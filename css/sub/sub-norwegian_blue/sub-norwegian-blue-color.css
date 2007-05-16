@@ -1,0 +1,64 @@
+body
+{
+	color: #2E3C55;
+	border-color: #FFFFFF;
+	background: #e7ebff;
+}
+
+a
+{
+text-decoration: none;
+color: blue;
+cursor: pointer;
+}
+
+a:active
+{
+color: red;
+}
+
+#layout-content a:hover
+{
+text-decoration: underline;
+}
+
+a.i_icon:hover, a.i_inline:hover
+{
+text-decoration: none;
+}
+
+#layout-nav a
+{
+	color: #FFFFFF;
+}
+
+#layout-nav a:hover
+{
+	color : #FFFFFF;
+}
+
+#layout-nav
+{
+	background: #486187;
+	height: 100%;
+}
+
+#layout-menu
+{
+	color: lightgray;
+}
+
+th,
+#layout-content div.main_all div.news h4,
+#layout-content div.main_all div.rightbar h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+	color: #4f5e77;
+	background-color: #a1b4cd;
+}
+
+#layout-content tr.g_odd,
+#layout-content li.g_odd
+{
+	background-color: #dfdff6;
+}
