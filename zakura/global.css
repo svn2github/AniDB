@@ -1,0 +1,317 @@
+/*---------------------------------
+				@GLOBAL
+	- menus			- pagination
+	- sections		- forms
+	- image replacement
+----------------------------------*/
+
+/* setup */
+body {
+	margin: 0;
+	width: 100%;
+	font: 9pt Verdana,Arial,Helvetica,sans-serif;
+	line-height: 1.5;
+	color: #3d3e6e;
+	background: #f8f7ff url(http://anidb.zakness.com/layout/bg-content.gif) repeat left top;
+}
+ul, ul li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+h1, h2, h3, h4 {
+	margin: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a img, :link img, :visited img {
+	border: 0;
+}
+
+/* zero out borders on images and some links */
+div#layout-content td.action a, div#layout-content th a, div#layout-content th a img {
+	border: 0 !important;
+}
+
+/* page titles */
+h1 {
+	font: bold 1.8em "Century Gothic", "Lucida Grande", sans-serif;
+	padding: 0.35em 0 0.3em 0.5em;
+	background: #f8f7ff;
+	color: #494a9c;
+	font-variant: small-caps;
+	letter-spacing: 0.1em;
+}
+h4 {
+	color: #7762ed;
+	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+	margin-bottom: 0.3em;
+}
+
+/* captions */
+caption {
+	color: #7762ed;
+	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+	margin-bottom: 0.3em;
+}
+
+/* small text */
+.s_small {
+	font-size: 0.9em;
+}
+
+/* container - content */
+div.g_content {
+	position: relative;
+	border: 1px solid #f3e7ff;
+	border-bottom-color: #dec9f2;
+	border-right-color: #dec9f2;
+	width: 100%;
+	background: #fff;
+}
+div.g_content>* {
+	margin: 1em;
+}
+
+/* clearing */
+div.g_end,
+div.g_notebox {
+	clear: both;
+}
+div.latestanimes_anime:after,
+div.anime_all div.info .block:after,
+div.search_all div.search_results ul.g_jumplist:after,
+div.file_all div.file_info dl:after,
+div.mylist_list form:after,
+div.userpage_all div.stats:after,
+div.userpage_all div.charts:after {
+	content: ".";
+	clear: both;
+	display: block;
+	visibility: hidden;
+	height: 0;
+}
+
+/* blocks */
+#layout-content div.block {
+	display:table;
+	margin-left:auto;
+	margin-right:auto;
+}
+#layout-content div.block div.image {
+	display:table-cell;
+	vertical-align:middle;
+}
+#layout-content div.block div.image img {
+	margin-right: 1em;
+}
+
+/* pagination */
+ul.g_jumplist,
+ul.g_navlist {
+	text-align: center;
+}
+ul.g_jumplist li,
+ul.g_navlist li {
+	display: inline;
+	color: #de4799;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+div#layout-content ul.g_jumplist li a, 
+div#layout-content ul.g_jumplist li a:link, 
+div#layout-content ul.g_jumplist li a:visited,
+div#layout-content ul.g_navlist li a, 
+div#layout-content ul.g_navlist li a:link, 
+div#layout-content ul.g_navlist li a:visited {
+	text-decoration: none;
+	border: 1px solid #f7edf1;
+	border-bottom: 1px solid #d28cb2;
+	color: #d28cb2;
+	background: #fff9fb;
+	padding: 0.2em 0.3em;
+	font-size: 0.95em;
+	font-weight: normal;
+}
+div#layout-content ul.g_jumplist li a:hover, 
+div#layout-content ul.g_jumplist li a:active,
+div#layout-content ul.g_navlist li a:hover, 
+div#layout-content ul.g_navlist li a:active {
+	background: transparent url(http://anidb.zakness.com/layout/stripe-pink2.gif) repeat left top;
+	color: #de4799;
+	border: 1px solid #eec6dc;
+}
+ul.g_jumplist li.prev {
+	float: left;
+	padding-left: 12px;
+	background: transparent url(http://anidb.zakness.com/layout/larr.gif) no-repeat left center;
+	font-weight: normal;
+}
+ul.g_jumplist li.next {
+	float: right;
+	padding-right: 12px;
+	background: transparent url(http://anidb.zakness.com/layout/rarr.gif) no-repeat right center;
+	font-weight: normal;
+}
+ul.g_jumplist li.all:before {
+	content: "Viewing: ";
+	color: #3d3e6e;
+	text-transform: none;
+	font-weight: normal;
+}
+
+/* navlist */
+ul.g_navlist.type li:first-child:before {
+	content: "Type: ";
+	color: #3d3e6e;
+	text-transform: none;
+}
+ul.g_navlist.g_numonpage li:first-child:before {
+	content: "Per page: ";
+	color: #3d3e6e;
+	text-transform: none;
+}
+
+/* list menu */
+div.g_menu {
+	float: right;
+	text-transform: capitalize;
+	width: 11em;
+}
+.g_menu h4 {
+	font-weight: normal;
+	padding: 0 0.15em;
+}
+div.g_menu ul li {
+	border-top: 1px solid #ebe1ef;
+	padding: 0.3em;
+	position: relative;
+}
+div.g_menu ul li.g_odd {
+	background-color: #f5f7ff;
+}
+
+/* selects */
+select option {
+	color: #3d3e6e;
+	background: #e0ecfd;
+}
+select option[value="0"] {
+	color: #B14C7C;
+}
+
+/* form input buttons */
+input[type="submit"] {
+	border: 1px solid #2d42af;
+	color: #fff;
+	background: #586fd1;
+	cursor: pointer;
+}
+input[type="submit"]:hover {
+	background: #2d42af;
+}
+
+/* informational boxes */
+.g_notebox, 
+.g_note {
+	border: 1px solid #dfc8ec;
+	padding: 0.7em;
+	background: #faf0ff;
+	color: #4d2f5f;
+}
+.g_errorbox {
+	border: 1px solid #ffcbf8;
+	padding: 0.7em;
+	background: #ffeafc;
+	color: #ac0d72;
+}
+.g_info {
+	clear: both;
+	padding: 0.7em;
+	background: #fcfcfc;
+	border: 1px solid #e0e0e0;
+	color: #777;
+}
+.g_notebox h3, 
+.g_note h3,
+.g_errorbox h3,
+.g_info h3 {
+	margin: 0 0 -0.5em;
+}
+.g_notebox>*:last-child,
+.g_note>*:last-child,
+.g_errorbox>*:last-child,
+.g_info>*:last-child {
+	margin-bottom: 0;
+}
+.g_notebox>*:first-child,
+.g_note>*:first-child,
+.g_errorbox>*:first-child,
+.g_info>*:first-child {
+	margin-top: 0;
+}
+
+/* actionlist */
+.g_actionlist {
+	padding: 0.3em 1em 0.4em;
+	background: #dff1ff;
+	border: 1px solid #b0dafb;
+	background-image: none;
+	text-align: center;
+	text-transform: capitalize;
+	clear: both;
+}
+.g_actionlist li {
+	display: inline;
+	margin: 0 0.7em;
+}
+
+/* text fields */
+input[type="text"], textarea {
+	background:#fafafa;
+	border: 1px solid #cfd0d1;
+	padding: 0.2em;
+}
+input[type="text"]:hover, textarea:hover {
+	border: 1px solid #bcc3c9;
+	background: #fdfdfd;
+}
+
+/* definition list tables */
+.g_definitionlist table {
+	border: 0;
+}
+.g_definitionlist table td {
+	padding: 0.2em;
+	font-weight: bold;
+	border-top: 1px solid #ebe1ef;
+	border-bottom: 0;
+}
+.g_definitionlist table th {
+	background-color: transparent;
+	padding: 0.2em;
+	color:#8e83a9;
+	border-top: 1px solid #ebe1ef;
+}
+.g_definitionlist table table, 
+.g_definitionlist table table * {
+	border: none;
+}
+
+/* filter list */
+.g_filterlist {
+	background: #eaf6ff;
+	border: 1px solid #c0e0f9;
+	padding: 0.7em;
+}
+.g_filterlist li {
+	margin-bottom: 1em;
+}
+.g_filterlist li:last-child {
+	margin-bottom: 0;
+}
+.g_filterlist li a {
+	text-transform: capitalize;
+}

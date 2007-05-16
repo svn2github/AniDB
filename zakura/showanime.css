@@ -1,0 +1,115 @@
+/*---------------------------------
+			@SHOW ANIME
+----------------------------------*/
+
+div.anime_all div.info div.block div.image img {
+	border: 1px solid #ebedf5;
+}
+div.anime_all div.info div.data,
+div.anime_all div.info table {
+	width: 100%;
+}
+div.anime_all div.info div.data {
+	display: table-cell;
+}
+div.anime_all div.info table table tr {
+	background: transparent;
+}
+div.anime_all div.awards {
+	margin: 1em 0;
+	text-align: center;
+}
+div.anime_all div.awards a {
+	border-bottom: 0 !important;
+}
+div.anime_all div.mylist table {
+	margin: 0 auto;
+}
+div.anime_all div.vote table {
+	margin: 0 auto;
+	border:1px solid #E1D9F5;
+}
+div.anime_all div.vote table tr {
+	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+}
+div.anime_all div.groups table {
+	margin: 0 auto;
+}
+div.anime_all div.groups table tr:last-child {
+	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+}
+div.anime_all div.groups .state.ongoing		{color: #2618b1;}
+div.anime_all div.groups .state.stalled		{color: #966319;}
+div.anime_all div.groups .state.complete	{color: #179023;}
+div.anime_all div.groups .state.complete,
+div.anime_all div.groups .complete .lastep	{font-weight: bold;}
+div.anime_all div.groups .state.dropped		{color: #8d92a0;}
+
+div.anime_all div.episodes {
+	padding-bottom: 0;
+}
+div.anime_all div.episodes table.eplist {
+	margin-bottom: 1em;
+	border: 1px solid #565ab9;
+	width: 100%;
+}
+div.anime_all div.episodes table.filelist td {
+	padding: 0.2em 0.4em;
+	border-bottom: none;
+}
+div.anime_all div.episodes div.mylist_add table {
+	margin: 0 auto;
+	border:1px solid #E1D9F5;
+	background: #fff;
+}
+div.anime_all div.episodes div.mylist_add tr.action {
+	text-align: center;
+	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+}
+div.anime_all caption {
+	text-align: center;
+	color: #7762ed;
+	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+	width: 100%;
+}
+div.anime_all div.info td {
+	font-size: 0.9em;
+}
+div.anime_all div.episodes div.mylist_add td,
+div.anime_all div.mylist td {
+	padding: 0.4em;
+}
+div.anime_all div.episodes table.eplist tr.newtype td {
+	border-top: 4px solid #d9def1;
+}
+div.anime_all div.episodes table.filelist {
+	background: #d3d7f3;
+}
+div.anime_all div.episodes table.filelist td {
+	background-color: #f7f7f7;
+}
+div.anime_all div.episodes table.filelist tr.g_odd td {
+	background-color: #f2f2f2;
+}
+div.anime_all div.episodes table.filelist td.id {
+	padding-left: 16px;
+}
+div.anime_all div.episodes table.filelist tr.good.g_odd td {
+	background-color: #e9ffd8;
+}
+div.anime_all div.episodes table.filelist tr.good td {
+	background-color: #f0ffe3;
+}
+div.anime_all div.episodes table.filelist tr.good td.id {
+	background-image: url(http://anidb.zakness.com/layout/checkmark.png);
+	background-repeat: no-repeat;
+	background-position: 2px center;
+}
+div.anime_all div.episodes table.filelist tr.deprecated td {
+	background-color: #ddd;
+}
+div.anime_all div.episodes table.filelist tr.deprecated td.id {
+	background-image: url(http://anidb.zakness.com/layout/deprecated.png);
+	background-repeat: no-repeat;
+	background-position: 2px center;
+}
