@@ -1,0 +1,45 @@
+
+#layout-content div.agcmts_entries
+{
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+#layout-content div.agcmts_entries div.comment + div.comment
+{
+	margin-top: 2em;
+}
+
+#layout-content div.agcmts_entries div.comment h4
+{
+	text-align: left;
+	background-color: #494d59;
+	margin-bottom: 0;
+}
+#layout-content div.agcmts_entries div.comment h4 a
+{
+	color: #bfc2c9;
+}
+
+#layout-content div.agcmts_entries div.comment span.stamp
+{
+	display: block;
+	text-align: right;
+	padding-right: 0.5em;
+	background-color: #969aa6;
+}
+#layout-content div.agcmts_add p.g_howto
+{
+	text-align: left;
+}
+#layout-content div.agcmts_add form div textarea
+{
+	display: block;
+	width: 80%;
+	margin-left: 10%;
+	height: 10em;
+}
+#layout-content div.agcmts_add form div
+{
+	text-align: center;
+}

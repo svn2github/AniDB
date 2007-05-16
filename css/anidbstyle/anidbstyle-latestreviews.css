@@ -1,0 +1,52 @@
+
+#layout-content div.latestreviews_all ul.g_navlist
+{
+	text-align: right;
+}
+
+#layout-content div.latestreviews_all ul.g_navlist:before
+{
+	content: "show: ";
+}
+
+#layout-content div.latestreviews_all ul li:first-child:before
+{
+	content: "";
+}
+
+#layout-content div.latestreviews_all table
+{
+	margin: 0 auto;
+}
+
+#layout-content div.latestreviews_all table th
+{
+	padding: 2px;
+	font-weight: normal;
+	text-align: left;
+}
+
+#layout-content div.latestreviews_all table td
+{
+	padding: 2px;
+}
+
+#layout-content div.latestreviews_all td.date
+{
+	white-space: nowrap;
+}
+
+#layout-content div.latestreviews_all div.footer 
+{
+	text-align: center;
+}
+
+#layout-content div.latestreviews_all div.filter
+{
+	margin: 1em 0 1em 0;
+}
+
+#layout-content div.latestreviews_all h4
+{
+	display: inline;
+}

@@ -1,0 +1,42 @@
+@import "anidbstyle.css";
+
+/*:lang(ja)*/ .l_ja
+{
+	font-size: 200%;
+}
+
+dd
+{
+	background-color: green;
+}
+
+dt
+{
+	background-color: orange;
+}
+
+.i_icon, .i_inline, .i_button
+{
+	background-color: red;
+}
+
+#layout-content table
+{
+	 background-color: olive;
+}
+
+div
+{
+	outline: black 1px solid;
+	-moz-outline: black 1px solid;
+}
+
+#layout-content div.g_section.vote form
+{
+	background-color: beige;
+}
+
+#layout-content div.g_section.vote form.tempvote
+{
+	background-color: white;
+}

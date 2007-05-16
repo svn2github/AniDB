@@ -1,0 +1,77 @@
+@import "../base/icons-flags.css";
+@import "../base/layout-jumplist.css";
+
+@import "base.css";
+@import "anidbstyle_images.css";
+@import "brown2_layout.css";
+@import "brown2-anime.css";
+@import "anidbstyle-animelist.css";
+@import "anidbstyle-dbstats.css";
+@import "anidbstyle-ep.css";
+@import "anidbstyle-genren.css";
+@import "anidbstyle-hint2.css";
+@import "anidbstyle-latest.css";
+@import "anidbstyle-latestanimes.css";
+@import "anidbstyle-latestreviews.css";
+@import "brown2-main.css";
+@import "anidbstyle-msg.css";
+@import "anidbstyle-mynotifies.css";
+@import "anidbstyle-myvotes.css";
+@import "anidbstyle-stats.css";
+
+body
+{
+	background: #F2F3EE;
+}
+
+a
+{
+	color: #4E4F47;
+}
+a:hover
+{
+	text-decoration: underline;
+}
+a.i_icon:hover, a.i_inline:hover
+{
+	text-decoration: none;
+}
+
+h2
+{
+	text-align: center;
+	font-size: 117%;
+	clear: both;
+}
+
+h4
+{
+	font-size: 100%;
+}
+
+table
+{
+	/*margin-left: auto;
+	margin-right: auto;
+	border: 0;*/
+	border-collapse: separate;
+}
+
+tr.g_odd,
+li.g_odd,
+span.g_odd
+{
+	background-color: #DCDDD9;
+}
+
+/* Transitional Hacks */
+
+*[bgcolor="#b0b0b0"], *[bgcolor="#969aa6"]
+{
+	background-color: #DCDDD9;
+}
+
+*[bgcolor="#494D59"]
+{
+	background-color: #A9ACA3;
+}

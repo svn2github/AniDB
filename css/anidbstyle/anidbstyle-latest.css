@@ -1,0 +1,50 @@
+
+#layout-content div.latest
+{
+	text-align: center;
+}
+
+#layout-content div.latest table
+{
+	margin-left: auto;
+	margin-right: auto;
+	min-width: 80%;
+	padding: 1em;
+	clear: both;
+}
+
+#layout-content div.latest table td,
+#layout-content div.latest table th
+{
+	padding: 2px;
+	text-align: left;
+}
+
+#layout-content div.latest table td.weight,
+#layout-content div.latest table td.addedby,
+#layout-content div.latest table td.action
+{
+	text-align: center;
+}
+
+#layout-content div.latest table td.size,
+#layout-content div.latest table td.rating
+{
+	text-align: right;
+}
+
+#layout-content div.latest table td.date
+{
+	white-space: nowrap;
+}
+
+#layout-content div.latest ul.type
+{
+	float: left;
+}
+
+#layout-content div.latest ul.type li:first-child:before
+{
+	content: "type: ";
+	font-style: normal;
+}

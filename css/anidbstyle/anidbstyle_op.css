@@ -1,0 +1,12 @@
+@import "anidbstyle.css";
+
+/*:lang(ja)*/ .l_ja
+{
+	font-size: 200%;
+}
+
+#layout-menu li.creqmod, #layout-menu li.bulkmsg, #layout-menu li.lame, #layout-menu li.userinfo ,
+#layout-menu li.userstats, #layout-menu li.dbstats, #layout-menu li.admin
+{
+	display: none;
+}

@@ -1,0 +1,114 @@
+
+#layout-content div.userpage_all div.stats,
+#layout-content div.myplace_all div.stats
+{
+	position: absolute;
+	width: 13.1em;
+	margin-top: 2em;
+}
+
+#layout-content div.userpage_all div.stats table,
+#layout-content div.userpage_all div.stats table caption,
+#layout-content div.myplace_all div.stats table,
+#layout-content div.myplace_all div.stats table caption
+{
+	margin-left: 1em;
+}
+
+#layout-content div.userpage_all div.stats table,
+#layout-content div.myplace_all div.stats table
+{
+	width: 14em;
+}
+
+#layout-content div.userpage_all div.stats table caption,
+#layout-content div.myplace_all div.stats table caption
+{
+	width: 12em;
+}
+
+#layout-content div.userpage_all div.stats div table td.value,
+#layout-content div.myplace_all div.stats div table td.value
+{
+	text-align: right;
+}
+
+#layout-content div.myplace_all div.latest
+{
+	margin-left: 14em;
+	margin-right: 10em;
+	clear: none;
+}
+
+#layout-content div.userpage_all,
+#layout-content div.myplace_all
+{
+	padding-right: 1em;
+}
+
+#layout-content div.userpage_all div.buddies li,
+#layout-content div.userpage_all div.favreviewers li,
+#layout-content div.userpage_all div.g_menu li,
+#layout-content div.myplace_all div.g_menu li
+{
+	padding-left: 6px;
+	padding-right: 6px;
+	text-align: left;
+	margin-left: -3em;
+	list-style-type: none;
+}
+
+#layout-content div.userpage_all div.buddies,
+#layout-content div.userpage_all div.favreviewers
+{
+	float: right;
+	margin-bottom: 1em;
+}
+
+#layout-content div.userpage_all div.buddies ul li,
+#layout-content div.userpage_all div.favreviewers ul li
+{
+	padding: 1px 6px 1px 6px;
+}
+
+#layout-content div.userpage_all div.userdetails,
+#layout-content div.userpage_all div.userprefs
+{
+	margin-left: 15em;
+	margin-right: 12em;
+	clear: none;
+}
+
+#layout-content div.userpage_all
+{
+	min-height:60em;
+}
+
+#layout-content div.userpage_all div.userprefs h4
+{
+	text-align: center;
+}
+
+#layout-content div.userpage_all div.userprefs ol
+{
+	margin-left: 4em;
+}
+
+#layout-content div.userpage_all div.charts div
+{
+	float: left;
+}
+#layout-content div.userpage_all div.charts div h4
+{
+	text-align: center;
+}
+#layout-content div.userpage_all div.charts div.votedistribution
+{
+	margin-left: 50px;
+}
+
+#layout-content div.userpage_all ul.g_actionlist,
+#layout-content div.userpage_all div.charts div.mylisthistory
+{
+	clear: both;
+}

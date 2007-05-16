@@ -1,0 +1,328 @@
+html
+{
+	width: 100%;
+	height: 100%;
+	font-weight: normal;
+	font-size: 10px;
+	line-height: 1.2;
+	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+	color: black;
+}
+
+body
+{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+a
+{
+	text-decoration: none;
+	color: blue;
+	cursor: pointer;
+}
+a:active
+{
+	color: red;
+}
+
+a img
+{
+	border: 0;
+}
+
+ul, li
+{
+	list-style: inside;
+}
+
+th
+{
+	font-weight: normal;
+	text-align: left;
+}
+
+fieldset
+{
+	display: none;
+}
+input[type="checkbox"]
+{
+	height: 1.3em;
+	width: 1.3em;
+	font-size: 100%;
+}
+
+*.g_note
+{
+	font-style: italic;
+	font-weight: normal;
+}
+
+*.g_note *
+{
+	font-style: normal;
+}
+
+*.g_note li
+{
+	font-style: italic;
+}
+
+*.g_note em
+{
+	font-style: italic;
+	text-decoration: underline;
+}
+
+div.g_note h4
+{
+	display: inline;
+}
+
+*.g_vital, *.g_vital *
+{
+	color: red;
+	font-weight: bolder;
+}
+
+tr.g_odd,
+li.g_odd,
+span.g_odd
+{
+	background-color: #b0b0b0;
+}
+
+*.g_navprev
+{
+	float: left;
+	padding-left: 0.3em;
+}
+
+*.g_navnext
+{
+	float: right;
+	padding-right: 0.3em;
+}
+
+span.g_navprev,
+span.g_navnext
+{
+	font-style: italic;
+}
+
+
+ul.g_navlist
+{
+	margin: 0;
+	padding: 0.3em;
+	text-align: center;
+	float: left;
+}
+
+ul.g_navlist li
+{
+	display: inline;
+	list-style: none outside;
+}
+
+ul.g_navlist li:before
+{
+	content: " | "
+}
+
+ul.g_navlist li:first-child:before
+{
+	content: "";
+}
+
+ul.g_navlist li.here
+{
+	font-style: italic;
+}
+
+td.action,
+tr.action td
+{
+	text-align: center;
+}
+
+#layout-content div.g_errorbox
+{
+	border: 1px solid #DD0000;
+	background-color: #FFE5E5;
+	margin: 2em;
+	padding: 1.2em;
+}
+#layout-content div.g_warnbox
+{
+	border: 1px solid #F46F0B;
+	background-color: #FFF0E5;
+	margin: 2em;
+	padding: 1.2em;
+}
+#layout-content div.g_notebox
+{
+	border: 1px solid #AFAF00;
+	background-color: #FFFFDF;
+	margin: 2em;
+	padding: 1.2em;
+}
+#layout-content div.g_successbox
+{
+	border: 1px solid #2EB42E;
+	background-color: #E5FFE5;
+	margin: 2em;
+	padding: 1.2em;
+}
+
+#layout-content div.g_errorbox h3
+{
+	color: #FF0000;
+}
+#layout-content div.g_warnbox h3
+{
+	color: #F46F0B;
+}
+#layout-content div.g_notebox h3
+{
+	color: #AFAF00;
+}
+#layout-content div.g_successbox h3
+{
+	color: #2EB42E;
+}
+
+#layout-content div.g_errorbox *,
+#layout-content div.g_warnbox *,
+#layout-content div.g_notebox *,
+#layout-content div.g_successbox *
+{
+	display: inline;
+}
+
+#layout-content ul.g_numonpage
+{
+	float: right;
+}
+
+#layout-content ul.g_numonpage li:first-child:before
+{
+	content: "show: ";
+}
+
+/* Transitional Hacks */
+
+#layout-content *[align="left"]
+{
+	text-align: left;
+}
+
+#layout-content *[align="left"] > *
+{
+	margin-left: 0;
+}
+
+#layout-content *[align="center"]
+{
+	text-align: center;
+}
+
+#layout-content *[align="center"] > *
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+#layout-content *[align="right"]
+{
+	text-align: right;
+}
+
+#layout-content *[align="right"] > *
+{
+	margin-right: 0;
+}
+
+#layout-content,
+#layout-content > form
+{
+	text-align: center;
+}
+
+#layout-content > h1
+{
+	text-align: left;
+}
+
+#layout-content > *,
+#layout-content > form > *
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+#layout-content div,
+#layout-content table,
+#layout-content table caption
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#layout-content .g_filterlist,
+#layout-content .g_actionlist,
+#layout-content .g_info
+{
+	text-align: center;
+}
+
+#layout-content div.g_menu
+{
+	float: right;
+}
+
+#layout-content div.g_section,
+#layout-content div.g_filterlist
+{
+	clear: both;
+}
+
+#layout-content div.block
+{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#layout-content div.block div.image
+{
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 10px;
+}
+
+#layout-content td.state,
+#layout-content td.type,
+#layout-content td.date,
+#layout-content td.rating,
+#layout-content td.vote,
+#layout-content td.action
+{
+	text-align: center;
+}
+
+#layout-content td.count
+{
+	text-align: right;
+}
+
+#layout-content div.g_section
+{
+	clear: both;
+}

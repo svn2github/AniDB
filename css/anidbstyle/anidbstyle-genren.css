@@ -1,0 +1,41 @@
+#layout-content div.genren_all
+{
+	text-align: center;
+}
+
+#layout-content div.genren_all div.categories
+{
+	width: 90%;
+	margin: 1em auto 1em auto;
+	text-align: left;
+}
+
+#layout-content div.genren_all div.controls
+{
+	text-align: center;
+}
+
+#layout-content div.genren_all a.i_icon
+{
+	position: relative;
+	right: 18px;
+	float: left;
+	margin-right: -15px;
+}
+
+#layout-content div.genren_all li
+{
+	list-style: none outside;
+	line-height: 14px;
+}
+
+#layout-content div.genren_all li span
+{
+	display: block;
+}
+
+#layout-content div.genren_all li.collapsed ul
+{
+	display: none;
+}
+

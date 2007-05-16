@@ -1,0 +1,38 @@
+
+#layout-content div.animelist_navtop,
+#layout-content div.animelist_navbottom,
+#layout-content div.animelist_actions
+{
+	text-align: center;
+}
+
+#layout-content div.animelist_navtop,
+#layout-content div.animelist_navbottom
+{
+	padding: 1em 0 0.5em 0;
+}
+
+#layout-content div.animelist_list table
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#layout-content div.animelist_list table th *.i_icon
+{
+	float: left;
+}
+
+
+#layout-content div.animelist_navtop ul,
+#layout-content div.animelist_navbottom ul
+{
+	margin-bottom: 0.3em;
+}
+
+#layout-content div.animelist_navtop ul:before,
+#layout-content div.animelist_navbottom ul:before
+{
+	content: "Jump to"
+}
+

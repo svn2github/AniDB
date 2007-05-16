@@ -1,0 +1,80 @@
+@import "../base/icons-flags.css";
+
+@import "base.css";
+@import "anidbstyle_images.css";
+@import "../base/layout-jumplist.css";
+@import "blue_layout.css";
+@import "blue-anime.css";
+@import "anidbstyle-agc.css";
+@import "anidbstyle-animelist.css";
+@import "anidbstyle-dbstats.css";
+@import "anidbstyle-ep.css";
+@import "anidbstyle-genren.css";
+@import "anidbstyle-group.css";
+@import "anidbstyle-hint2.css";
+@import "anidbstyle-latest.css";
+@import "anidbstyle-latestanimes.css";
+@import "anidbstyle-latestreviews.css";
+@import "blue-main.css";
+@import "anidbstyle-mylist.css";
+/*@import "anidbstyle-msg.css";*/
+@import "anidbstyle-mynotifies.css";
+@import "anidbstyle-myplace.css";
+@import "anidbstyle-myvotes.css";
+@import "anidbstyle-stats.css";
+
+body
+{
+	color: #2E3C55;
+	background: #E7EBFF;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+a.i_icon:hover, a.i_inline:hover
+{
+	text-decoration: none;
+}
+
+h2
+{
+	text-align: center;
+	font-size: 117%;
+	clear: both;
+}
+
+h4
+{
+	font-size: 100%;
+}
+
+table
+{
+	border-collapse: separate;
+}
+
+th
+{
+	background-color: #a1b4cd;
+}
+
+tr.g_odd,
+li.g_odd,
+span.g_odd
+{
+	background-color: #DFDFF6;
+}
+
+/* Transitional Hacks */
+
+*[bgcolor="#b0b0b0"], *[bgcolor="#969aa6"]
+{
+	background-color: #DFDFF6;
+}
+
+*[bgcolor="#494D59"]
+{
+	background-color: #a1b4cd;
+}

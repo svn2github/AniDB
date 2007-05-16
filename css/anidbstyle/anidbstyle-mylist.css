@@ -1,0 +1,59 @@
+#layout-content div.g_menu ul.state
+{
+	height: 15px;
+	padding-top: 2px;
+	padding-bottom: 1px;
+}
+
+#layout-content div.g_menu ul.state li
+{
+	float: left;
+	padding: 0px 2px 0px 1px;
+}
+
+#layout-content div.g_menu ul + ul
+{
+	margin-top: 2px;
+}
+
+#layout-content div.g_menu ul.state + ul
+{
+	clear: left;
+}
+
+#layout-content div.mylist_list table.animelist
+{
+	width: 75%;
+}
+#layout-content div.mylist_list td.title div
+{
+	float: right;
+}
+
+#layout-content div.mylist_list td div.icoco span.i_icon
+{
+	float: left;
+	padding: 0px 2px 0px 2px;
+}
+
+#layout-content div.mylist_list table table
+{
+	width: 100%;
+}
+
+#layout-content div.mylist_list table table table tr.good td
+{
+	background-color: #f2ffe9;
+}
+
+#layout-content div.mylist_all ul li
+{
+	list-style: none;
+	text-align: left;
+}
+
+#layout-content div.mylist_all tr.all_watched td.stats 
+{ 
+   color: darkgreen;
+   font-weight: bold;
+}
