@@ -1,0 +1,532 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="style.css" title="Light Blue" />
+<link rel="alternate stylesheet" type="text/css" href="stylew.css" title="White" />
+<link rel="alternate stylesheet" type="text/css" href="styleg.css" title="Green" />
+<script language="javascript" type="text/javascript" src="code.js"></script>
+<script language="javascript" type="text/javascript">
+	var uri = '' + window.location;
+	var aToExpand = '';
+
+	if (uri.indexOf('?') > -1)
+	{
+		var toExpand  = uri.substring(uri.indexOf('=') + 1, uri.length);
+		aToExpand = toExpand;
+		document.write('<script language="javascript" type="text/javascript" src="anime/' + aToExpand + '.js"><\/script>');
+	}
+</script>
+</head>
+<body onLoad="javascript:operaInit();">
+<table id=top border=0 cellspacing=0 cellpadding=4 width=100%>
+  <tr class=title>
+	<script language="javascript" type="text/javascript">
+		document.write('<td align=left><font size=4><b>');
+
+		var aname = xa.name;
+
+		if (parent.cktitlestyle == 1)
+		{
+			if (xa.japkanji != '-')
+				aname = xa.japkanji;
+		}
+
+		if (parent.cktitlestyle == 2)
+		{
+			if (xa.eng != '-')
+				aname = xa.eng;
+		}
+
+		document.write(aname);
+		document.write('</b></font></td>');
+		document.write('<td align=right><a href="' + anidb + '?show=anime&aid=' + xa.id + '" target="_blank"><img class=link src="images/anidb.gif" width=16 height=16 title="More info at AniDB"></a>');
+		if(xa.annUrl != '')
+			document.write(' <a href="' + xa.annUrl + '" target="_blank"><img class=link src="images/ann.gif" width=16 height=16 title="More info at ANN"></a>');
+		if(xa.animeNfoUrl != '')
+			document.write(' <a href="' + xa.animeNfoUrl + '" target="_blank"><img class=link src="images/animenfo.gif" width=16 height=16 title="More info at AnimeNFO"></a>');
+		if(xa.aniplaneturl != '')
+		    document.write(' <a href="' + xa.aniplaneturl + '" target="_blank"><img class=link src="images/animeplanet.gif" width=16 height=16 title="More info at Anime Planet"></a>');
+		if(xa.url)
+			document.write(' <a href="' + xa.url + '" target="_blank"><img class=link src="images/web.gif" width=16 height=16 title="More info at Home Site"></a>');
+		document.write('&nbsp;&nbsp;&nbsp;&nbsp;<img class=link src="images/close.gif" width=16 height=16 title="Close Anime Page" OnClick="window.location=\'mylist.htm\';"></td>');
+	</script>
+  </tr>
+</table>
+<table cellpadding=2>
+<script language="javascript" type="text/javascript">
+    var title1;
+    var title2;
+    var titlename1;
+    var titlename2;
+
+	if (parent.cktitlestyle == 0)
+	{
+		title1 = xa.eng;
+		title2 = xa.japkanji;
+		titlename1 = 'English Title:';
+		titlename2 = 'Kanji Title:';
+	}
+
+	if (parent.cktitlestyle == 1)
+	{
+		if (xa.japkanji != '-')
+		{
+			title1 = xa.name;
+			title2 = xa.eng;
+			titlename1 = 'Romaji Title:';
+			titlename2 = 'English Title:';
+		} else {
+			title1 = xa.eng;
+			title2 = xa.japkanji;
+			titlename1 = 'English Title:';
+			titlename2 = 'Kanji Title:';
+		}
+	}
+
+	if (parent.cktitlestyle == 2)
+	{
+		if (xa.eng != '-')
+		{
+			title1 = xa.name;
+			title2 = xa.japkanji;
+			titlename1 = 'Romaji Title:';
+			titlename2 = 'Kanji Title:';
+		} else {
+			title1 = xa.eng;
+			title2 = xa.japkanji;
+			titlename1 = 'English Title:';
+			titlename2 = 'Kanji Title:';
+		}
+	}
+
+    document.write('<tr>');
+    document.write('<td><b>' + titlename1 + '</b></td>');
+    document.write('<td>' + title1 + '</td>');
+    document.write('<td><b>Episodes:</b></td>');
+    document.write('<td>' + xa.eps + ' (' + xa.myEps + ' in mylist, ' + xa.myWeps + ' seen)</td>');
+    document.write('</tr>');
+
+    document.write('<tr>');
+    document.write('<td><b>' + titlename2 + '</b></td>');
+    document.write('<td>' + title2 + '</td>');
+    document.write('<td><b>Specials:</b></td>');
+    if (xa.mySEps != '0')
+	    document.write('<td>' + xa.mySEps + ' in mylist, ' + xa.myWSEps + ' seen</td>');
+	else
+	    document.write('<td>none</td>');
+    document.write('</tr>');
+
+    document.write('<tr>');
+    document.write('<td><b>Synonyms:</b></td>');
+    if (xa.aliases == '')
+	    document.write('<td>-</td>');
+	else
+	    document.write('<td>' + xa.aliases + '</td>');
+    document.write('<td><b>My Rating:</b></td>');
+    document.write('<td>');
+    if (xa.myvote != '')
+	    document.write(xa.myvote+ ' (permanent)</td>');
+	else if (xa.mytmpvote != '')
+	    document.write(xa.mytmpvote+ ' (temporary)</td>');
+	else
+	    document.write('-</td>');
+    document.write('</tr>');
+
+    document.write('<tr>');
+	document.write('<td><b>Short Titles:</b></td>');
+    if (xa.shortNames == '')
+	    document.write('<td>-</td>');
+	else
+	    document.write('<td>' + xa.shortNames + '</td>');
+    document.write('<td><b>Rating:</b></td>');
+    document.write('<td>' + xa.rating);
+    if (xa.votes != '0')
+	    document.write(' (' + xa.votes + ' votes)</td>');
+	else
+	    document.write('</td>');
+    document.write('</tr>');
+
+    document.write('<tr>');
+    document.write('<td><b>Genres:</b></td>');
+   	if (xa.genres == '')
+	    document.write('<td>-</td>');
+	else
+	{
+		if (xa.genres.length < 40)
+		    document.write('<td>' + xa.genres + '</td>');
+		else
+		    document.write('<td><span onMouseover="ddrivetip(escape(\'' + xa.genres + '\'));" onMouseout="hideddrivetip();">' + xa.genres.substring(0,40) + '...</span></td>');
+	}
+    document.write('<td><b>Temp Rating:</b></td>');
+    document.write('<td>' + xa.temprating);
+    if (xa.votes != '0')
+	    document.write(' (' + xa.tempvotes + ' votes)</td>');
+	else
+	    document.write('</td>');
+    document.write('</tr>');
+
+    document.write('<tr>');
+    document.write('<td><b>Type:</b></td>');
+    document.write('<td>' + xa.typename + '</td>');
+    document.write('<td><b>Reviews:</b></td>');
+    document.write('<td>' + xa.rrating);
+    if (xa.reviews != '0')
+	    document.write(' (' + xa.reviews + ' reviews)</td>');
+	else
+	    document.write('</td>');
+    document.write('</tr>');
+
+    document.write('<tr>');
+    document.write('<td><b>Year:</b></td>');
+    if (xa.startdate == xa.enddate)
+	    document.write('<td>' + xa.year + ' (' + xa.startdate + ')</td>');
+	else
+	    document.write('<td>' + xa.year + ' (' + xa.startdate + ' - '+ xa.enddate + ')</td>');
+    document.write('<td><b>Added to DB:</b></td>');
+    document.write('<td>' + xa.shortDate + '</td>');
+    document.write('</tr>');
+
+    document.write('<tr>');
+    document.write('<td><b>Companies:</b></td>');
+    if (xa.company == '')
+	    document.write('<td>-</td>');
+	else
+	{
+		if (xa.company.length < 40)
+		    document.write('<td>' + xa.company + '</td>');
+		else
+		    document.write('<td><span onMouseover="ddrivetip(escape(\'' + xa.company + '\'));" onMouseout="hideddrivetip();">' + xa.company.substring(0,40) + '...</span></td>');
+	}
+    document.write('<td><b>Last update:</b></td>');
+    document.write('<td>' + xa.shortUpdate + '</td>');
+    document.write('</tr>');
+
+    document.write('<tr><td><b>Awards:</b></td><td colspan=3>');
+	if (xa.awards.length == 0)
+	{
+		document.write ('none');
+	}
+	else
+	{
+	    for (i = 0; i < xa.awards.length; i++)
+		{
+			var str_awd;
+
+			if (xa.awards[i].substring(7,19) == 'animereactor')
+				str_awd = 'win';
+			else
+				str_awd = 'anidb';
+
+			document.write ('<a href="' + xa.awards[i] + '" title="Goto Site" target="_blank"><img aling=absmiddle src="images/award_' + str_awd + '.gif" width=15 height=13 title="Goto Site"> ' + xa.awards[i+2] + '</a>&nbsp;&nbsp;');
+
+			i = i+2;
+		}
+	}
+    document.write('</td></tr>');
+    document.write('</table>');
+
+    document.write('<hr>');
+    document.write('<table border=0 cellspacing=4 cellpadding=4 width=100%>');
+    document.write('<tr class=file><td>' + xa.description + '</td></tr>');
+    document.write('</table>');
+    document.write('<hr>');
+</script>
+<b><font size=2>Episodes (<a href="javascript:toggleAll();toggleAlleps();">toggle view</a>)</font></b>
+<br>
+<br>
+<table cellspacing=0 cellpadding=2>
+	<tr class=header>
+	</tr>
+	<tr>
+		<td>
+			<table id=ephead border=0 cellspacing=0 cellpadding=0 width=100%>
+				<tr class=header>
+					<td width=15>&nbsp;</td>
+					<td align=center width=25>EP</td>
+					<td width=400>Title</td>
+					<td width=60>&nbsp;</td>
+					<td align=center width=60>Length</td>
+					<td align=center width=70>Date</td>
+				</tr>
+			</table>
+			<script language="javascript" type="text/javascript">
+				for (i = 0; i < xa.enums.length; i++)
+				{
+					function getAudioChannels(audioChannels)
+					{
+						var audioChanName = "";
+
+						switch (audioChannels)
+						{
+							case 10:
+								audioChanName = "1.0 - mono";
+								break;
+							case 20:
+								audioChanName = "2.0 - stereo";
+								break;
+							case 30:
+								audioChanName = "4.0 - dolby surround";
+								break;
+							case 40:
+								audioChanName = "5.1 - 5.1 surround";
+								break;
+							case 50:
+								audioChanName = "6.1 - 6.1 surround";
+								break;
+							case 60:
+								audioChanName = "7.1 - 7.1 surround";
+								break;
+							case 100:
+								audioChanName = "other";
+								break;
+							default:
+								audioChanName = "unknown";
+						}
+
+						return audioChanName;
+					}
+
+					function getSubData(subType, subFlags)
+					{
+						var subData = "";
+
+						switch (subType)
+						{
+							case 10:
+								subData = "hard sub<br>";
+								break;
+							case 20:
+								subData = "soft sub<br>";
+								break;
+							case 30:
+								subData = "supplementary soft sub<br>";
+								break;
+							case 100:
+								subData = "other<br>";
+								break;
+							default:
+								subData = "unknown<br>";
+						}
+
+						if (subFlags & 0)
+							subData += "none<br>";
+						if (subFlags & 1)
+							subData += "additional explanations<br>";
+						if (subFlags & 2)
+							subData += "dubsubbed<br>";
+						if (subFlags & 4)
+							subData += "hearing impaired subs<br>";
+						if (subFlags & 8)
+							subData += "image subs<br>";
+						if (subFlags & 16)
+							subData += "karaoke subbed<br>";
+						if (subFlags & 32)
+							subData += "signs translated<br>";
+						if (subFlags & 64)
+							subData += "styled subs<br>";
+						if (subFlags & 128)
+							subData += "subs for commentary audio stream<br>";
+
+						return subData;
+					}
+
+					function getVideoInfo(videoAR, videoFlags)
+					{
+						var videoInfo = "";
+
+						switch (videoAR)
+						{
+							case 10:
+								videoInfo = "4:3";
+								break;
+							case 20:
+								videoInfo = "16:9";
+								break;
+							case 30:
+								videoInfo = "1.66:1";
+								break;
+							case 40:
+								videoInfo = "1.85:1";
+								break;
+							case 50:
+								videoInfo = "2.00:1";
+								break;
+							case 60:
+								videoInfo = "2.21:1";
+								break;
+							case 70:
+								videoInfo = "2.35:1";
+								break;
+							case 100:
+								videoInfo = "other";
+								break;
+							default:
+								videoInfo = "unknown";
+						}
+
+						if (videoFlags & 1)
+							videoInfo += ", anamorphic";
+						if (videoFlags & 2)
+							videoInfo += ", wrong aspect ratio";
+						if (videoFlags & 4)
+							videoInfo += ", variable frame rate";
+
+						return videoInfo;
+					}
+
+					var ep = elist[xa.enums[i]];
+
+					var epname = ep.name;
+
+					if (parent.ckepstyle == 1)
+					{
+						if (ep.namekanji != '-')
+							epname = ep.namekanji;
+					}
+
+					if (parent.ckepstyle == 2)
+					{
+						if (ep.nameromaji != '-')
+							epname = ep.nameromaji;
+					}
+
+					document.write('<table id=eploop border=0 cellspacing=0 cellpadding=0 width=100%>');
+					document.write('<tr class=line onMouseOver="this.className=\'over\';" onMouseOut="this.className=\'line\';">');
+					document.write('<td class=line align=center width=15 height=15>');
+					document.write('<a href="javascript:toggle(\'eid' + ep.id + '\');toggle(\'img_ep' + ep.id + '_plus\');toggle(\'img_ep' + ep.id + '_minus\');">');
+					document.write('<div id=img_ep' + ep.id + '_plus style="display:"><img src="images/plus.gif" width=15 height=13 Title="Show File Information"></div>');
+					document.write('<div id=img_ep' + ep.id + '_minus style="display:none"><img src="images/minus.gif" width=15 height=13 Title="Hide File Information"></div>');
+					document.write('</a></td>');
+					document.write('<td width=25 align=center>' + ep.num + '</td>');
+					document.write('<td width=400>' + epname + '&nbsp;</td>');
+					document.write('<td nowrap>');
+					document.write('<img src="images/state_' + ep.mystate + '.gif" width=15 height=13 title="'+ ep.mystatename + '">&nbsp;');
+					if (ep.isWatched)
+						document.write('<img src="images/seen.gif" width=15 height=13 Title="seen">&nbsp;');
+					if (ep.state == '2')
+						document.write('<img src="images/recap.gif" width=15 height=13 title="is a recap (summary)">');
+					document.write('</td>');
+					document.write('<td width=60 align=center>' + ep.elength + ' min</td>');
+					document.write('<td width=70 align=center>' + ep.shortDate + '</td>');
+					document.write('</tr>');
+					document.write('</table>');
+					document.write('<div id=eid' + ep.id + ' style="display:none">');
+					document.write('<table id=fileinfo border=0 cellspacing=1 cellpadding=0 width=100%>');
+					document.write('<tr>');
+					document.write('<td align=center width=50>ID</td>');
+					document.write('<td align=center width=50>Size</td>');
+					document.write('<td align=center width=80>Status</td>');
+					document.write('<td align=center width=80>Group</td>');
+					document.write('<td align=center width=60>Quality</td>');
+					document.write('<td align=center width=60>Resolution</td>');
+					document.write('<td align=center width=80>Video Codec</td>');
+					document.write('<td align=center width=40>Source</td>');
+					document.write('<td aling=center width=20>&nbsp;</td>');
+					document.write('</tr>');
+					for (k = 0; k < ep.fnums.length; k++)
+					{
+						var f = flist[ep.fnums[k]];
+
+						if (f.crcStatus == '1')
+						{
+							document.write('<tr height=18 class=filecrcyes>');
+						}
+						else if (f.crcStatus == '2')
+						{
+							document.write('<tr height=18 class=filecrcno>');
+						}
+						else
+						{
+							if (f.isGeneric)
+								document.write('<tr height=18 class=generic>');
+							else
+								document.write('<tr height=18 class=file>');
+						}
+						if (f.isGeneric)
+						{
+							document.write('<td align=center><a href="' + anidb + '?show=file&aid=' + xa.id + '&eid=' + ep.id + '&fid=' + f.id + '&nonav=1" title="View File Info at AniDB" target="_blank">' + f.id + '</a></td>');
+							document.write('<td align=center>&nbsp;</td>');
+							document.write('<td nowrap>');
+							document.write('<img src="images/state_' + f.mystate + '.gif" width=15 height=13 Title="' + f.mystatename + '">&nbsp;');
+							if (f.myfilestate != '0' && f.myfilestate != '')
+								document.write('<img src="images/filestate_' + f.myfilestate + '.gif" width=15 height=13 Title="' + f.myfilestatename + '">&nbsp;');
+							if (f.isWatched)
+								document.write('<img src="images/seen.gif" width=15 height=13 Title="seen">&nbsp;');
+							if (f.hasComment)
+								document.write('<img align=middle src="images/comment.gif" width=15 height=13 title="Comment: ' + f.other + '">&nbsp;');
+							if (f.hasStorage)
+								document.write('<img align=middle src="images/storage.gif" width=15 height=13 title="Storage: ' + f.storage + '">&nbsp;');
+							if (f.hasSource)
+								document.write('<img align=middle src="images/source.gif" width=15 height=13 title="Source: ' + f.source + '">');
+							document.write('</td>');
+							document.write('<td align=center>&nbsp;</td>');
+							document.write('<td align=center>&nbsp;</td>');
+							document.write('<td align=center>&nbsp;</td>');
+							document.write('<td align=center>&nbsp;</td>');
+							document.write('<td align=center>&nbsp;</td>');
+							document.write('<td align=center>&nbsp;</td>');
+						}
+						else
+						{
+							document.write('<td align=center><a href="' + anidb + '?show=file&aid=' + xa.id + '&eid=' + ep.id + '&fid=' + f.id + '&nonav=1" title="View File Info at AniDB" target="_blank">' + f.id + '</a></td>');
+							document.write('<td align=center nowrap><span title="' + f.sizeBytes + ' bytes">' + f.sizeMB + '</span></td>');
+							document.write('<td nowrap>');
+							if (f.Version != "v1")
+								document.write('<img src="images/' + f.Version + '.gif" width=15 height=13 Title="file is ' + f.Version + '">&nbsp;');
+							if (f.audioCount >= 1)
+								document.write('<img src="images/audio_' + f.langID + '.gif" width=15 height=13 onMouseover="ddrivetip(escape(\'<b>' + f.langName + ' audio</b><br>Codec: ' + f.audioCodecName + '<br>Bitrate: ' + f.audioBr + ' k/Bits<br>Channels: ' + getAudioChannels(f.audioChannels) + '\'));" onMouseout="hideddrivetip();">&nbsp;');
+							if (f.audioCount == 2)
+								document.write('<img src="images/audio_' + f.lang2ID + '.gif" width=15 height=13 onMouseover="ddrivetip(escape(\'<b>' + f.lang2Name + ' audio</b><br>Codec: ' + f.audio2CodecName + '<br>Bitrate: ' + f.audio2Br + ' k/Bits<br>Channels: ' + getAudioChannels(f.audio2Channels) + '\'));" onMouseout="hideddrivetip();">&nbsp;');
+							if (f.subCount >= 1)
+								document.write('<img src="images/sub_' + f.subID + '.gif" width=15 height=13 onMouseover="ddrivetip(escape(\'<b>' + f.subName + ' subtitle</b><br>' + getSubData(f.subType, f.subFlags) + '\'));" onMouseout="hideddrivetip();">&nbsp;');
+							if (f.subCount == 2)
+								document.write('<img src="images/sub_' + f.sub2ID + '.gif" width=15 height=13 onMouseover="ddrivetip(escape(\'<b>' + f.sub2Name + ' subtitle</b><br>' + getSubData(f.sub2Type, f.sub2Flags) + '\'));" onMouseout="hideddrivetip();">&nbsp;');
+							if (f.crcStatus == '1')
+								document.write('<img src="images/crc_yes.gif" width=15 height=13 title="file matches official crc (' + f.crc + ')">&nbsp;');
+							else if (f.crcStatus == '2')
+								document.write('<img src="images/crc_no.gif" width=15 height=13 title="file has invalid crc">&nbsp;');
+							else if (f.crc != '')
+								document.write('<img src="images/crc_unk.gif" width=15 height=13 title="file has an unverified crc (' + f.crc + ')">&nbsp;');
+							if (!f.isGeneric)
+								document.write('<img src="images/state_' + f.mystate + '.gif" width=15 height=13 Title="' + f.mystatename + '">&nbsp;');
+							if (f.myfilestate != '0' && f.myfilestate != '')
+								document.write('<img src="images/filestate_' + f.myfilestate + '.gif" width=15 height=13 Title="' + f.myfilestatename + '">&nbsp;');
+							if (f.isWatched)
+								document.write('<img src="images/seen.gif" width=15 height=13 Title="seen">&nbsp;');
+							if (f.hasComment)
+								document.write('<img align=middle src="images/comment.gif" width=15 height=13 title="Comment: ' + f.other + '">&nbsp;');
+							if (f.hasStorage)
+								document.write('<img align=middle src="images/storage.gif" width=15 height=13 title="Storage: ' + f.storage + '">&nbsp;');
+							if (f.hasSource)
+								document.write('<img align=middle src="images/source.gif" width=15 height=13 title="Source: ' + f.source + '">');
+							document.write('</td>');
+							document.write('<td align=center><a href="' + anidb + '?show=group&gid=' + f.groupID + '" target="_blank" Title="' + f.groupName + '">' + f.groupShort + '</a></td>');
+							document.write('<td align=center><img src="images/rate_' + f.qualID + '.gif" height=13 Title="' + f.qualName + '"></td>');
+							if(f.resName)
+								document.write('<td align=center><span title="aspect ratio: ' + getVideoInfo(f.videoAR, f.videoFlags) + '">' + f.resName + '</span></td>');
+							else
+								document.write('<td align=center>-</td>');
+							if(f.videoCodecName)
+								document.write('<td align=center><span title="bitrate: ' + f.videoBr + ' k/Bits">' + f.videoCodecName + '</span></td>');
+							else
+								document.write('<td align=center>-</td>');
+							if(f.typeName)
+								document.write('<td align=center>' + f.typeName + '</td>');
+							else
+								document.write('<td align=center>-</td>');
+							document.write('<td align=center>');
+				    		document.write('<img class=link src="images/ed2k.gif" width=15 height=13 title="ed2k link" OnClick="ed2k(xa, ' + xa.enums[i] + ', ' + ep.fnums[k] + ');">');
+							document.write('</td>');
+						}
+						document.write('</tr>');
+					}
+					document.write('<tr height=5><td></td></tr>');
+					document.write('</table>');
+					document.write('</div>');
+		 		}
+		  	</script>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

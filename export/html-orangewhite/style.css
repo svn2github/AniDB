@@ -1,0 +1,11 @@
+a:active {  text-decoration: underline}
+a:hover {  text-decoration: underline; color: #CC9900}
+a:link {  text-decoration: none; color:  }
+a:visited {  text-decoration: none; color: }
+body {  font-family: Verdana, Arial, Helvetica, sans-serif;}
+.table_mylist_info {  font-size: x-small; border: 1px #FF9900 solid}
+.table_mylist { font-size: x-small; border: 2px #FF9900 dotted}
+.complete {font-color: #ff0000;}
+.episode_sel {  background-color: #FFFFCC}
+.episode {  background-color: }.table_mylist_infoText { font-size: x-small}
+.table_mylist_infoTextWhite { font-size: x-small ; color: #FFFFFF; bgcolor: #FF9900}

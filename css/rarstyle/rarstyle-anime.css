@@ -1,0 +1,309 @@
+div.anime_info div.image img
+{
+	display: block;
+	float: right;
+	border: 1px outset;
+	padding: 2px;
+	margin-left: 0.5em;
+	background: white;
+}
+
+div.anime_info div.data dt
+{
+	margin: 0 0.5em 0 0;
+	padding-left: 1em;
+	clear: left;
+	float: left;
+	width: 9em;
+	height: 1.5em;
+	white-space: nowrap;
+}
+
+div.anime_info div.data dt:after
+{
+	content: " - ";
+}
+
+div.anime_info div.data dd
+{
+	margin: 0;
+	min-height: 1.3em;
+	overflow: hidden;
+	float: left;
+}
+
+div.anime_info div.data dd.japtitle
+{
+	margin: 0;
+	font-weight: bolder;
+	float: none;
+}
+
+div.anime_info div.data dd.japtitle + dt,
+div.anime_info div.data dd.othertitle + dt,
+div.anime_info div.data dd.type + dt
+{
+	clear: none;
+	width: 7em;
+}
+
+div.anime_info div.data dd.categories
+{
+	padding-left: 1em;
+	font-weight: bolder;
+}
+
+div.anime_info div.data dt:first-child,
+div.anime_info div.data dd.title,
+div.anime_info div.data dd.title + dt,
+div.anime_info div.data dd.othertitle,
+div.anime_info div.data dd.engtitle + dt,
+div.anime_info div.data dd.genres + dt,
+div.anime_info div.data dd.anfo,
+div.anime_info div.data dd.ann + dt,
+div.anime_info div.data dd.temprating,
+div.anime_info div.data dd.rating + dt
+{
+	display: none;
+}
+
+div.anime_info div.data dd.anirec a.i_help
+{
+	display:none;
+}
+
+div.anime_info p.desc
+{
+	clear: left;
+	margin: 1em;
+	text-indent: 2em;
+}
+
+div.anime_vote,
+div.anime_info
+{
+	border-top: 0px;
+	padding: 0;
+}
+
+#layout-content div.section.vote form.tempvote
+{
+	display: none;
+}
+
+#layout-content div.section.vote form.permvote
+{
+	clear: right;
+	float: right;
+	margin-top: 0.5em;
+}
+
+div.anime_mylist th,
+div.anime_group th
+{
+	border: white 1px solid;
+	background: black;
+	color: white;
+	font-weight: normal;
+	font-style: italic;
+	padding: 0.2em 0.5em 0.2em 0.5em;
+}
+
+div.anime_group td
+{
+	 display: none;
+}
+
+div.anime_mylist td,
+div.anime_group td+td
+{
+	display: table-cell;
+	padding: 0.2em 0.5em 0.2em 0.5em;
+	border-right: black 1px solid;
+	border-top: black 1px solid;
+}
+div.anime_mylist td+td,
+div.anime_group td+td+td
+{
+	display: table-cell;
+	border-right: none;
+	border-left: black 1px solid;
+}
+
+
+div.anime_mylist th.heading,
+div.anime_group th.info
+{
+	display: none;
+}
+
+div.anime_mylist th.anime
+{
+	width: 300px;
+	text-align: left;
+}
+
+div.anime_mylist td.eps,
+div.anime_mylist td.seen,
+div.anime_group td.cmts,
+div.anime_group td
+{
+	text-align: center;
+}
+
+div.anime_group th.group,
+div.anime_group td.group
+{
+	text-align: left;
+}
+
+div.anime_group td.lastep
+{
+	text-align: right;
+}
+
+div.anime_group td.state.complete,
+div.anime_group td.state.finished
+{
+	font-weight: bold;
+}
+
+div.anime_group td.state.stalled
+{
+	font-style: italic;
+}
+
+div.anime_table table
+{
+	width: 100%;
+	clear: both;
+}
+
+div.anime_table th
+{
+	font-weight: normal;
+	text-align: left;
+}
+
+div.anime_table a
+{
+	text-transform: uppercase;
+}
+
+div.anime_table table.eplist
+{
+	padding: 0;
+	margin-bottom: 1em;
+}
+
+div.anime_table table.eplist tr.even td
+{
+	border-right: black 2px solid;
+	border-top: black 2px solid;
+	border-bottom: black 2px solid;
+	font-weight: bolder;
+	padding: 0.2em;
+}
+
+div.anime_table table.eplist tr.g_even td+td
+{
+	border-right: none;
+	border-left: black 2px solid;
+}
+
+div.anime_table table.eplist tr.g_odd td
+{
+	border: white 2px solid;
+	font-weight: bolder;
+	padding: 0.2em;
+}
+
+div.anime_table table.filelist
+{
+	padding: 0.5em 0 1em 0;
+}
+
+div.anime_table table.filelist th,
+div.anime_table table.filelist td
+{
+	border: white 2px solid;
+	padding: 0 0.5em 0 0.5em;
+	overflow: visible;
+}
+
+div.anime_table table.filelist tr
+{
+	background-color: #E3E3E3;
+}
+
+div.anime_table table.filelist tr.good td
+{
+	background-color: #D5F2D5;
+}
+
+div.anime_table table.filelist tr.depr td
+{
+	background-color: #F2EBD5;
+}
+
+div.anime_table table.filelist tr.genr td
+{
+	background-color: white;
+}
+
+div.anime_table td.epusers,
+div.anime_table td.files
+{
+	text-align: right;
+}
+
+div.anime_table th.expand,
+div.anime_table td.expand,
+div.anime_table th.check,
+div.anime_table td.check,
+div.anime_table th.ed2k,
+div.anime_table td.ed2k,
+div.anime_table th.fileaction,
+div.anime_table td.fileaction
+{
+	text-align: center; /* Not actually much use, doesn't center block images */
+}
+
+div.anime_table td.stat .i_icon
+{
+	float: left;
+}
+
+div.anime_table td.stat .i_crc_yes
+{
+	margin-left: 3px;
+}
+
+div.anime_table td.qual .i_icon
+{
+	margin-left: 0;
+}
+
+div.anime_table td.title div
+{
+	float: right;
+}
+
+div.anime_table .icoco .i_icon
+{
+	float: left;
+	padding: 0px 2px 0px 2px;
+}
+
+div.anime_table div.actions
+{
+	text-align: center;
+	margin: auto;
+}
+
+
+div.anime_edit
+{
+	text-align: center;
+}
+

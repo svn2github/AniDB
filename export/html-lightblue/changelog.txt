@@ -1,0 +1,61 @@
+History:
+10.05.2006
+	Updated Genres (categories) and Companies
+	Fixed some wrong handling of new features
+	Added ESC handling to return from anime page
+05.05.2006
+	Added ANN link when available
+	Updated to reflect AniDB video, audio and sub streams changes
+	Added and updated some images
+26.07.2005
+	Removed some files states and images
+	Added and updated some images
+01.01.2005
+	Fixed sorting code (unicode in names was breaking the sort)
+	Fixed a bug with filtering by letter
+	Changed the letter navigators to be easier to handle
+	Minor CSS style changes
+	Added an audio flag (eng/ch)
+24.12.2004
+	Fixed a bug with applying filters when in last page view
+	Added column sorting to MyList page (ascending and descending)
+	Added applied filter status notification
+	Some minor formating changes and page size reduction
+14.12.2004
+	Minor changes/fixes and page loading message (useful for big lists)
+02.10.2004
+	Some minor fixes and changes
+	Updated design (position of elements) to be more like AniDB
+27.09.2004
+	Updated to SDK 0.9 (new features)
+16.08.2004
+	Added CRC to custom ed2k
+	Minor layout fix for Search
+	Fixed recap bug
+13.08.2004
+	Added search of anime names
+	Some fixes for the recent major update
+	Reduced size of exported files
+11.09.2004
+	Improved MyList page (now with only one list and filters)
+	Major update in data handling (now using JS arrays)
+	Integrated all pages in one and added some extra features
+	In Opera two pages are still needed
+18.04.2004
+	Some new info added (Temp Rating, Awards, New Titles etc)
+	Updated MyList layout to fit more series
+15.04.2004
+	Fixed custom ed2k link
+29.09.2003
+	Fix for storage showing (shouldn't be source as added on 07.09)
+08.09.2003
+	Added Anime Planet recommendations for similar anime
+07.09.2003
+	Added source information (hover over the icon to get the info)
+01.09.2003
+	Added episode status in anime list
+	Added different color styles selection to myList and Anime pages
+26.08.2003
+	Added state icons in myList and episodes/specials status in the anime page
+15.08.2003
+	1.0 release with lots of improvements

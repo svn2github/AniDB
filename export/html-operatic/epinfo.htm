@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>::aniDB.Net:: Episode Info </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+var uri = "" + window.location;
+var an = "";
+var ep = "";
+
+if ( uri.indexOf ( "?" ) > -1 ) {
+	var toExpand  = uri.substring ( uri.indexOf ( "=" ) + 1 , uri.length );
+	if ( toExpand.indexOf ( "&e" ) > -1 ) {
+		an = toExpand.substring ( 0 , toExpand.indexOf ( "&e" ) );
+		ep = toExpand.substring ( toExpand.indexOf ( "e" ) , toExpand.length );
+	} else {
+		an = toExpand;
+	}
+	//alert('uri = '+uri+'\ntoExpand = '+toExpand+'\naToExpand = '+an+'\neToExpand = '+ep);
+	document.write ( "<script language=\"javascript\" type=\"text/javascript\" src=\"anime/" + an + ".js\"><\/script>" );
+}
+
+
+</script>
+</head>
+<body bgcolor="#868178" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<script language="javascript" type="text/javascript">
+ep = eval(ep);
+
+if (ep.name == ''){ep.name = '-';};
+if (ep.shortAired == ''){ep.shortAired = '-';};
+if (ep.other == ''){ep.other = '-';};
+if (ep.state == 0){misc = '-';};
+if (ep.state == 1){misc = 'Special';};
+if (ep.state == 2){misc = 'Recap';};
+if (ep.state == 3){misc = 'Special & Recap';};
+if (ep.state == 4){misc = 'Opening/Ending/Credits';};
+if (ep.state == 8){misc = 'Ending';};
+if (ep.state == 16){misc = 'Unknown';};
+if (ep.state == 18){misc = 'Unknown & Recap';};
+if (ep.state == 32){misc = 'Trailer/Promo/Ads';};
+if (ep.state == 34){misc = 'Trailer/Promo/Ads & Recap';};
+if (ep.state == 64){misc = 'Parody/Fandub';};
+if (ep.state == 66){misc = 'Parody/Fandub & Recap';};
+if (ep.state == 128){misc = 'Other';};
+if (ep.state == 130){misc = 'Other & Recap';};
+
+document.write('<table class="anime_table_local" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#EDE8E0">');
+document.write('<tr>');
+document.write('<td>');
+document.write('<table class="anime_table" width="100%" border="0" cellspacing="0" cellpadding="0">');
+document.write('<tr background="images/topbar.gif" bgcolor="#868178">');
+document.write('<td width="130" class="bars_head" bgcolor="#868178" height="20"><font color="#EFE6D8">&nbsp;Episode Info</font></td>');
+document.write('<td align="right" class="bars_head" height="20" background="images/topbar.gif" bgcolor="#868178"><a href="javascript:window.close();"><img src="images/close.gif" width="16" height="16" border="0" alt="close window" title="close window"></a>&nbsp;</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" valign="top" >&nbsp; Anime Title: </td>');
+document.write('<td> <a href="' + anidb + '?show=anime&aid=' + xa.id + '" target="_blank">' + xa.name + '</a> (' + xa.id +')</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td ></td>');
+document.write('<td>&nbsp;</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" valign="top" >&nbsp; Episode Number: </td>');
+document.write('<td> <a href="' + anidb + '?show=ep&aid='+xa.id+'&eid=' + ep.id + '&nonav=1" target="_blank">' + ep.num + '</a></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" >&nbsp; Episode Title (English): </td>');
+document.write('<td> ' + ep.name + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" >&nbsp; Episode Title (Romanji): </td>');
+document.write('<td> ' + ep.name_romanji + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" >&nbsp; Episode Title (Kanji): </td>');
+document.write('<td> ' + ep.name_kanji + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" >&nbsp; Play Lenght: </td>');
+document.write('<td> ' + ep.elength + ' min</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" >&nbsp; Air/Release Date: </td>');
+document.write('<td> ' + ep.shortAired + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" >&nbsp; Last Update: </td>');
+document.write('<td> ' + ep.shortUpdate + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" >&nbsp; Rating: </td>');
+document.write('<td> ' + ep.rating + ' (' + ep.votes + ' votes) <a href="' + anidb + '?show=animevotes&aid=' + xa.id +'&nonav=1" title="show graph vote for this anime">[graph]</a></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td height="20" width="130" valign="top" >&nbsp; Misc: </td>');
+document.write('<td> ' + misc + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td ></td>');
+document.write('<td>&nbsp;</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td valign="top" height="20" width="130" >&nbsp; Descr: </td>');
+document.write('<td> ' + ep.other + '</td>');
+document.write('</tr>');
+document.write('</table>');
+document.write('</td>');
+document.write('</tr>');
+document.write('</table>');
+</script>
+</body>
+</html>

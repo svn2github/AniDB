@@ -1,0 +1,148 @@
+/*
+A style for XML-XSLT template
+© 2005 by Siddhi Pittayachawan
+Version 0.1
+*/
+.hover {
+	background: lightgreen;
+	color: forestgreen
+}
+
+.showcontent {
+	display: block
+}
+
+.hiddencontent {
+	display: none
+}
+
+a {
+	color: darkblue;
+	text-decoration: none
+}
+
+a:hover {
+	color: forestgreen
+}
+
+a.listlink {
+	color: darkblue;
+	display: block;
+	text-decoration: none
+}
+
+a[class="listlink"]:hover {
+	color: forestgreen
+}
+
+body {
+	border: 2px darkblue dotted;
+	color: darkblue;
+	font: 0.7em Verdana;
+	padding-left: 2em;
+	padding-right: 2em
+}
+
+colgroup.columnspace {
+	width: 7em
+}
+
+div#animelist table, table#animeinfo, table#episode, table#episode table{
+	width: 100%
+}
+
+div#userinfo td, table#animeinfo td {
+	background: whitesmoke
+}
+
+div#userinfo td:first-child, table#animeinfo td:first-child {
+	background: darkblue;
+	color: lightcyan;
+	font-weight: bold;
+	text-align: right;
+	width: 8.5em
+}
+
+img {
+	border: 0px
+}
+
+p.hover {
+	background: lightgreen;
+	color: forestgreen;
+	cursor: pointer;
+	display: inline
+}
+
+p.link {
+	display: inline
+}
+
+table {
+	border: 1px darkblue solid
+}
+
+td, th {
+/* activate this if you want 3D-like interface */
+/*	border-color: white black black white;
+	border-style: groove;
+	border-width: 1px;*/
+	vertical-align: top
+}
+
+/* setting the colours of global table headers */
+th {
+	background: darkblue;
+	color: lightcyan
+}
+
+/* setting the width of columns of episode table */
+th#ep_date {
+	width: 5em
+}
+
+th#ep_ep {
+	width: 3em
+}
+
+th#ep_length {
+	width: 6em
+}
+
+/* setting the width of columns of file details table */
+th#file_col_ed2k {
+	width: 4em
+}
+
+th#file_col_group {
+	width: 10em
+}
+
+th#file_col_id {
+	width: 5em
+}
+
+th#file_col_qual {
+	width: 8em
+}
+
+th#file_col_res {
+	width: 8em
+}
+
+th#file_col_size {
+	width: 8em
+}
+
+th#file_col_source {
+	width: 6em
+}
+
+/* background colours of complete/incomplete anime on mylist page */
+tr.complete {
+	background: #AAEEFF
+}
+
+tr.incomplete {
+	background: #FAFAFA
+}

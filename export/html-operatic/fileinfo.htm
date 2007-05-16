@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>::aniDB.Net:: File Info </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+var uri = "" + window.location;
+var an = "";
+var ep = "";
+var file = "";
+var crc_s = '-';
+var fvr = 'v1 - Version 1';
+var ename = '';
+
+if ( uri.indexOf ( "?" ) > -1 ) {
+	var toExpand  = uri.substring ( uri.indexOf ( "=" ) + 1 , uri.length );
+	if ( toExpand.indexOf ( "&e" ) > -1 ) {
+		an = toExpand.substring ( 0 , toExpand.indexOf ( "&e" ) );
+		if ( toExpand.indexOf ( "&f" ) > -1 ) {
+			ep = toExpand.substring ( toExpand.indexOf ( "e" ), toExpand.indexOf ( "&f" ) );
+			file = toExpand.substring ( toExpand.indexOf ( "&f" ) + 1, toExpand.length );
+		} else {
+			ep = toExpand.substring ( toExpand.indexOf ( "&e" ) , toExpand.length );
+		}
+	} else {
+		an = toExpand;
+	}
+	//alert('uri = '+uri+'\ntoExpand = '+toExpand+'\naToExpand = '+an+'\nfToExpand = '+file+'\neToExpand = '+ep);
+	document.write ( "<script language=\"javascript\" type=\"text/javascript\" src=\"anime/" + an + ".js\"><\/script>" );
+}
+
+
+</script>
+</head>
+<body bgcolor="#868178" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<script language="javascript" type="text/javascript">
+ep = eval(ep);
+f= eval(file);
+if (f.isCRCOK){crc_s = 'crc matches official crc';}
+if (f.isCRCNO){crc_s = 'crc <b>DOES NOT</b> match official crc!';};
+if (f.isCRCUN){crc_s = 'crc has not been verified';};
+if (f.isV2){fvr = 'v2 - Version 2';};
+if (f.isV3){fvr = 'v3 - Version 3';};
+if (f.isV4){fvr = 'v4 - Version 4';};
+if (f.isV5){fvr = 'v5 - Version 5';};
+if (pref_etitle == 0){ ename = ep.name };
+if (pref_etitle == 1){ 
+	if ( ep.name_romanji != '-'){ ename = ep.name_romanji } else { ename = ep.name }
+};
+if (pref_etitle == 2){ 
+	if ( ep.name_kanji != '-'){ ename = ep.name_kanji } else { ename = ep.name }
+};
+if (ename != ''){ep.name = ' - ' + ename};
+if (f.sha == ''){f.sha = '-';};
+if (f.md5 == ''){f.md5 = '-';};
+if (f.crc == ''){f.crc = '-';};
+if (f.groupShort != ''){f.groupName = '<a href="' + anidb + '?show=group&gid=' + f.groupID + '" target="_blank">' + f.groupName + '</a>';};
+if (f.groupShort == ''){f.groupName = 'no group (dvd rip) or unknown group';};
+if (f.other == ''){f.other = '-';};
+
+document.write('<table class="anime_table_local" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#EDE8E0">');
+document.write('<tr>');
+document.write('<td>');
+document.write('<table class="anime_table" width="100%" border="0" cellspacing="0" cellpadding="0">');
+document.write('<tr background="images/topbar.gif" bgcolor="#868178">');
+document.write('<td width="130" height="20" class="bars_head" bgcolor="#868178" height="20"><font color="#EFE6D8">&nbsp;Episode Info</font></td>');
+document.write('<td align="right" class="bars_head" height="20" background="images/topbar.gif" bgcolor="#868178"><a href="javascript:window.close();"><img src="images/close.gif" width="16" height="16" border="0" alt="close window" title="close window"></a>&nbsp;</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20" valign="top">&nbsp; Anime Title: </td>');
+document.write('<td> <a href="' + anidb + '?show=anime&aid=' + xa.id + '&nonav=1" target="_blank">' + xa.name + '</a> (' + xa.id +')</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20" valign="top">&nbsp; Episode: </td>');
+document.write('<td> <a href="' + anidb + '?show=file&aid=' + xa.id + '&eid='+ep.id+'&fid='+f.id+'&nonav=1" target="_blank">' + ep.num + ep.name + '</a> (' + ep.id + ')</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; File ID: </td>');
+document.write('<td> ' + f.id + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td colspan=2 height="20"></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Size: </td>');
+document.write('<td> ' + f.sizeBytes + ' bytes</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; MD5 Sum: </td>');
+document.write('<td> ' + f.md5 + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; SHA1 Sum: </td>');
+document.write('<td> ' + f.sha + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; CRC Sum: </td>');
+document.write('<td> ' + f.crc + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; CRC Status: </td>');
+document.write('<td> ' + crc_s + '</td>');
+document.write('</tr>');  
+document.write('<tr>');
+document.write('<td valign="top" width="130">&nbsp; ED2K Link: </td>');
+document.write('<td> <a href="' + f.ed2kLink + '" title="ed2k link">'+ f.ed2kName + '</a></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td colspan=2 height=20></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td valign="top" width="130">&nbsp; File Version: </td>');
+document.write('<td> ' + fvr + '<br>');
+document.write('<i>(A file version >v1 indicates corrected subs or a better video quality)</i>');
+document.write('</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; File Type: </td>');
+document.write('<td> ' + f.filetype + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Audio Language(s): </td>');
+document.write('<td> ' + f.langName + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Subtitle Language: </td>');
+document.write('<td> ' + f.subName + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Subbed by: </td>');
+document.write('<td> ' + f.groupName + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Released: </td>');
+document.write('<td> ' + f.shortReleased + ' -  <i>(added ' + f.shortDate + ')</i></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td colspan=2 height=20></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Quality: </td>');
+document.write('<td> ' + f.qualName + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Source: </td>');
+document.write('<td> ' + f.typeName + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Resolution: </td>');
+document.write('<td> ' + f.resName + '</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Video Codec: </td>');
+document.write('<td> ' + f.videoCodecName + ' - Bitrate: ' + f.videoBr + 'kBit/s</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Audio Codec: </td>');
+document.write('<td> ' + f.audioCodecName + ' - Bitrate: ' + f.audioBr + 'kBit/s</td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td colspan=2 height=20></td>');
+document.write('</tr>');
+document.write('<tr>');
+document.write('<td width="130" height="20">&nbsp; Descr: </td>');
+document.write('<td> ' + descr + '</td>');
+document.write('</tr>');
+document.write('</table>');
+document.write('</td>');
+document.write('</tr>');
+document.write('</table>');
+</script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<html>
+<head>
+<title>::aniDB.Net:: anime page </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js"></script>
+<script language="javascript">
+
+var uri = "" + window.location;
+var aToExpand = "";
+
+if ( uri.indexOf ( "?" ) > -1 ) {
+	var toExpand  = uri.substring ( uri.indexOf ( "=" ) + 1 , uri.length );
+	aToExpand = toExpand;
+	document.write ( "<script language=\"javascript\" type=\"text/javascript\" src=\"anime/" + aToExpand + ".js\"><\/script>" );
+}
+
+
+</script>
+<script language="javascript">
+function file_add(aid,epnum,fid){
+	//alert(test_file);
+	var f_trade = "";
+	var target = document.getElementById(fid + '_sel');
+	var checkbox = eval(target);
+	var in_list = 0;
+	var in_list_id = 0;
+	for (i = 0; i< test_file.length; i++){
+		if (test_file[i].fid == fid ){
+			in_list = 1;
+			in_list_id = i;
+		}
+	}
+	if (checkbox){
+		if (checkbox.checked){
+			var fileA = new Object();
+			fileA.aid = aid;
+			fileA.epnum = epnum;
+			fileA.fid = fid;
+			if (in_list == 0){
+				test_file.push(fileA);
+				//alert('added:\nfid['+fileA.fid+']\naid['+fileA.aid+']\nepnum['+fileA.epnum+']');
+			}
+		} else {
+			if (in_list == 1){
+				test_file.splice(in_list_id,1);
+			}
+		}
+	}
+	for (i = 0; i < test_file.length; i++){
+		f_trade += 'fid: '+ test_file[i].fid +' of '+xa.name+' ( ep: '+test_file[i].epnum+')' + ';'
+	}
+	setCookie('f_trade',f_trade);
+}
+
+</script>
+<style type="text/css">
+<!--
+.ani_table_local {  border: 2px #CCDDEE solid}
+.tab_active {  background-repeat: no-repeat; background-position: left top}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:set_prefs();" leftmargin="0" topmargin="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+	<td width="30"  bgcolor="#F0F0EB" align="center" height="20">&nbsp;</td>
+	<td  bgcolor="#F0F0EB"><font  size="1">Title: <b> 
+	  <script language="javascript">
+	  		if (pref_title == 0){ var aname = xa.name };
+			if (pref_title == 1){ 
+				if ( xa.japkanji != '-'){ var aname = xa.japkanji } else { var aname = xa.name }
+			};
+			if (pref_title == 2){ 
+				if ( xa.eng != '-'){ var aname = xa.eng } else { var aname = xa.name }
+			};
+	  		document.write (aname);
+	  </script></b></font></td>
+	<td  bgcolor="#F0F0EB" align="right">
+		<script language="javascript">
+			document.write ('<a href="'+anidb+'?show=anime&aid='+xa.id+'" target="_blank">');
+			document.write ('<img src="images/anidb.gif" width="15" height="13" border="0" title="Click to access aniDB information on '+xa.name+'"></a> ');
+			if (xa.animeNfoUrl != ""){
+				document.write ('<a href="'+xa.animeNfoUrl+'" target="_blank">');
+				document.write ('<img src="images/animenfo.gif" width="15" height="13" border="0" title="Click to access animeNFO information on '+xa.name+'"></a> ');
+			}
+			if (xa.aniplaneturl != ""){
+				document.write ('<a href="'+xa.aniplaneturl+'" target="_blank">');
+				document.write ('<img src="images/animeplanet.gif" width="15" height="13" border="0" title="Click to access Anime Planet information on '+xa.name+'"></a> ');
+			}
+			if (xa.url != ""){
+				document.write ('<a href="'+xa.url+'" target="_blank">');
+				document.write ('<img src="images/web.gif" width="15" height="13" border="0" title="Click to access '+xa.name+'\'s website."></a> ');
+			}
+			document.write ('&nbsp;');
+			/*if (pref_trade == 1){
+				document.write ('<a href="javascript:trade_files();">');
+				document.write ('<img src="images/trade.gif" width="15" height="13" border="0" title="Click to trade files"></a> ');
+			}*/
+			document.write ('&nbsp;');
+		</script>
+		<a href="javascript:popup('help.htm?=anime','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a>
+		<a href="javascript:popup('preferences.htm','Preferences','350','300');"><img src="images/preferences.gif" width="16" height="16" border="0" title="Preferences"></a></td>
+  </tr>
+  <tr> 
+	<td width="30"  bgcolor="#F0F0EB" align="center" valign="top"><script language="javascript">document.write ('<a href="javascript:toggle(\'info\');toggle(\'noinfo\');toggle(\'img_info_plus\');toggle(\'img_info_minus\');" Title="There is more information, click to show/Hide information on '+xa.name+'">');
+	  document.write ('<div id=img_info_plus style="display:none"><img src="images/plus.gif" width="15" height="13" Title="Show Information on '+xa.name+'" border="0"></div>');
+	  document.write ('<div id=img_info_minus style="display:"><img src="images/minus.gif" width="15" height="13" Title="Hide Information on '+xa.name+'" border="0"></div></a>');</script>
+	 </td>
+	<td valign="top" colspan="2"> 
+	  <div id=noinfo style="display:none">
+	  <script language="javascript">
+		document.write ('<table width="100%" border="0" cellspacing="0" cellpadding="0">');
+		document.write ('<tr height="20px"> ');
+		document.write ('<td><font size="1">&nbsp;Title: '+xa.name+'</font></td>');
+		document.write ('<td width="25" align="center"><font size="1" ><img src="images/state_'+xa.state+'.gif" width="15" height="13" Title="State: '+xa.statename+'" border="0"></font></td>');
+		document.write ('<td width="80"><font size="1">EPs: '+xa.myEps+' / '+xa.eps+'</font></td>');
+		document.write ('<td width="80"><font size="1">Seen: '+xa.myWeps+' / '+xa.eps+'</font></td>');
+		document.write ('<td width="130" align="center"><font size="1">Rating: '+xa.rating+' ('+xa.votes+')</font></td>');
+		document.write ('<td width="130" align="center"><font size="1">Reviews: <a href="'+ anidb +'?show=animeatt&aid='+ xa.id +'" title="View reviews for '+ xa.name +'" target="_blank">'+ xa.rrating +'</a> ('+ xa.reviews +')</font></td>');
+		document.write ('</tr>');
+		document.write ('</table>');
+	  </script>
+	  </div>
+	  <div id=info style="display:"> 
+		<script language="javascript">
+		document.write ('<table id=animeinfo border="0" cellspacing="2" cellpadding="0">');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Title:</font></td>');
+		document.write ('<td><font size="1"><b><a href="'+anidb+'?show=anime&aid='+xa.id+'" target="_blank" title="Click to access aniDB information on '+xa.name+'">'+xa.name+'</a></b></font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Jap. Kanji:</font></td>');
+		document.write ('<td><font size="1">'+xa.japkanji+'</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">English:</font></td>');
+		document.write ('<td><font size="1">'+xa.eng+'</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Synonyms:</font></td>');
+		document.write ('<td> <font size="1">'+xa.aliases+'</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Short:</font></td>');
+		document.write ('<td> <font size="1">'+xa.shortNames+' </font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Type: </font></td>');
+		document.write ('<td><font size="1">'+xa.typename+'</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Genres: </font></td>');
+		document.write ('<td><font size="1">'+xa.genres+'</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Year: </font></td>');
+		document.write ('<td> <font size="1">'+xa.year+' ');
+		xa.date_start_short = parseInt(xa.date_start_short);
+		if (xa.date_start_short > 0){
+			document.write ('('+xa.date_start_short+' till '+xa.date_end_short+') ');
+		}
+		document.write ('</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Producer: </font></td>');
+		document.write ('<td> <font size="1">'+xa.prod+' </font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">URL: </font></td>');
+		document.write ('<td> <font size="1"><a href="'+xa.url+'" target="_blank">'+xa.url+'</a> </font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Eps: </font></td>');
+		document.write ('<td> <font size="1">'+xa.eps+' ( '+xa.myEps+' in mylist / '+xa.myWeps+' seen ) </font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Specials:</font></td>');
+		document.write ('<td> <font size="1">'+xa.mySEps+' in mylist / '+xa.myWSEps+' seen</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Size: </font></td>');
+		document.write ('<td> <font size="1"><a title="'+xa.size+' bytes">'+xa.size_h+'</a></font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Rating: </font></td>');
+		document.write ('<td> <font size="1">'+xa.rating+' ('+xa.votes+' votes) ');
+		xa.votes = parseInt(xa.votes);
+		if (xa.votes > 0){
+			document.write ('<a href="' + anidb + '?show=animevotes&aid=' + xa.id +'&nonav=1" target="_blank" title="show graph vote for this anime">[graph]</a> ');
+		}
+		if (xa.HasMyVote){
+			document.write ('my Vote: '+xa.myVote+' ');
+		}
+		document.write ('</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Temp. Rating:</font></td>');
+		document.write ('<td> <font size="1">'+xa.tmpRating+' ('+xa.tmpVotes+' votes) ');
+		if (xa.HasMyTmpVote){
+			document.write ('my tmpVote: '+xa.myTmpVote+' ');
+		}
+		document.write ('</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Reviews: </font></td>');
+		document.write ('<td> <font size="1"><a href="'+anidb+'?show=animeatt&aid='+xa.id+'" title="View reviews for '+xa.name+'" target="_blank">'+xa.rrating+'</a> ('+xa.reviews+' reviews)</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">AniDB AID: </font></td>');
+		document.write ('<td> <font size="1"><a href="'+anidb+'?show=anime&aid='+xa.id+'" target="_blank" title="View aniDB information on '+xa.name+'"> '+xa.id+'</a></font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">AnimeNfo ID:</font></td>');
+		document.write ('<td> <font size="1"><a href="'+xa.animeNfoUrl+'" target="_blank" title="View animeNFO information on '+xa.name+'">'+xa.animeNfoName+'</a></font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100"><font size="1">Anime Planet:</font></td>');
+		document.write ('<td><font size="1">');
+		if (xa.aniplaneturl != ""){
+			document.write ('<a href="'+xa.aniplaneturl+'" target="_blank" title="View similar animes on Anime Planet">similar anime recommendations</a>');
+		} else { document.write ('there are no similar anime recommendations'); }
+		document.write ('</font></td>');
+		document.write ('</tr>');
+		if (xa.isWishListed){
+			document.write ('<tr> ');
+			document.write ('<td valign="top"><font size="1">Wishlist:</font></td>');
+			document.write ('<td><font size="1">'+xa.wishlist_type_name+' <img src="images/wish_pri_'+xa.wishlist_priority+'.gif" width="15" height="13" title="on Wishlist - Priority '+xa.wishlist_priority_name+'">');
+			if (xa.wishlist_comment != ""){
+				document.write ('&nbsp;<img src="images/comment.gif" width="15" height="13" title="Comment: '+xa.wishlist_comment+'" border="0">');
+			}
+			document.write ('&nbsp;</font></td>');
+			document.write ('</tr>');
+		}
+		document.write ('<tr> ');
+		document.write ('<td width="100">&nbsp;</td>');
+		document.write ('<td>&nbsp;</td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td valign="top"><font size="1">Description:</font></td>');
+		document.write ('<td><font size="1">'+xa.description+'&nbsp;</font></td>');
+		document.write ('</tr>');
+		document.write ('<tr> ');
+		document.write ('<td width="100">&nbsp;</td>');
+		document.write ('<td>&nbsp;</td>');
+		document.write ('</tr>');
+		document.write ('<tr>');
+		document.write ('<td><font size="1">Awards: </font></td><td>');
+		for (i = 0; i < xa.awards.length; i++){
+		var id_awd = "0";
+		if (xa.awards[i].substring(7,19) == "animereactor"){ id_awd = 2;} else { id_awd = 1;}
+			document.write ('<font size="1"><a href="'+xa.awards[i]+'"><img src="images/award_'+id_awd+'.gif" width="15" height="13" title="Award: '+xa.awards[i+2]+'" border="0"> '+xa.awards[i+2]+'</a></font> ');
+			i=i+2;
+		}
+		if (xa.awards.length == 0){
+			document.write ('<font size="1">none</font>');
+		}
+		document.write ('</td></tr>');
+		document.write ('</table>');
+		</script>
+	  </div>
+	</td>
+  </tr>
+  <tr> 
+	<td width="30"  bgcolor="#F0F0EB" align="center" valign="top"><script language="javascript">
+		document.write ('<a href="javascript:toggleAll();toggle(\'img_episodes_plus\');toggle(\'img_episodes_minus\');toggleAlleps();">');
+		document.write ('<div id=img_episodes_plus style="display:"><img src="images/plus.gif" width="15" height="13" Title="Show all File Information on '+xa.name+'" border="0"></div>');
+		document.write ('<div id=img_episodes_minus style="display:none"><img src="images/minus.gif" width="15" height="13" Title="Hide all File Information on '+xa.name+'" border="0"></div></a>');
+	  </script>
+	</td>
+	<td colspan="2"> 
+	  <table id=ephead width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr  bgcolor="#F0F0EB"> 
+		  <td width="30" height="15">&nbsp;</td>
+		  <td width="25"><font size="1" >EP</font></td>
+		  <td  bgcolor="#F0F0EB"><font size="1" >Title</font></td>
+		  <td width="25">&nbsp;</td>
+		  <td width="25">&nbsp;</td>
+		  <td width="60"><font size="1" >Length</font></td>
+		  <td width="70"><font size="1" >Date</font></td>
+		</tr>
+	  </table>
+	  <script language="javascript">
+	  for (i = 0; i < xa.enums.length; i++){
+		var ename = "";
+		var ep = eval("e" + xa.enums[i]);
+		document.write ('<table id=eploop width="100%" border="0" cellspacing="0" cellpadding="0" class="lines">');
+		document.write ('<tr height="20px">');
+		document.write ('<td width="30"  bgcolor="#F0F0EB" align="center" height="15"><font size="1" >');
+		document.write ('<a href="javascript:toggle(\'eid'+ep.num+'\');toggle(\'img_ep'+ep.num+'_plus\');toggle(\'img_ep'+ep.num+'_minus\');">');
+		document.write ('<div id=img_ep'+ep.num+'_plus style="display:"><img src="images/plus.gif" width="15" height="13" Title="Show File Information" border="0"></div>');
+		document.write ('<div id=img_ep'+ep.num+'_minus style="display:none"><img src="images/minus.gif" width="15" height="13" Title="Hide all File Information" border="0"></div>');
+		document.write ('</a></font></td>');
+		document.write ('<td width="25" align="center"><font size="1"><a href="javascript:popup(\'epinfo.htm?=a'+xa.id+'&e'+ep.num+'\',\'EpInfo\',\'370\',\'230\');" Title="Show/Hide information of files for this episode">'+ep.num+'</a></font></td>');
+	  	if (pref_etitle == 0){ ename = ep.name };
+		if (pref_etitle == 1){ 
+			if ( ep.name_romanji != '-'){ ename = ep.name_romanji } else { ename = ep.name }
+		};
+		if (pref_etitle == 2){ 
+			if ( ep.name_kanji != '-'){ ename = ep.name_kanji } else { ename = ep.name }
+		};
+
+		document.write ('<td><font size="1">'+ename+'&nbsp;</font></td>');
+		document.write ('<td width="25" align="center"><img src="images/ep_state_'+ep.state+'.gif" width="15" height="13"');
+		if (ep.state == "2"){document.write ('title="Episode is a recap (summary)">');}
+		document.write ('</td>');
+		document.write ('<td width="25" align="center">');
+		if (ep.isWatched){ document.write ('<a title="Seen"><img src="images/seen.gif" width="15" height="13" Title="Episode is Seen" border="0"></a>');}
+		document.write ('</td>');
+		document.write ('<td width="60" align="center"><font size="1">'+ep.elength+' min</font></td>');
+		if (pref_dates == 0){
+			document.write ('<td width="70" align="center"><font size="1">'+ep.shortDate+'</font></td>');
+		} else {
+			if (ep.shortAired != ""){
+				document.write ('<td width="70" align="center"><font size="1">'+ep.shortAired+'</font></td>');
+			} else {
+				document.write ('<td width="70" align="center"><font size="1">'+ep.shortDate+'</font></td>');
+			}
+		}
+		document.write ('</tr>');
+		document.write ('</table>');
+		document.write ('<div id=eid'+ep.num+' style="display:none">');
+		document.write ('<table id=fileinfo border="0" cellspacing="1" cellpadding="0" width="100%" bgcolor="#F0F0EB">');
+		document.write ('<tr height="20px">');
+		document.write ('<td width="30"  bgcolor="#F0F0EB" height="15">&nbsp;</td>');
+		document.write ('<td width="30"  bgcolor="#F0F0EB" height="15">&nbsp;</td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="60"><font size="1" >fID</font></td>');
+		document.write ('<td width="110"  bgcolor="#F0F0EB"><font size="1" >group</font></td>');
+		document.write ('<td width="150"  bgcolor="#F0F0EB"><font size="1" >size</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="60"><font size="1" >qual</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="130"><font size="1" >stat</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="50"><font size="1" >state</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="70"><font size="1" >storage</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="70"><font size="1" >source</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="70"><font size="1" >comment</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB" width="45"><font size="1" >ed2k</font></td>');
+		document.write ('<td  bgcolor="#F0F0EB">&nbsp;</td>');
+		document.write ('</tr>');
+		for (k = 0; k < ep.fnums.length; k++){		
+			var f = eval("f" + ep.fnums[k]);
+			if (f.isGeneric && pref_generic == 0){
+				//nothing happens, hopefully...
+			} else {
+				document.write ('<tr>');
+				document.write ('<td width="30"  bgcolor="#F0F0EB" height="15" align="center">&nbsp;</td>');
+				document.write ('<td width="30"  bgcolor="#F0F0EB" height="15" align="center"><a href="javascript:toggle(\'eid'+ep.num+'\');toggle(\'img_ep\''+ep.num+'_plus\');toggle(\'img_ep'+ep.num+'_minus\');" Title="Click to collapse file information"><img src="images/minus.gif" width="15" height="13" title="Collapse file information" border="0"></a></td>');
+				if (f.isGeneric){
+					document.write ('<td colspan="5" bgcolor="#b0b0b0"><font size="1">Generic File (<a href="http://www.anidb.net/wiki/index.php?title=Files:Generic_files" title="What are Generic Files?" target="_blank" alt="Generic Files">what\'s this?</a>)</font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><img src="images/filestate_'+f.myfilestate+'.gif" width="15" height="13" Title="My File State: '+f.myfilestatename+'" border="0"></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1">');
+					if (f.hasStorage){ document.write ('<img src="images/storage.gif" width="15" height="13" title="Storage: '+f.storage+'" border="0">');}
+					document.write ('</font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1">');
+					if (f.hasSource){ document.write ('<img src="images/source.gif" width="15" height="13" title="Source: '+f.source+'" border="0">');}
+					document.write ('</font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1">');
+					if (f.hasSource){ document.write ('<img src="images/comment.gif" width="15" height="13" title="Source: '+f.other+'" border="0">');}
+					document.write ('</font></td>');
+					document.write ('<td colspan="2" align="center" bgcolor="#b0b0b0">&nbsp;</td>');
+				} else {
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1"><a href="javascript:popup(\'fileinfo.htm?=a'+xa.id+'&e'+ep.num+'&f'+f.id+'\',\'FileInfo\',\'500\',\'500\');" title="Click for file information">'+f.id+'</a></font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1"><a href="'+anidb+'?show=group&gid='+f.groupID+'" target="_blank" Title="Group: '+f.groupName+'">'+f.groupShort+'</a></font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1"><a title="Size: '+f.sizeMB+'">'+f.sizeBytes+' bytes</a></font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><img src="images/rate_'+f.qualID+'.gif" height="13" Title="Rate: '+f.qualName+'" border="0"></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><img src="images/audio_'+f.langID+'.gif" height="13" Title="Audio Language(s): '+f.langName+'" border="0">');
+					document.write ('<img src="images/sub_'+f.subID+'.gif" width="15" height="13" Title="Subtitle Language: '+f.subName+'" border="0">');
+					if (f.isCRCOK){ document.write ('<img src="images/crc_yes.gif" title="file matches official crc ('+f.crc+')" width="15" height="13" border="0">');}
+					if (f.isCRCNO){ document.write ('<img src="images/crc_no.gif" title="File has invalid crc" width="15" height="13" border="0">'); } 
+					if (f.isCRCUN){ document.write ('<img src="images/crc_un.gif" title="File has not been CRC verified" width="15" height="13" border="0">'); } 
+					if (f.isWatched){ document.write ('<img src="images/seen.gif" width="15" height="13" Title="File is seen" border="0">');}
+					if (f.isV2){ document.write ('<img src="images/vrs_2.gif" width="15" height="13" Title="File is version 2" border="0">');}
+					if (f.isV3){ document.write ('<img src="images/vrs_3.gif" width="15" height="13" Title="File is version 3" border="0">');}
+					if (f.isV4){ document.write ('<img src="images/vrs_4.gif" width="15" height="13" Title="File is version 4" border="0">');}
+					if (f.isV5){ document.write ('<img src="images/vrs_5.gif" width="15" height="13" Title="File is version 5" border="0"></td>');}
+					document.write ('<td align="center" bgcolor="#b0b0b0"><img src="images/state_'+f.mystate+'.gif" width="15" height="13" Title="State: '+f.mystatename+'" border="0">');
+					document.write ('<img src="images/filestate_'+f.myfilestate+'.gif" width="15" height="13" Title="My File State: '+f.myfilestatename+'" border="0"></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1">');
+					if (f.hasStorage){ document.write ('<img src="images/storage.gif" width="15" height="13" title="Storage: '+f.storage+'" border="0">');}
+					document.write ('</font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1">');
+					if (f.hasSource){ document.write ('<img src="images/source.gif" width="15" height="13" title="Source: '+f.source+'" border="0">');}
+					document.write ('</font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><font size="1">');
+					if (f.hasCommnent){ document.write ('<img src="images/comment.gif" width="15" height="13" title="Comment: '+f.other+'" border="0">');}
+					document.write ('</font></td>');
+					document.write ('<td align="center" bgcolor="#b0b0b0"><a href="'+f.ed2kLink+'"><img src="images/ed2k.gif" width="15" height="13" Title="ed2k link" border="0"></a></td>');
+					if (pref_trade == 1){
+						document.write ('<td align="center" bgcolor="#b0b0b0"><input type="checkbox" id="'+f.id+'_sel" value="" onClick="javascript:file_add('+xa.id+','+ep.num+','+f.id+');"></td>');
+						//document.write ('<td align="center" bgcolor="#b0b0b0">&nbsp;</td>');
+					} else {
+						document.write ('<td align="center" bgcolor="#b0b0b0">&nbsp;</td>');
+					}
+				}
+			}
+		}
+		document.write ('</tr>');
+		document.write ('</table>');
+		document.write ('</div>');
+	  }
+	  </script>
+	</td>
+  </tr>
+</table>
+</body>
+</html>

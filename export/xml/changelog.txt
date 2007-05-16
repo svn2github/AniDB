@@ -1,0 +1,33 @@
+anidb.net mylist xml template
+Version: 1.0 (20.11.2003)
+
+History: 
+     - Version 0.01 (C) 2003 by Rafael Vuijk (aka Dark Fader) - http://darkfader.net
+     - Version 1.00 modified by Chuck Renner (aka chriv))
+
+Changelog:
+
+  1.00 (20.11.2003)
+     - Corrections and minor file-structure changes made by Chuck Renner (aka chriv)
+     - The following template and static files were corrected because of incorrect references in the resulting output
+       that prevented this template from working once moved to a website:
+         mylist.tpl
+         anime.tpl
+         index.html
+         mylist.xsl
+         anime.xsl
+    - A themes directory was created.
+      This is supported in newer versions of the anidb_template_sdk.
+    - The following static files were moved in to the themes directory.
+         mylist.css
+         mylist.xsl
+         anime.css
+         anime.xsl
+    - The following files were also updated:
+         info.dat
+    - The following files were added:
+         version.txt
+
+  0.01 (10.08.2003)
+    - original version by Rafael Vuijk (aka Dark Fader) - http://darkfader.net
+

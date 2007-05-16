@@ -1,0 +1,671 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Help</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+var uri = "" + window.location;
+
+function expand(){
+	if ( uri.indexOf ( "?" ) > -1 ) {
+		var toExpand  = uri.substring ( uri.indexOf ( "=" ) + 1 , uri.length );
+		stoggle(toExpand);
+	}
+}
+
+function inlink( ref , targetID ){
+	var etarget = eval(document.all[ targetID ]);
+	if (etarget){
+		target = document.all( targetID )
+		if (target.style.display == "none"){
+			target.style.display = "";
+			document.location.href = '#' + ref;
+		} else { 
+			document.location.href = '#' + ref; 
+		}
+	}
+}
+
+function stoggle(target){
+	hideT('mylist');
+	hideT('anime');
+	hideT('search');
+	hideT('prefs');
+	hideT('trade');
+	showT(target);
+}
+</script>
+</head>
+<body bgcolor="#868178" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:expand()">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ani_table_local" bgcolor="#EDE8E0">
+  <tr background="images/topbar.gif"> 
+	<td valign="top" colspan="3" height="20" bgcolor="#868178"> 
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr bgcolor="#868178" background="images/topbar.gif"> 
+		  <td class="bars_head">&nbsp;<font color="#EFE6D8">Help</font></td>
+		  <td align="right" class="bars_head"><a href="javascript:window.close();"><img src="images/close.gif" width="16" height="16" alt="close window" border="0"></a>&nbsp;</td>
+		</tr>
+	  </table>
+	</td>
+  </tr>
+  <tr> 
+	<td valign="top" width="25" align="center"> <br>
+	  <table width="25" border="0" cellspacing="0" cellpadding="0" class="anime_table" bgcolor="#FDF8F0">
+		<tr> 
+		  <td align="center" height="20"><a href="javascript:stoggle('mylist');"><img src="images/icon_mylist.gif" width="15" height="13" alt="mylist" title="mylist" border="0"></a></td>
+		</tr>
+		<tr> 
+		  <td align="center" height="20"><a href="javascript:stoggle('anime');"><img src="images/icon_anime.gif" width="15" height="13" alt="anime pages" title="anime pages" border="0"></a></td>
+		</tr>
+		<tr> 
+		  <td align="center" height="20"><a href="javascript:stoggle('search');"><img src="images/icon_search.gif" width="15" height="13" title="advanced search" alt="advanced search" border="0"></a></td>
+		</tr>
+		<tr> 
+		  <td align="center" height="20"><img src="images/icon_wishlist.gif" width="15" height="13" title="wishlist" alt="wishlist"></td>
+		</tr>
+		<tr> 
+		  <td align="center" height="20"><img src="images/votes.gif" width="15" height="13" title="votes" alt="votes"></td>
+		</tr>
+		<tr> 
+		  <td align="center" height="20"><a href="javascript:stoggle('trade');"><img src="images/trade.gif" width="15" height="13" title="trade" alt="trade" border="0"></a></td>
+		</tr>
+		<tr> 
+		  <td align="center" height="20"><img src="images/icon_print.gif" width="15" height="13" title="print" alt="print" border="0"></td>
+		</tr>
+		<tr> 
+		  <td align="center" height="20"><a href="javascript:stoggle('prefs');"><img src="images/icon_preferences.gif" width="15" height="13" title="preferences" alt="preferences" border="0"></a></td>
+		</tr>
+	  </table>
+	</td>
+	<td width="5">&nbsp;</td>
+	<td> 
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+		<tr> 
+		  <td><a name="mylista"></a> 
+			<div id=mylist style="display:none"> 
+			  <table  width="100%" cellspacing="0" cellpadding="0" class="anime_table">
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b><i>Description</i></b>:</td>
+				  <td>This page is a jump page to all the <b>Anime Pages</b>, 
+					on this page you can use filters to filter MyList and see 
+					some simple information on Animes.</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b><i>Notes</i></b>:</td>
+				  <td>About filters:<br>
+					Filters are somewhat of a problematic issue, they work, not 
+					at 100%, some combinations may render the anime list blank, 
+					if that happens just click one of the <b>show</b> <b>&quot;All&quot;</b> 
+					filters and everything should be back to normal.<br>
+					<br>
+					Filter Conjuctions:<br>
+					Filter by Alphabeth letter and then by these filters works, 
+					Filter by Genre, Filter by Type, Filter by State.<br>
+					For the Show/Hide filter to work with other filters, the filter 
+					needs to be activated first, the other way arround does not 
+					work.<br>
+					The Has Awards filters can't be used to filter an already 
+					filtered By State list.<br>
+					<br>
+					<i><b>Author note</b></i>: if anyboy can sort out the problems 
+					with filters, please do so and mail <a href="mailto:fahrenheit@netcabo.pt">me</a> 
+					with the corrected code.</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b>Header</b> 
+					Explantion:</td>
+				  <td>List of the names and meanings of the headers on MyList:<br>
+					<b>&nbsp;&nbsp;&nbsp;Title</b> (the title of the anime)<font color="#0000FF">[click: 
+					open Anime Page]</font>, <b><br>
+					&nbsp;&nbsp;&nbsp;EPs</b> (number of episodes i have of the 
+					anime / number of total episodes of the anime), <b><br>
+					&nbsp;&nbsp;&nbsp;Seen</b> (number of episodes i have seen 
+					of the anime / number of total episodes of the anime), <b><br>
+					&nbsp;&nbsp;&nbsp;Rating</b> (user rating of this anime (number 
+					of votes)),<b><br>
+					&nbsp;&nbsp;&nbsp;Reviews</b> (user reviews of this anime 
+					(number of reviews))<font color="#0000FF">[click: open aniDB 
+					reviews on the selected anime]</font>,<br>
+					<br>
+					<b>&nbsp;&nbsp;&nbsp;user</b> (my username on aniDB), <b><br>
+					&nbsp;&nbsp;&nbsp;created</b> (date of creation of this export)<font color="#006699">[hover: 
+					full export date]</font>, <b><br>
+					&nbsp;&nbsp;&nbsp;animes in list </b> (number of animes in 
+					MyList), <b><br>
+					&nbsp;&nbsp;&nbsp;episodes in list</b> (number of episodes 
+					in MyList),<b><br>
+					&nbsp;&nbsp;&nbsp;files in list</b> (number of files in MyList, 
+					episodes can have multiple files),<br>
+					<b>&nbsp;&nbsp;&nbsp;size</b> (size of MyList)<font color="#006699">[hover: 
+					size of MyList in bytes]</font>, </td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b>Icon</b> 
+					Explanation:</td>
+				  <td>List of all the icons used on this page:<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/show.gif" width="15" height="13"> 
+					<b>show</b> (shows selected anime),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/help.gif" width="15" height="13"> 
+					<b>help </b>(shows this help)<b>,<br>
+					&nbsp;&nbsp;&nbsp;<img src="images/rate_1.gif" width="15" height="13"> 
+					undefined</b> (animes who don't have a troughout state, like 
+					all episodes on hdd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_0.gif" width="15" height="13"> 
+					unknown</b> (animes which state is unknown),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_1.gif" width="15" height="13"> 
+					on hdd</b> (animes which are on hdd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_2.gif" width="15" height="13"> 
+					on cd</b> (animes which are on cd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/award_1.gif" width="15" height="13"> 
+					has awards</b> (animes which have awards),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_3.gif" width="15" height="13"> 
+					deleted</b> (animes which have been deleted),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_4.gif" width="15" height="13"> 
+					shared</b> (animes which are shared on eMule),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_5.gif" width="15" height="13"> 
+					released</b> (animes which have release status on eMule).</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">Anime 
+					row <b>Color</b> Explanation:</td>
+				  <td>List of colors used on anime rows and their meanings:<br>
+					<b>&nbsp;&nbsp;&nbsp;XX / XX </b> - this anime is complete,<br>
+					<b>&nbsp;&nbsp;&nbsp;<font color="#006600">XX / XX</font> 
+					</b> - this anime is watched.</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">Filter 
+					&quot;<b><i>show/hide</i></b>&quot;:</td>
+				  <td>Use this filter to show animes by status: <b><br>
+					&nbsp;&nbsp;&nbsp;complete</b> / <b>incomplete</b> (toggles 
+					between showing complete and incomplete animes), <b><br>
+					&nbsp;&nbsp;&nbsp;watched</b> / <b>unviewed</b> (toggles between 
+					showing watched and unviewed animes), <b></b><b><br>
+					&nbsp;&nbsp;&nbsp;reset all</b> (shows all animes/resets view). 
+				  </td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"> 
+					<a name="bystate"></a></font>Filter &quot;<b><i>by state</i></b>&quot;:</td>
+				  <td>Use this filter to show animes by state:<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/rate_1.gif" width="15" height="13"> 
+					undefined</b> (show only animes which don't have a troughout 
+					state, like all episodes on hdd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_0.gif" width="15" height="13"> 
+					unknown</b> (show only animes which state is unknown),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_1.gif" width="15" height="13"> 
+					on hdd</b> (show only animes which are on hdd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_2.gif" width="15" height="13"> 
+					on cd</b> (show only animes which are on cd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/award_1.gif" width="15" height="13"> 
+					has awards</b> (show only animes which have awards),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_3.gif" width="15" height="13"> 
+					deleted</b> (show only animes which have been deleted),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_4.gif" width="15" height="13"> 
+					shared</b> (show only animes which are shared),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_5.gif" width="15" height="13"> 
+					released</b> (show only animes which are releases),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_all.gif" width="15" height="13"> 
+					state all</b> (shows all animes/resets view).</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"><a name="bytype"></a></font>Filter 
+					&quot;<b><i>by type</i></b>&quot;:</td>
+				  <td>Use this filter to show animes by type: <b><br>
+					&nbsp;&nbsp;&nbsp;All</b> (shows all animes/resets view), 
+					<b><br>
+					&nbsp;&nbsp;&nbsp;Unknown</b> (show only animes which are 
+					of type unknown), <b><br>
+					&nbsp;&nbsp;&nbsp;TV</b> (show only animes which are TV series), 
+					<b><br>
+					&nbsp;&nbsp;&nbsp;OVA</b> (show only animes which are Original 
+					Video Animes),<b><br>
+					&nbsp;&nbsp;&nbsp;Movie</b> (show only animes which are Movies). 
+					<br>
+					<b>&nbsp;&nbsp;&nbsp;Other</b> (show only animes all other 
+					animes).</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"><a name="bygenre"></a></font>Filter 
+					&quot;<b><i>by genre</i></b>&quot;:</td>
+				  <td> 
+					<p>Use this filter to show animes by genre: <b><br>
+					  </b><b>&nbsp;&nbsp;&nbsp;Action</b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Adventure</b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Cars</b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Comedy</b> (self-explanatory), <br>
+					  <b>&nbsp;&nbsp;&nbsp;Dementia</b> (the anime is about madness/dementia 
+					  issues),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Demons</b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Detective</b> (detective storys),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Drama </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Ecchi</b> (Softcore hentai. Often includes 
+					  panty-shots, nudity, or perverted situations. Almost always 
+					  used for humor. Ecchi does not describe actual sex acts),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Fantasy </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Game</b><b> </b> (this anime is based 
+					  on a game),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Ghibli </b><b> </b> (basically animes 
+					  by Studio Ghibli),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Hentai</b> (In Japan this word just 
+					  means pervert. And is never used to incdicate a genre. To 
+					  indicate the erotic genre they use &quot;ecchi&quot; or 
+					  &quot;ero.&quot; And something they write ecchi as the letter 
+					  &quot;H.&quot; Hentai never refers to a genre or a naughty 
+					  picture. Hentai also means transformation, metamorphosis, 
+					  abnormality, or formation. The phrase 'hentai video' wouldn't 
+					  be used in Japan. Outside of Japan, it refers to both &quot;pervert&quot; 
+					  and anime with strong sexual themes. Nudity is NOT hentai. 
+					  Just simple nudity would be etchi. When something sexual 
+					  is depicted it's the hentai genre.),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Historical</b> (anime based and/or 
+					  describes historical facts) <br>
+					  <b>&nbsp;&nbsp;&nbsp;Horror</b><b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Kids </b> (normaly this genre of anime 
+					  has school kids as the main characters or the action revolves 
+					  arround school kids),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Love Story</b> <b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Magic</b> <b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Martial Arts</b> <b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Mecha </b>(normaly these animes have 
+					  mechs or robots participating in the action),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Music</b><b> </b> (anime about music),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Mystery</b><b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Parody</b><b> </b> (these animes often 
+					  parody about other animes/films),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Romance </b><b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Samurai</b> <b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;School</b> <b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;SciFi</b> <b> </b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Shoujo-ai</b> (from shoujo: girl, and 
+					  ai: love; coined by analogy with shounen-ai), refers to 
+					  anime or manga that deals with love between teenage girls 
+					  or young women. Shoujo-ai is usually thought of as less 
+					  explicit or sexual than yuri, although the term is mainly 
+					  used in the West and many Japanese fans do not bother with 
+					  distinctions between the two.),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Shounen-ai</b> (from shounen: boy, 
+					  and ai: love; refers to anime or manga that deals with love 
+					  between teenage boys or young men, especially of the bishounen 
+					  variety. Shounen-ai is usually thought of as less explicit 
+					  or sexual than yaoi.),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Space</b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Sports</b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Super Power </b> (anime which involves 
+					  super-human powers),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Vampires</b> (self-explanatory),<br>
+					  <b>&nbsp;&nbsp;&nbsp;Yaoi</b> (term is often used in a general 
+					  way to refer to male-male sexual or romantic content anywhere 
+					  in the galaxy of anime, manga and fan fiction based on these; 
+					  usually of a more hard-core nature than shounen-ai, sometimes 
+					  going so far as to include hentai.),</p>
+				  </td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+			</div>
+			<a name="animes"></a> 
+			<div id=anime style="display:none"> 
+			  <table  width="100%" cellspacing="0" cellpadding="0" class="anime_table">
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b><i>Description</i></b>:</td>
+				  <td>These pages display all information available for the selected 
+					anime, information on anime itself, episodes and files.</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b>Header</b> 
+					Explantion:</td>
+				  <td>List of the names and meanings of the headers on the <b>Anime 
+					Pages</b>:<br>
+					<b>&nbsp;&nbsp;&nbsp;Title</b> (the title of the anime in 
+					romanji)<font color="#0000FF">[click: open Anime Page on aniDB]</font>, 
+					<b><br>
+					&nbsp;&nbsp;&nbsp;Jap. Kanji </b> (the title of the anime 
+					in Japanese Kanji, if available),<b><br>
+					&nbsp;&nbsp;&nbsp;English</b> (the title of the anime in English, 
+					if available),<b><br>
+					&nbsp;&nbsp;&nbsp;Synonyms</b> (synonyms/allias the anime 
+					has, if available),<b> <br>
+					&nbsp;&nbsp;&nbsp;Short</b> (short names, this is like short 
+					names people use to referer to animes, if available),<b> <br>
+					&nbsp;&nbsp;&nbsp;Type</b> (the tpye of the anime, can be 
+					Unknown, TV, OVA, Movie and Other, refer to <a href="javascript:inlink('bystate','mylist');">Filter 
+					&quot;<i><b>by state</b></i>&quot;</a>), <b><br>
+					&nbsp;&nbsp;&nbsp;Genres</b> (the genres of the anime, refer 
+					to <a href="javascript:inlink('bygenre','mylist');">Filter 
+					&quot;<i><b>by genre</b></i>&quot;</a>),<b><br>
+					&nbsp;&nbsp;&nbsp;Year</b> (year the anime was made),<br>
+					<b>&nbsp;&nbsp;&nbsp;Producer</b> (the producer of the anime),<br>
+					<b>&nbsp;&nbsp;&nbsp;URL</b> (url to the page the producer 
+					has about the anime, if provided),<b><br>
+					&nbsp;&nbsp;&nbsp;EPs</b> (number of episodes the anime has 
+					(number of episodes i have / number of episodes i have seen)), 
+					<b><br>
+					&nbsp;&nbsp;&nbsp;Specials</b> (number of special episodes 
+					i have / number of special episodes i have seen), <b></b><b><br>
+					&nbsp;&nbsp;&nbsp;Size</b> (size of anime)<font color="#006699">[hover: 
+					size of MyList in bytes]</font>, <b><br>
+					&nbsp;&nbsp;&nbsp;Rating</b> (user rating of this anime (number 
+					of votes)),<b><br>
+					&nbsp;&nbsp;&nbsp;Temp. Rating</b> (temporary user rating 
+					of this anime (number of votes)),<b></b><b> <br>
+					&nbsp;&nbsp;&nbsp;Reviews</b> (user reviews of this anime 
+					(number of reviews))<font color="#0000FF">[click: open aniDB 
+					reviews on the selected anime]</font>,<b><br>
+					&nbsp;&nbsp;&nbsp;AniDB AID</b> (ID of the anime on aniDB),<b><br>
+					&nbsp;&nbsp;&nbsp;AnimeNfo ID</b> (ID of the anime on animeNFO, 
+					if available),<br>
+					<b>&nbsp;&nbsp;&nbsp;Anime Planet</b> (link to site that offers 
+					information on similar animes, if available)<font color="#006699"></font>, 
+					<br>
+					<b>&nbsp;&nbsp;&nbsp;Description</b> (short description of 
+					the anime),<br>
+					<b>&nbsp;&nbsp;&nbsp;Awards</b> (awards the anime has),<br>
+					<br>
+					<b>&nbsp;&nbsp;&nbsp;EP</b> (number of the episode)<font color="#0000FF">[click: 
+					popup Information on Episode]</font>, <b><br>
+					&nbsp;&nbsp;&nbsp;Title</b> (the title of episode),<b><br>
+					&nbsp;&nbsp;&nbsp;Lenght</b> (the running length of the episode),<b><br>
+					&nbsp;&nbsp;&nbsp;Date</b> (date the episode was added),<b> 
+					<br>
+					&nbsp;&nbsp;&nbsp;Short</b> (short names, this is like short 
+					names people use to referer to animes, if available),<b> <br>
+					&nbsp;&nbsp;&nbsp;fID</b> (fileID on aniDB<a href="javascript:inlink('bystate','mylist');"></a>)<font color="#0000FF">[click: 
+					popup Information on File]</font>, <b><br>
+					&nbsp;&nbsp;&nbsp;Group</b> (the group that subbed the anime<a href="javascript:inlink('bygenre','mylist');"></a>)<font color="#006699">[hover: 
+					full name of Group]</font><font color="#0000FF">[click: open 
+					aniDB information on Group]</font>,<b><br>
+					&nbsp;&nbsp;&nbsp;Size</b> (size of anime in bytes)<font color="#006699">[hover: 
+					size of file]</font>,<br>
+					<b>&nbsp;&nbsp;&nbsp;Qual</b> (quality of the file, refer 
+					to <b><a href="javascript:inlink('icon','anime');">Icon</a></b><a href="javascript:inlink('aicon','anime');"> 
+					Explanation</a>),<br>
+					<b>&nbsp;&nbsp;&nbsp;Stat</b><b></b> (statistics of the file, 
+					refer to <b><a href="javascript:inlink('icon','anime');">Icon</a></b><a href="javascript:inlink('aicon','anime');"> 
+					Explanation</a>),<b><br>
+					&nbsp;&nbsp;&nbsp;State</b> (state of the file, refer to <b><a href="javascript:inlink('icon','anime');">Icon</a></b><a href="javascript:inlink('bystate','mylist');"> 
+					Explanation</a>), <b><br>
+					&nbsp;&nbsp;&nbsp;Storage</b> (where the file is stored, cd 
+					label, etc)<font color="#006699">[hover: location of file, 
+					if icon is shown]</font>, <b></b><b><br>
+					&nbsp;&nbsp;&nbsp;Source</b> (source of the file: IRC, eMule,etc), 
+					<b><br>
+					&nbsp;&nbsp;&nbsp;ed2k</b> (ed2k link of the specific file).</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"><b><a name="aicon"></a></b></font><b>Icon</b> 
+					Explanation:</td>
+				  <td>List of all the icons used on this page:<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/back.gif" width="15" height="13"> 
+					<b>back</b> (backs to mylist),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/back.gif" width="15" height="13"> 
+					<b>expand</b> (expands selected/all episode(s)/file(s), also 
+					shows the <b>Full Anime Information Table</b>),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/back.gif" width="15" height="13"> 
+					<b>collapse</b> (collapses selected/all episode(s)/file(s), 
+					also shows the <b>Simple Anime Information Table</b>), <br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/help.gif" width="15" height="13"> 
+					<b>help </b>(shows this help),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/seen.gif" width="15" height="13"> 
+					<b>seen</b> (this file has been seen),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/rate_1.gif" width="15" height="13"> 
+					undefined</b> (anime which doesn't have a troughout state, 
+					like all episodes on hdd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_-1.gif" width="15" height="13"> 
+					undefined</b> (file which doesn't have a state defined), <br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_0.gif" width="15" height="13"> 
+					unknown</b> (anime/file which state is unknown),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_1.gif" width="15" height="13"> 
+					on hdd</b> (anime/file which is full stored on hdd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_2.gif" width="15" height="13"> 
+					on cd</b> (anime/file which is full stored on cd),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_3.gif" width="15" height="13"> 
+					deleted</b> (anime/file which has been deleted),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_4.gif" width="15" height="13"> 
+					shared</b> (anime/file which has been shared),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/state_5.gif" width="15" height="13"> 
+					released</b> (anime/file which has been released),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/award_1.gif" width="15" height="13"> 
+					has awards</b> (anime which has awards),<br>
+					<b>&nbsp;&nbsp;&nbsp;<img src="images/award_2.gif" width="15" height="13"> 
+					has awards</b> (anime which has awards), <br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/crc_yes.gif" width="15" height="13"> 
+					<b>crc ok</b> (file has been crc checked and checks ok),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/crc_no.gif" width="15" height="13"> 
+					<b>crc fail</b> (file has failed crc checksum),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/audio_1.gif" width="15" height="13"><b> 
+					unknown audio language</b> (file has an unknown audio language),<b><br>
+					&nbsp;&nbsp;&nbsp;<img src="images/sub_2.gif" width="15" height="13"></b> 
+					<b>unknown subtitles language</b> (file has na unknown subtitle 
+					language),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/audio_10.gif" width="30" height="13"> 
+					<b>dual audio</b> (file has dual audio streams, in the example: 
+					japanese/american audio),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/audio_2.gif" width="15" height="13"> 
+					<b>audio stream</b> <b>language</b> (file has the shown audio 
+					stream, in the example: japanese audio), <br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/sub_3.gif" width="15" height="13"> 
+					<b>subtitles language</b> (file has the shown subtitles, in 
+					the example: american subs),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/ep_state_2.gif" width="15" height="13"> 
+					<b>recap </b>(file is a recap or summary),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_1.gif" width="15" height="13"> 
+					<b>unknown rate</b> (quality rate of the file is unknown),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_2.gif" width="41" height="13"> 
+					<b>very high quality</b> (quality of the file is very high, 
+					like almost dvd like),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_3.gif" width="35" height="13"> 
+					<b>high quality </b>(quality of the file is high, like good 
+					TV like),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_4.gif" width="27" height="13"> 
+					<b>medium quality</b> (quality of the file is medium, like 
+					TV),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_5.gif" width="21" height="13"> 
+					<b>low quality</b> (quality of the file is very low, like 
+					VHS),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_6.gif" width="13" height="13"> 
+					<b>very low quality</b> (quality of the file is very low, 
+					like bad VHS,<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_8.gif" width="15" height="13"> 
+					<b>eyecancer</b> (quality of the file is very very bad, avoid 
+					if possible),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/rate_7.gif" width="15" height="13"> 
+					<b>corrupted</b> (file is corrupted),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/storage.gif" width="15" height="13"> 
+					<b>storage</b> (file is stored)<font color="#006699">[hover: 
+					location of file]</font>,<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/vrs_2.gif" width="15" height="13"> 
+					<b>version 2</b> (file is version 2, normaly means better 
+					audio and/or subs),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/vrs_3.gif" width="15" height="13"> 
+					<b>version 3</b> (file is version 3, normaly means better 
+					audio and/or subs),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/vrs_4.gif" width="15" height="13"><b> 
+					version 4</b> (file is version 4, normaly means better audio 
+					and/or subs),<br>
+					<b>&nbsp;&nbsp;&nbsp;</b><img src="images/vrs_5.gif" width="15" height="13"> 
+					<b>version 5</b> (file is version 5, normaly means better 
+					audio and/or subs).</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">Anime 
+					row <b>Color</b> Explanation:</td>
+				  <td>List of colors used on the <b>Simple Anime Information Table</b> 
+					and their meanings:<br>
+					<b>&nbsp;&nbsp;&nbsp;XX / XX </b> - this anime is complete,<br>
+					<b>&nbsp;&nbsp;&nbsp;<font color="#006600">XX / XX</font> 
+					</b> - this anime is watched.</td>
+				</tr>
+				<tr> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+			</div>
+			<a name="preferences"></a> 
+			<div id=prefs style="display:none"> 
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB"><b>Description:</b></td>
+				  <td>This page is used for you to set display preferences for 
+					<b>Anime Pages </b>and<b> MyList</b>.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB">Option 
+					&quot;<i><b>Expand Information onLoad</b></i>&quot;:</td>
+				  <td>Use this option to enable or disable by default if on anime 
+					pages the <b>Full Anime Information Table</b> (title, genres, 
+					type, awards, etc) is shown, if you select yes, it is shown, 
+					if you select no, only the <b>Simple Anime Information Table</b> 
+					(title, eps, seen, rating and reviews) is shown.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB">Option 
+					&quot;<i><b>Expand Episodes onLoad</b></i>&quot;:</td>
+				  <td>Use this option to enable or disable by default if on anime 
+					pages the <b>File Information Tables</b> (fID, group, size, 
+					qual, stat, state, storage, source and ed2k) is shown by default 
+					or no.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB">Option 
+					&quot;<i><b>Number of Animes per Page</b></i>&quot;:</td>
+				  <td>Number of animes to be shown per page on MyList. Select 
+					from the list the value.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB">Option 
+					&quot;<i><b>Show Trade Page</b></i>&quot;:</td>
+				  <td>Shows the trade function and all associated things.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB">Option 
+					&quot;<i><b>Default Title Display</b></i>&quot;:</td>
+				  <td>Shows by default the selected title, Japanese Romanji is 
+					allways the default if english or kanji titles not found.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="250" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+			</div>
+			<a name="searchA"></a> 
+			<div id=search style="display:none"> 
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b>Description:</b></td>
+				  <td>Page used to search <b>Animes</b> on MyList, there are some 
+					advanced filter options available.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b>Usage:</b></td>
+				  <td>Simply select the filters you want to use and take care 
+					to follow the notes on the filter fields if there are any, 
+					then just press &quot;Start Search&quot; to start a search, 
+					animes matching the selected options will be displayed on 
+					the results section.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+			</div>
+			<a name="tradeA"></a> 
+			<div id=trade style="display:none"> 
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b>Description:</b></td>
+				  <td>If the Trade function is properly configurated, this page 
+					serves the porpuse of sending a mail to the owner of the list 
+					with a trade request.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><font color="#bbbbbb"></font></td>
+				  <td>&nbsp;</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB"><b>Usage:</b></td>
+				  <td>Simply select the animes you want in MyList, use a Animes 
+					Per Page selection in which you can see all the animes without 
+					switching to other pages, the trade function only sees saves 
+					the current page selected animes.<br>
+					When you have made your selections, press &quot;Open Trade 
+					Page&quot; and fill in the input boxes, when you think all 
+					is ok press Send Mail, a confirmation box with a preview of 
+					the mail will then appear, confirm and send the mail.</td>
+				</tr>
+				<tr class="anime_table"> 
+				  <td width="180" valign="top" align="right" bgcolor="#F0F0EB">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+			</div>
+		  </td>
+		</tr>
+	  </table>
+	</td>
+  </tr>
+</table>
+</body>
+</html>

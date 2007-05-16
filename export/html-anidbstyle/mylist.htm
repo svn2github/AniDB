@@ -1,0 +1,637 @@
+<html>
+<head>
+
+<title>::AniDB.Net:: MyList Export</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js"></script>
+<script language="javascript" src="mylist.js"></script>
+<script language="javascript">
+
+var vis = aids;
+var pref_animes_per_page = parseInt(pref_animes_per_page);
+var numpages = Math.ceil(vis.length / pref_animes_per_page);
+var page = 0;
+var curpage = 0;
+var svids = 0;
+var snids = 0;
+var cur_vids = 0;
+var cur_nids = 0;
+if ( pref_animes_per_page > vis.length ) { snids = vis.length; cur_nids = vis.length } else { snids = pref_animes_per_page; cur_nids = pref_animes_per_page };
+var last_vids = cur_vids;
+var last_nids = cur_nids;
+var spanNext = '<a href="javascript:nextPage();">next</a>';
+var spanPrev = '<a href="javascript:prevPage();">prev</a>';
+var wishlist_sel = 0;
+
+function init(){
+	writeAnime(vis,svids,snids);
+	writeSpans();
+	spanStats();
+}
+
+function writeSpans(){
+	numpages = Math.ceil(vis.length / pref_animes_per_page);
+	if (curpage < 1){
+		document.getElementById("prev").innerHTML = 'prev';
+		document.getElementById("prev1").innerHTML = 'prev';
+	} else {
+		document.getElementById("prev").innerHTML = spanPrev;
+		document.getElementById("prev1").innerHTML = spanPrev;	
+	}
+	if (numpages > 1){
+		document.getElementById("next").innerHTML = spanNext;
+		document.getElementById("next1").innerHTML = spanNext;
+	} else {
+		document.getElementById("next").innerHTML = 'next';
+		document.getElementById("next1").innerHTML = 'next';	
+	}
+}
+
+function spanStats(){
+	var cur_page = curpage + 1;
+	document.getElementById("stats_vis").innerHTML = '<font size="1">&nbsp;&nbsp;&nbsp;animes filtered: ' + vis.length + ' of '+aids.length+'</font><br>'
+	document.getElementById("stats_pages").innerHTML = '<font size="1">&nbsp;&nbsp;&nbsp;page: ' + cur_page +' of '+numpages+'</font>'
+}
+
+function nextPage(){
+	if (curpage < numpages){
+		last_vids = cur_vids;
+		last_nids = cur_nids;
+		cur_vids = cur_nids;
+		if ( ( cur_nids + pref_animes_per_page ) > vis.length ){ cur_nids = vis.length } else { cur_nids = cur_nids + pref_animes_per_page }
+		curpage = curpage + 1;
+		writeAnime(vis,cur_vids,cur_nids);
+		document.getElementById("next").innerHTML = spanNext;
+		document.getElementById("next1").innerHTML = spanNext;
+		document.getElementById("prev").innerHTML = spanPrev;
+		document.getElementById("prev1").innerHTML = spanPrev;
+		if ((curpage + 1) == numpages){
+			document.getElementById("next").innerHTML = 'next';
+			document.getElementById("next1").innerHTML = 'next';
+		} else {
+			document.getElementById("next").innerHTML = spanNext;
+			document.getElementById("next1").innerHTML = spanNext;
+		}
+	} else {
+		document.getElementById("next").innerHTML = 'next';
+		document.getElementById("next1").innerHTML = 'next';
+		document.getElementById("prev").innerHTML = spanPrev;
+		document.getElementById("prev1").innerHTML = spanPrev;
+	}
+	spanStats();
+}
+
+function prevPage(){
+	if (curpage > 0){
+		var dif = 0;
+		cur_vids = last_vids;
+		cur_nids = last_nids;
+		curpage = curpage - 1;
+		writeAnime(vis,cur_vids,cur_nids);
+		if (cur_vids - pref_animes_per_page < 0) { 
+			dif = ( pref_animes_per_page - ( cur_vids - pref_animes_per_page )) 
+		} else {
+			dif = pref_animes_per_page
+		}
+		last_vids = cur_vids - dif;
+		last_nids = cur_nids - dif;
+		document.getElementById("prev").innerHTML = spanPrev;
+		document.getElementById("prev1").innerHTML = spanPrev;
+		document.getElementById("next").innerHTML = spanNext;
+		document.getElementById("next1").innerHTML = spanNext;
+		if ((curpage - 1) < 0){
+			document.getElementById("prev").innerHTML = 'prev';
+			document.getElementById("prev1").innerHTML = 'prev';
+		} else {
+			document.getElementById("prev").innerHTML = spanPrev;
+			document.getElementById("prev1").innerHTML = spanPrev;
+		}
+	} else {
+		document.getElementById("prev").innerHTML = 'prev';
+		document.getElementById("prev1").innerHTML = 'prev';
+		document.getElementById("next").innerHTML = spanNext;
+		document.getElementById("next1").innerHTML = spanNext;
+	}
+	spanStats();
+}
+
+function writeAnime(visible,vids,nids){
+	var output = "";
+	var tmp = nids
+	var color = 1;
+	if (nids > vis.length){ nids = vis.length };
+	var k = 0;
+		output = '<div id=page'+k+' style="display:">'
+		for (i = vids; i < nids; i++){
+			if (color == 0){ color = 1 } else { color = 0};
+			anime = eval ( "a" + visible [ i ] );
+			if (pref_title == 0){ var aname = anime.name };
+			if (pref_title == 1){ 
+				if ( anime.japkanji != '-'){ var aname = anime.japkanji } else { var aname = anime.name }
+			};
+			if (pref_title == 2){ 
+				if ( anime.eng != '-'){ var aname = anime.eng } else { var aname = anime.name }
+			};
+			if (pref_title2opt == 1){
+				if (pref_title2 == 0){ 
+					if ( anime.eng != '-'){ var bname = anime.eng } else { var bname = anime.name }
+				};
+				if (pref_title2 == 1){ 
+					if ( anime.japkanji != '-'){ var bname = anime.japkanji } else { var bname = anime.name }
+				};
+				if (pref_title2 == 2){ var bname = anime.name };
+				aname = aname + ' ('+bname+')';
+			}
+			if (anime.isHentai){
+				if (pref_hentai == 1){
+					output += '<div id=a' + visible[i] +' style="display:">'
+				} else {
+					output += '<div id=a' + visible[i] +' style="display:none">'
+				}
+			} else {
+				output += '<div id=a' + visible[i] +' style="display:">'
+			}
+			output += '<table width="100%" cellpadding="0" cellspacing="0">'
+			output += '<tr height="20px" '
+			if (color == 1){
+				output += 'bgcolor="#C5C5C5"'
+			}
+			output += '>'
+			output += '<td align="center" class="anime_table" width="30" bgcolor="#494d59"><a href="anime.htm?=a'+anime.id+'"><img id=x src="images/show.gif" width="15" height="13" Title="Show ' + anime.name + '" border="0"></a></td>'
+			output += '<td class="anime_table">&nbsp;<a  href="anime.htm?=a'+anime.id+'"'
+			if (pref_title2opt == 2){
+				if (pref_title2 == 0){ 
+					if ( anime.eng != '-'){ var bname = anime.eng } else { var bname = anime.name }
+				};
+				if (pref_title2 == 1){ 
+					if ( anime.japkanji != '-'){ var bname = anime.japkanji } else { var bname = anime.name }
+				};
+				if (pref_title2 == 2){ var bname = anime.name };
+				output += ' title="Optional Title: '+bname+'"'
+			}
+			output += '>' + aname + '</a> '
+			output += '</td>'
+			output += '<td align="center" class="anime_table" width="25">'
+			if (anime.isWishListed){
+				output += '<img src="images/wish_pri_'+anime.wishlist_priority+'.gif" width="15" height="13" title="on Wishlist: '+anime.wishlist_type_name+' | priority: '+anime.wishlist_priority_name+''
+				if (anime.wishlist_comment != ""){
+					output += ' | comment: '+anime.wishlist_comment+''
+				}
+				output += '" border="0">'
+			}
+			output += '</td>'
+			output += '<td align="center" class="anime_table" width="25">'
+			if (anime.hasAwards){
+				output += '<img src="images/award_1.gif" width="15" height="13" title="This anime has awards" border="0">'
+			}
+			output += '</td>'
+			output += '<td align="center" class="anime_table" width="25"><img src="images/state_'+ anime.state +'.gif" width="15" height="13" Title="State: '+ anime.statename +'"></td>'
+			output += '<td align="center" class="anime_table" width="70">'
+			if (anime.isComplete){
+				 output += '<b> '+ anime.myEps +' / '+ anime.eps +'</b>'
+			} else { 
+				output += ' ' + anime.myEps +' / '+ anime.eps
+			}
+			if (anime.mySEps > 0 && anime.mySEps == anime.myWSEps){
+				output += ' <b>+' + anime.mySEps +'</b>'
+			} else {
+				if (anime.mySEps > 0){
+					output += ' +' + anime.mySEps
+				}
+			}
+			output += '</td>'
+			output += '<td align="center" class="anime_table" width="70">'
+			if (anime.isWatched){
+				output += '<font color="#006600"><b> '+ anime.myWeps +' / '+ anime.eps +'</b></font>'
+			} else { 
+				output += ' ' + anime.myWeps +' / '+ anime.eps;
+			}
+			if (anime.myWSEps > 0 && anime.mySEps == anime.myWSEps){
+				output += ' <font color="#006600"><b>+' + anime.myWSEps +'</b></font>'
+			} else {
+				if (anime.myWSEps > 0){
+					output += ' +' + anime.myWSEps
+				}
+			}
+			output += '</td>'
+			output += '<td align="center" class="anime_table" width="100"> ' + anime.rating + ' ('+ anime.votes +') </td>'
+			output += '<td align="center" class="anime_table" width="70"> <a href="'+ anidb +'?show=animeatt&aid='+ anime.id +'" title="View reviews for '+ anime.name +'" target="_blank">'+ anime.rrating +'</a> ('+ anime.reviews +') </td>'
+			if (pref_trade == 1){
+				var in_list = 0;
+				if (anime.isWishListed){
+					for (wk = 0; wk< test_wishlist.length; wk++){
+						if (test_wishlist[wk] == anime.id){
+							in_list = 1;
+						}
+					}
+					output += '<td align="center" class="anime_table" width="25"><input type="checkbox" id="'+anime.id+'_sel" value="'+anime.size+'" onClick="javascript:wishlist_add('+anime.id+')"'				
+				} else {
+					for (tk = 0; tk< test_trade.length; tk++){
+						if (test_trade[tk] == anime.id){
+							in_list = 1;
+						}
+					}
+					output += '<td align="center" class="anime_table" width="25"><input type="checkbox" id="'+anime.id+'_sel" value="'+anime.size+'" onClick="javascript:trade_add('+anime.id+')"'
+				}
+				if (in_list == 1){
+					output += ' checked'
+				}
+				output += '></td>'
+			}
+			output += '</tr>'
+			output += '</table>'
+			output += '</div>'
+		}
+		vids = vids + pref_animes_per_page;
+		tmp = nids + pref_animes_per_page;
+		if ( tmp > visible.length ) { 
+			nids = visible.length;
+			tmp = nids;
+		} 
+		if ( tmp <= visible.length ) { 
+			nids = tmp;
+		}
+		
+		output += '</div>'
+	document.getElementById("animeItable").innerHTML = output;
+	spanStats();
+}
+
+function trade(){
+	if (tmail == ''){ alert('Sorry but the owner of this list has not configured the Trade function.\n\nIf you are the owner of this list, read the readme file to help you configure this function.');
+	} else {
+	var trade = "";
+	var wishlist = "";	
+	for (i = 0; i < test_trade.length; i++){
+		var anime = eval ( "a" + test_trade[i]);
+		trade += anime.id + ",";
+	}
+	for (i = 0; i < test_wishlist.length; i++){
+		var anime = eval ( "a" + test_wishlist[i]);
+		wishlist += anime.id + ",";
+	}
+	trade += "0";
+	wishlist += "0";
+	setCookie('trade',trade);
+	setCookie('wishlist',wishlist);
+	popup('trade.htm','Trade','600','370');
+	}
+}
+
+function trade_add(aid){
+	
+	var target = document.getElementById(aid + '_sel');
+	var checkbox = eval(target);
+	var in_list = 0;
+	var in_list_id = 0;
+	for (i = 0; i< test_trade.length; i++){
+		if (test_trade[i] == aid){
+			in_list = 1;
+			in_list_id = i;
+		}
+	}
+	if (checkbox){
+		if (checkbox.checked){
+			var anime = eval ( "a" + aid);
+			if (in_list == 0){
+				test_trade.push(aid);
+			}
+		} else {
+			if (in_list == 1){
+				test_trade.splice(in_list_id,1);
+			}
+		}
+	}
+}
+
+function wishlist_add(aid){
+	
+	var target = document.getElementById(aid + '_sel');
+	var checkbox = eval(target);
+	var in_list = 0;
+	var in_list_id = 0;
+	for (i = 0; i< test_wishlist.length; i++){
+		if (test_wishlist[i] == aid){
+			in_list = 1;
+			in_list_id = i;
+		}
+	}
+	if (checkbox){
+		if (checkbox.checked){
+			var anime = eval ( "a" + aid);
+			if (in_list == 0){
+				test_wishlist.push(aid);
+			}
+		} else {
+			if (in_list == 1){
+				test_wishlist.splice(in_list_id,1);
+			}
+		}
+	}
+}
+
+function show_wishlist(){
+	if (wishlist_sel == 0){
+		w_vis 		= vis;
+		w_cur_vids 	= cur_vids;
+		w_cur_nids 	= cur_nids;
+		w_curpage 	= curpage;
+		w_numpages	= numpages;
+		curpage		= 0;
+		dsStatus(5);
+		showT("wish_show");
+		showT("wish_state");
+		hideT("norm_show");
+		hideT("norm_state");
+		hideT("norm_type0");
+		hideT("norm_genre0");
+		hideT("norm_extra0");
+		hideT("norm_type1");
+		hideT("norm_genre1");
+		hideT("norm_extra1");
+	}
+	if(wishlist_sel == 1){ // restore current mylist view settings
+		vis 		= w_vis;
+		cur_vids 	= w_cur_vids;
+		cur_nids 	= w_cur_nids;
+		curpage		= w_curpage;
+		numpages	= w_numpages;
+		hideT("wish_show");
+		hideT("wish_state");
+		showT("norm_show");
+		showT("norm_state");
+		showT("norm_type0");
+		showT("norm_genre0");
+		showT("norm_extra0");
+		showT("norm_type1");
+		showT("norm_genre1");
+		showT("norm_extra1");
+		writeAnime(vis,cur_vids,cur_nids);
+		writeSpans();
+	}
+	if (wishlist_sel == 0){wishlist_sel = 1} else {wishlist_sel = 0};
+}
+
+</script>
+</head>
+
+<body bgcolor="#BFC2C9" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:init()">
+<div id=print_head style="display:none">
+<script language="javascript">
+	document.write('<p>aniDB Template Export for <b>'+user+'</b><br><font size="1"><a href="javascript:print(0);" title="reset view">print:off</a></font></p>');
+</script>
+</div>
+<div id=award0 style="diplay:none"></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="main">
+  <tr> 
+	<td align="left" valign="top"> 
+	  <table cellpadding="0" cellspacing="0" width="100%" class="ani_table">
+		<tr> 
+		  <td id=print_off_0> 
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr height="20px" bgcolor="#494d59"> 
+				<td width="30" bgcolor="#494d59">&nbsp;</td>
+				<td bgcolor="#494d59"><font size="1" color="#bbbbbb">Title</font></td>
+				<td width="25">&nbsp;</td>
+				<td width="25">&nbsp;</td>
+				<td width="25">&nbsp;</td>
+				<td width="70"><font size="1" color="#bbbbbb">EPs</font></td>
+				<td width="70"><font size="1" color="#bbbbbb">Seen</font></td>
+				<td width="100"><font size="1" color="#bbbbbb">Rating</font></td>
+				<td width="70"><font size="1" color="#bbbbbb">Reviews</font></td>
+				<script language="javascript" type="text/javascript">
+					if (pref_trade == 1){
+						document.write ('<td width="25">&nbsp;</td>');
+					}
+				</script>
+			  </tr>
+			</table>
+		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr height="20px" bgcolor="#494d59"> 
+				<td width="30" bgcolor="#494d59">&nbsp;</td>
+				<td bgcolor="#B0B0B0" align="right" width="50"><font size="1"><span id=prev></span>&nbsp;</font></td>
+				<td bgcolor="#B0B0B0" align="center"><font size="1">Jump to : 
+				  <a href="javascript:filterletter('all');">all</a> | <a href="javascript:filterletter('number');">0-9</a> 
+				  | <a href="javascript:filterletter('a');">a</a> | <a href="javascript:filterletter('b');">b</a> 
+				  | <a href="javascript:filterletter('c');">c</a> | <a href="javascript:filterletter('d');">d</a> 
+				  | <a href="javascript:filterletter('e');">e</a> | <a href="javascript:filterletter('f');">f</a> 
+				  | <a href="javascript:filterletter('g');">g</a> | <a href="javascript:filterletter('h');">h</a> 
+				  | <a href="javascript:filterletter('i');">i</a> | <a href="javascript:filterletter('j');">j</a> 
+				  | <a href="javascript:filterletter('k');">k</a> | <a href="javascript:filterletter('l');">l</a> 
+				  | <a href="javascript:filterletter('m');">m</a> | <a href="javascript:filterletter('n');">n</a> 
+				  | <a href="javascript:filterletter('o');">o</a> | <a href="javascript:filterletter('p');">p</a> 
+				  | <a href="javascript:filterletter('q');">q</a> | <a href="javascript:filterletter('r');">r</a> 
+				  | <a href="javascript:filterletter('s');">s</a> | <a href="javascript:filterletter('t');">t</a> 
+				  | <a href="javascript:filterletter('u');">u</a> | <a href="javascript:filterletter('v');">v</a> 
+				  | <a href="javascript:filterletter('w');">w</a> | <a href="javascript:filterletter('x');">x</a> 
+				  | <a href="javascript:filterletter('y');">y</a> | <a href="javascript:filterletter('z');">z</a></font></td>
+				<td bgcolor="#B0B0B0" align="left" width="50"><font size="1">&nbsp;<span id=next></span></font></td>
+			  </tr>
+			</table>
+		  </td>
+		</tr>
+		<tr> 
+		  <td> <span id=animeItable></span> </td>
+		</tr>
+		<tr>
+		<td id=print_off_1>
+		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr height="20px" bgcolor="#494d59"> 
+				<td width="30" bgcolor="#494d59">&nbsp;</td>
+				<td bgcolor="#B0B0B0" align="right" width="50"><font size="1"><span id=prev1></span>&nbsp;</font></td>
+				<td bgcolor="#B0B0B0" align="center"><font size="1">Jump to : 
+				  <a href="javascript:filterletter('all');">all</a> | <a href="javascript:filterletter('number');">0-9</a> 
+				  | <a href="javascript:filterletter('a');">a</a> | <a href="javascript:filterletter('b');">b</a> 
+				  | <a href="javascript:filterletter('c');">c</a> | <a href="javascript:filterletter('d');">d</a> 
+				  | <a href="javascript:filterletter('e');">e</a> | <a href="javascript:filterletter('f');">f</a> 
+				  | <a href="javascript:filterletter('g');">g</a> | <a href="javascript:filterletter('h');">h</a> 
+				  | <a href="javascript:filterletter('i');">i</a> | <a href="javascript:filterletter('j');">j</a> 
+				  | <a href="javascript:filterletter('k');">k</a> | <a href="javascript:filterletter('l');">l</a> 
+				  | <a href="javascript:filterletter('m');">m</a> | <a href="javascript:filterletter('n');">n</a> 
+				  | <a href="javascript:filterletter('o');">o</a> | <a href="javascript:filterletter('p');">p</a> 
+				  | <a href="javascript:filterletter('q');">q</a> | <a href="javascript:filterletter('r');">r</a> 
+				  | <a href="javascript:filterletter('s');">s</a> | <a href="javascript:filterletter('t');">t</a> 
+				  | <a href="javascript:filterletter('u');">u</a> | <a href="javascript:filterletter('v');">v</a> 
+				  | <a href="javascript:filterletter('w');">w</a> | <a href="javascript:filterletter('x');">x</a> 
+				  | <a href="javascript:filterletter('y');">y</a> | <a href="javascript:filterletter('z');">z</a></font></td>
+				<td bgcolor="#B0B0B0" align="left" width="50"><font size="1">&nbsp;<span id=next1></span></font></td>
+			  </tr>
+			</table>
+		  </td>
+		</tr>
+	  </table>
+	</td>
+	<td id=print_off_3 width="20">&nbsp;</td>
+	<td align="right" valign="top" id=print_off_2>
+	  <table width="150" border="0" cellspacing="0" cellpadding="0" class="ani_table">
+		<tr> 
+		  <td align="center" bgcolor="#494d59" height="20" width="134"><font size="2" color="#bbbbbb">MyList</font></td>
+		  <td align="right" bgcolor="#494d59" height="20" width="16"><a href="javascript:popup('preferences.htm','Preferences','370','350');"><img src="images/preferences.gif" width="16" height="16" border="0" title="Change Preferences"></a></td>
+		</tr>
+		<tr> 
+		  <td colspan="2"><font size="1">&nbsp;<b>show <a href="javascript:popup('help.htm?=mylist','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a>:</b><br><div id=norm_show style="display:">
+			&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(1);" title="Click to Show/Hide animes by completeness status">complete<br>
+			</a>&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(2);" title="Click to Show/Hide animes by completeness status">incomplete</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(3);" title="Click to Show/Hide animes by watched status">watched<br>
+			</a>&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(4);" title="Click to Show/Hide animes by watched status">unviewed</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(5);" title="Click to Show/Hide animes on wishlist">on wishlist</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(0);" title="Click to Show all animes/reset view">show 
+			all</a></div><div id=wish_show style="display:none">
+			&nbsp;&nbsp;&nbsp;<a href="javascript:wsStatus(0);" title="Click to Show/Hide animes by unknown/unfiled status">unknown/unfliled<br></a>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:wsStatus(1);" title="Click to Show/Hide animes by to watch status">to watch</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:wsStatus(2);" title="Click to Show/Hide animes by to get status">to get<br></a>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:wsStatus(3);" title="Click to Show/Hide animes by blacklist status">blacklist</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:wsStatus(4);" title="Click to Show all animes/reset view">show all</a>			
+			</div>
+			</font>
+		  </td>
+		</tr>
+		<tr> 
+		  <td colspan="2">&nbsp;</td>
+		</tr>
+		<tr> 
+		  <td colspan="2"><font size="1"><div id=norm_state style="display:">
+		    &nbsp;<b>by state <a href="javascript:popup('help.htm?=mylist','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a>:<br>
+			</b>&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('udf');"><img src="images/rate_1.gif" width="15" height="13" title="State: mixed state" border="0"></a> 
+			<a href="javascript:hideState('unk');"><img src="images/state_0.gif" width="15" height="13" title="State: unknown" border="0"></a> 
+			<a href="javascript:hideState('hdd');"><img src="images/state_1.gif" width="15" height="13" title="State: on hdd" border="0"></a> 
+			<a href="javascript:hideState('cd');"><img src="images/state_2.gif" width="15" height="13" title="State: on cd" border="0"></a> 
+			<a href="javascript:hideState('awd');"><img src="images/award_1.gif" width="15" height="13" title="State: has award(s)" border="0"></a> 
+			<br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('del');"><img src="images/state_3.gif" width="15" height="13" title="State: deleted" border="0"></a> 
+			<a href="javascript:hideState('all');"><img src="images/state_all.gif" width="15" height="13" title="State: all" border="0"></a>
+			</div><div id=wish_state style="display:none">
+			&nbsp;<b>by priority <a href="javascript:popup('help.htm?=mylist','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a>:<br></b>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:WShideState('low');"><img src="images/wish_pri_0.gif" width="15" height="13" title="Priority: Low" border="0"> - low</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:WShideState('med');"><img src="images/wish_pri_1.gif" width="15" height="13" title="Priority: Medium" border="0"> - medium</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:WShideState('high');"><img src="images/wish_pri_3.gif" width="15" height="13" title="Priority: High" border="0"> - high</a><br>
+			&nbsp;&nbsp;&nbsp;<a href="javascript:WShideState('all');"><img src="images/state_all.gif" width="15" height="13" title="Priority: All" border="0"> - all</a>
+			</div>
+			</font>
+		  </td>
+		</tr>
+		<tr> 
+		  <td colspan="2">&nbsp;</td>
+		</tr>
+		<tr id=norm_type0> 
+		  <td colspan="2"><font size="1">&nbsp;<b>by type <a href="javascript:popup('help.htm?=mylist','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a>:</b></font></td>
+		</tr>
+		<tr id=norm_type1> 
+		  <td align="center" colspan="2"> 
+			<form id="form_type" method="post" action="javascript:filter_type();">
+			  <select id="type_sel" size="1" width="125" height="15" class="forms" align="center" onChange="javascript:filter_type()">
+				<option value="all" selected>All</option>
+				<option value="unk">Unknown</option>
+				<option value="tv">TV</option>
+				<option value="ova">OVA</option>
+				<option value="mov">Movie</option>
+				<option value="web">Web</option>
+				<option value="otr">Other</option>
+			  </select>
+			</form>
+		  </td>
+		</tr>
+		<tr id=norm_extra0> 
+		  <td colspan="2">&nbsp;</td>
+		</tr>
+		<tr id=norm_genre0> 
+		  <td colspan="2"><font size="1">&nbsp;<b>by genre<a href="javascript:popup('help.htm?=mylist','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a>:</b></font></td>
+		</tr>
+		<tr id=norm_genre1> 
+		  <td align="center" colspan="2"> 
+			<form id="form_type" method="post" action="javascript:filter_genre();">
+			  <select id="genre_sel" size="1" width="125" height="15" class="forms" align="center" onChange="javascript:filter_genre();">
+				<option value="0" selected>All</option>
+				<option value="1">Action</option>
+				<option value="2">Adventure</option>
+				<option value="26">Cars</option>
+				<option value="3">Comedy</option>
+				<option value="25">Dementia</option>
+				<option value="10">Demons</option>
+				<option value="35">Detective</option>
+				<option value="4">Drama</option>
+				<option value="5">Ecchi</option>
+				<option value="11">Fantasy</option>
+				<option value="33">Game</option>
+				<option value="34">Ghibli</option>
+				<option value="6">Hentai</option>
+				<option value="12">Historical</option>
+				<option value="7">Horror</option>
+				<option value="27">Kids</option>
+				<option value="14">Magic</option>
+				<option value="15">Martial Arts</option>
+				<option value="16">Mecha</option>
+				<option value="28">Music</option>
+				<option value="17">Mystery</option>
+				<option value="18">Parody</option>
+				<option value="8">Romance</option>
+				<option value="19">Samurai</option>
+				<option value="20">School</option>
+				<option value="9">SciFi</option>
+				<option value="31">Shoujo</option>
+				<option value="37">Shoujo-Ai</option>
+				<option value="30">Shounen</option>
+				<option value="38">Shounen-Ai</option>
+				<option value="21">Space</option>
+				<option value="22">Sports</option>
+				<option value="23">Super Power</option>
+				<option value="24">Vampires</option>
+				<option value="29">Yaoi</option>
+				<option value="36">Yuri</option>
+			  </select>
+			</form>
+		  </td>
+		</tr>
+		<tr id=norm_extra1> 
+		  <td colspan="2">&nbsp;</td>
+		</tr>
+		<tr> 
+		  <td colspan="2"><font size="1"><b>&nbsp;pages:<a href="javascript:popup('help.htm?=search','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a>:</b></font></td>
+		</tr>
+		<tr> 
+		  <td colspan="2"><font size="1">&nbsp;&nbsp;&nbsp;<a href="javascript:popup('search.htm','Search','840','570');">search 
+			page</a></font></td>
+		</tr>
+		<script language="javascript" type="text/javascript">
+		if (pref_trade == 1){
+			document.write ('<tr>');
+			document.write ('<td colspan="2"><font size="1">&nbsp;&nbsp;&nbsp;<a href="javascript:trade();">trade page</a></font></td>');
+			document.write ('</tr>');
+		}
+		check_wishlist();
+		if (check_wish == 1){
+			document.write ('<tr>');
+			document.write ('<td colspan="2"><font size="1">&nbsp;&nbsp;&nbsp;<a href="javascript:show_wishlist();">wishlist page</a></font></td>');
+			document.write ('</tr>');
+		}
+		</script>
+		<tr> 
+		  <td colspan="2"><font size="1">&nbsp;&nbsp;&nbsp;<a href="javascript:print(1);">print page</a></font></td>
+		</tr>
+		<tr> 
+		  <td colspan="2">&nbsp;</td>
+		</tr>
+		<tr> 
+		  <td nowrap colspan="2"> 
+			<script language="javascript" type="text/javascript">
+				document.write ('<font size="1"><b>&nbsp;stats:</b><br>');
+				document.write ('&nbsp;&nbsp;&nbsp;user: <b>' + user + '</b><br>');
+				document.write ('&nbsp;&nbsp;&nbsp;created: <a title="Date: ' + cdate + '">' + cdate_short + '</a><br>');
+				document.write ('&nbsp;&nbsp;&nbsp;template ver.: ' + template_ver + '<br>');
+				document.write ('&nbsp;&nbsp;&nbsp;animes in list: ' + animecount + '<br>');
+				document.write ('&nbsp;&nbsp;&nbsp;episodes in list: ' + epcount + '<br>');
+				document.write ('&nbsp;&nbsp;&nbsp;files in list: ' + filecount + '<br>');
+				document.write ('&nbsp;&nbsp;&nbsp;size: <a title="Size: ' + bytecount + 'bytes">' + bytecount_h +'</a></font><br>');
+			</script>
+			<span id=stats_vis></span><span id=stats_pages></span> </td>
+		</tr>
+	  </table>
+	</td>
+  </tr>
+</table>
+<p>
+  <script language="javascript" type="text/javascript">document.write ('created using <a href="' + anidb + '"><b>aniDB</b></a> export feature.');</script>
+</p>
+</body>
+</html>

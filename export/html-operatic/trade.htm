@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Trade</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="mylist.js" type="text/javascript"></script>
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+var trade = getCookie('trade') || '';
+trade = trade.split(",");
+var trade_val = 0;
+var wishlist_val = 0;
+var type = "";
+for (i = 0; i < trade.length; i++){
+	type = trade[i].substring ( 0 , 1 );
+	if (trade[i] != '' && type == "a"){
+		var anime = eval ( trade[i] );
+		if (!anime.isWishListed){
+			trade_val += parseInt(anime.size);
+		}
+	}
+}
+
+function sendMail(){
+	var output = "";
+	var woutput = "";
+	var foutput = "";
+	var trade_val = 0;
+	var wishlist_val = 0;
+	var type = "";
+	var aux = "";
+	for (i = 0; i < trade.length; i++){
+		type = trade[i].substring ( 0 , 1 );
+		if(trade[i] != '' && type == "a"){
+			var anime = eval ( trade[i] );
+			if (!anime.isWishListed){
+				trade_val += parseInt(anime.size);
+				output += anime.name+' ('+anime.size+')\n'
+			}
+			if (anime.isWishListed){
+				wishlist_val += parseInt(anime.size);
+				woutput += anime.name+' ('+anime.size+')\n'
+			}
+		}
+		if(trade[i] != '' && type == "f"){
+				aux = trade[i].split(':');
+				var anime = eval ( "a" + aux[1] );
+				foutput += 'fid: ' + aux[0] + ' of ' + anime.name + ' [ep: '+aux[2]+']\n'
+		}
+	}
+	var to = tmail;
+	var trader_name = document.getElementById("form1").trader_name.value;
+	var trader_mail = document.getElementById("form1").trader_mail.value;
+	var trade_medium = document.getElementById("form1").sel_medium.value;
+	var trader_items = document.getElementById("form1").trader_items.value;
+	var subject = 'Trade request from ' + trader_name ;
+	var body    = '';
+	
+	body += trader_name + ' <'+trader_mail+'> has requested a trade for these animes:\n\n' + output + '\n\nthe animes are around '+trade_val+'MBs which amounts to: '+ Math.ceil(trade_val / 703) +' CD(s) or '+Math.ceil(trade_val / 4483)+' DVD(s).\n'
+	if ( foutput.length > 0 ){
+		body += trader_name + ' also has requested a trade for these files:\n\n' + foutput + '\n'
+	}
+	body += trader_name + ' has requested that the trade be made using ' + trade_medium + '.\n\nThe trade is to be made in exchange of the folowing items:\n' + trader_items + '\n\n'
+	if ( woutput.length > 0 ){
+		body += trader_name + ' also has the following animes of the wishlist\n\n'+ woutput
+	}
+	body += '\n\nmade using Operatic template, trade function.'
+	
+	if (confirm('to: ' + to +'\nsubject: '+ subject +'\nbody:\n'+body)){
+		var mail = 'mailto:'+escape(to)+'?&subject='+escape(subject)+'&Body='+escape(body)+'\n...'
+		document.location.href = mail;
+	}
+}
+
+function init() {}
+</script>
+</head>
+<body bgcolor="#868178" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:init();">
+<form id="form1" method="post" action="javascript:sendMail();">
+  <table class="ani_table_local" width="100%" bgcolor="#EDE8E0" cellpadding="0" cellspacing="0">
+	<tr background="images/topbar.gif" bgcolor="#868178"> 
+	  <td width="200" height="20"><b><font color="#EFE6D8">&nbsp;Trade</font></b></td>
+	  <td align="right"><a href="javascript:popup('help.htm?=trade','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a> 
+		<a href="javascript:window.close()"><img src="images/close.gif" width="16" height="16" alt="close window" title="close window" border="0"></a>&nbsp;</td>
+	</tr>
+	<tr> 
+	  <td width="200" height="20">&nbsp;</td>
+	  <td>&nbsp;</td>
+	</tr>
+	<tr> 
+	  <td width="200" valign="top" height="20">&nbsp;Total Size of Trade:</td>
+	  <td> 
+		<script language="javascript" type="text/javascript">
+			document.write ('<font size="1">'+trade_val+' MBs</font><br>');
+			document.write ('<font size="1">(around '+ Math.ceil(trade_val / 703) +' CD(s) or '+Math.ceil(trade_val / 4483)+' DVD(s))</font><br>');
+		</script>
+		<br>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" valign="top" height="20">&nbsp;Animes Traded:</td>
+	  <td><font size="1"> 
+		<script language="javascript" type="text/javascript">
+				for (i = 0; i < trade.length; i++){
+					type = trade[i].substring ( 0 , 1 );
+					if (type == "a"){
+						var anime = eval ( trade[i] );
+						if (!anime.isWishListed){
+							document.write ( anime.name+' ('+anime.size+')<br>');
+						}
+					}
+				}
+		</script>
+		<br>
+		</font></td>
+	</tr>
+	<tr> 
+	  <td width="200" valign="top" height="20">&nbsp;Files Traded:</td>
+	  <td><font size="1"> 
+		<script language="javascript" type="text/javascript">
+			var aux = "";
+			for (i = 0; i < trade.length; i++){
+				type = trade[i].substring ( 0 , 1 );
+				if (type == "f"){
+					aux = trade[i].split(':');
+					var anime = eval ( "a" + aux[1] );
+					document.write ( 'fid: ' + aux[0] + ' of ' + anime.name + ' [ep: '+aux[2]+']<br>');
+				}
+			}
+		</script>
+		<br>
+		</font></td>
+	</tr>
+	<tr> 
+	  <td width="200" height="20">&nbsp;Recording Medium for Trade:</td>
+	  <td> 
+		<select id="sel_medium" size="1">
+		  <option selected value="CDs">----</option>
+		  <option value="CDs">CD</option>
+		  <option value="DVDs">DVD</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" height="20">&nbsp;</td>
+	  <td>&nbsp;</td>
+	</tr>
+	<tr> 
+	  <td width="200" valign="top" height="20">&nbsp;Your name:</td>
+	  <td> 
+		<input type="text" id="trader_name" size="50">
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" valign="top" height="20">&nbsp;Your e-mail:</td>
+	  <td> 
+		<input type="text" id="trader_mail" size="50">
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" valign="top" height="20">&nbsp;Your animes for trade:</td>
+	  <td> 
+		<textarea id="trader_items" cols="40" rows="5"></textarea>
+	  </td>
+	</tr>
+	<tr>
+	  <td width="175" valign="top" height="20">&nbsp;Your animes from my wishlist:</td>
+		
+	  <td><font size="1">
+		<script language="javascript" type="text/javascript">
+				for (i = 0; i < trade.length; i++){
+					type = trade[i].substring ( 0 , 1 );
+					if (type == "a"){
+						var anime = eval ( trade[i] );
+						if (anime.isWishListed){
+							document.write ( anime.name+' ('+anime.size+')<br>');
+						}
+					}
+				}
+		</script>
+		</font></td>
+	</tr>
+	<tr> 
+	  <td colspan="2" align="center" height="30"> 
+		<input type="submit" id="Submit" value="Send Mail">
+	  </td>
+	</tr>
+  </table>
+</form>
+</body>
+</html>

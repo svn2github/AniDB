@@ -1,0 +1,42 @@
+
+a:visited, a:active, a:hover, a:link {
+  color: blue;
+  text-decoration: none;
+}
+
+#layout-content div.anime_all div.mylist th,
+#layout-content table.grouplist th,
+#layout-content tr.g_odd,
+#layout-content li.g_odd
+{
+	background-color: #b0b0b0;
+}
+
+#layout-content div.main_all div.news h4,
+#layout-content div.main_all div.rightbar h4
+{
+	color: #bbbbbb;
+	background-color: #494d59;
+}
+#layout-content div.agcmts_entries div.comment h4
+{
+	background-color: #969aa6;
+}
+
+#layout-content div.main_all div.news span.stamp 
+{
+	background-color: #969aa6;
+}
+
+#layout-menu a:link, #layout-menu a:visited {
+	color: #ffffff;
+}
+
+#layout-menu a:active
+{
+	color: #ff0000;
+}
+#layout-menu *,
+#layout-menu a:hover {
+	color: #bbbbbb;
+}

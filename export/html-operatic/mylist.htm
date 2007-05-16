@@ -1,0 +1,456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>::AniDB.Net:: MyList Export</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" type="text/javascript">
+document.write ('<div id=loading top="15px" left="15px">');
+document.write ('<i><font color="#000000">[please wait while loading...mylist data]</font></i>');
+document.write ('</div>');
+</script>
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" src="mcode.js" type="text/javascript"></script>
+<script language="javascript" src="layout.js" type="text/javascript"></script>
+<script language="javascript" src="mylist.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+<!-- function reused from html-knch template -->
+function scrollTo ( id ) {
+	var toScrollTo =  document.getElementById ( id );
+	var yOffset = 0;
+
+	if ( toScrollTo.offsetParent ) {
+		while ( toScrollTo.offsetParent ) {
+			yOffset += toScrollTo.offsetTop;
+			toScrollTo = toScrollTo.offsetParent;
+		}
+	} else if ( toScrollTo.y )
+	yOffset = toScrollTo.y;
+
+	if ( window.innerHeight ) {
+		document.body.scrollTop = yOffset - 20;
+	} else if ( document.body ) {
+		document.body.scrollTop = yOffset - 10;
+	}
+}
+
+
+</script>
+<script language="javascript" type="text/javascript">
+self.name = "mylist";
+reorder(0,0,1);
+var vis = aids;
+var pref_animes_per_page = parseInt(pref_animes_per_page);
+var numpages = Math.ceil(vis.length / pref_animes_per_page);
+var page = 0;
+var curpage = 0;
+var svids = 0;
+var snids = 0;
+var cur_vids = 0;
+var cur_nids = 0;
+if ( pref_animes_per_page > vis.length ) { snids = vis.length; cur_nids = vis.length } else { snids = pref_animes_per_page; cur_nids = pref_animes_per_page };
+var last_vids = cur_vids;
+var last_nids = cur_nids;
+var spanNext = '<a href="javascript:nextPage();"><img src="images/next.gif" width="41" height="10" title="next page" alt="next page" border="0"></a>';
+var spanPrev = '<a href="javascript:prevPage();"><img src="images/prev.gif" width="41" height="10" title="previous page" alt="previous page" border="0"></a>';
+var NspanNext = '<img src="images/nonext.gif" width="41" height="10" title="next page" alt="next page" border="0">';
+var NspanPrev = '<img src="images/noprev.gif" width="41" height="10" title="previous page" alt="previous page" border="0">';
+var cur_anime = '\'blank.htm\'';
+var sel_anime = 0;
+var wishlist_sel = 0;
+var f_s_0 = 'none';
+var f_s_1 = 'complete';
+var f_s_2 = 'incomplete';
+var f_s_3 = 'watched <img src="images/seen_yes.gif" width="15" height="13" title="Watched" alt="Watched">';
+var f_s_4 = 'unviewed <img src="images/seen_no.gif" width="15" height="13" title="Unviewed" alt="Unviewed">';
+var f_s_5 = 'on wishlist <img src="images/wish_pri_1.gif" width="15" height="13" title="On WishList" alt="On Wishlist">';
+var f_t_all = 'none';
+var f_t_unk = 'unknown';
+var f_t_tv = 'tv <img src="images/fansub_complete.gif" width="15" height="13" title="TV" alt="TV">';
+var f_t_ova = 'ova';
+var f_t_mov = 'movie <img src="images/movie.gif" width="15" height="13" title="Movie" alt="Movie">';
+var f_t_web = 'web <img src="images/web.gif" width="15" height="13" title="Web" alt="Web">';
+var f_t_otr = 'other';
+var f_st_all = 'none';
+var f_st_udf = 'mixed state <img src="images/rate_1.gif" width="15" height="13" border="0" alt="mixed state" title="mixed state">';
+var f_st_unk = 'unknown <img src="images/state_0.gif" width="15" height="13" border="0" alt="unknown" title="unknown">';
+var f_st_hdd = 'hdd <img src="images/state_1.gif" width="15" height="13" border="0" alt="on hdd" title="on hdd">';
+var f_st_cd = 'cd <img src="images/state_2.gif" width="15" height="13" border="0" alt="on cd" title="on cd">';
+var f_st_del = 'deleted <img src="images/state_3.gif" width="15" height="13" border="0" alt="deleted" title="deleted">';
+var f_st_sha = 'shared <img src="images/state_4.gif" width="15" height="13" border="0" alt="shared" title="shared">';
+var f_st_rel = 'released <img src="images/state_5.gif" width="15" height="13" border="0" alt="released" title="released">';
+var f_st_awd = 'awards <img src="images/award_2.gif" width="15" height="13" border="0" alt="awards" title="awards">';
+var f_st_ong = 'ongoing <img src="images/ongoing_tv.gif" width="15" height="15" border="0" alt="ongoing" title="ongoing">';
+var test_trade = getCookie('trade') || '';
+test_trade = test_trade.split(",");
+
+function init(){
+	
+	writeAnime(vis,svids,snids);
+	writeSpans();
+	spanStats();
+	if ( aToExpand != "" && expand == 1 ){ scrollTo ( "a" + aToExpand );};
+	hideT("loading");
+	filterletter('all');	
+}
+
+function SAdsStatus(){
+	var arg = document.getElementById("status_sel").value;
+	dsStatus(arg);
+	document.getElementById("type_sel2").value = "all";
+	var aux = eval('f_s_' + arg);
+	document.getElementById("active_filter").innerHTML = aux;
+}
+
+function SThideState(){
+	var arg = document.getElementById("type_sel2").value;
+	document.getElementById("status_sel").value = "0";
+	var aux = eval('f_t_' + arg);
+	document.getElementById("active_filter").innerHTML = aux;
+}
+
+function trade(){
+	if (tmail == ''){ alert('Sorry but the owner of this list has not configured the Trade function.\n\nIf you are the owner of this list, read the readme file to help you configure this function.');
+	} else {
+	var trade = "";
+	var type = "";
+	for (i = 0; i < test_trade.length; i++){
+		type = test_trade[i].substring ( 0 , 1 );
+		if (test_trade[i] != '' && type == "a"){
+			trade += test_trade[i] + ",";
+		}
+		if (test_trade[i] != '' && type == "f"){
+			trade += test_trade[i] + ",";
+		}
+
+	}
+	trade = trade.slice(0,-1);
+	setCookie('trade',trade);
+	popup('trade.htm','Trade','600','370');
+	}
+}
+
+function trade_add(type,id,xaid,ep){
+	
+	if (type == 'a'){
+		var aid = id;
+		var target = document.getElementById('a'+ aid + '_sel');
+		var checkbox = eval(target);
+		var in_list = 0;
+		var in_list_id = 0;
+		for (i = 0; i< test_trade.length; i++){
+			if (test_trade[i] == 'a' + aid && test_trade[i] != ''){
+				in_list = 1;
+				in_list_id = i;
+			}
+		}
+		if (checkbox){
+			if (checkbox.checked){
+				var anime = eval ("a" + aid);
+				if (in_list == 0){
+					test_trade.push("a" + aid);
+				}
+			} else {
+				if (in_list == 1){
+					test_trade.splice(in_list_id,1);
+				}
+			}
+		}
+	} else {
+		var fid = id;
+		var target = document.getElementById('f'+ fid + '_sel');
+		var checkbox = eval(target);
+		var in_list = 0;
+		var in_list_id = 0;
+		for (i = 0; i< test_trade.length; i++){
+			if (test_trade[i] == 'f' + fid + ':' + xaid + ':' + ep && test_trade[i] != ''){
+				in_list = 1;
+				in_list_id = i;
+			}
+		}
+		if (checkbox){
+			if (checkbox.checked){
+				var file = eval ("f" + fid);
+				if (in_list == 0){
+					test_trade.push("f" + fid + ':'+xaid+':'+ep);
+				}
+			} else {
+				if (in_list == 1){
+					test_trade.splice(in_list_id,1);
+				}
+			}
+		}
+	}
+	setCookie('trade',test_trade);
+}
+
+</script>
+<script language="javascript" type="text/javascript">
+var uri = "" + window.location;
+var aToExpand = "";
+var expand = 0;
+
+if ( uri.indexOf ( "?" ) > -1 ) {
+	var toExpand  = uri.substring ( uri.indexOf ( "=" ) + 1 , uri.length );
+	if (toExpand.indexOf ("expand") > 0){
+		aToExpand = toExpand.substring ( 1 , toExpand.indexOf ( "&expand=" ) );
+		expand = toExpand.substring ( toExpand.indexOf ( "=" ) + 1, toExpand.length );
+	} else { aToExpand = toExpand; }
+	//alert('a=['+aToExpand+']\nexpand=['+expand+']');
+	document.write ( "<script language=\"javascript\" type=\"text/javascript\" src=\"anime/a" + aToExpand + ".js\"><\/script>" );
+}
+</script>
+</head>
+
+<body bgcolor="#868178" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:init()">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+	<td id=print_off_3 width="25">&nbsp;</td>
+	<td id=print_off_4 width="5">&nbsp;</td>
+	<td rowspan="2" valign="top" align="left">
+	  <table cellpadding="0" cellspacing="0" width="100%" class="ani_table_local" bgcolor="#EDE8E0">
+		<tr valign="top"> 
+		  <td align="right" style="padding-top:2px;"> 
+			<div id=ttop style=display:"> 
+			  <script language="javascript" type="text/javascript">
+		 	document.write ('<font size="1">aniDB Template Export for <b><a href="javascript:popup(\'stats.htm\',\'stats\',\'270\',\'205\');" title="User Statistics" alt="User Statistics">'+user+'</a></b></font>&nbsp; <img src="images/anidb.gif" width="16" height="16">&nbsp;');
+		 </script>			  
+			  <div id=print_off_2 style="display:"> 
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr height="20px" bgcolor="#868178" background="images/topbar.gif"> 
+				  <td align="right" width="50" class="bars" bgcolor="#868178"><font size="1"><span id=prev></span>&nbsp;</font></td>
+				  <td align="center" class="bars" background="images/topbar.gif" bgcolor="#868178"> 
+					
+					<table id=alpha_bar0 border=0 cellspacing=0 cellpadding=0 height="100%">
+					  <tr> 
+						<td onClick="javascript:filterletter('all');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">all</td>
+						<td onClick="javascript:filterletter('number');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">0-9</td>
+						<td onClick="javascript:filterletter('a');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">a</td>
+						<td onClick="javascript:filterletter('b');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">b</td>
+						<td onClick="javascript:filterletter('c');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">c</td>
+						<td onClick="javascript:filterletter('d');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">d</td>
+						<td onClick="javascript:filterletter('e');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">e</td>
+						<td onClick="javascript:filterletter('f');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">f</td>
+						<td onClick="javascript:filterletter('g');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">g</td>
+						<td onClick="javascript:filterletter('h');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">h</td>
+						<td onClick="javascript:filterletter('i');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">i</td>
+						<td onClick="javascript:filterletter('j');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">j</td>
+						<td onClick="javascript:filterletter('k');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">k</td>
+						<td onClick="javascript:filterletter('l');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">l</td>
+						<td onClick="javascript:filterletter('m');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">m</td>
+						<td onClick="javascript:filterletter('n');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">n</td>
+						<td onClick="javascript:filterletter('o');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">o</td>
+						<td onClick="javascript:filterletter('p');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">p</td>
+						<td onClick="javascript:filterletter('q');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">q</td>
+						<td onClick="javascript:filterletter('r');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">r</td>
+						<td onClick="javascript:filterletter('s');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">s</td>
+						<td onClick="javascript:filterletter('t');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">t</td>
+						<td onClick="javascript:filterletter('u');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">u</td>
+						<td onClick="javascript:filterletter('v');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">v</td>
+						<td onClick="javascript:filterletter('w');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">w</td>
+						<td onClick="javascript:filterletter('x');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">x</td>
+						<td onClick="javascript:filterletter('y');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">y</td>
+						<td onClick="javascript:filterletter('z');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">z</td>
+					  </tr>
+					</table>
+				  </td>
+				  <td align="left" width="50" class="bars"><font size="1">&nbsp;<span id=next></span></font></td>
+				</tr>
+			  </table>
+			  </div>
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="bars_head">
+				<tr height="20px"> 
+				  <script language="javascript" type="text/javascript">
+			if (lay_mylist_name == 1){
+				document.write ('<td>&nbsp;Title <a href="javascript:reorder(0,0,0);"><img id=name_sort_up src="images/sort_up_sel.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(0,1,0);"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (lay_mylist_stat == 1){
+				document.write ('<td width="25">&nbsp;</td>');
+			}
+			if (lay_mylist_stat == 1){
+				document.write ('<td width="25">&nbsp;</td>');
+			}
+			if (lay_mylist_stat == 1){
+				document.write ('<td width="25">&nbsp;</td>');
+			}
+			if (lay_mylist_eps == 1){
+				document.write ('<td width="70" align="center">EPs <a href="javascript:reorder(2,0,0);"><img id=eps_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(2,1,0);"><img id=eps_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (lay_mylist_seen == 1){
+				document.write ('<td width="70" align="center">Seen <a href="javascript:reorder(3,0,0);"><img id=seen_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(3,1,0);"><img id=seen_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (lay_mylist_type == 1){
+				document.write ('<td width="100" align="center">Type <a href="javascript:reorder(4,0,0);"><img id=type_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(4,1,0);"><img id=type_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (lay_mylist_year == 1){
+				document.write ('<td width="100" align="center">Year <a href="javascript:reorder(7,0,0);"><img id=year_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(7,1,0);"><img id=year_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (lay_mylist_size == 1){
+				document.write ('<td width="100" align="center">Size <a href="javascript:reorder(6,0,0);"><img id=size_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(6,1,0);"><img id=size_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (lay_mylist_rating == 1){
+				document.write ('<td width="100" align="center">Rating <a href="javascript:reorder(1,0,0);"><img id=rating_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(1,1,0);"><img id=rating_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (lay_mylist_votes == 1){
+				document.write ('<td width="70" align="center">Reviews <a href="javascript:reorder(5,0,0);"><img id=votes_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"></a><a href="javascript:reorder(5,1,0);"><img id=votes_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></a></td>');
+			}
+			if (pref_trade == 1){
+				document.write ('<td width="25" align="center">Trade</td>');
+			}
+		  </script>
+				</tr>
+			  </table>
+			  </div>
+		  </td>
+		</tr>
+		<tr valign="top" height="100%"> 
+		  <td bgcolor="#FDF8F0" > 
+			<div id=animeItable></div>
+		  </td>
+		</tr>
+		<tr valign="top"> 
+		  <td >
+			<div id=dttop style=display:"> 
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr height="20px" bgcolor="#868178" background="images/topbar.gif"> 
+				  <td align="right" width="50" class="bars"><font size="1"><span id=prev1></span>&nbsp;</font></td>
+				  <td align="center" class="bars"> 
+					<table id=alpha_bar1 border=0 cellspacing=0 cellpadding=0 height="100%">
+					  <tr> 
+						<td onClick="javascript:filterletter('all');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">all</td>
+						<td onClick="javascript:filterletter('number');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">0-9</td>
+						<td onClick="javascript:filterletter('a');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">a</td>
+						<td onClick="javascript:filterletter('b');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">b</td>
+						<td onClick="javascript:filterletter('c');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">c</td>
+						<td onClick="javascript:filterletter('d');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">d</td>
+						<td onClick="javascript:filterletter('e');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">e</td>
+						<td onClick="javascript:filterletter('f');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">f</td>
+						<td onClick="javascript:filterletter('g');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">g</td>
+						<td onClick="javascript:filterletter('h');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">h</td>
+						<td onClick="javascript:filterletter('i');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">i</td>
+						<td onClick="javascript:filterletter('j');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">j</td>
+						<td onClick="javascript:filterletter('k');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">k</td>
+						<td onClick="javascript:filterletter('l');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">l</td>
+						<td onClick="javascript:filterletter('m');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">m</td>
+						<td onClick="javascript:filterletter('n');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">n</td>
+						<td onClick="javascript:filterletter('o');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">o</td>
+						<td onClick="javascript:filterletter('p');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">p</td>
+						<td onClick="javascript:filterletter('q');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">q</td>
+						<td onClick="javascript:filterletter('r');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">r</td>
+						<td onClick="javascript:filterletter('s');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">s</td>
+						<td onClick="javascript:filterletter('t');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">t</td>
+						<td onClick="javascript:filterletter('u');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">u</td>
+						<td onClick="javascript:filterletter('v');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">v</td>
+						<td onClick="javascript:filterletter('w');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">w</td>
+						<td onClick="javascript:filterletter('x');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">x</td>
+						<td onClick="javascript:filterletter('y');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">y</td>
+						<td onClick="javascript:filterletter('z');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">z</td>
+					  </tr>
+					</table>
+				  </td>
+				  <td align="left" width="50" class="bars"><font size="1">&nbsp;<span id=next1></span></font></td>
+				</tr>
+			  </table>
+			</div>
+			<div id=tbottom style="display:"> 
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr height="20px"> 
+				  <td>
+				  
+					<table border="0" cellspacing="0" cellpadding="0" class="anime_table" width="100%">
+					  <tr valign="top"> 
+						<td width="230" valign="middle"><span id=stats_pages></span> 
+						  | Filter: [<span id=active_filter>none</span>]</td>
+						<td valign="middle">&nbsp;</td>
+						<td width="240" valign="middle">State: <a href="javascript:hideState('udf');"><img src="images/rate_1.gif" width="15" height="13" border="0" alt="mixed state" title="mixed state"></a> 
+						  <a href="javascript:hideState('unk');"><img src="images/state_0.gif" width="15" height="13" border="0" alt="unknown" title="unknown"></a> 
+						  <a href="javascript:hideState('hdd');"><img src="images/state_1.gif" width="15" height="13" border="0" alt="on hdd" title="on hdd"></a> 
+						  <a href="javascript:hideState('cd');"><img src="images/state_2.gif" width="15" height="13" border="0" alt="on cd" title="on cd"></a> 
+						  <a href="javascript:hideState('del');"><img src="images/state_3.gif" width="15" height="13" border="0" alt="deleted" title="deleted"></a>
+						  <a href="javascript:hideState('awd');"><img src="images/award_2.gif" width="15" height="13" border="0" alt="awards" title="awards"></a> 
+						  <a href="javascript:hideState('ong');"><img src="images/ongoing_tv.gif" width="15" height="15" border="0" alt="ongoing" title="ongoing"></a> 
+						  <a href="javascript:hideState('all');"><img src="images/state_all.gif" width="15" height="13" border="0" alt="show all" title="show all"></a> 
+						</td>
+						<td width="150" valign="middle">Show: 
+						  <select id="status_sel" size="1" class="forms" onChange="javascript:SAdsStatus();" name="select">
+							<option value="0" selected>All</option>
+							<option value="1">Complete</option>
+							<option value="2">Incomplete</option>
+							<option value="3">Watched</option>
+							<option value="4">Unviewed</option>
+							<option value="5">On wishlist</option>
+						  </select>
+						</td>
+						<td width="150" valign="middle">Type: 
+						  <select id="type_sel2" size="1" width="125" height="15" class="forms" align="center" onChange="javascript:filter_type2();SThideState();" name="select2">
+							<option value="all" selected>All</option>
+							<option value="unk">Unknown</option>
+							<option value="tv">TV</option>
+							<option value="ova">OVA</option>
+							<option value="mov">Movie</option>
+							<option value="web">Web</option>
+							<option value="otr">Other</option>
+						  </select>
+						</td>
+						<td width="175" valign="middle"> 
+						  <input type="text" id="simple_search" class="forms" size="15" name="text">
+						    
+						  <input type="button" id="dosearch" value="go" class="forms" name="Button" onClick="simple_searchAnimes();">
+						</td>
+					  </tr>
+					</table>
+					
+				  </td>
+				</tr>
+			  </table>
+			</div>
+			<span id=wtbottom></span> </td>
+		</tr>
+	  </table>
+	</td>
+  </tr><div id=mlst style="display:">
+  <tr id=print_off_1> 
+	<td width="25" align="left" valign="top" >
+	    <table width="25" border="0" cellspacing="0" cellpadding="0" class="ani_table_local" bgcolor="#FDF8F0">
+		  <tr> 
+			<td align="center" height="10" bgcolor="#868178"><img src="images/icon_head.gif" width="15" height="7"></td>
+		  </tr>
+		  <tr> 
+			<td align="center" height="20"><a href="javascript:popup('search.htm','Search','1000','700');"><img src="images/icon_search.gif" width="15" height="13" title="advanced search" alt="advanced search" border="0"></a></td>
+		  </tr>
+		  <tr> 
+			<td align="center" height="20"><a href="javascript:popup('wishlist.htm','anime','960','500');"><img src="images/icon_wishlist.gif" width="15" height="13" title="wishlist" alt="wishlist" border="0"></a></td>
+		  </tr>
+		  <tr> 
+			<td align="center" height="20"><a href="javascript:popup('votes.htm','votes','600','350');"><img src="images/votes.gif" width="15" height="13" title="votes" alt="votes" border="0"></a></td>
+		  </tr>
+		  <tr> 
+			<td align="center" height="20"><a href="javascript:trade();"><img src="images/trade.gif" width="15" height="13" title="trade" alt="trade" border="0"></a></td>
+		  </tr>
+		  <tr> 
+			<td align="center" height="20"><a href="javascript:print(1);"><img src="images/icon_print.gif" width="15" height="13" title="print" alt="print" border="0"></a></td>
+		  </tr>
+		  <tr> 
+			<td align="center" height="20"><a href="javascript:popup('preferences.htm','Preferences','370','350');"><img src="images/icon_preferences.gif" width="15" height="13" title="preferences" alt="preferences" border="0"></a></td>
+		  </tr>
+		  <tr> 
+			<td align="center" height="20"><a href="javascript:popup('help.htm?=mylist','Help','700','350');"><img src="images/help.gif" width="15" height="13" title="help" alt="help" border="0"></a></td>
+		  </tr>
+		</table>
+	</td>
+	<td width="5">&nbsp;</td>
+  </tr></div>
+</table>
+<div id=print_off_0 style="display:"> 
+<script language="javascript" type="text/javascript">hideT('loading');
+  	document.write ('<p>created using <a href="' + anidb + '"><b>aniDB</b></a> export feature.</p>');
+</script></div>
+<div id=print_head style="display:none">
+<script language="javascript" type="text/javascript">
+	document.write(' <a href="javascript:print(0);" title="reset view"><img src="images/close.gif" width="16" height="16" border="0" alt="reset view" title="reset view"></a>');
+</script>
+</div>
+</body>
+</html>

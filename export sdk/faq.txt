@@ -1,0 +1,76 @@
+SHORT ANIDB TEMPLATE FAQ
+
+VERSION: 0.02 - 28.08.2003
+
+
+
+---------------------------------
+
+
+
+1. Can I include images, external stylesheets/javascript files with my templates?
+
+2. How do i create files other than .htm ?
+
+3. What is that info.dat file?
+
+...
+
+
+
+---------------------------------
+
+
+
+1. Can I include images, external stylesheets/javascript files with my templates?
+
+	Yes, you can copy stylesheet or javascript files directly into the template directory.
+
+	However images should be placed in a seperate zip file and will be hosted on anidb and linked
+
+	on the export page for seperate download. The images will _not_ be automatically included
+
+	into the tgz file the user downloads.
+
+	You also can't include subdirectories, you have to copy the files directly into the
+
+	directory of your template.
+
+
+
+
+
+2. How do i create files other than .htm ?
+
+	Take a look at the csv-minimal theme. You need to create a file called extension.dat
+
+	which only contains the desired extension, _without_ the dot!
+
+
+
+
+
+3. What is that info.dat file?
+
+	It's meant to provide the user with a short info about the template. The content should
+
+	not be too long but is otherwise left to the author of the template.
+
+	However, it is strongly recommended to begin the file with 3 special lines:
+
+		(C) 2003 by EXP
+		Version: 0.01 (08.07.2003)
+		
+
+	1. copyright of the template author, you may include your email address here
+
+	2. version number and date
+
+	3. one empty line
+
+
+
+
+
+...
+

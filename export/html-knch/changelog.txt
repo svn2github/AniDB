@@ -1,0 +1,7 @@
+Changes 0.2 > 0.3
+- Size reduction of .js's (from 9.83 > 7.37 )
+- Generation time is slightly up again
+
+Changes 0.1 > 0.2
+- Size reduction of .js's (from 20.7 > 9.83)
+- Generation time is slightly reduced

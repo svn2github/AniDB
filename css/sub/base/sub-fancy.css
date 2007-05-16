@@ -1,0 +1,58 @@
+#layout-nav:before
+{
+	background-image: url(images/shun23fv.png);
+	display: block;
+	height: 100px;
+	width: 100px;
+	margin: 0.5em auto 0.5em auto;
+	border: 1px #98AAB1 solid;
+	content:"";
+}
+
+#layout-nav div.menu
+{
+	margin-top: 1em;
+}
+#layout-nav div.usermenu p.user
+{
+	position: absolute;
+	width: 130px;
+	top: 110px;
+	text-align: center;
+}
+
+#layout-nav div.usermenu p.user:before
+{
+	content: "Hi, ";
+}
+#layout-nav div.usermenu p.user:after
+{
+	content: "!";
+}
+
+#layout-menu div.usermenu form[enctype]
+{
+	position: absolute;
+	top: 22px;
+	left: 175px;
+	width: 6em;
+}
+
+#layout-menu div.usermenu p a+a
+{
+	margin-left: 0.8em;
+}
+
+/*#layout-menu div.menu ul.my li.mynotifies,
+#layout-menu div.menu ul.my li.myreviews,
+#layout-menu div.menu ul.my li.mywishlist,
+#layout-menu div.menu ul.other
+{
+	display: none;
+}*/
+
+#layout-nav > div
+{
+	margin-left: 6px;
+	margin-right: 6px;
+}

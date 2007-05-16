@@ -1,0 +1,246 @@
+<html>
+  <head>
+    <script language="javascript" type="text/javascript">
+      var aToExpand = "";
+      var eToExpand = "";
+      var fToExpand = false;
+      var uri       = "" + window.location;
+
+      if ( uri.indexOf ( "?" ) > -1 ) {
+        var toExpand  = uri.substring ( uri.indexOf ( "=" ) + 1 , uri.length );
+        if ( toExpand.indexOf ( "e" ) > 0 ) {
+          aToExpand = toExpand.substring ( 0 , toExpand.indexOf ( "e" ) );
+          if ( toExpand.indexOf ( "f" ) > 0 ) {
+            eToExpand = toExpand.substring ( toExpand.indexOf ( "e" ) , toExpand.indexOf ( "f" ) );
+            fToExpand = true;
+          } else
+            eToExpand = toExpand.substring ( toExpand.indexOf ( "e" ) , toExpand.length );
+        } else
+          aToExpand = toExpand;
+        document.write ( "<script language=\"javascript\" type=\"text/javascript\" src=\"anime/" + aToExpand + ".js\"><\/script>" );
+      }
+
+      function scrollTo ( id ) {
+        var toScrollTo =  document.getElementById ( id );
+        var yOffset = 0;
+
+        if ( toScrollTo.offsetParent ) {
+          while ( toScrollTo.offsetParent ) {
+            yOffset += toScrollTo.offsetTop;
+            toScrollTo = toScrollTo.offsetParent;
+          }
+        } else if ( toScrollTo.y )
+          yOffset = toScrollTo.y;
+
+        if ( window.innerHeight ) {
+          document.body.scrollTop = yOffset - 20;
+        } else if ( document.body ) {
+          document.body.scrollTop = yOffset - 10;
+        }
+      }
+
+      onload = function () {
+        if ( aToExpand != "" && aToExpand != "fil" )
+          scrollTo ( aToExpand );
+      }
+
+      function writeAnime ( anime , level ) {
+        document.write ( "<tr><td width=1% align=center nowrap=nowrap class=" + level + "> <a id=a" + anime.ID + " name=a" + anime.ID + "></a><a href=?=a" + anime.ID + ">+</a> </td>" );
+        document.write ( "<td width=4% align=center nowrap=nowrap class=" + level + "><a href=?=a" + anime.ID + ">" + anime.ID + "</a></td>" );
+        document.write ( "<td width=45% align=left nowrap=nowrap class=" + level + "><a href=?=a" + anime.ID + ">" + anime.name + "</a></td>" );
+        document.write ( "<td width=5% align=center nowrap=nowrap class=" + level + ">" + anime.type + "</td>" );
+        document.write ( "<td width=10% align=center nowrap=nowrap class=" + level + ">" + anime.myEps + ( anime.mySpecials > 0 ? " + " + anime.mySpecials : "" ) + " / " + anime.eps + "</td>" );
+        document.write ( "<td width=10% align=center nowrap=nowrap class=" + level + ">" + anime.myWeps + ( anime.myWSpecials > 0 ? " + " + anime.myWSpecials : "" ) + " / " + anime.myEps + "</td>" );
+        document.write ( "<td width=3% align=center nowrap=nowrap class=" + level + ">" + anime.rating + "</td>" );
+        document.write ( "<td width=5% align=center nowrap=nowrap class=" + level + ">" + anime.shortDate + "</td>" );
+        document.write ( "<td width=15% align=right nowrap=nowrap class=" + level + ">" + anime.sizeGB + " <span class=smaller>(" + anime.sizeBytes + " bytes)</span></td>" );
+        if ( anime.isComplete )
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#00FF00><b>V</b></font></td>" );
+        else
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#FF0000><b>X</b></font></td>" );
+        if ( anime.isWatched )
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#00FF00><b>V</b></font></td>" );
+        else
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#FF0000><b>X</b></font></td>" );
+        document.write ( "</tr>" );
+      }
+
+      function writeExpandedAnime ( anime , level ) {
+        document.write ( "<tr><td width=1% align=center nowrap=nowrap class=" + level + "> <a id=a" + anime.ID + " name=a" + anime.ID + "></a><a href=?>-</a> </td>" );
+        document.write ( "<td width=4% align=center nowrap=nowrap class=" + level + ">" + anime.ID + "</td>" );
+        document.write ( "<td width=45% align=left nowrap=nowrap class=" + level + ">" + anime.name + "</td>" );
+        document.write ( "<td width=5% align=center nowrap=nowrap class=" + level + ">" + anime.type + "</td>" );
+        document.write ( "<td width=10% align=center nowrap=nowrap class=" + level + ">" + anime.myEps + ( anime.mySpecials > 0 ? " + " + anime.mySpecials : "" ) + " / " + anime.eps + "</td>" );
+        document.write ( "<td width=10% align=center nowrap=nowrap class=" + level + ">" + anime.myWeps + ( anime.myWSpecials > 0 ? " + " + anime.myWSpecials : "" ) + " / " + anime.myEps + "</td>" );
+        document.write ( "<td width=3% align=center nowrap=nowrap class=" + level + ">" + anime.rating + "</td>" );
+        document.write ( "<td width=5% align=center nowrap=nowrap class=" + level + ">" + anime.shortDate + "</td>" );
+        document.write ( "<td width=15% align=right nowrap=nowrap class=" + level + ">" + anime.sizeGB + " <span class=smaller>(" + anime.sizeBytes + " bytes)</span></td>" );
+        if ( anime.isComplete )
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#00FF00><b>V</b></font></td>" );
+        else
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#FF0000><b>X</b></font></td>" );
+        if ( anime.isWatched )
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#00FF00><b>V</b></font></td>" );
+        else
+          document.write ( "<td width=1% align=center class=" + level + "><font color=#FF0000><b>X</b></font></td>" );
+        document.write ( "</tr><tr><td class=" + level + ">&nbsp;</td><td class=" + level + " colspan=10 style=padding:0px 0px 0px 0px;>" );
+
+        var level  = level.replace ( "4" , "5" );
+        var levela = level.replace ( "5" , "6" );
+        var levelb = level.replace ( "5" , "7" );
+
+        document.write ( "<table width=100% border=0 cellpadding=1 cellspacing=0>" );
+        document.write ( "<tr><td align=center colspan=2 class=" + level + "> - General Info - </td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Name :: </td><td align=left valign=top width=50% class=" + levelb + ">" + xa.name + "</td></tr>" );
+        if ( xa.aliases != "" )
+          document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Aliases :: </td><td align=left valign=top width=50% class=" + levelb + ">" + xa.aliases.substring ( 0 , xa.aliases.lastIndexOf ( " ," ) ) + "</td></tr>" );
+        if ( xa.shortNames != "" )
+          document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Short Names :: </td><td align=left valign=top width=50% class=" + levelb + ">" + xa.shortNames.substring ( 0 , xa.shortNames.lastIndexOf ( " ," ) ) + "</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Year :: </td><td align=left valign=top width=50% class=" + levelb + ">" + xa.year + "</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Producer :: </td><td align=left valign=top width=50% class=" + levelb + ">" + ( xa.prod != "" ? xa.prod : "-" ) + "</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Genres :: </td><td align=left valign=top width=50% class=" + levelb + ">" + xa.genres.substring ( 0 , xa.genres.lastIndexOf ( " ," ) ) + "</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Date :: </td><td align=left valign=top width=50% class=" + levelb + ">" + xa.longDate + " (updated : " + ( xa.shortUpdate != "" ? xa.shortUpdate : "Never" ) + ")</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Url :: </td><td align=left valign=top width=50% class=" + levelb + ">" + ( xa.url != "" ? "<a href=" + xa.url + ">" + xa.url + "</a>" : "N/A" ) + "</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">AniDB :: </td><td align=left valign=top width=50% class=" + levelb + "><a href=" + aniDBUrl + "?show=anime&aid=" + xa.ID + ">Anime ID : " + xa.ID + "</a></td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">AnimeNfo :: </td><td align=left valign=top width=50% class=" + levelb + "><a href=" + xa.animeNfoUrl + ">AnimeNfo ID : " + xa.animeNfoID + "</a></td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levela + ">Description :: </td><td align=left valign=top width=50% class=" + levelb + ">" + ( xa.description != "" ? xa.description : "-" ) + "</td></tr>" );
+        document.write ( "<tr><td align=center colspan=2 class=" + level + "> - Episodes - </td></tr>" );
+        document.write ( "<tr><td align=center colspan=2 style=padding:0px 0px 0px 0px;><table width=100% border=0 cellpadding=1 cellspacing=0>" );
+        document.write ( "<tr><td width=1% class=" + levela + ">&nbsp;</td><td align=center valign=bottom width=5% class=" + levela + ">#</td><td align=center valign=bottom width=72% class=" + levela + ">Name</td><td align=center valign=bottom width=10% class=" + levela + ">Length</td><td align=center valign=bottom width=10% class=" + levela + ">Date</td><td align=center valign=bottom width=1% class=" + levela + ">S<br>p<br>e<br>c<br>i<br>a<br>l</td><td align=center valign=bottom width=1% class=" + levela + ">W<br>a<br>t<br>c<br>h<br>e<br>d</td></tr>" );
+
+        for ( j = 0 ; j < xa.e.length ; j++ ) {
+          if ( eToExpand == "e" + xa.e[j].ID ) {
+            writeExpandedEpisode ( j , levelb );
+          } else
+            writeEpisode ( j , levelb );
+        }
+
+        document.write ( "<tr><td colspan=2>&nbsp;</td></tr></table></td></tr></table></td></tr>" );
+      }
+
+      function writeEpisode ( num , level ) {
+
+        if ( xa.e[num].isSpecial )
+          level += "s";
+
+        document.write ( "<tr><td align=center valign=top width=1% class=" + level + "> <a href=?=a" + xa.ID + "e" + xa.e[num].ID + ">+</a> </td><td width=5% align=center valign=top class=" + level + "><a href=?=a" + xa.ID + "e" + xa.e[num].ID +">" + xa.e[num].num + "</a></td><td width=72% align=left valign=top class=" + level + "><a href=?=a" + xa.ID + "e" + xa.e[num].ID +">" + xa.e[num].name + "</a></td><td width=10% align=center valign=top class=" + level + ">" + xa.e[num].length + "</td><td width=10% align=center valign=top class=" + level + ">" + xa.e[num].shortDate + "</td>" );
+        if ( xa.e[num].isSpecial )
+          document.write ( "<td align=center valign=top width=1% class=" + level + "><font color=#0000FF><b>S</b></font></td>" );
+        else
+          document.write ( "<td align=center valign=top width=1% class=" + level + ">&nbsp;</td>" );
+        if ( xa.e[num].isWatched )
+          document.write ( "<td align=center valign=top width=1% class=" + level + "><font color=#00FF00><b>V</b></font></td></tr>" );
+        else
+          document.write ( "<td align=center valign=top width=1% class=" + level + "><font color=#FF0000><b>X</b></font></td></td></tr>" );
+      }
+
+      function writeExpandedEpisode ( num , level ) {
+
+        if ( xa.e[num].isSpecial )
+          level += "s";
+
+        var levela = level.replace ( "7" , "8" );
+        var levelb = level.replace ( "7" , "9" );
+        var levelc = level.replace ( "7" , "10" );
+
+        document.write ( "<tr><td align=center valign=top width=1% class=" + level + "> <a href=?=a" + xa.ID + ">-</a> </td><td width=5% align=center valign=top class=" + level + ">" + xa.e[num].num + "</td><td width=72% align=left valign=top class=" + level + ">" + xa.e[num].name + "</td><td width=10% align=center valign=top class=" + level + ">" + xa.e[num].length + "</td><td width=10% align=center valign=top class=" + level + ">" + xa.e[num].shortDate + "</td>" );
+        if ( xa.e[num].isSpecial )
+          document.write ( "<td align=center valign=top width=1% class=" + level + "><font color=#0000FF><b>S</b></font></td>" );
+        else
+          document.write ( "<td align=center valign=top width=1% class=" + level + ">&nbsp;</td>" );
+        if ( xa.e[num].isWatched )
+          document.write ( "<td align=center valign=top width=1% class=" + level + "><font color=#00FF00><b>V</b></font></td></tr>" );
+        else
+          document.write ( "<td align=center valign=top width=1% class=" + level + "><font color=#FF0000><b>X</b></font></td></td></tr>" );
+        document.write ( "<tr><td colspan=7 class=" + level + " style=padding:0px 0px 0px 0px;><table width=100% border=0 cellpadding=1 cellspacing=0>" );
+        document.write ( "<tr><td align=center colspan=2 class=" + levela + "> - General Info - </td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levelb + ">Name :: </td><td align=left valign=top width=50% class=" + levelc + ">" + xa.e[num].name + "</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levelb + ">Length :: </td><td align=left valign=top width=50% class=" + levelc + ">" + xa.e[num].length + " minutes</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levelb + ">Aired :: </td><td align=left valign=top width=50% class=" + levelc + ">" + xa.e[num].longAired + "</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levelb + ">Date :: </td><td align=left valign=top width=50% class=" + levelc + ">" + xa.e[num].longDate + " (updated : " + ( xa.e[num].shortUpdate != "" ? xa.e[num].shortUpdate : "Never" ) + ")</td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levelb + ">AniDB :: </td><td align=left valign=top width=50% class=" + levelc + "><a href=" + aniDBUrl + "?show=ep&aid=" + xa.ID + "&eid=" + xa.e[num].ID + ">Episode ID : " + xa.e[num].ID + "</a></td></tr>" );
+        document.write ( "<tr><td align=right valign=top width=50% class=" + levelb + ">Notes :: </td><td align=left valign=top width=50% class=" + levelc + ">" + ( xa.e[num].other != "" ? xa.e[num].other : "-" ) + "</td></tr>" );
+
+        if ( fToExpand == true )
+          writeExpandedFile ( num , levela );
+        else
+          writeFile ( num , levela );
+
+        document.write ( "</table></td></tr>" );
+      }
+
+      function writeFile ( num , level ) {
+        document.write ( "<tr><td align=center colspan=2 class=" + level + "> - Files (" + xa.e[num].f.length + ") - <a href=?=a" + xa.ID + "e" + xa.e[num].ID + "f>Expand</a> - </td></tr>" );
+        document.write ( "<tr><td align=center colspan=2>&nbsp;</td></tr>" );
+      }
+
+      function writeExpandedFile ( num , level ) {
+        document.write ( "<tr><td align=center colspan=2 class=" + level + "> - Files - <a href=?=a" + xa.ID + "e" + xa.e[num].ID + ">Collapse</a> - </td></tr>" );
+        document.write ( "<tr><td align=center colspan=2 style=padding:0px 0px 0px 0px;><table width=100% border=0 cellpadding=1 cellspacing=0>" );
+
+        var levela = level.replace ( "8" , "9" );
+        var levelb = level.replace ( "8" , "10" );
+
+        for ( k = 0 ; k < xa.e[num].f.length ; k++ ) {
+          document.write ( "<tr><td align=right valign=top width=10% rowspan=11 class=" + level + ">File " + ( k+1 ) + " :: <br>State : " + xa.e[num].f[k].stateIcon.replace ( "15" , "12" ).replace ( "13" , "10" ) + "</td><td align=right valign=top width=20% class=" + levela + ">AniDB :: </td><td align=left valign=top width=25% class=" + levelb + "><a href=" + aniDBUrl + "?show=file&aid=" + xa.ID + "&eid=" + xa.e[num].ID + "&fid=" + xa.e[num].f[k].ID + ">File ID : " + xa.e[num].f[k].ID + "</td><td width=45% colspan=2 class=" + levelb + ">&nbsp;</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Filetype :: </td><td align=left valign=top width=25% class=" + levelb + ">" + xa.e[num].f[k].filetype + "</td><td align=right valign=top width=20% class=" + levela + ">Size :: </td><td align=left valign=top width=25% class=" + levelb + ">" + xa.e[num].f[k].sizeMB + " (" + xa.e[num].f[k].sizeBytes + " bytes) </td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Date :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].longDate != "" ? xa.e[num].f[k].longDate + " (updated : " + ( xa.e[num].f[k].shortUpdate != "" ? xa.e[num].f[k].shortUpdate : "Never" ) + ")": "N/A" ) + "</td><td align=right valign=top width=20% class=" + levela + ">View Date :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].longViewdate != "-" ? xa.e[num].f[k].longViewdate : "Unseen" ) + "</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">CRC :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].crc != "" ? xa.e[num].f[k].crc.toUpperCase() + ( xa.e[num].f[k].isCrcOk == true ? " - OK" : ( xa.e[num].f[k].isCrcFailed == true ? " - Failed" : " - Unchecked" ) ) : "N/A" ) + "</td><td align=right valign=top width=20% class=" + levela + ">MD5 :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].md5 != "" ? xa.e[num].f[k].md5.toUpperCase() : "N/A" ) + "</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Ed2k Hash :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].ed2kHash != "" ? xa.e[num].f[k].ed2kHash.toUpperCase() : "N/A" ) + "</td><td width=45% colspan=2 class=" + levelb + ">&nbsp;</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Language (spoken) :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].langName != "unknown" ? xa.e[num].f[k].langName : "N/A" ) + "</td><td align=right valign=top width=20% class=" + levela + ">Language (subs) :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].subName != "unknown" ? xa.e[num].f[k].subName : "N/A" ) + "</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Group Name :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].groupName != "" ? "<a href=" + aniDBUrl + "?show=group&gid=" + xa.e[num].f[k].groupID + ">" + xa.e[num].f[k].groupName + "</a>" : "N/A" ) + "</td><td align=right valign=top width=20% class=" + levela + ">Released :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].longReleased != "-" ? xa.e[num].f[k].longReleased : "N/A" ) + "</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Resolution :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].resName != "unknown" ? xa.e[num].f[k].resName : "N/A" ) + "</td><td align=right valign=top width=20% class=" + levela + ">Quality :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].qualName != "unknown" ? xa.e[num].f[k].qualName : "N/A" ) + "</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Source :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].typeName != "unknown" ? xa.e[num].f[k].typeName : "N/A" ) + "</td><td width=45% colspan=2 class=" + levelb + ">&nbsp;</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Audio Codec :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].audioCodecName != "unknown" ? xa.e[num].f[k].audioCodecName : "N/A" ) + "</td><td align=right valign=top width=20% class=" + levela + ">Audio BitRate :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].audioBr > 0 ? xa.e[num].f[k].audioBr + " kbits/s" : "N/A" ) + "</td></tr>" );
+          document.write ( "<tr><td align=right valign=top width=20% class=" + levela + ">Video Codec :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].videoCodecName != "unknown" ? xa.e[num].f[k].videoCodecName : "N/A" ) + "</td><td align=right valign=top width=20% class=" + levela + ">Video BitRate :: </td><td align=left valign=top width=25% class=" + levelb + ">" + ( xa.e[num].f[k].videoBr > 0 ? xa.e[num].f[k].videoBr + " kbits/s" : "N/A" ) + "</td></tr>" );
+          document.write ( "<tr><td colspan=5>&nbsp;</td></tr>" );
+        }
+
+        document.write ( "</table></td></tr>" );
+      }
+    </script>
+    <script language="javascript" type="text/javascript" src="mylist.js">
+    <script language="javascript" type="text/javascript">
+      function foo () {}
+    </script>
+    <title> ::  AniDB.Net ::  MyList [Export] ::  </title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  </head>
+  <body>
+    <script language="javascript" type="text/javascript">
+      document.write ( "<table width=100% border=0 cellpadding=0 cellspacing=0><tr><td align=center colspan=2 valign=middle height=20 class=level0>::  AniDB.Net ::  MyList [Eport] - " + userName + " - " + shortDate + "</td></tr>" );
+      document.write ( "<tr><td align=right valign=top width=23% style=padding:0px 0px 0px 0px;><table width=100% border=0 cellpadding=1 cellspacing=0>" );
+      document.write ( "<tr><td align=center colspan=2 class=level1>: General Information :</td></tr>" );
+      document.write ( "<tr><td align=right width=50% class=level2>User Name :: </td><td align=left width=50% class=level3>" + userName + "</td></tr>" );
+      document.write ( "<tr><td align=right width=50% class=level2>Export Date :: </td><td align=left width=50% class=level3>" + longDate + "</td></tr>" );
+      document.write ( "<tr><td align=right width=50% class=level2>Animes :: </td><td align=left width=50% class=level3>" + animeCount + "</td></tr>" );
+      document.write ( "<tr><td align=right width=50% class=level2>Episodes :: </td><td align=left width=50% class=level3>" + episodeCount + "</td></tr>" );
+      document.write ( "<tr><td align=right width=50% class=level2>Files :: </td><td align=left width=50% class=level3>" + fileCount + "</td></tr>" );
+      document.write ( "<tr><td align=right valign=top width=50% class=level2>Size :: </td><td align=left width=50% class=level3>" + GByteCount + " <div class=small nowrap=nowrap>(" + byteCount + " bytes)</div></td></tr>" );
+      document.write ( "</table></td>" );
+      document.write ( "<td align=left valign=top width=77% style=padding:0px 0px 0px 0px;><table width=100% border=0 cellpadding=1 cellspacing=0>" );
+      document.write ( "<tr><td align=center colspan=11 class=level1>: Animes :</td></tr>" );
+      document.write ( "<tr><td width=1% nowrap=nowrap class=level2> &nbsp;</td><td width=4% align=center valign=bottom nowrap=nowrap class=level2>-ID-</td><td width=45% align=center valign=bottom nowrap=nowrap class=level2>-Name-</td><td width=5% align=center valign=bottom nowrap=nowrap class=level2>-Type-</td><td width=10% align=center valign=bottom nowrap=nowrap class=level2>-Episodes-</td><td width=10% align=center valign=bottom nowrap=nowrap class=level2>-Watched-</td><td width=3% align=center valign=bottom nowrap=nowrap class=level2>-Rating-</td><td width=5% align=center valign=bottom nowrap=nowrap class=level2>-Date-</td><td width=15% align=center valign=bottom nowrap=nowrap class=level2>-Size-</td><td width=1% align=center valign=bottom class=level2>C<br>o<br>m<br>p<br>l<br>e<br>t<br>e</td><td width=1% align=center valign=bottom class=level2>W<br>a<br>t<br>c<br>h<br>e<br>d</td></tr>" );
+      //document.write ( "<tr><td width=1%><img src=images/spacer.gif></td><td width=4% align=center valign=bottom><img src=images/up.gif border=0 alt =sort up><img src=images/down.gif border=0 alt=sort down></td><td width=45% align=center valign=bottom><img src=images/up.gif border=0 alt =sort up><img src=images/down.gif border=0 alt=sort down></td><td width=5% align=center valign=bottom><img src=images/up.gif border=0 alt =sort up><img src=images/down.gif border=0 alt=sort down></td><td width=10% align=center valign=bottom><img src=images/spacer.gif></td><td width=10% align=center valign=bottom><img src=images/spacer.gif></td><td width=3% align=center valign=bottom><img src=images/up.gif border=0 alt =sort up><img src=images/down.gif border=0 alt=sort down></td><td width=5% align=center valign=bottom><img src=images/up.gif border=0 alt =sort up><img src=images/down.gif border=0 alt=sort down></td><td width=15% align=center valign=bottom><img src=images/up.gif border=0 alt =sort up><img src=images/down.gif border=0 alt=sort down></td><td width=1% align=center valign=bottom><img src=images/spacer.gif></td><td width=1% align=center valign=bottom><img src=images/spacer.gif></td></tr>" );
+      for ( i = 0 ; i < animeArray.length ; i++ ) {
+        anime = eval ( "a" + animeArray [ i ] );
+
+        var myVar = "level4";
+
+        if ( anime.isComplete )
+          if ( anime.isWatched )
+            myVar += "cw";
+          else
+            myVar += "c";
+
+        if ( aToExpand == "a" + animeArray [ i ] ) {
+          writeExpandedAnime ( anime , myVar  );
+          /*document.write ( "<tr><td width=1% nowrap=nowrap> &nbsp;</td><td width=4% align=center valign=bottom nowrap=nowrap>-ID-</td><td width=45% align=center valign=bottom nowrap=nowrap>-Name-</td><td width=5% align=center valign=bottom nowrap=nowrap>-Type-</td><td width=10% align=center valign=bottom nowrap=nowrap>-Episodes-</td><td width=10% align=center valign=bottom nowrap=nowrap>-Watched-</td><td width=3% align=center valign=bottom nowrap=nowrap>-Rating-</td><td width=5% align=center valign=bottom nowrap=nowrap>-Date-</td><td width=15% align=center valign=bottom nowrap=nowrap>-Size-</td><td width=1% align=center valign=bottom>C</td><td width=1% align=center valign=bottom>W</td></tr>" );*/
+        } else
+          writeAnime ( anime , myVar );
+      }
+      document.write ( "</table></td></tr></table><div align=center class=small><p>- <a href=\"" + aniDBUrl + "\">AniDB.Net</a> - <a href=\"" + aniDBUrl + "?show=mylist\">MyList</a> -</p>" );
+      document.write ( "Knch' - js v0.2</div>" );
+    </script>
+  </body>
+</html>

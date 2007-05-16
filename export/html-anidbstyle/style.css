@@ -1,0 +1,13 @@
+a:active {  text-decoration: underline}
+a:hover {  text-decoration: underline}
+a:link {  text-decoration: none; color:  }
+a:visited {  text-decoration: none; color: }
+body {  font-family: Verdana, Arial, Helvetica, sans-serif;; font-size: 10px}
+.complete {font-color: #ff0000;}
+.episode_sel {  background-color: #FFFFCC}
+.episode {  background-color: }
+.anime_table {  font-size: xx-small}
+.ani_table {  border: #494d59; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.forms {  border: #b0b0b0; border-style: dotted; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.ani_tableHelp { border: 1px #494d59 dotted; font-size: xx-small}
+.lines {  border-color: #EEEEEE; border-style: solid; border-width: 0px 0px 1px 0px}

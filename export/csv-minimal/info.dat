@@ -1,0 +1,8 @@
+(C) 2003 by EXP
+Version: 0.01 (?)
+
+Very simple csv export template. This can be used to import a short summary
+of your mylist (only anime titles are listed, no ep or file info) into any
+programm which can handle csv files.
+
+

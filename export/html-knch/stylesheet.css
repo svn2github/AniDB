@@ -1,0 +1,45 @@
+a{background:inherit;color:inherit;font-weight:600;text-decoration:none}
+a:hover{background:inherit;color:#FFCE00;font-weight:600;text-decoration:none}
+body{background:#585858;color:#D3D3D3;font:normal normal normal 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+td{background:inherit;color:inherit;font:normal normal normal 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+tr,table{background:inherit;color:inherit}
+.level0{background:#3B3B3B;color:inherit;font:normal normal 600 12px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level1{background:#282828;color:inherit;font:normal normal 700 12px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level10{background:#4B4B4B;border-bottom:1px solid #3C3C3C;color:inherit}
+.level10c{background:#244A25;border-bottom:1px solid #1A351A;color:inherit}
+.level10cs{background:#244B57;border-bottom:1px solid #1B3740;color:inherit}
+.level10cw{background:#124913;border-bottom:1px solid #0C300C;color:inherit}
+.level10cws{background:#124946;border-bottom:1px solid #0C302E;color:inherit}
+.level10s{background:#4D4F77;border-bottom:1px solid #404163;color:inherit}
+.level2{background:#1B1B1B;border-bottom:1px solid #585858;color:inherit;font:normal normal 600 11px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level3{background:inherit;border-bottom:1px solid #1B1B1B;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level4{background:inherit;border-bottom:1px solid #1B1B1B;color:inherit}
+.level4c{background:#2C582C;border-bottom:1px solid #1B1B1B;color:#69D369}
+.level4cw{background:#165816;border-bottom:1px solid #1B1B1B;color:#34D334}
+.level5{background:#3B3B3B;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level5c{background:#1D3B1D;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level5cw{background:#0E3B0E;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level6{background:#494949;border-bottom:1px solid #3B3B3B;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level6c{background:#244924;border-bottom:1px solid #1D3B1D;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level6cw{background:#124912;border-bottom:1px solid #0E3B0E;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level7{background:#515151;border-bottom:1px solid #494949;color:inherit}
+.level7c{background:#285128;border-bottom:1px solid #244924;color:inherit}
+.level7cs{background:#28515E;border-bottom:1px solid #244924;color:#4F9E69}
+.level7cw{background:#145114;border-bottom:1px solid #124912;color:inherit}
+.level7cws{background:#14514F;border-bottom:1px solid #124912;color:#279E34}
+.level7s{background:#51517D;border-bottom:1px solid #494949;color:#9E9ED3}
+.level8{background:#3C3C3C;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level8c{background:#1A351A;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level8cs{background:#1B3740;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level8cw{background:#0C300C;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level8cws{background:#0C302E;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level8s{background:#404163;color:inherit;font:normal normal 600 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level9{background:#464646;border-bottom:1px solid #3C3C3C;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level9c{background:#214321;border-bottom:1px solid #1A351A;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level9cs{background:#21444F;border-bottom:1px solid #1B3740;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level9cw{background:#104111;border-bottom:1px solid #0C300C;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level9cws{background:#10413E;border-bottom:1px solid #0C302E;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.level9s{background:#484A70;border-bottom:1px solid #404163;color:inherit;font:normal normal 700 10px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.small{font:normal normal normal 9px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.smaller{font:normal normal normal 8px Verdana,Tahoma,"Trebuchet MS",sans-serif}
+.title{background:#000000;color:#FFFFFF;font:normal normal bold 11px Verdana,Tahoma,"Trebuchet MS",sans-serif}

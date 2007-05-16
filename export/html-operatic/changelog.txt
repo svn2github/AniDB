@@ -1,0 +1,23 @@
+History:
+
+version 1.0.2 (11.10.2005):
+	[+] added support for new special types (parody, traillers & others).
+	[-] fixed url for generic files.
+	[-] removed shared and released filters, as they aren't use anymore.
+
+version 1.0.1 (12.01.2005):
+	[+] re-added animeNFO ID and producer search to the adv. search page.
+	[+] changed an issue with the anime, mylist and wishlist pages and respective code.
+	[-] fixed a typo in the trade page.
+
+version 1.0 (06.01.2005):
+	[!] Initial Version 
+	[+] added expand(!).
+	[+] added votes page.
+	[+] fixed for real the trade function, works prefectly.
+	[+] added "On Going" filter.
+	[+] fixed several issues.
+
+By:	fahrenheit
+http:	http://pwp.netcabo.pt/fahrenheit
+mail:	fahrenheit@netcabo.pt

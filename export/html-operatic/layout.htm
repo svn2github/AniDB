@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Layout</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" src="layout.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+function init(){
+	document.getElementById("mylist_name").value = getCookie("lay_mylist_name") || 1;
+	document.getElementById("mylist_stat").value = getCookie("lay_mylist_stat") || 1;
+	document.getElementById("mylist_eps").value = getCookie("lay_mylist_eps") || 1;
+	document.getElementById("mylist_seen").value = getCookie("lay_mylist_seen") || 1;
+	document.getElementById("mylist_type").value = getCookie("lay_mylist_type") || 1;
+	document.getElementById("mylist_year").value = getCookie("lay_mylist_year") || 0;
+	document.getElementById("mylist_size").value = getCookie("lay_mylist_size") || 0;
+	document.getElementById("mylist_rating").value = getCookie("lay_mylist_rating") || 1;
+	document.getElementById("mylist_votes").value = getCookie("lay_mylist_votes") || 0;
+}
+
+function changeVars(){
+	var lay_mylist_name = document.getElementById("mylist_name").value;
+	var lay_mylist_stat = document.getElementById("mylist_stat").value;
+	var lay_mylist_eps = document.getElementById("mylist_eps").value;
+	var lay_mylist_seen = document.getElementById("mylist_seen").value;
+	var lay_mylist_type = document.getElementById("mylist_type").value;
+	var lay_mylist_year = document.getElementById("mylist_year").value;
+	var lay_mylist_size = document.getElementById("mylist_size").value;
+	var lay_mylist_rating = document.getElementById("mylist_rating").value;
+	var lay_mylist_votes = document.getElementById("mylist_votes").value;
+	setCookie("lay_mylist_name",lay_mylist_name);
+	setCookie("lay_mylist_stat",lay_mylist_stat);
+	setCookie("lay_mylist_eps",lay_mylist_eps);
+	setCookie("lay_mylist_seen",lay_mylist_seen);
+	setCookie("lay_mylist_type",lay_mylist_type);
+	setCookie("lay_mylist_year",lay_mylist_year);
+	setCookie("lay_mylist_size",lay_mylist_size);
+	setCookie("lay_mylist_rating",lay_mylist_rating);
+	setCookie("lay_mylist_votes",lay_mylist_votes);
+	window.open("mylist.htm","mylist");
+}
+</script>
+</head>
+
+<body bgcolor="#868178" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:init();">
+<form id="form1" method="post" action="javascript:changeVars();">
+		
+  <table width="100%" class="ani_table_local" bgcolor="#EDE8E0" cellpadding="0" cellspacing="0">
+	<tr height="20px" background="images/topbar.gif"> 
+	  <td colspan="13" bgcolor="#868178" height="20" class="bars_head"><font color="#EFE6D8">&nbsp;Layout</font></td>
+	  <td align="right" bgcolor="#868178" height="20" class="bars_head"><a href="javascript:window.close();"><img src="images/close.gif" width="16" height="16" border="0" alt="close window" title="close window"></a>&nbsp;</td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="14" height="20"><font size="2"><b><font color="#333333" size="1">&nbsp;Select 
+		which columns are displayed.</font></b></font></td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="2" height="20"> &nbsp; 
+		<select class="forms" id="mylist_name" DISABLED onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td colspan="4" align="center"> 
+		<select class="forms" id="mylist_stat" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="70" align="center"> 
+		<select class="forms" id="mylist_eps" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="70" align="center"> 
+		<select class="forms" id="mylist_seen" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="100" align="center"> 
+		<select class="forms" id="mylist_type" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="100" align="center"> 
+		<select class="forms" id="mylist_year" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="100" align="center"> 
+		<select class="forms" id="mylist_size" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="70" align="center"> 
+		<select class="forms" id="mylist_rating" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="70" align="center"> 
+		<select class="forms" id="mylist_votes" onChange="javascript:changeVars();">
+		  <option selected>----------</option>
+		  <option value="1">Show</option>
+		  <option value="0">Hide</option>
+		</select>
+	  </td>
+	  <td width="25" align="center">&nbsp; </td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="14" height="20">&nbsp;</td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="14" height="20"> 
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
+		  <tr height="20px" bgcolor="#868178" background="images/topbar.gif"> 
+			<td align="right" width="50" class="bars" bgcolor="#868178"><font size="1"><span id=prev></span><img src="images/noprev.gif" width="41" height="10">&nbsp;</font></td>
+			<td align="center" class="bars" background="images/topbar.gif" bgcolor="#868178"> 
+			  <table id=alpha_bar0 border=0 cellspacing=0 cellpadding=0 height="100%">
+				<tr> 
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">all</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">0-9</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">a</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">b</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">c</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">d</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">e</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">f</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">g</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">h</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">i</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">j</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">k</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">l</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">m</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">n</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">o</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">p</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">q</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">r</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">s</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">t</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">u</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">v</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">w</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">x</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">y</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">z</td>
+				</tr>
+			  </table>
+			</td>
+			<td align="left" width="50" class="bars"><font size="1">&nbsp;<span id=next><img src="images/nonext.gif" width="41" height="10"></span></font></td>
+		  </tr>
+		</table>
+	  </td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="2" height="20" class="bars_head"><font size="1" color="#333333">&nbsp;Title 
+		<img id=name_sort_up src="images/sort_up_sel.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td colspan="4" align="center" class="bars_head"><font size="1" color="#333333">Stat 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="70" align="center" class="bars_head"><font size="1" color="#333333">EPs 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="70" align="center" class="bars_head"><font size="1" color="#333333">Seen 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="100" align="center" class="bars_head"><font size="1" color="#333333">Type 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="100" align="center" class="bars_head"><font size="1" color="#333333">Year 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="100" align="center" class="bars_head"><font size="1" color="#333333">Size 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="70" align="center" class="bars_head"><font size="1" color="#333333">Rating 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="70" align="center" class="bars_head"><font size="1" color="#333333">Reviews 
+		<img id=name_sort_up src="images/sort_up.gif" width="9" height="10" alt="sort ascending" title="sort ascending" border="0"><img id=name_sort_down src="images/sort_down.gif" width="9" height="10" alt="sort descending" title="sort descending" border="0"></font></td>
+	  <td width="25" align="center" class="bars_head"><font size="1" color="#333333">Trade&nbsp;</font></td>
+	</tr>
+	<tr height="20px" bgcolor="#FDF8F0"> 
+	  <td width="20" class="lines" align="center"><img src="images/colapse.gif" width="15" height="13"></td>
+	  <td class="lines" height="20">.hack//LIMINALITY</td>
+	  <td width="25" class="lines" align="center"><img src="images/wish_pri_1.gif" width="15" height="13"></td>
+	  <td width="25" class="lines" align="center"><img src="images/ongoing_tv.gif" width="15" height="15"></td>
+	  <td width="25" class="lines" align="center"><img src="images/award_2.gif" width="15" height="13"></td>
+	  <td width="25" class="lines" align="center"><img src="images/state_1.gif" width="15" height="13"></td>
+	  <td width="70" align="center" class="lines">3 / 4</td>
+	  <td width="70" align="center" class="lines">0 / 4</td>
+	  <td width="100" align="center" class="lines">OVA</td>
+	  <td width="100" align="center" class="lines">2002-2003</td>
+	  <td width="100" align="center" class="lines">683 MB</td>
+	  <td width="70" align="center" class="lines">6.80 (291)</td>
+	  <td width="70" align="center" class="lines">7.50 (1)</td>
+	  <td width="25" align="center" class="lines"> 
+		<input type="checkbox" class="forms" name="checkbox2" value="checkbox" checked DISABLED>
+	  </td>
+	</tr>
+	<tr height="20px" bgcolor="#FDF8F0"> 
+	  <td colspan="14" class="lines" align="center"> 
+		<table id=ephead width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr bgcolor="#F0F0EB"> 
+			<td width="10" height="15">&nbsp;</td>
+			<td width="30" height="15">&nbsp;</td>
+			<td width="25"><font size="1" >EP</font></td>
+			<td bgcolor="#F0F0EB"><font size="1" >Title</font></td>
+			<td width="25">&nbsp;</td>
+			<td width="25">&nbsp;</td>
+			<td width="60"><font size="1" >Length</font></td>
+			<td width="70"><font size="1" >Date</font></td>
+		  </tr>
+		</table>
+		<table id=eploop width="100%" border="0" cellspacing="0" cellpadding="0" class="lines">
+		  <tr height="20px"> 
+			<td width="10" align="center" height="15"></td>
+			<td width="30" align="center" height="15"><font size="1" > 
+			  <div id=img_ep'+ep.num+'_plus style="display:"><img src="images/expand.gif" width="15" height="13" title="Show File Information" border="0"></div>
+			  </font></td>
+			<td width="25" align="center"><font size="1"><a href="javascript:" title="Show/Hide information of files for this episode">1</a></font></td>
+			<td height="20"> <font size="1">In Case of Minase, Mai </font></td>
+			<td width="25" align="center"><img src="images/ep_state_2.gif" width="15" height="13" title="Episode is a recap (summary)"> 
+			</td>
+			<td width="25" align="center"> <a title="Seen"><img src="images/seen.gif" width="15" height="13" title="Episode is Seen" border="0"></a> 
+			</td>
+			<td width="60" align="center"><font size="1">45 min</font></td>
+			<td width="70" align="center"><font size="1">03.10.02</font></td>
+		  </tr>
+		</table>
+		<table id=ephead width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr bgcolor="#F0F0EB"> 
+			<td colspan="8" height="20"></td>
+		  </tr>
+		</table>
+	  </td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="14" class="anime_table" align="center" height="20"> 
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
+		  <tr height="20px" bgcolor="#868178" background="images/topbar.gif"> 
+			<td align="right" width="50" class="bars" bgcolor="#868178"><font size="1"><span id=prev></span><img src="images/noprev.gif" width="41" height="10">&nbsp;</font></td>
+			<td align="center" class="bars" background="images/topbar.gif" bgcolor="#868178"> 
+			  <table id=alpha_bar0 border=0 cellspacing=0 cellpadding=0 height="100%">
+				<tr> 
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">all</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">0-9</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">a</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">b</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">c</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">d</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">e</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">f</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">g</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">h</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">i</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">j</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">k</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">l</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">m</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">n</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">o</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">p</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">q</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">r</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">s</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">t</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">u</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">v</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">w</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">x</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">y</td>
+				  <td onMouseOver="this.className='over';" onMouseOut="this.className='file';">z</td>
+				</tr>
+			  </table>
+			</td>
+			<td align="left" width="50" class="bars"><font size="1">&nbsp;<span id=next><img src="images/nonext.gif" width="41" height="10"></span></font></td>
+		  </tr>
+		</table>
+	  </td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="14" class="anime_table" align="center" height="20">&nbsp;</td>
+	</tr>
+	<tr height="20px"> 
+	  <td colspan="14" class="anime_table" align="center" height="30"> 
+		<input type="submit" id="Submit" value="Change Layout" class="forms" name="submit">
+	  </td>
+	</tr>
+  </table>
+</form>
+</body>
+</html>

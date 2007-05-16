@@ -1,0 +1,62 @@
+body/*,
+#layout-content div.g_definitionlist table*/
+{
+	color: #555040;
+	border-color: #FFFFFF;
+	background: #bebcad;
+	
+	font: x-small/1.4 Tahoma, Verdana, Helvetica, Arial, sans-serif;
+}
+
+a:link,a:active,a:visited
+{
+	color : #006699;
+}
+
+#layout-nav a
+{
+	color: #4f5e77;
+	font-weight: bold;
+}
+
+a:hover,
+#layout-nav a:hover
+{
+	color : #98b974;
+}
+
+#layout-nav
+{
+	background: #e0dbc9;
+}
+
+#layout-nav div ul,
+#layout-content,
+#layout-footer
+{
+	background-color: #e9e6d9;
+}
+
+th,
+#layout-content h1,
+#layout-content div.main_all div.news h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+	color: #e9e6d9;
+	background-color: #8c8673;
+}
+
+#layout-content tr.g_odd,
+#layout-content li.g_odd
+{
+	background-color: #e0dbc9;
+}
+
+#layout-menu > div > ul > li > a:hover
+{
+	color: inherit;
+}
+#layout-menu > div > ul > li:hover
+{
+	background-color: #e0dbc9;
+}

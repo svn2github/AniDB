@@ -1,0 +1,740 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Search</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" src="mylist.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+
+function showAnimePage(target){
+	if (target == 'blank.htm' && cur_anime != '\'blank.htm\''){} else { cur_anime = target; }
+	javascript:popup(target,'anime','960','500');
+}
+
+function resetST(){
+	document.getElementById("ep_sel").value = "0";
+	document.getElementById("year_sel").value = "0";
+	ep_selects();
+	year_selects();
+}
+
+function ep_selects(){
+	if (document.getElementById("ep_sel").value == "3"){ showT("ep_sel_from"); } else { hideT("ep_sel_from")}
+}
+
+function year_selects(){
+	if (document.getElementById("year_sel").value == "3"){ showT("year_sel_from"); } else { hideT("year_sel_from")}
+}
+
+function searchAnimes(){
+	var title = document.getElementById("anime_name").value;
+	title = title.toLowerCase();
+	var splited = title.split(/\s+/g);
+	var tslength = splited.length;
+	var anfo = document.getElementById("anfo").value;
+	var pname = document.getElementById("producer").value;
+	var status = document.getElementById("status_sel").value;
+	var status2 = document.getElementById("status_sel_2").value;
+	var state = document.getElementById("state_sel").value;
+	pname = pname.toLowerCase();
+	var psplited = pname.split(/\s+/g);
+	var ptslength = psplited.length;
+	var episodes = document.getElementById("anime_eps").value;
+	var ep_sType = document.getElementById("ep_sel").value;
+	if (ep_sType == "3"){
+		var eps_max = document.getElementById("anime_eps_to").value;
+	}
+	var atype = document.getElementById("atype_sel").value;
+	var year = document.getElementById("anime_year").value;
+	var year_sType = document.getElementById("year_sel").value;
+	if (year_sType == "3"){
+		var year_max = document.getElementById("anime_year_to").value;
+	}
+	var rating = document.getElementById("anime_rating").value;
+	var votes = document.getElementById("anime_votes").value;
+	var atts = document.getElementById("anime_atts").value;
+	var attavg = document.getElementById("anime_attavg").value;
+	var genres = new Array();
+	for (i = 1; i < 39; i++){
+		if (i != 13 && i != 32){
+			var tgenr = 'search_genre_'+ i;
+			if (document.getElementById(tgenr).checked){ genres.push (i ); };
+		}
+	}
+	var sh_ids = new Array();
+	for (i = 0; i < aids.length; i++){
+		var anime = eval ( "a" + aids [ i ] );
+		var t_n = 0;
+		var t_pr = 0;
+		var t_nfo = 0;
+		var t_e = 0;
+		var t_t = 0;
+		var t_y = 0;
+		var t_r = 0;
+		var t_v = 0;
+		var t_rv = 0;
+		var t_ra = 0;
+		var t_gn = 0;
+		var t_st = 0;
+		var t_stt = 0;
+		var t_stt2 = 0;
+		if (title != ''){
+			anime.name = anime.name.toLowerCase();
+			anime.eng = anime.eng.toLowerCase();
+			anime.shortNames = anime.shortNames.toLowerCase();
+			anime.aliases = anime.aliases.toLowerCase();
+			var title_split = anime.name.split(/\s+/g);
+			if ( anime.eng != '-'){ var title_split_eng = anime.eng.split(/\s+/g) } else { var title_split_eng = anime.name.split(/\s+/g) };
+			var short_split = anime.shortNames.split(/\s+/g);
+			var alias_split = anime.aliases.split(/\s+/g);
+			for (k = 0; k < tslength; k++){
+				for (x0 = 0; x0 < title_split.length; x0++){
+					if (title_split[x0] == splited[k]){ t_n = 1;}
+				}
+				for (x1 = 0; x1 < title_split_eng.length; x1++){
+					if (title_split_eng[x1] == splited[k]){ t_n = 1;}
+				}
+				for (x2 = 0; x2 < short_split.length; x2++){
+					if (short_split[x2] == splited[k]){ t_n = 1;}
+				}
+				for (x3 = 0; x3 < alias_split.length; x3++){
+					if (alias_split[x3] == splited[k]){ t_n = 1;}
+				}
+			}
+		} else { t_n = 1;}
+		if (pname != ''){
+			anime.producer = anime.producer.toLowerCase();
+			var pname_split = anime.producer.split(/\s+/g);
+			for (k = 0; k < ptslength; k++){
+				for (x0 = 0; x0 < pname_split.length; x0++){
+					if (pname_split[x0] == psplited[k]){ t_pr = 1;}
+				}
+			}
+		} else { t_pr = 1;}
+		if (episodes != ''){
+			if (ep_sType == "0"){
+				if (episodes == anime.eps){
+					t_e = 1;
+				}
+			}
+			if (ep_sType == "1"){
+				if (anime.eps <= episodes){
+					t_e = 1;
+				}
+			}
+			if (ep_sType == "2"){
+				if (anime.eps >= episodes){
+					t_e = 1;
+				}
+			}
+			if (ep_sType == "3"){
+				if (anime.eps >= episodes && anime.eps <= eps_max){
+					t_e = 1;
+				}
+			}
+		} else { t_e = 1;}
+		if (state != -3){
+			if (state > -2){
+				if (anime.state == state ){
+					t_st = 1;
+				}
+			}
+			if (state == -2){
+				if (anime.hasAwards){
+					t_st = 1;
+				}
+			}
+			if (state == -4){
+				if (anime.eps == 0){
+					t_st = 1;
+				}
+			}
+		} else { t_st = 1;}
+		if (status != 0){
+			if (status == 1){ 
+				if (anime.isComplete){
+					t_stt = 1;
+				}
+			}
+			if (status == 2){ 
+				if (!anime.isComplete){
+					t_stt = 1;
+				}
+			}
+		} else { t_stt = 1;}
+		if (status2 != 0){
+			if (status2 == 3){ 
+				if (anime.isWatched){
+					t_stt2 = 1;
+				}
+			}
+			if (status2 == 4){ 
+				if (!anime.isWatched){
+					t_stt2 = 1;
+				}
+			}
+		} else { t_stt2 = 1;}
+		if (atype != 'all'){
+			if (atype == anime.type){
+				t_t = 1;
+			}
+		} else { t_t = 1; }
+		if (anfo != ''){
+			if (anfo == anime.nfo){
+				t_nfo = 1;
+			}
+		} else { t_nfo = 1; }
+		if (year != ''){
+			if (year_sType == "0"){
+				if (year == anime.year){
+					t_y = 1;
+				}
+			}
+			if (year_sType == "1"){
+				if (anime.year <= year){
+					t_y = 1;
+				}
+			}
+			if (year_sType == "2"){
+				if (anime.year >= year){
+					t_y = 1;
+				}
+			}
+			if (year_sType == "3"){
+				if (anime.year >= year && anime.year <= year_max){
+					t_y = 1;
+				}
+			}
+		} else { t_y = 1;}
+		if (votes != ''){
+			if (anime.votes >= votes){
+				t_v = 1;
+			}
+		} else { v_ids_ok = aids; t_v = 1;}
+		if (rating != ''){
+			if (anime.rating >= rating){
+				t_r = 1;
+			}
+		} else { t_r = 1;}
+		if (atts != ''){
+			if (anime.reviews >= atts){
+				t_rv = 1;
+			}
+		} else { t_rv = 1;}
+		if (attavg != ''){
+			if (anime.rrating >= attavg){
+				t_ra = 1;
+			}
+		} else { t_ra = 1;}
+		if (genres.length > 0 ){
+			var t_gn_s = 0
+			for (k = 0; k < anime.ngenres; k++){
+				for (x = 0; x < genres.length; x++){
+					if ( anime.genres[k] == genres[x] ) {
+					 	t_gn_s += 1;
+					}
+				}
+			}
+			if (t_gn_s == genres.length){t_gn = 1}
+		} else { t_gn = 1;}
+		if ( t_st == 1 && t_stt == 1 && t_stt2 == 1 && t_n == 1 && t_pr == 1 && t_nfo == 1 && t_e == 1 && t_t == 1 && t_y == 1 && t_r == 1 && t_v == 1 && t_rv == 1 && t_ra == 1 && t_gn == 1 ){ sh_ids.push (aids[i]);}
+	}	
+	if (sh_ids.length > 0){
+		var string = '';
+		var color = 0;
+		for (k = 0; k < sh_ids.length; k++){
+			if (color == 0){ color = 1 } else { color = 0};
+			var anime = eval ( "a" + sh_ids[k] );
+			var bname = '';
+			var aname = '';
+			if (pref_title == 0){ aname = anime.name };
+			if (pref_title == 1){ 
+				if ( anime.japkanji != '-'){ aname = anime.japkanji } else { aname = anime.name }
+			};
+			if (pref_title == 2){ 
+				if ( anime.eng != '-'){ aname = anime.eng } else { aname = anime.name }
+			};
+			if (pref_title2opt == 1){
+				if (pref_title2 == 0){ 
+					if ( anime.eng != '-'){ bname = anime.eng } else { bname = anime.name }
+				};
+				if (pref_title2 == 1){ 
+					if ( anime.japkanji != '-'){ bname = anime.japkanji } else { bname = anime.name }
+				};
+				if (pref_title2 == 2){ bname = anime.name };
+				aname = aname + ' ('+bname+')';
+			}
+			string += '<div id=a' + sh_ids[k] +' style="display:">'
+			if (anime.eps == 0){var ongoing = 1} else {var ongoing = 0}
+			string += '<table width="100%" cellpadding="0" cellspacing="0" class="lines">'
+			string += '<tr height="20px">'
+			string += '<td class="anime_table">&nbsp;<a href="javascript:showAnimePage(\'anime.htm?=a'+anime.id+'\');"'
+			if (pref_title2opt == 2){
+				if (pref_title2 == 0){ 
+					if ( anime.eng != '-'){ bname = anime.eng } else { bname = anime.name }
+				};
+				if (pref_title2 == 1){ 
+					if ( anime.japkanji != '-'){ bname = anime.japkanji } else { bname = anime.name }
+				};
+				if (pref_title2 == 2){ bname = anime.name };
+				string += ' title="Optional Title: ' + bname + '"';
+			}
+			string += '>' + aname + '</a> '
+			string += '</td>'
+			string += '<td align="center" class="anime_table" width="25">'
+			if (anime.isWishListed){
+				string += '<img src="images/wish_pri_'+anime.wishlist_priority+'.gif" width="15" height="13" title="on Wishlist: '+anime.wishlist_type_name+' | priority: '+anime.wishlist_priority_name+''
+				if (anime.wishlist_comment != ""){
+					string += ' | comment: '+anime.wishlist_comment+' '
+				}
+				string += '" border="0">'
+			}
+			string += '</td>'
+			string += '<td align="center" class="anime_table" width="25">'
+			if (ongoing){
+				string += '<img src="images/ongoing_tv.gif" width="15" height="13" title="Ongoing" border="0">'
+			}
+			string += '</td>'
+			string += '<td align="center" class="anime_table" width="25">'
+			if (anime.hasAwards){
+				string += '<img src="images/award_1.gif" width="15" height="13" title="This anime has awards" border="0">'
+			}
+			string += '</td>'
+			string += '<td align="center" class="anime_table" width="25"><img src="images/state_'+ anime.state +'.gif" width="15" height="13" Title="State: '+ anime.statename +'"></td>'
+			string += '<td align="center" class="anime_table" width="70">'
+			if (anime.isComplete){
+				 string += '<b> '+ anime.myEps +' / '+ anime.eps +'</b>'
+			} else { 
+				string += ' ' + anime.myEps +' / '+ anime.eps
+			}
+			string += '</td>'
+			string += '<td align="center" class="anime_table" width="70">'
+			if (anime.isWatched){
+				string += '<font color="#006600"><b> '+ anime.myWeps +' / '+ anime.eps +'</b></font>'
+			} else { 
+				string += ' ' + anime.myWeps +' / '+ anime.eps;
+			}
+			string += '</td>'
+			string += '<td align="center" class="anime_table" width="100"> ' + anime.typename + ' </td>'
+			string += '<td align="center" class="anime_table" width="100"> ' + anime.year + ' </td>'
+			string += '<td align="center" class="anime_table" width="100"> ' + anime.rating + ' ('+ anime.votes +') </td>'
+			string += '<td align="center" class="anime_table" width="100"> <a href="'+ anidb +'?show=animeatt&aid='+ anime.id +'" title="View reviews for '+ anime.name +'" target="_blank">'+ anime.rrating +'</a> ('+ anime.reviews +') </td>'
+			string += '</tr>'
+			string += '</table>'
+			string += '</div>'
+		}
+	} else { string = 'no animes found using search definitions.';}
+	document.getElementById("results").innerHTML = string;
+	showT('prefs');
+	document.location.href = '#preferences'
+}
+</script>
+</head>
+<body bgcolor="#868178" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF">
+<a name="top"></a> 
+  
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ani_table_local" bgcolor="#FDF8F0">
+  <tr>
+	  <td>
+		
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr background="images/topbar.gif" bgcolor="#868178"> 
+		  <td class="bars_head" height="20"><b><font size="2" color="#EFE6D8">&nbsp;Search 
+			Animes:</font></b></td>
+			
+		  <td align="right" class="bars_head"><a href="javascript:popup('help.htm?=search','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0"></a> 
+			<a href="javascript:window.close();"><img src="images/close.gif" width="16" height="16" border="0" alt="close window" title="close window"></a>&nbsp;</td>
+		  </tr>
+		</table>
+		
+	    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#EDE8E0">
+		  <tr> 
+			<td class="anime_table" height="20"><b>&nbsp;<a href="javascript:toggle('mylist');"><font color="#333333">Search</font></a> 
+			  <a href="#top"><font color="#333333">(<img src="images/sort_up.gif" width="9" height="10" border="0">)</font></a></b></td>
+		  </tr>
+		</table>
+		<form id="searchA" method="post" action="javascript:searchAnimes();"><div id=mylist style="display:">  
+	      <table width="100%" cellspacing="0" cellpadding="0" bgcolor="#FDF8F0" class="anime_table" style="border-color: #EEEEEE; border-style: solid; border-width: 1px 1px 1px 1px">
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" ><b>Title</b>:</td>
+			  <td  width="5">&nbsp;</td>
+			  <td > 
+				<input type="text" id="anime_name" maxlength=500 size=50 class="forms" name="text">
+				<br>
+				(note: currently only searchs by words, not characthers)</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" ><b>Producer</b>:</td>
+			  <td  width="5">&nbsp;</td>
+			  <td > 
+				<input type="text" id="producer" maxlength=500 size=50 class="forms" name="text">
+				<br>
+				(note: currently only searchs by words, not characthers)</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" ><b>AnimeNfo 
+				ID</b>:</td>
+			  <td  width="5">&nbsp;</td>
+			  <td > 
+				<input type="text" id="anfo" maxlength=500 size=10 class="forms" name="text">
+			  </td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" ><b>Episodes</b>:</td>
+			  <td >&nbsp;</td>
+			  <td > 
+				<select id="ep_sel" onChange="javascript:ep_selects();" class="forms" name="select">
+				  <option value="0" selected>Equals</option>
+				  <option value="1">Less than</option>
+				  <option value="2">More than</option>
+				  <option value="3">From</option>
+				</select>
+				<input type="text" id="anime_eps" maxlength=5 size=5 class="forms" name="text2">
+				<span id="ep_sel_from" style="display:none"> to 
+				<input type="text" id="anime_eps_to" maxlength=5 size=5 class="forms" name="text2">
+				</span></td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp; </td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" ><b>Type</b>:</td>
+			  <td >&nbsp;</td>
+			  <td > 
+				<select id="atype_sel" width="125" height="15" class="forms" align="center" name="select">
+				  <option value="all" selected>All</option>
+				  <option value="1">Unknown</option>
+				  <option value="2">TV</option>
+				  <option value="3">OVA</option>
+				  <option value="4">Movie</option>
+				  <option value="6">Web</option>
+				  <option value="5">Other</option>
+				</select>
+			  </td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" ><b>Show:</b></td>
+			  <td >&nbsp;</td>
+			  <td > 
+				<select id="status_sel" size="1" class="forms" name="select2">
+				  <option value="0" selected>All</option>
+				  <option value="1">Complete</option>
+				  <option value="2">Incomplete</option>
+				</select>
+				&nbsp;&amp;&nbsp; 
+				<select id="status_sel_2" size="1" class="forms" name="select4">
+				  <option value="0" selected>All</option>
+				  <option value="3">Watched</option>
+				  <option value="4">Unviewed</option>
+				</select>
+			  </td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr>
+			  <td width="150" valign="top" align="right" height="20" ><b>State:</b></td>
+			  <td >&nbsp;</td>
+			  <td > 
+				  <select id="state_sel" size="1" class="forms" name="select3">
+					<option value="-3" selected>All</option>
+					<option value="-1">Undefined</option>
+					<option value="0">Unknown</option>
+					<option value="1">On HDD</option>
+					<option value="2">On CD</option>
+					<option value="3">Deleted</option>
+					<option value="4">Shared</option>
+					<option value="5">Released</option>
+					<option value="-2">Has Awards</option>
+					<option value="-4">On Going</option>
+				  </select>
+				</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" ><b>Release 
+				Year </b>:</td>
+			  <td >&nbsp;</td>
+			  <td > 
+				<select id="year_sel" onChange="javascript:year_selects();" class="forms" name="select">
+				  <option value="0" selected>Equals</option>
+				  <option value="1">Less than</option>
+				  <option value="2">More than</option>
+				  <option value="3">From</option>
+				</select>
+				<input type="text" id="anime_year" maxlength=9 size=10 class="forms" name="text2">
+				<span id="year_sel_from" style="display:none"> to 
+				<input type="text" id="anime_year_to" maxlength=9 size=10 class="forms" name="text2">
+				</span> <br>
+				(format: yyyy or yyyy-yyyy)</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20" >&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20"><b>Rating</b>:</td>
+			  <td >&nbsp;</td>
+			  <td >at least 
+				<input type="text" id="anime_votes" maxlength=3 size=5 class="forms" name="text2">
+				votes and a rating of at least 
+				<input type="text" id="anime_rating" maxlength=5 size=5 class="forms" name="text2">
+				(input: x.xx, i.e. 3.15)</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20">&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20"> <b>Reviews</b>:</td>
+			  <td >&nbsp;</td>
+			  <td >at least 
+				<input type="text" id="anime_atts" maxlength=3 size=5 class="forms" name="text2">
+				reviews and a rating of at least 
+				<input type="text" id="anime_attavg" maxlength=5 size=5 class="forms" name="text2">
+				(input: x.xx, i.e. 3.15)</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20">&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20"> <a name="bystate"></a><b>Genres</b>:</td>
+			  <td >&nbsp;</td>
+			  <td > 
+				<table border=0 class="ani_tableHelp">
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_1" class="forms" name="checkbox">
+					  &nbsp;Action </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_2" class="forms" name="checkbox">
+					  &nbsp;Adventure </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_26" class="forms" name="checkbox">
+					  &nbsp;Cars </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_3" class="forms" name="checkbox">
+					  &nbsp;Comedy </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_25" class="forms" name="checkbox">
+					  &nbsp;Dementia </td>
+				  </tr>
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_10" class="forms" name="checkbox">
+					  &nbsp;Demons </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_35" class="forms" name="checkbox">
+					  &nbsp;Detective </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_4" class="forms" name="checkbox">
+					  &nbsp;Drama </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_5" class="forms" name="checkbox">
+					  &nbsp;Ecchi </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_11" class="forms" name="checkbox">
+					  &nbsp;Fantasy </td>
+				  </tr>
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_33" class="forms" name="checkbox">
+					  &nbsp;Game </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_34" class="forms" name="checkbox">
+					  &nbsp;Ghibli </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_6" class="forms" name="checkbox">
+					  &nbsp;Hentai </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_12" class="forms" name="checkbox">
+					  &nbsp;Historical </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_7" class="forms" name="checkbox">
+					  &nbsp;Horror </td>
+				  </tr>
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_27" class="forms" name="checkbox">
+					  &nbsp;Kids </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_14" class="forms" name="checkbox">
+					  &nbsp;Magic </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_15" class="forms" name="checkbox">
+					  &nbsp;Martial Arts </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_16" class="forms" name="checkbox">
+					  &nbsp;Mecha </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_28" class="forms" name="checkbox">
+					  &nbsp;Music </td>
+				  </tr>
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_17" class="forms" name="checkbox">
+					  &nbsp;Mystery </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_18" class="forms" name="checkbox">
+					  &nbsp;Parody </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_8" class="forms" name="checkbox">
+					  &nbsp;Romance </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_19" class="forms" name="checkbox">
+					  &nbsp;Samurai </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_20" class="forms" name="checkbox">
+					  &nbsp;School </td>
+				  </tr>
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_9" class="forms" name="checkbox">
+					  &nbsp;SciFi </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_31" class="forms" name="checkbox">
+					  &nbsp;Shoujo </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_37" class="forms" name="checkbox">
+					  &nbsp;Shoujo-Ai </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_30" class="forms" name="checkbox">
+					  &nbsp;Shounen </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_38" class="forms" name="checkbox">
+					  &nbsp;Shounen-Ai </td>
+				  </tr>
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_21" class="forms" name="checkbox">
+					  &nbsp;Space </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_22" class="forms" name="checkbox">
+					  &nbsp;Sports </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_23" class="forms" name="checkbox">
+					  &nbsp;Super Power </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_24" class="forms" name="checkbox">
+					  &nbsp;Vampires </td>
+					<td> 
+					  <input type="checkbox" id="search_genre_29" class="forms" name="checkbox">
+					  &nbsp;Yaoi </td>
+				  </tr>
+				  <tr> 
+					<td> 
+					  <input type="checkbox" id="search_genre_36" class="forms" name="checkbox">
+					  &nbsp;Yuri </td>
+				  </tr>
+				</table>
+				<br>
+				<small>NOTE: none checked means all.</small></td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20">&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20"><b>Action</b>:</td>
+			  <td >&nbsp;</td>
+			  <td > 
+				<input type="submit" id="do.search" value=" Start Search " class="forms" name="submit">
+				| 
+				<input type="reset" id="Reset" value="Reset Search" onClick="javascript:resetST();" class="forms" name="reset">
+			  </td>
+			</tr>
+			<tr> 
+			  <td width="150" valign="top" align="right" height="20">&nbsp;</td>
+			  <td >&nbsp;</td>
+			  <td >&nbsp;</td>
+			</tr>
+		  </table>
+		</div></form>
+		
+	    <table width="100%" border="0" cellspacing="2" cellpadding="0" bgcolor="#EDE8E0">
+		  <tr> 
+			<td class="anime_table" height="20"><b>&nbsp;<a href="javascript:toggle('prefs');"><font color="#333333">Results</font></a><a href="#top"><font color="#333333"> 
+			  (<img src="images/sort_up.gif" width="9" height="10" border="0">)</font></a></b></td>
+		  </tr>
+		</table>
+		
+	  <div id=prefs style="display:none">  
+	    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FDF8F0">
+		  <tr class="anime_table"> 
+			<td height="20" > 
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr> 
+				  <td class="bars_head">&nbsp;Title</td>
+				  <td width="100" class="bars_head">&nbsp;</td>
+				  <td width="25" class="bars_head">&nbsp;</td>
+				  <td width="70" class="bars_head"> 
+					<div align="center">Eps</div>
+				  </td>
+				  <td width="70" class="bars_head"> 
+					<div align="center">Seen</div>
+				  </td>
+				  <td width="100" class="bars_head"> 
+					<div align="center">Type</div>
+				  </td>
+				  <td width="100" class="bars_head"> 
+					<div align="center">Year</div>
+				  </td>
+				  <td width="100" class="bars_head"> 
+					<div align="center">Rating</div>
+				  </td>
+				  <td width="100" class="bars_head"> 
+					<div align="center">Reviews</div>
+				  </td>
+				</tr>
+			  </table>
+			</td>
+		  </tr>
+		  <tr class="anime_table"> 
+			<td valign="top" align="right" height="20" ><span id=results></span></td>
+		  </tr>
+		  <tr class="anime_table"> 
+			<td valign="top" align="right" height="20" >&nbsp;</td>
+		  </tr>
+		</table>
+		</div>
+	  </td>
+	</tr>
+  </table>
+</body>
+</html>

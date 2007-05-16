@@ -1,0 +1,46 @@
+a:active {  text-decoration: underline}
+a:hover {  text-decoration: underline}
+a:link {  text-decoration: none; color:  }
+a:visited {  text-decoration: none; color: }
+body {  font-family: Verdana, Arial, Helvetica, sans-serif;; font-size: 10px}
+.complete {font-color: #ff0000;}
+.episode_sel {  background-color: #FFFFCC}
+.episode {  background-color: }
+.anime_table {  font-size: xx-small}
+.ani_table {  border: #494d59; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.forms {  border: 1px #b0b0b0 dotted;}
+.ani_tableHelp { border: 1px #494d59 dotted; font-size: xx-small}
+.lines {  border-color: #EEEEEE; border-style: solid; border-width: 0px 0px 1px 0px}
+.bars_head { font-weight: bold; color: #464131; font-size: 10px;}
+#alpha_bar0 td.file {
+	background-color : transparent;
+}
+#alpha_bar0 td.over {
+	background-color: #EDE8E0;
+	color: #464131;
+	cursor:pointer;
+}
+#alpha_bar0 td {
+	width: 25px;
+	text-align: center;
+	font-size: xx-small;
+	color: #EFE6D8;	
+}
+#alpha_bar1 td.file {
+	background-color : transparent;
+}
+#alpha_bar1 td.over {
+	background-color: #EDE8E0;
+	color: #464131;
+	cursor:pointer;
+}
+#alpha_bar1 td {
+	width: 25px;
+	text-align: center;
+	font-size: xx-small;
+	color: #EFE6D8;	
+}
+.ani_table_local {  border: 2px #464131 solid; font-size: xx-small}
+.tab_active {  background-repeat: no-repeat; background-position: left top}
+.image {  padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px; border: #868178; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
+.img_hold {  padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}

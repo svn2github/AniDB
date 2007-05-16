@@ -1,0 +1,209 @@
+body
+{
+	background-color: #666666;
+	font-family: Arial;
+	font-size: 12px;
+	color: black;
+}
+td
+{
+	font-family: Arial;
+	font-size: 12px;
+}
+td.border_header {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 1px; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px;
+	background: url("images/table.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+td.border_header_right {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px;
+	background: url("images/table.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;	
+}
+
+td.border_header_left {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 1px; 
+	border-top-width: 1px; 
+	border-right-width: 0px; 
+	border-bottom-width: 1px;
+	background: url("images/table.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+td.border_header_middle {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 1px; 
+	border-right-width: 0px; 
+	border-bottom-width: 1px;
+	background: url("images/table.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+td.border_header_small {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 1px; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background: url("images/table_small.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+td.border_header_right_small {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background: url("images/table_small.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+td.border_header_left_small {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 1px; 
+	border-top-width: 1px; 
+	border-right-width: 0px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background: url("images/table_small.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+td.border_header_middle_small {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 1px; 
+	border-right-width: 0px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background: url("images/table_small.gif");
+	background-color: #DDDDDD;
+	font-weight: bold;
+}
+
+td.border {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 1px; 
+	border-top-width: 0px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background-color: #FFFFFF;
+}
+
+td.border_right {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 0px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background-color: #FFFFFF;
+}
+
+td.border_left {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 1px; 
+	border-top-width: 0px; 
+	border-right-width: 0px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background-color: #FFFFFF;
+}
+
+td.border_middle {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 0px; 
+	border-right-width: 0px; 
+	border-bottom-width: 1px;
+	font-size: 10px;
+	background-color: #FFFFFF;
+}
+
+td.border_right_no_bottom_border {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 0px; 
+	border-right-width: 1px; 
+	border-bottom-width: 0px;
+	font-size: 10px;
+	background-color: #FFFFFF;
+}
+
+td.border_left_no_bottom_border {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 1px; 
+	border-top-width: 0px; 
+	border-right-width: 0px; 
+	border-bottom-width: 0px;
+	font-size: 10px;
+	background-color: #FFFFFF;
+}
+
+td.border_middle_no_bottom_border {
+	border: #000000; 
+	border-style: solid;
+	border-left-width: 0px; 
+	border-top-width: 0px; 
+	border-right-width: 0px; 
+	border-bottom-width: 0px;
+	font-size: 10px;
+	background-color: #FFFFFF;
+}
+
+a:link
+{
+	text-decoration: none;
+	color: #000000;
+}
+a:active 
+{
+	text-decoration: none;
+	color: #000000;
+}
+a:visited
+{
+	text-decoration: none;
+	color: #000000;
+}
+a:hover
+{
+	text-decoration: underline overline;
+	color: #000000;
+}

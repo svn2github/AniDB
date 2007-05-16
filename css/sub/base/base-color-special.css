@@ -1,0 +1,25 @@
+.v_pos
+{
+	color: #006600;
+}
+
+.g_vital a,
+.v_neg,
+.v_high,
+span.diff,
+#layout-content td.reviewed.no a,
+#layout-content div.creqmod_all .state.return,
+#layout-content div.creqmod_all span.type.del
+{
+	color: red;
+}
+
+#layout-content div.msg_all tr.mod
+{
+	background-color: orange;
+}
+
+#layout-content div.mylist_list tr.all_watched td.stats
+{
+	color: darkgreen;
+}

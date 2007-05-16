@@ -1,0 +1,14 @@
+New on v1.5:
+
+- made using sdk 0.07.
+- mylist design changed to a more compact version, also more like aniDB's myList.
+- anime pages design changed.
+- added more information from aniDB, including Jap. Titles and Awards Info.
+- added some help to fields colors.
+- 3 views per episode, simple, expanded, full.
+- added some info on tooltips, hover on items to see tooltips.
+- user information of mylist is expandable, click on title to expand/retract.
+
+New on v1.0:
+
+- initial version.

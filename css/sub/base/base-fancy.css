@@ -1,0 +1,128 @@
+#layout-content div.g_errorbox,
+#layout-content div.g_warnbox,
+#layout-content div.g_notebox,
+#layout-content div.g_successbox
+{
+	padding: 0.4em;
+}
+
+#layout-content div.block
+{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+#layout-content div.block div.image
+{
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 10px;
+}
+#layout-content div.anime_all div.info > p
+{
+	margin-top: 10px;
+}
+
+
+#layout-content ul.g_navlist
+{
+	margin: 0 auto;
+	padding: 0.3em;
+	text-align: left;
+	margin-bottom: 1em;
+}
+
+#layout-content ul.g_navlist li
+{
+	display: inline;
+	list-style: none outside;
+}
+#layout-content ul.type
+{
+	float: left;
+}
+#layout-content ul.g_numonpage
+{
+	float: right;
+}
+#layout-content div.g_section,
+#layout-content div.g_filterlist
+{
+	clear: both;
+}
+
+#layout-content ul.g_actionlist,
+#layout-content ul.g_jumplist
+{
+	clear: both;
+}
+
+*.g_navprev
+{
+	float: left;
+	padding-left: 0.3em;
+}
+
+*.g_navnext
+{
+	float: right;
+	padding-right: 0.3em;
+}
+
+#layout-content div.g_definitionlist
+{
+	border: none;
+}
+
+#layout-content div table td.title div
+{
+	float: right;
+}
+
+#layout-content div.group_released tr td.languages span.i_icon,
+#layout-content div table td div.icoco span.i_icon,
+#layout-content div.anime_all div.groups td.languages span.i_icon,
+#layout-content div.anime_all div.episodes td.action .i_icon,
+#layout-content div.latest_completed td.icon span.i_icon
+{
+	float: left;
+	padding: 0px 2px 0px 2px;
+}
+
+#layout-content div.anime_all div.episodes td.action.episode,
+#layout-content div.anime_all div.episodes td.action.file
+{
+	width: 60px;
+}
+
+#layout-content div.addanimetitle_form input[type="text"],
+#layout-content div.addeptitle_form p input[type="text"]
+{
+	width: 21em;
+}
+
+#layout-content div.addanimetitle_form span.comment label,
+#layout-content div.addeptitle_form span.comment label,
+#layout-content div.addanimetitle_form span input,
+#layout-content div.addeptitle_form p span input
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+#layout-content div.addanimetitle_form p span label,
+#layout-content div.addeptitle_form p span label,
+#layout-content div.addanimetitle_form p span.header,
+#layout-content div.addeptitle_form p span.header
+{
+	display: none;
+}
+
+#layout-content div.anime_all a.action:before
+{
+	content: "[";
+}
+#layout-content div.anime_all a.action:after
+{
+	content: "]";
+}

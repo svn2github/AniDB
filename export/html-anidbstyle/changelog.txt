@@ -1,0 +1,110 @@
+History:
+
+version 2.3b (11.10.2005):
+	[+] added support for new special types (parody, traillers & others).
+	[-] fixed url for generic files.
+	[-] removed shared and released filters, as they aren't use anymore.
+
+version 2.3a (29.11.2004):
+	[!] bugfix version 
+	[+] added small support for file trade (only possible for 1 single anime files per message). 
+	[+] added Special count and Special Watched count to mylist. 
+	[+] added the air date option behaviour that was left out for mistake.
+	[-] minor bugfixes
+	[!] Note 1: if you selected files they are saved by cookies and will allways appear on a new instance of Trade. 
+
+version 2.3 (28.10.2004):
+	[!] major update version 
+	[+] added extended support for wishlist, with filters. 
+	[+] added a print page. 
+	[+] rewrote the Trade script. 
+	[+] added a new preferece "default date display". 
+	[+] added alternate color to the mylist rows. 
+	[+] added random features to the bug list. 
+	[-] minor bug fixes. 
+	[!] Note 1: the wishlist option only appers if export contains a wishlisted anime with files added. 
+	[!] Note 2: the myvote/mytempvote items aren't currently supported by the export, even though feature is present.
+
+Version 2.25 (14.10.2004):
+	[!] minor update version 
+	[+] added a redundant file crc info flag [new image added].
+	[+] added a image to show if a file comment is present. 
+	[+] added support for generic files. 
+	[+] added support for mylist filestate info. 
+	[+] added support for air and end dates of animes. 
+	[+] added support for the romanji and kanji episode titles. 
+	[+] added my vote/tmpvote info for animes. 
+	[+] added optional Anime Title Display option. 
+	[+] added optional anime title displays option [Title1, Title1 (Title2), hover Title2].
+	[+] added show hentai titles option. 
+	[+] added default Episode Title Display option. 
+	[+] added Hide Generic Files option.
+	[+] added wishlist support.
+	[-] fixed animeplanet links. 
+	[-] corrected and updated the ID's for various sections.. 
+	[-] corrected a small bug in the trade option. 
+	[-] minor bug fixes.
+
+version 2.2 (03.08.2004):
+	[!] BugFix/Update version.
+	[+] Rewrote the search script, now allows for searchs by eps/year "Equal to X", "Less Than X", "More Than X" and "From X to Y".
+	[-] Fixed a small bug in the preferences page, now it loads the current pref values at load.
+	[-] Fixed a small bug in the File Information page, where on Audio Bitrate it was showing the AudioCodecID instead of the correct Audio Bit Rate.
+	[-] Fixed a issue that prevented IE based browsers to display the Popup for Ep and FIle Information.
+
+Version 2.1 (11.05.2004):
+	[!] BugFix/Major Update Version.
+	[+] Added full support for NS browsers (Netscape 7+, Mozilla, FireFox).
+	[+] Added new option: Default Title Display (displays by default titles in Romanji)
+	[+] Advance Search: search by title now searches using title names, eng. names, short titles and aliases.
+
+Version 2.0 (04.05.2004):
+	[!] BugFix/Major Update Version.
+	[+] Optimized the code even more, so you get more cpu intensive code, but lower export times and definitly lower size exports, generation time for pages is still not too high, but then again i have a Atlhon XP 2100+ with 768mbs of Ram.
+	[+] Added a simple "filter by genre" to the mylist page.
+	[+] Added a "filter by letter" option to the mylist page
+	[+] Added a "search page", with lots of options to filter your list.
+	[+] Added a "Trade page"..
+	[+] Added show X Animes per Page Preference.
+	[+] Added several more help texts.
+	[-] The old Filter By status behaviour is lost, new behaviour is somewhat more elusive..
+	[-] Removed a bug in the File Information page where groups tended to be unknown.
+	[-] Lost some sleep over some of the javascript problems..
+
+Version 1.7 (21.04.2004):
+	[!] BugFix/Update Version.
+	[+] Optimized most of the javascript, use is more intensive, but html size is lower and generation time is also lower.
+	[+] Also added a Preferences popup (and icon), which adds the ability to change the default layout of the anime pages.
+	[+] Added a Help popup (and icon), all the things you wished to know is there.
+	[-] Removed some minor bugs, cleaned up html a bit.
+	[-] Removed the extra information level, popups are the away now.
+
+Version 1.5 (19.04.2004):
+	[!] BugFix/Update Version.
+	[!] Updated SDK to 0.08.
+	[+] Rewrite most of the javascript, use is more intensive.
+	[+] Also added a Episode Info popup, with all the information available in similiar popup in anidb.
+	[+] Included information on Temporary Ratings.
+	[+] Added Episode is a Recap icon to anime pages information.
+	[+] Added Anime Has Awards icon to mylist page.
+	[+] Added new filter to mylist, "anime has awards".
+	[-] Removed the [...] thingie, fid now shows the popup.
+	[-] Removed the extra information level, popups are the away now.
+	[-] Removed usage of "data_anime_award_id" id's to show award icons, uses a local icon for mylist page and only "data_anime_award_url" are used on the anime pages.
+
+
+Version 1.0 (18.04.2004):
+	[!] Initial Release.
+	[!] Uses SDK 0.07.
+	[!] Based mostly on the aniDB MyList layout and dynamics, but with some custom additions/layout changes ^_^.
+	[!] Show/Hide anime on MyList by state (undefined, unknown, on hdd, on cd, deleted, release and shared) and by status (complete, incomplete, watched and unviewed).
+	[!] Direct links to aniDB for info (anime info, episode info, file info and group info).
+	[!] Link to both animeNFO and Anime Planet info on selected animes.
+	[!] Uses all information available to exports, including Awards and Jap/Eng Titles.
+	[!] Uses local images to reduce server-side load on aniDB servers.
+	[!] Anime pages offer different levels of information: simple, expanded and extra (click on the [...] on the file row to see full information on the selected file).
+	[!] Uses some javascript and css stylesheets.
+
+By:	fahrenheit
+mail:	fahrenheit@netcabo.pt
+http:	http://pwp.netcabo.pt/fahrenheit

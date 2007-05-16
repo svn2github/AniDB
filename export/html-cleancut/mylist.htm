@@ -1,0 +1,352 @@
+<html>
+<head>
+<title>::AniDB.Net:: MyList Export</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js"></script>
+<script language="javascript" src="mcode.js"></script>
+<script language="javascript" src="scode.js"></script>
+<script language="javascript" src="tcode.js"></script>
+<script language="javascript" src="wcode.js"></script>
+<script language="javascript" src="mylist.js"></script>
+<script language="javascript">
+
+var vis = aids;
+var pref_animes_per_page = parseInt(pref_animes_per_page);
+var numpages = Math.ceil(vis.length / pref_animes_per_page);
+var page = 0;
+var curpage = 0;
+var svids = 0;
+var snids = 0;
+var cur_vids = 0;
+var cur_nids = 0;
+if ( pref_animes_per_page > vis.length ) { snids = vis.length; cur_nids = vis.length } else { snids = pref_animes_per_page; cur_nids = pref_animes_per_page };
+var last_vids = cur_vids;
+var last_nids = cur_nids;
+var spanNext = '<a href="javascript:nextPage();">next</a>';
+var spanPrev = '<a href="javascript:prevPage();">prev</a>';
+var cur_anime = '\'blank.htm\'';
+var sel_anime = 0;
+var wishlist_sel = 0;
+
+function init(){
+	writeAnime(vis,svids,snids);
+	writeSpans();
+	spanStats();
+}
+
+function SAdsStatus(){
+	var arg = document.getElementById("status_sel").value
+	dsStatus(arg);
+}
+
+function SThideState(){
+	var arg = document.getElementById("state_sel").value
+	hideState(arg);
+}
+
+</script>
+<style type="text/css">
+<!--
+.ani_table_local {  border: 2px #CCDDEE solid}
+.tab_active {  background-repeat: no-repeat; background-position: left top}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:init()">
+<div id=print_head style="display:none">
+<script language="javascript">
+	document.write('<p>aniDB Template Export for <b>'+user+'</b><br><font size="1"><a href="javascript:print(0);" title="reset view">print:off</a></font></p>');
+</script>
+</div>
+<div id=print_off_0 style="display:">
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr align="center"> 
+	<td background="images/tab_active.gif" class="tab_active" width="100" height="20"><font size="2"><a href="javascript:showMyList();">Mylist</a></font></td>
+	<td background="images/tab_active.gif" class="tab_active" width="100" height="20"><font size="2"><a href="javascript:showSearchPage();">Search</a></font></td>
+	<script language="javascript">
+	check_wishlist();
+	if (check_wish == 1){
+		document.write('<td background="images/tab_active.gif" class="tab_active" width="100" height="20"><font size="2"><a href="javascript:showWishlistPage();">WishList</a></font></td>');
+	}
+	if (pref_trade == 1){
+		document.write ('<td background="images/tab_active.gif" class="tab_active" width="100" height="20"><font size="2"><a href="javascript:trade();showTradePage();">Trade</a></font></td>');
+	}
+	</script>
+	<td width="100" height="20" background="images/tab_active.gif" class="tab_active"><font size="2"><a href="javascript:showStatsPage();">Options</a></font></td>
+	<td width="100" height="20" background="images/tab_active.gif" class="tab_active"><font size="2"><script language="javascript">document.write ('<a href="javascript:showAnimePage('+cur_anime+');">Anime</a>');</script></font></td>
+  </tr>
+</table>
+</div>
+<table cellpadding="0" cellspacing="0" width="100%" class="ani_table_local">
+  <tr valign="top"> 
+	<td>
+		<div id=ttop style=display:"> 
+		<div id=print_off_1 style="display:">
+	    <table border="0" cellspacing="0" cellpadding="0">
+		  <tr align="center"> 
+			<td id=mlst bgcolor="#F0F0EB" width="98" height="10"></td>
+			<td width="100" height="10"></td>
+			<script language="javascript">
+			if (check_wish == 1){
+				document.write ('<td id=wlst width="100" height="10"></td>');
+			}
+			if (pref_trade == 1){
+				document.write ('<td width="100" height="10"></td>');
+			}
+			</script>
+			<td width="100" height="10"></td>
+		  </tr>
+		</table>
+		</div>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr height="20px"> 
+			<td><font size="1" color="#333333">Title</font></td>
+			<td width="25">&nbsp;</td>
+			<td width="25">&nbsp;</td>
+			<td width="70"><font size="1" color="#333333">EPs</font></td>
+			<td width="70"><font size="1" color="#333333">Seen</font></td>
+			<td width="70"><font size="1" color="#333333">Type</font></td>
+			<td width="70"><font size="1" color="#333333">Rating</font></td>
+			<td width="25">&nbsp;</td>
+		  </tr>
+		</table>
+		<div id=print_off_2 style="display:">
+	    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr height="20px" bgcolor="#F0F0EB"> 
+		  <td align="right" width="50"><font size="1"><span id=prev></span>&nbsp;</font></td>
+		  <td align="center" bgcolor="#F0F0EB"><font size="1">Jump to : <a href="javascript:filterletter('all');">all</a> 
+			| <a href="javascript:filterletter('number');">0-9</a> | <a href="javascript:filterletter('a');">a</a> 
+			| <a href="javascript:filterletter('b');">b</a> | <a href="javascript:filterletter('c');">c</a> 
+			| <a href="javascript:filterletter('d');">d</a> | <a href="javascript:filterletter('e');">e</a> 
+			| <a href="javascript:filterletter('f');">f</a> | <a href="javascript:filterletter('g');">g</a> 
+			| <a href="javascript:filterletter('h');">h</a> | <a href="javascript:filterletter('i');">i</a> 
+			| <a href="javascript:filterletter('j');">j</a> | <a href="javascript:filterletter('k');">k</a> 
+			| <a href="javascript:filterletter('l');">l</a> | <a href="javascript:filterletter('m');">m</a> 
+			| <a href="javascript:filterletter('n');">n</a> | <a href="javascript:filterletter('o');">o</a> 
+			| <a href="javascript:filterletter('p');">p</a> | <a href="javascript:filterletter('q');">q</a> 
+			| <a href="javascript:filterletter('r');">r</a> | <a href="javascript:filterletter('s');">s</a> 
+			| <a href="javascript:filterletter('t');">t</a> | <a href="javascript:filterletter('u');">u</a> 
+			| <a href="javascript:filterletter('v');">v</a> | <a href="javascript:filterletter('w');">w</a> 
+			| <a href="javascript:filterletter('x');">x</a> | <a href="javascript:filterletter('y');">y</a> 
+			| <a href="javascript:filterletter('z');">z</a></font></td>
+		  <td align="left" width="50"><font size="1">&nbsp;<span id=next></span></font></td>
+		</tr>
+	  </table></div></div>
+	</td>
+  </tr>
+  <tr valign="top" height="100%"> 
+	<td > 
+	  <div id=animeItable></div>
+	</td>
+  </tr>
+  <tr valign="top"> 
+	<td ><div id=dttop style=display:">
+	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr height="20px" bgcolor="#F0F0EB"> 
+		  <td align="right" width="50"><font size="1"><span id=prev1></span>&nbsp;</font></td>
+		  <td align="center"><font size="1">Jump to : <a href="javascript:filterletter('all');">all</a> 
+			| <a href="javascript:filterletter('number');">0-9</a> | <a href="javascript:filterletter('a');">a</a> 
+			| <a href="javascript:filterletter('b');">b</a> | <a href="javascript:filterletter('c');">c</a> 
+			| <a href="javascript:filterletter('d');">d</a> | <a href="javascript:filterletter('e');">e</a> 
+			| <a href="javascript:filterletter('f');">f</a> | <a href="javascript:filterletter('g');">g</a> 
+			| <a href="javascript:filterletter('h');">h</a> | <a href="javascript:filterletter('i');">i</a> 
+			| <a href="javascript:filterletter('j');">j</a> | <a href="javascript:filterletter('k');">k</a> 
+			| <a href="javascript:filterletter('l');">l</a> | <a href="javascript:filterletter('m');">m</a> 
+			| <a href="javascript:filterletter('n');">n</a> | <a href="javascript:filterletter('o');">o</a> 
+			| <a href="javascript:filterletter('p');">p</a> | <a href="javascript:filterletter('q');">q</a> 
+			| <a href="javascript:filterletter('r');">r</a> | <a href="javascript:filterletter('s');">s</a> 
+			| <a href="javascript:filterletter('t');">t</a> | <a href="javascript:filterletter('u');">u</a> 
+			| <a href="javascript:filterletter('v');">v</a> | <a href="javascript:filterletter('w');">w</a> 
+			| <a href="javascript:filterletter('x');">x</a> | <a href="javascript:filterletter('y');">y</a> 
+			| <a href="javascript:filterletter('z');">z</a></font></td>
+		  <td align="left" width="50"><font size="1">&nbsp;<span id=next1></span></font></td>
+		</tr>
+	  </table></div>
+	  <div id=tbottom style="display:">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr height="20px"> 
+			<td align="left">
+			  <table border="0" cellspacing="0" cellpadding="0" class="anime_table">
+				<tr> 
+				  <td width="30" height="20" align="center" valign="top"><a href="javascript:toggle('filters_min');toggle('filters_max');toggle('fil_mais');toggle('fil_menos');"><span id=fil_mais style="display:"><img src="images/plus.gif" width="15" height="13" border="0"></span><span id=fil_menos style="display:none"><img src="images/minus.gif" width="15" height="13" border="0"></span></a></td>
+				  <td> 
+					<div id=filters_min style="display:"> 
+					  <table border="0" cellspacing="0" cellpadding="0" class="anime_table">
+						<tr valign="top"> 
+						  <td width="175" valign="middle">Show: 
+							<select id="status_sel" size="1" class="forms" onChange="javascript:SAdsStatus();">
+							  <option value="0" selected>All</option>
+							  <option value="1">Complete</option>
+							  <option value="2">Incomplete</option>
+							  <option value="3">Watched</option>
+							  <option value="4">Unviewed</option>
+							  <option value="5">On wishlist</option>
+							</select>
+						  </td>
+						  <td width="175" valign="middle">State: 
+							<select id="state_sel" size="1" class="forms" onChange="javascript:SThideState();">
+							  <option value="all" selected>All</option>
+							  <option value="udf">Undefined</option>
+							  <option value="unk">Unknown</option>
+							  <option value="hdd">On HDD</option>
+							  <option value="cd">On CD</option>
+							  <option value="awd">Has Awards</option>
+							  <option value="del">Deleted</option>
+							</select>
+						  </td>
+						  <td width="175" valign="middle">Type: 
+							<select id="type_sel2" size="1" width="125" height="15" class="forms" align="center" onChange="javascript:filter_type2()">
+							  <option value="all" selected>All</option>
+							  <option value="unk">Unknown</option>
+							  <option value="tv">TV</option>
+							  <option value="ova">OVA</option>
+							  <option value="mov">Movie</option>
+							  <option value="web">Web</option>
+							  <option value="otr">Other</option>
+							</select>
+						  </td>
+						  <td width="175" valign="middle">Genre: 
+							<select id="genre_sel2" size="1" width="125" height="15" class="forms" align="center" onChange="javascript:filter_genre2();">
+							  <option value="0" selected>All</option>
+								<option value="1">Action</option>
+								<option value="2">Adventure</option>
+								<option value="26">Cars</option>
+								<option value="3">Comedy</option>
+								<option value="25">Dementia</option>
+								<option value="10">Demons</option>
+								<option value="35">Detective</option>
+								<option value="4">Drama</option>
+								<option value="5">Ecchi</option>
+								<option value="11">Fantasy</option>
+								<option value="33">Game</option>
+								<option value="34">Ghibli</option>
+								<option value="6">Hentai</option>
+								<option value="12">Historical</option>
+								<option value="7">Horror</option>
+								<option value="27">Kids</option>
+								<option value="14">Magic</option>
+								<option value="15">Martial Arts</option>
+								<option value="16">Mecha</option>
+								<option value="28">Music</option>
+								<option value="17">Mystery</option>
+								<option value="18">Parody</option>
+								<option value="8">Romance</option>
+								<option value="19">Samurai</option>
+								<option value="20">School</option>
+								<option value="9">SciFi</option>
+								<option value="31">Shoujo</option>
+								<option value="37">Shoujo-Ai</option>
+								<option value="30">Shounen</option>
+								<option value="38">Shounen-Ai</option>
+								<option value="21">Space</option>
+								<option value="22">Sports</option>
+								<option value="23">Super Power</option>
+								<option value="24">Vampires</option>
+								<option value="29">Yaoi</option>
+								<option value="36">Yuri</option>
+							</select>
+						  </td>
+						</tr>
+					  </table>
+					</div>
+					<div id=filters_max style="display:none"> 
+					  <table border="0" cellspacing="0" cellpadding="0" class="anime_table">
+						<tr> 
+						  <td valign="top" width="175">Show:<font size="1"><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(1);" title="Click to Show/Hide animes by completeness status">complete<br>
+							</a>&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(2);" title="Click to Show/Hide animes by completeness status">incomplete</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(3);" title="Click to Show/Hide animes by watched status">watched<br>
+							</a>&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(4);" title="Click to Show/Hide animes by watched status">unviewed</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(5);" title="Click to Show/Hide animes on wishlist">on wishlist</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:dsStatus(0);" title="Click to Show all animes/reset view">show 
+							all</a></font></td>
+						  <td valign="top" width="175">State:<b></b><font size="1"><b><br>
+							</b>&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('udf');"><img src="images/rate_1.gif" width="15" height="13" title="State: mixed state" border="0"> 
+							- undefined</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('unk');"><img src="images/state_0.gif" width="15" height="13" title="State: unknown" border="0"> 
+							- unknown</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('hdd');"><img src="images/state_1.gif" width="15" height="13" title="State: on hdd" border="0"> 
+							- on HDD</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('cd');"><img src="images/state_2.gif" width="15" height="13" title="State: on cd" border="0"> 
+							- on CD</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('awd');"><img src="images/award_1.gif" width="15" height="13" title="State: has award(s)" border="0"> 
+							- has awards</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('del');"><img src="images/state_3.gif" width="15" height="13" title="State: deleted" border="0"> 
+							- deleted</a><br>
+							&nbsp;&nbsp;&nbsp;<a href="javascript:hideState('all');"><img src="images/state_all.gif" width="15" height="13" title="State: all" border="0"> 
+							- all</a></font></td>
+						  <td valign="top" width="175">Type:<br>
+							<select id="type_sel" size="7" width="125" height="15" class="forms" align="center" onChange="javascript:filter_type()">
+							  <option value="all" selected width="125" >All</option>
+								<option value="unk">Unknown</option>
+								<option value="tv">TV</option>
+								<option value="ova">OVA</option>
+								<option value="mov">Movie</option>
+								<option value="web">Web</option>
+								<option value="otr">Other</option>
+							  </select>
+						  </td>
+						  <td valign="top" width="175">Genre:<br>
+							  
+							<select id="genre_sel" size="8" width="125" height="15" class="forms" align="center" onChange="javascript:filter_genre();">
+							  <option value="0" selected>All</option>
+								<option value="1">Action</option>
+								<option value="2">Adventure</option>
+								<option value="26">Cars</option>
+								<option value="3">Comedy</option>
+								<option value="25">Dementia</option>
+								<option value="10">Demons</option>
+								<option value="35">Detective</option>
+								<option value="4">Drama</option>
+								<option value="5">Ecchi</option>
+								<option value="11">Fantasy</option>
+								<option value="33">Game</option>
+								<option value="34">Ghibli</option>
+								<option value="6">Hentai</option>
+								<option value="12">Historical</option>
+								<option value="7">Horror</option>
+								<option value="27">Kids</option>
+								<option value="14">Magic</option>
+								<option value="15">Martial Arts</option>
+								<option value="16">Mecha</option>
+								<option value="28">Music</option>
+								<option value="17">Mystery</option>
+								<option value="18">Parody</option>
+								<option value="8">Romance</option>
+								<option value="19">Samurai</option>
+								<option value="20">School</option>
+								<option value="9">SciFi</option>
+								<option value="31">Shoujo</option>
+								<option value="37">Shoujo-Ai</option>
+								<option value="30">Shounen</option>
+								<option value="38">Shounen-Ai</option>
+								<option value="21">Space</option>
+								<option value="22">Sports</option>
+								<option value="23">Super Power</option>
+								<option value="24">Vampires</option>
+								<option value="29">Yaoi</option>
+								<option value="36">Yuri</option>
+							  </select>
+						  </td>
+						</tr>
+					  </table>
+					</div>
+				  </td>
+				</tr>
+			  </table>
+			  </td>
+			<td align="right" valign="top"><span id=stats_pages></span></td>
+		  </tr>
+		</table>
+	  </div>
+	  <span id=wtbottom></span>
+	  </td>
+  </tr>
+</table>
+<p> 
+  <script language="javascript" type="text/javascript">document.write ('created using <a href="' + anidb + '"><b>aniDB</b></a> export feature.');</script>
+</p>
+</body>
+</html>

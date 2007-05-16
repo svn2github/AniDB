@@ -1,0 +1,113 @@
+AniDB category ids.
+last updated: 24.09.2004
+
+should this list be outdated you can also check the html
+code of the corresponding dropdowns on AniDB.
+
+Anime Cathegories
+1 	unknown
+2 	TV
+3 	OVA
+4 	Movie
+6 	Web
+5 	Other
+
+Audio Languages
+1 	unknown
+2 	japanese
+4 	english
+20 	arabic
+3 	chinese
+6 	french
+5 	german
+8 	italian
+17 	korean
+18 	polish
+15 	russian
+9 	spanish
+19 	swedish
+10 	dual (jap/eng)
+12 	dual (jap/ger)
+13 	dual (jap/rus)
+11 	dual (jap/span)
+14 	dual (eng/rus)
+
+Sub Languages
+1 	unknown
+2 	none
+3 	english
+14 	arabic
+15 	brasilian
+9 	chinese
+21 	czech
+16 	danish
+6 	dutch
+17 	finnish
+7 	french
+4 	german
+18 	hebrew
+5 	italian
+8 	japanese
+13 	korean
+12 	polish
+19 	portuguese
+11 	spanish
+20 	swedish
+10 	other
+
+Audio Codecs
+1 	unknown
+2 	AC3
+3 	DivX Audio
+4 	MP3 UNK
+5 	MP3
+6 	MP3 VBR
+7 	MSAudio
+8 	Ogg Vorbis
+9 	AAC
+10 	PCM
+
+Video Codecs
+1 	unknown
+2 	DivX UNK
+3 	DivX3
+5 	DivX4
+7 	DivX5
+17 	XviD
+9 	MPG1 (vcd)
+10 	MPG2 (svcd)
+11 	MPG4
+18 	MS MP4x
+12 	ASF
+19 	WMV9
+13 	MOV
+14 	RM (also ram)
+20 	RV9
+15 	Vivo
+21 	IV5
+16 	DVD
+
+Quality Ratings
+1 	unknown
+2 	very high
+3 	high
+4 	med
+5 	low
+6 	very low
+7 	corrupted
+8 	eyecancer
+
+File Source Type
+1 	unknown
+2 	camcorder
+3 	TV
+5 	DTV
+4 	VHS
+9 	VCD
+8 	SVCD
+6 	LD
+7 	DVD
+10 	HKDVD
+11 	www
+
+File extensions do not have ids

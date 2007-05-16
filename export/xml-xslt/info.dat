@@ -1,0 +1,15 @@
+(C) 2005 by Siddhi Pittayachawan
+Version 0.1 (21/05/2005)
+
+Template created by Siddhi Pittayachawan (style modified from html-orangewhite)
+
+This theme:
+- Compliant with W3C standards
+- Coded with XML, XSLT, DHTML, CSS, and JavaScript
+- Works with only browsers that fully support XML and XSLT
+- May not displayed correctly on IE because IE partially supports CSS and XML
+- Uses JavaScript as little as possible because XSLT can operate considerably faster than JavaScript
+- Tested with Mozilla Firefox 1.0.4
+- Allows you to easily change theme's colours by modifying a CSS file
+- Allows you to easily change theme's layout by modifying XSLT files
+- Data (XML), data formats (XSLT), and styles (CSS) are separate from each other

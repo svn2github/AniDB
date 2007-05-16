@@ -1,0 +1,25 @@
+(C) 2005 by fahrenheit [fahrenheit@netcabo.pt]
+version 1.0.2 (11.10.2005):
+
+Required Images:
+<a href="http://www.anidb.net/files/html-operatic/images.zip">http://www.anidb.net/files/html-operatic/images.zip</a>
+
+Operatic HTML theme:
+- Light themed template, uses a Multiple Page Layout scheme to display information.
+- Filter anime on MyList by state (undefined, unknown, on hdd, on cd, deleted, ongoing and has awards), status (complete, incomplete, watched and unviewed), type (TV, OVA, etc) and by Genre.
+- Popups with File Information and Episode Information for each file/episode.
+- Has an internal "Search page" and an "Trade page" (disabled by default).
+- Includes basic support for printing.
+- Includes support for wishlist (see change log for notes).
+- Includes Expand(!).
+- Includes MyVotes support.
+- Link to aniDB, animeNFO and Anime Planet for more info on selected files/episodes/animes.
+- Uses all information available to exports, including Awards, Temporary Votes and Jap/Eng Titles.
+- Uses local images to reduce server-side load on aniDB servers.
+- Anime pages offer different levels of information: simple and expanded (click on the [+]/[-] icons to expand colapse info).
+- Uses javascript (intensively), css stylesheets (light) and cookies (optional but recomended).
+- Tested and working with: IE 6.0, FireFox 1.0, Opera 8.0b1.
+
+note: requires Netscape 7.0+, IE 4.0+, Opera 5.11+, Mozilla 1.0+.
+
+<a href="http://www.anidb.net/forum/viewtopic.php?t=2517">Support, Feature Requests, Bug Reports?</a>

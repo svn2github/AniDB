@@ -1,0 +1,817 @@
+<html>
+<head>
+<title>AniDB : myList export</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="style.css" title="Light Blue" />
+<link rel="alternate stylesheet" type="text/css" href="stylew.css" title="White" />
+<link rel="alternate stylesheet" type="text/css" href="styleg.css" title="Green" />
+<script language="javascript">
+	document.write ('<div id=loading align=center top=15 left=15>');
+	document.write ('<table border=0 cellspacing=0 cellpadding=0 width=100% height=100%>');
+	document.write ('<tr><td width=100%>');
+	document.write ('<center><font size=2 color=red>Please wait while page is loading myList data...</font></center>');
+	document.write ('</td></tr>');
+	document.write ('</table>');
+	document.write ('</div>');
+</script>
+<script language="javascript" type="text/javascript" src="code.js"></script>
+<script language="javascript" type="text/javascript" src="tooltip.js"></script>
+<script language="javascript" type="text/javascript" src="mylist.js"></script>
+<script language="javascript" type="text/javascript">
+	var vis = aids;
+	var ckanimepaging = parseInt(ckanimepaging);
+	var numpages = Math.ceil(vis.length / ckanimepaging);
+	var page = 0;
+	var curpage = 0;
+	var svids = 0;
+	var snids = 0;
+	var cur_vids = 0;
+	var cur_nids = 0;
+	var xa;
+	var elist;
+	var flist;
+
+	if (ckanimepaging > vis.length)
+	{
+		snids = vis.length;
+		cur_nids = vis.length;
+	}
+	else
+	{
+		snids = ckanimepaging;
+		cur_nids = ckanimepaging;
+	}
+	var last_vids = cur_vids;
+	var last_nids = cur_nids;
+	var spanNext = '<a href="javascript:nextPage();">NEXT</a>';
+	var spanPrev = '<a href="javascript:prevPage();">PREV</a>';
+
+	function init()
+	{
+		setPreferences();
+		writeAnime(vis, svids, snids);
+		writeSpans();
+		reorder(0,0,0);
+		document.getElementById('loading').style.display = 'none';
+		document.getElementById('mainpage').style.display = 'block';
+		document.onkeydown = keyDown;
+	}
+
+	function setChildData(obj)
+	{
+		var itm = null;
+		var itmml = null;
+		var itmpref = null;
+		var itmapsrc = null;
+		var itmresults = null;
+		var anpgid = 'apage';
+		var mlpgid = 'mylist';
+		var prefid = 'preferences';
+		var anpgsrcid = 'apagesrc';
+		var resultsid = 'results';
+
+		if (document.getElementById)
+		{
+			itm = document.getElementById(anpgid);
+			itmml = document.getElementById(mlpgid);
+			itmpref = document.getElementById(prefid);
+			itmapsrc = document.getElementById(anpgsrcid);
+			itmresults = document.getElementById(resultsid);
+		}
+		else if (document.all)
+		{
+			itm = document.all[pgid];
+			itmml = document.all[mlpgid];
+			itmpref = document.all[prefid];
+			itmapsrc = document.all[anpgsrcid];
+			itmresults = document.all[resultsid];
+		}
+		else if (document.layers)
+		{
+			itm = document.layers[pgid];
+			itmml = document.layers[mlpgid];
+			itmpref = document.layers[prefid];
+			itmapsrc = document.layers[anpgsrcid];
+			itmresults = document.layers[resultsid];
+		}
+
+		itm.innerHTML = obj.document.body.innerHTML;
+		xa = obj.xa;
+		elist = obj.elist;
+		flist = obj.flist;
+		itmapsrc.src = '';
+
+		initCollapsePref();
+
+		if (itm.style)
+		{
+			itm.style.display = 'block';
+			itmml.style.display = 'none';
+			itmpref.style.display = 'none';
+			itmresults.style.display = 'none';
+		}
+	}
+
+	function writeSpans()
+	{
+		numpages = Math.ceil(vis.length / ckanimepaging);
+		document.getElementById('prev').innerHTML = 'PREV';
+		document.getElementById('prev1').innerHTML = 'PREV';
+
+		if (numpages > 1)
+		{
+			document.getElementById('next').innerHTML = '<a href="javascript:nextPage();">NEXT</a>';
+			document.getElementById('next1').innerHTML = '<a href="javascript:nextPage();">NEXT</a>';
+		}
+		else
+		{
+			document.getElementById('next').innerHTML = 'NEXT';
+			document.getElementById('next1').innerHTML = 'NEXT';
+		}
+	}
+
+	function nextPage()
+	{
+		if (curpage < numpages)
+		{
+			last_vids = cur_vids;
+			last_nids = cur_nids;
+			cur_vids = cur_nids;
+
+			if ((cur_nids + ckanimepaging) > vis.length)
+				cur_nids = vis.length;
+			else
+				cur_nids = cur_nids + ckanimepaging;
+			curpage = curpage + 1;
+
+			writeAnime(vis, cur_vids, cur_nids);
+
+			document.getElementById('next').innerHTML = spanNext;
+			document.getElementById('next1').innerHTML = spanNext;
+			document.getElementById('prev').innerHTML = spanPrev;
+			document.getElementById('prev1').innerHTML = spanPrev;
+
+			if ((curpage + 1) == numpages)
+			{
+				document.getElementById('next').innerHTML = 'NEXT';
+				document.getElementById('next1').innerHTML = 'NEXT';
+			}
+			else
+			{
+				document.getElementById('next').innerHTML = spanNext;
+				document.getElementById('next1').innerHTML = spanNext;
+			}
+		}
+		else
+		{
+			document.getElementById('next').innerHTML = 'NEXT';
+			document.getElementById('next1').innerHTML = 'NEXT';
+			document.getElementById('prev').innerHTML = spanPrev;
+			document.getElementById('prev1').innerHTML = spanPrev;
+		}
+	}
+
+	function prevPage()
+	{
+		if (curpage > 0)
+		{
+			var dif = 0;
+			cur_vids = last_vids;
+			cur_nids = last_nids;
+			curpage = curpage - 1;
+
+			writeAnime(vis, cur_vids, cur_nids);
+
+			if (cur_vids - ckanimepaging < 0)
+				dif = (ckanimepaging - (cur_vids - ckanimepaging));
+			else
+				dif = ckanimepaging;
+
+			last_vids = cur_vids - dif;
+			last_nids = cur_nids - dif;
+
+			document.getElementById('prev').innerHTML = spanPrev;
+			document.getElementById('prev1').innerHTML = spanPrev;
+			document.getElementById('next').innerHTML = spanNext;
+			document.getElementById('next1').innerHTML = spanNext;
+
+			if ((curpage - 1) < 0)
+			{
+				document.getElementById('prev').innerHTML = 'PREV';
+				document.getElementById('prev1').innerHTML = 'PREV';
+			}
+			else
+			{
+				document.getElementById('prev').innerHTML = spanPrev;
+				document.getElementById('prev1').innerHTML = spanPrev;
+			}
+		}
+		else
+		{
+			document.getElementById('prev').innerHTML = 'PREV';
+			document.getElementById('prev1').innerHTML = 'PREV';
+			document.getElementById('next').innerHTML = spanNext;
+			document.getElementById('next1').innerHTML = spanNext;
+		}
+	}
+
+	function writeAnime(visible, vids, nids)
+	{
+		var output = '';
+		var tmp = nids;
+		var linestyle = '';
+		if (nids > vis.length)
+			nids = vis.length;
+		var k = 0;
+
+		output = '<div id=page' + k + ' style="display:">';
+
+		for (i = vids; i < nids; i++)
+		{
+			var anime = alist[visible[i]];
+
+			if (cktitlestyle == 0)
+			{
+				var aname = anime.name;
+				var acroname = 'English name: ' + anime.eng;
+			}
+
+			if (cktitlestyle == 1)
+			{
+				if (anime.japkanji != '-')
+				{
+					var aname = anime.japkanji;
+					var acroname = 'Romaji name: ' + anime.name;
+				}
+				else
+				{
+					var aname = anime.name;
+					var acroname = 'English name: ' + anime.eng;
+				}
+			}
+
+			if (cktitlestyle == 2)
+			{
+				if (anime.eng != '-')
+				{
+					var aname = anime.eng;
+					var acroname = 'Romaji name: ' + anime.name;
+				}
+				else
+				{
+					var aname = anime.name;
+					var acroname = 'English name: ' + anime.eng;
+				}
+			}
+
+			if (anime.isWatched)
+				linestyle = 'lineseen';
+			else
+				linestyle = 'line';
+
+			output += '<div id=a' + visible[i] + ' style="display:">';
+			output += '<table cellpadding=0 cellspacing=0 width=100%>';
+			output += '<tr height=20 class=' + linestyle  + ' onMouseOver="this.className=\'over\';" onMouseOut="this.className=\'' + linestyle + '\';">';
+			output += '<td><a href="#anime" title="' + acroname + '" OnClick="openAnimePage(\'' + anime.id + '\');">' + aname + '</a>';
+			if (anime.isWishlist)
+			{
+				if (anime.wishlistcomment != '')
+					output += ' <img src="images/pri_' + anime.wishlistprio + '.gif" width=15 height=13 title="' + anime.wishlisttypename + ", " + anime.wishlistcomment + '"></td>';
+				else
+					output += ' <img src="images/pri_' + anime.wishlistprio + '.gif" width=15 height=13 title="' + anime.wishlisttypename + '"></td>';
+			}
+			else
+				output += '</td>';
+ 			output += '<td align=center width=15>';
+			if (anime.hasAwards)
+				output += '<img src="images/award_win.gif" width=15 height=15 title="This anime has awards">';
+			output += '</td>';
+			output += '<td align=center width=15><img src="images/state_' + anime.state + '.gif" width=15 height=13 Title="'+ anime.statename +'"></td>';
+			output += '<td width=80 nowrap>';
+			if (anime.isWatched)
+			{
+				output += anime.myEps + ' / ' + anime.eps + '</td>';
+				output += '<td width=60 nowrap>';
+				output += anime.myWeps + ' / ' + anime.eps + '</td>';
+				output += '<td width=60 nowrap>' + anime.size + '</td>';
+				output += '<td width=70 nowrap>' + anime.rating + ' (' + anime.votes + ')</td>';
+				output += '<td width=80 nowrap>' + anime.temprating + ' (' + anime.tempvotes + ')</td>';
+				output += '<td width=80 nowrap><a href="' + anidb + '?show=animeatt&aid=' + anime.id + '" title="View reviews for ' + anime.name + '" target="_blank">' + anime.rrating + '</a> (' + anime.reviews + ')</td>';
+			}
+			else
+			{
+				output += '<b>' + anime.myEps + ' / ' + anime.eps + '</b></td>';
+				output += '<td width=60 nowrap>';
+				output += '<b>' + anime.myWeps + ' / ' + anime.eps + '</b></td>';
+				output += '<td width=60 nowrap><b>' + anime.size + '</b></td>';
+				output += '<td width=70 nowrap><b>' + anime.rating + ' (' + anime.votes + ')</b></td>';
+				output += '<td width=80 nowrap><b>' + anime.temprating + ' (' + anime.tempvotes + ')</b></td>';
+				output += '<td width=80 nowrap><b><a href="' + anidb + '?show=animeatt&aid=' + anime.id + '" title="View reviews for ' + anime.name + '" target="_blank">' + anime.rrating + '</a> (' + anime.reviews + ')</b></td>';
+			}
+			output += '</tr>';
+			output += '</table>';
+			output += '</div>';
+		}
+		vids = vids + ckanimepaging;
+		tmp = nids + ckanimepaging;
+
+		if (tmp > visible.length)
+		{
+			nids = visible.length;
+			tmp = nids;
+		}
+
+		if (tmp <= visible.length)
+			nids = tmp;
+
+		output += '</div>';
+
+		document.getElementById('animeTable').innerHTML = output;
+	}
+
+	function searchAnimes()
+	{
+		var title = document.getElementById('animeSearch').value;
+		title = title.toLowerCase();
+		var split = title.split(/\s+/g);
+		var tslength = split.length;
+		var sh_ids = new Array();
+
+		for (i = 0; i < aids.length; i++)
+		{
+			var anime = alist[aids[i]];
+
+			var t_n = 0;
+			var t_e = 0;
+			var t_t = 0;
+			var t_y = 0;
+			var t_r = 0;
+			var t_v = 0;
+			var t_rv = 0;
+			var t_ra = 0;
+			var t_gn = 0;
+
+			if (title != '')
+			{
+				var sa_name = anime.name.toLowerCase();
+				var sa_eng = anime.eng.toLowerCase();
+				var sa_shortNames = anime.shortNames.toLowerCase();
+				var sa_aliases = anime.aliases.toLowerCase();
+
+				var title_split = sa_name.split(/\s+/g);
+				if (anime.eng != '-')
+					var title_split_eng = sa_eng.split(/\s+/g);
+				else
+					var title_split_eng = sa_name.split(/\s+/g);
+				var short_split = sa_shortNames.split(/\s+/g);
+				var alias_split = sa_aliases.split(/\s+/g);
+
+				for (k = 0; k < tslength; k++)
+				{
+					for (x0 = 0; x0 < title_split.length; x0++)
+					{
+						if (title_split[x0] == split[k])
+							t_n = 1;
+					}
+					for (x1 = 0; x1 < title_split_eng.length; x1++)
+					{
+						if (title_split_eng[x1] == split[k])
+							t_n = 1;
+					}
+					for (x2 = 0; x2 < short_split.length; x2++)
+					{
+						if (short_split[x2] == split[k])
+							t_n = 1;
+					}
+					for (x3 = 0; x3 < alias_split.length; x3++)
+					{
+						if (alias_split[x3] == split[k])
+							t_n = 1;
+					}
+				}
+			}
+			else
+			{
+				t_n = 1;
+			}
+
+			if (t_n == 1)
+				sh_ids.push(aids[i]);
+		}
+
+		if (sh_ids.length > 0)
+		{
+			var string = '';
+
+			string += '<div id=a' + sh_ids[k] + ' style="display:">';
+			string += '<center>';
+			string += '<table cellpadding=0 cellspacing=0 width=95%>';
+			string += '<tr height=20 class=header>';
+			string += '<td colspan=8><b>Search Results</b></td>';
+			string += '<td align=right><img class=link src="images/close.gif" width=16 height=16 title="Close Results" OnClick="closeResults();"></td>';
+			string += '</tr>';
+
+			for (k = 0; k < sh_ids.length; k++)
+			{
+				var anime = alist[sh_ids[k]];
+
+				if (cktitlestyle == 0)
+				{
+					var aname = anime.name;
+					var acroname = 'English name: ' + anime.eng;
+				}
+
+				if (cktitlestyle == 1)
+				{
+					if (anime.japkanji != '-')
+					{
+						var aname = anime.japkanji;
+						var acroname = 'Romaji name: ' + anime.name;
+					}
+					else
+					{
+						var aname = anime.name;
+						var acroname = 'English name: ' + anime.eng;
+					}
+				}
+
+				if (cktitlestyle == 2)
+				{
+					if (anime.eng != '-')
+					{
+						var aname = anime.eng;
+						var acroname = 'Romaji name: ' + anime.name;
+					}
+					else
+					{
+						var aname = anime.name;
+						var acroname = 'English name: ' + anime.eng;
+					}
+				}
+
+				if (anime.isWatched)
+					linestyle = 'lineseen';
+				else
+					linestyle = 'line';
+
+				string += '<tr height=20 class=' + linestyle  + ' onMouseOver="this.className=\'over\';" onMouseOut="this.className=\'' + linestyle + '\';">';
+				string += '<td><a href="#anime" title="' + acroname + '" OnClick="openAnimePage(\'' + anime.id + '\');">' + aname + '</a></td>';
+				string += '<td align=center width=15>';
+				if (anime.hasAwards)
+					string += '<img src="images/award_win.gif" width=15 height=13 title="This anime has awards">';
+				string += '</td>';
+				string += '<td align=center width=15><img src="images/state_' + anime.state + '.gif" width=15 height=13 Title="'+ anime.statename +'"></td>';
+				string += '<td width=80 nowrap>';
+				if (anime.isWatched)
+				{
+					string += anime.myEps + ' / ' + anime.eps + '</td>';
+					string += '<td width=60 nowrap>';
+					string += anime.myWeps + ' / ' + anime.eps + '</td>';
+					string += '<td width=60 nowrap>' + anime.size + '</td>';
+					string += '<td width=70 nowrap>' + anime.rating + ' (' + anime.votes + ')</td>';
+					string += '<td width=80 nowrap>' + anime.temprating + ' (' + anime.tempvotes + ')</td>';
+					string += '<td width=80 nowrap><a href="' + anidb + '?show=animeatt&aid=' + anime.id + '" title="View reviews for ' + anime.name + '" target="_blank">' + anime.rrating + '</a> (' + anime.reviews + ')</td>';
+				}
+				else
+				{
+					string += '<b>' + anime.myEps + ' / ' + anime.eps + '</b></td>';
+					string += '<td width=60 nowrap>';
+					string += '<b>' + anime.myWeps + ' / ' + anime.eps + '</b></td>';
+					string += '<td width=60 nowrap><b>' + anime.size + '</b></td>';
+					string += '<td width=70 nowrap><b>' + anime.rating + ' (' + anime.votes + ')</b></td>';
+					string += '<td width=80 nowrap><b>' + anime.temprating + ' (' + anime.tempvotes + ')</b></td>';
+					string += '<td width=80 nowrap><b><a href="' + anidb + '?show=animeatt&aid=' + anime.id + '" title="View reviews for ' + anime.name + '" target="_blank">' + anime.rrating + '</a> (' + anime.reviews + ')</b></td>';
+				}
+				string += '</tr>';
+			}
+
+			string += '</table>';
+			string += '</center>';
+			string += '</div>';
+		}
+		else
+		{
+				string = '<center>';
+				string += '<table cellpadding=0 cellspacing=0 width=95%>';
+				string += '<tr height=20 class=header>';
+				string += '<td colspan=8><b>';
+				string += 'No animes found matching \'' + title + '\'';
+				string += '</b></td>';
+				string += '<td align=right><img class=link src="images/close.gif" width=16 height=16 title="Close Results" OnClick="closeResults();"></td>';
+				string += '</tr>';
+				string += '</table>';
+				string += '</center>';
+		}
+
+		document.getElementById('results').innerHTML = string;
+  		document.getElementById('results').style.display = 'block';
+		document.location.href = '#results'
+	}
+
+	function closeResults()
+	{
+		document.getElementById('results').style.display = 'none';
+	}
+</script>
+</head>
+<body onLoad="init();">
+<div id=mainpage style="DISPLAY: none; Z-INDEX: 0">
+<table border=0 cellspacing=0 cellpadding=4 width=100%>
+<script language="javascript" type="text/javascript">
+	document.write('<tr class=title>');
+	document.write('<td valign=middle>');
+	document.write('<font size=4 color=white><b>' + user.toUpperCase() + '</b></font>');
+	document.write('</td>');
+	document.write('<td align=right valign=middle>');
+	document.write('<img class=link src="images/preferences.gif" width=16 height=16 title="Show/Hide Preferences" OnClick="showHide(\'preferences\'); self.location=\'#preferences\';">');
+	document.write('</td>');
+	document.write('</tr>');
+ 	document.write('<tr class=title>');
+	document.write('<td>');
+	document.write('<font size=1 color=white>');
+	document.write('There are ' + animecount + ' animes, ' + epcount + ' episodes and ' + filecount + ' files in list. Total accumulated size of the collection: ' + bytecount_h + '.');
+	document.write('</font>');
+	document.write('</td>');
+	document.write('<td align=right><font size=1 color=white>List created on ' + cdate_short + '</font></td>');
+	document.write('</tr>');
+</script>
+</table>
+<br>
+<div id=mylist style="DISPLAY: show; Z-INDEX: 0">
+<table id=main border=0 cellspacing=0 cellpadding=0 width=100%>
+	<tr>
+		<td align=left valign=top>
+			<table cellpadding=0 cellspacing=0 width=100%>
+				<tr>
+					<td>
+						<table border=0 cellspacing=0 cellpadding=0 width=100%>
+							<tr height=30 class=header>
+							    <td>Title</font> <img id=name_sort_up class=link src="images/srtupon.gif" width=13 height=13 title="sort ascending" onClick="javascript:reorder(0,0,0);"><img id=name_sort_down class=link src="images/srtdnoff.gif" width=13 height=13 title="sort descending" onClick="javascript:reorder(0,1,0);"></td>
+								<td width=15>&nbsp;</td>
+								<td width=15>&nbsp;</td>
+							    <td width=80 nowrap>Episodes <img id=eps_sort_up class=link src="images/srtupoff.gif" width=13 height=13 title="sort ascending" onClick="javascript:reorder(1,0,0);"><img id=eps_sort_down class=link src="images/srtdnoff.gif" width=13 height=13 title="sort descending" onClick="javascript:reorder(1,1,0);"></td>
+							    <td width=60 nowrap>Seen <img id=seen_sort_up class=link src="images/srtupoff.gif" width=13 height=13 title="sort ascending" onClick="javascript:reorder(2,0,0);"><img id=seen_sort_down class=link src="images/srtdnoff.gif" width=13 height=13 title="sort descending" onClick="javascript:reorder(2,1,0);"></td>
+							    <td width=60 nowrap>Size <img id=size_sort_up class=link src="images/srtupoff.gif" width=13 height=13 title="sort ascending" onClick="javascript:reorder(3,0,0);"><img id=size_sort_down class=link src="images/srtdnoff.gif" width=13 height=13 title="sort descending" onClick="javascript:reorder(3,1,0);"></td>
+							    <td width=70 nowrap>Rating <img id=rating_sort_up class=link src="images/srtupoff.gif" width=13 height=13 title="sort ascending" onClick="javascript:reorder(4,0,0);"><img id=rating_sort_down class=link src="images/srtdnoff.gif" width=13 height=13 title="sort descending" onClick="javascript:reorder(4,1,0);"></td>
+							    <td width=80 nowrap>Temp R. <img id=trating_sort_up class=link src="images/srtupoff.gif" width=13 height=13 title="sort ascending" onClick="javascript:reorder(5,0,0);"><img id=trating_sort_down class=link src="images/srtdnoff.gif" width=13 height=13 title="sort descending" onClick="javascript:reorder(5,1,0);"></td>
+							    <td width=80 nowrap>Reviews <img id=review_sort_up class=link src="images/srtupoff.gif" width=13 height=13 title="sort ascending" onClick="javascript:reorder(6,0,0);"><img id=review_sort_down class=link src="images/srtdnoff.gif" width=13 height=13 title="sort descending" onClick="javascript:reorder(6,1,0);"></td>
+							</tr>
+						</table>
+		   				<table border=0 cellspacing=0 cellpadding=0 width=100%>
+			  				<tr height=20 class=file>
+								<td align=right width=50><span id=prev></span>&nbsp;</td>
+								<td align=center>
+										<table border=0 cellspacing=0 cellpadding=0>
+											<tr>
+												<td onClick="javascript:filterLetter('all');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">all</td>
+												<td onClick="javascript:filterLetter('number');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">0-9</td>
+												<td onClick="javascript:filterLetter('a');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">a</td>
+												<td onClick="javascript:filterLetter('b');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">b</td>
+												<td onClick="javascript:filterLetter('c');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">c</td>
+												<td onClick="javascript:filterLetter('d');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">d</td>
+												<td onClick="javascript:filterLetter('e');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">e</td>
+												<td onClick="javascript:filterLetter('f');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">f</td>
+												<td onClick="javascript:filterLetter('g');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">g</td>
+												<td onClick="javascript:filterLetter('h');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">h</td>
+												<td onClick="javascript:filterLetter('i');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">i</td>
+												<td onClick="javascript:filterLetter('j');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">j</td>
+												<td onClick="javascript:filterLetter('k');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">k</td>
+												<td onClick="javascript:filterLetter('l');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">l</td>
+												<td onClick="javascript:filterLetter('m');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">m</td>
+												<td onClick="javascript:filterLetter('n');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">n</td>
+												<td onClick="javascript:filterLetter('o');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">o</td>
+												<td onClick="javascript:filterLetter('p');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">p</td>
+												<td onClick="javascript:filterLetter('q');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">q</td>
+												<td onClick="javascript:filterLetter('r');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">r</td>
+												<td onClick="javascript:filterLetter('s');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">s</td>
+												<td onClick="javascript:filterLetter('t');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">t</td>
+												<td onClick="javascript:filterLetter('u');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">u</td>
+												<td onClick="javascript:filterLetter('v');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">v</td>
+												<td onClick="javascript:filterLetter('w');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">w</td>
+												<td onClick="javascript:filterLetter('x');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">x</td>
+												<td onClick="javascript:filterLetter('y');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">y</td>
+												<td onClick="javascript:filterLetter('z');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">z</td>
+											</tr>
+										</table>
+								</td>
+								<td align=left width=50>&nbsp;<span id=next></span></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td><span id=animeTable></span></td>
+				</tr>
+				<tr>
+					<td>
+						<form OnSubmit="searchAnimes();return false;">
+						    <table border=0 cellspacing=0 cellpadding=0 width=100%>
+								<tr height=20 class=file>
+									<td align=right width=50><span id=prev1></span>&nbsp;</td>
+									<td align=center>
+										<table border=0 cellspacing=0 cellpadding=0>
+											<tr>
+												<td onClick="javascript:filterLetter('all');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">all</td>
+												<td onClick="javascript:filterLetter('number');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">0-9</td>
+												<td onClick="javascript:filterLetter('a');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">a</td>
+												<td onClick="javascript:filterLetter('b');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">b</td>
+												<td onClick="javascript:filterLetter('c');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">c</td>
+												<td onClick="javascript:filterLetter('d');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">d</td>
+												<td onClick="javascript:filterLetter('e');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">e</td>
+												<td onClick="javascript:filterLetter('f');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">f</td>
+												<td onClick="javascript:filterLetter('g');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">g</td>
+												<td onClick="javascript:filterLetter('h');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">h</td>
+												<td onClick="javascript:filterLetter('i');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">i</td>
+												<td onClick="javascript:filterLetter('j');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">j</td>
+												<td onClick="javascript:filterLetter('k');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">k</td>
+												<td onClick="javascript:filterLetter('l');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">l</td>
+												<td onClick="javascript:filterLetter('m');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">m</td>
+												<td onClick="javascript:filterLetter('n');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">n</td>
+												<td onClick="javascript:filterLetter('o');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">o</td>
+												<td onClick="javascript:filterLetter('p');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">p</td>
+												<td onClick="javascript:filterLetter('q');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">q</td>
+												<td onClick="javascript:filterLetter('r');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">r</td>
+												<td onClick="javascript:filterLetter('s');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">s</td>
+												<td onClick="javascript:filterLetter('t');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">t</td>
+												<td onClick="javascript:filterLetter('u');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">u</td>
+												<td onClick="javascript:filterLetter('v');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">v</td>
+												<td onClick="javascript:filterLetter('w');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">w</td>
+												<td onClick="javascript:filterLetter('x');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">x</td>
+												<td onClick="javascript:filterLetter('y');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">y</td>
+												<td onClick="javascript:filterLetter('z');" onMouseOver="this.className='over';" onMouseOut="this.className='file';">z</td>
+											</tr>
+										</table>
+									</td>
+									<td align=left width=50>&nbsp;<span id=next1></span></td>
+								</tr>
+							</table>
+							<table border=0 cellspacing=0 cellpadding=0 width=100%>
+								<tr height=30 class=header valign=middle>
+									<td><b>FILTER</b> [<span id=filterused>NONE</span>]</td>
+									<td>
+										by state:&nbsp;&nbsp;
+										<a href="javascript:selectState('udf');"><img src="images/rate_1.gif" width=15 height=13 class=link title="State: mixed state"></a>
+										<a href="javascript:selectState('unk');"><img src="images/state_0.gif" width=15 height=13 class=link title="State: unknown"></a>
+										<a href="javascript:selectState('hdd');"><img src="images/state_1.gif" width=15 height=13 class=link title="State: on hdd"></a>
+										<a href="javascript:selectState('cd');"><img src="images/state_2.gif" width=15 height=13 class=link title="State: on cd"></a>
+										<a href="javascript:selectState('del');"><img src="images/state_3.gif" width=15 height=13 class=link title="State: deleted"></a>
+										<a href="javascript:selectState('awd');"><img src="images/award_win.gif" width=15 height=13 class=link title="State: has award(s)"></a>
+										<a href="javascript:selectState('all');"><img src="images/state_all.gif" width=15 height=13 class=link title="State: all"></a>
+										&nbsp;&nbsp;
+										by status:&nbsp;&nbsp;
+										<select id=status_sel onChange="filterStatus()">
+											<option value=complete>Complete</option>
+											<option value=incomplete>Incomplete</option>
+											<option value=viewed>Viewed</option>
+											<option value=unviewed>Unviewed</option>
+											<option value=wishlist>On wishlist</option>
+											<option value=all selected>All</option>
+										</select>
+										&nbsp;&nbsp;
+										by type:&nbsp;&nbsp;
+										<select id=type_sel onChange="filterType()">
+											<option value=all selected>All</option>
+											<option value=tv>TV</option>
+											<option value=ova>OVA</option>
+											<option value=mov>Movie</option>
+											<option value=web>Web</option>											
+											<option value=otr>Other</option>
+											<option value=unk>Unknown</option>
+										</select>
+									</td>
+									<td align=right><b>SEARCH</b></td>
+									<td align=right>
+										<input type=text id=animeSearch size=15>&nbsp;&nbsp;<input type=button id=submit value="DO" class=ibutton OnClick="searchAnimes();return false;">
+									</td>
+								</tr>
+							</table>
+						</form>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<br>
+</div>
+<iframe id=apagesrc style="DISPLAY: none; Z-INDEX: 1"></iframe>
+<div id=apage style="DISPLAY: none; Z-INDEX: 1"></div>
+<div id=results style="DISPLAY: none; Z-INDEX: 1"></div>
+<div id=preferences style="DISPLAY: none; Z-INDEX: 1">
+<form>
+	<table border=0 cellspacing=0 cellpadding=4>
+		<tr class=header>
+			<td colspan=7><b>General Preferences</b></td>
+		    <td align=right valign=middle><img class=link src="images/close.gif" width=16 height=16 title="Close Preferences" OnClick="showHide('preferences'); self.location='#top';"></td>
+		</tr>
+		<tr class=file>
+			<td align=left>Page style</td>
+			<td align=left colspan=7 width=500>
+				<select size=1 id=style onChange="setStyle();">
+					<option value=0>Light Blue</option>
+					<option value=1>White</option>
+					<option value=2>Green</option>
+				</select>
+			</td>
+		</tr>
+		<tr class=file>
+			<td align=left>Default anime title type</td>
+			<td align=left colspan=7 width=500>
+				<select size=1 id=titlestyle onChange="setTitleStyle();">
+					<option value=0>Japanese, Romaji</option>
+					<option value=1>Japanese, Kanji</option>
+					<option value=2>English</option>
+				</select>
+			</td>
+		</tr>
+		<tr class=file>
+			<td align=left>Default episode title type</td>
+			<td align=left colspan=7 width=500>
+				<select size=1 id=episodestyle onChange="setEpisodeTitleStyle();">
+					<option value=0>English</option>
+					<option value=1>Japanese, Kanji</option>
+					<option value=2>Japanese, Romaji</option>
+				</select>
+			</td>
+		</tr>
+		<tr class=file>
+			<td align=left>Number of entries per page</td>
+			<td align=left colspan=7 width=500>
+				<select size=1 id=animepaging onChange="setAminePaging();">
+					<option value=0>20</option>
+					<option value=1>25</option>
+					<option value=2>30</option>
+					<option value=3>50</option>
+				</select>
+			</td>
+		</tr>
+		<tr class=file>
+			<td colspan=8>Enable copy to clipboard on Internet Explorer & Mozilla based browsers <input type=checkbox id=clipboard onClick="setFormValue('clipboard');"></td>
+		</tr>
+		<tr class=file>
+			<td colspan=8>Enable auto collapse of anime episodes <input type=checkbox id=collapse onClick="setFormValue('collapse');"></td>
+		</tr>
+		<tr class=header>
+			<td colspan=8><b>Preferences for ed2k Links</b></td>
+		</tr>
+		<tr class=file>
+			<td align=left>EpNo style</td>
+			<td align=left colspan=7 width=500>
+				<select size=1 id=epnostyle onChange="setFormValue('epnostyle');">
+					<option value=1>leave it as it is</option>
+					<option value=0>convert to max digits adding 0s</option>
+				</select>
+			</td>
+		</tr>
+		<tr class=file>
+			<td align=left>Replace spaces in file name</td>
+			<td align=left colspan=7 width=500>
+				<select size=1 id=spacesstyle onChange="setSpacesStyle();">
+				<option value=0>no replace</option>
+				<option value=1>by dots</option>
+				<option value=2>by underscores</option>
+				</select>
+			</td>
+		</tr>
+		<tr class=header>
+			<td colspan=8><b>Preferences for ed2k Custom Link</b></td>
+		</tr>
+		<tr class=file>
+			<td align=left>Group</td>
+			<td align=left colspan=7 width=500>
+				<select size=1 id=groupstyle onChange="setFormValue('groupstyle');">
+				<option value=1>added to the end</option>
+				<option value=0>added to the start</option>
+				</select>
+			</td>
+		</tr>
+		<tr class=file>
+			<td>
+				File name
+			</td>
+			<td colspan=7>
+				Title <input type=checkbox id=title onClick="setFormValue('title');">
+				&nbsp;&nbsp;- <input type=checkbox id=sep1 onClick="setFormValue('sep1');">
+				&nbsp;&nbsp;Episode <input type=checkbox id=episodestr onClick="setFormValue('episodestr');">
+				&nbsp;&nbsp;EpNo <input type=checkbox id=epno onClick="setFormValue('epno');">
+				&nbsp;&nbsp;- <input type=checkbox id=sep2 onClick="setFormValue('sep2');">
+				&nbsp;&nbsp;Name <input type=checkbox id=epname onClick="setFormValue('epname');">
+				&nbsp;&nbsp;- <input type=checkbox id=sep3 onClick="setFormValue('sep3');">
+				&nbsp;&nbsp;Video Codec <input type=checkbox id=codec onClick="setFormValue('codec');">
+			</td>
+		</tr>
+		<tr class=file>
+			<td colspan=8>
+				Add CRC (if available) to the end of the file name <input type=checkbox id=crc onClick="setFormValue('crc');">
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+<script>
+//	Debug option - should be disabled on release
+//	window.clipboardData.setData( 'Text', document.documentElement.outerHTML );
+</script>
+</div>
+</body>
+</html>

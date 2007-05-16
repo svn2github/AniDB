@@ -1,0 +1,27 @@
+body {font-family: verdana, arial, helvetica; font-size: 12px;}
+p {font-family: verdana, arial, helvetica; font-size: 12px;}
+p.alt {font-family: verdana, arial, helvetica; font-size: 12px; color: #ffffff;}
+a:link, a:visited, a:active {color: #0000cd; text-decoration: none;}
+a:hover {color: #ff0000;}
+a.alt:link, a.alt:visited, a.alt:active {color: #ffffff; text-decoration: none;}
+a.alt:hover {color: #fffacd;}
+tr.title {background-color: #000000; color: #ffffff;}
+tr.header {background-color : #666666; color: #ffffff;}
+tr.info {background-color : #efefef;}
+tr.line {background-color : #d3d3d3;}
+tr.lineseen {background-color : #a9a9a9;}
+tr.file, td.file {background-color : #e6e6fa;}
+tr.generic {background-color: #e6e6e6;}
+tr.filecrcno {background-color : #f2c0c0;}
+tr.filecrcyes {background-color : #d8e8b6;}
+tr.over {background-color : #828282; color: #ffffff;}
+td.over {background-color : #828282; color: #ffffff; cursor: pointer;}
+td {padding-left: 10px; padding-right: 10px; font-size: 10px;}
+hr {color: #000000; background-color: #000000; height: 4px;}
+img {border: 0; vertical-align: middle;}
+img.link {cursor: pointer;}
+input {font-size: 10px; vertical-align: middle;}
+select {font-size: 10px; vertical-align: middle;}
+
+#dhtmlpointer {left: -300px; position: absolute; visibility: hidden; z-index: 101;}
+#dhtmltooltip {font-family: ms sans serif, tahoma, helvetica; background-color: #fffff6; border: 1px solid black; color: black; font-size: 8pt; left: -300px; overflow: hidden; padding: 4px; position: absolute; text-overflow: ellipsis; visibility: hidden; width: 200px; z-index: 100;}

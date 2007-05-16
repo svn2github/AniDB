@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Preferences</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="style.css" type="text/css">
+<script language="javascript" src="code.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+function init(){
+	document.getElementById("sel_info").value = getCookie("pref_expand_info") || 1;
+	document.getElementById("sel_eps").value = getCookie("pref_expand_eps") || 0;
+	document.getElementById("sel_perpage").value = getCookie("pref_animes_per_page") || 25;
+	document.getElementById("sel_trade").value = getCookie("pref_trade") || 0;
+	document.getElementById("sel_title").value = getCookie("pref_title") || 0;
+	document.getElementById("sel_title2").value = getCookie("pref_title2") || 0;
+	document.getElementById("sel_title2opt").value = getCookie("pref_title2opt") || 2;
+	document.getElementById("sel_etitle").value = getCookie("pref_etitle") || 0;
+	document.getElementById("sel_hentai").value = getCookie("pref_hentai") || 0;
+	document.getElementById("sel_generic").value = getCookie("pref_generic") || 1;
+	document.getElementById("sel_dates").value = getCookie("pref_dates") || 1;
+}
+
+function changeVars(){
+	var pref_expand_info = document.getElementById("sel_info").value;
+	var pref_expand_eps = document.getElementById("sel_eps").value;
+	var pref_animes_per_page = document.getElementById("sel_perpage").value;
+	var pref_trade = document.getElementById("sel_trade").value;
+	var pref_title = document.getElementById("sel_title").value;
+	var pref_title2 = document.getElementById("sel_title2").value;
+	var pref_title2opt = document.getElementById("sel_title2opt").value;
+	var pref_etitle = document.getElementById("sel_etitle").value;
+	var pref_hentai = document.getElementById("sel_hentai").value;
+	var pref_generic = document.getElementById("sel_generic").value;
+	var pref_dates = document.getElementById("sel_dates").value;
+	setCookie("pref_expand_info",pref_expand_info);
+	setCookie("pref_expand_eps",pref_expand_eps);
+	setCookie("pref_animes_per_page",pref_animes_per_page);
+	setCookie("pref_trade",pref_trade);
+	setCookie("pref_title",pref_title);
+	setCookie("pref_title2",pref_title2);
+	setCookie("pref_title2opt",pref_title2opt);
+	setCookie("pref_etitle",pref_etitle);
+	setCookie("pref_hentai",pref_hentai);
+	setCookie("pref_generic",pref_generic);
+	setCookie("pref_dates",pref_dates);
+	window.open("mylist.htm","mylist");
+}
+
+</script>
+</head>
+<body bgcolor="#868178" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" text="#000000" link="#0000FF" vlink="#0000FF" alink="#0000FF" onLoad="javascript:init();">
+<form id="form1" method="post" action="javascript:changeVars();">
+  <table width="100%" class="ani_table_local" bgcolor="#EDE8E0" cellpadding="0" cellspacing="0">
+	<tr background="images/topbar.gif" bgcolor="#868178"> 
+	  <td width="200" class="bars_head" bgcolor="#868178" height="20"><font color="#EFE6D8">&nbsp;Preferences</font></td>
+	  <td align="right" class="bars_head" height="20">&nbsp;</td>
+	  <td align="right" class="bars_head" height="20" background="images/topbar.gif" bgcolor="#868178"><a href="javascript:popup('help.htm?=prefs','Help','700','350');"><img src="images/help.gif" width="15" height="13" border="0" title="Show Help"></a> <a href="javascript:window.close();"><img src="images/close.gif" width="16" height="16" border="0" alt="close window" title="close window"></a>&nbsp;</td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25"> Expand Information onLoad:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_info" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>----</option>
+		  <option value="1">yes</option>
+		  <option value="0">no</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25"> Expand Episodes onLoad:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_eps" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>----</option>
+		  <option value="1">yes</option>
+		  <option value="0">no</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25"> Number of Animes per Page:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_perpage" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>----</option>
+		  <option value="5">5</option>
+		  <option value="10">10</option>
+		  <option value="15">15</option>
+		  <option value="20">20</option>
+		  <option value="25">25</option>
+		  <option value="30">30</option>
+		  <option value="40">40</option>
+		  <option value="50">50</option>
+		  <option value="100">100</option>
+		  <option value="150">150</option>
+		  <option value="200">200</option>
+		  <option value="250">250</option>
+		  <option value="500">500</option>
+		  <option value="750">750</option>
+		  <option value="1000">1K</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25"> 
+		<div align="right">Show Hentai Animes:</div>
+	  </td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_hentai" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>----</option>
+		  <option value="1">yes</option>
+		  <option value="0">no</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25"> 
+		<div align="right">Show Generic Files:</div>
+	  </td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_generic" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>----</option>
+		  <option value="1">yes</option>
+		  <option value="0">no</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25"> 
+		<div align="right">Show Trade Option:</div>
+	  </td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_trade" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>----</option>
+		  <option value="1">yes</option>
+		  <option value="0">no</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25">Default Anime Title Display:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_title" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>------------------</option>
+		  <option value="0">Japanese - Romanji</option>
+		  <option value="1">Japanese - Kanji</option>
+		  <option value="2">English</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25">Optional Anime Title Display:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_title2" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>------------------</option>
+		  <option value="0">English</option>
+		  <option value="1">Japanese - Kanji</option>
+		  <option value="2">Japanese - Romanji</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25">Optional Anime Title Layout:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_title2opt" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>------------------</option>
+		  <option value="0">Title 1</option>
+		  <option value="1">Title 1 (Title 2)</option>
+		  <option value="2">hover (Title 2)</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25">Default Episode Title Display:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_etitle" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>------------------</option>
+		  <option value="0">English</option>
+		  <option value="1">Japanese - Romanji</option>
+		  <option value="2">Japanese - Kanji</option>
+		</select>
+	  </td>
+	</tr>
+	<tr> 
+	  <td width="200" align="right" height="25">Default Date Display:</td>
+	  <td height="25">&nbsp;</td>
+	  <td height="25"> 
+		<select id="sel_dates" size="1" onChange="javascript:changeVars();" class="forms">
+		  <option selected>------------------</option>
+		  <option value="0">DB Date</option>
+		  <option value="1">Air Date</option>
+		</select>
+	  </td>
+	</tr>
+	<tr align="center"> 
+	  <td colspan="3" height="30"> 
+		<input type="submit" id="Submit" value="Change Options" class="forms">
+		| 
+		<input type="button" name="Button" value="Change Layout" class="forms" onClick="popup('layout.htm','layout','1000','300');">
+	  </td>
+	</tr>
+  </table>
+</form>
+</body>
+</html>
