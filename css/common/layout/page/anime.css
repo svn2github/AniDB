@@ -1,0 +1,49 @@
+#layout-content div.anime_all div.info th span.i_icon
+{
+	float: right;
+}
+
+#layout-content div.anime_all div.episodes table.eplist
+{
+	width: 99%;
+}
+
+#layout-content div.anime_all div.episodes div.mylist_add
+{
+	margin-top: 1em;
+}
+
+/*#layout-content div.anime_all div.episodes table table.filelist td.ftype .i_icon,
+#layout-content div.anime_all div.episodes td.ed2k .i_icon,
+#layout-content div.anime_all div.episodes td.stat .i_icon,
+#layout-content div.anime_all div.episodes td.action.file .i_icon
+{
+	padding-left: 5px;
+	float: left;
+}
+#layout-content div.anime_all div.episodes td.action.file
+{
+	width: 60px;
+}*/
+
+#layout-content div.anime_all div.episodes td.action.episode,
+#layout-content div.anime_all div.episodes td.action.file
+{
+	width: 60px;
+}
+
+#layout-content div.anime_all div.mylist table td
+{
+	padding: 1em;
+}
+
+#layout-content div.anime_all div.mylist table td span.i_icon
+{
+	margin-left: 1em;
+}
+
+#layout-content div.anime_all div.mylist div.g_actionlist
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}

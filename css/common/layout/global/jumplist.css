@@ -1,0 +1,66 @@
+#layout-content ul.g_jumplist
+{
+	height: 1.2em;
+}
+
+#layout-content table + ul.g_jumplist,
+#layout-content ul.g_jumplist + table
+{
+	margin-top: 1em;
+}
+
+#layout-content ul.g_jumplist
+{
+	clear: both;
+	padding-left: 0;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	width: 100%;
+	text-align: center;	
+}
+#layout-content ul.g_actionlist li,
+#layout-content ul.g_jumplist li
+{
+	display: inline;
+	font-style: italic;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+#layout-content ul.g_actionlist li a,
+#layout-content ul.g_jumplist li a
+{
+	display: inline;
+	font-style: normal;
+}
+#layout-content ul.g_jumplist li.prev:after,
+#layout-content ul.g_jumplist li.next:after,
+#layout-content ul.g_jumplist li.other:after
+{
+	content: "";
+}
+#layout-content ul.g_jumplist li:after
+{
+	font-style: normal;
+	content: " |";
+}
+#layout-content ul.g_jumplist li.prev
+{
+	padding-left: 1em;
+	float: left;
+}
+#layout-content ul.g_jumplist li.next
+{
+	padding-right: 1em;
+	float: right;
+}
+#layout-content ul.g_jumplist li.all:before
+{
+	font-style: normal;
+	content: "Jump to: ";
+}
+#layout-content ul.g_actionlist li+li:before
+{
+	content: " - ";
+}

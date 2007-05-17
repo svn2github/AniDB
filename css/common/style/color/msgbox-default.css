@@ -1,0 +1,37 @@
+#layout-content div.g_errorbox
+{
+	border: 1px solid #DD0000;
+	background-color: #FFE5E5;
+}
+#layout-content div.g_warnbox
+{
+	border: 1px solid #F46F0B;
+	background-color: #FFF0E5;
+}
+#layout-content div.g_notebox
+{
+	border: 1px solid #AFAF00;
+	background-color: #FFFFDF;
+}
+#layout-content div.g_successbox
+{
+	border: 1px solid #2EB42E;
+	background-color: #E5FFE5;
+}
+
+#layout-content div.g_errorbox h3
+{
+	color: #FF0000;
+}
+#layout-content div.g_warnbox h3
+{
+	color: #F46F0B;
+}
+#layout-content div.g_notebox h3
+{
+	color: #AFAF00;
+}
+#layout-content div.g_successbox h3
+{
+	color: #2EB42E;
+}

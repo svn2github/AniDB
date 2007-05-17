@@ -1,0 +1,23 @@
+#layout-content div.addanimetitle_form input[type="text"],
+#layout-content div.addeptitle_form p input[type="text"]
+{
+	width: 21em;
+}
+
+#layout-content div.addanimetitle_form span.comment label,
+#layout-content div.addeptitle_form span.comment label,
+#layout-content div.addanimetitle_form span input,
+#layout-content div.addeptitle_form p span input
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#layout-content div.addanimetitle_form p span label,
+#layout-content div.addeptitle_form p span label,
+#layout-content div.addanimetitle_form p span.header,
+#layout-content div.addeptitle_form p span.header
+{
+	display: none;
+}
