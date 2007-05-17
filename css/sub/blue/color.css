@@ -1,0 +1,57 @@
+body/*,
+#layout-content div.g_definitionlist table*/
+{
+	color: #2E3C55;
+	border-color: #FFFFFF;
+	background: #a1b4cd url(images/blue-bg-nav.gif) left repeat-y;
+}
+
+a:link,a:active,a:visited
+{
+	color : #006699;
+}
+
+
+#layout-nav a
+{
+	color: #EFEFEF;
+}
+
+a:hover,
+#layout-nav a:hover
+{
+	color : #FFFFFF;
+}
+
+#layout-nav
+{
+	background: #486187;
+}
+
+#layout-content,
+#layout-footer
+{
+	background-color: #e7f0ff;
+}
+
+th,
+#layout-content h1,
+#layout-content div.main_all div.news h4,
+#layout-content div.main_all div.rightbar h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+	color: #4f5e77;
+	background-color: #a1b4cd;
+}
+
+#layout-content tr.g_odd,
+#layout-content li.g_odd,
+#layout-content span.g_odd
+{
+	background-color: #cbd6e5;
+}
+
+#layout-menu > div > ul > li:hover
+{
+	background-color: #577096;
+}
