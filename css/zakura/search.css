@@ -1,0 +1,43 @@
+/*---------------------------------
+			@SEARCH
+----------------------------------*/
+
+div.search_all div.search table {
+	width: 100%;
+}
+div.search_all div.search td {
+	padding: 0.4em;
+}
+div.search_all div.search td table {
+	margin: 0;
+}
+div.search_all div.search td table * {
+	padding: 0.2em;
+	border: none;
+}
+div.search_all div.search caption {
+	display: none;
+}
+div.search_all div.search tr.action {
+	text-align: center;
+	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+}
+div.search_all div.search tr.genres td.value i {
+	color: #ac0d72;
+}
+div.search_all div.search tr.genres table td {
+	padding-right: 1em;
+}
+
+/* search results */
+div.search_all div.search_filter {
+	text-align: center;
+}
+div.search_all table.search_results {
+	width: 100%;
+	margin: 1em 0;
+}
+div.search_all table.search_results td.anime {
+	font-weight: bold;
+	width: 40%;
+}

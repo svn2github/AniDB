@@ -1,0 +1,119 @@
+/*---------------------------------
+		@ICONS (AniDB Originals) 
+----------------------------------*/
+
+.i_araward {background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_araward.gif);}
+.i_censored {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_censored.gif);}
+.i_comment {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_comment.gif);}
+.i_crc_no {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_crc_no.gif);}
+.i_crc_yes {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_crc_yes.gif);}
+.i_file_delete {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_delete.gif);}
+.i_file_ed2k {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_ed2k.gif);}
+.i_file_edit {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_edit.gif);}
+.i_file_removemylist {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_removemylist.gif);}
+.i_filestate_corrupted {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_corrupted.gif);}
+.i_filestate_edited {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_edited.gif);}
+.i_filestate_ontv {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_ontv.gif);}
+.i_filestate_onvhs {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_onvhs.gif);}
+.i_filestate_selfripped {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_selfripped.gif);}
+.i_filestate_theater {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_theater.gif);}
+.i_greenbar {background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_greenbar.gif);}
+.i_greenbarh {background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_greenbarh.gif);}
+.i_hanger {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_hanger.gif);}
+.i_new2 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_new2.gif);}
+.i_new_icon {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_new_icon.gif);}
+.i_no_rev {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_no_rev.gif);}
+.i_nonotify {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_nonotify.gif);}
+.i_notify {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_notify.gif);}
+.i_orangebar {background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_orangebar.gif);}
+.i_pri_high {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_pri_high.gif);}
+.i_pri_low {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_pri_low.gif);}
+.i_pri_med {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_pri_med.gif);}
+.i_rate_corrupted {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rate_corrupted.gif);}
+.i_rate_eyecancer {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rate_eyecancer.gif);}
+.i_rate_unknown {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rate_unknown.gif);}
+.i_recap {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_recap.gif);}
+.i_rev {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rev.gif);}
+.i_state_release {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_release.gif);}
+.i_state_shared {background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_shared.gif);}
+.i_uncensored {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_uncensored.gif);}
+.i_vrs_1 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_1.gif);}
+.i_vrs_2 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_2.gif);}
+.i_vrs_3 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_3.gif);}
+.i_vrs_4 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_4.gif);}
+.i_vrs_5 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_5.gif);}
+.i_ask {background-image: url(http://www.anidb.net/css/anidbstyle/images/ask.gif);}
+.i_back {background-image: url(http://www.anidb.net/css/anidbstyle/images/back.gif);}
+.i_punkt {background-image: url(http://www.anidb.net/css/anidbstyle/images/button_punkt.gif);}
+.i_signup {background-image: url(http://www.anidb.net/css/anidbstyle/images/button_signup.gif);}
+.i_suchen {background-image: url(http://www.anidb.net/css/anidbstyle/images/button_suchen.gif);}
+.i_empty {background-image: url(http://www.anidb.net/css/anidbstyle/images/empty.gif);}
+.i_invalid {background-image: url(http://www.anidb.net/css/anidbstyle/images/invalid.gif);}
+.i_na {background-image: url(http://www.anidb.net/css/anidbstyle/images/na.gif);}
+.i_none {background-image: url(http://www.anidb.net/css/anidbstyle/images/none.gif);}
+.i_nopic {background-image: url(http://www.anidb.net/css/anidbstyle/images/nopic.gif);}
+.i_mybuddy {background-image: url(http://www.anidb.net/css/anidbstyle/images/mybuddy.gif);}
+.i_yourbuddy {background-image: url(http://www.anidb.net/css/anidbstyle/images/yourbuddy.gif);}
+.i_authmybuddy {background-image: url(http://www.anidb.net/css/anidbstyle/images/buddywaiting.gif);}
+.i_authyourbuddy {background-image: url(http://www.anidb.net/css/anidbstyle/images/buddywaiting.gif);}
+
+/. fahrenheit ./
+.i_crc_unv {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_crc_unv.gif);}
+.i_sort {
+	width: 5px;
+	background-image: url(http://www.anidb.net/css/anidbstyle/images/sort.gif);
+}
+
+.i_group_revote,
+.i_ep_revote {background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_revote.gif);}
+span.i_videostream_unknown,
+span.i_videostream_other__non_asp_,
+span.i_videostream_asp_other,
+span.i_videostream_mpeg_2,
+span.i_videostream_mpeg_1,
+span.i_videostream_realvideo_other,
+span.i_videostream_wmv9__also_wmv3_,
+span.i_videostream {
+	background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream.gif);
+}
+span.i_videostream_realvideo_9_10__also_rv40_,
+span.i_videostream_realvideo_other {
+	width: 25px;
+	background-repeat: repeat-x;
+	background-position: left;
+	background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_real.gif);
+}
+span.i_videostream_ms_mp4x__also_wmv1_2_,
+span.i_videostream_wmv9__also_wmv3_ {
+	width: 25px;
+	background-repeat: repeat-x;
+	background-position: left;
+	background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_wmv.gif);
+}
+span.i_videostream_divx__unk,
+span.i_videostream_divx3,
+span.i_videostream_divx4,
+span.i_videostream_divx5__also_divx6_ {
+	width: 25px;
+	background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_divx.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+span.i_videostream_xvid {
+	width: 25px;
+	background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_xvid.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+span.i_videostream_h264_avc {
+	width: 25px;
+	background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_h264.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+.i_ftype_video {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_video.gif);}
+.i_ftype_video2 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_video2.gif);}
+.i_ftype_subtitle {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_subtitles.gif);}
+.i_ftype_subtitle2 {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_subtitles2.gif);}
+.i_ftype_audio {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_audio.gif);}
+.i_ftype_other {background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_other.gif);}

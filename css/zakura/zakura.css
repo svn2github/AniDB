@@ -1,0 +1,53 @@
+/*---------------------------------
+		AniDB CSS - Zakura
+		
+		www.zakness.com
+		last updated: 5-15-2007
+----------------------------------*/
+
+/* icons */
+@import "http://anidb.zakness.com/icons.css";
+@import "http://anidb.zakness.com/anidb_icons.css";
+@import "http://anidb.zakness.com/anidb_flags.css";
+
+/* global layout */
+@import "http://anidb.zakness.com/global.css";
+@import "http://anidb.zakness.com/layout.css";
+@import "http://anidb.zakness.com/anime-tables.css";
+
+/* the database */
+@import "http://anidb.zakness.com/main.css";
+@import "http://anidb.zakness.com/search.css";
+@import "http://anidb.zakness.com/calendar.css";
+@import "http://anidb.zakness.com/latest.css";
+@import "http://anidb.zakness.com/genres.css";
+@import "http://anidb.zakness.com/categories.css";
+@import "http://anidb.zakness.com/staff.css";
+
+/* anime meta */
+@import "http://anidb.zakness.com/animehint.css";
+@import "http://anidb.zakness.com/file.css";
+@import "http://anidb.zakness.com/showanime.css";
+@import "http://anidb.zakness.com/up2date.css";
+
+/* user info */
+@import "http://anidb.zakness.com/buddylist.css";
+@import "http://anidb.zakness.com/mycreqs.css";
+@import "http://anidb.zakness.com/myhistory.css";
+@import "http://anidb.zakness.com/mylist.css";
+@import "http://anidb.zakness.com/mylistreport.css";
+@import "http://anidb.zakness.com/mymessages.css";
+@import "http://anidb.zakness.com/mynotifies.css";
+@import "http://anidb.zakness.com/myplace.css";
+@import "http://anidb.zakness.com/myreviews.css";
+@import "http://anidb.zakness.com/myvotes.css";
+@import "http://anidb.zakness.com/mywishlist.css";
+@import "http://anidb.zakness.com/profile.css";
+@import "http://anidb.zakness.com/reviewerlist.css";
+@import "http://anidb.zakness.com/userpage.css";
+
+/* add to anidb */
+@import "http://anidb.zakness.com/addep.css";
+@import "http://anidb.zakness.com/ed2kdump.css";
+@import "http://anidb.zakness.com/addeptitle.css";
+@import "http://anidb.zakness.com/addfile.css";

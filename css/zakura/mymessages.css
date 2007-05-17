@@ -1,0 +1,48 @@
+/*---------------------------------
+			@MYMESSAGES
+----------------------------------*/
+
+div.msg_all div.message div.message {
+	margin: 0;
+}
+div.msg_all div.message caption {
+	display: none;
+}
+div.msg_all .g_menu {
+	margin: 0 1em 1em 0;
+}
+div.msg_all .g_menu li.new,
+div.msg_all .g_menu li.sent,
+div.msg_all .g_menu li.delete_all {
+	background-color: #f5f7ff;
+}
+div.msg_all div.message.entity table,
+div.msg_all div.g_definitionlist.message table {
+	width: 100%;
+	border: 1px solid #ebe1ef;
+}
+div.message.entity tr.title td {
+	font-weight: bold;
+}
+div.msg_all th {
+	padding-right: 1em;
+	vertical-align: top;
+}
+div.msg_all td {
+	font-weight: normal;
+}
+div.message.entity tr.date {
+	color: #994da9;
+}
+div.msg_all tr.action {
+	background: #fff url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+	border:1px solid #E1D9F5;
+	text-align: center;
+}
+div.msg_all tr.action td {
+	padding: 1em;
+}
+div.message.entity tr.body th {
+	visibility: hidden;
+}
+

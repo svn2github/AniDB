@@ -1,0 +1,23 @@
+/*---------------------------------
+			@ED2KDUMP
+----------------------------------*/
+
+div.ed2kdump_options table {
+	border:1px solid #E1D9F5;
+	margin: 0 auto;
+}
+div.ed2kdump_options caption {
+	margin: 1em auto 0;
+}
+div.ed2kdump_box h4 {
+	color: #7762ed;
+	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+	margin: 0 auto;
+}
+div.ed2kdump_box textarea {
+	width: 99%;
+}
+div.ed2kdump_options tr.action {
+	text-align: center;
+	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+}

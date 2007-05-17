@@ -1,0 +1,64 @@
+/*---------------------------------
+			@MYCREQS
+----------------------------------*/
+
+div.creq_all caption, div.creq_all h4 {
+	color: #7762ed;
+	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+	text-align: left;
+}
+div.creq_all div.creq_stats {
+	width: 10em;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+div.creq_all div.creq_stats table {
+	width: 100%;
+}
+div.creq_all div.creq_list_closed,
+div.creq_all div.g_notebox,
+div.creq_all div.g_errorbox {
+	margin: 1em 12em 1em 1em;
+}
+div.creq_all div.creq_list_closed>* {
+	margin: 1em 0;
+}
+div.creq_all div.creq_list_closed table {
+	width: 100%;
+	margin-top: 0;
+}
+div.creq_all div.creq_list_closed .g_info {
+	margin-top: 0;
+}
+div.creq_all div.states {
+	clear: both;
+}
+div.creq_all .creq_hist_clear {
+	background: #fff url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+	border: 1px solid #E1D9F5;
+	margin: 0;
+}
+div.creq_all .new {color: #2618b1; font-weight: bold;}
+div.creq_all .open {color: #2618b1;}
+div.creq_all .hold {color: #966319;}
+div.creq_all .return {color: #5417b0;}
+div.creq_all .locked {color: #403e4d; font-weight: bold;}
+div.creq_all .granted {color: #179023;}
+div.creq_all .denied {color: #dd1645;}
+div.creq_all .revoked {color: #8d92a0;}
+div.creq_all .deleted {text-decoration: line-through;}
+div.creq_all .states dd {
+	color:#3D3E6E;
+	font-weight: normal;
+	margin-bottom: 1em;
+	margin-left: 1em;
+	text-decoration: none;
+}
+div.creq_all .states dd:last-child {
+	margin-bottom: 0;
+}
+div.creq_all div.creq_entry_hist table {
+	width: 100%;
+}
+
