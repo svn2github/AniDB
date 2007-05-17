@@ -10,8 +10,6 @@ Furthermore you have to run the script with the option "upload"
 
 import os, sys, ftplib
 
-prep = "sub/"
-prep2 = "bits/"
 out = "../../flat/"
 
 def cssmerge(fullpath, outfile):
@@ -46,39 +44,27 @@ def cssmerge(fullpath, outfile):
 			outfile.write(line+"\n")
 	infile.close()
 
-def cssm(fname,subd):
+def cssm(path,oname):
 	if os.path.exists(out) == False:
 		os.mkdir(out)
 
-	outfile = file(out+fname, 'w')
-	cssmerge(subd+fname, outfile)
+	outfile = file(out+oname, 'w')
+	cssmerge(path, outfile)
 	outfile.close()
 
 def docss():
-	cssm("sub-silver.css",prep)
-	cssm("sub-blue.css",prep)
-	cssm("sub-brown.css",prep)
-	cssm("sub-dragon.css",prep)
-	cssm("sub-gray.css",prep)
-	cssm("sub-norwegian-blue.css",prep)
-	cssm("anidbstyle.css",prep2)
-	cssm("blue.css",prep2)
-	cssm("brown2.css",prep2)
-	cssm("suppy.css",prep2)
+	for nam in ["blue","brown","brown2","gray","norwegian-blue","silver"]:
+		cssm("sub/"+nam+"/main.css", "sub-"+nam+".css")
 
 def doftp():
 	ftp_update = [
-		("css/sub/silver.css", out+"sub-silver.css"),
 		("css/sub/blue.css", out+"sub-blue.css"),
 		("css/sub/brown.css", out+"sub-brown.css"),
-		#("css/sub/dragon.css", out+"sub-dragon.css"),
-		("css/sub/gray.css", out+"sub-gray.css"),
-		("css/sub/norwegian-blue.css", out+"sub-norwegian-blue.css"),
+		("css/sub/silver.css", out+"sub-silver.css"),
 		("css/anidbstyle/anidbstyle.css", out+"sub-gray.css"),
 		("css/blue/blue.css", out+"sub-norwegian-blue.css"),
-		#("css/brown2/brown2.css", out+"brown2.css"),
-		#("css/suppy.css", out+"suppy.css")
-		("css/icons-flags.css", "base/icons-flags.css"),
+		("css/brown2/brown2.css", out+"sub-brown2.css"),
+		("css/icons-flags.css", "common/style/icons/flags.css"),
 	]
 
 	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
