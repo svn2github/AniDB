@@ -10,7 +10,8 @@ Furthermore you have to run the script with the option "upload"
 
 import os, sys, ftplib
 
-out = "../../flat/"
+__out = "../../flat/"
+__ftp = {}
 
 def cssmerge(fullpath, outfile):
 	path, filename = os.path.split(os.path.normpath(fullpath))
@@ -44,28 +45,19 @@ def cssmerge(fullpath, outfile):
 			outfile.write(line+"\n")
 	infile.close()
 
-def cssm(path,oname):
-	if os.path.exists(out) == False:
-		os.mkdir(out)
+def cssm():
+	if os.path.exists(__out) is False:
+		os.mkdir(__out)
+	for line in file('stylelist').readlines():
+		if not line.startswith('#'):
+			path,name = line.rstrip('\n').rsplit('/',1)
+			oname = path.lstrip('./').replace('/','-') + '.css' #evil shite because of epoxis main.css ;_;
+			__ftp[oname] = path
+			cssmerge(line.rstrip('\n'),file(__out+oname, 'w'))
 
-	outfile = file(out+oname, 'w')
-	cssmerge(path, outfile)
-	outfile.close()
-
-def docss():
-	for nam in ["blue","brown","brown2","gray","norwegian-blue","silver"]:
-		cssm("sub/"+nam+"/main.css", "sub-"+nam+".css")
-
-def doftp():
-	ftp_update = [
-		("css/sub/blue.css", out+"sub-blue.css"),
-		("css/sub/brown.css", out+"sub-brown.css"),
-		("css/sub/silver.css", out+"sub-silver.css"),
-		("css/anidbstyle/anidbstyle.css", out+"sub-gray.css"),
-		("css/blue/blue.css", out+"sub-norwegian-blue.css"),
-		("css/brown2/brown2.css", out+"sub-brown2.css"),
-		("css/icons-flags.css", "common/style/icons/flags.css"),
-	]
+def doftp(ftp_update = []):
+	for css in __ftp:
+		ftp_update += [(__ftp[css],__out+css)]
 
 	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
 	for ftp_path, local_file in ftp_update:
@@ -74,7 +66,7 @@ def doftp():
 	anidbftp.quit()
 
 if __name__ == "__main__":
-	docss()
+	cssm()
 	
 	if sys.argv.pop() == "upload" :
 		doftp()
