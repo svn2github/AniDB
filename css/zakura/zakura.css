@@ -24,6 +24,7 @@
 @import "http://anidb.zakness.com/staff.css";
 
 /* anime meta */
+@import "http://anidb.zakness.com/animeatt.css";
 @import "http://anidb.zakness.com/animehint.css";
 @import "http://anidb.zakness.com/file.css";
 @import "http://anidb.zakness.com/group.css";
@@ -32,6 +33,7 @@
 
 /* user info */
 @import "http://anidb.zakness.com/buddylist.css";
+@import "http://anidb.zakness.com/mydb.css";
 @import "http://anidb.zakness.com/myhistory.css";
 @import "http://anidb.zakness.com/mylist.css";
 @import "http://anidb.zakness.com/mylistreport.css";
