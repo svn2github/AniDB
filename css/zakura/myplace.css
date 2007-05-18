@@ -51,6 +51,7 @@ div.myplace_all div.latest li span {
 	left: 0.3em;
 	font-weight: bold;
 }
-div.myplace_all div.latest_votes li a {
+div.myplace_all div.latest_votes li a,
+div.myplace_all div.latest_reviews li a {
 	margin-left: 3em;
 }
