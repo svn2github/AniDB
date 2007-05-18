@@ -6,41 +6,56 @@
 		<update>18.05.2007</update>
 		<status>active</status>
 		<description>It'S BLUE!!!!</description>
-	</style><style name="sub-brown">
+	</style>
+	<style name="sub-brown">
 		<title/>
 		<creator/>
 		<update/>
 		<status/>
 		<description/>
-	</style><style name="sub-brown2">
+	</style>
+	<style name="sub-brown2">
 		<title/>
 		<creator/>
 		<update/>
 		<status/>
 		<description/>
-	</style><style name="sub-dragon">
+	</style>
+	<style name="sub-dragon">
 		<title/>
 		<creator/>
 		<update/>
 		<status/>
 		<description/>
-	</style><style name="sub-gray">
+	</style>
+	<style name="sub-gray">
 		<title/>
 		<creator/>
 		<update/>
 		<status/>
 		<description/>
-	</style><style name="sub-norwegian-blue">
+	</style>
+	<style name="sub-norwegian-blue">
 		<title/>
 		<creator/>
 		<update/>
 		<status/>
 		<description/>
-	</style><style name="sub-silver">
-		<title></title>
-		<creator></creator>
-		<update></update>
-		<status></status>
-		<description></description>
+	</style>
+	<style name="sub-silver">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+	</style>
+	<style name="zakura">
+		<title>Zakura</title>
+		<creator>Zak</creator>
+		<update>May 19, 2007</update>
+		<status>In development</status>
+		<description>Only tested in Firefox/Mac.
+Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
+Thanks to ricce for making the fixed menu modification.</description>
 	</style>
 </css_styles>

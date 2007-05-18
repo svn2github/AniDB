@@ -98,7 +98,8 @@ img[src*="ask2.gif"] {
 	background: transparent url(images/buttons/help.png) no-repeat -1px top;
 	width: 0;
 	padding-left: 13px;
-} img[src*="ask2.gif"]:hover {
+}
+img[src*="ask2.gif"]:hover {
 	background-color: #dfd5ff;
 }
 img[src*="anidb_no_vote.gif"] {

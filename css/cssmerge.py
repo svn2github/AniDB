@@ -67,8 +67,15 @@ def xml(newstyle,path):
 	if os.path.exists(descpath):
 		stuff = file(descpath, 'r').readlines()
 		for line in stuff:
-			key, val = line.split(':')
-			new[key] = unicode(val.strip())
+			line = line.rstrip('\n')
+			if line.find(':') >0:
+				key, val = line.split(':')
+				new[key] = unicode(val.strip())
+			else:
+				if new[key] == '':
+					new[key] = new[key] + line
+				else:
+					new[key] = new[key] + '\n' + line
 
 	xmlstyles = xmldoc.css_styles.xml_xpath("style/@name")
 	for i in range(len(xmlstyles)):
