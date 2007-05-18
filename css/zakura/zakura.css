@@ -5,54 +5,54 @@
 ----------------------------------*/
 
 /* icons */
-@import "http://anidb.zakness.com/icons.css";
-@import "http://anidb.zakness.com/anidb_icons.css";
-@import "http://anidb.zakness.com/anidb_flags.css";
+@import "icons.css";
+@import "anidb_icons.css";
+@import "anidb_flags.css";
 
 /* global layout */
-@import "http://anidb.zakness.com/global.css";
-@import "http://anidb.zakness.com/layout.css";
-@import "http://anidb.zakness.com/anime-tables.css";
+@import "global.css";
+@import "layout.css";
+@import "anime-tables.css";
 
 /* the database */
-@import "http://anidb.zakness.com/main.css";
-@import "http://anidb.zakness.com/search.css";
-@import "http://anidb.zakness.com/calendar.css";
-@import "http://anidb.zakness.com/latest.css";
-@import "http://anidb.zakness.com/genres.css";
-@import "http://anidb.zakness.com/categories.css";
-@import "http://anidb.zakness.com/staff.css";
+@import "main.css";
+@import "search.css";
+@import "calendar.css";
+@import "latest.css";
+@import "genres.css";
+@import "categories.css";
+@import "staff.css";
 
 /* anime meta */
-@import "http://anidb.zakness.com/animeatt.css";
-@import "http://anidb.zakness.com/animehint.css";
-@import "http://anidb.zakness.com/ep.css";
-@import "http://anidb.zakness.com/file.css";
-@import "http://anidb.zakness.com/group.css";
-@import "http://anidb.zakness.com/rel.css";
-@import "http://anidb.zakness.com/showanime.css";
-@import "http://anidb.zakness.com/up2date.css";
+@import "animeatt.css";
+@import "animehint.css";
+@import "ep.css";
+@import "file.css";
+@import "group.css";
+@import "rel.css";
+@import "showanime.css";
+@import "up2date.css";
 
 /* user info */
-@import "http://anidb.zakness.com/buddylist.css";
-@import "http://anidb.zakness.com/mydb.css";
-@import "http://anidb.zakness.com/myhistory.css";
-@import "http://anidb.zakness.com/mylist.css";
-@import "http://anidb.zakness.com/mylistreport.css";
-@import "http://anidb.zakness.com/mymessages.css";
-@import "http://anidb.zakness.com/mynotifies.css";
-@import "http://anidb.zakness.com/myplace.css";
-@import "http://anidb.zakness.com/myreviews.css";
-@import "http://anidb.zakness.com/myvotes.css";
-@import "http://anidb.zakness.com/mywishlist.css";
-@import "http://anidb.zakness.com/profile.css";
-@import "http://anidb.zakness.com/reviewerlist.css";
-@import "http://anidb.zakness.com/userpage.css";
+@import "buddylist.css";
+@import "mydb.css";
+@import "myhistory.css";
+@import "mylist.css";
+@import "mylistreport.css";
+@import "mymessages.css";
+@import "mynotifies.css";
+@import "myplace.css";
+@import "myreviews.css";
+@import "myvotes.css";
+@import "mywishlist.css";
+@import "profile.css";
+@import "reviewerlist.css";
+@import "userpage.css";
 
 /* add to anidb */
-@import "http://anidb.zakness.com/addep.css";
-@import "http://anidb.zakness.com/addeptitle.css";
-@import "http://anidb.zakness.com/addfile.css";
-@import "http://anidb.zakness.com/addgroup.css";
-@import "http://anidb.zakness.com/ed2kdump.css";
-@import "http://anidb.zakness.com/creqs.css";
+@import "addep.css";
+@import "addeptitle.css";
+@import "addfile.css";
+@import "addgroup.css";
+@import "ed2kdump.css";
+@import "creqs.css";
