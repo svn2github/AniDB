@@ -57,13 +57,22 @@ def cssm():
 
 def doftp(ftp_update = []):
 	for css in __ftp:
-		ftp_update += [(__ftp[css],__out+css)]
+		ftp_update += [('css/' + __ftp[css].lstrip('./') + '/' + css,__out+css)]
+		if os.path.exists(__ftp[css]+'/images'): #do we have an /image path for the css?
+			for root,path,filename in os.walk(__ftp[css]+'/images'):
+				root = root.replace('\\','/') #evil mixed \ and /
+				for elem in filename:
+					if elem.endswith('.gif') or elem.endswith('.jpg') or elem.endswith('.png'):
+						ftp_update += [('css/' + root.lstrip('./') + '/' + elem,root + '/' + elem)]
 
 	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
 	for ftp_path, local_file in ftp_update:
-		print "Uploading", ftp_path
-		anidbftp.storbinary("STOR "+ftp_path, file(local_file))
-	anidbftp.quit()
+		try:
+		    anidbftp.storbinary("STOR "+ftp_path, file(local_file))
+		    print "Uploading", ftp_path
+		except:
+		    print 'Some error while uploading', ftp_path #needs soem real fixing for when the folder doesn't exist
+	anidbftp.quit()             
 
 if __name__ == "__main__":
 	cssm()
