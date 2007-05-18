@@ -167,11 +167,13 @@ ul.g_navlist.type li:first-child:before {
 	content: "Type: ";
 	color: #3d3e6e;
 	text-transform: none;
+	font-weight: normal;
 }
 ul.g_navlist.g_numonpage li:first-child:before {
 	content: "Per page: ";
 	color: #3d3e6e;
 	text-transform: none;
+	font-weight: normal;
 }
 
 /* list menu */
