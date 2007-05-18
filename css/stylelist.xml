@@ -1,5 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <css_styles>
-	<style name="">
+	<style name="sub-blue">
+		<title>sub-blue</title>
+		<creator>epoximator</creator>
+		<update>18.05.2007</update>
+		<status>active</status>
+		<description>It'S BLUE!!!!</description>
+	</style><style name="sub-brown">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+	</style><style name="sub-brown2">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+	</style><style name="sub-dragon">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+	</style><style name="sub-gray">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+	</style><style name="sub-norwegian-blue">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+	</style><style name="sub-silver">
 		<title></title>
 		<creator></creator>
 		<update></update>
