@@ -106,29 +106,33 @@ def xml(newstyle,path):
 def doftp():
 	ftp_update = []
 	for css in __ftp:
-		ftp_update += [(__ftppath + __ftp[css].lstrip('./') + '/' + css,__out+css)]
+		if __ftp[css].startswith('./sub/'): #more evil special fixing for sub styles
+			ftp_update += [(__ftppath + 'sub/' + css,__out+css)]
+		else:
+			ftp_update += [(__ftppath + __ftp[css].lstrip('./') + '/' + css,__out+css)]
 		if os.path.exists(__ftp[css]+'/images'): #do we have an /image path for the css?
 			for root,path,filename in os.walk(__ftp[css]+'/images'):
 				root = root.replace('\\','/') #evil mixed \ and /
 				for elem in filename:
 					if filter(elem.endswith, __extensions):
-						ftp_update += [(__ftppath + root.lstrip('./') + '/' + elem,root + '/' + elem)]
+						if root.startswith('./sub/'): #more evil special fixing for sub styles
+							ftp_update += [(__ftppath + 'sub/images/' + elem,root + '/' + elem)]
+						else:
+							ftp_update += [(__ftppath + root.lstrip('./') + '/' + elem,root + '/' + elem)]
 
 	ftp_update += [(__ftppath + 'stylelist.xml','./stylelist.xml')]
 	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
+
 	for ftp_path, local_file in ftp_update:
 		try:
 			anidbftp.storbinary("STOR "+ftp_path, file(local_file))
 			print "Uploading", ftp_path
 		except ftplib.error_perm, error:
-			if str(error).lower() == "550 filename invalid":
-				ftpfolder(ftp_path,anidbftp)
-				try:
-					anidbftp.storbinary("STOR "+ftp_path, file(local_file))
-					print "Uploading", ftp_path
-				except ftplib.error_perm, error:
-					print error
-			else:
+			ftpfolder(ftp_path,anidbftp)
+			try:
+				anidbftp.storbinary("STOR "+ftp_path, file(local_file))
+				print "Uploading", ftp_path
+			except ftplib.error_perm, error:
 				print error
 	anidbftp.quit()
 
