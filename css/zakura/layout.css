@@ -262,3 +262,6 @@ body.nonav div#layout-content {
 	padding: 0;
 	background: transparent;	
 }
+body.nonav form textarea {
+	width: 99%;
+}
