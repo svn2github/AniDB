@@ -38,7 +38,7 @@ div.anime_all div.mylist td.state.complete,
 div.anime_all div.mylist td.state.watched {
 	color: #000;
 	font-weight: bold;
-	background: transparent url(http://anidb.zakness.com/images/layout/checkmark-grey.png) no-repeat 2px center;
+	background: transparent url(images/layout/checkmark-grey.png) no-repeat 2px center;
 }
 div.mylist_list table.animelist tr.complete>td.seen,
 div.mylist_list>table.animelist td.state.complete+td.state.complete,
@@ -52,7 +52,7 @@ div.mylist_list table.animelist tr.all_watched>td.seen,
 div.mylist_list>table.animelist td.state.all_watched,
 div.anime_all div.mylist td.state.watched+td.state.watched {
 	color: #4b9b39;
-	background: transparent url(http://anidb.zakness.com/images/layout/checkmark.png) no-repeat 2px center;
+	background: transparent url(images/layout/checkmark.png) no-repeat 2px center;
 }
 div.mylist_list>table.animelist td.state.all_watched {
 	font-weight: bold;
@@ -81,7 +81,7 @@ div.mylist_list .g_actionlist,
 div#layout-content div.mylist_list table.eplist td.check {
 	margin: 1em 0;
 	padding: 1em;
-	background: #fff url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
+	background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
 	border:1px solid #E1D9F5;
 }
 
@@ -136,7 +136,7 @@ div.mylist_all div.mylist_edit table {
 	border:1px solid #E1D9F5;
 }
 div.mylist_all div.mylist_edit table tr.action {
-	background: #fff url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
+	background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
 	text-align: center;
 }
 div.mylist_all div.mylist_edit table tr.action td {

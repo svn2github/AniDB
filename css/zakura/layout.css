@@ -7,7 +7,7 @@
 /* container - main nav, login, & search */
 div#layout-nav {
 	padding-top: 160px;
-	background: #fff url(http://anidb.zakness.com/images/layout/bg-header.gif) repeat-x left top;
+	background: #fff url(images/layout/bg-header.gif) repeat-x left top;
 	min-width: 784px;
 }
 
@@ -51,7 +51,7 @@ div#layout-menu div.menu a:visited {
 }
 div#layout-menu div.menu a:hover, 
 div#layout-menu div.menu a:active {
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-pink.gif) repeat left top;
+	background: transparent url(images/layout/stripe-pink.gif) repeat left top;
 	color: #484b9a;
 }
 
@@ -73,7 +73,7 @@ div#layout-menu div.menu ul.my a:visited {
 div#layout-menu div.menu ul.my a:hover, 
 div#layout-menu div.menu ul.my a:active {
 	color: #ffd2fe;
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-dkblue.gif) repeat left top;
+	background: transparent url(images/layout/stripe-dkblue.gif) repeat left top;
 }
 
 /* mylistreport */
@@ -99,7 +99,7 @@ div#layout-menu div.menu ul.mod a:active {
 
 /* help link */
 div#layout-menu div.menu ul.other li.help {
-	background: transparent url(http://anidb.zakness.com/images/buttons/help.png) no-repeat 0.7em center;
+	background: transparent url(images/buttons/help.png) no-repeat 0.7em center;
 }
 div#layout-menu div.menu ul.other li.help a {
 	padding-left: 26px;
@@ -139,20 +139,20 @@ div#layout-menu div.usermenu a#newnotifies:visited {
 	color: #fd0576;
 	font-weight: bold;
 	margin-left: 0.5em;
-	background: transparent url(http://anidb.zakness.com/images/layout/trans-white.png) repeat left top;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
 	border-left: 1px solid #e7c7d5;
 }
 div#layout-menu div.usermenu a#newnotifies:hover, 
 div#layout-menu div.usermenu a#newnotifies:active {
 	color: #ff00c6;
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-white.png) repeat left top;
+	background: transparent url(images/layout/stripe-white.png) repeat left top;
 }
 div#layout-menu div.usermenu a.history, 
 div#layout-menu div.usermenu a.history:link, 
 div#layout-menu div.usermenu a.history:visited {
 	color: #ed95bd;
 	border: 0;
-	background: transparent url(http://anidb.zakness.com/images/layout/trans-white.png) repeat left top;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
 }
 div#layout-menu div.usermenu a.history:hover, 
 div#layout-menu div.usermenu a.history:active {
@@ -163,25 +163,25 @@ div#layout-menu div.usermenu a.i_button:link,
 div#layout-menu div.usermenu a.i_button:visited {
 	text-decoration: none;
 	color: #be518c;
-	background: transparent url(http://anidb.zakness.com/images/layout/trans-pink.png) repeat left top;
+	background: transparent url(images/layout/trans-pink.png) repeat left top;
 	border-left: 1px solid #e7c7d5;
 	font-weight: bold;
 }
 div#layout-menu div.usermenu a.i_button:hover, 
 div#layout-menu div.usermenu a.i_button:active {
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-pink.png) repeat left top;
+	background: transparent url(images/layout/stripe-pink.png) repeat left top;
 	color: #a93373;
 }
 div#layout-menu div.usermenu a.i_logout, 
 div#layout-menu div.usermenu a.i_logout:link, 
 div#layout-menu div.usermenu a.i_logout:visited {
-	background: transparent url(http://anidb.zakness.com/images/layout/trans-blue.png) repeat left top;
+	background: transparent url(images/layout/trans-blue.png) repeat left top;
 	border-right: 1px solid #e7c7d5;
 	color: #4a63e1;
 } 
 div#layout-menu div.usermenu a.i_logout:hover, 
 div#layout-menu div.usermenu a.i_logout:active {
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-blue.png) repeat left top;
+	background: transparent url(images/layout/stripe-blue.png) repeat left top;
 	color: #2d42af;
 }
 
@@ -189,7 +189,7 @@ div#layout-menu div.usermenu a.i_logout:active {
 div#layout-search {
 	position: absolute;
 	top: 0;
-	background: transparent url(http://anidb.zakness.com/images/layout/bg-login.png) no-repeat right top;
+	background: transparent url(images/layout/bg-login.png) no-repeat right top;
 	padding-top: 103px;
 	right: 1em;
 	width: 30em;
@@ -220,14 +220,14 @@ div#layout-search input.submit:hover {
 /* container - content */
 div#layout-content {
 	clear: both;
-	background: transparent url(http://anidb.zakness.com/images/layout/header.jpg) no-repeat left top;
+	background: transparent url(images/layout/header.jpg) no-repeat left top;
 	margin-top: -160px;
 	padding: 160px 1em 0 11em;
 }
 
 /* container - footer */
 div#layout-footer {
-	background: #f8f7ff url(http://anidb.zakness.com/images/layout/bg-content.gif) repeat left top;
+	background: #f8f7ff url(images/layout/bg-content.gif) repeat left top;
 }
 div#layout-footer p {
 	font-size: 0.8em;

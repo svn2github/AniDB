@@ -6,7 +6,7 @@ div.latestanimes_all div.g_section {
 	clear: both;
 }
 div.latestanimes_anime {
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
+	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
 	padding: 1em;
 	border: 1px solid #d9dfff;
 }
@@ -44,7 +44,7 @@ div#layout-content div.latestanimes_form a:visited {
 }
 div#layout-content div.latestanimes_form a:hover, 
 div#layout-content div.latestanimes_form a:active {
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-pink2.gif) repeat left top;
+	background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
 	color: #de4799;
 	border: 1px solid #eec6dc;
 }
@@ -71,7 +71,7 @@ div.animevotes_all table th {
 	text-align: center;
 }
 div.animevotes_all table.vote_graph tr:last-child {
-	background: transparent url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
+	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
 	font-weight: bold;
 }
 div.animevotes_all caption {

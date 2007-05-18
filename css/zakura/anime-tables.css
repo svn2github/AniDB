@@ -55,7 +55,7 @@ div#layout-content div.mylist_list table td[colspan="7"],
 div#layout-content div.anime_all div.episodes table td[colspan="8"] {
 	padding: 0;
 	padding-left: 20px;
-	background: #dcdff7 url(http://anidb.zakness.com/images/layout/stripe-blue.gif) repeat left top;
+	background: #dcdff7 url(images/layout/stripe-blue.gif) repeat left top;
 }
 div.mylist_list table td[colspan="7"] td[colspan="7"],
 div.anime_all div.episodes table td[colspan="8"] td[colspan="8"] {

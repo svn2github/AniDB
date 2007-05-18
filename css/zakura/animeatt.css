@@ -19,7 +19,7 @@ div.animeatt_all div.animeatt_reviews div.review {
 	padding-bottom: 1em;
 	border-bottom: 1px solid #f3e7ff;
 	margin-bottom: 1em;
-	background: transparent url(http://anidb.zakness.com/images/layout/flower2.png) no-repeat left 2px;
+	background: transparent url(images/layout/flower2.png) no-repeat left 2px;
 }
 div.animeatt_all div.animeatt_reviews div.review:last-child {
 	padding-bottom: 0;
@@ -38,11 +38,11 @@ div.animeatt_all h2 span.approval {
 	color: #3d3e6e;
 }
 div.animeatt_all div.approved h2 span.approval {
-	background: transparent url(http://anidb.zakness.com/images/layout/checkmark.png) no-repeat left center;
+	background: transparent url(images/layout/checkmark.png) no-repeat left center;
 	color: #5dac3b;
 }
 div.animeatt_all div.disapproved h2 span.approval {
-	background: transparent url(http://anidb.zakness.com/images/layout/deprecated.png) no-repeat left center;
+	background: transparent url(images/layout/deprecated.png) no-repeat left center;
 	color: #8f95ae;
 }
 div.animeatt_all div.disapproved h2 span.approval:before {

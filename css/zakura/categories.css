@@ -24,10 +24,10 @@ div#layout-content div.genren_all a.i_icon {
 	padding: 0;
 }
 div.genren_all a.i_minus {
-	background: transparent url(http://anidb.zakness.com/images/buttons/minus.gif) no-repeat left top;
+	background: transparent url(images/buttons/minus.gif) no-repeat left top;
 }
 div.genren_all a.i_plus {
-	background: transparent url(http://anidb.zakness.com/images/buttons/plus.gif) no-repeat left top;
+	background: transparent url(images/buttons/plus.gif) no-repeat left top;
 }
 div.genren_all a.i_minus:hover,
 div.genren_all a.i_plus:hover {
