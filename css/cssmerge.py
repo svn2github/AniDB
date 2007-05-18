@@ -8,7 +8,7 @@ password
 Furthermore you have to run the script with the option "upload"
 """
 
-import os, sys, ftplib
+import os, sys, ftplib, amara, copy
 
 __out = "../../flat/"
 __ftp = {}
@@ -54,6 +54,42 @@ def cssm():
 			oname = path.lstrip('./').replace('/','-') + '.css' #evil shite because of epoxis main.css ;_;
 			__ftp[oname] = path
 			cssmerge(line.rstrip('\n'),file(__out+oname, 'w'))
+			xml(unicode(oname.rstrip('.css')),path)
+
+def xml(newstyle,path):
+	__stylelist = []
+	xmldoc = amara.parse('./stylelist.xml')
+	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u''}
+
+	if os.path.exists(path + '/' + 'description'):
+		stuff = file(path + '/' + 'description', 'r').readlines()
+		for line in stuff:
+			key, val = line.split(':')
+			new[key] = unicode(val.strip())
+
+	for i in range(len(xmldoc.css_styles.xml_xpath("style/@name"))):
+		__stylelist += [xmldoc.css_styles.xml_xpath("style/@name")[i].value]
+
+	if newstyle in __stylelist:
+		for i in range(len(xmldoc.css_styles.style)):
+			if xmldoc.css_styles.style[i].name == newstyle:
+				xmldoc.css_styles.style[i].title = new['title']
+				xmldoc.css_styles.style[i].creator = new['creator']
+				xmldoc.css_styles.style[i].update = new['update']
+				xmldoc.css_styles.style[i].status = new['status']
+				xmldoc.css_styles.style[i].description = new['description']
+	else:
+		temp = copy.deepcopy(xmldoc.css_styles.style)
+		temp.name = newstyle
+		temp.title = new['title']
+		temp.creator = new['creator']
+		temp.update = new['update']
+		temp.status = new['status']
+		temp.description = new['description']
+		xmldoc.css_styles.xml_append(temp)
+
+	output = file('./stylelist.xml', 'w')
+	output.write(xmldoc.xml())
 
 def doftp(ftp_update = []):
 	for css in __ftp:
@@ -65,6 +101,8 @@ def doftp(ftp_update = []):
 					if elem.endswith('.gif') or elem.endswith('.jpg') or elem.endswith('.png'):
 						ftp_update += [('css/' + root.lstrip('./') + '/' + elem,root + '/' + elem)]
 
+	ftp_update += [('css/','./stylelist.xml')]
+	
 	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
 	for ftp_path, local_file in ftp_update:
 		try:
