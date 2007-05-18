@@ -12,6 +12,8 @@ import os, sys, ftplib, amara, copy
 
 __out = "../../flat/"
 __ftp = {}
+__ftppath = '/css/'
+__extensions = ('.jpg', '.jpeg', '.gif', '.png','.css')
 
 def cssmerge(fullpath, outfile):
 	path, filename = os.path.split(os.path.normpath(fullpath))
@@ -57,27 +59,30 @@ def cssm():
 			xml(unicode(oname.rstrip('.css')),path)
 
 def xml(newstyle,path):
-	__stylelist = []
-	xmldoc = amara.parse('./stylelist.xml')
+	stylelist = []
 	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u''}
+	descpath = path + '/' + 'description'
+	xmldoc = amara.parse('./stylelist.xml')
 
-	if os.path.exists(path + '/' + 'description'):
-		stuff = file(path + '/' + 'description', 'r').readlines()
+	if os.path.exists(descpath):
+		stuff = file(descpath, 'r').readlines()
 		for line in stuff:
 			key, val = line.split(':')
 			new[key] = unicode(val.strip())
 
-	for i in range(len(xmldoc.css_styles.xml_xpath("style/@name"))):
-		__stylelist += [xmldoc.css_styles.xml_xpath("style/@name")[i].value]
+	xmlstyles = xmldoc.css_styles.xml_xpath("style/@name")
+	for i in range(len(xmlstyles)):
+		stylelist += [xmlstyles[i].value]
 
-	if newstyle in __stylelist:
-		for i in range(len(xmldoc.css_styles.style)):
-			if xmldoc.css_styles.style[i].name == newstyle:
-				xmldoc.css_styles.style[i].title = new['title']
-				xmldoc.css_styles.style[i].creator = new['creator']
-				xmldoc.css_styles.style[i].update = new['update']
-				xmldoc.css_styles.style[i].status = new['status']
-				xmldoc.css_styles.style[i].description = new['description']
+	if newstyle in stylelist:
+		styleelem = xmldoc.css_styles.style
+		for i in range(len(styleelem)):
+			if styleelem[i].name == newstyle:
+				styleelem[i].title = new['title']
+				styleelem[i].creator = new['creator']
+				styleelem[i].update = new['update']
+				styleelem[i].status = new['status']
+				styleelem[i].description = new['description']
 	else:
 		temp = copy.deepcopy(xmldoc.css_styles.style)
 		temp.name = newstyle
@@ -91,31 +96,53 @@ def xml(newstyle,path):
 	output = file('./stylelist.xml', 'w')
 	output.write(xmldoc.xml())
 
-def doftp(ftp_update = []):
+def doftp():
+	ftp_update = []
 	for css in __ftp:
-		ftp_update += [('css/' + __ftp[css].lstrip('./') + '/' + css,__out+css)]
+		ftp_update += [(__ftppath + __ftp[css].lstrip('./') + '/' + css,__out+css)]
 		if os.path.exists(__ftp[css]+'/images'): #do we have an /image path for the css?
 			for root,path,filename in os.walk(__ftp[css]+'/images'):
 				root = root.replace('\\','/') #evil mixed \ and /
 				for elem in filename:
-					if elem.endswith('.gif') or elem.endswith('.jpg') or elem.endswith('.png'):
-						ftp_update += [('css/' + root.lstrip('./') + '/' + elem,root + '/' + elem)]
+					if filter(elem.endswith, __extensions):
+						ftp_update += [(__ftppath + root.lstrip('./') + '/' + elem,root + '/' + elem)]
 
-	ftp_update += [('css/','./stylelist.xml')]
-	
+	ftp_update += [(__ftppath + 'stylelist.xml','./stylelist.xml')]
 	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
 	for ftp_path, local_file in ftp_update:
 		try:
-		    anidbftp.storbinary("STOR "+ftp_path, file(local_file))
-		    print "Uploading", ftp_path
+			anidbftp.storbinary("STOR "+ftp_path, file(local_file))
+			print "Uploading", ftp_path
+		except ftplib.error_perm, error:
+			if str(error).lower() == "550 filename invalid":
+				ftpfolder(ftp_path,anidbftp)
+				try:
+					anidbftp.storbinary("STOR "+ftp_path, file(local_file))
+					print "Uploading", ftp_path
+				except ftplib.error_perm, error:
+					print error
+			else:
+				print error
+	anidbftp.quit()
+
+def ftpfolder(ftp_path,anidbftp,position='/'):
+	if ftp_path.find('/') >=0:
+		root,path = ftp_path.lstrip('/').split('/',1)
+		anidbftp.cwd('/')
+		try:
+			anidbftp.cwd(position)
+			anidbftp.cwd(root)
 		except:
-		    print 'Some error while uploading', ftp_path #needs soem real fixing for when the folder doesn't exist
-	anidbftp.quit()             
+			try:
+				anidbftp.mkd(root)
+			except ftplib.error_perm, error:
+				print error
+		ftpfolder(path,anidbftp,position+'/'+root)
 
 if __name__ == "__main__":
 	cssm()
 	
-	if sys.argv.pop() == "upload" :
+	if sys.argv.pop() == "upload":
 		doftp()
 
 	print "done"
