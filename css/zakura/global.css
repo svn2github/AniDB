@@ -86,7 +86,8 @@ div.search_all div.search_results ul.g_jumplist:after,
 div.file_all div.file_info dl:after,
 div.mylist_list form:after,
 div.userpage_all div.stats:after,
-div.userpage_all div.charts:after {
+div.userpage_all div.charts:after,
+div.animeatt_all div.animeatt_reviews div.review:after {
 	content: ".";
 	clear: both;
 	display: block;
