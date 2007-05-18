@@ -41,8 +41,7 @@ div.anime_all div.groups table tr:last-child {
 div.anime_all div.groups .state.ongoing		{color: #2618b1;}
 div.anime_all div.groups .state.stalled		{color: #966319;}
 div.anime_all div.groups .state.complete	{color: #179023;}
-div.anime_all div.groups .state.complete,
-div.anime_all div.groups .complete .lastep	{font-weight: bold;}
+div.anime_all div.groups .complete			{font-weight: bold;}
 div.anime_all div.groups .state.dropped		{color: #8d92a0;}
 
 div.anime_all div.episodes {
@@ -80,7 +79,7 @@ div.anime_all div.mylist td {
 	padding: 0.4em;
 }
 div.anime_all div.episodes table.eplist tr.newtype td {
-	border-top: 4px solid #d9def1;
+	border-top: 4px solid #a5b5f1;
 }
 div.anime_all div.episodes table.filelist {
 	background: #d3d7f3;

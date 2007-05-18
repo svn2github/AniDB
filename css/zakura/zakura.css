@@ -2,7 +2,6 @@
 		AniDB CSS - Zakura
 		
 		www.zakness.com
-		last updated: 5-15-2007
 ----------------------------------*/
 
 /* icons */
@@ -27,12 +26,12 @@
 /* anime meta */
 @import "http://anidb.zakness.com/animehint.css";
 @import "http://anidb.zakness.com/file.css";
+@import "http://anidb.zakness.com/group.css";
 @import "http://anidb.zakness.com/showanime.css";
 @import "http://anidb.zakness.com/up2date.css";
 
 /* user info */
 @import "http://anidb.zakness.com/buddylist.css";
-@import "http://anidb.zakness.com/mycreqs.css";
 @import "http://anidb.zakness.com/myhistory.css";
 @import "http://anidb.zakness.com/mylist.css";
 @import "http://anidb.zakness.com/mylistreport.css";
@@ -48,6 +47,8 @@
 
 /* add to anidb */
 @import "http://anidb.zakness.com/addep.css";
-@import "http://anidb.zakness.com/ed2kdump.css";
 @import "http://anidb.zakness.com/addeptitle.css";
 @import "http://anidb.zakness.com/addfile.css";
+@import "http://anidb.zakness.com/addgroup.css";
+@import "http://anidb.zakness.com/ed2kdump.css";
+@import "http://anidb.zakness.com/creqs.css";
