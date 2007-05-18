@@ -30,13 +30,13 @@ div.anime_all div.vote table {
 	border:1px solid #E1D9F5;
 }
 div.anime_all div.vote table tr {
-	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+	background: transparent url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
 }
 div.anime_all div.groups table {
 	margin: 0 auto;
 }
 div.anime_all div.groups table tr:last-child {
-	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+	background: transparent url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
 }
 div.anime_all div.groups .state.ongoing		{color: #2618b1;}
 div.anime_all div.groups .state.stalled		{color: #966319;}
@@ -63,7 +63,7 @@ div.anime_all div.episodes div.mylist_add table {
 }
 div.anime_all div.episodes div.mylist_add tr.action {
 	text-align: center;
-	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+	background: transparent url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
 }
 div.anime_all caption {
 	text-align: center;
@@ -100,7 +100,7 @@ div.anime_all div.episodes table.filelist tr.good td {
 	background-color: #f0ffe3;
 }
 div.anime_all div.episodes table.filelist tr.good td.id {
-	background-image: url(http://anidb.zakness.com/layout/checkmark.png);
+	background-image: url(http://anidb.zakness.com/images/layout/checkmark.png);
 	background-repeat: no-repeat;
 	background-position: 2px center;
 }
@@ -108,7 +108,7 @@ div.anime_all div.episodes table.filelist tr.deprecated td {
 	background-color: #ddd;
 }
 div.anime_all div.episodes table.filelist tr.deprecated td.id {
-	background-image: url(http://anidb.zakness.com/layout/deprecated.png);
+	background-image: url(http://anidb.zakness.com/images/layout/deprecated.png);
 	background-repeat: no-repeat;
 	background-position: 2px center;
 }

@@ -12,7 +12,7 @@ body {
 	font: 9pt Verdana,Arial,Helvetica,sans-serif;
 	line-height: 1.5;
 	color: #3d3e6e;
-	background: #f8f7ff url(http://anidb.zakness.com/layout/bg-content.gif) repeat left top;
+	background: #f8f7ff url(http://anidb.zakness.com/images/layout/bg-content.gif) repeat left top;
 }
 ul, ul li {
 	margin: 0;
@@ -140,20 +140,20 @@ div#layout-content ul.g_jumplist li a:hover,
 div#layout-content ul.g_jumplist li a:active,
 div#layout-content ul.g_navlist li a:hover, 
 div#layout-content ul.g_navlist li a:active {
-	background: transparent url(http://anidb.zakness.com/layout/stripe-pink2.gif) repeat left top;
+	background: transparent url(http://anidb.zakness.com/images/layout/stripe-pink2.gif) repeat left top;
 	color: #de4799;
 	border: 1px solid #eec6dc;
 }
 ul.g_jumplist li.prev {
 	float: left;
 	padding-left: 12px;
-	background: transparent url(http://anidb.zakness.com/layout/larr.gif) no-repeat left center;
+	background: transparent url(http://anidb.zakness.com/images/layout/larr.gif) no-repeat left center;
 	font-weight: normal;
 }
 ul.g_jumplist li.next {
 	float: right;
 	padding-right: 12px;
-	background: transparent url(http://anidb.zakness.com/layout/rarr.gif) no-repeat right center;
+	background: transparent url(http://anidb.zakness.com/images/layout/rarr.gif) no-repeat right center;
 	font-weight: normal;
 }
 ul.g_jumplist li.all:before {

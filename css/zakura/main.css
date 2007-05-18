@@ -7,7 +7,7 @@
 div.main_all div.rightbar {
 	float: right;
 	width: 25%;
-	background: #fcfafb url(http://anidb.zakness.com/layout/mamimi.png) no-repeat right top;
+	background: #fcfafb url(http://anidb.zakness.com/images/layout/mamimi.png) no-repeat right top;
 	padding: 0.5em 0 0;
 	font-size: 0.95em;
 	border: 1px solid #e4e4e4;
@@ -33,7 +33,7 @@ div.main_all div.rightbar h4 {
 }
 div.main_all div.rightbar p {
 	margin: 1em;
-	background: transparent url(http://anidb.zakness.com/layout/trans-white.png) repeat left top;
+	background: transparent url(http://anidb.zakness.com/images/layout/trans-white.png) repeat left top;
 	border-color: #ffdafc;
 	padding: 0.5em 0.2em;
 	margin: 0;
@@ -97,7 +97,7 @@ div.main_all div.news h4 {
 	margin-top: 0.7em;
 	margin-bottom: -0.1em;
 	font: 1.8em "Century Gothic", "Lucida Grande", sans-serif;
-	background: transparent url(http://anidb.zakness.com/layout/flower1.png) no-repeat left 5px;
+	background: transparent url(http://anidb.zakness.com/images/layout/flower1.png) no-repeat left 5px;
 	min-height: 30px;
 	color: #000;
 }

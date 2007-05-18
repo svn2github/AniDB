@@ -20,7 +20,7 @@ div.search_all div.search caption {
 }
 div.search_all div.search tr.action {
 	text-align: center;
-	background: transparent url(http://anidb.zakness.com/layout/stripe-ltblue.gif) repeat left top;
+	background: transparent url(http://anidb.zakness.com/images/layout/stripe-ltblue.gif) repeat left top;
 }
 div.search_all div.search tr.genres td.value i {
 	color: #ac0d72;

@@ -26,8 +26,10 @@
 /* anime meta */
 @import "http://anidb.zakness.com/animeatt.css";
 @import "http://anidb.zakness.com/animehint.css";
+@import "http://anidb.zakness.com/ep.css";
 @import "http://anidb.zakness.com/file.css";
 @import "http://anidb.zakness.com/group.css";
+@import "http://anidb.zakness.com/rel.css";
 @import "http://anidb.zakness.com/showanime.css";
 @import "http://anidb.zakness.com/up2date.css";
 
