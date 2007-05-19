@@ -56,11 +56,16 @@ def cssm():
 			if path.startswith('./sub/'):
 				oname = path.replace('./sub/','') + '.css'
 				xml(unicode('sub-'+oname.rstrip('.css')),path)
+				if os.path.exists(__out+'sub/') is False:
+					os.mkdir(__out+'sub/')
+				cssmerge(line.rstrip('\n'),file(__out+'sub/'+oname, 'w'))
 			else:
-				oname = path.lstrip('./').replace('/','-') + '.css' #evil shite because of epoxis main.css ;_;
+				oname = path.lstrip('./').replace('/','-') + '.css'
 				xml(unicode(oname.rstrip('.css')),path)
+				if os.path.exists(__out+path.lstrip('./')) is False:
+					os.mkdir(__out+path.lstrip('./'))
+				cssmerge(line.rstrip('\n'),file(__out+path.lstrip('./')+'/'+oname, 'w'))
 			__ftp[path] = oname
-			cssmerge(line.rstrip('\n'),file(__out+oname, 'w'))
 
 def xml(newstyle,path):
 	stylelist = []
@@ -111,9 +116,9 @@ def doftp():
 	ftp_update = []
 	for css in __ftp:
 		if css.startswith('./sub/'): #more evil special fixing for sub styles
-			ftp_update += [(__ftppath + 'sub/' + __ftp[css],__out+__ftp[css])]
+			ftp_update += [(__ftppath + 'sub/' + __ftp[css],__out+ 'sub/' +__ftp[css])]
 		else:
-			ftp_update += [(__ftppath + css.lstrip('./') + '/' + __ftp[css],__out+__ftp[css])]
+			ftp_update += [(__ftppath + css.lstrip('./') + '/' + __ftp[css],__out+ css.lstrip('./')+'/'+__ftp[css])]
 		if os.path.exists(css+'/images'): #do we have an /image path for the css?
 			for root,path,filename in os.walk(css+'/images'):
 				root = root.replace('\\','/') #evil mixed \ and /
