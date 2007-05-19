@@ -62,6 +62,11 @@ caption {
 	font-size: 0.9em;
 }
 
+/* abbreviations */
+abbr {
+	cursor: help;
+}
+
 /* container - content */
 div.g_content {
 	position: relative;
@@ -87,7 +92,8 @@ div.file_all div.file_info dl:after,
 div.mylist_list form:after,
 div.userpage_all div.stats:after,
 div.userpage_all div.charts:after,
-div.animeatt_all div.animeatt_reviews div.review:after {
+div.animeatt_all div.animeatt_reviews div.review:after,
+div.agcmts_all div.agcmts_head:after {
 	content: ".";
 	clear: both;
 	display: block;
@@ -197,6 +203,11 @@ div.g_menu ul li.g_odd {
 }
 
 /* selects */
+select {
+	background: #fafafa;
+	padding: 0.2em;
+	border: 1px solid #cfd0d1;
+}
 select option {
 	color: #3d3e6e;
 	background: #e0ecfd;
@@ -297,6 +308,7 @@ input[type="text"]:hover, textarea:hover {
 	padding: 0.2em;
 	color:#8e83a9;
 	border-top: 1px solid #ebe1ef;
+	vertical-align: middle;
 }
 .g_definitionlist table table, 
 .g_definitionlist table table * {

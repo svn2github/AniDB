@@ -1,0 +1,38 @@
+/*---------------------------------
+				@AGCMTS
+----------------------------------*/
+
+div.agcmts_all div.agcmts_head {
+	border-bottom: 3px solid #f3e7ff;
+	margin-bottom: 1em;
+}
+div.agcmts_all div.agcmts_head p {
+	margin-top: 0;
+	margin-bottom: 0.7em;
+	font-weight: bold;
+}
+div.agcmts_all div.agcmts_head p:first-child {
+	float: right;
+	clear: right;
+}
+div.agcmts_all div.agcmts_head p:last-child {
+	float: left;
+	clear: left;
+}
+
+/* news item elements */
+div.agcmts_all div.agcmts_entries div.comment {
+	padding-left: 27px;
+	background: transparent url(images/layout/flower1-small.png) no-repeat left top;
+	border-bottom: 1px solid #f3e7ff;
+	margin-bottom: 1em;
+}
+div.agcmts_all div.agcmts_entries div.comment:last-child {
+	border-bottom: 3px solid #f3e7ff;
+}
+
+div.agcmts_all div.agcmts_entries div.comment span.stamp {
+	display: block;
+	color: #859efd;
+	font-size: 0.85em;
+}

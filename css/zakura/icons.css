@@ -108,6 +108,32 @@ img[src*="anidb_no_vote.gif"] {
 	padding-left: 5px;
 	height: 16px;
 }
+img[src*="anidb_pri_low.gif"] {
+	background: transparent url(images/icons/priority-low.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_pri_med.gif"] {
+	background: transparent url(images/icons/priority-med.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_pri_high.gif"] {
+	background: transparent url(images/icons/priority-high.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_notify.gif"] {
+	background: transparent url(images/icons/notify.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_nonotify.gif"] {
+	background: transparent url(images/icons/notify-no.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+
 
 
 /* inline icon styles */
