@@ -1,46 +1,47 @@
+/* Last update: 29th April 2007 by Amour */
 @import "../anidbstyle/anidbstyle.css";
 
-* html td, * html th
+html td, html th
 {
 	font-size: 10px;
 	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
 }
 
-* html a.i_inline, * html span.i_inline
+html a.i_inline, html span.i_inline
 {
 	padding: 0;
 	background: none;
 }
 
-* html .i_inline span
+html .i_inline span
 {
 	display: inline;
 	font-size: 90%
 }
 
-* html #layout-search
+#layout-search
 {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 }
 
-* html #layout-search form input.submit
+#layout-search form input.submit
 {
 	margin-right: 15px;
 }
 
-* html #layout-content
+#layout-content
 {
 	margin-top: 103px;
 }
 
-* html #layout-content div.section
+#layout-content div.section
 {
 	width: 99%;
 }
 
-* html #layout-content
+#layout-content
 {
 	margin-left: 182px;
 	background-color: transparent;
@@ -48,7 +49,7 @@
 	height: auto;
 }
 
-* html #layout-content h1
+#layout-content h1
 {
 	display: block;
 	font-size: 16px;
@@ -56,8 +57,28 @@
 	margin: 4px 0 18px 37px;
 }
 
+#layout-content div.genren_all li span
+{
+	display: inline;
+	width: 100%;
+}
 
-* html #layout-content div.anime_info div.image
+#layout-content div.latestanimes_anime
+{
+	padding-left: 0;
+}
+
+#layout-content div.latestanimes_anime h3
+{
+	font-size: 10px;
+	font-weight: normal;
+}
+
+
+/* *** */
+/* Anime: fix to image position */
+/* *** */
+#layout-content div.info div.image
 {
 	float: left;
 	padding-bottom: 0px;
@@ -65,29 +86,61 @@
 	width: auto;
 }
 
-* html #layout-content div.anime_info div.data
-{
-	float: left;
-}
-
-* html #layout-content div.anime_info p.desc
+/* *** */
+/* Anime: fix to description position */
+/* *** */
+#layout-content div.info p.desc
 {
 	clear: both;
 }
 
-* html #layout-content div.genren_all li span
+/* *** */
+/* Transitional Hacks: fix to anidbstyle.css */
+/* *** */
+#layout-content *[align="center"] > *
 {
-	display: inline;
-	width: 100%;
+	text-align: center;
 }
 
-* html #layout-content div.latestanimes_anime
+/* *** */
+/* MyPlace: overlap fix */
+/* *** */
+#layout-content div.stats,
+#layout-content div.latest
 {
-	padding-left: 0;
+	clear: none;
 }
 
-* html #layout-content div.latestanimes_anime h3
+/* *** */
+/* MyList: width fix */
+/* *** */
+#layout-content ul.g_jumplist
 {
-	font-size: 10px;
-	font-weight: normal;
+width: auto;
+}
+
+#layout-content ul.g_actionlist li,
+#layout-content ul.g_jumplist li
+{
+font-style: normal;
+}
+
+/* *** */
+/* MyList: menu fix */
+/* *** */
+html #layout-content div.g_menu
+{
+	float: right;
+	height: auto;
+	width: 150px;
+}
+
+/* *** */
+/* Mass add files: dump size fix */
+/* *** */
+#layout-content div.addfilem.form div.dump textarea
+{
+	width: 90%;
+	height: 15em;
+	white-space: pre;
 }
