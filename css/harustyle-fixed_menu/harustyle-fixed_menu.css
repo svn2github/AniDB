@@ -1,9 +1,6 @@
-@import "icons-flags.css";
-@import "icons-file.css";
-@import "icons-filestate.css";
+@import "../common/style/icons/flags.css";
+@import "../common/style/icons/default.css";
 @import "icons-rate.css";
-@import "icons-other.css";
-@import "icons-other2.css";
 
 html {
 	width: 100%;
