@@ -41,11 +41,11 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-gray">
-		<title>AniDBstyle</title>
-		<creator>Default AniDB design based on akujin's creation. Converted to css by Rar and PetriW</creator>
+		<title/>
+		<creator/>
 		<update/>
-		<status>in development</status>
-		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.</description>
+		<status/>
+		<description/>
 		<path/>
 		<screenshot/>
 		<thumbnail/>
@@ -61,14 +61,14 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-silver">
-		<title>sub-blue</title>
-		<creator>epoximator</creator>
-		<update>18.05.2007</update>
-		<status>active</status>
-		<description>It'S SILVER!!!!</description>
-		<path>here</path>
-		<screenshot>no! really HERE!</screenshot>
-		<thumbnail>over here</thumbnail>
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="zakura">
 		<title>Zakura</title>
@@ -173,6 +173,16 @@ Thanks to ricce for making the fixed menu modification.</description>
 		<thumbnail/>
 	</style>
 	<style name="harustylex">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="anidbstyle-dongato">
 		<title/>
 		<creator/>
 		<update/>
