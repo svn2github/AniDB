@@ -6,6 +6,9 @@
 		<update>18.05.2007</update>
 		<status>active</status>
 		<description>It'S BLUE!!!!</description>
+		<path>here</path>
+		<screenshot>no! really HERE!</screenshot>
+		<thumbnail>over here</thumbnail>
 	</style>
 	<style name="sub-brown">
 		<title/>
@@ -13,6 +16,9 @@
 		<update/>
 		<status/>
 		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="sub-brown2">
 		<title/>
@@ -20,6 +26,9 @@
 		<update/>
 		<status/>
 		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="sub-dragon">
 		<title/>
@@ -27,6 +36,9 @@
 		<update/>
 		<status/>
 		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="sub-gray">
 		<title/>
@@ -34,6 +46,9 @@
 		<update/>
 		<status/>
 		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="sub-norwegian-blue">
 		<title/>
@@ -41,6 +56,9 @@
 		<update/>
 		<status/>
 		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="sub-silver">
 		<title/>
@@ -48,6 +66,9 @@
 		<update/>
 		<status/>
 		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="zakura">
 		<title>Zakura</title>
@@ -57,5 +78,8 @@
 		<description>Only tested in Firefox/Mac.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
 Thanks to ricce for making the fixed menu modification.</description>
+		<path></path>
+		<screenshot></screenshot>
+		<thumbnail></thumbnail>
 	</style>
 </css_styles>

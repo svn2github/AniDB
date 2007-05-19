@@ -55,21 +55,21 @@ def cssm():
 			path,name = line.rstrip('\n').rsplit('/',1)
 			if path.startswith('./sub/'):
 				oname = path.replace('./sub/','') + '.css'
-				xml(unicode('sub-'+oname.rstrip('.css')),path)
-				if os.path.exists(__out+'sub/') is False:
-					os.mkdir(__out+'sub/')
-				cssmerge(line.rstrip('\n'),file(__out+'sub/'+oname, 'w'))
+				xmlname = path.replace('./sub/','sub-')
 			else:
 				oname = path.lstrip('./').replace('/','-') + '.css'
-				xml(unicode(oname.rstrip('.css')),path)
-				if os.path.exists(__out+path.lstrip('./')) is False:
-					os.mkdir(__out+path.lstrip('./'))
-				cssmerge(line.rstrip('\n'),file(__out+path.lstrip('./')+'/'+oname, 'w'))
+				xmlname = path.lstrip('./').replace('/','-')
+				
+			xml(unicode(xmlname),path)
+			out = __out+path.lstrip('./').replace('/','-')
+			if os.path.exists(out) is False:
+				os.mkdir(out)
+			cssmerge(line.rstrip('\n'),file(out + '/' + oname, 'w'))
 			__ftp[path] = oname
 
 def xml(newstyle,path):
 	stylelist = []
-	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u''}
+	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u'', 'path': u'', 'screenshot': u'', 'thumbnail': u''}
 	descpath = path + '/' + 'description'
 	xmldoc = amara.parse('./stylelist.xml')
 
@@ -99,6 +99,9 @@ def xml(newstyle,path):
 				styleelem[i].update = new['update']
 				styleelem[i].status = new['status']
 				styleelem[i].description = new['description']
+				styleelem[i].path = new['path']
+				styleelem[i].thumbnail = new['thumbnail']
+				styleelem[i].screenshot = new['screenshot']
 	else:
 		temp = copy.deepcopy(xmldoc.css_styles.style)
 		temp.name = newstyle
@@ -107,6 +110,9 @@ def xml(newstyle,path):
 		temp.update = new['update']
 		temp.status = new['status']
 		temp.description = new['description']
+		temp.path = new['path']
+		temp.thumbnail = new['thumbnail']
+		temp.screenshot = new['screenshot']
 		xmldoc.css_styles.xml_append(temp)
 
 	output = file('./stylelist.xml', 'w')
@@ -115,19 +121,13 @@ def xml(newstyle,path):
 def doftp():
 	ftp_update = []
 	for css in __ftp:
-		if css.startswith('./sub/'): #more evil special fixing for sub styles
-			ftp_update += [(__ftppath + 'sub/' + __ftp[css],__out+ 'sub/' +__ftp[css])]
-		else:
-			ftp_update += [(__ftppath + css.lstrip('./') + '/' + __ftp[css],__out+ css.lstrip('./')+'/'+__ftp[css])]
+		ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/' + __ftp[css],__out+ css.lstrip('./').replace('/','-') + '/'+__ftp[css])]
 		if os.path.exists(css+'/images'): #do we have an /image path for the css?
 			for root,path,filename in os.walk(css+'/images'):
 				root = root.replace('\\','/') #evil mixed \ and /
 				for elem in filename:
 					if filter(elem.endswith, __extensions):
-						if root.startswith('./sub/'): #more evil special fixing for sub styles
-							ftp_update += [(__ftppath + 'sub/images/' + elem,root + '/' + elem)]
-						else:
-							ftp_update += [(__ftppath + root.lstrip('./') + '/' + elem,root + '/' + elem)]
+						ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
 
 	ftp_update += [(__ftppath + 'stylelist.xml','./stylelist.xml')]
 	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
