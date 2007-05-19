@@ -41,11 +41,11 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-gray">
-		<title/>
-		<creator/>
+		<title>AniDBstyle</title>
+		<creator>Default AniDB design based on akujin's creation. Converted to css by Rar and PetriW</creator>
 		<update/>
-		<status/>
-		<description/>
+		<status>in development</status>
+		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.</description>
 		<path/>
 		<screenshot/>
 		<thumbnail/>
@@ -61,14 +61,14 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-silver">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
+		<title>sub-blue</title>
+		<creator>epoximator</creator>
+		<update>18.05.2007</update>
+		<status>active</status>
+		<description>It'S SILVER!!!!</description>
+		<path>here</path>
+		<screenshot>no! really HERE!</screenshot>
+		<thumbnail>over here</thumbnail>
 	</style>
 	<style name="zakura">
 		<title>Zakura</title>
@@ -78,8 +78,108 @@
 		<description>Only tested in Firefox/Mac.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
 Thanks to ricce for making the fixed menu modification.</description>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="zakura-fixed_menu">
+		<title></title>
+		<creator></creator>
+		<update></update>
+		<status></status>
+		<description></description>
 		<path></path>
 		<screenshot></screenshot>
 		<thumbnail></thumbnail>
+	</style>
+	<style name="anidbstyle">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="anidbstyle_hacks">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="dark-style">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="grey">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustyle">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustylele">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustyle-fixed_menu">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="sub-harustylex">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustylex">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 </css_styles>
