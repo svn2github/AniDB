@@ -53,10 +53,14 @@ def cssm():
 	for line in file('stylelist').readlines():
 		if not line.startswith('#'):
 			path,name = line.rstrip('\n').rsplit('/',1)
-			oname = path.lstrip('./').replace('/','-') + '.css' #evil shite because of epoxis main.css ;_;
-			__ftp[oname] = path
+			if path.startswith('./sub/'):
+				oname = path.replace('./sub/','') + '.css'
+				xml(unicode('sub-'+oname.rstrip('.css')),path)
+			else:
+				oname = path.lstrip('./').replace('/','-') + '.css' #evil shite because of epoxis main.css ;_;
+				xml(unicode(oname.rstrip('.css')),path)
+			__ftp[path] = oname
 			cssmerge(line.rstrip('\n'),file(__out+oname, 'w'))
-			xml(unicode(oname.rstrip('.css')),path)
 
 def xml(newstyle,path):
 	stylelist = []
@@ -106,12 +110,12 @@ def xml(newstyle,path):
 def doftp():
 	ftp_update = []
 	for css in __ftp:
-		if __ftp[css].startswith('./sub/'): #more evil special fixing for sub styles
-			ftp_update += [(__ftppath + 'sub/' + css,__out+css)]
+		if css.startswith('./sub/'): #more evil special fixing for sub styles
+			ftp_update += [(__ftppath + 'sub/' + __ftp[css],__out+__ftp[css])]
 		else:
-			ftp_update += [(__ftppath + __ftp[css].lstrip('./') + '/' + css,__out+css)]
-		if os.path.exists(__ftp[css]+'/images'): #do we have an /image path for the css?
-			for root,path,filename in os.walk(__ftp[css]+'/images'):
+			ftp_update += [(__ftppath + css.lstrip('./') + '/' + __ftp[css],__out+__ftp[css])]
+		if os.path.exists(css+'/images'): #do we have an /image path for the css?
+			for root,path,filename in os.walk(css+'/images'):
 				root = root.replace('\\','/') #evil mixed \ and /
 				for elem in filename:
 					if filter(elem.endswith, __extensions):
@@ -125,12 +129,12 @@ def doftp():
 
 	for ftp_path, local_file in ftp_update:
 		try:
-			anidbftp.storbinary("STOR "+ftp_path, file(local_file))
+			anidbftp.storbinary("STOR "+ftp_path, file(local_file,'rb'))
 			print "Uploading", ftp_path
 		except ftplib.error_perm, error:
 			ftpfolder(ftp_path,anidbftp)
 			try:
-				anidbftp.storbinary("STOR "+ftp_path, file(local_file))
+				anidbftp.storbinary("STOR "+ftp_path, file(local_file,'rb'))
 				print "Uploading", ftp_path
 			except ftplib.error_perm, error:
 				print error
