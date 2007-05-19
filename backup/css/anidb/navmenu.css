@@ -1,0 +1,81 @@
+div#navmenu ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+div#navmenu {
+  font-size: 10px;
+  color: #bbbbbb;
+}
+
+div#navmenu a img {
+  border: none;
+}
+
+div#navmenu ul li {
+  clear: both;
+}
+
+div#navmenu ul li a img {
+  float: left;
+}
+
+div#navmenu a:link, a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+div#navmenu a:active {
+  color: #ff0000;
+  text-decoration: none;
+}
+div#navmenu a:hover {
+  color: #bbbbbb;
+  text-decoration: none;
+}
+
+div#loginInfo {
+  color: #bbbbbb;
+  text-align: left;
+}
+
+div#loginInfo a img {
+  border: none;
+}
+
+div#loginInfo span.exclaim {
+  color: red;
+}
+
+div#loginInfo a:link, a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+div#loginInfo a:active {
+  color: #ff0000;
+  text-decoration: none;
+}
+
+div#loginInfo a:hover {
+  color: #bbbbbb;
+  text-decoration: none;
+}
+
+div#loginInfo div#loginString p {
+  text-align: right;
+}
+
+div#loginInfo div#loginNotifies p {
+  text-align: center;
+}
+
+div#loginInfo div#loginButtons p {
+  text-align: center;
+}
+
+div#loginInfo div#loginButtons span.buttonText {
+  display: none;
+}
+

@@ -1,0 +1,2441 @@
+/*../common.css*/
+/*../common/layout/default.css*/
+html, body, div, form, table, tr, td, ul, ol, dl, li, dt, h1, h2, h3, h4, p, caption
+{
+padding: 1px;
+margin: 0;
+border: none;
+}
+
+table, dt, dd
+{
+padding: 0;
+}
+
+table table
+{
+width: 100%;
+}
+
+td, th
+{
+padding: 1px 2px 1px 2px;
+}
+
+li
+{
+padding: 0px 4px 0px 2px;
+}
+
+p
+{
+padding: 2px;
+}
+
+table, table caption
+{
+margin: 0 auto 0 auto;
+}
+
+span
+{
+display: inline;
+}
+
+fieldset
+{
+display: none;
+}
+
+ul
+{
+list-style-type: none;
+}
+
+ol
+{
+list-style-position: outside;
+margin-left: 2em;
+}
+
+dl
+{
+display: table;
+margin: 1px auto 1px auto;
+}
+
+dl dt
+{
+float: left;
+clear: left;
+}
+
+dl dd
+{
+margin-left: 10em;
+text-align: left;
+}
+
+/*../common/layout/common.css*/
+body.nonav #layout-content,
+body.nonav #layout-footer
+{
+width: auto;
+height: 90%;
+margin:0;
+}
+
+#layout-nav input
+{
+width: 100%;
+}
+
+#layout-nav ul+ul
+{
+margin-top: 2px;
+}
+
+#layout-nav label input
+{
+width: auto;
+}
+
+body.nonav
+{
+padding: 0;
+}
+
+body.nonav #layout-content h1
+{
+display: none;
+}
+
+#layout-content h1,
+#layout-content div.g_section,
+#layout-content div.g_filterlist,
+#layout-content ul.g_actionlist,
+#layout-content div.g_errorbox,
+#layout-content div.g_warnbox,
+#layout-content div.g_notebox,
+#layout-content div.g_successbox,
+#layout-content div.mylist_list ul.g_jumplist,
+#layout-content div.addepm div.ep
+{
+margin-bottom: 1em;
+}
+
+#layout-content div.g_end
+{
+padding: 0;
+margin: 0;
+clear: right;
+border: none;
+}
+
+#layout-content div.g_section,
+#layout-content div.g_filterlist,
+#layout-content ul.g_actionlist
+{
+clear: both;
+}
+
+#layout-content ul.type
+{
+float: left;
+}
+
+#layout-content ul.g_numonpage
+{
+float: right;
+}
+
+*.g_navprev
+{
+float: left;
+padding-left: 0.3em;
+}
+
+*.g_navnext
+{
+float: right;
+padding-right: 0.3em;
+}
+
+/*#layout-content div.g_definitionlist
+{
+border: none;
+}*/
+#layout-content div table td.title div
+{
+float: right;
+}
+
+#layout-content div.group_released tr td.languages span.i_icon,
+#layout-content div table td div.icoco span.i_icon,
+#layout-content div.anime_all div.groups td.languages span.i_icon,
+#layout-content div.anime_all div.episodes td.action .i_icon,
+#layout-content div.latest_completed td.icon span.i_icon
+{
+float: left;
+padding: 0px 2px 0px 2px;
+}
+
+#layout-content div.anime_all div.episodes table.eplist,
+#layout-content div.ep_all table.filelist
+{
+width: 98%;
+}
+
+#layout-content div.mylist_list table td.rating.votes span.count
+{
+display: none;
+}
+
+#layout-content div.ed2kdump_box textarea
+{
+width: 98%;
+}
+
+/*../common/layout/global/all.css*/
+/*block.css*/
+#layout-content div.block
+{
+display: table;
+margin-left: auto;
+margin-right: auto;
+}
+
+#layout-content div.block div.image
+{
+display: table-cell;
+vertical-align: middle;
+padding-right: 1em;
+}
+
+#layout-content div.block + p.desc
+{
+margin-top: 1em;
+margin-left: 2em;
+margin-right: 2em;
+}
+
+/*msgbox.css*/
+#layout-content div.g_errorbox,
+#layout-content div.g_warnbox,
+#layout-content div.g_notebox,
+#layout-content div.g_successbox
+{
+padding: 0.4em;
+}
+
+/*jumplist.css*/
+#layout-content ul.g_jumplist
+{
+height: 1.2em;
+}
+
+#layout-content table + ul.g_jumplist,
+#layout-content ul.g_jumplist + table
+{
+margin-top: 1em;
+}
+
+#layout-content ul.g_jumplist
+{
+clear: both;
+padding-left: 0;
+padding-top: 2px;
+padding-bottom: 2px;
+width: 100%;
+text-align: center;
+}
+
+#layout-content ul.g_actionlist li,
+#layout-content ul.g_jumplist li
+{
+display: inline;
+font-style: italic;
+margin-left: 0;
+margin-right: 0;
+padding-left: 0;
+padding-right: 0;
+}
+
+#layout-content ul.g_actionlist li a,
+#layout-content ul.g_jumplist li a
+{
+display: inline;
+font-style: normal;
+}
+
+#layout-content ul.g_jumplist li.prev:after,
+#layout-content ul.g_jumplist li.next:after,
+#layout-content ul.g_jumplist li.other:after
+{
+content: "";
+}
+
+#layout-content ul.g_jumplist li:after
+{
+font-style: normal;
+content: " |";
+}
+
+#layout-content ul.g_jumplist li.prev
+{
+padding-left: 1em;
+float: left;
+}
+
+#layout-content ul.g_jumplist li.next
+{
+padding-right: 1em;
+float: right;
+}
+
+#layout-content ul.g_jumplist li.all:before
+{
+font-style: normal;
+content: "Jump to: ";
+}
+
+#layout-content ul.g_actionlist li+li:before
+{
+content: " - ";
+}
+
+/*menu.css*/
+#layout-content div.g_menu
+{
+float: right;
+margin-bottom: 1em;
+}
+
+#layout-content div.g_menu ul + ul
+{
+margin-top: 2px;
+}
+
+#layout-content div.g_menu ul li
+{
+padding: 1px 6px 1px 6px;
+}
+
+#layout-content div.g_menu ul.state
+{
+height: 15px;
+padding-top: 2px;
+padding-bottom: 1px;
+}
+
+#layout-content div.g_menu ul.state li
+{
+float: left;
+padding: 0px 2px 0px 1px;
+}
+
+#layout-content div.g_menu ul.state + ul
+{
+clear: left;
+}
+
+/*navlist.css*/
+#layout-content ul.g_navlist
+{
+text-align: center;
+}
+
+#layout-content ul.g_navlist li
+{
+display: inline;
+list-style: none outside;
+}
+
+#layout-content ul.g_navlist li.here
+{
+font-style: italic;
+}
+
+#layout-content ul.g_navlist
+{
+margin: 0 auto;
+padding: 0.3em;
+text-align: left;
+margin-bottom: 1em;
+}
+
+#layout-content ul.g_navlist li
+{
+display: inline;
+list-style: none outside;
+}
+
+/*../common/layout/page/all.css*/
+/*addtitle.css*/
+#layout-content div.addanimetitle_form input[type="text"],
+#layout-content div.addeptitle_form p input[type="text"]
+{
+width: 21em;
+}
+
+#layout-content div.addanimetitle_form span.comment label,
+#layout-content div.addeptitle_form span.comment label,
+#layout-content div.addanimetitle_form span input,
+#layout-content div.addeptitle_form p span input
+{
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+#layout-content div.addanimetitle_form p span label,
+#layout-content div.addeptitle_form p span label,
+#layout-content div.addanimetitle_form p span.header,
+#layout-content div.addeptitle_form p span.header
+{
+display: none;
+}
+
+/*agcmts.css*/
+#layout-content div.agcmts_entries div.comment + div.comment
+{
+margin-top: 1em;
+}
+
+#layout-content div.agcmts_entries div.comment,
+#layout-content div.agcmts_entries div.comment h4
+{
+text-align: left;
+}
+
+#layout-content div.agcmts_entries div.comment span.stamp
+{
+display: block;
+text-align: right;
+margin-top: -1.3em;
+padding-right: 0.5em;
+}
+
+#layout-content div.agcmts_add p.g_howto
+{
+text-align: left;
+}
+
+#layout-content div.agcmts_add form div textarea
+{
+display: block;
+width: 80%;
+margin-left: 10%;
+height: 10em;
+}
+
+/*anime.css*/
+#layout-content div.anime_all div.info th span.i_icon
+{
+float: right;
+}
+
+#layout-content div.anime_all div.episodes table.eplist
+{
+width: 99%;
+}
+
+#layout-content div.anime_all div.episodes div.mylist_add
+{
+margin-top: 1em;
+}
+
+/*#layout-content div.anime_all div.episodes table table.filelist td.ftype .i_icon,
+#layout-content div.anime_all div.episodes td.ed2k .i_icon,
+#layout-content div.anime_all div.episodes td.stat .i_icon,
+#layout-content div.anime_all div.episodes td.action.file .i_icon
+{
+padding-left: 5px;
+float: left;
+}
+
+#layout-content div.anime_all div.episodes td.action.file
+{
+width: 60px;
+}*/
+#layout-content div.anime_all div.episodes td.action.episode,
+#layout-content div.anime_all div.episodes td.action.file
+{
+width: 60px;
+}
+
+#layout-content div.anime_all div.mylist table td
+{
+padding: 1em;
+}
+
+#layout-content div.anime_all div.mylist table td span.i_icon
+{
+margin-left: 1em;
+}
+
+#layout-content div.anime_all div.mylist div.g_actionlist
+{
+margin-top: 1em;
+margin-bottom: 1em;
+}
+
+/*animeatt.css*/
+#layout-content div.animeatt_reviews div.review
+{
+clear: right;
+}
+
+#layout-content div.animeatt_reviews div.review+div.review
+{
+margin-top: 2em;
+}
+
+#layout-content div.animeatt_reviews div.review div.head,
+#layout-content div.animeatt_reviews div.review div.menu
+{
+float: right;
+clear: right;
+width: 10em;
+padding-right: 2em;
+}
+
+#layout-content div.animeatt_reviews div.review div.head table,
+#layout-content div.animeatt_reviews div.review div.menu
+{
+width: 10em;
+}
+
+#layout-content div.animeatt_reviews div.review div.body
+{
+text-align: left;
+padding-right: 14em;
+padding-left: 8em;
+}
+
+#layout-content div.animeatt_reviews div.review div.head table td.value
+{
+text-align: right;
+}
+
+#layout-content div.animeatt_comment
+{
+text-align: left;
+}
+
+#layout-content div.animeatt_comment textarea
+{
+width: 96%;
+height: 10em;
+}
+
+/*file.css*/
+#layout-content div.file_info dl .type,
+#layout-content div.file_info dl .censored,
+#layout-content div.file_info dl .stats,
+#layout-content div.file_info dl .owner
+{
+margin-top: 0.4em;
+}
+
+#layout-content div.file_tracks div+div,
+#layout-content div.file_relations div+div
+{
+margin-top: 0.6em;
+}
+
+#layout-content div.addfilem.form div.dump textarea
+{
+width: 100%;
+height: 30em;
+white-space: nowrap;
+}
+
+#layout-content div.addfilem.form dl.options dt
+{
+text-align: left;
+}
+
+#layout-content div.addfilem.form dl.options dd
+{
+margin-left: 8em;
+}
+
+#layout-content div.addfilem.form dl.options dd select
+{
+min-width: 10em;
+max-width: 20.4em;
+}
+
+/*genren.css*/
+#layout-content div.genren_all
+{
+text-align: center;
+}
+
+#layout-content div.genren_all div.categories
+{
+width: 90%;
+margin: 1em auto 1em auto;
+text-align: left;
+}
+
+#layout-content div.genren_all div.controls
+{
+text-align: center;
+}
+
+#layout-content div.genren_all a.i_icon
+{
+position: relative;
+right: 18px;
+float: left;
+margin-right: -15px;
+}
+
+#layout-content div.genren_all li
+{
+list-style: none outside;
+line-height: 14px;
+padding: 0;
+}
+
+#layout-content div.genren_all li span
+{
+display: block;
+}
+
+#layout-content div.genren_all li.collapsed ul
+{
+display: none;
+}
+
+/*latestanimes.css*/
+#layout-content div.latestanimes_form
+{
+clear: both;
+}
+
+#layout-content div.latestanimes_form a
+{
+margin: 1.3em;
+}
+
+#layout-content div.latestanimes_form form
+{
+margin: 1em 0;
+text-align: center;
+}
+
+#layout-content div.latestanimes_form div
+{
+display: inline;
+}
+
+#layout-content div.latestanimes_form form input.year
+{
+width: 2.5em;
+}
+
+#layout-content div.latestanimes_anime
+{
+clear: left;
+padding-left: 10%
+}
+
+#layout-content div.latestanimes_anime img
+{
+display: block;
+width: 15em;
+margin: -2em 1em 1em 1em;
+float: left;
+}
+
+#layout-content div.latestanimes_anime h3
+{
+margin: 0.5em 0 0.5em 17.3em;
+}
+
+/*main.css*/
+#layout-content div.main_all div.rightbar
+{
+width: 19em;
+clear: right;
+float: right;
+}
+
+#layout-content div.main_all div.rightbar p
+{
+text-align: center;
+}
+
+#layout-content div.main_all div.rightbar h3
+{
+margin-top: 1em;
+}
+
+#layout-content div.main_all div.rightbar ol
+{
+list-style-type: none;
+margin-left: 0;
+}
+
+#layout-content div.main_all div.news
+{
+margin-right: 20em;
+}
+
+#layout-content div.main_all div.news h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+padding: 0.1em;
+margin-top: 0;
+margin-bottom: 0;
+}
+
+#layout-content div.main_all div.news div
+{
+padding: 0.2em;
+}
+
+#layout-content div.main_all div.news span.stamp
+{
+display: block;
+text-align: right;
+padding-right: 0.5em;
+}
+
+#layout-content div.main_all div.news div+h4
+{
+margin-top: 2em;
+}
+
+/* main_edit */
+#layout-content div.main_edit
+{
+text-align: center;
+padding-left: 5%;
+padding-right: 5%;
+}
+
+#layout-content div.main_edit label
+{
+display: block;
+text-align: left;
+vertical-align: top;
+margin: auto;
+padding: 0.6em;
+}
+
+#layout-content div.main_edit label *
+{
+display: block;
+margin-top: -1.2em;
+margin-left: 4em;
+}
+
+#layout-content div.main_edit label input
+{
+width: 90%;
+}
+
+#layout-content div.main_edit textarea
+{
+height: 30em;
+width: 90%;
+}
+
+#layout-content div.main_edit form div > input
+{
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+/*admin.css*/
+#layout-content div.dbstats_all table ol
+{
+width: 20em;
+}
+
+#layout-content div.creqmod_all table
+{
+width: 90%;
+}
+
+#layout-content div.stats_all table,
+#layout-content div.dbstats_all table
+{
+border: none;
+border-spacing: 1em;
+}
+
+#layout-content div.stats_all table tr,
+#layout-content div.dbstats_all table tr
+{
+background-color: inherit;
+}
+
+#layout-content div.stats_all table td,
+#layout-content div.dbstats_all table td
+{
+border: none;
+}
+
+#layout-content div.admin_menu,
+#layout-content div.admin_cat_menu ul
+{
+margin-left: 25%;
+margin-right: 25%;
+}
+
+/*myplace.css*/
+#layout-content div.userpage_all div.stats,
+#layout-content div.myplace_all div.stats
+{
+float: left;
+clear: none;
+width: 14em;
+}
+
+#layout-content div.userpage_all div.stats table,
+#layout-content div.myplace_all div.stats table
+{
+width: 95%;
+}
+
+#layout-content div.userpage_all div.stats div table th,
+#layout-content div.myplace_all div.stats div table th
+{
+width: 60%;
+}
+
+#layout-content div.userpage_all div.stats div table td.value,
+#layout-content div.myplace_all div.stats div table td.value
+{
+text-align: right;
+}
+
+#layout-content div.myplace_all div.latest
+{
+margin-left: 15em;
+margin-right: 9em;
+clear: none;
+}
+
+#layout-content div.userpage_all div.buddies,
+#layout-content div.userpage_all div.favreviewers
+{
+float: right;
+clear: right;
+margin-bottom: 1em;
+}
+
+#layout-content div.userpage_all div.g_menu h4,
+#layout-content div.userpage_all div.buddies h4,
+#layout-content div.userpage_all div.favreviewers h4
+{
+width: 9em;
+}
+
+#layout-content div.userpage_all div.buddies ul li,
+#layout-content div.userpage_all div.favreviewers ul li
+{
+padding: 1px 6px 1px 6px;
+}
+
+#layout-content div.userpage_all div.userdetails,
+#layout-content div.userpage_all div.userprefs
+{
+margin-left: 15em;
+margin-right: 11.5em;
+clear: none;
+}
+
+#layout-content div.userpage_all div.userprefs h4
+{
+text-align: center;
+}
+
+#layout-content div.userpage_all div.charts
+{
+width: 710px;
+height: 600px;
+margin-left:auto;
+margin-right:auto;
+}
+
+#layout-content div.userpage_all div.charts div
+{
+float: left;
+}
+
+#layout-content div.userpage_all div.charts div.votedistribution
+{
+margin-left: 50px;
+}
+
+#layout-content div.userpage_all div.userdetails p
+{
+text-align: left;
+margin-left: 4em;
+margin-right: 2em;
+margin-top: 2em;
+}
+
+#layout-content div.userpage_all ul.g_navlist
+{
+float: none;
+text-align: center;
+}
+
+#layout-content div.userpage_all div.latest div
+{
+margin: 0 25% 0 25%;
+}
+
+/*../common/style/icons/default.css*/
+a.i_icon:hover, a.i_inline:hover
+{
+text-decoration: none;
+}
+
+*.i_icon
+{
+background-repeat: no-repeat;
+background-position: center;
+display: block;
+width: 15px;
+height: 13px;
+text-indent: -5000px;
+margin-left: 0;
+margin-right: 0;
+}
+
+*.i_araward
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_araward.gif);
+}
+
+*.i_censored
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_censored.gif);
+}
+
+*.i_comment
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_comment.gif);
+}
+
+*.i_crc_no
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_crc_no.gif);
+}
+
+*.i_crc_yes
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_crc_yes.gif);
+}
+
+*.i_file_add
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_add.gif);
+}
+
+*.i_file_addmylist
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_addmylist.gif);
+}
+
+*.i_file_delete
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_delete.gif);
+}
+
+*.i_file_ed2k
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_ed2k.gif);
+}
+
+*.i_file_edit
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_edit.gif);
+}
+
+*.i_file_removemylist
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_file_removemylist.gif);
+}
+
+*.i_filestate_corrupted
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_corrupted.gif);
+}
+
+*.i_filestate_edited
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_edited.gif);
+}
+
+*.i_filestate_ondvd
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_ondvd.gif);
+}
+
+*.i_filestate_ontv
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_ontv.gif);
+}
+
+*.i_filestate_onvhs
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_onvhs.gif);
+}
+
+*.i_filestate_other
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_other.gif);
+}
+
+*.i_filestate_selfripped
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_selfripped.gif);
+}
+
+*.i_filestate_theater
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_filestate_theater.gif);
+}
+
+*.i_greenbar
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_greenbar.gif);
+}
+
+*.i_greenbarh
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_greenbarh.gif);
+}
+
+*.i_hanger
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_hanger.gif);
+}
+
+*.i_mylist
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_mylist.gif);
+}
+
+*.i_new2
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_new2.gif);
+}
+
+*.i_new_icon
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_new_icon.gif);
+}
+
+*.i_no_rev
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_no_rev.gif);
+}
+
+*.i_report_entry,
+*.i_no_vote
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_no_vote.gif);
+}
+
+*.i_nonotify
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_nonotify.gif);
+}
+
+*.i_notify
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_notify.gif);
+}
+
+*.i_orangebar
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_orangebar.gif);
+}
+
+*.i_pri_high
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_pri_high.gif);
+}
+
+*.i_pri_low
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_pri_low.gif);
+}
+
+*.i_pri_med
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_pri_med.gif);
+}
+
+*.i_rate_corrupted
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rate_corrupted.gif);
+}
+
+*.i_rate_eyecancer
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rate_eyecancer.gif);
+}
+
+*.i_rate_unknown
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rate_unknown.gif);
+}
+
+*.i_recap
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_recap.gif);
+}
+
+*.i_rev
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_rev.gif);
+}
+
+*.i_seen
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_seen.gif);
+}
+
+*.i_seen_no
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_seen_no.gif);
+}
+
+*.i_seen_yes
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_seen_yes.gif);
+}
+
+*.i_state_all
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_all.gif);
+}
+
+*.i_state_deleted
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_deleted.gif);
+}
+
+*.i_state_mixed
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_mixed.gif);
+}
+
+*.i_state_oncd
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_oncd.gif);
+}
+
+*.i_state_onhdd
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_onhdd.gif);
+}
+
+*.i_state_release
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_release.gif);
+}
+
+*.i_state_shared
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_shared.gif);
+}
+
+*.i_state_unknown
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/state/anidb_state_unknown.gif);
+}
+
+*.i_uncensored
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_uncensored.gif);
+}
+
+*.i_vrs_1
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_1.gif);
+}
+
+*.i_vrs_2
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_2.gif);
+}
+
+*.i_vrs_3
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_3.gif);
+}
+
+*.i_vrs_4
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_4.gif);
+}
+
+*.i_vrs_5
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_5.gif);
+}
+
+*.i_ask
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/ask.gif);
+}
+
+*.i_back
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/back.gif);
+}
+
+*.i_logon
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/button_logon.gif);
+}
+
+*.i_punkt
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/button_punkt.gif);
+}
+
+*.i_search
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/button_search.gif);
+}
+
+*.i_suchen
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/button_suchen.gif);
+}
+
+*.i_down1
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/down1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_empty
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/empty.gif);
+}
+
+*.i_invalid
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/invalid.gif);
+}
+
+*.i_minus
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/minus.gif);
+}
+
+*.i_na
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/na.gif);
+}
+
+*.i_nodown1
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/nodown1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_none
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/none.gif);
+}
+
+*.i_nopic
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/nopic.gif);
+}
+
+*.i_noup1
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/noup1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_plus
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/plus.gif);
+}
+
+*.i_up1
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/up1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_vrs_1
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_1.gif);
+}
+
+*.i_vrs_2
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_2.gif);
+}
+
+*.i_vrs_3
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_3.gif);
+}
+
+*.i_vrs_4
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_4.gif);
+}
+
+*.i_vrs_5
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_vrs_5.gif);
+}
+
+/* NEW ANIME PAGE */
+*.i_crc_unv
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_crc_unv.gif);
+}
+
+*.i_sort
+{
+width: 5px;
+background-image: url(http://www.anidb.net/css/anidbstyle/images/sort.gif);
+}
+
+*.i_group_vote,
+*.i_ep_vote
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_vote.gif);
+}
+
+*.i_group_revote,
+*.i_ep_revote
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/anidb_revote.gif);
+}
+
+span.i_videostream_unknown,
+span.i_videostream_other__non_asp_,
+span.i_videostream_asp_other,
+span.i_videostream_mpeg_2,
+span.i_videostream_mpeg_1,
+span.i_videostream_realvideo_other,
+span.i_videostream_wmv9__also_wmv3_,
+span.i_videostream
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream.gif);
+}
+
+span.i_videostream_realvideo_9_10__also_rv40_,
+span.i_videostream_realvideo_other
+{
+width: 20px;
+background-repeat: repeat-x;
+background-position: left;
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_real.gif);
+}
+
+span.i_videostream_ms_mp4x__also_wmv1_2_,
+span.i_videostream_wmv9__also_wmv3_
+{
+width: 20px;
+background-repeat: repeat-x;
+background-position: left;
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_wmv.gif);
+}
+
+span.i_videostream_divx__unk,
+span.i_videostream_divx3,
+span.i_videostream_divx4,
+span.i_videostream_divx5__also_divx6_
+{
+width: 20px;
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_divx.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_videostream_xvid
+{
+width: 20px;
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_xvid.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_videostream_h264_avc
+{
+width: 20px;
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_videoStream_h264.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+*.i_ftype_video
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_video.gif);
+}
+
+*.i_ftype_video2
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_video2.gif);
+}
+
+*.i_ftype_subtitle
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_subtitles.gif);
+}
+
+*.i_ftype_subtitle2
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_subtitles2.gif);
+}
+
+*.i_ftype_audio
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_audio.gif);
+}
+
+*.i_ftype_other
+{
+background-image: url(http://www.anidb.net/css/anidbstyle/images/icon/anidb_other.gif);
+}
+
+/*../common/style/icons/flags.css*/
+*.i_audio_ar
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_arabic.gif);
+}
+
+*.i_sub_ar
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_arabic.gif);
+}
+
+*.i_audio_bg
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_bulgarian.gif);
+}
+
+*.i_sub_bg
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_bulgarian.gif);
+}
+
+*.i_audio_ca
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_catalan.gif);
+}
+
+*.i_sub_ca
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_catalan.gif);
+}
+
+*.i_audio_cs
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_czech.gif);
+}
+
+*.i_sub_cs
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_czech.gif);
+}
+
+*.i_audio_da
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_danish.gif);
+}
+
+*.i_sub_da
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_danish.gif);
+}
+
+*.i_audio_de
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_german.gif);
+}
+
+*.i_sub_de
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_german.gif);
+}
+
+*.i_audio_et
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_estonian.gif);
+}
+
+*.i_sub_et
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_estonian.gif);
+}
+
+*.i_audio_es
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_spanish.gif);
+}
+
+*.i_sub_es
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_spanish.gif);
+}
+
+*.i_audio_el
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_greek.gif);
+}
+
+*.i_sub_el
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_greek.gif);
+}
+
+*.i_audio_en
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_english.gif);
+}
+
+*.i_sub_en
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_english.gif);
+}
+
+*.i_audio_fi
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_finnish.gif);
+}
+
+*.i_sub_fi
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_finnish.gif);
+}
+
+*.i_audio_fr
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_french.gif);
+}
+
+*.i_sub_fr
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_french.gif);
+}
+
+*.i_audio_he
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_hebrew.gif);
+}
+
+*.i_sub_he
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_hebrew.gif);
+}
+
+*.i_audio_hr
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_croatian.gif);
+}
+
+*.i_sub_hr
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_croatian.gif);
+}
+
+*.i_audio_hu
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_hungarian.gif);
+}
+
+*.i_sub_hu
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_hungarian.gif);
+}
+
+*.i_audio_id
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_indonesian.gif);
+}
+
+*.i_sub_id
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_indonesian.gif);
+}
+
+*.i_audio_it
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_italian.gif);
+}
+
+*.i_sub_it
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_italian.gif);
+}
+
+*.i_audio_ja
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_japanese.gif);
+}
+
+*.i_sub_ja
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_japanese.gif);
+}
+
+*.i_audio_ka
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_georgian.gif);
+}
+
+*.i_sub_ka
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_georgian.gif);
+}
+
+*.i_audio_ko
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_korean.gif);
+}
+
+*.i_sub_ko
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_korean.gif);
+}
+
+*.i_audio_la
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_latin.gif);
+}
+
+*.i_sub_la
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_latin.gif);
+}
+
+*.i_audio_lv
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_latvian.gif);
+}
+
+*.i_sub_lv
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_latvian.gif);
+}
+
+*.i_audio_lt
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_lithuanian.gif);
+}
+
+*.i_sub_lt
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_lithuanian.gif);
+}
+
+*.i_audio_my
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_malay.gif);
+}
+
+*.i_sub_my
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_malay.gif);
+}
+
+*.i_audio_nl
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_dutch.gif);
+}
+
+*.i_sub_nl
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_dutch.gif);
+}
+
+*.i_audio_no
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_norwegian.gif);
+}
+
+*.i_sub_no
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_norwegian.gif);
+}
+
+*.i_audio_pl
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_polish.gif);
+}
+
+*.i_sub_pl
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_polish.gif);
+}
+
+*.i_audio_pt
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_portuguese.gif);
+}
+
+*.i_sub_pt
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_portuguese.gif);
+}
+
+*.i_audio_pt-BR
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_brasilian.gif);
+}
+
+*.i_sub_pt-BR
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_brasilian.gif);
+}
+
+*.i_audio_ro
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_romanian.gif);
+}
+
+*.i_sub_ro
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_romanian.gif);
+}
+
+*.i_audio_ru
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_russian.gif);
+}
+
+*.i_sub_ru
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_russian.gif);
+}
+
+*.i_audio_sk
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_slovak.gif);
+}
+
+*.i_sub_sk
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_slovak.gif);
+}
+
+*.i_audio_sl
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_slovenian.gif);
+}
+
+*.i_sub_sl
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_slovenian.gif);
+}
+
+*.i_audio_sr
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_serbian.gif);
+}
+
+*.i_sub_sr
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_serbian.gif);
+}
+
+*.i_audio_sv
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_swedish.gif);
+}
+
+*.i_sub_sv
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_swedish.gif);
+}
+
+*.i_audio_ta
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_tamil.gif);
+}
+
+*.i_sub_ta
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_tamil.gif);
+}
+
+*.i_audio_tt
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_tartar.gif);
+}
+
+*.i_sub_tt
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_tartar.gif);
+}
+
+*.i_audio_th
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_thai.gif);
+}
+
+*.i_sub_th
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_thai.gif);
+}
+
+*.i_audio_tr
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_turkish.gif);
+}
+
+*.i_sub_tr
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_turkish.gif);
+}
+
+*.i_audio_uk
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_ukrainian.gif);
+}
+
+*.i_sub_uk
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_ukrainian.gif);
+}
+
+*.i_audio_vi
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_vietnamese.gif);
+}
+
+*.i_sub_vi
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_vietnamese.gif);
+}
+
+*.i_audio_x-in
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_instrumental.gif);
+}
+
+*.i_sub_x-in
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_instrumental.gif);
+}
+
+*.i_audio_x-jat
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_japanese-transcription.gif);
+}
+
+*.i_sub_x-jat
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_japanese-transcription.gif);
+}
+
+*.i_audio_x-other
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_unknown.gif);
+}
+
+*.i_sub_x-other
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_unknown.gif);
+}
+
+*.i_audio_x-unk
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_unknown.gif);
+}
+
+*.i_sub_x-unk
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_unknown.gif);
+}
+
+*.i_audio_zh
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_chinese.gif);
+}
+
+*.i_sub_zh
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_chinese.gif);
+}
+
+*.i_audio_zh-x-yue
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_cantonese.gif);
+}
+
+*.i_audio_zh-x-cmn
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_mandarin.gif);
+}
+
+*.i_audio_zh-x-nan
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_taiwanese.gif);
+}
+
+*.i_audio_zh-Hans
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_simplified.gif);
+}
+
+*.i_sub_zh-Hans
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_simplified.gif);
+}
+
+*.i_audio_zh-Hans
+{
+background-image: url(http://www.anidb.net/pics/anidb_audio_simplified.gif);
+}
+
+*.i_sub_zh-Hant
+{
+background-image: url(http://www.anidb.net/pics/anidb_sub_traditional.gif);
+}
+
+/*../common/style/color/msgbox-default.css*/
+#layout-content div.g_errorbox
+{
+border: 1px solid #DD0000;
+background-color: #FFE5E5;
+}
+
+#layout-content div.g_warnbox
+{
+border: 1px solid #F46F0B;
+background-color: #FFF0E5;
+}
+
+#layout-content div.g_notebox
+{
+border: 1px solid #AFAF00;
+background-color: #FFFFDF;
+}
+
+#layout-content div.g_successbox
+{
+border: 1px solid #2EB42E;
+background-color: #E5FFE5;
+}
+
+#layout-content div.g_errorbox h3
+{
+color: #FF0000;
+}
+
+#layout-content div.g_warnbox h3
+{
+color: #F46F0B;
+}
+
+#layout-content div.g_notebox h3
+{
+color: #AFAF00;
+}
+
+#layout-content div.g_successbox h3
+{
+color: #2EB42E;
+}
+
+/*../common/style/color/special.css*/
+.v_pos
+{
+color: #006600;
+}
+
+.g_vital a,
+.v_neg,
+.v_high,
+span.diff,
+#layout-content td.reviewed.no a,
+#layout-content div.creqmod_all .state.return,
+#layout-content div.creqmod_all span.type.del
+{
+color: red;
+}
+
+#layout-content div.msg_all tr.mod
+{
+background-color: orange;
+}
+
+#layout-content div.mylist_list tr.all_watched td.stats
+{
+color: darkgreen;
+}
+
+#layout-content ul.g_actionlist li.g_odd
+{
+background-color: inherit;
+}
+
+/*../common/style/text/default.css*/
+html, th
+{
+font-weight: normal;
+font-size: 10px;
+font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+a, del, ins
+{
+text-decoration: none;
+}
+
+th, td.action
+{
+white-space: nowrap;
+}
+
+/** ALIGNMENT **/
+td.id, td.count, td.number, td.size, td.epno
+{
+text-align: right;
+}
+
+td, ul, p.desc,
+th.field, td.value, td.name, td.quality, td.title, td.name,
+#layout-content div.main_all div.news h4
+{
+text-align: left;
+}
+
+th, h1, h2, h3, h4, form,
+tr.action td.value, td.stats,
+td.state, td.type, td.date, td.action, td.icon, td.ignore,
+td.name.user, td.name.owner, td.vote, td.rating, td.check,
+.g_navlist, .g_filterlist, .g_actionlist, .g_info, .g_input,
+#layout-content div.g_section,
+#layout-footer p,
+#layout-menu div.usermenu
+{
+text-align: center;
+}
+
+/** WEIGHT/STYLE **/
+.v_high,
+.v_med, span.diff,
+#layout-content div.creqmod_all .state.new,
+#layout-content div.creqmod_all .state.return,
+#layout-content div.creqmod_all span.type.del
+{
+font-weight: bold;
+}
+
+#layout-content div.msg_all tr.new td.state,
+#layout-content div.msg_all tr td.type
+{
+font-weight: bold;
+}
+
+/** SIZE **/
+#layout-menu
+{
+font-size: small;
+line-height: 1.1;
+}
+
+#layout-menu > div > ul > li > a
+{
+display: block;
+width: 104%;
+}
+
+#layout-content div.main_all div.rightbar li
+{
+font-size: x-small;
+/*overflow:hidden;
+text-overflow: ellipsis;
+white-space:nowrap;*/
+}
+
+.tiny, small
+{
+font-size: 95%;
+}
+
+/** SHIT **/
+table caption, h4
+{
+font-size: 115%;
+font-weight: bold;
+margin-top: 0.4em;
+margin-bottom: 0.2em;
+}
+
+#layout-content div.userlist_all table td.hidden:after
+{
+color: red;
+content: " hidden";
+}
+
+#layout-content div.anime_all div.groups td.state.unknown
+{
+content: "N/A";
+}
+
+/*#layout-content div.mylist_all tr.all_watched td.stats,*/
+#layout-content div.mylist_list tr.complete td.stats,
+#layout-content div.mylist_list tr.all_watched td.stats,
+#layout-content div.anime_all div.groups td.lastupdate.new,
+#layout-content div.anime_all div.groups td.state.finished,
+#layout-content div.anime_all div.groups td.state.complete,
+#layout-content div.group_released td.state.finished,
+#layout-content div.group_released td.state.complete
+{
+font-weight: bold;
+}
+
+#layout-content div.anime_all div.groups td.state.stalled,
+#layout-content div.anime_all div.groups td.state.unknown,
+#layout-content div.group_released td.state.stalled,
+#layout-content div.group_released td.state.unknown
+{
+font-style: italic;
+}
+
+#layout-content div.anime_all div.groups td.state.dropped,
+#layout-content div.group_released td.state.dropped
+{
+text-decoration: underline;
+}
+
+#layout-content div.addfile_add tr.subheader td
+{
+font-weight: bold;
+height: 2em;
+}
+
+#layout-content div.anime_all div.groups td.mylist
+{
+font-weight: bold;
+text-align: center;
+}
+
+#layout-content div.anime_all div.groups td.mylist.new
+{
+color: red;
+}
+
+#layout-content div.up2date_file_list table td.mylist
+{
+text-align: right;
+}
+
+#layout-content div.ed2kexport_all pre
+{
+white-space: pre-wrap;
+white-space: -moz-pre-wrap;
+}
+
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
+{
+content: "!";
+/*color: #FFFFFF;*/
+padding: 0.2em;
+}
+
+#layout-menu #newmessages
+{
+display: block;
+}
+
+/*../common/style/content/page-anime.css*/
+#layout-content div.anime_all a.action:before
+{
+content: "[";
+}
+
+#layout-content div.anime_all a.action:after
+{
+content: "]";
+}
+
+#layout-content div.anime_all div.groups td.mylist:before
+{
+content: "* ";
+}
+
+#layout-content div.anime_all div.groups td.mylist:after
+{
+content: " *";
+}
+
+/*../fancy.css*/
+#layout-nav:before
+{
+background-image: url(images/shun23fv.png);
+display: block;
+height: 100px;
+width: 100px;
+margin: 0.5em auto 0.5em auto;
+border: 1px #98AAB1 solid;
+content:"";
+}
+
+#layout-nav div.menu
+{
+margin-top: 1em;
+}
+
+#layout-nav div.usermenu p.user
+{
+position: absolute;
+left: 0;
+width: 150px;
+top: 110px;
+text-align: center;
+}
+
+#layout-nav div.usermenu p.user:before
+{
+content: "Hi, ";
+}
+
+#layout-nav div.usermenu p.user:after
+{
+content: "!";
+}
+
+#layout-menu div.usermenu form[enctype]
+{
+position: absolute;
+top: 22px;
+left: 175px;
+width: 6em;
+}
+
+#layout-menu div.usermenu p a.i_button+a.i_button
+{
+margin-left: 0.8em;
+}
+
+/*#layout-menu div.menu ul.my li.mynotifies,
+#layout-menu div.menu ul.my li.myreviews,
+#layout-menu div.menu ul.my li.mywishlist,
+#layout-menu div.menu ul.other
+{
+display: none;
+}*/
+#layout-nav > div
+{
+margin-left: 6px;
+margin-right: 6px;
+}
+
+/*../../common/layout/macro/separate.css*/
+body
+{
+padding: 8px;
+}
+
+#layout-nav
+{
+position: absolute;
+left: 8px;
+width: 150px;
+}
+
+#layout-content
+{
+margin-left: 165px;
+padding: 1em;
+padding-bottom: 0;
+}
+
+#layout-footer
+{
+margin-left: 165px;
+margin-top: 8px;
+}
+
+/*../../common/style/color/status-creme.css*/
+#layout-content td del,
+#layout-content tr.g_fs_lame,
+#layout-content table.filelist tr.invalid,
+#layout-content table.filelist tr.deprecated,
+#layout-content div.myvotes_all table tr.low td
+{
+background-color: #ffd7c2;
+}
+
+#layout-content div.myvotes_all table tr.g_odd.low td
+{
+background-color: #efc7b2;
+}
+
+#layout-content td ins,
+#layout-content table.filelist tr.good,
+#layout-content div.myvotes_all table tr.high td,
+#layout-content div.producer_all table tr.mylist/*,
+#layout-content div.mylist_list table table table tr.good td*/
+{
+background-color: #f2ffe9;
+}
+
+#layout-content table.filelist tr.g_odd.good,
+#layout-content div.myvotes_all table tr.g_odd.high td
+{
+background-color: #e2efd9;
+}
+
+/*border.css*/
+td
+{
+/*border-top: 1px #FFFFFF solid;*/
+}
+
+table
+{
+border: 1px solid #66604d;
+border-spacing: 0;
+}
+
+table table
+{
+border: none;
+}
+
+img, a
+{
+border: none;
+}
+
+/*ul,*/
+#layout-nav,
+#layout-footer,
+#layout-content
+{
+border: 1px #867f6a solid;
+}
+
+#layout-content *.g_jumplist,
+#layout-content *.g_description,
+#layout-content *.g_image image,
+#layout-content .g_block .g_definitionlist,
+#layout-content div.main_all div.news h4,
+#layout-content div.g_definitionlist table,
+#layout-content div.block + p.desc
+{
+border: 1px #999380 dotted;
+}
+
+#layout-content h1,
+#layout-content div.main_all div.news h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+border: 1px #867f6a dotted;
+}
+
+#layout-content .g_image image,
+#layout-content .g_definitionlist
+{
+padding: 1px;
+}
+
+#layout-content .g_block .g_definitionlist > table
+{
+border: none;
+margin: 0;
+}
+
+#layout-content div.anime_all div.episodes tr.newtype td
+{
+border-top: 1px #66604d double;
+}
+
+/*#layout-content div.g_definitionlist tr th
+{
+border-top: 1px #FFFFFF solid;
+border-right: 1px #FFFFFF solid;
+}*/
+/*color.css*/
+body/*,
+#layout-content div.g_definitionlist table*/
+{
+color: #555040;
+border-color: #FFFFFF;
+background: #bebcad;
+font: x-small/1.4 Tahoma, Verdana, Helvetica, Arial, sans-serif;
+}
+
+a:link,a:active,a:visited
+{
+color : #006699;
+}
+
+#layout-nav a
+{
+color: #4f5e77;
+font-weight: bold;
+}
+
+a:hover,
+#layout-nav a:hover
+{
+color : #98b974;
+}
+
+#layout-nav
+{
+background: #e0dbc9;
+}
+
+#layout-nav div ul,
+#layout-content,
+#layout-footer
+{
+background-color: #e9e6d9;
+}
+
+th,
+#layout-content h1,
+#layout-content div.main_all div.news h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+color: #e9e6d9;
+background-color: #8c8673;
+}
+
+#layout-content tr.g_odd,
+#layout-content li.g_odd,
+#layout-content span.g_odd,
+#layout-content div.block + p.desc
+{
+background-color: #e0dbc9;
+}
+
+#layout-menu > div > ul > li > a:hover
+{
+color: inherit;
+}
+
+#layout-menu > div > ul > li:hover
+{
+background-color: #e0dbc9;
+}
+

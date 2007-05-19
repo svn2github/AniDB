@@ -1,0 +1,17 @@
+#imgHelp {
+  background-image: url(images/ask2.gif);
+  width: 15px;
+  height: 13px;
+}
+
+#imgProfile {
+  background-image: url(images/button_profile.gif);
+  width: 42px;
+  height: 12px;
+}
+
+#imgLogout {
+  background-image: url(images/button_logout.gif);
+  width: 42px;
+  height: 12px;
+}

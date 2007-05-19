@@ -1,0 +1,50 @@
+/* Quote & Code blocks */
+.underline { text-decoration: underline; }
+
+.code {
+	position: relative;
+	font-family: Courier, 'Courier New', sans-serif; 
+	font-size: 11px; 
+	color: #006600;
+	background-color: #FAFAFA; 
+	border: #D1D7DC; 
+	border-style: solid;
+	border-width: 1px; 
+	padding: 5px;
+}
+
+.quotebody, .codebody {
+	width: 90%;
+	cellspacing: 1px;
+	cellpadding: 3px;
+	border-width: 0px;
+}
+
+.quoteof, .codeof {
+	position: relative;
+	font-weight: bold;
+}
+
+.quote {
+	position: relative;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 11px; 
+	color: #444444; 
+	line-height: 125%;
+	background-color: #FAFAFA; 
+	border: #D1D7DC; 
+	border-style: solid;
+	border-width: 1px; 
+	padding: 5px;
+}
+
+.hidden {
+	display: none;
+}
+
+.msg_preview {
+	width: 100%;
+	cellspacing: 1px;
+	cellpadding: 3px;
+	padding: 5px;
+}

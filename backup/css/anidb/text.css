@@ -1,0 +1,25 @@
+div#bodytext {
+  text-align: center;
+}
+
+div#bodytext table {
+  margin-left: auto;
+  margin-right: auto; 
+  text-align: left;
+}
+
+div#bodytext ul.columnList5 {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+div#bodytext ul.columnList5 li {
+  float: left;
+  width: 20%;
+}
+
+div#bodytext a:visited, a:active, a:hover, a:link {
+  color: blue;
+  text-decoration: none;
+}

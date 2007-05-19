@@ -1,0 +1,135 @@
+/* Defaults for structural divs */
+
+div#supercontainer {
+  width: 100%;
+}
+
+div#container {
+  margin: 0px;
+  padding: 0px;
+}
+
+div#container.visibleSidebar div#content-b-j {
+  position: absolute;
+  right: 0px;
+  width: 130px;
+}
+
+div#container h1 {
+  font-size: 14pt;
+  font-weight:  lighter;
+  font-family:"Trebuchet MS","Arial","Verdana",sans-serif;
+}
+
+div#banner {
+  background-color: #A9ACA3;
+  width: 130px;
+}
+
+div#banner-a {
+  color: #4B4F41;
+  font: 18px "Trebuchet MS","Arial","Verdana",sans-serif;
+  letter-spacing:.125em;
+  font-style: italic;
+  text-align: center;
+}
+
+div#content-b {
+  width: 100%;
+}
+
+div#content-b-b {
+  background-color: #A9ACA3;
+  float: left;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  width: 120px;
+}
+
+div#content-b-d {
+  clear: left;
+  float: left;
+  background-color: #A9ACA3;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  width: 120px;
+}
+
+div#content-b-f {
+  clear: left;
+  float: left;
+  background-color: #A9ACA3;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  width: 120px;
+}
+
+* html div#content-b-f {
+  clear: left;
+  float: left;
+  background-color: #A9ACA3;
+  padding-left: 10px;
+  height: 100px;
+  width: 120px;
+}
+
+div#content-b-h {
+  position: absolute;
+  left: 130px;
+  right: 130px;
+  top: 0px;
+}
+
+div#content-b-k {
+  display: none;
+}
+
+div#content-b-l {
+  padding-top: 20px;
+  padding-left: 130px;
+}
+
+* html div#content-b-l {
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  padding-top: 0px;
+}
+
+div#navmenu {
+  padding: 0px;
+  margin: 0px;
+  padding: 2px;
+}
+
+div#pageTitle {
+  text-align: center;
+}
+
+* html div#pageTitle {
+  width: 80%;
+}
+
+div#bodytext {
+  text-align: center;
+}
+
+div#searchBar {
+  text-align: right;
+  padding-right: 10px;
+}
+
+div#footer {
+  clear: both;
+  text-align: center;
+}
+
+* html div#footer {
+  background-color: #A9ACA3;
+  float: left;
+  width: 130px;
+  padding-bottom: 20px;
+}

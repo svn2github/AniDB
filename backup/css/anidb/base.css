@@ -1,0 +1,35 @@
+/* Basic elements (html, body, a, img) */
+
+html {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  min-height: 100%;
+}
+
+body {
+  background-image: url(images/background.gif);
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  font-family: "Verdana","Arial","Helvetica",sans-serif;
+  font-size: 10px;
+  color: #000000;
+}
+
+form {
+  margin: 0px;
+  padding: 0px;
+}
+
+div {
+  margin: 0px;
+  padding: 0px;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+
