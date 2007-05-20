@@ -52,20 +52,13 @@ def cssm():
 		os.mkdir(__out)
 	for line in file('stylelist').readlines():
 		if not line.startswith('#'):
-			path,name = line.rstrip('\n').rsplit('/',1)
-			if path.startswith('./sub/'):
-				oname = path.replace('./sub/','') + '.css'
-				xmlname = path.replace('./sub/','sub-')
-			else:
-				oname = path.lstrip('./').replace('/','-') + '.css'
-				xmlname = path.lstrip('./').replace('/','-')
-				
-			xml(unicode(xmlname),path)
+			path,name = line.rstrip('\n').rsplit('/',1)	
+			xml(unicode(path.lstrip('./').replace('/','-')),path)
 			out = __out+path.lstrip('./').replace('/','-')
 			if os.path.exists(out) is False:
 				os.mkdir(out)
-			cssmerge(line.rstrip('\n'),file(out + '/' + oname, 'w'))
-			__ftp[path] = oname
+			cssmerge(line.rstrip('\n'),file(out + '/' + path.lstrip('./').replace('/','-') + '.css', 'w'))
+			__ftp[path] = path.lstrip('./').replace('/','-')
 
 def xml(newstyle,path):
 	stylelist = []
