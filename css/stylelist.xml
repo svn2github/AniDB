@@ -43,19 +43,19 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update/>
-		<status/>
-		<description/>
+		<update>May 20, 2007</update>
+		<status>In development</status>
+		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
 		<screenshot/>
 		<thumbnail/>
 	</style>
 	<style name="haruhistylex">
-		<title>HaruhiStyleX</title>
-		<creator>TheJAG</creator>
-		<update>2007.05.20</update>
-		<status>Complete (in development)</status>
-		<description>This is a H-Rated (18+) style based on Harustyle by b1nh.</description>
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
 		<path/>
 		<screenshot/>
 		<thumbnail/>
