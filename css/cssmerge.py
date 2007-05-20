@@ -86,6 +86,12 @@ def xml(newstyle,path):
 				else:
 					new[key] = new[key] + '\n' + line
 
+        for elem in ('thumbnail', 'screenshot'):
+                if os.path.exists(os.path.join(path,'images',elem+'.png')):
+                        new[elem] = unicode(os.path.join(path,'images',elem+'.png')).replace('\\','/').lstrip('./')
+                else:
+                        new[elem] = u'none'
+
 	xmlstyles = xmldoc.css_styles.xml_xpath("style/@name")
 	for i in range(len(xmlstyles)):
 		stylelist += [xmlstyles[i].value]
