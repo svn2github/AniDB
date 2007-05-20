@@ -57,8 +57,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>haruhistylex/images/screenshot.png</screenshot>
+		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustyle">
 		<title>Harustyle</title>
@@ -170,7 +170,7 @@ Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making
 Thanks to ricce for making the fixed menu modification.</description>
 		<path/>
 		<screenshot>zakura/images/screenshot.png</screenshot>
-		<thumbnail>none</thumbnail>
+		<thumbnail>zakura/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="zakura-fixed_menu">
 		<title>Zakura (fixed menu edition)</title>
