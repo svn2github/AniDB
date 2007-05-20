@@ -7,8 +7,8 @@
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.</description>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>anidbstyle/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
@@ -17,8 +17,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle_hacks/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="dark-style">
 		<title>Dark Style</title>
@@ -37,8 +37,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="grey">
 		<title>Grey</title>
@@ -57,8 +57,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>haruhistylex/images/screenshot.png</screenshot>
-		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
+		<screenshot>none</screenshot>
+		<thumbnail>none</thumbnail>
 	</style>
 	<style name="harustyle">
 		<title>Harustyle</title>
@@ -127,8 +127,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>sub/dragon/images/screenshot.png</screenshot>
+		<thumbnail>sub/dragon/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-gray">
 		<title>sub-gray</title>
@@ -147,8 +147,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>sub/norwegian-blue/images/screenshot.png</screenshot>
+		<thumbnail>sub/norwegian-blue/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-silver">
 		<title>sub-silver</title>
