@@ -1,5 +1,4 @@
-body/*,
-#layout-content div.g_definitionlist table*/
+body
 {
 	color: #555040;
 	border-color: #FFFFFF;
@@ -37,10 +36,16 @@ a:hover,
 	background-color: #e9e6d9;
 }
 
+th a,
+#layout-content h1 a,
+#layout-content div.g_timedentry h4 a
+{
+	color: #e9e6d9;
+}
+
 th,
 #layout-content h1,
-#layout-content div.main_all div.news h4,
-#layout-content div.agcmts_entries div.comment h4
+#layout-content div.g_timedentry h4
 {
 	color: #e9e6d9;
 	background-color: #8c8673;

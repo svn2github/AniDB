@@ -1,7 +1,6 @@
 #layout-content div.main_all div.rightbar
 {
 	width: 19em;
-	clear: right;
 	float: right;
 }
 
@@ -21,34 +20,10 @@
 	margin-left: 0;
 }
 
-#layout-content div.main_all div.news
+#layout-content div.main_all > div.news
 {
+	clear: none;
 	margin-right: 20em;
-}
-
-#layout-content div.main_all div.news h4,
-#layout-content div.agcmts_entries div.comment h4
-{
-	padding: 0.1em;
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-#layout-content div.main_all div.news div
-{
-	padding: 0.2em;
-}
-
-#layout-content div.main_all div.news span.stamp
-{
-	display: block;
-	text-align: right;
-	padding-right: 0.5em;
-}
-
-#layout-content div.main_all div.news div+h4
-{
-	margin-top: 2em;
 }
 
 /* main_edit */

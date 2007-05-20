@@ -1,22 +1,3 @@
-#layout-content div.agcmts_entries div.comment + div.comment
-{
-	margin-top: 1em;
-}
-
-#layout-content div.agcmts_entries div.comment,
-#layout-content div.agcmts_entries div.comment h4
-{
-	text-align: left;
-}
-
-#layout-content div.agcmts_entries div.comment span.stamp
-{
-	display: block;
-	text-align: right;
-	margin-top: -1.3em;
-	padding-right: 0.5em;
-}
-
 #layout-content div.agcmts_add p.g_howto
 {
 	text-align: left;

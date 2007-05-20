@@ -31,7 +31,7 @@ img, a
 #layout-content *.g_description,
 #layout-content *.g_image image,
 #layout-content .g_block .g_definitionlist,
-#layout-content div.main_all div.news h4,
+#layout-content div.g_timedentry,
 #layout-content div.g_definitionlist table,
 #layout-content div.block + p.desc
 {
@@ -39,8 +39,7 @@ img, a
 }
 
 #layout-content h1,
-#layout-content div.main_all div.news h4,
-#layout-content div.agcmts_entries div.comment h4
+#layout-content div.g_timedentry h4
 {
 	border: 1px #867f6a dotted;
 }

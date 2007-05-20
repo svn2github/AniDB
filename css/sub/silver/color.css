@@ -38,15 +38,11 @@ th
 
 #layout-content h1
 {
-	/*color: #FFA34F;*/
 	color: #efefef;
-	border: 1px solid #03699c;
 	background: #3a95c2 url(images/sub-bg-th.gif) repeat-x;
 }
 
-#layout-content div.main_all div.news h4,
-#layout-content div.main_all div.news div,
-#layout-content div.agcmts_entries div.comment p,
+#layout-content div.g_timedentry,
 #layout-content div.block + p.desc
 {
 	background-color: #fafafa;
@@ -63,6 +59,7 @@ ul,
 	background-color: #f4f4f4
 }
 
+#layout-content div.g_timedentry h4,
 #layout-content tr.g_odd,
 #layout-content li.g_odd,
 #layout-content span.g_odd

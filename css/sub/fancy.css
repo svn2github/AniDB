@@ -58,3 +58,8 @@
 	margin-left: 6px;
 	margin-right: 6px;
 }
+
+#layout-content div.g_timedentry h4 span.id
+{
+	display: none;
+}

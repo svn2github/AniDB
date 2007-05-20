@@ -49,9 +49,8 @@ text-decoration: none;
 }
 
 th,
-#layout-content div.main_all div.news h4,
-#layout-content div.main_all div.rightbar h4,
-#layout-content div.agcmts_entries div.comment h4
+#layout-content div.g_timedentry h4,
+#layout-content div.main_all div.rightbar h4
 {
 	color: #4f5e77;
 	background-color: #a1b4cd;

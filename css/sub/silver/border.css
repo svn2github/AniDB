@@ -32,10 +32,8 @@ ul,
 #layout-content *.g_actionlist,
 #layout-content *.g_description,
 #layout-content *.g_image image,
-#layout-content .g_block .g_definitionlist,
-#layout-content div.main_all div.news h4,
-#layout-content div.main_all div.news div,
-#layout-content div.agcmts_entries div.comment p,
+#layout-content div.g_block .g_definitionlist,
+#layout-content div.g_timedentry,
 #layout-content div.g_definitionlist table,
 #layout-content div.latestanimes_form,
 #layout-content div.addepm div.ep,
@@ -43,6 +41,11 @@ ul,
 #layout-content div.block div.image img
 {
 	border: 1px #d1d7dc solid;
+}
+
+#layout-content h1
+{
+	border: 1px solid #03699c;
 }
 
 #layout-content div.block div.image img
