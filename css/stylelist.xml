@@ -1,18 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <css_styles>
+	<style name="anidbstyle">
+		<title>AniDBstyle</title>
+		<creator>Default AniDB design based on akujin's creation. Converted to css by Rar,PetriW and epoximator</creator>
+		<update/>
+		<status>in development</status>
+		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.</description>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="anidbstyle_hacks">
+		<title>AniDBstyle Hacks</title>
+		<creator>Amour</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="dark-style">
+		<title>Dark Style</title>
+		<creator>sylwira</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="anidbstyle-dongato">
+		<title>AniDBstyle Dongato Style</title>
+		<creator>Dongato</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="grey">
+		<title>Grey</title>
+		<creator>zeromind</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustyle">
+		<title>Harustyle</title>
+		<creator>b1nh</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustylele">
+		<title>Harustyle LE</title>
+		<creator>b1nh</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustyle-fixed_menu">
+		<title>Harustyle (fixed menu edition)</title>
+		<creator>mehyaa</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
+	<style name="harustylex">
+		<title>Harustyle X</title>
+		<creator>thejag</creator>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
+	</style>
 	<style name="sub-blue">
 		<title>sub-blue</title>
 		<creator>epoximator</creator>
-		<update>18.05.2007</update>
-		<status>active</status>
-		<description>It'S BLUE!!!!</description>
-		<path>here</path>
-		<screenshot>no! really HERE!</screenshot>
-		<thumbnail>over here</thumbnail>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot/>
+		<thumbnail/>
 	</style>
 	<style name="sub-brown">
-		<title/>
-		<creator/>
+		<title>sub-brown</title>
+		<creator>epoximator</creator>
 		<update/>
 		<status/>
 		<description/>
@@ -21,8 +111,8 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-brown2">
-		<title/>
-		<creator/>
+		<title>sub-brown2</title>
+		<creator>epoximator</creator>
 		<update/>
 		<status/>
 		<description/>
@@ -31,8 +121,8 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-dragon">
-		<title/>
-		<creator/>
+		<title>sub-dragon</title>
+		<creator>epoximator</creator>
 		<update/>
 		<status/>
 		<description/>
@@ -41,8 +131,8 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-gray">
-		<title/>
-		<creator/>
+		<title>sub-gray</title>
+		<creator>epoximator</creator>
 		<update/>
 		<status/>
 		<description/>
@@ -51,8 +141,8 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-norwegian-blue">
-		<title/>
-		<creator/>
+		<title>sub-norwegian-blue</title>
+		<creator>epoximator</creator>
 		<update/>
 		<status/>
 		<description/>
@@ -61,8 +151,8 @@
 		<thumbnail/>
 	</style>
 	<style name="sub-silver">
-		<title/>
-		<creator/>
+		<title>sub-silver</title>
+		<creator>epoximator</creator>
 		<update/>
 		<status/>
 		<description/>
@@ -83,113 +173,13 @@ Thanks to ricce for making the fixed menu modification.</description>
 		<thumbnail/>
 	</style>
 	<style name="zakura-fixed_menu">
-		<title></title>
-		<creator></creator>
+		<title>Zakura (fixed menu edition)</title>
+		<creator>ricce</creator>
 		<update></update>
 		<status></status>
 		<description></description>
 		<path></path>
 		<screenshot></screenshot>
 		<thumbnail></thumbnail>
-	</style>
-	<style name="anidbstyle">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="anidbstyle_hacks">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="dark-style">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="grey">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="harustyle">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="harustylele">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="harustyle-fixed_menu">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="sub-harustylex">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="harustylex">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
-	</style>
-	<style name="anidbstyle-dongato">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot/>
-		<thumbnail/>
 	</style>
 </css_styles>

@@ -1,0 +1,4 @@
+title: AniDBstyle
+creator: Default AniDB design based on akujin's creation. Converted to css by Rar,PetriW and epoximator
+status: in development
+description: Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.
