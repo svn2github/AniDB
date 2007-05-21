@@ -1,5 +1,6 @@
 @import "../common/style/icons/flags.css";
 @import "../common/style/icons/default.css";
+@import "../common/layout/page/latestanimes.css";
 
 html
 {
@@ -470,6 +471,35 @@ tr.action td
 {
 	display: block;
 }
+#layout-menu div.usermenu *.i_button
+{
+	background: none;
+	text-indent: 0;
+	text-align: right;
+	margin-right: 0;
+	width: 4.2em;
+	height: 1.2em;
+}
+
+#layout-menu div.usermenu *.i_profile
+{
+	margin-left: 0.4em;
+}
+*.i_button
+{
+	display: block;
+	width: 42px;
+	height: 12px;
+	float: left;
+	margin-right: 4px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+*.i_icon span, *.i_button span, *.i_inline span
+{
+	display: none;
+}
 
 #layout-search div.search
 {
@@ -574,61 +604,9 @@ body.nonav #layout-content h1
 #layout-footer p
 {
 	margin-top: 1.9em;
-	margin-bottom: 0;
+	margin-bottom: 0.5em;
 }
 
-
-/*
-#layout-content div.anime_info div.block
-{
-	display: table;
-	margin-left: 6px;
-	margin-top: 6px;
-}
-
-#layout-content div.anime_info div.image
-{
-	display: table-cell;
-	vertical-align: middle;
-	border: 1px solid;
-	border-color: #E8E9EC #717377 #717377 #E8E9EC;
-	padding: 2px;
-}
-
-#layout-content div.anime_info div.image img
-{
-	display: block;
-	border: 1px solid;
-	border-color: #717377 #E8E9EC #E8E9EC #717377;
-	padding: 1px;
-}
-
-#layout-content div.anime_info div.data
-{
-	display: table-cell;
-	vertical-align: middle;
-	padding-left: 7px;
-}
-
-#layout-content div.anime_info div.data dt
-{
-	margin-top: 0.36em;
-	margin-bottom: -1.2em;
-	margin-right: 10em;
-}
-
-#layout-content div.anime_info div.data dt:after
-{
-	content: ": ";
-}
-
-#layout-content div.anime_info div.data dd
-{
-	min-height: 1.3em;
-	overflow: hidden;
-	margin-left: 100px;
-}
-*/
 #layout-content div.anime_info div.data dd.anirec
 {
 	overflow: visible;
@@ -778,35 +756,65 @@ width: 99%;
 	padding: 2px 3px 15px 57px;
 }
 
-#layout-content div.anime_all tr.heading th
-{
-	padding: 4px 1px 7px 1px;
-	border-bottom: black 2px solid;
-}
 #layout-content div.anime_all tr.newtype td
 {
-	padding: 4px 1px 7px 1px;
-	border-top: black 2px solid;
+	border-top: #c12312 1px dotted;
 }
 
 #layout-content div.anime_all tr.good td,
-#layout-content div.group_all tr.good td
+#layout-content div.group_all tr.good td,
+#layout-content div.ep_all tr.good td
 {
 	background-image: url(images/greenpixel.png);
 }
-#layout-content div.group_all tr.invalid td
+#layout-content div.anime_all tr.invalid td,
+#layout-content div.group_all tr.invalid td,
+#layout-content div.ep_all tr.invalid td
 {
 	background-image: url(images/badredpixel.png);
 }
 
-#layout-content div.anime_all tr.depr td
+#layout-content div.anime_all tr.depr td,
+#layout-content div.group_all tr.depr td,
+#layout-content div.ep_all tr.depr td
 {
 	background-image: url(images/whitepixel.png);
 }
 
-#layout-content div.anime_all tr.genr td
+#layout-content div.anime_all tr.genr,
+#layout-content div.ep_all tr.genr
 {
-	background-image: url(images/blackpixel.png);
+	background-image: url(images/bg_3.gif)
+}
+
+#layout-content div.anime_all tr.genr td,
+#layout-content div.ep_all tr.genr td
+{
+	border-style: dotted;
+	border-right: 0;
+	border-left: 0;
+	border-color: #565656;
+	border-width: 1px;
+}
+
+#layout-content div.anime_all tr.genr td:first-child,
+#layout-content div.ep_all tr.genr td:first-child
+{
+	border-style: dotted;
+	border-color: #565656;
+	border-width: 1px;
+	border-left: 1;
+	border-right: 0;
+}
+
+#layout-content div.anime_all tr.genr td:last-child,
+#layout-content div.ep_all tr.genr td:last-child
+{
+	border-style: dotted;
+	border-color: #565656;
+	border-width: 1px;
+	border-right: 1;
+	border-left: 0;
 }
 
 #layout-content div.anime_all td.epusers,
@@ -856,7 +864,9 @@ width: 99%;
 #layout-content div table td div.icoco span.i_icon,
 #layout-content div.anime_all div.groups td.languages span.i_icon,
 #layout-content div.anime_all div.episodes td.action .i_icon,
-#layout-content div.latest_completed td.icon span.i_icon
+#layout-content div.latest_completed td.icon span.i_icon,
+#layout-content div.mylist_list td div.icoco span.i_icon,
+#layout-content div.group_all td div.icoco span.i_icon
 {
 	float: left;
 	padding: 0px 2px 0px 2px;
@@ -1109,13 +1119,6 @@ width: 99%;
 	content: ": ";
 }
 
-#layout-content div.ep_info tr.anime > *,
-#layout-content div.ep_info tr.misc > *,
-#layout-content div.ep_info tr.desc > *
-{
-	padding-bottom: 2.3em;
-}
-
 #layout-content div.ep_vote form
 {
 	margin-bottom: 0.5em;
@@ -1194,135 +1197,135 @@ width: 99%;
 }
 #layout-content div.hint2_note
 {
-text-align: center;
+	text-align: center;
 }
 
 #layout-content div.hint2_hinter
 {
-padding-left: 0.5em;
-padding-right: 0.5em;
-text-align: center;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	text-align: center;
 }
 
 #layout-content div.hint2_jscontrols
 {
-float: right;
-padding: 0 0 0.5em 0;
+	float: right;
+	padding: 0 0 0.5em 0;
 }
 
 #layout-content div.hint2_results
 {
-clear: both;
+	clear: both;
 }
 
 #layout-content div.hint2_jscontrols h4
 {
-background-color: #494D59;
-color: #bbbbbb;
-font-weight: normal;
-margin: 0;
+	background-color: #494D59;
+	color: #bbbbbb;
+	font-weight: normal;
+	margin: 0;
 }
 
 #layout-content div.hint2_jscontrols ul,
 #layout-content div.hint2_jscontrols li
 {
-list-style: none;
-margin: 0;
-padding: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 #layout-content div.hint2_hinter.jason form
 {
-margin-right: 12em;
+	margin-right: 12em;
 }
 
 #layout-content div.hint2_hinter div.collapse *
 {
-display: none;
+	display: none;
 }
 
 #layout-content div.hint2_hinter *.g_note
 {
-display: block;
+	display: block;
 }
 
 #layout-content div.hint2_hinter.nonote *.g_note
 {
-display: none;
+	display: none;
 }
 
 #layout-content div.hint2_hinter h2
 {
-font-size: 160%;
-margin: 0.5em 0 0 0;
+	font-size: 160%;
+	margin: 0.5em 0 0 0;
 }
 
 #layout-content div.hint2_hinter li
 {
-text-align: left;
+	text-align: left;
 }
 
 #layout-content div.hint2_hinter label
 {
-white-space: nowrap;
-line-height: 300%;
-padding: 0 0.3em 0 0.2em;
+	white-space: nowrap;
+	line-height: 300%;
+	padding: 0 0.3em 0 0.2em;
 }
 
 #layout-content div.hint2_hinter #Filter
 {
-padding-bottom: 2em;
+	padding-bottom: 2em;
 }
 
 #layout-content div.hint2_hinter div.genre
 {
-margin-left: auto;
-margin-right: auto;
-padding-bottom: 0.5em;
-display: table;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 0.5em;
+	display: table;
 }
 
 #layout-content div.hint2_hinter div.genre label
 {
-display: table-cell;
+	display: table-cell;
 }
 
 #layout-content div.hint2_hinter div.collapse div.genre
 {
-display: none;
+	display: none;
 }
 
 #layout-content div.hint2_all ol
 {
-height: 8em;
-list-style: none;
-overflow: auto;
-padding: 0.8em;
-margin: 0;
-border: 0;
-background: #232323;
-color: black;
-width: 20em;
+	height: 8em;
+	list-style: none;
+	overflow: auto;
+	padding: 0.8em;
+	margin: 0;
+	border: 0;
+	background: #232323;
+	color: black;
+	width: 20em;
 }
 
 #layout-content div.hint2_all ol li
 {
-list-style: none;
+	list-style: none;
 }
 
 #layout-content div.hint2_hinter ol li input
 {
-margin: 0.3em 0.3em 0 0;
+	margin: 0.3em 0.3em 0 0;
 }
 
 #layout-content div.hint2_hinter label input
 {
-width: 4em;
+	width: 4em;
 }
 
 #layout-content div.hint2_hinter select input
 {
-width: auto;
+	width: auto;
 }
 #layout-content div.latest
 {
@@ -1376,70 +1379,6 @@ width: auto;
 {
 	content: "type: ";
 	font-style: normal;
-}
-#layout-content div.latestanimes_form
-{
-	clear: both;
-}
-
-#layout-content div.latestanimes_form a
-{
-	margin: 1.3em;
-}
-
-#layout-content div.latestanimes_form form
-{
-	margin: 1em 0;
-	text-align: center;
-}
-
-#layout-content div.latestanimes_form div
-{
-	display: inline;
-}
-
-#layout-content div.latestanimes_form form input.year
-{
-	width: 2.5em;
-}
-
-
-#layout-content div.latestanimes_anime
-{
-	clear: left;
-	padding-left: 10%
-}
-
-#layout-content div.latestanimes_anime img
-{
-	display: block;
-	width: 15em;
-	margin: -2em 1em 1em 1em;
-	float: left;
-}
-
-#layout-content div.latestanimes_anime h3
-{
-	margin: 0.5em 0 0.5em 17.3em;
-	font-size: 100%;
-	font-weight: inherit;
-}
-
-#layout-content div.latestanimes_anime h3 a
-{
-	font-size: 120%;
-	font-weight: bolder;
-}
-
-#layout-content div.latestanimes_anime th:after
-{
-	content: ":";
-}
-
-
-#layout-content div.latestanimes_footer 
-{
-	text-align: center;
 }
 
 #layout-content div.latestreviews_all ul.g_navlist
@@ -1637,13 +1576,6 @@ width: auto;
 	float: right;
 }
 
-#layout-content div.mylist_list td div.icoco span.i_icon
-
-{
-	float: left;
-	padding: 0px 2px 0px 2px;
-}
-
 #layout-content div.mylist_list table table
 {
 	width: 100%;
@@ -1662,9 +1594,9 @@ width: auto;
 
 #layout-content div.mylist_all tr.all_watched td.stats 
 { 
-   color: #008800;;
-   font-weight: bold;
-}/*@import "anidbstyle-msg.css";*/
+	color: #008800;
+	font-weight: bold;
+}
 
 #layout-content div.mynotifies_all
 {
@@ -1930,12 +1862,11 @@ h4
 
 table
 {
-	border-collapse: separate;
+	border-spacing: 0;
 }
 
 th
 {
-	/*background-color: #800000;*/
 	background-image: url(images/redpixel.png)
 }
 
@@ -1958,7 +1889,7 @@ span.g_odd
 	background-image: url(images/redpixel.png);
 }
 /* zeromind */
-#layout-content div.producer_related_anime tr.mylist
+#layout-content div.producer_related_anime tr.mylist td
 {
 	background-image: url(images/greenpixel.png);
 }
@@ -1969,20 +1900,29 @@ span.g_odd
 	color: red;
 }
 
-/*#layout-content tr td.lame,*/
-#layout-content tr.denied
+#layout-content div.creq_all tr.granted td
+{
+	background: url(images/greenpixel.png);
+}
+
+#layout-content div.creq_all tr.denied td
 {
 	background-image: url(images/badredpixel.png);
 }
 
-#layout-content tr.granted
+#layout-content div.creq_all tr.revoked td
 {
-	background-image: url(images/greenpixel.png);
+	background-image: url(images/bg_2.gif);
 }
 
-#layout-content tr.revoked
+#layout-content div.creq_all tr.deleted td
 {
-	background-image: url(images/blackpixel.png);
+	color: red;
+	background-image: url(images/bg_2.gif);
+}
+#layout-content div.creq_all dd
+{
+	margin-bottom: 0.5em;
 }
 
 #layout-content tr th.field
@@ -2027,61 +1967,89 @@ span.g_odd
 }
 #layout-content div.animegroup_all div.form textarea
 {
-display: block;
-width: 80%;
-margin-left: 10%;
-height: 10em;
+	display: block;
+	width: 80%;
+	margin-left: 10%;
+	height: 10em;
 }
 
 #layout-content div.animeatt_reviews div.review
 {
-clear: right;
+	clear: right;
 }
 
 #layout-content div.animeatt_reviews div.review+div.review
 {
-margin-top: 2em;
+	margin-top: 2em;
 }
 
 #layout-content div.animeatt_reviews div.review div.head,
 #layout-content div.animeatt_reviews div.review div.menu
 {
-float: right;
-clear: right;
-width: 10em;
-padding-right: 2em;
+	float: right;
+	clear: right;
+	width: 10em;
+	padding-right: 2em;
 }
 
 #layout-content div.animeatt_reviews div.review div.head table,
 #layout-content div.animeatt_reviews div.review div.menu
 {
-width: 10em;
+	width: 10em;
 }
 
 #layout-content div.animeatt_reviews div.review div.body
 {
-text-align: left;
-padding-right: 14em;
-padding-left: 8em;
+	text-align: left;
+	padding-right: 14em;
+	padding-left: 8em;
 }
 
 #layout-content div.animeatt_reviews div.review div.head table td.value
 {
-text-align: right;
+	text-align: right;
 }
 
 #layout-content div.animeatt_comment
 {
-text-align: left;
+	text-align: left;
 }
 
 #layout-content div.animeatt_comment textarea
 {
-width: 96%;
-height: 10em;
+	width: 96%;
+	height: 10em;
 }
 #layout-content div.hint2_all td ol *
 {
 	background-color: black;
 	color: white;
+}
+#layout-content div.group_all div.ep_files table
+{
+	width: 99%;
+}
+#layout-content div.group_all div.ep_files table td
+{
+	padding-left: 0.5em;
+}
+#layout-content div.group_all div.ep_files table td.info
+{
+	text-align: left;
+}
+#layout-content div.group_all div.ep_files table td.epno,
+#layout-content div.group_all div.ep_files table td.id,
+#layout-content div.group_all div.ep_files table td.size
+{
+	text-align: right;
+}
+#layout-content div.group_all div.ep_files table td.resolution,
+#layout-content div.group_all div.ep_files table th
+{
+	text-align: center;
+}
+#layout-content div.addeptitle_all div.addeptitle_form p,
+#layout-content div.addanimetitle_all div.addanimetitle_form p
+{
+	text-align: center;
 }
