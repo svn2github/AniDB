@@ -7,8 +7,8 @@
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.</description>
 		<path/>
-		<screenshot>-anidbstyle/images/screenshot.png</screenshot>
-		<thumbnail>-anidbstyle/images/thumbnail.png</thumbnail>
+		<screenshot>anidbstyle/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
@@ -17,8 +17,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-anidbstyle_hacks/images/screenshot.png</screenshot>
-		<thumbnail>-anidbstyle_hacks/images/thumbnail.png</thumbnail>
+		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle_hacks/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="dark-style">
 		<title>Dark Style</title>
@@ -27,8 +27,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-dark-style/images/screenshot.png</screenshot>
-		<thumbnail>-dark-style/images/thumbnail.png</thumbnail>
+		<screenshot>dark-style/images/screenshot.png</screenshot>
+		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle Dongato Style</title>
@@ -37,8 +37,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-anidbstyle-dongato/images/screenshot.png</screenshot>
-		<thumbnail>-anidbstyle-dongato/images/thumbnail.png</thumbnail>
+		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="grey">
 		<title>Grey</title>
@@ -47,8 +47,8 @@
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
-		<screenshot>-grey/images/screenshot.png</screenshot>
-		<thumbnail>-grey/images/thumbnail.png</thumbnail>
+		<screenshot>grey/images/screenshot.png</screenshot>
+		<thumbnail>grey/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="haruhistylex">
 		<title/>
@@ -57,8 +57,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-haruhistylex/images/screenshot.png</screenshot>
-		<thumbnail>-haruhistylex/images/thumbnail.png</thumbnail>
+		<screenshot>haruhistylex/images/screenshot.png</screenshot>
+		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustyle">
 		<title>Harustyle</title>
@@ -67,8 +67,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-harustyle/images/screenshot.png</screenshot>
-		<thumbnail>-harustyle/images/thumbnail.png</thumbnail>
+		<screenshot>harustyle/images/screenshot.png</screenshot>
+		<thumbnail>harustyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustylele">
 		<title>Harustyle LE</title>
@@ -77,8 +77,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-harustylele/images/screenshot.png</screenshot>
-		<thumbnail>-harustylele/images/thumbnail.png</thumbnail>
+		<screenshot>harustylele/images/screenshot.png</screenshot>
+		<thumbnail>harustylele/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
@@ -87,8 +87,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-harustyle-fixed_menu/images/screenshot.png</screenshot>
-		<thumbnail>-harustyle-fixed_menu/images/thumbnail.png</thumbnail>
+		<screenshot>harustyle-fixed_menu/images/screenshot.png</screenshot>
+		<thumbnail>harustyle-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-blue">
 		<title>sub-blue</title>
@@ -97,8 +97,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-sub-blue/images/screenshot.png</screenshot>
-		<thumbnail>-sub-blue/images/thumbnail.png</thumbnail>
+		<screenshot>sub-blue/images/screenshot.png</screenshot>
+		<thumbnail>sub-blue/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-brown">
 		<title>sub-brown</title>
@@ -107,8 +107,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-sub-brown/images/screenshot.png</screenshot>
-		<thumbnail>-sub-brown/images/thumbnail.png</thumbnail>
+		<screenshot>sub-brown/images/screenshot.png</screenshot>
+		<thumbnail>sub-brown/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-brown2">
 		<title>sub-brown2</title>
@@ -117,8 +117,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-sub-brown2/images/screenshot.png</screenshot>
-		<thumbnail>-sub-brown2/images/thumbnail.png</thumbnail>
+		<screenshot>sub-brown2/images/screenshot.png</screenshot>
+		<thumbnail>sub-brown2/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-dragon">
 		<title>sub-dragon</title>
@@ -127,8 +127,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-sub-dragon/images/screenshot.png</screenshot>
-		<thumbnail>-sub-dragon/images/thumbnail.png</thumbnail>
+		<screenshot>sub-dragon/images/screenshot.png</screenshot>
+		<thumbnail>sub-dragon/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-gray">
 		<title>sub-gray</title>
@@ -147,8 +147,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-sub-norwegian-blue/images/screenshot.png</screenshot>
-		<thumbnail>-sub-norwegian-blue/images/thumbnail.png</thumbnail>
+		<screenshot>sub-norwegian-blue/images/screenshot.png</screenshot>
+		<thumbnail>sub-norwegian-blue/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-silver">
 		<title>sub-silver</title>
@@ -157,8 +157,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>-sub-silver/images/screenshot.png</screenshot>
-		<thumbnail>-sub-silver/images/thumbnail.png</thumbnail>
+		<screenshot>sub-silver/images/screenshot.png</screenshot>
+		<thumbnail>sub-silver/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="zakura">
 		<title>Zakura</title>
@@ -169,8 +169,8 @@
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
 Thanks to ricce for making the fixed menu modification.</description>
 		<path/>
-		<screenshot>-zakura/images/screenshot.png</screenshot>
-		<thumbnail>-zakura/images/thumbnail.png</thumbnail>
+		<screenshot>zakura/images/screenshot.png</screenshot>
+		<thumbnail>zakura/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="zakura-fixed_menu">
 		<title>Zakura (fixed menu edition)</title>
@@ -179,7 +179,7 @@ Thanks to ricce for making the fixed menu modification.</description>
 		<status></status>
 		<description></description>
 		<path></path>
-		<screenshot>-zakura-fixed_menu/images/screenshot.png</screenshot>
-		<thumbnail>-zakura-fixed_menu/images/thumbnail.png</thumbnail>
+		<screenshot>zakura-fixed_menu/images/screenshot.png</screenshot>
+		<thumbnail>zakura-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
 </css_styles>

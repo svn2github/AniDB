@@ -81,7 +81,7 @@ def xml(newstyle,path):
 
         for elem in ('thumbnail', 'screenshot'):
                 if os.path.exists(os.path.join(path,'images',elem+'.png')):
-                        new[elem] = unicode(os.path.join(path.replace('/','-'),'images',elem+'.png')).replace('\\','/').lstrip('./')
+                        new[elem] = unicode(path.lstrip('./').replace('/','-') + '/' + 'images' +'/' +elem+'.png')
                 else:
                         new[elem] = u'none'
 
