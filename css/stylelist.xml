@@ -43,7 +43,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>May 20, 2007</update>
+		<update>22.5.2007</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -63,7 +63,7 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update/>
+		<update>22.5.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -73,7 +73,7 @@
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update/>
+		<update>22.5.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -83,7 +83,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update/>
+		<update>22.5.2007</update>
 		<status/>
 		<description/>
 		<path/>

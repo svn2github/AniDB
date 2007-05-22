@@ -8,7 +8,7 @@ password
 Furthermore you have to run the script with the option "upload"
 """
 
-import os, sys, ftplib, amara, copy
+import os, sys, ftplib, amara, copy, datetime
 
 __out = "../../flat/"
 __ftp = {}
@@ -61,7 +61,9 @@ def cssm():
 			__ftp[path] = path.lstrip('./').replace('/','-')
 
 def xml(newstyle,path):
+        svn = {'day':21,'month':5,'year':2007} #date of the svn download. yes this is crap
 	stylelist = []
+	newest = 0
 	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u'', 'path': u'', 'screenshot': u'', 'thumbnail': u''}
 	descpath = path + '/' + 'description'
 	xmldoc = amara.parse('./stylelist.xml')
@@ -84,6 +86,18 @@ def xml(newstyle,path):
                         new[elem] = unicode(newstyle + '/' + 'images' +'/' +elem+'.png')
                 else:
                         new[elem] = u'none'
+        
+        for filename in os.listdir(path):
+                if filename.endswith('.css'):
+                        mtime = os.path.getmtime(path+'\\'+filename)
+                        if mtime >  newest:
+                                newest = mtime
+                                newestf = filename
+
+        newfile = datetime.datetime.fromtimestamp(newest)
+
+        if newfile.day >= svn['day'] and newfile.month >= svn['month'] and newfile.year >= svn['year']:
+                new['update'] = unicode(str(newfile.day) +'.'+ str(newfile.month) +'.'+ str(newfile.year))
 
 	xmlstyles = xmldoc.css_styles.xml_xpath("style/@name")
 	for i in range(len(xmlstyles)):
