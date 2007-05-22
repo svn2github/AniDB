@@ -51,11 +51,11 @@
 		<thumbnail>grey/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="haruhistylex">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
+		<title>HaruhiStyleX</title>
+		<creator>TheJAG</creator>
+		<update>2007.05.20</update>
+		<status>Complete (in development)</status>
+		<description>This is a H-Rated (18+) style based on Harustyle by b1nh.</description>
 		<path/>
 		<screenshot>haruhistylex/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
@@ -137,8 +137,8 @@
 		<status/>
 		<description/>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>sub-gray/images/screenshot.png</screenshot>
+		<thumbnail>sub-gray/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-norwegian-blue">
 		<title>sub-norwegian-blue</title>
