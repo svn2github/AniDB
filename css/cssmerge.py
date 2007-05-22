@@ -61,7 +61,7 @@ def cssm():
 			__ftp[path] = path.lstrip('./').replace('/','-')
 
 def xml(newstyle,path):
-        svn = {'day':21,'month':5,'year':2007} #date of the svn download. yes this is crap
+        svn = {'day':18,'month':5,'year':2007} #date of the svn start. less bollocks now
 	stylelist = []
 	newest = 0
 	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u'', 'path': u'', 'screenshot': u'', 'thumbnail': u''}
