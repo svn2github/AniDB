@@ -179,7 +179,7 @@ Thanks to ricce for making the fixed menu modification.</description>
 		<status></status>
 		<description></description>
 		<path></path>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>zakura-fixed_menu/images/screenshot.png</screenshot>
+		<thumbnail>zakura-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
 </css_styles>
