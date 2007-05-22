@@ -8,7 +8,7 @@ password
 Furthermore you have to run the script with the option "upload"
 """
 
-import os, sys, ftplib, amara, copy, datetime
+import os, sys, ftplib, amara, copy, datetime,time
 
 __out = "../../flat/"
 __ftp = {}
@@ -95,9 +95,8 @@ def xml(newstyle,path):
                                 newestf = filename
 
         newfile = datetime.datetime.fromtimestamp(newest)
-
         if newfile.day >= svn['day'] and newfile.month >= svn['month'] and newfile.year >= svn['year']:
-                new['update'] = unicode(str(newfile.day) +'.'+ str(newfile.month) +'.'+ str(newfile.year))
+                new['update'] = unicode(newfile.strftime('%d.%m.%Y'))
 
 	xmlstyles = xmldoc.css_styles.xml_xpath("style/@name")
 	for i in range(len(xmlstyles)):
