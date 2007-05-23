@@ -123,7 +123,7 @@
 	<style name="sub-dragon">
 		<title>sub-dragon</title>
 		<creator>epoximator</creator>
-		<update/>
+		<update>23.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -172,13 +172,4 @@ Thanks to ricce for making the fixed menu modification.</description>
 		<screenshot>zakura-fixed_menu/images/screenshot.png</screenshot>
 		<thumbnail>zakura-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
-<style name="sub-gray">
-		<title>sub-gray</title>
-		<creator>epoximator</creator>
-		<update>23.05.2007</update>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot>sub-gray/images/screenshot.png</screenshot>
-		<thumbnail>sub-gray/images/thumbnail.png</thumbnail>
-	</style></css_styles>
+</css_styles>
