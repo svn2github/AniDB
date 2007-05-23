@@ -10,7 +10,7 @@
 ./sub/blue/main.css
 ./sub/brown/main.css
 ./sub/brown2/main.css
-./sub/dragon/main.css
+#./sub/dragon/main.css #it's the same as the default style aka anidbstyle.css
 ./sub/gray/main.css
 ./sub/norwegian-blue/main.css
 ./sub/silver/main.css
