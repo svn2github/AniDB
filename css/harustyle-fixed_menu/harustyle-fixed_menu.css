@@ -499,7 +499,7 @@ tr.official *.i_icon {
 	text-indent: 15px;
 	background-position:  left 50%;
 	background-repeat: no-repeat;
-	background-image: url('http://www.anidb.net/css/anidbstyle/images/ask2.gif');
+	background-image: url('../icons/ask2.gif');
 	padding-left: 0px;
 	padding-right: 0px;
 	padding-top: 1px;
@@ -573,7 +573,7 @@ tr.official *.i_icon {
 	top: 14px;
 	left: 2px;
 	overflow: hidden;	
-	background: url('http://www.anidb.net/css/anidbstyle/images/button_logon.gif') no-repeat top;
+	background: url('../icons/button_logon.gif') no-repeat top;
 	border: 0px none;
 	content: "";
 	padding-left: 0px;

@@ -32,17 +32,17 @@ body,
 
 .i_logout
 {
-	background-image: url(http://www.anidb.net/css/anidbstyle/images/button_logout.gif);
+	background-image: url(../icons/button_logout.gif);
 }
 
 *.i_profile
 {
-	background-image: url(http://www.anidb.net/css/anidbstyle/images/button_profile.gif);
+	background-image: url(../icons/button_profile.gif);
 }
 
 *.i_signup
 {
-	background-image: url(http://www.anidb.net/css/anidbstyle/images/button_signup.gif);
+	background-image: url(../icons/button_signup.gif);
 }
 
 
