@@ -478,9 +478,9 @@
 	background-image: url(../icons/flags/anidb_sub_simplified.gif);
 }
 
-*.i_audio_zh-Hans
+*.i_audio_zh-Hant
 {
-	background-image: url(../icons/flags/anidb_audio_simplified.gif);
+	background-image: url(../icons/flags/anidb_audio_traditional.gif);
 }
 
 *.i_sub_zh-Hant
