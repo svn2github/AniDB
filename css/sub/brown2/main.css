@@ -7,11 +7,6 @@
 @import "color.css";
 
 
-#layout-nav
-{
-	position: fixed;
-}
-
 #layout-menu div+div
 {
 	margin-top: 1em;

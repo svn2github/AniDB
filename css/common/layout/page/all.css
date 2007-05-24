@@ -1,4 +1,5 @@
 @import "addtitle.css";
+@import "admin.css";
 @import "agcmts.css";
 @import "anime.css";
 @import "animeatt.css";
@@ -6,5 +7,5 @@
 @import "genren.css";
 @import "latestanimes.css";
 @import "main.css";
-@import "admin.css";
 @import "myplace.css";
+@import "profile.css";

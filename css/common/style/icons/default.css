@@ -15,6 +15,13 @@ a.i_icon:hover, a.i_inline:hover
 	margin-right: 0;
 }
 
+*.i_enlarge {
+	background-image: url(http://www.anidb.net/pics/enlarge.png);
+	float: right;
+	height: 11px;
+	padding-top: 5px;
+}
+
 *.i_araward
 {
 	background-image: url(../icons/anidb_araward.gif);
