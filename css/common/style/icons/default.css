@@ -16,7 +16,7 @@ a.i_icon:hover, a.i_inline:hover
 }
 
 *.i_enlarge {
-	background-image: url(http://www.anidb.net/pics/enlarge.png);
+	background-image: url(../icons/enlarge.png);
 	float: right;
 	height: 11px;
 	padding-top: 5px;

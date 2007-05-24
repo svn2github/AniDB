@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>Default AniDB design based on akujin's creation. Converted to css by Rar,PetriW and epoximator</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.</description>
 		<path/>
@@ -13,7 +13,7 @@
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -23,7 +23,7 @@
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -33,7 +33,7 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle Dongato Style</title>
 		<creator>Dongato</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -43,7 +43,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -53,7 +53,7 @@
 	<style name="haruhistylex">
 		<title>HaruhiStyleX</title>
 		<creator>TheJAG</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status>Complete (in development)</status>
 		<description>This is a H-Rated (18+) style based on Harustyle by b1nh.</description>
 		<path/>
@@ -63,7 +63,7 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -73,7 +73,7 @@
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -83,7 +83,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -93,7 +93,7 @@
 	<style name="sub-blue">
 		<title>sub-blue</title>
 		<creator>epoximator</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -103,7 +103,7 @@
 	<style name="sub-brown">
 		<title>sub-brown</title>
 		<creator>epoximator</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -111,9 +111,9 @@
 		<thumbnail>sub-brown/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-brown2">
-		<title>sub-brown2</title>
-		<creator>epoximator</creator>
-		<update>23.05.2007</update>
+		<title>brown2</title>
+		<creator>PetriW</creator>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -131,9 +131,9 @@
 		<thumbnail>sub-dragon/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-norwegian-blue">
-		<title>sub-norwegian-blue</title>
-		<creator>epoximator</creator>
-		<update>23.05.2007</update>
+		<title>norwegian-blue</title>
+		<creator>PetriW</creator>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -143,7 +143,7 @@
 	<style name="sub-silver">
 		<title>sub-silver</title>
 		<creator>epoximator</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -153,7 +153,7 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status>In development</status>
 		<description>Only tested in Firefox/Mac.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
@@ -165,7 +165,7 @@ Thanks to ricce for making the fixed menu modification.</description>
 	<style name="zakura-fixed_menu">
 		<title>Zakura (fixed menu edition)</title>
 		<creator>ricce</creator>
-		<update>23.05.2007</update>
+		<update>24.05.2007</update>
 		<status></status>
 		<description></description>
 		<path></path>
