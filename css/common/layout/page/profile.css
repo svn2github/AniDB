@@ -1,35 +1,14 @@
-#styletable {
-  width: 100%;
+#layout-content div.profile_css div.info dl dt
+{
+	font-weight: bold;
+}
+#layout-content div.profile_css div.info dl dd
+{
+	margin-left: 7em;
 }
 
-#styletable td.style_body { 
-  width: 100%; 
-}
-
-#styletable td.style_next,
-#styletable td.style_prev {
-  width: 15px;
-}
-
-#styletable td.style_next :hover,
-#styletable td.style_prev :hover {
-  font-weight: bold;
-}
-
-#styletable div.style_chooser {
-}
-
-#styletable div.style_item {
-  width: 600px;
-}
-
-#styletable td.style_description_heading {
-  font-weight: bold;
-  width: 80px;
-  vertical-align: top;
-}
-
-#styletable td.style_thumbnail {
+#style_thumbnail
+{
   width: 220px;
   border-width: 1px;
   border-style: solid;
@@ -42,11 +21,12 @@
   overflow-y: hidden;
 }
 
-#styletable table.style_description {
-  vertical-align: top;
-  height: 100%;
+#style_description
+{
+  width: 20em;
 }
 
-#image_viewer {
+#image_viewer
+{
   margin: 50px;
 }
