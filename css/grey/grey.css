@@ -43,6 +43,7 @@ th
 {
 	font-weight: normal;
 	text-align: left;
+	background-image: url(images/redpixel.png)
 }
 
 fieldset
@@ -107,7 +108,7 @@ tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-image: url(images/blackpixel.png);
+	background-image: url(images/bg_2.gif);
 }
 
 *.g_navprev
@@ -275,6 +276,11 @@ tr.action td
 #layout-content .g_info
 {
 	text-align: center;
+}
+
+#layout-content .g_actionlist .g_odd
+{
+	background: inherit;
 }
 
 #layout-content div.g_menu
@@ -604,7 +610,7 @@ body.nonav #layout-content h1
 #layout-footer p
 {
 	margin-top: 1.9em;
-	margin-bottom: 0.5em;
+	padding-bottom: 0.5em;
 }
 
 #layout-content div.anime_info div.data dd.anirec
@@ -791,10 +797,11 @@ width: 99%;
 #layout-content div.ep_all tr.genr td
 {
 	border-style: dotted;
-	border-right: 0;
-	border-left: 0;
 	border-color: #565656;
 	border-width: 1px;
+	border-right-width: 0;
+	border-left-width: 0;
+
 }
 
 #layout-content div.anime_all tr.genr td:first-child,
@@ -803,8 +810,8 @@ width: 99%;
 	border-style: dotted;
 	border-color: #565656;
 	border-width: 1px;
-	border-left: 1;
-	border-right: 0;
+	border-left-width: 1px;
+	border-right-width: 0;
 }
 
 #layout-content div.anime_all tr.genr td:last-child,
@@ -813,8 +820,8 @@ width: 99%;
 	border-style: dotted;
 	border-color: #565656;
 	border-width: 1px;
-	border-right: 1;
-	border-left: 0;
+	border-right-width: 1px;
+	border-left-width: 0;
 }
 
 #layout-content div.anime_all td.epusers,
@@ -1300,12 +1307,11 @@ width: 99%;
 	height: 8em;
 	list-style: none;
 	overflow: auto;
-	padding: 0.8em;
+	padding: 0 !important;
 	margin: 0;
-	border: 0;
-	background: #232323;
-	color: black;
-	width: 20em;
+	border: 2px transparent solid !important;
+	background: black !important;
+	color: white !important;
 }
 
 #layout-content div.hint2_all ol li
@@ -1659,7 +1665,8 @@ width: 99%;
 #layout-content div.userpage_all div.favreviewers li,
 #layout-content div.userpage_all div.g_menu li,
 #layout-content div.myplace_all div.g_menu li,
-#layout-content div.msg_all div.g_menu li
+#layout-content div.msg_all div.g_menu li,
+#layout-content div.animeatt_all div.menu li
 {
 	padding-left: 6px;
 	padding-right: 6px;
@@ -1865,18 +1872,6 @@ table
 	border-spacing: 0;
 }
 
-th
-{
-	background-image: url(images/redpixel.png)
-}
-
-tr.g_odd,
-li.g_odd,
-span.g_odd
-{
-	background-image: url(images/bg_2.gif);
-}
-
 /* Transitional Hacks */
 
 *[bgcolor="#b0b0b0"], *[bgcolor="#969aa6"]
@@ -1976,11 +1971,34 @@ span.g_odd
 #layout-content div.animeatt_reviews div.review
 {
 	clear: right;
+	border: #898989 1px dashed;
+	margin-right: 0.5em;
+	min-height: 32em;
+}
+#layout-content div.animeatt_reviews div.review h2
+{
+	padding: 0.5em;
+	margin: 0.5em 0.5em 0.5em 0.5em;
+}
+
+#layout-content div.animeatt_reviews div.review h2
+{
+	background-image: url(images/bg_2.gif);
+}
+
+#layout-content div.animeatt_reviews div.review.approved h2
+{
+	background-image: url(images/greenpixel.png);
+}
+
+#layout-content div.animeatt_reviews div.review.disapproved h2
+{
+	background-image: url(images/badredpixel.png);
 }
 
 #layout-content div.animeatt_reviews div.review+div.review
 {
-	margin-top: 2em;
+	margin-top: 1.5em;
 }
 
 #layout-content div.animeatt_reviews div.review div.head,
@@ -2001,8 +2019,9 @@ span.g_odd
 #layout-content div.animeatt_reviews div.review div.body
 {
 	text-align: left;
-	padding-right: 14em;
-	padding-left: 8em;
+	margin: 0 14em 1em 8em;
+	padding: 0.5em;
+	background-image: url(images/bg_2.gif);
 }
 
 #layout-content div.animeatt_reviews div.review div.head table td.value
@@ -2010,6 +2029,22 @@ span.g_odd
 	text-align: right;
 }
 
+#layout-content div.animeatt_reviews div.review span.stamp
+{
+	display: block;
+	padding: 0em 1em 1em 0.5em;
+	margin-left: 0.3em;
+}
+
+#layout-content div.animeatt_form table
+{
+	width: 80%;
+}
+
+#layout-content div.animeatt_form textarea
+{
+	width: 99%;
+}
 #layout-content div.animeatt_comment
 {
 	text-align: left;
@@ -2020,36 +2055,42 @@ span.g_odd
 	width: 96%;
 	height: 10em;
 }
-#layout-content div.hint2_all td ol *
-{
-	background-color: black;
-	color: white;
-}
+
 #layout-content div.group_all div.ep_files table
 {
 	width: 99%;
 }
+
 #layout-content div.group_all div.ep_files table td
 {
 	padding-left: 0.5em;
 }
+
 #layout-content div.group_all div.ep_files table td.info
 {
 	text-align: left;
 }
+
 #layout-content div.group_all div.ep_files table td.epno,
 #layout-content div.group_all div.ep_files table td.id,
 #layout-content div.group_all div.ep_files table td.size
 {
 	text-align: right;
 }
+
 #layout-content div.group_all div.ep_files table td.resolution,
 #layout-content div.group_all div.ep_files table th
 {
 	text-align: center;
 }
+
 #layout-content div.addeptitle_all div.addeptitle_form p,
 #layout-content div.addanimetitle_all div.addanimetitle_form p
 {
 	text-align: center;
+}
+
+#layout-content div.latest_all td.name.file
+{
+	padding-left: 1em;
 }
