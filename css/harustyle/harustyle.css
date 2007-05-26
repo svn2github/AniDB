@@ -1686,7 +1686,7 @@ float: right;
 }
 
 #layout-content div.group_released tr td.languages span.i_icon,
-#layout-content div table td div.icoco span.i_icon,
+#layout-content div table td div.icons span.i_icon,
 #layout-content div.anime_all div.groups td.languages span.i_icon,
 #layout-content div.anime_group table.grouplist tr td.languages span.i_icon, /*remove*/
 #layout-content div.anime_table td.action.file .i_icon, /*remove*/
@@ -1907,7 +1907,7 @@ width: 75%;
 float: right;
 }
 
-#layout-content div.mylist_list td div.icoco span.i_icon
+#layout-content div.mylist_list td div.icons span.i_icon
 {
 float: left;
 padding: 0px 2px 0px 2px;

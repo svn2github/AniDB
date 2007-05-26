@@ -137,10 +137,10 @@ img[src*="anidb_nonotify.gif"] {
 
 
 /* inline icon styles */
-div#layout-content div.icoco {
+div#layout-content div.icons {
 	margin: 2px 0.3em 0;
 }
-div#layout-content td.title div.icoco {
+div#layout-content td.title div.icons {
 	float: right;
 }
 div#layout-content .i_icon,

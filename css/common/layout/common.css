@@ -90,14 +90,19 @@ body.nonav #layout-content h1
 	float: right;
 }
 
+#layout-content *.icons *.i_icon,
 #layout-content div.group_released tr td.languages span.i_icon,
-#layout-content div table td div.icoco span.i_icon,
 #layout-content div.anime_all div.groups td.languages span.i_icon,
 #layout-content div.anime_all div.episodes td.action .i_icon,
 #layout-content div.latest_completed td.icon span.i_icon
 {
 	float: left;
 	padding: 0px 2px 0px 2px;
+}
+
+#layout-content td.icons.quality *.i_icon
+{
+	padding: 0px;
 }
 
 #layout-content div.anime_all div.episodes table.eplist,

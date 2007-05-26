@@ -1057,8 +1057,8 @@ body.nonav #layout-content h1 {
 }
 
 #layout-content div.anime_group table.grouplist tr td.languages span.i_icon,
-#layout-content div.anime_mylist td div.icoco span.i_icon,
-#layout-content div.anime_table td div.icoco span.i_icon {
+#layout-content div.anime_mylist td div.icons span.i_icon,
+#layout-content div.anime_table td div.icons span.i_icon {
 	float: left;
 	padding: 0px 2px 0px 2px;
 }
@@ -1797,7 +1797,7 @@ body.nonav #layout-content h1 {
 	float: right;
 }
 
-#layout-content div.mylist_list td div.icoco span.i_icon {
+#layout-content div.mylist_list td div.icons span.i_icon {
 	float: left;
 	padding: 0px 2px 0px 2px;
 }

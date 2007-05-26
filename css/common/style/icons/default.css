@@ -67,6 +67,11 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/icon/anidb_file_ed2k.gif);
 }
 
+*.i_file_ed2k_corrupt
+{
+	background-image: url(../icons/icon/anidb_file_ed2k_corrupt.gif);
+}
+
 *.i_file_edit
 {
 	background-image: url(../icons/icon/anidb_file_edit.gif);
@@ -196,6 +201,16 @@ a.i_icon:hover, a.i_inline:hover
 *.i_rate_eyecancer
 {
 	background-image: url(../icons/icon/anidb_rate_eyecancer.gif);
+}
+
+*.i_rate_star
+{
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+}
+
+*.i_rate_halfstar
+{
+	background-image: url(../icons/icon/anidb_rate_halfstar.gif);
 }
 
 *.i_rate_unknown

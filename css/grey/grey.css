@@ -856,17 +856,17 @@ width: 99%;
 	float: right;
 }
 
-#layout-content div.ep_files table.filelist td .icoco .i_icon,
+#layout-content div.ep_files table.filelist td .icons .i_icon,
 #layout-content div.anime_group table.grouplist tr td.languages span.i_icon,
-#layout-content div.anime_mylist td div.icoco span.i_icon,
-#layout-content div.group_all td div.icoco span.i_icon,
+#layout-content div.anime_mylist td div.icons span.i_icon,
+#layout-content div.group_all td div.icons span.i_icon,
 #layout-content div.group_released tr td.languages span.i_icon,
-#layout-content div table td div.icoco span.i_icon,
+#layout-content div table td div.icons span.i_icon,
 #layout-content div.anime_all div.groups td.languages span.i_icon,
 #layout-content div.anime_all div.episodes td.action .i_icon,
 #layout-content div.latest_completed td.icon span.i_icon,
-#layout-content div.mylist_list td div.icoco span.i_icon,
-#layout-content div.group_all td div.icoco span.i_icon
+#layout-content div.mylist_list td div.icons span.i_icon,
+#layout-content div.group_all td div.icons span.i_icon
 {
 	float: left;
 	padding: 0px 2px 0px 2px;
