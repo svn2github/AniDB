@@ -454,6 +454,11 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/anidb_revote.gif);
 }*/
 
+span.i_video
+{
+	background-image: url(../icons/icon/anidb_video.gif);
+}
+
 span.i_videostream_unknown,
 span.i_videostream_other__non_asp_,
 span.i_videostream_asp_other,
