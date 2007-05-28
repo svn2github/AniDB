@@ -10,6 +10,7 @@ for root, dirs, filenames in os.walk(os.getcwd()):
             newfile = ''
             css = file(root+'/'+cssfile,'rbU').readlines()
             for line in css:
+                line = line.replace('div.icoco','div.icons')
                 line = line.replace('http://www.anidb.net/css/anidbstyle/images/bg','../anidbstyle/images')
                 line = line.replace('http://anidb.net/css/anidbstyle/images/bg','../anidbstyle/images')
                 line = line.replace('http://www.anidb.net/css/anidbstyle/images','../icons')
