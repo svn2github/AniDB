@@ -4,6 +4,8 @@
 	width: 21em;
 }
 
+#layout-content div.addseq_form p span.comment label,
+#layout-content div.addseq_form p span.action,
 #layout-content div.addanimetitle_form span.comment label,
 #layout-content div.addeptitle_form span.comment label,
 #layout-content div.addanimetitle_form span input,
@@ -12,6 +14,7 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 0.4em;
 }
 
 #layout-content div.addanimetitle_form p span label,
@@ -20,4 +23,10 @@
 #layout-content div.addeptitle_form p span.header
 {
 	display: none;
+}
+
+#layout-content div.addseq_form div.explanation
+{
+	margin-left: 2em;
+	margin-right: 2em;
 }
