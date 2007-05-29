@@ -10,12 +10,40 @@ background-repeat:repeat-y;
 #layout-menu
 {
 width: 189px;
-background: url('images/menu.png') no-repeat top left; /* menu background picture */
+background: url('images/menu.png') no-repeat top left;
+}
+
+#layout-search div.search
+{
+background: url('images/banner.png') no-repeat top left;
+height: 94px;	
 }
 
 #layout-search
 {
-height: 94px; /* height of the banner layer, change if the height of your banner background is different */
+background url('images/topback.png') repeat-x top;
+height: 94px;
+}
+
+#layout-search div.search form
+{
+background: url('images/searchbg.png') no-repeat 0px 77px;
+height: 72px;
+}
+
+.i_logout
+{
+background-image: url('images/button_logout.gif');
+}
+
+.i_profile
+{
+background-image: url('images/button_profile.gif');
+}
+
+.i_search
+{
+background-image: url('images/button_search.gif');
 }
 
 #layout-search div.search
@@ -30,7 +58,7 @@ margin-top:2px;
 
 #layout-content div.g_section
 {
-padding: 0.5em 0 0.5em 2em;
+padding: 0.5em 2em 0.5em 2em;
 }
 
 #layout-content div.g_content
@@ -53,3 +81,9 @@ margin: 0.3em 17em 0.3em 2em;
 {
 margin: 0.1em 0.1em 3.1em 1em;
 }
+
+#layout-content div.myplace_all div.latest
+{
+margin-right: 22em;
+}
+
