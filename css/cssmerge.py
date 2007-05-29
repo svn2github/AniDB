@@ -5,7 +5,12 @@ following lines:
 www.anidb.net
 account
 password
-Furthermore you have to run the script with the option "upload"
+Furthermore to upload stuff to the ftp you have to run it with one of the following options:
+- to upload the css and all pics newer than the last upload (modification date of stylelist.xml) use 'upload'
+- to upload only the css use option 'cssupload'
+- to upload the css and all pics use option 'fullupload'
+
+default option should
 """
 
 import os, sys, ftplib, amara, copy, datetime,time
@@ -14,6 +19,7 @@ __out = "../../flat/"
 __ftp = {}
 __ftppath = '/css/'
 __extensions = ('.jpg', '.jpeg', '.gif', '.png','.css')
+__lastupdate = os.path.getmtime('stylelist.xml')
 
 def cssmerge(fullpath, outfile):
 	path, filename = os.path.split(os.path.normpath(fullpath))
@@ -58,10 +64,10 @@ def cssm():
 			if os.path.exists(out) is False:
 				os.mkdir(out)
 			cssmerge(line.rstrip('\n'),file(out + '/' + path.lstrip('./').replace('/','-') + '.css', 'w'))
-			__ftp[path] = path.lstrip('./').replace('/','-')
+			__ftp[path] = path.lstrip('./').replace('/','-') + '.css'
 
 def xml(newstyle,path):
-        svn = {'day':18,'month':5,'year':2007} #date of the svn start. less bollocks now
+	svn = {'day':18,'month':5,'year':2007} #date of the svn start. less bollocks now
 	stylelist = []
 	newest = 0
 	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u'', 'path': u'', 'screenshot': u'', 'thumbnail': u''}
@@ -81,22 +87,22 @@ def xml(newstyle,path):
 				else:
 					new[key] = new[key] + '\n' + line
 
-        for elem in ('thumbnail', 'screenshot'):
-                if os.path.exists(os.path.join(path,'images',elem+'.png')):
-                        new[elem] = unicode(newstyle + '/' + 'images' +'/' +elem+'.png')
-                else:
-                        new[elem] = u'none'
-        
-        for filename in os.listdir(path):
-                if filename.endswith('.css'):
-                        mtime = os.path.getmtime(path+'\\'+filename)
-                        if mtime >  newest:
-                                newest = mtime
-                                newestf = filename
+	for elem in ('thumbnail', 'screenshot'):
+		if os.path.exists(os.path.join(path,'images',elem+'.png')):
+			new[elem] = unicode(newstyle + '/' + 'images' +'/' +elem+'.png')
+		else:
+			new[elem] = u'none'
+	
+	for filename in os.listdir(path):
+		if filename.endswith('.css'):
+			mtime = os.path.getmtime(path+'\\'+filename)
+			if mtime >  newest:
+				newest = mtime
+				newestf = filename
 
-        newfile = datetime.datetime.fromtimestamp(newest)
-        if newfile.day >= svn['day'] and newfile.month >= svn['month'] and newfile.year >= svn['year']:
-                new['update'] = unicode(newfile.strftime('%d.%m.%Y'))
+	newfile = datetime.datetime.fromtimestamp(newest)
+	if newfile.day >= svn['day'] and newfile.month >= svn['month'] and newfile.year >= svn['year']:
+		new['update'] = unicode(newfile.strftime('%d.%m.%Y'))
 
 	xmlstyles = xmldoc.css_styles.xml_xpath("style/@name")
 	for i in range(len(xmlstyles)):
@@ -130,19 +136,24 @@ def xml(newstyle,path):
 	output = file('./stylelist.xml', 'w')
 	output.write(xmldoc.xml())
 
-def doftp():
+def doftp(update):
 	ftp_update = []
 	for css in __ftp:
 		ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/' + __ftp[css],__out+ css.lstrip('./').replace('/','-') + '/'+__ftp[css])]
-		if os.path.exists(css+'/images'): #do we have an /image path for the css?
-			for root,path,filename in os.walk(css+'/images'):
-				root = root.replace('\\','/') #evil mixed \ and /
-				for elem in filename:
-					if filter(elem.endswith, __extensions):
-						ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
+		if update in ('upload','fullupload'):
+			if os.path.exists(css+'/images'): #do we have an /image path for the css?
+				for root,path,filename in os.walk(css+'/images'):
+					root = root.replace('\\','/') #evil mixed \ and /
+					for elem in filename:
+						if filter(elem.lower().endswith, __extensions):
+							if update == 'upload':
+								if __lastupdate <= os.path.getmtime(root + '/' + elem):
+									ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
+							else:
+								ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
 
 	ftp_update += [(__ftppath + 'stylelist.xml','./stylelist.xml')]
-	anidbftp = ftplib.FTP(*file("../../ftp.txt").read().split("\n"))
+	anidbftp = ftplib.FTP(*file("../../ftptest.txt").read().split("\n"))
 
 	for ftp_path, local_file in ftp_update:
 		try:
@@ -173,8 +184,7 @@ def ftpfolder(ftp_path,anidbftp,position='/'):
 
 if __name__ == "__main__":
 	cssm()
-	
-	if sys.argv.pop() == "upload":
-		doftp()
 
+	if len(sys.argv) > 1:
+		doftp(sys.argv[1])
 	print "done"
