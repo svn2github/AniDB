@@ -13,13 +13,12 @@ Furthermore to upload stuff to the ftp you have to run it with one of the follow
 default option should
 """
 
-import os, sys, ftplib, amara, copy, datetime,time
+import os, sys, ftplib, amara, copy, datetime,time,urllib
 
 __out = "../../flat/"
 __ftp = {}
 __ftppath = '/css/'
 __extensions = ('.jpg', '.jpeg', '.gif', '.png','.css')
-__lastupdate = os.path.getmtime('stylelist.xml')
 
 def cssmerge(fullpath, outfile):
 	path, filename = os.path.split(os.path.normpath(fullpath))
@@ -137,7 +136,16 @@ def xml(newstyle,path):
 	output.write(xmldoc.xml())
 
 def doftp(update):
-	ftp_update = []
+    	ftp_update = []
+	if update in ('upload','fullupload'):
+		try:
+			lastupdate = int(urllib.urlopen('http://www.anidb.net/css/lastpicupload').read())
+			file(__out + 'lastpicupload','w').write(str(lastupdate))
+			ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
+		except:
+			file(__out + 'lastpicupload','w').write(str(time.mktime(time.gmtime())))
+			lastupdate = 0
+			print "Couldn't determine last picture upload. Running fullupdate."
 	for css in __ftp:
 		ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/' + __ftp[css],__out+ css.lstrip('./').replace('/','-') + '/'+__ftp[css])]
 		if update in ('upload','fullupload'):
@@ -147,7 +155,7 @@ def doftp(update):
 					for elem in filename:
 						if filter(elem.lower().endswith, __extensions):
 							if update == 'upload':
-								if __lastupdate <= os.path.getmtime(root + '/' + elem):
+								if lastupdate <= os.path.getmtime(root + '/' + elem):
 									ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
 							else:
 								ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
