@@ -6,7 +6,7 @@ www.anidb.net
 account
 password
 Furthermore to upload stuff to the ftp you have to run it with one of the following options:
-- to upload the css and all pics newer than the last upload (modification date of stylelist.xml) use 'upload'
+- to upload the css and all pics newer than the last upload (timestamp in lastpicupload file on the ftp) use 'upload'
 - to upload only the css use option 'cssupload'
 - to upload the css and all pics use option 'fullupload'
 
@@ -136,14 +136,14 @@ def xml(newstyle,path):
 	output.write(xmldoc.xml())
 
 def doftp(update):
-    	ftp_update = []
+	ftp_update = []
 	if update in ('upload','fullupload'):
 		try:
 			lastupdate = int(urllib.urlopen('http://www.anidb.net/css/lastpicupload').read())
 			file(__out + 'lastpicupload','w').write(str(lastupdate))
 			ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
 		except:
-			file(__out + 'lastpicupload','w').write(str(time.mktime(time.gmtime())))
+			file(__out + 'lastpicupload','w').write(str(time.mktime(time.localtime())))
 			lastupdate = 0
 			print "Couldn't determine last picture upload. Running fullupdate."
 	for css in __ftp:
@@ -155,7 +155,9 @@ def doftp(update):
 					for elem in filename:
 						if filter(elem.lower().endswith, __extensions):
 							if update == 'upload':
-								if lastupdate <= os.path.getmtime(root + '/' + elem):
+								fileupdate = os.path.getmtime(root + '/' + elem)
+								filecreation = os.path.getctime(root + '/' + elem)
+								if (lastupdate < fileupdate) or (lastupdate < filecreation):
 									ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
 							else:
 								ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
