@@ -100,7 +100,7 @@ img[src*="ask2.gif"] {
 	padding-left: 13px;
 }
 img[src*="ask2.gif"]:hover {
-	background-color: #dfd5ff;
+	background-position: -16px top;
 }
 img[src*="anidb_no_vote.gif"] {
 	background: transparent url(images/icons/vote-no.gif) no-repeat left 3px;
@@ -169,12 +169,13 @@ div.anime_all td.icons span {
 
 /* buttons */
 .i_help {
-	background-image: url(images/buttons/help.png);
+	background: transparent url(images/buttons/help.png) no-repeat left center;
 	cursor: help;
 	border: 0 !important;
+	padding: 4px 8px;
 }
 .i_help:hover {
-	background-color: #dfd5ff;
+	background-position: -15px center;
 }
 .i_nodown1, .i_down1, .i_noup1, .i_up1 {
 	width: 9px;
