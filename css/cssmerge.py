@@ -55,7 +55,7 @@ def cssmerge(fullpath, outfile):
 def cssm():
 	if os.path.exists(__out) is False:
 		os.mkdir(__out)
-	for line in file('stylelist').readlines():
+	for line in file('stylelist','rU').readlines():
 		if not line.startswith('#'):
 			path,name = line.rstrip('\n').rsplit('/',1)	
 			xml(unicode(path.lstrip('./').replace('/','-')),path)
@@ -163,7 +163,7 @@ def doftp(update):
 								ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
 
 	ftp_update += [(__ftppath + 'stylelist.xml','./stylelist.xml')]
-	anidbftp = ftplib.FTP(*file("../../ftptest.txt").read().split("\n"))
+	anidbftp = ftplib.FTP(*file("../../ftp.txt",'rU').read().split("\n"))
 
 	for ftp_path, local_file in ftp_update:
 		try:
