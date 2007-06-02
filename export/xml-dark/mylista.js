@@ -7,85 +7,85 @@ var selected = 0;
 var lastsel = 0;
 var watched = 0;
 var complete = 0;
-var sortName = "Name";
+var sortName = "N";
 var sortOrder = "ascending";
 var sortType = "text";
 
 function over(obj, name){
-   obj.style.cursor='pointer';
-   obj.className=name;
+	obj.style.cursor='pointer';
+	obj.className=name;
 }
 function out(obj){
-   obj.style.cursor='';
-   obj.className='';
+	obj.style.cursor='';
+	obj.className='';
 }
 function over2(obj, name){
-   lastclass = obj.className;
-   obj.className=name;
+	lastclass = obj.className;
+	obj.className=name;
 }
 function out2(obj){
-   obj.className=lastclass;
+	obj.className=lastclass;
 }
 function sort(field, type){
-   selected = 0;
-   if(sortName==field){
-      if(sortOrder=="ascending")
-         sortOrder="descending";
-      else   sortOrder="ascending";
-   }
-   else sortName = field;
+	selected = 0;
+	if(sortName==field){
+		if(sortOrder=="ascending")
+			sortOrder="descending";
+		else	sortOrder="ascending";
+	}
+	else sortName = field;
 
-   sortType = type;
+	sortType = type;
    
-   setVariable(xslDocument, "selected", selected);
-   sortColumns(xmlDocument, xslDocument, resultElementId, sortName, sortType, sortOrder);
-   update();
+	setVariable(xslDocument, "selected", selected);
+	sortColumns(xmlDocument, xslDocument, resultElementId, sortName, sortType, sortOrder);
+	update();
 }
 function select(nr){
-   if(lastsel==nr) nr = 0;
-   lastsel = nr;
-   selected=nr;
+	if(lastsel==nr) nr = 0;
+	lastsel = nr;
+	selected=nr;
    
-   setVariable(xslDocument, "selected", selected);
-   update();
+	setVariable(xslDocument, "selected", selected);
+	update();
 }
 function swWatched(obj, name){
-   selectedN = '0';
-   if(watched=='0'){
-      watched = '1';
-      obj.className=name;
-   }else{
-      watched = '0';
-      obj.className='';
-   }
+	selectedN = '0';
+	if(watched=='0'){
+		watched = '1';
+		obj.className=name;
+	}else{
+		watched = '0';
+		obj.className='';
+	}
    
-   setVariable(xslDocument, "watched", watched);
-   update();
+	setVariable(xslDocument, "watched", watched);
+	update();
 }
 function swComplete(obj){
-   selectedN = 0;
-   if(complete=='0'){
-         complete = '1';
-         obj.className='opt';
-      }else{
-         complete = '0';
-         obj.className='';
-      }
+	selectedN = '0';
+	if(complete=='0'){
+		complete = '1';
+		obj.className='opt';
+	}else{
+		complete = '0';
+		obj.className='';
+	}
 
-   setVariable(xslDocument, "complete", complete);
-   update();
+	setVariable(xslDocument, "complete", complete);
+	update();
 }
 function swSFV(obj){
-   if(sfv==0){
-         sfv = 1;
-         obj.className='opt';
-   }else{
-      sfv = 0;
-      obj.className='';
-   }
+	if(sfv==0){
+			sfv = 1;
+			obj.className='opt';
+	}else{
+		sfv = 0;
+		obj.className='';
+	}
 
-   setVariable(xslDocument, "sfv", sfv);
-   update();
+	setVariable(xslDocument, "sfv", sfv);
+	update();
 }
 
 function setVariable(xslDocument, varname, value) {
@@ -108,7 +108,7 @@ function setVariable(xslDocument, varname, value) {
   }
 }
 function sortColumns(xmlDocument, xslDocument, resultElementId, orderBy, dataType, sortOrder) {
-  removeXslSort(xslDocument, 'Anime');
+  removeXslSort(xslDocument, 'A');
   if (typeof orderBy != 'undefined') {
     if (typeof dataType == 'undefined') {
       dataType = 'text';
@@ -116,7 +116,7 @@ function sortColumns(xmlDocument, xslDocument, resultElementId, orderBy, dataTyp
     if (typeof sortOrder == 'undefined') {
       sortOrder = 'ascending';
     }
-    addXslSort(xslDocument, 'Anime', orderBy, dataType, sortOrder);
+    addXslSort(xslDocument, 'A', orderBy, dataType, sortOrder);
   }
 }
 function removeXslSort (xslDocument, tagName) {
@@ -197,10 +197,10 @@ function update(){
 }
 ////INIT////
 function transformIfLoaded () {
-   if(xmlDocument.readyState == 4 && xslDocument.readyState == 4) {
-      sortColumns(xmlDocument, xslDocument, resultElementId);
-      update();
-   }
+	if(xmlDocument.readyState == 4 && xslDocument.readyState == 4) {
+		sortColumns(xmlDocument, xslDocument, resultElementId);
+		update();
+	}
 }
 
 function initDocuments (xmlURL, xslURL) {
