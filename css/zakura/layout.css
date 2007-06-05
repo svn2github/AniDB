@@ -99,7 +99,7 @@ div#layout-menu div.menu ul.mod a:active {
 
 /* help link */
 div#layout-menu div.menu ul.other li.help {
-	background: transparent url(images/buttons/help.png) no-repeat 0.7em center;
+	background: transparent url(images/buttons/help-static.png) no-repeat 0.7em center;
 }
 div#layout-menu div.menu ul.other li.help a {
 	padding-left: 26px;

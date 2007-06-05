@@ -9,6 +9,7 @@ img[src*="plus.gif"] {
 	background: transparent url(images/buttons/minus.gif) no-repeat left top;
 	width: 0;
 	padding-left: 15px;
+	text-indent: 5000px;
 }
 img[src*="plus.gif"] {
 	background: transparent url(images/buttons/plus.gif) no-repeat left top;
