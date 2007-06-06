@@ -1,0 +1,6 @@
+List of known bugs:
+
+Internet Explorer 7:
+	No support for CSS:content (unfixable: browser error)
+	No support for CSS:text-transform (unfixable: browser error)
+
