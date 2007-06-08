@@ -107,8 +107,8 @@ body.nonav
 	left:205px;
 	color:white;
 	background-color:transparent;
-	/** background-color:transparent
-	 * prevents warnings form appearing in W3's css-validator
+	/** 
+	 * prevents warnings form appearing in W3s css-validator
 	 */
 	font-weight:bold;
 }
@@ -122,8 +122,8 @@ body.nonav
 {
 	color:white;
 	background-color:transparent;
-	/** background-color:transparent
-	 * prevents warnings form appearing in W3's css-validator
+	/** 
+	 * prevents warnings form appearing in W3s css-validator
 	 */
 	text-decoration:none;
 	font-weight:bold;
@@ -273,6 +273,20 @@ body.nonav #layout-content div.agcmts_add textarea
 {
 	width:300px;
 	height:200px;
+}
+
+body.nonav #layout-content div.animegroupvotes_all div.agvotes_header p
+{
+	margin:0px;
+	padding:0px;
+	background-color:#3496DA;
+	text-align:center;
+	font-size:16px;
+}
+
+body.nonav #layout-content div.animegroupvotes_all div.agvotes_graph table.vote_graph
+{
+	margin:auto;
 }
 
 body.nonav #layout-content hr
