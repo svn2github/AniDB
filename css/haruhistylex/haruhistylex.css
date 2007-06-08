@@ -3,6 +3,7 @@
  * Based on Harustyle by b1hn
  */
 
+@import "icons.css";
 @import "flags.css";
 
 body
@@ -379,19 +380,6 @@ body.nonav #layout-content hr
 	background-color:#AAD8E6;
 }
 
-#layout-content div.rightbar a
-{
-	color:black;
-	font-weight:bold;
-	text-decoration:none;
-}
-
-#layout-content div.rightbar a:hover,
-#layout-content div.rightbar a:active
-{
-	color:red;
-}
-
 #layout-content div.news h4
 {
 	background-color:#3496DA;
@@ -410,37 +398,11 @@ body.nonav #layout-content hr
 	padding-right:5px;
 }
 
-#layout-content div.news span.stamp a
-{
-	color:black;
-	font-weight:bold;
-	text-decoration:none;
-}
-
-#layout-content div.news span.stamp a:hover,
-#layout-content div.news span.stamp a:active
-{
-	color:red;
-}
-
 #layout-content div.news div
 {
 	margin:0px 0px 20px 0px;
 	padding:14px 5px 5px 5px;
 	font-size:12px;
-}
-
-#layout-content div.news div a
-{
-	color:black;
-	font-weight:bold;
-	text-decoration:none;
-}
-
-#layout-content div.news div a:hover,
-#layout-content div.news div a:active
-{
-	color:red;
 }
 
 #layout-content div.search_all div.search_form fieldset
@@ -493,17 +455,16 @@ body.nonav #layout-content hr
 	text-transform:capitalize;
 }
 
-#layout-content div.search_all a
+#layout-content div.anime_all div.info div.block
 {
-	color:black;
-	text-decoration:none;
-	font-weight:bold;
 }
 
-#layout-content div.search_all a:hover,
-#layout-content div.search_all a:active
+#layout-content div.anime_all div.info div.block div.image
 {
-	color:red;
+}
+
+#layout-content div.anime_all div.info div.block div.data
+{
 }
 
 #layout-footer
