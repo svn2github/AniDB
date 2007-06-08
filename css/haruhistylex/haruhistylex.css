@@ -24,6 +24,11 @@ body.nonav
 	background-image:none;
 }
 
+fieldset
+{
+	display:none;
+}
+
 #layout-menu
 {
 	width:100%;
@@ -405,11 +410,6 @@ body.nonav #layout-content hr
 	font-size:12px;
 }
 
-#layout-content div.search_all div.search_form fieldset
-{
-	display:none;
-}
-
 #layout-content div.search_all div.search_form div.search table
 {
 	margin:auto;
@@ -455,22 +455,43 @@ body.nonav #layout-content hr
 	text-transform:capitalize;
 }
 
-#layout-content div.anime_all div.info div.block
+#layout-content div.anime_all div.info div.block,
+#layout-content div.anime_all div.info div.block div.image,
+#layout-content div.anime_all div.info p.desc,
+#layout-content div.anime_all div.mylist,
+#layout-content div.anime_all div.groups,
+#layout-content div.anime_all div.episodes,
+#layout-content div.anime_all div.g_notebox,
+#layout-content div.anime_all ul.g_actionlist,
+#layout-content div.anime_all div.g_end
 {
+	float:left;
 }
 
-#layout-content div.anime_all div.info div.block div.image
+#layout-content div.anime_all div.info p.desc,
+#layout-content div.anime_all ul.g_actionlist
 {
+	margin:0px;
+	padding:0px;
 }
 
-#layout-content div.anime_all div.info div.block div.data
+#layout-content div.anime_all div.info div.block,
+#layout-content div.anime_all div.info p.desc,
+#layout-content div.anime_all div.mylist,
+#layout-content div.anime_all div.groups,
+#layout-content div.anime_all div.episodes,
+#layout-content div.anime_all div.episodes table,
+#layout-content div.anime_all div.g_notebox,
+#layout-content div.anime_all ul.g_actionlist,
+#layout-content div.anime_all div.g_end
 {
+	width:100%;
 }
 
-#layout-footer
+#layout-footer:before
 {
-	font-size:12px;
-	text-align:center;
+	content:'I\'ll fix the footer when I have some time over!!';
+	font-weight:bold;
 }
 
 #layout-footer p
@@ -481,5 +502,5 @@ body.nonav #layout-content hr
 
 #layout-footer:after
 {
-	content:'HaruhiStyleX by TheJAG. (Based on Harustyle by b1hn.)';
+	content:'HaruhiStyleX.AniDB v2 by TheJAG. (Based on Harustyle by b1hn.)';
 }
