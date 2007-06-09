@@ -3012,7 +3012,8 @@ div.export_all div
 
 div.g_info,
 div.export_action,
-div.animeatt_info ul
+div.animeatt_info ul,
+div.add_done ul
 {
 	text-align: center;
 }
