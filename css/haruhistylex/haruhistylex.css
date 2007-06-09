@@ -8,7 +8,7 @@
 
 body
 {
-	font-family:Calibri, "Arial Unicode MS", Arial, Tahoma, Verdana, monospace;
+	font-family:"Arial Unicode MS", Arial, Tahoma;
 	background-image:url('images/topBack.png');
 	background-repeat:repeat-x;
 	margin:0px;
@@ -113,9 +113,6 @@ fieldset
 	left:205px;
 	color:white;
 	background-color:transparent;
-	/** 
-	 * prevents warnings form appearing in W3s css-validator
-	 */
 	font-weight:bold;
 }
 
@@ -128,9 +125,6 @@ fieldset
 {
 	color:white;
 	background-color:transparent;
-	/** 
-	 * prevents warnings form appearing in W3s css-validator
-	 */
 	text-decoration:none;
 	font-weight:bold;
 	font-size:12px;
@@ -251,6 +245,7 @@ body.nonav #layout-content div.agcmts_all div.agcmts_entries div.comment h4
 {
 	background-color:#3496DA;
 	font-size:14px;
+	font-variant:small-caps;
 	margin:0px;
 }
 
@@ -269,6 +264,7 @@ body.nonav #layout-content div.agcmts_add h4
 	background-color:#3496DA;
 	font-size:16px;
 	font-weight:bold;
+	font-variant:small-caps;
 	text-align:center;
 	margin:0px;
 	padding:0px;
@@ -316,6 +312,7 @@ body.nonav #layout-content hr
 #layout-content h1
 {
 	font-size:24px;
+	font-variant:small-caps;
 	color:white;
 	background-color:#3496DA;
 	margin:0px;
@@ -333,15 +330,13 @@ body.nonav #layout-content hr
 	font-size:12px;
 	color:white;
 	background-color:transparent;
-	/** background-color:transparent
-	 * prevents warnings form appearing in W3's css-validator
-	 */
 }
 
 #layout-content div.rightbar h4
 {
 	background-color:#3496DA;
 	font-weight:bold;
+	font-variant:small-caps;
 	text-align:center;
 	margin:0px;
 	padding:0px;
@@ -351,6 +346,7 @@ body.nonav #layout-content hr
 {
 	background-color:#3496DA;
 	font-weight:bold;
+	font-variant:small-caps;
 	text-align:center;
 	margin:20px 0px 0px 0px;
 	padding:0px;
@@ -390,6 +386,7 @@ body.nonav #layout-content hr
 	background-color:#3496DA;
 	font-size:16px;
 	font-weight:bold;
+	font-variant:small-caps;
 	text-align:center;
 	margin:0px;
 	padding:0px;
@@ -457,13 +454,7 @@ body.nonav #layout-content hr
 
 #layout-content div.anime_all div.info div.block,
 #layout-content div.anime_all div.info div.block div.image,
-#layout-content div.anime_all div.info p.desc,
-#layout-content div.anime_all div.mylist,
-#layout-content div.anime_all div.groups,
-#layout-content div.anime_all div.episodes,
-#layout-content div.anime_all div.g_notebox,
-#layout-content div.anime_all ul.g_actionlist,
-#layout-content div.anime_all div.g_end
+#layout-content div.anime_all div.info p.desc
 {
 	float:left;
 }
@@ -477,9 +468,7 @@ body.nonav #layout-content hr
 
 #layout-content div.anime_all div.info div.block,
 #layout-content div.anime_all div.info p.desc,
-#layout-content div.anime_all div.mylist,
-#layout-content div.anime_all div.groups,
-#layout-content div.anime_all div.episodes,
+#layout-content div.anime_all div.awards,
 #layout-content div.anime_all div.episodes table,
 #layout-content div.anime_all div.g_notebox,
 #layout-content div.anime_all ul.g_actionlist,
@@ -488,10 +477,116 @@ body.nonav #layout-content hr
 	width:100%;
 }
 
-#layout-footer:before
+#layout-content div.anime_all div.info div.block
 {
-	content:'I\'ll fix the footer when I have some time over!!';
-	font-weight:bold;
+	margin-bottom:20px;
+}
+
+#layout-content div.anime_all div.info div.block div.data table
+{
+	border-spacing:0px;
+}
+
+#layout-content div.anime_all div.info div.block div.data table tr th
+{
+	font-weight:normal;
+}
+
+#layout-content div.anime_all div.info div.block div.data table tr.g_odd
+{
+	background-color:#AAD8E6;
+}
+
+#layout-content div.anime_all div.info div.block div.data table th
+{
+	text-align:left;
+}
+
+#layout-content div.anime_all div.info p.desc
+{
+	text-align:center;
+	margin-bottom:20px;
+	border-top-style:solid;
+	border-top-width:4px;
+	border-top-color:#3496DA;
+	border-bottom-style:solid;
+	border-bottom-width:4px;
+	border-bottom-color:#3496DA;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+#layout-content div.anime_all div.awards
+{
+	text-align:center;
+	margin-bottom:20px;
+}
+
+#layout-content div.anime_all div.vote table,
+#layout-content div.anime_all div.mylist table,
+#layout-content div.anime_all div.groups table
+{
+	margin:0 auto 20px auto;
+}
+
+#layout-content div.anime_all div.vote table
+{
+	border-left-style:solid;
+	border-left-width:2px;
+	border-left-color:#3496DA;
+	border-right-style:solid;
+	border-right-width:2px;
+	border-right-color:#3496DA;
+	border-bottom-style:solid;
+	border-bottom-width:2px;
+	border-bottom-color:#3496DA;
+	border-spacing:0px;
+	background-color:#AAD8E6;
+	text-align:center;
+}
+
+#layout-content div.anime_all div.vote table caption
+{
+	background-color:#3496DA;
+	color:white;
+	font-variant:small-caps;
+}
+
+#layout-content div.anime_all div.vote table tr td p,
+#layout-content div.anime_all div.vote table tr td form p
+{
+	margin:0px;
+	padding:0px;
+}
+
+#layout-content div.anime_all div.vote table tr td p i
+{
+	display:none;
+}
+
+#layout-content div.anime_all div.vote table tr td p b:after
+{
+	content:' Vote:';
+}
+
+#layout-content div.anime_all div.vote table tr td form p select
+{
+	border:none;
+	width:150px;
+	display:block;
+}
+
+#layout-content div.anime_all div.vote table tr td form p input.submit
+{
+	content:'test';
+}
+
+#layout-footer
+{
+	text-align:center;
+	font-size:12px;
+	background-color:#3496DA;
+	color:white;
 }
 
 #layout-footer p
