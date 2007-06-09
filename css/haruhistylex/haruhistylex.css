@@ -222,11 +222,23 @@ fieldset
 	margin-left:200px;
 	margin-right:10px;
 	font-size:12px;
+	border-left-style:solid;
+	border-left-width:2px;
+	border-left-color:#3496DA;
+	border-right-style:solid;
+	border-right-width:2px;
+	border-right-color:#3496DA;
 }
 
 body.nonav #layout-content
 {
 	margin:0px;
+	border-left-style:solid;
+	border-left-width:2px;
+	border-left-color:#3496DA;
+	border-right-style:solid;
+	border-right-width:2px;
+	border-right-color:#3496DA;
 }
 
 body.nonav #layout-content div.agcmts_all div.agcmts_head
@@ -318,6 +330,7 @@ body.nonav #layout-content hr
 	margin:0px;
 	padding:0px;
 	text-align:center;
+	z-index:1;
 }
 
 #layout-content div.rightbar
@@ -355,30 +368,57 @@ body.nonav #layout-content hr
 
 #layout-content div.rightbar p
 {
-	background-color:#AAD8E6;
+	background-color:#3496DA;
 	text-align:center;
 	margin:0px;
 	padding:0px;
+}
+
+#layout-content div.rightbar p a
+{
+	color:white;
+	background-color:transparent;
+}
+
+#layout-content div.rightbar p a:hover,
+#layout-content div.rightbar p a:active
+{
+	color:red;
 }
 
 #layout-content div.rightbar ol
 {
 	margin:0px 0px 10px 0px;
 	padding:0px;
+	border-left-style:solid;
+	border-left-width:2px;
+	border-left-color:#3496DA;
+	border-right-style:solid;
+	border-right-width:2px;
+	border-right-color:#3496DA;
+	border-bottom-style:solid;
+	border-bottom-width:2px;
+	border-bottom-color:#3496DA;
 }
 
 #layout-content div.rightbar li
 {
 	margin:0;
 	padding:0px;
-	width:180px;
 	list-style-type:none;
 	color:black;
+	background-color:white;
 }
 
 #layout-content div.rightbar li.g_odd
 {
 	background-color:#AAD8E6;
+}
+
+#layout-content div.news
+{
+	margin:0px;
+	padding:0px;
 }
 
 #layout-content div.news h4
@@ -402,9 +442,10 @@ body.nonav #layout-content hr
 
 #layout-content div.news div
 {
-	margin:0px 0px 20px 0px;
-	padding:14px 5px 5px 5px;
-	font-size:12px;
+	margin:0px;
+	padding:15px 5px 15px 5px;
+	font-size:10px;
+	background-color:#AAD8E6;
 }
 
 #layout-content div.search_all div.search_form div.search table
@@ -452,6 +493,11 @@ body.nonav #layout-content hr
 	text-transform:capitalize;
 }
 
+#layout-content div.anime_all
+{
+	background-color:#AAD8E6;
+}
+
 #layout-content div.anime_all div.info div.block,
 #layout-content div.anime_all div.info div.block div.image,
 #layout-content div.anime_all div.info p.desc
@@ -467,12 +513,12 @@ body.nonav #layout-content hr
 }
 
 #layout-content div.anime_all div.info div.block,
+#layout-content div.anime_all div.info div.block div.data,
 #layout-content div.anime_all div.info p.desc,
 #layout-content div.anime_all div.awards,
 #layout-content div.anime_all div.episodes table,
 #layout-content div.anime_all div.g_notebox,
-#layout-content div.anime_all ul.g_actionlist,
-#layout-content div.anime_all div.g_end
+#layout-content div.anime_all ul.g_actionlist
 {
 	width:100%;
 }
@@ -480,16 +526,61 @@ body.nonav #layout-content hr
 #layout-content div.anime_all div.info div.block
 {
 	margin-bottom:20px;
+	overflow:hidden;
+}
+
+#layout-content div.anime_all div.info div.block div.image
+{
+	position:absolute;
+	top:117px;
+	z-index:2;
+	width:10px;
+	height:10px;
+}
+
+#layout-content div.anime_all div.info div.block div.image:before
+{
+	content:url('images/showPicture.png');
+}
+
+#layout-content div.anime_all div.info div.block div.image img
+{
+	display:block;
+	visibility:hidden;
+}
+
+#layout-content div.anime_all div.info div.block div.image:hover img
+{
+	visibility:visible;
 }
 
 #layout-content div.anime_all div.info div.block div.data table
 {
-	border-spacing:0px;
+	width:100%;
+}
+
+#layout-content div.anime_all div.info div.block div.data table tr td.value table
+{
+	border-bottom-style:none;
+	margin:0px;
+	padding-left:0px;
+}
+
+#layout-content div.anime_all div.info div.block div.data table tr td.value table tr
+{
+	margin:0px;
+	background-color:transparent;
 }
 
 #layout-content div.anime_all div.info div.block div.data table tr th
 {
 	font-weight:normal;
+	text-align:left;
+}
+
+#layout-content div.anime_all div.info div.block div.data table tr
+{
+	background-color:white;
 }
 
 #layout-content div.anime_all div.info div.block div.data table tr.g_odd
@@ -497,23 +588,10 @@ body.nonav #layout-content hr
 	background-color:#AAD8E6;
 }
 
-#layout-content div.anime_all div.info div.block div.data table th
-{
-	text-align:left;
-}
-
 #layout-content div.anime_all div.info p.desc
 {
 	text-align:center;
 	margin-bottom:20px;
-	border-top-style:solid;
-	border-top-width:4px;
-	border-top-color:#3496DA;
-	border-bottom-style:solid;
-	border-bottom-width:4px;
-	border-bottom-color:#3496DA;
-	padding-top:10px;
-	padding-bottom:10px;
 }
 
 #layout-content div.anime_all div.awards
@@ -526,7 +604,7 @@ body.nonav #layout-content hr
 #layout-content div.anime_all div.mylist table,
 #layout-content div.anime_all div.groups table
 {
-	margin:0 auto 20px auto;
+	margin:0px auto 20px auto;
 }
 
 #layout-content div.anime_all div.vote table
@@ -540,7 +618,7 @@ body.nonav #layout-content hr
 	border-bottom-style:solid;
 	border-bottom-width:2px;
 	border-bottom-color:#3496DA;
-	border-spacing:0px;
+	border-spacing:2px;
 	background-color:#AAD8E6;
 	text-align:center;
 }
@@ -553,6 +631,7 @@ body.nonav #layout-content hr
 }
 
 #layout-content div.anime_all div.vote table tr td p,
+#layout-content div.anime_all div.vote table tr td form,
 #layout-content div.anime_all div.vote table tr td form p
 {
 	margin:0px;
@@ -569,16 +648,82 @@ body.nonav #layout-content hr
 	content:' Vote:';
 }
 
-#layout-content div.anime_all div.vote table tr td form p select
+#layout-content div.anime_all div.mylist table
 {
-	border:none;
-	width:150px;
-	display:block;
+	border-left-style:solid;
+	border-left-width:2px;
+	border-left-color:#3496DA;
+	border-right-style:solid;
+	border-right-width:2px;
+	border-right-color:#3496DA;
+	border-bottom-style:solid;
+	border-bottom-width:2px;
+	border-bottom-color:#3496DA;
+	border-spacing:2px;
+	background-color:#AAD8E6;
+	text-align:center;
 }
 
-#layout-content div.anime_all div.vote table tr td form p input.submit
+#layout-content div.anime_all div.mylist table caption
 {
-	content:'test';
+	background-color:#3496DA;
+	color:white;
+	font-variant:small-caps;
+}
+
+#layout-content div.anime_all div.mylist table tr td.title div.icoco
+{
+	display:inline;
+}
+
+#layout-content div.anime_all div.groups table.grouplist
+{
+	border-left-style:solid;
+	border-left-width:2px;
+	border-left-color:#3496DA;
+	border-right-style:solid;
+	border-right-width:2px;
+	border-right-color:#3496DA;
+	border-bottom-style:solid;
+	border-bottom-width:2px;
+	border-bottom-color:#3496DA;
+	border-spacing:0px;
+	background-color:#AAD8E6;
+}
+
+#layout-content div.anime_all div.groups table.grouplist caption
+{
+	background-color:#3496DA;
+	color:white;
+	font-variant:small-caps;
+}
+
+#layout-content div.anime_all div.groups table.grouplist tr.heading
+{
+
+}
+
+#layout-content div.anime_all div.groups table.grouplist tr.heading,
+#layout-content div.anime_all div.groups table.grouplist tr.finished,
+#layout-content div.anime_all div.groups table.grouplist tr.ongoing,
+#layout-content div.anime_all div.groups table.grouplist tr.specials.only
+{
+	background-color:#AAD8E6;
+}
+
+#layout-content div.anime_all div.groups table.grouplist tr.complete
+{
+	background-color:#90EE90;
+}
+
+#layout-content div.anime_all div.groups table.grouplist tr.dropped
+{
+	background-color:#FF6666;
+}
+
+#layout-content div.anime_all div.groups table.grouplist tr.stalled
+{
+	background-color:#FFC0CB;
 }
 
 #layout-footer
@@ -587,6 +732,8 @@ body.nonav #layout-content hr
 	font-size:12px;
 	background-color:#3496DA;
 	color:white;
+	margin:0px;
+	padding:0px;
 }
 
 #layout-footer p
