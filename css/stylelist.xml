@@ -13,9 +13,9 @@
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>20.05.2007</update>
-		<status/>
-		<description/>
+		<update>10th June 2007</update>
+		<status>stable (v5)</status>
+		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
 		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle_hacks/images/thumbnail.png</thumbnail>
@@ -33,7 +33,7 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle DonGato revision</title>
 		<creator>DonGato</creator>
-		<update>28.05.2007</update>
+		<update>09.06.2007</update>
 		<status>in sync</status>
 		<description>report any problem by a message</description>
 		<path/>
