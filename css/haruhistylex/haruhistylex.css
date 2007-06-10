@@ -17,6 +17,8 @@ body
 	top:0px;
 	left:0px;
 	width:100%;
+
+	z-index:1;
 }
 
 body.nonav
@@ -46,7 +48,8 @@ fieldset
 	position:absolute;
 	top:0px;
 	left:0px;
-	z-index:2;
+
+	z-index:3;
 }
 #layout-menu div.menu:hover
 {
@@ -97,13 +100,16 @@ fieldset
 	left:0px;
 	width:100%;
 	height:100px;
+
+	z-index:2;
 }
 
 #layout-menu div.usermenu p
 {
 	margin:0px;
 	padding:0px;
-	z-index:1;
+
+	z-index:3;
 }
 
 #layout-menu div.usermenu p.user
@@ -180,7 +186,8 @@ fieldset
 	top:0px;
 	left:190px;
 	height:100px;
-	z-index:1;
+
+	z-index:3;
 }
 
 #layout-search div.search input.text
@@ -330,7 +337,6 @@ body.nonav #layout-content hr
 	margin:0px;
 	padding:0px;
 	text-align:center;
-	z-index:1;
 }
 
 #layout-content div.rightbar
