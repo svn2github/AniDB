@@ -62,7 +62,7 @@ h4 {
 	font-size:				10px;
 	padding:				3px 0 3px 18px;
 	color:					#fff;
-	background:				url(http://bogna.best.net.pl/anidb/dark/h4.gif) left top no-repeat;
+	background:				url(images/h4.gif) left top no-repeat;
 	margin:					10px 0 0 0;
 }
 
@@ -72,7 +72,7 @@ table caption {
 	font-size:				10px;
 	padding:				3px 0 3px 18px;
 	color:					#fff;
-	background:				url(http://bogna.best.net.pl/anidb/dark/h4.gif) left top no-repeat;
+	background:				url(images/h4.gif) left top no-repeat;
 	color:					
 }
 
@@ -118,7 +118,7 @@ fieldset {
 	height:					200px;
 	width:					955px;
 	margin:					0 auto;
-	background:				url(http://bogna.best.net.pl/anidb/dark/dark.gif) 1px top no-repeat;
+	background:				url(images/dark.gif) 1px top no-repeat;
 	overflow:				visible;
 }
 #layout-menu ul {
@@ -214,7 +214,7 @@ ul.other a:hover {
 	text-indent:				-5000px;
 	display:				block;
 	float:					right;
-	background:				url(http://bogna.best.net.pl/anidb/dark/button_search.gif) no-repeat top;
+	background:				url(images/button_search.gif) no-repeat top;
 	border:					none;
 	width:					50px;
 	height:					14px;
@@ -224,7 +224,7 @@ ul.other a:hover {
 	cursor:					pointer;
 }
 #layout-search form input.submit:hover {
-	background:				url(http://bogna.best.net.pl/anidb/dark/button_search_over.gif) no-repeat top;
+	background:				url(images/button_search_over.gif) no-repeat top;
 }
 
 /*--------------------------------------------------------------------------------------------------------------CONTENT */
@@ -247,14 +247,15 @@ body.nonav div#layout-content {
 	margin:					20px;
 }
 .g_section {
-	clear:					both;
 	width:					100%;
 	margin:					0 auto;
+	clear:					both;
 }
 .g_end {
 	height:					20px;
 	border-top:				1px solid #333;
 	margin:					20px;
+	clear:					both;
 }
 .g_info,
 .g_actionlist,
@@ -297,15 +298,18 @@ li.g_odd,
 span.g_odd {
 	background-color:			#333;
 }
+ul.g_actionlist li.g_odd {
+	background-color:			transparent;
+}
 
 span.i_icon {
 	float:					left;
 	padding-right:				3px;
 }
-td.title div.icons span.i_icon,
-div.icons span.i_mylist,
-div.icons span[title*="status"],
-div.icons span[title*="seen"] {
+td.title div.icoco span.i_icon,
+div.icoco span.i_mylist,
+div.icoco span[title*="status"],
+div.icoco span[title*="seen"] {
 	float:					right;
 	padding-right:				3px;
 }
@@ -379,10 +383,10 @@ ul.g_jumplist li {
 	margin-right:				0;
 	padding-left:				5px;
 	padding-right:				5px;
-	background:				url("http://bogna.best.net.pl/anidb/dark/jumplist.gif") left bottom no-repeat;
+	background:				url("images/jumplist.gif") left bottom no-repeat;
 }
 ul.g_jumplist li:hover {
-	background-image:			url("http://bogna.best.net.pl/anidb/dark/jumplist_over.gif");
+	background-image:			url("images/jumplist_over.gif");
 }
 ul.g_jumplist li a {
 	display:				inline;
@@ -480,11 +484,11 @@ div.anime_all div.anime_awards a img {
 	margin:					5px 1px;
 }
 
-div.anime_all div.anime_mylist table,
+div.anime_all div.mylist table,
 div.anime_all div.mylist_add table {
 	width:					300px;
 }
-div.anime_all div.anime_mylist td {
+div.anime_all div.mylist td {
 	background-color:			#333;
 }
 
@@ -496,45 +500,52 @@ div.anime_all table.filelist {
 	width:					877px;
 	margin-left:				33px;
 }
-
-div.anime_all div.anime_mylist td.state,
-div.anime_all div.anime_group td.status,
-div.anime_all div.anime_group td.eps,
-div.anime_all div.anime_group td.epno,
-div.anime_all div.anime_group td.cmts,
-div.anime_all div.anime_table td.duration,
-div.anime_all div.anime_table td.files,
-div.anime_all div.anime_table td.ed2k,
-div.anime_all div.anime_table td.action {
+div.anime_all div.episodes td.action{
+	width:					40px;
+/*	padding-right:				20px;*/
+}
+div.anime_all div.mylist td.state,
+div.anime_all div.groups td.expand,
+div.anime_all div.groups td.eps,
+div.anime_all div.groups td.epno,
+div.anime_all div.groups td.cmts,
+div.anime_all div.episodes td.expand,
+div.anime_all div.episodes td.duration,
+div.anime_all div.episodes td.files,
+div.anime_all div.episodes td.ed2k {
 	width:					30px;
 	text-align:				center;
 }
-div.anime_all div.anime_group td.name,
-div.anime_all div.anime_group td.state,
-div.anime_all div.anime_group td.date,
-div.anime_all div.anime_group td.votes,
-div.anime_all div.anime_table td.date,
-div.anime_all div.anime_table td.epusers,
-div.anime_all div.anime_table td.size,
-div.anime_all div.anime_table td.quality,
-div.anime_all div.anime_table td.resolution,
-div.anime_all div.anime_table td.source,
-div.anime_all div.anime_table td.stats,
+div.anime_all div.groups td.name,
+div.anime_all div.groups td.state,
+div.anime_all div.groups td.date,
+div.anime_all div.groups td.votes,
+div.anime_all div.episodes td.date,
+div.anime_all div.episodes td.epusers,
+div.anime_all div.episodes td.size,
+div.anime_all div.episodes td.quality,
+div.anime_all div.episodes td.resolution,
+div.anime_all div.episodes td.source,
+div.anime_all div.episodes td.stats,
 div.anime_all table.filelist td.title {
 	width:					70px;
 	text-align:				center;
 }
+div.anime_all div.episodes td.action a.i_icon {
+	float:					right;
+}
 div.anime_all table.filelist td.action {
-	width:					27px;
+	width:					37px;
 	text-align:				center;
 }
-div.anime_all div.anime_table td.id,
-div.anime_all div.anime_table td.check {
+div.anime_all div.groups td.status,
+div.anime_all div.episodes td.id,
+div.anime_all div.episodes td.check {
 	width:					40px;
 	text-align:				center;
 }
-div.anime_all div.anime_group td.action {
-	width:					146px;
+div.anime_all div.groups td.action {
+	width:					76px;
 	text-align:				center;
 }
 
@@ -741,29 +752,34 @@ div.group_all td.date {
 
 /*-----------------------------------------------------------------------------------------------------------------MAIN */
 
-div.rightbar {
+div.main_all div.rightbar {
 	width:					300px;
-	margin:					-50px 0 0 20px;
+	margin:					-50px 0 0 10px;
 	float:					right;
 }
-div.rightbar p {
+div.main_all div.rightbar p {
 	text-align:				center;
 }
 
-div.news {
+div.main_all div.news {
 	width:					600px;
 	text-align:				justify;
+	float:					left;
+	clear:					none;
 }
-div.news b {
+div.main_all div.news b {
 	color:					#fff;
 }
-div.news span.stamp {
+div.main_all div.news big {
+	font-weight:				bold;
+}
+div.main_all div.news span.stamp {
 	color:					#999;
 	display:				block;
 	text-align:				right;
 	margin-bottom:				10px;
 }
-div.news div {
+div.main_all div.news div {
 	margin-bottom:				30px;
 }
 
@@ -798,6 +814,7 @@ div.latestanimes_all div.g_image {
 div.latestanimes_all img {
 	display:				block;
 	width:					150px;
+	padding:				0;
 }
 div.latestanimes_all div.data {
 	float:					right;
@@ -950,8 +967,21 @@ div.buddylist_all td.date {
 
 /*													       notifies */
 
-div.mynotifies_all div.action table {
-	width:					auto;
+div.mynotifies_all td.check {
+	width:					30px;
+	text-align:				center;
+}
+div.mynotifies_all td.type,
+div.mynotifies_all td.action {
+	width:					70px;
+	text-align:				center;
+}
+div.mynotifies_all td.date {
+	width:					100px;
+	text-align:				center;
+}
+div.mynotifies_all div.action {
+	width:					300px;
 	margin:					20px auto;
 }
 
@@ -1046,6 +1076,9 @@ div.ed2kdump_all table {
 div.profile_all table {
 	width:					300px;
 }
+div.profile_all div.profile_css {
+	width:					600px;
+}
 div.profile_all div.profile_permission table,
 div.profile_all div.rdf_notify table,
 div.profile_all div.im_notify table {
@@ -1053,6 +1086,27 @@ div.profile_all div.im_notify table {
 }
 div.profile_all div.profile_language td {
 	text-align:				right;
+}
+div.profile_all div.profile_css form {
+	text-align:				center;
+}
+div.profile_all div.profile_css form input {
+	margin:					5px auto;
+	width:					70px;
+}
+div.profile_all div.profile_css form input#style_url {
+	width:					600px;
+}
+div.profile_all div.profile_css div.image,
+div.profile_all div.profile_css div.info {
+	float:					left;
+	text-align:				left;
+}
+div.profile_all div.profile_css div.image {
+	width:					230px;
+}
+div.profile_all div.profile_css div.info {
+	width:					370px;
 }
 
 /*----------------------------------------------------------------------------------------------------------------LISTS */
@@ -1184,564 +1238,576 @@ div.genren_all li.collapsed ul {
 	display:				none;
 }
 *.i_help {
-	background:				url(http://bogna.best.net.pl/anidb/dark/ask2.gif) no-repeat right;
+	background:				url(images/ask2.gif) no-repeat right;
 	cursor:					help;
 }
 *.i_help:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/ask2_over.gif);
+	background-image:			url(images/ask2_over.gif);
 }
 
 *.i_araward {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_araward.gif);
+	background-image:			url(images/anidb_araward.gif);
 }
 *.i_censored {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_censored.gif);
+	background-image:			url(images/anidb_censored.gif);
 }
 *.i_comment {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_comment.gif);
+	background-image:			url(images/anidb_comment.gif);
 }
 *.i_crc_no {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_crc_no.gif);
+	background-image:			url(images/anidb_crc_no.gif);
 }
 *.i_crc_yes {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_crc_yes.gif);
+	background-image:			url(images/anidb_crc_yes.gif);
+}
+*.i_ep_vote {
+	background-image:			url(images/anidb_vote.gif);
 }
 *.i_file_add {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_file_add.gif);
+	background-image:			url(images/anidb_file_add.gif);
 }
 *.i_file_addmylist {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_file_addmylist.gif);
+	background-image:			url(images/anidb_file_addmylist.gif);
 }
 *.i_file_delete {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_file_delete.gif);
+	background-image:			url(images/anidb_file_delete.gif);
 }
 *.i_file_ed2k {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_file_ed2k.gif);
+	background-image:			url(images/anidb_file_ed2k.gif);
 }
 *.i_file_edit {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_file_edit.gif);
+	background-image:			url(images/anidb_file_edit.gif);
 }
 *.i_file_removemylist {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_file_removemylist.gif);
+	background-image:			url(images/anidb_file_removemylist.gif);
 }
 *.i_filestate_corrupted {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_corrupted.gif);
+	background-image:			url(images/anidb_filestate_corrupted.gif);
 }
 *.i_filestate_edited {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_edited.gif);
+	background-image:			url(images/anidb_filestate_edited.gif);
 }
 *.i_filestate_ondvd {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_ondvd.gif);
+	background-image:			url(images/anidb_filestate_ondvd.gif);
 }
 *.i_filestate_ontv {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_ontv.gif);
+	background-image:			url(images/anidb_filestate_ontv.gif);
 }
 *.i_filestate_onvhs {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_onvhs.gif);
+	background-image:			url(images/anidb_filestate_onvhs.gif);
 }
 *.i_filestate_other {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_other.gif);
+	background-image:			url(images/anidb_filestate_other.gif);
 }
 *.i_filestate_selfripped {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_selfripped.gif);
+	background-image:			url(images/anidb_filestate_selfripped.gif);
 }
 *.i_filestate_theater {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_filestate_theater.gif);
+	background-image:			url(images/anidb_filestate_theater.gif);
 }
 *.i_greenbar {
-	background-image:			url(../icons/anidb_greenbar.gif);
+	background-image:			url(http://www.anidb.net/css/anidbstyle/images/anidb_greenbar.gif);
 }
 *.i_greenbarh {
-	background-image:			url(../icons/anidb_greenbarh.gif);
+	background-image:			url(http://www.anidb.net/css/anidbstyle/images/anidb_greenbarh.gif);
 }
 *.i_hanger {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_hanger.gif);
+	background-image:			url(images/anidb_hanger.gif);
 }
 *.i_mylist {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_mylist.gif);
+	background-image:			url(images/anidb_mylist.gif);
 }
 *.i_new_icon {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_new_icon.gif);
+	background-image:			url(images/anidb_new_icon.gif);
 }
 *.i_no_rev {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_no_rev.gif);
+	background-image:			url(images/anidb_no_rev.gif);
 }
 *.i_no_vote {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_no_vote.gif);
+	background-image:			url(images/anidb_no_vote.gif);
 }
 *.i_nonotify {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_nonotify.gif);
+	background-image:			url(images/anidb_nonotify.gif);
 }
 *.i_notify {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_notify.gif);
+	background-image:			url(images/anidb_notify.gif);
 }
 *.i_orangebar {
-	background-image:			url(../icons/anidb_orangebar.gif);
+	background-image:			url(http://www.anidb.net/css/anidbstyle/images/anidb_orangebar.gif);
 }
 *.i_pri_high {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_pri_high.gif);
+	background-image:			url(images/anidb_pri_high.gif);
 }
 *.i_pri_low {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_pri_low.gif);
+	background-image:			url(images/anidb_pri_low.gif);
 }
 *.i_pri_med {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_pri_med.gif);
+	background-image:			url(images/anidb_pri_med.gif);
 }
 *.i_rate_corrupted {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_rate_corrupted.gif);
+	background-image:			url(images/anidb_rate_corrupted.gif);
 }
 *.i_rate_eyecancer {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_rate_eyecancer.gif);
+	background-image:			url(images/anidb_rate_eyecancer.gif);
 }
 *.i_rate_unknown {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_rate_unknown.gif);
+	background-image:			url(images/anidb_rate_unknown.gif);
+}
+*.i_rate_star {
+	background-image:			url(images/anidb_rate_star.gif);
+}
+*.i_rate_halfstar {
+	background-image:			url(images/anidb_rate_halfstar.gif);
 }
 *.i_recap {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_recap.gif);
+	background-image:			url(images/anidb_recap.gif);
 }
 *.i_rev {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_rev.gif);
+	background-image:			url(images/anidb_rev.gif);
 }
 *.i_seen {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_seen.gif);
+	background-image:			url(images/anidb_seen.gif);
 }
 *.i_seen_no {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_seen_no.gif);
+	background-image:			url(images/anidb_seen_no.gif);
 }
 *.i_seen_yes {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_seen_yes.gif);
+	background-image:			url(images/anidb_seen_yes.gif);
 }
 *.i_state_all {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_all.gif);
+	background-image:			url(images/anidb_state_all.gif);
 }
 *.i_state_deleted {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_deleted.gif);
+	background-image:			url(images/anidb_state_deleted.gif);
 }
 *.i_state_mixed {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_mixed.gif);
+	background-image:			url(images/anidb_state_mixed.gif);
 }
 *.i_state_oncd {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_oncd.gif);
+	background-image:			url(images/anidb_state_oncd.gif);
 }
 *.i_state_onhdd {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_onhdd.gif);
+	background-image:			url(images/anidb_state_onhdd.gif);
 }
 *.i_state_release {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_release.gif);
+	background-image:			url(images/anidb_state_release.gif);
 }
 *.i_state_shared {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_shared.gif);
+	background-image:			url(images/anidb_state_shared.gif);
 }
 *.i_state_unknown {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_state_unknown.gif);
+	background-image:			url(images/anidb_state_unknown.gif);
 }
 *.i_sub_vietnamese {
-	background-image:			url(../icons/flags/anidb_sub_vietnamese.gif);
+	background-image:			url(http://www.anidb.net/pics/anidb_sub_vietnamese.gif);
 }
 *.i_uncensored {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_uncensored.gif);
+	background-image:			url(images/anidb_uncensored.gif);
+}
+*.i_video {
+	background-image:			url(images/anidb_video.gif);
 }
 *.i_vrs_1 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_vrs_1.gif);
+	background-image:			url(images/anidb_vrs_1.gif);
 }
 *.i_vrs_2 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_vrs_2.gif);
+	background-image:			url(images/anidb_vrs_2.gif);
 }
 *.i_vrs_3 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_vrs_3.gif);
+	background-image:			url(images/anidb_vrs_3.gif);
 }
 *.i_vrs_4 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_vrs_4.gif);
+	background-image:			url(images/anidb_vrs_4.gif);
 }
 *.i_vrs_5 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/anidb_vrs_5.gif);
+	background-image:			url(images/anidb_vrs_5.gif);
 }
 *.i_ask {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/ask.gif);
+	background-image:			url(images/ask.gif);
 }
 *.i_back {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/back.gif);
+	background-image:			url(images/back.gif);
 }
 *.i_logon {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_logon.gif);
+	background-image:			url(images/button_logon.gif);
 }
 *.i_logout {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_logout.gif);
+	background-image:			url(images/button_logout.gif);
 }
 *.i_logout:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_logout_over.gif);
+	background-image:			url(images/button_logout_over.gif);
 }
 *.i_profile {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_profile.gif);
+	background-image:			url(images/button_profile.gif);
 	position:				relative;
 	top:					-5px;
 	left:					10px;
 }
 *.i_profile:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_profile_over.gif);
+	background-image:			url(images/button_profile_over.gif);
 }
 *.i_punkt {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_punkt.gif);
+	background-image:			url(images/button_punkt.gif);
 }
 *.i_search {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_search.gif);
+	background-image:			url(images/button_search.gif);
 }
 *.i_signup {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_signup.gif);
+	background-image:			url(images/button_signup.gif);
 }
 *.i_suchen {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/button_suchen.gif);
+	background-image:			url(images/button_suchen.gif);
 }
 *.i_down1 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/down1.gif);
+	background-image:			url(images/down1.gif);
 	width:					9px;
 	height:					10px;
 }
 *.i_empty {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/empty.gif);
+	background-image:			url(images/empty.gif);
 }
 *.i_invalid {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/invalid.gif);
+	background-image:			url(images/invalid.gif);
 }
 *.i_minus {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/minus.gif);
+	background-image:			url(images/minus.gif);
 }
 *.i_minus:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/minus_over.gif);
+	background-image:			url(images/minus_over.gif);
 }
 *.i_na {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/na.gif);
+	background-image:			url(images/na.gif);
 }
 *.i_nodown1 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/nodown1.gif);
+	background-image:			url(images/nodown1.gif);
 	width:					9px;
 	height:					10px;
 }
 *.i_none {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/none.gif);
+	background-image:			url(images/none.gif);
 }
 *.i_nopic {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/nopic.gif);
+	background-image:			url(images/nopic.gif);
 }
 *.i_noup1 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/noup1.gif);
+	background-image:			url(images/noup1.gif);
 	width:					9px;
 	height:					10px;
 }
 *.i_plus {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/plus.gif);
+	background-image:			url(images/plus.gif);
 }
 *.i_plus:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/plus_over.gif);
+	background-image:			url(images/plus_over.gif);
 }
 *.i_up1 {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/up1.gif);
+	background-image:			url(images/up1.gif);
 	width:					9px;
 	height:					10px;
 }
 *.i_mybuddy {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/mybuddy.gif);
+	background-image:			url(images/mybuddy.gif);
 }
 *.i_yourbuddy {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/yourbuddy.gif);
+	background-image:			url(images/yourbuddy.gif);
 }
 *.i_authmybuddy {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/buddywaiting.gif);
+	background-image:			url(images/buddywaiting.gif);
 }
 *.i_authyourbuddy {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/buddywaiting.gif);
+	background-image:			url(images/buddywaiting.gif);
 }
 
 *.i_audio_ar {
-	background-image: url(../icons/flags/anidb_audio_arabic.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_arabic.gif);
 }
 *.i_audio_pt-BR {
-	background-image: url(../icons/flags/anidb_audio_brasilian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_brasilian.gif);
 }
 *.i_audio_br {
-	background-image: url(../icons/flags/anidb_audio_bulgarian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_bulgarian.gif);
 }
 *.i_audio_zh-ca {
-	background-image: url(../icons/flags/anidb_audio_cantonese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_cantonese.gif);
 }
 *.i_audio_ca {
-	background-image: url(../icons/flags/anidb_audio_catalan.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_catalan.gif);
 }
 *.i_audio_zh {
-	background-image: url(../icons/flags/anidb_audio_chinese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_chinese.gif);
 }
 *.i_audio_cs {
-	background-image: url(../icons/flags/anidb_audio_czech.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_czech.gif);
 }
 *.i_audio_da {
-	background-image: url(../icons/flags/anidb_audio_danish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_danish.gif);
 }
 *.i_audio_nl {
-	background-image: url(../icons/flags/anidb_audio_dutch.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_dutch.gif);
 }
 *.i_audio_en {
-	background-image: url(../icons/flags/anidb_audio_english.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_english.gif);
 }
 *.i_audio_fi {
-	background-image: url(../icons/flags/anidb_audio_finnish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_finnish.gif);
 }
 *.i_audio_fr {
-	background-image: url(../icons/flags/anidb_audio_french.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_french.gif);
 }
 *.i_audio_ge {
-	background-image: url(../icons/flags/anidb_audio_georgian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_georgian.gif);
 }
 *.i_audio_de {
-	background-image: url(../icons/flags/anidb_audio_german.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_german.gif);
 }
 *.i_audio_el {
-	background-image: url(../icons/flags/anidb_audio_greek.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_greek.gif);
 }
 *.i_audio_he {
-	background-image: url(../icons/flags/anidb_audio_hebrew.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_hebrew.gif);
 }
 *.i_audio_hu {
-	background-image: url(../icons/flags/anidb_audio_hungarian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_hungarian.gif);
 }
 *.i_audio_in {
-	background-image: url(../icons/flags/anidb_audio_instrumental.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_instrumental.gif);
 }
 *.i_audio_id {
-	background-image: url(../icons/flags/anidb_audio_indonesian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_indonesian.gif);
 }
 *.i_audio_it {
-	background-image: url(../icons/flags/anidb_audio_italian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_italian.gif);
 }
-*.i_audio_jp {
-	background-image: url(../icons/flags/anidb_audio_japanese.gif);
+*.i_audio_ja {
+	background-image: url(http://www.anidb.net/pics/anidb_audio_japanese.gif);
 }
 *.i_audio_jpt {
-	background-image: url(../icons/flags/anidb_audio_romaji.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_romaji.gif);
 }
-*.i_audio_kr {
-	background-image: url(../icons/flags/anidb_audio_korean.gif);
+*.i_audio_ko {
+	background-image: url(http://www.anidb.net/pics/anidb_audio_korean.gif);
 }
 *.i_audio_la {
-	background-image: url(../icons/flags/anidb_audio_latin.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_latin.gif);
 }
 *.i_audio_lv {
-	background-image: url(../icons/flags/anidb_audio_latvian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_latvian.gif);
 }
 *.i_audio_lt {
-	background-image: url(../icons/flags/anidb_audio_lithuanian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_lithuanian.gif);
 }
 *.i_audio_my {
-	background-image: url(../icons/flags/anidb_audio_malay.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_malay.gif);
 }
 *.i_audio_zh-ma {
-	background-image: url(../icons/flags/anidb_audio_mandarin.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_mandarin.gif);
 }
 *.i_audio_no {
-	background-image: url(../icons/flags/anidb_audio_norwegian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_norwegian.gif);
 }
 *.i_audio_other {
-	background-image: url(../icons/flags/anidb_audio_unknown.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_unknown.gif);
 }
 *.i_audio_pl {
-	background-image: url(../icons/flags/anidb_audio_polish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_polish.gif);
 }
 *.i_audio_pt {
-	background-image: url(../icons/flags/anidb_audio_portuguese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_portuguese.gif);
 }
 *.i_audio_ro {
-	background-image: url(../icons/flags/anidb_audio_romanian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_romanian.gif);
 }
 *.i_audio_ru {
-	background-image: url(../icons/flags/anidb_audio_russian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_russian.gif);
 }
 *.i_audio_sk {
-	background-image: url(../icons/flags/anidb_audio_slovak.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_slovak.gif);
 }
 *.i_audio_sl {
-	background-image: url(../icons/flags/anidb_audio_slovenian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_slovenian.gif);
 }
 *.i_audio_es {
-	background-image: url(../icons/flags/anidb_audio_spanish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_spanish.gif);
 }
 *.i_audio_sv {
-	background-image: url(../icons/flags/anidb_audio_swedish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_swedish.gif);
 }
 *.i_audio_zh-ta {
-	background-image: url(../icons/flags/anidb_audio_taiwanese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_taiwanese.gif);
 }
 *.i_audio_sg {
-	background-image: url(../icons/flags/anidb_audio_tamil.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_tamil.gif);
 }
 *.i_audio_tt {
-	background-image: url(../icons/flags/anidb_audio_tartar.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_tartar.gif);
 }
 *.i_audio_th {
-	background-image: url(../icons/flags/anidb_audio_thai.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_thai.gif);
 }
 *.i_audio_tr {
-	background-image: url(../icons/flags/anidb_audio_turkish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_turkish.gif);
 }
 *.i_audio_unk {
-	background-image: url(../icons/flags/anidb_audio_unknown.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_unknown.gif);
 }
 *.i_audio_vn {
-	background-image: url(../icons/flags/anidb_audio_vietnamese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_audio_vietnamese.gif);
 }
 *.i_sub_ar {
-	background-image: url(../icons/flags/anidb_sub_arabic.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_arabic.gif);
 }
 *.i_sub_pt-BR {
-	background-image: url(../icons/flags/anidb_sub_brasilian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_brasilian.gif);
 }
 *.i_sub_br {
-	background-image: url(../icons/flags/anidb_sub_bulgarian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_bulgarian.gif);
 }
 *.i_sub_zh-ca {
-	background-image: url(../icons/flags/anidb_sub_cantonese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_cantonese.gif);
 }
 *.i_sub_ca {
-	background-image: url(../icons/flags/anidb_sub_catalan.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_catalan.gif);
 }
 *.i_sub_zh {
-	background-image: url(../icons/flags/anidb_sub_chinese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_chinese.gif);
 }
 *.i_sub_cs {
-	background-image: url(../icons/flags/anidb_sub_czech.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_czech.gif);
 }
 *.i_sub_da {
-	background-image: url(../icons/flags/anidb_sub_danish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_danish.gif);
 }
 *.i_sub_nl {
-	background-image: url(../icons/flags/anidb_sub_dutch.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_dutch.gif);
 }
 *.i_sub_en {
-	background-image: url(../icons/flags/anidb_sub_english.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_english.gif);
 }
 *.i_sub_fi {
-	background-image: url(../icons/flags/anidb_sub_finnish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_finnish.gif);
 }
 *.i_sub_fr {
-	background-image: url(../icons/flags/anidb_sub_french.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_french.gif);
 }
 *.i_sub_ge {
-	background-image: url(../icons/flags/anidb_sub_georgian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_georgian.gif);
 }
 *.i_sub_de {
-	background-image: url(../icons/flags/anidb_sub_german.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_german.gif);
 }
 *.i_sub_el {
-	background-image: url(../icons/flags/anidb_sub_greek.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_greek.gif);
 }
 *.i_sub_he {
-	background-image: url(../icons/flags/anidb_sub_hebrew.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_hebrew.gif);
 }
 *.i_sub_hu {
-	background-image: url(../icons/flags/anidb_sub_hungarian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_hungarian.gif);
 }
 *.i_sub_in {
-	background-image: url(../icons/flags/anidb_sub_instrumental.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_instrumental.gif);
 }
 *.i_sub_id {
-	background-image: url(../icons/flags/anidb_sub_indonesian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_indonesian.gif);
 }
 *.i_sub_it {
-	background-image: url(../icons/flags/anidb_sub_italian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_italian.gif);
 }
 *.i_sub_jp {
-	background-image: url(../icons/flags/anidb_sub_japanese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_japanese.gif);
 }
 *.i_sub_jpt {
-	background-image: url(../icons/flags/anidb_sub_romaji.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_romaji.gif);
 }
 *.i_sub_kr {
-	background-image: url(../icons/flags/anidb_sub_korean.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_korean.gif);
 }
 *.i_sub_la {
-	background-image: url(../icons/flags/anidb_sub_latin.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_latin.gif);
 }
 *.i_sub_lv {
-	background-image: url(../icons/flags/anidb_sub_latvian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_latvian.gif);
 }
 *.i_sub_lt {
-	background-image: url(../icons/flags/anidb_sub_lithuanian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_lithuanian.gif);
 }
 *.i_sub_my {
-	background-image: url(../icons/flags/anidb_sub_malay.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_malay.gif);
 }
 *.i_sub_zh-ma {
-	background-image: url(../icons/flags/anidb_sub_mandarin.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_mandarin.gif);
 }
 *.i_sub_no {
-	background-image: url(../icons/flags/anidb_sub_norwegian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_norwegian.gif);
 }
 *.i_sub_other {
-	background-image: url(../icons/flags/anidb_sub_unknown.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_unknown.gif);
 }
 *.i_sub_pl {
-	background-image: url(../icons/flags/anidb_sub_polish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_polish.gif);
 }
 *.i_sub_pt {
-	background-image: url(../icons/flags/anidb_sub_portuguese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_portuguese.gif);
 }
 *.i_sub_ro {
-	background-image: url(../icons/flags/anidb_sub_romanian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_romanian.gif);
 }
 *.i_sub_ru {
-	background-image: url(../icons/flags/anidb_sub_russian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_russian.gif);
 }
 *.i_sub_sk {
-	background-image: url(../icons/flags/anidb_sub_slovak.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_slovak.gif);
 }
 *.i_sub_sl {
-	background-image: url(../icons/flags/anidb_sub_slovenian.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_slovenian.gif);
 }
 *.i_sub_es {
-	background-image: url(../icons/flags/anidb_sub_spanish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_spanish.gif);
 }
 *.i_sub_sv {
-	background-image: url(../icons/flags/anidb_sub_swedish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_swedish.gif);
 }
 *.i_sub_zh-ta {
-	background-image: url(../icons/flags/anidb_sub_taiwanese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_taiwanese.gif);
 }
 *.i_sub_sg {
-	background-image: url(../icons/flags/anidb_sub_tamil.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_tamil.gif);
 }
 *.i_sub_tt {
-	background-image: url(../icons/flags/anidb_sub_tartar.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_tartar.gif);
 }
 *.i_sub_th {
-	background-image: url(../icons/flags/anidb_sub_thai.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_thai.gif);
 }
 *.i_sub_tr {
-	background-image: url(../icons/flags/anidb_sub_turkish.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_turkish.gif);
 }
 *.i_sub_unk {
-	background-image: url(../icons/flags/anidb_sub_unknown.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_unknown.gif);
 }
 *.i_sub_vn {
-	background-image: url(../icons/flags/anidb_sub_vietnamese.gif);
+	background-image: url(http://www.anidb.net/pics/anidb_sub_vietnamese.gif);
 }
 
 
 img[src*="minus.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/minus.gif) center 1px no-repeat;
+	background:				url(images/minus.gif) center 1px no-repeat;
 	width:					0;
 	padding-right:				13px;
 }
 img[src*="minus.gif"]:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/minus_over.gif);
+	background-image:			url(images/minus_over.gif);
 }
 img[src*="plus.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/plus.gif) center 1px no-repeat;
+	background:				url(images/plus.gif) center 1px no-repeat;
 	width:					0;
 	padding-right:				13px;
 }
 img[src*="plus.gif"]:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/plus_over.gif);
+	background-image:			url(images/plus_over.gif);
 }
 img[src*="ask2.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/ask2.gif) center 1px no-repeat;
+	background:				url(images/ask2.gif) center 1px no-repeat;
 	width:					0;
 	padding-right:				11px;
 	position:				relative;
@@ -1749,45 +1815,45 @@ img[src*="ask2.gif"] {
 	cursor:					help;
 }
 img[src*="ask2.gif"]:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/ask2_over.gif);
+	background-image:			url(images/ask2_over.gif);
 }
 img[src*="up1.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/up1.gif) center center no-repeat;
+	background:				url(images/up1.gif) center center no-repeat;
 	width:					0;
 	padding-right:				15px;
 	display:				block;
 	float:					left;
 }
 img[src*="down1.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/down1.gif) center center no-repeat;
+	background:				url(images/down1.gif) center center no-repeat;
 	width:					0;
 	padding-left:				15px;
 	display:				block;
 	float:					right;
 }
 img[src*="noup1.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/noup1.gif) center center no-repeat;
+	background:				url(images/noup1.gif) center center no-repeat;
 	width:					0;
 	padding-right:				15px;
 	display:				block;
 	float:					left;
 }
 img[src*="noup1.gif"]:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/up1_over.gif);
+	background-image:			url(images/up1_over.gif);
 }
 img[src*="nodown1.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/nodown1.gif) center center no-repeat;
+	background:				url(images/nodown1.gif) center center no-repeat;
 	width:					0;
 	padding-left:				15px;
 	display:				block;
 	float:					right;
 }
 img[src*="nodown1.gif"]:hover {
-	background-image:			url(http://bogna.best.net.pl/anidb/dark/down1_over.gif);
+	background-image:			url(images/down1_over.gif);
 }
 
 img[src*="nopic.gif"] {
-	background:				url(http://bogna.best.net.pl/anidb/dark/nopic.gif) center center no-repeat;
+	background:				url(images/nopic.gif) center center no-repeat;
 	height:					140px;
 	width:					0;
 	padding:				0 120px;
