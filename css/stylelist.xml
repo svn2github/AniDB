@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
-		<update/>
+		<update>19.05.2007</update>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
 		<path/>
@@ -63,9 +63,8 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>to come</update>
-		<status>In development
-		</status>
+		<update>26.05.2007</update>
+		<status>In development</status>
 		<description>There's a bug on the main page, where the news are not displayed properly. Will fix this asap.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
@@ -74,7 +73,7 @@
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update/>
+		<update>20.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -84,7 +83,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update/>
+		<update>26.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -94,7 +93,7 @@
 	<style name="sub-blue">
 		<title>sub-blue</title>
 		<creator>epoximator</creator>
-		<update/>
+		<update>20.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -104,7 +103,7 @@
 	<style name="sub-brown">
 		<title>sub-brown</title>
 		<creator>epoximator</creator>
-		<update/>
+		<update>20.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -114,7 +113,7 @@
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update/>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -134,7 +133,7 @@
 	<style name="sub-norwegian-blue">
 		<title>norwegian-blue</title>
 		<creator>PetriW</creator>
-		<update/>
+		<update>20.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -144,7 +143,7 @@
 	<style name="sub-silver">
 		<title>sub-silver</title>
 		<creator>epoximator</creator>
-		<update/>
+		<update>20.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -166,7 +165,7 @@ Thanks to ricce for making the fixed menu modification.</description>
 	<style name="zakura-fixed_menu">
 		<title>Zakura (fixed menu edition)</title>
 		<creator>ricce</creator>
-		<update></update>
+		<update>20.05.2007</update>
 		<status></status>
 		<description></description>
 		<path></path>
