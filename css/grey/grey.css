@@ -63,7 +63,8 @@ form select
 	font-size: 11px;
 	padding-left: 0.3em;
 }
-form input[type="submit"]
+form input[type="submit"],
+form input[type="button"]
 {
 	margin-top: 0.3em;
 	color: #ff6000;
@@ -71,6 +72,43 @@ form input[type="submit"]
 	border-color: #565656;
 	background-image: url(images/bg_2.gif);
 }
+
+dl dt
+{
+	float: left;
+	clear: left;
+}
+
+caption
+{
+	margin: 0.7em 0 0.4em 0;
+	font-weight: bold;
+	font-size: 110%;
+}
+
+span
+{
+display: inline;
+}
+
+h2
+{
+	text-align: center;
+	font-size: 117%;
+	clear: both;
+}
+
+h4
+{
+	font-size: 100%;
+	text-align: center;
+}
+
+table
+{
+	border-spacing: 0;
+}
+
 *.g_note
 {
 	font-style: italic;
@@ -159,16 +197,15 @@ ul.g_navlist li.here
 	font-style: italic;
 }
 
-td.action,
-tr.action td
+td.action
 {
 	text-align: center;
 }
 
 #layout-content div.g_errorbox
 {
-	border: 1px solid maroon;
-	background: url(images/redpixel.png);
+	border: 1px solid #c40d0d;
+	background: url(images/bg_2.gif);
 	margin: 2em;
 	padding: 1.2em;
 }
@@ -196,7 +233,7 @@ tr.action td
 
 #layout-content div.g_errorbox h3
 {
-	color: #FF0000;
+	color: red;
 }
 #layout-content div.g_warnbox h3
 {
@@ -388,7 +425,6 @@ tr.action td
 	width: 11em;
 	margin-left: 1em;
 	margin-right: 1em;
-	padding-bottom: 0.5em;
 }
 #layout-menu ul
 {
@@ -450,7 +486,6 @@ tr.action td
 	content: "Rec ";
 }
 
-
 #layout-menu span.login,
 #layout-menu span.user
 {
@@ -469,48 +504,16 @@ tr.action td
 #layout-menu a.history:after
 {
 	content: "!";
-	color: #FFFFFF;
+	font-weight: bold;
+	color: red;
 	padding: 0.2em;
-}
-
-#layout-menu #newmessages
-{
-	display: block;
-}
-#layout-menu div.usermenu *.i_button
-{
-	background: none;
-	text-indent: 0;
-	text-align: right;
-	margin-right: 0;
-	width: 4.2em;
-	height: 1.2em;
 }
 
 #layout-menu div.usermenu *.i_profile
 {
-	margin-left: 0.4em;
-}
-*.i_button
-{
-	display: block;
-	width: 42px;
-	height: 12px;
-	float: left;
-	margin-right: 4px;
-	background-repeat: no-repeat;
-	background-position: center;
+	margin-right: 1.7em;
 }
 
-*.i_icon span, *.i_button span, *.i_inline span
-{
-	display: none;
-}
-
-#layout-search div.search
-{
-	margin-left: 0.8em;
-}
 #layout-search form input.text
 {
 	width: 11.4em;
@@ -521,7 +524,6 @@ tr.action td
 #layout-search form p
 {
 	text-align: center;
-	margin-left: -0.8em;
 }
 #layout-search form input.submit
 {
@@ -769,13 +771,17 @@ width: 99%;
 
 #layout-content div.anime_all tr.good td,
 #layout-content div.group_all tr.good td,
-#layout-content div.ep_all tr.good td
+#layout-content div.ep_all tr.good td,
+#layout-content tr.verified.yes td,
+#layout-content tr.verified.yes th
 {
 	background-image: url(images/greenpixel.png);
 }
+
 #layout-content div.anime_all tr.invalid td,
 #layout-content div.group_all tr.invalid td,
-#layout-content div.ep_all tr.invalid td
+#layout-content div.ep_all tr.invalid td,
+#layout-content div.mydb_all tr.lame td
 {
 	background-image: url(images/badredpixel.png);
 }
@@ -863,6 +869,7 @@ width: 99%;
 	float: right;
 }
 
+#layout-content *.icons *.i_icon,
 #layout-content div.ep_files table.filelist td .icons .i_icon,
 #layout-content div.anime_group table.grouplist tr td.languages span.i_icon,
 #layout-content div.anime_mylist td div.icons span.i_icon,
@@ -872,11 +879,23 @@ width: 99%;
 #layout-content div.anime_all div.groups td.languages span.i_icon,
 #layout-content div.anime_all div.episodes td.action .i_icon,
 #layout-content div.latest_completed td.icon span.i_icon,
-#layout-content div.mylist_list td div.icons span.i_icon,
-#layout-content div.group_all td div.icons span.i_icon
+#layout-content div.mylist_all div.icons span.i_icon,
+#layout-content div.group_all div.icons span.i_icon
 {
 	float: left;
 	padding: 0px 2px 0px 2px;
+}
+
+#layout-content div.anime_all div.info th span.i_icon
+{
+	 display: inline;
+	 float: right;
+	 padding: 0px 2px 0px 2px;
+}
+
+#layout-content td.icons.quality *.i_icon
+{
+	padding: 0px;
 }
 
 #layout-content div.anime_all div.actions
@@ -942,11 +961,6 @@ width: 99%;
 #layout-content div.anime_all a.action:after
 {
 	content: "]";
-}
-
-#layout-content div.anime_all span.i_icon
-{
-	float: right;
 }
 
 #layout-content div.ep_info div.info table
@@ -1139,7 +1153,9 @@ width: 99%;
 #layout-content div.ep_vote form label
 {
 	display: block;
-}#layout-content div.genren_all
+}
+
+#layout-content div.genren_all
 {
 	text-align: center;
 }
@@ -1446,7 +1462,10 @@ width: 99%;
 	font-weight: normal;
 	margin: 0;
 }
-
+#layout-content div.main_all div.news h4
+{
+	text-align: left;
+}
 
 #layout-content div.main_all div.rightbar
 {
@@ -1484,6 +1503,12 @@ width: 99%;
 	text-align: left;
 }
 
+#layout-content div.main_all > div.news
+{
+	clear: none;
+	margin-right: 20em;
+}
+
 #layout-content div.main_all div.rightbar li span
 {
 	display: block;
@@ -1498,7 +1523,6 @@ width: 99%;
 	display: block;
 	margin-left: 4em;	
 }
-
 
 #layout-content div.main_all div.news
 {
@@ -1855,23 +1879,6 @@ a.i_icon:hover, a.i_inline:hover
 	text-decoration: none;
 }
 
-h2
-{
-	text-align: center;
-	font-size: 117%;
-	clear: both;
-}
-
-h4
-{
-	font-size: 100%;
-}
-
-table
-{
-	border-spacing: 0;
-}
-
 /* Transitional Hacks */
 
 *[bgcolor="#b0b0b0"], *[bgcolor="#969aa6"]
@@ -1925,9 +1932,9 @@ table
 	background: none;
 }
 
-#layout-content tr.g_odd th.field
+#layout-content tr th.field
 {
-	background-image: url(images/bg_2.gif);
+	background: inherit;
 }
 /*worf*/
 #layout-content div.creq_data ins
@@ -2061,29 +2068,6 @@ table
 	width: 99%;
 }
 
-#layout-content div.group_all div.ep_files table td
-{
-	padding-left: 0.5em;
-}
-
-#layout-content div.group_all div.ep_files table td.info
-{
-	text-align: left;
-}
-
-#layout-content div.group_all div.ep_files table td.epno,
-#layout-content div.group_all div.ep_files table td.id,
-#layout-content div.group_all div.ep_files table td.size
-{
-	text-align: right;
-}
-
-#layout-content div.group_all div.ep_files table td.resolution,
-#layout-content div.group_all div.ep_files table th
-{
-	text-align: center;
-}
-
 #layout-content div.addeptitle_all div.addeptitle_form p,
 #layout-content div.addanimetitle_all div.addanimetitle_form p
 {
@@ -2093,4 +2077,76 @@ table
 #layout-content div.latest_all td.name.file
 {
 	padding-left: 1em;
+}
+
+#layout-content div.profile_all div.profile_css div
+{
+	text-align: center;
+}
+
+#layout-content div.profile_css div.info dl dt
+{
+	font-weight: bold;
+}
+
+#layout-content div.profile_css div.info dl dd,
+#layout-content div.creq_all div.states dd
+{
+	margin-left: 7em;
+}
+
+#style_thumbnail
+{
+  width: 220px;
+  margin: 3px;
+  font-size: 94%;
+  text-align: center;
+  overflow: hidden;
+}
+
+#layout-content div.profile_all div.profile_css div.block div.image
+{
+	background-image: url(images/bg_2.gif);
+	border: 2px solid #565656;
+}
+
+#layout-content div.profile_all div.profile_css div.block div.info
+{
+	margin-left: 0.7em;
+	text-align: left;
+}
+
+#style_description
+{
+  width: 20em;
+}
+
+#image_viewer
+{
+  margin: 50px;
+}
+
+#style_url
+{
+	margin-bottom: 1em;
+}
+
+*.i_group_vote,
+*.i_ep_vote
+{
+	background-image: url(images/anidb_vote.gif);
+}
+*.i_crc_no
+{
+	background-image: url(images/anidb_crc_no.gif);
+}
+
+*.i_crc_yes
+{
+	background-image: url(images/anidb_crc_yes.gif);
+}
+
+*.i_crc_unv
+{
+	background-image: url(images/anidb_crc_unv.gif);
 }
