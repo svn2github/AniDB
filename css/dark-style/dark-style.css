@@ -306,10 +306,10 @@ span.i_icon {
 	float:					left;
 	padding-right:				3px;
 }
-td.title div.icoco span.i_icon,
-div.icoco span.i_mylist,
-div.icoco span[title*="status"],
-div.icoco span[title*="seen"] {
+td.title div.icons span.i_icon,
+div.icons span.i_mylist,
+div.icons span[title*="status"],
+div.icons span[title*="seen"] {
 	float:					right;
 	padding-right:				3px;
 }

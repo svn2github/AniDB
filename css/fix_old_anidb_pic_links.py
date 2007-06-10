@@ -8,7 +8,7 @@ for root, dirs, filenames in os.walk(os.getcwd()):
     for cssfile in filenames:
         if cssfile.endswith('css'):
             newfile = ''
-            css = file(root+'/'+cssfile,'rbU').readlines()
+            css = file(root+'/'+cssfile,'rU').readlines()
             for line in css:
                 line = line.replace('div.icoco','div.icons')
                 line = line.replace('http://www.anidb.net/css/anidbstyle/images/bg','../anidbstyle/images')
@@ -18,4 +18,4 @@ for root, dirs, filenames in os.walk(os.getcwd()):
                 line = line.replace('http://www.anidb.net/pics','../icons/flags')
                 line = line.replace('http://anidb.net/pics','../icons/flags')
                 newfile +=line
-            file(root+'/'+cssfile,'wbU').write(newfile)
+            file(root+'/'+cssfile,'wb').write(newfile)

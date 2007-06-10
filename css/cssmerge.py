@@ -100,6 +100,7 @@ def xml(newstyle,path):
 				newestf = filename
 
 	newfile = datetime.datetime.fromtimestamp(newest)
+
 	if newfile.day >= svn['day'] and newfile.month >= svn['month'] and newfile.year >= svn['year']:
 		new['update'] = unicode(newfile.strftime('%d.%m.%Y'))
 
@@ -139,12 +140,13 @@ def doftp(update):
 	ftp_update = []
 	if update in ('upload','fullupload'):
 		try:
-			lastupdate = int(urllib.urlopen('http://www.anidb.net/css/lastpicupload').read())
+			lastupdate = float(urllib.urlopen('http://www.anidb.net/css/lastpicupload').read())
 			file(__out + 'lastpicupload','w').write(str(lastupdate))
 			ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
 		except:
 			file(__out + 'lastpicupload','w').write(str(time.mktime(time.localtime())))
 			lastupdate = 0
+			ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
 			print "Couldn't determine last picture upload. Running fullupdate."
 	for css in __ftp:
 		ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/' + __ftp[css],__out+ css.lstrip('./').replace('/','-') + '/'+__ftp[css])]
