@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>Default AniDB design based on akujin's creation. Converted to css by Rar,PetriW and epoximator</creator>
-		<update>19.05.2007</update>
+		<update>20.05.2007</update>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup.</description>
 		<path/>
@@ -23,7 +23,7 @@
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>26.05.2007</update>
+		<update>28.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -31,11 +31,11 @@
 		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle-dongato">
-		<title>AniDBstyle Dongato Style</title>
-		<creator>Dongato</creator>
-		<update>26.05.2007</update>
-		<status/>
-		<description/>
+		<title>AniDBstyle DonGato revision</title>
+		<creator>DonGato</creator>
+		<update>28.05.2007</update>
+		<status>in sync</status>
+		<description>report any problem by a message</description>
 		<path/>
 		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
@@ -43,7 +43,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>26.05.2007</update>
+		<update>28.05.2007</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -53,9 +53,15 @@
 	<style name="haruhistylex">
 		<title>HaruhiStyleX</title>
 		<creator>TheJAG</creator>
+<<<<<<< .mine
+		<update>2007.05.20</update>
+		<status>Complete (in development)</status>
+		<description>This is a H-Rated (18+) style based on Harustyle by b1nh.</description>
+=======
 		<update>06.06.2007</update>
 		<status>Incomplete (In development...)</status>
 		<description>This style contains adult material, you should not use this tyle unless you are of age to view adult material within your country. Nither TheJAG nor AniDB is in any way responsible if this condition is not kept.</description>
+>>>>>>> .r161
 		<path/>
 		<screenshot>haruhistylex/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
@@ -63,7 +69,7 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>26.05.2007</update>
+		<update>28.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -83,7 +89,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update>26.05.2007</update>
+		<update>28.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -113,7 +119,7 @@
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update>24.05.2007</update>
+		<update>28.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -153,7 +159,7 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>26.05.2007</update>
+		<update>May 19, 2007</update>
 		<status>In development</status>
 		<description>Only tested in Firefox/Mac.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.

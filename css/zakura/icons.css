@@ -85,10 +85,18 @@ img[src*="anidb_file_ed2k.gif"] {
 	width: 0;
 	padding-left: 15px;
 }
+*.i_rate_star {
+  width: 15px;
+  background: transparent url(images/icons/star.png) no-repeat left top;
+}
 img[src*="anidb_rate_star.gif"] {
 	background: transparent url(images/icons/star.png) no-repeat left top;
 	width: 0;
 	padding-left: 15px;
+}
+*.i_rate_halfstar {
+  width: 15px;
+  background: transparent url(images/icons/star-half.png) no-repeat left top;
 }
 img[src*="anidb_rate_halfstar.gif"] {
 	background: transparent url(images/icons/star-half.png) no-repeat left top;
