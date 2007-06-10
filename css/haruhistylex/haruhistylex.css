@@ -1,13 +1,12 @@
-/** HaruhiStyleX.AniDB v2
+/** HaruhiStyleX.AniDB v2 (Opera Version)
  * Style by: TheJAG
  * Based on Harustyle by b1hn
  */
-
+ 
 @import "icons.css";
 @import "flags.css";
 
-body
-{
+body {
 	font-family:Geneva, Arial, Helvetica, sans-serif;
 	background-image:url('images/topBack.png');
 	background-repeat:repeat-x;
@@ -18,27 +17,19 @@ body
 	left:0px;
 	width:100%;
 }
-
-body.nonav
-{
+body.nonav {
 	background-image:none;
 }
-
-fieldset
-{
+fieldset {
 	display:none;
 }
-
-#layout-menu
-{
+#layout-menu {
 	width:100%;
 	position:absolute;
 	top:0px;
 	left:0px;
 }
-
-#layout-menu div.menu
-{
+#layout-menu div.menu {
 	background-image:url('images/menuClean.png');
 	background-repeat:no-repeat;
 	height:600px;
@@ -47,13 +38,10 @@ fieldset
 	top:0px;
 	left:0px;
 }
-#layout-menu div.menu:hover
-{
+#layout-menu div.menu:hover {
 	background-image:url('images/menu.png');
 }
-
-#layout-menu div.menu ul
-{
+#layout-menu div.menu ul {
 	visibility:hidden;
 	list-style-type:none;
 	font-size:14px;
@@ -61,33 +49,22 @@ fieldset
 	margin:0px;
 	padding:15px 0px 0px 30px;
 }
-
-#layout-menu div.menu:hover ul
-{
+#layout-menu div.menu:hover ul {
 	visibility:visible;
 }
-
-#layout-menu div.menu ul.main li.main a
-{
+#layout-menu div.menu ul.main li.main a {
 	content:'news';
 }
-
-#layout-menu div.menu a
-{
+#layout-menu div.menu a {
 	color:black;
 	text-decoration:none;
 	font-weight:bold;
 	text-transform:capitalize;
 }
-
-#layout-menu div.menu a:hover,
-#layout-menu div.menu a:active
-{
+#layout-menu div.menu a:hover, #layout-menu div.menu a:active {
 	color:red;
 }
-
-#layout-menu div.usermenu
-{
+#layout-menu div.usermenu {
 	background-image:url('images/banner.png');
 	background-repeat:no-repeat;
 	background-position:190px 0px;
@@ -97,15 +74,11 @@ fieldset
 	width:100%;
 	height:100px;
 }
-
-#layout-menu div.usermenu p
-{
+#layout-menu div.usermenu p {
 	margin:0px;
 	padding:0px;
 }
-
-#layout-menu div.usermenu p.user
-{
+#layout-menu div.usermenu p.user {
 	position:absolute;
 	top:8px;
 	left:205px;
@@ -113,75 +86,54 @@ fieldset
 	background-color:transparent;
 	font-weight:bold;
 }
-
-#layout-menu div.usermenu p.user:before
-{
+#layout-menu div.usermenu p.user:before {
 	content:'Welcome ';
 }
-
-#layout-menu div.usermenu a
-{
+#layout-menu div.usermenu a {
 	color:white;
 	background-color:transparent;
 	text-decoration:none;
 	font-weight:bold;
 	font-size:12px;
 }
-
-#layout-menu div.usermenu a:hover,
-#layout-menu div.usermenu a:active
-{
+#layout-menu div.usermenu a:hover, #layout-menu div.usermenu a:active {
 	color:red;
 }
-
-#layout-menu div.usermenu a.i_profile
-{
+#layout-menu div.usermenu a.i_profile {
 	position:absolute;
 	top:25px;
 	left:340px;
 	text-transform:capitalize;
 }
-
-#layout-menu div.usermenu a.i_logout
-{
+#layout-menu div.usermenu a.i_logout {
 	position:absolute;
 	top:35px;
 	left:340px;
 	text-transform:capitalize;
 }
-
-#layout-menu div.usermenu a#newnotifies
-{
+#layout-menu div.usermenu a#newnotifies {
 	position:absolute;
 	top:45px;
 	left:340px;
 }
-
-#layout-menu div.usermenu a.history
-{
+#layout-menu div.usermenu a.history {
 	position:absolute;
 	top:55px;
 	left:340px;
 	content:'History';
 }
-
-#layout-menu div.usermenu a#newmessages
-{
+#layout-menu div.usermenu a#newmessages {
 	position:absolute;
 	top:65px;
 	left:340px;
 }
-
-#layout-search div.search
-{
+#layout-search div.search {
 	position:absolute;
 	top:0px;
 	left:190px;
 	height:100px;
 }
-
-#layout-search div.search input.text
-{
+#layout-search div.search input.text {
 	position:absolute;
 	top:55px;
 	left:20px;
@@ -191,9 +143,7 @@ fieldset
 	height:12px;
 	width:100px;
 }
-
-#layout-search div.search input.submit
-{
+#layout-search div.search input.submit {
 	position:absolute;
 	top:70px;
 	left:60px;
@@ -205,16 +155,11 @@ fieldset
 	font-weight:bold;
 	content:'Search';
 }
-
-#layout-search div.search input.submit:hover,
-#layout-search div.search input.submit:active
-{
+#layout-search div.search input.submit:hover, #layout-search div.search input.submit:active {
 	cursor:pointer;
 	color:red;
 }
-
-#layout-content
-{
+#layout-content {
 	margin-top:100px;
 	margin-left:200px;
 	margin-right:10px;
@@ -226,9 +171,7 @@ fieldset
 	border-right-width:2px;
 	border-right-color:#3496DA;
 }
-
-body.nonav #layout-content
-{
+body.nonav #layout-content {
 	margin:0px;
 	border-left-style:solid;
 	border-left-width:2px;
@@ -237,39 +180,27 @@ body.nonav #layout-content
 	border-right-width:2px;
 	border-right-color:#3496DA;
 }
-
-body.nonav #layout-content div.agcmts_all div.agcmts_head
-{
+body.nonav #layout-content div.agcmts_all div.agcmts_head {
 	text-align:center;
 	background-color:#3496DA;
 	font-size:16px;
 }
-
-body.nonav #layout-content div.agcmts_all div.agcmts_head p
-{
+body.nonav #layout-content div.agcmts_all div.agcmts_head p {
 	margin:0px;
 }
-
-body.nonav #layout-content div.agcmts_all div.agcmts_entries div.comment h4
-{
+body.nonav #layout-content div.agcmts_all div.agcmts_entries div.comment h4 {
 	background-color:#3496DA;
 	font-size:14px;
 	font-variant:small-caps;
 	margin:0px;
 }
-
-body.nonav #layout-content div.agcmts_all div.agcmts_entries div.comment span.stamp
-{
+body.nonav #layout-content div.agcmts_all div.agcmts_entries div.comment span.stamp {
 	float:right;
 }
-
-body.nonav #layout-content div.agcmts_all div.agcmts_entries div.comment p
-{
+body.nonav #layout-content div.agcmts_all div.agcmts_entries div.comment p {
 	margin-top:16px;
 }
-
-body.nonav #layout-content div.agcmts_add h4
-{
+body.nonav #layout-content div.agcmts_add h4 {
 	background-color:#3496DA;
 	font-size:16px;
 	font-weight:bold;
@@ -279,47 +210,32 @@ body.nonav #layout-content div.agcmts_add h4
 	padding:0px;
 	color:white;
 }
-
-body.nonav #layout-content div.agcmts_add textarea
-{
+body.nonav #layout-content div.agcmts_add textarea {
 	width:300px;
 	height:200px;
 }
-
-body.nonav #layout-content div.animegroupvotes_all div.agvotes_header p
-{
+body.nonav #layout-content div.animegroupvotes_all div.agvotes_header p {
 	margin:0px;
 	padding:0px;
 	background-color:#3496DA;
 	text-align:center;
 	font-size:16px;
 }
-
-body.nonav #layout-content div.animegroupvotes_all div.agvotes_graph table.vote_graph
-{
+body.nonav #layout-content div.animegroupvotes_all div.agvotes_graph table.vote_graph {
 	margin:auto;
 }
-
-body.nonav #layout-content hr
-{
+body.nonav #layout-content hr {
 	display:none;
 }
-
-#layout-content a
-{
+#layout-content a {
 	color:black;
 	text-decoration:none;
 	font-weight:bold;
 }
-
-#layout-content a:hover,
-#layout-content a:active
-{
+#layout-content a:hover, #layout-content a:active {
 	color:red;
 }
-
-#layout-content h1
-{
+#layout-content h1 {
 	font-size:24px;
 	font-variant:small-caps;
 	color:white;
@@ -328,9 +244,7 @@ body.nonav #layout-content hr
 	padding:0px;
 	text-align:center;
 }
-
-#layout-content div.rightbar
-{
+#layout-content div.rightbar {
 	position:absolute;
 	top:600px;
 	left:10px;
@@ -340,9 +254,7 @@ body.nonav #layout-content hr
 	color:white;
 	background-color:transparent;
 }
-
-#layout-content div.rightbar h4
-{
+#layout-content div.rightbar h4 {
 	background-color:#3496DA;
 	font-weight:bold;
 	font-variant:small-caps;
@@ -350,9 +262,7 @@ body.nonav #layout-content hr
 	margin:0px;
 	padding:0px;
 }
-
-#layout-content div.rightbar h3
-{
+#layout-content div.rightbar h3 {
 	background-color:#3496DA;
 	font-weight:bold;
 	font-variant:small-caps;
@@ -361,29 +271,20 @@ body.nonav #layout-content hr
 	padding:0px;
 	font-size:16px;
 }
-
-#layout-content div.rightbar p
-{
+#layout-content div.rightbar p {
 	background-color:#3496DA;
 	text-align:center;
 	margin:0px;
 	padding:0px;
 }
-
-#layout-content div.rightbar p a
-{
+#layout-content div.rightbar p a {
 	color:white;
 	background-color:transparent;
 }
-
-#layout-content div.rightbar p a:hover,
-#layout-content div.rightbar p a:active
-{
+#layout-content div.rightbar p a:hover, #layout-content div.rightbar p a:active {
 	color:red;
 }
-
-#layout-content div.rightbar ol
-{
+#layout-content div.rightbar ol {
 	margin:0px 0px 10px 0px;
 	padding:0px;
 	border-left-style:solid;
@@ -396,29 +297,21 @@ body.nonav #layout-content hr
 	border-bottom-width:2px;
 	border-bottom-color:#3496DA;
 }
-
-#layout-content div.rightbar li
-{
+#layout-content div.rightbar li {
 	margin:0;
 	padding:0px;
 	list-style-type:none;
 	color:black;
 	background-color:white;
 }
-
-#layout-content div.rightbar li.g_odd
-{
+#layout-content div.rightbar li.g_odd {
 	background-color:#AAD8E6;
 }
-
-#layout-content div.news
-{
+#layout-content div.news {
 	margin:0px;
 	padding:0px;
 }
-
-#layout-content div.news h4
-{
+#layout-content div.news h4 {
 	background-color:#3496DA;
 	font-size:16px;
 	font-weight:bold;
@@ -428,59 +321,41 @@ body.nonav #layout-content hr
 	padding:0px;
 	color:white;
 }
-
-#layout-content div.news span.stamp
-{
+#layout-content div.news span.stamp {
 	float:right;
 	font-size:12px;
 	padding-right:5px;
 }
-
-#layout-content div.news div
-{
+#layout-content div.news div {
 	margin:0px;
 	padding:15px 5px 15px 5px;
 	font-size:10px;
 	background-color:#AAD8E6;
 }
-
-#layout-content div.search_all div.search_form div.search table
-{
+#layout-content div.search_all div.search_form div.search table {
 	margin:auto;
 	width:100%;
 	border-spacing:0px;
 }
-
-#layout-content div.search_all div.search_form div.search caption
-{
+#layout-content div.search_all div.search_form div.search caption {
 	background-color:#3496DA;
 	color:white;
 	font-weight:bold;
 	font-size:16px;
 }
-
-#layout-content div.search_all div.search_form div.search th
-{
+#layout-content div.search_all div.search_form div.search th {
 	text-align:left;
 }
-
-#layout-content div.search_all div.search_form div.search tr.g_odd
-{
+#layout-content div.search_all div.search_form div.search tr.g_odd {
 	background-color:#AAD8E6;
 }
-
-#layout-content div.search_all div.search_form div.search tr.genres i
-{
+#layout-content div.search_all div.search_form div.search tr.genres i {
 	font-size:12px;
 }
-
-#layout-content div.search_all div.search_form div.search tr.action
-{
+#layout-content div.search_all div.search_form div.search tr.action {
 	text-align:center
 }
-
-#layout-content div.search_all ul
-{
+#layout-content div.search_all ul {
 	list-style-type:none;
 	margin:0px;
 	padding:0px;
@@ -488,122 +363,73 @@ body.nonav #layout-content hr
 	background-color:#AAD8E6;
 	text-transform:capitalize;
 }
-
-#layout-content div.anime_all
-{
+#layout-content div.anime_all {
 	background-color:#AAD8E6;
 }
-
-#layout-content div.anime_all div.info div.block,
-#layout-content div.anime_all div.info div.block div.image,
-#layout-content div.anime_all div.info p.desc
-{
+#layout-content div.anime_all div.info div.block, #layout-content div.anime_all div.info div.block div.image, #layout-content div.anime_all div.info p.desc {
 	float:left;
 }
-
-#layout-content div.anime_all div.info p.desc,
-#layout-content div.anime_all ul.g_actionlist
-{
+#layout-content div.anime_all div.info p.desc, #layout-content div.anime_all ul.g_actionlist {
 	margin:0px;
 	padding:0px;
 }
-
-#layout-content div.anime_all div.info div.block,
-#layout-content div.anime_all div.info div.block div.data,
-#layout-content div.anime_all div.info p.desc,
-#layout-content div.anime_all div.awards,
-#layout-content div.anime_all div.episodes table,
-#layout-content div.anime_all div.g_notebox,
-#layout-content div.anime_all ul.g_actionlist
-{
+#layout-content div.anime_all div.info div.block, #layout-content div.anime_all div.info div.block div.data, #layout-content div.anime_all div.info p.desc, #layout-content div.anime_all div.awards, #layout-content div.anime_all div.episodes table, #layout-content div.anime_all div.g_notebox, #layout-content div.anime_all ul.g_actionlist {
 	width:100%;
 }
-
-#layout-content div.anime_all div.info div.block
-{
+#layout-content div.anime_all div.info div.block {
 	margin-bottom:20px;
 	overflow:hidden;
 }
-
-#layout-content div.anime_all div.info div.block div.image
-{
+#layout-content div.anime_all div.info div.block div.image {
 	position:absolute;
 	top:117px;
 	width:10px;
 	height:10px;
 }
-
-#layout-content div.anime_all div.info div.block div.image:before
-{
+#layout-content div.anime_all div.info div.block div.image:before {
 	content:url('images/showPicture.png');
 }
-
-#layout-content div.anime_all div.info div.block div.image img
-{
+#layout-content div.anime_all div.info div.block div.image img {
 	display:block;
 	visibility:hidden;
 }
-
-#layout-content div.anime_all div.info div.block div.image:hover img
-{
+#layout-content div.anime_all div.info div.block div.image:hover img {
 	visibility:visible;
 }
-
-#layout-content div.anime_all div.info div.block div.data table
-{
+#layout-content div.anime_all div.info div.block div.data table {
 	width:100%;
 }
-
-#layout-content div.anime_all div.info div.block div.data table tr td.value table
-{
+#layout-content div.anime_all div.info div.block div.data table tr td.value table {
 	border-bottom-style:none;
 	margin:0px;
 	padding-left:0px;
 }
-
-#layout-content div.anime_all div.info div.block div.data table tr td.value table tr
-{
+#layout-content div.anime_all div.info div.block div.data table tr td.value table tr {
 	margin:0px;
 	background-color:transparent;
 }
-
-#layout-content div.anime_all div.info div.block div.data table tr th
-{
+#layout-content div.anime_all div.info div.block div.data table tr th {
 	font-weight:normal;
 	text-align:left;
 }
-
-#layout-content div.anime_all div.info div.block div.data table tr
-{
+#layout-content div.anime_all div.info div.block div.data table tr {
 	background-color:white;
 }
-
-#layout-content div.anime_all div.info div.block div.data table tr.g_odd
-{
+#layout-content div.anime_all div.info div.block div.data table tr.g_odd {
 	background-color:#AAD8E6;
 }
-
-#layout-content div.anime_all div.info p.desc
-{
+#layout-content div.anime_all div.info p.desc {
 	text-align:center;
 	margin-bottom:20px;
 }
-
-#layout-content div.anime_all div.awards
-{
+#layout-content div.anime_all div.awards {
 	text-align:center;
 	margin-bottom:20px;
 }
-
-#layout-content div.anime_all div.vote table,
-#layout-content div.anime_all div.mylist table,
-#layout-content div.anime_all div.groups table
-{
+#layout-content div.anime_all div.vote table, #layout-content div.anime_all div.mylist table, #layout-content div.anime_all div.groups table {
 	margin:0px auto 20px auto;
 }
-
-#layout-content div.anime_all div.vote table
-{
+#layout-content div.anime_all div.vote table {
 	border-left-style:solid;
 	border-left-width:2px;
 	border-left-color:#3496DA;
@@ -617,34 +443,22 @@ body.nonav #layout-content hr
 	background-color:#AAD8E6;
 	text-align:center;
 }
-
-#layout-content div.anime_all div.vote table caption
-{
+#layout-content div.anime_all div.vote table caption {
 	background-color:#3496DA;
 	color:white;
 	font-variant:small-caps;
 }
-
-#layout-content div.anime_all div.vote table tr td p,
-#layout-content div.anime_all div.vote table tr td form,
-#layout-content div.anime_all div.vote table tr td form p
-{
+#layout-content div.anime_all div.vote table tr td p, #layout-content div.anime_all div.vote table tr td form, #layout-content div.anime_all div.vote table tr td form p {
 	margin:0px;
 	padding:0px;
 }
-
-#layout-content div.anime_all div.vote table tr td p i
-{
+#layout-content div.anime_all div.vote table tr td p i {
 	display:none;
 }
-
-#layout-content div.anime_all div.vote table tr td p b:after
-{
+#layout-content div.anime_all div.vote table tr td p b:after {
 	content:' Vote:';
 }
-
-#layout-content div.anime_all div.mylist table
-{
+#layout-content div.anime_all div.mylist table {
 	border-left-style:solid;
 	border-left-width:2px;
 	border-left-color:#3496DA;
@@ -658,21 +472,15 @@ body.nonav #layout-content hr
 	background-color:#AAD8E6;
 	text-align:center;
 }
-
-#layout-content div.anime_all div.mylist table caption
-{
+#layout-content div.anime_all div.mylist table caption {
 	background-color:#3496DA;
 	color:white;
 	font-variant:small-caps;
 }
-
-#layout-content div.anime_all div.mylist table tr td.title div.icoco
-{
+#layout-content div.anime_all div.mylist table tr td.title div.icoco {
 	display:inline;
 }
-
-#layout-content div.anime_all div.groups table.grouplist
-{
+#layout-content div.anime_all div.groups table.grouplist {
 	border-left-style:solid;
 	border-left-width:2px;
 	border-left-color:#3496DA;
@@ -685,44 +493,24 @@ body.nonav #layout-content hr
 	border-spacing:0px;
 	background-color:#AAD8E6;
 }
-
-#layout-content div.anime_all div.groups table.grouplist caption
-{
+#layout-content div.anime_all div.groups table.grouplist caption {
 	background-color:#3496DA;
 	color:white;
 	font-variant:small-caps;
 }
-/*
-#layout-content div.anime_all div.groups table.grouplist tr.heading
-{
-
-}*/
-
-#layout-content div.anime_all div.groups table.grouplist tr.heading,
-#layout-content div.anime_all div.groups table.grouplist tr.finished,
-#layout-content div.anime_all div.groups table.grouplist tr.ongoing,
-#layout-content div.anime_all div.groups table.grouplist tr.specials.only
-{
+#layout-content div.anime_all div.groups table.grouplist tr.heading, #layout-content div.anime_all div.groups table.grouplist tr.finished, #layout-content div.anime_all div.groups table.grouplist tr.ongoing, #layout-content div.anime_all div.groups table.grouplist tr.specials.only {
 	background-color:#AAD8E6;
 }
-
-#layout-content div.anime_all div.groups table.grouplist tr.complete
-{
+#layout-content div.anime_all div.groups table.grouplist tr.complete {
 	background-color:#90EE90;
 }
-
-#layout-content div.anime_all div.groups table.grouplist tr.dropped
-{
+#layout-content div.anime_all div.groups table.grouplist tr.dropped {
 	background-color:#FF6666;
 }
-
-#layout-content div.anime_all div.groups table.grouplist tr.stalled
-{
+#layout-content div.anime_all div.groups table.grouplist tr.stalled {
 	background-color:#FFC0CB;
 }
-
-#layout-footer
-{
+#layout-footer {
 	text-align:center;
 	font-size:12px;
 	background-color:#3496DA;
@@ -730,14 +518,10 @@ body.nonav #layout-content hr
 	margin:0px;
 	padding:0px;
 }
-
-#layout-footer p
-{
+#layout-footer p {
 	margin:0px;
 	padding:0px;
 }
-
-#layout-footer:after
-{
+#layout-footer:after {
 	content:'HaruhiStyleX.AniDB v2 by TheJAG. (Based on Harustyle by b1hn.)';
 }
