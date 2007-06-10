@@ -15,6 +15,23 @@ a.i_icon:hover, a.i_inline:hover
 	margin-right: 0;
 }
 
+*.i_inline
+{
+	padding: 0px 8px 0px 7px;
+	margin: 4px;
+}
+
+*.i_icon span, *.i_button span, *.i_inline span
+{
+	display: none;
+}
+
+*.i_help
+{
+	background: url(../icons/ask2.gif) no-repeat right;
+	cursor: help; /* just for teh funs */
+}
+
 *.i_enlarge {
 	background-image: url(../icons/enlarge.png);
 	float: right;

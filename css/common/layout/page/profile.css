@@ -5,6 +5,7 @@
 #layout-content div.profile_css div.info dl dd
 {
 	margin-left: 7em;
+	width: 20em;
 }
 
 #style_thumbnail
@@ -19,11 +20,6 @@
   text-align: center;
   overflow-x: hidden;
   overflow-y: hidden;
-}
-
-#style_description
-{
-  width: 20em;
 }
 
 #image_viewer

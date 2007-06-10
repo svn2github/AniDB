@@ -27,7 +27,7 @@
 {
 	list-style: none outside;
 	line-height: 14px;
-	padding: 0;
+	margin-left: 2em;
 }
 
 #layout-content div.genren_all li span
