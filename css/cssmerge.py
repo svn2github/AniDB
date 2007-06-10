@@ -17,7 +17,7 @@ import os, sys, ftplib, amara, copy, datetime,time,urllib
 
 __out = "../../flat/"
 __ftp = {}
-__ftppath = '/css/'
+__ftppath = 'httpdocs/css/'
 __extensions = ('.jpg', '.jpeg', '.gif', '.png','.css')
 
 def cssmerge(fullpath, outfile):
