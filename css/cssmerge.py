@@ -78,7 +78,7 @@ def xml(newstyle,path):
 		for line in stuff:
 			line = line.rstrip('\n')
 			if line.find(':') >0:
-				key, val = line.split(':')
+				key, val = line.split(':', 1)
 				new[key] = unicode(val.strip())
 			else:
 				if new[key] == '':
