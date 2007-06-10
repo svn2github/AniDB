@@ -697,11 +697,11 @@ body.nonav #layout-content hr
 	color:white;
 	font-variant:small-caps;
 }
-
+/*
 #layout-content div.anime_all div.groups table.grouplist tr.heading
 {
 
-}
+}*/
 
 #layout-content div.anime_all div.groups table.grouplist tr.heading,
 #layout-content div.anime_all div.groups table.grouplist tr.finished,
