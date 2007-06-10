@@ -1,82 +1,41 @@
-/* Last update: 29th April 2007 by Amour */
+/* Creation: 21th January 2007 by Amour */
+/* Last update: 10th June 2007 by Amour */
 @import "../anidbstyle/anidbstyle.css";
 
-html td, html th
+/* *** */
+/* News: fix to latest additions display */
+/* Unfortunatly, it brokes Firefox */
+/* *** */
+/*
+#layout-content div.main_all div.rightbar li a
 {
-	font-size: 10px;
-	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+	float: left;
+	margin: 0em;
+	width: 11.4em;
 }
-
-html a.i_inline, html span.i_inline
-{
-	padding: 0;
-	background: none;
-}
-
-html .i_inline span
-{
-	display: inline;
-	font-size: 90%
-}
-
-#layout-search
-{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-#layout-search form input.submit
-{
-	margin-right: 15px;
-}
-
-#layout-content
-{
-	margin-top: 103px;
-}
-
-#layout-content div.section
-{
-	width: 99%;
-}
-
-#layout-content
-{
-	margin-left: 182px;
-	background-color: transparent;
-	width: auto;
-	height: auto;
-}
-
-#layout-content h1
-{
-	display: block;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 4px 0 18px 37px;
-}
-
-#layout-content div.genren_all li span
-{
-	display: inline;
-	width: 100%;
-}
-
-#layout-content div.latestanimes_anime
-{
-	padding-left: 0;
-}
-
-#layout-content div.latestanimes_anime h3
-{
-	font-size: 10px;
-	font-weight: normal;
-}
-
+*/
+/* *** */
 
 /* *** */
-/* Anime: fix to image position */
+/* Calendar: fix to titles size */
+/* *** */
+#layout-content div.latestanimes_anime h3
+{
+	font-size: 12px;
+}
+
+/* *** */
+/* Anime List: the year value should display on one line only */
+/* MyDbEntries: the date value should display on one line only */
+/* *** */
+#layout-content td.year,
+#layout-content td.date
+{
+	white-space: nowrap;
+}
+
+/* *** */
+/* Anime: workaround to image/definition position */
 /* *** */
 #layout-content div.info div.image
 {
@@ -95,15 +54,52 @@ html .i_inline span
 }
 
 /* *** */
-/* Transitional Hacks: fix to anidbstyle.css */
+/* Profile: workaround to image/definition position */
 /* *** */
-#layout-content *[align="center"] > *
+#layout-content div.profile_css div.block div.image
 {
-	text-align: center;
+	clear: both;
+	float: left;
+	padding: 0px;
+	height: auto;
+	width: 40%;
+}
+
+#layout-content div.profile_css div.block div.info
+{
+	clear: none;
+	float: left;
+	padding: 0px;
+	height: auto;
+	width: 60%;
 }
 
 /* *** */
-/* MyPlace: overlap fix */
+/* MyList: fix to page width */
+/* *** */
+#layout-content ul.g_jumplist
+{
+	width: auto;
+}
+
+#layout-content ul.g_actionlist li,
+#layout-content ul.g_jumplist li
+{
+	font-style: normal;
+}
+
+/* *** */
+/* MyList & MyPlace: fix to menu */
+/* *** */
+html #layout-content div.g_menu
+{
+	float: right;
+	height: auto;
+	width: auto;
+}
+
+/* *** */
+/* MyPlace: fix to overlap content */
 /* *** */
 #layout-content div.stats,
 #layout-content div.latest
@@ -112,31 +108,7 @@ html .i_inline span
 }
 
 /* *** */
-/* MyList: width fix */
-/* *** */
-#layout-content ul.g_jumplist
-{
-width: auto;
-}
-
-#layout-content ul.g_actionlist li,
-#layout-content ul.g_jumplist li
-{
-font-style: normal;
-}
-
-/* *** */
-/* MyList: menu fix */
-/* *** */
-html #layout-content div.g_menu
-{
-	float: right;
-	height: auto;
-	width: 150px;
-}
-
-/* *** */
-/* Mass add files: dump size fix */
+/* Mass add files: fix to dump size */
 /* *** */
 #layout-content div.addfilem.form div.dump textarea
 {
