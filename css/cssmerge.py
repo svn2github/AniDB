@@ -140,7 +140,7 @@ def doftp(update):
 	ftp_update = []
 	if update in ('upload','fullupload'):
 		try:
-			lastupdate = float(urllib.urlopen('http://www.anidb.net/css/lastpicupload').read())
+			lastupdate = float(urllib.urlopen('http://static.anidb.net/css/lastpicupload').read())
 			file(__out + 'lastpicupload','w').write(str(lastupdate))
 			ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
 		except:

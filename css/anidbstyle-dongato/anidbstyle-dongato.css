@@ -2293,7 +2293,7 @@ span.diff,
 /*sub-gray-layout.css*/
 html
 {
-/*	background: #BFC2C9 url(/images/backtoo.png) repeat-y left; */
+/*	background: #BFC2C9 url(images/backtoo.png) repeat-y left; */
 	background-color: #BFC2C9;
 }
 
@@ -2309,7 +2309,7 @@ body.nonav
 	left: 0;
 	width: 170px;
 	height: 603px;
-	background: transparent url(/images/menuback.png) no-repeat top left;
+	background: transparent url(images/menuback.png) no-repeat top left;
 }
 
 #layout-menu div.menu
@@ -2448,14 +2448,14 @@ body.nonav
 
 #layout-search
 {
-	background: transparent url(/images/backlame.png) repeat-x top;
+	background: transparent url(images/backlame.png) repeat-x top;
 	width: 100%;
 	height: 94px;
 }
 
 #layout-search div.search
 {
-	background: transparent url(/images/anidb01toosimple.png) no-repeat top left;
+	background: transparent url(images/anidb01toosimple.png) no-repeat top left;
 	height: 94px;
 }
 
@@ -2463,7 +2463,7 @@ body.nonav
 {
 	display: block;
 	float: right;
-	background: transparent url(/images/searchback.png) no-repeat 0px 77px;
+	background: transparent url(images/searchback.png) no-repeat 0px 77px;
 	padding: 70px 0 0 0;
 	margin: 0;
 	height: 64px;

@@ -20,16 +20,6 @@
 		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle_hacks/images/thumbnail.png</thumbnail>
 	</style>
-	<style name="dark-style">
-		<title>Dark Style</title>
-		<creator>sylwira</creator>
-		<update>10.06.2007</update>
-		<status>In development</status>
-		<description>Firefox only. (Works also in Opera, but don't even try it with IE :D )</description>
-		<path/>
-		<screenshot>dark-style/images/screenshot.png</screenshot>
-		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
-	</style>
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle DonGato revision</title>
 		<creator>DonGato</creator>
@@ -39,6 +29,16 @@
 		<path/>
 		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="dark-style">
+		<title>Dark Style</title>
+		<creator>sylwira</creator>
+		<update>10.06.2007</update>
+		<status>In development</status>
+		<description>Firefox only. (Works also in Opera, but don't even try it with IE :D )</description>
+		<path/>
+		<screenshot>dark-style/images/screenshot.png</screenshot>
+		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="grey">
 		<title>Grey</title>
@@ -119,16 +119,6 @@
 		<path/>
 		<screenshot>sub-brown2/images/screenshot.png</screenshot>
 		<thumbnail>sub-brown2/images/thumbnail.png</thumbnail>
-	</style>
-	<style name="sub-dragon">
-		<title>sub-dragon</title>
-		<creator>epoximator</creator>
-		<update>23.05.2007</update>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot>sub-dragon/images/screenshot.png</screenshot>
-		<thumbnail>sub-dragon/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-norwegian-blue">
 		<title>norwegian-blue</title>
