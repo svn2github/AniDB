@@ -3,6 +3,27 @@
 @import "../anidbstyle/anidbstyle.css";
 
 /* *** */
+/* News: IE6 only compatibility... */
+/* *** */
+#layout-content div.main_all div.rightbar
+{
+	-clear: both;
+	-float: right;
+	-margin: 0.3em;
+	-padding: 0em;
+	-width: 20%;
+}
+
+#layout-content div.main_all div.news
+{
+	-clear: left;
+	-float: right;
+	-margin: 0.3em;
+	-padding: 0em;
+	-width: 80%;
+}
+
+/* *** */
 /* News: fix to latest additions display */
 /* Unfortunatly, it brokes Firefox */
 /* *** */
