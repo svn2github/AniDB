@@ -64,8 +64,9 @@
 	background-image: url(../icons/sort.gif);
 }
 
-.i_group_revote,
-.i_ep_revote {background-image: url(../icons/anidb_revote.gif);}
+/*.i_group_revote,
+.i_ep_revote {background-image: url(../icons/anidb_revote.gif);}*/
+
 span.i_videostream_unknown,
 span.i_videostream_other__non_asp_,
 span.i_videostream_asp_other,
@@ -116,4 +117,4 @@ span.i_videostream_h264_avc {
 .i_ftype_subtitle {background-image: url(../icons/icon/anidb_subtitles.gif);}
 .i_ftype_subtitle2 {background-image: url(../icons/icon/anidb_subtitles2.gif);}
 .i_ftype_audio {background-image: url(../icons/icon/anidb_audio.gif);}
-.i_ftype_other {background-image: url(../icons/icon/anidb_other.gif);}
+/*.i_ftype_other {background-image: url(../icons/icon/anidb_other.gif);}*/
