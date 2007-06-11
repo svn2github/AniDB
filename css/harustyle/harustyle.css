@@ -939,11 +939,6 @@ background-image: url('../icons/flags/anidb_sub_vietnamese.gif');
 background-image: url('../icons/flags/anidb_audio_instrumental.gif');
 }
 
-*.i_sub_x-in
-{
-background-image: url('../icons/flags/anidb_sub_instrumental.gif');
-}
-
 *.i_audio_x-jat
 {
 background-image: url('../icons/flags/anidb_audio_japanese-transcription.gif');
