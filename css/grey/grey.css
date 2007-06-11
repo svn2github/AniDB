@@ -2130,3 +2130,23 @@ a.i_icon:hover, a.i_inline:hover
 {
 	margin-bottom: 1em;
 }
+
+*.i_group_vote,
+*.i_ep_vote
+{
+	background-image: url(images/anidb_vote.gif);
+}
+*.i_crc_no
+{
+	background-image: url(images/anidb_crc_no.gif);
+}
+
+*.i_crc_yes
+{
+	background-image: url(images/anidb_crc_yes.gif);
+}
+
+*.i_crc_unv
+{
+	background-image: url(images/anidb_crc_unv.gif);
+}
