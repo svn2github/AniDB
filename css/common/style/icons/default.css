@@ -598,7 +598,19 @@ span.i_videostream_h264_avc
 	background-image: url(../icons/icon/anidb_audio.gif);
 }
 
-/**.i_ftype_other
+*.i_ftype_other
 {
 	background-image: url(../icons/icon/anidb_other.gif);
-}*/
+}
+
+*.i_file2ep_rel
+{
+  width: 20px;
+	background-image: url(../icons/icon/anidb_file2ep2.gif);
+}
+
+*.i_file2file_rel
+{
+  width: 20px;
+	background-image: url(../icons/icon/anidb_file2file2.gif);
+}

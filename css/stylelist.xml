@@ -13,7 +13,7 @@
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>10.07.2007</update>
+		<update>10.06.2007</update>
 		<status>stable (v5)</status>
 		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
@@ -144,7 +144,7 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>May 19, 2007</update>
+		<update>19.05.2007</update>
 		<status>In development</status>
 		<description>Only tested in Firefox/Mac.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
