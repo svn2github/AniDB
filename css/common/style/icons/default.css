@@ -235,6 +235,46 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/icon/anidb_rate_unknown.gif);
 }
 
+span.i_rate_veryhigh
+{
+	width: 43px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+span.i_rate_high
+{
+	width: 36px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+span.i_rate_med
+{
+	width: 30px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+span.i_rate_low
+{
+	width: 22px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+span.i_rate_verylow
+{
+	width: 15px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
 *.i_recap
 {
 	background-image: url(../icons/icon/anidb_recap.gif);
