@@ -55,3 +55,17 @@ div.myplace_all div.latest_votes li a,
 div.myplace_all div.latest_reviews li a {
 	margin-left: 3em;
 }
+
+div.myplace_all div.latest_votes span.mid,
+div.myplace_all div.latest_reviews span.mid {
+	color: #a1be2e;
+}
+div.myplace_all div.latest_votes span.high,
+div.myplace_all div.latest_reviews span.high {
+	color: #5dac3b;
+	font-weight: bold;
+}
+div.myplace_all div.latest_votes span.low,
+div.myplace_all div.latest_reviews span.low {
+	color: #e33e23;
+}

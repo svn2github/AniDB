@@ -90,15 +90,16 @@ div.main_all div.news {
 }
 
 /* news item elements */
-div.main_all div.news>* {
-	padding-left: 40px !important;
+div.main_all div.newsitem {
+	padding-left: 40px;
+	background: transparent url(images/layout/flower1.png) no-repeat left top;
+	border-bottom: 1px solid #f3e7ff;
+	padding-bottom: 1.2em;
 }
 div.main_all div.news h4 {
 	margin-top: 0.7em;
 	margin-bottom: -0.1em;
 	font: 1.8em "Century Gothic", "Lucida Grande", sans-serif;
-	background: transparent url(images/layout/flower1.png) no-repeat left 5px;
-	min-height: 30px;
 	color: #000;
 }
 div.main_all div.news span.stamp {
@@ -107,11 +108,6 @@ div.main_all div.news span.stamp {
 	padding: 0.2em;
 	font-size: 0.85em;
 }
-div.main_all div.news div {
-	font-size: 1.1em;
-	border-bottom: 1px solid #f3e7ff;
-	padding-bottom: 1.2em;
-}
-div.main_all div.news div:last-child {
+div.main_all div.newsitem:last-child {
 	border-bottom: 0;
 }

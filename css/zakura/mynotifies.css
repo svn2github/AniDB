@@ -26,3 +26,9 @@ div.mynotifies_all div.action {
 	background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
 	border: 1px solid #E1D9F5;
 }
+
+
+div.mynotifies_list td.type.group		{color: #2618b1;}
+div.mynotifies_list td.type.complete	{color: #179023;}
+div.mynotifies_list td.type.all			{font-weight: bold;}
+div.mynotifies_list td.type.new			{color: #fd0576;}

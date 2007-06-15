@@ -25,3 +25,62 @@ div.profile_all td.action {
 	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
 	padding: 0.7em;
 } 
+
+
+div.profile_all div.profile_css {
+	text-align: center;
+}
+div.profile_all div.profile_css div {
+	width: 50%;
+	margin: 0 auto;
+}
+
+div.profile_all img#style_thumbnail {
+	border:1px solid #EBEDF5;
+	background-color:#F9F9F9;
+	overflow:hidden;
+	text-align:center;
+	width:220px;
+}
+#layout-content div.profile_css div.block div.image {
+	height:auto;
+	width:40%;
+}
+#layout-content div.profile_css div.block div.info {
+	height:auto;
+	width:60%;
+}
+
+#layout-content div.profile_css div.info dl dt {
+	font-weight:bold;
+	clear:left;
+	float:left;
+	text-align: left;
+}
+#layout-content div.profile_css div.info dl dd {
+	margin-left:7em;
+	width:20em;
+	text-align: left;
+	margin-bottom: 0.3em;
+}
+
+#layout-content div.profile_css input#style_prev,
+#layout-content div.profile_css input#style_next {
+	border: 1px solid #f7edf1;
+	border-bottom: 1px solid #d28cb2;
+	color: #d28cb2;
+	background: #fff9fb;
+	padding: 0.2em 0.3em;
+	font-size: 0.95em;
+	cursor: pointer;
+}
+#layout-content div.profile_css input#style_prev:hover,
+#layout-content div.profile_css input#style_next:hover {
+	background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
+	color: #de4799;
+	border: 1px solid #eec6dc;
+}
+#layout-content div.profile_css input#style_url {
+	margin-top: 1em;
+	width: 100%;
+}
