@@ -8,9 +8,3 @@ div.mydb_all ul.g_jumplist {
 div.mydb_all div.g_section>table {
 	width: 100%;
 }
-div.mydb_all table.mydb_ep td.name.episode,
-div.mydb_all table.mydb_file td.name.anime,
-div.mydb_all table.mydb_file td.epno,
-div.mydb_all table.mydb_animetitle td.name.title {
-	font-weight: bold;
-}

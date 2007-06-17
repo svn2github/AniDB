@@ -299,7 +299,6 @@ input[type="text"]:hover, textarea:hover {
 }
 .g_definitionlist table td {
 	padding: 0.2em;
-	font-weight: bold;
 	border-top: 1px solid #ebe1ef;
 	border-bottom: 0;
 }

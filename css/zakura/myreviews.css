@@ -12,6 +12,3 @@ div.myreviews_all div table {
 div.myreviews_all div table:first-child {
 	margin-top: 0;
 }
-div.myreviews_all td.anime {
-	font-weight: bold;
-}

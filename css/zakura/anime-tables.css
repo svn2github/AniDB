@@ -128,9 +128,3 @@ div.producerlist_all .g_filterlist {
 div.grouplist_list th.rating {
 	width: 8em;
 }
-div.animelist_list td.name,
-div.grouplist_list td:first-child,
-div.userlist_list td.user,
-div.producerlist_list td:first-child {
-	font-weight: bold;
-}

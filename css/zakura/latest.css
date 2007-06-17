@@ -9,23 +9,6 @@ div.latest_all .latest_userdata table {
 	width: auto;
 	margin: 0 auto;
 }
-div.latest_files_list td.name.file,
-div.latest_anime td.name.anime,
-div.latest_titles td.name.anime,
-div.latest_titles td.name.ep,
-div.latest_seq td.type,
-div.latest_groups td.name.group,
-div.latest_producers td.name.producer,
-div.latest_aproducer td.name.producer,
-div.latest_categories td.name.category,
-div.latest_reviews_list td.vote.review,
-div.latest_reviews_list td.vote.anime,
-div.latest_groups table.agcomments td.name.anime,
-div.latest_hotanime td.name.anime,
-div.latest_completed td.name.anime,
-div.latest_userdata td.name.user {
-	font-weight: bold;
-}
 div.latest_all tr.yes.g_odd td {
 	background-color: #e9ffd8;
 }
