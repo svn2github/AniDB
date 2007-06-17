@@ -23,7 +23,7 @@ div.agcmts_all div.agcmts_head p:last-child {
 /* news item elements */
 div.agcmts_all div.agcmts_entries div.comment {
 	padding-left: 27px;
-	background: transparent url(images/layout/flower1-small.png) no-repeat left top;
+	background: transparent url(images/layout/flower1-smaller.png) no-repeat left top;
 	border-bottom: 1px solid #f3e7ff;
 	margin-bottom: 1em;
 }
