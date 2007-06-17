@@ -261,6 +261,7 @@ div.anime_all td.icons span {
 
 /* actions */
 .i_file_add 			{background-image: url(images/buttons/epfile-add.gif);}
+.i_file_ed2k 			{background-image: url(images/buttons/ed2k.png);}
 .i_ep_vote				{background-image: url(images/buttons/vote.png);}
 .i_group_vote			{background-image: url(images/buttons/vote.png);}
 
