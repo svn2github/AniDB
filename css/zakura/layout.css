@@ -185,6 +185,61 @@ div#layout-menu div.usermenu a.i_logout:active {
 	color: #2d42af;
 }
 
+/* login form - not logged in */
+div#layout-menu div.usermenu span.login+a+form {
+	background-color: #F7EDF1;
+	width: 100%;
+	padding-top: 35px;
+	height: 40px;
+	width: 280px;
+	padding-left: 20px;
+}
+div#layout-menu div.usermenu span.login+a+form input.text {
+	width: 131px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+div#layout-menu div.usermenu span.login+a+form input.text+input.text {
+	margin-left: 2px;
+}
+div#layout-menu div.usermenu span.login {
+	text-transform: capitalize;
+	position: absolute;
+	left: 20px;
+	top: 15px;
+}
+div#layout-menu div.usermenu span.login a,
+div#layout-menu div.usermenu span.login a:link,
+div#layout-menu div.usermenu span.login a:visited {
+	color: #ed95bd;
+	text-decoration: none;
+}
+div#layout-menu div.usermenu span.login a:hover,
+div#layout-menu div.usermenu span.login a:active {
+	color: #fd0576;
+}
+div#layout-menu div.usermenu input.logon,
+div#layout-menu div.usermenu a.i_signup,
+div#layout-menu div.usermenu label.remember {
+	position: absolute;
+	right: 0;
+	bottom: 1em;
+	width: 4.5em;
+	height: 1.8em;
+}
+div#layout-menu div.usermenu a.i_signup {
+	top: 15px;
+	border-left: 0 !important;
+	background: none !important;
+	text-transform: capitalize;
+	padding: 0;
+}
+div#layout-menu div.usermenu label.remember {
+	right: 6.5em;
+	width: 13em;
+	text-align: right;
+}
+
 /* container - search */
 div#layout-search {
 	position: absolute;
@@ -212,6 +267,7 @@ div#layout-search input.submit {
 	height: 1.8em;
 	padding-bottom: 0.2em;
 	margin-bottom: 0.1em;
+	width: 4.5em;
 }
 div#layout-search input.submit:hover {
 	background: #2d42af;

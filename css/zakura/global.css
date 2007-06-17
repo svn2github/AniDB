@@ -283,12 +283,12 @@ input[type="submit"]:hover {
 }
 
 /* text fields */
-input[type="text"], textarea {
+input[type="text"], input[type="password"], input.text, textarea {
 	background:#fafafa;
 	border: 1px solid #cfd0d1;
 	padding: 0.2em;
 }
-input[type="text"]:hover, textarea:hover {
+input[type="text"]:hover, input[type="password"]:hover, input.text:hover, textarea:hover {
 	border: 1px solid #bcc3c9;
 	background: #fdfdfd;
 }

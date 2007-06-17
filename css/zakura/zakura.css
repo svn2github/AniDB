@@ -57,3 +57,7 @@
 @import "addgroup.css";
 @import "ed2kdump.css";
 @import "creqs.css";
+
+/* other */
+@import "login.css";
+@import "signup.css";
