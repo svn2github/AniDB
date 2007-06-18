@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
-		<update>20.05.2007</update>
+		<update>19.05.2007</update>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
 		<path/>
@@ -84,7 +84,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update>28.05.2007</update>
+		<update>26.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -104,7 +104,7 @@
 	<style name="sub-brown">
 		<title>sub-brown</title>
 		<creator>epoximator</creator>
-		<update>20.05.2007</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -114,7 +114,7 @@
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update>28.05.2007</update>
+		<update>24.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -144,11 +144,12 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>19.05.2007</update>
-		<status>In development</status>
-		<description>Only tested in Firefox/Mac.
+		<update>18.06.2007</update>
+		<status>Complete | Always in development</status>
+		<description>Might be a little too pink for some people's taste.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
-Thanks to ricce for making the fixed menu modification.</description>
+Thanks to ricce for making the fixed menu modification.
+Only tested in Firefox/Mac.</description>
 		<path/>
 		<screenshot>zakura/images/screenshot.png</screenshot>
 		<thumbnail>zakura/images/thumbnail.png</thumbnail>

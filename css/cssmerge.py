@@ -17,7 +17,7 @@ import os, sys, ftplib, amara, copy, datetime,time,urllib
 
 __out = "../../flat/"
 __ftp = {}
-__ftppath = 'httpdocs/css/'
+__ftppath = '/httpdocs/css/'
 __extensions = ('.jpg', '.jpeg', '.gif', '.png','.css')
 
 def cssmerge(fullpath, outfile):
@@ -94,10 +94,9 @@ def xml(newstyle,path):
 	
 	for filename in os.listdir(path):
 		if filename.endswith('.css'):
-			mtime = os.path.getmtime(path+'\\'+filename)
+			mtime = os.path.getmtime(path + '/' + filename)
 			if mtime >  newest:
 				newest = mtime
-				newestf = filename
 
 	newfile = datetime.datetime.fromtimestamp(newest)
 
@@ -141,13 +140,24 @@ def doftp(update):
 	if update in ('upload','fullupload'):
 		try:
 			lastupdate = float(urllib.urlopen('http://static.anidb.net/css/lastpicupload').read())
-			file(__out + 'lastpicupload','w').write(str(lastupdate))
-			ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
 		except:
-			file(__out + 'lastpicupload','w').write(str(time.mktime(time.localtime())))
-			lastupdate = 0
-			ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
 			print "Couldn't determine last picture upload. Running fullupdate."
+			lastupdate = 0
+
+		file(__out + 'lastpicupload','w').write(str(time.mktime(time.localtime())))
+		ftp_update += [(__ftppath + 'lastpicupload',__out + 'lastpicupload')]
+		for root,path,filename in os.walk('icons'): #grab the ./icons/ folder if neccessary - yes that's ugly to have this function twice. bite me :P
+			root = root.replace('\\','/') #evil mixed \ and /
+			for elem in filename:
+				if filter(elem.lower().endswith, __extensions):
+					if update == 'upload':
+						fileupdate = os.path.getmtime(root + '/' + elem)
+						filecreation = os.path.getctime(root + '/' + elem)
+						if (lastupdate < fileupdate) or (lastupdate < filecreation):
+							ftp_update += [(__ftppath + root + '/' + elem,root + '/' + elem)]
+					else:
+						ftp_update += [(__ftppath + root + '/' + elem,root + '/' + elem)]
+
 	for css in __ftp:
 		ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/' + __ftp[css],__out+ css.lstrip('./').replace('/','-') + '/'+__ftp[css])]
 		if update in ('upload','fullupload'):
@@ -160,10 +170,11 @@ def doftp(update):
 								fileupdate = os.path.getmtime(root + '/' + elem)
 								filecreation = os.path.getctime(root + '/' + elem)
 								if (lastupdate < fileupdate) or (lastupdate < filecreation):
-									ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
+									ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + root.replace(css,'') + '/' + elem,root + '/' + elem)]
 							else:
-								ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + '/images/' + elem,root + '/' + elem)]
+								ftp_update += [(__ftppath + css.lstrip('./').replace('/','-') + root.replace(css,'') + '/' + elem,root + '/' + elem)]
 
+	ftp_update += [(__ftppath + 'nopic.png','./nopic.png')]
 	ftp_update += [(__ftppath + 'stylelist.xml','./stylelist.xml')]
 	anidbftp = ftplib.FTP(*file("../../ftp.txt",'rU').read().split("\n"))
 
