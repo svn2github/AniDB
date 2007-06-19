@@ -118,16 +118,22 @@ div.mylist_menu ul.filters {
 }
 div.mylist_menu ul.state li,
 div.mylist_menu ul.filters li {
-
 	border-top: 0;
 	padding: 0.1em 0.5em;
 }
+div#layout-content div.mylist_menu ul.state li a {
+	display: block;
+	border-bottom: none !important;
+}
 div#layout-content div.mylist_menu ul.state span {
 	padding-left: 18px;
+	text-indent: 0;
 	background-repeat: no-repeat;
-	background-position: middle center;
+	background-position: left 3px;
 	float: none;
-	display: inline;
+	display: block;
+	width: 8em;
+	height: auto;
 }
 
 /* add file to mylist */

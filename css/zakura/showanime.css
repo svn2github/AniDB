@@ -9,6 +9,9 @@ div.anime_all div.info div.data,
 div.anime_all div.info table {
 	width: 100%;
 }
+div.anime_all div.info table table {
+	width: inherit;
+}
 div.anime_all div.info div.data {
 	display: table-cell;
 }
