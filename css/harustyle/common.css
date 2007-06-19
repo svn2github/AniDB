@@ -1,0 +1,15 @@
+@import "layout/default.css";
+@import "layout/common.css";
+
+@import "layout/global/all.css";
+@import "layout/page/all.css";
+
+@import "style/icons/default.css";
+@import "style/icons/flags.css";
+
+@import "style/color/msgbox-default.css";
+@import "style/color/special.css";
+
+@import "style/text/default.css";
+
+@import "style/content/page-anime.css";
