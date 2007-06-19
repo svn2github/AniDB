@@ -63,10 +63,10 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>to come</update>
+		<update>19.06.2007</update>
 		<status>In development
 </status>
-		<description>There's a bug on the main page, where the news are not displayed properly. Will fix this asap.</description>
+		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
 		<thumbnail>harustyle/images/thumbnail.png</thumbnail>
@@ -144,7 +144,7 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>18.06.2007</update>
+		<update>19.06.2007</update>
 		<status>Complete | Always in development</status>
 		<description>Might be a little too pink for some people's taste.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
