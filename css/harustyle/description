@@ -1,6 +1,6 @@
 title: Harustyle
 creator: b1nh
-update: to come
+update: 19.06.2007
 status: In development
 
-description: There's a bug on the main page, where the news are not displayed properly. Will fix this asap.
+description: Completely recoded based on epox' gray css. Everything should work now.
