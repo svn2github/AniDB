@@ -33,9 +33,9 @@
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>10.06.2007</update>
+		<update>20.06.2007</update>
 		<status>In development</status>
-		<description>Firefox only. (Works also in Opera, but don't even try it with IE :D )</description>
+		<description>Firefox only. (Works also in Opera, but not so well. Don't even try it with IE :D )</description>
 		<path/>
 		<screenshot>dark-style/images/screenshot.png</screenshot>
 		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
