@@ -85,62 +85,15 @@ img[src*="anidb_file_ed2k.gif"] {
 	width: 0;
 	padding-left: 15px;
 }
-*.i_rate_star {
-  width: 15px;
-  background: transparent url(images/icons/star.png) no-repeat left top;
-}
 img[src*="anidb_rate_star.gif"] {
 	background: transparent url(images/icons/star.png) no-repeat left top;
 	width: 0;
 	padding-left: 15px;
 }
-*.i_rate_halfstar {
-  width: 15px;
-  background: transparent url(images/icons/star-half.png) no-repeat left top;
-}
 img[src*="anidb_rate_halfstar.gif"] {
 	background: transparent url(images/icons/star-half.png) no-repeat left top;
 	width: 0;
 	padding-left: 8px;
-}
-span.i_rate_veryhigh
-{
-	width: 43px;
-	background-image: url(images/icons/star.png);
-	background-repeat: repeat-x;
-	background-position: left;
-}
-
-span.i_rate_high
-{
-	width: 36px;
-	background-image: url(images/icons/star.png);
-	background-repeat: repeat-x;
-	background-position: left;
-}
-
-span.i_rate_med
-{
-	width: 30px;
-	background-image: url(images/icons/star.png);
-	background-repeat: repeat-x;
-	background-position: left;
-}
-
-span.i_rate_low
-{
-	width: 22px;
-	background-image: url(images/icons/star.png);
-	background-repeat: repeat-x;
-	background-position: left;
-}
-
-span.i_rate_verylow
-{
-	width: 15px;
-	background-image: url(images/icons/star.png);
-	background-repeat: repeat-x;
-	background-position: left;
 }
 img[src*="ask2.gif"] {
 	background: transparent url(images/buttons/help.png) no-repeat -1px top;

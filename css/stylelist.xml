@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
-		<update>19.05.2007</update>
+		<update>20.05.2007</update>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
 		<path/>
@@ -23,7 +23,7 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle DonGato revision</title>
 		<creator>DonGato</creator>
-		<update>09.06.2007</update>
+		<update>18.06.2007</update>
 		<status>in sync</status>
 		<description>report any problem by a message</description>
 		<path/>
@@ -33,9 +33,9 @@
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>20.06.2007</update>
+		<update>10.06.2007</update>
 		<status>In development</status>
-		<description>Firefox only. (Works also in Opera, but not so well. Don't even try it with IE :D )</description>
+		<description>Firefox only. (Works also in Opera, but don't even try it with IE :D )</description>
 		<path/>
 		<screenshot>dark-style/images/screenshot.png</screenshot>
 		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
@@ -63,10 +63,10 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>19.06.2007</update>
+		<update>to come</update>
 		<status>In development
 </status>
-		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
+		<description>There's a bug on the main page, where the news are not displayed properly. Will fix this asap.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
 		<thumbnail>harustyle/images/thumbnail.png</thumbnail>
@@ -84,7 +84,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update>26.05.2007</update>
+		<update>28.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -104,7 +104,7 @@
 	<style name="sub-brown">
 		<title>sub-brown</title>
 		<creator>epoximator</creator>
-		<update/>
+		<update>18.06.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -114,7 +114,7 @@
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update>24.05.2007</update>
+		<update>28.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -144,7 +144,7 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>19.06.2007</update>
+		<update>21.06.2007</update>
 		<status>Complete | Always in development</status>
 		<description>Might be a little too pink for some people's taste.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
