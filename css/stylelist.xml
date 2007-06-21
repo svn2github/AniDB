@@ -33,9 +33,9 @@
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>10.06.2007</update>
+		<update>21.06.2007</update>
 		<status>In development</status>
-		<description>Firefox only. (Works also in Opera, but don't even try it with IE :D )</description>
+		<description>Firefox only. (Works also in Opera, but not so well. Don't even try it with IE :D )</description>
 		<path/>
 		<screenshot>dark-style/images/screenshot.png</screenshot>
 		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
@@ -63,10 +63,10 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>to come</update>
+		<update>21.06.2007</update>
 		<status>In development
 </status>
-		<description>There's a bug on the main page, where the news are not displayed properly. Will fix this asap.</description>
+		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
 		<thumbnail>harustyle/images/thumbnail.png</thumbnail>
