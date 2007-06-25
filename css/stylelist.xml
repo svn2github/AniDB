@@ -56,7 +56,7 @@
 		<update>06.06.2007</update>
 		<status>Incomplete (In development...)</status>
 		<description>This style contains adult material, you should not use this tyle unless you are of age to view adult material within your country. Nither TheJAG nor AniDB is in any way responsible if this condition is not kept.</description>
-		<path/>
+		<path></path>
 		<screenshot>haruhistylex/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
@@ -144,7 +144,7 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>21.06.2007</update>
+		<update>25.06.2007</update>
 		<status>Complete | Always in development</status>
 		<description>Might be a little too pink for some people's taste.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
@@ -158,9 +158,9 @@ Only tested in Firefox/Mac.</description>
 		<title>Zakura (fixed menu edition)</title>
 		<creator>ricce</creator>
 		<update>20.05.2007</update>
-		<status></status>
-		<description></description>
-		<path></path>
+		<status/>
+		<description/>
+		<path/>
 		<screenshot>zakura-fixed_menu/images/screenshot.png</screenshot>
 		<thumbnail>zakura-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
