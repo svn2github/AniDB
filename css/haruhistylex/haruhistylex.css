@@ -3,8 +3,8 @@
  * Based on Harustyle by b1hn
  */
  
-@import "icons.css";
-@import "flags.css";
+@import "../common/style/icons/default.css";
+@import "../common/style/icons/flags.css";
 
 body {
 	font-family:Geneva, Arial, Helvetica, sans-serif;
