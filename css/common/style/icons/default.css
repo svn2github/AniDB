@@ -642,12 +642,10 @@ span.i_videostream_h264_avc
 	background-image: url(../icons/state/anidb_gstate_stalled.gif);
 }
 
-/*
 *.i_gstate_specials
 {
 	background-image: url(../icons/state/anidb_gstate_specials.gif);
 }
-*/
 
 *.i_gstate_all
 {
