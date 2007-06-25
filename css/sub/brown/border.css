@@ -9,6 +9,10 @@ table
 	border-spacing: 0;
 }
 
+table.filelist tr.newep td{
+	border-top: 1px solid #66604d;
+}
+
 table table
 {
 	border: none;
