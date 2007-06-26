@@ -1,6 +1,6 @@
 AnimeDB Template SDK
 
-Version: 0.09b - 13.10.2005
+Version: 0.11 - 26.06.2007
 
 (C) 2003-2004 by EXP
 
@@ -17,6 +17,10 @@ Get new Versions here:
 
 
 Changelog:
+
+  0.11 - 26.06.2007
+	- data files updated
+	- maybe some other changes?
 
   0.10 - 30.04.2006
 
