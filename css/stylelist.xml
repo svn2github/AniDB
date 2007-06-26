@@ -53,10 +53,10 @@
 	<style name="haruhistylex">
 		<title>HaruhiStyleX</title>
 		<creator>TheJAG</creator>
-		<update>06.06.2007</update>
+		<update>25.06.2007</update>
 		<status>Incomplete (In development...)</status>
 		<description>This style contains adult material, you should not use this tyle unless you are of age to view adult material within your country. Nither TheJAG nor AniDB is in any way responsible if this condition is not kept.</description>
-		<path></path>
+		<path/>
 		<screenshot>haruhistylex/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
@@ -94,7 +94,7 @@
 	<style name="sub-blue">
 		<title>sub-blue</title>
 		<creator>epoximator</creator>
-		<update>20.05.2007</update>
+		<update>25.06.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -104,7 +104,7 @@
 	<style name="sub-brown">
 		<title>sub-brown</title>
 		<creator>epoximator</creator>
-		<update>18.06.2007</update>
+		<update>25.06.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -134,7 +134,7 @@
 	<style name="sub-silver">
 		<title>sub-silver</title>
 		<creator>epoximator</creator>
-		<update>20.05.2007</update>
+		<update>25.06.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -158,9 +158,9 @@ Only tested in Firefox/Mac.</description>
 		<title>Zakura (fixed menu edition)</title>
 		<creator>ricce</creator>
 		<update>20.05.2007</update>
-		<status/>
-		<description/>
-		<path/>
+		<status></status>
+		<description></description>
+		<path></path>
 		<screenshot>zakura-fixed_menu/images/screenshot.png</screenshot>
 		<thumbnail>zakura-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
