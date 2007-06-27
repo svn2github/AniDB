@@ -1,819 +1,422 @@
 VERY SHORT TEMPLATE HOWTO:
-
-File Version: 0.05c - 12.10.2005
-
-
+File Version: 0.7 - 26.06.2007
 
 For additional info you can also check:
-
 http://html-template.sourceforge.net/html_template_expr.html
-
-
-
-
-
-
-
-!!! NOTE !!!
-
+----------------------------------------------------------------------------------------------
+***********************************  !!!   WARNING   !!!  ************************************
 The variable listing at the end of this file is most likely NOT uptodate.
-
 You should also take a look at the changelog in readme.txt!
-
-!!! NOTE !!!
-
-
+And the wiki page at: http://wiki.anidb.info/w/Mylist_export_template_guidelines
+----------------------------------------------------------------------------------------------
 
 
-
-Well,
-
-
-
-here's all you need to write templates for the mylist export function.
-
-we really need better templates!
-
-send finished templates to: exp@3dwars.de
-
-
+Well, here's all you need to write templates for the mylist export function.
+We really need better templates!
+Commit your changes to the SVN and warn a mod when you think they are ready to be used.
 
 A theme consist out of one or multiple tpl files. Those are called:
-
 mylist.tpl - (mandatory)
-
 anime.tpl - (optional)
-
 extension.dat - (optional)
-
 info.dat - (mandatory)
-
 changelog.txt - (optional)
-
-All files, if possible, in unix format. But dos format doesn't hurt either, i'll
-
+All files, if possible, in unix format. But dos format doesn't hurt either, I'll
 convert them, in that case.
 
+The export script will parse the mylist.tpl file and create one output file called
+i.e. mylist.htm. So mylist.tpl get's parsed only once (because you only have one mylist).
+However anime.tpl will be parsed once for every anime in your mylist. And for each
+a unique file will be created. The default file extension for the output files is "htm",
+however if you create a file called "extension.dat" and put only the extension in
+the first line of the file, i.e. "txt" then that extension will be used.
 
-
-The export script will parse the mylist.tpl file and create one output file
-
-called i.e. mylist.htm. So mylist.tpl get's parsed only once (bc you only have one mylist).
-
-However anime.tpl will be parsed once for every anime
-
-in your mylist. And for each a unique file will be created.
-
-The default file extension for the output files is "htm", however if you
-
-create a file called "extension.dat" and put only the extension in the first line of the file,
-
-i.e. "txt" then that extension will be used.
-
-
-
-The file info.dat should contain at least the following 3 lines
-
-	(C) 2003 by EXP
-	Version: 0.01 (08.07.2003)
-
-
+The file info.dat should contain at least the following 3 lines:
+    (C) 2003 by EXP
+    Version: 0.01 (08.07.2003)
 
 1. copyright of the template author, you may include your email address here
-
 2. version number and date
-
 3. one empty line
 
 The rest may be used for a short description of the template.
+Please do not include the changelog in your info.dat file, instead
+create a seperate changelog.txt file and put your changelog there.
 
+Please also note that the content of the info.dat will be displayed on
+the AniDB MyList Export Page, so please make sure that your additional info
+is acutally of interest to AniDB users who are trying to decide which theme to use.
 
-
-Please do not include the changelog in your info.dat file.
-
-Instead create a seperate changelog.txt file and put your changelog there.
-
-
-
-Please also note that the content of the info.dat will be displayed on the AniDB MyList Export Page,
-
-so please make sure that your additional info is acutally of intrest to AniDB users who are trying to
-
-decide which theme to use.
-
-
-
-
-
-The export script will create the file (i.e.) mylist.htm and if anime.tpl was provided a folder "anime" where for each anime a file "a<animeid>.htm" will be created.
-
-This can be used to created a linked animelist instead of one huge single html file with all data in it.
-
-
+The export script will create the file (i.e.) mylist.htm and if anime.tpl was provided
+a folder "anime" where for each anime a file "a<animeid>.htm" will be created.
+This can be used to created a linked animelist instead of one huge single html file
+with all data in it.
 
 The tpl files are simple plaintext or html files. So just put normal html code in them.
 
+The export function uses the HTML::Template perl module to create the output.
+This means you have to use some special tags:
 
+Example 1:
+<tmpl_var name=data_anime_name> will be replaced with the value of the specified variable,
+in this case the anime name.
 
-The export function uses the HTML::Template perl module to create the output. This means you have to use some special tags:
-
-
-
-<tmpl_var name=data_anime_name>
-
-will be replaced with the value of the specified vairable, in this case the anime name
-
-
-
+Example 2:
 <tmpl_if name=status_anime_iswatched>
-
 anime is watched
-
 <tmpl_else>
-
 anime is unwatched
-
 </tmpl_if>
+This is a simple if/else statement. This would write "anime is watched" or "anime is unwatched"
+into the resulting html file. Note that you can only check if a variable is defined,
+it is not possible to compare values. All variables begining with status_ are meant
+to be used in ifs. They are either 0 or 1.
 
-this is a simple if/else statement.
-
-This would write "anime is watched" or "anime is unwatched" into the resulting html file.
-
-Note that you can only check if a variable is defined, it is not possible to compare values.
-
-All variables begining with status_ are meant to be used in ifs. They are either 0 or 1.
-
+Example 3:
 You can also used id variables, if the id is undef (0) they are false, otherwise they are true.
-
 The negation of <tmpl_if> is <tmpl_unless> i.e.
-
-
-
 <tmpl_unless name=status_anime_iswatched>
-
 anime is unwatched
-
 </tmpl_unless>
+This would only write "anime is unwatched" to the output file if status_anime_iswatched is 0.
+Note that this tag is closed with /tmpl_unless and not tmpl_if.
 
-This would only write "anime is unwatched" to the output file if status_anime_iswatched is 0. (note that this tag is closed with /tmpl_unless and not tmpl_if)
+Example 4:
+You can also check if a value is greater or smaller than something. i.e.
+<tmpl_if expr="data_file_audcnt > 1">multiple audio streams</tmpl_if>
 
-
-
+Example 5:
 You will also need loops to create a usefull template. What are loops?
-
-Well to create html tables there will be some parts of the html code (mostly table rows) which need to be repeated over and over again and filled with anime/ep/file info.
-
+Well, to create html tables there will be some parts of the html code (mostly table rows)
+which need to be repeated over and over again and filled with anime/ep/file info.
 This is specified like this:
-
-
-
 <table>
-
 <tmpl_loop name=loop_anime>
-
 <tr><td> <tmpl_var name=data_anime_name> </td></tr>
-
 </tmpl_loop>
-
 </table>
-
 This would create a table with a list of all anime titles.
+Take a look at the included themes for more examples.
 
-Take a look at the themes below for more examples.
+NOTE: the first and last lines in anime.tpl start/close a loop, this has internal reasons
+and you have to do this too, or your theme won't work.
 
+ADVICE: the best way to write your own theme might be to take one of the existing ones and edit it.
 
-
-NOTE: The first and last lines in anime.tpl start/close a loop, this has internal reasons and you have to do this too. Or your themes won't work.
-
-
-
-The best way to write your own theme might be to take one of the existing ones and edit it.
-
-
-
-Here is a list of available variables which you can use for tmpl_var tags in your themes. If something is missing, tell me and I'll add it:
-
-
+Here is a list of available variables which you can use for tmpl_var tags in your themes.
+If something is missing, tell me and I'll add it:
 
 Global Vars:
-
-  global_user - AnimeDB Username
-
-  global_date - Date of creation (i.e. 02.08.2003 12:18)
-
-  global_date_short - short date (i.e. 02.08.03)
-
-  global_animecount - Number of animes in list
-
-  global_epcount - Number of episodes in list
-
-  global_filecount - Number of files in list
-
-  global_bytecount - Overall size of all files in list in Bytes
-
-  global_bytecount_h - Same as global_bytecount but in kB,MB,GB,...
-
-  global_animedburl - Url to animedb, http://..../animedb.pl
-
-
-
+  global_user								        AniDB Username
+  global_date								        Date of creation (i.e. 02.08.2003 12:18)
+  global_date_short							    Short date of creation (i.e. 02.08.03)
+  global_animecount							    Number of animes in mylist
+  global_epcount							      Number of episodes in mylist
+  global_filecount							    Number of files in mylist
+  global_bytecount							    Overall size of all files in mylist in Bytes
+  global_bytecount_h						    Same as global_bytecount but in kB, MB, GB, ...
+  global_animedburl							    URL to animedb, http://..../animedb.pl
+  global_userstat_animeadded				Anime entries added by user to db
+  global_userstat_epsadded					Episode entries added by user to db
+  global_userstat_filesadded				Files added by user to db
+  global_userstat_groupsadded				Group entries added by user to db
+  global_userstat_lamefiles					Number of lame files user owns
+  global_userstat_lamefilesp				Percentage of lame files in mylist
+  global_userstat_independencep			Percentage of independence (http://wiki.anidb.info/w/AniDB_Stats:Most_Independent_User)
+  global_userstat_leechp					  Percentage of leechness (http://wiki.anidb.info/w/AniDB_Stats:Biggest_Leech0r)
+  global_userstat_reviews					  Total reviews written by user
+  global_userstat_votes						  Number of votes issued by user
+  global_userstat_totalviewedp			Percentage of viewed episodes, from all db
+  global_userstat_totalownedp				Percentage of owned episodes, from all db
+  global_userstat_ownviewedp				Percentage of viewed episodes, from mylist
+  global_userstat_viewedepcnt				Number of viewed episodes, from mylist
 
 
 Loops, Subloops and Loopdata:
 
-
-
-  loop_anime - Loop over all anime entries
-
-	data_anime_id
-
-	data_anime_eps
-
-	data_anime_year
-
-	data_anime_producer
-
-	data_anime_url
-
-	data_anime_other
-
-	data_anime_date
-
-	data_anime_date_short
-
-	data_anime_update
-
-	data_anime_update_short
-
-	data_anime_startdate
-
-	data_anime_startdate_short
-
-	data_anime_enddate
-
-	data_anime_enddate_short
-
-	data_anime_rating
-
-	data_anime_votes
-
-	data_anime_tmprating
-
-	data_anime_tmpvotes
-
-	data_anime_reviews
-
-	data_anime_reviewrating
-
-	data_anime_type_id
-
-	data_anime_type_name
-
-	data_anime_animenfoid
-
-	#the old animenfo id
-
-
-
-	data_anime_animenfoid2
-
-	#the additional new one
-
-
-
-	data_anime_animenfourl
-
-	#complete url (without <a href="">, just a plain url) to the animenfo page of this anime
-
-	
-
-	data_anime_animenfourl_name
-
-	#link name as displayed on anidb (i.e. "ID: 64" or "ID: 1235,rvvvjg")
-
-	
-
-	data_anime_my_eps
-
-	#number of non-special eps in mylist
-
-
-
-	data_anime_my_eps_special
-
-	#number of special eps in mylist
-
-
-
-	data_anime_my_eps_total
-
-	#number of non-special+special eps in mylist
-
-
-
-	data_anime_my_watchedeps
-
-	data_anime_my_watchedeps_special
-
-	data_anime_my_watchedeps_total
-
-	data_anime_my_unwatchedeps
-
-	data_anime_my_unwatchedeps_special
-
-	data_anime_my_unwatchedeps_total
-
-	data_anime_my_size
-
-	data_anime_my_size_h
-
-	status_anime_iscomplete
-
-	status_anime_iswatched
-
-	status_anime_genre_<genrename>
-
-	#i.e. status_anime_genre_action = 1, if the anime has genre action added
-
-	#note: genres are all lowercase and spaces are replaced with _
-
-
-
-	data_anime_name
-
-	#default anime title (mostly japanese romaji), always present
-
-
-
-	data_anime_title_jap_kanji
-
-	#anime title in japanese kanji, optional
-
-
-
-	status_anime_title_has_jap_kanji
-
-	data_anime_title_eng
-
-	#anime title in english, optional
-
-
-
-	status_anime_title_has_eng
-
-	data_anime_title_other
-
-	#anime title in another language, optional
-
-
-
-	status_anime_title_has_other
-
-
-
-	loop_anime_title_alias
-
-	#synonyms for this anime, note, the data_anime_name and data_anime_title_* titles are not included
-
-	#in this list!
-
-  		data_anime_title_alias_name
-
-
-
-	loop_anime_title_short
-
-		data_anime_title_short_name
-
-
-
-	status_anime_hasawards
-
-	data_anime_awardicons
-
-	#ready to use html string which displays the little award icons from anidb
-
-	#empty string if no awards are present
-
-	
-
-	loop_anime_award_types
-
-	#award types describe the types of awards which were assigned to this anime
-
-	#typically that would be AniDB TOP10 or ARC Awards 2003, however this is likely
-
-	#to be extended in the future without notice, your template should not depend on the id.
-
-		data_anime_award_type_id
-
-		data_anime_award_type_name
-
-		data_anime_award_type_img
-
-		#full html image tag
-
-	
-
-	loop_anime_awards
-
-	#these are the actual awards which are assigned to this anime
-
-	#these are things like the AniDB TOP10 award, ARC Best Anime, ARC Best Action Anime, ...
-
-	#again a template should not depend on the ids
-
-		data_anime_award_id
-
-		data_anime_award_name
-
-		data_anime_award_type
-
-		data_anime_award_url
-
-		#url assigned to this award, i.e. overview over all awards of this type
-
-		data_anime_award_picurl
-
-		#url to pic only		
-
-
-
-	loop_anime_genre
-
-		data_anime_genre_id
-
-		data_anime_genre_name
-
-
-
-	#if only one file is present for an anime the following variables will have the same
-
-	#values as the ones for that file, if there is more than one file and all files have
-
-	#the same mystate it will match those. in any other case the mystate is undef
-
-	data_anime_mystate
-
-	#undef=-1, unknown=0, on hdd=1, on cd=2, deleted=3, shared=4, release=5
-
-
-
-	data_anime_mystate_string
-
-	#gives the string representation (i.e. "unknown" or "on cd")
-
-
-
-	data_anime_mystate_icon
-
-	#gives the icon known from anidb (direct inet link to image, img tag already included)
-
-
-
-	status_anime_mystate_undef
-
-	status_anime_mystate_unknown
-
-	status_anime_mystate_onhdd
-
-	status_anime_mystate_oncd
-
-	status_anime_mystate_deleted
-
-	status_anime_mystate_shared
-
-	status_anime_mystate_release
-
-	
-
-	status_anime_isinwishlist
-
-    	data_anime_wishlist_type
-
-    	#(0="unknown / unfiled", 1="to watch", 2="to get", 3="blacklist"),
-
-    	
-
-    	data_anime_wishlist_type_name
-
-    	data_anime_wishlist_priority
-
-    	#(0="low", 1="medium", 3="high")
-
-    	
-
-    	data_anime_wishlist_priority_name
-
-    	data_anime_wishlist_comment
-
-
-
-    	status_anime_my_isvoted
-
-    	data_anime_my_vote
-
-    	status_anime_my_istmpvoted
-
-    	data_anime_my_tmpvote
-
-
-
-
-
-  loop_ep
-
-	data_ep_id
-
-	data_ep_epno
-
-	data_ep_name
-
-	data_ep_name_romaji
-
-	status_ep_hasname_romaji
-
-	data_ep_name_kanji
-
-	status_ep_hasname_kanji
-
-	data_ep_length
-
-	data_ep_aired
-
-	data_ep_aired_short
-
-	data_ep_other
-
-	data_ep_rating
-
-	data_ep_votes
-
-	data_ep_date
-
-	data_ep_date_short
-
-	data_ep_update
-
-	data_ep_update_short
-
-	data_ep_state
-
-	#EP_SPECIAL=1, EP_RECAP=2, EP_OP/END/CREDITS=4, (8 & 16 unused), EP_TRAILER=32, EP_PARODY=64, EP_OTHER=128
-	#note that the values can be added together, so 3 would be a special which is also a recap
-	#EP_SPECIAL, EP_OP/END/CREDITS, EP_TRAILER, EP_PARODY, EP_OTHER are exclusive
-
-
-	#status_ep_state_special
-
-	#status_ep_state_recap
-
-	#status_ep_state_op
-
-	#status_ep_state_end
-
-	#status_ep_iswatched
-
-	#status_ep_hasfile
-
-
-
-	#if only one file is present for an ep the following variables will have the same
-
-	#values as the ones for that file, if there is more than one file and all files have
-
-	#the same mystate it will match those. in any other case the mystate is undef
-
-	data_ep_mystate
-
-	#undef=-1, unknown=0, on hdd=1, on cd=2, deleted=3, shared=4, release=5
-
-
-
-	data_ep_mystate_string
-
-	#gives the string representation (i.e. "unknown" or "on cd")
-
-
-
-	data_ep_mystate_icon
-
-	#gives the icon known from anidb (direct inet link to image, img tag already included)
-
-
-
-	status_ep_mystate_undef
-
-	status_ep_mystate_unknown
-
-	status_ep_mystate_onhdd
-
-	status_ep_mystate_oncd
-
-	status_ep_mystate_deleted
-
-	status_ep_mystate_shared
-
-	status_ep_mystate_release
-
-
-
-
-
-  loop_file
-
-	data_file_id
-
-	data_file_size
-
-	#size in bytes with dots
-
-	data_file_size_plain
-
-	#plain size in bytes w/o dots
-
-
-
-	data_file_size_h
-
-	#size in MB i.e. "123 MB"
-
-
-
-	status_file_isgeneric
-
-	data_file_filetype
-
-	data_file_crc
-
-	data_file_md5
-
-	data_file_sha1
-
-	data_file_ed2k_link
-
-	data_file_ed2k_hash
-
-	data_file_ed2k_name
-
-	data_file_group_id
-
-	data_file_group_name
-
-	data_file_group_shortname
-
-	data_file_released
-
-	data_file_released_short
-
-	data_file_qual_id
-
-	data_file_qual_name
-
-	data_file_res_id
-
-	data_file_res_name
-
-	data_file_abitrate
-
-	data_file_acodec_id
-
-	data_file_acodec_name
-
-	data_file_vbitrate
-
-	data_file_vcodec_id
-
-	data_file_vcodec_name
-
-	data_file_lang_id
-
-	data_file_lang_name
-
-	data_file_sub_id
-
-	data_file_sub_name
-
-	data_file_type_id
-
-	data_file_type_name
-
-	data_file_other
-
-	data_file_date
-
-	data_file_date_short
-
-	data_file_update
-
-	data_file_update_short
-
-	data_file_storage
-
-	data_file_source
-
-	data_file_other
-
-	status_file_hascomment
-
-	data_file_viewdate
-
-	data_file_viewdate_short
-
-	data_file_state
-
-	#FILE_CRCOK=1, FILE_CRCERR=2, FILE_ISV2=4, FILE_ISV3=8,
-
-	#FILE_ISV4=16, FILE_ISV5=32
-
-
-
-	status_file_state_crcok
-
-	status_file_state_crcfailed
-
-	status_file_state_crcunverified
-
-	#(not status_file_state_crcok and not status_file_state_crcfailed implies
-
-	#status_file_state_crcunverified)
-
-	
-
-	status_file_state_isv2
-
-	status_file_state_isv3
-
-	status_file_state_isv4
-
-	status_file_state_isv5
-
-	status_file_iswatched
-
-	data_file_state_versionname
-
-	data_file_mystate
-
-	#unknown=0, on hdd=1, on cd=2, deleted=3
-
-
-
-	data_file_mystate_string
-
-	#gives the string representation (i.e. "unknown" or "on cd")
-
-
-
-	data_file_mystate_icon
-
-	#gives the icon known from anidb (direct inet link to image, img tag already included)
-
-
-
-	status_file_mystate_unknown
-
-	status_file_mystate_onhdd
-
-	status_file_mystate_oncd
-
-	status_file_mystate_deleted
-
-	status_file_mystate_shared
-
-	status_file_mystate_release
-
-
-
-	data_file_myfilestate
-
-	#(0=normal, 1=invalid crc, 2=self edited,
-
-        #10=self ripped, 11=on dvd, 12=on vhs, 13=on tv, 14=theater,
-
-        #100=other)
-
-        
-
-        data_file_myfilestate_string
-
-        data_file_myfilestate_icon
-
-        status_file_myfilestate_normal
-
-        status_file_myfilestate_invalidcrc
-
-        status_file_myfilestate_selfedited
-
-        status_file_myfilestate_selfripped
-
-        status_file_myfilestate_ondvd
-
-        status_file_myfilestate_onvhs
-
-        status_file_myfilestate_ontv
-
-        status_file_myfilestate_theater
-
-        status_file_myfilestate_other
-
-        
+  loop_anime							        # loop for anime entries
+    data_anime_id							      AniDB ID for anime entry
+    data_anime_eps							    Total of episodes
+    data_anime_year							    Year of release/airing
+    data_anime_producer						  [deprecated] Producer
+    data_anime_url							    Official home page
+    data_anime_other						    Anime synopsis
+    data_anime_date							    Date of addition to db
+    data_anime_date_short					  Short date of addition to db
+    data_anime_update						    Last update date (in unix time format)
+    data_anime_update_short					Last update short date
+    data_anime_startdate					  Start airing/release date
+    data_anime_startdate_short			Short start airing/release date
+    data_anime_enddate						  End airing/release date
+    data_anime_enddate_short				Short end airing/release date
+    data_anime_rating						    Average rating
+    data_anime_votes						    Total votes
+    data_anime_tmprating					  Average temporal rating
+    data_anime_tmpvotes						  Total temporal votes
+    data_anime_reviewrating					Average review rating
+    data_anime_reviews						  Number of reviews
+    data_anime_type_id						  Anime type ID (see ids.txt)
+    data_anime_type_name					  Anime type name
+    data_anime_animenfoid					  Old AnimeNFO ID (i.e. 954)
+    data_anime_animenfoid2					New AnimeNFO ID (i.e. klmgzk)
+    data_anime_animenfourl					Complete AnimeNFO url (without <a href="">, just a plain url)
+    data_anime_animenfourl_name			AnimeNFO link name as displayed at AniDB (i.e. "ID: 954" or "ID: 954,klmgzk")
+    data_anime_annid						    Anime News Network ID
+    status_anime_ann_listed					Anime News Network is listed (0/1)
+    data_anime_annurl						    Anime News Network url
+    data_anime_allcinemaid					AllCinema ID
+    status_anime_allcinema_listed		All Cinema is listed (0/1)
+    data_anime_allcinemaurl					AllCinema url
+    data_anime_animeplanetid				Anime-Planet ID (i.e. 415)
+	status_anime_animeplanet_listed		Anime-Planet is listed (0/1)
+    data_anime_animeplaneturl				Anime-Planet Recomendation url
+
+    loop_anime_genren 					  # loop for new genres (categories)
+      data_anime_genren_id					Genre (Category) ID
+      data_anime_genren_name				Genre (Category) name
+      data_anime_genren_parentid		Parent genre (category) ID
+      data_anime_genren_ishentai		This genre (category) is hentai related
+
+    loop_anime_tag 						    # loop for user defined tags
+      data_anime_tag_id					  	Tag ID
+      data_anime_tag_name				  	Tag name
+      data_anime_tag_date				  	Date of creation
+
+    loop_anime_company					  # loop for all involved companies
+      data_anime_company_id					Company ID
+      data_anime_company_name				Company name
+      data_anime_company_shortname	Company short name
+      data_anime_company_othername	Company other name
+      data_anime_company_type				Company type ID (see ids.txt)
+      data_anime_company_url				Company url
+      data_anime_company_picurl			Company logo url
+      data_anime_company_aptype			Company role for the anime (see ids.txt)
+
+    data_anime_my_eps						    Number of non-special episodes in mylist
+    data_anime_my_eps_special				Number of special episodes in mylist
+    data_anime_my_eps_total					Number of non-special and special episodes in mylist
+    data_anime_my_watchedeps				Number of watched episodes
+    data_anime_my_watchedeps_special		Number of watched specials
+    data_anime_my_watchedeps_total	Total number of watched episodes and specials
+    data_anime_my_unwatchedeps			Number of unwatched episodes
+    data_anime_my_unwatchedeps_special	Number of unwatched specials
+    data_anime_my_unwatchedeps_total		Total number of unwatched episodes and specials
+    data_anime_my_size						  Overall size of all anime files in mylist in Bytes
+    data_anime_my_size_h					  Same as data_anime_my_size but in kB, MB, GB, ...
+    status_anime_iscomplete					Anime is complete (0/1)
+    status_anime_iswatched					Anime is completely watched (0/1)
+    status_anime_genre_<genrename>	[deprecated] i.e. status_anime_genre_action = 1,
+                                      if the anime has genre action added. Genres are
+                                      all lowercase and spaces are replaced with _
+    data_anime_name							    Default anime title (mostly japanese romaji), always present
+    data_anime_title_jap_kanji			Anime title in japanese kanji, optional
+    status_anime_title_has_jap_kanji	Has kanji title (0/1)
+    data_anime_title_eng					  Anime title in english, optional
+    status_anime_title_has_eng			Has english title (0/1)
+    data_anime_title_other					Other official title in another language, optional
+    status_anime_title_has_other		Has other title (0/1)
+
+    loop_anime_title_alias				# loop for synonyms
+      data_anime_title_alias_name		Synonyms (data_anime_name and data_anime_title_* are not included)
+
+    loop_anime_title_short				# loop for short titles
+      data_anime_title_short_name		Short titles
+
+    status_anime_hasawards					Has awards (0/1)
+    data_anime_awardicons					  Ready to use html string which displays the little award icons from AniDB.
+                                      Empty string if no awards are present.
+
+    loop_anime_award_types				# loop for award types
+      # Award types describe the types of awards which were assigned to this anime.
+      # Typically that would be AniDB TOP10 or ARC Awards, however this is likely
+      # to be extended in the future without notice, your template should not depend on the id.
+      data_anime_award_type_id			Award type ID
+      data_anime_award_type_name		Award type name
+      data_anime_award_type_img			Award type image (full html image tag)
+
+    loop_anime_awards					    # loop for Awards
+      # These are the actual awards which are assigned to this anime.
+      # These are things like the AniDB TOP10 award, ARC Best Anime, ARC Best Action Anime, ...
+      # Again a template should not depend on the ids.
+      data_anime_award_id					  Award ID
+      data_anime_award_name					Award name
+      data_anime_award_type					Award type
+      data_anime_award_url					Award URL (url assigned to this award, i.e. overview over all awards of this type)
+      data_anime_award_picurl				URL to pic only
+
+    loop_anime_genre					    # loop of anime genres (old system)
+      data_anime_genre_id					  Genre ID
+      data_anime_genre_name					Genre name
+
+    # If only one file is present for an anime the following variables will have the same
+    # values as the ones for that file, if there is more than one file and all files have
+    # the same mystate it will match those. in any other case the mystate is undef
+    data_anime_mystate						  State of anime files
+                                      # undef=-1, unknown=0, on hdd=1, on cd=2, deleted=3
+    data_anime_mystate_string				String representation of state (i.e. "unknown" or "on cd")
+    data_anime_mystate_icon					AniDB url to state icon (img tag already included)
+    status_anime_mystate_undef			Has undefined state (0/1)
+    status_anime_mystate_unknown		Has unknwon state (0/1)
+    status_anime_mystate_onhdd			Has onhdd state (0/1)
+    status_anime_mystate_oncd				Has oncd state (0/1)
+    status_anime_mystate_deleted		Has deleted state (0/1)
+
+    status_anime_isinwishlist				Anime is in wishlist
+    data_anime_wishlist_type				Wishlist type ID
+                                    # (0="unknown / unfiled", 1="to watch", 2="to get", 3="blacklist"),
+    data_anime_wishlist_type_name		Wishlist type name
+    data_anime_wishlist_priority		Wishlist priority (0="low", 1="medium", 3="high")
+    data_anime_wishlist_priority_name		Wishlist priority string representation
+    data_anime_wishlist_comment			Wishlist comment
+    status_anime_my_isvoted					User voted for this anime (0/1)
+    data_anime_my_vote						  User vote for this anime
+    data_anime_my_vote_date         User vote date
+    data_anime_my_vote_date_short   User vote date (short)
+    status_anime_my_istmpvoted			User temporally voted for this anime (0/1)
+    data_anime_my_tmpvote					  User temporal vote for this anime
+    data_anime_my_tmpvote_date      User temporal vote date for this anime
+    data_anime_my_tmpvote_date_short  User temporal vote date for this anime (short)
+
+    loop_ep								        # loop for episodes
+      data_ep_id							      Episode ID (as in DB)
+      data_ep_epno							    Episode number
+      data_ep_name							    Episode name
+      status_ep_hasname_romaji			Has romaji episode name (0/1)
+      data_ep_name_romaji					  Romaji episode name
+      status_ep_hasname_kanji				Has kanji episode name (0/1)
+      data_ep_name_kanji					  Kanji episode name
+      data_ep_length						    Episode lenght, in minutes
+      data_ep_aired							    Date of first airing
+      data_ep_aired_short					  Short date of first airing
+      data_ep_other							    Other information related to episode
+      data_ep_rating						    Average rating
+      data_ep_votes							    Total votes
+      data_ep_date							    Date of addition to DB
+      data_ep_date_short					  Short date of addition to DB
+      data_ep_update						    Last update date
+      data_ep_update_short					Last update short date
+      data_ep_state							    Episode state
+                                      # 1=Special, 2=Recap, 4=OP/ED/Credits, 32=Trailer, 64=Parody, 128=Others
+                                      # Note that the values can be added together, so 3 would be a special
+                                      # which is also a recap. 4, 32, 64 and 128 are exclusive
+      status_ep_state_special				Episode is a special (0/1)
+      status_ep_state_recap					Episode is a recap (0/1)
+      status_ep_state_op					  Episode is an opening (0/1)
+      status_ep_state_end					  Episode is an ending (0/1)
+      status_ep_iswatched					  Episode was watched
+      status_ep_hasfile						  Episode has files (0/1)
+ 
+      # If only one file is present for an ep the following variables will have the same
+      # values as the ones for that file, if there is more than one file and all files have
+      # the same mystate it will match those. in any other case the mystate is undef
+      data_ep_mystate						    State of anime episode
+                                      # undef=-1, unknown=0, on hdd=1, on cd=2, deleted=3
+      data_ep_mystate_string				String representation of state (i.e. "unknown" or "on cd")
+      data_ep_mystate_icon					AniDB url to state icon (img tag already included)
+      status_ep_mystate_undef				Has undefined state (0/1)
+      status_ep_mystate_unknown			Has unknown state (0/1)
+      status_ep_mystate_onhdd				Has onhdd state (0/1)
+      status_ep_mystate_oncd				Has oncd state (0/1)
+      status_ep_mystate_deleted			Has deleted state (0/1)
+
+      loop_file							      # loop for files
+        data_file_id						    File ID (as in DB)
+        data_file_size						  File size in bytes (with dots)
+        data_file_size_plain				File size in bytes (without dots)
+        data_file_size_h					  Same as data_file_size_plain but in MB
+        status_file_isgeneric				Is a generic (0/1) (http://wiki.anidb.info/w/Files:Generic_files)
+        data_file_filetype					File type (extension, i.e. avi or mkv)
+        data_file_crc						    CRC for file
+        data_file_md5						    MD5 hash for file
+        data_file_sha1						  SHA1 hash for file
+        data_file_ed2k_link					Full ed2k link
+        data_file_ed2k_hash					ed2k hash for file
+        data_file_ed2k_name					ed2k file name
+        data_file_group_id					ID for the group who released the file
+        data_file_group_name				Group name
+        data_file_group_shortname		Short group name
+        data_file_released					Date of release
+        data_file_released_short		Short date of release
+        data_file_qual_id					  Quality ID
+        data_file_qual_name					Quality string representation
+        data_file_res_name					Video resolution
+        data_file_vidcnt					  Count for video streams (1 for media files, 0 for others)
+        data_file_ar					    	Aspect ratio
+        data_file_fps						    Frames per second
+        data_file_vbitrate					Video bit rate
+        data_file_vcodec_id					Video codec ID (see ids.txt)
+        data_file_vcodec_name				Video codec name
+        data_file_vflags					  Video Flags (see ids.txt)
+        data_file_audcnt					  Count for audio streams (for now just 2)
+        data_file_abitrate					Audio bitrate
+        data_file_acodec_id					Audio codec ID (see ids.txt)
+        data_file_acodec_name				Audio codec name
+        data_file_chantype					Number of audio channels (see ids.txt)
+        data_file_lang_id					  Language ID (see ids.txt)
+        data_file_lang_name					Language name
+        data_file_abitrate2					Audio bitrate, for second stream
+        data_file_acodec_id2				Audio codec ID (see ids.txt), for second stream
+        data_file_acodec_name2			Audio codec name, for second stream
+        data_file_chantype2					Number of audio channels (see ids.txt), for second stream
+        data_file_lang_id2					Language ID (see ids.txt), for second stream
+        data_file_lang_name2				Language name, for second stream
+        data_file_subcnt					  Count for subtitle streams (for now just 2)
+        data_file_sflags					  Subtitle flags describing the kind of subtitles (see ids.txt)
+        data_file_stype						  Subtitle type (see ids.txt)
+        data_file_sub_id					  Subtitle language ID (see ids.txt)
+        data_file_sub_name					Subtitle language name
+        data_file_sflags2					  Subtitle flags describing the kind of subtitles (see ids.txt), for second stream
+        data_file_stype2					  Subtitle type (see ids.txt), for second stream
+        data_file_sub_id2					  Subtitle language ID (see ids.txt), for second stream
+        data_file_sub_name2					Subtitle language name, for second stream
+        data_file_length				  	File length in seconds
+        data_file_type					  	File type (see ids.txt)
+        data_file_type_id				  	File source ID
+        data_file_type_name					File source name
+        data_file_ldate             File date of addition to Mylist
+        data_file_ldate_short       File date of addition to Mylist (short)
+        data_file_date						  Date of addition to DB
+        data_file_date_short				Short date of addition to DB
+        data_file_update					  Last update date
+        data_file_update_short			Last update short date
+        data_file_storage					  User defined string for storage
+        data_file_source				  	User defined string for source
+        status_file_hascomment			Has comment (0/1)
+        data_file_other						  File comments
+        data_file_viewdate					Date when viewed
+        data_file_viewdate_short		Short date when viewed
+        data_file_state						  File state
+                                      # 1=CRC ok, 2=CRC error, 4=is v2, 8=is v3, 16=is v4, 32=is v5
+                                      # 64=is uncensored, 128=is censored
+        status_file_state_crcok			File has verified CRC (0/1)
+        status_file_state_crcfailed	File has failed CRC (0/1)
+        status_file_state_crcunverified		File has unverified CRC (0/1)
+        status_file_state_isv2			File is second release (0/1)
+        status_file_state_isv3			File is third release (0/1)
+        status_file_state_isv4			File is fourth release (0/1)
+        status_file_state_isv5			File is fifth release (0/1)
+        status_file_iswatched				File was watched (0/1)
+        data_file_state_versionname	File release version in string (including v1)
+        data_file_mystate					  File state
+                                      # unknown=0, on hdd=1, on cd=2, deleted=3
+        data_file_mystate_string		String representation of file state (i.e. "unknown" or "on cd")
+        data_file_mystate_icon			AniDB url to state icon (img tag already included)
+        status_file_mystate_unknown	Has unknwon state (0/1)
+        status_file_mystate_onhdd		Has onhdd state (0/1)
+        status_file_mystate_oncd		Has oncd state (0/1)
+        status_file_mystate_deleted	Has deleted state (0/1)
+        data_file_myfilestate				User file mystate ID
+                                      # 0=normal, 1=invalid crc, 2=self edited,
+                                      # 10=self ripped, 11=on dvd, 12=on vhs, 13=on tv, 14=theater,
+                                      # 20=filler ep, 100=other
+        data_file_myfilestate_string	String representation of user file mystate ID
+        data_file_myfilestate_icon		AniDB url to mystate icon (img tag already included)
+        status_file_myfilestate_normal	File is normal mystate (0/1)
+        status_file_myfilestate_invalidcrc	File is invalidcrc mystate (0/1)
+        status_file_myfilestate_selfedited	File is sefedited mystate (0/1)
+        status_file_myfilestate_selfripped	File is selfripped mystate (0/1)
+        status_file_myfilestate_ondvd	  File is ondvd mystate (0/1)
+        status_file_myfilestate_onvhs		File is onvhs mystate (0/1)
+        status_file_myfilestate_ontv		File is ontv mystate (0/1)
+        status_file_myfilestate_theater	File is theater mystate (0/1)
+        status_file_myfilestate_other		File is other mystate (0/1)

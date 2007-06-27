@@ -1,76 +1,58 @@
 SHORT ANIDB TEMPLATE FAQ
+VERSION: 0.03 - 26.06.2007
+(C) 2003-2007 by EXP
 
-VERSION: 0.02 - 28.08.2003
+Get new Versions here: http://forum.anidb.net/viewtopic.php?t=429
+Wiki Page: http://wiki.anidb.info/w/Mylist_export_template_guidelines
 
+----------------------------------------------------------------------------------------------
 
-
----------------------------------
-
-
-
+1. What are Mylist Exports?
+2. Can i create my own template?
+3. What are the requirements for building a template?
 1. Can I include images, external stylesheets/javascript files with my templates?
-
-2. How do i create files other than .htm ?
-
+2. How do i create files other than .htm?
 3. What is that info.dat file?
 
-...
+
+1. What are Mylist Exports?
+
+  Mylist exports are a way to export your mylist, providing offline browsing capabilites, it's 
+  like a snapshot of the state of your mylist at the moment you requested the export. 
+
+2. Can i create my own template?
+
+  Yes, this page should help you starting with your own template. 
+
+3. What are the requirements for building a template?
+
+  Well, the only true *requirement* is a text editor, though if you wan't to test your template
+  before submiting you will need Perl (v5.8.8+) to use the SDK. 
+
+4. Can I include images, external stylesheets/javascript files with my templates?
+
+  Yes, you can copy stylesheet or javascript files directly into the template directory. 
+  However images should be placed in a seperate zip file and will be hosted on anidb and linked
+  on the export page for seperate download. 
+  You also can't include subdirectories, you have to copy the files directly into the directory
+  of your template. 
+
+5. How do i create files other than .htm?
+
+  Take a look at the csv-minimal theme. You need to create a file called extension.dat which only
+  contains the desired extension, _without_ the dot! 
+
+6. What is that info.dat file?
+
+  It's ment to provide the user with a short info about the template. The content should not be
+  too long but is otherwise left to the author of the template. 
+  However, it is strongly recommended to begin the file with 3 special lines:
+
+    (C) 2003 by EXP 
+    Version: 0.01 (08.07.2003) 
 
 
-
----------------------------------
-
-
-
-1. Can I include images, external stylesheets/javascript files with my templates?
-
-	Yes, you can copy stylesheet or javascript files directly into the template directory.
-
-	However images should be placed in a seperate zip file and will be hosted on anidb and linked
-
-	on the export page for seperate download. The images will _not_ be automatically included
-
-	into the tgz file the user downloads.
-
-	You also can't include subdirectories, you have to copy the files directly into the
-
-	directory of your template.
-
-
-
-
-
-2. How do i create files other than .htm ?
-
-	Take a look at the csv-minimal theme. You need to create a file called extension.dat
-
-	which only contains the desired extension, _without_ the dot!
-
-
-
-
-
-3. What is that info.dat file?
-
-	It's meant to provide the user with a short info about the template. The content should
-
-	not be too long but is otherwise left to the author of the template.
-
-	However, it is strongly recommended to begin the file with 3 special lines:
-
-		(C) 2003 by EXP
-		Version: 0.01 (08.07.2003)
-		
-
-	1. copyright of the template author, you may include your email address here
-
-	2. version number and date
-
-	3. one empty line
-
-
-
-
-
-...
+    1. copyright of the template author, you may include your email address here 
+    2. version number and date 
+    3. one empty line 
 

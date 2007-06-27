@@ -1,113 +1,214 @@
-AniDB category ids.
-last updated: 24.09.2004
-
-should this list be outdated you can also check the html
-code of the corresponding dropdowns on AniDB.
-
-Anime Cathegories
-1 	unknown
-2 	TV
-3 	OVA
-4 	Movie
-6 	Web
-5 	Other
-
-Audio Languages
-1 	unknown
-2 	japanese
-4 	english
-20 	arabic
-3 	chinese
-6 	french
-5 	german
-8 	italian
-17 	korean
-18 	polish
-15 	russian
-9 	spanish
-19 	swedish
-10 	dual (jap/eng)
-12 	dual (jap/ger)
-13 	dual (jap/rus)
-11 	dual (jap/span)
-14 	dual (eng/rus)
-
-Sub Languages
-1 	unknown
-2 	none
-3 	english
-14 	arabic
-15 	brasilian
-9 	chinese
-21 	czech
-16 	danish
-6 	dutch
-17 	finnish
-7 	french
-4 	german
-18 	hebrew
-5 	italian
-8 	japanese
-13 	korean
-12 	polish
-19 	portuguese
-11 	spanish
-20 	swedish
-10 	other
-
-Audio Codecs
-1 	unknown
-2 	AC3
-3 	DivX Audio
-4 	MP3 UNK
-5 	MP3
-6 	MP3 VBR
-7 	MSAudio
-8 	Ogg Vorbis
-9 	AAC
-10 	PCM
-
-Video Codecs
-1 	unknown
-2 	DivX UNK
-3 	DivX3
-5 	DivX4
-7 	DivX5
-17 	XviD
-9 	MPG1 (vcd)
-10 	MPG2 (svcd)
-11 	MPG4
-18 	MS MP4x
-12 	ASF
-19 	WMV9
-13 	MOV
-14 	RM (also ram)
-20 	RV9
-15 	Vivo
-21 	IV5
-16 	DVD
-
-Quality Ratings
-1 	unknown
-2 	very high
-3 	high
-4 	med
-5 	low
-6 	very low
-7 	corrupted
-8 	eyecancer
-
-File Source Type
-1 	unknown
-2 	camcorder
-3 	TV
-5 	DTV
-4 	VHS
-9 	VCD
-8 	SVCD
-6 	LD
-7 	DVD
-10 	HKDVD
-11 	www
-
+AniDB category IDs
+last updated: 20.06.2007
+
+Should this list be outdated you can also check
+the HTML code of the corresponding dropdowns at AniDB.
+Also check http://wiki.anidb.info/w/Mylist_export_template_guidelines
+for a more up to date version.
+----------------------------------------------------------------------------------------------
+
+Anime Categories
+1 		unknown
+2 		TV
+3 		OVA
+4 		Movie
+6 		Web
+5 		Other
+6		  TV Special
+
+All Languages (both Audio and Subs use the same ids)
+1 		unknown
+2 		japanese
+3 		chinese (unspecified)
+4 		english
+5 		german
+6 		french
+8 		italian
+9 		spanish
+#10 	dual (jap/eng)			(not used anymore)
+#11 	dual (jap/span)			(not used anymore)
+#12 	dual (jap/ger)			(not used anymore)
+#13 	dual (jap/rus)			(not used anymore)
+#14 	dual (eng/rus)			(not used anymore)
+15 		russian
+17 		korean
+18 		polish
+19 		swedish
+20 		arabic
+21		portuguese
+23		norwegian
+25		brazilian
+26		catalan
+27		czech
+28		danish
+29		dutch
+30		finish
+31		greek
+32		hebrew
+33		hungarian
+34		instrumental			(only on Audio Languages)
+35		lithuanian
+37		thai
+38		turkish
+41		chinese (mandarin)		(not in Sub Languages)
+42		chinese (cantonese)		(not in Sub Languages)
+43		taiwanese
+58		other
+61		romanian
+62		malay
+63		slovak
+64		slovenian
+65		tartar
+67		latvian
+68		georgian
+
+File Types
+10		video file
+20		subtitle file
+30		audio file
+100		other
+
+Audio Codecs
+1 		unknown
+2 		AC3
+3 		WMA (also DivX Audio)
+#4 		MP3 UNK	(not used anymore)
+5 		MP3 CBR
+6 		MP3 VBR
+7 		MSAudio
+8 		Vorbis (Ogg Vorbis)
+9 		AAC
+10 		PCM
+11		MP2
+13		DTS
+
+Audio Types
+10		normal audio
+20		commentary
+30		fandub
+40		alternative voiceover
+100		other
+
+Channel Types
+10		1.0 - mono
+20		2.0 - stereo
+30		4.0 - dolby surround
+40		5.1 - 5.1 surround
+50		6.1 - 6.1 surround
+60		7.1 - 7.1 surround
+100		other
+200		unknown
+
+Subtitle types
+10		hard sub
+20		soft sub
+30		supplementary soft sub (i.e. sign translations)
+100		other
+200		unknown
+
+Subtitle Flags (bits)
+0		none
+1		additional explanations 
+2		dubsubbed
+4		hearing impaired subs 
+8		image subs
+16		karaoke subbed 
+32		signs translated 
+64		styled subs
+128		subs for commentary audio stream 
+256		unstyled subs
+
+Video Flags (bits)
+0		none
+1		anamorphic
+2		wrong aspect ratio
+4		variable frame rate
+8		clean video (no hardsubs...)
+
+Video Codecs
+1 		unknown
+2 		DivX UNK
+3 		DivX3
+5 		DivX4
+7 		DivX5 (also DivX6)
+9 		MPEG-1
+10 		MPEG-2
+11 		ASP Other
+12 		Other (non-ASP)
+#13 	MOV							(not used anymore)
+14 		RealVideo Other
+#15 	Vivo						(not used anymore)
+#16 	DVD							(not used anymore)
+17 		XviD
+18 		MS MP4x (also WMV1/2)
+19 		WMV9 (also WMV3)
+20 		RealVideo 9/10 (also RV40)
+#21 	IV5							(not used anymore)
+22		H264/AVC
+
+Quality Ratings
+1 		unknown
+2 		very high
+3 		high
+4 		med
+5 		low
+6 		very low
+7 		corrupted
+8 		eyecancer
+
+File Source Type
+1 		unknown
+2 		camcorder
+3 		TV
+5 		DTV
+4 		VHS
+9 		VCD
+8 		SVCD
+6 		LD
+7 		DVD
+10 		HKDVD
+11 		www
+
+Aspect Ratio Ids
+10		4:3
+20		16:9
+30		1.66:1
+40		1.85:1
+50		2.00:1
+60		2.21:1
+70		2.35:1
+100		other
+200		unknown
+
 File extensions do not have ids
+
+Company Ids
+10		Company
+20		Organization
+30		Individual
+
+Company Role
+10		Financial Production
+20		Animation Production
+30		Original Story
+40		Music Production
+50		Animation Co-Production
+500		Original Work
+510		Production
+520		Production Assistance
+530		Production Studio
+540		Work
+550		Work Assistance
+560		Work Studio
+570		Animation
+580		Animation Work
+590		Animation Work Assistance
+600		Music Work
+610		Photography
+620		Animation Assistance
+630		Publication
+640		Music Work Assistance
+650		Music Assistance
+660		Music Production
+670		Assistance/Cooperation
+1000	Unknown Relation
