@@ -36,13 +36,15 @@ def get_css(link):
 def get_url(css,link):
     for line in css.readlines():
         if line.find('@import')>=0:
-            i = line.find('"') + 1
-            j = line.rfind('"')
-            stuff = line[i:j].replace("'","").replace('"','')
-            if not stuff.find(':') >0:
-                root,crap = link.rsplit('/',1)
-                newlink = root + '/' + stuff
-            get_css(newlink)
+            if not line.startswith('/*'):
+                i = line.find('"') + 1
+                j = line.rfind('"')
+                stuff = line[i:j].replace("'","").replace('"','')
+                if not stuff.find(':') >0:
+                    root,crap = link.rsplit('/',1)
+                    newlink = root + '/' + stuff
+                get_css(newlink)
+            
         if line.find('url(')>0:
             i = line.find('(') + 1
             j = line.find(')')
