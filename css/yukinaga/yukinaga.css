@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* aniDB CSS Document, YukiNaga by dizzy */
+
+body{
+	background-color: #aed5da;
+	color: #000000;
+	font-family: Tahoma, Verdana, Arial;
+	font-size: 13px;
+	margin: 0px;
+	background-image: url(images/top_bg.gif);
+	background-repeat: repeat-x;
+	background-position: 0px 0px;
+}
+
+ul, li{
+	margin: 0px;
+}
+
+form{
+	margin: 0px;
+}
+
+#layout-nav{
+	margin-top: 0px;
+	padding-top: 0px;
+	background-image: url(images/top_yuki.jpg);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+#layout-menu{
+	margin-top: 225px;
+	float: left;
+	width: 200px;
+}
+
+#layout-search{
+	float: right;
+	background-image: url(images/top_search_bg.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	height: 225px;
+}
+
+#layout-content{
+	float: left;
+	padding-left: 200px;
+}
+
+.rightbar{
+	float: right;
+	width: 200px;
+}
