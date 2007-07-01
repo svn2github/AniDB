@@ -96,6 +96,10 @@ div.mylist_menu ul.filters:before {
 div.mylist_menu ul.state:before {
 	content: "Show only";
 }
+div.mylist_menu ul.animecat:before {
+	content: "Types";
+}
+div.mylist_menu ul.animecat:before,
 div.mylist_menu ul.state:before,
 div.mylist_menu ul.filters:before {
 	text-transform: none;
@@ -110,12 +114,14 @@ div.mylist_menu ul.filters:before {
 div.mylist_menu ul {
 	font-size: 0.95em;
 }
+div.mylist_menu ul.animecat,
 div.mylist_menu ul.state,
 div.mylist_menu ul.filters {
 	background: #eaf6ff;
 	border: 1px solid #c0e0f9;
 	margin-bottom: 1em;
 }
+div.mylist_menu ul.animecat li,
 div.mylist_menu ul.state li,
 div.mylist_menu ul.filters li {
 	border-top: 0;
