@@ -11,20 +11,60 @@ $export::VERSION = "0.07";	#26.06.2007
 ##INIT
 ##
 
+my $theme;
+
 #SUBs
+
+sub recurse_dir 
+{
+  my($path) = @_;
+  my $basedir = $main::themedir.'/'.$theme;
+  $path .= '/' if($path !~ /\/$/);
+  for my $f (glob($path.'*')) {
+    my $file = $f;
+    $file =~ s/($basedir)//mgi;
+    my $fname = substr($f,rindex($f,'/')+1,length($f));
+    if( -d $f) {
+      mkdir($main::outdir.'/'.$file);
+      recurse_dir($f);
+    } else {
+      if ( ($fname eq ".") || ($fname eq "..") || ($fname eq "mylist.tpl") || ($fname eq "anime.tpl") || ($fname eq "extension.dat") || ($fname eq "info.dat"))
+      {
+        next;
+      }
+      elsif ( $f =~ /.+?\~/ )
+      {
+        next;
+      }
+      copy($f, $main::outdir.'/'.$file);
+    }
+  }
+}
+
+sub cleanup {
+  my $dir = shift;
+  local *DIR;
+
+  opendir DIR, $dir or die "opendir $dir: $!";
+  my $found = 0;
+  while ($_ = readdir DIR) {
+    next if /^\.{1,2}$/;
+    my $path = "$dir/$_";
+    unlink $path if -f $path;
+    cleanup($path) if -d $path;
+  }
+  closedir DIR;
+  rmdir $dir or print "error - $!";
+}
 
 sub do_export
 {
-	my $theme = lc $_[0];
+	$theme = lc $_[0];
 
 	#clean dir
 	print " * cleaning output directory...";
-	if (-d "$main::outdir/anime")
-	{
-		unlink(<$main::outdir/anime/*.*>);
-		rmdir("$main::outdir/anime");
-	}
-	unlink(<$main::outdir/*.*>);
+  &cleanup($main::outdir);
+  mkdir($main::outdir);
 	print " done.\n";
 
 	print " * parsing mylist.tpl...";
@@ -40,24 +80,7 @@ sub do_export
 	}
 
 	print " * copying additional files...";
-	opendir(TDIR,$main::themedir.'/'.$theme);
-	while (my $f = readdir(TDIR))
-	{
-		if ( ($f eq ".") || ($f eq "..") || ($f eq "mylist.tpl") || ($f eq "anime.tpl") || ($f eq "extension.dat") || ($f eq "info.dat"))
-		{
-			next;
-		}
-    elsif ( $f =~ /.+?\~/ )
-    {
-      next;
-    }
-		elsif (-d $main::themedir.'/'.$theme.'/'.$f)
-		{
-			next;
-		}
-		copy($main::themedir.'/'.$theme.'/'.$f, $main::outdir.'/'.$f);
-	}
-	closedir(TDIR);
+  &recurse_dir($main::themedir.'/'.$theme);
 	print " done.\n";
 }
 
@@ -79,6 +102,7 @@ sub create_tpl
 	);
 	
   $tpl->param("global_user" => "test");
+  $tpl->param("global_user_id" => "32");
 	$tpl->param("global_date" => "26.06.2007 12:00");
 	$tpl->param("global_date_short" => "26.06.07");
 	$tpl->param("global_animedburl" => "http://anidb.info/perl-bin/animedb.pl");

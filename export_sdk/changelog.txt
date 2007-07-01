@@ -1,11 +1,72 @@
 AnimeDB Template SDK - ChangeLog
-Version: 0.11 - 26.06.2007
+Version: 0.12 - 02.07.2007
 (C) 2003-2007 by EXP
 
 Get new Versions here: http://forum.anidb.net/viewtopic.php?t=429
 Wiki Page: http://wiki.anidb.info/w/Mylist_export_template_guidelines
 
 ----------------------------------------------------------------------------------------------
+
+ 0.12 - 02.07.2007
+   - data files updated
+   - new fields
+   ANIME:
+       data_anime_name_langname - Language name (ie: Japanese)
+       data_anime_name_langsname - Language shortname (ie: ja)
+       data_anime_eps_special - Total number of special episodes
+       data_anime_eps_total - Total number of episodes
+       loop_anime_groups: [new loop]
+           data_anime_group_id - Group ID
+           data_anime_group_agid - Group AGID
+           data_anime_group_name - Group name
+           data_anime_group_sname - Group shortname
+           data_anime_group_state - Group state (complete, dropped, etc)
+           data_anime_group_lastep - Last episode released
+           data_anime_group_lastup - Last update date (dd.mm.yyyy hh:mm)
+           data_anime_group_votes - Number of votes
+           data_anime_group_rating - Rating
+           data_anime_group_cmts - Number of comments
+           data_anime_group_epcnt - Normal episode count
+           data_anime_group_sepcnt - Specials count (S + O + C + T + P eps)
+           data_anime_group_myvote - My vote or '-' if none
+           data_anime_group_myvote_date - My vote date (dd.mm.yyyy hh:mm)
+       loop_anime_titles: [new loop]
+           data_anime_title_name - Title
+           data_anime_title_langid - Language ID
+           data_anime_title_type_id - Type ID (1 = main, 2 = syn, 3 = short, 4 = official)
+           data_anime_title_type_string - Type name (main, syn, short, official)
+           data_anime_title_langname - Language name (ie: Japanese)
+           data_anime_title_langsname - Language shortname (ie: ja)
+       loop_anime_title_alias: [existing loop]
+           data_anime_title_alias_langname - Language name (ie: Japanese)
+           data_anime_title_alias_langsname - Language shortname (ie: ja)
+       loop_anime_title_short: [existing loop]
+           data_anime_title_short_langname - Language name (ie: Japanese)
+           data_anime_title_short_langsname - Language shortname (ie: ja)
+       loop_anime_title_official: [existing loop]
+           data_anime_title_official_langname - Language name (ie: Japanese)
+           data_anime_title_official_langsname - Language shortname (ie: ja)
+   EP:
+       data_ep_myvote - My vote for a given episode
+       data_ep_myvote_date - My vote date for a given episode
+   FILE:
+       data_file_tth - TTH hash
+       data_file_filerel_loop: [new loop]
+           data_file_filerel_fid - one end of the relation
+           data_file_filerel_otherfid - the other end of the relation
+           data_file_filerel_type - type of the relation (subtitle file, etc)
+       data_file_fileeprel_loop: [new loop]
+           data_file_fileeprel_fid - the fid that spans eps
+           data_file_fileeprel_eid - the episode
+           data_file_fileeprel_startp - start percentage
+           data_file_fileeprel_endp - end percentage
+       data_file_lang_sname - Language shortname (ie: ja)
+       data_file_lang_sname2 - Language shortname (ie: ja)
+       data_file_sub_sname - Language shortname (ie: ja)
+       data_file_sub_sname2 - Language shortname (ie: ja)
+   - fixed fields
+       data_anime_mystate_string - wasn't outputting correctly for mixed state
+   - better support for wishlisted animes with no files, anime information only will be exported
 
   0.11 - 26.06.2007
     - data files updated
