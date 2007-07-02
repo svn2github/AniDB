@@ -1,0 +1,22 @@
+(C) 2007 by fahrenheit [alka.setzer[at]gmail.com]
+version 1.0 (02.07.2007):
+
+html-fstyle theme:
+- Light themed template, uses a Single Page/Multiple Page Layout scheme to display information (based on user pref).
+- Filter anime on MyList by state (mixed, unknown, on hdd, on cd, deleted, ongoing and has awards), status (complete, incomplete, watched and unviewed), type (TV, OVA, etc) and by Genre.
+- Popups with File Information and Episode Information for each file/episode.
+- Has an internal "Search page".
+- Includes support for Wishlist.
+- Link to aniDB, animeNFO and Anime Planet for more info on selected files/episodes/animes.
+- Uses all information available to exports, including Awards, Temporary Votes and Jap/Eng Titles.
+- Can be styled with anidb's CSS stylesheets (with minor adjustments), supplied with the default theme.
+- Tested and working with: IE 6.0+, FireFox 1.0+, Opera 8.0+.
+
+note: requires a browser capable of doing the following:
+- javascript version 1.5
+- XMLHTTPRequest support
+- HTTP 1.1 (required by XMLHTTPREQUEST for assync gets)
+- css v1 and v2
+- cookies (optional)
+
+<a href="http://forum.anidb.net/viewtopic.php?t=2517">Support, Feature Requests, Bug Reports?</a>

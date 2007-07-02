@@ -1,0 +1,13 @@
+Template: html-fstyle - ChangeLog
+Version: 0.4 - 02.07.2007
+(C) 2003-2007 by fahrenheit
+
+Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
+SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/export/html-fstyle
+
+----------------------------------------------------------------------------------------------
+
+0.4 - 02.07.2007
+	- SVN release
+0.1 - 24.05.2006
+	- Initial release (testing only)

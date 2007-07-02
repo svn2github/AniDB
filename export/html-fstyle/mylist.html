@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>::AniDB.net:: MyList Export ::</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="icon" href="favicon.ico" />
+		<link rel="alternate" type="application/rss+xml" title="AniDB RDF" href="http://anidb.info/anidb.rdf" />
+		<link rel="stylesheet" href="css/zakura/zakura.css" type="text/css" title="zakura Style" />
+		<link rel="alternate stylesheet" href="css/anidbstyle/anidbstyle.css" type="text/css" title="Classic" />
+	</head>
+  <body>
+    <div id="layout-content">
+      <h1>MyList Export for %USERNAME% (<a class="short_link" href="http://anidb.info/%USERID%">u%USERID%</a>)</h1>
+      <div class="g_content mylist_all">
+        <div class="g_section mylist_list">
+          <ul class="g_jumplist">
+            <li class="prev"><a>prev</a></li>
+            <li class="next"><a>next</a></li>
+            <li class="all">all</li>
+            <li class="0-9"><a>0-9</a></li>
+            <li class="a"><a>a</a></li>
+            <li class="b"><a>b</a></li>
+            <li class="c"><a>c</a></li>
+            <li class="d"><a>d</a></li>
+            <li class="e"><a>e</a></li>
+            <li class="f"><a>f</a></li>
+            <li class="g"><a>g</a></li>
+            <li class="h"><a>h</a></li>
+            <li class="i"><a>i</a></li>
+            <li class="j"><a>j</a></li>
+            <li class="k"><a>k</a></li>
+            <li class="l"><a>l</a></li>
+            <li class="m"><a>m</a></li>
+            <li class="n"><a>n</a></li>
+            <li class="o"><a>o</a></li>
+            <li class="p"><a>p</a></li>
+            <li class="q"><a>q</a></li>
+            <li class="r"><a>r</a></li>
+            <li class="s"><a>s</a></li>
+            <li class="t"><a>t</a></li>
+            <li class="u"><a>u</a></li>
+            <li class="v"><a>v</a></li>
+            <li class="w"><a>w</a></li>
+            <li class="x"><a>x</a></li>
+            <li class="y"><a>y</a></li>
+            <li class="z"><a>z</a></li>
+            <li class="other"><a>other</a></li>
+          </ul>
+          <div class="g_menu mylist_menu">
+            <ul class="filters">
+              <li><a>hide restricted</a></li>
+              <li><a>hide incomplete</a></li>
+              <li><a>hide complete</a></li>
+              <li><a>hide stalled</a></li>
+              <li><a>hide watched</a></li>
+              <li><a>hide not watched</a></li>
+              <li><a>show fileinfo</a></li>
+            </ul>
+            <ul class="state">
+              <li><a><span class="i_icon i_state_all" title="all states">all states</span></a></li>
+              <li><a><span class="i_icon i_state_mixed" title="file with status: mixed state">mixed state</span></a></li>
+              <li><a><span class="i_icon i_state_unknown" title="file with status: unknown">unknown</span></a></li>
+              <li><a><span class="i_icon i_state_onhdd" title="file with status: internal storage (hdd)">on hdd</span></a></li>
+              <li><a><span class="i_icon i_state_oncd" title="file with status: external storage (cd/dvd/...)">on cd</span></a></li>
+              <li><a><span class="i_icon i_state_deleted" title="file with status: deleted">deleted</span></a></li>
+            </ul>
+            <ul class="animecat">
+              <li><a>all types *</a></li>
+              <li><a>series only</a></li>
+              <li><a>OVAs only</a></li>
+              <li><a>Movies only</a></li>
+            </ul>
+            <ul class="user">
+              <li><a href="http://anidb.info/perl-bin/animedb.pl?show=userpage&uid=%USERID%">user page</a></li>
+              <li><a href="http://anidb.info/perl-bin/animedb.pl?show=msg&amp;do=new&amp;msg.to=%USERNAME%">send message</a></li>
+              <li><a>list votes</a></li>
+              <li><a>show wishlist</a></li>
+              <li><a>show statistics</a></li>
+            </ul>
+            <ul class="util">
+              <li><a>adv. search</a></li>
+              <li><a>preferences</a></li>
+              <li><a>help</a></li>
+            </ul>
+          </div>
+          <form id="animemain" name="animemain">
+            <table class="animelist">
+              <thead>
+                <tr>
+                  <th class="expand" valign="top">all: <a><img src="css/icons/plus.gif" width="15" height="13" alt="(+)" title="expand all entries" /></a></th>
+                  <th class="title">Title</th>
+                  <th class="stats eps">EPs</th>
+                  <th class="stats seen">Seen</th>
+                  <th class="rating anime mid">Rating</th>
+                  <th class="vote">My</th>
+                  <th class="reviews attavg mid">Reviews</th>
+                  <th class="action">Action</th>
+                </tr>
+              </thead>
+                <tbody>
+                  <tr class="" id="a%ANIMEID%">
+                    <td class="expand"><a><img src="css/icons/plus.gif" width="15" height="13" alt="(+)" title="expand entry" /></a></td>
+                    <td class="title"><div class="icons"></div><span><a href="">%ANIMETITLE%</a></span></td>
+                    <td class="stats eps">%EPS%</td>
+                    <td class="stats seen">%SEEN%</td>
+                    <td class="rating anime mid">%RATING% (<span class="count">%VOTES%</span>)</td>
+                    <td class="vote none">%MYVOTE%</td>
+                    <td class="reviews attavg mid">%REVIEWRATING% (<span class="count">%REVIEWCNT%</span>)</td>
+                    <td class="action"><input type="checkbox" name="myamod.a.%ANIMEID%" /></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="g_actionlist mylist_action">
+            </div>
+          </form>
+          <ul class="g_jumplist">
+            <li class="prev"><a>prev</a></li>
+            <li class="next"><a>next</a></li>
+            <li class="all">all</li>
+            <li class="0-9"><a>0-9</a></li>
+            <li class="a"><a>a</a></li>
+            <li class="b"><a>b</a></li>
+            <li class="c"><a>c</a></li>
+            <li class="d"><a>d</a></li>
+            <li class="e"><a>e</a></li>
+            <li class="f"><a>f</a></li>
+            <li class="g"><a>g</a></li>
+            <li class="h"><a>h</a></li>
+            <li class="i"><a>i</a></li>
+            <li class="j"><a>j</a></li>
+            <li class="k"><a>k</a></li>
+            <li class="l"><a>l</a></li>
+            <li class="m"><a>m</a></li>
+            <li class="n"><a>n</a></li>
+            <li class="o"><a>o</a></li>
+            <li class="p"><a>p</a></li>
+            <li class="q"><a>q</a></li>
+            <li class="r"><a>r</a></li>
+            <li class="s"><a>s</a></li>
+            <li class="t"><a>t</a></li>
+            <li class="u"><a>u</a></li>
+            <li class="v"><a>v</a></li>
+            <li class="w"><a>w</a></li>
+            <li class="x"><a>x</a></li>
+            <li class="y"><a>y</a></li>
+            <li class="z"><a>z</a></li>
+            <li class="other"><a>other</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="g_end"></div>
+    </div>
+    <div id="layout-footer">
+      <p>V %THEMEVERSION% %THEMESOURCE% %THEMEDATE%, (C) 2007 by fahrenheit/AniDB, all rights reserved</p>
+    </div>
+	</body>
+</html>
