@@ -2,41 +2,51 @@
  * @file Classes interface
  * @author fahrenheit (alka.setzer@gmail.com)
  *         Based on code from PetriW's work at anidb
- * @version 2.1 (22.03.2007)
+ * @version 2.2 (02.07.2007)
  */
- 
+
 /* *
- * Creates a new Mylist Entry from a given node
- * @param node Node from which to get the mylist information
- * @return mylistEntry
+ * Creates a new UserInfo Entry from a given node
+ * @param node Node from which to get the userinfo
+ * @return userinfoEntry
  */
-function CMylistEntry(node) {
-  this.id = Number(node.getAttribute('id'));
-  this.fileId = Number(node.getAttribute('fid'));
-  this.episodeId = Number(node.getAttribute('eid'));
-  this.groupId = Number(node.getAttribute('gid'));
-  this.fstate = 'unknown';
-  this.status = 'unknown';
-  this.seen = 0;
-  this.seenDate = null;
-  this.source = null;
-  this.storage = null;
-  this.other = null;
-  this.fType = null;
+function CUserinfoEntry(node) {
+  this.id = uid;
+  this.eps = new Object();
+  this.files = new Object();
+  this.groups = new Object();
   for (var i = 0; i < node.childNodes.length; i++) {
-    var sNode = node.childNodes.item(i);
-    if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName) {
-      case 'state': this.status = nodeData(sNode); break;
-      case 'fstate': this.fstate = nodeData(sNode); break;
-      case 'seen': this.seen = Number(nodeData(sNode)); this.seenDate = convertTime(sNode.getAttribute('date')); break;
-      case 'source': this.source = nodeData(sNode); break;
-      case 'storage': this.storage = nodeData(sNode); break;
-      case 'other': this.other = nodeData(sNode); break;
-      default: showAlert('mylistEntry for lid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
+    var snode = node.childNodes.item(i);
+    if (snode.nodeType == 3) continue; // Text node, not interested
+    switch (snode.nodeName) {
+      case 'name': this.name = nodeData(snode); break;
+      case 'eps':
+        this.eps['added'] = Number(snode.getAttribute('added'));
+        this.eps['dbviewedp'] = snode.getAttribute('dbviewedp');
+        this.eps['dbownedp'] = snode.getAttribute('dbownedp');
+        this.eps['viewedp'] = snode.getAttribute('viewedp');
+        this.eps['viewed'] = Number(snode.getAttribute('viewed'));
+        this.eps['user'] = Number(snode.getAttribute('user'));
+        break;
+      case 'files':
+        this.files['added'] = Number(snode.getAttribute('added'));
+        this.files['lamecnt'] = Number(snode.getAttribute('lamecnt'));
+        this.files['user'] = Number(snode.getAttribute('user'));
+        break;
+      case 'groups':
+        this.groups['added'] = Number(snode.getAttribute('added'));
+        break;
+      case 'size':
+        this.sizeBytes = snode.getAttribute('longn');
+        this.size = snode.getAttribute('shortn');
+        break;
+      case 'stats':
+        this.votes = Number(snode.getAttribute('votes'));
+        this.reviews = Number(snode.getAttribute('reviews'));
+        break;
+      default: showAlert('userinfoEntry for uid: '+uid, node.nodeName, node.nodeName,snode.nodeName);
     }
   }
-  this.fType = mapFState(this.fstate);
 }
 
 /* *
@@ -99,46 +109,68 @@ function CGroupEntry(node) {
 function CAnimeEntry(node) {
   this.id = Number(node.getAttribute('id'));
   this.type = node.getAttribute('type');
-  this.titles = new Array();
+  this.year = node.getAttribute('year');
+  this.eps = new Object();
+  this.seps = new Object();
+  this.title = "Anime "+this.id;
+  this.titles = new Object();
   for (i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
     switch (sNode.nodeName) {
-      case 'neps': this.eps = Number(nodeData(sNode)); break;
-      case 'epcnt': this.epCount = Number(nodeData(sNode)); break;
-      case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
-      case 'gcnt': this.groupCount = Number(nodeData(sNode)); break;
-      case 'eps': 
-      case 'groups': break; // Will be taken care elsewhere 
+      case 'status':
+        this.complete = Number(sNode.getAttribute('complete'));
+        this.watched = Number(sNode.getAttribute('watched'));
+        this.hasawards = Number(sNode.getAttribute('hasawards'));
+        break;
+      case 'neps': 
+        this.eps['cnt'] = Number(sNode.getAttribute('cnt'));
+        this.eps['user'] = Number(sNode.getAttribute('user'));
+        this.eps['seen'] = Number(sNode.getAttribute('seen'));
+        break;
+      case 'seps':
+        this.seps['cnt'] = Number(sNode.getAttribute('cnt'));
+        this.seps['user'] = Number(sNode.getAttribute('user'));
+        this.seps['seen'] = Number(sNode.getAttribute('seen'));
+        break;
       case 'titles':
         for (var k = 0; k < sNode.childNodes.length; k++) {
           var tNode = sNode.childNodes.item(k);
           if (tNode.nodeType == 3) continue; // Text node, not interested
-          this.titles[tNode.getAttribute('lang')] = { "type":tNode.getAttribute('type'),"title":nodeData(tNode)};
+          if (!this.titles[tNode.getAttribute('type')]) this.titles[tNode.getAttribute('type')] = new Object();
+          this.titles[tNode.getAttribute('type')][tNode.getAttribute('lang')] = nodeData(tNode);
+          if (tNode.getAttribute('type') == 'main') this.title = nodeData(tNode);
         }
         break;
+      case 'state': this.state = nodeData(sNode); break;
+      case 'size': this.sizeBytes = sNode.getAttribute('longn'); this.size = sNode.getAttribute('cnt'); break;
+      case 'rating': this.votes = sNode.getAttribute('votes'); this.rating = sNode.getAttribute('rating'); break;
+      case 'reviews': this.reviews = sNode.getAttribute('cnt'); this.rrating = sNode.getAttribute('rating'); break;
+      case 'wishlist': this.wishlist = {'type':sNode.getAttribute('type'),'pri':sNode.getAttribute('pri'),'comment':nodeData(sNode)}; break;
+      case 'myvote': this.myvote = {'type':sNode.getAttribute('type'),'date':sNode.getAttribute('date'),'vote':sNode.getAttribute('vote')}; break;
+      case 'dates': this.dates = {'added':sNode.getAttribute('added'),'update':sNode.getAttribute('update'),'start':sNode.getAttribute('start'),'end':sNode.getAttribute('end')}; break;
       default: showAlert('animeEntry for aid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
     }
   }
 }
 
-CAnimeEntry.prototype.getTitle = function() {
+CAnimeEntry.prototype.getTitle = function(type) {
   var title = null;
-  if (this.titles[animeTitleLang]) title = this.titles[animeTitleLang]['title'];
+  if (this.titles[type] && this.titles[type][animeTitleLang]) return this.titles[type][animeTitleLang];
   if (!title) {
-    for (var lang in this.titles) { // default
-      if (this.titles[lang]['type'] == 'main') { title = this.titles[lang]['title']; break; } 
-    }
+    if (!this.titles['official']) return anime.title;
+    else if (!this.titles['official'][animeTitleLang]) return anime.title;
+    else return this.titles['official'][animeTitleLang];
   }
-  if (!title) title = 'unknown';
-  return (title);
+  if (!title) return anime.title;
 }
 
-CAnimeEntry.prototype.getAltTitle = function() {
+CAnimeEntry.prototype.getAltTitle = function(type) {
   var title = null;
-  if (this.titles[animeAltTitleLang]) title = this.titles[animeAltTitleLang]['title'];
-  if (!title) title = '';
-  return (title);
+  if (!this.titles['official']) return '';
+  else if (!this.titles['official'][animeAltTitleLang]) return '';
+  else return this.titles['official'][animeAltTitleLang];
+  if (!title) return '';
 }
 
 /* *

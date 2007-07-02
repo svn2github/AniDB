@@ -140,7 +140,7 @@ function showDOMtree(node) {
   alert(out);
 }
 
-/**
+/* *
  * Function that searches a HTMLCollection Object for an element
  * with a specific class name
  * @param nodes The nodes
@@ -157,7 +157,7 @@ function getElementsByClassName(nodes, name, useIndexOf) {
   return ret;
 }
 
-/**
+/* *
  * Function that searches a HTMLCollection Object for an element
  * with a specific name
  * @param nodes The nodes
@@ -174,7 +174,7 @@ function getElementsByName(nodes, sname, useIndexOf) {
   return ret;
 }
 
-/**
+/* *
  * Function that returns elements of given tag name for the given node only
  * @param node The node
  * @param tag The nodeName of the node.childNodes elements to find
@@ -188,7 +188,7 @@ function getNodeElementsByTagName(node, tag) {
   return ret;
 }
 
-/**
+/* *
  * Creates icons
  * @param parentNode ParenteNode of the newly created icon or null if want return
  * @param text Text

@@ -7,8 +7,16 @@
 		<link rel="alternate" type="application/rss+xml" title="AniDB RDF" href="http://anidb.info/anidb.rdf" />
 		<link rel="stylesheet" href="css/zakura/zakura.css" type="text/css" title="zakura Style" />
 		<link rel="alternate stylesheet" href="css/anidbstyle/anidbstyle.css" type="text/css" title="Classic" />
+    <script src="js/preferences.js" type="text/javascript" title="Preferences"></script>
+	  <script src="js/mapvalues.js" type="text/javascript" title="Map Functions"></script>
+    <script src="js/utils.js" type="text/javascript" title="Utils"></script>
+    <script src="js/classes.js" type="text/javascript" title="XML Parser"></script>
+	  <script src="js/parser.js" type="text/javascript" title="XML Parser"></script>
+	  <script src="js/ajax.js" type="text/javascript" title="XMLHTTPRequest implementation"></script>
+	  <script src="js/mylist.js" type="text/javascript" title="mylist extension"></script>
 	</head>
   <body>
+    <div id="statusBox"></div>
     <div id="layout-content">
       <h1>MyList Export for %USERNAME% (<a class="short_link" href="http://anidb.info/%USERID%">u%USERID%</a>)</h1>
       <div class="g_content mylist_all">
@@ -16,6 +24,7 @@
           <ul class="g_jumplist">
             <li class="prev"><a>prev</a></li>
             <li class="next"><a>next</a></li>
+            <li class="jump">%PAGEJUMP%</li>
             <li class="all">all</li>
             <li class="0-9"><a>0-9</a></li>
             <li class="a"><a>a</a></li>
@@ -71,8 +80,8 @@
               <li><a>Movies only</a></li>
             </ul>
             <ul class="user">
-              <li><a href="http://anidb.info/perl-bin/animedb.pl?show=userpage&uid=%USERID%">user page</a></li>
-              <li><a href="http://anidb.info/perl-bin/animedb.pl?show=msg&amp;do=new&amp;msg.to=%USERNAME%">send message</a></li>
+              <li><a href="%ANIDBURL%?show=userpage&uid=%USERID%">user page</a></li>
+              <li><a href="%ANIDBURL%?show=msg&amp;do=new&amp;msg.to=%USERNAME%">send message</a></li>
               <li><a>list votes</a></li>
               <li><a>show wishlist</a></li>
               <li><a>show statistics</a></li>
@@ -93,20 +102,20 @@
                   <th class="stats seen">Seen</th>
                   <th class="rating anime mid">Rating</th>
                   <th class="vote">My</th>
-                  <th class="reviews attavg mid">Reviews</th>
+                  <th class="rating attavg mid">Reviews</th>
                   <th class="action">Action</th>
                 </tr>
               </thead>
-                <tbody>
-                  <tr class="" id="a%ANIMEID%">
-                    <td class="expand"><a><img src="css/icons/plus.gif" width="15" height="13" alt="(+)" title="expand entry" /></a></td>
-                    <td class="title"><div class="icons"></div><span><a href="">%ANIMETITLE%</a></span></td>
-                    <td class="stats eps">%EPS%</td>
-                    <td class="stats seen">%SEEN%</td>
-                    <td class="rating anime mid">%RATING% (<span class="count">%VOTES%</span>)</td>
-                    <td class="vote none">%MYVOTE%</td>
-                    <td class="reviews attavg mid">%REVIEWRATING% (<span class="count">%REVIEWCNT%</span>)</td>
-                    <td class="action"><input type="checkbox" name="myamod.a.%ANIMEID%" /></td>
+              <tbody>
+                <tr class="" id="a%ANIMEID%">
+                  <td class="expand"><a><img src="css/icons/plus.gif" width="15" height="13" alt="(+)" title="expand entry" /></a></td>
+                  <td class="title"><div class="icons">%ANIMESTATEICON%</div><span><a href="anime.html?show=anime&aid=%ANIMEID%">%ANIMETITLE%</a></span></td>
+                  <td class="stats eps">%EPS%</td>
+                  <td class="stats seen">%SEEN%</td>
+                  <td class="rating anime mid">%RATING% (<span class="count">%VOTES%</span>)</td>
+                  <td class="vote none">%MYVOTE%</td>
+                  <td class="rating attavg mid">%REVIEWRATING% (<span class="count">%REVIEWCNT%</span>)</td>
+                  <td class="action"><input type="checkbox" name="myamod.a.%ANIMEID%" /></td>
                 </tr>
               </tbody>
             </table>
@@ -116,6 +125,7 @@
           <ul class="g_jumplist">
             <li class="prev"><a>prev</a></li>
             <li class="next"><a>next</a></li>
+            <li class="jump">%PAGEJUMP%</li>
             <li class="all">all</li>
             <li class="0-9"><a>0-9</a></li>
             <li class="a"><a>a</a></li>

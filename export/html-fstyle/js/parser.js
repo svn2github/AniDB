@@ -32,162 +32,11 @@ function parseCustom(node) {
     childNode = node.childNodes.item(i);
     if (childNode.nodeType == 3) continue;
     switch (childNode.nodeName) {
-      case 'mylist':
-        var mylistNodes = childNode.getElementsByTagName('file');
-        for (m = 0; m < mylistNodes.length; m++) {
-          var mylistNode = mylistNodes[m];
-      	  mylistEntry = new CMylistEntry(mylistNode);
-          mylist[mylistEntry.fileId] = mylistEntry;
-          var ep = episodes[mylistEntry.episodeId];
-          if (mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
-          //if (mylistEntry.groupId != 0) {
-            var group = groups[mylistEntry.groupId];
-            group.isInMylist = true;
-            group.visible = true;
-            group.epsInMyListArray.push(ep.epno);
-          //}
-        }
-        break;
-      case 'ratings': // taking care of both episode votes and group ratings
-        var groupVotes = childNode.getElementsByTagName('group');
-        var episodeVotes = childNode.getElementsByTagName('ep');
-        for (var gv = 0; gv < groupVotes.length; gv++) { // Group rating entries
-          var gvote = groupVotes[gv];
-          var urating = nodeData(gvote);
-          var agid = gvote.getAttribute('agid');
-          var gid = aGroups[agid].gid;
-          groups[gid].userRating = urating;
-        }
-        for (var ev = 0; ev < episodeVotes.length; ev++) {
-          var evote = episodeVotes[ev];
-          var vote = nodeData(evote);
-          var eid = evote.getAttribute('id');
-          episodes[eid].vote = vote;
-        }
-        break;
-      case 'config': parseConfig(childNode);
+      case 'userinfo': userInfo = new CUserinfoEntry(childNode);
       default: showAlert('Options',node.nodeName,node.nodeName,childNode.nodeName);
     }
   }
-  // We set now the string for the eps of each group the user has
-  //
-  var noGroup = groups[0];
-  for (var i in groups) {
-    var group = groups[i];
-    if (group.id == 0) continue;
-    if (group.epsInMyListArray == null || !group.epsInMyListArray.length) continue;
-    var workArray = new Array();
-    if (groupGuess) { // doing some guess
-      for (var ep in group.epsInMyListArray) workArray.push(group.epsInMyListArray[ep]);
-      for (var ep in noGroup.epsInMyListArray) {
-        var epNo = noGroup.epsInMyListArray[ep];
-        if (workArray.indexOf(epNo) == -1) workArray.push(epNo);
-      }
-    } else workArray = group.epsInMyListArray;
-    // We now produce the new string with the episodes
-    var startNum = -1;
-    var st = 0;
-    workArray.sort(function sort(a,b) { return (a-b); });
-    while (st < workArray.length) {
-      if (startNum == -1) startNum = workArray[st];
-      if ((workArray.length > st+1) && (workArray[st]+1 < workArray[st+1])) {
-        if (group.epsInMyListStringGuess.length > 0) group.epsInMyListStringGuess += ', ';
-        if (startNum == workArray[st]) group.epsInMyListStringGuess += epNoToString(startNum);
-        else group.epsInMyListStringGuess += epNoToString(startNum) + '-' + epNoToString(workArray[st]);
-        startNum = -1;
-      } 
-      st++;
-    }
-    if (startNum >= 0) {
-      if (group.epsInMyListStringGuess.length > 0) group.epsInMyListStringGuess += ', ';
-      if (startNum == workArray[workArray.length-1]) group.epsInMyListStringGuess += epNoToString(startNum);
-      else group.epsInMyListStringGuess += epNoToString(startNum) + '-' + workArray[workArray.length-1];
-    }
-    if (groupGuess) { // also keep track of real group info
-      var startNum = -1;
-      var st = 0;
-      group.epsInMyListArray.sort(function sort(a,b) { return (a-b); });
-      while (st < group.epsInMyListArray.length) {
-        if (startNum == -1) startNum = group.epsInMyListArray[st];
-        if ((group.epsInMyListArray.length > st+1) && (group.epsInMyListArray[st]+1 < group.epsInMyListArray[st+1])) {
-          if (group.epsInMyListString.length > 0) group.epsInMyListString += ', ';
-          if (startNum == group.epsInMyListArray[st]) group.epsInMyListString += epNoToString(startNum);
-          else group.epsInMyListString += epNoToString(startNum) + '-' + epNoToString(group.epsInMyListArray[st]);
-          startNum = -1;
-        } 
-        st++;
-      }
-      if (startNum >= 0) {
-        if (group.epsInMyListString.length > 0) group.epsInMyListString += ', ';
-        if (startNum == group.epsInMyListArray[group.epsInMyListArray.length-1]) group.epsInMyListString += epNoToString(startNum);
-        else group.epsInMyListString += epNoToString(startNum) + '-' + group.epsInMyListArray[group.epsInMyListArray.length-1];
-      }
-    }
-    if (!groupGuess) group.epsInMyListString = group.epsInMyListStringGuess;
-  }
   return true;
-}
-
-/* *
- * Function to parse configuration options
- * @param node Config node
- * @return void Options will be set
- */
-function parseConfig(node) {
-  for (var i = 0; i < node.childNodes.length; i++) {
-    var sNode = node.childNodes.item(i);
-    if (sNode.nodeType == 3) continue;
-    switch (sNode.nodeName) {
-      case 'epp': preferredEntriesPerPage = parseInt(nodeData(sNode)) || 25; break;
-      case 'lay':
-        var lay = Number(nodeData(sNode)) || 0;
-        LAY_HEADER = (lay & 1) ? true : false;
-        LAY_NOANIMEGROUPREL = (lay & 32) ? true : false;
-        LAY_HIDEFILES = (lay & 512) ? true : false;
-        LAY_HIDERAWS = (lay & 1024) ? true : false;
-        LAY_HIDEGENERICFILES = (lay & 4096) ? true : false;
-        LAY_HIDEPARODYEPS = (lay & 131072) ? true : false;
-        break;
-      case 'animelang':
-        for (var j = 0; j < sNode.childNodes.length; j++) {
-          var dNode = sNode.childNodes.item(j);
-          switch (dNode.nodeName) {
-            case 'lang': animeTitleLang = nodeData(dNode); animeAltTitleLang = dNode.getAttribute('alt') || 'en'; break;
-            default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-          }
-        }
-        break;
-      case 'eplang':
-        for (var j = 0; j < sNode.childNodes.length; j++) {
-          var dNode = sNode.childNodes.item(j);
-          switch (dNode.nodeName) {
-            case 'lang': animeTitleLang = nodeData(dNode); animeAltTitleLang = dNode.getAttribute('alt') || 'en'; break;
-            default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-          }
-        }
-        break;
-      case 'filealang':
-      	for (var j = 0; j < sNode.childNodes.length; j++) {
-      	  var dNode = sNode.childNodes.item(j);
-      	  switch (dNode.nodeName) {
-      	  	case 'lang': filterAudLang.push(nodeData(dNode)); break;
-      	  	default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-      	  }
-      	}
-      	break;
-      case 'fileslang':
-      	for (var j = 0; j < sNode.childNodes.length; j++) {
-      	  var dNode = sNode.childNodes.item(j);
-      	  switch (dNode.nodeName) {
-      	  	case 'lang': filterSubLang.push(nodeData(dNode)); break;
-      	  	default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-      	  }
-      	}
-      	break;
-      case 'ed2k': break;
-      default: showAlert('Options','config',sNode.nodeName,dNode.nodeName);
-    }
-  }
 }
 
 /* *
@@ -261,7 +110,7 @@ function parseEpisodes(node,aid) {
  */
 function parseAnimes(node) {
   if (!node) return false; // no nodes return;
-  var isAnimePage = (uriObj['show'].indexOf('anime') >= 0) ? true : false;
+  var isAnimePage = (uriObj['show'] && uriObj['show'].indexOf('anime') >= 0) ? true : false;
   for (var nd = 0; nd < node.length; nd++) { // find the right animes entry
     if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
   }
@@ -272,11 +121,13 @@ function parseAnimes(node) {
     var childNode = animeNodes[i];
     var animeEntry = new CAnimeEntry(childNode);
     animes[animeEntry.id] = animeEntry;
-    if (isAnimePage) anime = animes[animeEntry.id]; // assigning a shortcut
-    var groupNodes = childNode.getElementsByTagName('groups');
-    parseGroups(groupNodes,animeEntry.id); // Parsing Groups
-    var epNodes = childNode.getElementsByTagName('eps');
-    parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
+    if (isAnimePage) {
+      anime = animes[animeEntry.id]; // assigning a shortcut
+      var groupNodes = childNode.getElementsByTagName('groups');
+      parseGroups(groupNodes,animeEntry.id); // Parsing Groups
+      var epNodes = childNode.getElementsByTagName('eps');
+      parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
+    }
     animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
     if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
   }
