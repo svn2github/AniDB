@@ -1,0 +1,36 @@
+xml-singlefile-dataonly anidb.net export template
+Version: 2.0 (19.09.2006)
+
+History: 
+     - Version 2.0 by bsdude
+     - Version 1.00 by Chuck Renner (aka chriv)
+
+Changelog:
+
+  2.1 (21.09.2006)
+     - Removed some confusing info from the topic
+     - Removed redundant Producer field from animes table (info already in companies table)
+
+  2.0 (19.09.2006)
+     - This new version my a different author is not fully backwards compatible!
+     - Fixed various typos
+     - Added new fields
+     - Removed some redundancies
+     - New tables: award_types, awards, genres, categories, tags, companies
+
+  1.00 (24.11.2003)
+     - First version
+     - All data is XML
+     - No formating (no CSS, no XSL, no XSD, no HTML, etc.)
+     - I was going to include schema (XSD), but I don't know how to
+       create standarized schema yet (maybe in a later version)
+     - All known known available fields are in a single XML document
+       for simplicity
+     - Intended for use in importing into external databases
+     - Resulting XML tested by importing into MS Access XP (2002)
+     - Also intended for by parsing with server-side CGI scripts
+       (like PHP/Perl etc.)
+     - I changed field names to my liking (and may change them again)
+     - MAYBE I add PHP scripts to parse and display the data in a future
+       version (no promises)
+     
