@@ -54,7 +54,7 @@ sub cleanup {
     cleanup($path) if -d $path;
   }
   closedir DIR;
-  rmdir $dir or print "error - $!";
+  rmdir $dir or print "error - $! \n";
 }
 
 sub do_export

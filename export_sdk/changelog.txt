@@ -10,7 +10,10 @@ Wiki Page: http://wiki.anidb.info/w/Mylist_export_template_guidelines
  0.12 - 02.07.2007
    - data files updated
    - new fields
+   GLOBAL:
+       global_user_id - AniDB User ID
    ANIME:
+       status_anime_isrestricted - Anime has +18 restricted audience (0/1)
        data_anime_name_langname - Language name (ie: Japanese)
        data_anime_name_langsname - Language shortname (ie: ja)
        data_anime_eps_special - Total number of special episodes
