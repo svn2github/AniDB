@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><?xml-stylesheet type="text/xsl" href="mylist.xsl"?>
-
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
 
 A my list page
 
 by path[w]
 
-Version 0.1
+Version 0.2
 
 -->
 
@@ -20,341 +19,35 @@ Version 0.1
 
         <tmpl_loop name= loop_anime>
 
-            <anime id="<tmpl_var name=data_anime_id>">
-
-                <seriesInfo>
-
-                    <name>
-
-                        <romanji><![CDATA[<tmpl_var name=data_anime_name>]]></romanji>
-
-                        <kanji><![CDATA[<tmpl_var name=data_anime_title_jap_kanji>]]></kanji>
-
-                        <english><![CDATA[<tmpl_var name=data_anime_title_eng>]]></english>
-
-                        <other><![CDATA[<tmpl_var name=data_anime_title_other>]]></other>
-
-                        <synonym>
-
-                            <tmpl_loop name= loop_anime_title_alias>
-
-                                <alias><![CDATA[<tmpl_var name=data_anime_title_alias_name>]]></alias>
-
-                            </tmpl_loop>
-
-                        </synonym>
-
-                        <shorts>
-
-                            <tmpl_loop name= loop_anime_title_short>
-
-                                <short><![CDATA[<tmpl_var name=data_anime_title_short_name>]]></short>
-
-                            </tmpl_loop>
-
-                        </shorts>
-
-                    </name>
-
-                    <genres>
-
-                        <tmpl_loop name= loop_anime_genren>
-
-                            <genre>
-
-                                <tmpl_var name= data_anime_genren_name>
-
-                            </genre>
-
-                        </tmpl_loop>
-
-                    </genres>
-
-                    <airingDate>
-
-                        <year>
-
-                            <tmpl_var name= data_anime_year>
-
-                        </year>
-
-                        <start>
-
-                            <tmpl_var name= data_anime_startdate>
-
-                        </start>
-
-                        <end>
-
-                            <tmpl_var name= data_anime_enddate>
-
-                        </end>
-
-                    </airingDate>
-
-                    <type>
-
-                        <tmpl_var name= data_anime_type_name>
-
-                    </type>
-
-                    <rating>
-
-                        <tmpl_var name= data_anime_rating>
-
-                    </rating>
-
-                    <awards>
-
-                        <awardTypes>
-
-                            <tmpl_loop name= loop_anime_award_types>
-
-                                <awardType>
-
-                                    <tmpl_var name= data_anime_award_type_name>
-
-                                </awardType>
-
-                            </tmpl_loop>
-
-                        </awardTypes>
-
-                        <awardNames>
-
-                            <tmpl_loop name= loop_anime_awards>
-
-                                <type>
-
-                                    <awardName>
-
-                                        <tmpl_var name= data_anime_award_name>
-
-                                    </awardName>
-
-                                </type>
-
-                            </tmpl_loop>
-
-                        </awardNames>
-
-                    </awards>
-
-                    <size>
-
-                        <tmpl_var name= data_anime_my_size_h>
-
-                    </size>
-
-                    <companies>
-
-                        <tmpl_loop name= loop_anime_company>
-
-                            <tmpl_var name= data_anime_company_name>
-
-                            <tmpl_var name= data_anime_company_aptype>
-
-                        </tmpl_loop>
-
-                    </companies>
-
-                    <synopsis><![CDATA[<tmpl_var name=data_anime_other>]]></synopsis>
-
-                </seriesInfo>
-
-                <episodes status="<tmpl_if name=status_anime_iscomplete>complete<tmpl_else>incomplete</tmpl_if>">
-
-                    <count Total="<tmpl_var name= data_anime_eps>">
-
-                        <own Total="<tmpl_var name=data_anime_my_eps_total>" Normal="<tmpl_var name= data_anime_my_eps>"
-
-                             Special="<tmpl_var name= data_anime_my_eps_special>"/>
-
-                        <watched Total="<tmpl_var name=data_anime_my_watchedeps_total>"
-
-                                 Normal="<tmpl_var name= data_anime_my_watchedeps >"
-
-                                 Special="<tmpl_var name= data_anime_my_watchedeps_special>"/>
-
-                    </count>
-
+            <anime id="<tmpl_var name=data_anime_id>" broadcastDate="<tmpl_var name= data_anime_startdate>"
+                   type="<tmpl_var name= data_anime_type_name>" rating="<tmpl_var name= data_anime_rating>">
+                <romanjiName><![CDATA[<tmpl_var name=data_anime_name>]]></romanjiName>
+                <englishName><![CDATA[<tmpl_var name=data_anime_title_eng>]]></englishName>
+
+
+                <episodeCount>
+                    <total totalEpisodes="<tmpl_var name= data_anime_eps_total>"
+                                ownEpisodes="<tmpl_var name=data_anime_my_eps_total>"/>
+                    <normal totalEpisodes="<tmpl_var name= data_anime_eps>"
+                                 ownEpisodes="<tmpl_var name= data_anime_my_eps>"/>
+                    <special totalEpisodes="<tmpl_var name= data_anime_eps_special>"
+                                  ownEpisodes="<tmpl_var name= data_anime_my_eps_special>"/>
+                </episodeCount>
+                <episodes>
                     <tmpl_loop name= loop_ep>
-
-                        <episode id="<tmpl_var name=data_ep_id>" number="<tmpl_var name=data_ep_epno>"
-
-                                 length="<tmpl_var name=data_ep_length>">
-
-                            <name>
-
-                                <english><![CDATA[<tmpl_var name=data_ep_name>]]></english>
-
-                                <romanji><![CDATA[<tmpl_var name=data_ep_name_romaji>]]></romanji>
-
-                                <kanji><![CDATA[<tmpl_var name=data_ep_name_kanji>]]></kanji>
-
-                                <titles>
-
-                                    <tmpl_loop name= loop_data_ep_titles>
-
-                                        <name><![CDATA[<tmpl_var name=data_ep_title_name>]]></name>
-
-                                    </tmpl_loop>
-
-                                </titles>
-
-                            </name>
-
-                            <airingDate>
-
-                                <tmpl_var name= data_ep_aired_short>
-
-                            </airingDate>
-
-                            <otherInfo><![CDATA[<tmpl_var name=data_ep_other>]]></otherInfo>
-
-                            <status recap="<tmpl_if name= status_ep_state_recap>true<tmpl_else>false</tmpl_if>"
-
-                                    special="<tmpl_if name= status_ep_state_special>true<tmpl_else>false</tmpl_if>"
-
-                                    opening="<tmpl_if name= status_ep_state_op>true<tmpl_else>false</tmpl_if>"
-
-                                    ending="<tmpl_if name= status_ep_state_end>true<tmpl_else>false</tmpl_if>"
-
-                                    noFiles="<tmpl_unless name= status_ep_hasfile>true<tmpl_else>false</tmpl_unless>"
-
-                                    type="<tmpl_var name= data_ep_state>"/>
-
+                        <episode id="<tmpl_var name=data_ep_id>">
                             <files>
-
                                 <tmpl_loop name= loop_file>
-
-                                    <file id="<tmpl_var name=data_file_id>" size="<tmpl_var name=data_file_size_h>"
-
-                                          type="<tmpl_var name=data_file_filetype>" state="<tmpl_var name=data_file_state>"
-
-                                            version="<tmpl_var name=data_file_state_versionname>"
-
-                                            generic="<tmpl_if name=status_file_isgeneric>true<tmpl_else>false</tmpl_if>">
-
-                                        <hashInformation>
-
-                                            <crc>
-
-                                                <tmpl_var name= data_file_crc>
-
-                                            </crc>
-
-                                            <md5>
-
-                                                <tmpl_var name= data_file_md5>
-
-                                            </md5>
-
-                                            <sha1>
-
-                                                <tmpl_var name= data_file_sha1>
-
-                                            </sha1>
-
-                                            <ed2kLink><![CDATA[<tmpl_var name= data_file_ed2k_link>]]></ed2kLink>
-
-                                        </hashInformation>
-
-                                        <group id="<tmpl_var name=data_file_group_id>">
-
-                                            <name><![CDATA[<tmpl_var name=data_file_group_name>]]></name>
-
-                                            <shortName><![CDATA[<tmpl_var name= data_file_group_shortname>]]></shortName>
-
-                                        </group>
-
-                                        <dates releaseDate="<tmpl_var name=data_file_released_short>"
-
-                                               additionDate="<tmpl_var name=data_file_ldate_short>"/>
-
-                                        <quality name="<tmpl_var name=data_file_qual_name>"
-
-                                                 source="<tmpl_var name=data_file_type_name>"
-
-                                                userDefinedSource="<tmpl_var name=data_file_source>">
-
-                                            <video resolution="<tmpl_var name=data_file_res_name>"
-
-                                                   aspectRatio="<tmpl_var name=data_file_ar>"
-
-                                                   framesPerSecond="<tmpl_var name=data_file_fps>"
-
-                                                   bitRate="<tmpl_var name=data_file_vbitrate>"
-
-                                                   codec="<tmpl_var name=data_file_vcodec_name>"/>
-
-                                            <audioStreams>
-
-                                                <audio language="<tmpl_var name=data_file_lang_name>"
-
-                                                       channels="<tmpl_var name=data_file_chantype>"
-
-                                                       bitrate="<tmpl_var name=data_file_abitrate>"
-
-                                                       codec="<tmpl_var name=data_file_acodec_name>"/>
-
-
-
-                                                <tmpl_if expr="data_file_audcnt > 1">
-
-                                                    <audio language="<tmpl_var name=data_file_lang_name2>"
-
-                                                           channels="<tmpl_var name=data_file_chantype2>"
-
-                                                           bitrate="<tmpl_var name=data_file_abitrate2>"
-
-                                                           codec="<tmpl_var name=data_file_acodec_name2>"/>
-
-                                                </tmpl_if>
-
-                                            </audioStreams>
-
-                                            <subtitleStreams>
-
-                                                <subtitles language="<tmpl_var name=data_file_sub_name>"
-
-                                                           flag="<tmpl_var name=data_file_sflags>"
-
-                                                           type="<tmpl_var name=data_file_stype>"/>
-
-                                                <tmpl_if expr="data_file_subcnt > 1">
-
-                                                    <subtitles language="<tmpl_var name=data_file_sub_name2>"
-
-                                                               flag="<tmpl_var name=data_file_sflags2>"
-
-                                                               type="<tmpl_var name=data_file_stype2>"/>
-
-                                                </tmpl_if>
-
-                                            </subtitleStreams>
-
-                                        </quality>
-
-                                        <comments><![CDATA[<tmpl_var name=data_file_other>]]></comments>
-
-                                    </file>
-
+                                    <file id="<tmpl_var name=data_file_id>"
+                                          additionDate="<tmpl_var name=data_file_ldate>"/>
                                 </tmpl_loop>
-
                             </files>
-
                         </episode>
-
                     </tmpl_loop>
-
                 </episodes>
-
             </anime>
-
         </tmpl_loop>
-
+        <databaseColumnTableSchema date="<tmpl_var name=global_date>"/>
     </animeList>
-
 </myList>
 

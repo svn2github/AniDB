@@ -1,7 +1,9 @@
-Version 0.1 (27/06/2007)
+Version 0.2 (3/07/2007)
 
 Template created by path (scavenged from xml-xslt and xml-dark)
 The idea is to try and extract almost everything thats useful into the xml. Please feel free to edit this
-and add more data if you need it.
+and add more data if you need it. However for performance reasons Ive had to move a lot of data into the
+anime.tpl xmls rather than the main xml. This makes it harder to get the main table to show information if you need it.
+I don't know how to solve this dichotomy.
 
 
