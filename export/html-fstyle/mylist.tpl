@@ -13,8 +13,8 @@
   </custom>
 	<animes><tmpl_loop name=loop_anime>
 		<anime id="<tmpl_var name=data_anime_id>" type="<tmpl_var name=data_anime_type_name>" year="<tmpl_var name=data_anime_year>">
-      <status complete="<tmpl_var name=status_anime_iscomplete>" watched="<tmpl_var name=status_anime_iswatched>" hasawards="<tmpl_var name=status_anime_hasawards>" />
-		  <neps user="<tmpl_var name=data_anime_my_eps>" seen="<tmpl_var name=data_anime_my_watchedeps>" cnt="<tmpl_var expr="data_anime_eps_total - data_anime_eps_special">" />
+      <status complete="<tmpl_var name=status_anime_iscomplete>" watched="<tmpl_var name=status_anime_iswatched>" hasawards="<tmpl_var name=status_anime_hasawards>" restricted="<tmpl_var name=status_anime_isrestricted>" />
+		  <neps user="<tmpl_var name=data_anime_my_eps>" seen="<tmpl_var name=data_anime_my_watchedeps>" cnt="<tmpl_var name=data_anime_eps>" />
 		  <seps user="<tmpl_var name=data_anime_my_eps_special>" seen="<tmpl_var name=data_anime_my_watchedeps_special>" cnt="<tmpl_var name=data_anime_eps_special>" /> 
 			<titles><tmpl_loop name=loop_anime_titles>
         <title type="<tmpl_var name=data_anime_title_type_string>" lang="<tmpl_var name=data_anime_title_langsname>"><![CDATA[<tmpl_var name=data_anime_title_name>]]></title></tmpl_loop>

@@ -6,7 +6,13 @@ Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
 SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/export/html-fstyle
 
 ----------------------------------------------------------------------------------------------
-
+0.5 - 06.07.2007
+	- Mylist functional
+	- Possible filters: letter, state, status, type
+	- Paging supported, jump to page supported (needs a bit more work to support long lists without clutering)
+	- fstyle.css takes care of most of the basic changes needed for a normal anidb css stylesheet to work with the template
+	- Initial pseudo-template support (possible extension of collumns supported)
+	- Needs sorting abilities and in mylist search of titles ability to have a full mylist page
 0.4 - 02.07.2007
 	- SVN release
 0.1 - 24.05.2006

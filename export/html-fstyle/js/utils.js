@@ -798,7 +798,7 @@ function applyFormat(identifier, file, episode, anime, group) {
   identifier = identifier.replace("%epat",episode.getAltTitle());
   if (identifier.indexOf("%enr") >= 0) {
     var epLen = String(anime.eps);
-    var epFmt = '0000'+episode.epno;000036
+    var epFmt = '0000'+episode.epno;
     epFmt = epFmt.slice(epFmt.length-epLen.length);
     identifier = identifier.replace("%enr",episode.typeChar+epFmt); 
   }

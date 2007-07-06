@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:anidb="http://anidb.info/markup" xml:lang="en" lang="en">
 	<head>
 		<title>::AniDB.net:: MyList Export ::</title>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -7,6 +8,7 @@
 		<link rel="alternate" type="application/rss+xml" title="AniDB RDF" href="http://anidb.info/anidb.rdf" />
 		<link rel="stylesheet" href="css/zakura/zakura.css" type="text/css" title="zakura Style" />
 		<link rel="alternate stylesheet" href="css/anidbstyle/anidbstyle.css" type="text/css" title="Classic" />
+    <link rel="stylesheet" href="css/fstyle.css" type="text/css" />
     <script src="js/preferences.js" type="text/javascript" title="Preferences"></script>
 	  <script src="js/mapvalues.js" type="text/javascript" title="Map Functions"></script>
     <script src="js/utils.js" type="text/javascript" title="Utils"></script>
@@ -18,14 +20,13 @@
   <body>
     <div id="statusBox"></div>
     <div id="layout-content">
-      <h1>MyList Export for %USERNAME% (<a class="short_link" href="http://anidb.info/%USERID%">u%USERID%</a>)</h1>
+      <h1>MyList Export for <username></username> (<useridlink></useridlink>)</h1>
       <div class="g_content mylist_all">
         <div class="g_section mylist_list">
           <ul class="g_jumplist">
             <li class="prev"><a>prev</a></li>
             <li class="next"><a>next</a></li>
-            <li class="jump">%PAGEJUMP%</li>
-            <li class="all">all</li>
+            <li class="all"><a>all</a></li>
             <li class="0-9"><a>0-9</a></li>
             <li class="a"><a>a</a></li>
             <li class="b"><a>b</a></li>
@@ -63,15 +64,18 @@
               <li><a>hide stalled</a></li>
               <li><a>hide watched</a></li>
               <li><a>hide not watched</a></li>
+              <li><a>hide awarded</a></li>
+              <li><a>hide ongoing</a></li>
+              <li><a>hide wishlisted</a></li>
               <li><a>show fileinfo</a></li>
             </ul>
             <ul class="state">
               <li><a><span class="i_icon i_state_all" title="all states">all states</span></a></li>
-              <li><a><span class="i_icon i_state_mixed" title="file with status: mixed state">mixed state</span></a></li>
-              <li><a><span class="i_icon i_state_unknown" title="file with status: unknown">unknown</span></a></li>
-              <li><a><span class="i_icon i_state_onhdd" title="file with status: internal storage (hdd)">on hdd</span></a></li>
-              <li><a><span class="i_icon i_state_oncd" title="file with status: external storage (cd/dvd/...)">on cd</span></a></li>
-              <li><a><span class="i_icon i_state_deleted" title="file with status: deleted">deleted</span></a></li>
+              <li><a><span class="i_icon i_state_mixed" title="animes with state: mixed state">mixed state</span></a></li>
+              <li><a><span class="i_icon i_state_unknown" title="animes with state: unknown">unknown</span></a></li>
+              <li><a><span class="i_icon i_state_onhdd" title="animes with state: internal storage (hdd)">on hdd</span></a></li>
+              <li><a><span class="i_icon i_state_oncd" title="animes with state: external storage (cd/dvd/...)">on cd</span></a></li>
+              <li><a><span class="i_icon i_state_deleted" title="animes with state: deleted">deleted</span></a></li>
             </ul>
             <ul class="animecat">
               <li><a>all types *</a></li>
@@ -80,8 +84,8 @@
               <li><a>Movies only</a></li>
             </ul>
             <ul class="user">
-              <li><a href="%ANIDBURL%?show=userpage&uid=%USERID%">user page</a></li>
-              <li><a href="%ANIDBURL%?show=msg&amp;do=new&amp;msg.to=%USERNAME%">send message</a></li>
+              <li><userpagelink></userpagelink></li>
+              <li><anidbmsguserlink></anidbmsguserlink></li>
               <li><a>list votes</a></li>
               <li><a>show wishlist</a></li>
               <li><a>show statistics</a></li>
@@ -107,26 +111,24 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="" id="a%ANIMEID%">
+                <tr class="" id="a%ANIMEID%" style="display: none;">
                   <td class="expand"><a><img src="css/icons/plus.gif" width="15" height="13" alt="(+)" title="expand entry" /></a></td>
-                  <td class="title"><div class="icons">%ANIMESTATEICON%</div><span><a href="anime.html?show=anime&aid=%ANIMEID%">%ANIMETITLE%</a></span></td>
-                  <td class="stats eps">%EPS%</td>
-                  <td class="stats seen">%SEEN%</td>
-                  <td class="rating anime mid">%RATING% (<span class="count">%VOTES%</span>)</td>
-                  <td class="vote none">%MYVOTE%</td>
-                  <td class="rating attavg mid">%REVIEWRATING% (<span class="count">%REVIEWCNT%</span>)</td>
+                  <td class="title"><div class="icons">%ANIMEICONS%</div><span><a href="anime.html?show=anime&aid=%ANIMEID%">%ANIMETITLE%</a></span></td>
+                  <td class="stats eps">%ANIMEEPS%</td>
+                  <td class="stats seen">%ANIMESEEN%</td>
+                  <td class="rating anime mid">%ANIMERATING% (<span class="count">%ANIMEVOTES%</span>)</td>
+                  <td class="vote">%ANIMEMYVOTE%</td>
+                  <td class="rating attavg mid">%ANIMEREVIEWRATING% (<span class="count">%ANIMEREVIEWCNT%</span>)</td>
                   <td class="action"><input type="checkbox" name="myamod.a.%ANIMEID%" /></td>
                 </tr>
               </tbody>
             </table>
-            <div class="g_actionlist mylist_action">
-            </div>
+            <div class="g_actionlist mylist_action"><jumppage></jumppage></div>
           </form>
           <ul class="g_jumplist">
             <li class="prev"><a>prev</a></li>
             <li class="next"><a>next</a></li>
-            <li class="jump">%PAGEJUMP%</li>
-            <li class="all">all</li>
+            <li class="all"><a>all</a></li>
             <li class="0-9"><a>0-9</a></li>
             <li class="a"><a>a</a></li>
             <li class="b"><a>b</a></li>
@@ -161,7 +163,7 @@
       <div class="g_end"></div>
     </div>
     <div id="layout-footer">
-      <p>V %THEMEVERSION% %THEMESOURCE% %THEMEDATE%, (C) 2007 by fahrenheit/AniDB, all rights reserved</p>
+      <p>V <themeversion></themeversion> <themesource></themesource> <themedate></themedate>, (C) 2007 by fahrenheit/AniDB, all rights reserved</p>
     </div>
 	</body>
 </html>

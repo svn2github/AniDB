@@ -110,10 +110,12 @@ function CAnimeEntry(node) {
   this.id = Number(node.getAttribute('id'));
   this.type = node.getAttribute('type');
   this.year = node.getAttribute('year');
-  this.eps = new Object();
+  this.neps = new Object();
   this.seps = new Object();
   this.title = "Anime "+this.id;
   this.titles = new Object();
+  this.state = 'unknown';
+  this.filtered = false;
   for (i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
@@ -122,11 +124,12 @@ function CAnimeEntry(node) {
         this.complete = Number(sNode.getAttribute('complete'));
         this.watched = Number(sNode.getAttribute('watched'));
         this.hasawards = Number(sNode.getAttribute('hasawards'));
+        this.restricted = Number(sNode.getAttribute('restricted'));
         break;
       case 'neps': 
-        this.eps['cnt'] = Number(sNode.getAttribute('cnt'));
-        this.eps['user'] = Number(sNode.getAttribute('user'));
-        this.eps['seen'] = Number(sNode.getAttribute('seen'));
+        this.neps['cnt'] = Number(sNode.getAttribute('cnt'));
+        this.neps['user'] = Number(sNode.getAttribute('user'));
+        this.neps['seen'] = Number(sNode.getAttribute('seen'));
         break;
       case 'seps':
         this.seps['cnt'] = Number(sNode.getAttribute('cnt'));
@@ -149,6 +152,8 @@ function CAnimeEntry(node) {
       case 'wishlist': this.wishlist = {'type':sNode.getAttribute('type'),'pri':sNode.getAttribute('pri'),'comment':nodeData(sNode)}; break;
       case 'myvote': this.myvote = {'type':sNode.getAttribute('type'),'date':sNode.getAttribute('date'),'vote':sNode.getAttribute('vote')}; break;
       case 'dates': this.dates = {'added':sNode.getAttribute('added'),'update':sNode.getAttribute('update'),'start':sNode.getAttribute('start'),'end':sNode.getAttribute('end')}; break;
+      case 'eps':
+      case 'groups': break; // handled else where
       default: showAlert('animeEntry for aid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
     }
   }
