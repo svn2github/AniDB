@@ -1,11 +1,20 @@
 History:
+07.07.2007
+	Updated language flags
+	Added total special episodes count
+	Added date of permamnet/temporal vote
+	Added link to AniDB MyList
+25.04.2007
+	BBCode replacement for description at anime page
+	Added tooltip for synonyms with more than 20 chars
+	Fix for mixed state icon
 10.05.2006
 	Updated Genres (categories) and Companies
 	Fixed some wrong handling of new features
 	Added ESC handling to return from anime page
 05.05.2006
 	Added ANN link when available
-	Updated to reflect AniDB video, audio and sub streams changes
+	Updated to reflect AniDB video, audio and sub tracks changes
 	Added and updated some images
 26.07.2005
 	Removed some files states and images

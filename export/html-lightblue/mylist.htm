@@ -1,7 +1,7 @@
 <html>
 <head>
 <title>AniDB : myList export</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="style.css" title="Light Blue" />
 <link rel="alternate stylesheet" type="text/css" href="stylew.css" title="White" />
 <link rel="alternate stylesheet" type="text/css" href="styleg.css" title="Green" />
@@ -523,7 +523,7 @@
 	document.write('<font size=4 color=white><b>' + user.toUpperCase() + '</b></font>');
 	document.write('</td>');
 	document.write('<td align=right valign=middle>');
-	document.write('<img class=link src="images/preferences.gif" width=16 height=16 title="Show/Hide Preferences" OnClick="showHide(\'preferences\'); self.location=\'#preferences\';">');
+	document.write('<a href="http://anidb.info/perl-bin/animedb.pl?show=mylist&uid=' + userid + '" target="_blank"><img class=link src="images/anidb.gif" width=16 height=16 title="View MyList at AniDB"></a>&nbsp;&nbsp;&nbsp;<img class=link src="images/preferences.gif" width=16 height=16 title="Show/Hide Preferences" OnClick="showHide(\'preferences\'); self.location=\'#preferences\';">');
 	document.write('</td>');
 	document.write('</tr>');
  	document.write('<tr class=title>');
@@ -650,7 +650,7 @@
 									<td><b>FILTER</b> [<span id=filterused>NONE</span>]</td>
 									<td>
 										by state:&nbsp;&nbsp;
-										<a href="javascript:selectState('udf');"><img src="images/rate_1.gif" width=15 height=13 class=link title="State: mixed state"></a>
+										<a href="javascript:selectState('udf');"><img src="images/state_-1.gif" width=15 height=13 class=link title="State: mixed state"></a>
 										<a href="javascript:selectState('unk');"><img src="images/state_0.gif" width=15 height=13 class=link title="State: unknown"></a>
 										<a href="javascript:selectState('hdd');"><img src="images/state_1.gif" width=15 height=13 class=link title="State: on hdd"></a>
 										<a href="javascript:selectState('cd');"><img src="images/state_2.gif" width=15 height=13 class=link title="State: on cd"></a>

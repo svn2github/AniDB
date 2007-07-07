@@ -1,22 +1,22 @@
-(C) 2003-2006 by DonGato
-Version: 3.1 (10.05.2006)
-
-Required Images (new for v3.1):
-<a href="http://www.anidb.net/files/html-lightblue/images.zip">http://www.anidb.net/files/html-lightblue/images.zip</a>
-
-Light blue HTML theme:
-- Most of the available data at aniDB is used
-- Search for anime titles inside your collection
-- Filter MyList data by status, state or type
-- Sort MyList data by any column in ascending or descending order
-- Images are used but included in a separate package
-- Heavy usage of CSS and JavaScript
-- No pop-ups nor multiple pages to navigate (not in Opera)
-- It uses cookies (not required but recommended)
-- Tested with Internet Explorer 6.0 SP2, FireFox 1.5.0.3 and Opera 8.5
-- Customizable ed2k link style
-- Customizable anime/episode title type
-- Selectable copy to clipboard feature
-- Three different color styles available (Light Blue as default, White and Green)
-
-<a href="http://www.anidb.net/forum/viewtopic.php?p=2782">Support, Feature Requests, Bug Reports?</a>
+(C) 2003-2006 by DonGato
+Version: 3.2 (07.07.2007)
+
+Required Images (new for v3.2):
+<a href="http://www.anidb.net/files/html-lightblue/images.zip">http://www.anidb.net/files/html-lightblue/images.zip</a>
+
+Light blue HTML theme:
+- Most of the available data at aniDB is used
+- Search for anime titles inside your collection
+- Filter MyList data by status, state or type
+- Sort MyList data by any column in ascending or descending order
+- Images are used but included in a separate package
+- Heavy usage of CSS and JavaScript
+- No pop-ups nor multiple pages to navigate (not in Opera)
+- It uses cookies (not required but recommended)
+- Tested with Internet Explorer 6.0 SP2, FireFox 2.0 and Opera 9
+- Customizable ed2k link style
+- Customizable anime/episode title type
+- Selectable copy to clipboard feature
+- Three different color styles available (Light Blue as default, White and Green)
+
+<a href="http://www.anidb.net/forum/viewtopic.php?p=2782">Support, Feature Requests, Bug Reports?</a>

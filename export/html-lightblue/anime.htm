@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script language="javascript" type="text/javascript">
 	var uri = '' + window.location;
 	var aToExpand = '';
@@ -9,6 +10,17 @@
 		var toExpand  = uri.substring(uri.indexOf('=') + 1, uri.length);
 		aToExpand = toExpand;
 		document.write('<script language="javascript" type="text/javascript" src="anime/' + aToExpand + '.js"><\/script>');
+	}
+
+	function ReplaceBBCode(str)
+	{
+		str = str.replace(/\[b\]/g, "<b>");
+		str = str.replace(/\[\/b\]/g, "</b>");
+		str = str.replace(/\[i\]/g, "<i>");
+		str = str.replace(/\[\/i\]/g, "</i>");
+		str = str.replace(/\[u\]/g, "<u>");
+		str = str.replace(/\[\/u\]/g, "</u>");
+		return str;
 	}
 </script>
 </head>
@@ -106,7 +118,7 @@
     document.write('<td>' + title2 + '</td>');
     document.write('<td><b>Specials:</b></td>');
     if (xa.mySEps != '0')
-	    document.write('<td>' + xa.mySEps + ' in mylist, ' + xa.myWSEps + ' seen</td>');
+	    document.write('<td>' + xa.SEps + ' (' + xa.mySEps + ' in mylist, ' + xa.myWSEps + ' seen)</td>');
 	else
 	    document.write('<td>none</td>');
     document.write('</tr>');
@@ -116,13 +128,18 @@
     if (xa.aliases == '')
 	    document.write('<td>-</td>');
 	else
-	    document.write('<td>' + xa.aliases + '</td>');
+	{
+		if (xa.aliases.length < 40)
+		    document.write('<td>' + xa.aliases + '</td>');
+		else
+		    document.write('<td><span onMouseover="ddrivetip(escape(\'' + xa.aliases + '\'));" onMouseout="hideddrivetip();">' + xa.aliases.substring(0,40) + '...</span></td>');
+	}
     document.write('<td><b>My Rating:</b></td>');
     document.write('<td>');
     if (xa.myvote != '')
-	    document.write(xa.myvote+ ' (permanent)</td>');
+	    document.write(xa.myvote+ ' (permanent on ' + xa.myvotedate + ')</td>');
 	else if (xa.mytmpvote != '')
-	    document.write(xa.mytmpvote+ ' (temporary)</td>');
+	    document.write(xa.mytmpvote+ ' (temporary on ' + xa.mytmpvotedate + ')</td>');
 	else
 	    document.write('-</td>');
     document.write('</tr>');
@@ -222,7 +239,7 @@
 
     document.write('<hr>');
     document.write('<table border=0 cellspacing=4 cellpadding=4 width=100%>');
-    document.write('<tr class=file><td>' + xa.description + '</td></tr>');
+    document.write('<tr class=file><td>' + ReplaceBBCode(xa.description) + '</td></tr>');
     document.write('</table>');
     document.write('<hr>');
 </script>
