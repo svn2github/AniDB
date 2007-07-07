@@ -128,8 +128,76 @@ form{
 .rightbar{
 	float: right;
 	width: 200px;
+	margin-right: 4px;
+	background-color: #6ac6af;
+	border: 1px solid #3ea68c;
+}
+
+.rightbar h4{
+	margin: 0px;
+	background-color: #006699;
+	color: #FFFFFF;
+	padding-left: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border: 1px solid #d6f2e5;
+	background-color: #9cddbe;
+	color: #2c496d;
+	margin: 4px;
+}
+
+.rightbar h3{
+	background-color: #d6f2e5;
+	padding-bottom: 2px;
+	text-align: center;
+	font-variant: small-caps;
+	font-size: 14px;
+	letter-spacing: 3px;
+}
+
+.rightbar p{
+	margin: 0px;
+	text-align: center;
+}
+
+.rightbar p a{
+	color: #000000;
+	text-decoration: none;
+}
+
+.rightbar p a:hover{
+	text-decoration: underline;
+}
+
+.rightbar .g_vital{
+	margin-bottom: 15px;
+}
+
+.rightbar ol{
+	font-size: 11px;
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	color: #377b6a;
+}
+
+.rightbar ol li a{
+	color: #000000;
+	text-decoration: none;
+}
+
+.rightbar ol li a:hover{
+	color:#FFFFFF;
 }
 
 #layout-footer{
 	clear: both;
+	font-size: 11px;
+	color: #000000;
+	background-color: #69cbcc;
+	text-align: right;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #FFFFFF;
+	padding: 5px;
 }
