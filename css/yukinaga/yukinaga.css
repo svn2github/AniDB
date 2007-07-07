@@ -1,5 +1,5 @@
 @charset "utf-8";
-/* aniDB CSS Document, YukiNaga by dizzy */
+/* aniDB CSS, YukiNaga by dizzy */
 
 body{
 	background-color: #aed5da;
@@ -14,6 +14,7 @@ body{
 
 ul, li{
 	margin: 0px;
+	padding-left: 20px;
 }
 
 form{
@@ -26,12 +27,74 @@ form{
 	background-image: url(images/top_yuki.jpg);
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
+	float: left;
 }
 
 #layout-menu{
-	margin-top: 225px;
-	float: left;
-	width: 200px;
+	width: 160px;
+	background-color: #4485af;
+	color: #FFFFFF;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #d5edef;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #FFFFFF;
+	overflow: visible;
+	position: absolute;
+	left: 0px;
+	top: 225px;
+	visibility: visible;
+	z-index: 2;
+	height: auto;
+}
+
+#layout-menu ul{
+	margin-top: 10px;
+}
+
+#layout-menu ul li{
+	font-size: 11px;
+	list-style-type: none;
+	border: solid #8ab6d3 1px;
+	background-color: #5791b7;
+	padding-left: 10px;
+	padding-right: 4px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin-top: 2px;
+	width: 100px;
+	font-variant: small-caps;
+	letter-spacing: 1px;
+}
+
+#layout-menu ul li a, #layout-menu ul li a:visited{
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#layout-menu ul li:hover, #layout-menu ul li:hover a{
+	background-color: #d4db6c;
+	color: #000000;
+}
+
+#layout-menu .usermenu{
+	margin-left: 20px;
+	margin-top: 10px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
+
+#layout-menu .usermenu p{
+	margin: 0px;
+	text-align: center;
+}
+
+#layout-menu .usermenu .user{
+	font-family: Arial, Tahoma, Verdana;
+	font-size: 16px;
+	font-weight: bold;
+	color:#FFCC33;
 }
 
 #layout-search{
@@ -40,14 +103,33 @@ form{
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	height: 225px;
+	width: 320px;
+}
+
+#layout-search form{
+	margin-top: 190px;
+}
+
+#layout-search form .text{
+	border: 1px solid white;
+	background-color: #6acbcc;
+	color: #327172;
+	width: 150px;
+	padding-left: 4px;
+	padding-top: 4px;
+	padding-bottom: 4px;
 }
 
 #layout-content{
 	float: left;
-	padding-left: 200px;
+	padding-left: 210px;
 }
 
 .rightbar{
 	float: right;
 	width: 200px;
+}
+
+#layout-footer{
+	clear: both;
 }
