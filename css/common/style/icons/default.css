@@ -500,13 +500,15 @@ span.i_rate_verylow
 }
 
 *.i_group_vote,
-*.i_ep_vote
+*.i_ep_vote,
+*.i_vote
 {
 	background-image: url(../icons/anidb_vote.gif);
 }
 
 *.i_group_revote,
-*.i_ep_revote
+*.i_ep_revote,
+*.i_revote
 {
 	background-image: url(../icons/anidb_revote.gif);
 }
