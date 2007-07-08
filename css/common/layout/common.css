@@ -85,7 +85,8 @@ body.nonav #layout-content h1
 	border: none;
 }*/
 
-#layout-content div table td.title div
+#layout-content div.anime_all div.info tr.official td.value div.icons,
+#layout-content div table td.title div.icons
 {
 	float: right;
 }
