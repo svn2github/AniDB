@@ -61,7 +61,7 @@ form select
 	border: 0;
 	font-family: Arial Unicode MS, Verdana, Tahoma, Arial, Helvetica, sans-serif;
 	font-size: 11px;
-	padding-left: 0.3em;
+	margin-left: 0.3em;
 }
 form input[type="submit"],
 form input[type="button"]
@@ -77,6 +77,12 @@ dl dt
 {
 	float: left;
 	clear: left;
+}
+
+dl
+{
+	display: table;
+	margin: 1px auto 1px auto;
 }
 
 caption
@@ -461,19 +467,10 @@ td.action
 {
 	background: none;
 }
-#layout-menu div.menu li.search
-{
-	text-transform: lowercase;
-}
 
 #layout-menu div.menu li.forum
 {
 	font-weight: bold;
-}
-
-#layout-menu div.menu li.genren a:before
-{
-	content: "categories                                    ";
 }
 
 #layout-menu div.menu li.forum a:before
@@ -483,7 +480,7 @@ td.action
 
 #layout-menu div.menu li.reclinks a:before
 {
-	content: "Rec ";
+	content: "rec. ";
 }
 
 #layout-menu span.login,
@@ -498,6 +495,8 @@ td.action
 	display: inline;
 }
 
+#layout-menu #newnews:before,
+#layout-menu #newnews:after,
 #layout-menu #newmessages:before,
 #layout-menu #newnotifies:before,
 #layout-menu #newmessages:after,
@@ -506,7 +505,16 @@ td.action
 	content: "!";
 	font-weight: bold;
 	color: red;
-	padding: 0.2em;
+	margin: 0.2em;
+}
+
+#layout-menu #newmessages,
+#layout-menu #newnews
+{
+	display: table-caption;
+	text-align: center;
+	white-space: nowrap;
+	margin: auto;
 }
 
 #layout-menu div.usermenu *.i_profile
@@ -750,7 +758,6 @@ width: 99%;
 {
 	height: 1.6em;
 	padding: 0.1em 0.1em 0.1em 0.1em;
-	vertical-align: middle;
 }
 
 #layout-content div.anime_all table.eplist
@@ -1007,7 +1014,8 @@ width: 99%;
 	text-align: left;
 }
 #layout-content div.agcmts_add form div textarea,
-#layout-content div.animegroup_all form div textarea
+#layout-content div.animegroup_all form div textarea,
+#layout-content div.creq_all form div textarea
 {
 	display: block;
 	width: 80%;
@@ -1016,7 +1024,8 @@ width: 99%;
 }
 #layout-content div.agcmts_add form div input,
 #layout-content div.animegroup_all label,
-#layout-content div.animegroup_all form div input
+#layout-content div.animegroup_all form div input,
+#layout-content div.creq_all form div input
 {
 	margin: 0.3em 0 0 10%;
 }
@@ -2089,10 +2098,9 @@ a.i_icon:hover, a.i_inline:hover
 	font-weight: bold;
 }
 
-#layout-content div.profile_css div.info dl dd,
-#layout-content div.creq_all div.states dd
+#layout-content dl dd
 {
-	margin-left: 7em;
+	margin-left: 10em;
 }
 
 #style_thumbnail
