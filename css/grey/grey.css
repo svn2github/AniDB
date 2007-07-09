@@ -2158,3 +2158,33 @@ a.i_icon:hover, a.i_inline:hover
 {
 	background-image: url(images/anidb_crc_unv.gif);
 }
+
+*.releaseinfotooltip div.icons span.i_icon
+{
+	float: left;
+}
+
+#obj-tooltip
+{
+	width: auto !important;
+	height: auto !important;
+	background-color: maroon;
+	color: white;
+	visibility: hidden;
+	z-index: 100;
+}
+
+#obj-tooltip h1
+{
+	display: none;
+}
+
+#obj-tooltip ul li,
+#obj-tooltip ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	vertical-align: center;
+}
