@@ -126,8 +126,8 @@ body.nonav #layout-content h1
 /* Tooltip support */
 #obj-tooltip {
 	position: absolute;
-	left: -300px;
-	width: 150px;
+	left: 0px;
+	width: 300px;
 	border: 1px solid black;
 	padding: 2px;
 	background-color: lightyellow;

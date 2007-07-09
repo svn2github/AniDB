@@ -334,7 +334,7 @@ input[type="text"]:hover, input[type="password"]:hover, input.text:hover, textar
 #obj-tooltip {
 	position: absolute;
 	left: -300px;
-	width: 150px;
+	width: 300px;
 	border: 1px solid black;
 	padding: 2px;
 	background-color: lightyellow;
