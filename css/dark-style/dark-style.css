@@ -306,13 +306,6 @@ span.i_icon {
 	float:					left;
 	padding-right:				3px;
 }
-td.title div.icons span.i_icon,
-div.icons span.i_mylist,
-div.icons span[title*="status"],
-div.icons span[title*="seen"] {
-	float:					right;
-	padding-right:				3px;
-}
 
 table {
 	border-spacing:				0;
@@ -508,13 +501,14 @@ div.anime_all table.filelist {
 	width:					877px;
 	margin-left:				33px;
 }
-div.anime_all div.episodes td.action{
+div.anime_all div.episodes td.action,
+div.anime_all div.groups td.action {
 	width:					40px;
 }
 div.anime_all div.mylist td.state,
 div.anime_all div.groups td.expand,
-div.anime_all div.groups td.eps,
 div.anime_all div.groups td.epno,
+div.anime_all div.groups td.specials,
 div.anime_all div.groups td.cmts,
 div.anime_all div.episodes td.expand,
 div.anime_all div.episodes td.duration,
@@ -526,7 +520,7 @@ div.anime_all div.episodes td.ed2k {
 div.anime_all div.groups td.name,
 div.anime_all div.groups td.state,
 div.anime_all div.groups td.date,
-div.anime_all div.groups td.votes,
+div.anime_all div.groups td.rating,
 div.anime_all div.episodes td.date,
 div.anime_all div.episodes td.epusers,
 div.anime_all div.episodes td.size,
@@ -538,7 +532,8 @@ div.anime_all table.filelist td.title {
 	width:					70px;
 	text-align:				center;
 }
-div.anime_all div.episodes td.action a.i_icon {
+div.anime_all div.episodes td.action a.i_icon,
+div.anime_all div.groups td.action a.i_icon {
 	float:					right;
 }
 div.anime_all table.filelist td.action {
@@ -551,8 +546,8 @@ div.anime_all div.episodes td.check {
 	width:					40px;
 	text-align:				center;
 }
-div.anime_all div.groups td.action {
-	width:					76px;
+div.anime_all div.groups td.eps {
+	width:					205px;
 	text-align:				center;
 }
 
@@ -1003,6 +998,7 @@ div.mylist_all td.action {
 }
 div.mylist_all td.stats,
 div.mylist_all td.rating,
+div.mylist_all td.vote,
 div.mylist_all td.date,
 div.mylist_all td.group,
 div.mylist_all td.size,
@@ -1070,7 +1066,8 @@ div.buddylist_all td.date {
 
 /*													       notifies */
 
-div.mynotifies_all td.check {
+div.mynotifies_all td.check,
+div.mynotifies_all td.priority {
 	width:					30px;
 	text-align:				center;
 }
@@ -1090,18 +1087,29 @@ div.mynotifies_all div.action {
 
 /*													       wishlist */
 
+div.mywishlist_all table {
+	width:					auto;
+}
 div.mywishlist_all div table {
 	width:					100%;
 }
-div.mywishlist_all div td[align="center"] {
+div.mywishlist_all td.expand,
+div.mywishlist_all td.pri,
+div.mywishlist_all td.nfy,
+div.mywishlist_all td.releaseinfo,
+div.mywishlist_all td.state {
 	width:					30px;
-}
-div.mywishlist_all div td + td + td {
+	text-align:				center;
+} 
+div.mywishlist_all td.mylist,
+div.mywishlist_all td.seen,
+div.mywishlist_all td.date,
+div.mywishlist_all td.rating,
+div.mywishlist_all td.tmprating,
+div.mywishlist_all td.revrating,
+div.mywishlist_all td.cmts {
 	width:					70px;
 	text-align:				center;
-}
-div.mywishlist_all input {
-	width:					100%;
 }
 
 /*														   hint */
@@ -1412,6 +1420,30 @@ div.icons {
 }
 *.i_rate_halfstar {
 	background-image:			url(images/anidb_rate_halfstar.gif);
+}
+
+*.i_rate_veryhigh,
+*.i_rate_high,
+*.i_rate_med,
+*.i_rate_low,
+*.i_rate_verylow {
+	background: 				url(images/anidb_rate_star.gif) left center repeat-x;
+}
+
+*.i_rate_veryhigh {
+	width:					43px;
+}
+*.i_rate_high {
+	width:					36px;
+}
+*.i_rate_med {
+	width:					29px;
+}
+*.i_rate_low {
+	width:					21px;
+}
+*.i_rate_verylow {
+	width:					15px;
 }
 
 /* file actions */
@@ -1841,7 +1873,7 @@ table.filelist span.i_mylist {
 *.i_sub_jpt {
 	background-image: url(../icons/flags/anidb_sub_romaji.gif);
 }
-*.i_sub_kr {
+*.i_sub_ko {
 	background-image: url(../icons/flags/anidb_sub_korean.gif);
 }
 *.i_sub_la {
@@ -1915,6 +1947,27 @@ table.filelist span.i_mylist {
 }
 
 
+img[src*="anidb_mainichiaward.gif"] {
+	background:				url(images/anidb_awardmainichi.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+}
+img[src*="anidb_ar2002award.gif"],
+img[src*="anidb_ar2003award.gif"],
+img[src*="anidb_ar2004award.gif"],
+img[src*="anidb_ar2005award.gif"],
+img[src*="anidb_ar2006award.gif"],
+img[src*="anidb_ar2007award.gif"] {
+	background:				url(images/anidb_awardar.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+}
+img[src*="anidb_rate_star.gif"] {
+	background:				url(images/anidb_awardstar.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+}
+
 img[src*="minus.gif"] {
 	background:				url(images/minus.gif) center 1px no-repeat;
 	width:					0;
@@ -1984,4 +2037,4 @@ div.latestanimes_all img[src*="nopic.gif"] {
 	height:					140px;
 	width:					0;
 	padding:				0 75px;
-} 
+}
