@@ -726,3 +726,16 @@ span.i_videostream_h264_avc
 *.f_buddy {
   background-image: url(../icons/formating/user.gif);
 }
+
+/* Sorting Icons */
+
+*.s_reverse {
+  background: transparent url(../icons/up1.gif) no-repeat center right;
+  padding-right: 10px;
+}
+
+*.s_forward {
+  background: transparent url(../icons/down1.gif) no-repeat center right;
+  padding-right: 10px;
+}
+
