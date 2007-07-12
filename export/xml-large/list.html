@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <title>
+    </title>
+    <link rel="stylesheet" type="text/css" href="mylist.css"/>
+    <script type="text/javascript" src="helper.js"></script>
+    <script type="text/javascript" src="mylista.js"></script>
+    <script type="text/javascript" src="xsltTools.js"></script>
+</head>
+<body>
+<table width="100%" border="0">
+    <tr class="options">
+        <td>Options:</td>
+        <td>
+            <input type="checkbox" onclick="setXslParamShow('showOVA',this)"/>
+            Hide Oavs
+        </td>
+        <td>
+            <input type="checkbox" onclick="setXslParamShow('showTv',this)"/>
+            Hide TV Series
+        </td>
+        <td>
+            <input type="checkbox" onclick="setXslParamShow('showMovie',this)"/>
+            Hide Movies
+        </td>
+        <td>
+            <input type="checkbox" onclick="setXslParamShow('showOther',this)"/>
+            Hide Other
+        </td>
+        <td>
+            <input type="checkbox" onclick="setXslParamShow('showIncomplete',this)"/>
+            Hide Incomplete
+        </td>
+    </tr>
+</table>
+<div id="resultDiv"></div>
+<noscript>
+    <p>
+        This page uses scripted XSLT transformations. Ya need IE/Win, Mozilla or Netscape 7.1.
+    </p>
+</noscript>
+</body>
+</html>

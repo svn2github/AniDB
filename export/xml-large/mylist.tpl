@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="ISO-8859-1"?><?xml-stylesheet type="text/xsl" href="firstpass.xsl"?>
+
 <!--
 
 A my list page
@@ -20,7 +21,8 @@ Version 0.2
         <tmpl_loop name= loop_anime>
 
             <anime id="<tmpl_var name=data_anime_id>" broadcastDate="<tmpl_var name= data_anime_startdate>"
-                   type="<tmpl_var name= data_anime_type_name>" rating="<tmpl_var name= data_anime_rating>">
+                   type="<tmpl_var name= data_anime_type_name>" rating="<tmpl_var name= data_anime_rating>"
+                     status="<tmpl_if name=status_anime_iscomplete>complete<tmpl_else>incomplete</tmpl_if>">
                 <romanjiName><![CDATA[<tmpl_var name=data_anime_name>]]></romanjiName>
                 <englishName><![CDATA[<tmpl_var name=data_anime_title_eng>]]></englishName>
 
