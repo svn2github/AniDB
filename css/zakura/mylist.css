@@ -9,7 +9,7 @@ div.mylist_list form ul.g_jumplist {
 	margin: 1em 0 0;
 }
 div.mylist_list form,
-div.mylist_list>table.animelist {
+div.mylist_list div.compare {
 	margin: 1em 11em 1em 0;
 }
 div.mylist_list table.animelist {
@@ -28,12 +28,14 @@ div.mylist_list table.animelist td {
 div.mylist_list table.animelist td.eps,
 div.mylist_list table.animelist td.seen,
 div.mylist_list>table.animelist td.state,
+div.mylist_list div.compare table.animelist td.state,
 div.anime_all div.mylist td.state {
 	padding-left: 15px;
 }
 div.mylist_list table.animelist tr.complete>td.stats,
 div.mylist_list table.animelist tr.all_watched>td.stats,
 div.mylist_list>table.animelist td.state.complete,
+div.mylist_list div.compare table.animelist td.state.complete,
 div.anime_all div.mylist td.state.complete,
 div.anime_all div.mylist td.state.watched {
 	color: #000;
@@ -42,6 +44,7 @@ div.anime_all div.mylist td.state.watched {
 }
 div.mylist_list table.animelist tr.complete>td.seen,
 div.mylist_list>table.animelist td.state.complete+td.state.complete,
+div.mylist_list div.compare table.animelist td.state.complete+td.state.complete,
 div.anime_all div.mylist td.state,
 div.anime_all div.mylist td.state.complete+td.state.complete {
 	color: #000;
@@ -50,24 +53,26 @@ div.anime_all div.mylist td.state.complete+td.state.complete {
 }
 div.mylist_list table.animelist tr.all_watched>td.seen,
 div.mylist_list>table.animelist td.state.all_watched,
+div.mylist_list div.compare table.animelist td.state.all_watched,
 div.anime_all div.mylist td.state.watched+td.state.watched {
 	color: #4b9b39;
 	background: transparent url(images/layout/checkmark.png) no-repeat 2px center;
 }
-div.mylist_list>table.animelist td.state.all_watched {
+div.mylist_list>table.animelist td.state.all_watched,
+div.mylist_list div.compare table.animelist td.state.all_watched {
 	font-weight: bold;
 }
 div.mylist_list table.animelist td.myvote,
 div.mylist_list table.animelist td.vote {
-	color: #a1be2e;
+	color: #444;
 	text-align: center;
 }
 div.mylist_list table.animelist td.high {
-	color: #5dac3b;
+	color: #000;
 	font-weight: bold;
 }
 div.mylist_list table.animelist td.low {
-	color: #e33e23;
+	color: #999;
 }
 div.mylist_list table td.check {
 	padding: 1em 0 2em;

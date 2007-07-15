@@ -22,6 +22,7 @@ div#layout-content div.genren_all a.i_icon {
 	margin-right: 5px;
 	margin-bottom: -2px;
 	padding: 0;
+	background-position: left top;
 }
 div.genren_all a.i_minus {
 	background: transparent url(images/buttons/minus.gif) no-repeat left top;
@@ -29,8 +30,8 @@ div.genren_all a.i_minus {
 div.genren_all a.i_plus {
 	background: transparent url(images/buttons/plus.gif) no-repeat left top;
 }
-div.genren_all a.i_minus:hover,
-div.genren_all a.i_plus:hover {
+div#layout-content div.genren_all a.i_minus:hover,
+div#layout-content div.genren_all a.i_plus:hover {
 	background-position: -16px top;
 }
 div.genren_all span.cat {

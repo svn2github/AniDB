@@ -37,6 +37,6 @@ div.search_all table.search_results {
 	width: 100%;
 	margin: 1em 0;
 }
-div.search_all table.search_results td.anime {
-	width: 40%;
+div.search_all table.search_results th.rating {
+	width: 10%;
 }

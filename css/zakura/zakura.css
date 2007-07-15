@@ -5,8 +5,11 @@
 ----------------------------------*/
 
 /* icons */
-@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";
+/*@import "../common/style/icons/default.css";
+@import "../common/style/icons/flags.css";*/
+
+@import "anidb-default.css";
+@import "anidb-flags.css";
 @import "icons.css";
 
 /* global layout */
@@ -27,6 +30,8 @@
 @import "agcmts.css";
 @import "animeatt.css";
 @import "animehint.css";
+@import "animehist.css";
+@import "animevotes.css";
 @import "ep.css";
 @import "file.css";
 @import "group.css";
@@ -56,6 +61,7 @@
 @import "addeptitle.css";
 @import "addfile.css";
 @import "addgroup.css";
+@import "addtoanime.css";
 @import "ed2kdump.css";
 @import "creqs.css";
 

@@ -15,7 +15,8 @@ div.latest_all tr.yes.g_odd td {
 div.latest_all tr.yes td {
 	background-color: #f0ffe3;
 }
-div.latest_all td.verified.yes {
+div.latest_all td.verified.yes,
+div.latest_all td.vv.yes {
 	color: #4b9b39;
 	font-weight: bold;
 }
@@ -39,3 +40,7 @@ div.latest_all .g_section th {
 div.latest_groups table.agcomments td.text.comment {
 	width: 45%;
 }
+div.latest_all td.rating {color: #aaa;}
+div.latest_all td.rating.low {color: #999;}
+div.latest_all td.rating.mid {color: #444;}
+div.latest_all td.rating.high {color: #000; font-weight: bold;}

@@ -6,6 +6,7 @@ div.mynotifies_all caption {
 	display: none;
 }
 div.mynotifies_all div.list table,
+div.mynotifies_all div.mynotifies_history table,
 div.mynotifies_all div.action {
 	width: 100%;
 }

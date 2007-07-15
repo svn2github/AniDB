@@ -217,13 +217,13 @@ select option[value="0"] {
 }
 
 /* form input buttons */
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
 	border: 1px solid #2d42af;
 	color: #fff;
 	background: #586fd1;
 	cursor: pointer;
 }
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
 	background: #2d42af;
 }
 
@@ -235,7 +235,8 @@ input[type="submit"]:hover {
 	background: #faf0ff;
 	color: #4d2f5f;
 }
-.g_errorbox {
+.g_errorbox,
+.g_warnbox {
 	border: 1px solid #ffcbf8;
 	padding: 0.7em;
 	background: #ffeafc;
@@ -251,19 +252,22 @@ input[type="submit"]:hover {
 .g_notebox h3, 
 .g_note h3,
 .g_errorbox h3,
-.g_info h3 {
+.g_info h3,
+.g_warnbox {
 	margin: 0 0 -0.5em;
 }
 .g_notebox>*:last-child,
 .g_note>*:last-child,
 .g_errorbox>*:last-child,
-.g_info>*:last-child {
+.g_info>*:last-child,
+.g_warnbox>*:last-child {
 	margin-bottom: 0;
 }
 .g_notebox>*:first-child,
 .g_note>*:first-child,
 .g_errorbox>*:first-child,
-.g_info>*:first-child {
+.g_info>*:first-child,
+.g_warnbox>*:first-child {
 	margin-top: 0;
 }
 
@@ -335,19 +339,27 @@ input[type="text"]:hover, input[type="password"]:hover, input.text:hover, textar
 	position: absolute;
 	left: -300px;
 	width: 300px;
-	border: 1px solid black;
+	border: 1px solid #171a61;
 	padding: 2px;
-	background-color: lightyellow;
+	background: transparent url(images/layout/trans-dkblue.png) repeat left top;
 	visibility: hidden;
 	z-index: 100;
 	font-size: x-small;
+	color: #e8d0f5;
+}
+#obj-tooltip h1 {
+	background-color: transparent;
+	font-size: 1.2em;
+	color: #fff;
 }
 
 #obj-pointer {
 	position: absolute;
 	left: -300px;
-  width: 15px;
-  height: 13px;
+	width: 15px;
+	height: 13px;
 	z-index: 101;
 	visibility: hidden;
 }
+
+

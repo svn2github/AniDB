@@ -128,3 +128,31 @@ div.producerlist_all .g_filterlist {
 div.grouplist_list th.rating {
 	width: 8em;
 }
+
+/* js sorting */
+th.s_forward, th.s_reverse {
+	background-color: #565AB9;
+}
+th.s_forward {
+	background-image: url(images/buttons/down2.gif); 
+}
+th.s_reverse {
+	background-image: url(images/buttons/up2.gif); 
+}
+
+/* anime list rating */
+div.animelist_all table.anime_list td.rating {
+	color: #aaa;
+}
+div.animelist_all table.anime_list td.rating.mid {
+	color: #444;
+}
+div.animelist_all table.anime_list td.rating.high {
+	color: #000;
+	font-weight: bold;
+}
+div.animelist_all table.anime_list td.rating.low {
+	color: #999;
+}
+
+
