@@ -5,12 +5,12 @@
 ----------------------------------*/
 
 /* icons */
-/*@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";*/
+@import "../common/style/icons/default.css";
+@import "../common/style/icons/flags.css";
 
-@import "anidb-default.css";
-@import "anidb-flags.css";
-@import "icons.css";
+/*@import "anidb-default.css";*/
+/*@import "anidb-flags.css";*/
+/*@import "icons.css";*/
 
 /* global layout */
 @import "global.css";
