@@ -130,8 +130,26 @@ div.grouplist_list th.rating {
 }
 
 /* js sorting */
+
+th.c_set, 
+th.c_setlatin, 
+th.c_date, 
+th.c_latin {
+	cursor: pointer;
+	background-image: url(images/buttons/updown.gif);
+	background-position: right center;
+	background-repeat: no-repeat;
+	padding-right: 16px;
+}
+th.c_set:hover, 
+th.c_setlatin:hover, 
+th.c_date:hover,
+ th.c_latin:hover {
+	background-color: #353A8F
+}
 th.s_forward, th.s_reverse {
 	background-color: #565AB9;
+	padding-right: 18px;
 }
 th.s_forward {
 	background-image: url(images/buttons/down2.gif); 
