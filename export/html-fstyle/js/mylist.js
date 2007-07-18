@@ -79,6 +79,7 @@ function showPage(page) {
   if (isNaN(page)) page = this.firstChild.nodeValue;
   if (!page) return;
   var vis = 0;
+  var i = 0;
   var start = ((page - 1) * entriesPerPage);
   for (var a in animes) {
     var anime = animes[a];
@@ -88,7 +89,12 @@ function showPage(page) {
     if (!anime.filtered) { // anime is not filtered
       vis++;
       if (vis <= start || vis > start + entriesPerPage) row.style.display = 'none';
-      else row.style.display = '';
+      else {
+        row.style.display = '';
+        row.className = row.className.replace('g_odd','');
+        row.className += (i % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
+        i++;
+      }
     }
   }
   createPageJump(page);
@@ -113,6 +119,7 @@ function prevPage() {
  * Creates the Page Jump
  */
 function createPageJump(page) {
+  if (!isNaN(page)) curpage = Number(page);
   var jumppages = document.getElementsByTagName('jumppage');
   if (!jumppages.length) jumppages = getElementsByClassName(document.getElementsByTagName('UL'),'pageJump',true);
   for (var j = 0; j < jumppages.length; j++) {
@@ -120,15 +127,45 @@ function createPageJump(page) {
     ul.className = 'pageJump';
     var pages = Math.ceil(calculateNonFilteredAnimes()/entriesPerPage);
     for (var i = 1; i <= pages; i++) {
-      var li = document.createElement('LI');
-      li.className = 'jitem';
-      if (i == page) li.className += '_current';
-      li.onclick = showPage;
-      li.appendChild(document.createTextNode(i));
-      li.style.cursor = "pointer";
-      ul.appendChild(li);
+      if ((i == 1) ||
+          (i == pages) || 
+          (i == curpage - 2 && i > 2) ||
+          (i == curpage - 1 && i > 1) || 
+          (i == curpage) ||
+          (i == curpage + 1 && curpage + 1 < pages) ||
+          (i == curpage + 2 && curpage + 2 < pages) 
+         )
+      {
+        var li = document.createElement('LI');
+        li.className = 'jitem';
+        if (i == page) li.className += '_current';
+        li.onclick = showPage;
+        li.appendChild(document.createTextNode(i));
+        li.style.cursor = "pointer";
+        ul.appendChild(li);
+      }
     }
     jumppages[j].parentNode.replaceChild(ul,jumppages[j]);
+  }
+}
+/* *
+ * Creates a search box
+ */
+function createSearchBox() {
+  var searchboxes = document.getElementsByTagName('searchbox');
+  for (var j = 0; j < searchboxes.length; j++) {
+    var ul = document.createElement('UL');
+    ul.className = 'searchBox';
+    var li = document.createElement('LI');
+    var input = createTextInput('searchbox',15,false,false);
+    var button = document.createElement('INPUT');
+    button.type = 'submit';
+    button.onclick = filterByText;
+    button.value = "search";
+    li.appendChild(input);
+    li.appendChild(button);
+    ul.appendChild(li);
+    searchboxes[j].parentNode.replaceChild(ul,searchboxes[j]);
   }
 }
 
@@ -182,23 +219,27 @@ function updateAnimeRow(anime) {
       if (animeTitleDisplay == 1) title += ' ('+anime.getAltTitle('official')+')';
       ahref.firstChild.nodeValue = ahref.firstChild.nodeValue.replace('%ANIMETITLE%',title);
       if (animeTitleDisplay == 2 && anime.getAltTitle('official').length) ahref.title = 'Alternative title: '+ anime.getAltTitle('official');
+      cell.setAttribute('anidb:sort',title);
     }
   }
   cell = getElementsByClassName(cells,'eps',true)[0];
   if (cell) {
     var eps = anime.neps['user'] + '/' + anime.neps['cnt']+(anime.seps['user'] ? '+' + anime.seps['user'] : '');
     cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMEEPS%',eps);
+    cell.setAttribute('anidb:sort',anime.neps['user']);
   }
   cell = getElementsByClassName(cells,'seen',true)[0];
   if (cell) {
     var seen = anime.neps['seen'] + '/' + anime.neps['cnt']+(anime.seps['seen'] ? '+' + anime.seps['seen'] : '');
     cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMESEEN%',seen);
+    cell.setAttribute('anidb:sort',anime.neps['seen']);
   }
   cell = getElementsByClassName(cells,'anime',true)[0];
   if (cell) {
     cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMERATING%',(anime.votes ? anime.rating : '-'));
     var span = cell.getElementsByTagName('SPAN')[0];
     span.firstChild.nodeValue = span.firstChild.nodeValue.replace('%ANIMEVOTES%',(anime.votes ? anime.votes : '0'));
+    cell.setAttribute('anidb:sort',(anime.votes ? anime.rating : '0'));
   }
   cell = getElementsByClassName(cells,'vote',true)[0];
   if (cell) {
@@ -212,12 +253,14 @@ function updateAnimeRow(anime) {
       else if (anime.myvote['type'] == 'normal') cell.className += ' anime mid';
     }
     cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMEMYVOTE%',vote);
+    cell.setAttribute('anidb:sort',(anime.myvote ? anime.myvote['vote'] : '0'));
   }
   cell = getElementsByClassName(cells,'attavg',true)[0];
   if (cell) {
     cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMEREVIEWRATING%',(anime.reviews ? anime.rrating : '-'));
     var span = cell.getElementsByTagName('SPAN')[0];
     span.firstChild.nodeValue = span.firstChild.nodeValue.replace('%ANIMEREVIEWCNT%',(anime.reviews ? anime.reviews : '0'));
+    cell.setAttribute('anidb:sort',(anime.reviews ? anime.reviews : '0'));
   }
   cell = getElementsByClassName(cells,'action',true)[0];
   if (cell) cell.firstChild.name = cell.firstChild.name.replace('%ANIMEID%',anime.id);
@@ -246,6 +289,14 @@ function renderPage() {
     var row = updateAnimeRow(anime);
     row.className += (i % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
     tbody.appendChild(row);
+  }
+  init_sorting(animeListTable.tHead.rows[0],'title','up');
+  var ths = animeListTable.tHead.getElementsByTagName('TH');
+  for (var i = 0; i < ths.length; i++) {
+    ths[i].onclick = function onclick(event) {
+      showPage(1);
+      sortcol(this);
+    }
   }
 }
 
@@ -360,7 +411,7 @@ function filterByLetter() {
     if (!anime) continue;
     var row = document.getElementById('a'+anime.id);
     if (!row) continue;
-    if (letter == 'all') row.style.display = '';
+    if (letter == 'all') { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
     else {
       var code = anime.getTitle('main').charAt(0).toLowerCase();
       code = code.charCodeAt(0);
@@ -374,7 +425,43 @@ function filterByLetter() {
 }
 
 /* *
- * Replace Global's, DO NOT USE!!
+ * Filters the list by text
+ */
+function filterByText() {
+  var inputs = this.parentNode.getElementsByTagName('INPUT');
+  var text = '';
+  for (var i = 0; i < inputs.length; i++) {
+    if (inputs[i].type == 'text' && inputs[i].name == 'searchbox')  { text = inputs[i].value; break; }
+  }
+  if (text == '') return;
+  var textArray = text.split(' '); // split on spaces
+  for (var a in animes) {
+    var anime = animes[a];
+    if (!anime) continue;
+    var row = document.getElementById('a'+anime.id);
+    if (!row) continue;
+    var found = 0;
+    for (var t = 0; t < textArray.length; t++) {
+      var word = new RegExp(textArray[t],'mgi');
+      for (var types in anime.titles) {
+        for (var lang in anime.titles[types]) {
+          if (anime.titles[types][lang].match(word)) found++;
+        }
+      }
+    }
+    if (search_logic == 'OR') { 
+      if (found) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+      else { row.style.display = 'none'; filteredAnimes++; anime.filtered = true; }
+    } else { 
+      if (found == textArray.length) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+      else { row.style.display = 'none'; filteredAnimes++; anime.filtered = true; }
+    }
+  }
+  curpage = 1; showPage(curpage);
+}
+
+/* *
+ * Replace Global's
  * @param node to search
  */
 function replaceGlobals(node) {
@@ -406,7 +493,7 @@ function replaceGlobals(node) {
   a.href=base_url+'?show=msg&amp;do=new&amp;msg.to='+userInfo.name;
   a.appendChild(document.createTextNode('send message'));
   for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(a,elems[e]);
-  
+  createSearchBox();
 }
 
 /* *
@@ -414,6 +501,7 @@ function replaceGlobals(node) {
  */
 function prepPage() {
   uriObj = parseURI();
+  if (uriObj['show'] && uriObj['show'] != 'mylist') return;
   loadData('mylist.xml',parseData);
   var uls = document.getElementsByTagName('UL');
   var stateUL = getElementsByClassName(uls,'state',false)[0];

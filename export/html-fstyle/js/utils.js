@@ -264,7 +264,7 @@ function createSelect(base,name,id) {
 
 function createTextInput(name,size,disabled,hidden) {
   var input = document.createElement('INPUT');
-  if (hidden != null && !hidden) input.type = 'text';
+  if (!hidden) input.type = 'text';
   else input.type = 'hidden';
   input.name = name;
   if (size != null) input.size = size;

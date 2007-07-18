@@ -1,12 +1,17 @@
 Template: html-fstyle - ChangeLog
-Version: 0.4 - 02.07.2007
+Version: 0.6 - 18.07.2007
 (C) 2003-2007 by fahrenheit
 
 Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
 SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/export/html-fstyle
 
 ----------------------------------------------------------------------------------------------
-0.5 - 06.07.2007
+
+0.6 - 18.07.2007
+	- Mylist done, sorting needs to improve though
+	- jumplist done, as in, maximum number of pages shown in the jumplist is 5
+	- filter by state, type, status, letter and text implemented
+v0.5 - 06.07.2007
 	- Mylist functional
 	- Possible filters: letter, state, status, type
 	- Paging supported, jump to page supported (needs a bit more work to support long lists without clutering)
