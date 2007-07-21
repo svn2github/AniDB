@@ -31,7 +31,9 @@ a img, :link img, :visited img {
 }
 
 /* zero out borders on images and some links */
-div#layout-content td.action a, div#layout-content th a, div#layout-content th a img {
+.g_content td.action a, 
+.g_content th a, 
+.g_content th a img {
 	border: 0 !important;
 }
 
@@ -102,16 +104,16 @@ div.agcmts_all div.agcmts_head:after {
 }
 
 /* blocks */
-#layout-content div.block {
+.g_content div.block {
 	display:table;
 	margin-left:auto;
 	margin-right:auto;
 }
-#layout-content div.block div.image {
+.g_content div.block div.image {
 	display:table-cell;
 	vertical-align:middle;
 }
-#layout-content div.block div.image img {
+.g_content div.block div.image img {
 	margin-right: 1em;
 }
 
@@ -127,12 +129,12 @@ ul.g_navlist li {
 	font-weight: bold;
 	text-transform: capitalize;
 }
-div#layout-content ul.g_jumplist li a, 
-div#layout-content ul.g_jumplist li a:link, 
-div#layout-content ul.g_jumplist li a:visited,
-div#layout-content ul.g_navlist li a, 
-div#layout-content ul.g_navlist li a:link, 
-div#layout-content ul.g_navlist li a:visited {
+.g_content ul.g_jumplist li a, 
+.g_content ul.g_jumplist li a:link, 
+.g_content ul.g_jumplist li a:visited,
+.g_content ul.g_navlist li a, 
+.g_content ul.g_navlist li a:link, 
+.g_content ul.g_navlist li a:visited {
 	text-decoration: none;
 	border: 1px solid #f7edf1;
 	border-bottom: 1px solid #d28cb2;
@@ -142,10 +144,10 @@ div#layout-content ul.g_navlist li a:visited {
 	font-size: 0.95em;
 	font-weight: normal;
 }
-div#layout-content ul.g_jumplist li a:hover, 
-div#layout-content ul.g_jumplist li a:active,
-div#layout-content ul.g_navlist li a:hover, 
-div#layout-content ul.g_navlist li a:active {
+.g_content ul.g_jumplist li a:hover, 
+.g_content ul.g_jumplist li a:active,
+.g_content ul.g_navlist li a:hover, 
+.g_content ul.g_navlist li a:active {
 	background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
 	color: #de4799;
 	border: 1px solid #eec6dc;

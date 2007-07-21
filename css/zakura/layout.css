@@ -297,17 +297,17 @@ div#layout-footer p:after {
 }
 
 /* content links */
-div#layout-content a, 
-div#layout-content a:link {
+.g_content a, 
+.g_content a:link {
 	color: #154ef4;
 	text-decoration: none;
 	border-bottom: 1px solid transparent;
 }
-div#layout-content a:visited {
+.g_content a:visited {
 	color: #7264a6;
 }
-div#layout-content a:hover, 
-div#layout-content a:active {
+.g_content a:hover, 
+.g_content a:active {
 	color: #4876fe;
 	border-bottom: 1px dotted #4876fe;
 }

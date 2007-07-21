@@ -41,11 +41,11 @@ div.anime_all div.groups table {
 div.anime_all div.groups table tr:last-child {
 	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
 }
-div.anime_all div.groups .state.ongoing		{color: #2618b1;}
-div.anime_all div.groups .state.stalled		{color: #966319;}
-div.anime_all div.groups .state.complete	{color: #179023;}
-div.anime_all div.groups .complete			{font-weight: bold;}
-div.anime_all div.groups .state.dropped		{color: #8d92a0;}
+div.anime_all div.groups .state.ongoing, div.anime_all div.groups .state.ongoing a		{color: #2618b1;}
+div.anime_all div.groups .state.stalled, div.anime_all div.groups .state.stalled a		{color: #966319;}
+div.anime_all div.groups .state.complete, div.anime_all div.groups .state.complete a	{color: #179023;}
+div.anime_all div.groups .complete, div.anime_all div.groups .complete a				{font-weight: bold;}
+div.anime_all div.groups .state.dropped, div.anime_all div.groups .state.dropped a		{color: #8d92a0;}
 
 div.anime_all div.episodes {
 	padding-bottom: 0;

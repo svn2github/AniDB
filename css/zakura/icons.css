@@ -81,7 +81,7 @@ img[src*="anidb_file_removemylist.gif"] {
 	padding-left: 15px;
 }
 img[src*="anidb_file_ed2k.gif"] {
-	background: transparent url(images/buttons/ed2k.png) no-repeat left top;
+	background: transparent url(images/buttons/ed2k.gif) no-repeat left top;
 	width: 0;
 	padding-left: 15px;
 }
@@ -138,13 +138,13 @@ img[src*="anidb_nonotify.gif"] {
 
 
 /* inline icon styles */
-div#layout-content div.icons {
+.g_content div.icons {
 	margin: 2px 0.3em 0;
 }
-div#layout-content td.title div.icons {
+.g_content td.title div.icons {
 	float: right;
 }
-div#layout-content .i_icon,
+.g_content .i_icon,
 div.mylist_list td.icons span,
 div.anime_all td.icons span,
 #obj-tooltip div.icons .i_icon {
@@ -195,6 +195,10 @@ div.anime_all td.icons span,
 .i_filestate_onhdd 		{background-image: url(images/icons/state-hdd.gif);}
 .i_filestate_other	 	{background-image: url(images/icons/state-unknown.gif);}
 
+/* file attributes */
+span.i_video			{background-image: url(images/icons/video.gif);}
+.i_uncensored			{background-image: url(images/icons/uncensored.gif);}
+
 /* anime state */
 .i_state_all 			{background-image: url(images/icons/state-all.png);}
 .i_state_deleted 		{background-image: url(images/icons/state-del.png);}
@@ -211,12 +215,13 @@ div.anime_all td.icons span,
 
 /* mylist */
 .i_file_addmylist	 	{background-image: url(images/buttons/mylist-add.png);}
+.i_file_removemylist	{background-image: url(images/buttons/mylist-remove.png);}
 .i_mylist 				{background-image: url(images/icons/state-inmylist.png);}
 
 /* actions */
 .i_file_add 			{background-image: url(images/buttons/epfile-add.gif);}
 .i_file_edit 			{background-image: url(images/buttons/edit.png);}
-.i_file_ed2k 			{background-image: url(images/buttons/ed2k.png);}
+.i_file_ed2k 			{background-image: url(images/buttons/ed2k.gif);}
 .i_ep_vote				{background-image: url(images/buttons/vote.png);}
 .i_group_vote			{background-image: url(images/buttons/vote.png);}
 .i_vote					{background-image: url(images/buttons/vote.png);}
@@ -235,18 +240,19 @@ div.anime_all td.icons span,
 .i_sub_x-unk 			{background-image: url(images/icons/audio-sub-unknown.gif);}
 
 /* rating */
-span.i_rate_vhigh,
+span.i_rate_veryhigh,
 span.i_rate_high,
 span.i_rate_med,
 span.i_rate_low,
 span.i_rate_vlow {
-	background-repeat: repeat-x;
-	background-position: left;
+	background-repeat: repeat-x !important;
+	background-position: left !important;
+	padding: 0 !important;
 	background-image: url(images/icons/star.png);
 }
-span.i_rate_vhigh	{width: 45px;}
-span.i_rate_high	{width: 37px;}
-span.i_rate_med		{width: 30px;}
-span.i_rate_low		{width: 22px;}
-span.i_rate_vlow	{width: 15px;}
+span.i_rate_veryhigh	{width: 45px !important;}
+span.i_rate_high		{width: 37px !important;}
+span.i_rate_med			{width: 30px !important;}
+span.i_rate_low			{width: 22px !important;}
+span.i_rate_vlow		{width: 15px !important;}
 
