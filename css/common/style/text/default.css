@@ -17,7 +17,7 @@ th, td.action
 
 
 /** ALIGNMENT **/
-td.id, td.count, td.number, td.size, td.epno
+td.id, td.count, td.number, td.size, td.epno, td.duration
 {
 	text-align: right;
 }
