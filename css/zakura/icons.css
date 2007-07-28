@@ -196,8 +196,13 @@ div.anime_all td.icons span,
 .i_filestate_other	 	{background-image: url(images/icons/state-unknown.gif);}
 
 /* file attributes */
-span.i_video			{background-image: url(images/icons/video.gif);}
+.i_comment				{background-image: url(images/icons/comment.png); height: 15px !important; background-position: center bottom !important;}
+.i_crc_yes				{background-image: url(images/icons/crc-yes.png); height: 15px !important;}
 .i_uncensored			{background-image: url(images/icons/uncensored.gif);}
+span.i_video			{background-image: url(images/icons/video.gif);}
+.i_vrs_2				{background-image: url(images/icons/v2.png); height: 15px !important;}
+.i_vrs_3				{background-image: url(images/icons/v3.png); height: 15px !important;}
+
 
 /* anime state */
 .i_state_all 			{background-image: url(images/icons/state-all.png);}
@@ -228,12 +233,18 @@ span.i_video			{background-image: url(images/icons/video.gif);}
 
 
 /* audio+sub flags */
+.i_audio_fi 			{background-image: url(images/icons/audio-finnish.gif);}
+.i_sub_fi 				{background-image: url(images/icons/audio-sub-finnish.gif);}
 .i_audio_ja 			{background-image: url(images/icons/audio-japanese.gif);}
 .i_sub_ja 				{background-image: url(images/icons/audio-sub-japanese.gif);}
 .i_audio_x-jat			{background-image: url(images/icons/audio-x-japanese.gif);}
 .i_sub_x-jat			{background-image: url(images/icons/audio-sub-x-japanese.gif);}
 .i_audio_pl 			{background-image: url(images/icons/audio-polish.gif);}
 .i_sub_pl 				{background-image: url(images/icons/audio-sub-polish.gif);}
+.i_audio_ru 			{background-image: url(images/icons/audio-russian.gif);}
+.i_sub_ru 				{background-image: url(images/icons/audio-sub-russian.gif);}
+.i_audio_sl 			{background-image: url(images/icons/audio-slovenian.gif);}
+.i_sub_sl 				{background-image: url(images/icons/audio-sub-slovenian.gif);}
 .i_audio_x-other 		{background-image: url(images/icons/audio-unknown.gif);}
 .i_sub_x-other 			{background-image: url(images/icons/audio-sub-unknown.gif);}
 .i_audio_x-unk 			{background-image: url(images/icons/audio-unknown.gif);}
@@ -255,4 +266,9 @@ span.i_rate_high		{width: 37px !important;}
 span.i_rate_med			{width: 30px !important;}
 span.i_rate_low			{width: 22px !important;}
 span.i_rate_vlow		{width: 15px !important;}
+span.i_rate_unknown		{
+	background-image: url(images/icons/star-un.png);
+	padding: 0 !important;
+	height: 15px !important;
+}
 
