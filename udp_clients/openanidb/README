@@ -1,0 +1,74 @@
+Welcome to OpenAniDB. This is still a fairly experimental client, but 
+you should be able to use it fairly well. Please read this README; if 
+you don't, I can't improve the client, and you will not be pleased.
+
+To get started, make sure you have Python 2.4.x, wxPython 2.6.x, and 
+APSW. I realize that for now this is difficult for those not on Linux, 
+but I will address that in a few days.
+
+Type:
+ $ ./openanidb.py
+To start the program.
+
+What works:
+ - File hashing
+   - Files are hashed using ed2k. If PyCrypto is installed, OADB will 
+     use that; otherwise, there is a builtin MD4, although it will be 
+     slower since it is written in Python.
+ - Mylist
+   - Currently, MYLIST and MYLISTADD are supported, meaning that files 
+     can be added to your mylist. Currently, the parameters "viewed" and 
+     "state" are supported, and can be set in Settings.
+   - The local mylist is stored with the global cache, although since 
+     mylist lids are global, there should not be problems.
+ - Caching
+   - The cache is an Sqlite-powered flat file database, caching all 
+     possible requests and easing server load.
+
+What doesn't work:
+ - Cache invalidation
+   - Currently, the cache doesn't invalidate or clean itself, nor can it 
+     be cleaned manually, except through tools like sqlitebrowser.
+ - Hashes besides ed2k
+   - MD5 and SHA1 are trivial to implement in Python. RIPEMD and TTH are 
+     slightly more complex, but also fairly easy to add. They have been 
+     put aside in favor of bugfixes.
+ - Graceful error handling
+   - Network-based errors are handled in the UDP socket thread, and you 
+     will know if an error occurs because of a nice popup box. However,
+     error handling for the rest of the program is still largely 
+     nonexistent.
+
+What simply isn't there:
+ - Mylist import/export
+   - Currently, the only CSV export template is minimal-csv, which does 
+     not contain enough information to be useful as an import. We're 
+     working on it.
+   - Similarly, CSV export styles haven't been figured out. I'll get to 
+     it someday.
+ - Local file tracking
+   - The ultimate goal of a locally cached AniDB is the ability to 
+     reorganize and search any part of your collection on-the-fly 
+     without a (fast) Internet connection. Right now, local files aren't 
+     tracked, but it's a high priority.
+ - Search/goto
+ - Stateful browsing and incremental refresh
+ - Gentler hashing/hash cache
+ - Psyco support
+   - This is one of those "Don't try this at home"-style things. Psyco 
+     support for heavy lifting will be optional and user-controlled.
+
+Wow, you read all that? Good work. Now...
+
+If something breaks, send me the version numbers in the About box and 
+the traceback. (Tracebacks are printed to the console. You can get one 
+in Windows by running OADB from the command line or from inside IDLE.)
+
+If you have a feature request, go ahead and post it. I don't mind 
+discussing things that are clearly topical and within the realm of 
+reality. (OADB will never check your mail, toast your bread, or babysit 
+your children. Ever.)
+
+Thanks for trying out OpenAniDB!
+
+~ Corbin (MostAwesomeDude)
