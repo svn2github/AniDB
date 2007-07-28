@@ -34,7 +34,6 @@ img, a
 #layout-content *.g_jumplist,
 #layout-content *.g_description,
 #layout-content *.g_image image,
-#layout-content .g_block .g_definitionlist,
 #layout-content div.g_timedentry,
 #layout-content div.g_definitionlist table,
 #layout-content div.block + p.desc
@@ -54,7 +53,7 @@ img, a
 	padding: 1px;
 }
 
-#layout-content .g_block .g_definitionlist > table
+#layout-content .block .g_definitionlist > table
 {
 	border: none;
 	margin: 0;
