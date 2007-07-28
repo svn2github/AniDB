@@ -52,12 +52,13 @@ def cssmerge(fullpath, outfile):
 			outfile.write(line+"\n")
 	infile.close()
 
-def cssm():
+def cssm(cssfile="/"):
 	if os.path.exists(__out) is False:
 		os.mkdir(__out)
+
 	for line in file('stylelist','rU').readlines():
-		if not line.startswith('#'):
-			path,name = line.rstrip('\n').rsplit('/',1)	
+		if not line.startswith('#') and line.find(cssfile) > 0:
+			path,name = line.rstrip('\n').rsplit('/',1)
 			xml(unicode(path.lstrip('./').replace('/','-')),path)
 			out = __out+path.lstrip('./').replace('/','-')
 			if os.path.exists(out) is False:
@@ -206,8 +207,14 @@ def ftpfolder(ftp_path,anidbftp,position='/'):
 		ftpfolder(path,anidbftp,position+'/'+root)
 
 if __name__ == "__main__":
-	cssm()
-
-	if len(sys.argv) > 1:
-		doftp(sys.argv[1])
+	if len(sys.argv) == 3:
+		cssm(sys.argv[2])
+		if sys.argv[1] in ('upload','fullupload','cssupload'):
+			doftp(sys.argv[1])
+	elif len(sys.argv) == 2:
+		cssm()
+		if sys.argv[1] in ('upload','fullupload','cssupload'):
+			doftp(sys.argv[1])
+	else:
+		cssm()
 	print "done"
