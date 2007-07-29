@@ -24,6 +24,8 @@ span.diff,
 	color: darkgreen;
 }
 
+#layout-content table ul li.g_odd,
+#layout-content table table td.g_odd,
 #layout-content ul.g_actionlist li.g_odd
 {
 	background-color: inherit;
