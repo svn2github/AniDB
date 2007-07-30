@@ -1720,7 +1720,7 @@ table.filelist span.i_mylist {
 *.i_audio_hu {
 	background-image: url(../icons/flags/anidb_audio_hungarian.gif);
 }
-*.i_audio_in {
+*.i_audio_x-in {
 	background-image: url(../icons/flags/anidb_audio_instrumental.gif);
 }
 *.i_audio_id {
