@@ -58,6 +58,7 @@ function parseGroups(node,aid) {
     var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
     groups[groupEntry.id] = groupEntry;
     aGroups[aGroupEntry.id] = aGroupEntry;
+		animes[aid].groups.push(groupEntry.id);
     if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
   }
   // create the "no group" group entry
@@ -78,6 +79,7 @@ function parseGroups(node,aid) {
   groupEntry.stateId = 0;
   groupEntry.hasCherryBeenPoped = false;
   groups[groupEntry.id] = groupEntry;
+	animes[aid].groups.push(groupEntry.id);
 }
 
 /* *
@@ -98,6 +100,7 @@ function parseEpisodes(node,aid) {
     var episodeEntry = new CEpisodeEntry(childNode);
     episodeEntry.animeId = aid;
     episodes[episodeEntry.id] = episodeEntry;
+		animes[aid].eps.push(episodeEntry.id);
     epOrder.push(episodeEntry.id);
     if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
   }

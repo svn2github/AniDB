@@ -6,30 +6,12 @@
  
 // GLOBALs //
 
-var uid;       // userID
-var userInfo;  // userInfo
-var anime;     // anime Object (used in animePage)
-var animes = new Array();      // stored by aid
-var animeOrder = new Array();  // episodes ordered in db way (link to eid)
-var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
-var seeTimes = false;
 var animeListTable; // the animelist table
 var animeListRow; // the sample animeList row
 var animeFilter = {'complete':false,'incomplete':false,'restricted':false,'watched':false,'ongoing':false,
                    'notwatched':false,'stalled':false,'fileinfo':true,'wishlisted':false,'awarded':false};
 var curpage = 1;
 var filteredAnimes = 0;
-
-/* *
- * Fetches data
- * @param url URL of the data to fetch
- * @param func Parsing function
- */
-function loadData(url,func) {
-  var req = xhttpRequest();
-  xhttpRequestFetch(req, url, func);
-}
 
 /* *
  * Calls data handlers for xml data
@@ -148,26 +130,6 @@ function createPageJump(page) {
     jumppages[j].parentNode.replaceChild(ul,jumppages[j]);
   }
 }
-/* *
- * Creates a search box
- */
-function createSearchBox() {
-  var searchboxes = document.getElementsByTagName('searchbox');
-  for (var j = 0; j < searchboxes.length; j++) {
-    var ul = document.createElement('UL');
-    ul.className = 'searchBox';
-    var li = document.createElement('LI');
-    var input = createTextInput('searchbox',15,false,false);
-    var button = document.createElement('INPUT');
-    button.type = 'submit';
-    button.onclick = filterByText;
-    button.value = "search";
-    li.appendChild(input);
-    li.appendChild(button);
-    ul.appendChild(li);
-    searchboxes[j].parentNode.replaceChild(ul,searchboxes[j]);
-  }
-}
 
 /* *
  * Creates the mylist status Icons
@@ -236,10 +198,10 @@ function updateAnimeRow(anime) {
   }
   cell = getElementsByClassName(cells,'anime',true)[0];
   if (cell) {
-    cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMERATING%',(anime.votes ? anime.rating : '-'));
+    cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMERATING%',(anime.rating['votes'] ? anime.rating['rating'] : '-'));
     var span = cell.getElementsByTagName('SPAN')[0];
-    span.firstChild.nodeValue = span.firstChild.nodeValue.replace('%ANIMEVOTES%',(anime.votes ? anime.votes : '0'));
-    cell.setAttribute('anidb:sort',(anime.votes ? anime.rating : '0'));
+    span.firstChild.nodeValue = span.firstChild.nodeValue.replace('%ANIMEVOTES%',(anime.rating['votes'] ? anime.rating['votes'] : '0'));
+    cell.setAttribute('anidb:sort',(anime.rating['votes'] ? anime.rating['rating'] : '0'));
   }
   cell = getElementsByClassName(cells,'vote',true)[0];
   if (cell) {
@@ -458,42 +420,6 @@ function filterByText() {
     }
   }
   curpage = 1; showPage(curpage);
-}
-
-/* *
- * Replace Global's
- * @param node to search
- */
-function replaceGlobals(node) {
-  if (!userInfo) return;
-  var elems = node.getElementsByTagName('USERNAME');
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(document.createTextNode(userInfo.name),elems[e]);
-  elems = node.getElementsByTagName('USERID');
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(document.createTextNode(userInfo.id),elems[e]);
-  elems = node.getElementsByTagName('THEMEVERSION');
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(document.createTextNode(theme['version']),elems[e]);
-  elems = node.getElementsByTagName('THEMESOURCE');
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(document.createTextNode(theme['source']),elems[e]);
-  elems = node.getElementsByTagName('THEMEDATE');
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(document.createTextNode(theme['date']),elems[e]);
-  elems = node.getElementsByTagName('USERIDLINK');
-  var a = document.createElement('A');
-  a.className='short_link';
-  a.href='http://anidb.info/u'+userInfo.id;
-  a.appendChild(document.createTextNode('u'+userInfo.id));
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(a,elems[e]);
-  elems = node.getElementsByTagName('USERPAGELINK');
-  a = document.createElement('A');
-  a.className='short_link';
-  a.href='http://anidb.info/up'+userInfo.id;
-  a.appendChild(document.createTextNode('user page'));
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(a,elems[e]);
-  elems = node.getElementsByTagName('ANIDBMSGUSERLINK');
-  a = document.createElement('A');
-  a.href=base_url+'?show=msg&amp;do=new&amp;msg.to='+userInfo.name;
-  a.appendChild(document.createTextNode('send message'));
-  for (var e = 0; e < elems.length; e++) elems[e].parentNode.replaceChild(a,elems[e]);
-  createSearchBox();
 }
 
 /* *

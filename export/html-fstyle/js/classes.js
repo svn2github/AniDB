@@ -55,7 +55,6 @@ function CUserinfoEntry(node) {
  * @return groupEntry
  */
 function CGroupEntry(node) {
-  hiddenGroups++;
   this.visible = true;
   this.defaultVisible = false;
   this.filtered = false;
@@ -68,10 +67,8 @@ function CGroupEntry(node) {
   //this.relatedGroups = new Array();
   this.sepCnt = 0;
   this.epCnt = 0;
-  this.isInMylist = false;
-  this.epsInMyListArray = new Array();
-  this.epsInMyListStringGuess = '';
-  this.epsInMyListString = '';
+  this.isInMylistRange = '';
+  this.epRange = '';
   this.audioLangs = new Array();
   this.subtitleLangs = new Array();
   this.state = 'unknown';
@@ -90,6 +87,7 @@ function CGroupEntry(node) {
       case 'cmts': this.commentCount = Number(sNode.getAttribute('cnt')); break;
       case 'epcnt': this.epCnt = Number(nodeData(sNode)); break;
       case 'sepcnt': this.sepCnt = Number(nodeData(sNode)); break;
+      case 'eprange': this.epRange = nodeData(sNode); break;
       case 'aud': var langs = sNode.getElementsByTagName('lang');
   		  for (var k = 0; k < langs.length; k++) this.audioLangs.push(nodeData(langs[k]));
   		  break;
@@ -114,8 +112,21 @@ function CAnimeEntry(node) {
   this.seps = new Object();
   this.title = "Anime "+this.id;
   this.titles = new Object();
+	this.tags = new Object();
+	this.rating = new Object();
   this.state = 'unknown';
   this.filtered = false;
+	this.info = new Object();
+	this.eps = new Array();
+	this.groups = new Array();
+	this.temp; // temp var
+	// info stuff
+	this.other = '';
+	this.resources = new Object();
+	this.genres = new Array();
+	this.cats = new Array();
+	this.companys = new Array();
+	this.awards = new Array();
   for (i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
@@ -140,18 +151,115 @@ function CAnimeEntry(node) {
         for (var k = 0; k < sNode.childNodes.length; k++) {
           var tNode = sNode.childNodes.item(k);
           if (tNode.nodeType == 3) continue; // Text node, not interested
-          if (!this.titles[tNode.getAttribute('type')]) this.titles[tNode.getAttribute('type')] = new Object();
-          this.titles[tNode.getAttribute('type')][tNode.getAttribute('lang')] = nodeData(tNode);
+          if (tNode.getAttribute('type') == 'official' || tNode.getAttribute('type') == 'main') {
+						if (!this.titles[tNode.getAttribute('type')]) this.titles[tNode.getAttribute('type')] = new Object();
+						this.titles[tNode.getAttribute('type')][tNode.getAttribute('lang')] = nodeData(tNode);
+					} else {
+						if (!this.titles[tNode.getAttribute('type')]) this.titles[tNode.getAttribute('type')] = new Array();
+						this.titles[tNode.getAttribute('type')].push(nodeData(tNode));
+					}
           if (tNode.getAttribute('type') == 'main') this.title = nodeData(tNode);
+        }
+        break;
+			case 'tags':
+        for (var k = 0; k < sNode.childNodes.length; k++) {
+          var tNode = sNode.childNodes.item(k);
+          if (tNode.nodeType == 3) continue; // Text node, not interested
+					var tid = tNode.getAttribute('id');
+          this.tags[tid] = new Object();
+          this.tags[tid]['date'] = tNode.getAttribute('date')
+					this.tags[tid]['desc'] = nodeData(tNode);
         }
         break;
       case 'state': this.state = nodeData(sNode); break;
       case 'size': this.sizeBytes = sNode.getAttribute('longn'); this.size = sNode.getAttribute('cnt'); break;
-      case 'rating': this.votes = sNode.getAttribute('votes'); this.rating = sNode.getAttribute('rating'); break;
+      case 'rating': this.rating['type'] = sNode.getAttribute('type'); this.rating['votes'] = sNode.getAttribute('votes'); this.rating['rating'] = sNode.getAttribute('rating'); break;
       case 'reviews': this.reviews = sNode.getAttribute('cnt'); this.rrating = sNode.getAttribute('rating'); break;
       case 'wishlist': this.wishlist = {'type':sNode.getAttribute('type'),'pri':sNode.getAttribute('pri'),'comment':nodeData(sNode)}; break;
       case 'myvote': this.myvote = {'type':sNode.getAttribute('type'),'date':sNode.getAttribute('date'),'vote':sNode.getAttribute('vote')}; break;
       case 'dates': this.dates = {'added':sNode.getAttribute('added'),'update':sNode.getAttribute('update'),'start':sNode.getAttribute('start'),'end':sNode.getAttribute('end')}; break;
+			case 'info': // very long anime info parser
+				for (var k = 0; k < sNode.childNodes.length; k++) {
+          var tNode = sNode.childNodes.item(k);
+          if (tNode.nodeType == 3) continue; // Text node, not interested
+					switch (tNode.nodeName) {
+						case 'desc': this.other = nodeData(tNode); break;
+						case 'resources':
+							for (var r = 0; r < tNode.childNodes.length; r++) {
+								var rNode = tNode.childNodes.item(r);
+								if (rNode.nodeType == 3) continue; // Text node, not interested
+								this.resources[rNode.nodeName] = new Object();
+								if (rNode.getAttribute('id')) this.resources[rNode.nodeName]['id'] = rNode.getAttribute('id');
+								this.resources[rNode.nodeName]['link'] = nodeData(rNode);
+							}
+							break;
+						case 'genres':
+							for (var r = 0; r < tNode.childNodes.length; r++) {
+								var rNode = tNode.childNodes.item(r);
+								if (rNode.nodeType == 3) continue; // Text node, not interested
+								var genre = new Object();
+								genre['id'] = rNode.getAttribute('id');
+								genre['name'] = nodeData(rNode);
+								this.genres.push(genre);
+							}
+							break;
+						case 'cats':
+							for (var r = 0; r < tNode.childNodes.length; r++) {
+								var rNode = tNode.childNodes.item(r);
+								if (rNode.nodeType == 3) continue; // Text node, not interested
+								var cat = new Object();
+								cat['id'] = rNode.getAttribute('id');
+								cat['pid'] = rNode.getAttribute('pid');
+								cat['restricted'] = rNode.getAttribute('restricted');
+								cat['name'] = nodeData(rNode);
+								this.cats.push(cat);
+							}
+							break;
+						case 'companys':
+							for (var r = 0; r < tNode.childNodes.length; r++) {
+								var rNode = tNode.childNodes.item(r);
+								if (rNode.nodeType == 3) continue; // Text node, not interested
+								var id = rNode.getAttribute('id');
+								var company = new Object();
+								company['id'] = id;
+								company['type'] = rNode.getAttribute('atype');
+								this.companys.push(company);
+								if (!companys[id]) {
+									companys[id] = new Object();
+									companys[id]['type'] = rNode.getAttribute('type');
+									for (var c = 0; c < rNode.childNodes.length; c++) {
+										var cNode = rNode.childNodes.item(c);
+										if (cNode.nodeType == 3) continue; // Text node, not interested
+										companys[id][cNode.nodeName] = nodeData(cNode);
+									}
+								}
+							}
+							break;
+						case 'awards_type':
+							for (var r = 0; r < tNode.childNodes.length; r++) {
+								var rNode = tNode.childNodes.item(r);
+								if (rNode.nodeType == 3) continue; // Text node, not interested
+								var id = rNode.getAttribute('id');
+								if (awardtypes[id]) continue;
+								awardtypes[id] = nodeData(rNode);
+							}
+							break;
+						case 'awards':
+							for (var r = 0; r < tNode.childNodes.length; r++) {
+								var rNode = tNode.childNodes.item(r);
+								if (rNode.nodeType == 3) continue; // Text node, not interested
+								var award = new Object();
+								award['id'] = rNode.getAttribute('id');
+								award['type'] = rNode.getAttribute('type');
+								award['url'] = rNode.getAttribute('url');
+								award['award'] = nodeData(rNode);
+								this.awards.push(award);
+							}
+							break;
+						default: showAlert('infoEntry for aid: '+this.id, sNode.nodeName, sNode.nodeName,tNode.nodeName);
+					}
+        }
+				break;
       case 'eps':
       case 'groups': break; // handled else where
       default: showAlert('animeEntry for aid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
@@ -159,22 +267,24 @@ function CAnimeEntry(node) {
   }
 }
 
-CAnimeEntry.prototype.getTitle = function(type) {
+CAnimeEntry.prototype.getTitle = function(type,lang) {
+	if (!lang) lang = animeTitleLang;
   var title = null;
-  if (this.titles[type] && this.titles[type][animeTitleLang]) return this.titles[type][animeTitleLang];
-  if (!title) {
+  if (this.titles[type] && this.titles[type][lang]) { this.temp = lang; return this.titles[type][lang]; }
+  if (!title) {	
     if (!this.titles['official']) return anime.title;
-    else if (!this.titles['official'][animeTitleLang]) return anime.title;
-    else return this.titles['official'][animeTitleLang];
+    else if (!this.titles['official'][lang]) return anime.title;
+    else { this.temp = lang; return this.titles['official'][lang]; }
   }
   if (!title) return anime.title;
 }
 
-CAnimeEntry.prototype.getAltTitle = function(type) {
+CAnimeEntry.prototype.getAltTitle = function(type,lang) {
+	if (!lang) lang = animeAltTitleLang;
   var title = null;
   if (!this.titles['official']) return '';
-  else if (!this.titles['official'][animeAltTitleLang]) return '';
-  else return this.titles['official'][animeAltTitleLang];
+  else if (!this.titles['official'][lang]) return '';
+  else { this.temp = lang; return this.titles['official'][lang]; }
   if (!title) return '';
 }
 
@@ -206,8 +316,9 @@ function CEpisodeEntry(node) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
     switch (sNode.nodeName) {
+			case 'state': this.watched = sNode.getAttribute('watched'); this.state = nodeData(sNode);
       case 'flags': this.flags = Number(nodeData(sNode)); break;
-      case 'epno': this.epno = Number(nodeData(sNode)); break;
+      case 'epno': this.epno = nodeData(sNode); break;
       case 'len': this.length = Number(nodeData(sNode)); break;
       case 'date': this.addDate = convertTime(nodeData(sNode)); this.relDate = convertTime(sNode.getAttribute('rel')) || 0; break;
       case 'ucnt': this.userCount = Number(nodeData(sNode)); break;

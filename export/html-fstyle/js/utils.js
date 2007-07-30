@@ -35,8 +35,11 @@ function convertTime(data) {
     return (data.split('T').join(" "));
   else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0)
     return data;
-  else {
+  else if (data.indexOf(' ') >= 0)
+		return data;
+	else {
     var datetime = new Date(data * 1000);
+		if (datetime) return data;
     return (datetime.getFullYear() + '-' + padLeft(datetime.getMonth()+1, '0', 2) + '-' + padLeft(datetime.getDate(), '0', 2));
   }
 }
@@ -74,10 +77,12 @@ function javascriptDate(data) {
  */
 function cTimeDate(data) {
   if (!data) return;
-  if (data.indexOf(' ') >= 0) {
+  if (data.indexOf(' ') >= 0 && data.indexOf('-') >= 0) {
     data = data.split(' ')[0];
     data = data.split('-')[2] + '.' + data.split('-')[1] + '.' + data.split('-')[0];
     return (data);
+	} else if (data.indexOf('-') < 0 && data.indexOf(' ') >= 0) {
+		return (data.split(' ')[0]);
   } else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0) {
     data = data.split('-')[2] + '.' + data.split('-')[1] + '.' + data.split('-')[0];
     return (data);
@@ -271,6 +276,62 @@ function createTextInput(name,size,disabled,hidden) {
   if (disabled != null) input.disabled = disabled;
   return input;
 }
+
+function makeBar(parentNode,start,end,total,map) {
+  var mult = 1;
+  if ( total > 0 && 192 / total >= 1) mult = 192 / total;
+
+  var width = 1 + end - start;
+  var img = document.createElement('IMG');
+  img.src = 'http://static.anidb.net/pics/anidb_bar_h_'+map['img']+'.gif';
+  img.width = ( width * mult );
+  img.height = 10;
+  img.title = img.alt = '';
+  if (parentNode != null || parentNode != '') parentNode.appendChild(img);
+  else return img;
+}
+
+function makeCompletionBar(parentNode, range, maps) {
+  var len = range.length;
+  if ( len > 300 ) len = 300;
+  var span = document.createElement('SPAN');
+  span.className = 'range eps';
+  if (maps[1]['use'] || maps[2]['use']) {
+    span.setAttribute('anidb:data',maps);
+    span.onmouseout = hideTooltip;
+    span.onmouseover = function onmouseover(event) {
+      var node = document.createElement('DIV');
+      if (maps[1]['use']) node.appendChild(document.createTextNode(maps[1]['desc']));
+      if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createElement('BR')); 
+      if (maps[2]['use']) node.appendChild(document.createTextNode(maps[2]['desc']));
+      setTooltip(node,true,'auto');
+    }
+  }
+
+  for (var i=0; i < len; ) {
+    var v = range[i];
+    var k = i+1;
+    while ( k < len && range[k] == v ) k++;
+    if (!v) v=0;
+    makeBar(span, i+1, k, len, maps[v] );
+    i = k;
+  }
+  if (parentNode == null || parentNode == '') return span;
+	else parentNode.appendChild(span);
+}
+
+function expandRange(range,limit,map,array) {
+  if (!range && !array) return (new Array(limit));
+  var rangeGroups = range.split(',');
+  for (var r = 0; r < rangeGroups.length; r++) {
+    var rangeGroup = rangeGroups[r];
+    var rg = rangeGroup.split('-');
+    if ( rg.length == 1 ) array[rg[0]] = map['type'];
+    else { for( var i = rg[0]; i <= rg[1]; i++) array[ i-1 ] = map['type']; }
+  }
+  return array;
+}
+
 
 // GENERAL FUNCTIONS //
 

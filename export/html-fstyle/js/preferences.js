@@ -5,10 +5,11 @@
  */
 
 // template info
-var theme = {'version':"0.5beta",'source':"svn",'date':"03.07.2007"};
+var theme = {'version':"0.8beta",'source':"svn",'date':"30.07.2007"};
 // settings
 var animeTitleLang = 'x-jat';
 var animeAltTitleLang = 'en';
+var animeOfficialTitleLang = 'en';
 var animeTitleDisplay = 2;
 var episodeTitleLang = 'en';
 var episodeAltTitleLang = 'x-jat';
