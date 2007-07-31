@@ -41,7 +41,7 @@ version = "Database:\n  APSW version: " + apsw.apswversion() + "\n  SQLite versi
 
 conf = config.config()
 
-db = "anime.db"
+db = os.path.normpath(os.path.expanduser("~") + "/.oadb/anime.db")
 
 data = {
 	"anime":
@@ -70,6 +70,8 @@ def regendb():
 		cursor.execute("create table " + k + "(" + ', '.join(v) + ")")
 
 if not os.path.exists(db):
+	# There is no os.path.touch(), sadly...
+	open(db, "w").close()
 	# Gotta recreate the database!
 	regendb()
 

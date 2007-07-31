@@ -143,8 +143,9 @@ def login(user, passwd):
 		# Failed...
 		return False
 	elif code == "201":
-		# New version available; FIXME: make this apparent in the retval
+		# New version available!
 		(session, trash) = data.split(" ", 1)
+		wx.CallAfter(wx.MessageBox("There's a new version of OADB available.\nYou should go upgrade.","New Version Available", wx.OK | wx.ICON_INFORMATION))
 		return True
 	else:
 		# Some other code. Not important right now
@@ -310,6 +311,7 @@ def mylist(lid=0, fid=0):
 
 def mylistadd(fid, viewed, state):
 	'''Issues a MYLISTADD.'''
+	# Do we need to issue a MYLIST anyway? Currently, no.
 	if session == None:
 		return False
 	command = "MYLISTADD fid=" + str(fid) + "&viewed=" + str(viewed) + "&state=" + str(state) + "&s=" + session

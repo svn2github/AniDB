@@ -1,0 +1,11 @@
+Changelog:
+ - svn 304:
+   - Incremented version number to 0.3, network number to 2.
+   - Moved config files (anime.db, openanidb.ini) to ~/.oadb. Works on Linux, should work 
+     elsewhere.
+   - Fixed broken context menus in data browser. FIXME: File refreshes are not currently atomic.
+   - Implemented UDP status 201 (Successful login; new version available.)
+   - Committed CHANGELOG.
+ - svn 296:
+   - Initial commit.
+

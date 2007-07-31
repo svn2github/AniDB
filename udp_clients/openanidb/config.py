@@ -20,6 +20,7 @@
 ############################################################################
 
 import ConfigParser
+import os.path
 
 class config:
 	'''This class wraps ConfigParser without inheriting from it. The
@@ -28,7 +29,8 @@ class config:
 	locations or value conversion.'''
 	def __init__(self):
 		# Config file(s)
-		self.files = ["openanidb.ini"]
+		self.files = []
+		self.files.append(os.path.normpath(os.path.expanduser("~") + "/.oadb/openanidb.ini"))
 		self.parser = ConfigParser.SafeConfigParser()
 		self.parser.read(self.files)
 		if not self.parser.has_section("OpenAniDB"):
