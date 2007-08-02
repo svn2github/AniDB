@@ -158,6 +158,16 @@
 	background-image: url(../icons/flags/anidb_sub_indonesian.gif);
 }
 
+*.i_audio_is
+{
+	background-image: url(../icons/flags/anidb_audio_icelandic.gif);
+}
+
+*.i_sub_is
+{
+	background-image: url(../icons/flags/anidb_sub_icelandic.gif);
+}
+
 *.i_audio_it
 {
 	background-image: url(../icons/flags/anidb_audio_italian.gif);
