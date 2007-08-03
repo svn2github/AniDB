@@ -60,7 +60,7 @@ class udpthread(threading.Thread):
     '''Thread that runs a UDP request queue. Handles timeouts, errors,
     MTU, and flood control automatically. Not bad for datagrams, huh?'''
     def __init__(self):
-    threading.Thread.__init__(self)
+        threading.Thread.__init__(self)
         # In...
         self.i = Queue.Queue(5)
         # And out...
