@@ -32,7 +32,7 @@ import wx
 # We need to make sure our global directory exists
 storage = os.path.normpath(os.path.expanduser("~") + "/.oadb")
 if not os.path.exists(storage):
-	os.mkdir(storage)
+    os.mkdir(storage)
 
 # Local imports
 import config
@@ -41,76 +41,76 @@ import udp
 import hash
 
 replace_hash = {
-	'aname': 'a',
-	'aid': 'A',
-	'ename': 'e',
-	'eid': 'E',
-	'epno': 'n',
-	'fid': 'F',
-	'gshort': 'g',
-	'gid': 'G'
+    'aname': 'a',
+    'aid': 'A',
+    'ename': 'e',
+    'eid': 'E',
+    'epno': 'n',
+    'fid': 'F',
+    'gshort': 'g',
+    'gid': 'G'
 }
 
 sample_data = {
-	'aname': 'Death Note',
-	'rating': 897,
-	'epno': 35,
-	'tmprating': 884,
-	'erating': 734,
-	'evotes': 1232,
-	'synonyms': '',
-	'year': '2006-2007',
-	'ekanji': u'\u6bba\u610f',
-	'size': 183302144,
-	'ratings': 12,
-	'epcount': 37,
-	'ashort': 'DN',
-	'filename': 'Death Note - 35 - Murder Intent - [Kuro-Hana](3838c4e6).avi',
-	'state': 1,
-	'gid': 4012,
-	'fid': 334560,
-	'length': 23,
-	'type': 'TV Series',
-	'cats': 'Present,Alternative,Japan,Earth,Asia,Manga,Seinen,Plot Continuity,Rivalry,Thriller,Detective,Character Developement,Fantasy,Law and Order,Romance,Cops,Love Polygon',
-	'ed2k': '1f7d17883edbd552da28a980306109c2',
-	'spcount': 7,
-	'ename': 'Murder Intent',
-	'average': 871,
-	'eps': 37,
-	'tmpvotes': 2122,
-	'eid': 73592,
-	'aid': 4563,
-	'other': '',
-	'gshort': 'Kuro-Hana'
+    'aname': 'Death Note',
+    'rating': 897,
+    'epno': 35,
+    'tmprating': 884,
+    'erating': 734,
+    'evotes': 1232,
+    'synonyms': '',
+    'year': '2006-2007',
+    'ekanji': u'\u6bba\u610f',
+    'size': 183302144,
+    'ratings': 12,
+    'epcount': 37,
+    'ashort': 'DN',
+    'filename': 'Death Note - 35 - Murder Intent - [Kuro-Hana](3838c4e6).avi',
+    'state': 1,
+    'gid': 4012,
+    'fid': 334560,
+    'length': 23,
+    'type': 'TV Series',
+    'cats': 'Present,Alternative,Japan,Earth,Asia,Manga,Seinen,Plot Continuity,Rivalry,Thriller,Detective,Character Developement,Fantasy,Law and Order,Romance,Cops,Love Polygon',
+    'ed2k': '1f7d17883edbd552da28a980306109c2',
+    'spcount': 7,
+    'ename': 'Murder Intent',
+    'average': 871,
+    'eps': 37,
+    'tmpvotes': 2122,
+    'eid': 73592,
+    'aid': 4563,
+    'other': '',
+    'gshort': 'Kuro-Hana'
 }
 
 def replace_hashes(regexp, data):
-	'''Replaces hash-filled expressions with data. This function
-	shouldn't be fucked with lightly.'''
-	# No surprises here, XD...
-	regexp = unicode(regexp)
-	tempdic = {}
-	for k, v in data.iteritems():
-		# God, wonder if there's an easier way?
-		# Although, this IS pretty snazzy...
-		if replace_hash.has_key(k):
-			tempdic[replace_hash[k]] = v
-	data = tempdic
-	del tempdic
-	for key in data:
-		'''Yes, I know there are TWO different ways to perform
-		simple var subs on strings in Python. I don't want to use
-		either because this is so much simpler and faster.'''
-		'''if regexp.find("%" + key) != -1:
-			# Hit. Replace...
-			regexp = regexp.replace("%" + key, unicode(str(data[key])))'''
-		regexp = regexp.replace("$" + key, unicode(str(data[key])))
-	return regexp
+    '''Replaces hash-filled expressions with data. This function
+    shouldn't be fucked with lightly.'''
+    # No surprises here, XD...
+    regexp = unicode(regexp)
+    tempdic = {}
+    for k, v in data.iteritems():
+        # God, wonder if there's an easier way?
+        # Although, this IS pretty snazzy...
+        if replace_hash.has_key(k):
+            tempdic[replace_hash[k]] = v
+    data = tempdic
+    del tempdic
+    for key in data:
+        '''Yes, I know there are TWO different ways to perform
+        simple var subs on strings in Python. I don't want to use
+        either because this is so much simpler and faster.'''
+        '''if regexp.find("%" + key) != -1:
+            # Hit. Replace...
+            regexp = regexp.replace("%" + key, unicode(str(data[key])))'''
+        regexp = regexp.replace("$" + key, unicode(str(data[key])))
+    return regexp
 
 class settingsdialog(wx.Dialog):
     def __init__(self, *args, **kwds):
-	self.conf = kwds["conf"]
-	del kwds["conf"]
+        self.conf = kwds["conf"]
+        del kwds["conf"]
         # begin wxGlade: settingsdialog.__init__
         kwds["style"] = wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
@@ -153,29 +153,29 @@ class settingsdialog(wx.Dialog):
         self.Bind(wx.EVT_BUTTON, self.revert_settings, self.revert)
         self.Bind(wx.EVT_BUTTON, self.apply_settings, id=wx.ID_OK)
         # end wxGlade
-	self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filemove.Enable(self.filemovecheck.GetValue()), self.filemovecheck)
-	self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filerename.Enable(self.filerenamecheck.GetValue()), self.filerenamecheck)
-	self.boxdic = {
-		"english.anime": self.englishanime,
-		"english.eps": self.englisheps,
-		"anime.format": self.animeformat,
-		"eps.format": self.episodeformat,
-		"file.format": self.fileformat,
-		"file.move.check": self.filemovecheck,
-		"file.rename.check": self.filerenamecheck,
-		"file.move.dest": self.filemove,
-		"file.rename.dest": self.filerename,
-		"mylist.check": self.mylistcheck,
-		"mylist.viewed": self.mylistviewed,
-		"mylist.state": self.myliststate
-	}
-	self.revert_settings(None)
-	self.filemove.Enable(self.filemovecheck.GetValue())
-	self.filerename.Enable(self.filerenamecheck.GetValue())
-	self.update_anime_preview(None)
-	self.update_episode_preview(None)
-	self.update_file_preview(None)
-	self.update_rename_preview(None)
+        self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filemove.Enable(self.filemovecheck.GetValue()), self.filemovecheck)
+        self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filerename.Enable(self.filerenamecheck.GetValue()), self.filerenamecheck)
+        self.boxdic = {
+            "english.anime": self.englishanime,
+            "english.eps": self.englisheps,
+            "anime.format": self.animeformat,
+            "eps.format": self.episodeformat,
+            "file.format": self.fileformat,
+            "file.move.check": self.filemovecheck,
+            "file.rename.check": self.filerenamecheck,
+            "file.move.dest": self.filemove,
+            "file.rename.dest": self.filerename,
+            "mylist.check": self.mylistcheck,
+            "mylist.viewed": self.mylistviewed,
+            "mylist.state": self.myliststate
+        }
+        self.revert_settings(None)
+        self.filemove.Enable(self.filemovecheck.GetValue())
+        self.filerename.Enable(self.filerenamecheck.GetValue())
+        self.update_anime_preview(None)
+        self.update_episode_preview(None)
+        self.update_file_preview(None)
+        self.update_rename_preview(None)
 
     def __set_properties(self):
         # begin wxGlade: settingsdialog.__set_properties
@@ -234,38 +234,38 @@ class settingsdialog(wx.Dialog):
 
     def apply_settings(self, event): # wxGlade: settingsdialog.<event_handler>
         print "Applying settings..."
-	for label, box in self.boxdic.iteritems():
-		if type(box) == wx.CheckBox:
-			self.conf.set(label, box.IsChecked())
-		elif box == self.filemove:
-			# This box needs special treatment!
-			box.SetValue(os.path.normpath(box.GetValue()))
-			self.conf.set(label, box.GetValue())
-		elif type(box) == wx.TextCtrl:
-			# Strip out forbidden characters
-			for char in ['%']:
-				box.SetValue(box.GetValue().replace(char,''))
-			self.conf.set(label, box.GetValue())
-		elif type(box) == wx.RadioBox:
-			self.conf.set(label, box.GetSelection())
-	self.conf.save()
-	event.Skip()
+        for label, box in self.boxdic.iteritems():
+            if type(box) == wx.CheckBox:
+                self.conf.set(label, box.IsChecked())
+            elif box == self.filemove:
+                # This box needs special treatment!
+                box.SetValue(os.path.normpath(box.GetValue()))
+                self.conf.set(label, box.GetValue())
+            elif type(box) == wx.TextCtrl:
+                # Strip out forbidden characters
+                for char in ['%']:
+                    box.SetValue(box.GetValue().replace(char,''))
+                self.conf.set(label, box.GetValue())
+            elif type(box) == wx.RadioBox:
+                self.conf.set(label, box.GetSelection())
+        self.conf.save()
+        event.Skip()
 
     def revert_settings(self, event): # wxGlade: settingsdialog.<event_handler>
         print "Reverting settings..."
-	self.conf.reload()
-	for label, box in self.boxdic.iteritems():
-		setting = self.conf.get(label)
-		if type(box) == wx.RadioBox:
-			if setting != None:
-				box.SetSelection(int(self.conf.get(label)))
-			else:
-				self.conf.set(label, box.GetSelection())
-		else:
-			if setting != None:
-				box.SetValue(self.conf.get(label))
-			else:
-				self.conf.set(label, box.GetValue())
+        self.conf.reload()
+        for label, box in self.boxdic.iteritems():
+            setting = self.conf.get(label)
+            if type(box) == wx.RadioBox:
+                if setting != None:
+                    box.SetSelection(int(self.conf.get(label)))
+                else:
+                    self.conf.set(label, box.GetSelection())
+            else:
+                if setting != None:
+                    box.SetValue(self.conf.get(label))
+                else:
+                    self.conf.set(label, box.GetValue())
 
     def update_anime_preview(self, event): # wxGlade: settingsdialog.<event_handler>
         self.animeformatpreview.SetLabel(replace_hashes(self.animeformat.GetValue(), sample_data))
@@ -291,7 +291,7 @@ class oaframe(wx.Frame):
         self.localdb = wx.Panel(self.notebook1, -1)
         self.anime = wx.Panel(self.notebook1, -1)
         self.main = wx.Panel(self.notebook1, -1)
-        
+
         # Menu Bar
         self.menubar = wx.MenuBar()
         self.SetMenuBar(self.menubar)
@@ -344,34 +344,34 @@ class oaframe(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.gui_filebrowse, self.browse)
         self.Bind(wx.EVT_TOGGLEBUTTON, self.gui_hash, self.starthashing)
         # end wxGlade
-	# Tree events
-	self.Bind(wx.EVT_TREE_ITEM_RIGHT_CLICK, self.gui_tree_rc, self.tree)
-	self.Bind(wx.EVT_CLOSE, self.quit, self)
-	
-	# This sets up all the global shit we might need
-	# UDP socket (the one and only)
-	# self.sock = udp.udpsock()
-	# UDP thread (the one and only)
-	#self.outbound = Queue.Queue(10)
-	#self.inbound = Queue.Queue(5)
-	#self.udpthread = udp.udpthread(self.outbound, self.inbound, self.statusbar)
-	#self.udpthread.setDaemon(True)
-	#self.udpthread.start()
-	self.udpthread = udp.internets
-	self.udpthread.status = self.statusbar
-	self.udpthread.errno = self.derror
-	# Start "teh internets," lawl.
-	self.udpthread.setDaemon(True)
-	self.udpthread.start()
-	# Session ID
-	# If None, not logged in. Else, logged in. Remember that.
-	self.ssid = None
-	# Initialize the tree, ignore the returned root
-	self.tree.AddRoot("!root")
-	# Initialize the list
-	self.filelist.InsertColumn(0, "File name", wx.LIST_FORMAT_CENTER, -1)
-	# Settings
-	self.conf = config.config()
+        # Tree events
+        self.Bind(wx.EVT_TREE_ITEM_RIGHT_CLICK, self.gui_tree_rc, self.tree)
+        self.Bind(wx.EVT_CLOSE, self.quit, self)
+
+        # This sets up all the global shit we might need
+        # UDP socket (the one and only)
+        # self.sock = udp.udpsock()
+        # UDP thread (the one and only)
+        #self.outbound = Queue.Queue(10)
+        #self.inbound = Queue.Queue(5)
+        #self.udpthread = udp.udpthread(self.outbound, self.inbound, self.statusbar)
+        #self.udpthread.setDaemon(True)
+        #self.udpthread.start()
+        self.udpthread = udp.internets
+        self.udpthread.status = self.statusbar
+        self.udpthread.errno = self.derror
+        # Start "teh internets," lawl.
+        self.udpthread.setDaemon(True)
+        self.udpthread.start()
+        # Session ID
+        # If None, not logged in. Else, logged in. Remember that.
+        self.ssid = None
+        # Initialize the tree, ignore the returned root
+        self.tree.AddRoot("!root")
+        # Initialize the list
+        self.filelist.InsertColumn(0, "File name", wx.LIST_FORMAT_CENTER, -1)
+        # Settings
+        self.conf = config.config()
 
     def __set_properties(self):
         # begin wxGlade: oaframe.__set_properties
@@ -456,270 +456,269 @@ class oaframe(wx.Frame):
 
     def derror(self, message):
         '''As the name suggests, this pops up an error dialog.
-	In my infinite wisdom, I also decree that this function
-	shall print to the console as well.'''
-	wx.MessageBox(message, "Error")
-	print "Error:", message
+        In my infinite wisdom, I also decree that this function
+        shall print to the console as well.'''
+        wx.MessageBox(message, "Error")
+        print "Error:", message
 
     def about(self, event): # wxGlade: oaframe.<event_handler>
         print "Showing 'About...' box..."
-	versionstring = "Core:\n  GUI Version: 0.2a\n  Python version: " + sys.version.split()[0] + "\n  WX version: " + wx.__version__ + "\n" + udp.version + hash.version + db.version
-	wx.MessageBox("OpenAniDB (OADB) is a simple interface\nto the Anime Database (AniDB), written\nin Python with an emphasis on readable\nsource code and programmer sanity.\n\nIt is eternally under development,\nand commentary is always welcome.\n\n" + versionstring + "\nProgrammer: Corbin Simpson <MostAwesomeDude@gmail.com>\n", "About OADB", wx.OK + wx.ICON_INFORMATION)
+        versionstring = "Core:\n  GUI Version: 0.2a\n  Python version: " + sys.version.split()[0] + "\n  WX version: " + wx.__version__ + "\n" + udp.version + hash.version + db.version
+        wx.MessageBox("OpenAniDB (OADB) is a simple interface\nto the Anime Database (AniDB), written\nin Python with an emphasis on readable\nsource code and programmer sanity.\n\nIt is eternally under development,\nand commentary is always welcome.\n\n" + versionstring + "\nProgrammer: Corbin Simpson <MostAwesomeDude@gmail.com>\n", "About OADB", wx.OK + wx.ICON_INFORMATION)
 
     def quit(self, event): # wxGlade: oaframe.<event_handler>
         print "Quitting..."
-	# Cleanup is good.
-	if self.ssid != None:
-		# Logout
-		self.gui_logout(event)
-	self.Destroy()
+        # Cleanup is good.
+        if self.ssid != None:
+            # Logout
+            self.gui_logout(event)
+        self.Destroy()
         sys.exit()
 
     def gui_login(self, event): # wxGlade: oaframe.<event_handler>
         print "Logging in..."
-	if self.ssid != None:
-		# Already logged in, dumbass.
-		self.derror("Already logged in.")
-		return
+        if self.ssid != None:
+            # Already logged in, dumbass.
+            self.derror("Already logged in.")
+            return
         if udp.ping():
-		wx.BeginBusyCursor()
-		user = self.username_box.GetValue()
-		passwd = self.password_box.GetValue()
-		loginstatus = udp.login(user, passwd)
-		wx.EndBusyCursor()
-		if loginstatus == False:
-			self.derror("Incorrect username or password.")
-		else:
-			# We're in.
-			self.login.Enable(False)
-			self.logout.Enable(True)
-			print "Changing encoding..."
-			if not udp.encoding():
-				self.derror("Warning: Couldn't negotiate Unicode encoding;\nJapanese characters may not appear correctly on Windows.")
-	else:
-		self.derror("AniDB not responding. Try again in a minute.")
+            wx.BeginBusyCursor()
+            user = self.username_box.GetValue()
+            passwd = self.password_box.GetValue()
+            loginstatus = udp.login(user, passwd)
+            wx.EndBusyCursor()
+            if loginstatus == False:
+                self.derror("Incorrect username or password.")
+            else:
+                # We're in.
+                self.login.Enable(False)
+                self.logout.Enable(True)
+                print "Changing encoding..."
+                if not udp.encoding():
+                    self.derror("Warning: Couldn't negotiate Unicode encoding;\nJapanese characters may not appear correctly on Windows.")
+        else:
+            self.derror("AniDB not responding. Try again in a minute.")
 
     def gui_logout(self, event): # wxGlade: oaframe.<event_handler>
         print "Logging out..."
-	if udp.logout():
-		# Okay, we're outa da Matrix...
-		self.login.Enable(True)
-		self.logout.Enable(False)
-	else:
-		# Shit?!?
-		self.derror("Could not log out.")
+        if udp.logout():
+            # Okay, we're outa da Matrix...
+            self.login.Enable(True)
+            self.logout.Enable(False)
+        else:
+            # Shit?!?
+            self.derror("Could not log out.")
 
     def gui_anime(self, event): # wxGlade: oaframe.<event_handler>
         print "Starting anime search..."
-	aname = self.aname_box.GetValue()
-	try:
-		aid = int(self.aid_box.GetValue())
-	except ValueError:
-		aid = 0
-	self.anime_results.Clear()
-	wx.BeginBusyCursor()
-	results = udp.anime(self.outbound, self.inbound, self.ssid, aid, aname)
-	wx.EndBusyCursor()
-	if results != None:
-		# Hit!
-		# Formatting...
-		results = [unicode(i) for i in results]
-		self.aname_box.Clear()
-		self.aid_box.Clear()
-		# {0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{int4 review rating average}|{int4 reviews}|{10}|{11}|{12}|{13}|{14}|{15}|{str short names}|{str synonyms}|{str category list}|{19}
-		self.anime_results.AppendText("Name: " + results[12] + "\n")
-		self.anime_results.AppendText("Kanji: " + results[13] + "\n")
-		self.anime_results.AppendText("English: " + results[14] + "\n")
-		self.anime_results.AppendText("Anime ID: " + results[0] + "\n")
-		self.anime_results.AppendText("AniDB link: http://anidb.info/a" + results[0] + "\n")
-		self.anime_results.AppendText("Year: " + results[10] + " (" + results[11] + ")\n")
-		self.anime_results.AppendText("(Other languages: " + results[15] + ")\n")
-		self.anime_results.AppendText("Episodes: " + results[1] + " (" + results[2] + " normal, " + results[3] + " special)\n")
-		self.anime_results.AppendText("Rating: " + results[4] + " (" + results[5] + " votes)\n")
-		self.anime_results.AppendText("(Temporary rating: " + results[4] + " (" + results[5] + " votes))\n")
-		self.anime_results.AppendText("\nFrom cache: " + results[19])
-	else:
-		self.anime_results.AppendText("No results, sorry.")
-		self.derror("No results found.")
+        aname = self.aname_box.GetValue()
+        try:
+            aid = int(self.aid_box.GetValue())
+        except ValueError:
+            aid = 0
+        self.anime_results.Clear()
+        wx.BeginBusyCursor()
+        results = udp.anime(self.outbound, self.inbound, self.ssid, aid, aname)
+        wx.EndBusyCursor()
+        if results != None:
+            # Hit!
+            # Formatting...
+            results = [unicode(i) for i in results]
+            self.aname_box.Clear()
+            self.aid_box.Clear()
+            # {0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{int4 review rating average}|{int4 reviews}|{10}|{11}|{12}|{13}|{14}|{15}|{str short names}|{str synonyms}|{str category list}|{19}
+            self.anime_results.AppendText("Name: " + results[12] + "\n")
+            self.anime_results.AppendText("Kanji: " + results[13] + "\n")
+            self.anime_results.AppendText("English: " + results[14] + "\n")
+            self.anime_results.AppendText("Anime ID: " + results[0] + "\n")
+            self.anime_results.AppendText("AniDB link: http://anidb.info/a" + results[0] + "\n")
+            self.anime_results.AppendText("Year: " + results[10] + " (" + results[11] + ")\n")
+            self.anime_results.AppendText("(Other languages: " + results[15] + ")\n")
+            self.anime_results.AppendText("Episodes: " + results[1] + " (" + results[2] + " normal, " + results[3] + " special)\n")
+            self.anime_results.AppendText("Rating: " + results[4] + " (" + results[5] + " votes)\n")
+            self.anime_results.AppendText("(Temporary rating: " + results[4] + " (" + results[5] + " votes))\n")
+            self.anime_results.AppendText("\nFrom cache: " + results[19])
+        else:
+            self.anime_results.AppendText("No results, sorry.")
+            self.derror("No results found.")
 
     def gui_refresh(self, event): # wxGlade: oaframe.<event_handler>
         print "Refreshing database tree..."
-	'''Lemme explain how this new loop works. We iterate internally
-	through all eps for each anime, and then through all files for each
-	ep, crossing off results from each array as they match.'''
-	# This flag, if set, will recall this event at the end of execution.
-	unclean = False
-	choice = self.tablechoose.GetSelection()
-	if choice == 0 or choice == 1:
-		# Entire cache, sorted as desired
-		animes = db.allanime(choice)
-		eps = db.alleps(choice)
-	files = db.allfiles()
-	mylist = db.allmylist()
-	# Clear the tree, and then repopulate
-	wx.BeginBusyCursor()
-	root = self.tree.GetRootItem()
-	animebranches = []
-	self.tree.DeleteChildren(root)
-	# Display anime names in English if possible?
-	englishanime = self.conf.get("english.anime")
-	englisheps = self.conf.get("english.eps")
-	animeregexp = self.conf.get("anime.format")
-	epregexp = self.conf.get("eps.format")
-	fileregexp = self.conf.get("file.format")
-	for anime in animes:
-		# Soo much casting...
-		if animeregexp != '':
-			branch = self.tree.AppendItem(root, replace_hashes(animeregexp, anime))
-		else:
-			branch = self.tree.AppendItem(root, anime['aname'] + " (" + str(anime['aid']) + ")")
-		self.tree.SetItemPyData(branch, ("a", anime['aid']))
-		animebranches.append(branch)
-		# Yes, this is for() each episode in the anime.
-		for i in range(1, int(anime['epcount'])):
-			leaf = self.tree.AppendItem(branch, "Episode " + str(i))
-			# "ue" is "unknown episode"
-			self.tree.SetItemPyData(leaf, ("ue", (anime['aid'], i)))
-			for ep in eps:
-				# Does aid match?
-				if ep['aid'] == anime['aid'] and ep['epno'] == i:
-					# Hit!
-					if epregexp is not '':
-						self.tree.SetItemText(leaf, replace_hashes(epregexp, ep))
-					else:
-						self.tree.SetItemText(leaf, ep['ename'])
-					self.tree.SetItemPyData(leaf, ("e", ep['eid']))
-					for file in files:
-						# First, does aid match?
-						if file['aid'] == anime['aid']:
-							# Second, does eid match?
-							if file['eid'] == ep['eid']:
-								# Hit! But, we need to establish some things
-								# first...
-								if fileregexp is not '':
-									fileleaf = self.tree.AppendItem(leaf, replace_hashes(fileregexp, file))
-								else:
-									fileleaf = self.tree.AppendItem(leaf, "File " + str(file['fid']))
-								self.tree.SetItemPyData(fileleaf, ("f", file['fid']))
-					break
-	# Restore control
-	wx.EndBusyCursor()
+        '''Lemme explain how this new loop works. We iterate internally
+        through all eps for each anime, and then through all files for each
+        ep, crossing off results from each array as they match.'''
+        # This flag, if set, will recall this event at the end of execution.
+        unclean = False
+        choice = self.tablechoose.GetSelection()
+        if choice == 0 or choice == 1:
+            # Entire cache, sorted as desired
+            animes = db.allanime(choice)
+            eps = db.alleps(choice)
+        files = db.allfiles()
+        mylist = db.allmylist()
+        # Clear the tree, and then repopulate
+        wx.BeginBusyCursor()
+        root = self.tree.GetRootItem()
+        animebranches = []
+        self.tree.DeleteChildren(root)
+        # Display anime names in English if possible?
+        englishanime = self.conf.get("english.anime")
+        englisheps = self.conf.get("english.eps")
+        animeregexp = self.conf.get("anime.format")
+        epregexp = self.conf.get("eps.format")
+        fileregexp = self.conf.get("file.format")
+        for anime in animes:
+            # Soo much casting...
+            if animeregexp != '':
+                branch = self.tree.AppendItem(root, replace_hashes(animeregexp, anime))
+            else:
+                branch = self.tree.AppendItem(root, anime['aname'] + " (" + str(anime['aid']) + ")")
+            self.tree.SetItemPyData(branch, ("a", anime['aid']))
+            animebranches.append(branch)
+            # Yes, this is for() each episode in the anime.
+            for i in range(1, int(anime['epcount'])):
+                leaf = self.tree.AppendItem(branch, "Episode " + str(i))
+                # "ue" is "unknown episode"
+                self.tree.SetItemPyData(leaf, ("ue", (anime['aid'], i)))
+                for ep in eps:
+                    # Does aid match?
+                    if ep['aid'] == anime['aid'] and ep['epno'] == i:
+                        # Hit!
+                        if epregexp is not '':
+                            self.tree.SetItemText(leaf, replace_hashes(epregexp, ep))
+                        else:
+                            self.tree.SetItemText(leaf, ep['ename'])
+                        self.tree.SetItemPyData(leaf, ("e", ep['eid']))
+                        for file in files:
+                            # First, does aid match?
+                            if file['aid'] == anime['aid']:
+                                # Second, does eid match?
+                                if file['eid'] == ep['eid']:
+                                    # Hit! But, we need to establish some things first...
+                                    if fileregexp is not '':
+                                        fileleaf = self.tree.AppendItem(leaf, replace_hashes(fileregexp, file))
+                                    else:
+                                        fileleaf = self.tree.AppendItem(leaf, "File " + str(file['fid']))
+                                        self.tree.SetItemPyData(fileleaf, ("f", file['fid']))
+                                        break
+        # Restore control
+        wx.EndBusyCursor()
 
     def gui_tree_rc(self, event):
-	popup = wx.Menu()
-	treeitem = event.GetItem()
-	treedata = self.tree.GetItemPyData(treeitem)
-	if treedata[0] == "a":
-		# Right-click on anime
-		idd = wx.NewId()
-		popup.Append(idd, "Remove anime " + str(treedata[1]))
-		self.Bind(wx.EVT_MENU, lambda evt: db.rmaid(treedata[1]), id=idd)
-		idd = wx.NewId()
-		popup.Append(idd, "Refresh anime " + str(treedata[1]))
-		self.Bind(wx.EVT_MENU, lambda evt: db.rmaid(treedata[1]) and db.findaid(treedata[1]), id=idd)
-	elif treedata[0] == "ue":
-		# Right-click on unidentified episode
-		idd = wx.NewId()
-		popup.Append(idd, "Lookup episode")
-		self.Bind(wx.EVT_MENU, lambda evt: db.findeid(aid=treedata[1]), id=idd)
-	elif treedata[0] == "e":
-		# Right-click on known episode
-		idd = wx.NewId()
-		popup.Append(idd, "Remove episode " + str(treedata[1]))
-		self.Bind(wx.EVT_MENU, lambda evt: db.rmeid(treedata[1]), id=idd)
-		idd = wx.NewId()
-		popup.Append(idd, "Refresh episode " + str(treedata[1]))
-		self.Bind(wx.EVT_MENU, lambda evt: db.rmeid(treedata[1]) and db.findeid(treedata[1]), id=idd)
-	elif treedata[0] == "f":
-		# Right-click on file
-		idd = wx.NewId()
-		popup.Append(idd, "Remove file " + str(treedata[1]))
-		self.Bind(wx.EVT_MENU, lambda evt: db.rmfid(treedata[1]), id=idd)
-		idd = wx.NewId()
-		popup.Append(idd, "Refresh file " + str(treedata[1]))
-		self.Bind(wx.EVT_MENU, lambda evt: db.rmfid(treedata[1]) and db.findfid(treedata[1]), id=idd)
-	idd = wx.NewId()
-	popup.Append(idd, "Refresh")
-	self.Bind(wx.EVT_MENU, self.gui_refresh, id=idd)
-	self.PopupMenu(popup)
-	event.Skip()
+        popup = wx.Menu()
+        treeitem = event.GetItem()
+        treedata = self.tree.GetItemPyData(treeitem)
+        if treedata[0] == "a":
+            # Right-click on anime
+            idd = wx.NewId()
+            popup.Append(idd, "Remove anime " + str(treedata[1]))
+            self.Bind(wx.EVT_MENU, lambda evt: db.rmaid(treedata[1]), id=idd)
+            idd = wx.NewId()
+            popup.Append(idd, "Refresh anime " + str(treedata[1]))
+            self.Bind(wx.EVT_MENU, lambda evt: db.rmaid(treedata[1]) and db.findaid(treedata[1]), id=idd)
+        elif treedata[0] == "ue":
+            # Right-click on unidentified episode
+            idd = wx.NewId()
+            popup.Append(idd, "Lookup episode")
+            self.Bind(wx.EVT_MENU, lambda evt: db.findeid(aid=treedata[1]), id=idd)
+        elif treedata[0] == "e":
+            # Right-click on known episode
+            idd = wx.NewId()
+            popup.Append(idd, "Remove episode " + str(treedata[1]))
+            self.Bind(wx.EVT_MENU, lambda evt: db.rmeid(treedata[1]), id=idd)
+            idd = wx.NewId()
+            popup.Append(idd, "Refresh episode " + str(treedata[1]))
+            self.Bind(wx.EVT_MENU, lambda evt: db.rmeid(treedata[1]) and db.findeid(treedata[1]), id=idd)
+        elif treedata[0] == "f":
+            # Right-click on file
+            idd = wx.NewId()
+            popup.Append(idd, "Remove file " + str(treedata[1]))
+            self.Bind(wx.EVT_MENU, lambda evt: db.rmfid(treedata[1]), id=idd)
+            idd = wx.NewId()
+            popup.Append(idd, "Refresh file " + str(treedata[1]))
+            self.Bind(wx.EVT_MENU, lambda evt: db.rmfid(treedata[1]) and db.findfid(treedata[1]), id=idd)
+        idd = wx.NewId()
+        popup.Append(idd, "Refresh")
+        self.Bind(wx.EVT_MENU, self.gui_refresh, id=idd)
+        self.PopupMenu(popup)
+        event.Skip()
 
     def show_settings(self, event): # wxGlade: oaframe.<event_handler>
         print "Showing settings dialog..."
-	settings = settingsdialog(self, conf=self.conf)
-	settings.ShowModal()
-	settings.Destroy()
+        settings = settingsdialog(self, conf=self.conf)
+        settings.ShowModal()
+        settings.Destroy()
         event.Skip()
 
     def gui_filebrowse(self, event): # wxGlade: oaframe.<event_handler>
         print "Showing file chooser..."
-	filechooser = wx.FileDialog(self, "Add File(s)", '', '', "All supported filetypes|*.avi;*.mkv;*.mp4|Audio-Video Interleave (*.avi)|*.avi|Matroska (*.mkv)|*.mkv|Quicktime MPEG-4 (*.mp4)|*.mp4", wx.OPEN | wx.FILE_MUST_EXIST | wx.MULTIPLE)
-	if filechooser.ShowModal() == wx.ID_OK:
-		for file in filechooser.GetPaths():
-			self.filelist.InsertStringItem(self.filelist.GetItemCount(), file)
-	filechooser.Destroy()
+        filechooser = wx.FileDialog(self, "Add File(s)", '', '', "All supported filetypes|*.avi;*.mkv;*.mp4|Audio-Video Interleave (*.avi)|*.avi|Matroska (*.mkv)|*.mkv|Quicktime MPEG-4 (*.mp4)|*.mp4", wx.OPEN | wx.FILE_MUST_EXIST | wx.MULTIPLE)
+        if filechooser.ShowModal() == wx.ID_OK:
+            for file in filechooser.GetPaths():
+                self.filelist.InsertStringItem(self.filelist.GetItemCount(), file)
+        filechooser.Destroy()
         event.Skip()
 
     def gui_hash(self, event): # wxGlade: oaframe.<event_handler>
         print "Starting hashing..."
-	if udp.session == '':
-		x = wx.MessageBox("Sure you don't want to be logged in?", "Not Logged In", wx.YES_NO)
-		if x == wx.NO:
-			return
-	if self.starthashing.GetValue():
-		'''There used to be some threading code here that passed
-		references from here to hash.hashthread. FUCK THAT SHIT.
-		GTK+, at least, doesn't like doing things like passing
-		references between threads. Fortunately, the progress
-		dialog is modal anyway.'''
-		total = self.filelist.GetItemCount()
-		# hashes = []
-		progdialog = wx.ProgressDialog("Currently hashing...", "Currently hashing...", (total*25)+1, self)
-		while self.filelist.GetItemCount() > 0:
-			filename = self.filelist.GetItem(0, 0).GetText()
-			x = (total - self.filelist.GetItemCount())*25
-			progdialog.Update(x, os.path.split(filename)[1])
-			# hashes.append(hash.ed2k(filename))
-			hasher = hash.ed2k(filename)
-			datum = None
-			for i in hasher:
-				x = x + 1
-				progdialog.Update(x)
-				if i != 1:
-					# On the last iteration, returns the data!
-					datum = i
-					break
-			fileinfo = db.findfid(h=datum)
-			del hasher
-			if self.conf.get("file.move.check") or self.conf.get("file.rename.check"):
-				# Move the file!
-				if os.access(filename, os.R_OK | os.W_OK):
-					# We're okay, so let's move it...
-					if self.conf.get("file.move.check"):
-						head = self.conf.get("file.move.dest")
-					else:
-						head = os.path.split(filename)[0]
-					tail = os.path.split(filename)[1]
-					if self.conf.get("file.rename.check"):
-						# Confusing line. New tail is regexp plus file extension.
-						tail = replace_hashes(self.conf.get("file.rename.dest"), fileinfo) + '.' + tail.split('.')[-1]
-					print "Head:",head
-					print "Tail:",tail
-					target = os.path.join(head, tail)
-					os.rename(filename, target)
-					(filename, target) = (target, None)
-				else:
-					self.derror("Could not move " + filename + ": Permission denied!")
-			if self.conf.get("mylist.check"):
-				# Add to mylist!
-				if not db.mylistadd(fileinfo["fid"], int(self.conf.get("mylist.viewed")), self.conf.get("mylist.state")):
-					wx.MessageBox("Couldn't add a file to the mylist. This ain't good.")
-			self.filelist.DeleteItem(0)
-		progdialog.Update(total*25+1)
-		progdialog.Destroy()
-		self.starthashing.SetValue(False)
-		#for hash in hashes:
-			#db.findfile(h=hash)
+        if udp.session == '':
+            x = wx.MessageBox("Sure you don't want to be logged in?", "Not Logged In", wx.YES_NO)
+            if x == wx.NO:
+                return
+        if self.starthashing.GetValue():
+            '''There used to be some threading code here that passed
+            references from here to hash.hashthread. FUCK THAT SHIT.
+            GTK+, at least, doesn't like doing things like passing
+            references between threads. Fortunately, the progress
+            dialog is modal anyway.'''
+            total = self.filelist.GetItemCount()
+            # hashes = []
+            progdialog = wx.ProgressDialog("Currently hashing...", "Currently hashing...", (total*25)+1, self)
+            while self.filelist.GetItemCount() > 0:
+                filename = self.filelist.GetItem(0, 0).GetText()
+                x = (total - self.filelist.GetItemCount())*25
+                progdialog.Update(x, os.path.split(filename)[1])
+                # hashes.append(hash.ed2k(filename))
+                hasher = hash.ed2k(filename)
+                datum = None
+                for i in hasher:
+                    x = x + 1
+                    progdialog.Update(x)
+                    if i != 1:
+                        # On the last iteration, returns the data!
+                        datum = i
+                        break
+                fileinfo = db.findfid(h=datum)
+                del hasher
+                if self.conf.get("file.move.check") or self.conf.get("file.rename.check"):
+                    # Move the file!
+                    if os.access(filename, os.R_OK | os.W_OK):
+                        # We're okay, so let's move it...
+                        if self.conf.get("file.move.check"):
+                            head = self.conf.get("file.move.dest")
+                        else:
+                            head = os.path.split(filename)[0]
+                            tail = os.path.split(filename)[1]
+                        if self.conf.get("file.rename.check"):
+                            # Confusing line. New tail is regexp plus file extension.
+                            tail = replace_hashes(self.conf.get("file.rename.dest"), fileinfo) + '.' + tail.split('.')[-1]
+                            print "Head:",head
+                            print "Tail:",tail
+                        target = os.path.join(head, tail)
+                        os.rename(filename, target)
+                        (filename, target) = (target, None)
+                    else:
+                        self.derror("Could not move " + filename + ": Permission denied!")
+                        if self.conf.get("mylist.check"):
+                            # Add to mylist!
+                            if not db.mylistadd(fileinfo["fid"], int(self.conf.get("mylist.viewed")), self.conf.get("mylist.state")):
+                                wx.MessageBox("Couldn't add a file to the mylist. This ain't good.")
+                self.filelist.DeleteItem(0)
+            progdialog.Update(total*25+1)
+            progdialog.Destroy()
+            self.starthashing.SetValue(False)
+            #for hash in hashes:
+                #db.findfile(h=hash)
         print "Finished hashing!"
 
 # end of class oaframe
