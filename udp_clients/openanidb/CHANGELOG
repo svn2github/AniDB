@@ -1,4 +1,8 @@
 Changelog:
+ - svn 306:
+   - Fixed whitespace issues causing IDLE to crash.
+   - Fixed regression in menu code with popups not displaying correctly.
+   - Fixed regression in menu code causing popups to show known episodes as unknown episodes.
  - svn 304:
    - Incremented version number to 0.3, network number to 2.
    - Moved config files (anime.db, openanidb.ini) to ~/.oadb. Works on Linux, should work 

@@ -266,27 +266,27 @@ def f2(a, b, c, d, k, s, X): return ROL(a + G(b, c, d) + X[k] + U32(0x5a827999L)
 def f3(a, b, c, d, k, s, X): return ROL(a + H(b, c, d) + X[k] + U32(0x6ed9eba1L), s)
 
 try:
-	import Crypto
-	import Crypto.Hash.MD4
-	md4obj = Crypto.Hash.MD4.new
-	version = "Hash module:\n  PCT version: " + Crypto.__version__ + "\n"
+    import Crypto
+    import Crypto.Hash.MD4
+    md4obj = Crypto.Hash.MD4.new
+    version = "Hash module:\n  PCT version: " + Crypto.__version__ + "\n"
 except ImportError:
-	md4obj = MD4
-	version = "Hash module:\n  No PCT present, using internal library\n"
+    md4obj = MD4
+    version = "Hash module:\n  No PCT present, using internal library\n"
 
 def ed2k(file):
-	'''Given a file name, return the ED2K hash and size as a tuple.'''
-	'''ED2K is a rudimentary tree hash, with a depth of 1 and a leaf
-	size of 9,728,000 bytes. The hash is MD4, and one way or the other,
-	it will be available, lawl.'''
-	handle = open(file, "rb")
-	buf = ''
-	hashl = []
-	while True:
-		buf = handle.read(9728000)
-		yield 1
-		if buf == '':
-			break
-		hashl.append(md4obj(buf).digest())
-	handle.close()
-	yield (md4obj(''.join(hashl)).hexdigest(), os.path.getsize(file))
+    '''Given a file name, return the ED2K hash and size as a tuple.'''
+    '''ED2K is a rudimentary tree hash, with a depth of 1 and a leaf
+    size of 9,728,000 bytes. The hash is MD4, and one way or the other,
+    it will be available, lawl.'''
+    handle = open(file, "rb")
+    buf = ''
+    hashl = []
+    while True:
+        buf = handle.read(9728000)
+        yield 1
+        if buf == '':
+            break
+        hashl.append(md4obj(buf).digest())
+    handle.close()
+    yield (md4obj(''.join(hashl)).hexdigest(), os.path.getsize(file))
