@@ -30,3 +30,9 @@ span.diff,
 {
 	background-color: inherit;
 }
+
+#layout-content .name span.main,
+#layout-content .name span.match
+{
+	color: gray;
+}

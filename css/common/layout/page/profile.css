@@ -1,8 +1,26 @@
-#layout-content div.profile_css div.info dl dt
+#layout-content div.profile_all > div
+{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#layout-content div.profile_all > div > div,
+#layout-content div.profile_all > div form > div
+{
+	display: table-cell;
+}
+
+#layout-content div.profile_all .g_info
+{
+	text-align: left;
+}
+
+#layout-content div.profile_all div.css_style div.info dl dt
 {
 	font-weight: bold;
 }
-#layout-content div.profile_css div.info dl dd
+#layout-content div.profile_all div.css_style div.info dl dd
 {
 	margin-left: 7em;
 	width: 20em;

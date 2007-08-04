@@ -6,3 +6,10 @@
 
 @import "border.css";
 @import "color.css";
+
+html, th, div
+{
+	font-weight: normal;
+	font-size: 14px;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}

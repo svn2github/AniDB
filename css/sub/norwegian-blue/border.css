@@ -49,3 +49,8 @@ img, a
 {
 	border-top: black 2px solid;
 }
+
+#layout-content div.profile_all div.g_section
+{
+	border: 3px solid #486187;
+}

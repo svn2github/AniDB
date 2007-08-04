@@ -13,7 +13,8 @@ table.filelist tr.newep td{
 	border-top: 1px solid #e9e6d9;
 }
 
-table table
+table table,
+#layout-content div.profile_all table
 {
 	border: none;
 }
@@ -64,8 +65,7 @@ img, a
 	border-top: 1px #66604d double;
 }
 
-/*#layout-content div.g_definitionlist tr th
+#layout-content div.profile_all div.g_section
 {
-	border-top: 1px #FFFFFF solid;
-	border-right: 1px #FFFFFF solid;
-}*/
+	border: 3px solid #8c8673;
+}

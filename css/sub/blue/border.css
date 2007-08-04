@@ -69,8 +69,7 @@ img, a
 	border-top: 2px #006699 double;
 }
 
-/*#layout-content div.g_definitionlist tr th
+#layout-content div.profile_all div.g_section
 {
-	border-top: 1px #FFFFFF solid;
-	border-right: 1px #FFFFFF solid;
-}*/
+	border: 3px solid #a1b4cd;
+}

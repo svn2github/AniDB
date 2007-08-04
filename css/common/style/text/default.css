@@ -1,4 +1,4 @@
-html, th
+html, th, div
 {
 	font-weight: normal;
 	font-size: 10px;
@@ -80,11 +80,12 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	white-space:nowrap;*/
 }
 
-.tiny, small
+.tiny, small,
+#layout-content .name span.main,
+#layout-content .name span.match
 {
 	font-size: 95%;
 }
-
 
 /** SHIT **/
 
