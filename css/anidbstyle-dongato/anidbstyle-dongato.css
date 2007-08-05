@@ -1,6 +1,6 @@
-/* Updated to 0.1.34 CSS version */
+/* Updated to 0.1.38 CSS version */
 
-/*anidbstyle_hacks.css*/
+/* anidbstyle_hacks.css */
 * html td, * html th
 {
 	font-size: 10px;
@@ -92,8 +92,8 @@
 	font-weight: normal;
 }
 
-/*sub-base.css*/
-/*base-icons.css*/
+/* sub-base.css */
+/* base-icons.css */
 a.i_icon:hover, a.i_inline:hover
 {
 	text-decoration: none;
@@ -113,7 +113,7 @@ a.i_icon:hover, a.i_inline:hover
 
 *.i_enlarge
 {
-	background-image: url((http://static.anidb.net/css/icons/enlarge.png);
+	background-image: url(http://static.anidb.net/css/icons/enlarge.png);
 	float: right;
 	height: 11px;
 	padding-top: 5px;
@@ -576,7 +576,7 @@ span.i_rate_verylow
 
 *.i_sort
 {
-width: 5px;
+	width: 5px;
 	background-image: url(http://static.anidb.net/css/icons/sort.gif);
 }
 
@@ -597,6 +597,24 @@ width: 5px;
 span.i_video
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video.gif);
+}
+
+span.i_ext
+{
+	display: none;
+/*	background-image: url(http://static.anidb.net/css/icons/icon/anidb_other.gif); */
+}
+
+span.i_ext.mkv
+{
+	display: none;
+/*	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_mkv.gif); */
+}
+
+span.i_ext.ogm
+{
+	display: none;
+/*	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_ogm.gif); */
 }
 
 span.i_videostream_unknown,
@@ -837,7 +855,7 @@ span.i_videostream_h264_avc
 	padding-right: 10px;
 }
 
-/*../base/icons-flags.css*/
+/* flags.css */
 *.i_audio_ar
 {
 	background-image: url(http://static.anidb.net/css/icons/flags/anidb_audio_arabic.gif);
@@ -996,6 +1014,16 @@ span.i_videostream_h264_avc
 *.i_sub_id
 {
 	background-image: url(http://static.anidb.net/css/icons/flags/anidb_sub_indonesian.gif);
+}
+
+*.i_audio_is
+{
+	background-image: url(http://static.anidb.net/css/icons/flags/anidb_audio_icelandic.gif);
+}
+
+*.i_sub_is
+{
+	background-image: url(http://static.anidb.net/css/icons/flags/anidb_sub_icelandic.gif);
 }
 
 *.i_audio_it
@@ -1328,7 +1356,7 @@ span.i_videostream_h264_avc
 	background-image: url(http://static.anidb.net/css/icons/flags/anidb_sub_traditional.gif);
 }
 
-/*../base/layout-animeatt.css*/
+/* animeatt.css */
 #layout-content div.animeatt_reviews div.review
 {
 	clear: right;
@@ -1377,7 +1405,7 @@ span.i_videostream_h264_avc
 	height: 10em;
 }
 
-/*base-default.css*/
+/* default.css */
 html, body, div, form, table, tr, td, ul, ol, dl, li, dt, h1, h2, h3, h4, p, caption
 {
 	padding: 1px;
@@ -1454,7 +1482,7 @@ dl dd
 	text-align: left;
 }
 
-/*base-layout.css*/
+/* layout.css */
 body.nonav #layout-content,
 body.nonav #layout-footer
 {
@@ -1649,7 +1677,7 @@ body.nonav #layout-content h1
 	margin-top: 0.6em;
 }
 
-/*** agcmts ***/
+/* agcmts */
 #layout-content div.agcmts_entries div.comment + div.comment
 {
 	margin-top: 1em;
@@ -1698,7 +1726,7 @@ body.nonav #layout-content h1
 	margin-top: 1em;
 }
 
-/*base-text.css*/
+/* text.css */
 html, th
 {
 	font-weight: normal;
@@ -1780,7 +1808,6 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	font-size: 95%;
 }
 
-/** SHIT **/
 table caption, h4
 {
 	font-size: 115%;
@@ -1857,7 +1884,7 @@ table caption, h4
 	text-align: right;
 }
 
-/*base-fancy.css*/
+/* fancy.css */
 #layout-content div.g_errorbox,
 #layout-content div.g_warnbox,
 #layout-content div.g_notebox,
@@ -1993,7 +2020,7 @@ table caption, h4
 	content: "]";
 }
 
-/*base-color-box.css*/
+/* box.css */
 #layout-content div.g_errorbox
 {
 	border: 1px solid #DD0000;
@@ -2038,7 +2065,7 @@ table caption, h4
 	color: #2EB42E;
 }
 
-/*base-color-special.css*/
+/* special.css */
 .v_pos
 {
 	color: #006600;
@@ -2065,7 +2092,7 @@ span.diff,
 	color: darkgreen;
 }
 
-/*../base/layout-jumplist.css*/
+/* jumplist.css */
 #layout-content ul.g_jumplist
 {
 	padding-left: 0;
@@ -2129,7 +2156,7 @@ span.diff,
 	content: " - ";
 }
 
-/*../bits/anidbstyle-mylist.css*/
+/* mylist.css */
 #layout-content div.g_menu ul.state
 {
 	height: 15px;
@@ -2191,7 +2218,7 @@ span.diff,
 	font-weight: bold;
 }
 
-/*../bits/anidbstyle-latestanimes.css*/
+/* latestanimes.css */
 #layout-content div.latestanimes_form
 {
 	clear: both;
@@ -2255,7 +2282,7 @@ span.diff,
 	text-align: center;
 }
 
-/*../bits/anidbstyle-genren.css*/
+/* genren.css */
 #layout-content div.genren_all
 {
 	text-align: center;
@@ -2297,7 +2324,7 @@ span.diff,
 	display: none;
 }
 
-/*base-layout-myplace.css*/
+/* myplace.css */
 #layout-content div.userpage_all div.stats,
 #layout-content div.myplace_all div.stats
 {
@@ -2402,7 +2429,6 @@ span.diff,
 	margin: 0 25% 0 25%;
 }
 
-/*SHIT*/
 #layout-content div.anime_table table.eplist,
 #layout-content div.ep_all table.filelist
 {
@@ -2485,10 +2511,9 @@ span.diff,
 	margin-right: 25%;
 }
 
-/*sub-gray-layout.css*/
+/* sub-gray-layout.css */
 html
 {
-/*	background: #BFC2C9 url(images/backtoo.png) repeat-y left; */
 	background-color: #BFC2C9;
 }
 
@@ -2747,7 +2772,7 @@ body.nonav
 	width: 300px;
 }
 
-/*base-color-status-radioactive.css*/
+/* radioactive.css */
 #layout-content td del,
 #layout-content tr.g_fs_lame,
 #layout-content table.filelist tr.invalid,
@@ -2775,7 +2800,7 @@ body.nonav
 	background-color: #EEEEEE;
 }
 
-/*sub-gray-color.css*/
+/* sub-gray-color.css */
 a:visited, a:active, a:hover, a:link
 {
 	color: blue;
@@ -2818,7 +2843,7 @@ a:visited, a:active, a:hover, a:link
 	color: #bbbbbb;
 }
 
-/*sub-gray-border.css*/
+/* sub-gray-border.css */
 table
 {
 	border-spacing: 1;
@@ -2840,7 +2865,7 @@ img, a
 	padding: 1px;
 }
 
-#layout-content .block .g_definitionlist > table
+#layout-content .g_block .g_definitionlist > table
 {
 	border: none;
 	margin: 0;
@@ -2864,7 +2889,7 @@ img, a
 	border-top: black 2px solid;
 }
 
-/*sub-gray-text.css*/
+/* sub-gray-text.css */
 #layout-content ul.g_navlist li
 {
 	padding: 0px;
@@ -3054,14 +3079,30 @@ body,
 	width: 90%;
 }
 
+#style_thumbnail
+{
+	width: 220px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #cccccc;
+	padding: 3px;
+	background-color: #f9f9f9;
+	font-size: 94%;
+	text-align: center;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+#image_viewer
+{
+	margin: 50px;
+}
+
 /* global-formatting.css.svn-base excerpts */
 #layout-content span.f_controls
 {
 	display: block;
-	background-color: #ffffff;
-	border-bottom-width: 2px;
-	border-bottom-style: solid;
-	border-bottom-color: #000000;
+	background-color: #B0B0B0;
 	padding: 2px;
 }
 
@@ -3083,7 +3124,6 @@ body,
 	display: block;
 	width: 100%;
 	width: 365px;
-	/*overflow: auto; */
 	border-width: 2px;
 	border-style: solid;
 	border-color: #000000;
@@ -3350,4 +3390,69 @@ td.quality .i_rate_halfstar
 #wysiwyg_0
 {
 	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+}
+
+/* profile styling */
+#layout-content div.profile_all > div.general
+{
+	margin-left:auto;
+	margin-right:auto;
+	width: 50%;
+}
+
+div.permissions div.detailed td
+{
+	text-align: center;
+}
+
+div.permissions div.detailed th
+{
+	text-align: left;
+}
+
+*.i_inline
+{
+	padding: 2px 8px 2px 8px;
+	margin: 4px;
+}
+
+*.i_icon span, *.i_button span, *.i_inline span
+{
+	display: none;
+}
+
+*.i_help
+{
+	background: url(http://static.anidb.net/css/icons/ask2.gif) no-repeat center center;
+	cursor: help;
+}
+
+/* Tooltip support */
+#obj-tooltip
+{
+	position: absolute;
+	left: 0px;
+	width: 150px;
+	border: 1px solid black;
+	padding: 2px;
+	background-color: #FFFFF0;
+	visibility: hidden;
+	z-index: 100;
+	font-size: x-small;
+}
+
+#obj-pointer
+{
+	position: absolute;
+	left: -300px;
+	width: 15px;
+	height: 13px;
+	z-index: 101;
+	visibility: hidden;
+}
+
+*.releaseinfotooltip div.icons
+{
+	float: left;
 }
