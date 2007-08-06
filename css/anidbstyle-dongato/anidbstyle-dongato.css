@@ -3456,3 +3456,9 @@ div.permissions div.detailed th
 {
 	float: left;
 }
+
+/* Wrap fix for icon cells */
+td.icons
+{
+	white-space: nowrap;
+}
