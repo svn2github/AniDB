@@ -1739,11 +1739,6 @@ a, del, ins
 	text-decoration: none;
 }
 
-th, td.action
-{
-	white-space: nowrap;
-}
-
 /** ALIGNMENT **/
 td.id, td.count, td.number, td.size, td.epno
 {
@@ -1759,7 +1754,7 @@ th.field, td.value, td.name, td.quality, td.title, td.name,
 
 th, h1, h2, h3, h4, form,
 tr.action td.value, td.stats,
-td.state, td.type, td.date, td.action, td.icon, td.ignore,
+td.state, td.date, td.action, td.icon, td.ignore,
 td.name.user, td.name.owner, td.vote, td.rating, td.check,
 .g_navlist, .g_filterlist, .g_actionlist, .g_info, .g_input,
 #layout-content div.g_section,
@@ -2270,6 +2265,11 @@ span.diff,
 {
 	font-size: 120%;
 	font-weight: bolder;
+}
+
+#layout-content div.latestanimes_anime th
+{
+	width: 30%;
 }
 
 #layout-content div.latestanimes_anime th:after
@@ -3184,6 +3184,7 @@ input[type="checkbox"]
 	font-size: 100%;
 	height: 1.3em;
 	width: 1.3em;
+	vertical-align: middle;
 }
 
 input[type="button"],
@@ -3457,8 +3458,14 @@ div.permissions div.detailed th
 	float: left;
 }
 
-/* Wrap fix for icon cells */
-td.icons
+/* Wrap fix for icon and action cells */
+th, td.action, td.icons
 {
 	white-space: nowrap;
+}
+
+/* remove odd coloring for mylist table headers */
+div.mylist_list .g_odd.files
+{
+	background-color: transparent !important;
 }
