@@ -2762,11 +2762,6 @@ body.nonav
 	text-align: center;
 }
 
-#layout-footer:after
-{
-	content: "design by akujiN"
-}
-
 #layout-content div.anime_all div.mylist th.anime
 {
 	width: 300px;
@@ -3395,10 +3390,11 @@ td.quality .i_rate_halfstar
 }
 
 /* profile styling */
-#layout-content div.profile_all > div.general
+div.profile_all > div.general,
+div.new_files
 {
-	margin-left:auto;
-	margin-right:auto;
+	left: 25%;
+	position: relative;
 	width: 50%;
 }
 
