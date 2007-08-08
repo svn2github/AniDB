@@ -139,8 +139,7 @@ class MD4:
             dest.buf[i] = self.buf[i]
         return dest
     def update(self, str):
-        buf = []
-        for i in str: buf.append(ord(i))
+        buf = [ord(i) for i in str]
         ilen = U32(len(buf))
         if (long(self.len1 + (ilen << 3)) < long(self.len1)):
             self.len2 = self.len2 + U32(1)
@@ -287,6 +286,10 @@ def ed2k(file):
         yield 1
         if buf == '':
             break
-        hashl.append(md4obj(buf).digest())
+        temp = md4obj()
+        temp.update(buf)
+        hashl.append(temp.digest())
     handle.close()
-    yield (md4obj(''.join(hashl)).hexdigest(), os.path.getsize(file))
+    temp = md4obj()
+    temp.update(''.join(hashl))
+    yield (temp.hexdigest(), os.path.getsize(file))

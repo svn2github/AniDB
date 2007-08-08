@@ -3,8 +3,8 @@ you should be able to use it fairly well. Please read this README; if
 you don't, I can't improve the client, and you will not be pleased.
 
 To get started, make sure you have Python 2.4.x, wxPython 2.6.x, and 
-APSW. I realize that for now this is difficult for those not on Linux, 
-but I will address that in a few days.
+APSW. If you plan on hashing files, please get either PCT (Python
+Cryptography Toolkit) or Psyco.
 
 Type:
  $ ./openanidb.py
@@ -14,7 +14,9 @@ What works:
  - File hashing
    - Files are hashed using ed2k. If PyCrypto is installed, OADB will 
      use that; otherwise, there is a builtin MD4, although it will be 
-     slower since it is written in Python.
+     slower since it is written in Python. A lot slower. Hashes take
+     30 seconds with PCT, but 30 minutes with the builtin. You have
+     been warned.
  - Mylist
    - Currently, MYLIST and MYLISTADD are supported, meaning that files 
      can be added to your mylist. Currently, the parameters "viewed" and 

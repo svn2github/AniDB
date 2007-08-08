@@ -25,10 +25,9 @@ a few things to know; read the comment(s) below for details.'''
 '''The current state of things as we approach version 3 is not bad at all. We
 still need to do some work on stability and flexibility, and there's still a
 lot of duplicated code in this file (db.py,) but overall we're making good
-progress. The cache works fine, and UDP works as expected. Mylists still need
-to be done, but those should be a piece of cake. After mylists are done, some
-work should be put in on simplifying and strengthening the code in here, since
-this is the part of the program that does the most work with the least clarity.'''
+progress. The cache works fine, and UDP works as expected. Some work should
+be put in on simplifying and strengthening the code in here, since this is
+the part of the program that does the most work with the least clarity.'''
 
 import os.path
 
@@ -38,6 +37,13 @@ import config
 import udp
 
 version = "Database:\n  APSW version: " + apsw.apswversion() + "\n  SQLite version: " + apsw.sqlitelibversion() + "\n"
+
+# Do we need to call Connection.close()?
+# View this next line monospace...
+def doclose(con):
+    # If APSW's version's third major number is greater than 8...
+    if int(apsw.apswversion().split('.')[2].split('-')[0]) >= 8:
+        con.close()
 
 conf = config.config()
 
@@ -68,6 +74,7 @@ def regendb():
             pass
         cursor.execute("vacuum")
         cursor.execute("create table " + k + "(" + ', '.join(v) + ")")
+    doclose(handle)
 
 if not os.path.exists(db):
     # There is no os.path.touch(), sadly...
@@ -87,6 +94,7 @@ def addaid(animel):
         if type(animel[i]) == str:
             animel[i] = animel[i].strip().decode('utf8')
     cursor.execute("insert into anime values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", animel)
+    doclose(handle)
 
 def findaid(aid=0, aname=u''):
     '''Find an anime record in the cache.'''
@@ -112,17 +120,20 @@ def findaid(aid=0, aname=u''):
             else:
                 result = [dict(zip(data['anime'],row)) for row in cursor.execute("select * from anime where aromaji=? or akanji=? or aenglish=? limit 1", (aname,aname,aname))]
         else:
+            doclose(handle)
             return None
     if (conf.get("english.anime") and result[0]['aenglish'] != '') or result[0]['aromaji'] == '':
         result[0]['aname'] = result[0]['aenglish']
     else:
         result[0]['aname'] = result[0]['aromaji']
+    doclose(handle)
     return result[0]
 
 def rmaid(aid=0):
     '''Remove a record from the anime cache.'''
     handle = apsw.Connection(db)
     handle.cursor().execute("delete from anime where aid=?", (aid,))
+    doclose(handle)
 
 def allanime(sort):
     '''Returns the anime table.'''
@@ -137,6 +148,7 @@ def allanime(sort):
             dic['aname'] = dic['aenglish']
         else:
             dic['aname'] = dic['aromaji']
+    doclose(handle)
     return result
 
 def addeid(epl):
@@ -156,6 +168,7 @@ def addeid(epl):
         if type(epl[i]) == str:
             epl[i] = epl[i].strip().decode('utf8')
     cursor.execute("insert into episodes values(?,?,?,?,?,?,?,?,?)", epl)
+    doclose(handle)
 
 def findeid(eid=0, aid=(0,0)):
     '''Find an episode record in the cache.'''
@@ -176,6 +189,7 @@ def findeid(eid=0, aid=(0,0)):
                 else:
                     result = [dict(zip(data["episodes"],row)) for row in cursor.execute("select * from episodes where eid=? limit 1", (eid,))]
             else:
+                doclose(handle)
                 return None
     retval = result[0]
     retval.update(findaid(retval["aid"]))
@@ -183,12 +197,14 @@ def findeid(eid=0, aid=(0,0)):
         retval['ename'] = retval['eenglish']
     else:
         retval['ename'] = retval['eromaji']
+    doclose(handle)
     return retval
 
 def rmeid(eid=0):
     '''Remove a record from the anime cache.'''
     handle = apsw.Connection(db)
     handle.cursor().execute("delete from episodes where eid=?", (eid,))
+    doclose(handle)
 
 def alleps(sort):
     '''Returns the aid and aname columns of the episode table.'''
@@ -204,6 +220,7 @@ def alleps(sort):
         else:
             ep['ename'] = ep['eromaji']
         ep.update(findaid(ep["aid"]))
+    doclose(handle)
     return result
 
 def addfid(fpl):
@@ -219,6 +236,7 @@ def addfid(fpl):
         if type(fpl[i]) == str:
             fpl[i] = fpl[i].strip().decode('utf8')
     cursor.execute("insert into files values(?,?,?,?,?,?,?,?)", fpl)
+    doclose(handle)
 
 def findfid(fid=0, h=('',0)):
     '''Find a file record in the cache.'''
@@ -238,15 +256,18 @@ def findfid(fid=0, h=('',0)):
                 else:
                     result = [dict(zip(data["files"],row)) for row in cursor.execute("select * from files where ed2k=? and size=? limit 1", h)]
             else:
+                doclose(handle)
                 return None
     result[0].update(findeid(result[0]["eid"]))
     result[0].update(findgid(result[0]["gid"]))
+    doclose(handle)
     return result[0]
 
 def rmfid(fid=0):
     '''Remove a record from the anime cache.'''
     handle = apsw.Connection(db)
     handle.cursor().execute("delete from files where fid=?", (fid,))
+    doclose(handle)
 
 def allfiles():
     '''Returns stuff from the files table.'''
@@ -256,6 +277,7 @@ def allfiles():
     for file in result:
         file.update(findeid(file["eid"]))
         file.update(findgid(file["gid"]))
+    doclose(handle)
     return result
 
 def addgid(gpl):
@@ -271,6 +293,7 @@ def addgid(gpl):
         if type(gpl[i]) == str:
             gpl[i] = gpl[i].strip().decode('utf8')
     cursor.execute("insert into groups values(?,?,?,?,?,?,?,?,?,?)", gpl)
+    doclose(handle)
 
 def findgid(gid=0):
     '''Find a group record in the cache.'''
@@ -284,13 +307,16 @@ def findgid(gid=0):
             addgid(net)
             result = [dict(zip(data["groups"],row)) for row in cursor.execute("select * from groups where gid=? limit 1", (gid,))]
         else:
+            doclose(handle)
             return None
+    doclose(handle)
     return result[0]
 
 def rmgid(gid=0):
     '''Remove a record from the anime cache.'''
     handle = apsw.Connection(db)
     handle.cursor().execute("delete from groups where gid=?", (gid,))
+    doclose(handle)
 
 def addlid(lpl):
     '''Adds an episode to the cache.'''
@@ -305,6 +331,7 @@ def addlid(lpl):
         if type(lpl[i]) == str:
             lpl[i] = lpl[i].strip().decode('utf8')
     cursor.execute("insert into mylist values(?,?,?,?,?,?,?,?,?,?,?)", lpl)
+    doclose(handle)
 
 def findlid(lid=0, fid=0):
     '''Find a file record in the cache.'''
@@ -324,6 +351,7 @@ def findlid(lid=0, fid=0):
                 else:
                     result = [dict(zip(data["mylist"],row)) for row in cursor.execute("select * from mylist where fid=? limit 1", (fid,))]
             else:
+                doclose(handle)
                 return None
     result[0].update(findfid(result[0]["fid"]))
     return result[0]
@@ -332,6 +360,7 @@ def rmlid(lid=0):
     '''Remove a record from the anime cache.'''
     handle = apsw.Connection(db)
     handle.cursor().execute("delete from mylist where lid=?", (lid,))
+    doclose(handle)
 
 def allmylist():
     '''Returns stuff from the files table.'''
@@ -340,6 +369,7 @@ def allmylist():
     result = [dict(zip(data["mylist"],row)) for row in cursor.execute("select * from mylist order by aid, eid asc")]
     for file in result:
         file.update(findfid(file["fid"]))
+    doclose(handle)
     return result
 
 def mylistadd(fid, viewed, state):
@@ -348,4 +378,5 @@ def mylistadd(fid, viewed, state):
     if result != []:
         if int(result[0][0]) == state:
             return True
+    doclose(handle)
     return udp.mylistadd(fid, viewed, state)

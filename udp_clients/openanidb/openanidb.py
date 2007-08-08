@@ -34,11 +34,23 @@ storage = os.path.normpath(os.path.expanduser("~") + "/.oadb")
 if not os.path.exists(storage):
     os.mkdir(storage)
 
+coreversion = "Core:\n  GUI Version: 0.2a\n  Python version: " + sys.version.split()[0] + "\n  WX version: " + wx.__version__ + "\n"
+
+try:
+    import psyco
+    psyco.full()
+    psycover = [str(i) for i in psyco.version_info]
+    coreversion = coreversion + "  Psyco version: " + '.'.join(psycover) + "\n"
+except ImportError:
+    coreversion = coreversion + "  Not using Psyco"
+
 # Local imports
 import config
 import db
 import udp
 import hash
+
+versionstring = coreversion + udp.version + hash.version + db.version
 
 replace_hash = {
     'aname': 'a',
@@ -109,12 +121,12 @@ def replace_hashes(regexp, data):
 
 class settingsdialog(wx.Dialog):
     def __init__(self, *args, **kwds):
-        self.conf = kwds["conf"]
-        del kwds["conf"]
+        self.conf = config.config()
         # begin wxGlade: settingsdialog.__init__
         kwds["style"] = wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
         self.display_staticbox = wx.StaticBox(self, -1, "Display")
+        self.network_staticbox = wx.StaticBox(self, -1, "Network")
         self.filehashing_staticbox = wx.StaticBox(self, -1, "File Hashing")
         self.mylist_staticbox = wx.StaticBox(self, -1, "Mylist")
         self.actions_staticbox = wx.StaticBox(self, -1, "Actions")
@@ -130,6 +142,11 @@ class settingsdialog(wx.Dialog):
         self.fileformatlabel = wx.StaticText(self, -1, "Formatting string for files:")
         self.fileformat = wx.TextCtrl(self, -1, "$g ($F)")
         self.fileformatpreview = wx.StaticText(self, -1, "<Preview>")
+        self.userpasscheck = wx.CheckBox(self, -1, "Save username and password?")
+        self.usernamelabel = wx.StaticText(self, -1, "Username:")
+        self.username = wx.TextCtrl(self, -1, "")
+        self.passwordlabel = wx.StaticText(self, -1, "Password:")
+        self.password = wx.TextCtrl(self, -1, "")
         self.filemovecheck = wx.CheckBox(self, -1, "Move files to the following folder:")
         self.filemove = wx.TextCtrl(self, -1, "")
         self.filerenamecheck = wx.CheckBox(self, -1, "Rename files using the following pattern:")
@@ -145,16 +162,17 @@ class settingsdialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
 
-        self.Bind(wx.EVT_TEXT, self.update_anime_preview, self.animeformat)
-        self.Bind(wx.EVT_TEXT, self.update_episode_preview, self.episodeformat)
-        self.Bind(wx.EVT_TEXT, self.update_file_preview, self.fileformat)
-        self.Bind(wx.EVT_TEXT, self.update_rename_preview, self.filerename)
         self.Bind(wx.EVT_BUTTON, self.apply_settings, self.apply)
         self.Bind(wx.EVT_BUTTON, self.revert_settings, self.revert)
         self.Bind(wx.EVT_BUTTON, self.apply_settings, id=wx.ID_OK)
         # end wxGlade
+        self.Bind(wx.EVT_TEXT, self.animeformatpreview.SetLabel(replace_hashes(self.animeformat.GetValue(), sample_data)), self.animeformat)
+        self.Bind(wx.EVT_TEXT, self.episodeformatpreview.SetLabel(replace_hashes(self.episodeformat.GetValue(), sample_data)), self.episodeformat)
+        self.Bind(wx.EVT_TEXT, self.fileformatpreview.SetLabel(replace_hashes(self.fileformat.GetValue(), sample_data)), self.fileformat)
+        self.Bind(wx.EVT_TEXT, self.filerenamepreview.SetLabel(replace_hashes(self.filerename.GetValue(), sample_data)), self.filerename)
         self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filemove.Enable(self.filemovecheck.GetValue()), self.filemovecheck)
         self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filerename.Enable(self.filerenamecheck.GetValue()), self.filerenamecheck)
+        self.Bind(wx.EVT_CHECKBOX, lambda evt: self.password.Enable(self.userpasscheck.GetValue()) and self.username.Enable(self.userpasscheck.GetValue()))
         self.boxdic = {
             "english.anime": self.englishanime,
             "english.eps": self.englisheps,
@@ -167,20 +185,20 @@ class settingsdialog(wx.Dialog):
             "file.rename.dest": self.filerename,
             "mylist.check": self.mylistcheck,
             "mylist.viewed": self.mylistviewed,
-            "mylist.state": self.myliststate
+            "mylist.state": self.myliststate,
+            "user.pass.check": self.userpasscheck,
+            "user": self.username,
+            "pass": self.password
         }
         self.revert_settings(None)
         self.filemove.Enable(self.filemovecheck.GetValue())
         self.filerename.Enable(self.filerenamecheck.GetValue())
-        self.update_anime_preview(None)
-        self.update_episode_preview(None)
-        self.update_file_preview(None)
-        self.update_rename_preview(None)
 
     def __set_properties(self):
         # begin wxGlade: settingsdialog.__set_properties
         self.SetTitle("Settings")
         self.englisheps.SetValue(1)
+        self.userpasscheck.SetValue(1)
         self.filerenamecheck.SetValue(1)
         self.mylistviewed.SetValue(1)
         self.myliststate.SetSelection(1)
@@ -194,6 +212,8 @@ class settingsdialog(wx.Dialog):
         mylist = wx.StaticBoxSizer(self.mylist_staticbox, wx.VERTICAL)
         filehashing = wx.StaticBoxSizer(self.filehashing_staticbox, wx.VERTICAL)
         sizer_8 = wx.BoxSizer(wx.VERTICAL)
+        network = wx.StaticBoxSizer(self.network_staticbox, wx.VERTICAL)
+        sizer_12 = wx.BoxSizer(wx.HORIZONTAL)
         display = wx.StaticBoxSizer(self.display_staticbox, wx.VERTICAL)
         languages = wx.StaticBoxSizer(self.languages_staticbox, wx.HORIZONTAL)
         languages.Add(self.englishanime, 0, wx.ADJUST_MINSIZE, 0)
@@ -209,6 +229,13 @@ class settingsdialog(wx.Dialog):
         display.Add(self.fileformat, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
         display.Add(self.fileformatpreview, 0, wx.ADJUST_MINSIZE, 0)
         sizer_8.Add(display, 0, wx.EXPAND, 0)
+        network.Add(self.userpasscheck, 0, wx.ADJUST_MINSIZE, 0)
+        sizer_12.Add(self.usernamelabel, 0, wx.ADJUST_MINSIZE, 0)
+        sizer_12.Add(self.username, 1, wx.ADJUST_MINSIZE, 0)
+        sizer_12.Add(self.passwordlabel, 0, wx.ADJUST_MINSIZE, 0)
+        sizer_12.Add(self.password, 1, wx.ADJUST_MINSIZE, 0)
+        network.Add(sizer_12, 1, wx.EXPAND, 0)
+        sizer_8.Add(network, 1, wx.EXPAND, 0)
         sizer_7.Add(sizer_8, 1, wx.EXPAND, 0)
         filehashing.Add(self.filemovecheck, 0, wx.ADJUST_MINSIZE, 0)
         filehashing.Add(self.filemove, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
@@ -267,18 +294,6 @@ class settingsdialog(wx.Dialog):
                 else:
                     self.conf.set(label, box.GetValue())
 
-    def update_anime_preview(self, event): # wxGlade: settingsdialog.<event_handler>
-        self.animeformatpreview.SetLabel(replace_hashes(self.animeformat.GetValue(), sample_data))
-
-    def update_episode_preview(self, event): # wxGlade: settingsdialog.<event_handler>
-        self.episodeformatpreview.SetLabel(replace_hashes(self.episodeformat.GetValue(), sample_data))
-
-    def update_file_preview(self, event): # wxGlade: settingsdialog.<event_handler>
-        self.fileformatpreview.SetLabel(replace_hashes(self.fileformat.GetValue(), sample_data))
-
-    def update_rename_preview(self, event): # wxGlade: settingsdialog.<event_handler>
-        self.filerenamepreview.SetLabel(replace_hashes(self.filerename.GetValue(), sample_data))
-
 # end of class settingsdialog
 
 class oaframe(wx.Frame):
@@ -291,18 +306,18 @@ class oaframe(wx.Frame):
         self.localdb = wx.Panel(self.notebook1, -1)
         self.anime = wx.Panel(self.notebook1, -1)
         self.main = wx.Panel(self.notebook1, -1)
-
+        
         # Menu Bar
         self.menubar = wx.MenuBar()
         self.SetMenuBar(self.menubar)
         wxglade_tmp_menu = wx.Menu()
-        wxglade_tmp_menu.Append(wx.ID_EXIT, "Exit", "", wx.ITEM_NORMAL)
+        wxglade_tmp_menu.Append(wx.ID_EXIT, "&Quit\tCtrl-Q", "", wx.ITEM_NORMAL)
         self.menubar.Append(wxglade_tmp_menu, "AniDB")
         wxglade_tmp_menu = wx.Menu()
         wxglade_tmp_menu.Append(wx.ID_PREFERENCES, "Settings", "", wx.ITEM_NORMAL)
         self.menubar.Append(wxglade_tmp_menu, "Settings")
         wxglade_tmp_menu = wx.Menu()
-        wxglade_tmp_menu.Append(wx.ID_ABOUT, "About", "", wx.ITEM_NORMAL)
+        wxglade_tmp_menu.Append(wx.ID_ABOUT, "About\tF1", "", wx.ITEM_NORMAL)
         self.menubar.Append(wxglade_tmp_menu, "Help")
         # Menu Bar end
         self.statusbar = self.CreateStatusBar(2, 0)
@@ -369,7 +384,7 @@ class oaframe(wx.Frame):
         # Initialize the tree, ignore the returned root
         self.tree.AddRoot("!root")
         # Initialize the list
-        self.filelist.InsertColumn(0, "File name", wx.LIST_FORMAT_CENTER, -1)
+        self.filelist.InsertColumn(0, "File name", wx.LIST_FORMAT_CENTER, 250)
         # Settings
         self.conf = config.config()
 
@@ -463,7 +478,7 @@ class oaframe(wx.Frame):
 
     def about(self, event): # wxGlade: oaframe.<event_handler>
         print "Showing 'About...' box..."
-        versionstring = "Core:\n  GUI Version: 0.2a\n  Python version: " + sys.version.split()[0] + "\n  WX version: " + wx.__version__ + "\n" + udp.version + hash.version + db.version
+        global versionstring
         wx.MessageBox("OpenAniDB (OADB) is a simple interface\nto the Anime Database (AniDB), written\nin Python with an emphasis on readable\nsource code and programmer sanity.\n\nIt is eternally under development,\nand commentary is always welcome.\n\n" + versionstring + "\nProgrammer: Corbin Simpson <MostAwesomeDude@gmail.com>\n", "About OADB", wx.OK + wx.ICON_INFORMATION)
 
     def quit(self, event): # wxGlade: oaframe.<event_handler>
@@ -518,26 +533,24 @@ class oaframe(wx.Frame):
             aid = 0
         self.anime_results.Clear()
         wx.BeginBusyCursor()
-        results = udp.anime(self.outbound, self.inbound, self.ssid, aid, aname)
+        results = db.findaid(aid, aname)
         wx.EndBusyCursor()
         if results != None:
             # Hit!
             # Formatting...
-            results = [unicode(i) for i in results]
+            for k,v in results.iteritems():
+                results[k] = unicode(str(v))
             self.aname_box.Clear()
             self.aid_box.Clear()
-            # {0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{int4 review rating average}|{int4 reviews}|{10}|{11}|{12}|{13}|{14}|{15}|{str short names}|{str synonyms}|{str category list}|{19}
-            self.anime_results.AppendText("Name: " + results[12] + "\n")
-            self.anime_results.AppendText("Kanji: " + results[13] + "\n")
-            self.anime_results.AppendText("English: " + results[14] + "\n")
-            self.anime_results.AppendText("Anime ID: " + results[0] + "\n")
-            self.anime_results.AppendText("AniDB link: http://anidb.info/a" + results[0] + "\n")
-            self.anime_results.AppendText("Year: " + results[10] + " (" + results[11] + ")\n")
-            self.anime_results.AppendText("(Other languages: " + results[15] + ")\n")
-            self.anime_results.AppendText("Episodes: " + results[1] + " (" + results[2] + " normal, " + results[3] + " special)\n")
-            self.anime_results.AppendText("Rating: " + results[4] + " (" + results[5] + " votes)\n")
-            self.anime_results.AppendText("(Temporary rating: " + results[4] + " (" + results[5] + " votes))\n")
-            self.anime_results.AppendText("\nFrom cache: " + results[19])
+            self.anime_results.AppendText("Name: " + results['aname'] + "\n")
+            self.anime_results.AppendText("Kanji: " + results['akanji'] + "\n")
+            self.anime_results.AppendText("Anime ID: " + results['aid'] + "\n")
+            self.anime_results.AppendText("AniDB link: http://anidb.info/a" + results['aid'] + "\n")
+            self.anime_results.AppendText("Year: " + results['year'] + " (" + results['type'] + ")\n")
+            self.anime_results.AppendText("(Other languages: " + results['aother'] + ")\n")
+            self.anime_results.AppendText("Episodes: " + results['eps'] + " (" + results['epcount'] + " normal, " + results['spcount'] + " special)\n")
+            self.anime_results.AppendText("Rating: " + results['arating'] + " (" + results['avotes'] + " votes)\n")
+            self.anime_results.AppendText("(Temporary rating: " + results['tmprating'] + " (" + results['tmpvotes'] + " votes))\n")
         else:
             self.anime_results.AppendText("No results, sorry.")
             self.derror("No results found.")
@@ -645,7 +658,7 @@ class oaframe(wx.Frame):
 
     def show_settings(self, event): # wxGlade: oaframe.<event_handler>
         print "Showing settings dialog..."
-        settings = settingsdialog(self, conf=self.conf)
+        settings = settingsdialog(self)
         settings.ShowModal()
         settings.Destroy()
         event.Skip()

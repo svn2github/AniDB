@@ -1,13 +1,25 @@
 Changelog:
+ - svn 314:
+   - Fixed hashing regression when not using PCT and sped up builtin MD4
+     slightly.
+   - Added Psyco support if Psyco is present.
+   - Brought gui_anime() up to date and unbroke anime searching.
+   - New settings: Save username and password.
+   - Added accelerators to menu items: Ctrl-Q quits and F1 displays 
+     About box.
+   - Added apsw.Connection.close() to DB operations if APSW is newer than
+     version 3.3.7-r1.
  - svn 306:
    - Fixed whitespace issues causing IDLE to crash.
    - Fixed regression in menu code with popups not displaying correctly.
-   - Fixed regression in menu code causing popups to show known episodes as unknown episodes.
+   - Fixed regression in menu code causing popups to show known episodes as
+     unknown episodes.
  - svn 304:
    - Incremented version number to 0.3, network number to 2.
-   - Moved config files (anime.db, openanidb.ini) to ~/.oadb. Works on Linux, should work 
-     elsewhere.
-   - Fixed broken context menus in data browser. FIXME: File refreshes are not currently atomic.
+   - Moved config files (anime.db, openanidb.ini) to ~/.oadb. Works on Linux,
+     should work elsewhere.
+   - Fixed broken context menus in data browser. FIXME: File refreshes are not
+     currently atomic.
    - Implemented UDP status 201 (Successful login; new version available.)
    - Committed CHANGELOG.
  - svn 296:
