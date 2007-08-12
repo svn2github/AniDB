@@ -50,15 +50,15 @@
 		<screenshot>grey/images/screenshot.png</screenshot>
 		<thumbnail>grey/images/thumbnail.png</thumbnail>
 	</style>
-	<style name="haruhistylex">
-		<title>HaruhiStyleX</title>
+	<style name="haruhistylex-v2">
+		<title>HaruhiStyleX.AniDB v2</title>
 		<creator>TheJAG</creator>
-		<update>25.06.2007</update>
+		<update>12.08.2007</update>
 		<status>Incomplete (In development...)</status>
-		<description>This style contains adult material, you should not use this tyle unless you are of age to view adult material within your country. Nither TheJAG nor AniDB is in any way responsible if this condition is not kept.</description>
+		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB v2 is developed for Opera and may not work in any other webbrowser. (Based on Harustyle by b1hn.)</description>
 		<path/>
-		<screenshot>haruhistylex/images/screenshot.png</screenshot>
-		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
+		<screenshot>haruhistylex-v2/images/screenshot.png</screenshot>
+		<thumbnail>haruhistylex-v2/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustyle">
 		<title>Harustyle</title>
