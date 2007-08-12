@@ -98,5 +98,7 @@
 
 #layout-content div.userpage_all div.latest div
 {
-	margin: 0 25% 0 25%;
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
 }
