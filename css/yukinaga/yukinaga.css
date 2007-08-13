@@ -1,203 +1,64 @@
-@charset "utf-8";
-/* aniDB CSS, YukiNaga by dizzy */
+/*---------------------------------
+		AniDB CSS - Zakura
+		
+		www.zakness.com
+----------------------------------*/
 
-body{
-	background-color: #aed5da;
-	color: #000000;
-	font-family: Tahoma, Verdana, Arial;
-	font-size: 13px;
-	margin: 0px;
-	background-image: url(images/top_bg.gif);
-	background-repeat: repeat-x;
-	background-position: 0px 0px;
-}
+/* icons */
+@import "../common/style/icons/default.css";
+@import "../common/style/icons/flags.css";
+@import "icons.css";
 
-ul, li{
-	margin: 0px;
-	padding-left: 20px;
-}
+/* global layout */
+@import "global.css";
+@import "layout.css";
+@import "anime-tables.css";
 
-form{
-	margin: 0px;
-}
+/* the database */
+@import "main.css";
+@import "search.css";
+@import "calendar.css";
+@import "latest.css";
+@import "genres.css";
+@import "categories.css";
+@import "staff.css";
 
-#layout-nav{
-	margin-top: 0px;
-	padding-top: 0px;
-	background-image: url(images/top_yuki.jpg);
-	background-repeat: no-repeat;
-	background-position: 0px 0px;
-	float: left;
-}
+/* anime meta */
+@import "agcmts.css";
+@import "animeatt.css";
+@import "animehint.css";
+@import "ep.css";
+@import "file.css";
+@import "group.css";
+@import "producer.css";
+@import "rel.css";
+@import "showanime.css";
+@import "up2date.css";
 
-#layout-menu{
-	width: 160px;
-	background-color: #4485af;
-	color: #FFFFFF;
-	border-right-width: 1px;
-	border-right-style: solid;
-	border-right-color: #d5edef;
-	border-top-width: 1px;
-	border-top-style: solid;
-	border-top-color: #FFFFFF;
-	overflow: visible;
-	position: absolute;
-	left: 0px;
-	top: 225px;
-	visibility: visible;
-	z-index: 2;
-	height: auto;
-}
+/* user info */
+@import "buddylist.css";
+@import "mydb.css";
+@import "myhistory.css";
+@import "mylist.css";
+@import "mylistreport.css";
+@import "mymessages.css";
+@import "mynotifies.css";
+@import "myplace.css";
+@import "myreviews.css";
+@import "myvotes.css";
+@import "mywishlist.css";
+@import "profile.css";
+@import "reviewerlist.css";
+@import "userpage.css";
 
-#layout-menu ul{
-	margin-top: 10px;
-}
+/* add to anidb */
+@import "addep.css";
+@import "addeptitle.css";
+@import "addfile.css";
+@import "addgroup.css";
+@import "ed2kdump.css";
+@import "creqs.css";
 
-#layout-menu ul li{
-	font-size: 11px;
-	list-style-type: none;
-	border: solid #8ab6d3 1px;
-	background-color: #5791b7;
-	padding-left: 10px;
-	padding-right: 4px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	margin-top: 2px;
-	width: 100px;
-	font-variant: small-caps;
-	letter-spacing: 1px;
-}
-
-#layout-menu ul li a, #layout-menu ul li a:visited{
-	color: #FFFFFF;
-	text-decoration: none;
-}
-
-#layout-menu ul li:hover, #layout-menu ul li:hover a{
-	background-color: #d4db6c;
-	color: #000000;
-}
-
-#layout-menu .usermenu{
-	margin-left: 20px;
-	margin-top: 10px;
-	margin-right: 20px;
-	margin-bottom: 10px;
-}
-
-#layout-menu .usermenu p{
-	margin: 0px;
-	text-align: center;
-}
-
-#layout-menu .usermenu .user{
-	font-family: Arial, Tahoma, Verdana;
-	font-size: 16px;
-	font-weight: bold;
-	color:#FFCC33;
-}
-
-#layout-search{
-	float: right;
-	background-image: url(images/top_search_bg.gif);
-	background-repeat: no-repeat;
-	background-position: right bottom;
-	height: 225px;
-	width: 320px;
-}
-
-#layout-search form{
-	margin-top: 190px;
-}
-
-#layout-search form .text{
-	border: 1px solid white;
-	background-color: #6acbcc;
-	color: #327172;
-	width: 150px;
-	padding-left: 4px;
-	padding-top: 4px;
-	padding-bottom: 4px;
-}
-
-#layout-content{
-	float: left;
-	padding-left: 210px;
-}
-
-.rightbar{
-	float: right;
-	width: 200px;
-	margin-right: 4px;
-	background-color: #6ac6af;
-	border: 1px solid #3ea68c;
-}
-
-.rightbar h4{
-	margin: 0px;
-	background-color: #006699;
-	color: #FFFFFF;
-	padding-left: 5px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	border: 1px solid #d6f2e5;
-	background-color: #9cddbe;
-	color: #2c496d;
-	margin: 4px;
-}
-
-.rightbar h3{
-	background-color: #d6f2e5;
-	padding-bottom: 2px;
-	text-align: center;
-	font-variant: small-caps;
-	font-size: 14px;
-	letter-spacing: 3px;
-}
-
-.rightbar p{
-	margin: 0px;
-	text-align: center;
-}
-
-.rightbar p a{
-	color: #000000;
-	text-decoration: none;
-}
-
-.rightbar p a:hover{
-	text-decoration: underline;
-}
-
-.rightbar .g_vital{
-	margin-bottom: 15px;
-}
-
-.rightbar ol{
-	font-size: 11px;
-	margin: 0px;
-	padding: 0px;
-	list-style-type: none;
-	color: #377b6a;
-}
-
-.rightbar ol li a{
-	color: #000000;
-	text-decoration: none;
-}
-
-.rightbar ol li a:hover{
-	color:#FFFFFF;
-}
-
-#layout-footer{
-	clear: both;
-	font-size: 11px;
-	color: #000000;
-	background-color: #69cbcc;
-	text-align: right;
-	border-top-width: 1px;
-	border-top-style: solid;
-	border-top-color: #FFFFFF;
-	padding: 5px;
-}
+/* other */
+@import "login.css";
+@import "signup.css";
