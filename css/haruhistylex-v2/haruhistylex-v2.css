@@ -12,8 +12,6 @@
  * Border: #3496DA
  */
 
-
- 
 /* Imports. */
 @import "../common/style/icons/default.css";
 @import "../common/style/icons/flags.css";
@@ -55,6 +53,11 @@ a:hover
 	color:#0000FF;
 }
 
+fieldset
+{
+	display:none;
+}
+
 #layout-content > h1:first-child
 {
 	color:#0099FF;
@@ -64,6 +67,30 @@ a:hover
 	width:50%;
 	margin-left:auto;
 	margin-right:auto;
+}
+
+#layout-content div.g_notebox
+{
+	background-color:#AAD8E6;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	margin:20px auto 20px auto;
+	padding:0;
+	width:90%;
+	text-transform:capitalize;
+}
+
+#layout-content div.g_notebox h3
+{
+	background-color:#2496DA;
+	margin:0;
+	padding:0;
+	content:"Note!";
+	font-size:large;
+	text-align:center;
+	color:#FFFFFF;
+	font-variant:small-caps;
 }
 
 #layout-footer
@@ -78,7 +105,7 @@ a:hover
 	margin-right:auto;
 }
 
-#layout-footer > p:before
+#layout-footer p:before
 {
 	content:"HaruhiStyleX.AniDB v2 by TheJAG! (Based on Harustyle by b1hn.)";
 	display:block;
@@ -215,7 +242,7 @@ a:hover
 	text-transform:capitalize;
 }
 
-/* Search */
+/* Searchbar */
 #layout-search div.search p
 {
 	position:fixed;
@@ -280,7 +307,7 @@ a:hover
 	padding:0;
 }
 
-#layout-content div.main_all div.rightbar > h4
+#layout-content div.main_all div.rightbar h4
 {
 	background-color:#2496DA;
 	font-size:large;
@@ -291,7 +318,7 @@ a:hover
 	padding:0;
 }
 
-#layout-content div.main_all div.rightbar > h4 + p.g_vital
+#layout-content div.main_all div.rightbar h4 + p.g_vital
 {
 	background-color:#AAD8E6;
 	border-left:#2496DA solid 2px;
@@ -301,7 +328,7 @@ a:hover
 	text-align:center;
 }
 
-#layout-content div.main_all div.rightbar > h4 + p.g_vital + p
+#layout-content div.main_all div.rightbar h4 + p.g_vital + p
 {
 	background-color:#AAD8E6;
 	border-left:#2496DA solid 2px;
@@ -311,7 +338,7 @@ a:hover
 	text-align:center;
 }
 
-#layout-content div.main_all div.rightbar > h4 + p.g_vital + p + p
+#layout-content div.main_all div.rightbar h4 + p.g_vital + p + p
 {
 	background-color:#AAD8E6;
 	border-left:#2496DA solid 2px;
@@ -322,7 +349,7 @@ a:hover
 	text-align:center;
 }
 
-#layout-content div.main_all div.rightbar > h3
+#layout-content div.main_all div.rightbar h3
 {
 	color:#0099FF;
 	text-align:center;
@@ -333,7 +360,7 @@ a:hover
 	margin-right:auto;
 }
 
-#layout-content div.main_all div.rightbar > h4 + ol
+#layout-content div.main_all div.rightbar h4 + ol
 {
 	background-color:#AAD8E6;
 	border-left:#2496DA solid 2px;
@@ -345,15 +372,14 @@ a:hover
 	font-size:small;
 }
 
-#layout-content div.main_all div.rightbar > h4 + ol > li > span
+#layout-content div.main_all div.rightbar h4 + ol li span
 {
 	font-weight:bold;
-	text-decoration:underline;
 }
 
-#layout-content div.main_all div.rightbar > h4 + ol > li > span + a
+#layout-content div.main_all div.rightbar h4 + ol li span + a
 {
-	padding-left:20px;
+	padding-left:5px;
 }
 
 /* Main/News Page */
@@ -364,7 +390,7 @@ a:hover
 	margin-left:310px;
 }
 
-#layout-content div.main_all div.news > div.newsitem
+#layout-content div.main_all div.news div.newsitem
 {
 	background-color:#AAD8E6;
 	border-left:#2496DA solid 2px;
@@ -374,9 +400,10 @@ a:hover
 	padding:0;
 	list-style-type:none;
 	font-size:small;
+	text-transform:capitalize;
 }
 
-#layout-content div.main_all div.news > div.newsitem > h4
+#layout-content div.main_all div.news div.newsitem h4
 {
 	background-color:#2496DA;
 	font-size:large;
@@ -387,10 +414,228 @@ a:hover
 	padding:0;
 }
 
-#layout-content div.main_all div.news > div.newsitem > span.stamp
+#layout-content div.main_all div.news div.newsitem span.stamp
 {
 	font-size:smaller;
 	float:right;
 	margin-right:10px;
-	text-decoration:underline;
+}
+
+#layout-content div.main_all div.news div.newsitem span.stamp:after
+{
+	content:".";
+}
+
+/* Advanced Search Page */
+#layout-content div.search_all div.search_form div.search > table:first-child
+{
+	background-color:#AAD8E6;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	margin:0 auto 0 auto;
+	padding:0;
+	list-style-type:none;
+	font-size:small;
+}
+
+#layout-content div.search_all div.search_form div.search table caption
+{
+	background-color:#2496DA;
+	font-size:large;
+	text-align:center;
+	color:#FFFFFF;
+	font-variant:small-caps;
+	margin:0;
+	padding:0;
+}
+
+#layout-content div.search_all div.search_form div.search table tr th
+{
+	text-align:left;
+}
+
+#layout-content div.search_all div.search_form div.search table tr th:after
+{
+	content:": ";
+}
+
+#layout-content div.search_all div.search_form div.search table tr td
+{
+	text-transform:capitalize;
+}
+
+#layout-content div.search_all div.search_form div.search table tr.action td.value
+{
+	text-align:center;
+}
+
+#layout-content div.search_all ul.g_actionlist
+{
+	list-style-type:none;
+	margin:10px 0 0 0;
+	padding:0;
+	text-align:center;
+	text-transform:capitalize;
+}
+
+#layout-content div.search_all ul.g_actionlist li
+{
+	display:inline;
+}
+
+#layout-content div.search_all ul.g_actionlist > li:first-child:before,
+#layout-content div.search_all ul.g_actionlist li:after
+{
+	content:" - ";
+}
+
+/* Search Results Page */
+#layout-content div.search_all div.search_filter
+{
+	text-align:center;
+	text-transform:capitalize;
+	margin:0 0 10px 0;
+	padding:0;
+}
+
+#layout-content div.search_all div.search_filter:before,
+#layout-content div.search_all div.search_filter:after,
+#layout-content div.search_all div.search_results ul.g_jumplist li.prev:before,
+#layout-content div.search_all div.search_results ul.g_jumplist li.prev:after,
+#layout-content div.search_all div.search_results ul.g_jumplist li.next:before,
+#layout-content div.search_all div.search_results ul.g_jumplist li.next:after
+{
+	content:" - ";
+}
+
+#layout-content div.search_all div.search_results ul.g_jumplist
+{
+	text-align:center;
+	list-style-type:none;
+	padding:0;
+	margin:10px 20px;
+	height:20px;
+	clear:both;
+	text-transform:capitalize;
+}
+
+#layout-content div.search_all div.search_results ul.g_jumplist li
+{
+	display:inline;
+}
+
+#layout-content div.search_all div.search_results ul.g_jumplist li.prev
+{
+	float:left;
+}
+
+#layout-content div.search_all div.search_results ul.g_jumplist li.next
+{
+	float:right;
+}
+
+#layout-content div.search_all table.search_results
+{
+	background-color:#AAD8E6;
+	border-top:#2496DA solid 2px;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	margin:20px auto 20px auto;
+	padding:0;
+	list-style-type:none;
+	font-size:small;
+}
+
+/* Latest Additions Page */
+#layout-content div.latest_all ul.type
+{
+	list-style-type:none;
+	text-align:center;
+}
+
+#layout-content div.latest_all ul.type li
+{
+	display:inline;
+}
+
+/* Anime List Page */
+#layout-content div.animelist_all div.g_filterlist
+{
+	text-align:center;
+	text-transform:capitalize;
+	margin:0 0 10px 0;
+	padding:0;
+}
+
+#layout-content div.animelist_all div.g_filterlist:before,
+#layout-content div.animelist_all div.g_filterlist:after
+{
+	content:" - ";
+}
+
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist
+{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	text-align:center;
+	text-transform:capitalize;
+}
+
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li
+{
+	display:inline;
+}
+
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.all:before,
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.other:after,
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev:before,
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev:after,
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.next:before,
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.next:after,
+#layout-content div.animelist_all ul.g_actionlist > li:first-child:before,
+#layout-content div.animelist_all ul.g_actionlist li:after
+{
+	content:" - ";
+}
+
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev
+{
+	float:left;
+	margin-left:40px;
+}
+
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.next
+{
+	float:right;
+	margin-right:40px;
+}
+
+#layout-content div.animelist_all div.animelist_list table.anime_list
+{
+	background-color:#AAD8E6;
+	border-top:#2496DA solid 2px;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	margin:20px auto 20px auto;
+	padding:0;
+	list-style-type:none;
+	font-size:small;
+}
+
+#layout-content div.animelist_all ul.g_actionlist
+{
+	list-style-type:none;
+	margin:10px 0 0 0;
+	padding:0;
+	text-align:center;
+	text-transform:capitalize;
+}
+
+#layout-content div.animelist_all ul.g_actionlist li
+{
+	display:inline;
 }
