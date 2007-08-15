@@ -42,7 +42,7 @@ class config:
             self.parser.add_section("OpenAniDB")
 
     def save(self):
-        self.parser.write(file("openanidb.ini", "w"))
+        self.parser.write(file(self.files[0], "w"))
 
     def get(self, key):
         '''Gets key's value, or None if not set.'''
@@ -60,3 +60,4 @@ class config:
     def set(self, key, value):
         '''Sets key to value.'''
         self.parser.set("OpenAniDB", key, str(value))
+        return True

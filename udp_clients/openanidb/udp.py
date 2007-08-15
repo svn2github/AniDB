@@ -158,7 +158,8 @@ def logout():
     if session == None:
         # Why is sanity checking here? Whatever...
         # SQ,SA. It's to keep from issuing a deterministic, wasteful packet.
-        return False
+        # We never logged in, so we are DEFINITELY logged out, AFAWK.
+        return True
     command = "LOGOUT s=" + session
     internets.i.put(command)
     data = internets.o.get()

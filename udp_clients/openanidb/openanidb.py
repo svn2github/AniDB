@@ -113,15 +113,13 @@ def replace_hashes(regexp, data):
         '''Yes, I know there are TWO different ways to perform
         simple var subs on strings in Python. I don't want to use
         either because this is so much simpler and faster.'''
-        '''if regexp.find("%" + key) != -1:
-            # Hit. Replace...
-            regexp = regexp.replace("%" + key, unicode(str(data[key])))'''
         regexp = regexp.replace("$" + key, unicode(str(data[key])))
     return regexp
 
 class settingsdialog(wx.Dialog):
     def __init__(self, *args, **kwds):
-        self.conf = config.config()
+        self.conf = kwds["conf"]
+        del kwds["conf"]
         # begin wxGlade: settingsdialog.__init__
         kwds["style"] = wx.DEFAULT_DIALOG_STYLE
         wx.Dialog.__init__(self, *args, **kwds)
@@ -143,6 +141,7 @@ class settingsdialog(wx.Dialog):
         self.fileformat = wx.TextCtrl(self, -1, "$g ($F)")
         self.fileformatpreview = wx.StaticText(self, -1, "<Preview>")
         self.userpasscheck = wx.CheckBox(self, -1, "Save username and password?")
+        self.autologin = wx.CheckBox(self, -1, "Autologin?")
         self.usernamelabel = wx.StaticText(self, -1, "Username:")
         self.username = wx.TextCtrl(self, -1, "")
         self.passwordlabel = wx.StaticText(self, -1, "Password:")
@@ -162,6 +161,7 @@ class settingsdialog(wx.Dialog):
         self.__set_properties()
         self.__do_layout()
 
+        self.Bind(wx.EVT_CHECKBOX, self.fix_autologin, self.autologin)
         self.Bind(wx.EVT_BUTTON, self.apply_settings, self.apply)
         self.Bind(wx.EVT_BUTTON, self.revert_settings, self.revert)
         self.Bind(wx.EVT_BUTTON, self.apply_settings, id=wx.ID_OK)
@@ -172,7 +172,8 @@ class settingsdialog(wx.Dialog):
         self.Bind(wx.EVT_TEXT, self.filerenamepreview.SetLabel(replace_hashes(self.filerename.GetValue(), sample_data)), self.filerename)
         self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filemove.Enable(self.filemovecheck.GetValue()), self.filemovecheck)
         self.Bind(wx.EVT_CHECKBOX, lambda evt: self.filerename.Enable(self.filerenamecheck.GetValue()), self.filerenamecheck)
-        self.Bind(wx.EVT_CHECKBOX, lambda evt: self.password.Enable(self.userpasscheck.GetValue()) and self.username.Enable(self.userpasscheck.GetValue()))
+        # Yes, these next three are required...
+        self.Bind(wx.EVT_CHECKBOX, lambda evt: self.password.Enable(self.userpasscheck.GetValue()) and self.username.Enable(self.userpasscheck.GetValue()) and self.autologin.SetValue(self.userpasscheck.GetValue()), self.userpasscheck)
         self.boxdic = {
             "english.anime": self.englishanime,
             "english.eps": self.englisheps,
@@ -187,18 +188,19 @@ class settingsdialog(wx.Dialog):
             "mylist.viewed": self.mylistviewed,
             "mylist.state": self.myliststate,
             "user.pass.check": self.userpasscheck,
+            "autologin.check": self.autologin,
             "user": self.username,
             "pass": self.password
         }
+        # Initial fill
         self.revert_settings(None)
         self.filemove.Enable(self.filemovecheck.GetValue())
         self.filerename.Enable(self.filerenamecheck.GetValue())
-
+        self.fix_autologin(None)
     def __set_properties(self):
         # begin wxGlade: settingsdialog.__set_properties
         self.SetTitle("Settings")
         self.englisheps.SetValue(1)
-        self.userpasscheck.SetValue(1)
         self.filerenamecheck.SetValue(1)
         self.mylistviewed.SetValue(1)
         self.myliststate.SetSelection(1)
@@ -214,6 +216,7 @@ class settingsdialog(wx.Dialog):
         sizer_8 = wx.BoxSizer(wx.VERTICAL)
         network = wx.StaticBoxSizer(self.network_staticbox, wx.VERTICAL)
         sizer_12 = wx.BoxSizer(wx.HORIZONTAL)
+        sizer_9 = wx.BoxSizer(wx.HORIZONTAL)
         display = wx.StaticBoxSizer(self.display_staticbox, wx.VERTICAL)
         languages = wx.StaticBoxSizer(self.languages_staticbox, wx.HORIZONTAL)
         languages.Add(self.englishanime, 0, wx.ADJUST_MINSIZE, 0)
@@ -229,13 +232,15 @@ class settingsdialog(wx.Dialog):
         display.Add(self.fileformat, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
         display.Add(self.fileformatpreview, 0, wx.ADJUST_MINSIZE, 0)
         sizer_8.Add(display, 0, wx.EXPAND, 0)
-        network.Add(self.userpasscheck, 0, wx.ADJUST_MINSIZE, 0)
+        sizer_9.Add(self.userpasscheck, 0, wx.ADJUST_MINSIZE, 0)
+        sizer_9.Add(self.autologin, 0, wx.ADJUST_MINSIZE, 0)
+        network.Add(sizer_9, 1, wx.EXPAND, 0)
         sizer_12.Add(self.usernamelabel, 0, wx.ADJUST_MINSIZE, 0)
         sizer_12.Add(self.username, 1, wx.ADJUST_MINSIZE, 0)
         sizer_12.Add(self.passwordlabel, 0, wx.ADJUST_MINSIZE, 0)
         sizer_12.Add(self.password, 1, wx.ADJUST_MINSIZE, 0)
         network.Add(sizer_12, 1, wx.EXPAND, 0)
-        sizer_8.Add(network, 1, wx.EXPAND, 0)
+        sizer_8.Add(network, 0, wx.EXPAND, 0)
         sizer_7.Add(sizer_8, 1, wx.EXPAND, 0)
         filehashing.Add(self.filemovecheck, 0, wx.ADJUST_MINSIZE, 0)
         filehashing.Add(self.filemove, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
@@ -246,7 +251,7 @@ class settingsdialog(wx.Dialog):
         mylist.Add(self.mylistcheck, 0, wx.ADJUST_MINSIZE, 0)
         mylist.Add(self.mylistviewed, 0, wx.ADJUST_MINSIZE, 0)
         mylist.Add(self.myliststate, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
-        sizer_11.Add(mylist, 1, wx.EXPAND, 0)
+        sizer_11.Add(mylist, 0, wx.EXPAND, 0)
         actions.Add(self.apply, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
         actions.Add(self.revert, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
         actions.Add(self.close, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
@@ -262,12 +267,12 @@ class settingsdialog(wx.Dialog):
     def apply_settings(self, event): # wxGlade: settingsdialog.<event_handler>
         print "Applying settings..."
         for label, box in self.boxdic.iteritems():
-            if type(box) == wx.CheckBox:
-                self.conf.set(label, box.IsChecked())
-            elif box == self.filemove:
+            if box == self.filemove:
                 # This box needs special treatment!
                 box.SetValue(os.path.normpath(box.GetValue()))
                 self.conf.set(label, box.GetValue())
+            elif type(box) == wx.CheckBox:
+                self.conf.set(label, box.IsChecked())
             elif type(box) == wx.TextCtrl:
                 # Strip out forbidden characters
                 for char in ['%']:
@@ -293,6 +298,13 @@ class settingsdialog(wx.Dialog):
                     box.SetValue(self.conf.get(label))
                 else:
                     self.conf.set(label, box.GetValue())
+
+    def fix_autologin(self, event): # wxGlade: settingsdialog.<event_handler>
+        # We have to fix autologin, since its control doesn't fit in one lambda...
+        if self.autologin.GetValue():
+            self.userpasscheck.SetValue(True)
+            self.password.Enable(True)
+            self.username.Enable(True)
 
 # end of class settingsdialog
 
@@ -321,11 +333,13 @@ class oaframe(wx.Frame):
         self.menubar.Append(wxglade_tmp_menu, "Help")
         # Menu Bar end
         self.statusbar = self.CreateStatusBar(2, 0)
-        self.intro = wx.StaticText(self.main, -1, "Welcome to OpenAniDB. Current\nclient version is 1 and current\nprotocol version is 3.")
+        self.intro = wx.StaticText(self.main, -1, "Welcome to OpenAniDB.\n\nTo get started, please login below.")
         self.label_user = wx.StaticText(self.main, -1, "Username:", style=wx.ALIGN_CENTRE)
         self.label_pass = wx.StaticText(self.main, -1, "Password:", style=wx.ALIGN_CENTRE)
+        self.saveuserpass = wx.CheckBox(self.main, -1, "Save username/\npassword?")
         self.username_box = wx.TextCtrl(self.main, -1, "")
         self.password_box = wx.TextCtrl(self.main, -1, "", style=wx.TE_PASSWORD)
+        self.autologin = wx.CheckBox(self.main, -1, "Autologin?")
         self.login = wx.Button(self.main, -1, "Login", style=wx.BU_EXACTFIT)
         self.logout = wx.Button(self.main, -1, "Logout", style=wx.BU_EXACTFIT)
         self.search_anime = wx.StaticText(self.anime, -1, "Search for anime by name or\nanime ID (aid).")
@@ -348,8 +362,10 @@ class oaframe(wx.Frame):
         self.Bind(wx.EVT_MENU, self.quit, id=wx.ID_EXIT)
         self.Bind(wx.EVT_MENU, self.show_settings, id=wx.ID_PREFERENCES)
         self.Bind(wx.EVT_MENU, self.about, id=wx.ID_ABOUT)
+        self.Bind(wx.EVT_CHECKBOX, self.set_userpass, self.saveuserpass)
         self.Bind(wx.EVT_TEXT_ENTER, self.gui_login, self.username_box)
         self.Bind(wx.EVT_TEXT_ENTER, self.gui_login, self.password_box)
+        self.Bind(wx.EVT_CHECKBOX, self.set_autologin, self.autologin)
         self.Bind(wx.EVT_BUTTON, self.gui_login, self.login)
         self.Bind(wx.EVT_BUTTON, self.gui_logout, self.logout)
         self.Bind(wx.EVT_TEXT_ENTER, self.gui_anime, self.aname_box)
@@ -364,34 +380,40 @@ class oaframe(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.quit, self)
 
         # This sets up all the global shit we might need
-        # UDP socket (the one and only)
-        # self.sock = udp.udpsock()
-        # UDP thread (the one and only)
-        #self.outbound = Queue.Queue(10)
-        #self.inbound = Queue.Queue(5)
-        #self.udpthread = udp.udpthread(self.outbound, self.inbound, self.statusbar)
-        #self.udpthread.setDaemon(True)
-        #self.udpthread.start()
         self.udpthread = udp.internets
         self.udpthread.status = self.statusbar
         self.udpthread.errno = self.derror
         # Start "teh internets," lawl.
         self.udpthread.setDaemon(True)
         self.udpthread.start()
-        # Session ID
-        # If None, not logged in. Else, logged in. Remember that.
-        self.ssid = None
         # Initialize the tree, ignore the returned root
         self.tree.AddRoot("!root")
         # Initialize the list
         self.filelist.InsertColumn(0, "File name", wx.LIST_FORMAT_CENTER, 250)
         # Settings
         self.conf = config.config()
+        # Icon
+        iconpath = os.path.normpath(os.path.expanduser("~") + "/.oadb/zero.xpm")
+        if not os.path.exists(iconpath):
+            # No worries, this is expected. Just fall back on the default.
+            icon = wx.Icon("zero.xpm", wx.BITMAP_TYPE_XPM)
+        else:
+            icon = wx.Icon(iconpath, wx.BITMAP_TYPE_XPM)
+        self.SetIcon(icon)
+        # Load persistent settings
+        if type(self.conf.get("user.pass.check")) is bool:
+            self.saveuserpass.SetValue(self.conf.get("user.pass.check"))
+        if type(self.conf.get("autologin.check")) is bool:
+            self.autologin.SetValue(self.conf.get("autologin.check"))
+        if self.conf.get("user.pass.check"):
+            self.username_box.SetValue(self.conf.get("user"))
+            self.password_box.SetValue(self.conf.get("pass"))
+            if self.conf.get("autologin.check"):
+                wx.CallAfter(self.gui_login, None)
 
     def __set_properties(self):
         # begin wxGlade: oaframe.__set_properties
         self.SetTitle("OpenAniDB")
-        self.SetSize((400, 500))
         self.statusbar.SetStatusWidths([-1, 100])
         # statusbar fields
         statusbar_fields = ["OpenAniDB version 0.3", "Loading..."]
@@ -413,19 +435,18 @@ class oaframe(wx.Frame):
         sizer_1 = wx.BoxSizer(wx.VERTICAL)
         sizer_2 = wx.BoxSizer(wx.HORIZONTAL)
         grid_sizer_1 = wx.GridSizer(2, 3, 0, 0)
-        sizer_1.Add(self.intro, 0, wx.EXPAND|wx.ADJUST_MINSIZE, 0)
+        sizer_1.Add(self.intro, 0, wx.ADJUST_MINSIZE, 0)
         sizer_1.Add((20, 30), 0, wx.ADJUST_MINSIZE, 0)
         grid_sizer_1.Add(self.label_user, 0, wx.ADJUST_MINSIZE, 0)
         grid_sizer_1.Add(self.label_pass, 0, wx.ADJUST_MINSIZE, 0)
-        grid_sizer_1.Add((50, 20), 0, wx.ADJUST_MINSIZE, 0)
+        grid_sizer_1.Add(self.saveuserpass, 0, wx.ADJUST_MINSIZE, 0)
         grid_sizer_1.Add(self.username_box, 0, wx.ADJUST_MINSIZE, 0)
         grid_sizer_1.Add(self.password_box, 0, wx.ADJUST_MINSIZE, 0)
-        grid_sizer_1.Add((50, 20), 0, wx.ADJUST_MINSIZE, 0)
-        sizer_1.Add(grid_sizer_1, 1, wx.EXPAND, 0)
+        grid_sizer_1.Add(self.autologin, 0, wx.ADJUST_MINSIZE, 0)
+        sizer_1.Add(grid_sizer_1, 0, 0, 0)
         sizer_2.Add(self.login, 0, wx.ADJUST_MINSIZE, 0)
         sizer_2.Add(self.logout, 0, wx.ALIGN_RIGHT|wx.ADJUST_MINSIZE, 0)
-        sizer_2.Add((100, 20), 0, wx.ADJUST_MINSIZE, 0)
-        sizer_1.Add(sizer_2, 1, wx.EXPAND, 0)
+        sizer_1.Add(sizer_2, 0, wx.EXPAND, 0)
         self.main.SetAutoLayout(True)
         self.main.SetSizer(sizer_1)
         sizer_1.Fit(self.main)
@@ -466,6 +487,8 @@ class oaframe(wx.Frame):
         sizer1.Add(self.notebook1, 1, wx.EXPAND, 0)
         self.SetAutoLayout(True)
         self.SetSizer(sizer1)
+        sizer1.Fit(self)
+        sizer1.SetSizeHints(self)
         self.Layout()
         # end wxGlade
 
@@ -484,15 +507,13 @@ class oaframe(wx.Frame):
     def quit(self, event): # wxGlade: oaframe.<event_handler>
         print "Quitting..."
         # Cleanup is good.
-        if self.ssid != None:
-            # Logout
-            self.gui_logout(event)
+        self.gui_logout(event)
         self.Destroy()
         sys.exit()
 
     def gui_login(self, event): # wxGlade: oaframe.<event_handler>
         print "Logging in..."
-        if self.ssid != None:
+        if udp.session != None:
             # Already logged in, dumbass.
             self.derror("Already logged in.")
             return
@@ -505,7 +526,10 @@ class oaframe(wx.Frame):
             if loginstatus == False:
                 self.derror("Incorrect username or password.")
             else:
-                # We're in.
+                # We're in. If we're supposed to, save the user/pass.
+                if self.conf.get("user.pass.check"):
+                    self.conf.set("user", self.username_box.GetValue())
+                    self.conf.set("pass", self.password_box.GetValue())
                 self.login.Enable(False)
                 self.logout.Enable(True)
                 print "Changing encoding..."
@@ -658,9 +682,11 @@ class oaframe(wx.Frame):
 
     def show_settings(self, event): # wxGlade: oaframe.<event_handler>
         print "Showing settings dialog..."
-        settings = settingsdialog(self)
+        settings = settingsdialog(self, conf=self.conf)
         settings.ShowModal()
         settings.Destroy()
+        self.saveuserpass.SetValue(self.conf.get("user.pass.check"))
+        self.autologin.SetValue(self.conf.get("autologin.check"))
         event.Skip()
 
     def gui_filebrowse(self, event): # wxGlade: oaframe.<event_handler>
@@ -733,6 +759,20 @@ class oaframe(wx.Frame):
             #for hash in hashes:
                 #db.findfile(h=hash)
         print "Finished hashing!"
+
+    def set_userpass(self, event): # wxGlade: oaframe.<event_handler>
+        if not self.saveuserpass.GetValue():
+            self.autologin.SetValue(False)
+        self.conf.set("user.pass.check", self.saveuserpass.GetValue())
+        self.conf.save()
+        event.Skip()
+
+    def set_autologin(self, event): # wxGlade: oaframe.<event_handler>
+        if self.autologin.GetValue():
+            self.saveuserpass.SetValue(True)
+        self.conf.set("autologin.check", self.autologin.GetValue())
+        self.conf.save()
+        event.Skip()
 
 # end of class oaframe
 

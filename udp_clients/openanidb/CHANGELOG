@@ -1,4 +1,15 @@
 Changelog:
+ - svn 326:
+   - Added icon(s). For the curious, it's Zero from "Zero no Tsukaima;"
+     I felt she was appropriate considering the nature of this project.
+     Want to change it? Modify zero.xpm or add your own zero.xpm to
+     your .oadb directory.
+   - Hooked up username/password save.
+   - New settings: Autologin. When selected, the program will
+     automatically try to log you in using the saved name and password.
+     OADB won't save a user/pass combo that is not valid.
+   - Fixed bug making config files non-persistent on Windows. You should
+     delete your old openanidb.ini if you are on Windows!
  - svn 314:
    - Fixed hashing regression when not using PCT and sped up builtin MD4
      slightly.
