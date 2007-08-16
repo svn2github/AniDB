@@ -4,17 +4,17 @@
  * Based on Harustyle by b1hn.
  */
 
-/** Colors
- * Complete (Green): #90EE90
- * Dropped (Red): #FF6666
- * Stalled (Red): #FFC0CB
- * Background: #AAD8E6
- * Border: #3496DA
+/** Colors to remember. :P
+ * Complete (Green):	#90EE90
+ * Dropped (Red): 	#FF6666
+ * Stalled (Pink): 	#FFC0CB
+ * Background: 		#AAD8E6
+ * Border: 		#3496DA
  */
 
 /* Imports. */
-@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";
+@import url("../common/style/icons/default.css");
+@import url("../common/style/icons/flags.css");
 
 /* Global */
 html
@@ -232,7 +232,7 @@ fieldset
 
 #layout-menu div.usermenu p a.i_profile
 {
-	content:"Account Settings!";
+	content:"Your Profile!";
 	text-transform:capitalize;
 }
 
@@ -276,11 +276,6 @@ fieldset
 	border-bottom:#2496DA solid 2px;
 	font-weight:bold;
 	text-align:center;
-}
-
-#layout-search div.search p input.text.value
-{
-	content:"test";
 }
 
 #layout-search div.search p input.submit
@@ -548,16 +543,126 @@ fieldset
 	font-size:small;
 }
 
-/* Latest Additions Page */
-#layout-content div.latest_all ul.type
+/* Anime Calendar Page */
+#layout-content div.latestanimes_all div.latestanimes_form.top a.g_navprev
 {
-	list-style-type:none;
+	float:left;
+}
+
+#layout-content div.latestanimes_all div.latestanimes_form.top a.g_navnext
+{
+	float:right;
+}
+
+#layout-content div.latestanimes_all div.latestanimes_form.top form p
+{
+	padding-top:20px;
 	text-align:center;
 }
 
-#layout-content div.latest_all ul.type li
+#layout-content div.latestanimes_all div.latestanimes_form.top form p select.month
+{
+	background-color:#AAD8E6;
+	border-top:#2496DA solid 2px;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	font-weight:bold;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+
+#layout-content div.latestanimes_all div.latestanimes_form.top form p input.year
+{
+	width:40px;
+	background-color:#AAD8E6;
+	border-top:#2496DA solid 2px;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	font-weight:bold;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+
+#layout-content div.latestanimes_all div.latestanimes_form.top form p select.type
+{
+	background-color:#AAD8E6;
+	border-top:#2496DA solid 2px;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	font-weight:bold;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+
+#layout-content div.latestanimes_all div.latestanimes_form.top form p input.submit
+{
+	background-color:#AAD8E6;
+	border-top:#2496DA solid 2px;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	font-weight:bold;
+	text-align:center;
+	margin:0;
+	padding:0;
+}
+
+/* Latest Additions Page */
+#layout-content div.latest_all ul.type,
+#layout-content div.latest_all ul.g_numonpage,
+#layout-content div.latest_all ul.g_actionlist
+{
+	list-style-type:none;
+	text-align:center;
+	font-size:small;
+}
+
+#layout-content div.latest_all ul.type:before,
+#layout-content div.latest_all ul.type:after,
+#layout-content div.latest_all ul.g_numonpage:before,
+#layout-content div.latest_all ul.g_numonpage:after,
+#layout-content div.latest_all ul.g_actionlist > li:first-child:before,
+#layout-content div.latest_all ul.g_actionlist li:after
+{
+	content:" - ";
+}
+
+#layout-content div.latest_all ul.type li,
+#layout-content div.latest_all ul.g_numonpage li,
+#layout-content div.latest_all ul.g_actionlist li
 {
 	display:inline;
+}
+
+#layout-content div.latest_all ul.type li:before,
+#layout-content div.latest_all ul.g_numonpage li:before
+{
+	content:" | ";
+}
+
+#layout-content div.latest_all ul.type > li:first-child:before,
+#layout-content div.latest_all ul.g_numonpage > li:first-child:before
+{
+	content:"";
+}
+
+#layout-content div.latest_all div.latest_files_list table.files
+{
+	background-color:#AAD8E6;
+	border-top:#2496DA solid 2px;
+	border-left:#2496DA solid 2px;
+	border-right:#2496DA solid 2px;
+	border-bottom:#2496DA solid 2px;
+	margin:20px auto 20px auto;
+	padding:0;
+	list-style-type:none;
+	font-size:small;
 }
 
 /* Anime List Page */
@@ -567,28 +672,11 @@ fieldset
 	text-transform:capitalize;
 	margin:0 0 10px 0;
 	padding:0;
+	font-size:small;
 }
 
 #layout-content div.animelist_all div.g_filterlist:before,
-#layout-content div.animelist_all div.g_filterlist:after
-{
-	content:" - ";
-}
-
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist
-{
-	list-style-type:none;
-	margin:0;
-	padding:0;
-	text-align:center;
-	text-transform:capitalize;
-}
-
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li
-{
-	display:inline;
-}
-
+#layout-content div.animelist_all div.g_filterlist:after,
 #layout-content div.animelist_all div.animelist_list ul.g_jumplist li.all:before,
 #layout-content div.animelist_all div.animelist_list ul.g_jumplist li.other:after,
 #layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev:before,
@@ -601,16 +689,29 @@ fieldset
 	content:" - ";
 }
 
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist
+{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	text-align:center;
+	text-transform:capitalize;
+	font-size:small;
+}
+
+#layout-content div.animelist_all div.animelist_list ul.g_jumplist li
+{
+	display:inline;
+}
+
 #layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev
 {
 	float:left;
-	margin-left:40px;
 }
 
 #layout-content div.animelist_all div.animelist_list ul.g_jumplist li.next
 {
 	float:right;
-	margin-right:40px;
 }
 
 #layout-content div.animelist_all div.animelist_list table.anime_list
@@ -633,6 +734,7 @@ fieldset
 	padding:0;
 	text-align:center;
 	text-transform:capitalize;
+	font-size:small;
 }
 
 #layout-content div.animelist_all ul.g_actionlist li
