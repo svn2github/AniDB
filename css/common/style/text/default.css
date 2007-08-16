@@ -22,7 +22,7 @@ td.id, td.count, td.number, td.size, td.epno, td.duration
 	text-align: right;
 }
 
-td, ul, p.desc,
+td, ul,
 th.field, td.value, td.name, td.quality, td.title, td.name,
 #layout-content div.main_all div.news h4
 {

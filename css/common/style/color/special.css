@@ -36,3 +36,8 @@ span.diff,
 {
 	color: gray;
 }
+
+input.g_error
+{
+	background-color: #FFDDDD;
+}
