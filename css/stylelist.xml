@@ -23,7 +23,7 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle DonGato revision</title>
 		<creator>DonGato</creator>
-		<update>06.08.2007</update>
+		<update>18.08.2007</update>
 		<status>in sync with 0.1.38</status>
 		<description>report any problem by a message</description>
 		<path/>
@@ -43,7 +43,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>May 20, 2007</update>
+		<update>18.08.2007</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -57,8 +57,8 @@
 		<status>not maintained anymore and replaced by v2</status>
 		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB is developed for Opera at a resolution of 1280x1024 and may not work in any other webbrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>haruhistylex/images/screenshot.png</screenshot>
+		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="haruhistylex-v2">
 		<title>HaruhiStyleX.AniDB v2</title>
