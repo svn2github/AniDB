@@ -601,20 +601,17 @@ span.i_video
 
 span.i_ext
 {
-	display: none;
-/*	background-image: url(http://static.anidb.net/css/icons/icon/anidb_other.gif); */
+	background-image: url(http://dongato.dyndns.org/anidb/images/anidb_other.gif);
 }
 
 span.i_ext.mkv
 {
-	display: none;
-/*	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_mkv.gif); */
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_mkv.gif);
 }
 
 span.i_ext.ogm
 {
-	display: none;
-/*	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_ogm.gif); */
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_ogm.gif);
 }
 
 span.i_videostream_unknown,
@@ -2785,7 +2782,8 @@ body.nonav
 #layout-content td ins,
 #layout-content table.filelist tr.good,
 #layout-content div.myvotes_all table tr.high td,
-#layout-content div.producer_all table tr.mylist
+#layout-content div.producer_all table tr.mylist,
+#layout-content div.group_released table tr.mylist
 {
 	background-color: #6FC279;
 }
@@ -3458,6 +3456,12 @@ div.permissions div.detailed th
 th, td.action, td.icons
 {
 	white-space: nowrap;
+}
+
+div.anime_all td.action,
+div.latest_files_list td.action
+{
+	width: 40px;
 }
 
 /* remove odd coloring for mylist table headers */
