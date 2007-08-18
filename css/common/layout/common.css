@@ -94,11 +94,10 @@ body.nonav #layout-content h1
 #layout-content *.icons *.i_icon,
 #layout-content div.group_released tr td.languages span.i_icon,
 #layout-content div.anime_all div.groups td.languages span.i_icon,
-#layout-content div.anime_all div.episodes td.action .i_icon,
-#layout-content div.latest_completed td.icon span.i_icon
+#layout-content div.anime_all div.episodes td.action .i_icon
 {
 	float: left;
-	padding: 0px 2px 0px 2px;
+	padding: 0px 1px 0px 1px;
 }
 
 #layout-content td.icons.quality *.i_icon
