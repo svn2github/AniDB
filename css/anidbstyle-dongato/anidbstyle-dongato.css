@@ -609,6 +609,11 @@ span.i_ext
 	background-image: url(images/anidb_other.gif);
 }
 
+span.i_ext.mp4
+{
+	background-image: url(images/anidb_mp4.gif);
+}
+
 span.i_ext.mkv
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_mkv.gif);
