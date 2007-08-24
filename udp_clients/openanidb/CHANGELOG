@@ -1,4 +1,19 @@
 Changelog:
+ - svn 337:
+   - Renamed classes in openanidb.py and fixed indentation issues. If
+     I broke anything doing it, let me know.
+   - Added formatting help to the settings dialog. This should make the
+     cryptic dollar signs a bit less cryptic. Also, if you want or need
+     more formatting strings, let me know.
+   - Added default actions (Escape, Enter, etc.) to settings dialog.
+   - Unbroke previews for formatted strings in settings. I wish that
+     someone had told me sooner that they were broken.
+   - Unbroke icky hashing logic.
+   - Added substitutions for file moves.
+   - Added warning if hashing is started while not logged in.
+   - Added safety checks to hashing. Hashing will now halt with an
+     error box if it does not have permission to move files or make
+     directories.
  - svn 326:
    - Added icon(s). For the curious, it's Zero from "Zero no Tsukaima;"
      I felt she was appropriate considering the nature of this project.
