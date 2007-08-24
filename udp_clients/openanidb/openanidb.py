@@ -200,7 +200,7 @@ class oadb(wx.Frame):
         self.SetTitle("OpenAniDB")
         self.statusbar.SetStatusWidths([-1, 100])
         # statusbar fields
-        statusbar_fields = ["OpenAniDB version 0.3", "Loading..."]
+        statusbar_fields = ["OpenAniDB version 0.4 ", "Loading..."]
         for i in range(len(statusbar_fields)):
             self.statusbar.SetStatusText(statusbar_fields[i], i)
         self.logout.Enable(False)
@@ -279,12 +279,21 @@ class oadb(wx.Frame):
         self.filelist.InsertColumn(0, "File name", wx.LIST_FORMAT_CENTER, 350)
         # Settings
         self.conf = config.config()
-        # Icon
+        # Icon stuffs
+        # The "default," available everywhere
+        icon = wx.Icon("zero.xpm", wx.BITMAP_TYPE_XPM)
+        # Are we on Windows?
+        try:
+            import win32api
+            # Yes. Try to grab the icon from the resource section, if we're compiled.
+            exe = win32api.GetModuleFileName(win32api.GetModuleHandle(None))
+            icon = wx.Icon(exe + ";0", wx.BITMAP_TYPE_ICO)
+        except:
+            # No.
+            pass
         iconpath = os.path.normpath(os.path.expanduser("~") + "/.oadb/zero.xpm")
-        if not os.path.exists(iconpath):
-            # No worries, this is expected. Just fall back on the default.
-            icon = wx.Icon("zero.xpm", wx.BITMAP_TYPE_XPM)
-        else:
+        if os.path.isfile(iconpath):
+            # Custom overrides all!
             icon = wx.Icon(iconpath, wx.BITMAP_TYPE_XPM)
         self.SetIcon(icon)
         # Load persistent settings

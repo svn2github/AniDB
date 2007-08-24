@@ -75,7 +75,7 @@ class udpthread(threading.Thread):
         while True:
             if not self.i.empty():
                 if self.status != None:
-                    self.status.SetStatusText("Queued: " + str(self.i.qsize()), 1)
+                    wx.CallAfter(self.status.SetStatusText, "Queued: " + str(self.i.qsize()), 1)
                 # This thread's in is the system's out.
                 outbound = self.i.get(False)
                 print "UDP: Sending", outbound
@@ -96,7 +96,7 @@ class udpthread(threading.Thread):
                     wx.CallAfter(self.errno, s)
                     self.o.put(None)
             elif self.status != None:
-                self.status.SetStatusText("Idle...", 1)
+                wx.CallAfter(self.status.SetStatusText, "Idle...", 1)
             time.sleep(2)
 
 # Yes, this is the session string.

@@ -1,4 +1,19 @@
 Changelog:
+ - svn 338:
+   - Started Windows-specific work. In particular, fixed a network bug
+     of the showstopper variety, added support for the Windows icon,
+     and generated Windows binaries. You may now log in and hash files
+     on Windows.
+   - Added COPYING, a copy of the GNU GPL, to the repo. I hope people
+     do not bear me ill will for explicitly declaring what they may and
+     may not do with my code.
+   - Added zero.ico, a Windows icon resource, to the repo. Contains
+     16x16, 32x32, and 64x64 icons for Windows to use.
+   - Added setup.py, a py2exe script for generating Windows binaries.
+     I figured you guys should have it. The binaries will be quite
+     large, roughly 11MB; I used UPX and gzip to get it down below the
+     5MB mark.
+   - Updated README to reflect current project status.
  - svn 337:
    - Renamed classes in openanidb.py and fixed indentation issues. If
      I broke anything doing it, let me know.

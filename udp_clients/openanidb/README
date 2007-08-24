@@ -3,12 +3,14 @@ you should be able to use it fairly well. Please read this README; if
 you don't, I can't improve the client, and you will not be pleased.
 
 To get started, make sure you have Python 2.4.x, wxPython 2.6.x, and 
-APSW. If you plan on hashing files, please get either PCT (Python
-Cryptography Toolkit) or Psyco.
+APSW and PCT (PyCrypto.) Psyco is optional, and will be
+automatically loaded if it is found.
 
 Type:
  $ ./openanidb.py
-To start the program.
+To start the program, or
+ > python openanidb.py
+On Windows.
 
 What works:
  - File hashing
@@ -23,9 +25,12 @@ What works:
      "state" are supported, and can be set in Settings.
    - The local mylist is stored with the global cache, although since 
      mylist lids are global, there should not be problems.
+   - There are no per-user mylists. This shouldn't be a problem for
+     most people, so it is currently a "feature." If you're interested
+     in per-user mylists, contact me.
  - Caching
    - The cache is an Sqlite-powered flat file database, caching all 
-     possible requests and easing server load.
+     possible requests and easing server load whenever possible.
 
 What doesn't work:
  - Cache invalidation
@@ -56,9 +61,8 @@ What simply isn't there:
  - Search/goto
  - Stateful browsing and incremental refresh
  - Gentler hashing/hash cache
- - Psyco support
-   - This is one of those "Don't try this at home"-style things. Psyco 
-     support for heavy lifting will be optional and user-controlled.
+   - If you're on Linux, your hashes will be cached by the OS. Also, the
+     hashing code is threaded now, so it shouldn't monopolize your CPU.
 
 Wow, you read all that? Good work. Now...
 
