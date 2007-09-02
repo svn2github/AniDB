@@ -15,5 +15,5 @@ setup(
 			"icon_resources": [(0, "zero.ico")]
 		}
 	],
-	data_files = [(".", ["COPYING", "CHANGELOG", "README"])]
+	data_files = [(".", ["COPYING", "CHANGELOG", "README", "zero.ico", "zero.xpm"])]
 )

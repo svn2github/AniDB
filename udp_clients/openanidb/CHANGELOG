@@ -1,4 +1,15 @@
 Changelog:
+ - svn 339:
+   - Fixed small typo in About box.
+   - Cleaned up icon code. The correct icon should now appear on both
+     Windows and Linux, even if the code is compiled to a binary.
+   - Added zero.ico and zero.xpm to setup.py. Not sure how I missed
+     that, but it's fixed now.
+   - Added a few more filetypes to the hash dialog. Thanks, Hakker!
+     - Added .wmv and .asf (Windows Media Video)
+     - Added .rm and .rmvb (RealMedia Video)
+     - Added .mpg (MPEG)
+     - Added .ogg and .ogm (Ogg)
  - svn 338:
    - Started Windows-specific work. In particular, fixed a network bug
      of the showstopper variety, added support for the Windows icon,

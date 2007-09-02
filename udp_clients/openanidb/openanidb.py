@@ -42,7 +42,7 @@ try:
     psycover = [str(i) for i in psyco.version_info]
     coreversion = coreversion + "  Psyco version: " + '.'.join(psycover) + "\n"
 except ImportError:
-    coreversion = coreversion + "  Not using Psyco"
+    coreversion = coreversion + "  Not using Psyco\n"
 
 # Local imports
 import config
@@ -279,20 +279,13 @@ class oadb(wx.Frame):
         self.filelist.InsertColumn(0, "File name", wx.LIST_FORMAT_CENTER, 350)
         # Settings
         self.conf = config.config()
-        # Icon stuffs
-        # The "default," available everywhere
-        icon = wx.Icon("zero.xpm", wx.BITMAP_TYPE_XPM)
-        # Are we on Windows?
-        try:
-            import win32api
-            # Yes. Try to grab the icon from the resource section, if we're compiled.
-            exe = win32api.GetModuleFileName(win32api.GetModuleHandle(None))
-            icon = wx.Icon(exe + ";0", wx.BITMAP_TYPE_ICO)
-        except:
-            # No.
-            pass
+        # Icon stuff
+        if sys.platform == "win32":
+            icon = wx.Icon("zero.ico", wx.BITMAP_TYPE_ICO)
+        else:
+            icon = wx.Icon("zero.xpm", wx.BITMAP_TYPE_XPM)
         iconpath = os.path.normpath(os.path.expanduser("~") + "/.oadb/zero.xpm")
-        if os.path.isfile(iconpath):
+        if os.path.exists(iconpath) and os.path.isfile(iconpath):
             # Custom overrides all!
             icon = wx.Icon(iconpath, wx.BITMAP_TYPE_XPM)
         self.SetIcon(icon)
@@ -478,7 +471,24 @@ class oadb(wx.Frame):
 
     def gui_filebrowse(self, event): # wxGlade: oadb.<event_handler>
         print "Showing file chooser..."
-        filechooser = wx.FileDialog(self, "Add File(s)", '', '', "All supported filetypes|*.avi;*.mkv;*.mp4|Audio-Video Interleave (*.avi)|*.avi|Matroska (*.mkv)|*.mkv|Quicktime MPEG-4 (*.mp4)|*.mp4", wx.OPEN | wx.FILE_MUST_EXIST | wx.MULTIPLE)
+        filetypes = [ "All supported filetypes",
+            "*.asf;*.avi;*.ogg;*.ogm;*.mkv;*.mp4;*.mpeg;*.mpg;*.rm;*.rmvb;*.wmv",
+            "Audio-Video Interleave (*.avi)",
+            "*.avi",
+            "Matroska (*.mkv)",
+            "*.mkv",
+            "MPEG (*.mpeg,*.mpg)",
+            "*.mpeg;*.mpg",
+            "Ogg (*.ogm,*.ogg)",
+            "*.ogg;*.ogm",
+            "Quicktime MPEG-4 (*.mp4)",
+            "*.mp4",
+            "RealMedia Video (*.rm,*.rmvb)",
+            "*.rm;*.rmvb",
+            "Windows Media Video (*.asf,*.wmv)",
+            "*.asf;*.wmv"
+        ]
+        filechooser = wx.FileDialog(self, "Add File(s)", '', '', "|".join(filetypes), wx.OPEN | wx.FILE_MUST_EXIST | wx.MULTIPLE)
         if filechooser.ShowModal() == wx.ID_OK:
             for file in filechooser.GetPaths():
                 self.filelist.InsertStringItem(self.filelist.GetItemCount(), file)
