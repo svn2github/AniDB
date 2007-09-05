@@ -86,6 +86,67 @@
 						<title lang="<tmpl_var name=data_ep_title_langsname>"><![CDATA[<tmpl_var name=data_ep_title_name>]]></title></tmpl_loop>
 					</titles>
 					<rating votes="<tmpl_var name=data_ep_votes>"><tmpl_var name=data_ep_rating></rating>
+					<files><tmpl_loop name=loop_file>
+						<file id="<tmpl_var name=data_file_id>" type=""><tmpl_if expr="data_file_state != 0">
+							<flags><tmpl_var name=data_file_state></flags></tmpl_if>
+							<mylist>
+								<date viewed="<tmpl_var name=data_file_viewdate>"><tmpl_var name=data_file_ldate></date><tmpl_if expr="data_file_storage ne ''">
+								<storage><tmpl_var name=data_file_storage></storage></tmpl_if><tmpl_if expr="data_file_source ne ''">
+								<source><tmpl_var name=data_file_source></source></tmpl_if><tmpl_if expr="data_file_other ne ''">
+								<other><![CDATA[<tmpl_var name=data_file_other>]]></other></tmpl_if>
+								<mystate><tmpl_var name=data_file_mystate_string></mystate>
+								<myfilestate><tmpl_var name=data_file_myfilestate_string></myfilestate>
+							</mylist>
+							<size><tmpl_var name=data_file_size_plain></size>
+							<ftype><tmpl_var name=data_file_filetype></ftype>
+							<len><tmpl_var name=data_file_length></len><tmpl_if name=data_file_crc>
+							<crc><tmpl_var name=data_file_crc></crc></tmpl_if><tmpl_if name=data_file_md5>
+							<md5><tmpl_var name=data_file_md5></md5></tmpl_if><tmpl_if name=data_file_sha1>
+							<sha1><tmpl_var name=data_file_sha1></sha1></tmpl_if><tmpl_if name=data_file_tth>
+							<tth><tmpl_var name=data_file_tth></tth></tmpl_if><tmpl_if name=data_file_ed2k_hash>
+							<ed2k><tmpl_var name=data_file_ed2k_hash></ed2k></tmpl_if>
+							<group id="<tmpl_var name=data_file_group_id>" />
+							<date update="<tmpl_var name=data_file_update>" rel="<tmpl_var name=data_file_released>"><tmpl_var name=data_file_date></date>
+							<qual><tmpl_var name=data_file_qual_name></qual>
+							<source><tmpl_var name=data_file_type_name></source>
+							<tmpl_if expr="data_file_vidcnt > 0"><vid cnt="<tmpl_var name=data_file_vidcnt>">
+								<stream>
+									<res><tmpl_var name=data_file_res_name></res>
+									<br><tmpl_var name=data_file_vbitrate></br>
+									<codec><tmpl_var name=data_file_vcodec_name></codec>
+									<ar><tmpl_var name=data_file_ar></ar>
+									<fps><tmpl_var name=data_file_fps></fps><tmpl_if expr="data_file_vflags != 0">
+									<flags><tmpl_var name=data_file_vflags></flags></tmpl_if>
+								</stream>
+							</vid></tmpl_if><tmpl_if expr="data_file_audcnt > 0">
+							<aud cnt="<tmpl_var name=data_file_audcnt>"><tmpl_if expr="data_file_audcnt > 0">
+								<stream>
+									<br><tmpl_var name=data_file_abitrate></br>
+									<codec><tmpl_var name=data_file_acodec_name></codec>
+									<chan><tmpl_var name=data_file_chantype></chan>
+									<lang><tmpl_var name=data_file_lang_sname></lang>
+								</stream></tmpl_if><tmpl_if expr="data_file_audcnt > 1">
+								<stream>
+									<br><tmpl_var name=data_file_abitrate2></br>
+									<codec><tmpl_var name=data_file_acodec_name2></codec>
+									<chan><tmpl_var name=data_file_chantype2></chan>
+									<lang><tmpl_var name=data_file_lang_sname2></lang>
+								</stream></tmpl_if>
+							</aud></tmpl_if><tmpl_if expr="data_file_subcnt > 0">
+							<sub cnt="<tmpl_var name=data_file_subcnt>"><tmpl_if expr="data_file_subcnt > 0">
+								<stream>
+									<type><tmpl_var name=data_file_stype></type><tmpl_if expr="data_file_sflags != 0">
+									<flags><tmpl_var name=data_file_sflags></flags></tmpl_if>
+									<lang><tmpl_var name=data_file_sub_sname></lang>
+								</stream></tmpl_if><tmpl_if expr="data_file_subcnt > 1">
+								<stream>
+									<type><tmpl_var name=data_file_stype2></type><tmpl_if expr="data_file_sflags2 != 0">
+									<flags><tmpl_var name=data_file_sflags2></flags></tmpl_if>
+									<lang><tmpl_var name=data_file_sub_sname2></lang>
+								</stream></tmpl_if>
+							</sub></tmpl_if>
+						</file></tmpl_loop>
+					</files>
 				</ep></tmpl_loop>
 			</eps>
 		</anime></tmpl_loop>

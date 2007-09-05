@@ -1,4 +1,4 @@
-/**
+/* *
  * @file MapValues interface
  * @author fahrenheit (alka.setzer@gmail.com)
  *         Based on code from PetriW's work at anidb
@@ -7,7 +7,7 @@
  
  // CORE Maps //
  
- /**
+ /* *
   * Function that maps file states to textual values
   * @param fstate The fstate to convert
   * @return String of the textual converted value
@@ -20,7 +20,7 @@ function mapFState(fstate) {
   return stClass;
 }
 
-/**
+/* *
  * Function to convert a mylistEntry status id to a status name
  * @param statId Status id to convert to text
  * @return String containing status name
@@ -85,7 +85,7 @@ var languageMap = {'x-unk':{"name":'unknown',"classname":'unknown'},
                    'zh-Hans':{"name":'chinese (simplified)',"classname":'simplified'},
                    'is':{"name":'icelandic',"classname":'icelandic'}};
 
-/**
+/* *
  * Function that maps a LANGCODE to a language
  * @param langCode The language code to convert
  * @return Name of the language
@@ -94,7 +94,7 @@ function mapLanguage(langCode) {
   if (languageMap[langCode]) return (languageMap[langCode]['name']);
   else return ('unknown');
 }
-/**
+/* *
  * Function that maps a LANGCODE to a language used in the icons
  * @param langCode The language code to convert
  * @return Name of the language
@@ -104,7 +104,7 @@ function mapClassLanguage(langCode) {
   else return ('unknown');
 }
 
-/**
+/* *
  * Converts a subtitle stream flags in the textual relation
  * @param subFlags Int representing subtitle flags
  * @return String giving text based subtitle flags
@@ -124,7 +124,7 @@ function mapSubFlagData(subFlags) {
 	return subData.join(', ');
 }
 
-/**
+/* *
  * Converts a video stream flags in the textual relation
  * @param videoFlags Int representing video flags
  * @return String giving text based video flags
@@ -139,7 +139,7 @@ function mapVideoFlagsInfo(videoFlags) {
 	return videoInfo.join(', ');
 }
 
-/**
+/* *
  * Converts a subtitle types in the textual relation
  * @param subType Int representing sub type
  * @return String giving text based sub type
@@ -154,7 +154,7 @@ function mapSubTypeData(subType) {
 	return (subType);
 }
 
-/**
+/* *
  * Converts a audioChannel id in the textual relation
  * @param audioChannels Int representing stream aud chan
  * @return String giving text based channel type
@@ -172,7 +172,7 @@ function mapAudioChannels(audioChannels) {
 	return (audioChannels);
 }
 
-/**
+/* *
  * Converts numeric audio types in a textual relation
  * @param type Type of audio file
  * @return String containing text based audio type
@@ -186,7 +186,7 @@ function mapAudioType(type) {
   return (type);     
 }
 
-/**
+/* *
  * This should not be needed, and wasn't needed till *someone* changed the system...
  * @param qual Quality
  * @return Quality className
@@ -202,7 +202,7 @@ function mapQualityClassName(qual) {
   return ("unknown");
 }
 
-/**
+/* *
  * This should not be needed, and wasn't needed till *someone* changed the system...
  * @param qual Quality
  * @return Quality className
@@ -221,7 +221,7 @@ function mapQuality(qualClassName) {
   return (1);
 }
 
-/**
+/* *
  * Function that returns the anime type
  * @param type Anime type id
  * @return String with anime type

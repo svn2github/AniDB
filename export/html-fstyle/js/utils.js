@@ -1,4 +1,4 @@
-/**
+/* *
  * @file Utilities
  * @author fahrenheit (alka.setzer@gmail.com)
            some code derived from work by PetriW and Rar at anidb
@@ -24,7 +24,7 @@ function padRight(text, padChar, count) {
   return (text + result);
 }
 
-/**
+/* *
  * Function that converts UTC TIME/UNIXTIME date format to a string
  * @param data The date to convert
  * @return A string with the date
@@ -44,7 +44,7 @@ function convertTime(data) {
   }
 }
 
-/**
+/* *
  * Function that converts given date to javascript a Date object
  * @param data The date to convert
  * @return A Date object
@@ -70,7 +70,7 @@ function javascriptDate(data) {
     return datetime = new Date(data * 1000); // UNIX time format
 }
 
-/**
+/* *
  * This function returns a Date of UTC time date
  * @param data The date
  * @return Date in the format of dd.mm.yyyy
@@ -88,7 +88,7 @@ function cTimeDate(data) {
     return (data);
   } else return(data);
 }
-/**
+/* *
  * This function returns a Hour of UTC time date
  * @param data The date
  * @return Date in the format of hh:mm:ss
@@ -102,7 +102,7 @@ function cTimeHour(data) {
 
 // DOM NODE FUNCTIONS //
 
-/**
+/* *
  * Returns the nodeValue of a given node
  * @param node The node where to extract information
  * @return String containing node data
@@ -115,7 +115,7 @@ function nodeData(node) {
 // STUB //
 function doNothing() { return false; }
 
-/**
+/* *
  * Debug function that shows the dom tree of a node
  * @param node The node to show the tree
  * @return void (shows an alert box)
@@ -143,6 +143,18 @@ function showDOMtree(node) {
   }
   out += '</'+node.nodeName+'>';
   alert(out);
+}
+
+/* *
+ * Function that parses HMTL text and converts it to DOM nodes
+ * @param source Text to convert
+ * @return a SPAN containing the converted text
+ */
+function convertStringToDom(source) {
+	var span = document.createElement('SPAN');
+	// yeah, yeah.. I know i shouldn't be using innerHTML but it's a pain otherwise
+	span.innerHTML = convert_input(source);
+	return span;
 }
 
 /* *
@@ -228,7 +240,7 @@ function createLink(parentNode, text, url, rel, onclick, title, className) {
   else return(obj);
 }
 
-/**
+/* *
  * Creates a SELECT option element
  * @param parentNode ParenteNode of the newly created option or null if want return
  * @param text Text for the option
@@ -335,7 +347,7 @@ function expandRange(range,limit,map,array) {
 
 // GENERAL FUNCTIONS //
 
-/**
+/* *
  * Function that alerts the user for errors
  * @param func Name of the function
  * @param process 
@@ -351,7 +363,7 @@ function showAlert(func, process, pNode, cNode) {
         '\nPlease warn your favorite moderator with this text message');
 }
 
-/**
+/* *
  * Function that parses the URI
  * return Object holding URI Data
  */
@@ -373,7 +385,7 @@ function parseURI() {
   return obj;
 }
 
-/**
+/* *
  * Function that updates the URI
  * @param obj URI object
  * @return void (set's the URI)
@@ -392,7 +404,7 @@ function updateURI(obj) {
   return (currentURI);
 }
 
-/**
+/* *
  * Function that clones an object
  * @param what The object to clone
  * @return usage: var x = new cloneObject(y);
@@ -403,7 +415,7 @@ function cloneObject(what) {
     this[i] = what[i];
 }
 
-/**
+/* *
  * Adds array push prototype to arrays if not defined
  */
 function Array_push() {
@@ -415,9 +427,9 @@ function Array_push() {
 }
 if (typeof Array.prototype.push == "undefined") {
   Array.prototype.push = Array_push;
-}
+}
 
-/**
+/* *
  * Adds array shift prototype to arrays if not defined
  */
 function Array_shift() {
@@ -433,7 +445,7 @@ if (typeof Array.prototype.shift == "undefined") {
   Array.prototype.shift = Array_shift;
 }
 
-/**
+/* *
  * This function is used to update the status of the Request
  * @param text Text to show
  * @return void
@@ -453,7 +465,7 @@ function updateStatus(text,add) {
   } catch (e) { }
 }
 
-/**
+/* *
  * Converts episode numbers from exp notation to interface notation
  * @param epno Episode Number to convert
  * @return converted episode number
@@ -469,7 +481,7 @@ function epNoToString(epno) {
   return ret;
 }
 
-/**
+/* *
  * This function formats the file size
  * @param size Size in bytes
  * @param force Should force LAY_FORMATFILESIZE?
@@ -501,7 +513,7 @@ function formatFileSize(size,force) {
   }
 }
 
-/**
+/* *
  * This function formats a length to a given format
  * @param length Length in seconds
  * @param format The output format ['long'|'rounded']
@@ -535,12 +547,13 @@ function formatFileLength(length, format) {
 
 function buildQualityIcon(node,quality) {
   var qual = quality.replace(' ','');
-  createIcon(node, quality, null, null, 'quality: '+quality, 'i_rate_'+qual);
+	if (node == null || node == '') return createIcon(node, quality, null, null, 'quality: '+quality, 'i_rate_'+qual);
+	else createIcon(node, quality, null, null, 'quality: '+quality, 'i_rate_'+qual);
 }
 
 // EPISODE Functions //
 
-/**
+/* *
  * Finds and returns every mylist entry associated with a given eid
  * @param eid Episode id of the episode to find entries
  * @return Array with found entries
@@ -827,7 +840,7 @@ var validIdentifiers = ["%ant","%anat","%ept","%epat","%enr","%pn","%fpn","%raw"
                         "%grp","%grn","%qual","%src","%res","%vcodec","%eps","%atype",
                         "%fid","%aid","%eid","%gid","%dlen","%ext","%ed2k","%uncen",
                         "%acodec","%achans","%hlen","%flen"]
-/**
+/* *
  * Function that tests if a given identifier is valid
  * @param identifier The identifier to test
  * @return true|false
@@ -838,7 +851,7 @@ function checkIdentifiers(identifier) {
   }
   return false;
 }
-/**
+/* *
  * Function that creates the link for a given hash
  * @return void (sets the hash href) 
  */
@@ -984,3 +997,83 @@ function createHashLink() {
   ahref.href = pattern;
 }
 
+// SOME FORMATING FUNCTIONS
+
+/* *
+ * This function creates and inserts an href at the selection
+ * @param obj The RTE obj
+ * @param fTA The underlying textArea
+ * @param val The type of the link
+ * @param attribute The attribute of the link
+ * @param textOnly true if only the text of the link is needed
+ */
+function createHTTPLink(val,attribute,sel,textOnly) {
+  var base = "http://anidb.net/";
+  var type = ""; // link type
+  switch (val) {
+    case 'anime':
+    case 'creq':
+    case 'ep':
+    case 'file':
+    case 'group':
+    case 'producer':
+    case 'reviews':
+    case 'mylist':
+    case 'votes': type = val.charAt(0); break;
+    case 'titles': type = 'at'; break;
+    case 'producers': type = 'ap'; break;
+    case 'genres': type = 'ag'; break;
+    case 'cats': type = 'ac'; break;
+    case 'relations': type = 'ar'; break;
+    case 'user': type = 'up'; break;
+    case 'review': type = 'rs'; break;
+    case 'groupcmts': type = 'agc'; break;
+    case 'wiki': base = "http://wiki.anidb.net/w/"; break;
+    case 'forum':
+    case 'forum.topic':
+    case 'forum.board':
+    case 'forum.post': 
+      base = "http://forum.anidb.net/";
+      if      (val == 'forum.board') base += "viewforum.php?f=";
+      else if (val == 'forum.topic') base += "viewtopic.php?t=";
+      else if (val == 'forum.post' ) base += "viewtopic.php?p=";
+      break;
+    case 'tracker': base = "http://tracker.anidb.net/view.php?id="; break;
+    default: base = "";
+  }
+  if (base == "") return; //no base no link
+  return '<a href="'+base+type+attribute+'" type="'+val+'" att="'+attribute+'">'+sel+'</a>';
+}
+
+/*
+ * Link replacement functions 
+ */
+function convertLinksInput(mstr, m1, m2, m3, offset, s) {
+  return createHTTPLink(null,null,m1,m2,m3,true);
+}
+
+/*
+ * Replacement functions
+ */
+function convert_input(str) {
+  str = str.replace(/\[b\]/mgi,'<b>');
+  str = str.replace(/\[\/b\]/mgi,'</b>');
+  str = str.replace(/\[i\]/mgi,'<i>');
+  str = str.replace(/\[\/i\]/mgi,'</i>');
+  str = str.replace(/\[u\]/mgi,'<u>');
+  str = str.replace(/\[\/u\]/mgi,'</u>');
+  str = str.replace(/\[s\]/mgi,'<strike>');
+  str = str.replace(/\[\/s\]/mgi,'</strike>');
+  str = str.replace(/\[ul\]/mgi,'<ul>');
+  str = str.replace(/\[\/ul\]/mgi,'</ul>');
+  str = str.replace(/\[ol\]/mgi,'<ol>');
+  str = str.replace(/\[\/ol\]/mgi,'</ol>');
+  str = str.replace(/\[li\]/mgi,'<li>');
+  str = str.replace(/\[\/li\]/mgi,'</li>');
+  str = str.replace(/\[br\]/mgi,'<br>');
+	str = str.replace(/\\"/mgi,'"');
+	str = str.replace(/\\'/mgi,"'");
+	str = str.replace(/\\`/mgi,"`");
+  str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
+  return (str);
+}

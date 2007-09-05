@@ -5,7 +5,7 @@
  */
 
 // template info
-var theme = {'version':"0.8beta",'source':"svn",'date':"30.07.2007"};
+var theme = {'version':"0.9beta",'source':"svn",'date':"05.09.2007"};
 // settings
 var animeTitleLang = 'x-jat';
 var animeAltTitleLang = 'en';

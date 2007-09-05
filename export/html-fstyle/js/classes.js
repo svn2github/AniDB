@@ -316,7 +316,7 @@ function CEpisodeEntry(node) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
     switch (sNode.nodeName) {
-			case 'state': this.watched = sNode.getAttribute('watched'); this.state = nodeData(sNode);
+			case 'state': this.watched = Number(sNode.getAttribute('watched')); this.state = nodeData(sNode);
       case 'flags': this.flags = Number(nodeData(sNode)); break;
       case 'epno': this.epno = nodeData(sNode); break;
       case 'len': this.length = Number(nodeData(sNode)); break;
@@ -429,6 +429,7 @@ function CFileEntry(node) {
   this.videoTracks = new Array();
   this.audioTracks = new Array();
   this.subtitleTracks = new Array();
+	this.mylist = new Object(); // substitute for mylist entries
   // Actualy fill the data;
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode1 = node.childNodes.item(i);
@@ -445,6 +446,24 @@ function CFileEntry(node) {
         if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
         this.relDate = convertTime(sNode1.getAttribute('rel'));
         break;
+			case 'mylist':
+        for (var j = 0; j < sNode1.childNodes.length; j++) {
+          var dNode = sNode1.childNodes.item(j);
+          switch (dNode.nodeName) {
+						case 'date': 
+							this.mylist.seenDate = dNode.getAttribute('viewed'); 
+							if (this.mylist.seenDate != '-') this.mylist.seen = true; else this.mylist.seen = false;
+							this.mylist.addDate = nodeData(dNode); 
+							break;
+						case 'storage': this.mylist.storage = nodeData(dNode); break;
+						case 'source': this.mylist.source = nodeData(dNode); break;
+						case 'other': this.mylist.other = nodeData(dNode); break;
+						case 'mystate': this.mylist.status = nodeData(dNode); break;
+						case 'myfilestate': this.mylist.fstate = nodeData(dNode); break;
+						default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'mylistNode', dNode.nodeName,dNode.nodeName);
+					}
+				}
+				break;
       case 'vid':
         this.vidCnt = Number(sNode1.getAttribute('cnt')) || 0;
         for (var j = 0; j < sNode1.childNodes.length; j++) {
@@ -452,26 +471,21 @@ function CFileEntry(node) {
           switch (dNode.nodeName) {
             case 'stream':
               var stream = new Object;
-              stream.resW = 0;
-              stream.resH = 0;
-              stream.ar = 'unknown';
-              stream.codec = 'unknown';
+              stream.ar = stream.codec = stream.bitrate = stream.fps = stream.resolution = 'unknown';
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
                 switch (stNode.nodeName) {
-                  case 'res': 
-                    stream.resW = Number(stNode.getAttribute('w')) || 0; 
-                    stream.resH = Number(stNode.getAttribute('h')) || 0;                     
-                    if (stream.resW && stream.resH) this.resolution = stream.resW + 'x' + stream.resH;
-                    break;
+                  case 'res': stream.resolution = this.resolution = nodeData(stNode); break;
                   case 'ar': stream.ar = nodeData(stNode); break;
+									case 'br': stream.bitrate = nodeData(stNode); break;
+									case 'fps': stream.fps = nodeData(stNode); break;
                   case 'codec': stream.codec = nodeData(stNode); break;
                   default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStream['+k+']', dNode.nodeName,stNode.nodeName);
                 }
               } 
               this.videoTracks.push(stream);
               break;
-            default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStreams', dNode.nodeName,stNode.nodeName);
+            default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStreams', dNode.nodeName,dNode.nodeName);
           }
         }
         break;
@@ -482,22 +496,21 @@ function CFileEntry(node) {
           switch (dNode.nodeName) {
             case 'stream':
               var stream = new Object;
-              stream.chan = 'unknown';
-              stream.codec = 'unknown';
-              stream.type = 'normal';
+              stream.chan = stream.codec = stream.bitrate = stream.type = stream.lang = 'unknown';
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
                 switch (stNode.nodeName) {
                   case 'lang': stream.lang = nodeData(stNode); break;
                   case 'chan': stream.chan = nodeData(stNode); break;
                   case 'codec': stream.codec = nodeData(stNode); break;
+									case 'br' : stream.bitrate = nodeData(stNode); break;
                   case 'type': stream.type = nodeData(stNode); break;
                   default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStream['+k+']', dNode.nodeName,stNode.nodeName);
                 }
               }
               this.audioTracks.push(stream);
               break;
-            default:  showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStreams', dNode.nodeName,stNode.nodeName);
+            default:  showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStreams', dNode.nodeName,dNode.nodeName);
           }
         }
         break;

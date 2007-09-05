@@ -1,13 +1,15 @@
 /* *
  * @file AnimePage interface 
  * @author fahrenheit (alka.setzer@gmail.com)
- * @version 1.0 (25.07.2007)
+ * @version 1.1 (05.09.2007)
  */
  
 // GLOBALs //
 
 var seeDebug = false;
 var seeTimes = false;
+var filelistTableRow = null;
+var fileRow = null;
 
 /* *
  * Calls data handlers for xml data
@@ -225,7 +227,10 @@ function renderPage() {
 		if (elems[0]) elems[0].parentNode.replaceChild(span,elems[0]);
 	}
 	elems = document.getElementsByTagName('ANIME.DESCRIPTION');
-	while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(anime.other),elems[0]);
+	while (elems.length) {
+		//elems[0].parentNode.replaceChild(document.createTextNode(anime.other),elems[0]);
+		elems[0].parentNode.replaceChild(convertStringToDom(anime.other),elems[0]);
+	}
 	elems = document.getElementsByTagName('ANIME.RESOURCES');
 	while (elems.length) {
 		var div = document.createElement('DIV');
@@ -420,7 +425,7 @@ function renderGroupList() {
 		}
 		elems = row.getElementsByTagName('ANIME.GROUP.NAME');
 		while (elems.length) {
-			var a = createLink(null,group.shortName,'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null);
+			var a = createLink(null,group.shortName,base_url+'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null);
 			elems[0].parentNode.replaceChild(a,elems[0]);
 		}
 		elems = row.getElementsByTagName('ANIME.GROUP.STATE');
@@ -465,12 +470,27 @@ function renderGroupList() {
 function expandFilesByGroup() { }
 function foldFilesByGroup() { }
 
+function createEpIcons(parentNode,episode) {
+	if (episode.watched) createIcon(parentNode, 'watched', null, null, 'watched', 'i_seen');
+	var state = episode.state;
+	if (state)
+		if (state) { // Wishlisted anime with no files don't have state
+		if (state.indexOf('hdd') >= 0) state = 'onhdd';
+		if (state.indexOf('cd') >= 0) state = 'oncd';
+		createIcon(parentNode, '['+anime.state+']', null, null, 'state: '+anime.state,'i_state_'+state);
+	}
+}
+
 function renderEpisodeList() {
 	var epTable = getElementsByClassName(document.getElementsByTagName('TABLE'),'eplist',false)[0];
 	if (!epTable) return;
 	if (!anime.neps['user'] && !anime.seps['user']) { epTable.parentNode.removeChild(epTable); return; }
 	var cloneTBody = document.createElement('TBODY');
 	cloneTBody.appendChild(epTable.tBodies[0].rows[0]);
+	filelistTableRow = document.createElement('TBODY');
+	filelistTableRow.appendChild(epTable.tBodies[0].rows[0]);
+	fileRow = document.createElement('TBODY');
+	fileRow.appendChild(filelistTableRow.getElementsByTagName('TBODY')[0].rows[0]);
 	for (var e = 0; e < anime.eps.length; e++) {
 		var episode = episodes[anime.eps[e]];
 		if (!episode) continue;
@@ -510,8 +530,17 @@ function renderEpisodeList() {
 			}
 			elems[0].parentNode.replaceChild(span,elems[0]);
 		}
+		elems = row.getElementsByTagName('ANIME.EP.ICONS');
+		while (elems.length) {
+			var div = document.createElement('DIV');
+			div.className = 'icons';
+			createEpIcons(div,episode);
+			elems[0].parentNode.replaceChild(div,elems[0]);
+		}
 		elems = row.getElementsByTagName('ANIME.EP.DURATION');
 		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(episode.length),elems[0]);
+		elems = row.getElementsByTagName('ANIME.EP.FILES');
+		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(episode.files.length),elems[0]);
 		elems = row.getElementsByTagName('ANIME.EP.AIRDATE');
 		while (elems.length) {
 			var text,tooltip;
@@ -524,8 +553,194 @@ function renderEpisodeList() {
 	}
 }
 
-function expandFilesByEp() { }
-function foldFilesByEp() { }
+function createFileIcons(file,icons) {
+  if (file.type != 'generic') {
+    var tooltip = 'type: '+file.type+' | added: '+cTimeDate(file.date);
+    if (file.relDate > 0) tooltip += ' | released: '+cTimeDate(file.relDate);
+    if (file.fileType != '') tooltip += ' | extension: '+file.fileType;
+    createIcon(icons, file.type, null, null, tooltip, 'i_ftype_'+file.type);
+  }
+  // /TEST //
+  if (file.type == 'video') { // VIDEO STREAM
+    for (var st in file.videoTracks) {
+      var stream = file.videoTracks[st];
+      if (stream && stream.codec) {
+        var res;
+        var vc_RXP = /[^\w]/ig;
+        var vcodec = 'unknown';
+        if (stream.codec) vcodec = stream.codec.toLowerCase();
+        var vstyle = vcodec.replace(vc_RXP,'_');
+        var tooltip = 'video';
+        if (file.resolution != 'unknown') tooltip += ' | resolution: '+file.resolution;
+        if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
+        if (stream.ar != 'unknown')tooltip += ' | ar: '+stream.ar;
+        if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
+        createIcon(icons, 'vid0 ', null, null, tooltip, 'i_videostream_'+vstyle);
+      }
+    }
+  }
+  if (file.type == 'video' || file.type == 'audio') { // AUDIO STREAM
+    for (var st in file.audioTracks) {
+      var stream = file.audioTracks[st];
+      if (stream && stream.lang) {
+        var tooltip = 'audio: '+mapLanguage(stream.lang);
+        if (st < 2) { // EXP only exports info other than lang for the first 2 streams
+          if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
+          if (stream.chan != 'other') tooltip += ' | channels: '+mapAudioChannels(stream.chan);
+          if (stream.type) tooltip += ' | type: '+mapAudioType(stream.type);
+          if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
+        }
+        createIcon(icons, 'aud'+st+'.'+stream.lang+' ', null, null, tooltip, 'i_audio_'+stream.lang);
+      }
+    }
+  }
+  if (file.type == 'video' || file.type == 'subtitle' || file.type == 'other') { // SUBTITLE STREAM
+    for (var st in file.subtitleTracks) {
+      var stream = file.subtitleTracks[st];
+      if (stream && stream.lang) {
+        var tooltip = 'subtitle: '+mapLanguage(stream.lang);
+        if (st < 2) {
+         if (stream.type && stream.type != 'unknown') tooltip += ' | type: '+mapSubTypeData(stream.type);
+         if (stream.flags) tooltip += ' | flags: '+mapSubFlagData(stream.flags);
+        }
+        createIcon(icons, 'sub'+st+'.'+stream.lang+' ', null, null, tooltip, 'i_sub_'+stream.lang);
+      }
+    }
+  }
+  // FILE CRC STATUS
+  if (file.crcStatus == 'valid') createIcon(icons, 'crc.ok ', null, null, 'crc *matches* official crc ('+file.crc32.toUpperCase()+')', 'i_crc_yes');
+  else if (file.crcStatus == 'invalid') createIcon(icons, 'crc.bad ', null, null, 'crc *does not match* official crc', 'i_crc_no');
+  else if (file.type != 'generic') createIcon(icons, 'crc.unv ', null, null, 'crc *not* compared to official crc', 'i_crc_unv');
+  // FILE VERSION
+  if (file.version != 'v1') createIcon(icons, file.version+' ', null, null, 'version *'+file.version.charAt(1)+'* (error corrections)', 'i_vrs_'+file.version.charAt(1));
+  // FILE CENSOR STATUS
+  if (file.isCensored) createIcon(icons, 'cen ', null, null, '*censored*', 'i_censored');
+  if (file.isUncensored) createIcon(icons, 'uncen ', null, null, '*uncensored*', 'i_uncensored');
+  // FILE<->EP RELATIONS
+  if (file.epRelations && file.epRelations[file.episodeId]) { // Do some work
+    var rel = file.epRelations[file.episodeId];
+    var tooltip = 'File covers: [';
+    for (var bar = 0; bar < rel['startp']/10; bar++) tooltip += '-';
+    for (var bar = rel['startp']/10; bar < rel['endp']/10; bar++) tooltip += '=';
+    for (var bar = rel['endp']/10; bar < 10; bar++) tooltip += '-';
+    createIcon(icons, '['+rel['startp']+'-'+rel['endp']+']', null, null, tooltip+']', 'i_file2ep_rel');
+  }
+  // FILE<->FILE RELATIONS
+  if (file.fileRelations && file.fileRelations.length) { // Do some work
+    for (var r in file.fileRelations) {
+      var rel = file.fileRelations[r];
+      if (rel['relfile'] == undefined) continue;
+      var tooltip = 'File relation of type \"'+rel['type']+'\" \"'+rel['dir']+'\" with file id \"'+rel['relfile']+'\"';
+      createIcon(icons,'[rel: '+ rel['relfile'] + ']', null, null, tooltip, 'i_file2file_rel');
+    }
+  }
+  // FILE COMMENT
+  if ((file.other) && (file.other != '') && (file.other != undefined)) createIcon(icons, 'comment ', null, null, 'comment: '+file.other, 'i_comment');
+  // NEW FILE
+  if (file.newFile) createIcon(icons, 'new.file ', null, null, '*new file* (last 24h)', 'i_new_icon');
+  // MYLIST
+  var temp = new Array();
+	var mylistEntry = file.mylist;
+  createIcon(icons, 'in.mylist ', null, null, '*in mylist*', 'i_mylist');
+  // Mylist status icon
+  var tooltip = 'mylist status: '+mylistEntry.status;
+	if (mylistEntry.storage && mylistEntry.storage != '') tooltip += ' | storage: '+mylistEntry.storage;
+	var className = mapMEStatusName(mylistEntry.status);
+	createIcon(icons, mylistEntry.status+' ', null, null, tooltip, 'i_state_'+className);
+	// Mylist FileState
+	if (mylistEntry.fstate && ( mylistEntry.fstate != 'unknown' && mylistEntry.fstate != 'normal/original' )) {
+		var className = mapFState(mylistEntry.fstate);
+		var tooltip = 'mylist state: '+mylistEntry.fstate;
+		createIcon(icons, mylistEntry.fstate+' ', null, null, tooltip, className);
+	}
+	// Seen status
+	if (mylistEntry.seen) createIcon(icons, 'seen ', null, null, 'seen on: '+cTimeDate(mylistEntry.seenDate), 'i_seen');
+	// mylist comment
+	if ((mylistEntry.other) && (mylistEntry.other != '') && (mylistEntry.other != undefined)) createIcon(icons, 'mylist comment ', null, null, 'mylist comment: '+mylistEntry.other, 'i_comment');
+}
+
+function createFileList(eid) { 
+	var fileTable = filelistTableRow.rows[0].cloneNode(true);
+	fileTable.id = eid+'_filelist';
+	var body = fileTable.getElementsByTagName('TBODY')[0];
+	var episode = episodes[eid.substr(4,eid.length)];
+	if (!episode) return;
+	for (var i = 0; i < episode.files.length; i++) {
+		var file = files[episode.files[i]];
+		if (!file) continue;
+		var row = fileRow.rows[0].cloneNode(true);
+		row.id = 'fid_'+file.id;
+		// work
+		var elems = row.getElementsByTagName('ANIME.FILE.ID');
+		while (elems.length) {
+			var a = createLink(null, file.id, 'file.html?show=fid&id='+file.id, null, null, null, null);
+			elems[0].parentNode.replaceChild(a,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.FILE.SIZE');
+		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(formatFileSize(file.size,false)),elems[0]);
+		elems = row.getElementsByTagName('ANIME.FILE.GROUP');
+		while (elems.length) {
+			var group = groups[file.groupId];
+			if (!group) continue;
+			var a = createLink(null, group.shortName, base_url+'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null);
+			elems[0].parentNode.replaceChild(a,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.FILE.RESOLUTION');
+		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(file.resolution),elems[0]);
+		elems = row.getElementsByTagName('ANIME.FILE.SOURCE');
+		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(file.source),elems[0]);
+		elems = row.getElementsByTagName('ANIME.FILE.QUALITY');
+		while (elems.length) {
+			var span = buildQualityIcon(null,file.quality);
+			elems[0].className += file.quality;
+			elems[0].parentNode.replaceChild(span,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.FILE.ED2K');
+		while (elems.length) {
+			var span;
+			if (file.ed2k != '') {
+				elems[0].parentNode.onmouseover = createHashLink;
+				if (file.crcStatus != 'invalid') span = createIcon(null, 'ed2k', "!fillme!", null, 'ed2k hash', 'i_file_ed2k');
+				else createIcon(null, 'ed2k.crc.bad', "!fillme!", null, 'ed2k hash (invalid CRC file)', 'i_file_ed2k_corrupt');
+			} else span = document.createTextNode('-');
+			elems[0].parentNode.replaceChild(span,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.FILE.ICONS');
+		while (elems.length) {
+			var icons = document.createElement('DIV');
+			icons.className = 'icons';
+			createFileIcons(file,icons);
+			elems[0].parentNode.replaceChild(icons,elems[0]);
+		}
+		body.appendChild(row);
+	}
+	var epRow = document.getElementById(eid);
+	epRow.parentNode.insertBefore(fileTable,epRow.nextSibling);
+}
+
+function expandFilesByEp() {
+	var eid=this.parentNode.parentNode.id;
+	/*alert('expanding: '+eid+
+				'\nfileTablePresent: '+document.getElementById(eid+'_filelist'));*/
+	if (!document.getElementById(eid+'_filelist')) createFileList(eid);
+	else document.getElementById(eid+'_filelist').style.display = '';
+	this.onclick = foldFilesByEp;
+	var img = this.getElementsByTagName('IMG')[0];
+	img.src = 'css/icons/minus.gif';
+	img.title = 'collapse all entries';
+	img.alt = '[-]';
+}
+function foldFilesByEp() { 
+	var eid=this.parentNode.parentNode.id;
+	/*alert('collapsing: '+eid+
+				'\nfileTablePresent: '+document.getElementById(eid+'_filelist'));*/
+	if (document.getElementById(eid+'_filelist')) document.getElementById(eid+'_filelist').style.display = 'none';
+	this.onclick = expandFilesByEp;
+	var img = this.getElementsByTagName('IMG')[0];
+	img.src = 'css/icons/plus.gif';
+	img.title = 'expand all entries';
+	img.alt = '[+]';
+}
 
 /* *
  * Prepares the page, also fetches XML data

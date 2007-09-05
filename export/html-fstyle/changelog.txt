@@ -1,5 +1,5 @@
 Template: html-fstyle - ChangeLog
-Version: 0.8 - 27.07.2007
+Version: 0.9 - 05.09.2007
 (C) 2003-2007 by fahrenheit
 
 Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
@@ -7,6 +7,11 @@ SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/expo
 
 ----------------------------------------------------------------------------------------------
 
+0.9 - 05.09.2007
+	- Added files to Anime XML (stable, but not complete, i think)
+	- Anime description now gets it's html string parsed to DOM (thank innerHTML)
+	- File list available with some information about each file (not all, the PERL needs some changes before that :P)
+	- Episode icons now showing.
 0.8 - 30.07.2007
 	- Anime XML stable (i.e. complete)
 	- Anime page up to eplist done (just missing the episode icons currently)

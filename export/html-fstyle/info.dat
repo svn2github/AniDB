@@ -1,5 +1,7 @@
 (C) 2007 by fahrenheit [alka.setzer[at]gmail.com]
-version 1.0 (02.07.2007):
+version svn0.9 (05.09.2007):
+
+THIS TEMPLATE IS NOT COMPLETE AND THERE WILL BE NO SUPPORT UNTIL IT'S PROPERLY RELEASED
 
 html-fstyle theme:
 - Light themed template, uses a Single Page/Multiple Page Layout scheme to display information (based on user pref).

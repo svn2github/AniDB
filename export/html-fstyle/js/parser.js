@@ -102,6 +102,7 @@ function parseEpisodes(node,aid) {
     episodes[episodeEntry.id] = episodeEntry;
 		animes[aid].eps.push(episodeEntry.id);
     epOrder.push(episodeEntry.id);
+		parseEpisode(childNode,aid);
     if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
   }
 }
@@ -184,6 +185,4 @@ function parseEpisode(node, aid) {
   for (var i = 0; i < fileNodes.length; i++)
     buildFileEntry(fileNodes[i],aid, eid);
   if (seeTimes) alert('Processing files for eid.'+eid+' took: '+(new Date() - nodeTime)+' ms');
-  //var fileTable = createFileTable(episode);
-  //document.getElementById('eid_'+episode.id+'_ftHolder').cells[0].className = '';
 }
