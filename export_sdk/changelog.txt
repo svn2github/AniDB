@@ -7,6 +7,8 @@ Wiki Page: http://wiki.anidb.info/w/Mylist_export_template_guidelines
 
 ----------------------------------------------------------------------------------------------
 
+ 0.13 - T.B.A.
+
  0.12 - 02.07.2007
    - data files updated
    - new fields

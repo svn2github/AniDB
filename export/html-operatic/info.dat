@@ -1,9 +1,6 @@
 (C) 2005 by fahrenheit [fahrenheit@netcabo.pt]
 version 1.0.2 (11.10.2005):
 
-Required Images:
-<a href="http://www.anidb.net/files/html-operatic/images.zip">http://www.anidb.net/files/html-operatic/images.zip</a>
-
 Operatic HTML theme:
 - Light themed template, uses a Multiple Page Layout scheme to display information.
 - Filter anime on MyList by state (undefined, unknown, on hdd, on cd, deleted, ongoing and has awards), status (complete, incomplete, watched and unviewed), type (TV, OVA, etc) and by Genre.

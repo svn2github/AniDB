@@ -1,9 +1,6 @@
 (C) 2004 by fahrenheit [fahrenheit@netcabo.pt]
 Version: 2.3b (11.10.2005)
 
-Required Images:
-<a href="http://www.anidb.net/files/html-anidbstyle/images.zip">http://www.anidb.net/files/html-anidbstyle/images.zip</a>
-
 aniDBStyle HTML theme:
 - Based mostly on the aniDB MyList layout and dynamics, but with some custom additions/layout changes ^_^.
 - Show/Hide anime on MyList by state (undefined, unknown, on hdd, on cd, deleted, and has awards) and by status (complete, incomplete, watched and unviewed).
