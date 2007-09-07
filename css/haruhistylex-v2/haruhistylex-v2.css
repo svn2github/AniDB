@@ -13,8 +13,8 @@
  */
 
 /* Imports. */
-@import url("../common/style/icons/default.css");
-@import url("../common/style/icons/flags.css");
+@import url(../common/style/icons/default.css);
+@import url(../common/style/icons/flags.css);
 
 /* Global */
 html
