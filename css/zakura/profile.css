@@ -93,7 +93,7 @@ div.profile_all div.css_style input#style_url {
 	margin-top: 1em;
 	width: 100%;
 }
-div.profile_all .performance p {
+div.profile_all .performance {
 	text-align: center;
 }
 div.profile_all .languages div table {
