@@ -14,8 +14,8 @@ img[src*="plus.gif"] {
 img[src*="plus.gif"] {
 	background: transparent url(images/buttons/plus.gif) no-repeat left top;
 }
-a:hover img[src*="minus.gif"], a:active img[src*="minus.gif"],
-a:hover img[src*="plus.gif"], a:active img[src*="plus.gif"] {
+a:focus img[src*="minus.gif"], a:hover img[src*="minus.gif"], a:active img[src*="minus.gif"],
+a:focus img[src*="plus.gif"], a:hover img[src*="plus.gif"], a:active img[src*="plus.gif"] {
 	background-position: -16px top;
 }
 img[src*="down1.gif"] {
@@ -42,12 +42,12 @@ img[src*="noup1.gif"] {
 	width: 0;
 	padding-left: 9px;
 }
-a:hover img[src*="up1.gif"], a:active img[src*="up1.gif"],
-a:hover img[src*="down1.gif"], a:active img[src*="down1.gif"] {
+a:focus img[src*="up1.gif"], a:hover img[src*="up1.gif"], a:active img[src*="up1.gif"],
+a:focus img[src*="down1.gif"], a:hover img[src*="down1.gif"], a:active img[src*="down1.gif"] {
 	background-position: -9px top;
 }
-a:hover img[src*="noup1.gif"], a:active img[src*="noup1.gif"],
-a:hover img[src*="nodown1.gif"], a:active img[src*="nodown1.gif"] {
+a:focus img[src*="noup1.gif"], a:hover img[src*="noup1.gif"], a:active img[src*="noup1.gif"],
+a:focus img[src*="nodown1.gif"], a:hover img[src*="nodown1.gif"], a:active img[src*="nodown1.gif"] {
 	background-position: -11px top;
 }
 img[src*="file_delete.gif"] {
@@ -198,6 +198,7 @@ div.anime_all td.icons span,
 /* file attributes */
 .i_comment				{background-image: url(images/icons/comment.png); height: 15px !important; background-position: center bottom !important;}
 .i_crc_yes				{background-image: url(images/icons/crc-yes.png); height: 15px !important;}
+.i_new_icon				{background-image: url(images/icons/epfile-new.png);}
 .i_uncensored			{background-image: url(images/icons/uncensored.gif);}
 span.i_video			{background-image: url(images/icons/video.gif);}
 .i_vrs_2				{background-image: url(images/icons/v2.png); height: 15px !important;}

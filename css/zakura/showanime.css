@@ -15,6 +15,9 @@ div.anime_all div.info table table {
 div.anime_all div.info div.data {
 	display: table-cell;
 }
+div.anime_all div.info div.data caption {
+	display: none;
+}
 div.anime_all div.info table table tr {
 	background: transparent;
 }
@@ -40,6 +43,9 @@ div.anime_all div.groups table {
 }
 div.anime_all div.groups table tr:last-child {
 	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+div.anime_all div.groups table td.expand a {
+	border: none !important;
 }
 div.anime_all div.groups .state.ongoing, div.anime_all div.groups .state.ongoing a		{color: #2618b1;}
 div.anime_all div.groups .state.stalled, div.anime_all div.groups .state.stalled a		{color: #966319;}

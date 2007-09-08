@@ -51,15 +51,20 @@ div.anime_all div.episodes table.eplist td.action.collapse {
 table td.date {
 	color: #994da9;
 }
-div#layout-content div.mylist_list table td[colspan="7"],
-div#layout-content div.anime_all div.episodes table td[colspan="8"] {
+div.anime_all div.episodes table td[colspan="10"] table {
+	border-width: 0 0 0 1px;
+}
+div.mylist_list table td[colspan="7"],
+div.anime_all div.episodes table td[colspan="10"] {
 	padding: 0;
 	padding-left: 20px;
 	background: #dcdff7 url(images/layout/stripe-blue.gif) repeat left top;
 }
 div.mylist_list table td[colspan="7"] td[colspan="7"],
-div.anime_all div.episodes table td[colspan="8"] td[colspan="8"] {
-	background-color: #ccd0ef;
+div#layout-content div.anime_all div.episodes table td[colspan="10"] td[colspan="10"] {
+	background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+	padding: 0.2em 0.4em;
+	text-align: center;
 }
 div.mylist_list table table,
 div.anime_all div.episodes table.filelist {

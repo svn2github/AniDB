@@ -222,11 +222,11 @@ select option[value="0"] {
 input[type="submit"], input[type="button"] {
 	border: 1px solid #2d42af;
 	color: #fff;
-	background: #586fd1;
+	background-color: #586fd1;
 	cursor: pointer;
 }
 input[type="submit"]:hover, input[type="button"]:hover {
-	background: #2d42af;
+	background-color: #2d42af;
 }
 
 /* informational boxes */
@@ -294,8 +294,11 @@ input[type="text"], input[type="password"], input.text, textarea {
 	border: 1px solid #cfd0d1;
 	padding: 0.2em;
 }
-input[type="text"]:hover, input[type="password"]:hover, input.text:hover, textarea:hover {
-	border: 1px solid #bcc3c9;
+input[type="text"]:focus, input[type="text"]:hover,
+input[type="password"]:focus, input[type="password"]:hover, 
+input.text:focus, input.text:hover, 
+textarea:focus, textarea:hover {
+	border: 1px solid #a1aab2;
 	background: #fdfdfd;
 }
 
