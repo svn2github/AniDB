@@ -518,6 +518,11 @@ span.i_video
 	background-image: url(../icons/icon/anidb_video.gif);
 }
 
+span.i_video.avc
+{
+	background-image: url(../icons/icon/anidb_video_avc.gif);
+}
+
 span.i_ext
 {
 	background-image: url(../icons/icon/anidb_other.gif);
