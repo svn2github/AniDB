@@ -1,21 +1,9 @@
-#layout-content div.genren_all
+#layout-content .categories div.controls
 {
 	text-align: center;
 }
 
-#layout-content div.genren_all div.categories
-{
-	width: 90%;
-	margin: 1em auto 1em auto;
-	text-align: left;
-}
-
-#layout-content div.genren_all div.controls
-{
-	text-align: center;
-}
-
-#layout-content div.genren_all a.i_icon
+#layout-content ul#cattree a.i_icon
 {
 	position: relative;
 	right: 18px;
@@ -23,19 +11,19 @@
 	margin-right: -15px;
 }
 
-#layout-content div.genren_all li
+#layout-content ul#cattree li
 {
 	list-style: none outside;
 	line-height: 14px;
 	margin-left: 2em;
 }
 
-#layout-content div.genren_all li span
+#layout-content ul#cattree li span
 {
 	display: block;
 }
 
-#layout-content div.genren_all li.collapsed ul
+#layout-content ul#cattree li.collapsed ul
 {
 	display: none;
 }
