@@ -10,9 +10,9 @@ Wiki Page: http://wiki.anidb.info/w/Mylist_export_template_guidelines
 1. What are Mylist Exports?
 2. Can i create my own template?
 3. What are the requirements for building a template?
-1. Can I include images, external stylesheets/javascript files with my templates?
-2. How do i create files other than .htm?
-3. What is that info.dat file?
+4. Can I include images, external stylesheets/javascript files with my templates?
+5. How do i create files other than .htm?
+6. What is that info.dat file?
 
 
 1. What are Mylist Exports?

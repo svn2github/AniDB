@@ -6,6 +6,10 @@ use strict;
 use Storable;
 use File::Copy;
 
+binmode( STDIN,  ':utf8' );
+binmode( STDOUT, ':utf8' );
+binmode( STDERR, ':utf8' );
+
 $export::VERSION = "0.07";	#26.06.2007
 
 ##INIT
@@ -157,7 +161,7 @@ sub make_main_tpl
 	$tpl->param("loop_anime" => $alist);
 
 	my $ext = &export_utils::get_file_ext($theme);
-	open(OUT,">$main::outdir/mylist.$ext");
+	open(OUT,">:utf8", "$main::outdir/mylist.$ext");
 	print OUT $tpl->output();
 	close(OUT);
 }
@@ -186,7 +190,7 @@ sub make_sub_tpl
 		my $ext = &export_utils::get_file_ext($theme);
 		my $of = "$main::outdir/anime/a$aid.$ext";
 
-		open(OUT,">$of");
+		open(OUT,">:utf8", "$of");
 		print OUT $tpl->output();
 		close(OUT);
 	}

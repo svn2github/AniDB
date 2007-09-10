@@ -1,5 +1,5 @@
 AnimeDB Template SDK - ChangeLog
-Version: 0.12 - 02.07.2007
+Version: 0.13 - 09.09.2007
 (C) 2003-2007 by EXP
 
 Get new Versions here: http://forum.anidb.net/viewtopic.php?t=429
@@ -7,7 +7,46 @@ Wiki Page: http://wiki.anidb.info/w/Mylist_export_template_guidelines
 
 ----------------------------------------------------------------------------------------------
 
- 0.13 - T.B.A.
+ 0.13 - 09.09.2007
+   - data files updated (global_genren_loop is not on the dump)
+   - fixes
+   ANIME:
+       loop_anime_groups:
+           data_anime_group_state - Now correctly outputs state
+   - new fields
+   GLOBAL:
+        global_genren_loop: - New global loop for the cat system
+            global_genren_id - cat id
+            global_genren_name - cat name
+            global_genren_parentid - cat parent id
+            global_genren_ishentai - is cat 18+ restricted
+        NOTES: you should try to limit the usage of this loop to mylist.tpl
+   ANIME:
+        loop_anime_groups:
+            data_anime_group_eprange - episode range for a given group (as in anidb)
+            data_anime_group_alangs_loop: - loops group audio languags
+                data_anime_group_alang_id - audio language id (i.e.: 1)
+                data_anime_group_alang_name - audio language name (chinese,english, etc)
+                data_anime_group_alang_sname - audio language short name (ja, ne, etc)
+            data_anime_group_slangs_loop: - loops group sub languags
+                data_anime_group_slang_id - sub language id (i.e.: 1)
+                data_anime_group_slang_name - sub language name (chinese,english, etc)
+                data_anime_group_slang_sname - sub language short name (ja, ne, etc)
+        loop_anime_company:
+            data_anime_company_type_name - company type string (company, organization, individual, etc)
+            data_anime_company_atype_name - company relation to given anime string (production, music, etc)
+   FILE:
+        data_file_tth - tth hash (now actually added the hash, had forgot before)
+        data_file_typename - file type string (video,audio,etc)
+        data_file_ar_name - The AR string (4:3, 16:9, etc)
+        data_file_chantype_name - channel string (Mono, Stereo, etc) (stream #1)
+        data_file_chantype_name2 - channel string (Mono, Stereo, etc) (stream #2)
+        data_file_atype - audio type id (stream #1)
+        data_file_atype2 - audio type id (stream #2)
+        data_file_atype_name - audio type string (stream #1)
+        data_file_atype_name2 - audio type string (stream #2)
+        data_file_stypename - subtitle type string (stream #1)
+        data_file_stypename2 - subtitle type string (stream #2)
 
  0.12 - 02.07.2007
    - data files updated
