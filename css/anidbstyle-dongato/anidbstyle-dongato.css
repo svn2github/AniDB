@@ -70,15 +70,9 @@
 	float: left;
 }
 
-* html #layout-content div.info p.desc
+* html #layout-content div.info div.desc
 {
 	clear: both;
-}
-
-* html #layout-content div.genren_all li span
-{
-	display: inline;
-	width: 100%;
 }
 
 * html #layout-content div.latestanimes_anime
@@ -597,6 +591,11 @@ span.i_rate_verylow
 span.i_video
 {
 	background-image: url(images/anidb_video.gif);
+}
+
+span.i_video.unk
+{
+	background-image: url(images/anidb_video_unk.gif);
 }
 
 span.i_video.avc
@@ -1588,11 +1587,6 @@ body.nonav #layout-content h1
 	width: 20em;
 }
 
-#layout-content div.genren_all li.collapsed ul
-{
-	display: none;
-}
-
 #layout-content div.creqmod_all table
 {
 	width: 90%;
@@ -1752,7 +1746,7 @@ td.id, td.count, td.number, td.size, td.epno
 	text-align: right;
 }
 
-td, ul, p.desc,
+td, ul, div.desc,
 th.field, td.value, td.name, td.quality, td.title, td.name,
 #layout-content div.main_all div.news h4
 {
@@ -1764,7 +1758,6 @@ tr.action td.value, td.stats,
 td.state, td.date, td.action, td.icon, td.ignore,
 td.name.user, td.name.owner, td.vote, td.rating, td.check,
 .g_navlist, .g_filterlist, .g_actionlist, .g_info, .g_input,
-#layout-content div.g_section,
 #layout-footer p,
 #layout-menu div.usermenu
 {
@@ -2290,24 +2283,12 @@ span.diff,
 }
 
 /* genren.css */
-#layout-content div.genren_all
+#layout-content .categories div.controls
 {
 	text-align: center;
 }
 
-#layout-content div.genren_all div.categories
-{
-	width: 90%;
-	margin: 1em auto 1em auto;
-	text-align: left;
-}
-
-#layout-content div.genren_all div.controls
-{
-	text-align: center;
-}
-
-#layout-content div.genren_all a.i_icon
+#layout-content ul#cattree a.i_icon
 {
 	position: relative;
 	right: 18px;
@@ -2315,18 +2296,19 @@ span.diff,
 	margin-right: -15px;
 }
 
-#layout-content div.genren_all li
+#layout-content ul#cattree li
 {
 	list-style: none outside;
 	line-height: 14px;
+	margin-left: 2em;
 }
 
-#layout-content div.genren_all li span
+#layout-content ul#cattree li span
 {
 	display: block;
 }
 
-#layout-content div.genren_all li.collapsed ul
+#layout-content ul#cattree li.collapsed ul
 {
 	display: none;
 }
@@ -2585,7 +2567,7 @@ body.nonav
 	margin-bottom: 1.0em;
 }
 
-#layout-menu li.genre, #layout-menu li.genren
+#layout-menu li.genre
 {
 	display: inline;
 }
@@ -2926,16 +2908,6 @@ img, a
 	font-weight: bolder;
 }
 
-#layout-menu li.genren:before
-{
-	content: "(";
-}
-
-#layout-menu li.genren:after
-{
-	content: ")";
-}
-
 html, body, div
 {
 	padding: 0px;
@@ -3192,7 +3164,8 @@ input[type="checkbox"]
 
 input[type="button"],
 input[type="submit"],
-input[type="reset"]
+input[type="reset"],
+button[type="submit"]
 {
 	background-color: #999999;
 	border: 1px solid #444444;
@@ -3242,7 +3215,7 @@ div.g_content
 }
 
 /* center and align group description */
-div.group_info p.desc
+div.group_info div.desc
 {
 	margin-top: 2em;
 	text-align: center;
@@ -3256,7 +3229,7 @@ div.group_info p.desc
 }
 
 /* different anime description style */
-#layout-content div.info p.desc,
+#layout-content div.info div.desc,
 #layout-content div.info ul
 {
 	background-color: #B0B0B0;
@@ -3489,4 +3462,16 @@ div.latest_files_list table td.id
 div.mylist_list .g_odd.files
 {
 	background-color: transparent !important;
+}
+
+/* Color of main anime title */
+td.name span.main
+{
+	color: gray;
+}
+
+/* Color of Filter link */
+a.filter
+{
+	color: gray;
 }
