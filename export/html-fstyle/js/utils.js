@@ -338,12 +338,11 @@ function expandRange(range,limit,map,array) {
   for (var r = 0; r < rangeGroups.length; r++) {
     var rangeGroup = rangeGroups[r];
     var rg = rangeGroup.split('-');
-    if ( rg.length == 1 ) array[rg[0]] = map['type'];
-    else { for( var i = rg[0]; i <= rg[1]; i++) array[ i-1 ] = map['type']; }
+    if ( rg.length == 1 ) array[Number(rg[0])] = map['type'];
+    else { for( var i = Number(rg[0]); i <= Number(rg[1]); i++) array[ i-1 ] = map['type']; }
   }
   return array;
 }
-
 
 // GENERAL FUNCTIONS //
 
@@ -1076,4 +1075,100 @@ function convert_input(str) {
 	str = str.replace(/\\`/mgi,"`");
   str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
   return (str);
+}
+
+// TOOLTIP FUNCTIONS //
+
+var offsetfromcursorX=12;       //Customize x offset of tooltip
+var offsetfromcursorY=10;       //Customize y offset of tooltip
+var offsetdivfrompointerX=0;   //Customize x offset of tooltip DIV relative to pointer image
+var offsetdivfrompointerY=0;   //Customize y offset of tooltip DIV relative to pointer image. Tip: Set it to (height_of_pointer_image-1).
+
+var divHTMLTOOLTIP; //tooltip
+
+var ie = document.all;
+var ns6 = document.getElementById && !document.all;
+var enabletip = false;
+
+//var pointerobj = document.all ? document.all["dhtmlpointer"] : document.getElementById? document.getElementById("dhtmlpointer") : "";
+
+function ietruebody(){
+	return (document.compatMode && document.compatMode!="BackCompat") ? document.documentElement : document.body;
+}
+
+/* *
+ * Sets the tooltip
+ */
+function setTooltip(thetext, dom, thewidth, thecolor){
+  while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
+  if (!thetext) return;
+	if (typeof thewidth != "undefined") {
+	  if (thewidth != 'auto') divHTMLTOOLTIP.style.width = thewidth + 'px';
+	  else divHTMLTOOLTIP.style.width = thewidth;
+	}
+	if (typeof thecolor != "undefined" && thecolor != "") divHTMLTOOLTIP.style.backgroundColor = thecolor;
+  if (typeof dom != "undefined") {
+    if (dom) divHTMLTOOLTIP.appendChild(thetext);
+    else divHTMLTOOLTIP.innerHTML = thetext;
+  }
+	enabletip = true;
+  divHTMLTOOLTIP.style.visibility = "visible";
+	return false;
+}
+
+function positionTooltip(e){
+	if (enabletip){
+    divHTMLTOOLTIP.style.position = 'absolute';
+		var nondefaultpos = false;
+    var curX = 0;
+    var curY = 0;
+    if (!e) var e = window.event;
+    if (e.pageX || e.pageY) { curX = e.pageX; curY = e.pageY; }
+    else if (e.clientX || e.clientY) { curX = e.clientX + document.body.scrollLeft; curY = e.clientY + document.body.scrollTop; }
+		//Find out how close the mouse is to the corner of the window
+		var winwidth = ie && !window.opera ? ietruebody().clientWidth : window.innerWidth - 20;
+		var winheight = ie && !window.opera ? ietruebody().clientHeight : window.innerHeight - 20;
+		var rightedge = ie && !window.opera ? winwidth - event.clientX - offsetfromcursorX : winwidth - e.clientX - offsetfromcursorX;
+		var bottomedge = ie && !window.opera ? winheight - event.clientY - offsetfromcursorY : winheight - e.clientY - offsetfromcursorY;
+		var leftedge = (offsetfromcursorX < 0) ? offsetfromcursorX * (-1) : - 5000;
+		//if the horizontal distance isn't enough to accomodate the width of the context menu
+		if (rightedge < divHTMLTOOLTIP.offsetWidth) { //move the horizontal position of the menu to the left by it's width
+			divHTMLTOOLTIP.style.left = (curX - divHTMLTOOLTIP.offsetWidth) + 'px';
+			nondefaultpos = true;
+		}
+		else if (curX < leftedge) divHTMLTOOLTIP.style.left = "5px";
+		else { //position the horizontal position of the menu where the mouse is positioned
+			divHTMLTOOLTIP.style.left = (curX + offsetfromcursorX - offsetdivfrompointerX) + 'px';
+			//pointerobj.style.left = curX + offsetfromcursorX + "px";
+		}
+		if (bottomedge < divHTMLTOOLTIP.offsetHeight) { //same concept with the vertical position
+			divHTMLTOOLTIP.style.top = (curY - divHTMLTOOLTIP.offsetHeight - offsetfromcursorY) + 'px';
+			nondefaultpos = true;
+		} else {
+			divHTMLTOOLTIP.style.top = (curY + offsetfromcursorY + offsetdivfrompointerY) + 'px';
+			//pointerobj.style.top = curY + offsetfromcursorY + "px";
+		}
+    divHTMLTOOLTIP.style.visibility = "visible";
+    /*
+		if (!nondefaultpos)	pointerobj.style.visibility="visible"
+		else pointerobj.style.visibility="hidden"
+    */
+	}
+}
+
+function hideTooltip(){
+  enabletip = false;
+  divHTMLTOOLTIP.style.visibility = "hidden";
+  while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
+	//pointerobj.style.visibility = "hidden";
+	divHTMLTOOLTIP.style.left = "-5000px";
+	divHTMLTOOLTIP.style.backgroundColor = '';
+	divHTMLTOOLTIP.style.width = '';
+}
+
+function initTooltips() {
+  divHTMLTOOLTIP = document.createElement('DIV');
+  divHTMLTOOLTIP.id = "obj-tooltip"
+  document.body.appendChild(divHTMLTOOLTIP);
+  document.onmousemove = positionTooltip;
 }

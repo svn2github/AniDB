@@ -235,6 +235,7 @@ function renderPage() {
 	while (elems.length) {
 		var div = document.createElement('DIV');
 		div.className = 'icons';
+		createIcon(div, 'mylist', 'mylist.html', null, 'back to mylist', 'i_backtomylist');
 		createIcon(div, 'anidb', 'http://anidb.info/a'+anime.id, null, 'link to anime page at anidb', 'i_anidb');
 		if (anime.resources['url']) createIcon(div, 'url', anime.resources['url']['link'], null, 'link to website', 'i_url');
 		if (anime.resources['ann']) createIcon(div, 'ann', anime.resources['ann']['link'], null, 'link to anime page at news network site', 'i_ann');
@@ -442,7 +443,7 @@ function renderGroupList() {
 									'1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"},
 									'2' : {'use':false,'type': 2,'desc':"in mylist: "+group.inMylistRange,'img':"lime"}};
 			var range = expandRange(null,anime.neps['cnt'],maps[0],null);
-			if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange,anime.neps['cnt'],maps[1],range); }
+			if (group.epRange != '' && group.epRange != '0') { maps[1]['use'] = true; range = expandRange(group.epRange,anime.neps['cnt'],maps[1],range); }
 			if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange,anime.neps['cnt'],maps[2],range); }
 			var span = makeCompletionBar(null,range,maps);
 			elems[0].parentNode.replaceChild(span,elems[0]);
@@ -451,6 +452,20 @@ function renderGroupList() {
 		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(group.lastEp),elems[0]);
 		elems = row.getElementsByTagName('ANIME.GROUP.SPECIALS');
 		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(group.sepCnt),elems[0]);
+		elems = row.getElementsByTagName('ANIME.GROUP.LANGUAGES');
+		while (elems.length) {
+			var icons = document.createElement('DIV');
+			icons.className = 'icons';
+			if (group.audioLangs) {
+				for (var i = 0; i < group.audioLangs.length; i++)
+					createIcon(icons, mapLanguage(group.audioLangs[i]), '', '', 'audio lang: '+mapLanguage(group.audioLangs[i]), 'i_audio_'+group.audioLangs[i]);
+			}
+			if (group.subtitleLangs) {
+				for (var i = 0; i < group.subtitleLangs.length; i++)
+					createIcon(icons, mapLanguage(group.subtitleLangs[i]), '', '', 'sub lang: '+mapLanguage(group.subtitleLangs[i]), 'i_sub_'+group.subtitleLangs[i]);  
+			}
+			elems[0].parentNode.replaceChild(icons,elems[0]);
+		}
 		elems = row.getElementsByTagName('ANIME.GROUP.RATING');
 		while (elems.length) {
 			elems[0].parentNode.setAttribute('anidb:sort',(group.rating == '-') ? '0' : group.rating);
@@ -748,6 +763,7 @@ function foldFilesByEp() {
 function prepPage() {
   uriObj = parseURI();
   if (uriObj['show'] && uriObj['show'] != 'anime' && !uriObj['aid']) return;
+	initTooltips();
   loadData('anime/a'+uriObj['aid']+'.xml',parseData);
 }
 

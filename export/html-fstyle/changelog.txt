@@ -7,6 +7,9 @@ SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/expo
 
 ----------------------------------------------------------------------------------------------
 
+0.9.1 - 09.09.2007
+	- Completed changes into the SDK, information available is now correct.
+
 0.9 - 05.09.2007
 	- Added files to Anime XML (stable, but not complete, i think)
 	- Anime description now gets it's html string parsed to DOM (thank innerHTML)

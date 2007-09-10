@@ -1,0 +1,4425 @@
+/*---------------------------------
+AniDB CSS - Zakura
+www.zakness.com
+----------------------------------*/
+/* icons */
+/*../common/style/icons/default.css*/
+a.i_icon:hover, a.i_inline:hover
+{
+text-decoration: none;
+}
+
+*.i_icon
+{
+background-repeat: no-repeat;
+background-position: center;
+display: block;
+width: 15px;
+height: 13px;
+text-indent: -5000px;
+margin-left: 0;
+margin-right: 0;
+}
+
+*.i_inline
+{
+padding: 0px 8px 0px 7px;
+margin: 4px;
+}
+
+*.i_icon span, *.i_button span, *.i_inline span
+{
+display: none;
+}
+
+*.i_help
+{
+background: url(../icons/ask2.gif) no-repeat right;
+cursor: help; /* just for teh funs */
+}
+
+*.i_enlarge {
+background-image: url(../icons/enlarge.png);
+float: right;
+height: 11px;
+padding-top: 5px;
+}
+
+*.i_araward
+{
+background-image: url(../icons/anidb_araward.gif);
+}
+
+*.i_censored
+{
+background-image: url(../icons/icon/anidb_censored.gif);
+}
+
+*.i_comment
+{
+background-image: url(../icons/icon/anidb_comment.gif);
+}
+
+*.i_crc_no
+{
+background-image: url(../icons/icon/anidb_crc_no.gif);
+}
+
+*.i_crc_yes
+{
+background-image: url(../icons/icon/anidb_crc_yes.gif);
+}
+
+*.i_file_add
+{
+background-image: url(../icons/icon/anidb_file_add.gif);
+}
+
+*.i_file_addmylist
+{
+background-image: url(../icons/icon/anidb_file_addmylist.gif);
+}
+
+*.i_file_delete
+{
+background-image: url(../icons/icon/anidb_file_delete.gif);
+}
+
+*.i_file_ed2k
+{
+background-image: url(../icons/icon/anidb_file_ed2k.gif);
+}
+
+*.i_file_ed2k_corrupt
+{
+background-image: url(../icons/icon/anidb_file_ed2k_corrupt.gif);
+}
+
+*.i_file_edit
+{
+background-image: url(../icons/icon/anidb_file_edit.gif);
+}
+
+*.i_file_removemylist
+{
+background-image: url(../icons/icon/anidb_file_removemylist.gif);
+}
+
+*.i_filestate_corrupted
+{
+background-image: url(../icons/state/anidb_filestate_corrupted.gif);
+}
+
+*.i_filestate_edited
+{
+background-image: url(../icons/state/anidb_filestate_edited.gif);
+}
+
+*.i_filestate_ondvd
+{
+background-image: url(../icons/state/anidb_filestate_ondvd.gif);
+}
+
+*.i_filestate_ontv
+{
+background-image: url(../icons/state/anidb_filestate_ontv.gif);
+}
+
+*.i_filestate_onvhs
+{
+background-image: url(../icons/state/anidb_filestate_onvhs.gif);
+}
+
+*.i_filestate_other
+{
+background-image: url(../icons/state/anidb_filestate_other.gif);
+}
+
+*.i_filestate_selfripped
+{
+background-image: url(../icons/state/anidb_filestate_selfripped.gif);
+}
+
+*.i_filestate_theater
+{
+background-image: url(../icons/state/anidb_filestate_theater.gif);
+}
+
+*.i_greenbar
+{
+background-image: url(../icons/anidb_greenbar.gif);
+}
+
+*.i_greenbarh
+{
+background-image: url(../icons/anidb_greenbarh.gif);
+}
+
+*.i_hanger
+{
+background-image: url(../icons/icon/anidb_hanger.gif);
+}
+
+*.i_mylist
+{
+background-image: url(../icons/icon/anidb_mylist.gif);
+}
+
+/**.i_new2
+{
+background-image: url(../icons/icon/anidb_new2.gif);
+}*/
+*.i_new_icon
+{
+background-image: url(../icons/icon/anidb_new_icon.gif);
+}
+
+*.i_no_rev
+{
+background-image: url(../icons/icon/anidb_no_rev.gif);
+}
+
+*.i_report_entry,
+*.i_no_vote
+{
+background-image: url(../icons/icon/anidb_no_vote.gif);
+}
+
+*.i_nonotify
+{
+background-image: url(../icons/icon/anidb_nonotify.gif);
+}
+
+*.i_notify
+{
+background-image: url(../icons/icon/anidb_notify.gif);
+}
+
+*.i_orangebar
+{
+background-image: url(../icons/anidb_orangebar.gif);
+}
+
+*.i_pri_high
+{
+background-image: url(../icons/icon/anidb_pri_high.gif);
+}
+
+*.i_pri_low
+{
+background-image: url(../icons/icon/anidb_pri_low.gif);
+}
+
+*.i_pri_med
+{
+background-image: url(../icons/icon/anidb_pri_med.gif);
+}
+
+*.i_rate_corrupted
+{
+background-image: url(../icons/icon/anidb_rate_corrupted.gif);
+}
+
+*.i_rate_eyecancer
+{
+background-image: url(../icons/icon/anidb_rate_eyecancer.gif);
+}
+
+*.i_rate_star
+{
+background-image: url(../icons/icon/anidb_rate_star.gif);
+}
+
+*.i_rate_halfstar
+{
+background-image: url(../icons/icon/anidb_rate_halfstar.gif);
+}
+
+*.i_rate_unknown
+{
+background-image: url(../icons/icon/anidb_rate_unknown.gif);
+}
+
+span.i_rate_veryhigh
+{
+width: 43px;
+background-image: url(../icons/icon/anidb_rate_star.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_rate_high
+{
+width: 36px;
+background-image: url(../icons/icon/anidb_rate_star.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_rate_med
+{
+width: 30px;
+background-image: url(../icons/icon/anidb_rate_star.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_rate_low
+{
+width: 22px;
+background-image: url(../icons/icon/anidb_rate_star.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_rate_verylow
+{
+width: 15px;
+background-image: url(../icons/icon/anidb_rate_star.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+*.i_recap
+{
+background-image: url(../icons/icon/anidb_recap.gif);
+}
+
+*.i_rev
+{
+background-image: url(../icons/icon/anidb_rev.gif);
+}
+
+*.i_seen
+{
+background-image: url(../icons/icon/anidb_seen.gif);
+}
+
+*.i_seen_no
+{
+background-image: url(../icons/icon/anidb_seen_no.gif);
+}
+
+*.i_seen_yes
+{
+background-image: url(../icons/icon/anidb_seen_yes.gif);
+}
+
+*.i_state_all
+{
+background-image: url(../icons/state/anidb_state_all.gif);
+}
+
+*.i_state_deleted
+{
+background-image: url(../icons/state/anidb_state_deleted.gif);
+}
+
+*.i_state_mixed
+{
+background-image: url(../icons/state/anidb_state_mixed.gif);
+}
+
+*.i_state_oncd
+{
+background-image: url(../icons/state/anidb_state_oncd.gif);
+}
+
+*.i_state_onhdd
+{
+background-image: url(../icons/state/anidb_state_onhdd.gif);
+}
+
+*.i_state_release
+{
+background-image: url(../icons/state/anidb_state_release.gif);
+}
+
+*.i_state_shared
+{
+background-image: url(../icons/state/anidb_state_shared.gif);
+}
+
+*.i_state_unknown
+{
+background-image: url(../icons/state/anidb_state_unknown.gif);
+}
+
+*.i_uncensored
+{
+background-image: url(../icons/icon/anidb_uncensored.gif);
+}
+
+*.i_vrs_1
+{
+background-image: url(../icons/icon/anidb_vrs_1.gif);
+}
+
+*.i_vrs_2
+{
+background-image: url(../icons/icon/anidb_vrs_2.gif);
+}
+
+*.i_vrs_3
+{
+background-image: url(../icons/icon/anidb_vrs_3.gif);
+}
+
+*.i_vrs_4
+{
+background-image: url(../icons/icon/anidb_vrs_4.gif);
+}
+
+*.i_vrs_5
+{
+background-image: url(../icons/icon/anidb_vrs_5.gif);
+}
+
+*.i_ask
+{
+background-image: url(../icons/ask.gif);
+}
+
+*.i_back
+{
+background-image: url(../icons/back.gif);
+}
+
+*.i_logon
+{
+background-image: url(../icons/button_logon.gif);
+}
+
+*.i_punkt
+{
+background-image: url(../icons/button_punkt.gif);
+}
+
+*.i_search
+{
+background-image: url(../icons/button_search.gif);
+}
+
+*.i_suchen
+{
+background-image: url(../icons/button_suchen.gif);
+}
+
+*.i_down1
+{
+background-image: url(../icons/down1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_empty
+{
+background-image: url(../icons/empty.gif);
+}
+
+*.i_invalid
+{
+background-image: url(../icons/invalid.gif);
+}
+
+*.i_minus
+{
+background-image: url(../icons/minus.gif);
+}
+
+*.i_na
+{
+background-image: url(../icons/na.gif);
+}
+
+*.i_nodown1
+{
+background-image: url(../icons/nodown1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_none
+{
+background-image: url(../icons/none.gif);
+}
+
+*.i_nopic
+{
+background-image: url(../icons/nopic.gif);
+}
+
+*.i_noup1
+{
+background-image: url(../icons/noup1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_plus
+{
+background-image: url(../icons/plus.gif);
+}
+
+*.i_up1
+{
+background-image: url(../icons/up1.gif);
+width: 9px;
+height: 10px;
+}
+
+*.i_vrs_1
+{
+background-image: url(../icons/icon/anidb_vrs_1.gif);
+}
+
+*.i_vrs_2
+{
+background-image: url(../icons/icon/anidb_vrs_2.gif);
+}
+
+*.i_vrs_3
+{
+background-image: url(../icons/icon/anidb_vrs_3.gif);
+}
+
+*.i_vrs_4
+{
+background-image: url(../icons/icon/anidb_vrs_4.gif);
+}
+
+*.i_vrs_5
+{
+background-image: url(../icons/icon/anidb_vrs_5.gif);
+}
+
+/* NEW ANIME PAGE */
+*.i_crc_unv
+{
+background-image: url(../icons/icon/anidb_crc_unv.gif);
+}
+
+*.i_sort
+{
+width: 5px;
+background-image: url(../icons/sort.gif);
+}
+
+*.i_group_vote,
+*.i_ep_vote
+{
+background-image: url(../icons/anidb_vote.gif);
+}
+
+*.i_group_revote,
+*.i_ep_revote
+{
+background-image: url(../icons/anidb_revote.gif);
+}
+
+span.i_video
+{
+background-image: url(../icons/icon/anidb_video.gif);
+}
+
+span.i_videostream_unknown,
+span.i_videostream_other__non_asp_,
+span.i_videostream_asp_other,
+span.i_videostream_mpeg_2,
+span.i_videostream_mpeg_1,
+span.i_videostream_realvideo_other,
+span.i_videostream_wmv9__also_wmv3_,
+span.i_videostream
+{
+background-image: url(../icons/icon/anidb_videoStream.gif);
+}
+
+span.i_videostream_realvideo_9_10__also_rv40_,
+span.i_videostream_realvideo_other
+{
+width: 20px;
+background-repeat: repeat-x;
+background-position: left;
+background-image: url(../icons/icon/anidb_videoStream_real.gif);
+}
+
+span.i_videostream_ms_mp4x__also_wmv1_2_,
+span.i_videostream_wmv9__also_wmv3_
+{
+width: 20px;
+background-repeat: repeat-x;
+background-position: left;
+background-image: url(../icons/icon/anidb_videoStream_wmv.gif);
+}
+
+span.i_videostream_divx__unk,
+span.i_videostream_divx3,
+span.i_videostream_divx4,
+span.i_videostream_divx5__also_divx6_
+{
+width: 20px;
+background-image: url(../icons/icon/anidb_videoStream_divx.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_videostream_xvid
+{
+width: 20px;
+background-image: url(../icons/icon/anidb_videoStream_xvid.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+span.i_videostream_h264_avc
+{
+width: 20px;
+background-image: url(../icons/icon/anidb_videoStream_h264.gif);
+background-repeat: repeat-x;
+background-position: left;
+}
+
+*.i_ftype_video
+{
+background-image: url(../icons/icon/anidb_video.gif);
+}
+
+*.i_ftype_video2
+{
+background-image: url(../icons/icon/anidb_video2.gif);
+}
+
+*.i_ftype_subtitle
+{
+background-image: url(../icons/icon/anidb_subtitles.gif);
+}
+
+*.i_ftype_subtitle2
+{
+background-image: url(../icons/icon/anidb_subtitles2.gif);
+}
+
+*.i_ftype_audio
+{
+background-image: url(../icons/icon/anidb_audio.gif);
+}
+
+*.i_ftype_other
+{
+background-image: url(../icons/icon/anidb_other.gif);
+}
+
+*.i_file2ep_rel
+{
+width: 20px;
+background-image: url(../icons/icon/anidb_file2ep2.gif);
+}
+
+*.i_file2file_rel
+{
+width: 20px;
+background-image: url(../icons/icon/anidb_file2file2.gif);
+}
+
+/* Group States */
+*.i_gstate_complete
+{
+background-image: url(../icons/state/anidb_gstate_complete.gif);
+}
+
+*.i_gstate_dropped
+{
+background-image: url(../icons/state/anidb_gstate_dropped.gif);
+}
+
+*.i_gstate_finished
+{
+background-image: url(../icons/state/anidb_gstate_finished.gif);
+}
+
+*.i_gstate_ongoing
+{
+background-image: url(../icons/state/anidb_gstate_ongoing.gif);
+}
+
+*.i_gstate_stalled
+{
+background-image: url(../icons/state/anidb_gstate_stalled.gif);
+}
+
+*.i_gstate_specials
+{
+background-image: url(../icons/state/anidb_gstate_specials.gif);
+}
+
+*.i_gstate_all
+{
+background-image: url(../icons/state/anidb_gstate_all.gif);
+}
+
+/* Formating stuff */
+*.f_button {
+background-repeat: no-repeat;
+background-position: center;
+width: 21px;
+height: 21px;
+text-indent: -5000px;
+margin-left: 0;
+margin-right: 0;
+border: 1px solid;
+border-color: #D6D3CE;
+background-color: #FFFFFF;
+}
+
+*.f_mouseover {
+background-color: #B5BED6;
+border-color: #000000;
+}
+
+*.f_mouseout {
+background-color: #FFFFFF;
+border-color: #D6D3CE;
+}
+
+*.f_selected {
+background-color: #8492B5;
+}
+
+*.f_bold {
+background-image: url(../icons/formating/bold.gif);
+}
+
+*.f_italic {
+background-image: url(../icons/formating/italic.gif);
+}
+
+*.f_underline {
+background-image: url(../icons/formating/underline.gif);
+}
+
+*.f_strikethrough {
+background-image: url(../icons/formating/strikethrough.gif);
+}
+
+*.f_orderedlist {
+background-image: url(../icons/formating/orderedlist.gif);
+}
+
+*.f_unorderedlist {
+background-image: url(../icons/formating/unorderedlist.gif);
+}
+
+*.f_link {
+background-image: url(../icons/formating/link.gif);
+}
+
+*.f_separator {
+background-image: url(../icons/formating/separator.gif);
+}
+
+*.f_view_source {
+background-image: url(../icons/formating/view_source.gif);
+}
+
+*.f_view_text {
+background-image: url(../icons/formating/view_text.gif);
+}
+
+*.f_buddy {
+background-image: url(../icons/formating/user.gif);
+}
+
+/*../common/style/icons/flags.css*/
+*.i_audio_ar
+{
+background-image: url(../icons/flags/anidb_audio_arabic.gif);
+}
+
+*.i_sub_ar
+{
+background-image: url(../icons/flags/anidb_sub_arabic.gif);
+}
+
+*.i_audio_bg
+{
+background-image: url(../icons/flags/anidb_audio_bulgarian.gif);
+}
+
+*.i_sub_bg
+{
+background-image: url(../icons/flags/anidb_sub_bulgarian.gif);
+}
+
+*.i_audio_ca
+{
+background-image: url(../icons/flags/anidb_audio_catalan.gif);
+}
+
+*.i_sub_ca
+{
+background-image: url(../icons/flags/anidb_sub_catalan.gif);
+}
+
+*.i_audio_cs
+{
+background-image: url(../icons/flags/anidb_audio_czech.gif);
+}
+
+*.i_sub_cs
+{
+background-image: url(../icons/flags/anidb_sub_czech.gif);
+}
+
+*.i_audio_da
+{
+background-image: url(../icons/flags/anidb_audio_danish.gif);
+}
+
+*.i_sub_da
+{
+background-image: url(../icons/flags/anidb_sub_danish.gif);
+}
+
+*.i_audio_de
+{
+background-image: url(../icons/flags/anidb_audio_german.gif);
+}
+
+*.i_sub_de
+{
+background-image: url(../icons/flags/anidb_sub_german.gif);
+}
+
+*.i_audio_et
+{
+background-image: url(../icons/flags/anidb_audio_estonian.gif);
+}
+
+*.i_sub_et
+{
+background-image: url(../icons/flags/anidb_sub_estonian.gif);
+}
+
+*.i_audio_es
+{
+background-image: url(../icons/flags/anidb_audio_spanish.gif);
+}
+
+*.i_sub_es
+{
+background-image: url(../icons/flags/anidb_sub_spanish.gif);
+}
+
+*.i_audio_el
+{
+background-image: url(../icons/flags/anidb_audio_greek.gif);
+}
+
+*.i_sub_el
+{
+background-image: url(../icons/flags/anidb_sub_greek.gif);
+}
+
+*.i_audio_en
+{
+background-image: url(../icons/flags/anidb_audio_english.gif);
+}
+
+*.i_sub_en
+{
+background-image: url(../icons/flags/anidb_sub_english.gif);
+}
+
+*.i_audio_fi
+{
+background-image: url(../icons/flags/anidb_audio_finnish.gif);
+}
+
+*.i_sub_fi
+{
+background-image: url(../icons/flags/anidb_sub_finnish.gif);
+}
+
+*.i_audio_fr
+{
+background-image: url(../icons/flags/anidb_audio_french.gif);
+}
+
+*.i_sub_fr
+{
+background-image: url(../icons/flags/anidb_sub_french.gif);
+}
+
+*.i_audio_he
+{
+background-image: url(../icons/flags/anidb_audio_hebrew.gif);
+}
+
+*.i_sub_he
+{
+background-image: url(../icons/flags/anidb_sub_hebrew.gif);
+}
+
+*.i_audio_hr
+{
+background-image: url(../icons/flags/anidb_audio_croatian.gif);
+}
+
+*.i_sub_hr
+{
+background-image: url(../icons/flags/anidb_sub_croatian.gif);
+}
+
+*.i_audio_hu
+{
+background-image: url(../icons/flags/anidb_audio_hungarian.gif);
+}
+
+*.i_sub_hu
+{
+background-image: url(../icons/flags/anidb_sub_hungarian.gif);
+}
+
+*.i_audio_id
+{
+background-image: url(../icons/flags/anidb_audio_indonesian.gif);
+}
+
+*.i_sub_id
+{
+background-image: url(../icons/flags/anidb_sub_indonesian.gif);
+}
+
+*.i_audio_it
+{
+background-image: url(../icons/flags/anidb_audio_italian.gif);
+}
+
+*.i_sub_it
+{
+background-image: url(../icons/flags/anidb_sub_italian.gif);
+}
+
+*.i_audio_ja
+{
+background-image: url(../icons/flags/anidb_audio_japanese.gif);
+}
+
+*.i_sub_ja
+{
+background-image: url(../icons/flags/anidb_sub_japanese.gif);
+}
+
+*.i_audio_ka
+{
+background-image: url(../icons/flags/anidb_audio_georgian.gif);
+}
+
+*.i_sub_ka
+{
+background-image: url(../icons/flags/anidb_sub_georgian.gif);
+}
+
+*.i_audio_ko
+{
+background-image: url(../icons/flags/anidb_audio_korean.gif);
+}
+
+*.i_sub_ko
+{
+background-image: url(../icons/flags/anidb_sub_korean.gif);
+}
+
+*.i_audio_la
+{
+background-image: url(../icons/flags/anidb_audio_latin.gif);
+}
+
+*.i_sub_la
+{
+background-image: url(../icons/flags/anidb_sub_latin.gif);
+}
+
+*.i_audio_lv
+{
+background-image: url(../icons/flags/anidb_audio_latvian.gif);
+}
+
+*.i_sub_lv
+{
+background-image: url(../icons/flags/anidb_sub_latvian.gif);
+}
+
+*.i_audio_lt
+{
+background-image: url(../icons/flags/anidb_audio_lithuanian.gif);
+}
+
+*.i_sub_lt
+{
+background-image: url(../icons/flags/anidb_sub_lithuanian.gif);
+}
+
+*.i_audio_my
+{
+background-image: url(../icons/flags/anidb_audio_malay.gif);
+}
+
+*.i_sub_my
+{
+background-image: url(../icons/flags/anidb_sub_malay.gif);
+}
+
+*.i_audio_nl
+{
+background-image: url(../icons/flags/anidb_audio_dutch.gif);
+}
+
+*.i_sub_nl
+{
+background-image: url(../icons/flags/anidb_sub_dutch.gif);
+}
+
+*.i_audio_no
+{
+background-image: url(../icons/flags/anidb_audio_norwegian.gif);
+}
+
+*.i_sub_no
+{
+background-image: url(../icons/flags/anidb_sub_norwegian.gif);
+}
+
+*.i_audio_pl
+{
+background-image: url(../icons/flags/anidb_audio_polish.gif);
+}
+
+*.i_sub_pl
+{
+background-image: url(../icons/flags/anidb_sub_polish.gif);
+}
+
+*.i_audio_pt
+{
+background-image: url(../icons/flags/anidb_audio_portuguese.gif);
+}
+
+*.i_sub_pt
+{
+background-image: url(../icons/flags/anidb_sub_portuguese.gif);
+}
+
+*.i_audio_pt-BR
+{
+background-image: url(../icons/flags/anidb_audio_brasilian.gif);
+}
+
+*.i_sub_pt-BR
+{
+background-image: url(../icons/flags/anidb_sub_brasilian.gif);
+}
+
+*.i_audio_ro
+{
+background-image: url(../icons/flags/anidb_audio_romanian.gif);
+}
+
+*.i_sub_ro
+{
+background-image: url(../icons/flags/anidb_sub_romanian.gif);
+}
+
+*.i_audio_ru
+{
+background-image: url(../icons/flags/anidb_audio_russian.gif);
+}
+
+*.i_sub_ru
+{
+background-image: url(../icons/flags/anidb_sub_russian.gif);
+}
+
+*.i_audio_sk
+{
+background-image: url(../icons/flags/anidb_audio_slovak.gif);
+}
+
+*.i_sub_sk
+{
+background-image: url(../icons/flags/anidb_sub_slovak.gif);
+}
+
+*.i_audio_sl
+{
+background-image: url(../icons/flags/anidb_audio_slovenian.gif);
+}
+
+*.i_sub_sl
+{
+background-image: url(../icons/flags/anidb_sub_slovenian.gif);
+}
+
+*.i_audio_sr
+{
+background-image: url(../icons/flags/anidb_audio_serbian.gif);
+}
+
+*.i_sub_sr
+{
+background-image: url(../icons/flags/anidb_sub_serbian.gif);
+}
+
+*.i_audio_sv
+{
+background-image: url(../icons/flags/anidb_audio_swedish.gif);
+}
+
+*.i_sub_sv
+{
+background-image: url(../icons/flags/anidb_sub_swedish.gif);
+}
+
+*.i_audio_ta
+{
+background-image: url(../icons/flags/anidb_audio_tamil.gif);
+}
+
+*.i_sub_ta
+{
+background-image: url(../icons/flags/anidb_sub_tamil.gif);
+}
+
+*.i_audio_tt
+{
+background-image: url(../icons/flags/anidb_audio_tartar.gif);
+}
+
+*.i_sub_tt
+{
+background-image: url(../icons/flags/anidb_sub_tartar.gif);
+}
+
+*.i_audio_th
+{
+background-image: url(../icons/flags/anidb_audio_thai.gif);
+}
+
+*.i_sub_th
+{
+background-image: url(../icons/flags/anidb_sub_thai.gif);
+}
+
+*.i_audio_tr
+{
+background-image: url(../icons/flags/anidb_audio_turkish.gif);
+}
+
+*.i_sub_tr
+{
+background-image: url(../icons/flags/anidb_sub_turkish.gif);
+}
+
+*.i_audio_uk
+{
+background-image: url(../icons/flags/anidb_audio_ukrainian.gif);
+}
+
+*.i_sub_uk
+{
+background-image: url(../icons/flags/anidb_sub_ukrainian.gif);
+}
+
+*.i_audio_vi
+{
+background-image: url(../icons/flags/anidb_audio_vietnamese.gif);
+}
+
+*.i_sub_vi
+{
+background-image: url(../icons/flags/anidb_sub_vietnamese.gif);
+}
+
+*.i_audio_x-in
+{
+background-image: url(../icons/flags/anidb_audio_instrumental.gif);
+}
+
+*.i_audio_x-jat
+{
+background-image: url(../icons/flags/anidb_audio_japanese-transcription.gif);
+}
+
+*.i_sub_x-jat
+{
+background-image: url(../icons/flags/anidb_sub_japanese-transcription.gif);
+}
+
+*.i_audio_x-other
+{
+background-image: url(../icons/flags/anidb_audio_unknown.gif);
+}
+
+*.i_sub_x-other
+{
+background-image: url(../icons/flags/anidb_sub_unknown.gif);
+}
+
+*.i_audio_x-unk
+{
+background-image: url(../icons/flags/anidb_audio_unknown.gif);
+}
+
+*.i_sub_x-unk
+{
+background-image: url(../icons/flags/anidb_sub_unknown.gif);
+}
+
+*.i_audio_zh
+{
+background-image: url(../icons/flags/anidb_audio_chinese.gif);
+}
+
+*.i_sub_zh
+{
+background-image: url(../icons/flags/anidb_sub_chinese.gif);
+}
+
+*.i_audio_zh-x-yue
+{
+background-image: url(../icons/flags/anidb_audio_cantonese.gif);
+}
+
+*.i_audio_zh-x-cmn
+{
+background-image: url(../icons/flags/anidb_audio_mandarin.gif);
+}
+
+*.i_audio_zh-x-nan
+{
+background-image: url(../icons/flags/anidb_audio_taiwanese.gif);
+}
+
+*.i_audio_zh-Hans
+{
+background-image: url(../icons/flags/anidb_audio_simplified.gif);
+}
+
+*.i_sub_zh-Hans
+{
+background-image: url(../icons/flags/anidb_sub_simplified.gif);
+}
+
+*.i_audio_zh-Hant
+{
+background-image: url(../icons/flags/anidb_audio_traditional.gif);
+}
+
+*.i_sub_zh-Hant
+{
+background-image: url(../icons/flags/anidb_sub_traditional.gif);
+}
+
+/*icons.css*/
+/*---------------------------------
+@ICONS
+----------------------------------*/
+/* image replacement */
+img[src*="minus.gif"],
+img[src*="plus.gif"] {
+background: transparent url(images/buttons/minus.gif) no-repeat left top;
+width: 0;
+padding-left: 15px;
+text-indent: 5000px;
+}
+
+img[src*="plus.gif"] {
+background: transparent url(images/buttons/plus.gif) no-repeat left top;
+}
+
+a:hover img[src*="minus.gif"], a:active img[src*="minus.gif"],
+a:hover img[src*="plus.gif"], a:active img[src*="plus.gif"] {
+background-position: -16px top;
+}
+
+img[src*="down1.gif"] {
+background: #202379 url(images/buttons/down.gif) no-repeat 2px top;
+width: 0;
+padding-left: 13px;
+height: 12px;
+margin-bottom: -2px;
+}
+
+img[src*="up1.gif"] {
+background: #202379 url(images/buttons/up.gif) no-repeat 2px top;
+width: 0;
+padding-left: 13px;
+height: 12px;
+margin-bottom: -2px;
+}
+
+img[src*="nodown1.gif"] {
+background: transparent url(images/buttons/down.gif) no-repeat left top;
+width: 0;
+padding-left: 9px;
+}
+
+img[src*="noup1.gif"] {
+background: transparent url(images/buttons/up.gif) no-repeat left top;
+width: 0;
+padding-left: 9px;
+}
+
+a:hover img[src*="up1.gif"], a:active img[src*="up1.gif"],
+a:hover img[src*="down1.gif"], a:active img[src*="down1.gif"] {
+background-position: -9px top;
+}
+
+a:hover img[src*="noup1.gif"], a:active img[src*="noup1.gif"],
+a:hover img[src*="nodown1.gif"], a:active img[src*="nodown1.gif"] {
+background-position: -11px top;
+}
+
+img[src*="file_delete.gif"] {
+background: transparent url(images/icons/state-del.png) no-repeat left top;
+width: 0;
+padding-left: 14px;
+}
+
+img[src*="file_edit.gif"] {
+background: transparent url(images/buttons/mylist-edit.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_seen_no.gif"] {
+background: transparent url(images/buttons/seen-no.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_seen_yes.gif"] {
+background: transparent url(images/buttons/seen-yes.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_file_addmylist.gif"] {
+background: transparent url(images/buttons/mylist-add.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_file_removemylist.gif"] {
+background: transparent url(images/buttons/mylist-remove.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_file_ed2k.gif"] {
+background: transparent url(images/buttons/ed2k.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_rate_star.gif"] {
+background: transparent url(images/icons/star.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_rate_halfstar.gif"] {
+background: transparent url(images/icons/star-half.png) no-repeat left top;
+width: 0;
+padding-left: 8px;
+}
+
+img[src*="ask2.gif"] {
+background: transparent url(images/buttons/help.png) no-repeat -1px top;
+width: 0;
+padding-left: 13px;
+}
+
+img[src*="ask2.gif"]:hover {
+background-position: -16px top;
+}
+
+img[src*="anidb_no_vote.gif"] {
+background: transparent url(images/icons/vote-no.gif) no-repeat left 3px;
+width: 0;
+padding-left: 5px;
+height: 16px;
+}
+
+img[src*="anidb_pri_low.gif"] {
+background: transparent url(images/icons/priority-low.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_pri_med.gif"] {
+background: transparent url(images/icons/priority-med.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_pri_high.gif"] {
+background: transparent url(images/icons/priority-high.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_notify.gif"] {
+background: transparent url(images/icons/notify.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+img[src*="anidb_nonotify.gif"] {
+background: transparent url(images/icons/notify-no.png) no-repeat left top;
+width: 0;
+padding-left: 15px;
+}
+
+/* inline icon styles */
+div#layout-content div.icons {
+margin: 2px 0.3em 0;
+}
+
+div#layout-content td.title div.icons {
+float: right;
+}
+
+div#layout-content .i_icon,
+div.mylist_list td.icons span,
+div.anime_all td.icons span {
+float: left;
+display: block;
+width: 15px;
+height: 13px;
+background-repeat: no-repeat;
+background-position: center;
+text-indent: -5000px;
+padding: 0 2px;
+}
+
+.icon a:hover {
+border: none !important;
+}
+
+.i_inline {
+padding: 8px;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.i_inline span {
+display: none;
+}
+
+/* buttons */
+.i_help {
+background: transparent url(images/buttons/help.png) no-repeat left center;
+cursor: help;
+border: 0 !important;
+padding: 4px 8px;
+}
+
+.i_help:hover {
+background-position: -15px center;
+}
+
+.i_nodown1, .i_down1, .i_noup1, .i_up1 {
+width: 9px;
+height: 10px;
+}
+
+.i_down1, .i_up1		{background-position: -11px center;}
+
+.i_nodown1, .i_down1	{background-image: url(images/buttons/down.gif);}
+
+.i_noup1, .i_up1		{background-image: url(images/buttons/up.gif);}
+
+.i_minus				{background-image: url(images/buttons/minus.gif);}
+
+.i_plus					{background-image: url(images/buttons/plus.gif);}
+
+/* file state */
+.i_filestate_oncd 		{background-image: url(images/icons/state-cd.png);}
+
+.i_filestate_ondvd 		{background-image: url(images/icons/state-dvd.png);}
+
+.i_filestate_onhdd 		{background-image: url(images/icons/state-hdd.gif);}
+
+.i_filestate_other	 	{background-image: url(images/icons/state-unknown.gif);}
+
+/* anime state */
+.i_state_all 			{background-image: url(images/icons/state-all.png);}
+
+.i_state_deleted 		{background-image: url(images/icons/state-del.png);}
+
+.i_state_mixed 			{background-image: url(images/icons/state-mixed.png);}
+
+.i_state_oncd	 		{background-image: url(images/icons/state-cd.png);}
+
+.i_state_onhdd	 		{background-image: url(images/icons/state-hdd.gif);}
+
+.i_state_unknown 		{background-image: url(images/icons/state-unknown.gif);}
+
+.i_no_vote				{background-image: url(images/icons/vote-no.gif);}
+
+/* seen */
+.i_seen 				{background-image: url(images/icons/state-seen.png);}
+
+.i_seen_no 				{background-image: url(images/buttons/seen-no.png);}
+
+.i_seen_yes 			{background-image: url(images/buttons/seen-yes.png);}
+
+/* mylist */
+.i_file_addmylist	 	{background-image: url(images/buttons/mylist-add.png);}
+
+.i_mylist 				{background-image: url(images/icons/state-inmylist.png);}
+
+/* actions */
+.i_file_add 			{background-image: url(images/buttons/epfile-add.gif);}
+
+.i_file_ed2k 			{background-image: url(images/buttons/ed2k.png);}
+
+.i_ep_vote				{background-image: url(images/buttons/vote.png);}
+
+.i_group_vote			{background-image: url(images/buttons/vote.png);}
+
+/* audio+sub flags */
+.i_audio_ja 			{background-image: url(images/icons/audio-japanese.gif);}
+
+.i_sub_ja 				{background-image: url(images/icons/audio-sub-japanese.gif);}
+
+.i_audio_x-jat			{background-image: url(images/icons/audio-x-japanese.gif);}
+
+.i_sub_x-jat			{background-image: url(images/icons/audio-sub-x-japanese.gif);}
+
+.i_audio_pl 			{background-image: url(images/icons/audio-polish.gif);}
+
+.i_sub_pl 				{background-image: url(images/icons/audio-sub-polish.gif);}
+
+.i_audio_x-other 		{background-image: url(images/icons/audio-unknown.gif);}
+
+.i_sub_x-other 			{background-image: url(images/icons/audio-sub-unknown.gif);}
+
+.i_audio_x-unk 			{background-image: url(images/icons/audio-unknown.gif);}
+
+.i_sub_x-unk 			{background-image: url(images/icons/audio-sub-unknown.gif);}
+
+/* rating */
+span.i_rate_vhigh,
+span.i_rate_high,
+span.i_rate_med,
+span.i_rate_low,
+span.i_rate_vlow {
+background-repeat: repeat-x;
+background-position: left;
+background-image: url(images/icons/star.png);
+}
+
+span.i_rate_vhigh	{width: 45px;}
+
+span.i_rate_high	{width: 37px;}
+
+span.i_rate_med		{width: 30px;}
+
+span.i_rate_low		{width: 22px;}
+
+span.i_rate_vlow	{width: 15px;}
+
+/* global layout */
+/*global.css*/
+/*---------------------------------
+@GLOBAL
+- menus			- pagination
+- sections		- forms
+- image replacement
+----------------------------------*/
+/* setup */
+body {
+margin: 0;
+width: 100%;
+font: 9pt Verdana,Arial,Helvetica,sans-serif;
+line-height: 1.5;
+color: #3d3e6e;
+background: #f8f7ff url(images/layout/bg-content.gif) repeat left top;
+}
+
+ul, ul li {
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+h1, h2, h3, h4 {
+margin: 0;
+}
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+a img, :link img, :visited img {
+border: 0;
+}
+
+/* zero out borders on images and some links */
+div#layout-content td.action a, div#layout-content th a, div#layout-content th a img {
+border: 0 !important;
+}
+
+/* page titles */
+h1 {
+font: bold 1.8em "Century Gothic", "Lucida Grande", sans-serif;
+padding: 0.35em 0 0.3em 0.5em;
+background: #f8f7ff;
+color: #494a9c;
+font-variant: small-caps;
+letter-spacing: 0.1em;
+}
+
+h4 {
+color: #7762ed;
+font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+margin-bottom: 0.3em;
+}
+
+/* captions */
+caption {
+color: #7762ed;
+font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+margin-bottom: 0.3em;
+}
+
+/* small text */
+.s_small {
+font-size: 0.9em;
+}
+
+/* abbreviations */
+abbr {
+cursor: help;
+}
+
+/* container - content */
+div.g_content {
+position: relative;
+border: 1px solid #f3e7ff;
+border-bottom-color: #dec9f2;
+border-right-color: #dec9f2;
+width: 100%;
+background: #fff;
+}
+
+div.g_content>* {
+margin: 1em;
+}
+
+/* clearing */
+div.g_end,
+div.g_notebox {
+clear: both;
+}
+
+div.latestanimes_anime:after,
+div.anime_all div.info .block:after,
+div.search_all div.search_results ul.g_jumplist:after,
+div.file_all div.file_info dl:after,
+div.mylist_list form:after,
+div.userpage_all div.stats:after,
+div.userpage_all div.charts:after,
+div.animeatt_all div.animeatt_reviews div.review:after,
+div.agcmts_all div.agcmts_head:after {
+content: ".";
+clear: both;
+display: block;
+visibility: hidden;
+height: 0;
+}
+
+/* blocks */
+#layout-content div.block {
+display:table;
+margin-left:auto;
+margin-right:auto;
+}
+
+#layout-content div.block div.image {
+display:table-cell;
+vertical-align:middle;
+}
+
+#layout-content div.block div.image img {
+margin-right: 1em;
+}
+
+/* pagination */
+ul.g_jumplist,
+ul.g_navlist {
+text-align: center;
+}
+
+ul.g_jumplist li,
+ul.g_navlist li {
+display: inline;
+color: #de4799;
+font-weight: bold;
+text-transform: capitalize;
+}
+
+div#layout-content ul.g_jumplist li a,
+div#layout-content ul.g_jumplist li a:link,
+div#layout-content ul.g_jumplist li a:visited,
+div#layout-content ul.g_navlist li a,
+div#layout-content ul.g_navlist li a:link,
+div#layout-content ul.g_navlist li a:visited {
+text-decoration: none;
+border: 1px solid #f7edf1;
+border-bottom: 1px solid #d28cb2;
+color: #d28cb2;
+background: #fff9fb;
+padding: 0.2em 0.3em;
+font-size: 0.95em;
+font-weight: normal;
+}
+
+div#layout-content ul.g_jumplist li a:hover,
+div#layout-content ul.g_jumplist li a:active,
+div#layout-content ul.g_navlist li a:hover,
+div#layout-content ul.g_navlist li a:active {
+background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
+color: #de4799;
+border: 1px solid #eec6dc;
+}
+
+ul.g_jumplist li.prev {
+float: left;
+padding-left: 12px;
+background: transparent url(images/layout/larr.gif) no-repeat left center;
+font-weight: normal;
+}
+
+ul.g_jumplist li.next {
+float: right;
+padding-right: 12px;
+background: transparent url(images/layout/rarr.gif) no-repeat right center;
+font-weight: normal;
+}
+
+ul.g_jumplist li.all:before {
+content: "Viewing: ";
+color: #3d3e6e;
+text-transform: none;
+font-weight: normal;
+}
+
+/* navlist */
+ul.g_navlist.type li:first-child:before {
+content: "Type: ";
+color: #3d3e6e;
+text-transform: none;
+font-weight: normal;
+}
+
+ul.g_navlist.g_numonpage li:first-child:before {
+content: "Per page: ";
+color: #3d3e6e;
+text-transform: none;
+font-weight: normal;
+}
+
+/* list menu */
+div.g_menu {
+float: right;
+text-transform: capitalize;
+width: 11em;
+}
+
+.g_menu h4 {
+font-weight: normal;
+padding: 0 0.15em;
+}
+
+div.g_menu ul li {
+border-top: 1px solid #ebe1ef;
+padding: 0.3em;
+position: relative;
+}
+
+div.g_menu ul li.g_odd {
+background-color: #f5f7ff;
+}
+
+/* selects */
+select {
+background: #fafafa;
+padding: 0.2em;
+border: 1px solid #cfd0d1;
+}
+
+select option {
+color: #3d3e6e;
+background: #e0ecfd;
+}
+
+select option[value="0"] {
+color: #B14C7C;
+}
+
+/* form input buttons */
+input[type="submit"] {
+border: 1px solid #2d42af;
+color: #fff;
+background: #586fd1;
+cursor: pointer;
+}
+
+input[type="submit"]:hover {
+background: #2d42af;
+}
+
+/* informational boxes */
+.g_notebox,
+.g_note {
+border: 1px solid #dfc8ec;
+padding: 0.7em;
+background: #faf0ff;
+color: #4d2f5f;
+}
+
+.g_errorbox {
+border: 1px solid #ffcbf8;
+padding: 0.7em;
+background: #ffeafc;
+color: #ac0d72;
+}
+
+.g_info {
+clear: both;
+padding: 0.7em;
+background: #fcfcfc;
+border: 1px solid #e0e0e0;
+color: #777;
+}
+
+.g_notebox h3,
+.g_note h3,
+.g_errorbox h3,
+.g_info h3 {
+margin: 0 0 -0.5em;
+}
+
+.g_notebox>*:last-child,
+.g_note>*:last-child,
+.g_errorbox>*:last-child,
+.g_info>*:last-child {
+margin-bottom: 0;
+}
+
+.g_notebox>*:first-child,
+.g_note>*:first-child,
+.g_errorbox>*:first-child,
+.g_info>*:first-child {
+margin-top: 0;
+}
+
+/* actionlist */
+.g_actionlist {
+padding: 0.3em 1em 0.4em;
+background: #dff1ff;
+border: 1px solid #b0dafb;
+background-image: none;
+text-align: center;
+text-transform: capitalize;
+clear: both;
+}
+
+.g_actionlist li {
+display: inline;
+margin: 0 0.7em;
+}
+
+/* text fields */
+input[type="text"], input[type="password"], input.text, textarea {
+background:#fafafa;
+border: 1px solid #cfd0d1;
+padding: 0.2em;
+}
+
+input[type="text"]:hover, input[type="password"]:hover, input.text:hover, textarea:hover {
+border: 1px solid #bcc3c9;
+background: #fdfdfd;
+}
+
+/* definition list tables */
+.g_definitionlist table {
+border: 0;
+}
+
+.g_definitionlist table td {
+padding: 0.2em;
+border-top: 1px solid #ebe1ef;
+border-bottom: 0;
+}
+
+.g_definitionlist table th {
+background-color: transparent;
+padding: 0.2em;
+color:#8e83a9;
+border-top: 1px solid #ebe1ef;
+vertical-align: middle;
+}
+
+.g_definitionlist table table,
+.g_definitionlist table table * {
+border: none;
+}
+
+/* filter list */
+.g_filterlist {
+background: #eaf6ff;
+border: 1px solid #c0e0f9;
+padding: 0.7em;
+}
+
+.g_filterlist li {
+margin-bottom: 1em;
+}
+
+.g_filterlist li:last-child {
+margin-bottom: 0;
+}
+
+.g_filterlist li a {
+text-transform: capitalize;
+}
+
+/*layout.css*/
+/*---------------------------------
+@LAYOUT
+- main nav		- structure
+- user login	- quick search
+----------------------------------*/
+/* container - main nav, login, & search */
+div#layout-nav {
+padding-top: 160px;
+background: #fff url(images/layout/bg-header.gif) repeat-x left top;
+min-width: 784px;
+}
+
+/* container - main nav links & login */
+div#layout-menu {
+position: relative;
+}
+
+/* container - main nav links */
+div#layout-menu div.menu {
+padding: 1em;
+position: absolute;
+top: -8px;
+left: 0;
+width: 9em;
+}
+
+/* main nav link lists */
+div#layout-menu div.menu ul {
+background: #fff;
+border: 1px solid #f3e7ff;
+border-bottom-color: #dec9f2;
+border-right-color: #dec9f2;
+margin-bottom: 1em;
+}
+
+div#layout-menu div.menu ul li {
+border-bottom: 1px solid #ffecf5;
+}
+
+div#layout-menu div.menu ul li:last-child {
+border-bottom: none;
+}
+
+div#layout-menu div.menu a,
+div#layout-menu div.menu a:link,
+div#layout-menu div.menu a:visited {
+text-decoration: none;
+text-transform: capitalize;
+color: #7c87d8;
+padding: 0.2em 0.7em;
+display: block;
+font-size: 0.95em;
+}
+
+div#layout-menu div.menu a:hover,
+div#layout-menu div.menu a:active {
+background: transparent url(images/layout/stripe-pink.gif) repeat left top;
+color: #484b9a;
+}
+
+/* my nav */
+div#layout-menu div.menu ul.my {
+background-color: #7c87d8;
+border: 1px solid #6470c3;
+border-bottom-color: #434fa2;
+border-right-color: #434fa2;
+}
+
+div#layout-menu div.menu ul.my li {
+border-bottom-color: #6470c3;
+}
+
+div#layout-menu div.menu ul.my a,
+div#layout-menu div.menu ul.my a:link,
+div#layout-menu div.menu ul.my a:visited {
+color: #fff;
+}
+
+div#layout-menu div.menu ul.my a:hover,
+div#layout-menu div.menu ul.my a:active {
+color: #ffd2fe;
+background: transparent url(images/layout/stripe-dkblue.gif) repeat left top;
+}
+
+/* mylistreport */
+div#layout-menu div.menu ul.mod {
+background-color: #382ec0;
+border: 1px solid #20179d;
+border-bottom-color: #1c1386;
+border-right-color: #1c1386;
+}
+
+div#layout-menu div.menu ul.mod li {
+border-bottom-color: #291fad;
+}
+
+div#layout-menu div.menu ul.mod a,
+div#layout-menu div.menu ul.mod a:link,
+div#layout-menu div.menu ul.mod a:visited {
+color: #c9dcfb;
+}
+
+div#layout-menu div.menu ul.mod a:hover,
+div#layout-menu div.menu ul.mod a:active {
+color: #d3e4ff;
+background: #1c1386;
+}
+
+/* help link */
+div#layout-menu div.menu ul.other li.help {
+background: transparent url(images/buttons/help-static.png) no-repeat 0.7em center;
+}
+
+div#layout-menu div.menu ul.other li.help a {
+padding-left: 26px;
+}
+
+/* container - login */
+div#layout-menu div.usermenu {
+position: absolute;
+top: -160px;
+right: 1em;
+height: 102px;
+z-index: 1;
+}
+
+/* logged in */
+div#layout-menu div.usermenu p {
+position: relative;
+float: left;
+margin: 0;
+}
+
+div#layout-menu div.usermenu p a,
+div#layout-menu div.usermenu p.user {
+padding: 78px 0.4em 0;
+height: 24px;
+display: block;
+float: left;
+text-decoration: none;
+text-transform: capitalize;
+}
+
+div#layout-menu div.usermenu p.user {
+font-weight: bold;
+text-transform: none;
+}
+
+div#layout-menu div.usermenu a#newnotifies,
+div#layout-menu div.usermenu a#newnotifies:link,
+div#layout-menu div.usermenu a#newnotifies:visited {
+color: #fd0576;
+font-weight: bold;
+margin-left: 0.5em;
+background: transparent url(images/layout/trans-white.png) repeat left top;
+border-left: 1px solid #e7c7d5;
+}
+
+div#layout-menu div.usermenu a#newnotifies:hover,
+div#layout-menu div.usermenu a#newnotifies:active {
+color: #ff00c6;
+background: transparent url(images/layout/stripe-white.png) repeat left top;
+}
+
+div#layout-menu div.usermenu a.history,
+div#layout-menu div.usermenu a.history:link,
+div#layout-menu div.usermenu a.history:visited {
+color: #ed95bd;
+border: 0;
+background: transparent url(images/layout/trans-white.png) repeat left top;
+}
+
+div#layout-menu div.usermenu a.history:hover,
+div#layout-menu div.usermenu a.history:active {
+color: #fd0576;
+}
+
+div#layout-menu div.usermenu a.i_button,
+div#layout-menu div.usermenu a.i_button:link,
+div#layout-menu div.usermenu a.i_button:visited {
+text-decoration: none;
+color: #be518c;
+background: transparent url(images/layout/trans-pink.png) repeat left top;
+border-left: 1px solid #e7c7d5;
+font-weight: bold;
+}
+
+div#layout-menu div.usermenu a.i_button:hover,
+div#layout-menu div.usermenu a.i_button:active {
+background: transparent url(images/layout/stripe-pink.png) repeat left top;
+color: #a93373;
+}
+
+div#layout-menu div.usermenu a.i_logout,
+div#layout-menu div.usermenu a.i_logout:link,
+div#layout-menu div.usermenu a.i_logout:visited {
+background: transparent url(images/layout/trans-blue.png) repeat left top;
+border-right: 1px solid #e7c7d5;
+color: #4a63e1;
+}
+
+div#layout-menu div.usermenu a.i_logout:hover,
+div#layout-menu div.usermenu a.i_logout:active {
+background: transparent url(images/layout/stripe-blue.png) repeat left top;
+color: #2d42af;
+}
+
+/* login form - not logged in */
+div#layout-menu div.usermenu span.login+a+form {
+background-color: #F7EDF1;
+width: 100%;
+padding-top: 35px;
+height: 40px;
+width: 280px;
+padding-left: 20px;
+}
+
+div#layout-menu div.usermenu span.login+a+form input.text {
+width: 131px;
+padding-left: 2px;
+padding-right: 2px;
+}
+
+div#layout-menu div.usermenu span.login+a+form input.text+input.text {
+margin-left: 2px;
+}
+
+div#layout-menu div.usermenu span.login {
+text-transform: capitalize;
+position: absolute;
+left: 20px;
+top: 15px;
+}
+
+div#layout-menu div.usermenu span.login a,
+div#layout-menu div.usermenu span.login a:link,
+div#layout-menu div.usermenu span.login a:visited {
+color: #ed95bd;
+text-decoration: none;
+}
+
+div#layout-menu div.usermenu span.login a:hover,
+div#layout-menu div.usermenu span.login a:active {
+color: #fd0576;
+}
+
+div#layout-menu div.usermenu input.logon,
+div#layout-menu div.usermenu a.i_signup,
+div#layout-menu div.usermenu label.remember {
+position: absolute;
+right: 0;
+bottom: 1em;
+width: 4.5em;
+height: 1.8em;
+}
+
+div#layout-menu div.usermenu a.i_signup {
+top: 15px;
+border-left: 0 !important;
+background: none !important;
+text-transform: capitalize;
+padding: 0;
+}
+
+div#layout-menu div.usermenu label.remember {
+right: 6.5em;
+width: 13em;
+text-align: right;
+}
+
+/* container - search */
+div#layout-search {
+position: absolute;
+top: 0;
+background: transparent url(images/layout/bg-login.png) no-repeat right top;
+padding-top: 103px;
+right: 1em;
+width: 30em;
+text-align: right;
+z-index: 0;
+}
+
+/* search - form */
+div#layout-search input.text {
+border: 1px solid #eed0da;
+padding: 0.3em 0.3em 0 0.3em;
+height: 1.5em;
+width: 16em;
+color: #1e2495;
+}
+
+div#layout-search input.text:hover {
+border: 1px solid #dc9abf
+}
+
+div#layout-search input.submit {
+height: 1.8em;
+padding-bottom: 0.2em;
+margin-bottom: 0.1em;
+width: 4.5em;
+}
+
+div#layout-search input.submit:hover {
+background: #2d42af;
+}
+
+/* container - content */
+div#layout-content {
+clear: both;
+background: transparent url(images/layout/header.jpg) no-repeat left top;
+margin-top: -160px;
+padding: 160px 1em 0 11em;
+}
+
+/* container - footer */
+div#layout-footer {
+background: #f8f7ff url(images/layout/bg-content.gif) repeat left top;
+}
+
+div#layout-footer p {
+font-size: 0.8em;
+text-align: center;
+color: #85809f;
+margin: 0;
+padding: 2em 0;
+}
+
+div#layout-footer p:after {
+content: ". Design by zakness.";
+}
+
+/* content links */
+div#layout-content a,
+div#layout-content a:link {
+color: #154ef4;
+text-decoration: none;
+border-bottom: 1px solid transparent;
+}
+
+div#layout-content a:visited {
+color: #7264a6;
+}
+
+div#layout-content a:hover,
+div#layout-content a:active {
+color: #4876fe;
+border-bottom: 1px dotted #4876fe;
+}
+
+/* no nav (popups) */
+body.nonav div#layout-content {
+margin: 0 1em 1em 1em;
+padding: 0;
+background: transparent;
+}
+
+body.nonav form textarea {
+width: 99%;
+}
+
+/*anime-tables.css*/
+/*---------------------------------
+@ANIME TABLES
+----------------------------------*/
+form fieldset {
+display: none;
+}
+
+/* default tables */
+table  {
+border: 1px solid #565ab9;
+}
+
+table tr {
+background-color: #fff;
+}
+
+table tr.g_odd {
+background-color: #f5f7ff;
+}
+
+table th {
+text-align: left;
+background-color: #565ab9;
+color: #fff;
+font-weight: normal;
+text-transform: capitalize;
+padding: 0.3em 0.4em;
+vertical-align: bottom;
+}
+
+table td span.count {
+color: #8f95ae;
+}
+
+table th img[src*="plus.gif"],
+table th img[src*="minus.gif"] {
+margin-bottom: -2px;
+}
+
+table td {
+font-size: 0.95em;
+border-bottom: 1px dotted #d3d7e2;
+padding: 0.3em 0.4em;
+}
+
+div.mylist_list table.animelist td td,
+div.anime_all div.episodes table.eplist td td,
+div.anime_info td td {
+font-size: 1em;
+}
+
+div.mylist_list table.animelist td.action,
+div.anime_all div.episodes table.eplist td.action.expand,
+div.anime_all div.episodes table.eplist td.action.collapse {
+padding-left: 1.2em;
+vertical-align: baseline;
+}
+
+table td.date {
+color: #994da9;
+}
+
+div#layout-content div.mylist_list table td[colspan="7"],
+div#layout-content div.anime_all div.episodes table td[colspan="8"] {
+padding: 0;
+padding-left: 20px;
+background: #dcdff7 url(images/layout/stripe-blue.gif) repeat left top;
+}
+
+div.mylist_list table td[colspan="7"] td[colspan="7"],
+div.anime_all div.episodes table td[colspan="8"] td[colspan="8"] {
+background-color: #ccd0ef;
+}
+
+div.mylist_list table table,
+div.anime_all div.episodes table.filelist {
+width: 100%;
+border-left: 1px solid #a9b0e1;
+}
+
+div.mylist_list table.eplist th,
+div.anime_all div.episodes table.filelist th {
+background-color: #a9b0e1;
+font-size: 0.95em;
+}
+
+div.mylist_list table.animelist tr:hover>td,
+div.anime_all div.episodes table.eplist tr:hover>td,
+div.animelist_all table.anime_list tr:hover>td,
+div.latest_all table tr:hover>td,
+div.grouplist_all table.group_list tr:hover>td,
+div.userlist_all table.users tr:hover>td,
+div.producerlist_all table.producer_list tr:hover>td,
+div.anidb_staff table tr:hover>td,
+div.mywishlist_all div table:first-child tr:hover>td,
+div.myvotes_all table tr:hover>td,
+div.mynotifies_all div.list table tr:hover>td,
+div.mylistreport_results table tr:hover>td  {
+background-color: #f2e1f5 !important;
+}
+
+div.mylist_list td.icons.file span {
+float: left;
+padding: 0 2px;
+}
+
+div.mylist_list table.filelist,
+div.anime_all div.episodes table.filelist {
+border-collapse: separate;
+border-spacing: 1px;
+}
+
+table.filelist tr.genr td,
+table.filelist tr.generic td {
+background-color: #fff !important;
+color: #8e4eaf;
+font-weight: bold;
+}
+
+table.filelist td[colspan="11"] i {
+display: block;
+text-align: center;
+color: #000;
+font-style: normal;
+}
+
+/* list tables */
+div.animelist_all div.animelist_list .g_jumplist,
+div.grouplist_all div.grouplist_list .g_jumplist,
+div.userlist_all div.userlist_list .g_jumplist,
+div.producerlist_all div.producerlist_list .g_jumplist {
+margin: 1em 0;
+}
+
+div.animelist_all table.anime_list,
+div.grouplist_all table.group_list,
+div.userlist_all table.users,
+div.producerlist_all table.producer_list {
+width: 100%;
+}
+
+div.animelist_all .g_filterlist,
+div.producerlist_all .g_filterlist {
+text-align: right;
+}
+
+div.grouplist_list th.rating {
+width: 8em;
+}
+
+/* the database */
+/*main.css*/
+/*---------------------------------
+@MAIN
+- news		- top10 rightbar
+----------------------------------*/
+/* container - right sidebar */
+div.main_all div.rightbar {
+float: right;
+width: 25%;
+background: #fcfafb url(images/layout/mamimi.png) no-repeat right top;
+padding: 0.5em 0 0;
+font-size: 0.95em;
+border: 1px solid #e4e4e4;
+border-right-color: #d5cccc;
+border-bottom-color: #d5cccc;
+}
+
+/* rightbar elements */
+div.main_all div.rightbar h3 {
+color: #7762ed;
+background: #f0f2ff;
+padding: 0.3em 0.75em;
+margin: 1.5em 0 0;
+border-top: 1px solid #ece5ff;
+border-bottom: 1px solid #ece5ff;
+font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+}
+
+div.main_all div.rightbar h4 {
+color: #4d4993;
+padding: 0.3em 1em;
+font-size: 1.1em;
+font-weight: bold;
+}
+
+div.main_all div.rightbar p {
+margin: 1em;
+background: transparent url(images/layout/trans-white.png) repeat left top;
+border-color: #ffdafc;
+padding: 0.5em 0.2em;
+margin: 0;
+text-align: center;
+}
+
+div#layout-content div.rightbar p.g_vital a,
+div#layout-content div.rightbar p.g_vital a:link,
+div#layout-content div.rightbar p.g_vital a:visited {
+border-bottom: 1px dotted #fd0576;
+color: #fd0576;
+font-weight: bold;
+}
+
+div#layout-content div.rightbar p.g_vital a:hover,
+div#layout-content div.rightbar p.g_vital a:active {
+color: #d90085;
+border-bottom: 1px dotted #d90085;
+}
+
+/* rightbar top 10 lists */
+div.main_all div.rightbar ol {
+margin-top: 0;
+margin-left: 0;
+padding-left: 0;
+}
+
+div.main_all div.rightbar ol:last-child {
+margin-bottom: 0;
+}
+
+div.main_all div.rightbar ol li {
+padding: 0.3em;
+padding-left: 1em;
+list-style: none;
+position: relative;
+border-bottom: 1px solid #e4e4e4;
+}
+
+div.main_all div.rightbar ol li span {
+position: absolute;
+top: 0.3em;
+left: 1em;
+}
+
+div.main_all div.rightbar ol li.g_odd {
+background: #fff;
+}
+
+div.main_all div.rightbar ol li a {
+margin-left: 20%;
+display: block;
+border-bottom: none !important;
+}
+
+/* container - news */
+div.main_all div.news {
+margin: 0 28% 1em 0;
+padding: 0.5em 1em;
+}
+
+/* news item elements */
+div.main_all div.newsitem {
+padding-left: 40px;
+background: transparent url(images/layout/flower1.png) no-repeat left top;
+border-bottom: 1px solid #f3e7ff;
+padding-bottom: 1.2em;
+}
+
+div.main_all div.news h4 {
+margin-top: 0.7em;
+margin-bottom: -0.1em;
+font: 1.8em "Century Gothic", "Lucida Grande", sans-serif;
+color: #000;
+}
+
+div.main_all div.news span.stamp {
+display: block;
+color: #859efd;
+padding: 0.2em;
+font-size: 0.85em;
+}
+
+div.main_all div.newsitem:last-child {
+border-bottom: 0;
+}
+
+/*search.css*/
+/*---------------------------------
+@SEARCH
+----------------------------------*/
+div.search_all div.search table {
+width: 100%;
+}
+
+div.search_all div.search td {
+padding: 0.4em;
+}
+
+div.search_all div.search td table {
+margin: 0;
+}
+
+div.search_all div.search td table * {
+padding: 0.2em;
+border: none;
+}
+
+div.search_all div.search caption {
+display: none;
+}
+
+div.search_all div.search tr.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+div.search_all div.search tr.genres td.value i {
+color: #ac0d72;
+}
+
+div.search_all div.search tr.genres table td {
+padding-right: 1em;
+}
+
+/* search results */
+div.search_all div.search_filter {
+text-align: center;
+}
+
+div.search_all table.search_results {
+width: 100%;
+margin: 1em 0;
+}
+
+div.search_all table.search_results td.anime {
+width: 40%;
+}
+
+/*calendar.css*/
+/*---------------------------------
+@CALENDAR
+----------------------------------*/
+div.latestanimes_all div.g_section {
+clear: both;
+}
+
+div.latestanimes_anime {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 1em;
+border: 1px solid #d9dfff;
+}
+
+div.latestanimes_anime h3 {
+margin-bottom: 1em;
+}
+
+div.latestanimes_all div.g_image {
+margin-right: 1em;
+float: left;
+}
+
+div.latestanimes_all div.g_image img {
+border: 1px solid #ebedf5;
+}
+
+div.latestanimes_anime div.g_definitionlist {
+float: left;
+clear: right;
+}
+
+div.latestanimes_all .data td {
+background: #fff;
+}
+
+div.latestanimes_form {
+color: #de4799;
+text-transform: capitalize;
+text-align: center;
+}
+
+div#layout-content div.latestanimes_form a,
+div#layout-content div.latestanimes_form a:link,
+div#layout-content div.latestanimes_form a:visited {
+text-decoration: none;
+border: 1px solid #f7edf1;
+border-bottom: 1px solid #d28cb2;
+color: #d28cb2;
+background: #fff9fb;
+padding: 0.3em 0.4em;
+}
+
+div#layout-content div.latestanimes_form a:hover,
+div#layout-content div.latestanimes_form a:active {
+background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
+color: #de4799;
+border: 1px solid #eec6dc;
+}
+
+div#layout-content div.latestanimes_form a.g_navprev {
+float: left;
+}
+
+div#layout-content div.latestanimes_form a.g_navnext {
+float: right;
+}
+
+/* anime votes graphs */
+div.animevotes_all>table {
+width: 95%;
+margin: 0 auto;
+border: 0;
+}
+
+div.animevotes_all table table {
+width: 100%;
+border:1px solid #E1D9F5;
+margin-bottom: 1em;
+}
+
+div.animevotes_all table td,
+div.animevotes_all table th {
+text-align: center;
+}
+
+div.animevotes_all table.vote_graph tr:last-child {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+font-weight: bold;
+}
+
+div.animevotes_all caption {
+margin-top: 1em;
+}
+
+/*latest.css*/
+/*---------------------------------
+@LATEST
+----------------------------------*/
+div.latest_all .g_section table {
+width: 100%;
+}
+
+div.latest_all .latest_userdata table {
+width: auto;
+margin: 0 auto;
+}
+
+div.latest_all tr.yes.g_odd td {
+background-color: #e9ffd8;
+}
+
+div.latest_all tr.yes td {
+background-color: #f0ffe3;
+}
+
+div.latest_all td.verified.yes {
+color: #4b9b39;
+font-weight: bold;
+}
+
+div.latest_categories td.number.weight_100 {color: #7b9174;}
+
+div.latest_categories td.number.weight_200 {color: #a1be2e;}
+
+div.latest_categories td.number.weight_300 {color: #5dac3b;}
+
+div.latest_categories td.number.weight_400 {color: #348d30;}
+
+div.latest_categories td.number.weight_500 {color: #0e7709;}
+
+div.latest_categories td.number.weight_600 {color: #054409;}
+
+div.latest_reviews_list th[colspan="2"] {
+font-weight: bold;
+font-size: 0.9em;
+}
+
+div.latest_all .g_section .g_filterlist {
+margin: 1em 0;
+}
+
+div.latest_all .g_section td,
+div.latest_all .g_section th {
+padding: 0.2em 0.4em;
+}
+
+div.latest_groups table.agcomments td.text.comment {
+width: 45%;
+}
+
+/*genres.css*/
+/*---------------------------------
+@GENRES
+----------------------------------*/
+div.genre_list caption {
+display: none;
+}
+
+div.genre_list table {
+margin: 1em auto;
+}
+
+div.genre_list table td {
+padding-right: 1em;
+}
+
+div.genre_list table td[align="right"] {
+padding: 0.4em;
+text-align: center;
+background-color: #f5eef8;
+}
+
+/*categories.css*/
+/*---------------------------------
+@CATEGORIES
+----------------------------------*/
+div.genren_all div.controls {
+background: #eaf6ff;
+border: 1px solid #c0e0f9;
+padding: 0.7em;
+text-align: center;
+}
+
+div.genren_all div.controls a {
+cursor: pointer;
+}
+
+div#layout-content div.genren_all a.i_icon {
+float: left;
+display: block;
+width: 15px;
+height: 13px;
+text-indent: -5000px;
+border-bottom: 0 !important;
+cursor: pointer;
+margin-right: 5px;
+margin-bottom: -2px;
+padding: 0;
+}
+
+div.genren_all a.i_minus {
+background: transparent url(images/buttons/minus.gif) no-repeat left top;
+}
+
+div.genren_all a.i_plus {
+background: transparent url(images/buttons/plus.gif) no-repeat left top;
+}
+
+div.genren_all a.i_minus:hover,
+div.genren_all a.i_plus:hover {
+background-position: -16px top;
+}
+
+div.genren_all span.cat {
+color: #8f95ae;
+}
+
+div.genren_all li.branch.collapsed ul {
+display: none;
+}
+
+div.genren_all ul ul {
+margin-left: 20px;
+}
+
+div.genren_all #cattree {
+margin: 1em auto;
+}
+
+div.genren_all #cattree>li {
+float: left;
+width: 29%;
+margin: 0 2% 1em;
+font-weight: bold;
+}
+
+div.genren_all #cattree>li+li+li,
+div.genren_all #cattree>li+li+li+li+li+li {
+clear: right;
+}
+
+div.genren_all #cattree>li+li+li+li,
+div.genren_all #cattree>li+li+li+li+li+li+li {
+clear: left;
+}
+
+div.genren_all #cattree>li+li+li+li+li,
+div.genren_all #cattree>li+li+li+li+li+li+li+li {
+clear: none;
+}
+
+div.genren_all #cattree>li li {
+font-weight: normal;
+}
+
+/*staff.css*/
+/*---------------------------------
+@ANIDBSTAFF
+----------------------------------*/
+div.anidb_staff table {
+width: 100%;
+}
+
+/* anime meta */
+/*agcmts.css*/
+/*---------------------------------
+@AGCMTS
+----------------------------------*/
+div.agcmts_all div.agcmts_head {
+border-bottom: 3px solid #f3e7ff;
+margin-bottom: 1em;
+}
+
+div.agcmts_all div.agcmts_head p {
+margin-top: 0;
+margin-bottom: 0.7em;
+font-weight: bold;
+}
+
+div.agcmts_all div.agcmts_head p:first-child {
+float: right;
+clear: right;
+}
+
+div.agcmts_all div.agcmts_head p:last-child {
+float: left;
+clear: left;
+}
+
+/* news item elements */
+div.agcmts_all div.agcmts_entries div.comment {
+padding-left: 27px;
+background: transparent url(images/layout/flower1-smaller.png) no-repeat left top;
+border-bottom: 1px solid #f3e7ff;
+margin-bottom: 1em;
+}
+
+div.agcmts_all div.agcmts_entries div.comment:last-child {
+border-bottom: 3px solid #f3e7ff;
+}
+
+div.agcmts_all div.agcmts_entries div.comment span.stamp {
+display: block;
+color: #859efd;
+font-size: 0.85em;
+}
+
+/*animeatt.css*/
+/*---------------------------------
+@ANIMEATT
+----------------------------------*/
+div.animeatt_all div.animeatt_header>table {
+margin: 0 auto;
+font-size: 1.2em;
+}
+
+div.animeatt_all div.animeatt_header table td {
+background-color: #565ab9;
+color: #fff;
+}
+
+div.animeatt_all div.animeatt_header table table td {
+color: #3d3e6e;
+background-color: #fff;
+}
+
+div.animeatt_all div.animeatt_reviews div.review {
+clear: right;
+padding-bottom: 1em;
+border-bottom: 1px solid #f3e7ff;
+margin-bottom: 1em;
+background: transparent url(images/layout/flower2.png) no-repeat left 2px;
+}
+
+div.animeatt_all div.animeatt_reviews div.review:last-child {
+padding-bottom: 0;
+border-bottom: 0;
+margin-bottom: 0;
+}
+
+div.animeatt_all h2 {
+font-weight: normal;
+color: #fff;
+position: relative;
+padding-left: 30px;
+}
+
+div.animeatt_all h2 span.approval {
+font-size: 0.9em;
+padding-left: 15px;
+color: #3d3e6e;
+}
+
+div.animeatt_all div.approved h2 span.approval {
+background: transparent url(images/layout/checkmark.png) no-repeat left center;
+color: #5dac3b;
+}
+
+div.animeatt_all div.disapproved h2 span.approval {
+background: transparent url(images/layout/deprecated.png) no-repeat left center;
+color: #8f95ae;
+}
+
+div.animeatt_all div.disapproved h2 span.approval:before {
+content: "Dis";
+}
+
+div.animeatt_all h2 span.vote {
+font-size: 1.1em;
+font-weight: bold;
+}
+
+div.animeatt_all h2 span.vote.high {
+color: #5dac3b;
+}
+
+div.animeatt_all h2 span.vote.low {
+color: #e33e23;
+}
+
+div.animeatt_all h2 a.no {
+font-weight: bold;
+font-size: 0.8em;
+position: absolute;
+left: 9px;
+top: 8px;
+}
+
+div.animeatt_all h2 a.by:before {
+content: "By ";
+color: #859efd;
+font-size: 0.8em;
+}
+
+div.animeatt_all div.review span.stamp {
+color: #859efd;
+padding-left: 44px;
+padding-bottom: 0.5em;
+}
+
+div.animeatt_all div.review div.body {
+padding-right: 12em;
+padding-left: 44px;
+}
+
+div.animeatt_all div.review div.head {
+margin-top: -1.4em;
+}
+
+div.animeatt_all div.review div.head table {
+width: 100%;
+}
+
+div.animeatt_all div.review div.head,
+div.animeatt_all div.review div.menu {
+clear: right;
+float: right;
+width: 10em;
+}
+
+div.animeatt_all div.review div.head div,
+div.animeatt_all div.review div.menu div {
+margin-bottom: 1em;
+}
+
+div.animeatt_all div.review div.head caption,
+div.animeatt_all div.review div.menu caption {
+text-align: left;
+}
+
+div.animeatt_all div.review div.head th {
+vertical-align: middle;
+}
+
+div.animeatt_all div.review div.head td.value {
+text-align: right;
+font-size: 1.4em;
+}
+
+/*animehint.css*/
+/*---------------------------------
+@ANIMEHINT
+----------------------------------*/
+div.hint2_all hr {
+display: none;
+}
+
+div.hint2_all {
+text-align: center;
+color: #ac0d72;
+}
+
+div.hint2_all>* {
+margin: 0;
+}
+
+div.hint2_all>br {
+margin-top: 1em;
+}
+
+div.hint2_all>table {
+width: 80%;
+margin: 1em auto;
+border: 0;
+text-align: left;
+}
+
+div.hint2_all>table td {
+border-bottom: 0;
+}
+
+div.hint2_all table table {
+width: 100%;
+color: #3d3e6e;
+}
+
+div.hint2_all span#UserDesc table,
+div.hint2_all span#AnimeDesc table,
+div.hint2_all span#FilterDesc table {
+border:1px solid #E1D9F5;
+background: #f7f4ff;
+color: #6f75bc;
+margin: 0;
+}
+
+div.hint2_all td[width="1"] table {
+border: 1px solid #c0e0f9;
+}
+
+div.hint2_all td[width="1"] table td {
+background: #eaf6ff;
+}
+
+div.hint2_all td[width="1"] table td.nav {
+background-color: #f1fcff;
+color: #76a5e5;
+border-bottom: 1px solid #c0e0f9;
+}
+
+/*ep.css*/
+/*---------------------------------
+@EPISODE
+----------------------------------*/
+div.ep_all div table {
+width: 100%;
+}
+
+div.ep_all div.ep_vote,
+div.ep_all h4 {
+text-align: center;
+}
+
+div.ep_all td[colspan="11"] {
+background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+/*file.css*/
+/*---------------------------------
+@FILE
+----------------------------------*/
+div.file_all div.file_info dl {
+width: 100%;
+}
+
+div.file_all div.file_info dl dd,
+div.file_all div.file_info dl dt {
+padding: 0.2em 1%;
+border-top: 1px solid #ebe1ef;
+float: left;
+}
+
+div.file_all div.file_info dl dt {
+width: 16%;
+}
+
+div.file_all div.file_info dl dd {
+width: 80%;
+margin: 0;
+font-weight: bold;
+}
+
+div.file_all h4 {
+margin-top: 1em;
+}
+
+div.file_all div.file_info dl .group,
+div.file_all div.file_info dl .size,
+div.file_all div.file_info dl .ed2k,
+div.file_all div.file_info dl .sha1,
+div.file_all div.file_info dl .censored,
+div.file_all div.file_info dl .quality,
+div.file_all div.file_info dl .stats {
+background-color: #f5f7ff;
+}
+
+/*group.css*/
+/*---------------------------------
+@GROUP
+----------------------------------*/
+div.group_all div.group_released table {
+width: 100%;
+}
+
+div.group_all div.group_released table .state.ongoing		{color: #2618b1;}
+
+div.group_all div.group_released table .state.stalled		{color: #966319;}
+
+div.group_all div.group_released table .state.complete		{color: #179023;}
+
+div.group_all div.group_released table .complete			{font-weight: bold;}
+
+div.group_all div.group_released table .state.dropped		{color: #8d92a0;}
+
+div.group_all div.group_vote {
+text-align: center;
+}
+
+/*producer.css*/
+/*---------------------------------
+@PRODUCER
+----------------------------------*/
+div.producer_all div.producer_related_anime table {
+width: 100%;
+}
+
+/*rel.css*/
+/*---------------------------------
+@RELATIONS
+----------------------------------*/
+div.rel_all div.g_section * {
+border: 0;
+}
+
+/*showanime.css*/
+/*---------------------------------
+@SHOW ANIME
+----------------------------------*/
+div.anime_all div.info div.block div.image img {
+border: 1px solid #ebedf5;
+}
+
+div.anime_all div.info div.data,
+div.anime_all div.info table {
+width: 100%;
+}
+
+div.anime_all div.info table table {
+width: inherit;
+}
+
+div.anime_all div.info div.data {
+display: table-cell;
+}
+
+div.anime_all div.info table table tr {
+background: transparent;
+}
+
+div.anime_all div.awards {
+margin: 1em 0;
+text-align: center;
+}
+
+div.anime_all div.awards a {
+border-bottom: 0 !important;
+}
+
+div.anime_all div.mylist table {
+margin: 0 auto;
+}
+
+div.anime_all div.vote table {
+margin: 0 auto;
+border:1px solid #E1D9F5;
+}
+
+div.anime_all div.vote table tr {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+div.anime_all div.groups table {
+margin: 0 auto;
+}
+
+div.anime_all div.groups table tr:last-child {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+div.anime_all div.groups .state.ongoing		{color: #2618b1;}
+
+div.anime_all div.groups .state.stalled		{color: #966319;}
+
+div.anime_all div.groups .state.complete	{color: #179023;}
+
+div.anime_all div.groups .complete			{font-weight: bold;}
+
+div.anime_all div.groups .state.dropped		{color: #8d92a0;}
+
+div.anime_all div.episodes {
+padding-bottom: 0;
+}
+
+div.anime_all div.episodes table.eplist {
+margin-bottom: 1em;
+border: 1px solid #565ab9;
+width: 100%;
+}
+
+div.anime_all div.episodes table.filelist td {
+padding: 0.2em 0.4em;
+border-bottom: none;
+}
+
+div.anime_all div.episodes div.mylist_add table {
+margin: 0 auto;
+border:1px solid #E1D9F5;
+background: #fff;
+}
+
+div.anime_all div.episodes div.mylist_add tr.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+div.anime_all caption {
+text-align: center;
+color: #7762ed;
+font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+width: 100%;
+}
+
+div.anime_all div.info td {
+font-size: 0.9em;
+}
+
+div.anime_all div.episodes div.mylist_add td,
+div.anime_all div.mylist td {
+padding: 0.4em;
+}
+
+div.anime_all div.episodes table.eplist tr.newtype td {
+border-top: 4px solid #a5b5f1;
+}
+
+div.anime_all div.episodes table.filelist {
+background: #d3d7f3;
+}
+
+div.anime_all div.episodes table.filelist td {
+background-color: #f7f7f7;
+}
+
+div.anime_all div.episodes table.filelist tr.g_odd td {
+background-color: #f2f2f2;
+}
+
+div.anime_all div.episodes table.filelist td.id {
+padding-left: 16px;
+}
+
+div.anime_all div.episodes table.filelist tr.good.g_odd td {
+background-color: #e9ffd8;
+}
+
+div.anime_all div.episodes table.filelist tr.good td {
+background-color: #f0ffe3;
+}
+
+div.anime_all div.episodes table.filelist tr.good td.id {
+background-image: url(images/layout/checkmark.png);
+background-repeat: no-repeat;
+background-position: 2px center;
+}
+
+div.anime_all div.episodes table.filelist tr.deprecated td {
+background-color: #ddd;
+}
+
+div.anime_all div.episodes table.filelist tr.deprecated td.id {
+background-image: url(images/layout/deprecated.png);
+background-repeat: no-repeat;
+background-position: 2px center;
+}
+
+/*up2date.css*/
+/*---------------------------------
+@UP2DATE
+----------------------------------*/
+div.up2date_file_filter .g_filterlist b {
+font-weight: normal;
+}
+
+div.up2date_file_list table.files {
+width: 100%;
+}
+
+div.up2date_file_list div.mylist_add caption {
+margin: 1em auto 0;
+}
+
+div.up2date_file_list div.mylist_add table {
+border:1px solid #E1D9F5;
+background: #fff;
+margin: 0 auto;
+}
+
+div.up2date_file_list div.mylist_add tr.action,
+div.up2date_sequels_filter form {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+div.up2date_sequels_filter form {
+border:1px solid #E1D9F5;
+}
+
+div.up2date_sequels_filter h4 {
+display: none;
+}
+
+div.up2date_sequels_list td.date {
+width: 8%;
+}
+
+div.up2date_sequels_list td.year {
+color: #994da9;
+}
+
+/* user info */
+/*buddylist.css*/
+/*---------------------------------
+@BUDDYLIST
+----------------------------------*/
+div.buddylist_all div table {
+width: 100%;
+margin: 0 0 1em;
+}
+
+/*mydb.css*/
+/*---------------------------------
+@MYDB
+----------------------------------*/
+div.mydb_all ul.g_jumplist {
+margin: 1em 0;
+}
+
+div.mydb_all div.g_section>table {
+width: 100%;
+}
+
+/*myhistory.css*/
+/*---------------------------------
+@MYHISTORY
+----------------------------------*/
+div.myhistory_all div table {
+width: 100%;
+margin: 1em 0;
+}
+
+div.myhistory_all .g_filterlist {
+text-align: center;
+}
+
+/*mylist.css*/
+/*---------------------------------
+@MYLIST
+----------------------------------*/
+div.mylist_list ul.g_jumplist {
+margin-right: 11em;
+}
+
+div.mylist_list form ul.g_jumplist {
+margin: 1em 0 0;
+}
+
+div.mylist_list form,
+div.mylist_list>table.animelist {
+margin: 1em 11em 1em 0;
+}
+
+div.mylist_list table.animelist {
+width: 100%;
+}
+
+div.mylist_list>table.animelist {
+width: inherit;
+}
+
+div.mylist_list table.filelist {
+background: #a9b0e1;
+}
+
+div.mylist_list table.animelist td {
+padding: 0.2em 0.3em;
+text-align: left;
+}
+
+div.mylist_list table.animelist td.eps,
+div.mylist_list table.animelist td.seen,
+div.mylist_list>table.animelist td.state,
+div.anime_all div.mylist td.state {
+padding-left: 15px;
+}
+
+div.mylist_list table.animelist tr.complete>td.stats,
+div.mylist_list table.animelist tr.all_watched>td.stats,
+div.mylist_list>table.animelist td.state.complete,
+div.anime_all div.mylist td.state.complete,
+div.anime_all div.mylist td.state.watched {
+color: #000;
+font-weight: bold;
+background: transparent url(images/layout/checkmark-grey.png) no-repeat 2px center;
+}
+
+div.mylist_list table.animelist tr.complete>td.seen,
+div.mylist_list>table.animelist td.state.complete+td.state.complete,
+div.anime_all div.mylist td.state,
+div.anime_all div.mylist td.state.complete+td.state.complete {
+color: #000;
+font-weight: normal;
+background: none;
+}
+
+div.mylist_list table.animelist tr.all_watched>td.seen,
+div.mylist_list>table.animelist td.state.all_watched,
+div.anime_all div.mylist td.state.watched+td.state.watched {
+color: #4b9b39;
+background: transparent url(images/layout/checkmark.png) no-repeat 2px center;
+}
+
+div.mylist_list>table.animelist td.state.all_watched {
+font-weight: bold;
+}
+
+div.mylist_list table.animelist td.myvote,
+div.mylist_list table.animelist td.vote {
+color: #a1be2e;
+text-align: center;
+}
+
+div.mylist_list table.animelist td.high {
+color: #5dac3b;
+font-weight: bold;
+}
+
+div.mylist_list table.animelist td.low {
+color: #e33e23;
+}
+
+div.mylist_list table td.check {
+padding: 1em 0 2em;
+background-image: none;
+text-align: center;
+}
+
+div.mylist_list table td.check select {
+margin-left: 1em;
+}
+
+div.mylist_list .g_actionlist,
+div#layout-content div.mylist_list table.eplist td.check {
+margin: 1em 0;
+padding: 1em;
+background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+border:1px solid #E1D9F5;
+}
+
+/* right side menu */
+div.mylist_menu {
+margin-top: -1.4em;
+width: 10em;
+}
+
+div.mylist_menu ul.filters:before {
+content: "Filters";
+}
+
+div.mylist_menu ul.state:before {
+content: "Show only";
+}
+
+div.mylist_menu ul.animecat:before {
+content: "Types";
+}
+
+div.mylist_menu ul.animecat:before,
+div.mylist_menu ul.state:before,
+div.mylist_menu ul.filters:before {
+text-transform: none;
+border-bottom: 1px solid #c0e0f9;
+color: #76a5e5;
+margin-bottom: 0.2em;
+display: block;
+font-size: 0.9em;
+padding: 0.5em;
+background-color: #f1fcff;
+}
+
+div.mylist_menu ul {
+font-size: 0.95em;
+}
+
+div.mylist_menu ul.animecat,
+div.mylist_menu ul.state,
+div.mylist_menu ul.filters {
+background: #eaf6ff;
+border: 1px solid #c0e0f9;
+margin-bottom: 1em;
+}
+
+div.mylist_menu ul.animecat li,
+div.mylist_menu ul.state li,
+div.mylist_menu ul.filters li {
+border-top: 0;
+padding: 0.1em 0.5em;
+}
+
+div#layout-content div.mylist_menu ul.state li a {
+display: block;
+border-bottom: none !important;
+}
+
+div#layout-content div.mylist_menu ul.state span {
+padding-left: 18px;
+text-indent: 0;
+background-repeat: no-repeat;
+background-position: left 3px;
+float: none;
+display: block;
+width: 8em;
+height: auto;
+}
+
+/* add file to mylist */
+div.mylist_all div.mylist_edit table {
+margin: 0 auto;
+border:1px solid #E1D9F5;
+}
+
+div.mylist_all div.mylist_edit table tr.action {
+background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+text-align: center;
+}
+
+div.mylist_all div.mylist_edit table tr.action td {
+padding: 0.7em 0;
+}
+
+/*mylistreport.css*/
+/*---------------------------------
+@MYLISTREPORT
+----------------------------------*/
+div.mylistreport_form {
+text-align: center;
+}
+
+div.mylistreport_form h4 {
+display: none;
+}
+
+div.mylistreport_results>* {
+margin: 1em 0;
+}
+
+div.mylistreport_results>*:first-child {
+margin-top: 0;
+}
+
+div.mylistreport_results table {
+width: 100%;
+}
+
+div.mylistreport_results table td[align="right"] {
+text-align: left;
+}
+
+/*mymessages.css*/
+/*---------------------------------
+@MYMESSAGES
+----------------------------------*/
+div.msg_all div.message div.message {
+margin: 0;
+}
+
+div.msg_all div.message caption {
+display: none;
+}
+
+div.msg_all .g_menu {
+margin: 0 1em 1em 0;
+}
+
+div.msg_all .g_menu li.new,
+div.msg_all .g_menu li.sent,
+div.msg_all .g_menu li.delete_all {
+background-color: #f5f7ff;
+}
+
+div.msg_all div.message.entity table,
+div.msg_all div.g_definitionlist.message table {
+width: 100%;
+border: 1px solid #ebe1ef;
+}
+
+div.message.entity tr.title td {
+font-weight: bold;
+}
+
+div.msg_all th {
+padding-right: 1em;
+vertical-align: top;
+}
+
+div.msg_all td {
+font-weight: normal;
+}
+
+div.message.entity tr.date {
+color: #994da9;
+}
+
+div.msg_all tr.action {
+background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+border:1px solid #E1D9F5;
+text-align: center;
+}
+
+div.msg_all tr.action td {
+padding: 1em;
+}
+
+div.message.entity tr.body th {
+visibility: hidden;
+}
+
+/*mynotifies.css*/
+/*---------------------------------
+@MYNOTIFIES
+----------------------------------*/
+div.mynotifies_all caption {
+display: none;
+}
+
+div.mynotifies_all div.list table,
+div.mynotifies_all div.action {
+width: 100%;
+}
+
+div.mynotifies_all div.select_all table,
+div.mynotifies_all div.action table {
+border: 0;
+}
+
+div.mynotifies_all div.select_all table tr,
+div.mynotifies_all div.action table tr {
+background: transparent;
+}
+
+div.mynotifies_all div.select_all table td,
+div.mynotifies_all div.action table td {
+border: 0;
+}
+
+div.mynotifies_all div.action {
+padding-top: 1em;
+background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+border: 1px solid #E1D9F5;
+}
+
+div.mynotifies_list td.type.group		{color: #2618b1;}
+
+div.mynotifies_list td.type.complete	{color: #179023;}
+
+div.mynotifies_list td.type.all			{font-weight: bold;}
+
+div.mynotifies_list td.type.new			{color: #fd0576;}
+
+/*myplace.css*/
+/*---------------------------------
+@MYPLACE
+----------------------------------*/
+div.myplace_all div.g_menu div {
+margin-bottom: 1em;
+}
+
+div.myplace_all div.g_menu div:last-child {
+margin-bottom: 0;
+}
+
+div.myplace_all div.stats,
+div.myplace_all div.latest {
+padding-right: 12em;
+clear: left;
+}
+
+div.myplace_all div.latest {
+padding-top: 1em;
+}
+
+div.myplace_all div.stats table {
+width: 100%;
+}
+
+div.myplace_all div.stats>div {
+float: left;
+width: 23.5%;
+padding-right: 2%;
+}
+
+div.myplace_all div.stats>div:last-child {
+padding-right: 0;
+}
+
+div.myplace_all caption,
+div.myplace_all div.latest h4 {
+text-align: left;
+color: #7762ed;
+font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+padding: 0 0.15em;
+}
+
+div.myplace_all div.latest ul {
+margin-bottom: 1em;
+}
+
+div.myplace_all div.latest ul li {
+border-top: 1px solid #ebe1ef;
+padding: 0.3em;
+position: relative;
+}
+
+div.myplace_all div.latest ul li.g_odd {
+background-color: #f5f7ff;
+}
+
+div.myplace_all div.latest li span {
+position: absolute;
+top: 0.3em;
+left: 0.3em;
+font-weight: bold;
+}
+
+div.myplace_all div.latest li span+a {
+margin-left: 3em;
+}
+
+div.myplace_all div.latest_files li span+a {
+margin-left: 10em;
+}
+
+div.myplace_all div.latest_votes span.mid,
+div.myplace_all div.latest_reviews span.mid {
+color: #a1be2e;
+}
+
+div.myplace_all div.latest_votes span.high,
+div.myplace_all div.latest_reviews span.high {
+color: #5dac3b;
+font-weight: bold;
+}
+
+div.myplace_all div.latest_votes span.low,
+div.myplace_all div.latest_reviews span.low {
+color: #e33e23;
+}
+
+/*myreviews.css*/
+/*---------------------------------
+@MYREVIEWS
+----------------------------------*/
+div.myreviews_all caption {
+display: none;
+}
+
+div.myreviews_all div table {
+width: 100%;
+margin: 1em 0;
+}
+
+div.myreviews_all div table:first-child {
+margin-top: 0;
+}
+
+/*myvotes.css*/
+/*---------------------------------
+@MYVOTES
+----------------------------------*/
+div.myvotes_all caption {
+display: none;
+}
+
+div.myvotes_all .g_filterlist {
+text-align: right;
+padding: 0.7em;
+}
+
+div.myvotes_all .g_filterlist a {
+border: 0 !important;
+}
+
+div.myvotes_all div div {
+padding: 1em;
+}
+
+div.myvotes_all div table {
+width: 100%;
+}
+
+/*mywishlist.css*/
+/*---------------------------------
+@MYWISHLIST
+----------------------------------*/
+div.mywishlist_all div table:first-child {
+width: 100%;
+}
+
+div.mywishlist_all caption {
+color: #7762ed;
+font: 1.5em "Century Gothic", "Lucida Grande", sans-serif;
+text-transform: capitalize;
+}
+
+div.mywishlist_all div table td {
+padding: 0.2em 0.3em;
+}
+
+div.mywishlist_all div table:last-child {
+border: 0;
+margin: 0 0 1em 0.5em;
+}
+
+div.mywishlist_all div table:last-child td {
+border: 0;
+}
+
+div.mywishlist_all form>table {
+border: 0;
+}
+
+div.mywishlist_all form>table:last-child {
+width: 100%;
+border:1px solid #E1D9F5;
+}
+
+div.mywishlist_all form>table:last-child tr {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+div.mywishlist_all form>table table {
+border: 0;
+}
+
+div.mywishlist_all form>table td {
+border: 0;
+}
+
+/*profile.css*/
+/*---------------------------------
+@PROFILE
+----------------------------------*/
+div.profile_all a[rel="anidb::wiki"] {
+border-bottom: none !important;
+}
+
+div.profile_all .g_section {
+padding-bottom: 1em;
+border-bottom: 1px solid #f3e7ff;
+}
+
+div.profile_all .g_section .g_info {
+margin: 1em 0;
+}
+
+div.profile_all .g_section table {
+margin: 0 auto;
+border:1px solid #E1D9F5;
+}
+
+div.profile_all .g_section caption {
+width: 100%;
+text-align: center;
+}
+
+div.profile_all td.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.7em;
+}
+
+div.profile_all div.profile_css {
+text-align: center;
+}
+
+div.profile_all div.profile_css div {
+width: 50%;
+margin: 0 auto;
+}
+
+div.profile_all img#style_thumbnail {
+border:1px solid #EBEDF5;
+background-color:#F9F9F9;
+overflow:hidden;
+text-align:center;
+width:220px;
+}
+
+#layout-content div.profile_css div.block div.image {
+height:auto;
+width:40%;
+}
+
+#layout-content div.profile_css div.block div.info {
+height:auto;
+width:60%;
+}
+
+#layout-content div.profile_css div.info dl dt {
+font-weight:bold;
+clear:left;
+float:left;
+text-align: left;
+}
+
+#layout-content div.profile_css div.info dl dd {
+margin-left:7em;
+width:20em;
+text-align: left;
+margin-bottom: 0.3em;
+}
+
+#layout-content div.profile_css input#style_prev,
+#layout-content div.profile_css input#style_next {
+border: 1px solid #f7edf1;
+border-bottom: 1px solid #d28cb2;
+color: #d28cb2;
+background: #fff9fb;
+padding: 0.2em 0.3em;
+font-size: 0.95em;
+cursor: pointer;
+}
+
+#layout-content div.profile_css input#style_prev:hover,
+#layout-content div.profile_css input#style_next:hover {
+background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
+color: #de4799;
+border: 1px solid #eec6dc;
+}
+
+#layout-content div.profile_css input#style_url {
+margin-top: 1em;
+width: 100%;
+}
+
+/*reviewerlist.css*/
+/*---------------------------------
+@REVIEWERLIST
+----------------------------------*/
+div.reviewerlist_all div table {
+width: 100%;
+}
+
+div.reviewerlist_all h4 {
+text-align: center;
+}
+
+div.reviewerlist_add table {
+border:1px solid #E1D9F5;
+}
+
+div.reviewerlist_add table td.action  {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+text-align: center;
+padding: 0.5em;
+}
+
+div.reviewerlist_all div.latest_reviews_list td.rating.review {
+color: #8f95ae;
+}
+
+div.reviewerlist_all div.latest_reviews_list td.rating.review span.vote {
+color: #a1be2e;
+}
+
+div.reviewerlist_all div.latest_reviews_list td.rating.review span.vote.high {
+color: #5dac3b;
+font-weight: bold;
+}
+
+div.reviewerlist_all div.latest_reviews_list td.rating.review span.vote.low {
+color: #e33e23;
+}
+
+/*userpage.css*/
+/*---------------------------------
+@USERPAGE
+----------------------------------*/
+div.userpage_all div.g_menu,
+div.userpage_all div.stats {
+margin-top: 0;
+}
+
+div.userpage_all div.g_menu div {
+margin-bottom: 1em;
+}
+
+div.userpage_all div.g_menu div:last-child {
+margin-bottom: 0;
+}
+
+div.userpage_all div.stats {
+width: 15em;
+float: left;
+clear: none;
+}
+
+div.userpage_all div.stats table {
+width: 100%;
+}
+
+div.userpage_all div.stats table td {
+text-align: right;
+}
+
+div.userpage_all div.stats>div {
+margin-bottom: 1em;
+}
+
+div.userpage_all div.userdetails,
+div.userpage_all div.userprefs {
+margin: 1em 11.6em 1em 16em;
+clear: none;
+}
+
+div.userpage_all div.userprefs h4 {
+text-align: center;
+}
+
+div.userpage_all div.favreviewers,
+div.userpage_all div.buddies {
+float: right;
+clear: right;
+margin-bottom: 1em;
+width: 10.6em;
+}
+
+div.userpage_all caption,
+div.userpage_all div.latest h4 {
+text-align: left;
+padding: 0 0.05em;
+}
+
+/* latest */
+div.userpage_all div.latest ul {
+margin-bottom: 1em;
+width: 100%;
+}
+
+div.userpage_all div.latest ul li {
+border-top: 1px solid #ebe1ef;
+padding: 0.3em;
+position: relative;
+}
+
+div.userpage_all div.latest ul li.g_odd {
+background-color: #f5f7ff;
+}
+
+div.userpage_all div.latest li span {
+position: absolute;
+top: 0.3em;
+left: 0.3em;
+font-weight: bold;
+}
+
+div.userpage_all div.latest div.latest_votes li a {
+margin-left: 3em;
+}
+
+/* stats */
+div.userpage_all div.charts {
+width: 710px;
+margin: 0 auto;
+}
+
+div.userpage_all div.charts>div {
+margin: 1em 5px 0;
+float: left;
+text-align: center;
+}
+
+div.userpage_all div.charts>div:first-child {
+padding-left: 45px;
+}
+
+div.userpage_all div.charts div.mylisthistory {
+width: 100%;
+clear: both;
+}
+
+/* edit */
+div.adduserdata_all table {
+border:1px solid #E1D9F5;
+}
+
+div.adduserdata_all table td.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.7em;
+}
+
+/* add to anidb */
+/*addep.css*/
+/*---------------------------------
+@ADDEP
+----------------------------------*/
+div.addep_all div.episode_add table {
+margin: 0 auto;
+}
+
+div.addep_all div.episode_add caption {
+width: 100%;
+}
+
+div.addep_all div.episode_add td.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.5em;
+}
+
+div.addep_all div.episode_add tr:last-child td {
+text-align: right;
+}
+
+/*addeptitle.css*/
+/*---------------------------------
+@ADDEPTITLE
+----------------------------------*/
+div.addeptitle_all div.addeptitle_list table,
+div.addeptitle_all div.addeptitle_form form {
+width: 100%;
+}
+
+div.addeptitle_all div.addeptitle_list tr.yes.g_odd td {
+background-color: #e9ffd8;
+}
+
+div.addeptitle_all div.addeptitle_list tr.yes td {
+background-color: #f0ffe3;
+}
+
+div.addeptitle_all div.addeptitle_list td.verified.yes {
+color: #4b9b39;
+font-weight: bold;
+}
+
+div.addeptitle_all div.addeptitle_form form p>span {
+display: block;
+margin: 1em 0;
+position: relative;
+}
+
+div.addeptitle_all div.addeptitle_form form label {
+position: absolute;
+left: 0;
+top: 0;
+}
+
+div.addeptitle_all div.addeptitle_form form label+*,
+div.addeptitle_all div.addeptitle_form form span.action input {
+margin-left: 10em;
+}
+
+div.addeptitle_all div.addeptitle_form form label+a {
+margin-left: 10.8em;
+}
+
+/*addfile.css*/
+/*---------------------------------
+@ADDFILE
+----------------------------------*/
+div.addfile_all div.addfile_add table {
+margin: 0 auto;
+}
+
+div.addfile_all div.addfile_add table table,
+div.addfile_all div.addfile_add table table td {
+border: 0;
+margin: 0;
+}
+
+div.addfile_all div.addfile_add td.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.5em;
+}
+
+/*addgroup.css*/
+/*---------------------------------
+@ADDGROUP
+----------------------------------*/
+div.addgroup_all div.group_add table {
+margin: 0 auto;
+}
+
+div.addgroup_all div.group_add td.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.5em;
+}
+
+/*ed2kdump.css*/
+/*---------------------------------
+@ED2KDUMP
+----------------------------------*/
+div.ed2kdump_options table {
+border:1px solid #E1D9F5;
+margin: 0 auto;
+}
+
+div.ed2kdump_options caption {
+margin: 1em auto 0;
+}
+
+div.ed2kdump_box h4 {
+color: #7762ed;
+font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+margin: 0 auto;
+}
+
+div.ed2kdump_box textarea {
+width: 99%;
+}
+
+div.ed2kdump_options tr.action {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+
+/*creqs.css*/
+/*---------------------------------
+@MYCREQS
+----------------------------------*/
+div.creq_all caption, div.creq_all h4 {
+color: #7762ed;
+font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+text-align: left;
+}
+
+div.creq_all div.creq_stats {
+width: 10em;
+position: absolute;
+right: 0;
+top: 0;
+}
+
+div.creq_all div.creq_stats table {
+width: 100%;
+}
+
+div.creq_all div.creq_list_closed,
+div.creq_all div.g_notebox,
+div.creq_all div.g_errorbox {
+margin: 1em 12em 1em 1em;
+}
+
+div.creq_all div.creq_list_closed>* {
+margin: 1em 0;
+}
+
+div.creq_all div.creq_list_closed table {
+width: 100%;
+margin-top: 0;
+}
+
+div.creq_all div.creq_list_closed .g_info {
+margin-top: 0;
+}
+
+div.creq_all div.states {
+clear: both;
+}
+
+div.creq_all .creq_hist_clear {
+background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+border: 1px solid #E1D9F5;
+margin: 0;
+}
+
+div.creq_all .new {color: #2618b1; font-weight: bold;}
+
+div.creq_all .open {color: #2618b1;}
+
+div.creq_all .hold {color: #966319;}
+
+div.creq_all .return {color: #5417b0;}
+
+div.creq_all .locked {color: #403e4d; font-weight: bold;}
+
+div.creq_all .granted {color: #179023;}
+
+div.creq_all .denied {color: #dd1645;}
+
+div.creq_all .revoked {color: #8d92a0;}
+
+div.creq_all .deleted {text-decoration: line-through;}
+
+div.creq_all .states dd {
+color:#3D3E6E;
+font-weight: normal;
+margin-bottom: 1em;
+margin-left: 1em;
+text-decoration: none;
+}
+
+div.creq_all .states dd:last-child {
+margin-bottom: 0;
+}
+
+div.creq_all th.new {color: #fff;}
+
+div.creq_all div.creq_entry_hist table {
+width: 100%;
+}
+
+/* other */
+/*login.css*/
+/*---------------------------------
+@LOGIN
+----------------------------------*/
+div.login_all form>b, div.login_all form>br {
+display: none;
+}
+
+div.login_all table {
+margin: 0 auto;
+border:1px solid #E1D9F5;
+}
+
+div.login_all .g_section caption {
+width: 100%;
+text-align: center;
+}
+
+div.login_all td[colspan="2"] {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.7em;
+}
+
+/*signup.css*/
+/*---------------------------------
+@SIGNUP
+----------------------------------*/
+div.signup_all hr {
+display: none;
+}
+
+div.signup_all table {
+margin: 0 auto;
+border:1px solid #E1D9F5;
+}
+
+div.signup_all .g_section caption {
+width: 100%;
+text-align: center;
+}
+
+div.signup_all td[colspan="2"] {
+text-align: center;
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.7em;
+}
+

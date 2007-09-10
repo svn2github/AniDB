@@ -1,0 +1,69 @@
+#statusBox { 
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+  font-family: Arial,Helvetica,sans-serif;
+  text-decoration: none;
+  color: #000000;
+  text-align: right;
+  background-color: #FFFFFF;
+  font-size: x-small;
+}
+
+*.jitem {
+  background-color: transparent;
+}
+
+*.jitem:hover {
+  background-color: rgb(253, 248, 240);
+  border: 1px solid black;
+  font-weight: bold;
+}
+
+*.jitem_current {
+  background-color: rgb(253, 248, 240);
+  font-weight: bold;
+}
+
+ul.pageJump {
+  float: left;
+  margin-left: 12px;
+  margin-top: -8px; 
+  padding-left: 2px;
+  font-weight: normal;
+  text-align: center;
+  font-size: x-small;
+  background-color: transparent;
+}
+
+
+ul.pageJump:before {
+content: "Jump to page: ";
+text-transform: none;
+font-weight: normal;
+}
+
+div#layout-content {
+clear: both;
+margin-top: 5px;
+margin-left: 5px;
+padding: 0px 5px 0px 0px;
+}
+
+div#layout-search {
+padding-top: 10px;
+}
+
+div#layout-content h1 div.icons { 
+	float: right;
+}
+div#layout-content h1 div.icons a.i_icon { 
+	width: 16px;
+	height: 16px;
+}
+*.i_animeplanet { width: 16px; height: 16px; background-image: url(icons/animeplanet.gif); }
+*.i_animenfo { width: 16px; height: 16px; background-image: url(icons/animenfo.gif); }
+*.i_ann { width: 16px; height: 16px; background-image: url(icons/ann.gif); }
+*.i_url, *.i_allcinema { width: 16px; height: 16px; background-image: url(icons/web.gif); }
+*.i_anidb { width: 16px; height: 16px; background-image: url(icons/anidb.gif); }
+*.i_backtomylist { width: 16px; height: 16px; background-image: url(icons/mylist.gif); }

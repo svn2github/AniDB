@@ -72,6 +72,13 @@
 					<myvote vote="<tmpl_var name=data_anime_group_myvote>" date="<tmpl_var name=data_anime_group_myvote_date>"></myvote></tmpl_if>
 					<epcnt><tmpl_var name=data_anime_group_epcnt></epcnt>
 					<sepcnt><tmpl_var name=data_anime_group_sepcnt></sepcnt>
+					<eprange><tmpl_var name=data_anime_group_eprange></eprange>
+					<aud><tmpl_loop name=data_anime_group_alangs_loop>
+						<lang><tmpl_var name=data_anime_group_alang_sname></lang></tmpl_loop>
+					</aud>
+					<sub><tmpl_loop name=data_anime_group_slangs_loop>
+						<lang><tmpl_var name=data_anime_group_slang_sname></lang></tmpl_loop>
+					</sub>
 				</group></tmpl_loop>
 			</groups>
 			<eps><tmpl_loop name=loop_ep>
@@ -81,13 +88,13 @@
 					<epno><tmpl_var name=data_ep_epno></epno>
 					<len><tmpl_var name=data_ep_length></len>
 					<date rel="<tmpl_var name=data_ep_aired_short>"><tmpl_var name=data_ep_date></date><tmpl_if expr="data_ep_myvote ne '-'">
-					<myvote vote="<tmpl_var name=data_ep_myvote>" date="<tmpl_var name=data_ep_myvote_date>"></myvote></tmpl_if>
+					<myvote date="<tmpl_var name=data_ep_myvote_date>"><tmpl_var name=data_ep_myvote></myvote></tmpl_if>
 					<titles><tmpl_loop name=data_ep_titles>
 						<title lang="<tmpl_var name=data_ep_title_langsname>"><![CDATA[<tmpl_var name=data_ep_title_name>]]></title></tmpl_loop>
 					</titles>
 					<rating votes="<tmpl_var name=data_ep_votes>"><tmpl_var name=data_ep_rating></rating>
 					<files><tmpl_loop name=loop_file>
-						<file id="<tmpl_var name=data_file_id>" type=""><tmpl_if expr="data_file_state != 0">
+						<file id="<tmpl_var name=data_file_id>" type="<tmpl_var name=data_file_typename>"><tmpl_if expr="data_file_state != 0">
 							<flags><tmpl_var name=data_file_state></flags></tmpl_if>
 							<mylist>
 								<date viewed="<tmpl_var name=data_file_viewdate>"><tmpl_var name=data_file_ldate></date><tmpl_if expr="data_file_storage ne ''">
@@ -114,7 +121,7 @@
 									<res><tmpl_var name=data_file_res_name></res>
 									<br><tmpl_var name=data_file_vbitrate></br>
 									<codec><tmpl_var name=data_file_vcodec_name></codec>
-									<ar><tmpl_var name=data_file_ar></ar>
+									<ar><tmpl_var name=data_file_ar_name></ar>
 									<fps><tmpl_var name=data_file_fps></fps><tmpl_if expr="data_file_vflags != 0">
 									<flags><tmpl_var name=data_file_vflags></flags></tmpl_if>
 								</stream>
@@ -123,24 +130,26 @@
 								<stream>
 									<br><tmpl_var name=data_file_abitrate></br>
 									<codec><tmpl_var name=data_file_acodec_name></codec>
-									<chan><tmpl_var name=data_file_chantype></chan>
+									<chan><tmpl_var name=data_file_chantype_name></chan>
+									<type><tmpl_var name=data_file_atype_name></type>
 									<lang><tmpl_var name=data_file_lang_sname></lang>
 								</stream></tmpl_if><tmpl_if expr="data_file_audcnt > 1">
 								<stream>
 									<br><tmpl_var name=data_file_abitrate2></br>
 									<codec><tmpl_var name=data_file_acodec_name2></codec>
-									<chan><tmpl_var name=data_file_chantype2></chan>
+									<chan><tmpl_var name=data_file_chantype_name2></chan>
+									<type><tmpl_var name=data_file_atype_name2></type>
 									<lang><tmpl_var name=data_file_lang_sname2></lang>
 								</stream></tmpl_if>
 							</aud></tmpl_if><tmpl_if expr="data_file_subcnt > 0">
 							<sub cnt="<tmpl_var name=data_file_subcnt>"><tmpl_if expr="data_file_subcnt > 0">
 								<stream>
-									<type><tmpl_var name=data_file_stype></type><tmpl_if expr="data_file_sflags != 0">
+									<type><tmpl_var name=data_file_stypename></type><tmpl_if expr="data_file_sflags != 0">
 									<flags><tmpl_var name=data_file_sflags></flags></tmpl_if>
 									<lang><tmpl_var name=data_file_sub_sname></lang>
 								</stream></tmpl_if><tmpl_if expr="data_file_subcnt > 1">
 								<stream>
-									<type><tmpl_var name=data_file_stype2></type><tmpl_if expr="data_file_sflags2 != 0">
+									<type><tmpl_var name=data_file_stypename2></type><tmpl_if expr="data_file_sflags2 != 0">
 									<flags><tmpl_var name=data_file_sflags2></flags></tmpl_if>
 									<lang><tmpl_var name=data_file_sub_sname2></lang>
 								</stream></tmpl_if>

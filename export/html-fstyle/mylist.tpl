@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root anidb="<tmpl_var name=global_animedburl>">
 	<custom uid="<tmpl_var name=global_user_id>">
-		<userinfo>
-			<name><tmpl_var name=global_user></name>
-			<animes added="<tmpl_var name=global_userstat_animeadded>" user="<tmpl_var name=global_animecount>" />
-			<eps added="<tmpl_var name=global_userstat_epsadded>" dbviewedp="<tmpl_var name=global_userstat_totalviewedp>" dbownedp="<tmpl_var name=global_userstat_totalownedp>" viewedp="<tmpl_var name=global_userstat_ownviewedp>" viewed="<tmpl_var name=global_userstat_viewedepcnt>" user="<tmpl_var name=global_epcount>" />
-			<files added="<tmpl_var name=global_userstat_filesadded>" lamecnt="<tmpl_var name=global_userstat_lamefiles>" user="<tmpl_var name=global_filecount>" />
-			<groups added="<tmpl_var name=global_userstat_groupsadded>" />
-			<size longn="<tmpl_var name=global_bytecount>" shortn="<tmpl_var name=global_bytecount_h>" />
-			<stats votes="<tmpl_var name=global_userstat_reviews>" reviews="<tmpl_var name=global_userstat_votes>" />
-		</userinfo>
+	<userinfo>
+		<name><tmpl_var name=global_user></name>
+		<animes added="<tmpl_var name=global_userstat_animeadded>" user="<tmpl_var name=global_animecount>" />
+		<eps added="<tmpl_var name=global_userstat_epsadded>" dbviewedp="<tmpl_var name=global_userstat_totalviewedp>" dbownedp="<tmpl_var name=global_userstat_totalownedp>" viewedp="<tmpl_var name=global_userstat_ownviewedp>" viewed="<tmpl_var name=global_userstat_viewedepcnt>" user="<tmpl_var name=global_epcount>" />
+		<files added="<tmpl_var name=global_userstat_filesadded>" lamecnt="<tmpl_var name=global_userstat_lamefiles>" user="<tmpl_var name=global_filecount>" />
+		<groups added="<tmpl_var name=global_userstat_groupsadded>" />
+		<size longn="<tmpl_var name=global_bytecount>" shortn="<tmpl_var name=global_bytecount_h>" />
+		<stats votes="<tmpl_var name=global_userstat_reviews>" reviews="<tmpl_var name=global_userstat_votes>" />
+	</userinfo>
 	</custom>
+	<cats><tmpl_loop name=global_genren_loop>
+		<cat id="<tmpl_var name=global_genren_id>" pid="<tmpl_var name=global_genren_parentid>" restricted="<tmpl_var name=global_genren_ishentai>"><tmpl_var name=global_genren_name></cat></tmpl_loop>
+	</cats>
 	<animes><tmpl_loop name=loop_anime>
 		<anime id="<tmpl_var name=data_anime_id>" type="<tmpl_var name=data_anime_type_name>" year="<tmpl_var name=data_anime_year>">
 			<status complete="<tmpl_var name=status_anime_iscomplete>" watched="<tmpl_var name=status_anime_iswatched>" hasawards="<tmpl_var name=status_anime_hasawards>" restricted="<tmpl_var name=status_anime_isrestricted>" />

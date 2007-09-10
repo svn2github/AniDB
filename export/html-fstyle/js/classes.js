@@ -299,6 +299,9 @@ function CEpisodeEntry(node) {
   this.typeFull = 'Normal Episode';
   this.typeChar = '';
   this.vote = -1; // set later
+	this.voteDate;
+	this.voteCnt = 0;
+	this.rating = 0;
   this.isRecap = false;
   this.animeId = -1;
   this.hiddenFiles = 0;
@@ -324,6 +327,8 @@ function CEpisodeEntry(node) {
       case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
       case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
       case 'other': this.other = nodeData(sNode); break;
+			case 'rating': this.rating = nodeData(sNode); this.voteCnt = sNode.getAttribute('votes'); break;
+			case 'myvote': this.vote = nodeData(sNode); this.voteDate = convertTime(sNode.getAttribute('date')); break;
       case 'titles':
         for (var k = 0; k < sNode.childNodes.length; k++) {
           var tNode = sNode.childNodes.item(k);
@@ -331,6 +336,7 @@ function CEpisodeEntry(node) {
           this.titles[tNode.getAttribute('lang')] = nodeData(tNode);
         }
         break;
+			case 'files': break;
       default: showAlert('episodeEntry for gid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
     }
   }
@@ -394,11 +400,13 @@ function CFileEntry(node) {
   this.relatedFiles = new Array(); // if (this.length) this is a pseudoFile
   this.relatedPS = new Array(); // used to store related pseudoFiles ids
   this.relatedGroups = new Array(); // used to hold related group information
-  //this.relatedEpisodes = new Array(); // used only if external file
   // defaults
   this.flags = 0;
   this.visible = true; // should the file be displayed (default: yes)
   this.crc32 = '';
+	this.md5 = '';
+	this.sha1 = '';
+	this.tth = '';
   this.crcStatus = '';
   this.isDeprecated = false;
   this.ed2k = '';
@@ -409,8 +417,6 @@ function CFileEntry(node) {
   this.length = 0;
   this.fileType = '';
   this.groupId = 0;
-  //this.groupName = ''; // only for pseudo files
-  //this.groupShortName = '';  // only for pseudo files
   this.version = 'v1';
   this.isCensored = 0;
   this.isUncensored = 0;
@@ -436,6 +442,9 @@ function CFileEntry(node) {
     switch (sNode1.nodeName) {
       case 'size': this.size = Number(nodeData(sNode1)); break;
       case 'ed2k': this.ed2k = nodeData(sNode1); break;
+			case 'md5': this.md5 = nodeData(sNode1); break;
+			case 'sha1': this.sha1 = nodeData(sNode1); break;
+			case 'tth': this.tth = nodeData(sNode1); break;
       case 'crc': this.crc32 = nodeData(sNode1); break;
       case 'len': this.length = Number(nodeData(sNode1)); break;
       case 'ftype': this.fileType = nodeData(sNode1); break;
@@ -445,6 +454,7 @@ function CFileEntry(node) {
         this.date = convertTime(nodeData(sNode1));
         if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
         this.relDate = convertTime(sNode1.getAttribute('rel'));
+				this.upDate = convertTime(sNode1.getAttribute('update'));
         break;
 			case 'mylist':
         for (var j = 0; j < sNode1.childNodes.length; j++) {
