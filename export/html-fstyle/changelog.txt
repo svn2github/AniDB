@@ -1,5 +1,5 @@
 Template: html-fstyle - ChangeLog
-Version: 0.9 - 05.09.2007
+Version: 0.9 - 11.09.2007
 (C) 2003-2007 by fahrenheit
 
 Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
@@ -7,9 +7,11 @@ SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/expo
 
 ----------------------------------------------------------------------------------------------
 
+0.9.2 - 11.09.2007
+	- Detailed File and Episode pages done.
+	- updated the css's to those available at the date
 0.9.1 - 09.09.2007
 	- Completed changes into the SDK, information available is now correct.
-
 0.9 - 05.09.2007
 	- Added files to Anime XML (stable, but not complete, i think)
 	- Anime description now gets it's html string parsed to DOM (thank innerHTML)

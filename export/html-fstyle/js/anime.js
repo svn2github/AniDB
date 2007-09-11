@@ -46,11 +46,10 @@ function renderPage() {
 	var elems = document.getElementsByTagName('ANIME.TITLE.MAIN');
 	while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(anime.title),elems[0]);
 	elems = document.getElementsByTagName('ANIME.ALINK');
-	var a = document.createElement('A');
-	a.className = 'short_link';
-	a.href = 'http://anidb.info/a'+anime.id;
-	a.appendChild(document.createTextNode('a'+anime.id));
-	while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
+	while (elems.length) {
+		var a = createLink(null, anime.title, 'http://anidb.net/a'+anime.Id, null, null, null, 'short_link');
+		elems[0].parentNode.replaceChild(a,elems[0]);
+	}
 	elems = document.getElementsByTagName('ANIME.TYPE');
 	while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(anime.type),elems[0]);
 	elems = document.getElementsByTagName('ANIME.RELEASE');
@@ -235,8 +234,8 @@ function renderPage() {
 	while (elems.length) {
 		var div = document.createElement('DIV');
 		div.className = 'icons';
-		createIcon(div, 'mylist', 'mylist.html', null, 'back to mylist', 'i_backtomylist');
-		createIcon(div, 'anidb', 'http://anidb.info/a'+anime.id, null, 'link to anime page at anidb', 'i_anidb');
+		createIcon(div, 'mylist', 'mylist.html?show=mylist', null, 'back to mylist', 'i_backtomylist');
+		createIcon(div, 'anidb', 'http://anidb.net/a'+anime.id, null, 'link to anime page at anidb', 'i_anidb');
 		if (anime.resources['url']) createIcon(div, 'url', anime.resources['url']['link'], null, 'link to website', 'i_url');
 		if (anime.resources['ann']) createIcon(div, 'ann', anime.resources['ann']['link'], null, 'link to anime page at news network site', 'i_ann');
 		if (anime.resources['animenfo']) createIcon(div, 'anfo', anime.resources['animenfo']['link'], null, 'link to anime page at animenfo', 'i_animenfo');
@@ -527,7 +526,7 @@ function renderEpisodeList() {
 		}
 		elems = row.getElementsByTagName('ANIME.EP.EPNO');
 		while (elems.length) {
-			var a = createLink(null,episode.epno,'episode.html?show=ep&eid='+episode.id,null,null,null,null);
+			var a = createLink(null,episode.epno,'episode.html?show=ep&eid='+episode.id+'&aid='+anime.id,null,null,null,null);
 			elems[0].parentNode.replaceChild(a,elems[0]);
 		}
 		elems = row.getElementsByTagName('ANIME.EP.TITLE');
@@ -559,8 +558,8 @@ function renderEpisodeList() {
 		elems = row.getElementsByTagName('ANIME.EP.AIRDATE');
 		while (elems.length) {
 			var text,tooltip;
-			if (episode.relDate) { text = cTimeDate(episode.relDate); tooltip = 'added on '+episode.addDate; }
-			else text = cTimeDate(episode.addDate);
+			if (episode.dates['rel']) { text = cTimeDate(episode.dates['rel']); tooltip = 'added on '+episode.dates['add']; }
+			else text = cTimeDate(episode.dates['add']);
 			var a = createLink(null,text,null,null,null,(tooltip ? tooltip : null),null);
 			elems[0].parentNode.replaceChild(a,elems[0]);
 		}
@@ -674,10 +673,13 @@ function createFileIcons(file,icons) {
 	if ((mylistEntry.other) && (mylistEntry.other != '') && (mylistEntry.other != undefined)) createIcon(icons, 'mylist comment ', null, null, 'mylist comment: '+mylistEntry.other, 'i_comment');
 }
 
-function createFileList(eid) { 
-	var fileTable = filelistTableRow.rows[0].cloneNode(true);
-	fileTable.id = eid+'_filelist';
-	var body = fileTable.getElementsByTagName('TBODY')[0];
+function createFileList(eid,nbody) {
+	var fileTable, body;
+	if (!nbody) {
+		fileTable = filelistTableRow.rows[0].cloneNode(true);
+		fileTable.id = eid+'_filelist';
+	  body = fileTable.getElementsByTagName('TBODY')[0];
+	} else body = nbody;
 	var episode = episodes[eid.substr(4,eid.length)];
 	if (!episode) return;
 	for (var i = 0; i < episode.files.length; i++) {
@@ -688,7 +690,7 @@ function createFileList(eid) {
 		// work
 		var elems = row.getElementsByTagName('ANIME.FILE.ID');
 		while (elems.length) {
-			var a = createLink(null, file.id, 'file.html?show=fid&id='+file.id, null, null, null, null);
+			var a = createLink(null, file.id, 'file.html?show=file&fid='+file.id+'&aid='+file.animeId+'&eid='+file.episodeId, null, null, null, null);
 			elems[0].parentNode.replaceChild(a,elems[0]);
 		}
 		elems = row.getElementsByTagName('ANIME.FILE.SIZE');
@@ -730,14 +732,14 @@ function createFileList(eid) {
 		body.appendChild(row);
 	}
 	var epRow = document.getElementById(eid);
-	epRow.parentNode.insertBefore(fileTable,epRow.nextSibling);
+	if (epRow) epRow.parentNode.insertBefore(fileTable,epRow.nextSibling);
 }
 
 function expandFilesByEp() {
 	var eid=this.parentNode.parentNode.id;
 	/*alert('expanding: '+eid+
 				'\nfileTablePresent: '+document.getElementById(eid+'_filelist'));*/
-	if (!document.getElementById(eid+'_filelist')) createFileList(eid);
+	if (!document.getElementById(eid+'_filelist')) createFileList(eid,null);
 	else document.getElementById(eid+'_filelist').style.display = '';
 	this.onclick = foldFilesByEp;
 	var img = this.getElementsByTagName('IMG')[0];

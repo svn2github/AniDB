@@ -166,7 +166,8 @@ padding-right: 0.3em;
 {
 border: none;
 }*/
-#layout-content div table td.title div
+#layout-content div.anime_all div.info tr.official td.value div.icons,
+#layout-content div table td.title div.icons
 {
 float: right;
 }
@@ -174,11 +175,10 @@ float: right;
 #layout-content *.icons *.i_icon,
 #layout-content div.group_released tr td.languages span.i_icon,
 #layout-content div.anime_all div.groups td.languages span.i_icon,
-#layout-content div.anime_all div.episodes td.action .i_icon,
-#layout-content div.latest_completed td.icon span.i_icon
+#layout-content div.anime_all div.episodes td.action .i_icon
 {
 float: left;
-padding: 0px 2px 0px 2px;
+padding: 0px 1px 0px 1px;
 }
 
 #layout-content td.icons.quality *.i_icon
@@ -202,6 +202,28 @@ display: none;
 width: 98%;
 }
 
+/* Tooltip support */
+#obj-tooltip {
+position: absolute;
+left: 0px;
+width: 300px;
+border: 1px solid black;
+padding: 2px;
+background-color: lightyellow;
+visibility: hidden;
+z-index: 100;
+font-size: x-small;
+}
+
+#obj-pointer {
+position: absolute;
+left: -300px;
+width: 15px;
+height: 13px;
+z-index: 101;
+visibility: hidden;
+}
+
 /*../common/layout/global/all.css*/
 /*block.css*/
 #layout-content div.block
@@ -218,7 +240,7 @@ vertical-align: middle;
 padding-right: 1em;
 }
 
-#layout-content div.block + p.desc
+#layout-content div.block + .desc
 {
 margin-top: 1em;
 margin-left: 2em;
@@ -384,7 +406,7 @@ margin: 0;
 text-align: left;
 }
 
-#layout-content div.g_timedentry p.body
+#layout-content div.g_timedentry .body
 {
 padding: 0.2em;
 text-align: left;
@@ -627,24 +649,12 @@ max-width: 20.4em;
 }
 
 /*genren.css*/
-#layout-content div.genren_all
+#layout-content .categories div.controls
 {
 text-align: center;
 }
 
-#layout-content div.genren_all div.categories
-{
-width: 90%;
-margin: 1em auto 1em auto;
-text-align: left;
-}
-
-#layout-content div.genren_all div.controls
-{
-text-align: center;
-}
-
-#layout-content div.genren_all a.i_icon
+#layout-content ul#cattree a.i_icon
 {
 position: relative;
 right: 18px;
@@ -652,19 +662,19 @@ float: left;
 margin-right: -15px;
 }
 
-#layout-content div.genren_all li
+#layout-content ul#cattree li
 {
 list-style: none outside;
 line-height: 14px;
 margin-left: 2em;
 }
 
-#layout-content div.genren_all li span
+#layout-content ul#cattree li span
 {
 display: block;
 }
 
-#layout-content div.genren_all li.collapsed ul
+#layout-content ul#cattree li.collapsed ul
 {
 display: none;
 }
@@ -888,16 +898,36 @@ text-align: center;
 
 #layout-content div.userpage_all div.latest div
 {
-margin: 0 25% 0 25%;
+display: table;
+margin-left: auto;
+margin-right: auto;
 }
 
 /*profile.css*/
-#layout-content div.profile_css div.info dl dt
+#layout-content div.profile_all > div
+{
+display: table;
+margin-left: auto;
+margin-right: auto;
+}
+
+#layout-content div.profile_all > div > div,
+#layout-content div.profile_all > div form > div
+{
+display: table-cell;
+}
+
+#layout-content div.profile_all .g_info
+{
+text-align: left;
+}
+
+#layout-content div.profile_all div.css_style div.info dl dt
 {
 font-weight: bold;
 }
 
-#layout-content div.profile_css div.info dl dd
+#layout-content div.profile_all div.css_style div.info dl dd
 {
 margin-left: 7em;
 width: 20em;
@@ -920,6 +950,11 @@ overflow-y: hidden;
 #image_viewer
 {
 margin: 50px;
+}
+
+/*wishlist.css*/
+*.releaseinfotooltip div.icons {
+float: left;
 }
 
 /*../common/style/icons/default.css*/
@@ -1425,13 +1460,15 @@ background-image: url(../icons/sort.gif);
 }
 
 *.i_group_vote,
-*.i_ep_vote
+*.i_ep_vote,
+*.i_vote
 {
 background-image: url(../icons/anidb_vote.gif);
 }
 
 *.i_group_revote,
-*.i_ep_revote
+*.i_ep_revote,
+*.i_revote
 {
 background-image: url(../icons/anidb_revote.gif);
 }
@@ -1439,6 +1476,26 @@ background-image: url(../icons/anidb_revote.gif);
 span.i_video
 {
 background-image: url(../icons/icon/anidb_video.gif);
+}
+
+span.i_video.avc
+{
+background-image: url(../icons/icon/anidb_video_avc.gif);
+}
+
+span.i_ext
+{
+background-image: url(../icons/icon/anidb_other.gif);
+}
+
+span.i_ext.mkv
+{
+background-image: url(../icons/icon/anidb_ext_mkv.gif);
+}
+
+span.i_ext.ogm
+{
+background-image: url(../icons/icon/anidb_ext_ogm.gif);
 }
 
 span.i_videostream_unknown,
@@ -1648,6 +1705,17 @@ background-image: url(../icons/formating/view_text.gif);
 background-image: url(../icons/formating/user.gif);
 }
 
+/* Sorting Icons */
+*.s_reverse {
+background: transparent url(../icons/up1.gif) no-repeat center right;
+padding-right: 10px;
+}
+
+*.s_forward {
+background: transparent url(../icons/down1.gif) no-repeat center right;
+padding-right: 10px;
+}
+
 /*../common/style/icons/flags.css*/
 *.i_audio_ar
 {
@@ -1807,6 +1875,16 @@ background-image: url(../icons/flags/anidb_audio_indonesian.gif);
 *.i_sub_id
 {
 background-image: url(../icons/flags/anidb_sub_indonesian.gif);
+}
+
+*.i_audio_is
+{
+background-image: url(../icons/flags/anidb_audio_icelandic.gif);
+}
+
+*.i_sub_is
+{
+background-image: url(../icons/flags/anidb_sub_icelandic.gif);
 }
 
 *.i_audio_it
@@ -2211,13 +2289,26 @@ background-color: orange;
 color: darkgreen;
 }
 
+#layout-content table ul li.g_odd,
+#layout-content table table td.g_odd,
 #layout-content ul.g_actionlist li.g_odd
 {
 background-color: inherit;
 }
 
+#layout-content .name span.main,
+#layout-content .name span.match
+{
+color: gray;
+}
+
+input.g_error
+{
+background-color: #FFDDDD;
+}
+
 /*../common/style/text/default.css*/
-html, th
+html, th, div
 {
 font-weight: normal;
 font-size: 10px;
@@ -2235,12 +2326,12 @@ white-space: nowrap;
 }
 
 /** ALIGNMENT **/
-td.id, td.count, td.number, td.size, td.epno
+td.id, td.count, td.number, td.size, td.epno, td.duration
 {
 text-align: right;
 }
 
-td, ul, p.desc,
+td, ul, .desc, .body,
 th.field, td.value, td.name, td.quality, td.title, td.name,
 #layout-content div.main_all div.news h4
 {
@@ -2296,7 +2387,9 @@ text-overflow: ellipsis;
 white-space:nowrap;*/
 }
 
-.tiny, small
+.tiny, small,
+#layout-content .name span.main,
+#layout-content .name span.match
 {
 font-size: 95%;
 }
@@ -2737,7 +2830,7 @@ border: none;
 padding: 1px;
 }
 
-#layout-content .g_block .g_definitionlist > table
+#layout-content .block .g_definitionlist > table
 {
 border: none;
 margin: 0;
@@ -2759,6 +2852,11 @@ border-bottom: black 2px solid;
 #layout-content div.anime_all div.episodes tr.newtype td
 {
 border-top: black 2px solid;
+}
+
+#layout-content div.profile_all div.g_section
+{
+border: 3px solid #969aa6;
 }
 
 /*color.css*/

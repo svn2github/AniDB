@@ -1,0 +1,217 @@
+<!DOCtype html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:anidb="http://anidb.info/markup" xml:lang="en" lang="en">
+	<head>
+		<title>::AniDB.net:: MyList Export ::</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="icon" href="favicon.ico" />
+		<link rel="alternate" type="application/rss+xml" title="AniDB RDF" href="http://anidb.info/anidb.rdf" />
+		<link rel="stylesheet" href="css/zakura/zakura.css" type="text/css" title="zakura Style" />
+		<link rel="alternate stylesheet" href="css/anidbstyle/anidbstyle.css" type="text/css" title="Classic" />
+    <link rel="stylesheet" href="css/fstyle.css" type="text/css" />
+    <script src="js/preferences.js" type="text/javascript" title="Preferences"></script>
+	  <script src="js/mapvalues.js" type="text/javascript" title="Map Functions"></script>
+    <script src="js/utils.js" type="text/javascript" title="Utils"></script>
+    <script src="js/classes.js" type="text/javascript" title="Object Classes"></script>
+	  <script src="js/parser.js" type="text/javascript" title="XML Parser"></script>
+	  <script src="js/ajax.js" type="text/javascript" title="XMLHTTPRequest implementation"></script>
+	  <script src="js/shared.js" type="text/javascript" title="shared extension"></script>
+		<script src="js/file.js" type="text/javascript" title="File extension"></script>
+	</head>
+  <body>
+    <div id="statusBox"></div>
+		<div id="layout-content">
+			<h1><file.resources></file.resources>File: <anime.title.main></anime.title.main> - <episode.number></episode.number></h1>
+			<div class="g_content file_all">
+				<div class="g_section file_info">
+          <div class="block">
+            <div class="g_definitionlist data">
+              <table>
+								<caption>Info</caption>
+                <tbody>
+									<tr>
+										<th class="relation">Relation</th>
+										<td class="relation"><anime.title.main></anime.title.main> - <episode.title.main></episode.title.main> (<file.alink></file.alink>)</td>
+									</tr>
+									<tr>
+										<th class="group">Released by</th>
+										<td class="group"><file.group.name></file.group.name> (<file.group.release></file.group.release>) <file.date></file.date></td>
+									</tr>
+									<tr>
+										<th class="censored">Censored</th>
+										<td class="censored"><file.censored></file.censored></td>
+									</tr>
+									<tr>
+										<th class="version">Revision</th>
+										<td class="version"><file.version></file.version></td>
+									</tr>
+									<tr>
+										<th class="quality">Source/Quality</th>
+										<td class="quality"><file.source></file.source> / <file.quality></file.quality></td>
+									</tr>
+									<tr>
+										<th class="desc">Description</th>
+										<td class="desc"><file.other></file.other></td>
+									</tr>
+									<tr>
+										<th class="type">Type</th>
+										<td class="type"><file.type></file.type> file, <file.extension></file.extension></td>
+									</tr>
+									<tr>
+										<th class="size">Size/Duration</th>
+										<td class="size"><file.size></file.size> / <file.duration></file.duration></td>
+									</tr>
+									<tr>
+										<th class="crc">CRC/Status</th>
+										<td class="crc"><file.crc.hash></file.crc.hash> / <file.crc.status></file.crc.status></td>
+									</tr>
+									<tr>
+										<th class="ed2k">ED2K Hash</th>
+										<td class="ed2k"><file.ed2k.hash.link></file.ed2k.hash.link></td>
+									</tr>
+									<tr>
+										<th class="md5">MD5 Hash</th>
+										<td class="md5"><file.md5.hash></file.md5.hash></td>
+									</tr>
+									<tr>
+										<th class="sha1">SHA1 Hash</th>
+										<td class="sha1"><file.sha1.hash></file.sha1.hash></td>
+									</tr>
+									<tr>
+										<th class="tth">TTH Hash</th>
+										<td class="tth"><file.tth.hash></file.tth.hash></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="g_section file_tracks">
+					<div class="track_vid">
+						<h4>Video</h4>
+						<table>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Pixel Res.</th>
+									<th>AR</th>
+									<th>FPS</th>
+									<th>Codec</th>
+									<th>Bitrate</th>
+									<th>Flags</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="g_odd">
+									<td class="id"><file.vid.stream.num></file.vid.stream.num></td>
+									<td class="size resolution"><file.vid.stream.resolution></file.vid.stream.resolution></td>
+									<td class="type ar"><file.vid.stream.ar></file.vid.stream.ar></td>
+									<td class="size fps"><file.vid.stream.fps></file.vid.stream.fps></td>
+									<td class="text codec"><file.vid.stream.codec></file.vid.stream.codec></td>
+									<td class="size bitrate"><file.vid.stream.bitrate></file.vid.stream.bitrate></td>
+									<td class="text flags"><file.vid.stream.flags></file.vid.stream.flags></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="track_aud">
+						<h4>Audio</h4>
+						<table>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Type</th>
+									<th colspan="2">Language</th>
+									<th>Codec</th>
+									<th>Bitrate</th>
+									<th>Channels</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="g_odd">
+									<td class="id"><file.aud.stream.num></file.aud.stream.num></td>
+									<td class="type"><file.aud.stream.type></file.aud.stream.type></td>
+									<td class="icon language"><file.aud.stream.language.icon></file.aud.stream.language.icon></td>
+									<td class="text language"><file.aud.stream.language.name></file.aud.stream.language.name></td>
+									<td class="text codec"><file.aud.stream.codec></file.aud.stream.codec></td>
+									<td class="size bitrate"><file.aud.stream.bitrate></file.aud.stream.bitrate></td>
+									<td class="type channels"><file.aud.stream.channels></file.aud.stream.channels></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="track_sub">
+						<h4>Subtitles</h4>
+						<table>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th colspan="2">Language</th>
+									<th>Type</th>
+									<th>Flags</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="g_odd">
+									<td class="id"><file.sub.stream.num></file.sub.stream.num></td>
+									<td class="icon language"><file.sub.stream.language.icon></file.sub.stream.language.icon></td>
+									<td class="text language"><file.sub.stream.language.name></file.sub.stream.language.name></td>
+									<td class="type"><file.sub.stream.type></file.sub.stream.type></td>
+									<td class="text flags"><file.sub.stream.flags></file.sub.stream.flags></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="g_section file_relations">
+					<div class="rel_files">
+						<h4>Related Files</h4>
+						<table>
+							<thead>
+								<tr>
+									<th>Dir</th>
+									<th>FID</th>
+									<th>Type</th>
+									<th>Relation</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="g_odd">
+									<td class="direction"><file.rel.files.dir></file.rel.files.dir></td>
+									<td class="id"><file.rel.files.otherfid></file.rel.files.otherfid></td>
+									<td class="type other"><file.rel.files.othertype></file.rel.files.othertype></td>
+									<td class="type this"><file.rel.files.type></file.rel.files.type></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="rel_eps">
+						<h4>Related Episodes</h4>
+						<table>
+							<thead>
+								<tr>
+									<th>EID</th>
+									<th>Epno</th>
+									<th>Start</th>
+									<th>End</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="g_odd">
+									<td class="id"><file.rel.episodes.eidlink></file.rel.episodes.eidlink></td>
+									<td class="epno"><file.rel.episodes.epno></file.rel.episodes.epno></td>
+									<td class="percentage start"><file.rel.episodes.start></file.rel.episodes.start></td>
+									<td class="percentage end"><file.rel.episodes.end></file.rel.episodes.end></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="g_end"></div>
+		</div>
+    <div id="layout-footer">
+      <p>V <themeversion></themeversion> <themesource></themesource> <themedate></themedate>, (C) 2007 by fahrenheit/AniDB, all rights reserved</p>
+    </div>
+	</body>
+</html>

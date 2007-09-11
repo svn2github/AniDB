@@ -2,6 +2,9 @@
 AniDB CSS - Zakura
 www.zakness.com
 ----------------------------------*/
+/* for local testing */
+/*@import "anidb-default.css";*/
+/*@import "anidb-flags.css";*/
 /* icons */
 /*../common/style/icons/default.css*/
 a.i_icon:hover, a.i_inline:hover
@@ -506,13 +509,15 @@ background-image: url(../icons/sort.gif);
 }
 
 *.i_group_vote,
-*.i_ep_vote
+*.i_ep_vote,
+*.i_vote
 {
 background-image: url(../icons/anidb_vote.gif);
 }
 
 *.i_group_revote,
-*.i_ep_revote
+*.i_ep_revote,
+*.i_revote
 {
 background-image: url(../icons/anidb_revote.gif);
 }
@@ -520,6 +525,26 @@ background-image: url(../icons/anidb_revote.gif);
 span.i_video
 {
 background-image: url(../icons/icon/anidb_video.gif);
+}
+
+span.i_video.avc
+{
+background-image: url(../icons/icon/anidb_video_avc.gif);
+}
+
+span.i_ext
+{
+background-image: url(../icons/icon/anidb_other.gif);
+}
+
+span.i_ext.mkv
+{
+background-image: url(../icons/icon/anidb_ext_mkv.gif);
+}
+
+span.i_ext.ogm
+{
+background-image: url(../icons/icon/anidb_ext_ogm.gif);
 }
 
 span.i_videostream_unknown,
@@ -729,6 +754,17 @@ background-image: url(../icons/formating/view_text.gif);
 background-image: url(../icons/formating/user.gif);
 }
 
+/* Sorting Icons */
+*.s_reverse {
+background: transparent url(../icons/up1.gif) no-repeat center right;
+padding-right: 10px;
+}
+
+*.s_forward {
+background: transparent url(../icons/down1.gif) no-repeat center right;
+padding-right: 10px;
+}
+
 /*../common/style/icons/flags.css*/
 *.i_audio_ar
 {
@@ -888,6 +924,16 @@ background-image: url(../icons/flags/anidb_audio_indonesian.gif);
 *.i_sub_id
 {
 background-image: url(../icons/flags/anidb_sub_indonesian.gif);
+}
+
+*.i_audio_is
+{
+background-image: url(../icons/flags/anidb_audio_icelandic.gif);
+}
+
+*.i_sub_is
+{
+background-image: url(../icons/flags/anidb_sub_icelandic.gif);
 }
 
 *.i_audio_it
@@ -1317,7 +1363,7 @@ padding-left: 15px;
 }
 
 img[src*="anidb_file_ed2k.gif"] {
-background: transparent url(images/buttons/ed2k.png) no-repeat left top;
+background: transparent url(images/buttons/ed2k.gif) no-repeat left top;
 width: 0;
 padding-left: 15px;
 }
@@ -1382,17 +1428,18 @@ padding-left: 15px;
 }
 
 /* inline icon styles */
-div#layout-content div.icons {
+.g_content div.icons {
 margin: 2px 0.3em 0;
 }
 
-div#layout-content td.title div.icons {
+.g_content td.title div.icons {
 float: right;
 }
 
-div#layout-content .i_icon,
+.g_content .i_icon,
 div.mylist_list td.icons span,
-div.anime_all td.icons span {
+div.anime_all td.icons span,
+#obj-tooltip div.icons .i_icon {
 float: left;
 display: block;
 width: 15px;
@@ -1453,6 +1500,19 @@ height: 10px;
 
 .i_filestate_other	 	{background-image: url(images/icons/state-unknown.gif);}
 
+/* file attributes */
+.i_comment				{background-image: url(images/icons/comment.png); height: 15px !important; background-position: center bottom !important;}
+
+.i_crc_yes				{background-image: url(images/icons/crc-yes.png); height: 15px !important;}
+
+.i_uncensored			{background-image: url(images/icons/uncensored.gif);}
+
+span.i_video			{background-image: url(images/icons/video.gif);}
+
+.i_vrs_2				{background-image: url(images/icons/v2.png); height: 15px !important;}
+
+.i_vrs_3				{background-image: url(images/icons/v3.png); height: 15px !important;}
+
 /* anime state */
 .i_state_all 			{background-image: url(images/icons/state-all.png);}
 
@@ -1478,18 +1538,28 @@ height: 10px;
 /* mylist */
 .i_file_addmylist	 	{background-image: url(images/buttons/mylist-add.png);}
 
+.i_file_removemylist	{background-image: url(images/buttons/mylist-remove.png);}
+
 .i_mylist 				{background-image: url(images/icons/state-inmylist.png);}
 
 /* actions */
 .i_file_add 			{background-image: url(images/buttons/epfile-add.gif);}
 
-.i_file_ed2k 			{background-image: url(images/buttons/ed2k.png);}
+.i_file_edit 			{background-image: url(images/buttons/edit.png);}
+
+.i_file_ed2k 			{background-image: url(images/buttons/ed2k.gif);}
 
 .i_ep_vote				{background-image: url(images/buttons/vote.png);}
 
 .i_group_vote			{background-image: url(images/buttons/vote.png);}
 
+.i_vote					{background-image: url(images/buttons/vote.png);}
+
 /* audio+sub flags */
+.i_audio_fi 			{background-image: url(images/icons/audio-finnish.gif);}
+
+.i_sub_fi 				{background-image: url(images/icons/audio-sub-finnish.gif);}
+
 .i_audio_ja 			{background-image: url(images/icons/audio-japanese.gif);}
 
 .i_sub_ja 				{background-image: url(images/icons/audio-sub-japanese.gif);}
@@ -1502,6 +1572,14 @@ height: 10px;
 
 .i_sub_pl 				{background-image: url(images/icons/audio-sub-polish.gif);}
 
+.i_audio_ru 			{background-image: url(images/icons/audio-russian.gif);}
+
+.i_sub_ru 				{background-image: url(images/icons/audio-sub-russian.gif);}
+
+.i_audio_sl 			{background-image: url(images/icons/audio-slovenian.gif);}
+
+.i_sub_sl 				{background-image: url(images/icons/audio-sub-slovenian.gif);}
+
 .i_audio_x-other 		{background-image: url(images/icons/audio-unknown.gif);}
 
 .i_sub_x-other 			{background-image: url(images/icons/audio-sub-unknown.gif);}
@@ -1511,25 +1589,32 @@ height: 10px;
 .i_sub_x-unk 			{background-image: url(images/icons/audio-sub-unknown.gif);}
 
 /* rating */
-span.i_rate_vhigh,
+span.i_rate_veryhigh,
 span.i_rate_high,
 span.i_rate_med,
 span.i_rate_low,
 span.i_rate_vlow {
-background-repeat: repeat-x;
-background-position: left;
+background-repeat: repeat-x !important;
+background-position: left !important;
+padding: 0 !important;
 background-image: url(images/icons/star.png);
 }
 
-span.i_rate_vhigh	{width: 45px;}
+span.i_rate_veryhigh	{width: 45px !important;}
 
-span.i_rate_high	{width: 37px;}
+span.i_rate_high		{width: 37px !important;}
 
-span.i_rate_med		{width: 30px;}
+span.i_rate_med			{width: 30px !important;}
 
-span.i_rate_low		{width: 22px;}
+span.i_rate_low			{width: 22px !important;}
 
-span.i_rate_vlow	{width: 15px;}
+span.i_rate_vlow		{width: 15px !important;}
+
+span.i_rate_unknown		{
+background-image: url(images/icons/star-un.png);
+padding: 0 !important;
+height: 15px !important;
+}
 
 /* global layout */
 /*global.css*/
@@ -1569,7 +1654,9 @@ border: 0;
 }
 
 /* zero out borders on images and some links */
-div#layout-content td.action a, div#layout-content th a, div#layout-content th a img {
+.g_content td.action a,
+.g_content th a,
+.g_content th a img {
 border: 0 !important;
 }
 
@@ -1643,18 +1730,18 @@ height: 0;
 }
 
 /* blocks */
-#layout-content div.block {
+.g_content div.block {
 display:table;
 margin-left:auto;
 margin-right:auto;
 }
 
-#layout-content div.block div.image {
+.g_content div.block div.image {
 display:table-cell;
 vertical-align:middle;
 }
 
-#layout-content div.block div.image img {
+.g_content div.block div.image img {
 margin-right: 1em;
 }
 
@@ -1672,12 +1759,12 @@ font-weight: bold;
 text-transform: capitalize;
 }
 
-div#layout-content ul.g_jumplist li a,
-div#layout-content ul.g_jumplist li a:link,
-div#layout-content ul.g_jumplist li a:visited,
-div#layout-content ul.g_navlist li a,
-div#layout-content ul.g_navlist li a:link,
-div#layout-content ul.g_navlist li a:visited {
+.g_content ul.g_jumplist li a,
+.g_content ul.g_jumplist li a:link,
+.g_content ul.g_jumplist li a:visited,
+.g_content ul.g_navlist li a,
+.g_content ul.g_navlist li a:link,
+.g_content ul.g_navlist li a:visited {
 text-decoration: none;
 border: 1px solid #f7edf1;
 border-bottom: 1px solid #d28cb2;
@@ -1688,10 +1775,10 @@ font-size: 0.95em;
 font-weight: normal;
 }
 
-div#layout-content ul.g_jumplist li a:hover,
-div#layout-content ul.g_jumplist li a:active,
-div#layout-content ul.g_navlist li a:hover,
-div#layout-content ul.g_navlist li a:active {
+.g_content ul.g_jumplist li a:hover,
+.g_content ul.g_jumplist li a:active,
+.g_content ul.g_navlist li a:hover,
+.g_content ul.g_navlist li a:active {
 background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
 color: #de4799;
 border: 1px solid #eec6dc;
@@ -1772,14 +1859,14 @@ color: #B14C7C;
 }
 
 /* form input buttons */
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
 border: 1px solid #2d42af;
 color: #fff;
 background: #586fd1;
 cursor: pointer;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, input[type="button"]:hover {
 background: #2d42af;
 }
 
@@ -1792,7 +1879,8 @@ background: #faf0ff;
 color: #4d2f5f;
 }
 
-.g_errorbox {
+.g_errorbox,
+.g_warnbox {
 border: 1px solid #ffcbf8;
 padding: 0.7em;
 background: #ffeafc;
@@ -1810,21 +1898,24 @@ color: #777;
 .g_notebox h3,
 .g_note h3,
 .g_errorbox h3,
-.g_info h3 {
+.g_info h3,
+.g_warnbox {
 margin: 0 0 -0.5em;
 }
 
 .g_notebox>*:last-child,
 .g_note>*:last-child,
 .g_errorbox>*:last-child,
-.g_info>*:last-child {
+.g_info>*:last-child,
+.g_warnbox>*:last-child {
 margin-bottom: 0;
 }
 
 .g_notebox>*:first-child,
 .g_note>*:first-child,
 .g_errorbox>*:first-child,
-.g_info>*:first-child {
+.g_info>*:first-child,
+.g_warnbox>*:first-child {
 margin-top: 0;
 }
 
@@ -1897,6 +1988,35 @@ margin-bottom: 0;
 
 .g_filterlist li a {
 text-transform: capitalize;
+}
+
+/* Tooltip support */
+#obj-tooltip {
+position: absolute;
+left: -300px;
+width: 300px;
+border: 1px solid #171a61;
+padding: 2px;
+background: transparent url(images/layout/trans-dkblue.png) repeat left top;
+visibility: hidden;
+z-index: 100;
+font-size: x-small;
+color: #e8d0f5;
+}
+
+#obj-tooltip h1 {
+background-color: transparent;
+font-size: 1.2em;
+color: #fff;
+}
+
+#obj-pointer {
+position: absolute;
+left: -300px;
+width: 15px;
+height: 13px;
+z-index: 101;
+visibility: hidden;
 }
 
 /*layout.css*/
@@ -2232,19 +2352,19 @@ content: ". Design by zakness.";
 }
 
 /* content links */
-div#layout-content a,
-div#layout-content a:link {
+.g_content a,
+.g_content a:link {
 color: #154ef4;
 text-decoration: none;
 border-bottom: 1px solid transparent;
 }
 
-div#layout-content a:visited {
+.g_content a:visited {
 color: #7264a6;
 }
 
-div#layout-content a:hover,
-div#layout-content a:active {
+.g_content a:hover,
+.g_content a:active {
 color: #4876fe;
 border-bottom: 1px dotted #4876fe;
 }
@@ -2409,6 +2529,56 @@ text-align: right;
 
 div.grouplist_list th.rating {
 width: 8em;
+}
+
+/* js sorting */
+th.c_set,
+th.c_setlatin,
+th.c_date,
+th.c_latin {
+cursor: pointer;
+background-image: url(images/buttons/updown.gif);
+background-position: right center;
+background-repeat: no-repeat;
+padding-right: 16px;
+}
+
+th.c_set:hover,
+th.c_setlatin:hover,
+th.c_date:hover,
+th.c_latin:hover {
+background-color: #353A8F
+}
+
+th.s_forward, th.s_reverse {
+background-color: #565AB9;
+padding-right: 18px;
+}
+
+th.s_forward {
+background-image: url(images/buttons/down2.gif);
+}
+
+th.s_reverse {
+background-image: url(images/buttons/up2.gif);
+}
+
+/* anime list rating */
+div.animelist_all table.anime_list td.rating {
+color: #aaa;
+}
+
+div.animelist_all table.anime_list td.rating.mid {
+color: #444;
+}
+
+div.animelist_all table.anime_list td.rating.high {
+color: #000;
+font-weight: bold;
+}
+
+div.animelist_all table.anime_list td.rating.low {
+color: #999;
 }
 
 /* the database */
@@ -2585,8 +2755,8 @@ width: 100%;
 margin: 1em 0;
 }
 
-div.search_all table.search_results td.anime {
-width: 40%;
+div.search_all table.search_results th.rating {
+width: 10%;
 }
 
 /*calendar.css*/
@@ -2657,33 +2827,6 @@ div#layout-content div.latestanimes_form a.g_navnext {
 float: right;
 }
 
-/* anime votes graphs */
-div.animevotes_all>table {
-width: 95%;
-margin: 0 auto;
-border: 0;
-}
-
-div.animevotes_all table table {
-width: 100%;
-border:1px solid #E1D9F5;
-margin-bottom: 1em;
-}
-
-div.animevotes_all table td,
-div.animevotes_all table th {
-text-align: center;
-}
-
-div.animevotes_all table.vote_graph tr:last-child {
-background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
-font-weight: bold;
-}
-
-div.animevotes_all caption {
-margin-top: 1em;
-}
-
 /*latest.css*/
 /*---------------------------------
 @LATEST
@@ -2705,7 +2848,8 @@ div.latest_all tr.yes td {
 background-color: #f0ffe3;
 }
 
-div.latest_all td.verified.yes {
+div.latest_all td.verified.yes,
+div.latest_all td.vv.yes {
 color: #4b9b39;
 font-weight: bold;
 }
@@ -2739,6 +2883,14 @@ padding: 0.2em 0.4em;
 div.latest_groups table.agcomments td.text.comment {
 width: 45%;
 }
+
+div.latest_all td.rating {color: #aaa;}
+
+div.latest_all td.rating.low {color: #999;}
+
+div.latest_all td.rating.mid {color: #444;}
+
+div.latest_all td.rating.high {color: #000; font-weight: bold;}
 
 /*genres.css*/
 /*---------------------------------
@@ -2788,6 +2940,7 @@ cursor: pointer;
 margin-right: 5px;
 margin-bottom: -2px;
 padding: 0;
+background-position: left top;
 }
 
 div.genren_all a.i_minus {
@@ -2798,8 +2951,8 @@ div.genren_all a.i_plus {
 background: transparent url(images/buttons/plus.gif) no-repeat left top;
 }
 
-div.genren_all a.i_minus:hover,
-div.genren_all a.i_plus:hover {
+div#layout-content div.genren_all a.i_minus:hover,
+div#layout-content div.genren_all a.i_plus:hover {
 background-position: -16px top;
 }
 
@@ -3089,6 +3242,49 @@ color: #76a5e5;
 border-bottom: 1px solid #c0e0f9;
 }
 
+/*animehist.css*/
+/*---------------------------------
+@ANIME HISTORY
+----------------------------------*/
+div.animehist_all table.animehistory {
+width: 100%;
+}
+
+/*animevotes.css*/
+/*---------------------------------
+@ANIMEVOTES
+----------------------------------*/
+/* anime votes graphs */
+div.animevotes_all>table {
+width: 95%;
+margin: 0 auto;
+border: 0;
+}
+
+div.animevotes_all table table {
+width: 100%;
+border:1px solid #E1D9F5;
+margin-bottom: 1em;
+}
+
+div.animevotes_all table td,
+div.animevotes_all table th {
+text-align: center;
+}
+
+div.animevotes_all table.vote_graph tr:last-child {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+font-weight: bold;
+}
+
+div.animevotes_all caption {
+margin-top: 1em;
+}
+
+div.animevotes_all td.rating.ep+td {
+text-align: left;
+}
+
 /*ep.css*/
 /*---------------------------------
 @EPISODE
@@ -3167,6 +3363,24 @@ div.group_all div.group_vote {
 text-align: center;
 }
 
+/* anime list rating */
+div.group_all td.rating {
+color: #aaa;
+}
+
+div.group_all td.rating.mid {
+color: #444;
+}
+
+div.group_all td.rating.high {
+color: #000;
+font-weight: bold;
+}
+
+div.group_all td.rating.low {
+color: #999;
+}
+
 /*producer.css*/
 /*---------------------------------
 @PRODUCER
@@ -3238,15 +3452,15 @@ div.anime_all div.groups table tr:last-child {
 background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
 }
 
-div.anime_all div.groups .state.ongoing		{color: #2618b1;}
+div.anime_all div.groups .state.ongoing, div.anime_all div.groups .state.ongoing a		{color: #2618b1;}
 
-div.anime_all div.groups .state.stalled		{color: #966319;}
+div.anime_all div.groups .state.stalled, div.anime_all div.groups .state.stalled a		{color: #966319;}
 
-div.anime_all div.groups .state.complete	{color: #179023;}
+div.anime_all div.groups .state.complete, div.anime_all div.groups .state.complete a	{color: #179023;}
 
-div.anime_all div.groups .complete			{font-weight: bold;}
+div.anime_all div.groups .complete, div.anime_all div.groups .complete a				{font-weight: bold;}
 
-div.anime_all div.groups .state.dropped		{color: #8d92a0;}
+div.anime_all div.groups .state.dropped, div.anime_all div.groups .state.dropped a		{color: #8d92a0;}
 
 div.anime_all div.episodes {
 padding-bottom: 0;
@@ -3426,7 +3640,7 @@ margin: 1em 0 0;
 }
 
 div.mylist_list form,
-div.mylist_list>table.animelist {
+div.mylist_list div.compare {
 margin: 1em 11em 1em 0;
 }
 
@@ -3450,6 +3664,7 @@ text-align: left;
 div.mylist_list table.animelist td.eps,
 div.mylist_list table.animelist td.seen,
 div.mylist_list>table.animelist td.state,
+div.mylist_list div.compare table.animelist td.state,
 div.anime_all div.mylist td.state {
 padding-left: 15px;
 }
@@ -3457,6 +3672,7 @@ padding-left: 15px;
 div.mylist_list table.animelist tr.complete>td.stats,
 div.mylist_list table.animelist tr.all_watched>td.stats,
 div.mylist_list>table.animelist td.state.complete,
+div.mylist_list div.compare table.animelist td.state.complete,
 div.anime_all div.mylist td.state.complete,
 div.anime_all div.mylist td.state.watched {
 color: #000;
@@ -3466,6 +3682,7 @@ background: transparent url(images/layout/checkmark-grey.png) no-repeat 2px cent
 
 div.mylist_list table.animelist tr.complete>td.seen,
 div.mylist_list>table.animelist td.state.complete+td.state.complete,
+div.mylist_list div.compare table.animelist td.state.complete+td.state.complete,
 div.anime_all div.mylist td.state,
 div.anime_all div.mylist td.state.complete+td.state.complete {
 color: #000;
@@ -3475,28 +3692,30 @@ background: none;
 
 div.mylist_list table.animelist tr.all_watched>td.seen,
 div.mylist_list>table.animelist td.state.all_watched,
+div.mylist_list div.compare table.animelist td.state.all_watched,
 div.anime_all div.mylist td.state.watched+td.state.watched {
 color: #4b9b39;
 background: transparent url(images/layout/checkmark.png) no-repeat 2px center;
 }
 
-div.mylist_list>table.animelist td.state.all_watched {
+div.mylist_list>table.animelist td.state.all_watched,
+div.mylist_list div.compare table.animelist td.state.all_watched {
 font-weight: bold;
 }
 
 div.mylist_list table.animelist td.myvote,
 div.mylist_list table.animelist td.vote {
-color: #a1be2e;
+color: #444;
 text-align: center;
 }
 
 div.mylist_list table.animelist td.high {
-color: #5dac3b;
+color: #000;
 font-weight: bold;
 }
 
 div.mylist_list table.animelist td.low {
-color: #e33e23;
+color: #999;
 }
 
 div.mylist_list table td.check {
@@ -3694,6 +3913,7 @@ display: none;
 }
 
 div.mynotifies_all div.list table,
+div.mynotifies_all div.mynotifies_history table,
 div.mynotifies_all div.action {
 width: 100%;
 }
@@ -3789,11 +4009,10 @@ div.myplace_all div.latest li span {
 position: absolute;
 top: 0.3em;
 left: 0.3em;
-font-weight: bold;
 }
 
 div.myplace_all div.latest li span+a {
-margin-left: 3em;
+margin-left: 6em;
 }
 
 div.myplace_all div.latest_files li span+a {
@@ -3802,18 +4021,18 @@ margin-left: 10em;
 
 div.myplace_all div.latest_votes span.mid,
 div.myplace_all div.latest_reviews span.mid {
-color: #a1be2e;
+color: #444;
 }
 
 div.myplace_all div.latest_votes span.high,
 div.myplace_all div.latest_reviews span.high {
-color: #5dac3b;
+color: #000;
 font-weight: bold;
 }
 
 div.myplace_all div.latest_votes span.low,
 div.myplace_all div.latest_reviews span.low {
-color: #e33e23;
+color: #aaa;
 }
 
 /*myreviews.css*/
@@ -3881,12 +4100,16 @@ border: 0;
 margin: 0 0 1em 0.5em;
 }
 
-div.mywishlist_all div table:last-child td {
+div.mywishlist_all form>table,
+div.mywishlist_all div table:last-child td,
+div.mywishlist_all form>table table,
+div.mywishlist_all form>table td {
 border: 0;
 }
 
-div.mywishlist_all form>table {
-border: 0;
+div.mywishlist_all td.nfy a:hover,
+div.mywishlist_all td.pri a:hover {
+border-bottom: none !important;
 }
 
 div.mywishlist_all form>table:last-child {
@@ -3896,14 +4119,6 @@ border:1px solid #E1D9F5;
 
 div.mywishlist_all form>table:last-child tr {
 background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
-}
-
-div.mywishlist_all form>table table {
-border: 0;
-}
-
-div.mywishlist_all form>table td {
-border: 0;
 }
 
 /*profile.css*/
@@ -4258,6 +4473,164 @@ div.addgroup_all div.group_add td.action {
 text-align: center;
 background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
 padding: 0.5em;
+}
+
+/*addtoanime.css*/
+/*---------------------------------
+@ADD TO ANIME
+- add/del category
+- add tags
+- add a producer
+- add title
+- add genre
+----------------------------------*/
+/* add category */
+div.addgenren_list table {
+width: 100%;
+}
+
+div.addgenren_form caption {
+display: none;
+}
+
+div.addgenren_form table {
+margin: 0 auto;
+border: 1px solid #EBE1EF;
+}
+
+div.addgenren_form table tr.action td,
+div.addgenren_form table td.action {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+text-align: center;
+}
+
+/* anime tags */
+div.animetag_list table {
+width: 100%;
+}
+
+div.animetag_add {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+border: 1px solid #565AB9;
+}
+
+/* add a producer */
+div.addaproducer_all caption {
+display: none;
+}
+
+div.aproducer_entries table {
+width: 100%;
+}
+
+div.aproducer_add form {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+border: 1px solid #EBE1EF;
+text-align: center;
+padding: 1em;
+}
+
+/* add title */
+div.addanimetitle_list table {
+width: 100%;
+}
+
+div.addanimetitle_form form {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+border: 1px solid #EBE1EF;
+text-align: center;
+padding: 1em;
+}
+
+div.addanimetitle_all table tr.yes {
+background-color: #E9FFD8;
+}
+
+div.addanimetitle_all table td.verified.yes {
+color:#4B9B39;
+font-weight:bold;
+}
+
+/* add genre */
+div.addgenre_list table {
+width: 100%;
+}
+
+/* add sequel */
+div.addseq_form form {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+border: 1px solid #EBE1EF;
+text-align: center;
+padding: 1em;
+margin-bottom: 1em;
+}
+
+div.addseq_form div.explanation dl {
+margin-left: 2em;
+}
+
+div.addseq_form div.explanation dt {
+font-weight:bold;
+clear:left;
+float:left;
+text-align: left;
+}
+
+div.addseq_form div.explanation dd {
+margin-left: 15em;
+text-align: left;
+margin-bottom: 0.3em;
+}
+
+/* mass add/edit eps */
+div.addepm form div {
+margin: 0 auto;
+}
+
+div.addepm form p {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+border: 1px solid #EBE1EF;
+text-align: center;
+padding: 1em;
+}
+
+div.addepm form div.ep p {
+background: none;
+border: none;
+text-align: left;
+padding: 0.3em;
+}
+
+/* mass add files */
+div.addfilem form dt {
+font-weight:bold;
+clear:left;
+float:left;
+text-align: left;
+}
+
+div.addfilem form dd {
+margin-left: 10em;
+text-align: left;
+margin-bottom: 0.3em;
+}
+
+/* edit anime */
+div.addanime_all div.anime_add form table {
+width: 100%;
+}
+
+div.addanime_all div.anime_add form table td.action {
+background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+text-align: center;
+padding: 1em;
+}
+
+/* anime export */
+div.ed2kexport_all pre {
+white-space: -moz-pre-wrap; /* Mozilla */
+white-space: -o-pre-wrap; /* Opera 7 */
+word-wrap: break-word; /* IE */
 }
 
 /*ed2kdump.css*/

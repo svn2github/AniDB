@@ -5,7 +5,7 @@
  */
 
 // template info
-var theme = {'version':"0.9beta",'source':"svn",'date':"05.09.2007"};
+var theme = {'version':"0.9beta",'source':"svn",'date':"11.09.2007"};
 // settings
 var animeTitleLang = 'x-jat';
 var animeAltTitleLang = 'en';
@@ -26,4 +26,4 @@ var LAY_PSEUDOFILES = true;
 var LAY_FORMATFILESIZE = false;
 var LAY_FILTERFILES = false;
 var search_logic = 'OR';
-var base_url = 'http://anidb.info/perl-bin/animedb.pl';
+var base_url = 'http://anidb.net/perl-bin/animedb.pl';

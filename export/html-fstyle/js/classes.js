@@ -298,16 +298,14 @@ function CEpisodeEntry(node) {
   this.type = 'normal';
   this.typeFull = 'Normal Episode';
   this.typeChar = '';
-  this.vote = -1; // set later
-	this.voteDate;
-	this.voteCnt = 0;
-	this.rating = 0;
+  this.myvote = new Object(); // set later
+	this.rating = new Object();
   this.isRecap = false;
   this.animeId = -1;
   this.hiddenFiles = 0;
   this.seenDate = 0;
   this.length = 0;
-  this.relDate = 0;
+  this.dates = new Object();
   this.userCount = 0;
   this.fileCount = 0;
   this.other = '';
@@ -323,12 +321,12 @@ function CEpisodeEntry(node) {
       case 'flags': this.flags = Number(nodeData(sNode)); break;
       case 'epno': this.epno = nodeData(sNode); break;
       case 'len': this.length = Number(nodeData(sNode)); break;
-      case 'date': this.addDate = convertTime(nodeData(sNode)); this.relDate = convertTime(sNode.getAttribute('rel')) || 0; break;
+      case 'date': this.dates['add'] = convertTime(nodeData(sNode)); this.dates['rel'] = convertTime(sNode.getAttribute('rel')) || 0; break;
       case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
       case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
       case 'other': this.other = nodeData(sNode); break;
-			case 'rating': this.rating = nodeData(sNode); this.voteCnt = sNode.getAttribute('votes'); break;
-			case 'myvote': this.vote = nodeData(sNode); this.voteDate = convertTime(sNode.getAttribute('date')); break;
+			case 'rating': this.rating['rating'] = nodeData(sNode); this.rating['votes'] = sNode.getAttribute('votes'); break;
+			case 'myvote': this.myvote['vote'] = nodeData(sNode); this.myvote['date'] = convertTime(sNode.getAttribute('date')); break;
       case 'titles':
         for (var k = 0; k < sNode.childNodes.length; k++) {
           var tNode = sNode.childNodes.item(k);
@@ -412,8 +410,7 @@ function CFileEntry(node) {
   this.ed2k = '';
   this.ed2klink = '';
   this.size = 0;
-  this.date = 0;
-  this.relDate = 0;
+  this.dates = new Object();
   this.length = 0;
   this.fileType = '';
   this.groupId = 0;
@@ -451,10 +448,10 @@ function CFileEntry(node) {
       case 'group': this.groupId = Number(sNode1.getAttribute('id')); this.relatedGroups.push(this.groupId); break; 
       case 'flags': this.flags = Number(nodeData(sNode1)); break;
       case 'date': 
-        this.date = convertTime(nodeData(sNode1));
-        if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
-        this.relDate = convertTime(sNode1.getAttribute('rel'));
-				this.upDate = convertTime(sNode1.getAttribute('update'));
+        this.dates['add'] = convertTime(nodeData(sNode1));
+        if (Number(new Date()/1000 - javascriptDate(this.dates['add'])/1000) < 86400) this.newFile = true;
+        this.dates['rel'] = convertTime(sNode1.getAttribute('rel'));
+				this.dates['update'] = convertTime(sNode1.getAttribute('update'));
         break;
 			case 'mylist':
         for (var j = 0; j < sNode1.childNodes.length; j++) {
@@ -467,7 +464,6 @@ function CFileEntry(node) {
 							break;
 						case 'storage': this.mylist.storage = nodeData(dNode); break;
 						case 'source': this.mylist.source = nodeData(dNode); break;
-						case 'other': this.mylist.other = nodeData(dNode); break;
 						case 'mystate': this.mylist.status = nodeData(dNode); break;
 						case 'myfilestate': this.mylist.fstate = nodeData(dNode); break;
 						default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'mylistNode', dNode.nodeName,dNode.nodeName);
@@ -488,8 +484,9 @@ function CFileEntry(node) {
                   case 'res': stream.resolution = this.resolution = nodeData(stNode); break;
                   case 'ar': stream.ar = nodeData(stNode); break;
 									case 'br': stream.bitrate = nodeData(stNode); break;
-									case 'fps': stream.fps = nodeData(stNode); break;
+									case 'fps': stream.fps = formatFileSize(nodeData(stNode),false); break;
                   case 'codec': stream.codec = nodeData(stNode); break;
+									case 'flags': stream.flags = nodeData(stNode); break;
                   default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStream['+k+']', dNode.nodeName,stNode.nodeName);
                 }
               } 

@@ -950,7 +950,7 @@ function applyFormat(identifier, file, episode, anime, group) {
 
 function createHashLink() {
   var ahref = this.getElementsByTagName('A')[0];
-  if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash 
+  if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
   var fid = Number(this.parentNode.id.split('fid_')[1]);
   var file = files[fid];
   if (!file) return;

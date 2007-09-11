@@ -70,21 +70,13 @@ function replaceGlobals(node) {
   elems = node.getElementsByTagName('THEMEDATE');
   while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(theme['date']),elems[0]);
   elems = node.getElementsByTagName('USERIDLINK');
-  var a = document.createElement('A');
-  a.className='short_link';
-  a.href='http://anidb.info/u'+userInfo.id;
-  a.appendChild(document.createTextNode('u'+userInfo.id));
+  var a = createLink(null, 'u'+userInfo.id, 'http://anidb.net/u'+userInfo.id, null, null, null, 'short_link');
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
   elems = node.getElementsByTagName('USERPAGELINK');
-  a = document.createElement('A');
-  a.className='short_link';
-  a.href='http://anidb.info/up'+userInfo.id;
-  a.appendChild(document.createTextNode('user page'));
+  a = createLink(null, 'Userpage', 'http://anidb.net/up'+userInfo.id, null, null, null, 'short_link');
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
   elems = node.getElementsByTagName('ANIDBMSGUSERLINK');
-  a = document.createElement('A');
-  a.href=base_url+'?show=msg&amp;do=new&amp;msg.to='+userInfo.name;
-  a.appendChild(document.createTextNode('send message'));
+  a = createLink(null, 'send message', base_url+'?show=msg&do=new&msg.to='+userInfo.name, null, null, null, null);
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
   createSearchBox();
 }

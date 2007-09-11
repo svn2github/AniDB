@@ -1,0 +1,101 @@
+<!DOCtype html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:anidb="http://anidb.info/markup" xml:lang="en" lang="en">
+	<head>
+		<title>::AniDB.net:: MyList Export ::</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="icon" href="favicon.ico" />
+		<link rel="alternate" type="application/rss+xml" title="AniDB RDF" href="http://anidb.info/anidb.rdf" />
+		<link rel="stylesheet" href="css/zakura/zakura.css" type="text/css" title="zakura Style" />
+		<link rel="alternate stylesheet" href="css/anidbstyle/anidbstyle.css" type="text/css" title="Classic" />
+    <link rel="stylesheet" href="css/fstyle.css" type="text/css" />
+    <script src="js/preferences.js" type="text/javascript" title="Preferences"></script>
+	  <script src="js/mapvalues.js" type="text/javascript" title="Map Functions"></script>
+    <script src="js/utils.js" type="text/javascript" title="Utils"></script>
+    <script src="js/classes.js" type="text/javascript" title="Object Classes"></script>
+	  <script src="js/parser.js" type="text/javascript" title="XML Parser"></script>
+	  <script src="js/ajax.js" type="text/javascript" title="XMLHTTPRequest implementation"></script>
+	  <script src="js/shared.js" type="text/javascript" title="shared extension"></script>
+		<script src="js/anime.js" type="text/javascript" title="Anime extension"></script>
+		<script src="js/episode.js" type="text/javascript" title="Episode extension"></script>
+	</head>
+  <body>
+    <div id="statusBox"></div>
+    <div id="layout-content">
+      <h1><episode.resources></episode.resources>Episode: <anime.title.main></anime.title.main> - <episode.title.main></episode.title.main></h1>
+      <div class="g_content ep_all">
+        <div class="g_section ep_info">
+          <div class="block">
+            <div class="g_definitionlist data">
+              <table>
+								<caption>Info</caption>
+                <tbody>
+                  <tr class="title">
+                    <th class="field">Title</th>
+                    <td class="value"><anime.title.main></anime.title.main>	- <episode.number></episode.number> (<episode.alink></episode.alink>)</td>
+                  </tr>
+                  <tr class="titles">
+                    <th class="field">Titles</th>
+                    <td class="value"><episode.titles></episode.titles></td>
+                  </tr>
+									<tr class="len">
+										<th class="field">Play Length</th>
+										<td class="value"><episode.length></episode.length></td>
+									</tr>
+									<tr class="date">
+										<th class="field">Air/Release Date</th>
+										<td class="value"><episode.date></episode.date></td>
+									</tr>
+                  <tr class="rating">
+                    <th class="field"><a href="myvotes.html">Rating</a></th>
+                    <td class="value"><episode.rating></episode.rating></td>
+                  </tr>
+                  <tr class="misc">
+                    <th class="field">Misc</th>
+                    <td class="value"><episode.misc></episode.misc></td>
+                  </tr>
+									<tr class="desc">
+                    <th class="field">Description</th>
+                    <td class="value"><episode.other></episode.other></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+				<div class="g_section ep_files">
+					<h4>Files</h4>
+					<table class="filelist">
+						<thead>
+							<tr class="heading">
+								<th class="id">FID</th>
+								<th class="size">Size</th>
+								<th class="icons status">Status</th>
+								<th class="title">Group</th>
+								<th class="quality">Quality</th>
+								<th class="resolution">Resolution</th>
+								<th class="source">Source</th>
+								<th class="icon ed2k">ED2K</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="" id="fid_%anime.file.id%">
+								<td class="id"><anime.file.id></anime.file.id></td>
+								<td class="size"><anime.file.size></anime.file.size></td>
+								<td class="icons status"><anime.file.icons></anime.file.icons></td>
+								<td class="title"><anime.file.group></anime.file.group></td>
+								<td class="quality"><anime.file.quality></anime.file.quality></td>
+								<td class="resolution"><anime.file.resolution></anime.file.resolution></td>
+								<td class="source"><anime.file.source></anime.file.source></td>
+								<td class="icon ed2k"><anime.file.ed2k></anime.file.ed2k></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+      </div>
+    </div>
+    <div id="layout-footer">
+      <p>V <themeversion></themeversion> <themesource></themesource> <themedate></themedate>, (C) 2007 by fahrenheit/AniDB, all rights reserved</p>
+    </div>
+	</body>
+</html>

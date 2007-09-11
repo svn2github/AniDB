@@ -99,8 +99,7 @@
 							<mylist>
 								<date viewed="<tmpl_var name=data_file_viewdate>"><tmpl_var name=data_file_ldate></date><tmpl_if expr="data_file_storage ne ''">
 								<storage><tmpl_var name=data_file_storage></storage></tmpl_if><tmpl_if expr="data_file_source ne ''">
-								<source><tmpl_var name=data_file_source></source></tmpl_if><tmpl_if expr="data_file_other ne ''">
-								<other><![CDATA[<tmpl_var name=data_file_other>]]></other></tmpl_if>
+								<source><tmpl_var name=data_file_source></source></tmpl_if>
 								<mystate><tmpl_var name=data_file_mystate_string></mystate>
 								<myfilestate><tmpl_var name=data_file_myfilestate_string></myfilestate>
 							</mylist>
@@ -115,7 +114,8 @@
 							<group id="<tmpl_var name=data_file_group_id>" />
 							<date update="<tmpl_var name=data_file_update>" rel="<tmpl_var name=data_file_released>"><tmpl_var name=data_file_date></date>
 							<qual><tmpl_var name=data_file_qual_name></qual>
-							<source><tmpl_var name=data_file_type_name></source>
+							<source><tmpl_var name=data_file_type_name></source><tmpl_if expr="data_file_other ne ''">
+							<other><![CDATA[<tmpl_var name=data_file_other>]]></other></tmpl_if>
 							<tmpl_if expr="data_file_vidcnt > 0"><vid cnt="<tmpl_var name=data_file_vidcnt>">
 								<stream>
 									<res><tmpl_var name=data_file_res_name></res>

@@ -427,7 +427,7 @@ function filterByText() {
  */
 function prepPage() {
   uriObj = parseURI();
-  if (uriObj['show'] && uriObj['show'] != 'mylist') return;
+  //if (uriObj['show'] && uriObj['show'] != 'mylist') return;
   loadData('mylist.xml',parseData);
   var uls = document.getElementsByTagName('UL');
   var stateUL = getElementsByClassName(uls,'state',false)[0];

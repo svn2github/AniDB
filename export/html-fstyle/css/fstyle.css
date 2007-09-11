@@ -54,6 +54,27 @@ div#layout-search {
 padding-top: 10px;
 }
 
+div#layout-content div.icons {
+margin: 2px 0.3em 0;
+}
+
+div#layout-content td.title div.icons {
+float: right;
+}
+
+div#layout-content .i_icon,
+div.mylist_list td.icons span,
+div.anime_all td.icons span {
+float: left;
+display: block;
+width: 15px;
+height: 13px;
+background-repeat: no-repeat;
+background-position: center;
+text-indent: -5000px;
+padding: 0 2px;
+}
+
 div#layout-content h1 div.icons { 
 	float: right;
 }
