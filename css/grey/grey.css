@@ -823,10 +823,6 @@ width: 99%;
 {
 	content: " *";
 }
-#layout-content div.mylist_list tr.complete td.stats
-{
- 	font-weight: bold;
-}
 #layout-content div.ed2kdump_box
 {
 	text-align: center;
@@ -1406,11 +1402,6 @@ width: 99%;
 	list-style: none;
 	text-align: left;
 }
-#layout-content div.mylist_all tr.all_watched td.stats
-{
-	color: #008800;
-	font-weight: bold;
-}
 #layout-content div.mynotifies_all
 {
 	text-align: center;
@@ -1660,7 +1651,8 @@ a.i_icon:hover, a.i_inline:hover
 	color: red;
 	background-image: url(images/bg_2.gif);
 }
-#layout-content div.creq_all dd
+#layout-content div.creq_all dd,
+#layout-content div.creqmod_all dd
 {
 	margin-bottom: 0.5em;
 }
@@ -1711,7 +1703,7 @@ a.i_icon:hover, a.i_inline:hover
 	clear: right;
 	border: #898989 1px dashed;
 	margin-right: 0.5em;
-	min-height: 32em;
+	min-height: 34em;
 }
 #layout-content div.animeatt_reviews div.review h2
 {
@@ -2027,4 +2019,28 @@ a.i_icon:hover, a.i_inline:hover
 {
 	text-align: left;
 	padding: 1px;
+}
+#layout-content div.animelist_all tr.mylist td
+{
+	background-image: url(images/orangepixel.png);
+}
+#layout-content div.animelist_all tr.mylist.complete td,
+#layout-content div.mylist_list tr.complete td
+{
+	background-image: url(images/bluepixel.png);
+}
+#layout-content div.animelist_all tr.mylist.all_watched td,
+#layout-content div.mylist_list tr.all_watched td
+{
+	background-image: url(images/greenpixel.png);
+}
+#layout-content div.latest_all div.latest_files_list tr td a.filter
+{
+	color: orange;
+}
+#layout-content div.mylist_list tr td.vote.temp,
+#layout-content div.myplace_all div.latest div.latest_votes span.vote.temp,
+#layout-content div.userpage_all div.latest div.latest_votes span.vote.temp
+{
+	font-style: italic;
 }
