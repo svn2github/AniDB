@@ -66,15 +66,6 @@ function renderPage() {
 		} else text = document.createTextNode(file.other);
 		elems[0].parentNode.replaceChild(text,elems[0]);
 	}
-	elems = document.getElementsByTagName('EPISODE.MISC');
-	while (elems.length) {
-		var text;
-		if (episode.isRecap) {
-			text = document.createElement('B');
-			text.appendChild(document.createTextNode('RECAP'));
-		} else text = document.createTextNode('');
-		elems[0].parentNode.replaceChild(text,elems[0]);
-	}
 	elems = document.getElementsByTagName('FILE.LENGTH');
 	while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(file.length),elems[0]);
 	elems = document.getElementsByTagName('FILE.SIZE');

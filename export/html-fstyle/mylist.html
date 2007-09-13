@@ -15,8 +15,9 @@
     <script src="js/classes.js" type="text/javascript" title="XML Parser"></script>
 	  <script src="js/parser.js" type="text/javascript" title="XML Parser"></script>
 	  <script src="js/ajax.js" type="text/javascript" title="XMLHTTPRequest implementation"></script>
-		<script src="js/shared.js" type="text/javascript" title="shared extension"></script>
-	  <script src="js/mylist.js" type="text/javascript" title="mylist extension"></script>
+		<script src="js/shared.js" type="text/javascript" title="Shared extension"></script>
+		<script src="js/anime.js" type="text/javascript" title="Anime extension"></script>
+	  <script src="js/mylist.js" type="text/javascript" title="Mylist extension"></script>
 	</head>
   <body>
     <div id="statusBox"></div>
@@ -70,7 +71,6 @@
               <li><a>hide awarded</a></li>
               <li><a>hide ongoing</a></li>
               <li><a>hide wishlisted</a></li>
-              <li><a>show fileinfo</a></li>
             </ul>
             <ul class="state">
               <li><a><span class="i_icon i_state_all" title="all states">all states</span></a></li>
@@ -115,15 +115,73 @@
               </thead>
               <tbody>
                 <tr class="" id="a%ANIMEID%" style="display: none;">
-                  <td class="expand"><a><img src="css/icons/plus.gif" width="15" height="13" alt="(+)" title="expand entry" /></a></td>
-                  <td class="title"><div class="icons">%ANIMEICONS%</div><span><a href="anime.html?show=anime&aid=%ANIMEID%">%ANIMETITLE%</a></span></td>
-                  <td class="stats eps">%ANIMEEPS%</td>
-                  <td class="stats seen">%ANIMESEEN%</td>
-                  <td class="rating anime mid">%ANIMERATING% (<span class="count">%ANIMEVOTES%</span>)</td>
-                  <td class="vote">%ANIMEMYVOTE%</td>
-                  <td class="rating attavg mid">%ANIMEREVIEWRATING% (<span class="count">%ANIMEREVIEWCNT%</span>)</td>
-                  <td class="action"><input type="checkbox" name="myamod.a.%ANIMEID%" /></td>
+                  <td class="expand"><anime.expand></anime.expand></td>
+                  <td class="title"><anime.icons></anime.icons><anime.title.alink></anime.title.alink></span></td>
+                  <td class="stats eps"><anime.eps.owned></anime.eps.owned></td>
+                  <td class="stats seen"><anime.eps.seen></anime.eps.seen></td>
+                  <td class="rating anime mid"><anime.rating></anime.rating> (<anime.votes></anime.votes>)</td>
+                  <td class="vote"><anime.myvote></anime.myvote></td>
+                  <td class="rating attavg mid"><anime.review.rating></anime.review.rating> (<anime.review.cnt></anime.review.cnt>)</td>
+                  <td class="action"><anime.action></anime.action></td>
                 </tr>
+								<tr id="a%ANIMEID%_eplist" style="display: none">
+									<td colspan="8">
+										<div class="g_section episodes">
+											<table id="eplist" class="eplist">
+												<thead>
+													<tr class="heading">
+														<th class="expand">X</th>
+														<th class="id">EP</th>
+														<th class="title">Title</th>
+														<th class="duration">Len</th>
+														<th class="number files">Files</th>
+														<th class="date airdate">Date</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr id="eid_%anime.ep.id%" class="">
+														<td class="action expand"><anime.ep.expand></anime.ep.expand></td>
+														<td class="id eid"><anime.ep.epno></anime.ep.epno></td>
+														<td class="title"><anime.ep.icons></anime.ep.icons><anime.ep.title></anime.ep.title></td>
+														<td class="duration"><anime.ep.duration></anime.ep.duration></td>
+														<td class="number files"><anime.ep.files></anime.ep.files></td>
+														<td class="date airdate"><anime.ep.airdate></anime.ep.airdate></td>
+													</tr>
+													<tr id="eid_%anime.ep.id%_filelist">
+														<td colspan="6">
+															<table class="filelist">
+																<thead>
+																	<tr class="heading">
+																		<th class="id">FID</th>
+																		<th class="size">Size</th>
+																		<th class="icons status">Status</th>
+																		<th class="title">Group</th>
+																		<th class="quality">Quality</th>
+																		<th class="resolution">Resolution</th>
+																		<th class="source">Source</th>
+																		<th class="icon ed2k">ED2K</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr class="" id="fid_%anime.file.id%">
+																		<td class="id"><anime.file.id></anime.file.id></td>
+																		<td class="size"><anime.file.size></anime.file.size></td>
+																		<td class="icons status"><anime.file.icons></anime.file.icons></td>
+																		<td class="title"><anime.file.group></anime.file.group></td>
+																		<td class="quality"><anime.file.quality></anime.file.quality></td>
+																		<td class="resolution"><anime.file.resolution></anime.file.resolution></td>
+																		<td class="source"><anime.file.source></anime.file.source></td>
+																		<td class="icon ed2k"><anime.file.ed2k></anime.file.ed2k></td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
               </tbody>
             </table>
             <div class="g_actionlist mylist_action"><jumppage></jumppage></div>

@@ -12,6 +12,9 @@ var animeFilter = {'complete':false,'incomplete':false,'restricted':false,'watch
                    'notwatched':false,'stalled':false,'fileinfo':true,'wishlisted':false,'awarded':false};
 var curpage = 1;
 var filteredAnimes = 0;
+var eplistTableRow;
+var filelistTableRow;
+var fileRow;
 
 /* *
  * Calls data handlers for xml data
@@ -165,74 +168,242 @@ function updateAnimeRow(anime) {
   //row.style.display = '';
   if (anime.complete) row.className = "complete ";
   if (anime.watched) row.className = "all_watched ";
-  var cells = row.getElementsByTagName('TD');
-  if (!cells) return;
-  var cell = getElementsByClassName(cells,'title',true)[0];
-  if (cell) {
-    var icons = getElementsByClassName(cell.getElementsByTagName('DIV'),'icons',false)[0];
-    if (icons) {
-      while (icons.childNodes.length) icons.removeChild(icons.firstChild);
-      mylistIcons(icons,anime);
-    }
-    var ahref = cell.getElementsByTagName('A')[0];
-    if (ahref) {
-      ahref.href = ahref.href.replace('%ANIMEID%',anime.id);
-      var title = anime.getTitle('main');
-      if (animeTitleDisplay == 1) title += ' ('+anime.getAltTitle('official')+')';
-      ahref.firstChild.nodeValue = ahref.firstChild.nodeValue.replace('%ANIMETITLE%',title);
-      if (animeTitleDisplay == 2 && anime.getAltTitle('official').length) ahref.title = 'Alternative title: '+ anime.getAltTitle('official');
-      cell.setAttribute('anidb:sort',title);
-    }
-  }
-  cell = getElementsByClassName(cells,'eps',true)[0];
-  if (cell) {
-    var eps = anime.neps['user'] + '/' + anime.neps['cnt']+(anime.seps['user'] ? '+' + anime.seps['user'] : '');
-    cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMEEPS%',eps);
-    cell.setAttribute('anidb:sort',anime.neps['user']);
-  }
-  cell = getElementsByClassName(cells,'seen',true)[0];
-  if (cell) {
-    var seen = anime.neps['seen'] + '/' + anime.neps['cnt']+(anime.seps['seen'] ? '+' + anime.seps['seen'] : '');
-    cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMESEEN%',seen);
-    cell.setAttribute('anidb:sort',anime.neps['seen']);
-  }
-  cell = getElementsByClassName(cells,'anime',true)[0];
-  if (cell) {
-    cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMERATING%',(anime.rating['votes'] ? anime.rating['rating'] : '-'));
-    var span = cell.getElementsByTagName('SPAN')[0];
-    span.firstChild.nodeValue = span.firstChild.nodeValue.replace('%ANIMEVOTES%',(anime.rating['votes'] ? anime.rating['votes'] : '0'));
-    cell.setAttribute('anidb:sort',(anime.rating['votes'] ? anime.rating['rating'] : '0'));
-  }
-  cell = getElementsByClassName(cells,'vote',true)[0];
-  if (cell) {
-    var vote = (anime.myvote ? anime.myvote['vote'] : '');
-    if (!anime.watched) cell.className += ' none';
-    else {
-      if (!anime.myvote) { 
-        cell.className += ' pending';
-        createIcon(cell,'pending',null,null,'You have not voted for this anime yet!','i_no_vote');
-      } else if (anime.myvote['type'] == 'temp') cell.className += ' temp mid';
-      else if (anime.myvote['type'] == 'normal') cell.className += ' anime mid';
-    }
-    cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMEMYVOTE%',vote);
-    cell.setAttribute('anidb:sort',(anime.myvote ? anime.myvote['vote'] : '0'));
-  }
-  cell = getElementsByClassName(cells,'attavg',true)[0];
-  if (cell) {
-    cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMEREVIEWRATING%',(anime.reviews ? anime.rrating : '-'));
-    var span = cell.getElementsByTagName('SPAN')[0];
-    span.firstChild.nodeValue = span.firstChild.nodeValue.replace('%ANIMEREVIEWCNT%',(anime.reviews ? anime.reviews : '0'));
-    cell.setAttribute('anidb:sort',(anime.reviews ? anime.reviews : '0'));
-  }
-  cell = getElementsByClassName(cells,'action',true)[0];
-  if (cell) cell.firstChild.name = cell.firstChild.name.replace('%ANIMEID%',anime.id);
-  cell = getElementsByClassName(cells,'year',true)[0];
-  if (cell) cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMEYEAR%',anime.year);
-  cell = getElementsByClassName(cells,'type',true)[0];
-  if (cell) cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMETYPE%',anime.type);
-  cell = getElementsByClassName(cells,'size',true)[0];
-  if (cell) cell.firstChild.nodeValue = cell.firstChild.nodeValue.replace('%ANIMESIZE%',anime.size);
-  return row;
+	// work
+	var elems = row.getElementsByTagName('ANIME.EXPAND');
+	while (elems.length) {
+		var a = document.createElement('A');
+		var img = document.createElement('IMG');
+		img.src = 'css/icons/plus.gif';
+		img.title = 'expand all entries';
+		img.alt = '(+)';
+		img.width = 15;
+		img.height = 13;
+		a.appendChild(img);
+		a.onclick = expandEpsByAnime;
+		elems[0].parentNode.replaceChild(a,elems[0]);
+	}
+	var elems = row.getElementsByTagName('ANIME.TITLE.ALINK');
+	while (elems.length) {
+    var title = anime.getTitle('main');
+		var tooltip;
+    if (animeTitleDisplay == 1) title += ' ('+anime.getAltTitle('official')+')';
+    if (animeTitleDisplay == 2 && anime.getAltTitle('official').length) tooltip = 'Alternative title: '+ anime.getAltTitle('official');
+    elems[0].parentNode.setAttribute('anidb:sort',title);
+		var a = createLink(null, title, 'anime.html?show=anime&aid='+anime.id, null, null, tooltip, null);
+		elems[0].parentNode.replaceChild(a,elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.ICONS');
+	while (elems.length) {
+    var div = document.createElement('DIV');
+		div.className = 'icons';
+		mylistIcons(div,anime);
+		elems[0].parentNode.replaceChild(div,elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.EPS.OWNED');
+	while (elems.length) {
+		var eps = anime.neps['user'] + '/' + anime.neps['cnt']+(anime.seps['user'] ? '+' + anime.seps['user'] : '');
+		elems[0].parentNode.setAttribute('anidb:sort',anime.neps['user']);
+		elems[0].parentNode.replaceChild(document.createTextNode(eps),elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.EPS.SEEN');
+	while (elems.length) {
+		var seen = anime.neps['seen'] + '/' + anime.neps['cnt']+(anime.seps['seen'] ? '+' + anime.seps['seen'] : '');
+		elems[0].parentNode.setAttribute('anidb:sort',anime.neps['seen']);
+		elems[0].parentNode.replaceChild(document.createTextNode(seen),elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.RATING');
+	while (elems.length) {
+		elems[0].parentNode.setAttribute('anidb:sort',(anime.rating['votes'] ? anime.rating['rating'] : '0'));
+		elems[0].parentNode.replaceChild(document.createTextNode((anime.rating['votes'] ? anime.rating['rating'] : '-')),elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.VOTES');
+	while (elems.length) {
+		var span = document.createElement('SPAN');
+		span.className = 'count';
+		span.appendChild(document.createTextNode((anime.rating['votes'] ? anime.rating['votes'] : '0')));
+		elems[0].parentNode.replaceChild(span,elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.MYVOTE');
+	while (elems.length) {
+		var vote = (anime.myvote ? anime.myvote['vote'] : '');
+		var rep = document.createTextNode(vote);
+		if (!anime.watched) elems[0].parentNode.className += ' none';
+		else {
+			if (!anime.myvote) { 
+				elems[0].parentNode.className += ' pending';
+				rep = createIcon(null,'[!]',null,null,'You have not voted for this anime yet!','i_no_vote');
+			} else {
+				if (anime.myvote['type'] == 'temp') elems[0].parentNode.className += ' temp mid';
+				if (anime.myvote['type'] == 'normal') elems[0].parentNode.className += ' anime mid';
+				if (Number(vote) >= 8) { rep = document.createElement('B'); rep.appendChild(document.createTextNode(vote)); }
+			}
+		}
+		elems[0].parentNode.setAttribute('anidb:sort',(anime.myvote ? anime.myvote['vote'] : '0'));
+		elems[0].parentNode.replaceChild(rep,elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.REVIEW.RATING');
+	while (elems.length) {
+		elems[0].parentNode.setAttribute('anidb:sort',(anime.reviews ? anime.reviews : '0'));
+		elems[0].parentNode.replaceChild(document.createTextNode((anime.reviews ? anime.rrating : '-')),elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.REVIEW.CNT');
+	while (elems.length) {
+		var span = document.createElement('SPAN');
+		span.className = 'count';
+		span.appendChild(document.createTextNode((anime.reviews ? anime.reviews : '0')));
+		elems[0].parentNode.replaceChild(span,elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.ID');
+	while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(anime.id),elems[0]);
+	elems = row.getElementsByTagName('ANIME.YEAR');
+	while (elems.length) { 
+		elems[0].parentNode.setAttribute('anidb:sort',anime.year);
+		elems[0].parentNode.replaceChild(document.createTextNode(anime.year),elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.TYPE');
+	while (elems.length) { 
+		elems[0].parentNode.setAttribute('anidb:sort',anime.type);
+		elems[0].parentNode.replaceChild(document.createTextNode(anime.type),elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.SIZE');
+	while (elems.length) { 
+		elems[0].parentNode.setAttribute('anidb:sort',anime.size);
+		elems[0].parentNode.replaceChild(document.createTextNode(anime.size),elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.ACTION');
+	while (elems.length) { 
+		var input = document.createElement('INPUT');
+		input.type = 'checkbox';
+		input.name = 'trade.a'+anime.id;
+		elems[0].parentNode.replaceChild(input,elems[0]);
+	}
+	return row;
+}
+
+function expandEpsByAnime() {
+	var aid=this.parentNode.parentNode.id;
+	if (!document.getElementById(aid+'_eplist')) fetchAnime(aid);
+	else document.getElementById(aid+'_eplist').style.display = '';
+	this.onclick = foldEpsByAnime;
+	var img = this.getElementsByTagName('IMG')[0];
+	img.src = 'css/icons/minus.gif';
+	img.title = 'collapse all entries';
+	img.alt = '[-]';
+}
+function foldEpsByAnime() { 
+	var aid=this.parentNode.parentNode.id;
+	if (document.getElementById(aid+'_eplist')) document.getElementById(aid+'_eplist').style.display = 'none';
+	this.onclick = expandEpsByAnime;
+	var img = this.getElementsByTagName('IMG')[0];
+	img.src = 'css/icons/plus.gif';
+	img.title = 'expand all entries';
+	img.alt = '[+]';
+}
+
+function fetchAnime(aid) {
+	loadData('anime/'+aid+'.xml',parseAnimeData);
+	uriObj['show'] = 'anime';
+}
+
+function parseAnimeData(xmldoc) {
+  updateStatus('parsing Custom node');
+  var root = xmldoc.getElementsByTagName('root').item(0);
+  var t1 = new Date();
+  parseCustom(root.getElementsByTagName('custom').item(0));
+  var parseCustomNode = (new Date()) - t1;
+  updateStatus('Processing anime...');
+  t1 = new Date();
+  parseAnimes(root.getElementsByTagName('animes'));
+  var parseAnimeNode = (new Date()) - t1;
+  updateStatus('Processing user information...');
+  if (seeTimes) { alert('Processing...'+
+        '\n\tanime: '+parseAnimeNode+'ms'+
+        '\n\tcustom: '+parseCustomNode+' ms'+
+        '\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms'); }
+  updateStatus('');
+  createEpList('a'+anime.id,null);
+}
+
+function createEpList(aid,nbody) {
+	var epTable, body;
+	if (!nbody) {
+		epTable = eplistTableRow.cloneNode(true);
+		epTable.id = aid+'_eplist';
+	  body = epTable.getElementsByTagName('TBODY')[0];
+	} else body = nbody;
+	var anime = animes[aid.substr(1,aid.length)];
+	if (!anime) return;
+	var cloneTBody = document.createElement('TBODY');
+	cloneTBody.appendChild(body.rows[0]);
+	filelistTableRow = document.createElement('TBODY');
+	filelistTableRow.appendChild(body.rows[0]);
+	fileRow = document.createElement('TBODY');
+	fileRow.appendChild(filelistTableRow.getElementsByTagName('TBODY')[0].rows[0]);
+	for (var e = 0; e < anime.eps.length; e++) {
+		var episode = episodes[anime.eps[e]];
+		if (!episode) continue;
+		var row = cloneTBody.rows[0].cloneNode(true);
+		row.id = 'eid_'+episode.id;
+		// Work
+		var elems = row.getElementsByTagName('ANIME.EP.EXPAND');
+		while (elems.length) {
+			var a = document.createElement('A');
+			var img = document.createElement('IMG');
+			img.src = 'css/icons/plus.gif';
+			img.title = 'expand all entries';
+			img.alt = '(+)';
+			img.width = 15;
+			img.height = 13;
+			a.appendChild(img);
+			a.onclick = expandFilesByEp;
+			elems[0].parentNode.replaceChild(a,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.EP.EPNO');
+		while (elems.length) {
+			var a = createLink(null,episode.epno,'episode.html?show=ep&eid='+episode.id+'&aid='+anime.id,null,null,null,null);
+			elems[0].parentNode.replaceChild(a,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.EP.TITLE');
+		while (elems.length) {
+			var span = document.createElement('SPAN');
+			span.appendChild(document.createTextNode(episode.getTitle()));
+			var altTitle = curTitle = '';
+			if (episodeTitleLang != episodeAltTitleLang && 
+					episode.titles[episodeAltTitleLang] && 
+					episode.titles[episodeAltTitleLang] != '' &&
+					episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
+			if (altTitle != '') {
+				if (episodeTitleDisplay == 1) span.appendChild(document.createTextNode(' ('+altTitle+')'));
+				if (episodeTitleDisplay == 2) span.title = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle;
+			}
+			elems[0].parentNode.replaceChild(span,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.EP.ICONS');
+		while (elems.length) {
+			var div = document.createElement('DIV');
+			div.className = 'icons';
+			createEpIcons(div,episode);
+			elems[0].parentNode.replaceChild(div,elems[0]);
+		}
+		elems = row.getElementsByTagName('ANIME.EP.DURATION');
+		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(episode.length),elems[0]);
+		elems = row.getElementsByTagName('ANIME.EP.FILES');
+		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(episode.files.length),elems[0]);
+		elems = row.getElementsByTagName('ANIME.EP.AIRDATE');
+		while (elems.length) {
+			var text,tooltip;
+			if (episode.dates['rel']) { text = cTimeDate(episode.dates['rel']); tooltip = 'added on '+episode.dates['add']; }
+			else text = cTimeDate(episode.dates['add']);
+			var a = createLink(null,text,null,null,null,(tooltip ? tooltip : null),null);
+			elems[0].parentNode.replaceChild(a,elems[0]);
+		}
+		body.appendChild(row);
+	}
+	var animeRow = document.getElementById(aid);
+	if (animeRow) { 
+		animeRow.parentNode.insertBefore(epTable,animeRow.nextSibling);
+		epTable.style.display = '';
+	}
 }
 
 /* *
@@ -246,6 +417,8 @@ function renderPage() {
   var tbody = animeListTable.tBodies[0];
   animeListRow = tbody.rows[0].cloneNode(true);
   tbody.removeChild(tbody.rows[0]);
+	eplistTableRow = tbody.rows[0].cloneNode(true);
+	tbody.removeChild(tbody.rows[0]);
   for (var i = 0; i < animeOrder.length; i++) {
     var anime = animes[animeOrder[i]];
     var row = updateAnimeRow(anime);

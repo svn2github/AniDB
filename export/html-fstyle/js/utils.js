@@ -662,6 +662,7 @@ function init_sorting(node,ident,sortico) {
 	for (var i = 0; i < headinglist.length; i++) {
 		headinglist[i].onclick = sortcol; // This applies the actual sorting behaviour
 		// And the following adds the icons (Optional, it's just a visual input)
+    /*
 		for (var k = 0; k < sortFuncs.length; k++) {
 		  if (headinglist[i].className.indexOf(sortFuncs[k]) >= 0) {
 		    var dv = document.createElement('DIV');
@@ -692,6 +693,7 @@ function init_sorting(node,ident,sortico) {
 		    break;
 		  }
 	  }
+    */
   }
 	FunctionMap = {'c_latin':{'sortf':c_string, 'sortr':c_string_r, 'getval':dig_text_lower},
 		'c_number':{'sortf':c_number, 'sortr':c_number_r, 'getval':dig_text},
@@ -735,6 +737,7 @@ function sortcol(node) {
 	var sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
 	if (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none') return; // There will be no sorting for this column.
 	// We get all the spans in the icons divs so that we can clear their icons
+/*
 	var headinglist = here.parentNode.getElementsByTagName('SPAN');
 	for (var i=0; i < headinglist.length; i++) {
 	  var span = headinglist[i];
@@ -743,6 +746,7 @@ function sortcol(node) {
 		  span.title = 'click header to sort column';
 		}
 	}
+*/
   // clear other sorting that could be present
   for (var i = 0; i < node.parentNode.childNodes.length; i++) {
     var cell = node.parentNode.childNodes[i];
@@ -751,6 +755,7 @@ function sortcol(node) {
     if (cell.className.indexOf(' s_reverse') > -1) cell.className = cell.className.replace(' s_reverse','');
   }
 	// Finding the current header sort icon span
+/*
 	var curSpan;
 	var spanlist = here.getElementsByTagName('SPAN');
 	for (var i = 0; i < spanlist.length; i++) {
@@ -760,6 +765,7 @@ function sortcol(node) {
 	    break;
 	  }
 	}
+*/
   // Finding the actual Table node
 	while (here.nodeName != 'TABLE')
 	  here = here.parentNode;
@@ -803,13 +809,17 @@ function sortcol(node) {
 	if (node.className.indexOf("s_forward") >= 0) {
 		sortlist.sort(funcmap['sortr']);
 		node.className = node.className.replace("s_forward", "s_reverse");
+/*
 		curSpan.className = 'i_icon i_down1';
 		curSpan.title = 'sort descending';
+*/
 	} else {
 		sortlist.sort(funcmap['sortf']);
 		node.className = node.className.replace(" s_reverse","") + " s_forward";
+/*
 		curSpan.className = 'i_icon i_up1';
 		curSpan.title = 'sort ascending';
+*/
 	}
 
 	for (var i = 0; i < sortlist.length; i++) {

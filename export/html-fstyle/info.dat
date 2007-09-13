@@ -1,21 +1,23 @@
 (C) 2007 by fahrenheit [alka.setzer[at]gmail.com]
-version svn0.9 (05.09.2007):
+version svn0.9.3 (13.09.2007):
 
-THIS TEMPLATE IS NOT COMPLETE AND THERE WILL BE NO SUPPORT UNTIL IT'S PROPERLY RELEASED
+THIS TEMPLATE IS NOT YET COMPLETE, BASIC FUNCTIONALITY IS AVAILABLE BUT ADVANCE PAGES ARE MISSING
+THERE WILL BE NO SUPPORT UNTIL IT'S PROPERLY RELEASED
+THIS TEMPLATE WILL REPLACE html-anidbstyle, html-operatic AND html-cleancut WHEN FINISHED.
 
 html-fstyle theme:
-- Light themed template, uses a Single Page/Multiple Page Layout scheme to display information (based on user pref).
-- Filter anime on MyList by state (mixed, unknown, on hdd, on cd, deleted, ongoing and has awards), status (complete, incomplete, watched and unviewed), type (TV, OVA, etc) and by Genre.
+- Highly customizable and informative theme using a Multiple Page layout for displaying information.
+- Filter anime on MyList by state (mixed, unknown, on hdd, on cd, deleted, ongoing and has awards), status (complete, incomplete, watched and unviewed), type (TV, OVA, etc).
 - Popups with File Information and Episode Information for each file/episode.
-- Has an internal "Search page".
-- Includes support for Wishlist.
-- Link to aniDB, animeNFO and Anime Planet for more info on selected files/episodes/animes.
-- Uses all information available to exports, including Awards, Temporary Votes and Jap/Eng Titles.
-- Can be styled with anidb's CSS stylesheets (with minor adjustments), supplied with the default theme.
+- Has an internal "Search page". (not working yet)
+- Includes support for Wishlist. (only basic filtering available currently)
+- Links external databases for more information about a given anime.
+- Uses all sensible information available to exports.
+- Can be styled with Anidb's CSS stylesheets.
 - Tested and working with: IE 6.0+, FireFox 1.0+, Opera 8.0+.
 
 note: requires a browser capable of doing the following:
-- javascript version 1.5
+- javascript version 1.5+
 - XMLHTTPRequest support
 - HTTP 1.1 (required by XMLHTTPREQUEST for assync gets)
 - css v1 and v2

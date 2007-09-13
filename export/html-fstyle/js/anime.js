@@ -47,7 +47,7 @@ function renderPage() {
 	while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(anime.title),elems[0]);
 	elems = document.getElementsByTagName('ANIME.ALINK');
 	while (elems.length) {
-		var a = createLink(null, anime.title, 'http://anidb.net/a'+anime.Id, null, null, null, 'short_link');
+		var a = createLink(null, 'a'+anime.id, 'http://anidb.net/a'+anime.id, null, null, null, 'short_link');
 		elems[0].parentNode.replaceChild(a,elems[0]);
 	}
 	elems = document.getElementsByTagName('ANIME.TYPE');
@@ -693,34 +693,44 @@ function createFileList(eid,nbody) {
 			var a = createLink(null, file.id, 'file.html?show=file&fid='+file.id+'&aid='+file.animeId+'&eid='+file.episodeId, null, null, null, null);
 			elems[0].parentNode.replaceChild(a,elems[0]);
 		}
-		elems = row.getElementsByTagName('ANIME.FILE.SIZE');
-		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(formatFileSize(file.size,false)),elems[0]);
-		elems = row.getElementsByTagName('ANIME.FILE.GROUP');
-		while (elems.length) {
-			var group = groups[file.groupId];
-			if (!group) continue;
-			var a = createLink(null, group.shortName, base_url+'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null);
-			elems[0].parentNode.replaceChild(a,elems[0]);
-		}
-		elems = row.getElementsByTagName('ANIME.FILE.RESOLUTION');
-		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(file.resolution),elems[0]);
-		elems = row.getElementsByTagName('ANIME.FILE.SOURCE');
-		while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(file.source),elems[0]);
-		elems = row.getElementsByTagName('ANIME.FILE.QUALITY');
-		while (elems.length) {
-			var span = buildQualityIcon(null,file.quality);
-			elems[0].className += file.quality;
-			elems[0].parentNode.replaceChild(span,elems[0]);
-		}
-		elems = row.getElementsByTagName('ANIME.FILE.ED2K');
-		while (elems.length) {
-			var span;
-			if (file.ed2k != '') {
-				elems[0].parentNode.onmouseover = createHashLink;
-				if (file.crcStatus != 'invalid') span = createIcon(null, 'ed2k', "!fillme!", null, 'ed2k hash', 'i_file_ed2k');
-				else createIcon(null, 'ed2k.crc.bad', "!fillme!", null, 'ed2k hash (invalid CRC file)', 'i_file_ed2k_corrupt');
-			} else span = document.createTextNode('-');
-			elems[0].parentNode.replaceChild(span,elems[0]);
+		if (file.type != 'generic') {
+			elems = row.getElementsByTagName('ANIME.FILE.SIZE');
+			while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(formatFileSize(file.size,false)),elems[0]);
+			elems = row.getElementsByTagName('ANIME.FILE.GROUP');
+			while (elems.length) {
+				var group = groups[file.groupId];
+				if (!group) continue;
+				var a = createLink(null, group.shortName, base_url+'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null);
+				elems[0].parentNode.replaceChild(a,elems[0]);
+			}
+			elems = row.getElementsByTagName('ANIME.FILE.RESOLUTION');
+			while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(file.resolution),elems[0]);
+			elems = row.getElementsByTagName('ANIME.FILE.SOURCE');
+			while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(file.source),elems[0]);
+			elems = row.getElementsByTagName('ANIME.FILE.QUALITY');
+			while (elems.length) {
+				var span = buildQualityIcon(null,file.quality);
+				elems[0].className += file.quality;
+				elems[0].parentNode.replaceChild(span,elems[0]);
+			}
+			elems = row.getElementsByTagName('ANIME.FILE.ED2K');
+			while (elems.length) {
+				var span;
+				if (file.ed2k != '') {
+					elems[0].parentNode.onmouseover = createHashLink;
+					if (file.crcStatus != 'invalid') span = createIcon(null, 'ed2k', "!fillme!", null, 'ed2k hash', 'i_file_ed2k');
+					else createIcon(null, 'ed2k.crc.bad', "!fillme!", null, 'ed2k hash (invalid CRC file)', 'i_file_ed2k_corrupt');
+				} else span = document.createTextNode('-');
+				elems[0].parentNode.replaceChild(span,elems[0]);
+			}
+		} else {
+			elems = row.getElementsByTagName('ANIME.FILE.SIZE');
+			while (elems.length) {
+				var a = createLink(null, 'generic file', 'http://wiki.anidb.net/w/Files:Generic_files', null, null, null, null);
+				var b = document.createElement('B');
+				b.appendChild(a);
+				elems[0].parentNode.replaceChild(b,elems[0]);
+			}
 		}
 		elems = row.getElementsByTagName('ANIME.FILE.ICONS');
 		while (elems.length) {
