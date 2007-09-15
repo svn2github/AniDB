@@ -569,7 +569,7 @@ body.nonav #layout-content h1
 {
 	display: block;
 }
-#layout-content div.anime_info p.desc
+#layout-content div.anime_info div.desc
 {
 	margin: 0.7em 0.3em 0.3em 0.3em;
 }
@@ -1678,7 +1678,7 @@ a.i_icon:hover, a.i_inline:hover
 {
 	text-align: center;
 }
-#layout-content div.group_info p.desc
+#layout-content div.group_info div.desc
 {
 	text-align: center;
 }

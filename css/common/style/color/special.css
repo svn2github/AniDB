@@ -31,6 +31,7 @@ span.diff,
 	background-color: inherit;
 }
 
+#layout-content a.filter,
 #layout-content .name span.main,
 #layout-content .name span.match
 {

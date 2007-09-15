@@ -518,9 +518,20 @@ span.i_video
 	background-image: url(../icons/icon/anidb_video.gif);
 }
 
+span.i_video.xvid,
+span.i_video.divx5,
+{
+	background-image: url(../icons/icon/anidb_video_asp.gif);
+}
+
 span.i_video.avc
 {
 	background-image: url(../icons/icon/anidb_video_avc.gif);
+}
+
+span.i_video.wmv9
+{
+	background-image: url(../icons/icon/anidb_video_wmv.gif);
 }
 
 span.i_ext
@@ -536,6 +547,16 @@ span.i_ext.mkv
 span.i_ext.ogm
 {
 	background-image: url(../icons/icon/anidb_ext_ogm.gif);
+}
+
+span.i_ext.avi
+{
+	background-image: url(../icons/icon/anidb_ext_avi.gif);
+}
+
+span.i_ext.mp4
+{
+	background-image: url(../icons/icon/anidb_ext_mp4.gif);
 }
 
 span.i_videostream_unknown,

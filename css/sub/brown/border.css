@@ -37,7 +37,7 @@ img, a
 #layout-content *.g_image image,
 #layout-content div.g_timedentry,
 #layout-content div.g_definitionlist table,
-#layout-content div.block + .desc
+#layout-content div.block + div.desc
 {
 	border: 1px #999380 dotted;
 }

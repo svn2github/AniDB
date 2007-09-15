@@ -40,7 +40,7 @@ ul,
 #layout-content div.g_definitionlist table,
 #layout-content div.latestanimes_form,
 #layout-content div.addepm div.ep,
-#layout-content div.block + .desc,
+#layout-content div.block + div.desc,
 #layout-content div.block div.image img
 {
 	border: 1px #d1d7dc solid;
