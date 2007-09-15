@@ -36,6 +36,7 @@ function parseData(xmldoc) {
 }
 
 function renderPage() {
+	updateStatus('Rendering page...');
 	var anime = animes[uriObj['aid']];
 	var episode = episodes[uriObj['eid']];
 	var elems = document.getElementsByTagName('ANIME.TITLE.MAIN');
@@ -127,6 +128,7 @@ function renderPage() {
 	fileRow = document.createElement('TBODY');
 	fileRow.appendChild(filelist.tBodies[0].rows[0]);
 	createFileList('eid_'+episode.id,filelist.tBodies[0]);
+	updateStatus('');
 }
 
 /* *

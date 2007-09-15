@@ -37,6 +37,7 @@ function parseData(xmldoc) {
 }
 
 function renderPage() {
+	updateStatus('Rendering page...');
 	var anime = animes[uriObj['aid']];
 	var episode = episodes[uriObj['eid']];
 	var file = files[uriObj['fid']];
@@ -321,6 +322,7 @@ function renderPage() {
 			}
 		}
 	} else if (div) div.parentNode.removeChild(div);
+	updateStatus('');
 }
 
 /* *

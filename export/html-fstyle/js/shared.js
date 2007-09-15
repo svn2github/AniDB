@@ -32,6 +32,37 @@ function loadData(url,func) {
   xhttpRequestFetch(req, url, func);
 }
 
+
+/* *
+ * Removes rows from a given TBody
+ */
+function clearTableRows(tbody) {
+	while (tbody.rows.length) tbody.removeChild(tbody.rows[0]);
+}
+
+
+function clearFontWeight(parentNode,type) {
+	//alert('pType: '+parentNode.nodeName+'\nnType: '+type);
+	var elems = parentNode.getElementsByTagName(type);
+	for (var i = 0; i < elems.length; i++) { 
+		var elem = elems[i];
+		if (!elem.style) continue;
+		elem.style.fontWeight = 'normal';
+	}
+}
+
+/* *
+ * Sets the number of EntriesPerPage and refreshes data
+ */
+function setEpp() {
+	var epp = Number(this.firstChild.nodeValue);
+	if (epp.isNaN) return;
+	clearFontWeight(this.parentNode.parentNode,this.nodeName);
+	this.style.fontWeigth = 'bold';
+	entriesPerPage = epp;
+	writeData(); // force data write
+}
+
 /* *
  * Creates a search box
  */
@@ -63,6 +94,8 @@ function replaceGlobals(node) {
   while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(userInfo.name),elems[0]);
   elems = node.getElementsByTagName('USERID');
   while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(userInfo.id),elems[0]);
+  elems = node.getElementsByTagName('THEMENAME');
+  while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(theme['name']),elems[0]);
   elems = node.getElementsByTagName('THEMEVERSION');
   while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(theme['version']),elems[0]);
   elems = node.getElementsByTagName('THEMESOURCE');
@@ -73,7 +106,7 @@ function replaceGlobals(node) {
   var a = createLink(null, 'u'+userInfo.id, 'http://anidb.net/u'+userInfo.id, null, null, null, 'short_link');
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
   elems = node.getElementsByTagName('USERPAGELINK');
-  a = createLink(null, 'Userpage', 'http://anidb.net/up'+userInfo.id, null, null, null, 'short_link');
+  a = createLink(null, 'userpage', 'http://anidb.net/up'+userInfo.id, null, null, null, 'short_link');
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
   elems = node.getElementsByTagName('ANIDBMSGUSERLINK');
   a = createLink(null, 'send message', base_url+'?show=msg&do=new&msg.to='+userInfo.name, null, null, null, null);

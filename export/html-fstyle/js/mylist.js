@@ -9,7 +9,8 @@
 var animeListTable; // the animelist table
 var animeListRow; // the sample animeList row
 var animeFilter = {'complete':false,'incomplete':false,'restricted':false,'watched':false,'ongoing':false,
-                   'notwatched':false,'stalled':false,'fileinfo':true,'wishlisted':false,'awarded':false};
+                   'notwatched':false,'stalled':false,'fileinfo':true,'wishlisted':false,'awarded':false,
+									 'myvote':false};
 var curpage = 1;
 var filteredAnimes = 0;
 var eplistTableRow;
@@ -111,6 +112,7 @@ function createPageJump(page) {
     var ul = document.createElement('UL');
     ul.className = 'pageJump';
     var pages = Math.ceil(calculateNonFilteredAnimes()/entriesPerPage);
+		//alert('calculateNonFilteredAnimes(): '+calculateNonFilteredAnimes()+'\nePP: '+entriesPerPage+'\npages: '+pages);
     for (var i = 1; i <= pages; i++) {
       if ((i == 1) ||
           (i == pages) || 
@@ -301,6 +303,7 @@ function foldEpsByAnime() {
 }
 
 function fetchAnime(aid) {
+	updateStatus('Fetching anime data...');
 	loadData('anime/'+aid+'.xml',parseAnimeData);
 	uriObj['show'] = 'anime';
 }
@@ -407,6 +410,21 @@ function createEpList(aid,nbody) {
 }
 
 /* *
+ * Writes the Data to the animetable
+ */
+function writeData() {
+	updateStatus('Rendering page...');
+	var tbody = animeListTable.tBodies[0];
+	clearTableRows(tbody);
+  for (var i = 0; i < animeOrder.length; i++) {
+    var anime = animes[animeOrder[i]];
+    var row = updateAnimeRow(anime);
+    row.className += (i % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
+    tbody.appendChild(row);
+  }
+}
+
+/* *
  * Renders page, fills in anime rows etc
  */
 function renderPage() {
@@ -414,17 +432,12 @@ function renderPage() {
   if (!animes) { alert('Do you have animes?'); return; }
   animeListTable = getElementsByClassName(document.getElementsByTagName('TABLE'),'animelist',false)[0];
   if (!animeListTable) { alert('Your html structure isn\'t valid'); return; }
+	
   var tbody = animeListTable.tBodies[0];
   animeListRow = tbody.rows[0].cloneNode(true);
   tbody.removeChild(tbody.rows[0]);
 	eplistTableRow = tbody.rows[0].cloneNode(true);
 	tbody.removeChild(tbody.rows[0]);
-  for (var i = 0; i < animeOrder.length; i++) {
-    var anime = animes[animeOrder[i]];
-    var row = updateAnimeRow(anime);
-    row.className += (i % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
-    tbody.appendChild(row);
-  }
   init_sorting(animeListTable.tHead.rows[0],'title','up');
   var ths = animeListTable.tHead.getElementsByTagName('TH');
   for (var i = 0; i < ths.length; i++) {
@@ -433,6 +446,8 @@ function renderPage() {
       sortcol(this);
     }
   }
+	writeData();
+	updateStatus('');
 }
 
 /* *

@@ -12,14 +12,20 @@
  */
 function CUserinfoEntry(node) {
   this.id = uid;
+	this.animes = new Object();
   this.eps = new Object();
   this.files = new Object();
   this.groups = new Object();
+	this.size = new Object();
   for (var i = 0; i < node.childNodes.length; i++) {
     var snode = node.childNodes.item(i);
     if (snode.nodeType == 3) continue; // Text node, not interested
     switch (snode.nodeName) {
       case 'name': this.name = nodeData(snode); break;
+      case 'animes':
+        this.animes['added'] = Number(snode.getAttribute('added'));
+        this.animes['user'] = Number(snode.getAttribute('user'));
+        break;
       case 'eps':
         this.eps['added'] = Number(snode.getAttribute('added'));
         this.eps['dbviewedp'] = snode.getAttribute('dbviewedp');
@@ -37,13 +43,16 @@ function CUserinfoEntry(node) {
         this.groups['added'] = Number(snode.getAttribute('added'));
         break;
       case 'size':
-        this.sizeBytes = snode.getAttribute('longn');
-        this.size = snode.getAttribute('shortn');
+        this.size['bytes'] = snode.getAttribute('longn');
+        this.size['short'] = snode.getAttribute('shortn');
         break;
       case 'stats':
         this.votes = Number(snode.getAttribute('votes'));
         this.reviews = Number(snode.getAttribute('reviews'));
         break;
+			case 'date':
+				this.date = convertTime(nodeData(snode));
+				break;
       default: showAlert('userinfoEntry for uid: '+uid, node.nodeName, node.nodeName,snode.nodeName);
     }
   }

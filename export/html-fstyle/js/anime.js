@@ -43,6 +43,7 @@ function showAllHiddenSpans() {
 }
 
 function renderPage() {
+	updateStatus('Rendering page...');
 	var elems = document.getElementsByTagName('ANIME.TITLE.MAIN');
 	while (elems.length) elems[0].parentNode.replaceChild(document.createTextNode(anime.title),elems[0]);
 	elems = document.getElementsByTagName('ANIME.ALINK');
@@ -386,8 +387,11 @@ function renderPage() {
 		img.onerror = function onerror(event) { this.parentNode.removeChild(this); }
 		elems[0].parentNode.replaceChild(img,elems[0]);
 	}
+	updateStatus('Rendering group list...');
 	renderGroupList();
+	updateStatus('Rendering episode list...');
 	renderEpisodeList();
+	updateStatus('');
 }
 
 function renderGroupList() {
@@ -674,6 +678,7 @@ function createFileIcons(file,icons) {
 }
 
 function createFileList(eid,nbody) {
+	updateStatus('Rendering file list...');
 	var fileTable, body;
 	if (!nbody) {
 		fileTable = filelistTableRow.rows[0].cloneNode(true);
@@ -743,6 +748,7 @@ function createFileList(eid,nbody) {
 	}
 	var epRow = document.getElementById(eid);
 	if (epRow) epRow.parentNode.insertBefore(fileTable,epRow.nextSibling);
+	updateStatus('');
 }
 
 function expandFilesByEp() {

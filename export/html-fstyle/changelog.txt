@@ -1,5 +1,5 @@
 Template: html-fstyle - ChangeLog
-Version: 0.9.3 - 13.09.2007
+Version: 0.9.4 - 15.09.2007
 (C) 2003-2007 by fahrenheit
 
 Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
@@ -7,6 +7,8 @@ SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/expo
 
 ----------------------------------------------------------------------------------------------
 
+0.9.4 - 15.09.2007
+	- MyVotes and User Statistics pages done
 0.9.3 - 13.09.2007
 	- basework almost complete (only missing file relations)
 	- mylist page now expands episodes of a given anime and respective files

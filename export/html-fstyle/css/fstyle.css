@@ -88,3 +88,5 @@ div#layout-content h1 div.icons a.i_icon {
 *.i_url, *.i_allcinema { width: 16px; height: 16px; background-image: url(icons/web.gif); }
 *.i_anidb { width: 16px; height: 16px; background-image: url(icons/anidb.gif); }
 *.i_backtomylist { width: 16px; height: 16px; background-image: url(icons/mylist.gif); }
+
+*.i_hand { cursor:pointer; }

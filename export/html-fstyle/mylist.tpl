@@ -9,6 +9,7 @@
 		<groups added="<tmpl_var name=global_userstat_groupsadded>" />
 		<size longn="<tmpl_var name=global_bytecount>" shortn="<tmpl_var name=global_bytecount_h>" />
 		<stats votes="<tmpl_var name=global_userstat_reviews>" reviews="<tmpl_var name=global_userstat_votes>" />
+		<date><tmpl_var name=global_date></date>
 	</userinfo>
 	</custom>
 	<cats><tmpl_loop name=global_genren_loop>
