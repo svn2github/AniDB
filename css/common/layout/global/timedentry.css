@@ -1,6 +1,6 @@
 #layout-content div.g_timedentry
 {
-	min-height: 130px;
+	min-height: 150px;
 }
 
 #layout-content div.g_timedentry h4
@@ -13,7 +13,7 @@
 #layout-content div.g_timedentry div.avatar
 {
 	float: right;
-	margin: 0.4em;
+	margin: 10px;
 }
 
 #layout-content div.g_timedentry div.body
