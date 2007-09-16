@@ -41,7 +41,8 @@ ul,
 #layout-content div.latestanimes_form,
 #layout-content div.addepm div.ep,
 #layout-content div.block + div.desc,
-#layout-content div.block div.image img
+#layout-content div.block div.image img,
+#layout-content div.avatar img
 {
 	border: 1px #d1d7dc solid;
 }

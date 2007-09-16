@@ -69,3 +69,8 @@ img, a
 {
 	border: 3px solid #8c8673;
 }
+
+#layout-content div.avatar img
+{
+	border: 1px solid #8c8673;
+}

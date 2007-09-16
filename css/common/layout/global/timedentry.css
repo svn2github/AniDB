@@ -13,6 +13,7 @@
 #layout-content div.g_timedentry div.avatar
 {
 	float: right;
+	margin: 0.4em;
 }
 
 #layout-content div.g_timedentry div.body
