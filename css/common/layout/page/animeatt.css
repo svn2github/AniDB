@@ -4,9 +4,10 @@
 }
 #layout-content div.animeatt_reviews div.review+div.review
 {
-	margin-top: 2em;
+	padding-top: 4em;
 }
 #layout-content div.animeatt_reviews div.review div.head,
+#layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
 	float: right;
@@ -14,7 +15,12 @@
 	width: 10em;
 	padding-right: 2em;
 }
+#layout-content div.animeatt_reviews div.review div.avatar
+{
+	margin-top: -2em;
+}
 #layout-content div.animeatt_reviews div.review div.head table,
+#layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
 	width: 10em;
