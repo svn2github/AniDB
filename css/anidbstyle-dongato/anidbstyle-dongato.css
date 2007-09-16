@@ -588,19 +588,30 @@ span.i_rate_verylow
 	background-image: url(http://static.anidb.net/css/icons/anidb_revote.gif);
 }
 
+*.i_group_comment
+{
+	background-image: url(images/groupcmnt.gif);
+}
+
 span.i_video
 {
 	background-image: url(images/anidb_video.gif);
 }
 
-span.i_video.unk
+span.i_video.xvid,
+span.i_video.divx5
 {
-	background-image: url(images/anidb_video_unk.gif);
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_asp.gif);
 }
 
 span.i_video.avc
 {
-	background-image: url(images/anidb_video_avc.gif);
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_avc.gif);
+}
+
+span.i_video.wmv9
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_wmv.gif);
 }
 
 span.i_ext
@@ -608,19 +619,19 @@ span.i_ext
 	background-image: url(images/anidb_other.gif);
 }
 
-span.i_ext.mp4
-{
-	background-image: url(images/anidb_mp4.gif);
-}
-
 span.i_ext.mkv
 {
-	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_mkv.gif);
+	background-image: url(images/anidb_mkv.gif);
 }
 
 span.i_ext.ogm
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_ogm.gif);
+}
+
+span.i_ext.mp4
+{
+	background-image: url(images/anidb_mp4.gif);
 }
 
 span.i_videostream_unknown,
@@ -1374,6 +1385,7 @@ span.i_videostream_h264_avc
 }
 
 #layout-content div.animeatt_reviews div.review div.head,
+#layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
 	float: right;
@@ -1382,7 +1394,13 @@ span.i_videostream_h264_avc
 	padding-right: 2em;
 }
 
+#layout-content div.animeatt_reviews div.review div.avatar
+{
+	margin-top: -2em;
+}
+
 #layout-content div.animeatt_reviews div.review div.head table,
+#layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
 	width: 10em;
@@ -1690,12 +1708,14 @@ body.nonav #layout-content h1
 	text-align: left;
 }
 
-#layout-content div.agcmts_entries div.comment span.stamp
+#layout-content div.agcmts_entries div.comment span.stamp,
+#layout-content div.review span.stamp
 {
-	display: block;
-	text-align: right;
-	margin-top: -1.3em;
-	padding-right: 0.5em;
+	display: table;
+	text-align: center;
+	padding-top: 0,5em;
+	padding-bottom: 2em;
+	width: 100%;
 }
 
 #layout-content div.agcmts_add p.g_howto
@@ -1899,7 +1919,50 @@ table caption, h4
 {
 	display: table-cell;
 	vertical-align: middle;
-	padding-right: 10px;
+	padding-right: 1em;
+}
+
+#layout-content div.block + div.desc
+{
+	margin-top: 1em;
+	margin-left: 2em;
+	margin-right: 2em;
+}
+
+#layout-content div.g_timedentry
+{
+	min-height: 150px;
+}
+
+#layout-content div.g_timedentry h4
+{
+	padding: 0.1em;
+	margin: 0;
+	text-align: left;
+}
+
+#layout-content div.g_timedentry div.avatar
+{
+	float: right;
+	margin: 10px;
+}
+
+#layout-content div.g_timedentry div.body
+{
+	padding: 0.2em;
+	text-align: left;
+}
+
+#layout-content div.g_timedentry span.stamp
+{
+	display: block;
+	text-align: right;
+	padding-right: 0.5em;
+}
+
+#layout-content div.g_timedentry+div.g_timedentry
+{
+	margin-top: 2em;
 }
 
 #layout-content div.info > p
@@ -2807,11 +2870,6 @@ a:visited, a:active, a:hover, a:link
 	background-color: #494D59;
 }
 
-#layout-content div.main_all div.news span.stamp
-{
-	background-color: #969AA6;
-}
-
 #layout-menu a:link,
 #layout-menu a:visited
 {
@@ -3016,7 +3074,7 @@ body,
 {
 	display: block;
 	text-align: right;
-	background-color: #969aa6;
+	background-color: #969AA6;
 	padding: 0.1em 1em 0.1em 0.1em;
 }
 
@@ -3135,7 +3193,8 @@ div.g_menu .g_odd,
 div.mylist_dump .g_odd,
 div.ed2kdump_options .g_odd,
 div.mylist_add .g_odd,
-.g_actionlist .g_odd,
+div.g_actionlist .g_odd,
+div.g_definitionlist .g_odd,
 li.cat
 {
 	background-color: transparent !important;
@@ -3154,11 +3213,8 @@ div.latestanimes_anime h3
 }
 
 /* buttons and input boxes customization */
-input[type="checkbox"]
+input[type="checkbox"], input[type="radio"]
 {
-	font-size: 100%;
-	height: 1.3em;
-	width: 1.3em;
 	vertical-align: middle;
 }
 
@@ -3268,13 +3324,20 @@ div.hint2_all td.nav
 }
 
 /* fixes for export page */
+div.export_themes div h4
+{
+	color: #BBBBBB;
+	background-color: #494D59;
+}
+
 div.export_all div
 {
-	margin: 2em 0 2em 0;
+	margin: 4em 5em 4em 5em;
 }
 
 div.g_info,
 div.export_action,
+div.export_status ul,
 div.animeatt_info ul,
 div.add_done ul
 {
@@ -3406,7 +3469,7 @@ div.permissions div.detailed th
 	cursor: help;
 }
 
-/* Tooltip support */
+/* tooltip support */
 #obj-tooltip
 {
 	position: absolute;
@@ -3435,17 +3498,10 @@ div.permissions div.detailed th
 	float: left;
 }
 
-/* Wrap fix for icon and action cells */
-th, td.action, td.icons
+/* wrap fix for icon and action cells */
+th, td.action.icons
 {
 	white-space: nowrap;
-}
-
-/* some fixes for latest files */
-div.anime_all td.action,
-div.latest_files_list td.action
-{
-	width: 40px;
 }
 
 div.latest_files_list table
@@ -3464,14 +3520,19 @@ div.mylist_list .g_odd.files
 	background-color: transparent !important;
 }
 
-/* Color of main anime title */
-td.name span.main
+/* different color for main/match/filter */
+#layout-content a.filter,
+#layout-content .name span.main,
+#layout-content .name span.match
 {
 	color: gray;
 }
 
-/* Color of Filter link */
-a.filter
+/* notification box centering */
+#layout-content div.g_errorbox,
+#layout-content div.g_warnbox,
+#layout-content div.g_notebox,
+#layout-content div.g_successbox
 {
-	color: gray;
+	text-align: center;
 }
