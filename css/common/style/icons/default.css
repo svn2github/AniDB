@@ -564,6 +564,11 @@ span.i_ext.mp4
 	background-image: url(../icons/icon/anidb_ext_mp4.gif);
 }
 
+span.i_ext.wmv
+{
+	background-image: url(../icons/icon/anidb_ext_wmv.gif);
+}
+
 span.i_videostream_unknown,
 span.i_videostream_other__non_asp_,
 span.i_videostream_asp_other,
