@@ -493,8 +493,8 @@ td.action
 }
 body.nonav #layout-content
 {
-	width: 100%;
-	height: 100%;
+	width: auto;
+	height: auto;
 	margin: 0;
 }
 body.nonav #layout-content h1
@@ -1703,7 +1703,7 @@ a.i_icon:hover, a.i_inline:hover
 	clear: right;
 	border: #898989 1px dashed;
 	margin-right: 0.5em;
-	min-height: 34em;
+	min-height: 42em;
 }
 #layout-content div.animeatt_reviews div.review h2
 {
@@ -1727,6 +1727,7 @@ a.i_icon:hover, a.i_inline:hover
 	margin-top: 1.5em;
 }
 #layout-content div.animeatt_reviews div.review div.head,
+#layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
 	float: right;
@@ -1734,7 +1735,12 @@ a.i_icon:hover, a.i_inline:hover
 	width: 10em;
 	padding-right: 2em;
 }
+#layout-content div.animeatt_reviews div.review div.avatar
+{
+	margin-top: -2em;
+}
 #layout-content div.animeatt_reviews div.review div.head table,
+#layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
 	width: 10em;
@@ -2043,4 +2049,23 @@ a.i_icon:hover, a.i_inline:hover
 #layout-content div.userpage_all div.latest div.latest_votes span.vote.temp
 {
 	font-style: italic;
+}
+#layout-content div.g_timedentry div.avatar
+{
+	float: right;
+	margin: 10px;
+}
+
+#layout-content div.g_timedentry div.body
+{
+	padding: 0.2em;
+	text-align: left;
+}
+#layout-content div.g_timedentry
+{
+	min-height: 150px;
+}
+#layout-content div.g_timedentry+div.g_timedentry 
+{
+	margin-top: 2em;
 }
