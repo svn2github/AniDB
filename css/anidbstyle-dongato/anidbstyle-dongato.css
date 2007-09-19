@@ -3504,6 +3504,11 @@ th, td.action.icons
 	white-space: nowrap;
 }
 
+.grouplist .action.icons
+{
+	width: 60px;
+}
+
 div.latest_files_list table
 {
 	width: 100%;
