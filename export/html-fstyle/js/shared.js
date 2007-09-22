@@ -21,6 +21,7 @@ var files = new Array();				// stored by fid
 var uriObj = new Array();				// Object that holds the URI
 var seeDebug = false;						// should we display debug info (can be very verbose)
 var seeTimes = false;						// should we display timing info?
+function curDataWrite() {};			// var that holds the dataWrite function to use
 
 /* *
  * Fetches data
@@ -60,7 +61,10 @@ function setEpp() {
 	clearFontWeight(this.parentNode.parentNode,this.nodeName);
 	this.style.fontWeigth = 'bold';
 	entriesPerPage = epp;
-	writeData(); // force data write
+	curDataWrite(); // force data write
+	curpage = 1;
+	showPage(curpage);
+	updateStatus('');
 }
 
 /* *
@@ -105,11 +109,21 @@ function replaceGlobals(node) {
   elems = node.getElementsByTagName('USERIDLINK');
   var a = createLink(null, 'u'+userInfo.id, 'http://anidb.net/u'+userInfo.id, null, null, null, 'short_link');
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
+	elems = document.getElementsByTagName('USERVLINK');
+	a = createLink(null, 'v'+userInfo.id, 'http://anidb.net/v'+userInfo.id, null, null, null, 'short_link')
+	while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
   elems = node.getElementsByTagName('USERPAGELINK');
   a = createLink(null, 'userpage', 'http://anidb.net/up'+userInfo.id, null, null, null, 'short_link');
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
   elems = node.getElementsByTagName('ANIDBMSGUSERLINK');
   a = createLink(null, 'send message', base_url+'?show=msg&do=new&msg.to='+userInfo.name, null, null, null, null);
   while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
+	elems = document.getElementsByTagName('VOTES.RESOURCES');
+	while (elems.length) {
+		var div = document.createElement('DIV');
+		div.className = 'icons';
+		createIcon(div, 'mylist', 'mylist.html?show=mylist', null, 'back to mylist', 'i_backtomylist');
+		elems[0].parentNode.replaceChild(div,elems[0]);
+	}
   createSearchBox();
 }

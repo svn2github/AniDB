@@ -5,7 +5,7 @@
  */
 
 // template info
-var theme = {'name':"html-fstyle",'version':"0.9.4beta",'source':"svn",'date':"14.09.2007"};
+var theme = {'name':"html-fstyle",'version':"0.9.5beta",'source':"svn",'date':"18.09.2007"};
 // settings
 var animeTitleLang = 'x-jat';
 var animeAltTitleLang = 'en';

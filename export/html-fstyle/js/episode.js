@@ -141,4 +141,5 @@ function prepPage() {
   loadData('anime/a'+uriObj['aid']+'.xml',parseData);
 }
 
-window.onload = prepPage;
+//window.onload = prepPage;
+addLoadEvent(prepPage);

@@ -400,12 +400,15 @@ function renderGroupList() {
 	if (anime.groups.length <= 1) { groupTable.parentNode.removeChild(groupTable); return; }
 	var cloneTBody = document.createElement('TBODY');
 	cloneTBody.appendChild(groupTable.tBodies[0].rows[0]);
+	var cnt = -1;
 	for (var g = 0; g < anime.groups.length; g++) {
 		var group = groups[anime.groups[g]];
 		if (!group || !group.id) continue;
 		var row = cloneTBody.rows[0].cloneNode(true);
 		row.id = 'gid_'+group.id;
 		row.className = group.state;
+		cnt++;
+    row.className += (cnt % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
 		// Work
 		var elems = row.getElementsByTagName('ANIME.GROUP.EXPAND');
 		while (elems.length) {
@@ -509,11 +512,14 @@ function renderEpisodeList() {
 	filelistTableRow.appendChild(epTable.tBodies[0].rows[0]);
 	fileRow = document.createElement('TBODY');
 	fileRow.appendChild(filelistTableRow.getElementsByTagName('TBODY')[0].rows[0]);
+	var cnt = -1;
 	for (var e = 0; e < anime.eps.length; e++) {
 		var episode = episodes[anime.eps[e]];
 		if (!episode) continue;
 		var row = cloneTBody.rows[0].cloneNode(true);
 		row.id = 'eid_'+episode.id;
+		cnt++;
+    row.className += (cnt % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
 		// Work
 		var elems = row.getElementsByTagName('ANIME.EP.EXPAND');
 		while (elems.length) {
@@ -687,11 +693,14 @@ function createFileList(eid,nbody) {
 	} else body = nbody;
 	var episode = episodes[eid.substr(4,eid.length)];
 	if (!episode) return;
+	var cnt = -1;
 	for (var i = 0; i < episode.files.length; i++) {
 		var file = files[episode.files[i]];
 		if (!file) continue;
 		var row = fileRow.rows[0].cloneNode(true);
 		row.id = 'fid_'+file.id;
+		cnt++;
+    row.className += (cnt % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
 		// work
 		var elems = row.getElementsByTagName('ANIME.FILE.ID');
 		while (elems.length) {
@@ -785,4 +794,5 @@ function prepPage() {
   loadData('anime/a'+uriObj['aid']+'.xml',parseData);
 }
 
-window.onload = prepPage;
+//window.onload = prepPage;
+addLoadEvent(prepPage);

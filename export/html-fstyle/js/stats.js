@@ -50,7 +50,7 @@ function renderPage() {
 	}
 	var elems = document.getElementsByTagName('EXPORT.SIZE');
 	while (elems.length) {
-		var a = createLink(null, userInfo.size['short'], null, null, null, 'Total: '+userInfo.size['bytes'], 'i_hand');
+		var a = createLink(null, userInfo.size['short'], null, null, null, 'Total: '+userInfo.size['bytes']+' bytes', 'i_hand');
 		elems[0].parentNode.replaceChild(a,elems[0]);
 	}
 	elems = document.getElementsByTagName('STATS.RESOURCES');
@@ -72,4 +72,5 @@ function prepPage() {
   loadData('mylist.xml',parseData);
 }
 
-window.onload = prepPage;
+//window.onload = prepPage;
+addLoadEvent(prepPage);

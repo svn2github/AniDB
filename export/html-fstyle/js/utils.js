@@ -347,6 +347,44 @@ function expandRange(range,limit,map,array) {
 // GENERAL FUNCTIONS //
 
 /* *
+ * Function that expands/collapses ul's
+ */
+function toggleUL() {
+	if (this.nodeName != 'UL') return;
+	var lis = ul.getElementsByTagName('LI');
+	var expand = (this.className.indexOf('t_expand') > -1) ? false : true;
+	for (var i = 0; i < lis.length; i++) {
+		if (!expand) lis[i].style.display = 'none';
+		else lis[i].style.display = '';
+	}
+	if (!expand) this.className.replace('t_expand','t_fold');
+	else this.className.replace('t_fold','t_expand');
+	var div = this.getElementsByTagName('DIV')[0];
+	if (!div || (div && div.className.indexOf('icons') <0)) return;
+	while (div.childNodes.length) div.removeChild(div.childNodes[0]);
+	var state = (!expand) ? 'plus' : 'minus';
+	createIcon(div, (!expand) ? '[+]' : '[-]', null, toggleUL, (!expand) ? 'expand' : 'fold', 'i_'+state);
+}
+
+/* *
+ * Function that initiates the toogle function
+ */
+function initToggle(node,defaultState) {
+	if (node.nodeName != 'UL') return;
+	// create the icon div
+	var div = document.createElement('DIV');
+	div.className = 'icons';
+	var state = (defaultState == 'expand') ? 'plus' : 'minus';
+	createIcon(div, (defaultState == 'expand') ? '[+]' : '[-]', null, toggleUL, defaultState, 'i_'+state);
+	node.insertBefore(div,node.firstChild);
+	node.className += ' t_' + (defaultState) ? defaultState : 'expand';
+	if (defaultState != 'expand') { // collapse
+		var lis = node.getElementsByTagName('LI');
+		for (var i = 0; i < lis.length; i++) lis[i].style.display = 'none';
+	}
+}
+
+/* *
  * Function that alerts the user for errors
  * @param func Name of the function
  * @param process 

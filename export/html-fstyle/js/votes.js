@@ -11,23 +11,25 @@ var seeTimes = false;
 var ginfo;
 
 function parseData(xmldoc) {
-  updateStatus('parsing Custom node');
-  var root = xmldoc.getElementsByTagName('root').item(0);
-  base_url = root.getAttribute('anidb');
-  var t1 = new Date();
-  parseCustom(root.getElementsByTagName('custom').item(0));
-  var parseCustomNode = (new Date()) - t1;
-  replaceGlobals(document.body);
-  updateStatus('Processing animes...');
-  t1 = new Date();
-  parseAnimes(root.getElementsByTagName('animes'));
-  var parseAnimeNode = (new Date()) - t1;
-  updateStatus('Processing user information...');
-  if (seeTimes) { alert('Processing...'+
-        '\n\tanime: '+parseAnimeNode+'ms'+
-        '\n\tcustom: '+parseCustomNode+' ms'+
-        '\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms'); }
-  updateStatus('');
+	if (!animeOrder.length) { // to prevent double data
+		updateStatus('parsing Custom node');
+		var root = xmldoc.getElementsByTagName('root').item(0);
+		base_url = root.getAttribute('anidb');
+		var t1 = new Date();
+		parseCustom(root.getElementsByTagName('custom').item(0));
+		var parseCustomNode = (new Date()) - t1;
+		replaceGlobals(document.body);
+		updateStatus('Processing animes...');
+		t1 = new Date();
+		parseAnimes(root.getElementsByTagName('animes'));
+		var parseAnimeNode = (new Date()) - t1;
+		updateStatus('Processing user information...');
+		if (seeTimes) { alert('Processing...'+
+					'\n\tanime: '+parseAnimeNode+'ms'+
+					'\n\tcustom: '+parseCustomNode+' ms'+
+					'\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms'); }
+		updateStatus('');
+	}
   renderPage();
 	showPage(curpage);
 }
@@ -121,7 +123,7 @@ function writeData() {
 		cnt++;
 		avg += Number(anime.myvote['vote']);
     var row = updateAnimeRow(anime);
-    row.className += (i % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
+    row.className += (cnt % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
 		row.style.display = '';
     tbody.appendChild(row);
   }
@@ -147,8 +149,7 @@ function renderPage() {
 	animeFilter['myvote'] = 'normal';
 	updateStatus('Rendering page...');
 	elems = document.getElementsByTagName('USERVLINK');
-  var a = createLink(null, 'v'+userInfo.id, 'http://anidb.net/v'+userInfo.id, null, null, null, 'short_link');
-	while (elems.length) elems[0].parentNode.replaceChild(a,elems[0]);
+	while (elems.length) elems[0].parentNode.replaceChild(createLink(null, 'v'+userInfo.id, 'http://anidb.net/v'+userInfo.id, null, null, null, 'short_link'),elems[0]);
 	elems = document.getElementsByTagName('VOTES.RESOURCES');
 	while (elems.length) {
 		var div = document.createElement('DIV');
@@ -236,4 +237,5 @@ function prepPage() {
   }
 }
 
-window.onload = prepPage;
+//window.onload = prepPage;
+addLoadEvent(prepPage);

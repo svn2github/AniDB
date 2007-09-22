@@ -10,12 +10,13 @@ var animeListTable; // the animelist table
 var animeListRow; // the sample animeList row
 var animeFilter = {'complete':false,'incomplete':false,'restricted':false,'watched':false,'ongoing':false,
                    'notwatched':false,'stalled':false,'fileinfo':true,'wishlisted':false,'awarded':false,
-									 'myvote':false};
+									 'myvote':false,'wishlisttype':false,'wishlistpri':false};
 var curpage = 1;
 var filteredAnimes = 0;
 var eplistTableRow;
 var filelistTableRow;
 var fileRow;
+var layout = 'mylist'; // holds current layout
 
 /* *
  * Calls data handlers for xml data
@@ -279,6 +280,29 @@ function updateAnimeRow(anime) {
 		input.name = 'trade.a'+anime.id;
 		elems[0].parentNode.replaceChild(input,elems[0]);
 	}
+	elems = row.getElementsByTagName('ANIME.MYVOTE');
+	while (elems.length) {
+		var vote = (anime.myvote ? anime.myvote['vote'] : '');
+		var rep = document.createTextNode(vote);
+		if (!anime.watched) elems[0].parentNode.className += ' none';
+		else {
+			if (!anime.myvote) { 
+				elems[0].parentNode.className += ' pending';
+				rep = createIcon(null,'[!]',null,null,'You have not voted for this anime yet!','i_no_vote');
+			} else {
+				if (anime.myvote['type'] == 'temp') elems[0].parentNode.className += ' temp mid';
+				if (anime.myvote['type'] == 'normal') elems[0].parentNode.className += ' anime mid';
+				if (Number(vote) >= 8) { rep = document.createElement('B'); rep.appendChild(document.createTextNode(vote)); }
+			}
+		}
+		elems[0].parentNode.setAttribute('anidb:sort',(anime.myvote ? anime.myvote['vote'] : '0'));
+		elems[0].parentNode.replaceChild(rep,elems[0]);
+	}
+	elems = row.getElementsByTagName('ANIME.MYVOTE.DATE');
+	while (elems.length) {
+		elems[0].parentNode.setAttribute('anidb:sort',anime.myvote['date']);
+		elems[0].parentNode.replaceChild(document.createTextNode(anime.myvote['date']),elems[0]);
+	}
 	return row;
 }
 
@@ -342,11 +366,14 @@ function createEpList(aid,nbody) {
 	filelistTableRow.appendChild(body.rows[0]);
 	fileRow = document.createElement('TBODY');
 	fileRow.appendChild(filelistTableRow.getElementsByTagName('TBODY')[0].rows[0]);
+	var cnt = -1;
 	for (var e = 0; e < anime.eps.length; e++) {
 		var episode = episodes[anime.eps[e]];
 		if (!episode) continue;
 		var row = cloneTBody.rows[0].cloneNode(true);
 		row.id = 'eid_'+episode.id;
+		cnt++;
+    row.className += (cnt % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
 		// Work
 		var elems = row.getElementsByTagName('ANIME.EP.EXPAND');
 		while (elems.length) {
@@ -418,8 +445,52 @@ function writeData() {
 	clearTableRows(tbody);
   for (var i = 0; i < animeOrder.length; i++) {
     var anime = animes[animeOrder[i]];
+		anime.filtered = false;
     var row = updateAnimeRow(anime);
     row.className += (i % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
+    tbody.appendChild(row);
+  }
+}
+
+/* *
+ * Writes the Wishlist data to the animetable
+ */
+function writeWishlistData() {
+	updateStatus('Rendering page...');
+	var tbody = animeListTable.tBodies[0];
+	clearTableRows(tbody);
+	var cnt = 0;
+  for (var i = 0; i < animeOrder.length; i++) {
+    var anime = animes[animeOrder[i]];
+		if (!anime.wishlist) { anime.filtered = true; continue; }
+		if (animeFilter['wishlisttype'] && anime.wishlist['type'] != animeFilter['wishlisttype']) { anime.filtered = true; continue; }
+		if (animeFilter['wishlistpri'] && anime.wishlist['pri'] != animeFilter['wishlistpri']) { anime.filtered = true; continue; }
+		anime.filtered = false;
+		cnt++;
+    var row = updateAnimeRow(anime);
+    row.className += (cnt % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
+    tbody.appendChild(row);
+  }
+}
+
+/* *
+ * Writes the Wishlist data to the animetable
+ */
+function writeMyvotesData() {
+	updateStatus('Rendering page...');
+	var tbody = animeListTable.tBodies[0];
+	clearTableRows(tbody);
+	var cnt = 0;
+  for (var i = 0; i < animeOrder.length; i++) {
+    var anime = animes[animeOrder[i]];
+		if (!anime.myvote) { anime.filtered = true; continue; }
+		if (animeFilter['restricted'] == 'hentai' && !anime.restricted) { anime.filtered = true; continue; }
+		if (animeFilter['restricted'] == 'nohentai' && anime.restricted) { anime.filtered = true; continue; }
+		anime.filtered = false;
+		cnt++;
+    var row = updateAnimeRow(anime);
+		if (anime.myvote && anime.myvote['type'] != animeFilter['myvote']) anime.filtered = true;
+    row.className += (cnt % 2) ? '' : ((row.className.length) ? ' ' : '') + 'g_odd';
     tbody.appendChild(row);
   }
 }
@@ -436,17 +507,64 @@ function renderPage() {
   var tbody = animeListTable.tBodies[0];
   animeListRow = tbody.rows[0].cloneNode(true);
   tbody.removeChild(tbody.rows[0]);
-	eplistTableRow = tbody.rows[0].cloneNode(true);
-	tbody.removeChild(tbody.rows[0]);
+	if (tbody.rows[0]) {
+		eplistTableRow = tbody.rows[0].cloneNode(true);
+		tbody.removeChild(tbody.rows[0]);
+	}
   init_sorting(animeListTable.tHead.rows[0],'title','up');
   var ths = animeListTable.tHead.getElementsByTagName('TH');
   for (var i = 0; i < ths.length; i++) {
-    ths[i].onclick = function onclick(event) {
+			ths[i].onclick = function onclick(event) {
       showPage(1);
       sortcol(this);
     }
   }
-	writeData();
+	if (uriObj['show'] && uriObj['show'] == 'wishlist') layout = 'wishlist';
+	if (uriObj['show'] && uriObj['show'] == 'myvotes') layout = 'myvotes';
+	switchLayout(null);
+	updateStatus('');
+}
+
+/* *
+ * Function that switches between layouts
+ */
+function switchLayout(node) {
+	//alert('current layout: '+layout);
+	var uls = document.getElementsByTagName('UL');
+	if (!uls.length) return;
+	var wishlisttype = getElementsByClassName(uls,'wishlisttype',false)[0];
+	var wishlistpri = getElementsByClassName(uls,'wishlistpri',false)[0];
+	if (node) {
+		var text = this.firstChild.nodeValue;
+		var state = text.substring(0,text.indexOf(' '));
+		if (state == 'show' && layout == 'mylist') state = 'hide';
+		var new_state = (state == 'show') ? 'hide' : 'show';
+		this.firstChild.nodeValue = this.firstChild.nodeValue.replace(state,new_state);
+	}
+	switch (layout) {
+		case 'wishlist':
+			layout = 'mylist';
+			if (wishlisttype) wishlisttype.style.display = '';
+			if (wishlistpri) wishlistpri.style.display = '';
+			curDataWrite = function() { writeWishlistData(); }
+			break;
+		case 'mylist':
+			layout = 'wishlist';
+			if (wishlisttype) wishlisttype.style.display = 'none';
+			if (wishlistpri) wishlistpri.style.display = 'none';
+			curDataWrite = function() { writeData(); }
+			break;
+		case 'myvotes':
+			layout = 'mylist';
+			animeFilter['myvote'] = 'normal';
+			curDataWrite = function() { writeMyvotesData(); }
+			break;
+		default:
+			alert('uknown layout type');
+	}
+	curDataWrite();
+	curpage = 1;
+	showPage(curpage);
 	updateStatus('');
 }
 
@@ -487,9 +605,13 @@ function filterAnime(anime) {
   if (!anime.watched && animeFilter['notwatched']) vis = true;
   if (anime.wishlist && animeFilter['wishlisted']) vis = true;
   if (anime.restricted && animeFilter['restricted']) vis = true;
+	if (animeFilter['wishlisttype'] && anime.wishlist && anime.wishlist['type'] == animeFilter['wishlisttype']) vis = true;
+	if (animeFilter['wishlistpri'] && anime.wishlist && anime.wishlist['pri'].indexOf(animeFilter['wishlistpri']) > -1) vis = true;
+	if (anime.restricted && animeFilter['restricted']) vis = true;
   var dt = javascriptDate(anime.dates['end']);
   if ((anime.dates['end'] == '?' || ( anime.dates['end'] != '?' && (new Date() < dt))) && animeFilter['ongoing']) vis = true;
   if (anime.hasawards && animeFilter['awarded']) vis = true;
+	if (anime.myvote && anime.myvote['type'] == animeFilter['myvote']) vis = true;
   return vis;
 }
 
@@ -611,6 +733,96 @@ function filterByText() {
 }
 
 /* *
+ * Filter Animes by Wishlist Type
+ */
+function filterByWishlistType() {
+  var type = this.firstChild.nodeValue;
+  if (!type) return;
+  var localA;
+  var stateUL = this.parentNode.parentNode;
+  if (stateUL) {
+    var as = stateUL.getElementsByTagName('A');
+    for (var i = 0; i < as.length; i++) {
+      var a = as[i];
+      var text = a.firstChild.nodeValue;
+      a.firstChild.nodeValue = a.firstChild.nodeValue.replace(' *','');
+      if (text == type) { localA = a; a.firstChild.nodeValue += ' *' }
+    }
+  }
+  if (type.search(/all/i) > -1) type = false;
+	animeFilter['wishlisttype'] = type;
+  for (var a in animes) {
+    var anime = animes[a];
+    if (!anime) continue;
+    var row = document.getElementById('a'+anime.id);
+    if (!row) continue;
+    if (!type) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+    else {
+      if (anime.wishlist && anime.wishlist['type'] == animeFilter['wishlisttype']) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+      else { row.style.display = 'none'; filteredAnimes++; anime.filtered = true; }
+    }
+  }
+  curpage = 1; showPage(curpage);
+}
+
+/* *
+ * Filter Animes by Wishlist Priority
+ */
+function filterByWishlistPriority() {
+  var pri = this.firstChild.className.substr(this.firstChild.className.indexOf('i_pri_')+6,this.firstChild.className.length);
+  if (!pri) return;
+	animeFilter['wishlistpri'] = pri;
+  for (var a in animes) {
+    var anime = animes[a];
+    if (!anime) continue;
+    var row = document.getElementById('a'+anime.id);
+    if (!row) continue;
+    if (!pri) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+    else {
+      if (anime.wishlist && anime.wishlist['pri'].indexOf(animeFilter['wishlistpri']) > -1) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+      else { row.style.display = 'none'; filteredAnimes++; anime.filtered = true; }
+    }
+  }
+  curpage = 1; showPage(curpage);
+}
+
+
+/* *
+ * Filter animes by vote type
+ */
+function changeVotesType() {
+	var type = this.firstChild.nodeValue;
+	if (!type) return;
+	clearFontWeight(this.parentNode.parentNode,this.nodeName);
+	this.style.fontWeight = 'bold';
+	animeFilter['myvote'] = ((type.search(/tmp/i) < 0)) ? 'normal' : 'temp';
+  for (var a in animes) {
+    var anime = animes[a];
+    if (!anime) continue;
+    var row = document.getElementById('a'+anime.id);
+    if (!row) continue;
+    if (!type) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+    else {
+      if (anime.myvote && anime.myvote['type'] == animeFilter['myvote']) { row.style.display = ''; filteredAnimes--; anime.filtered = false; }
+      else { row.style.display = 'none'; filteredAnimes++; anime.filtered = true; }
+    }
+  }
+  curpage = 1; showPage(curpage);
+}
+
+/* *
+ * Filter Animes by restricted value
+ */
+function changeRestrictedFilter() {
+	var restricted = this.firstChild.nodeValue;
+	clearFontWeight(this.parentNode,this.nodeName);
+	this.style.fontWeight = 'bold';
+	animeFilter['restricted'] = ((restricted.search(/hide/i) < 0)) ? 'hentai' : 'nohentai';
+	if (restricted.search(/all/i) > -1) animeFilter['restricted'] = false;
+	//alert('restricted: '+restricted+'\nanimeFilter[\'restricted\']: '+animeFilter['restricted']);
+	writeData();
+}
+/* *
  * Prepares the page, also fetches XML data
  */
 function prepPage() {
@@ -620,16 +832,19 @@ function prepPage() {
   var uls = document.getElementsByTagName('UL');
   var stateUL = getElementsByClassName(uls,'state',false)[0];
   if (stateUL) {
+		//initToggle(stateUL,'expand');
     var as = stateUL.getElementsByTagName('A');
     for (var i = 0; i < as.length; i++) { as[i].onclick = filterByState; as[i].style.cursor = 'pointer'; }
   }
   stateUL = getElementsByClassName(uls,'filters',false)[0];
   if (stateUL) {
+		//initToggle(stateUL,'expand');
     var as = stateUL.getElementsByTagName('A');
     for (var i = 0; i < as.length; i++) { as[i].onclick = filterByStatus; as[i].style.cursor = 'pointer'; }
   }
   stateUL = getElementsByClassName(uls,'animecat',false)[0];
   if (stateUL) {
+		//initToggle(stateUL,'expand');
     var as = stateUL.getElementsByTagName('A');
     for (var i = 0; i < as.length; i++) { as[i].onclick = filterByType; as[i].style.cursor = 'pointer'; }
   }
@@ -648,6 +863,67 @@ function prepPage() {
       }
     }
   }
+  stateUL = getElementsByClassName(uls,'wishlisttype',false)[0];
+  if (stateUL) {
+		//initToggle(stateUL,'fold');
+    var as = stateUL.getElementsByTagName('A');
+    for (var i = 0; i < as.length; i++) { as[i].onclick = filterByWishlistType; as[i].style.cursor = 'pointer'; }
+  }
+  stateUL = getElementsByClassName(uls,'wishlistpri',false)[0];
+  if (stateUL) {
+		//initToggle(stateUL,'fold');
+    var as = stateUL.getElementsByTagName('A');
+    for (var i = 0; i < as.length; i++) { as[i].onclick = filterByWishlistPriority; as[i].style.cursor = 'pointer'; }
+  }
+  stateUL = getElementsByClassName(uls,'user',false)[0];
+  if (stateUL) {
+    var as = stateUL.getElementsByTagName('A');
+    for (var i = 0; i < as.length; i++) { 
+			var a = as[i];
+			if (a.firstChild.nodeValue.search(/wishlist/i) < 0) continue;
+			a.onclick = switchLayout;
+			a.style.cursor = 'pointer'; 
+		}
+  }
+	var eppUL = getElementsByClassName(uls,'g_numonpage',true);
+	if (eppUL) {
+    for (var j in eppUL) {
+      var epps = eppUL[j];
+      var lis = epps.getElementsByTagName('LI');
+      for (var i = 0; i < lis.length; i++) {
+        var li = lis[i];
+				var a = li.getElementsByTagName('A')[0];
+				if (a.firstChild.nodeValue == entriesPerPage) a.style.fontWeight = 'bold';
+        a.onclick = setEpp;
+        li.style.cursor = 'pointer';
+      }
+    }
+  }
+	var typeUL = getElementsByClassName(uls,'g_navlist type',true);
+	if (typeUL) {
+    for (var j in typeUL) {
+      var type = typeUL[j];
+      var lis = type.getElementsByTagName('LI');
+      for (var i = 0; i < lis.length; i++) {
+        var li = lis[i];
+				var a = li.getElementsByTagName('A')[0]
+        a.onclick = changeVotesType;
+        li.style.cursor = 'pointer';
+      }
+    }
+  }
+	var restrcitedDIV = getElementsByClassName(document.getElementsByTagName('DIV'),'g_filterlist',true);
+	if (restrcitedDIV) {
+    for (var j in restrcitedDIV) {
+      var restricted = restrcitedDIV[j];
+      var as = restricted.getElementsByTagName('A');
+      for (var i = 0; i < as.length; i++) {
+				as[i].onclick = changeRestrictedFilter;
+				as[i].style.cursor = 'pointer';
+			}
+    }
+  }
 }
 
-window.onload = prepPage;
+//window.onload = prepPage;
+addLoadEvent(prepPage);
