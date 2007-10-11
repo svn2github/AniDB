@@ -785,13 +785,11 @@ span.i_videostream_h264_avc
 
 /* Sorting Icons */
 
-*.s_reverse {
-  background: transparent url(../icons/up1.gif) no-repeat center right;
-  padding-right: 10px;
+*.s_reverse:after {
+  content: "\\";
 }
 
-*.s_forward {
-  background: transparent url(../icons/down1.gif) no-repeat center right;
-  padding-right: 10px;
+*.s_forward:after {
+  content: "^";
 }
 
