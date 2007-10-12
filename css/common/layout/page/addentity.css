@@ -9,7 +9,9 @@
 #layout-content div.addanimetitle_form span.comment label,
 #layout-content div.addeptitle_form span.comment label,
 #layout-content div.addanimetitle_form span input,
-#layout-content div.addeptitle_form p span input
+#layout-content div.addeptitle_form p span input,
+#layout-content div.recommendation_add span,
+#layout-content div.recommendation_add textarea
 {
 	display: block;
 	margin-left: auto;
