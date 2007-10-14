@@ -33,88 +33,6 @@ function BasicPopupSelf()
 	return BasicPopup(this);
 }
 
-var Magic = {
-	'interestedusers':["rar","epoximator","deridiot","exp","pelican","fahrenheit"],
-	'addvalidatorinterface':(function ()
-		{
-			if (document.evaluate && window.XMLSerializer) // interested people don't use IE anyway
-			{
-				var username = document.evaluate("//div[@id='layout-menu']/div[@class='usermenu' and not(form)]/p[@class='user']",
-					document.body, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-				if (username && Magic.interestedusers.indexOf(username.firstChild.nodeValue) >= 0)
-				{
-					var footernode = document.getElementById('layout-footer');
-					if (footernode) { footernode.onclick = Magic.noreallydoitthistime; }
-				}
-			}
-		}),
-	'noreallydoitthistime':(function ()
-		{
-			// this is going to be horrible for a bit
-			//options:
-			// * tell validator to get current uri (will always be guest access, and sometimes denied)
-			// * send current doc serialised (always well-formed, maybe not valid, good for dhtml checking)
-			// * xmlhttpreq the current uri and send the text recieved (bad for post and borked gets, good for well-formedness check)
-			// XHTML+Basic+1.0 when, well: <epoximator> 1.0 when we have a tablewriter
-			var footernode = document.getElementById('layout-footer');
-			footernode.onclick = null;
-			var validatorloc = "http://qa-dev.w3.org/wmvs/HEAD/check", doctypecheck = "XHTML 1.1", f, n, i, k;
-			f = document.createElement("form");
-			f.method = "post"; f.enctype = "multipart/form-data"; f.action = validatorloc;
-			footernode.appendChild(f, footernode);
-			Magic.valiform = f;
-			f = f.appendChild(document.createElement("div"));
-			n = document.createElement("a");
-			n.href = validatorloc+"?uri=referer&doctype="+doctypecheck.replace(" ","+");
-			n.title = "Validate current URI as it is accessed by a guest";
-			n.appendChild(document.createTextNode("@"));
-			f.appendChild(n);
-			var params = [['parsemodel',"xml"], ['doctype',doctypecheck], ['ss',1], ['fragment',""]];
-			for (i = 0; k = params[i]; i++)
-			{
-				n = document.createElement("input");
-				n.type = 'hidden'; n.name = k[0]; n.value = k[1]; f.appendChild(n);
-			}
-			Magic.checkfield = n;
-			params = [["<",Magic.currentcheck,"Serialise current doc state and validate"],
-				[">",Magic.basecheck,"Re-fetch current URI from server and validate"]];
-			for (i = 0; k = params[i]; i++)
-			{
-				n = document.createElement("a");
-				n.title = k[2]; f.appendChild(document.createTextNode(" "));
-				n.appendChild(document.createTextNode(k[0])); n.onclick = k[1]; f.appendChild(n);
-			}
-		}),
-	'asxmlfixup':(function (s)
-		{
-			return s.replace(/<[^! >]+/g, function(m){return m.toLowerCase();})
-				.replace('<html','<html xmlns="http://www.w3.org/1999/xhtml"')
-				.replace(/(<[^>]+\s+)lang(=[\'\"])/g,"$1xml:lang$2");
-		}),
-	'currentcheck':(function ()
-		{
-			var serialator = new XMLSerializer();
-			Magic.checkfield.value = Magic.asxmlfixup(serialator.serializeToString(document));
-			Magic.valiform.submit();
-		}),
-	'basecheck':(function ()
-		{
-			if (!window.location.search) { alert("Page seems to have been POST-ed, can't re-fetch"); }
-			else
-			{
-				var req = new XMLHttpRequest();
-				req.open('GET', window.location, false); 
-				req.send(null);
-				if(req.status != 200) { alert("Refetching the document failed with code: "+req.status); }
-				else
-				{
-					Magic.checkfield.value = Magic.asxmlfixup(req.responseText);
-					Magic.valiform.submit();
-				}
-			}
-		})
-	};
-
 function InitDefault()
 {
 	if (document.getElementsByTagName)
@@ -124,7 +42,6 @@ function InitDefault()
 		var spanlist = document.getElementsByTagName('span');
 	}
 	else return;
-	Magic.addvalidatorinterface();
 	for (var i = 0; i < rowlist.length; i++)
 	{
 		var row = rowlist[i];

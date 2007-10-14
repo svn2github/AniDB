@@ -579,8 +579,8 @@ function renderEpisodeList() {
 
 function createFileIcons(file,icons) {
   if (file.type != 'generic') {
-    var tooltip = 'type: '+file.type+' | added: '+cTimeDate(file.date);
-    if (file.relDate > 0) tooltip += ' | released: '+cTimeDate(file.relDate);
+    var tooltip = 'type: '+file.type+' | added: '+cTimeDate(file.dates['add']);
+    if (file.dates['rel'] > 0) tooltip += ' | released: '+cTimeDate(file.dates['rel']);
     if (file.fileType != '') tooltip += ' | extension: '+file.fileType;
     createIcon(icons, file.type, null, null, tooltip, 'i_ftype_'+file.type);
   }

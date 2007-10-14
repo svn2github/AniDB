@@ -5,6 +5,8 @@
  * @version 2.2 (02.07.2007)
  */
 
+var anime = new Object(); //stub
+
 /* *
  * Creates a new UserInfo Entry from a given node
  * @param node Node from which to get the userinfo
