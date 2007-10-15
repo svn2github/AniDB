@@ -1,6 +1,0 @@
-Revision history for Perl extension AniDB.
-
-0.01  Mon Oct 15 18:31:03 2007
-	- original version; created by h2xs 1.23 with options
-		-AX -n AniDB
-
