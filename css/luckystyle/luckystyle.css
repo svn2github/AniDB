@@ -34,17 +34,17 @@ body,
 
 .i_logout
 {
-	background-image: url('Buttons/button_logout.gif');
+	background-image: url('images/Buttons/button_logout.gif');
 }
 
 *.i_profile
 {
-	background-image: url('Buttons/button_profile.gif');
+	background-image: url('images/Buttons/button_profile.gif');
 }
 
 *.i_signup
 {
-	background-image: url('Buttons/button_signup.gif');
+	background-image: url('images/Buttons/button_signup.gif');
 }
 
 
