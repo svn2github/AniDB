@@ -21,14 +21,12 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-use constant USERNAME => 'username';
-use constant PASSWORD => 'password';
-
 use strict;
 use warnings;
 
 use AniDB::UDPClient;
 use File::Copy;
+use Getopt::ArgvFile home=>1;
 use Getopt::Long;
 
 my $addmylist = 1;
@@ -38,6 +36,8 @@ my $debug     = 0;
 my $format    =
   "\%anime_name_english\%_\%episode\%\%version\%-\%group_short\%.\%filetype\%";
 my $onlyhash = 0;
+my $username;
+my $password;
 
 my $result = GetOptions(
     "addmylist" => \$addmylist,
@@ -46,6 +46,8 @@ my $result = GetOptions(
     "debug"     => \$debug,
     "format=s"  => \$format,
     "onlyhash"  => \$onlyhash,
+    "username=s"=> \$username,
+    "password=s"=> \$password,
 );
 
 my @files;
@@ -68,8 +70,8 @@ if ($onlyhash) {
 }
 
 my $a = AniDB::UDPClient->new(
-    username  => USERNAME,
-    password  => PASSWORD,
+    username  => $username,
+    password  => $password,
     client    => "adbren",
     clientver => "3",
     debug     => $debug,
@@ -151,7 +153,6 @@ Format vars:
 	\%anime_type\%, \%anime_name_romaji\%, \%anime_name_kanji\%, 
 	\%anime_name_english\%, \%anime_name_other\%, \%anime_name_short\%, 
 	\%anime_synonyms\%, \%anime_category\%, \%version\%, \%censored\%
-	
-Remember to edit this file to change anidb username and password./;
+/;
     exit;
 }
