@@ -127,7 +127,7 @@ foreach my $file (@files) {
         }
     }
     if ($addmylist) {
-        $a->mylistadd( $fileinfo->{fid} );
+        $a->mylistadd( $fileinfo );
     }
 }
 
