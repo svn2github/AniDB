@@ -164,6 +164,7 @@ sub new
 } ## end sub new
 
 sub _makehandle {
+	my $self = shift;
 	$self->{handle} = IO::Socket::INET->new(
 		Proto => 'udp',
 		ReuseAddr => 1,
@@ -525,6 +526,7 @@ sub ping
 sub _sendrecv
 {
 	my ( $self, $msg ) = @_;
+	my $handle = $self->{handle};
 	my $stat = 0;
 	while ( ( time - $self->{last_command} ) < MIN_INTERVAL )
 	{
@@ -539,7 +541,7 @@ sub _sendrecv
 	{
 		$msg .= "\n";
 	}
-	print $self->{handle} $msg or LOGDIE( "Send: " . $! );
+	print $handle $msg or LOGDIE( "Send: " . $! );
 	$self->{last_command} = time;
 	debug "-->", $msg;
 	my $recvmsg;
@@ -554,7 +556,7 @@ sub _sendrecv
 		}
 		$timer++;
 		debug "-->", $msg;
-		print $self->{handle} $msg
+		print $handle $msg
 			or LOGDIE( "Send: " . $! );
 	}
 	if ( $recvmsg =~ /^501.*|^506.*/ )
@@ -573,7 +575,8 @@ sub _sendrecv
 sub _send
 {
 	my ( $self, $msg ) = @_;
-	print $self->{handle} $msg or LOGDIE( "Send: " . $! );
+	my $handle = $self->{handle};
+	print $handle $msg or LOGDIE( "Send: " . $! );
 	debug "-->", $msg;
 }
 
