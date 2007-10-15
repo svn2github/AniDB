@@ -149,7 +149,7 @@ sub new
 						$log .= $clean . " ";
 					}
 				}
-				TRACE($log);
+				#TRACE($log);
 			}
 		}
 	}
@@ -168,12 +168,13 @@ sub _makehandle {
 	$self->{handle} = IO::Socket::INET->new(
 		Proto => 'udp',
 		ReuseAddr => 1,
-		ReusePort => 1,
+		#ReusePort => 1,
 		PeerAddr => $self->{hostname},
 		PeerPort => $self->{port},
 		LocalHost => $self->{bindaddr},
 		LocalPort => $self->{bindport},
 	 ) or LOGDIE($!);
+	# TODO: retry with a new session and without Reuse*
 	$self->{bindaddr} = $self->{handle}->sockaddr();
 	$self->{bindport} = $self->{handle}->sockport();
 }
