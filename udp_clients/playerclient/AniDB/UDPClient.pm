@@ -117,11 +117,6 @@ sub new
 
 	$self->{hostname} = "api.anidb.net";
 	$self->{port}     = 9000;
-	$self->{handle}   = IO::Socket::INET->new( Proto => 'udp' ) or LOGDIE($!);
-	$self->{ipaddr}   = gethostbyname( $self->{hostname} )
-		or LOGDIE( "Gethostbyname(" . $self->{hostname} . "):" . $! );
-	$self->{sockaddr} = sockaddr_in( $self->{port}, $self->{ipaddr} )
-		or LOGDIE($!);
 	$self->{last_command} = 0;
 	my %args = @_;
 
@@ -164,8 +159,23 @@ sub new
 	}
 	debug "State File: ", $self->{state_file};
 	$self->load_state();
+	$self->_makehandle();
 	return $self;
 } ## end sub new
+
+sub _makehandle {
+	$self->{handle} = IO::Socket::INET->new(
+		Proto => 'udp',
+		ReuseAddr => 1,
+		ReusePort => 1,
+		PeerAddr => $self->{hostname},
+		PeerPort => $self->{port},
+		LocalHost => $self->{bindaddr},
+		LocalPort => $self->{bindport},
+	 ) or LOGDIE($!);
+	$self->{bindaddr} = $self->{handle}->sockaddr();
+	$self->{bindport} = $self->{handle}->sockport();
+}
 
 sub load_state
 {
@@ -197,6 +207,7 @@ sub save_state
 		debug "Writing new state file skey=", $self->{skey};
 		print F "skey==" . $self->{skey} . "\n";
 		print F "last_command==" . time . "\n";
+		print F "bindport==" . $self->{'bindport'} . "\n";
 		close F;
 	}
 	chmod 0666, $self->{state_file};
@@ -528,7 +539,7 @@ sub _sendrecv
 	{
 		$msg .= "\n";
 	}
-	send( $self->{handle}, $msg, 0, $self->{sockaddr} ) or LOGDIE( "Send: " . $! );
+	print $self->{handle} $msg or LOGDIE( "Send: " . $! );
 	$self->{last_command} = time;
 	debug "-->", $msg;
 	my $recvmsg;
@@ -543,7 +554,7 @@ sub _sendrecv
 		}
 		$timer++;
 		debug "-->", $msg;
-		send( $self->{handle}, $msg, 0, $self->{sockaddr} )
+		print $self->{handle} $msg
 			or LOGDIE( "Send: " . $! );
 	}
 	if ( $recvmsg =~ /^501.*|^506.*/ )
@@ -562,7 +573,7 @@ sub _sendrecv
 sub _send
 {
 	my ( $self, $msg ) = @_;
-	send( $self->{handle}, $msg, 0, $self->{sockaddr} ) or LOGDIE( "Send: " . $! );
+	print $self->{handle} $msg or LOGDIE( "Send: " . $! );
 	debug "-->", $msg;
 }
 
