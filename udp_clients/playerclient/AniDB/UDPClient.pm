@@ -30,6 +30,7 @@ use warnings;
 
 use IO::Socket;
 use Digest::MD4;
+use File::HomeDir;
 use File::Spec;
 use Data::Dumper;
 use Log::Log4perl qw(:easy);
@@ -132,7 +133,7 @@ sub new
 	defined $self->{password}  or LOGDIE "Password not defined!\n";
 	defined $self->{client}    or LOGDIE "Client not defined!\n";
 	defined $self->{clientver} or LOGDIE "Clientver not defined!\n";
-	$self->{state_file} = File::Spec->catfile( File::Spec->tmpdir(), "anidb_udpclient_state.tmp" );
+	$self->{state_file} = File::Spec->catfile( File::HomeDir->my_data, ".anidb_udpclient_state" );
 	my $logger = get_logger();
 	if ( $logger->is_debug() )
 	{
