@@ -403,15 +403,15 @@ sub mylistadd
 			$msg .= "&fid=" . $param->{'file'};
 		}
 	}
-	elsif ( $param->{'fid'} =~ /^\d+$/ )
+	elsif ( ($param->{'fid'} || '') =~ /^\d+$/ )
 	{
 		$msg .= "&fid=" . $param->{'fid'};
 	}
-	elsif ( $param->{'lid'} =~ /^\d+$/ )
+	elsif ( ($param->{'lid'} || '') =~ /^\d+$/ )
 	{
 		$msg .= "&lid=" . $param->{'lid'};
 	}
-	elsif ( $param->{'size'} =~ /^\d+$/ && $param->{'ed2k'} =~ /^[a-fA-F0-9]{32,32}$/ )
+	elsif ( ($param->{'size'} || '') =~ /^\d+$/ && ($param->{'ed2k'} || '') =~ /^[a-fA-F0-9]{32,32}$/ )
 	{
 		$msg .= "&size=" . $param->{'size'} . "&ed2k=" . $param->{'ed2k'} . "";
 	}
