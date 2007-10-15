@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
-		<update>28.06.2007</update>
+		<update>19.05.2007</update>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
 		<path/>
@@ -13,7 +13,7 @@
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>28.06.2007</update>
+		<update>10.06.2007</update>
 		<status>stable (v5)</status>
 		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
@@ -23,7 +23,7 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle DonGato revision</title>
 		<creator>DonGato</creator>
-		<update>18.08.2007</update>
+		<update>19.09.2007</update>
 		<status>in sync with 0.1.38</status>
 		<description>report any problem by a message</description>
 		<path/>
@@ -33,7 +33,7 @@
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>30.07.2007</update>
+		<update>11.07.2007</update>
 		<status>In development</status>
 		<description>Firefox only. (Works also in Opera, but not so well. Don't even try it with IE :D )</description>
 		<path/>
@@ -43,7 +43,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>18.08.2007</update>
+		<update>19.09.2007</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -53,7 +53,7 @@
 	<style name="haruhistylex">
 		<title>HaruhiStyleX.AniDB</title>
 		<creator>TheJAG</creator>
-		<update>29.05.2007</update>
+		<update/>
 		<status>not maintained anymore and replaced by v2</status>
 		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB is developed for Opera at a resolution of 1280x1024 and may not work in any other webbrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
 		<path/>
@@ -84,7 +84,7 @@
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update>28.06.2007</update>
+		<update>20.05.2007</update>
 		<status/>
 		<description/>
 		<path/>
@@ -94,12 +94,23 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update>28.06.2007</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
 		<screenshot>harustyle-fixed_menu/images/screenshot.png</screenshot>
 		<thumbnail>harustyle-fixed_menu/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="luckystyle">
+		<title>LuckyStyle</title>
+		<creator>Breadstone</creator>
+		<update>12.10.2007</update>
+		<status>In development</status>
+		<description>Thanks to B1nhs help i've finally completed my LuckyStyle. I hope you guys (and gals) like it. If you find any bugs or something you think
+should be fixed just send me a PM.</description>
+		<path/>
+		<screenshot>luckystyle/images/screenshot.png</screenshot>
+		<thumbnail>luckystyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-blue">
 		<title>sub-blue</title>
@@ -124,7 +135,7 @@
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update>28.07.2007</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -154,7 +165,7 @@
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>29.07.2007</update>
+		<update>08.09.2007</update>
 		<status>Complete | Always in development</status>
 		<description>Might be a little too pink for some people's taste.
 Thanks to nunpoom, mehyaa, pseprodux for pointing out things I missed and making other suggestions.
@@ -166,7 +177,7 @@ Thanks to ricce for making the fixed menu modification.</description>
 	<style name="zakura-fixed_menu">
 		<title>Zakura (fixed menu edition)</title>
 		<creator>ricce</creator>
-		<update>28.06.2007</update>
+		<update>20.05.2007</update>
 		<status></status>
 		<description></description>
 		<path></path>
