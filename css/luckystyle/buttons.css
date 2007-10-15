@@ -1,0 +1,86 @@
+*.i_vrs_1
+{
+	background-image: url('buttons/anidb_vrs_1.gif');
+}
+
+*.i_vrs_2
+{
+	background-image: url('buttons/anidb_vrs_2.gif');
+}
+
+*.i_vrs_3
+{
+	background-image: url('buttons/anidb_vrs_3.gif');
+}
+
+*.i_vrs_4
+{
+	background-image: url('buttons/anidb_vrs_4.gif');
+}
+
+*.i_vrs_5
+{
+	background-image: url('buttons/anidb_vrs_5.gif');
+}
+*.i_noup1
+{
+	background-image: url('buttons/noup1.gif');
+	width: 9px;
+	height: 10px;
+}
+
+*.i_plus
+{
+	background-image: url('buttons/plus.gif');
+}
+
+*.i_up1
+{
+	background-image: url('buttons/up1.gif');
+	width: 9px;
+	height: 10px;
+}
+
+*.i_nodown1
+{
+	background-image: url('buttons/nodown1.gif');
+	width: 9px;
+	height: 10px;
+}
+
+*.i_none
+{
+	background-image: url('buttons/none.gif');
+}
+
+*.i_minus
+{
+	background-image: url('buttons/minus.gif');
+}
+
+*.i_punkt
+{
+	background-image: url('buttons/buttons_punkt.gif');
+}
+
+*.i_search
+{
+	background-image: url('buttons/buttons_search.gif');
+}
+
+*.i_suchen
+{
+	background-image: url('buttons/buttons_suchen.gif');
+}
+
+*.i_report_entry,
+*.i_no_vote
+{
+	background-image: url('buttons/icon/anidb_no_vote.gif');
+}
+
+*.i_help
+{
+	background: url('buttons/ask2.gif') no-repeat right;
+	cursor: help; /* just for teh funs */
+}

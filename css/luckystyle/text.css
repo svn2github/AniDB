@@ -1,0 +1,47 @@
+#layout-content ul.g_navlist li
+{
+	padding: 0px;
+}
+
+#layout-content ul.g_navlist li:before
+{
+	content: " | "
+}
+#layout-content ul.g_navlist li:first-child:before
+{
+	content: "";
+}
+#layout-content ul.g_numonpage li:first-child:before
+{
+	content: "show: ";
+}
+
+#layout-content div.main_all h4
+{
+	font-size: 100%;
+	line-height: 1.2;
+	font-weight: normal;
+}
+
+#layout-content p.g_vital a:link,
+#layout-content p.g_vital a:visited
+{
+	font-weight: bolder;
+         color: #2fe324;
+}
+
+#layout-menu li.genren:before
+{
+	content: "(";
+}
+
+#layout-menu li.genren:after
+{
+	content: ")";
+}
+
+#layout-content table.animelist tr.all_watched td.eps,
+#layout-content table.animelist tr.all_watched td.seen
+{
+ 	color: #e64b73;
+}
