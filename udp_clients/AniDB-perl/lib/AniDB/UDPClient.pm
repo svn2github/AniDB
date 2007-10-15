@@ -108,7 +108,7 @@ use constant MYLIST_ENUM => qw/lid fid eid aid gid date state viewdate storage s
 
 use subs 'debug';
 
-$AniDB::UDPClient::VERSION = '0.02'; #2007-10-12
+$AniDB::UDPClient::VERSION = '0.3'; # not released
 
 sub new
 {
