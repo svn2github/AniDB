@@ -149,7 +149,7 @@ sub new
 						$log .= $clean . " ";
 					}
 				}
-				#TRACE($log);
+				DEBUG($log);
 			}
 		}
 	}
