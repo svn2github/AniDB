@@ -28,6 +28,7 @@ use AniDB::UDPClient;
 use File::Copy;
 use Getopt::ArgvFile home=>1;
 use Getopt::Long;
+use Log::Log4perl qw(:easy);
 
 my $addmylist = 1;
 my $norename  = 0;
@@ -68,6 +69,8 @@ if ($onlyhash) {
     }
     exit;
 }
+
+Log::Log4perl->easy_init( $DEBUG );
 
 my $a = AniDB::UDPClient->new(
     username  => $username,
