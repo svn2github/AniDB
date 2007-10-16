@@ -123,9 +123,11 @@ a:visited, a:active, a:hover, a:link {
 #layout-content div.message table,
 #layout-content div.message tr,
 #layout-content div.message th,
-#layout-content div.message td
+#layout-content div.message td,
+#layout-content div.message textarea
 {
 	background-color: #000000;
+         color: white;
 }
 
 #layout-content div.episodes tr.invalid

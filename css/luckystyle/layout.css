@@ -146,7 +146,7 @@ body.nonav
 	top: 14px;
 	left: 2px;
 	overflow: hidden;
-	background: url('images/Buttons/button_logon.gif') no-repeat top;
+	background: url('images/buttons/button_logon.gif') no-repeat top;
 	border: 0px none;
 	content: ""; padding-left:0; padding-right:0; padding-top:12px; padding-bottom:0;
 }
