@@ -124,7 +124,8 @@ a:visited, a:active, a:hover, a:link {
 #layout-content div.message tr,
 #layout-content div.message th,
 #layout-content div.message td,
-#layout-content div.message textarea
+#layout-content div.message td.iframe,
+#layout-content div.message td.iframe wysiwyg
 {
 	background-color: #000000;
          color: white;
