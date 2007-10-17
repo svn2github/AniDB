@@ -23,13 +23,10 @@ body,
 *.i_button
 {
 	display: block;
-	width: 42px;
-	height: 12px;
 	float: left;
 	margin-right: 4px;
 	background-repeat: no-repeat;
 	background-position: center;
-	text-indent: -5000px;
 }
 
 .i_logout
