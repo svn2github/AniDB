@@ -160,7 +160,7 @@ a.i_icon:hover, a.i_inline:hover
 
 *.i_file_ed2k_corrupt
 {
-	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_ed2k_corrupt.gif);
+	background-image: url(images/anidb_file_ed2k_corrupt.gif);
 }
 
 *.i_file_edit
@@ -616,7 +616,12 @@ span.i_video.wmv9
 
 span.i_ext
 {
-	background-image: url(images/anidb_other.gif);
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_state_mixed.gif);
+}
+
+span.i_ext.avi
+{
+	background-image: url(images/anidb_avi.gif);
 }
 
 span.i_ext.mkv
@@ -624,14 +629,29 @@ span.i_ext.mkv
 	background-image: url(images/anidb_mkv.gif);
 }
 
+span.i_ext.mp4
+{
+	background-image: url(images/anidb_mp4.gif);
+}
+
 span.i_ext.ogm
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_ogm.gif);
 }
 
-span.i_ext.mp4
+span.i_ext.wmv
 {
-	background-image: url(images/anidb_mp4.gif);
+	background-image: url(images/anidb_wmv.gif);
+}
+
+span.i_ext.rar, span.i_ext.zip
+{
+	background-image: url(images/anidb_zip.gif);
+}
+
+span.i_ext.ass, span.i_ext.srt
+{
+	background-image: url(images/anidb_subs.gif);
 }
 
 span.i_videostream_unknown,
