@@ -789,6 +789,7 @@ function foldFilesByEp() {
  */
 function prepPage() {
   uriObj = parseURI();
+	if (!uriObj['show']) return;
   if (uriObj['show'] && uriObj['show'] != 'anime' && !uriObj['aid']) return;
 	initTooltips();
   loadData('anime/a'+uriObj['aid']+'.xml',parseData);

@@ -18,16 +18,13 @@
 	  <script src="js/ajax.js" type="text/javascript" title="XMLHTTPRequest implementation"></script>
 		<script src="js/shared.js" type="text/javascript" title="Shared extension"></script>
 		<script src="js/anime.js" type="text/javascript" title="Anime extension"></script>
-	  <script src="js/mylist.js" type="text/javascript" title="Mylist extension"></script>
+	  <script src="js/search.js" type="text/javascript" title="Search extension"></script>
 	</head>
   <body>
     <div id="statusBox"></div>
-    <div id="layout-search">
-      <div class="search"><searchbox></searchbox></div>
-    </div>
     <div id="layout-content">
-      <h1>MyList Export for <username></username> (<useridlink></useridlink>)</h1>
-      <div class="g_content mylist_all">
+      <h1>MyList Search</h1>
+      <div class="g_content search_all">
         <div class="g_section mylist_list">
           <ul class="g_jumplist">
             <li class="prev"><a>prev</a></li>
@@ -62,56 +59,6 @@
             <li class="z"><a>z</a></li>
             <li class="other"><a>other</a></li>
           </ul>
-          <div class="g_menu mylist_menu">
-            <ul class="filters">
-              <li><a>hide restricted</a></li>
-              <li><a>hide incomplete</a></li>
-              <li><a>hide complete</a></li>
-              <li><a>hide watched</a></li>
-              <li><a>hide not watched</a></li>
-              <li><a>hide awarded</a></li>
-              <li><a>hide ongoing</a></li>
-              <li><a>hide wishlisted</a></li>
-            </ul>
-            <ul class="state">
-              <li><a><span class="i_icon i_state_all" title="all states">all states</span></a></li>
-              <li><a><span class="i_icon i_state_mixed" title="animes with state: mixed state">mixed state</span></a></li>
-              <li><a><span class="i_icon i_state_unknown" title="animes with state: unknown">unknown</span></a></li>
-              <li><a><span class="i_icon i_state_onhdd" title="animes with state: internal storage (hdd)">on hdd</span></a></li>
-              <li><a><span class="i_icon i_state_oncd" title="animes with state: external storage (cd/dvd/...)">on cd</span></a></li>
-              <li><a><span class="i_icon i_state_deleted" title="animes with state: deleted">deleted</span></a></li>
-            </ul>
-            <ul class="animecat">
-              <li><a>all types *</a></li>
-              <li><a>series only</a></li>
-              <li><a>OVAs only</a></li>
-              <li><a>Movies only</a></li>
-            </ul>
-						<ul class="wishlisttype" style="display:none;">
-							<li><a>all types *</a></li>
-              <li><a>unknown</a></li>
-              <li><a>to get</a></li>
-              <li><a>to watch</a></li>
-							<li><a>blacklisted</a></li>
-            </ul>
-						<ul class="wishlistpri" style="display:none;">
-              <li><a><span class="i_icon i_pri_high" title="high priority">high priority</span></a></li>
-              <li><a><span class="i_icon i_pri_med" title="medium priority">medium priority</span></a></li>
-              <li><a><span class="i_icon i_pri_low" title="low priority">low priority</span></a></li>
-            </ul>
-            <ul class="user">
-              <li><userpagelink></userpagelink></li>
-              <li><anidbmsguserlink></anidbmsguserlink></li>
-              <li><a href="myvotes.html?show=myvotes">list votes</a></li>
-              <li><a href="#">show wishlist</a></li>
-              <li><a href="stats.html?show=stats" rel="anidb::popup" class="380.280.1.1">show statistics</a></li>
-            </ul>
-            <ul class="util">
-              <li><a href="search.html" rel="anidb::popup" class="900.600.1.1">adv. search</a></li>
-              <li><a href="preferences.html" rel="anidb::popup" class="380.280.1.1">preferences</a></li>
-              <li><a>help</a></li>
-            </ul>
-          </div>
           <form id="animemain" name="animemain">
             <table class="animelist">
               <thead>
@@ -137,64 +84,6 @@
                   <td class="rating attavg mid"><anime.review.rating></anime.review.rating> (<anime.review.cnt></anime.review.cnt>)</td>
                   <td class="action"><anime.action></anime.action></td>
                 </tr>
-								<tr id="a%ANIMEID%_eplist" style="display: none">
-									<td colspan="8">
-										<div class="g_section episodes">
-											<table id="eplist" class="eplist">
-												<thead>
-													<tr class="heading">
-														<th class="expand">X</th>
-														<th class="id">EP</th>
-														<th class="title">Title</th>
-														<th class="duration">Len</th>
-														<th class="number files">Files</th>
-														<th class="date airdate">Date</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr id="eid_%anime.ep.id%" class="">
-														<td class="action expand"><anime.ep.expand></anime.ep.expand></td>
-														<td class="id eid"><anime.ep.epno></anime.ep.epno></td>
-														<td class="title"><anime.ep.icons></anime.ep.icons><anime.ep.title></anime.ep.title></td>
-														<td class="duration"><anime.ep.duration></anime.ep.duration></td>
-														<td class="number files"><anime.ep.files></anime.ep.files></td>
-														<td class="date airdate"><anime.ep.airdate></anime.ep.airdate></td>
-													</tr>
-													<tr id="eid_%anime.ep.id%_filelist">
-														<td colspan="6">
-															<table class="filelist">
-																<thead>
-																	<tr class="heading">
-																		<th class="id">FID</th>
-																		<th class="size">Size</th>
-																		<th class="icons status">Status</th>
-																		<th class="title">Group</th>
-																		<th class="quality">Quality</th>
-																		<th class="resolution">Resolution</th>
-																		<th class="source">Source</th>
-																		<th class="icon ed2k">ED2K</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr class="" id="fid_%anime.file.id%">
-																		<td class="id"><anime.file.id></anime.file.id></td>
-																		<td class="size"><anime.file.size></anime.file.size></td>
-																		<td class="icons status"><anime.file.icons></anime.file.icons></td>
-																		<td class="title"><anime.file.group></anime.file.group></td>
-																		<td class="quality"><anime.file.quality></anime.file.quality></td>
-																		<td class="resolution"><anime.file.resolution></anime.file.resolution></td>
-																		<td class="source"><anime.file.source></anime.file.source></td>
-																		<td class="icon ed2k"><anime.file.ed2k></anime.file.ed2k></td>
-																	</tr>
-																</tbody>
-															</table>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</td>
-								</tr>
               </tbody>
             </table>
             <div class="g_actionlist mylist_action"><jumppage></jumppage></div>

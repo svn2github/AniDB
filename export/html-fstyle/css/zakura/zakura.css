@@ -1438,6 +1438,7 @@ float: right;
 
 .g_content .i_icon,
 div.mylist_list td.icons span,
+div.search_list td.icons span,
 div.anime_all td.icons span,
 #obj-tooltip div.icons .i_icon {
 float: left;

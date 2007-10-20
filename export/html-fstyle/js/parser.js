@@ -114,7 +114,11 @@ function parseEpisodes(node,aid) {
  */
 function parseAnimes(node) {
   if (!node) return false; // no nodes return;
-  var isAnimePage = (uriObj['show'] && (uriObj['show'].indexOf('anime') >= 0 || uriObj['show'].indexOf('ep') >= 0) || uriObj['show'].indexOf('file') >= 0) ? true : false;
+  var isAnimePage = false;
+	if (uriObj['show']) {
+		var pages = ['anime','ep','file'];
+		for (var i in pages) { if (uriObj['show'].indexOf(pages[i]) >= 0) isAnimePage = true; }
+	}
   for (var nd = 0; nd < node.length; nd++) { // find the right animes entry
     if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
   }

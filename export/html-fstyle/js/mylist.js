@@ -188,7 +188,7 @@ function updateAnimeRow(anime) {
 	var elems = row.getElementsByTagName('ANIME.TITLE.ALINK');
 	while (elems.length) {
     var title = anime.getTitle('main');
-		var tooltip;
+		var tooltip = "";
     if (animeTitleDisplay == 1) title += ' ('+anime.getAltTitle('official')+')';
     if (animeTitleDisplay == 2 && anime.getAltTitle('official').length) tooltip = 'Alternative title: '+ anime.getAltTitle('official');
     elems[0].parentNode.setAttribute('anidb:sort',title);
