@@ -1,3 +1,13 @@
+*.i_audio_al
+{
+	background-image: url(../icons/flags/anidb_audio_albanian.gif);
+}
+
+*.i_sub_al
+{
+	background-image: url(../icons/flags/anidb_sub_albanian.gif);
+}
+
 *.i_audio_ar
 {
 	background-image: url(../icons/flags/anidb_audio_arabic.gif);
