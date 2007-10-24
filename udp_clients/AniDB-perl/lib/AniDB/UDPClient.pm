@@ -118,6 +118,7 @@ sub new
 	$self->{hostname} = "api.anidb.net";
 	$self->{port}     = 9000;
 	$self->{last_command} = 0;
+	$self->{antiflood} = 1;
 	my %args = @_;
 
 	foreach my $key ( keys %args )
@@ -542,9 +543,8 @@ sub _sendrecv
 	{
 		$msg .= "\n";
 	}
-	print $handle $msg or LOGDIE( "Send: " . $! );
+	$self->_send($msg);
 	$self->{last_command} = time;
-	debug "-->", $msg;
 	my $recvmsg;
 	my $timer = 0;
 	while ( !( $recvmsg = $self->_recv() ) )
@@ -556,9 +556,7 @@ sub _sendrecv
 			return undef;
 		}
 		$timer++;
-		debug "-->", $msg;
-		print $handle $msg
-			or LOGDIE( "Send: " . $! );
+		$self->_send($msg);
 	}
 	if ( $recvmsg =~ /^501.*|^506.*/ )
 	{
