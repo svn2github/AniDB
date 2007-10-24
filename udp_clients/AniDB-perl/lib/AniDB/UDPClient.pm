@@ -528,13 +528,6 @@ sub ping
 sub _sendrecv
 {
 	my ( $self, $msg ) = @_;
-	my $stat = 0;
-	while ( ( time - $self->{last_command} ) < MIN_INTERVAL )
-	{
-		$stat = MIN_INTERVAL - ( time - $self->{last_command} );
-		sleep($stat);
-		debug "Delay: $stat\n";
-	}
 	if ( $msg =~ /\n$/ )
 	{
 	}
@@ -573,6 +566,15 @@ sub _sendrecv
 sub _send
 {
 	my ( $self, $msg ) = @_;
+	$self->{antiflood} and do {
+		my $stat = 0;
+		while ( ( time - $self->{last_command} ) < MIN_INTERVAL )
+		{
+			$stat = MIN_INTERVAL - ( time - $self->{last_command} );
+			sleep($stat);
+			debug "Delay: $stat\n";
+		}
+	};
 	my $handle = $self->{handle};
 	print $handle $msg or LOGDIE( "Send: " . $! );
 	debug "-->", $msg;
