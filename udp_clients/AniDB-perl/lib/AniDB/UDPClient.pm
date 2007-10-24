@@ -528,7 +528,6 @@ sub ping
 sub _sendrecv
 {
 	my ( $self, $msg ) = @_;
-	my $handle = $self->{handle};
 	my $stat = 0;
 	while ( ( time - $self->{last_command} ) < MIN_INTERVAL )
 	{
