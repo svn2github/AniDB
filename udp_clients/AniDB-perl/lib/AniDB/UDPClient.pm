@@ -536,7 +536,6 @@ sub _sendrecv
 		$msg .= "\n";
 	}
 	$self->_send($msg);
-	$self->{last_command} = time;
 	my $recvmsg;
 	my $timer = 0;
 	while ( !( $recvmsg = $self->_recv() ) )
@@ -578,6 +577,7 @@ sub _send
 	my $handle = $self->{handle};
 	print $handle $msg or LOGDIE( "Send: " . $! );
 	debug "-->", $msg;
+	$self->{last_command} = time;
 }
 
 sub _recv
