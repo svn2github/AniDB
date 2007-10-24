@@ -578,6 +578,7 @@ sub _send
 	print $handle $msg or LOGDIE( "Send: " . $! );
 	debug "-->", $msg;
 	$self->{last_command} = time;
+	$self->save_state();
 }
 
 sub _recv
