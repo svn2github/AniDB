@@ -1,0 +1,109 @@
+<html>
+	<head>
+		<style type="text/css">
+body {
+	background-color: #DEE3E7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #006699; }
+table{
+	width: 100%;
+	border-color: Black;
+	border-style: solid;
+	border-width: 0px;
+	border-collapse: collapse;
+	font-size: 11px;
+}
+td{	background-color: #EFEFEF; }
+a{	color: #006699;
+	text-decoration: none;
+}
+a:hover{
+	color: #DD6900;
+}
+	</style>
+	</head>
+	<body>
+		<center>
+					<h1><a href="%ula">%ann</a> - <a href="%uly">%yea</a> - %typ</h1>
+					<h3><a href="%ulm">%kan</a> - %eng</h3>
+					<h2>Ep %enr of %eps (%lep): <a href="%ule">%epn</a></h2>
+					<small>(fid=<a href="%ulf">%fid</a>, aid=<a href="%ula">%aid</a>, eid=<a href="%ule">%eid</e>, gid=<a href="%ulg">%gid</a>, lid=<a href="%ulx">%lid</a>)</small>
+					<table cellspacing="2">
+						<tr>
+							<td>File</td>
+							<td><a href="%ulf">%fil</a></td>
+						</tr>
+						<tr>
+							<td>Original</td>
+							<td>%ori</td>
+						</tr>
+						<tr>
+							<td>Path</td>
+							<td><a href="file://%pat">%pat</a></td>
+						</tr>
+						<tr>
+							<td>New File</td>
+							<td>%new</td>
+						</tr>
+						<tr>
+							<td>Size/CRC</td>
+							<td>%siz / %CRC</td>
+						</tr>
+						<tr>
+							<td>Status</td>
+							<td>%sta</td>
+						</tr>
+						<tr>
+							<td>Group</td>
+							<td><a href="%ulg">%grp</a></td>
+						</tr>
+						<tr>
+							<td>Cat</td>
+							<td>%gen</td>
+						</tr>
+						<tr>
+							<td>Dub/Sub</td>
+							<td>%dub / %sub</td>
+						</tr>
+						<tr>
+							<td>Tech</td>
+							<td>%src (%qua quality): %res %vid / %aud %ver %cen</td>
+						</tr>
+			</table>
+
+			<b>Hash sums</b>
+			<table cellspacing="2">
+				<tr>
+					<td>ed2k</td>
+					<td>%ed2</td>
+				</tr>
+				<tr>
+					<td>md5</td>
+					<td>%md5</td>
+				</tr>
+				<tr>
+					<td>sha1</td>
+					<td>%sha</td>
+				</tr>
+			</table>
+
+<avinfo>
+			<b>Video</b>
+			<table cellspacing="2">
+				<vid><tr><td>#%num</td><td>%pre</td><td>%fps fps</td><td>%cod</td><td>%fla</td><td>%bit kbps</td></tr></vid>
+			</table>
+
+			<b>Audio</b>
+			<table cellspacing="2">
+				<aud><tr><td>#%num</td><td>%lan</td><td>%cod</td><td>%cha</td><td>%bit kbps</td></tr></aud>
+			</table>
+
+			<b>Subtitles</b>
+			<table cellspacing="2">
+				<sub><tr><td>#%num</td><td>%lan (%nam)</td><td>%fla</td><td>%typ</td><td>%byt bytes</td></tr></sub>
+			</table>
+</avinfo>
+
+		</center>
+	</body>
+</html>

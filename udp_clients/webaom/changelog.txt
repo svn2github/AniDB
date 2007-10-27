@@ -1,0 +1,215 @@
+Please note that this version is marked "unstable", meaning it can be broken from time
+to time. Do at least check the changelog for relevant info before using it.
+
+1.19 20.11.2006:
+*Fixed 'year' parsing exception.
+*Added 'ASSUME [SPECIAL] {int}' rule. For padding epno when total is unknown (always true for specials).
+*Fixed () issue in tests, for example "IF E(^(Complete Movie|Part \d of \d|OVA)$) DO ADD '%epn '"
+*Added english episode name to 'E' test.
+*Fixed 'storage field loaded as source field on startup.' (Mylist Options)
+*Fixed 'I' test (defined) for 'ver', meaning true if greater than 1.
+*Changed 'I' test "syntax"; I(%eng) -> I(eng).
+*Fixed and changed truncation; TRUNCATE<{int len},{str end}>. (TRUNCATE<64,...>)
+*Fixed db update for postgresql users. To fix 'borked' dbs:
+**ALTER TABLE ftb ADD COLUMN len INTEGER NOT NULL DEFAULT 0;
+*Added column 'len' to 'Jobs'. (Length in sec)
+*Added regexp test to E(pisode) test.
+*Added 'TRUNCATE {int max len}' to rules. Will truncate file name if necessary.
+*Fixed (removed) the extra k printed in ed2k hash @ info window.
+*Fixed stored order of columns in 'Jobs'.
+*Added two columns in 'Job' list; mds, mda (missing data flags).
+*Added job-list-column-customization to options file.
+*Added option 'Auto save'; save options to disk without asking.
+*Fixed some minor bugs.
+*Some gui changes.
+
+1.18b 21.07.2006:
+*Fixed 'Show Info' bug (thx to TechnoMage).
+*Back to 1.4 compliance level.
+*Added more keyboard mappings (and changed E to X).
+
+1.18 14.07.2006:
+*Fixed bug in !mystats (thx to GuntherDW).
+*Added more tool tips and changed some text to make WebAOM more understandable.
+*Added 'Cancel' button to the 'The options has changed' dialog.
+*Fixed Rules->Rename/Moving-radio-buttons bug (thx to Kei-kun).
+*Fixed joint eps bug; java.lang.NumberFormatException.
+*Added drop and ctrl-v support to 'Jobs' table.
+*Change: db update; etb.number width, for joint eps.
+*Added selectable columns in 'Job' view. (Right click table header.)
+*Change: Job-filter-combo-box -> check boxes. (suggested by weedy)
+*Change: Keep-alive is now enabled also when nat is not detected (every 30 min).
+*Fixed bug in keep-alive code.
+*Fixed minor ui update bug in 'Alt'.
+*Fixed sorting bug in 'Jobs' when changing filter.
+*Added new job colors; red -> corrupted, gray -> missing (not found).
+*Changed options file encoding to utf8.
+*Only Java 1.5 support from now.
+*Massive internal changes.
+*Added support for avinfo.dll ([[Avdump]], put the dll somewhere it will be found).
+*Improved support for large font sizes.
+**Fixed table row height.
+**Fixed font in popup menu.
+**To change the 'Log' font; press DELETE, edit header, press ok.
+**To customize the file info page; extract 'file.htm' from the jar, edit, save as '.webaom.htm' in your home folder.
+*Added filtering in 'Jobs' view.
+*Added selectable titles in 'Alt' view (romaji,kanji,english).
+*Minor UI changes.
+
+1.17 07.05.2006:
+*Added 'Edit File Name' to pop up menu.
+*Some fixes/changes in the com core.
+*Minor changes for new lang/stream system.
+*Added 'Path regexp' to options file.
+*Changed keep-alive timer to 3 min.
+*Fixed NullPointerEx on 'Add to mylist' when file is unknown, thx to egg.
+*Added more debug output for 'Alt' view.
+*Added 'Load db on startup' and 'Auto log' options.
+*Hidden feature: F9 resets application.
+*Updated 'Alt' view. V3: path exlude, improved %, added M(issing) col, secondary sort
+*Added password (and apipass) storage option.
+*Added 'Alt' key mappings to 'Jobs' too.
+*Code cleanup.
+*Added 'Remove from mylist' to job menu.
+*Added a bunch of key mappings to 'Alt'; afgmwe, left, right, and enter.
+*Added key mapping q to 'File Info' window (close).
+*Updated 'Alt' view. V2: size column, FNF filter, 3 selectable structures;
+::Anime-File, Anime-Episode-File, Anime-Group-File, Anime-Folder-File
+*Added test for codec (C). Tests both audio and video.
+*Change: it's now possible to set job 'Finished' even if the file is not found.
+*Added check box for connection keep-alive.
+*Added 'Set fid (force)' to job menu. For self edited files. (Hashing is still required.)
+*Change: 3 timeouts -> lockdown, new: unlocks after 15 min.
+*Fixed minor bug in pinger when port is out of range.
+*Added support for encrypted and compressed communication.
+*Fixed minor epno padding bug.
+*Fixed "Data too long for column 'audio' at row 1".
+*Fixed (hopefully) out of mem error when adding large folders.
+*Change: Login Dialog doesn't show up at startup anymore.
+*Minor changes in gui.
+
+1.16 13.01.2006:
+-Added support for udp server v3. Removed support for v2.
+-Removed all http access and html parsing.
+-Added simple chii emulator. (!uptime,!stats,!top,!mystats,!anime,!group,!randomanime,!mylist,!state)
+-Several fixes/changes in core.
+-Improved html log performance.
+-Added key command ESC in job list which stops the menu worker thread if running.
+-Added key command DEL in html log which deletes the log.
+-Removed 'Save Log' button.
+-Added first version of an alternative job/file view (mylist tree view).
+-Added support for postgre database.
+-Updated the database definition and included it in jar.
+-Added support for import and export of data. (An anidb mylist export template will be added asap.)
+-Added 'Edit Folder Path' to job menu.
+-Fixed: infinite loop when 'Waiting/Add' and 'Add to mylist' unchecked thx to egg.
+-Change: switching between 'Renaming' and 'Moving' @ 'Rules' does now 'Apply'. (eh..)
+
+1.15 09.11.2005
+-Removed 'E' in test. Added regexp test to 'P' (file path). Extensions can be tested here now.
+-Added test 'I' (Is defined). Checks whether a tag is defined or not. (E.g. I(%eng).)
+-Fixed job table bug when sorting is used.
+-Added save dialog on shutdown.
+-Added 'log to file' option.
+-Added support for //-comments in rules.
+-Removed 'offline mode' check box. And some other changes in the gui.
+-Added support for gzip (parser was broken).
+-Fixed some bugs thx to egg and neginegi.
+
+1.14 30.10.2005
+-Cleanup. A lot of internal changes (in job handling / html parsing / data structures).
+-Added support for private/local mysql database.
+-Added support for path 'P', extension 'E' and genre 'N' in tests. Former 'E' (english title) is now included in 'A'.
+-Added support for ELSE IF and RETURN in scripts.
+-Added coloring, sorting, aid and gid columns, in job table.
+-Added new file info frame, html style.
+-Added Pause, Restore name, Rehash, Identify, Add to mylist, Set Finished, Set Folder to job popup menu.
+-Changes in debug window.
+
+1.13 26.09.2005
+-Change in Rule system. Scripting. Textfield instead of table.
+-Fixed two bugs in parsing code thx to egg.
+-Fixed padding for specials thx to egg.
+
+1.12 24.09.2005
+-Added extra '0' padding in epnr when an anime serie got more than 99 episodes. Will only work when total num of eps is known.
+-Added support for dub language (D) and sub language (L) in tests.
+-Added support for NOT (!) in tests.
+-Added tags %kan = Jap. Kanji Title and %eng = English Title. (If null then %ann is used.)
+-Added support for hentai (needs to be enabled in profile: http://anidb.info/perl-bin/animedb.pl?show=profile).
+-Fixed some minor bugs.
+
+1.11 22.09.2005
+-Fixed bug in rule system: Test 'A' did not work.
+-Fixed some minor bugs thx to hrm.
+-Added combobox 'Renaming' for selection of renaming mode.
+-Change in file handler: Will not try to add files that are locked (used by another process).
+
+1.10 15.09.2005
+-Fixed bug where Job is not set to Finished (when rename/moving is enabled but not needed).
+-Fixed parsing bug. (Movies has parts, not episodes.)
+-Fixed minor gui bugs.
+-Added slider for delay between datagrams sent to server (3-10 sec).
+-Added updating of progress bar when checking crc (after move).
+-Added updating of second progress bar (total progress).
+
+1.09 09.09.2005
+-Fixed rename bug when group is "raw/unknown" (gid=0). These are now just called "unknown".
+-Added possibility to save options.
+-Added new rule system: rename and move files based on file info.
+-Significant changes in gui and underlying system:
+ -File lists replaced with one table.
+ -Rename option panel replaced with Rules tab.
+ -Start and Stop buttons replaced with toggle buttons for hasher thread and communication thread.
+-Added timeout slider for UDP communication (20-60 sec).
+-Added "Hash Dirs", "Browser Path" and "My Database" text fields.
+-Added Wiki button. (Works only on Windows systems, unless browser path is defined.)
+
+1.08 05.07.2005
+-Updated mylist file states.
+-Updated file info parser (renamer was broken).
+
+1.07 12.06.2005
+-Updated the second progress bar.
+-Changed comm. thread sleeping routine.
+-Changed file info dialog to a text dialog.
+-Added Tiger Tree Hash.
+-Added possibility to choose each hash type.
+-Added debug tab.
+-Made 1.4.2 comp again thx to gyrojoe.
+
+1.06 29.05.2005
+-Changed the way files are hashed and added to mylist. This is now done concurrent.
+-Changes in the status and logging system.
+-Fixed some minor bugs.
+
+1.05 14.05.2005
+-Added custom renaming of files thx to ExElNeT.
+-Added some more checking on username and password.
+-Changes in option tab.
+
+1.04 11.05.2005
+-Added extra file information thx to ExElNeT. Double click rows in 'Finished Files' to see.
+-Added offline mode
+-Fixed two bugs in file rename code. thx to ExElNeT and visnu
+
+1.03 19.02.2005
+-Added extensive hashing. MD5, SHA-1 and CRC32
+-Changes in the error handler.
+-Bugfix: Applet crash with Opera and Firefox
+
+1.02 04.02.2005
+-Added connection options.
+-Added connection check.
+
+1.01 30.01.2005
+-New layout, options in own tab.
+-Added "Source" and "Other" string for AniDB file info.
+-Added possibility to save the log.
+-Added illegal character replacement customization.
+-Added recursive directory search.
+-Added new filehandler.
+-Bugfix in AniDBConnection.
+
+1.00 23.01.2005
+-First version.

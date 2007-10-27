@@ -1,0 +1,91 @@
+WebAOM!
+
+1.19k 27.10.2007:
+*Fixed I() so it works for %cen too.
+
+1.19j 29.09.2007:
+*Fixed jtb.size @ db (int->bigint).
+*anidb.info -> anidb.net
+
+1.19i 04.07.2007:
+*Added test X for number of episodes. "IF X(1)" -> true if total num = 1.
+*Added possibility to use relative path in move rules -> DO ADD '.\' (on windows)
+
+1.19h 16.07.2007:
+*Fixed applet version.
+
+1.19g 15.07.2007:
+*Fixed NullPointerException @ RecDir (introduced in d) thx to s2d4theworld.
+*Added support for 64 bit file sizes.
+*Added LookAndFeel switch.
+*Removed rules dropdown. Controlled in the rules tab.
+
+1.19f 19.05.2007:
+*Fixed ArrayIndexOutOfBoundsException when anime has only special eps.
+*Fixed file moving issue with absolute path on Linux systems.
+*Added correction of file extension.
+
+1.19e 17.05.2007:
+*Added test U(tag:tag) which returns true if both tags are defined and unequal.
+
+1.19d 21.04.2007:
+*Fixed ArrayIndexOutOfBoundsException when epno is 0.
+*Improved/fixed applet behavior.
+*Ignore widows network paths.
+
+1.19c 24.03.2007:
+*Added rule help menu. Right click in text editor.
+
+1.19b 10.02.2007:
+*Fixed default job columns.
+
+New in 1.19
+
+1.19 20.11.2006:
+*Fixed 'year' parsing exception.
+*Added 'ASSUME [SPECIAL] {int}' rule. For padding epno when total is unknown (always true for specials).
+*Fixed () issue in tests, for example "IF E(^(Complete Movie|Part \d of \d|OVA)$) DO ADD '%epn '"
+*Added english episode name to 'E' test.
+*Fixed 'storage field loaded as source field on startup.' (Mylist Options)
+*Fixed 'I' test (defined) for 'ver', meaning true if greater than 1.
+*Changed 'I' test "syntax"; I(%eng) -> I(eng).
+*Fixed and changed truncation; TRUNCATE<{int len},{str end}>. (TRUNCATE<64,...>)
+*Fixed db update for postgresql users. To fix 'borked' dbs:
+**ALTER TABLE ftb ADD COLUMN len INTEGER NOT NULL DEFAULT 0;
+*Added column 'len' to 'Jobs'. (Length in sec)
+*Added regexp test to E(pisode) test.
+*Added 'TRUNCATE {int max len}' to rules. Will truncate file name if necessary.
+*Fixed (removed) the extra k printed in ed2k hash @ info window.
+*Fixed stored order of columns in 'Jobs'.
+*Added two columns in 'Job' list; mds, mda (missing data flags).
+*Added job-list-column-customization to options file.
+*Added option 'Auto save'; save options to disk without asking.
+*Fixed some minor bugs.
+*Some gui changes.
+
+
+Copyright 2005-2006 epoximator
+This software is licenced under GPL
+See: http://www.gnu.org/copyleft/gpl.html
+Contact: http://www.anidb.net/forum/privmsg.php?mode=post&u=2555
+
+This applet make use of:
+Jacksum 1.5.1 Copyright (C) 2002-2004
+Dipl.-Inf. (FH) Johann Nepomuk Loefflmann
+http://www.jonelo.de/java/jacksum/
+
+GNU Crypto.
+Copyright (C) 2001, 2002, Free Software Foundation, Inc.
+
+Timothy W Macinta's Fast MD5 Implementation in Java
+http://www.twmacinta.com/myjava/fast_md5.php
+
+SourceForge Project: TigerTree Hash Code
+http://sourceforge.net/projects/tigertree
+
+JTreeTable Copyright 1997-2000 Sun Microsystems, Inc. All Rights Reserved.
+http://java.sun.com/products/jfc/tsc/articles/treetable1/index.html
+
+By using this software you acknowledge that it is not designed,
+licensed or intended for use in the design, construction, operation or
+maintenance of any nuclear facility.
