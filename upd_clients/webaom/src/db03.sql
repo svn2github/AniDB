@@ -1,0 +1,7 @@
+ALTER TABLE ftb
+MODIFY COLUMN audio VARCHAR(255) DEFAULT NULL,
+MODIFY COLUMN sublang VARCHAR(255) NOT NULL,
+MODIFY COLUMN dublang VARCHAR(255) NOT NULL;
+UPDATE ftb SET video="H264" WHERE video like "H264%AVC";
+UPDATE ftb SET audio="Vorbis" WHERE audio like "Ogg%Vorbis%";
+UPDATE vtb SET ver=1;
