@@ -1,3 +1,0 @@
-Manifest-Version: 0.1.19.21
-Main-Class: epox.webaom.WebAOM
-Created-By: epoximator
