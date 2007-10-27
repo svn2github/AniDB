@@ -436,7 +436,7 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 		}else if(source==jpOdiv.tfLogfl)
 			startLog();
 		else if(source==jpAlt.jcbAm){
-			A.cache.mImode = jpAlt.jcbAm.getSelectedIndex();
+			Cache.mImode = jpAlt.jcbAm.getSelectedIndex();
 			jpAlt.updateAlt(true);
 		}else if(source==jpAlt.jcbAs){
 			Cache.hideN = jpAlt.jcbAs.getSelectedIndex()==1;
