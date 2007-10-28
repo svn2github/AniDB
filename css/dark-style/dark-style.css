@@ -76,6 +76,8 @@ table caption {
 	color:					
 }
 
+
+
 /*														  forms */
 
 input, select, textarea {
@@ -148,8 +150,7 @@ ul.my {
 ul.mod {
 	position:				relative;
 	top:					5px;
-	left:					5px;
-	visibility:				hidden;
+	left:					230px;
 }
 ul.mod li {
 	background-color:			transparent;
@@ -452,6 +453,11 @@ a.g_navprev {
 a.g_navnext {
 	float:					right;
 }
+div.filters li,
+ul.state li,
+div.user li {
+	background:				none;
+}
 
 /*-----------------------------------------------------------------------------------------------------------ANIME INFO */
 
@@ -501,8 +507,7 @@ div.anime_all table.filelist {
 	width:					877px;
 	margin-left:				33px;
 }
-div.anime_all div.episodes td.action,
-div.anime_all div.groups td.action {
+div.anime_all div.episodes td.action {
 	width:					40px;
 }
 div.anime_all div.mylist td.state,
@@ -521,6 +526,7 @@ div.anime_all div.groups td.name,
 div.anime_all div.groups td.state,
 div.anime_all div.groups td.date,
 div.anime_all div.groups td.rating,
+div.anime_all div.groups td.action,
 div.anime_all div.episodes td.date,
 div.anime_all div.episodes td.epusers,
 div.anime_all div.episodes td.size,
@@ -535,6 +541,7 @@ div.anime_all table.filelist td.title {
 div.anime_all div.episodes td.action a.i_icon,
 div.anime_all div.groups td.action a.i_icon {
 	float:					right;
+	margin:					0 2px;
 }
 div.anime_all table.filelist td.action {
 	width:					37px;
@@ -553,6 +560,7 @@ div.anime_all div.groups td.eps {
 
 span.i_censored,
 span.i_comment,
+span.i_ext,
 span.i_crc_no,
 span.i_crc_yes,
 td.status span.i_new_icon,
@@ -566,10 +574,14 @@ span.i_vrs_5 {
 	float:					right;
 	margin-left:				-20px;
 }
+span.i_ext {
+	position:				relative;
+	right:					20px;
+}
 span.i_crc_no,
 span.i_crc_yes {
 	position:				relative;
-	right:					20px;
+	right:					40px;
 }
 span.i_vrs_1,
 span.i_vrs_2,
@@ -577,20 +589,20 @@ span.i_vrs_3,
 span.i_vrs_4,
 span.i_vrs_5 {
 	position:				relative;
-	right:					40px;
+	right:					60px;
 }
 span.i_censored,
 span.i_uncensored {
 	position:				relative;
-	right:					60px;
+	right:					80px;
 }
 span.i_comment {
 	position:				relative;
-	right:					80px;
+	right:					1000px;
 }
 td.status span.i_new_icon {
 	position:				relative;
-	right:					100px;
+	right:					120px;
 }
 
 
@@ -607,11 +619,11 @@ div.addgenren_form td.check {
 	width:					70px;
 	text-align:				center;
 }
-div.addgenren_all div.add {
-	width:					300px;
+div.addgenren_all table {
+	width:					600px;
 }
-div.addgenren_all div.add table {
-	width:					100%;
+div.addgenren_all table td.action {
+	width:					175px;
 }
 
 /*													      relations */
@@ -867,14 +879,23 @@ div.main_all div.news b {
 div.main_all div.news big {
 	font-weight:				bold;
 }
+div.main_all div.news h4 {
+	float:					left;
+	width:					430px;
+}
 div.main_all div.news span.stamp {
 	color:					#999;
 	display:				block;
+	float:					right;
 	text-align:				right;
 	margin-bottom:				10px;
+	width:					150px;
+	padding:				3px 0 3px 0;
+	margin:					10px 0 10px 0;
 }
-div.main_all div.news div {
-	margin-bottom:				30px;
+div.main_all div.news div.body {
+	margin:					0 0 30px 0;
+	clear:					both;
 }
 
 /*														 search */
@@ -888,6 +909,19 @@ div.search_all table {
 }
 div.search_all table tr.title td input {
 	width:					100%;
+}
+div.search_all li.collapsed ul {
+	display: 				none;
+}
+div.search_all li a.i_icon {
+	margin:					0 2px;
+	float:					left;
+}
+div.search_all li.collapsed {
+	height:					17px;
+}
+div.search_all li ul {
+	margin:					0 20px;
 }
 
 /*													       calendar */
@@ -1031,12 +1065,12 @@ div.myvotes_all td.epno {
 	width:					30px;
 	text-align:				center;
 }
-div.myvotes_all td.state,
-div.myvotes_all td.action {
+div.myvotes_all td.state {
 	width:					70px;
 	text-align:				center;
 }
-div.myvotes_all td.date {
+div.myvotes_all td.date,
+div.myvotes_all td.action {
 	width:					100px;
 	text-align:				center;
 }
@@ -1230,7 +1264,6 @@ div.producerlist_all table {
 	width:					100%;
 }
 
-div.latest_all td.action,
 div.latest_all td.count,
 div.latest_all td.number,
 div.latest_all td.vote,
@@ -1240,6 +1273,7 @@ div.userlist_all td.fcnt {
 	width:					30px;
 	text-align:				center;
 }
+div.latest_all td.action,
 div.latest_all td.size,
 div.latest_all td.type,
 div.latest_all td.short,
@@ -1247,13 +1281,13 @@ div.latest_all td.user,
 div.latest_all td.rating,
 div.latest_all td.tmprating,
 div.latest_all td.dub,
-div.latest_all td.date,
 div.animelist_all td,
 div.userlist_all td.size {
 	width:					70px;
 	text-align:				center;
 }
 div.latest_all td.category,
+div.latest_all td.date,
 div.userlist_all td.date {
 	width:					100px;
 	text-align:				center;
@@ -1261,6 +1295,9 @@ div.userlist_all td.date {
 div.latest_all div.latest_aproducer td.type {
 	width:					175px;
 	text-align:				center;
+}
+div.latest_all td.status {
+	width:					250px;
 }
 div.latest_all td.id {
 	width:					40px;
@@ -1270,9 +1307,14 @@ div.animelist_all td.eps {
 	width:					30px;
 	text-align:				center;
 }
+div.latest_all td.name,
 div.animelist_all td.name {
 	width:					auto;
 	text-align:				left;
+}
+div.latest_all td.action a {
+	float:					right;
+	margin:					0 2px;
 }
 
 /*													     categories */
@@ -1373,11 +1415,24 @@ div.icons {
 *.i_crc_yes {
 	background-image:			url(images/anidb_crc_yes.gif);
 }
+*.i_crc_unv {
+	background-image:			url(images/anidb_crc_unv.gif);
+}
 *.i_araward {
 	background-image:			url(images/anidb_araward.gif);
 }
-*.i_ep_vote {
+*.i_group_vote,
+*.i_ep_vote,
+*.i_vote {
 	background-image:			url(images/anidb_vote.gif);
+}
+*.i_group_revote,
+*.i_ep_revote,
+*.i_revote {
+	background-image:			url(images/anidb_revote.gif);
+}
+*.i_group_comment {
+	background-image: 			url(images/anidb_groupcomment.gif);
 }
 *.i_new_icon {
 	background-image:			url(images/anidb_new_icon.gif);
@@ -1387,6 +1442,13 @@ div.icons {
 }
 *.i_video {
 	background-image:			url(images/anidb_video.gif);
+}
+*.i_video.avc {
+	background-image: 			url(images/anidb_video_avc.gif);
+}
+*.i_video.xvid,
+*.i_video.divx5 {
+	background-image: 			url(images/anidb_video_asp.gif);
 }
 *.i_vrs_1 {
 	background-image:			url(images/anidb_vrs_1.gif);
@@ -1402,6 +1464,28 @@ div.icons {
 }
 *.i_vrs_5 {
 	background-image:			url(images/anidb_vrs_5.gif);
+}
+
+*.i_ext {
+	background-image: 			url(images/anidb_ext_other.gif);
+}
+*.i_ext.mkv {
+	background-image: 			url(images/anidb_ext_mkv.gif);
+}
+*.i_ext.ogm {
+	background-image: 			url(images/anidb_ext_ogm.gif);
+}
+*.i_ext.avi {
+	background-image: 			url(images/anidb_ext_avi.gif);
+}
+*.i_ext.mp4 {
+	background-image: 			url(images/anidb_ext_mp4.gif);
+}
+*.i_ext.wmv {
+	background-image: 			url(images/anidb_ext_wmv.gif);
+}
+*.i_ext.srt {
+	background-image: 			url(images/anidb_ext_srt.gif);
 }
 
 /* file rating */
