@@ -1,18 +1,18 @@
-// Copyright (C) 2005-2006 epoximator
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+//Copyright (C) 2005-2006 epoximator
+
+//This program is free software; you can redistribute it and/or
+//modify it under the terms of the GNU General Public License
+//as published by the Free Software Foundation; either version 2
+//of the License, or (at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program; if not, write to the Free Software
+//Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /*
  * Created on 03.08.05
@@ -144,10 +144,10 @@ public class Rules{
 			if(tup.startsWith("#")) continue;
 			if(tup.startsWith("DO ") && handle(schema, tok.substring(3))) break;
 			else if(tup.startsWith("IF ")&&
-						(prev=check(tok.substring(3, (i=tup.indexOf(" DO "))), j)) &&
+					(prev=check(tok.substring(3, (i=tup.indexOf(" DO "))), j)) &&
 					handle(schema, tok.substring(i+4))) break;
 			else if(tup.startsWith("ELSE IF ")&&!prev &&
-						(prev=check(tok.substring(8, (i=tup.indexOf(" DO "))), j)) &&
+					(prev=check(tok.substring(8, (i=tup.indexOf(" DO "))), j)) &&
 					handle(schema, tok.substring(i+4))) break;
 			else if(tup.startsWith("ELSE DO ")&&!prev &&
 					handle(schema, tok.substring(8))) break;
@@ -212,7 +212,7 @@ public class Rules{
 				e.printStackTrace();
 				return false;
 			}
-		return b;
+			return b;
 	}
 	private int findEndPar(String s, int start){
 		int level = 0; char c;
@@ -242,67 +242,70 @@ public class Rules{
 				if(not) test = test.substring(1);
 				if(not^check0(c, test, j)) return true;
 			}catch (Exception ex){ex.printStackTrace();}
-		return false;
+			return false;
 	}
 	private boolean check0(char c, String s, Job j){
 		switch(Character.toUpperCase(c)){
-			case 'A':{ //Name
-				try{
-					return j.m_fa.aid==Integer.parseInt(s.trim());
-				}catch(NumberFormatException e){/*part of plan*/}
-				return	j.m_fa.anime.checkName(s);
+		case 'A':{ //Name
+			try{
+				return j.m_fa.aid==Integer.parseInt(s.trim());
+			}catch(NumberFormatException e){
+				return regtest(j.m_fa.anime.rom, s)
+				|| regtest(j.m_fa.anime.kan, s)
+				|| regtest(j.m_fa.anime.eng, s);
 			}
-			case 'E':
-				return regtest(j.m_fa.ep.num, s)||regtest(j.m_fa.ep.eng, s);
-			case 'C': //Codec
-				return j.m_fa.vid.equalsIgnoreCase(s) || cont(j.m_fa.aud,s);
-			case 'Q': //Quality
-				return j.m_fa.qua.equalsIgnoreCase(s);
-			case 'R': //ripSource
-				return j.m_fa.rip.equalsIgnoreCase(s);
-			case 'T': //Type
-				return j.m_fa.anime.typ.equalsIgnoreCase(s);
-			case 'G':{ //Group
-				if(j.m_fa.gid==0)
-					return s.equalsIgnoreCase("unknown");
-				try{
-					return j.m_fa.gid==Integer.parseInt(s.trim());
-				}catch(NumberFormatException e){/*part of plan*/}
-				return	j.m_fa.group.name.equalsIgnoreCase(s)||
-						j.m_fa.group.sname.equalsIgnoreCase(s);
-			}
-			case 'Y': //Year
-				return j.m_fa.inYear(s);
-			case 'D': //Dub lang
-				return cont(j.m_fa.dub,s);
-			case 'S': //Sub lang
-				return cont(j.m_fa.sub,s);
-			case 'X': //check number of eps
-				return s.equals(""+j.m_fa.anime.eps);
-			case 'P': //Path
-				return regtest(j.m_fc.getAbsolutePath(), s);
-			case 'N': //Genre
-				return cont(j.m_fa.anime.cat,s);
-			case 'I':{ //Is Defined
-				/*if(s.equals("eng"))//probably most used
+		}
+		case 'E':
+			return regtest(j.m_fa.ep.num, s)||regtest(j.m_fa.ep.eng, s);
+		case 'C': //Codec
+			return j.m_fa.vid.equalsIgnoreCase(s) || cont(j.m_fa.aud,s);
+		case 'Q': //Quality
+			return j.m_fa.qua.equalsIgnoreCase(s);
+		case 'R': //ripSource
+			return j.m_fa.rip.equalsIgnoreCase(s);
+		case 'T': //Type
+			return j.m_fa.anime.typ.equalsIgnoreCase(s);
+		case 'G':{ //Group
+			if(j.m_fa.gid==0)
+				return s.equalsIgnoreCase("unknown");
+			try{
+				return j.m_fa.gid==Integer.parseInt(s.trim());
+			}catch(NumberFormatException e){/*part of plan*/}
+			return	j.m_fa.group.name.equalsIgnoreCase(s)||
+			j.m_fa.group.sname.equalsIgnoreCase(s);
+		}
+		case 'Y': //Year
+			return j.m_fa.inYear(s);
+		case 'D': //Dub lang
+			return cont(j.m_fa.dub,s);
+		case 'S': //Sub lang
+			return cont(j.m_fa.sub,s);
+		case 'X': //check number of eps
+			return s.equals(""+j.m_fa.anime.eps);
+		case 'P': //Path
+			return regtest(j.m_fc.getAbsolutePath(), s);
+		case 'N': //Genre
+			return cont(j.m_fa.anime.cat,s);
+		case 'I':{ //Is Defined
+			/*if(s.equals("eng"))//probably most used
 					return j.m_fa.anime.eng!=null;
 				if(s.equals("ver"))//won't work with .containsKey since it is not null by default
 					return j.m_fa.getVersion().length()>0;*/
-				String t = (String)mAmap.get(s);
-				return t!=null && t.length()>0;
+			String t = (String)mAmap.get(s);
+			return t!=null && t.length()>0;
+		}
+		case 'U':{
+			String[] cmp = s.split(":", 2);
+			if(cmp.length==2){
+				return mAmap.containsKey(cmp[0])
+				&& mAmap.containsKey(cmp[1])
+				&& !mAmap.get(cmp[0]).equals(mAmap.get(cmp[1]));
 			}
-			case 'U':{
-				String[] cmp = s.split(":", 2);
-				if(cmp.length==2){
-					return mAmap.containsKey(cmp[0])
-						&& mAmap.containsKey(cmp[1])
-						&& !mAmap.get(cmp[0]).equals(mAmap.get(cmp[1]));
-				}
-				System.out.println("ERROR: Invalid data in test: U("+s+")");
-				return false;
-			}
+			System.out.println("ERROR: Invalid data in test: U("+s+")");
+			return false;
+		}
 
-			default: return false;
+		default: return false;
 		}
 	}
 	private static boolean regtest(String s, String t){

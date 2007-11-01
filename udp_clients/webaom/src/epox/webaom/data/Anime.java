@@ -141,12 +141,6 @@ public class Anime extends Base{
 		if(x<3) return pro.first()?'l':'e';
 		return (char)(62+x);//(""+x).charAt(0);
 	}
-	public boolean checkName(String name){
-		return
-			rom!=null&&rom.equalsIgnoreCase(name) ||
-			kan!=null&&kan.equalsIgnoreCase(name) ||
-			eng!=null&&eng.equalsIgnoreCase(name);
-	}
 	public int compareTo(Object o){
 		int i = comp(o, s0);
 		if(i==0&&s0!=s1)
