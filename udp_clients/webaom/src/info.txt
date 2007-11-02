@@ -1,7 +1,8 @@
 WebAOM!
 
-1.19l 01.11.2007:
+1.19l 02.11.2007:
 * Changed A() from exact match to regexp.
+* Fixed %cen tag.
 
 1.19k 27.10.2007:
 *Fixed I() so it works for %cen too.
