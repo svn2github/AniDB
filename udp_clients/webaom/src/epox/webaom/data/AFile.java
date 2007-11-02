@@ -200,8 +200,8 @@ public class AFile extends Base{
 	}
 	public String getCensored(){
 		switch(stt&0xC0){
-			case F_CEN: return "unc";
-			case F_UNC: return "cen";
+			case F_CEN: return "cen";
+			case F_UNC: return "unc";
 			default: return "";
 		}
 	}
