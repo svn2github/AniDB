@@ -82,7 +82,7 @@ body.nonav
 	text-indent: 15px;
 	background-position:  left 50%;
 	background-repeat: no-repeat;
-	background-image: url('images/Buttons/ask2.gif');padding-left:0; padding-right:0; padding-top:1px; padding-bottom:0
+	background-image: url('images/buttons/ask2.gif');padding-left:0; padding-right:0; padding-top:1px; padding-bottom:0
 }
 
 #layout-menu li.forum
@@ -229,7 +229,7 @@ body.nonav
 {
 	display: block;
 	float: right;
-	background: url('images/Buttons/button_search.gif') no-repeat top;
+	background: url('images/buttons/button_search.gif') no-repeat top;
 	font-size: 10px;
 	border: 0px solid white;
 	width: 63px;
