@@ -415,7 +415,7 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 			A.opt.save();
 		}
 		else if(source==jbButt[B_WIKI]){
-			hlGo("http://wiki.anidb.info/w/WebAOM");
+			hlGo("http://wiki.anidb.net/w/WebAOM");
 		}
 		else if(source==mTdio) dioStart();
 		else if(source==mTprg)
