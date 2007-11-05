@@ -47,7 +47,7 @@ public class A{
 	public static void memstats(){
 		System.out.println((mem1-mem0)/1048576f+"\t"+(mem2-mem1)/1048576f+"\t"+(mem3-mem2)/1048576f+"\t"+(mem4-mem3)/1048576f+"\t"+(mem5)/1048576f);
 	}*/
-	public static final String S_WEB="anidb.info", S_VER = "1.19l (071105)", S_N="\r\n";
+	public static final String S_WEB="anidb.net", S_VER = "1.19l (071105)", S_N="\r\n";
 	public static String fschema, dir = null, preg=null/*"^.*$"*/, font="";
 	public static int ASNO = 99, ASSP = 99;
 

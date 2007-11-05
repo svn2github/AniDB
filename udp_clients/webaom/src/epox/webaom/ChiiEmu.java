@@ -232,7 +232,7 @@ public class ChiiEmu implements CommandModel{
 			sb.append(s[4]);
 			sb.append(" files, url: ");
 			sb.append(s[8]);
-			sb.append(", http://anidb.info/g"+s[0]);
+			sb.append(", http://anidb.net/g"+s[0]);
 			return sb.toString();
 		}
 		public String top(String str){
