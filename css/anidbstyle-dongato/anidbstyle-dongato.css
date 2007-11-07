@@ -893,6 +893,16 @@ span.i_videostream_h264_avc
 }
 
 /* flags.css */
+*.i_audio_al
+{
+	background-image: url(http://static.anidb.net/css/icons/flags/anidb_audio_albanian.gif);
+}
+
+*.i_sub_al
+{
+	background-image: url(http://static.anidb.net/css/icons/flags/anidb_sub_albanian.gif);
+}
+
 *.i_audio_ar
 {
 	background-image: url(http://static.anidb.net/css/icons/flags/anidb_audio_arabic.gif);
@@ -3403,7 +3413,8 @@ div.latest ul li
 }
 
 /* centering mass add results */
-div.maddtomylist_all ul.results
+div.maddtomylist_all ul.results,
+div.group_released p.stats
 {
 	padding-top: 1em;
 	text-align: center;
