@@ -6,13 +6,6 @@
 <font face="arial,helvetica" size=2>
 <h3>AniDB Export for <tmpl_var name=global_user></h3>
 <hr>
-<tmpl_var expr="4*5"><br>
-<tmpl_var expr="lc('AbCd')"><br>
-<tmpl_var expr="uc('AbCd')"><br>
-<tmpl_var expr="jsencode('Ab"Cd')"><br>
-<tmpl_var expr="replace('e','t',global_user)"><br>
-<tmpl_var expr="ireplace('a','b','abcdefABCDEF')"><br>
-<hr>
 <table>
 <tr>
     <td> User: </td>
