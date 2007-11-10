@@ -117,8 +117,8 @@ div.profile_all div.languages div {
 	float: left;
 	width: 33.33%;
 }
-div.profile_all div.general form>input,
-div.profile_all div.languages input {
+div.profile_all div.general form>input/*, this was hiding two buttons
+div.profile_all div.languages input*/ {
 	position: absolute;
 	left: 45%;
 	bottom: 1em;
