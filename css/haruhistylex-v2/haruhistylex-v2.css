@@ -1,6 +1,6 @@
 @charset "utf-8";
-@import "http://static.anidb.net/css/common/style/icons/default.css";
-@import "http://static.anidb.net/css/common/style/icons/flags.css";
+@import "../common/style/icons/default.css";
+@import "../common/style/icons/flags.css";
 
 /**
  * HaruhiStyleX.AniDB v2
