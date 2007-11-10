@@ -1,44 +1,58 @@
-@charset "UTF-8";
-/** HaruhiStyleX.AniDB v2 (Opera Version)
- * Style by: TheJAG
- * Based on Harustyle by b1hn.
+@charset "utf-8";
+@import "http://static.anidb.net/css/common/style/icons/default.css";
+@import "http://static.anidb.net/css/common/style/icons/flags.css";
+
+/**
+ * HaruhiStyleX.AniDB v2
+ * A style for AniDB.net by TheJAG
+ * Based on Harustyle by b1hn
+ * 
+ * Currently known supported browsers:
+ * Opera 9+
+ * Firefox 2+
+ * Safari 3+
  */
 
-/** Colors to remember. :P
- * Complete (Green):	#90EE90
- * Dropped (Red): 	#FF6666
- * Stalled (Pink): 	#FFC0CB
- * Background: 		#AAD8E6
- * Border: 		#3496DA
- */
-
-/* Imports. */
-@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";
-
-/* Global */
 html
 {
-	background-image:url(images/topBack.png);
-	background-repeat:repeat-x;
+	background-image:url(images/Background.png);
+	background-position:bottom right;
+	background-attachment:fixed;
+	background-repeat:no-repeat;
 }
 
 body
 {
-	background-image:url(images/banner.png);
-	background-position:190px 0px;
+	background-image:url(images/Banner.png);
+	background-position:top center;
 	background-repeat:no-repeat;
-	font-family:Calibri, Corbel, Consolas, Candara, Cambria, Constantia, "Arial Unicode MS", Arial, monospace;
-	padding-left:200px;
-	padding-top:80px;
-	margin:0;
+	font-family:Calibri, "Arial Unicode MS", Arial, Helvetica, sans-serif;
+	margin:0px;
+	padding:80px 0 0 200px;
 }
 
 body.nonav
 {
-	background-image:none;
-	margin-left:0;
-	margin-top:0;
+	background:none;
+	padding:0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5
+{
+	font-variant:small-caps;
+	color:#0099FF;
+	text-align:center;
+}
+
+ul,
+ol
+{
+	margin:0;
+	padding:0;
 }
 
 a
@@ -50,694 +64,158 @@ a
 
 a:hover
 {
-	color:#0000FF;
-}
-
-fieldset
-{
-	display:none;
-}
-
-#layout-content > h1:first-child
-{
 	color:#0099FF;
-	text-align:center;
-	font-variant:small-caps;
-	border-bottom:#0099FF solid 4px;
-	width:50%;
-	margin-left:auto;
-	margin-right:auto;
 }
 
-#layout-content div.g_notebox
+#layout-menu
 {
-	background-color:#AAD8E6;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:20px auto 20px auto;
-	padding:0;
-	width:90%;
-	text-transform:capitalize;
-}
-
-#layout-content div.g_notebox h3
-{
-	background-color:#2496DA;
+	position:fixed;
+	left:0px;
+	top:0px;
 	margin:0;
-	padding:0;
-	content:"Note!";
-	font-size:large;
-	text-align:center;
-	color:#FFFFFF;
-	font-variant:small-caps;
-}
-
-#layout-footer
-{
-	color:#0099FF;
-	text-align:center;
-	font-variant:small-caps;
-	border-top:#0099FF solid 4px;
-	width:50%;
-	margin-top:20px;
-	margin-left:auto;
-	margin-right:auto;
-}
-
-#layout-footer p:before
-{
-	content:"HaruhiStyleX.AniDB v2 by TheJAG! (Based on Harustyle by b1hn.)";
-	display:block;
-}
-
-/* Menu */
-#layout-menu div.menu
-{
-	background-attachment:fixed;
+	padding:15px 0 0 30px;
 	background-image:url(images/menuClean.png);
 	background-repeat:no-repeat;
-	position:fixed;
-	top:0;
-	left:0;
-	width:190px;
+	width:200px;
 	height:600px;
-	z-index:2;
+	line-height:.9;
+	font-size:small;
 }
 
-#layout-menu div.menu:hover
+#layout-menu:first-child:hover
 {
 	background-image:url(images/menu.png);
 }
 
-#layout-menu div.menu ul
+#layout-menu > div.menu
+{
+	position:absolute;
+	top:12px;
+	left:24px;
+	width:130px;
+	height:490px;
+}
+
+#layout-menu > div.menu > ul
 {
 	list-style-type:none;
-	padding:0 0 0 30px;
+	visibility:hidden;
 	text-transform:capitalize;
-	line-height:1em;
+}
+
+#layout-menu > div.menu > ul.main > li.main > a
+{
+	content:"news";
+}
+
+#layout-menu > div.usermenu
+{
 	visibility:hidden;
 }
 
-#layout-menu div.menu ul.main li.main a
-{
-	content:"News";
-}
-
-#layout-menu div.menu ul li a
-{
-	display:block;
-	width:120px;
-}
-
-#layout-menu div.menu:hover ul
+#layout-menu > div.menu:hover > ul,
+#layout-menu > div.menu:hover + div.usermenu
 {
 	visibility:visible;
 }
 
-/* Usermenu */
-#layout-menu div.usermenu
+#layout-search
 {
 	position:fixed;
-	top:660px;
-	left:0;
-	width:190px;
-	background-color:#AAD8E6;
-	border:#2496DA solid 2px;
+	top:550px;
+	left:15px;
 }
 
-#layout-menu div.usermenu p
+#layout-search > div.search > form > p > input[type=text]
 {
-	margin:0;
-	padding:0;
+	width:100px;
+	color:#0099FF;
+	font-weight:bold;
+}
+
+#layout-search > div.search > form > p > input[type=submit]
+{
+}
+
+#layout-content
+{
+	margin:0px;
+	padding:0px;
+}
+
+#layout-content div,
+#layout-content p,
+#layout-content span
+{
 	font-size:small;
-	text-align:center;
 }
 
-#layout-menu div.usermenu p a
+#layout-content > div.main_all > div.rightbar
 {
-	display:block;
+	position:absolute;
+	top:80px;
+	right:0px;
+	width:250px;
+	display:none;
 }
 
-#layout-menu div.usermenu p.user:before
+#layout-content > div.main_all > div.news > div.newsitem
 {
-	content:"Welcome ";
-	text-transform:none;
+	background-image:url(images/GlassMediumBottom.png);
+	background-repeat:no-repeat;
+	margin:-40px 0 0 0;
+	padding:60px 0 0 0;
+	width:650px;
+	margin:0 auto;
 }
 
-#layout-menu div.usermenu p.user
+#layout-content > div.main_all > div.news > div.newsitem:first-child
 {
-	background-color:#2496DA;
-	font-size:large;
-	text-transform:uppercase;
-	text-align:center;
-	color:#FFFFFF;
-	font-variant:small-caps;
-	overflow:auto;
-	font-weight:bold;
-}
-
-#layout-menu div.usermenu p.user:after
-{
-	content:"!";
-}
-
-#layout-menu div.usermenu p a#newnews:before,
-#layout-menu div.usermenu p a#newnotifies:before,
-#layout-menu div.usermenu p a#newmessages:before
-{
-	content:"You Have ";
-}
-
-#layout-menu div.usermenu p a#newnews,
-#layout-menu div.usermenu p a#newnotifies,
-#layout-menu div.usermenu p a#newmessages
-{
-	text-transform:capitalize;
-}
-
-#layout-menu div.usermenu p a#newnews:after,
-#layout-menu div.usermenu p a#newnotifies:after,
-#layout-menu div.usermenu p a#newmessages:after
-{
-	content:"!";
-}
-
-#layout-menu div.usermenu p a.history
-{
-	content:"Notification History!";
-	font-size:xx-small;
-	line-height:0.5em;
-}
-
-#layout-menu div.usermenu p a.i_profile
-{
-	content:"Your Profile!";
-	text-transform:capitalize;
-}
-
-#layout-menu div.usermenu p a.i_logout
-{
-	content:"Leave AniDB!";
-	text-transform:capitalize;
-}
-
-/* Searchbar */
-#layout-search div.search p
-{
-	position:fixed;
-	top:600px;
-	left:0;
-	margin:0;
+	background-image:none;
 	padding:0;
-	background-color:#2496DA;
 }
 
-#layout-search div.search p:before
+#layout-content > div.main_all > div.news > div.newsitem > h4
 {
-	content:"Quick Search!";
-	display:block;
-	background-color:#2496DA;
-	font-size:large;
-	text-align:center;
-	color:#FFFFFF;
-	font-variant:small-caps;
-	font-weight:bold;
+	background-image:url(images/GlassMediumTop.png);
+	background-repeat:no-repeat;
+	padding:40px 60px 0 60px;
+	margin:0;
+	height:60px;
 }
 
-#layout-search div.search p input.text
-{
-	width:188px;
-	height:20px;
-	background-color:#AAD8E6;
-	border-top:none;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	font-weight:bold;
-	text-align:center;
-}
-
-#layout-search div.search p input.submit
+#layout-content > div.main_all > div.news > div.newsitem > div.avatar,
+#layout-content > div.main_all > div.news > div.newsitem > span.stamp
 {
 	display:none;
 }
 
-/* Main/News Rightbar */
-#layout-content div.main_all div.rightbar
+#layout-content > div.main_all > div.news > div.newsitem > div.body
 {
-	position:absolute;
-	right:0px;
-	width:300px;
+	background-image:url(images/GlassMediumMiddle.png);
+	background-repeat:repeat-y;
+	padding:0 60px;
+	margin:-40px 0 0 0;
 }
 
-#layout-content div.main_all div.rightbar > h4:first-child
+#layout-content > div.main_all > div.news > div.newsitem > div.body > ul,
+#layout-content > div.main_all > div.news > div.newsitem > div.body > ol
 {
-	background-color:#2496DA;
-	font-size:large;
-	text-align:center;
-	color:#FFFFFF;
-	font-variant:small-caps;
-	margin:0;
-	padding:0;
+	padding:10px 0 0 40px;
 }
 
-#layout-content div.main_all div.rightbar h4
+#layout-footer
 {
-	background-color:#2496DA;
-	font-size:large;
-	text-align:center;
-	color:#FFFFFF;
-	font-variant:small-caps;
-	margin:20px 0 0 0;
-	padding:0;
-}
-
-#layout-content div.main_all div.rightbar h4 + p.g_vital
-{
-	background-color:#AAD8E6;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	margin:0;
-	padding:0;
-	text-align:center;
-}
-
-#layout-content div.main_all div.rightbar h4 + p.g_vital + p
-{
-	background-color:#AAD8E6;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	margin:0;
-	padding:0;
-	text-align:center;
-}
-
-#layout-content div.main_all div.rightbar h4 + p.g_vital + p + p
-{
-	background-color:#AAD8E6;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:0;
-	padding:0;
-	text-align:center;
-}
-
-#layout-content div.main_all div.rightbar h3
-{
-	color:#0099FF;
-	text-align:center;
-	font-variant:small-caps;
-	border-bottom:#0099FF solid 4px;
-	width:50%;
-	margin-left:auto;
-	margin-right:auto;
-}
-
-#layout-content div.main_all div.rightbar h4 + ol
-{
-	background-color:#AAD8E6;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:0;
-	padding:0;
-	list-style-type:none;
+	background-image:url(images/GlassMediumBottom.png);
+	background-repeat:no-repeat;
+	width:650px;
+	margin:0 auto;
+	padding:70px 0 0 0;
 	font-size:small;
-}
-
-#layout-content div.main_all div.rightbar h4 + ol li span
-{
-	font-weight:bold;
-}
-
-#layout-content div.main_all div.rightbar h4 + ol li span + a
-{
-	padding-left:5px;
-}
-
-/* Main/News Page */
-#layout-content div.main_all div.news
-{
-	position:relative;
-	right:310px;
-	margin-left:310px;
-}
-
-#layout-content div.main_all div.news div.newsitem
-{
-	background-color:#AAD8E6;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:0;
-	padding:0;
-	list-style-type:none;
-	font-size:small;
-	text-transform:capitalize;
-}
-
-#layout-content div.main_all div.news div.newsitem h4
-{
-	background-color:#2496DA;
-	font-size:large;
-	text-align:center;
-	color:#FFFFFF;
-	font-variant:small-caps;
-	margin:20px 0 0 0;
-	padding:0;
-}
-
-#layout-content div.main_all div.news div.newsitem span.stamp
-{
-	font-size:smaller;
-	float:right;
-	margin-right:10px;
-}
-
-#layout-content div.main_all div.news div.newsitem span.stamp:after
-{
-	content:".";
-}
-
-/* Advanced Search Page */
-#layout-content div.search_all div.search_form div.search > table:first-child
-{
-	background-color:#AAD8E6;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:0 auto 0 auto;
-	padding:0;
-	list-style-type:none;
-	font-size:small;
-}
-
-#layout-content div.search_all div.search_form div.search table caption
-{
-	background-color:#2496DA;
-	font-size:large;
-	text-align:center;
-	color:#FFFFFF;
-	font-variant:small-caps;
-	margin:0;
-	padding:0;
-}
-
-#layout-content div.search_all div.search_form div.search table tr th
-{
-	text-align:left;
-}
-
-#layout-content div.search_all div.search_form div.search table tr th:after
-{
-	content:": ";
-}
-
-#layout-content div.search_all div.search_form div.search table tr td
-{
-	text-transform:capitalize;
-}
-
-#layout-content div.search_all div.search_form div.search table tr.action td.value
-{
 	text-align:center;
 }
 
-#layout-content div.search_all ul.g_actionlist
+#layout-footer:before
 {
-	list-style-type:none;
-	margin:10px 0 0 0;
-	padding:0;
-	text-align:center;
-	text-transform:capitalize;
-}
-
-#layout-content div.search_all ul.g_actionlist li
-{
-	display:inline;
-}
-
-#layout-content div.search_all ul.g_actionlist > li:first-child:before,
-#layout-content div.search_all ul.g_actionlist li:after
-{
-	content:" - ";
-}
-
-/* Search Results Page */
-#layout-content div.search_all div.search_filter
-{
-	text-align:center;
-	text-transform:capitalize;
-	margin:0 0 10px 0;
-	padding:0;
-}
-
-#layout-content div.search_all div.search_filter:before,
-#layout-content div.search_all div.search_filter:after,
-#layout-content div.search_all div.search_results ul.g_jumplist li.prev:before,
-#layout-content div.search_all div.search_results ul.g_jumplist li.prev:after,
-#layout-content div.search_all div.search_results ul.g_jumplist li.next:before,
-#layout-content div.search_all div.search_results ul.g_jumplist li.next:after
-{
-	content:" - ";
-}
-
-#layout-content div.search_all div.search_results ul.g_jumplist
-{
-	text-align:center;
-	list-style-type:none;
-	padding:0;
-	margin:10px 20px;
-	height:20px;
-	clear:both;
-	text-transform:capitalize;
-}
-
-#layout-content div.search_all div.search_results ul.g_jumplist li
-{
-	display:inline;
-}
-
-#layout-content div.search_all div.search_results ul.g_jumplist li.prev
-{
-	float:left;
-}
-
-#layout-content div.search_all div.search_results ul.g_jumplist li.next
-{
-	float:right;
-}
-
-#layout-content div.search_all table.search_results
-{
-	background-color:#AAD8E6;
-	border-top:#2496DA solid 2px;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:20px auto 20px auto;
-	padding:0;
-	list-style-type:none;
-	font-size:small;
-}
-
-/* Anime Calendar Page */
-#layout-content div.latestanimes_all div.latestanimes_form.top a.g_navprev
-{
-	float:left;
-}
-
-#layout-content div.latestanimes_all div.latestanimes_form.top a.g_navnext
-{
-	float:right;
-}
-
-#layout-content div.latestanimes_all div.latestanimes_form.top form p
-{
-	padding-top:20px;
-	text-align:center;
-}
-
-#layout-content div.latestanimes_all div.latestanimes_form.top form p select.month
-{
-	background-color:#AAD8E6;
-	border-top:#2496DA solid 2px;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	font-weight:bold;
-	text-align:center;
-	margin:0;
-	padding:0;
-}
-
-#layout-content div.latestanimes_all div.latestanimes_form.top form p input.year
-{
-	width:40px;
-	background-color:#AAD8E6;
-	border-top:#2496DA solid 2px;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	font-weight:bold;
-	text-align:center;
-	margin:0;
-	padding:0;
-}
-
-#layout-content div.latestanimes_all div.latestanimes_form.top form p select.type
-{
-	background-color:#AAD8E6;
-	border-top:#2496DA solid 2px;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	font-weight:bold;
-	text-align:center;
-	margin:0;
-	padding:0;
-}
-
-#layout-content div.latestanimes_all div.latestanimes_form.top form p input.submit
-{
-	background-color:#AAD8E6;
-	border-top:#2496DA solid 2px;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	font-weight:bold;
-	text-align:center;
-	margin:0;
-	padding:0;
-}
-
-/* Latest Additions Page */
-#layout-content div.latest_all ul.type,
-#layout-content div.latest_all ul.g_numonpage,
-#layout-content div.latest_all ul.g_actionlist
-{
-	list-style-type:none;
-	text-align:center;
-	font-size:small;
-}
-
-#layout-content div.latest_all ul.type:before,
-#layout-content div.latest_all ul.type:after,
-#layout-content div.latest_all ul.g_numonpage:before,
-#layout-content div.latest_all ul.g_numonpage:after,
-#layout-content div.latest_all ul.g_actionlist > li:first-child:before,
-#layout-content div.latest_all ul.g_actionlist li:after
-{
-	content:" - ";
-}
-
-#layout-content div.latest_all ul.type li,
-#layout-content div.latest_all ul.g_numonpage li,
-#layout-content div.latest_all ul.g_actionlist li
-{
-	display:inline;
-}
-
-#layout-content div.latest_all ul.type li:before,
-#layout-content div.latest_all ul.g_numonpage li:before
-{
-	content:" | ";
-}
-
-#layout-content div.latest_all ul.type > li:first-child:before,
-#layout-content div.latest_all ul.g_numonpage > li:first-child:before
-{
-	content:"";
-}
-
-#layout-content div.latest_all div.latest_files_list table.files
-{
-	background-color:#AAD8E6;
-	border-top:#2496DA solid 2px;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:20px auto 20px auto;
-	padding:0;
-	list-style-type:none;
-	font-size:small;
-}
-
-/* Anime List Page */
-#layout-content div.animelist_all div.g_filterlist
-{
-	text-align:center;
-	text-transform:capitalize;
-	margin:0 0 10px 0;
-	padding:0;
-	font-size:small;
-}
-
-#layout-content div.animelist_all div.g_filterlist:before,
-#layout-content div.animelist_all div.g_filterlist:after,
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.all:before,
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.other:after,
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev:before,
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev:after,
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.next:before,
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.next:after,
-#layout-content div.animelist_all ul.g_actionlist > li:first-child:before,
-#layout-content div.animelist_all ul.g_actionlist li:after
-{
-	content:" - ";
-}
-
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist
-{
-	list-style-type:none;
-	margin:0;
-	padding:0;
-	text-align:center;
-	text-transform:capitalize;
-	font-size:small;
-}
-
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li
-{
-	display:inline;
-}
-
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.prev
-{
-	float:left;
-}
-
-#layout-content div.animelist_all div.animelist_list ul.g_jumplist li.next
-{
-	float:right;
-}
-
-#layout-content div.animelist_all div.animelist_list table.anime_list
-{
-	background-color:#AAD8E6;
-	border-top:#2496DA solid 2px;
-	border-left:#2496DA solid 2px;
-	border-right:#2496DA solid 2px;
-	border-bottom:#2496DA solid 2px;
-	margin:20px auto 20px auto;
-	padding:0;
-	list-style-type:none;
-	font-size:small;
-}
-
-#layout-content div.animelist_all ul.g_actionlist
-{
-	list-style-type:none;
-	margin:10px 0 0 0;
-	padding:0;
-	text-align:center;
-	text-transform:capitalize;
-	font-size:small;
-}
-
-#layout-content div.animelist_all ul.g_actionlist li
-{
-	display:inline;
+	content:"HaruhiStyleX.AniDB v2 - Made by TheJAG - Based on Harustyle by b1hn";
 }
