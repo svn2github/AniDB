@@ -690,19 +690,19 @@ width: 99%;
 {
 	background-image: url(images/badredpixel.png);
 }
-#layout-content div.anime_all tr.depr td,
-#layout-content div.group_all tr.depr td,
-#layout-content div.ep_all tr.depr td
+#layout-content div.anime_all tr.deprecated td,
+#layout-content div.group_all tr.deprecated td,
+#layout-content div.ep_all tr.deprecated td
 {
 	background-image: url(images/whitepixel.png);
 }
-#layout-content div.anime_all tr.genr,
-#layout-content div.ep_all tr.genr
+#layout-content div.anime_all tr.generic,
+#layout-content div.ep_all tr.generic
 {
 	background-image: url(images/bg_3.gif)
 }
-#layout-content div.anime_all tr.genr td,
-#layout-content div.ep_all tr.genr td
+#layout-content div.anime_all tr.generic td,
+#layout-content div.ep_all tr.generic td
 {
 	border-style: dotted;
 	border-color: #565656;
@@ -710,8 +710,8 @@ width: 99%;
 	border-right-width: 0;
 	border-left-width: 0;
 }
-#layout-content div.anime_all tr.genr td:first-child,
-#layout-content div.ep_all tr.genr td:first-child
+#layout-content div.anime_all tr.generic td:first-child,
+#layout-content div.ep_all tr.generic td:first-child
 {
 	border-style: dotted;
 	border-color: #565656;
@@ -719,8 +719,8 @@ width: 99%;
 	border-left-width: 1px;
 	border-right-width: 0;
 }
-#layout-content div.anime_all tr.genr td:last-child,
-#layout-content div.ep_all tr.genr td:last-child
+#layout-content div.anime_all tr.generic td:last-child,
+#layout-content div.ep_all tr.generic td:last-child
 {
 	border-style: dotted;
 	border-color: #565656;

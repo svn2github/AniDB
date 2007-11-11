@@ -220,12 +220,12 @@
 	background-color: #6fc279;
 }
 
-#layout-content div.anime_table tr.depr td
+#layout-content div.anime_table tr.deprecated td
 {
 	background-color: #999999;
 }
 
-#layout-content div.anime_table tr.genr td
+#layout-content div.anime_table tr.generic td
 {
 	background-color: #eeeeee;
 }

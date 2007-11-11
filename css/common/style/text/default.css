@@ -45,19 +45,25 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 /** WEIGHT/STYLE **/
 .v_high,
 .v_med, span.diff,
+#layout-content table.filelist tr.undumped td.id,
 #layout-content div.creqmod_all .state.new,
 #layout-content div.creqmod_all .state.return,
-#layout-content div.creqmod_all span.type.del
-{
-	font-weight: bold;
-}
-
+#layout-content div.creqmod_all span.type.del,
 #layout-content div.msg_all tr.new td.state,
 #layout-content div.msg_all tr td.type
 {
 	font-weight: bold;
 }
 
+#layout-content table.filelist tr.deprecated
+{
+	text-decoration: line-through;
+}
+
+#layout-content table.filelist tr.virtual
+{
+	font-style: italic;
+}
 
 /** SIZE **/
 #layout-menu

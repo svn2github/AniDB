@@ -1,7 +1,7 @@
 #layout-content td del,
 #layout-content tr.g_fs_lame,
 #layout-content table.filelist tr.invalid,
-#layout-content table.filelist tr.deprecated,
+/*#layout-content table.filelist tr.deprecated,*/
 #layout-content div.myvotes_all table tr.low td
 {
 	background-color: #ffd7c2;

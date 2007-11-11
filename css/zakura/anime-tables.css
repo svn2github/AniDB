@@ -99,7 +99,7 @@ div.anime_all div.episodes table.filelist {
 	border-collapse: separate;
 	border-spacing: 1px;
 }
-table.filelist tr.genr td,
+table.filelist tr.generic td,
 table.filelist tr.generic td {
 	background-color: #fff !important;
 	color: #8e4eaf;
