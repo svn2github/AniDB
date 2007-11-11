@@ -539,6 +539,11 @@ span.i_video.wmv9
 	background-image: url(../icons/icon/anidb_video_wmv.gif);
 }
 
+span.i_audio
+{
+	display: none;
+}
+
 span.i_ext
 {
 	background-image: url(../icons/icon/anidb_other.gif);
