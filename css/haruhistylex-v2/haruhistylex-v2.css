@@ -1,7 +1,12 @@
 @charset "utf-8";
+<<<<<<< .mine
+@import "../common/style/icons/default.css";
+@import "../common/style/icons/flags.css";
+=======
 @import "../common/style/icons/default.css";
 @import "../common/style/icons/flags.css";
 @import "../harustyle/harustyle.css";
+>>>>>>> .r439
 
 /**
  * HaruhiStyleX.AniDB v2
@@ -10,8 +15,8 @@
  * 
  * Currently known supported browsers:
  * Opera 9+
- * Firefox 2+
- * Safari 3+
+ * Firefox 2+ (No CSS Content)
+ * Safari 3+ (No CSS Content)
  */
 
 html
@@ -27,7 +32,7 @@ body
 	background-image:url(images/Banner.png);
 	background-position:top center;
 	background-repeat:no-repeat;
-	font-family:Calibri, "Arial Unicode MS", Arial, Helvetica, sans-serif;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
 	margin:0px;
 	padding:80px 0 0 200px;
 }
@@ -59,7 +64,6 @@ ol
 a
 {
 	color:#000000;
-	text-decoration:none;
 	font-weight:bold;
 }
 
@@ -70,72 +74,188 @@ a:hover
 
 #layout-menu
 {
-	position:fixed;
-	left:0px;
-	top:0px;
-	margin:0;
-	padding:15px 0 0 30px;
-	background-image:url(images/menuClean.png);
-	background-repeat:no-repeat;
+	background-image:url(images/MenuClean.png);
+	height:300px;
 	width:200px;
-	height:600px;
-	line-height:.9;
-	font-size:small;
-}
-
-#layout-menu:first-child:hover
-{
-	background-image:url(images/menu.png);
-}
-
-#layout-menu > div.menu
-{
 	position:absolute;
-	top:12px;
-	left:24px;
-	width:130px;
-	height:490px;
+	top:0;
+	left:0;
 }
 
-#layout-menu > div.menu > ul
+#layout-menu:hover
 {
-	list-style-type:none;
-	visibility:hidden;
-	text-transform:capitalize;
+	background-image:url(images/Menu.png);
 }
 
-#layout-menu > div.menu > ul.main > li.main > a
-{
-	content:"news";
-}
-
+#layout-menu > div.menu,
 #layout-menu > div.usermenu
 {
 	visibility:hidden;
 }
 
-#layout-menu > div.menu:hover > ul,
-#layout-menu > div.menu:hover + div.usermenu
+#layout-menu:hover > div.menu,
+#layout-menu:hover > div.usermenu
 {
 	visibility:visible;
 }
 
+#layout-menu > div.menu > ul
+{
+	padding:10px 0 0 40px;
+	list-style-type:none;
+}
+
+#layout-menu > div.menu > ul.my,
+#layout-menu > div.menu > ul.mod
+{
+	display:none;
+}
+
+#layout-menu > div.menu > ul > li > a
+{
+	font-size:x-small;
+	line-height:1;
+	display:list-item;
+	list-style-type:none;
+	text-transform:capitalize;
+}
+
+#layout-menu > div.usermenu > p
+{
+	font-size:x-small;
+	line-height:1;
+	margin:0;
+	padding:10px 0 0 40px;
+}
+
+#layout-menu > div.usermenu > p.user
+{
+	font-size:small;
+	margin:0;
+	padding:10px 0 0 10px;
+	font-weight:bold;
+	width:160px;
+	overflow:hidden;
+	height:20px;
+}
+
+#layout-menu > div.usermenu > p.user:after
+{
+	content:"!";
+}
+
+#layout-menu > div.usermenu > p.user:before
+{
+	content:"Welcome ";
+}
+
+#layout-menu > div.usermenu > p > a
+{
+	display:list-item;
+	list-style-type:none;
+	text-transform:capitalize;
+}
+
+#layout-menu > div.usermenu > p > a.history
+{
+	display:none;
+}
+
+#layout-menu > div.menu > ul > li > a:hover,
+#layout-menu > div.usermenu > p > a:hover
+{
+	color:#FFFFFF;
+}
+
 #layout-search
 {
-	position:fixed;
-	top:550px;
+	position:absolute;
+	top:300px;
 	left:15px;
 }
 
 #layout-search > div.search > form > p > input[type=text]
 {
-	width:100px;
+	width:150px;
 	color:#0099FF;
 	font-weight:bold;
 }
 
 #layout-search > div.search > form > p > input[type=submit]
 {
+	display:list-item;
+	list-style-type:none;
+	margin:0 auto;
+}
+
+#layout-content > div.main_all > div.rightbar
+{
+	position:absolute;
+	top:380px;
+	left:0px;
+	width:200px;
+}
+
+#layout-content > div.main_all > div.rightbar > h4
+{
+	background-image:url(images/SmallGlassTop.png);
+	background-repeat:no-repeat;
+	margin:0;
+	padding:10px 0 0 0;
+	height:30px;
+}
+
+#layout-content > div.main_all > div.rightbar > p > a,
+#layout-content > div.main_all > div.rightbar > ol > li > a
+{
+	text-decoration:none;
+}
+
+#layout-content > div.main_all > div.rightbar > p.g_vital,
+#layout-content > div.main_all > div.rightbar > p.g_vital + p,
+#layout-content > div.main_all > div.rightbar > p.g_vital + p + p,
+#layout-content > div.main_all > div.rightbar > ol > li
+{
+	background-image:url(images/SmallGlassMiddle.png);
+	background-repeat:repeat-y;
+	margin:0;
+	padding:0 10px;
+	font-size:x-small;
+	text-align:center;
+}
+
+#layout-content > div.main_all > div.rightbar > p.g_vital + p + p,
+#layout-content > div.main_all > div.rightbar > ol > li + li + li + li + li + li + li + li + li + li
+{
+	background-image:url(images/SmallGlassBottom.png);
+	background-repeat:no-repeat;
+	height:40px;
+}
+
+#layout-content > div.main_all > div.rightbar > ol
+{
+	margin-bottom:20px;
+	list-style-type:none;
+}
+
+#layout-content > div.main_all > div.rightbar > ol > li
+{
+	text-align:left;
+}
+
+#layout-content > div.main_all > div.rightbar > ol > li.g_odd
+{
+	background-image:url(images/SmallGlassMiddle2.png);
+}
+
+#layout-content > div.main_all > div.rightbar > ol > li.g_odd > a:hover
+{
+	color:#FFFFFF;
+}
+
+#layout-content > div.main_all > div.rightbar > ol > li > span
+{
+	display:none;
 }
 
 #layout-content
@@ -151,18 +271,9 @@ a:hover
 	font-size:small;
 }
 
-#layout-content > div.main_all > div.rightbar
-{
-	position:absolute;
-	top:80px;
-	right:0px;
-	width:250px;
-	display:none;
-}
-
 #layout-content > div.main_all > div.news > div.newsitem
 {
-	background-image:url(images/GlassMediumBottom.png);
+	background-image:url(images/GlassBottom.png);
 	background-repeat:no-repeat;
 	margin:-40px 0 0 0;
 	padding:60px 0 0 0;
@@ -178,11 +289,16 @@ a:hover
 
 #layout-content > div.main_all > div.news > div.newsitem > h4
 {
-	background-image:url(images/GlassMediumTop.png);
+	background-image:url(images/GlassTop.png);
 	background-repeat:no-repeat;
 	padding:40px 60px 0 60px;
-	margin:0;
+	margin:40px 0 0 0;
 	height:60px;
+}
+
+#layout-content > div.main_all > div.news > div.newsitem:first-child > h4
+{
+	margin-top:0;
 }
 
 #layout-content > div.main_all > div.news > div.newsitem > div.avatar,
@@ -193,10 +309,11 @@ a:hover
 
 #layout-content > div.main_all > div.news > div.newsitem > div.body
 {
-	background-image:url(images/GlassMediumMiddle.png);
+	background-image:url(images/GlassMiddle.png);
 	background-repeat:repeat-y;
 	padding:0 60px;
 	margin:-40px 0 0 0;
+	font-weight:bold;
 }
 
 #layout-content > div.main_all > div.news > div.newsitem > div.body > ul,
@@ -207,13 +324,14 @@ a:hover
 
 #layout-footer
 {
-	background-image:url(images/GlassMediumBottom.png);
+	background-image:url(images/GlassBottom.png);
 	background-repeat:no-repeat;
 	width:650px;
 	margin:0 auto;
 	padding:70px 0 0 0;
 	font-size:small;
 	text-align:center;
+	font-weight:bold;
 }
 
 #layout-footer:before
