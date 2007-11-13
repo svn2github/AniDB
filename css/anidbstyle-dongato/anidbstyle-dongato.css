@@ -3607,3 +3607,8 @@ div.mylist_add
 	margin-right: auto;
 	width: 300px;
 }
+
+table.filelist tr.generic td
+{
+	background-color: white;
+}
