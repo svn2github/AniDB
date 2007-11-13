@@ -1,4 +1,4 @@
-/* Updated to 0.1.38 CSS version */
+/* Updated to 0.1.45 CSS version */
 
 /* anidbstyle_hacks.css */
 * html td, * html th
@@ -890,6 +890,10 @@ span.i_videostream_h264_avc
 {
 	background: transparent url(http://static.anidb.net/css/icons/down1.gif) no-repeat center right;
 	padding-right: 10px;
+}
+
+*.i_audio {
+	display: none;
 }
 
 /* flags.css */
@@ -2291,6 +2295,11 @@ span.diff,
 
 #layout-content div.mylist_list table table table tr.good td
 {
+	background-color: #6FCF7F;
+}
+
+#layout-content div.mylist_list table table table tr.g_odd.good td
+{
 	background-color: #6FC279;
 }
 
@@ -2870,10 +2879,19 @@ body.nonav
 #layout-content div.producer_all table tr.mylist,
 #layout-content div.group_released table tr.mylist
 {
+	background-color: #6FCF7F;
+}
+
+#layout-content td.g_odd ins,
+#layout-content table.filelist tr.g_odd.good,
+#layout-content div.myvotes_all table tr.g_odd.high td,
+#layout-content div.producer_all table tr.g_odd.mylist,
+#layout-content div.group_released table tr.g_odd.mylist
+{
 	background-color: #6FC279;
 }
 
-#layout-content table.filelist tr.generic
+#layout-content table.filelist tr.genr
 {
 	background-color: #EEEEEE;
 }
@@ -3224,7 +3242,6 @@ div.mylist_dump .g_odd,
 div.ed2kdump_options .g_odd,
 div.mylist_add .g_odd,
 div.g_actionlist .g_odd,
-div.g_definitionlist .g_odd,
 li.cat
 {
 	background-color: transparent !important;
@@ -3324,7 +3341,7 @@ div.group_info div.desc
 }
 
 /* border for anime images */
-div.image img
+div.anime_all div.image img
 {
 	border: 1px solid;
 	border-color: #717377 #E8E9EC #E8E9EC #717377;
@@ -3500,6 +3517,16 @@ div.permissions div.detailed th
 	cursor: help;
 }
 
+div.css_style .i_help
+{
+	display: none;
+}
+
+div.profile_all div
+{
+	padding-bottom: 1em;
+}
+
 /* tooltip support */
 #obj-tooltip
 {
@@ -3571,4 +3598,12 @@ div.mylist_list .g_odd.files
 #layout-content div.g_successbox
 {
 	text-align: center;
+}
+
+/* fix for mylist_add */
+div.mylist_add
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
 }
