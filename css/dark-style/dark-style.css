@@ -333,7 +333,9 @@ tr.newtype td {
 	border-top:				1px dashed #666;
 }
 tr.episode:hover td,
-tr.file:hover td {
+tr.file:hover td,
+tr.anime:hover td,
+tr.files:hover td {
 	padding-top:				0;
 	padding-bottom:				0;					
 	border-top:				1px solid #666;
@@ -518,6 +520,7 @@ div.anime_all div.groups td.cmts,
 div.anime_all div.episodes td.expand,
 div.anime_all div.episodes td.duration,
 div.anime_all div.episodes td.files,
+div.anime_all div.episodes td.source,
 div.anime_all div.episodes td.ed2k {
 	width:					30px;
 	text-align:				center;
@@ -530,25 +533,28 @@ div.anime_all div.groups td.action,
 div.anime_all div.episodes td.date,
 div.anime_all div.episodes td.epusers,
 div.anime_all div.episodes td.size,
-div.anime_all div.episodes td.quality,
+div.anime_all div.episodes td.crc,
 div.anime_all div.episodes td.resolution,
-div.anime_all div.episodes td.source,
-div.anime_all div.episodes td.stats,
+div.anime_all div.episodes td.users,
 div.anime_all table.filelist td.title {
 	width:					70px;
 	text-align:				center;
 }
-div.anime_all div.episodes td.action a.i_icon,
 div.anime_all div.groups td.action a.i_icon {
 	float:					right;
-	margin:					0 2px;
+	margin:					0 3px;
+}
+div.anime_all div.episodes td.action a.i_icon {
+	float:					right;
+	margin:					0 0 0 1px;
 }
 div.anime_all table.filelist td.action {
-	width:					37px;
+	width:					32px;
 	text-align:				center;
 }
 div.anime_all div.groups td.status,
 div.anime_all div.episodes td.id,
+div.anime_all div.episodes td.quality,
 div.anime_all div.episodes td.check {
 	width:					40px;
 	text-align:				center;
@@ -558,6 +564,7 @@ div.anime_all div.groups td.eps {
 	text-align:				center;
 }
 
+a.i_file_ed2k,
 span.i_censored,
 span.i_comment,
 span.i_ext,
@@ -574,14 +581,18 @@ span.i_vrs_5 {
 	float:					right;
 	margin-left:				-20px;
 }
+span.i_video {
+	position:				relative;
+	right:					18px;
+}
 span.i_ext {
 	position:				relative;
-	right:					20px;
+	right:					36px;
 }
 span.i_crc_no,
 span.i_crc_yes {
 	position:				relative;
-	right:					40px;
+	right:					54px;
 }
 span.i_vrs_1,
 span.i_vrs_2,
@@ -589,20 +600,20 @@ span.i_vrs_3,
 span.i_vrs_4,
 span.i_vrs_5 {
 	position:				relative;
-	right:					60px;
+	right:					72px;
 }
 span.i_censored,
 span.i_uncensored {
 	position:				relative;
-	right:					80px;
+	right:					90px;
 }
 span.i_comment {
 	position:				relative;
-	right:					1000px;
+	right:					108px;
 }
 td.status span.i_new_icon {
 	position:				relative;
-	right:					120px;
+	right:					126px;
 }
 
 
@@ -1218,40 +1229,158 @@ div.ed2kdump_all table {
 
 /*														profile */
 
-div.profile_all table {
-	width:					300px;
+div.profile_all div.g_section {
+	width:					100%;
+	overflow:				hidden;
+	margin:					20px auto;
+	padding:				20px 0;
+	border-bottom:				1px solid #333;
 }
-div.profile_all div.profile_css {
+div.profile_all input[type="submit"] {
+	width:					90px;
+}
+
+/* css */
+div.profile_all div.css_style h4,
+div.profile_all div.css_style form  {
 	width:					600px;
+	margin:					0 auto;
 }
-div.profile_all div.profile_permission table,
-div.profile_all div.rdf_notify table,
-div.profile_all div.im_notify table {
-	width:					600px;
+div.profile_all div.css_style a.i_help  {
+	position:				relative;
+	left:					230px;
+	top:					-14px;
 }
-div.profile_all div.profile_language td {
-	text-align:				right;
-}
-div.profile_all div.profile_css form {
+div.profile_all div.css_style form {
 	text-align:				center;
 }
-div.profile_all div.profile_css form input {
+div.profile_all div.css_style form input {
 	margin:					5px auto;
-	width:					70px;
 }
-div.profile_all div.profile_css form input#style_url {
+div.profile_all div.css_style form input#style_url {
 	width:					600px;
 }
-div.profile_all div.profile_css div.image,
-div.profile_all div.profile_css div.info {
+div.profile_all div.css_style div.image,
+div.profile_all div.css_style div.info {
 	float:					left;
 	text-align:				left;
 }
-div.profile_all div.profile_css div.image {
+div.profile_all div.css_style div.image {
 	width:					230px;
 }
-div.profile_all div.profile_css div.info {
+div.profile_all div.css_style div.info {
 	width:					370px;
+}
+
+/* general */
+div.profile_all div.general form {
+	width:					950px;
+	overflow:				auto;
+	text-align:				center;
+}
+div.profile_all div.general div {
+	min-width:				290px;
+	float:					left;
+	margin:					0 15px 0 0;
+}
+div.profile_all div.general div li {
+	padding-right:				3px;
+}
+div.profile_all div.general form input[type="submit"] {
+	float:					right;
+	margin:					40px 20px 0 0;
+}
+div.profile_all div.general form div {
+	text-align:				left;
+}
+div.profile_all div.general form div input {
+	margin:					2px 0;
+}
+
+div.profile_all div.performance h4,
+div.profile_all div.performance form  {
+	width:					290px;
+	margin:					0 auto;
+}
+div.profile_all div.performance select  {
+	margin:					0 0 5px 60px;
+}
+div.profile_all div.performance input  {
+	float:					right;
+	margin:					0 12px 0 0;
+}
+
+/* languages, passwords, permissions, notify */
+div.profile_all div.languages div,
+div.profile_all div.languages div table {
+	width:					290px;
+	float:					left;
+	margin:					0 15px 0 0;
+}
+
+div.profile_all div.passwords div.guest,
+div.profile_all div.passwords div.api,
+div.profile_all div.permissions div.detailed,
+div.profile_all div.notify div.rdf_notify {
+	width:					590px;
+	float:					left;
+}
+div.profile_all div.languages div.subtitles,
+div.profile_all div.languages div.subtitles table,
+div.profile_all div.passwords div.anidb,
+div.profile_all div.permissions div.mastermode,
+div.profile_all div.notify div.im_notify,
+div.profile_all div.passwords div.anidb table,
+div.profile_all div.permissions div.mastermode table,
+div.profile_all div.notify div.im_notify table {
+	width:					300px;
+	float:					right;
+	margin:					0;
+}
+div.profile_all div.languages div td,
+div.profile_all div.passwords div.anidb td,
+div.profile_all div.permissions div.mastermode td,
+div.profile_all div.notify div.im_notify td {
+	padding:				3px 5px;
+	width:					150px;
+	vertical-align:				top;
+}
+div.profile_all div.languages div td select,
+div.profile_all div.passwords div.anidb table input[type="text"],
+div.profile_all div.passwords div.anidb table input[type="password"],
+div.profile_all div.permissions div.mastermode table input[type="text"],
+div.profile_all div.notify div.im_notify table input[type="text"] {
+	width:					180px;
+}
+
+div.profile_all div.passwords div.guest input[type="text"],
+div.profile_all div.passwords div.api input[type="text"] {
+	width:					480px;
+	float:					left;
+}
+div.profile_all div.passwords div.guest input[type="submit"],
+div.profile_all div.passwords div.api input[type="submit"] {
+	float:					right;
+}
+div.profile_all div.passwords div.guest div.g_info p {
+	margin:					0;
+}
+
+div.profile_all div.permissions div.detailed table {
+	width:					590px;
+}
+div.profile_all div.permissions div.detailed table th {
+	text-align:				left;
+	padding:				3px;
+}
+div.profile_all div.permissions div.detailed table td {
+	text-align:				center;
+}
+
+div.profile_all td.action,
+div.profile_all div.permissions div.detailed table td.action {
+	text-align:				right;
+	padding:				3px 0;
 }
 
 /*----------------------------------------------------------------------------------------------------------------LISTS */
@@ -2122,3 +2251,4 @@ div.latestanimes_all img[src*="nopic.gif"] {
 	width:					0;
 	padding:				0 75px;
 }
+
