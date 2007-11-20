@@ -5,7 +5,7 @@
  */
 
 // template info
-var theme = {'name':"html-fstyle",'version':"0.9.6beta",'source':"svn",'date':"14.10.2007"};
+var theme = {'name':"html-fstyle",'version':"0.9.7beta",'source':"svn",'date':"20.11.2007"};
 // settings
 var animeTitleLang = getCookie('animeTitleLang') || 'x-jat';
 var animeAltTitleLang = getCookie('animeAltTitleLang') || 'en';
@@ -29,54 +29,6 @@ var LAY_FORMATFILESIZE = (getCookie('LAY_FORMATFILESIZE') == 'true');
 var LAY_FILTERFILES = (getCookie('LAY_FILTERFILES') == 'true');
 var search_logic = 'OR';
 var base_url = 'http://anidb.net/perl-bin/animedb.pl';
-
-
-function createBasicSelect(name,id,onchange) {
-	var select = document.createElement('SELECT');
-	if (name && name != '') select.name = name;
-	if (id && id != '') select.id = id;
-	if (onchange && onchange != '') select.onchange = onchange;
-	return select;
-}
-
-function createLanguageSelect(parentNode,name,id,onchange,selected) {
-	var select = createBasicSelect(name,id,onchange);
-	for (var lang in languageMap) {
-		var option = document.createElement('OPTION');
-		var op = languageMap[lang];
-		option.text = op['name'];
-		option.value = lang;
-		if (lang == selected) option.selected = true;
-		select.appendChild(option);
-	}
-	if (parentNode && parentNode != '') parentNode.appendChild(select);
-	else return select;
-}
-
-function createSelectArray(parentNode,name,id,onchange,selected,optionArray) {
-	var select = createBasicSelect(name,id,onchange);
-	for (var opt in optionArray) {
-		var option = document.createElement('OPTION');
-		var op = optionArray[opt];
-		option.text = op['text'];
-		option.value = opt;
-		if (opt == selected) option.selected = true;
-		select.appendChild(option);
-	}
-	if (parentNode && parentNode != '') parentNode.appendChild(select);
-	else return select;
-}
-
-function createCheckBox(parentNode,name,id,onchange,checked) {
-	var ck = document.createElement('INPUT');
-	ck.type = 'checkbox';
-	if (name && name != '') ck.name = name;
-	if (id && id != '') ck.id = id;
-	if (onchange && onchange != '') ck.onchange = onchange;
-	if (checked) ck.checked = true;
-	if (parentNode && parentNode != '') parentNode.appendChild(ck);
-	else return ck;
-}
 
 function changeOptionValue() {
 	var name = (this.name == this.id ? this.name : this.id);

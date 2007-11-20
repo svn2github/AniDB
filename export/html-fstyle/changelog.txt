@@ -1,5 +1,5 @@
 Template: html-fstyle - ChangeLog
-Version: 0.9.6 - 14.10.2007
+Version: 0.9.7 - 20.11.2007
 (C) 2003-2007 by fahrenheit
 
 Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
@@ -7,6 +7,10 @@ SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/expo
 
 ----------------------------------------------------------------------------------------------
 
+0.9.7 - 20.11.2007
+	- Mylist Search page working draft (still misses some search functions)
+	- Added a new icon for the anime listings, anime type (OVA, TV, Movie, etc)
+	- more bug fixes
 0.9.6 - 14.10.2007
 	- Small bug fixes
 	- Preferences page (though some options aren't supported)

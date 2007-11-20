@@ -1,7 +1,7 @@
 (C) 2007 by fahrenheit [alka.setzer[at]gmail.com]
-version svn0.9.3 (13.09.2007):
+version svn0.9.7 (20.11.2007):
 
-THIS TEMPLATE IS NOT YET COMPLETE, BASIC FUNCTIONALITY IS AVAILABLE BUT ADVANCE PAGES ARE MISSING
+THIS TEMPLATE IS NOT YET COMPLETE, BASIC FUNCTIONALITY AVAILABLE
 THERE WILL BE NO SUPPORT UNTIL IT'S PROPERLY RELEASED
 THIS TEMPLATE WILL REPLACE html-anidbstyle, html-operatic AND html-cleancut WHEN FINISHED.
 
@@ -9,18 +9,19 @@ html-fstyle theme:
 - Highly customizable and informative theme using a Multiple Page layout for displaying information.
 - Filter anime on MyList by state (mixed, unknown, on hdd, on cd, deleted, ongoing and has awards), status (complete, incomplete, watched and unviewed), type (TV, OVA, etc).
 - Popups with File Information and Episode Information for each file/episode.
-- Has an internal "Search page". (not working yet)
-- Includes support for Wishlist. (only basic filtering available currently)
+- Has an internal "Search page". (partialy working)
+- Includes support for Wishlist.
+- Uses file relations. (not implemented yet)
 - Links external databases for more information about a given anime.
 - Uses all sensible information available to exports.
 - Can be styled with Anidb's CSS stylesheets.
-- Tested and working with: IE 6.0+, FireFox 1.0+, Opera 8.0+.
+- Tested and working with: FireFox 2.0+ (not final, just what i'm testing now)
 
 note: requires a browser capable of doing the following:
 - javascript version 1.5+
 - XMLHTTPRequest support
 - HTTP 1.1 (required by XMLHTTPREQUEST for assync gets)
 - css v1 and v2
-- cookies (optional)
+- cookies (optional, but prefered for saving preferences)
 
 <a href="http://forum.anidb.net/viewtopic.php?t=2517">Support, Feature Requests, Bug Reports?</a>

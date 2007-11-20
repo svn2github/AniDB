@@ -159,6 +159,9 @@ function mylistIcons(parentNode,anime) {
     if (state.indexOf('cd') >= 0) state = 'oncd';
     createIcon(parentNode, '['+anime.state+']', null, null, 'state: '+anime.state,'i_state_'+state);
   }
+	var atype = anime.type.replace(' ','_');
+	atype = atype.toLowerCase();
+	createIcon(parentNode, '['+anime.type+']',null,null, 'type: '+anime.type,'i_type_'+atype);
 }
 
 /* *
@@ -828,6 +831,7 @@ function changeRestrictedFilter() {
 function prepPage() {
   uriObj = parseURI();
   //if (uriObj['show'] && uriObj['show'] != 'mylist') return;
+	if (uriObj['basename'] && uriObj['basename'].indexOf('mylist') < 0) return;
   loadData('mylist.xml',parseData);
   var uls = document.getElementsByTagName('UL');
   var stateUL = getElementsByClassName(uls,'state',false)[0];
