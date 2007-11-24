@@ -54,6 +54,11 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/icon/anidb_comment.gif);
 }
 
+*.i_av_yes
+{
+	background-image: url(../icons/icon/anidb_av_yes.gif);
+}
+
 *.i_crc_no
 {
 	background-image: url(../icons/icon/anidb_crc_no.gif);
