@@ -240,7 +240,7 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/icon/anidb_rate_unknown.gif);
 }
 
-span.i_rate_veryhigh
+*.i_rate_veryhigh
 {
 	width: 43px;
 	background-image: url(../icons/icon/anidb_rate_star.gif);
@@ -248,7 +248,7 @@ span.i_rate_veryhigh
 	background-position: left;
 }
 
-span.i_rate_high
+*.i_rate_high
 {
 	width: 36px;
 	background-image: url(../icons/icon/anidb_rate_star.gif);
@@ -256,7 +256,7 @@ span.i_rate_high
 	background-position: left;
 }
 
-span.i_rate_med
+*.i_rate_med
 {
 	width: 30px;
 	background-image: url(../icons/icon/anidb_rate_star.gif);
@@ -264,7 +264,7 @@ span.i_rate_med
 	background-position: left;
 }
 
-span.i_rate_low
+*.i_rate_low
 {
 	width: 22px;
 	background-image: url(../icons/icon/anidb_rate_star.gif);
@@ -272,7 +272,7 @@ span.i_rate_low
 	background-position: left;
 }
 
-span.i_rate_verylow
+*.i_rate_verylow
 {
 	width: 15px;
 	background-image: url(../icons/icon/anidb_rate_star.gif);
@@ -523,81 +523,81 @@ span.i_rate_verylow
 	background-image: url(../icons/anidb_groupcomment.gif);
 }
 
-span.i_video
+*.i_video
 {
 	background-image: url(../icons/icon/anidb_video.gif);
 }
 
-span.i_video.xvid,
-span.i_video.divx5
+*.i_video.xvid,
+*.i_video.divx5
 {
 	background-image: url(../icons/icon/anidb_video_asp.gif);
 }
 
-span.i_video.avc
+*.i_video.avc
 {
 	background-image: url(../icons/icon/anidb_video_avc.gif);
 }
 
-span.i_video.wmv9
+*.i_video.wmv9
 {
 	background-image: url(../icons/icon/anidb_video_wmv.gif);
 }
 
-span.i_audio
+*.i_audio
 {
 	display: none;
 }
 
-span.i_ext
+*.i_ext
 {
 	background-image: url(../icons/icon/anidb_other.gif);
 }
 
-span.i_ext.mkv
+*.i_ext.mkv
 {
 	background-image: url(../icons/icon/anidb_ext_mkv.gif);
 }
 
-span.i_ext.ogm
+*.i_ext.ogm
 {
 	background-image: url(../icons/icon/anidb_ext_ogm.gif);
 }
 
-span.i_ext.avi
+*.i_ext.avi
 {
 	background-image: url(../icons/icon/anidb_ext_avi.gif);
 }
 
-span.i_ext.mp4
+*.i_ext.mp4
 {
 	background-image: url(../icons/icon/anidb_ext_mp4.gif);
 }
 
-span.i_ext.wmv
+*.i_ext.wmv
 {
 	background-image: url(../icons/icon/anidb_ext_wmv.gif);
 }
 
-span.i_ext.srt
+*.i_ext.srt
 {
 	background-image: url(../icons/icon/anidb_ext_srt.gif);
 }
 
-span.i_videostream_unknown,
-span.i_videostream_other__non_asp_,
-span.i_videostream_asp_other,
-span.i_videostream_mpeg_2,
-span.i_videostream_mpeg_1,
-span.i_videostream_realvideo_other,
-span.i_videostream_wmv9__also_wmv3_,
-span.i_videostream
+*.i_videostream_unknown,
+*.i_videostream_other__non_asp_,
+*.i_videostream_asp_other,
+*.i_videostream_mpeg_2,
+*.i_videostream_mpeg_1,
+*.i_videostream_realvideo_other,
+*.i_videostream_wmv9__also_wmv3_,
+*.i_videostream
 {
 	background-image: url(../icons/icon/anidb_videoStream.gif);
 }
 
-span.i_videostream_realvideo_9_10__also_rv40_,
-span.i_videostream_realvideo_other 
+*.i_videostream_realvideo_9_10__also_rv40_,
+*.i_videostream_realvideo_other 
 {
   width: 20px;
 	background-repeat: repeat-x;
@@ -605,8 +605,8 @@ span.i_videostream_realvideo_other
 	background-image: url(../icons/icon/anidb_videoStream_real.gif);
 }
 
-span.i_videostream_ms_mp4x__also_wmv1_2_,
-span.i_videostream_wmv9__also_wmv3_
+*.i_videostream_ms_mp4x__also_wmv1_2_,
+*.i_videostream_wmv9__also_wmv3_
 {
   width: 20px;
 	background-repeat: repeat-x;
@@ -614,10 +614,10 @@ span.i_videostream_wmv9__also_wmv3_
 	background-image: url(../icons/icon/anidb_videoStream_wmv.gif);
 }
 
-span.i_videostream_divx__unk,
-span.i_videostream_divx3,
-span.i_videostream_divx4,
-span.i_videostream_divx5__also_divx6_
+*.i_videostream_divx__unk,
+*.i_videostream_divx3,
+*.i_videostream_divx4,
+*.i_videostream_divx5__also_divx6_
 {
   width: 20px;
 	background-image: url(../icons/icon/anidb_videoStream_divx.gif);
@@ -625,7 +625,7 @@ span.i_videostream_divx5__also_divx6_
 	background-position: left;
 }
 
-span.i_videostream_xvid
+*.i_videostream_xvid
 {
   width: 20px;
 	background-image: url(../icons/icon/anidb_videoStream_xvid.gif);
@@ -633,7 +633,7 @@ span.i_videostream_xvid
 	background-position: left;
 }
 
-span.i_videostream_h264_avc
+*.i_videostream_h264_avc
 {
   width: 20px;
 	background-image: url(../icons/icon/anidb_videoStream_h264.gif);
