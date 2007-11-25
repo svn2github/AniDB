@@ -84,6 +84,11 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/icon/anidb_file_delete.gif);
 }
 
+*.i_file_details
+{
+	background-image: url(../icons/icon/anidb_file_details.gif);
+}
+
 *.i_file_ed2k
 {
 	background-image: url(../icons/icon/anidb_file_ed2k.gif);
