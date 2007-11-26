@@ -5,7 +5,6 @@
 /**
  * HaruhiStyleX.AniDB v2
  * A style for AniDB.net by TheJAG
- * Based on Harustyle by b1hn
  * 
  * Currently known supported browsers:
  * Opera 9+
@@ -95,8 +94,9 @@ a:hover
 
 #layout-menu > div.menu > ul
 {
-	padding:10px 0 0 40px;
+	padding:10px 0 0 0;
 	list-style-type:none;
+	width:170px;
 }
 
 #layout-menu > div.menu > ul.my,
@@ -105,13 +105,21 @@ a:hover
 	display:none;
 }
 
+#layout-menu > div.menu > ul > li
+{
+	margin:0;
+	padding:0;
+	height:10px;
+}
+
 #layout-menu > div.menu > ul > li > a
 {
 	font-size:x-small;
-	line-height:1;
+	text-transform:capitalize;
+	text-decoration:none;
 	display:list-item;
 	list-style-type:none;
-	text-transform:capitalize;
+	padding:0 0 0 40px;
 }
 
 #layout-menu > div.usermenu > p
@@ -119,7 +127,8 @@ a:hover
 	font-size:x-small;
 	line-height:1;
 	margin:0;
-	padding:10px 0 0 40px;
+	padding:10px 0 0 0;
+	width:170px;
 }
 
 #layout-menu > div.usermenu > p.user
@@ -128,7 +137,6 @@ a:hover
 	margin:0;
 	padding:10px 0 0 10px;
 	font-weight:bold;
-	width:160px;
 	overflow:hidden;
 	height:20px;
 }
@@ -147,7 +155,10 @@ a:hover
 {
 	display:list-item;
 	list-style-type:none;
+	line-height:1;
 	text-transform:capitalize;
+	text-decoration:none;
+	padding:0 0 0 40px;
 }
 
 #layout-menu > div.usermenu > p > a.history
@@ -164,28 +175,20 @@ a:hover
 #layout-search
 {
 	position:absolute;
-	top:300px;
-	left:15px;
+	top:400px;
+	left:5px;
 }
 
 #layout-search > div.search > form > p > input[type=text]
 {
-	width:150px;
-	color:#0099FF;
+	width:100px;
 	font-weight:bold;
-}
-
-#layout-search > div.search > form > p > input[type=submit]
-{
-	display:list-item;
-	list-style-type:none;
-	margin:0 auto;
 }
 
 #layout-content > div.main_all > div.rightbar
 {
 	position:absolute;
-	top:380px;
+	top:480px;
 	left:0px;
 	width:200px;
 }
@@ -330,5 +333,5 @@ a:hover
 
 #layout-footer:before
 {
-	content:"HaruhiStyleX.AniDB v2 - Made by TheJAG - Based on Harustyle by b1hn";
+	content:"HaruhiStyleX.AniDB v2 - Made by TheJAG";
 }
