@@ -737,7 +737,7 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/state/anidb_atype_movie.gif); 
 }
 
-*.i_type_ova { 
+*.i_atype_ova { 
 	width: 15px; 
 	height: 15px; 
 	background-image: url(../icons/state/anidb_atype_ova.gif); 
@@ -755,7 +755,7 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/state/anidb_atype_tv_special.gif); 
 }
 
-*.i_aatype_other, *.i_atype_unknown { 
+*.i_atype_other, *.i_atype_unknown { 
 	display: none; 
 }
 
