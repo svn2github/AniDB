@@ -725,6 +725,40 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/state/anidb_gstate_all.gif);
 }
 
+*.i_atype_tv_series { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_tv_series.gif); 
+}
+
+*.i_atype_movie { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_movie.gif); 
+}
+
+*.i_type_ova { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_ova.gif); 
+}
+
+*.i_atype_web { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_web.gif); 
+}
+
+*.i_atype_tv_special { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_tv_special.gif); 
+}
+
+*.i_aatype_other, *.i_atype_unknown { 
+	display: none; 
+}
+
 /* Formating stuff */
 
 *.f_button {
