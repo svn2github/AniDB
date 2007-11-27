@@ -50,12 +50,5 @@
 
 #layout-content div.anime_all div.episodes table table.filelist td.source div.icons
 {
-	/*padding-left: 5px;*/
 	float: right;
-}
-
-#layout-content div.anime_all div.episodes table table.filelist td.id div.icons
-{
-	float: right;
-	text-indent: -5000px;
 }
