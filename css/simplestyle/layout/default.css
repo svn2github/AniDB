@@ -1,0 +1,62 @@
+html, body, div, form, table, tr, td, ul, ol, dl, li, dt, h1, h2, h3, h4, p, caption
+{
+	padding: 0px;
+	margin: 0;
+	border: none;
+}
+table, dt, dd
+{
+	padding: 0;
+}
+table table
+{
+	width: 100%;
+}
+td, th
+{
+	padding: 3px;
+}
+li
+{
+	padding: 0px 4px 0px 2px;
+}
+p
+{
+	padding: 2px;
+}
+table, table caption
+{
+	margin: 0 auto 0 auto;
+}
+span
+{
+	display: inline;
+}
+fieldset
+{
+	display: none;
+}
+ul
+{
+	list-style-type: none;
+}
+ol
+{
+	list-style-position: outside;
+	margin-left: 2em;
+}
+dl
+{
+  display: table;
+	margin: 1px auto 1px auto;
+}
+dl dt
+{
+	float: left;
+	clear: left;
+}
+dl dd
+{
+	margin-left: 10em;
+	text-align: left;
+}

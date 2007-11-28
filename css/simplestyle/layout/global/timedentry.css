@@ -1,0 +1,35 @@
+#layout-content div.g_timedentry
+{
+	min-height: 174px;
+}
+
+#layout-content div.g_timedentry h4
+{
+	padding: 0.1em;
+	margin: 0;
+	text-align: left;
+}
+
+#layout-content div.g_timedentry div.avatar
+{
+	float: right;
+	margin: 10px;
+}
+
+#layout-content div.g_timedentry div.body
+{
+         padding: 20px 0 20px 31px;
+	text-align: left;
+}
+
+#layout-content div.g_timedentry span.stamp
+{
+	display: block;
+	text-align: left;
+	padding-right: 0.5em;
+}
+
+#layout-content div.g_timedentry+div.g_timedentry
+{
+	margin-top: 2em;
+}

@@ -1,0 +1,50 @@
+#layout-content div.g_errorbox
+{
+	border: 1px solid #DD0000;
+	background-color: #FFE5E5;
+}
+#layout-content div.g_warnbox
+{
+	border-left: 3px solid #FF9E2C;;
+         color: #FF9E2C;
+}
+#layout-content div.g_warnbox p
+{
+         color: #FF9E2C;
+}
+#layout-content div.g_sucessbox p
+{
+	color: #9CCD17;
+}
+#layout-content div.g_notebox
+{
+	border: 1px solid #AFAF00;
+	background-color: #FFFFDF;
+}
+#layout-content div.g_note
+{
+	border-left: 3px solid #46C5FF;
+         color: #46C5FF;  
+}
+#layout-content div.g_successbox
+{
+	border-left: 3px solid #9CCD17;
+         color: #9CCD17;
+}
+
+#layout-content div.g_errorbox h3
+{
+	color: #FF0000;
+}
+#layout-content div.g_warnbox h3
+{
+	color: #FF9E2C;
+}
+#layout-content div.g_notebox h3
+{
+	color: #AFAF00;
+}
+#layout-content div.g_successbox h3
+{
+	color: #9CCD17;
+}

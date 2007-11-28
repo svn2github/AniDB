@@ -1,0 +1,160 @@
+@import "layout/default.css";
+@import "layout/common.css";
+
+@import "layout/global/all.css";
+@import "layout/page/all.css";
+
+@import "style/icons/default.css";
+@import "style/icons/flags.css";
+
+
+@import "style/color/special.css";
+
+@import "style/text/default.css";
+
+@import "style/content/page-anime.css";
+
+@import "../../common/style/color/status-radioactive.css";
+
+@import "layout.css";
+@import "border.css";
+@import "color.css";
+@import "text.css";
+
+@import "style/color/msgbox-default.css";
+
+html, body, div
+{
+	padding: 0;
+}
+
+body,
+#layout-menu
+{
+	font-size: 10px;
+}
+
+*.i_button
+{
+	display: block;
+	width: 42px;
+	height: 12px;
+	float: left;
+	margin-right: 4px;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-indent: -5000px;
+}
+
+.i_logout
+{
+	background-image: url(images/logout.gif);
+}
+
+/**.i_profile
+{
+	background-image: url(../icons/button_profile.gif);
+}*/
+
+*.i_signup
+{
+	background-image: url(../icons/button_signup.gif);
+}
+
+#layout-content div.main_all div.rightbar
+{
+	width: 181px;
+	float: right;
+	text-align: center;
+	margin-top: -42px;
+         background: #46C5FF url(images/rightbar_back.png) no-repeat right top;
+         padding-top: 10px;
+}
+
+#layout-content div.main_all div.rightbar p
+{
+	margin: 1.2em 0 0 0;
+         text-align: left;
+         padding-left: 31px;
+}
+
+#layout-content div.main_all div.rightbar p a
+{
+	color: #FFFFFF;
+         font-size: 11px;
+         font-weight: bolder;
+}
+
+
+#layout-content div.main_all div.rightbar h3
+{
+	font-size: 13px;
+         height: 58px;
+         padding: 20px  0 0 0 ;
+         background: #46C5FF url(images/h4_bg.png) no-repeat;
+         color: #FFFFFF;
+         margin-top: 8px;
+         margin-bottom: -27px;
+}
+
+#layout-content div.main_all div.rightbar ol
+{
+	margin: 0em 0 0.4em 0;
+	padding: 0;
+}
+
+#layout-content div.main_all div.rightbar li
+{
+	list-style: none;
+         padding: 3px 6px;
+	text-align: left;
+         vertical-align: middle;
+}
+
+#layout-content div.main_all div.rightbar li span
+{
+	display: block;
+	float: left;
+	height: 100%;
+	width: 4em;
+	text-align: center;
+}
+
+#layout-content div.main_all div.rightbar li a
+{
+	display: block;
+	margin-left: 4em;
+}
+
+#layout-content div.main_all div.news
+{
+	margin-right: 220px;
+	margin-left: 34px;;
+}
+
+#layout-content div.main_all div.newsitem
+{
+	border-bottom: 1px solid #B9CD81;
+}
+
+#layout-content div.main_all div.newsitem:last-child
+{
+	border-bottom: none;
+}
+
+#layout-content div.main_all div.news div.newsitem h4
+{
+	background: url(images/newsicon.jpg) no-repeat left;
+         padding-left:31px;
+}
+
+#layout-content div.main_all div.news div.newsitem span.stamp
+{
+         margin-top: -3px;
+         padding: 0 0 0 31px;
+}
+
+#layout-content div.main_all div.news div.newsitem p.body
+{
+	margin: 0.1em 0.1em 3.1em 0.1em;
+}

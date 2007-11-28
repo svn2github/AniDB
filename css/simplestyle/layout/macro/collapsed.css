@@ -1,0 +1,21 @@
+html, body
+{
+	padding: 0;
+}
+
+#layout-nav
+{
+	position: absolute;
+	width: 13em;
+}
+
+#layout-content
+{
+	margin-left: 13em;
+	padding: 1em;
+}
+
+#layout-footer
+{
+	margin-left: 152px;
+}
