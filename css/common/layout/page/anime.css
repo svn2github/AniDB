@@ -52,3 +52,8 @@
 {
 	float: right;
 }
+
+#layout-content div.anime_all div.episodes table table.filelist td.id .i_icon 
+{
+	text-align: left;
+}
