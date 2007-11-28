@@ -14,7 +14,7 @@
 
 @import "style/content/page-anime.css";
 
-@import "../../common/style/color/status-radioactive.css";
+@import "../common/style/color/status-radioactive.css";
 
 @import "layout.css";
 @import "border.css";
