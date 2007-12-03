@@ -309,7 +309,8 @@ body.nonav
 	display: none;
 }
 
-#layout-content caption
+#layout-content caption,
+#layout-content div.profile_all h4
 {
 	font-size: 14px;
 	color: #46C5FF;
@@ -320,9 +321,9 @@ body.nonav
          border:#9CCD17 2px solid;
 }
 
-#layout-content div.g_content
+#layout-content div.g_content div.profile_all
 {
-	/*padding-top: 175px;*/
+	text-align: center;
 }
 
 #layout-content div.g_filterlist,

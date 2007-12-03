@@ -1,3 +1,5 @@
+@import "../sub/common.css";
+
 @import "layout/default.css";
 @import "layout/common.css";
 
@@ -5,8 +7,6 @@
 @import "layout/page/all.css";
 
 @import "style/icons/default.css";
-@import "style/icons/flags.css";
-
 
 @import "style/color/special.css";
 
@@ -20,6 +20,7 @@
 @import "border.css";
 @import "color.css";
 @import "text.css";
+@import "icons.css";
 
 @import "style/color/msgbox-default.css";
 

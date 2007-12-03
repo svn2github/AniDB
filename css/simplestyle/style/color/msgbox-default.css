@@ -18,13 +18,17 @@
 }
 #layout-content div.g_notebox
 {
-	border: 1px solid #AFAF00;
-	background-color: #FFFFDF;
+	border-left: 3px solid #46C5FF;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
+         color: #46C5FF;
 }
 #layout-content div.g_note
 {
 	border-left: 3px solid #46C5FF;
-         color: #46C5FF;  
+         color: #46C5FF;
 }
 #layout-content div.g_successbox
 {
@@ -42,7 +46,7 @@
 }
 #layout-content div.g_notebox h3
 {
-	color: #AFAF00;
+         color: #46C5FF;
 }
 #layout-content div.g_successbox h3
 {

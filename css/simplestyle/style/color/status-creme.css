@@ -9,7 +9,8 @@
 
 #layout-content div.myvotes_all table tr.g_odd.low td
 {
-	background-color: #efc7b2;
+	background-color: #FF0000;
+         color: #FFFFFF;
 }
 
 #layout-content td ins,
@@ -19,7 +20,8 @@
 #layout-content div.animelist_all table tr.mylist,
 #layout-content div.group_released table tr.mylist
 {
-	background-color: #f2ffe9;
+	background-color: #46C5FF;
+         color: #FFFFFF;
 }
 
 #layout-content table.filelist tr.g_odd.good,
@@ -28,5 +30,6 @@
 #layout-content div.animelist_all table tr.g_odd.mylist,
 #layout-content div.group_released table tr.g_odd.mylist
 {
-	background-color: #e2efd9;
+	background-color: #46C5FF;
+         color: #FFFFFF;
 }

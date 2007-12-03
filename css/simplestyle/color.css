@@ -23,6 +23,11 @@ select
          color: #46C5FF;
 }
 
+#layout-content div.profile_all div.css_style
+{
+         color: #9CCD17;
+}
+
 #layout-content tr span.main
 {
          color: #46C5FF;
@@ -58,7 +63,6 @@ select
 	color: #FFFFFF;
 }
 
-#layout-content div.anime_all div.mylist th,
 #layout-content table.grouplist th,
 #layout-content tr.g_odd,
 #layout-content li.g_odd,
@@ -67,6 +71,14 @@ select
 {
          color: #FFFFFF;
 }
+
+
+#layout-content div.anime_all div.mylist th,
+#layout-content div.anime_all div.groups th
+{
+         color: #46C5FF;
+}
+
 
 #layout-content div.g_definitionlist th
 {
@@ -132,6 +144,33 @@ select
          color: #9CCD17;
 }
 
+#layout-content td del,
+#layout-content tr.g_fs_lame,
+#layout-content table.filelist tr.invalid,
+#layout-content div.myvotes_all table tr.low td
+{
+	background-color: #FF4242;
+         color: #FFFFFF;
+}
+
+#layout-content td ins,
+#layout-content table.filelist tr.good,
+#layout-content div.myvotes_all table tr.high td,
+#layout-content div.producer_all table tr.mylist
+{
+	background-color: #46C5FF;
+         color: #FFFFFF;
+}
+
+#layout-content table.filelist tr.deprecated,
+#layout-content table.filelist tr.deprecated a,
+#layout-content table.filelist tr.good a,
+#layout-content table.filelist tr.invalid a
+{
+         color: #FFFFFF;
+}
+
+
 /* CHANGES END*/
 
 #layout-content div.rightbar li.g_odd
@@ -150,7 +189,7 @@ select
 #layout-content div.main_all h4,
 #layout-content div.main_edit h4
 {
-	color: #46C5FF; 
+	color: #46C5FF;
 }
 
 #layout-content div.main_all div.news h4
