@@ -781,7 +781,7 @@ width: 99%;
 {
 	 display: inline;
 	 float: right;
-	 padding: 0px 2px 0px 2px;
+	 padding: 0px 1px 0px 1px;
 }
 #layout-content td.icons.quality *.i_icon
 {
@@ -1875,6 +1875,10 @@ a.i_icon:hover, a.i_inline:hover
 {
 	background-image: url(images/anidb_crc_unv.gif);
 }
+*.i_av_yes
+{
+	background-image: url(images/anidb_av_yes.gif);
+}
 *.releaseinfotooltip div.icons span.i_icon
 {
 	float: left;
@@ -2068,4 +2072,8 @@ a.i_icon:hover, a.i_inline:hover
 #layout-content div.g_timedentry+div.g_timedentry 
 {
 	margin-top: 2em;
+}
+#layout-content div.anime_all div.episodes table table.filelist td.id .i_icon
+{
+	text-align: left;
 }
