@@ -22,7 +22,7 @@ html
 
 body
 {
-	background-image:url(images/Banner.png);
+	background-image:url(images/banner.png);
 	background-position:top center;
 	background-repeat:no-repeat;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
@@ -67,7 +67,7 @@ a:hover
 
 #layout-menu
 {
-	background-image:url(images/MenuClean.png);
+	background-image:url(images/menuClean.png);
 	height:300px;
 	width:200px;
 	position:absolute;
@@ -77,7 +77,7 @@ a:hover
 
 #layout-menu:hover
 {
-	background-image:url(images/Menu.png);
+	background-image:url(images/menu.png);
 }
 
 #layout-menu > div.menu,
