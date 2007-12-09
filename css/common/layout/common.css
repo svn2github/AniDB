@@ -86,7 +86,8 @@ body.nonav #layout-content h1
 }*/
 
 #layout-content div.anime_all div.info tr.official td.value div.icons,
-#layout-content div table td.title div.icons
+#layout-content div table td.title div.icons,
+#layout-content table.filelist td.source div.icons
 {
 	float: right;
 }

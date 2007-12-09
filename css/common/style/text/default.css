@@ -17,13 +17,13 @@ th, td.action
 
 
 /** ALIGNMENT **/
-td.count, td.number, td.size, td.epno, td.duration
+td.id, td.count, td.number, td.size, td.epno, td.duration
 {
 	text-align: right;
 }
 
-td, ul, div.desc, .body,
-th.field, td.id, td.value, td.name, td.quality, td.title, td.name,
+td, ul, div.desc, .body, td.id a.i_icon,
+th.field, td.value, td.name, td.quality, td.title, td.name,
 #layout-content div.main_all div.news h4
 {
 	text-align: left;
