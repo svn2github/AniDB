@@ -153,6 +153,11 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_delete.gif);
 }
 
+*.i_file_details
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_details.gif);
+}
+
 *.i_file_ed2k
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_ed2k.gif);
@@ -231,11 +236,6 @@ a.i_icon:hover, a.i_inline:hover
 *.i_mylist
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_mylist.gif);
-}
-
-*.i_new2
-{
-	background-image: url(http://static.anidb.net/css/icons/icon/anidb_new2.gif);
 }
 
 *.i_new_icon
@@ -788,6 +788,40 @@ span.i_videostream_h264_avc
 *.i_gstate_all
 {
 	background-image: url(http://static.anidb.net/css/icons/state/anidb_gstate_all.gif);
+}
+
+*.i_atype_tv_series { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_tv_series.gif); 
+}
+
+*.i_atype_movie { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_movie.gif); 
+}
+
+*.i_atype_ova { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_ova.gif); 
+}
+
+*.i_atype_web { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_web.gif); 
+}
+
+*.i_atype_tv_special { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_tv_special.gif); 
+}
+
+*.i_atype_other, *.i_atype_unknown { 
+	display: none; 
 }
 
 /* Formating stuff */
@@ -1771,6 +1805,21 @@ body.nonav #layout-content h1
 	float: right;
 }
 
+#layout-content div.anime_all a.action:before
+{
+	content: "[";
+}
+
+#layout-content div.anime_all a.action:after
+{
+	content: "]";
+}
+
+#layout-content div.anime_all div.info th span.i_icon
+{
+	float: right;
+}
+
 #layout-content div.anime_all div.episodes table.eplist
 {
 	width: 99%;
@@ -1779,6 +1828,38 @@ body.nonav #layout-content h1
 #layout-content div.anime_all div.episodes div.mylist_add
 {
 	margin-top: 1em;
+}
+
+#layout-content div.anime_all div.episodes td.action.episode,
+#layout-content div.anime_all div.episodes td.action.file
+{
+	width: 60px;
+}
+
+#layout-content div.anime_all div.mylist table td
+{
+	padding: 1em;
+}
+
+#layout-content div.anime_all div.mylist table td span.i_icon
+{
+	margin-left: 1em;
+}
+
+#layout-content div.anime_all div.mylist div.g_actionlist
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#layout-content div.anime_all div.episodes table table.filelist td.source div.icons
+{
+	float: right;
+}
+
+#layout-content div.anime_all div.episodes table table.filelist td.id .i_icon 
+{
+	text-align: left;
 }
 
 /* text.css */
@@ -2072,12 +2153,6 @@ table caption, h4
 	padding: 0px 2px 0px 2px;
 }
 
-#layout-content div.anime_all div.episodes td.action.episode,
-#layout-content div.anime_table td.action.file
-{
-	width: 60px;
-}
-
 #layout-content div.addanimetitle_form input[type="text"],
 #layout-content div.addeptitle_form p input[type="text"]
 {
@@ -2100,16 +2175,6 @@ table caption, h4
 #layout-content div.addeptitle_form p span.header
 {
 	display: none;
-}
-
-#layout-content div.anime_all a.action:before
-{
-	content: "[";
-}
-
-#layout-content div.anime_all a.action:after
-{
-	content: "]";
 }
 
 /* box.css */
