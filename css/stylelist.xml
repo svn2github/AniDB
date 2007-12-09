@@ -23,8 +23,8 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDBstyle DonGato revision</title>
 		<creator>DonGato</creator>
-		<update>13.11.2007</update>
-		<status>in sync with 0.1.45</status>
+		<update>08.12.2007</update>
+		<status>in sync with 0.1.46</status>
 		<description>report any problem by a message</description>
 		<path/>
 		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
@@ -43,7 +43,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>May 20, 2007</update>
+		<update>08.12.2007</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -122,8 +122,8 @@ Well, what should I say ... I kept it simple and clean. If it's too bright for y
 Internet Explorer not supported due to a css bug - sorry. 
 Thanks to zak for his help and great AniDB CSS style</description>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>simplestyle/images/screenshot.png</screenshot>
+		<thumbnail>simplestyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-blue">
 		<title>sub-blue</title>
