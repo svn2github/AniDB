@@ -1,5 +1,9 @@
+* {
+	margin:					0;
+	padding:				0;
+	border:					0;
+}
 html {
-	width:					100%;
 	height:					100%;
 	font-weight:				normal;
 	font-size:				10px;
@@ -9,11 +13,7 @@ html {
 	background-color:			#000;
 }
 body {
-	width:					100%;
 	height:					100%;
-	margin:					0;
-	padding:				0;
-	border:					0;
 }
 
 a {
@@ -23,7 +23,6 @@ a {
 a:hover {
 	color:					#c9f;
 }
-
 .g_actionlist a,
 .g_jumplist a,
 .latestanimes_form a,
@@ -38,7 +37,6 @@ a:hover {
 .news a:hover {
 	color:					#fff;
 }
-
 a img {
 	border:					0;
 }
@@ -75,7 +73,6 @@ table caption {
 	background:				url(images/h4.gif) left top no-repeat;
 	color:					
 }
-
 
 
 /*														  forms */
@@ -140,13 +137,11 @@ ul.main a {
 ul.main a:hover {
 	color:					#c9f;
 }
-
 ul.my {
 	position:				relative;
 	top:					5px;
 	left:					20px;
 }
-
 ul.mod {
 	position:				relative;
 	top:					5px;
@@ -155,7 +150,6 @@ ul.mod {
 ul.mod li {
 	background-color:			transparent;
 }
-
 ul.lists {
 	position:				relative;
 	top:					60px;
@@ -197,7 +191,7 @@ ul.other a:hover {
 
 #layout-search {
 	position:				relative;
-	top:					-70px;
+	top:					-60px;
 	left:					260px;
 	width:					210px;
 	float:					left;
@@ -267,6 +261,41 @@ body.nonav div#layout-content {
 	text-align:				center;
 }
 
+/*												                  icons */
+
+*.i_icon {
+	display:				block;
+	width:					15px;
+	height:					13px;
+	background-repeat:			no-repeat;
+	background-position:			center;
+	text-indent:				-5000px;
+	margin-left:				2px;
+	margin-right:				2px;
+	float:					right;
+}
+div.icons {
+	float:					right;
+}
+div.icons .i_icon {
+	float:					left;
+}
+*.i_inline {
+	padding:				7px 10px 6px 10px;
+	background-repeat:			no-repeat;
+	background-position:			center;
+}
+*.i_button {
+	display:				block;
+	width:					42px;
+	height:					12px;
+	float:					left;
+	margin-right:				4px;
+	background-repeat:			no-repeat;
+	background-position:			center;
+	text-indent:				-5000px;
+}
+
 /*												       v-lists & tables */
 
 ul, ol {
@@ -294,19 +323,21 @@ dd {
 	padding:				0;
 }
 
-tr.g_odd,
-li.g_odd,
-span.g_odd {
+.g_odd {
 	background-color:			#333;
 }
-ul.g_actionlist li.g_odd {
+ul.g_actionlist .g_odd,
+ul.g_jumplist .g_odd,
+ul.g_navlist .g_odd,
+div.mylist_menu .g_odd,
+ul.state .g_odd {
 	background-color:			transparent;
 }
-
+/*
 span.i_icon {
 	float:					left;
 	padding-right:				3px;
-}
+}*/
 
 table {
 	border-spacing:				0;
@@ -325,9 +356,6 @@ td {
 th {
 	vertical-align:				top;
 }
-tr.g_odd td td {
-	border:					none;
-}
 tr.newtype td {
 	padding-top:				0;
 	border-top:				1px dashed #666;
@@ -343,14 +371,11 @@ tr.files:hover td {
 }
 
 div.data th,
-div.g_definitionlist th,
 div.addgenren_all div.add th {
 	text-align:				left;
 	width:					100px;
 }
-div.data td,
-div.g_definitionlist td,
-div.addgenren_all div.add td {
+div.data td {
 	text-align:				left;
 }
 tr.action,
@@ -362,11 +387,8 @@ tr.action td {
 
 /*														h-lists */
 
-ul.g_jumplist {
-	padding-left:				0;
-	padding-top:				2px;
-	padding-bottom:				2px;
-	text-align:				center;
+ul.g_actionlist {
+	margin:					20px 0;
 }
 ul.g_actionlist li {
 	display:				inline;
@@ -379,6 +401,16 @@ ul.g_actionlist li {
 ul.g_actionlist li a {
 	display:				inline;
 	font-style:				normal;
+}
+ul.g_actionlist li+li:before {
+	content:				" - ";
+}
+
+ul.g_jumplist {
+	padding-left:				0;
+	padding-top:				2px;
+	padding-bottom:				2px;
+	text-align:				center;
 }
 ul.g_jumplist li {
 	display:				inline;
@@ -416,9 +448,6 @@ ul.g_jumplist li.all:before {
 	font-style:				normal;
 	content:				"Jump to: ";
 }
-ul.g_actionlist li+li:before {
-	content:				" - ";
-}
 
 ul.g_navlist,
 div.mylist_menu ul,
@@ -437,16 +466,18 @@ div.mylist_menu ul li a,
 div.messages ul li a {
 	padding:				0 3px;
 }
+
 div.g_menu ul.state {
-	width:					160px;
+	width:					180px;
 	height:					15px;
 	margin:					0 auto;
 }
 div.g_menu ul.state li {
 	float:					left;
 }
-ul.g_actionlist {
-	margin:					20px 0;
+div.g_menu ul.state span.i_icon {
+	float:					left;
+	padding-right:				3px;
 }
 
 a.g_navprev {
@@ -454,11 +485,6 @@ a.g_navprev {
 }
 a.g_navnext {
 	float:					right;
-}
-div.filters li,
-ul.state li,
-div.user li {
-	background:				none;
 }
 
 /*-----------------------------------------------------------------------------------------------------------ANIME INFO */
@@ -485,11 +511,11 @@ div.anime_all div.desc {
 	text-align:				justify;
 }
 
-div.anime_all div.anime_awards {
+div.anime_all div.awards {
 	text-align:				center;
 	padding:				10px 0;
 }
-div.anime_all div.anime_awards a img {
+div.anime_all div.awards a img {
 	margin:					5px 1px;
 }
 
@@ -509,19 +535,21 @@ div.anime_all table.filelist {
 	width:					877px;
 	margin-left:				33px;
 }
-div.anime_all div.episodes td.action {
+
+div.anime_all div.episodes td.action,
+div.anime_all div.episodes td.codec {
 	width:					40px;
 }
 div.anime_all div.mylist td.state,
 div.anime_all div.groups td.expand,
+div.anime_all div.groups td.note,
 div.anime_all div.groups td.epno,
 div.anime_all div.groups td.specials,
 div.anime_all div.groups td.cmts,
 div.anime_all div.episodes td.expand,
+div.anime_all div.episodes td.id,
 div.anime_all div.episodes td.duration,
-div.anime_all div.episodes td.files,
-div.anime_all div.episodes td.source,
-div.anime_all div.episodes td.ed2k {
+div.anime_all div.episodes td.files {
 	width:					30px;
 	text-align:				center;
 }
@@ -533,133 +561,53 @@ div.anime_all div.groups td.action,
 div.anime_all div.episodes td.date,
 div.anime_all div.episodes td.epusers,
 div.anime_all div.episodes td.size,
-div.anime_all div.episodes td.crc,
 div.anime_all div.episodes td.resolution,
+div.anime_all div.episodes td.source,
+div.anime_all div.episodes td.hash,
 div.anime_all div.episodes td.users,
+div.anime_all div.episodes td.mylist,
+div.anime_all div.episodes td.file,
 div.anime_all table.filelist td.title {
 	width:					70px;
 	text-align:				center;
 }
-div.anime_all div.groups td.action a.i_icon {
-	float:					right;
-	margin:					0 3px;
-}
-div.anime_all div.episodes td.action a.i_icon {
-	float:					right;
-	margin:					0 0 0 1px;
-}
-div.anime_all table.filelist td.action {
-	width:					32px;
+div.anime_all div.groups td.eps {
+	width:					200px;
 	text-align:				center;
 }
-div.anime_all div.groups td.status,
-div.anime_all div.episodes td.id,
-div.anime_all div.episodes td.quality,
-div.anime_all div.episodes td.check {
+div.anime_all div.groups td.action a.i_icon,
+div.anime_all div.episodes td.file a.i_icon {
+	margin:					0 3px;
+}
+div.anime_all div.episodes td.quality {
 	width:					40px;
 	text-align:				center;
 }
-div.anime_all div.groups td.eps {
-	width:					205px;
-	text-align:				center;
+div.anime_all div.episodes td.quality span.i_icon {
+	float:					left;
 }
-
-a.i_file_ed2k,
-span.i_censored,
-span.i_comment,
-span.i_ext,
-span.i_crc_no,
-span.i_crc_yes,
-td.status span.i_new_icon,
-span.i_uncensored,
-span.i_video,
-span.i_vrs_1,
-span.i_vrs_2,
-span.i_vrs_3,
-span.i_vrs_4,
-span.i_vrs_5 {
-	float:					right;
-	margin-left:				-20px;
+div.anime_all *.i_vrs_1,
+div.anime_all *.i_vrs_2,
+div.anime_all *.i_vrs_3,
+div.anime_all *.i_vrs_4,
+div.anime_all *.i_vrs_5,
+div.anime_all *.i_censored,
+div.anime_all *.i_uncensored,
+div.anime_all *.i_new_icon,
+div.anime_all *.i_comment {
+	margin-left:				-15px;
 }
-span.i_video {
+div.anime_all *.i_vrs_1,
+div.anime_all *.i_vrs_2,
+div.anime_all *.i_vrs_3,
+div.anime_all *.i_vrs_4,
+div.anime_all *.i_vrs_5 {
 	position:				relative;
-	right:					18px;
+	right:					110px;
 }
-span.i_ext {
+div.anime_all *.i_new_icon {
 	position:				relative;
-	right:					36px;
-}
-span.i_crc_no,
-span.i_crc_yes {
-	position:				relative;
-	right:					54px;
-}
-span.i_vrs_1,
-span.i_vrs_2,
-span.i_vrs_3,
-span.i_vrs_4,
-span.i_vrs_5 {
-	position:				relative;
-	right:					72px;
-}
-span.i_censored,
-span.i_uncensored {
-	position:				relative;
-	right:					90px;
-}
-span.i_comment {
-	position:				relative;
-	right:					108px;
-}
-td.status span.i_new_icon {
-	position:				relative;
-	right:					126px;
-}
-
-
-/*													     categories */
-
-div.addgenren_list td.id,
-div.addgenren_list td.weight {
-	width:					30px;
-	text-align:				center;
-}
-div.addgenren_list td.action,
-div.addgenren_form td.weight,
-div.addgenren_form td.check {
-	width:					70px;
-	text-align:				center;
-}
-div.addgenren_all table {
-	width:					600px;
-}
-div.addgenren_all table td.action {
-	width:					175px;
-}
-
-/*													      relations */
-
-div.rel_all div.animerel {
-	overflow-x:				scroll;
-}
-div.rel_all div.animerel img {
-	display:				block;
-	border:					none;
-	background-color:			#7A799A;
-}
-/*														  votes */
-
-div.animevotes_all table {
-	width:					100%;
-}
-div.animevotes_all table td {
-	text-align:				left;
-}
-div.animevotes_all table table {
-	width:					300px;
-}
-div.animevotes_all table table.vote_graph {
-	width:					500px;
+	right:					127px;
 }
 
 /*														reviews */
@@ -716,20 +664,74 @@ div.animeatt_all div.body {
 	margin:					-120px 0 10px 0;
 }
 
-/*														history */
+/*														  votes */
 
-div.animehist_all td.eps,
-div.animehist_all td.files {
+div.animevotes_all table {
+	width:					100%;
+}
+div.animevotes_all table td {
+	text-align:				left;
+}
+div.animevotes_all table table {
+	width:					300px;
+}
+div.animevotes_all table table.vote_graph {
+	width:					500px;
+}
+
+/*													      relations */
+
+div.rel_all div.animerel {
+	overflow-x:				scroll;
+}
+div.rel_all div.animerel img {
+	display:				block;
+	border:					none;
+	background-color:			#7A799A;
+}
+
+/*													     categories */
+
+div.addgenren_list td.id,
+div.addgenren_list td.weight {
 	width:					30px;
 	text-align:				center;
 }
-div.animehist_all td.groups,
-div.animehist_all td.users,
-div.animehist_all td.rating,
-div.animehist_all td.tmprating,
-div.animehist_all td.reviews {
+div.addgenren_list td.action,
+div.addgenren_form td.weight,
+div.addgenren_form td.check {
 	width:					70px;
 	text-align:				center;
+}
+div.addgenren_all table {
+	width:					600px;
+}
+div.addgenren_all table td.action {
+	width:					175px;
+}
+
+/*														history */
+
+div.animehist_all td.eps,
+div.animehist_all td.files,
+div.animehist_all td.groups {
+	width:					30px;
+	text-align:				center;
+}
+div.animehist_all td.users,
+div.animehist_all td.review {
+	width:					70px;
+	text-align:				center;
+}
+div.animehist_all td.anime,
+div.animehist_all td.tmpanime {
+	width:					100px;
+	text-align:				center;
+}
+div.animehist_all div.users,
+div.animehist_all div.files {
+	width:					600px;
+	margin:					15px auto;
 }
 
 /*												     mass add to mylist */
@@ -739,43 +741,48 @@ div.maddtomylist_all div.maddtomylist {
 	margin:					0 auto;
 }
 
-/*									    add anime / report this entry / add episode */
+/*										    add... title / relations / producer */
 
-div.addanime_all textarea,
-div.creq_all textarea,
-div.addep_all textarea {
+div.addseq_all table {
 	width:					100%;
 }
-div.creq_all p {
-	text-align:				center;
-}
-
-/*									  add title / add producer / relations / genere */
-
 div.addanimetitle_all td.id,
-div.addaproducer_all td.id,
-div.addgenre_all td.id,
-div.addgenre_all td.action {
+div.addaproducer_all td.id {
 	width:					40px;
 	text-align:				center;
 }
 div.addanimetitle_all td.date,
-div.addaproducer_all td.date,
-div.addanimetitle_all td.action,
-div.addaproducer_all td.action {
+div.addseq_all td.date,
+div.addaproducer_all td.date {
 	width:					70px;
+	text-align:				center;
+}
+div.addanimetitle_all td.action {
+	width:					100px;
+	text-align:				center;
+}
+div.addseq_all td.action,
+div.addaproducer_all td.action {
+	width:					175px;
 	text-align:				center;
 }
 
 div.addanimetitle_all form,
-div.addaproducer_all form,
-div.seq_entries,
-div.seq_add {
+div.addaproducer_all form {
 	width:					600px;
 	margin:					0 auto;
 }
-div.addgenre_all table {
-	width:					300px;
+
+/*									    add anime / report this entry / add episode */
+
+div.addanime_all textarea,
+div.creq_all textarea,
+div.addep_all textarea,
+div.creq_entry_hist table {
+	width:					100%;
+}
+div.creq_all p {
+	text-align:				center;
 }
 
 /*											       EPISODE INFO / FILE INFO */
@@ -794,22 +801,24 @@ div.file_all div.file_relations {
 	margin:					0 auto;
 }
 
+div.ep_all td.title,
 div.ep_all td.size,
-div.ep_all td.quality,
 div.ep_all td.resolution,
 div.ep_all td.source,
-div.ep_all td.stats,
-div.ep_all td.title,
+div.ep_all td.hash,
+div.ep_all td.users,
+div.ep_all td.mylist,
+div.ep_all td.file,
 div.file_all td.size,
 div.file_all td.type,
 div.file_all td[class="text language"],
 div.file_all td.channels,
-div.file_all td.percentage {
+div.file_all td.action {
 	width:					70px;
 	text-align:				center;
 }
+div.ep_all td.id,
 div.ep_all td.ed2k,
-div.ep_all td.action,
 div.file_all div.file_tracks td.id,
 div.file_all td.ar,
 div.file_all td[class="icon language"],
@@ -817,8 +826,8 @@ div.file_all td.epno {
 	width:					30px;
 	text-align:				center;
 }
-div.ep_all td.action,
-div.ep_all td.id {
+div.ep_all td.codec,
+div.ep_all td.quality {
 	width:					40px;
 	text-align:				center;
 }
@@ -830,8 +839,8 @@ div.file_all td.flags {
 	width:					175px;
 	text-align:				center;
 }
-div.ep_all td.action a.i_icon {
-	float:					right;
+div.ep_all td.quality span.i_icon {
+	float:					left;
 }
 
 /*												       producer / group */
@@ -843,7 +852,7 @@ div.group_all div.block {
 div.producer_all div.producer_info table,
 div.group_all div.group_info table,
 div.group_all div.group_vote {
-	width:					300px;
+	width:					600px;
 	margin:					0 auto;
 }
 div.producer_all div.producer_related_anime table,
@@ -852,7 +861,8 @@ div.group_all div.group_released table {
 }
 
 div.producer_all td.eps,
-div.group_all td.eps {
+div.group_all td.eps,
+div.group_all td.last_ep {
 	width:					30px;
 	text-align:				center;
 }
@@ -861,6 +871,7 @@ div.producer_all td.type,
 div.group_all td.releases,
 div.group_all td.state,
 div.group_all td.rating,
+div.group_all td.update,
 div.group_all td.date {
 	width:					70px;
 	text-align:				center;
@@ -1063,10 +1074,6 @@ div.mylist_all table.filelist td.ed2k + td.action {
 div.mylist_all td.ed2k {
 	width:					30px;
 	text-align:				center;
-}
-div.mylist_all td.state span.i_seen {
-	float:					right;
-	margin-left:				-20px;
 }
 
 /*														  votes */
@@ -1491,34 +1498,6 @@ div.genren_all li.collapsed ul {
 
 /*----------------------------------------------------------------------------------------------------------------ICONS */
 
-div.icons {
-	float:					right;
-}
-*.i_icon {
-	display:				block;
-	width:					15px;
-	height:					13px;
-	background-repeat:			no-repeat;
-	background-position:			center;
-	text-indent:				-5000px;
-	margin-left:				auto;
-	margin-right:				auto;
-}
-*.i_inline {
-	padding:				7px 10px 6px 10px;
-	background-repeat:			no-repeat;
-	background-position:			center;
-}
-*.i_button {
-	display:				block;
-	width:					42px;
-	height:					12px;
-	float:					left;
-	margin-right:				4px;
-	background-repeat:			no-repeat;
-	background-position:			center;
-	text-indent:				-5000px;
-}
 *.i_icon span, *.i_button span, *.i_inline span {
 	display:				none;
 }
@@ -1537,6 +1516,9 @@ div.icons {
 }
 *.i_comment {
 	background-image:			url(images/anidb_comment.gif);
+}
+*.i_av_yes {
+	background-image:			url(images/anidb_av_yes.gif);
 }
 *.i_crc_no {
 	background-image:			url(images/anidb_crc_no.gif);
@@ -1568,6 +1550,10 @@ div.icons {
 }
 *.i_uncensored {
 	background-image:			url(images/anidb_uncensored.gif);
+}
+*.i_audio {
+	background-image:			url(images/anidb_audio.gif);
+	display:				none;
 }
 *.i_video {
 	background-image:			url(images/anidb_video.gif);
@@ -1644,19 +1630,19 @@ div.icons {
 }
 
 *.i_rate_veryhigh {
-	width:					43px;
+	width:					39px;
 }
 *.i_rate_high {
-	width:					36px;
+	width:					32px;
 }
 *.i_rate_med {
-	width:					29px;
+	width:					26px;
 }
 *.i_rate_low {
-	width:					21px;
+	width:					19px;
 }
 *.i_rate_verylow {
-	width:					15px;
+	width:					13px;
 }
 
 /* file actions */
@@ -1669,6 +1655,9 @@ div.icons {
 }
 *.i_file_delete {
 	background-image:			url(images/anidb_file_delete.gif);
+}
+*.i_file_details {
+	background-image:			url(images/anidb_file_details.gif);
 }
 *.i_file_ed2k {
 	background-image:			url(images/anidb_file_ed2k.gif);
@@ -1747,9 +1736,6 @@ div.icons {
 }
 *.i_mylist {
 	background-image:			url(images/anidb_mylist.gif);
-}
-table.filelist span.i_mylist {
-	margin-left:				20px;
 }
 
 /* wishlist */
@@ -1880,284 +1866,312 @@ table.filelist span.i_mylist {
 	background-image:			url(images/buddywaiting.gif);
 }
 
-/* audio */
+/* lang */
 
+*.i_sub_al {
+	background-image: url(../icons/flags/anidb_sub_albanian.gif);
+}
 *.i_audio_ar {
-	background-image: url(../icons/flags/anidb_audio_arabic.gif);
+background-image: url(../icons/flags/anidb_audio_arabic.gif);
 }
-*.i_audio_pt-BR {
-	background-image: url(../icons/flags/anidb_audio_brasilian.gif);
+*.i_sub_ar {
+background-image: url(../icons/flags/anidb_sub_arabic.gif);
 }
-*.i_audio_br {
-	background-image: url(../icons/flags/anidb_audio_bulgarian.gif);
+*.i_audio_bg {
+background-image: url(../icons/flags/anidb_audio_bulgarian.gif);
 }
-*.i_audio_zh-ca {
-	background-image: url(../icons/flags/anidb_audio_cantonese.gif);
+*.i_sub_bg {
+background-image: url(../icons/flags/anidb_sub_bulgarian.gif);
 }
 *.i_audio_ca {
-	background-image: url(../icons/flags/anidb_audio_catalan.gif);
-}
-*.i_audio_zh {
-	background-image: url(../icons/flags/anidb_audio_chinese.gif);
-}
-*.i_audio_cs {
-	background-image: url(../icons/flags/anidb_audio_czech.gif);
-}
-*.i_audio_da {
-	background-image: url(../icons/flags/anidb_audio_danish.gif);
-}
-*.i_audio_nl {
-	background-image: url(../icons/flags/anidb_audio_dutch.gif);
-}
-*.i_audio_en {
-	background-image: url(../icons/flags/anidb_audio_english.gif);
-}
-*.i_audio_fi {
-	background-image: url(../icons/flags/anidb_audio_finnish.gif);
-}
-*.i_audio_fr {
-	background-image: url(../icons/flags/anidb_audio_french.gif);
-}
-*.i_audio_ge {
-	background-image: url(../icons/flags/anidb_audio_georgian.gif);
-}
-*.i_audio_de {
-	background-image: url(../icons/flags/anidb_audio_german.gif);
-}
-*.i_audio_el {
-	background-image: url(../icons/flags/anidb_audio_greek.gif);
-}
-*.i_audio_he {
-	background-image: url(../icons/flags/anidb_audio_hebrew.gif);
-}
-*.i_audio_hu {
-	background-image: url(../icons/flags/anidb_audio_hungarian.gif);
-}
-*.i_audio_x-in {
-	background-image: url(../icons/flags/anidb_audio_instrumental.gif);
-}
-*.i_audio_id {
-	background-image: url(../icons/flags/anidb_audio_indonesian.gif);
-}
-*.i_audio_it {
-	background-image: url(../icons/flags/anidb_audio_italian.gif);
-}
-*.i_audio_ja {
-	background-image: url(../icons/flags/anidb_audio_japanese.gif);
-}
-*.i_audio_jpt {
-	background-image: url(../icons/flags/anidb_audio_romaji.gif);
-}
-*.i_audio_ko {
-	background-image: url(../icons/flags/anidb_audio_korean.gif);
-}
-*.i_audio_la {
-	background-image: url(../icons/flags/anidb_audio_latin.gif);
-}
-*.i_audio_lv {
-	background-image: url(../icons/flags/anidb_audio_latvian.gif);
-}
-*.i_audio_lt {
-	background-image: url(../icons/flags/anidb_audio_lithuanian.gif);
-}
-*.i_audio_my {
-	background-image: url(../icons/flags/anidb_audio_malay.gif);
-}
-*.i_audio_zh-ma {
-	background-image: url(../icons/flags/anidb_audio_mandarin.gif);
-}
-*.i_audio_no {
-	background-image: url(../icons/flags/anidb_audio_norwegian.gif);
-}
-*.i_audio_other {
-	background-image: url(../icons/flags/anidb_audio_unknown.gif);
-}
-*.i_audio_pl {
-	background-image: url(../icons/flags/anidb_audio_polish.gif);
-}
-*.i_audio_pt {
-	background-image: url(../icons/flags/anidb_audio_portuguese.gif);
-}
-*.i_audio_ro {
-	background-image: url(../icons/flags/anidb_audio_romanian.gif);
-}
-*.i_audio_ru {
-	background-image: url(../icons/flags/anidb_audio_russian.gif);
-}
-*.i_audio_sk {
-	background-image: url(../icons/flags/anidb_audio_slovak.gif);
-}
-*.i_audio_sl {
-	background-image: url(../icons/flags/anidb_audio_slovenian.gif);
-}
-*.i_audio_es {
-	background-image: url(../icons/flags/anidb_audio_spanish.gif);
-}
-*.i_audio_sv {
-	background-image: url(../icons/flags/anidb_audio_swedish.gif);
-}
-*.i_audio_zh-ta {
-	background-image: url(../icons/flags/anidb_audio_taiwanese.gif);
-}
-*.i_audio_sg {
-	background-image: url(../icons/flags/anidb_audio_tamil.gif);
-}
-*.i_audio_tt {
-	background-image: url(../icons/flags/anidb_audio_tartar.gif);
-}
-*.i_audio_th {
-	background-image: url(../icons/flags/anidb_audio_thai.gif);
-}
-*.i_audio_tr {
-	background-image: url(../icons/flags/anidb_audio_turkish.gif);
-}
-*.i_audio_unk {
-	background-image: url(../icons/flags/anidb_audio_unknown.gif);
-}
-*.i_audio_vn {
-	background-image: url(../icons/flags/anidb_audio_vietnamese.gif);
-}
-
-/* subs */
-
-*.i_sub_ar {
-	background-image: url(../icons/flags/anidb_sub_arabic.gif);
-}
-*.i_sub_pt-BR {
-	background-image: url(../icons/flags/anidb_sub_brasilian.gif);
-}
-*.i_sub_br {
-	background-image: url(../icons/flags/anidb_sub_bulgarian.gif);
-}
-*.i_sub_zh-ca {
-	background-image: url(../icons/flags/anidb_sub_cantonese.gif);
+background-image: url(../icons/flags/anidb_audio_catalan.gif);
 }
 *.i_sub_ca {
-	background-image: url(../icons/flags/anidb_sub_catalan.gif);
+background-image: url(../icons/flags/anidb_sub_catalan.gif);
 }
-*.i_sub_zh {
-	background-image: url(../icons/flags/anidb_sub_chinese.gif);
+*.i_audio_cs {
+background-image: url(../icons/flags/anidb_audio_czech.gif);
 }
 *.i_sub_cs {
-	background-image: url(../icons/flags/anidb_sub_czech.gif);
+background-image: url(../icons/flags/anidb_sub_czech.gif);
+}
+*.i_audio_da {
+background-image: url(../icons/flags/anidb_audio_danish.gif);
 }
 *.i_sub_da {
-	background-image: url(../icons/flags/anidb_sub_danish.gif);
+background-image: url(../icons/flags/anidb_sub_danish.gif);
 }
-*.i_sub_nl {
-	background-image: url(../icons/flags/anidb_sub_dutch.gif);
-}
-*.i_sub_en {
-	background-image: url(../icons/flags/anidb_sub_english.gif);
-}
-*.i_sub_fi {
-	background-image: url(../icons/flags/anidb_sub_finnish.gif);
-}
-*.i_sub_fr {
-	background-image: url(../icons/flags/anidb_sub_french.gif);
-}
-*.i_sub_ge {
-	background-image: url(../icons/flags/anidb_sub_georgian.gif);
+*.i_audio_de {
+background-image: url(../icons/flags/anidb_audio_german.gif);
 }
 *.i_sub_de {
-	background-image: url(../icons/flags/anidb_sub_german.gif);
+background-image: url(../icons/flags/anidb_sub_german.gif);
 }
-*.i_sub_el {
-	background-image: url(../icons/flags/anidb_sub_greek.gif);
+*.i_audio_et {
+background-image: url(../icons/flags/anidb_audio_estonian.gif);
 }
-*.i_sub_he {
-	background-image: url(../icons/flags/anidb_sub_hebrew.gif);
+*.i_sub_et {
+background-image: url(../icons/flags/anidb_sub_estonian.gif);
 }
-*.i_sub_hu {
-	background-image: url(../icons/flags/anidb_sub_hungarian.gif);
-}
-*.i_sub_in {
-	background-image: url(../icons/flags/anidb_sub_instrumental.gif);
-}
-*.i_sub_id {
-	background-image: url(../icons/flags/anidb_sub_indonesian.gif);
-}
-*.i_sub_it {
-	background-image: url(../icons/flags/anidb_sub_italian.gif);
-}
-*.i_sub_ja {
-	background-image: url(../icons/flags/anidb_sub_japanese.gif);
-}
-*.i_sub_jpt {
-	background-image: url(../icons/flags/anidb_sub_romaji.gif);
-}
-*.i_sub_ko {
-	background-image: url(../icons/flags/anidb_sub_korean.gif);
-}
-*.i_sub_la {
-	background-image: url(../icons/flags/anidb_sub_latin.gif);
-}
-*.i_sub_lv {
-	background-image: url(../icons/flags/anidb_sub_latvian.gif);
-}
-*.i_sub_lt {
-	background-image: url(../icons/flags/anidb_sub_lithuanian.gif);
-}
-*.i_sub_my {
-	background-image: url(../icons/flags/anidb_sub_malay.gif);
-}
-*.i_sub_zh-ma {
-	background-image: url(../icons/flags/anidb_sub_mandarin.gif);
-}
-*.i_sub_no {
-	background-image: url(../icons/flags/anidb_sub_norwegian.gif);
-}
-*.i_sub_other {
-	background-image: url(../icons/flags/anidb_sub_unknown.gif);
-}
-*.i_sub_pl {
-	background-image: url(../icons/flags/anidb_sub_polish.gif);
-}
-*.i_sub_pt {
-	background-image: url(../icons/flags/anidb_sub_portuguese.gif);
-}
-*.i_sub_ro {
-	background-image: url(../icons/flags/anidb_sub_romanian.gif);
-}
-*.i_sub_ru {
-	background-image: url(../icons/flags/anidb_sub_russian.gif);
-}
-*.i_sub_sk {
-	background-image: url(../icons/flags/anidb_sub_slovak.gif);
-}
-*.i_sub_sl {
-	background-image: url(../icons/flags/anidb_sub_slovenian.gif);
+*.i_audio_es {
+background-image: url(../icons/flags/anidb_audio_spanish.gif);
 }
 *.i_sub_es {
-	background-image: url(../icons/flags/anidb_sub_spanish.gif);
+background-image: url(../icons/flags/anidb_sub_spanish.gif);
+}
+*.i_audio_el {
+background-image: url(../icons/flags/anidb_audio_greek.gif);
+}
+*.i_sub_el {
+background-image: url(../icons/flags/anidb_sub_greek.gif);
+}
+*.i_audio_en {
+background-image: url(../icons/flags/anidb_audio_english.gif);
+}
+*.i_sub_en {
+background-image: url(../icons/flags/anidb_sub_english.gif);
+}
+*.i_audio_fi {
+background-image: url(../icons/flags/anidb_audio_finnish.gif);
+}
+*.i_sub_fi {
+background-image: url(../icons/flags/anidb_sub_finnish.gif);
+}
+*.i_audio_fr {
+background-image: url(../icons/flags/anidb_audio_french.gif);
+}
+*.i_sub_fr {
+background-image: url(../icons/flags/anidb_sub_french.gif);
+}
+*.i_audio_he {
+background-image: url(../icons/flags/anidb_audio_hebrew.gif);
+}
+*.i_sub_he {
+background-image: url(../icons/flags/anidb_sub_hebrew.gif);
+}
+*.i_audio_hr {
+background-image: url(../icons/flags/anidb_audio_croatian.gif);
+}
+*.i_sub_hr {
+background-image: url(../icons/flags/anidb_sub_croatian.gif);
+}
+*.i_audio_hu {
+background-image: url(../icons/flags/anidb_audio_hungarian.gif);
+}
+*.i_sub_hu {
+background-image: url(../icons/flags/anidb_sub_hungarian.gif);
+}
+*.i_audio_id {
+background-image: url(../icons/flags/anidb_audio_indonesian.gif);
+}
+*.i_sub_id {
+background-image: url(../icons/flags/anidb_sub_indonesian.gif);
+}
+*.i_audio_is {
+background-image: url(../icons/flags/anidb_audio_icelandic.gif);
+}
+*.i_sub_is {
+background-image: url(../icons/flags/anidb_sub_icelandic.gif);
+}
+*.i_audio_it {
+background-image: url(../icons/flags/anidb_audio_italian.gif);
+}
+*.i_sub_it {
+background-image: url(../icons/flags/anidb_sub_italian.gif);
+}
+*.i_audio_ja {
+background-image: url(../icons/flags/anidb_audio_japanese.gif);
+}
+*.i_sub_ja {
+background-image: url(../icons/flags/anidb_sub_japanese.gif);
+}
+*.i_audio_ka {
+background-image: url(../icons/flags/anidb_audio_georgian.gif);
+}
+*.i_sub_ka {
+background-image: url(../icons/flags/anidb_sub_georgian.gif);
+}
+*.i_audio_ko {
+background-image: url(../icons/flags/anidb_audio_korean.gif);
+}
+*.i_sub_ko {
+background-image: url(../icons/flags/anidb_sub_korean.gif);
+}
+*.i_audio_la {
+background-image: url(../icons/flags/anidb_audio_latin.gif);
+}
+*.i_sub_la {
+background-image: url(../icons/flags/anidb_sub_latin.gif);
+}
+*.i_audio_lv {
+background-image: url(../icons/flags/anidb_audio_latvian.gif);
+}
+*.i_sub_lv {
+background-image: url(../icons/flags/anidb_sub_latvian.gif);
+}
+*.i_audio_lt {
+background-image: url(../icons/flags/anidb_audio_lithuanian.gif);
+}
+*.i_sub_lt {
+background-image: url(../icons/flags/anidb_sub_lithuanian.gif);
+}
+*.i_audio_my {
+background-image: url(../icons/flags/anidb_audio_malay.gif);
+}
+*.i_sub_my {
+background-image: url(../icons/flags/anidb_sub_malay.gif);
+}
+*.i_audio_nl {
+background-image: url(../icons/flags/anidb_audio_dutch.gif);
+}
+*.i_sub_nl {
+background-image: url(../icons/flags/anidb_sub_dutch.gif);
+}
+*.i_audio_no {
+background-image: url(../icons/flags/anidb_audio_norwegian.gif);
+}
+*.i_sub_no {
+background-image: url(../icons/flags/anidb_sub_norwegian.gif);
+}
+*.i_audio_pl {
+background-image: url(../icons/flags/anidb_audio_polish.gif);
+}
+*.i_sub_pl {
+background-image: url(../icons/flags/anidb_sub_polish.gif);
+}
+*.i_audio_pt {
+background-image: url(../icons/flags/anidb_audio_portuguese.gif);
+}
+*.i_sub_pt {
+background-image: url(../icons/flags/anidb_sub_portuguese.gif);
+}
+*.i_audio_pt-BR {
+background-image: url(../icons/flags/anidb_audio_brasilian.gif);
+}
+*.i_sub_pt-BR {
+background-image: url(../icons/flags/anidb_sub_brasilian.gif);
+}
+*.i_audio_ro {
+background-image: url(../icons/flags/anidb_audio_romanian.gif);
+}
+*.i_sub_ro {
+background-image: url(../icons/flags/anidb_sub_romanian.gif);
+}
+*.i_audio_ru {
+background-image: url(../icons/flags/anidb_audio_russian.gif);
+}
+*.i_sub_ru {
+background-image: url(../icons/flags/anidb_sub_russian.gif);
+}
+*.i_audio_sk {
+background-image: url(../icons/flags/anidb_audio_slovak.gif);
+}
+*.i_sub_sk {
+background-image: url(../icons/flags/anidb_sub_slovak.gif);
+}
+*.i_audio_sl {
+background-image: url(../icons/flags/anidb_audio_slovenian.gif);
+}
+*.i_sub_sl {
+background-image: url(../icons/flags/anidb_sub_slovenian.gif);
+}
+*.i_audio_sr {
+background-image: url(../icons/flags/anidb_audio_serbian.gif);
+}
+*.i_sub_sr {
+background-image: url(../icons/flags/anidb_sub_serbian.gif);
+}
+*.i_audio_sv {
+background-image: url(../icons/flags/anidb_audio_swedish.gif);
 }
 *.i_sub_sv {
-	background-image: url(../icons/flags/anidb_sub_swedish.gif);
+background-image: url(../icons/flags/anidb_sub_swedish.gif);
 }
-*.i_sub_zh-ta {
-	background-image: url(../icons/flags/anidb_sub_taiwanese.gif);
+*.i_audio_ta {
+background-image: url(../icons/flags/anidb_audio_tamil.gif);
 }
-*.i_sub_sg {
-	background-image: url(../icons/flags/anidb_sub_tamil.gif);
+*.i_sub_ta {
+background-image: url(../icons/flags/anidb_sub_tamil.gif);
+}
+*.i_audio_tt {
+background-image: url(../icons/flags/anidb_audio_tartar.gif);
 }
 *.i_sub_tt {
-	background-image: url(../icons/flags/anidb_sub_tartar.gif);
+background-image: url(../icons/flags/anidb_sub_tartar.gif);
+}
+*.i_audio_th {
+background-image: url(../icons/flags/anidb_audio_thai.gif);
 }
 *.i_sub_th {
-	background-image: url(../icons/flags/anidb_sub_thai.gif);
+background-image: url(../icons/flags/anidb_sub_thai.gif);
+}
+*.i_audio_tr {
+background-image: url(../icons/flags/anidb_audio_turkish.gif);
 }
 *.i_sub_tr {
-	background-image: url(../icons/flags/anidb_sub_turkish.gif);
+background-image: url(../icons/flags/anidb_sub_turkish.gif);
 }
-*.i_sub_unk {
-	background-image: url(../icons/flags/anidb_sub_unknown.gif);
+*.i_audio_uk {
+background-image: url(../icons/flags/anidb_audio_ukrainian.gif);
 }
-*.i_sub_vn {
-	background-image: url(../icons/flags/anidb_sub_vietnamese.gif);
+*.i_sub_uk {
+background-image: url(../icons/flags/anidb_sub_ukrainian.gif);
 }
-*.i_sub_vietnamese {
-	background-image: url(../icons/flags/anidb_sub_vietnamese.gif);
+*.i_audio_vi {
+background-image: url(../icons/flags/anidb_audio_vietnamese.gif);
 }
+*.i_sub_vi {
+background-image: url(../icons/flags/anidb_sub_vietnamese.gif);
+}
+*.i_audio_x-in {
+background-image: url(../icons/flags/anidb_audio_instrumental.gif);
+}
+*.i_audio_x-jat {
+background-image: url(../icons/flags/anidb_audio_japanese-transcription.gif);
+}
+*.i_sub_x-jat {
+background-image: url(../icons/flags/anidb_sub_japanese-transcription.gif);
+}
+*.i_audio_x-other {
+background-image: url(../icons/flags/anidb_audio_unknown.gif);
+}
+*.i_sub_x-other {
+background-image: url(../icons/flags/anidb_sub_unknown.gif);
+}
+*.i_audio_x-unk {
+background-image: url(../icons/flags/anidb_audio_unknown.gif);
+}
+*.i_sub_x-unk {
+background-image: url(../icons/flags/anidb_sub_unknown.gif);
+}
+*.i_audio_zh {
+background-image: url(../icons/flags/anidb_audio_chinese.gif);
+}
+*.i_sub_zh {
+background-image: url(../icons/flags/anidb_sub_chinese.gif);
+}
+*.i_audio_zh-x-yue {
+background-image: url(../icons/flags/anidb_audio_cantonese.gif);
+}
+*.i_audio_zh-x-cmn {
+background-image: url(../icons/flags/anidb_audio_mandarin.gif);
+}
+*.i_audio_zh-x-nan {
+background-image: url(../icons/flags/anidb_audio_taiwanese.gif);
+}
+*.i_audio_zh-Hans {
+background-image: url(../icons/flags/anidb_audio_simplified.gif);
+}
+*.i_sub_zh-Hans {
+background-image: url(../icons/flags/anidb_sub_simplified.gif);
+}
+*.i_audio_zh-Hant {
+background-image: url(../icons/flags/anidb_audio_traditional.gif);
+}
+*.i_sub_zh-Hant {
+background-image: url(../icons/flags/anidb_sub_traditional.gif);
+}
+
 
 
 img[src*="anidb_mainichiaward.gif"] {
