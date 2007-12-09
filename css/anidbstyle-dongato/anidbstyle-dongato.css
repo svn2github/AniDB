@@ -799,7 +799,8 @@ span.i_videostream_h264_avc
 *.i_atype_movie {
 	width: 15px;
 	height: 15px;
-	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_movie.gif);
+/*	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_movie.gif); */
+	background-image: url(images/type_movie.gif);
 }
 
 *.i_atype_ova {
