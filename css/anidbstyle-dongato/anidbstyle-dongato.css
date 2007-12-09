@@ -593,63 +593,63 @@ span.i_rate_verylow
 	background-image: url(images/groupcmnt.gif);
 }
 
-span.i_video
+*.i_video
 {
 	background-image: url(images/anidb_video.gif);
 }
 
-span.i_video.xvid,
-span.i_video.divx5
+*.i_video.xvid,
+*.i_video.divx5
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_asp.gif);
 }
 
-span.i_video.avc
+*.i_video.avc
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_avc.gif);
 }
 
-span.i_video.wmv9
+*.i_video.wmv9
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_wmv.gif);
 }
 
-span.i_ext
+*.i_ext
 {
 	background-image: url(http://static.anidb.net/css/icons/state/anidb_state_mixed.gif);
 }
 
-span.i_ext.avi
+*.i_ext.avi
 {
 	background-image: url(images/anidb_avi.gif);
 }
 
-span.i_ext.mkv
+*.i_ext.mkv
 {
 	background-image: url(images/anidb_mkv.gif);
 }
 
-span.i_ext.mp4
+*.i_ext.mp4
 {
 	background-image: url(images/anidb_mp4.gif);
 }
 
-span.i_ext.ogm
+*.i_ext.ogm
 {
 	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_ogm.gif);
 }
 
-span.i_ext.wmv
+*.i_ext.wmv
 {
 	background-image: url(images/anidb_wmv.gif);
 }
 
-span.i_ext.rar, span.i_ext.zip
+*.i_ext.rar, *.i_ext.zip
 {
 	background-image: url(images/anidb_zip.gif);
 }
 
-span.i_ext.ass, span.i_ext.srt
+*.i_ext.ass, *.i_ext.srt
 {
 	background-image: url(images/anidb_subs.gif);
 }
@@ -790,38 +790,38 @@ span.i_videostream_h264_avc
 	background-image: url(http://static.anidb.net/css/icons/state/anidb_gstate_all.gif);
 }
 
-*.i_atype_tv_series { 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_tv_series.gif); 
+*.i_atype_tv_series {
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_tv.gif);
 }
 
-*.i_atype_movie { 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_movie.gif); 
+*.i_atype_movie {
+	width: 15px;
+	height: 15px;
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_movie.gif);
 }
 
-*.i_atype_ova { 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_ova.gif); 
+*.i_atype_ova {
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_ova.gif);
 }
 
-*.i_atype_web { 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_web.gif); 
+*.i_atype_web {
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_web.gif);
 }
 
-*.i_atype_tv_special { 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(http://static.anidb.net/css/icons/state/anidb_atype_tv_special.gif); 
+*.i_atype_tv_special {
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_special.gif);
 }
 
-*.i_atype_other, *.i_atype_unknown { 
-	display: none; 
+*.i_atype_other, *.i_atype_unknown {
+	display: none;
 }
 
 /* Formating stuff */
@@ -1857,7 +1857,7 @@ body.nonav #layout-content h1
 	float: right;
 }
 
-#layout-content div.anime_all div.episodes table table.filelist td.id .i_icon 
+#layout-content div.anime_all div.episodes table table.filelist td.id .i_icon
 {
 	text-align: left;
 }
