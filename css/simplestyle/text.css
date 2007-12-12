@@ -62,3 +62,9 @@
 {
 	font-size: 10px;
 }
+
+#layout-menu div.usermenu #newnotifies,
+#layout-menu div.usermenu a.nextnotify
+{
+	font-size: 11px;
+}

@@ -20,6 +20,8 @@
 *.i_minus
 {
 	background-image: url(images/icons/minus.gif);
+	width: 15px;
+	height: 13px;
 }
 
 *.i_nodown1
@@ -39,11 +41,35 @@
 *.i_plus
 {
 	background-image: url(images/icons/plus.gif);
+	width: 15px;
+	height: 13px;
 }
 
 *.i_up1
 {
 	background-image: url(images/icons/up1.gif);
+	width: 15px;
+	height: 13px;
+}
+
+/* credits to zak */
+img[src*="down1.gif"] {
+	background: url(images/icons/down.gif) no-repeat top;
+	width: 15px;
+	height: 13px;
+}
+img[src*="up1.gif"] {
+	background: url(images/icons/up1.gif) no-repeat top;
+	width: 15px;
+	height: 13px;
+}
+img[src*="nodown1.gif"] {
+	background: transparent url(images/icons/nodown1.gif) no-repeat left top;
+	width: 15px;
+	height: 13px;
+}
+img[src*="noup1.gif"] {
+	background: transparent url(images/icons/noup.gif) no-repeat left top;
 	width: 15px;
 	height: 13px;
 }

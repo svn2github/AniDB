@@ -1,4 +1,5 @@
 @import "../sub/common.css";
+@import "style/color/msgbox-default.css";
 
 @import "layout/default.css";
 @import "layout/common.css";
@@ -22,7 +23,6 @@
 @import "text.css";
 @import "icons.css";
 
-@import "style/color/msgbox-default.css";
 
 html, body, div
 {

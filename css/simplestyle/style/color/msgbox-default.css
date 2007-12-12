@@ -1,11 +1,18 @@
 #layout-content div.g_errorbox
 {
-	border: 1px solid #DD0000;
-	background-color: #FFE5E5;
+	border-left: 3px solid #FF0000;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+	background-color: #FFFFFF;
 }
 #layout-content div.g_warnbox
 {
 	border-left: 3px solid #FF9E2C;;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
          color: #FF9E2C;
 }
 #layout-content div.g_warnbox p
@@ -28,11 +35,19 @@
 #layout-content div.g_note
 {
 	border-left: 3px solid #46C5FF;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
          color: #46C5FF;
 }
 #layout-content div.g_successbox
 {
 	border-left: 3px solid #9CCD17;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
          color: #9CCD17;
 }
 

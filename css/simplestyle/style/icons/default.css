@@ -8,8 +8,8 @@ a.i_icon:hover, a.i_inline:hover
 	background-repeat: no-repeat;
 	background-position: center;
 	display: block;
-	width: 15px;
-	height: 13px;
+	width: 17px;
+	height: 15px;
 	text-indent: -5000px;
 	margin-left: 0;
 	margin-right: 0;
@@ -458,14 +458,14 @@ a.i_icon:hover, a.i_inline:hover
 
 *.i_plus
 {
-	background-image: url(../icons/plus.gif);
+	background-image: url(images/icons/plus.gif);
 }
 
 *.i_up1
 {
 	background-image: url(images/icons/up1.gif);
-	width: 15px;
-	height: 13px;
+	width: 17px;
+	height: 15px;
 }
 
 *.i_vrs_1

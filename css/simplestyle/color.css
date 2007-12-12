@@ -39,6 +39,11 @@ select
          color: #46C5FF;
 }
 
+#layout-content  tr.high a
+{
+	color: #FFFFFF;
+}
+
 #layout-content tr.g_odd
 {
          background-color: #9CCD17;
@@ -170,6 +175,10 @@ select
          color: #FFFFFF;
 }
 
+#wysiwyg_0
+{
+	background-color:#FFFFFF;
+}
 
 /* CHANGES END*/
 
