@@ -2147,8 +2147,7 @@ table caption, h4
 #layout-content *.icons *.i_icon,
 #layout-content div.group_released tr td.languages span.i_icon,
 #layout-content div.anime_all div.groups td.languages span.i_icon,
-#layout-content div.anime_all div.episodes td.action .i_icon,
-#layout-content div.latest_completed td.icon span.i_icon
+#layout-content div.anime_all div.episodes td.action .i_icon
 {
 	float: left;
 	padding: 0px 2px 0px 2px;
@@ -3677,4 +3676,10 @@ div.mylist_add
 table.filelist tr.generic td
 {
 	background-color: white;
+}
+
+/* fix for episode info */
+a.i_file_details
+{
+	text-indent: 5000px;
 }
