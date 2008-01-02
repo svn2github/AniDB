@@ -1,36 +1,29 @@
-var xmlURL = "mylist.xml";
-var firstPassXslURL = "firstPass.xsl";
-var htmlGenerationXslURL = "mylistb.xsl";
-var resultElementId = "resultDiv";
-var lastclass = "";
 var sfv = 0;
 var selected = 0;
 var lastsel = 0;
 var watched = 0;
 var complete = 0;
-var sortName = "N";
-var sortOrder = "ascending";
-var sortType = "text";
+var selectedId = 0;
+var lastClass
+
 
 function over(obj, name) {
     obj.style.cursor = 'pointer';
-    obj.className = name;
+    overChangeClass(obj, name)
 }
 function out(obj) {
     obj.style.cursor = '';
-    obj.className = '';
+    outChangeClass(obj)
 }
 
-function over2(obj, name){
-	lastclass = obj.className;
-	obj.className=name;
+function overChangeClass(obj, name) {
+    lastClass = obj.className;
+    obj.className = name;
 }
 
-function out2(obj){
-	obj.className=lastclass;
+function outChangeClass(obj) {
+    obj.className = lastClass;
 }
-
-
 
 //function radioButton() {
 //    var checkedRadioButton = function(radioButton){return radioButton.checked}
@@ -85,31 +78,38 @@ function out2(obj){
 //	update();
 //}
 
-function setTitle(title)
-{
+function setTitle(title) {
     document.title = title;
 }
 
-function setXslParamShow(name, checkbox) {
-    if (checkbox.checked)
-     xdoc.setXslParameter(name,'false');
-     else xdoc.setXslParameter(name,'true');
-    xdoc.update();
+function collapseShow() {
+    var element = document.getElementById(animeInfoId);
+    if (element)
+        element.parentNode.removeChild(element)
 }
 
-function sortTable(field, type) {
-     if(sortName==field){
-		if(sortOrder=="ascending")
-			sortOrder="descending";
-		else	sortOrder="ascending";
-	}
-	else sortName = field;
-    xdoc.setXslParameter("sortNodeName", field);
-    xdoc.setXslParameter("sortDataType", type);
-    xdoc.setXslParameter("sortDirection", sortOrder);
-    xdoc.update();
+function expandShow(id) {
+    var element = document.getElementById(id);
+    if (element) {
+        var newRow = element.ownerDocument.createElement("tr");
+        newRow.setAttribute("id", animeInfoId);
+        var newCol = element.ownerDocument.createElement("td");
+        newRow.appendChild(newCol)
+        newCol.appendChild(element.ownerDocument.createTextNode("blah"))
+        prevElement = element.nextSibling;
+        insertAfter(newRow, element)
+    }
+}
+
+function selectShow(id) {
+    collapseShow();
+    if (selectedId != id) {
+        selectedId = id;
+        expandShow(selectedId);
+    }
 }
 
 window.onload = function (evt) {
-      xdoc = new xsltUpdater(xmlURL,firstPassXslURL,htmlGenerationXslURL,resultElementId)
+    myListRenderer = new myListXsltUpdater();
+
 }

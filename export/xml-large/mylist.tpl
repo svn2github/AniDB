@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><?xml-stylesheet type="text/xsl" href="firstpass.xsl"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!--
 
@@ -17,6 +17,11 @@ Version 0.2
                files="<tmpl_var name=global_filecount>"
 
                size="<tmpl_var name=global_bytecount_h>">
+        <genres>
+            <tmpl_loop name= global_genren_loop>
+                <genre id="<tmpl_var name=global_genren_id>" name="<tmpl_var name=global_genren_name>" parentId="<tmpl_var name=global_genren_parentid>"/>
+            </tmpl_loop>
+        </genres>
 
         <tmpl_loop name= loop_anime>
 

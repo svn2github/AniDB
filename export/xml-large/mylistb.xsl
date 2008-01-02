@@ -10,35 +10,36 @@
     <xsl:param name="showOther" select="'true'"/>
     <xsl:param name="showIncomplete" select="'true'"/>
     <xsl:template match="animeList">
-
         <table width="100%">
-            <tr class="thead">
-                <td>#</td>
-                <td onClick="sortTable('romanjiName', 'text')" onMouseOver="over(this, 'sort')"
-                    onMouseOut="out(this)">
-                    Name
-                </td>
-                <td onClick="sortTable('type', 'text')" onMouseOver="over(this, 'sort')"
-                    onMouseOut="out(this)">
-                    Type
-                </td>
-                <td onClick="sortTable('broadcastDate', 'text')" onMouseOver="over(this, 'sort')"
-                    onMouseOut="out(this)">
-                    Broadcast Date
-                </td>
-                <td onClick="sortTable('rating', 'number')" onMouseOver="over(this, 'sort')"
-                    onMouseOut="out(this)">
-                    Anidb Rating
-                </td>
-                <td onClick="sortTable('files', 'number')" onMouseOver="over(this, 'sort')"
-                    onMouseOut="out(this)">
-                    Files
-                </td>
-                <td onClick="sortTable('additionDate', 'text')" onMouseOver="over(this, 'sort')"
-                    onMouseOut="out(this)">
-                    Last Addition Date
-                </td>
-            </tr>
+            <thead>
+                <tr class="thead">
+                    <td>#</td>
+                    <td onClick="myListRenderer.sortList('romanjiName', 'text')" onMouseOver="over(this, 'sort')"
+                        onMouseOut="out(this)">
+                      Name
+                    </td>
+                    <td onClick="myListRenderer.sortList('type', 'text')" onMouseOver="over(this, 'sort')"
+                        onMouseOut="out(this)">
+                        Type
+                    </td>
+                    <td onClick="myListRenderer.sortList('broadcastDate', 'text')" onMouseOver="over(this, 'sort')"
+                        onMouseOut="out(this)">
+                        Broadcast Date
+                    </td>
+                    <td onClick="myListRenderer.sortList('rating', 'number')" onMouseOver="over(this, 'sort')"
+                        onMouseOut="out(this)">
+                        Anidb Rating
+                    </td>
+                    <td onClick="myListRenderer.sortList('files', 'number')" onMouseOver="over(this, 'sort')"
+                        onMouseOut="out(this)">
+                        Files
+                    </td>
+                    <td onClick="myListRenderer.sortList('additionDate', 'text')" onMouseOver="over(this, 'sort')"
+                        onMouseOut="out(this)">
+                        Last Addition Date
+                    </td>
+                </tr>
+            </thead>
             <tbody>
                 <xsl:apply-templates select="anime[@type[(. != 'OVA' or $showOVA = 'true') and
                     (. != 'TV Series' or $showTv = 'true') and (. != 'Movie' or $showMovie = 'true') and
@@ -76,7 +77,7 @@
         <xsl:variable name="selected" select="0"/>
         <xsl:variable name="position" select="position()"/>
 
-        <tr onMouseOver="over2(this, 'high1')" onMouseOut="out2(this)">
+        <tr onMouseOver="overChangeClass(this, 'high1')" onMouseOut="outChangeClass(this)" id="a{@id}">
             <xsl:choose>
                 <xsl:when test="position() mod 2">
                     <xsl:attribute name="class">even</xsl:attribute>
@@ -86,10 +87,10 @@
                 </xsl:otherwise>
             </xsl:choose>
 
-            <td align="center" style="cursor:pointer;">
+            <td align="center" onClick="myListRenderer.selectShow('a{@id}')" style="cursor:pointer;">
                 <xsl:value-of select="$position"/>
             </td>
-            <td align="left">
+            <td align="left" onClick="myListRenderer.selectShow('a{@id}')" style="cursor:pointer;">
                 <xsl:value-of select="romanjiName"/>
                 <xsl:if test="englishName !=  ''">
                     /

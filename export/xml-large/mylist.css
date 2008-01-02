@@ -1,93 +1,124 @@
-body{
-	background-color: #000000;
-	color: #FFFFFF;
-	font-size: 10px;
-	font-family: Tahoma, Verdana, Arial, Helvetica;
-	margin: 0;
-	height: 100%;
-}
-h1{
-	color: #800000;
-	text-align: center;
-	font-size: 1.5em;
-}
-h2{
-	color: #008000;
-	text-align: left;
-	font-size: 1.2em;
-}
-tbody {
-    /*overflow : scroll;*/
+* {
+    margin: 0;
+    padding: 0;
 }
 
-table{
-	width: 100%;
-	border-color: Black;
-	border-style: solid;
-	border-width: 0px;
-	border-collapse: collapse;
-	font-size: 10px;
+body {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-family: Tahoma, Verdana, Arial, Helvetica;
+    margin: 0;
+    height: 100%;
 }
-tr{
-	background-color: #000000;
+
+h1 {
+    color: #800000;
+    text-align: center;
+    font-size: 1.5em;
 }
-tr.even{
-	color: #FFFFFF;
-	background-color: #000000;
+
+h2 {
+    color: #008000;
+    text-align: left;
+    font-size: 1.2em;
 }
-tr.odd{
-	color: #FFFFFF;
-	background-color: #330000;
+
+tbody {
+/*overflow : scroll;*/
 }
-tr.dir{
-	background-color: #000030;
+
+.floatLeft {
+    float: left;
+    text-align: right;
 }
-tr.high1{
-	color: #FFCC00;
-	background-color: #660000;
+
+.floatRight {
+    float: right;
+    text-align: left;
 }
-tr.high2{
-	color: #FFCC00;
-	background-color: #330066;
+
+table {
+    width: 100%;
+    border-color: Black;
+    border-style: solid;
+    border-width: 0px;
+    border-collapse: collapse;
+    font-size: 10px;
 }
-td.sort{
-	color: #FFCC00;
-	background-color: #330000;
+
+tr {
+    background-color: #000000;
 }
-td.opt{
-	color: #FFCC00;
-	background-color: #003000;
+
+tr.even {
+    color: #FFFFFF;
+    background-color: #000000;
 }
-tr.options{
-	color: #F0F0F0;
-	font-weight: bold;
-	padding-bottom: 100px;
-	text-align: center;
-	background-color: #005000;
+
+tr.odd {
+    color: #FFFFFF;
+    background-color: #330000;
 }
-tr.thead{
-	color: #F0F0F0;
-	font-weight: bold;
-	background-color: #993300;
-	padding: 0px;
-	padding-bottom: 100px;
-	text-align: center;
+
+tr.dir {
+    background-color: #000030;
 }
-tfoot tr{
-	color: #F0F0F0;
-	background-color: #00C000;
+
+tr.high1 {
+    color: #FFCC00;
+    background-color: #660000;
 }
-td{
-	padding: 0px;
-	white-space: nowrap;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #000000;
+
+tr.high2 {
+    color: #FFCC00;
+    background-color: #330066;
 }
-a{
-	color: #FFFFFF;
-	text-decoration: none;
+
+td.sort {
+    color: #FFCC00;
+    background-color: #330000;
 }
-a:hover{
-	color: #99CCFF;
+
+td.opt {
+    color: #FFCC00;
+    background-color: #003000;
+}
+
+tr.options {
+    color: #F0F0F0;
+    font-weight: bold;
+    padding-bottom: 100px;
+    text-align: center;
+    background-color: #005000;
+}
+
+tr.thead {
+    color: #F0F0F0;
+    font-weight: bold;
+    background-color: #993300;
+    padding: 0px;
+    padding-bottom: 100px;
+    text-align: center;
+}
+
+tfoot tr {
+    color: #F0F0F0;
+    background-color: #00C000;
+}
+
+td {
+    padding: 0px; /*white-space: nowrap;*/
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #99CCFF;
 }

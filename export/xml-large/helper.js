@@ -42,9 +42,14 @@ Function.prototype.bind = function(object) {
     }
 }
 
-function inherits(newClass, baseClass) {
-    newClass.prototype = new baseClass()
-    newClass.prototype.base = baseClass.prototype
+document.insertAfter = function(newChild, refChild) {
+    if (refChild.nextSibling)
+        refChild.parentNode.insertBefore(newChild, refChild.nextSibling);
+    else refChild.parentNode.appendChild(newChild)
 }
 
+document.removeElementById = function(id) {
+    var element = this.getElementById(id);
+    if (element) element.parentNode.removeChild(element);
+}
 

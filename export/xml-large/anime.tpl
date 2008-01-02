@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><?xml-stylesheet type="text/xsl" href="mylist.xsl"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!--
 
@@ -51,11 +51,7 @@ Version 0.2
 
                 <tmpl_loop name= loop_anime_genren>
 
-                    <genre>
-
-                        <tmpl_var name= data_anime_genren_name>
-
-                    </genre>
+                    <genre name="<tmpl_var name= data_anime_genren_name>" id="<tmpl_var name= data_anime_genren_id>"/>
 
                 </tmpl_loop>
 
@@ -77,61 +73,46 @@ Version 0.2
             </rating>
 
             <awards>
-
                 <awardTypes>
-
                     <tmpl_loop name= loop_anime_award_types>
-
-                        <awardType>
-
-                            <tmpl_var name= data_anime_award_type_name>
-
+                        <awardType id="<tmpl_var name= data_anime_award_type_id >">
+                            <![CDATA[<tmpl_var name= data_anime_award_type_name>]]>
                         </awardType>
-
                     </tmpl_loop>
-
                 </awardTypes>
-
-                <awardNames>
-
-                    <tmpl_loop name= loop_anime_awards>
-
-                        <type>
-
-                            <awardName>
-
-                                <tmpl_var name= data_anime_award_name>
-
-                            </awardName>
-
-                        </type>
-
-                    </tmpl_loop>
-
-                </awardNames>
-
+                <tmpl_loop name= loop_anime_awards>
+                    <award awardTypeId="<tmpl_var name= data_anime_award_type>">
+                        <awardName>
+                            <![CDATA[<tmpl_var name= data_anime_award_name>]]>
+                        </awardName>
+                        <awardURL>
+                            <tmpl_var name= data_anime_award_url>
+                        </awardURL>
+                    </award>
+                </tmpl_loop>
             </awards>
 
             <companies>
 
                 <tmpl_loop name= loop_anime_company>
-                    <company type="<tmpl_var name= data_anime_company_aptype>">
-                        <![CDATA[<tmpl_var name= data_anime_company_name>]]>
+                    <company typeId="<tmpl_var name= data_anime_company_aptype>">
+                        <type>
+                            <![CDATA[<tmpl_var name= data_anime_company_aptype_name>]]>
+                        </type>
+                        <name>
+                            <![CDATA[<tmpl_var name= data_anime_company_name>]]>
+                        </name>
                     </company>
                 </tmpl_loop>
 
             </companies>
 
-            <synopsis><![CDATA[<tmpl_var name=data_anime_other>]]></synopsis>
-
+            <synopsis><![CDATA[<tmpl_var expr="jsencodehtml(data_anime_other)">]]></synopsis>
         </seriesInfo>
 
         <episodes status="<tmpl_if name=status_anime_iscomplete>complete<tmpl_else>incomplete</tmpl_if>">
-
             <size>
-
                 <tmpl_var name= data_anime_my_size_h>
-
             </size>
             <episodeCount>
                 <total totalEpisodes="<tmpl_var name= data_anime_eps_total>"
@@ -146,8 +127,8 @@ Version 0.2
             </episodeCount>
 
             <groups>
-                <tmpl_loop name= loop_anime>
-                    <group id="<tmpl_var name= data_anime_group_id>" state="<tmpl_var name= data_anime_group_id>"
+                <tmpl_loop name= loop_anime_groups>
+                    <group id="<tmpl_var name= data_anime_group_id>" state="<tmpl_var name= data_anime_group_state>"
                            rating="<tmpl_var name= data_anime_group_rating>"
                            voteCount="<tmpl_var name= data_anime_group_votes>">
                         <releasedEpisodes normal="<tmpl_var name= data_anime_group_epcnt>"

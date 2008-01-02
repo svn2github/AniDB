@@ -16,12 +16,13 @@ XmlDocument.prototype = {
         this.setLoaded();
         callback();
     },
-    load: function(url) {
+    load: function(url, callback) {
         this.setUnloaded();
+        this.setForLoading(callback);
         this._xmlDocument.load(url);
     },
-    setLoaded: function(url) {
-       this.loaded = true;
+    setLoaded: function() {
+        this.loaded = true;
     },
     setUnloaded: function() {
         this.loaded = false;
@@ -35,14 +36,12 @@ XmlDocument.prototype = {
     }
 }
 
-XmlDocument.getDocumentAndPrepareForLoading = function(xmlNameSpace, callback) {
-    var xDoc = browserDetect(function IEXdoc() {
+XmlDocument.getDocumentAndPrepareForLoading = function(xmlNameSpace) {
+    return browserDetect(function IEXdoc() {
         return new IEDocument(xmlNameSpace)
     }, function MozillaXdoc() {
         return new MozillaDocument(xmlNameSpace)
     });
-    if (typeof xDoc != undefined) xDoc.setForLoading(callback);
-    return xDoc;
 }
 
 
@@ -76,11 +75,15 @@ IEDocument.prototype.transformNode = function(xslDocument) {
 
 IEDocument.prototype.transformNodeToObject = function(xslDocument) {
     var outputDocument = new IEDocument('')
-    this._xmlDocument.transformNodeToObject(xslDocument._xmlDocument,outputDocument._xmlDocument);
+    this._xmlDocument.transformNodeToObject(xslDocument._xmlDocument, outputDocument._xmlDocument);
     return outputDocument;
 }
 
-var MozillaDocument = function(xmlNameSpace, callback) {
+IEDocument.prototype.insertIntoElement = function(element) {
+    element.innerHTML = this._xmlDocument.lastChild.xml;
+}
+
+var MozillaDocument = function(xmlNameSpace) {
     this._xmlDocument = document.implementation.createDocument('', 'dummy', null);
     this.init(xmlNameSpace);
 }
@@ -88,7 +91,7 @@ var MozillaDocument = function(xmlNameSpace, callback) {
 MozillaDocument.prototype = new XmlDocument();
 
 MozillaDocument.prototype.setForLoading = function(callback) {
-   this._xmlDocument.async = true;
+    this._xmlDocument.async = true;
     this._xmlDocument.onload = function() {
         this.setLoadedAndCallBack(callback)
     }.bind(this)
@@ -107,19 +110,26 @@ MozillaDocument.prototype.selectSingleNode = function(xpath) {
 }
 
 MozillaDocument.prototype.createElement = function(name) {
-    return this._xmlDocument.createElementNS(this.xmlNameSpace, 'xsl:sort')
+    return this._xmlDocument.createElementNS(this.xmlNameSpace, name)
+}
+
+MozillaDocument.prototype.insertIntoElement = function(element) {
+    var r = element.ownerDocument.createRange();
+    r.selectNodeContents(element);
+    r.deleteContents();
+    var df = r.createContextualFragment(new XMLSerializer().serializeToString(this._xmlDocument.lastChild));
+    element.appendChild(df);
 }
 
 var XslDocument = function() {
 }
 
 XslDocument.prototype = {
-    init: function(XmldocType, callback) {
+    init: function(XmldocType) {
         this._xslDocument = new XmldocType('http://www.w3.org/1999/XSL/Transform');
-        this._xslDocument.setForLoading(callback)
     },
-    load: function(url) {
-        this._xslDocument.load(url);
+    load: function(url, callback) {
+        this._xslDocument.load(url, callback);
     },
     isLoaded: function() {
         return this._xslDocument.isLoaded();
@@ -144,7 +154,7 @@ XslDocument.prototype = {
             node.appendChild(xslSort);
         }
     },
-    addDateSortNode: function(node, orderBy, dataType, sortOrder) {
+    addDateSortNode: function(node, orderBy,sortOrder) {
         this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),7,4)', 'number', sortOrder);
         this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),4,2)', 'number', sortOrder);
         this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),1,2)', 'number', sortOrder);
@@ -165,16 +175,16 @@ XslDocument.prototype = {
     }
 }
 
-XslDocument.getDocumentAndPrepareForLoading = function(callback) {
+XslDocument.getDocumentAndPrepareForLoading = function() {
     return browserDetect(function IEXsldoc() {
-        return new IEXslDocument(callback)
+        return new IEXslDocument()
     }, function MozillaXsldoc() {
-        return new MozillaXslDocument(callback)
+        return new MozillaXslDocument()
     });
 }
 
-var IEXslDocument = function(callback) {
-    this.init(IEDocument, callback);
+var IEXslDocument = function() {
+    this.init(IEDocument);
 }
 
 IEXslDocument.prototype = new XslDocument();
@@ -186,23 +196,27 @@ IEXslDocument.prototype.transformedDocument = function(xmlDocument) {
 IEXslDocument.prototype.setParameter = function(name, value) {
     var node = this._xslDocument.selectSingleNode('//xsl:param[@name="' + name + '"]')
     node.removeAttribute('select');
-    node.setAttribute('select',"'"+ value + "'");
+    node.setAttribute('select', "'" + value + "'");
 }
 
 IEXslDocument.prototype.transformIntoElement = function(xmlDocument, resultElement) {
     resultElement.innerHTML = xmlDocument.transformNode(this._xslDocument);
 }
 
-var MozillaXslDocument = function(callback) {
+var MozillaXslDocument = function() {
+    this.init(MozillaDocument);
+}
+
+MozillaXslDocument.prototype = new XslDocument();
+
+MozillaXslDocument.prototype.load = function(url, callback) {
     var interceptedCallback = function() {
         this.xsltProcessor = new XSLTProcessor();
         this.xsltProcessor.importStylesheet(this._xslDocument._xmlDocument);
         callback()
     }.bind(this)
-    this.init(MozillaDocument, interceptedCallback);
+    this._xslDocument.load(url, interceptedCallback);
 }
-
-MozillaXslDocument.prototype = new XslDocument();
 
 MozillaXslDocument.prototype.transformedDocument = function(xmlDocument) {
     var outputDocument = XmlDocument.getDocumentAndPrepareForLoading('');
@@ -211,7 +225,7 @@ MozillaXslDocument.prototype.transformedDocument = function(xmlDocument) {
 }
 
 MozillaXslDocument.prototype.setParameter = function(name, value) {
-    this.xsltProcessor.setParameter('',name,value)
+    this.xsltProcessor.setParameter('', name, value)
 }
 
 MozillaXslDocument.prototype.transformIntoElement = function(xmlDocument, resultElement) {
@@ -222,33 +236,22 @@ MozillaXslDocument.prototype.transformIntoElement = function(xmlDocument, result
     resultElement.appendChild(documentFragment);
 }
 
-function xsltUpdater(xmlUrl, firstXslUrl, secondXslUrl, resultElementId)
-{
-    this.resultElement = document.getElementById(resultElementId);
-    this.xmlDocument = XmlDocument.getDocumentAndPrepareForLoading('', this.transformIfLoaded.bind(this))
-    this.firstXslDocument = XslDocument.getDocumentAndPrepareForLoading(this.transformIfLoaded.bind(this))
-    this.secondXslDocument = XslDocument.getDocumentAndPrepareForLoading(this.transformIfLoaded.bind(this))
-    this.loaded = typeof this.xmlDocument != 'undefined';
-    this.xmlDocument.load(xmlUrl)
-    this.firstXslDocument.load(firstXslUrl)
-    this.secondXslDocument.load(secondXslUrl)
-}
-
-xsltUpdater.prototype = {
-    transformIfLoaded:  function() {
-        if (this.xmlDocument.isLoaded() && this.firstXslDocument.isLoaded() && this.secondXslDocument.isLoaded()) {
-            this.buildIntermediateXml();
+var loadDocuments = function(documentMap, callback) {
+    var callbackFunction = function() {
+        var status = true;
+        for (var key in documentMap)
+        {
+            if (!documentMap[key].isLoaded()) {
+                status = false;
+            }
         }
-    },
-    buildIntermediateXml: function () {
-        this.intermediateXml = this.firstXslDocument.transformedDocument(this.xmlDocument)
-        this.update()
-    },
-    update: function () {
-        this.secondXslDocument.transformIntoElement(this.intermediateXml, this.resultElement);
-    },
-    setXslParameter: function(name, value) {
-        this.secondXslDocument.setParameter(name, value);
+        if (status) callback();
+    }
+
+
+    for (var key in documentMap) {
+        documentMap[key].load(key, callbackFunction);
     }
 }
+
 
