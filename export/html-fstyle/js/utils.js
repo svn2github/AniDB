@@ -316,10 +316,7 @@ function createSelectArray(parentNode,name,id,onchange,selected,optionArray) {
 	for (var opt in optionArray) {
 		var option = document.createElement('OPTION');
 		var op = optionArray[opt];
-		option.text = op['text'];
-		option.value = opt;
-		if (opt == selected) option.selected = true;
-		select.appendChild(option);
+		createSelectOption(select,op['text'], opt, (opt == selected));
 	}
 	if (parentNode && parentNode != '') parentNode.appendChild(select);
 	else return select;

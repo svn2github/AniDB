@@ -88,10 +88,11 @@ div#layout-content h1 div.icons a.i_icon {
 *.i_url, *.i_allcinema { width: 16px; height: 16px; background-image: url(icons/web.gif); }
 *.i_anidb { width: 16px; height: 16px; background-image: url(icons/anidb.gif); }
 *.i_backtomylist { width: 16px; height: 16px; background-image: url(icons/mylist.gif); }
-*.i_type_tv_series { width: 15px; height: 15px; background-image: url(icons/state/anidb_type_tv_series.gif); }
-*.i_type_movie, *.i_type_ova { width: 15px; height: 15px; background-image: url(icons/state/anidb_type_movie.gif); }
-*.i_type_web { width: 16px; height: 16px; background-image: url(icons/state/anidb_type_web.gif); }
-*.i_type_tv_special { width: 16px; height: 16px; background-image: url(icons/state/anidb_type_tv_special.gif); }
-*.i_type_other, *.i_type_unknown { display: none; }
+*.i_atype_tv_series { width: 15px; height: 15px; background-image: url(icons/state/anidb_atype_tv_series.gif); }
+*.i_atype_movie { width: 15px; height: 15px; background-image: url(icons/state/anidb_atype_movie.gif); }
+*.i_atype_ova { width: 15px; height: 15px; background-image: url(icons/state/anidb_atype_ova.gif); }
+*.i_atype_web { width: 16px; height: 16px; background-image: url(icons/state/anidb_type_web.gif); }
+*.i_atype_tv_special { width: 16px; height: 16px; background-image: url(icons/state/anidb_atype_tv_special.gif); }
+*.i_atype_other, *.i_type_unknown { display: none; }
 
 *.i_hand { cursor:pointer; }

@@ -161,7 +161,7 @@ function mylistIcons(parentNode,anime) {
   }
 	var atype = anime.type.replace(' ','_');
 	atype = atype.toLowerCase();
-	createIcon(parentNode, '['+anime.type+']',null,null, 'type: '+anime.type,'i_type_'+atype);
+	createIcon(parentNode, '['+anime.type+']',null,null, 'type: '+anime.type,'i_atype_'+atype);
 }
 
 /* *

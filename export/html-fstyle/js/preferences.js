@@ -5,7 +5,7 @@
  */
 
 // template info
-var theme = {'name':"html-fstyle",'version':"0.9.7beta",'source':"svn",'date':"20.11.2007"};
+var theme = {'name':"html-fstyle",'version':"0.9.8beta",'source':"svn",'date':"31.12.2007"};
 // settings
 var animeTitleLang = getCookie('animeTitleLang') || 'x-jat';
 var animeAltTitleLang = getCookie('animeAltTitleLang') || 'en';

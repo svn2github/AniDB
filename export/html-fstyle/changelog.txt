@@ -1,12 +1,17 @@
 Template: html-fstyle - ChangeLog
-Version: 0.9.7 - 20.11.2007
-(C) 2003-2007 by fahrenheit
+Version: 0.9.8 - 01.01.2008
+(C) 2003-2008 by fahrenheit
 
 Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
 SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/export/html-fstyle
 
 ----------------------------------------------------------------------------------------------
 
+0.9.8 - 01.01.2008
+	- Fixed the votes page, wasn't working
+	- Fixed the type of envolvment for anime producers
+	- Fixed some icons
+	- Added more stuff to the search page (only missing search by year and cattegories)
 0.9.7 - 20.11.2007
 	- Mylist Search page working draft (still misses some search functions)
 	- Added a new icon for the anime listings, anime type (OVA, TV, Movie, etc)

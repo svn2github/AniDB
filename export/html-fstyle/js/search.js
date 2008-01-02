@@ -1,7 +1,7 @@
 /* *
  * @file Search interface 
  * @author fahrenheit (alka.setzer@gmail.com)
- * @version 1.0 (15.10.2007)
+ * @version 1.1 (01.01.2008)
  */
  
 // GLOBALs //
@@ -144,6 +144,8 @@ function processSearch() {
 	animeFilter['incomplete'] = document.getElementById('search.incomplete').checked;
 	animeFilter['watched'] = document.getElementById('search.watched').checked;
 	animeFilter['notwatched'] = document.getElementById('search.notwatched').checked;
+	animeFilter['myvote'] = document.getElementById('search.myvote').checked;
+	animeFilter['awarded'] = document.getElementById('search.awarded').checked;
 	var wtype = document.getElementById('search.wishlist.type').value;
 	animeFilter['wishlisttype'] = (wtype == 'all' ? false : wtype);
 	var wpri = document.getElementById('search.wishlist.pri').value;
@@ -165,8 +167,8 @@ function processSearch() {
 	animeFilter['reviewcnt']['comparator'] = ">";
 	animeFilter['reviewcnt']['value'] = document.getElementById('search.reviews.count').value;
 	animeFilter['age'] = document.getElementById('search.restricted').value;
-	if (animeFilter['age'] == "censor") animeFilter['restricted'] = true;
-	else animeFilter['restricted'] = false;
+	if (animeFilter['age'] == "censor") animeFilter['restricted'] = false;
+	else animeFilter['restricted'] = true;
 	processAnimes();
 }
 
@@ -256,21 +258,24 @@ function compareSymbol(symbol, a, b) {
  */
 function filterAnime(anime) {
 	if (!anime) return true;
-	var vis = false;
-	if (anime.complete && animeFilter['complete']) vis = true;
-	if (!anime.complete && animeFilter['incomplete']) vis = true;
-	if (anime.watched && animeFilter['watched']) vis = true;
-	if (!anime.watched && animeFilter['notwatched']) vis = true;
-	if (anime.wishlist && animeFilter['wishlisted']) vis = true;
-	if (anime.restricted && animeFilter['restricted']) vis = true;
-	if (animeFilter['wishlisttype'] && anime.wishlist && anime.wishlist['type'] == animeFilter['wishlisttype']) vis = true;
-	if (animeFilter['wishlistpri'] && anime.wishlist && anime.wishlist['pri'].indexOf(animeFilter['wishlistpri']) > -1) vis = true;
-	if (anime.restricted && animeFilter['restricted']) vis = true;
-	var dt = javascriptDate(anime.dates['end']);
-	if ((anime.dates['end'] == '?' || ( anime.dates['end'] != '?' && (new Date() < dt))) && animeFilter['ongoing']) vis = true;
-	if (anime.hasawards && animeFilter['awarded']) vis = true;
-	if (anime.myvote && anime.myvote['type'] == animeFilter['myvote']) vis = true;
-	if (anime.type == animeFilter['type']) vis = true;
+	if (animeFilter['complete'] && !anime.complete) return false;
+	if (animeFilter['incomplete'] && anime.complete) return false;
+	if (animeFilter['watched'] && !anime.watched) return false;
+	if (animeFilter['notwatched'] && anime.watched) return false;
+	if ((animeFilter['wishlisttype'] && animeFilter['wishlisttype'] != 'all') || 
+			(animeFilter['wishlistpri'] && animeFilter['wishlistpri'] != 'all')) {
+		if (!anime.wishlist) return false;
+		if (animeFilter['wishlisttype'] != 'all' && anime.wishlist['type'] != animeFilter['wishlisttype']) return false;
+		if (animeFilter['wishlistpri'] != 'all' && anime.wishlist['pri'].indexOf(animeFilter['wishlistpri']) < 0) return false;
+	}
+	if (animeFilter['ongoing']) {
+		var dt = javascriptDate(anime.dates['end']);
+		if ((anime.dates['end'] == '?' || ( anime.dates['end'] != '?' && (new Date() < dt)))) true;
+		else return false;
+	}
+	if (animeFilter['awarded'] && !anime.hasawards) return false;
+	if (animeFilter['myvote'] && !anime.myvote) return false;
+	if (animeFilter['type'] != 'all' && anime.type.toLowerCase() != animeFilter['type']) return false;
 	if (animeFilter['text'] != "") {
 		var textArray = animeFilter['text'].split(' '); // split on spaces
 		var found = 0;
@@ -282,23 +287,50 @@ function filterAnime(anime) {
 				}
 			}
 		}
-		if (search_logic == 'OR') { 
-			if (found) vis = true;
-			else vis = false;
-		} else { 
-			if (found == textArray.length) vis = true;
-			else vis = false;
-		}
+		if (search_logic == 'OR') { if (!found) return false; }
+		else { if (found != textArray.length) return false; }
 	}
 	if (animeFilter['neps']['value'] && animeFilter['neps']['value'] != "") {
 		var targetEps = Number(animeFilter['neps']['value']);
-		if (compareSymbol(animeFilter['neps']['comparator'],anime.neps['cnt'],targetEps)) vis = true;
+		if (compareSymbol(animeFilter['neps']['comparator'],anime.neps['cnt'],targetEps)) true; else return false;
 	}
 	if (animeFilter['seps']['value'] && animeFilter['seps']['value'] != "") {
 		var targetEps = Number(animeFilter['seps']['value']);
-		if (compareSymbol(animeFilter['seps']['comparator'],anime.seps['cnt'],targetEps)) vis = true;
+		if (compareSymbol(animeFilter['seps']['comparator'],anime.seps['cnt'],targetEps)) true; else return false;
 	}
-	return vis;
+	if (animeFilter['age'] != 'all') {
+		if (animeFilter['age'] == 'censor' && anime.restricted) return false;
+		if (animeFilter['age'] == 'restricted' && !anime.restricted) return false;
+	}
+	if (animeFilter['rating']['value'] && animeFilter['rating']['value'] != '') {
+		if (animeFilter['rating']['type'] != 'all' && anime.rating['type'] != animeFilter['rating']['type']) return false;
+		// first check if we have a minimum vote count
+		if (animeFilter['votes']['value'] && animeFilter['votes']['value'] != '') {
+			var targetVote = Number(animeFilter['votes']['value']);
+			if (compareSymbol(animeFilter['votes']['comparator'],anime.rating['votes'],targetVote)) true; else return false;
+		} // then do the actual rating comparison
+		var targetRating = Number(animeFilter['rating']['value']);
+		if (compareSymbol(animeFilter['rating']['comparator'],anime.rating['rating'],targetRating)) true; else return false;
+	}
+	if (animeFilter['reviews']['value'] && animeFilter['reviews']['value'] != '') {
+		// first check if we have a minimum review count
+		if (animeFilter['reviewcnt']['value'] && animeFilter['reviewcnt']['value'] != '') {
+			var targetReviews = Number(animeFilter['reviewcnt']['value']);
+			if (compareSymbol(animeFilter['reviewcnt']['comparator'],anime.reviews,targetReviews)) true; else return false;
+		} // then do the actual rating comparison
+		var targetRRating = Number(animeFilter['reviews']['value']);
+		if (compareSymbol(animeFilter['reviews']['comparator'],anime.rrating,targetRRating)) true; else return false;
+	}
+	if (animeFilter['reviewcnt']['value'] && animeFilter['reviewcnt']['value'] != '') {
+		// first check if we have a minimum review count
+		if (animeFilter['reviews']['value'] && animeFilter['reviews']['value'] != '') {
+			var targetRRating = Number(animeFilter['reviews']['value']);
+			if (compareSymbol(animeFilter['reviews']['comparator'],anime.rrating,targetRRating)) true; else return false;
+		} // then do the actual rating comparison
+		var targetReviews = Number(animeFilter['reviewcnt']['value']);
+		if (compareSymbol(animeFilter['reviewcnt']['comparator'],anime.reviews,targetReviews)) true; else return false;
+	}
+	return true;
 }
 
 function prepPage() {
@@ -315,6 +347,7 @@ function prepPage() {
 		select.appendChild(none);
 		while (select2.options.length) select.appendChild(select2.options[0]);
 		select.options[0].selected = true;
+		select.disabled = true;
 		elems[0].parentNode.replaceChild(select,elems[0]);
 	}
 	elems = document.getElementsByTagName('SEARCH.NEPS.COMPARATOR');

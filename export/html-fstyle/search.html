@@ -45,7 +45,7 @@
 										<select id="search.type" size="1">
 											<option value="all" selected="selected">All types</option>
 											<option value="unknown">unknown</option>
-											<option value="tv">TV Series</option>
+											<option value="tv series">TV Series</option>
 											<option value="ova">OVA</option>
 											<option value="movie">Movie</option>
 											<option value="other">Other</option>
@@ -72,7 +72,7 @@
 									<th class="field">Misc</th>
 									<td class="value">
 										<input type="checkbox" id="search.ongoing" /> ongoing 
-										<input type="checkbox" id="search.incomplete" /> awarded 
+										<input type="checkbox" id="search.awarded" /> awarded 
 										<input type="checkbox" id="search.myvote" /> my vote 
 									</td>
 								</tr>
@@ -80,29 +80,29 @@
 									<th class="field">Wishlist</th>
 									<td class="value"><search.wishlist.type></search.wishlist.type> type(s) with priority: <search.wishlist.pri></search.wishlist.pri></td>
 								</tr>
-								<tr class="episodes">
+								<tr class="g_odd episodes">
 									<th class="field">Episodes</th>
 									<td class="value"><search.neps.comparator></search.neps.comparator> <input type="text" id="search.neps" maxlength="5" size="5"/> episode(s)</td>
 								</tr>
-								<tr class="g_odd episodes">
+								<tr class="episodes">
 									<th class="field">Specials</th>
-									<td class="value"><search.seps.comparator></search.seps.comparator> <input type="text" id="search.seps" maxlength="5" size="5"/> episode(s)</td>
+									<td class="value"><search.seps.comparator></search.seps.comparator> <input type="text" id="search.seps" maxlength="5" size="5"/> specials(s)</td>
 								</tr>
-								<tr class="started">
+								<tr class="g_odd started">
 									<th class="field">Started</th>
 									<td class="value">between
 										<input type="text" id="search.airdate0" maxlength="10" size="10"/> and
 										<input type="text" id="search.airdate1" maxlength="10" size="10"/> (date formats are supported, default period is 1 year)
 									</td>
 								</tr>
-								<tr class="g_odd ended">
+								<tr class="ended">
 									<th class="field">Ended</th>
 									<td class="value">between
 										<input type="text" id="search.enddate0" maxlength="10" size="10"/> and
 										<input type="text" id="search.enddate1" maxlength="10" size="10"/> (date formats are supported, default period is 1 year)
 									</td>
 								</tr>
-								<tr class="votes">
+								<tr class="g_odd votes">
 									<th class="field">Rating</th>
 									<td class="value">of type 
 									  <select id="search.rating.type" size="1">
@@ -114,14 +114,14 @@
 										<input type="text" id="search.rating.rating" maxlength="4" size="5"/> (input: x.xx, i.e. 3.15)
 									</td>
 								</tr>
-								<tr class="g_odd reviews">
+								<tr class="reviews">
 									<th class="field">Reviews</th>
 									<td class="value">at least
 										<input type="text" id="search.reviews.count" maxlength="3" size="5" value=""/> reviews and a rating of at least
 										<input type="text" id="search.reviews.rating" maxlength="4" size="5"/> (input: x.xx, i.e. 3.15)
 									</td>
 								</tr>
-								<tr class="action">
+								<tr class="g_odd action">
 									<td class="value" colspan="2"><input type="submit" id="search.do" value="Search"/></td>
 								</tr>
 							</tbody>

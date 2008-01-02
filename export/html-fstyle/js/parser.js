@@ -32,7 +32,7 @@ function parseCustom(node) {
     childNode = node.childNodes.item(i);
     if (childNode.nodeType == 3) continue;
     switch (childNode.nodeName) {
-      case 'userinfo': userInfo = new CUserinfoEntry(childNode);
+      case 'userinfo': userInfo = new CUserinfoEntry(childNode); break;
       default: showAlert('Options',node.nodeName,node.nodeName,childNode.nodeName);
     }
   }
@@ -135,9 +135,9 @@ function parseAnimes(node) {
       parseGroups(groupNodes,animeEntry.id); // Parsing Groups
       var epNodes = childNode.getElementsByTagName('eps');
       parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
+			if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
     }
     animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
-    if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
   }
 }
 

@@ -37,7 +37,7 @@
 					<cat id="<tmpl_var name=data_anime_genren_id>" pid="<tmpl_var name=data_anime_genren_parentid>" restricted="<tmpl_var name=data_anime_genren_ishentai>"><tmpl_var name=data_anime_genren_name></cat></tmpl_loop>
 				</cats>
 				<companys><tmpl_loop name=loop_anime_company>
-					<company id="<tmpl_var name=data_anime_company_id>" type="<tmpl_var name=data_anime_company_type_name>" atype="<tmpl_var name=data_anime_company_atype_name>"><tmpl_if expr="data_anime_company_name">
+					<company id="<tmpl_var name=data_anime_company_id>" type="<tmpl_var name=data_anime_company_type_name>" atype="<tmpl_var name=data_anime_company_aptype_name>"><tmpl_if expr="data_anime_company_name">
 						<name><![CDATA[<tmpl_var name=data_anime_company_name>]]></name></tmpl_if><tmpl_if expr="data_anime_company_shortname">
 						<shortname><![CDATA[<tmpl_var name=data_anime_company_shortname>]]></shortname></tmpl_if><tmpl_if expr="data_anime_company_othername">
 						<othername><![CDATA[<tmpl_var name=data_anime_company_othername>]]></othername></tmpl_if><tmpl_if expr="data_anime_company_url">

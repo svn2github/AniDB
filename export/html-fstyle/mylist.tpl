@@ -22,15 +22,15 @@
 			<seps user="<tmpl_var name=data_anime_my_eps_special>" seen="<tmpl_var name=data_anime_my_watchedeps_special>" cnt="<tmpl_var name=data_anime_eps_special>" /> 
 			<titles><tmpl_loop name=loop_anime_titles>
 				<title type="<tmpl_var name=data_anime_title_type_string>" lang="<tmpl_var name=data_anime_title_langsname>"><![CDATA[<tmpl_var name=data_anime_title_name>]]></title></tmpl_loop>
-			</titles><tmpl_if expr="data_anime_votes">
+			</titles>
 			<tags><tmpl_loop name=loop_anime_tag>
 				<tag id="<tmpl_var name=data_anime_tag_id>" date="<tmpl_var name=data_anime_tag_date>"><tmpl_var name=data_anime_tag_name></tag></tmpl_loop>
 			</tags>
 			<state><tmpl_var name=data_anime_mystate_string></state><tmpl_if expr="data_anime_my_vote || data_anime_my_tmpvote">
-			<myvote type="<tmpl_if expr="data_anime_my_vote">normal</tmpl_if><tmpl_if expr="data_anime_my_tmpvote">temp</tmpl_if>" date="<tmpl_if expr="data_anime_my_vote"><tmpl_var name=data_anime_my_vote_date_short></tmpl_if><tmpl_if expr="data_anime_my_tmpvote"><tmpl_var name=data_anime_my_tmpvote_date_short></tmpl_if>" vote="<tmpl_if expr="data_anime_my_vote"><tmpl_var name=data_anime_my_vote></tmpl_if><tmpl_if expr="data_anime_my_tmpvote"><tmpl_var name=data_anime_my_tmpvote></tmpl_if>" /></tmpl_if><tmpl_if expr="data_anime_wishlist_priority">
+			<myvote type="<tmpl_if expr="data_anime_my_vote">normal<tmpl_else>temp</tmpl_if>" date="<tmpl_if expr="data_anime_my_vote"><tmpl_var name=data_anime_my_vote_date_short><tmpl_else><tmpl_var name=data_anime_my_tmpvote_date_short></tmpl_if>" vote="<tmpl_if expr="data_anime_my_vote"><tmpl_var name=data_anime_my_vote><tmpl_else><tmpl_var name=data_anime_my_tmpvote></tmpl_if>" /></tmpl_if><tmpl_if expr="data_anime_wishlist_priority">
 			<wishlist type="<tmpl_var name=data_anime_wishlist_type_name>" pri="<tmpl_var name=data_anime_wishlist_priority_name >"><![CDATA[<tmpl_var name=data_anime_wishlist_comment>]]></wishlist></tmpl_if>
-			<size longn="<tmpl_var name=data_anime_my_size>" shortn="<tmpl_var name=data_anime_my_size_h>" />
-			<rating votes="<tmpl_var name=data_anime_votes>" rating="<tmpl_var name=data_anime_rating>" /><tmpl_else><trating votes="<tmpl_var name=data_anime_tmpvotes>" rating="<tmpl_var name=data_anime_tmprating>" /></tmpl_if><tmpl_if expr="data_anime_reviews">
+			<size longn="<tmpl_var name=data_anime_my_size>" shortn="<tmpl_var name=data_anime_my_size_h>" /><tmpl_if expr="data_anime_votes">
+			<rating type="normal" votes="<tmpl_var name=data_anime_votes>" rating="<tmpl_var name=data_anime_rating>" /><tmpl_else><rating type="temp" votes="<tmpl_var name=data_anime_tmpvotes>" rating="<tmpl_var name=data_anime_tmprating>" /></tmpl_if><tmpl_if expr="data_anime_reviews">
 			<reviews cnt="<tmpl_var name=data_anime_reviews>" rating="<tmpl_var name=data_anime_reviewrating>" /></tmpl_if>
 			<dates added="<tmpl_var name=data_anime_date_short>" update="<tmpl_var name=data_anime_update_short>" start="<tmpl_var name=data_anime_startdate>" end="<tmpl_var name=data_anime_enddate>" />
 		</anime></tmpl_loop>
