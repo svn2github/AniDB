@@ -335,3 +335,8 @@ a:hover
 {
 	content:"HaruhiStyleX.AniDB v2 - Made by TheJAG";
 }
+
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}

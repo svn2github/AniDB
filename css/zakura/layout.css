@@ -4,6 +4,11 @@
 	- user login	- quick search
 ----------------------------------*/
 
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}
+
 /* container - main nav, login, & search */
 div#layout-nav {
 	padding-top: 160px;

@@ -3683,3 +3683,8 @@ a.i_file_details
 {
 	text-indent: 5000px;
 }
+
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}

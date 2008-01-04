@@ -159,3 +159,8 @@ body,
 {
 	margin: 0.1em 0.1em 3.1em 0.1em;
 }
+
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}

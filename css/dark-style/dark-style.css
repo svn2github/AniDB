@@ -2266,3 +2266,7 @@ div.latestanimes_all img[src*="nopic.gif"] {
 	padding:				0 75px;
 }
 
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}

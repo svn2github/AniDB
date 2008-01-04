@@ -2077,3 +2077,8 @@ a.i_icon:hover, a.i_inline:hover
 {
 	text-align: left;
 }
+
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}
