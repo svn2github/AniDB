@@ -842,3 +842,55 @@ a.i_icon:hover, a.i_inline:hover
   content: "^";
 }
 
+/* new comment and user icons */
+
+*.i_comment_add
+{
+	background-image: url(../icons/test/comment_add.png);
+}
+
+*.i_comment_delete
+{
+	background-image: url(../icons/test/comment_delete.png);
+}
+
+*.i_comment_edit
+{
+	background-image: url(../icons/test/comment_edit.png);
+}
+
+*.i_user_add
+{
+	background-image: url(../icons/test/user_add.png);
+}
+
+*.i_user_delete
+{
+	background-image: url(../icons/test/user_delete.png);
+}
+
+*.i_user_info
+{
+	background-image: url(../icons/test/user_info.png);
+}
+
+*.i_user_mylist
+{
+	background-image: url(../icons/test/user_mylist.png);
+}
+
+*.i_user_page
+{
+	background-image: url(../icons/test/user_page.png);
+}
+
+*.i_user_send
+{
+	background-image: url(../icons/test/user_send.png);
+}
+
+*.i_user_votes
+{
+	background-image: url(../icons/test/user_votes.png);
+}
+
