@@ -846,51 +846,56 @@ a.i_icon:hover, a.i_inline:hover
 
 *.i_comment_add
 {
-	background-image: url(../icons/test/comment_add.png);
+	background-image: url(../icons/boomy/comment_add.png);
 }
 
 *.i_comment_delete
 {
-	background-image: url(../icons/test/comment_delete.png);
+	background-image: url(../icons/boomy/comment_delete.png);
+}
+
+*.i_comment_deleterequest
+{
+	background-image: url(../icons/boomy/comment_deleterequest.png);
 }
 
 *.i_comment_edit
 {
-	background-image: url(../icons/test/comment_edit.png);
+	background-image: url(../icons/boomy/comment_edit.png);
 }
 
 *.i_user_add
 {
-	background-image: url(../icons/test/user_add.png);
+	background-image: url(../icons/boomy/user_add.png);
 }
 
 *.i_user_delete
 {
-	background-image: url(../icons/test/user_delete.png);
+	background-image: url(../icons/boomy/user_delete.png);
 }
 
 *.i_user_info
 {
-	background-image: url(../icons/test/user_info.png);
+	background-image: url(../icons/boomy/user_info.png);
 }
 
 *.i_user_mylist
 {
-	background-image: url(../icons/test/user_mylist.png);
+	background-image: url(../icons/boomy/user_mylist.png);
 }
 
 *.i_user_page
 {
-	background-image: url(../icons/test/user_page.png);
+	background-image: url(../icons/boomy/user_page.png);
 }
 
 *.i_user_send
 {
-	background-image: url(../icons/test/user_send.png);
+	background-image: url(../icons/boomy/user_send.png);
 }
 
 *.i_user_votes
 {
-	background-image: url(../icons/test/user_votes.png);
+	background-image: url(../icons/boomy/user_votes.png);
 }
 
