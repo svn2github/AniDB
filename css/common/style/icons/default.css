@@ -874,6 +874,11 @@ a.i_icon:hover, a.i_inline:hover
 	background-image: url(../icons/boomy/user_delete.png);
 }
 
+*.i_user_feedback
+{
+	background-image: url(../icons/boomy/user_feedback.png);
+}
+
 *.i_user_info
 {
 	background-image: url(../icons/boomy/user_info.png);
@@ -887,6 +892,11 @@ a.i_icon:hover, a.i_inline:hover
 *.i_user_page
 {
 	background-image: url(../icons/boomy/user_page.png);
+}
+
+*.i_user_reviews
+{
+	background-image: url(../icons/boomy/user_reviews.png);
 }
 
 *.i_user_send
