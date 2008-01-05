@@ -71,7 +71,7 @@ public class JFrameHtml extends JFrame implements HyperlinkListener, KeyListener
 	}
 	public void hyperlinkUpdate(HyperlinkEvent e){
 		if(e.getEventType()==HyperlinkEvent.EventType.ACTIVATED)
-			A.gui.hlGo(e.getDescription());
+			A.hlGo(e.getDescription());
 	}
 	public void keyTyped(KeyEvent e) {
 		if(e.getKeyChar()=='q') dispose();

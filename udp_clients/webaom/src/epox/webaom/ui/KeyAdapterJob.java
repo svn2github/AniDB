@@ -17,9 +17,11 @@ public class KeyAdapterJob extends KeyAdapter {
 	private JTable m_jt;
 	private JTreeTableR m_tt;
 	private RowModel m_rm;
-	public KeyAdapterJob(JTable jt, RowModel rm){
+	private JPanelAlt m_jpa;
+	public KeyAdapterJob(JTable jt, RowModel rm, JPanelAlt jpa){
 		m_jt = jt;
 		m_rm = rm;
+		m_jpa = jpa;
 		if(jt instanceof JTreeTableR)
 			m_tt = (JTreeTableR)jt;
 		else m_tt = null;
@@ -28,10 +30,10 @@ public class KeyAdapterJob extends KeyAdapter {
 		try{
 			int code = e.getKeyCode();
 			switch(code){
-				case 'R': A.gui.jpAlt.updateAlt(true); return;
+				case 'R': if(m_jpa!=null) m_jpa.updateAlt(true); return;
 				case 'D': A.p.dump("@ "); return; //A.jobs.dumpHashSet();
 				case 'B': A.dumpStats(); return;
-				case 'L': A.p.clear(); A.gui.jpAlt.updateAlt(false); return;
+				case 'L': A.p.clear();  if(m_jpa!=null) m_jpa.updateAlt(false); return;
 			}
 			int i = m_jt.getSelectedRow();
 			if(i<0) return;
@@ -40,16 +42,16 @@ public class KeyAdapterJob extends KeyAdapter {
 			Job j = a[0];//A.jobs.get(m_rm.convertRow(i)[0]);
 			boolean con = true;
 			switch(code){
-				case 'A': A.gui.hlGo(j.m_fa.urlAnime()); break;
-				case 'M': A.gui.hlGo(j.m_fa.urlMylist()); break;
-				case 'N': A.gui.hlGo(j.m_fa.urlMylistE(j.mIlid)); break;
-				case 'E': A.gui.hlGo(j.m_fa.urlEp()); break;
-				case 'G': A.gui.hlGo(j.m_fa.urlGroup()); break;
-				case 'F': A.gui.hlGo(j.m_fa.urlFile()); break;
-				case 'K': A.gui.hlGo(j.m_fa.urlExport()); break;
+				case 'A': A.hlGo(j.m_fa.urlAnime()); break;
+				case 'M': A.hlGo(j.m_fa.urlMylist()); break;
+				case 'N': A.hlGo(j.m_fa.urlMylistE(j.mIlid)); break;
+				case 'E': A.hlGo(j.m_fa.urlEp()); break;
+				case 'G': A.hlGo(j.m_fa.urlGroup()); break;
+				case 'F': A.hlGo(j.m_fa.urlFile()); break;
+				case 'K': A.hlGo(j.m_fa.urlExport()); break;
 				case 'W': JobMan.c_watch(j); break;
 				case 'X': JobMan.c_expl(j); break;
-				case 'C': JobMan.c_avdump(j); A.gui.hlGo(j.m_fa.urlFile()); break;
+				case 'C': JobMan.c_avdump(j); A.hlGo(j.m_fa.urlFile()); break;
 				case 'P': JobMan.updateStatus(j, Job.H_PAUSED, true); break;
 				case 'S': JobMan.updateStatus(j, Job.IDENTIFIED, true); break;
 				case 'I': j.m_fa = null; JobMan.updateStatus(j, Job.HASHED, true); break;

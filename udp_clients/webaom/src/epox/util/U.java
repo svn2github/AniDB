@@ -206,4 +206,20 @@ public class U {
 			sb.append(s.charAt(i));
 		return sb.toString();
 	}
+	public static void deleteFileAndFolder(File f, String s){
+		deleteFile(f, s);
+		deleteFile(f.getParentFile(), s);
+	}
+	public static void deleteFile(File f, String s){
+		try {
+			if(!f.getCanonicalPath().equals(f.getAbsolutePath()))
+				System.out.println("! Ignored "+f+" ("+s+")");
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		if(f.delete()) System.out.println("$ Deleted "+f+" ("+s+")");
+	}
+	public static boolean bitcmp(int s, int m){
+		return (s&m)==m;
+	}
 }

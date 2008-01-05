@@ -27,7 +27,9 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.PatternSyntaxException;
 
+import epox.swing.Log;
 import epox.util.DSData;
+import epox.util.Hyper;
 import epox.util.U;
 import epox.webaom.data.AMap;
 
@@ -42,7 +44,11 @@ public class Rules{
 	public Vector/*!<DSData>*/ mVill;
 	private String mSren, mSmov;
 	private AMap mAmap=null;
-	//private int mItruncate = 0;
+
+	private Log log;
+	public void setLog(Log l){
+		log = l;
+	}
 
 	public Rules(){
 		mVill = new Vector/*!<DSData>*/();
@@ -57,8 +63,8 @@ public class Rules{
 		mVill.add(new DSData("?", "", true));
 		mVill.add(new DSData("*", "", true));
 
-		mSren="#RENAME\n#DO SET '%ann - %enr - %epn '\n#IF G(!unknown) DO ADD '[%grp]'\n#ELSE DO ADD '[RAW]'";
-		mSmov="#MOVE";
+		mSren="#Uncomment to enable default renaming\n#DO SET '%ann - %enr - %epn '\n#IF G(!unknown) DO ADD '[%grp]'\n#ELSE DO ADD '[RAW]'";
+		mSmov="#Check the wiki before writing move rules";
 	}
 	public String getMov() {
 		return mSmov;
@@ -195,7 +201,7 @@ public class Rules{
 			int y = up.indexOf(',');
 			if(x>0 && y>0 && y<x)
 				sch.add(new Section(up.substring(0,x+1)));
-			else A.gui.println(Hyper.error("Invalid rule element: "+op));
+			else log.add(Hyper.error("Invalid rule element: "+op));
 			return false;
 		}
 		sch.clear();

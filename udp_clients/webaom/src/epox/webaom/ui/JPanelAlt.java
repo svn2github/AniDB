@@ -75,7 +75,7 @@ public class JPanelAlt extends JPanel {
 				updateAlt(false);
 			}
 		});
-		jttAlt.addKeyListener(new KeyAdapterJob(jttAlt,jttAlt));
+		jttAlt.addKeyListener(new KeyAdapterJob(jttAlt,jttAlt,this));
 	}
 	protected void updateAlt(boolean r){
 		synchronized(A.p){

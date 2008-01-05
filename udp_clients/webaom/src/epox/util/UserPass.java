@@ -1,18 +1,18 @@
-// Copyright (C) 2005-2006 epoximator
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+//Copyright (C) 2005-2006 epoximator
+
+//This program is free software; you can redistribute it and/or
+//modify it under the terms of the GNU General Public License
+//as published by the Free Software Foundation; either version 2
+//of the License, or (at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program; if not, write to the Free Software
+//Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /*
  * Created on 18.des.2005 12:36:32
@@ -28,18 +28,31 @@ import javax.crypto.spec.SecretKeySpec;
 
 import com.bitzi.util.Base32;
 
+import epox.webaom.A;
+
 public class UserPass{
-	public String usr,psw,key;
-	public UserPass(String u, String p, String k){
+	public String usr,psw,key,ses;
+	public UserPass(String u, String p, String k, String s){
 		usr = u;
 		psw = p;
 		key = k;
+		ses = s;
+	}
+	public UserPass(String u, String p, String k){
+		this(u,p,k,null);
 	}
 	public void set(String s){
 		try{
 			String a[] = U.split(s,':');
-			usr = a[0];
-			psw = dec(a[1]);
+			if(usr==null || usr.equals(a[0]) ||
+					!A.confirm("User clash",
+							"<html>You are trying to identify as <b>" + usr +
+							"</b> but the settings loaded are for <b>" + a[0] +
+							"</b>.</html>",
+							"Use "+usr, "Use "+a[0])){
+				usr = a[0];
+				psw = dec(a[1]);
+			}
 			key = dec(a[2]);
 		}catch(Exception e){
 			//

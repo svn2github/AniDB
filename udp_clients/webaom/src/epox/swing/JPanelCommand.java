@@ -64,17 +64,14 @@ public class JPanelCommand extends JPanel implements ActionListener, Log{
 		if(o.toString().length()<1) return;
 		jcb.insertItemAt(o,0);
 		jcb.setSelectedItem("");
-		println(o);
+		add(o);
 		cm.handleCommand(o.toString());
 	}
-	public void println(Object o){
+	public void add(Object o){
 		jta.append(o+"\r\n");
 		jta.setCaretPosition(jta.getDocument().getLength());
 	}
-	public void status0(String str){
-		println(str);
-	}
-	public void status1(String str){
-		println(str);
+	public void add(int i, Object o){
+		add(o);
 	}
 }

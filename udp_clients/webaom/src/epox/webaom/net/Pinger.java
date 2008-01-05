@@ -22,42 +22,41 @@
  */
 package epox.webaom.net;
 
-import epox.webaom.Hyper;
-import epox.webaom.ui.JPanelMain;
-
+import epox.swing.Log;
+import epox.swing.Status;
+import epox.util.Hyper;
 
 public class Pinger extends Thread{
-	private JPanelMain web;
-	public Pinger(JPanelMain w){
+	private ACon ani;
+	private Log log;
+	private Status status;
+	public Pinger(ACon a, Log l, Status s){
 		super("Pinger");
-		web = w;
-		web.fatal(true);
+		ani = a;
+		log = l;
+		status = s;
 		start();
 	}
 	public void run(){
-		ACon ani = null;
+		status.started();
 		try{
-			ani = web.getConnection();
 			if(ani.connect()){
-				web.println("PING...");
+				log.add("PING...");
 				String str = "PONG (in "+(ani.ping()/1000f)+" seconds).";
-				web.println(str);
-				web.msg(str);
-			}else web.msg(ani.getLastError()+".");
+				log.add(Log.LOG|Log.MSG, str);
+			}else log.add(Log.MSG, ani.getLastError()+".");
 		}
 		catch(java.net.SocketTimeoutException e){
 			String str = "AniDB is not reachable";
-			web.println(Hyper.error(str+"."));
-			web.msg(str);
+			log.add(Log.LOG|Log.MSG, Hyper.error(str+"."));
 		}
 		catch(NumberFormatException e){
-			web.msg("Invalid number."+e.getMessage());
+			log.add(Log.MSG, "Invalid number."+e.getMessage());
 		}
 		catch(Exception e){ e.printStackTrace();
-			web.println(Hyper.error(e.getMessage()+"."));
-			web.msg(e.getMessage()+".");
+			log.add(Log.LOG|Log.MSG, Hyper.error(e.getMessage()+"."));
 		}
 		if(ani!=null) ani.disconnect();
-		web.fatal(false);
+		status.finished();
 	}
 }

@@ -1,4 +1,4 @@
-package epox.webaom;
+package epox.webaom.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

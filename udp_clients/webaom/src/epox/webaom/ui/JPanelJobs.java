@@ -5,6 +5,7 @@
 package epox.webaom.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.dnd.DropTarget;
 import java.awt.event.ActionEvent;
@@ -33,6 +34,13 @@ public class JPanelJobs extends JPanel implements ActionListener {
 	private int mIs = 0, mIf = 0; //status, file state
 	private boolean mBu = false;
 
+	public Container getTable(){
+		return m_jst;
+	}
+	public void readdTable(){
+		add(m_jst, BorderLayout.CENTER);
+	}
+
 	public JPanelJobs(JTableJobs j, TableModelJobs s){
 		super(new BorderLayout());
 		m_jtj = j;
@@ -50,7 +58,8 @@ public class JPanelJobs extends JPanel implements ActionListener {
 		add(m_jst, BorderLayout.CENTER);
 		add(south, BorderLayout.SOUTH);
 
-		new DropTarget( this, m_jtj );
+		new DropTarget(this, m_jtj);
+		new DropTarget(m_jst, m_jtj);
 		m_jst.addKeyListener(m_jtj);
 	}
 	public void actionPerformed(ActionEvent e){

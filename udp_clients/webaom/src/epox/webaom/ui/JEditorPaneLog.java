@@ -40,9 +40,9 @@ import javax.swing.text.EditorKit;
 
 import epox.swing.JTextInputDialog;
 import epox.swing.Log;
+import epox.util.Hyper;
 import epox.util.U;
 import epox.webaom.A;
-import epox.webaom.Hyper;
 
 public class JEditorPaneLog extends JEditorPane implements Log,Action,ActionListener{
 	public static String HEAD = "<style type=\"text/css\">body{background-color:#FFFFFF;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11pt;}</style>";
@@ -67,7 +67,10 @@ public class JEditorPaneLog extends JEditorPane implements Log,Action,ActionList
         	e.printStackTrace();
 		}
     }
-	public void println(Object o){
+	public void add(int i, Object o){
+		add(o);
+	}
+	public void add(Object o){
 		String time = Hyper.number(U.time());
 		StringBuffer line = new StringBuffer(256);
 		line.append('[');
@@ -98,12 +101,6 @@ public class JEditorPaneLog extends JEditorPane implements Log,Action,ActionList
 		}catch(Exception e){
 			//don't care
 		}
-	}
-	public void status0(String msg){
-		//don't care
-	}
-	public void status1(String msg){
-		//don't care
 	}
 	private class AppendFileStream extends OutputStream {
 		RandomAccessFile fd;

@@ -23,6 +23,7 @@
 package epox.webaom.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.DefaultKeyboardFocusManager;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -38,7 +39,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollBar;
@@ -60,56 +60,90 @@ import javax.swing.event.HyperlinkListener;
 import epox.swing.JPanelCommand;
 import epox.swing.JPanelDebug;
 import epox.swing.Log;
+import epox.swing.Progress;
+import epox.swing.Status;
+import epox.util.Hyper;
 import epox.util.U;
 import epox.webaom.A;
 import epox.webaom.Cache;
 import epox.webaom.ChiiEmu;
-import epox.webaom.Hyper;
 import epox.webaom.Job;
 import epox.webaom.JobMan;
 import epox.webaom.Options;
-import epox.webaom.Parser;
+import epox.webaom.RecDir;
 import epox.webaom.data.Anime;
 import epox.webaom.data.Ep;
-import epox.webaom.net.ACon;
 import epox.webaom.net.AConE;
 import epox.webaom.net.AConS;
 import epox.webaom.net.Pinger;
 
-public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkListener,ChangeListener{
-	protected JTableJobs jtJobs;
-	protected JScrollBar jsbJobs;
-	protected TableModelJobs jlmJobs;
+public class JPanelMain extends JPanel implements Log, ActionListener{
+	public Container getTable(){
+		return jpJob.getTable();
+	}
 
+	private JTableJobs jtJobs;
+	private TableModelJobs jlmJobs;
 	private JTextField jtfNewExt;
 	private JEditorPaneLog jepM;
 	private JTextArea jtaHash;
 	private JButton[] jbButt;
-	private JCheckBox jcbMa;
 	private JTabbedPane jtp;
+	private JPanelJobs jpJob;
+	private JPanelOptRls jpOrls;
 
-	public JProgressBar jpb0, jpb1;
-	public JPanelOptRls jpOrls;
-	public JPanelOptCon jpOnio;
-	public JPanelOptDiv jpOdiv;
+	protected JPanelOptCon jpOnio;
+	protected JScrollBar jsbJobs;
+	protected JCheckBox jcbMa;
+	protected JProgressBar jpb0, jpb1;
+	protected JPanelOptDiv jpOdiv;
+	protected JPanelAlt jpAlt;
+
 	public JPanelOptMyl jpOmyl;
-	public JPanelJobs jpJob;
-	public JPanelAlt jpAlt;
 
-	protected boolean mBcrw; // cancel rec workr
-	private boolean mBkill, mBdio, mBnio;
 	private int mIupds = 0;
-	private String mSmsg;
 	private Runnable mRjsd;
-	protected Timer mTdio, mTprg, mTunf, mTgui;
-	public Thread mWdio, mWnio, mWdiv;
+
+	protected String mSmsg;
+	protected Timer mTprg, mTunf, mTgui;
+
+	public final Progress mPa = new Progress(){
+		public void set(float f){
+			jpb0.setValue((int)(1000*f));
+		}
+	};
+	public final Status mSdio = new Status(){
+		public void started(){
+			setDIOEnabled(true);
+			A.dio.setHashCotainer(jpOdiv.getHashContainer());
+		}
+		public void finished(){
+			setDIORelated(true);
+			setDIOEnabled(false);
+		}
+	};
+	public final Status mSnio = new Status(){
+		public void started(){
+			setNIOEnabled(true);
+		}
+		public void finished(){
+			setNIORelated(true);
+			setNIOEnabled(false);
+		}
+	};
+	public final Status mSping = new Status(){
+		public void started(){
+			jpOnio.jbPing.setEnabled(false);
+		}
+		public void finished(){
+			jpOnio.jbPing.setEnabled(true);
+		}
+	};
 
 	public JPanelMain(){
-		mBkill = mBdio = mBnio = false;
 		init();
 
 		mRjsd = new JobScrollDown();
-		mTdio = new Timer(4000, this);
 		mTprg = new Timer(1000, this);
 		mTunf = new Timer(1000*60*30, this);
 		mTgui = new Timer(500, this);
@@ -131,48 +165,44 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 					t[i].setName("GUI");
 		}catch(Exception e){/*don't care*/}
 	}
-	public void startup(){
+	public void c_startup(){
+		jpJob.readdTable();
 		if(jpOdiv.autoLog())
 			startLog();
 		if(jpOdiv.autoLoadDB())
 			startDB();
 		else mTgui.start();
 	}
-	public void shutdown(){
-		jepM.closeLogFile();
-		if(mWnio!=null&&A.conn!=null&&A.conn.m_authed){
-			ACon.shutdown = true;
-			jbButt[B_CONN].setEnabled(false); // disable the button
-			mBnio = false;
-			try {
-				mWnio.join();
-			} catch (InterruptedException e){
-				e.printStackTrace();
-			}
+	public void setLocked(boolean b){
+		if(b){
+			setDIORelated(false);
+			setNIORelated(false);
+			for(int i=1; i<jbButt.length; i++)
+				jbButt[i].setEnabled(false);
+			mTgui.stop();
+			mTunf.start();
+		}else{
+			mTunf.stop();
+			mTgui.start();
+			setDIORelated(true);
+			setNIORelated(true);
+			for(int i=1; i<jbButt.length; i++)
+				jbButt[i].setEnabled(true);
 		}
 	}
-	public void reset(){
-		synchronized(A.p){
-			if(mBdio) dioToggle();
-			nioEnable(false);
-			try{
-				mWdio.join(1000);
-			}catch(Exception x){
-				//
-			}
-			A.db._shutdown();
-			jpOdiv.tfMyDBs.setEnabled(true);
-			A.p.clear();
-			A.jobs.clear();
-			A.cache.clear();
-			A.jobc.reset();
-			jlmJobs.reset();
-			jtJobs.updateUI();
-			jpAlt.jttAlt.updateUI();
-			System.gc();
-			System.runFinalization();
-			System.gc();
-		}
+	public void c_shutdown(){
+		jepM.closeLogFile();
+		jbButt[B_CONN].setEnabled(false);
+		mTprg.stop();
+		mTunf.stop();
+	}
+	public void c_reset(){
+		setDIOEnabled(false);
+		setNIOEnabled(false);
+		jlmJobs.reset();
+		jtJobs.updateUI();
+		jpAlt.jttAlt.updateUI();
+		jpOdiv.tfMyDBs.setEnabled(true);
 	}
 	private void init(){
 							/*	+---------------------------+
@@ -238,7 +268,15 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 
 		//FILE OPTIONS
 		jcbMa = new JCheckBox("Add files to mylist automatically", true);
-		jcbMa.addChangeListener(this);
+		jcbMa.addChangeListener(new ChangeListener(){
+			public void stateChanged(ChangeEvent e){
+				Object source = e.getSource();
+				if(source==jcbMa){
+					A.autoadd = jcbMa.isSelected();
+					jpOmyl.setEnabled(A.autoadd);
+				}
+			}
+		});
 		JPanel pFile = new JPanel(new BorderLayout());
 		pFile.setBorder(new TitledBorder("Mylist"));
 		pFile.add(jcbMa, BorderLayout.NORTH);
@@ -262,13 +300,25 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 
 		//////////////////////////////HTML LOG PANE/////////////////////////////
 		jepM = new JEditorPaneLog();
-		jepM.addHyperlinkListener(this);
+		jepM.addHyperlinkListener(new HyperlinkListener(){
+			public void hyperlinkUpdate(HyperlinkEvent e){
+				if(e.getEventType()==HyperlinkEvent.EventType.ACTIVATED)
+					A.hlGo(e.getDescription());
+				else
+				if(e.getEventType()==HyperlinkEvent.EventType.ENTERED){
+					mSmsg = jpb0.getString();
+					jpb0.setString(e.getDescription());
+				}else
+				if(e.getEventType()==HyperlinkEvent.EventType.EXITED)
+					jpb0.setString(mSmsg);
+			}
+		});
 
 		JScrollPane scM = new JScrollPane(jepM);
 		jsbJobs = scM.getVerticalScrollBar();
 
 		////////////////////////////////INFO PANE///////////////////////////////
-		JTextArea jtaInfo = new JTextArea(A.getFileString("info.txt"));
+		JTextArea jtaInfo = new JTextArea(A.getResourceAsString("info.txt"));
 		jtaInfo.setEditable(false);
 		jtaInfo.setMargin(new Insets(2,2,2,2));
 
@@ -289,7 +339,7 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 		jpAlt = new JPanelAlt(this);
 
 		//////////////////////////////CHII EMULATOR/////////////////////////////
-		ChiiEmu cm = new ChiiEmu(A.conn);
+		ChiiEmu cm = new ChiiEmu();
 		JPanelCommand jcp = new JPanelCommand(cm, "Implemented commands: !uptime,!mystats,!anime,!group,!randomanime,!mylist,!state,!watched,!storage,!font\nTo test API directly start command with '?'.\nLogin/logout is done automatically, no need to set s=.\n");
 		cm.setLog(jcp);
 
@@ -327,108 +377,103 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 		kbfm.addKeyEventDispatcher(new DefaultKeyboardFocusManager(){
 			public boolean dispatchKeyEvent(KeyEvent e) {
 				if(e.getKeyCode()== KeyEvent.VK_F9 && (e.getID()==KeyEvent.KEY_PRESSED)){
-					reset();
+					A.reset();
 					return true;
 				}
 				return super.dispatchKeyEvent(e);
 			}
 		});
 	}
-	/*public void updateJobTable(Job j){
-		//jlmJobs.updateRow(j);
-	}*/
-	public void setEnabled_dio(boolean b){
+	public void dioToggle(){
+		jbButt[B_HASH].setEnabled(false);
+		if(A.dio.isEnabled()){
+			A.dio.setEnabled(false);
+		}else{
+			setDIORelated(false);
+			if(!A.dio.setEnabled(true)){
+				jbButt[B_HASH].setEnabled(true);
+				setDIORelated(true);
+			}
+		}
+	}
+	public void nioToggle(){
+		jbButt[B_CONN].setEnabled(false); // disable the button
+		if(A.nio.isEnabled()){
+			A.nio.setEnabled(false);
+		}else{ // we want it to run
+			setNIORelated(false); // freeze settings
+			if(!A.nio.setEnabled(true)){ // failed
+				jbButt[B_CONN].setEnabled(true); // enable the button
+				setNIORelated(true); // unfreeze settings
+			}
+		}
+	}
+	protected void setDIOEnabled(boolean b){
+		if(!A.isKilled()){
+			if(b){
+				jbButt[B_HASH].setText(S_DIOD);
+			}else{
+				jbButt[B_HASH].setText(S_DIOE);
+			}
+			jbButt[B_HASH].setEnabled(true);
+		}
+	}
+	protected void setDIORelated(boolean b){
 		jpOdiv.setEnabled(b);
 	}
-	public void setEnabled_nio(boolean b){
-		if(!killed()){
+	protected void setNIOEnabled(boolean b){
+		if(!A.isKilled()){
+			if(b) jbButt[B_CONN].setText(S_NIOD);
+			else{
+				jbButt[B_CONN].setText(S_NIOE);
+				A.nio.setEnabled(false);
+			}
+			jbButt[B_CONN].setEnabled(true);
+		}
+	}
+	protected void setNIORelated(boolean b){
+		if(!A.isKilled()){
 			jpOnio.setEnabled(b);
 			jcbMa.setEnabled(b);
 			jpOmyl.setEnabled(b&&A.autoadd);
 		}
 	}
-	public void nioEnable(boolean b){
-		if(!killed()){
-			if(b) jbButt[B_CONN].setText(S_NIOD);
-			else{
-				jbButt[B_CONN].setText(S_NIOE);
-				mBnio = false;
-			}
-			jbButt[B_CONN].setEnabled(true);
-		}
-	}
-	public void fatal(boolean b){
-		if(b){
-			if(mBdio) dioToggle();
-			setEnabled_dio(false);
-			setEnabled_nio(false);
-			for(int i=1; i<jbButt.length; i++)
-				jbButt[i].setEnabled(false);
-			mTunf.start();
-		}else{
-			mTunf.stop();
-			setEnabled_dio(true);
-			setEnabled_nio(true);
-			for(int i=1; i<jbButt.length; i++)
-				jbButt[i].setEnabled(true);
-		}
-	}
-	public String getHost(){
-		return jpOnio.tfHost.getText();
-	}
-	public int getRPort(){
-		return Integer.parseInt(jpOnio.tfRPort.getText());
-	}
-	public int getLPort(){
-		return Integer.parseInt(jpOnio.tfLPort.getText());
-	}
 	/////////////////////////////IMPLEMENTATIONS////////////////////////////////
-	public void hyperlinkUpdate(HyperlinkEvent e){
-		if(e.getEventType()==HyperlinkEvent.EventType.ACTIVATED)
-			hlGo(e.getDescription());
-		else
-		if(e.getEventType()==HyperlinkEvent.EventType.ENTERED){
-			mSmsg = jpb0.getString();
-			jpb0.setString(e.getDescription());
-		}else
-		if(e.getEventType()==HyperlinkEvent.EventType.EXITED)
-			jpb0.setString(mSmsg);
-	}
 	public void actionPerformed(ActionEvent e){
 		Object source = e.getSource();
 		if(source==jbButt[B_SELF]) selectFiles();
 		else if(source==jbButt[B_SELD]) selectDirs();
 		else if(source==jbButt[B_HASH]) dioToggle();
 		else if(source==jbButt[B_CONN]) nioToggle();
-		else if(source==jbButt[B_EXPO]){
-			if(mWdiv!=null) return;
-			mWdiv = new ExImp(false);
-			mWdiv.start();
+		//TODO fox
+		/*else if(source==jbButt[B_EXPO]){
+			if(A.mWdiv!=null) return;
+			A.mWdiv = new ExImp(false);
+			A.mWdiv.start();
 		}
 		else if(source==jbButt[B_IMPO]){
-			if(mWdiv!=null) return;
-			mWdiv = new ExImp(true);
-			mWdiv.start();
-		}
+			if(A.mWdiv!=null) return;
+			A.mWdiv = new ExImp(true);
+			A.mWdiv.start();
+		}*/
 		else if(source==jbButt[B_SAVE]){
 			opts(A.opt);
 			A.opt.save();
 		}
 		else if(source==jbButt[B_WIKI]){
-			hlGo("http://wiki.anidb.net/w/WebAOM");
+			A.hlGo("http://wiki.anidb.net/w/WebAOM");
 		}
-		else if(source==mTdio) dioStart();
 		else if(source==mTprg)
-			//System.err.println(A.frame.getFocusOwner());
 			updateProgressbar();
 		else if(source==mTunf){
-			mBkill = false;
-			fatal(false);
+			A.revive();
+			setLocked(false);
 		}else if(source==mTgui){
 			if(jtp.getSelectedComponent()==jpJob)
 				jpJob.update();
 		}
-		else if(source==jpOnio.jbPing) new Pinger(this);
+		else if(source==jpOnio.jbPing)
+			new Pinger(getConnectionData(), this, mSping);
 		else if(source==jpOdiv.tfMyDBs) startDB();
 		else if(source==jtfNewExt){
 			A.fha.addExt(jtfNewExt.getText());
@@ -461,130 +506,63 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 			jpOdiv.tfLogfl.setEnabled(false);
 	}
 	private void startDB(){
-		if(A.db._ok() || mWdiv!=null) return;
-		mWdiv = new InitDB(jpOdiv.tfMyDBs);
-		mWdiv.start();
-	}
-	public void stateChanged(ChangeEvent e){
-		Object source = e.getSource();
-		if(source==jcbMa){
-			A.autoadd = jcbMa.isSelected();
-			jpOmyl.setEnabled(A.autoadd);
-		}
+		if(A.db._ok() || A.mWdiv!=null) return;
+		A.mWdiv = new InitDB(jpOdiv.tfMyDBs);
+		A.mWdiv.start();
 	}
 	/////////////////////////////////DIV METH///////////////////////////////////
-	public void dioToggle(){
-		mBdio = !mBdio;
-		if(mBdio){
-			jbButt[B_HASH].setText(S_DIOD);
-			dioStart();
-			mTdio.start();
-		}else{
-			jbButt[B_HASH].setText(S_DIOE);
-			mTdio.stop();
-		}
-	}
-	private void dioStart(){
-		if(mWdio==null){
-			if(!A.jobs.workForDio()){
-				Thread rw = new RecDir(jpOdiv.getDirs(), true);
-				rw.start();
-				Thread.yield();
-				if(!A.jobs.workForDio()) return;
-			}
-			mWdio = new Thread(A.dio, "DiskIO");
-			mWdio.start();
-		}
-	}
-	/*public void dioStop(){
-		mBdio = false;
-	}*/
-	private void nioToggle(){
-		jbButt[B_CONN].setEnabled(false); // disable the button
-		mBnio = !mBnio; // change the state
-		if(mBnio){ // we want it to run
-			setEnabled_nio(false); // freeze settings
-			mBnio = nioEnableInt(); // try to start
-			if(!mBnio){ // failed
-				jbButt[B_CONN].setEnabled(true); // enable the button
-				setEnabled_nio(true); // unfreeze settings
-			}
-		}
-	}
-	private boolean nioEnableInt(){
-		if(!killed()&&mWnio==null){
-			//if(A.up.usr==null||A.up.psw==null||A.up.key==null)
-			if(new JDialogLogin().getPass()==null)
-				return false;
-			//A.conn = getConnection();
-			mWnio = new Thread(A.nio, "NetIO");
-			mWnio.start();
-			return true;
-		}
-		return false;
-	}
-	public void kill(){
-		mBkill = true;
-	}
-	public boolean dioOK(){
-		return mBdio && !mBkill;
-	}
-	public boolean nioOK(){
-		return mBnio && !mBkill;
-	}
-	public boolean killed(){
-		return mBkill;
-	}
-	public void msg(String msg){
-		A.dialog("Message", msg);
-	}
-	public void msg(String title, String msg){
-		JOptionPane.showMessageDialog(A.component, msg, title, JOptionPane.WARNING_MESSAGE);
-	}
 	protected class JobScrollDown implements Runnable{
 		public void run(){
 			if(!jsbJobs.getValueIsAdjusting())
 				jsbJobs.setValue(jsbJobs.getMaximum());
 		}
 	}
-	public void println(Object o){
-		jepM.println(o.toString());
-		if(jepM.isVisible())
-			javax.swing.SwingUtilities.invokeLater(mRjsd);
+	public void add(Object o){
+		add(Log.LOG, o);
 	}
-	public void status0(String str){
-		jpb0.setString(str);
-		mSmsg = str;
+	public void add(int i, Object o){
+		String s = o.toString();
+		if(U.bitcmp(i, Log.LOG))
+		{
+			jepM.add(s);
+			if(jepM.isVisible())
+				javax.swing.SwingUtilities.invokeLater(mRjsd);
+		}
+		if(U.bitcmp(i, Log.STD)){
+			mSmsg = s;
+			jpb0.setString(s);
+		}
+		if(U.bitcmp(i, Log.STN)){
+			jpb1.setString(s);
+		}
+		if(U.bitcmp(i, Log.SPE)){
+			jtaHash.append(s+"\r\n");
+		}
+		if(U.bitcmp(i, Log.MSG)){
+			A.dialog("Message","<html>"+s+"</html>");
+		}
 	}
-	public void status1(String str){
-		jpb1.setString(str);
-	}
-	public void printHash(String msg){
-		jtaHash.append(msg+"\r\n");
-	}
-	public void updateProgressbar(){
+	private void updateProgressbar(){
 		jpb1.setValue(A.jobc.getProgress());
 		if(A.frame!=null)
 			A.frame.setTitle("WebAOM "+A.S_VER+" "+A.jobc.getStatus());
 		if(((mIupds++)%10)==0)
 			System.gc();
 	}
-	public void hlGo(String url){
-		Runtime rt = Runtime.getRuntime();
-		try{
-			U.out(url);
-			String path = jpOdiv.tfBrows.getText();
-			if(path.length()>0)
-				rt.exec(path+" "+url);
-			else
-				rt.exec("rundll32 url.dll,FileProtocolHandler \""+url+"\"");
-		}catch(java.io.IOException f){f.printStackTrace();}
-	}
-	public AConE getConnection(){
-		A.usetup = new AConS(getHost(), getRPort(), getLPort(), jpOnio.getT(), jpOnio.getD(), 3, jpOnio.getN());
+	public AConE getConnectionData(){
+		String host = jpOnio.tfHost.getText();
+		int rport = Integer.parseInt(jpOnio.tfRPort.getText());
+		int lport = Integer.parseInt(jpOnio.tfLPort.getText());
+		A.usetup = new AConS(host, rport, lport, jpOnio.getT(), jpOnio.getD(), 3, jpOnio.getN());
 		AConE a = new AConE(this, A.usetup);
-		a.set(A.up.usr, A.up.psw, A.up.key);
+		a.set(A.up.usr, A.up.psw, A.up.key, A.up.ses);
 		return a;
+	}
+	public String getBrowserPath(){
+		return jpOdiv.tfBrows.getText();
+	}
+	public File[] getDirs(){
+		return jpOdiv.getDirs();
 	}
 	///////////////////////////////////OPTIONS//////////////////////////////////
 	public void opts(Options o){
@@ -603,7 +581,7 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 		o.setS(Options.S_FONTSTR, A.font);
 		o.setS(Options.S_LOGHEAD, JEditorPaneLog.HEAD);
 	}
-	public void optl(Options o){
+	private void optl(Options o){
 		try{
 			jcbMa.setSelected(o.getB(Options.B_ADDFILE));
 			Hyper.dec(o.getS(Options.S_HTMLCOL));
@@ -626,95 +604,33 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("! Options file is outdated. Could not load.");
-			println("Options file is outdated. Could not load.");
+			add("Options file is outdated. Could not load.");
 		}
 	}
 	/////////////////////////////////ADD FILES//////////////////////////////////
 	private void selectFiles(){
-		mBcrw = true;
-		if(mWdiv != null) return;
+		RecDir.kill();
+		if(A.mWdiv != null) return;
 		JFileChooser fc = new JFileChooser();
 		fc.setFileFilter(A.fha.m_ff);
 		fc.setMultiSelectionEnabled(true);
 		if(A.dir!=null) fc.setCurrentDirectory(new File(A.dir));
-		int option = fc.showDialog(A.component, "Select File(s)");
+		int option = fc.showDialog(A.container, "Select File(s)");
 		if(option == JFileChooser.APPROVE_OPTION)
-			select(fc.getSelectedFiles());
+			A.select(fc.getSelectedFiles());
 		else A.dir = fc.getCurrentDirectory().getAbsolutePath();
 	}
 	private void selectDirs(){
-		mBcrw = true;
-		if(mWdiv != null) return;
+		RecDir.kill();
+		if(A.mWdiv != null) return;
 		JFileChooser fc = new JFileChooser();
 		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		fc.setMultiSelectionEnabled(true);
 		if(A.dir!=null) fc.setCurrentDirectory(new File(A.dir));
-		int option = fc.showDialog(A.component, "Select Directory(ies) (recursive)");
+		int option = fc.showDialog(A.container, "Select Directory(ies) (recursive)");
 		if(option == JFileChooser.APPROVE_OPTION)
-			select(fc.getSelectedFiles());
+			A.select(fc.getSelectedFiles());
 		else A.dir = fc.getCurrentDirectory().getAbsolutePath();
-	}
-	public void select(File[] files){
-		if(mWdiv != null){
-			A.dialog("Message", "There is already a thread like this running.");
-			return;
-		}
-		if(files.length<=0) return;
-		if(files[0].getParent()!=null) A.dir = files[0].getParent();
-		else A.dir = files[0].getAbsolutePath();
-		mWdiv = new RecDir(files, false);
-		mWdiv.start();
-	}
-	private class RecDir extends Thread{
-		private File[] dirs;
-		private int nd = 0;
-		private boolean print;
-
-		public RecDir(File[] d, boolean hdir){
-			super("RecDir");
-			dirs = d;
-			mBcrw = false;
-			print = !hdir && mWdio==null;
-		}
-		public void run(){
-			long t0 = System.currentTimeMillis();
-			setEnabled(false);
-			int nr=0;
-			for(int i=0; i<dirs.length; i++){
-				String parent = dirs[i].getParent();
-				if(parent!=null && parent.startsWith("\\\\"))
-					msg("Windor network paths not supported: "+dirs[i]);
-				else
-					nr += addFileRecursive(dirs[i]);
-			}
-			if(print){
-				String s = "";
-				if(nr==1)
-					s = "Added one file in "+(System.currentTimeMillis()-t0)+ " ms.";
-				else if(nr>1)
-					s = "Added "+nr+" files in "+(System.currentTimeMillis()-t0)+ " ms.";
-				status0(s);
-				if(s.length()>0)
-					println(s);
-			}
-			setEnabled(true);
-			Thread.yield();
-			mWdiv = null;
-		}
-		private int addFileRecursive(File file){
-			if(mBcrw) return 0;
-			if(file.isDirectory()){
-				if(print && (nd++)%100==0) status0("Checking: "+file);
-				int nr=0;
-				File[] files = file.listFiles(A.fha.m_ff);
-				if(files==null) return 0;
-				for(int i=0; i<files.length; i++)
-					nr+=addFileRecursive(files[i]);
-				return nr;
-			}
-			if(A.fha.addFile(file)) return 1;
-			return 0;
-		}
 	}
 	private class InitDB extends Thread{
 		private JTextField jt;
@@ -744,18 +660,18 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 					//updateJobTable(j);
 				}
 				int m = (int)(System.currentTimeMillis()-t0);
-				println("Loaded db in "+Hyper.number(m)+" ms. "+Hyper.number(A.jobs.size())+" files found.");
+				add("Loaded db in "+Hyper.number(m)+" ms. "+Hyper.number(A.jobs.size())+" files found.");
 				jpAlt.updateAlt(true);
 			} else jt.setEnabled(true);
 			A.db.debug = true;
-			mWdiv = null;
+			A.mWdiv = null;
 
 			//A.mem5 = A.getUsed();
 			//A.memstats();
 			mTgui.start();
 		}
 	}
-	private class ExImp extends Thread{
+	/*private class ExImp extends Thread{
 		private boolean imp = true;
 		public ExImp(boolean b){
 			super("Im/Ex");
@@ -771,27 +687,27 @@ public class JPanelMain extends JPanel implements Log, ActionListener,HyperlinkL
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			mWdiv = null;
+			A.mWdiv = null;
 		}
-	}
-	private final static int	B_WIKI=0,
+	}*/
+	private final static int	B_CONN=0,
 								B_SELF=1,
 								B_SELD=2,
 								B_HASH=3,
-								B_CONN=4,
+								B_WIKI=4,
 								B_SAVE=5,
 								B_EXPO=6,
 								B_IMPO=7,
-								S_IBAL=8;
+								S_IBAL=6;
 	private static final String
-	S_NIOE = "Login",
+	S_NIOE = "1. Login",
 	S_NIOD = "Log out",
-	S_DIOE = "Start",
+	S_DIOE = "3. Start",
 	S_DIOD = "Stop";
 	private static String getName(int code){
 		switch(code){
-		case B_SELF: return "Files...";
-		case B_SELD: return "Folders...";
+		case B_SELF: return "2. Add files...";
+		case B_SELD: return "Or folders...";
 		case B_HASH: return S_DIOE;
 		case B_CONN: return S_NIOE;
 		case B_SAVE: return "Save opt";

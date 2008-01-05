@@ -23,9 +23,15 @@
 package epox.swing;
 
 public interface Log{
-	public void println(Object o);
-	public void status0(String str);
-	public void status1(String str);
+	public final static int
+	LOG = 1,
+	MSG = 2,
+	STD = 4,
+	STN = 8,
+	SPE = 16;
+
+	public void add(int type, Object o);
+	public void add(Object o);
 }/*
 class DebugLog implements Log{
 	public void println(String str){

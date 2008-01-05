@@ -110,7 +110,7 @@ public class Parser{
 				JFileChooser fc = new JFileChooser();
 				if(A.dir!=null)
 					fc.setCurrentDirectory(new File(A.dir));
-				if(fc.showDialog(A.component, "Select File") == JFileChooser.APPROVE_OPTION){
+				if(fc.showDialog(A.container, "Select File") == JFileChooser.APPROVE_OPTION){
 					File file = fc.getSelectedFile();
 					A.dir = file.getParentFile().getAbsolutePath();
 					FileOutputStream fos = new FileOutputStream(file);
@@ -149,7 +149,7 @@ public class Parser{
 				JFileChooser fc = new JFileChooser();
 				if(A.dir!=null)
 					fc.setCurrentDirectory(new File(A.dir));
-				if(fc.showDialog(A.component, "Select File") == JFileChooser.APPROVE_OPTION){
+				if(fc.showDialog(A.container, "Select File") == JFileChooser.APPROVE_OPTION){
 					File file = fc.getSelectedFile();
 					A.dir = file.getParentFile().getAbsolutePath();
 					FileInputStream fos = new FileInputStream(file);

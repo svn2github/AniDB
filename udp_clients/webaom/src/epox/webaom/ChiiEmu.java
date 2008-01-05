@@ -32,12 +32,11 @@ public class ChiiEmu implements CommandModel{
 	protected ACon m_ac;
 	private Log m_log;
 
-	public ChiiEmu(ACon a){
+	public ChiiEmu(){
 		m_log = null;
-		m_ac = a;
 	}
 	public void handleCommand(String cmd){
-		m_ac = A.conn;
+		m_ac = A.nio.getConnection();
 		if(cmd.startsWith("!font")){
 			if(cmd.length()>6){
 				A.font = cmd.substring(6).trim();
@@ -55,8 +54,8 @@ public class ChiiEmu implements CommandModel{
 	}
 	public void println(Object o){
 		if(m_log==null) return;
-		if(o==null) m_log.println("err..");
-		else m_log.println(o.toString());
+		if(o==null) m_log.add("err..");
+		else m_log.add(o.toString());
 	}
 	private class EmuWorker extends Thread{
 		private String mScmd;

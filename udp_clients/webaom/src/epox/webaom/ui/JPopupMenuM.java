@@ -184,7 +184,7 @@ public class JPopupMenuM extends JPopupMenu implements MouseListener, ActionList
 		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		fc.setMultiSelectionEnabled(false);
 		if(dir!=null) fc.setCurrentDirectory(new java.io.File(dir));
-		int option = fc.showDialog(A.component, "Select Directory");
+		int option = fc.showDialog(A.container, "Select Directory");
 		if(option == JFileChooser.APPROVE_OPTION){
 			dir = fc.getSelectedFile().getAbsolutePath();
 			return dir;

@@ -47,7 +47,7 @@ public class JTableJobs extends JTableSortable implements DropTargetListener, Ke
 				pop.stop();
 			}
 		});
-		addKeyListener(new KeyAdapterJob(this, jlm));
+		addKeyListener(new KeyAdapterJob(this, jlm, null));
 
 		new DropTarget( this, this );
 		addKeyListener(this);
@@ -145,7 +145,7 @@ public class JTableJobs extends JTableSortable implements DropTargetListener, Ke
 				List l = (List)t.getTransferData(DataFlavor.javaFileListFlavor);
 				File f[] = (File[])l.toArray();
 				Arrays.sort(f);
-				A.gui.select(f);
+				A.select(f);
 				return true;
 			}catch(Exception e){
 				e.printStackTrace();

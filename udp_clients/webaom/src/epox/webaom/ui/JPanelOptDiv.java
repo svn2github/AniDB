@@ -94,7 +94,7 @@ public class JPanelOptDiv extends JPanel{
 		add("Browser Path", tfBrows, cs);
 		add("My Database", tfMyDBs, cs);
 		add("Log File", tfLogfl, cs);
-		add("LookAndFeel", new JComboBoxLF(A.component), cs);
+		add("LookAndFeel", new JComboBoxLF(A.container), cs);
 
 		cs.gridwidth = 1;
 

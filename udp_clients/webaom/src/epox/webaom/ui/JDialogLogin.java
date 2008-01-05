@@ -125,7 +125,7 @@ public class JDialogLogin extends JDialog implements ActionListener{
 			ok.setText("Username too long - OK");
 		else if(!U.alfanum(usrt))
 			ok.setText("Only letters and digits - OK");
-		else if(pswt.length()<4)
+		else if(A.up.ses==null && pswt.length()<4)
 			ok.setText("Password too short - OK");
 		//else if(pswt.indexOf('&')>=0||pswt.indexOf('=')>=0)
 		//	ok.setText("Password cannot include '&' or '='.");
@@ -140,7 +140,7 @@ public class JDialogLogin extends JDialog implements ActionListener{
 	public UserPass getPass(){
 		setVisible(true);
 		if(success)
-			return new UserPass(usrt,pswt,keyt);
+			return new UserPass(usrt,pswt,keyt,A.up.ses);
 		return null;
 	}
 }

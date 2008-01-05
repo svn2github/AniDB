@@ -171,8 +171,8 @@ public class DB{
 			ResultSet rs = query("select state from mylist where lid=0", silent);
 			if(rs!=null && rs.next()){ // old system
 				int v = rs.getInt(1);
-				if(v<1) _execStr(A.getFileString("db01.sql"), silent);
-				if(v<2) _execStr(A.getFileString("db02.sql"), silent);
+				if(v<1) _execStr(A.getResourceAsString("db01.sql"), silent);
+				if(v<2) _execStr(A.getResourceAsString("db02.sql"), silent);
 			}else{ // new system or none db defined
 				rs = query("select ver from vtb;", silent);
 				if(rs!=null && rs.next()){
@@ -180,20 +180,20 @@ public class DB{
 					if(v<4)
 						if(!A.confirm("Warning", "The database definition has to be upgraded.\nThis will make it uncompatible with previous versions of WebAOM.\nDo you want to continue? (Backup now, if needed.)","Yes","No"))
 							return false;
-					if(v<1) _execStr(A.getFileString("db03.sql"), silent);
-					if(v<2) _execStr(A.getFileString("db04.sql"), silent);
-					if(v<3) _execStr(A.getFileString("db05.sql"), silent);
-					if(v<4) _execStr(A.getFileString("db06.sql"), silent);
+					if(v<1) _execStr(A.getResourceAsString("db03.sql"), silent);
+					if(v<2) _execStr(A.getResourceAsString("db04.sql"), silent);
+					if(v<3) _execStr(A.getResourceAsString("db05.sql"), silent);
+					if(v<4) _execStr(A.getResourceAsString("db06.sql"), silent);
 					if(v<5){
-						if(mBpgre) _execStr(A.getFileString("db07a.sql"), silent);
-						else _execStr(A.getFileString("db07b.sql"), silent);
+						if(mBpgre) _execStr(A.getResourceAsString("db07a.sql"), silent);
+						else _execStr(A.getResourceAsString("db07b.sql"), silent);
 					}
 					if(v<6){
-						if(mBpgre) _execStr(A.getFileString("db08a.sql"), silent);
-						else _execStr(A.getFileString("db08b.sql"), silent);
+						if(mBpgre) _execStr(A.getResourceAsString("db08a.sql"), silent);
+						else _execStr(A.getResourceAsString("db08b.sql"), silent);
 					}
 				}else{
-					String s = A.getFileString("db00.sql");
+					String s = A.getResourceAsString("db00.sql");
 					if(!mBpgre)
 						s = U.replace(s,"serial","integer NOT NULL auto_increment");
 					_execStr(s, silent);

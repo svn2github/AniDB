@@ -24,7 +24,12 @@ package epox.webaom;
 
 import java.io.File;
 
+import epox.swing.Log;
+import epox.util.Hyper;
+import epox.util.U;
+
 public class JobMan{
+	public static Log log;
 	public static void setPath(Job job, String path, boolean parent){
 		synchronized(job){
 			if(job.check(Job.S_DOING)) return;
@@ -177,7 +182,7 @@ public class JobMan{
 	public static boolean updatePath(Job job){
 		if(job.incompl()){
 			job.setError("Extensive fileinfo not available.");
-			A.gui.println(job.m_fc+" cannot be renamed: Extensive fileinfo not available.");
+			log.add(job.m_fc+" cannot be renamed: Extensive fileinfo not available.");
 			return false;
 		}
 		return updatePath(job, A.rules.apply(job));
@@ -198,25 +203,25 @@ public class JobMan{
 //SOURCE FILE HEALTHY?
 		if(!job.m_fc.exists()){
 			job.setError("File does not exist.");
-			A.gui.println(sf0+" cannot be moved. File not found.");
+			log.add(sf0+" cannot be moved. File not found.");
 			return false;
 		}
 //DESTINATION FILE HEALTHY?
 		if(normal && f.exists()){
 			if(job.m_fc.length()==f.length()){ //could be the same
 				job.m_fn = f;
-				A.gui.println(sf0+" will be moved to "+sf1+" later.");
+				log.add(sf0+" will be moved to "+sf1+" later.");
 				return true;
 			}
 			job.setError("File cannot be moved. Destination file already exists!");
-			A.gui.println(sf0+" cannot be moved to "+sf1+": Destination file already exists!");
+			log.add(sf0+" cannot be moved to "+sf1+": Destination file already exists!");
 			return false;
 		}
 //DESTINATION FOLDER OK?
 		File parent = f.getParentFile();
 		if(!parent.exists() && !parent.mkdirs()){
 			job.setError("Folder "+parent+" cannot be created!");
-			A.gui.println("Folder "+parent+" cannot be created!");
+			log.add("Folder "+parent+" cannot be created!");
 			return false;
 		}
 		A.jobs.addPath(f);
@@ -229,27 +234,27 @@ public class JobMan{
 			if(p0.charAt(0)==p1.charAt(0)){
 				if(job.m_fc.renameTo(f)){
 					moveSub(job.m_fc, f);
-					A.deleteFile(job.m_fc.getParentFile(), sok);
+					U.deleteFile(job.m_fc.getParentFile(), sok);
 					JobMan.setJobFile(job, f);
-					A.gui.println("Renamed "+sf0+" to "+sf1);
+					log.add("Renamed "+sf0+" to "+sf1);
 					return true;
 				}
-				A.gui.println(Hyper.error("Renaming failed!")+" ("+sf0+" to "+sf1+")");
+				log.add(Hyper.error("Renaming failed!")+" ("+sf0+" to "+sf1+")");
 				return false;
 			}
 			job.m_fn = f;
-			A.gui.println(sf0+" will be moved to "+sf1+" later.");
+			log.add(sf0+" will be moved to "+sf1+" later.");
 			return true;
 		}
 //TRY TO MOVE: *NIX
 		if(job.m_fc.renameTo(f)){ //linux can't rename over partitions
-			A.deleteFile(job.m_fc.getParentFile(), sok);
+			U.deleteFile(job.m_fc.getParentFile(), sok);
 			JobMan.setJobFile(job, f);
-			A.gui.println("Renamed"+sf0+" to "+sf1);
+			log.add("Renamed"+sf0+" to "+sf1);
 			return true;
 		}
 		job.m_fn = f;
-		A.gui.println(sf0+" will be moved to "+sf1+" later.");
+		log.add(sf0+" will be moved to "+sf1+" later.");
 		return true;
 //THE END
 	}
@@ -261,8 +266,8 @@ public class JobMan{
 		}else j.m_fc = f;
 	}
 	public static void showInfo(Job job){
-		//A.dialog2(job.m_fc.getName(), job.convert(U.fileToString("d:\\java\\webaom\\src\\file.htm")));
-		A.dialog2(job.m_fc.getName(), job.convert(A.fschema));
+		//new epox.webaom.ui.JFrameHtml((job.m_fc.getName(), job.convert(U.fileToString("d:\\java\\webaom\\src\\file.htm")));
+		new epox.webaom.ui.JFrameHtml(job.m_fc.getName(), job.convert(A.fschema));
 	}
 	private static void moveSub(File a, File b){
 		moveSub(a,b,"srt");

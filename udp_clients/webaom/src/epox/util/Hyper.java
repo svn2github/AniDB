@@ -20,9 +20,11 @@
  * @version 	02 (1.09,1.06)
  * @author 		epoximator
  */
-package epox.webaom;
+package epox.util;
 
 import java.util.StringTokenizer;
+
+import epox.webaom.Options;
 
 public class Hyper{
 

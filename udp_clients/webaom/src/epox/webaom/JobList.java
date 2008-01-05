@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import epox.util.LinkedHash;
+import epox.util.U;
 import epox.webaom.ui.TableModelJobs;
 
 public class JobList{
@@ -102,7 +103,8 @@ public class JobList{
 		jlm.insertJob(m_al.size()-1);
 	}
 	public synchronized Job add(File f){
-		if(m_hs.add(f)){//TODO if update then check against existing files
+		if(m_hs.add(f)){
+			//TODO if update then check against existing files
 			Job j = new Job(f, Job.HASHWAIT);
 			int status = A.db.getJob(j, false);
 			if(status>=0&&j.m_fa!=null){
@@ -169,13 +171,13 @@ public class JobList{
 	private void updateHashSets(Job j, int status, boolean add){
 		if(status<0) return;
 		int type = -1;
-		if(A.bitcmp(status,Job.S_DO)||A.bitcmp(status,Job.S_DOING)){
-			if(A.bitcmp(status,Job.D_DIO))
+		if(U.bitcmp(status,Job.S_DO)||U.bitcmp(status,Job.S_DOING)){
+			if(U.bitcmp(status,Job.D_DIO))
 				type = DIO;
-			else if(A.bitcmp(status,Job.D_NIO))
+			else if(U.bitcmp(status,Job.D_NIO))
 				type = NIO;
 			else return;
-		} else if(A.bitcmp(status,Job.FAILED)||A.bitcmp(status,Job.UNKNOWN))
+		} else if(U.bitcmp(status,Job.FAILED)||U.bitcmp(status,Job.UNKNOWN))
 			type = I_ERR;
 		else return;
 		if(add) m_lh[type].addLast(j);

@@ -23,6 +23,8 @@
 
 package epox.webaom;
 
+import epox.util.U;
+
 public class JobCnt{
 	private int mItot = 0;
 	private final int mIcnt[] = new int[I_LEN];
@@ -48,14 +50,14 @@ public class JobCnt{
 			return;
 		}
 		int type = I_HLT;
-		if(A.bitcmp(health,Job.H_NORMAL)&&(A.bitcmp(status,Job.S_DO)||A.bitcmp(status,Job.S_DOING))){
-			if(A.bitcmp(status,Job.D_DIO))
+		if(U.bitcmp(health,Job.H_NORMAL)&&(U.bitcmp(status,Job.S_DO)||U.bitcmp(status,Job.S_DOING))){
+			if(U.bitcmp(status,Job.D_DIO))
 				type = I_DIO;
-			else if(A.bitcmp(status,Job.D_NIO))
+			else if(U.bitcmp(status,Job.D_NIO))
 				type = I_NIO;
-		} else if(A.bitcmp(health,Job.H_NORMAL)&&A.bitcmp(status,Job.FINISHED))
+		} else if(U.bitcmp(health,Job.H_NORMAL)&&U.bitcmp(status,Job.FINISHED))
 			type = I_FIN;
-		else if(A.bitcmp(status,Job.FAILED)||A.bitcmp(status,Job.UNKNOWN))
+		else if(U.bitcmp(status,Job.FAILED)||U.bitcmp(status,Job.UNKNOWN))
 			type = I_ERR;
 		if(inc) mIcnt[type]++;
 		else mIcnt[type]--;
