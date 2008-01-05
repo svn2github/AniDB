@@ -28,6 +28,7 @@ body,
 	background-repeat: no-repeat;
 	background-position: center;
 	text-indent: -5000px;
+	line-height: 1;
 }
 
 .i_logout

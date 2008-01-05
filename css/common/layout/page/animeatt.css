@@ -2,9 +2,9 @@
 {
 	clear: right;	
 }
-#layout-content div.animeatt_reviews div.review+div.review
+#layout-content div.animeatt_reviews div.review
 {
-	padding-top: 4em;
+	padding-top: 3em;
 }
 #layout-content div.animeatt_reviews div.review div.head,
 #layout-content div.animeatt_reviews div.review div.avatar,

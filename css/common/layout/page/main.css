@@ -20,7 +20,7 @@
 	margin-left: 0;
 }
 
-#layout-content div.main_all > div.news
+#layout-content div.main_all div.news
 {
 	clear: none;
 	margin-right: 20em;

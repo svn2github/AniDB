@@ -118,7 +118,7 @@ body.nonav
 }
 #layout-menu form
 {
-	margin-top: 16px;
+	margin-top: 12px;
 }
 #layout-menu form input.text
 {
@@ -144,6 +144,11 @@ body.nonav
 	background: transparent url(../icons/button_logon.gif) no-repeat top;
 	border: 0;
 	content: "";
+}
+
+#layout-menu div.usermenu span.login
+{
+	margin-top: -6px;
 }
 
 #layout-menu div.usermenu a.i_signup
@@ -182,12 +187,11 @@ body.nonav
 {
 	display: block;
 	float: right;
-	background: transparent url(../anidbstyle/images/searchback.png) no-repeat 0px 77px;
+	background: transparent url(../anidbstyle/images/searchback.png) no-repeat 0 77px;
 	padding: 70px 0 0 0;
 	margin: 0;
 	height: 64px;
-	width: 15.2em;
-	max-width: 152px;
+	width: 152px;
 }
 
 #layout-search div.search form p

@@ -10,9 +10,17 @@
 	vertical-align: middle;
 	padding-right: 1em;
 }
-#layout-content div.block + div.desc
+#layout-content div.desc
 {
 	margin-top: 1em;
 	margin-left: 2em;
 	margin-right: 2em;
+}
+#layout-content div.block div.image
+{
+	-float: left;
+}
+#layout-content div.desc
+{
+	-clear: left;
 }

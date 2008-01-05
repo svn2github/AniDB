@@ -11,7 +11,7 @@ body.nonav #layout-footer
 	width: 100%;
 }
 
-#layout-nav ul+ul
+#layout-nav ul
 {
 	margin-top: 2px;
 }
@@ -123,7 +123,6 @@ body.nonav #layout-content h1
 	width: 98%;
 }
 
-/* Tooltip support */
 #obj-tooltip {
 	position: absolute;
 	left: 0px;
@@ -143,4 +142,14 @@ body.nonav #layout-content h1
   height: 13px;
 	z-index: 101;
 	visibility: hidden;
+}
+
+#layout-hint
+{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	border: 1px solid #AFAF00;
+	background-color: #FFFFDF;
+	text-align: center;
 }
