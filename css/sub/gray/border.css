@@ -48,3 +48,8 @@ img, a
 {
 	border: 3px solid #969aa6;
 }
+
+#layout-content div.g_content
+{
+	border-top: 2px groove #BFC2CA;
+}

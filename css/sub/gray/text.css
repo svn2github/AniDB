@@ -38,3 +38,8 @@
 {
 	content: ")";
 }
+
+#layout-footer:after
+{
+	content: "design by akujiN"
+}
