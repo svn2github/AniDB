@@ -28,7 +28,6 @@ body,
 	background-repeat: no-repeat;
 	background-position: center;
 	text-indent: -5000px;
-	line-height: 1;
 }
 
 .i_logout
@@ -44,6 +43,14 @@ body,
 *.i_signup
 {
 	background-image: url(../icons/button_signup.gif);
+}
+
+
+#layout-content div.main_all h4,
+#layout-content div.main_edit h4
+{
+	background-color: #494D59;
+	color: #bbbbbb;
 }
 
 #layout-content div.main_all div.rightbar
@@ -105,6 +112,7 @@ body,
 
 #layout-content div.main_all div.news div.newsitem span.stamp
 {
+	background-color: #969aa6;
 	padding: 0.1em 1em 0.1em 0.1em;
 }
 

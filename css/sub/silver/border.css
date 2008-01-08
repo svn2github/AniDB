@@ -40,7 +40,7 @@ ul,
 #layout-content div.g_definitionlist table,
 #layout-content div.latestanimes_form,
 #layout-content div.addepm div.ep,
-#layout-content div.desc,
+#layout-content div.block + div.desc,
 #layout-content div.block div.image img,
 #layout-content div.avatar img
 {
@@ -63,7 +63,7 @@ ul,
 	padding: 1px;
 }
 
-#layout-content .block .g_definitionlist table
+#layout-content .block .g_definitionlist > table
 {
 	border: none;
 	margin: 0;

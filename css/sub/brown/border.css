@@ -37,7 +37,7 @@ img, a
 #layout-content *.g_image image,
 #layout-content div.g_timedentry,
 #layout-content div.g_definitionlist table,
-#layout-content div.desc
+#layout-content div.block + div.desc
 {
 	border: 1px #999380 dotted;
 }
@@ -54,7 +54,7 @@ img, a
 	padding: 1px;
 }
 
-#layout-content .block .g_definitionlist table
+#layout-content .block .g_definitionlist > table
 {
 	border: none;
 	margin: 0;

@@ -54,7 +54,7 @@ th,
 #layout-content tr.g_odd,
 #layout-content li.g_odd,
 #layout-content span.g_odd,
-#layout-content div.desc
+#layout-content div.block + div.desc
 {
 	background-color: #e0dbc9;
 }

@@ -67,7 +67,7 @@
 
 #layout-content div.userpage_all div.charts
 {
-	width: 700px;
+	width: 710px;
 	height: 600px;
 	margin-left:auto;
 	margin-right:auto;	
@@ -80,7 +80,7 @@
 
 #layout-content div.userpage_all div.charts div.votedistribution
 {
-	padding-left: 50px; /*margin doesn't work for ie6, should be ok w/o borders*/
+	margin-left: 50px;
 }
 
 #layout-content div.userpage_all div.userdetails p

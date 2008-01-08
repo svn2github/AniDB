@@ -19,7 +19,7 @@ img, a
 	padding: 1px;
 }
 
-#layout-content .block .g_definitionlist table
+#layout-content .block .g_definitionlist > table
 {
 	border: none;
 	margin: 0;
@@ -47,9 +47,4 @@ img, a
 #layout-content div.profile_all div.g_section
 {
 	border: 3px solid #969aa6;
-}
-
-#layout-content div.g_content
-{
-	border-top: 2px groove #BFC2CA;
 }

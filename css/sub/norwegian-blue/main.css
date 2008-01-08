@@ -12,12 +12,6 @@
 	position: fixed;
 }
 
-#layout-content
-{
-	-position: absolute;
-	-top: 0;
-}
-
 #layout-menu div+div
 {
 	margin-top: 1em;
@@ -39,7 +33,7 @@
 {
 	padding-left: 1em;
 }
-#layout-menu ul
+#layout-menu ul + ul
 {
 	margin-top: 1em;
 }

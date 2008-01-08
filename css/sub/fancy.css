@@ -4,7 +4,7 @@
 	display: block;
 	height: 100px;
 	width: 100px;
-	margin: 1.2em auto -0.5em auto;
+	margin: 0.5em auto 0.5em auto;
 	border: 1px #98AAB1 solid;
 	content:"";
 }
@@ -19,7 +19,7 @@
 	position: absolute;
 	left: 0;
 	width: 150px;
-	top: 0;
+	top: 110px;
 	text-align: center;
 }
 
@@ -62,9 +62,4 @@
 #layout-content div.g_timedentry h4 span.id
 {
 	display: none;
-}
-
-#layout-content td.all_watched
-{
-	text-decoration: line-through;
 }

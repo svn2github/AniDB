@@ -1,8 +1,8 @@
-*
+html, th, div
 {
-	font-size: 9pt;
 	font-weight: normal;
-	font-family: Verdana, Tahoma, Helvetica, Arial, sans-serif;
+	font-size: 10px;
+	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
 }
 
 a, del, ins
@@ -10,11 +10,11 @@ a, del, ins
 	text-decoration: none;
 }
 
-th, td.action, td.date, td.year,
-#layout-content div.anime_all div.g_section.mylist td.title
+th, td.action
 {
 	white-space: nowrap;
 }
+
 
 /** ALIGNMENT **/
 td.id, td.count, td.number, td.size, td.epno, td.duration
@@ -72,7 +72,7 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	line-height: 1.1;
 }
 
-#layout-menu div ul li a
+#layout-menu > div > ul > li > a
 {
 	display: block;
 	width: 104%;
@@ -94,18 +94,8 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 }
 
 /** SHIT **/
-#layout-content h1
-{
-font-size: 200%;
-font-weight: bold;
-}
 
-#layout-content h1 a
-{
-font-size: 100%;
-}
-
-#layout-content table caption, h4
+table caption, h4
 {
 	font-size: 115%;
 	font-weight: bold;
@@ -123,6 +113,7 @@ font-size: 100%;
 	content: "N/A";
 }
 
+/*#layout-content div.mylist_all tr.all_watched td.stats,*/
 #layout-content div.mylist_list tr.complete td.stats,
 #layout-content div.mylist_list tr.all_watched td.stats,
 #layout-content div.anime_all div.groups td.lastupdate.new,
@@ -182,6 +173,7 @@ font-size: 100%;
 #layout-menu a.history:after
 {
 	content: "!";
+	/*color: #FFFFFF;*/
 	padding: 0.2em;
 }
 

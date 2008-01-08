@@ -4,7 +4,7 @@
 	margin-bottom: 1em;
 }
 
-#layout-content div.g_menu ul
+#layout-content div.g_menu ul + ul
 {
 	margin-top: 2px;
 }
@@ -30,9 +30,4 @@
 #layout-content div.g_menu ul.state + ul
 {
 	clear: left;
-}
-
-#layout-content div.g_menu.mylist_menu
-{
-	width: 10em; /*IE*/
 }
