@@ -138,7 +138,8 @@ div.grouplist_list th.rating {
 
 th.c_set, 
 th.c_setlatin, 
-th.c_date, 
+th.c_date,
+th.c_number, 
 th.c_latin {
 	cursor: pointer;
 	background-image: url(images/buttons/updown.gif);
@@ -149,7 +150,8 @@ th.c_latin {
 th.c_set:hover, 
 th.c_setlatin:hover, 
 th.c_date:hover,
- th.c_latin:hover {
+th.c_number:hover,
+th.c_latin:hover {
 	background-color: #353A8F
 }
 th.s_forward, th.s_reverse {
