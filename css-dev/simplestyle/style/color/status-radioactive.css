@@ -1,0 +1,26 @@
+#layout-content td del,
+#layout-content tr.g_fs_lame,
+#layout-content table.filelist tr.invalid,
+#layout-content div.myvotes_all table tr.low td
+{
+	background-color: #bf6269;
+}
+
+#layout-content td ins,
+#layout-content table.filelist tr.good,
+#layout-content div.myvotes_all table tr.high td,
+#layout-content div.producer_all table tr.mylist
+{
+	background-color: #46C5FF;
+         color: #FFFFFF;
+}
+
+#layout-content table.filelist tr.deprecated
+{
+	background-color: #999999;
+}
+
+#layout-content div.anime_all div.episodes tr.generic td
+{
+	background-color: #eeeeee;
+}

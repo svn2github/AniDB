@@ -1,0 +1,23 @@
+#layout-content div.latestanimes_anime h3
+{
+	margin: 0.5em 0 0.5em 17.3em;
+	font-size: 100%;
+	font-weight: inherit;
+}
+
+#layout-content div.latestanimes_anime h3 a
+{
+	font-size: 120%;
+	font-weight: bolder;
+}
+
+#layout-content div.latestanimes_anime th:after
+{
+	content: ":";
+}
+
+
+#layout-content div.latestanimes_footer 
+{
+	text-align: center;
+}

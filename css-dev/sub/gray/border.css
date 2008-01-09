@@ -1,0 +1,50 @@
+table
+{
+	border-collapse: separate;
+}
+
+table table
+{
+	border: none;
+}
+
+img, a
+{
+	border: none;
+}
+
+#layout-content .g_image image,
+#layout-content .g_definitionlist
+{
+	padding: 1px;
+}
+
+#layout-content .block .g_definitionlist > table
+{
+	border: none;
+	margin: 0;
+}
+
+#layout-content div.avatar img,
+#layout-content div.anime_all div.info div.image img
+{
+	border: 1px solid;
+	border-color: #717377 #E8E9EC #E8E9EC #717377;
+	padding: 1px;
+}
+
+#layout-content div.anime_all div.episodes tr.heading th
+{
+	padding: 4px 1px 7px 1px;
+	border-bottom: black 2px solid;
+}
+
+#layout-content div.anime_all div.episodes tr.newtype td
+{
+	border-top: black 2px solid;
+}
+
+#layout-content div.profile_all div.g_section
+{
+	border: 3px solid #969aa6;
+}

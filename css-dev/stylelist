@@ -1,0 +1,21 @@
+./anidbstyle/anidbstyle.css
+./anidbstyle_hacks/anidbstyle_hacks.css
+./anidbstyle-dongato/anidbstyle-dongato.css
+./dark-style/dark-style.css
+./grey/grey.css
+./haruhistylex/haruhistylex.css
+./haruhistylex-v2/haruhistylex-v2.css
+./harustyle/harustyle.css
+./harustylele/harustylele.css
+./harustyle-fixed_menu/harustyle-fixed_menu.css
+./luckystyle/luckystyle.css
+./sub/blue/main.css
+./sub/brown/main.css
+./sub/brown2/main.css
+#./sub/dragon/main.css
+#./sub/gray/main.css #it's the same as the default style aka anidbstyle.css
+./sub/norwegian-blue/main.css
+./sub/silver/main.css
+./simplestyle/simplestyle.css
+./zakura/zakura.css
+./zakura-fixed_menu/zakura-fixed_menu.css

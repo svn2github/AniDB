@@ -1,0 +1,47 @@
+#layout-content div.animeatt_reviews div.review
+{
+	clear: right;	
+}
+#layout-content div.animeatt_reviews div.review+div.review
+{
+	padding-top: 4em;
+}
+#layout-content div.animeatt_reviews div.review div.head,
+#layout-content div.animeatt_reviews div.review div.avatar,
+#layout-content div.animeatt_reviews div.review div.menu
+{
+	float: right;
+	clear: right;
+	width: 10em;
+	padding-right: 2em;
+}
+#layout-content div.animeatt_reviews div.review div.avatar
+{
+	margin-top: -2em;
+}
+#layout-content div.animeatt_reviews div.review div.head table,
+#layout-content div.animeatt_reviews div.review div.avatar,
+#layout-content div.animeatt_reviews div.review div.menu
+{
+	width: 10em;
+}
+#layout-content div.animeatt_reviews div.review div.body
+{
+	text-align: left;
+	padding-right: 14em;
+	padding-left: 8em;
+}
+#layout-content div.animeatt_reviews div.review div.head table td.value
+{
+	text-align: right;
+}
+
+#layout-content div.animeatt_comment
+{
+	text-align: left;	
+}
+#layout-content div.animeatt_comment textarea
+{
+	width: 96%;
+	height: 10em;
+}

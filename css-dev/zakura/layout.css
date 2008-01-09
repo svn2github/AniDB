@@ -1,0 +1,328 @@
+/*---------------------------------
+				@LAYOUT
+	- main nav		- structure
+	- user login	- quick search
+----------------------------------*/
+
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}
+
+/* container - main nav, login, & search */
+div#layout-nav {
+	padding-top: 160px;
+	background: #fff url(images/layout/bg-header.gif) repeat-x left top;
+	min-width: 784px;
+}
+
+/* container - main nav links & login */
+div#layout-menu {
+	position: relative;
+}
+
+/* container - main nav links */
+div#layout-menu div.menu {
+	padding: 1em;
+	position: absolute;
+	top: -8px;
+	left: 0;
+	width: 9em;
+}
+
+/* main nav link lists */
+div#layout-menu div.menu ul {
+	background: #fff;
+	border: 1px solid #f3e7ff;
+	border-bottom-color: #dec9f2;
+	border-right-color: #dec9f2;
+	margin-bottom: 1em;
+}
+div#layout-menu div.menu ul li {
+	border-bottom: 1px solid #ffecf5;
+}
+div#layout-menu div.menu ul li:last-child {
+	border-bottom: none;
+}
+div#layout-menu div.menu a, 
+div#layout-menu div.menu a:link, 
+div#layout-menu div.menu a:visited {
+	text-decoration: none;
+	text-transform: capitalize;
+	color: #7c87d8;
+	padding: 0.2em 0.7em;
+	display: block;
+	font-size: 0.95em;
+}
+div#layout-menu div.menu a:hover, 
+div#layout-menu div.menu a:active {
+	background: transparent url(images/layout/stripe-pink.gif) repeat left top;
+	color: #484b9a;
+}
+
+/* my nav */
+div#layout-menu div.menu ul.my {
+	background-color: #7c87d8;
+	border: 1px solid #6470c3;
+	border-bottom-color: #434fa2;
+	border-right-color: #434fa2;
+}
+div#layout-menu div.menu ul.my li {
+	border-bottom-color: #6470c3; 
+}
+div#layout-menu div.menu ul.my a, 
+div#layout-menu div.menu ul.my a:link, 
+div#layout-menu div.menu ul.my a:visited {
+	color: #fff;
+}
+div#layout-menu div.menu ul.my a:hover, 
+div#layout-menu div.menu ul.my a:active {
+	color: #ffd2fe;
+	background: transparent url(images/layout/stripe-dkblue.gif) repeat left top;
+}
+
+/* mylistreport */
+div#layout-menu div.menu ul.mod {
+	background-color: #382ec0;
+	border: 1px solid #20179d;
+	border-bottom-color: #1c1386;
+	border-right-color: #1c1386;
+}
+div#layout-menu div.menu ul.mod li {
+	border-bottom-color: #291fad; 
+}
+div#layout-menu div.menu ul.mod a, 
+div#layout-menu div.menu ul.mod a:link, 
+div#layout-menu div.menu ul.mod a:visited {
+	color: #c9dcfb;
+}
+div#layout-menu div.menu ul.mod a:hover, 
+div#layout-menu div.menu ul.mod a:active {
+	color: #d3e4ff;
+	background: #1c1386;
+}
+
+/* help link */
+div#layout-menu div.menu ul.other li.help {
+	background: transparent url(images/buttons/help-static.png) no-repeat 0.7em center;
+}
+div#layout-menu div.menu ul.other li.help a {
+	padding-left: 26px;
+}
+
+/* container - login */
+div#layout-menu div.usermenu {
+	position: absolute;
+	top: -160px;
+	right: 1em;
+	height: 102px;
+	z-index: 1;
+}
+
+/* logged in */
+div#layout-menu div.usermenu p {
+	position: relative;
+	float: left;
+	margin: 0;
+}
+div#layout-menu div.usermenu p a,
+div#layout-menu div.usermenu p.user {
+	padding: 78px 0.4em 0;
+	height: 24px;
+	display: block;
+	float: left;
+	text-decoration: none;
+	text-transform: capitalize;
+}
+div#layout-menu div.usermenu p.user {
+	font-weight: bold;
+	text-transform: none;
+}
+div#layout-menu div.usermenu a#newnotifies, 
+div#layout-menu div.usermenu a#newnotifies:link, 
+div#layout-menu div.usermenu a#newnotifies:visited {
+	color: #fd0576;
+	font-weight: bold;
+	margin-left: 0.5em;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
+	border-left: 1px solid #e7c7d5;
+}
+div#layout-menu div.usermenu a#newnotifies:hover, 
+div#layout-menu div.usermenu a#newnotifies:active {
+	color: #ff00c6;
+	background: transparent url(images/layout/stripe-white.png) repeat left top;
+}
+div#layout-menu div.usermenu a.history, 
+div#layout-menu div.usermenu a.history:link, 
+div#layout-menu div.usermenu a.history:visited {
+	color: #ed95bd;
+	border: 0;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
+}
+div#layout-menu div.usermenu a.history:hover, 
+div#layout-menu div.usermenu a.history:active {
+	color: #fd0576;
+}
+div#layout-menu div.usermenu a.i_button, 
+div#layout-menu div.usermenu a.i_button:link, 
+div#layout-menu div.usermenu a.i_button:visited {
+	text-decoration: none;
+	color: #be518c;
+	background: transparent url(images/layout/trans-pink.png) repeat left top;
+	border-left: 1px solid #e7c7d5;
+	font-weight: bold;
+}
+div#layout-menu div.usermenu a.i_button:hover, 
+div#layout-menu div.usermenu a.i_button:active {
+	background: transparent url(images/layout/stripe-pink.png) repeat left top;
+	color: #a93373;
+}
+div#layout-menu div.usermenu a.i_logout, 
+div#layout-menu div.usermenu a.i_logout:link, 
+div#layout-menu div.usermenu a.i_logout:visited {
+	background: transparent url(images/layout/trans-blue.png) repeat left top;
+	border-right: 1px solid #e7c7d5;
+	color: #4a63e1;
+} 
+div#layout-menu div.usermenu a.i_logout:hover, 
+div#layout-menu div.usermenu a.i_logout:active {
+	background: transparent url(images/layout/stripe-blue.png) repeat left top;
+	color: #2d42af;
+}
+
+/* login form - not logged in */
+div#layout-menu div.usermenu span.login+a+form {
+	background-color: #F7EDF1;
+	width: 100%;
+	padding-top: 35px;
+	height: 40px;
+	width: 280px;
+	padding-left: 20px;
+}
+div#layout-menu div.usermenu span.login+a+form input.text {
+	width: 131px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+div#layout-menu div.usermenu span.login+a+form input.text+input.text {
+	margin-left: 2px;
+}
+div#layout-menu div.usermenu span.login {
+	text-transform: capitalize;
+	position: absolute;
+	left: 20px;
+	top: 15px;
+}
+div#layout-menu div.usermenu span.login a,
+div#layout-menu div.usermenu span.login a:link,
+div#layout-menu div.usermenu span.login a:visited {
+	color: #ed95bd;
+	text-decoration: none;
+}
+div#layout-menu div.usermenu span.login a:hover,
+div#layout-menu div.usermenu span.login a:active {
+	color: #fd0576;
+}
+div#layout-menu div.usermenu input.logon,
+div#layout-menu div.usermenu a.i_signup,
+div#layout-menu div.usermenu label.remember {
+	position: absolute;
+	right: 0;
+	bottom: 1em;
+	width: 4.5em;
+	height: 1.8em;
+}
+div#layout-menu div.usermenu a.i_signup {
+	top: 15px;
+	border-left: 0 !important;
+	background: none !important;
+	text-transform: capitalize;
+	padding: 0;
+}
+div#layout-menu div.usermenu label.remember {
+	right: 6.5em;
+	width: 13em;
+	text-align: right;
+}
+
+/* container - search */
+div#layout-search {
+	position: absolute;
+	top: 0;
+	background: transparent url(images/layout/bg-login.png) no-repeat right top;
+	padding-top: 103px;
+	right: 1em;
+	width: 30em;
+	text-align: right;
+	z-index: 0;
+}
+
+/* search - form */
+div#layout-search input.text {
+	border: 1px solid #eed0da;
+	padding: 0.3em 0.3em 0 0.3em;
+	height: 1.5em;
+	width: 16em;
+	color: #1e2495;
+}
+div#layout-search input.text:hover {
+	border: 1px solid #dc9abf
+}
+div#layout-search input.submit {
+	height: 1.8em;
+	padding-bottom: 0.2em;
+	margin-bottom: 0.1em;
+	width: 4.5em;
+}
+div#layout-search input.submit:hover {
+	background: #2d42af;
+}
+
+/* container - content */
+div#layout-content {
+	clear: both;
+	background: transparent url(images/layout/header.jpg) no-repeat left top;
+	margin-top: -160px;
+	padding: 160px 1em 0 11em;
+}
+
+/* container - footer */
+div#layout-footer {
+	background: #f8f7ff url(images/layout/bg-content.gif) repeat left top;
+}
+div#layout-footer p {
+	font-size: 0.8em;
+	text-align: center;
+	color: #85809f;
+	margin: 0;
+	padding: 2em 0;
+}
+div#layout-footer p:after {
+	content: ". Design by zakness.";
+}
+
+/* content links */
+.g_content a, 
+.g_content a:link {
+	color: #154ef4;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+.g_content a:visited {
+	color: #7264a6;
+}
+.g_content a:hover, 
+.g_content a:active {
+	color: #4876fe;
+	border-bottom: 1px dotted #4876fe;
+}
+
+/* no nav (popups) */
+body.nonav div#layout-content {
+	margin: 0 1em 1em 1em;
+	padding: 0;
+	background: transparent;	
+}
+body.nonav form textarea {
+	width: 99%;
+}

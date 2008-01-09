@@ -1,0 +1,35 @@
+#layout-content td del,
+#layout-content tr.g_fs_lame,
+#layout-content table.filelist tr.invalid,
+/*#layout-content table.filelist tr.deprecated,*/
+#layout-content div.myvotes_all table tr.low td
+{
+	background-color: #ffd7c2;
+}
+
+#layout-content div.myvotes_all table tr.g_odd.low td
+{
+	background-color: #FF0000;
+         color: #FFFFFF;
+}
+
+#layout-content td ins,
+#layout-content table.filelist tr.good,
+#layout-content div.myvotes_all table tr.high td,
+#layout-content div.producer_all table tr.mylist,
+#layout-content div.animelist_all table tr.mylist,
+#layout-content div.group_released table tr.mylist
+{
+	background-color: #46C5FF;
+         color: #FFFFFF;
+}
+
+#layout-content table.filelist tr.g_odd.good,
+#layout-content div.myvotes_all table tr.g_odd.high td,
+#layout-content div.producer_all table tr.g_odd.mylist,
+#layout-content div.animelist_all table tr.g_odd.mylist,
+#layout-content div.group_released table tr.g_odd.mylist
+{
+	background-color: #46C5FF;
+         color: #FFFFFF;
+}

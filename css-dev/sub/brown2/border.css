@@ -1,0 +1,56 @@
+table
+{
+	border-collapse: separate;
+}
+
+table table
+{
+	border: none;
+}
+
+img, a
+{
+	border: none;
+}
+
+#layout-content *.g_jumplist,
+#layout-content *.g_description,
+#layout-content *.g_image image,
+#layout-content div.main_all div.news h4,
+#layout-content div.g_definitionlist table
+{
+	border: 1px #98AAB1 dotted;
+}
+
+#layout-content .g_image image,
+#layout-content .g_definitionlist
+{
+	padding: 1px;
+}
+
+#layout-content .block .g_definitionlist > table
+{
+	border: none;
+	margin: 0;
+}
+
+#layout-content div.anime_all div.episodes tr.newtype td
+{
+	border-top: 2px #006699 double;
+}
+
+#layout-content div.anime_all div.episodes tr.heading th
+{
+	padding: 4px 1px 7px 1px;
+	border-bottom: black 2px solid;
+}
+
+#layout-content div.anime_all div.episodes tr.newtype td
+{
+	border-top: black 2px solid;
+}
+
+#layout-content div.avatar img
+{
+	border: 1px solid #cbd6e5;
+}

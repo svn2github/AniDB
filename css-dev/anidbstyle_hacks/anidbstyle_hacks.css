@@ -1,0 +1,139 @@
+/* Creation: 21th January 2007 by Amour */
+/* Last update: 10th June 2007 by Amour */
+@import "../anidbstyle/anidbstyle.css";
+
+/* *** */
+/* News: IE6 only compatibility... */
+/* *** */
+#layout-content div.main_all div.rightbar
+{
+	-clear: both;
+	-float: right;
+	-margin: 0.3em;
+	-padding: 0em;
+	-width: 20%;
+}
+
+#layout-content div.main_all div.news
+{
+	-clear: left;
+	-float: right;
+	-margin: 0.3em;
+	-padding: 0em;
+	-width: 80%;
+}
+
+/* *** */
+/* News: fix to latest additions display */
+/* Unfortunatly, it brokes Firefox */
+/* *** */
+/*
+#layout-content div.main_all div.rightbar li a
+{
+	float: left;
+	margin: 0em;
+	width: 11.4em;
+}
+*/
+/* *** */
+
+/* *** */
+/* Calendar: fix to titles size */
+/* *** */
+#layout-content div.latestanimes_anime h3
+{
+	font-size: 12px;
+}
+
+/* *** */
+/* Anime List: the year value should display on one line only */
+/* MyDbEntries: the date value should display on one line only */
+/* *** */
+#layout-content td.year,
+#layout-content td.date
+{
+	white-space: nowrap;
+}
+
+/* *** */
+/* Anime: workaround to image/definition position */
+/* *** */
+#layout-content div.info div.image
+{
+	float: left;
+	padding-bottom: 0px;
+	height: auto;
+	width: auto;
+}
+
+/* *** */
+/* Anime: fix to description position */
+/* *** */
+#layout-content div.info p.desc
+{
+	clear: both;
+}
+
+/* *** */
+/* Profile: workaround to image/definition position */
+/* *** */
+#layout-content div.profile_css div.block div.image
+{
+	clear: both;
+	float: left;
+	padding: 0px;
+	height: auto;
+	width: 40%;
+}
+
+#layout-content div.profile_css div.block div.info
+{
+	clear: none;
+	float: left;
+	padding: 0px;
+	height: auto;
+	width: 60%;
+}
+
+/* *** */
+/* MyList: fix to page width */
+/* *** */
+#layout-content ul.g_jumplist
+{
+	width: auto;
+}
+
+#layout-content ul.g_actionlist li,
+#layout-content ul.g_jumplist li
+{
+	font-style: normal;
+}
+
+/* *** */
+/* MyList & MyPlace: fix to menu */
+/* *** */
+html #layout-content div.g_menu
+{
+	float: right;
+	height: auto;
+	width: auto;
+}
+
+/* *** */
+/* MyPlace: fix to overlap content */
+/* *** */
+#layout-content div.stats,
+#layout-content div.latest
+{
+	clear: none;
+}
+
+/* *** */
+/* Mass add files: fix to dump size */
+/* *** */
+#layout-content div.addfilem.form div.dump textarea
+{
+	width: 90%;
+	height: 15em;
+	white-space: pre;
+}

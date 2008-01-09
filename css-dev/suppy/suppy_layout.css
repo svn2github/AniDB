@@ -1,0 +1,311 @@
+#layout-nav
+{
+  display: block;
+  height: 16em;
+}
+
+#layout-menu
+{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#layout-nav .usermenu
+{
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  border: 0px;
+  width: 10em;
+}
+#layout-nav .usermenu:before
+{
+  font-size: 3em;
+  content: "AniDB";
+}
+.usermenu > #newnotifies
+{
+  display: list-item;
+  position: absolute;
+  top: 3.5em;
+  left: 20em;
+  color: red;
+  white-space: nowrap;
+}
+.usermenu > #newnotifies + .history
+{
+  position: absolute;
+  top: 3.5em;
+  left: 26em;
+  color: red;
+}
+.usermenu > #newmessages
+{
+  display: list-item;
+  position: absolute;
+  top: 3.5em;
+  left: 30em;
+  color: red;
+  white-space: nowrap;
+}
+.usermenu > .login
+{
+  display: block;
+  position: relative;
+}
+.usermenu > .user
+{
+  display: block;
+  position: absolute;
+  white-space: nowrap;
+  top: 3.6em;
+  left: 4.5em;
+}
+.usermenu > .i_profile, .usermenu > .i_logout
+{
+  margin-top: 1px;
+}
+.usermenu > input[name="xuser"], .usermenu > input[name="xpass"]
+{
+  display: block;
+  position: relative;
+  width: 9.3em;
+  border: 1px solid;
+  margin-top: 1px;
+  font-size: 1em;
+  font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+  clear: both;
+}
+.usermenu > .logon
+{
+  display: block;
+  position: relative;
+  width: 42px;
+  height: 12px;
+  padding-top: 12px;
+  padding-left: 0px;
+  padding-right: 0px;
+  overflow: hidden;
+  float: left;
+  margin-right: 5px;
+  margin-top: 1px;
+  background: transparent url(../icon/button_logon.gif) no-repeat top;
+  border: 0px;
+  content: "";
+}
+.usermenu > .i_signup
+{
+  display: block;
+  position: relative;
+  top: 0em;
+  left: 0px;
+  width: 42px;
+  height: 12px;
+  margin-top: 1px;
+}
+.usermenu > .remember
+{
+  display: block;
+  position: absolute;
+  top: 9.8em;
+  left: 0.3em;
+}
+
+#layout-search
+{
+  display: block;
+  position: relative;
+  top: 2em;
+  left: 11em;
+  width: 43em;
+}
+#layout-search p, #layout-search form
+{
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+#layout-search select.type
+{
+  position: relative;
+  float: right;
+  width: 5em;
+  border: 1px solid;
+  margin: 0 0 0 0;
+}
+#layout-search input.text
+{
+  width: 80%;
+  border: 1px solid;
+  margin: 0 0 0 0;
+  float: left;
+}
+#layout-search input.submit
+{
+  font-size: 1.2em;
+  text-transform: capitalize;
+  margin: 0 0 0 0;
+  float: right;
+}
+
+
+
+#layout-menu div.mainmenu
+{
+  display: block;
+  position: relative;
+  top: 0em;
+  left: 11em;
+  padding-bottom: 2em;
+}
+#layout-menu div.mainmenu > ul
+{
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  white-space: nowrap;
+}
+li.animelist
+{
+  display: block;
+  position: absolute;
+  top: 0.5em;
+  left: 1em;
+}
+li.grouplist
+{
+  position: absolute;
+  top: 0.5em;
+  left: 7em;
+  white-space: nowrap;
+}
+li.userlist
+{
+  position: absolute;
+  top: 0.5em;
+  left: 14em;
+  white-space: nowrap;
+}
+li.producerlist
+{
+  position: absolute;
+  top: 0.5em;
+  left: 20em;
+  white-space: nowrap;
+}
+li.genre
+{
+  position: absolute;
+  top: 0.5em;
+  left: 28.3em;
+  white-space: nowrap;
+}
+li.genren:before
+{
+  content: "(";
+}
+li.genren
+{
+  display: block;
+  position: absolute;
+  top: 0.5em;
+  left: 33.3em;
+}
+li.genren:after
+{
+  content: ")";
+}
+li.search
+{
+  position: absolute;
+  top: 0.5em;
+  left: 35.6em;
+  white-space: nowrap;
+}
+
+li.main
+{
+  display: block;
+  position: absolute;
+  top: 5.8em;
+  left: 0.3em;
+}
+li.report
+{
+  position: absolute;
+  top: 5.8em;
+  left: 3.7em;
+}
+li.latest
+{
+  position: absolute;
+  top: 5.8em;
+  left: 13.8em;
+}
+li.latestreviews
+{
+  position: absolute;
+  top: 5.8em;
+  left: 24.2em;
+}
+li.latestanimes
+{
+  position: absolute;
+  top: 5.8em;
+  left: 33.6em;
+}
+
+li.help
+{
+  display: block;
+  position: absolute;
+  top: 7em;
+  left: 10em;
+}
+li.forum
+{
+  position: absolute;
+  top: 7em;
+  left: 17.7em;
+}
+li.reclinks
+{
+  position: absolute;
+  top: 7em;
+  left: 26.8em;
+}
+
+li.mylist, li.myplace, li.ed2kwatch, li.ed2kdump, li.mymessages, li.mynotifies, li.mywishlist,
+li.myvotes, li.myreviews, li.mydbentries, li.mycreqs, li.up2date
+{
+  display: block;
+  position: relative;
+  left: 44.5em;
+  top: 1em;
+  width: 1em;
+  white-space: nowrap;
+
+}
+
+#layout-content > h1
+{
+  display: block;
+  width: 100%;
+  background-color: #e5ecf9;
+  border-top: 1px solid blue;
+
+}
+
+#layout-footer
+{
+	text-align: center;
+}
+
+#layout-footer p
+{
+	margin-bottom: 0;
+}
+
+#layout-footer:after
+{
+	content: "design by hrm"
+}

@@ -1,0 +1,69 @@
+#layout-content div.g_errorbox
+{
+	border-left: 3px solid #FF0000;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+	background-color: #FFFFFF;
+}
+#layout-content div.g_warnbox
+{
+	border-left: 3px solid #FF9E2C;;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
+         color: #FF9E2C;
+}
+#layout-content div.g_warnbox p
+{
+         color: #FF9E2C;
+}
+#layout-content div.g_sucessbox p
+{
+	color: #9CCD17;
+}
+#layout-content div.g_notebox
+{
+	border-left: 3px solid #46C5FF;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
+         color: #46C5FF;
+}
+#layout-content div.g_note
+{
+	border-left: 3px solid #46C5FF;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
+         color: #46C5FF;
+}
+#layout-content div.g_successbox
+{
+	border-left: 3px solid #9CCD17;
+         border-top:0;
+         border-right:0;
+         border-bottom:0;
+         background-color: #FFFFFF;
+         color: #9CCD17;
+}
+
+#layout-content div.g_errorbox h3
+{
+	color: #FF0000;
+}
+#layout-content div.g_warnbox h3
+{
+	color: #FF9E2C;
+}
+#layout-content div.g_notebox h3
+{
+         color: #46C5FF;
+}
+#layout-content div.g_successbox h3
+{
+	color: #9CCD17;
+}

@@ -1,0 +1,35 @@
+/*---------------------------------
+			@MYNOTIFIES
+----------------------------------*/
+
+div.mynotifies_all caption {
+	display: none;
+}
+div.mynotifies_all div.list table,
+div.mynotifies_all div.mynotifies_history table,
+div.mynotifies_all div.action {
+	width: 100%;
+}
+div.mynotifies_all div.select_all table,
+div.mynotifies_all div.action table {
+	border: 0;
+}
+div.mynotifies_all div.select_all table tr,
+div.mynotifies_all div.action table tr {
+	background: transparent;
+}
+div.mynotifies_all div.select_all table td,
+div.mynotifies_all div.action table td {
+	border: 0;
+}
+div.mynotifies_all div.action {
+	padding-top: 1em;
+	background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+	border: 1px solid #E1D9F5;
+}
+
+
+div.mynotifies_list td.type.group		{color: #2618b1;}
+div.mynotifies_list td.type.complete	{color: #179023;}
+div.mynotifies_list td.type.all			{font-weight: bold;}
+div.mynotifies_list td.type.new			{color: #fd0576;}

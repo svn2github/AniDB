@@ -1,0 +1,32 @@
+
+/*---------------------------------
+			@REVIEWERLIST
+----------------------------------*/
+
+div.reviewerlist_all div table {
+	width: 100%;
+}
+div.reviewerlist_all h4 {
+	text-align: center;
+}
+div.reviewerlist_add table {
+	border:1px solid #E1D9F5;
+}
+div.reviewerlist_add table td.action  {
+	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+	text-align: center;
+	padding: 0.5em;
+}
+div.reviewerlist_all div.latest_reviews_list td.rating.review {
+	color: #8f95ae;
+}
+div.reviewerlist_all div.latest_reviews_list td.rating.review span.vote {
+	color: #a1be2e;
+}
+div.reviewerlist_all div.latest_reviews_list td.rating.review span.vote.high {
+	color: #5dac3b;
+	font-weight: bold;
+}
+div.reviewerlist_all div.latest_reviews_list td.rating.review span.vote.low {
+	color: #e33e23;
+}

@@ -1,0 +1,76 @@
+td
+{
+	/*border-top: 1px #FFFFFF solid;*/
+}
+
+table
+{
+	border: 1px solid #66604d;
+	border-spacing: 0;
+}
+
+table.filelist tr.newep td{
+	border-top: 1px solid #e9e6d9;
+}
+
+table table,
+#layout-content div.profile_all table
+{
+	border: none;
+}
+
+img, a
+{
+	border: none;
+}
+
+/*ul,*/
+#layout-nav,
+#layout-footer,
+#layout-content
+{
+	border: 1px #867f6a solid;
+}
+
+#layout-content *.g_jumplist,
+#layout-content *.g_description,
+#layout-content *.g_image image,
+#layout-content div.g_timedentry,
+#layout-content div.g_definitionlist table,
+#layout-content div.block + div.desc
+{
+	border: 1px #999380 dotted;
+}
+
+#layout-content h1,
+#layout-content div.g_timedentry h4
+{
+	border: 1px #867f6a dotted;
+}
+
+#layout-content .g_image image,
+#layout-content .g_definitionlist
+{
+	padding: 1px;
+}
+
+#layout-content .block .g_definitionlist > table
+{
+	border: none;
+	margin: 0;
+}
+
+#layout-content div.anime_all div.episodes tr.newtype td
+{
+	border-top: 1px #66604d double;
+}
+
+#layout-content div.profile_all div.g_section
+{
+	border: 3px solid #8c8673;
+}
+
+#layout-content div.avatar img
+{
+	border: 1px solid #8c8673;
+}

@@ -1,0 +1,124 @@
+body/*,
+#layout-content div.g_definitionlist table*/
+{
+	border-color: #cccccc;
+	background-color: #cccccc;
+	
+	font: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, Arial, sans-serif;
+}
+
+a:link,a:active,a:visited
+{
+	color : #006699;
+}
+
+
+#layout-nav a
+{
+	color: #000000;
+}
+
+a:hover,
+#layout-nav a:hover
+{
+	/*color : #98b974;*/
+}
+
+#layout-nav
+{
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+#layout-content ul.g_jumplist,
+#layout-nav div.menu
+{
+	color: #FFFFFF;
+}
+
+#layout-content div.g_menu a,
+#layout-content ul.g_jumplist a,
+/*#layout-content tr,
+#layout-content li,
+#layout-content tr a,
+#layout-content li a,*/
+#layout-nav div.menu a
+{
+	color: #FFFFFF;
+}
+
+/*#layout-content tr,
+#layout-content li,*/
+#layout-content div.g_menu ul,
+#layout-nav div.menu ul.my
+{
+	background-color: #1188dd;
+}
+
+#layout-content ul.g_jumplist,
+#layout-nav div.menu ul.lists
+{
+	background-color: #99cc00;
+}
+
+#layout-nav div.menu ul.other
+{
+	background-color: #dd88cc;
+}
+
+#layout-nav div.menu ul.main,
+#layout-nav div.menu ul.mod
+{
+	background-color: #bb66aa;
+}
+
+#layout-content,
+#layout-footer
+{
+	color: #00000000;
+	background-color: #FFFFFF;
+}
+
+th,
+#layout-content h1,
+#layout-content div.main_all div.news h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+	color: #FFFFFF;
+	background-color: #114477;
+}
+
+/*ul,
+#layout-content tr,
+#layout-content ul.g_jumplist,
+#layout-content *.g_filterlist,
+#layout-content *.g_actionlist,
+#layout-content *.g_description
+{
+	background-color: #bac5d4;
+}*/
+
+/*#layout-nav li:hover
+{
+  background: #bac5d4;
+}*/
+
+
+#layout-content tr.g_odd,
+#layout-content li.g_odd
+{
+	/*background-color: #99cc00;*/
+}
+
+#layout-content table table.filelist tr,
+#layout-content div.g_definitionlist tr
+{
+	background-color: inherit;
+}
+
+#layout-content div.g_definitionlist tr th
+{
+	color: inherit;
+	background-image: none;
+	background-color: inherit;
+}

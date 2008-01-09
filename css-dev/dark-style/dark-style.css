@@ -1,0 +1,2272 @@
+* {
+	margin:					0;
+	padding:				0;
+	border:					0;
+}
+html {
+	height:					100%;
+	font-weight:				normal;
+	font-size:				10px;
+	line-height:				1.2;
+	font-family:				Arial, Helvetica, Verdana, Tahoma, sans-serif;
+	color:					#ccc;
+	background-color:			#000;
+}
+body {
+	height:					100%;
+}
+
+a {
+	color:					#fff;
+	text-decoration:			none;
+}
+a:hover {
+	color:					#c9f;
+}
+.g_actionlist a,
+.g_jumplist a,
+.latestanimes_form a,
+.g_vital a,
+.news a {
+	color:					#E6D4B5;
+}
+.g_actionlist a:hover,
+.g_jumplist a:hover,
+.latestanimes_form a:hover,
+.g_vital a:hover,
+.news a:hover {
+	color:					#fff;
+}
+a img {
+	border:					0;
+}
+
+h1 {
+	text-align:				center;
+	font-size:				18px;
+	color:					#666;
+	margin-top:				200px;
+}
+.nonav h1 {
+	margin-top:				20px;
+}
+h2, h3 {
+	text-align:				center;
+	font-size:				12px;
+	color:					#fff;
+	margin:					30px 0 0 0;
+}
+h4 {
+	font-size:				10px;
+	padding:				3px 0 3px 18px;
+	color:					#fff;
+	background:				url(images/h4.gif) left top no-repeat;
+	margin:					10px 0 0 0;
+}
+
+table caption {
+	margin:					20px auto 0 auto;
+	text-align:				left;
+	font-size:				10px;
+	padding:				3px 0 3px 18px;
+	color:					#fff;
+	background:				url(images/h4.gif) left top no-repeat;
+	color:					
+}
+
+
+/*														  forms */
+
+input, select, textarea {
+	font-family:				Arial, Helvetica, Verdana, Tahoma, sans-serif;
+	font-size:				10px;
+	color:					#fff;
+	background-color:			#000;
+	border:					#666 1px solid;
+}
+input[type="submit"] {
+	font-family:				Arial, Helvetica, Verdana, Tahoma, sans-serif;
+	font-size:				10px;
+	color:					#fff;
+	background-color:			#333;
+	border:					none;
+	padding:				1px;
+	cursor:					pointer;
+}
+.g_odd input[type="submit"] {
+	background-color:			#000;
+}
+input[type="submit"]:hover {
+	color:					#c9f;
+}
+fieldset {
+	display:				none;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------MENU */
+
+#layout-nav {
+	position:				fixed;
+	left:					50%;
+	width:					0px;
+	overflow:				visible;
+}
+#layout-menu {
+	position:				relative;
+	left:					-478px;
+	height:					200px;
+	width:					955px;
+	margin:					0 auto;
+	background:				url(images/dark.gif) 1px top no-repeat;
+	overflow:				visible;
+}
+#layout-menu ul {
+	display:				block;
+	width:					150px;
+	float:					left;
+}
+ul.main {
+	position:				relative;
+	top:					115px;
+	left:					215px;
+}
+ul.main a {
+	color:					#000;
+	background-color:			#fff;
+}
+ul.main a:hover {
+	color:					#c9f;
+}
+ul.my {
+	position:				relative;
+	top:					5px;
+	left:					20px;
+}
+ul.mod {
+	position:				relative;
+	top:					5px;
+	left:					230px;
+}
+ul.mod li {
+	background-color:			transparent;
+}
+ul.lists {
+	position:				relative;
+	top:					60px;
+	left:					320px;
+}
+ul.lists a {
+	color:					#E6D4B5;
+}
+ul.lists a:hover {
+	color:					#fff;
+}
+ul.other {
+	position:				relative;
+	top:					15px;
+	left:					-20px;
+}
+ul.other a {
+	color:					#000;
+	background-color:			#fff;
+}
+ul.other a:hover {
+	color:					#c9f;
+}
+
+/*													      user-menu */
+
+#layout-menu div.usermenu {
+	float:					right;
+}
+#layout-menu div.usermenu p {
+	text-align:				right;
+	margin:					10px;
+}
+#layout-menu div.usermenu p a.i_button {
+	text-align:				left;
+}
+
+/*														 search */
+
+#layout-search {
+	position:				relative;
+	top:					-60px;
+	left:					260px;
+	width:					210px;
+	float:					left;
+}
+#layout-search div.search form {
+	display:				block;
+	float:					right;
+}
+#layout-search form input.text {
+	width:					140px;
+	float:					left;
+}
+
+#layout-search form input.submit {
+	text-indent:				-5000px;
+	display:				block;
+	float:					right;
+	background:				url(images/button_search.gif) no-repeat top;
+	border:					none;
+	width:					50px;
+	height:					14px;
+	overflow:				hidden;
+	content:				"";
+	margin:					0 3px;
+	cursor:					pointer;
+}
+#layout-search form input.submit:hover {
+	background:				url(images/button_search_over.gif) no-repeat top;
+}
+
+/*--------------------------------------------------------------------------------------------------------------CONTENT */
+
+#layout-content {
+	border-left:				1px solid #fff;
+	border-right:				1px solid #fff;
+	width:					955px;
+	min-height:				100%;
+	margin:					0 auto;
+	overflow:				hidden;
+}
+body.nonav div#layout-content {
+	border:					none;
+	width:					100%;
+	min-height:				100%;
+	margin:					0;
+}
+.g_content {
+	margin:					20px;
+}
+.g_section {
+	width:					100%;
+	margin:					0 auto;
+	clear:					both;
+}
+.g_end {
+	height:					20px;
+	border-top:				1px solid #333;
+	margin:					20px;
+	clear:					both;
+}
+.g_info,
+.g_actionlist,
+.g_filterlist,
+.g_notebox,
+.g_successbox,
+.g_warnbox {
+	text-align:				center;
+}
+
+/*												                  icons */
+
+*.i_icon {
+	display:				block;
+	width:					15px;
+	height:					13px;
+	background-repeat:			no-repeat;
+	background-position:			center;
+	text-indent:				-5000px;
+	margin-left:				2px;
+	margin-right:				2px;
+	float:					right;
+}
+div.icons {
+	float:					right;
+}
+div.icons .i_icon {
+	float:					left;
+}
+*.i_inline {
+	padding:				7px 10px 6px 10px;
+	background-repeat:			no-repeat;
+	background-position:			center;
+}
+*.i_button {
+	display:				block;
+	width:					42px;
+	height:					12px;
+	float:					left;
+	margin-right:				4px;
+	background-repeat:			no-repeat;
+	background-position:			center;
+	text-indent:				-5000px;
+}
+
+/*												       v-lists & tables */
+
+ul, ol {
+	margin:					0;
+	padding:				0;
+	text-indent:				0;
+	list-style:				none outside;
+}
+li {
+	margin:					0;
+	padding:				1px;
+	text-indent:				0;
+	list-style:				none outside;
+}
+
+dt {
+	margin:					0 0 -17px 0;
+	padding:				5px 0;
+}
+dt:after {
+	content: 				": ";
+}
+dd {
+	margin:					0 0 0 90px;
+	padding:				0;
+}
+
+.g_odd {
+	background-color:			#333;
+}
+ul.g_actionlist .g_odd,
+ul.g_jumplist .g_odd,
+ul.g_navlist .g_odd,
+div.mylist_menu .g_odd,
+ul.state .g_odd {
+	background-color:			transparent;
+}
+/*
+span.i_icon {
+	float:					left;
+	padding-right:				3px;
+}*/
+
+table {
+	border-spacing:				0;
+	margin:					0 auto;
+	width:					600px;
+}
+.nonav table,
+.nonav table caption {
+	width:					100%;
+	margin:					0;
+}
+td {
+	border-left:				1px solid #000;
+	padding:				1px 3px;
+}
+th {
+	vertical-align:				top;
+}
+tr.newtype td {
+	padding-top:				0;
+	border-top:				1px dashed #666;
+}
+tr.episode:hover td,
+tr.file:hover td,
+tr.anime:hover td,
+tr.files:hover td {
+	padding-top:				0;
+	padding-bottom:				0;					
+	border-top:				1px solid #666;
+	border-bottom:				1px solid #666;
+}
+
+div.data th,
+div.addgenren_all div.add th {
+	text-align:				left;
+	width:					100px;
+}
+div.data td {
+	text-align:				left;
+}
+tr.action,
+td.action,
+tr.action td {
+	text-align:				center;
+}
+
+
+/*														h-lists */
+
+ul.g_actionlist {
+	margin:					20px 0;
+}
+ul.g_actionlist li {
+	display:				inline;
+	font-style:				italic;
+	margin-left:				0;
+	margin-right:				0;
+	padding-left:				0;
+	padding-right:				0;
+}
+ul.g_actionlist li a {
+	display:				inline;
+	font-style:				normal;
+}
+ul.g_actionlist li+li:before {
+	content:				" - ";
+}
+
+ul.g_jumplist {
+	padding-left:				0;
+	padding-top:				2px;
+	padding-bottom:				2px;
+	text-align:				center;
+}
+ul.g_jumplist li {
+	display:				inline;
+	font-style:				italic;
+	margin-left:				0;
+	margin-right:				0;
+	padding-left:				5px;
+	padding-right:				5px;
+	background:				url("images/jumplist.gif") left bottom no-repeat;
+}
+ul.g_jumplist li:hover {
+	background-image:			url("images/jumplist_over.gif");
+}
+ul.g_jumplist li a {
+	display:				inline;
+	font-style:				normal;
+	margin-left:				-10px;
+	margin-right:				-10px;
+	padding-left:				10px;
+	padding-right:				10px;
+}
+ul.g_jumplist li.all,
+ul.g_jumplist li.other,
+ul.g_jumplist li.prev,
+ul.g_jumplist li.next {
+	background:				none;
+}
+ul.g_jumplist li.prev {
+	float:					left;
+}
+ul.g_jumplist li.next {
+	float:					right;
+}
+ul.g_jumplist li.all:before {
+	font-style:				normal;
+	content:				"Jump to: ";
+}
+
+ul.g_navlist,
+div.mylist_menu ul,
+div.messages ul {
+	margin:					5px auto;
+	clear:					both;
+	text-align:				center;
+}
+ul.g_navlist li,
+div.mylist_menu ul li,
+div.messages ul li {
+	display:				inline;
+}
+ul.g_navlist li a,
+div.mylist_menu ul li a,
+div.messages ul li a {
+	padding:				0 3px;
+}
+
+div.g_menu ul.state {
+	width:					180px;
+	height:					15px;
+	margin:					0 auto;
+}
+div.g_menu ul.state li {
+	float:					left;
+}
+div.g_menu ul.state span.i_icon {
+	float:					left;
+	padding-right:				3px;
+}
+
+a.g_navprev {
+	float:					left;
+}
+a.g_navnext {
+	float:					right;
+}
+
+/*-----------------------------------------------------------------------------------------------------------ANIME INFO */
+
+div.anime_all div.image {
+	width:					350px;
+	float:					left;
+	text-align:				center;
+	background-color:			#333;
+}
+div.anime_all div.image img {
+	max-width:				350px;
+}
+div.anime_all div.data {
+	width:					550px;
+	float:					right;
+}
+div.anime_all div.data table {
+	width:					100%;
+}
+div.anime_all div.desc {
+	width:					550px;
+	float:					right;
+	text-align:				justify;
+}
+
+div.anime_all div.awards {
+	text-align:				center;
+	padding:				10px 0;
+}
+div.anime_all div.awards a img {
+	margin:					5px 1px;
+}
+
+div.anime_all div.mylist table,
+div.anime_all div.mylist_add table {
+	width:					300px;
+}
+div.anime_all div.mylist td {
+	background-color:			#333;
+}
+
+div.anime_all table.grouplist,
+div.anime_all table.eplist {
+	width:					100%;
+}
+div.anime_all table.filelist {
+	width:					877px;
+	margin-left:				33px;
+}
+
+div.anime_all div.episodes td.action,
+div.anime_all div.episodes td.codec {
+	width:					40px;
+}
+div.anime_all div.mylist td.state,
+div.anime_all div.groups td.expand,
+div.anime_all div.groups td.note,
+div.anime_all div.groups td.epno,
+div.anime_all div.groups td.specials,
+div.anime_all div.groups td.cmts,
+div.anime_all div.episodes td.expand,
+div.anime_all div.episodes td.id,
+div.anime_all div.episodes td.duration,
+div.anime_all div.episodes td.files {
+	width:					30px;
+	text-align:				center;
+}
+div.anime_all div.groups td.name,
+div.anime_all div.groups td.state,
+div.anime_all div.groups td.date,
+div.anime_all div.groups td.rating,
+div.anime_all div.groups td.action,
+div.anime_all div.episodes td.date,
+div.anime_all div.episodes td.epusers,
+div.anime_all div.episodes td.size,
+div.anime_all div.episodes td.resolution,
+div.anime_all div.episodes td.source,
+div.anime_all div.episodes td.hash,
+div.anime_all div.episodes td.users,
+div.anime_all div.episodes td.mylist,
+div.anime_all div.episodes td.file,
+div.anime_all table.filelist td.title {
+	width:					70px;
+	text-align:				center;
+}
+div.anime_all div.groups td.eps {
+	width:					200px;
+	text-align:				center;
+}
+div.anime_all div.groups td.action a.i_icon,
+div.anime_all div.episodes td.file a.i_icon {
+	margin:					0 3px;
+}
+div.anime_all div.episodes td.quality {
+	width:					40px;
+	text-align:				center;
+}
+div.anime_all div.episodes td.quality span.i_icon {
+	float:					left;
+}
+div.anime_all *.i_vrs_1,
+div.anime_all *.i_vrs_2,
+div.anime_all *.i_vrs_3,
+div.anime_all *.i_vrs_4,
+div.anime_all *.i_vrs_5,
+div.anime_all *.i_censored,
+div.anime_all *.i_uncensored,
+div.anime_all *.i_new_icon,
+div.anime_all *.i_comment {
+	margin-left:				-15px;
+}
+div.anime_all *.i_vrs_1,
+div.anime_all *.i_vrs_2,
+div.anime_all *.i_vrs_3,
+div.anime_all *.i_vrs_4,
+div.anime_all *.i_vrs_5 {
+	position:				relative;
+	right:					110px;
+}
+div.anime_all *.i_new_icon {
+	position:				relative;
+	right:					127px;
+}
+
+/*														reviews */
+
+div.animeatt_all div.animeatt_header table {
+	width:					auto;
+	margin:					0;
+}
+div.animeatt_all div.animeatt_header table table {
+	width:					auto;
+	margin:					0 5px;
+}
+div.animeatt_all div.animeatt_header big {
+	font-weight:				bold;
+	font-size:				18px;
+	color:					#fff;
+	width:					145px;
+	display:				block;
+	text-align:				right;
+}
+div.animeatt_all div.review {
+	width:					100%;
+	clear:					both;
+	margin:					20px 0 20px 0;
+	overflow:				auto;
+}
+div.animeatt_all h2 {
+	text-align:				left;
+	margin-left:				170px;
+	color:					#000;
+}
+div.animeatt_all h2 span.approval {
+	float:					right;
+	margin-top:				-13px;
+	color:					#ccc;
+}
+div.animeatt_all span.stamp,
+div.animeatt_all div.g_definitionlist,
+div.animeatt_all div.g_definitionlist table,
+div.animeatt_all div.head,
+div.animeatt_all div.menu {
+	width:					150px;
+	float:					left;
+	clear:					left;
+}
+
+div.animeatt_all span.stamp {
+	margin-top:				-13px;
+}
+div.animeatt_all div.body {
+	width:					750px;
+	text-align:				justify;
+	float:					right;
+	margin:					-120px 0 10px 0;
+}
+
+/*														  votes */
+
+div.animevotes_all table {
+	width:					100%;
+}
+div.animevotes_all table td {
+	text-align:				left;
+}
+div.animevotes_all table table {
+	width:					300px;
+}
+div.animevotes_all table table.vote_graph {
+	width:					500px;
+}
+
+/*													      relations */
+
+div.rel_all div.animerel {
+	overflow-x:				scroll;
+}
+div.rel_all div.animerel img {
+	display:				block;
+	border:					none;
+	background-color:			#7A799A;
+}
+
+/*													     categories */
+
+div.addgenren_list td.id,
+div.addgenren_list td.weight {
+	width:					30px;
+	text-align:				center;
+}
+div.addgenren_list td.action,
+div.addgenren_form td.weight,
+div.addgenren_form td.check {
+	width:					70px;
+	text-align:				center;
+}
+div.addgenren_all table {
+	width:					600px;
+}
+div.addgenren_all table td.action {
+	width:					175px;
+}
+
+/*														history */
+
+div.animehist_all td.eps,
+div.animehist_all td.files,
+div.animehist_all td.groups {
+	width:					30px;
+	text-align:				center;
+}
+div.animehist_all td.users,
+div.animehist_all td.review {
+	width:					70px;
+	text-align:				center;
+}
+div.animehist_all td.anime,
+div.animehist_all td.tmpanime {
+	width:					100px;
+	text-align:				center;
+}
+div.animehist_all div.users,
+div.animehist_all div.files {
+	width:					600px;
+	margin:					15px auto;
+}
+
+/*												     mass add to mylist */
+
+div.maddtomylist_all div.maddtomylist {
+	width:					300px;
+	margin:					0 auto;
+}
+
+/*										    add... title / relations / producer */
+
+div.addseq_all table {
+	width:					100%;
+}
+div.addanimetitle_all td.id,
+div.addaproducer_all td.id {
+	width:					40px;
+	text-align:				center;
+}
+div.addanimetitle_all td.date,
+div.addseq_all td.date,
+div.addaproducer_all td.date {
+	width:					70px;
+	text-align:				center;
+}
+div.addanimetitle_all td.action {
+	width:					100px;
+	text-align:				center;
+}
+div.addseq_all td.action,
+div.addaproducer_all td.action {
+	width:					175px;
+	text-align:				center;
+}
+
+div.addanimetitle_all form,
+div.addaproducer_all form {
+	width:					600px;
+	margin:					0 auto;
+}
+
+/*									    add anime / report this entry / add episode */
+
+div.addanime_all textarea,
+div.creq_all textarea,
+div.addep_all textarea,
+div.creq_entry_hist table {
+	width:					100%;
+}
+div.creq_all p {
+	text-align:				center;
+}
+
+/*											       EPISODE INFO / FILE INFO */
+
+div.ep_all div.info table,
+div.ep_all div.ep_vote form {
+	width:					300px;
+	margin:					0 auto;
+}
+div.ep_all table,
+div.file_all table {
+	width:					100%;
+}
+div.file_all div.file_relations {
+	width:					300px;
+	margin:					0 auto;
+}
+
+div.ep_all td.title,
+div.ep_all td.size,
+div.ep_all td.resolution,
+div.ep_all td.source,
+div.ep_all td.hash,
+div.ep_all td.users,
+div.ep_all td.mylist,
+div.ep_all td.file,
+div.file_all td.size,
+div.file_all td.type,
+div.file_all td[class="text language"],
+div.file_all td.channels,
+div.file_all td.action {
+	width:					70px;
+	text-align:				center;
+}
+div.ep_all td.id,
+div.ep_all td.ed2k,
+div.file_all div.file_tracks td.id,
+div.file_all td.ar,
+div.file_all td[class="icon language"],
+div.file_all td.epno {
+	width:					30px;
+	text-align:				center;
+}
+div.ep_all td.codec,
+div.ep_all td.quality {
+	width:					40px;
+	text-align:				center;
+}
+div.file_all td.codec {
+	width:					100px;
+	text-align:				center;
+}
+div.file_all td.flags {
+	width:					175px;
+	text-align:				center;
+}
+div.ep_all td.quality span.i_icon {
+	float:					left;
+}
+
+/*												       producer / group */
+
+div.producer_all div.block,
+div.group_all div.block {
+	text-align:				center;
+}
+div.producer_all div.producer_info table,
+div.group_all div.group_info table,
+div.group_all div.group_vote {
+	width:					600px;
+	margin:					0 auto;
+}
+div.producer_all div.producer_related_anime table,
+div.group_all div.group_released table {
+	width:					100%;
+}
+
+div.producer_all td.eps,
+div.group_all td.eps,
+div.group_all td.last_ep {
+	width:					30px;
+	text-align:				center;
+}
+div.producer_all td.date,
+div.producer_all td.type,
+div.group_all td.releases,
+div.group_all td.state,
+div.group_all td.rating,
+div.group_all td.update,
+div.group_all td.date {
+	width:					70px;
+	text-align:				center;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------MAIN */
+
+div.main_all div.rightbar {
+	width:					300px;
+	margin:					-50px 0 0 10px;
+	float:					right;
+}
+div.main_all div.rightbar p {
+	text-align:				center;
+}
+
+div.main_all div.news {
+	width:					600px;
+	text-align:				justify;
+	float:					left;
+	clear:					none;
+	overflow:				hidden;
+}
+div.main_all div.news b {
+	color:					#fff;
+}
+div.main_all div.news big {
+	font-weight:				bold;
+}
+div.main_all div.news h4 {
+	float:					left;
+	width:					430px;
+}
+div.main_all div.news span.stamp {
+	color:					#999;
+	display:				block;
+	float:					right;
+	text-align:				right;
+	margin-bottom:				10px;
+	width:					150px;
+	padding:				3px 0 3px 0;
+	margin:					10px 0 10px 0;
+}
+div.main_all div.news div.body {
+	margin:					0 0 30px 0;
+	clear:					both;
+}
+
+/*														 search */
+
+div.search_all div.search_form {
+	width:					600px;
+	margin:					0 auto;
+}
+div.search_all table {
+	width:					100%;
+}
+div.search_all table tr.title td input {
+	width:					100%;
+}
+div.search_all li.collapsed ul {
+	display: 				none;
+}
+div.search_all li a.i_icon {
+	margin:					0 2px;
+	float:					left;
+}
+div.search_all li.collapsed {
+	height:					17px;
+}
+div.search_all li ul {
+	margin:					0 20px;
+}
+
+/*													       calendar */
+
+div.latestanimes_all div.latestanimes_form {
+	text-align:				center;
+}
+div.latestanimes_all div.latestanimes_anime {
+	clear:					both;
+	overflow:				auto;
+}
+div.latestanimes_all h3 {
+	margin:					10px;
+}
+div.latestanimes_all div.g_image {
+	float:					left;
+}
+div.latestanimes_all img {
+	display:				block;
+	width:					150px;
+	padding:				0;
+}
+div.latestanimes_all div.data {
+	float:					right;
+	width:					750px;
+}
+div.latestanimes_all div.data table {
+	width:					100%;
+}
+
+/*-------------------------------------------------------------------------------------------------------------MY PLACE */
+
+div.myplace_all div.g_menu {
+	width:					255px;
+	margin:					20px 0;
+	float:					left;
+}
+div.myplace_all div.stats {
+	width:					630px;
+	margin:					10px 0 -300px 0;
+	float:					right;
+	position:				relative;
+	top:					-320px;
+}
+div.myplace_all div.g_definitionlist {
+	width:					300px;
+	float:					right;
+}
+div.myplace_all div.stats_mylist,
+div.myplace_all div.stats_roles {
+	float:					left;
+}
+div.myplace_all table {
+	width:					100%;
+}
+div.myplace_all table th {
+	text-align:				left;
+	width:					50%;
+}
+div.myplace_all table td{
+	text-align:				center;
+}
+
+/*													    my messages */
+
+div.msg_all div.messages h4 {
+	visibility:				hidden;
+}
+div.msg_all td.state,
+div.msg_all td.action {
+	width:					30px;
+	text-align:				center;
+}
+div.msg_all td.date,
+div.msg_all td.from,
+div.msg_all td.type {
+	width:					30px;
+	text-align:				center;
+}
+div.msg_all div.send_form input[id="msg.title"] ,
+div.msg_all div.send_form textarea[id="msg.body"] {
+	width:					100%;
+}
+
+/*														my list */
+
+div.mylist_all table.animelist {
+	width:					100%;
+}
+div.mylist_all table.eplist {
+	margin-left:				33px;
+	width:					877px;
+}
+div.mylist_all table.filelist {
+	margin-left:				33px;
+	width:					842px;
+}
+div.mylist_all div.mylist_action {
+	margin:					20px 0;
+}
+div.mylist_all td.epno,
+div.mylist_all td.duration,
+div.mylist_all td.files,
+div.mylist_all td.mylist,
+div.mylist_all td.action {
+	width:					30px;
+	text-align:				center;
+}
+div.mylist_all td.stats,
+div.mylist_all td.rating,
+div.mylist_all td.vote,
+div.mylist_all td.date,
+div.mylist_all td.group,
+div.mylist_all td.size,
+div.mylist_all td.quality,
+div.mylist_all td.status {
+	width:					70px;
+	text-align:				center;
+}
+div.mylist_all td.id {
+	width:					40px;
+	text-align:				center;
+}
+div.mylist_all table.filelist td.ed2k + td.action {
+	width:					65px;
+	text-align:				center;
+}
+div.mylist_all td.ed2k {
+	width:					30px;
+	text-align:				center;
+}
+
+/*														  votes */
+
+div.myvotes_all td.vote,
+div.myvotes_all td.epno {
+	width:					30px;
+	text-align:				center;
+}
+div.myvotes_all td.state {
+	width:					70px;
+	text-align:				center;
+}
+div.myvotes_all td.date,
+div.myvotes_all td.action {
+	width:					100px;
+	text-align:				center;
+}
+
+/*													      reviewers */
+
+div.reviewerlist_all h4 {
+	width:					600px;
+	margin:					0 auto;
+}
+
+/*														buddies */
+
+div.buddylist_all div.buddy_wait table,
+div.buddylist_all div.buddy_add form {
+	width:					300px;
+	margin:					0 auto;
+}
+div.buddylist_all td.state {
+	width:					70px;
+	text-align:				center;
+}
+div.buddylist_all td.date {
+	width:					100px;
+	text-align:				center;
+}
+
+/*													       notifies */
+
+div.mynotifies_all td.check,
+div.mynotifies_all td.priority {
+	width:					30px;
+	text-align:				center;
+}
+div.mynotifies_all td.type,
+div.mynotifies_all td.action {
+	width:					70px;
+	text-align:				center;
+}
+div.mynotifies_all td.date {
+	width:					100px;
+	text-align:				center;
+}
+div.mynotifies_all div.action {
+	width:					300px;
+	margin:					20px auto;
+}
+
+/*													       wishlist */
+
+div.mywishlist_all table {
+	width:					auto;
+}
+div.mywishlist_all div table {
+	width:					100%;
+}
+div.mywishlist_all td.expand,
+div.mywishlist_all td.pri,
+div.mywishlist_all td.nfy,
+div.mywishlist_all td.releaseinfo,
+div.mywishlist_all td.state {
+	width:					30px;
+	text-align:				center;
+} 
+div.mywishlist_all td.mylist,
+div.mywishlist_all td.seen,
+div.mywishlist_all td.date,
+div.mywishlist_all td.rating,
+div.mywishlist_all td.tmprating,
+div.mywishlist_all td.revrating,
+div.mywishlist_all td.cmts {
+	width:					70px;
+	text-align:				center;
+}
+
+/*														   hint */
+
+div.hint2_all table {
+	width:					100%;
+}
+div.hint2_all td {
+	width:					0;
+}
+div.hint2_all th {
+	color:					#fff;
+	padding:				10px 0 5px 0;
+}
+div.hint2_all input[type="text"],
+div.hint2_all select {
+	width:					100%;
+}
+
+/*														  creqs */
+
+div.creq_all div.creq_stats table {
+	width:					300px;
+}
+div.creq_all div.creq_list_closed table {
+	width:					100%;
+}
+div.creq_all div.states {
+	width:					600px;
+	margin:					0 auto;
+}
+
+/*														up2date */
+
+div.up2date_all table.files,
+div.up2date_all table.sequels {
+	width:					100%;
+}
+div.up2date_all div.mylist_add table,
+div.up2date_all div.up2date_sequels_filter {
+	width:					300px;
+}
+div.up2date_all td.ed2k,
+div.up2date_all td.epno,
+div.up2date_all td.eps {
+	width:					30px;
+	text-align:				center;
+}
+div.up2date_all td.action,
+div.up2date_all td.date,
+div.up2date_all td.size,
+div.up2date_all td.group,
+div.up2date_all td.mylist,
+div.up2date_all td.relation,
+div.up2date_all td.year {
+	width:					70px;
+	text-align:				center;
+}
+div.up2date_all td.id {
+	width:					40px;
+	text-align:				center;
+}
+
+
+/*													      ed2k dump */
+
+div.ed2kdump_all div.ed2kdump_box,
+div.ed2kdump_all table {
+	width:					300px;
+	margin:					0 auto;
+}
+
+/*														profile */
+
+div.profile_all div.g_section {
+	width:					100%;
+	overflow:				hidden;
+	margin:					20px auto;
+	padding:				20px 0;
+	border-bottom:				1px solid #333;
+}
+div.profile_all input[type="submit"] {
+	width:					90px;
+}
+
+/* css */
+div.profile_all div.css_style h4,
+div.profile_all div.css_style form  {
+	width:					600px;
+	margin:					0 auto;
+}
+div.profile_all div.css_style a.i_help  {
+	position:				relative;
+	left:					230px;
+	top:					-14px;
+}
+div.profile_all div.css_style form {
+	text-align:				center;
+}
+div.profile_all div.css_style form input {
+	margin:					5px auto;
+}
+div.profile_all div.css_style form input#style_url {
+	width:					600px;
+}
+div.profile_all div.css_style div.image,
+div.profile_all div.css_style div.info {
+	float:					left;
+	text-align:				left;
+}
+div.profile_all div.css_style div.image {
+	width:					230px;
+}
+div.profile_all div.css_style div.info {
+	width:					370px;
+}
+
+/* general */
+div.profile_all div.general form {
+	width:					950px;
+	overflow:				auto;
+	text-align:				center;
+}
+div.profile_all div.general div {
+	min-width:				290px;
+	float:					left;
+	margin:					0 15px 0 0;
+}
+div.profile_all div.general div li {
+	padding-right:				3px;
+}
+div.profile_all div.general form input[type="submit"] {
+	float:					right;
+	margin:					40px 20px 0 0;
+}
+div.profile_all div.general form div {
+	text-align:				left;
+}
+div.profile_all div.general form div input {
+	margin:					2px 0;
+}
+
+div.profile_all div.performance h4,
+div.profile_all div.performance form  {
+	width:					290px;
+	margin:					0 auto;
+}
+div.profile_all div.performance select  {
+	margin:					0 0 5px 60px;
+}
+div.profile_all div.performance input  {
+	float:					right;
+	margin:					0 12px 0 0;
+}
+
+/* languages, passwords, permissions, notify */
+div.profile_all div.languages div,
+div.profile_all div.languages div table {
+	width:					290px;
+	float:					left;
+	margin:					0 15px 0 0;
+}
+
+div.profile_all div.passwords div.guest,
+div.profile_all div.passwords div.api,
+div.profile_all div.permissions div.detailed,
+div.profile_all div.notify div.rdf_notify {
+	width:					590px;
+	float:					left;
+}
+div.profile_all div.languages div.subtitles,
+div.profile_all div.languages div.subtitles table,
+div.profile_all div.passwords div.anidb,
+div.profile_all div.permissions div.mastermode,
+div.profile_all div.notify div.im_notify,
+div.profile_all div.passwords div.anidb table,
+div.profile_all div.permissions div.mastermode table,
+div.profile_all div.notify div.im_notify table {
+	width:					300px;
+	float:					right;
+	margin:					0;
+}
+div.profile_all div.languages div td,
+div.profile_all div.passwords div.anidb td,
+div.profile_all div.permissions div.mastermode td,
+div.profile_all div.notify div.im_notify td {
+	padding:				3px 5px;
+	width:					150px;
+	vertical-align:				top;
+}
+div.profile_all div.languages div td select,
+div.profile_all div.passwords div.anidb table input[type="text"],
+div.profile_all div.passwords div.anidb table input[type="password"],
+div.profile_all div.permissions div.mastermode table input[type="text"],
+div.profile_all div.notify div.im_notify table input[type="text"] {
+	width:					180px;
+}
+
+div.profile_all div.passwords div.guest input[type="text"],
+div.profile_all div.passwords div.api input[type="text"] {
+	width:					480px;
+	float:					left;
+}
+div.profile_all div.passwords div.guest input[type="submit"],
+div.profile_all div.passwords div.api input[type="submit"] {
+	float:					right;
+}
+div.profile_all div.passwords div.guest div.g_info p {
+	margin:					0;
+}
+
+div.profile_all div.permissions div.detailed table {
+	width:					590px;
+}
+div.profile_all div.permissions div.detailed table th {
+	text-align:				left;
+	padding:				3px;
+}
+div.profile_all div.permissions div.detailed table td {
+	text-align:				center;
+}
+
+div.profile_all td.action,
+div.profile_all div.permissions div.detailed table td.action {
+	text-align:				right;
+	padding:				3px 0;
+}
+
+/*----------------------------------------------------------------------------------------------------------------LISTS */
+
+div.latest_all table,
+div.animelist_all table,
+div.grouplist_all table,
+div.userlist_all table,
+div.producerlist_all table {
+	width:					100%;
+}
+
+div.latest_all td.count,
+div.latest_all td.number,
+div.latest_all td.vote,
+div.userlist_all td.acnt,
+div.userlist_all td.epcnt,
+div.userlist_all td.fcnt {
+	width:					30px;
+	text-align:				center;
+}
+div.latest_all td.action,
+div.latest_all td.size,
+div.latest_all td.type,
+div.latest_all td.short,
+div.latest_all td.user,
+div.latest_all td.rating,
+div.latest_all td.tmprating,
+div.latest_all td.dub,
+div.animelist_all td,
+div.userlist_all td.size {
+	width:					70px;
+	text-align:				center;
+}
+div.latest_all td.category,
+div.latest_all td.date,
+div.userlist_all td.date {
+	width:					100px;
+	text-align:				center;
+}
+div.latest_all div.latest_aproducer td.type {
+	width:					175px;
+	text-align:				center;
+}
+div.latest_all td.status {
+	width:					250px;
+}
+div.latest_all td.id {
+	width:					40px;
+	text-align:				center;
+}
+div.animelist_all td.eps {
+	width:					30px;
+	text-align:				center;
+}
+div.latest_all td.name,
+div.animelist_all td.name {
+	width:					auto;
+	text-align:				left;
+}
+div.latest_all td.action a {
+	float:					right;
+	margin:					0 2px;
+}
+
+/*													     categories */
+
+div.genren_all div.controls {
+	text-align:				center;
+}
+div.genren_all div.controls a {
+	cursor:					pointer;
+}
+div.genren_all a.i_icon {
+	position:				relative;
+	right:					20px;
+	float:					left;
+	margin-right:				-35px;
+	cursor:					pointer;
+}
+div.genren_all ul {
+	margin:					0 0 0 20px;
+}
+div.genren_all li {
+	padding:				1px 3px;
+}
+div.genren_all li span {
+	display:				block;
+}
+div.genren_all li.collapsed ul {
+	display:				none;
+}
+
+/*---------------------------------------------------------------------------------------------------------------FOOTER */
+
+#layout-footer {
+	border-left:				1px solid #fff;
+	border-right:				1px solid #fff;
+	width:					955px;
+	margin:					0 auto;
+	overflow:				auto;
+	text-align:				center;
+	padding-top:				10px;
+	color:					#666;
+	position:				relative;
+	top:					-45px;
+}
+
+/*----------------------------------------------------------------------------------------------------------------ICONS */
+
+*.i_icon span, *.i_button span, *.i_inline span {
+	display:				none;
+}
+*.i_help {
+	background:				url(images/ask2.gif) no-repeat right;
+	cursor:					help;
+}
+*.i_help:hover {
+	background-image:			url(images/ask2_over.gif);
+}
+
+/* file info */
+
+*.i_censored {
+	background-image:			url(images/anidb_censored.gif);
+}
+*.i_comment {
+	background-image:			url(images/anidb_comment.gif);
+}
+*.i_av_yes {
+	background-image:			url(images/anidb_av_yes.gif);
+}
+*.i_crc_no {
+	background-image:			url(images/anidb_crc_no.gif);
+}
+*.i_crc_yes {
+	background-image:			url(images/anidb_crc_yes.gif);
+}
+*.i_crc_unv {
+	background-image:			url(images/anidb_crc_unv.gif);
+}
+*.i_araward {
+	background-image:			url(images/anidb_araward.gif);
+}
+*.i_group_vote,
+*.i_ep_vote,
+*.i_vote {
+	background-image:			url(images/anidb_vote.gif);
+}
+*.i_group_revote,
+*.i_ep_revote,
+*.i_revote {
+	background-image:			url(images/anidb_revote.gif);
+}
+*.i_group_comment {
+	background-image: 			url(images/anidb_groupcomment.gif);
+}
+*.i_new_icon {
+	background-image:			url(images/anidb_new_icon.gif);
+}
+*.i_uncensored {
+	background-image:			url(images/anidb_uncensored.gif);
+}
+*.i_audio {
+	background-image:			url(images/anidb_audio.gif);
+	display:				none;
+}
+*.i_video {
+	background-image:			url(images/anidb_video.gif);
+}
+*.i_video.avc {
+	background-image: 			url(images/anidb_video_avc.gif);
+}
+*.i_video.xvid,
+*.i_video.divx5 {
+	background-image: 			url(images/anidb_video_asp.gif);
+}
+*.i_vrs_1 {
+	background-image:			url(images/anidb_vrs_1.gif);
+}
+*.i_vrs_2 {
+	background-image:			url(images/anidb_vrs_2.gif);
+}
+*.i_vrs_3 {
+	background-image:			url(images/anidb_vrs_3.gif);
+}
+*.i_vrs_4 {
+	background-image:			url(images/anidb_vrs_4.gif);
+}
+*.i_vrs_5 {
+	background-image:			url(images/anidb_vrs_5.gif);
+}
+
+*.i_ext {
+	background-image: 			url(images/anidb_ext_other.gif);
+}
+*.i_ext.mkv {
+	background-image: 			url(images/anidb_ext_mkv.gif);
+}
+*.i_ext.ogm {
+	background-image: 			url(images/anidb_ext_ogm.gif);
+}
+*.i_ext.avi {
+	background-image: 			url(images/anidb_ext_avi.gif);
+}
+*.i_ext.mp4 {
+	background-image: 			url(images/anidb_ext_mp4.gif);
+}
+*.i_ext.wmv {
+	background-image: 			url(images/anidb_ext_wmv.gif);
+}
+*.i_ext.srt {
+	background-image: 			url(images/anidb_ext_srt.gif);
+}
+
+/* file rating */
+
+*.i_rate_corrupted {
+	background-image:			url(images/anidb_rate_corrupted.gif);
+}
+*.i_rate_eyecancer {
+	background-image:			url(images/anidb_rate_eyecancer.gif);
+}
+*.i_rate_unknown {
+	background-image:			url(images/anidb_rate_unknown.gif);
+}
+*.i_rate_star {
+	background-image:			url(images/anidb_rate_star.gif);
+}
+*.i_rate_halfstar {
+	background-image:			url(images/anidb_rate_halfstar.gif);
+}
+
+*.i_rate_veryhigh,
+*.i_rate_high,
+*.i_rate_med,
+*.i_rate_low,
+*.i_rate_verylow {
+	background: 				url(images/anidb_rate_star.gif) left center repeat-x;
+}
+
+*.i_rate_veryhigh {
+	width:					39px;
+}
+*.i_rate_high {
+	width:					32px;
+}
+*.i_rate_med {
+	width:					26px;
+}
+*.i_rate_low {
+	width:					19px;
+}
+*.i_rate_verylow {
+	width:					13px;
+}
+
+/* file actions */
+
+*.i_file_add {
+	background-image:			url(images/anidb_file_add.gif);
+}
+*.i_file_addmylist {
+	background-image:			url(images/anidb_file_addmylist.gif);
+}
+*.i_file_delete {
+	background-image:			url(images/anidb_file_delete.gif);
+}
+*.i_file_details {
+	background-image:			url(images/anidb_file_details.gif);
+}
+*.i_file_ed2k {
+	background-image:			url(images/anidb_file_ed2k.gif);
+}
+*.i_file_edit {
+	background-image:			url(images/anidb_file_edit.gif);
+}
+*.i_file_removemylist {
+	background-image:			url(images/anidb_file_removemylist.gif);
+}
+*.i_seen_no {
+	background-image:			url(images/anidb_seen_no.gif);
+}
+*.i_seen_yes {
+	background-image:			url(images/anidb_seen_yes.gif);
+}
+
+/* file states */
+
+*.i_filestate_corrupted {
+	background-image:			url(images/anidb_filestate_corrupted.gif);
+}
+*.i_filestate_edited {
+	background-image:			url(images/anidb_filestate_edited.gif);
+}
+*.i_filestate_ondvd {
+	background-image:			url(images/anidb_filestate_ondvd.gif);
+}
+*.i_filestate_ontv {
+	background-image:			url(images/anidb_filestate_ontv.gif);
+}
+*.i_filestate_onvhs {
+	background-image:			url(images/anidb_filestate_onvhs.gif);
+}
+*.i_filestate_other {
+	background-image:			url(images/anidb_filestate_other.gif);
+}
+*.i_filestate_selfripped {
+	background-image:			url(images/anidb_filestate_selfripped.gif);
+}
+*.i_filestate_theater {
+	background-image:			url(images/anidb_filestate_theater.gif);
+}
+
+/* ep info */
+
+*.i_recap {
+	background-image:			url(images/anidb_recap.gif);
+}
+*.i_seen {
+	background-image:			url(images/anidb_seen.gif);
+}
+*.i_state_all {
+	background-image:			url(images/anidb_state_all.gif);
+}
+*.i_state_deleted {
+	background-image:			url(images/anidb_state_deleted.gif);
+}
+*.i_state_mixed {
+	background-image:			url(images/anidb_state_mixed.gif);
+}
+*.i_state_oncd {
+	background-image:			url(images/anidb_state_oncd.gif);
+}
+*.i_state_onhdd {
+	background-image:			url(images/anidb_state_onhdd.gif);
+}
+*.i_state_release {
+	background-image:			url(images/anidb_state_release.gif);
+}
+*.i_state_shared {
+	background-image:			url(images/anidb_state_shared.gif);
+}
+*.i_state_unknown {
+	background-image:			url(images/anidb_state_unknown.gif);
+}
+*.i_mylist {
+	background-image:			url(images/anidb_mylist.gif);
+}
+
+/* wishlist */
+
+*.i_pri_high {
+	background-image:			url(images/anidb_pri_high.gif);
+}
+*.i_pri_low {
+	background-image:			url(images/anidb_pri_low.gif);
+}
+*.i_pri_med {
+	background-image:			url(images/anidb_pri_med.gif);
+}
+
+*.i_nonotify {
+	background-image:			url(images/anidb_nonotify.gif);
+}
+*.i_notify {
+	background-image:			url(images/anidb_notify.gif);
+}
+
+/* other */
+
+*.i_rev {
+	background-image:			url(images/anidb_rev.gif);
+}
+*.i_no_rev {
+	background-image:			url(images/anidb_no_rev.gif);
+}
+*.i_no_vote {
+	background-image:			url(images/anidb_no_vote.gif);
+}
+*.i_hanger {
+	background-image:			url(images/anidb_hanger.gif);
+}
+
+/* nav */
+
+*.i_logon {
+	background-image:			url(images/button_logon.gif);
+}
+*.i_logout {
+	background-image:			url(images/button_logout.gif);
+}
+*.i_logout:hover {
+	background-image:			url(images/button_logout_over.gif);
+}
+*.i_profile {
+	background-image:			url(images/button_profile.gif);
+	position:				relative;
+	top:					-5px;
+	left:					10px;
+}
+*.i_profile:hover {
+	background-image:			url(images/button_profile_over.gif);
+}
+*.i_punkt {
+	background-image:			url(images/button_punkt.gif);
+}
+*.i_search {
+	background-image:			url(images/button_search.gif);
+}
+*.i_signup {
+	background-image:			url(images/button_signup.gif);
+}
+*.i_suchen {
+	background-image:			url(images/button_suchen.gif);
+}
+*.i_down1 {
+	background-image:			url(images/down1.gif);
+	width:					9px;
+	height:					10px;
+}
+*.i_empty {
+	background-image:			url(images/empty.gif);
+}
+*.i_invalid {
+	background-image:			url(images/invalid.gif);
+}
+*.i_minus {
+	background-image:			url(images/minus.gif);
+}
+*.i_minus:hover {
+	background-image:			url(images/minus_over.gif);
+}
+*.i_na {
+	background-image:			url(images/na.gif);
+}
+*.i_nodown1 {
+	background-image:			url(images/nodown1.gif);
+	width:					9px;
+	height:					10px;
+}
+*.i_none {
+	background-image:			url(images/none.gif);
+}
+*.i_nopic {
+	background-image:			url(images/nopic.gif);
+}
+*.i_noup1 {
+	background-image:			url(images/noup1.gif);
+	width:					9px;
+	height:					10px;
+}
+*.i_plus {
+	background-image:			url(images/plus.gif);
+}
+*.i_plus:hover {
+	background-image:			url(images/plus_over.gif);
+}
+*.i_up1 {
+	background-image:			url(images/up1.gif);
+	width:					9px;
+	height:					10px;
+}
+
+
+*.i_mybuddy {
+	background-image:			url(images/mybuddy.gif);
+}
+*.i_yourbuddy {
+	background-image:			url(images/yourbuddy.gif);
+}
+*.i_authmybuddy {
+	background-image:			url(images/buddywaiting.gif);
+}
+*.i_authyourbuddy {
+	background-image:			url(images/buddywaiting.gif);
+}
+
+/* lang */
+
+*.i_sub_al {
+	background-image: url(../icons/flags/anidb_sub_albanian.gif);
+}
+*.i_audio_ar {
+background-image: url(../icons/flags/anidb_audio_arabic.gif);
+}
+*.i_sub_ar {
+background-image: url(../icons/flags/anidb_sub_arabic.gif);
+}
+*.i_audio_bg {
+background-image: url(../icons/flags/anidb_audio_bulgarian.gif);
+}
+*.i_sub_bg {
+background-image: url(../icons/flags/anidb_sub_bulgarian.gif);
+}
+*.i_audio_ca {
+background-image: url(../icons/flags/anidb_audio_catalan.gif);
+}
+*.i_sub_ca {
+background-image: url(../icons/flags/anidb_sub_catalan.gif);
+}
+*.i_audio_cs {
+background-image: url(../icons/flags/anidb_audio_czech.gif);
+}
+*.i_sub_cs {
+background-image: url(../icons/flags/anidb_sub_czech.gif);
+}
+*.i_audio_da {
+background-image: url(../icons/flags/anidb_audio_danish.gif);
+}
+*.i_sub_da {
+background-image: url(../icons/flags/anidb_sub_danish.gif);
+}
+*.i_audio_de {
+background-image: url(../icons/flags/anidb_audio_german.gif);
+}
+*.i_sub_de {
+background-image: url(../icons/flags/anidb_sub_german.gif);
+}
+*.i_audio_et {
+background-image: url(../icons/flags/anidb_audio_estonian.gif);
+}
+*.i_sub_et {
+background-image: url(../icons/flags/anidb_sub_estonian.gif);
+}
+*.i_audio_es {
+background-image: url(../icons/flags/anidb_audio_spanish.gif);
+}
+*.i_sub_es {
+background-image: url(../icons/flags/anidb_sub_spanish.gif);
+}
+*.i_audio_el {
+background-image: url(../icons/flags/anidb_audio_greek.gif);
+}
+*.i_sub_el {
+background-image: url(../icons/flags/anidb_sub_greek.gif);
+}
+*.i_audio_en {
+background-image: url(../icons/flags/anidb_audio_english.gif);
+}
+*.i_sub_en {
+background-image: url(../icons/flags/anidb_sub_english.gif);
+}
+*.i_audio_fi {
+background-image: url(../icons/flags/anidb_audio_finnish.gif);
+}
+*.i_sub_fi {
+background-image: url(../icons/flags/anidb_sub_finnish.gif);
+}
+*.i_audio_fr {
+background-image: url(../icons/flags/anidb_audio_french.gif);
+}
+*.i_sub_fr {
+background-image: url(../icons/flags/anidb_sub_french.gif);
+}
+*.i_audio_he {
+background-image: url(../icons/flags/anidb_audio_hebrew.gif);
+}
+*.i_sub_he {
+background-image: url(../icons/flags/anidb_sub_hebrew.gif);
+}
+*.i_audio_hr {
+background-image: url(../icons/flags/anidb_audio_croatian.gif);
+}
+*.i_sub_hr {
+background-image: url(../icons/flags/anidb_sub_croatian.gif);
+}
+*.i_audio_hu {
+background-image: url(../icons/flags/anidb_audio_hungarian.gif);
+}
+*.i_sub_hu {
+background-image: url(../icons/flags/anidb_sub_hungarian.gif);
+}
+*.i_audio_id {
+background-image: url(../icons/flags/anidb_audio_indonesian.gif);
+}
+*.i_sub_id {
+background-image: url(../icons/flags/anidb_sub_indonesian.gif);
+}
+*.i_audio_is {
+background-image: url(../icons/flags/anidb_audio_icelandic.gif);
+}
+*.i_sub_is {
+background-image: url(../icons/flags/anidb_sub_icelandic.gif);
+}
+*.i_audio_it {
+background-image: url(../icons/flags/anidb_audio_italian.gif);
+}
+*.i_sub_it {
+background-image: url(../icons/flags/anidb_sub_italian.gif);
+}
+*.i_audio_ja {
+background-image: url(../icons/flags/anidb_audio_japanese.gif);
+}
+*.i_sub_ja {
+background-image: url(../icons/flags/anidb_sub_japanese.gif);
+}
+*.i_audio_ka {
+background-image: url(../icons/flags/anidb_audio_georgian.gif);
+}
+*.i_sub_ka {
+background-image: url(../icons/flags/anidb_sub_georgian.gif);
+}
+*.i_audio_ko {
+background-image: url(../icons/flags/anidb_audio_korean.gif);
+}
+*.i_sub_ko {
+background-image: url(../icons/flags/anidb_sub_korean.gif);
+}
+*.i_audio_la {
+background-image: url(../icons/flags/anidb_audio_latin.gif);
+}
+*.i_sub_la {
+background-image: url(../icons/flags/anidb_sub_latin.gif);
+}
+*.i_audio_lv {
+background-image: url(../icons/flags/anidb_audio_latvian.gif);
+}
+*.i_sub_lv {
+background-image: url(../icons/flags/anidb_sub_latvian.gif);
+}
+*.i_audio_lt {
+background-image: url(../icons/flags/anidb_audio_lithuanian.gif);
+}
+*.i_sub_lt {
+background-image: url(../icons/flags/anidb_sub_lithuanian.gif);
+}
+*.i_audio_my {
+background-image: url(../icons/flags/anidb_audio_malay.gif);
+}
+*.i_sub_my {
+background-image: url(../icons/flags/anidb_sub_malay.gif);
+}
+*.i_audio_nl {
+background-image: url(../icons/flags/anidb_audio_dutch.gif);
+}
+*.i_sub_nl {
+background-image: url(../icons/flags/anidb_sub_dutch.gif);
+}
+*.i_audio_no {
+background-image: url(../icons/flags/anidb_audio_norwegian.gif);
+}
+*.i_sub_no {
+background-image: url(../icons/flags/anidb_sub_norwegian.gif);
+}
+*.i_audio_pl {
+background-image: url(../icons/flags/anidb_audio_polish.gif);
+}
+*.i_sub_pl {
+background-image: url(../icons/flags/anidb_sub_polish.gif);
+}
+*.i_audio_pt {
+background-image: url(../icons/flags/anidb_audio_portuguese.gif);
+}
+*.i_sub_pt {
+background-image: url(../icons/flags/anidb_sub_portuguese.gif);
+}
+*.i_audio_pt-BR {
+background-image: url(../icons/flags/anidb_audio_brasilian.gif);
+}
+*.i_sub_pt-BR {
+background-image: url(../icons/flags/anidb_sub_brasilian.gif);
+}
+*.i_audio_ro {
+background-image: url(../icons/flags/anidb_audio_romanian.gif);
+}
+*.i_sub_ro {
+background-image: url(../icons/flags/anidb_sub_romanian.gif);
+}
+*.i_audio_ru {
+background-image: url(../icons/flags/anidb_audio_russian.gif);
+}
+*.i_sub_ru {
+background-image: url(../icons/flags/anidb_sub_russian.gif);
+}
+*.i_audio_sk {
+background-image: url(../icons/flags/anidb_audio_slovak.gif);
+}
+*.i_sub_sk {
+background-image: url(../icons/flags/anidb_sub_slovak.gif);
+}
+*.i_audio_sl {
+background-image: url(../icons/flags/anidb_audio_slovenian.gif);
+}
+*.i_sub_sl {
+background-image: url(../icons/flags/anidb_sub_slovenian.gif);
+}
+*.i_audio_sr {
+background-image: url(../icons/flags/anidb_audio_serbian.gif);
+}
+*.i_sub_sr {
+background-image: url(../icons/flags/anidb_sub_serbian.gif);
+}
+*.i_audio_sv {
+background-image: url(../icons/flags/anidb_audio_swedish.gif);
+}
+*.i_sub_sv {
+background-image: url(../icons/flags/anidb_sub_swedish.gif);
+}
+*.i_audio_ta {
+background-image: url(../icons/flags/anidb_audio_tamil.gif);
+}
+*.i_sub_ta {
+background-image: url(../icons/flags/anidb_sub_tamil.gif);
+}
+*.i_audio_tt {
+background-image: url(../icons/flags/anidb_audio_tartar.gif);
+}
+*.i_sub_tt {
+background-image: url(../icons/flags/anidb_sub_tartar.gif);
+}
+*.i_audio_th {
+background-image: url(../icons/flags/anidb_audio_thai.gif);
+}
+*.i_sub_th {
+background-image: url(../icons/flags/anidb_sub_thai.gif);
+}
+*.i_audio_tr {
+background-image: url(../icons/flags/anidb_audio_turkish.gif);
+}
+*.i_sub_tr {
+background-image: url(../icons/flags/anidb_sub_turkish.gif);
+}
+*.i_audio_uk {
+background-image: url(../icons/flags/anidb_audio_ukrainian.gif);
+}
+*.i_sub_uk {
+background-image: url(../icons/flags/anidb_sub_ukrainian.gif);
+}
+*.i_audio_vi {
+background-image: url(../icons/flags/anidb_audio_vietnamese.gif);
+}
+*.i_sub_vi {
+background-image: url(../icons/flags/anidb_sub_vietnamese.gif);
+}
+*.i_audio_x-in {
+background-image: url(../icons/flags/anidb_audio_instrumental.gif);
+}
+*.i_audio_x-jat {
+background-image: url(../icons/flags/anidb_audio_japanese-transcription.gif);
+}
+*.i_sub_x-jat {
+background-image: url(../icons/flags/anidb_sub_japanese-transcription.gif);
+}
+*.i_audio_x-other {
+background-image: url(../icons/flags/anidb_audio_unknown.gif);
+}
+*.i_sub_x-other {
+background-image: url(../icons/flags/anidb_sub_unknown.gif);
+}
+*.i_audio_x-unk {
+background-image: url(../icons/flags/anidb_audio_unknown.gif);
+}
+*.i_sub_x-unk {
+background-image: url(../icons/flags/anidb_sub_unknown.gif);
+}
+*.i_audio_zh {
+background-image: url(../icons/flags/anidb_audio_chinese.gif);
+}
+*.i_sub_zh {
+background-image: url(../icons/flags/anidb_sub_chinese.gif);
+}
+*.i_audio_zh-x-yue {
+background-image: url(../icons/flags/anidb_audio_cantonese.gif);
+}
+*.i_audio_zh-x-cmn {
+background-image: url(../icons/flags/anidb_audio_mandarin.gif);
+}
+*.i_audio_zh-x-nan {
+background-image: url(../icons/flags/anidb_audio_taiwanese.gif);
+}
+*.i_audio_zh-Hans {
+background-image: url(../icons/flags/anidb_audio_simplified.gif);
+}
+*.i_sub_zh-Hans {
+background-image: url(../icons/flags/anidb_sub_simplified.gif);
+}
+*.i_audio_zh-Hant {
+background-image: url(../icons/flags/anidb_audio_traditional.gif);
+}
+*.i_sub_zh-Hant {
+background-image: url(../icons/flags/anidb_sub_traditional.gif);
+}
+
+
+
+img[src*="anidb_mainichiaward.gif"] {
+	background:				url(images/anidb_awardmainichi.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+}
+img[src*="anidb_ar2002award.gif"],
+img[src*="anidb_ar2003award.gif"],
+img[src*="anidb_ar2004award.gif"],
+img[src*="anidb_ar2005award.gif"],
+img[src*="anidb_ar2006award.gif"],
+img[src*="anidb_ar2007award.gif"] {
+	background:				url(images/anidb_awardar.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+}
+img[src*="anidb_rate_star.gif"] {
+	background:				url(images/anidb_awardstar.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+}
+
+img[src*="minus.gif"] {
+	background:				url(images/minus.gif) center 1px no-repeat;
+	width:					0;
+	padding-right:				13px;
+}
+img[src*="minus.gif"]:hover {
+	background-image:			url(images/minus_over.gif);
+}
+img[src*="plus.gif"] {
+	background:				url(images/plus.gif) center 1px no-repeat;
+	width:					0;
+	padding-right:				13px;
+}
+img[src*="plus.gif"]:hover {
+	background-image:			url(images/plus_over.gif);
+}
+img[src*="ask2.gif"] {
+	background:				url(images/ask2.gif) center 1px no-repeat;
+	width:					0;
+	padding-right:				11px;
+	position:				relative;
+	top:					1px;
+	cursor:					help;
+}
+img[src*="ask2.gif"]:hover {
+	background-image:			url(images/ask2_over.gif);
+}
+img[src*="up1.gif"] {
+	background:				url(images/up1.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+	display:				block;
+	float:					left;
+}
+img[src*="down1.gif"] {
+	background:				url(images/down1.gif) center center no-repeat;
+	width:					0;
+	padding-left:				15px;
+	display:				block;
+	float:					right;
+}
+img[src*="noup1.gif"] {
+	background:				url(images/noup1.gif) center center no-repeat;
+	width:					0;
+	padding-right:				15px;
+	display:				block;
+	float:					left;
+}
+img[src*="noup1.gif"]:hover {
+	background-image:			url(images/up1_over.gif);
+}
+img[src*="nodown1.gif"] {
+	background:				url(images/nodown1.gif) center center no-repeat;
+	width:					0;
+	padding-left:				15px;
+	display:				block;
+	float:					right;
+}
+img[src*="nodown1.gif"]:hover {
+	background-image:			url(images/down1_over.gif);
+}
+
+img[src*="nopic.gif"],
+div.latestanimes_all img[src*="nopic.gif"] {
+	background:				url(images/nopic.gif) center center no-repeat;
+	display:				inline;				
+	height:					140px;
+	width:					0;
+	padding:				0 75px;
+}
+
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}
