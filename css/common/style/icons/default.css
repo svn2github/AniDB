@@ -772,6 +772,8 @@ a.i_icon:hover, a.i_inline:hover
   border: 1px solid;
   border-color: #D6D3CE;
   background-color: #FFFFFF;
+	float: left;
+	display: block;
 }
 
 *.f_mouseover {
@@ -830,6 +832,8 @@ a.i_icon:hover, a.i_inline:hover
 
 *.f_buddy {
   background-image: url(../icons/formating/user.gif);
+	display: inline;
+	float: none;
 }
 
 /* Sorting Icons */
