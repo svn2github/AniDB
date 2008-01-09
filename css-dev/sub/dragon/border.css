@@ -39,7 +39,7 @@ img, a
 
 #layout-content h1,
 #layout-content div.main_all div.news h4,
-#layout-content div.agcmts_entries div.comment h4
+#layout-content div.cmt_all div.comment h4
 {
 	/*border: 1px #867f6a dotted;*/
 }
@@ -50,7 +50,7 @@ img, a
 	padding: 1px;
 }
 
-#layout-content .block .g_definitionlist > table
+#layout-content .block .g_definitionlist table
 {
 	border: none;
 	margin: 0;

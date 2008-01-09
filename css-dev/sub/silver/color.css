@@ -43,7 +43,7 @@ th
 }
 
 #layout-content div.g_timedentry,
-#layout-content div.block + div.desc
+#layout-content div.desc
 {
 	background-color: #fafafa;
 }

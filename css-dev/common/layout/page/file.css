@@ -6,8 +6,8 @@
 	margin-top: 0.4em;
 }
 
-#layout-content div.file_tracks div+div,
-#layout-content div.file_relations div+div
+#layout-content div.file_tracks div,
+#layout-content div.file_relations div
 {
 	margin-top: 0.6em;
 }

@@ -1,13 +1,3 @@
-html
-{
-	background: #BFC2C9 url(../anidbstyle/images/backtoo.png) repeat-y left;
-}
-
-body.nonav
-{
-	background: #BFC2C9;
-}
-
 #layout-menu
 {
 	position: absolute;
@@ -116,18 +106,17 @@ body.nonav
 {
 	display: block;
 }
+
 #layout-menu form
 {
-	margin-top: 16px;
+	margin-top: 12px;
 }
+
 #layout-menu form input.text
 {
 	display: block;
 	font-size: 10px;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	color: #ffffff;
-	background-color: #272D43;
-	border: #BFC2C9 1px solid;
 	width: 8.7em;
 }
 
@@ -144,6 +133,11 @@ body.nonav
 	background: transparent url(../icons/button_logon.gif) no-repeat top;
 	border: 0;
 	content: "";
+}
+
+#layout-menu div.usermenu span.login
+{
+	margin-top: -6px;
 }
 
 #layout-menu div.usermenu a.i_signup
@@ -182,12 +176,11 @@ body.nonav
 {
 	display: block;
 	float: right;
-	background: transparent url(../anidbstyle/images/searchback.png) no-repeat 0px 77px;
+	background: transparent url(../anidbstyle/images/searchback.png) no-repeat 0 77px;
 	padding: 70px 0 0 0;
 	margin: 0;
 	height: 64px;
-	width: 15.2em;
-	max-width: 152px;
+	width: 152px;
 }
 
 #layout-search div.search form p
@@ -249,21 +242,11 @@ body.nonav
 	clear: both;
 }
 
-#layout-content div.g_content
-{
-	border-top: 2px groove #BFC2CA;
-}
-
 #layout-footer
 {
 	margin-top: 19px;
 	margin-left: 182px;
 	text-align: center;
-}
-
-#layout-footer:after
-{
-	content: "design by akujiN"
 }
 
 #layout-content div.anime_all div.mylist th.anime
