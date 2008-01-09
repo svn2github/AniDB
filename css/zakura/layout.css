@@ -112,199 +112,170 @@ div#layout-menu div.menu ul.other li.help a {
 
 /* container - login */
 div#layout-menu div.usermenu {
-background: transparent url(images/layout/bg-login.png) no-repeat left top;
-position: absolute;
-top: -160px;
-right: -5em;
-height: 102px;
-width: 30em;
-z-index: 1;
+	position: absolute;
+	top: -160px;
+	right: 1em;
+	height: 102px;
+	z-index: 1;
 }
 
 /* logged in */
 div#layout-menu div.usermenu p {
-position: relative;
-display: block;
-float: left;
-margin: 0;
+	position: relative;
+	float: left;
+	margin: 0;
 }
-
 div#layout-menu div.usermenu p a,
 div#layout-menu div.usermenu p.user {
-padding: 78px 0.4em 0;
-height: 24px;
-float: left;
-text-decoration: none;
-text-transform: capitalize;
-}
-
-div#layout-menu div.usermenu p.user {
-font-weight: bold;
-text-transform: none;
-position: relative;
-float: left;
-text-indent: 8em;
-}
-
-div#layout-menu div.usermenu a#newnotifies,
-div#layout-menu div.usermenu a#newnotifies:link,
-div#layout-menu div.usermenu a#newnotifies:visited {
-color: #fd0576;
-font-weight: bold;
-margin-left: 0.5em;
-background: transparent url(images/layout/trans-white.png) repeat left top;
-border-left: 1px solid #e7c7d5;
-}
-
-div#layout-menu div.usermenu a#newnotifies:hover,
-div#layout-menu div.usermenu a#newnotifies:active {
-color: #ff00c6;
-background: transparent url(images/layout/stripe-white.png) repeat left top;
-}
-
-div#layout-menu div.usermenu a.history,
-div#layout-menu div.usermenu a.history:link,
-div#layout-menu div.usermenu a.history:visited {
-color: #ed95bd;
-border: 0;
-background: transparent url(images/layout/trans-white.png) repeat left top;
-}
-
-div#layout-menu div.usermenu a.history:hover,
-div#layout-menu div.usermenu a.history:active {
-color: #fd0576;
-}
-
-div#layout-menu div.usermenu a.i_button {
+	padding: 78px 0.4em 0;
+	height: 24px;
 	display: block;
+	float: left;
+	text-decoration: none;
+	text-transform: capitalize;
 }
-
-div#layout-menu div.usermenu a.i_button,
-div#layout-menu div.usermenu a.i_button:link,
+div#layout-menu div.usermenu p.user {
+	font-weight: bold;
+	text-transform: none;
+}
+div#layout-menu div.usermenu a#newnotifies, 
+div#layout-menu div.usermenu a#newnotifies:link, 
+div#layout-menu div.usermenu a#newnotifies:visited {
+	color: #fd0576;
+	font-weight: bold;
+	margin-left: 0.5em;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
+	border-left: 1px solid #e7c7d5;
+}
+div#layout-menu div.usermenu a#newnotifies:hover, 
+div#layout-menu div.usermenu a#newnotifies:active {
+	color: #ff00c6;
+	background: transparent url(images/layout/stripe-white.png) repeat left top;
+}
+div#layout-menu div.usermenu a.history, 
+div#layout-menu div.usermenu a.history:link, 
+div#layout-menu div.usermenu a.history:visited {
+	color: #ed95bd;
+	border: 0;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
+}
+div#layout-menu div.usermenu a.history:hover, 
+div#layout-menu div.usermenu a.history:active {
+	color: #fd0576;
+}
+div#layout-menu div.usermenu a.i_button, 
+div#layout-menu div.usermenu a.i_button:link, 
 div#layout-menu div.usermenu a.i_button:visited {
-text-decoration: none;
-color: #be518c;
-background: transparent url(images/layout/trans-pink.png) repeat left top;
-border-left: 1px solid #e7c7d5;
-font-weight: bold;
+	text-decoration: none;
+	color: #be518c;
+	background: transparent url(images/layout/trans-pink.png) repeat left top;
+	border-left: 1px solid #e7c7d5;
+	font-weight: bold;
 }
-
-div#layout-menu div.usermenu a.i_button:hover,
+div#layout-menu div.usermenu a.i_button:hover, 
 div#layout-menu div.usermenu a.i_button:active {
-background: transparent url(images/layout/stripe-pink.png) repeat left top;
-color: #a93373;
+	background: transparent url(images/layout/stripe-pink.png) repeat left top;
+	color: #a93373;
 }
-
-div#layout-menu div.usermenu a.i_logout,
-div#layout-menu div.usermenu a.i_logout:link,
+div#layout-menu div.usermenu a.i_logout, 
+div#layout-menu div.usermenu a.i_logout:link, 
 div#layout-menu div.usermenu a.i_logout:visited {
-background: transparent url(images/layout/trans-blue.png) repeat left top;
-border-right: 1px solid #e7c7d5;
-color: #4a63e1;
-}
-
-div#layout-menu div.usermenu a.i_logout:hover,
+	background: transparent url(images/layout/trans-blue.png) repeat left top;
+	border-right: 1px solid #e7c7d5;
+	color: #4a63e1;
+} 
+div#layout-menu div.usermenu a.i_logout:hover, 
 div#layout-menu div.usermenu a.i_logout:active {
-background: transparent url(images/layout/stripe-blue.png) repeat left top;
-color: #2d42af;
+	background: transparent url(images/layout/stripe-blue.png) repeat left top;
+	color: #2d42af;
 }
 
 /* login form - not logged in */
 div#layout-menu div.usermenu span.login+a+form {
-background-color: #F7EDF1;
-width: 100%;
-padding-top: 35px;
-height: 40px;
-width: 280px;
-padding-left: 20px;
+	background-color: #F7EDF1;
+	width: 100%;
+	padding-top: 35px;
+	height: 40px;
+	width: 280px;
+	padding-left: 20px;
 }
-
 div#layout-menu div.usermenu span.login+a+form input.text {
-width: 131px;
-padding-left: 2px;
-padding-right: 2px;
+	width: 131px;
+	padding-left: 2px;
+	padding-right: 2px;
 }
-
 div#layout-menu div.usermenu span.login+a+form input.text+input.text {
-margin-left: 2px;
+	margin-left: 2px;
 }
-
 div#layout-menu div.usermenu span.login {
-text-transform: capitalize;
-position: absolute;
-left: 20px;
-top: 15px;
+	text-transform: capitalize;
+	position: absolute;
+	left: 20px;
+	top: 15px;
 }
-
 div#layout-menu div.usermenu span.login a,
 div#layout-menu div.usermenu span.login a:link,
 div#layout-menu div.usermenu span.login a:visited {
-color: #ed95bd;
-text-decoration: none;
+	color: #ed95bd;
+	text-decoration: none;
 }
-
 div#layout-menu div.usermenu span.login a:hover,
 div#layout-menu div.usermenu span.login a:active {
-color: #fd0576;
+	color: #fd0576;
 }
-
 div#layout-menu div.usermenu input.logon,
 div#layout-menu div.usermenu a.i_signup,
 div#layout-menu div.usermenu label.remember {
-position: absolute;
-right: 0;
-bottom: 1em;
-width: 4.5em;
-height: 1.8em;
+	position: absolute;
+	right: 0;
+	bottom: 1em;
+	width: 4.5em;
+	height: 1.8em;
 }
-
 div#layout-menu div.usermenu a.i_signup {
-top: 15px;
-border-left: 0 !important;
-background: none !important;
-text-transform: capitalize;
-padding: 0;
+	top: 15px;
+	border-left: 0 !important;
+	background: none !important;
+	text-transform: capitalize;
+	padding: 0;
 }
-
 div#layout-menu div.usermenu label.remember {
-right: 6.5em;
-width: 13em;
-text-align: right;
+	right: 6.5em;
+	width: 13em;
+	text-align: right;
 }
 
 /* container - search */
 div#layout-search {
-position: absolute;
-top: 0;
-padding-top: 113px;
-right: 1em;
-width: 30em;
-text-align: right;
-z-index: 0;
+	position: absolute;
+	top: 0;
+	background: transparent url(images/layout/bg-login.png) no-repeat right top;
+	padding-top: 103px;
+	right: 1em;
+	width: 30em;
+	text-align: right;
+	z-index: 0;
 }
 
 /* search - form */
 div#layout-search input.text {
-border: 1px solid #eed0da;
-padding: 0.3em 0.3em 0 0.3em;
-height: 1.5em;
-width: 16em;
-color: #1e2495;
+	border: 1px solid #eed0da;
+	padding: 0.3em 0.3em 0 0.3em;
+	height: 1.5em;
+	width: 16em;
+	color: #1e2495;
 }
-
 div#layout-search input.text:hover {
-border: 1px solid #dc9abf
+	border: 1px solid #dc9abf
 }
-
 div#layout-search input.submit {
-height: 1.8em;
-padding-bottom: 0.2em;
-margin-bottom: 0.1em;
-width: 4.5em;
+	height: 1.8em;
+	padding-bottom: 0.2em;
+	margin-bottom: 0.1em;
+	width: 4.5em;
 }
-
 div#layout-search input.submit:hover {
-background: #2d42af;
+	background: #2d42af;
 }
 
 /* container - content */
