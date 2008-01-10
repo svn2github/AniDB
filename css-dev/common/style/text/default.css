@@ -1,13 +1,39 @@
 *
 {
-	font-size: 9pt;
+	font-size: 10px;
+	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+}
+
+div, p, th, td, li, dt, dd, span, a
+{
 	font-weight: normal;
-	font-family: Verdana, Tahoma, Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, caption
+{
+	font-weight: bold;
 }
 
 a, del, ins
 {
 	text-decoration: none;
+}
+
+h1
+{
+	font-size: 160%;
+}
+
+h1 a
+{
+	font-size: 100%;
+}
+
+h4, caption
+{
+	font-size: 115%;
+	margin-top: 0.4em;
+	margin-bottom: 0.2em;
 }
 
 th, td.action, td.date, td.year,
@@ -16,8 +42,8 @@ th, td.action, td.date, td.year,
 	white-space: nowrap;
 }
 
-/** ALIGNMENT **/
-td.id, td.count, td.number, td.size, td.epno, td.duration
+td.id, td.count, td.number, td.size, td.epno, td.duration,
+#layout-content div.up2date_file_list table td.mylist
 {
 	text-align: right;
 }
@@ -41,20 +67,6 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	text-align: center;
 }
 
-
-/** WEIGHT/STYLE **/
-.v_high,
-.v_med, span.diff,
-#layout-content table.filelist tr.undumped td.id,
-#layout-content div.creqmod_all .state.new,
-#layout-content div.creqmod_all .state.return,
-#layout-content div.creqmod_all span.type.del,
-#layout-content div.msg_all tr.new td.state,
-#layout-content div.msg_all tr td.type
-{
-	font-weight: bold;
-}
-
 #layout-content table.filelist tr.deprecated
 {
 	text-decoration: line-through;
@@ -65,7 +77,6 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	font-style: italic;
 }
 
-/** SIZE **/
 #layout-menu
 {
 	font-size: small;
@@ -78,39 +89,11 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	width: 104%;
 }
 
-#layout-content div.main_all div.rightbar li
-{
-	font-size: x-small;
-	/*overflow:hidden;
-	text-overflow: ellipsis;
-	white-space:nowrap;*/
-}
-
 .tiny, small,
 #layout-content .name span.main,
 #layout-content .name span.match
 {
 	font-size: 95%;
-}
-
-/** SHIT **/
-#layout-content h1
-{
-font-size: 200%;
-font-weight: bold;
-}
-
-#layout-content h1 a
-{
-font-size: 100%;
-}
-
-#layout-content table caption, h4
-{
-	font-size: 115%;
-	font-weight: bold;
-	margin-top: 0.4em;
-	margin-bottom: 0.2em;
 }
 
 #layout-content div.userlist_all table td.hidden:after
@@ -123,6 +106,13 @@ font-size: 100%;
 	content: "N/A";
 }
 
+.v_high, .v_med, span.diff,
+#layout-content table.filelist tr.undumped td.id,
+#layout-content div.creqmod_all .state.new,
+#layout-content div.creqmod_all .state.return,
+#layout-content div.creqmod_all span.type.del,
+#layout-content div.msg_all tr.new td.state,
+#layout-content div.msg_all tr td.type,
 #layout-content div.mylist_list tr.complete td.stats,
 #layout-content div.mylist_list tr.all_watched td.stats,
 #layout-content div.anime_all div.groups td.lastupdate.new,
@@ -162,11 +152,6 @@ font-size: 100%;
 #layout-content div.anime_all div.groups td.mylist.new
 {
 	color: red;
-}
-
-#layout-content div.up2date_file_list table td.mylist
-{
-	text-align: right;
 }
 
 #layout-content div.ed2kexport_all pre

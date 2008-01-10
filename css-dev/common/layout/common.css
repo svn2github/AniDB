@@ -29,6 +29,11 @@ body.nonav #layout-content h1
 	display: none;
 }
 
+.hide
+{
+	display: none;
+}
+
 #layout-content h1,
 #layout-content div.g_section,
 #layout-content div.g_filterlist,
@@ -68,22 +73,17 @@ body.nonav #layout-content h1
 	float: right;
 }
 
-*.g_navprev
+#layout-content .g_navprev
 {
 	float: left;
 	padding-left: 0.3em;
 }
 
-*.g_navnext
+#layout-content .g_navnext
 {
 	float: right;
 	padding-right: 0.3em;
 }
-
-/*#layout-content div.g_definitionlist
-{
-	border: none;
-}*/
 
 #layout-content div.anime_all div.info tr.official td.value div.icons,
 #layout-content div table td.title div.icons,
