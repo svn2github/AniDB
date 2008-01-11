@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Data Tester</title>
+    <script type="text/javascript" src="helper.js"></script>
+    <script type="text/javascript" src="xsltTools.js"></script>
+    <script type="text/javascript" src="DataTester.js"></script>
+    <style type="text/css">td { vertical-align: top; } table {table-layout: fixed;}</style>
+</head>
+<body>
+<form action="">
+    <table width="100%" border="1px" style="">
+        <tr>
+            <th width="33%">
+                Category
+            </th>
+            <th width="33%">
+                Result
+            </th>
+            <th width="33%">
+                Extra Info
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" id="myListTest" onclick="testMyList(this)" value="Test MyListXml"/>
+            </td>
+            <td id="myListTestResult">
+                -
+            </td>
+            <td id="myListTestResultMessage">
+                -
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" id="animeFilesTest" onclick="testanimeFiles(this)" value="Test AnimeXmls"/>
+            </td>
+            <td id="animeFilesTestResult">
+                -
+            </td>
+            <td id="animeFilesTestResultMessage">
+                 -
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

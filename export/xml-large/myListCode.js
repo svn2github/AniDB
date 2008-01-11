@@ -1,4 +1,4 @@
-function myListXsltUpdater(resultElementId) {
+function myListXsltUpdater() {
     this.resultElement = document.getElementById("resultDiv");
     this.loadTopPanel();
     this.animeDetailsRenderer = new animeDetailsUpdater();

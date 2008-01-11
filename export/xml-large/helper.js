@@ -32,6 +32,13 @@ var CollectionNameSpace = {
             if (condition(item)) foundItems.push(item);
         })
         return foundItems;
+    },
+    ConvertAll: function(ary, converter) {
+        var result = new Array();
+        CollectionNameSpace.forEach(ary, function store(item){
+            result.push(converter(item));
+        })
+        return result;
     }
 }
 
@@ -52,4 +59,9 @@ document.removeElementById = function(id) {
     var element = this.getElementById(id);
     if (element) element.parentNode.removeChild(element);
 }
+
+
+
+
+
 

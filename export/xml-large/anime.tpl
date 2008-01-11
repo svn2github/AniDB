@@ -72,25 +72,28 @@ Version 0.2
 
             </rating>
 
-            <awards>
-                <awardTypes>
-                    <tmpl_loop name= loop_anime_award_types>
-                        <awardType id="<tmpl_var name= data_anime_award_type_id >">
-                            <![CDATA[<tmpl_var name= data_anime_award_type_name>]]>
-                        </awardType>
+
+            <tmpl_if name= status_anime_hasawards>
+                <awards>
+                    <awardTypes>
+                        <tmpl_loop name= loop_anime_award_types>
+                            <awardType id="<tmpl_var name= data_anime_award_type_id >">
+                                <![CDATA[<tmpl_var name= data_anime_award_type_name>]]>
+                            </awardType>
+                        </tmpl_loop>
+                    </awardTypes>
+                    <tmpl_loop name= loop_anime_awards>
+                        <award awardTypeId="<tmpl_var name= data_anime_award_type>">
+                            <awardName>
+                                <![CDATA[<tmpl_var name= data_anime_award_name>]]>
+                            </awardName>
+                            <awardURL>
+                                <tmpl_var name= data_anime_award_url>
+                            </awardURL>
+                        </award>
                     </tmpl_loop>
-                </awardTypes>
-                <tmpl_loop name= loop_anime_awards>
-                    <award awardTypeId="<tmpl_var name= data_anime_award_type>">
-                        <awardName>
-                            <![CDATA[<tmpl_var name= data_anime_award_name>]]>
-                        </awardName>
-                        <awardURL>
-                            <tmpl_var name= data_anime_award_url>
-                        </awardURL>
-                    </award>
-                </tmpl_loop>
-            </awards>
+                </awards>
+            </tmpl_if>
 
             <companies>
 
@@ -104,10 +107,12 @@ Version 0.2
                         </name>
                     </company>
                 </tmpl_loop>
-
             </companies>
 
-            <synopsis><![CDATA[<tmpl_var expr="jsencodehtml(data_anime_other)">]]></synopsis>
+            <synopsis><tmpl_var expr="jsencodehtml(data_anime_other)"></synopsis>
+            <!--<whatsthis>-->
+                <!--<tmpl_var name= data_anime_awardicons>-->
+            <!--</whatsthis>-->
         </seriesInfo>
 
         <episodes status="<tmpl_if name=status_anime_iscomplete>complete<tmpl_else>incomplete</tmpl_if>">

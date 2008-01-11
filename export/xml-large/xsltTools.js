@@ -14,12 +14,18 @@ XmlDocument.prototype = {
     },
     setLoadedAndCallBack: function(callback) {
         this.setLoaded();
+        this.parseError = this.checkParseError();
         callback();
     },
     load: function(url, callback) {
         this.setUnloaded();
         this.setForLoading(callback);
-        this._xmlDocument.load(url);
+        try {
+            this._xmlDocument.load(url);
+        }
+        catch (ex) {
+            this.handleLoadError(ex, callback);
+        }
     },
     setLoaded: function() {
         this.loaded = true;
@@ -30,9 +36,15 @@ XmlDocument.prototype = {
     init: function(xmlNameSpace) {
         this.setUnloaded();
         this.xmlNameSpace = xmlNameSpace;
+        this.parseError = this.createParseError(false);
     },
     isLoaded: function() {
         return this.loaded;
+    },
+    createParseError: function(hasError, reason, errorCode) {
+        if (typeof errorCode == 'undefined')
+            errorCode = (hasError) ? 1 : 0;
+        return {'hasError' : hasError,'errorCode' : errorCode, 'reason' : reason}
     }
 }
 
@@ -44,7 +56,6 @@ XmlDocument.getDocumentAndPrepareForLoading = function(xmlNameSpace) {
     });
 }
 
-
 var IEDocument = function(xmlNameSpace) {
     this._xmlDocument = new ActiveXObject('Msxml2.DOMDocument');
     this.init(xmlNameSpace);
@@ -55,8 +66,18 @@ IEDocument.prototype = new XmlDocument();
 IEDocument.prototype.setForLoading = function(callback) {
     this._xmlDocument.async = false;
     this._xmlDocument.onreadystatechange = function() {
-        if (this._xmlDocument.readyState == 4) this.setLoadedAndCallBack(callback);
+        if (this._xmlDocument.readyState != 4) return;
+        this.parseError = this._xmlDocument.parseError;
+        this.setLoadedAndCallBack(callback);
     }.bind(this)
+}
+
+IEDocument.prototype.handleLoadError = function(exception, callback) {
+
+}
+
+IEDocument.prototype.xml = function() {
+    return this._xmlDocument.xml;
 }
 
 IEDocument.prototype.selectSingleNode = function(xpath) {
@@ -65,8 +86,19 @@ IEDocument.prototype.selectSingleNode = function(xpath) {
     return this._xmlDocument.selectSingleNode(xpath);
 }
 
+IEDocument.prototype.selectNodes = function(xpath) {
+    this._xmlDocument.setProperty('SelectionLanguage', 'XPath');
+    this._xmlDocument.setProperty('SelectionNamespaces', 'xmlns:xsl="' + this.xmlNameSpace + '"');
+    return this._xmlDocument.selectNodes(xpath);
+}
+
 IEDocument.prototype.createElement = function(name) {
     return this._xmlDocument.createNode('element', name, this.xmlNameSpace)
+}
+
+IEDocument.prototype.checkParseError = function() {
+    var parseError = this._xmlDocument.parseError;
+    return this.createParseError((parseError.errorCode != 0), parseError.reason, parseError.errorCode)
 }
 
 IEDocument.prototype.transformNode = function(xslDocument) {
@@ -97,6 +129,21 @@ MozillaDocument.prototype.setForLoading = function(callback) {
     }.bind(this)
 }
 
+MozillaDocument.prototype.checkParseError = function() {
+    var parseError = this._xmlDocument.documentElement.nodeName == "parsererror";
+    if (parseError) var reason = this.xml();
+    return this.createParseError(parseError, reason)
+}
+
+MozillaDocument.prototype.handleLoadError = function(exception, callback) {
+    this.parseError = this.createParseError(true, exception.message);
+    callback();
+}
+
+MozillaDocument.prototype.xml = function () {
+    return new XMLSerializer().serializeToString(this._xmlDocument);
+}
+
 MozillaDocument.prototype.nameSpaceResolver = function() {
     var xmlNameSpace = this.xmlNameSpace;
     return function(prefix) {
@@ -107,6 +154,17 @@ MozillaDocument.prototype.nameSpaceResolver = function() {
 MozillaDocument.prototype.selectSingleNode = function(xpath) {
     var result = this._xmlDocument.evaluate(xpath, this._xmlDocument, this.nameSpaceResolver(), XPathResult.ANY_UNORDERED_NODE_TYPE, null);
     return result.singleNodeValue;
+}
+
+MozillaDocument.prototype.selectNodes = function(xpath) {
+    var result = this._xmlDocument.evaluate(xpath, this._xmlDocument, this.nameSpaceResolver(), XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+    var returnVal = new Array();
+    var node = result.iterateNext();
+    while (node) {
+        returnVal.push(node);
+        node = result.iterateNext();
+    }
+    return returnVal;
 }
 
 MozillaDocument.prototype.createElement = function(name) {
@@ -154,7 +212,7 @@ XslDocument.prototype = {
             node.appendChild(xslSort);
         }
     },
-    addDateSortNode: function(node, orderBy,sortOrder) {
+    addDateSortNode: function(node, orderBy, sortOrder) {
         this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),7,4)', 'number', sortOrder);
         this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),4,2)', 'number', sortOrder);
         this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),1,2)', 'number', sortOrder);
