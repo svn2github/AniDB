@@ -60,14 +60,18 @@ select
 	font-size: 11px;
 	margin-left: 0.3em;
 }
-form input[type="submit"],
 form input[type="button"]
 {
 	margin-top: 0.3em;
-	color: #ff6000;
-	border-style: solid;
-	border-color: #565656;
+	color: #797979;
+	border-style: dashed;
 	background-image: url(images/bg_2.gif);
+}
+form input[type="button"]:hover
+{
+	color: white;
+	background-image: url(images/blackpixel.png);
+	border-color: #797979;
 }
 ul
 {
@@ -91,7 +95,7 @@ caption
 }
 span
 {
-display: inline;
+	display: inline;
 }
 h2
 {
@@ -163,15 +167,15 @@ span.g_navnext
 }
 #layout-content ul.g_navlist li
 {
-padding: 0px;
+	padding: 0px;
 }
 #layout-content ul.g_navlist li:before
 {
-content: " | "
+	content: " | "
 }
 #layout-content ul.g_navlist li:first-child:before
 {
-content: "";
+	content: "";
 }
 td.action
 {
@@ -314,7 +318,8 @@ td.action
 {
 	text-align: right;
 }
-#layout-content ul.g_jumplist
+#layout-content ul.g_jumplist,
+#layout-tabs ul.main-tabs
 {
 	padding-left: 0;
 	padding-top: 2px;
@@ -323,17 +328,18 @@ td.action
 	text-align: center;
 }
 #layout-content ul.g_actionlist li,
-#layout-content ul.g_jumplist li
+#layout-content ul.g_jumplist li,
+#layout-tabs ul.main-tabs li
 {
 	display: inline;
-	font-style: italic;
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 0;
 	padding-right: 0;
 }
 #layout-content ul.g_actionlist li a,
-#layout-content ul.g_jumplist li a
+#layout-content ul.g_jumplist li a,
+#layout-tabs ul.main-tabs
 {
 	display: inline;
 	font-style: normal;
@@ -359,9 +365,20 @@ td.action
 	padding-right: 1em;
 	float: right;
 }
-#layout-content ul.g_actionlist li+li:before
+#layout-content ul.g_actionlist li+li:before,
+#layout-content ul.main-tabs li+li:before
 {
 	content: " - ";
+}
+#layout-tabs ul.main-tabs li
+{
+	background: inherit;
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+#layout-tabs ul.main-tabs li.selected a
+{
+	color: #FF6600;
 }
 #layout-nav
 {
@@ -469,18 +486,22 @@ td.action
 {
 	text-align: center;
 }
-#layout-search form input.submit
+#layout-search form input.submit,
+form input[type="submit"]
 {
 	margin-top: 0.5em;
 	color: white;
 	font-size: 13px;
 	border-style: dashed;
+	border-color: #565656;
 	background: url(images/whitepixel.png);
 }
-#layout-search form input.submit:hover
+#layout-search form input.submit:hover,
+form input[type="submit"]:hover
 {
 	color: #ff6000;
 	background: url(images/redpixel.png);
+	border-color: #797979;
 }
 #layout-content
 {
@@ -650,7 +671,7 @@ body.nonav #layout-content h1
 #layout-content div.anime_all div.episodes table.eplist,
 #layout-content div.anime_all div.episodes table.filelist
 {
-width: 99%;
+	width: 99%;
 }
 #layout-content div.anime_all th
 {
@@ -779,9 +800,9 @@ width: 99%;
 }
 #layout-content div.anime_all div.info th span.i_icon
 {
-	 display: inline;
-	 float: right;
-	 padding: 0px 1px 0px 1px;
+	display: inline;
+	float: right;
+	padding: 0px 1px 0px 1px;
 }
 #layout-content td.icons.quality *.i_icon
 {
@@ -1841,11 +1862,11 @@ a.i_icon:hover, a.i_inline:hover
 }
 #style_description
 {
-  width: 20em;
+	width: 20em;
 }
 #image_viewer
 {
-  margin: 50px;
+	margin: 50px;
 }
 #style_url
 {
@@ -1903,7 +1924,7 @@ a.i_icon:hover, a.i_inline:hover
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	vertical-align: center;
+	vertical-align: middle;
 }
 *.s_reverse
 {
@@ -2076,9 +2097,4 @@ a.i_icon:hover, a.i_inline:hover
 #layout-content div.anime_all div.episodes table table.filelist td.id .i_icon
 {
 	text-align: left;
-}
-
-/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
-#layout-tabs {
-	display:none;
 }
