@@ -1,0 +1,9 @@
+LIBRARY			hash_d
+;DESCRIPTION	'Div Hash Calc'
+VERSION			1
+
+EXPORTS
+	hash_create
+	hash_update
+	hash_digest
+	hash_destroy
