@@ -3,23 +3,23 @@
     <tr class="options">
         <td>Options:</td>
         <td>
-            <input type="checkbox" onclick="myListRenderer.setXslParamShow('showOVA',this.checked)" checked="checked"/>
+            <input type="checkbox" onclick="myListRenderer.update({'showOVA': this.checked.toString()})" checked="checked"/>
             Show OAVs
         </td>
         <td>
-            <input type="checkbox" onclick="myListRenderer.setXslParamShow('showTv',this.checked)" checked="checked"/>
+            <input type="checkbox" onclick="myListRenderer.update({'showTV': this.checked.toString()})" checked="checked"/>
             Show TV Series
         </td>
         <td>
-            <input type="checkbox" onclick="myListRenderer.setXslParamShow('showMovie',this.checked)" checked="checked"/>
+            <input type="checkbox" onclick="myListRenderer.update({'showMovie': this.checked.toString()})" checked="checked"/>
             Show Movies
         </td>
         <td>
-            <input type="checkbox" onclick="myListRenderer.setXslParamShow('showOther',this.checked)" checked="checked"/>
+            <input type="checkbox" onclick="myListRenderer.update({'showOther': this.checked.toString()})" checked="checked"/>
             Show Others
         </td>
         <td>
-            <input type="checkbox" onclick="myListRenderer.setXslParamShow('showIncomplete',this.checked )" checked="checked"/>
+            <input type="checkbox" onclick="myListRenderer.update({'showIncomplete': this.checked.toString()})" checked="checked"/>
             Show Incomplete
         </td>
     </tr>

@@ -109,7 +109,7 @@ Version 0.2
                 </tmpl_loop>
             </companies>
 
-            <synopsis><tmpl_var expr="jsencodehtml(data_anime_other)"></synopsis>
+            <synopsis><tmpl_var expr="jsencodexml(data_anime_other)"></synopsis>
             <!--<whatsthis>-->
                 <!--<tmpl_var name= data_anime_awardicons>-->
             <!--</whatsthis>-->

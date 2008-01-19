@@ -2,6 +2,10 @@ function testMyList(sender) {
     xmlTest(sender, new Array('mylist.xml', 'malformed.xml', 'unknown.xml'));
 }
 
+function testMyListTransform(sender) {
+    xmlTransformTest(sender, new Array('mylist.xml', 'badoutput.xml'));
+}
+
 function testanimeFiles(sender) {
     var getAnimeFile = function(node) {
         return 'anime/a' + node.getAttribute('id') + '.xml';
@@ -14,6 +18,37 @@ function testanimeFiles(sender) {
     }
     listDoc.load("mylist.xml", callback);
 }
+
+function XmlTransformTest(sender, fileList) {
+    var fileNumber = 0;
+    var failureCount = 0;
+    var message = '';
+    var loadFile = function(fileName) {
+        var listDoc = XmlDocument.getDocumentAndPrepareForLoading('');
+        listDoc.load(fileName, callBack(listDoc, fileName))
+    }
+
+    var callBack = function(listDoc, fileName) {
+        return function()
+        {
+            var parseError = listDoc.parseError;
+            if (parseError.hasError) {
+                failureCount += 1;
+                message += '<div>' + fileName + ' : ' + parseError.reason + '</div>';
+            }
+            fileNumber += 1;
+            if (fileNumber == fileList.length)
+                displayResult();
+        }
+    }
+
+    var displayResult = function() {
+        document.getElementById(sender.id + 'Result').innerHTML = (failureCount == 0) ? 'Success' : 'Failure on ' + failureCount + ' files.'
+        document.getElementById(sender.id + 'ResultMessage').innerHTML = message;
+    }
+    CollectionNameSpace.forEach(fileList, loadFile);
+}
+
 
 function xmlTest(sender, fileList) {
     var fileNumber = 0;
@@ -44,6 +79,7 @@ function xmlTest(sender, fileList) {
     }
     CollectionNameSpace.forEach(fileList, loadFile);
 }
+
 
 
 

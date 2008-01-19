@@ -20,6 +20,10 @@ function outChangeClass(obj) {
     obj.className = lastClass;
 }
 
+function unlinkParentEvent(element) {
+    element.parentNode.onclick = null;
+}
+
 function setTitle(title) {
     document.title = title;
 }

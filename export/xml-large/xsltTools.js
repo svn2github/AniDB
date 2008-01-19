@@ -192,44 +192,19 @@ XslDocument.prototype = {
     isLoaded: function() {
         return this._xslDocument.isLoaded();
     },
-    removeSortNodes: function(node) {
-        if (!node) return;
-        var sortNodes = CollectionNameSpace.findall(node.childNodes, function isSortNode(childNode) {
-            return childNode.nodeName == 'xsl:sort';
-        })
-        CollectionNameSpace.forEach(sortNodes, function remove(childNode) {
-            node.removeChild(childNode);
-        });
+    processParameters: function(parameters) {
+        if (typeof parameters != 'undefined')
+            for (var param in parameters) {
+                this.setParameter(param, parameters[param])
+            }
     },
-    addSortNode: function(node, orderBy, dataType, sortOrder) {
-        if (!node) return;
-        if (dataType == 'date') this.addDateSortNode(node, orderBy, dataType, sortOrder);
-        else {
-            var xslSort = this._xslDocument.createElement('xsl:sort');
-            xslSort.setAttribute('select', orderBy);
-            xslSort.setAttribute('data-type', dataType);
-            xslSort.setAttribute('order', sortOrder);
-            node.appendChild(xslSort);
-        }
+    transformedDocument: function(xmlDocument, parameters) {
+        this.processParameters(parameters);
+        return this.getTransformedDocument(xmlDocument);
     },
-    addDateSortNode: function(node, orderBy, sortOrder) {
-        this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),7,4)', 'number', sortOrder);
-        this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),4,2)', 'number', sortOrder);
-        this.addSortNode(node, 'substring(normalize-space(' + orderBy + '),1,2)', 'number', sortOrder);
-    },
-    selectApplyTemplateNode: function(tagName) {
-        return this._xslDocument.selectSingleNode('//xsl:apply-templates[@select = "' + tagName + '"]');
-    },
-    removeXslSortFromApplyTemplate: function(tagName) {
-        this.removeSortNodes(this.selectApplyTemplateNode(tagName));
-    },
-    addXslSortToApplyTemplate: function(tagName, orderBy, dataType, sortOrder) {
-        this.addSortNode(this.selectApplyTemplateNode(tagName), orderBy, dataType, sortOrder);
-    },
-    replaceXslSortOnApplyTemplate: function(tagName, orderBy, dataType, sortOrder) {
-        var node = this.selectApplyTemplateNode(tagName);
-        this.removeSortNodes(node)
-        this.addSortNode(node, orderBy, dataType, sortOrder)
+    transformIntoElement: function(xmlDocument, resultElement, parameters) {
+        this.processParameters(parameters);
+        this.performTransformIntoElement(xmlDocument, resultElement);
     }
 }
 
@@ -247,17 +222,17 @@ var IEXslDocument = function() {
 
 IEXslDocument.prototype = new XslDocument();
 
-IEXslDocument.prototype.transformedDocument = function(xmlDocument) {
+IEXslDocument.prototype.getTransformedDocument = function(xmlDocument) {
     return xmlDocument.transformNodeToObject(this._xslDocument);
 }
 
 IEXslDocument.prototype.setParameter = function(name, value) {
-    var node = this._xslDocument.selectSingleNode('//xsl:param[@name="' + name + '"]')
+    var node = this._xslDocument.selectSingleNode('/xsl:stylesheet/xsl:param[@name="' + name + '"]')
     node.removeAttribute('select');
     node.setAttribute('select', "'" + value + "'");
 }
 
-IEXslDocument.prototype.transformIntoElement = function(xmlDocument, resultElement) {
+IEXslDocument.prototype.performTransformIntoElement = function(xmlDocument, resultElement) {
     resultElement.innerHTML = xmlDocument.transformNode(this._xslDocument);
 }
 
@@ -276,17 +251,18 @@ MozillaXslDocument.prototype.load = function(url, callback) {
     this._xslDocument.load(url, interceptedCallback);
 }
 
-MozillaXslDocument.prototype.transformedDocument = function(xmlDocument) {
+MozillaXslDocument.prototype.getTransformedDocument = function(xmlDocument) {
     var outputDocument = XmlDocument.getDocumentAndPrepareForLoading('');
     outputDocument.storeDomObject(this.xsltProcessor.transformToDocument(xmlDocument._xmlDocument));
     return outputDocument;
 }
 
 MozillaXslDocument.prototype.setParameter = function(name, value) {
-    this.xsltProcessor.setParameter('', name, value)
+    this.xsltProcessor.removeParameter(null, name);
+    this.xsltProcessor.setParameter(null, name, value);
 }
 
-MozillaXslDocument.prototype.transformIntoElement = function(xmlDocument, resultElement) {
+MozillaXslDocument.prototype.performTransformIntoElement = function(xmlDocument, resultElement) {
     var documentFragment = this.xsltProcessor.transformToFragment(xmlDocument._xmlDocument, resultElement.ownerDocument);
     while (resultElement.hasChildNodes()) {
         resultElement.removeChild(resultElement.lastChild);

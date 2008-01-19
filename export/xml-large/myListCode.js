@@ -16,36 +16,16 @@ myListXsltUpdater.prototype = {
         this.xmlDocument = XmlDocument.getDocumentAndPrepareForLoading('');
         this.firstXslDocument = XslDocument.getDocumentAndPrepareForLoading();
         this.secondXslDocument = XslDocument.getDocumentAndPrepareForLoading();
-        this.loaded = typeof this.xmlDocument != 'undefined';
         loadDocuments({"mylist.xml": this.xmlDocument, "firstPass.xsl": this.firstXslDocument,
             "mylistb.xsl": this.secondXslDocument}, this.buildIntermediateXml.bind(this));
-
     },
     buildIntermediateXml: function () {
         this.intermediateXml = this.firstXslDocument.transformedDocument(this.xmlDocument);
-        this.sortOrder = "descending";
-        this.sortList('additionDate', 'text');
+        this.update();
     },
-    update: function () {
-        this.secondXslDocument.transformIntoElement(this.intermediateXml, this.resultElement);
+    update: function (parameters) {
+        this.secondXslDocument.transformIntoElement(this.intermediateXml, this.resultElement, parameters);
         this.animeDetailsRenderer.updateDisplay();
-    },
-    setXslParameter: function(name, value) {
-        this.secondXslDocument.setParameter(name, value);
-    },
-    setXslParamShow: function(name, shouldShow) {
-        this.setXslParameter(name, (shouldShow ? 'true' : 'false'));
-        this.update();
-    },
-    sortList: function(field, type) {
-        if (this.sortName == field) {
-            this.sortOrder = (this.sortOrder == "ascending" ? "descending" : "ascending");
-        }
-        else this.sortName = field;
-        this.setXslParameter("sortNodeName", this.sortName);
-        this.setXslParameter("sortDataType", type);
-        this.setXslParameter("sortDirection", this.sortOrder);
-        this.update();
     },
     selectShow: function(id) {
         this.animeDetailsRenderer.handleUserSelection(id);

@@ -6,10 +6,18 @@
 body {
     background-color: #000000;
     color: #FFFFFF;
-    font-size: 10px;
+    font-size: 12px;
     font-family: Tahoma, Verdana, Arial, Helvetica;
     margin: 0;
     height: 100%;
+}
+
+.descending {
+    background-image: url( images/desc.gif );
+}
+
+.ascending {
+    background-image: url( images/asc.gif );
 }
 
 h1 {
@@ -24,18 +32,31 @@ h2 {
     font-size: 1.2em;
 }
 
+.sub {
+    font-size: 10px;
+}
+
+.clickable {
+    border: thin outset #993300;
+}
+
+.headerCenter {
+    margin-right: 215px;
+    margin-left: 215px;
+}
+
 tbody {
 /*overflow : scroll;*/
 }
 
-.floatLeft {
+.headerLeft {
     float: left;
-    text-align: right;
+    width: 20%;
 }
 
-.floatRight {
+.headerRight {
     float: right;
-    text-align: left;
+    width: 20%;
 }
 
 table {
@@ -44,7 +65,7 @@ table {
     border-style: solid;
     border-width: 0px;
     border-collapse: collapse;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 tr {
@@ -96,10 +117,12 @@ tr.options {
 tr.thead {
     color: #F0F0F0;
     font-weight: bold;
+    font-size: 14px;
     background-color: #993300;
     padding: 0px;
     padding-bottom: 100px;
     text-align: center;
+
 }
 
 tfoot tr {
@@ -107,11 +130,13 @@ tfoot tr {
     background-color: #00C000;
 }
 
-td {
+td, th {
     padding: 0px; /*white-space: nowrap;*/
     border-width: 1px;
     border-style: solid;
     border-color: #000000;
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 
 a {
