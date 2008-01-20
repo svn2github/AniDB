@@ -2,6 +2,7 @@
 @import "../common/style/icons/default.css";
 @import "../common/layout/page/latestanimes.css";
 @import "../common/layout/global/navlist.css";
+@import "../common/style/icons/awards.css";
 html
 {
 	width: 100%;
