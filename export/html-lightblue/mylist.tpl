@@ -38,7 +38,7 @@ alist[<tmpl_var name=data_anime_id>].isWatched = <tmpl_if name=status_anime_iswa
 alist[<tmpl_var name=data_anime_id>].isWishlist = <tmpl_if name=status_anime_isinwishlist>true;<tmpl_else>false;</tmpl_if>
 alist[<tmpl_var name=data_anime_id>].wishlistprio = "<tmpl_var name=data_anime_wishlist_priority>";
 alist[<tmpl_var name=data_anime_id>].wishlisttypename = "<tmpl_var name=data_anime_wishlist_type_name>";
-alist[<tmpl_var name=data_anime_id>].wishlistcomment = "<tmpl_var name=data_anime_wishlist_comment>";
+alist[<tmpl_var name=data_anime_id>].wishlistcomment = "<tmpl_var expr="jsencode(data_anime_wishlist_comment)">";
 alist[<tmpl_var name=data_anime_id>].hasAwards = <tmpl_if name=status_anime_hasawards>true;<tmpl_else>false;</tmpl_if>
 alist[<tmpl_var name=data_anime_id>].aliases = "";
 alist[<tmpl_var name=data_anime_id>].shortNames = "";
