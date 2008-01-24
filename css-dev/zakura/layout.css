@@ -8,6 +8,7 @@
 #layout-tabs {
 	display:none;
 }
+ul.tabs,ul.contribution { display: none; }
 
 /* container - main nav, login, & search */
 div#layout-nav {

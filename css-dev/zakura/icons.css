@@ -186,8 +186,8 @@ div.anime_all td.icons span,
 .i_down1, .i_up1		{background-position: -11px center;}
 .i_nodown1, .i_down1	{background-image: url(images/buttons/down.gif);}
 .i_noup1, .i_up1		{background-image: url(images/buttons/up.gif);}
-.i_minus				{background-image: url(images/buttons/minus.gif);}
-.i_plus					{background-image: url(images/buttons/plus.gif);}
+.i_minus { background: transparent url(images/buttons/minus.gif) no-repeat 3px top; }
+.i_plus	{ background: transparent url(images/buttons/plus.gif) no-repeat 3px top;}
 
 /* file state */
 .i_filestate_oncd 		{background-image: url(images/icons/state-cd.png);}
