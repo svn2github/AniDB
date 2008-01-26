@@ -1,26 +1,38 @@
-#layout-content div.block
+#layout-main div.block
 {
+	width: 100%;
 	display: table;
-	margin-left: auto;
-	margin-right: auto;
 }
-#layout-content div.block div.image
+#layout-main div.block div.image
 {
 	display: table-cell;
 	vertical-align: middle;
 	padding-right: 1em;
+	text-align: right;
+	width: 40%;
 }
-#layout-content div.desc
+#layout-main div.block div.data
+{
+	display: table-cell;
+	width: 60%;
+	height: 100%;
+}
+#layout-main div.block div.data > div
+{
+	display: table;
+	height: 100%;
+}
+#layout-main div.desc
 {
 	margin-top: 1em;
 	margin-left: 2em;
 	margin-right: 2em;
 }
-#layout-content div.block div.image
+#layout-main div.block div.image
 {
-	-float: left;
+	-float: left; /*IE*/
 }
-#layout-content div.desc
+#layout-main div.desc
 {
-	-clear: left;
+	-clear: left; /*IE*/
 }

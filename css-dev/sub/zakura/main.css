@@ -1,0 +1,20 @@
+@import "../common.css";
+
+@import "layout-macro.css";
+
+@import "style-default.css";
+@import "style-menu.css";
+@import "style-usermenu.css";
+@import "style-content.css";
+
+@import "../../zakura/icons.css";
+
+html, body, div, form, table, tr, td, ul, ol, dl, li, dt, h1, h2, h3, h4, p, caption
+{
+	padding: 0;
+}
+
+*
+{
+	font-size: 12px;
+}

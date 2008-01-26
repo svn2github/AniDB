@@ -22,46 +22,46 @@ img, a
 /*ul,*/
 #layout-nav,
 #layout-footer,
-#layout-content
+#layout-main
 {
 	/*border: 1px #867f6a solid;*/
 }
 
-#layout-content *.g_jumplist,
-#layout-content *.g_description,
-#layout-content *.g_image image,
-#layout-content .block .g_definitionlist,
-#layout-content div.main_all div.news h4,
-#layout-content div.g_definitionlist table
+#layout-main *.g_jumplist,
+#layout-main *.g_description,
+#layout-main *.g_image image,
+#layout-main .block .g_definitionlist,
+#layout-main div.main_all div.news h4,
+#layout-main div.g_definitionlist table
 {
 	/*border: 1px #999380 dotted;*/
 }
 
-#layout-content h1,
-#layout-content div.main_all div.news h4,
-#layout-content div.cmt_all div.comment h4
+#layout-main h1,
+#layout-main div.main_all div.news h4,
+#layout-main div.cmt_all div.comment h4
 {
 	/*border: 1px #867f6a dotted;*/
 }
 
-#layout-content .g_image image,
-#layout-content .g_definitionlist
+#layout-main .g_image image,
+#layout-main .g_definitionlist
 {
 	padding: 1px;
 }
 
-#layout-content .block .g_definitionlist table
+#layout-main .block .g_definitionlist table
 {
 	border: none;
 	margin: 0;
 }
 
-#layout-content div.anime_all div.episodes tr.newtype td
+#layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top: 2px #006699 double;
 }
 
-/*#layout-content div.g_definitionlist tr th
+/*#layout-main div.g_definitionlist tr th
 {
 	border-top: 1px #FFFFFF solid;
 	border-right: 1px #FFFFFF solid;

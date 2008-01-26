@@ -17,7 +17,7 @@ a:active
 color: red;
 }
 
-#layout-content a:hover
+#layout-main a:hover
 {
 text-decoration: underline;
 }
@@ -49,16 +49,16 @@ text-decoration: none;
 }
 
 th,
-#layout-content div.g_timedentry h4,
-#layout-content div.main_all div.rightbar h4
+#layout-main div.g_timedentry h4,
+#layout-main div.main_all div.rightbar h4
 {
 	color: #4f5e77;
 	background-color: #a1b4cd;
 }
 
-#layout-content tr.g_odd,
-#layout-content li.g_odd,
-#layout-content span.g_odd
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd
 {
 	background-color: #dfdff6;
 }

@@ -1,29 +1,29 @@
-#layout-content div.anime_all div.info th span.i_icon
+#layout-main div.anime_all div.info th span.i_icon
 {
 	float: right;
 }
 
-#layout-content div.anime_all div.episodes table.eplist
+#layout-main div.anime_all div.episodes table.eplist
 {
 	width: 99%;
 }
 
-#layout-content div.anime_all div.episodes div.mylist_add
+#layout-main div.anime_all div.episodes div.mylist_add
 {
 	margin-top: 1em;
 }
 
-#layout-content div.anime_all div.mylist table td
+#layout-main div.anime_all div.mylist table td
 {
 	padding: 1em;
 }
 
-#layout-content div.anime_all div.mylist table td span.i_icon
+#layout-main div.anime_all div.mylist table td span.i_icon
 {
 	margin-left: 1em;
 }
 
-#layout-content div.anime_all div.mylist div.g_actionlist
+#layout-main div.anime_all div.mylist div.g_actionlist
 {
 	margin-top: 1em;
 	margin-bottom: 1em;

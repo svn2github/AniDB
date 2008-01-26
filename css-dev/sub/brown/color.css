@@ -30,31 +30,31 @@ a:hover,
 }
 
 #layout-nav div ul,
-#layout-content,
+#layout-main,
 #layout-footer
 {
 	background-color: #e9e6d9;
 }
 
-#layout-content th a,
-#layout-content h1 a,
-#layout-content div.g_timedentry h4 a
+#layout-main th a,
+#layout-main h1 a,
+#layout-main div.g_timedentry h4 a
 {
 	color: #e9e6d9;
 }
 
 th,
-#layout-content h1,
-#layout-content div.g_timedentry h4
+#layout-main h1,
+#layout-main div.g_timedentry h4
 {
 	color: #e9e6d9;
 	background-color: #8c8673;
 }
 
-#layout-content tr.g_odd,
-#layout-content li.g_odd,
-#layout-content span.g_odd,
-#layout-content div.desc
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd,
+#layout-main div.desc
 {
 	background-color: #e0dbc9;
 }

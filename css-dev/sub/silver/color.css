@@ -1,10 +1,17 @@
 body,
-#layout-content div.g_definitionlist table
+#layout-main div.g_definitionlist table,
+#layout-main div.tabbed_pane div.pane,
+#layout-main div.tabbed_pane div.pane ul
 {
 	color: #2E3C55;
-	border-color: #e5e5e5;
-	background: #e5e5e5 url(images/sub-bg-body.gif) repeat-x;
+	border-color: #E5E5E5;
+	background: #E5E5E5 url(images/sub-bg-body.gif) repeat-x;
 }
+
+/*#layout-main div.tabbed_pane div.pane ul
+{
+	background: #fefefe url(http://static.anidb.net/css/sub-silver/images/sub-bg-body.gif) repeat-x;
+}*/
 
 a:link,a:active,a:visited
 {
@@ -16,7 +23,7 @@ a:hover
 	color : #f26522/*#DD6900*/;
 }
 
-#layout-content
+#layout-main
 {
 	background: #FBFBFB url(images/sub-bg-layout2.gif) repeat-x;
 }
@@ -36,44 +43,44 @@ th
 	background: #3a95c2 url(images/sub-bg-th.gif) repeat-x;
 }
 
-#layout-content h1
+#layout-main h1
 {
 	color: #efefef;
 	background: #3a95c2 url(images/sub-bg-th.gif) repeat-x;
 }
 
-#layout-content div.g_timedentry,
-#layout-content div.desc
+#layout-main div.g_timedentry,
+#layout-main div.desc
 {
 	background-color: #fafafa;
 }
 
 ul,
-#layout-content tr,
-#layout-content ul.g_jumplist,
-#layout-content *.g_filterlist,
-#layout-content *.g_actionlist,
-#layout-content *.g_description,
-#layout-content div.addepm div.ep
+#layout-main tr,
+#layout-main ul.g_jumplist,
+#layout-main *.g_filterlist,
+#layout-main *.g_actionlist,
+#layout-main *.g_description,
+#layout-main div.addepm div.ep
 {
 	background-color: #f4f4f4
 }
 
-#layout-content div.g_timedentry h4,
-#layout-content tr.g_odd,
-#layout-content li.g_odd,
-#layout-content span.g_odd
+#layout-main div.g_timedentry h4,
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd
 {
 	background-color: #dee3e7;
 }
 
-#layout-content table table.filelist tr,
-#layout-content div.g_definitionlist tr
+#layout-main table table.filelist tr,
+#layout-main div.g_definitionlist tr
 {
 	background-color: inherit;
 }
 
-#layout-content div.g_definitionlist tr th
+#layout-main div.g_definitionlist tr th
 {
 	color: inherit;
 	background-image: none;
@@ -83,4 +90,31 @@ ul,
 #layout-menu > div > ul > li:hover
 {
 	background-color: #fafafa;
+}
+
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a
+{
+	border: 1px #98AAB1 solid;
+	background-color: #F4F4F4;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: white;
+}
+
+#layout-tabs ul li.selected a
+{
+	background-color: #E5E5E5;
+	border-bottom: 1px #E5E5E5 double;
+}
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background: #FFFFFF;
+}
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color: #E5E5E5;
 }

@@ -1,0 +1,498 @@
+.g_content a,
+.g_content a:link {
+	color: #154ef4;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+}
+
+.g_content a:visited {
+	color: #7264a6;
+}
+
+.g_content a:hover,
+.g_content a:active {
+	color: #4876fe;
+	border-bottom: 1px dotted #4876fe;
+}
+
+.g_content td.action a,
+.g_content th a,
+.g_content th a img {
+	border: 0 !important;
+}
+
+div.g_content {
+border: 1px solid #f3e7ff;
+border-bottom-color: #dec9f2;
+border-right-color: #dec9f2;
+width: 100%;
+background: #fff;
+}
+
+div.g_content>* {
+margin: 1em;
+}
+
+div.latestanimes_anime:after,
+div.anime_all div.info .block:after,
+div.search_all div.search_results ul.g_jumplist:after,
+div.file_all div.file_info dl:after,
+div.mylist_list form:after,
+div.userpage_all div.stats:after,
+div.userpage_all div.charts:after,
+div.animeatt_all div.animeatt_reviews div.review:after,
+div.agcmts_all div.agcmts_head:after {
+content: ".";
+clear: both;
+display: block;
+visibility: hidden;
+height: 0;
+}
+
+/* blocks */
+.g_content div.block {
+display:table;
+margin-left:auto;
+margin-right:auto;
+}
+
+.g_content div.block div.image {
+display:table-cell;
+vertical-align:middle;
+}
+
+.g_content div.block div.image img {
+margin-right: 1em;
+}
+
+/* pagination */
+ul.g_jumplist,
+ul.g_navlist {
+text-align: center;
+}
+
+ul.g_jumplist li,
+ul.g_navlist li {
+display: inline;
+color: #de4799;
+font-weight: bold;
+text-transform: capitalize;
+}
+
+.g_content ul.g_jumplist li a,
+.g_content ul.g_jumplist li a:link,
+.g_content ul.g_jumplist li a:visited,
+.g_content ul.g_navlist li a,
+.g_content ul.g_navlist li a:link,
+.g_content ul.g_navlist li a:visited {
+text-decoration: none;
+border: 1px solid #f7edf1;
+border-bottom: 1px solid #d28cb2;
+color: #d28cb2;
+background: #fff9fb;
+padding: 0.2em 0.3em;
+font-size: 0.95em;
+font-weight: normal;
+}
+
+.g_content ul.g_jumplist li a:hover,
+.g_content ul.g_jumplist li a:active,
+.g_content ul.g_navlist li a:hover,
+.g_content ul.g_navlist li a:active {
+background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
+color: #de4799;
+border: 1px solid #eec6dc;
+}
+
+ul.g_jumplist li.prev {
+float: left;
+padding-left: 12px;
+background: transparent url(images/layout/larr.gif) no-repeat left center;
+font-weight: normal;
+}
+
+ul.g_jumplist li.next {
+float: right;
+padding-right: 12px;
+background: transparent url(images/layout/rarr.gif) no-repeat right center;
+font-weight: normal;
+}
+
+ul.g_jumplist li.all:before {
+content: "Viewing: ";
+color: #3d3e6e;
+text-transform: none;
+font-weight: normal;
+}
+
+/* navlist */
+ul.g_navlist.type li:first-child:before {
+content: "Type: ";
+color: #3d3e6e;
+text-transform: none;
+font-weight: normal;
+}
+
+ul.g_navlist.g_numonpage li:first-child:before {
+content: "Per page: ";
+color: #3d3e6e;
+text-transform: none;
+font-weight: normal;
+}
+
+/* list menu */
+div.g_menu {
+float: right;
+text-transform: capitalize;
+width: 11em;
+}
+
+.g_menu h4 {
+font-weight: normal;
+padding: 0 0.15em;
+}
+
+div.g_menu ul li {
+border-top: 1px solid #ebe1ef;
+padding: 0.3em;
+position: relative;
+}
+
+div.g_menu ul li.g_odd {
+background-color: #f5f7ff;
+}
+
+/* selects */
+select {
+background: #fafafa;
+padding: 0.2em;
+border: 1px solid #cfd0d1;
+}
+
+select option {
+color: #3d3e6e;
+background: #e0ecfd;
+}
+
+select option[value="0"] {
+color: #B14C7C;
+}
+
+/* form input buttons */
+input[type="submit"], input[type="button"] {
+border: 1px solid #2d42af;
+color: #fff;
+background-color: #586fd1;
+cursor: pointer;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover {
+background-color: #2d42af;
+}
+
+/* informational boxes */
+.g_notebox,
+.g_note {
+border: 1px solid #dfc8ec;
+padding: 0.7em;
+background: #faf0ff;
+color: #4d2f5f;
+}
+
+.g_errorbox,
+.g_warnbox {
+border: 1px solid #ffcbf8;
+padding: 0.7em;
+background: #ffeafc;
+color: #ac0d72;
+}
+
+.g_info {
+clear: both;
+padding: 0.7em;
+background: #fcfcfc;
+border: 1px solid #e0e0e0;
+color: #777;
+}
+
+.g_notebox h3,
+.g_note h3,
+.g_errorbox h3,
+.g_info h3,
+.g_warnbox {
+margin: 0 0 -0.5em;
+}
+
+.g_notebox>*:last-child,
+.g_note>*:last-child,
+.g_errorbox>*:last-child,
+.g_info>*:last-child,
+.g_warnbox>*:last-child {
+margin-bottom: 0;
+}
+
+.g_notebox>*:first-child,
+.g_note>*:first-child,
+.g_errorbox>*:first-child,
+.g_info>*:first-child,
+.g_warnbox>*:first-child {
+margin-top: 0;
+}
+
+/* actionlist */
+.g_actionlist {
+padding: 0.3em 1em 0.4em;
+background: #dff1ff;
+border: 1px solid #b0dafb;
+background-image: none;
+text-align: center;
+text-transform: capitalize;
+clear: both;
+}
+
+.g_actionlist li {
+display: inline;
+margin: 0 0.7em;
+}
+
+/* text fields */
+input[type="text"], input[type="password"], input.text, textarea {
+background:#fafafa;
+border: 1px solid #cfd0d1;
+padding: 0.2em;
+}
+
+input[type="text"]:focus, input[type="text"]:hover,
+input[type="password"]:focus, input[type="password"]:hover,
+input.text:focus, input.text:hover,
+textarea:focus, textarea:hover {
+border: 1px solid #a1aab2;
+background: #fdfdfd;
+}
+
+/* definition list tables */
+.g_definitionlist table {
+border: 0;
+}
+
+.g_definitionlist table td {
+padding: 0.2em;
+border-top: 1px solid #ebe1ef;
+border-bottom: 0;
+}
+
+.g_definitionlist table th {
+background-color: transparent;
+padding: 0.2em;
+color:#8e83a9;
+border-top: 1px solid #ebe1ef;
+vertical-align: middle;
+}
+
+.g_definitionlist table table,
+.g_definitionlist table table * {
+border: none;
+}
+
+/* filter list */
+.g_filterlist {
+background: #eaf6ff;
+border: 1px solid #c0e0f9;
+padding: 0.7em;
+}
+
+.g_filterlist li {
+margin-bottom: 1em;
+}
+
+.g_filterlist li:last-child {
+margin-bottom: 0;
+}
+
+.g_filterlist li a {
+text-transform: capitalize;
+}
+
+/* default tables */
+table  {
+border: 1px solid #565ab9;
+}
+
+table tr {
+background-color: #fff;
+}
+
+table tr.g_odd {
+background-color: #f5f7ff;
+}
+
+table th {
+text-align: left;
+background-color: #565ab9;
+color: #fff;
+font-weight: normal;
+text-transform: capitalize;
+padding: 0.3em 0.4em;
+vertical-align: bottom;
+}
+
+table td span.count {
+color: #8f95ae;
+}
+
+table th img[src*="plus.gif"],
+table th img[src*="minus.gif"] {
+margin-bottom: -2px;
+}
+
+table td {
+font-size: 0.95em;
+border-bottom: 1px dotted #d3d7e2;
+padding: 0.3em 0.4em;
+}
+
+div.mylist_list table.animelist td td,
+div.anime_all div.episodes table.eplist td td,
+div.anime_info td td {
+font-size: 1em;
+}
+
+div.mylist_list table.animelist td.action,
+div.anime_all div.episodes table.eplist td.action.expand,
+div.anime_all div.episodes table.eplist td.action.collapse {
+padding-left: 1.2em;
+vertical-align: baseline;
+}
+
+table td.date {
+color: #994da9;
+}
+
+div.anime_all div.episodes table td[colspan="10"] table {
+border-width: 0 0 0 1px;
+}
+
+div.mylist_list table td[colspan="7"],
+div.anime_all div.episodes table td[colspan="10"] {
+padding: 0;
+padding-left: 20px;
+background: #dcdff7 url(images/layout/stripe-blue.gif) repeat left top;
+}
+
+div.mylist_list table td[colspan="7"] td[colspan="7"],
+div#layout-main div.anime_all div.episodes table td[colspan="10"] td[colspan="10"] {
+background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+padding: 0.2em 0.4em;
+text-align: center;
+}
+
+div.mylist_list table table,
+div.anime_all div.episodes table.filelist {
+width: 100%;
+border-left: 1px solid #a9b0e1;
+}
+
+div.mylist_list table.eplist th,
+div.anime_all div.episodes table.filelist th {
+background-color: #a9b0e1;
+font-size: 0.95em;
+}
+
+div.mylist_list td.icons.file span {
+float: left;
+padding: 0 2px;
+}
+
+div.mylist_list table.filelist,
+div.anime_all div.episodes table.filelist {
+border-collapse: separate;
+border-spacing: 1px;
+}
+
+table.filelist tr.generic td,
+table.filelist tr.generic td {
+background-color: #fff !important;
+color: #8e4eaf;
+font-weight: bold;
+}
+
+table.filelist td[colspan="11"] i {
+display: block;
+text-align: center;
+color: #000;
+font-style: normal;
+}
+
+/* list tables */
+div.animelist_all div.animelist_list .g_jumplist,
+div.grouplist_all div.grouplist_list .g_jumplist,
+div.userlist_all div.userlist_list .g_jumplist,
+div.producerlist_all div.producerlist_list .g_jumplist {
+margin: 1em 0;
+}
+
+div.animelist_all table.anime_list,
+div.grouplist_all table.group_list,
+div.userlist_all table.users,
+div.producerlist_all table.producer_list {
+width: 100%;
+}
+
+div.animelist_all .g_filterlist,
+div.producerlist_all .g_filterlist {
+text-align: right;
+}
+
+div.grouplist_list th.rating {
+width: 8em;
+}
+
+/* js sorting */
+th.c_set,
+th.c_setlatin,
+th.c_date,
+th.c_latin {
+cursor: pointer;
+background-image: url(images/buttons/updown.gif);
+background-position: right center;
+background-repeat: no-repeat;
+padding-right: 16px;
+}
+
+th.c_set:hover,
+th.c_setlatin:hover,
+th.c_date:hover,
+th.c_latin:hover {
+background-color: #353A8F
+}
+
+th.s_forward, th.s_reverse {
+background-color: #565AB9;
+padding-right: 18px;
+}
+
+th.s_forward {
+background-image: url(images/buttons/down2.gif);
+}
+
+th.s_reverse {
+background-image: url(images/buttons/up2.gif);
+}
+
+/* anime list rating */
+div.animelist_all table.anime_list td.rating {
+color: #aaa;
+}
+
+div.animelist_all table.anime_list td.rating.mid {
+color: #444;
+}
+
+div.animelist_all table.anime_list td.rating.high {
+color: #000;
+font-weight: bold;
+}
+
+div.animelist_all table.anime_list td.rating.low {
+color: #999;
+}

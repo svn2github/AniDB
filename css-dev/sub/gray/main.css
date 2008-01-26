@@ -46,29 +46,29 @@ body,
 	background-image: url(../icons/button_signup.gif);
 }
 
-#layout-content div.main_all div.rightbar
+#layout-main div.main_all div.rightbar
 {
 	width: 16em;
 	margin: 0.3em;
 }
 
-#layout-content div.main_all div.rightbar p
+#layout-main div.main_all div.rightbar p
 {
 	margin: 1.2em 0 0 0;
 }
 
-#layout-content div.main_all div.rightbar h3
+#layout-main div.main_all div.rightbar h3
 {
 	margin: 1.5em 0 0.4em 0;
 }
 
-#layout-content div.main_all div.rightbar ol
+#layout-main div.main_all div.rightbar ol
 {
 	margin: 0em 0 0.4em 0;
 	padding: 0;
 }
 
-#layout-content div.main_all div.rightbar li span
+#layout-main div.main_all div.rightbar li span
 {
 	display: block;
 	float: left;
@@ -77,29 +77,29 @@ body,
 	text-align: center;
 }
 
-#layout-content div.main_all div.rightbar li a
+#layout-main div.main_all div.rightbar li a
 {
 	display: block;
 	margin-left: 4em;
 }
 
-#layout-content div.main_all div.news
+#layout-main div.main_all div.news
 {
 	margin-right: 17em;
 	margin-left: 0.3em;
 }
 
-#layout-content div.main_all div.news div.newsitem h4
+#layout-main div.main_all div.news div.newsitem h4
 {
 	padding: 0.1em;
 }
 
-#layout-content div.main_all div.news div.newsitem span.stamp
+#layout-main div.main_all div.news div.newsitem span.stamp
 {
 	padding: 0.1em 1em 0.1em 0.1em;
 }
 
-#layout-content div.main_all div.news div.newsitem p.body
+#layout-main div.main_all div.news div.newsitem p.body
 {
 	margin: 0.1em 0.1em 3.1em 0.1em;
 }

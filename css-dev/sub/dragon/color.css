@@ -1,5 +1,5 @@
 body/*,
-#layout-content div.g_definitionlist table*/
+#layout-main div.g_definitionlist table*/
 {
 	border-color: #cccccc;
 	background-color: #cccccc;
@@ -30,32 +30,32 @@ a:hover,
 	background-color: #FFFFFF;
 }
 
-#layout-content ul.g_jumplist,
+#layout-main ul.g_jumplist,
 #layout-nav div.menu
 {
 	color: #FFFFFF;
 }
 
-#layout-content div.g_menu a,
-#layout-content ul.g_jumplist a,
-/*#layout-content tr,
-#layout-content li,
-#layout-content tr a,
-#layout-content li a,*/
+#layout-main div.g_menu a,
+#layout-main ul.g_jumplist a,
+/*#layout-main tr,
+#layout-main li,
+#layout-main tr a,
+#layout-main li a,*/
 #layout-nav div.menu a
 {
 	color: #FFFFFF;
 }
 
-/*#layout-content tr,
-#layout-content li,*/
-#layout-content div.g_menu ul,
+/*#layout-main tr,
+#layout-main li,*/
+#layout-main div.g_menu ul,
 #layout-nav div.menu ul.my
 {
 	background-color: #1188dd;
 }
 
-#layout-content ul.g_jumplist,
+#layout-main ul.g_jumplist,
 #layout-nav div.menu ul.lists
 {
 	background-color: #99cc00;
@@ -72,7 +72,7 @@ a:hover,
 	background-color: #bb66aa;
 }
 
-#layout-content,
+#layout-main,
 #layout-footer
 {
 	color: #00000000;
@@ -80,20 +80,20 @@ a:hover,
 }
 
 th,
-#layout-content h1,
-#layout-content div.main_all div.news h4,
-#layout-content div.cmt_all div.comment h4
+#layout-main h1,
+#layout-main div.main_all div.news h4,
+#layout-main div.cmt_all div.comment h4
 {
 	color: #FFFFFF;
 	background-color: #114477;
 }
 
 /*ul,
-#layout-content tr,
-#layout-content ul.g_jumplist,
-#layout-content *.g_filterlist,
-#layout-content *.g_actionlist,
-#layout-content *.g_description
+#layout-main tr,
+#layout-main ul.g_jumplist,
+#layout-main *.g_filterlist,
+#layout-main *.g_actionlist,
+#layout-main *.g_description
 {
 	background-color: #bac5d4;
 }*/
@@ -104,19 +104,19 @@ th,
 }*/
 
 
-#layout-content tr.g_odd,
-#layout-content li.g_odd
+#layout-main tr.g_odd,
+#layout-main li.g_odd
 {
 	/*background-color: #99cc00;*/
 }
 
-#layout-content table table.filelist tr,
-#layout-content div.g_definitionlist tr
+#layout-main table table.filelist tr,
+#layout-main div.g_definitionlist tr
 {
 	background-color: inherit;
 }
 
-#layout-content div.g_definitionlist tr th
+#layout-main div.g_definitionlist tr th
 {
 	color: inherit;
 	background-image: none;

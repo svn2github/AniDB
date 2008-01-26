@@ -1,34 +1,34 @@
-#layout-content div.dbstats_all table ol
+#layout-main div.dbstats_all table ol
 {
 	width: 20em;
 }
 
-#layout-content div.creqmod_all table
+#layout-main div.creqmod_all table
 {
 	width: 90%;
 }
 
-#layout-content div.stats_all table,
-#layout-content div.dbstats_all table
+#layout-main div.stats_all table,
+#layout-main div.dbstats_all table
 {
 	border: none;
 	border-spacing: 1em;
 }
 
-#layout-content div.stats_all table tr,
-#layout-content div.dbstats_all table tr
+#layout-main div.stats_all table tr,
+#layout-main div.dbstats_all table tr
 {
 	background-color: inherit;
 }
 
-#layout-content div.stats_all table td,
-#layout-content div.dbstats_all table td
+#layout-main div.stats_all table td,
+#layout-main div.dbstats_all table td
 {
 	border: none;
 }
 
-#layout-content div.admin_menu,
-#layout-content div.admin_cat_menu ul
+#layout-main div.admin_menu,
+#layout-main div.admin_cat_menu ul
 {
 	margin-left: 25%;
 	margin-right: 25%;

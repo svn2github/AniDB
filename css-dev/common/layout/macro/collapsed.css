@@ -12,6 +12,10 @@ html, body
 #layout-content
 {
 	margin-left: 13em;
+}
+
+#layout-main
+{
 	padding: 1em;
 }
 

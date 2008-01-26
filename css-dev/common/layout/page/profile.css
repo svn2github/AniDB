@@ -1,26 +1,40 @@
-#layout-content div.profile_all > div
+#layout-main div.profile_all div.passwords
 {
 	display: table;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#layout-content div.profile_all > div > div,
-#layout-content div.profile_all > div form > div
+#layout-main div.profile_all div.passwords > div,
+#layout-main div.profile_all div.passwords form > div
 {
 	display: table-cell;
 }
 
-#layout-content div.profile_all .g_info
+#layout-main div.profile_all div.preferences
+{
+	width: 100%;
+}
+#layout-main div.profile_all div.tabbed_pane
+{
+	width: 100%;
+	min-height: 400px;
+}
+#layout-main div.profile_all table
+{
+	border: none;
+}
+
+#layout-main div.profile_all .g_info
 {
 	text-align: left;
 }
 
-#layout-content div.profile_all div.css_style div.info dl dt
+#layout-main div.profile_all div.css_style div.info dl dt
 {
 	font-weight: bold;
 }
-#layout-content div.profile_all div.css_style div.info dl dd
+#layout-main div.profile_all div.css_style div.info dl dd
 {
 	margin-left: 7em;
 	width: 20em;

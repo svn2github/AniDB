@@ -177,19 +177,19 @@
 	content: "";
 }
 
-#layout-content
+#layout-main
 {
 	margin-left: 182px;
 	padding-top: 0.5em;
 }
 
-#layout-content h1
+#layout-main h1
 {
 	margin: 3px 0 18px 37px;
 	text-align: left;
 }
 
-#layout-content div.g_section
+#layout-main div.g_section
 {
 	padding-top: 10px;
 	clear: both;
@@ -202,7 +202,7 @@
 	text-align: center;
 }
 
-#layout-content div.anime_all div.mylist th.anime
+#layout-main div.anime_all div.mylist th.anime
 {
 	width: 300px;
 }

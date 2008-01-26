@@ -46,7 +46,7 @@
 	border: #BFC2C9 1px solid;
 }
 
-#layout-content h1
+#layout-main h1
 {
 	text-align: center;
 	font-size: 14pt;
@@ -56,22 +56,22 @@
 	padding-top: 1.1em;
 }
 
-#layout-content div.g_timedentry h4
+#layout-main div.g_timedentry h4
 {
 	font-size: 100%;
 	line-height: 1.2;	
 	font-weight: normal;
 }
 
-#layout-content ul.g_navlist li:before
+#layout-main ul.g_navlist li:before
 {
 	content: " | "
 }
-#layout-content ul.g_navlist li:first-child:before
+#layout-main ul.g_navlist li:first-child:before
 {
 	content: "";
 }
-#layout-content ul.g_numonpage li:first-child:before
+#layout-main ul.g_numonpage li:first-child:before
 {
 	content: "show: ";
 }

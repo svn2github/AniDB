@@ -1,5 +1,5 @@
 body/*,
-#layout-content div.g_definitionlist table*/
+#layout-main div.g_definitionlist table*/
 {
 	color: #2E3C55;
 	border-color: #FFFFFF;
@@ -28,24 +28,24 @@ a:hover,
 	background: #486187;
 }
 
-#layout-content,
+#layout-main,
 #layout-footer
 {
 	background-color: #e7f0ff;
 }
 
 th,
-#layout-content h1,
-#layout-content div.g_timedentry h4,
-#layout-content div.main_all div.rightbar h4
+#layout-main h1,
+#layout-main div.g_timedentry h4,
+#layout-main div.main_all div.rightbar h4
 {
 	color: #4f5e77;
 	background-color: #a1b4cd;
 }
 
-#layout-content tr.g_odd,
-#layout-content li.g_odd,
-#layout-content span.g_odd
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd
 {
 	background-color: #cbd6e5;
 }

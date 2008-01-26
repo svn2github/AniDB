@@ -1,13 +1,9 @@
-html, body, div, form, table, tr, td, ul, ol, dl, li, dt, h1, h2, h3, h4, p, caption
+html, body, div, form, table, tr, td, ul, ol, dl, li, dt, dd, h1, h2, h3, h4, p, caption
 {
-	padding: 1px;
+	padding: 0;
 	margin: 0;
 	border: none;
 	left: 0;
-}
-table, dt, dd
-{
-	padding: 0;
 }
 table table
 {

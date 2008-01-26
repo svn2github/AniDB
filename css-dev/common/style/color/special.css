@@ -7,33 +7,33 @@
 .v_neg,
 .v_high,
 span.diff,
-#layout-content td.reviewed.no a,
-#layout-content div.creqmod_all .state.return,
-#layout-content div.creqmod_all span.type.del
+#layout-main td.reviewed.no a,
+#layout-main div.creqmod_all .state.return,
+#layout-main div.creqmod_all span.type.del
 {
 	color: red;
 }
 
-#layout-content div.msg_all tr.mod
+#layout-main div.msg_all tr.mod
 {
 	background-color: orange;
 }
 
-#layout-content div.mylist_list tr.all_watched td.stats
+#layout-main div.mylist_list tr.all_watched td.stats
 {
 	color: darkgreen;
 }
 
-#layout-content table ul li.g_odd,
-#layout-content table table td.g_odd,
-#layout-content ul.g_actionlist li.g_odd
+#layout-main table ul li.g_odd,
+#layout-main table table td.g_odd,
+#layout-main ul.g_actionlist li.g_odd
 {
 	background-color: inherit;
 }
 
-#layout-content a.filter,
-#layout-content .name span.main,
-#layout-content .name span.match
+#layout-main a.filter,
+#layout-main .name span.main,
+#layout-main .name span.match
 {
 	color: gray;
 }

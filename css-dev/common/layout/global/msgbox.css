@@ -1,7 +1,7 @@
-#layout-content div.g_errorbox,
-#layout-content div.g_warnbox,
-#layout-content div.g_notebox,
-#layout-content div.g_successbox
+#layout-main div.g_errorbox,
+#layout-main div.g_warnbox,
+#layout-main div.g_notebox,
+#layout-main div.g_successbox
 {
 	padding: 0.4em;
 }

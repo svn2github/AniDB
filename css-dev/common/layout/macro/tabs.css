@@ -1,0 +1,25 @@
+#layout-tabs
+{
+	margin: 1px;
+	display: block;
+}
+
+#layout-tabs ul
+{
+	display: inline;
+	border: none;
+	background-color: inherit;
+}
+
+#layout-tabs ul li
+{
+	display: inline;
+	margin: 0 0 0 6px;
+	padding: 0;
+}
+
+#layout-tabs ul li a
+{
+	padding: 1px 6px 1px 6px;
+	border-bottom: 0;
+}

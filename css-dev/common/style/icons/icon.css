@@ -1,0 +1,40 @@
+a.i_icon:hover, a.i_inline:hover
+{
+	text-decoration: none;
+}
+
+*.s_reverse:after {
+  text-decoration: overline;
+}
+
+*.s_forward:after {
+	text-decoration: underline;
+}
+
+*.i_icon
+{
+	background-repeat: no-repeat;
+	background-position: center;
+	display: block;
+	width: 15px;
+	height: 13px;
+	text-indent: -5000px;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/**.i_icon span
+{
+	display: none;
+}*/
+
+*.i_inline
+{
+	padding: 0px 8px 0px 7px;
+	margin: 4px;
+}
+
+*.i_icon span, *.i_button span, *.i_inline span
+{
+	display: none;
+}

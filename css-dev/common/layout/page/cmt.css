@@ -1,12 +1,40 @@
-#layout-content div.cmt_add p.g_howto
+#layout-main div.cmt_add p.g_howto
 {
 	text-align: left;
 }
 
-#layout-content div.cmt_add form div textarea
+#layout-main div.cmt_add form div textarea
 {
 	display: block;
 	width: 80%;
 	margin-left: 10%;
 	height: 10em;
+}
+
+#layout-main div.comment
+{
+	line-height: 1.4;
+}
+#layout-main div.comment span.icons
+{
+	float: right;
+}
+#layout-main div.comment span.stamp span.icons
+{
+	float: left;
+}
+
+#layout-main div.cmt_all div.topic_actions
+{
+	height: 25px;
+}
+
+#layout-main div.cmt_all div.topic_actions div.icons
+{
+	float: right;
+}
+
+#layout-main div.cmt_all div.topic_actions div.buttons a
+{
+	float: left;
 }

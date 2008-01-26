@@ -1,4 +1,4 @@
-body.nonav #layout-content,
+body.nonav #layout-main,
 body.nonav #layout-footer
 {
 	width: auto;
@@ -24,31 +24,33 @@ body.nonav
 {
 	padding: 0;
 }
-body.nonav #layout-content h1
+body.nonav #layout-main h1
 {
 	display: none;
 }
 
-.hide
+.hide,
+#layout-tabs
 {
 	display: none;
 }
 
-#layout-content h1,
-#layout-content div.g_section,
-#layout-content div.g_filterlist,
-#layout-content ul.g_actionlist,
-#layout-content div.g_errorbox,
-#layout-content div.g_warnbox,
-#layout-content div.g_notebox,
-#layout-content div.g_successbox,
-#layout-content div.mylist_list ul.g_jumplist,
-#layout-content div.addepm div.ep
+#layout-main h1,
+#layout-main div.g_section,
+#layout-main div.g_filterlist,
+#layout-main ul.g_actionlist,
+#layout-main div.g_errorbox,
+#layout-main div.g_warnbox,
+#layout-main div.g_notebox,
+#layout-main div.g_successbox,
+#layout-main div.mylist_list ul.g_jumplist,
+#layout-main div.addepm div.ep,
+#layout-main div.cmt_all div.topic_actions
 {
 	margin-bottom: 1em;
 }
 
-#layout-content div.g_end
+#layout-main div.g_end
 {
 	padding: 0;
 	margin: 0;
@@ -56,71 +58,76 @@ body.nonav #layout-content h1
 	border: none;
 }
 
-#layout-content div.g_section,
-#layout-content div.g_filterlist,
-#layout-content ul.g_actionlist
+#layout-main div.g_section,
+#layout-main div.g_filterlist,
+#layout-main ul.g_actionlist
 {
 	clear: both;
 }
 
-#layout-content ul.type
+#layout-main ul.type
 {
 	float: left;
 }
 
-#layout-content ul.g_numonpage
+#layout-main ul.g_numonpage
 {
 	float: right;
 }
 
-#layout-content .g_navprev
+#layout-main .g_navprev
 {
 	float: left;
 	padding-left: 0.3em;
 }
 
-#layout-content .g_navnext
+#layout-main .g_navnext
 {
 	float: right;
 	padding-right: 0.3em;
 }
 
-#layout-content div.anime_all div.info tr.official td.value div.icons,
-#layout-content div table td.title div.icons,
-#layout-content table.filelist td.source div.icons
+#layout-main div.anime_all div.info tr.official td.value div.icons,
+#layout-main div table td.title div.icons,
+#layout-main table.filelist td.source div.icons
 {
 	float: right;
 }
 
-#layout-content *.icons *.i_icon,
-#layout-content div.group_released tr td.languages span.i_icon,
-#layout-content div.anime_all div.groups td.languages span.i_icon,
-#layout-content div.anime_all div.episodes td.action .i_icon
+#layout-main *.icons *.i_icon,
+#layout-main div.group_released tr td.languages span.i_icon,
+#layout-main div.anime_all div.groups td.languages span.i_icon,
+#layout-main div.anime_all div.episodes td.action .i_icon
 {
 	float: left;
 	padding: 0px 1px 0px 1px;
 }
 
-#layout-content td.icons.quality *.i_icon
+#layout-main td.icons.quality *.i_icon
 {
 	padding: 0px;
 }
 
-#layout-content div.anime_all div.episodes table.eplist,
-#layout-content div.ep_all table.filelist
+#layout-main div.anime_all div.episodes table.eplist,
+#layout-main div.ep_all table.filelist
 {
 	width: 98%;
 }
 
 
-#layout-content div.mylist_list table td.rating.votes span.count
+#layout-main div.mylist_list table td.rating.votes span.count
 {
 	display: none;
 }
 
-#layout-content div.ed2kdump_box textarea
+#layout-main div.ed2kdump_box textarea
 {
 	width: 98%;
+}
+
+#layout-main div.schedule table
+{
+	width: 100%;
 }
 
 #obj-tooltip {

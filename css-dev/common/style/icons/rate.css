@@ -1,0 +1,79 @@
+*.i_pri_high
+{
+	background-image: url(../icons/icon/anidb_pri_high.gif);
+}
+
+*.i_pri_low
+{
+	background-image: url(../icons/icon/anidb_pri_low.gif);
+}
+
+*.i_pri_med
+{
+	background-image: url(../icons/icon/anidb_pri_med.gif);
+}
+
+*.i_rate_corrupted
+{
+	background-image: url(../icons/icon/anidb_rate_corrupted.gif);
+}
+
+*.i_rate_eyecancer
+{
+	background-image: url(../icons/icon/anidb_rate_eyecancer.gif);
+}
+
+*.i_rate_star
+{
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+}
+
+*.i_rate_halfstar
+{
+	background-image: url(../icons/icon/anidb_rate_halfstar.gif);
+}
+
+*.i_rate_unknown
+{
+	background-image: url(../icons/icon/anidb_rate_unknown.gif);
+}
+
+*.i_rate_veryhigh
+{
+	width: 43px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+*.i_rate_high
+{
+	width: 36px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+*.i_rate_med
+{
+	width: 30px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+*.i_rate_low
+{
+	width: 22px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+*.i_rate_verylow
+{
+	width: 15px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
