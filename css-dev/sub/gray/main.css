@@ -8,10 +8,6 @@
 @import "text.css";
 
 
-html, body, div
-{
-	padding: 0;
-}
 body,
 #layout-menu
 {
@@ -48,8 +44,9 @@ body,
 
 #layout-main div.main_all div.rightbar
 {
-	width: 16em;
+	width: 20em;
 	margin: 0.3em;
+	padding-top: 0.7em;
 }
 
 #layout-main div.main_all div.rightbar p
@@ -85,8 +82,9 @@ body,
 
 #layout-main div.main_all div.news
 {
-	margin-right: 17em;
+	margin-right: 21em;
 	margin-left: 0.3em;
+	margin-top: 0;
 }
 
 #layout-main div.main_all div.news div.newsitem h4

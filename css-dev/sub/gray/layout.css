@@ -35,6 +35,11 @@
 	line-height: 1.2;
 }
 
+/*#layout-menu li
+{
+	display: inline;
+}*/
+
 #layout-menu li.mymessages, #layout-menu li.mynotifies, #layout-menu li.mywishlist,
 #layout-menu li.myvotes, #layout-menu li.myreviews, #layout-menu li.mydbentries,
 #layout-menu li.mycreqs, #layout-menu li.up2date
@@ -132,7 +137,6 @@
 {
 	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
 	width: 100%;
-	height: 94px;
 }
 
 #layout-search div.search
@@ -143,12 +147,19 @@
 
 #layout-search div.search form
 {
-	background: transparent url(../anidbstyle/images/searchback.png) no-repeat 0 77px;
-	padding: 70px 0 0 0;
-	display: block;
-	float: right;
-	height: 64px;
+	background: transparent url(../anidbstyle/images/searchback.png) no-repeat top right;
+	position: absolute;
+	top: 77px;
+	left: auto;
+	right: 0;
+	-right: -1px;
 	width: 152px;
+	height: 57px;
+}
+#layout-search div.search form p
+{
+	margin-top: 18px;
+  margin-left: 38px;
 }
 
 #layout-search div.search form input.text
@@ -156,28 +167,22 @@
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	background-color: #272D43;
 	border: #BFC2C9 1px solid;
-	margin: 27px 3px 0 0;
 	color: #ffffff;
 	width: 10.3em;
-	display: block;
-	float: right;
 }
 
 #layout-search div.search form input.submit
 {
 	background: url(../icons/button_search.gif) no-repeat top;
-	border: solid 0 white;
-	padding: 14px 0 0 0;
-	margin-right: 2.3em;
+	padding: 20px 0 0 0;
 	overflow: hidden;
-	display: block;
-	float: right;
 	width: 63px;
 	height: 14px;
-	content: "";
+	border: 0;
+	cursor: pointer;
 }
 
-#layout-main
+#layout-content
 {
 	margin-left: 182px;
 	padding-top: 0.5em;

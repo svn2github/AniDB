@@ -32,6 +32,11 @@
 	content: "!";
 }
 
+#layout-menu div ul li a
+{
+	display: block;
+}
+
 #layout-menu div.usermenu form[enctype]
 {
 	position: absolute;

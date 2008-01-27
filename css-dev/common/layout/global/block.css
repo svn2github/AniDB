@@ -10,11 +10,13 @@
 	padding-right: 1em;
 	text-align: right;
 	width: 40%;
+	-width: auto;
 }
 #layout-main div.block div.data
 {
 	display: table-cell;
 	width: 60%;
+	-width: auto;
 	height: 100%;
 }
 #layout-main div.block div.data > div
@@ -31,6 +33,7 @@
 #layout-main div.block div.image
 {
 	-float: left; /*IE*/
+	-margin-left: 2em;
 }
 #layout-main div.desc
 {
