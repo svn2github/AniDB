@@ -30,7 +30,9 @@
 
 *.i_rate_halfstar
 {
-	background-image: url(../icons/icon/anidb_rate_halfstar.gif);
+	width: 7px;
+	background-image: url(../icons/icon/anidb_rate_star.gif);
+	background-position: left;
 }
 
 *.i_rate_unknown
