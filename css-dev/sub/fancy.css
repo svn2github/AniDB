@@ -69,7 +69,8 @@
 	display: none;
 }
 
-#layout-main td.all_watched
+#layout-main tr.all_watched
 {
-	text-decoration: line-through;
+	/*text-decoration: line-through;*/
+	font-style: italic;
 }

@@ -37,9 +37,14 @@ a:hover
 	background-color: #FBFBFB;
 }
 
-th
+#layout-main th,
+#layout-main tr.header th a
 {
 	color: #FFA34F;
+}
+
+#layout-main th
+{
 	background: #3a95c2 url(images/sub-bg-th.gif) repeat-x;
 }
 
