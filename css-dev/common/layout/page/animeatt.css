@@ -45,3 +45,18 @@
 	width: 96%;
 	height: 10em;
 }
+
+#layout-main div.animeatt_all div.topic_actions
+{
+	height: 25px;
+}
+
+#layout-main div.animeatt_all div.topic_actions div.buttons a
+{
+	float: left;
+}
+
+#layout-main div.animeatt_all div.topic_actions div.icons
+{
+	float: right;
+}
