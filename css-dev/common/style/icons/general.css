@@ -82,3 +82,18 @@
 {
 	background-image: url(../icons/test/arrow_inactive.gif);
 }
+
+#layout-main th a.inactive{
+	background: url(../icons/test/arrow_inactive.gif) center left no-repeat;
+	padding-left: 11px;
+}
+
+#layout-main th a.descending{
+	background: url(../icons/test/arrow_down.gif) center left no-repeat;
+	padding-left: 11px;
+}
+
+#layout-main th a.ascending{
+	background: url(../icons/test/arrow_up.gif) center left no-repeat;
+	padding-left: 11px;
+}
