@@ -6,7 +6,7 @@
 
 div, p, th, td, li, dt, dd, span, a
 {
-	font-weight: normal;
+	font-weight: inherit;
 }
 
 h1, h2, h3, h4, caption

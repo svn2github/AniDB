@@ -3,15 +3,7 @@ a.i_icon:hover, a.i_inline:hover
 	text-decoration: none;
 }
 
-*.s_reverse {
-	text-decoration: underline;
-}
-
-*.s_forward {
-	text-decoration: overline;
-}
-
-*.i_icon
+.i_icon
 {
 	background-repeat: no-repeat;
 	background-position: center;
@@ -23,18 +15,22 @@ a.i_icon:hover, a.i_inline:hover
 	margin-right: 0;
 }
 
-/**.i_icon span
-{
-	display: none;
-}*/
-
-*.i_inline
+.i_inline
 {
 	padding: 0px 8px 0px 7px;
 	margin: 4px;
 }
 
-*.i_icon span, *.i_button span, *.i_inline span
+.i_icon span, .i_button span, .i_inline span
 {
 	display: none;
+}
+
+.i_award
+{
+	width: 300px;
+	height: 50px;
+	padding: 0.2em;
+	display: -moz-inline-box;
+	display: inline-block;
 }

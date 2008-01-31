@@ -8,11 +8,6 @@ body,
 	background: #E5E5E5 url(images/sub-bg-body.gif) repeat-x;
 }
 
-/*#layout-main div.tabbed_pane div.pane ul
-{
-	background: #fefefe url(http://static.anidb.net/css/sub-silver/images/sub-bg-body.gif) repeat-x;
-}*/
-
 a:link,a:active,a:visited
 {
 	color : #006699;
@@ -23,7 +18,8 @@ a:hover
 	color : #f26522/*#DD6900*/;
 }
 
-#layout-main
+#layout-main,
+#layout-main div.animeatt_reviews div.review div.text
 {
 	background: #FBFBFB url(images/sub-bg-layout2.gif) repeat-x;
 }

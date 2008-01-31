@@ -97,3 +97,11 @@
 	background: url(../icons/test/arrow_up.gif) center left no-repeat;
 	padding-left: 11px;
 }
+
+.s_reverse {
+	text-decoration: underline;
+}
+
+.s_forward {
+	text-decoration: overline;
+}

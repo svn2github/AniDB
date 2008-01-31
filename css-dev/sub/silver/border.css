@@ -50,7 +50,8 @@ ul,
 #layout-main div.block div.image img,
 #layout-main div.avatar img,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.tabbed_pane div.pane ul li ul li
+#layout-main div.tabbed_pane div.pane ul li ul li,
+#layout-main div.review div.text
 {
 	border: 1px #d1d7dc solid;
 }

@@ -42,3 +42,8 @@ input.g_error
 {
 	background-color: #FFDDDD;
 }
+
+th a
+{
+	color: inherit;
+}
