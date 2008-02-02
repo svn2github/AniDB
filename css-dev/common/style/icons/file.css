@@ -8,6 +8,11 @@
 	background-image: url(../icons/icon/anidb_file_delete.gif);
 }
 
+i_file_edit
+{
+	background-image: url(../icons/icon/anidb_file_edit.gif);
+}
+
 *.i_file_details
 {
 	background-image: url(../icons/icon/anidb_file_details.gif);
