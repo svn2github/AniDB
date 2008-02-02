@@ -51,7 +51,8 @@ td.id, td.count, td.number, td.size, td.epno, td.duration,
 
 td, ul, div.desc, .body, td.id a.i_icon,
 th.field, td.value, td.name, td.quality, td.title, td.name,
-#layout-main div.main_all div.news h4
+#layout-main div.main_all div.news h4,
+#layout-main div.profile_all .g_info
 {
 	text-align: left;
 }
@@ -63,7 +64,8 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 .g_navlist, .g_filterlist, .g_actionlist, .g_info, .g_input,
 #layout-main div.g_section,
 #layout-footer p,
-#layout-menu div.usermenu
+#layout-menu div.usermenu,
+#layout-main div.profile_all p
 {
 	text-align: center;
 }

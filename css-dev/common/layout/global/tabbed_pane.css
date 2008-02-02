@@ -2,30 +2,35 @@
 {
 	width: 96%;
 }
+
+#layout-main div.tabbed_pane div.body
+{
+	min-height: 32em;
+	padding: 0.4em;
+}
+
 #layout-main div.tabbed_pane div.pane ul,
 #layout-main div.tabbed_pane div.pane div table
 {
 	width: 100%;
 	display: table;
 }
-#layout-main div.tabbed_pane div.pane
-{
-	min-height: 400px;
-}
 #layout-main div.tabbed_pane div.pane.hide
 {
 	display: none;
 }
-#layout-main div.tabbed_pane ul.tabs li.selected
-{
-	padding: 1px 6px 1px 6px;
-}
+
 #layout-main div.tabbed_pane ul.tabs
 {
 	background-color: inherit;
 	border: none;
 	margin: 1px 1px 1px 6px;
 }
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	padding: 1px 6px 1px 6px;
+}
+
 #layout-main div.tabbed_pane div.pane table,
 #layout-main div.tabbed_pane div.pane table td,
 #layout-main div.tabbed_pane div.pane ul,
@@ -39,4 +44,24 @@
 	display: inline;
 	padding: 1px 6px 1px 6px;
 	border-bottom: 0;
+}
+
+#layout-main div.tabbed_pane div.pane table tr
+{
+	background-color: inherit;
+}
+
+#layout-main div.tabbed_pane div.pane table td
+{
+	vertical-align: top;
+}
+
+div.profile_all #tab4_pane
+{
+	display: table;
+	width: 100%;
+}
+div.profile_all #tab4_pane div
+{
+	display: table-cell;
 }

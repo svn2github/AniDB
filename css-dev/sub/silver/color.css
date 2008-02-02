@@ -1,10 +1,8 @@
 body,
 #layout-main div.g_definitionlist table,
-#layout-main div.tabbed_pane div.pane,
-#layout-main div.tabbed_pane div.pane ul
+#layout-main div.tabbed_pane div.body
 {
 	color: #2E3C55;
-	border-color: #E5E5E5;
 	background: #E5E5E5 url(images/sub-bg-body.gif) repeat-x;
 }
 
@@ -100,6 +98,11 @@ ul,
 	background-color: #F4F4F4;
 }
 
+#layout-tabs ul li.selected a
+{
+	border-bottom: 1px #E5E5E5 double;
+}
+
 #layout-tabs ul li a:hover,
 #layout-main div.tabbed_pane ul.tabs li:hover
 {
@@ -109,7 +112,6 @@ ul,
 #layout-tabs ul li.selected a
 {
 	background-color: #E5E5E5;
-	border-bottom: 1px #E5E5E5 double;
 }
 #layout-main div.tabbed_pane ul.tabs li.selected
 {

@@ -35,6 +35,7 @@
 #layout-menu div ul li a
 {
 	display: block;
+	-display: inline;
 }
 
 #layout-menu div.usermenu form[enctype]

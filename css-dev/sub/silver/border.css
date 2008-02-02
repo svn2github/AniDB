@@ -25,10 +25,14 @@ img, a
 
 #layout-nav,
 #layout-footer,
-#layout-main,
-#layout-main div.tabbed_pane div.pane
+#layout-main
 {
 	border: 1px #98AAB1 solid;
+}
+
+#layout-main div.g_definitionlist table
+{
+	border-color: #E5E5E5;
 }
 
 #layout-main div.tabbed_pane ul.tabs li.selected
@@ -49,9 +53,9 @@ ul,
 #layout-main div.desc,
 #layout-main div.block div.image img,
 #layout-main div.avatar img,
-#layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.tabbed_pane div.pane ul li ul li,
-#layout-main div.review div.text
+#layout-main div.review div.text,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li
 {
 	border: 1px #d1d7dc solid;
 }

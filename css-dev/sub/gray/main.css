@@ -67,16 +67,11 @@ body,
 
 #layout-main div.main_all div.rightbar li span
 {
-	display: block;
-	float: left;
-	height: 100%;
-	width: 4em;
-	text-align: center;
+	margin-left: -4em;
 }
 
-#layout-main div.main_all div.rightbar li a
+#layout-main div.main_all div.rightbar li
 {
-	display: block;
 	margin-left: 4em;
 }
 
