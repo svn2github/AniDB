@@ -62,7 +62,7 @@ a:visited, a:active, a:hover, a:link {
 }
 
 input[type="text"],
-input[type="button"]
+input[type="button"],
 input[type="password"],
 select, textarea, button
 {
