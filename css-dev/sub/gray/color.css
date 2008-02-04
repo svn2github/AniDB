@@ -43,23 +43,49 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #969aa6;
 }
 
-#layout-menu a:link, #layout-menu a:visited {
-	color: #ffffff;
+#layout-menu a:link,
+#layout-menu a:visited,
+#layout-tabs a
+{
+	color: white;
 }
 
-#layout-menu a:active
+#layout-menu a:active,
+#layout-tabs li.selected a
 {
-	color: #ff0000;
+	color: red;
 }
 #layout-menu *,
-#layout-menu a:hover {
+#layout-menu a:hover,
+#layout-tabs a:hover {
 	color: #bbbbbb;
 }
 
-#layout-menu form input.text,
-#layout-search form input.text
+input[type="text"],
+input[type="password"],
+select, textarea
 {
+	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	color: #ffffff;
 	background-color: #272D43;
 	border: #BFC2C9 1px solid;
+}
+
+input[type="submit"],
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border: outset #969AA6 1px;
+	background-color: #BFC2C9;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border: inset #969AA6 1px;
+	background-color: #B0B0B1;
+}
+
+input[type="submit"]:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: #B0B0B1;
 }

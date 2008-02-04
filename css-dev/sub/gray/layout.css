@@ -35,11 +35,6 @@
 	line-height: 1.2;
 }
 
-/*#layout-menu li
-{
-	display: inline;
-}*/
-
 #layout-menu li.mymessages, #layout-menu li.mynotifies, #layout-menu li.mywishlist,
 #layout-menu li.myvotes, #layout-menu li.myreviews, #layout-menu li.mydbentries,
 #layout-menu li.mycreqs, #layout-menu li.up2date
@@ -164,11 +159,7 @@
 
 #layout-search div.search form input.text
 {
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	background-color: #272D43;
-	border: #BFC2C9 1px solid;
-	color: #ffffff;
-	width: 10.3em;
+	width: 100px;
 }
 
 #layout-search div.search form input.submit
@@ -225,4 +216,33 @@
 #newmessages
 {
 	display: block;
+}
+
+#layout-tabs
+{
+	position: absolute;
+	right: 152px;
+	left: 168px;
+	top: 79px;
+}
+
+#layout-tabs ul li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	display: inline;
+}
+
+#layout-tabs ul
+{
+	text-align: right;
+}
+
+#layout-main div.profile_all div.tabbed_pane ul.tabs
+{
+	text-align: center;
+}
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin: 6px;
 }
