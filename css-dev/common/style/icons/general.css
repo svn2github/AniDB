@@ -70,31 +70,31 @@
 
 *.i_arrow_up
 {
-	background-image: url(../icons/test/arrow_up.gif);
+	background-image: url(../icons/test/arrow_up.png);
 }
 
 *.i_arrow_down
 {
-	background-image: url(../icons/test/arrow_down.gif);
+	background-image: url(../icons/test/arrow_down.png);
 }
 
 *.i_arrow_inactive
 {
-	background-image: url(../icons/test/arrow_inactive.gif);
+	background-image: url(../icons/test/arrow_inactive.png);
 }
 
 #layout-main th a.inactive{
-	background: url(../icons/test/arrow_inactive.gif) center left no-repeat;
+	background: url(../icons/test/arrow_inactive.png) center left no-repeat;
 	padding-left: 11px;
 }
 
 #layout-main th a.descending{
-	background: url(../icons/test/arrow_down.gif) center left no-repeat;
+	background: url(../icons/test/arrow_down.png) center left no-repeat;
 	padding-left: 11px;
 }
 
 #layout-main th a.ascending{
-	background: url(../icons/test/arrow_up.gif) center left no-repeat;
+	background: url(../icons/test/arrow_up.png) center left no-repeat;
 	padding-left: 11px;
 }
 
