@@ -21,6 +21,10 @@ p, textarea
 {
 	padding: 4px;
 }
+textarea
+{
+	width: 90%;
+}
 input
 {
 	padding-left: 2px;

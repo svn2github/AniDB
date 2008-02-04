@@ -3,11 +3,6 @@
 	float: right;
 }
 
-#layout-main div.anime_all div.episodes table.eplist
-{
-	width: 99%;
-}
-
 #layout-main div.anime_all div.episodes div.mylist_add
 {
 	margin-top: 1em;

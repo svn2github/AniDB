@@ -65,7 +65,8 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 #layout-main div.g_section,
 #layout-footer p,
 #layout-menu div.usermenu,
-#layout-main div.profile_all p
+#layout-main div.profile_all p,
+#layout-main table.grouplist td.number.eps
 {
 	text-align: center;
 }
