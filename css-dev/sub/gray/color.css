@@ -62,8 +62,9 @@ a:visited, a:active, a:hover, a:link {
 }
 
 input[type="text"],
+input[type="button"]
 input[type="password"],
-select, textarea
+select, textarea, button
 {
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	color: #ffffff;

@@ -15,6 +15,11 @@ body,
 	font-size: 10px;
 }
 
+#layout-tabs
+{
+	display: block;
+}
+
 *.i_button
 {
 	display: block;

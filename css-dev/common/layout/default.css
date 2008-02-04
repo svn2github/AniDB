@@ -17,9 +17,13 @@ li
 {
 	padding: 0px 4px 0px 2px;
 }
-p
+p, textarea
 {
-	padding: 2px;
+	padding: 4px;
+}
+input
+{
+	padding-left: 2px;
 }
 table, table caption
 {
