@@ -81,23 +81,33 @@ input[size="60"]
 	width: 36em;
 }
 
+span.test,
 button,
-input[type="button"],
-input[type="submit"],
-#layout-main div.tabbed_pane ul.tabs li
+/*input[type="button"],
+input[type="submit"],*/
+#layout-main div.tabbed_pane ul.tabs li,
+.g_jumplist li, /*NEW*/
+div.pagination span a
 {
 	border: outset #969AA6 1px;
 	background-color: #BFC2C9;
 }
 
-#layout-main div.tabbed_pane ul.tabs li.selected
+#layout-main div.tabbed_pane ul.tabs li.selected,
+.g_jumplist li.selected, /*NEW*/
+div.pagination span strong
 {
 	border: inset #969AA6 1px;
 	background-color: #B0B0B1;
 }
 
-input[type="submit"]:hover,
-#layout-main div.tabbed_pane ul.tabs li:hover
+span.test:hover,
+button:hover,
+/*input[type="button"]:hover,
+input[type="submit"]:hover,*/
+#layout-main div.tabbed_pane ul.tabs li:hover,
+.g_jumplist li:hover,
+div.pagination span strong:hover
 {
 	background-color: #B0B0B1;
 }

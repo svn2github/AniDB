@@ -121,3 +121,24 @@ ul,
 {
 	background-color: #E5E5E5;
 }
+
+div.pagination span a
+{
+	border: 1px solid #BABABA;
+}
+
+div.pagination span a
+{
+	background-color: #ECEDEE;
+	border-color: #B4BAC0;
+	color: #5C758C;
+}
+
+div.pagination span a:hover,
+div.pagination span strong
+{
+	border: 1px solid #BFBFBF;
+	background-color: #4692BF;
+	border-color: #4692BF;
+	color: #FFFFFF;
+}

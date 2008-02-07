@@ -1,44 +1,10 @@
 div.pagination
 {
 	float: right;
-	width:auto;
-	margin-top: 3px;
-}
-
-div.pagination span
-{
-	margin:0pt;
-	padding:0pt;
-}
-
-div.pagination span a
-{
-	border:1px solid #BABABA;
-	font-size:0.9em;
-	font-weight:normal;
-	line-height:1.5em;
-	margin:0pt 2px;
-	padding:0pt 2px;
-	text-decoration:none;
-	background-color:#ECEDEE;
-	border-color:#B4BAC0;
-	color:#5C758C;
+	margin-right: 1em;
 }
 
 div.pagination span span.page-sep
 {
 	display:none;
-}
-
-div.pagination span a:hover,
-div.pagination span strong
-{
-	background-color:#4692BF;
-	border-color:#4692BF;
-	color:#FFFFFF;
-	border:1px solid #BFBFBF;
-	font-size:0.9em;
-	font-weight:normal;
-	padding:0pt 2px;
-	margin:0pt 2px;
 }

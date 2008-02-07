@@ -84,8 +84,8 @@
 
 #layout-menu div.usermenu form input.text
 {
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	display: block;
+	color: white;
 	width: 8.7em;
 }
 
@@ -101,6 +101,7 @@
 	top: 1.3em;
 	left: 2px;
 	border: 0;
+	color: white;
 	content: "";
 }
 
@@ -124,7 +125,6 @@
 
 #layout-menu div.usermenu form label.remember input
 {
-	font-size: 111%;
 	vertical-align: middle;
 }
 

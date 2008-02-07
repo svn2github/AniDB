@@ -1,4 +1,4 @@
-#layout-main ul.g_jumplist
+/*#layout-main ul.g_jumplist
 {
 	height: 1.2em;
 }
@@ -7,15 +7,16 @@
 #layout-main ul.g_jumplist + table
 {
 	margin-top: 1em;
-}
+}*/
 
 #layout-main ul.g_jumplist
 {
 	clear: both;
-	padding-left: 0;
+/*	padding-left: 0;
 	padding-top: 2px;
 	padding-bottom: 2px;
-	width: 100%;
+	width: 100%;*/
+	margin: 1em;
 	text-align: center;	
 }
 
@@ -23,14 +24,14 @@
 #layout-main ul.g_jumplist li
 {
 	display: inline;
-	font-style: italic;
-	margin-left: 0;
+	margin-left: 1px;
+	/*font-style: italic;
 	margin-right: 0;
 	padding-left: 0;
-	padding-right: 0;
+	padding-right: 0;*/
 }
 
-#layout-main ul.g_actionlist li a,
+/*#layout-main ul.g_actionlist li a,
 #layout-main ul.g_jumplist li a
 {
 	display: inline;
@@ -46,7 +47,7 @@
 {
 	font-style: normal;
 	content: " |";
-}
+}*/
 #layout-main ul.g_jumplist li.prev
 {
 	padding-left: 1em;
@@ -57,11 +58,11 @@
 	padding-right: 1em;
 	float: right;
 }
-#layout-main ul.g_jumplist li.all:before
+/*#layout-main ul.g_jumplist li.all:before
 {
 	font-style: normal;
 	content: "Jump to: ";
-}
+}*/
 #layout-main ul.g_actionlist li+li:before
 {
 	content: " - ";

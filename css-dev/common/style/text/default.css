@@ -1,5 +1,10 @@
 *
 {
+	font-size: inherit;
+	font-family: inherit;
+}
+body
+{
 	font-size: 10px;
 	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
 }
@@ -72,6 +77,7 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	text-align: center;
 }
 
+h4.collapsed span,
 #layout-main table.filelist tr.deprecated
 {
 	text-decoration: line-through;
@@ -85,7 +91,7 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 
 #layout-menu
 {
-	font-size: small;
+	font-size: 10px;
 	line-height: 1.1;
 }
 
@@ -186,5 +192,25 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 {
 	text-align: left;
 	font-weight: bold;
-	font-size: 1.1em;
+	font-size: 120%;
+}
+
+button,
+input[type="button"],
+input[type="submit"]
+{
+	padding: 1px;
+}
+
+h4 span,
+span.test,
+div.tabbed_pane ul.tabs li,
+ul.g_jumplist li,
+div.pagination span strong,
+div.pagination span a
+{
+	padding: 2px 4px 2px 4px;
+	-moz-user-select: none;
+	user-select: none;
+	text-transform: capitalize;
 }

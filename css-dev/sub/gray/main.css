@@ -8,9 +8,9 @@
 @import "text.css";
 
 
-body,
+body/*,
 #layout-menu,
-#layout-tabs
+#layout-tabs*/
 {
 	font-size: 10px;
 }
