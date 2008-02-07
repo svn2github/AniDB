@@ -22,18 +22,23 @@ function InitGenren()
 			if (lis[i].className == "branch")
 			{
 				var toggle = document.createElement('a');
+				var span = document.createElement('span');
 				if (lis[i].parentNode.parentNode.nodeName == "FORM")
 				{
+					//span.appendChild(document.createTextNode("collapse this branch"));
 					toggle.className = "i_icon i_minus";
 					toggle.onclick = CollapseBranch;
-					toggle.appendChild(document.createTextNode("collapse this branch"));
+					toggle.title = "Collapse this branch";
+					toggle.appendChild(span);
 				}
 				else
 				{
 					lis[i].className += " collapsed";
+					//span.appendChild(document.createTextNode("expand this branch"));
 					toggle.className = "i_icon i_plus";
 					toggle.onclick = UnCollapseBranch;
-					toggle.appendChild(document.createTextNode("expand this branch"));
+					toggle.title = "Expand this branch";
+					toggle.appendChild(span);
 				}
 				lis[i].insertBefore(toggle, lis[i].firstChild);
 			}
