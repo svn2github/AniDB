@@ -1,13 +1,19 @@
 /* compat */
-!Array.prototype.indexOf && (Array.prototype.indexOf = function (it)
-	{
-		for (var i = 0, l = this.length; i < l; i++)
-		{
+!Array.prototype.indexOf && (Array.prototype.indexOf = function (it){
+		for (var i = 0, l = this.length; i < l; i++){
 			if (this[i] === it) { return i; }
 		}
 		return -1;
 	});
 
+if (typeof Array.prototype.indexOf == "undefined") {
+	Array.prototype.indexOf = function(what) {
+		for (var i = 0; i < this.length; i++) {
+			if (this[i] == what) return i;
+		}
+		return -1;
+	}
+}
 
 function popup(url,w,h,scr,re,title)
 {
@@ -39,13 +45,8 @@ var Magic = {
 		{
 			if (document.evaluate && window.XMLSerializer) // interested people don't use IE anyway
 			{
-				var username = document.evaluate("//div[@id='layout-menu']/div[@class='usermenu' and not(form)]/p[@class='user']",
-					document.body, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-				if (username && Magic.interestedusers.indexOf(username.firstChild.nodeValue) >= 0)
-				{
-					var footernode = document.getElementById('layout-footer');
-					if (footernode) { footernode.onclick = Magic.noreallydoitthistime; }
-				}
+				var footernode = document.getElementById('layout-footer');
+				if (footernode) { footernode.onclick = Magic.noreallydoitthistime; }
 			}
 		}),
 	'noreallydoitthistime':(function ()
@@ -114,8 +115,151 @@ var Magic = {
 					Magic.valiform.submit();
 				}
 			}
+		}),
+	'enable_hide':(function ()
+		{
+			var elems = document.getElementsByTagName('H4');
+			for (var i = 0; i < elems.length; i++){	
+				elems[i].onclick = Magic.toggle_hide;
+			}
+		}),
+	'toggle_hide':(function (e)
+		{
+			var block = this;
+			ClassToggle(block, 'collapsed'); 
+			while ( block = block.nextSibling ){
+				if( block.nodeType==1 )
+					ClassToggle(block, 'hide');
+			}
+		}),
+	'enable_tabs':(function ()
+		{
+			var elems = document.getElementsByTagName('ul');
+			var selected = CookieGet('tab') || 'tab1';
+			for (var i = 0; i < elems.length; i++){				
+				if(elems[i].className == "tabs"){
+					var li = elems[i].getElementsByTagName('li');
+					for (var j = 0; j < li.length; j++){
+						var tab = li[j];
+						if(tab.id == selected)
+						{
+							Magic.toggle_tabs(0, tab);
+							selected = 0;
+						}
+						tab.onclick = Magic.toggle_tabs;
+					}
+					if( li.length>0 && selected ){
+						Magic.toggle_tabs('tab1', li[0]);
+					}
+				}
+			}
+		}),
+	'toggle_tabs':(function (e, o)
+		{
+			var tab = o || this;
+			if(tab){
+				var pane = document.getElementById(tab.id+'_pane');
+				if(pane){
+					var elems = tab.parentNode.getElementsByTagName('li');
+					for (var i = 0; i < elems.length; i++){
+						ClassToggle(elems[i], 'selected', 2);						
+					}
+					ClassToggle(tab, 'selected', 1);
+					CookieSet('tab', tab.id);
+					elems = tab.parentNode.parentNode.getElementsByTagName('div');
+					for (var i = 0; i < elems.length; i++){
+						// this isn't a pane so no need to hide it
+						if (elems[i].className.indexOf('pane') < 0) continue;
+						ClassToggle(elems[i], 'hide', 1);
+					}
+					ClassToggle(pane, 'hide', 2);
+				}
+			}
 		})
 	};
+
+function ClassToggle(elem, classN, mode)
+{
+	var classes = elem.className.split(" ");
+	var index = classes.indexOf(classN); // IE doesn't natively support this
+	if(index<0){
+		if(mode==2) return;
+		classes.push(classN);
+		elem.className = classes.join(" ");
+	}else{
+		if(mode==1) return;
+		classes.splice(index,1);
+		elem.className = classes.join(" ");
+	}
+	
+}
+
+function CookieSet( name, value, expires, path, domain, secure ) 
+{
+	// set time, it's in milliseconds
+	var today = new Date();
+	today.setTime( today.getTime() );
+
+	/*
+	if the expires variable is set, make the correct 
+	expires time, the current script below will set 
+	it for x number of days, to make it for hours, 
+	delete * 24, for minutes, delete * 60 * 24
+	*/
+	if ( expires )
+	{
+		expires = expires * 1000 * 60 * 60 * 24;
+	}
+	var expires_date = new Date( today.getTime() + (expires) );
+
+	document.cookie = name + "=" +escape( value ) +
+	( ( expires ) ? ";expires=" + expires_date.toGMTString() : "" ) + 
+	( ( path ) ? ";path=" + path : "" ) + 
+	( ( domain ) ? ";domain=" + domain : "" ) +
+	( ( secure ) ? ";secure" : "" );
+}
+
+// this fixes an issue with the old method, ambiguous values 
+// with this test document.cookie.indexOf( name + "=" );
+function CookieGet( check_name ) {
+	// first we'll split this cookie up into name/value pairs
+	// note: document.cookie only returns name=value, not the other components
+	var a_all_cookies = document.cookie.split( ';' );
+	var a_temp_cookie = '';
+	var cookie_name = '';
+	var cookie_value = '';
+	var b_cookie_found = false; // set boolean t/f default f
+	
+	for ( i = 0; i < a_all_cookies.length; i++ )
+	{
+		// now we'll split apart each name=value pair
+		a_temp_cookie = a_all_cookies[i].split( '=' );
+		
+		
+		// and trim left/right whitespace while we're at it
+		cookie_name = a_temp_cookie[0].replace(/^\s+|\s+$/g, '');
+	
+		// if the extracted name matches passed check_name
+		if ( cookie_name == check_name )
+		{
+			b_cookie_found = true;
+			// we need to handle case where cookie has no value but exists (no = sign, that is):
+			if ( a_temp_cookie.length > 1 )
+			{
+				cookie_value = unescape( a_temp_cookie[1].replace(/^\s+|\s+$/g, '') );
+			}
+			// note that in cases where cookie is initialized but no value, null is returned
+			return cookie_value;
+			break;
+		}
+		a_temp_cookie = null;
+		cookie_name = '';
+	}
+	if ( !b_cookie_found )
+	{
+		return null;
+	}
+}
 
 function InitDefault()
 {
@@ -153,6 +297,9 @@ function InitDefault()
 			linklist[i].target = "_blank";
 		}
 	}
+	//Magic.enable_over();
+	Magic.enable_hide();
+	Magic.enable_tabs();
 }
 
 /**
