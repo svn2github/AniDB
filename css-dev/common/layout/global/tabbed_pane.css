@@ -8,8 +8,8 @@
 	padding: 0.4em;
 }
 
-#layout-main div.tabbed_pane div.pane ul,
-#layout-main div.tabbed_pane div.pane div table
+#layout-main div.tabbed_pane div.pane ul/*,
+#layout-main div.tabbed_pane div.pane div table*/
 {
 	width: 100%;
 	display: table;
@@ -56,12 +56,13 @@
 	vertical-align: top;
 }
 
-div.profile_all #tab4_pane
+div.profile_all #tab3_pane
 {
 	display: table;
-	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }
-div.profile_all #tab4_pane div
+div.profile_all #tab3_pane div
 {
 	display: table-cell;
 }
