@@ -29,7 +29,11 @@ body.nonav #layout-main h1
 	display: none;
 }
 
-.hide,
+.hide
+{
+	display: none !important;
+}
+
 #layout-tabs
 {
 	display: none;

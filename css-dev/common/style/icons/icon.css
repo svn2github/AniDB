@@ -10,7 +10,7 @@ a.i_icon:hover, a.i_inline:hover
 	display: block;
 	width: 15px;
 	height: 13px;
-	text-indent: -5000px;
+	/*text-indent: -5000px;*/
 	margin-left: 0;
 	margin-right: 0;
 }
