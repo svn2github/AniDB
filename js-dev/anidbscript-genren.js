@@ -44,7 +44,6 @@ function InitGenren()
 		}
 		RepaintStripes(root, true);
 	}
-	InitDefault();
 }
 
 function CollapseAll()
