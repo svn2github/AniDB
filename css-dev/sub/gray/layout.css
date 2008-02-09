@@ -3,24 +3,28 @@
 	position: absolute;
 	top: 94px;
 	left: 0;
-	width: 170px;
+	width: 142px;
 	height: 603px;
+	padding: 51px 0px 0px 28px;
 	background: transparent url(../anidbstyle/images/menuback.png) no-repeat top left;
 }
 
-#layout-menu div.menu
+#layout-menu ul
 {
-	padding: 51px 42px 0px 28px;
+	width: 96px;
+	margin-bottom: 10px;
 }
 
-#layout-menu div.usermenu
+#menu-account,
+#menu-login
 {
 	position: absolute;
 	top: 420px;
 	left: 10px;
 	line-height: 2;
 }
-#layout-menu div.menu ul.mod
+
+#menu-mod
 {
 	position: absolute;
 	top: 600px;
@@ -59,75 +63,6 @@
 	font-weight: bold;
 }
 
-#layout-menu div.usermenu
-{
-	text-align: center;
-}
-
-#layout-menu div.usermenu span.login
-{
-	display: block;
-	text-align: left;
-	margin-left: 47px;
-}
-
-#layout-menu div.usermenu span.user
-{
-	text-align: left;
-	display: block;
-}
-
-#layout-menu div.usermenu form
-{
-	margin-top: 1.3em;
-}
-
-#layout-menu div.usermenu form input.text
-{
-	display: block;
-	color: white;
-	width: 8.7em;
-}
-
-#layout-menu div.usermenu form input.logon
-{
-	background: transparent url(../icons/button_logon.gif) no-repeat top;
-	padding: 12px 0 0 0;
-	position: absolute;
-	overflow: hidden;	
-	display: block;
-	width: 42px;
-	height: 12px;
-	top: 1.3em;
-	left: 2px;
-	border: 0;
-	color: white;
-	content: "";
-}
-
-#layout-menu div.usermenu span.login
-{
-	margin-top: -6px;
-}
-
-#layout-menu div.usermenu a.i_signup
-{
-	position: absolute;
-	top: 1.3em;
-	left: 46px;
-}
-
-#layout-menu div.usermenu form label.remember
-{
-	margin-left: -20px;
-	font-size: 90%;
-}
-
-#layout-menu div.usermenu form label.remember input
-{
-	vertical-align: middle;
-}
-
 #layout-search
 {
 	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
@@ -151,6 +86,7 @@
 	width: 152px;
 	height: 57px;
 }
+
 #layout-search div.search form p
 {
 	margin-top: 18px;

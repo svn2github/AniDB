@@ -6,15 +6,16 @@ body.nonav #layout-footer
 	margin:0;
 }
 
+/*#layout-menu ul
+{
+	margin-bottom: 4px;
+}*/
+
 #layout-nav input
 {
 	width: 96%;
 }
 
-#layout-nav ul
-{
-	margin-top: 2px;
-}
 #layout-nav label input
 {
 	width: auto;
@@ -34,27 +35,28 @@ body.nonav #layout-main h1
 	display: none !important;
 }
 
+#layout-menu span.tab,
 #layout-tabs
 {
 	display: none;
 }
 
+#layout-menu span.tab
+{
+	position: absolute; /*IE6*/
+}
+
 #layout-main h1,
-#layout-main div.g_section,
-#layout-main div.g_filterlist,
-#layout-main ul.g_actionlist,
-#layout-main div.g_errorbox,
-#layout-main div.g_warnbox,
-#layout-main div.g_notebox,
-#layout-main div.g_successbox,
-#layout-main div.mylist_list ul.g_jumplist,
+#layout-main .g_section,
+#layout-main .g_list,
+#layout-main .g_msg,
 #layout-main div.addepm div.ep,
 #layout-main div.cmt_all div.topic_actions
 {
 	margin-bottom: 1em;
 }
 
-#layout-main div.g_end
+#layout-main .g_end
 {
 	padding: 0;
 	margin: 0;
@@ -62,19 +64,18 @@ body.nonav #layout-main h1
 	border: none;
 }
 
-#layout-main div.g_section,
-#layout-main div.g_filterlist,
-#layout-main ul.g_actionlist
+#layout-main .g_section,
+#layout-main .g_list
 {
 	clear: both;
 }
 
-#layout-main ul.type
+#layout-main .type
 {
 	float: left;
 }
 
-#layout-main ul.g_numonpage
+#layout-main .g_list.limit
 {
 	float: right;
 }
@@ -91,14 +92,14 @@ body.nonav #layout-main h1
 	padding-right: 0.3em;
 }
 
-#layout-main div.anime_all div.info tr.official td.value div.icons,
-#layout-main div table td.title div.icons,
-#layout-main table.filelist td.source div.icons
+#layout-main div.anime_all div.info tr.official td.value span.icons,
+#layout-main div table td.title span.icons,
+#layout-main table.filelist td.source span.icons
 {
 	float: right;
 }
 
-#layout-main *.icons *.i_icon,
+#layout-main .icons .i_icon,
 #layout-main div.group_released tr td.languages span.i_icon,
 #layout-main div.anime_all div.groups td.languages span.i_icon,
 #layout-main div.anime_all div.episodes td.action .i_icon
@@ -107,7 +108,7 @@ body.nonav #layout-main h1
 	padding: 0px 1px 0px 1px;
 }
 
-#layout-main td.icons.quality *.i_icon
+#layout-main td.icons.quality .i_icon
 {
 	padding: 0px;
 }

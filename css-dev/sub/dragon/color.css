@@ -30,19 +30,19 @@ a:hover,
 	background-color: #FFFFFF;
 }
 
-#layout-main ul.g_jumplist,
-#layout-nav div.menu
+#layout-main ul.g_list,
+#layout-menu
 {
 	color: #FFFFFF;
 }
 
 #layout-main div.g_menu a,
-#layout-main ul.g_jumplist a,
+#layout-main u.g_list a,
 /*#layout-main tr,
 #layout-main li,
 #layout-main tr a,
 #layout-main li a,*/
-#layout-nav div.menu a
+#layout-menu a
 {
 	color: #FFFFFF;
 }
@@ -50,24 +50,24 @@ a:hover,
 /*#layout-main tr,
 #layout-main li,*/
 #layout-main div.g_menu ul,
-#layout-nav div.menu ul.my
+#layout-menu ul.my
 {
 	background-color: #1188dd;
 }
 
-#layout-main ul.g_jumplist,
-#layout-nav div.menu ul.lists
+#layout-main ul.g_list,
+#layout-menu ul.lists
 {
 	background-color: #99cc00;
 }
 
-#layout-nav div.menu ul.other
+#layout-menu ul.other
 {
 	background-color: #dd88cc;
 }
 
-#layout-nav div.menu ul.main,
-#layout-nav div.menu ul.mod
+#layout-menu ul.main,
+#layout-menu ul.mod
 {
 	background-color: #bb66aa;
 }
@@ -86,28 +86,6 @@ th,
 {
 	color: #FFFFFF;
 	background-color: #114477;
-}
-
-/*ul,
-#layout-main tr,
-#layout-main ul.g_jumplist,
-#layout-main *.g_filterlist,
-#layout-main *.g_actionlist,
-#layout-main *.g_description
-{
-	background-color: #bac5d4;
-}*/
-
-/*#layout-nav li:hover
-{
-  background: #bac5d4;
-}*/
-
-
-#layout-main tr.g_odd,
-#layout-main li.g_odd
-{
-	/*background-color: #99cc00;*/
 }
 
 #layout-main table table.filelist tr,

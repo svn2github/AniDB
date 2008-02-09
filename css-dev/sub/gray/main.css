@@ -3,14 +3,14 @@
 @import "../../common/style/color/status-radioactive.css";
 
 @import "layout.css";
+@import "menu-user.css";
 @import "border.css";
 @import "color.css";
 @import "text.css";
 
 
-body/*,
-#layout-menu,
-#layout-tabs*/
+body,
+#layout-nav input
 {
 	font-size: 10px;
 }
@@ -20,7 +20,12 @@ body/*,
 	display: block;
 }
 
-*.i_button
+.g_msg
+{
+	margin: 1em;
+}
+
+.i_button
 {
 	display: block;
 	width: 42px;
@@ -38,12 +43,12 @@ body/*,
 	background-image: url(../icons/button_logout.gif);
 }
 
-*.i_profile
+.i_profile
 {
 	background-image: url(../icons/button_profile.gif);
 }
 
-*.i_signup
+.i_signup
 {
 	background-image: url(../icons/button_signup.gif);
 }

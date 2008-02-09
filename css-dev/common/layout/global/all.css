@@ -1,8 +1,7 @@
 @import "block.css";
-@import "jumplist.css";
+@import "list.css";
 @import "menu.css";
-@import "msgbox.css";
-@import "navlist.css";
+@import "msg.css";
 @import "pagination.css";
 @import "tabbed_pane.css";
 @import "timedentry.css";

@@ -35,7 +35,7 @@ margin: 1em;
 
 div.latestanimes_anime:after,
 div.anime_all div.info .block:after,
-div.search_all div.search_results ul.g_jumplist:after,
+div.search_all div.search_results ul.g_list:after,
 div.file_all div.file_info dl:after,
 div.mylist_list form:after,
 div.userpage_all div.stats:after,
@@ -66,25 +66,20 @@ margin-right: 1em;
 }
 
 /* pagination */
-ul.g_jumplist,
-ul.g_navlist {
+.g_list {
 text-align: center;
 }
 
-ul.g_jumplist li,
-ul.g_navlist li {
+.g_list li {
 display: inline;
 color: #de4799;
 font-weight: bold;
 text-transform: capitalize;
 }
 
-.g_content ul.g_jumplist li a,
-.g_content ul.g_jumplist li a:link,
-.g_content ul.g_jumplist li a:visited,
-.g_content ul.g_navlist li a,
-.g_content ul.g_navlist li a:link,
-.g_content ul.g_navlist li a:visited {
+.g_content ul.g_list li a,
+.g_content ul.g_list li a:link,
+.g_content ul.g_list li a:visited {
 text-decoration: none;
 border: 1px solid #f7edf1;
 border-bottom: 1px solid #d28cb2;
@@ -95,46 +90,29 @@ font-size: 0.95em;
 font-weight: normal;
 }
 
-.g_content ul.g_jumplist li a:hover,
-.g_content ul.g_jumplist li a:active,
-.g_content ul.g_navlist li a:hover,
-.g_content ul.g_navlist li a:active {
+.g_content ul.g_list li a:hover,
+.g_content ul.g_list li a:active {
 background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
 color: #de4799;
 border: 1px solid #eec6dc;
 }
 
-ul.g_jumplist li.prev {
+ul.g_list li.prev {
 float: left;
 padding-left: 12px;
 background: transparent url(images/layout/larr.gif) no-repeat left center;
 font-weight: normal;
 }
 
-ul.g_jumplist li.next {
+ul.g_list li.next {
 float: right;
 padding-right: 12px;
 background: transparent url(images/layout/rarr.gif) no-repeat right center;
 font-weight: normal;
 }
 
-ul.g_jumplist li.all:before {
+ul.g_list li.all:before {
 content: "Viewing: ";
-color: #3d3e6e;
-text-transform: none;
-font-weight: normal;
-}
-
-/* navlist */
-ul.g_navlist.type li:first-child:before {
-content: "Type: ";
-color: #3d3e6e;
-text-transform: none;
-font-weight: normal;
-}
-
-ul.g_navlist.g_numonpage li:first-child:before {
-content: "Per page: ";
 color: #3d3e6e;
 text-transform: none;
 font-weight: normal;
@@ -240,7 +218,7 @@ margin-top: 0;
 }
 
 /* actionlist */
-.g_actionlist {
+.g_list {
 padding: 0.3em 1em 0.4em;
 background: #dff1ff;
 border: 1px solid #b0dafb;
@@ -250,7 +228,7 @@ text-transform: capitalize;
 clear: both;
 }
 
-.g_actionlist li {
+.g_list li {
 display: inline;
 margin: 0 0.7em;
 }
@@ -292,25 +270,6 @@ vertical-align: middle;
 .g_definitionlist table table,
 .g_definitionlist table table * {
 border: none;
-}
-
-/* filter list */
-.g_filterlist {
-background: #eaf6ff;
-border: 1px solid #c0e0f9;
-padding: 0.7em;
-}
-
-.g_filterlist li {
-margin-bottom: 1em;
-}
-
-.g_filterlist li:last-child {
-margin-bottom: 0;
-}
-
-.g_filterlist li a {
-text-transform: capitalize;
 }
 
 /* default tables */
@@ -424,10 +383,7 @@ font-style: normal;
 }
 
 /* list tables */
-div.animelist_all div.animelist_list .g_jumplist,
-div.grouplist_all div.grouplist_list .g_jumplist,
-div.userlist_all div.userlist_list .g_jumplist,
-div.producerlist_all div.producerlist_list .g_jumplist {
+table .g_list {
 margin: 1em 0;
 }
 
@@ -438,8 +394,7 @@ div.producerlist_all table.producer_list {
 width: 100%;
 }
 
-div.animelist_all .g_filterlist,
-div.producerlist_all .g_filterlist {
+.g_list.filter {
 text-align: right;
 }
 

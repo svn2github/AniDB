@@ -74,15 +74,15 @@
 	font-weight: normal;
 }
 
-#layout-main ul.g_navlist li:before
+#layout-main .g_list li:before
 {
 	content: " | "
 }
-#layout-main ul.g_navlist li:first-child:before
+#layout-main .g_list li:first-child:before
 {
 	content: "";
 }
-#layout-main ul.g_numonpage li:first-child:before
+#layout-main .g_list.limit li:first-child:before
 {
 	content: "show: ";
 }

@@ -1,0 +1,72 @@
+#user-name
+{
+	text-align: center;
+}
+
+#user-login
+{
+	text-align: right;
+}
+
+#user-login a:after
+{
+	content: " *";
+}
+
+#user-xauth button
+{
+	background-color: transparent;
+	padding: 12px 0 0 0;
+	width: 42px;
+	height: 12px;
+	overflow: hidden;
+	border: 0;
+	cursor: pointer;
+	-cursor: hand;
+}
+
+#user-logout,
+#user-xauth
+{
+	background: transparent url(../icons/button_logon.gif) no-repeat left top;
+	position: absolute;
+	top: 1.4em;
+	left: 4px;
+	height: 12px;
+	padding:0;
+	width: 42px;
+	height: 12px;
+}
+
+#user-profile,
+#user-signup
+{
+	position: absolute;
+	top: 1.4em;
+	left: 48px;
+	padding:0;
+	width: 42px;
+	height: 12px;
+}
+
+#user-xuser
+{
+	margin-top: 16px;
+}
+
+#user-remember input
+{
+	border: none;
+	width: auto;
+}
+
+#user-remember label
+{
+	margin-left: -20px;
+	font-size: 90%;
+}
+
+#user-remember input
+{
+	vertical-align: middle;
+}

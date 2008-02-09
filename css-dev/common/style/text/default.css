@@ -41,9 +41,11 @@ h4, caption
 	margin-bottom: 0.2em;	
 }
 
+.tab,
 h4 span
 {
 	cursor: pointer;
+	cursor: hand;
 }
 
 th, td.action, td.date, td.year,
@@ -70,8 +72,7 @@ th, h1, h2, h3, h4, form,
 tr.action td.value, td.stats,
 td.state, td.type, td.date, td.action, td.icon, td.ignore,
 td.name.user, td.name.owner, td.vote, td.rating, td.check,
-.g_navlist, .g_filterlist, .g_actionlist, .g_info, .g_input,
-#layout-main div.g_section,
+.g_list, .g_info, .g_input, .g_section,
 #layout-footer p,
 #layout-menu div.usermenu,
 #layout-main div.profile_all p,
@@ -87,7 +88,7 @@ h4.collapsed span,
 }
 
 #layout-main table.filelist tr.virtual,
-#layout-main ul.g_navlist li.here
+#layout-main ul.g_list li.selected
 {
 	font-style: italic;
 }
@@ -208,7 +209,7 @@ input[type="submit"]
 h4 span,
 span.test,
 div.tabbed_pane ul.tabs li,
-ul.g_jumplist li,
+ul.g_list li,
 div.pagination span strong,
 div.pagination span a
 {

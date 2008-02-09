@@ -54,12 +54,11 @@ a:hover
 	background-color: #fafafa;
 }
 
-ul,
+#layout-main ul,
+#layout-menu ul,
 #layout-main tr,
-#layout-main ul.g_jumplist,
-#layout-main *.g_filterlist,
-#layout-main *.g_actionlist,
-#layout-main *.g_description,
+#layout-main .g_list,
+#layout-main .g_description,
 #layout-main div.addepm div.ep
 {
 	background-color: #f4f4f4
@@ -86,7 +85,7 @@ ul,
 	background-color: inherit;/*#d1d7dc;*/
 }
 
-#layout-menu > div > ul > li:hover
+#layout-menu li:hover
 {
 	background-color: #fafafa;
 }

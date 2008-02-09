@@ -21,7 +21,7 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #b0b0b0;
 }
 
-#layout-main ul.g_actionlist li.g_odd
+#layout-main ul.g_list li.g_odd
 {
 	background-color: #BFC2C9;
 }
@@ -54,15 +54,17 @@ a:visited, a:active, a:hover, a:link {
 {
 	color: red;
 }
-#layout-menu *,
+
+#layout-menu,
 #layout-menu a:hover,
 #layout-tabs a:hover {
 	color: #bbbbbb;
 }
 
-input[type="text"],
+/*input[type="text"],
 input[type="password"],
-input[type="checkbox"],
+input[type="checkbox"],*/
+input,
 select, textarea
 {
 	color: white;
@@ -86,7 +88,7 @@ button,
 /*input[type="button"],
 input[type="submit"],*/
 #layout-main div.tabbed_pane ul.tabs li,
-.g_jumplist li, /*NEW*/
+.g_list li,
 div.pagination span a
 {
 	border: outset #969AA6 1px;
@@ -94,7 +96,7 @@ div.pagination span a
 }
 
 #layout-main div.tabbed_pane ul.tabs li.selected,
-.g_jumplist li.selected, /*NEW*/
+.g_list li.selected,
 div.pagination span strong
 {
 	border: inset #969AA6 1px;
@@ -106,7 +108,7 @@ button:hover,
 /*input[type="button"]:hover,
 input[type="submit"]:hover,*/
 #layout-main div.tabbed_pane ul.tabs li:hover,
-.g_jumplist li:hover,
+.g_list li:hover,
 div.pagination span strong:hover
 {
 	background-color: #B0B0B1;

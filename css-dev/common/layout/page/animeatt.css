@@ -46,7 +46,7 @@
 	float: left;
 }
 
-#layout-main div.animeatt_all div.topic_actions div.icons
+#layout-main div.animeatt_all div.topic_actions span.icons
 {
 	float: right;
 }

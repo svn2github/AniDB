@@ -26,9 +26,9 @@ span.diff,
 
 #layout-main table ul li.g_odd,
 #layout-main table table td.g_odd,
-#layout-main ul.g_actionlist li.g_odd
+#layout-main ul.g_list li.g_odd
 {
-	background-color: inherit;
+	background-color: transparent;
 }
 
 #layout-main a.filter,

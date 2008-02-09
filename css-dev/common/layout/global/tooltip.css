@@ -6,11 +6,11 @@
 {
 	padding: 2px;
 }
-#obj-tooltip div.releaseinfotooltip ul li div.icons
+#obj-tooltip div.releaseinfotooltip ul li span.icons
 {
 	float: right;
 }
-#obj-tooltip div.releaseinfotooltip ul li div.icons span.i_icon
+#obj-tooltip div.releaseinfotooltip ul li span.icons .i_icon
 {
 	float: left;
 }

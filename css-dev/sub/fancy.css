@@ -9,30 +9,36 @@
 	content:"";
 }
 
-#layout-nav div.menu
+#layout-menu
 {
 	margin-top: 1em;
+	padding: 6px;
 }
 
-#layout-nav div.usermenu p.user
+#layout-menu > li+li
+{
+	margin-top: 6px;
+}
+
+#user-name
 {
 	position: absolute;
 	left: 0;
 	width: 150px;
-	top: 0.1em;
+	top: 0.2em;
 	text-align: center;
 }
 
-#layout-nav div.usermenu p.user:before
+#user-name a:before
 {
 	content: "Hi, ";
 }
-#layout-nav div.usermenu p.user:after
+#user-name a:after
 {
 	content: "!";
 }
 
-#layout-menu div ul li a
+#layout-menu ul li a
 {
 	display: block;
 	-display: inline;
@@ -46,7 +52,7 @@
 	width: 6em;
 }
 
-#layout-menu div.usermenu p a.i_button+a.i_button
+#layout-menu a.i_button+a.i_button
 {
 	margin-left: 0.8em;
 }
@@ -59,7 +65,7 @@
 	display: none;
 }*/
 
-#layout-nav > div
+#layout-nav
 {
 	margin-left: 6px;
 	margin-right: 6px;
@@ -75,3 +81,5 @@
 	/*text-decoration: line-through;*/
 	font-style: italic;
 }
+
+body{ font-size: 12px; }

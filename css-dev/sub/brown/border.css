@@ -32,7 +32,7 @@ img, a
 	border: 1px #867f6a solid;
 }
 
-#layout-main *.g_jumplist,
+#layout-main *.g_list,
 #layout-main *.g_description,
 #layout-main *.g_image image,
 #layout-main div.g_timedentry,
