@@ -40,7 +40,6 @@ function BasicPopupSelf()
 }
 
 var Magic = {
-	'interestedusers':["rar","epoximator","deridiot","exp","pelican","fahrenheit"],
 	'addvalidatorinterface':(function ()
 		{
 			if (document.evaluate && window.XMLSerializer) // interested people don't use IE anyway
@@ -119,8 +118,9 @@ var Magic = {
 	'enable_hide':(function ()
 		{
 			var elems = document.getElementsByTagName('H4');
-			for (var i = 0; i < elems.length; i++){	
-				elems[i].onclick = Magic.toggle_hide;
+			for (var i = 0; i < elems.length; i++){
+				if(elems[i].getElementsByTagName('span').length>0)
+					elems[i].onclick = Magic.toggle_hide;
 			}
 		}),
 	'toggle_hide':(function (e)
@@ -194,6 +194,78 @@ function ClassToggle(elem, classN, mode)
 	
 }
 
+function InitDefault()
+{
+	if (document.getElementsByTagName)
+	{
+		var linklist = document.getElementsByTagName('a');
+		var rowlist = document.getElementsByTagName('tr');
+		var spanlist = document.getElementsByTagName('span');
+	}
+	else return;
+	Magic.addvalidatorinterface();
+	for (var i = 0; i < rowlist.length; i++)
+	{
+		var row = rowlist[i];
+		for (var j = 0; j < row.childNodes.length; j++)
+		{
+			var kidclass = row.childNodes[j].className || "";
+			if (kidclass.indexOf(" ") >= 0)
+			{
+				row.className += kidclass.substring(kidclass.indexOf(" "));
+			}
+		}
+	}
+	
+	for (var i = 0; i < linklist.length; i++)
+	{
+		var relstring = linklist[i].getAttribute("rel") || "";
+		if (relstring.indexOf("anidb::popup") >= 0)
+		{
+			linklist[i].target = "_blank";
+			linklist[i].onclick = BasicPopupSelf;
+		}
+		else if (relstring.indexOf("anidb::") >= 0) // ::extern ::wiki ::forum ::tracker
+		{
+			linklist[i].target = "_blank";
+		}
+	}
+	//Magic.enable_over();
+	Magic.enable_hide();
+	Magic.enable_tabs();
+	
+	mbSet('layout-menu', 'menu-over');
+}
+
+
+/**/
+
+
+
+/**
+ * Adds onload events to window.onload
+ * usage: addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
+ *    or: addLoadEvent(function() {
+ *           more code to run on page load 
+ *         });
+ */
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+
+window.onload = InitDefault;
+
+
 function CookieSet( name, value, expires, path, domain, secure ) 
 {
 	// set time, it's in milliseconds
@@ -261,66 +333,33 @@ function CookieGet( check_name ) {
 	}
 }
 
-function InitDefault()
-{
-	if (document.getElementsByTagName)
-	{
-		var linklist = document.getElementsByTagName('a');
-		var rowlist = document.getElementsByTagName('tr');
-		var spanlist = document.getElementsByTagName('span');
-	}
-	else return;
-	Magic.addvalidatorinterface();
-	for (var i = 0; i < rowlist.length; i++)
-	{
-		var row = rowlist[i];
-		for (var j = 0; j < row.childNodes.length; j++)
-		{
-			var kidclass = row.childNodes[j].className || "";
-			if (kidclass.indexOf(" ") >= 0)
-			{
-				row.className += kidclass.substring(kidclass.indexOf(" "));
-			}
-		}
-	}
+function mbSet(m,c) {
+if (document.getElementById&&document.createElement) {
+	var m=document.getElementById(m);
+	m.className=c;
 	
-	for (var i = 0; i < linklist.length; i++)
-	{
-		var relstring = linklist[i].getAttribute("rel") || "";
-		if (relstring.indexOf("anidb::popup") >= 0)
-		{
-			linklist[i].target = "_blank";
-			linklist[i].onclick = BasicPopupSelf;
-		}
-		else if (relstring.indexOf("anidb::") >= 0) // ::extern ::wiki ::forum ::tracker
-		{
-			linklist[i].target = "_blank";
-		}
+	var i, ul, s;
+	l = m.getElementsByTagName('ul');
+	for (i=0;i<l.length;i++) {
+		ul = l[i];
+		
+		ul.onmouseout = ul.onblur = (function(){
+			this.className=null;
+		});
+		ul.onmouseover = ul.onfocus = (function(){
+			this.className='popup';
+		});
+		
+		s = document.createElement('span');
+		s.appendChild(document.createTextNode(ul.title || ul.id));
+		s.className = 'tab';
+		ul.parentNode.insertBefore(s, ul);
+
+		s.onmouseout = s.onblur = (function(){
+			this.nextSibling.className=null;
+		});
+		s.onmouseover = s.onfocus = (function(){
+			this.nextSibling.className='popup';
+		});
 	}
-	//Magic.enable_over();
-	Magic.enable_hide();
-	Magic.enable_tabs();
-}
-
-/**
- * Adds onload events to window.onload
- * usage: addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
- *    or: addLoadEvent(function() {
- *           more code to run on page load 
- *         });
- */
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      if (oldonload) {
-        oldonload();
-      }
-      func();
-    }
-  }
-}
-
-window.onload = InitDefault;
+}}
