@@ -1,9 +1,14 @@
 #layout-main ul.g_list
 {
 	clear: both;
-	margin: 1em;
 	text-align: center;	
 }
+
+#layout-main ul.g_list.nav
+{
+	text-align: left;	
+}
+
 
 #layout-main ul.g_list li
 {
@@ -18,4 +23,9 @@
 #layout-main ul.g_list li.next
 {
 	float: right;
+}
+
+#layout-main .latest_all .g_list.filter li
+{
+	display: block;
 }

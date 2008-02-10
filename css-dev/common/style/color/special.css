@@ -45,7 +45,7 @@ input.g_error
 	background-color: #FFDDDD;
 }
 
-th a
+th a, h1 a.short_link
 {
 	color: inherit;
 }

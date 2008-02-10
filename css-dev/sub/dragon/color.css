@@ -91,12 +91,12 @@ th,
 #layout-main table table.filelist tr,
 #layout-main div.g_definitionlist tr
 {
-	background-color: inherit;
+	background-color: transparent;
 }
 
 #layout-main div.g_definitionlist tr th
 {
 	color: inherit;
 	background-image: none;
-	background-color: inherit;
+	background-color: transparent;
 }

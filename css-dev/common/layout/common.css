@@ -70,7 +70,7 @@ body.nonav #layout-main h1
 	clear: both;
 }
 
-#layout-main .type
+#layout-main .g_list.type
 {
 	float: left;
 }
@@ -78,18 +78,6 @@ body.nonav #layout-main h1
 #layout-main .g_list.limit
 {
 	float: right;
-}
-
-#layout-main .g_navprev
-{
-	float: left;
-	padding-left: 0.3em;
-}
-
-#layout-main .g_navnext
-{
-	float: right;
-	padding-right: 0.3em;
 }
 
 #layout-main div.anime_all div.info tr.official td.value span.icons,

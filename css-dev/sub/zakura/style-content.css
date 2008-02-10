@@ -169,7 +169,7 @@ background-color: #2d42af;
 }
 
 /* informational boxes */
-.g_notebox,
+.g_msg.note,
 .g_note {
 border: 1px solid #dfc8ec;
 padding: 0.7em;
@@ -177,8 +177,8 @@ background: #faf0ff;
 color: #4d2f5f;
 }
 
-.g_errorbox,
-.g_warnbox {
+.g_msg.error,
+.g_msg.warning {
 border: 1px solid #ffcbf8;
 padding: 0.7em;
 background: #ffeafc;
@@ -193,27 +193,27 @@ border: 1px solid #e0e0e0;
 color: #777;
 }
 
-.g_notebox h3,
+.g_msg.note h3,
 .g_note h3,
-.g_errorbox h3,
+.g_msg.error h3,
 .g_info h3,
-.g_warnbox {
+.g_msg.warning {
 margin: 0 0 -0.5em;
 }
 
-.g_notebox>*:last-child,
+.g_msg.note>*:last-child,
 .g_note>*:last-child,
-.g_errorbox>*:last-child,
+.g_msg.error>*:last-child,
 .g_info>*:last-child,
-.g_warnbox>*:last-child {
+.g_msg.warning>*:last-child {
 margin-bottom: 0;
 }
 
-.g_notebox>*:first-child,
+.g_msg.note>*:first-child,
 .g_note>*:first-child,
-.g_errorbox>*:first-child,
+.g_msg.error>*:first-child,
 .g_info>*:first-child,
-.g_warnbox>*:first-child {
+.g_msg.warning>*:first-child {
 margin-top: 0;
 }
 

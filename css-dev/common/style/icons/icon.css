@@ -6,11 +6,9 @@ a.i_icon:hover, a.i_inline:hover
 .i_icon
 {
 	background-repeat: no-repeat;
-	background-position: center;
 	display: block;
 	width: 15px;
 	height: 13px;
-	/*text-indent: -5000px;*/
 	margin-left: 0;
 	margin-right: 0;
 }

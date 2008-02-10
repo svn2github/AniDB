@@ -21,7 +21,7 @@
 
 #layout-main div.tabbed_pane ul.tabs
 {
-	background-color: inherit;
+	background-color: transparent;
 	border: none;
 	margin: 1px 1px 1px 6px;
 }
@@ -48,7 +48,7 @@
 
 #layout-main div.tabbed_pane div.pane table tr
 {
-	background-color: inherit;
+	background-color: transparent;
 }
 
 #layout-main div.tabbed_pane div.pane table td

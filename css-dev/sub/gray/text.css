@@ -2,7 +2,7 @@
 {
 	content: "";
 }
-#layout-main .g_list.limit li:first-child:before
+#layout-main .g_list.limit:before
 {
 	content: "show: ";
 }

@@ -172,12 +172,6 @@ h4.collapsed span,
 	white-space: -moz-pre-wrap;
 }
 
-
-#menu-account li
-{
-	text-align: center;
-}
-
 #menu-account li.alert span:before,
 #menu-account li.alert span:after
 {
@@ -203,6 +197,7 @@ input[type="submit"]
 h4 span,
 span.test,
 .tabbed_pane ul.tabs li,
+.g_list li,
 .g_list li a,
 div.pagination span strong,
 div.pagination span a

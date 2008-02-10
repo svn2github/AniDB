@@ -48,4 +48,5 @@ img, a
 #layout-main div.g_content
 {
 	border-top: 2px groove #BFC2CA;
+	padding: 1em;
 }

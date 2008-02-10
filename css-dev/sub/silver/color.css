@@ -75,14 +75,14 @@ a:hover
 #layout-main table table.filelist tr,
 #layout-main div.g_definitionlist tr
 {
-	background-color: inherit;
+	background-color: transparent;
 }
 
 #layout-main div.g_definitionlist tr th
 {
 	color: inherit;
 	background-image: none;
-	background-color: inherit;/*#d1d7dc;*/
+	background-color: transparent;/*#d1d7dc;*/
 }
 
 #layout-menu li:hover

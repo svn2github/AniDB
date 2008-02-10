@@ -18,7 +18,7 @@
 #layout-main div.stats_all table tr,
 #layout-main div.dbstats_all table tr
 {
-	background-color: inherit;
+	background-color: transparent;
 }
 
 #layout-main div.stats_all table td,

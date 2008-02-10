@@ -73,6 +73,17 @@ select, textarea
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 }
 
+/*IE*/
+#layout-search input,
+#user-xname input,
+#user-xpass input
+{
+	color: white;
+	border: #BFC2C9 1px solid;
+	background-color: #272D43;
+	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+}
+
 input[size="10"]
 {
 	width: 6em;
@@ -83,13 +94,19 @@ input[size="60"]
 	width: 36em;
 }
 
-input[type="button"],
-input[type="submit"],
 span.test,
 button,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main .g_list li a,
 #layout-main div.pagination span a
+{
+	color: black;
+	border: outset #969AA6 1px;
+	background-color: #BFC2C9;
+}
+
+input[type="button"], /*NIE*/
+input[type="submit"]
 {
 	color: black;
 	border: outset #969AA6 1px;
@@ -104,14 +121,18 @@ div.pagination span strong
 	background-color: #B0B0B1;
 }
 
-input[type="button"]:hover,
-input[type="submit"]:hover,
 span.test:hover,
 button:hover,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main .g_list li a:hover,
 #layout-main .g_list li.g_odd a:hover,
 div.pagination span strong:hover
+{
+	background-color: #B0B0B1;
+}
+
+input[type="button"]:hover, /*NIE*/
+input[type="submit"]:hover
 {
 	background-color: #B0B0B1;
 }
