@@ -45,10 +45,11 @@ h4, caption
 h4 span
 {
 	cursor: pointer;
-	cursor: hand;
+	-cursor: hand;
 }
 
 th, td.action, td.date, td.year,
+#menu-account li.alert,
 #layout-main div.anime_all div.g_section.mylist td.title
 {
 	white-space: nowrap;
@@ -93,11 +94,11 @@ h4.collapsed span,
 	font-style: italic;
 }
 
-#layout-menu
+/*#layout-menu
 {
 	font-size: 10px;
 	line-height: 1.1;
-}
+}*/
 
 .tiny, small,
 #layout-main .name span.main,
@@ -165,12 +166,6 @@ h4.collapsed span,
 	text-align: center;
 }
 
-#layout-main div.schedule_all a.promo_only,
-#layout-main div.anime_all div.groups td.mylist.new
-{
-	color: red;
-}
-
 #layout-main div.ed2kexport_all pre
 {
 	white-space: pre-wrap;
@@ -178,18 +173,17 @@ h4.collapsed span,
 }
 
 
-#layout-menu #newmessages:before,
-#layout-menu #newnotifies:before,
-#layout-menu #newmessages:after,
-#layout-menu a.history:after
+#menu-account li
 {
-	content: "!";
-	padding: 0.2em;
+	text-align: center;
 }
 
-#layout-menu #newmessages
+#menu-account li.alert span:before,
+#menu-account li.alert span:after
 {
-	display: block;
+	content: "!";
+	color: red;
+	padding: 0.2em;
 }
 
 #layout-main div.japan_time
@@ -208,13 +202,13 @@ input[type="submit"]
 
 h4 span,
 span.test,
-div.tabbed_pane ul.tabs li,
-ul.g_list li,
+.tabbed_pane ul.tabs li,
+.g_list li a,
 div.pagination span strong,
 div.pagination span a
 {
-	padding: 2px 4px 2px 4px;
+	padding: 1px 2px 1px 2px;
 	-moz-user-select: none;
-	user-select: none;
+	-user-select: none;
 	text-transform: capitalize;
 }

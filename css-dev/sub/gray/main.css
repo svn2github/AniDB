@@ -25,39 +25,11 @@ body,
 	margin: 1em;
 }
 
-.i_button
-{
-	display: block;
-	width: 42px;
-	height: 12px;
-	float: left;
-	margin-right: 4px;
-	background-repeat: no-repeat;
-	background-position: center;
-	text-indent: -5000px;
-	line-height: 1;
-}
-
-.i_logout
-{
-	background-image: url(../icons/button_logout.gif);
-}
-
-.i_profile
-{
-	background-image: url(../icons/button_profile.gif);
-}
-
-.i_signup
-{
-	background-image: url(../icons/button_signup.gif);
-}
-
 #layout-main div.main_all div.rightbar
 {
 	width: 20em;
 	margin: 0.3em;
-	padding-top: 0.7em;
+	padding-top: 3px;
 }
 
 #layout-main div.main_all div.rightbar p
@@ -76,14 +48,16 @@ body,
 	padding: 0;
 }
 
-#layout-main div.main_all div.rightbar li span
-{
-	margin-left: -4em;
-}
 
 #layout-main div.main_all div.rightbar li
 {
 	margin-left: 4em;
+	padding-left: 2px;
+}
+
+#layout-main div.main_all div.rightbar li span
+{
+	margin-left: -4em;
 }
 
 #layout-main div.main_all div.news
@@ -91,11 +65,6 @@ body,
 	margin-right: 21em;
 	margin-left: 0.3em;
 	margin-top: 0;
-}
-
-#layout-main div.main_all div.news div.newsitem h4
-{
-	padding: 0.1em;
 }
 
 #layout-main div.main_all div.news div.newsitem span.stamp

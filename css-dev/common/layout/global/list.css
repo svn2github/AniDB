@@ -12,23 +12,10 @@
 
 #layout-main ul.g_list li.prev
 {
-	padding-left: 1em;
 	float: left;
 }
 
 #layout-main ul.g_list li.next
 {
-	padding-right: 1em;
 	float: right;
-}
-
-/*#layout-main ul.g_list.jump li.all:before
-{
-	font-style: normal;
-	content: "Jump to: ";
-}*/
-
-#layout-main ul.g_list.links li+li:before
-{
-	content: " - ";
 }

@@ -20,7 +20,7 @@
 {
 	position: absolute;
 	top: 420px;
-	left: 10px;
+	left: 8px;
 	line-height: 2;
 }
 
@@ -28,10 +28,10 @@
 {
 	position: absolute;
 	top: 600px;
-	left: 20px;
-	padding: 10px;
+	left: 23px;
+	padding: 4px;
 	background-color: #1a2238;
-	border: 1px solid #969aa6;
+	border: 1px inset #AEAEAE;
 }
 
 #layout-menu ul
@@ -89,13 +89,13 @@
 
 #layout-search div.search form p
 {
-	margin-top: 18px;
-  margin-left: 38px;
+	margin-top: 14px;
+	margin-left: 36px;
 }
 
 #layout-search div.search form input.text
 {
-	width: 100px;
+	margin-bottom: 2px;
 }
 
 #layout-search div.search form input.submit
@@ -137,21 +137,6 @@
 #layout-main div.anime_all div.mylist th.anime
 {
 	width: 300px;
-}
-
-#newmessages:before,
-#newnotifies:before,
-#newmessages:after,
-#layout-menu a.history:after
-{
-	content: "!";
-	color: red;
-	padding: 0.2em;
-}
-
-#newmessages
-{
-	display: block;
 }
 
 #layout-tabs

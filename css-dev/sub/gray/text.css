@@ -1,7 +1,3 @@
-#layout-main .g_list li:before
-{
-	content: " | "
-}
 #layout-main .g_list li:first-child:before
 {
 	content: "";

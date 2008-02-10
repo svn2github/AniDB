@@ -9,7 +9,9 @@
 span.diff,
 #layout-main td.reviewed.no a,
 #layout-main div.creqmod_all .state.return,
-#layout-main div.creqmod_all span.type.del
+#layout-main div.creqmod_all span.type.del,
+#layout-main div.schedule_all a.promo_only,
+#layout-main div.anime_all div.groups td.mylist.new
 {
 	color: red;
 }
