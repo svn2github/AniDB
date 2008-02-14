@@ -1,4 +1,4 @@
-/* *
+/*
  * @file Utilities
  * @author fahrenheit (alka.setzer@gmail.com)
            some code derived from work by PetriW and Rar at anidb
@@ -15,6 +15,7 @@ function padLeft(text, padChar, count) {
   }
   return (result + text);
 }
+
 function padRight(text, padChar, count) {
   var result = '';
   text = new String(text);
@@ -105,6 +106,7 @@ function cTimeHour(data) {
 function nodeData(node) { 
   try { return node.childNodes.item(0).nodeValue; } 
   catch(e) { return ''; }
+
 }
 
 // STUB //
@@ -189,6 +191,41 @@ function getNodeElementsByTagName(node, tag) {
 }
 
 /* *
+ * Function that creates an header
+ * @param parentNode The parent node (or null if you want to return the object)
+ * @param className Class name to give
+ * @param text Text to go in the node
+ * @param abbr Text to go in the abbreviation title (or null if you won't use it)
+ */
+function createHeader(parentNode, className, text, abbr) {
+	var th = document.createElement('TH');
+	if (className != null) th.className = className;
+	if (abbr != null) {
+		var abbreviation = document.createElement('ABBR');
+		abbreviation.title = abbr;
+		if (text != null) abbreviation.appendChild(document.createTextNode(text));
+		th.appendChild(abbreviation);
+	} else if (text != null) th.appendChild(document.createTextNode(text));
+	if (parentNode != null) parentNode.appendChild(th);
+	else return th;
+}
+
+/* *
+ * This function creates a simple cell with an optional element
+ * @param parentNode The parent node (or null if you want to return the object)
+ * @param className Class name to give
+ * @param someElement Some element to add to the cell, other elements have to be added manualy
+ */
+function createCell(parentNode, className, someElement, anidbSort) {
+	var td = document.createElement('TD');
+	if (className != null) td.className = className;
+	if (someElement != null) td.appendChild(someElement);
+	if (anidbSort != null) td.setAttribute('anidb:sort',anidbSort);
+	if (parentNode != null) parentNode.appendChild(td);
+	else return td;
+}
+
+/* *
  * Creates icons
  * @param parentNode ParenteNode of the newly created icon or null if want return
  * @param text Text
@@ -223,6 +260,13 @@ function createLink(parentNode, text, url, rel, onclick, title, className) {
   else return(obj);
 }
 
+function createTextLink(parentNode, text, url, rel, onclick, title, className) {
+	var obj = createLink(null, text, url, rel, onclick, title, className);
+	obj.className = className;
+	if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
+  else return(obj);
+}
+
 /* *
  * Creates a SELECT option element
  * @param parentNode ParenteNode of the newly created option or null if want return
@@ -234,7 +278,7 @@ function createSelectOption(parentNode, text, value, isSelected) {
   var obj = document.createElement('OPTION');
   if (text != null) obj.appendChild(document.createTextNode(text));
   if (value != null) obj.value = value;
-  if (isSelected) obj.selected = true;
+  if (isSelected != null) obj.selected = isSelected;
   if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
   else return(obj);
 }
@@ -247,34 +291,102 @@ function createCheckbox(name,checked) {
   return ck;
 }
 
-function createSelect(base,name,id) {
-  var select = document.createElement('SELECT');
-  select.name = name;
-  select.size = 1;
-  if (id != null) select.id = id;
-  for (var i = 0; i < base.options.length; i++) {
-    var option = document.createElement('OPTION');
-    if (base.options[i].selected) option.selected = true;
-    option.value = base.options[i].value;
-    option.appendChild(document.createTextNode(base.options[i].text));
-    select.appendChild(option);
-  }
-  return select;
-}
-
-function createTextInput(name,size,disabled,hidden) {
+function createTextInput(name,size,disabled,hidden,maxlength) {
   var input = document.createElement('INPUT');
-  if (hidden) input.type = 'hidden';
-  else input.type = 'text';
-  input.name = name;
+  if (!hidden) input.type = 'text';
+  else input.type = 'hidden';
+  if (name != null) { input.name = name; input.id = name; }
   if (size != null) input.size = size;
   if (disabled != null) input.disabled = disabled;
+	if (maxlength != null) input.maxlength = maxlength;
   return input;
 }
 
+function createBasicButton(name,value,type) {
+	var button = document.createElement('INPUT');
+	button.type = (type && type != '') ? type : 'button';
+	if (name && name != '') {
+		button.name = name;
+		button.id = name;
+	}
+	if (value != null) button.value = value;
+	return button;
+}
+
+function createButton(name,id,disabled,value,type) {
+	var button = createBasicButton(name,value,type);
+	if (id && id != '') button.id = id;
+	if (disabled != null) button.disabled = (disabled);
+	return button;
+}
+
+function createTextBox(name,id,cols,rows,onchange) {
+	var textbox = document.createElement('TEXTAREA');
+	if (name) textbox.name = name;
+	if (id) textbox.id = id;
+	if (cols) textbox.cols = cols;
+	if (rows) textbox.rows = rows;
+	if (onchange) textbox.onchange = onchange;
+	return textbox;
+}
+
+function createBasicSelect(name,id,onchange) {
+	var select = document.createElement('SELECT');
+	select.size = "1";
+	if (name && name != '') select.name = name;
+	if (id && id != '') select.id = id;
+	if (onchange && onchange != '') select.onchange = onchange;
+	return select;
+}
+
+function createLanguageSelect(parentNode,name,id,onchange,selected) {
+	var select = createBasicSelect(name,id,onchange);
+	for (var lang in languageMap) {
+		var option = document.createElement('OPTION');
+		var op = languageMap[lang];
+		option.text = op['name'];
+		option.value = lang;
+		if (lang == selected) option.selected = true;
+		select.appendChild(option);
+	}
+	if (parentNode && parentNode != '') parentNode.appendChild(select);
+	else return select;
+}
+
+function createSelectArray(parentNode,name,id,onchange,selected,optionArray) {
+	var select = createBasicSelect(name,id,onchange);
+	for (var opt in optionArray) {
+		var option = document.createElement('OPTION');
+		var op = optionArray[opt];
+		createSelectOption(select,op['text'], opt, (opt == selected));
+	}
+	if (parentNode && parentNode != '') parentNode.appendChild(select);
+	else return select;
+}
+
+function createMultiSelectArray(parentNode,name,id,onchange,selected,optionArray,size) {
+	var select = createSelectArray(null,name,id,onchange,selected,optionArray);
+	select.multiple = true;
+	select.size = (size) ? size : 5;
+	if (parentNode && parentNode != '') parentNode.appendChild(select);
+	else return select;
+}
+
+function createCheckBox(parentNode,name,id,onchange,checked) {
+	var ck = document.createElement('INPUT');
+	ck.type = 'checkbox';
+	if (name && name != '') ck.name = name;
+	if (id && id != '') ck.id = id;
+	if (onchange && onchange != '') ck.onchange = onchange;
+	if (checked) ck.checked = true;
+	if (parentNode && parentNode != '') parentNode.appendChild(ck);
+	else return ck;
+}
+
+
 function makeBar(parentNode,start,end,total,map) {
   var mult = 1;
-  if ( total > 0 && 192 / total >= 1) mult = 192 / total;
+  if ( total > 0 && 200 / total >= 1) mult = Math.floor(200 / total);
 
   var width = 1 + end - start;
   var img = document.createElement('IMG');
@@ -321,13 +433,34 @@ function expandRange(range,limit,map,array) {
   for (var r = 0; r < rangeGroups.length; r++) {
     var rangeGroup = rangeGroups[r];
     var rg = rangeGroup.split('-');
-    if ( rg.length == 1 ) array[rg[0]] = map['type'];
-    else { for( var i = rg[0]; i <= rg[1]; i++) array[ i-1 ] = map['type']; }
+    if ( rg.length == 1 ) array[Number(rg[0])] = map['type'];
+    else { for( var i = Number(rg[0]); i <= Number(rg[1]); i++) array[ i-1 ] = map['type']; }
   }
   return array;
 }
 
 // GENERAL FUNCTIONS //
+
+/* *
+ * Function that repaints the stripes of table
+ * @param table Table (or tbody) to paint stripes 
+ * @param startAt optional index where to start painting stripes
+ */
+function repaintStripes(table, startAt) {
+	if (!table || (table && (table.nodeName != 'TABLE' && table.nodeName != 'TBODY'))) return;
+	if (!startAt) startAt = 0;
+	var tbody = (table.nodeName == 'TABLE') ? table.getElementsByTagName('TBODY')[0] : table;
+	if (!tbody) return;
+	var rows = tbody.rows;
+	var g_odd = "";
+	for (var i = startAt; i < rows.length; i++) {
+		var row = rows[i];
+		g_odd = (i % 2) ? "g_odd" : "";
+		if (row.className.indexOf('g_odd') >= 0) row.className = row.className.replace("g_odd","");
+		if (row.className.length > 0) g_odd = " " + g_odd;
+		row.className += g_odd;
+	}
+}
 
 /* *
  * Function that alerts the user for errors
@@ -343,6 +476,20 @@ function showAlert(func, process, pNode, cNode) {
 	      '\nProcessing: '+process+
 	      '\nUnrecognized '+pNode+' node: '+cNode+
         '\nPlease warn your favorite moderator with this text message');
+}
+
+/* *
+ * Function that alerts the user for errors
+ * @param funcName Name of the function
+ * @param whereIs some message to indicate where the error is
+ * @return void
+ */
+function errorAlert(funcName,whereIs) {
+	if (seeDebug) {
+		alert('There was an error while processing '+funcName+' ('+whereIs+')'+
+					'\nPlease inform an AniDB mod about this error.');
+	}
+	return;
 }
 
 /* *
@@ -407,9 +554,11 @@ function Array_push() {
   }
   return(this.length);
 }
+
 if (typeof Array.prototype.push == "undefined") {
   Array.prototype.push = Array_push;
 }
+
 
 /* *
  * Adds array shift prototype to arrays if not defined
@@ -423,8 +572,24 @@ function Array_shift() {
   this.length--;
   return(response);
 }
+
 if (typeof Array.prototype.shift == "undefined") {
   Array.prototype.shift = Array_shift;
+}
+
+/* *
+ * Adds array indexOf prototype to arrays if not defined
+ */
+function Array_indexOf(what) {
+	var index = -1;
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == what) return i;
+	}
+	return index;
+}
+
+if (typeof Array.prototype.indexOf == "undefined") {
+  Array.prototype.indexOf = Array_indexOf;
 }
 
 /* *
@@ -452,7 +617,9 @@ function updateStatus(text,add) {
  * @param epno Episode Number to convert
  * @return converted episode number
  */
+
 function epNoToString(epno) {
+
   var ret = Number(epno);
   if (isNaN(ret)) return epno;
   if (ret >= 10000) return 'O' + Number(ret - 10000);
@@ -461,6 +628,7 @@ function epNoToString(epno) {
   if (ret >= 2000 && ret < 3000) return 'C' + Number(ret - 2000);
   if (ret >= 1000 && ret < 2000) return 'S' + Number(ret - 1000);
   return ret;
+
 }
 
 /* *
@@ -580,20 +748,12 @@ function c_number_r(b, a) {
   val =  a.split('|')[1] - b.split('|')[1];
   return val || (a.split('|')[0] - b.split('|')[0]);
 }
-
-function get_text(node) {
-	return node.firstChild.nodeValue;
-}
 function dig_text(node) {
 	while (node && !node.nodeValue) { node = node.firstChild; }
 	return node.nodeValue;
 }
 function dig_text_lower(node) {
-	while (node && !node.nodeValue) { node = node.firstChild; }
-	return node.nodeValue.toLowerCase();
-}
-function get_title(node) {
-	return node.title;
+	return dig_text(node).toLowerCase();
 }
 function get_blank(node) {
 	return "";
@@ -602,30 +762,55 @@ function get_anidbsort(node) {
   // Should be using node.getAttributeNS("http://anidb.info/markup","sort");
 	return node.getAttribute("anidb:sort");
 }
-function get_datelong(node) {
-  while (node && !node.nodeValue) { node = node.firstChild; }
-  var edate = node.nodeValue.split(".");
-  var ehour = node.nodeValue.split(":");
-  var day = Number(edate[0]);  
-  var month = Number(edate[1]);
-  var now = new Date();
-  var year;
-  var echar = node.nodeValue.charAt(node.nodeValue.lastIndexOf('.')+1);
-  if (echar != '1' || echar != '2') {
-    if (month > now.getMonth()) year = (now.getFullYear()-1)
-    else year = now.getFullYear();
-  } else year = parseInt(node.nodeValue.substring(lastIndexOf('.')+1,lastIndexOf('.')+5));
-  var hour = Number(node.nodeValue.substring(node.nodeValue.indexOf(':')-2,node.nodeValue.indexOf(':')));
-  var minute = Number(ehour[1]);
-  return new Date(year,month-1,day,hour,minute).getTime();
-}
+
 function get_date(node) {
-  while (node && !node.nodeValue) { node = node.firstChild; }
-  var edate = node.nodeValue.split(".");
-  var day = Number(edate[0]);
-  var month = Number(edate[1])-1;
-  var year = Number(edate[2]);
-  return Number(new Date(year,month,day));
+	while (node && !node.nodeValue) { node = node.firstChild; }
+	var string = node.nodeValue;
+	var findPrecision = function getPrecision(pstring) {
+		if (pstring == '?') return Number(new Date(2099,11,31)); // Totaly future date
+		if (pstring.indexOf('.') >= 0) {
+			var highPrecision = (pstring.indexOf(':') >= 0);
+			var datePart = hourPart = "";
+			if (highPrecision) {
+				var splitChar = String.fromCharCode(160);
+				datePart = pstring.substr(0,pstring.indexOf(splitChar));
+				hourPart = pstring.substr(pstring.indexOf(splitChar)+1,pstring.length);
+			} else datePart = pstring;
+			var edate = datePart.split(".");
+			var ehour = hour = minute = 0;
+			var now = new Date();
+			var year;
+			// more date stuff
+			if (edate[2] && !isNaN(Number(edate[2]))) year = edate[2];
+			else {
+				if ((Number(edate[1]) - 1) > now.getMonth()) year = (now.getFullYear()-1);
+				else year = now.getFullYear();
+			}
+			var month = (edate[1] != '?' ? Number(edate[1]) - 1 : 11);
+			var day;
+			if (edate[0] == '?') {
+				var aux = 31;
+				var tdate = new Date(year,month,aux);
+				while (aux != tdate.getDate()) { aux--; tdate = new Date(year,month,aux); }
+				day = aux;
+			} else day = Number(edate[0]);
+			if (highPrecision) {
+				ehour = hourPart.split(":");
+				hour = Number(ehour[0]);
+				minute = Number(ehour[1]);
+			}
+			return Number((highPrecision ? new Date(year,month,day,hour,minute) : new Date(year,month,day)));
+		} else { // very low precision mode
+			var pyear = parseInt(pstring);
+			if (isNaN(pyear)) return 0;// not even a low precision date
+			return Number(new Date(pyear,00,01));
+		}
+	}
+	var isRange = (string.indexOf('till') >= 0 || string.indexOf(' - ') >= 0);
+	if (isRange) { 
+		var split = (string.indexOf('till') >= 0 ? string.split('till') : string.split(' - '));
+		return findPrecision(split[0]); // Ranged date mode, just return the first date
+	} else return findPrecision(string); // Single date mode
 }
 
 /* *
@@ -640,47 +825,22 @@ function init_sorting(node,ident,sortico) {
 	if (document.getElementsByTagName) headinglist = node.getElementsByTagName('TH');
 	else return;
 	// The Sorting functions, see FunctionMap for the actual function names
-	var sortFuncs = new Array('c_latin','c_number','c_datetime','c_datelong','c_date','c_set','c_setlatin');
+	var sortFuncs = new Array('c_latin','c_number','c_date','c_set','c_setlatin');
 	for (var i = 0; i < headinglist.length; i++) {
 		headinglist[i].onclick = sortcol; // This applies the actual sorting behaviour
 		// And the following adds the icons (Optional, it's just a visual input)
-    /*
-		for (var k = 0; k < sortFuncs.length; k++) {
-		  if (headinglist[i].className.indexOf(sortFuncs[k]) >= 0) {
-		    var dv = document.createElement('DIV');
-		    dv.className = 'icons';
-		    var span = document.createElement('SPAN');
-		    span.className = 'i_icon i_sort';
-		    span.title = 'click header to sort column';
-		    // Optional part, sets a specific icon to match the default db order
-		    if (ident && ident.length) {
-		      var identifier = headinglist[i].className.substring(0,headinglist[i].className.indexOf(" ")) || headinglist[i].className;
-		      if (identifier.indexOf(ident) >= 0) {
-		        if (sortico && sortico.length) {
-		          if (sortico == 'up') {
-		            span.className = 'i_icon i_up1';
-		            span.title = 'sort ascending';
-		          } else {
-		            span.className = 'i_icon i_down1';
-		            span.title = 'sort descending';
-		          }
-	          } else { 
-	            span.className = 'i_icon i_down1';
-	            span.title = 'sort descending';
-	          }
-	        }
-		    } 
-		    dv.appendChild(span);
-		    headinglist[i].insertBefore(dv,headinglist[i].firstChild);
-		    break;
+		if (ident && ident.length) {
+			var identifier = headinglist[i].className.substring(0,headinglist[i].className.indexOf(" ")) || headinglist[i].className;
+		  if (identifier.indexOf(ident) >= 0) {
+				if (sortico && sortico.length > 0) {
+					if (sortico == 'up')		headinglist[i].className += ' s_forward';
+					if (sortico == 'down')	headinglist[i].className += ' s_reverse';
+				}
+			}
+		}
 		  }
-	  }
-    */
-  }
 	FunctionMap = {'c_latin':{'sortf':c_string, 'sortr':c_string_r, 'getval':dig_text_lower},
 		'c_number':{'sortf':c_number, 'sortr':c_number_r, 'getval':dig_text},
-		'c_datetime':{'sortf':c_string, 'sortr':c_string_r, 'getval':get_anidbsort},
-		'c_datelong':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_datelong},
 		'c_date':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_date},
 		'c_set':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_anidbsort},
 		'c_setlatin':{'sortf':c_string, 'sortr':c_string_r, 'getval':get_anidbsort},
@@ -718,17 +878,6 @@ function sortcol(node) {
 	// We now find out which sort function to apply to the column or none
 	var sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
 	if (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none') return; // There will be no sorting for this column.
-	// We get all the spans in the icons divs so that we can clear their icons
-/*
-	var headinglist = here.parentNode.getElementsByTagName('SPAN');
-	for (var i=0; i < headinglist.length; i++) {
-	  var span = headinglist[i];
-	  if (span.className.indexOf('i_down1') >= 0 || span.className.indexOf('i_up1') >= 0) {
-	    span.className = 'i_icon i_sort';
-		  span.title = 'click header to sort column';
-		}
-	}
-*/
   // clear other sorting that could be present
   for (var i = 0; i < node.parentNode.childNodes.length; i++) {
     var cell = node.parentNode.childNodes[i];
@@ -736,18 +885,6 @@ function sortcol(node) {
     if (cell.className.indexOf(' s_forward') > -1) cell.className = cell.className.replace(' s_forward','');
     if (cell.className.indexOf(' s_reverse') > -1) cell.className = cell.className.replace(' s_reverse','');
   }
-	// Finding the current header sort icon span
-/*
-	var curSpan;
-	var spanlist = here.getElementsByTagName('SPAN');
-	for (var i = 0; i < spanlist.length; i++) {
-	  var span = spanlist[i];
-	  if (span.className.indexOf('i_sort') >= 0) {
-	    curSpan = span;
-	    break;
-	  }
-	}
-*/
   // Finding the actual Table node
 	while (here.nodeName != 'TABLE')
 	  here = here.parentNode;
@@ -788,20 +925,12 @@ function sortcol(node) {
     i++;
   }
 	// Are we sorting forward or reverse? If no info, we apply a Forward sort
-	if (node.className.indexOf("s_forward") >= 0) {
+	if (node.className.indexOf("s_reverse") >= 0) {
 		sortlist.sort(funcmap['sortr']);
-		node.className = node.className.replace("s_forward", "s_reverse");
-/*
-		curSpan.className = 'i_icon i_down1';
-		curSpan.title = 'sort descending';
-*/
+		node.className = node.className.replace("s_reverse", "s_forward");
 	} else {
 		sortlist.sort(funcmap['sortf']);
-		node.className = node.className.replace(" s_reverse","") + " s_forward";
-/*
-		curSpan.className = 'i_icon i_up1';
-		curSpan.title = 'sort ascending';
-*/
+		node.className = node.className.replace(" s_forward","") + " s_reverse";
 	}
 
 	for (var i = 0; i < sortlist.length; i++) {
@@ -942,7 +1071,7 @@ function applyFormat(identifier, file, episode, anime, group) {
 
 function createHashLink() {
   var ahref = this.getElementsByTagName('A')[0];
-  if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash 
+  if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
   var fid = Number(this.parentNode.id.split('fid_')[1]);
   var file = files[fid];
   if (!file) return;
@@ -1028,50 +1157,36 @@ function setTooltip(thetext, dom, thewidth, thecolor){
 }
 
 function positionTooltip(e){
-	if (enabletip){
-    divHTMLTOOLTIP.style.position = 'absolute';
-		var nondefaultpos = false;
-    var curX = 0;
-    var curY = 0;
-    if (!e) var e = window.event;
-    if (e.pageX || e.pageY) { curX = e.pageX; curY = e.pageY; }
-    else if (e.clientX || e.clientY) { curX = e.clientX + document.body.scrollLeft; curY = e.clientY + document.body.scrollTop; }
-		//Find out how close the mouse is to the corner of the window
-		var winwidth = ie && !window.opera ? ietruebody().clientWidth : window.innerWidth - 20;
-		var winheight = ie && !window.opera ? ietruebody().clientHeight : window.innerHeight - 20;
-		var rightedge = ie && !window.opera ? winwidth - event.clientX - offsetfromcursorX : winwidth - e.clientX - offsetfromcursorX;
-		var bottomedge = ie && !window.opera ? winheight - event.clientY - offsetfromcursorY : winheight - e.clientY - offsetfromcursorY;
-		var leftedge = (offsetfromcursorX < 0) ? offsetfromcursorX * (-1) : - 5000;
-		//if the horizontal distance isn't enough to accomodate the width of the context menu
-		if (rightedge < divHTMLTOOLTIP.offsetWidth) { //move the horizontal position of the menu to the left by it's width
-			divHTMLTOOLTIP.style.left = (curX - divHTMLTOOLTIP.offsetWidth) + 'px';
-			nondefaultpos = true;
-		}
-		else if (curX < leftedge) divHTMLTOOLTIP.style.left = "5px";
-		else { //position the horizontal position of the menu where the mouse is positioned
-			divHTMLTOOLTIP.style.left = (curX + offsetfromcursorX - offsetdivfrompointerX) + 'px';
-			//pointerobj.style.left = curX + offsetfromcursorX + "px";
-		}
-		if (bottomedge < divHTMLTOOLTIP.offsetHeight) { //same concept with the vertical position
-			divHTMLTOOLTIP.style.top = (curY - divHTMLTOOLTIP.offsetHeight - offsetfromcursorY) + 'px';
-			nondefaultpos = true;
-		} else {
-			divHTMLTOOLTIP.style.top = (curY + offsetfromcursorY + offsetdivfrompointerY) + 'px';
-			//pointerobj.style.top = curY + offsetfromcursorY + "px";
-		}
-    divHTMLTOOLTIP.style.visibility = "visible";
-    /*
-		if (!nondefaultpos)	pointerobj.style.visibility="visible"
-		else pointerobj.style.visibility="hidden"
-    */
+	if (!enabletip) return;
+	divHTMLTOOLTIP.style.position = 'absolute';
+	var nondefaultpos = false;
+	var curX = 0;
+	var curY = 0;
+	if (!e) var e = window.event;
+	if (e.pageX || e.pageY) { curX = e.pageX; curY = e.pageY; }
+	else if (e.clientX || e.clientY) { curX = e.clientX + document.documentElement.scrollLeft; curY = e.clientY + document.documentElement.scrollTop; }
+	//Find out how close the mouse is to the corner of the window
+	var winwidth = ie && !window.opera ? ietruebody().clientWidth : window.innerWidth - 20;
+	var winheight = ie && !window.opera ? ietruebody().clientHeight : window.innerHeight - 20;
+	var rightedge = ie && !window.opera ? winwidth - event.clientX - offsetfromcursorX : winwidth - e.clientX - offsetfromcursorX;
+	var bottomedge = ie && !window.opera ? winheight - event.clientY - offsetfromcursorY : winheight - e.clientY - offsetfromcursorY;
+	var leftedge = (offsetfromcursorX < 0) ? offsetfromcursorX * (-1) : - 5000;
+	//if the horizontal distance isn't enough to accomodate the width of the context menu
+	if (rightedge < divHTMLTOOLTIP.offsetWidth) { //move the horizontal position of the menu to the left by it's width
+		divHTMLTOOLTIP.style.left = (curX - divHTMLTOOLTIP.offsetWidth) + 'px';
+		nondefaultpos = true;
 	}
+	else if (curX < leftedge) divHTMLTOOLTIP.style.left = "5px";
+	else { divHTMLTOOLTIP.style.left = (curX + offsetfromcursorX - offsetdivfrompointerX) + 'px'; 	} //position the horizontal position of the menu where the mouse is positioned
+	if (bottomedge < divHTMLTOOLTIP.offsetHeight) { divHTMLTOOLTIP.style.top = (curY - divHTMLTOOLTIP.offsetHeight - offsetfromcursorY) + 'px'; nondefaultpos = true; } //same concept with the vertical position
+	else { divHTMLTOOLTIP.style.top = (curY + offsetfromcursorY + offsetdivfrompointerY) + 'px';	}
+	divHTMLTOOLTIP.style.visibility = "visible";
 }
 
 function hideTooltip(){
   enabletip = false;
   divHTMLTOOLTIP.style.visibility = "hidden";
   while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
-	//pointerobj.style.visibility = "hidden";
 	divHTMLTOOLTIP.style.left = "-5000px";
 	divHTMLTOOLTIP.style.backgroundColor = '';
 	divHTMLTOOLTIP.style.width = '';

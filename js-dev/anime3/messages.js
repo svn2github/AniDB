@@ -1,8 +1,8 @@
-/**
+/* *
  * @file message page scripts
  * @author fahrenheit (alka.setzer@gmail.com)
  * @contents Core Functions
- * @version 1.1 (18.06.2007)
+ * @version 1.2 (15.01.2008)
  */
 
 // GLOBALS
@@ -12,11 +12,26 @@ var msgTable;
 var headingList;
 var input_msgTO;
 var select_msgTO;
+var g_note = null;
+var deltimer = null;
+var msgListTable = null;
+var msgNewTable = null;
+var msgListAction = null;
+var msgNewAction = null;
+var msgListH1 = null;
+var msgNewH1 = null;
 
 function fetchData() {
   var req = xhttpRequest();
   if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/buddies.xml', parseData);
   else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=buddies', parseData);
+}
+
+function doMsgDelete(url) {
+  var req = xhttpRequest();
+	var data = url.substr(url.indexOf('?')+1,url.length);
+  if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showDelBox, data);
+  else xhttpRequestPost(req, 'animedb.pl', showDelBox, data);
 }
 
 function CBuddy(node) {
@@ -26,18 +41,45 @@ function CBuddy(node) {
   this.name = nodeData(node);
 }
 
+function showDelBox(xmldoc) {
+	if (!g_note) {
+		g_note = document.createElement('DIV');
+		g_note.className = 'g_section g_notebox';
+		var h3 = document.createElement('H3');
+		h3.appendChild(document.createTextNode('NOTE:'));
+		g_note.appendChild(h3);
+		var p = document.createElement('P');
+		p.appendChild(document.createTextNode('Message deleted.'));
+		g_note.appendChild(p);
+	}
+	var msg_all = getElementsByClassName(document.getElementsByTagName('DIV'), 'g_content msg_all', true)[0];
+	if (!msg_all) return;
+	msg_all.insertBefore(g_note,msg_all.firstChild);
+	self.clearTimeout(deltimer);
+	deltimer = self.setTimeout('removeDelBox()', 1000);
+}
+
+function removeDelBox() {
+	g_note.parentNode.removeChild(g_note);
+	g_note = null;
+}
+
+function deleteMessage() {
+	var url = this.href;
+	this.removeAttribute('href');
+	var tr = this.parentNode;
+	while(tr.nodeName != 'TR') tr = tr.parentNode;
+	tr.parentNode.removeChild(tr);
+	repaintStripes(msgListTable,1);
+	doMsgDelete(url);
+}
+
 function parseData(xmldoc) {
   var root = xmldoc.getElementsByTagName('root').item(0);
   var t1 = new Date();
   var buddyEntries = root.getElementsByTagName('buddy');
-  var select = document.createElement('SELECT');
-  select.size = 1;
-  select.name = 'msg.to';
-  select.id = 'msg.to';
-  var option = document.createElement("option");
-  option.value = '';
-  option.appendChild(document.createTextNode('manual'));
-  select.appendChild(option);
+	var select = createBasicSelect('msg.to','msg.to',null);
+	createSelectOption(select,'manual', '', false);
   for (var i = 0; i < buddyEntries.length; i++) {
     var buddyEntry = new CBuddy(buddyEntries[i]);
     createSelectOption(select, buddyEntry.name, buddyEntry.uid, false);
@@ -94,99 +136,170 @@ function filterMessages() {
 }
 
 function createReply() {
-  var quoted = false;
-  if (this.name == 'msg.replyq') quoted = true;
-  // fetched required data
-  var divA = getElementsByClassName(document.getElementsByTagName('DIV'),'g_section message entity',true)[0];
-  divA.className = divA.className.replace('entity','form');
-  var inputs =  divA.getElementsByTagName('INPUT');
-  var msgDO = getElementsByName(inputs,'do',true)[0];
-  msgDO.value = 'send'; // value needs to change
-  var msgMID = getElementsByName(inputs,'mid',true)[0];
-  msgMID.parentNode.removeChild(msgMID); // got to remove this
-  var msgTO = getElementsByName(inputs,'msg.to',true)[0];
-  msgTO.type = "text";
-  msgTO.id = msgTO.name;
-  msgTO.size = "20";
-  msgTO.maxlength = "16";
-  var msgTITLE = getElementsByName(inputs,'msg.title',true)[0];
-  msgTITLE.id = msgTITLE.name;
-  msgTITLE.type = "text";
-  msgTITLE.size = "80";
-  msgTITLE.maxlength = "50";
-  var msgBODYval = getElementsByName(inputs,'msg.body',true)[0];
-  var msgBODY = document.createElement('TEXTAREA');
-  msgBODY.id = msgBODYval.name;
-  msgBODY.name = msgBODY.id;
-  if (quoted) {
-    var quote = '[quote="'+msgTO.value+'"]';
-    quote += convert_input(msgBODYval.value);
-    quote += '[/quote]';
-    msgBODY.appendChild(document.createTextNode(quote));
-  }
-  msgBODYval.parentNode.removeChild(msgBODYval);
-  var div = getElementsByClassName(document.getElementsByTagName('DIV'),'g_definitionlist message',true)[0];
-  var table = div.getElementsByTagName('TABLE')[0];
-  while (table.caption.childNodes.length) table.caption.removeChild(table.caption.childNodes[0]);
-  table.caption.appendChild(document.createTextNode("New Message"));
-  while (table.rows.length) table.tBodies[0].removeChild(table.rows[0]); // remove old rows
-  var row = document.createElement('TR');
-  var th = document.createElement('TH');
-  th.className = "field";
-  row.appendChild(th);
-  var td = document.createElement('TD');
-  td.className = "value";
-  row.appendChild(td);
-  var TO = row.cloneNode(true);
-  TO.className = "g_odd to";
-  TO.cells[0].appendChild(document.createTextNode('To'));
-  TO.cells[1].appendChild(msgTO);
-  input_msgTO = msgTO.cloneNode(true);
-  var curItem = {'id':"Buddy",'desc':"Buddy list",'text':"Buddy",'onclick':showBuddyList,'active':false};
-  var buddyButton = document.createElement('INPUT');
-  buddyButton = createButton(null,'buddy',curItem);
-  TO.cells[1].appendChild(buddyButton);
-  var i = document.createElement('I');
-  i.appendChild(document.createTextNode('(username or uid)'));
-  TO.cells[1].appendChild(document.createTextNode(' '));
-  TO.cells[1].appendChild(i);
-  table.tBodies[0].appendChild(TO);
-  var TITLE = row.cloneNode(true);
-  TITLE.className = "title";
-  TITLE.cells[0].appendChild(document.createTextNode('Title'));
-  TITLE.cells[1].appendChild(msgTITLE);
-  table.tBodies[0].appendChild(TITLE);
-  var BODY = row.cloneNode(true);
-  BODY.className = "g_odd body";
-  BODY.cells[0].appendChild(document.createTextNode('Body'));
-  BODY.cells[1].appendChild(msgBODY);
-  table.tBodies[0].appendChild(BODY);
-  var row = document.createElement('TR');
-  row.className = 'action';
-  td = document.createElement('TD');
-  td.className = "value";
-  td.colSpan = "2";
-  var send = document.createElement('INPUT');
-  send.type = "submit";
-  send.id = "msg.send";
-  send.name = send.id;
-  send.value = "Send Message";
-  td.appendChild(send);
-  row.appendChild(td);
-  table.tBodies[0].appendChild(row);
-  if (init_formating) init_formating(); // should be loaded but you never know
+	var quoted = false;
+	if (this.name == 'msg.replyq') quoted = true;
+	// fetched required data
+	var divA = getElementsByClassName(document.getElementsByTagName('DIV'),'g_section message entity',true)[0];
+	divA.className = divA.className.replace('entity','form');
+	var inputs =  divA.getElementsByTagName('INPUT');
+	var msgDO = getElementsByName(inputs,'do',true)[0];
+	msgDO.value = 'send'; // value needs to change
+	var msgMID = getElementsByName(inputs,'mid',true)[0];
+	msgMID.parentNode.removeChild(msgMID); // got to remove this
+	var msgTO = getElementsByName(inputs,'msg.to',true)[0];
+	var msgToValue = msgTO.value;
+	msgTO.parentNode.removeChild(msgTO);
+	var msgTITLE = getElementsByName(inputs,'msg.title',true)[0];
+	var msgTitleValue = msgTITLE.value;
+	msgTITLE.parentNode.removeChild(msgTITLE);
+	var msgBODYval = getElementsByName(inputs,'msg.body',true)[0];
+	var msgBodyValue = null;
+	if (quoted) {
+		var quote = '[quote="'+msgTO.value+'"]';
+		quote += convert_input(msgBODYval.value);
+		quote += '[/quote]';
+		msgBodyValue = quote;
+	}
+	msgBODYval.parentNode.removeChild(msgBODYval);
+	var div = getElementsByClassName(document.getElementsByTagName('DIV'),'g_definitionlist message',true)[0];
+	var table = div.getElementsByTagName('TABLE')[0];
+	createMessageInput(msgToValue,msgTitleValue,msgBodyValue);
+	table.parentNode.replaceChild(msgNewTable,table);
+	if (init_formating) init_formating(); // should be loaded but you never know
+}
+
+function createNewMessage() {
+	// pre: we are on the message list and want to send a new msg
+	var h1 = document.getElementById('layout-content').getElementsByTagName('H1')[0];
+	if (!h1) return;
+	msgListH1 = h1.cloneNode(true);
+	if (!msgNewH1) {
+		msgNewH1 = document.createElement('H1');
+		msgNewH1.appendChild(document.createTextNode('New Message'));
+	}
+	h1.parentNode.replaceChild(msgNewH1,h1);
+	var div = getElementsByClassName(document.getElementsByTagName('DIV'),'g_section message',true)[0];
+	if (!div) return;
+	var msg_all = div.parentNode;
+	div.className = 'g_section message form';
+	var form = document.createElement('FORM');
+	form.method = 'post';
+	form.action = 'animedb.pl';
+	var fieldSet = document.createElement('FIELDSET');
+	var ishow = createTextInput('show',null,false,true,null);
+	ishow.value = "msg";
+	fieldSet.appendChild(ishow);
+	var ido = createTextInput('do',null,false,true,null);
+	ido.value = "send";
+	fieldSet.appendChild(ido);
+	form.appendChild(fieldSet);
+	var deflist = document.createElement('DIV');
+	deflist.className = 'g_definitionlist message';
+	createMessageInput();
+	deflist.appendChild(msgNewTable);
+	form.appendChild(deflist);
+	while(div.childNodes.length) div.removeChild(div.firstChild);
+	div.appendChild(form);
+	// reset action list
+	createNewMessageAction();
+	var newmsgListAction = msgListAction;
+	msg_all.replaceChild(msgNewAction,msgListAction);
+	msgListAction = newmsgListAction;
+	if (init_formating) init_formating(); // should be loaded but you never know
+}
+
+function showMsgList() {
+	var h1 = document.getElementById('layout-content').getElementsByTagName('H1')[0];
+	if (!h1) return;
+	msgNewH1 = h1.cloneNode(true);
+	h1.parentNode.replaceChild(msgListH1,h1);
+	var div = getElementsByClassName(document.getElementsByTagName('DIV'),'g_section message',true)[0];
+	if (!div) return;
+	var msg_all = div.parentNode;
+	div.className = 'g_section message list';
+	while(div.childNodes.length) div.removeChild(div.firstChild);
+	div.appendChild(msgListTable);
+	// reset action list
+	msg_all.replaceChild(msgListAction,msgNewAction);
+	msgNewAction = null;
+	createNewMessageAction();
+}
+
+function createNewMessageAction() {
+	var ul = document.createElement('UL');
+	ul.className = 'g_actionlist';
+	var li = document.createElement('LI');
+	li.className = 'g_odd';
+	var a = document.createElement('A');
+	a.onclick = showMsgList;
+	a.appendChild(document.createTextNode('Back'));
+	li.appendChild(a);
+	ul.appendChild(li);
+	msgNewAction = ul;
+	return msgNewAction;
+}
+
+function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
+	var table = document.createElement('TABLE');
+	var caption = document.createElement('CAPTION');
+	caption.appendChild(document.createTextNode('New Message'));
+	table.appendChild(caption);
+	var tbody = document.createElement('TBODY');
+	var row = document.createElement('TR');
+	row.className = 'g_odd to';
+	createHeader(row, 'field', 'To', null);
+	input_msgTO = createTextInput('msg.to','20',false,false,'16');
+	input_msgTO.tabIndex = 1;
+	if (msgToValue) input_msgTO.value = msgToValue;
+	var cell = createCell(null, 'value', input_msgTO, null);
+	var curItem = {'id':"Buddy",'desc':"Buddy list",'text':"Buddy",'onclick':showBuddyList,'active':false};
+	createLocalButton(cell,'buddy',curItem);
+	var i = document.createElement('I');
+	i.appendChild(document.createTextNode(' (username or id)'));
+	cell.appendChild(i);
+	row.appendChild(cell);
+	tbody.appendChild(row);
+	row = document.createElement('TR');
+	row.className = 'title';
+	createHeader(row, 'field', 'Title', null);
+	var msgTitle = createTextInput('msg.title','80',false,false,'50');
+	msgTitle.tabIndex = 2;
+	if (msgTitleValue) msgTitle.value = msgTitleValue;
+	createCell(row, 'value', msgTitle, null);
+	tbody.appendChild(row);
+	row = document.createElement('TR');
+	row.className = 'g_odd body';
+	createHeader(row, 'field', 'Body', null);
+	var msgBody = document.createElement('TEXTAREA');
+	msgBody.tabIndex = 3;
+	msgBody.rows = "15";
+	msgBody.cols = "60";
+	msgBody.name = msgBody.id = "msg.body";
+	if (msgBodyValue) msgBody.appendChild(document.createTextNode(msgBodyValue));
+	createCell(row, 'value', msgBody, null);
+	tbody.appendChild(row);
+	row = document.createElement('TR');
+	row.className = 'action'; 
+	cell = createCell(null, 'value', createButton('msg.send','msg.send',false,'Send Message','submit'), null);
+	cell.colSpan = "2";
+	row.appendChild(cell);
+	tbody.appendChild(row);
+	table.appendChild(tbody);
+	msgNewTable = table;
+	return msgNewTable;
 }
 
 function updateMsgList() {
   var div = getElementsByClassName(document.getElementsByTagName('DIV'), 'message list', true)[0];
   if (!div) return;
-  msgTable = div.getElementsByTagName('TABLE')[0];
+  msgTable = div.getElementsByTagName('TABLE')[0];	
   if (!msgTable) return;
+	msgListTable = msgTable;
   headingList = msgTable.getElementsByTagName('TH');
   var actionList = getElementsByClassName(document.getElementsByTagName('UL'), 'g_actionlist', true)[0];
   // I know the headings i need so..
   headingList[0].className += ' c_latin'; // State
-  headingList[1].className += ' c_datelong';  // Date
+  headingList[1].className += ' c_date';  // Date
   headingList[2].className += ' c_latin'; // From
   headingList[3].className += ' c_latin'; // type
   headingList[4].className += ' c_latin'; // Title
@@ -194,50 +307,60 @@ function updateMsgList() {
   
   // append some extra filtering options
   // FILTER BY TYPE
-  var select = document.createElement('SELECT');
-  select.onchange = filterMessages;
-  createSelectOption(select,'all','all',true);
-  createSelectOption(select,'normal','normal',false);
-  createSelectOption(select,'system','system',false);
-  createSelectOption(select,'bulk','bulk',false);
-  createSelectOption(select,'mod','mod',false);
+	var optionArray = {'all':{"text":' all '},'normal':{"text":' normal '},'system':{"text":' system '},
+								 'bulk':{"text":' bulk '},'mod':{"text":' mod '}};
+	var select = createSelectArray(null,null,null,filterMessages,'all',optionArray);
   var li = document.createElement('LI');
+	li.className = 'filter_type';
   li.appendChild(document.createTextNode('type: '));
   li.appendChild(select);
-  li.appendChild(document.createTextNode(' - '));
-  li.className = 'filter_type';
+  li.appendChild(document.createTextNode(' '));
   actionList.insertBefore(li,actionList.firstChild);
   // FILTER BY STATE
-  select = document.createElement('SELECT');
-  select.onchange = filterMessages;
-  createSelectOption(select,'all','all',true);
-  createSelectOption(select,'new','new',false);
-  createSelectOption(select,'old','old',false);
+	optionArray = {'all':{"text":' all '},'new':{"text":' new '},'old':{"text":' old '}};
+	select = createSelectArray(null,null,null,filterMessages,'all',optionArray);
   li = document.createElement('LI');
+	li.className = 'filter_state';
   li.appendChild(document.createTextNode('state: '));
   li.appendChild(select);
-  li.appendChild(document.createTextNode(' - '));
-  li.className = 'filter_state';
+  li.appendChild(document.createTextNode(' '));
   actionList.insertBefore(li,actionList.firstChild);
+	
+	// update the delete action for messages
+	var rows = msgTable.tBodies[0].rows;
+	for (var i = 1; i < rows.length; i++) {
+		var row = rows[i];
+		var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action', true)[0];
+		if (!cell) continue;
+		var a = cell.getElementsByTagName('A')[0];
+		if (!a) continue;
+		a.onclick = deleteMessage;
+	}
+	
+	//update the new message link
+	var newMsg = getElementsByClassName(actionList.getElementsByTagName('LI'), 'new', true)[0];
+	var a = newMsg.getElementsByTagName('A')[0];
+	a.removeAttribute('href');
+	a.onclick = createNewMessage;
+	
+	msgListAction = actionList;
   
   // apply the sorting function
-  init_sorting(msgTable,'date'); 
+  init_sorting(msgTable,'date','up'); 
 }
 
 function prepPage() {
   uriObj = parseURI(); // update the uriObj
   if (!uriObj['show'] || uriObj['show'] != 'msg') return; // not interested in this page
   if (!uriObj['do']) updateMsgList(); // message list
-  if (uriObj['do']) {
+  else {
     if (uriObj['do'] == 'new') {
       // if we are on the message send page (which is where we should be)
       var msgTO = document.getElementById('msg.to');
-      if (msgTO) {
+      if (msgTO && msgTO.type != 'hidden') {
         input_msgTO = msgTO.cloneNode(true);
         var curItem = {'id':"Buddy",'desc':"Buddy list",'text':"Buddy",'onclick':showBuddyList,'active':false};
-        var buddyButton = document.createElement('INPUT');
-        buddyButton = createButton(null,'buddy',curItem);
-        msgTO.parentNode.insertBefore(buddyButton,msgTO.nextSibling);
+        msgTO.parentNode.insertBefore(createLocalButton(null,'buddy',curItem),msgTO.nextSibling);
       }
     } else if (uriObj['do'] == 'show') {
       // search for some stuff
@@ -245,10 +368,13 @@ function prepPage() {
       var reply = getElementsByName(inputs,'msg.reply',true)[0];
       var replyq = getElementsByName(inputs,'msg.replyq',true)[0];
       if (!reply || !replyq) return;
-      reply.type = 'button';
-      replyq.type = 'button';
-      reply.onclick = createReply;
-      replyq.onclick = createReply;
+			// i'm going to regret this, but thus is the way js works cross-browser...
+			var nreply = createButton('msg.reply','msg.reply',false,'Reply');			
+			var nreplyq = createButton('msg.replyq','msg.replyq',false,'Quote');
+      nreply.onclick = createReply;
+      nreplyq.onclick = createReply;
+			reply.parentNode.replaceChild(nreply,reply);
+			replyq.parentNode.replaceChild(nreplyq,replyq);
     }
   }
 }
