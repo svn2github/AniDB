@@ -1,4 +1,4 @@
-/**
+/* *
  * @file XMLHttpRequest (AJAX) implementation 
  * @author fahrenheit (alka.setzer@gmail.com)
  *         Some code derived from PetriW work at anidb
@@ -10,7 +10,7 @@
 var isIE = false; // Are we dealing with an IE based browser?
 var disableCaching = false; // Should we disable caching?
 
-/**
+/* *
  * Function that returns a new XMLHttpRequest object
  * @return an XMLHttpRequest object
  */
@@ -35,7 +35,7 @@ function xhttpRequest() {
   return httpRequest;
 }
 
-/**
+/* *
  * Fetches a given url and then passes the result to the given handler
  * @param obj The XMLHttpRequest object
  * @param url HTTP protcol URL
@@ -43,9 +43,9 @@ function xhttpRequest() {
  * @param override Overrides the document mime-type with given override
  * @return void
  */
-function xhttpRequestFetch(obj, url, handler, override) {
+function xhttpRequestFetch(obj, url, handler, override, method) {
   if (!obj) return;
-  obj.onreadystatechange = function() { xhttpRequestReadData(obj, handler); };
+  obj.onreadystatechange = function() { xhttpRequestReadData(obj,handler,method); };
   obj.open('GET', url, true);
   if (obj.overrideMimeType && override) obj.overrideMimeType(override); // Setting the override type
   if (isIE) obj.setRequestHeader('Content-Type','application/xml'); // IE compatibility
@@ -53,7 +53,7 @@ function xhttpRequestFetch(obj, url, handler, override) {
   obj.send(null);
 }
 
-/**
+/* *
  * Posts given data to a given url and then passes the result to the given handler
  * @param obj The XMLHttpRequest object
  * @param url HTTP protcol URL
@@ -61,21 +61,23 @@ function xhttpRequestFetch(obj, url, handler, override) {
  * @param data The Data to send to the URL
  * @return void
  */
-function xhttpRequestPost(obj, url, handler, data) {
-  if (!obj) return;
-  obj.onreadystatechange = function() { xhttpRequestReadData(obj,handler); };
-  obj.setRequestHeader('Content-Type','application/x-www-form-urlencoded'); // Setting the correct header
-  obj.open('POST', url, true);
-  obj.send(data);
+function xhttpRequestPost(obj, url, handler, data, override, method) {
+	if (!obj) return;
+	obj.onreadystatechange = function() { xhttpRequestReadData(obj,handler,method); };
+	obj.open('POST', url, true);
+	obj.setRequestHeader('Content-Type','application/x-www-form-urlencoded'); // Setting the correct header
+	if (disableCaching) obj.setRequestHeader('Cache-Control','no-cache'); // disables caching
+	if (obj.overrideMimeType && override) obj.overrideMimeType(override); // Setting the override type
+	obj.send(data);
 }
 
-/**
+/* *
  * This Function handles the status changes of the reply
  * @param obj The XMLHttpRequest object
  * @param handler The function that will handle the given obj
  * @return void
  */
-function xhttpRequestReadData(obj, handler) {
+function xhttpRequestReadData(obj, handler,method) {
   if (!obj) { xhttpRequestUpdateStatus('object is null...'); return; }
   var rootDoc = 'root';
   //try {
@@ -88,13 +90,17 @@ function xhttpRequestReadData(obj, handler) {
           case 0:
           case 200:
           case 304:
-            var xmlData;
-            if (window.XMLHttpRequest) xmlData = obj.responseXML; // Mozilla and likes
-            else { // The original IE implementation
-              xmlData = new ActiveXObject("MSXML2.DOMDocument");
-              xmlData.loadXML(obj.responseText);
-            }
-            handler(xmlData);
+						var data = null;
+						if (!method || method == 'xml') {
+							if (window.XMLHttpRequest) data = obj.responseXML; // Mozilla and likes
+							else { // The original IE implementation
+								data = new ActiveXObject("MSXML2.DOMDocument");
+								data.loadXML(obj.responseText);
+							}
+						} else if (method == 'text') {
+							data = obj.responseText;
+						}
+						if (handler) handler(data);
             break;
           default:
             alert('There was a problem with the request.\nServer returned: '+obj.status+': '+obj.statusText);
@@ -107,7 +113,7 @@ function xhttpRequestReadData(obj, handler) {
   }*/
 }
 
-/**
+/* *
  * This function is used to update the status of the Request
  * @param text Text to show
  * @return void

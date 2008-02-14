@@ -1,4 +1,4 @@
-/**
+/* *
  * @file fileadd page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
  *         
@@ -27,6 +27,7 @@ var simpleView = true;
 var isEditPage = false;
 var seeDebug = false;
 var LAY_FORMATFILESIZE = false;
+var templateType = 'manual';
 
 // FUNCTIONS
 
@@ -68,6 +69,14 @@ function parseData(xmldoc) {
     replaceCell.removeChild(replaceCell.childNodes[0]);
   replaceCell.appendChild(select);
 }
+
+function createFileAddSelect(source,name,id) {
+	var select = source.cloneNode(true);
+	if (name) select.name = name;
+	if (id) select.id = id;
+	return select;
+}
+
 
 function vidStreams() {
   this.numStreams = getElementsByName(document.getElementsByTagName('INPUT'),'addf.vid.streams',true)[0];
@@ -165,7 +174,7 @@ audStreams.prototype.add = function() {
   row = document.createElement('TR'); 
   c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Type:')); row.appendChild(c0);
   c1 = document.createElement('TD');
-  var select = createSelect(this.streams[0].type,'addstrm.aud_'+audTracks+'.type');
+  var select = createFileAddSelect(this.streams[0].type,'addstrm.aud_'+audTracks+'.type');
   this.streams[str].type = select;
   c1.appendChild(select);
   row.appendChild(c1);
@@ -175,7 +184,7 @@ audStreams.prototype.add = function() {
   row = document.createElement('TR'); 
   c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Language:')); row.appendChild(c0);
   c1 = document.createElement('TD');
-  select = createSelect(this.streams[0].lang,'addstrm.aud_'+audTracks+'.lang','addfilem.aud_'+audTracks+'.lang');
+  select = createFileAddSelect(this.streams[0].lang,'addstrm.aud_'+audTracks+'.lang','addfilem.aud_'+audTracks+'.lang');
   this.streams[str].lang = select;
   c1.appendChild(select);
   row.appendChild(c1);
@@ -186,7 +195,7 @@ audStreams.prototype.add = function() {
   if (simpleView) row.style.display = 'none';
   c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Codec/Bitrate:')); row.appendChild(c0);
   c1 = document.createElement('TD');
-  select = createSelect(this.streams[0].codec,'addstrm.aud_'+audTracks+'.acodecid');
+  select = createFileAddSelect(this.streams[0].codec,'addstrm.aud_'+audTracks+'.acodecid');
   this.streams[str].codec = select;
   c1.appendChild(select);
   c1.appendChild(document.createTextNode(' '));
@@ -202,7 +211,7 @@ audStreams.prototype.add = function() {
   if (simpleView) row.style.display = 'none';
   c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Channels:')); row.appendChild(c0);
   c1 = document.createElement('TD');
-  select = createSelect(this.streams[0].channels,'addstrm.aud_'+audTracks+'.chantype');
+  select = createFileAddSelect(this.streams[0].channels,'addstrm.aud_'+audTracks+'.chantype');
   this.streams[str].channels = select;
   c1.appendChild(select);
   row.appendChild(c1);
@@ -297,7 +306,7 @@ subStreams.prototype.add = function() {
   row = document.createElement('TR'); 
   c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Type:')); row.appendChild(c0);
   c1 = document.createElement('TD');
-  select = createSelect(this.streams[0].type,'addstrm.sub_'+subTracks+'.type');
+  select = createFileAddSelect(this.streams[0].type,'addstrm.sub_'+subTracks+'.type');
   this.streams[str].type = select;
   c1.appendChild(select);
   row.appendChild(c1);
@@ -307,7 +316,7 @@ subStreams.prototype.add = function() {
   row = document.createElement('TR'); 
   c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Language:')); row.appendChild(c0);
   c1 = document.createElement('TD');
-  select = createSelect(this.streams[0].lang,'addstrm.sub_'+subTracks+'.lang','addfilem.sub_'+subTracks+'.lang');
+  select = createFileAddSelect(this.streams[0].lang,'addstrm.sub_'+subTracks+'.lang','addfilem.sub_'+subTracks+'.lang');
   this.streams[str].lang = select;
   c1.appendChild(select);
   row.appendChild(c1);
@@ -400,8 +409,6 @@ function CView() {
   if (test) this.filetype = test.parentNode.parentNode;
   test = getElementsByName(document.getElementsByTagName('SELECT'),'addf.fileversion',true)[0];
   if (test) this.fileversion = test.parentNode.parentNode;
-  test = getElementsByName(document.getElementsByTagName('SELECT'),'addf.censored',true)[0];
-  if (test) this.censored = test.parentNode.parentNode;
   this.type = typeSelect.parentNode.parentNode;
   if (!isEditPage) {
     this.vid_resolution = vidstrm.streams[0].height.parentNode.parentNode;
@@ -416,13 +423,17 @@ CView.prototype.simpleView = function() {
   }
   if (!isEditPage) {
     for (var i in audstrm.streams) {
-      audstrm.streams[i].codec.parentNode.parentNode.style.display = "none";
-      audstrm.streams[i].channels.parentNode.parentNode.style.display = "none";
+      var stream = audstrm.streams[i];
+      if (!stream) continue;
+      if (stream.codec) stream.codec.parentNode.parentNode.style.display = "none";
+      if (stream.channels) stream.channels.parentNode.parentNode.style.display = "none";
     }
     for (var i in substrm.streams) {
-      substrm.streams[i].image.parentNode.style.display = "none";
-      substrm.streams[i].styled.parentNode.style.display = "none";
-      substrm.streams[i].unstyled.parentNode.style.display = "none";
+      var stream = substrm.streams[i];
+      if (!stream) continue;
+      if (stream.image) stream.image.parentNode.style.display = "none";
+      if (stream.styled) stream.styled.parentNode.style.display = "none";
+      if (stream.unstyled) stream.unstyled.parentNode.style.display = "none";
     }
   }
 }
@@ -433,13 +444,17 @@ CView.prototype.fullView = function() {
   }
   if (!isEditPage) {
     for (var i in audstrm.streams) {
-      audstrm.streams[i].codec.parentNode.parentNode.style.display = "";
-      audstrm.streams[i].channels.parentNode.parentNode.style.display = "";
+      var stream = audstrm.streams[i];
+      if (!stream) continue;
+      if (stream.codec) stream.codec.parentNode.parentNode.style.display = "";
+      if (stream.channels) stream.channels.parentNode.parentNode.style.display = "";
     }
     for (var i in substrm.streams) {
-      substrm.streams[i].image.parentNode.style.display = "";
-      substrm.streams[i].styled.parentNode.style.display = "";
-      substrm.streams[i].unstyled.parentNode.style.display = "";
+      var stream = substrm.streams[i];
+      if (!stream) continue;
+      if (stream.image) stream.image.parentNode.style.display = "";
+      if (stream.styled) stream.styled.parentNode.style.display = "";
+      if (stream.unstyled) stream.unstyled.parentNode.style.display = "";
     }
   }
 }
@@ -500,9 +515,9 @@ function parseEd2k() {
 
 function workEd2k(file) {
   // Stuff that i'll possibly edit
-  vidstrm.disable(false);
-  audstrm.disable(false);
-  substrm.disable(false);
+  if (templateType == 'dub' || templateType == 'sub') vidstrm.disable(true); else vidstrm.disable(false);
+  if (templateType == 'sub') audstrm.disable(true); else audstrm.disable(false);
+  if (templateType == 'raw' || templateType == 'dub') substrm.disable(true); else substrm.disable(false);
   switch (file.filetype) {
     case 'srt':
       vidstrm.disable(true,0);
@@ -538,6 +553,7 @@ function workTemplate() {
   vidstrm.disable(false);
   audstrm.disable(false);
   substrm.disable(false);
+  templateType = this.value;
   //typeSelect.disabled = true;
   switch (this.value) {
     case 'manual':
@@ -592,42 +608,13 @@ function workTemplate() {
 
 function addTemplate() {
   var row = document.createElement('TR');
-  var cell0 = document.createElement('TD');
-  cell0.appendChild(document.createTextNode('Template:'));
-  row.appendChild(cell0);
-  var cell1 = document.createElement('TD');
-  var select = document.createElement('SELECT');
+  createCell(row, null, document.createTextNode('Template:'), null);
+  var optionArray = {"manual":{"text":'manual input'},"raw":{"text":'raw (japanese audio, no subtitles)'},
+					 "fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
+					 "dub":{"text":'external dub file (? audio)'},"sub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
+  var select = createSelectArray(null,null,null,null,null,optionArray);
   select.onchange = workTemplate;
-  var optionNone = document.createElement('OPTION');
-  optionNone.value = "manual";
-  optionNone.appendChild(document.createTextNode('manual input'));
-  select.appendChild(optionNone);
-  var option0 = document.createElement('OPTION');
-  option0.value = "raw";
-  option0.appendChild(document.createTextNode('raw (japanese audio, no subtitles)'));
-  select.appendChild(option0);
-  var option1 = document.createElement('OPTION');
-  option1.value = "fansub";
-  option1.appendChild(document.createTextNode('fansub (japanese audio, ? subtitles)'));
-  select.appendChild(option1);
-  var option2 = document.createElement('OPTION');
-  option2.value = "dual";
-  option2.appendChild(document.createTextNode('dual (japanese audio, ? audio, ? subtitles)'));
-  select.appendChild(option2);
-  var option3 = document.createElement('OPTION');
-  option3.value = "dub";
-  option3.appendChild(document.createTextNode('external dub file (? audio)'));
-  select.appendChild(option3);
-  var option4 = document.createElement('OPTION');
-  option4.value = "sub";
-  option4.appendChild(document.createTextNode('external sub file (? subtitles)'));
-  select.appendChild(option4);
-  var option5 = document.createElement('OPTION');
-  option5.value = "other";
-  option5.appendChild(document.createTextNode('other'));
-  select.appendChild(option5);
-  cell1.appendChild(select);
-  row.appendChild(cell1);
+  createCell(row, null, select, null);
   table.tBodies[0].insertBefore(row,targetRow);
   vidstrm = new vidStreams();
   audstrm = new audStreams();
@@ -638,6 +625,29 @@ function addTemplate() {
   qualSelect = getElementsByName(document.getElementsByTagName('SELECT'),'addf.quality',true)[0];
   sourceSelect = getElementsByName(document.getElementsByTagName('SELECT'),'addf.type',true)[0];
 
+}
+
+function updateSize() {
+	if (this.value.indexOf(' ') < -1) return;
+	var replace = new RegExp(" +","mgi");
+	this.value = this.value.replace(replace,'.');
+}
+
+function updateDates() {
+	if (this.value.indexOf('/') < 0 && this.value.indexOf('-') < 0) return;
+	var replace = new RegExp("\/+","mgi");
+	this.value = this.value.replace(replace,'.');
+	replace = new RegExp("\-+","mgi");
+	this.value = this.value.replace(replace,'.');
+
+}
+
+function updateSearchString() { 
+	while (replaceCell.childNodes.length)
+    replaceCell.removeChild(replaceCell.childNodes[0]);
+  replaceCell.appendChild(document.createTextNode('please wait while searching...'));
+  searchString = searchbox.value;
+  fetchData(); 
 }
 
 function prepPage() {
@@ -654,13 +664,10 @@ function prepPage() {
   var rowId = prow.rowIndex;
   var nrow = prow.parentNode.rows[rowId+1];
   replaceCell = nrow.cells[cellId];
-  if (!replaceCell) { alert('BORK'); return; }
-  input.type = 'button';
-  input.onclick = function updateSearchString() { while (replaceCell.childNodes.length)
-                                                    replaceCell.removeChild(replaceCell.childNodes[0]);
-                                                    replaceCell.appendChild(document.createTextNode('please wait while searching...'));
-                                                    searchString = searchbox.value;
-                                                    fetchData(); }
+  if (!replaceCell) errorAlert('prepPage','noReplaceCell');
+  var newinput = createBasicButton('addf.do.searchgroup',' Search ');
+  newinput.onclick = updateSearchString;
+  input.parentNode.replaceChild(newinput,input);
   // Stuff for the template part
   table = getElementsByClassName(document.getElementsByTagName('TABLE'),'file_add',true)[0];
   if (!table) return;
@@ -688,7 +695,9 @@ function prepPage() {
   input_crc32 = getElementsByName(document.getElementsByTagName('INPUT'),'addf.crc',true)[0];
   input_fileVersion = getElementsByName(document.getElementsByTagName('SELECT'),'addf.fileversion',true)[0];
   input_size = getElementsByName(document.getElementsByTagName('INPUT'),'addf.size',true)[0];
+  input_size.onchange = updateSize;
   input_fileExtension = getElementsByName(document.getElementsByTagName('SELECT'),'addf.filetype',true)[0];
+  getElementsByName(document.getElementsByTagName('INPUT'),'addf.released',true)[0].onchange = updateDates;
 }
 
 

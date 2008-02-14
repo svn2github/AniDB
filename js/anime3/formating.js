@@ -73,8 +73,6 @@ function updateTextAreaCK() {
   if (!tx) return;
   var n = tx.id.replace('textArea_','');
   updateTextArea(n);
-  /*tx.style.display = '';
-  return (false);*/
 }
 
 function createSelect(node,item,className) {
@@ -88,7 +86,7 @@ function createSelect(node,item,className) {
   node.appendChild(select);
 }
 
-function createButton(node,item,curItem) {
+function createLocalButton(node,item,curItem) {
   var button = document.createElement('INPUT');
   button.type = 'button';
   if (!curItem['onclick']) button.onclick = make;
@@ -136,22 +134,23 @@ function buttonMouseOut() {
  */
 function insertAtSelection(myField, myValue, text) {
 	if (document.selection) {	//IE support
+		myField = myField.document;
 		myField.focus();
 		var sel = myField.selection.createRange();
-    if (text) sel.text = myValue;
-    else sel.pasteHTML(myValue);
+		if (text) sel.text = myValue;
+		else sel.pasteHTML(myValue);
 		myField.focus();
 	} else if (window.getSelection) { //MOZILLA/NETSCAPE support
 		myField.focus();
-    var sel = myField.getSelection();
+		var sel = myField.getSelection();
 		var range = sel.getRangeAt(0);
-    range.deleteContents();
-    if (text) range.insertNode(document.createTextNode(myValue));
-    else range.insertNode(myValue);
+		range.deleteContents();
+		if (text) range.insertNode(document.createTextNode(myValue));
+		else range.insertNode(myValue);
 	} else {
-    if (seeDebug) alert('insertAtSelection: unknown selection method');
-    return;
-  }
+		if (seeDebug) alert('insertAtSelection: unknown selection method');
+		return;
+	}
 }
 
 /* *
@@ -161,18 +160,19 @@ function insertAtSelection(myField, myValue, text) {
  */
 function getSelection(myField) {
 	if (document.selection) {	//IE support
+		myField = myField.document;
 		myField.focus();
 		var sel = myField.selection.createRange();
 		return (sel.text);
 	} else if (window.getSelection) { //MOZILLA/NETSCAPE support
 		myField.focus();
-    var sel = myField.getSelection();
-    var range = sel.getRangeAt(0);
-    return (range.toString());
+		var sel = myField.getSelection();
+		var range = sel.getRangeAt(0);
+		return (range.toString());
 	} else {
-    if (seeDebug) alert('getSelection: unknown selection method');
-    return;
-  }
+		if (seeDebug) alert('getSelection: unknown selection method');
+		return;
+	}
 }
 
 /* *
@@ -206,7 +206,7 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
     var selects = fTA.form.getElementsByTagName('SELECT');
     for (var s in selects) {
       var select = selects[s];
-      if (select.className.indexOf('f_links') >= 0) { val = select.value; break; }
+      if (select.className && select.className.indexOf('f_links') >= 0) { val = select.value; break; }
     }
     if (!val) return; // there is some error
   }
@@ -252,9 +252,10 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
     sel = getSelection(obj);
     if (!sel) sel = val + " " + attribute;
   }
-  var hyperLink = '<a href="'+base+type+attribute+'" type="'+val+'" att="'+attribute+'">'+sel+'</a>';
+  var hyperLink = '['+val+':'+attribute+':'+sel+']';
   if (textOnly) return hyperLink;
 	if (document.selection) {	//IE support
+		// IE fails miserably here, don't show the link thingie
     insertAtSelection(obj, hyperLink, true);
 	} else if (window.getSelection) { //MOZILLA/NETSCAPE support
     hyperLink = document.createElement('A');
@@ -309,15 +310,6 @@ function make () {
 	var execID = fMap.id;
   var iframeId = this.parentNode.id.replace('controls_','');
   formatText(execID, iframeId, null);
-  /* This isn't working very nicelly
-  var cln = this.className;
-  if (formatingFunc != 'link') {
-    if (cln.indexOf('f_selected') > 0) this.className = this.className.replace(' f_selected','');
-    else this.className += ' f_selected';
-  } else {
-    if (cln.indexOf('f_selected') > 0) this.className = this.className.replace(' f_selected','');
-  }
-  */
 }
 
 /*
@@ -406,13 +398,13 @@ function init_formating() {
   	span.className = 'f_controls';
     span.id = 'controls_'+ i;
     // yes, yes, i know, blame IE
-  	createButton(span,'bold',FunctionMap['bold']);
-    createButton(span,'italic',FunctionMap['italic']);
-    createButton(span,'underline',FunctionMap['underline']);
-    createButton(span,'strikethrough',FunctionMap['strikethrough']);
-    createButton(span,'orderedlist',FunctionMap['orderedlist']);
-    createButton(span,'unorderedlist',FunctionMap['unorderedlist']);
-    createButton(span,'link',FunctionMap['link']);
+  	createLocalButton(span,'bold',FunctionMap['bold']);
+    createLocalButton(span,'italic',FunctionMap['italic']);
+    createLocalButton(span,'underline',FunctionMap['underline']);
+    createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
+    createLocalButton(span,'orderedlist',FunctionMap['orderedlist']);
+    createLocalButton(span,'unorderedlist',FunctionMap['unorderedlist']);
+    createLocalButton(span,'link',FunctionMap['link']);
     createSelect(span,OptionsMap,'f_links');
     var html = getElementsByClassName(span.getElementsByTagName('INPUT'),'f_view_source',true)[0];
     var text = getElementsByClassName(span.getElementsByTagName('INPUT'),'f_view_text',true)[0];

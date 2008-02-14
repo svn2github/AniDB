@@ -1,4 +1,4 @@
-/**
+/* *
  * @file MapValues interface
  * @author fahrenheit (alka.setzer@gmail.com)
  *         Based on code from PetriW's work at anidb
@@ -7,7 +7,7 @@
  
  // CORE Maps //
  
- /**
+ /* *
   * Function that maps file states to textual values
   * @param fstate The fstate to convert
   * @return String of the textual converted value
@@ -20,7 +20,7 @@ function mapFState(fstate) {
   return stClass;
 }
 
-/**
+/* *
  * Function to convert a mylistEntry status id to a status name
  * @param statId Status id to convert to text
  * @return String containing status name
@@ -83,9 +83,36 @@ var languageMap = {'x-unk':{"name":'unknown',"classname":'unknown'},
                    'sr':{"name":'serbian',"classname":'serbian'},
                    'zh-Hant':{"name":'chinese (traditional)',"classname":'traditional'},
                    'zh-Hans':{"name":'chinese (simplified)',"classname":'simplified'},
-                   'is':{"name":'icelandic',"classname":'icelandic'}};
+                   'is':{"name":'icelandic',"classname":'icelandic'},
+									 'al':{"name":'albanian',"classname":'albanian'}};
 
-/**
+var codecMap = {'unk':{"name":'unknown'},
+								'other':{"name":'Other (non-ASP)'},
+								'avc':{"name":'H264/AVC'},
+								'xvid':{"name":'XviD'},
+								'asp':{"name":'ASP Other'},
+								'divxu':{"name":'DivX UNK'},
+								'divx3':{"name":'DivX3'},
+								'divx4':{"name":'DivX4'},
+								'divx5':{"name":'DivX5 (also DivX6)'},
+								'mpeg1':{"name":'MPEG-1'},
+								'mpeg2':{"name":'MPEG-2'},
+								'mp4x':{"name":'MS MP4x (also WMV1/2)'},
+								'rvo':{"name":'RealVideo Other'},
+								'rv40':{"name":'RealVideo 9/10 (also RV40)  	'},
+								'wmv9':{"name":'WMV9 (also WMV3)'},
+								'aac':{"name":'AAC'},
+								'ac3':{"name":'AC3'},
+								'dts':{"name":'DTS'},
+								'mp2':{"name":'MP2'},
+								'mp3cbr':{"name":'MP3 CBR'},
+								'mp3vbr':{"name":'MP3 VBR'},
+								'msaud':{"name":'MSAudio'},
+								'pcm':{"name":'PCM'},
+								'vorbis':{"name":'Vorbis (Ogg Vorbis)'},
+								'wma':{"name":'WMA (also DivX Audio)'}};
+
+/* *
  * Function that maps a LANGCODE to a language
  * @param langCode The language code to convert
  * @return Name of the language
@@ -94,7 +121,16 @@ function mapLanguage(langCode) {
   if (languageMap[langCode]) return (languageMap[langCode]['name']);
   else return ('unknown');
 }
-/**
+/* *
+ * Function that maps a CODEC sname to a long version
+ * @param langCode The language code to convert
+ * @return Name of the language
+ */
+function mapCodec(codecSNAME) {
+  if (codecMap[codecSNAME]) return (codecMap[codecSNAME]['name']);
+  else return ('unknown');
+}
+/* *
  * Function that maps a LANGCODE to a language used in the icons
  * @param langCode The language code to convert
  * @return Name of the language
@@ -104,7 +140,7 @@ function mapClassLanguage(langCode) {
   else return ('unknown');
 }
 
-/**
+/* *
  * Converts a subtitle stream flags in the textual relation
  * @param subFlags Int representing subtitle flags
  * @return String giving text based subtitle flags
@@ -124,7 +160,7 @@ function mapSubFlagData(subFlags) {
 	return subData.join(', ');
 }
 
-/**
+/* *
  * Converts a video stream flags in the textual relation
  * @param videoFlags Int representing video flags
  * @return String giving text based video flags
@@ -139,7 +175,7 @@ function mapVideoFlagsInfo(videoFlags) {
 	return videoInfo.join(', ');
 }
 
-/**
+/* *
  * Converts a subtitle types in the textual relation
  * @param subType Int representing sub type
  * @return String giving text based sub type
@@ -154,7 +190,7 @@ function mapSubTypeData(subType) {
 	return (subType);
 }
 
-/**
+/* *
  * Converts a audioChannel id in the textual relation
  * @param audioChannels Int representing stream aud chan
  * @return String giving text based channel type
@@ -172,7 +208,7 @@ function mapAudioChannels(audioChannels) {
 	return (audioChannels);
 }
 
-/**
+/* *
  * Converts numeric audio types in a textual relation
  * @param type Type of audio file
  * @return String containing text based audio type
@@ -186,7 +222,7 @@ function mapAudioType(type) {
   return (type);     
 }
 
-/**
+/* *
  * This should not be needed, and wasn't needed till *someone* changed the system...
  * @param qual Quality
  * @return Quality className
@@ -195,14 +231,13 @@ function mapQualityClassName(qual) {
   switch (qual) {
     case 'veryhigh': return ("vhigh");
     case 'medium': return ("med");
-    case 'low': return ("low");
     case 'verylow': return ("vlow");
     default: return (qual);
   }
   return ("unknown");
 }
 
-/**
+/* *
  * This should not be needed, and wasn't needed till *someone* changed the system...
  * @param qual Quality
  * @return Quality className
@@ -221,7 +256,7 @@ function mapQuality(qualClassName) {
   return (1);
 }
 
-/**
+/* *
  * Function that returns the anime type
  * @param type Anime type id
  * @return String with anime type

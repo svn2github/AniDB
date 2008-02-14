@@ -17,7 +17,7 @@ var eInt = 150; // time to wait between ep render
 
 // CORE Classes //
 
-/**
+/* *
  * Creates a new Mylist Entry from a given node
  * @param node Node from which to get the mylist information
  * @return mylistEntry
@@ -51,7 +51,7 @@ function CMylistEntry(node) {
   this.fType = mapFState(this.fstate);
 }
 
-/**
+/* *
  * Creates a new Group Entry from a given node
  * @param node Node from which to get the group information
  * @return groupEntry
@@ -102,7 +102,7 @@ function CGroupEntry(node) {
   }
 }
 
-/**
+/* *
  * Creates a new Anime Entry from a given node
  * @param node Node from which to get the anime information
  * @return animeEntry
@@ -152,7 +152,7 @@ CAnimeEntry.prototype.getAltTitle = function() {
   return (title);
 }
 
-/**
+/* *
  * Creates a new Episode Entry from a given node
  * @param node Node from which to get the episode information
  * @return episodeEntry
@@ -242,7 +242,7 @@ CEpisodeEntry.prototype.getTitles = function() {
   return (ret.join(', '));
 }
 
-/**
+/* *
  * Creates a new File Entry from a given node
  * @param node Node from which to get the file information
  * @return fileEntry
@@ -287,6 +287,7 @@ function CFileEntry(node) {
   this.vidCnt = 0;
   this.audCnt = 0;
   this.subCnt = 0;
+	this.avdumped = 0;
   this.newFile = false;
   this.pseudoFile = false; // Got fed up with strange methods for checking if a file isn't pseudo
   this.videoTracks = new Array();
@@ -308,6 +309,7 @@ function CFileEntry(node) {
         if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
         this.relDate = convertTime(sNode1.getAttribute('rel'));
         break;
+			case 'avdumped': this.avdumped = Number(nodeData(sNode1)); break;
       case 'vid':
         this.vidCnt = Number(sNode1.getAttribute('cnt')) || 0;
         for (var j = 0; j < sNode1.childNodes.length; j++) {
@@ -319,6 +321,7 @@ function CFileEntry(node) {
               stream.resH = 0;
               stream.ar = 'unknown';
               stream.codec = 'unknown';
+							stream.codec_sname = 'unk';
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
                 switch (stNode.nodeName) {
@@ -328,7 +331,7 @@ function CFileEntry(node) {
                     if (stream.resW && stream.resH) this.resolution = stream.resW + 'x' + stream.resH;
                     break;
                   case 'ar': stream.ar = nodeData(stNode); break;
-                  case 'codec': stream.codec = nodeData(stNode); break;
+                  case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
                   default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStream['+k+']', dNode.nodeName,stNode.nodeName);
                 }
               } 
@@ -347,13 +350,14 @@ function CFileEntry(node) {
               var stream = new Object;
               stream.chan = 'unknown';
               stream.codec = 'unknown';
+							stream.codec_sname = 'unknown';
               stream.type = 'normal';
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
                 switch (stNode.nodeName) {
                   case 'lang': stream.lang = nodeData(stNode); break;
                   case 'chan': stream.chan = nodeData(stNode); break;
-                  case 'codec': stream.codec = nodeData(stNode); break;
+                  case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
                   case 'type': stream.type = nodeData(stNode); break;
                   default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStream['+k+']', dNode.nodeName,stNode.nodeName);
                 }

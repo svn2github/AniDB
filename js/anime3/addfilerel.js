@@ -48,9 +48,9 @@ function cleanFilterRelations() {
       relType.appendChild(option);
     } else {
       switch (option.value) {
-        case '10': if (fileType.indexOf('subtitle') >= 0) relType.appendChild(option); break;
+        case '10': if (fileType.indexOf('subtitle') >= 0 || fileType.indexOf('other') >= 0) relType.appendChild(option); break;
         case '40': if (fileType.indexOf('video') >= 0) relType.appendChild(option); break;
-        case '50': if (fileType.indexOf('audio') >= 0) relType.appendChild(option); break;
+        case '50': if (fileType.indexOf('audio') >= 0 || fileType.indexOf('other') >= 0) relType.appendChild(option); break;
         default: relType.appendChild(option);
       }
     }
