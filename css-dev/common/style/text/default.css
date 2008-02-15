@@ -37,8 +37,8 @@ h1 a
 h4, caption
 {
 	font-size: 120%;
-	margin-top: 0.4em;
-	margin-bottom: 0.2em;	
+	/*margin-top: 0.4em;
+	margin-bottom: 0.2em;*/
 }
 
 .tab,

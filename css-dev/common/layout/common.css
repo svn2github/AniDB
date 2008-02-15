@@ -11,13 +11,16 @@ body.nonav #layout-footer
 	margin-bottom: 4px;
 }*/
 
-#layout-nav input
+#layout-nav input,
+#layout-nav button
 {
 	width: 100%;
 }
 
-#layout-nav label input
+
+#layout-nav #user-xkeep input
 {
+	border: none;
 	width: auto;
 }
 

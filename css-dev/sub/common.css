@@ -15,8 +15,3 @@
 @import "../common/style/text/default.css";
 
 @import "../common/style/content/page-anime.css";
-
-#layout-nav input
-{
-	width: 96%;
-}

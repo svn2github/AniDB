@@ -85,7 +85,7 @@ a:hover
 	background-color: transparent;/*#d1d7dc;*/
 }
 
-#layout-menu li:hover
+#layout-menu ul li:hover
 {
 	background-color: #fafafa;
 }

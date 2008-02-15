@@ -28,8 +28,8 @@ body,
 #layout-main div.main_all div.rightbar
 {
 	width: 20em;
-	margin: 0.3em;
-	padding-top: 3px;
+	/*margin: 0.3em;
+	padding-top: 3px;*/
 }
 
 #layout-main div.main_all div.rightbar p
@@ -48,23 +48,20 @@ body,
 	padding: 0;
 }
 
-
-#layout-main div.main_all div.rightbar li
+#layout-main div.main_all div.rightbar li a
 {
 	margin-left: 4em;
-	padding-left: 2px;
+	display: table;
 }
 
 #layout-main div.main_all div.rightbar li span
 {
-	margin-left: -4em;
+	position: absolute;
 }
 
 #layout-main div.main_all div.news
 {
 	margin-right: 21em;
-	margin-left: 0.3em;
-	margin-top: 0;
 }
 
 #layout-main div.main_all div.news div.newsitem span.stamp

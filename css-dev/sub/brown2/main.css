@@ -33,8 +33,8 @@
 	margin-top: 1em;
 }
 
-#layout-menu div.usermenu input[type="text"],
-#layout-menu div.usermenu input[type="password"],
+#menu-user input[type="text"],
+#menu-user input[type="password"],
 #layout-search form input.text
 {
 	display: block;

@@ -17,7 +17,7 @@
 
 #layout-menu > li+li
 {
-	margin-top: 6px;
+	margin-top: 3px;
 }
 
 #user-name
@@ -44,7 +44,7 @@
 	-display: inline;
 }
 
-#layout-menu div.usermenu form[enctype]
+#menu-user form[enctype]
 {
 	position: absolute;
 	top: 22px;
@@ -78,8 +78,18 @@
 
 #layout-main tr.all_watched
 {
-	/*text-decoration: line-through;*/
-	font-style: italic;
+	text-decoration: line-through;
+	/*font-style: italic;*/
+}
+
+#layout-nav input
+{
+	width: 96%;
+}
+
+#layout-menu ul li
+{
+	padding: 1px 2px;
 }
 
 body{ font-size: 12px; }

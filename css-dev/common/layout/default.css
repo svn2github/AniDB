@@ -52,7 +52,7 @@ ol
 }
 dl
 {
-  display: table;
+	display: table;
 	margin: 1px auto 1px auto;
 }
 dl dt
