@@ -13,11 +13,10 @@ img, a
 	border: none;
 }
 
-#layout-main .g_list,
 #layout-main .g_description,
 #layout-main .g_image image,
-#layout-main div.g_timedentry h4,
-#layout-main div.g_definitionlist table
+#layout-main .g_timedentry h4,
+#layout-main .g_definitionlist table
 {
 	border: 1px #98AAB1 dotted;
 }

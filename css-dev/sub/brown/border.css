@@ -27,17 +27,19 @@ img, a
 /*ul,*/
 #layout-nav,
 #layout-footer,
-#layout-main
+#layout-main,
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a
 {
 	border: 1px #867f6a solid;
 }
 
-#layout-main *.g_list,
-#layout-main *.g_description,
-#layout-main *.g_image image,
-#layout-main div.g_timedentry,
-#layout-main div.g_definitionlist table,
-#layout-main div.desc
+#layout-main .g_description,
+#layout-main .g_image image,
+#layout-main .g_timedentry,
+#layout-main .g_definitionlist table,
+#layout-main div.desc,
+#layout-main div.tabbed_pane ul.tabs li
 {
 	border: 1px #999380 dotted;
 }
@@ -63,11 +65,6 @@ img, a
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top: 1px #66604d double;
-}
-
-#layout-main div.profile_all div.g_section
-{
-	border: 3px solid #8c8673;
 }
 
 #layout-main div.avatar img

@@ -50,7 +50,7 @@ th,
 	background-color: #cbd6e5;
 }
 
-#layout-menu > div > ul > li:hover
+#layout-menu ul li:hover
 {
 	background-color: #577096;
 }

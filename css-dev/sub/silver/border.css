@@ -25,7 +25,9 @@ img, a
 
 #layout-nav,
 #layout-footer,
-#layout-main
+#layout-main,
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a
 {
 	border: 1px #98AAB1 solid;
 }
@@ -35,6 +37,11 @@ img, a
 	border-color: #E5E5E5;
 }
 
+#layout-tabs ul li.selected a
+{
+	border-bottom: 1px #E5E5E5 double;
+}
+
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	border-bottom: 1px #fefefe double;
@@ -42,9 +49,9 @@ img, a
 
 #layout-main ul,
 #layout-menu ul, 
-#layout-main *.g_list,
-#layout-main *.g_description,
-#layout-main *.g_image image,
+#layout-main .g_list,
+#layout-main .g_description,
+#layout-main .g_image image,
 #layout-main div.g_timedentry,
 #layout-main div.g_definitionlist table,
 #layout-main div.latestanimes_form,

@@ -1,10 +1,7 @@
 body
 {
 	color: #555040;
-	border-color: #FFFFFF;
-	background: #bebcad;
-	
-	font: x-small/1.4 Tahoma, Verdana, Helvetica, Arial, sans-serif;
+	background-color: #bebcad;
 }
 
 a:link,a:active,a:visited
@@ -29,7 +26,10 @@ a:hover,
 	background: #e0dbc9;
 }
 
-#layout-nav div ul,
+#layout-menu ul,
+#layout-tabs ul li a:hover,
+#layout-tabs ul li.selected a,
+#layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main,
 #layout-footer
 {
@@ -45,12 +45,19 @@ a:hover,
 
 th,
 #layout-main h1,
-#layout-main div.g_timedentry h4
+#layout-main div.g_timedentry h4,
+#layout-main div.tabbed_pane ul.tabs li
 {
 	color: #e9e6d9;
 	background-color: #8c8673;
 }
 
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	color: black;
+}
+
+#layout-tabs ul li a,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
 #layout-main span.g_odd,
@@ -59,11 +66,20 @@ th,
 	background-color: #e0dbc9;
 }
 
-#layout-menu > div > ul > li > a:hover
+#layout-menu ul li a:hover,
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
 {
 	color: inherit;
 }
-#layout-menu > div > ul > li:hover
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-menu ul li:hover
 {
 	background-color: #e0dbc9;
+}
+
+#layout-tabs ul li.selected a
+{
+	border-bottom: 1px #E5E5E5 double;
 }

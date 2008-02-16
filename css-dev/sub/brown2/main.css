@@ -7,11 +7,6 @@
 @import "color.css";
 
 
-#layout-menu div+div
-{
-	margin-top: 1em;
-}
-
 #layout-nav:before
 {
 	display: block;
@@ -24,11 +19,11 @@
 	margin-bottom: 1em;
 }
 
-#layout-menu div.menu
+#layout-menu
 {
 	padding-left: 1em;
 }
-#layout-menu ul + ul
+#layout-menu > li + li
 {
 	margin-top: 1em;
 }
@@ -63,29 +58,29 @@
 	font-weight: normal;
 }
 
-#layout-main ul.g_list li:before
+#layout-main .g_list li:before
 {
 	content: " | "
 }
-#layout-main ul.g_list.limit li:first-child:before
+#layout-main .g_list li:first-child:before
 {
 	content: "";
 }
-#layout-main ul.g_list.limit li:first-child:before
+#layout-main .g_list.limit li:first-child:before
 {
 	content: "show: ";
 }
 
-#layout-menu div.menu li.forum a:before
+#layout-menu li.forum a:before
 {
 	content: "AniDB ";
 }
-#layout-menu div.menu li.forum a
+#layout-menu li.forum a
 {
 	font-weight: bold;
 }
 
-#layout-menu div.menu li.reclinks a:before
+#layout-menu li.reclinks a:before
 {
 	content: "Rec ";
 }

@@ -18,7 +18,7 @@
 	-top: 0;
 }
 
-#layout-menu div+div
+#layout-menu > li + li
 {
 	margin-top: 1em;
 }
@@ -35,10 +35,11 @@
 	margin-bottom: 1em;
 }
 
-#layout-menu div.menu
+#layout-menu
 {
 	padding-left: 1em;
 }
+
 #layout-menu ul
 {
 	margin-top: 1em;
@@ -87,16 +88,16 @@
 	content: "show: ";
 }
 
-#layout-menu div.menu li.forum a:before
+#layout-menu i.forum a:before
 {
 	content: "AniDB ";
 }
-#layout-menu div.menu li.forum a
+#layout-menu li.forum a
 {
 	font-weight: bold;
 }
 
-#layout-menu div.menu li.reclinks a:before
+#layout-menu li.reclinks a:before
 {
 	content: "Rec ";
 }

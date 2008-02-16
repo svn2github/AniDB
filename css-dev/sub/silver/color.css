@@ -54,8 +54,10 @@ a:hover
 	background-color: #fafafa;
 }
 
-#layout-main ul,
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a
 #layout-menu ul,
+#layout-main ul,
 #layout-main tr,
 #layout-main .g_list,
 #layout-main .g_description,
@@ -82,24 +84,12 @@ a:hover
 {
 	color: inherit;
 	background-image: none;
-	background-color: transparent;/*#d1d7dc;*/
+	background-color: transparent;
 }
 
 #layout-menu ul li:hover
 {
 	background-color: #fafafa;
-}
-
-#layout-tabs ul li a,
-#layout-tabs ul li.g_odd a
-{
-	border: 1px #98AAB1 solid;
-	background-color: #F4F4F4;
-}
-
-#layout-tabs ul li.selected a
-{
-	border-bottom: 1px #E5E5E5 double;
 }
 
 #layout-tabs ul li a:hover,
