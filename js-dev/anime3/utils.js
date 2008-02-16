@@ -1,4 +1,4 @@
-/*
+/**
  * @file Utilities
  * @author fahrenheit (alka.setzer@gmail.com)
            some code derived from work by PetriW and Rar at anidb
