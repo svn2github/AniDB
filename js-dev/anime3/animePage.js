@@ -273,7 +273,7 @@ function updateEpisodeTable() {
 				// Loop to see if an entry should get a status, and file state
 				var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'title', true)[0];
 				if (cell) {
-					var icons = cell.getElementsByTagName('DIV')[0];
+					var icons = cell.getElementsByTagName('SPAN')[0];
 					if (cell) icon = getElementsByClassName(icons.getElementsByTagName('SPAN'), 'mixed', true)[0];
 					if (icon) icons.removeChild(icon); // remove the mixed state icon
 					var stateFiles = new Array();
