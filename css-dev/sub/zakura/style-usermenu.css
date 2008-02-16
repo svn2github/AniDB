@@ -70,13 +70,18 @@
 
 #menu-account .alert a.history,
 #menu-account .alert a.history:link,
-#menu-account .alert a.history:visited {
+#menu-account .alert a.history:visited,
+#menu-account .alert a.nextnotify,
+#menu-account .alert a.nextnotify:link,
+#menu-account .alert a.nextnotify:visited {
 	color: #ed95bd;
 	border: 0;
 	background: transparent url(images/layout/trans-white.png) repeat left top;
 }
 
 #menu-account .alert a.history:hover,
-#menu-account .alert a.history:active {
+#menu-account .alert a.history:active,
+#menu-account .alert a.nextnotify:hover,
+#menu-account .alert a.nextnotify:active  {
 	color: #fd0576;
 }

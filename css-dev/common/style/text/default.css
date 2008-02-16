@@ -172,14 +172,6 @@ h4.collapsed span,
 	white-space: -moz-pre-wrap;
 }
 
-#menu-account li.alert span:before,
-#menu-account li.alert span:after
-{
-	content: "!";
-	color: red;
-	padding: 0.2em;
-}
-
 #layout-main div.japan_time
 {
 	text-align: left;
