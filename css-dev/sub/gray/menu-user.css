@@ -77,15 +77,16 @@
 
 #user-xauth button
 {
-	border: 0;
-	background-color: transparent;
+	background: transparent;
 	cursor: pointer;
+	border: none;
 	-cursor: hand;
 }
 
 #user-xauth button span
 {
-	display: none;
+	display: block;
+	padding-top: 12px;
 }
 
 #user-xkeep label
