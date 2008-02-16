@@ -9,6 +9,8 @@
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;
 var gTable = null;
+var released_div = null;
+var ep_table = null;
 
 /* *
  * Updates the release list rows to allow more sorting options
@@ -16,7 +18,7 @@ var gTable = null;
 function updateReleaseListRows() {
 	var table = gTable;
 	if (!table) {
-		var div = getElementsByClassName(document.getElementsByTagName('DIV'), 'group_released', true)[0];
+		var div = released_div;
 		if (!div) return;
 		var table = div.getElementsByTagName('TABLE')[0];
 	}
@@ -40,7 +42,7 @@ function updateReleaseListRows() {
 			cnt = neps+seps;
 			test.setAttribute('anidb:sort',cnt);
 		}
-		test = row.cells[6];		// State Cell
+		test = row.cells[7];		// State Cell
 		if (test) {
 			a = test.getElementsByTagName('A')[0];
 			if (a) {
@@ -48,7 +50,7 @@ function updateReleaseListRows() {
 				test.setAttribute('anidb:sort',state);
 			}
 		}
-		test = row.cells[8];	// Rating Cell
+		test = row.cells[9];	// Rating Cell
 		if (test) {
 			var rating = test.firstChild.nodeValue;
 			test.setAttribute('anidb:sort',((rating == 'N/A ') ? "0" : rating));
@@ -60,30 +62,96 @@ function updateReleaseListRows() {
  * Updates the release list table with sorting
  */
 function updateReleaseList() {
-	var div = getElementsByClassName(document.getElementsByTagName('DIV'), 'group_released', true)[0];
-  if (!div) return;
+	var div = released_div;
+	if (!div) return;
 	gTable = div.getElementsByTagName('TABLE')[0];
 	if (!gTable) return;
-	headingList = gTable.getElementsByTagName('TH');
-  // I know the headings i need so..
-  headingList[0].className += ' c_date';			// First
-  headingList[1].className += ' c_date';			// Last
-  headingList[2].className += ' c_setlatin';	// Title
-  headingList[3].className += ' c_number';		// EPS
-  headingList[4].className += ' c_number';		// Last
-  headingList[5].className += ' c_set';			// Done
-	headingList[6].className += ' c_setlatin';	// State
-	headingList[7].className += ' c_none';			// N
-	headingList[8].className += ' c_set';			// Rating
-	//headingList[9].className += ' c_none';			// Action - Only available for *special* ppl
+	var headingList = gTable.getElementsByTagName('TH');
+	// I know the headings i need so..
+	headingList[0].className += ' c_date';			// First
+	headingList[1].className += ' c_date';			// Last
+	headingList[2].className += ' c_setlatin';		// Title
+	headingList[3].className += ' c_number';		// EPS
+	headingList[4].className += ' c_number';		// Last
+	headingList[5].className += ' c_set';			// Done
+	headingList[6].className += ' c_number';		// Undumped
+	headingList[7].className += ' c_setlatin';		// State
+	headingList[8].className += ' c_none';			// N
+	headingList[9].className += ' c_set';			// Rating
 	init_sorting(gTable.tBodies[0].rows[0],'title','down');
 }
 
+/* *
+ * Updates the episode list rows to allow more sorting options
+ */
+function updateEpTableRows() {
+	var table = ep_table;
+	if (!table) return;
+	var tbody = table.tBodies[0];
+	for (var i = 1; i < tbody.rows.length; i++) { // update each row
+		var row = tbody.rows[i];
+		test = row.cells[4];		// Group Cell
+		if (test) {
+			var a = test.getElementsByTagName('A')[0];
+			if (a) {
+				var group = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',group);
+			}
+		}
+		test = row.cells[7];		// Quality Cell
+		if (test) {
+			var span = test.getElementsByTagName('SPAN')[0];
+			if (span) {
+				var className = span.className.substr(span.className.indexOf('i_rate_')+7,span.className.length);
+				test.setAttribute('anidb:sort',mapQuality(className));
+			}
+		}
+		test = row.cells[10];	// Users Cell
+		if (test) {
+			var a = test.getElementsByTagName('A')[0];
+			if (a) {
+				var cnt = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',cnt);
+			}
+		}
+	}
+}
+
+/* *
+ * Updates the filelist table with sorting
+ */
+function updateEpTable() {
+	var table = ep_table;
+	if (!table) return;
+	var headingList = table.getElementsByTagName('TH');
+	// I know the headings i need so..
+	headingList[0].className += ' c_none';			// X
+	headingList[1].className += ' c_date';			// Date
+	headingList[2].className += ' c_set';			// ID
+	headingList[3].className += ' c_set';			// EP
+	headingList[4].className += ' c_setlatin';		// Group
+	headingList[5].className += ' c_set';			// Size
+	headingList[6].className += ' c_latin';		// CRC
+	headingList[7].className += ' c_setlatin';		// Quality
+	headingList[8].className += ' c_latin';		// Source
+	headingList[9].className += ' c_latin';		// Resolution
+	headingList[10].className += ' c_set';			// User count
+	init_sorting(gTable.tBodies[0].rows[0],'group','down');
+}
+
 function prepPage() {
-  uriObj = parseURI(); // update the uriObj
-  if (!uriObj['show'] || uriObj['show'] != 'group') return; // badPage
-	updateReleaseListRows();
-	updateReleaseList();
+	uriObj = parseURI(); // update the uriObj
+	if (!uriObj['show'] || uriObj['show'] != 'group') return; // badPage
+	released_div = getElementsByClassName(document.getElementsByTagName('DIV'), 'group_released', true)[0];
+	ep_table = getElementsByClassName(document.getElementsByTagName('TABLE'), 'filelist', true)[0];
+	if (released_div) { // releases
+		updateReleaseListRows();
+		updateReleaseList();
+	}
+	if (ep_table) {
+		updateEpTableRows();
+		updateEpTable();
+	}
 }
 
 //window.onload = prepPage;

@@ -84,7 +84,6 @@ function updateEpisodeListRows() {
 			var span = test.getElementsByTagName('SPAN')[0];
 			if (span) {
 				var className = span.className.substr(span.className.indexOf('i_rate_')+7,span.className.length);
-				//alert('className: '+span.className+'\nclass: '+className+'\nmap: '+mapQuality(className));
 				test.setAttribute('anidb:sort',mapQuality(className));
 			}
 		}
@@ -116,20 +115,20 @@ function updateEpisodeList() {
 	if (showall) tfoot.appendChild(showall);
 	epTable.appendChild(tfoot);
 	headingList = thead.getElementsByTagName('TH');
-  // I know the headings i need so.. i set the corresponding functions and add the names
+	// I know the headings i need so.. i set the corresponding functions and add the names
 	var i = 0;
-  headingList[0].className += 'id c_set';					// File
-  headingList[1].className += 'title c_setlatin';	// Groupname
-  headingList[2].className += 'size c_set';				// size
+	headingList[0].className += 'id c_set';				// File
+	headingList[1].className += 'title c_setlatin';		// Groupname
+	headingList[2].className += 'size c_set';				// size
 	if (uriObj['showcrc'] && uriObj['showcrc'] == 1) {
 		headingList[3].className += 'crc c_latin';			// crc
 		i++
 	}
 	headingList[4+i].className += 'codec c_setlatin';		// codec
-  headingList[5+i].className += 'resolution c_latin';	// resolution
-  headingList[6+i].className += 'source c_setlatin';		// source
-  headingList[7+i].className += 'quality c_set';				// quality
-	headingList[9+i].className += 'users c_set';					// users
+	headingList[5+i].className += 'resolution c_latin';	// resolution
+	headingList[6+i].className += 'source c_setlatin';		// source
+	headingList[7+i].className += 'quality c_set';			// quality
+	headingList[9+i].className += 'users c_set';			// users
 	init_sorting(thead,'title','down');
 }
 
