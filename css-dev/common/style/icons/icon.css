@@ -32,3 +32,8 @@ a.i_icon:hover, a.i_inline:hover
 	display: -moz-inline-box;
 	display: inline-block;
 }
+
+.i_audio
+{
+	display: none;
+}

@@ -109,11 +109,6 @@
 	background-image: url(../icons/icon/anidb_video_wmv.gif);
 }
 
-*.i_audio
-{
-	display: none;
-}
-
 *.i_ext
 {
 	background-image: url(../icons/icon/anidb_other.gif);
