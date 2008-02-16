@@ -14,8 +14,10 @@
 ./sub/brown2/main.css
 #./sub/dragon/main.css
 #./sub/gray/main.css #it's the same as the default style aka anidbstyle.css
+./sub/nice-day/main.css
 ./sub/norwegian-blue/main.css
 ./sub/silver/main.css
+./sub/zakura/main.css
 ./simplestyle/simplestyle.css
 ./zakura/zakura.css
 ./zakura-fixed_menu/zakura-fixed_menu.css

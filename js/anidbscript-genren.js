@@ -5,12 +5,14 @@ function InitGenren()
 		var root = document.getElementById("cattree")
 		var controls = document.createElement('div');
 		controls.className = "controls";
-		var tag = document.createElement('a');
+		var tag = document.createElement('span');
+		tag.className = 'tab';
 		tag.onclick = UnCollapseAll;
 		tag.appendChild(document.createTextNode("show all"));
 		controls.appendChild(tag);
 		controls.appendChild(document.createTextNode(" - "));
-		tag = document.createElement('a');
+		tag = document.createElement('span');
+		tag.className = 'tab';
 		tag.onclick = CollapseAll;
 		tag.appendChild(document.createTextNode("hide all"));
 		controls.appendChild(tag);
@@ -20,27 +22,28 @@ function InitGenren()
 		for (var i = 0; i < lis.length; i++)
 		{
 			if (lis[i].className == "branch")
-			{
-				var toggle = document.createElement('a');
-				if (lis[i].parentNode.parentNode.nodeName == "FORM")
-				{
-					toggle.className = "i_icon i_minus";
-					toggle.onclick = CollapseBranch;
-					toggle.appendChild(document.createTextNode("collapse this branch"));
-				}
-				else
-				{
-					lis[i].className += " collapsed";
-					toggle.className = "i_icon i_plus";
-					toggle.onclick = UnCollapseBranch;
-					toggle.appendChild(document.createTextNode("expand this branch"));
-				}
-				lis[i].insertBefore(toggle, lis[i].firstChild);
+						{
+							var toggle = document.createElement('a');
+							if (lis[i].parentNode.parentNode.nodeName == "FORM")
+							{
+								toggle.className = "i_icon i_minus";
+								toggle.onclick = CollapseBranch;
+								toggle.title = "Collapse node branch";
+								toggle.appendChild(document.createTextNode(""));
+							}
+							else
+							{
+								lis[i].className += " collapsed";
+								toggle.className = "i_icon i_plus";
+								toggle.onclick = UnCollapseBranch;
+								toggle.title = "Expand node branch";
+								toggle.appendChild(document.createTextNode(""));
+							}
+							lis[i].insertBefore(toggle, lis[i].firstChild);
 			}
 		}
 		RepaintStripes(root, true);
 	}
-	InitDefault();
 }
 
 function CollapseAll()
@@ -83,16 +86,16 @@ function CollapseBranchDo(node)
 {
 	node.parentNode.className += " collapsed";
 	node.className = node.className.replace(/i_minus/i, "i_plus");
-	node.firstChild.nodeValue = "expand node branch";
-	node.title = "expand node branch";
+	node.firstChild.nodeValue = "";
+	node.title = "Expand node branch";
 	node.onclick = UnCollapseBranch;
 }
 function UnCollapseBranchDo(node)
 {
 	node.parentNode.className = node.parentNode.className.replace(/ collapsed|collapsed/i, "");
 	node.className = node.className.replace(/i_plus/i, "i_minus");
-	node.firstChild.nodeValue = "collapse node branch";
-	node.title = "collapse node branch";
+	node.firstChild.nodeValue = "";
+	node.title = "Collapse node branch";
 	node.onclick = CollapseBranch;
 }
 

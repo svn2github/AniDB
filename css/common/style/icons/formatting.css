@@ -1,0 +1,70 @@
+*.f_button {
+  background-repeat: no-repeat;
+	background-position: center;
+	width: 21px;
+	height: 21px;
+	text-indent: -5000px;
+	margin-left: 0;
+	margin-right: 0;
+  border: 1px solid;
+  border-color: #D6D3CE;
+  background-color: #FFFFFF;
+}
+
+*.f_mouseover {
+  background-color: #B5BED6;
+  border-color: #000000;
+}
+
+*.f_mouseout {
+  background-color: #FFFFFF;
+  border-color: #D6D3CE;
+}
+
+*.f_selected {
+  background-color: #8492B5;
+}
+
+*.f_bold {
+  background-image: url(../icons/formating/bold.gif);
+}
+
+*.f_italic {
+  background-image: url(../icons/formating/italic.gif);
+}
+
+*.f_underline {
+  background-image: url(../icons/formating/underline.gif);
+}
+
+*.f_strikethrough {
+  background-image: url(../icons/formating/strikethrough.gif);
+}
+
+*.f_orderedlist {
+  background-image: url(../icons/formating/orderedlist.gif);
+}
+
+*.f_unorderedlist {
+  background-image: url(../icons/formating/unorderedlist.gif);
+}
+
+*.f_link {
+  background-image: url(../icons/formating/link.gif);
+}
+
+*.f_separator {
+  background-image: url(../icons/formating/separator.gif);
+}
+
+*.f_view_source {
+  background-image: url(../icons/formating/view_source.gif);
+}
+
+*.f_view_text {
+  background-image: url(../icons/formating/view_text.gif);
+}
+
+*.f_buddy {
+  background-image: url(../icons/formating/user.gif);
+}

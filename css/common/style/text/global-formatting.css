@@ -1,12 +1,12 @@
-#layout-content input,
-#layout-content select {
+#layout-main input,
+#layout-main select {
   background-color: #ffffff;
   border-width: 1px;
   border-style: solid;
   border-color: #cccccc;
 }
 
-#layout-content span.f_controls {
+#layout-main span.f_controls {
   display: block;
   background-color: #ffffff;
   border-bottom-width: 2px;
@@ -15,7 +15,7 @@
   padding: 2px;
 }
 
-#layout-content span.f_separator {
+#layout-main span.f_separator {
   display: block;
   float: left;
   width: 5px;
@@ -24,62 +24,62 @@
   text-indent: -5000px;
 }
 
-#layout-content input.f_mouseover,
-#layout-content input.f_selected {
+#layout-main input.f_mouseover,
+#layout-main input.f_selected {
   border-color: #89aad1;
   background-color: #e8f0fa;
 }
 
-#layout-content input.f_bold {
+#layout-main input.f_bold {
   width: 23px;
   height: 23px;
   background-image: url(images/formating/bold.gif);
   text-indent: -5000px;
 }
 
-#layout-content input.f_italic {
+#layout-main input.f_italic {
   width: 23px;
   height: 23px;
   background-image: url(images/formating/italic.gif);
   text-indent: -5000px;
 }
 
-#layout-content input.f_underline {
+#layout-main input.f_underline {
   width: 23px;
   height: 23px;
   background-image: url(images/formating/underline.gif);
   text-indent: -5000px;
 }
 
-#layout-content input.f_strikethrough {
+#layout-main input.f_strikethrough {
   width: 23px;
   height: 23px;
   background-image: url(images/formating/strikethrough.gif);
   text-indent: -5000px;
 }
 
-#layout-content input.f_unorderedlist {
+#layout-main input.f_unorderedlist {
   width: 23px;
   height: 23px;
   background-image: url(images/formating/unorderedlist.gif);
   text-indent: -5000px;
 }
 
-#layout-content input.f_orderedlist {
+#layout-main input.f_orderedlist {
   width: 23px;
   height: 23px;
   background-image: url(images/formating/orderedlist.gif);
   text-indent: -5000px;
 }
 
-#layout-content input.f_link {
+#layout-main input.f_link {
   width: 23px;
   height: 23px;
   background-image: url(images/formating/link.gif);
   text-indent: -5000px;
 }
 
-#layout-content select.f_links {
+#layout-main select.f_links {
 }
 
 #layout-overlay {
@@ -94,7 +94,7 @@
   opacity: 0.6;
 }
 
-#layout-content span.preview-box {
+#layout-main span.preview-box {
   display: block;
   width: 100%;
   width: 365px;
@@ -105,7 +105,7 @@
   background: #b0b0b0;
 }
 
-#layout-content span.preview-title {
+#layout-main span.preview-title {
   display: block;
   font-weight: bold;
   text-align: center;
@@ -115,7 +115,7 @@
   padding: 1px;
 }
 
-#layout-content span.preview-text {
+#layout-main span.preview-text {
   text-align: left;
   padding: 1px;
 }

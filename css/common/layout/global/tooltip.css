@@ -1,0 +1,16 @@
+#obj-tooltip
+{
+	width: 16em;
+}
+#obj-tooltip div.releaseinfotooltip ul li
+{
+	padding: 2px;
+}
+#obj-tooltip div.releaseinfotooltip ul li span.icons
+{
+	float: right;
+}
+#obj-tooltip div.releaseinfotooltip ul li span.icons .i_icon
+{
+	float: left;
+}

@@ -12,10 +12,14 @@ html, body
 #layout-content
 {
 	margin-left: 13em;
+}
+
+#layout-main
+{
 	padding: 1em;
 }
 
 #layout-footer
 {
-	margin-left: 152px;
+	margin-left: 13em;
 }

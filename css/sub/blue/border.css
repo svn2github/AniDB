@@ -1,13 +1,5 @@
-td
-{
-	/*border-top: 1px #FFFFFF solid;*/
-}
-
 table
 {
-	/*border: 1px solid #4f5e77;*/
-	/*border: 2px #006699 solid;*/
-	/*border-collapse: collapse;*/
 	border-spacing: 0;
 }
 
@@ -21,55 +13,34 @@ img, a
 	border: none;
 }
 
-/*ul,*/
-#layout-nav,
-#layout-footer,
-#layout-content
-{
-	/*border: 1px #FFFFFF dashed;*/
-}
-
-#layout-content *.g_jumplist,
-#layout-content *.g_description,
-#layout-content *.g_image image,
-#layout-content .block .g_definitionlist,
-#layout-content div.g_timedentry h4,
-#layout-content div.g_definitionlist table
+#layout-main .g_list,
+#layout-main .g_description,
+#layout-main .g_image image,
+#layout-main .block .g_definitionlist,
+#layout-main .g_timedentry h4,
+#layout-main .g_definitionlist table
 {
 	border: 1px #98AAB1 dotted;
 }
 
-/*#layout-content h1,
-#layout-content div.main_all div.news h4,
-#layout-content div.main_all div.rightbar h4,
-#layout-content div.agcmts_entries div.comment h4
-{
-	border: 1px dotted #4f5e77;
-}*/
-
-#layout-content .g_image image,
-#layout-content .g_definitionlist
+#layout-main .g_image image,
+#layout-main .g_definitionlist
 {
 	padding: 1px;
 }
 
-#layout-content .block .g_definitionlist > table
+#layout-main .block .g_definitionlist table
 {
 	border: none;
 	margin: 0;
 }
 
-#layout-content table.filelist tr.newep td
+#layout-main table.filelist tr.newep td
 {
 	border-top: 1px #006699 solid;
 }
 
-#layout-content div.anime_all div.episodes tr.newtype td
+#layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top: 2px #006699 double;
-}
-
-#layout-content div.profile_all div.g_section
-{
-	border: 3px solid #a1b4cd;
 }

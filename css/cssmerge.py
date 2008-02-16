@@ -47,5 +47,8 @@ def cssm(cssfile="/"):
 			cssmerge(line.rstrip('\n'),file(out + '/' + path.lstrip('./').replace('/','-') + '.css', 'w'))
 
 if __name__ == "__main__":
-	cssm()
+	if len(sys.argv) == 2:
+		cssm(sys.argv[1])
+	else:
+		cssm()
 	print "done"

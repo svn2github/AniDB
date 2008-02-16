@@ -12,7 +12,13 @@
 	position: fixed;
 }
 
-#layout-menu div+div
+#layout-main
+{
+	-position: absolute;
+	-top: 0;
+}
+
+#layout-menu > li + li
 {
 	margin-top: 1em;
 }
@@ -29,17 +35,18 @@
 	margin-bottom: 1em;
 }
 
-#layout-menu div.menu
+#layout-menu
 {
 	padding-left: 1em;
 }
-#layout-menu ul + ul
+
+#layout-menu ul
 {
 	margin-top: 1em;
 }
 
-#layout-menu div.usermenu input[type="text"],
-#layout-menu div.usermenu input[type="password"],
+#menu-user input[type="text"],
+#menu-user input[type="password"],
 #layout-search form input.text
 {
 	display: block;
@@ -51,7 +58,7 @@
 	border: #BFC2C9 1px solid;
 }
 
-#layout-content h1
+#layout-main h1
 {
 	text-align: center;
 	font-size: 14pt;
@@ -61,36 +68,36 @@
 	padding-top: 1.1em;
 }
 
-#layout-content div.g_timedentry h4
+#layout-main div.g_timedentry h4
 {
 	font-size: 100%;
 	line-height: 1.2;	
 	font-weight: normal;
 }
 
-#layout-content ul.g_navlist li:before
+#layout-main .g_list li:before
 {
 	content: " | "
 }
-#layout-content ul.g_navlist li:first-child:before
+#layout-main .g_list li:first-child:before
 {
 	content: "";
 }
-#layout-content ul.g_numonpage li:first-child:before
+#layout-main .g_list.limit li:first-child:before
 {
 	content: "show: ";
 }
 
-#layout-menu div.menu li.forum a:before
+#layout-menu i.forum a:before
 {
 	content: "AniDB ";
 }
-#layout-menu div.menu li.forum a
+#layout-menu li.forum a
 {
 	font-weight: bold;
 }
 
-#layout-menu div.menu li.reclinks a:before
+#layout-menu li.reclinks a:before
 {
 	content: "Rec ";
 }

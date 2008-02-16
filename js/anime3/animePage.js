@@ -93,27 +93,27 @@ function loadData() {
 }
 
 function parseData(xmldoc) {
-  var root = xmldoc.getElementsByTagName('root').item(0);
-  if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
-  var t1 = new Date();
-  parseAnimes(root.getElementsByTagName('animes'));
-  var parseAnimeNode = (new Date()) - t1;
-  updateStatus('Processing user data...');
-  var t1 = new Date();
-  parseCustom(root.getElementsByTagName('custom').item(0));
-  var parseCustomNode = (new Date()) - t1;
-  if (seeTimes) alert('Processing...\n'+
-        '\n\tanimes: '+parseAnimeNode+'ms'+
-        '\n\tcustom: '+parseCustomNode+' ms'+
-        '\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms');
-  updateStatus('');
-  if (uriObj['expandall']) loadExpand = true;
-  initTooltips();
-  updateEpisodeTable(); // Update the episode table
-  loadExpand = false;
-  updateGroupTable(); // Update the group table
-  checkEpExpand(); // Check to see if the user requested the page with ep expanding
-  updateMylistBox(); // update mylist box
+	var root = xmldoc.getElementsByTagName('root').item(0);
+	if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
+	var t1 = new Date();
+	parseAnimes(root.getElementsByTagName('animes'));
+	var parseAnimeNode = (new Date()) - t1;
+	updateStatus('Processing user data...');
+	var t1 = new Date();
+	parseCustom(root.getElementsByTagName('custom').item(0));
+	var parseCustomNode = (new Date()) - t1;
+	if (seeTimes) alert('Processing...\n'+
+						'\n\tanimes: '+parseAnimeNode+'ms'+
+						'\n\tcustom: '+parseCustomNode+' ms'+
+						'\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms');
+	updateStatus('');
+	if (uriObj['expandall']) loadExpand = true;
+	initTooltips();
+	updateEpisodeTable(); // Update the episode table
+	loadExpand = false;
+	updateGroupTable(); // Update the group table
+	checkEpExpand(); // Check to see if the user requested the page with ep expanding
+	updateMylistBox(); // update mylist box
 	if (!getElementsByClassName(document.getElementsByTagName('DIV'),'g_definitionlist mylist_add',false).length) {
 		// we don't have the mylist add to thingie, as i allways show checkboxes i need that
 		var eplist = document.getElementById('eplist');
@@ -149,9 +149,9 @@ function updateMylistBox() {
   if (!mylistBox) return; // not logged or no files on mylist
   var cell = getElementsByClassName(mylistBox.getElementsByTagName('TD'),'title',true)[0];
   if (!cell) return;
-  var icons = getElementsByClassName(cell.getElementsByTagName('DIV'),'icons',true)[0];
+  var icons = getElementsByClassName(cell.getElementsByTagName('SPAN'),'icons',true)[0];
   if (!icons) {
-    icons = document.createElement('DIV');
+    icons = document.createElement('SPAN');
     icons.className = 'icons';
   }
   var icon;
@@ -219,23 +219,23 @@ function checkEpExpand() {
 }
 
 function updateEpisodeTable() {
-  for (var i in episodes) { // Update each row of the episodeList 
-    var episode = episodes[i];
-    var row = document.getElementById('eid_'+episode.id);
-    if (!row) continue;
-    if (loadExpand) { // i have to fix some data tables
-      var eprowid = row.rowIndex + 1;
-      var tbRow = row.parentNode.rows[eprowid];
-      tbRow.id = 'eid_'+episode.id+'_ftHolder';
-    }
-    var cell, icon;
-    var mylistEpEntries = findMylistEpEntries(episode.id);
-    if (episode.relDate) { // This episode has a release date, so we add the the db add date
-      cell = getElementsByClassName(row.getElementsByTagName('TD'), 'date', true)[0];
-      if (cell) cell.title = 'DB add date: '+ episode.addDate;
-    }
-    // hook up the expand function
-    cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action expand', true)[0];
+	for (var i in episodes) { // Update each row of the episodeList 
+		var episode = episodes[i];
+		var row = document.getElementById('eid_'+episode.id);
+		if (!row) continue;
+		if (loadExpand) { // i have to fix some data tables
+		  var eprowid = row.rowIndex + 1;
+		  var tbRow = row.parentNode.rows[eprowid];
+		  tbRow.id = 'eid_'+episode.id+'_ftHolder';
+		}
+		var cell, icon;
+		var mylistEpEntries = findMylistEpEntries(episode.id);
+		if (episode.relDate) { // This episode has a release date, so we add the the db add date
+		  cell = getElementsByClassName(row.getElementsByTagName('TD'), 'date', true)[0];
+		  if (cell) cell.title = 'DB add date: '+ episode.addDate;
+		}
+		// hook up the expand function
+		cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action expand', true)[0];
 		if (cell) {
 			var ahref = cell.getElementsByTagName('A')[0];
 			if (ahref) {
@@ -255,15 +255,15 @@ function updateEpisodeTable() {
 			}
 			ahref.removeAttribute('href');
 		}
-    cell = getElementsByClassName(row.getElementsByTagName('TD'), 'title', true)[0];
+		cell = getElementsByClassName(row.getElementsByTagName('TD'), 'title', true)[0];
 		if (cell) {
 			var altTitle = curTitle = '';
 			var titleSpan = getNodeElementsByTagName(cell, 'SPAN')[0];
 			if (titleSpan) curTitle = nodeData(titleSpan);
 			if (episodeTitleLang != episodeAltTitleLang && 
-					episode.titles[episodeAltTitleLang] && 
-					episode.titles[episodeAltTitleLang] != '' &&
-					episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
+				episode.titles[episodeAltTitleLang] && 
+				episode.titles[episodeAltTitleLang] != '' &&
+				episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
 			if (altTitle != '') {
 				if (episodeTitleDisplay == 1) titleSpan.firstChild.nodeValue += ' ('+altTitle+')';
 				if (episodeTitleDisplay == 2) titleSpan.title = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle;
@@ -273,7 +273,7 @@ function updateEpisodeTable() {
 				// Loop to see if an entry should get a status, and file state
 				var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'title', true)[0];
 				if (cell) {
-					var icons = cell.getElementsByTagName('DIV')[0];
+					var icons = cell.getElementsByTagName('SPAN')[0];
 					if (cell) icon = getElementsByClassName(icons.getElementsByTagName('SPAN'), 'mixed', true)[0];
 					if (icon) icons.removeChild(icon); // remove the mixed state icon
 					var stateFiles = new Array();
@@ -317,8 +317,8 @@ function updateEpisodeTable() {
 					if (icon) icon.title = 'seen on: ' + cTimeDate(episode.seenDate);
 				}
 			}
-    }
-  }
+		}
+	}
 	// Remove the collapse icon as i don't need it
 	if (uriObj['gid']) {
 		var table = document.getElementById('eplist');
@@ -635,7 +635,7 @@ function updateGroupTable() {
   // append some group status filters
   var cell = row.cells[row.cells.length-2]; // second to last cell
   cell.className = 'action filter';
-  var div = document.createElement('DIV');
+  var div = document.createElement('SPAN');
   div.className = 'icons';
   createGroupFilters(div);
   cell.appendChild(div);
@@ -1231,38 +1231,38 @@ function createFileIcons(file) {
 }
 
 function createFileTableRow(episode,file) {
-  // if (tFileRow) return (tFileRow.cloneNode(tFileRow,true));
+	// if (tFileRow) return (tFileRow.cloneNode(tFileRow,true));
 	// ROW Definition
-  var fTBr0 = document.createElement('TR');
-  if (!file.pseudoFile) {
-    var test = document.getElementById('fid_'+file.id);
-    if (test) {
-      var t2 = test.parentNode.parentNode.id;
-      if (Number(t2.substring(7,t2.indexOf('files'))) != episode.id) fTBr0.id = 'fid_'+file.id+'_eid_'+episode.id;
-      else return; // The row was allready created and we have it
-    } else fTBr0.id = 'fid_'+file.id;
-  } else fTBr0.id = 'rfid_'+file.id+'_eid_'+episode.id; // This is safer
-  if (!file.pseudoFile || file.type != 'stub') {
-    filterObj.markDeprecated(file);
-    filterObj.markUnfiltered(file);
-    if (LAY_HIDEFILES && file.isDeprecated) file.visible = false;
-    filterObj.markVisible(file);
-    filterObj.markHidden(file);
-    if (!file.visible) episode.hiddenFiles++;
-  } else file.visible = false; // STUB files should be very hidden, very hidden indeed..
-  if (!file.visible || (file.type == 'generic' && LAY_HIDEGENERICFILES)) fTBr0.style.display = 'none';
-  if (groups[file.groupId] && !groups[file.groupId].visible) fTBr0.style.display = 'none';
-  if (file.type == 'generic') fTBr0.className = "generic no_sort";
-  else {
-    if (file.crcStatus == 'valid') fTBr0.className = 'good';
-    if (file.crcStatus == 'invalid') fTBr0.className = 'bad';
-    if (file.isDeprecated) fTBr0.className = 'deprecated';
-  }
+	var fTBr0 = document.createElement('TR');
+	if (!file.pseudoFile) {
+		var test = document.getElementById('fid_'+file.id);
+		if (test) {
+			var t2 = test.parentNode.parentNode.id;
+			if (Number(t2.substring(7,t2.indexOf('files'))) != episode.id) fTBr0.id = 'fid_'+file.id+'_eid_'+episode.id;
+			else return; // The row was allready created and we have it
+		} else fTBr0.id = 'fid_'+file.id;
+	} else fTBr0.id = 'rfid_'+file.id+'_eid_'+episode.id; // This is safer
+	if (!file.pseudoFile || file.type != 'stub') {
+		filterObj.markDeprecated(file);
+		filterObj.markUnfiltered(file);
+		if (LAY_HIDEFILES && file.isDeprecated) file.visible = false;
+		filterObj.markVisible(file);
+		filterObj.markHidden(file);
+		if (!file.visible) episode.hiddenFiles++;
+	} else file.visible = false; // STUB files should be very hidden, very hidden indeed..
+	if (!file.visible || (file.type == 'generic' && LAY_HIDEGENERICFILES)) fTBr0.style.display = 'none';
+	if (groups[file.groupId] && !groups[file.groupId].visible) fTBr0.style.display = 'none';
+	if (file.type == 'generic') fTBr0.className = "generic no_sort";
+	else {
+		if (file.crcStatus == 'valid') fTBr0.className = 'good';
+		if (file.crcStatus == 'invalid') fTBr0.className = 'bad';
+		if (file.isDeprecated) fTBr0.className = 'deprecated';
+	}
 	// Start of cells
 	var icons = createFileIcons(file); // get file icons
-  //createCell(fTBr0, 'file expand', icons['expand']); // EXPAND  
+	//createCell(fTBr0, 'file expand', icons['expand']); // EXPAND  
 	var ck = createCheckBox(null,'madd.f.'+file.id,null,showAddToMylistBox,false);
-  if (file.pseudoFile) ck.disabled = true;
+	if (file.pseudoFile) ck.disabled = true;
 	createCell(fTBr0, 'check', ck); // CHECKBOX
 	if (!icons['expand'])
 		createCell(fTBr0, 'id icons', icons['fid'], file.id); // FID
@@ -1272,49 +1272,51 @@ function createFileTableRow(episode,file) {
 		fTBr0.appendChild(cell);
 	}
 	// Group
-  if (file.type == 'generic') {
+	if (file.type == 'generic') {
 		createCell(fTBr0, 'title',createLink(null, 'generic file', 'http://wiki.anidb.info/w/Files:Generic_files', 'extern wiki', null, null, null)); // GROUP
-  } else { // group
+	} else { // group
 		var cell = createCell(null, 'title');
 		if (icons['date'] || icons['cmt'] || icons['ver']) {
-			var divIcons = document.createElement('DIV');
+			var divIcons = document.createElement('SPAN');
 			divIcons.className = 'icons';
 			if (icons['date']) divIcons.appendChild(icons['date']);
 			if (icons['cmt']) divIcons.appendChild(icons['cmt']);
 			if (icons['ver']) divIcons.appendChild(icons['ver']);
 			cell.appendChild(divIcons);
 		}
-    var groupEntry = groups[file.groupId];
+		var groupEntry = groups[file.groupId];
 		cell.setAttribute('anidb:sort',groupEntry.shortName);
-    if (!file.groupId) groupEntry = null;
-    if (!file.pseudoFile) {
-      if (groupEntry) 
-				cell.appendChild(createLink(null, groupEntry.shortName, 'animedb.pl?show=group&gid=' + file.groupId, 'extern anidb', null, 'group name: ' + groupEntry.name, null));
-      else 
-				cell.appendChild(document.createTextNode('no group'));
-    } else {
-      var shortNames = "";
+		if (!file.groupId) groupEntry = null;
+		var label = document.createElement('LABEL');
+		if (!file.pseudoFile) {
+			if (groupEntry) 
+				label.appendChild(createLink(null, groupEntry.shortName, 'animedb.pl?show=group&gid=' + file.groupId, 'extern anidb', null, 'group name: ' + groupEntry.name, null));
+			else 
+				label.appendChild(document.createTextNode('no group'));
+		} else {
+			var shortNames = "";
 			var Names = "";
-      for (var gr = 0; gr < file.relatedGroups.length; gr++) {
+			for (var gr = 0; gr < file.relatedGroups.length; gr++) {
 				var groupEntry = groups[file.relatedGroups[gr]];
 				shortNames += groupEntry.shortName;
 				Names += groupEntry.name;
-        if (gr < 2 && file.relatedGroups.length > gr+1) {
-          shortNames += '&'; Names += '&';
-        } else if (gr == 1) {
-          shortNames += '&...'; Names += '&...';
-        } else break; // will not add more information even if it exists
-      }
-      cell.appendChild(createLink(null, shortNames, 'http://wiki.anidb.info/w/Files:Pseudo_files', 'extern wiki', null, 'group name: ' + Names, null));
-    }
+				if (gr < 2 && file.relatedGroups.length > gr+1) {
+					shortNames += '&'; Names += '&';
+				} else if (gr == 1) {
+					shortNames += '&...'; Names += '&...';
+				} else break; // will not add more information even if it exists
+			}
+			label.appendChild(createLink(null, shortNames, 'http://wiki.anidb.info/w/Files:Pseudo_files', 'extern wiki', null, 'group name: ' + Names, null));
+		}
+		cell.appendChild(label);
 		fTBr0.appendChild(cell);
-  }
+	}
 	if (file.type == 'generic') {
 		var cell = document.createElement('TD');
 		cell.colSpan = ((uriObj['showcrc'] && uriObj['showcrc'] == '1') ? 8 : 7);
 		fTBr0.appendChild(cell);
 	} else {
-    createCell(fTBr0, 'size', document.createElement('NOBR').appendChild(document.createTextNode(formatFileSize(file.size))), file.size); // SIZE
+		createCell(fTBr0, 'size', document.createElement('NOBR').appendChild(document.createTextNode(formatFileSize(file.size))), file.size); // SIZE
 		if (uriObj['showcrc'] && uriObj['showcrc'] == '1') createCell(fTBr0, 'crc', document.createTextNode(file.crc32.toUpperCase()));
 		var cell = createCell(null, 'lang icons');
 		if (icons['audlangs']) {
@@ -1340,12 +1342,14 @@ function createFileTableRow(episode,file) {
 		createCell(fTBr0, 'resolution', ((file.type == 'video') ? document.createTextNode(file.resolution) : document.createTextNode('n/a')));
 		var cell = createCell(null, 'source');
 		if (icons['cen']) {
-			var divIcons = document.createElement('DIV');
+			var divIcons = document.createElement('SPAN');
 			divIcons.className = 'icons';
 			if (icons['cen']) divIcons.appendChild(icons['cen']);
 			cell.appendChild(divIcons);
 		}
-		cell.appendChild(document.createTextNode(file.source));
+		var label = document.createElement('LABEL');
+		label.appendChild(document.createTextNode(file.source));
+		cell.appendChild(label);
 		fTBr0.appendChild(cell);
 		createCell(fTBr0, 'quality '+file.quality, icons['quality'],mapQuality(file.quality));
 		cell = createCell(null, 'hash icons ed2k');
@@ -1379,7 +1383,7 @@ function createFileTableRow(episode,file) {
 	if (icons['mylist_action']) cell.appendChild(icons['mylist_action']);
 	if (icons['mylist_watch']) cell.appendChild(icons['mylist_watch']);
 	fTBr0.appendChild(cell);
-  return (fTBr0);
+	return (fTBr0);
 }
 
 function prepareForSort() {
@@ -1558,7 +1562,7 @@ function updateFileTable(episode) {
       createIcon(c0, '[+]', null, expandFiles, 'expand this entry', 'i_plus');
     row.insertBefore(c0,row.cells[0]);
     var statusrow = getElementsByClassName(row.getElementsByTagName('TD'), 'status', true)[0];
-    var icons = getElementsByClassName(statusrow.getElementsByTagName('DIV'), 'icons', true)[0];
+    var icons = getElementsByClassName(statusrow.getElementsByTagName('SPAN'), 'icons', true)[0];
     while (icons.childNodes.length)
       icons.removeChild(icons.childNodes[0]);
     createFileIcons(file,icons);

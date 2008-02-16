@@ -1,0 +1,48 @@
+@import "../../common/normalize.css";
+@import "../../common/layout/default.css";
+@import "../../common/layout/common.css";
+
+@import "../../common/layout/global/all.css";
+@import "../../common/layout/page/all.css";
+
+@import "../../common/style/icons/icon.css";
+@import "../../common/style/icons/flags.css";
+@import "../../common/style/icons/awards.css";
+@import "../../common/style/icons/zakura.css";
+
+@import "../../common/style/color/special.css";
+
+@import "../../common/style/text/default.css";
+
+@import "../../common/style/content/page-anime.css";
+
+@import "layout-macro.css";
+
+@import "style-default.css";
+@import "style-menu.css";
+@import "style-usermenu.css";
+@import "style-content.css";
+
+/*@import "../../zakura/icons.css";*/
+
+@import "../../zakura/main.css";
+
+/**
+{
+	font-size: 9pt;
+}*/
+
+#layout-main div.block div.image
+{
+	width: auto;
+}
+#layout-main div.block div.image
+{
+	vertical-align: middle;
+}
+#layout-main div.block div.data{
+	width: 100%;
+}
+#layout-main div.block div.data > div > table{
+	width: 100%;
+}

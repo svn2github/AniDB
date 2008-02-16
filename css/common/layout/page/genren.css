@@ -1,9 +1,9 @@
-#layout-content .categories div.controls
+#layout-main .categories div.controls
 {
 	text-align: center;
 }
 
-#layout-content ul#cattree a.i_icon
+#layout-main ul#cattree a.i_icon
 {
 	position: relative;
 	right: 18px;
@@ -11,19 +11,19 @@
 	margin-right: -15px;
 }
 
-#layout-content ul#cattree li
+#layout-main ul#cattree li
 {
 	list-style: none outside;
 	line-height: 14px;
 	margin-left: 2em;
 }
 
-#layout-content ul#cattree li span
+#layout-main ul#cattree li span
 {
 	display: block;
 }
 
-#layout-content ul#cattree li.collapsed ul
+#layout-main ul#cattree li.collapsed ul
 {
 	display: none;
 }

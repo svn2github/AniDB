@@ -1,46 +1,64 @@
-#layout-content div.profile_all > div
+#layout-main div.profile_all div.passwords
 {
 	display: table;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#layout-content div.profile_all > div > div,
-#layout-content div.profile_all > div form > div
+#layout-main div.profile_all div.passwords > div,
+#layout-main div.profile_all div.passwords form > div
 {
 	display: table-cell;
 }
 
-#layout-content div.profile_all .g_info
+#layout-main div.profile_all div.preferences
 {
-	text-align: left;
+	width: 100%;
+}
+#layout-main div.profile_all div.tabbed_pane
+{
+	width: 100%;
 }
 
-#layout-content div.profile_all div.css_style div.info dl dt
+#layout-main div.profile_all table
 {
-	font-weight: bold;
+	border: none;
 }
-#layout-content div.profile_all div.css_style div.info dl dd
+
+#layout-main div.css_style div.info dl dd
 {
 	margin-left: 7em;
-	width: 20em;
+	width: 60%;
+}
+
+#layout-main div.profile_all div.block div.image
+{
+	width: 40%;
+}
+
+#layout-main div.profile_all div.block div.info dl
+{
+	margin-left: 0;
+}
+
+#style_url
+{
+	width: 75%;
 }
 
 #style_thumbnail
 {
-  width: 220px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #cccccc;
-  padding: 3px;
-  background-color: #f9f9f9;
-  font-size: 94%;
-  text-align: center;
-  overflow-x: hidden;
-  overflow-y: hidden;
+	width: 220px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #cccccc;
+	padding: 3px;
+	background-color: #f9f9f9;
+	font-size: 94%;
+	text-align: center;
 }
 
 #image_viewer
 {
-  margin: 50px;
+	margin: 50px;
 }

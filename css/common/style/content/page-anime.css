@@ -1,19 +1,19 @@
-#layout-content div.anime_all a.action:before
+#layout-main div.anime_all a.action:before
 {
 	content: "[";
 }
 
-#layout-content div.anime_all a.action:after
+#layout-main div.anime_all a.action:after
 {
 	content: "]";
 }
 
-#layout-content div.anime_all div.groups td.mylist:before
+#layout-main div.anime_all div.groups td.mylist:before
 {
 	content: "* ";
 }
 
-#layout-content div.anime_all div.groups td.mylist:after
+#layout-main div.anime_all div.groups td.mylist:after
 {
 	content: " *";
 }

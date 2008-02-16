@@ -1,0 +1,27 @@
+*.i_comment_add
+{
+	width: 96px;
+	height: 25px;
+	margin: 5px;
+	background:transparent none no-repeat scroll 0pt;
+	background-image: url(../icons/test/comment_add_inactive.png);
+}
+
+*.i_comment_add:hover
+{
+	background-image: url(../icons/test/comment_add_active.png);
+}
+
+*.i_review_add
+{
+	width: 96px;
+	height: 25px;
+	margin: 5px;
+	background:transparent none no-repeat scroll 0pt;
+	background-image: url(../icons/test/review_add_inactive.png);
+}
+
+*.i_review_add:hover
+{
+	background-image: url(../icons/test/review_add_active.png);
+}
