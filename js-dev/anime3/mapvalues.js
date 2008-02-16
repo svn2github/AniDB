@@ -34,7 +34,7 @@ function mapMEStatusName(statusName) {
 
 var languageMap = {'x-unk':{"name":'unknown',"classname":'unknown'},
                    'ja':{"name":'japanese',"classname":'japanese'},
-                   'zh':{"name":'chinise (unspecified)',"classname":'chinese'},
+                   'zh':{"name":'chinese (unspecified)',"classname":'chinese'},
                    'en':{"name":'english',"classname":'english'},
                    'de':{"name":'german',"classname":'german'},
                    'fr':{"name":'french',"classname":'french'},
