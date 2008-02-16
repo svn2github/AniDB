@@ -49,6 +49,11 @@
 	-display: inline;
 }
 
+#layout-menu ul li.alert a
+{
+	display: inline;
+}
+
 #menu-user form[enctype]
 {
 	position: absolute;
