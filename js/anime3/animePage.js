@@ -414,7 +414,7 @@ function createGroupRow(group) {
   row.appendChild(cell);
   // Eps
   cell = document.createElement('TD');
-  cell.className = 'eps';
+  cell.className = 'eps number';
   cell.setAttribute('anidb:sort',String(group.epCnt));
   //createLink(cell,group.epCnt + '+' + group.sepCnt,'animedb.pl?show=group&gid='+group.id+'&aid='+anime.id,null,null,null,null);
   var maps = {'0' : {'use':true,'type': 0,'desc':"",'img':"blue"},
