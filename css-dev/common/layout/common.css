@@ -96,7 +96,7 @@ body.nonav #layout-main h1
 #layout-main div.anime_all div.episodes td.action .i_icon
 {
 	float: left;
-	padding: 0px 1px 0px 1px;
+	/*padding: 0px 1px 0px 1px;*/
 }
 
 #layout-main td.icons.quality .i_icon

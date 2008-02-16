@@ -1,4 +1,4 @@
-#layout-menu div.menu ul {
+#layout-menu ul {
 	background: #fff;
 	border: 1px solid #f3e7ff;
 	border-bottom-color: #dec9f2;
@@ -7,17 +7,17 @@
 	line-height: 1.5;
 }
 
-#layout-menu div.menu ul li {
+#layout-menu ul li {
 	border-bottom: 1px solid #ffecf5;
 }
 
-#layout-menu div.menu ul li:last-child {
+#layout-menu ul li:last-child {
 	border-bottom: none;
 }
 
-#layout-menu div.menu a,
-#layout-menu div.menu a:link,
-#layout-menu div.menu a:visited {
+#layout-menu a,
+#layout-menu a:link,
+#layout-menu a:visited {
 	text-decoration: none;
 	text-transform: capitalize;
 	color: #7c87d8;
@@ -27,62 +27,62 @@
 	font-size: 0.95em;
 }
 
-#layout-menu div.menu a:hover,
-#layout-menu div.menu a:active {
+#layout-menu a:hover,
+#layout-menu a:active {
 	background: transparent url(images/layout/stripe-pink.gif) repeat left top;
 	color: #484b9a;
 }
 
-#layout-menu div.menu ul.my {
+#layout-menu #menu-private {
 	background-color: #7c87d8;
 	border: 1px solid #6470c3;
 	border-bottom-color: #434fa2;
 	border-right-color: #434fa2;
 }
 
-#layout-menu div.menu ul.my li {
+#layout-menu #menu-private li {
 	border-bottom-color: #6470c3;
 }
 
-#layout-menu div.menu ul.my a,
-#layout-menu div.menu ul.my a:link,
-#layout-menu div.menu ul.my a:visited {
+#layout-menu #menu-private a,
+#layout-menu #menu-private a:link,
+#layout-menu #menu-private a:visited {
 	color: #fff;
 }
 
-#layout-menu div.menu ul.my a:hover,
-#layout-menu div.menu ul.my a:active {
+#layout-menu #menu-private a:hover,
+#layout-menu #menu-private a:active {
 	color: #ffd2fe;
 	background: transparent url(images/layout/stripe-dkblue.gif) repeat left top;
 }
 
-#layout-menu div.menu ul.mod {
+#layout-menu #menu-mod {
 	background-color: #382ec0;
 	border: 1px solid #20179d;
 	border-bottom-color: #1c1386;
 	border-right-color: #1c1386;
 }
 
-#layout-menu div.menu ul.mod li {
+#layout-menu #menu-mod li {
 	border-bottom-color: #291fad;
 }
 
-#layout-menu div.menu ul.mod a,
-#layout-menu div.menu ul.mod a:link,
-#layout-menu div.menu ul.mod a:visited {
+#layout-menu #menu-mod a,
+#layout-menu #menu-mod a:link,
+#layout-menu #menu-mod a:visited {
 	color: #c9dcfb;
 }
 
-#layout-menu div.menu ul.mod a:hover,
-#layout-menu div.menu ul.mod a:active {
+#layout-menu #menu-mod a:hover,
+#layout-menu #menu-mod a:active {
 	color: #d3e4ff;
 	background: #1c1386;
 }
 
-#layout-menu div.menu ul.other li.help {
+#layout-menu #menu-support li.help {
 	background: transparent url(images/buttons/help-static.png) no-repeat 0.7em center;
 }
 
-#layout-menu div.menu ul.other li.help a {
+#layout-menu #menu-support li.help a {
 	padding-left: 26px;
 }

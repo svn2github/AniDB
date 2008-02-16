@@ -1,4 +1,5 @@
 @import "../common.css";
+@import "../../common/style/icons/zakura.css";
 
 @import "layout-macro.css";
 
@@ -7,14 +8,26 @@
 @import "style-usermenu.css";
 @import "style-content.css";
 
-@import "../../zakura/icons.css";
+/*@import "../../zakura/icons.css";*/
 
-html, body, div, form, table, tr, td, ul, ol, dl, li, dt, h1, h2, h3, h4, p, caption
+@import "../../zakura/main.css";
+
+/**
 {
-	padding: 0;
+	font-size: 9pt;
+}*/
+
+#layout-main div.block div.image
+{
+	width: auto;
 }
-
-*
+#layout-main div.block div.image
 {
-	font-size: 12px;
+	vertical-align: middle;
+}
+#layout-main div.block div.data{
+	width: 100%;
+}
+#layout-main div.block div.data > div > table{
+	width: 100%;
 }

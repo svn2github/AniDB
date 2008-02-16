@@ -2,58 +2,58 @@ body
 {
 	background: #f8f7ff url(images/layout/bg-content.gif) repeat left top;
 }
+
 body.nonav #layout-main {
 	margin: 0 1em 1em 1em;
 	padding: 0;
 	background: transparent;
 }
+
 body.nonav form textarea {
 	width: 99%;
 }
 
 #layout-nav {
-	padding-top: 160px;
 	background: #fff url(images/layout/bg-header.gif) repeat-x left top;
-	min-width: 784px;
-}
-
-#layout-main {
-	background: transparent url(images/layout/header.jpg) no-repeat left top;
-	margin-top: -160px;
-	padding: 166px 1em 0 11em;
-}
-
-#layout-main h1
-{
-	text-align: left;
-	margin-bottom: 0;
-	margin-top: -6px;
+	height: 160px;
+	/*width: 100%;
+	position: absolute;*/
 }
 
 #layout-menu {
-	position: relative;
+	background: transparent url(images/layout/header.jpg) no-repeat left top;
+	padding-top: 164px;
+	padding-left: 12px;
 }
 
-#layout-menu div.menu {
-	padding: 1em;
-	position: absolute;
-	top: -8px;
-	left: 0;
-	width: 9em;
+#layout-menu li.sub-menu{
+	width: 108px;
 }
 
-#layout-menu div.usermenu {
-	position: absolute;
-	top: -160px;
-	left: auto;
-	right: 1em;
-	height: 102px;
-	z-index: 1;
+#layout-content, #layout-footer {
+	margin-left: 132px;
+	margin-right: 1em;
 }
-#layout-menu div.usermenu p {
-	position: relative;
-	float: left;
+
+#layout-content{
+	margin-top 160px;
+	border-top: 1px solid #f8f7ff;
+	background-color: #f8f7ff;
+}
+
+#layout-menu #menu-account {
+	background: transparent url(images/layout/bg-login.png) no-repeat right top;
 	margin: 0;
+	position: absolute;
+	top: 0;
+	right: 1em;
+	left: auto;
+	padding-left: 200px;
+	height: 102px;
+	width: 56px;
+	border: none;
+	text-align: right;
+	display: table;
 }
 
 #layout-search {
@@ -61,30 +61,31 @@ body.nonav form textarea {
 	top: 0;
 	left: auto;
 	right: 1em;
-	background: transparent url(images/layout/bg-login.png) no-repeat right top;
 	width: 30em;
-	z-index: 0;
+	margin-top: 110px;
+	padding: 0;
 }
-#layout-search div.search{
-	margin-top: 113px;
-}
+
 #layout-search div.search p{
 	text-align: right;
+	font-size: 10pt;
 }
+
 #layout-search input.text {
 	border: 1px solid #eed0da;
-	padding: 0.3em 0.3em 0 0.3em;
+	padding: 0.3em 0.3em 0;
 	height: 1.5em;
 	width: 16em;
 	color: #1e2495;
 }
+
 #layout-search input.text:hover {
 	border: 1px solid #dc9abf
 }
+
 #layout-search input.submit {
 	height: 1.8em;
 	padding-bottom: 0.2em;
-	margin-bottom: 0.1em;
 	width: 4.5em;
 }
 
@@ -92,9 +93,9 @@ body.nonav form textarea {
 	font-size: 0.8em;
 	text-align: center;
 	color: #85809f;
-	margin: 0;
 	padding: 2em 0;
 }
+
 #layout-footer p:after {
 	content: ". Design by zakness.";
 }

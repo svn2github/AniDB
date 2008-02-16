@@ -1,4 +1,4 @@
-.g_content a,
+/*.g_content a,
 .g_content a:link {
 	color: #154ef4;
 	text-decoration: none;
@@ -18,19 +18,19 @@
 .g_content td.action a,
 .g_content th a,
 .g_content th a img {
+	color: white;
 	border: 0 !important;
-}
+}*/
 
-div.g_content {
-border: 1px solid #f3e7ff;
-border-bottom-color: #dec9f2;
-border-right-color: #dec9f2;
-width: 100%;
-background: #fff;
+.g_content {
+	border: 1px solid #f3e7ff;
+	border-bottom-color: #dec9f2;
+	border-right-color: #dec9f2;
+	background: #fff;
 }
 
 div.g_content>* {
-margin: 1em;
+	margin: 1em;
 }
 
 div.latestanimes_anime:after,
@@ -43,101 +43,100 @@ div.userpage_all div.charts:after,
 div.animeatt_all div.animeatt_reviews div.review:after,
 div.agcmts_all div.agcmts_head:after {
 content: ".";
-clear: both;
-display: block;
-visibility: hidden;
-height: 0;
+	clear: both;
+	display: block;
+	visibility: hidden;
+	height: 0;
 }
 
 /* blocks */
 .g_content div.block {
-display:table;
-margin-left:auto;
-margin-right:auto;
+	display:table;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .g_content div.block div.image {
-display:table-cell;
-vertical-align:middle;
+	display:table-cell;
+	vertical-align:middle;
 }
 
 .g_content div.block div.image img {
-margin-right: 1em;
+	margin-right: 1em;
 }
 
 /* pagination */
 .g_list {
-text-align: center;
+	text-align: center;
 }
 
 .g_list li {
-display: inline;
-color: #de4799;
-font-weight: bold;
-text-transform: capitalize;
+	display: inline;
+	color: #de4799;
+	text-transform: capitalize;
 }
 
-.g_content ul.g_list li a,
-.g_content ul.g_list li a:link,
-.g_content ul.g_list li a:visited {
-text-decoration: none;
-border: 1px solid #f7edf1;
-border-bottom: 1px solid #d28cb2;
-color: #d28cb2;
-background: #fff9fb;
-padding: 0.2em 0.3em;
-font-size: 0.95em;
-font-weight: normal;
+.g_content ul.g_list.jump li a,
+.g_content ul.g_list.jump li a:link,
+.g_content ul.g_list.jump li a:visited {
+	text-decoration: none;
+	border: 1px solid #f7edf1;
+	border-bottom: 1px solid #d28cb2;
+	color: #d28cb2;
+	background: #fff9fb;
+	padding: 0.2em 0.3em;
+	font-size: 0.95em;
+	font-weight: normal;
 }
 
-.g_content ul.g_list li a:hover,
-.g_content ul.g_list li a:active {
-background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
-color: #de4799;
-border: 1px solid #eec6dc;
+.g_content ul.g_list.jump li a:hover,
+.g_content ul.g_list.jump li a:active {
+	background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
+	color: #de4799;
+	border: 1px solid #eec6dc;
 }
 
-ul.g_list li.prev {
-float: left;
-padding-left: 12px;
-background: transparent url(images/layout/larr.gif) no-repeat left center;
-font-weight: normal;
+.g_list li.prev {
+	float: left;
+	padding-left: 12px;
+	background: transparent url(images/layout/larr.gif) no-repeat left center;
+	font-weight: normal;
 }
 
-ul.g_list li.next {
-float: right;
-padding-right: 12px;
-background: transparent url(images/layout/rarr.gif) no-repeat right center;
-font-weight: normal;
+.g_list li.next {
+	float: right;
+	padding-right: 12px;
+	background: transparent url(images/layout/rarr.gif) no-repeat right center;
+	font-weight: normal;
 }
 
-ul.g_list li.all:before {
-content: "Viewing: ";
-color: #3d3e6e;
-text-transform: none;
-font-weight: normal;
+.g_list li.all:before {
+	content: "Viewing: ";
+	color: #3d3e6e;
+	text-transform: none;
+	font-weight: normal;
 }
 
 /* list menu */
-div.g_menu {
-float: right;
-text-transform: capitalize;
-width: 11em;
+.g_menu {
+	float: right;
+	text-transform: capitalize;
+	width: 11em;
 }
 
 .g_menu h4 {
-font-weight: normal;
-padding: 0 0.15em;
+	font-weight: normal;
+	padding: 0 0.15em;
 }
 
-div.g_menu ul li {
-border-top: 1px solid #ebe1ef;
-padding: 0.3em;
-position: relative;
+.g_menu ul li {
+	border-top: 1px solid #ebe1ef;
+	padding: 0.3em;
+	position: relative;
 }
 
-div.g_menu ul li.g_odd {
-background-color: #f5f7ff;
+.g_menu ul li.g_odd {
+	background-color: #f5f7ff;
 }
 
 /* selects */
@@ -218,7 +217,7 @@ margin-top: 0;
 }
 
 /* actionlist */
-.g_list {
+.g_list.links {
 padding: 0.3em 1em 0.4em;
 background: #dff1ff;
 border: 1px solid #b0dafb;
@@ -228,7 +227,7 @@ text-transform: capitalize;
 clear: both;
 }
 
-.g_list li {
+.g_list.links li {
 display: inline;
 margin: 0 0.7em;
 }
@@ -297,11 +296,6 @@ vertical-align: bottom;
 
 table td span.count {
 color: #8f95ae;
-}
-
-table th img[src*="plus.gif"],
-table th img[src*="minus.gif"] {
-margin-bottom: -2px;
 }
 
 table td {

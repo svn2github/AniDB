@@ -26,19 +26,20 @@ a img, :link img, :visited img {
 	border: 0;
 }
 
-h1 {
+#layout-main h1 {
 	font: bold 1.8em "Century Gothic", "Lucida Grande", sans-serif;
-	padding: 0.35em 0 0.3em 0.5em;
-	background: #f8f7ff;
+	margin: 0.35em 0 0.3em 0.5em;
 	color: #494a9c;
 	font-variant: small-caps;
 	letter-spacing: 0.1em;
+	text-align: left;
 }
 
 h4, caption {
 	color: #7762ed;
 	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
 	margin-bottom: 0.3em;
+	text-align: left;
 }
 
 .s_small {
