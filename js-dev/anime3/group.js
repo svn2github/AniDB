@@ -13,6 +13,25 @@ var released_div = null;
 var ep_table = null;
 
 /* *
+ * Converts qualitys to a rate system
+ * @param qual Quality
+ * @return Quality className
+ */
+function mapQuality(qualClassName) {
+  switch (qualClassName) {
+		case 'veryhigh': return (8);
+		case 'high': return (7);
+		case 'med': return (6);
+		case 'low': return (5);
+		case 'verylow': return (4);
+		case 'corrupted': return (3);
+		case 'eyecancer': return (2);
+		case 'unknown': return (1);
+  }
+  return (1);
+}
+
+/* *
  * Updates the release list rows to allow more sorting options
  */
 function updateReleaseListRows() {
