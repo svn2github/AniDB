@@ -24,9 +24,14 @@
 {
 	position: absolute;
 	left: 0;
-	width: 150px;
+	width: 146px;
 	top: 0.2em;
 	text-align: center;
+}
+
+#layout-menu #user-name:hover
+{
+	background-color: transparent;
 }
 
 #user-name a:before
