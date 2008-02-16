@@ -464,7 +464,7 @@ function createGroupRow(group) {
 		cell = document.createElement('TD');
 		cell.className = 'action icons';
 		createLink(cell,'cmt','animedb.pl?show=agcmts&agid='+group.agid,'anidb::popup',null,'Comment on this release','i_icon i_group_comment 600.500.1.1.agcmts');
-		createLink(cell,(group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=pop&pop=agvote&id='+group.id,'anidb::popup',null,'Rate this release','i_icon i_ep_vote 380.140.0.0.agvote');
+		createLink(cell,(group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=pop&pop=agvote&id='+group.id,'anidb::popup',null,'Rate this release','i_icon i_vote 380.140.0.0.agvote');
 		createLink(cell,'edit','animedb.pl?show=animegroup&agid='+group.agid,'anidb::popup',null,'Request edit of the state','i_icon i_file_edit 400.400.0.0.agstate');
 		//createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
 		row.appendChild(cell);
