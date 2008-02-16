@@ -93,27 +93,27 @@ function loadData() {
 }
 
 function parseData(xmldoc) {
-  var root = xmldoc.getElementsByTagName('root').item(0);
-  if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
-  var t1 = new Date();
-  parseAnimes(root.getElementsByTagName('animes'));
-  var parseAnimeNode = (new Date()) - t1;
-  updateStatus('Processing user data...');
-  var t1 = new Date();
-  parseCustom(root.getElementsByTagName('custom').item(0));
-  var parseCustomNode = (new Date()) - t1;
-  if (seeTimes) alert('Processing...\n'+
-        '\n\tanimes: '+parseAnimeNode+'ms'+
-        '\n\tcustom: '+parseCustomNode+' ms'+
-        '\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms');
-  updateStatus('');
-  if (uriObj['expandall']) loadExpand = true;
-  initTooltips();
-  updateEpisodeTable(); // Update the episode table
-  loadExpand = false;
-  updateGroupTable(); // Update the group table
-  checkEpExpand(); // Check to see if the user requested the page with ep expanding
-  updateMylistBox(); // update mylist box
+	var root = xmldoc.getElementsByTagName('root').item(0);
+	if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
+	var t1 = new Date();
+	parseAnimes(root.getElementsByTagName('animes'));
+	var parseAnimeNode = (new Date()) - t1;
+	updateStatus('Processing user data...');
+	var t1 = new Date();
+	parseCustom(root.getElementsByTagName('custom').item(0));
+	var parseCustomNode = (new Date()) - t1;
+	if (seeTimes) alert('Processing...\n'+
+						'\n\tanimes: '+parseAnimeNode+'ms'+
+						'\n\tcustom: '+parseCustomNode+' ms'+
+						'\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms');
+	updateStatus('');
+	if (uriObj['expandall']) loadExpand = true;
+	initTooltips();
+	updateEpisodeTable(); // Update the episode table
+	loadExpand = false;
+	updateGroupTable(); // Update the group table
+	checkEpExpand(); // Check to see if the user requested the page with ep expanding
+	updateMylistBox(); // update mylist box
 	if (!getElementsByClassName(document.getElementsByTagName('DIV'),'g_definitionlist mylist_add',false).length) {
 		// we don't have the mylist add to thingie, as i allways show checkboxes i need that
 		var eplist = document.getElementById('eplist');
@@ -219,23 +219,23 @@ function checkEpExpand() {
 }
 
 function updateEpisodeTable() {
-  for (var i in episodes) { // Update each row of the episodeList 
-    var episode = episodes[i];
-    var row = document.getElementById('eid_'+episode.id);
-    if (!row) continue;
-    if (loadExpand) { // i have to fix some data tables
-      var eprowid = row.rowIndex + 1;
-      var tbRow = row.parentNode.rows[eprowid];
-      tbRow.id = 'eid_'+episode.id+'_ftHolder';
-    }
-    var cell, icon;
-    var mylistEpEntries = findMylistEpEntries(episode.id);
-    if (episode.relDate) { // This episode has a release date, so we add the the db add date
-      cell = getElementsByClassName(row.getElementsByTagName('TD'), 'date', true)[0];
-      if (cell) cell.title = 'DB add date: '+ episode.addDate;
-    }
-    // hook up the expand function
-    cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action expand', true)[0];
+	for (var i in episodes) { // Update each row of the episodeList 
+		var episode = episodes[i];
+		var row = document.getElementById('eid_'+episode.id);
+		if (!row) continue;
+		if (loadExpand) { // i have to fix some data tables
+		  var eprowid = row.rowIndex + 1;
+		  var tbRow = row.parentNode.rows[eprowid];
+		  tbRow.id = 'eid_'+episode.id+'_ftHolder';
+		}
+		var cell, icon;
+		var mylistEpEntries = findMylistEpEntries(episode.id);
+		if (episode.relDate) { // This episode has a release date, so we add the the db add date
+		  cell = getElementsByClassName(row.getElementsByTagName('TD'), 'date', true)[0];
+		  if (cell) cell.title = 'DB add date: '+ episode.addDate;
+		}
+		// hook up the expand function
+		cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action expand', true)[0];
 		if (cell) {
 			var ahref = cell.getElementsByTagName('A')[0];
 			if (ahref) {
@@ -255,15 +255,15 @@ function updateEpisodeTable() {
 			}
 			ahref.removeAttribute('href');
 		}
-    cell = getElementsByClassName(row.getElementsByTagName('TD'), 'title', true)[0];
+		cell = getElementsByClassName(row.getElementsByTagName('TD'), 'title', true)[0];
 		if (cell) {
 			var altTitle = curTitle = '';
 			var titleSpan = getNodeElementsByTagName(cell, 'SPAN')[0];
 			if (titleSpan) curTitle = nodeData(titleSpan);
 			if (episodeTitleLang != episodeAltTitleLang && 
-					episode.titles[episodeAltTitleLang] && 
-					episode.titles[episodeAltTitleLang] != '' &&
-					episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
+				episode.titles[episodeAltTitleLang] && 
+				episode.titles[episodeAltTitleLang] != '' &&
+				episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
 			if (altTitle != '') {
 				if (episodeTitleDisplay == 1) titleSpan.firstChild.nodeValue += ' ('+altTitle+')';
 				if (episodeTitleDisplay == 2) titleSpan.title = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle;
@@ -317,8 +317,8 @@ function updateEpisodeTable() {
 					if (icon) icon.title = 'seen on: ' + cTimeDate(episode.seenDate);
 				}
 			}
-    }
-  }
+		}
+	}
 	// Remove the collapse icon as i don't need it
 	if (uriObj['gid']) {
 		var table = document.getElementById('eplist');

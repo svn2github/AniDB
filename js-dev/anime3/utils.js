@@ -242,7 +242,11 @@ function createIcon(parentNode, text, url, onclick, title, className) {
     obj.href = url;
   }
   if (onclick != null || onclick != '') obj.onclick = onclick;
-  if (text != null) obj.appendChild(document.createTextNode(text));
+  if (text != null) {
+	var label = document.createElement('SPAN');
+	label.appendChild(document.createTextNode(text));
+	obj.appendChild(label);
+  }
   if (title != null || title != '') {
     obj.title = title;
     obj.alt = title;
