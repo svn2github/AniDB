@@ -26,8 +26,8 @@ function applySorting(node) {
       case 'state': th.className += ' c_none'; break;
       case 'date added': th.className += ' c_date'; break;
       case 'rating': th.className += ' c_latin'; break;
-      case 'tmprating': th.className += ' c_latin'; break;
-      case 'revrating': th.className += ' c_latin'; break;
+      case 'tmprating': th.className = 'tmpanime c_latin'; break;
+      case 'revrating': th.className = 'review c_latin'; break;
       case 'cmts': th.className += ' c_none'; break; // can break
       default: if (seeDebug) alert('unknown class: '+th.className); break;
     }
