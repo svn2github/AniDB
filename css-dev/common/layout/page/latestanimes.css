@@ -42,3 +42,13 @@
 {
 	margin: 0.5em 0 0.5em 17.3em;
 }
+
+#layout-main div.latestanimes_anime div.data table
+{
+width: 400px;
+}
+
+#layout-main div.latestanimes_anime div.data table tbody td
+{
+width: 100%;
+}
