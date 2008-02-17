@@ -1,0 +1,70 @@
+#layout-main div.main_all div.rightbar
+{
+	width: 19em;
+	float: right;
+}
+
+#layout-main div.main_all div.rightbar p
+{
+	text-align: center;
+}
+
+#layout-main div.main_all div.rightbar h3
+{
+	margin-top: 1em;
+}
+
+#layout-main div.main_all div.rightbar ol
+{
+	list-style-type: none;
+	margin-left: 0px;
+}
+
+#layout-main div.main_all div.news
+{
+	clear: none;
+	margin-right: 20em;
+}
+
+/* main_edit */
+
+#layout-main div.main_edit
+{
+	text-align: center;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+#layout-main div.main_edit label
+{
+	display: block;
+	text-align: left;
+	vertical-align: top;
+	margin: auto;
+	padding: 0.6em;
+}
+
+#layout-main div.main_edit label *
+{
+	display: block;
+	margin-top: -1.2em;
+	margin-left: 4em;
+}
+
+#layout-main div.main_edit label input
+{
+	width: 90%;
+}
+
+#layout-main div.main_edit textarea
+{
+	height: 30em;
+	width: 90%;
+}
+
+#layout-main div.main_edit form div > input
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}

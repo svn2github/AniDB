@@ -1,0 +1,187 @@
+*.i_file_add
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_add.gif);
+}
+
+*.i_file_delete
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_delete.gif);
+}
+
+*.i_file_edit
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_edit.gif);
+}
+
+*.i_file_details
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_details.gif);
+}
+
+*.i_file_ed2k
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file_ed2k.gif);
+}
+
+*.i_file_ed2k_corrupt
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_file_ed2k_corrupt.gif);
+}
+
+*.i_new_icon
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_new_icon.gif);
+}
+
+*.i_av_yes
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_av_yes.gif);
+}
+
+*.i_crc_no
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_crc_no.gif);
+}
+
+*.i_crc_yes
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_crc_yes.gif);
+}
+
+*.i_censored
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_censored.gif);
+}
+
+*.i_uncensored
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_uncensored.gif);
+}
+
+*.i_vrs_1
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_vrs_1.gif);
+}
+
+*.i_vrs_2
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_vrs_2.gif);
+}
+
+*.i_vrs_3
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_vrs_3.gif);
+}
+
+*.i_vrs_4
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_vrs_4.gif);
+}
+
+*.i_vrs_5
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_vrs_5.gif);
+}
+
+*.i_crc_unv
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_crc_unv.gif);
+}
+
+*.i_video
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video.gif);
+}
+
+*.i_video.xvid,
+*.i_video.divx5
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_asp.gif);
+}
+
+*.i_video.avc
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_avc.gif);
+}
+
+*.i_video.wmv9
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video_wmv.gif);
+}
+
+*.i_ext
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_other.gif);
+}
+
+*.i_ext.mkv
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_mkv.gif);
+}
+
+*.i_ext.ogm
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_ext_ogm.gif);
+}
+
+*.i_ext.avi
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_avi.gif);
+}
+
+*.i_ext.mp4
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_mp4.gif);
+}
+
+*.i_ext.wmv
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_wmv.gif);
+}
+
+*.i_ext.srt
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_subs.gif);
+}
+
+*.i_ftype_video
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video.gif);
+}
+
+*.i_ftype_video2
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_video2.gif);
+}
+
+*.i_ftype_subtitle
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_subtitles.gif);
+}
+
+*.i_ftype_subtitle2
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_subtitles2.gif);
+}
+
+*.i_ftype_audio
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_audio.gif);
+}
+
+*.i_ftype_other
+{
+	background-image: url(/anidbstyle-dongato/images/anidb_other.gif);
+}
+
+*.i_file2ep_rel
+{
+  width: 20px;
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file2ep2.gif);
+}
+
+*.i_file2file_rel
+{
+  width: 20px;
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_file2file2.gif);
+}

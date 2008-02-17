@@ -1,0 +1,31 @@
+#layout-main .g_list li:first-child:before
+{
+	content: "";
+}
+#layout-main .g_list.limit:before
+{
+	content: "show: ";
+}
+
+#layout-main div.main_all h4
+{
+	font-size: 100%;
+	line-height: 1.2;	
+	font-weight: normal;
+}
+
+#layout-main p.g_vital a
+{
+	color: red;
+	font-weight: bolder;
+}
+
+#layout-menu li.genren:before
+{
+	content: "(";
+}
+
+#layout-menu li.genren:after
+{
+	content: ")";
+}

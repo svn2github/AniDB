@@ -1,0 +1,19 @@
+*.i_comment_add
+{
+	background-image: url(http://static.anidb.net/css/icons/boomy/comment_add.png);
+}
+
+*.i_comment_delete
+{
+	background-image: url(http://static.anidb.net/css/icons/boomy/comment_delete.png);
+}
+
+*.i_comment_deleterequest
+{
+	background-image: url(http://static.anidb.net/css/icons/boomy/comment_deleterequest.png);
+}
+
+*.i_comment_edit
+{
+	background-image: url(http://static.anidb.net/css/icons/boomy/comment_edit.png);
+}
