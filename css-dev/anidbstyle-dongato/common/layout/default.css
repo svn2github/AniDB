@@ -1,0 +1,68 @@
+html, body, div, form, table, tr, td, ul, ol, dl, li, dt, dd, h1, h2, h3, h4, p, caption
+{
+	left: 0px;
+}
+
+table table
+{
+	width: 100%;
+}
+
+td, th
+{
+	padding: 1px 2px 1px 2px;
+}
+
+p, textarea
+{
+	padding: 4px;
+}
+
+textarea
+{
+	width: 90%;
+}
+
+table, table caption
+{
+	margin: 0px auto 0px auto;
+}
+
+span
+{
+	display: inline;
+}
+
+fieldset
+{
+	display: none;
+}
+
+ul
+{
+	list-style-type: none;
+}
+
+ol
+{
+	list-style-position: outside;
+	margin-left: 2em;
+}
+
+dl
+{
+	display: table;
+	margin: 1px auto 1px auto;
+}
+
+dl dt
+{
+	float: left;
+	clear: left;
+}
+
+dl dd
+{
+	margin-left: 10em;
+	text-align: left;
+}

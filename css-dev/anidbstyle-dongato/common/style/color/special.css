@@ -1,0 +1,51 @@
+.v_pos
+{
+	color: #006600;
+}
+
+.g_vital a,
+.v_neg,
+.v_high,
+span.diff,
+#layout-main td.reviewed.no a,
+#layout-main div.creqmod_all .state.return,
+#layout-main div.creqmod_all span.type.del,
+#layout-main div.schedule_all a.promo_only,
+#layout-main div.anime_all div.groups td.mylist.new
+{
+	color: red;
+}
+
+#layout-main div.msg_all tr.mod
+{
+	background-color: orange;
+}
+
+#layout-main div.mylist_list tr.all_watched td.stats
+{
+	color: darkgreen;
+}
+
+#layout-main table ul li.g_odd,
+#layout-main table table td.g_odd,
+#layout-main ul.g_list li.g_odd
+{
+	background-color: transparent;
+}
+
+#layout-main a.filter,
+#layout-main .name span.main,
+#layout-main .name span.match
+{
+	color: gray;
+}
+
+input.g_error
+{
+	background-color: #FFDDDD;
+}
+
+th a, h1 a.short_link
+{
+	color: inherit;
+}

@@ -1,0 +1,33 @@
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main div.myvotes_all table tr.low td
+{
+	background-color: #ffd7c2;
+}
+
+#layout-main div.myvotes_all table tr.g_odd.low td
+{
+	background-color: #efc7b2;
+}
+
+#layout-main td ins,
+#layout-main input.include,
+#layout-main table.filelist tr.good,
+#layout-main div.myvotes_all table tr.high td,
+#layout-main div.producer_all table tr.mylist,
+#layout-main div.animelist_all table tr.mylist,
+#layout-main div.group_released table tr.mylist
+{
+	background-color: #f2ffe9;
+}
+
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.myvotes_all table tr.g_odd.high td,
+#layout-main div.producer_all table tr.g_odd.mylist,
+#layout-main div.animelist_all table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist
+{
+	background-color: #e2efd9;
+}

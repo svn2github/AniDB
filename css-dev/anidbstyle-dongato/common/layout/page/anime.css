@@ -1,0 +1,25 @@
+#layout-main div.anime_all div.info th span.i_icon
+{
+	float: right;
+}
+
+#layout-main div.anime_all div.episodes div.mylist_add
+{
+	margin-top: 1em;
+}
+
+#layout-main div.anime_all div.mylist table td
+{
+	padding: 1em;
+}
+
+#layout-main div.anime_all div.mylist table td span.i_icon
+{
+	margin-left: 1em;
+}
+
+#layout-main div.anime_all div.awards
+{
+	clear: both;
+	text-align: center;
+}

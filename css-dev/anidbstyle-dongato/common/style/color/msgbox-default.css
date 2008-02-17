@@ -1,0 +1,43 @@
+#layout-main div.g_msg.error
+{
+	border: 1px solid #DD0000;
+	background-color: #FFE5E5;
+}
+
+#layout-main div.g_msg.warning
+{
+	border: 1px solid #F46F0B;
+	background-color: #FFF0E5;
+}
+
+#layout-main div.g_msg.note
+{
+	border: 1px solid #AFAF00;
+	background-color: #FFFFDF;
+}
+
+#layout-main div.g_msg.success
+{
+	border: 1px solid #2EB42E;
+	background-color: #E5FFE5;
+}
+
+#layout-main div.g_msg.error h3
+{
+	color: #FF0000;
+}
+
+#layout-main div.g_msg.warning h3
+{
+	color: #F46F0B;
+}
+
+#layout-main div.g_msg.note h3
+{
+	color: #AFAF00;
+}
+
+#layout-main div.g_msg.success h3
+{
+	color: #2EB42E;
+}

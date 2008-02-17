@@ -1,0 +1,133 @@
+#layout-main input,
+#layout-main select
+{
+  background-color: #ffffff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cccccc;
+}
+
+#layout-main span.f_controls
+{
+  display: block;
+  background-color: #ffffff;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #000000;
+  padding: 2px;
+}
+
+#layout-main span.f_separator
+{
+  display: block;
+  float: left;
+  width: 5px;
+  height: 20px;
+  background: transparent url(http://static.anidb.net/css/icons/formating/separator.gif) no-repeat;
+  text-indent: -5000px;
+}
+
+#layout-main input.f_mouseover,
+#layout-main input.f_selected
+{
+  border-color: #89aad1;
+  background-color: #e8f0fa;
+}
+
+#layout-main input.f_bold
+{
+  width: 23px;
+  height: 23px;
+  background-image: url(http://static.anidb.net/css/icons/formating/bold.gif);
+  text-indent: -5000px;
+}
+
+#layout-main input.f_italic
+{
+  width: 23px;
+  height: 23px;
+  background-image: url(http://static.anidb.net/css/icons/formating/italic.gif);
+  text-indent: -5000px;
+}
+
+#layout-main input.f_underline
+{
+  width: 23px;
+  height: 23px;
+  background-image: url(http://static.anidb.net/css/icons/formating/underline.gif);
+  text-indent: -5000px;
+}
+
+#layout-main input.f_strikethrough
+{
+  width: 23px;
+  height: 23px;
+  background-image: url(http://static.anidb.net/css/icons/formating/strikethrough.gif);
+  text-indent: -5000px;
+}
+
+#layout-main input.f_unorderedlist
+{
+  width: 23px;
+  height: 23px;
+  background-image: url(http://static.anidb.net/css/icons/formating/unorderedlist.gif);
+  text-indent: -5000px;
+}
+
+#layout-main input.f_orderedlist
+{
+  width: 23px;
+  height: 23px;
+  background-image: url(http://static.anidb.net/css/icons/formating/orderedlist.gif);
+  text-indent: -5000px;
+}
+
+#layout-main input.f_link
+{
+  width: 23px;
+  height: 23px;
+  background-image: url(http://static.anidb.net/css/icons/formating/link.gif);
+  text-indent: -5000px;
+}
+
+#layout-overlay
+{
+  position: absolute;
+  z-index:100000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  min-height:100%;
+  background-color:#000000;
+  opacity: 0.6;
+}
+
+#layout-main span.preview-box
+{
+  display: block;
+  width: 100%;
+  width: 365px;
+  /*overflow: auto; */
+  border-width: 2px;
+  border-style: solid;
+  border-color: #000000;
+  background: #b0b0b0;
+}
+
+#layout-main span.preview-title
+{
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  background-color: #494d59;
+  color: #bbbbbb;
+  padding: 1px;
+}
+
+#layout-main span.preview-text
+{
+  text-align: left;
+  padding: 1px;
+}
