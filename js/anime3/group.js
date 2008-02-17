@@ -155,7 +155,7 @@ function updateEpTable() {
 	headingList[8].className += ' c_latin';		// Source
 	headingList[9].className += ' c_latin';		// Resolution
 	headingList[10].className += ' c_set';			// User count
-	init_sorting(gTable.tBodies[0].rows[0],'group','down');
+	init_sorting(table.tBodies[0].rows[0],'group','down');
 }
 
 function prepPage() {
