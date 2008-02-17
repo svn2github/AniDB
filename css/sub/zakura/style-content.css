@@ -413,7 +413,7 @@ th.c_set:hover,
 th.c_setlatin:hover,
 th.c_date:hover,
 th.c_latin:hover,
-th.c_number:hover {
+th.c_number {
 background-color: #353A8F
 }
 
