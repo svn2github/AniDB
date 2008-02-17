@@ -1,12 +1,12 @@
-@import "/anidbstyle-dongato/common.css";
+@import "../common.css";
 
-@import "/anidbstyle-dongato/common/style/color/status-radioactive.css";
+@import "../../common/style/color/status-radioactive.css";
 
-@import "/anidbstyle-dongato/css/border.css";
-@import "/anidbstyle-dongato/css/color.css";
-@import "/anidbstyle-dongato/css/layout.css";
-@import "/anidbstyle-dongato/css/menu-user.css";
-@import "/anidbstyle-dongato/css/text.css";
+@import "border.css";
+@import "color.css";
+@import "layout.css";
+@import "menu-user.css";
+@import "text.css";
 
 body,
 #layout-nav input
