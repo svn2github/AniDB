@@ -109,13 +109,28 @@ function updateEpTableRows() {
 	var tbody = table.tBodies[0];
 	for (var i = 1; i < tbody.rows.length; i++) { // update each row
 		var row = tbody.rows[i];
-		test = row.cells[4];		// Group Cell
+		var test = row.cells[2];	// ID cell
 		if (test) {
 			var a = test.getElementsByTagName('A')[0];
 			if (a) {
-				var group = a.firstChild.nodeValue;
-				test.setAttribute('anidb:sort',group);
+				var cnt = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',cnt);
 			}
+		}
+		test = row.cells[3];		// EP cell
+		if (test) {
+			var a = test.getElementsByTagName('A')[0];
+			if (a) {
+				var cnt = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',cnt);
+			}
+		}
+		test = row.cells[5];		// Size cell
+		if (test) test.setAttribute('anidb:sort',test.firstChild.nodeValue);
+		test = row.cells[6];		// CRC Cell
+		if (test) {
+			if (!test.childNodes.length) test.setAttribute('anidb:sort','-');
+			else test.setAttribute('anidb:sort',test.firstChild.nodeValue);
 		}
 		test = row.cells[7];		// Quality Cell
 		if (test) {
@@ -146,11 +161,11 @@ function updateEpTable() {
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';			// X
 	headingList[1].className += ' c_date';			// Date
-	headingList[2].className += ' c_set';			// ID
-	headingList[3].className += ' c_set';			// EP
-	headingList[4].className += ' c_setlatin';		// Group
-	headingList[5].className += ' c_set';			// Size
-	headingList[6].className += ' c_latin';		// CRC
+	headingList[2].className += ' c_setlatin';		// ID
+	headingList[3].className += ' c_setlatin';		// EP
+	headingList[4].className += ' c_none';			// Group
+	headingList[5].className += ' c_setlatin';		// Size
+	headingList[6].className += ' c_setlatin';		// CRC
 	headingList[7].className += ' c_setlatin';		// Quality
 	headingList[8].className += ' c_latin';		// Source
 	headingList[9].className += ' c_latin';		// Resolution

@@ -14,7 +14,7 @@ var style_index = 0;
 var base_url = "http://static.anidb.net/";
 var styleList = new Array();   // Stylelist array
 var style_thumbnail, style_title, style_creator, style_status, style_updated, style_description;
-var style_apply, style_next, style_prev;
+var style_apply, style_next, style_prev, style_chooser;
  
 function fetchData() {
   var req = xhttpRequest();
@@ -57,6 +57,7 @@ function clearImg() {
 
 function updateCurrentStyle() {
   var curStyle = styleList[style_index];
+  style_chooser.value = style_index;
   // Thumbnail
   if (!style_thumbnail) style_thumbnail = document.getElementById('style_thumbnail');
   style_thumbnail.title = "Style: "+curStyle.name;
@@ -137,6 +138,7 @@ function parseData(xmldoc) {
   var t1 = new Date();
   var styleEntries = root.getElementsByTagName('style');
   // the first entry is the custom node
+  var optionArray = new Object();
   var scustom = new Object();
   scustom.name = "custom";
   scustom.title = "Custom/Default";
@@ -147,6 +149,7 @@ function parseData(xmldoc) {
   scustom.update = "N/A";
   scustom.status = "N/A";
   scustom.description = "Provide a url to a custom style sheet or leave it blank if you wish to use the default style.";
+  optionArray[styleList.length] = {'text':"custom" };
   styleList.push(scustom);
   for (var i = 0; i < styleEntries.length; i++) {
     var styleEntry = new CStyle(styleEntries[i]);
@@ -157,6 +160,7 @@ function parseData(xmldoc) {
         if (styleEntry.name.toLowerCase().indexOf(current_css.toLowerCase()) >= 0) style_index = i+1;
       }
     } // we just got the style the user is using (at least i hope we got it)
+	optionArray[styleList.length] = {'text':styleEntry.name.toLowerCase()};
     styleList.push(styleEntry);
   }
   // FUCK IE //
@@ -166,7 +170,15 @@ function parseData(xmldoc) {
   if (style_index < styleList.length-1) style_next.disabled = false;
   style_next.onclick = styleNext;
   style_prev.onclick = stylePrev;
+  style_chooser = createSelectArray(null,null,"profile.style_chooser",selectStyle,0,optionArray);
+  style_next.parentNode.insertBefore(style_chooser,style_next);
+  style_next.parentNode.insertBefore(document.createTextNode(' '),style_next);
   updateCurrentStyle();
+}
+
+function selectStyle() {
+	style_index = this.value;
+	changeStyle();
 }
 
 function prepPage() {
