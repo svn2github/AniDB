@@ -400,7 +400,8 @@ width: 8em;
 th.c_set,
 th.c_setlatin,
 th.c_date,
-th.c_latin {
+th.c_latin,
+th.c_number {
 cursor: pointer;
 background-image: url(images/buttons/updown.gif);
 background-position: right center;
@@ -411,7 +412,8 @@ padding-right: 16px;
 th.c_set:hover,
 th.c_setlatin:hover,
 th.c_date:hover,
-th.c_latin:hover {
+th.c_latin:hover,
+th.c_number:hover {
 background-color: #353A8F
 }
 
