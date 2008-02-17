@@ -7,14 +7,3 @@
 
 @import "border.css";
 @import "color.css";
-
-*
-{
-	font-size: 14px;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-}
-
-#layout-menu
-{
-	line-height: 1em;
-}
