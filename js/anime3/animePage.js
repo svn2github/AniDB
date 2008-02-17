@@ -60,6 +60,7 @@ var showNoGroup = true;
 var expandAllG = false;
 var base_url = 'http://static.anidb.net/';
 var group_vis = {'complete':false,'finished':false,'ongoing':false,'stalled':false,'dropped':false,'specials':false,'all':true};
+var simpleaddanimetomylistbox = null;
 var addfilestomylistbox = null;
 var addanimetomylistbox = null;
 
@@ -121,10 +122,17 @@ function parseData(xmldoc) {
 		createMylistAddBox(null,'files');
 	}
 	// replace the existing box with my box :P (box in a box, funny? well i guessed not)
-	var p = getElementsByClassName(document.getElementsByTagName('P'),'mylist_add',false)[0];
-	if (p) {
-		var parentNode = p.parentNode;
-		parentNode.replaceChild(createMylistAddBox(null,'anime'),p);
+	simpleaddanimetomylistbox = getElementsByClassName(document.getElementsByTagName('P'),'mylistadd',false)[0];
+	if (simpleaddanimetomylistbox) {
+		// Add an expand inline icon to allow expanding to a full version of the generic add thing
+		var span = simpleaddanimetomylistbox.getElementsByTagName('SPAN')[0];
+		if (span) {
+			var expand = document.createElement('SPAN');
+			expand.className = 'i_inline i_plus';
+			expand.title = 'Show full Add Anime to Mylist box';
+			expand.onclick = showAddAnimeToMylistBox;
+		}
+		simpleaddanimetomylistbox.insertBefore(expand,span);
 	}
 }
 
@@ -330,19 +338,32 @@ function updateEpisodeTable() {
 
 // GROUP FUNCTIONS //
 
+function showAddAnimeToMylistBox() {
+	this.className = 'i_inline i_minus';
+	this.title = 'show simple Add Anime to Mylist box';
+	var parentNode = simpleaddanimetomylistbox.parentNode;
+	parentNode.replaceChild(createMylistAddBox(null,'anime'),simpleaddanimetomylistbox);
+	simpleaddanimetomylistbox = null;
+}
+
 function showAddToMylistBox() {
-	if (!getElementsByClassName(document.getElementsByTagName('DIV'),'g_definitionlist mylist_add',false).length || addanimetomylistbox) {
+	if (!getElementsByClassName(document.getElementsByTagName('DIV'),'g_definitionlist mylist_add',false).length || addanimetomylistbox || simpleaddanimetomylistbox) {
 		// we don't have the mylist add to thingie, as i allways show checkboxes i need that
 		var eplist = document.getElementById('eplist');
 		if (!eplist) return;
 		if (!addanimetomylistbox) createMylistAddBox(eplist.parentNode,'files');
 		else {
-			eplist.parentNode.replaceChild(addfilestomylistbox,addanimetomylistbox);
+			if (simpleaddanimetomylistbox) eplist.parentNode.replaceChild(addfilestomylistbox,simpleaddanimetomylistbox);
+			else eplist.parentNode.replaceChild(addfilestomylistbox,addanimetomylistbox);
 			addanimetomylistbox = null;
 		}
 	}
 	addfilestomylistbox.style.display = '';
 	if (addanimetomylistbox && addanimetomylistbox.parentNode) addanimetomylistbox.parentNode.removeChild(addanimetomylistbox);
+	if (simpleaddanimetomylistbox && simpleaddanimetomylistbox.parentNode) {
+		simpleaddanimetomylistbox.parentNode.removeChild(simpleaddanimetomylistbox);
+		simpleaddanimetomylistbox = null;
+	}
 }
 
 function toggleFilesFromGroup() {
@@ -1644,13 +1665,13 @@ function createMylistAddBox(parentNode,type) {
 	tbody.appendChild(row);
 	if (type == 'files') {
 		optionArray = {0:{"text":' normal/original '},1:{"text":' corrupted version/invalid crc '},
-									 2:{"text":' self edited '},100:{"text":' other '}};
+						2:{"text":' self edited '},100:{"text":' other '}};
 		select = createSelectArray(null,"addl.filestate","addl.filestate",null,0,optionArray);
 		createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
 	}
 	if (type == 'anime') {
 		optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
-									 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '}};
+						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '}};
 		select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,100,optionArray);
 		createFieldValueRow(tbody,'type'+gODD(i),'Type Gen',select); i++;
 	}
