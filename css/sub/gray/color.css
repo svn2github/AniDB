@@ -67,7 +67,7 @@ input[type="password"],
 input[type="checkbox"],
 select, textarea
 {
-	color: #B0B0B0;
+	color: #b0b0b0;
 	border: #BFC2C9 1px solid;
 	background-color: #34394d;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
@@ -79,7 +79,7 @@ select, textarea
 #user-xname input,
 #user-xpass input
 {
-	color: #B0B0B0;
+	color: #b0b0b0;
 	border: #BFC2C9 1px solid;
 	background-color: #34394d;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
