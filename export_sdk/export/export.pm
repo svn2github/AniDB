@@ -99,14 +99,15 @@ sub create_tpl
 		'functions' =>
 		{
 			'jsencode' => \&export_funcs::jsencode,
-      'jsencodehtml' => \&export_funcs::jsencodehtml,
+			'jsencodehtml' => \&export_funcs::jsencodehtml,
+			'jsencodexml'  => \&export_funcs::jsencodexml,
 			'replace' => \&export_funcs::replace,
 			'ireplace' => \&export_funcs::ireplace
 		}
 	);
 	
-  $tpl->param("global_user" => "test");
-  $tpl->param("global_user_id" => "32");
+	$tpl->param("global_user" => "test");
+	$tpl->param("global_user_id" => "32");
 	$tpl->param("global_date" => "26.06.2007 12:00");
 	$tpl->param("global_date_short" => "26.06.07");
 	$tpl->param("global_animedburl" => "http://anidb.info/perl-bin/animedb.pl");

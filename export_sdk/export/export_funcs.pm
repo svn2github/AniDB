@@ -43,6 +43,26 @@ sub jsencodehtml
 	return $str;
 }
 
+sub jsencodexml
+{
+    my $str = shift;
+    
+    $str =~ s/\[i\]/\<i\>/g;
+    $str =~ s/\[\/i\]/\<\/i\>/g;
+    $str =~ s/\[b\]/\<b\>/g;
+    $str =~ s/\[\/b\]/\<\/b\>/g;
+    $str =~ s/\[u\]/\<u\>/g;
+    $str =~ s/\[\/u\]/\<\/u\>/g;
+    $str =~ s/\‘/\&#8217\;/g;
+    $str =~ s/\'/\&0000039\;/g;
+    $str =~ s/\"/\&0000034\;/g;
+    $str =~ s/\`/\&#8216\;/g;
+    $str =~ s/\r//g;
+    $str =~ s/\n/\<br \/\>/g;
+
+    return $str;
+}
+
 #replace('a','b','abcdef');
 sub replace
 {
