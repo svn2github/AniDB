@@ -27,18 +27,28 @@
 #layout-main div.latestanimes_anime
 {
 	clear: left;
-/*	padding-left: 10% */
 }
 
 #layout-main div.latestanimes_anime img
 {
 	display: block;
-	width: 15em;
-	margin: -2em 1em 1em 1em;
+	margin: -2em 1em 2em 1em;
 	float: left;
 }
 
 #layout-main div.latestanimes_anime h3
 {
-	margin: 0.5em 0 0.5em 17.3em;
+	margin: 0.5em 0 0.5em 12.25em;
+	text-align: left;
+	font-size: 14px;
+}
+
+#layout-main div.latestanimes_anime div.data table
+{
+	width: 100%;
+}
+
+#layout-main div.latestanimes_anime div.data table tbody th
+{
+	width: 15%;
 }
