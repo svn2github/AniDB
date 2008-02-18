@@ -487,7 +487,7 @@ function createGroupRow(group) {
 		cell.className = 'action icons';
 		createLink(cell,'cmt','animedb.pl?show=cmt&do=animegroup&id='+group.agid,'anidb::popup',null,'Comment on this release','i_icon i_group_comment 600.500.1.1.agcmts');
 		createLink(cell,
-				   (group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=agvote&id='+group.id,
+				   (group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=agvote&id='+group.agid,
 				   'anidb::popup',
 				   null,
 				   (group.userRating > -1) ? 'Your vote: '+group.userRating : 'Rate this release',
