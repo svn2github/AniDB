@@ -34,6 +34,7 @@ var LAY_HIDERAWS = false;
 var LAY_HIDEGROUPRAWS = false;
 var LAY_HIDEGENERICFILES = false;
 var LAY_HIDEPARODYEPS = false;
+var LAY_SHOWFID = false;
 //var LAY_HIDEEPTITLES = false;
 //var LAY_FILEHIGHLIGHT = true;
 //var LAY_PSEUDOFILES = true;
@@ -485,9 +486,13 @@ function createGroupRow(group) {
 		cell = document.createElement('TD');
 		cell.className = 'action icons';
 		createLink(cell,'cmt','animedb.pl?show=cmt&do=animegroup&id='+group.agid,'anidb::popup',null,'Comment on this release','i_icon i_group_comment 600.500.1.1.agcmts');
-		createLink(cell,(group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=pop&pop=agvote&id='+group.id,'anidb::popup',null,'Rate this release','i_icon i_vote 380.140.0.0.agvote');
+		createLink(cell,
+				   (group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=agvote&id='+group.id,
+				   'anidb::popup',
+				   null,
+				   (group.userRating > -1) ? 'Your vote: '+group.userRating : 'Rate this release',
+				   'i_icon ' +((group.userRating > -1) ? 'i_revote' : 'i_vote' )+' 380.140.0.0.agvote');
 		createLink(cell,'edit','animedb.pl?show=animegroup&agid='+group.agid,'anidb::popup',null,'Request edit of the state','i_icon i_file_edit 400.400.0.0.agstate');
-		//createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
 		row.appendChild(cell);
 	}
   return (row);
@@ -1092,10 +1097,17 @@ function createFileIcons(file) {
 	// fid
 	if (file.pseudoFile || (file.relatedFiles && file.relatedFiles.length)) 
 		icons['expand'] = createIcon(null, '[+]', null, expandFiles, 'expand this entry', 'i_plus');
-	if (!file.pseudoFile)
-		icons['fid'] = createIcon(null, file.id, 'animedb.pl?show=file&fid='+file.id, null, 'show file details - FID: '+file.id, 'i_file_details');
-	else
-		icons['fid'] = createIcon(null, 'P'+file.id, 'http://wiki.anidb.net/w/Files:Pseudo_files', null, 'Pseudo File: P'+file.id, 'i_file_details');
+	if (!LAY_SHOWFID) {
+		if (!file.pseudoFile)
+			icons['fid'] = createIcon(null, file.id, 'animedb.pl?show=file&fid='+file.id, null, 'show file details - FID: '+file.id, 'i_file_details');
+		else
+			icons['fid'] = createIcon(null, 'P'+file.id, 'http://wiki.anidb.net/w/Files:Pseudo_files', null, 'Pseudo File: P'+file.id, 'i_file_details');
+	} else {
+		if (!file.pseudoFile)
+			icons['fid'] = createLink(null, file.id, 'animedb.pl?show=file&fid='+file.id, null, null ,null, null);
+		else
+			icons['fid'] = createLink(null, 'P'+file.id, 'http://wiki.anidb.net/w/Files:Pseudo_files', null, null ,null, null);
+	}
 	// extension
   if (file.type != 'generic') {
     var tooltip = 'type: '+file.type+' | added: '+cTimeDate(file.date);

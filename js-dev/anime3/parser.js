@@ -501,6 +501,7 @@ function parseConfig(node) {
         LAY_HIDERAWS = (lay & 1024) ? true : false;
         LAY_HIDEGENERICFILES = (lay & 4096) ? true : false;
         LAY_HIDEPARODYEPS = (lay & 131072) ? true : false;
+		LAY_SHOWFID = (lay & 268435456) ? true : false;
         break;
       case 'animelang':
         for (var j = 0; j < sNode.childNodes.length; j++) {
