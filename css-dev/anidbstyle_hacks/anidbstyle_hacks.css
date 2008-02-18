@@ -1,5 +1,5 @@
 /* Creation: 21th January 2007 by Amour */
-/* Last update: 10th June 2007 by Amour */
+/* Last update: 18th February 2008 by Amour */
 @import "../common/style/icons/awards.css";
 @import "../anidbstyle/anidbstyle.css";
 
@@ -59,41 +59,47 @@
 /* *** */
 /* Anime: workaround to image/definition position */
 /* *** */
-#layout-content div.info div.image
+#layout-main div.info div.block
 {
-	float: left;
-	padding-bottom: 0px;
-	height: auto;
-	width: auto;
+	display: block;	/*for FF*/
 }
 
-/* *** */
-/* Anime: fix to description position */
-/* *** */
-#layout-content div.info p.desc
+#layout-main div.info div.block div.image
 {
-	clear: both;
+	float: left;	/*for IE*/
+	padding-bottom: 0px;	/*for IE*/
+	width: auto;	/*for FF*/
+}
+
+#layout-main div.info div.block div.data,
+{
+	width: auto;	/*for FF*/
 }
 
 /* *** */
 /* Profile: workaround to image/definition position */
+/* Unfortunatly, it brokes Firefox */
 /* *** */
-#layout-content div.profile_css div.block div.image
+/*
+#layout-main div.block div.image
 {
-	clear: both;
 	float: left;
-	padding: 0px;
-	height: auto;
-	width: 40%;
+	width: auto;
 }
 
-#layout-content div.profile_css div.block div.info
+#layout-main div.block div.info
 {
-	clear: none;
 	float: left;
-	padding: 0px;
-	height: auto;
-	width: 60%;
+	width: auto;
+}
+*/
+
+/* *** */
+/* Anime: fix to description position */
+/* *** */
+#layout-main div.info div.desc
+{
+	clear: both;
 }
 
 /* *** */

@@ -7,6 +7,7 @@
 }
 
 /* remove odd coloring in some divs */
+div.mylistadd .g_odd,
 div.mylist_edit .g_odd,
 div.search .g_odd,
 div.g_menu .g_odd,
@@ -14,12 +15,15 @@ div.mylist_dump .g_odd,
 div.ed2kdump_options .g_odd,
 div.mylist_add .g_odd,
 div.g_actionlist .g_odd,
+div.addgenren_form .g_odd,
+div.latestanimes_anime .g_odd,
 li.cat
 {
 	background-color: transparent !important;
 }
 
 /* calendar fix */
+
 div.latestanimes_anime table
 {
 	margin-bottom: 20px;
@@ -29,6 +33,11 @@ div.latestanimes_anime table
 div.latestanimes_anime h3
 {
 	text-align: left;
+}
+
+div.latestanimes_anime th
+{
+	width: 20%;
 }
 
 /* buttons and input boxes customization */
@@ -46,6 +55,7 @@ button[type="submit"]
 	background-color: #999999;
 	border: 1px solid #444444;
 	color: #000000;
+	height: 16px;
 }
 
 input[type="button"]:hover,
@@ -257,49 +267,16 @@ td.quality .i_rate_halfstar
 }
 
 /* profile styling */
-div.profile_all > div.general,
-div.new_files
-{
-	left: 25%;
-	position: relative;
-	width: 50%;
-}
-
-div.permissions div.detailed td
-{
-	text-align: center;
-}
-
-div.permissions div.detailed th
-{
-	text-align: left;
-}
-
 *.i_inline
 {
 	padding: 2px 8px 2px 8px;
 	margin: 4px;
 }
 
-*.i_icon span, *.i_button span, *.i_inline span
+div.css_style div.block
 {
-	display: none;
-}
-
-*.i_help
-{
-	background: url(http://static.anidb.net/css/icons/ask2.gif) no-repeat center center;
-	cursor: help;
-}
-
-div.css_style .i_help
-{
-	display: none;
-}
-
-div.profile_all div
-{
-	padding-bottom: 1em;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* tooltip support */
@@ -342,6 +319,7 @@ th, td.action.icons
 	width: 60px;
 }
 
+/* fix for lates anime files */
 div.latest_files_list table
 {
 	width: 100%;
@@ -375,23 +353,9 @@ div.mylist_list .g_odd.files
 	text-align: center;
 }
 
-/* fix for mylist_add */
-div.mylist_add
-{
-	margin-left: auto;
-	margin-right: auto;
-	width: 300px;
-}
-
 table.filelist tr.generic td
 {
 	background-color: white;
-}
-
-/* fix for episode info */
-a.i_file_details
-{
-	text-indent: 5000px;
 }
 
 /* fix for mylist size */
@@ -408,9 +372,23 @@ a.i_file_details
 	height: 20px;
 }
 
-/* fix jumplist */
+/* fix for jumplist */
 ul.g_list.jump
 {
 	margin: 2em 0 2em 0;
 }
 
+/* search input box fix */
+div.search input.text
+{
+	width: 90% !important;
+}
+
+/* add section fix */
+div.mylistadd table,
+div.ed2kdump_options table
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 350px;
+}
