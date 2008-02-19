@@ -6,7 +6,7 @@
 	width: 142px;
 	height: 603px;
 	padding: 51px 0px 0px 28px;
-	background: transparent url(images/menuback.png) no-repeat top left;
+	background: transparent url(/css/anidbstyle-dongato/images/menuback.png) no-repeat top left;
 }
 
 #layout-menu ul
@@ -53,19 +53,19 @@
 
 #layout-search
 {
-	background: transparent url(images/backlame.png) repeat-x top;
+	background: transparent url(/css/anidbstyle-dongato/images/backlame.png) repeat-x top;
 	width: 100%;
 }
 
 #layout-search div.search
 {
-	background: transparent url(images/anidb01toosimple.png) no-repeat top left;
+	background: transparent url(/css/anidbstyle-dongato/images/anidb01toosimple.png) no-repeat top left;
 	height: 94px;
 }
 
 #layout-search div.search form
 {
-	background: transparent url(images/searchback.png) no-repeat top right;
+	background: transparent url(/css/anidbstyle-dongato/images/searchback.png) no-repeat top right;
 	position: absolute;
 	top: 77px;
 	left: auto;

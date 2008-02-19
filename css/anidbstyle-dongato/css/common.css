@@ -1,12 +1,12 @@
-@import "../common/normalize.css";
-@import "../common/layout/default.css";
-@import "../common/layout/common.css";
+@import "/css/anidbstyle-dongato/common/normalize.css";
+@import "/css/anidbstyle-dongato/common/layout/default.css";
+@import "/css/anidbstyle-dongato/common/layout/common.css";
 
-@import "../common/layout/global/all.css";
-@import "../common/layout/page/all.css";
+@import "/css/anidbstyle-dongato/common/layout/global/all.css";
+@import "/css/anidbstyle-dongato/common/layout/page/all.css";
 
-@import "../common/style/color/msgbox-default.css";
-@import "../common/style/color/special.css";
-@import "../common/style/content/page-anime.css";
-@import "../common/style/icons/default.css";
-@import "../common/style/text/default.css";
+@import "/css/anidbstyle-dongato/common/style/color/msgbox-default.css";
+@import "/css/anidbstyle-dongato/common/style/color/special.css";
+@import "/css/anidbstyle-dongato/common/style/content/page-anime.css";
+@import "/css/anidbstyle-dongato/common/style/icons/default.css";
+@import "/css/anidbstyle-dongato/common/style/text/default.css";

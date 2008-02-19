@@ -34,10 +34,15 @@ img, a
 }
 
 #layout-main div.anime_all div.groups tr.header th,
-#layout-main div.anime_all div.episodes tr.header th
+#layout-main div.anime_all div.episodes tr.header.episode th
 {
 	padding: 4px 1px 7px 1px;
 	border-bottom: black 2px solid;
+}
+
+#layout-main table.filelist tr.header th
+{
+	border-bottom: 1px solid Gray;
 }
 
 #layout-main div.anime_all div.episodes tr.newtype td
