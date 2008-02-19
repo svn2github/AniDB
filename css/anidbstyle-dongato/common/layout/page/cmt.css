@@ -24,6 +24,7 @@
 #layout-main div.comment span.stamp span.icons
 {
 	float: left;
+	margin-top: 4px;
 }
 
 #layout-main div.cmt_all div.topic_actions
