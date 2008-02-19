@@ -2,35 +2,35 @@
 {
 	width: 15px;
 	height: 15px;
-	background-image: url(/css/anidbstyle-dongato/images/type_tv.gif);
+	background-image: url(images/type_tv.gif);
 }
 
 *.i_movie
 {
 	width: 15px;
 	height: 15px;
-	background-image: url(/css/anidbstyle-dongato/images/type_movie.gif);
+	background-image: url(images/type_movie.gif);
 }
 
 *.i_ova
 {
 	width: 15px;
 	height: 15px;
-	background-image: url(/css/anidbstyle-dongato/images/type_ova.gif);
+	background-image: url(images/type_ova.gif);
 }
 
 *.i_web
 {
 	width: 15px;
 	height: 15px;
-	background-image: url(/css/anidbstyle-dongato/images/type_web.gif);
+	background-image: url(images/type_web.gif);
 }
 
 *.i_tv_special
 {
 	width: 15px;
 	height: 15px;
-	background-image: url(/css/anidbstyle-dongato/images/type_special.gif);
+	background-image: url(images/type_special.gif);
 }
 
 *.i_other, *.i_unknown
