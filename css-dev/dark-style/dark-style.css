@@ -24,6 +24,7 @@ a {
 a:hover {
 	color:					#c9f;
 }
+.g_list a,
 .g_actionlist a,
 .g_jumplist a,
 .latestanimes_form a,
@@ -31,6 +32,7 @@ a:hover {
 .news a {
 	color:					#E6D4B5;
 }
+.g_list a:hover,
 .g_actionlist a:hover,
 .g_jumplist a:hover,
 .latestanimes_form a:hover,
@@ -73,6 +75,11 @@ table caption {
 	color:					#fff;
 	background:				url(images/h4.gif) left top no-repeat;
 	color:					
+}
+
+
+.hide {
+	display:				none;
 }
 
 
@@ -121,71 +128,101 @@ fieldset {
 	background:				url(images/dark.gif) 1px top no-repeat;
 	overflow:				visible;
 }
+
+#layout-menu span.tab,
+#layout-tabs {
+	display:				none;
+}
 #layout-menu ul {
 	display:				block;
 	width:					150px;
 	float:					left;
 }
-ul.main {
+ul#menu-main {
 	position:				relative;
-	top:					115px;
+	top:					100px;
 	left:					215px;
 }
-ul.main a {
+ul#menu-main a {
 	color:					#000;
 	background-color:			#fff;
 }
-ul.main a:hover {
+ul#menu-main a:hover {
 	color:					#c9f;
 }
-ul.my {
+ul#menu-private {
 	position:				relative;
-	top:					5px;
+	top:					0;
 	left:					20px;
 }
-ul.mod {
+ul#menu-mod {
 	position:				relative;
-	top:					5px;
+	top:					0;
 	left:					230px;
 }
-ul.mod li {
+ul#menu-mod li {
 	background-color:			transparent;
 }
-ul.lists {
+ul#menu-lists {
 	position:				relative;
 	top:					60px;
 	left:					320px;
 }
-ul.lists a {
+ul#menu-lists a {
 	color:					#E6D4B5;
 }
-ul.lists a:hover {
+ul#menu-lists a:hover {
 	color:					#fff;
 }
-ul.other {
+ul#menu-support {
 	position:				relative;
-	top:					15px;
-	left:					-20px;
+	top:					0;
+	left:					-15px;
 }
-ul.other a {
+ul#menu-support a {
 	color:					#000;
 	background-color:			#fff;
 }
-ul.other a:hover {
+ul#menu-support a:hover {
 	color:					#c9f;
 }
 
 /*													      user-menu */
 
-#layout-menu div.usermenu {
+ul#menu-account {
+	float:					right;
+	text-align:				right;
+	margin-right:				10px;
+	position:				relative;
+	top:					-5px;
+}
+*#user-logout a,
+*#user-profile a {
+	width:					42px;
+	height:					12px;
 	float:					right;
 }
-#layout-menu div.usermenu p {
-	text-align:				right;
-	margin:					10px;
+*#user-logout a {
+	background-image:			url(images/button_logout.gif);
+	position:				relative;
+	top:					-3px;
+	left:					10px;
 }
-#layout-menu div.usermenu p a.i_button {
-	text-align:				left;
+*#user-logout a:hover {
+	background-image:			url(images/button_logout_over.gif);
+}
+*#user-profile a {
+	background-image:			url(images/button_profile.gif);
+	position:				relative;
+	top:					5px;
+}
+*#user-profile a:hover {
+	background-image:			url(images/button_profile_over.gif);
+}
+
+#user-profile a span,
+#user-logout a span {
+display: none;
 }
 
 /*														 search */
@@ -327,6 +364,7 @@ dd {
 .g_odd {
 	background-color:			#333;
 }
+ul.g_list .g_odd,
 ul.g_actionlist .g_odd,
 ul.g_jumplist .g_odd,
 ul.g_navlist .g_odd,
@@ -391,6 +429,7 @@ tr.action td {
 ul.g_actionlist {
 	margin:					20px 0;
 }
+
 ul.g_actionlist li {
 	display:				inline;
 	font-style:				italic;
@@ -399,6 +438,7 @@ ul.g_actionlist li {
 	padding-left:				0;
 	padding-right:				0;
 }
+
 ul.g_actionlist li a {
 	display:				inline;
 	font-style:				normal;
@@ -450,6 +490,7 @@ ul.g_jumplist li.all:before {
 	content:				"Jump to: ";
 }
 
+ul.g_list,
 ul.g_navlist,
 div.mylist_menu ul,
 div.messages ul {
@@ -457,11 +498,13 @@ div.messages ul {
 	clear:					both;
 	text-align:				center;
 }
+ul.g_list li,
 ul.g_navlist li,
 div.mylist_menu ul li,
 div.messages ul li {
 	display:				inline;
 }
+ul.g_list li a,
 ul.g_navlist li a,
 div.mylist_menu ul li a,
 div.messages ul li a {
@@ -1775,24 +1818,6 @@ div.genren_all li.collapsed ul {
 
 /* nav */
 
-*.i_logon {
-	background-image:			url(images/button_logon.gif);
-}
-*.i_logout {
-	background-image:			url(images/button_logout.gif);
-}
-*.i_logout:hover {
-	background-image:			url(images/button_logout_over.gif);
-}
-*.i_profile {
-	background-image:			url(images/button_profile.gif);
-	position:				relative;
-	top:					-5px;
-	left:					10px;
-}
-*.i_profile:hover {
-	background-image:			url(images/button_profile_over.gif);
-}
 *.i_punkt {
 	background-image:			url(images/button_punkt.gif);
 }
@@ -2271,3 +2296,4 @@ div.latestanimes_all img[src*="nopic.gif"] {
 #layout-tabs {
 	display:none;
 }
+

@@ -319,8 +319,9 @@ table.filelist tr.generic td
 	height: 20px;
 }
 
-/* fix for jumplist */
-ul.g_list.jump
+/* fix for jumplist/pagination */
+ul.g_list.jump,
+div.pagination
 {
 	margin: 2em 0 2em 0;
 }
@@ -350,4 +351,11 @@ input[type=checkbox]
 div.anime_form th
 {
 	vertical-align: top;
+}
+
+div.cmt_all h4
+{
+	display: block;
+	margin: 2em;
+	font-size: 14px;
 }
