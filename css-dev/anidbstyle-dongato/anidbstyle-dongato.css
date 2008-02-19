@@ -17,6 +17,7 @@ div.mylist_add .g_odd,
 div.g_actionlist .g_odd,
 div.addgenren_form .g_odd,
 div.latestanimes_anime .g_odd,
+div.anime_form .g_odd,
 li.cat
 {
 	background-color: transparent !important;
@@ -343,4 +344,10 @@ div.ed2kdump_options table
 input[type=checkbox]
 {
 	margin: 2px;
+}
+
+/* fixed alignement of table headers */
+div.anime_form th
+{
+	vertical-align: top;
 }
