@@ -1,41 +1,41 @@
-*.i_atype_tv_series
-{ 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(images/type_tv.gif); 
+*.i_tv_series
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_tv.gif);
 }
 
-*.i_atype_movie
-{ 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(images/type_movie.gif); 
+*.i_movie
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_movie.gif);
 }
 
-*.i_atype_ova
-{ 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(images/type_ova.gif); 
+*.i_ova
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_ova.gif);
 }
 
-*.i_atype_web
-{ 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(images/type_web.gif); 
+*.i_web
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_web.gif);
 }
 
-*.i_atype_tv_special
-{ 
-	width: 15px; 
-	height: 15px; 
-	background-image: url(images/type_special.gif); 
+*.i_tv_special
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_special.gif);
 }
 
-*.i_atype_other, *.i_atype_unknown
-{ 
-	display: none; 
+*.i_other, *.i_unknown
+{
+	display: none;
 }
 
 *.i_recap

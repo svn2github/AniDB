@@ -54,7 +54,7 @@ th, td.action, td.date, td.year,
 	white-space: nowrap;
 }
 
-td.id, td.count, td.number, td.size, td.epno, td.duration,
+td.id, td.count, td.number, td.size, td.duration,
 #layout-main div.up2date_file_list table td.mylist
 {
 	text-align: right;
@@ -69,7 +69,7 @@ th.field, td.value, td.name, td.quality, td.title, td.name,
 }
 
 th, h1, h2, h3, h4, form,
-tr.action td.value, td.stats,
+tr.action td.value, td.stats, td.epno,
 td.state, td.type, td.date, td.action, td.icon, td.ignore,
 td.name.user, td.name.owner, td.vote, td.rating, td.check,
 .g_list, .g_info, .g_input, .g_section,

@@ -22,50 +22,10 @@ li.cat
 	background-color: transparent !important;
 }
 
-/* calendar fix */
-
-div.latestanimes_anime table
-{
-	margin-bottom: 20px;
-	width: 80%;
-}
-
-div.latestanimes_anime h3
-{
-	text-align: left;
-}
-
-div.latestanimes_anime th
-{
-	width: 20%;
-}
-
 /* buttons and input boxes customization */
 input[type="checkbox"], input[type="radio"]
 {
 	vertical-align: middle;
-}
-
-input[type="button"],
-input[type="submit"],
-input[type="reset"],
-button[type="submit"]
-{
-	color: black;
-	background-color: #999999;
-	border: 1px solid #444444;
-	color: #000000;
-	height: 16px;
-}
-
-input[type="button"]:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover
-{
-	color: black;
-	background-color: #777777;
-	border: 1px solid #222222;
-	color: #000000;
 }
 
 input[type="text"],
@@ -86,20 +46,6 @@ input[type="password"]
 {
 	padding-left: 3px;
 	padding-right: 3px;
-}
-
-/* a little space between borders for content window */
-div.g_content
-{
-	margin-left: auto;
-	margin-right: auto;
-	width: 98%;
-}
-
-/* center text in table */
-.more
-{
-	text-align: center;
 }
 
 /* center and align group description */
@@ -391,4 +337,10 @@ div.ed2kdump_options table
 	margin-left: auto;
 	margin-right: auto;
 	width: 350px;
+}
+
+/* a little space for checkboxes */
+input[type=checkbox]
+{
+	margin: 2px;
 }

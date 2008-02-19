@@ -1,11 +1,11 @@
 @import "common.css";
 
-@import "../../common/style/color/status-radioactive.css";
+@import "../common/style/color/status-radioactive.css";
 
-@import "border.css";
-@import "color.css";
 @import "layout.css";
 @import "menu-user.css";
+@import "border.css";
+@import "color.css";
 @import "text.css";
 
 body,
