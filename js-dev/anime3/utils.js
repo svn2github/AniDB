@@ -1118,7 +1118,7 @@ function createHashLink() {
   pattern = applyFormat(pattern,file,episode,anime,group);
   if (hashObj.convertSpaces) pattern = pattern.replace(/ /mgi,hashObj.spacesChar);
   //alert('pattern.out: '+pattern);
-  ahref.href = pattern;
+  ahref.href = pattern+'/';
 }
 
 // TOOLTIP FUNCTIONS //
