@@ -1,7 +1,54 @@
-@import "../common/style/icons/flags.css";
 @import "../common/style/icons/default.css";
 @import "../common/layout/page/latestanimes.css";
+@import "../common/layout/page/animeatt.css";
 @import "../common/style/icons/awards.css";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
+margin:0;
+padding:0;
+}
+h4 span,
+span.test,
+.tabbed_pane ul.tabs li,
+div.pagination span strong,
+div.pagination span a
+{
+padding: 1px 2px 1px 2px;
+cursor: default;
+}
+#layout-main h1,
+#layout-main .g_section,
+#layout-main .g_list,
+#layout-main .g_msg,
+#layout-main div.addepm div.ep,
+#layout-main div.cmt_all div.topic_actions
+{
+margin-bottom: 1em;
+}
+#layout-main .g_end
+{
+padding: 0;
+margin: 0;
+clear: right;
+border: none;
+}
+
+#layout-main .g_section,
+#layout-main .g_list
+{
+clear: both;
+}
+
+#layout-main .g_list.type
+{
+float: left;
+}
+
+#layout-main .g_list.limit
+{
+float: right;
+}
+
+
 html
 {
 	width: 100%;
@@ -11,7 +58,7 @@ html
 	line-height: 1.2;
 	font-family: "Arial Unicode MS", Verdana, Tahoma, Arial, Helvetica, sans-serif;
 	color: white;
-	background-image: url(images/bg_2.gif);
+	background-image: url(images/bg_1.gif);
 }
 body
 {
@@ -73,9 +120,12 @@ form input[type="button"]:hover
 	background-image: url(images/blackpixel.png);
 	border-color: #797979;
 }
-ul
+ul,
+ol
 {
 	list-style-type: none;
+	list-style-image: none;
+	list-style-position: outside;
 }
 dl dt
 {
@@ -160,28 +210,20 @@ span.g_navnext
 {
 	font-style: italic;
 }
-#layout-content div.userpage_all ul.g_navlist
+#layout-content div.userpage_all ul.g_list
 {
 	float: none;
 	text-align: center;
 }
-#layout-content ul.g_navlist li
+#layout-content ul.g_list li
 {
-	padding: 0px;
-}
-#layout-content ul.g_navlist li:before
-{
-	content: " | "
-}
-#layout-content ul.g_navlist li:first-child:before
-{
-	content: "";
+	padding: 0 0 0 0;
 }
 td.action
 {
 	text-align: center;
 }
-#layout-content div.g_errorbox
+#layout-content div.g_msg.error
 {
 	border: 1px solid #c40d0d;
 	background: url(images/bg_2.gif);
@@ -195,21 +237,21 @@ td.action
 	margin: 2em;
 	padding: 1.2em;
 }
-#layout-content div.g_notebox
+#layout-content div.g_msg.note
 {
 	border: 1px solid maroon;
 	background: url(images/bg_2.gif);
 	margin: 2em;
 	padding: 1.2em;
 }
-#layout-content div.g_successbox
+#layout-content div.g_msg.success
 {
 	border: 1px solid #1D6125;
 	background: url(images/bg_2.gif);
 	margin: 2em;
 	padding: 1.2em;
 }
-#layout-content div.g_errorbox h3
+#layout-content div.g_msg.error h3
 {
 	color: red;
 }
@@ -217,18 +259,18 @@ td.action
 {
 	color: #FF6000;
 }
-#layout-content div.g_notebox h3
+#layout-content div.g_msg.note h3
 {
 	color: #006600;
 }
-#layout-content div.g_successbox h3
+#layout-content div.g_msg.success h3
 {
 	color: #2EB42E;
 }
-#layout-content div.g_errorbox *,
+#layout-content div.g_msg.error *,
 #layout-content div.g_warnbox *,
-#layout-content div.g_notebox *,
-#layout-content div.g_successbox *
+#layout-content div.g_msg.note *,
+#layout-content div.g_msg.success *
 {
 	display: inline;
 }
@@ -267,7 +309,7 @@ td.action
 {
 	text-align: left;
 }
-#layout-content div,
+
 #layout-content table,
 #layout-content table caption
 {
@@ -275,12 +317,12 @@ td.action
 	margin-right: auto;
 }
 #layout-content .g_filterlist,
-#layout-content .g_actionlist,
+#layout-content .g_list.links,
 #layout-content .g_info
 {
 	text-align: center;
 }
-#layout-content .g_actionlist .g_odd
+#layout-content .g_list.links .g_odd
 {
 	background: inherit;
 }
@@ -288,7 +330,6 @@ td.action
 {
 	float: right;
 }
-#layout-content div.g_section,
 #layout-content div.g_filterlist
 {
 	clear: both;
@@ -318,7 +359,9 @@ td.action
 {
 	text-align: right;
 }
-#layout-content ul.g_jumplist,
+#layout-content ul.g_list.nav,
+#layout-content ul.g_list.jump,
+#layout-content ul.g_list.limit,
 #layout-tabs ul.main-tabs
 {
 	padding-left: 0;
@@ -327,8 +370,10 @@ td.action
 	width: 100%;
 	text-align: center;
 }
-#layout-content ul.g_actionlist li,
-#layout-content ul.g_jumplist li,
+#layout-content ul.g_list.nav li,
+#layout-content ul.g_list.links li,
+#layout-content ul.g_list.jump li,
+#layout-content ul.g_list.limit li,
 #layout-tabs ul.main-tabs li
 {
 	display: inline;
@@ -337,35 +382,42 @@ td.action
 	padding-left: 0;
 	padding-right: 0;
 }
-#layout-content ul.g_actionlist li a,
-#layout-content ul.g_jumplist li a,
+#layout-content ul.g_list.nav li a,
+#layout-content ul.g_list.links li a,
+#layout-content ul.g_list.jump li a,
+#layout-content ul.g_list.limit li a,
 #layout-tabs ul.main-tabs
 {
 	display: inline;
 	font-style: normal;
 }
-#layout-content ul.g_jumplist li.prev:after,
-#layout-content ul.g_jumplist li.next:after,
-#layout-content ul.g_jumplist li.other:after
+#layout-content ul.g_list.jump li+li:before,
+#layout-content ul.g_list.limit li+li:before
+{
+	font-style: normal;
+	content: " | ";
+}
+#layout-content ul.g_list.nav li.prev:after,
+#layout-content ul.g_list.nav li.next:after,
+#layout-content ul.g_list.nav li.other:after,
+#layout-content ul.g_list.jump li.prev:before,
+#layout-content ul.g_list.jump li.next:before,
+#layout-content ul.g_list.jump li.all:before
 {
 	content: "";
 }
-#layout-content ul.g_jumplist li:after
-{
-	font-style: normal;
-	content: " |";
-}
-#layout-content ul.g_jumplist li.prev
+#layout-content ul.g_list.jump li.prev
 {
 	padding-left: 1em;
 	float: left;
 }
-#layout-content ul.g_jumplist li.next
+#layout-content ul.g_list.jump li.next
 {
 	padding-right: 1em;
 	float: right;
 }
-#layout-content ul.g_actionlist li+li:before,
+#layout-content ul.g_list.links li+li:before,
+#layout-content ul.g_list.nav li+li:before,
 #layout-content ul.main-tabs li+li:before
 {
 	content: " - ";
@@ -383,18 +435,20 @@ td.action
 #layout-nav
 {
 	position: fixed;
-	width: 12em;
-	height: 100%;
+	width: 100%;
+	height: 2em;
 	padding-top: 0px;
 	/*background: #232323;*/
-	/*background-image: url(images/bg_2.gif);*/
+	background-image: url(images/bg_2.gif);
 }
 #layout-menu
 {
 	text-align: left;
-	width: 11em;
 	margin-left: 1em;
 	margin-right: 1em;
+	margin-bottom: 1em;
+	margin-top: 0.4em;
+	display: block;
 }
 #layout-menu ul
 {
@@ -403,19 +457,12 @@ td.action
 	padding-left: 2px;
 	padding-top: 3px;
 	padding-bottom: 1px;
-	width: 100%;
 }
 #layout-menu ul li
 {
 	list-style: none;
 	margin-top: 0px;
-	width: 100%;
 	height: 1em;
-}
-#layout-menu div.usermenu
-{
-	color: #ff6000;
-	text-align: center;
 }
 #layout-menu div.menu li.calendar, #layout-menu div.menu li.ed2kdump, #layout-menu div.menu li.genre
 {
@@ -471,33 +518,39 @@ td.action
 	white-space: nowrap;
 	margin: auto;
 }
-#layout-menu div.usermenu *.i_profile
+#layout-search
 {
-	margin-right: 1.7em;
+display: inline;
+padding: 0 0 0 0;
+margin: -20px 0 0 0;
+float: right;
+clear: right;
 }
 #layout-search form input.text
 {
 	width: 11.4em;
 	font-size: 10px;
-	margin-left: 0.2em;
+	margin: 0;
+	padding: 0;
 	background: url(images/whitepixel.png);
 }
 #layout-search form p
 {
-	text-align: center;
+	text-align: right;
 }
 #layout-search form input.submit,
-form input[type="submit"]
+form button[type="submit"]
 {
-	margin-top: 0.5em;
+	margin: 0;
+	padding: 0;
 	color: white;
-	font-size: 13px;
+	font-size: 11px;
 	border-style: dashed;
 	border-color: #565656;
 	background: url(images/whitepixel.png);
 }
 #layout-search form input.submit:hover,
-form input[type="submit"]:hover
+form button[type="submit"]:hover
 {
 	color: #ff6000;
 	background: url(images/redpixel.png);
@@ -505,12 +558,10 @@ form input[type="submit"]:hover
 }
 #layout-content
 {
-	margin-left: 12em;
-	padding-top: 0.5em;
-	padding-left: 0.5em;
+	margin: 0 0 0 0;
+	padding-top: 3em;
 	padding-bottom: 0.1em;
-	background-image: url(images/whitepixel.png);
-	min-height: 90%
+	width: 100%;
 }
 body.nonav #layout-content
 {
@@ -535,12 +586,11 @@ body.nonav #layout-content h1
 {
 	color: white;
 }
-#layout-nav li:hover a
+#layout-nav li li:hover a
 {
 	color: #ff6000;
 	cursor: default;
 	display:block;
-	width: 10.8em;
 	background-image: url(images/whitepixel.png);
 }
 #layout-content div.section
@@ -563,12 +613,13 @@ body.nonav #layout-content h1
 #layout-footer
 {
 	text-align: center;
-	margin-left: 13em;
+	margin-left: 0;
+	background-image: url(images/bg_2.gif);
 }
 #layout-footer p
 {
-	margin-top: 1.9em;
-	padding-bottom: 0.5em;
+	margin-top: 3em;
+	padding-bottom: 0.3em;
 }
 #layout-content div.anime_info div.data dd.anirec
 {
@@ -920,17 +971,7 @@ body.nonav #layout-content h1
 {
 	margin: 1em;
 }
-#layout-content div.animelist_navtop,
-#layout-content div.animelist_navbottom,
-#layout-content div.animelist_actions
-{
-	text-align: center;
-}
-#layout-content div.animelist_navtop,
-#layout-content div.animelist_navbottom
-{
-	padding: 1em 0 0.5em 0;
-}
+
 #layout-content div.animelist_list table
 {
 	margin-left: auto;
@@ -940,15 +981,15 @@ body.nonav #layout-content h1
 {
 	float: left;
 }
-#layout-content div.animelist_navtop ul,
-#layout-content div.animelist_navbottom ul
-{
-	margin-bottom: 0.3em;
-}
-#layout-content div.animelist_navtop ul:before,
-#layout-content div.animelist_navbottom ul:before
+
+#layout-content div.animelist_list .g_list ul:before
 {
 	content: "Jump to"
+}
+#layout-content div.animelist_list .g_list il:before,
+#layout-content div.animelist_list .g_list il:after
+{
+	content: ""
 }
 #layout-content div.dbstats_all
 {
@@ -1007,6 +1048,10 @@ body.nonav #layout-content h1
 {
 	display: table;
 	margin-left: 0.3em;
+}
+#layout-content div.dbstats_all div.dbstats table
+{
+	width: 100%;
 }
 /* Default center is probably too zealous... */
 #layout-content div.ep_info table
@@ -1238,11 +1283,11 @@ body.nonav #layout-content h1
 	content: "type: ";
 	font-style: normal;
 }
-#layout-content div.latestreviews_all ul.g_navlist
+#layout-content div.latestreviews_all ul.g_list
 {
 	text-align: right;
 }
-#layout-content div.latestreviews_all ul.g_navlist:before
+#layout-content div.latestreviews_all ul.g_list:before
 {
 	content: "show: ";
 }
@@ -1526,7 +1571,7 @@ body.nonav #layout-content h1
 {
 	margin-left: 50px;
 }
-#layout-content div.userpage_all ul.g_actionlist,
+#layout-content div.userpage_all ul.g_list.links,
 #layout-content div.userpage_all div.charts div.mylisthistory
 {
 	clear: both;
@@ -1582,14 +1627,8 @@ body.nonav #layout-content h1
 {
 	float: left;
 }
-#layout-content div.stats_all
-{
-	padding-left: 9.6em;
-	padding-right: 8em;
-}
 #layout-content div.stats_all div.stats
 {
-	float: left;
 	margin: 0.3em 0.1em 0.1em 0.3em;
 	min-width: 15em;
 }
@@ -1721,9 +1760,9 @@ a.i_icon:hover, a.i_inline:hover
 }
 #layout-content div.animeatt_reviews div.review
 {
-	clear: right;
 	border: #898989 1px dashed;
 	margin-right: 0.5em;
+	margin-left: 0.5em;
 	min-height: 42em;
 }
 #layout-content div.animeatt_reviews div.review h2
@@ -1752,7 +1791,6 @@ a.i_icon:hover, a.i_inline:hover
 #layout-content div.animeatt_reviews div.review div.menu
 {
 	float: right;
-	clear: right;
 	width: 10em;
 	padding-right: 2em;
 }
@@ -1766,7 +1804,7 @@ a.i_icon:hover, a.i_inline:hover
 {
 	width: 10em;
 }
-#layout-content div.animeatt_reviews div.review div.body
+#layout-content div.animeatt_reviews div.review div.text
 {
 	text-align: left;
 	margin: 0 14em 1em 8em;
@@ -2097,4 +2135,68 @@ a.i_icon:hover, a.i_inline:hover
 #layout-content div.anime_all div.episodes table table.filelist td.id .i_icon
 {
 	text-align: left;
+}
+#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account
+{
+	display: none;
+	z-index: 7;
+	position: absolute;
+	top: 16px;
+}
+ul#layout-menu li ul.popup{
+display: block;
+position: absolute;
+background-image: url(images/bg_2.gif);
+padding-top: 0px;
+padding-right: 6px;
+padding-bottom: 6px;
+padding-left: 6px;
+margin-left: -6px;
+margin-top: 0px;
+}
+
+ul#layout-menu li ul li{
+float: none;
+display: block;
+line-height: normal;
+white-space: nowrap;
+margin-left: 0;
+margin-right: 0;
+}
+ul#layout-menu li {
+float: left;
+margin-left: 10px;
+}
+#layout-menu
+{
+cursor: default;
+}
+#layout-main .g_image image,
+#layout-main .g_definitionlist
+{
+padding: 1px;
+}
+
+#layout-main .block .g_definitionlist table
+{
+border: none;
+margin: 0;
+}
+html, body, div, form, table, tr, td, ol, dl, li, dt, dd, h1, h2, h3, h4, p, caption
+{
+left: 0;
+}
+#layout-content div.group_all div.group_released table td.undumped
+{
+	visibility: hidden;
+}
+#layout-content div.group_all div.group_released table td.notalldumped
+{
+	visibility: visible;
+	color: red;
+	font-weight: bold;
+}
+#layout-nav #layout-menu li.sub-menu span.tab
+{
+text-transform: lowercase;
 }
