@@ -21,7 +21,9 @@
 
 #layout-main div.latestanimes_form form input.year
 {
-	width: 2.5em;
+	width: 4em;
+	padding: 1px;
+	text-align: center;
 }
 
 #layout-main div.latestanimes_anime

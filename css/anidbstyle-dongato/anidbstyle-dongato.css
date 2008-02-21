@@ -6,7 +6,7 @@
 	display: none;
 }
 
-/* remove odd coloring in some divs */
+/* remove row odd coloring */
 div.mylistadd .g_odd,
 div.mylist_edit .g_odd,
 div.search .g_odd,
@@ -26,7 +26,7 @@ li.cat
 /* buttons and input boxes customization */
 input[type="checkbox"], input[type="radio"]
 {
-	vertical-align: middle;
+	vertical-align: bottom;
 }
 
 input[type="text"],
@@ -38,8 +38,7 @@ textarea
 	background-color: #FFFFFF;
 	border: 1px solid #999999;
 	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
-	font-size: 11px;
-	margin: 1px;
+	font-size: 10px;
 }
 
 input[type="text"],
@@ -358,4 +357,10 @@ div.cmt_all h4
 	display: block;
 	margin: 2em;
 	font-size: 14px;
+}
+
+/* improve table padding */
+td
+{
+	padding: 2px 4px 2px 4px;
 }
