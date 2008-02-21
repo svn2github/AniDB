@@ -185,3 +185,28 @@
   width: 20px;
 	background-image: url(../icons/icon/anidb_file2file2.gif);
 }
+
+.i_avmf_dump
+{
+	background-image: url(../icons/icon/anidb_avmf_dump.gif);
+}
+
+.i_avmf_smite
+{
+	background-image: url(../icons/icon/anidb_avmf_smite.gif);
+}
+
+.i_avmf_reset
+{
+	background-image: url(../icons/icon/anidb_avmf_reset.gif);
+}
+
+.i_avmf_forget
+{
+	background-image: url(../icons/icon/anidb_avmf_forget.gif);
+}
+
+.i_avmf_delete
+{
+	background-image: url(../icons/icon/anidb_avmf_delete.gif);
+}
