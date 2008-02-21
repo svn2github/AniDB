@@ -1,3 +1,4 @@
+
 @import "css/main.css";
 
 /* hide mod panel */
@@ -7,20 +8,37 @@
 }
 
 /* remove row odd coloring */
-div.mylistadd .g_odd,
-div.mylist_edit .g_odd,
-div.search .g_odd,
-div.g_menu .g_odd,
-div.mylist_dump .g_odd,
-div.ed2kdump_options .g_odd,
-div.mylist_add .g_odd,
-div.g_actionlist .g_odd,
 div.addgenren_form .g_odd,
-div.latestanimes_anime .g_odd,
 div.anime_form .g_odd,
+div.ed2kdump_options .g_odd,
+div.episode_add .g_odd,
+div.g_actionlist .g_odd,
+div.g_menu .g_odd,
+div.g_section.form .g_odd,
+div.g_section.userprefs .g_odd,
+div.group_form .g_odd,
+div.latestanimes_anime .g_odd,
+div.mylist_add .g_odd,
+div.mylist_dump .g_odd,
+div.mylist_edit .g_odd,
+div.mylist_import_options .g_odd,
+div.mylistadd .g_odd,
+div.producer_form .g_odd,
+div.search .g_odd,
+div.userdata_form .g_odd,
 li.cat
 {
 	background-color: transparent !important;
+}
+
+/* fixed alignement of table headers */
+div.anime_form th,
+div.episode_add th,
+div.group_form th,
+div.producer_form th,
+div.userdata_form th
+{
+	vertical-align: top;
 }
 
 /* buttons and input boxes customization */
@@ -44,15 +62,7 @@ textarea
 input[type="text"],
 input[type="password"]
 {
-	padding-left: 3px;
-	padding-right: 3px;
-}
-
-/* center and align group description */
-div.group_info div.desc
-{
-	margin-top: 2em;
-	text-align: center;
+	padding: 1px 3px 1px 3px;
 }
 
 /* anime page align left */
@@ -117,7 +127,9 @@ div.g_info,
 div.export_action,
 div.export_status ul,
 div.animeatt_info ul,
-div.add_done ul
+div.add_done ul,
+div.g_section.userprefs ul,
+caption
 {
 	text-align: center;
 }
@@ -129,25 +141,6 @@ div.export_themes table
 	margin-bottom: 20px;
 }
 
-/* if a popup, kill the title */
-body.nonav #layout-content h1
-{
-	display: none;
-}
-
-/* if a popup, kill the top border */
-body.nonav #layout-content div.g_content
-{
-	border-top: none;
-}
-
-/* remove useless image in mylist */
-div.mylist_all table.eplist td.action img[title="fold entry"],
-div.mylist_all table.eplist td.action img[title="expand entry"]
-{
-	display: none;
-}
-
 /* hide background in popups */
 body.nav
 {
@@ -157,7 +150,7 @@ body.nav
 /* fix for spacing of MyPlace latest entries */
 div.latest ul li
 {
-	padding: 2px;
+	padding: 1px;
 }
 
 /* centering mass add results */
@@ -174,26 +167,6 @@ div.review h2
 	border: 1px solid #696969;
 	background-color: Silver;
 	padding: 4px;
-}
-
-/* add separation to review end */
-div.review
-{
-	margin-bottom: 2em;
-}
-
-/* exception for quality stars alignement */
-td.quality .i_rate_star,
-td.quality .i_rate_halfstar
-{
-	background-position: left;
-	padding: 0px !important;
-}
-
-/* main page news alignement */
-#layout-content div.main_all div.news div.newsitem p.body
-{
-	text-align: left;
 }
 
 /* textarea sizing and positioning */
@@ -265,7 +238,7 @@ th, td.action.icons
 	width: 60px;
 }
 
-/* fix for lates anime files */
+/* enlarge latest files table */
 div.latest_files_list table
 {
 	width: 100%;
@@ -320,9 +293,10 @@ table.filelist tr.generic td
 
 /* fix for jumplist/pagination */
 ul.g_list.jump,
-div.pagination
+div.pagination,
+div.cmt_entries div.g_timedentry
 {
-	margin: 2em 0 2em 0;
+	margin: 2.5em 0 2.5em 0;
 }
 
 /* search input box fix */
@@ -333,7 +307,8 @@ div.search input.text
 
 /* add section fix */
 div.mylistadd table,
-div.ed2kdump_options table
+div.ed2kdump_options table,
+div.categories
 {
 	margin-left: auto;
 	margin-right: auto;
@@ -346,12 +321,56 @@ input[type=checkbox]
 	margin: 2px;
 }
 
-/* fixed alignement of table headers */
-div.anime_form th
+/* improve table padding */
+td
 {
-	vertical-align: top;
+	padding: 2px 4px 2px 4px;
 }
 
+/* fixes for block div */
+div.group_info div.block,
+div.producer_info div.block,
+div.group_form,
+div.g_section.form,
+div.latestanimes_all
+{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* center and align description */
+div.group_info div.desc,
+div.producer_info div.desc
+{
+	margin-top: 2em;
+	text-align: center;
+}
+
+/* improved margins for table data/images */
+div.charts div.image,
+div.latest div
+{
+	margin: 1em;
+}
+
+/* change title color of hidden lists */
+h4.collapsed span
+{
+	color: gray;
+}
+
+/* add separation to content/menus end */
+div.review,
+div.g_section.userprefs div,
+div.bar div,
+div.mylist_menu div,
+div.mylist_menu ul
+{
+	margin-bottom: 2em;
+}
+
+/* more prominent header */
 div.cmt_all h4
 {
 	display: block;
@@ -359,8 +378,25 @@ div.cmt_all h4
 	font-size: 14px;
 }
 
-/* improve table padding */
-td
+/* fixes for mass add files */
+div.addfilem dd input,
+div.addfilem dd select
 {
-	padding: 2px 4px 2px 4px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+div.addfilem dt
+{
+	width: 10em;
+}
+
+div.addfilem dd > br
+{
+	display: none;
+}
+
+div.dump textarea
+{
+	margin-bottom: 1em;
 }

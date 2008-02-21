@@ -81,7 +81,6 @@ td.name.user, td.name.owner, td.vote, td.rating, td.check,
 	text-align: center;
 }
 
-h4.collapsed span,
 #layout-main table.filelist tr.deprecated
 {
 	text-decoration: line-through;
