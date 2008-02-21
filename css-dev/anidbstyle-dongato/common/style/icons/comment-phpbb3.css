@@ -8,11 +8,6 @@
 	margin: 1.3em 0 1em 0;
 }
 
-*.i_comment_add:hover
-{
-	background-image: url(http://static.anidb.net/css/icons/test/comment_add_active.png);
-}
-
 *.i_review_add
 {
 	width: 96px;
@@ -21,9 +16,4 @@
 	background: transparent none no-repeat scroll 0pt;
 	background-image: url(http://static.anidb.net/css/icons/test/review_add_inactive.png);
 	margin: 1.3em 0 1em 0;
-}
-
-*.i_review_add:hover
-{
-	background-image: url(http://static.anidb.net/css/icons/test/review_add_active.png);
 }
