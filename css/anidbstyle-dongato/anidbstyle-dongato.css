@@ -406,3 +406,9 @@ div.data
 {
 	width: 90%;
 }
+
+/* fix for award icons wrap */
+td.awards span.i_icon
+{
+	float: left;
+}
