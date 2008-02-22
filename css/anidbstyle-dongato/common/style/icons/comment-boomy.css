@@ -1,19 +1,19 @@
 *.i_comment_add
 {
-	background-image: url(../../../images/comment_add.png);
+	background-image: url(images/comment_add.png);
 }
 
 *.i_comment_delete
 {
-	background-image: url(../../../images/comment_delete.png);
+	background-image: url(images/comment_delete.png);
 }
 
 *.i_comment_deleterequest
 {
-	background-image: url(../../../images/comment_deleterequest.png);
+	background-image: url(images/comment_deleterequest.png);
 }
 
 *.i_comment_edit
 {
-	background-image: url(../../../images/comment_edit.png);
+	background-image: url(images/comment_edit.png);
 }
