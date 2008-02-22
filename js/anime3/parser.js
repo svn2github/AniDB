@@ -1004,7 +1004,7 @@ filterObj.defaultDeprecated = {0:5,
                             2:{"fcrc":"==,invalid"},
                             3:{"fqual":"<=,5"},
                             4:{"c_sf_fgroup":"==,this","c_rf_fversion":"==,this","c_rf_fcrc":"==,valid","fcrc":"!=,valid","fgroup":"!=,0"},
-                            5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"},
+                            5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"}}
 filterObj.deprecated = filterObj.defaultDeprecated;
 filterObj.defaultVisible = {0:5,
                             1:{"fdeprecated":"==,true"},
