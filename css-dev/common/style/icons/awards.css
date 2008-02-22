@@ -38,6 +38,11 @@
 	background-image: url(../icons/awards/anidb_arc2006award.gif);
 }
 
+#top10
+{
+	background-image: url(../icons/awards/anidb_top10_banner.gif);
+}
+
 #mainichi_animation
 {
 	background-image: url(../icons/awards/anidb_mainichi_animation.png);

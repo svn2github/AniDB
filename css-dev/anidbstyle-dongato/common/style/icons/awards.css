@@ -1,49 +1,54 @@
-*.i_award_mainichi_small
+*.i_award_mainichi
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_mainichi.gif);
 }
 
-*.i_award_top10_small
+*.i_award_top10
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_top10.gif);
 }
 
-*.i_award_arc2001_small
+*.i_award_arc2001
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2001award.gif);
 }
 
-*.i_award_arc2002_small
+*.i_award_arc2002
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2002award.gif);
 }
 
-*.i_award_arc2003_small
+*.i_award_arc2003
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2003award.gif);
 }
 
-*.i_award_arc2004_small
+*.i_award_arc2004
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2004award.gif);
 }
 
-*.i_award_arc2005_small
+*.i_award_arc2005
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2005award.gif);
 }
 
-*.i_award_arc2006_small
+*.i_award_arc2006
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2006award.gif);
 }
 
-*.i_award_mainichi_animation
+#top10
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_top10_banner.gif);
+}
+
+#mainichi_animation
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_mainichi_animation.png);
 }
 
-*.i_award_mainichi_oofuji_noburou
+#mainichi_oofuji_noburou
 {
 	background-image: url(http://static.anidb.net/css/icons/awards/anidb_mainichi_oofuji_noburou.png);
 }
