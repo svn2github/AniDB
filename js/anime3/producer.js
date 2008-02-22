@@ -20,12 +20,16 @@ function updateReleaseListRows() {
 	var tbody = table.tBodies[0];
 	for (var i = 1; i < tbody.rows.length; i++) { // update each row
 		var row = tbody.rows[i];
-		var titleCell = row.cells[0];		// Title Cell
-		if (!titleCell) continue;
-		var a = titleCell.getElementsByTagName('A')[0];
-		if (!a) continue;
-		var title = a.firstChild.nodeValue;
-		titleCell.setAttribute('anidb:sort',title.toLowerCase());
+		var test = row.cells[0];		// Title Cell
+		if (!test) continue;
+		var label = test.getElementsByTagName('LABEL')[0];
+		if (label && label.childNodes.length) {
+			var a = label.getElementsByTagName('A')[0];
+			if (a) {
+				var title = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',title.toLowerCase());
+			} else test.setAttribute('anidb:sort','-');
+		} else test.setAttribute('anidb:sort','-');
 	}
 }
 

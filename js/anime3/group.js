@@ -48,12 +48,13 @@ function updateReleaseListRows() {
 		var test = row.cells[2];		// Title Cell
 		if (test) {
 			var label = test.getElementsByTagName('LABEL')[0];
-			if (!label || !label.childNodes.length) 
-			var a = label.getElementsByTagName('A')[0];
-			if (a) {
-				var title = ''+a.firstChild.nodeValue;
-				test.setAttribute('anidb:sort',title.toLowerCase());
-			}
+			if (label && label.childNodes.length) {
+				var a = label.getElementsByTagName('A')[0];
+				if (a) {
+					var title = a.firstChild.nodeValue;
+					test.setAttribute('anidb:sort',title.toLowerCase());
+				} else test.setAttribute('anidb:sort','-');
+			} else test.setAttribute('anidb:sort','-');
 		}
 		test = row.cells[5];		// Done Cell
 		if (test) {
@@ -128,7 +129,12 @@ function updateEpTableRows() {
 			}
 		}
 		test = row.cells[5];		// Size cell
-		if (test) test.setAttribute('anidb:sort',test.firstChild.nodeValue);
+		if (test) {
+			// convert to bytes without dots
+			var fsize = test.firstChild.nodeValue;
+			while(fsize.indexOf('.') > -1) fsize = fsize.replace('.','');
+			test.setAttribute('anidb:sort',fsize);
+		}
 		test = row.cells[6];		// CRC Cell
 		if (test) {
 			if (!test.childNodes.length) test.setAttribute('anidb:sort','-');
@@ -166,7 +172,7 @@ function updateEpTable() {
 	headingList[2].className += ' c_setlatin';		// ID
 	headingList[3].className += ' c_setlatin';		// EP
 	headingList[4].className += ' c_none';			// Group
-	headingList[5].className += ' c_setlatin';		// Size
+	headingList[5].className += ' c_set';			// Size
 	headingList[6].className += ' c_setlatin';		// CRC
 	headingList[7].className += ' c_setlatin';		// Quality
 	headingList[8].className += ' c_latin';		// Source
