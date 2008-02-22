@@ -51,7 +51,7 @@ function updateReleaseListRows() {
 			if (!label || !label.childNodes.length) 
 			var a = label.getElementsByTagName('A')[0];
 			if (a) {
-				var title = a.firstChild.nodeValue;
+				var title = ''+a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',title.toLowerCase());
 			}
 		}
