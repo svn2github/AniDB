@@ -443,8 +443,8 @@ function createGroupRow(group) {
               '1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"},
               '2' : {'use':false,'type': 2,'desc':"in mylist: "+group.inMylistRange,'img':"lime"}};
   var range = expandRange(null,anime.eps,maps[0],null);
-  if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange,anime.eps,maps[1],range); }
-  if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange,anime.eps,maps[2],range); }
+  if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange,(anime.eps ? anime.eps : anime.epCount),maps[1],range); }
+  if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange,(anime.eps ? anime.eps : anime.epCount),maps[2],range); }
   makeCompletionBar(cell,range,maps);
   row.appendChild(cell);
   // Last
@@ -938,6 +938,7 @@ function foldFilesByGroup() {
       forceFileTableRedraw(episode); // Force a redraw of the fileTable
     }
   }
+  internalExpand = false;
 }
 
 function expandEp() {
@@ -974,8 +975,8 @@ function expandEp() {
 
 function foldEp() {
   var row = this.parentNode.parentNode;
-  if (!document.getElementById(row.id+'_ftHolder')) return; // what the fuck am i doing here anyway?
-  document.getElementById(row.id+'_ftHolder').style.display = 'none';
+  var elem = document.getElementById(row.id+'_ftHolder');
+  if (elem) elem.style.display = 'none';
   this.onclick = expandEp;
   this.title = 'fold this entry';
   this.alt = '(-)';
@@ -1272,7 +1273,7 @@ function createFileTableRow(episode,file) {
 		if (test) {
 			var t2 = test.parentNode.parentNode.id;
 			if (Number(t2.substring(7,t2.indexOf('files'))) != episode.id) fTBr0.id = 'fid_'+file.id+'_eid_'+episode.id;
-			else return; // The row was allready created and we have it
+			else return test;// The row was allready created and we have it
 		} else fTBr0.id = 'fid_'+file.id;
 	} else fTBr0.id = 'rfid_'+file.id+'_eid_'+episode.id; // This is safer
 	if (!file.pseudoFile || file.type != 'stub') {

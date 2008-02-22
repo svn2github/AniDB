@@ -50,12 +50,16 @@ function updateEpisodeListRows() {
 		}
 		test = row.cells[1];		// Title Cell
 		if (test) {
-			var a = test.getElementsByTagName('A')[0];
+			var label = test.getElementsByTagName('LABEL')[0];
+			if (!label || !label.childNodes.length) 
+			var a = label.getElementsByTagName('A')[0];
 			if (a) {
 				var title = a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',title);
 			}
 		}
+		test = row.cells[2];		// Size cell
+		if (test) test.setAttribute('anidb:sort',test.firstChild.nodeValue);
 		test = row.cells[4+extraCol];		// codecs Cell
 		if (test) {
 			var codecSort = 'unk'; // default in case something borks
@@ -71,12 +75,8 @@ function updateEpisodeListRows() {
 		test = row.cells[6+extraCol];		// source Cell
 		if (test) {
 			var text = 'unknown'; // default in case something borks
-			for (var k = 0; k < test.childNodes.length; k++) {
-				var child = test.childNodes[k];
-				if (child.nodeType != 3) continue;
-				text = child.nodeValue; // found the right one
-				break;
-			}
+			var label = test.getElementsByTagName('LABEL')[0];
+			if (label && label.childNodes.length) text = label.firstChild.nodeValue;
 			test.setAttribute('anidb:sort',text);
 		}
 		test = row.cells[7+extraCol];		// quality Cell
@@ -119,7 +119,7 @@ function updateEpisodeList() {
 	var i = 0;
 	headingList[0].className += 'id c_set';				// File
 	headingList[1].className += 'title c_setlatin';		// Groupname
-	headingList[2].className += 'size c_set';				// size
+	headingList[2].className += 'size c_setlatin';			// size
 	if (uriObj['showcrc'] && uriObj['showcrc'] == 1) {
 		headingList[3].className += 'crc c_latin';			// crc
 		i++

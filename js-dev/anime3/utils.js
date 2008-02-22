@@ -601,10 +601,11 @@ if (typeof Array.prototype.indexOf == "undefined") {
  * @param text Text to show
  * @return void
  */
-function updateStatus(text,add) {
+function updateStatus(text,add,targetName) {
   try {
-    if (document.getElementById('statusBox')) {
-      var statusBox = document.getElementById('statusBox');
+	if (!targetName) targetName = 'statusBox';
+    if (document.getElementById(targetName)) {
+      var statusBox = document.getElementById(targetName);
       if (!add) { 
         if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
         statusBox.appendChild(document.createTextNode(text)); 
@@ -995,7 +996,7 @@ function applyFormat(identifier, file, episode, anime, group) {
   identifier = identifier.replace("%ept",episode.getTitle());
   identifier = identifier.replace("%epat",episode.getAltTitle());
   if (identifier.indexOf("%enr") >= 0) {
-    var epLen = String(anime.eps);
+    var epLen = String((anime.eps) ? anime.eps : anime.epCount);
     var epFmt = '0000'+episode.epno;
     epFmt = epFmt.slice(epFmt.length-epLen.length);
     identifier = identifier.replace("%enr",episode.typeChar+epFmt); 

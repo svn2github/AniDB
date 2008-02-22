@@ -47,7 +47,9 @@ function updateReleaseListRows() {
 		var row = tbody.rows[i];
 		var test = row.cells[2];		// Title Cell
 		if (test) {
-			var a = test.getElementsByTagName('A')[0];
+			var label = test.getElementsByTagName('LABEL')[0];
+			if (!label || !label.childNodes.length) 
+			var a = label.getElementsByTagName('A')[0];
 			if (a) {
 				var title = a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',title);
