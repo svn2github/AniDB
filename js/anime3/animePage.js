@@ -422,6 +422,7 @@ function createGroupRow(group) {
   cell = document.createElement('TD');
   cell.className = 'name group';
   createLink(cell,group.shortName,'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null);
+  cell.setAttribute('anidb:sort',group.shortName.toLowerCase());
   row.appendChild(cell);
   // State
   cell = document.createElement('TD');
@@ -607,6 +608,8 @@ function updateGroupRow(group) {
     else ahref.onclick = expandFilesByGroup;
     ahref.removeAttribute('href');
   }
+  cell = getElementsByClassName(cells, 'group', true)[0];
+  if (cell) cell.setAttribute('anidb:sort',(group.shortName ? group.shortName.toLowerCase() : 'no group'));
   cell = getElementsByClassName(cells, 'status', true)[0];
   if (cell) cell.setAttribute('anidb:sort',(group.epsInMyListArray && group.epsInMyListArray.length) ? String(group.epsInMyListArray.length) : '0');
   cell = getElementsByClassName(cells, 'eps', true)[0];
@@ -685,7 +688,7 @@ function updateGroupTable() {
   // apply filtering support for the group list
   var headingList = thead.rows[0].getElementsByTagName('TH');
   headingTest = getElementsByClassName(headingList,'name group',true)[0];
-  if (headingTest) headingTest.className += ' c_latin';
+  if (headingTest) headingTest.className += ' c_setlatin';
   headingTest = getElementsByClassName(headingList,'eps',true)[0];
   if (headingTest) headingTest.className += ' c_set';
   headingTest = getElementsByClassName(headingList,'specials',true)[0];
@@ -1319,7 +1322,7 @@ function createFileTableRow(episode,file) {
 			cell.appendChild(divIcons);
 		}
 		var groupEntry = groups[file.groupId];
-		cell.setAttribute('anidb:sort',groupEntry.shortName);
+		cell.setAttribute('anidb:sort',groupEntry.shortName.toLowerCase());
 		if (!file.groupId) groupEntry = null;
 		var label = document.createElement('LABEL');
 		if (!file.pseudoFile) {

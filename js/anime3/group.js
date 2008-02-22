@@ -52,7 +52,7 @@ function updateReleaseListRows() {
 			var a = label.getElementsByTagName('A')[0];
 			if (a) {
 				var title = a.firstChild.nodeValue;
-				test.setAttribute('anidb:sort',title);
+				test.setAttribute('anidb:sort',title.toLowerCase());
 			}
 		}
 		test = row.cells[5];		// Done Cell

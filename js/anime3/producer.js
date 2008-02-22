@@ -25,7 +25,7 @@ function updateReleaseListRows() {
 		var a = titleCell.getElementsByTagName('A')[0];
 		if (!a) continue;
 		var title = a.firstChild.nodeValue;
-		titleCell.setAttribute('anidb:sort',title);
+		titleCell.setAttribute('anidb:sort',title.toLowerCase());
 	}
 }
 
