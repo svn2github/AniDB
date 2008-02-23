@@ -40,6 +40,11 @@ function BasicPopupSelf()
 }
 
 var Magic = {
+	'OpenNewWindow':(function ()
+		{
+			window.open(this.href);
+			return false;
+		}),
 	'addvalidatorinterface':(function ()
 		{
 			if (document.evaluate && window.XMLSerializer) // interested people don't use IE anyway
@@ -64,11 +69,8 @@ var Magic = {
 			footernode.appendChild(f, footernode);
 			Magic.valiform = f;
 			f = f.appendChild(document.createElement("div"));
-			n = document.createElement("a");
-			n.href = validatorloc+"?uri=referer&doctype="+doctypecheck.replace(" ","+");
-			n.title = "Validate current URI as it is accessed by a guest";
-			n.appendChild(document.createTextNode("@"));
-			f.appendChild(n);
+			f.appendChild(document.createTextNode("Validate: "));
+
 			var params = [['parsemodel',"xml"], ['doctype',doctypecheck], ['ss',1], ['fragment',""]];
 			for (i = 0; k = params[i]; i++)
 			{
@@ -76,13 +78,20 @@ var Magic = {
 				n.type = 'hidden'; n.name = k[0]; n.value = k[1]; f.appendChild(n);
 			}
 			Magic.checkfield = n;
-			params = [["<",Magic.currentcheck,"Serialise current doc state and validate"],
-				[">",Magic.basecheck,"Re-fetch current URI from server and validate"]];
+
+			params = [
+				["current",Magic.currentcheck,"Serialise current doc state and validate"],
+				["re-fetch",Magic.basecheck,"Re-fetch current URI from server and validate"],
+				["as guest", undefined, "Validate current URI as it is accessed by a guest"]];
 			for (i = 0; k = params[i]; i++)
 			{
 				n = document.createElement("a");
-				n.title = k[2]; f.appendChild(document.createTextNode(" "));
-				n.appendChild(document.createTextNode(k[0])); n.onclick = k[1]; f.appendChild(n);
+				n.title = k[2]; 
+				n.appendChild(document.createTextNode(k[0]));
+				if( k[1] ) n.onclick = k[1];
+				else n.href = validatorloc+"?uri=referer&doctype="+doctypecheck.replace(" ","+");
+				if( i>0 ) f.appendChild(document.createTextNode(", "));
+				f.appendChild(n);
 			}
 		}),
 	'asxmlfixup':(function (s)
@@ -119,13 +128,14 @@ var Magic = {
 		{
 			var elems = document.getElementsByTagName('H4');
 			for (var i = 0; i < elems.length; i++){
-				if(elems[i].getElementsByTagName('span').length>0)
-					elems[i].onclick = Magic.toggle_hide;
+				var spans = elems[i].getElementsByTagName('span');
+				if(spans.length>0)
+					spans[0].onclick = Magic.toggle_hide;
 			}
 		}),
 	'toggle_hide':(function (e)
 		{
-			var block = this;
+			var block = this.parentNode;
 			ClassToggle(block, 'collapsed'); 
 			while ( block = block.nextSibling ){
 				if( block.nodeType==1 )
@@ -227,10 +237,10 @@ function InitDefault()
 		}
 		else if (relstring.indexOf("anidb::") >= 0) // ::extern ::wiki ::forum ::tracker
 		{
-			linklist[i].target = "_blank";
+			linklist[i].onclick = Magic.OpenNewWindow;
 		}
 	}
-	//Magic.enable_over();
+
 	Magic.enable_hide();
 	Magic.enable_tabs();
 	
@@ -334,8 +344,8 @@ function CookieGet( check_name ) {
 }
 
 function mbSet(m,c) {
-if (document.getElementById&&document.createElement) {
-	var m=document.getElementById(m);
+var m = document.getElementById(m);
+if (m) {
 	m.className=c;
 	
 	var i, ul, s;
@@ -343,10 +353,10 @@ if (document.getElementById&&document.createElement) {
 	for (i=0;i<l.length;i++) {
 		ul = l[i];
 		
-		ul.onmouseout = ul.onblur = (function(){
+		ul.onmouseout = (function(){
 			this.className=null;
 		});
-		ul.onmouseover = ul.onfocus = (function(){
+		ul.onmouseover = (function(){
 			this.className='popup';
 		});
 		
@@ -355,10 +365,10 @@ if (document.getElementById&&document.createElement) {
 		s.className = 'tab';
 		ul.parentNode.insertBefore(s, ul);
 
-		s.onmouseout = s.onblur = (function(){
+		s.onmouseout = (function(){
 			this.nextSibling.className=null;
 		});
-		s.onmouseover = s.onfocus = (function(){
+		s.onmouseover = (function(){
 			this.nextSibling.className='popup';
 		});
 	}
