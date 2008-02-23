@@ -52,16 +52,22 @@ padding-left: 20px;
 font-family: sans-serif;
 }
 
-#layout-menu li span.tab{
+#layout-menu > li{
 float: left;
+}
+
+#layout-menu li span.tab{
 background: #D9E1E5 url(images/nav.gif);
 border-right: 1px solid #AFBEC7;
 font-weight: bold;
 }
 
+#layout-menu li.alert span.tab{
+color: #B00;
+}
+
 #layout-menu li span.tab:hover{
-background-position: left bottom;
-color: #234;
+background-position: left bottom; color: #234;
 }
 
 #layout-menu li ul.popup{
@@ -69,7 +75,6 @@ position: absolute;
 background-color: #F5F5F5;
 border: 1px solid #AFBEC7;
 border-top: none;
-margin-top: 41px;
 margin-left: -1px;
 padding-top: 10px;
 padding-bottom: 10px;
@@ -125,6 +130,7 @@ width: 1024px;
 body.nonav{
 width: auto;
 margin: 0;
+background-color: transparent;
 }
 
 #layout-footer{
@@ -200,12 +206,13 @@ float: left;
 padding: 1em;
 }
 
-.desc{
+div.desc{
 clear: left;
 background-color: #F5F5F5;
 border: 1px solid #E3E4E4;
 color: #505050;
-padding: 2px 3px 3px 8px;
+padding: 3px 3px 3px 8px;
+margin-top: 1em;
 }
 
 .g_content{
@@ -218,8 +225,14 @@ margin-top: 0.5em;
 margin-bottom: 0.5em;
 }
 
-.tab, #layout-footer{
+.tab, #layout-footer, .i_icon span, h4 span:first-child, span a{
 cursor: pointer;
+-moz-user-select: none;
+-user-select: none;
+}
+
+#layout-menu .tab, .i_icon span, th{
+cursor: default;
 }
 
 #layout-footer div{
@@ -249,7 +262,7 @@ padding-right: 10px;
 text-align: right;
 }
 
-tr.action td, p.mylistadd{
+tr.action td[colspan="2"], p.mylistadd{
 text-align: center;
 }
 
@@ -264,7 +277,8 @@ display: none;
 table td{
 border-top: 1px solid #EEE;
 }
-table tr.good td{
+
+tr.mylist td, tr.good td{
 background-color: #F2FFF0;
 }
 
@@ -272,16 +286,24 @@ td table{
 margin: 1em;
 }
 
+input[type="text"], textarea, select{
+padding-left: 2px;
+/*border: 1px solid orange;*/
+}
+
 /*g_msg*/
 .g_msg{
+padding: 0.1em 0.2em;
 border-top: 1px solid #EEE;
 border-bottom: 1px solid #EEE;
 background-color: white;
 }
+
 .g_msg h3{
 float: right;
+/*margin-right: 0.2em;*/
 font-weight: bold;
-font-family: sans-serif;
+/*font-family: sans-serif;*/
 }
 
 .g_msg.note h3{
@@ -303,10 +325,13 @@ color: #88AA88;
 .i_award{
 padding: 0 0.5em;
 }
+
 .i_award + .i_award{
 border-left: 1px solid black;
 }
 
+/*TEMP*/
+/*img{opacity: 0.03}*/
 th.award, td.awards{
 display: none;
 }
@@ -333,4 +358,19 @@ dl dd
 {
 margin-left: 10em;
 text-align: left;
+}
+
+span.date, td.rating{ white-space: nowrap }
+
+span.time, td.rating span{ color: gray; font-size: 76%; vertical-align: top; }
+
+h4.collapsed span:first-child{ text-decoration: line-through }
+
+
+div.g_info{
+margin: 1em 0;
+padding: 0.2em 1em;
+background-color: white;
+border-top: 1px solid #EEE;
+border-bottom: 1px solid #EEE;
 }
