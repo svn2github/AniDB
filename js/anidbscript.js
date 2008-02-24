@@ -69,7 +69,7 @@ var Magic = {
 			footernode.appendChild(f, footernode);
 			Magic.valiform = f;
 			f = f.appendChild(document.createElement("div"));
-			f.appendChild(document.createTextNode("Validate: "));
+			f.appendChild(document.createTextNode("W3 Validator: "));
 
 			var params = [['parsemodel',"xml"], ['doctype',doctypecheck], ['ss',1], ['fragment',""]];
 			for (i = 0; k = params[i]; i++)
