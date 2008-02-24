@@ -482,7 +482,7 @@ function parseCustom(node) {
   return true;
 }
 
-/**
+/* *
  * Function to parse configuration options
  * @param node Config node
  * @return void Options will be set
@@ -516,7 +516,7 @@ function parseConfig(node) {
         for (var j = 0; j < sNode.childNodes.length; j++) {
           var dNode = sNode.childNodes.item(j);
           switch (dNode.nodeName) {
-            case 'lang': animeTitleLang = nodeData(dNode); animeAltTitleLang = dNode.getAttribute('alt') || 'en'; break;
+            case 'lang': episodeTitleLang = nodeData(dNode); episodeAltTitleLang = dNode.getAttribute('alt') || 'en'; break;
             default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
           }
         }
