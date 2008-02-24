@@ -192,7 +192,7 @@ a.descending{
 text-decoration: overline;
 }
 
-.all_watched .name{
+.all_watched .name label{
 text-decoration: line-through;
 }
 
@@ -215,6 +215,7 @@ padding: 3px 3px 3px 8px;
 margin-top: 1em;
 }
 
+.main_all .news,
 .g_content{
 background-color: #FAFAFA;
 padding: 6px;
@@ -262,8 +263,12 @@ padding-right: 10px;
 text-align: right;
 }
 
-tr.action td[colspan="2"], p.mylistadd{
+p.action,
+tr.action td.submit,
+tr.action td.value,
+p.mylistadd{
 text-align: center;
+padding: 1em;
 }
 
 textarea{
@@ -374,3 +379,20 @@ background-color: white;
 border-top: 1px solid #EEE;
 border-bottom: 1px solid #EEE;
 }
+select{font-family: "Lucida Sans Unicode", sans-serif;}
+option{padding-left: 12px}
+option.section{padding-left: 4px; color: gray}
+option.section:after{content:":"}
+option[value="delall"]{color: #B11}
+
+/*PAGE SPEC LAY*/
+.mylist_menu h4{display:none}
+.mylist_menu ul{margin: 0.4em 0}
+.mylist_menu ul li{display:inline; border-left: 2px solid #CCC; border-bottom: 1px solid #DDD}
+
+.main_all {background-color: transparent}
+.main_all .news{width: 70%;}
+.main_all .rightbar{ width:27%; float:right}
+.main_all .g_list {text-align: left}
+
+.g_end {clear: both}
