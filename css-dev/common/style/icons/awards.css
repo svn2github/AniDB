@@ -38,6 +38,11 @@
 	background-image: url(../icons/awards/anidb_arc2006award.gif);
 }
 
+*.i_award_arc2007
+{
+	background-image: url(../icons/awards/anidb_arc2006award.gif);
+}
+
 #top10
 {
 	background-image: url(../icons/awards/anidb_top10_banner.gif);
@@ -606,4 +611,109 @@
 #arc2006_villain
 {
 	background-image: url(../icons/awards/arc2006_villain.jpg);
+}
+
+#arc2007_action
+{
+	background-image: url(../icons/awards/arc2007_action.jpg);
+}
+
+#arc2007_adventure_fantasy
+{
+	background-image: url(../icons/awards/arc2007_adventure_fantasy.jpg);
+}
+
+#arc2007_animation
+{
+	background-image: url(../icons/awards/arc2007_animation.jpg);
+}
+
+#arc2007_anime_overall
+{
+	background-image: url(../icons/awards/arc2007_anime_overall.jpg);
+}
+
+#arc2007_character_development
+{
+	background-image: url(../icons/awards/arc2007_character_development.jpg);
+}
+
+#arc2007_comedy
+{
+	background-image: url(../icons/awards/arc2007_comedy.jpg);
+}
+
+#arc2007_drama
+{
+	background-image: url(../icons/awards/arc2007_drama.jpg);
+}
+
+#arc2007_ecchi
+{
+	background-image: url(../icons/awards/arc2007_ecchi.jpg);
+}
+
+#arc2007_female_character
+{
+	background-image: url(../icons/awards/arc2007_female_character.jpg);
+}
+
+#arc2007_male_character
+{
+	background-image: url(../icons/awards/arc2007_male_character.jpg);
+}
+
+#arc2007_music_ost
+{
+	background-image: url(../icons/awards/arc2007_music_ost.jpg);
+}
+
+#arc2007_mystery_thriller_horror
+{
+	background-image: url(../icons/awards/arc2007_mystery_thriller_horror.jpg);
+}
+
+#arc2007_newcomer
+{
+	background-image: url(../icons/awards/arc2007_newcomer.jpg);
+}
+
+#arc2007_op-ed
+{
+	background-image: url(../icons/awards/arc2007_op-ed.jpg);
+}
+
+#arc2007_quick_watch
+{
+	background-image: url(../icons/awards/arc2007_quick_watch.jpg);
+}
+
+#arc2007_romance
+{
+	background-image: url(../icons/awards/arc2007_romance.jpg);
+}
+
+#arc2007_sci-fi
+{
+	background-image: url(../icons/awards/arc2007_sci-fi.jpg);
+}
+
+#arc2007_slice_of_life
+{
+	background-image: url(../icons/awards/arc2007_slice_of_life.jpg);
+}
+
+#arc2007_sports
+{
+	background-image: url(../icons/awards/arc2007_sports.jpg);
+}
+
+#arc2007_story
+{
+	background-image: url(../icons/awards/arc2007_story.jpg);
+}
+
+#arc2007_villain
+{
+	background-image: url(../icons/awards/arc2007_villain.jpg);
 }

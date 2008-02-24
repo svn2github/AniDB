@@ -76,3 +76,8 @@ body,
 {
 	margin-top: 3px;
 }
+
+#layout-search select
+{
+	display: none;
+}

@@ -1,64 +1,48 @@
 @charset "utf-8";
-@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";
-@import "../common/style/icons/awards.css";
 
-/**
- * HaruhiStyleX.AniDB v2
+/** HaruhiStyleX.AniDB v2
  * A style for AniDB.net by TheJAG
  * 
- * Currently known supported browsers:
+ * This style is designed for a screen resolutions of 1024×768 and higher!
+ * 
+ * Currently known supported browsers: (Tested on Windows XP!)
  * Opera 9+
- * Firefox 2+ (No CSS Content)
- * Safari 3+ (No CSS Content)
- */
+ * Currently known partially supported browsers:
+ * Firefox 2+ (No suppport for CSS2: content:"";)
+ * Safari 3+ (No suppport for CSS2: content:"";)
+ * Currently known unsupported browsers:
+ * Microsoft Internet Explorer 6- (Version 6 and below.)
+ * Windows Internet Explorer 7 (Aka. Microsoft Internet Explorer 7)
+**/
 
-html
-{
-	background-image:url(images/Background.png);
-	background-position:bottom right;
-	background-attachment:fixed;
-	background-repeat:no-repeat;
-}
-
-body
-{
-	background-image:url(images/banner.png);
-	background-position:top center;
-	background-repeat:no-repeat;
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-	margin:0px;
-	padding:80px 0 0 200px;
-}
-
-body.nonav
-{
-	background:none;
-	padding:0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5
-{
-	font-variant:small-caps;
-	color:#0099FF;
-	text-align:center;
-}
-
-ul,
-ol
+*
 {
 	margin:0;
 	padding:0;
+}
+
+html
+{
+	background-attachment:fixed;
+	background-color:#FFFFFF;
+	background-image:url(images/Background.png);
+	background-position:right bottom;
+	background-repeat:no-repeat;
+	font-family:Calibri, "Times New Roman", Times, serif;
+}
+
+#anidb
+{
+	background-image:url(images/banner.png);
+	background-position:center 20px;
+	background-repeat:no-repeat;
 }
 
 a
 {
 	color:#000000;
 	font-weight:bold;
+	text-decoration:none;
 }
 
 a:hover
@@ -66,14 +50,26 @@ a:hover
 	color:#0099FF;
 }
 
+ol,
+ul
+{
+	list-style-type:none;
+}
+
+#layout-nav
+{
+	float:left;
+	width:200px;
+	z-index:2;
+}
+
 #layout-menu
 {
 	background-image:url(images/menuClean.png);
+	background-position:left top;
+	background-repeat:no-repeat;
 	height:300px;
-	width:200px;
-	position:absolute;
-	top:0;
-	left:0;
+	padding-top:5px;
 }
 
 #layout-menu:hover
@@ -81,263 +77,260 @@ a:hover
 	background-image:url(images/menu.png);
 }
 
-#layout-menu > div.menu,
-#layout-menu > div.usermenu
+#layout-menu > li.sub-menu
 {
 	visibility:hidden;
 }
 
-#layout-menu:hover > div.menu,
-#layout-menu:hover > div.usermenu
+#layout-menu:hover > li.sub-menu
 {
 	visibility:visible;
 }
 
-#layout-menu > div.menu > ul
-{
-	padding:10px 0 0 0;
-	list-style-type:none;
-	width:170px;
-}
-
-#layout-menu > div.menu > ul.my,
-#layout-menu > div.menu > ul.mod
+#layout-menu > li.sub-menu > span.tab
 {
 	display:none;
 }
 
-#layout-menu > div.menu > ul > li
+#menu-main,
+#menu-lists,
+#menu-private
 {
-	margin:0;
-	padding:0;
-	height:10px;
+	clear:both;
+	float:left;
+	padding-left:5px;
+	width:80px;
 }
 
-#layout-menu > div.menu > ul > li > a
+#menu-account
 {
-	font-size:x-small;
-	text-transform:capitalize;
-	text-decoration:none;
-	display:list-item;
-	list-style-type:none;
-	padding:0 0 0 40px;
+	padding-top:24px;
 }
 
-#layout-menu > div.usermenu > p
+#menu-main > li,
+#menu-lists > li,
+#menu-private > li,
+#menu-mod > li,
+#menu-support > li,
+#menu-account > li
 {
-	font-size:x-small;
-	line-height:1;
-	margin:0;
-	padding:10px 0 0 0;
-	width:170px;
+	height:12px;
 }
 
-#layout-menu > div.usermenu > p.user
-{
-	font-size:small;
-	margin:0;
-	padding:10px 0 0 10px;
-	font-weight:bold;
-	overflow:hidden;
-	height:20px;
-}
-
-#layout-menu > div.usermenu > p.user:after
-{
-	content:"!";
-}
-
-#layout-menu > div.usermenu > p.user:before
-{
-	content:"Welcome ";
-}
-
-#layout-menu > div.usermenu > p > a
-{
-	display:list-item;
-	list-style-type:none;
-	line-height:1;
-	text-transform:capitalize;
-	text-decoration:none;
-	padding:0 0 0 40px;
-}
-
-#layout-menu > div.usermenu > p > a.history
-{
-	display:none;
-}
-
-#layout-menu > div.menu > ul > li > a:hover,
-#layout-menu > div.usermenu > p > a:hover
+#menu-main > li > a,
+#menu-lists > li > a,
+#menu-private > li > a,
+#menu-mod > li > a,
+#menu-support > li > a,
+#menu-account > li > a,
+#menu-account > li > span > a
 {
 	color:#FFFFFF;
+	font-size:12px;
+	text-transform:capitalize;
+	font-variant:small-caps;
+}
+
+#menu-main > li > a:hover,
+#menu-lists > li > a:hover,
+#menu-private > li > a:hover,
+#menu-mod > li > a:hover,
+#menu-support > li > a:hover,
+#menu-account > li > a:hover,
+#menu-account > li > span > a:hover
+{
+	color:#000000;
+}
+
+#menu-main > li.main > a > span
+{
+	content:"news";
 }
 
 #layout-search
 {
-	position:absolute;
-	top:400px;
-	left:5px;
-}
-
-#layout-search > div.search > form > p > input[type=text]
-{
-	width:100px;
-	font-weight:bold;
-}
-
-#layout-content > div.main_all > div.rightbar
-{
-	position:absolute;
-	top:480px;
-	left:0px;
-	width:200px;
-}
-
-#layout-content > div.main_all > div.rightbar > h4
-{
-	background-image:url(images/SmallGlassTop.png);
+	background-image:url(images/Search.png);
 	background-repeat:no-repeat;
-	margin:0;
-	padding:10px 0 0 0;
-	height:30px;
 }
 
-#layout-content > div.main_all > div.rightbar > p > a,
-#layout-content > div.main_all > div.rightbar > ol > li > a
+#layout-search > div.search
 {
-	text-decoration:none;
+	padding-top:210px;
 }
 
-#layout-content > div.main_all > div.rightbar > p.g_vital,
-#layout-content > div.main_all > div.rightbar > p.g_vital + p,
-#layout-content > div.main_all > div.rightbar > p.g_vital + p + p,
-#layout-content > div.main_all > div.rightbar > ol > li
+#layout-search > div.search > form > p > input.text
 {
-	background-image:url(images/SmallGlassMiddle.png);
-	background-repeat:repeat-y;
-	margin:0;
-	padding:0 10px;
-	font-size:x-small;
-	text-align:center;
+	width:190px;
+	height:20px;
+	margin-left:4px;
+	border-color:#000000;
+	border-width:1px;
 }
 
-#layout-content > div.main_all > div.rightbar > p.g_vital + p + p,
-#layout-content > div.main_all > div.rightbar > ol > li + li + li + li + li + li + li + li + li + li
-{
-	background-image:url(images/SmallGlassBottom.png);
-	background-repeat:no-repeat;
-	height:40px;
-}
-
-#layout-content > div.main_all > div.rightbar > ol
-{
-	margin-bottom:20px;
-	list-style-type:none;
-}
-
-#layout-content > div.main_all > div.rightbar > ol > li
-{
-	text-align:left;
-}
-
-#layout-content > div.main_all > div.rightbar > ol > li.g_odd
-{
-	background-image:url(images/SmallGlassMiddle2.png);
-}
-
-#layout-content > div.main_all > div.rightbar > ol > li.g_odd > a:hover
-{
-	color:#FFFFFF;
-}
-
-#layout-content > div.main_all > div.rightbar > ol > li > span
+#layout-search > div.search > form > p > input.submit
 {
 	display:none;
 }
 
 #layout-content
 {
-	margin:0px;
-	padding:0px;
+	padding-top:100px;
+	margin-left:200px;
 }
 
-#layout-content div,
-#layout-content p,
-#layout-content span
+#layout-main > h1
 {
-	font-size:small;
+	text-align:center;
+	font-variant:small-caps;
+	color:#0099FF;
+	font-size:36px;
 }
 
-#layout-content > div.main_all > div.news > div.newsitem
+#layout-main > div.g_content > div.rightbar
 {
-	background-image:url(images/GlassBottom.png);
+	position:absolute;
+	top:540px;
+	left:0;
+	width:200px;
+}
+
+#layout-main > div.g_content > div.rightbar > h4
+{
+	background-image:url(images/SmallGlassTop.png);
 	background-repeat:no-repeat;
-	margin:-40px 0 0 0;
-	padding:60px 0 0 0;
-	width:650px;
-	margin:0 auto;
+	padding-top:10px;
+	text-align:center;
+	font-variant:small-caps;
+	color:#0099FF;
+	height:30px;
+	font-size:16px;
 }
 
-#layout-content > div.main_all > div.news > div.newsitem:first-child
+#layout-main > div.g_content > div.rightbar > p,
+#layout-main > div.g_content > div.rightbar > ol > li
 {
-	background-image:none;
-	padding:0;
+	background-image:url(images/SmallGlassMiddle.png);
+	background-repeat:repeat-y;
+	text-align:center;
+	font-size:12px;
 }
 
-#layout-content > div.main_all > div.news > div.newsitem > h4
+#layout-main > div.g_content > div.rightbar > ol > li.g_odd
 {
-	background-image:url(images/GlassTop.png);
+	background-image:url(images/SmallGlassMiddle2.png);
+}
+
+#layout-main > div.g_content > div.rightbar > p + p + p,
+#layout-main > div.g_content > div.rightbar > ol > li + li + li + li + li + li + li + li + li + li
+{
+	background-image:url(images/SmallGlassBottom.png);
 	background-repeat:no-repeat;
-	padding:40px 60px 0 60px;
-	margin:40px 0 0 0;
-	height:60px;
+	height:40px;
 }
 
-#layout-content > div.main_all > div.news > div.newsitem:first-child > h4
+#layout-main > div.g_content > div.rightbar > h3
 {
-	margin-top:0;
+	text-align:center;
+	font-variant:small-caps;
+	color:#0099FF;
+	padding:10px 0;
+	font-size:20px;
 }
 
-#layout-content > div.main_all > div.news > div.newsitem > div.avatar,
-#layout-content > div.main_all > div.news > div.newsitem > span.stamp
+#layout-main > div.g_content > div.rightbar > ol
+{
+}
+
+#layout-main > div.g_content > div.rightbar > ol > li
+{
+	text-align:left;
+	padding-left:10px;
+}
+
+#layout-main > div.g_content > div.rightbar > ol > li > span
 {
 	display:none;
 }
 
-#layout-content > div.main_all > div.news > div.newsitem > div.body
+#layout-main > div.g_content > div.g_section > div.g_timedentry
+{
+	margin:0 auto;
+	width:650px;
+	background-image:url(images/GlassBottom.png);
+	background-repeat:no-repeat;
+	background-position:bottom left;
+	padding-bottom:60px;
+	margin-bottom:50px;
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > h4
+{
+	background-image:url(images/GlassTop.png);
+	background-repeat:no-repeat;
+	padding-top:30px;
+	text-align:center;
+	font-variant:small-caps;
+	color:#0099FF;
+	height:30px;
+	font-size:20px;
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > span.stamp,
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar,
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.body
+{
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > span.stamp
+{
+	display:block;
+	width:200px;
+	height:20px;
+	padding-left:40px;
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar
+{
+	width:200px;
+	padding-left:60px;
+	height:100px;
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar > a
+{
+	text-decoration:none;
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar > a > img
+{
+	border:none;
+	height:100px;
+	width:100px;
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.body
 {
 	background-image:url(images/GlassMiddle.png);
 	background-repeat:repeat-y;
-	padding:0 60px;
-	margin:-40px 0 0 0;
-	font-weight:bold;
+	padding:0 40px 0 200px;
+	margin-top:-120px;
+	overflow:hidden;
+	min-height:120px;
 }
 
-#layout-content > div.main_all > div.news > div.newsitem > div.body > ul,
-#layout-content > div.main_all > div.news > div.newsitem > div.body > ol
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.body > img
 {
-	padding:10px 0 0 40px;
+	max-width:420px;
 }
 
 #layout-footer
 {
-	background-image:url(images/GlassBottom.png);
-	background-repeat:no-repeat;
-	width:650px;
-	margin:0 auto;
-	padding:70px 0 0 0;
-	font-size:small;
+	padding-left:200px;
+	margin-bottom:50px;
 	text-align:center;
-	font-weight:bold;
 }
 
 #layout-footer:before
 {
-	content:"HaruhiStyleX.AniDB v2 - Made by TheJAG";
-}
-
-/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
-#layout-tabs {
-	display:none;
+	content:"HaruhiStyleX.AniDB v2 - A Stylesheet by TheJAG"
 }
