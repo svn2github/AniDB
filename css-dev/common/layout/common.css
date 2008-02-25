@@ -84,6 +84,7 @@ body.nonav #layout-main h1
 }
 
 #layout-main div.anime_all div.info tr.official td.value span.icons,
+#layout-main div table td.name span.icons,
 #layout-main div table td.title span.icons,
 #layout-main table.filelist td.source span.icons
 {

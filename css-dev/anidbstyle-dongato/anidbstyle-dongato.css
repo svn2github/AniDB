@@ -412,3 +412,18 @@ td.awards span.i_icon
 {
 	float: left;
 }
+
+div.latestanimes_anime div.g_image img[src*="nopic.gif"]
+{
+	width: 150px;
+}
+
+div.data caption
+{
+	float: left;
+}
+
+div.search select
+{
+	display: none;
+}
