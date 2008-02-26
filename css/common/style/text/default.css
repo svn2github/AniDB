@@ -37,8 +37,6 @@ h1 a
 h4, caption
 {
 	font-size: 120%;
-	/*margin-top: 0.4em;
-	margin-bottom: 0.2em;*/
 }
 
 .tab,
@@ -49,11 +47,18 @@ h4 span
 }
 
 th, td.action, td.date, td.year,
+span.date, span.user, td.rating,
 #menu-account li.alert,
 #layout-main div.anime_all div.g_section.mylist td.title
 {
 	white-space: nowrap;
 }
+
+span.date, span.user a.id, td.id, td.size{ letter-spacing: -1px }
+
+span.time, span.user a.id, td.rating span, a.filter{ font-size: 80%; vertical-align: top; }
+
+.file_all dd.group span.time { display: none }
 
 td.id, td.count, td.number, td.size, td.epno, td.duration,
 #layout-main div.up2date_file_list table td.mylist
@@ -93,12 +98,6 @@ h4.collapsed span,
 {
 	font-style: italic;
 }
-
-/*#layout-menu
-{
-	font-size: 10px;
-	line-height: 1.1;
-}*/
 
 .tiny, small,
 #layout-main .name span.main,

@@ -40,6 +40,11 @@ img, a
 	border-bottom: black 2px solid;
 }
 
+#layout-main table.eplist tr.files.episode td
+{
+	border-bottom: 1px solid gray;
+}
+
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top: black 2px solid;

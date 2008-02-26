@@ -1,11 +1,14 @@
-html
+body
 {
-	background: #BFC2C9 url(../anidbstyle/images/backtoo.png) repeat-y left;
+	background-image: url(../anidbstyle/images/backtoo.png);
+	background-position: left;
+	background-repeat: repeat-y;
+	background-color: #BFC2C9;
 }
 
 body.nonav
 {
-	background-color: #BFC2C9;
+	background-image: none;
 }
 
 a:visited, a:active, a:hover, a:link {
