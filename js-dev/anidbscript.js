@@ -121,7 +121,7 @@ var Magic = {
 				n = document.createElement("a");
 				n.title = k[2]; 
 				n.appendChild(document.createTextNode(k[0]));
-				if( k[1] ) n.onclick = k[1];
+				if( k[1] ){ n.href=""; n.onclick = k[1]; }
 				else n.href = validatorloc+"?uri=referer&doctype="+doctypecheck.replace(" ","+");
 				if( i>0 ) f.appendChild(document.createTextNode(", "));
 				f.appendChild(n);
@@ -138,6 +138,7 @@ var Magic = {
 				.replace(/(<[^>]+\s+)lang(=[\'\"])/g,"$1xml:lang$2")
 				.replace(/selected="true"/g,'selected="selected"') //for opera
 				.replace(/checked="true"/g,'checked="checked"') //for opera
+				.replace(/\/\*&#x5d\]>\*\//,'/*]]&gt;*/') //for opera
 				//.replace(/<select\s+name="(.+)"\s+size="(\d+)"\svalue="1">/g,'<select name="$1" size="$2">') //for opera
 				.replace(/\ class=""/g,'') //for js disabled classes
 			;
@@ -147,6 +148,7 @@ var Magic = {
 			var serialator = new XMLSerializer();
 			Magic.checkfield.value = Magic.asxmlfixup(serialator.serializeToString(document));
 			Magic.valiform.submit();
+			return false;
 		}),
 	'check_base':(function ()
 		{
@@ -163,6 +165,7 @@ var Magic = {
 					Magic.valiform.submit();
 				}
 			}
+			return false;
 		}),
 	'enable_row_kid_classes':(function ()
 		{
