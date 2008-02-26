@@ -137,6 +137,7 @@ var Magic = {
 				.replace(/<html/,'<html xmlns="http://www.w3.org/1999/xhtml"')
 				.replace(/(<[^>]+\s+)lang(=[\'\"])/g,"$1xml:lang$2")
 				.replace(/selected="true"/g,'selected="selected"') //for opera
+				.replace(/checked="true"/g,'checked="checked"') //for opera
 				//.replace(/<select\s+name="(.+)"\s+size="(\d+)"\svalue="1">/g,'<select name="$1" size="$2">') //for opera
 				.replace(/\ class=""/g,'') //for js disabled classes
 			;
