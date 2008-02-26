@@ -129,14 +129,16 @@ var Magic = {
 		}),
 	'asxmlfixup':(function (s)
 		{
-			return s
+			return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/tr/xhtml11/DTD/xhtml11.dtd\" [ <!ATTLIST td anidb:sort CDATA #IMPLIED> <!ATTLIST select value CDATA #IMPLIED> ]>"
+				+s
 				.replace(/<[^! >]+/g, function(m){return m.toLowerCase();})
 				.replace(/<\?xml\ version="1.0"\?>/,'')
-				.replace(/<!DOCTYPE\ html>/,"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/tr/xhtml11/DTD/xhtml11.dtd\" [ <!ATTLIST td anidb:sort CDATA #IMPLIED> ]>")
+				.replace(/<!DOCTYPE\ html>/,'')
 				.replace(/<html/,'<html xmlns="http://www.w3.org/1999/xhtml"')
 				.replace(/(<[^>]+\s+)lang(=[\'\"])/g,"$1xml:lang$2")
 				.replace(/selected="true"/g,'selected="selected"') //for opera
-				.replace(/\ class=""/g,'') //for js disabled classes*/
+				//.replace(/<select\s+name="(.+)"\s+size="(\d+)"\svalue="1">/g,'<select name="$1" size="$2">') //for opera
+				.replace(/\ class=""/g,'') //for js disabled classes
 			;
 		}),
 	'check_current':(function ()
