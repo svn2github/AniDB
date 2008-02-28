@@ -1,7 +1,6 @@
 @import "../../common/normalize.css";
 
 /*DEFAULT*/
-
 dl
 {
 display: table;
@@ -127,8 +126,7 @@ margin-left: 0;
 table table,
 h4+table,
 .g_section > table,
-.g_section > form > table/*,
-.search_all .g_definitionlist > table*/{
+.g_section > form > table{
 width: 100%;
 }
 
@@ -187,11 +185,6 @@ padding-right: 1em;
 
 a{
 text-decoration: none;
-}
-
-a:hover {
-color:#CC6600;
-background-color: #FFDDAA;
 }
 
 h1, a, .tabs li {
@@ -285,6 +278,7 @@ p.mylistadd{
 text-align: center;
 padding: 1em;
 background-color: white;
+border-top: 1px solid #EEE;
 border-bottom: 1px solid #EEE;
 }
 
@@ -296,32 +290,6 @@ width: 99%;
 display: none;
 }
 
-table td{
-border-top: 1px solid #EEE;
-}
-
-tr.mylist td, tr.good td{
-background-color: #F2FFF0;
-}
-
-tr.mylist td.name a:after{
-content: " M";
-font-size: 60%;
-color: gray;
-vertical-align: top;
-}
-
-tr.mylist.all_watched td{
-background-color: #F6F4FF;
-}
-tr.mylist.all_watched .name a:after/*, TODO: add label @ anime list? or go back to title
-.all_watched .name label:after*/{
-content: " W";
-/*font-size: 60%;
-color: gray;
-vertical-align: top;*/
-}
-
 td table{
 margin: 1em;
 }
@@ -330,6 +298,12 @@ input[type="text"], textarea, select{
 padding-left: 2px;
 /*border: 1px solid orange;*/
 }
+
+/*global structures*/
+.g_menu{ float: right }
+.g_end {clear: both}
+.g_section{ clear: left }
+
 
 /*global structure: g_info*/
 .g_info{
@@ -379,10 +353,15 @@ border-left: 1px solid black;
 
 /*global structure: g_timedentry*/
 .g_timedentry { margin: 0.5em 0.5em }
+
 .g_timedentry + .g_timedentry { margin-top: 1em }
+
 .g_timedentry h4{ font-size: 130% }
+
 .g_timedentry .avatar{ display: none }
+
 .g_timedentry .stamp{ float: right; margin-top: -1.2em }
+
 .g_timedentry .body{
 padding: 0.2em 1em;
 background-color: white;
@@ -398,14 +377,19 @@ th.award, td.awards{
 display: none;
 }
 
-pre, div.animerel{
-overflow: scroll;
-}
+pre, div.animerel, div.creq_data{ overflow: scroll } 
+pre{ max-height: 36em; }
+div.creq_data{ max-height: 28em; }
+
+
+
 
 /*bling bling, global micro objects*/
 td span.icons{ color: gray; float: right; }
 
-span.date, span.user, td.rating{ white-space: nowrap }
+span.date, span.user, td.rating, td.action, td.type{ white-space: nowrap }
+
+td.count, td.type, td.rating { text-align: center }
 
 span.date, span.user a.id, td.id, td.size{ letter-spacing: -1px }
 
@@ -415,7 +399,6 @@ span.time, span.user a.id, td.rating span, a.filter
 h4.collapsed span:first-child{ text-decoration: line-through }
 
 select{font-family: "Lucida Sans Unicode", sans-serif;} /*opera needs it...*/
-
 option{padding-left: 12px}
 
 option.section{padding-left: 4px; color: gray}
@@ -431,12 +414,62 @@ border-left: 2px solid lightgray;
 padding-left: 2px;
 }
 
+.pre_creq{ text-align: center; color: gray }
+
+a:hover {
+color:#CC6600;
+background-color: #FFDDAA;
+}
+
+td{
+border-top: 1px solid #EEE;
+}
+
+tr.newtype td{
+border-width: 3px;
+}
+
+tr.mylist td, tr.good td{
+background-color: #F2FFF0;
+}
+
+tr.mylist.all_watched td{
+background-color: #F6F4FF;
+}
+
+tr.mylist td.name a:after{
+content: " M";
+font-size: 60%;
+color: gray;
+vertical-align: top;
+}
+
+tr.mylist.all_watched .name a:after{
+content: " W";
+}
+
+del{ background-color: #FFEEEE }
+ins{ background-color: #F2FFF0 }
+
+.state.complete{ }
+.state.stalled{ font-style: italic }
+.state.dropped{ text-decoration: line-through }
+
+td.rating{ color: #0000AA }
+td.count{ color: #770000 }
+td.type{ color: gray }
+
+
 /*page spesific*/
-.mylist_menu h4{display:none}
 
-.mylist_menu ul{margin: 0.4em 0}
-
-.mylist_menu ul li{display:inline; border-left: 2px solid #CCC; border-bottom: 1px solid #DDD}
+.g_menu.mylist_menu{
+float: right;
+margin-right: -12em;
+margin-top: -6em;
+background-color: #F5F5F5;
+border: 1px solid #AFBEC7;
+padding: 0.4em;
+}
 
 .main_all {background-color: transparent}
 
@@ -449,18 +482,22 @@ background-color: #F7F7F2;
 margin-top: 7px;
 font-family: Tahoma, sans-serif;
 }
+
 .main_all .rightbar > * { margin: 8px }
+
 .main_all .rightbar h3 { display: none }
+
 .main_all .rightbar h4 { font-weight: bold; border-bottom: 1px solid #EAEADA }
+
 .main_all .rightbar li { white-space: nowrap; overflow: hidden }
 
 .main_all .g_list {text-align: left}
 
-.g_end {clear: both}
-
 .file_all dd.group span.time { display: none }
 
 .grouplist span.completion:after { content: attr(title) }
+
 .grouplist span.completion img { display: none }
 
 .group_all td.date.added { color: gray }
+
