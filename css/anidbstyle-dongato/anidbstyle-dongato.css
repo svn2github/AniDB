@@ -432,7 +432,8 @@ div.search select
 }
 
 /* more fixes for a design fuckup by anidb 'devs' */
-table.animelist td.name span.icons
+table.animelist td.name span.icons,
+table.filelist td.name span.icons
 {
 	float: right;
 }
