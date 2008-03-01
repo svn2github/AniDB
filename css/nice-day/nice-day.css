@@ -1,30 +1,5 @@
-@import "../../common/normalize.css";
-
-/*DEFAULT*/
-dl
-{
-display: table;
-margin: 1px auto 1px auto;
-}
-
-dl dt
-{
-float: left;
-clear: left;
-}
-
-dl dd
-{
-margin-left: 10em;
-text-align: left;
-}
-
-/**/
-*{
-color: inherit;
-font-size: inherit;
-font-family: inherit;
-}
+@import "../common/normalize.css";
+@import "../common/layout/default.css";
 
 				body.nonav
 { width: auto }

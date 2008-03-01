@@ -10,12 +10,10 @@
 ./harustylele/harustylele.css
 ./harustyle-fixed_menu/harustyle-fixed_menu.css
 ./luckystyle/luckystyle.css
+./nice-day/nice-day.css
 ./sub/blue/main.css
 ./sub/brown/main.css
 ./sub/brown2/main.css
-#./sub/dragon/main.css
-#./sub/gray/main.css #it's the same as the default style aka anidbstyle.css
-./sub/nice-day/main.css
 ./sub/norwegian-blue/main.css
 ./sub/silver/main.css
 ./sub/zakura/main.css
