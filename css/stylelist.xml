@@ -60,6 +60,16 @@
 		<screenshot>haruhistylex/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
+	<style name="haruhistylex-v1.5">
+		<title>HaruhiStyleX.AniDB</title>
+		<creator>Benda11</creator>
+		<update>29.02.2008</update>
+		<status>In development...</status>
+		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB is developed for Opera at a resolution of 1280x1024 and may not work in any other webbrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
+		<path/>
+		<screenshot>haruhistylex-v1.5/images/screenshot.png</screenshot>
+		<thumbnail>haruhistylex-v1.5/images/thumbnail.png</thumbnail>
+	</style>
 	<style name="haruhistylex-v2">
 		<title>HaruhiStyleX.AniDB v2</title>
 		<creator>TheJAG</creator>
