@@ -5,9 +5,14 @@
 @import "text.css";
 
 
-html, body, div
+#user-logout a
 {
-	padding: 0;
+	background-image: url(images/button_logout.gif);
+}
+
+#user-profile a
+{
+	background-image: url(images/button_profile.gif);
 }
 
 body,
@@ -16,78 +21,19 @@ body,
 	font-size: 10px;
 }
 
-#layout-content div.main_all h4,
-#layout-content div.main_edit h4
+.main_all .rightbar
 {
-	background-color: #3496DA;
-	color: #FFFFFF;
+	margin-top: 10px;
 }
 
-#layout-content div.main_all div.rightbar
+#layout-content div.anime_all div.mylist th.anime
 {
-	width: 16em;
-	float: right;
-	text-align: center;
-	margin: 0.3em;
+	width: 300px;
 }
 
-#layout-content div.main_all div.rightbar p
+#layout-footer:after
 {
-	margin: 1.2em 0 0 0;
-}
-
-#layout-content div.main_all div.rightbar h3
-{
-	font-size: 100%;
-	margin: 1.5em 0 0.4em 0;
-}
-
-#layout-content div.main_all div.rightbar ol
-{
-	margin: 0em 0 0.4em 0;
-	padding: 0;
-}
-
-#layout-content div.main_all div.rightbar li
-{
-	list-style: none;
-	text-align: left;
-}
-
-#layout-content div.main_all div.rightbar li span
-{
-	display: block;
-	float: left;
-	height: 100%;
-	width: 4em;
-	text-align: center;
-}
-
-#layout-content div.main_all div.rightbar li a
-{
-	display: block;
-	margin-left: 4em;
-}
-
-#layout-content div.main_all div.news
-{
-	margin-right: 17em;
-	margin-left: 0.3em;
-}
-
-#layout-content div.main_all div.news div.newsitem h4
-{
-	padding: 0.1em;
-}
-
-#layout-content div.main_all div.news div.newsitem span.stamp
-{
-	padding: 0.1em 1em 0.1em 0.1em;
-}
-
-#layout-content div.main_all div.news div.newsitem p.body
-{
-	margin: 0.1em 0.1em 3.1em 0.1em;
+	content: "design by b1nh"
 }
 
 /*disable new features until it's styled properly by the actual css dev if he wants to use it*/

@@ -1,6 +1,6 @@
 /* Style created by Benda_11 */
 
-@import "harustyle.css";
+@import "../harustyle/harustyle.css";
 
 /* s_tart m_ain */
 html
@@ -14,11 +14,6 @@ html
 	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
 }
 
-body {
-	padding: 0px;
-	margin: 0px;
-	border: 0px;
-}
 /* e_nd m_ain */
 
 /* s_tart s_earch */
@@ -34,25 +29,16 @@ body {
 	background: url('images/topback.png') repeat-x top;
 	height: 94px;
 	width: 100%;
-	_margin-top: -705px;
 }
 
 #layout-search div.search form
 {
-	display: block;
-	float: right;
-	background: url('images/searchbg.png') no-repeat 0px 77px;
+	background: url(images/searchbg.png) no-repeat 0px 77px;
 	margin: 0;
 	height: 70px;
 	width: 15.2em;
-	max-width: 152px; padding-left:0; padding-right:0; padding-top: 70px; padding-bottom:0;
-	/*margin-top: -727px;*/
-	_margin-top: 0px;
-}
-#layout-search div.search form p
-{
-	margin: 0;
-	padding: 0;
+	max-width: 152px;
+	padding: 70px 0 0 0;
 }
 
 #layout-search form select.type
@@ -60,52 +46,21 @@ body {
 	display: none;
 }
 
-#layout-search form input.text
-{
-	display: block;
-	float: right;
-	font-size: 10px;
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	color: #ffffff;
-	background-color: #272D43;
-	border: #BFC2C9 1px solid;
-	margin: 27px 3px 0 0;
-	width: 10.3em;
-}
-
 #layout-search form input.submit
 {
-	display: block;
-	float: right;
-	background: url('images/button_search.gif') no-repeat top;
-	font-size: 10px;
-	border: 0px solid white;
-	width: 63px;
-	height: 10px;
-	overflow: hidden;
-	margin-right: 2.3em;
+	background: url(images/button_search.gif) no-repeat top;
 	margin-top: 3px;
-	content: "";
-	padding:	0;
-	padding-top:14px;
 }
 /* e_nd s_earch*/
 
 /* s_tart m_enu */
 #layout-menu
 {
-	width: 500px;
-	background: url('images/menu.png') no-repeat;
-	float: left;
-	margin-top: 114px;
-	margin-left: 0px;
-	height: 603px;
-	margin-right: 0px;
+	background: url(images/menu.png) no-repeat left 94px;
 }
 
-#layout-menu li
-{
-	margin-left: -25px;
+#layout-menu ul {
+	margin-bottom: 2em;
 }
 
 #layout-menu *,
@@ -120,28 +75,19 @@ body {
 /* e_nd m_enu */
 
 /* s_tart p_rofile */
-#user-logout
+#user-logout a
 {
-	background-image: url('images/button_logout.gif');
-	background-repeat: no-repeat;
-	width: 42px;
-	height: 12px;
+	background-image: url(images/button_logout.gif);
 }
 
-#user-logout span {
-	visibility: hidden;
-}
-
-#user-profile
+#user-profile a
 {
-	background-image: url('images/button_profile.gif');
-	background-repeat: no-repeat;
-	width: 42px;
-	height: 12px;
+	background-image: url(images/button_profile.gif);
 }
 
-#user-profile span {
-	visibility: hidden;
+#user-profile a,
+#user-logout a{
+	float: none;
 }
 
 #user-name
@@ -152,32 +98,32 @@ body {
 }
 
 #menu-account {
-	position: absolute;
-	top: 0px;
-	left: 90%;
-	float: right;
+	top: 0;
+	right: 0;
+	left: auto;
 	margin-top: 5px;
-	_margin-top: 20px;
+	width: 120px;
+	z-index: 10;
 }
 
 #menu-account li {
+	text-align: left;
 	margin-top: 5px;
-	_margin-left: 5px; 
 }
 
 #menu-support {
-	padding-top: 70px;
+	position: absolute;
+	top: 506px;
+	left: 25px;
 }
 /* e_nd p_rofile */
 
 /* s_tart c_ontent*/
-#layout-content
+#layout-content h1, .g_content
 {
-	margin-left: 182px;
-	padding-top: 0.5em;
-	float: right;
-	margin-top: -553px;
+	margin-bottom: 1.5em;
 }
+
 /* e_nd c_ontent*/
 
 /* s_tart t_ext */

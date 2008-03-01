@@ -8,27 +8,10 @@
 @import "color.css";
 @import "text.css";
 
-
-html, body, div
-{
-	padding: 0;
-}
 body,
 #layout-menu
 {
 	font-size: 10px;
-}
-
-*.i_button
-{
-	display: block;
-	width: 42px;
-	height: 12px;
-	float: left;
-	margin-right: 4px;
-	background-repeat: no-repeat;
-	background-position: center;
-	text-indent: -5000px;
 }
 
 .i_logout
@@ -36,12 +19,12 @@ body,
 	background-image: url('images/button_logout.gif');
 }
 
-*.i_profile
+.i_profile
 {
 	background-image: url('images/button_profile.gif');
 }
 
-*.i_signup
+.i_signup
 {
 	background-image: url('images/button_signup.gif');
 }

@@ -8,26 +8,58 @@ body.nonav
 	background: #BFC2C9;
 }
 
+#layout-nav
+{
+	height: 102px;	
+}
+
 #layout-menu
 {
-	position: absolute;
-	top: 94px;
-	left: 0;
-	width: 100px;
+	background: url(images/menu.jpg) no-repeat left 94px;
+	padding: 146px 23px 0px 28px;
 	height: 603px;
-	background: url(images/menu.jpg) no-repeat top left;
-	padding: 44px 42px 0px 28px;
+	width: 120px;
+}
+
+#layout-content
+{
+	margin-left: 182px;
+	margin-top: -640px;
+}
+
+body > #layout-content
+{
+	margin-top: 0;
+}
+
+#layout-content h1
+{
+	font-size: 16px;
+	font-weight: bold;
+	text-align: left;
+}
+
+#layout-content div.g_section
+{
+	padding-top: 10px;
+	clear: both;
+}
+
+#layout-footer
+{
+	margin-top: 19px;
+	margin-left: 182px;
+	text-align: center;
 }
 
 #menu-account
 {
 	position: absolute;
-	top: 420px;
+	top: 510px;
 	left: 17px;
 	line-height: 1.2;
 }
 
-/* Mylist Report */
 #menu-mod
 {
 	display: none;
@@ -35,7 +67,8 @@ body.nonav
 
 #layout-menu ul
 {
-	line-height: 1.2;
+	line-height: 1.1;
+	margin-bottom: 0.8em;
 }
 
 #layout-menu li
@@ -51,24 +84,9 @@ body.nonav
 	display: none;
 }
 
-#layout-menu ul.main, #layout-menu li.ed2kdump, #layout-menu ul.lists
-{
-	margin-bottom: 1.0em;
-}
-
 #layout-menu li.genre, #layout-menu li.genren
 {
 	display: inline;
-}
-
-#layout-menu li.help
-{
-	margin-bottom: 2px;
-	display: block;
-	text-indent: 15px;
-	background-position:  left 50%;
-	background-repeat: no-repeat;
-	background-image: url(images/ask2.gif);padding-left:0; padding-right:0; padding-top:1px; padding-bottom:0
 }
 
 #layout-menu li.forum
@@ -78,7 +96,7 @@ body.nonav
 
 #menu-account li
 {
-	width: 90px;
+	width: 92px;
 	text-align: center;
 }
 
@@ -98,16 +116,6 @@ body.nonav
 	display: none;
 }
 
-#user-logout a
-{
-	background-image: url('images/button_logout.gif');
-}
-
-#user-profile a
-{
-	background-image: url('images/button_profile.gif');
-}
-
 #layout-menu #newmessages:before,
 #layout-menu #newnotifies:before,
 #layout-menu #newmessages:after,
@@ -125,8 +133,10 @@ body.nonav
 
 #layout-search
 {
+	position: absolute;
+	top: 0;
+	right: 0;
 	background: url(images/topback.png) repeat-x top;
-	width: 100%;
 	height: 102px
 }
 
@@ -138,7 +148,7 @@ body.nonav
 #layout-search div.search
 {
 	background: url(images/banner.png) no-repeat top left;
-	height: 102px
+	height: 102px;
 }
 
 #layout-search div.search form
@@ -148,8 +158,8 @@ body.nonav
 	background: url(images/searchbg.png) no-repeat 0px 77px;
 	margin: 0;
 	height: 70px;
-	width: 15.2em;
-	max-width: 152px; padding-left:0; padding-right:0; padding-top:70px; padding-bottom:0
+	width: 152px;
+	padding: 70px 0 0 0;
 }
 
 #layout-search div.search form p
@@ -173,51 +183,12 @@ body.nonav
 
 #layout-search form input.submit
 {
-	display: block;
-	float: right;
 	background: url(images/button_search.gif) no-repeat top;
-	font-size: 10px;
-	border: 0px solid white;
+	padding: 20px 0 0 0;
+	margin-left: 50px;
+	overflow: hidden;
 	width: 63px;
 	height: 14px;
-	overflow: hidden;
-	margin-right: 2.3em;
-	content: ""; padding-left:0; padding-right:0; padding-top:14px; padding-bottom:0
-}
-
-#layout-content
-{
-	margin-left: 182px;
-	padding-top: 0.5em;
-}
-
-#layout-content h1
-{
-	font-size: 16px;
-	font-weight: bold;
-	margin: 3px 0 18px 37px;
-	text-align: left;
-}
-
-#layout-content div.g_section
-{
-	padding-top: 10px;
-	clear: both;
-}
-
-#layout-footer
-{
-	margin-top: 19px;
-	margin-left: 182px;
-	text-align: center;
-}
-
-#layout-footer:after
-{
-	content: "design by b1nh"
-}
-
-#layout-content div.anime_all div.mylist th.anime
-{
-	width: 300px;
+	border: 0;
+	cursor: pointer;
 }
