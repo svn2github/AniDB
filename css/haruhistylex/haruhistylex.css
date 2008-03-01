@@ -23,7 +23,7 @@ background-repeat:repeat-y;
 #layout-menu
 {
 width: 189px;
-background: url('images/menu.png') no-repeat top left;
+background: url('images/menu.png') no-repeat left 94px;
 }
 
 #layout-search div.search
