@@ -22,6 +22,10 @@
 				.main_all .rightbar
 { width: 027% }
 
+				.review .bar
+{ width: 10em }
+
+
 				#layout-menu li ul li
 ,				.animelist .type
 ,				.main_all .rightbar li
@@ -303,12 +307,12 @@
 
 				#layout-search
 ,				#layout-tabs
-,				.animeatt_all .review .bar
 ,				.g_menu
 ,				.g_menu.mylist_menu
 ,				.g_msg h3
 ,				.g_timedentry .stamp
 ,				.main_all .rightbar
+,				.review .bar
 ,				td span.icons
 { float: right }
 
