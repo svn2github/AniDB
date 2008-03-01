@@ -1,0 +1,38 @@
+*.i_tv_series { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_tv_series.gif); 
+}
+
+*.i_movie { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_movie.gif); 
+}
+
+*.i_ova { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_ova.gif); 
+}
+
+*.i_web { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_web.gif); 
+}
+
+*.i_tv_special { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_tv_special.gif); 
+}
+
+*.i_other, *.i_unknown { 
+	display: none; 
+}
+
+*.i_recap
+{
+	background-image: url(../icons/icon/anidb_recap.gif);
+}

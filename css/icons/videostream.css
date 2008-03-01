@@ -1,0 +1,56 @@
+*.i_videostream_unknown,
+*.i_videostream_other__non_asp_,
+*.i_videostream_asp_other,
+*.i_videostream_mpeg_2,
+*.i_videostream_mpeg_1,
+*.i_videostream_realvideo_other,
+*.i_videostream_wmv9__also_wmv3_,
+*.i_videostream
+{
+	background-image: url(../icons/icon/anidb_videoStream.gif);
+}
+
+*.i_videostream_realvideo_9_10__also_rv40_,
+*.i_videostream_realvideo_other 
+{
+  width: 20px;
+	background-repeat: repeat-x;
+	background-position: left;
+	background-image: url(../icons/icon/anidb_videoStream_real.gif);
+}
+
+*.i_videostream_ms_mp4x__also_wmv1_2_,
+*.i_videostream_wmv9__also_wmv3_
+{
+  width: 20px;
+	background-repeat: repeat-x;
+	background-position: left;
+	background-image: url(../icons/icon/anidb_videoStream_wmv.gif);
+}
+
+*.i_videostream_divx__unk,
+*.i_videostream_divx3,
+*.i_videostream_divx4,
+*.i_videostream_divx5__also_divx6_
+{
+  width: 20px;
+	background-image: url(../icons/icon/anidb_videoStream_divx.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+*.i_videostream_xvid
+{
+  width: 20px;
+	background-image: url(../icons/icon/anidb_videoStream_xvid.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}
+
+*.i_videostream_h264_avc
+{
+  width: 20px;
+	background-image: url(../icons/icon/anidb_videoStream_h264.gif);
+	background-repeat: repeat-x;
+	background-position: left;
+}

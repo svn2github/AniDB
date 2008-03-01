@@ -1,0 +1,237 @@
+a.descending {
+	padding-left: 11px; background: url(../icons/zakura/order-descending.gif) no-repeat center left;
+}
+a.ascending {
+	padding-left: 11px; background: url(../icons/zakura/order-ascending.gif) no-repeat center left;
+}
+a.inactive {
+	padding-left: 11px; background: url(../icons/zakura/order.gif) no-repeat center left;
+}
+
+.i_help {
+	background: transparent url(../icons/zakura/help.png) no-repeat left center;
+	cursor: help;
+	border: 0 !important;
+	padding: 4px 8px;
+}
+
+.i_help:hover {
+	background-position: -15px center;
+}
+
+.i_down1, .i_up1		{background-position: -11px center;}
+.i_nodown1, .i_down1	{background-image: url(../icons/zakura/down.gif);}
+.i_noup1, .i_up1		{background-image: url(../icons/zakura/up.gif);}
+.i_minus				{background-image: url(../icons/zakura/minus.gif);}
+.i_plus					{background-image: url(../icons/zakura/plus.gif);}
+.i_minus:hover			{background-position: right}
+.i_plus:hover			{background-position: right}
+
+/* file state */
+.i_filestate_oncd		{background-image: url(../icons/zakura/state-cd.png);}
+.i_filestate_ondvd		{background-image: url(../icons/zakura/state-dvd.png);}
+.i_filestate_onhdd		{background-image: url(../icons/zakura/state-hdd.gif);}
+.i_filestate_other		{background-image: url(../icons/zakura/state-unknown.gif);}
+
+/* file attributes */
+.i_comment,
+.i_group_comment		{background-image: url(../icons/zakura/comment.png); height: 15px !important; background-position: center bottom !important;}
+.i_crc_yes				{background-image: url(../icons/zakura/crc-yes.png); height: 15px !important;}
+.i_new_icon				{background-image: url(../icons/zakura/epfile-new.png);}
+.i_uncensored			{background-image: url(../icons/zakura/uncensored.gif);}
+.i_video				{background-image: url(../icons/zakura/video.gif);}
+.i_vrs_2				{background-image: url(../icons/zakura/v2.png); height: 15px !important;}
+.i_vrs_3				{background-image: url(../icons/zakura/v3.png); height: 15px !important;}
+
+
+/* anime state */
+.i_state_all			{background-image: url(../icons/zakura/state-all.png);}
+.i_state_deleted		{background-image: url(../icons/zakura/state-del.png);}
+.i_state_mixed			{background-image: url(../icons/zakura/state-mixed.png);}
+.i_state_oncd			{background-image: url(../icons/zakura/state-cd.png);}
+.i_state_onhdd			{background-image: url(../icons/zakura/state-hdd.gif);}
+.i_state_unknown		{background-image: url(../icons/zakura/state-unknown.gif);}
+.i_no_vote				{background-image: url(../icons/zakura/vote-no.gif);}
+
+/* seen */
+.i_seen					{background-image: url(../icons/zakura/state-seen.png);}
+.i_seen_no				{background-image: url(../icons/zakura/seen-no.png);}
+.i_seen_yes				{background-image: url(../icons/zakura/seen-yes.png);}
+
+/* mylist */
+.i_file_addmylist		{background-image: url(../icons/zakura/mylist-add.png);}
+.i_file_removemylist	{background-image: url(../icons/zakura/mylist-remove.png);}
+.i_mylist				{background-image: url(../icons/zakura/state-inmylist.png);}
+
+/* actions */
+.i_file_add				{background-image: url(../icons/zakura/epfile-add.gif);}
+.i_ep_edit,
+.i_file_edit			{background-image: url(../icons/zakura/edit.png);}
+.i_file_ed2k			{background-image: url(../icons/zakura/ed2k.gif);}
+.i_ep_vote				{background-image: url(../icons/zakura/vote.png);}
+.i_group_vote			{background-image: url(../icons/zakura/vote.png);}
+.i_vote					{background-image: url(../icons/zakura/vote.png);}
+
+
+/* audio+sub flags */
+.i_audio_fi				{background-image: url(../icons/zakura/audio-finnish.gif);}
+.i_sub_fi				{background-image: url(../icons/zakura/audio-sub-finnish.gif);}
+.i_audio_ja				{background-image: url(../icons/zakura/audio-japanese.gif);}
+.i_sub_ja				{background-image: url(../icons/zakura/audio-sub-japanese.gif);}
+.i_audio_x-jat			{background-image: url(../icons/zakura/audio-x-japanese.gif);}
+.i_sub_x-jat			{background-image: url(../icons/zakura/audio-sub-x-japanese.gif);}
+.i_audio_pl				{background-image: url(../icons/zakura/audio-polish.gif);}
+.i_sub_pl				{background-image: url(../icons/zakura/audio-sub-polish.gif);}
+.i_audio_ru				{background-image: url(../icons/zakura/audio-russian.gif);}
+.i_sub_ru				{background-image: url(../icons/zakura/audio-sub-russian.gif);}
+.i_audio_sl				{background-image: url(../icons/zakura/audio-slovenian.gif);}
+.i_sub_sl				{background-image: url(../icons/zakura/audio-sub-slovenian.gif);}
+.i_audio_x-other		{background-image: url(../icons/zakura/audio-unknown.gif);}
+.i_sub_x-other			{background-image: url(../icons/zakura/audio-sub-unknown.gif);}
+.i_audio_x-unk			{background-image: url(../icons/zakura/audio-unknown.gif);}
+.i_sub_x-unk			{background-image: url(../icons/zakura/audio-sub-unknown.gif);}
+
+/* rating */
+.i_rate_veryhigh,
+.i_rate_high,
+.i_rate_med,
+.i_rate_low,
+.i_rate_vlow {
+	background-repeat: repeat-x !important;
+	background-position: left !important;
+	padding: 0 !important;
+	background-image: url(../icons/zakura/star.png);
+}
+
+.i_rate_veryhigh		{width: 45px !important;}
+.i_rate_high			{width: 37px !important;}
+.i_rate_med				{width: 30px !important;}
+.i_rate_low				{width: 22px !important;}
+.i_rate_vlow			{width: 15px !important;}
+.i_rate_unknown		{
+	background-image: url(../icons/zakura/star-un.png);
+	padding: 0 !important;
+	height: 15px !important;
+}
+
+img[src*="anidb_pri_low.gif"] {
+	background: transparent url(../icons/zakura/priority-low.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_pri_med.gif"] {
+	background: transparent url(../icons/zakura/priority-med.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_pri_high.gif"] {
+	background: transparent url(../icons/zakura/priority-high.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_notify.gif"] {
+	background: transparent url(../icons/zakura/notify.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_nonotify.gif"] {
+	background: transparent url(../icons/zakura/notify-no.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+
+img[src*="anidb_no_vote.gif"] {
+	background: transparent url(../icons/zakura/vote-no.gif) no-repeat left 3px;
+	width: 0;
+	padding-left: 5px;
+	height: 16px;
+}
+
+/*a:focus .i_up, a:hover .i_up, a:active .i_up,
+a:focus .i_down, a:hover .i_down, a:active .i_down {
+	background-position: right;
+}*/
+/*a:focus img[src*="noup1.gif"], a:hover img[src*="noup1.gif"], a:active img[src*="noup1.gif"],
+a:focus img[src*="nodown1.gif"], a:hover img[src*="nodown1.gif"], a:active img[src*="nodown1.gif"] {
+	background-position: -11px top;
+}
+img[src*="file_delete.gif"] {
+	background: transparent url(../icons/zakura/state-del.png) no-repeat left top;
+	width: 0;
+	padding-left: 14px;
+}
+img[src*="file_edit.gif"] {
+	background: transparent url(../icons/zakura/mylist-edit.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_seen_no.gif"] {
+	background: transparent url(../icons/zakura/seen-no.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_seen_yes.gif"] {
+	background: transparent url(../icons/zakura/seen-yes.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_file_addmylist.gif"] {
+	background: transparent url(../icons/zakura/mylist-add.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_file_removemylist.gif"] {
+	background: transparent url(../icons/zakura/mylist-remove.png) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="anidb_file_ed2k.gif"] {
+	background: transparent url(../icons/zakura/ed2k.gif) no-repeat left top;
+	width: 0;
+	padding-left: 15px;
+}
+img[src*="ask2.gif"] {
+	background: transparent url(../icons/zakura/help.png) no-repeat -1px top;
+	width: 0;
+	padding-left: 13px;
+}
+img[src*="ask2.gif"]:hover {
+	background-position: -16px top;
+}
+
+.g_content div.icons {
+	margin: 2px 0.3em 0;
+}
+
+.g_content td.title div.icons {
+	float: right;
+}
+
+.g_content .i_icon,
+div.mylist_list td.icons span,
+div.anime_all td.icons span,
+#obj-tooltip div.icons .i_icon {
+	float: left;
+	display: block;
+	width: 15px;
+	height: 13px;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-indent: -5000px;
+	padding: 0 2px;
+}
+.icon a:hover {
+	border: none !important;
+}
+.i_inline {
+	padding: 8px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.i_inline span {
+	display: none;
+}
+.i_nodown1, .i_down1, .i_noup1, .i_up1 {
+	width: 9px;
+	height: 10px;
+}*/
