@@ -103,14 +103,8 @@ span.test,
 button,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main .g_list li a,
-#layout-main div.pagination span a
-{
-	color: black;
-	border: outset #969AA6 1px;
-	background-color: #BFC2C9;
-}
-
-input[type="button"], /*NIE*/
+#layout-main div.pagination span a,
+input[type="button"],
 input[type="submit"]
 {
 	color: black;
@@ -131,12 +125,8 @@ button:hover,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main .g_list li a:hover,
 #layout-main .g_list li.g_odd a:hover,
-div.pagination span strong:hover
-{
-	background-color: #B0B0B1;
-}
-
-input[type="button"]:hover, /*NIE*/
+div.pagination span strong:hover,
+input[type="button"]:hover,
 input[type="submit"]:hover
 {
 	background-color: #B0B0B1;
