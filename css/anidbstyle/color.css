@@ -1,0 +1,143 @@
+body
+{
+	background-image: url(../anidbstyle/images/backtoo.png);
+	background-position: left;
+	background-repeat: repeat-y;
+	background-color: #BFC2C9;
+}
+
+body.nonav
+{
+	background-image: none;
+}
+
+a:visited, a:active, a:hover, a:link {
+  color: blue;
+  text-decoration: none;
+}
+
+#layout-main div.anime_all div.mylist th,
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd
+{
+	background-color: #b0b0b0;
+}
+
+#layout-main ul.g_list li.g_odd
+{
+	background-color: #BFC2C9;
+}
+
+#layout-main div.main_all div.news h4,
+#layout-main div.main_all div.rightbar h4
+{
+	padding: 2px;
+	color: #bbbbbb;
+	background-color: #494d59;
+}
+#layout-main div.cmt_all div.comment h4
+{
+	background-color: #969aa6;
+}
+
+#layout-main div.main_all div.news div.newsitem span.stamp
+{
+	background-color: #969aa6;
+}
+
+#layout-menu a:link,
+#layout-menu a:visited,
+#layout-tabs a
+{
+	color: white;
+}
+
+#layout-menu a:active,
+#layout-tabs li.selected a
+{
+	color: red;
+}
+
+#layout-menu,
+#layout-menu a:hover,
+#layout-tabs a:hover {
+	color: #bbbbbb;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="checkbox"],
+select, textarea
+{
+	color: #b0b0b0;
+	border: #BFC2C9 1px solid;
+	background-color: #34394d;
+	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size: 130%;
+}
+
+/*IE*/
+#layout-search input,
+#user-xname input,
+#user-xpass input
+{
+	color: #b0b0b0;
+	border: #BFC2C9 1px solid;
+	background-color: #34394d;
+	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size: 130%;
+}
+
+input[size="10"]
+{
+	width: 6em;
+}
+
+input[size="60"]
+{
+	width: 36em;
+}
+
+span.test,
+button,
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main .g_list li a,
+#layout-main div.pagination span a
+{
+	color: black;
+	border: outset #969AA6 1px;
+	background-color: #BFC2C9;
+}
+
+input[type="button"], /*NIE*/
+input[type="submit"]
+{
+	color: black;
+	border: outset #969AA6 1px;
+	background-color: #BFC2C9;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected,
+.g_list li.selected,
+div.pagination span strong
+{
+	border: inset #969AA6 1px;
+	background-color: #B0B0B1;
+}
+
+span.test:hover,
+button:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main .g_list li a:hover,
+#layout-main .g_list li.g_odd a:hover,
+div.pagination span strong:hover
+{
+	background-color: #B0B0B1;
+}
+
+input[type="button"]:hover, /*NIE*/
+input[type="submit"]:hover
+{
+	background-color: #B0B0B1;
+}

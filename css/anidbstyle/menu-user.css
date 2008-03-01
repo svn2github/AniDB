@@ -1,0 +1,109 @@
+#menu-account li
+{
+	text-align: center;
+}
+
+#menu-account #user-name
+{
+	padding-left: 8px;
+	margin-bottom: 6px;
+}
+
+#menu-login #user-login
+{
+	text-align: right;
+	margin-bottom: 2px;	
+}
+
+#user-login a:after
+{
+	content: " *";
+}
+
+#user-signup a,
+#user-profile a,
+#user-logout a
+{
+	display: block;
+	width: 42px;
+	height: 12px;
+	border: 0;
+}
+
+#user-signup a span,
+#user-profile a span,
+#user-logout a span
+{
+	display: none;
+}
+
+#user-logout,
+#user-xauth,
+#user-profile,
+#user-signup
+{
+	float: right;
+	margin: 1px 2px 2px 1px;
+}
+
+#user-xname,
+#menu-account li.alert
+{
+	clear: right; /*FF*/
+}
+
+#user-profile a
+{
+	background-image: url(../icons/button_profile.gif);
+}
+
+#user-logout a
+{
+	background-image: url(../icons/button_logout.gif);
+}
+
+#user-signup a
+{
+	background-image: url(../icons/button_signup.gif);
+}
+
+#user-xauth
+{
+	background: url(../icons/button_logon.gif);
+	width: 42px;
+	height: 12px;
+	overflow: hidden;
+}
+
+#user-xauth button
+{
+	background: transparent;
+	cursor: pointer;
+	border: none;
+	-cursor: hand;
+}
+
+#user-xauth button span
+{
+	display: block;
+	padding-top: 12px;
+}
+
+#user-xkeep label
+{
+	margin-left: -20px;
+	font-size: 90%;
+}
+
+#user-xkeep input
+{
+	vertical-align: middle;
+}
+
+#menu-account li.alert span:before,
+#menu-account li.alert span:after
+{
+	content: "!";
+	color: red;
+	padding: 0.2em;
+}
