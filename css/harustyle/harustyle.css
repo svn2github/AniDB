@@ -1,8 +1,4 @@
-@import "../common/style/icons/awards.css";
 @import "common.css";
-
-@import "../common/style/color/status-radioactive.css";
-
 @import "layout.css";
 @import "border.css";
 @import "color.css";
@@ -13,39 +9,12 @@ html, body, div
 {
 	padding: 0;
 }
+
 body,
 #layout-menu
 {
 	font-size: 10px;
 }
-
-*.i_button
-{
-	display: block;
-	width: 42px;
-	height: 12px;
-	float: left;
-	margin-right: 4px;
-	background-repeat: no-repeat;
-	background-position: center;
-	text-indent: -5000px;
-}
-
-.i_logout
-{
-	background-image: url('images/button_logout.gif');
-}
-
-*.i_profile
-{
-	background-image: url('images/button_profile.gif');
-}
-
-*.i_signup
-{
-	background-image: url('images/button_signup.gif');
-}
-
 
 #layout-content div.main_all h4,
 #layout-content div.main_edit h4
@@ -121,7 +90,8 @@ body,
 	margin: 0.1em 0.1em 3.1em 0.1em;
 }
 
-/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+/*disable new features until it's styled properly by the actual css dev if he wants to use it*/
+#layout-search select,
 #layout-tabs {
 	display:none;
 }

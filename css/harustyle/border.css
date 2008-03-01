@@ -25,7 +25,7 @@ img, a
 	margin: 0;
 }
 
-#layout-content div.anime_all div.episodes tr.heading th
+#layout-content div.anime_all div.episodes tr.header th
 {
 	padding: 4px 1px 7px 1px;
 	border-bottom: black 2px solid;

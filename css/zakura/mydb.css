@@ -2,7 +2,7 @@
 			@MYDB
 ----------------------------------*/
 
-div.mydb_all ul.g_jumplist {
+div.mydb_all ul.g_list.jump {
 	margin: 1em 0;
 }
 div.mydb_all div.g_section>table {

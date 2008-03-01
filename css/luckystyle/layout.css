@@ -14,17 +14,13 @@ body.nonav
 	position: absolute;
 	top: 132px;
 	left: 0;
-	width: 170px;
+	width: 100px;
 	height: 603px;
+	padding: 10px 42px 0px 28px;
 	background: url('images/Lucky_Menu.png') no-repeat top left;
 }
 
-#layout-menu div.menu
-{
-	padding: 10px 42px 0px 28px;
-}
-
-#layout-menu div.usermenu
+#menu-account
 {
 	position: absolute;
 	top: 370px;
@@ -32,16 +28,11 @@ body.nonav
 	line-height: 1.2;
 }
 
-/* Mylist Report */
-#layout-menu div.menu ul.mod
+#menu-mod,
+#menu-main .schedule,
+#menu-main .random
 {
-	position: absolute;
-	top: 600px;
-	left: 20px;
-	padding: 10px;
-	background-color: #1a2238;
-	border: 1px solid #969aa6;
-	visibility: hidden;
+	display: none;
 }
 
 #layout-menu ul
@@ -65,7 +56,7 @@ body.nonav
 	display: none;
 }
 
-#layout-menu ul.main, #layout-menu li.ed2kdump, #layout-menu ul.lists
+#menu-main, #menu-private, #menu-lists
 {
 	margin-bottom: 1.0em;
 }
@@ -90,22 +81,36 @@ body.nonav
 	font-weight: bold;
 }
 
-#layout-menu div.usermenu
+#menu-account li
 {
+	width: 90px;
 	text-align: center;
 }
 
-#layout-menu span.login
+#user-profile a,
+#user-logout a
 {
-	text-align: left;
+	float: left;
 	display: block;
-	margin-left: 47px;
+	width: 42px;
+	height: 12px;
+	margin: 2px;
 }
 
-#layout-menu span.user
+#user-profile a span,
+#user-logout a span
 {
-	text-align: left;
-	display: block;
+	display: none;
+}
+
+#user-logout a
+{
+	background-image: url('images/buttons/button_logout.gif');
+}
+
+#user-profile a
+{
+	background-image: url('images/buttons/button_profile.gif');
 }
 
 #layout-menu #newmessages:before,
@@ -121,53 +126,6 @@ body.nonav
 #layout-menu #newmessages
 {
 	display: block;
-}
-#layout-menu form
-{
-	margin-top: 16px;
-}
-#layout-menu form input.text
-{
-	display: block;
-	font-size: 10px;
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	color: #ffffff;
-	background-color: #272D43;
-	border: #BFC2C9 1px solid;
-	width: 8.7em;
-}
-
-#layout-menu form input.logon
-{
-	position: absolute;
-	display: block;
-	width: 42px;
-	height: 12px;
-	top: 14px;
-	left: 2px;
-	overflow: hidden;
-	background: url('images/buttons/button_logon.gif') no-repeat top;
-	border: 0px none;
-	content: ""; padding-left:0; padding-right:0; padding-top:12px; padding-bottom:0;
-}
-
-#layout-menu div.usermenu a.i_signup
-{
-	position: absolute;
-	top: 14px;
-	left: 46px;
-}
-
-#layout-menu form label.remember
-{
-	margin-left: -20px;
-	font-size: 90%;
-}
-
-#layout-menu form label.remember input
-{
-	font-size: 111%;
-	vertical-align: middle;
 }
 
 #layout-search

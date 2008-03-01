@@ -1,3 +1,4 @@
+@import "../common/normalize.css";
 @import "../common/layout/default.css";
 @import "../common/layout/common.css";
 
@@ -6,7 +7,10 @@
 
 @import "../common/style/icons/default.css";
 @import "../common/style/icons/flags.css";
+@import "../common/style/icons/awards.css";
 
+/*@import "../common/style/color/status-radioactive.css";*/
+@import "status-radioactive.css";
 @import "../common/style/color/msgbox-default.css";
 @import "../common/style/color/special.css";
 

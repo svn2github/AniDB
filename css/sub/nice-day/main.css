@@ -26,478 +26,587 @@ font-size: inherit;
 font-family: inherit;
 }
 
-a{
-text-decoration: underline;
-}
-
-.g_list, .tabs{
-text-align: right;
-}
-
-.main-tabs li,
-.tabs li.tab,
-.g_list li{
-display: inline;
-}
-
-ul.contribution li{
-display: block;
-text-align: left;
-}
-
-#layout-nav{
-background: url(images/dc.jpg) top left no-repeat;
-padding-top: 160px;
-}
-
-#layout-menu{
-background: #D9E1E5 url(images/nav.gif) top left;
-border-color: #DFEEF7 rgb(207, 222, 231);
-border-style: solid;
-border-width: 1px;
-color: #444444;
-height: 41px;
-}
-
-#layout-menu li span.tab,
-#layout-menu li ul.popup{
-font-size: 110%;
-color: #456;
-display: block;
-line-height: 41px;
-padding-right: 20px;
-padding-left: 20px;
-font-family: sans-serif;
-}
-
-#layout-menu > li{
-float: left;
-}
-
-#layout-menu li span.tab{
-background: #D9E1E5 url(images/nav.gif);
-border-right: 1px solid #AFBEC7;
-font-weight: bold;
-}
-
-#layout-menu li.alert span.tab{
-color: #B00;
-}
-
-#layout-menu li span.tab:hover{
-background-position: left bottom; color: #234;
-}
-
-#layout-menu li ul.popup{
-position: absolute;
-background-color: #F5F5F5;
-border: 1px solid #AFBEC7;
-border-top: none;
-margin-left: -1px;
-padding-top: 10px;
-padding-bottom: 10px;
-}
-
-#layout-menu li form{
-line-height: 41px;
-}
-
-#layout-menu a[title^=""] span{
-display: none;
-}
-
-#layout-menu a[title^=""]:after{
-content: attr(title); /*Opera only*/
-}
-
-#layout-menu li ul{
-display: none;
-}
-
-#layout-menu li ul li{
-float: none;
-display: block;
-line-height: normal;
-white-space: nowrap;
-margin-left: 0;
-}
-
-/**/
-table table,
-h4+table,
-.g_section > table,
-.g_section > form > table{
-width: 100%;
-}
-
-html{
-background: #E6EDF5 url(images/bg.jpg) top left repeat-x;
-font-family: "Lucida Sans Unicode", sans-serif;
-font-size: 14px;
-height: 100%;
-}
-
-body{
-background-color: white;
-margin: 10px auto 10px auto;
-padding: 10px 10px 5px 10px;
-width: 1024px;
-}
-
-body.nonav{
-width: auto;
-margin: 0;
-background-color: transparent;
-}
-
-#layout-footer{
-text-align: center;
-font-size: 80%;
-padding-top: 0.5em;
-}
-
-h1{
-font-family: Tahoma,sans-serif;
-font-size: 220%;
-margin-top: 0.2em;
-}
-
-#layout-tabs{
-margin-top: 0.5em;
-float: right;
-}
-
-h4 span{
-font-size: 120%;
-font-weight: bold;
-color:#666666;
-line-height: 2em;
-}
-
-td,th{
-padding-left: 3px;
-}
-
-th{
-white-space: nowrap;
-padding-right: 1em;
-}
-
-a{
-text-decoration: none;
-}
-
-h1, a, .tabs li {
-color: #996633;
-}
-
-.selected a,
-#layout-footer{
-color: #AAAAAA;
-}
-
-a.ascending{
-text-decoration: underline;
-}
-
-a.descending{
-text-decoration: overline;
-}
-
-/**/
-.hide{
-display: none !important;
-}
-
-.image{
-float: left;
-padding: 1em;
-}
-
-div.desc{
-clear: left;
-background-color: #F5F5F5;
-border: 1px solid #E3E4E4;
-color: #505050;
-padding: 3px 3px 3px 8px;
-margin-top: 1em;
-}
-
-.main_all .news,
-.g_content{
-background-color: #FAFAFA;
-padding: 6px;
-}
-
-.g_section,.g_list,.g_msg, .tabs{
-margin-top: 0.5em;
-margin-bottom: 0.5em;
-}
-
-.tab, #layout-footer, .i_icon span, h4 span:first-child, span a{
-cursor: pointer;
--moz-user-select: none;
--user-select: none;
-}
-
-#layout-menu .tab, .i_icon span, th{
-cursor: default;
-}
-
-#layout-footer div{
-font-size: 200%;
-}
-
-ul.main-tabs li,
-ul.tabs li.tab,
-ul.g_list li,
-li.tab,
-tr.header {
-border-color: #EEEEEE rgb(238, 238, 238) rgb(238, 238, 238) rgb(193, 202, 211);
-border-style: solid;
-border-width: 1px 1px 1px 5px;
-padding-left: 2px;
-font-family: Tahoma,sans-serif;
-line-height: 1.6em;
-}
-
-#layout-search{
-float: right;
-margin-top: -33px;
-padding-right: 10px;
-}
-
-#layout-menu p{
-text-align: right;
-}
-
-p.action,
-tr.action td.submit,
-tr.action td.value,
-p.mylistadd{
-text-align: center;
-padding: 1em;
-background-color: white;
-border-top: 1px solid #EEE;
-border-bottom: 1px solid #EEE;
-}
-
-textarea{
-width: 99%;
-}
-
-#menu-user li.user{
-display: none;
-}
-
-td table{
-margin: 1em;
-}
-
-input[type="text"], textarea, select{
-padding-left: 2px;
-/*border: 1px solid orange;*/
-}
-
-/*global structures*/
-.g_menu{ float: right }
-.g_end {clear: both}
-.g_section{ clear: left }
-
-
-/*global structure: g_info*/
-.g_info{
-margin: 1em 0;
-padding: 0.2em 1em;
-background-color: white;
-border-top: 1px solid #EEE;
-border-bottom: 1px solid #EEE;
-}
-
-/*global structure: g_msg*/
-.g_msg{
-padding: 0.1em 0.2em;
-border-top: 1px solid #EEE;
-border-bottom: 1px solid #EEE;
-background-color: white;
-}
-
-.g_msg h3{
-float: right;
-font-weight: bold;
-}
-
-.g_msg.note h3{
-color: #8888FF;
-}
-
-.g_msg.error h3{
-color: #DD5533;
-}
-
-.g_msg.warning h3{
-color: #FF8800;
-}
-
-.g_msg.success h3{
-color: #88AA88;
-}
-
-.i_award{
-padding: 0 0.5em;
-}
-
-.i_award + .i_award{
-border-left: 1px solid black;
-}
-
-/*global structure: g_timedentry*/
-.g_timedentry { margin: 0.5em 0.5em }
-
-.g_timedentry + .g_timedentry { margin-top: 1em }
-
-.g_timedentry h4{ font-size: 130% }
-
-.g_timedentry .avatar{ display: none }
-
-.g_timedentry .stamp{ float: right; margin-top: -1.2em }
-
-.g_timedentry .body{
-padding: 0.2em 1em;
-background-color: white;
-border-top: 1px solid #EEE;
-border-bottom: 1px solid #EEE;
-}
-
-/*TEMP*/
-/*img{opacity: 0.04}*/
-
-.i_video, .i_audio,
-th.award, td.awards{
-display: none;
-}
-
-pre, div.animerel, div.creq_data{ overflow: scroll } 
-pre{ max-height: 36em; }
-div.creq_data{ max-height: 28em; }
-
-
-
-
-/*bling bling, global micro objects*/
-td span.icons{ color: gray; float: right; }
-
-span.date, span.user, td.rating, td.action, td.type{ white-space: nowrap }
-
-td.count, td.type, td.rating { text-align: center }
-
-span.date, span.user a.id, td.id, td.size{ letter-spacing: -1px }
-
-span.time, span.user a.id, td.rating span, a.filter
-{ color: gray; font-size: 76%; vertical-align: top; }
-
-h4.collapsed span:first-child{ text-decoration: line-through }
-
-select{font-family: "Lucida Sans Unicode", sans-serif;} /*opera needs it...*/
-option{padding-left: 12px}
-
-option.section{padding-left: 4px; color: gray}
-
-option.section:after{content:":"}
-
-option[value="delall"]{color: #B11}
-
-blockquote{
-color: #0F0F0F;
-background-color: white;
-border-left: 2px solid lightgray;
-padding-left: 2px;
-}
-
-.pre_creq{ text-align: center; color: gray }
-
-a:hover {
-color:#CC6600;
-background-color: #FFDDAA;
-}
-
-td{
-border-top: 1px solid #EEE;
-}
-
-tr.newtype td{
-border-width: 3px;
-}
-
-tr.mylist td, tr.good td{
-background-color: #F2FFF0;
-}
-
-tr.mylist.all_watched td{
-background-color: #F6F4FF;
-}
-
-tr.mylist td.name a:after{
-content: " M";
-font-size: 60%;
-color: gray;
-vertical-align: top;
-}
-
-tr.mylist.all_watched .name a:after{
-content: " W";
-}
-
-del{ background-color: #FFEEEE }
-ins{ background-color: #F2FFF0 }
-
-.state.complete{ }
-.state.stalled{ font-style: italic }
-.state.dropped{ text-decoration: line-through }
-
-td.rating{ color: #0000AA }
-td.count{ color: #770000 }
-td.type{ color: gray }
-
-
-/*page spesific*/
-
-.g_menu.mylist_menu{
-float: right;
-margin-right: -12em;
-margin-top: -6em;
-background-color: #F5F5F5;
-border: 1px solid #AFBEC7;
-padding: 0.4em;
-}
-
-.main_all {background-color: transparent}
-
-.main_all .news{ width: 70% }
-
-.main_all .rightbar{
-width:27%;
-float:right;
-background-color: #F7F7F2;
-margin-top: 7px;
-font-family: Tahoma, sans-serif;
-}
-
-.main_all .rightbar > * { margin: 8px }
-
-.main_all .rightbar h3 { display: none }
-
-.main_all .rightbar h4 { font-weight: bold; border-bottom: 1px solid #EAEADA }
-
-.main_all .rightbar li { white-space: nowrap; overflow: hidden }
-
-.main_all .g_list {text-align: left}
-
-.file_all dd.group span.time { display: none }
-
-.grouplist span.completion:after { content: attr(title) }
-
-.grouplist span.completion img { display: none }
-
-.group_all td.date.added { color: gray }
+				body.nonav
+{ width: auto }
+
+				body
+{ width: 1024px }
+
+				.g_section > form > table
+,				.g_section > table
+,				h4+table
+,				table table
+{ width: 100% }
+
+				textarea
+{ width: 099% }
+
+				.main_all .news
+{ width: 070% }
+
+				.main_all .rightbar
+{ width: 027% }
+
+				#layout-menu li ul li
+,				.animelist .type
+,				.main_all .rightbar li
+,				span.date
+,				span.user
+,				td.action
+,				td.rating
+,				th
+{ white-space: nowrap }
+
+				a.filter
+,				span.time
+,				span.user a.id
+,				td.rating span
+,				tr.mylist td.name a:after
+{ vertical-align: top }
+
+				.state.return
+,				a.ascending
+{ text-decoration: underline }
+
+				a.descending
+{ text-decoration: overline }
+
+				a
+{ text-decoration: none }
+
+				.state.dropped
+,				h4.collapsed span:first-child
+{ text-decoration: line-through }
+
+				#layout-menu p
+,				.g_list
+,				.tabs
+{ text-align: right }
+
+				.main_all .g_list
+,				ul.contribution li
+{ text-align: left }
+
+				#layout-footer
+,				.animeatt_all .review .bar .avatar
+,				.pre_creq
+,				p.action
+,				p.mylistadd
+,				td.count
+,				td.rating
+,				td.type
+,				tr.action td.submit
+,				tr.action td.value
+{ text-align: center }
+
+				#layout-menu li ul.popup
+{ position: absolute }
+
+				.g_content
+,				.main_all .news
+{ padding: 6px }
+
+				#layout-nav
+{ padding: 41px 0 0 0 }
+
+				.image
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				tr.action td.submit
+,				tr.action td.value
+{ padding: 1em }
+
+				#layout-menu li ul.popup
+{ padding: 10px 16px 10px 16px }
+
+				body
+{ padding: 10px }
+
+				.g_menu.mylist_menu
+{ padding: 0.4em }
+
+				.g_info
+,				.g_timedentry .body
+{ padding: 0.2em 1em }
+
+				.g_msg
+{ padding: 0.1em 0.2em }
+
+				.i_award
+{ padding: 0 0.5em }
+
+				#layout-footer
+{ padding-top: 10px }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ padding-right: 18px }
+
+				#layout-search
+{ padding-right: 10px }
+
+				th
+{ padding-right: 01em }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ padding-left: 18px }
+
+				option
+{ padding-left: 12px }
+
+				blockquote
+,				input[type="text"]
+,				li.tab
+,				option.section
+,				select
+,				td
+,				textarea
+,				th
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ padding-left: 02px }
+
+				.creq_data
+,				div.animerel
+,				pre
+{ overflow: scroll }
+
+				.main_all .rightbar li
+{ overflow: hidden }
+
+				pre
+{ max-height: 36em }
+
+				.creq_data
+{ max-height: 28em }
+
+				.main_all .rightbar > *
+{ margin: 8px }
+
+				body
+{ margin: 10px auto 10px auto }
+
+				.g_info
+{ margin: 01em 0 }
+
+				td table
+{ margin: 01em }
+
+				.g_timedentry
+{ margin: 00.5em }
+
+				.animeatt_all .review .bar
+{ margin: 0 0 1em 1em }
+
+				body.nonav
+{ margin: 0 }
+
+				.g_menu.mylist_menu
+{ margin: -06em -12em 0 0 }
+
+				.main_all .rightbar
+{ margin-top: 7px }
+
+				.animeatt_all .review + .review
+,				.g_timedentry + .g_timedentry
+{ margin-top: 2em }
+
+				#layout-tabs
+,				.g_list
+,				.g_msg
+,				.g_section
+,				.tabs
+{ margin-top: 0.5em }
+
+				h1
+{ margin-top: 0.2em }
+
+				#layout-search
+{ margin-top: -33px }
+
+				.g_timedentry .stamp
+{ margin-top: -01.2em }
+
+				#layout-menu li ul.popup
+{ margin-left: -1px }
+
+				.g_list
+,				.g_msg
+,				.g_section
+,				.tabs
+{ margin-bottom: 0.5em }
+
+				#layout-menu li ul li
+{ line-height: normal }
+
+				#layout-menu li form
+,				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ line-height: 41px }
+
+				caption
+,				h4
+{ line-height: 02.0em }
+
+				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ line-height: 01.6em }
+
+				span.date
+,				span.user a.id
+,				td.id
+,				td.size
+{ letter-spacing: -01px }
+
+				#layout-menu
+{ height: 41px }
+
+				html
+{ height: 100% }
+
+				#layout-menu li span.tab
+,				.g_msg h3
+,				.state.new
+{ font-weight: bold }
+
+				.state.stalled
+{ font-style: italic }
+
+				h1
+{ font-size: 220% }
+
+				#layout-footer div
+{ font-size: 200% }
+
+				.g_timedentry h4
+,				caption
+,				h4
+{ font-size: 130% }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ font-size: 110% }
+
+				#layout-footer
+{ font-size: 080% }
+
+				a.filter
+,				span.time
+,				span.user a.id
+,				td.rating span
+{ font-size: 076% }
+
+				tr.mylist td.name a:first-child:after
+{ font-size: 060% }
+
+				html
+{ font-size: 014px }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ font-family: sans-serif }
+
+				.main_all .rightbar li
+,				h1
+,				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ font-family: Tahoma, sans-serif }
+
+				html
+,				select
+{ font-family: "Lucida Sans Unicode", sans-serif }
+
+				#layout-search
+,				#layout-tabs
+,				.animeatt_all .review .bar
+,				.g_menu
+,				.g_menu.mylist_menu
+,				.g_msg h3
+,				.g_timedentry .stamp
+,				.main_all .rightbar
+,				td span.icons
+{ float: right }
+
+				#layout-menu > li
+,				.image
+{ float: left }
+
+				.hide
+{ display: none !important }
+
+				#layout-menu a[title^=""] span
+,				#layout-menu li ul
+,				#menu-user li.user
+,				.file_all dd.group span.time
+,				.g_timedentry .avatar
+,				.grouplist span.completion img
+,				.i_audio
+,				.i_video
+,				.main_all .rightbar h3
+,				td.awards
+,				th.award
+{ display: none }
+
+				.g_list li
+,				.main-tabs li
+,				.tabs li.tab
+{ display: inline }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul li
+,				#layout-menu li ul.popup
+,				ul.contribution li
+{ display: block }
+
+				#layout-footer
+,				.i_icon span
+,				.tab
+,				h4 span:first-child
+,				span a
+{ cursor: pointer }
+
+				#layout-menu .tab
+,				.i_icon span
+,				th
+{ cursor: default }
+
+				#layout-menu a[title^=""]:after
+,				.grouplist span.completion:after
+{ content: attr(title) }
+
+				option.section:after
+{ content: ": " }
+
+				tr.mylist.all_watched .name a:first-child:after
+{ content: " W" }
+
+				tr.mylist td.name a:first-child:after
+{ content: " M" }
+
+				.group_all td.date.added
+,				.pre_creq
+,				.state.locked
+,				a.filter
+,				option.section
+,				span.time
+,				span.user a.id
+,				td span.icons
+,				td.rating span
+,				td.type
+,				tr.mylist td.name a:after
+{ color: gray }
+
+				.g_msg.warning h3
+{ color: #FF8800 }
+
+				.g_msg.error h3
+{ color: #DD5533 }
+
+				a:hover
+{ color: #CC6600 }
+
+				option[value="delall"]
+{ color: #BB1111 }
+
+				#layout-menu li.alert span.tab
+{ color: #BB0000 }
+
+				#layout-footer
+,				.selected a
+{ color: #AAAAAA }
+
+				.tabs li
+,				a
+,				h1
+{ color: #996633 }
+
+				.g_msg.success h3
+{ color: #88AA88 }
+
+				.g_msg.note h3
+{ color: #8888FF }
+
+				td.count
+{ color: #770000 }
+
+				caption
+,				h4
+{ color: #666666 }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ color: #445566 }
+
+				#layout-menu
+{ color: #444444 }
+
+				#layout-menu li span.tab:hover
+{ color: #223344 }
+
+				blockquote
+{ color: #0F0F0F }
+
+				td.rating
+{ color: #0000AA }
+
+				.animeatt_all .review
+,				.g_list
+{ clear: right }
+
+				.g_section
+,				div.desc
+{ clear: left }
+
+				.g_end
+{ clear: both }
+
+				#layout-menu li ul.popup
+,				.g_menu.mylist_menu
+{ border: 1px solid #AFBEC7 }
+
+				tr.newtype td
+{ border-width: 3px }
+
+				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ border-width: 1px 1px 1px 5px }
+
+				#layout-nav
+{ border-width: 1px }
+
+				#layout-menu li ul.popup
+{ border-top: none }
+
+				.g_info
+,				.g_msg
+,				.g_timedentry .body
+,				.review h4
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				td
+,				tr.action td.submit
+,				tr.action td.value
+{ border-top: 1px solid #EEEEEE }
+
+				#layout-nav
+,				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ border-style: solid }
+
+				#layout-menu li span.tab
+{ border-right: 1px solid #AFBEC7 }
+
+				blockquote
+{ border-left: 2px solid lightgray }
+
+				.i_award + .i_award
+{ border-left: 1px solid #000000 }
+
+				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ border-color: #EEEEEE rgb(238, 238, 238) rgb(238, 238, 238) rgb(193, 202, 211) }
+
+				#layout-nav
+{ border-color: #DFEEF7 rgb(207, 222, 231) }
+
+				.g_info
+,				.g_msg
+,				.g_timedentry .body
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				tr.action td.submit
+,				tr.action td.value
+{ border-bottom: 1px solid #EEEEEE }
+
+				.main_all .rightbar h4
+{ border-bottom: 1px solid #EAEADA }
+
+				#layout-nav
+{ background: url(images/dc.jpg) center -60px no-repeat }
+
+				html
+{ background: #E6EDF5 url(images/bg.jpg) top left repeat-x }
+
+				#layout-menu li span.tab
+{ background: #D9E1E5 url(images/nav.gif) }
+
+				#layout-menu li span.tab:hover
+{ background-position: left bottom }
+
+				.main_all
+,				body.nonav
+{ background-color: transparent !important }
+
+				.g_info
+,				.g_msg
+,				.g_timedentry .body
+,				blockquote
+,				body
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				tr.action td.submit
+,				tr.action td.value
+{ background-color: #FFFFFF }
+
+				del
+,				tr.bad
+{ background-color: #FFEAEA }
+
+				a:hover
+{ background-color: #FFDDAA }
+
+				.g_content
+,				.main_all .news
+{ background-color: #FAFAFA }
+
+				.main_all .rightbar
+{ background-color: #F7F7F2 }
+
+				tr.mylist.all_watched td
+{ background-color: #F6F4FF }
+
+				#layout-menu li ul.popup
+,				.g_menu.mylist_menu
+{ background-color: #F5F5F5 }
+
+				ins
+,				tr.good td
+,				tr.mylist td
+{ background-color: #F2FFF0 }
+
+				#layout-footer
+,				.i_icon span
+,				.tab
+,				h4 span:first-child
+,				span a
+{ -user-select: none }
+
+				#layout-footer
+,				.i_icon span
+,				.tab
+,				h4 span:first-child
+,				span a
+{ -moz-user-select: none }
 
