@@ -1,6 +1,6 @@
 *.i_help
 {
-	background: url(http://static.anidb.net/css/icons/ask2.gif) no-repeat right;
+	background: url(http://static.anidb.net/css/icons/orange/ask2.gif) no-repeat right;
 	cursor: help; /* just for teh funs */
 }
 
@@ -35,38 +35,38 @@
 
 *.i_plus
 {
-	background-image: url(http://static.anidb.net/css/icons/plus.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/plus.gif);
 }
 
 *.i_minus
 {
-	background-image: url(http://static.anidb.net/css/icons/minus.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/minus.gif);
 }
 
 *.i_none
 {
-	background-image: url(http://static.anidb.net/css/icons/none.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/none.gif);
 }
 
 *.i_nopic
 {
-	background-image: url(http://static.anidb.net/css/icons/nopic.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/nopic.gif);
 }
 
 *.i_sort
 {
   width: 5px;
-	background-image: url(http://static.anidb.net/css/icons/sort.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/sort.gif);
 }
 
 *.i_vote
 {
-	background-image: url(http://static.anidb.net/css/icons/anidb_vote.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/anidb_vote.gif);
 }
 
 *.i_revote
 {
-	background-image: url(http://static.anidb.net/css/icons/anidb_revote.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/anidb_revote.gif);
 }
 
 *.i_arrow_up

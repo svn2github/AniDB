@@ -55,7 +55,7 @@
 {
 	margin-bottom: 2px;
 	text-indent: 15px;
-	background: url(../icons/ask2.gif) left no-repeat;
+	background: url(../icons/orange/ask2.gif) left no-repeat;
 }
 
 #layout-menu li.forum a
@@ -100,7 +100,7 @@
 
 #layout-search div.search form input.submit
 {
-	background: url(../icons/button_search.gif) no-repeat top;
+	background: url(../icons/orange/button_search.gif) no-repeat top;
 	padding: 20px 0 0 0;
 	overflow: hidden;
 	width: 63px;

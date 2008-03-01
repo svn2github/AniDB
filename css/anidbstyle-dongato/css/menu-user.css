@@ -54,22 +54,22 @@
 
 #user-profile a
 {
-	background-image: url(http://static.anidb.net/css/icons/button_profile.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/button_profile.gif);
 }
 
 #user-logout a
 {
-	background-image: url(http://static.anidb.net/css/icons/button_logout.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/button_logout.gif);
 }
 
 #user-signup a
 {
-	background-image: url(http://static.anidb.net/css/icons/button_signup.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/button_signup.gif);
 }
 
 #user-xauth
 {
-	background: url(http://static.anidb.net/css/icons/button_logon.gif);
+	background: url(http://static.anidb.net/css/icons/orange/button_logon.gif);
 	width: 42px;
 	height: 12px;
 	overflow: hidden;

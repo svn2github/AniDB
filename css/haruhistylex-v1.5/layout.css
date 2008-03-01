@@ -71,16 +71,6 @@ body.nonav
 	display: inline;
 }
 
-#layout-menu li.help
-{
-	margin-bottom: 2px;
-	display: block;
-	text-indent: 15px;
-	background-position:  left 50%;
-	background-repeat: no-repeat;
-	background-image: url('../icons/ask2.gif');padding-left:0; padding-right:0; padding-top:1px; padding-bottom:0
-}
-
 #layout-menu li.forum
 {
 	font-weight: bold;
@@ -212,20 +202,6 @@ body.nonav
 	border: #BFC2C9 1px solid;
 	margin: 27px 3px 0 0;
 	width: 10.3em;
-}
-
-#layout-search form input.submit
-{
-	display: block;
-	float: right;
-	background: url('../icons/button_search.gif') no-repeat top;
-	font-size: 10px;
-	border: 0px solid white;
-	width: 63px;
-	height: 14px;
-	overflow: hidden;
-	margin-right: 2.3em;
-	content: ""; padding-left:0; padding-right:0; padding-top:14px; padding-bottom:0
 }
 
 #layout-content

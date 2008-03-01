@@ -88,7 +88,7 @@
 
 #layout-search div.search form input.submit
 {
-	background: url(http://static.anidb.net/css/icons/button_search.gif) no-repeat top;
+	background: url(http://static.anidb.net/css/icons/orange/button_search.gif) no-repeat top;
 	padding: 20px 0 0 0;
 	overflow: hidden;
 	width: 63px;

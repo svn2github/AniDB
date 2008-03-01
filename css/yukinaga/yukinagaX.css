@@ -5,8 +5,7 @@
 ----------------------------------*/
 
 /* icons */
-@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";
+@import "../icons/all.css";
 @import "icons.css";
 
 /* global layout */

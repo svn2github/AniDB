@@ -4,12 +4,11 @@
 @import "../common/layout/global/all.css";
 @import "../common/layout/page/all.css";
 
-@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";
-
 @import "../common/style/color/msgbox-default.css";
 @import "../common/style/color/special.css";
 
 @import "../common/style/text/default.css";
 
 @import "../common/style/content/page-anime.css";
+
+@import "../icons/all.css";

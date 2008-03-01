@@ -9,9 +9,7 @@
 /*@import "anidb-flags.css";*/
 
 /* icons */
-@import "../common/style/icons/default.css";
-@import "../common/style/icons/flags.css";
-@import "../common/style/icons/awards.css";
+@import "../icons/all.css";
 @import "icons.css";
 
 /* global layout */
