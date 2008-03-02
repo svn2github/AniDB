@@ -1,24 +1,11 @@
 html
 {
-	background: #FFFFFF url(images/menubg.jpg) repeat-y left;
+	background: #FFFFFF url(../harustyle/images/menubg.jpg) repeat-y left;
 }
 
 body.nonav
 {
 	background: #BFC2C9;
-}
-
-#layout-nav
-{
-	height: 102px;	
-}
-
-#layout-menu
-{
-	background: url(images/menu.jpg) no-repeat left 94px;
-	padding: 146px 23px 0px 28px;
-	height: 603px;
-	width: 120px;
 }
 
 #layout-content
@@ -67,8 +54,9 @@ body > #layout-content
 
 #layout-menu ul
 {
+	width: 96px;
 	line-height: 1.1;
-	margin-bottom: 0.8em;
+	margin-bottom: 0.6em;
 }
 
 #layout-menu li
@@ -96,18 +84,22 @@ body > #layout-content
 
 #menu-account li
 {
-	width: 92px;
 	text-align: center;
+}
+
+#user-profile,
+#user-logout
+{
+	float: right;
+	margin: 3px;
 }
 
 #user-profile a,
 #user-logout a
 {
-	float: left;
 	display: block;
 	width: 42px;
 	height: 12px;
-	margin: 2px;
 }
 
 #user-profile a span,
@@ -136,8 +128,6 @@ body > #layout-content
 	position: absolute;
 	top: 0;
 	right: 0;
-	background: url(images/topback.png) repeat-x top;
-	height: 102px
 }
 
 #layout-search select
@@ -145,17 +135,10 @@ body > #layout-content
 	display: none;
 }
 
-#layout-search div.search
-{
-	background: url(images/banner.png) no-repeat top left;
-	height: 102px;
-}
-
 #layout-search div.search form
 {
 	display: block;
 	float: right;
-	background: url(images/searchbg.png) no-repeat 0px 77px;
 	margin: 0;
 	height: 70px;
 	width: 152px;
@@ -183,7 +166,6 @@ body > #layout-content
 
 #layout-search form input.submit
 {
-	background: url(images/button_search.gif) no-repeat top;
 	padding: 20px 0 0 0;
 	margin-left: 50px;
 	overflow: hidden;

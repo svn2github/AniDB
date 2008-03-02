@@ -1,5 +1,4 @@
-body/*,
-#layout-main div.g_definitionlist table*/
+body
 {
 	color: #2E3C55;
 	border-color: #FFFFFF;
@@ -10,7 +9,6 @@ a:link,a:active,a:visited
 {
 	color : #006699;
 }
-
 
 #layout-nav a
 {

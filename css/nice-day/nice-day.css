@@ -10,11 +10,13 @@
 				.g_section > form > table
 ,				.g_section > table
 ,				h4+table
-,				table table
 { width: 100% }
 
 				textarea
 { width: 099% }
+
+				table table
+{ width: 098% }
 
 				.main_all .news
 { width: 070% }

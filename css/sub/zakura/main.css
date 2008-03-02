@@ -25,22 +25,13 @@
 
 @import "../../zakura/main.css";
 
-/**
-{
-	font-size: 9pt;
-}*/
-
-#layout-main div.block div.image
-{
-	width: auto;
+#layout-main div.block > div.image{
+	width: 32%;
 }
-#layout-main div.block div.image
-{
-	vertical-align: middle;
+#layout-main div.block > div.data{
+	width: 67%;
 }
-#layout-main div.block div.data{
-	width: 100%;
-}
+#layout-main div.block div.data div.tabbed_pane table,
 #layout-main div.block div.data > div > table{
 	width: 100%;
 }

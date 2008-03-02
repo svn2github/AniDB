@@ -75,7 +75,6 @@ td.state, td.type, td.date, td.action, td.icon, td.ignore,
 td.name.user, td.name.owner, td.vote, td.rating, td.check,
 .g_list, .g_info, .g_input, .g_section,
 #layout-footer p,
-#layout-menu div.usermenu,
 #layout-main div.profile_all p,
 #layout-main table.grouplist td.number.eps
 {

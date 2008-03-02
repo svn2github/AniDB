@@ -1,29 +1,10 @@
-@import "common.css";
-@import "layout.css";
-@import "border.css";
-@import "color.css";
-@import "text.css";
-
-
-#user-logout a
-{
-	background-image: url(images/button_logout.gif);
-}
-
-#user-profile a
-{
-	background-image: url(images/button_profile.gif);
-}
+@import "base.css";
+@import "images.css";
 
 body,
 #layout-menu
 {
 	font-size: 10px;
-}
-
-.main_all .rightbar
-{
-	margin-top: 10px;
 }
 
 #layout-content div.anime_all div.mylist th.anime

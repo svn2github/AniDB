@@ -11,7 +11,13 @@
   top: 0;
   left: 0;
 }
-#layout-nav .usermenu
+
+#layout-menu ul li
+{
+  display: inline;
+}
+/*
+#menu-account
 {
   position: absolute;
   top: 1em;
@@ -19,12 +25,12 @@
   border: 0px;
   width: 10em;
 }
-#layout-nav .usermenu:before
+#menu-account:before
 {
   font-size: 3em;
   content: "AniDB";
 }
-.usermenu > #newnotifies
+#menu-account > #newnotifies
 {
   display: list-item;
   position: absolute;
@@ -33,14 +39,14 @@
   color: red;
   white-space: nowrap;
 }
-.usermenu > #newnotifies + .history
+#menu-account > #newnotifies + .history
 {
   position: absolute;
   top: 3.5em;
   left: 26em;
   color: red;
 }
-.usermenu > #newmessages
+#menu-account > #newmessages
 {
   display: list-item;
   position: absolute;
@@ -49,12 +55,12 @@
   color: red;
   white-space: nowrap;
 }
-.usermenu > .login
+#menu-account > .login
 {
   display: block;
   position: relative;
 }
-.usermenu > .user
+#menu-account > .user
 {
   display: block;
   position: absolute;
@@ -62,11 +68,11 @@
   top: 3.6em;
   left: 4.5em;
 }
-.usermenu > .i_profile, .usermenu > .i_logout
+#menu-account > .i_profile, #menu-account > .i_logout
 {
   margin-top: 1px;
 }
-.usermenu > input[name="xuser"], .usermenu > input[name="xpass"]
+#menu-account > input[name="xuser"], #menu-account > input[name="xpass"]
 {
   display: block;
   position: relative;
@@ -77,7 +83,7 @@
   font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
   clear: both;
 }
-.usermenu > .logon
+#menu-account > .logon
 {
   display: block;
   position: relative;
@@ -94,7 +100,7 @@
   border: 0px;
   content: "";
 }
-.usermenu > .i_signup
+#menu-account > .i_signup
 {
   display: block;
   position: relative;
@@ -104,20 +110,20 @@
   height: 12px;
   margin-top: 1px;
 }
-.usermenu > .remember
+#menu-account > .remember
 {
   display: block;
   position: absolute;
   top: 9.8em;
   left: 0.3em;
-}
+}*/
 
 #layout-search
 {
   display: block;
-  position: relative;
+  position: absolute;
   top: 2em;
-  left: 11em;
+  left: 50%;
   width: 43em;
 }
 #layout-search p, #layout-search form
@@ -149,8 +155,8 @@
 }
 
 
-
-#layout-menu div.mainmenu
+/*
+#layout-menu
 {
   display: block;
   position: relative;
@@ -158,12 +164,12 @@
   left: 11em;
   padding-bottom: 2em;
 }
-#layout-menu div.mainmenu > ul
+#layout-menu > ul
 {
   padding: 0 0 0 0;
   margin: 0 0 0 0;
   white-space: nowrap;
-}
+}*/
 li.animelist
 {
   display: block;
@@ -191,7 +197,7 @@ li.producerlist
   top: 0.5em;
   left: 20em;
   white-space: nowrap;
-}
+}/*
 li.genre
 {
   position: absolute;
@@ -284,9 +290,9 @@ li.myvotes, li.myreviews, li.mydbentries, li.mycreqs, li.up2date
   width: 1em;
   white-space: nowrap;
 
-}
+}*/
 
-#layout-content > h1
+#layout-main > h1
 {
   display: block;
   width: 100%;

@@ -4,9 +4,10 @@
 {
 	position: fixed;
 	top: 0;
+	width: 100%;
 }
 
-#layout-content
+#layout-main
 {
 	margin-top: 110px;
 }

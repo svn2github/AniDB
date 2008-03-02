@@ -9,12 +9,6 @@
 	background: transparent url(../anidbstyle/images/menuback.png) no-repeat top left;
 }
 
-#layout-menu ul
-{
-	width: 96px;
-	margin-bottom: 10px;
-}
-
 #menu-account,
 #menu-login
 {
@@ -37,6 +31,8 @@
 #layout-menu ul
 {
 	line-height: 1.2;
+	width: 96px;
+	margin-bottom: 10px;
 }
 
 #layout-menu li.mymessages, #layout-menu li.mynotifies, #layout-menu li.mywishlist,

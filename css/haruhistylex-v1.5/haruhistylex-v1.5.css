@@ -1,243 +1,145 @@
-/* Style created by Benda_11 */
+/* haruhistylex-v1.5 created by Benda_11 */
 
-@import "harustyle.css";
+@import "../harustyle/base.css";
 
 /* s_tart m_ain */
 html
 {
-background-color: #FFFFFF;
-background-image: url('images/background.png');
-background-attachment: fixed;
-background-position: bottom right;
-background-repeat: no-repeat;
-font-size: 10px;
-font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
-}
-
-body {
-padding: 0px;
-margin: 0px;
-border: 0px;
-z-index: 10;
+	font-size: 10px;
+	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+	background-color: #FFFFFF;
+	background-image: url(images/background.png);
+	background-attachment: fixed;
+	background-position: bottom right;
+	background-repeat: no-repeat;
 }
 
 /* e_nd m_ain */
 /* s_tart s_earch */
-#layout-search div.search
+#layout-nav
 {
-background: url('images/banner.png') no-repeat top left;
-height: 94px;
-margin-left: 190px;
+	background: url(../haruhistylex-v1.5/images/topback.png) repeat-x top;
+	height: 106px;
 }
 
-#layout-search
+#layout-search div.search
 {
-background: url('images/topback.png') repeat-x top;
-height: 94px;
-width: 100%;
-_margin-top: -705px;
+	background: url(../haruhistylex-v1.5/images/banner.png) no-repeat 190px top;
+	height: 106px;
 }
 
 #layout-search div.search form
 {
-display: block;
-float: right;
-background: url('images/searchbg.png') no-repeat 0px 77px;
-margin: 0;
-height: 70px;
-width: 15.2em;
-max-width: 152px; 
+	background: url(../haruhistylex-v1.5/images/searchbg.png) no-repeat 0px 77px;
 }
 
-#layout-search div.search form p
+#layout-search div.search form select
 {
-margin: 0;
-padding: 0;
-margin-top: -17px;
-_margin-top: -20px;
-}
-
-#layout-search form select.type
-{
-display: none;
+	display: none;
 }
 
 #layout-search form input.text
 {
-display: block;
-float: right;
-font-size: 10px;
-font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-color: #ffffff;
-background-color: #272D43;
-border: #BFC2C9 1px solid;
-margin: 27px 3px 0 0;
-width: 10.3em;
+	width: 10.3em;
 }
 
 #layout-search form input.submit
 {
-display: block;
-float: right;
-background: url('images/button_search.gif') no-repeat top;
-font-size: 10px;
-border: 0px solid white;
-width: 63px;
-height: 10px;
-overflow: hidden;
-margin-right: 2.3em;
-margin-top: 3px;
-content: "";
-padding:	0;
-padding-top: 14px;
+	background: url(../haruhistylex-v1.5/images/button_search.gif) no-repeat top;
+	margin-top: 3px;
+	width: 63px;
 }
 
 #layout-search form input.submit:hover
 {
-background: url('images/button_search-hover.gif') no-repeat top;
-width: 63px;
+	background: url(../haruhistylex-v1.5/images/button_search-hover.gif) no-repeat top;
 }
 
 /* e_nd s_earch*/
 /* s_tart m_enu */
 #layout-menu
 {
-position: absolute;
-top: 0px;
-left: 0px;
-background: url('images/menu.png') no-repeat;
-height: 603px;
-width: 190px;
-margin-right: 0px;
-float: left;
-margin-top: 115px; /*xxx*/
-margin-left: 0px;
-margin-right: 0px;
-z-index: 0;
+	background: url(../haruhistylex-v1.5/images/menu.png) no-repeat left 94px;
+	padding: 146px 23px 0px 28px;
+	height: 603px;
+	width: 120px;
 }
 
-#layout-menu li.sub-menu,
-#layout-menu li.sub-menu ul,
-#layout-menu li.sub-menu ul li
+#layout-menu ul
 {
-width: 150px;
-}
-
-#layout-menu li.sub-menu ul
-{
-
-}
-
-#layout-menu li.sub-menu
-{
-margin-top: 45px;
-margin-left: -50px;
-_margin-left: -15px;
-margin-bottom: -23px;
+	line-height: 1.3;
+	margin-bottom: 1em;
 }
 
 #layout-menu *,
 #layout-menu a:hover
 {
-color: #000000;
+	color: #000000;
 }
 
 #layout-menu a:hover
 {
-text-decoration: underline;
+	text-decoration: underline;
 }
 
 #layout-menu li.help
 {
-margin-bottom: 2px;
-display: block;
-text-indent: 15px;
-background-position:  left 50%;
-background-repeat: no-repeat;
-background-image: url('images/help.gif');
-padding:2px;
+	background: url(../haruhistylex-v1.5/images/help.gif) no-repeat left 50%;
+	text-indent: 15px;
+	margin-bottom: 2px;
+	padding:2px;
 }
+
+#menu-support {
+	position: absolute;
+	top: 500px;
+}
+
+#menu-account {
+	position: absolute;
+	top: 20px;
+	left: 25px;
+	z-index: 1;
+}
+
+#menu-mod
+{
+	display: block;
+}
+
 /* e_nd m_enu */
 /* s_tart p_rofile */
-#user-logout
+
+#user-logout a
 {
-background-image: url('images/button_logout.gif');
-background-repeat: no-repeat;
-width: 42px;
-height: 12px;
+	background-image: url(../haruhistylex-v1.5/images/button_logout.gif);
 }
 
 #user-logout a:hover
 {
-text-decoration: none;
-background-image: url('images/button_logout-hover.gif');
-background-repeat: no-repeat;
-width: 42px;
-height: 12px;
+	background-image: url(../haruhistylex-v1.5/images/button_logout-hover.gif);
 }
 
-#user-logout span {
-visibility: hidden;
-}
-
-#user-profile
+#user-profile a
 {
-background-image: url('images/button_profile.gif');
-background-repeat: no-repeat;
-width: 42px;
-height: 12px;
+	background-image: url(../haruhistylex-v1.5/images/button_profile.gif);
 }
 
 #user-profile a:hover
 {
-text-decoration: none;
-background-image: url('images/button_profile-hover.gif');
-background-repeat: no-repeat;
-width: 42px;
-height: 12px;
-}
-
-#user-profile span {
-visibility: hidden;
+	background-image: url(../haruhistylex-v1.5/images/button_profile-hover.gif);
 }
 
 #user-name
 {
-font-weight: 200;
-font-size: 11pt;
-margin-bottom: 10px;
-}
-
-#menu-account {
-position: absolute;
-top: 0;
-left: 0;
-margin-top: -100px;
-}
-
-#menu-account li {
-margin-top: 5px;
-_margin-left: 5px;
-}
-
-#menu-support {
-padding-top: 80px;
-}
-
-/* e_nd p_rofile */
-/* s_tart c_ontent*/
-#layout-content
-{
-margin-left: 200px;
-padding-top: 0.5em;
-float: right;
-margin-top: 0px;
-z-index: 100;
+	font-weight: 200;
+	font-size: 11pt;
+	margin-bottom: 10px;
 }
 
 /* e_nd c_ontent*/
 /* s_tart t_ext */
-#layout-main div.block
+/*#layout-main div.block
 {
 display: block;
 }
@@ -276,7 +178,7 @@ margin-left: 2em;
 margin-right: 2em;
 padding: 0.3em;
 clear: left;
-}
+}*/
 
 /* e_nd t_ext */
 /* s_tart f_ooter */
