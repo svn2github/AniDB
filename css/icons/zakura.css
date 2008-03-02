@@ -96,7 +96,7 @@ a.inactive {
 .i_rate_high,
 .i_rate_med,
 .i_rate_low,
-.i_rate_vlow {
+.i_rate_verylow {
 	background-repeat: repeat-x !important;
 	background-position: left !important;
 	padding: 0 !important;
@@ -107,7 +107,7 @@ a.inactive {
 .i_rate_high			{width: 37px !important;}
 .i_rate_med				{width: 30px !important;}
 .i_rate_low				{width: 22px !important;}
-.i_rate_vlow			{width: 15px !important;}
+.i_rate_verylow			{width: 15px !important;}
 .i_rate_unknown		{
 	background-image: url(../icons/zakura/star-un.png);
 	padding: 0 !important;
