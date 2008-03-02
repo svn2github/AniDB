@@ -29,11 +29,11 @@
 	width: 32%;
 }
 #layout-main div.block > div.data{
-	width: 67%;
+	width: 65%;
 }
 #layout-main div.block div.data div.tabbed_pane table,
 #layout-main div.block div.data > div > table{
-	width: 100%;
+	width: 99%;
 }
 
 /** TABS **/
