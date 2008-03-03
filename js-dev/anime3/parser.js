@@ -111,6 +111,8 @@ function CAnimeEntry(node) {
   this.id = Number(node.getAttribute('id'));
   this.type = node.getAttribute('type');
   this.titles = new Array();
+  this.episodes = new Array();
+  this.groups = new Array();
   for (i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
@@ -194,6 +196,7 @@ function CEpisodeEntry(node) {
           this.titles[tNode.getAttribute('lang')] = nodeData(tNode);
         }
         break;
+	  case 'files': break;
       default: showAlert('episodeEntry for gid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
     }
   }
@@ -422,7 +425,7 @@ function CFileEntry(node) {
 
 // CORE Functions //
 
-/**
+/* *
  * Processes a node to extract Custom (user) information
  * @param node Node to process
  * @return boolean (true if processing succeful, false otherwise)
@@ -545,7 +548,7 @@ function parseConfig(node) {
   }
 }
 
-/**
+/* *
  * Processes a node to extract group information
  * @param node Node to process
 * @param aid Anime ID of group data
@@ -585,7 +588,7 @@ function parseGroups(node,aid) {
   groups[groupEntry.id] = groupEntry;
 }
 
-/**
+/* *
  * Processes a node to extract episode information
  * @param node Node to process
  * @param aid Anime ID of episode data
@@ -604,11 +607,13 @@ function parseEpisodes(node,aid) {
     episodeEntry.animeId = aid;
     episodes[episodeEntry.id] = episodeEntry;
     epOrder.push(episodeEntry.id);
+	parseEpisode(childNode,aid);
+	if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.id);
     if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
   }
 }
 
-/**
+/* *
  * Processes a node to extract anime information
  * @param node Node to process
  * @return void (sets anime)
@@ -626,7 +631,8 @@ function parseAnimes(node) {
     var childNode = animeNodes[i];
     var animeEntry = new CAnimeEntry(childNode);
     animes[animeEntry.id] = animeEntry;
-    if (isAnimePage) anime = animes[animeEntry.id]; // assigning a shortcut
+    //if (isAnimePage) anime = animes[animeEntry.id]; // assigning a shortcut
+	anime = animes[animeEntry.id]; // assigning a shortcut
     var groupNodes = childNode.getElementsByTagName('groups');
     parseGroups(groupNodes,animeEntry.id); // Parsing Groups
     var epNodes = childNode.getElementsByTagName('eps');
@@ -636,7 +642,7 @@ function parseAnimes(node) {
   }
 }
 
-/**
+/* *
  * Builds a fileEntry
  * @param node The node to parse
  * @param aid Anime Id
@@ -669,7 +675,7 @@ function buildFileEntry(node, aid, eid) {
   if (episode.files.indexOf(fileEntry.id) < 0) episode.files.push(fileEntry.id)
 }
 
-/**
+/* *
  * Processes a node to extract file information for a given episode
  * @param node Node to process
  * @param aid Anime ID of episode data
@@ -688,7 +694,7 @@ function parseEpisode(node, aid) {
   //document.getElementById('eid_'+episode.id+'_ftHolder').cells[0].className = '';
 }
 
-/**
+/* *
  * Function that parses extra files, needed by relations
  * @param nodes Relation nodes
  * @return void (sets info for files)
@@ -703,7 +709,7 @@ function parseExtraFiles(nodes,eid) {
   }
 }
 
-/**
+/* *
  * Function that parses file<->ep relations
  * @param nodes Relation nodes
  * @return void (sets info for files)
@@ -732,7 +738,7 @@ function parseEpRelations(nodes) {
   }
 }
 
-/**
+/* *
  * Function that parses file<->file relations
  * @param nodes Relation nodes
  * @return void (sets info for files)
@@ -787,7 +793,7 @@ function parseFileRelations(nodes) {
   }
 }
 
-/**
+/* *
  * Processes a node to extract filedata information
  * @param node Node to process
  * @param aid Anime ID of episode data
@@ -925,7 +931,7 @@ function makePseudoFile(fileA,fileB,type) {
   }
 }
 
-/**
+/* *
  * Creates pseudoFiles
  * This is totaly magic, there is absolutely no reason why i should be doing this
  * @return void (creates a pseudoFile)
@@ -994,7 +1000,7 @@ function pseudoFilesCreator() {
 var filterObj = new Object();
 filterObj.useDefaultFilters = false;
 filterObj.processingFiles = new Array(); // Auxiliar object that holds temporary results
-/** RULES **/
+/* * RULES **/
 filterObj.defaultUnfiltered = {0:2,
                                1:{"fdate":"<,172800"},
                                2:{"ftype":"==,generic"}};
@@ -1017,7 +1023,7 @@ filterObj.defaultHidden = {0:2,
                            1:{"falang":"==,obj.filterAudLang"},
                            2:{"fslang":"==,obj.filterSubLang"}};
 filterObj.hidden = filterObj.defaultHidden;
-/** AUXILIAR COMPARE FUNCTION **/
+/* * AUXILIAR COMPARE FUNCTION **/
 filterObj.compare = function compare(symbol, a, b) {
   switch (symbol) {
     case '>' : return (a >  b);
@@ -1029,7 +1035,7 @@ filterObj.compare = function compare(symbol, a, b) {
   }
   return 0;
 };
-/** TEST FUNCTIONS **/
+/* * TEST FUNCTIONS **/
 filterObj['fdate'] = function fdate(file,symbol,value,rthis) {
   var curDate = Number(new Date()) / 1000;
   var fDate = Number(javascriptDate(cTimeDate(file.date))) / 1000;
@@ -1124,7 +1130,7 @@ filterObj['fdeprecated'] = function fdeprecated(file,symbol,value,rthis) {
   if (rthis) return (file.isDeprecated);
   return (filterObj.compare(symbol, file.isDeprecated, value));
 };
-/** PROCESSING FUCTIONS **/
+/* * PROCESSING FUCTIONS **/
 filterObj.processFile = function processFile(file, operation) {
   if (!file) return false;
   var episode = episodes[file.episodeId];
