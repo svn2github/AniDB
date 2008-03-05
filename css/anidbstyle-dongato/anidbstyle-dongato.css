@@ -233,7 +233,8 @@ th, td.action.icons
 	white-space: nowrap !important;
 }
 
-.grouplist .action.icons
+.grouplist .action.icons,
+table.anime_list td.type
 {
 	width: 60px;
 }
