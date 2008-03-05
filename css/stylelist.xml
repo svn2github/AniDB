@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
-		<update>19.05.2007</update>
+		<update/>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
 		<path/>
@@ -13,8 +13,8 @@
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>10.06.2007</update>
-		<status>stable (v5)</status>
+		<update>18.02.2008</update>
+		<status>stable (v6)</status>
 		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
 		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
@@ -23,9 +23,9 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDB Style DonGato's revision</title>
 		<creator>DonGato</creator>
-		<update>18.02.2008</update>
-		<status>in sync with 0.1.47</status>
-		<description>report any problem by a message</description>
+		<update>05.03.2008</update>
+		<status>in sync with 0.1.47c</status>
+		<description>it only works well with Firefox (sorry don't have any more time to spend with IE/Opera</description>
 		<path/>
 		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
@@ -61,11 +61,11 @@
 		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="haruhistylex-v1.5">
-		<title>HaruhiStyleX.AniDB</title>
-		<creator>Benda11</creator>
-		<update>29.02.2008</update>
-		<status>In development...</status>
-		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB is developed for Opera at a resolution of 1280x1024 and may not work in any other webbrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
 		<path/>
 		<screenshot>haruhistylex-v1.5/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex-v1.5/images/thumbnail.png</thumbnail>
@@ -73,9 +73,9 @@
 	<style name="haruhistylex-v2">
 		<title>HaruhiStyleX.AniDB v2</title>
 		<creator>TheJAG</creator>
-		<update>10.11.2007</update>
+		<update>24.02.2008</update>
 		<status>Very Incomplete (In development...)</status>
-		<description>Note! This style contains adult content. HaruhiStyleX.AniDB v2 is developed for Opera 9+, Safari 3+ and Firefox 2+ at a resolution of 1024x768 and may not work in any other webrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
+		<description>This style features pornographic images commonly known as hentai images of the popular character Haruhi from the Suzumiya Haruhi no Yuuutsu anime series. HaruhiStyleX.AniDB v2 is designed for a screen resolutions of 1024x768 and higher! Currently this stylesheet is compatible with the Opera 9+ browser, Safari 3+ and Firefox 2+ are partially compatible due to their lack of CSS support</description>
 		<path/>
 		<screenshot>haruhistylex-v2/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex-v2/images/thumbnail.png</thumbnail>
@@ -94,7 +94,7 @@
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update>20.05.2007</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -121,6 +121,16 @@ should be fixed just send me a PM.</description>
 		<path/>
 		<screenshot>luckystyle/images/screenshot.png</screenshot>
 		<thumbnail>luckystyle/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="nice-day">
+		<title>Nice Day</title>
+		<creator>epoximator</creator>
+		<update/>
+		<status>Experimental</status>
+		<description>Based on "Beautiful Day" by Kaushal Sheth (http://www.kaushalsheth.com)</description>
+		<path/>
+		<screenshot>nice-day/images/screenshot.png</screenshot>
+		<thumbnail>nice-day/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="simplestyle">
 		<title>SimpleStyle</title>
@@ -165,16 +175,6 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<screenshot>sub-brown2/images/screenshot.png</screenshot>
 		<thumbnail>sub-brown2/images/thumbnail.png</thumbnail>
 	</style>
-	<style name="sub-nice-day">
-		<title>Nice Day</title>
-		<creator>epoximator</creator>
-		<update/>
-		<status>Experimental</status>
-		<description>Based on "Beautiful Day" by Kaushal Sheth (http://www.kaushalsheth.com)</description>
-		<path/>
-		<screenshot>sub-nice-day/images/screenshot.png</screenshot>
-		<thumbnail>sub-nice-day/images/thumbnail.png</thumbnail>
-	</style>
 	<style name="sub-norwegian-blue">
 		<title>norwegian-blue</title>
 		<creator>PetriW</creator>
@@ -202,8 +202,8 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<status>Test</status>
 		<description>Based on Zakura by Zak</description>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>sub-zakura/images/screenshot.png</screenshot>
+		<thumbnail>sub-zakura/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="zakura">
 		<title>Zakura</title>
