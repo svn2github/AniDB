@@ -1,15 +1,9 @@
-#layout-main div.tabbed_pane
-{
-	width: 96%;
-}
-
 #layout-main div.tabbed_pane div.body
 {
 	padding: 0.4em;
 }
 
-#layout-main div.tabbed_pane div.pane ul/*,
-#layout-main div.tabbed_pane div.pane div table*/
+#layout-main div.tabbed_pane div.pane ul
 {
 	width: 100%;
 	display: table;
@@ -26,11 +20,6 @@
 	margin: 1px 1px 1px 6px;
 }
 
-/*#layout-main div.tabbed_pane ul.tabs li.selected
-{
-	padding: 1px 6px 1px 6px;
-}*/
-
 #layout-main div.tabbed_pane div.pane table,
 #layout-main div.tabbed_pane div.pane table td,
 #layout-main div.tabbed_pane div.pane ul,
@@ -38,6 +27,7 @@
 {
 	background: inherit;
 }
+
 #layout-main div.tabbed_pane ul.tabs li
 {
 	cursor: pointer;
@@ -48,12 +38,12 @@
 
 #layout-main div.tabbed_pane div.pane table tr
 {
-	background-color: transparent;
+	/*background-color: transparent;*/
 }
 
 #layout-main div.tabbed_pane div.pane table td
 {
-	vertical-align: top;
+	/*vertical-align: top;*/
 }
 
 div.profile_all #tab3_pane

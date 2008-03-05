@@ -1,7 +1,6 @@
-@import "../common/style/icons/default.css";
+@import "../icons/all.css";
 @import "../common/layout/page/latestanimes.css";
 @import "../common/layout/page/animeatt.css";
-@import "../common/style/icons/awards.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
 padding:0;

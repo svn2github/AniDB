@@ -8,46 +8,60 @@ body.nonav
 	background: #FFFFFF;
 }
 
+#layout-content
+{
+	margin-left: 202px;
+}
+
 #layout-nav
 {
-         padding-top: 187px;
+	background: transparent url(images/header.png) no-repeat;
+	height: 187px;
 }
 
 #layout-menu
 {
-	position: relative;
+	background: url(images/menubg.png) no-repeat left 187px;
+	padding-top: 195px;
+	padding-left: 24px;
+	height: 578px;
 }
 
-#layout-menu div.menu
-{
-	position: absolute;
-	padding: 8px 0px 0px 24px;
-         height: 578px;
-	background: url(images/menubg.png) no-repeat top left;
+#layout-menu li.sub-menu{
+	width: 108px;
 }
 
-#layout-menu div.usermenu
+#menu-account
 {
 	position: absolute;
-	top: -176px;
-	right: 0px;
+	top: 10px;
+	right: 10px;
+	left: auto;
 	line-height: 1.7;
-         height: 105px;
-         width: 186px;
-         padding: 0 2px 0 0;
-         z-index: 12;
-         font-weight: bold;
-}
-
-#layout-menu div.usermenu p
-{
+	height: 105px;
+	width: 186px;
+	padding: 0 2px 0 0;
+	z-index: 12;
+	font-weight: bold;
 	width: 130px;
 }
 
-#layout-menu div.menu ul.mod
+#layout-search
 {
 	position: absolute;
-	top: 551px;
+	width: 186px;
+	left: auto;
+	right: 2px;
+	top: 0px;
+	height: 176px;
+	background: transparent url(images/searchbg.png) no-repeat top right;
+	z-index: 10;
+}
+
+#menu-mod
+{
+	position: absolute;
+	top: 740px;
 	left: 24px;
 	padding: 0px;
 }
@@ -62,20 +76,21 @@ body.nonav
 {
 	padding: 0;
 	text-indent: 0;
-         text-transform:capitalize;
-         width: 170px;
+	text-transform:capitalize;
+	width: 170px;
 }
 
-#layout-menu li.mymessages, #layout-menu li.mynotifies, #layout-menu li.mywishlist,
-#layout-menu li.myvotes, #layout-menu li.myreviews, #layout-menu li.mydbentries,
-#layout-menu li.mycreqs, #layout-menu li.up2date
+#menu-main .schedule,
+#menu-main .random,
+#menu-support .irc,
+#menu-adm
 {
-	/*displa54y: none:*/
+	display: none;
 }
 
-#layout-menu ul.main,
-#layout-menu li.ed2kdump,
-#layout-menu ul.lists
+#menu-main,
+#menu-lists,
+#menu-private
 {
 	margin-bottom: 33px;
 }
@@ -106,18 +121,6 @@ body.nonav
 	font-weight: bold;
 }
 
-#layout-menu div.usermenu
-{
-	text-align: center;
-}
-
-#layout-menu span.login
-{
-	text-align: left;
-	display: block;
-	margin-left: 47px;
-}
-
 #layout-menu span.user
 {
 	text-align: left;
@@ -138,91 +141,36 @@ body.nonav
 {
 	display: block;
 }
-#layout-menu form
-{
-	margin-top: 16px;
-}
-#layout-menu form input.text
-{
-	display: block;
-	font-size: 10px;
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	color: #ffffff;
-	background-color: #272D43;
-	border: #BFC2C9 1px solid;
-	width: 8.7em;
-}
 
-#layout-menu form input.logon
+#user-profile a
 {
 	position: absolute;
-	display: block;
-	width: 42px;
-	height: 12px;
-	top: 14px;
-	left: 2px;
-	padding: 12px 0 0 0;
-	overflow: hidden;
-	background: transparent url(images/button_logon.gif) no-repeat top;
-	border: 0;
-	content: "";
-}
-
-#layout-menu div.usermenu a.i_signup
-{
-	position: absolute;
-	top: 14px;
-	left: 46px;
-}
-
-#layout-menu div.usermenu a.i_profile
-{
-	position: absolute;
-         top: 0px;
-         right: 0px;
+	top: 0px;
+	right: 0px;
 	width: 60px;
-         height: 110px;
+	height: 100px;
 }
 
-#layout-menu div.usermenu a.i_logout
+#user-profile a span
+{
+	display: none;
+}
+
+#user-logout a
 {
 	position: absolute;
-         bottom: 10px;
-         left: 44px;
+	bottom: 10px;
+	left: 44px;
 	width: 49px;
-         height: 11px;
-}
-
-#layout-menu form label.remember
-{
-	margin-left: -20px;
-	font-size: 90%;
-}
-
-#layout-menu form label.remember input
-{
-	font-size: 111%;
-	vertical-align: middle;
-}
-
-
-#layout-search
-{
-	position: absolute;
-	width: 186px;
-         right: 2px;
-         top: 0px;
-	height: 176px;
-        	background: transparent url(images/searchbg.png) no-repeat top right;
-         z-index: 10;
+	height: 11px;
 }
 
 #layout-search div.search
 {
 	position: absolute;
-         top: 112px;
+	top: 112px;
 	height: 30px;
-         z-index: 11;
+	z-index: 11;
 }
 
 #layout-search div.search form
@@ -241,7 +189,7 @@ body.nonav
 	padding: 0;
 }
 
-#layout-search form select.type
+#layout-search select
 {
 	display: none;
 }
@@ -251,37 +199,20 @@ body.nonav
 	display: block;
 	float: right;
 	font-size: 13px;
-         font-weight: bold;
+	font-weight: bold;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	color: #9CCD17;
-         vertical-align: middle;
+	vertical-align: middle;
 	background-color: #FFFFFF;
 	border: #D1EDFA 2px solid;
 	margin: 24px 3px 0 0;
 	width: 179px;
-         height: 17px;
+	height: 17px;
 }
 
 #layout-search form input.submit
 {
-	display: block;
-	float: right;
-	font-size: 10px;
-	border: solid 0 white;
-         background-color: #FFFFFF;
-	width: 63px;
-	height: 14px;
-	padding: 14px 0 0 0;
-	overflow: hidden;
-	margin-right: 2.3em;
-	content: "";
-}
-
-#layout-content
-{
-	padding: 187px 0 0 202px;
-	margin-top: -187px;
-         background: transparent url(images/header.png) no-repeat;
+	display: none;
 }
 
 #layout-content h1
@@ -291,11 +222,10 @@ body.nonav
 	font-weight: bold;
 	margin: 0px 0 5px 0px;
 	text-align: left;
-         height: 23px;
-         color: #9CCD17;
-         padding: 4px 0px 0px 13px;
-         border-left:#9CCD17 3px solid;
-         /*background: url(images/newsbg.gif) no-repeat;*/
+	height: 23px;
+	color: #9CCD17;
+	padding: 4px 0px 0px 13px;
+	border-left:#9CCD17 3px solid;
 }
 
 #layout-content div.g_section
@@ -318,7 +248,7 @@ body.nonav
 
 #layout-content table
 {
-         border:#9CCD17 2px solid;
+	border:#9CCD17 2px solid;
 }
 
 #layout-content div.g_content div.profile_all
@@ -330,9 +260,9 @@ body.nonav
 #layout-content ul.g_actionlist,
 #layout-content ul.g_navlist
 {
-         background: #46C5FF;
-         padding: 2px;
-         color: #FFFFFF;
+	background: #46C5FF;
+	padding: 2px;
+	color: #FFFFFF;
 }
 
 #layout-content div.adduserdata_all table
@@ -344,7 +274,7 @@ body.nonav
 {
 	margin-top: 19px;
 	margin-left: 182px;
-         color: #92C016;
+	color: #92C016;
 	text-align: center;
 }
 

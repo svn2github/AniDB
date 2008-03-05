@@ -167,6 +167,7 @@ ul
 	border-width:1px;
 }
 
+#layout-search > div.search > form > p > select,
 #layout-search > div.search > form > p > input.submit
 {
 	display:none;

@@ -2,10 +2,10 @@
 			@MYLIST
 ----------------------------------*/
 
-div.mylist_list ul.g_jumplist {
+div.mylist_list ul.g_list.jump {
 	margin-right: 11em;
 }
-div.mylist_list form ul.g_jumplist {
+div.mylist_list form ul.g_list.jump {
 	margin: 1em 0 0;
 }
 div.mylist_list form,
@@ -82,7 +82,7 @@ div.mylist_list table td.check {
 div.mylist_list table td.check select {
 	margin-left: 1em;
 }
-div.mylist_list .g_actionlist,
+div.mylist_list .g_list,
 div#layout-content div.mylist_list table.eplist td.check {
 	margin: 1em 0;
 	padding: 1em;

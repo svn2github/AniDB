@@ -84,12 +84,12 @@ div.g_content>* {
 
 /* clearing */
 div.g_end,
-div.g_notebox {
+div.g_msg.note {
 	clear: both;
 }
 div.latestanimes_anime:after,
 div.anime_all div.info .block:after,
-div.search_all div.search_results ul.g_jumplist:after,
+div.search_all div.search_results ul.g_list.jump:after,
 div.file_all div.file_info dl:after,
 div.mylist_list form:after,
 div.userpage_all div.stats:after,
@@ -118,23 +118,23 @@ div.agcmts_all div.agcmts_head:after {
 }
 
 /* pagination */
-ul.g_jumplist,
-ul.g_navlist {
+ul.g_list.jump,
+ul.g_list.nav {
 	text-align: center;
 }
-ul.g_jumplist li,
-ul.g_navlist li {
+ul.g_list.jump li,
+ul.g_list.nav li {
 	display: inline;
 	color: #de4799;
 	font-weight: bold;
 	text-transform: capitalize;
 }
-.g_content ul.g_jumplist li a, 
-.g_content ul.g_jumplist li a:link, 
-.g_content ul.g_jumplist li a:visited,
-.g_content ul.g_navlist li a, 
-.g_content ul.g_navlist li a:link, 
-.g_content ul.g_navlist li a:visited {
+.g_content ul.g_list.jump li a, 
+.g_content ul.g_list.jump li a:link, 
+.g_content ul.g_list.jump li a:visited,
+.g_content ul.g_list.nav li a, 
+.g_content ul.g_list.nav li a:link, 
+.g_content ul.g_list.nav li a:visited {
 	text-decoration: none;
 	border: 1px solid #f7edf1;
 	border-bottom: 1px solid #d28cb2;
@@ -144,27 +144,27 @@ ul.g_navlist li {
 	font-size: 0.95em;
 	font-weight: normal;
 }
-.g_content ul.g_jumplist li a:hover, 
-.g_content ul.g_jumplist li a:active,
-.g_content ul.g_navlist li a:hover, 
-.g_content ul.g_navlist li a:active {
+.g_content ul.g_list.jump li a:hover, 
+.g_content ul.g_list.jump li a:active,
+.g_content ul.g_list.nav li a:hover, 
+.g_content ul.g_list.nav li a:active {
 	background: transparent url(images/layout/stripe-pink2.gif) repeat left top;
 	color: #de4799;
 	border: 1px solid #eec6dc;
 }
-ul.g_jumplist li.prev {
+ul.g_list.jump li.prev {
 	float: left;
 	padding-left: 12px;
 	background: transparent url(images/layout/larr.gif) no-repeat left center;
 	font-weight: normal;
 }
-ul.g_jumplist li.next {
+ul.g_list.jump li.next {
 	float: right;
 	padding-right: 12px;
 	background: transparent url(images/layout/rarr.gif) no-repeat right center;
 	font-weight: normal;
 }
-ul.g_jumplist li.all:before {
+ul.g_list.jump li.all:before {
 	content: "Viewing: ";
 	color: #3d3e6e;
 	text-transform: none;
@@ -172,13 +172,13 @@ ul.g_jumplist li.all:before {
 }
 
 /* navlist */
-ul.g_navlist.type li:first-child:before {
+ul.g_list.nav.type li:first-child:before {
 	content: "Type: ";
 	color: #3d3e6e;
 	text-transform: none;
 	font-weight: normal;
 }
-ul.g_navlist.g_numonpage li:first-child:before {
+ul.g_list.limit li:first-child:before {
 	content: "Per page: ";
 	color: #3d3e6e;
 	text-transform: none;
@@ -230,15 +230,15 @@ input[type="submit"]:hover, input[type="button"]:hover {
 }
 
 /* informational boxes */
-.g_notebox, 
+.g_msg.note, 
 .g_note {
 	border: 1px solid #dfc8ec;
 	padding: 0.7em;
 	background: #faf0ff;
 	color: #4d2f5f;
 }
-.g_errorbox,
-.g_warnbox {
+.g_msg.error,
+.g_msg.warning {
 	border: 1px solid #ffcbf8;
 	padding: 0.7em;
 	background: #ffeafc;
@@ -251,30 +251,30 @@ input[type="submit"]:hover, input[type="button"]:hover {
 	border: 1px solid #e0e0e0;
 	color: #777;
 }
-.g_notebox h3, 
+.g_msg.note h3, 
 .g_note h3,
-.g_errorbox h3,
+.g_msg.error h3,
 .g_info h3,
-.g_warnbox {
+.g_msg.warning {
 	margin: 0 0 -0.5em;
 }
-.g_notebox>*:last-child,
+.g_msg.note>*:last-child,
 .g_note>*:last-child,
-.g_errorbox>*:last-child,
+.g_msg.error>*:last-child,
 .g_info>*:last-child,
-.g_warnbox>*:last-child {
+.g_msg.warning>*:last-child {
 	margin-bottom: 0;
 }
-.g_notebox>*:first-child,
+.g_msg.note>*:first-child,
 .g_note>*:first-child,
-.g_errorbox>*:first-child,
+.g_msg.error>*:first-child,
 .g_info>*:first-child,
-.g_warnbox>*:first-child {
+.g_msg.warning>*:first-child {
 	margin-top: 0;
 }
 
-/* actionlist */
-.g_actionlist {
+/* list */
+.g_list {
 	padding: 0.3em 1em 0.4em;
 	background: #dff1ff;
 	border: 1px solid #b0dafb;
@@ -283,7 +283,7 @@ input[type="submit"]:hover, input[type="button"]:hover {
 	text-transform: capitalize;
 	clear: both;
 }
-.g_actionlist li {
+.g_list li {
 	display: inline;
 	margin: 0 0.7em;
 }

@@ -11,43 +11,47 @@
 ul.tabs,ul.contribution { display: none; }
 
 /* container - main nav, login, & search */
-div#layout-nav {
+#layout-nav {
 	padding-top: 160px;
 	background: #fff url(images/layout/bg-header.gif) repeat-x left top;
 	min-width: 784px;
 }
 
 /* container - main nav links & login */
-div#layout-menu {
+#layout-menu {
 	position: relative;
 }
 
 /* container - main nav links */
-div#layout-menu div.menu {
+#layout-menu {
 	padding: 1em;
 	position: absolute;
-	top: -8px;
+	top: 162px;
 	left: 0;
 	width: 9em;
 }
 
+#layout-menu span.tab{
+	display: none;
+}
+
 /* main nav link lists */
-div#layout-menu div.menu ul {
+#layout-menu ul {
 	background: #fff;
 	border: 1px solid #f3e7ff;
 	border-bottom-color: #dec9f2;
 	border-right-color: #dec9f2;
 	margin-bottom: 1em;
 }
-div#layout-menu div.menu ul li {
+#layout-menu ul li {
 	border-bottom: 1px solid #ffecf5;
 }
-div#layout-menu div.menu ul li:last-child {
+#layout-menu ul li:last-child {
 	border-bottom: none;
 }
-div#layout-menu div.menu a, 
-div#layout-menu div.menu a:link, 
-div#layout-menu div.menu a:visited {
+#layout-menu a, 
+#layout-menu a:link, 
+#layout-menu a:visited {
 	text-decoration: none;
 	text-transform: capitalize;
 	color: #7c87d8;
@@ -55,64 +59,64 @@ div#layout-menu div.menu a:visited {
 	display: block;
 	font-size: 0.95em;
 }
-div#layout-menu div.menu a:hover, 
-div#layout-menu div.menu a:active {
+#layout-menu a:hover, 
+#layout-menu a:active {
 	background: transparent url(images/layout/stripe-pink.gif) repeat left top;
 	color: #484b9a;
 }
 
 /* my nav */
-div#layout-menu div.menu ul.my {
+#layout-menu #menu-private {
 	background-color: #7c87d8;
 	border: 1px solid #6470c3;
 	border-bottom-color: #434fa2;
 	border-right-color: #434fa2;
 }
-div#layout-menu div.menu ul.my li {
-	border-bottom-color: #6470c3; 
+#layout-menu #menu-private li {
+	border-bottom-color: #6470c3;
 }
-div#layout-menu div.menu ul.my a, 
-div#layout-menu div.menu ul.my a:link, 
-div#layout-menu div.menu ul.my a:visited {
+#menu-private a, 
+#menu-private a:link, 
+#menu-private a:visited {
 	color: #fff;
 }
-div#layout-menu div.menu ul.my a:hover, 
-div#layout-menu div.menu ul.my a:active {
+#menu-private a:hover, 
+#menu-private a:active {
 	color: #ffd2fe;
 	background: transparent url(images/layout/stripe-dkblue.gif) repeat left top;
 }
 
 /* mylistreport */
-div#layout-menu div.menu ul.mod {
+#layout-menu #menu-mod {
 	background-color: #382ec0;
 	border: 1px solid #20179d;
 	border-bottom-color: #1c1386;
 	border-right-color: #1c1386;
 }
-div#layout-menu div.menu ul.mod li {
+#layout-menu #menu-mod li {
 	border-bottom-color: #291fad; 
 }
-div#layout-menu div.menu ul.mod a, 
-div#layout-menu div.menu ul.mod a:link, 
-div#layout-menu div.menu ul.mod a:visited {
+#layout-menu #menu-mod a, 
+#layout-menu #menu-mod a:link, 
+#layout-menu #menu-mod a:visited {
 	color: #c9dcfb;
 }
-div#layout-menu div.menu ul.mod a:hover, 
-div#layout-menu div.menu ul.mod a:active {
+#layout-menu #menu-mod a:hover, 
+#layout-menu #menu-mod a:active {
 	color: #d3e4ff;
 	background: #1c1386;
 }
 
 /* help link */
-div#layout-menu div.menu ul.other li.help {
+#layout-menu ul.other li.help {
 	background: transparent url(images/buttons/help-static.png) no-repeat 0.7em center;
 }
-div#layout-menu div.menu ul.other li.help a {
+#layout-menu ul.other li.help a {
 	padding-left: 26px;
 }
 
 /* container - login */
-div#layout-menu div.usermenu {
+#layout-menu div.usermenu {
 	position: absolute;
 	top: -160px;
 	right: 1em;
@@ -121,13 +125,13 @@ div#layout-menu div.usermenu {
 }
 
 /* logged in */
-div#layout-menu div.usermenu p {
+#layout-menu div.usermenu p {
 	position: relative;
 	float: left;
 	margin: 0;
 }
-div#layout-menu div.usermenu p a,
-div#layout-menu div.usermenu p.user {
+#layout-menu div.usermenu p a,
+#layout-menu div.usermenu p.user {
 	padding: 78px 0.4em 0;
 	height: 24px;
 	display: block;
@@ -135,64 +139,64 @@ div#layout-menu div.usermenu p.user {
 	text-decoration: none;
 	text-transform: capitalize;
 }
-div#layout-menu div.usermenu p.user {
+#layout-menu div.usermenu p.user {
 	font-weight: bold;
 	text-transform: none;
 }
-div#layout-menu div.usermenu a#newnotifies, 
-div#layout-menu div.usermenu a#newnotifies:link, 
-div#layout-menu div.usermenu a#newnotifies:visited {
+#layout-menu div.usermenu a#newnotifies, 
+#layout-menu div.usermenu a#newnotifies:link, 
+#layout-menu div.usermenu a#newnotifies:visited {
 	color: #fd0576;
 	font-weight: bold;
 	margin-left: 0.5em;
 	background: transparent url(images/layout/trans-white.png) repeat left top;
 	border-left: 1px solid #e7c7d5;
 }
-div#layout-menu div.usermenu a#newnotifies:hover, 
-div#layout-menu div.usermenu a#newnotifies:active {
+#layout-menu div.usermenu a#newnotifies:hover, 
+#layout-menu div.usermenu a#newnotifies:active {
 	color: #ff00c6;
 	background: transparent url(images/layout/stripe-white.png) repeat left top;
 }
-div#layout-menu div.usermenu a.history, 
-div#layout-menu div.usermenu a.history:link, 
-div#layout-menu div.usermenu a.history:visited {
+#layout-menu div.usermenu a.history, 
+#layout-menu div.usermenu a.history:link, 
+#layout-menu div.usermenu a.history:visited {
 	color: #ed95bd;
 	border: 0;
 	background: transparent url(images/layout/trans-white.png) repeat left top;
 }
-div#layout-menu div.usermenu a.history:hover, 
-div#layout-menu div.usermenu a.history:active {
+#layout-menu div.usermenu a.history:hover, 
+#layout-menu div.usermenu a.history:active {
 	color: #fd0576;
 }
-div#layout-menu div.usermenu a.i_button, 
-div#layout-menu div.usermenu a.i_button:link, 
-div#layout-menu div.usermenu a.i_button:visited {
+#layout-menu div.usermenu a.i_button, 
+#layout-menu div.usermenu a.i_button:link, 
+#layout-menu div.usermenu a.i_button:visited {
 	text-decoration: none;
 	color: #be518c;
 	background: transparent url(images/layout/trans-pink.png) repeat left top;
 	border-left: 1px solid #e7c7d5;
 	font-weight: bold;
 }
-div#layout-menu div.usermenu a.i_button:hover, 
-div#layout-menu div.usermenu a.i_button:active {
+#layout-menu div.usermenu a.i_button:hover, 
+#layout-menu div.usermenu a.i_button:active {
 	background: transparent url(images/layout/stripe-pink.png) repeat left top;
 	color: #a93373;
 }
-div#layout-menu div.usermenu a.i_logout, 
-div#layout-menu div.usermenu a.i_logout:link, 
-div#layout-menu div.usermenu a.i_logout:visited {
+#layout-menu div.usermenu a.i_logout, 
+#layout-menu div.usermenu a.i_logout:link, 
+#layout-menu div.usermenu a.i_logout:visited {
 	background: transparent url(images/layout/trans-blue.png) repeat left top;
 	border-right: 1px solid #e7c7d5;
 	color: #4a63e1;
 } 
-div#layout-menu div.usermenu a.i_logout:hover, 
-div#layout-menu div.usermenu a.i_logout:active {
+#layout-menu div.usermenu a.i_logout:hover, 
+#layout-menu div.usermenu a.i_logout:active {
 	background: transparent url(images/layout/stripe-blue.png) repeat left top;
 	color: #2d42af;
 }
 
 /* login form - not logged in */
-div#layout-menu div.usermenu span.login+a+form {
+#layout-menu div.usermenu span.login+a+form {
 	background-color: #F7EDF1;
 	width: 100%;
 	padding-top: 35px;
@@ -200,87 +204,87 @@ div#layout-menu div.usermenu span.login+a+form {
 	width: 280px;
 	padding-left: 20px;
 }
-div#layout-menu div.usermenu span.login+a+form input.text {
+#layout-menu div.usermenu span.login+a+form input.text {
 	width: 131px;
 	padding-left: 2px;
 	padding-right: 2px;
 }
-div#layout-menu div.usermenu span.login+a+form input.text+input.text {
+#layout-menu div.usermenu span.login+a+form input.text+input.text {
 	margin-left: 2px;
 }
-div#layout-menu div.usermenu span.login {
+#layout-menu div.usermenu span.login {
 	text-transform: capitalize;
 	position: absolute;
 	left: 20px;
 	top: 15px;
 }
-div#layout-menu div.usermenu span.login a,
-div#layout-menu div.usermenu span.login a:link,
-div#layout-menu div.usermenu span.login a:visited {
+#layout-menu div.usermenu span.login a,
+#layout-menu div.usermenu span.login a:link,
+#layout-menu div.usermenu span.login a:visited {
 	color: #ed95bd;
 	text-decoration: none;
 }
-div#layout-menu div.usermenu span.login a:hover,
-div#layout-menu div.usermenu span.login a:active {
+#layout-menu div.usermenu span.login a:hover,
+#layout-menu div.usermenu span.login a:active {
 	color: #fd0576;
 }
-div#layout-menu div.usermenu input.logon,
-div#layout-menu div.usermenu a.i_signup,
-div#layout-menu div.usermenu label.remember {
+#layout-menu div.usermenu input.logon,
+#layout-menu div.usermenu a.i_signup,
+#layout-menu div.usermenu label.remember {
 	position: absolute;
 	right: 0;
 	bottom: 1em;
 	width: 4.5em;
 	height: 1.8em;
 }
-div#layout-menu div.usermenu a.i_signup {
+#layout-menu div.usermenu a.i_signup {
 	top: 15px;
 	border-left: 0 !important;
 	background: none !important;
 	text-transform: capitalize;
 	padding: 0;
 }
-div#layout-menu div.usermenu label.remember {
+#layout-menu div.usermenu label.remember {
 	right: 6.5em;
 	width: 13em;
 	text-align: right;
 }
 
 /* container - search */
-div#layout-search {
+#layout-search {
 	position: absolute;
 	top: 0;
 	background: transparent url(images/layout/bg-login.png) no-repeat right top;
 	padding-top: 103px;
 	right: 1em;
-	width: 30em;
+	width: 40em;
 	text-align: right;
 	z-index: 0;
 }
 
 /* search - form */
-div#layout-search input.text {
+#layout-search input.text {
 	border: 1px solid #eed0da;
 	padding: 0.3em 0.3em 0 0.3em;
 	height: 1.5em;
 	width: 16em;
 	color: #1e2495;
 }
-div#layout-search input.text:hover {
+#layout-search input.text:hover {
 	border: 1px solid #dc9abf
 }
-div#layout-search input.submit {
+#layout-search input.submit {
 	height: 1.8em;
 	padding-bottom: 0.2em;
 	margin-bottom: 0.1em;
 	width: 4.5em;
 }
-div#layout-search input.submit:hover {
+#layout-search input.submit:hover {
 	background: #2d42af;
 }
 
 /* container - content */
-div#layout-content {
+#layout-content {
 	clear: both;
 	background: transparent url(images/layout/header.jpg) no-repeat left top;
 	margin-top: -160px;
@@ -288,17 +292,17 @@ div#layout-content {
 }
 
 /* container - footer */
-div#layout-footer {
+#layout-footer {
 	background: #f8f7ff url(images/layout/bg-content.gif) repeat left top;
 }
-div#layout-footer p {
+#layout-footer p {
 	font-size: 0.8em;
 	text-align: center;
 	color: #85809f;
 	margin: 0;
 	padding: 2em 0;
 }
-div#layout-footer p:after {
+#layout-footer p:after {
 	content: ". Design by zakness.";
 }
 
@@ -319,7 +323,7 @@ div#layout-footer p:after {
 }
 
 /* no nav (popups) */
-body.nonav div#layout-content {
+body.nonav #layout-content {
 	margin: 0 1em 1em 1em;
 	padding: 0;
 	background: transparent;	

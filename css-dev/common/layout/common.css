@@ -6,17 +6,18 @@ body.nonav #layout-footer
 	margin:0;
 }
 
-/*#layout-menu ul
-{
-	margin-bottom: 4px;
-}*/
-
 #layout-nav input,
 #layout-nav button
 {
 	width: 100%;
 }
 
+
+#layout-main table,
+#layout-main table caption
+{
+	margin: 0 auto 0 auto;
+}
 
 #layout-nav #user-xkeep input
 {

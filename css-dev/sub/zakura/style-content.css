@@ -49,22 +49,6 @@ content: ".";
 	height: 0;
 }
 
-/* blocks */
-.g_content div.block {
-	display:table;
-	margin-left:auto;
-	margin-right:auto;
-}
-
-.g_content div.block div.image {
-	display:table-cell;
-	vertical-align:middle;
-}
-
-.g_content div.block div.image img {
-	margin-right: 1em;
-}
-
 /* pagination */
 .g_list {
 	text-align: center;

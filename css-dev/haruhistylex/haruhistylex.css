@@ -1,4 +1,5 @@
 @import "../harustyle/harustyle.css";
+
 html
 {
 background-color: #FFFFFF;
@@ -7,43 +8,55 @@ background-position: 0px 697px;
 background-repeat:repeat-y;
 }
 
+#layout-content,
+#layout-footer
+{
+	margin-left: 190px;
+	padding: 1em;
+}
+
+#layout-content h1, .g_content
+{
+	margin-bottom: 1.1em;
+}
+
 #layout-menu
 {
 width: 189px;
-background: url('images/menu.png') no-repeat top left;
+background: url('images/menu.png') no-repeat left 94px;
 }
 
 #layout-search div.search
 {
-background: url('images/banner.png') no-repeat top left;
+background: url(images/banner.png) no-repeat top left;
 height: 94px;	
 }
 
 #layout-search
 {
-background url('images/topback.png') repeat-x top;
+background url(images/topback.png) repeat-x top;
 height: 94px;
 }
 
 #layout-search div.search form
 {
-background: url('images/searchbg.png') no-repeat 0px 77px;
+background: url(images/searchbg.png) no-repeat 0px 77px;
 height: 72px;
 }
 
-.i_logout
+#user-logout a
 {
-background-image: url('images/button_logout.gif');
+background-image: url(images/button_logout.gif);
 }
 
-.i_profile
+#user-profile a
 {
-background-image: url('images/button_profile.gif');
+background-image: url(images/button_profile.gif);
 }
 
-.i_search
+#layout-search form input.submit
 {
-background-image: url('images/button_search.gif');
+background-image: url(images/button_search.gif);
 }
 
 #layout-search div.search
@@ -53,33 +66,12 @@ height: 94px;
 
 #layout-search form input.submit
 {
-margin-top:2px;
-}
-
-#layout-content div.g_section
-{
-padding: 0.5em 2em 0.5em 2em;
-}
-
-#layout-content div.g_content
-{
-margin-left:1em;
-margin-right:1em;
+margin-top: 2px;
 }
 
 #layout-footer:after
 {
 content: "HaruhiStyleX by TheJAG (Based on HaruStyle by b1nh)"
-}
-
-#layout-content div.main_all div.news
-{
-margin: 0.3em 17em 0.3em 2em;
-}
-
-#layout-content div.main_all div.news div
-{
-margin: 0.1em 0.1em 3.1em 1em;
 }
 
 #layout-content div.myplace_all div.latest

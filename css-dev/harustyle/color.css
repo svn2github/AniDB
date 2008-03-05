@@ -30,17 +30,15 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #FFFFFF;
 }
 
-#layout-menu a:link, #layout-menu a:visited {
+#layout-menu a:link,
+#layout-menu a:visited
+{
 	color: #000000;
 }
 
 #layout-menu a:active
 {
 	color: #ff0000;
-}
-#layout-menu *,
-#layout-menu a:hover {
-	color: #bbbbbb;
 }
 
 #layout-menu #newnotifies
@@ -62,16 +60,16 @@ a:visited, a:active, a:hover, a:link {
 	color: #FFE681; /* text color - history link */
 }
 
-#layout-menu div.usermenu p.user
+#menu-account #user-name a span
 {
 	color: white;
 }
 
 #layout-content div.agcmts_entries div.comment a:link,
-#layout-content div.agcmts_entries div.comment a:hover
-#llayout-content div.agcmts_entries div.comment a:active
-#llayout-content div.agcmts_entries div.comment a:visited
+#layout-content div.agcmts_entries div.comment a:hover,
+#layout-content div.agcmts_entries div.comment a:active,
+#layout-content div.agcmts_entries div.comment a:visited
 {
-color: #FFFFFF; /* Link color in comments */
-font-weight: bold;
+	color: #FFFFFF; /* Link color in comments */
+	font-weight: bold;
 }

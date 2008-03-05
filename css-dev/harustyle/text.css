@@ -1,17 +1,17 @@
-#layout-content ul.g_navlist li
+#layout-content ul.g_list.nav li
 {
 	padding: 0px;
 }
 
-#layout-content ul.g_navlist li:before
+#layout-content ul.g_list.nav li:before
 {
 	content: " | "
 }
-#layout-content ul.g_navlist li:first-child:before
+#layout-content ul.g_list.nav li:first-child:before
 {
 	content: "";
 }
-#layout-content ul.g_numonpage li:first-child:before
+#layout-content ul.g_list.limit li:first-child:before
 {
 	content: "show: ";
 }

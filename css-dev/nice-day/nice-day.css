@@ -1,0 +1,593 @@
+@import "../common/normalize.css";
+@import "../common/layout/default.css";
+
+				body.nonav
+{ width: auto }
+
+				body
+{ width: 1024px }
+
+				.g_section > form > table
+,				.g_section > table
+,				h4+table
+{ width: 100% }
+
+				textarea
+{ width: 099% }
+
+				table table
+{ width: 098% }
+
+				.main_all .news
+{ width: 070% }
+
+				.main_all .rightbar
+{ width: 027% }
+
+				.review .bar
+{ width: 10em }
+
+
+				#layout-menu li ul li
+,				.animelist .type
+,				.main_all .rightbar li
+,				span.date
+,				span.user
+,				td.action
+,				td.rating
+,				th
+{ white-space: nowrap }
+
+				a.filter
+,				span.time
+,				span.user a.id
+,				td.rating span
+,				tr.mylist td.name a:after
+{ vertical-align: top }
+
+				.state.return
+,				a.ascending
+{ text-decoration: underline }
+
+				a.descending
+{ text-decoration: overline }
+
+				a
+{ text-decoration: none }
+
+				.state.dropped
+,				h4.collapsed span:first-child
+{ text-decoration: line-through }
+
+				#layout-menu p
+,				.g_list
+,				.tabs
+{ text-align: right }
+
+				.main_all .g_list
+,				ul.contribution li
+{ text-align: left }
+
+				#layout-footer
+,				.animeatt_all .review .bar .avatar
+,				.pre_creq
+,				p.action
+,				p.mylistadd
+,				td.count
+,				td.rating
+,				td.type
+,				tr.action td.submit
+,				tr.action td.value
+{ text-align: center }
+
+				#layout-menu li ul.popup
+{ position: absolute }
+
+				.g_content
+,				.main_all .news
+{ padding: 6px }
+
+				#layout-nav
+{ padding: 41px 0 0 0 }
+
+				.image
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				tr.action td.submit
+,				tr.action td.value
+{ padding: 1em }
+
+				#layout-menu li ul.popup
+{ padding: 10px 16px 10px 16px }
+
+				body
+{ padding: 10px }
+
+				.g_menu.mylist_menu
+{ padding: 0.4em }
+
+				.g_info
+,				.g_timedentry .body
+{ padding: 0.2em 1em }
+
+				.g_msg
+{ padding: 0.1em 0.2em }
+
+				.i_award
+{ padding: 0 0.5em }
+
+				#layout-footer
+{ padding-top: 10px }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ padding-right: 18px }
+
+				#layout-search
+{ padding-right: 10px }
+
+				th
+{ padding-right: 01em }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ padding-left: 18px }
+
+				option
+{ padding-left: 12px }
+
+				blockquote
+,				input[type="text"]
+,				li.tab
+,				option.section
+,				select
+,				td
+,				textarea
+,				th
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ padding-left: 02px }
+
+				.creq_data
+,				div.animerel
+,				pre
+{ overflow: scroll }
+
+				.main_all .rightbar li
+{ overflow: hidden }
+
+				pre
+{ max-height: 36em }
+
+				.creq_data
+{ max-height: 28em }
+
+				.main_all .rightbar > *
+{ margin: 8px }
+
+				body
+{ margin: 10px auto 10px auto }
+
+				.g_info
+{ margin: 01em 0 }
+
+				td table
+{ margin: 01em }
+
+				.g_timedentry
+{ margin: 00.5em }
+
+				.animeatt_all .review .bar
+{ margin: 0 0 1em 1em }
+
+				body.nonav
+{ margin: 0 }
+
+				.g_menu.mylist_menu
+{ margin: -06em -12em 0 0 }
+
+				.main_all .rightbar
+{ margin-top: 7px }
+
+				.animeatt_all .review + .review
+,				.g_timedentry + .g_timedentry
+{ margin-top: 2em }
+
+				#layout-tabs
+,				.g_list
+,				.g_msg
+,				.g_section
+,				.tabs
+{ margin-top: 0.5em }
+
+				h1
+{ margin-top: 0.2em }
+
+				#layout-search
+{ margin-top: -33px }
+
+				.g_timedentry .stamp
+{ margin-top: -01.2em }
+
+				#layout-menu li ul.popup
+{ margin-left: -1px }
+
+				.g_list
+,				.g_msg
+,				.g_section
+,				.tabs
+{ margin-bottom: 0.5em }
+
+				#layout-menu li ul li
+{ line-height: normal }
+
+				#layout-menu li form
+,				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ line-height: 41px }
+
+				caption
+,				h4
+{ line-height: 02.0em }
+
+				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ line-height: 01.6em }
+
+				span.date
+,				span.user a.id
+,				td.id
+,				td.size
+{ letter-spacing: -01px }
+
+				#layout-menu
+{ height: 41px }
+
+				html
+{ height: 100% }
+
+				#layout-menu li span.tab
+,				.g_msg h3
+,				.state.new
+{ font-weight: bold }
+
+				.state.stalled
+{ font-style: italic }
+
+				h1
+{ font-size: 220% }
+
+				#layout-footer div
+{ font-size: 200% }
+
+				.g_timedentry h4
+,				caption
+,				h4
+{ font-size: 130% }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ font-size: 110% }
+
+				#layout-footer
+{ font-size: 080% }
+
+				a.filter
+,				span.time
+,				span.user a.id
+,				td.rating span
+{ font-size: 076% }
+
+				tr.mylist td.name a:first-child:after
+{ font-size: 060% }
+
+				html
+{ font-size: 014px }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ font-family: sans-serif }
+
+				.main_all .rightbar li
+,				h1
+,				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ font-family: Tahoma, sans-serif }
+
+				html
+,				select
+{ font-family: "Lucida Sans Unicode", sans-serif }
+
+				#layout-search
+,				#layout-tabs
+,				.g_menu
+,				.g_menu.mylist_menu
+,				.g_msg h3
+,				.g_timedentry .stamp
+,				.main_all .rightbar
+,				.review .bar
+,				td span.icons
+{ float: right }
+
+				#layout-menu > li
+,				.image
+{ float: left }
+
+				.hide
+{ display: none !important }
+
+				#layout-menu a[title^=""] span
+,				#layout-menu li ul
+,				#menu-user li.user
+,				.file_all dd.group span.time
+,				.g_timedentry .avatar
+,				.grouplist span.completion img
+,				.i_audio
+,				.i_video
+,				.main_all .rightbar h3
+,				td.awards
+,				th.award
+{ display: none }
+
+				.g_list li
+,				.main-tabs li
+,				.tabs li.tab
+{ display: inline }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul li
+,				#layout-menu li ul.popup
+,				ul.contribution li
+{ display: block }
+
+				#layout-footer
+,				.i_icon span
+,				.tab
+,				h4 span:first-child
+,				span a
+{ cursor: pointer }
+
+				#layout-menu .tab
+,				.i_icon span
+,				th
+{ cursor: default }
+
+				#layout-menu a[title^=""]:after
+,				.grouplist span.completion:after
+{ content: attr(title) }
+
+				option.section:after
+{ content: ": " }
+
+				tr.mylist.all_watched .name a:first-child:after
+{ content: " W" }
+
+				tr.mylist td.name a:first-child:after
+{ content: " M" }
+
+				.group_all td.date.added
+,				.pre_creq
+,				.state.locked
+,				a.filter
+,				option.section
+,				span.time
+,				span.user a.id
+,				td span.icons
+,				td.rating span
+,				td.type
+,				tr.mylist td.name a:after
+{ color: gray }
+
+				.g_msg.warning h3
+{ color: #FF8800 }
+
+				.g_msg.error h3
+{ color: #DD5533 }
+
+				a:hover
+{ color: #CC6600 }
+
+				option[value="delall"]
+{ color: #BB1111 }
+
+				#layout-menu li.alert span.tab
+{ color: #BB0000 }
+
+				#layout-footer
+,				.selected a
+{ color: #AAAAAA }
+
+				.tabs li
+,				a
+,				h1
+{ color: #996633 }
+
+				.g_msg.success h3
+{ color: #88AA88 }
+
+				.g_msg.note h3
+{ color: #8888FF }
+
+				td.count
+{ color: #770000 }
+
+				caption
+,				h4
+{ color: #666666 }
+
+				#layout-menu li span.tab
+,				#layout-menu li ul.popup
+{ color: #445566 }
+
+				#layout-menu
+{ color: #444444 }
+
+				#layout-menu li span.tab:hover
+{ color: #223344 }
+
+				blockquote
+{ color: #0F0F0F }
+
+				td.rating
+{ color: #0000AA }
+
+				.animeatt_all .review
+,				.g_list
+{ clear: right }
+
+				.g_section
+,				div.desc
+{ clear: left }
+
+				.g_end
+{ clear: both }
+
+				#layout-menu li ul.popup
+,				.g_menu.mylist_menu
+{ border: 1px solid #AFBEC7 }
+
+				tr.newtype td
+{ border-width: 3px }
+
+				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ border-width: 1px 1px 1px 5px }
+
+				#layout-nav
+{ border-width: 1px }
+
+				#layout-menu li ul.popup
+{ border-top: none }
+
+				.g_info
+,				.g_msg
+,				.g_timedentry .body
+,				.review h4
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				td
+,				tr.action td.submit
+,				tr.action td.value
+{ border-top: 1px solid #EEEEEE }
+
+				#layout-nav
+,				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ border-style: solid }
+
+				#layout-menu li span.tab
+{ border-right: 1px solid #AFBEC7 }
+
+				blockquote
+{ border-left: 2px solid lightgray }
+
+				.i_award + .i_award
+{ border-left: 1px solid #000000 }
+
+				li.tab
+,				tr.header
+,				ul.g_list li
+,				ul.main-tabs li
+,				ul.tabs li.tab
+{ border-color: #EEEEEE rgb(238, 238, 238) rgb(238, 238, 238) rgb(193, 202, 211) }
+
+				#layout-nav
+{ border-color: #DFEEF7 rgb(207, 222, 231) }
+
+				.g_info
+,				.g_msg
+,				.g_timedentry .body
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				tr.action td.submit
+,				tr.action td.value
+{ border-bottom: 1px solid #EEEEEE }
+
+				.main_all .rightbar h4
+{ border-bottom: 1px solid #EAEADA }
+
+				#layout-nav
+{ background: url(images/dc.jpg) center -60px no-repeat }
+
+				html
+{ background: #E6EDF5 url(images/bg.jpg) top left repeat-x }
+
+				#layout-menu li span.tab
+{ background: #D9E1E5 url(images/nav.gif) }
+
+				#layout-menu li span.tab:hover
+{ background-position: left bottom }
+
+				.main_all
+,				body.nonav
+{ background-color: transparent !important }
+
+				.g_info
+,				.g_msg
+,				.g_timedentry .body
+,				blockquote
+,				body
+,				div.desc
+,				p.action
+,				p.mylistadd
+,				tr.action td.submit
+,				tr.action td.value
+{ background-color: #FFFFFF }
+
+				del
+,				tr.bad
+{ background-color: #FFEAEA }
+
+				a:hover
+{ background-color: #FFDDAA }
+
+				.g_content
+,				.main_all .news
+{ background-color: #FAFAFA }
+
+				.main_all .rightbar
+{ background-color: #F7F7F2 }
+
+				tr.mylist.all_watched td
+{ background-color: #F6F4FF }
+
+				#layout-menu li ul.popup
+,				.g_menu.mylist_menu
+{ background-color: #F5F5F5 }
+
+				ins
+,				tr.good td
+,				tr.mylist td
+{ background-color: #F2FFF0 }
+
+				#layout-footer
+,				.i_icon span
+,				.tab
+,				h4 span:first-child
+,				span a
+{ -user-select: none }
+
+				#layout-footer
+,				.i_icon span
+,				.tab
+,				h4 span:first-child
+,				span a
+{ -moz-user-select: none }
+
