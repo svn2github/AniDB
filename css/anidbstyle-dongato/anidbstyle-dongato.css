@@ -294,7 +294,6 @@ table.filelist tr.generic td
 
 /* fix for jumplist/pagination */
 ul.g_list.jump,
-div.pagination,
 div.cmt_entries div.g_timedentry
 {
 	margin: 2.5em 0 2.5em 0;
@@ -333,7 +332,8 @@ div.group_info div.block,
 div.producer_info div.block,
 div.group_form,
 div.g_section.form,
-div.latestanimes_all
+div.latestanimes_all,
+div.userdetails div.block
 {
 	display: table;
 	margin-left: auto;
