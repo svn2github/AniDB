@@ -444,3 +444,8 @@ table.animelist tr.action td.submit
 	padding: 1em;
 	text-align: center;
 }
+
+h4
+{
+	margin: 3px;
+}
