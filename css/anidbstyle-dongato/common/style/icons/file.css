@@ -25,7 +25,7 @@
 
 *.i_file_ed2k_corrupt
 {
-	background-image: url(../../../images/anidb_file_ed2k_corrupt.gif);
+	background-image: url(images/anidb_file_ed2k_corrupt.gif);
 }
 
 *.i_new_icon
@@ -111,12 +111,12 @@
 
 *.i_ext
 {
-	background-image: url(../../../images/anidb_other.gif);
+	background-image: url(images/anidb_other.gif);
 }
 
 *.i_ext.mkv
 {
-	background-image: url(../../../images/anidb_mkv.gif);
+	background-image: url(images/anidb_mkv.gif);
 }
 
 *.i_ext.ogm
@@ -126,22 +126,22 @@
 
 *.i_ext.avi
 {
-	background-image: url(../../../images/anidb_avi.gif);
+	background-image: url(images/anidb_avi.gif);
 }
 
 *.i_ext.mp4
 {
-	background-image: url(../../../images/anidb_mp4.gif);
+	background-image: url(images/anidb_mp4.gif);
 }
 
 *.i_ext.wmv
 {
-	background-image: url(../../../images/anidb_wmv.gif);
+	background-image: url(images/anidb_wmv.gif);
 }
 
 *.i_ext.srt
 {
-	background-image: url(../../../images/anidb_subs.gif);
+	background-image: url(images/anidb_subs.gif);
 }
 
 *.i_ftype_video
@@ -171,7 +171,7 @@
 
 *.i_ftype_other
 {
-	background-image: url(../../../images/anidb_other.gif);
+	background-image: url(images/anidb_other.gif);
 }
 
 *.i_file2ep_rel
