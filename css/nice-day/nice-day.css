@@ -365,8 +365,8 @@
 ,				.grouplist span.completion:after
 { content: attr(title) }
 
-				option.section:after
-{ content: ": " }
+/*				option.section:after
+{ content: ": " }*/ /*breaks select in opera... (wrong option on submit)*/
 
 				tr.mylist.all_watched .name a:first-child:after
 { content: " W" }
