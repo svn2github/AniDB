@@ -7,6 +7,10 @@ if (typeof Array.prototype.indexOf == "undefined") {
 		return -1;
 	}
 }
+Array.prototype.sum = function(){
+	for(var i=0,sum=0;i<this.length;sum+=this[i++]);
+	return sum;
+}
 
 /*function popup(url,w,h,scr,re,title)
 {
@@ -68,12 +72,13 @@ function ClassToggle(elem, name, mode)
 		if(mode==2) return;
 		classes.push(name);
 		elem.className = classes.join(" ");
+		return 1;
 	}else{
 		if(mode==1) return;
 		classes.splice(index,1);
 		elem.className = classes.join(" ");
-	}
-	
+		return 1;
+	}	
 }
 
 /* specific */
@@ -102,7 +107,7 @@ var Magic = {
 			footernode.appendChild(f, footernode);
 			Magic.valiform = f;
 			f = f.appendChild(document.createElement("div"));
-			f.appendChild(document.createTextNode("Validate: "));
+			f.appendChild(document.createTextNode("W3 Validator: "));
 
 			var params = [['parsemodel',"xml"], /*['doctype',doctypecheck],*/ ['ss',1], ['fragment',""]];
 			for (i = 0; k = params[i]; i++)
@@ -204,6 +209,7 @@ var Magic = {
 			var m = document.getElementById('layout-menu');
 			if (m) {
 				var i, ul, s;
+				m.normalize();
 				l = m.getElementsByTagName('ul');
 				for (i=0;i<l.length;i++) {
 					ul = l[i];
@@ -215,10 +221,10 @@ var Magic = {
 						this.className='popup';
 					});
 
-					s = document.createElement('span');
-					s.appendChild(document.createTextNode(ul.title || ul.id));
+					s = ul.parentNode.getElementsByTagName('span')[0];
+					/*s.appendChild(document.createTextNode(ul.title || ul.id));
 					s.className = 'tab';
-					ul.parentNode.insertBefore(s, ul);
+					ul.parentNode.insertBefore(s, ul);*/
 
 					s.onmouseout = (function(){
 						this.nextSibling.className=null;
@@ -231,7 +237,7 @@ var Magic = {
 		}),
 	'enable_hide':(function ()
 		{
-			var elems = document.getElementsByTagName('H4');
+			var elems = document.getElementsByTagName('h4');
 			for (var i = 0; i < elems.length; i++){
 				var spans = elems[i].getElementsByTagName('span');
 				if(spans.length>0)
@@ -301,13 +307,200 @@ function InitDefault()
 		return;
 	}
 
-	Magic.enable_hover_menu();
+	//Magic.enable_hover_menu();
 	Magic.enable_a_onclick_by_rel();	//for popup and "open in new window"
 	Magic.enable_row_kid_classes();		//for styling entire rows by td classes
 	Magic.enable_hide();				//for h4 collapsing
 	Magic.enable_tabs();				//for global structure ul.tabs
 	Magic.add_validator_interface();
+	
+	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
+		?do_sort_opera_and_ff3:do_sort_generic);
 }
+
+function enable_sort(func){
+	var tables = document.getElementsByTagName('table');
+	for (var i = 0; i < tables.length; i++){
+		var rows = tables[i].getElementsByTagName('tr');
+		if(rows[0] && rows[1] && rows[0].className=='header'){
+			var ths = rows[0].getElementsByTagName('th');
+			var tds = rows[1].getElementsByTagName('td');
+			if(ths.length==tds.length)
+				for(var j=0; j<ths.length; j++)
+					if(tds[j].getAttribute("anidb:sort")!=undefined && ths[j].getElementsByTagName('a').length<1){
+						ClassToggle(ths[j], 'sortable', 1);
+						ths[j].onclick = func;
+					}
+		}
+	}
+}
+function do_sort_generic(){
+	var t = new Date().getTime(), s;
+	var tx = new Array();
+	
+	var type = this.getAttribute("anidb:sort");
+	var desc = ClassToggle(this, 'ascending', 2);
+	
+	var ths = this.parentNode.getElementsByTagName('th');
+	for (var i = 0; i < ths.length; i++){
+		ClassToggle(ths[i], 'ascending', 2);
+		ClassToggle(ths[i], 'descending', 2);
+		if(ths[i]==this) index = i;
+	}
+	if(index<0){
+		alert("Internal error: this is not a th...");
+		return;
+	}
+
+	var section = this.parentNode.parentNode;
+	var table = section.parentNode;
+	
+	table.normalize();
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+	var tmp = new Array();
+	var num = true; var reg = /^\d+$/;
+	var rows = section.getElementsByTagName('tr');
+	while(rows.length>1){
+		var tds = rows[1].getElementsByTagName('td');
+		if(tds.length!=ths.length) //irregular row
+			break;
+		var val = tds[index].getAttribute("anidb:sort");
+		tmp.push([ section.removeChild(rows[1]), val, rows.length ]);
+		if(num && !reg.test(val)) num = false;
+	}
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+	if( desc ){
+		tmp.sort(num?sort_number_r:sort_text_r);
+		ClassToggle(this, 'descending', 1);
+	}else{
+		tmp.sort(num?sort_number:sort_text);
+		ClassToggle(this, 'ascending', 1);
+	}
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+
+	if(rows.length>1){
+		var last = rows[1];
+		for (var i = 0; i < tmp.length; i++){
+			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
+			section.insertBefore(tmp[i][0], last);
+		}
+	}else{
+		for (var i = 0; i < tmp.length; i++){
+			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
+			section.appendChild(tmp[i][0]);
+		}
+	}
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+	/*var t = document.getElementById('layout-footer');
+	var p = t.appendChild(document.createElement('p'));
+	p.appendChild(document.createTextNode(tx.join(', ')+ " => "+tx.sum()+" / "+rows.length));*/
+}
+
+function do_sort_opera_and_ff3(){
+	var t = new Date().getTime(), s;
+	var tx = new Array();
+	
+	var type = this.getAttribute("anidb:sort");
+	var desc = ClassToggle(this, 'ascending', 2);
+	
+	var ths = this.parentNode.getElementsByTagName('th');
+	for (var i = 0; i < ths.length; i++){
+		ClassToggle(ths[i], 'ascending', 2);
+		ClassToggle(ths[i], 'descending', 2);
+		if(ths[i]==this) index = i;
+	}
+	if(index<0){
+		alert("Internal error: this is not a th...");
+		return;
+	}
+
+	var section = this.parentNode.parentNode;
+	var table = section.parentNode;
+	
+	table.removeChild(section);
+	//ClassToggle(table, 'hide', 1);
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+	table.normalize();
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+	var tmp = new Array();
+	var num = true; var reg = /^\d+$/;
+	var rows = section.getElementsByTagName('tr');
+	var last;
+	for(var i=1;i<rows.length; i++){
+		var tds = rows[i].getElementsByTagName('td');
+		if(tds.length!=ths.length){ //irregular row
+			last = i;
+			break;
+		}
+		var val = tds[index].getAttribute("anidb:sort");
+		tmp.push([ rows[i], val, rows.length-i ]);
+		if(num && !reg.test(val)) num = false;
+	}
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+	if( desc ){
+		tmp.sort(num?sort_number_r:sort_text_r);
+		ClassToggle(this, 'descending', 1);
+	}else{
+		tmp.sort(num?sort_number:sort_text);
+		ClassToggle(this, 'ascending', 1);
+	}
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+
+	if(last){
+		var last = rows[last];
+		for (var i = 0; i < tmp.length; i++){
+			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
+			section.insertBefore(tmp[i][0], last);
+		}
+	}else{
+		for (var i = 0; i < tmp.length; i++){
+			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
+			section.appendChild(tmp[i][0]);
+		}
+	}
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	table.appendChild(section);
+	
+	s = new Date().getTime(); tx.push(s-t); t=s;
+	
+	/*var t = document.getElementById('layout-footer');
+	var p = t.appendChild(document.createElement('p'));
+	p.appendChild(document.createTextNode(tx.join(', ')+ " => "+tx.sum()+" / "+rows.length));*/
+}
+function sort_number(a,b){
+	return a[1]-b[1] || b[2]-a[2];
+}
+function sort_number_r(a,b){
+	return b[1]-a[1] || b[2]-a[2];
+}
+function sort_text(a,b){
+	if(a[1]<b[1]) return -1;
+	if(a[1]>b[1]) return 1;
+	return b[2]-a[2];
+}
+function sort_text_r(a,b){
+	if(a[1]>b[1]) return -1;
+	if(a[1]<b[1]) return 1;
+	return b[2]-a[2];
+}
+
 
 window.onload = InitDefault;
 

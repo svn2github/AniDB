@@ -72,12 +72,12 @@ function prepPage() {
     var tbody = div.getElementsByTagName('TBODY')[0];
     if (!tbody) continue;
     var head = tbody.rows[0];
-    applySorting(head);
+    //applySorting(head);
     var table = tbody.parentNode;
     var thead = document.createElement('THEAD');
     thead.appendChild(head);
     table.appendChild(thead);
-    init_sorting(head);
+    //init_sorting(head);
     createTooltips(table);
   }
 }
