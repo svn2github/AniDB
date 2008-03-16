@@ -24,7 +24,7 @@ function InitGenren()
 			if (lis[i].className == "branch")
 						{
 							var toggle = document.createElement('a');
-							if (lis[i].parentNode.parentNode.nodeName.toLowerCase() == "form" )
+							if (lis[i].parentNode.parentNode.nodeName == "FORM")
 							{
 								toggle.className = "i_icon i_minus";
 								toggle.onclick = CollapseBranch;
@@ -103,7 +103,7 @@ function RepaintStripes(olnode, odd)
 {
 	for (var i = 0; i < olnode.childNodes.length; i++)
 	{
-		if (olnode.childNodes[i].nodeName.toLowerCase() == "li")
+		if (olnode.childNodes[i].nodeName == "LI")
 		{
 			if (olnode.childNodes[i].className.indexOf("branch") >= 0)
 			{
