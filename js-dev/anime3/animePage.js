@@ -10,7 +10,7 @@ var uid;                       // userID
 var mod;                       // isMod
 var anime;                     // anime Object (used in animePage)
 var animes = new Array();      // stored by aid
-var animeOrder = new Array();  // animes ordered in db way (link to aid)
+var animeOrder = new Array();  // episodes ordered in db way (link to eid)
 //var groupOrder = new Array();   // ordered group list (filtering porpuses)
 var groups = new Array();      // stored by gid
 var aGroups = new Array();     // stored by agid (gid to link groups)
@@ -91,7 +91,7 @@ function loadData() {
   else return;
   var req = xhttpRequest();
   if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
-  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
+  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&dev=1&aid='+aid, parseData);
 }
 
 function parseData(xmldoc) {
@@ -215,7 +215,7 @@ function checkEpExpand() {
     var aid = uriObj['aid'];
     var req = xhttpRequest();
     if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/eid'+eid+'.xml', parseEpisodeData);
-    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+aid+'&eid='+eid, parseEpisodeData);
+    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&dev=1&aid='+aid+'&eid='+eid, parseEpisodeData);
   }
   if (uriObj['gid']) { // Shucks Batman, we are loading all episodes for a group
     loadExpand = true;
@@ -223,7 +223,7 @@ function checkEpExpand() {
     var gid = uriObj['gid'];
     var req = xhttpRequest();
     if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
-    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+aid+'&eid=all&gid='+gid, parseEpisodeData);
+    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&dev=1&aid='+aid+'&eid=all&gid='+gid, parseEpisodeData);
   }
 }
 
@@ -866,7 +866,7 @@ function expandFilesByGroup() {
     forceGroupVisibilty(false); // #1 Hide all groups that aren't expanded
     var req = xhttpRequest();
     if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
-    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid=all&gid='+gid, parseEpisodeData);
+    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&dev=1&aid='+uriObj['aid']+'&eid=all&gid='+gid, parseEpisodeData);
   } else {
     // we allready have the files for this group so we need to do the following:
     forceGroupVisibilty(false); // #1 Hide all groups that aren't expanded
@@ -963,7 +963,7 @@ function expandEp() {
 		getXML = true;
     var req = xhttpRequest();
     if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/eid'+eid+'.xml', parseEpisodeData);
-    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid='+eid, parseEpisodeData);
+    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&dev=1&aid='+uriObj['aid']+'&eid='+eid, parseEpisodeData);
   } else {
     document.getElementById(row.id+'_ftHolder').style.display = '';
   }
@@ -1068,22 +1068,22 @@ function createFileTableHead() {
   if (tFileHeadRow) return (tFileHeadRow.cloneNode(tFileHeadRow,true));
   var row = document.createElement('TR');
 	row.className = 'heading';
-	//createHeader(row,'expand c_none',' ');									// expand
-	createHeader(row,'check c_none','x');										// checkbox
-	createHeader(row,'id c_set','F','File Details/FID');						// fid
-	createHeader(row,'title c_setlatin','Group');								// group
-	createHeader(row,'size c_set','Size');										// size
+	//createHeader(row,'expand c_none',' ');															// expand
+	createHeader(row,'check c_none','x');																	// checkbox
+	createHeader(row,'id c_set','F','File Details/FID');									// fid
+	createHeader(row,'title c_setlatin','Group');													// group
+	createHeader(row,'size c_set','Size');																// size
 	if (uriObj['showcrc'] && uriObj['showcrc'] == 1) 
-		createHeader(row,'crc c_latin','CRC');									// crc
-	createHeader(row,'lang c_none','Lang');										// lang
+		createHeader(row,'crc c_latin','CRC');															// crc
+	createHeader(row,'lang c_none','Lang');																// lang
 	createHeader(row,'codec c_setlatin','CF','Container Format and Codecs');	// codecs
-	createHeader(row,'resolution c_latin','Resolution');						// resolution
-	createHeader(row,'source c_latin','Source');								// source
-	createHeader(row,'quality c_set','Quality');								// quality
-	createHeader(row,'hash c_none','Hash');										// hash
-	createHeader(row,'users c_set','Users');									// users
-	createHeader(row,'mylist c_none','Mylist','Mylist State');					// mylist
-	createHeader(row,'action c_none','Action');									// action
+	createHeader(row,'resolution c_latin','Resolution');									// resolution
+	createHeader(row,'source c_latin','Source');													// source
+	createHeader(row,'quality c_set','Quality');													// quality
+	createHeader(row,'hash c_none','Hash');																// hash
+	createHeader(row,'users c_set','Users');															// users
+	createHeader(row,'mylist c_none','Mylist','Mylist State');						// mylist
+	createHeader(row,'action c_none','Action');														// action
   tFileHeadRow = row;
   return (row.cloneNode(row,true));
 }
@@ -1113,152 +1113,151 @@ function createFileIcons(file) {
 			icons['fid'] = createLink(null, 'P'+file.id, 'http://wiki.anidb.net/w/Files:Pseudo_files', null, null ,null, null);
 	}
 	// extension
-	if (file.type != 'generic') {
-		var tooltip = 'type: '+file.type+' | added: '+cTimeDate(file.date);
-		if (file.relDate > 0) tooltip += ' | released: '+cTimeDate(file.relDate);
-		if (file.fileType != '') tooltip += ' | extension: '+file.fileType;
-		icons['ext'] = createIcon(null, file.fileType, null, null, tooltip, 'i_ext '+file.fileType);
-	}
+  if (file.type != 'generic') {
+    var tooltip = 'type: '+file.type+' | added: '+cTimeDate(file.date);
+    if (file.relDate > 0) tooltip += ' | released: '+cTimeDate(file.relDate);
+    if (file.fileType != '') tooltip += ' | extension: '+file.fileType;
+    icons['ext'] = createIcon(null, file.fileType, null, null, tooltip, 'i_ext '+file.fileType);
+  }
 	// avdumped
 	if (file.avdumped)
 		icons['avdump'] = createIcon(null,' [avdumped]','http://wiki.anidb.net/w/Avdump',null,'File was verified by an AniDB Client','i_av_yes');
 	// vid
-	if (file.type == 'video') { // VIDEO STREAM
-		for (var st in file.videoTracks) {
-			var stream = file.videoTracks[st];
-			if (stream && stream.codec) {
-				var res;
-				var vc_RXP = /[^\w]/ig;
-				var vcodec = 'unknown';
-				if (stream.codec) vcodec = stream.codec.toLowerCase();
-				var vstyle = vcodec.replace(vc_RXP,'_');
-				var tooltip = 'video';
-				if (file.resolution != 'unknown') tooltip += ' | resolution: '+file.resolution;
-				if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
-				if (stream.ar != 'unknown')tooltip += ' | ar: '+stream.ar;
-				if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
-				//createIcon(icons, 'vid0 ', null, null, tooltip, 'i_videostream_'+vstyle);
+  if (file.type == 'video') { // VIDEO STREAM
+    for (var st in file.videoTracks) {
+      var stream = file.videoTracks[st];
+      if (stream && stream.codec) {
+        var res;
+        var vc_RXP = /[^\w]/ig;
+        var vcodec = 'unknown';
+        if (stream.codec) vcodec = stream.codec.toLowerCase();
+        var vstyle = vcodec.replace(vc_RXP,'_');
+        var tooltip = 'video';
+        if (file.resolution != 'unknown') tooltip += ' | resolution: '+file.resolution;
+        if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
+        if (stream.ar != 'unknown')tooltip += ' | ar: '+stream.ar;
+        if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
+        //createIcon(icons, 'vid0 ', null, null, tooltip, 'i_videostream_'+vstyle);
 				icons['vid'] = createIcon(null, 'vid0 ', null, null, tooltip, 'i_video '+stream.codec_sname);
-			}
-		}
-	}
+      }
+    }
+  }
 	// audio languages
 	if (file.type == 'video' || file.type == 'audio') { // AUDIO STREAM
 		var audioLangs = new Array();
 		var audioCodecs = new Array();
 		for (var st in file.audioTracks) {
-			var stream = file.audioTracks[st];
-			if (stream && stream.lang) {
-				var tooltip = 'audio: '+mapLanguage(stream.lang);
+      var stream = file.audioTracks[st];
+      if (stream && stream.lang) {
+        var tooltip = 'audio: '+mapLanguage(stream.lang);
 				if (st < 2) { // EXP only exports info other than lang for the first 2 streams
-					if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
-					if (stream.chan != 'other') tooltip += ' | channels: '+mapAudioChannels(stream.chan);
-					if (stream.type) tooltip += ' | type: '+mapAudioType(stream.type);
-					if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
+          if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
+          if (stream.chan != 'other') tooltip += ' | channels: '+mapAudioChannels(stream.chan);
+          if (stream.type) tooltip += ' | type: '+mapAudioType(stream.type);
+          if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
 					audioCodecs.push(createIcon(null, stream.codec, 'http://wiki.anidb.info/w/Codecs', null, 'Audio codec: '+stream.codec,'i_audio '+stream.codec_sname));
-				}
+        }
 				audioLangs.push(createIcon(null, 'aud'+st+'.'+stream.lang+' ', null, null, tooltip, 'i_audio_'+stream.lang));
-			}
-		}
+      }
+    }
 		icons['audlangs'] = audioLangs;
 		icons['audcodecs'] = audioCodecs;
 	}
 	// subtitle languages
-	if (file.type == 'video' || file.type == 'subtitle' || file.type == 'other') { // SUBTITLE STREAM
+  if (file.type == 'video' || file.type == 'subtitle' || file.type == 'other') { // SUBTITLE STREAM
 		var subtitleLangs = new Array();
-		for (var st in file.subtitleTracks) {
-			var stream = file.subtitleTracks[st];
-			if (stream && stream.lang) {
-				var tooltip = 'subtitle: '+mapLanguage(stream.lang);
-				if (st < 2) {
-					if (stream.type && stream.type != 'unknown') tooltip += ' | type: '+mapSubTypeData(stream.type);
-					if (stream.flags) tooltip += ' | flags: '+mapSubFlagData(stream.flags);
-				}
-				subtitleLangs.push(createIcon(null, 'sub'+st+'.'+stream.lang+' ', null, null, tooltip, 'i_sub_'+stream.lang));
-			}
-		}
+    for (var st in file.subtitleTracks) {
+      var stream = file.subtitleTracks[st];
+      if (stream && stream.lang) {
+        var tooltip = 'subtitle: '+mapLanguage(stream.lang);
+		    if (st < 2) {
+         if (stream.type && stream.type != 'unknown') tooltip += ' | type: '+mapSubTypeData(stream.type);
+         if (stream.flags) tooltip += ' | flags: '+mapSubFlagData(stream.flags);
+        }
+        subtitleLangs.push(createIcon(null, 'sub'+st+'.'+stream.lang+' ', null, null, tooltip, 'i_sub_'+stream.lang));
+      }
+    }
 		icons['sublangs'] = subtitleLangs;
-	}
-	// crc status
-	if (file.crcStatus == 'valid') 
+  }
+  // crc status
+  if (file.crcStatus == 'valid') 
 		icons['crc'] = createIcon(null, 'crc.ok ', null, null, 'crc *matches* official crc ('+file.crc32.toUpperCase()+')', 'i_crc_yes');
-	else if (file.crcStatus == 'invalid') 
+  else if (file.crcStatus == 'invalid') 
 		icons['crc'] = createIcon(null, 'crc.bad ', null, null, 'crc *does not match* official crc', 'i_crc_no');
-	else if (file.type != 'generic') 
+  else if (file.type != 'generic') 
 		icons['crc'] = createIcon(null, 'crc.unv ', null, null, 'crc *not* compared to official crc', 'i_crc_unv');
-	// file version
-	if (file.version != 'v1') 
+  // file version
+  if (file.version != 'v1') 
 		icons['ver'] = createIcon(null, file.version+' ', null, null, 'version *'+file.version.charAt(1)+'* (error corrections)', 'i_vrs_'+file.version.charAt(1));
 	// censor
-	if (file.isCensored) 
+  if (file.isCensored) 
 		icons['cen'] = createIcon(null, 'cen ', null, null, '*censored*', 'i_censored');
-	if (file.isUncensored) 
+  if (file.isUncensored) 
 		icons['cen'] = createIcon(null, 'uncen ', null, null, '*uncensored*', 'i_uncensored');
-	// FILE<->EP RELATIONS
-	if (file.epRelations && file.epRelations[file.episodeId]) { // Do some work
-		var rel = file.epRelations[file.episodeId];
-		var tooltip = 'File covers: [';
-		for (var bar = 0; bar < rel['startp']/10; bar++) tooltip += '-';
-		for (var bar = rel['startp']/10; bar < rel['endp']/10; bar++) tooltip += '=';
-		for (var bar = rel['endp']/10; bar < 10; bar++) tooltip += '-';
-		icons['file_ep_rel'] = createIcon(null, '['+rel['startp']+'-'+rel['endp']+']', null, null, tooltip+']', 'i_file2ep_rel');
-	}
-	// FILE<->FILE RELATIONS
-	if (file.fileRelations && file.fileRelations.length) { // Do some work
-		for (var r in file.fileRelations) {
-			var rel = file.fileRelations[r];
-			if (rel['relfile'] == undefined) continue;
-			var tooltip = 'File relation of type \"'+rel['type']+'\" \"'+rel['dir']+'\" with file id \"'+rel['relfile']+'\"';
-			icons['file_file_rel'] = createIcon(null,'[rel: '+ rel['relfile'] + ']', null, null, tooltip, 'i_file2file_rel');
-		}
-	}
-	// FILE COMMENT
-	if ((file.other) && (file.other != '') && (file.other != undefined)) 
+  // FILE<->EP RELATIONS
+  if (file.epRelations && file.epRelations[file.episodeId]) { // Do some work
+    var rel = file.epRelations[file.episodeId];
+    var tooltip = 'File covers: [';
+    for (var bar = 0; bar < rel['startp']/10; bar++) tooltip += '-';
+    for (var bar = rel['startp']/10; bar < rel['endp']/10; bar++) tooltip += '=';
+    for (var bar = rel['endp']/10; bar < 10; bar++) tooltip += '-';
+    icons['file_ep_rel'] = createIcon(null, '['+rel['startp']+'-'+rel['endp']+']', null, null, tooltip+']', 'i_file2ep_rel');
+  }
+  // FILE<->FILE RELATIONS
+  if (file.fileRelations && file.fileRelations.length) { // Do some work
+    for (var r in file.fileRelations) {
+      var rel = file.fileRelations[r];
+      if (rel['relfile'] == undefined) continue;
+      var tooltip = 'File relation of type \"'+rel['type']+'\" \"'+rel['dir']+'\" with file id \"'+rel['relfile']+'\"';
+      icons['file_file_rel'] = createIcon(null,'[rel: '+ rel['relfile'] + ']', null, null, tooltip, 'i_file2file_rel');
+    }
+  }
+  // FILE COMMENT
+  if ((file.other) && (file.other != '') && (file.other != undefined)) 
 		icons['cmt'] = createIcon(null, 'comment ', null, null, 'comment: '+file.other, 'i_comment');
-	// NEW FILE
-	if (file.newFile)
+  // NEW FILE
+  if (file.newFile)
 		icons['date'] = createIcon(null, 'new.file ', null, null, '*new file* (last 24h)', 'i_new_icon');
-	// MYLIST
-	var temp = new Array();
-	var mylistEntry = mylist[file.id];
-	if (mylistEntry) {
-		icons['mylist'] = createIcon(null, 'in.mylist ', null, null, '*in mylist*', 'i_mylist');
-		// Mylist status icon
-		var tooltip = 'mylist status: '+mylistEntry.status;
-		if (mylistEntry.storage && mylistEntry.storage != '') tooltip += ' | storage: '+mylistEntry.storage;
-		var className = mapMEStatusName(mylistEntry.status);
-		icons['mylist_status'] = createIcon(null, mylistEntry.status+' ', null, null, tooltip, 'i_state_'+className);
-		// Mylist FileState
-		if (mylistEntry.fstate && mylistEntry.fstate != 'unknown') {
-			var className = mapFState(mylistEntry.fstate);
-			var tooltip = 'mylist state: '+mylistEntry.fstate;
-			icons['mylist_fstate'] = createIcon(null, mylistEntry.fstate+' ', null, null, tooltip, className);
-		}
+  // MYLIST
+  var temp = new Array();
+  var mylistEntry = mylist[file.id];
+  if (mylistEntry) {
+    icons['mylist'] = createIcon(null, 'in.mylist ', null, null, '*in mylist*', 'i_mylist');
+    // Mylist status icon
+    var tooltip = 'mylist status: '+mylistEntry.status;
+    if (mylistEntry.storage && mylistEntry.storage != '') tooltip += ' | storage: '+mylistEntry.storage;
+    var className = mapMEStatusName(mylistEntry.status);
+    icons['mylist_status'] = createIcon(null, mylistEntry.status+' ', null, null, tooltip, 'i_state_'+className);
+    // Mylist FileState
+    if (mylistEntry.fstate && mylistEntry.fstate != 'unknown') {
+      var className = mapFState(mylistEntry.fstate);
+      var tooltip = 'mylist state: '+mylistEntry.fstate;
+      icons['mylist_fstate'] = createIcon(null, mylistEntry.fstate+' ', null, null, tooltip, className);
+    }
 		var animeFL = anime.getTitle().charAt(0).toLowerCase();
-		// Seen status
-		if (mylistEntry.seen) 
+    // Seen status
+    if (mylistEntry.seen) 
 			icons['mylist_seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDate(mylistEntry.seenDate), 'i_seen');
-		// mylist comment
-		if ((mylistEntry.other) && (mylistEntry.other != '') && (mylistEntry.other != undefined)) 
+    // mylist comment
+    if ((mylistEntry.other) && (mylistEntry.other != '') && (mylistEntry.other != undefined)) 
 			icons['mylist_cmt'] = createIcon(null, 'mylist comment ', null, null, 'mylist comment: '+mylistEntry.other, 'i_comment');
 		// mylist action
-		icons['mylist_action'] = createIcon(null, 'mylist.remove ', 'animedb.pl?show=mylist&do=del&lid='+mylistEntry.id+'&expand=' + file.animeId + '&showfiles=1&char='+animeFL+'#a'+file.animeId, null, 'remove from mylist', 'i_file_removemylist');
-		if (mylistEntry.seen) 
+    icons['mylist_action'] = createIcon(null, 'mylist.remove ', 'animedb.pl?show=mylist&do=del&lid='+mylistEntry.id+'&expand=' + file.animeId + '&showfiles=1&char='+animeFL+'#a'+file.animeId, null, 'remove from mylist', 'i_file_removemylist');
+    if (mylistEntry.seen) 
 			icons['mylist_watch'] = createIcon(null, 'mylist.unwatch ', 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id+'&expand='+ file.animeId+'&showfiles=1&char='+animeFL+'#a'+file.animeId, null, 'mark unwatched', 'i_seen_no');
-		else 
+    else 
 			icons['mylist_watch'] = createIcon(null, 'mylist.watch ', 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id+'&expand='+file.animeId+'&showfiles=1&char='+animeFL+'#a'+file.animeId, null, 'mark watched', 'i_seen_yes');
-				icons['mylist_edit'] = createIcon(null, 'mylist.edit ', 'animedb.pl?show=mylist&do=add&lid='+mylistEntry.id, null, 'edit mylist entry', 'i_file_edit');
 	} else {
 		// mylist action
 		icons['mylist_action'] = createIcon(null, 'mylist.add ', 'animedb.pl?show=mylist&do=add&fid=' + file.id, null, 'add to mylist', 'i_file_addmylist');
 	}
 	// ed2k
 	if (uid != undefined && file.ed2k != '') {
-		if (file.crcStatus != 'invalid') 
+    if (file.crcStatus != 'invalid') 
 			icons['ed2k'] = createIcon(null, 'ed2k', "!fillme!", null, 'ed2k hash', 'i_file_ed2k');
-		else 
+    else 
 			icons['ed2k'] = createIcon(null, 'ed2k.crc.bad', "!fillme!", null, 'ed2k hash (invalid CRC file)', 'i_file_ed2k_corrupt');
-	}
+  }
 	// Action icons
 	if (file.type != 'generic') {
 		icons['edit'] = createIcon(null, 'edit', 'animedb.pl?show=addfile&aid='+file.animeId+'&eid='+file.episodeId+'&edit='+file.id, null, 'edit', 'i_file_edit');
@@ -1357,8 +1356,14 @@ function createFileTableRow(episode,file) {
 		createCell(fTBr0, 'size', document.createElement('NOBR').appendChild(document.createTextNode(formatFileSize(file.size))), file.size); // SIZE
 		if (uriObj['showcrc'] && uriObj['showcrc'] == '1') createCell(fTBr0, 'crc', document.createTextNode(file.crc32.toUpperCase()));
 		var cell = createCell(null, 'lang icons');
-		if (icons['audlangs']) { var audlangs = icons['audlangs']; for (var i = 0; i < audlangs.length; i++) cell.appendChild(audlangs[i]); }
-		if (icons['sublangs']) { var sublangs = icons['sublangs']; for (var i = 0; i < sublangs.length; i++) cell.appendChild(sublangs[i]); }
+		if (icons['audlangs']) {
+			var audlangs = icons['audlangs'];
+			for (var i = 0; i < audlangs.length; i++) cell.appendChild(audlangs[i]);
+		}
+		if (icons['sublangs']) {
+			var sublangs = icons['sublangs'];
+			for (var i = 0; i < sublangs.length; i++) cell.appendChild(sublangs[i]);
+		}
 		fTBr0.appendChild(cell);
 		cell = createCell(null, 'codec icons');
 		var codecSort = 'unknown';
@@ -1366,7 +1371,10 @@ function createFileTableRow(episode,file) {
 		cell.setAttribute('anidb:sort',codecSort);
 		if (icons['ext']) cell.appendChild(icons['ext']);
 		if (icons['vid']) cell.appendChild(icons['vid']);
-		if (icons['audcodecs']) { var audcodecs = icons['audcodecs']; for (var i = 0; i < audcodecs.length; i++) cell.appendChild(audcodecs[i]); }
+		if (icons['audcodecs']) {
+			var audcodecs = icons['audcodecs'];
+			for (var i = 0; i < audcodecs.length; i++) cell.appendChild(audcodecs[i]);
+		}
 		fTBr0.appendChild(cell);
 		createCell(fTBr0, 'resolution', ((file.type == 'video') ? document.createTextNode(file.resolution) : document.createTextNode('n/a')));
 		var cell = createCell(null, 'source');

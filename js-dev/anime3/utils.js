@@ -278,13 +278,11 @@ function createTextLink(parentNode, text, url, rel, onclick, title, className) {
  * @param value Value of the option
  * @param isSelected Should this option be selected
  */
-function createSelectOption(parentNode, text, value, isSelected, className, isDisabled) {
+function createSelectOption(parentNode, text, value, isSelected) {
   var obj = document.createElement('OPTION');
   if (text != null) obj.appendChild(document.createTextNode(text));
   if (value != null) obj.value = value;
   if (isSelected != null) obj.selected = isSelected;
-  if (className != null) obj.className = className;
-  if (isDisabled != null) obj.disabled = isDisabled;
   if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
   else return(obj);
 }
@@ -362,17 +360,9 @@ function createLanguageSelect(parentNode,name,id,onchange,selected) {
 function createSelectArray(parentNode,name,id,onchange,selected,optionArray) {
 	var select = createBasicSelect(name,id,onchange);
 	for (var opt in optionArray) {
+		var option = document.createElement('OPTION');
 		var op = optionArray[opt];
-		createSelectOption(select,op['text'], opt, (opt == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
-	}
-	if (parentNode && parentNode != '') parentNode.appendChild(select);
-	else return select;
-}
-function createSelectArrayN(parentNode,name,id,onchange,selected,optionArray) {
-	var select = createBasicSelect(name,id,onchange);
-	for (var i = 0; i < optionArray.length; i++) {
-		var op = optionArray[i];
-		createSelectOption(select, op['text'], op['value'], (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
+		createSelectOption(select,op['text'], opt, (opt == selected));
 	}
 	if (parentNode && parentNode != '') parentNode.appendChild(select);
 	else return select;
@@ -396,6 +386,7 @@ function createCheckBox(parentNode,name,id,onchange,checked) {
 	if (parentNode && parentNode != '') parentNode.appendChild(ck);
 	else return ck;
 }
+
 
 function makeBar(parentNode,start,end,total,map) {
   var mult = 1;

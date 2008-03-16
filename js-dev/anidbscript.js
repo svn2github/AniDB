@@ -1,45 +1,26 @@
 /* compat */
+!Array.prototype.indexOf && (Array.prototype.indexOf = function (it){
+		for (var i = 0, l = this.length; i < l; i++){
+			if (this[i] === it) { return i; }
+		}
+		return -1;
+	});
+
 if (typeof Array.prototype.indexOf == "undefined") {
-	Array.prototype.indexOf = function(it) {
+	Array.prototype.indexOf = function(what) {
 		for (var i = 0; i < this.length; i++) {
-			if (this[i] == it) return i;
+			if (this[i] == what) return i;
 		}
 		return -1;
 	}
 }
-Array.prototype.sum = function(){
-	for(var i=0,sum=0;i<this.length;sum+=this[i++]);
-	return sum;
-}
 
-/*function popup(url,w,h,scr,re,title)
+function popup(url,w,h,scr,re,title)
 {
 	var urlp = (url.indexOf("animedb.pl?") != -1 && url.indexOf("&nonav") == -1) ? url+"&nonav=1" : url;
     window.open(urlp,title,'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars='+scr+',resizable='+re+',width='+w+',height='+h);
-}*/
-
-/* generic */
-
-/**
- * Adds onload events to window.onload
- * usage: addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
- *    or: addLoadEvent(function() {
- *           more code to run on page load 
- *         });
- */
-function addLoadEvent(func) {
-	var oldonload = window.onload;
-	if (typeof window.onload != 'function') {
-		window.onload = func;
-	} else {
-		window.onload = function() {
-			if (oldonload) {
-				oldonload();
-			}
-			func();
-		}
-	}
 }
+
 
 function BasicPopup(a)
 {
@@ -58,32 +39,13 @@ function BasicPopupSelf()
 	return BasicPopup(this);
 }
 
-function OpenNewWindow()
-{
-	window.open(this.href);
-	return false;
-}
-
-function ClassToggle(elem, name, mode)
-{
-	var classes = elem.className.split(" ");
-	var index = classes.indexOf(name);
-	if(index<0){
-		if(mode==2) return;
-		classes.push(name);
-		elem.className = classes.join(" ");
-		return 1;
-	}else{
-		if(mode==1) return;
-		classes.splice(index,1);
-		elem.className = classes.join(" ");
-		return 1;
-	}	
-}
-
-/* specific */
 var Magic = {
-	'add_validator_interface':(function ()
+	'OpenNewWindow':(function ()
+		{
+			window.open(this.href);
+			return false;
+		}),
+	'addvalidatorinterface':(function ()
 		{
 			if (document.evaluate && window.XMLSerializer) // interested people don't use IE anyway
 			{
@@ -109,7 +71,7 @@ var Magic = {
 			f = f.appendChild(document.createElement("div"));
 			f.appendChild(document.createTextNode("W3 Validator: "));
 
-			var params = [['parsemodel',"xml"], /*['doctype',doctypecheck],*/ ['ss',1], ['fragment',""]];
+			var params = [['parsemodel',"xml"], ['doctype',doctypecheck], ['ss',1], ['fragment',""]];
 			for (i = 0; k = params[i]; i++)
 			{
 				n = document.createElement("input");
@@ -118,15 +80,15 @@ var Magic = {
 			Magic.checkfield = n;
 
 			params = [
-				["current",Magic.check_current,"Serialise current doc state and validate"],
-				["re-fetch",Magic.check_base,"Re-fetch current URI from server and validate"],
+				["current",Magic.currentcheck,"Serialise current doc state and validate"],
+				["re-fetch",Magic.basecheck,"Re-fetch current URI from server and validate"],
 				["as guest", undefined, "Validate current URI as it is accessed by a guest"]];
 			for (i = 0; k = params[i]; i++)
 			{
 				n = document.createElement("a");
 				n.title = k[2]; 
 				n.appendChild(document.createTextNode(k[0]));
-				if( k[1] ){ n.href=""; n.onclick = k[1]; }
+				if( k[1] ) n.onclick = k[1];
 				else n.href = validatorloc+"?uri=referer&doctype="+doctypecheck.replace(" ","+");
 				if( i>0 ) f.appendChild(document.createTextNode(", "));
 				f.appendChild(n);
@@ -134,28 +96,19 @@ var Magic = {
 		}),
 	'asxmlfixup':(function (s)
 		{
-			return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/tr/xhtml11/DTD/xhtml11.dtd\" [ <!ATTLIST td anidb:sort CDATA #IMPLIED> <!ATTLIST select value CDATA #IMPLIED> ]>"
-				+s
-				.replace(/<[^! >]+/g, function(m){return m.toLowerCase();})
-				.replace(/<\?xml\ version="1.0"\?>/,'')
-				.replace(/<!DOCTYPE\ html>/,'')
-				.replace(/<html/,'<html xmlns="http://www.w3.org/1999/xhtml"')
-				.replace(/(<[^>]+\s+)lang(=[\'\"])/g,"$1xml:lang$2")
-				.replace(/selected="true"/g,'selected="selected"') //for opera
-				.replace(/checked="true"/g,'checked="checked"') //for opera
-				.replace(/\/\*&#x5d\]>\*\//,'/*]]&gt;*/') //for opera
-				//.replace(/<select\s+name="(.+)"\s+size="(\d+)"\svalue="1">/g,'<select name="$1" size="$2">') //for opera
-				.replace(/\ class=""/g,'') //for js disabled classes
-			;
+			return s.replace(/<[^! >]+/g, function(m){return m.toLowerCase();})
+				.replace('<?xml version="1.0"?>','')
+				.replace(/selected="true"/g,'selected="selected"')
+				.replace('<html','<html xmlns="http://www.w3.org/1999/xhtml"')
+				.replace(/(<[^>]+\s+)lang(=[\'\"])/g,"$1xml:lang$2");
 		}),
-	'check_current':(function ()
+	'currentcheck':(function ()
 		{
 			var serialator = new XMLSerializer();
 			Magic.checkfield.value = Magic.asxmlfixup(serialator.serializeToString(document));
 			Magic.valiform.submit();
-			return false;
 		}),
-	'check_base':(function ()
+	'basecheck':(function ()
 		{
 			if (!window.location.search) { alert("Page seems to have been POST-ed, can't re-fetch"); }
 			else
@@ -170,74 +123,10 @@ var Magic = {
 					Magic.valiform.submit();
 				}
 			}
-			return false;
-		}),
-	'enable_row_kid_classes':(function ()
-		{
-			var rowlist = document.getElementsByTagName('tr');
-			for (var i = 0; i < rowlist.length; i++)
-			{
-				var row = rowlist[i];
-				for (var j = 0; j < row.childNodes.length; j++)
-				{
-					var kidclass = row.childNodes[j].className || "";
-					if (kidclass.indexOf(" ") >= 0)
-					{
-						row.className += kidclass.substring(kidclass.indexOf(" "));
-					}
-				}
-			}
-		}),
-	'enable_a_onclick_by_rel':(function ()
-		{
-			var linklist = document.getElementsByTagName('a');
-			for (var i = 0; i < linklist.length; i++)
-			{
-				var relstring = linklist[i].getAttribute("rel") || "";
-				if (relstring.indexOf("anidb::popup") >= 0)
-				{
-					linklist[i].onclick = BasicPopupSelf;
-				}
-				else if (relstring.indexOf("anidb::") >= 0) // ::extern ::wiki ::forum ::tracker
-				{
-					linklist[i].onclick = OpenNewWindow;
-				}
-			}
-		}),
-	'enable_hover_menu':(function (m)
-		{
-			var m = document.getElementById('layout-menu');
-			if (m) {
-				var i, ul, s;
-				m.normalize();
-				l = m.getElementsByTagName('ul');
-				for (i=0;i<l.length;i++) {
-					ul = l[i];
-
-					ul.onmouseout = (function(){
-						this.className=null;
-					});
-					ul.onmouseover = (function(){
-						this.className='popup';
-					});
-
-					s = ul.parentNode.getElementsByTagName('span')[0];
-					/*s.appendChild(document.createTextNode(ul.title || ul.id));
-					s.className = 'tab';
-					ul.parentNode.insertBefore(s, ul);*/
-
-					s.onmouseout = (function(){
-						this.nextSibling.className=null;
-					});
-					s.onmouseover = (function(){
-						this.nextSibling.className='popup';
-					});
-				}
-			}
 		}),
 	'enable_hide':(function ()
 		{
-			var elems = document.getElementsByTagName('h4');
+			var elems = document.getElementsByTagName('H4');
 			for (var i = 0; i < elems.length; i++){
 				var spans = elems[i].getElementsByTagName('span');
 				if(spans.length>0)
@@ -299,218 +188,108 @@ var Magic = {
 		})
 	};
 
-/* init */
+function ClassToggle(elem, classN, mode)
+{
+	var classes = elem.className.split(" ");
+	var index = classes.indexOf(classN); // IE doesn't natively support this
+	if(index<0){
+		if(mode==2) return;
+		classes.push(classN);
+		elem.className = classes.join(" ");
+	}else{
+		if(mode==1) return;
+		classes.splice(index,1);
+		elem.className = classes.join(" ");
+	}
+	
+}
 
 function InitDefault()
 {
-	if (!document.getElementsByTagName){
-		return;
+	if (document.getElementsByTagName)
+	{
+		var linklist = document.getElementsByTagName('a');
+		var rowlist = document.getElementsByTagName('tr');
+		var spanlist = document.getElementsByTagName('span');
 	}
-
-	//Magic.enable_hover_menu();
-	Magic.enable_a_onclick_by_rel();	//for popup and "open in new window"
-	Magic.enable_row_kid_classes();		//for styling entire rows by td classes
-	Magic.enable_hide();				//for h4 collapsing
-	Magic.enable_tabs();				//for global structure ul.tabs
-	Magic.add_validator_interface();
-	
-	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
-		?do_sort_opera_and_ff3:do_sort_generic);
-}
-
-function enable_sort(func){
-	var tables = document.getElementsByTagName('table');
-	for (var i = 0; i < tables.length; i++){
-		var rows = tables[i].getElementsByTagName('tr');
-		if(rows[0] && rows[1] && rows[0].className=='header'){
-			var ths = rows[0].getElementsByTagName('th');
-			var tds = rows[1].getElementsByTagName('td');
-			if(ths.length==tds.length)
-				for(var j=0; j<ths.length; j++)
-					if(tds[j].getAttribute("anidb:sort")!=undefined && ths[j].getElementsByTagName('a').length<1){
-						ClassToggle(ths[j], 'sortable', 1);
-						ths[j].onclick = func;
-					}
-		}
-	}
-}
-function do_sort_generic(){
-	var t = new Date().getTime(), s;
-	var tx = new Array();
-	
-	var type = this.getAttribute("anidb:sort");
-	var desc = ClassToggle(this, 'ascending', 2);
-	
-	var ths = this.parentNode.getElementsByTagName('th');
-	for (var i = 0; i < ths.length; i++){
-		ClassToggle(ths[i], 'ascending', 2);
-		ClassToggle(ths[i], 'descending', 2);
-		if(ths[i]==this) index = i;
-	}
-	if(index<0){
-		alert("Internal error: this is not a th...");
-		return;
-	}
-
-	var section = this.parentNode.parentNode;
-	var table = section.parentNode;
-	
-	table.normalize();
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-	var tmp = new Array();
-	var num = true; var reg = /^\d+$/;
-	var rows = section.getElementsByTagName('tr');
-	while(rows.length>1){
-		var tds = rows[1].getElementsByTagName('td');
-		if(tds.length!=ths.length) //irregular row
-			break;
-		var val = tds[index].getAttribute("anidb:sort");
-		tmp.push([ section.removeChild(rows[1]), val, rows.length ]);
-		if(num && !reg.test(val)) num = false;
-	}
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-	if( desc ){
-		tmp.sort(num?sort_number_r:sort_text_r);
-		ClassToggle(this, 'descending', 1);
-	}else{
-		tmp.sort(num?sort_number:sort_text);
-		ClassToggle(this, 'ascending', 1);
-	}
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-
-	if(rows.length>1){
-		var last = rows[1];
-		for (var i = 0; i < tmp.length; i++){
-			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
-			section.insertBefore(tmp[i][0], last);
-		}
-	}else{
-		for (var i = 0; i < tmp.length; i++){
-			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
-			section.appendChild(tmp[i][0]);
+	else return;
+	Magic.addvalidatorinterface();
+	for (var i = 0; i < rowlist.length; i++)
+	{
+		var row = rowlist[i];
+		for (var j = 0; j < row.childNodes.length; j++)
+		{
+			var kidclass = row.childNodes[j].className || "";
+			if (kidclass.indexOf(" ") >= 0)
+			{
+				row.className += kidclass.substring(kidclass.indexOf(" "));
+			}
 		}
 	}
 	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-	/*var t = document.getElementById('layout-footer');
-	var p = t.appendChild(document.createElement('p'));
-	p.appendChild(document.createTextNode(tx.join(', ')+ " => "+tx.sum()+" / "+rows.length));*/
-}
-
-function do_sort_opera_and_ff3(){
-	var t = new Date().getTime(), s;
-	var tx = new Array();
-	
-	var type = this.getAttribute("anidb:sort");
-	var desc = ClassToggle(this, 'ascending', 2);
-	
-	var ths = this.parentNode.getElementsByTagName('th');
-	for (var i = 0; i < ths.length; i++){
-		ClassToggle(ths[i], 'ascending', 2);
-		ClassToggle(ths[i], 'descending', 2);
-		if(ths[i]==this) index = i;
-	}
-	if(index<0){
-		alert("Internal error: this is not a th...");
-		return;
-	}
-
-	var section = this.parentNode.parentNode;
-	var table = section.parentNode;
-	
-	table.removeChild(section);
-	//ClassToggle(table, 'hide', 1);
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-	table.normalize();
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-	var tmp = new Array();
-	var num = true; var reg = /^\d+$/;
-	var rows = section.getElementsByTagName('tr');
-	var last;
-	for(var i=1;i<rows.length; i++){
-		var tds = rows[i].getElementsByTagName('td');
-		if(tds.length!=ths.length){ //irregular row
-			last = i;
-			break;
+	for (var i = 0; i < linklist.length; i++)
+	{
+		var relstring = linklist[i].getAttribute("rel") || "";
+		if (relstring.indexOf("anidb::popup") >= 0)
+		{
+			linklist[i].target = "_blank";
+			linklist[i].onclick = BasicPopupSelf;
 		}
-		var val = tds[index].getAttribute("anidb:sort");
-		tmp.push([ rows[i], val, rows.length-i ]);
-		if(num && !reg.test(val)) num = false;
-	}
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-	if( desc ){
-		tmp.sort(num?sort_number_r:sort_text_r);
-		ClassToggle(this, 'descending', 1);
-	}else{
-		tmp.sort(num?sort_number:sort_text);
-		ClassToggle(this, 'ascending', 1);
-	}
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-
-	if(last){
-		var last = rows[last];
-		for (var i = 0; i < tmp.length; i++){
-			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
-			section.insertBefore(tmp[i][0], last);
-		}
-	}else{
-		for (var i = 0; i < tmp.length; i++){
-			ClassToggle(tmp[i][0], 'g_odd', i%2==0?1:2);
-			section.appendChild(tmp[i][0]);
+		else if (relstring.indexOf("anidb::") >= 0) // ::extern ::wiki ::forum ::tracker
+		{
+			linklist[i].onclick = Magic.OpenNewWindow;
 		}
 	}
+
+	Magic.enable_hide();
+	Magic.enable_tabs();
 	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	table.appendChild(section);
-	
-	s = new Date().getTime(); tx.push(s-t); t=s;
-	
-	/*var t = document.getElementById('layout-footer');
-	var p = t.appendChild(document.createElement('p'));
-	p.appendChild(document.createTextNode(tx.join(', ')+ " => "+tx.sum()+" / "+rows.length));*/
-}
-function sort_number(a,b){
-	return a[1]-b[1] || b[2]-a[2];
-}
-function sort_number_r(a,b){
-	return b[1]-a[1] || b[2]-a[2];
-}
-function sort_text(a,b){
-	if(a[1]<b[1]) return -1;
-	if(a[1]>b[1]) return 1;
-	return b[2]-a[2];
-}
-function sort_text_r(a,b){
-	if(a[1]>b[1]) return -1;
-	if(a[1]<b[1]) return 1;
-	return b[2]-a[2];
+	mbSet('layout-menu', 'menu-over');
 }
 
+
+/**/
+
+
+
+/**
+ * Adds onload events to window.onload
+ * usage: addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
+ *    or: addLoadEvent(function() {
+ *           more code to run on page load 
+ *         });
+ */
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
 
 window.onload = InitDefault;
 
 
 function CookieSet( name, value, expires, path, domain, secure ) 
 {
+	// set time, it's in milliseconds
 	var today = new Date();
 	today.setTime( today.getTime() );
 
-	if ( expires ){
+	/*
+	if the expires variable is set, make the correct 
+	expires time, the current script below will set 
+	it for x number of days, to make it for hours, 
+	delete * 24, for minutes, delete * 60 * 24
+	*/
+	if ( expires )
+	{
 		expires = expires * 1000 * 60 * 60 * 24;
 	}
 	var expires_date = new Date( today.getTime() + (expires) );
@@ -522,22 +301,75 @@ function CookieSet( name, value, expires, path, domain, secure )
 	( ( secure ) ? ";secure" : "" );
 }
 
-function CookieGet( check_name )
-{
+// this fixes an issue with the old method, ambiguous values 
+// with this test document.cookie.indexOf( name + "=" );
+function CookieGet( check_name ) {
+	// first we'll split this cookie up into name/value pairs
+	// note: document.cookie only returns name=value, not the other components
 	var a_all_cookies = document.cookie.split( ';' );
-	var a_temp_cookie, cookie_name, cookie_value;
+	var a_temp_cookie = '';
+	var cookie_name = '';
+	var cookie_value = '';
+	var b_cookie_found = false; // set boolean t/f default f
 	
 	for ( i = 0; i < a_all_cookies.length; i++ )
 	{
+		// now we'll split apart each name=value pair
 		a_temp_cookie = a_all_cookies[i].split( '=' );
+		
+		
+		// and trim left/right whitespace while we're at it
 		cookie_name = a_temp_cookie[0].replace(/^\s+|\s+$/g, '');
 	
-		if ( cookie_name == check_name ){
-			if ( a_temp_cookie.length > 1 ){
+		// if the extracted name matches passed check_name
+		if ( cookie_name == check_name )
+		{
+			b_cookie_found = true;
+			// we need to handle case where cookie has no value but exists (no = sign, that is):
+			if ( a_temp_cookie.length > 1 )
+			{
 				cookie_value = unescape( a_temp_cookie[1].replace(/^\s+|\s+$/g, '') );
 			}
+			// note that in cases where cookie is initialized but no value, null is returned
 			return cookie_value;
+			break;
 		}
+		a_temp_cookie = null;
+		cookie_name = '';
 	}
-	return null;
+	if ( !b_cookie_found )
+	{
+		return null;
+	}
 }
+
+function mbSet(m,c) {
+var m = document.getElementById(m);
+if (m) {
+	m.className=c;
+	
+	var i, ul, s;
+	l = m.getElementsByTagName('ul');
+	for (i=0;i<l.length;i++) {
+		ul = l[i];
+		
+		ul.onmouseout = (function(){
+			this.className=null;
+		});
+		ul.onmouseover = (function(){
+			this.className='popup';
+		});
+		
+		s = document.createElement('span');
+		s.appendChild(document.createTextNode(ul.title || ul.id));
+		s.className = 'tab';
+		ul.parentNode.insertBefore(s, ul);
+
+		s.onmouseout = (function(){
+			this.nextSibling.className=null;
+		});
+		s.onmouseover = (function(){
+			this.nextSibling.className='popup';
+		});
+	}
+}}
