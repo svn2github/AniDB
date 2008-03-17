@@ -69,6 +69,7 @@
 				#layout-footer
 ,				.animeatt_all .review .bar .avatar
 ,				.pre_creq
+,				div.pane p
 ,				p.action
 ,				p.mylistadd
 ,				td.count
@@ -386,6 +387,7 @@
 
 				.g_section
 ,				div.desc
+,				.css_style + p
 { clear: left }
 
 				.g_end
