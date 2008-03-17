@@ -28,8 +28,7 @@
 { width: 10em }
 
 
-				#layout-menu li ul li
-,				.animelist .type
+				.animelist .type
 ,				.main_all .rightbar li
 ,				span.date
 ,				span.user
@@ -59,8 +58,7 @@
 ,				h4.collapsed span:first-child
 { text-decoration: line-through }
 
-				#layout-menu p
-,				.g_list
+				.g_list
 ,				.tabs
 { text-align: right }
 
@@ -71,6 +69,7 @@
 				#layout-footer
 ,				.animeatt_all .review .bar .avatar
 ,				.pre_creq
+,				div.pane p
 ,				p.action
 ,				p.mylistadd
 ,				td.count
@@ -79,9 +78,6 @@
 ,				tr.action td.submit
 ,				tr.action td.value
 { text-align: center }
-
-				#layout-menu li ul.popup
-{ position: absolute }
 
 				.g_content
 ,				.main_all .news
@@ -97,9 +93,6 @@
 ,				tr.action td.submit
 ,				tr.action td.value
 { padding: 1em }
-
-				#layout-menu li ul.popup
-{ padding: 10px 16px 10px 16px }
 
 				body
 { padding: 10px }
@@ -120,19 +113,11 @@
 				#layout-footer
 { padding-top: 10px }
 
-				#layout-menu li span.tab
-,				#layout-menu li ul.popup
-{ padding-right: 18px }
-
 				#layout-search
 { padding-right: 10px }
 
 				th
 { padding-right: 01em }
-
-				#layout-menu li span.tab
-,				#layout-menu li ul.popup
-{ padding-left: 18px }
 
 				option
 { padding-left: 12px }
@@ -212,22 +197,11 @@
 				.g_timedentry .stamp
 { margin-top: -01.2em }
 
-				#layout-menu li ul.popup
-{ margin-left: -1px }
-
 				.g_list
 ,				.g_msg
 ,				.g_section
 ,				.tabs
 { margin-bottom: 0.5em }
-
-				#layout-menu li ul li
-{ line-height: normal }
-
-				#layout-menu li form
-,				#layout-menu li span.tab
-,				#layout-menu li ul.popup
-{ line-height: 41px }
 
 				caption
 ,				h4
@@ -246,14 +220,10 @@
 ,				td.size
 { letter-spacing: -01px }
 
-				#layout-menu
-{ height: 41px }
-
 				html
 { height: 100% }
 
-				#layout-menu li span.tab
-,				.g_msg h3
+				.g_msg h3
 ,				.state.new
 { font-weight: bold }
 
@@ -271,10 +241,6 @@
 ,				h4
 { font-size: 130% }
 
-				#layout-menu li span.tab
-,				#layout-menu li ul.popup
-{ font-size: 110% }
-
 				#layout-footer
 { font-size: 080% }
 
@@ -289,10 +255,6 @@
 
 				html
 { font-size: 014px }
-
-				#layout-menu li span.tab
-,				#layout-menu li ul.popup
-{ font-family: sans-serif }
 
 				.main_all .rightbar li
 ,				h1
@@ -318,16 +280,13 @@
 ,				td span.icons
 { float: right }
 
-				#layout-menu > li
-,				.image
+				.image
 { float: left }
 
 				.hide
 { display: none !important }
 
-				#layout-menu a[title^=""] span
-,				#layout-menu li ul
-,				#menu-user li.user
+				#menu-user li.user
 ,				.file_all dd.group span.time
 ,				.g_timedentry .avatar
 ,				.grouplist span.completion img
@@ -343,10 +302,7 @@
 ,				.tabs li.tab
 { display: inline }
 
-				#layout-menu li span.tab
-,				#layout-menu li ul li
-,				#layout-menu li ul.popup
-,				ul.contribution li
+				ul.contribution li
 { display: block }
 
 				#layout-footer
@@ -356,17 +312,15 @@
 ,				span a
 { cursor: pointer }
 
-				#layout-menu .tab
-,				.i_icon span
+				.i_icon span
 ,				th
 { cursor: default }
 
-				#layout-menu a[title^=""]:after
-,				.grouplist span.completion:after
+				.grouplist span.completion:after
 { content: attr(title) }
 
-				option.section:after
-{ content: ": " }
+/*				option.section:after
+{ content: ": " }*/ /*breaks select in opera... (wrong option on submit)*/
 
 				tr.mylist.all_watched .name a:first-child:after
 { content: " W" }
@@ -399,9 +353,6 @@
 				option[value="delall"]
 { color: #BB1111 }
 
-				#layout-menu li.alert span.tab
-{ color: #BB0000 }
-
 				#layout-footer
 ,				.selected a
 { color: #AAAAAA }
@@ -424,16 +375,6 @@
 ,				h4
 { color: #666666 }
 
-				#layout-menu li span.tab
-,				#layout-menu li ul.popup
-{ color: #445566 }
-
-				#layout-menu
-{ color: #444444 }
-
-				#layout-menu li span.tab:hover
-{ color: #223344 }
-
 				blockquote
 { color: #0F0F0F }
 
@@ -446,13 +387,13 @@
 
 				.g_section
 ,				div.desc
+,				.css_style + p
 { clear: left }
 
 				.g_end
 { clear: both }
 
-				#layout-menu li ul.popup
-,				.g_menu.mylist_menu
+				.g_menu.mylist_menu
 { border: 1px solid #AFBEC7 }
 
 				tr.newtype td
@@ -467,9 +408,6 @@
 
 				#layout-nav
 { border-width: 1px }
-
-				#layout-menu li ul.popup
-{ border-top: none }
 
 				.g_info
 ,				.g_msg
@@ -490,9 +428,6 @@
 ,				ul.main-tabs li
 ,				ul.tabs li.tab
 { border-style: solid }
-
-				#layout-menu li span.tab
-{ border-right: 1px solid #AFBEC7 }
 
 				blockquote
 { border-left: 2px solid lightgray }
@@ -529,12 +464,6 @@
 				html
 { background: #E6EDF5 url(images/bg.jpg) top left repeat-x }
 
-				#layout-menu li span.tab
-{ background: #D9E1E5 url(images/nav.gif) }
-
-				#layout-menu li span.tab:hover
-{ background-position: left bottom }
-
 				.main_all
 ,				body.nonav
 { background-color: transparent !important }
@@ -568,8 +497,7 @@
 				tr.mylist.all_watched td
 { background-color: #F6F4FF }
 
-				#layout-menu li ul.popup
-,				.g_menu.mylist_menu
+				.g_menu.mylist_menu
 { background-color: #F5F5F5 }
 
 				ins
@@ -591,3 +519,72 @@
 ,				span a
 { -moz-user-select: none }
 
+/*mech*/
+#layout-menu > li{
+display: block;
+float: left;
+}
+#layout-menu > li ul{
+display: none;
+position: absolute;
+}
+#layout-menu > li:hover ul{
+display: block;
+}
+/*#layout-menu > li:before{
+content: attr(title);
+}*/
+
+/*style*/
+#layout-menu{
+height: 41px;
+cursor: default;
+color: #445566;
+font-size: 110%;
+font-family: sans-serif;
+}
+
+#layout-menu > li{
+background: #D9E1E5 url(images/nav.gif);
+border-right: 1px solid #AFBEC7;
+padding-right: 18px;
+padding-left: 18px;
+font-weight: bold;
+line-height: 41px;
+}
+
+#layout-menu > li ul{
+background-color: #F5F5F5;
+border: 1px solid #AFBEC7;
+border-top: none;
+margin-left: -19px;
+padding: 4px 0;
+font-weight: normal;
+line-height: normal;
+}
+
+#layout-menu > li.alert{
+color: #BB0000;
+}
+
+#layout-menu > li:hover{
+background-position: left bottom; color: #223344;
+}
+
+#layout-menu a{
+display: block;
+padding: 3px 8px;
+}
+#layout-menu a[title^=""] span{
+display: none;
+}
+
+#layout-menu a[title^=""]:after{
+content: attr(title);
+}
+
+th.sortable{ cursor: pointer }
+th.ascending{ text-decoration: underline}
+th.descending{ text-decoration: overline}
+
+/*tr.g_odd td { background-color: #FFE }*/

@@ -17,6 +17,10 @@
 	width: 49%;
 	text-align: left;
 }
+#layout-main .css_style + p
+{
+	clear: left;
+}
 #layout-main div.block + div.desc
 {
 	clear: left;

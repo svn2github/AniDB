@@ -1,13 +1,13 @@
 @import "../icons/all.css";
 @import "../common/layout/page/latestanimes.css";
 @import "../common/layout/page/animeatt.css";
+@import "../common/layout/global/tabbed_pane.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
 padding:0;
 }
 h4 span,
 span.test,
-.tabbed_pane ul.tabs li,
 div.pagination span strong,
 div.pagination span a
 {
@@ -106,14 +106,16 @@ select
 	font-size: 11px;
 	margin-left: 0.3em;
 }
-form input[type="button"]
+form input[type="button"],
+form input[type="submit"]
 {
 	margin-top: 0.3em;
 	color: #797979;
 	border-style: dashed;
 	background-image: url(images/bg_2.gif);
 }
-form input[type="button"]:hover
+form input[type="button"]:hover,
+form input[type="submit"]:hover
 {
 	color: white;
 	background-image: url(images/blackpixel.png);
@@ -478,14 +480,6 @@ td.action
 #layout-menu div.menu li.forum
 {
 	font-weight: bold;
-}
-#layout-menu div.menu li.forum a:before
-{
-	content: "AniDB ";
-}
-#layout-menu div.menu li.reclinks a:before
-{
-	content: "rec. ";
 }
 #layout-menu span.login,
 #layout-menu span.user
@@ -949,19 +943,21 @@ body.nonav #layout-content h1
 #layout-content div.agcmts_add form div textarea,
 #layout-content div.animegroup_all form div textarea,
 #layout-content div.creq_all form div textarea,
-#layout-content div.creqmod_all form div textarea
+#layout-content div.creqmod_all form div textarea,
+#layout-content div.addfilem_all div form div textarea
 {
-	display: block;
-	width: 80%;
-	margin-left: 10%;
-	height: 10em;
+	display: block !important;
+	width: 80% !important;
+	margin-left: 10% !important;
+	height: 20em !important;
 }
 #layout-content div.agcmts_add form div input,
 #layout-content div.animegroup_all label,
 #layout-content div.animegroup_all form div input,
 #layout-content div.creq_all form div input,
 #layout-content div.creqmod_all div.creq_buttons,
-#layout-content div.creqmod_all div.creq_messages > p
+#layout-content div.creqmod_all div.creq_messages > p,
+#layout-content div.addfilem_all form div input
 {
 	margin: 0.3em 0 0 10%;
 }
@@ -1056,10 +1052,6 @@ body.nonav #layout-content h1
 #layout-content div.ep_info table
 {
 	margin-left: 0;
-}
-#layout-content div.ep_info th:after
-{
-	content: ": ";
 }
 #layout-content div.ep_vote form
 {
@@ -1717,10 +1709,6 @@ a.i_icon:hover, a.i_inline:hover
 }
 #layout-content tr th.field
 {
-	background: none;
-}
-#layout-content tr th.field
-{
 	background: inherit;
 }
 #layout-content div.creq_data ins
@@ -2117,7 +2105,6 @@ a.i_icon:hover, a.i_inline:hover
 	float: right;
 	margin: 10px;
 }
-
 #layout-content div.g_timedentry div.body
 {
 	padding: 0.2em;
@@ -2142,7 +2129,7 @@ a.i_icon:hover, a.i_inline:hover
 	position: absolute;
 	top: 16px;
 }
-ul#layout-menu li ul.popup{
+ul#layout-menu li:hover ul {
 display: block;
 position: absolute;
 background-image: url(images/bg_2.gif);
@@ -2153,7 +2140,6 @@ padding-left: 6px;
 margin-left: -6px;
 margin-top: 0px;
 }
-
 ul#layout-menu li ul li{
 float: none;
 display: block;
@@ -2175,7 +2161,6 @@ cursor: default;
 {
 padding: 1px;
 }
-
 #layout-main .block .g_definitionlist table
 {
 border: none;
@@ -2198,4 +2183,8 @@ left: 0;
 #layout-nav #layout-menu li.sub-menu span.tab
 {
 text-transform: lowercase;
+}
+#layout-nav #layout-menu li.alert > span
+{
+color: red;
 }

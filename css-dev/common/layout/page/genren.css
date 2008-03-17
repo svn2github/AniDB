@@ -3,22 +3,23 @@
 	text-align: center;
 }
 
+#layout-main ul#cattree
+{
+	margin-left: 1em;
+}
 #layout-main ul#cattree a.i_icon
 {
-	position: relative;
-	right: 18px;
 	float: left;
-	margin-right: -15px;
+	margin-left: -16px;
 }
 
 #layout-main ul#cattree li
 {
-	list-style: none outside;
 	line-height: 14px;
 	margin-left: 2em;
 }
 
-#layout-main ul#cattree li span
+#layout-main ul#cattree li > span
 {
 	display: block;
 }
