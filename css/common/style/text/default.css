@@ -192,3 +192,13 @@ div.pagination span a
 	-user-select: none;
 	text-transform: capitalize;
 }
+
+th.sortable{ cursor: pointer }
+.s_reverse, th.ascending
+{
+	text-decoration: underline;
+}
+.s_forward, th.descending
+{
+	text-decoration: overline;
+}
