@@ -309,7 +309,7 @@ function InitDefault()
 
 	//Magic.enable_hover_menu();
 	Magic.enable_a_onclick_by_rel();	//for popup and "open in new window"
-	Magic.enable_row_kid_classes();		//for styling entire rows by td classes
+	//Magic.enable_row_kid_classes();		//for styling entire rows by td classes
 	Magic.enable_hide();				//for h4 collapsing
 	Magic.enable_tabs();				//for global structure ul.tabs
 	Magic.add_validator_interface();
