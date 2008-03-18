@@ -27,7 +27,7 @@
 #layout-main div.myplace_all div.latest
 {
 	margin-left: 15em;
-	margin-right: 9em;
+	margin-right: 11em;
 	clear: none;
 }
 
@@ -39,11 +39,11 @@
 	margin-bottom: 1em;	
 }
 
-#layout-main div.userpage_all div.g_menu h4,
-#layout-main div.userpage_all div.buddies h4,
-#layout-main div.userpage_all div.favreviewers h4
+#layout-main div.userpage_all div.g_menu,
+#layout-main div.userpage_all div.buddies,
+#layout-main div.userpage_all div.favreviewers
 {
-	width: 9em;
+	width: 10em;
 }
 
 #layout-main div.userpage_all div.buddies ul li,
@@ -56,8 +56,25 @@
 #layout-main div.userpage_all div.userprefs
 {
 	margin-left: 15em;
-	margin-right: 11.5em;
+	margin-right: 12em;
 	clear: none;
+}
+
+#layout-main div.userpage_all div.userdetails
+{
+	display: table;
+}
+
+#layout-main div.userpage_all div.userdetails .block > div{
+	float: none;
+	width: auto;
+	display: table-cell;
+	vertical-align: top;
+}
+
+#layout-main div.userpage_all div.userdetails img
+{
+	margin-right: 1em;
 }
 
 #layout-main div.userpage_all div.userprefs h4
