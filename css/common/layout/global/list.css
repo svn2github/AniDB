@@ -2,7 +2,7 @@
 {
 	clear: both;
 	text-align: center;
-	height: 1.4em;
+	min-height: 1.4em;
 }
 
 #layout-main ul.g_list.nav
