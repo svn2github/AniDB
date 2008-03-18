@@ -26,6 +26,12 @@
 	margin-right: 20em;
 }
 
+#layout-main div.main_all div.news p.comment
+{
+	float: right;
+	margin: -2em 0 0 0;
+}
+
 /* main_edit */
 
 #layout-main div.main_edit
@@ -67,4 +73,4 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-}
+}z
