@@ -18,6 +18,8 @@
 #include <process.h>
 #include "config.h"
 
+#include <iomanip>
+
 #define SESSION_REFRESH 16
 
 #ifdef ENABLE_WXW
@@ -76,10 +78,11 @@ void tinyAddX(TiXmlElement *e, const char* tag, string value, bool attr=false, b
 #define PRNT(type,name,sum) if(BC(mode, type)){if(BC(mode, HT_INDENT)) sst << "  ";sst << name << sum << endl;}
 void printHashes(stringstream &sst, hashc* chk, int mode, bool show, wstring path, __int64 file_size){
 	
-	if(BC(mode, HT_INDENT))
+	if(BC(mode, HASH_ED2K)){
+
+		if(BC(mode, HT_INDENT))
 		sst << "  ";
 
-	if(BC(mode, HASH_ED2K)){
 		char anidb_link[255];
 		sprintf_s(anidb_link, 255, "http://anidb.info/perl-bin/animedb.pl?show=file&size=%I64d&hash=%s", file_size, chk->ed2k);
 		string file_name(path.begin(), path.end());
@@ -379,7 +382,7 @@ bool do_work_inner(config &conf, vector<wstring> *files){
 		if(conf.b_randomize_order)	file = files->at( (size_t)pick(lookup,xlen--) );
 		else file = files->at( /*0/*/i );
 
-		if(conf.i_master_mode!=FORMAT_LIST){
+		if(conf.i_master_mode!=FORMAT_LIST && !conf.b_silent){
 			if(len>1) 
 				wprintf(L"File number %d of %d: ", i+1, len);
 			wprintf(L"%s\n", file.c_str());//wcout fails on unicode!?
@@ -414,8 +417,11 @@ bool do_work_inner(config &conf, vector<wstring> *files){
 
 			printHashes(sst, &conf.chk, mode, conf.i_master_mode>=0||conf.b_skip_media_parsing, file, file_size);
 
-			if(BC(mode, HT_HTIME))
-				sst << "  time: " << (GetTickCount()-t0) << " ms" << endl;
+			if(BC(mode, HT_HTIME)){
+				unsigned int t = GetTickCount()-t0;
+				float mbps = 1000.0*file_size/t/1024/1024;
+				sst << "  time: " << t << " ms, " << fixed << setprecision(2) << mbps << " MB/s" << endl;
+			}
 		}
 #endif
 		fclose(file_handle);
@@ -426,7 +432,8 @@ bool do_work_inner(config &conf, vector<wstring> *files){
 				break;
 		{
 			string s = sst.str();
-			printf("%s", s.c_str());
+			if(!conf.b_silent)
+				printf("%s", s.c_str());
 #ifdef ENABLE_WXW
 			if(conf.f_log){
 				if(conf.i_master_mode!=FORMAT_LIST){
@@ -461,7 +468,7 @@ bool do_work_inner(config &conf, vector<wstring> *files){
 			newtime = _localtime64( &long_time );
 
 			char buf[256];
-			strftime( buf, 256, "(%d.%m.%Y-%H:%M:%S)", newtime );
+			strftime( buf, 256, "(%Y-%m-%d %H:%M:%S)", newtime );
 			cout << " Proc time: " << (GetTickCount()-t0) << " ms " << buf << endl;
 		}
 

@@ -537,7 +537,7 @@ void checkforvfr(MatroskaTrackInfo *track, avmf::TrackVideo *tv, unsigned __int6
 		int min=2000, max=0, delta;
 
 #ifdef TIMECODESTAT
-		uint64 acc = last;
+		uint64 acc = 0;
 		const int asize = 2048;
 		int arr[asize];
 		for(int i=0; i<asize; i++)

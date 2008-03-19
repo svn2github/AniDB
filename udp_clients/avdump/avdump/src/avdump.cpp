@@ -35,8 +35,8 @@ myHashSet *file_register;
 #endif
 
 #define STR_HOST "api.anidb.net"
-#define STR_VERSION "0.33.00"
-#define STR_DATE "080106"
+#define STR_VERSION "0.34.00"
+#define STR_DATE "080318"
 #define STR_USAGE "\
 Help:      http://wiki.anidb.info/w/Avdump\n\
 Usage:     avdump [-options] <media file/folder> [<media file/folder> ...]\n\
@@ -57,6 +57,7 @@ Options:    (one letter switches can be put in one string)\n\
    l       List (codecs)\n\
    x       XML Old format\n\
    y       XML Creq format\n\
+   N       No data output. Does not affect error messages or progress.\n\
   Control:\n\
    c       do _not_ reCurse into subfolders\n\
    i       skIp full parsing (only for testing)\n\
@@ -99,7 +100,8 @@ void init(config &conf){
 	conf.b_newline_after_each_file =
 	conf.b_randomize_order =
 	conf.b_pause_after_each_file =
-	conf.b_delete_files = false;
+	conf.b_delete_files =
+	conf.b_silent = false;
 	conf.b_full_media_parsing = true;
 	conf.i_master_mode = FORMAT_OLD;
 
@@ -313,6 +315,7 @@ const char* do_work(config &conf, int argc, wchar_t* argv[]){
 				switch(arg.at(i)){
 					case L'p': conf.b_pause_at_end = true; break;
 					case L'q': conf.b_pause_after_each_file = true; break;
+					case L'N': conf.b_silent = true; break;
 					case L's': conf.i_master_mode = FORMAT_SHORT; break;
 					case L'x': conf.i_master_mode = FORMAT_XML; break;
 					case L'l': conf.i_master_mode = FORMAT_LIST; break;
@@ -414,20 +417,26 @@ const char* do_work(config &conf, int argc, wchar_t* argv[]){
 	add(files);
 #endif
 
-	bool found_files = files->size()>0;
+	bool found_files = files->size()>0, slept = false;
 	sort(files->begin(), files->end());
 	
 	while(do_work_inner(conf, files) && monitor){
 #ifdef ENABLE_WXW
 		files->clear();
+		if(!conf.b_silent && !slept){
+			slept = true;
+			wcout << "Sleeping.." << endl;
+		}
 		Sleep(monitor);
 		for (size_t i=0; i<arg_path.size(); i++) {
 			directory_listing(files, exts, arg_path[i], recurse, check);
 		}
 		sort(files->begin(), files->end());
 		add(files);
-		if(files->size()>0)
+		if(files->size()>0){
+			slept = false;
 			found_files = true;
+		}
 #endif
 	}
 
@@ -457,7 +466,6 @@ int wmain(int argc, wchar_t* argv[]){
 	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 	//_CrtSetBreakAlloc(448865);
 #endif
-
 	config conf;
 	init(conf);
 

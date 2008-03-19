@@ -50,7 +50,8 @@ struct config{
 		b_randomize_order,
 		b_full_media_parsing,
 		b_pause_after_each_file,
-		b_delete_files;
+		b_delete_files,
+		b_silent;
 
 	int i_session_count,
 		i_master_mode;

@@ -65,8 +65,8 @@ LANGUAGE LANG_NORWEGIAN, SUBLANG_NORWEGIAN_BOKMAL
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,33,0,0
- PRODUCTVERSION 0,33,0,0
+ FILEVERSION 0,34,0,0
+ PRODUCTVERSION 0,34,0,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -81,12 +81,12 @@ BEGIN
     BEGIN
         BLOCK "080004b0"
         BEGIN
-            VALUE "Comments", "Built on 06.01.2008 by epoximator"
+            VALUE "Comments", "Built on 18.03.2008 by epoximator"
             VALUE "FileDescription", "Audio Video Info Extractor"
-            VALUE "FileVersion", "0, 33, 0, 0"
+            VALUE "FileVersion", "0, 34, 0, 0"
             VALUE "LegalCopyright", "http://wiki.anidb.net/w/Avdump"
             VALUE "OriginalFilename", "avdump.exe"
-            VALUE "ProductVersion", "0, 33, 0, 0"
+            VALUE "ProductVersion", "0, 34, 0, 0"
         END
     END
     BLOCK "VarFileInfo"

@@ -85,7 +85,7 @@ string clean(string& old){
 	return str;
 }
 void tinyAdd(TiXmlElement *e, const char* tag, string value, bool attr=false, bool cdata=false){
-	if(value.length()>0 && value.length()<1024){
+	if(value.length()>0 && value.length()<2048){
 		if(attr){
 			e->SetAttribute(tag, value.c_str());
 		}else{
