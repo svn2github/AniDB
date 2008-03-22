@@ -134,3 +134,9 @@ input[type="submit"]:hover
 {
 	background-color: #B0B0B1;
 }
+
+#layout-main div.news p.comment,
+#layout-main div.news p.comment a
+{
+    color: #C0C0C0;
+}
