@@ -541,3 +541,39 @@ function CookieGet( check_name )
 	}
 	return null;
 }
+
+//anidb.js code (C) 2003 by PetriW
+function myGetElement(name) { 
+    if (document.getElementById) { 
+      // Standards 
+      return document.getElementById(name); 
+    } else if (document.layers) { 
+      // NS 4 
+      return document.layers[name]; 
+    } else if (document.all) { 
+      // IE 4 
+      return document.all[name]; 
+    } else { 
+      return false;
+    } 
+}
+
+function cbSelect(files) { 
+    for (var i = 0; i < files.length; i++) { 
+      myGetElement('mylmod.f.' + files[i]).checked = true; 
+    } 
+} 
+
+function cbDeselect(files) { 
+    for (var i = 0; i < files.length; i++) { 
+      myGetElement('mylmod.f.' + files[i]).checked = false; 
+    } 
+} 
+
+function cbToggle(files) { 
+    for (var i = 0; i < files.length; i++) { 
+      obj = myGetElement('mylmod.f.' + files[i]);
+      if (obj)
+        obj.checked = !obj.checked; 
+    } 
+} 
