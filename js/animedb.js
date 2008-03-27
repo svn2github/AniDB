@@ -1,5 +1,4 @@
-//(C) 2001 by EXPlorer <exp@3dwars.de>, all rights reserved!
-// for http://www.3dwars.de
+//(C) 2001 by AniDB, all rights reserved!
 // VERSION: 0.02   20.06.2001
 //misc functions
 
