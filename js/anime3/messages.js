@@ -290,27 +290,27 @@ function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 }
 
 function updateMsgList() {
-  var div = getElementsByClassName(document.getElementsByTagName('DIV'), 'message list', true)[0];
+  var div = getElementsByClassName(document.getElementsByTagName('div'), 'message list', true)[0];
   if (!div) return;
-  msgTable = div.getElementsByTagName('TABLE')[0];	
+  msgTable = div.getElementsByTagName('table')[0];	
   if (!msgTable) return;
 	msgListTable = msgTable;
-  headingList = msgTable.getElementsByTagName('TH');
-  var actionList = getElementsByClassName(document.getElementsByTagName('UL'), 'g_actionlist', true)[0];
-  // I know the headings i need so..
+  headingList = msgTable.getElementsByTagName('th');
+  /* I know the headings i need so..
   headingList[0].className += ' c_latin'; // State
   headingList[1].className += ' c_date';  // Date
   headingList[2].className += ' c_latin'; // From
   headingList[3].className += ' c_latin'; // type
   headingList[4].className += ' c_latin'; // Title
-  headingList[5].className += ' c_none';  // Action
+  headingList[5].className += ' c_none';  // Action*/
   
+  var actionList = getElementsByClassName(document.getElementsByTagName('ul'), 'g_list links', true)[0];
   // append some extra filtering options
   // FILTER BY TYPE
 	var optionArray = {'all':{"text":' all '},'normal':{"text":' normal '},'system':{"text":' system '},
 								 'bulk':{"text":' bulk '},'mod':{"text":' mod '}};
 	var select = createSelectArray(null,null,null,filterMessages,'all',optionArray);
-  var li = document.createElement('LI');
+  var li = document.createElement('li');
 	li.className = 'filter_type';
   li.appendChild(document.createTextNode('type: '));
   li.appendChild(select);
@@ -319,7 +319,7 @@ function updateMsgList() {
   // FILTER BY STATE
 	optionArray = {'all':{"text":' all '},'new':{"text":' new '},'old':{"text":' old '}};
 	select = createSelectArray(null,null,null,filterMessages,'all',optionArray);
-  li = document.createElement('LI');
+  li = document.createElement('li');
 	li.className = 'filter_state';
   li.appendChild(document.createTextNode('state: '));
   li.appendChild(select);
@@ -327,26 +327,26 @@ function updateMsgList() {
   actionList.insertBefore(li,actionList.firstChild);
 	
 	// update the delete action for messages
-	var rows = msgTable.tBodies[0].rows;
+	var rows = msgTable.getElementsByTagName('tr');
 	for (var i = 1; i < rows.length; i++) {
 		var row = rows[i];
-		var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action', true)[0];
+		var cell = getElementsByClassName(row.getElementsByTagName('td'), 'action', true)[0];
 		if (!cell) continue;
-		var a = cell.getElementsByTagName('A')[0];
+		var a = cell.getElementsByTagName('a')[0];
 		if (!a) continue;
 		a.onclick = deleteMessage;
 	}
 	
 	//update the new message link
-	var newMsg = getElementsByClassName(actionList.getElementsByTagName('LI'), 'new', true)[0];
-	var a = newMsg.getElementsByTagName('A')[0];
+	var newMsg = getElementsByClassName(actionList.getElementsByTagName('li'), 'new', true)[0];
+	var a = newMsg.getElementsByTagName('a')[0];
 	a.removeAttribute('href');
 	a.onclick = createNewMessage;
 	
 	msgListAction = actionList;
   
   // apply the sorting function
-  init_sorting(msgTable,'date','up'); 
+  //init_sorting(msgTable,'date','up'); 
 }
 
 function prepPage() {
