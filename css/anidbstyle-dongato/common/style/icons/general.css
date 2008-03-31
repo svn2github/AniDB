@@ -101,3 +101,13 @@
 	background: url(http://static.anidb.net/css/icons/test/arrow_up.png) center left no-repeat;
 	padding-left: 11px;
 }
+
+.s_reverse
+{
+	text-decoration: underline;
+}
+
+.s_forward
+{
+	text-decoration: overline;
+}

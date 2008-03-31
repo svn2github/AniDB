@@ -55,6 +55,11 @@ body.nonav #layout-main h1
 	margin-bottom: 1em;
 }
 
+#layout-main table + .g_list
+{
+	margin-top: 1em;
+}
+
 #layout-main .g_end
 {
 	padding: 0px;
