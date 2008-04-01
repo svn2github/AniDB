@@ -36,3 +36,9 @@
 {
 	margin-bottom: 2em;
 }
+
+#layout-main div.g_timedentry span.stamp span.icons.user
+{	
+	float: right;
+	margin-top: -1.6em;
+}

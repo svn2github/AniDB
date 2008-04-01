@@ -8,10 +8,6 @@ html, body, div, form, table
 {
 	left: 0;
 }
-table table
-{
-	width: 100%;
-}
 td, th
 {
 	padding: 1px 2px 1px 2px;
@@ -19,10 +15,6 @@ td, th
 p, textarea
 {
 	padding: 4px;
-}
-textarea
-{
-	width: 90%;
 }
 span
 {

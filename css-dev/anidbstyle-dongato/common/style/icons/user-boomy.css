@@ -38,6 +38,11 @@
 	background-image: url(images/user_send.png);
 }
 
+*.i_user_wishlist
+{
+	background-image: url(images/user_wishlist.png);
+}
+
 *.i_user_votes
 {
 	background-image: url(images/user_votes.png);

@@ -26,6 +26,11 @@
 	height: 100%;
 }
 
+#layout-main .css_style + p
+{
+	clear: left;
+}
+
 #layout-main div.desc
 {
 	margin-top: 1em;

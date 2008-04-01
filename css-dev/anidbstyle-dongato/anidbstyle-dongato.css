@@ -449,3 +449,21 @@ h4
 {
 	margin: 3px;
 }
+
+/* fix for news comment */
+
+div.news p.comment
+{
+	color: #bbbbbb;
+	float: right;
+}
+
+div.news p.comment a
+{
+	color: white;
+}
+
+div.cmt_all div.topic_actions
+{
+	margin-top: 1em;
+}

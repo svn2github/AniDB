@@ -1,0 +1,5 @@
+#layout-main div.animelist_all td.awards span.i_icon
+{
+	display: -moz-inline-box;
+	display: inline-block;
+}

@@ -86,11 +86,10 @@
 	display: none;
 }
 
-#layout-main tr.all_watched
+/*#layout-main tr.all_watched td.name
 {
 	text-decoration: line-through;
-	/*font-style: italic;*/
-}
+}*/
 
 #layout-nav input
 {
