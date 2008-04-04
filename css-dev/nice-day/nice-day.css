@@ -1,4 +1,5 @@
 @import "../common/normalize.css";
+@import "../common/layout/default.css";
 
 				body.nonav
 { width: auto }

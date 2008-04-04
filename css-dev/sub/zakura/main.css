@@ -1,4 +1,5 @@
 @import "../../common/normalize.css";
+@import "../../common/layout/default.css";
 @import "../../common/layout/common.css";
 
 @import "../../common/layout/global/all.css";
