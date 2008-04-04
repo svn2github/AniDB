@@ -136,7 +136,8 @@ input[type="submit"]:hover
 }
 
 #layout-main div.news p.comment,
-#layout-main div.news p.comment a
+#layout-main div.news p.comment a,
+#layout-main div.news div.newsitem h4 a
 {
     color: #C0C0C0;
 }
