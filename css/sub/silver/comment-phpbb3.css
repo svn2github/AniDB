@@ -12,7 +12,6 @@
 	background-image: url(images/phpbb/comment_add_active.png);
 }
 
-*.i_news_add,
 *.i_review_add
 {
 	width: 96px;
@@ -22,7 +21,6 @@
 	background-image: url(images/phpbb/review_add_inactive.png);
 }
 
-*.i_news_add,
 *.i_review_add:hover
 {
 	background-image: url(images/phpbb/review_add_active.png);
