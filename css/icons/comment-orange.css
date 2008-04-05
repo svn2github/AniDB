@@ -15,4 +15,9 @@
 	background:transparent none no-repeat scroll 0pt;
 	background-image: url(../icons/orange/review_add.png);
 }
- 
+
+/*to center the paginationbar vertically*/
+div.pagination
+{
+	margin-top:0.66em;
+}

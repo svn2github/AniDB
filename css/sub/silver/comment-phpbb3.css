@@ -25,3 +25,9 @@
 {
 	background-image: url(images/phpbb/review_add_active.png);
 }
+
+/*to center the paginationbar vertically*/
+div.pagination
+{
+	margin-top:1.2em;
+}
