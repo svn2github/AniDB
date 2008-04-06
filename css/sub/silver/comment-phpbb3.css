@@ -31,3 +31,8 @@ div.pagination
 {
 	margin-top:1.2em;
 }
+/*exception*/
+#layout-main div.news_all div.news div.topic_actions pagination
+{
+	margin-top:0em;
+}
