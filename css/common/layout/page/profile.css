@@ -80,11 +80,6 @@
     text-align: left;
 }
 
-#tab5_pane form p
-{
-    clear: left;
-}
-
 #tab5_pane div.permissions div
 {
     float: left;
@@ -98,7 +93,6 @@
     margin-right: 1em;
 }
 
-#tab5_pane div.permissions div label input,
 #tab5_pane div.permissions div label select
 {
     display: block;
@@ -110,4 +104,10 @@
 #tab5_pane div.permissions div label input
 {
     width: 326px;
+}
+
+#tab5_pane div.guest
+{
+    clear: left;
+    text-align: center;
 }
