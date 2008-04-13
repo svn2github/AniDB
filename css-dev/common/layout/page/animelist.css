@@ -3,3 +3,15 @@
 	display: -moz-inline-box;
 	display: inline-block;
 }
+
+#layout-main div.animelist_all div.filters ul li span,
+#layout-main div.animelist_all div.filters ul li span span
+{
+    display: -moz-box;
+    display: inline-block;
+}
+
+#layout-main div.animelist_all div.filters ul li span span span
+{
+    display: none;
+}

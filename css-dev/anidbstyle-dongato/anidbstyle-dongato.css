@@ -7,6 +7,12 @@
 	display: none;
 }
 
+/* link styling */
+a:hover
+{
+	color: #990017;
+}
+
 /* remove row odd coloring */
 div.addgenren_form .g_odd,
 div.anime_form .g_odd,
@@ -228,7 +234,7 @@ div.css_style div.block
 }
 
 /* wrap fix for icon and action cells */
-th, td.action.icons
+th, td.action.icons, td.codec
 {
 	white-space: nowrap !important;
 }
@@ -458,9 +464,10 @@ div.news p.comment
 	float: right;
 }
 
+h4 a,
 div.news p.comment a
 {
-	color: white;
+	color: white !important;
 }
 
 div.cmt_all div.topic_actions

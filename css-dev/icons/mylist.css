@@ -97,3 +97,8 @@
 {
 	background-image: url(../icons/state/anidb_state_unknown.gif);
 }
+
+*.i_vote_pending
+{
+	background-image: url(../icons/icon/anidb_no_vote.gif);
+}

@@ -1,12 +1,11 @@
-#layout-main td del,
 #layout-main tr.g_fs_lame,
 #layout-main input.exclude,
-#layout-main table.filelist tr.invalid,
-#layout-main div.myvotes_all table tr.low td
+#layout-main table.filelist tr.invalid
 {
 	background-color: #AAAAAA;
 }
 
+#layout-main td del,
 #layout-content div.myvotes_all table tr.g_odd.low td,
 #layout-content div.myvotes_all table tr.low td
 {

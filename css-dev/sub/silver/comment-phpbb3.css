@@ -1,0 +1,38 @@
+*.i_comment_add
+{
+	width: 96px;
+	height: 25px;
+	margin: 5px;
+	background:transparent none no-repeat scroll 0pt;
+	background-image: url(images/phpbb/comment_add_inactive.png);
+}
+
+*.i_comment_add:hover
+{
+	background-image: url(images/phpbb/comment_add_active.png);
+}
+
+*.i_review_add
+{
+	width: 96px;
+	height: 25px;
+	margin: 5px;
+	background:transparent none no-repeat scroll 0pt;
+	background-image: url(images/phpbb/review_add_inactive.png);
+}
+
+*.i_review_add:hover
+{
+	background-image: url(images/phpbb/review_add_active.png);
+}
+
+/*to center the paginationbar vertically*/
+div.pagination
+{
+	margin-top:1.2em;
+}
+/*exception*/
+#layout-main div.news_all div.news div.topic_actions div.pagination
+{
+	margin-top:0em;
+}

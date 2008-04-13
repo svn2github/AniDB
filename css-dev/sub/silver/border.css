@@ -98,3 +98,8 @@ img, a
 	border-top: 1px #FFFFFF solid;
 	border-right: 1px #FFFFFF solid;
 }
+
+#layout-main div.tabbed_pane ul.contribute
+{
+    border:none;
+}

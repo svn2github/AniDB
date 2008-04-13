@@ -27,7 +27,7 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #BFC2C9;
 }
 
-#layout-main div.main_all div.news h4,
+#layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4
 {
 	padding: 2px;
@@ -39,7 +39,7 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #969aa6;
 }
 
-#layout-main div.main_all div.news div.newsitem span.stamp
+#layout-main div.news div.newsitem span.stamp
 {
 	background-color: #969aa6;
 }

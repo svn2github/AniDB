@@ -28,3 +28,22 @@
 {
 	display: none;
 }
+
+#layout-main ul#cattree li
+{
+    margin-bottom: 0.5em;
+}
+
+#layout-main ul#cattree li label
+{
+    display: block;
+    line-height: 1.8;
+    margin-right: 1em;
+}
+
+#layout-main ul#cattree li label select
+{
+    display: block;
+    margin-left: 20em;
+    margin-top: -1.8em;
+}
