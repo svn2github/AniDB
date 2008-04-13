@@ -83,6 +83,11 @@
 	background-image: url(../icons/test/arrow_inactive.png);
 }
 
+*.i_massaddtomylist
+{
+	background-image: url(../icons/orange/massaddtomylist.png);
+}
+
 #layout-main th a.inactive{
 	background: url(../icons/test/arrow_inactive.png) center left no-repeat;
 	padding-left: 11px;
