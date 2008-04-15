@@ -532,6 +532,7 @@ function updateGroupTable() {
 		if (!group || group && group.id == 0) continue; // not interested in non groups nor the no group
 		// update existing rows
 		var gid = group.id;
+		if (!groups[gid]) continue; // not interested
 		var row = document.getElementById('gid_'+gid);
 		if (!row) {
 			row = createGroupRow(group.id, groupCols, groupSkips);
