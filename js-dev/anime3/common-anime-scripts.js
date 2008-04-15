@@ -132,7 +132,7 @@ function createEpisodeIcons(episode) {
 		icons['fstate'] = new Array();
 		for (var me = 0; me < mylistEpEntries.length; me++) {
 			var mylistEntry = mylistEpEntries[me];
-			if (isNaN(statusFiles.[mylistEntry.status])) statusFiles[mylistEntry.status] = 1;
+			if (isNaN(statusFiles[mylistEntry.status])) statusFiles[mylistEntry.status] = 1;
 			else statusFiles[mylistEntry.status]++;
 			if (isNaN(stateFiles[mylistEntry.fstate])) stateFiles[mylistEntry.fstate] = 1;
 			else stateFiles[mylistEntry.fstate]++;
