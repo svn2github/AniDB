@@ -285,6 +285,7 @@ function createGroupRow(gid,cols,skips) {
 	var row = document.createElement('tr');
 	row.id = 'gid_'+gid;
 	var group = groups[gid];
+	if (!group) { alert('no group for gid: '+gid); return row; }
 	row.className = group.state;
 	if (group.filtered) row.style.display = 'none';
 	var icons = createGroupIcons(group); // get icons
