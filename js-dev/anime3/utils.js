@@ -592,7 +592,12 @@ function Array_indexOf(what) {
 }
 
 if (typeof Array.prototype.indexOf == "undefined") {
-  Array.prototype.indexOf = Array_indexOf;
+	Array.prototype.indexOf = Array_indexOf;
+}
+
+/* Overriding an override */
+if (typeof Array.prototype.sum != "undefined") {
+	Array.prototype.sum = null;
 }
 
 /* This function is used to update the status of the Request

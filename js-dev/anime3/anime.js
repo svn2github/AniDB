@@ -1151,7 +1151,6 @@ function parseEpisodeData(xmldoc) {
 		// find file tables without files
 		for (var e in episodes) {
 			var episode = episodes[e];
-			if (episode.id == undefined) episodes[e] = null;
 			if (!episode) continue;
 			forceFileTableRedraw(episode);
 		}
