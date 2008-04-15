@@ -1,7 +1,7 @@
-/* *
- * @file animePage interface 
+/* file animePage interface 
  * @author fahrenheit (alka.setzer@gmail.com)
- * @version 1.0 (22.03.2007)
+ * version 1.0 (22.03.2007) - Initial version
+ * version 1.2 (03.03.2008) - Some fixes and starting 2.0 conversion
  */
 
 // GLOBALs //
@@ -35,15 +35,11 @@ var LAY_HIDEGROUPRAWS = false;
 var LAY_HIDEGENERICFILES = false;
 var LAY_HIDEPARODYEPS = false;
 var LAY_SHOWFID = false;
-//var LAY_HIDEEPTITLES = false;
-//var LAY_FILEHIGHLIGHT = true;
-//var LAY_PSEUDOFILES = true;
+var LAY_SHOWCRC = false;
 var LAY_FORMATFILESIZE = false;
-//var LAY_FILTERFILES = false;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
-//var useFancyStyles = false;
 var seeDebug = false;
 var seeTimes = false;
 var epInterval = 250; // This one needs work
@@ -64,6 +60,18 @@ var group_vis = {'complete':false,'finished':false,'ongoing':false,'stalled':fal
 var simpleaddanimetomylistbox = null;
 var addfilestomylistbox = null;
 var addanimetomylistbox = null;
+// general column definitions
+// remove some cols from the default definitions
+var fileCols = cloneArray(genFileCols);
+removeColAttribute("check-mylist",fileCols);
+removeColAttribute("mylist-storage",fileCols);
+removeColAttribute("mylist-source",fileCols);
+removeColAttribute("state-mylist",fileCols);
+removeColAttribute("actions-mylist",fileCols);
+removeColAttribute("epno",fileCols);
+var fileSkips = null;
+var groupCols = cloneArray(genGroupCols);
+var groupSkips = buildSkipCols(groupCols);
 
 function changeValueOfOption() {
   switch (this.id) {
@@ -81,60 +89,81 @@ function preLoad() {
     var anime3 = getElementsByClassName(document.getElementsByTagName('DIV'), 'anime3', true)[0];
     if (anime3) anime3.className = anime3.className.replace("anime3","anime"); // this will correct css used in dev
   }
+  initTooltips();
   loadData();
   return;
 }
 
 function loadData() {
-  uriObj = parseURI(); // update the uriObj
-  if (uriObj['aid'] && uriObj['show'] && uriObj['show'].indexOf('anime') >= 0) aid = uriObj['aid'];
-  else return;
-  var req = xhttpRequest();
-  if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
-  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
+	uriObj = parseURI(); // update the uriObj
+	if (uriObj['ajax'] && uriObj['ajax'] == 0) return;
+	if (uriObj['aid'] && uriObj['show'] && uriObj['show'].indexOf('anime') >= 0) aid = uriObj['aid'];
+	else return;
+	var req = xhttpRequest();
+	if (''+window.location.hostname == '') {
+		xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
+		base_url = '';
+	}
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
 }
 
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
+	updateStatus('Processing anime data...');
 	var t1 = new Date();
 	parseAnimes(root.getElementsByTagName('animes'));
 	var parseAnimeNode = (new Date()) - t1;
+	updateStatus('');
 	updateStatus('Processing user data...');
 	var t1 = new Date();
 	parseCustom(root.getElementsByTagName('custom').item(0));
 	var parseCustomNode = (new Date()) - t1;
-	if (seeTimes) alert('Processing...\n'+
-						'\n\tanimes: '+parseAnimeNode+'ms'+
-						'\n\tcustom: '+parseCustomNode+' ms'+
-						'\nTotal: '+(parseAnimeNode+parseCustomNode)+' ms');
-	updateStatus('');
+	// do some triming of the definition cols if possible
+	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !LAY_SHOWCRC)
+		removeColAttribute('crc',fileCols);
+	fileSkips = buildSkipCols(fileCols);
 	if (uriObj['expandall']) loadExpand = true;
-	initTooltips();
+	t1 = new Date();
+	var t2 = new Date();
 	updateEpisodeTable(); // Update the episode table
+	var uET = new Date() - t2;
 	loadExpand = false;
+	t2 = new Date();
 	updateGroupTable(); // Update the group table
+	var uGT = new Date() - t2;
 	checkEpExpand(); // Check to see if the user requested the page with ep expanding
 	updateMylistBox(); // update mylist box
-	if (!getElementsByClassName(document.getElementsByTagName('DIV'),'g_definitionlist mylist_add',false).length) {
+	t2 = new Date();
+	if (!getElementsByClassName(document.getElementsByTagName('div'),'g_definitionlist mylist_add',false).length) {
 		// we don't have the mylist add to thingie, as i allways show checkboxes i need that
 		var eplist = document.getElementById('eplist');
 		if (!eplist) return;
 		createMylistAddBox(null,'files');
 	}
-	// replace the existing box with my box :P (box in a box, funny? well i guessed not)
-	simpleaddanimetomylistbox = getElementsByClassName(document.getElementsByTagName('P'),'mylistadd',false)[0];
+	// replace the existing box with my box :P (box in a box, funny? well, i guessed not)
+	simpleaddanimetomylistbox = getElementsByClassName(document.getElementsByTagName('p'),'mylistadd',false)[0];
 	if (simpleaddanimetomylistbox) {
 		// Add an expand inline icon to allow expanding to a full version of the generic add thing
-		var span = simpleaddanimetomylistbox.getElementsByTagName('SPAN')[0];
+		var span = simpleaddanimetomylistbox.getElementsByTagName('span')[0];
 		if (span) {
-			var expand = document.createElement('SPAN');
+			var expand = document.createElement('span');
 			expand.className = 'i_inline i_plus';
 			expand.title = 'Show full Add Anime to Mylist box';
 			expand.onclick = showAddAnimeToMylistBox;
 		}
 		simpleaddanimetomylistbox.insertBefore(expand,span);
 	}
+	var uAB = new Date() - t2;
+	var preparingPage = (new Date() - t1);
+	if (seeTimes) alert('Processing...\n'+
+						'\n\tanimes: '+parseAnimeNode+'ms'+
+						'\n\tcustom: '+parseCustomNode+' ms'+
+						'\n\tpreping: '+preparingPage+' ms'+
+						'\n\t\tupdateGroupTable: '+uGT+' ms'+
+						'\n\t\tupdateEpisodeTable: '+uET+' ms'+
+						'\n\t\tupdateAddToMylistBox: '+uAB+' ms'+
+						'\n\tTotal: '+(parseAnimeNode+parseCustomNode+preparingPage)+' ms');
 }
 
 function expandBox(object, node) {
@@ -160,7 +189,7 @@ function updateMylistBox() {
   if (!cell) return;
   var icons = getElementsByClassName(cell.getElementsByTagName('SPAN'),'icons',true)[0];
   if (!icons) {
-    icons = document.createElement('SPAN');
+    icons = document.createElement('span');
     icons.className = 'icons';
   }
   var icon;
@@ -252,7 +281,7 @@ function updateEpisodeTable() {
 				else ahref.onclick = expandEp;
 			} else { // someone called expand gid, add the ep expand icon
 				var ahref = createIcon(null, "", "removeme", foldEp, "", "");
-				var img = document.createElement('IMG');
+				var img = document.createElement('img');
 				img.width = "15";
 				img.height = "13";
 				img.alt = "(-)";
@@ -378,126 +407,19 @@ function toggleFilesFromGroup() {
 		if (file.groupId != gid) continue;
 		totalFiles++;
 		if (checked && !file.visible) continue;
-		var row = document.getElementById('fid_'+file.id);
+		var row = document.getElementById('e'+file.episodeId+'f'+file.id);
 		if (!row) continue;
-		var ck = row.getElementsByTagName('INPUT')[0];
+		var ck = row.getElementsByTagName('input')[0];
 		if (!ck) continue;
 		ck.checked = checked;
 		filesChecked++;
 	}
-	if (checked) alert('Checked '+filesChecked+' of '+totalFiles+' files, please check to see if the selection is correct.'+
-											'\nManual adding is not recommend. The best way to add files to your mylist is by using an AniDB Client. There is also a ready-to-run Java Applet.');
+	if (checked) 
+		alert('Checked '+filesChecked+' of '+totalFiles+' files, please confirm if the selection is correct.'+
+			'\nManual adding is not recommend. The best way to add files to your mylist is by using an AniDB Client. There is also a ready-to-run Java Applet.');
 	showAddToMylistBox();
 }
 
-function createGroupRow(group) {
-  var row = document.createElement('TR');
-  row.id = 'gid_'+group.id;
-  row.className = group.state; 
-  if (group.filtered) row.style.display = 'none';
-  var cell;
-	if (uid) {
-		cell = document.createElement('TD');
-		// Expand
-		cell.className = 'expand';
-		cell.setAttribute('anidb:sort','0');
-		var a = document.createElement('A');
-		a.className = 'i_icon i_plus';
-		a.title = 'expand all entries';
-		a.alt = '(+)';
-		var span = document.createElement('SPAN');
-		span.appendChild(document.createTextNode('expand all entries'));
-		a.appendChild(span);
-		a.onclick = expandFilesByGroup;
-		cell.appendChild(a);
-		row.appendChild(cell);
-	}
-  // Last update
-  cell = document.createElement('TD');
-  cell.className = 'date lastupdate';
-  if (Number(new Date())/1000 - Number(javascriptDate(cTimeDate(group.lastUp)))/1000 < 86400) cell.className += ' new';
-  cell.appendChild(document.createTextNode(cTimeDate(group.lastUp)));
-  row.appendChild(cell);
-  // Name
-  cell = document.createElement('TD');
-  cell.className = 'name group';
-  createLink(cell,group.shortName,'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null);
-  cell.setAttribute('anidb:sort',group.shortName.toLowerCase());
-  row.appendChild(cell);
-  // State
-  cell = document.createElement('TD');
-  cell.className = 'state ' + group.state;
-	createLink(cell,group.state,'animedb.pl?show=group&gid='+group.id+'&aid='+anime.id,null,null,null,null);
-  //cell.appendChild(document.createTextNode(group.state));
-  row.appendChild(cell);
-  // N
-  cell = document.createElement('TD');
-  cell.className = 'note';
-  cell.appendChild(document.createTextNode(' '));
-  row.appendChild(cell);
-  // Eps
-  cell = document.createElement('TD');
-  cell.className = 'eps number';
-  cell.setAttribute('anidb:sort',String(group.epCnt));
-  //createLink(cell,group.epCnt + '+' + group.sepCnt,'animedb.pl?show=group&gid='+group.id+'&aid='+anime.id,null,null,null,null);
-  var maps = {'0' : {'use':true,'type': 0,'desc':"",'img':"blue"},
-              '1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"},
-              '2' : {'use':false,'type': 2,'desc':"in mylist: "+group.inMylistRange,'img':"lime"}};
-  var range = expandRange(null,(anime.eps ? anime.eps : anime.epCount),maps[0],null);
-  if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange,(anime.eps ? anime.eps : anime.epCount),maps[1],range); }
-  if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange,(anime.eps ? anime.eps : anime.epCount),maps[2],range); }
-  makeCompletionBar(cell,range,maps);
-  row.appendChild(cell);
-  // Last
-  cell = document.createElement('TD');
-  cell.className = 'epno lastep';
-  cell.appendChild(document.createTextNode(group.lastEp));
-  row.appendChild(cell);
-  // Specials
-  cell = document.createElement('TD');
-  cell.className = 'number specials';
-  cell.appendChild(document.createTextNode(group.sepCnt));
-  row.appendChild(cell);
-  // Languages
-  cell = document.createElement('TD');
-  cell.className = 'languages';
-  if (group.audioLangs) {
-    for (var i = 0; i < group.audioLangs.length; i++)
-      createIcon(cell, mapLanguage(group.audioLangs[i]), '', '', 'audio lang: '+mapLanguage(group.audioLangs[i]), 'i_audio_'+group.audioLangs[i]);
-  }
-  if (group.subtitleLangs) {
-    for (var i = 0; i < group.subtitleLangs.length; i++)
-      createIcon(cell, mapLanguage(group.subtitleLangs[i]), '', '', 'sub lang: '+mapLanguage(group.subtitleLangs[i]), 'i_sub_'+group.subtitleLangs[i]);  
-  }
-  row.appendChild(cell);
-  // Votes
-  cell = document.createElement('TD');
-  cell.className = 'rating';
-  cell.setAttribute('anidb:sort',(group.rating == '-') ? '0' : group.rating);
-  createLink(cell,((group.rating == '-') ? 'N/A' : group.rating) + ' ('+group.ratingCount+')','animedb.pl?show=animegroupvotes&agid='+group.agid,'anidb::popup',null,null,'350.400.1.1.agvotes');
-  row.appendChild(cell);
-  // Cmts
-  cell = document.createElement('TD');
-  cell.className = 'number cmts';
-  cell.setAttribute('anidb:sort',group.commentCount);
-  createLink(cell,group.commentCount,'animedb.pl?show=cmt&do=animegroup&id='+group.agid,'anidb::popup',null,null,'600.500.1.1.agcmts action');
-  row.appendChild(cell);
-  // Action
-	if (uid) {
-		cell = document.createElement('TD');
-		cell.className = 'action icons';
-		createLink(cell,'cmt','animedb.pl?show=cmt&do=animegroup&id='+group.agid,'anidb::popup',null,'Comment on this release','i_icon i_group_comment 600.500.1.1.agcmts');
-		createLink(cell,
-				   (group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=agvote&id='+group.agid,
-				   'anidb::popup',
-				   null,
-				   (group.userRating > -1) ? 'Your vote: '+group.userRating : 'Rate this release',
-				   'i_icon ' +((group.userRating > -1) ? 'i_revote' : 'i_vote' )+' 380.140.0.0.agvote');
-		createLink(cell,'edit','animedb.pl?show=animegroup&agid='+group.agid,'anidb::popup',null,'Request edit of the state','i_icon i_file_edit 400.400.0.0.agstate');
-		row.appendChild(cell);
-	}
-  return (row);
-}
 
 function expandGroupTable() {
   var groupTable = getElementsByClassName(document.getElementsByTagName('TABLE'), 'grouplist', true)[0];
@@ -516,7 +438,7 @@ function expandGroupTable() {
       if (!group.filtered) row.style.display = '';
     } else {
       if (group.id == undefined || group.id == 0) continue;
-      row = createGroupRow(group);
+      row = createGroupRow(group.id, groupCols, groupSkips);
       firstRun = true;
       if (lastIndex >= groupBody.rows.length) lastIndex = groupBody.rows.length-1;
       if (row && groupBody.rows[lastIndex]) groupBody.insertBefore(row, groupBody.rows[lastIndex]);
@@ -524,7 +446,7 @@ function expandGroupTable() {
   }
   if (firstRun) { // rebuild the group list to prevent some rendering issues
     groupBody.style.display = "none"; // hide for now
-    var cloneTB = document.createElement('TBODY');
+    var cloneTB = document.createElement('tbody');
     while (groupBody.childNodes.length) {
       var child = groupBody.firstChild;
       if (child.nodeName == 'TR') cloneTB.appendChild(child);
@@ -543,7 +465,7 @@ function expandGroupTable() {
     groupBody.style.display = ""; // finished
   }
   for (var i = 0; i < groupBody.rows.length; i++) {
-    var className = (i % 2) ? 'g_odd' : 'g_even';
+    var className = (i % 2) ? 'g_even' : 'g_odd';
     var row = groupBody.rows[i];
     var gid = row.id.substring(row.id.indexOf('_')+1,row.id.length);
     var group = groups[Number(gid)];
@@ -557,7 +479,7 @@ function expandGroupTable() {
   var ahref = cell.getElementsByTagName('A')[0];
   ahref.onclick = foldGroupTable;
   ahref.removeAttribute('href');
-  ahref.firstChild.nodeValue = 'show default';
+  ahref.firstChild.firstChild.nodeValue = 'show default';
   uriObj['showallag'] = 1;
 }
 
@@ -567,7 +489,7 @@ function foldGroupTable() {
   expandAllG = false;
   var groupBody = groupTable.tBodies[0];
   var groupFoot = groupTable.tFoot;
-  var displayed = 1;
+  var displayed = 0;
   for (var i = 0; i < groupBody.rows.length; i++) {
     var row = groupBody.rows[i];
     var gid = row.id.substring(row.id.indexOf('_')+1,row.id.length);
@@ -575,7 +497,7 @@ function foldGroupTable() {
     if (group) {
       if (group.defaultVisible) {
         if (!group.filtered) row.style.display = '';
-        row.className = ((displayed % 2) ? 'g_odd' : 'g_even') + ' ' + groups[group.id].state;
+        row.className = ((displayed % 2) ? 'g_even' : 'g_odd') + ' ' + groups[group.id].state;
         displayed++;
       } else row.style.display = 'none'
     } else continue;
@@ -585,7 +507,7 @@ function foldGroupTable() {
   var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action', false)[0];
   var ahref = cell.getElementsByTagName('A')[0];
   ahref.onclick = expandGroupTable;
-  ahref.firstChild.nodeValue = 'show all';
+  ahref.firstChild.firstChild.nodeValue = 'show all';
   //uriObj.slice('showallag',1);
 }
 
@@ -614,6 +536,10 @@ function updateGroupRow(group) {
   if (cell) cell.setAttribute('anidb:sort',(group.epsInMyListArray && group.epsInMyListArray.length) ? String(group.epsInMyListArray.length) : '0');
   cell = getElementsByClassName(cells, 'eps', true)[0];
   if (cell) cell.setAttribute('anidb:sort',String(group.epCnt));
+  cell = getElementsByClassName(cells, 'lastep', true)[0];
+  if (cell) cell.setAttribute('anidb:sort',String(group.lastEp));
+  cell = getElementsByClassName(cells, 'specials', true)[0];
+  if (cell) cell.setAttribute('anidb:sort',String(group.sepCnt));
   cell = getElementsByClassName(cells, 'rating', true)[0];
   if (cell) cell.setAttribute('anidb:sort',(group.rating == '-') ? '0' : group.rating);
   cell = getElementsByClassName(cells, 'cmts', true)[0];
@@ -636,74 +562,76 @@ function createGroupFilters(node) {
 }
 
 function updateGroupTable() {
-  // Update each row of the groupList
+	// Update each row of the groupList
 	var groupCnt = 0;
-  for (var i in groups) {
-    var group = groups[i];
-    if (!group) continue;
+	for (var i in groups) {
+		var group = groups[i];
+		if (!group) continue;
 		groupCnt++;
-    updateGroupRow(group);
-  }
-  // update the no group row
-  var group = new Object();
-  group.id = 0;
-  updateGroupRow(group);
-  // Update the "show all" link to point to my expand groups function
-  var groupTable = getElementsByClassName(document.getElementsByTagName('TABLE'), 'grouplist', true)[0];
-  if (!groupTable) return;
-  groupBody = groupTable.tBodies[0];
+		updateGroupRow(group);
+	}
+	// update the no group row
+	var group = new Object();
+	group.id = 0;
+	updateGroupRow(group);
+	// Update the "show all" link to point to my expand groups function
+	var groupTable = getElementsByClassName(document.getElementsByTagName('TABLE'), 'grouplist', true)[0];
+	if (!groupTable) return;
+	groupBody = groupTable.tBodies[0];
 	var groupRowCnt = groupBody.rows.length - 1;
-  // Move the heading and the footer rows to their table counterparts
-  var thead = document.createElement('THEAD');
-  var tfoot = document.createElement('TFOOT');
-  groupTable.insertBefore(thead,groupBody);
-  groupTable.insertBefore(tfoot,groupBody.nextSibling);
-  thead.appendChild(groupBody.rows[0]);
-  var row = groupBody.rows[groupBody.rows.length-1];
-  if (!row) return;
-  // append some group status filters
-  var cell = row.cells[row.cells.length-2]; // second to last cell
-  cell.className = 'action filter';
-  var div = document.createElement('SPAN');
-  div.className = 'icons';
-  createGroupFilters(div);
-  cell.appendChild(div);
-  cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action', false)[0];
-  var ahref = cell.getElementsByTagName('A')[0];
-  if (ahref) { // There are cases when we have nothing to expand
-    ahref.removeAttribute('href');
-    if (uriObj['showallag'] && uriObj['showallag'] == 1) {
-      ahref.onclick = foldGroupTable;
-      ahref.firstChild.nodeValue = 'show default';
-    } else ahref.onclick = expandGroupTable;
-  } else { // but we should have something to see no?
+	// Move the heading and the footer rows to their table counterparts
+	var thead = document.createElement('thead');
+	var tfoot = document.createElement('tfoot');
+	groupTable.insertBefore(thead,groupBody);
+	groupTable.insertBefore(tfoot,groupBody.nextSibling);
+	thead.appendChild(groupBody.rows[0]);
+	var row = groupBody.rows[groupBody.rows.length-1];
+	if (!row) return;
+	// append some group status filters
+	var cell = row.cells[row.cells.length-2]; // second to last cell
+	cell.className = 'action filter';
+	var div = document.createElement('span');
+	div.className = 'icons';
+	createGroupFilters(div);
+	cell.appendChild(div);
+	cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action', false)[0];
+	var ahref = cell.getElementsByTagName('A')[0];
+	if (ahref) { // There are cases when we have nothing to expand
+		ahref.removeAttribute('href');
+		if (uriObj['showallag'] && uriObj['showallag'] == 1) {
+			ahref.onclick = foldGroupTable;
+			ahref.firstChild.nodeValue = 'show default';
+		} else ahref.onclick = expandGroupTable;
+	} else { // but we should have something to see no?
 		if (groupRowCnt != groupCnt) { // we do! show the link
 			var a = createTextLink(null,'show all','removeme', null,expandGroupTable,null,null);
 			a.removeAttribute('href');
+			a.style.cursor = 'pointer';
 			cell.appendChild(a);
 		}
 	}
-  tfoot.appendChild(groupBody.rows[groupBody.rows.length-1]);
-  //groupBody.removeChild(groupBody.rows[groupBody.rows.length-1]);
-  // apply filtering support for the group list
-  var headingList = thead.rows[0].getElementsByTagName('TH');
-  headingTest = getElementsByClassName(headingList,'name group',true)[0];
-  if (headingTest) headingTest.className += ' c_setlatin';
-  headingTest = getElementsByClassName(headingList,'eps',true)[0];
-  if (headingTest) headingTest.className += ' c_set';
-  headingTest = getElementsByClassName(headingList,'specials',true)[0];
-  if (headingTest) headingTest.className += ' c_number';
-  headingTest = getElementsByClassName(headingList,'epno last',true)[0];
-  if (headingTest) headingTest.className += ' c_number s_reverse';
-  headingTest = getElementsByClassName(headingList,'state',true)[0];
-  if (headingTest) headingTest.className += ' c_latin';
-  headingTest = getElementsByClassName(headingList,'date lastupdate',true)[0];
-  if (headingTest) headingTest.className += ' c_date';
-  headingTest = getElementsByClassName(headingList,'rating',true)[0];
-  if (headingTest) headingTest.className += ' c_set'; //waiting for adbs_anime.pm
-  headingTest = getElementsByClassName(headingList,'cmts',true)[0];
-  if (headingTest) headingTest.className += ' c_set';
-  init_sorting(thead.rows[0],'epno','down');
+	tfoot.appendChild(groupBody.rows[groupBody.rows.length-1]);
+	// apply filtering support for the group list
+	if (LAY_HEADER) {
+		var headingList = thead.rows[0].getElementsByTagName('TH');
+		headingTest = getElementsByClassName(headingList,'name group',true)[0];
+		if (headingTest) headingTest.className += ' c_setlatin';
+		headingTest = getElementsByClassName(headingList,'eps',true)[0];
+		if (headingTest) headingTest.className += ' c_set';
+		headingTest = getElementsByClassName(headingList,'specials',true)[0];
+		if (headingTest) headingTest.className += ' c_number';
+		headingTest = getElementsByClassName(headingList,'epno last',true)[0];
+		if (headingTest) headingTest.className += ' c_number s_reverse';
+		headingTest = getElementsByClassName(headingList,'state',true)[0];
+		if (headingTest) headingTest.className += ' c_latin';
+		headingTest = getElementsByClassName(headingList,'date lastupdate',true)[0];
+		if (headingTest) headingTest.className += ' c_date';
+		headingTest = getElementsByClassName(headingList,'rating',true)[0];
+		if (headingTest) headingTest.className += ' c_set'; //waiting for adbs_anime.pm
+		headingTest = getElementsByClassName(headingList,'cmts',true)[0];
+		if (headingTest) headingTest.className += ' c_set';
+		init_sorting(thead.rows[0],'epno','down');
+	}
 }
 
 function filterGroups() {
@@ -792,156 +720,132 @@ function forceFileTableRedraw(episode) {
 }
 
 function expandFilesByGroup() {
-  // this will be cute :P
-  loadExpand = true; // warn scripts we are doing a full blown ep work
-  internalExpand = true;
-  expandedGroups++;
-  var expandCnt = 0;
-  var row;
-  var gid = this.parentNode.parentNode.id;
-  gid = gid.substring(gid.indexOf('_')+1,gid.length);
-  if (!gid) { gid = 0; showNoGroup = true; }
-  var group = groups[gid];
-  group.visible = true;
-  var getXML = false;
-  if (group && !group.hasCherryBeenPoped) { 
-    getXML = true;
-    // And assuming everything goes well, our group has had it cherry poped :P
-    group.hasCherryBeenPoped = true;
-  }
-	if (true) { // add the checkbox to the group
-		var row;
-		if (group.id != 0) row = document.getElementById('gid_'+group.id);
-		else {
-			var tb = getElementsByClassName(document.getElementsByTagName('TABLE'),'grouplist',true)[0];
-			var row = tb.tBodies[0].rows[tb.tBodies[0].rows.length - 1];
-		}
-		if (row) {
-			group.defaultVisible = true;
-			var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action', true)[0];
-			if (cell && row.id.indexOf('gid') >= 0) createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
+	// this will be cute :P
+	loadExpand = true; // warn scripts we are doing a full blown ep work
+	internalExpand = true;
+	expandedGroups++;
+	var expandCnt = 0;
+	var row;
+	var gid = this.parentNode.parentNode.id;
+	gid = gid.substring(gid.indexOf('_')+1,gid.length);
+	if (!gid) { gid = 0; showNoGroup = true; }
+	var group = groups[gid];
+	group.visible = true;
+	var getXML = false;
+	if (group && !group.hasCherryBeenPoped) { 
+		getXML = true;
+		group.hasCherryBeenPoped = true; // And assuming everything goes well, our group has had his cherry poped :P
+	}
+	// add the checkbox to the group
+	var row;
+	if (group.id != 0) row = document.getElementById('gid_'+group.id);
+	else {
+		var tb = document.getElementById('grouplist');
+		var row = tb.tBodies[0].rows[tb.tBodies[0].rows.length - 1];
+	}
+	if (row) {
+		group.defaultVisible = true;
+		var cell = getElementsByClassName(row.getElementsByTagName('td'), 'action', true)[0];
+		if (cell && row.id.indexOf('gid') >= 0) createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
+	}
+	var eid = null;
+	// check for page expands
+	for (var e in episodes) {
+		var episode = episodes[e];
+		if (!episode) continue;
+		eid = episode.id;
+		row = document.getElementById('eid_'+eid);
+		if (!row) continue;
+		var tRow = document.getElementById(row.id+'_ftHolder');
+		if (tRow) tRow.parentNode.removeChild(tRow);
+		var nRow = createLoadingRow(10); //the new episode row
+		nRow.id = 'eid_' + eid + '_ftHolder';		
+		row.parentNode.insertBefore(nRow,row.nextSibling);
+		var cell = getElementsByClassName(row.getElementsByTagName('td'), 'expand', true)[0];
+		var ahref = cell.getElementsByTagName('a')[0];
+		if (getXML) ahref.onclick = null; // will be set later
+		else ahref.onclick = foldEp;
+		ahref.title = ahref.alt = 'fold all entries';
+		ahref.firstChild.firstChild.nodeValue = '-';
+		ahref.className = 'i_icon i_minus';
+	}
+	this.onclick = foldFilesByGroup;
+	this.title = this.alt = 'Fold this release';
+	this.firstChild.firstChild.nodeValue = '-';
+	this.className = 'i_icon i_minus';
+	uriObj['expandall'] = 1;
+	if (getXML) { // *Need* to fetch the xml so we need to do the following:
+		forceGroupVisibilty(false); // #1 Hide all groups that aren't expanded
+		var req = xhttpRequest(); // #2 Fetch data
+		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid=all&gid='+gid, parseEpisodeData);
+	} else { // we allready have the files for this group so we need to do the following:
+		forceGroupVisibilty(false); // #1 Hide all groups that aren't expanded
+		for (var e in episodes) {
+			var episode = episodes[e];
+			if (!episode) continue;
+			forceFileTableRedraw(episode); // #2 Force a redraw of the fileTables
 		}
 	}
-  var eid = null;
-  // check for page expands
-  for (var e in episodes) {
-    var episode = episodes[e];
-    if (!episode) continue;
-    eid = episode.id;
-    row = document.getElementById('eid_'+eid);
-    if (!row) continue;
-    var tRow = document.getElementById(row.id+'_ftHolder');
-    if (tRow) tRow.parentNode.removeChild(tRow);
-    var rowSibling = row.nextSibling;
-    var rowParent = row.parentNode;
-    var nRow = document.createElement('TR'); //the new episode row
-    var nCell = document.createElement('TD');
-    nRow.id = row.id + '_ftHolder';
-    eid = row.id.split('_')[1];
-    nCell.colSpan = row.cells.length;
-    nCell.className = 'eidFileTable_load';
-    nCell.appendChild(document.createTextNode('loading data...'));
-    nRow.appendChild(nCell);
-    rowParent.insertBefore(nRow,rowSibling);
-  }
-  this.onclick = foldFilesByGroup;
-  this.title = 'fold all entries';
-  this.alt = '(-)';
-  this.className = 'i_icon i_minus';
-  uriObj['expandall'] = 1;
-  for (var i in episodes) { // Update each row of the episodeList 
-    var episode = episodes[i];
-    var row = document.getElementById('eid_'+episode.id);
-    if (!row) continue;
-    var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action expand', true)[0];
-    var ahref = cell.getElementsByTagName('A')[0];
-    if (getXML) ahref.onclick = null; // will be set later
-		else ahref.onclick = foldEp;
-    ahref.title = 'fold all entries';
-    ahref.alt = '(-)';
-    ahref.className = 'i_icon i_minus';
-  }
-  if (getXML) { // *Need* to fetch the xml
-    // we allready have the files for this group so we need to do the following:
-    forceGroupVisibilty(false); // #1 Hide all groups that aren't expanded
-    var req = xhttpRequest();
-    if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
-    else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid=all&gid='+gid, parseEpisodeData);
-  } else {
-    // we allready have the files for this group so we need to do the following:
-    forceGroupVisibilty(false); // #1 Hide all groups that aren't expanded
-    for (var e in episodes) {
-      var episode = episodes[e];
-      if (!episode) continue;
-      forceFileTableRedraw(episode);     // #2 Force a redraw of the fileTables
-    }
-  }
 }
 
 function foldFilesByGroup() {
-  // this will be cute :P
-  expandedGroups--;
-  var row;
-  var gid = this.parentNode.parentNode.id;
-  gid = gid.substring(gid.indexOf('_')+1,gid.length);
-  if (!gid) { gid = 0; showNoGroup = false }
-  var group = groups[gid];
-  group.visible = false;
-  var eid = null;
-  this.onclick = expandFilesByGroup;
-  this.title = 'expand all entries';
-  this.alt = '(+)';
-  this.className = 'i_icon i_plus';
-  if (expandedGroups <= 0) forceGroupVisibilty(true); // unhide all groups
-  else forceGroupVisibilty(false);                    // #1 Hide all groups that aren't expanded
+	// this will be cute :P
+	expandedGroups--;
+	var row;
+	var gid = this.parentNode.parentNode.id;
+	gid = gid.substring(gid.indexOf('_')+1,gid.length);
+	if (!gid) { gid = 0; showNoGroup = false }
+	var group = groups[gid];
+	group.visible = false;
+	var eid = null;
+	this.onclick = expandFilesByGroup;
+	this.title = this.alt = 'Expand this release';
+	this.firstChild.firstChild.nodeValue = '+';
+	this.className = 'i_icon i_plus';
+	if (expandedGroups <= 0) forceGroupVisibilty(true); // unhide all groups
+	else forceGroupVisibilty(false);                    // #1 Hide all groups that aren't expanded
 	if (true) { // remove the checkbox from the group
 		var row;
 		if (group.id != 0) row = document.getElementById('gid_'+group.id);
 		else {
-			var tb = getElementsByClassName(document.getElementsByTagName('TABLE'),'grouplist',true)[0];
+			var tb = document.getElementById('grouplist');
 			var row = tb.tBodies[0].rows[tb.tBodies[0].rows.length - 1];
 		}
 		if (row) {
 			group.defaultVisible = true;
-			var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action', true)[0];
+			var cell = getElementsByClassName(row.getElementsByTagName('td'), 'action', true)[0];
 			if (cell && row.id.indexOf('gid') >= 0) {
-				var cks = cell.getElementsByTagName('INPUT');
+				var cks = cell.getElementsByTagName('input');
 				while (cks.length) cell.removeChild(cks[0]);
 			}
 		}
 	}
-  for (var e in episodes) {
-    var episode = episodes[e];
-    if (!episode) continue;
-    eid = episode.id;
-    row = document.getElementById('eid_'+eid);
-    if (!row) continue;
-    // we will remove the table on fold on this case
-    var tb = document.getElementById('eid_'+episode.id+'_ftHolder');
-    if (tb) tb.parentNode.removeChild(tb);
-    if (expandedGroups <= 0) { // no more groups expanded
-      // update the icon
-      var cell = getElementsByClassName(row.getElementsByTagName('TD'), 'action expand', true)[0];
-      var ahref = cell.getElementsByTagName('A')[0];
-      ahref.onclick = expandEp;
-      ahref.title = 'expand all entries';
-      ahref.alt = '(+)';
-      ahref.className = 'i_icon i_plus';
-    } else { // we still have expanded groups
-      var rowSibling = row.nextSibling;
-      var rowParent = row.parentNode;
-      var nRow = document.createElement('TR'); //the new episode row
-      var nCell = document.createElement('TD');
-      nRow.id = row.id + '_ftHolder';
-      nCell.colSpan = row.cells.length;
-      nCell.className = 'eidFileTable_load';
-      nCell.appendChild(document.createTextNode('loading data...'));
-      nRow.appendChild(nCell);
-      rowParent.insertBefore(nRow,rowSibling);
-      forceFileTableRedraw(episode); // Force a redraw of the fileTable
-    }
-  }
-  internalExpand = false;
+	for (var e in episodes) {
+		var episode = episodes[e];
+		if (!episode) continue;
+		eid = episode.id;
+		row = document.getElementById('eid_'+eid);
+		if (!row) continue;
+		// we will remove the table on fold on this case
+		var tb = document.getElementById('eid_'+episode.id+'_ftHolder');
+		if (tb) tb.parentNode.removeChild(tb);
+		if (expandedGroups <= 0) { // no more groups expanded
+			// update the icon
+			var cell = getElementsByClassName(row.getElementsByTagName('td'), 'action expand', true)[0];
+			var ahref = cell.getElementsByTagName('a')[0];
+			ahref.onclick = expandEp;
+			ahref.title = this.alt = 'expand all entries';
+			ahref.firstChild.firstChild.nodeValue = '+';
+			ahref.className = 'i_icon i_plus';
+		} else { // we still have expanded groups
+			var nRow = createLoadingRow(10); //the new episode row
+			nRow.id = 'eid_' + eid + '_ftHolder';		
+			row.parentNode.insertBefore(nRow,row.nextSibling);
+			forceFileTableRedraw(episode); // Force a redraw of the fileTable
+		}
+	}
+	internalExpand = false;
 }
 
 function expandEp() {
@@ -951,8 +855,8 @@ function expandEp() {
   if (!document.getElementById(row.id+'_ftHolder')) {
     var rowSibling = row.nextSibling;
     var rowParent = row.parentNode;
-    var nRow = document.createElement('TR'); //the new episode row
-    var nCell = document.createElement('TD');
+    var nRow = document.createElement('tr'); //the new episode row
+    var nCell = document.createElement('td');
     nRow.id = row.id + '_ftHolder';
     eid = row.id.split('_')[1];
     nCell.colSpan = 10;//row.cells.length;
@@ -994,8 +898,8 @@ function expandFiles() {
   if (!document.getElementById(row.id+'_relftHolder')) {
     var rowSibling = row.nextSibling;
     var rowParent = row.parentNode;
-    var nRow = document.createElement('TR'); //the new episode row
-    var nCell = document.createElement('TD');
+    var nRow = document.createElement('tr'); //the new episode row
+    var nCell = document.createElement('td');
     nRow.id = row.id + '_relftHolder';
     rfid = row.id.split('_')[1];
     var file = null;
@@ -1003,17 +907,17 @@ function expandFiles() {
     else file = pseudoFiles.list[rfid];
     nCell.colSpan = row.cells.length;
 		// Relation Table
-    var fT = document.createElement('TABLE');
+    var fT = document.createElement('table');
     fT.className = 'filelist';
     fT.id = 'file'+rfid+'relations';
     // TableHead
     if (LAY_HEADER) {
-      var fTH = document.createElement('THEAD');
+      var fTH = document.createElement('thead');
       fTH.appendChild(createFileTableHead());
       fT.appendChild(fTH);
     }
     // TableBody
-    var fTB = document.createElement('TBODY');
+    var fTB = document.createElement('tbody');
     for (var f = 0; f < file.relatedFiles.length; f++) {
       var drow = document.getElementById('fid_'+file.relatedFiles[f]);
       var dnode;
@@ -1066,12 +970,12 @@ function foldFiles() {
 /* * Creates the file table heading row */
 function createFileTableHead() {
   if (tFileHeadRow) return (tFileHeadRow.cloneNode(tFileHeadRow,true));
-  var row = document.createElement('TR');
-	row.className = 'heading';
+  var row = document.createElement('tr');
+	row.className = 'header';
 	//createHeader(row,'expand c_none',' ');									// expand
 	createHeader(row,'check c_none','x');										// checkbox
 	createHeader(row,'id c_set','F','File Details/FID');						// fid
-	createHeader(row,'title c_setlatin','Group');								// group
+	createHeader(row,'group c_setlatin','Group');								// group
 	createHeader(row,'size c_set','Size');										// size
 	if (uriObj['showcrc'] && uriObj['showcrc'] == 1) 
 		createHeader(row,'crc c_latin','CRC');									// crc
@@ -1088,198 +992,9 @@ function createFileTableHead() {
   return (row.cloneNode(row,true));
 }
 
-/* *
- * This function creates and returns a Object with all the possible icons for a given file
- * @param file File to build icon object
- * @return an Object with the icons
- * ids: fid, ext, vid, audlangs, audcodecs, sublangs, crc, ver, cenfile_ep_rel, file_file_rel,
- *      cmt, date, mylist, mylist_status, mylist_fstate, mylist_seen, mylist_cmt, mylist_action,
- *      mylist_watch, ed2k, edit, expand, quality, avdump
- */
-function createFileIcons(file) {
-	var icons = new Object();
-	// fid
-	if (file.pseudoFile || (file.relatedFiles && file.relatedFiles.length)) 
-		icons['expand'] = createIcon(null, '[+]', null, expandFiles, 'expand this entry', 'i_plus');
-	if (!LAY_SHOWFID) {
-		if (!file.pseudoFile)
-			icons['fid'] = createIcon(null, file.id, 'animedb.pl?show=file&fid='+file.id, null, 'show file details - FID: '+file.id, 'i_file_details');
-		else
-			icons['fid'] = createIcon(null, 'P'+file.id, 'http://wiki.anidb.net/w/Files:Pseudo_files', null, 'Pseudo File: P'+file.id, 'i_file_details');
-	} else {
-		if (!file.pseudoFile)
-			icons['fid'] = createLink(null, file.id, 'animedb.pl?show=file&fid='+file.id, null, null ,null, null);
-		else
-			icons['fid'] = createLink(null, 'P'+file.id, 'http://wiki.anidb.net/w/Files:Pseudo_files', null, null ,null, null);
-	}
-	// extension
-	if (file.type != 'generic') {
-		var tooltip = 'type: '+file.type+' | added: '+cTimeDate(file.date);
-		if (file.relDate > 0) tooltip += ' | released: '+cTimeDate(file.relDate);
-		if (file.fileType != '') tooltip += ' | extension: '+file.fileType;
-		icons['ext'] = createIcon(null, file.fileType, null, null, tooltip, 'i_ext '+file.fileType);
-	}
-	// avdumped
-	if (file.avdumped)
-		icons['avdump'] = createIcon(null,' [avdumped]','http://wiki.anidb.net/w/Avdump',null,'File was verified by an AniDB Client','i_av_yes');
-	// vid
-	if (file.type == 'video') { // VIDEO STREAM
-		for (var st in file.videoTracks) {
-			var stream = file.videoTracks[st];
-			if (stream && stream.codec) {
-				var res;
-				var vc_RXP = /[^\w]/ig;
-				var vcodec = 'unknown';
-				if (stream.codec) vcodec = stream.codec.toLowerCase();
-				var vstyle = vcodec.replace(vc_RXP,'_');
-				var tooltip = 'video';
-				if (file.resolution != 'unknown') tooltip += ' | resolution: '+file.resolution;
-				if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
-				if (stream.ar != 'unknown')tooltip += ' | ar: '+stream.ar;
-				if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
-				//createIcon(icons, 'vid0 ', null, null, tooltip, 'i_videostream_'+vstyle);
-				icons['vid'] = createIcon(null, 'vid0 ', null, null, tooltip, 'i_video '+stream.codec_sname);
-			}
-		}
-	}
-	// audio languages
-	if (file.type == 'video' || file.type == 'audio') { // AUDIO STREAM
-		var audioLangs = new Array();
-		var audioCodecs = new Array();
-		for (var st in file.audioTracks) {
-			var stream = file.audioTracks[st];
-			if (stream && stream.lang) {
-				var tooltip = 'audio: '+mapLanguage(stream.lang);
-				if (st < 2) { // EXP only exports info other than lang for the first 2 streams
-					if (stream.codec != 'unknown') tooltip += ' | codec: '+stream.codec;
-					if (stream.chan != 'other') tooltip += ' | channels: '+mapAudioChannels(stream.chan);
-					if (stream.type) tooltip += ' | type: '+mapAudioType(stream.type);
-					if (file.length) tooltip += ' | duration: '+formatFileLength(file.length,'long');
-					audioCodecs.push(createIcon(null, stream.codec, 'http://wiki.anidb.info/w/Codecs', null, 'Audio codec: '+stream.codec,'i_audio '+stream.codec_sname));
-				}
-				audioLangs.push(createIcon(null, 'aud'+st+'.'+stream.lang+' ', null, null, tooltip, 'i_audio_'+stream.lang));
-			}
-		}
-		icons['audlangs'] = audioLangs;
-		icons['audcodecs'] = audioCodecs;
-	}
-	// subtitle languages
-	if (file.type == 'video' || file.type == 'subtitle' || file.type == 'other') { // SUBTITLE STREAM
-		var subtitleLangs = new Array();
-		for (var st in file.subtitleTracks) {
-			var stream = file.subtitleTracks[st];
-			if (stream && stream.lang) {
-				var tooltip = 'subtitle: '+mapLanguage(stream.lang);
-				if (st < 2) {
-					if (stream.type && stream.type != 'unknown') tooltip += ' | type: '+mapSubTypeData(stream.type);
-					if (stream.flags) tooltip += ' | flags: '+mapSubFlagData(stream.flags);
-				}
-				subtitleLangs.push(createIcon(null, 'sub'+st+'.'+stream.lang+' ', null, null, tooltip, 'i_sub_'+stream.lang));
-			}
-		}
-		icons['sublangs'] = subtitleLangs;
-	}
-	// crc status
-	if (file.crcStatus == 'valid') 
-		icons['crc'] = createIcon(null, 'crc.ok ', null, null, 'crc *matches* official crc ('+file.crc32.toUpperCase()+')', 'i_crc_yes');
-	else if (file.crcStatus == 'invalid') 
-		icons['crc'] = createIcon(null, 'crc.bad ', null, null, 'crc *does not match* official crc', 'i_crc_no');
-	else if (file.type != 'generic') 
-		icons['crc'] = createIcon(null, 'crc.unv ', null, null, 'crc *not* compared to official crc', 'i_crc_unv');
-	// file version
-	if (file.version != 'v1') 
-		icons['ver'] = createIcon(null, file.version+' ', null, null, 'version *'+file.version.charAt(1)+'* (error corrections)', 'i_vrs_'+file.version.charAt(1));
-	// censor
-	if (file.isCensored) 
-		icons['cen'] = createIcon(null, 'cen ', null, null, '*censored*', 'i_censored');
-	if (file.isUncensored) 
-		icons['cen'] = createIcon(null, 'uncen ', null, null, '*uncensored*', 'i_uncensored');
-	// FILE<->EP RELATIONS
-	if (file.epRelations && file.epRelations[file.episodeId]) { // Do some work
-		var rel = file.epRelations[file.episodeId];
-		var tooltip = 'File covers: [';
-		for (var bar = 0; bar < rel['startp']/10; bar++) tooltip += '-';
-		for (var bar = rel['startp']/10; bar < rel['endp']/10; bar++) tooltip += '=';
-		for (var bar = rel['endp']/10; bar < 10; bar++) tooltip += '-';
-		icons['file_ep_rel'] = createIcon(null, '['+rel['startp']+'-'+rel['endp']+']', null, null, tooltip+']', 'i_file2ep_rel');
-	}
-	// FILE<->FILE RELATIONS
-	if (file.fileRelations && file.fileRelations.length) { // Do some work
-		for (var r in file.fileRelations) {
-			var rel = file.fileRelations[r];
-			if (rel['relfile'] == undefined) continue;
-			var tooltip = 'File relation of type \"'+rel['type']+'\" \"'+rel['dir']+'\" with file id \"'+rel['relfile']+'\"';
-			icons['file_file_rel'] = createIcon(null,'[rel: '+ rel['relfile'] + ']', null, null, tooltip, 'i_file2file_rel');
-		}
-	}
-	// FILE COMMENT
-	if ((file.other) && (file.other != '') && (file.other != undefined)) 
-		icons['cmt'] = createIcon(null, 'comment ', null, null, 'comment: '+file.other, 'i_comment');
-	// NEW FILE
-	if (file.newFile)
-		icons['date'] = createIcon(null, 'new.file ', null, null, '*new file* (last 24h)', 'i_new_icon');
-	// MYLIST
-	var temp = new Array();
-	var mylistEntry = mylist[file.id];
-	if (mylistEntry) {
-		icons['mylist'] = createIcon(null, 'in.mylist ', null, null, '*in mylist*', 'i_mylist');
-		// Mylist status icon
-		var tooltip = 'mylist status: '+mylistEntry.status;
-		if (mylistEntry.storage && mylistEntry.storage != '') tooltip += ' | storage: '+mylistEntry.storage;
-		var className = mapMEStatusName(mylistEntry.status);
-		icons['mylist_status'] = createIcon(null, mylistEntry.status+' ', null, null, tooltip, 'i_state_'+className);
-		// Mylist FileState
-		if (mylistEntry.fstate && mylistEntry.fstate != 'unknown') {
-			var className = mapFState(mylistEntry.fstate);
-			var tooltip = 'mylist state: '+mylistEntry.fstate;
-			icons['mylist_fstate'] = createIcon(null, mylistEntry.fstate+' ', null, null, tooltip, className);
-		}
-		var animeFL = anime.getTitle().charAt(0).toLowerCase();
-		// Seen status
-		if (mylistEntry.seen) 
-			icons['mylist_seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDate(mylistEntry.seenDate), 'i_seen');
-		// mylist comment
-		if ((mylistEntry.other) && (mylistEntry.other != '') && (mylistEntry.other != undefined)) 
-			icons['mylist_cmt'] = createIcon(null, 'mylist comment ', null, null, 'mylist comment: '+mylistEntry.other, 'i_comment');
-		// mylist action
-		icons['mylist_action'] = createIcon(null, 'mylist.remove ', 'animedb.pl?show=mylist&do=del&lid='+mylistEntry.id+'&expand=' + file.animeId + '&showfiles=1&char='+animeFL+'#a'+file.animeId, null, 'remove from mylist', 'i_file_removemylist');
-		if (mylistEntry.seen) 
-			icons['mylist_watch'] = createIcon(null, 'mylist.unwatch ', 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id+'&expand='+ file.animeId+'&showfiles=1&char='+animeFL+'#a'+file.animeId, null, 'mark unwatched', 'i_seen_no');
-		else 
-			icons['mylist_watch'] = createIcon(null, 'mylist.watch ', 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id+'&expand='+file.animeId+'&showfiles=1&char='+animeFL+'#a'+file.animeId, null, 'mark watched', 'i_seen_yes');
-				icons['mylist_edit'] = createIcon(null, 'mylist.edit ', 'animedb.pl?show=mylist&do=add&lid='+mylistEntry.id, null, 'edit mylist entry', 'i_file_edit');
-	} else {
-		// mylist action
-		icons['mylist_action'] = createIcon(null, 'mylist.add ', 'animedb.pl?show=mylist&do=add&fid=' + file.id, null, 'add to mylist', 'i_file_addmylist');
-	}
-	// ed2k
-	if (uid != undefined && file.ed2k != '') {
-		if (file.crcStatus != 'invalid') 
-			icons['ed2k'] = createIcon(null, 'ed2k', "!fillme!", null, 'ed2k hash', 'i_file_ed2k');
-		else 
-			icons['ed2k'] = createIcon(null, 'ed2k.crc.bad', "!fillme!", null, 'ed2k hash (invalid CRC file)', 'i_file_ed2k_corrupt');
-	}
-	// Action icons
-	if (file.type != 'generic') {
-		icons['edit'] = createIcon(null, 'edit', 'animedb.pl?show=addfile&aid='+file.animeId+'&eid='+file.episodeId+'&edit='+file.id, null, 'edit', 'i_file_edit');
-		var qual = file.quality.replace(' ','');
-		icons['quality'] = createIcon(null, file.quality, null, null, 'quality: '+file.quality, 'i_rate_'+qual);
-	}
-	return icons;
-}
-
 function createFileTableRow(episode,file) {
-	// if (tFileRow) return (tFileRow.cloneNode(tFileRow,true));
 	// ROW Definition
-	var fTBr0 = document.createElement('TR');
-	if (!file.pseudoFile) {
-		var test = document.getElementById('fid_'+file.id);
-		if (test) {
-			var t2 = test.parentNode.parentNode.id;
-			if (Number(t2.substring(7,t2.indexOf('files'))) != episode.id) fTBr0.id = 'fid_'+file.id+'_eid_'+episode.id;
-			else return test;// The row was allready created and we have it
-		} else fTBr0.id = 'fid_'+file.id;
-	} else fTBr0.id = 'rfid_'+file.id+'_eid_'+episode.id; // This is safer
+	var fTBr0 = createFileRow(episode.id,file.id,fileCols,fileSkips);
 	if (!file.pseudoFile || file.type != 'stub') {
 		filterObj.markDeprecated(file);
 		filterObj.markUnfiltered(file);
@@ -1295,123 +1010,8 @@ function createFileTableRow(episode,file) {
 		if (file.crcStatus == 'valid') fTBr0.className = 'good';
 		if (file.crcStatus == 'invalid') fTBr0.className = 'bad';
 		if (file.isDeprecated) fTBr0.className = 'deprecated';
+		if (!file.avdumped) fTBr0.className += ' undumped';
 	}
-	// Start of cells
-	var icons = createFileIcons(file); // get file icons
-	//createCell(fTBr0, 'file expand', icons['expand']); // EXPAND  
-	var ck = createCheckBox(null,'madd.f.'+file.id,null,showAddToMylistBox,false);
-	if (file.pseudoFile) ck.disabled = true;
-	createCell(fTBr0, 'check', ck); // CHECKBOX
-	if (!icons['expand'])
-		createCell(fTBr0, 'id icons', icons['fid'], file.id); // FID
-	else {
-		var cell = createCell(null, 'id icons',icons['fid'],file.id);
-		cell.appendChild(icons['expand']);
-		fTBr0.appendChild(cell);
-	}
-	// Group
-	if (file.type == 'generic') {
-		createCell(fTBr0, 'title',createLink(null, 'generic file', 'http://wiki.anidb.info/w/Files:Generic_files', 'extern wiki', null, null, null)); // GROUP
-	} else { // group
-		var cell = createCell(null, 'title');
-		if (icons['date'] || icons['cmt'] || icons['ver']) {
-			var divIcons = document.createElement('SPAN');
-			divIcons.className = 'icons';
-			if (icons['date']) divIcons.appendChild(icons['date']);
-			if (icons['cmt']) divIcons.appendChild(icons['cmt']);
-			if (icons['ver']) divIcons.appendChild(icons['ver']);
-			cell.appendChild(divIcons);
-		}
-		var groupEntry = groups[file.groupId];
-		cell.setAttribute('anidb:sort',groupEntry.shortName.toLowerCase());
-		if (!file.groupId) groupEntry = null;
-		var label = document.createElement('LABEL');
-		if (!file.pseudoFile) {
-			if (groupEntry) 
-				label.appendChild(createLink(null, groupEntry.shortName, 'animedb.pl?show=group&gid=' + file.groupId, 'extern anidb', null, 'group name: ' + groupEntry.name, null));
-			else 
-				label.appendChild(document.createTextNode('no group'));
-		} else {
-			var shortNames = "";
-			var Names = "";
-			for (var gr = 0; gr < file.relatedGroups.length; gr++) {
-				var groupEntry = groups[file.relatedGroups[gr]];
-				shortNames += groupEntry.shortName;
-				Names += groupEntry.name;
-				if (gr < 2 && file.relatedGroups.length > gr+1) {
-					shortNames += '&'; Names += '&';
-				} else if (gr == 1) {
-					shortNames += '&...'; Names += '&...';
-				} else break; // will not add more information even if it exists
-			}
-			label.appendChild(createLink(null, shortNames, 'http://wiki.anidb.info/w/Files:Pseudo_files', 'extern wiki', null, 'group name: ' + Names, null));
-		}
-		cell.appendChild(label);
-		fTBr0.appendChild(cell);
-	}
-	if (file.type == 'generic') {
-		var cell = document.createElement('TD');
-		cell.colSpan = ((uriObj['showcrc'] && uriObj['showcrc'] == '1') ? 8 : 7);
-		fTBr0.appendChild(cell);
-	} else {
-		createCell(fTBr0, 'size', document.createElement('NOBR').appendChild(document.createTextNode(formatFileSize(file.size))), file.size); // SIZE
-		if (uriObj['showcrc'] && uriObj['showcrc'] == '1') createCell(fTBr0, 'crc', document.createTextNode(file.crc32.toUpperCase()));
-		var cell = createCell(null, 'lang icons');
-		if (icons['audlangs']) { var audlangs = icons['audlangs']; for (var i = 0; i < audlangs.length; i++) cell.appendChild(audlangs[i]); }
-		if (icons['sublangs']) { var sublangs = icons['sublangs']; for (var i = 0; i < sublangs.length; i++) cell.appendChild(sublangs[i]); }
-		fTBr0.appendChild(cell);
-		cell = createCell(null, 'codec icons');
-		var codecSort = 'unknown';
-		if (file.type == 'video' && file.videoTracks[0] && file.videoTracks[0].codec) codecSort = file.videoTracks[0].codec;
-		cell.setAttribute('anidb:sort',codecSort);
-		if (icons['ext']) cell.appendChild(icons['ext']);
-		if (icons['vid']) cell.appendChild(icons['vid']);
-		if (icons['audcodecs']) { var audcodecs = icons['audcodecs']; for (var i = 0; i < audcodecs.length; i++) cell.appendChild(audcodecs[i]); }
-		fTBr0.appendChild(cell);
-		createCell(fTBr0, 'resolution', ((file.type == 'video') ? document.createTextNode(file.resolution) : document.createTextNode('n/a')));
-		var cell = createCell(null, 'source');
-		if (icons['cen']) {
-			var divIcons = document.createElement('SPAN');
-			divIcons.className = 'icons';
-			if (icons['cen']) divIcons.appendChild(icons['cen']);
-			cell.appendChild(divIcons);
-		}
-		var label = document.createElement('LABEL');
-		label.appendChild(document.createTextNode(file.source));
-		cell.appendChild(label);
-		fTBr0.appendChild(cell);
-		createCell(fTBr0, 'quality '+file.quality, icons['quality'],mapQuality(file.quality));
-		cell = createCell(null, 'hash icons ed2k');
-		if (uid != undefined && file.ed2k != '') cell.onmouseover = createHashLink;
-		if (icons['ed2k']) cell.appendChild(icons['ed2k']);
-		if (icons['crc']) cell.appendChild(icons['crc']);
-		if (icons['avdump']) cell.appendChild(icons['avdump']);
-		fTBr0.appendChild(cell);
-	}
-	cell = createCell(null, 'users count',createLink(null, file.usersTotal, 'animedb.pl?show=userlist&fid=' + file.id, null, null, 'total users', null),file.usersTotal);
-	cell.appendChild(document.createTextNode('/'));
-	var abbr = document.createElement('ABBR');
-	abbr.title = 'deleted';
-	abbr.appendChild(document.createTextNode(file.usersDeleted));
-	cell.appendChild(abbr);
-	cell.appendChild(document.createTextNode('/'));
-	abbr = document.createElement('ABBR');
-	abbr.title = 'unknown status';
-	abbr.appendChild(document.createTextNode(file.usersUnknown));
-	cell.appendChild(abbr);
-	fTBr0.appendChild(cell);
-	cell = createCell(null, 'mylist icons');
-	if (icons['mylist']) cell.appendChild(icons['mylist']);
-	if (icons['mylist_status']) cell.appendChild(icons['mylist_status']);
-	if (icons['mylist_fstate']) cell.appendChild(icons['mylist_fstate']);
-	if (icons['mylist_seen']) cell.appendChild(icons['mylist_seen']);
-	if (icons['mylist_cmt']) cell.appendChild(icons['mylist_cmt']);
-	fTBr0.appendChild(cell);
-	cell = createCell(null, 'action file icons');
-	if (icons['edit']) cell.appendChild(icons['edit']);
-	if (icons['mylist_action']) cell.appendChild(icons['mylist_action']);
-	if (icons['mylist_watch']) cell.appendChild(icons['mylist_watch']);
-	fTBr0.appendChild(cell);
 	return (fTBr0);
 }
 
@@ -1455,9 +1055,11 @@ function showFiles(hide,passedNode) {
     var row = tBody.rows[i];
     if (row.id.indexOf('_relftHolder') >= 0) continue; //not interested
     var file = null;
-    switch (row.id.substr(0,4)) {
-      case 'fid_': file = files[Number(row.id.split('_')[1])]; break;
-      case 'rfid': file = pseudoFiles.list[Number(row.id.split('_')[1])]; break;
+	var eLen = String('e'+eid).length;
+	var fid = Number(row.id.substring(row.id.indexOf('f')+1, row.id.length));
+    switch (row.id.substr(eLen,1)) {
+      case 'f': file = files[fid]; break;
+      case 'r': file = pseudoFiles.list[fid]; break;
     }
     if (!file) continue;
     //alert('show?: '+!passedNode+'\nfid: '+file.id+' is visible? '+file.visible+'\nrow: '+row);
@@ -1467,16 +1069,18 @@ function showFiles(hide,passedNode) {
     }
   }
   while (cell.childNodes.length) cell.removeChild(cell.firstChild);
-  var i = document.createElement('I');
+  var i = document.createElement('i');
   if (!passedNode) {
     i.appendChild(document.createTextNode('All files shown - '));
     var ahref = createLink(null,'hide files', 'removeme', null, hideFiles, null, null);
     ahref.removeAttribute('href');
+	ahref.style.cursor = 'pointer';
     i.appendChild(ahref);     
   } else {
     i.appendChild(document.createTextNode(episode.hiddenFiles + ' file'+((episode.hiddenFiles > 1) ? 's' : '')+ ' not shown - '));
     var ahref = createLink(null,'show all files', 'removeme', null, showFiles, null, null);
     ahref.removeAttribute('href');
+	ahref.style.cursor = 'pointer';
     i.appendChild(ahref);   
   }
   cell.appendChild(i);
@@ -1488,18 +1092,18 @@ function hideFiles() {
 
 function createFileTable(episode) {
   if (!episode) return;
-  var fT = document.createElement('TABLE');
+  var fT = document.createElement('table');
   fT.className = 'filelist';
   fT.id = 'episode'+episode.id+'files';
   // TableHead
   if (LAY_HEADER) {
-    var fTH = document.createElement('THEAD');
+    var fTH = document.createElement('thead');
     fTH.appendChild(createFileTableHead());
     fT.appendChild(fTH);
   }
-  var fTF = document.createElement('TFOOT');
+  var fTF = document.createElement('tfoot');
   // TableBody
-  var fTB = document.createElement('TBODY');
+  var fTB = document.createElement('tbody');
   if (episode.files && episode.files.length) {
     for (var f = 0; f < episode.files.length; f++) {
       var file = files[episode.files[f]];
@@ -1509,13 +1113,14 @@ function createFileTable(episode) {
   }
   fT.appendChild(fTB);
   if (episode.hiddenFiles) {
-    var tr = document.createElement('TR');
-    var td = document.createElement('TD');
+    var tr = document.createElement('tr');
+    var td = document.createElement('td');
     td.colSpan = ((uriObj['showcrc'] && uriObj['showcrc'] == '1') ? 14 : 13);
-    var i = document.createElement('I');
+    var i = document.createElement('i');
     i.appendChild(document.createTextNode(episode.hiddenFiles + ' file'+((episode.hiddenFiles > 1) ? 's' : '')+ ' not shown - '));
     var ahref = createLink(null,'show all files', 'removeme', null, showFiles, null, null);
     ahref.removeAttribute('href');
+	ahref.style.cursor = 'pointer';
     i.appendChild(ahref);
     td.appendChild(i);
 		tr.appendChild(td);
@@ -1547,18 +1152,18 @@ function updateFileTable(episode) {
   var tbody = tbRow.getElementsByTagName('TBODY')[0];
   if (!tbody) return;
   var table = tbody.parentNode;
-  var thead = document.createElement('THEAD');
-  var tfoot = document.createElement('TFOOT');
+  var thead = document.createElement('thead');
+  var tfoot = document.createElement('tbody');
   table.insertBefore(thead,tbody);
   table.insertBefore(thead,tbody.nextSibling);
   var ckrow = getElementsByClassName(tbody.rows[0].getElementsByTagName('TD'), 'check', false)[0];
   if (!ckrow) {
-      var c1 = document.createElement('TH'); // CHECKBOX
+      var c1 = document.createElement('th'); // CHECKBOX
       c1.className = 'check';
       c1.appendChild(document.createTextNode('x'));
       tbody.rows[0].insertBefore(c1,tbody.rows[0].cells[0]);
     }
-  var c0 = document.createElement('TH');
+  var c0 = document.createElement('th');
   c0.className = 'file expand c_none';
   tbody.rows[0].insertBefore(c0,tbody.rows[0].cells[0]);
   thead.appendChild(tbody.rows[0]);
@@ -1575,7 +1180,7 @@ function updateFileTable(episode) {
     if (!file) continue;
     var ckrow = getElementsByClassName(row.getElementsByTagName('TD'), 'check', false)[0];
     if (!ckrow) {
-      var c1 = document.createElement('TD'); // CHECKBOX
+      var c1 = document.createElement('td'); // CHECKBOX
       c1.className = 'check'; 
       var ck = createCheckbox('madd.f.'+file.id,false)
       if (file.pseudoFile) ck.disabled = true;
@@ -1585,7 +1190,7 @@ function updateFileTable(episode) {
       var ck = ckrow.getElementsByTagName('INPUT')[0];
       if (file.pseudoFile) ck.disabled = true;
     }
-    c0 = document.createElement('TD');
+    c0 = document.createElement('td');
     c0.className = 'file expand';
     if (file.pseudoFile || (file.relatedFiles && file.relatedFiles.length)) 
       createIcon(c0, '[+]', null, expandFiles, 'expand this entry', 'i_plus');
@@ -1600,13 +1205,13 @@ function updateFileTable(episode) {
 }
 
 function createFieldValueRow(parentNode, className, field, valueElement) {
-	var row = document.createElement('TR');
+	var row = document.createElement('tr');
 	row.className = className;
-	var th = document.createElement('TH');
+	var th = document.createElement('th');
 	th.className = 'field';
 	if (field) th.appendChild(document.createTextNode(field));
 	row.appendChild(th);
-	var td = document.createElement('TD');
+	var td = document.createElement('td');
 	td.className = 'value';
 	if (valueElement) td.appendChild(valueElement);
 	row.appendChild(td);
@@ -1628,11 +1233,11 @@ function gODD(i) {
 }
 
 function createMylistAddBox(parentNode,type) {
-	var div = document.createElement('DIV');
+	var div = document.createElement('div');
 	div.className = "g_definitionlist mylist_add";
 	if (type == 'files') div.style.display = 'none';
-	var table = document.createElement('TABLE');
-	var caption = document.createElement('CAPTION');
+	var table = document.createElement('table');
+	var caption = document.createElement('caption');
 	if (type == 'files')
 		caption.appendChild(document.createTextNode('Add selected files to mylist'));
 	if (type == 'anime') {
@@ -1643,7 +1248,7 @@ function createMylistAddBox(parentNode,type) {
 	}
 	table.appendChild(caption);
 	var i = 0;
-	var tbody = document.createElement('TBODY');
+	var tbody = document.createElement('tbody');
 	var select; var row; var input;
 	if (type == 'anime') {
 		//,2:{"text":'all known generics'}}
@@ -1662,11 +1267,11 @@ function createMylistAddBox(parentNode,type) {
 										 2:{"text":'external storage (cd/dvd/...)'},3:{"text":'deleted'}};
 	select = createSelectArray(null,"addl.state","addl.state",null,0,optionArray);
 	var row = createFieldValueRow(null,'state'+gODD(i),'State',select); i++;
-	var inlineHelp = document.createElement('A');
+	var inlineHelp = document.createElement('a');
 	inlineHelp.className = 'i_inline i_help';
 	inlineHelp.href = 'http://wiki.anidb.net/w/myliststate';
 	inlineHelp.rel = 'popup 300-450-1-1-helppopup';
-	var span = document.createElement('SPAN');
+	var span = document.createElement('span');
 	span.appendChild(document.createTextNode('help'));
 	inlineHelp.appendChild(span);
 	row.getElementsByTagName('TD')[0].appendChild(inlineHelp);
@@ -1690,10 +1295,10 @@ function createMylistAddBox(parentNode,type) {
 	var cell = row.getElementsByTagName('TD')[0];
 	if (type == 'anime') {
 		cell.appendChild(document.createTextNode('You can add this anime to your mylist with the form above using generic files. Expand per group if you wish to add specific files.'));
-		cell.appendChild(document.createElement('BR'));
+		cell.appendChild(document.createElement('br'));
 	}
 	cell.appendChild(document.createTextNode('Manual adding is '));
-	var b = document.createElement('B');
+	var b = document.createElement('b');
 	b.appendChild(document.createTextNode('not recommend'));
 	cell.appendChild(b);
 	cell.appendChild(document.createTextNode('. The best way to add files to your mylist is by using an '));
@@ -1702,11 +1307,11 @@ function createMylistAddBox(parentNode,type) {
 	cell.appendChild(createTextLink(null,'Java Applet',"http://static.anidb.net/client/webaom.htm","anidb::popup",null, null,null));
 	cell.appendChild(document.createTextNode('.'));
 	tbody.appendChild(row);
-	row = document.createElement('TR');
+	row = document.createElement('tr');
 	row.className = 'action';
-	cell = document.createElement('TD');
+	cell = document.createElement('td');
 	cell.colSpan = 2;
-	input = document.createElement('INPUT');
+	input = document.createElement('input');
 	input.type = 'submit';
 	input.name = 'addl.doadd';
 	input.value = 'Add';
@@ -1781,10 +1386,10 @@ function parseEpisodeData(xmldoc) {
       if (!episode) continue;
       if (loadExpand) { // Normal behaviour
         //epQueue.push(epNodes[k]);
-				var eprow = document.getElementById('eid_'+episode.id);
-				// find the expand thingie (quick way)
-				var a = eprow.getElementsByTagName('A')[0];
-				if (a) a.onclick = foldEp;
+		var eprow = document.getElementById('eid_'+episode.id);
+		// find the expand thingie (quick way)
+		var a = eprow.getElementsByTagName('A')[0];
+		if (a) a.onclick = foldEp;
         var eprowid = eprow.rowIndex + 1;
         var tbRow = document.getElementById('eid_'+episode.id).parentNode.rows[eprowid];
         tbRow.id = 'eid_'+eid+'_ftHolder';

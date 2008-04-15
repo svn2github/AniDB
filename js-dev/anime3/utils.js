@@ -1,8 +1,7 @@
-/*
- * @file Utilities
+/* Utilities
  * @author fahrenheit (alka.setzer@gmail.com)
-           some code derived from work by PetriW and Rar at anidb
- * @version 2.2 (07.07.2007)
+           some code derived from work done by PetriW and Rar at anidb
+ * version 2.2 (07.07.2007)
  */
 
 // TIME/DATE FUNCTIONS //
@@ -25,8 +24,7 @@ function padRight(text, padChar, count) {
   return (text + result);
 }
 
-/* *
- * Function that converts UTC TIME/UNIXTIME date format to a string
+/* Function that converts UTC TIME/UNIXTIME date format to a string
  * @param data The date to convert
  * @return A string with the date
  */
@@ -42,8 +40,7 @@ function convertTime(data) {
   }
 }
 
-/* *
- * Function that converts given date to javascript a Date object
+/* Function that converts given date to javascript a Date object
  * @param data The date to convert
  * @return A Date object
  */
@@ -68,8 +65,7 @@ function javascriptDate(data) {
     return datetime = new Date(data * 1000); // UNIX time format
 }
 
-/* *
- * This function returns a Date of UTC time date
+/* This function returns a Date of UTC time date
  * @param data The date
  * @return Date in the format of dd.mm.yyyy
  */
@@ -84,8 +80,7 @@ function cTimeDate(data) {
     return (data);
   } else return(data);
 }
-/* *
- * This function returns a Hour of UTC time date
+/* This function returns a Hour of UTC time date
  * @param data The date
  * @return Date in the format of hh:mm:ss
  */
@@ -98,8 +93,7 @@ function cTimeHour(data) {
 
 // DOM NODE FUNCTIONS //
 
-/* *
- * Returns the nodeValue of a given node
+/* Returns the nodeValue of a given node
  * @param node The node where to extract information
  * @return String containing node data
  */
@@ -109,11 +103,11 @@ function nodeData(node) {
 
 }
 
-// STUB //
+// STUBS //
 function doNothing() { return false; }
+function notImplemented() { alert('Not implemented yet'); }
 
-/* *
- * Debug function that shows the dom tree of a node
+/* Debug function that shows the dom tree of a node
  * @param node The node to show the tree
  * @return void (shows an alert box)
  */
@@ -142,8 +136,7 @@ function showDOMtree(node) {
   alert(out);
 }
 
-/* *
- * Function that searches a HTMLCollection Object for an element
+/* Function that searches a HTMLCollection Object for an element
  * with a specific class name
  * @param nodes The nodes
  * @param name The name of the class to find
@@ -159,8 +152,7 @@ function getElementsByClassName(nodes, name, useIndexOf) {
   return ret;
 }
 
-/* *
- * Function that searches a HTMLCollection Object for an element
+/* Function that searches a HTMLCollection Object for an element
  * with a specific name
  * @param nodes The nodes
  * @param sname The name of the class to find
@@ -176,8 +168,7 @@ function getElementsByName(nodes, sname, useIndexOf) {
   return ret;
 }
 
-/* *
- * Function that returns elements of given tag name for the given node only
+/* Function that returns elements of given tag name for the given node only
  * @param node The node
  * @param tag The nodeName of the node.childNodes elements to find
  * @return requested node(s)
@@ -190,18 +181,17 @@ function getNodeElementsByTagName(node, tag) {
   return ret;
 }
 
-/* *
- * Function that creates an header
+/* Function that creates an header
  * @param parentNode The parent node (or null if you want to return the object)
  * @param className Class name to give
  * @param text Text to go in the node
  * @param abbr Text to go in the abbreviation title (or null if you won't use it)
  */
 function createHeader(parentNode, className, text, abbr) {
-	var th = document.createElement('TH');
+	var th = document.createElement('th');
 	if (className != null) th.className = className;
 	if (abbr != null) {
-		var abbreviation = document.createElement('ABBR');
+		var abbreviation = document.createElement('abbr');
 		abbreviation.title = abbr;
 		if (text != null) abbreviation.appendChild(document.createTextNode(text));
 		th.appendChild(abbreviation);
@@ -210,23 +200,22 @@ function createHeader(parentNode, className, text, abbr) {
 	else return th;
 }
 
-/* *
- * This function creates a simple cell with an optional element
+/* This function creates a simple cell with an optional element
  * @param parentNode The parent node (or null if you want to return the object)
  * @param className Class name to give
  * @param someElement Some element to add to the cell, other elements have to be added manualy
  */
-function createCell(parentNode, className, someElement, anidbSort) {
-	var td = document.createElement('TD');
+function createCell(parentNode, className, someElement, anidbSort, colSpan) {
+	var td = document.createElement('td');
 	if (className != null) td.className = className;
 	if (someElement != null) td.appendChild(someElement);
 	if (anidbSort != null) td.setAttribute('anidb:sort',anidbSort);
+	if (colSpan != null && colSpan > 1) td.colSpan = colSpan;
 	if (parentNode != null) parentNode.appendChild(td);
 	else return td;
 }
 
-/* *
- * Creates icons
+/* Creates icons
  * @param parentNode ParenteNode of the newly created icon or null if want return
  * @param text Text
  * @param url HREF
@@ -235,25 +224,32 @@ function createCell(parentNode, className, someElement, anidbSort) {
  * @param cname Class name
  */
 function createIcon(parentNode, text, url, onclick, title, className) {
-  var obj;
-  if (url == '' || url == null) obj = document.createElement('SPAN');
-  else {
-    obj = document.createElement('A');
-    obj.href = url;
-  }
-  if (onclick != null || onclick != '') obj.onclick = onclick;
-  if (text != null) {
-	var label = document.createElement('SPAN');
-	label.appendChild(document.createTextNode(text));
-	obj.appendChild(label);
-  }
-  if (title != null || title != '') {
-    obj.title = title;
-    obj.alt = title;
-  }
-  if (className != null && className != '') obj.className = 'i_icon '+className;
-  if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
-  else return(obj);
+	var obj;
+	if (url == '' || url == null) obj = document.createElement('span');
+	else {
+		obj = document.createElement('a');
+		obj.href = url;
+	}
+	if (onclick != null || onclick != '') {
+		obj.onclick = onclick;
+		obj.style.cursor = 'pointer';
+	}
+	if (url == 'removeme') {
+		obj.style.cursor = 'pointer';
+		obj.removeAttribute('href');
+	}
+	if (text != null) {
+		var label = document.createElement('span');
+		label.appendChild(document.createTextNode(text));
+		obj.appendChild(label);
+	}
+	if (title != null || title != '') {
+		obj.title = title;
+		obj.alt = title;
+	}
+	if (className != null && className != '') obj.className = 'i_icon '+className;
+	if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
+	else return(obj);
 }
 
 function createLink(parentNode, text, url, rel, onclick, title, className) {
@@ -271,15 +267,14 @@ function createTextLink(parentNode, text, url, rel, onclick, title, className) {
   else return(obj);
 }
 
-/* *
- * Creates a SELECT option element
+/* Creates a SELECT option element
  * @param parentNode ParenteNode of the newly created option or null if want return
  * @param text Text for the option
  * @param value Value of the option
  * @param isSelected Should this option be selected
  */
 function createSelectOption(parentNode, text, value, isSelected, className, isDisabled) {
-  var obj = document.createElement('OPTION');
+  var obj = document.createElement('option');
   if (text != null) obj.appendChild(document.createTextNode(text));
   if (value != null) obj.value = value;
   if (isSelected != null) obj.selected = isSelected;
@@ -290,26 +285,27 @@ function createSelectOption(parentNode, text, value, isSelected, className, isDi
 }
 
 function createCheckbox(name,checked) {
-  var ck = document.createElement('INPUT');
+  var ck = document.createElement('input');
   ck.type = 'checkbox';
   ck.name = name;
   if (checked != null) ck.checked = checked;
   return ck;
 }
 
-function createTextInput(name,size,disabled,hidden,maxlength) {
-  var input = document.createElement('INPUT');
+function createTextInput(name,size,disabled,hidden,maxlength,value) {
+  var input = document.createElement('input');
   if (!hidden) input.type = 'text';
   else input.type = 'hidden';
   if (name != null) { input.name = name; input.id = name; }
   if (size != null) input.size = size;
   if (disabled != null) input.disabled = disabled;
-	if (maxlength != null) input.maxlength = maxlength;
+  if (maxlength != null) input.maxlength = maxlength;
+  if (value != null) input.value = value;
   return input;
 }
 
 function createBasicButton(name,value,type) {
-	var button = document.createElement('INPUT');
+	var button = document.createElement('input');
 	button.type = (type && type != '') ? type : 'button';
 	if (name && name != '') {
 		button.name = name;
@@ -327,7 +323,7 @@ function createButton(name,id,disabled,value,type) {
 }
 
 function createTextBox(name,id,cols,rows,onchange) {
-	var textbox = document.createElement('TEXTAREA');
+	var textbox = document.createElement('textarea');
 	if (name) textbox.name = name;
 	if (id) textbox.id = id;
 	if (cols) textbox.cols = cols;
@@ -337,7 +333,7 @@ function createTextBox(name,id,cols,rows,onchange) {
 }
 
 function createBasicSelect(name,id,onchange) {
-	var select = document.createElement('SELECT');
+	var select = document.createElement('select');
 	select.size = "1";
 	if (name && name != '') select.name = name;
 	if (id && id != '') select.id = id;
@@ -348,7 +344,7 @@ function createBasicSelect(name,id,onchange) {
 function createLanguageSelect(parentNode,name,id,onchange,selected) {
 	var select = createBasicSelect(name,id,onchange);
 	for (var lang in languageMap) {
-		var option = document.createElement('OPTION');
+		var option = document.createElement('option');
 		var op = languageMap[lang];
 		option.text = op['name'];
 		option.value = lang;
@@ -387,7 +383,7 @@ function createMultiSelectArray(parentNode,name,id,onchange,selected,optionArray
 }
 
 function createCheckBox(parentNode,name,id,onchange,checked) {
-	var ck = document.createElement('INPUT');
+	var ck = document.createElement('input');
 	ck.type = 'checkbox';
 	if (name && name != '') ck.name = name;
 	if (id && id != '') ck.id = id;
@@ -402,8 +398,8 @@ function makeBar(parentNode,start,end,total,map) {
   if ( total > 0 && 200 / total >= 1) mult = Math.floor(200 / total);
 
   var width = 1 + end - start;
-  var img = document.createElement('IMG');
-  img.src = 'http://static.anidb.net/pics/anidb_bar_h_'+map['img']+'.gif';
+  var img = document.createElement('img');
+  img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
   img.width = ( width * mult );
   img.height = 10;
   img.title = img.alt = '';
@@ -414,15 +410,15 @@ function makeBar(parentNode,start,end,total,map) {
 function makeCompletionBar(parentNode, range, maps) {
   var len = range.length;
   if ( len > 300 ) len = 300;
-  var span = document.createElement('SPAN');
+  var span = document.createElement('span');
   span.className = 'range eps';
   if (maps[1]['use'] || maps[2]['use']) {
     span.setAttribute('anidb:data',maps);
     span.onmouseout = hideTooltip;
     span.onmouseover = function onmouseover(event) {
-      var node = document.createElement('DIV');
+      var node = document.createElement('div');
       if (maps[1]['use']) node.appendChild(document.createTextNode(maps[1]['desc']));
-      if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createElement('BR')); 
+      if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createElement('br')); 
       if (maps[2]['use']) node.appendChild(document.createTextNode(maps[2]['desc']));
       setTooltip(node,true,'auto');
     }
@@ -436,7 +432,7 @@ function makeCompletionBar(parentNode, range, maps) {
     makeBar(span, i+1, k, len, maps[v] );
     i = k;
   }
-  if (parentNode != null || parentNode != '') parentNode.appendChild(span);
+  if (parentNode != null && parentNode != '') parentNode.appendChild(span);
   return span;
 }
 
@@ -454,15 +450,14 @@ function expandRange(range,limit,map,array) {
 
 // GENERAL FUNCTIONS //
 
-/* *
- * Function that repaints the stripes of table
+/* Function that repaints the stripes of a table
  * @param table Table (or tbody) to paint stripes 
  * @param startAt optional index where to start painting stripes
  */
 function repaintStripes(table, startAt) {
 	if (!table || (table && (table.nodeName != 'TABLE' && table.nodeName != 'TBODY'))) return;
 	if (!startAt) startAt = 0;
-	var tbody = (table.nodeName == 'TABLE') ? table.getElementsByTagName('TBODY')[0] : table;
+	var tbody = (table.nodeName == 'TABLE') ? table.getElementsByTagName('tbody')[0] : table;
 	if (!tbody) return;
 	var rows = tbody.rows;
 	var g_odd = "";
@@ -475,8 +470,7 @@ function repaintStripes(table, startAt) {
 	}
 }
 
-/* *
- * Function that alerts the user for errors
+/* Function that alerts the user for errors
  * @param func Name of the function
  * @param process 
  * @param pNode Parent node
@@ -491,8 +485,7 @@ function showAlert(func, process, pNode, cNode) {
         '\nPlease warn your favorite moderator with this text message');
 }
 
-/* *
- * Function that alerts the user for errors
+/* Function that alerts the user for errors
  * @param funcName Name of the function
  * @param whereIs some message to indicate where the error is
  * @return void
@@ -505,9 +498,8 @@ function errorAlert(funcName,whereIs) {
 	return;
 }
 
-/* *
- * Function that parses the URI
- * return Object holding URI Data
+/* Function that parses the URI
+ * @return Object holding URI Data
  */
 function parseURI() {
   var uri = "" + window.location;
@@ -527,8 +519,7 @@ function parseURI() {
   return obj;
 }
 
-/* *
- * Function that updates the URI
+/* Function that updates the URI
  * @param obj URI object
  * @return void (set's the URI)
  */
@@ -546,20 +537,23 @@ function updateURI(obj) {
   return (currentURI);
 }
 
-/* *
- * Function that clones an object
+/* Function that clones an object
  * @param what The object to clone
  * @return usage: var x = new cloneObject(y);
  */
 function cloneObject(what) {
-  var i;
-  for (i in what)
+  for (var i in what)
     this[i] = what[i];
 }
 
-/* *
- * Adds array push prototype to arrays if not defined
- */
+function cloneArray(what) {
+	var array = new Array();
+	for (var i = 0; i < what.length; i++)
+		array[i] = what[i];
+	return array;
+}
+
+/* Adds array push prototype to arrays if not defined */
 function Array_push() {
   var A_p = 0;
   for (A_p = 0; A_p < arguments.length; A_p++) {
@@ -573,9 +567,7 @@ if (typeof Array.prototype.push == "undefined") {
 }
 
 
-/* *
- * Adds array shift prototype to arrays if not defined
- */
+/* Adds array shift prototype to arrays if not defined */
 function Array_shift() {
   var A_s = 0;
   var response = this[0];
@@ -590,9 +582,7 @@ if (typeof Array.prototype.shift == "undefined") {
   Array.prototype.shift = Array_shift;
 }
 
-/* *
- * Adds array indexOf prototype to arrays if not defined
- */
+/* Adds array indexOf prototype to arrays if not defined */
 function Array_indexOf(what) {
 	var index = -1;
 	for (var i = 0; i < this.length; i++) {
@@ -605,8 +595,7 @@ if (typeof Array.prototype.indexOf == "undefined") {
   Array.prototype.indexOf = Array_indexOf;
 }
 
-/* *
- * This function is used to update the status of the Request
+/* This function is used to update the status of the Request
  * @param text Text to show
  * @return void
  */
@@ -626,12 +615,10 @@ function updateStatus(text,add,targetName) {
   } catch (e) { }
 }
 
-/* *
- * Converts episode numbers from exp notation to interface notation
+/* Converts episode numbers from exp notation to interface notation
  * @param epno Episode Number to convert
  * @return converted episode number
  */
-
 function epNoToString(epno) {
 
   var ret = Number(epno);
@@ -645,8 +632,7 @@ function epNoToString(epno) {
 
 }
 
-/* *
- * This function formats the file size
+/* This function formats the file size
  * @param size Size in bytes
  * @param force Should force LAY_FORMATFILESIZE?
  * @return Converted file size
@@ -677,8 +663,7 @@ function formatFileSize(size,force) {
   }
 }
 
-/* *
- * This function formats a length to a given format
+/* This function formats a length to a given format
  * @param length Length in seconds
  * @param format The output format ['long'|'rounded']
  * @return Formated length
@@ -716,8 +701,7 @@ function buildQualityIcon(node,quality) {
 
 // EPISODE Functions //
 
-/* *
- * Finds and returns every mylist entry associated with a given eid
+/* Finds and returns every mylist entry associated with a given eid
  * @param eid Episode id of the episode to find entries
  * @return Array with found entries
  */
@@ -725,6 +709,7 @@ function findMylistEpEntries(eid) {
 	var ret = new Array();
 	var episode = episodes[eid];
 	for (var sd in mylist) {
+		if (!mylist[sd]) continue;
 		if (mylist[sd].episodeId != eid) continue;
 		ret.push(mylist[sd]);
 	}
@@ -755,12 +740,11 @@ function c_string_r(b, a) {
   return b.split('|')[0] - a.split('|')[0];
 }
 function c_number(a, b) {
-  val =  a.split('|')[1] - b.split('|')[1];
-  return val || (a.split('|')[0] - b.split('|')[0]);
+  val =  Number(a.split('|')[1]) - Number(b.split('|')[1]);
+  return val || Number((a.split('|')[0]) - Number(b.split('|')[0]));
 }
 function c_number_r(b, a) {
-  val =  a.split('|')[1] - b.split('|')[1];
-  return val || (a.split('|')[0] - b.split('|')[0]);
+  return c_number(a, b);
 }
 function dig_text(node) {
 	while (node && !node.nodeValue) { node = node.firstChild; }
@@ -827,16 +811,15 @@ function get_date(node) {
 	} else return findPrecision(string); // Single date mode
 }
 
-/* *
- * This function attaches the sorting function to TH's
+/* This function attaches the sorting function to th's
  * @param node If specified tells the root node [node]
- * @param ident If specified tells to make a special case for the TH identified by ident [identifier]
- * @param sortico If specified the TH referenced by ident will get this sort icon or the i_down1 icon [up|down] 
+ * @param ident If specified tells to make a special case for the th identified by ident [identifier]
+ * @param sortico If specified the th referenced by ident will get this sort icon or the i_down1 icon [up|down] 
  */ 
 function init_sorting(node,ident,sortico) {
-  if (!node) node = document;
-  var headinglist;
-	if (document.getElementsByTagName) headinglist = node.getElementsByTagName('TH');
+	if (!node) node = document;
+	var headinglist;
+	if (document.getElementsByTagName) headinglist = node.getElementsByTagName('th');
 	else return;
 	// The Sorting functions, see FunctionMap for the actual function names
 	var sortFuncs = new Array('c_latin','c_number','c_date','c_set','c_setlatin');
@@ -845,14 +828,14 @@ function init_sorting(node,ident,sortico) {
 		// And the following adds the icons (Optional, it's just a visual input)
 		if (ident && ident.length) {
 			var identifier = headinglist[i].className.substring(0,headinglist[i].className.indexOf(" ")) || headinglist[i].className;
-		  if (identifier.indexOf(ident) >= 0) {
+			if (identifier.indexOf(ident) >= 0) {
 				if (sortico && sortico.length > 0) {
 					if (sortico == 'up')		headinglist[i].className += ' s_forward';
 					if (sortico == 'down')	headinglist[i].className += ' s_reverse';
 				}
 			}
 		}
-		  }
+	}
 	FunctionMap = {'c_latin':{'sortf':c_string, 'sortr':c_string_r, 'getval':dig_text_lower},
 		'c_number':{'sortf':c_number, 'sortr':c_number_r, 'getval':dig_text},
 		'c_date':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_date},
@@ -861,15 +844,14 @@ function init_sorting(node,ident,sortico) {
 		'c_none':{'sortf':c_undefined, 'sortr':c_undefined_r, 'getval':get_blank} }  
 }
 
-/* *
- * Finds the active sort col and return it's identifier
+/* Finds the active sort col and return it's identifier
  * @param node If specified tells the root node [node]
  */
 function findSortCol(node) {
   if (!node) node = document;
   var headinglist;
 	if (document.getElementsByTagName)
-		headinglist = node.getElementsByTagName('TH');
+		headinglist = node.getElementsByTagName('th');
 	else 	
 	  return;
 	for (var i = 0; i < headinglist.length; i++) {
@@ -909,15 +891,15 @@ function sortcol(node) {
 	var sortlist = new Array();
 	var sortmap = new Object();
 	var pContainer = container.tBodies[0];
-  var rowlist = pContainer.getElementsByTagName('TR');
+  var rowlist = pContainer.getElementsByTagName('tr');
 	var funcmap = FunctionMap[sortfunc] || FunctionMap['c_none'];
 	// We now build a construct that will hold the sorting data
   var cellIdx = 0;
   var i = sortIndex;
-  var cloneTB = document.createElement('TBODY'); // a clone table body, cloneNode doesn't work as expected
+  var cloneTB = document.createElement('tbody'); // a clone table body, cloneNode doesn't work as expected
   while (rowlist.length > sortIndex) {
     var cRow = rowlist[sortIndex];
-    var cellList = cRow.getElementsByTagName('TD');
+    var cellList = cRow.getElementsByTagName('td');
     if (cellList[cellIdx].className.indexOf(identifier) < 0) { // do this the hard way
       for (var k = 0; k < cellList.length; k++) {
         var cell = cellList[k];
@@ -962,7 +944,8 @@ function sortcol(node) {
 var hashObj = new Object();
 hashObj.usePatterns = true;
 hashObj.convertSpaces = true;
-hashObj.spacesChar = '_';
+hashObj.defaultSpacesChar = '_';
+hashObj.spacesChar = hashObj.defaultSpacesChar;
 hashObj.defaultPattern = "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
 hashObj.pattern = hashObj.defaultPattern;
 hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
@@ -974,8 +957,7 @@ var validIdentifiers = ["%ant","%anat","%ept","%epat","%enr","%pn","%fpn","%raw"
                         "%grp","%grn","%qual","%src","%res","%vcodec","%eps","%atype",
                         "%fid","%aid","%eid","%gid","%dlen","%ext","%ed2k","%uncen",
                         "%acodec","%achans","%hlen","%flen"]
-/* *
- * Function that tests if a given identifier is valid
+/* Function that tests if a given identifier is valid
  * @param identifier The identifier to test
  * @return true|false
  */
@@ -985,8 +967,7 @@ function checkIdentifiers(identifier) {
   }
   return false;
 }
-/* *
- * Function that creates the link for a given hash
+/* Function that creates the link for a given hash
  * @return void (sets the hash href) 
  */
 function applyFormat(identifier, file, episode, anime, group) {
@@ -1084,9 +1065,10 @@ function applyFormat(identifier, file, episode, anime, group) {
 }
 
 function createHashLink() {
-  var ahref = this.getElementsByTagName('A')[0];
+  var ahref = this.getElementsByTagName('a')[0];
   if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
-  var fid = Number(this.parentNode.id.split('fid_')[1]);
+  var parentid = this.parentNode.id;
+  var fid = Number((parentid.indexOf('fid_') >= 0) ? this.parentNode.id.split('fid_')[1] : this.parentNode.id.split('f')[1]);
   var file = files[fid];
   if (!file) return;
   var episode = episodes[file.episodeId];
@@ -1135,8 +1117,8 @@ function createHashLink() {
 
 var offsetfromcursorX=12;       //Customize x offset of tooltip
 var offsetfromcursorY=10;       //Customize y offset of tooltip
-var offsetdivfrompointerX=0;   //Customize x offset of tooltip DIV relative to pointer image
-var offsetdivfrompointerY=0;   //Customize y offset of tooltip DIV relative to pointer image. Tip: Set it to (height_of_pointer_image-1).
+var offsetdivfrompointerX=0;   //Customize x offset of tooltip div relative to pointer image
+var offsetdivfrompointerY=0;   //Customize y offset of tooltip div relative to pointer image. Tip: Set it to (height_of_pointer_image-1).
 
 var divHTMLTOOLTIP; //tooltip
 
@@ -1150,9 +1132,7 @@ function ietruebody(){
 	return (document.compatMode && document.compatMode!="BackCompat") ? document.documentElement : document.body;
 }
 
-/* *
- * Sets the tooltip
- */
+/* Sets the tooltip */
 function setTooltip(thetext, dom, thewidth, thecolor){
   while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
   if (!thetext) return;
@@ -1207,7 +1187,7 @@ function hideTooltip(){
 }
 
 function initTooltips() {
-  divHTMLTOOLTIP = document.createElement('DIV');
+  divHTMLTOOLTIP = document.createElement('div');
   divHTMLTOOLTIP.id = "obj-tooltip"
   document.body.appendChild(divHTMLTOOLTIP);
   document.onmousemove = positionTooltip;
