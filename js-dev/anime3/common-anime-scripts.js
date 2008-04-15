@@ -126,35 +126,32 @@ function createEpisodeIcons(episode) {
 	var mylistEpEntries = findMylistEpEntries(episode.id);
 	if (mylistEpEntries.length) {
 		// Loop to see if an entry should get a status, and file state
-		var stateFiles = new Array();
-		var statusFiles = new Array();
+		var stateFiles = new Object();
+		var statusFiles = new Object();
 		icons['state'] = new Array();
 		icons['fstate'] = new Array();
 		for (var me = 0; me < mylistEpEntries.length; me++) {
 			var mylistEntry = mylistEpEntries[me];
-			if (statusFiles[mylistEntry.status] == null) statusFiles[mylistEntry.status] = 1;
+			if (isNaN(statusFiles.[mylistEntry.status])) statusFiles[mylistEntry.status] = 1;
 			else statusFiles[mylistEntry.status]++;
-			if (stateFiles[mylistEntry.fstate] == null) stateFiles[mylistEntry.fstate] = 1;
+			if (isNaN(stateFiles[mylistEntry.fstate])) stateFiles[mylistEntry.fstate] = 1;
 			else stateFiles[mylistEntry.fstate]++;
 		}
 		for (var st in statusFiles) {
-			if (st == 'indexOf') continue;
 			var status = statusFiles[st];
-			if (status == null || !status) continue;
+			if (isNaN(status)) continue;
+			//if (status == null || !status) continue;
 			var stClass = 'i_icon i_state_'+mapMEStatusName(st);
-			var txt = status + ' file';
-			if (status > 1) txt += 's';
-			txt += ' with status: '+st;
+			var txt = status + ' file' + (status > 1 ? 's' : '') + ' with status: '+st;
 			icons['state'].push(createLink(null, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass));
 		}
 		for (var st in stateFiles) {
-			if (st == 'indexOf' || st == 'unknown') continue;
+			//if (st == 'indexOf' || st == 'unknown') continue;
 			var state = stateFiles[st];
-			if (state == null || !state) continue;
+			if (isNaN(state)) continue;
+			//if (state == null || !state) continue;
 			var stClass = 'i_icon '+mapFState(st);
-			var txt = state + ' file';
-			if (state > 1) txt += 's';
-			txt += ' with state: '+st;
+			var txt = state + ' file' + (state > 1 ? 's' : '') + ' with state: '+st;
 			icons['fstate'].push(createLink(null, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass));
 		}
 		if (episode.seenDate)

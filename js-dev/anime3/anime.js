@@ -54,6 +54,7 @@ var loadExpand = false;
 var internalExpand = false;
 var expandedGroups = 0;
 var showNoGroup = true;
+var expandNoGroup = false;
 var expandAllG = false;
 var base_url = 'http://static.anidb.net/';
 var group_vis = {'complete':false,'finished':false,'ongoing':false,'stalled':false,'dropped':false,'specials':false,'all':true};
@@ -294,7 +295,7 @@ function forceGroupVisibilty(vis) {
 		}
 		group.visible = vis;
 	}
-	if (!vis && showNoGroup) {
+	if (!vis && expandNoGroup) {
 		groups[0].visible = true;
 		groupFilter.push(0);
 	}
@@ -342,7 +343,7 @@ function expandFilesByGroup() {
 	var row;
 	var gid = this.parentNode.parentNode.id;
 	gid = gid.substring(gid.indexOf('_')+1,gid.length);
-	if (!gid) { gid = 0; showNoGroup = true; }
+	if (!gid) { gid = 0; showNoGroup = true; expandNoGroup = true; }
 	var group = groups[gid];
 	group.visible = true;
 	var getXML = false;
@@ -399,7 +400,7 @@ function foldFilesByGroup() {
 	var row;
 	var gid = this.parentNode.parentNode.id;
 	gid = gid.substring(gid.indexOf('_')+1,gid.length);
-	if (!gid) { gid = 0; showNoGroup = false }
+	if (!gid) { gid = 0; showNoGroup = false; expandNoGroup = false; }
 	var group = groups[gid];
 	group.visible = false;
 	var eid = null;
@@ -723,48 +724,11 @@ function updateEpisodeTable() {
 						// Loop to see if an entry should get a status, and file state
 						var span = cell.getElementsByTagName('span')[0];
 						if (span) {
-							var as = span.getElementsByTagName('a');
-							icon = getElementsByClassName(as, 'mixed', true)[0];
-							if (icon) icons.removeChild(icon); // remove the mixed state icon
-							var stateFiles = new Array();
-							var statusFiles = new Array();
-							for (var me = 0; me < mylistEpEntries.length; me++) {
-								var mylistEntry = mylistEpEntries[me];
-								if (statusFiles[mylistEntry.status] == null) statusFiles[mylistEntry.status] = 1;
-								else statusFiles[mylistEntry.status]++;
-								if (stateFiles[mylistEntry.fstate] == null) stateFiles[mylistEntry.fstate] = 1;
-								else stateFiles[mylistEntry.fstate]++;
-							}
-							for (var st in statusFiles) {
-								if (st == 'indexOf') continue;
-								var status = statusFiles[st];
-								if (status == null || !status) continue;
-								var stClass = 'i_state_'+mapMEStatusName(st);
-								var txt = status + ' file';
-								if (status > 1) txt += 's';
-								txt += ' with status: '+st;
-								var icon = getElementsByClassName(as, stClass, true)[0];
-								if (icon) // we already have this icon, so we just update it's title
-									icon.title = txt;
-								else // we don't have the icon, we add one
-									createLink(span, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass);
-							}
-							for (var st in stateFiles) {
-								if (st == 'indexOf' || st == 'unknown') continue;
-								var state = stateFiles[st];
-								if (state == null || !state) continue;
-								var stClass = mapFState(st);
-								var txt = state + ' file';
-								if (state > 1) txt += 's';
-								txt += ' with state: '+st;
-								var icon = getElementsByClassName(as, stClass, true)[0];
-								if (icon) // we already have this icon, so we just update it's title
-									icon.title = txt;
-								else // we don't have the icon, we add one
-									createLink(span, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass);
-							}
-							icon = getElementsByClassName(as, 'seen', true)[0];
-							if (icon) icon.title = 'seen on: ' + cTimeDate(episode.seenDate);
+							while (span.childNodes.length) span.removeChild(span.firstChild);
+							var icons = createEpisodeIcons(episode);
+							if (icons['seen']) span.appendChild(icons['seen']);
+							if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
+							if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
 						}
 					}
 				}
