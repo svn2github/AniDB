@@ -109,7 +109,7 @@ function postData(url) {
 	var req = xhttpRequest();
 	var data = url.substr(url.indexOf('?')+1,url.length);
 	if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showSuccessBox, data);
-	else xhttpRequestPost(req, 'animedb.pl', showSucessBox, data);
+	else xhttpRequestPost(req, 'animedb.pl', showSuccessBox, data);
 }
 
 /* Function that parses xml response
