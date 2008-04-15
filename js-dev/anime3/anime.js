@@ -251,7 +251,7 @@ function forceFileTableRedraw(episode) {
 	if (!episode) {
 		for (var e in episodes) {
 			var episode = episodes[e];
-			if (!episode) continue;
+			if (!episode || !episode.files) continue;
 			var fileTable = createFileTable(episode);
 			var row = document.getElementById('eid_'+episode.id+'_ftHolder');
 			if (!row) continue;
@@ -1151,6 +1151,7 @@ function parseEpisodeData(xmldoc) {
 		// find file tables without files
 		for (var e in episodes) {
 			var episode = episodes[e];
+			if (episode.id == undefined) episodes[e] = null;
 			if (!episode) continue;
 			forceFileTableRedraw(episode);
 		}
