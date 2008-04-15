@@ -747,7 +747,7 @@ function updateEpisodeTable() {
 								if (icon) // we already have this icon, so we just update it's title
 									icon.title = txt;
 								else // we don't have the icon, we add one
-									createLink(icons, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass);
+									createLink(span, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass);
 							}
 							for (var st in stateFiles) {
 								if (st == 'indexOf' || st == 'unknown') continue;
@@ -761,7 +761,7 @@ function updateEpisodeTable() {
 								if (icon) // we already have this icon, so we just update it's title
 									icon.title = txt;
 								else // we don't have the icon, we add one
-									createLink(icons, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass);
+									createLink(span, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass);
 							}
 							icon = getElementsByClassName(as, 'seen', true)[0];
 							if (icon) icon.title = 'seen on: ' + cTimeDate(episode.seenDate);
