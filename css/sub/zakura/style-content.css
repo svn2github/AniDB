@@ -431,3 +431,30 @@ font-weight: bold;
 div.animelist_all table.anime_list td.rating.low {
 color: #999;
 }
+
+/* Group list */
+
+div.anime_all div.groups .state.ongoing, div.anime_all div.groups .state.ongoing a		{color: #2618b1;}
+div.anime_all div.groups .state.stalled, div.anime_all div.groups .state.stalled a		{color: #966319;}
+div.anime_all div.groups .state.complete, div.anime_all div.groups .state.complete a	{color: #179023;}
+div.anime_all div.groups .complete, div.anime_all div.groups .complete a				{font-weight: bold;}
+div.anime_all div.groups .state.dropped, div.anime_all div.groups .state.dropped a		{color: #8d92a0;}
+
+/* File Tables */
+#layout-main table.filelist { background: #d3d7f3; }
+#layout-main table.filelist td { background-color: #f7f7f7; }
+#layout-main table.filelist tr.g_odd td { background-color: #f2f2f2; }
+#layout-main table.filelist td.id {  padding-left: 16px; }
+#layout-main table.filelist tr.good.g_odd td { background-color: #e9ffd8; }
+#layout-main table.filelist tr.good td { background-color: #f0ffe3; }
+#layout-main table.filelist tr.good td.id { 
+background-image: url(images/layout/checkmark.png);
+background-repeat: no-repeat;
+background-position: 2px center;
+}
+#layout-main table.filelist tr.deprecated td { background-color: #ddd; }
+#layout-main table.filelist tr.deprecated td.id {
+background-image: url(images/layout/deprecated.png);
+background-repeat: no-repeat;
+background-position: 2px center;
+}
