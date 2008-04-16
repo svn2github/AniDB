@@ -313,12 +313,14 @@ function toggleFilesFromGroup() {
 		if (file.groupId != gid) continue;
 		totalFiles++;
 		if (checked) {
-			if (group_check_type == "0" && !file.visible) continue;
-			else if (group_check_type == "1" && !file.visible && (file.fileType != 'mkv' && file.fileType != 'ogm')) continue;
-			else if (group_check_type == "2" && !file.visible && file.fileType != 'avi') continue;
-			else if (group_check_type == "3" && !file.visible && (!file.videoTracks.length || file.videoTracks[0].resH < 720)) continue;
-			else if (group_check_type == "4" && !file.visible && (!file.videoTracks.length || file.videoTracks[0].resH >= 720)) continue;
-			else continue;
+			if (!file.visible) continue;
+			switch(Number(group_check_type)) {
+				case 1: if (file.fileType != 'mkv' && file.fileType != 'ogm') continue; break;
+				case 2: if (file.fileType != 'avi') continue; break;
+				case 3: if ((!file.videoTracks.length || file.videoTracks[0].resH < 720)) continue; break;
+				case 4: if ((!file.videoTracks.length || file.videoTracks[0].resH >= 720)) continue; break;
+				default: continue;
+			}
 		}
 		var row = document.getElementById('e'+file.episodeId+'f'+file.id);
 		if (!row) continue;
