@@ -149,6 +149,14 @@ function updateEpTableRows() {
 				test.setAttribute('anidb:sort',cnt);
 			}
 		}
+		test = row.cells[12];	// Username
+		if (test) {
+			var a =  getElementsByClassName(test.getElementsByTagName('a'), 'name', false)[0];
+			if (a) {
+				var username = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',username);
+			}
+		}
 	}
 }
 
@@ -157,6 +165,7 @@ function updateEpTable() {
 	var table = ep_table;
 	if (!table) return;
 	var headingList = table.getElementsByTagName('th');
+	var updateRows = false;
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';			// X
 	headingList[1].className += ' c_date';			// Date
@@ -169,7 +178,20 @@ function updateEpTable() {
 	headingList[8].className += ' c_latin';		// Source
 	headingList[9].className += ' c_set';			// Resolution
 	headingList[10].className += ' c_set';			// User count
-	init_sorting(table.tBodies[0].rows[0],'epno','down');
+	if (headingList[12]) {
+		headingList[12].className += ' c_setlatin';// Username
+		updateRows = true;
+	}
+	if (updateRows) {
+		var tbody = table.tBodies[0];
+		var thead = document.createElement('thead');
+		thead.appendChild(tbody.rows[0]);
+		table.insertBefore(thead,tbody);
+		var rows = tbody.getElementsByTagName('tr');
+		for (var i = 0; i < rows.length; i++)
+			rows[i].cells[12].className = 'added_by '+ rows[i].cells[12].className;
+	}
+	init_sorting(table,'epno','down');
 }
 
 function prepPage() {
