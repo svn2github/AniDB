@@ -1,8 +1,8 @@
-/* *
- * @file episode page support scripts
+/* file episode page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
  *         
- * @version 1.0 (19.01.2008)
+ * version 1.0 (19.01.2008) - Initial release
+ * version 2.0 (17.04.2008) - Updated version, added show all ajax function
  */
  
 // GLOBALS
@@ -10,8 +10,7 @@ var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;
 var epTable = null;
 
-/* *
- * Converts qualitys to a rate system
+/* Converts qualitys to a rate system
  * @param qual Quality
  * @return Quality className
  */
@@ -29,20 +28,18 @@ function mapQuality(qualClassName) {
   return (1);
 }
 
-/* *
- * Updates the release list rows to allow more sorting options
- */
+/* Updates the release list rows to allow more sorting options */
 function updateEpisodeListRows() {
 	var table = epTable;
-	if (!epTable) table = getElementsByClassName(document.getElementsByTagName('TABLE'), 'filelist', true)[0];
+	if (!epTable) table = getElementsByClassName(document.getElementsByTagName('table'), 'filelist', true)[0];
 	if (!table) return;
-	var tbody = table.getElementsByTagName('TBODY')[0];
+	var tbody = table.getElementsByTagName('tbody')[0];
 	var extraCol = (uriObj['showcrc'] && uriObj['showcrc'] == 1) ? 1 : 0;
 	for (var i = 0; i < tbody.rows.length; i++) { // update each row
 		var row = tbody.rows[i];
 		var test = row.cells[0];			// fid cell
 		if (test) {
-			var a = test.getElementsByTagName('A')[0];
+			var a = test.getElementsByTagName('a')[0];
 			if (a) {
 				var fid = a.href.substr(a.href.indexOf('fid=')+4,a.href.length);
 				test.setAttribute('anidb:sort',fid);
@@ -50,9 +47,10 @@ function updateEpisodeListRows() {
 		}
 		test = row.cells[1];		// Title Cell
 		if (test) {
-			var label = test.getElementsByTagName('LABEL')[0];
+			test.className = test.className.replace('name','title');
+			var label = test.getElementsByTagName('label')[0];
 			if (label && label.childNodes.length) {
-				var a = label.getElementsByTagName('A')[0];
+				var a = label.getElementsByTagName('a')[0];
 				if (a) {
 					var title = a.firstChild.nodeValue;
 					test.setAttribute('anidb:sort',title.toLowerCase());
@@ -69,7 +67,7 @@ function updateEpisodeListRows() {
 		test = row.cells[4+extraCol];		// codecs Cell
 		if (test) {
 			var codecSort = 'unk'; // default in case something borks
-			var as = test.getElementsByTagName('A');
+			var as = test.getElementsByTagName('a');
 			for (var k = 0; k < as.length; k++) {
 				var a = as[k];
 				if (a.className.indexOf('i_video') < 0) continue;
@@ -87,7 +85,7 @@ function updateEpisodeListRows() {
 		}
 		test = row.cells[7+extraCol];		// quality Cell
 		if (test) {
-			var span = test.getElementsByTagName('SPAN')[0];
+			var span = test.getElementsByTagName('span')[0];
 			if (span) {
 				var className = span.className.substr(span.className.indexOf('i_rate_')+7,span.className.length);
 				test.setAttribute('anidb:sort',mapQuality(className));
@@ -95,7 +93,7 @@ function updateEpisodeListRows() {
 		}
 		test = row.cells[9+extraCol];		// users Cell
 		if (test) {
-			var a = test.getElementsByTagName('A')[0];
+			var a = test.getElementsByTagName('a')[0];
 			if (a) {
 				var cnt = a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',cnt);
@@ -104,23 +102,23 @@ function updateEpisodeListRows() {
 	}
 }
 
-/* *
- * Updates the release list table with sorting
- */
+/* Updates the release list table with sorting */
 function updateEpisodeList() {
-	var epTable = getElementsByClassName(document.getElementsByTagName('TABLE'), 'filelist', true)[0];
+	var epTable = getElementsByClassName(document.getElementsByTagName('table'), 'filelist', true)[0];
 	if (!epTable) return;
-	var tbody = epTable.getElementsByTagName('TBODY')[0];
-	var thead = document.createElement('THEAD');
+	var tbody = epTable.getElementsByTagName('tbody')[0];
+	var thead = document.createElement('thead');
 	thead.appendChild(tbody.rows[0]);
 	epTable.insertBefore(thead,tbody);
-	var tfoot = document.createElement('TFOOT');
-	var generic = getElementsByClassName(tbody.getElementsByTagName('TR'), 'generic', true)[0];
+	var tfoot = document.createElement('tfoot');
+	var generic = getElementsByClassName(tbody.getElementsByTagName('tr'), 'generic', true)[0];
 	if (generic) tfoot.appendChild(generic);
-	var showall = getElementsByClassName(tbody.getElementsByTagName('TR'), 'show_all', true)[0];
+	var showall = getElementsByClassName(tbody.getElementsByTagName('tr'), 'show_all', true)[0];
 	if (showall) tfoot.appendChild(showall);
 	epTable.appendChild(tfoot);
-	headingList = thead.getElementsByTagName('TH');
+	headingList = thead.getElementsByTagName('th');
+	// fix the default sortable mess
+	for (var i = 0; i < headingList.length; i++) headingList[i].className = headingList[i].className.replace('sortable','');
 	// I know the headings i need so.. i set the corresponding functions and add the names
 	var i = 0;
 	headingList[0].className += 'id c_set';				// File

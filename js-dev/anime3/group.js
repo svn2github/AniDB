@@ -1,8 +1,7 @@
-/* *
- * @file group page support scripts
+/* file group page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- *         
- * @version 1.0 (22.11.2007)
+ * version 1.0 (22.11.2007) - Initial Release
+ * version 1.1 (17.04.2008) - Re-added and fixed stuff
  */
  
 // GLOBALS
@@ -12,8 +11,7 @@ var gTable = null;
 var released_div = null;
 var ep_table = null;
 
-/* *
- * Converts qualitys to a rate system
+/* Converts qualitys to a rate system
  * @param qual Quality
  * @return Quality className
  */
@@ -31,15 +29,13 @@ function mapQuality(qualClassName) {
   return (1);
 }
 
-/* *
- * Updates the release list rows to allow more sorting options
- */
+/* Updates the release list rows to allow more sorting options */
 function updateReleaseListRows() {
 	var table = gTable;
 	if (!table) {
 		var div = released_div;
 		if (!div) return;
-		var table = div.getElementsByTagName('TABLE')[0];
+		var table = div.getElementsByTagName('table')[0];
 	}
 	if (!table) return;
 	var tbody = table.tBodies[0];
@@ -47,9 +43,10 @@ function updateReleaseListRows() {
 		var row = tbody.rows[i];
 		var test = row.cells[2];		// Title Cell
 		if (test) {
-			var label = test.getElementsByTagName('LABEL')[0];
+			test.className = test.className.replace('name','title');
+			var label = test.getElementsByTagName('label')[0];
 			if (label && label.childNodes.length) {
-				var a = label.getElementsByTagName('A')[0];
+				var a = label.getElementsByTagName('a')[0];
 				if (a) {
 					var title = a.firstChild.nodeValue;
 					test.setAttribute('anidb:sort',title.toLowerCase());
@@ -66,13 +63,13 @@ function updateReleaseListRows() {
 		}
 		test = row.cells[7];		// State Cell
 		if (test) {
-			a = test.getElementsByTagName('A')[0];
+			a = test.getElementsByTagName('a')[0];
 			if (a) {
 				var state = a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',state);
 			}
 		}
-		test = row.cells[9];	// Rating Cell
+		test = row.cells[8];	// Rating Cell
 		if (test) {
 			var rating = test.firstChild.nodeValue;
 			test.setAttribute('anidb:sort',((rating == 'N/A ') ? "0" : rating));
@@ -80,15 +77,13 @@ function updateReleaseListRows() {
 	}
 }
 
-/* *
- * Updates the release list table with sorting
- */
+/* Updates the release list table with sorting */
 function updateReleaseList() {
 	var div = released_div;
 	if (!div) return;
-	gTable = div.getElementsByTagName('TABLE')[0];
+	gTable = div.getElementsByTagName('table')[0];
 	if (!gTable) return;
-	var headingList = gTable.getElementsByTagName('TH');
+	var headingList = gTable.getElementsByTagName('th');
 	// I know the headings i need so..
 	headingList[0].className += ' c_date';			// First
 	headingList[1].className += ' c_date';			// Last
@@ -98,14 +93,12 @@ function updateReleaseList() {
 	headingList[5].className += ' c_set';			// Done
 	headingList[6].className += ' c_number';		// Undumped
 	headingList[7].className += ' c_setlatin';		// State
-	headingList[8].className += ' c_none';			// N
-	headingList[9].className += ' c_set';			// Rating
+	headingList[8].className += ' c_set';			// Rating
+	headingList[9].className += ' c_number';		// C
 	init_sorting(gTable.tBodies[0].rows[0],'title','down');
 }
 
-/* *
- * Updates the episode list rows to allow more sorting options
- */
+/* Updates the episode list rows to allow more sorting options */
 function updateEpTableRows() {
 	var table = ep_table;
 	if (!table) return;
@@ -114,7 +107,7 @@ function updateEpTableRows() {
 		var row = tbody.rows[i];
 		var test = row.cells[2];	// ID cell
 		if (test) {
-			var a = test.getElementsByTagName('A')[0];
+			var a = test.getElementsByTagName('a')[0];
 			if (a) {
 				var cnt = a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',cnt);
@@ -122,7 +115,7 @@ function updateEpTableRows() {
 		}
 		test = row.cells[3];		// EP cell
 		if (test) {
-			var a = test.getElementsByTagName('A')[0];
+			var a = test.getElementsByTagName('a')[0];
 			if (a) {
 				var cnt = a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',cnt);
@@ -142,7 +135,7 @@ function updateEpTableRows() {
 		}
 		test = row.cells[7];		// Quality Cell
 		if (test) {
-			var span = test.getElementsByTagName('SPAN')[0];
+			var span = test.getElementsByTagName('span')[0];
 			if (span) {
 				var className = span.className.substr(span.className.indexOf('i_rate_')+7,span.className.length);
 				test.setAttribute('anidb:sort',mapQuality(className));
@@ -150,7 +143,7 @@ function updateEpTableRows() {
 		}
 		test = row.cells[10];	// Users Cell
 		if (test) {
-			var a = test.getElementsByTagName('A')[0];
+			var a = test.getElementsByTagName('a')[0];
 			if (a) {
 				var cnt = a.firstChild.nodeValue;
 				test.setAttribute('anidb:sort',cnt);
@@ -159,33 +152,31 @@ function updateEpTableRows() {
 	}
 }
 
-/* *
- * Updates the filelist table with sorting
- */
+/* Updates the filelist table with sorting */
 function updateEpTable() {
 	var table = ep_table;
 	if (!table) return;
-	var headingList = table.getElementsByTagName('TH');
+	var headingList = table.getElementsByTagName('th');
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';			// X
 	headingList[1].className += ' c_date';			// Date
-	headingList[2].className += ' c_setlatin';		// ID
-	headingList[3].className += ' c_setlatin';		// EP
+	headingList[2].className += ' c_set';			// ID
+	headingList[3].className += ' c_set';			// EP
 	headingList[4].className += ' c_none';			// Group
 	headingList[5].className += ' c_set';			// Size
 	headingList[6].className += ' c_setlatin';		// CRC
 	headingList[7].className += ' c_setlatin';		// Quality
 	headingList[8].className += ' c_latin';		// Source
-	headingList[9].className += ' c_latin';		// Resolution
+	headingList[9].className += ' c_set';			// Resolution
 	headingList[10].className += ' c_set';			// User count
-	init_sorting(table.tBodies[0].rows[0],'group','down');
+	init_sorting(table.tBodies[0].rows[0],'epno','down');
 }
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
 	if (!uriObj['show'] || uriObj['show'] != 'group') return; // badPage
-	released_div = getElementsByClassName(document.getElementsByTagName('DIV'), 'group_released', true)[0];
-	ep_table = getElementsByClassName(document.getElementsByTagName('TABLE'), 'filelist', true)[0];
+	released_div = getElementsByClassName(document.getElementsByTagName('div'), 'group_released', true)[0];
+	ep_table = getElementsByClassName(document.getElementsByTagName('table'), 'filelist', true)[0];
 	if (released_div) { // releases
 		updateReleaseListRows();
 		updateReleaseList();
