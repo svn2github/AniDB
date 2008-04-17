@@ -42,6 +42,7 @@ function createSelectBoxes(producerEntries) {
 	replaceCell.replaceChild(producerSelect,((newsearchbox) ? newsearchbox : searchbox));
 	inputbutton.value = " Search again ";
 	inputbutton.onclick = function replaceBox() {	newsearchbox = searchbox.cloneNode(true);
+													newsearchbox.value = '';
 													replaceCell.replaceChild(newsearchbox,producerSelect); 
 													inputbutton.value = " Search ";
 													inputbutton.onclick = function updateSearchString() {	searchString = newsearchbox.value; newsearchbox.value = 'please wait while searching...'; fetchData(); }
