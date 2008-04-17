@@ -814,6 +814,7 @@ function createPreferencesTable(type) {
 		li.onclick = Magic.toggle_tabs;
 		ul_tabs.appendChild(li);
 	}
+	
 	panes.appendChild(ul_tabs);
 	var body = document.createElement('div');
 	body.className = 'body';
@@ -839,6 +840,21 @@ function createPreferencesTable(type) {
 				createSelectArray(li,'episodeTitleDisplay','episodeTitleDisplay',function() { changeOptionValue(this); episodeTitleDisplay = this.value; },episodeTitleDisplay,optionArray);
 				li.appendChild(document.createTextNode(' Episode Alternative Title Display'));
 				ul.appendChild(li);
+				var actionLI = document.createElement('li');
+				actionLI.className = 'action';
+				actionLI.appendChild(document.createTextNode('Actions: '));
+				var reloadInput = createBasicButton('do.reload','reload page');
+				reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
+				actionLI.appendChild(reloadInput);
+				actionLI.appendChild(document.createTextNode(' '));
+				var saveInput = createBasicButton('do.save','save preferences');
+				saveInput.onclick = function saveSettings() {
+					CookieSet('episodeAltTitleLang',episodeAltTitleLang);
+					CookieSet('episodeTitleDisplay',episodeTitleDisplay);
+					alert('Current Title preferences saved.');
+				}
+				actionLI.appendChild(saveInput);
+				ul.appendChild(actionLI);
 				tab.appendChild(ul);
 				break;
 			case 'ed2k-prefs':
@@ -846,13 +862,18 @@ function createPreferencesTable(type) {
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var input = createTextInput('ed2k_pattern',80,false,false,255,ed2k_pattern);
-				input.onchange = function() { changeOptionValue(this); ed2k_pattern = this.value; };
+				input.onchange = function() { 
+					changeOptionValue(this); 
+					ed2k_pattern = this.value;
+					hashObj.pattern = ed2k_pattern;
+				};
 				li.appendChild(input);
 				var setDefault = createBasicButton('set_ed2k_default','default');
 				setDefault.onclick = function sd() {
 					var input = document.getElementById('ed2k_pattern');
 					if (input) input.value = hashObj.defaultPattern;
 					ed2k_pattern = hashObj.defaultPattern;
+					hashObj.pattern = ed2k_pattern;
 				}
 				li.appendChild(document.createTextNode(' '));
 				li.appendChild(setDefault);
@@ -861,18 +882,41 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var setSpace = createTextInput('space_pattern',1,false,false,1,space_pattern);
-				setSpace.onchange = function() { changeOptionValue(this); space_pattern = this.value; };
+				setSpace.onchange = function() { 
+					changeOptionValue(this); 
+					space_pattern = this.value;
+					hashObj.spacesChar = space_pattern;
+				};
 				li.appendChild(setSpace);
 				var setSpaceDefault = createBasicButton('set_space_default','default');
 				setSpaceDefault.onclick = function ssd() {
 					var input = document.getElementById('space_pattern');
 					if (input) input.value = hashObj.defaultSpacesChar;
 					space_pattern = hashObj.defaultSpacesChar;
+					hashObj.spacesChar = space_pattern;
 				}
 				li.appendChild(document.createTextNode(' '));
 				li.appendChild(setSpaceDefault);
 				li.appendChild(document.createTextNode(' ED2K hash spaces convert character'));
 				ul.appendChild(li);
+				var actionLI = document.createElement('li');
+				actionLI.className = 'action';
+				actionLI.appendChild(document.createTextNode('Actions: '));
+				var reloadInput = createBasicButton('do.reload','reload page');
+				reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
+				actionLI.appendChild(reloadInput);
+				var applyInput = createBasicButton('do.apply','apply changes');
+				applyInput.onclick = function reloadPage() { alert('Settings applied\nYou may need to reload page before seeing results.'); }
+				actionLI.appendChild(applyInput);
+				actionLI.appendChild(document.createTextNode(' '));
+				var saveInput = createBasicButton('do.save','save preferences');
+				saveInput.onclick = function saveSettings() {
+					CookieSet('ed2k_pattern',ed2k_pattern);
+					CookieSet('space_pattern',space_pattern);
+					alert('Current ED2K preferences saved.');
+				}
+				actionLI.appendChild(saveInput);
+				ul.appendChild(actionLI);
 				tab.appendChild(ul);
 				break;
 			case 'mylist-prefs':
@@ -918,6 +962,23 @@ function createPreferencesTable(type) {
 				li.appendChild(watchedSel);
 				li.appendChild(document.createTextNode(' Default quick-add watched state'));
 				ul.appendChild(li);
+				var actionLI = document.createElement('li');
+				actionLI.className = 'action';
+				actionLI.appendChild(document.createTextNode('Actions: '));
+				var reloadInput = createBasicButton('do.apply','apply changes');
+				reloadInput.onclick = function reloadPage() { alert('Settings applied.'); }
+				actionLI.appendChild(reloadInput);
+				actionLI.appendChild(document.createTextNode(' '));
+				var saveInput = createBasicButton('do.save','save preferences');
+				saveInput.onclick = function saveSettings() {
+					CookieSet('use_mylist_add',use_mylist_add);
+					CookieSet('mylist_add_state',mylist_add_state);
+					CookieSet('mylist_add_fstate',mylist_add_fstate);
+					CookieSet('mylist_add_viewed_state',mylist_add_viewed_state);
+					alert('Current Mylist preferences saved.');
+				}
+				actionLI.appendChild(saveInput);
+				ul.appendChild(actionLI);
 				tab.appendChild(ul);
 				break;
 			case 'group-prefs':
@@ -962,6 +1023,20 @@ function createPreferencesTable(type) {
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprectated Standard Definition files (video resolution height < 720)'));
 				ul.appendChild(li);
+				var actionLI = document.createElement('li');
+				actionLI.className = 'action';
+				actionLI.appendChild(document.createTextNode('Actions: '));
+				var reloadInput = createBasicButton('do.apply','apply changes');
+				reloadInput.onclick = function reloadPage() { alert('Settings applied.'); }
+				actionLI.appendChild(reloadInput);
+				actionLI.appendChild(document.createTextNode(' '));
+				var saveInput = createBasicButton('do.save','save preferences');
+				saveInput.onclick = function saveSettings() {
+					CookieSet('group_check_type',group_check_type);
+					alert('Current Group preferences saved.');
+				}
+				actionLI.appendChild(saveInput);
+				ul.appendChild(actionLI);
 				tab.appendChild(ul);
 				break;
 			default:
