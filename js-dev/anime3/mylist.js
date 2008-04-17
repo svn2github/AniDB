@@ -124,7 +124,7 @@ function prepPage() {
 			mylist_settings['filemode'] = (a.firstChild.nodeValue.indexOf('show') >= 0) ? '1' : '2';
 		}
 	}
-	//mylist_settings['noeptb'] = false;
+	mylist_settings['noeptb'] = false; // force this setting
 	createPreferencesTable('mylist');
 }
 
