@@ -110,6 +110,7 @@ function prepPage() {
 		ruid = mylist_settings['uid'];
 		a.removeAttribute('href');
 		a.onclick = expandAnime;
+		a.style.cursor = "pointer";
 	}
 	var filters = getElementsByClassName(document.getElementsByTagName('div'),'filters',true)[0];
 	if (filters) {
@@ -120,10 +121,10 @@ function prepPage() {
 				a.onclick = toggleFileMode;
 				a.style.cursor = "pointer";
 			}
-			mylist_settings['filemode'] = (a.firstChild.nodeValue.indexOf('show') >= 0) ? '2' : '1';
+			mylist_settings['filemode'] = (a.firstChild.nodeValue.indexOf('show') >= 0) ? '1' : '2';
 		}
 	}
-	mylist_settings['noeptb'] = false;
+	//mylist_settings['noeptb'] = false;
 	createPreferencesTable('mylist');
 }
 
@@ -589,7 +590,7 @@ function createEpisodeTableFoot(colSpan) {
 					{"value":'gstate:13',"text":'on tv'},{"value":'gstate:14',"text":'theater'},{"value":'gstate:20',"text":'filler ep'},{"value":'gstate:100',"text":'other'}];
 	createSelectArrayN(cell,"mylmod.type","mylmod.type",null,0,optionArray);
 	cell.appendChild(document.createTextNode(' '));
-	var button = createBasicButton('mylmod.doit','Update selected files','button');
+	var button = createBasicButton('mylmod.doit','Update selected files','submit');
 	cell.appendChild(button)
 	row.appendChild(cell);
 	tfoot.appendChild(row);
@@ -660,11 +661,11 @@ function createEpisodeTable(aid) {
 		table.appendChild(tbody);
 	}
 	var tfoot = (epTableFoot ? epTableFoot.cloneNode(true) : createEpisodeTableFoot(colSpan));
-	var inputs = tfoot.getElementsByTagName('INPUT');
+	var inputs = tfoot.getElementsByTagName('input');
 	for (var i = 0; i < inputs.length; i++) {
 		var input = inputs[i];
 		if (input.type == 'checkbox') input.onchange = cbToggle;
-		if (input.type == 'button') input.onclick = notImplemented;
+		//if (input.type == 'button') input.onclick = notImplemented;
 	}
 	table.appendChild(tfoot);
 	form.appendChild(table);
