@@ -1018,10 +1018,11 @@ filterObj.defaultVisible = {0:5,
                             4:{"fdate":"<,604800"},
                             5:{"efvisible":"<,1"}};
 filterObj.visible = filterObj.defaultVisible;
-filterObj.defaultHidden = {0:3,
+filterObj.defaultHidden = {0:4,
                            1:{"falang":"==,obj.filterAudLang"},
                            2:{"fslang":"==,obj.filterSubLang"},
-						   3:{"fraw":"!=,LAY_HIDERAWS"}};
+						   3:{"fraw":"!=,LAY_HIDERAWS"},
+						   4:{"fgroupfiltered":"==,LAY_HIDEFILTEREDGROUPS"}};
 filterObj.hidden = filterObj.defaultHidden;
 /* AUXILIAR COMPARE FUNCTION */
 filterObj.compare = function compare(symbol, a, b) {
@@ -1134,6 +1135,13 @@ filterObj['fraw'] = function fraw(file,symbol,value,rthis) {
   if (rthis) return (file.isRaw);
   return (filterObj.compare(symbol, file.isRaw, LAY_HIDERAWS));
 };
+filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
+  var group = groups[file.groupId];
+  if (!group) return false;
+  if (rthis) return (group.filtered);
+  return (filterObj.compare(symbol, group.filtered, LAY_HIDEFILTEREDGROUPS));
+};
+
 /* PROCESSING FUCTIONS */
 filterObj.processFile = function processFile(file, operation) {
   if (!file) return false;

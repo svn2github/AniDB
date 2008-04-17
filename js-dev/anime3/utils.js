@@ -233,6 +233,7 @@ function createIcon(parentNode, text, url, onclick, title, className) {
 	if (onclick != null || onclick != '') {
 		obj.onclick = onclick;
 		obj.style.cursor = 'pointer';
+		obj.setAttribute('role','link');
 	}
 	if (url == 'removeme') {
 		obj.style.cursor = 'pointer';

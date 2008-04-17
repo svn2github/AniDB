@@ -63,7 +63,7 @@ var genAnimeCols = [{'name':"expand",'classname':"expand",'header':"X",'abbr':"E
 var mylist_settings = null;
 var ed2k_pattern = (hashObj && hashObj.pattern ? hashObj.pattern : "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>");
 var space_pattern = (hashObj && hashObj.spacesChar ? hashObj.spacesChar : "_");
-var use_mylist_add = false;
+var use_mylist_add = 0;
 var mylist_add_viewed_state = 0;
 var mylist_add_state = 0;
 var mylist_add_fstate = 0;
@@ -759,8 +759,12 @@ function createLoadingRow(colSpan) {
 /* Function that sets options values */
 function changeOptionValue(node) {
 	if (!node) node = this;
-	var name = (node.name == node.id ? node.name : node.id);
-	var value = (node.type == 'checkbox' ? node.checked : node.value);
+	var name = "";
+	if (node.name && node.id && node.name == node.id) name = node.name;
+	else if (node.name && !node.id) name = node.name;
+	else if (!node.name && node.id) name = node.id;
+	else return;
+	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);	
 	CookieSet(name,value);
 }
 
@@ -786,7 +790,7 @@ function createPreferencesTable(type) {
 	hashObj.pattern = ed2k_pattern;
 	space_pattern = CookieGet('space_pattern') || "_";
 	hashObj.spacesChar = space_pattern;
-	use_mylist_add = CookieGet('use_mylist_add') || false;
+	use_mylist_add = CookieGet('use_mylist_add') || 0;
 	mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
 	mylist_add_state = CookieGet('mylist_add_state') || 0;
 	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
@@ -878,7 +882,7 @@ function createPreferencesTable(type) {
 				var ck = createCheckbox('use_mylist_add',use_mylist_add);
 				ck.onchange = function() {
 					changeOptionValue(this);
-					use_mylist_add = this.checked;
+					use_mylist_add = Number(this.checked);
 					document.getElementById('mylist_add_state').disabled = (!this.checked);
 					document.getElementById('mylist_add_fstate').disabled = (!this.checked);
 					document.getElementById('mylist_add_viewed_state').disabled = (!this.checked);
@@ -969,15 +973,15 @@ function createPreferencesTable(type) {
 
 	// set this before the links
 	if (type == 'anime') {
-		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true);
-		for (var i = 0; i < links.length; i++) {
-			var lastLi = links[i].getElementsByTagName('li');
+		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true)[1];
+		if (links) {
+			var lastLi = links.getElementsByTagName('li');
 			lastLi = lastLi[lastLi.length-1];
 			var li = document.createElement('li');
 			li.className = (lastLi.className.indexOf('g_odd') < 0 ? 'g_odd' : '');
 			createLink(li, 'Page Preferences', 'removeme', null, function () { var pagePrefs = document.getElementById('page_prefs'); if(!pagePrefs) return; pagePrefs.style.display = (pagePrefs.style.display == 'none' ? '' : 'none'); }, null, null);
-			links[i].appendChild(li);
-			if (i == 1) links[i].parentNode.insertBefore(main,links[i]);
+			links.appendChild(li);
+			links.parentNode.insertBefore(main,links);
 		}
 	}
 	if (type == 'mylist') {

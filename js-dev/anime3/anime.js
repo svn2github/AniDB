@@ -39,6 +39,7 @@ var LAY_HIDEPARODYEPS = false;
 var LAY_SHOWFID = false;
 var LAY_SHOWCRC = false;
 var LAY_FORMATFILESIZE = false;
+var LAY_HIDEFILTEREDGROUPS = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
@@ -252,9 +253,9 @@ function forceFileTableRedraw(episode) {
 		for (var e in episodes) {
 			var episode = episodes[e];
 			if (!episode || !episode.files) continue;
-			var fileTable = createFileTable(episode);
 			var row = document.getElementById('eid_'+episode.id+'_ftHolder');
 			if (!row) continue;
+			var fileTable = createFileTable(episode);
 			row.cells[0].className = '';
 			if (!fileTable.tBodies[0].rows.length && !fileTable.tFoot.rows.length) 
 				fileTable.parentNode.removeChild(fileTable);
@@ -496,9 +497,7 @@ function filterGroups() {
 			this.title = this.title.replace('hide','show');
 		}
 	}
-	/* We are going now to refresh the tables */
-	// #1 create the eid_XXXX_ftHolder rows
-	// #2 update the file tables
+	forceFileTableRedraw();
 }
 
 /* Function that creates Group Table Filters
@@ -790,7 +789,7 @@ function changeWatchedState() {
 		var actionCell = getElementsByClassName(row.getElementsByTagName('td'),'icons action',true)[0];
 		var ico = getElementsByClassName(actionCell.getElementsByTagName('a'),'i_seen_',true)[0];
 		if (mylistEntry.seen) {
-			url = 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id;
+			url = 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id;
 			ico.title = 'mark unwatched';
 			ico.className = 'i_icon i_seen_no';
 			ico.getElementsByTagName('span')[0].nodeValue = 'mylist.unwatch';
@@ -814,7 +813,7 @@ function changeWatchedState() {
 				}
 			}
 		} else {
-			url = 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id;
+			url = 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id;
 			ico.title = 'mark watched';
 			ico.className = 'i_icon i_seen_yes';
 			ico.getElementsByTagName('span')[0].nodeValue = 'mylist.watch';

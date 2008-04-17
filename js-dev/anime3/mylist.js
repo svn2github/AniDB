@@ -49,18 +49,17 @@ var fileTableHead = null;
 var deltimer = null;
 var g_note = null
 // general column definitions
-var fileCols = [ 	{'name':"check-mylist",'classname':"check"}, {'name':"fid",'classname':"file id icons"},
-					{'name':"epno",'classname':"epno"}, {'name':"group",'classname':"name group"},
-					{'name':"size",'classname':"size",'nogenerics':true}, {'name':"crc",'classname':"crc",'nogenerics':true},
-					{'name':"langs",'classname':"lang icons",'nogenerics':true}, {'name':"cf",'classname':"codec icons",'nogenerics':true},
-					{'name':"quality",'nogenerics':true}, {'name':"hashes",'classname':"hash icons ed2k",'nogenerics':true},
-					{'name':"mylist-storage",'classname':"storage text"}, {'name':"mylist-source",'classname':"source text"},
-					{'name':"state-mylist",'classname':"icons state"}, {'name':"actions-mylist",'classname':"icons action"}	];
+var fileCols = cloneArray(genFileCols);
+removeColAttribute("check-anime",fileCols);
+removeColAttribute("state-anime",fileCols);
+removeColAttribute("actions-anime",fileCols);
+removeColAttribute("anime-source",fileCols);
+removeColAttribute("resolution",fileCols);
+removeColAttribute("users",fileCols);
 var fileSkips = null;
-var epCols = [		{'name':"expand",'classname':"expand"}, {'name':"epno",'classname':"epno"},
-					{'name':"title",'classname':"title"}, {'name':"duration",'classname':"duration"},
-					{'name':"date",'classname':"date"}, {'name':"files",'classname':"count files"},
-					{'name':"actions",'classname':"action"}	];
+var epCols = cloneArray(genEpCols);
+removeColAttribute("airdate",epCols);
+removeColAttribute("users",epCols);
 var epSkips = null;
 
 
@@ -125,6 +124,7 @@ function prepPage() {
 		}
 	}
 	mylist_settings['noeptb'] = false;
+	createPreferencesTable('mylist');
 }
 
 /* Function that fetches anime data
@@ -141,10 +141,10 @@ function fetchData(aid,uid) {
  * @param url URL to post
  */
 function postData(url) {
-  var req = xhttpRequest();
+	var req = xhttpRequest();
 	var data = url.substr(url.indexOf('?')+1,url.length);
-  if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showSuccessBox, data);
-  else xhttpRequestPost(req, 'animedb.pl', showSuccessBox, data);
+	if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showSuccessBox, data);
+	else xhttpRequestPost(req, 'animedb.pl', showSucessBox, data);
 }
 
 /* Function that parses xml response
@@ -181,7 +181,7 @@ function parseData(xmldoc) {
 }
 
 /* Shows a success box for a brief time */
-function showSucessBox(xmldoc) {
+function showSuccessBox(xmldoc) {
 	if (!g_note) {
 		g_note = document.createElement('div');
 		g_note.className = 'g_section g_notebox';
@@ -196,7 +196,7 @@ function showSucessBox(xmldoc) {
 	if (!msg_all) return;
 	msg_all.insertBefore(g_note,msg_all.firstChild);
 	self.clearTimeout(deltimer);
-	deltimer = self.setTimeout('removeNoteBox()', 1000);
+	deltimer = self.setTimeout('removeNoteBox()', 5000);
 }
 
 /* Removes the success box */
@@ -211,7 +211,7 @@ function expandAnime() {
 	this.title = 'Fold entry';
 	this.className = 'i_icon i_minus';
 	var row = this.parentNode;
-	while (row.nodeName != 'TR') row = row.parentNode;
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
 	var aid = row.id.substr(1,row.id.length);
 	if (!animes[aid]) {
 		var nrow = createLoadingRow(row.cells.length);
@@ -230,7 +230,7 @@ function foldAnime() {
 	this.title = 'Expand entry';
 	this.className = 'i_icon i_plus';
 	var row = this.parentNode;
-	while (row.nodeName != 'TR') row = row.parentNode;
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
 	var aid = row.id.substr(1,row.id.length);
 	var testRow = document.getElementById('a'+aid+'_epsRow');
 	if (testRow) testRow.style.display = 'none';
@@ -239,11 +239,11 @@ function foldAnime() {
 /* Function that expands files of a given anime */
 function expandFiles() {
 	this.onclick = foldFiles;
-	this.title = 'Fold entry';
+	this.title = 'Fold this entry';
 	this.className = 'i_icon i_minus';
 	this.firstChild.firstChild.nodeValue = '[-]';
 	var row = this.parentNode;
-	while (row.nodeName != 'TR') row = row.parentNode;
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
 	var eid = row.id.substr(1,row.id.length);
 	var testRow = document.getElementById('e'+eid+'_filesRow');
 	if (testRow) testRow.style.display = '';
@@ -252,11 +252,11 @@ function expandFiles() {
 /* Function that folds files of a given anime */
 function foldFiles() {
 	this.onclick = expandFiles;
-	this.title = 'Expand entry';
+	this.title = 'Expand this entry';
 	this.className = 'i_icon i_plus';
 	this.firstChild.firstChild.nodeValue = '[+]';
 	var row = this.parentNode;
-	while (row.nodeName != 'TR') row = row.parentNode;
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
 	var eid = row.id.substr(1,row.id.length);
 	var testRow = document.getElementById('e'+eid+'_filesRow');
 	if (testRow) testRow.style.display = 'none';
@@ -316,7 +316,7 @@ function toggleFileMode() {
 function changeWatchedState() {
 	var row = this.parentNode;
 	var isWatched = (this.className.indexOf('i_seen_yes') >= 0);
-	while (row.nodeName != 'TR') row = row.parentNode;
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
 	var fid = Number(row.id.substr(row.id.indexOf('f')+1,row.id.length));
 	if (this.href) this.removeAttribute('href');
 	var mylistEntry = mylist[fid];
@@ -341,7 +341,7 @@ function changeWatchedState() {
 		var arow = document.getElementById('a'+episode.animeId);
 		var cellSeen = (arow ? getElementsByClassName(arow.getElementsByTagName('td'),'stats seen',true)[0] : null);
 		if (mylistEntry.seen) {
-			url = 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id;
+			url = 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id;
 			ico.title = 'mark unwatched';
 			ico.className = 'i_icon i_seen_no';
 			ico.getElementsByTagName('span')[0].nodeValue = 'mylist.unwatch';
@@ -380,7 +380,7 @@ function changeWatchedState() {
 				}
 			}
 		} else {
-			url = 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id;
+			url = 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id;
 			ico.title = 'mark watched';
 			ico.className = 'i_icon i_seen_yes';
 			ico.getElementsByTagName('span')[0].nodeValue = 'mylist.watch';
@@ -430,12 +430,13 @@ function changeWatchedState() {
 			}
 		}
 	}
+	postData(url);
 	return true;
 }
 /* Function that removes a file from mylist */
 function removeFromMylist() {
 	var row = this.parentNode;
-	while (row.nodeName != 'TR') row = row.parentNode;
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
 	var fid = Number(row.id.substr(row.id.indexOf('f')+1,row.id.length));
 	if (this.href) this.removeAttribute('href');
 	var mylistEntry = mylist[fid];
@@ -516,31 +517,14 @@ function removeFromMylist() {
 			fileTable.removeChild(row);
 		}
 	}
+	postData(url);
 	return true;
 }
 
 
 /* Creates an episode files table thead */
 function createFilesTableHead() {
-	var thead = document.createElement('thead');
-	var row = document.createElement('tr');
-	row.className = 'head';
-	createHeader(row, 'check', 'X', 'Check/uncheck files');
-	createHeader(row, 'file', 'F', 'File details/FID');
-	if (mylist_settings['noeptb']) createHeader(row, 'epno', 'Epno', 'Episode number');
-	createHeader(row, 'group', 'Group');
-	createHeader(row, 'size', 'Size');
-	if ((uriObj['showcrc'] && uriObj['showcrc'] == '1') || LAY_SHOWCRC)
-		createHeader(row, 'crc','CRC');
-	createHeader(row, 'lang', 'Lang');
-	createHeader(row, 'codec', 'CF', 'Container Format and Codecs');
-	createHeader(row, 'quality', 'Quality');
-	createHeader(row, 'hash', 'Hash');
-	createHeader(row, 'storage', 'Storage');
-	createHeader(row, 'source', 'Source');
-	createHeader(row, 'state', 'State');
-	createHeader(row, 'action', 'Action');
-	thead.appendChild(row);
+	var thead = createTableHead(fileCols);
 	fileTableHead = thead;
 	return(fileTableHead.cloneNode(true));
 }
@@ -552,7 +536,7 @@ function createFilesTableHead() {
 function createFilesTable(eid) {
 	var insertRow = document.createElement('tr');
 	insertRow.id = 'e'+eid+'_filesRow';
-	insertRow.style.display = (mylist_settings['filemode'] == '1' ? '' : 'none');
+	insertRow.style.display = (mylist_settings['filemode'] == '2' ? '' : 'none');
 	var insertCell = document.createElement('td');
 	//insertCell.colSpan = (mylist_settings['noeptb']) ? '7' : '6';
 	insertCell.colSpan = '7';
@@ -573,6 +557,7 @@ function createFilesTable(eid) {
 	}
 	// Piece it all together
 	table.appendChild(tbody);
+	init_sorting(table);
 	insertCell.appendChild(table);
 	insertRow.appendChild(insertCell);
 	return insertRow;
@@ -580,17 +565,7 @@ function createFilesTable(eid) {
 
 /* Creates an episode table thead */
 function createEpisodeTableHead() {
-	var thead = document.createElement('thead');
-	var row = document.createElement('tr');
-	row.className = 'head';
-	createHeader(row, 'expand', 'X', 'Expand/fold files');
-	createHeader(row, 'epno', 'EP', null);
-	createHeader(row, 'title', 'Title', null);
-	createHeader(row, 'duration', 'Len', 'Play length');
-	createHeader(row, 'date', 'Date', null);
-	createHeader(row, 'count files', 'Files', null);
-	createHeader(row, 'action', 'Action', null);
-	thead.appendChild(row);
+	var thead = createTableHead(epCols);
 	epTableHead = thead;
 	return(epTableHead.cloneNode(true));
 }
