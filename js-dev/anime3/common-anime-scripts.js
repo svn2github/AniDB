@@ -3,6 +3,7 @@
  * version 1.0 (05.03.2008) - Initial Version (createFileRow, createFileIcons, buildSkips, removeColAttribute, createLoadingRow)
  * version 1.1 (31.03.2008) - Group Rows added (createGroupRow, createGroupIcons)
  * version 1.2 (03.04.2008) - Episode Rows added (createEpisodeRow, createEpisodeIcons)
+ * version 1.3 (15.04.2008) - Page Preferences added
  */
 
 /* These are the default file, episode, group and anime cols */
@@ -114,7 +115,7 @@ function buildSkipCols(cols) {
  */
 function createEpisodeIcons(episode) {
 	var icons = new Object();
-	if (mylist_settings && mylist_settings['filemode'] != '2') {
+	if (mylist_settings && mylist_settings['filemode'] == '2') {
 		var a = createIcon(null, '[-]', null, (mylist_settings ? foldFiles : foldEp), 'Fold this entry', 'i_minus');
 		a.style.cursor = 'pointer';
 		icons['expand'] = a;
@@ -146,7 +147,7 @@ function createEpisodeIcons(episode) {
 			icons['state'].push(createLink(null, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass));
 		}
 		for (var st in stateFiles) {
-			//if (st == 'indexOf' || st == 'unknown') continue;
+			if (st == 'indexOf' || st == 'unknown') continue;
 			var state = stateFiles[st];
 			if (isNaN(state)) continue;
 			//if (state == null || !state) continue;
