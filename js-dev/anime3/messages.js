@@ -1,8 +1,8 @@
-/* *
- * @file message page scripts
+/* file message page scripts
  * @author fahrenheit (alka.setzer@gmail.com)
  * @contents Core Functions
- * @version 1.2 (15.01.2008)
+ * version 1.2 (15.01.2008)
+ * version 1.3 (17.04.2008) - Anidb 0.1.50 version update
  */
 
 // GLOBALS
@@ -348,6 +348,7 @@ function updateMsgList() {
 	var a = newMsg.getElementsByTagName('a')[0];
 	a.removeAttribute('href');
 	a.onclick = createNewMessage;
+	a.style.cursor = 'pointer';
 	
 	// now do some clean up of the table to allow for cleaner sort
 	var tbody = msgTable.tBodies[0];
