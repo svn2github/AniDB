@@ -867,6 +867,7 @@ function createPreferencesTable(type) {
 					changeOptionValue(this); 
 					ed2k_pattern = this.value;
 					hashObj.pattern = ed2k_pattern;
+					hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
 				};
 				li.appendChild(input);
 				var setDefault = createBasicButton('set_ed2k_default','default');
@@ -875,6 +876,7 @@ function createPreferencesTable(type) {
 					if (input) input.value = hashObj.defaultPattern;
 					ed2k_pattern = hashObj.defaultPattern;
 					hashObj.pattern = ed2k_pattern;
+					hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
 				}
 				li.appendChild(document.createTextNode(' '));
 				li.appendChild(setDefault);
@@ -906,6 +908,7 @@ function createPreferencesTable(type) {
 				var reloadInput = createBasicButton('do.reload','reload page');
 				reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
 				actionLI.appendChild(reloadInput);
+				actionLI.appendChild(document.createTextNode(' '));
 				var applyInput = createBasicButton('do.apply','apply changes');
 				applyInput.onclick = function reloadPage() { alert('Settings applied\nYou may need to reload page before seeing results.'); }
 				actionLI.appendChild(applyInput);
