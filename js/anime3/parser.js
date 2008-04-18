@@ -1,5 +1,4 @@
-/* *
- * @file XMLParser for mylist, anime and episode xml data 
+/* file XMLParser for mylist, anime and episode xml data 
  * @author fahrenheit (alka.setzer@gmail.com)
  *         Some code derived from PetriW's work at anidb
  * @contents Core Classes
@@ -17,8 +16,7 @@ var eInt = 150; // time to wait between ep render
 
 // CORE Classes //
 
-/* *
- * Creates a new Mylist Entry from a given node
+/* Creates a new Mylist Entry from a given node
  * @param node Node from which to get the mylist information
  * @return mylistEntry
  */
@@ -51,8 +49,7 @@ function CMylistEntry(node) {
   this.fType = mapFState(this.fstate);
 }
 
-/* *
- * Creates a new Group Entry from a given node
+/* Creates a new Group Entry from a given node
  * @param node Node from which to get the group information
  * @return groupEntry
  */
@@ -102,8 +99,7 @@ function CGroupEntry(node) {
   }
 }
 
-/* *
- * Creates a new Anime Entry from a given node
+/* Creates a new Anime Entry from a given node
  * @param node Node from which to get the anime information
  * @return animeEntry
  */
@@ -121,6 +117,7 @@ function CAnimeEntry(node) {
       case 'epcnt': this.epCount = Number(nodeData(sNode)); break;
       case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
       case 'gcnt': this.groupCount = Number(nodeData(sNode)); break;
+	  case 'filedata':
       case 'eps': 
       case 'groups': break; // Will be taken care elsewhere 
       case 'titles':
@@ -154,8 +151,7 @@ CAnimeEntry.prototype.getAltTitle = function() {
   return (title);
 }
 
-/* *
- * Creates a new Episode Entry from a given node
+/* Creates a new Episode Entry from a given node
  * @param node Node from which to get the episode information
  * @return episodeEntry
  */
@@ -174,6 +170,8 @@ function CEpisodeEntry(node) {
   this.userCount = 0;
   this.fileCount = 0;
   this.other = '';
+  this.rating = '-';
+  this.ratingCount = 0;
   this.newFiles = false;
   this.titles = new Array();
   this.files = new Array(); // File IDS of related files are stored in the files array
@@ -189,6 +187,7 @@ function CEpisodeEntry(node) {
       case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
       case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
       case 'other': this.other = nodeData(sNode); break;
+      case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
       case 'titles':
         for (var k = 0; k < sNode.childNodes.length; k++) {
           var tNode = sNode.childNodes.item(k);
@@ -245,8 +244,7 @@ CEpisodeEntry.prototype.getTitles = function() {
   return (ret.join(', '));
 }
 
-/* *
- * Creates a new File Entry from a given node
+/* Creates a new File Entry from a given node
  * @param node Node from which to get the file information
  * @return fileEntry
  */
@@ -282,6 +280,7 @@ function CFileEntry(node) {
   this.isUncensored = 0;
   this.quality = 'unknown';
   this.resolution = 'unknown';
+  this.pixelarea = 0;
   this.source = 'unknown';
   this.other = '';
   this.usersTotal = 0;
@@ -290,12 +289,13 @@ function CFileEntry(node) {
   this.vidCnt = 0;
   this.audCnt = 0;
   this.subCnt = 0;
-	this.avdumped = 0;
+  this.avdumped = 0;
   this.newFile = false;
   this.pseudoFile = false; // Got fed up with strange methods for checking if a file isn't pseudo
   this.videoTracks = new Array();
   this.audioTracks = new Array();
   this.subtitleTracks = new Array();
+  this.isRaw = false;
   // Actualy fill the data;
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode1 = node.childNodes.item(i);
@@ -312,11 +312,12 @@ function CFileEntry(node) {
         if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
         this.relDate = convertTime(sNode1.getAttribute('rel'));
         break;
-			case 'avdumped': this.avdumped = Number(nodeData(sNode1)); break;
+      case 'avdumped': this.avdumped = Number(nodeData(sNode1)); break;
       case 'vid':
         this.vidCnt = Number(sNode1.getAttribute('cnt')) || 0;
         for (var j = 0; j < sNode1.childNodes.length; j++) {
           var dNode = sNode1.childNodes.item(j);
+		  if (dNode.nodeType == 3) continue;
           switch (dNode.nodeName) {
             case 'stream':
               var stream = new Object;
@@ -324,14 +325,18 @@ function CFileEntry(node) {
               stream.resH = 0;
               stream.ar = 'unknown';
               stream.codec = 'unknown';
-							stream.codec_sname = 'unk';
+              stream.codec_sname = 'unk';
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
+				if (stNode.nodeType == 3) continue;
                 switch (stNode.nodeName) {
                   case 'res': 
                     stream.resW = Number(stNode.getAttribute('w')) || 0; 
                     stream.resH = Number(stNode.getAttribute('h')) || 0;                     
-                    if (stream.resW && stream.resH) this.resolution = stream.resW + 'x' + stream.resH;
+                    if (stream.resW && stream.resH) {
+						this.resolution = stream.resW + 'x' + stream.resH;
+						this.pixelarea = Number(stream.resW)*Number(stream.resH);
+					}
                     break;
                   case 'ar': stream.ar = nodeData(stNode); break;
                   case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
@@ -348,18 +353,20 @@ function CFileEntry(node) {
         this.audCnt = Number(sNode1.getAttribute('cnt')) || 0;
         for (var j = 0; j < sNode1.childNodes.length; j++) {
           var dNode = sNode1.childNodes.item(j);
+		  if (dNode.nodeType == 3) continue;
           switch (dNode.nodeName) {
             case 'stream':
               var stream = new Object;
               stream.chan = 'unknown';
               stream.codec = 'unknown';
-							stream.codec_sname = 'unknown';
+              stream.codec_sname = 'unknown';
               stream.type = 'normal';
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
+				if (stNode.nodeType == 3) continue;
                 switch (stNode.nodeName) {
-                  case 'lang': stream.lang = nodeData(stNode); break;
                   case 'chan': stream.chan = nodeData(stNode); break;
+                  case 'lang': stream.lang = nodeData(stNode); break;
                   case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
                   case 'type': stream.type = nodeData(stNode); break;
                   default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStream['+k+']', dNode.nodeName,stNode.nodeName);
@@ -375,6 +382,7 @@ function CFileEntry(node) {
         this.subCnt = Number(sNode1.getAttribute('cnt')) || 0;
         for (var j = 0; j < sNode1.childNodes.length; j++) {
           var dNode = sNode1.childNodes.item(j);
+		  if (dNode.nodeType == 3) continue;
           switch (dNode.nodeName) {
             case 'stream':
               var stream = new Object;
@@ -382,6 +390,7 @@ function CFileEntry(node) {
               stream.flags = 0;
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
+				if (stNode.nodeType == 3) continue;
                 switch (stNode.nodeName) {
                   case 'lang': stream.lang = nodeData(stNode); break;
                   case 'type': stream.type = nodeData(stNode); break;
@@ -421,12 +430,12 @@ function CFileEntry(node) {
   if (this.flags & 32) { this.version = 'v5'; }
   if (this.flags & 64) { this.isUncensored = 1; }
   if (this.flags & 128) { this.isCensored = 1; }
+  if (this.vidCnt && !this.subCnt) { this.isRaw = true; }
 }
 
 // CORE Functions //
 
-/* *
- * Processes a node to extract Custom (user) information
+/* Processes a node to extract Custom (user) information
  * @param node Node to process
  * @return boolean (true if processing succeful, false otherwise)
  */
@@ -478,15 +487,14 @@ function parseCustom(node) {
           episodes[eid].vote = vote;
         }
         break;
-      case 'config': parseConfig(childNode);
+      case 'config': parseConfig(childNode); break;
       default: showAlert('Options',node.nodeName,node.nodeName,childNode.nodeName);
     }
   }
   return true;
 }
 
-/* *
- * Function to parse configuration options
+/* Function to parse configuration options
  * @param node Config node
  * @return void Options will be set
  */
@@ -505,6 +513,7 @@ function parseConfig(node) {
         LAY_HIDEGENERICFILES = (lay & 4096) ? true : false;
         LAY_HIDEPARODYEPS = (lay & 131072) ? true : false;
 		LAY_SHOWFID = (lay & 268435456) ? true : false;
+		LAY_SHOWCRC = (lay & 536870912) ? true : false;
         break;
       case 'animelang':
         for (var j = 0; j < sNode.childNodes.length; j++) {
@@ -519,7 +528,7 @@ function parseConfig(node) {
         for (var j = 0; j < sNode.childNodes.length; j++) {
           var dNode = sNode.childNodes.item(j);
           switch (dNode.nodeName) {
-            case 'lang': episodeTitleLang = nodeData(dNode); episodeAltTitleLang = dNode.getAttribute('alt') || 'en'; break;
+            case 'lang': episodeTitleLang = nodeData(dNode); episodeAltTitleLang = dNode.getAttribute('alt') || 'x-jat'; break;
             default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
           }
         }
@@ -548,10 +557,9 @@ function parseConfig(node) {
   }
 }
 
-/* *
- * Processes a node to extract group information
+/* Processes a node to extract group information
  * @param node Node to process
-* @param aid Anime ID of group data
+ * @param aid Anime ID of group data
  * @return void (sets groups)
  */
 function parseGroups(node,aid) {
@@ -588,8 +596,7 @@ function parseGroups(node,aid) {
   groups[groupEntry.id] = groupEntry;
 }
 
-/* *
- * Processes a node to extract episode information
+/* Processes a node to extract episode information
  * @param node Node to process
  * @param aid Anime ID of episode data
  * @return void (sets episodes)
@@ -613,8 +620,7 @@ function parseEpisodes(node,aid) {
   }
 }
 
-/* *
- * Processes a node to extract anime information
+/* Processes a node to extract anime information
  * @param node Node to process
  * @return void (sets anime)
  */
@@ -642,8 +648,7 @@ function parseAnimes(node) {
   }
 }
 
-/* *
- * Builds a fileEntry
+/* Builds a fileEntry
  * @param node The node to parse
  * @param aid Anime Id
  * @param eid Episode Id
@@ -675,8 +680,7 @@ function buildFileEntry(node, aid, eid) {
   if (episode.files.indexOf(fileEntry.id) < 0) episode.files.push(fileEntry.id)
 }
 
-/* *
- * Processes a node to extract file information for a given episode
+/* Processes a node to extract file information for a given episode
  * @param node Node to process
  * @param aid Anime ID of episode data
  * @return void (sets files)
@@ -689,13 +693,12 @@ function parseEpisode(node, aid) {
   var nodeTime = new Date();
   for (var i = 0; i < fileNodes.length; i++)
     buildFileEntry(fileNodes[i],aid, eid);
-  if (seeTimes) alert('Processing files for eid.'+eid+' took: '+(new Date() - nodeTime)+' ms');
+  //if (seeTimes) alert('Processing files for eid.'+eid+' took: '+(new Date() - nodeTime)+' ms');
   //var fileTable = createFileTable(episode);
   //document.getElementById('eid_'+episode.id+'_ftHolder').cells[0].className = '';
 }
 
-/* *
- * Function that parses extra files, needed by relations
+/* Function that parses extra files, needed by relations
  * @param nodes Relation nodes
  * @return void (sets info for files)
  */
@@ -709,8 +712,7 @@ function parseExtraFiles(nodes,eid) {
   }
 }
 
-/* *
- * Function that parses file<->ep relations
+/* Function that parses file<->ep relations
  * @param nodes Relation nodes
  * @return void (sets info for files)
  */ 
@@ -738,8 +740,7 @@ function parseEpRelations(nodes) {
   }
 }
 
-/* *
- * Function that parses file<->file relations
+/* Function that parses file<->file relations
  * @param nodes Relation nodes
  * @return void (sets info for files)
  */ 
@@ -793,8 +794,7 @@ function parseFileRelations(nodes) {
   }
 }
 
-/* *
- * Processes a node to extract filedata information
+/* Processes a node to extract filedata information
  * @param node Node to process
  * @param aid Anime ID of episode data
  * @return void (sets files)
@@ -808,7 +808,7 @@ function parseFiledata(node, aid) {
   parseExtraFiles(extraFiles);
   parseEpRelations(fileEpRel);
   parseFileRelations(fileRel);
-  if (seeTimes) alert('Processing filedata for aid.'+aid+' took: '+(new Date() - nodeTime)+' ms');
+  //if (seeTimes) alert('Processing filedata for aid.'+aid+' took: '+(new Date() - nodeTime)+' ms');
 }
 
 // PseudoFiles Functions //
@@ -931,8 +931,7 @@ function makePseudoFile(fileA,fileB,type) {
   }
 }
 
-/* *
- * Creates pseudoFiles
+/* Creates pseudoFiles
  * This is totaly magic, there is absolutely no reason why i should be doing this
  * @return void (creates a pseudoFile)
  */
@@ -1000,7 +999,7 @@ function pseudoFilesCreator() {
 var filterObj = new Object();
 filterObj.useDefaultFilters = false;
 filterObj.processingFiles = new Array(); // Auxiliar object that holds temporary results
-/* * RULES **/
+/* RULES */
 filterObj.defaultUnfiltered = {0:2,
                                1:{"fdate":"<,172800"},
                                2:{"ftype":"==,generic"}};
@@ -1019,11 +1018,13 @@ filterObj.defaultVisible = {0:5,
                             4:{"fdate":"<,604800"},
                             5:{"efvisible":"<,1"}};
 filterObj.visible = filterObj.defaultVisible;
-filterObj.defaultHidden = {0:2,
+filterObj.defaultHidden = {0:4,
                            1:{"falang":"==,obj.filterAudLang"},
-                           2:{"fslang":"==,obj.filterSubLang"}};
+                           2:{"fslang":"==,obj.filterSubLang"},
+						   3:{"fraw":"!=,LAY_HIDERAWS"},
+						   4:{"fgroupfiltered":"==,LAY_HIDEFILTEREDGROUPS"}};
 filterObj.hidden = filterObj.defaultHidden;
-/* * AUXILIAR COMPARE FUNCTION **/
+/* AUXILIAR COMPARE FUNCTION */
 filterObj.compare = function compare(symbol, a, b) {
   switch (symbol) {
     case '>' : return (a >  b);
@@ -1035,7 +1036,7 @@ filterObj.compare = function compare(symbol, a, b) {
   }
   return 0;
 };
-/* * TEST FUNCTIONS **/
+/* TEST FUNCTIONS */
 filterObj['fdate'] = function fdate(file,symbol,value,rthis) {
   var curDate = Number(new Date()) / 1000;
   var fDate = Number(javascriptDate(cTimeDate(file.date))) / 1000;
@@ -1130,7 +1131,18 @@ filterObj['fdeprecated'] = function fdeprecated(file,symbol,value,rthis) {
   if (rthis) return (file.isDeprecated);
   return (filterObj.compare(symbol, file.isDeprecated, value));
 };
-/* * PROCESSING FUCTIONS **/
+filterObj['fraw'] = function fraw(file,symbol,value,rthis) {
+  if (rthis) return (file.isRaw);
+  return (filterObj.compare(symbol, file.isRaw, LAY_HIDERAWS));
+};
+filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
+  var group = groups[file.groupId];
+  if (!group) return false;
+  if (rthis) return (group.filtered);
+  return (filterObj.compare(symbol, group.filtered, LAY_HIDEFILTEREDGROUPS));
+};
+
+/* PROCESSING FUCTIONS */
 filterObj.processFile = function processFile(file, operation) {
   if (!file) return false;
   var episode = episodes[file.episodeId];
