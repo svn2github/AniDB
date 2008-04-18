@@ -56,7 +56,7 @@ function showDelBox(xmldoc) {
 	if (!msg_all) return;
 	msg_all.insertBefore(g_note,msg_all.firstChild);
 	self.clearTimeout(deltimer);
-	deltimer = self.setTimeout('removeDelBox()', 1000);
+	//deltimer = self.setTimeout('removeDelBox()', 1000);
 }
 
 function removeDelBox() {

@@ -442,6 +442,7 @@ function init_formating() {
 		iframe.id = "wysiwyg_" + i;
 		iframe.style.height = wysiwygHeight + "px";
 		iframe.style.width = wysiwygWidth + "px";
+		iframe.borderWidth = 0;
 		textArea.parentNode.insertBefore(iframe,textArea);
 		// Pass the textarea's existing text over to the content variable
 		var content = convert_input(textArea.value);
@@ -505,7 +506,7 @@ function prepPage() {
 			else return;
 			break;
 		case 'cmt':
-			if      (uriObj['cmt.do.add'] && (uriObj['cmt.do.add'] == '1' || uriObj['cmt.do.edit'] == '1')) init_formating();
+			if      (uriObj['cmt.do.add'] && (uriObj['cmt.do.add'] || uriObj['cmt.do.edit'])) init_formating();
 			else return;
 			break;
 		default: return;

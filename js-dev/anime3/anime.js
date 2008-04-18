@@ -924,8 +924,16 @@ function changeMylistState(action,node) {
 			if (!epWatchedCount) episode.seenDate = 0;
 		} else {
 			var aAdd = getElementsByClassName(as, 'addmylist', true)[0];
-			if (aAdd) actionCell.replaceChild(icons['mylist_remove'],aAdd);
-			actionCell.appendChild(icons['mylist_watch']);
+			if (aAdd) {
+				var removeWithoutAction = icons['mylist_remove'];
+				removeWithoutAction.removeAttribute('href');
+				removeWithoutAction.onclick = function showWarning() { alert('Action not available to quick-add files.\nPlease reload the page to act upon the file'); }
+				actionCell.replaceChild(removeWithoutAction,aAdd);
+			}
+			var watchWithoutAction = icons['mylist_watch'];
+			watchWithoutAction.removeAttribute('href');
+			watchWithoutAction.onclick = function showWarning() { alert('Action not available to quick-add files.\nPlease reload the page to act upon the file'); }
+			actionCell.appendChild(watchWithoutAction);
 			// mylist cell
 			if (mylistCell) {
 				while (mylistCell.childNodes.length) mylistCell.removeChild(mylistCell.firstChild);
