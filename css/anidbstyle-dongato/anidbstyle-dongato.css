@@ -239,10 +239,14 @@ th, td.action.icons, td.codec
 	white-space: nowrap !important;
 }
 
-.grouplist .action.icons,
-table.anime_list td.type
+.grouplist .action.icons
 {
 	width: 60px;
+}
+
+table.animelist td.codec
+{
+	width: 40px;
 }
 
 /* enlarge latest files table */
