@@ -13,6 +13,7 @@
 var episodeFileTableRenderList = new Array(); // stack of fileTables in queue for render (currently not used)
 var fInt = 100; // time to wait between ep node parsing 
 var eInt = 150; // time to wait between ep render
+var groupOrder = new Array();
 
 // CORE Classes //
 
@@ -575,6 +576,7 @@ function parseGroups(node,aid) {
     var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
     groups[groupEntry.id] = groupEntry;
     aGroups[aGroupEntry.id] = aGroupEntry;
+	if (groupOrder) groupOrder.push(aGroupEntry.id);
     if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
   }
   // create the "no group" group entry

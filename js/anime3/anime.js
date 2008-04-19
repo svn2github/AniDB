@@ -12,7 +12,7 @@ var mod;						// isMod
 var anime;						// anime Object (used in animePage)
 var animes = new Array();		// stored by aid
 var animeOrder = new Array();	// animes ordered in db way (link to aid)
-//var groupOrder = new Array();	// ordered group list (filtering porpuses)
+var groupOrder = new Array();	// ordered group list (filtering porpuses)
 var groups = new Array();		// stored by gid
 var aGroups = new Array();		// stored by agid (gid to link groups)
 var mylist = new Array();		// stored by fid
@@ -529,8 +529,8 @@ function updateGroupTable() {
 	groupTable.appendChild(tfoot);
 	var groupCnt = tbody.rows.length;
 	var lastIndex = 0;
-	for (g in groups) {
-		var group = groups[g];
+	for (var g = 0; g < groupOrder.length; g++) {
+		var group = groups[groupOrder[g]];
 		if (!group || group && group.id == 0) continue; // not interested in non groups nor the no group
 		// update existing rows
 		var gid = group.id;
@@ -594,7 +594,7 @@ function updateGroupTable() {
 		if (headingTest) headingTest.className += ' c_set';
 		headingTest = getElementsByClassName(headingList,'cmts',true)[0];
 		if (headingTest) headingTest.className += ' c_set';
-		init_sorting(thead.rows[0],'epno','down');
+		init_sorting(thead.rows[0],'epno','up');
 		//sortcol(head); // resort the table
 	}
 	// add filtering and stuff to tfoot
