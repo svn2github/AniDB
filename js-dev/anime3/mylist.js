@@ -126,6 +126,7 @@ function prepPage() {
 	}
 	mylist_settings['noeptb'] = false; // force this setting
 	createPreferencesTable('mylist');
+	cleanUpExpands();
 }
 
 /* Function that fetches anime data
@@ -193,7 +194,7 @@ function showSuccessBox(xmldoc) {
 		p.appendChild(document.createTextNode('Action done.'));
 		g_note.appendChild(p);
 	}
-	var msg_all = getElementsByClassName(document.getElementsByTagName('DIV'), 'g_content msg_all', true)[0];
+	var msg_all = getElementsByClassName(document.getElementsByTagName('div'), 'g_content msg_all', true)[0];
 	if (!msg_all) return;
 	msg_all.insertBefore(g_note,msg_all.firstChild);
 	self.clearTimeout(deltimer);
@@ -204,6 +205,21 @@ function showSuccessBox(xmldoc) {
 function removeDelBox() {
 	g_note.parentNode.removeChild(g_note);
 	g_note = null;
+}
+
+/* Function that cleans up pages called with expanded animes */
+function cleanUpExpands() {
+	if (!uriObj['expand']) return; // nothing to do
+	var aid = Number(uriObj['expand']);
+	var aRow = document.getElementById('a'+aid);
+	if (!aRow) return;
+	var rowIndex = aRow.rowIndex;
+	var tbody = aRow.parentNode;
+	tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
+	tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
+	// now do my stuff and get this over with
+	var a = aRow.getElementsByTagName('a')[0];
+	if (a) a.onclick();
 }
 
 /* Function that expands one anime */
@@ -355,13 +371,18 @@ function changeWatchedState() {
 				if (erow) { // we got the episode row, add the span
 					var cell = getElementsByClassName(erow.getElementsByTagName('td'), 'title', true)[0];
 					if (cell) {
+						var icons = createEpisodeIcons(episode);
 						var span = getElementsByClassName(cell.getElementsByTagName('span'),'icons', true)[0];
 						if (!span) { // no span, add one to the dom and add the icon
 							span = document.createElement('span');
 							span.className = 'icons';
 							cell.insertBefore(span,cell.firstChild);
+						} else {
+							while (span.childNodes.length) span.removeChild(span.firstChild);
 						}
-						createIcon(span, 'seen ', null, null, 'seen on: '+cTimeDate(episode.seenDate), 'i_seen');
+						if (icons['seen']) span.appendChild(icons['seen']);
+						if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
+						if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
 						// update anime row
 						if (cellSeen) {
 							if (episode.typeChar == '') { // episode is one of the normal episodes

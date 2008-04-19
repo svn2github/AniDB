@@ -529,7 +529,7 @@ function updateGroupTable() {
 	groupTable.appendChild(tfoot);
 	var groupCnt = tbody.rows.length;
 	var lastIndex = 0;
-	for (g in groups) {
+	for (var g in groups) {
 		var group = groups[g];
 		if (!group || group && group.id == 0) continue; // not interested in non groups nor the no group
 		// update existing rows
@@ -594,7 +594,7 @@ function updateGroupTable() {
 		if (headingTest) headingTest.className += ' c_set';
 		headingTest = getElementsByClassName(headingList,'cmts',true)[0];
 		if (headingTest) headingTest.className += ' c_set';
-		init_sorting(thead.rows[0],'epno','down');
+		init_sorting(thead.rows[0],'epno','up');
 		//sortcol(head); // resort the table
 	}
 	// add filtering and stuff to tfoot
@@ -802,13 +802,18 @@ function changeWatchedState() {
 				if (erow) { // we got the episode row, add the span
 					var cell = getElementsByClassName(erow.getElementsByTagName('td'), 'title', true)[0];
 					if (cell) {
+						var icons = createEpisodeIcons(episode);
 						var span = getElementsByClassName(cell.getElementsByTagName('span'),'icons', true)[0];
 						if (!span) { // no span, add one to the dom and add the icon
 							span = document.createElement('span');
 							span.className = 'icons';
 							cell.insertBefore(span,cell.firstChild);
+						} else {
+							while (span.childNodes.length) span.removeChild(span.firstChild);
 						}
-						createIcon(span, 'seen ', null, null, 'seen on: '+cTimeDate(episode.seenDate), 'i_seen');
+						if (icons['seen']) span.appendChild(icons['seen']);
+						if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
+						if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
 					}
 				}
 			}
@@ -1037,6 +1042,81 @@ function showFiles(hide,passedNode) {
 
 /* Function that hides filtered out files */
 function hideFiles() { showFiles(true,this); }
+
+/* Expand file relations */
+function expandFiles() {
+	var row = this.parentNode.parentNode;
+	var eid = null;
+	if (!document.getElementById(row.id+'_relftHolder')) {
+		var rowSibling = row.nextSibling;
+		var rowParent = row.parentNode;
+		var nRow = document.createElement('tr'); //the new episode row
+		var nCell = document.createElement('td');
+		nRow.id = row.id + '_relftHolder';
+		var rfid = row.id.split('f')[1];
+		eid = row.id.split((row.id.indexOf('rf') < 0) ? 'f' : 'rf')[0];
+		var file = null;
+		if (row.id.indexOf('rf') < 0) file = files[rfid];
+		else file = pseudoFiles.list[rfid];
+		nCell.colSpan = row.cells.length;
+		// Relation Table
+		var table = document.createElement('table');
+		table.className = 'filelist';
+		table.id = 'file'+rfid+'relations';
+		if (LAY_HEADER)
+			table.appendChild(createTableHead(fileCols));
+		var tfoot = document.createElement('tfoot');
+		var tbody = document.createElement('tbody');
+		// TableBody
+		for (var f = 0; f < file.relatedFiles.length; f++) {
+			var drow = document.getElementById('e'+eid+'f'+file.relatedFiles[f]);
+			var dnode;
+			if (!drow) {
+				var rfile = files[file.relatedFiles[f]];
+				var episode = episodes[rfile.episodeId];
+				drow = createFileRow(eid,rfile.id,fileCols,fileSkips);
+				dnode = drow;
+			} else {
+				dnode = drow.cloneNode(true);
+				dnode.id = 'e'+eid+'rf'+file.relatedFiles[f];
+			}
+			dnode.style.display = '';
+			// clean up the extra node
+			var ccell = getElementsByClassName(dnode.getElementsByTagName('td'),'id icons',true)[0];
+			if (ccell) {
+				var spans = dnode.getElementsByTagName('span');
+				var ico = getElementsByClassName(spans,'i_icon i_plus',true)[0];
+				if (ico) ccell.removeChild(ico);
+				else {
+					ico = getElementsByClassName(spans,'i_icon i_minus',true)[0];
+					if (ico) ccell.removeChild(ico);
+				}
+			}
+			tbody.appendChild(dnode);
+		}
+		table.appendChild(tbody);
+		// END here
+		nCell.appendChild(table);
+		nRow.appendChild(nCell);
+		rowParent.insertBefore(nRow,rowSibling);
+	} else {
+		document.getElementById(row.id+'_relftHolder').style.display = '';
+	}
+	this.onclick = foldFiles;
+	this.title = 'fold this entry';
+	this.alt = '[-]';
+	this.className = 'i_icon i_minus';
+}
+
+/* Fold file relations */
+function foldFiles() {
+	var row = this.parentNode.parentNode;
+	document.getElementById(row.id+'_relftHolder').style.display = 'none';
+	this.onclick = expandFiles;
+	this.title = 'expand this entry';
+	this.alt = '[+]';
+	this.className = 'i_icon i_plus';
+}
 
 /* Function that creates a file table for a given episode
  * @param episode The episode data

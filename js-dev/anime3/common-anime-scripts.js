@@ -34,7 +34,7 @@ var genEpCols = [	{'name':"expand",'classname':"expand",'header':"X",'abbr':"Exp
 					{'name':"duration",'classname':"duration",'header':"Len",'abbr':"Play length"},
 					{'name':"date",'classname':"date",'header':"Date"}, 
 					{'name':"airdate",'classname':"date airdate",'header':"Air Date"}, 
-					{'name':"users",'classname':"number epusers",'header':"Users",},
+					{'name':"users",'classname':"number epusers",'header':"Users"},
 					{'name':"files",'classname':"count files",'header':"Files",'headclass':"files"},
 					{'name':"actions",'classname':"action",'header':"Action"}	];
 					
@@ -369,7 +369,6 @@ function createFileIcons(file) {
 	// fid
 	if (file.pseudoFile || (file.relatedFiles && file.relatedFiles.length)) {
 		var a = createIcon(null, '[+]', null, expandFiles, 'expand this entry', 'i_plus');
-		a.style.cursor = 'pointer';
 		icons['expand'] = a;
 	}
 	if (!LAY_SHOWFID) {
@@ -552,11 +551,12 @@ function createFileIcons(file) {
  * @param skips Array with colspans for generic classes (optional)
  * @return file row
  */
-function createFileRow(eid,fid,cols,skips) {
+function createFileRow(eid,fid,cols,skips,rfid) {
 if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 	var row = document.createElement('tr');
 	var mylistEntry = mylist[fid];
 	var file = files[fid];
+	if (rfid != null) file = pseudoFiles[rfid];
 	var episode = episodes[eid];
 	row.id = 'e'+eid+(file.pseudoFile ? 'r' : '')+'f'+fid;
 	if (file.type == 'generic') row.className = "generic no_sort";
@@ -630,10 +630,10 @@ if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 				}
 				break;
 			case 'mylist-storage':
-				createCell(row, col['classname'], document.createTextNode(mylistEntry.storage), null, colSpan);
+				createCell(row, col['classname'], document.createTextNode((mylistEntry.storage ? mylistEntry.storage : "")), null, colSpan);
 				break;
 			case 'mylist-source':
-				createCell(row, col['classname'], document.createTextNode(mylistEntry.source), null, colSpan);
+				createCell(row, col['classname'], document.createTextNode((mylistEntry.source ? mylistEntry.source : "")), null, colSpan);
 				break;
 			case 'users':
 				cell = createCell(null, col['classname'],createLink(null, file.usersTotal, 'animedb.pl?show=userlist&fid=' + file.id, null, null, 'total users', null),file.usersTotal, colSpan);
