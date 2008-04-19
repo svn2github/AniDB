@@ -363,6 +363,14 @@ function convert_input(str) {
 	str = str.replace(/\[\/li\]/mgi,'</li>');
 	str = str.replace(/\[br\]/mgi,'<br>');
 	str = str.replace(/\n/mgi,'<br>');
+	//str = str.replace(/\%nbsp\;/mgi,' ');
+	/* IE and opera support */
+	str = str.replace(/\<strong\>/mgi,'<b>');
+	str = str.replace(/\<\/strong\>/mgi,'<\b>');
+	str = str.replace(/\<em\>/mgi,'<i>');
+	str = str.replace(/\<\/em\>/mgi,'<\i>');
+	str = str.replace(/\<p\>/mgi,'');
+	str = str.replace(/\<\/p\>/mgi,'<br>');
 	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
 	return (str);
 }
@@ -390,6 +398,14 @@ function format_output(n) {
 	str = str.replace(/\<li\>/mgi,'[li]');
 	str = str.replace(/\<\/li\>/mgi,'[/li]');
 	str = str.replace(/\<br\>/mgi,'[br]');
+	/* IE and opera support */
+	str = str.replace(/\<p\>/mgi,'');
+	str = str.replace(/\<\/p\>/mgi,'[br]');
+	str = str.replace(/\<strong\>/mgi,'[b]');
+	str = str.replace(/\<\/strong\>/mgi,'[/b]');
+	str = str.replace(/\<em\>/mgi,'[i]');
+	str = str.replace(/\<\/em\>/mgi,'[/i]');
+	/* Other stuff */
 	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 	textArea.value = str;
 }
@@ -399,6 +415,9 @@ function init_formating() {
 	// detection rar wants for his shinny firefox 1.0.7
 	if (!document.getElementsByTagName) return; // Can't do a thing..
 	if (!document.designMode) return;
+	var browserName = navigator.appName;
+	if (browserName == "Microsoft Internet Explorer")
+	
 	var textAreas = document.getElementsByTagName('textarea');
 	if (!textAreas.length) return; // Still no nodes..
 
