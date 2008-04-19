@@ -402,6 +402,8 @@ function format_output(n) {
 	/* IE and opera support */
 	str = str.replace(/\<p\>/mgi,'');
 	str = str.replace(/\<\/p\>/mgi,'[br]');
+	str = str.replace(/\<STRONG\>/mgi,'[b]');
+	str = str.replace(/\<\/STRONG\>/mgi,'[/b]');
 	str = str.replace(/\<strong\>/mgi,'[b]');
 	str = str.replace(/\<\/strong\>/mgi,'[/b]');
 	str = str.replace(/\<em\>/mgi,'[i]');
