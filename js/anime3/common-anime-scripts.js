@@ -573,7 +573,7 @@ if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 				createCell(row, col['classname'], createCheckBox(null,'mylmod.f.'+mylistEntry.id,'mylmod.f.'+mylistEntry.id,null,false), null, colSpan);
 				break;
 			case 'check-anime':
-				createCell(row, col['classname'], createCheckBox(null,'madd.f.'+file.id,'madd.f.'+file.id,null,false), null, colSpan);
+				createCell(row, col['classname'], createCheckBox(null,'madd.f.'+file.id,'madd.f.'+file.id,showAddToMylistBox,false), null, colSpan);
 				break;
 			case 'fid':
 				if (!icons['expand'])
