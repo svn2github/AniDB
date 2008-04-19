@@ -396,6 +396,7 @@ function format_output(n) {
 	str = str.replace(/\<ol\>/mgi,'[ol]');
 	str = str.replace(/\<\/ol\>/mgi,'[/ol]');
 	str = str.replace(/\<li\>/mgi,'[li]');
+	str = str.replace(/\<li\>\<br \/\>/mgi,'[li]');
 	str = str.replace(/\<\/li\>/mgi,'[/li]');
 	str = str.replace(/\<br\>/mgi,'[br]');
 	/* IE and opera support */
@@ -415,9 +416,6 @@ function init_formating() {
 	// detection rar wants for his shinny firefox 1.0.7
 	if (!document.getElementsByTagName) return; // Can't do a thing..
 	if (!document.designMode) return;
-	var browserName = navigator.appName;
-	if (browserName == "Microsoft Internet Explorer")
-	
 	var textAreas = document.getElementsByTagName('textarea');
 	if (!textAreas.length) return; // Still no nodes..
 
