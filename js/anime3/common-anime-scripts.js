@@ -34,7 +34,7 @@ var genEpCols = [	{'name':"expand",'classname':"expand",'header':"X",'abbr':"Exp
 					{'name':"duration",'classname':"duration",'header':"Len",'abbr':"Play length"},
 					{'name':"date",'classname':"date",'header':"Date"}, 
 					{'name':"airdate",'classname':"date airdate",'header':"Air Date"}, 
-					{'name':"users",'classname':"number epusers",'header':"Users",},
+					{'name':"users",'classname':"number epusers",'header':"Users"},
 					{'name':"files",'classname':"count files",'header':"Files",'headclass':"files"},
 					{'name':"actions",'classname':"action",'header':"Action"}	];
 					
