@@ -193,7 +193,7 @@ function showSuccessBox(xmldoc) {
 		p.appendChild(document.createTextNode('Action done.'));
 		g_note.appendChild(p);
 	}
-	var msg_all = getElementsByClassName(document.getElementsByTagName('DIV'), 'g_content msg_all', true)[0];
+	var msg_all = getElementsByClassName(document.getElementsByTagName('div'), 'g_content msg_all', true)[0];
 	if (!msg_all) return;
 	msg_all.insertBefore(g_note,msg_all.firstChild);
 	self.clearTimeout(deltimer);
@@ -355,13 +355,18 @@ function changeWatchedState() {
 				if (erow) { // we got the episode row, add the span
 					var cell = getElementsByClassName(erow.getElementsByTagName('td'), 'title', true)[0];
 					if (cell) {
+						var icons = createEpisodeIcons(episode);
 						var span = getElementsByClassName(cell.getElementsByTagName('span'),'icons', true)[0];
 						if (!span) { // no span, add one to the dom and add the icon
 							span = document.createElement('span');
 							span.className = 'icons';
 							cell.insertBefore(span,cell.firstChild);
+						} else {
+							while (span.childNodes.length) span.removeChild(span.firstChild);
 						}
-						createIcon(span, 'seen ', null, null, 'seen on: '+cTimeDate(episode.seenDate), 'i_seen');
+						if (icons['seen']) span.appendChild(icons['seen']);
+						if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
+						if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
 						// update anime row
 						if (cellSeen) {
 							if (episode.typeChar == '') { // episode is one of the normal episodes

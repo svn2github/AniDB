@@ -369,7 +369,6 @@ function createFileIcons(file) {
 	// fid
 	if (file.pseudoFile || (file.relatedFiles && file.relatedFiles.length)) {
 		var a = createIcon(null, '[+]', null, expandFiles, 'expand this entry', 'i_plus');
-		a.style.cursor = 'pointer';
 		icons['expand'] = a;
 	}
 	if (!LAY_SHOWFID) {
@@ -552,11 +551,12 @@ function createFileIcons(file) {
  * @param skips Array with colspans for generic classes (optional)
  * @return file row
  */
-function createFileRow(eid,fid,cols,skips) {
+function createFileRow(eid,fid,cols,skips,rfid) {
 if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 	var row = document.createElement('tr');
 	var mylistEntry = mylist[fid];
 	var file = files[fid];
+	if (rfid != null) file = pseudoFiles[rfid];
 	var episode = episodes[eid];
 	row.id = 'e'+eid+(file.pseudoFile ? 'r' : '')+'f'+fid;
 	if (file.type == 'generic') row.className = "generic no_sort";

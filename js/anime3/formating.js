@@ -506,7 +506,7 @@ function prepPage() {
 			else return;
 			break;
 		case 'cmt':
-			if      (uriObj['cmt.do.add'] && (uriObj['cmt.do.add'] || uriObj['cmt.do.edit'])) init_formating();
+			if      (uriObj['cmt.do.add'] || uriObj['cmt.do.edit'])) init_formating();
 			else return;
 			break;
 		default: return;
