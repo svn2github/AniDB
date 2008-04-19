@@ -630,10 +630,10 @@ if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 				}
 				break;
 			case 'mylist-storage':
-				createCell(row, col['classname'], document.createTextNode(mylistEntry.storage), null, colSpan);
+				createCell(row, col['classname'], document.createTextNode((mylistEntry.storage ? mylistEntry.storage : ""), null, colSpan);
 				break;
 			case 'mylist-source':
-				createCell(row, col['classname'], document.createTextNode(mylistEntry.source), null, colSpan);
+				createCell(row, col['classname'], document.createTextNode((mylistEntry.source ? mylistEntry.source : ""), null, colSpan);
 				break;
 			case 'users':
 				cell = createCell(null, col['classname'],createLink(null, file.usersTotal, 'animedb.pl?show=userlist&fid=' + file.id, null, null, 'total users', null),file.usersTotal, colSpan);
