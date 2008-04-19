@@ -575,7 +575,6 @@ function parseGroups(node,aid) {
     var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
     groups[groupEntry.id] = groupEntry;
     aGroups[aGroupEntry.id] = aGroupEntry;
-	if (groupOrder) groupOrder.push(aGroupEntry.id);
     if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
   }
   // create the "no group" group entry
