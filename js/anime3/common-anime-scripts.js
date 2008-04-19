@@ -789,6 +789,8 @@ function createPreferencesTable(type) {
 	episodeTitleDisplay = CookieGet('episodeTitleDisplay') || 2;
 	ed2k_pattern = CookieGet('ed2k_pattern') || "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
 	hashObj.pattern = ed2k_pattern;
+	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
+	hashObj.sfv = hashObj.pattern+".%ext %crc";
 	space_pattern = CookieGet('space_pattern') || "_";
 	hashObj.spacesChar = space_pattern;
 	use_mylist_add = CookieGet('use_mylist_add') || 0;
@@ -868,6 +870,7 @@ function createPreferencesTable(type) {
 					ed2k_pattern = this.value;
 					hashObj.pattern = ed2k_pattern;
 					hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
+					hashObj.sfv = hashObj.pattern+".%ext %crc";
 				};
 				li.appendChild(input);
 				var setDefault = createBasicButton('set_ed2k_default','default');
@@ -877,6 +880,7 @@ function createPreferencesTable(type) {
 					ed2k_pattern = hashObj.defaultPattern;
 					hashObj.pattern = ed2k_pattern;
 					hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
+					hashObj.sfv = hashObj.pattern+".%ext %crc";
 				}
 				li.appendChild(document.createTextNode(' '));
 				li.appendChild(setDefault);
