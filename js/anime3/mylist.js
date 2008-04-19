@@ -126,6 +126,7 @@ function prepPage() {
 	}
 	mylist_settings['noeptb'] = false; // force this setting
 	createPreferencesTable('mylist');
+	cleanUpExpands();
 }
 
 /* Function that fetches anime data
@@ -204,6 +205,21 @@ function showSuccessBox(xmldoc) {
 function removeDelBox() {
 	g_note.parentNode.removeChild(g_note);
 	g_note = null;
+}
+
+/* Function that cleans up pages called with expanded animes */
+function cleanUpExpands() {
+	if (!uriObj['expand']) return; // nothing to do
+	var aid = Number(uriObj['expand']);
+	var aRow = document.getElementById('a'+aid);
+	if (!aRow) return;
+	var rowIndex = aRow.rowIndex;
+	var tbody = aRow.parentNode;
+	tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
+	tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
+	// now do my stuff and get this over with
+	var a = aRow.getElementsByTagName('a')[0];
+	if (a) a.onclick();
 }
 
 /* Function that expands one anime */
