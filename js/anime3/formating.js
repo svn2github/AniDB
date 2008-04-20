@@ -15,6 +15,10 @@ var wysiwygHeight = 250;
 // enabling all toolbar commands while in HTML mode
 var viewTextMode = 0;
 var current_ed; // current editor
+var isIE = (document.selection != undefined && window.getSelection == undefined) ? true : false;
+var isFF = (document.selection == undefined && window.getSelection != undefined) ? true : false;
+var isOP = (document.selection != undefined && window.getSelection != undefined) ? true : false;
+var isWK = (navigator.userAgent.toLowerCase().indexOf('applewebkit') >= 0);
 
 /* Change view mode
  * @param type Type of view mode (source,wysiwyg)
@@ -160,19 +164,20 @@ function buttonMouseOut() {
  * @param text if true will insert text instead of nodes
  */
 function insertAtSelection(myField, myValue, text) {
-	if (document.selection) {	//IE support
+	if (isIE) {	//IE support
 		myField = myField.document;
 		myField.focus();
 		var sel = myField.selection.createRange();
 		if (text) sel.text = myValue;
 		else sel.pasteHTML(myValue);
 		myField.focus();
-	} else if (window.getSelection) { //MOZILLA/NETSCAPE support
-		myField.focus();
+	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+		if (isFF) myField.focus();
 		var sel = myField.getSelection();
 		var range = sel.getRangeAt(0);
 		range.deleteContents();
-		if (text) range.insertNode(document.createTextNode(myValue));
+		var doc = myField.document;
+		if (text) range.insertNode(doc.createTextNode(myValue));
 		else range.insertNode(myValue);
 	} else {
 		if (seeDebug) alert('insertAtSelection: unknown selection method');
@@ -185,13 +190,13 @@ function insertAtSelection(myField, myValue, text) {
  * @return 
  */
 function getSelection(myField) {
-	if (document.selection) {	//IE support
+	if (isIE) {	//IE support
 		myField = myField.document;
 		myField.focus();
 		var sel = myField.selection.createRange();
 		return (sel.text);
-	} else if (window.getSelection) { //MOZILLA/NETSCAPE support
-		myField.focus();
+	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+		if (isFF) myField.focus();
 		var sel = myField.getSelection();
 		var range = sel.getRangeAt(0);
 		return (range.toString());
@@ -276,11 +281,11 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
 	}
 	var hyperLink = '['+val+':'+attribute+':'+sel+']';
 	if (textOnly) return hyperLink;
-	if (document.selection) {	//IE support
+	if (isIE) {	//IE support
 		// IE fails miserably here, don't show the link thingie
 		insertAtSelection(obj, hyperLink, true);
-	} else if (window.getSelection) { //MOZILLA/NETSCAPE support
-		hyperLink = document.createElement('a');
+	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+		hyperLink = obj.document.createElement('a');
 		hyperLink.setAttribute('att',attribute);
 		hyperLink.type = val;
 		hyperLink.href = base+type+attribute;
@@ -367,6 +372,8 @@ function convert_input(str) {
 	/* IE and opera support */
 	str = str.replace(/\<strong\>/mgi,'<b>');
 	str = str.replace(/\<\/strong\>/mgi,'<\b>');
+	str = str.replace(/\<STRONG\>/mgi,'<b>');
+	str = str.replace(/\<\/STRONG\>/mgi,'<\b>');
 	str = str.replace(/\<em\>/mgi,'<i>');
 	str = str.replace(/\<\/em\>/mgi,'<\i>');
 	str = str.replace(/\<p\>/mgi,'');
@@ -468,14 +475,17 @@ function init_formating() {
 		var doc = iframe.contentWindow.document;
 		// Write the textarea's content into the iframe
 		doc.open();
-		var htmlNode = doc.firstChild;
+		var htmlNode = doc.firstChild; // only works for firefox
 		if (htmlNode) {
 			var head = null;
 			for (var n = 0; n < htmlNode.childNodes.length; n++) {
 				if (htmlNode.childNodes[n].nodeName.toLowerCase() == 'head') 
 					head = htmlNode.childNodes[n];
 			}
-			if (!head) head = document.createElement('head');
+			if (!head) {
+				head = document.createElement('head');
+				htmlNode.appendChild(head);
+			}
 			for (var ss = 0; ss < document.styleSheets.length; ss++) {
 				var stylesheet = document.createElement('link');
 				stylesheet.title = document.styleSheets[ss].title;
@@ -484,6 +494,13 @@ function init_formating() {
 				stylesheet.rel = (ss ? 'alternate ' : '' ) + 'stylesheet';
 				head.appendChild(stylesheet);
 			}
+			// creating the new stylesheet
+			var stylesheet = document.createElement('style');
+			stylesheet.type = 'text/css';
+			head.appendChild(stylesheet);
+			var x = doc.styleSheets[doc.styleSheets.length - 1];
+			//x.insertRule('body { background-image: none; }',x.cssRules.length);
+			x.insertRule('html { background-image: none; }',x.cssRules.length);
 		}
 		doc.write(content);
 		doc.close();
@@ -512,6 +529,7 @@ function init_formating() {
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
+	if (isWK) return; // no support for safari
 	if (!uriObj['show']) return; // go away evil page!
 	switch (uriObj['show']) { // list of pages where to apply formating stuff
 		case 'animeatt':
