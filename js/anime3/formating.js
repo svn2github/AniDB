@@ -450,7 +450,7 @@ function init_formating() {
 	for (var i = 0; i < textAreas.length; i++) {
 		var textArea = textAreas[i];
 		textArea.id = "textArea_"+i;
-		//textArea.style.display = "none";
+		textArea.style.display = "none";
 		var fTA = textArea.form;
 		var span = document.createElement('span');
 		span.className = 'f_controls';
@@ -530,7 +530,6 @@ function init_formating() {
 			var input = inputs[s];
 			if (input.type != 'submit') continue;
 			input.onclick = updateTextAreaCK;
-			input.type = 'button';
 			break;
 		}
 	}
