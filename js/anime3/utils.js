@@ -756,7 +756,9 @@ function c_number_r(b, a) {
   return c_number(a, b);
 }
 function dig_text(node) {
+	if (!node) return ("");
 	while (node && !node.nodeValue) { node = node.firstChild; }
+	if (!node) return (""); 
 	return node.nodeValue;
 }
 function dig_text_lower(node) {
