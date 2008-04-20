@@ -232,7 +232,7 @@ function showMsgList() {
 
 function createNewMessageAction() {
 	var ul = document.createElement('ul');
-	ul.className = 'g_actionlist';
+	ul.className = 'g_list links';
 	var li = document.createElement('li');
 	li.className = 'g_odd';
 	var a = document.createElement('a');
@@ -285,7 +285,7 @@ function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 	tbody.appendChild(row);
 	row = document.createElement('tr');
 	row.className = 'action'; 
-	cell = createCell(null, 'value', createButton('msg.send','msg.send',false,'Send Message','submit'), null);
+	cell = createCell(null, 'value', createButton('do','msg.send',false,'Send Message','submit'), null);
 	cell.colSpan = "2";
 	row.appendChild(cell);
 	tbody.appendChild(row);
