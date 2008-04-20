@@ -403,7 +403,7 @@ function format_output(n) {
 	str = str.replace(/\<ol\>/mgi,'[ol]');
 	str = str.replace(/\<\/ol\>/mgi,'[/ol]');
 	str = str.replace(/\<li\>/mgi,'[li]');
-	str = str.replace(/\<li\>\<br \/\>/mgi,'[li]');
+	//str = str.replace(/\<li\>\<br \/\>/mgi,'[li]');
 	str = str.replace(/\<\/li\>/mgi,'[/li]');
 	str = str.replace(/\<br\>/mgi,'[br]');
 	/* IE and opera support */
@@ -415,8 +415,16 @@ function format_output(n) {
 	str = str.replace(/\<\/strong\>/mgi,'[/b]');
 	str = str.replace(/\<em\>/mgi,'[i]');
 	str = str.replace(/\<\/em\>/mgi,'[/i]');
-	/* Other stuff */
 	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
+	/* Other stuff */
+	str = str.replace(/\<A href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/A\>/mgi,convertLinksOutput);
+	/* Safari support */
+	if (isWK) {
+		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: underline\;\"\>(.+?)\<\span\>/mgi,'[u]'+$0+'[/u]');
+		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: line-through\;\"\>(.+?)\<\span\>/mgi,'[i]'+$0+'[/i]');
+		str = str.replace(/\<div\>/mgi,'');
+		str = str.replace(/\<\/div\>/mgi,'[br]');
+	}
 	textArea.value = str;
 }
 
@@ -442,7 +450,7 @@ function init_formating() {
 	for (var i = 0; i < textAreas.length; i++) {
 		var textArea = textAreas[i];
 		textArea.id = "textArea_"+i;
-		textArea.style.display = "none";
+		//textArea.style.display = "none";
 		var fTA = textArea.form;
 		var span = document.createElement('span');
 		span.className = 'f_controls';
@@ -522,6 +530,7 @@ function init_formating() {
 			var input = inputs[s];
 			if (input.type != 'submit') continue;
 			input.onclick = updateTextAreaCK;
+			input.type = 'button';
 			break;
 		}
 	}
@@ -529,7 +538,7 @@ function init_formating() {
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
-	if (isWK) return; // no support for safari
+	//if (isWK) return; // no support for safari
 	if (!uriObj['show']) return; // go away evil page!
 	switch (uriObj['show']) { // list of pages where to apply formating stuff
 		case 'animeatt':
@@ -548,6 +557,7 @@ function prepPage() {
 			break;
 		default: return;
 	}
+	//init_formating();
 }
 
 //window.onload = prepPage;
