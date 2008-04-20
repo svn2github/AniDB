@@ -415,9 +415,8 @@ function format_output(n) {
 	str = str.replace(/\<\/strong\>/mgi,'[/b]');
 	str = str.replace(/\<em\>/mgi,'[i]');
 	str = str.replace(/\<\/em\>/mgi,'[/i]');
-	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
-	/* Other stuff */
 	str = str.replace(/\<A href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/A\>/mgi,convertLinksOutput);
+	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 	/* Safari support */
 	if (isWK) {
 		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: underline\;\"\>(.+?)\<\span\>/mgi,'[u]'+$0+'[/u]');
