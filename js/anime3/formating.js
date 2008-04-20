@@ -457,8 +457,8 @@ function init_formating() {
 		// yes, yes, i know, blame IE
 		createLocalButton(span,'bold',FunctionMap['bold']);
 		createLocalButton(span,'italic',FunctionMap['italic']);
-		createLocalButton(span,'underline',FunctionMap['underline']);
-		createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
+		if(!isWK) createLocalButton(span,'underline',FunctionMap['underline']);
+		if(!isWK) createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
 		createLocalButton(span,'orderedlist',FunctionMap['orderedlist']);
 		createLocalButton(span,'unorderedlist',FunctionMap['unorderedlist']);
 		createLocalButton(span,'link',FunctionMap['link']);
