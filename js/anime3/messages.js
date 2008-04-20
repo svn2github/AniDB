@@ -305,7 +305,7 @@ function updateMsgList() {
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';		// checkbox
 	headingList[1].className += ' c_latin';	// state
-	headingList[2].className += ' c_date';		// date
+	headingList[2].className += ' c_set';		// date, anidb.sort is given so i'll just use it while i don't fix my date
 	headingList[3].className += ' c_latin';	// from
 	headingList[4].className += ' c_latin';	// type
 	headingList[5].className += ' c_latin';	// title
