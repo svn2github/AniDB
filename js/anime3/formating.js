@@ -2,7 +2,8 @@
  * @author fahrenheit (alka.setzer@gmail.com)
  * @contents Core Functions
  *           Formating
- * version 1.2 (18.06.2007)
+ * version 1.2 (18.06.2007) - Previous version
+ * version 2.0 (20.04.2008) - Rather full support for every major browser Firefox, IE, Opera and Safari
  */
 
 // GLOBALS
@@ -286,9 +287,9 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
 		insertAtSelection(obj, hyperLink, true);
 	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
 		hyperLink = obj.document.createElement('a');
-		hyperLink.setAttribute('att',attribute);
-		hyperLink.type = val;
 		hyperLink.href = base+type+attribute;
+		hyperLink.type = val;
+		hyperLink.setAttribute('att',attribute);
 		hyperLink.appendChild(document.createTextNode(sel));
 		insertAtSelection(obj, hyperLink, false);
 	} else {
@@ -368,7 +369,7 @@ function convert_input(str) {
 	str = str.replace(/\[\/li\]/mgi,'</li>');
 	str = str.replace(/\[br\]/mgi,'<br>');
 	str = str.replace(/\n/mgi,'<br>');
-	//str = str.replace(/\%nbsp\;/mgi,' ');
+	str = str.replace(/\%nbsp\;/mgi,' ');
 	/* IE and opera support */
 	str = str.replace(/\<strong\>/mgi,'<b>');
 	str = str.replace(/\<\/strong\>/mgi,'<\b>');
@@ -415,12 +416,11 @@ function format_output(n) {
 	str = str.replace(/\<\/strong\>/mgi,'[/b]');
 	str = str.replace(/\<em\>/mgi,'[i]');
 	str = str.replace(/\<\/em\>/mgi,'[/i]');
-	str = str.replace(/\<A href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/A\>/mgi,convertLinksOutput);
 	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 	/* Safari support */
 	if (isWK) {
-		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: underline\;\"\>(.+?)\<\span\>/mgi,'[u]'+$0+'[/u]');
-		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: line-through\;\"\>(.+?)\<\span\>/mgi,'[i]'+$0+'[/i]');
+		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: underline\; \"\>(.+?)\<\/span\>/mgi,'[u]$1[/u]');
+		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: line-through\; \"\>(.+?)\<\/span\>/mgi,'[i]$1[/i]');
 		str = str.replace(/\<div\>/mgi,'');
 		str = str.replace(/\<\/div\>/mgi,'[br]');
 	}
@@ -449,7 +449,7 @@ function init_formating() {
 	for (var i = 0; i < textAreas.length; i++) {
 		var textArea = textAreas[i];
 		textArea.id = "textArea_"+i;
-		textArea.style.display = "none";
+		//textArea.style.display = "none";
 		var fTA = textArea.form;
 		var span = document.createElement('span');
 		span.className = 'f_controls';
@@ -529,6 +529,7 @@ function init_formating() {
 			var input = inputs[s];
 			if (input.type != 'submit') continue;
 			input.onclick = updateTextAreaCK;
+			input.type = 'button';
 			break;
 		}
 	}
@@ -536,7 +537,6 @@ function init_formating() {
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
-	//if (isWK) return; // no support for safari
 	if (!uriObj['show']) return; // go away evil page!
 	switch (uriObj['show']) { // list of pages where to apply formating stuff
 		case 'animeatt':
@@ -555,7 +555,6 @@ function prepPage() {
 			break;
 		default: return;
 	}
-	//init_formating();
 }
 
 //window.onload = prepPage;
