@@ -285,7 +285,7 @@ function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 	tbody.appendChild(row);
 	row = document.createElement('tr');
 	row.className = 'action'; 
-	cell = createCell(null, 'value', createButton('do','msg.send',false,'Send Message','submit'), null);
+	cell = createCell(null, 'value', createButton('do','msg.send',false,'Send','submit'), null);
 	cell.colSpan = "2";
 	row.appendChild(cell);
 	tbody.appendChild(row);
