@@ -409,7 +409,7 @@ function format_output(n) {
 	str = str.replace(/\<br\>/mgi,'[br]');
 	/* IE and opera support */
 	str = str.replace(/\<p\>/mgi,'');
-	str = str.replace(/\<\/p\>/mgi,'[br]');
+	str = str.replace(/\<\/p\>/mgi,'[br][br]');
 	str = str.replace(/\<STRONG\>/mgi,'[b]');
 	str = str.replace(/\<\/STRONG\>/mgi,'[/b]');
 	str = str.replace(/\<strong\>/mgi,'[b]');
@@ -417,12 +417,14 @@ function format_output(n) {
 	str = str.replace(/\<em\>/mgi,'[i]');
 	str = str.replace(/\<\/em\>/mgi,'[/i]');
 	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
+	str = str.replace(/\<div\>/mgi,'');
+	str = str.replace(/\<\/div\>/mgi,'[br]');
+	str = str.replace(/\<span(.+?)\>(.+?)\<\/span\>/mgi,'$2');
+	str = str.replace(/\<font(.+?)\>(.+?)\<\/font\>/mgi,'$2');
 	/* Safari support */
 	if (isWK) {
 		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: underline\; \"\>(.+?)\<\/span\>/mgi,'[u]$1[/u]');
 		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: line-through\; \"\>(.+?)\<\/span\>/mgi,'[i]$1[/i]');
-		str = str.replace(/\<div\>/mgi,'');
-		str = str.replace(/\<\/div\>/mgi,'[br]');
 	}
 	textArea.value = str;
 }
