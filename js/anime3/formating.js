@@ -417,6 +417,7 @@ function format_output(n) {
 	str = str.replace(/\<em\>/mgi,'[i]');
 	str = str.replace(/\<\/em\>/mgi,'[/i]');
 	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
+	str = str.replace(/\<a href\=\"(.+?)\"\>(.+?)\<\/a\>/mgi,'[link for "$2" refering to: [u]$1[/u]]');
 	str = str.replace(/\<div\>/mgi,'');
 	str = str.replace(/\<\/div\>/mgi,'[br]');
 	str = str.replace(/\<span(.+?)\>(.+?)\<\/span\>/mgi,'$2');
