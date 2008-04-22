@@ -85,8 +85,8 @@ function updateReleaseList() {
 	if (!gTable) return;
 	var headingList = gTable.getElementsByTagName('th');
 	// I know the headings i need so..
-	headingList[0].className += ' c_date';			// First
-	headingList[1].className += ' c_date';			// Last
+	headingList[0].className += ' c_set';			// First
+	headingList[1].className += ' c_set';			// Last
 	headingList[2].className += ' c_setlatin';		// Title
 	headingList[3].className += ' c_number';		// EPS
 	headingList[4].className += ' c_number';		// Last
@@ -168,7 +168,7 @@ function updateEpTable() {
 	var updateRows = false;
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';			// X
-	headingList[1].className += ' c_date';			// Date
+	headingList[1].className += ' c_set';			// Date
 	headingList[2].className += ' c_set';			// ID
 	headingList[3].className += ' c_set';			// EP
 	headingList[4].className += ' c_none';			// Group
