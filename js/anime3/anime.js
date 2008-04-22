@@ -316,6 +316,7 @@ function toggleFilesFromGroup() {
 		if (checked) {
 			if (!file.visible) continue;
 			switch(Number(group_check_type)) {
+				case 0: break;
 				case 1: if (file.fileType != 'mkv' && file.fileType != 'ogm') continue; break;
 				case 2: if (file.fileType != 'avi') continue; break;
 				case 3: if ((!file.videoTracks.length || file.videoTracks[0].resH < 720)) continue; break;

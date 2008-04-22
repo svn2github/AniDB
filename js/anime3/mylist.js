@@ -455,6 +455,13 @@ function changeWatchedState() {
 	postData(url);
 	return true;
 }
+
+/* Function that adds a file to mylist */
+function addToMylist() {
+	alert('This action shouldn\'t be possible.\nPlease inform an anidb moderator what you have done to get this message.');
+	return true;
+}
+
 /* Function that removes a file from mylist */
 function removeFromMylist() {
 	var row = this.parentNode;
