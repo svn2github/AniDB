@@ -91,6 +91,21 @@ function cTimeHour(data) {
   else return(data);
 }
 
+/* This function retuns a Date of UTC time in DATE HOUR style
+ * @param data The date
+ * @return Date in the format of dd.mm.yyyy hh:mm
+ */
+function cTimeDateHour(data) {
+  if (!data) return;
+  var date = cTimeDate(data);
+  if (data.indexOf(' ') >= 0) {
+	var hour = data.split(' ')[1] || '';
+	if (hour != '') hour = ' ' + hour.split(':')[0] + ':' + hour.split(':')[1];
+    return (date+hour);
+  }
+  else return(date);
+}
+
 // DOM NODE FUNCTIONS //
 
 /* Returns the nodeValue of a given node

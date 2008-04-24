@@ -126,13 +126,17 @@ function updateEpisodeList() {
 	headingList[2].className += 'size c_set';				// size
 	if (uriObj['showcrc'] && uriObj['showcrc'] == 1) {
 		headingList[3].className += 'crc c_latin';			// crc
+		headingList[4].className += 'lang';				// lang
 		i++
-	}
+	} else headingList[3].className += 'lang';				// lang
 	headingList[4+i].className += 'codec c_setlatin';		// codec
 	headingList[5+i].className += 'resolution c_latin';	// resolution
 	headingList[6+i].className += 'source c_setlatin';		// source
 	headingList[7+i].className += 'quality c_set';			// quality
+	headingList[8+i].className += 'hash';					// hash
 	headingList[9+i].className += 'users c_set';			// users
+	headingList[10+i].className += 'state';				// mylist
+	headingList[11+i].className += 'action';				// action
 	init_sorting(thead,'title','down');
 }
 

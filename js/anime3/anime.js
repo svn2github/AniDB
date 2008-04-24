@@ -710,16 +710,33 @@ function updateEpisodeTable() {
 				}
 				if (cname.indexOf('title') >= 0) {
 					var mylistEpEntries = findMylistEpEntries(eid);
-					var altTitle = curTitle = '';
+					var altTitle = jaTitle = curTitle = '';
 					var titleSpan = cell.getElementsByTagName('label')[0];
 					if (titleSpan) curTitle = nodeData(titleSpan);
 					if (episodeTitleLang != episodeAltTitleLang && 
 						episode.titles[episodeAltTitleLang] && 
 						episode.titles[episodeAltTitleLang] != '' &&
 						episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
-					if (altTitle != '') {
-						if (episodeTitleDisplay == 1) titleSpan.firstChild.nodeValue += ' ('+altTitle+')';
-						if (episodeTitleDisplay == 2) titleSpan.title = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle;
+					if (episodeTitleLang != 'ja' &&
+						episodeAltTitleLang != 'ja' &&
+						episode.titles['ja'] && 
+						episode.titles['ja'] != '' && 
+						episode.titles['ja'] != altTitle) jaTitle = episode.titles['ja'];
+					if (altTitle != '' || jaTitle != '') {
+						if (episodeTitleDisplay == 1 || (episodeTitleDisplay == 4 && jaTitle == ''))
+							titleSpan.firstChild.nodeValue += ' ('+altTitle+')';
+						if (episodeTitleDisplay == 2 || (episodeTitleDisplay == 3 && jaTitle == '')) 
+							titleSpan.title = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle;
+						if (episodeTitleDisplay == 3 && jaTitle != '') {
+							var titleTag = '';
+							if (altTitle != '') titleTag = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle + ' / ';
+							titleSpan.title = titleTag + jaTitle;
+						}
+						if (episodeTitleDisplay == 4 && jaTitle != '') {
+							var titleTag = ' (';
+							if (altTitle != '') titleTag += altTitle+' / ';
+							titleSpan.firstChild.nodeValue += titleTag +jaTitle+ ')';
+						}
 					}
 					if (mylistEpEntries.length) { // A neat part now, state icons
 						var icon;

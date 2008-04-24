@@ -156,7 +156,7 @@ function createEpisodeIcons(episode) {
 			icons['fstate'].push(createLink(null, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass));
 		}
 		if (episode.seenDate)
-			icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDate(episode.seenDate), 'i_seen');
+			icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(episode.seenDate), 'i_seen');
 	}
 	return icons;
 }
@@ -194,14 +194,31 @@ function createEpisodeRow(aid,eid,cols,skips) {
 			case 'title':
 				var eptitle;
 				var eptitleURL = 'animedb.pl?show=ep&aid='+aid+'&eid='+eid;
-				var altTitle = curTitle = '';
+				var altTitle = jaTitle = curTitle = '';
 				if (episodeTitleLang != episodeAltTitleLang && 
 					episode.titles[episodeAltTitleLang] && 
 					episode.titles[episodeAltTitleLang] != '' &&
 					episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
-				if (altTitle != '') {
-					if (episodeTitleDisplay == 1) eptitle = createTextLink(null, episode.getTitle()+' ('+altTitle+')', eptitleURL, null, null, null, null);
-					if (episodeTitleDisplay == 2) eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle, null);
+				if (episodeTitleLang != 'ja' &&
+					episodeAltTitleLang != 'ja' &&
+					episode.titles['ja'] && 
+					episode.titles['ja'] != '' && 
+					episode.titles['ja'] != altTitle) jaTitle = episode.titles['ja'];
+				if (altTitle != '' || jaTitle != '') {
+					if (episodeTitleDisplay == 1 || (episodeTitleDisplay == 4 && jaTitle == '')) 
+						eptitle = createTextLink(null, episode.getTitle()+' ('+altTitle+')', eptitleURL, null, null, null, null);
+					if (episodeTitleDisplay == 2 || (episodeTitleDisplay == 3 && jaTitle == '')) 
+						eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle, null);
+					if (episodeTitleDisplay == 3 && jaTitle != '') {
+						var titleTag = '';
+						if (altTitle != '') titleTag = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle + ' / ';
+						eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, titleTag += jaTitle, null);
+					}
+					if (episodeTitleDisplay == 4 && jaTitle != '') {
+						var titleTag = ' (';
+						if (altTitle != '') titleTag += altTitle+' / ';
+						eptitle = createTextLink(null, episode.getTitle()+ titleTag +jaTitle+ ')', eptitleURL, null, null, null, null);
+					}
 				} else eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, null, null);
 				if (episode.seenDate != 0) {
 					var watchedState = document.createElement('span');
@@ -509,7 +526,7 @@ function createFileIcons(file) {
 		var animeFL = anime.getTitle().charAt(0).toLowerCase();
 		// Seen status
 		if (mylistEntry.seen) 
-			icons['mylist_seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDate(mylistEntry.seenDate), 'i_seen');
+			icons['mylist_seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(mylistEntry.seenDate), 'i_seen');
 		// mylist comment
 		if ((mylistEntry.other) && (mylistEntry.other != '') && (mylistEntry.other != undefined)) 
 			icons['mylist_cmt'] = createIcon(null, 'mylist comment ', null, null, 'mylist comment: '+mylistEntry.other, 'i_comment');
@@ -773,15 +790,16 @@ function changeOptionValue(node) {
  * @param type Type can be either mylist or anime
  */
 function createPreferencesTable(type) {
-	var mylistItems =	[	{'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true},
-							{'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"}	];
-	var animeItems =	[	{'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true},
-							{'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"}	,
-							{'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"},
-							{'id':"group-prefs",'head':"Group",'title':"Group select Preferences"}	];
-	var items;
-	if (type == 'anime') items = animeItems;
-	else items = mylistItems;
+	var items = new Object();
+	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true};
+	var ed2kPrefs = {'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"};
+	var mylistPrefs = {'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"};
+	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
+	items['mylist'] =	[titlePrefs, ed2kPrefs];
+	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs];
+	items['group'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
+	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
+	if (!items[type]) return;
 
 	/* load settings from cookie */
 
@@ -798,6 +816,7 @@ function createPreferencesTable(type) {
 	mylist_add_state = CookieGet('mylist_add_state') || 0;
 	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	group_check_type = CookieGet('group_check_type') || 0;
+	var storedTab = CookieGet('tab') || '';
 	
 	/* create preferences tabs */
 
@@ -809,11 +828,11 @@ function createPreferencesTable(type) {
 	panes.className = "tabbed_pane";
 	var ul_tabs = document.createElement('ul');
 	ul_tabs.className = 'tabs';
-	for (var t = 0; t < items.length; t++) {
+	for (var t = 0; t < items[type].length; t++) {
 		var li = document.createElement('li');
 		li.id = "pref"+(t+1);
-		li.className = "tab" + (items[t]['default'] ? ' selected' : '');
-		li.appendChild(document.createTextNode(items[t]['head']));
+		li.className = "tab" + (((items[type][t]['default'] && storedTab.indexOf('pref') < 0) || storedTab == li.id) ? ' selected' : '');
+		li.appendChild(document.createTextNode(items[type][t]['head']));
 		li.onclick = Magic.toggle_tabs;
 		ul_tabs.appendChild(li);
 	}
@@ -821,11 +840,11 @@ function createPreferencesTable(type) {
 	panes.appendChild(ul_tabs);
 	var body = document.createElement('div');
 	body.className = 'body';
-	for (var t = 0; t < items.length; t++) {
-		var item = items[t];
+	for (var t = 0; t < items[type].length; t++) {
+		var item = items[type][t];
 		var tab = document.createElement('div');
 		tab.id = "pref"+(t+1)+"_pane";
-		tab.className = "pane" + (item['default'] ? '' : ' hide');
+		tab.className = "pane" + (((item['default'] && storedTab.indexOf('pref') < 0) || storedTab == "pref"+(t+1)) ? '' : ' hide');
 		var h4 = document.createElement('h4');
 		h4.appendChild(document.createTextNode(item['title']));
 		tab.appendChild(h4);
@@ -839,7 +858,7 @@ function createPreferencesTable(type) {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var optionArray = { 0 : {"text":'Title'} , 1 : {"text":'Title (Alt. Title)'}, 2 : {"text":'Title [tooltip: Alt. Title]'}};
+				var optionArray = { 0 : {"text":'Title'} , 1 : {"text":'Title (Alt. Title)'}, 2 : {"text":'Title [tooltip: Alt. Title]'}, 3 : {"text":'Title [tooltip Alt.title / Ja title]'}, 4 : {"text":'Title (Alt. Title / Ja title)'}};
 				createSelectArray(li,'episodeTitleDisplay','episodeTitleDisplay',function() { changeOptionValue(this); episodeTitleDisplay = this.value; },episodeTitleDisplay,optionArray);
 				li.appendChild(document.createTextNode(' Episode Alternative Title Display'));
 				ul.appendChild(li);

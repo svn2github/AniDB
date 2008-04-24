@@ -232,7 +232,7 @@ function showMsgList() {
 
 function createNewMessageAction() {
 	var ul = document.createElement('ul');
-	ul.className = 'g_actionlist';
+	ul.className = 'g_list links';
 	var li = document.createElement('li');
 	li.className = 'g_odd';
 	var a = document.createElement('a');
@@ -285,7 +285,7 @@ function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 	tbody.appendChild(row);
 	row = document.createElement('tr');
 	row.className = 'action'; 
-	cell = createCell(null, 'value', createButton('msg.send','msg.send',false,'Send Message','submit'), null);
+	cell = createCell(null, 'value', createButton('do','msg.send',false,'Send','submit'), null);
 	cell.colSpan = "2";
 	row.appendChild(cell);
 	tbody.appendChild(row);
@@ -305,7 +305,7 @@ function updateMsgList() {
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';		// checkbox
 	headingList[1].className += ' c_latin';	// state
-	headingList[2].className += ' c_date';		// date
+	headingList[2].className += ' c_set';		// date, anidb.sort is given so i'll just use it while i don't fix my date
 	headingList[3].className += ' c_latin';	// from
 	headingList[4].className += ' c_latin';	// type
 	headingList[5].className += ' c_latin';	// title

@@ -91,6 +91,21 @@ function cTimeHour(data) {
   else return(data);
 }
 
+/* This function retuns a Date of UTC time in DATE HOUR style
+ * @param data The date
+ * @return Date in the format of dd.mm.yyyy hh:mm
+ */
+function cTimeDateHour(data) {
+  if (!data) return;
+  var date = cTimeDate(data);
+  if (data.indexOf(' ') >= 0) {
+	var hour = data.split(' ')[1] || '';
+	if (hour != '') hour = ' ' + hour.split(':')[0] + ':' + hour.split(':')[1];
+    return (date+hour);
+  }
+  else return(date);
+}
+
 // DOM NODE FUNCTIONS //
 
 /* Returns the nodeValue of a given node
@@ -254,11 +269,14 @@ function createIcon(parentNode, text, url, onclick, title, className) {
 }
 
 function createLink(parentNode, text, url, rel, onclick, title, className) {
-  var obj = createIcon('', text, url, onclick, title, className);
-  if (rel == '' || rel == null) obj.rel = rel;
-  if (className != null || className != '') obj.className = className;
-  if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
-  else return(obj);
+	var obj = createIcon('', text, url, onclick, title, className);
+	if (rel == '' || rel == null) {
+		obj.rel = rel;
+		if (rel == 'wiki') obj.target = '_blank';
+	}
+	if (className != null || className != '') obj.className = className;
+	if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
+	else return(obj);
 }
 
 function createTextLink(parentNode, text, url, rel, onclick, title, className) {
@@ -753,7 +771,9 @@ function c_number_r(b, a) {
   return c_number(a, b);
 }
 function dig_text(node) {
+	if (!node) return ("");
 	while (node && !node.nodeValue) { node = node.firstChild; }
+	if (!node) return (""); 
 	return node.nodeValue;
 }
 function dig_text_lower(node) {
@@ -871,61 +891,61 @@ function findSortCol(node) {
 
 function sortcol(node) {
 	if (!node) node = this; // ie funkyness
-  if (node.nodeName != 'TH') node = this;
+	if (!node.nodeName || (node.nodeName && node.nodeName.toLowerCase() != 'th')) node = this;
 	var here = node;
 	// We find out if our header is in the tBody of the Table
 	// Because if it's not we are going to sort the whole TBody
-  var sortIndex = 0;
-	if (here.parentNode.parentNode.nodeName == 'TBODY') sortIndex = Number(here.parentNode.rowIndex)+1; 
+	var sortIndex = 0;
+	if (here.parentNode.parentNode.nodeName.toLowerCase() == 'tbody') sortIndex = Number(here.parentNode.rowIndex)+1; 
 	// We now find out which sort function to apply to the column or none
 	var sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
 	if (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none') return; // There will be no sorting for this column.
-  // clear other sorting that could be present
-  for (var i = 0; i < node.parentNode.childNodes.length; i++) {
-    var cell = node.parentNode.childNodes[i];
-    if (cell.nodeName != 'TH' || cell.className == node.className) continue; // our node
-    if (cell.className.indexOf(' s_forward') > -1) cell.className = cell.className.replace(' s_forward','');
-    if (cell.className.indexOf(' s_reverse') > -1) cell.className = cell.className.replace(' s_reverse','');
-  }
-  // Finding the actual Table node
-	while (here.nodeName != 'TABLE')
-	  here = here.parentNode;
+	// clear other sorting that could be present
+	for (var i = 0; i < node.parentNode.childNodes.length; i++) {
+		var cell = node.parentNode.childNodes[i];
+		if (cell.nodeName.toLowerCase() != 'th' || cell.className == node.className) continue; // our node
+		if (cell.className.indexOf(' s_forward') > -1) cell.className = cell.className.replace(' s_forward','');
+		if (cell.className.indexOf(' s_reverse') > -1) cell.className = cell.className.replace(' s_reverse','');
+	}
+	// Finding the actual Table node
+	while (here.nodeName.toLowerCase() != 'table') here = here.parentNode;
 	var container = here;
 	container.style.display = 'none';
-  // An identifier so we can track this column
+	// An identifier so we can track this column
 	var identifier = node.className.substring(0,node.className.indexOf(" ")) || node.className;
 	var sortlist = new Array();
 	var sortmap = new Object();
 	var pContainer = container.tBodies[0];
-  var rowlist = pContainer.getElementsByTagName('tr');
+	var rowlist = pContainer.getElementsByTagName('tr');
 	var funcmap = FunctionMap[sortfunc] || FunctionMap['c_none'];
 	// We now build a construct that will hold the sorting data
-  var cellIdx = 0;
-  var i = sortIndex;
-  var cloneTB = document.createElement('tbody'); // a clone table body, cloneNode doesn't work as expected
-  while (rowlist.length > sortIndex) {
-    var cRow = rowlist[sortIndex];
-    var cellList = cRow.getElementsByTagName('td');
-    if (cellList[cellIdx].className.indexOf(identifier) < 0) { // do this the hard way
-      for (var k = 0; k < cellList.length; k++) {
-        var cell = cellList[k];
-        if (cell.className.indexOf(identifier) < 0) continue; // next cell
-        var cellid = i+"|"+funcmap['getval'](cell);
-        sortlist.push(cellid);
-        cloneTB.appendChild(cRow);
-        sortmap[cellid] = cloneTB.lastChild;
-        cellIdx = k;
-        break; // we allready found our cell no need to continue;
-      }
-    } else { // we allready know the index just do the simple version
-      var cell = cellList[cellIdx];
-      var cellid = i+"|"+funcmap['getval'](cell);
-      sortlist.push(cellid);
-      cloneTB.appendChild(cRow);
-      sortmap[cellid] = cloneTB.lastChild;
-    }
-    i++;
-  }
+	var cellIdx = 0;
+	var i = sortIndex;
+	var cloneTB = document.createElement('tbody'); // a clone table body, cloneNode doesn't work as expected
+	//alert(identifier+' at '+sortIndex+' in '+rowlist.length);
+	while (rowlist.length > sortIndex) {
+		var cRow = rowlist[sortIndex];
+		var cellList = cRow.getElementsByTagName('td');
+		if (cellList[cellIdx].className.indexOf(identifier) < 0) { // do this the hard way
+			for (var k = 0; k < cellList.length; k++) {
+				var cell = cellList[k];
+				if (cell.className.indexOf(identifier) < 0) continue; // next cell
+				var cellid = i+"|"+funcmap['getval'](cell);
+				sortlist.push(cellid);
+				cloneTB.appendChild(cRow);
+				sortmap[cellid] = cloneTB.lastChild;
+				cellIdx = k;
+				break; // we allready found our cell no need to continue;
+			}
+		} else { // we allready know the index just do the simple version
+			var cell = cellList[cellIdx];
+			var cellid = i+"|"+funcmap['getval'](cell);
+			sortlist.push(cellid);
+			cloneTB.appendChild(cRow);
+			sortmap[cellid] = cloneTB.lastChild;
+		}
+		i++;
+	}
 	// Are we sorting forward or reverse? If no info, we apply a Forward sort
 	if (node.className.indexOf("s_reverse") >= 0) {
 		sortlist.sort(funcmap['sortr']);
