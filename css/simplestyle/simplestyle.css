@@ -8,6 +8,7 @@
 @import "../icons/all.css";
 
 @import "style/color/msgbox-default.css";
+@import "../common/style/color/quotebox-default.css";
 @import "style/color/special.css";
 
 @import "../common/style/text/default.css";

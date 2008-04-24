@@ -119,3 +119,22 @@
   text-align: left;
   padding: 1px;
 }
+
+/*quotes (comments, news, messages, etc.)*/
+div.quotebody
+{
+	margin-right: 12em;
+	margin-left: 1em;
+	padding: 0.4em;
+}
+
+div.quotebody div.quoteof
+{
+	font-weight: bold;
+}
+
+div.quotebody div.quote div.quotebody
+{
+	margin-top: 1em;
+	margin-right: 0.2em;
+}
