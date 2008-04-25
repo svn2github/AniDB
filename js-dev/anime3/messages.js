@@ -11,7 +11,7 @@ var seeDebug = false;
 var msgTable;
 var headingList;
 var input_msgTO;
-var select_msgTO;
+var select_msgTO = null;
 var g_note = null;
 var deltimer = null;
 var msgListTable = null;
@@ -21,26 +21,36 @@ var msgNewAction = null;
 var msgListH1 = null;
 var msgNewH1 = null;
 
+/* Function that fetches buddylist data */
 function fetchData() {
-  var req = xhttpRequest();
-  if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/buddies.xml', parseData);
-  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=buddies', parseData);
+	var req = xhttpRequest();
+	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/buddies.xml', parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=buddies', parseData);
 }
 
+/* Function that deletes a message (server)
+ * @url url URL of the message to delete
+ */
 function doMsgDelete(url) {
-  var req = xhttpRequest();
+	var req = xhttpRequest();
 	var data = url.substr(url.indexOf('?')+1,url.length);
-  if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showDelBox, data);
-  else xhttpRequestPost(req, 'animedb.pl', showDelBox, data);
+	if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showDelBox, data);
+	else xhttpRequestPost(req, 'animedb.pl', showDelBox, data);
 }
 
+/* Buddy Class
+ * @param node Buddy data node
+ */
 function CBuddy(node) {
-  this.uid = node.getAttribute('uid');
-  this.state = node.getAttribute('state');
-  this.date = node.getAttribute('date');
-  this.name = nodeData(node);
+	this.uid = node.getAttribute('uid');
+	this.state = node.getAttribute('state');
+	this.date = node.getAttribute('date');
+	this.name = nodeData(node);
 }
 
+/* Function that shows a delete box
+ * @param xmldoc Response XML (can't be used)
+ */
 function showDelBox(xmldoc) {
 	if (!g_note) {
 		g_note = document.createElement('div');
@@ -59,11 +69,13 @@ function showDelBox(xmldoc) {
 	//deltimer = self.setTimeout('removeDelBox()', 1000);
 }
 
+/* Function that removes the delete box */
 function removeDelBox() {
 	g_note.parentNode.removeChild(g_note);
 	g_note = null;
 }
 
+/* Function that deletes a message (client) */
 function deleteMessage() {
 	var url = this.href;
 	this.removeAttribute('href');
@@ -74,67 +86,70 @@ function deleteMessage() {
 	doMsgDelete(url);
 }
 
+/* Function that parses buddy list data
+ * @param xmldoc Response XML
+ */
 function parseData(xmldoc) {
-  var root = xmldoc.getElementsByTagName('root').item(0);
-  var t1 = new Date();
-  var buddyEntries = root.getElementsByTagName('buddy');
+	var root = xmldoc.getElementsByTagName('root').item(0);
+	var t1 = new Date();
+	var buddyEntries = root.getElementsByTagName('buddy');
 	var select = createBasicSelect('msg.to','msg.to',null);
 	createSelectOption(select,'manual', '', false);
-  for (var i = 0; i < buddyEntries.length; i++) {
-    var buddyEntry = new CBuddy(buddyEntries[i]);
-    createSelectOption(select, buddyEntry.name, buddyEntry.uid, false);
-  }
-  select_msgTO = select;
-  var msgTO = document.getElementById('msg.to');
-  var pNode = msgTO.parentNode;
-  pNode.removeChild(msgTO);
-  pNode.insertBefore(select_msgTO.cloneNode(true),pNode.firstChild);
+	for (var i = 0; i < buddyEntries.length; i++) {
+		var buddyEntry = new CBuddy(buddyEntries[i]);
+		createSelectOption(select, buddyEntry.name, buddyEntry.uid, false);
+	}
+	select_msgTO = select;
+	var msgTO = document.getElementById('msg.to');
+	var pNode = msgTO.parentNode;
+	pNode.removeChild(msgTO);
+	pNode.insertBefore(select_msgTO.cloneNode(true),pNode.firstChild);
 }
 
-/* Shows buddy list */
+/* Function that shows buddy list */
 function showBuddyList() {
-  var msgTO = document.getElementById('msg.to');
-  if (msgTO) {
-    var pNode = msgTO.parentNode;
-    if (msgTO.nodeName == 'input') {
-      if (!select_msgTO) fetchData();
-      else {
-        pNode.removeChild(msgTO);
-        pNode.insertBefore(select_msgTO.cloneNode(true),pNode.firstChild);
-      }
-    } else {
-      pNode.removeChild(msgTO);
-      pNode.insertBefore(input_msgTO.cloneNode(true),pNode.firstChild);
-    }
-  }
-  var cln = this.className;
-  if (cln.indexOf('f_selected') > 0) this.className = this.className.replace(' f_selected','');
-  else this.className += ' f_selected';
+	var msgTO = document.getElementById('msg.to');
+	if (msgTO) {
+		var pNode = msgTO.parentNode;
+		if (msgTO.nodeName.toLowerCase() == 'input') {
+			if (!select_msgTO) fetchData();
+			else {
+				pNode.removeChild(msgTO);
+				pNode.insertBefore(select_msgTO.cloneNode(true),pNode.firstChild);
+			}
+		} else {
+			pNode.removeChild(msgTO);
+			pNode.insertBefore(input_msgTO.cloneNode(true),pNode.firstChild);
+		}
+	}
+	var cln = this.className;
+	if (cln.indexOf('f_selected') > 0) this.className = this.className.replace(' f_selected','');
+	else this.className += ' f_selected';
 }
 
 /* Filters messages */
 function filterMessages() {
-  var filter = this.value;
-  var type = this.parentNode.className.substring(this.parentNode.className.indexOf("filter_")+7,this.parentNode.className.length);
-  var div = document.getElementById('layout-content');
-  var rowList = msgTable.tBodies[0].getElementsByTagName('tr');
-  // find the "type" col
-  var typeCol = -1;
-  for (var i = 0; headingList.length; i++){
-    var cell = headingList[i];
-    if (cell.className.indexOf(type) < 0) continue;
-    typeCol = cell.cellIndex;
-    break;
-  }
-  if (typeCol == -1) return; // didn't find a type col
-  for (var i = 0; i < rowList.length; i++) {
-    var row = rowList[i];
-    var cell = row.cells[typeCol];
-    if (cell.nodeName.toLowerCase() != 'td') continue;
-    if (filter == 'all') { row.style.display = ''; continue; }
-    if (cell.firstChild.nodeValue != filter) row.style.display = 'none';
-    else row.style.display = '';
-  }
+	var filter = this.value;
+	var type = this.parentNode.className.substring(this.parentNode.className.indexOf("filter_")+7,this.parentNode.className.length);
+	var div = document.getElementById('layout-content');
+	var rowList = msgTable.tBodies[0].getElementsByTagName('tr');
+	// find the "type" col
+	var typeCol = -1;
+	for (var i = 0; headingList.length; i++){
+		var cell = headingList[i];
+		if (cell.className.indexOf(type) < 0) continue;
+		typeCol = cell.cellIndex;
+		break;
+	}
+	if (typeCol == -1) return; // didn't find a type col
+	for (var i = 0; i < rowList.length; i++) {
+		var row = rowList[i];
+		var cell = row.cells[typeCol];
+		if (cell.nodeName.toLowerCase() != 'td') continue;
+		if (filter == 'all') { row.style.display = ''; continue; }
+		if (cell.firstChild.nodeValue != filter) row.style.display = 'none';
+		else row.style.display = '';
+	}
 }
 
 /* Creates the reply */
@@ -158,7 +173,7 @@ function createReply() {
 	var msgBODYval = getElementsByName(inputs,'msg.body',true)[0];
 	var msgBodyValue = null;
 	if (quoted) {
-		var quote = '[quote="'+msgTO.value+'"]';
+		var quote = '[quote]Quoted '+msgTO.value+':';
 		quote += convert_input(msgBODYval.value);
 		quote += '[/quote]';
 		msgBodyValue = quote;
@@ -230,6 +245,7 @@ function showMsgList() {
 	createNewMessageAction();
 }
 
+/* Function that creates a new Message link list */
 function createNewMessageAction() {
 	var ul = document.createElement('ul');
 	ul.className = 'g_list links';
@@ -244,6 +260,11 @@ function createNewMessageAction() {
 	return msgNewAction;
 }
 
+/* Function that creates the new message table
+ * @param msgToValue Message To value
+ * @param msgTitleValue Message Title value
+ * @param msgBodyValue Message contents
+ */
 function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 	var table = document.createElement('table');
 	var caption = document.createElement('caption');
@@ -294,6 +315,7 @@ function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 	return msgNewTable;
 }
 
+/* Function that updates the message list */
 function updateMsgList() {
 	var div = getElementsByClassName(document.getElementsByTagName('div'), 'message list', true)[0];
 	if (!div) return;
@@ -365,6 +387,7 @@ function updateMsgList() {
 	init_sorting(msgTable,'date','up');
 }
 
+/* Function that prepares the page */
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
 	if (!uriObj['show'] || uriObj['show'] != 'msg') return; // not interested in this page

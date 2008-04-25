@@ -580,6 +580,7 @@ function createFilesTable(eid) {
 	var episode = episodes[eid];
 	for (var i = 0; i < episode.files.length; i++) {
 		var fid = episode.files[i];
+		if (!mylist[fid]) continue;
 		var row = createFileRow(eid,fid,fileCols,fileSkips);
 		row.className = ((i % 2) ? '' : 'g_odd ') + 'files';
 		tbody.appendChild(row);

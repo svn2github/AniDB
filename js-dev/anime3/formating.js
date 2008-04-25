@@ -50,12 +50,16 @@ function viewMode(type,n) {
 		}
 	}
 	// Hide the HTML Mode button and show the Text Mode button
-	var html = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_view_source',true)[0];
-	var text = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_view_text',true)[0];
-	if (!html || !text) return; // no buttons nothing, to do
+	var html = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_viewsource',true)[0];
+	var text = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_viewrte',true)[0];
+	var clean = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_cleansource',true)[0];
+	var preview = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_preview',true)[0];
+	if (!html && !text && !clean && !preview) return; // no buttons nothing, to do
 	if (type == 'source') {
 		if (html) html.style.display = 'none'; 
 		if (text) text.style.display = '';
+		if (clean) clean.style.display = 'none';
+		if (preview) preview.style.display = 'none';
 		// set the font values for displaying HTML source
 		getDocument.body.style.fontSize = "12px";
 		getDocument.body.style.fontFamily = "Courier New"; 
@@ -63,13 +67,15 @@ function viewMode(type,n) {
 	} else {
 		if (html) html.style.display = ''; 
 		if (text) text.style.display = 'none';
+		if (clean) clean.style.display = '';
+		if (preview) preview.style.display = '';
 		// reset the font values
 		getDocument.body.style.fontSize = "";
 		getDocument.body.style.fontFamily = ""; 
 		viewTextMode = 0;
 	}
 	var cln = this.className;
-	if (cln.indexOf('f_selected') > 0) this.className = this.className.replace(' f_selected','');
+	if (cln && cln.indexOf('f_selected') > 0) this.className = this.className.replace(' f_selected','');
 }
 
 /* Updates a textarea
@@ -325,6 +331,10 @@ function formatText(id, n, selected) {
 			viewMode('source',n);
 		} else if (id == "ViewText") { // ViewText
 			viewMode('text',n);
+		} else if (id == "CleanSource") { // Clean Source
+			cleanHTML(obj.contentWindow.document);
+		} else if (id == "Preview") { // Preview document
+			previewDoc(obj.contentWindow.document);
 		} else { // Every other command
 			obj.contentWindow.document.execCommand(id, false, null);
 		}
@@ -347,83 +357,132 @@ function convertLinksInput(mstr, m1, m2, m3, offset, s) {
 	return createLink(null,null,m1,m2,m3,true);
 }
 function convertLinksOutput(mstr, m1, m2, m3, offset, s) {
-	return ("["+m1+":"+m2+":"+m3+"]");
+	var href = att = type = "";
+	var hrefIndex = mstr.indexOf('href');
+	if (hrefIndex >= 0) {
+		var hrefIndex0 = mstr.indexOf('"',hrefIndex)+1;
+		var hrefIndex1 = mstr.indexOf('"',hrefIndex0+1);
+		href = mstr.substring(hrefIndex0,hrefIndex1);
+	}
+	var attIndex = mstr.indexOf('att');
+	if (attIndex >= 0) {
+		var attIndex0 = mstr.indexOf('"',attIndex)+1;
+		var attIndex1 = mstr.indexOf('"',attIndex0+1);
+		att = mstr.substring(attIndex0,attIndex1);
+	}
+	var typeIndex = mstr.indexOf('type');
+	if (typeIndex >= 0) {
+		var typeIndex0 = mstr.indexOf('"',typeIndex)+1;
+		var typeIndex1 = mstr.indexOf('"',typeIndex0+1);
+		type = mstr.substring(typeIndex0,typeIndex1);
+	}
+	if (href.indexOf('anidb.net') < 0) return ('(link: ' + m2+' - '+href+')');
+	return ("["+type+":"+att+":"+m2+"]");
 }
+
 /* Replacement functions
  * @param str String to replace identifiers
  */
 function convert_input(str) {
-	str = str.replace(/\[b\]/mgi,'<b>');
-	str = str.replace(/\[\/b\]/mgi,'</b>');
-	str = str.replace(/\[i\]/mgi,'<i>');
-	str = str.replace(/\[\/i\]/mgi,'</i>');
-	str = str.replace(/\[u\]/mgi,'<u>');
-	str = str.replace(/\[\/u\]/mgi,'</u>');
-	str = str.replace(/\[s\]/mgi,'<strike>');
-	str = str.replace(/\[\/s\]/mgi,'</strike>');
-	str = str.replace(/\[ul\]/mgi,'<ul>');
-	str = str.replace(/\[\/ul\]/mgi,'</ul>');
-	str = str.replace(/\[ol\]/mgi,'<ol>');
-	str = str.replace(/\[\/ol\]/mgi,'</ol>');
-	str = str.replace(/\[li\]/mgi,'<li>');
-	str = str.replace(/\[\/li\]/mgi,'</li>');
-	str = str.replace(/\[br\]/mgi,'<br>');
-	str = str.replace(/\n/mgi,'<br>');
-	str = str.replace(/\%nbsp\;/mgi,' ');
+	str = str.replace(/\[([/])?(p|b|i|u|ul|ol|li)\]/mgi,'<$1$2>');
+	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
+	str = str.replace(/\[br\]/mgi,'<br />');
+	str = str.replace(/\n/mgi,'<br />');
+	//str = str.replace(/\&nbsp\;/mgi,' ');
 	/* IE and opera support */
+/*
 	str = str.replace(/\<strong\>/mgi,'<b>');
 	str = str.replace(/\<\/strong\>/mgi,'<\b>');
 	str = str.replace(/\<em\>/mgi,'<i>');
 	str = str.replace(/\<\/em\>/mgi,'<\i>');
 	str = str.replace(/\<p\>/mgi,'');
 	str = str.replace(/\<\/p\>/mgi,'<br><br>');
+*/
 	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
 	return (str);
 }
+
+/* Function that formats an output string
+ * @param str String to format
+ */
+function convert_output(str) {
+	str = str.replace(/\n/mgi,'[br][br]');
+	str = str.replace(/\<br([^>]*)\>/mgi,'[br]');
+	str = str.replace(/\<([/])?(p|u|b|i|ul|ol|li)[^>]*\>/mgi,'[$1$2]');
+	str = str.replace(/\<([/])?strike\>/mgi,'[$1s]');
+	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
+	/* Safari support */
+/*
+	str = str.replace(/\<span.+?font\-weight\: bold.+?\>(.+?)\<\/span\>/mgi,'[b]$1[/b]');
+	str = str.replace(/\<span.+?text\-style\: italic.+?\>(.+?)\<\/span\>/mgi,'[i]$1[/i]');
+	str = str.replace(/\<span.+?text\-decoration\: underline.+?\>(.+?)\<\/span\>/mgi,'[u]$1[/u]');
+	str = str.replace(/\<span.+?text\-decoration\: line\-through.+?\>(.+?)\<\/span\>/mgi,'[s]$1[/s]');	
+*/
+	/* IE and opera support */
+	str = str.replace(/\<([/])?strong([^>]*)\>/mgi,'[$1b]');
+	str = str.replace(/\<([/])?em([^>]*)\>/mgi,'[$1i]');
+	/* Extra stuff, mostly word paste */
+	str = str.replace(/\&nbsp\;/mgi,' ');
+	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
+	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
+	/* Remove empty tags */
+	str = str.replace(/\[(p|u|b|i|ul|ol|li)\]\[\/(p|u|b|i|ul|ol|li)\]/mgi,'');
+	return (str);
+}
+
 /* Function that formats outputs
  * @param n Number of the textArea
  */
 function format_output(n) {
 	var textArea = document.getElementById('textArea_'+n);
 	if (!textArea) return;
-	var str = textArea.value;
-	str = str.replace(/\<b\>/mgi,'[b]');
-	str = str.replace(/\<\/b\>/mgi,'[/b]');
-	str = str.replace(/\<i\>/mgi,'[i]');
-	str = str.replace(/\<\/i\>/mgi,'[/i]');
-	str = str.replace(/\<u\>/mgi,'[u]');
-	str = str.replace(/\<\/u\>/mgi,'[/u]');
-	str = str.replace(/\&lt\;span style\=\&quot;text\-decoration\: underline\;\&quot\;\&gt\;(.+?)\&lt\;\/span\&gt\;/mgi,'[u]$1[/u]');
-	str = str.replace(/\<strike\>/mgi,'[s]');
-	str = str.replace(/\<\/strike\>/mgi,'[/s]');
-	str = str.replace(/\&lt\;span style\=\&quot;text\-decoration\: line\-through\;\&quot\;\&gt\;(.+?)\&lt\;\/span\&gt\;/mgi,'[s]$1[/s]');
-	str = str.replace(/\<ul\>/mgi,'[ul]');
-	str = str.replace(/\<\/ul\>/mgi,'[/ul]');
-	str = str.replace(/\<ol\>/mgi,'[ol]');
-	str = str.replace(/\<\/ol\>/mgi,'[/ol]');
-	str = str.replace(/\<li\>/mgi,'[li]');
-	//str = str.replace(/\<li\>\<br \/\>/mgi,'[li]');
-	str = str.replace(/\<\/li\>/mgi,'[/li]');
-	str = str.replace(/\<br\>/mgi,'[br]');
-	/* IE and opera support */
-	str = str.replace(/\<p\>/mgi,'');
-	str = str.replace(/\<\/p\>/mgi,'[br][br]');
-	str = str.replace(/\<strong\>/mgi,'[b]');
-	str = str.replace(/\<\/strong\>/mgi,'[/b]');
-	str = str.replace(/\<em\>/mgi,'[i]');
-	str = str.replace(/\<\/em\>/mgi,'[/i]');
-	str = str.replace(/\<a href\=\".+?\" type="(.+?)" att="(.+?)"\>(.+?)\<\/a\>/mgi,convertLinksOutput);
-	str = str.replace(/\<a href\=\"(.+?)\"\>(.+?)\<\/a\>/mgi,'[link for "$2" refering to: [u]$1[/u]]');
-	str = str.replace(/\<div\>/mgi,'');
-	str = str.replace(/\<\/div\>/mgi,'[br]');
-	str = str.replace(/\<span(.+?)\>(.+?)\<\/span\>/mgi,'$2');
-	str = str.replace(/\<font(.+?)\>(.+?)\<\/font\>/mgi,'$2');
+	textArea.value = convert_output(textArea.value);
+}
+
+
+/* Function that cleans up html source
+ * @param str String
+ */
+function cleanHTMLSource(str) {
+	str = str.replace(/\n/mgi,' ');
+	//str = str.replace(/\<([/])?(p|u|b|i|ul|ol|li)\>/mgi,'<$1$2>');
+	str = str.replace(/\<([/])?strike[^>]*\>/mgi,'<$1strike>');
+	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
 	/* Safari support */
-	if (isWK) {
-		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: underline\; \"\>(.+?)\<\/span\>/mgi,'[u]$1[/u]');
-		str = str.replace(/\<span class\=\"Apple\-style\-span\" style\=\"text\-decoration\: line-through\; \"\>(.+?)\<\/span\>/mgi,'[i]$1[/i]');
-	}
-	textArea.value = str;
+/*
+	str = str.replace(/\<span.+?font\-weight\: bold.+?\>(.+?)\<\/span\>/mgi,'<b>$1</b>');
+	str = str.replace(/\<span.+?text\-style\: italic.+?\>(.+?)\<\/span\>/mgi,'<i>$1</i>');
+	str = str.replace(/\<span.+?text\-decoration\: underline.+?\>(.+?)\<\/span\>/mgi,'<u>$1</u>');
+	str = str.replace(/\<span.+?text\-decoration\: line\-through.+?\>(.+?)\<\/span\>/mgi,'<strike>$1</strike>');
+*/
+	/* IE and opera support */
+	str = str.replace(/\<([/])?strong([^>]*)\>/mgi,'<$1b>');
+	str = str.replace(/\<([/])?em([^>]*)\>/mgi,'<$1i>');
+	/* Extra stuff, mostly word paste */
+	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
+	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
+	/* Remove empty tags */
+	str = str.replace(/\<(p|u|b|i|ul|ol|li)\>\<\/(p|u|b|i|ul|ol|li)\>/mgi,'');
+	return (str)
+}
+
+/* Function that cleans the html of an RTE window
+ * @param myField Editor document
+ */
+function cleanHTML(myField) {
+	if (!myField) return;
+	myField.body.innerHTML = cleanHTMLSource(myField.body.innerHTML);
+}
+
+/* Function tha opens up a preview window
+ * @param myField Editor document
+ */
+function previewDoc(myField) {
+	if (!myField) return;
+	var html = myField.body.innerHTML;
+	var previewWindow = window.open('','previewWin','height=400,width=500,resizable=yes,scrollbars=yes,toolbar=no,status=no');
+	previewWindow.document.write('<html><body>'+convert_input(convert_output(html))+'</body></html>');
+	previewWindow.document.close();
 }
 
 /* Initializes RTE's */
@@ -434,12 +493,16 @@ function init_formating() {
 	var textAreas = document.getElementsByTagName('textarea');
 	if (!textAreas.length) return; // Still no nodes..
 
-	FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: *text* (alt+b)",'accesskey':"b",'text':"B",'start':"*",'end':"*",'active':false},
-	               'italic':{'id':"Italic",'desc':"Italic text: /text/ (alt+i)",'accesskey':"i",'text':"I",'start':"/",'end':"/",'active':false},
-	               'underline':{'id':"Underline",'desc':"Underline text: __text__ (alt+u)",'accesskey':"u",'text':"U",'start':"__",'end':"__",'active':false},
-	               'strikethrough':{'id':"Strikethrough",'desc':"Strike-through text: --text-- (alt+s)",'accesskey':"S",'text':"s",'start':"--",'end':"--",'active':false},
+	FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'accesskey':"b",'text':"B",'start':"*",'end':"*",'active':false},
+	               'italic':{'id':"Italic",'desc':"Italic text: [i]text[/i] (alt+i)",'accesskey':"i",'text':"I",'start':"/",'end':"/",'active':false},
+	               'underline':{'id':"Underline",'desc':"Underline text: [u]text[/u] (alt+u)",'accesskey':"u",'text':"U",'start':"__",'end':"__",'active':false},
+	               'strikethrough':{'id':"Strikethrough",'desc':"Strike-through text: [s]text[/s] (alt+s)",'accesskey':"S",'text':"s",'start':"--",'end':"--",'active':false},
 	               'orderedlist':{'id':"InsertOrderedList",'desc':"Ordered item: # text (alt+o)",'accesskey':"o",'text':"oLi",'start':"# ",'end':"",'active':false},
 	               'unorderedlist':{'id':"InsertUnorderedList",'desc':"Unordered item: * text (alt+l)",'accesskey':"l",'text':"uLi",'start':"* ",'end':"",'active':false},
+				   'viewsource':{'id':"ViewSource",'desc':"Source Mode",'accesskey':"q",'text':"vSource",'start':null,'end':null,'active':false},
+				   'viewrte':{'id':"ViewText",'desc':"WYSIWYG Mode",'accesskey':"w",'text':"vWYSIWYG",'start':null,'end':null,'active':false},
+				   'cleansource':{'id':"CleanSource",'desc':"Clean Source (alt+b)",'accesskey':"c",'text':"Clean",'start':null,'end':null,'active':false},
+				   'preview':{'id':"Preview",'desc':"Preview",'accesskey':"",'text':"preview",'start':null,'end':null,'active':false},
 	               'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"LNK",'start':"[",'end':"]",'active':false}};
 	OptionsMap = new Array('anime','ep','file','group','producer','producers','user','mylist','votes','creq','review','titles','genres',
 							'cats','relations','groupcmts','reviews','tracker','wiki','forum.board','forum.topic','forum.post');
@@ -456,16 +519,24 @@ function init_formating() {
 		// yes, yes, i know, blame IE
 		createLocalButton(span,'bold',FunctionMap['bold']);
 		createLocalButton(span,'italic',FunctionMap['italic']);
-		if(!isWK) createLocalButton(span,'underline',FunctionMap['underline']);
-		if(!isWK) createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
+		/* if(!isWK) */ createLocalButton(span,'underline',FunctionMap['underline']);
+		/* if(!isWK) */ createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
 		createLocalButton(span,'orderedlist',FunctionMap['orderedlist']);
 		createLocalButton(span,'unorderedlist',FunctionMap['unorderedlist']);
+		createLocalButton(span,'viewsource',FunctionMap['viewsource']);
+		createLocalButton(span,'viewrte',FunctionMap['viewrte']);
+		createLocalButton(span,'cleansource',FunctionMap['cleansource']);
+		createLocalButton(span,'preview',FunctionMap['preview']);
 		createLocalButton(span,'link',FunctionMap['link']);
 		createSelect(span,OptionsMap,'f_links');
-		var html = getElementsByClassName(span.getElementsByTagName('input'),'f_view_source',true)[0];
-		var text = getElementsByClassName(span.getElementsByTagName('input'),'f_view_text',true)[0];
+		var html = getElementsByClassName(span.getElementsByTagName('input'),'f_viewsource',true)[0];
+		var text = getElementsByClassName(span.getElementsByTagName('input'),'f_viewrte',true)[0];
+		var clean = getElementsByClassName(span.getElementsByTagName('input'),'f_cleansource',true)[0];
+		var preview = getElementsByClassName(span.getElementsByTagName('input'),'f_preview',true)[0];
 		if (html) html.style.display = ''; 
 		if (text) text.style.display = 'none';
+		if (clean) clean.style.display = '';
+		if (preview) preview.style.display = '';
 		span.appendChild(document.createElement('br'));
 		textArea.parentNode.insertBefore(span,textArea);
 		// Create iframe which will be used for rich text editing
@@ -528,6 +599,7 @@ function init_formating() {
 			var input = inputs[s];
 			if (input.type != 'submit') continue;
 			input.onclick = updateTextAreaCK;
+			//input.type = 'button';
 			break;
 		}
 	}
