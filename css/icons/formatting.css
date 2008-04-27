@@ -57,13 +57,18 @@
   background-image: url(../icons/formating/separator.gif);
 }
 
-*.f_view_source {
-  background-image: url(../icons/formating/view_source.gif);
+*.f_viewsource {
+background-image: url(../icons/formating/view_text.gif);
 }
 
-*.f_view_text {
-  background-image: url(../icons/formating/view_text.gif);
+*.f_viewrte {
+background-image: url(../icons/formating/view_source.gif);
 }
+
+*.f_cleansource {
+background-image: url(../icons/formating/clean_source.gif);
+}
+
 
 *.f_buddy {
   background-image: url(../icons/formating/user.gif);
