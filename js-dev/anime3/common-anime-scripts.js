@@ -1074,8 +1074,10 @@ function createPreferencesTable(type) {
 	main.appendChild(panes);
 
 	// set this before the links
-	if (type == 'anime') {
-		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true)[1];
+	if (type != 'mylist') {
+		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true);
+		if (!links) return;
+		links = links[links.length-1];
 		if (links) {
 			var lastLi = links.getElementsByTagName('li');
 			lastLi = lastLi[lastLi.length-1];
@@ -1087,8 +1089,10 @@ function createPreferencesTable(type) {
 		}
 	}
 	if (type == 'mylist') {
-		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list jump', true)[1];
+		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list jump', true);
 		var userLinks = getElementsByClassName(document.getElementsByTagName('div'),'user', false)[0];
+		if (!links) return;
+		links = links[links.length-1];
 		if (userLinks) {
 			var ul = userLinks.getElementsByTagName('ul')[0];
 			var lastLi = ul.getElementsByTagName('li');
