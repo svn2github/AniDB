@@ -797,7 +797,7 @@ function createPreferencesTable(type) {
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	items['mylist'] =	[titlePrefs, ed2kPrefs];
 	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs];
-	items['group'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
+	items['group'] =	[titlePrefs, ed2kPrefs];
 	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
 	if (!items[type]) return;
 
