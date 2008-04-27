@@ -380,24 +380,47 @@ function convertLinksOutput(mstr, m1, m2, m3, offset, s) {
 	return ("["+type+":"+att+":"+m2+"]");
 }
 
+function areTwoEqual(mstr,s1,s2) {
+	if (s1 == s2) return ' ';
+	else return mstr;
+}
+
+/* Function that cleans up html source
+ * @param str String
+ */
+function cleanHTMLSource(str) {
+	str = str.replace(/\n/mgi,'');
+	
+	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
+	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
+
+	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|br) [^>]*?\>/mgi,'<$1>');
+	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|br) [^>]*?\>/mgi,'</$1>');
+	/* waiting on perl release */
+	str = str.replace(/\<p\>/mgi,'<br /><br />');
+	str = str.replace(/\<\/p\>/mgi,'');
+	
+	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
+	
+	/* IE and opera support */
+	str = str.replace(/\<([/])?strong ([^>]*)\>/mgi,'<$1b>');
+	str = str.replace(/\<([/])?em ([^>]*)\>/mgi,'<$1i>');
+	/* Extra stuff, mostly word paste */
+	/* Remove empty tags */
+	str = str.replace(/\<(p|u|b|i|ul|ol|li)\>\<\/(p|u|b|i|ul|ol|li)\>/mgi,areTwoEqual);
+	return (str)
+}
+
 /* Replacement functions
  * @param str String to replace identifiers
  */
 function convert_input(str) {
-	str = str.replace(/\[([/])?(p|b|i|u|ul|ol|li)\]/mgi,'<$1$2>');
+	str = str.replace(/\[(p|b|i|u|ul|ol|li)+?\]/mgi,'<$1>');
+	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)+?\]/mgi,'</$1>');
 	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
 	str = str.replace(/\[br\]/mgi,'<br />');
 	str = str.replace(/\n/mgi,'<br />');
-	//str = str.replace(/\&nbsp\;/mgi,' ');
 	/* IE and opera support */
-/*
-	str = str.replace(/\<strong\>/mgi,'<b>');
-	str = str.replace(/\<\/strong\>/mgi,'<\b>');
-	str = str.replace(/\<em\>/mgi,'<i>');
-	str = str.replace(/\<\/em\>/mgi,'<\i>');
-	str = str.replace(/\<p\>/mgi,'');
-	str = str.replace(/\<\/p\>/mgi,'<br><br>');
-*/
 	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
 	return (str);
 }
@@ -406,11 +429,23 @@ function convert_input(str) {
  * @param str String to format
  */
 function convert_output(str) {
+	/* Extra stuff, mostly word paste */
+	str = str.replace(/\&nbsp\;/mgi,' ');
+	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
+	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
+
 	str = str.replace(/\n/mgi,'[br][br]');
 	str = str.replace(/\<br([^>]*)\>/mgi,'[br]');
-	str = str.replace(/\<([/])?(p|u|b|i|ul|ol|li)[^>]*\>/mgi,'[$1$2]');
+	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike) [^>]*?\>/mgi,'[$1]');
+	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike) [^>]*?\>/mgi,'[/$1]');
+	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike)\>/mgi,'[$1]');
+	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike)\>/mgi,'[/$1]');
 	str = str.replace(/\<([/])?strike\>/mgi,'[$1s]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
+
+	str = str.replace(/\[p\]/mgi,'[br][br]');
+	str = str.replace(/\[\/p\]/mgi,'');
+
 	/* Safari support */
 /*
 	str = str.replace(/\<span.+?font\-weight\: bold.+?\>(.+?)\<\/span\>/mgi,'[b]$1[/b]');
@@ -421,12 +456,8 @@ function convert_output(str) {
 	/* IE and opera support */
 	str = str.replace(/\<([/])?strong([^>]*)\>/mgi,'[$1b]');
 	str = str.replace(/\<([/])?em([^>]*)\>/mgi,'[$1i]');
-	/* Extra stuff, mostly word paste */
-	str = str.replace(/\&nbsp\;/mgi,' ');
-	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
-	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
 	/* Remove empty tags */
-	str = str.replace(/\[(p|u|b|i|ul|ol|li)\]\[\/(p|u|b|i|ul|ol|li)\]/mgi,'');
+	str = str.replace(/\[(p|u|b|i|ul|ol|li)\]\[\/(p|u|b|i|ul|ol|li)\]/mgi,areTwoEqual);
 	return (str);
 }
 
@@ -437,33 +468,6 @@ function format_output(n) {
 	var textArea = document.getElementById('textArea_'+n);
 	if (!textArea) return;
 	textArea.value = convert_output(textArea.value);
-}
-
-
-/* Function that cleans up html source
- * @param str String
- */
-function cleanHTMLSource(str) {
-	str = str.replace(/\n/mgi,' ');
-	//str = str.replace(/\<([/])?(p|u|b|i|ul|ol|li)\>/mgi,'<$1$2>');
-	str = str.replace(/\<([/])?strike[^>]*\>/mgi,'<$1strike>');
-	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
-	/* Safari support */
-/*
-	str = str.replace(/\<span.+?font\-weight\: bold.+?\>(.+?)\<\/span\>/mgi,'<b>$1</b>');
-	str = str.replace(/\<span.+?text\-style\: italic.+?\>(.+?)\<\/span\>/mgi,'<i>$1</i>');
-	str = str.replace(/\<span.+?text\-decoration\: underline.+?\>(.+?)\<\/span\>/mgi,'<u>$1</u>');
-	str = str.replace(/\<span.+?text\-decoration\: line\-through.+?\>(.+?)\<\/span\>/mgi,'<strike>$1</strike>');
-*/
-	/* IE and opera support */
-	str = str.replace(/\<([/])?strong([^>]*)\>/mgi,'<$1b>');
-	str = str.replace(/\<([/])?em([^>]*)\>/mgi,'<$1i>');
-	/* Extra stuff, mostly word paste */
-	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
-	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
-	/* Remove empty tags */
-	str = str.replace(/\<(p|u|b|i|ul|ol|li)\>\<\/(p|u|b|i|ul|ol|li)\>/mgi,'');
-	return (str)
 }
 
 /* Function that cleans the html of an RTE window
