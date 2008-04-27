@@ -21,3 +21,8 @@
 	display: inline-block;
 	min-width: 20em;
 }
+
+#layout-main ul#cattree li.collapsed ul
+{
+	display: none;
+}
