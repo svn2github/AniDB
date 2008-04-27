@@ -19,7 +19,24 @@ a:visited, a:active, a:hover, a:link {
 #layout-main li.g_odd,
 #layout-main span.g_odd
 {
-	background-color: #b0b0b0;
+	background-color: #B0B0B0;
+}
+
+#layout-main *.g_odd *.g_odd
+{
+	background-color: #BFC2C9
+}
+#layout-main *.g_odd *.g_odd *.g_odd
+{
+	background-color: #B0B0B0;
+}
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd
+{
+	background-color: #BFC2C9
+}
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd
+{
+	background-color: #B0B0B0;
 }
 
 #layout-main ul.g_list li.g_odd
