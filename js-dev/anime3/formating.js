@@ -419,7 +419,7 @@ function convert_input(str) {
 	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)+?\]/mgi,'</$1>');
 	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
 	str = str.replace(/\[br\]/mgi,'<br />');
-	str = str.replace(/\n/mgi,'<br />');
+	str = str.replace(/\n/mgi,'');
 	/* IE and opera support */
 	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
 	return (str);
@@ -434,7 +434,7 @@ function convert_output(str) {
 	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
 	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
 
-	str = str.replace(/\n/mgi,'[br][br]');
+	str = str.replace(/\n/mgi,'');
 	str = str.replace(/\<br([^>]*)\>/mgi,'[br]');
 	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike) [^>]*?\>/mgi,'[$1]');
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike) [^>]*?\>/mgi,'[/$1]');
