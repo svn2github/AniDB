@@ -206,7 +206,7 @@ th.sortable{ cursor: pointer }
 /*quotes (comments, news, messages, etc.)*/
 div.quotebody
 {
-	margin-right: 12em;
+	margin-right: 0.5em;
 	margin-left: 1em;
 	padding: 0.4em;
 }
