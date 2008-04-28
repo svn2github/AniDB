@@ -47,7 +47,6 @@
 {
 	text-align:left;
 	min-height:0pt;
-	background-color:#E1EBF2;
 	margin-bottom:1em;
 }
 
@@ -107,6 +106,7 @@
 	clear:both;
 	height:11px;
 	text-align:right;
+	padding-bottom:0.9em;
 }
 
 #layout-main div.cmt_entries div.postfooter a.i_top
