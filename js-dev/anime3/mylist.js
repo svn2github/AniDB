@@ -300,7 +300,10 @@ function cbToggle() {
 	var node = this.parentNode;
 	while (node.nodeName.toLowerCase() != 'table') node = node.parentNode;
 	var aid = Number(node.id.substring(1,node.id.indexOf('_')));
-	var tbody = document.getElementById('a'+aid+'_episodesTable').tBodies[0];
+	var table = document.getElementById('a'+aid+'_episodesTable');
+	if (!table) table = document.getElementById('a'+aid+'_filesTable');
+	if (!table) return; // can't make this work :P
+	var tbody = table.tBodies[0];
 	var checkboxes = tbody.getElementsByTagName('input');
 	for (var i = 0; i < checkboxes.length; i++) {
 		var ck = checkboxes[i];
