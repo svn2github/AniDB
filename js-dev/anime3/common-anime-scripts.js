@@ -569,7 +569,7 @@ function createFileIcons(file) {
  * @return file row
  */
 function createFileRow(eid,fid,cols,skips,rfid) {
-if (!cols) { errorAlert('createFileRow','no cols given'); return; }
+	if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 	var row = document.createElement('tr');
 	var mylistEntry = mylist[fid];
 	var file = files[fid];
@@ -587,7 +587,8 @@ if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 		}
 		switch(col['name']) {
 			case 'check-mylist':
-				createCell(row, col['classname'], createCheckBox(null,'mylmod.f.'+mylistEntry.id,'mylmod.f.'+mylistEntry.id,null,false), null, colSpan);
+				var ck = ((uid != ruid) ? document.createTextNode(' ') : createCheckBox(null,'mylmod.f.'+mylistEntry.id,'mylmod.f.'+mylistEntry.id,null,false));
+				createCell(row, col['classname'], ck, null, colSpan);
 				break;
 			case 'check-anime':
 				createCell(row, col['classname'], createCheckBox(null,'madd.f.'+file.id,'madd.f.'+file.id,showAddToMylistBox,false), null, colSpan);
