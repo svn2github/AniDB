@@ -598,7 +598,12 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 					createCell(row, col['classname'], icons['fid'], file.id, colSpan);
 				else {
 					var cell = createCell(null, col['classname'], icons['fid'], file.id, colSpan);
-					cell.appendChild(icons['expand']);
+					// now do some checking before posting the expand icon
+					var showExpandIcon = true;
+					for (var fr = 0; fr < file.relatedFiles.length; fr++) {
+						if (!files[file.relatedFiles[fr]]) { showExpandIcon = false; break; }
+					}
+					if (showExpandIcon) cell.appendChild(icons['expand']);
 					row.appendChild(cell);
 				}
 				break;

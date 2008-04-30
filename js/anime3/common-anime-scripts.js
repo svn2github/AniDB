@@ -569,7 +569,7 @@ function createFileIcons(file) {
  * @return file row
  */
 function createFileRow(eid,fid,cols,skips,rfid) {
-if (!cols) { errorAlert('createFileRow','no cols given'); return; }
+	if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 	var row = document.createElement('tr');
 	var mylistEntry = mylist[fid];
 	var file = files[fid];
@@ -587,7 +587,8 @@ if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 		}
 		switch(col['name']) {
 			case 'check-mylist':
-				createCell(row, col['classname'], createCheckBox(null,'mylmod.f.'+mylistEntry.id,'mylmod.f.'+mylistEntry.id,null,false), null, colSpan);
+				var ck = ((uid != ruid) ? document.createTextNode(' ') : createCheckBox(null,'mylmod.f.'+mylistEntry.id,'mylmod.f.'+mylistEntry.id,null,false));
+				createCell(row, col['classname'], ck, null, colSpan);
 				break;
 			case 'check-anime':
 				createCell(row, col['classname'], createCheckBox(null,'madd.f.'+file.id,'madd.f.'+file.id,showAddToMylistBox,false), null, colSpan);
@@ -597,7 +598,12 @@ if (!cols) { errorAlert('createFileRow','no cols given'); return; }
 					createCell(row, col['classname'], icons['fid'], file.id, colSpan);
 				else {
 					var cell = createCell(null, col['classname'], icons['fid'], file.id, colSpan);
-					cell.appendChild(icons['expand']);
+					// now do some checking before posting the expand icon
+					var showExpandIcon = true;
+					for (var fr = 0; fr < file.relatedFiles.length; fr++) {
+						if (!files[file.relatedFiles[fr]]) { showExpandIcon = false; break; }
+					}
+					if (showExpandIcon) cell.appendChild(icons['expand']);
 					row.appendChild(cell);
 				}
 				break;
@@ -797,7 +803,7 @@ function createPreferencesTable(type) {
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	items['mylist'] =	[titlePrefs, ed2kPrefs];
 	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs];
-	items['group'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
+	items['group'] =	[titlePrefs, ed2kPrefs];
 	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
 	if (!items[type]) return;
 
@@ -1074,8 +1080,10 @@ function createPreferencesTable(type) {
 	main.appendChild(panes);
 
 	// set this before the links
-	if (type == 'anime') {
-		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true)[1];
+	if (type != 'mylist') {
+		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true);
+		if (!links) return;
+		links = links[links.length-1];
 		if (links) {
 			var lastLi = links.getElementsByTagName('li');
 			lastLi = lastLi[lastLi.length-1];
@@ -1087,8 +1095,10 @@ function createPreferencesTable(type) {
 		}
 	}
 	if (type == 'mylist') {
-		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list jump', true)[1];
+		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list jump', true);
 		var userLinks = getElementsByClassName(document.getElementsByTagName('div'),'user', false)[0];
+		if (!links) return;
+		links = links[links.length-1];
 		if (userLinks) {
 			var ul = userLinks.getElementsByTagName('ul')[0];
 			var lastLi = ul.getElementsByTagName('li');

@@ -41,13 +41,14 @@ mylist_settings['noeptb'] = false;
 mylist_settings['showvotes'] = true;
 mylist_settings['showheader'] = true;
 mylist_settings['filemode'] = '1';
+var expandedAID = null;
 // cached stuff
 var loading_row = null;
 var epTableHead = null;
 var epTableFoot = null;
 var fileTableHead = null;
 var deltimer = null;
-var g_note = null
+var g_note = null;
 // general column definitions
 var fileCols = cloneArray(genFileCols);
 removeColAttribute("check-anime",fileCols);
@@ -109,7 +110,11 @@ function prepPage() {
 		parseMylistExpandLink(a.href,mylist_settings);
 		ruid = mylist_settings['uid'];
 		a.removeAttribute('href');
-		a.onclick = expandAnime;
+		if (a.className.indexOf('i_minus') >= 0) {
+			a.onclick = foldAnime;
+			expandedAID = Number(row.id.substring(1,row.id.length));
+		}
+		else a.onclick = expandAnime;
 		a.style.cursor = "pointer";
 	}
 	var filters = getElementsByClassName(document.getElementsByTagName('div'),'filters',true)[0];
@@ -209,17 +214,26 @@ function removeDelBox() {
 
 /* Function that cleans up pages called with expanded animes */
 function cleanUpExpands() {
-	if (!uriObj['expand']) return; // nothing to do
-	var aid = Number(uriObj['expand']);
-	var aRow = document.getElementById('a'+aid);
+	if (!uriObj['expand'] && uriObj['show']) return; // nothing to do
+	var aRow = null;
+	if (uriObj['expand']) {
+		var aid = Number(uriObj['expand']);
+		aRow = document.getElementById('a'+aid);
+	} else if (expandedAID) { // this one is the tricky bit
+		aRow = document.getElementById('a'+expandedAID);
+	}
 	if (!aRow) return;
 	var rowIndex = aRow.rowIndex;
 	var tbody = aRow.parentNode;
-	tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
-	tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
+	if (!tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
+	if (!tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
 	// now do my stuff and get this over with
 	var a = aRow.getElementsByTagName('a')[0];
-	if (a) a.onclick();
+	if (a) {
+		if (expandedAID) a.onclick = expandAnime;
+		a.onclick();
+		if (expandedAID) a.onclick = foldAnime;
+	}
 }
 
 /* Function that expands one anime */
@@ -308,35 +322,16 @@ function cbToggle() {
 function toggleFileMode() {
 	var showFiles = (this.firstChild.nodeValue.indexOf('show') >= 0);
 	if (showFiles) { // hidden files, show them!
-		mylist_settings['filemode'] = '0';
+		mylist_settings['filemode'] = '1';
 		this.firstChild.nodeValue = 'hide fileinfo';
 	} else { // shown files, hide them!
-		mylist_settings['filemode'] = '1';
+		mylist_settings['filemode'] = '0';
 		this.firstChild.nodeValue = 'show fileinfo';
 	}
-	for (var e in episodes) {
-		var episode = episodes[e];
-		if (!episode) continue;
-		var eidRow = document.getElementById('e'+e);
-		var eidFilesRow = document.getElementById('e'+e+'_filesRow');
-		if (eidRow) {
-			var expandCell = getElementsByClassName(eidRow.getElementsByTagName('td'),'expand',true)[0];
-			if (expandCell) {
-				var ico = expandCell.getElementsByTagName('span')[0];
-				if (showFiles) {
-					ico.onclick = foldFiles;
-					ico.title = 'Fold entry';
-					ico.className = 'i_icon i_minus';
-					ico.firstChild.firstChild.nodeValue = '[-]';
-				} else {
-					ico.onclick = expandFiles;
-					ico.title = 'Expand entry';
-					ico.className = 'i_icon i_plus';
-					ico.firstChild.firstChild.nodeValue = '[+]';
-				}
-			}
-		}
-		if (eidFilesRow) eidFilesRow.style.display = (showFiles ? '' : 'none');
+	for (var a in animes) {
+		var anime = animes[a];
+		if (!anime) continue;
+		createEpisodeTable(anime.id);
 	}
 }
 
@@ -698,17 +693,18 @@ function createEpisodeTable(aid) {
 		table.appendChild(thead);
 		var tbody = document.createElement('tbody');
 		var anime = animes[aid];
-		// Add files
+		// Add files		
 		for (var e = 0; e < anime.episodes.length; e++) {
 			var eid = anime.episodes[e];
 			var episode = episodes[eid];
 			for (var f = 0; f < episode.files.length; f++) {
 				var fid = episode.files[f];
 				var row = createFileRow(eid,fid,fileCols,fileSkips);
-				row.className = ((f % 2) ? '' : 'g_odd ') + 'files';
 				tbody.appendChild(row);
 			}
 		}
+		for (var i = 0 ; i < tbody.rows.length; i++)
+			tbody.rows[i].className = ((i % 2) ? '' : 'g_odd ') + 'files';
 		table.appendChild(tbody);
 	}
 	if (uid == ruid) {
