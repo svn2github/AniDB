@@ -115,7 +115,7 @@ function buildSkipCols(cols) {
  */
 function createEpisodeIcons(episode) {
 	var icons = new Object();
-	if (mylist_settings && mylist_settings['filemode'] == '2') {
+	if (mylist_settings && mylist_settings['filemode'] == '1') {
 		var a = createIcon(null, '[-]', null, (mylist_settings ? foldFiles : foldEp), 'Fold this entry', 'i_minus');
 		a.style.cursor = 'pointer';
 		icons['expand'] = a;
@@ -600,8 +600,13 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 					var cell = createCell(null, col['classname'], icons['fid'], file.id, colSpan);
 					// now do some checking before posting the expand icon
 					var showExpandIcon = true;
-					for (var fr = 0; fr < file.relatedFiles.length; fr++) {
-						if (!files[file.relatedFiles[fr]]) { showExpandIcon = false; break; }
+					if (mylist_settings) {
+						var mycnt = 0;
+						for (var fr = 0; fr < file.relatedFiles.length; fr++) {
+							if (!files[file.relatedFiles[fr]]) continue;
+							if (mylist[file.relatedFiles[fr]]) mycnt++;
+						}
+						if (!mycnt) showExpandIcon = false;
 					}
 					if (showExpandIcon) cell.appendChild(icons['expand']);
 					row.appendChild(cell);

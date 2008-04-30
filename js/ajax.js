@@ -43,7 +43,7 @@ function xhttpRequest() {
  * @param method method
  * @return void
  */
-function doRequest(obj, url, handerl, override, method, data) {
+function doRequest(obj, url, handler, override, method, data) {
 	if (!obj) return;
 	obj.onreadystatechange = function() { xhttpRequestReadData(obj,handler,method); };
 	if (data) obj.open('POST', url, true); // POST
@@ -61,12 +61,12 @@ function doRequest(obj, url, handerl, override, method, data) {
 
 /* Fetches a given url and then passes the result to the given handler */
 function xhttpRequestFetch(obj, url, handler, override, method) {
-	doRequest(obj, url, handerl, override, method, null);
+	doRequest(obj, url, handler, override, method, null);
 }
 
 /* Posts given data to a given url and then passes the result to the given handler */
 function xhttpRequestPost(obj, url, handler, data, override, method) {
-	doRequest(obj, url, handerl, override, method, data)
+	doRequest(obj, url, handler, override, method, data)
 }
 
 /* This Function handles the status changes of the reply

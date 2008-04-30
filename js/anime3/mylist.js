@@ -702,6 +702,7 @@ function createEpisodeTable(aid) {
 			var episode = episodes[eid];
 			for (var f = 0; f < episode.files.length; f++) {
 				var fid = episode.files[f];
+				if (!mylist[fid]) continue;
 				var row = createFileRow(eid,fid,fileCols,fileSkips);
 				tbody.appendChild(row);
 			}
