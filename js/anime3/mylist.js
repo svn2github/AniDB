@@ -141,7 +141,7 @@ function prepPage() {
 function fetchData(aid,uid) {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_uid'+ruid+'.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+'&uid='+ruid, parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+'&uid='+Number(ruid), parseData);
 }
 
 /* Function that posts data
