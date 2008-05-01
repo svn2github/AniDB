@@ -7,51 +7,9 @@
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;
-var seeTimes = false;
 var gTable = null;
 var released_div = null;
 var ep_table = null;
-var uid;						// userID
-var mod;						// isMod
-var aid;						// AnimeID
-var gid;						// GroupID
-var anime;						// anime Object (used in animePage)
-var animes = new Array();		// stored by aid
-var animeOrder = new Array();	// animes ordered in db way (link to aid)
-//var groupOrder = new Array();	// ordered group list (filtering porpuses)
-var groups = new Array();		// stored by gid
-var aGroups = new Array();		// stored by agid (gid to link groups)
-var mylist = new Array();		// stored by fid
-var episodes = new Array();		// stored in eid
-var epOrder = new Array();		// episodes ordered in db way (link to eid)
-var files = new Array();		// stored by fid
-var animeTitleLang = '';
-var animeAltTitleLang = 'en';
-var episodeTitleLang = '';
-var episodeAltTitleLang = 'x-jat';
-var episodeTitleDisplay = 2;
-var entriesPerPage = 30;
-var LAY_HEADER = false;
-var LAY_NOANIMEGROUPREL = false;
-var LAY_HIDEFILES = false;
-var LAY_HIDERAWS = false;
-var LAY_HIDEGROUPRAWS = false;
-var LAY_HIDEGENERICFILES = false;
-var LAY_HIDEPARODYEPS = false;
-var LAY_SHOWFID = false;
-var LAY_SHOWCRC = false;
-var LAY_FORMATFILESIZE = false;
-var LAY_HIDEFILTEREDGROUPS = true;
-var useLangFilters = true;
-var filterAudLang = new Array();
-var filterSubLang = new Array();
-var epInterval = 250; // This one needs work
-var epInt; // Interval ID
-var processingEps = false; // are we processing episodes?
-var base_url = 'http://static.anidb.net/';
-var g_note = null;
-var hiddenGroups = 0;
-var loadExpand = false;
 
 /* Converts qualitys to a rate system
  * @param qual Quality
@@ -141,74 +99,62 @@ function updateReleaseList() {
 }
 
 /* Updates the episode list rows to allow more sorting options */
-function updateEpTableRows(cellClean) {
+function updateEpTableRows() {
 	var table = ep_table;
 	if (!table) return;
 	var tbody = table.tBodies[0];
-	for (var i = 0; i < tbody.rows.length; i++) { // update each row
+	for (var i = 1; i < tbody.rows.length; i++) { // update each row
 		var row = tbody.rows[i];
-		if (!cellClean) {
-			var test = row.cells[2];	// ID cell
-			if (test) {
-				var a = test.getElementsByTagName('a')[0];
-				if (a) {
-					var cnt = a.firstChild.nodeValue;
-					test.setAttribute('anidb:sort',cnt);
-					row.id = 'fid_'+cnt;
-				}
+		var test = row.cells[2];	// ID cell
+		if (test) {
+			var a = test.getElementsByTagName('a')[0];
+			if (a) {
+				var cnt = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',cnt);
 			}
-			test = row.cells[3];		// EP cell
-			if (test) {
-				var a = test.getElementsByTagName('a')[0];
-				if (a) {
-					var cnt = a.firstChild.nodeValue;
-					test.setAttribute('anidb:sort',cnt);
-				}
+		}
+		test = row.cells[3];		// EP cell
+		if (test) {
+			var a = test.getElementsByTagName('a')[0];
+			if (a) {
+				var cnt = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',cnt);
 			}
-			test = row.cells[5];		// Size cell
-			if (test) {
-				// convert to bytes without dots
-				var fsize = test.firstChild.nodeValue;
-				while(fsize.indexOf('.') > -1) fsize = fsize.replace('.','');
-				test.setAttribute('anidb:sort',fsize);
+		}
+		test = row.cells[5];		// Size cell
+		if (test) {
+			// convert to bytes without dots
+			var fsize = test.firstChild.nodeValue;
+			while(fsize.indexOf('.') > -1) fsize = fsize.replace('.','');
+			test.setAttribute('anidb:sort',fsize);
+		}
+		test = row.cells[6];		// CRC Cell
+		if (test) {
+			if (!test.childNodes.length) test.setAttribute('anidb:sort','-');
+			else test.setAttribute('anidb:sort',test.firstChild.nodeValue);
+		}
+		test = row.cells[7];		// Quality Cell
+		if (test) {
+			var span = test.getElementsByTagName('span')[0];
+			if (span) {
+				var className = span.className.substr(span.className.indexOf('i_rate_')+7,span.className.length);
+				test.setAttribute('anidb:sort',mapQuality(className));
 			}
-			test = row.cells[6];		// CRC Cell
-			if (test) {
-				if (!test.childNodes.length) test.setAttribute('anidb:sort','-');
-				else test.setAttribute('anidb:sort',test.firstChild.nodeValue);
+		}
+		test = row.cells[10];	// Users Cell
+		if (test) {
+			var a = test.getElementsByTagName('a')[0];
+			if (a) {
+				var cnt = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',cnt);
 			}
-			test = row.cells[7];		// Quality Cell
-			if (test) {
-				var span = test.getElementsByTagName('span')[0];
-				if (span) {
-					var className = span.className.substr(span.className.indexOf('i_rate_')+7,span.className.length);
-					test.setAttribute('anidb:sort',mapQuality(className));
-				}
-			}
-			test = row.cells[10];	// Users Cell
-			if (test) {
-				var a = test.getElementsByTagName('a')[0];
-				if (a) {
-					var cnt = a.firstChild.nodeValue;
-					test.setAttribute('anidb:sort',cnt);
-				}
-			}
-			test = row.cells[11];	// icons Cell
-			if (test) test.className = test.className = 'added_by '+ test.className +' ed2k'
-			test = row.cells[12];	// Username
-			if (test) {
-				var a =  getElementsByClassName(test.getElementsByTagName('a'), 'name', false)[0];
-				if (a) {
-					var username = a.firstChild.nodeValue;
-					test.setAttribute('anidb:sort',username);
-				}
-			}
-		} else {
-			test = row.cells[11];	// icons Cell
-			if (test) {
-				test.onmouseover = createHashLink;
-				var a = test.getElementsByTagName('a')[0];
-				if (a) a.href = '!fillme!';
+		}
+		test = row.cells[12];	// Username
+		if (test) {
+			var a =  getElementsByClassName(test.getElementsByTagName('a'), 'name', false)[0];
+			if (a) {
+				var username = a.firstChild.nodeValue;
+				test.setAttribute('anidb:sort',username);
 			}
 		}
 	}
@@ -228,124 +174,39 @@ function updateEpTable() {
 	headingList[4].className += ' c_none';			// Group
 	headingList[5].className += ' c_set';			// Size
 	headingList[6].className += ' c_setlatin';		// CRC
-	headingList[7].className += ' c_set';			// Quality
-	headingList[8].className += ' c_set';			// Source
+	headingList[7].className += ' c_setlatin';		// Quality
+	headingList[8].className += ' c_latin';		// Source
 	headingList[9].className += ' c_set';			// Resolution
 	headingList[10].className += ' c_set';			// User count
-	headingList[11].className += ' c_set';			// icons
-	if (headingList[12] && headingList[12].className.indexOf('') >= 0) {
+	if (headingList[12]) {
 		headingList[12].className += ' c_setlatin';// Username
+		updateRows = true;
 	}
-	var tbody = table.tBodies[0];
-	var thead = document.createElement('thead');
-	thead.appendChild(tbody.rows[0]);
-	table.insertBefore(thead,tbody);
+	if (updateRows) {
+		var tbody = table.tBodies[0];
+		var thead = document.createElement('thead');
+		thead.appendChild(tbody.rows[0]);
+		table.insertBefore(thead,tbody);
+		var rows = tbody.getElementsByTagName('tr');
+		for (var i = 0; i < rows.length; i++)
+			rows[i].cells[12].className = 'added_by '+ rows[i].cells[12].className;
+	}
 	init_sorting(table,'epno','down');
-	updateEpTableRows(false);
 }
 
-/* This function prepares the mylist page for use with my scripts */
 function prepPage() {
-	uriObj = parseURI();
-	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
+	uriObj = parseURI(); // update the uriObj
+	if (!uriObj['show'] || uriObj['show'] != 'group') return; // badPage
 	released_div = getElementsByClassName(document.getElementsByTagName('div'), 'group_released', true)[0];
 	ep_table = getElementsByClassName(document.getElementsByTagName('table'), 'filelist', true)[0];
 	if (released_div) { // releases
 		updateReleaseListRows();
 		updateReleaseList();
 	}
-	if (ep_table) updateEpTable();
-	if (!uriObj['show'] || uriObj['show'] != 'group') return; // can't work more magic without the rest
-	initTooltips();
-	aid = Number(uriObj['aid']);
-	gid = Number(uriObj['gid']);
-	if (isNaN(aid) || isNaN(gid)) return;
-	fetchData(aid);
-	createPreferencesTable('group');
-}
-
-/* Function that fetches anime data
- * @param aid Anime ID
- * @param gid Group ID
- */
-function fetchData(aid,gid) {
-	var req = xhttpRequest();
-	if (gid == null) {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
-	} else {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+aid+'&eid=all&gid='+gid, parseEpisodeData);
+	if (ep_table) {
+		updateEpTableRows();
+		updateEpTable();
 	}
-}
-
-/* Function that parses xml response
- * @param xmldoc The xml response
- */
-function parseData(xmldoc) {
-	var root = xmldoc.getElementsByTagName('root').item(0);
-	if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
-	updateStatus('Processing anime data...');
-	t1 = new Date();
-	parseAnimes(root.getElementsByTagName('animes'));
-	var parseAnimeNode = (new Date()) - t1;
-	var filedataNodes = root.getElementsByTagName('filedata');
-	for (var k = 0; k < filedataNodes.length; k++) parseFiledata(filedataNodes[k], aid);
-	updateStatus('Processing user data...');
-	var t1 = new Date();
-	parseCustom(root.getElementsByTagName('custom').item(0));
-	var parseCustomNode = (new Date()) - t1;
-	updateStatus('');
-	var aid = root.getElementsByTagName('anime')[0];
-	if (!aid) { errorAlert('parseData','no anime node'); return; }
-	aid = Number(aid.getAttribute('id'));
-	t1 = new Date();
-	var preparingPage = (new Date() - t1);
-	if (seeTimes) alert('Processing...\n'+
-						'\n\tanimes: '+parseAnimeNode+'ms'+
-						'\n\tcustom: '+parseCustomNode+' ms'+
-						'\n\tpreping: '+preparingPage+' ms'+
-						'\n\tTotal: '+(parseAnimeNode+parseCustomNode+preparingPage)+' ms');
-	// now fetch group data
-	fetchData(aid,gid); // now that we have anime data, fetch the rest of the data
-}
-
-/* Function that parses Episode data
- * @param xmldoc The xml document to parse
- */
-function parseEpisodeData(xmldoc) {
-	var root = xmldoc.getElementsByTagName('root').item(0);
-	if (!root) return;
-	updateStatus('Processing anime episode(s)...');
-	var animesNode = root.getElementsByTagName('animes')[0];
-	if (!animesNode) return;
-	var animeNodes = animesNode.getElementsByTagName('anime');
-	for (var i = 0; i < animeNodes.length; i++) {
-		if (animeNodes[i].parentNode.nodeName != 'animes') continue; // wrong node
-		var aid = Number(animeNodes[i].getAttribute('id'));
-		var epNodes = animeNodes[i].getElementsByTagName('ep');
-		var filedataNodes = animeNodes[i].getElementsByTagName('filedata');
-		var t1 = new Date();
-		for (var k = 0; k < filedataNodes.length; k++)
-			parseFiledata(filedataNodes[k], aid);
-		var epNodestime = (new Date()) - t1;
-		t1 = new Date();
-		processingEps = true; // make the table creation wait
-		for (var k = 0; k < epNodes.length; k++) {
-			// if we are handling just one episode do stuff now otherwise defer execution
-			var eid = Number(epNodes[k].getAttribute('id'));
-			parseEpisode(epNodes[k], aid);
-			var episode = episodes[eid];
-			if (!episode) continue;
-		}
-		processingEps = false;
-		pseudoFilesCreator(); // create pseudo files
-		if (loadExpand) loadExpand = false;
-		if (seeTimes) alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
-	}
-	updateStatus('');
-	// now that we have all the data actualy update the hash nodes
-	updateEpTableRows(true);
 }
 
 //window.onload = prepPage;
