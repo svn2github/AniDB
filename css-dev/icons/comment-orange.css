@@ -38,7 +38,7 @@
 {
 	width: 15px;
 	height: 12px;
-	margin: 1px;
+	margin: 3px;
 	background-image: url(../icons/orange/comment_info.gif);
 }
 
@@ -46,7 +46,7 @@
 {
 	width: 40px;
 	height: 12px;
-	margin: 1px;
+	margin: 3px;
 	background-image: url(../icons/orange/comment_quote.gif);
 }
 
@@ -54,7 +54,7 @@
 {
 	width: 45px;
 	height: 12px;
-	margin: 1px;
+	margin: 3px;
 	background-image: url(../icons/orange/comment_delete.gif);
 }
 
@@ -62,7 +62,7 @@
 {
 	width: 94px;
 	height: 12px;
-	margin: 1px;
+	margin: 3px;
 	background-image: url(../icons/orange/comment_creq.gif);
 }
 
@@ -70,7 +70,7 @@
 {
 	width: 32px;
 	height: 12px;
-	margin: 1px;
+	margin: 3px;
 	background-image: url(../icons/orange/comment_edit.gif);
 }
 
