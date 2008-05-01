@@ -4,6 +4,7 @@
 @import "../common/layout/common.css";
 
 @import "../common/layout/global/all.css";
+@import "../common/layout/global/timedentry.css";
 @import "../common/layout/page/all.css";
 
 @import "../common/style/color/msgbox-default.css";
