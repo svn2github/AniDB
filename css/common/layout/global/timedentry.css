@@ -14,7 +14,7 @@
 #layout-main div.g_timedentry h4
 {
 	padding: 0.1em;
-	margin: 0;
+	margin: 0px;
 	text-align: left;
 }
 
@@ -41,4 +41,93 @@
 {	
 	float: right;
 	margin-top: -1.5em;
+}
+
+#layout-main div.cmt_entries div.comment
+{
+	text-align:left;
+	min-height:0pt;
+	margin-bottom:1em;
+	border: 1px solid #D1D7DC;
+}
+
+#layout-main div.cmt_entries dl.profile
+{
+	border-right: 1px solid #D1D7DC;
+	display:inline;
+	float:left;
+	margin:0pt 8px 8pt 8pt;
+	min-height:80px;
+	width:15em;
+}
+
+#layout-main div.cmt_entries dl.profile dd
+{
+	clear:none;
+	float:none;
+	margin-left:0em;
+	color:#666666;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user
+{
+	padding-top:4px;
+}
+
+#layout-main div.cmt_entries dl.profile dd strong
+{
+	color:#000000;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user_icons span.icons
+{
+	float: none;
+}
+
+#layout-main div.cmt_entries div.postbody div.content
+{
+	margin-left: 17em;
+}
+
+#layout-main div.cmt_entries div.postbody p.author
+{
+	margin:0pt 15em 0.6em 0pt;
+	padding:2pt 0pt 5px;
+}
+
+#layout-main div.cmt_entries div.postbody span.actions a
+{
+	float:right;
+	margin-top: 4px;
+}
+
+#layout-main div.cmt_entries div.postfooter
+{
+	clear:both;
+	height:11px;
+	text-align:right;
+	padding-bottom:0.9em;
+}
+
+#layout-main div.cmt_entries div.postfooter a.i_top
+{
+	display:block;
+	float:right;
+}
+
+#layout-main div.cmt_entries a.username-colored
+{
+	color:#AA0000;
+	font-weight:bold;
+}
+
+#layout-main div.cmt_entries hr
+{
+	border-color: #D1D7DC;
+	border-style: solid none none;
+	border-width: 1px 0pt 0pt;
+	clear: both;
+	display: block;
+	height: 1px;
+	margin: 5px 0pt;
 }

@@ -1,5 +1,7 @@
 @import "../common/normalize.css";
 @import "../common/layout/default.css";
+@import "../icons/all.css";
+@import "../common/layout/global/timedentry.css";
 
 				body.nonav
 { width: auto }

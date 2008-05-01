@@ -1,4 +1,6 @@
 @import "../icons/awards.css";
+@import "../icons/comment-orange.css";
+@import "../common/layout/global/timedentry.css";
 
 * {
 	margin:					0;
