@@ -84,7 +84,7 @@
 	float: none;
 }
 
-#layout-main div.cmt_entries div.postbody p.content
+#layout-main div.cmt_entries div.postbody div.content
 {
 	margin-left: 17em;
 }
