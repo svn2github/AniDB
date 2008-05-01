@@ -58,7 +58,7 @@
 	float:left;
 	margin:0pt 8px 8pt 8pt;
 	min-height:80px;
-	width:15em;
+	width:12.5em;
 }
 
 #layout-main div.cmt_entries dl.profile dd
@@ -86,12 +86,12 @@
 
 #layout-main div.cmt_entries div.postbody div.content
 {
-	margin-left: 17em;
+	margin-left: 15em;
 }
 
 #layout-main div.cmt_entries div.postbody p.author
 {
-	margin:0pt 15em 0.6em 0pt;
+	margin:0pt 15em 0.6em 14.5em;
 	padding:2pt 0pt 5px;
 }
 
