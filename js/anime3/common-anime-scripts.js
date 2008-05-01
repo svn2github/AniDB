@@ -689,9 +689,13 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 				break;
 			case 'actions-mylist':
 				cell = createCell(null, col['classname'], null, null, colSpan);
-				if (icons['mylist_watch']) cell.appendChild(icons['mylist_watch']);
-				if (icons['mylist_edit']) cell.appendChild(icons['mylist_edit']);
-				if (icons['mylist_remove']) cell.appendChild(icons['mylist_remove']);
+				if (uid == ruid) {
+					if (icons['mylist_watch']) cell.appendChild(icons['mylist_watch']);
+					if (icons['mylist_edit']) cell.appendChild(icons['mylist_edit']);
+					if (icons['mylist_remove']) cell.appendChild(icons['mylist_remove']);
+				} else {
+					if (icons['mylist_add']) cell.appendChild(icons['mylist_add']);
+				}
 				row.appendChild(cell);
 				break;
 			case 'actions-anime':
