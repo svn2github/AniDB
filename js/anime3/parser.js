@@ -575,6 +575,7 @@ function parseGroups(node,aid) {
     var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
     groups[groupEntry.id] = groupEntry;
     aGroups[aGroupEntry.id] = aGroupEntry;
+	if (animes[aid].groups.indexOf(groupEntry.id) < 0) animes[aid].groups.push(groupEntry.id);
     if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
   }
   // create the "no group" group entry
@@ -594,6 +595,7 @@ function parseGroups(node,aid) {
   groupEntry.stateId = 0;
   groupEntry.hasCherryBeenPoped = false;
   groups[groupEntry.id] = groupEntry;
+  animes[aid].groups.push(0);
 }
 
 /* Processes a node to extract episode information

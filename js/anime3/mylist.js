@@ -610,7 +610,7 @@ function createEpisodeTableHead() {
 }
 
 /* Function that creates the episode table tfoot */
-function createEpisodeTableFoot(colSpan) {
+function createEpisodeTableFoot(colSpan,aid) {
 	var tfoot = document.createElement('tfoot');
 	var row = document.createElement('tr');
 	var cell = document.createElement('td');
@@ -618,9 +618,9 @@ function createEpisodeTableFoot(colSpan) {
 	createCheckBox(cell,'ck',null,cbToggle,false);
 	cell.appendChild(document.createTextNode(' select '));
 	var optionArray = [ {"value":'all',"text":'all'} ];
-	for (var g in groups) {
-		if (!groups[g]) continue;
-		var group = groups[g];
+	for (var g in animes[aid].groups) {
+		var group = groups[animes[aid].groups[g]];
+		if (!group) continue;
 		optionArray.push({"value":group.id,"text":group.shortName});
 	}
 	createSelectArrayN(cell,"mylmod.groupsel","mylmod.groupsel",null,0,optionArray);
@@ -712,7 +712,7 @@ function createEpisodeTable(aid) {
 		table.appendChild(tbody);
 	}
 	if (uid == ruid) {
-		var tfoot = (epTableFoot ? epTableFoot.cloneNode(true) : createEpisodeTableFoot(colSpan));
+		var tfoot = createEpisodeTableFoot(colSpan,aid);
 		var inputs = tfoot.getElementsByTagName('input');
 		for (var i = 0; i < inputs.length; i++) {
 			var input = inputs[i];
