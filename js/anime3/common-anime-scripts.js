@@ -157,6 +157,16 @@ function createEpisodeIcons(episode) {
 		}
 		if (episode.seenDate)
 			icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(episode.seenDate), 'i_seen');
+	} else if (mylist.length) { // for the case where the episode is related to some file
+		for (var fe = 0; fe < episode.files.length; fe++) {
+			var fid = episode.files[fe];
+			if (!mylist[fid]) continue;
+			if (mylist[fid].seenDate) {
+				episode.seenDate = mylist[fid].seenDate;
+				icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(episode.seenDate), 'i_seen');
+				break;
+			}
+		}	
 	}
 	return icons;
 }
