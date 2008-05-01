@@ -48,11 +48,12 @@
 	text-align:left;
 	min-height:0pt;
 	margin-bottom:1em;
+	border: 1px solid #D1D7DC
 }
 
 #layout-main div.cmt_entries dl.profile
 {
-	border-right:1px solid #FFFFFF;
+	border-right: 1px solid #D1D7DC
 	display:inline;
 	float:left;
 	margin:0pt 8px 8pt 8pt;
