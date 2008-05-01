@@ -84,6 +84,11 @@
 	float: none;
 }
 
+#layout-main div.cmt_entries div.postbody div.content
+{
+	margin-left: 17em;
+}
+
 #layout-main div.cmt_entries div.postbody p.author
 {
 	margin:0pt 15em 0.6em 0pt;
