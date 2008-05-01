@@ -3,6 +3,7 @@
 @import "../common/layout/page/animeatt.css";
 @import "../common/layout/global/tabbed_pane.css";
 @import "../common/layout/global/timedentry.css";
+@import "../common/style/color/quotebox-default.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
 padding:0;
