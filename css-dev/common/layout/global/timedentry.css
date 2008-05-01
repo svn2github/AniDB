@@ -121,3 +121,14 @@
 	color:#AA0000;
 	font-weight:bold;
 }
+
+#layout-main div.cmt_entries hr
+{
+	border-color: #D1D7DC;
+	border-style: solid none none;
+	border-width: 1px 0pt 0pt;
+	clear: both;
+	display: block;
+	height: 1px;
+	margin: 5px 0pt;
+}
