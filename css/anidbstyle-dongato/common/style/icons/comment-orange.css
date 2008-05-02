@@ -4,7 +4,7 @@
 	height: 12px;
 	margin: 5px;
 	background:transparent none no-repeat scroll 0pt;
-	background-image: url(../icons/orange/comment_add.png);
+	background-image: url(http://static.anidb.net/css/icons/orange/comment_add.png);
 }
 
 *.i_review_add
@@ -13,7 +13,7 @@
 	height: 12px;
 	margin: 5px;
 	background:transparent none no-repeat scroll 0pt;
-	background-image: url(../icons/orange/review_add.png);
+	background-image: url(http://static.anidb.net/css/icons/orange/review_add.png);
 }
 
 *.i_review_add
@@ -22,7 +22,7 @@
 	height: 12px;
 	margin: 5px;
 	background:transparent none no-repeat scroll 0pt;
-	background-image: url(../icons/orange/review_add.png);
+	background-image: url(http://static.anidb.net/css/icons/orange/review_add.png);
 }
 
 *.i_top
@@ -31,7 +31,7 @@
 	height: 11px;
 	margin: 5px;
 	background:transparent none no-repeat scroll 0pt;
-	background-image: url(../icons/phpbb/icon_back_top.gif);
+	background-image: url(../../../images/icon_back_top.gif);
 }
 
 *.i_comment_info
@@ -39,7 +39,7 @@
 	width: 15px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_info.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/comment_info.gif);
 }
 
 *.i_comment_quote
@@ -47,7 +47,7 @@
 	width: 40px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_quote.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/comment_quote.gif);
 }
 
 *.i_comment_delete
@@ -55,7 +55,7 @@
 	width: 45px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_delete.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/comment_delete.gif);
 }
 
 *.i_comment_creq
@@ -63,7 +63,7 @@
 	width: 94px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_creq.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/comment_creq.gif);
 }
 
 *.i_comment_edit
@@ -71,7 +71,7 @@
 	width: 32px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_edit.gif);
+	background-image: url(http://static.anidb.net/css/icons/orange/comment_edit.gif);
 }
 
 /*to center the paginationbar vertically*/
@@ -79,6 +79,7 @@ div.pagination
 {
 	margin-top:0.66em;
 }
+
 /*exception for this*/
 #layout-main div.news_all div.news div.topic_actions div.pagination
 {
