@@ -49,18 +49,34 @@ function javascriptDate(data) {
   if (data.indexOf('T') >= 0) { // UTC time
     var date = data.split('T')[0].split('-');
     var time = data.split('T')[1].split(':');
-    return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),Number(time[2]));
+	if (date[2].length == 2) {
+		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
+		else date[2] = '19'+date[2];
+	}
+    return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
   } else if (data.indexOf('-') >= 0 && data.indexOf(' ') >= 0 && data.indexOf(':') >= 0) {
     var date = data.split(' ')[0].split('-');
     var time = data.split(' ')[1].split(':');
-    return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),Number(time[2]));
+	if (date[2].length == 2) {
+		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
+		else date[2] = '19'+date[2];
+	}
+    return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
   } else if (data.indexOf('.') >= 0 && data.indexOf(' ') < 0 && data.indexOf(':') < 0) {
     var date = data.split('.');
+	if (date[2].length == 2) {
+		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
+		else date[2] = '19'+date[2];
+	}
     return new Date(Number(date[2]),Number(date[1])-1,Number(date[0]));
   } else if (data.indexOf('.') >= 0 && data.indexOf(' ') >= 0 && data.indexOf(':') >= 0) {
     var date = data.split(' ')[0].split('.');
     var time = data.split(' ')[1].split(':');
-    return new Date(Number(date[2]),Number(date[1])-1,Number(date[0]),Number(time[0]),Number(time[1]),Number(time[2]));
+	if (date[2].length == 2) {
+		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
+		else date[2] = '19'+date[2];
+	}
+    return new Date(Number(date[2]),Number(date[1])-1,Number(date[0]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
   } else
     return datetime = new Date(data * 1000); // UNIX time format
 }
@@ -788,8 +804,11 @@ function get_anidbsort(node) {
 }
 
 function get_date(node) {
-	while (node && !node.nodeValue) { node = node.firstChild; }
-	var string = node.nodeValue;
+	if (node && !node.childNodes.length) string = '?';
+	else {
+		while (node && !node.nodeValue) { node = node.firstChild; }
+		var string = node.nodeValue;
+	}
 	var findPrecision = function getPrecision(pstring) {
 		if (pstring == '?') return Number(new Date(2099,11,31)); // Totaly future date
 		if (pstring.indexOf('.') >= 0) {
@@ -797,16 +816,34 @@ function get_date(node) {
 			var datePart = hourPart = "";
 			if (highPrecision) {
 				var splitChar = String.fromCharCode(160);
-				datePart = pstring.substr(0,pstring.indexOf(splitChar));
-				hourPart = pstring.substr(pstring.indexOf(splitChar)+1,pstring.length);
+				if (pstring.indexOf(splitChar) >= 0) {
+					datePart = pstring.substr(0,pstring.indexOf(splitChar));
+					hourPart = pstring.substr(pstring.indexOf(splitChar)+1,pstring.length);
+				} else {
+					if (pstring.indexOf('T') >= 0) { // UTC time
+						var datePart = pstring.split('T')[0].split('-').join('.');
+						var hourPart = pstring.split('T')[1].split(':').join(':');
+					} else if (pstring.indexOf('-') >= 0 && pstring.indexOf(' ') >= 0 && pstring.indexOf(':') >= 0) {
+						var datePart = pstring.split(' ')[0].split('-').join('.');
+						var hourPart = pstring.split(' ')[1].split(':').join(':');
+					} else if (pstring.indexOf('.') >= 0 && pstring.indexOf(' ') >= 0 && pstring.indexOf(':') >= 0) {
+						var datePart = pstring.split(' ')[0].split('.').join('.');
+						var hourPart = pstring.split(' ')[1].split(':').join(':');
+					}
+				}
 			} else datePart = pstring;
 			var edate = datePart.split(".");
 			var ehour = hour = minute = 0;
 			var now = new Date();
 			var year;
 			// more date stuff
-			if (edate[2] && !isNaN(Number(edate[2]))) year = edate[2];
-			else {
+			if (edate[2] && !isNaN(Number(edate[2]))) {
+				year = edate[2];
+				if (year.length == 2) {
+					if (Number(year[0]) < 4) year = '20'+year;
+					else year = '19'+year;
+				}
+			} else {
 				if ((Number(edate[1]) - 1) > now.getMonth()) year = (now.getFullYear()-1);
 				else year = now.getFullYear();
 			}

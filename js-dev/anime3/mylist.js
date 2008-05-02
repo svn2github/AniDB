@@ -109,6 +109,7 @@ function prepPage() {
 		if (!a) { errorAlert('prepPage','no a link found'); continue; }
 		parseMylistExpandLink(a.href,mylist_settings);
 		ruid = mylist_settings['uid'];
+		if (Number(ruid) == 1) return; // Ajax mylist is currently disabled for exp
 		a.removeAttribute('href');
 		if (a.className.indexOf('i_minus') >= 0) {
 			a.onclick = foldAnime;
@@ -141,7 +142,7 @@ function prepPage() {
 function fetchData(aid,uid) {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_uid'+ruid+'.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+'&uid='+ruid, parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+'&uid='+Number(ruid), parseData);
 }
 
 /* Function that posts data

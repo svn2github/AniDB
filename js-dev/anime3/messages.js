@@ -152,6 +152,28 @@ function filterMessages() {
 	}
 }
 
+/* Function that selects messages on the message list based on the filter selections */
+function selectMessages() {
+	var div = document.getElementById('layout-content');
+	var rowList = msgTable.tBodies[0].getElementsByTagName('tr');
+	var ckId = -1;
+	for (var i = 0; i < rowList.length; i++) {
+		var row = rowList[i];
+		var ck = row.getElementsByTagName('input');
+		if (ckId >= 0) ck = ck[ckId];
+		else {
+			for (var j = 0; j < ck.length; j++) {
+				if (ck[j].type != 'checkbox') continue;
+				ckId = j;
+				ck = ck[j];
+				break;
+			}
+		}
+		if (row.style.display == 'none') ck.checked = false;
+		else ck.checked = this.checked;
+	}
+}
+
 /* Creates the reply */
 function createReply() {
 	var quoted = false;
@@ -334,6 +356,7 @@ function updateMsgList() {
 	headingList[6].className += ' c_none';		// action
   
 	// append some extra filtering options
+		
 	// FILTER BY TYPE
 	var optionArray = {	'all':{"text":' all '},'normal':{"text":' normal '},'system':{"text":' system '},
 						'bulk':{"text":' bulk '},'mod':{"text":' mod '}};
@@ -352,6 +375,12 @@ function updateMsgList() {
 	li.appendChild(document.createTextNode('state: '));
 	li.appendChild(select);
 	li.appendChild(document.createTextNode(' '));
+	actionList.insertBefore(li,actionList.firstChild);
+	// SELECT MESSAGES
+	li = document.createElement('li');
+	li.className = 'filter_messages';
+	createCheckBox(li,null,null,selectMessages,false);
+	li.appendChild(document.createTextNode(' select by '));
 	actionList.insertBefore(li,actionList.firstChild);
 
 	// update the delete action for messages
@@ -390,8 +419,10 @@ function updateMsgList() {
 /* Function that prepares the page */
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
-	if (!uriObj['show'] || uriObj['show'] != 'msg') return; // not interested in this page
-	if (!uriObj['do']) updateMsgList(); // message list
+	//if (!uriObj['show'] || uriObj['show'] != 'msg') return; // not interested in this page
+	var areWeMessageList = getElementsByClassName(document.getElementsByTagName('div'), 'g_section message list', false)[0];
+	if (!uriObj['do'] && areWeMessageList) updateMsgList(); // message list
+	else if (!uriObj['do'] && !areWeMessageList) return; // i don't know this page, go away
 	else {
 		if (uriObj['do'] == 'new') {
 			// if we are on the message send page (which is where we should be)
