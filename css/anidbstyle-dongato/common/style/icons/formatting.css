@@ -69,14 +69,19 @@
 	background-image: url(http://static.anidb.net/css/icons/formating/separator.gif);
 }
 
-*.f_view_source
+*.f_viewsource
+{
+	background-image: url(http://static.anidb.net/css/icons/formating/view_text.gif);
+}
+
+*.f_viewrte
 {
 	background-image: url(http://static.anidb.net/css/icons/formating/view_source.gif);
 }
 
-*.f_view_text
+*.f_cleansource
 {
-	background-image: url(http://static.anidb.net/css/icons/formating/view_text.gif);
+	background-image: url(http://static.anidb.net/css/icons/formating/clean_source.gif);
 }
 
 *.f_buddy

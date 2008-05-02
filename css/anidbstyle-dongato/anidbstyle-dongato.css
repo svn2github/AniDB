@@ -1,5 +1,10 @@
-
 @import "css/main.css";
+
+/* format for PRE */
+pre
+{
+	font-family: Lucida Console, Courier New;
+}
 
 /* hide mod panel */
 #layout-menu #menu-mod
@@ -317,8 +322,7 @@ div.search input.text
 
 /* add section fix */
 div.mylistadd table,
-div.ed2kdump_options table,
-div.categories
+div.ed2kdump_options table
 {
 	margin-left: auto;
 	margin-right: auto;
@@ -436,10 +440,19 @@ div.data caption
 	float: left;
 }
 
-/* removed search options */
-div.search select
+/* hide search options */
+#layout-search div.search form p select
 {
-	display: none;
+	display: none !important;
+}
+
+/* improved search options spacing */
+#layout-main ul#cattree .cat a,
+div.permissions span.name
+{
+	display: -moz-inline-box;
+	display: inline-block;
+	min-width: 20em;
 }
 
 /* more fixes for a design fuckup by anidb 'devs' */
