@@ -109,7 +109,7 @@ function prepPage() {
 		if (!a) { errorAlert('prepPage','no a link found'); continue; }
 		parseMylistExpandLink(a.href,mylist_settings);
 		ruid = mylist_settings['uid'];
-		if (Number(ruid) == 1) return; // Ajax mylist is currently disabled for exp
+		//if (Number(ruid) == 1) return; // Ajax mylist is currently disabled for exp
 		a.removeAttribute('href');
 		if (a.className.indexOf('i_minus') >= 0) {
 			a.onclick = foldAnime;
