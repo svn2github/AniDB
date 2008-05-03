@@ -440,7 +440,8 @@ function convert_output(str) {
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike) [^>]*?\>/mgi,'[/$1]');
 	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike)\>/mgi,'[$1]');
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike)\>/mgi,'[/$1]');
-	str = str.replace(/\[([/])?strike\]/mgi,'[$1s]');
+	str = str.replace(/\[strike\]/mgi,'[s]');
+	str = str.replace(/\[\/strike\]/mgi,'[/s]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 
 	str = str.replace(/\[p\]/mgi,'[br][br]');
