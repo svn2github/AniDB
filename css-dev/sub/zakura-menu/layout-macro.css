@@ -40,30 +40,39 @@ body.nonav form textarea {
 	border-top: 1px solid #f8f7ff;
 	background-color: #f8f7ff;
 }
-
+/*
 #layout-menu #menu-account {
-	background: transparent url(images/layout/bg-login.png) no-repeat right top;
-	margin: 0;
-	position: absolute;
-	top: 0;
-	right: 1em;
-	left: auto;
-	padding-left: 200px;
-	height: 102px;
-	width: 56px;
-	border: none;
-	text-align: right;
-	display: table;
+background: transparent url(images/layout/bg-login.png) no-repeat right top;
+margin: 0;
+position: absolute;
+top: 0;
+right: 1em;
+left: auto;
+padding-left: 200px;
+height: 102px;
+width: 56px;
+border: none;
+text-align: right;
+display: table;
 }
-
+*/
 #layout-search {
-	position: absolute;
-	top: 0;
-	left: auto;
-	right: 1em;
-	width: 35em;
-	margin-top: 110px;
-	padding: 0;
+position: absolute;
+top: 0;
+left: auto;
+right: 1em;
+/* width: 35em;
+margin-top: 110px; */
+padding: 0;
+padding-top: 110px;
+background: transparent url(images/layout/bg-login.png) no-repeat right top;
+padding-left: 200px;
+/* height: 102px; */
+width: 35em;
+border: none;
+text-align: right;
+display: table;
+margin: 0px;
 }
 
 #layout-search div.search p{

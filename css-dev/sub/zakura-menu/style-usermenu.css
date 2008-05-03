@@ -1,13 +1,14 @@
+/*
 #layout-menu #menu-account li {
 	display: table-cell;
 	border-bottom: none;
 	-display: block;
 	-float: right;
 }
-
+*/
 #layout-menu #menu-account li a{
-	display: table-cell;
-	height: 102px;
+	/*display: table-cell;
+	height: 102px;*/
 	vertical-align: bottom;
 	text-decoration: none;
 	text-transform: capitalize;

@@ -210,12 +210,6 @@ a.filter, span.time, span.user a.id, td.rating span { font-size: 076% }
 
 tr.mylist td.name a:first-child:after { font-size: 060% }
 
-.main_all .rightbar li, h1, li.tab, tr.header,
-ul.g_list li, ul.main-tabs li, ul.tabs li.tab
-{ font-family: Tahoma, sans-serif }
-
-html, select { font-family: "Lucida Sans Unicode", sans-serif }
-
 #layout-search,	#layout-tabs,
 .g_menu, .g_menu.mylist_menu, .g_msg h3,
 .main_all .rightbar,
@@ -328,10 +322,7 @@ ins, tr.good td, tr.mylist td { background-color: #F2FFF0 }
 #layout-footer, .i_icon span, .tab, h4 span:first-child, span a { -moz-user-select: none }
 
 /*mech*/
-
-#layout-menu > li:hover ul{
-display: block;
-}
+#layout-menu > li:hover ul{ display: block; }
 
 #layout-menu > li{
 background-color: #FFF;
@@ -343,6 +334,7 @@ border-right-color: rgb(222, 201, 242);
 border-left-color: rgb(243, 231, 255);
 padding-right: 18px;
 padding-left: 18px;
+padding-top: -20px;
 font-weight: bold;
 line-height: 20px;
 }
@@ -351,7 +343,8 @@ line-height: 20px;
 display: none;
 position: absolute;
 border: 1px solid #AFBEC7;
-border-top: none;
+border-top: 0px;
+margin-top: 20px;
 margin-left: -19px;
 padding: 0;
 font-weight: normal;
@@ -374,3 +367,13 @@ th.sortable{ cursor: pointer }
 th.ascending{ text-decoration: underline}
 
 th.descending{ text-decoration: overline}
+
+/* overrides */
+#layout-content { 
+	margin-left: 1em;
+	padding-top: 20px;
+}
+#layout-menu span.tab { 
+	display: inline; 
+	float: right;
+}
