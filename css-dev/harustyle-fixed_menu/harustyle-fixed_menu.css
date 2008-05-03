@@ -1,0 +1,13 @@
+@import "../harustyle/harustyle.css";
+
+#layout-nav
+{
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+#layout-main
+{
+	margin-top: 110px;
+}

@@ -1,0 +1,30 @@
+/*---------------------------------
+				@GROUP
+----------------------------------*/
+
+div.group_all div.group_released table {
+	width: 100%;
+}
+div.group_all div.group_released table .state.ongoing		{color: #2618b1;}
+div.group_all div.group_released table .state.stalled		{color: #966319;}
+div.group_all div.group_released table .state.complete		{color: #179023;}
+div.group_all div.group_released table .complete			{font-weight: bold;}
+div.group_all div.group_released table .state.dropped		{color: #8d92a0;}
+div.group_all div.group_vote {
+	text-align: center;
+}
+
+/* anime list rating */
+div.group_all td.rating {
+	color: #aaa;
+}
+div.group_all td.rating.mid {
+	color: #444;
+}
+div.group_all td.rating.high {
+	color: #000;
+	font-weight: bold;
+}
+div.group_all td.rating.low {
+	color: #999;
+}

@@ -1,0 +1,80 @@
+html
+{
+	color: #2E3C55;
+	border-color: #FFFFFF;
+	background: #e7ebff;
+}
+
+a
+{
+text-decoration: none;
+color: blue;
+cursor: pointer;
+}
+
+a:active
+{
+color: red;
+}
+
+#layout-main a:hover
+{
+text-decoration: underline;
+}
+
+a.i_icon:hover, a.i_inline:hover
+{
+text-decoration: none;
+}
+
+#layout-nav a
+{
+	color: #FFFFFF;
+}
+
+#layout-nav a:hover
+{
+	color : #FFFFFF;
+}
+
+#layout-nav
+{
+	background: #486187;
+	height: 100%;
+}
+
+#layout-menu
+{
+	color: #b0b0b0;
+}
+
+th,
+#layout-main div.g_timedentry h4,
+#layout-main div.main_all div.rightbar h4
+{
+	color: #4f5e77;
+	background-color: #a1b4cd;
+}
+
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd
+{
+	background-color: #DFDFF6;
+}
+#layout-main *.g_odd *.g_odd
+{
+	background-color: #E7EBFF;
+}
+#layout-main *.g_odd *.g_odd *.g_odd
+{
+	background-color: #DFDFF6;
+}
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd
+{
+	background-color: #E7EBFF;
+}
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd
+{
+	background-color: #DFDFF6;
+}

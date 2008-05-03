@@ -1,0 +1,49 @@
+table
+{
+	border-spacing: 0;
+}
+
+table table
+{
+	border: none;
+}
+
+img, a
+{
+	border: none;
+}
+
+#layout-main
+{
+	border-bottom: 1px solid transparent; /*hack for margin*/
+}
+#layout-main .g_list,
+#layout-main .g_description,
+#layout-main .g_image image,
+#layout-main .g_timedentry h4,
+#layout-main .g_definitionlist table
+{
+	border: 1px #98AAB1 dotted;
+}
+
+#layout-main .g_image image,
+#layout-main .g_definitionlist
+{
+	padding: 1px;
+}
+
+#layout-main .block .g_definitionlist table
+{
+	border: none;
+	margin: 0;
+}
+
+#layout-main table.filelist tr.newep td
+{
+	border-top: 1px #006699 solid;
+}
+
+#layout-main div.anime_all div.episodes tr.newtype td
+{
+	border-top: 2px #006699 double;
+}

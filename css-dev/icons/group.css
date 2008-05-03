@@ -1,0 +1,39 @@
+*.i_gstate_complete
+{
+	background-image: url(../icons/state/anidb_gstate_complete.gif);
+}
+
+*.i_gstate_dropped
+{
+	background-image: url(../icons/state/anidb_gstate_dropped.gif);
+}
+
+*.i_gstate_finished
+{
+	background-image: url(../icons/state/anidb_gstate_finished.gif);
+}
+
+*.i_gstate_ongoing
+{
+	background-image: url(../icons/state/anidb_gstate_ongoing.gif);
+}
+
+*.i_gstate_stalled
+{
+	background-image: url(../icons/state/anidb_gstate_stalled.gif);
+}
+
+*.i_gstate_specials
+{
+	background-image: url(../icons/state/anidb_gstate_specials.gif);
+}
+
+*.i_gstate_all
+{
+	background-image: url(../icons/state/anidb_gstate_all.gif);
+}
+
+*.i_group_comment
+{
+	background-image: url(../icons/silk/comment_add.png);
+}

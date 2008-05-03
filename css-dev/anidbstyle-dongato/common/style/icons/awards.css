@@ -1,0 +1,719 @@
+*.i_award_mainichi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_mainichi.gif);
+}
+
+*.i_award_top10
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_top10.gif);
+}
+
+*.i_award_arc2001
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2001award.gif);
+}
+
+*.i_award_arc2002
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2002award.gif);
+}
+
+*.i_award_arc2003
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2003award.gif);
+}
+
+*.i_award_arc2004
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2004award.gif);
+}
+
+*.i_award_arc2005
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2005award.gif);
+}
+
+*.i_award_arc2006
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2006award.gif);
+}
+
+*.i_award_arc2007
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_arc2006award.gif);
+}
+
+#top10
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_top10_banner.gif);
+}
+
+#mainichi_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_mainichi_animation.png);
+}
+
+#mainichi_oofuji_noburou
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/anidb_mainichi_oofuji_noburou.png);
+}
+
+#arc2001_action
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_action.jpg);
+}
+
+#arc2002_action
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_action.jpg);
+}
+
+#arc2003_action
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_action.jpg);
+}
+
+#arc2004_action
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_action.jpg);
+}
+
+#arc2005_action
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_action.jpg);
+}
+
+#arc2006_action
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_action.jpg);
+}
+
+#arc2001_adventure_fantasy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_adventure_fantasy.jpg);
+}
+
+#arc2002_adventure_fantasy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_adventure_fantasy.jpg);
+}
+
+#arc2003_adventure_fantasy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_adventure_fantasy.jpg);
+}
+
+#arc2004_adventure_fantasy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_adventure_fantasy.jpg);
+}
+
+#arc2005_adventure_fantasy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_adventure_fantasy.jpg);
+}
+
+#arc2006_adventure_fantasy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_adventure_fantasy.jpg);
+}
+
+#arc2001_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_animation.jpg);
+}
+
+#arc2002_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_animation.jpg);
+}
+
+#arc2003_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_animation.jpg);
+}
+
+#arc2004_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_animation.jpg);
+}
+
+#arc2005_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_animation.jpg);
+}
+
+#arc2006_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_animation.jpg);
+}
+
+#arc2001_anime_overall
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_anime_overall.jpg);
+}
+
+#arc2002_anime_overall
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_anime_overall.jpg);
+}
+
+#arc2003_anime_overall
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_anime_overall.jpg);
+}
+
+#arc2004_anime_overall
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_anime_overall.jpg);
+}
+
+#arc2005_anime_overall
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_anime_overall.jpg);
+}
+
+#arc2006_anime_overall
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_anime_overall.jpg);
+}
+
+#arc2001_character_development
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_character_development.jpg);
+}
+
+#arc2002_character_development
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_character_development.jpg);
+}
+
+#arc2003_character_development
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_character_development.jpg);
+}
+
+#arc2004_character_development
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_character_development.jpg);
+}
+
+#arc2005_character_development
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_character_development.jpg);
+}
+
+#arc2006_character_development
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_character_development.jpg);
+}
+
+#arc2001_comedy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_comedy.jpg);
+}
+
+#arc2002_comedy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_comedy.jpg);
+}
+
+#arc2003_comedy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_comedy.jpg);
+}
+
+#arc2004_comedy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_comedy.jpg);
+}
+
+#arc2005_comedy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_comedy.jpg);
+}
+
+#arc2006_comedy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_comedy.jpg);
+}
+
+#arc2001_drama
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_drama.jpg);
+}
+
+#arc2002_drama
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_drama.jpg);
+}
+
+#arc2003_drama
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_drama.jpg);
+}
+
+#arc2004_drama
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_drama.jpg);
+}
+
+#arc2005_drama
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_drama.jpg);
+}
+
+#arc2006_drama
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_drama.jpg);
+}
+
+#arc2001_ecchi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_ecchi.jpg);
+}
+
+#arc2002_ecchi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_ecchi.jpg);
+}
+
+#arc2003_ecchi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_ecchi.jpg);
+}
+
+#arc2004_ecchi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_ecchi.jpg);
+}
+
+#arc2005_ecchi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_ecchi.jpg);
+}
+
+#arc2006_ecchi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_ecchi.jpg);
+}
+
+#arc2001_female_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_female_character.jpg);
+}
+
+#arc2002_female_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_female_character.jpg);
+}
+
+#arc2003_female_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_female_character.jpg);
+}
+
+#arc2004_female_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_female_character.jpg);
+}
+
+#arc2005_female_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_female_character.jpg);
+}
+
+#arc2006_female_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_female_character.jpg);
+}
+
+#arc2001_male_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_male_character.jpg);
+}
+
+#arc2002_male_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_male_character.jpg);
+}
+
+#arc2003_male_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_male_character.jpg);
+}
+
+#arc2004_male_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_male_character.jpg);
+}
+
+#arc2005_male_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_male_character.jpg);
+}
+
+#arc2006_male_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_male_character.jpg);
+}
+
+#arc2001_music_ost
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_music_ost.jpg);
+}
+
+#arc2002_music_ost
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_music_ost.jpg);
+}
+
+#arc2003_music_ost
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_music_ost.jpg);
+}
+
+#arc2004_music_ost
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_music_ost.jpg);
+}
+
+#arc2005_music_ost
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_music_ost.jpg);
+}
+
+#arc2006_music_ost
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_music_ost.jpg);
+}
+
+#arc2001_mystery_thriller_horror
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_mystery_thriller_horror.jpg);
+}
+
+#arc2002_mystery_thriller_horror
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_mystery_thriller_horror.jpg);
+}
+
+#arc2004_mystery_thriller_horror
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_mystery_thriller_horror.jpg);
+}
+
+#arc2005_mystery_thriller_horror
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_mystery_thriller_horror.jpg);
+}
+
+#arc2006_mystery_thriller_horror
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_mystery_thriller_horror.jpg);
+}
+
+#arc2003_newcomer
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_newcomer.jpg);
+}
+
+#arc2004_newcomer
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_newcomer.jpg);
+}
+
+#arc2005_newcomer
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_newcomer.jpg);
+}
+
+#arc2006_newcomer
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_newcomer.jpg);
+}
+
+#arc2001_op-ed
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_op-ed.jpg);
+}
+
+#arc2002_op-ed
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_op-ed.jpg);
+}
+
+#arc2003_op-ed
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_op-ed.jpg);
+}
+
+#arc2004_op-ed
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_op-ed.jpg);
+}
+
+#arc2005_op-ed
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_op-ed.jpg);
+}
+
+#arc2006_op-ed
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_op-ed.jpg);
+}
+
+#arc2001_quick_watch
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_quick_watch.jpg);
+}
+
+#arc2002_quick_watch
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_quick_watch.jpg);
+}
+
+#arc2004_quick_watch
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_quick_watch.jpg);
+}
+
+#arc2005_quick_watch
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_quick_watch.jpg);
+}
+
+#arc2006_quick_watch
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_quick_watch.jpg);
+}
+
+#arc2001_romance
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_romance.jpg);
+}
+
+#arc2002_romance
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_romance.jpg);
+}
+
+#arc2003_romance
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_romance.jpg);
+}
+
+#arc2004_romance
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_romance.jpg);
+}
+
+#arc2005_romance
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_romance.jpg);
+}
+
+#arc2006_romance
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_romance.jpg);
+}
+
+#arc2001_sci-fi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_sci-fi.jpg);
+}
+
+#arc2002_sci-fi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_sci-fi.jpg);
+}
+
+#arc2003_sci-fi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_sci-fi.jpg);
+}
+
+#arc2004_sci-fi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_sci-fi.jpg);
+}
+
+#arc2005_sci-fi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_sci-fi.jpg);
+}
+
+#arc2006_sci-fi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_sci-fi.jpg);
+}
+
+#arc2001_sports
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_sports.jpg);
+}
+
+#arc2003_sports
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_sports.jpg);
+}
+
+#arc2001_story
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_story.jpg);
+}
+
+#arc2002_story
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_story.jpg);
+}
+
+#arc2003_story
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2003_story.jpg);
+}
+
+#arc2004_story
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_story.jpg);
+}
+
+#arc2005_story
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_story.jpg);
+}
+
+#arc2006_story
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_story.jpg);
+}
+
+#arc2001_villain
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2001_villain.jpg);
+}
+
+#arc2002_villain
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2002_villain.jpg);
+}
+
+#arc2004_villain
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2004_villain.jpg);
+}
+
+#arc2005_villain
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2005_villain.jpg);
+}
+
+#arc2006_villain
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2006_villain.jpg);
+}
+
+#arc2007_action
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_action.jpg);
+}
+
+#arc2007_adventure_fantasy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_adventure_fantasy.jpg);
+}
+
+#arc2007_animation
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_animation.jpg);
+}
+
+#arc2007_anime_overall
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_anime_overall.jpg);
+}
+
+#arc2007_character_development
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_character_development.jpg);
+}
+
+#arc2007_comedy
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_comedy.jpg);
+}
+
+#arc2007_drama
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_drama.jpg);
+}
+
+#arc2007_ecchi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_ecchi.jpg);
+}
+
+#arc2007_female_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_female_character.jpg);
+}
+
+#arc2007_male_character
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_male_character.jpg);
+}
+
+#arc2007_music_ost
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_music_ost.jpg);
+}
+
+#arc2007_mystery_thriller_horror
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_mystery_thriller_horror.jpg);
+}
+
+#arc2007_newcomer
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_newcomer.jpg);
+}
+
+#arc2007_op-ed
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_op-ed.jpg);
+}
+
+#arc2007_quick_watch
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_quick_watch.jpg);
+}
+
+#arc2007_romance
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_romance.jpg);
+}
+
+#arc2007_sci-fi
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_sci-fi.jpg);
+}
+
+#arc2007_slice_of_life
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_slice_of_life.jpg);
+}
+
+#arc2007_sports
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_sports.jpg);
+}
+
+#arc2007_story
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_story.jpg);
+}
+
+#arc2007_villain
+{
+	background-image: url(http://static.anidb.net/css/icons/awards/arc2007_villain.jpg);
+}

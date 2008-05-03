@@ -1,0 +1,33 @@
+/*---------------------------------
+				@FILE
+----------------------------------*/
+
+div.file_all div.file_info dl {
+	width: 100%;
+}
+div.file_all div.file_info dl dd,
+div.file_all div.file_info dl dt {
+	padding: 0.2em 1%;
+	border-top: 1px solid #ebe1ef;
+	float: left;
+}
+div.file_all div.file_info dl dt {
+	width: 16%;
+}
+div.file_all div.file_info dl dd {
+	width: 80%;
+	margin: 0;
+	font-weight: bold;
+}
+div.file_all h4 {
+	margin-top: 1em;
+}
+div.file_all div.file_info dl .group,
+div.file_all div.file_info dl .size,
+div.file_all div.file_info dl .ed2k,
+div.file_all div.file_info dl .sha1,
+div.file_all div.file_info dl .censored,
+div.file_all div.file_info dl .quality,
+div.file_all div.file_info dl .stats {
+	background-color: #f5f7ff;
+}

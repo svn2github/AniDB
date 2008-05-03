@@ -1,0 +1,31 @@
+#layout-main .categories div.controls
+{
+	text-align: center;
+}
+
+#layout-main ul#cattree
+{
+	margin-left: 1em;
+}
+
+#layout-main ul#cattree a.i_icon
+{
+	float: left;
+	margin-left: -16px;
+}
+
+#layout-main ul#cattree li
+{
+	line-height: 14px;
+	margin-left: 2em;
+}
+
+#layout-main ul#cattree li > span
+{
+	display: block;
+}
+
+#layout-main ul#cattree li.collapsed ul
+{
+	display: none;
+}

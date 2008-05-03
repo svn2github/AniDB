@@ -1,0 +1,79 @@
+
+#layout-content div.msg_all table,
+#layout-content div.msg_all div.menu
+{
+	background-color: #ffffff;
+	border-color: blue;
+	border-style: solid;
+	border-width: 1px 0px 0px 0px;
+	margin: 0;
+}
+
+#layout-content div.msg_all div.menu
+{
+	float: right;
+	width: 15em;
+	margin-left: 4px;
+	margin-right: 10%;
+}
+
+#layout-content div.msg_all table.messages
+{
+	border-collapse: collapse;
+	width: auto;
+	text-align: center;
+	margin-top: 1px;
+	margin-left: 3em;
+}
+
+#layout-content div.msg_all th,
+#layout-content div.msg_all h4
+{
+	background-color: #e5ecf9;
+	color: #000000;
+	font-weight: normal;
+	text-align: left;
+	margin: 0;
+	padding: 1px;
+}
+
+#layout-content div.msg_all div.menu ul
+{
+	padding: 0.1em 0.5em 1.3em 0.5em;
+	margin: 0;
+}
+
+#layout-content div.msg_all div.menu li
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#layout-content div.msg_all div.menu li.refresh,
+#layout-content div.msg_all div.menu li.sent,
+#layout-content div.msg_all div.menu li.delsys
+{
+	margin-bottom: 1.2em;
+}
+
+#layout-content div.msg_all table.messages td.date
+{
+	white-space: nowrap;
+}
+
+#layout-content div.msg_all table.messages td.title
+{
+	text-align: left;
+}
+
+#layout-content div.msg_all table.messages td.state.old
+{
+	font-style: italic;
+}
+
+#layout-content div.msg_all table.messages td.state.new,
+#layout-content div.msg_all table.messages td.type.sys
+{
+	font-weight: bold;
+}

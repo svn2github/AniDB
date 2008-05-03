@@ -1,0 +1,116 @@
+#layout-main div.userpage_all div.stats,
+#layout-main div.myplace_all div.stats
+{
+	float: left;
+	clear: none;
+	width: 14em;
+}
+
+#layout-main div.userpage_all div.stats table,
+#layout-main div.myplace_all div.stats table
+{
+	width: 95%;
+}
+
+#layout-main div.userpage_all div.stats div table th,
+#layout-main div.myplace_all div.stats div table th
+{
+	width: 60%;
+}
+
+#layout-main div.userpage_all div.stats div table td.value,
+#layout-main div.myplace_all div.stats div table td.value
+{
+	text-align: right;
+}
+
+#layout-main div.myplace_all div.latest
+{
+	margin-left: 15em;
+	margin-right: 11em;
+	clear: none;
+}
+
+#layout-main div.userpage_all div.buddies,
+#layout-main div.userpage_all div.favreviewers
+{
+	float: right;
+	clear: right;
+	margin-bottom: 1em;	
+}
+
+#layout-main div.userpage_all div.g_menu,
+#layout-main div.userpage_all div.buddies,
+#layout-main div.userpage_all div.favreviewers
+{
+	width: 10em;
+}
+
+#layout-main div.userpage_all div.buddies ul li,
+#layout-main div.userpage_all div.favreviewers ul li
+{
+	padding: 1px 6px 1px 6px;
+}
+
+#layout-main div.userpage_all div.userdetails,
+#layout-main div.userpage_all div.userprefs
+{
+	margin-left: 15em;
+	margin-right: 12em;
+	clear: none;
+}
+
+#layout-main div.userpage_all div.userdetails
+{
+	display: table;
+}
+
+#layout-main div.userpage_all div.userdetails .block > div{
+	float: none;
+	width: auto;
+	display: table-cell;
+	vertical-align: top;
+}
+
+#layout-main div.userpage_all div.userdetails img
+{
+	margin-right: 1em;
+}
+
+#layout-main div.userpage_all div.userprefs h4
+{
+	text-align: center;
+}
+
+#layout-main div.userpage_all div.charts
+{
+	width: 700px;
+	height: 600px;
+	margin-left:auto;
+	margin-right:auto;	
+}
+
+#layout-main div.userpage_all div.charts div
+{
+	float: left;
+}
+
+#layout-main div.userpage_all div.charts div.votedistribution
+{
+	padding-left: 50px; /*margin doesn't work for ie6, should be ok w/o borders*/
+}
+
+#layout-main div.userpage_all div.userdetails p
+{
+	text-align: left;
+	margin-left: 4em;
+	margin-right: 2em;
+	margin-top: 2em;
+}
+
+#layout-main div.userpage_all div.latest div
+{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}

@@ -1,0 +1,9 @@
+@import "../common.css";
+@import "../fancy.css";
+
+@import "../../common/layout/macro/separate.css";
+@import "../../common/layout/macro/tabs.css";
+@import "../../common/style/color/status-creme.css";
+
+@import "border.css";
+@import "color.css";

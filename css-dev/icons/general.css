@@ -1,0 +1,112 @@
+*.i_help
+{
+	background: url(../icons/orange/ask2.gif) no-repeat right;
+	cursor: help; /* just for teh funs */
+}
+
+*.i_enlarge {
+	background-image: url(../icons/enlarge.png);
+	float: right;
+	height: 11px;
+	padding-top: 5px;
+}
+
+*.i_comment
+{
+	background-image: url(../icons/icon/anidb_comment.gif);
+}
+
+*.i_report_entry,
+*.i_no_vote
+{
+	background-image: url(../icons/icon/anidb_no_vote.gif);
+}
+
+*.i_nonotify
+{
+	background-image: url(../icons/icon/anidb_nonotify.gif);
+}
+
+*.i_notify
+{
+	background-image: url(../icons/icon/anidb_notify.gif);
+}
+
+*.i_plus
+{
+	background-image: url(../icons/orange/plus.gif);
+}
+
+*.i_minus
+{
+	background-image: url(../icons/orange/minus.gif);
+}
+
+*.i_none
+{
+	background-image: url(../icons/orange/none.gif);
+}
+
+*.i_nopic
+{
+	background-image: url(../icons/orange/nopic.gif);
+}
+
+*.i_sort
+{
+  width: 5px;
+	background-image: url(../icons/orange/sort.gif);
+}
+
+*.i_vote
+{
+	background-image: url(../icons/orange/anidb_vote.gif);
+}
+
+*.i_revote
+{
+	background-image: url(../icons/orange/anidb_revote.gif);
+}
+
+*.i_arrow_up
+{
+	background-image: url(../icons/test/arrow_up.png);
+}
+
+*.i_arrow_down
+{
+	background-image: url(../icons/test/arrow_down.png);
+}
+
+*.i_arrow_inactive
+{
+	background-image: url(../icons/test/arrow_inactive.png);
+}
+
+*.i_massaddtomylist
+{
+	background-image: url(../icons/orange/massaddtomylist.png);
+}
+
+#layout-main th a.inactive{
+	background: url(../icons/test/arrow_inactive.png) center left no-repeat;
+	padding-left: 11px;
+}
+
+#layout-main th a.descending{
+	background: url(../icons/test/arrow_down.png) center left no-repeat;
+	padding-left: 11px;
+}
+
+#layout-main th a.ascending{
+	background: url(../icons/test/arrow_up.png) center left no-repeat;
+	padding-left: 11px;
+}
+
+.s_reverse {
+	text-decoration: underline;
+}
+
+.s_forward {
+	text-decoration: overline;
+}

@@ -1,0 +1,85 @@
+body
+{
+	color: #555040;
+	background-color: #bebcad;
+}
+
+a:link,a:active,a:visited
+{
+	color : #006699;
+}
+
+#layout-nav a
+{
+	color: #4f5e77;
+	font-weight: bold;
+}
+
+a:hover,
+#layout-nav a:hover
+{
+	color : #98b974;
+}
+
+#layout-nav
+{
+	background: #e0dbc9;
+}
+
+#layout-menu ul,
+#layout-tabs ul li a:hover,
+#layout-tabs ul li.selected a,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main,
+#layout-footer
+{
+	background-color: #e9e6d9;
+}
+
+#layout-main th a,
+#layout-main h1 a,
+#layout-main div.g_timedentry h4 a
+{
+	color: #e9e6d9;
+}
+
+th,
+#layout-main h1,
+#layout-main div.g_timedentry h4,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	color: #e9e6d9;
+	background-color: #8c8673;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	color: black;
+}
+
+#layout-tabs ul li a,
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd,
+#layout-main div.desc
+{
+	background-color: #e0dbc9;
+}
+
+#layout-menu ul li a:hover,
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	color: inherit;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-menu ul li:hover
+{
+	background-color: #e0dbc9;
+}
+
+#layout-tabs ul li.selected a
+{
+	border-bottom: 1px #E5E5E5 double;
+}

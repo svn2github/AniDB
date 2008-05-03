@@ -1,0 +1,45 @@
+.v_pos
+{
+	color: #006600;
+}
+
+.g_vital a,
+.v_neg,
+.v_high,
+span.diff,
+#layout-content td.reviewed.no a,
+#layout-content div.creqmod_all .state.return,
+#layout-content div.creqmod_all span.type.del
+{
+	color: red;
+}
+
+#layout-content div.msg_all tr.mod
+{
+	background-color: orange;
+}
+
+#layout-content div.mylist_list tr.all_watched td.stats
+{
+	color: darkgreen;
+}
+
+#layout-content table ul li.g_odd,
+#layout-content table table td.g_odd,
+#layout-content ul.g_actionlist li.g_odd
+{
+	background-color: inherit;
+}
+
+#layout-content a.filter,
+#layout-content .name span.main,
+#layout-content .name span.match
+{
+	color: #46C5FF;
+	margin-left: 5px;
+}
+
+input.g_error
+{
+	background-color: #FFDDDD;
+}

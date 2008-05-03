@@ -1,0 +1,49 @@
+*.i_user_add
+{
+	background-image: url(images/user_add.png);
+}
+
+*.i_user_delete
+{
+	background-image: url(images/user_delete.png);
+}
+
+*.i_user_feedback
+{
+	background-image: url(images/user_feedback.png);
+}
+
+*.i_user_info
+{
+	background-image: url(images/user_info.png);
+}
+
+*.i_user_mylist
+{
+	background-image: url(images/user_mylist.png);
+}
+
+*.i_user_page
+{
+	background-image: url(images/user_page.png);
+}
+
+*.i_user_reviews
+{
+	background-image: url(images/user_reviews.png);
+}
+
+*.i_user_send
+{
+	background-image: url(images/user_send.png);
+}
+
+*.i_user_wishlist
+{
+	background-image: url(images/user_wishlist.png);
+}
+
+*.i_user_votes
+{
+	background-image: url(images/user_votes.png);
+}

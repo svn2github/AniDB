@@ -1,0 +1,50 @@
+*
+{
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+html, body, div, form, table
+{
+	left: 0;
+}
+td, th
+{
+	padding: 1px 2px 1px 2px;
+}
+p, textarea
+{
+	padding: 4px;
+}
+span
+{
+	display: inline;
+}
+fieldset
+{
+	display: none;
+}
+ul
+{
+	list-style-type: none;
+}
+ol
+{
+	list-style-position: outside;
+	margin-left: 2em;
+}
+dl
+{
+	display: table;
+	margin: 1px auto 1px auto;
+}
+dl dt
+{
+	float: left;
+	clear: left;
+}
+dl dd
+{
+	margin-left: 10em;
+	text-align: left;
+}

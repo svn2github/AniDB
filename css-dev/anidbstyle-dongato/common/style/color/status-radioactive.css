@@ -1,0 +1,42 @@
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main div.myvotes_all table tr.low td
+{
+	background-color: #AAAAAA;
+}
+
+#layout-content div.myvotes_all table tr.g_odd.low td,
+#layout-content div.myvotes_all table tr.low td
+{
+	background-color: #BF6269;
+}
+
+#layout-main td ins,
+#layout-main table.filelist tr.good,
+#layout-main div.myvotes_all table tr.high td,
+#layout-main div.producer_all table tr.mylist,
+#layout-content div.group_released table tr.mylist
+{
+	background-color: #6FCF7F;
+}
+
+#layout-content td.g_odd ins,
+#layout-content table.filelist tr.g_odd.good,
+#layout-content div.myvotes_all table tr.g_odd.high td,
+#layout-content div.producer_all table tr.g_odd.mylist,
+#layout-content div.group_released table tr.g_odd.mylist
+{
+	background-color: #6FC279;
+}
+
+#layout-main table.filelist tr.deprecated
+{
+	background-color: #CC9999;
+}
+
+#layout-main div.anime_all div.episodes tr.generic td
+{
+	background-color: #EEEEEE;
+}

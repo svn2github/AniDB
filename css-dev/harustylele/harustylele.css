@@ -1,0 +1,11 @@
+@import "../harustyle/harustyle.css";
+
+#layout-menu
+{
+	background: url(images/menu.jpg) no-repeat left 94px;
+}
+
+#layout-search div.search
+{
+	background: url(images/banner.png) no-repeat top left;
+}

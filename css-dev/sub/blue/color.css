@@ -1,0 +1,54 @@
+body
+{
+	color: #2E3C55;
+	border-color: #FFFFFF;
+	background: #a1b4cd url(images/blue-bg-nav.gif) left repeat-y;
+}
+
+a:link,a:active,a:visited
+{
+	color : #006699;
+}
+
+#layout-nav a
+{
+	color: #EFEFEF;
+}
+
+a:hover,
+#layout-nav a:hover
+{
+	color : #FFFFFF;
+}
+
+#layout-nav
+{
+	background: #486187;
+}
+
+#layout-main,
+#layout-footer
+{
+	background-color: #e7f0ff;
+}
+
+th,
+#layout-main h1,
+#layout-main div.g_timedentry h4,
+#layout-main div.main_all div.rightbar h4
+{
+	color: #4f5e77;
+	background-color: #a1b4cd;
+}
+
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd
+{
+	background-color: #cbd6e5;
+}
+
+#layout-menu ul li:hover
+{
+	background-color: #577096;
+}

@@ -1,0 +1,72 @@
+/*---------------------------------
+			@MYPLACE
+----------------------------------*/
+
+div.myplace_all div.g_menu div {
+	margin-bottom: 1em;
+}
+div.myplace_all div.g_menu div:last-child {
+	margin-bottom: 0;
+}
+div.myplace_all div.stats,
+div.myplace_all div.latest {
+	padding-right: 12em;
+	clear: left;
+}
+div.myplace_all div.latest {
+	padding-top: 1em;
+}
+div.myplace_all div.stats table {
+	width: 100%;
+}
+div.myplace_all div.stats>div {
+	float: left;
+	width: 23.5%;
+	padding-right: 2%;
+}
+div.myplace_all div.stats>div:last-child {
+	padding-right: 0;
+}
+div.myplace_all caption,
+div.myplace_all div.latest h4 {
+	text-align: left;
+	color: #7762ed;
+	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+	padding: 0 0.15em;
+}
+div.myplace_all div.latest ul {
+	margin-bottom: 1em;
+}
+div.myplace_all div.latest ul li {
+	border-top: 1px solid #ebe1ef;
+	padding: 0.3em;
+	position: relative;
+}
+div.myplace_all div.latest ul li.g_odd {
+	background-color: #f5f7ff;
+}
+div.myplace_all div.latest li span {
+	position: absolute;
+	top: 0.3em;
+	left: 0.3em;
+}
+div.myplace_all div.latest li span+a {
+	margin-left: 6em;
+}
+div.myplace_all div.latest_files li span+a {
+	margin-left: 10em;
+}
+
+div.myplace_all div.latest_votes span.mid,
+div.myplace_all div.latest_reviews span.mid {
+	color: #444;
+}
+div.myplace_all div.latest_votes span.high,
+div.myplace_all div.latest_reviews span.high {
+	color: #000;
+	font-weight: bold;
+}
+div.myplace_all div.latest_votes span.low,
+div.myplace_all div.latest_reviews span.low {
+	color: #aaa;
+}

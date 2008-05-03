@@ -1,0 +1,38 @@
+#layout-main div.g_menu
+{
+	float: right;
+	margin-bottom: 1em;
+}
+
+#layout-main div.g_menu ul
+{
+	margin-top: 2px;
+}
+
+#layout-main div.g_menu ul li
+{
+	padding: 1px 6px 1px 6px;
+}
+
+#layout-main div.g_menu ul.state
+{
+	height: 15px;
+	padding-top: 2px;
+	padding-bottom: 1px;
+}
+
+#layout-main div.g_menu ul.state li
+{
+	float: left;
+	padding: 0px 2px 0px 1px;
+}
+
+#layout-main div.g_menu ul.state + ul
+{
+	clear: left;
+}
+
+#layout-main div.g_menu.mylist_menu
+{
+	width: 10em; /*IE*/
+}

@@ -1,0 +1,159 @@
+#layout-menu
+{
+	position: absolute;
+	top: 94px;
+	left: 0;
+	width: 142px;
+	height: 603px;
+	padding: 51px 0px 0px 28px;
+	background: transparent url(../anidbstyle/images/menuback.png) no-repeat top left;
+}
+
+#menu-account,
+#menu-login
+{
+	position: absolute;
+	top: 420px;
+	left: 8px;
+	line-height: 2;
+}
+
+#menu-mod
+{
+	position: absolute;
+	top: 600px;
+	left: 23px;
+	padding: 4px;
+	background-color: #1a2238;
+	border: 1px inset #AEAEAE;
+}
+
+#layout-menu ul
+{
+	line-height: 1.2;
+	width: 96px;
+	margin-bottom: 10px;
+}
+
+#layout-menu li.mymessages, #layout-menu li.mynotifies, #layout-menu li.mywishlist,
+#layout-menu li.myvotes, #layout-menu li.myreviews, #layout-menu li.mydbentries,
+#layout-menu li.mycreqs, #layout-menu li.up2date
+{
+	display: none;
+}
+
+#layout-menu ul.main, #layout-menu li.ed2kdump, #layout-menu ul.lists
+{
+	margin-bottom: 1.0em;
+}
+
+#layout-menu li.help
+{
+	margin-bottom: 2px;
+	text-indent: 15px;
+	background: url(../icons/orange/ask2.gif) left no-repeat;
+}
+
+#layout-menu li.forum a
+{
+	font-weight: bold;
+}
+
+#layout-search
+{
+	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
+	width: 100%;
+}
+
+#layout-search div.search
+{
+	background: transparent url(../anidbstyle/images/anidb01toosimple.png) no-repeat top left;
+	height: 94px;
+}
+
+#layout-search div.search form
+{
+	background: transparent url(../anidbstyle/images/searchback.png) no-repeat top right;
+	position: absolute;
+	top: 77px;
+	left: auto;
+	right: 0;
+	-right: -1px;
+	width: 152px;
+	height: 57px;
+}
+
+#layout-search div.search form p
+{
+	margin-top: 12px;
+	margin-left: 32px;
+}
+
+#layout-search div.search form input.text
+{
+	margin-bottom: 2px;
+}
+
+#layout-search div.search form input.submit
+{
+	background: url(../icons/orange/button_search.gif) no-repeat top;
+	padding: 20px 0 0 0;
+	overflow: hidden;
+	width: 63px;
+	height: 14px;
+	border: 0;
+	cursor: pointer;
+}
+
+#layout-content
+{
+	margin-left: 182px;
+	padding-top: 0.5em;
+}
+
+#layout-main h1
+{
+	margin: 3px 0 18px 37px;
+	text-align: left;
+}
+
+#layout-footer
+{
+	margin-top: 19px;
+	margin-left: 182px;
+	text-align: center;
+}
+
+#layout-main div.anime_all div.mylist th.anime
+{
+	width: 300px;
+}
+
+#layout-tabs
+{
+	position: absolute;
+	right: 152px;
+	left: 168px;
+	top: 79px;
+}
+
+#layout-tabs ul li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	display: inline;
+}
+
+#layout-tabs ul
+{
+	text-align: right;
+}
+
+#layout-main div.profile_all div.tabbed_pane ul.tabs
+{
+	text-align: center;
+}
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin: 6px;
+}

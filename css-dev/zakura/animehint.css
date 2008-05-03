@@ -1,0 +1,49 @@
+/*---------------------------------
+			@ANIMEHINT
+----------------------------------*/
+
+div.hint2_all hr {
+	display: none;
+}
+div.hint2_all {
+	text-align: center;
+	color: #ac0d72;
+}
+div.hint2_all>* {
+	margin: 0;
+}
+div.hint2_all>br {
+	margin-top: 1em;
+}
+div.hint2_all>table {
+	width: 80%;
+	margin: 1em auto;
+	border: 0;
+	text-align: left;
+}
+div.hint2_all>table td {
+	border-bottom: 0;
+}
+div.hint2_all table table {
+	width: 100%;
+	color: #3d3e6e;
+}
+div.hint2_all span#UserDesc table,
+div.hint2_all span#AnimeDesc table,
+div.hint2_all span#FilterDesc table {
+	border:1px solid #E1D9F5;
+	background: #f7f4ff;
+	color: #6f75bc;
+	margin: 0;
+}
+div.hint2_all td[width="1"] table {
+	border: 1px solid #c0e0f9;
+}
+div.hint2_all td[width="1"] table td {
+	background: #eaf6ff;
+}
+div.hint2_all td[width="1"] table td.nav {
+	background-color: #f1fcff;
+	color: #76a5e5;
+	border-bottom: 1px solid #c0e0f9;
+}

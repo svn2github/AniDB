@@ -1,0 +1,18 @@
+/*---------------------------------
+				@ADDEP
+----------------------------------*/
+
+div.addep_all div.episode_add table {
+	margin: 0 auto;
+}
+div.addep_all div.episode_add caption {
+	width: 100%;
+}
+div.addep_all div.episode_add td.action {
+	text-align: center;
+	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+	padding: 0.5em;
+}
+div.addep_all div.episode_add tr:last-child td {
+	text-align: right;
+}
