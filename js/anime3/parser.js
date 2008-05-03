@@ -309,9 +309,7 @@ function CFileEntry(node) {
       case 'flags': this.flags = Number(nodeData(sNode1)); break;
       case 'date': 
         this.date = convertTime(nodeData(sNode1));
-		var curDateInt = parseInt(Number(new Date()/1000));
-		var fileDateInt = parseInt(Number(javascriptDate(this.date)/1000));
-        if (Number(curDateInt - fileDateInt) < 86400) this.newFile = true;
+        if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
         this.relDate = convertTime(sNode1.getAttribute('rel'));
         break;
       case 'avdumped': this.avdumped = Number(nodeData(sNode1)); break;

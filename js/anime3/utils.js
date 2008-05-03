@@ -45,40 +45,40 @@ function convertTime(data) {
  * @return A Date object
  */
 function javascriptDate(data) {
-  if (!data) return;
-  if (data.indexOf('T') >= 0) { // UTC time
-    var date = data.split('T')[0].split('-');
-    var time = data.split('T')[1].split(':');
-	if (date[2].length == 2) {
-		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
-		else date[2] = '19'+date[2];
-	}
-    return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
-  } else if (data.indexOf('-') >= 0 && data.indexOf(' ') >= 0 && data.indexOf(':') >= 0) {
-    var date = data.split(' ')[0].split('-');
-    var time = data.split(' ')[1].split(':');
-	if (date[2].length == 2) {
-		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
-		else date[2] = '19'+date[2];
-	}
-    return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
-  } else if (data.indexOf('.') >= 0 && data.indexOf(' ') < 0 && data.indexOf(':') < 0) {
-    var date = data.split('.');
-	if (date[2].length == 2) {
-		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
-		else date[2] = '19'+date[2];
-	}
-    return new Date(Number(date[2]),Number(date[1])-1,Number(date[0]));
-  } else if (data.indexOf('.') >= 0 && data.indexOf(' ') >= 0 && data.indexOf(':') >= 0) {
-    var date = data.split(' ')[0].split('.');
-    var time = data.split(' ')[1].split(':');
-	if (date[2].length == 2) {
-		if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
-		else date[2] = '19'+date[2];
-	}
-    return new Date(Number(date[2]),Number(date[1])-1,Number(date[0]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
-  } else
-    return datetime = new Date(data * 1000); // UNIX time format
+	if (!data) return;
+	if (data.indexOf('T') >= 0) { // UTC time
+		var date = data.split('T')[0].split('-');
+		var time = data.split('T')[1].split(':');
+		if (date[0].length == 2) {
+			if (Number(date[0][0]) < 4) date[0] = '20'+date[0];
+			else date[0] = '19'+date[0];
+		}
+		return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
+	} else if (data.indexOf('-') >= 0 && data.indexOf(' ') >= 0 && data.indexOf(':') >= 0) {
+		var date = data.split(' ')[0].split('-');
+		var time = data.split(' ')[1].split(':');
+		if (date[0].length == 2) {
+			if (Number(date[0][0]) < 4) date[0] = '20'+date[0];
+			else date[0] = '19'+date[0];
+		}
+		return new Date(Number(date[0]),Number(date[1])-1,Number(date[2]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
+	} else if (data.indexOf('.') >= 0 && data.indexOf(' ') < 0 && data.indexOf(':') < 0) {
+		var date = data.split('.');
+		if (date[2].length == 2) {
+			if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
+			else date[2] = '19'+date[2];
+		}
+		return new Date(Number(date[2]),Number(date[1])-1,Number(date[0]));
+	} else if (data.indexOf('.') >= 0 && data.indexOf(' ') >= 0 && data.indexOf(':') >= 0) {
+		var date = data.split(' ')[0].split('.');
+		var time = data.split(' ')[1].split(':');
+		if (date[2].length == 2) {
+			if (Number(date[2][0]) < 4) date[2] = '20'+date[2];
+			else date[2] = '19'+date[2];
+		}
+		return new Date(Number(date[2]),Number(date[1])-1,Number(date[0]),Number(time[0]),Number(time[1]),(time[2] ? Number(time[2]) : 0));
+	} else
+		return datetime = new Date(data * 1000); // UNIX time format
 }
 
 /* This function returns a Date of UTC time date
