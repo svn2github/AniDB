@@ -226,8 +226,8 @@ function cleanUpExpands() {
 	if (!aRow) return;
 	var rowIndex = aRow.rowIndex;
 	var tbody = aRow.parentNode;
-	if (!tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
-	if (!tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
+	if (tbody.rows[rowIndex+1] && !tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
+	if (tbody.rows[rowIndex+1] && !tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
 	// now do my stuff and get this over with
 	var a = aRow.getElementsByTagName('a')[0];
 	if (a) {
