@@ -68,3 +68,4 @@
 /* other */
 @import "login.css";
 @import "signup.css";
+@import "../common/style/color/quotebox-default.css";
