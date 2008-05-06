@@ -308,7 +308,7 @@ function addLangToBox() {
 		var selectedId = audlangs.select[0].selectedIndex;
 		if (audlangs.select[0].value != '0') {
 			audlangs.add(audlangs.select[0].value);
-			if (audlangs.array.indexOf(0) >= 0) {
+			if (audlangs.array.indexOf('0') >= 0) {
 				audlangs.rem(0);
 				for (var i = 0; i < audlangs.select[1].options.length; i++) {
 					if (audlangs.select[1].options[i].value != 0) continue;
@@ -327,7 +327,7 @@ function addLangToBox() {
 		var selectedId = sublangs.select[0].selectedIndex;
 		if (sublangs.select[0].value != '0') {
 			sublangs.add(sublangs.select[0].value);
-			if (sublangs.array.indexOf(0) >= 0) {
+			if (sublangs.array.indexOf('0') >= 0) {
 				sublangs.rem(0);
 				for (var i = 0; i < sublangs.select[1].options.length; i++) {
 					if (sublangs.select[1].options[i].value != 0) continue;
@@ -351,7 +351,7 @@ function remLangFromBox() {
 	var type = (this.id.indexOf('Aud') > 0) ? 'aud' : 'sub';
 	if (type == 'aud') {
 		if (audlangs.select[1].value == '') return;
-		if (audlangs.array.length == 1 && audlangs.array[0] == 0) return;
+		if (audlangs.array.length == 1 && audlangs.array[0] == '0') return;
 		audlangs.rem(audlangs.select[1].value);
 		audlangs.select[0].appendChild(audlangs.select[1].options[audlangs.select[1].selectedIndex]);
 		if (!audlangs.select[1].options.length) { // clean
@@ -364,7 +364,7 @@ function remLangFromBox() {
 		}
 	} else {
 		if (sublangs.select[1].value == '') return;
-		if (sublangs.array.length == 1 && sublangs.array[0] == 0) return;
+		if (sublangs.array.length == 1 && sublangs.array[0] == '0') return;
 		sublangs.rem(sublangs.select[1].value);
 		sublangs.select[0].appendChild(sublangs.select[1].options[sublangs.select[1].selectedIndex]);
 		if (!sublangs.select[1].options.length) { // clean
@@ -402,7 +402,7 @@ function prepPage() {
 	if (audlangs.in) {
 		audlangs.text = audlangs.in.value;
 		audlangs.array = audlangs.text.replace(/[{}]/mgi,'').split(',');
-		if (!audlangs.array.length) audlangs.array.push(0);
+		if (!audlangs.array.length) audlangs.array.push('0');
 		audlangs.add = addLanguageToArray;
 		audlangs.rem = remLanguageFromArray;
 		audlangs.toString = convLanguagesToText;
@@ -412,7 +412,7 @@ function prepPage() {
 	if (sublangs.in) {
 		sublangs.text = sublangs.in.value;
 		sublangs.array = sublangs.text.replace(/[{}]/mgi,'').split(',');
-		if (!sublangs.array.length) sublangs.array.push(0);
+		if (!sublangs.array.length) sublangs.array.push('0');
 		sublangs.add = addLanguageToArray;
 		sublangs.rem = remLanguageFromArray;
 		sublangs.toString = convLanguagesToText;
