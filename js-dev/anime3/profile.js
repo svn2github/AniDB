@@ -201,7 +201,7 @@ function remLanguageFromArray(value) {
 
 /* Converts a language array to text */
 function convLanguagesToText() {
-	this.text = this.array.join(',');
+	this.text = '{'+this.array.join(',')+'}';
 	this.in.value = this.text;
 }
 
