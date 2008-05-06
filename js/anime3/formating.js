@@ -444,7 +444,7 @@ function convert_output(str) {
 	str = str.replace(/\[\/strike\]/mgi,'[/s]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 
-	str = str.replace(/\[p\]/mgi,'[br][br]');
+	str = str.replace(/\[p\]/mgi,'[br]');
 	str = str.replace(/\[\/p\]/mgi,'');
 
 	/* Safari support */
