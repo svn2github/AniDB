@@ -219,10 +219,15 @@ function prepLanguages() {
 		if (baseSelect) {
 			for (var i = 0; i < baseSelect.options.length; i++) {
 				var option = baseSelect.options[i];
-				if (audlangs.array.indexOf(option.value) >= 0)
-					createSelectOption(audlangs.select[1], option.text, option.value, false, null, false);
-				else
-					createSelectOption(audlangs.select[0], option.text, option.value, false, null, false);
+				if (audlangs.array.indexOf(option.value) >= 0) {
+					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
+					newOption.ondblclick = remLangFromBox; 
+					audlangs.select[1].appendChild(newOption);
+				} else {
+					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
+					newOption.ondblclick = addLangToBox;
+					audlangs.select[0].appendChild(newOption);
+				}
 			}
 		}
 		audlangs.select[0].size = audlangs.select[1].size = 8;
@@ -236,10 +241,15 @@ function prepLanguages() {
 		if (baseSelect) {
 			for (var i = 0; i < baseSelect.options.length; i++) {
 				var option = baseSelect.options[i];
-				if (sublangs.array.indexOf(option.value) >= 0)
-					createSelectOption(sublangs.select[1], option.text, option.value, false, null, false);
-				else
-					createSelectOption(sublangs.select[0], option.text, option.value, false, null, false);
+				if (sublangs.array.indexOf(option.value) >= 0) {
+					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
+					newOption.ondblclick = remLangFromBox; 
+					sublangs.select[1].appendChild(newOption);
+				} else {
+					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
+					newOption.ondblclick = addLangToBox;
+					sublangs.select[0].appendChild(newOption);
+				}
 			}
 		}
 		sublangs.select[0].size = sublangs.select[1].size = 8;
@@ -302,25 +312,37 @@ function changeLangType() {
 }
 
 function addLangToBox() {
-	var type = (this.id.indexOf('Aud') > 0) ? 'aud' : 'sub';
+	var type = 'aud';
+	if (this.nodeName.toLowerCase() == 'input') type = (this.id.indexOf('Aud') > 0) ? 'aud' : 'sub';
+	else type = (this.parentNode.id.indexOf('audio') >= 0) ? 'aud' : 'sub';
 	if (type == 'aud') {
 		if (audlangs.select[0].value == '') return;
 		var selectedId = audlangs.select[0].selectedIndex;
 		if (audlangs.select[0].value != '0') {
 			audlangs.add(audlangs.select[0].value);
 			if (audlangs.array.indexOf('0') >= 0) {
-				audlangs.rem(0);
+				audlangs.rem('0');
 				for (var i = 0; i < audlangs.select[1].options.length; i++) {
 					if (audlangs.select[1].options[i].value != 0) continue;
-					audlangs.select[0].appendChild(audlangs.select[1].options[i]);
+					var newOption = audlangs.select[1].options[i];
+					newOption.ondblclick = addLangToBox;
+					audlangs.select[0].appendChild(newOption);
 					break;
 				}
 			}
-			audlangs.select[1].appendChild(audlangs.select[0].options[selectedId]);
+			var newOption = audlangs.select[0].options[selectedId];
+			newOption.ondblclick = remLangFromBox;
+			audlangs.select[1].appendChild(newOption);
 		} else { // we are adding the no language lang, we need to remove all other langs
-			while(audlangs.select[1].options.length) audlangs.select[0].appendChild(audlangs.select[1].options[0]);
-			audlangs.select[1].appendChild(audlangs.select[0].options[selectedId]);
-			audlangs.array = [ 0 ];
+			while(audlangs.select[1].options.length) {
+				var newOption = audlangs.select[1].options[0];
+				newOption.ondblclick = addLangToBox;
+				audlangs.select[0].appendChild(newOption);
+			}
+			var newOption = audlangs.select[0].options[selectedId];
+			newOption.ondblclick = remLangFromBox;
+			audlangs.select[1].appendChild(newOption);
+			audlangs.array = [ '0' ];
 		}
 	} else {
 		if (sublangs.select[0].value == '') return;
@@ -328,19 +350,29 @@ function addLangToBox() {
 		if (sublangs.select[0].value != '0') {
 			sublangs.add(sublangs.select[0].value);
 			if (sublangs.array.indexOf('0') >= 0) {
-				sublangs.rem(0);
+				sublangs.rem('0');
 				for (var i = 0; i < sublangs.select[1].options.length; i++) {
 					if (sublangs.select[1].options[i].value != 0) continue;
-					sublangs.select[0].appendChild(sublangs.select[1].options[i]);
+					var newOption = sublangs.select[1].options[i];
+					newOption.ondblclick = addLangToBox;
+					sublangs.select[0].appendChild(newOption);
 					break;
 				}
 			}
-			sublangs.select[1].appendChild(sublangs.select[0].options[selectedId]);
+			var newOption = sublangs.select[0].options[selectedId];
+			newOption.ondblclick = remLangFromBox;
+			sublangs.select[1].appendChild(newOption);
 		} else { // we are adding the no language lang, we need to remove all other langs
 			var selectedId = sublangs.select[0].selectedIndex;
-			while(sublangs.select[1].options.length) sublangs.select[0].appendChild(sublangs.select[1].options[0]);
-			sublangs.select[1].appendChild(sublangs.select[0].options[selectedId]);
-			sublangs.array = [ 0 ];
+			while(sublangs.select[1].options.length) {
+				var newOption = sublangs.select[1].options[0];
+				newOption.ondblclick = addLangToBox;
+				sublangs.select[0].appendChild(newOption);
+			}
+			var newOption = sublangs.select[0].options[selectedId];
+			newOption.ondblclick = remLangFromBox;
+			sublangs.select[1].appendChild(newOption);
+			sublangs.array = [ '0' ];
 		}
 	}
 	audlangs.toString();
@@ -348,32 +380,42 @@ function addLangToBox() {
 }
 
 function remLangFromBox() {
-	var type = (this.id.indexOf('Aud') > 0) ? 'aud' : 'sub';
+	var type = 'aud';
+	if (this.nodeName.toLowerCase() == 'input') type = (this.id.indexOf('Aud') > 0) ? 'aud' : 'sub';
+	else type = (this.parentNode.id.indexOf('audio') >= 0) ? 'aud' : 'sub';
 	if (type == 'aud') {
 		if (audlangs.select[1].value == '') return;
 		if (audlangs.array.length == 1 && audlangs.array[0] == '0') return;
 		audlangs.rem(audlangs.select[1].value);
-		audlangs.select[0].appendChild(audlangs.select[1].options[audlangs.select[1].selectedIndex]);
+		var newOption = audlangs.select[1].options[audlangs.select[1].selectedIndex];
+		newOption.ondblclick = addLangToBox;
+		audlangs.select[0].appendChild(newOption);
 		if (!audlangs.select[1].options.length) { // clean
 			for (var i = 0; i < audlangs.select[0].options.length; i++) {
 				if (audlangs.select[0].options[i].value != 0) continue;
-				audlangs.select[1].appendChild(audlangs.select[0].options[i]);
+				var newOption = audlangs.select[0].options[i];
+				newOption.ondblclick = remLangFromBox;
+				audlangs.select[1].appendChild(newOption);
 				break;
 			}
-			audlangs.array = [ 0 ];
+			audlangs.array = [ '0' ];
 		}
 	} else {
 		if (sublangs.select[1].value == '') return;
 		if (sublangs.array.length == 1 && sublangs.array[0] == '0') return;
 		sublangs.rem(sublangs.select[1].value);
-		sublangs.select[0].appendChild(sublangs.select[1].options[sublangs.select[1].selectedIndex]);
+		var newOption = sublangs.select[1].options[sublangs.select[1].selectedIndex];
+		newOption.ondblclick = addLangToBox;
+		sublangs.select[0].appendChild(newOption);
 		if (!sublangs.select[1].options.length) { // clean
 			for (var i = 0; i < sublangs.select[0].options.length; i++) {
 				if (sublangs.select[0].options[i].value != 0) continue;
-				sublangs.select[1].appendChild(sublangs.select[0].options[i]);
+				var newOption = sublangs.select[0].options[i];
+				newOption.ondblclick = remLangFromBox;
+				sublangs.select[1].appendChild(newOption);
 				break;
 			}
-			sublangs.array = [ 0 ];
+			sublangs.array = [ '0' ];
 		}
 	}
 	audlangs.toString();
