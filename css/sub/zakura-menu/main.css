@@ -1,0 +1,357 @@
+@import "../../common/normalize.css";
+@import "../../common/layout/default.css";
+@import "../../common/layout/common.css";
+
+@import "../../common/layout/global/all.css";
+@import "../../common/layout/page/all.css";
+
+@import "../../icons/all.css";
+@import "../../icons/zakura.css";
+
+@import "../../common/style/color/special.css";
+
+@import "../../common/style/text/default.css";
+
+@import "../../common/style/content/page-anime.css";
+
+@import "layout-macro.css";
+
+@import "style-default.css";
+@import "style-menu.css";
+@import "style-usermenu.css";
+@import "style-content.css";
+
+/*@import "../../zakura/icons.css";*/
+
+@import "../../zakura/main.css";
+
+#layout-main div.block > div.image{
+	width: 32%;
+}
+#layout-main div.block > div.data{
+	width: 65%;
+}
+#layout-main div.block div.data div.tabbed_pane table,
+#layout-main div.block div.data > div > table{
+	width: 99%;
+}
+
+/** TABS **/
+
+#layout-main div.tabbed_pane div.body
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(86, 90, 185);
+}
+#layout-main div.tabbed_pane div.body div.* {
+	left: 0px;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: rgb(53, 58, 143);
+	color: white;
+}
+
+#layout-tabs ul li.selected a
+{
+	background-color: rgb(53, 58, 143);
+}
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: rgb(53, 58, 143);
+	color: white;
+}
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color: rgb(86, 90, 185);
+	color: rgb(255, 255, 255);
+	padding: 4px;
+}
+
+div.pagination span a
+{
+	border: 1px solid rgb(86, 90, 185);
+	background-color: rgb(86, 90, 185);
+	color: rgb(255, 255, 255);
+}
+
+div.pagination span a:hover,
+div.pagination span strong
+{
+	border: 1px solid rgb(53, 58, 143);
+	background-color: rgb(53, 58, 143);
+	color: #FFFFFF;
+}
+
+/* DROP DOWN STUFF */
+
+body.nonav { width: auto }
+
+.g_section > form > table,
+.g_section > table, h4+table
+{ width: 100% }
+
+textarea { width: 099% }
+
+table table { width: 098% }
+
+.main_all .rightbar { width: 027% }
+
+.review .bar { width: 10em }
+
+.animelist .type,
+.main_all .rightbar li,
+span.date, span.user,
+td.action, td.rating, th
+{ white-space: nowrap }
+
+a.filter, span.time, span.user a.id,
+td.rating span, tr.mylist td.name a:after
+{ vertical-align: top }
+
+.state.return, a.ascending { text-decoration: underline }
+
+a.descending { text-decoration: overline }
+
+a { text-decoration: none }
+
+.state.dropped,	h4.collapsed span:first-child { text-decoration: line-through }
+
+.g_list, .tabs { text-align: right }
+
+.main_all .g_list, ul.contribution li { text-align: left }
+
+#layout-footer, .animeatt_all .review .bar .avatar,
+.pre_creq, div.pane p, p.action, p.mylistadd,
+td.count, td.rating, td.type, tr.action td.submit,
+tr.action td.value
+{ text-align: center }
+
+.g_content, .main_all .news { padding: 6px }
+
+.g_menu.mylist_menu { padding: 0.4em }
+
+.g_info, .g_timedentry .body { padding: 0.2em 1em }
+
+.g_msg { padding: 0.1em 0.2em }
+
+.i_award { padding: 0 0.5em }
+
+#layout-footer { padding-top: 10px }
+
+th { padding-right: 01em }
+
+option { padding-left: 12px }
+
+blockquote,	input[type="text"], li.tab,
+option.section, select, td, textarea,
+th, tr.header, ul.g_list li, ul.main-tabs li,
+ul.tabs li.tab
+{ padding-left: 02px }
+
+.creq_data, div.animerel, pre { overflow: scroll }
+
+.main_all .rightbar li { overflow: hidden }
+
+pre { max-height: 36em }
+
+.creq_data { max-height: 28em }
+
+.main_all .rightbar > * { margin: 8px }
+
+.g_info { margin: 01em 0 }
+
+td table { margin: 01em }
+
+.animeatt_all .review .bar { margin: 0 0 1em 1em }
+
+body.nonav { margin: 0 }
+
+.g_menu.mylist_menu { margin: -06em -12em 0 0 }
+
+.main_all .rightbar { margin-top: 7px }
+
+.animeatt_all .review + .review, .g_timedentry + .g_timedentry { margin-top: 2em }
+
+#layout-tabs, .g_list, .g_msg, .g_section, .tabs { margin-top: 0.5em }
+
+h1 { margin-top: 0.2em }
+
+.g_list, .g_msg, .g_section, .tabs { margin-bottom: 0.5em }
+
+caption, h4 { line-height: 02.0em }
+
+li.tab, tr.header, ul.g_list li,
+ul.main-tabs li, ul.tabs li.tab
+{ line-height: 01.6em }
+
+span.date, span.user a.id, td.id, td.size
+{ letter-spacing: -01px }
+
+.g_msg h3, .state.new { font-weight: bold }
+
+h1 { font-size: 220% }
+
+#layout-footer div { font-size: 200% }
+
+.g_timedentry h4, caption, h4 { font-size: 130% }
+
+#layout-footer { font-size: 080% }
+
+a.filter, span.time, span.user a.id, td.rating span { font-size: 076% }
+
+tr.mylist td.name a:first-child:after { font-size: 060% }
+
+#layout-search,	#layout-tabs,
+.g_menu, .g_menu.mylist_menu, .g_msg h3,
+.main_all .rightbar,
+.review .bar, td span.icons
+{ float: right }
+
+.hide { display: none !important }
+
+.g_list li, .main-tabs li, .tabs li.tab { display: inline }
+
+ul.contribution li { display: block }
+
+#layout-footer, .i_icon span, .tab, h4 span:first-child, span a { cursor: pointer }
+
+.i_icon span, th { cursor: default }
+
+
+/*				option.section:after
+{ content: ": " }*/ /*breaks select in opera... (wrong option on submit)*/
+tr.mylist.all_watched .name a:first-child:after { content: " W" }
+
+tr.mylist td.name a:first-child:after { content: " M" }
+
+.group_all td.date.added, .pre_creq, .state.locked,
+a.filter, option.section, span.time, span.user a.id,
+td span.icons, td.rating span, td.type,	tr.mylist td.name a:after
+{ color: gray }
+
+.g_msg.warning h3 { color: #FF8800 }
+
+.g_msg.error h3 { color: #DD5533 }
+
+a:hover { color: #CC6600 }
+
+option[value="delall"] { color: #BB1111 }
+
+#layout-footer,	.selected a { color: #AAAAAA }
+
+.tabs li, a, h1 { color: #996633 }
+
+.g_msg.success h3 { color: #88AA88 }
+
+.g_msg.note h3 { color: #8888FF }
+
+td.count { color: #770000 }
+
+caption, h4 { color: #666666 }
+
+blockquote { color: #0F0F0F }
+
+td.rating { color: #0000AA }
+
+.animeatt_all .review, .g_list { clear: right }
+
+.g_section,	div.desc, .css_style + p { clear: left }
+
+.g_end { clear: both }
+
+.g_menu.mylist_menu { border: 1px solid #AFBEC7 }
+
+tr.newtype td { border-width: 3px }
+
+.g_info, .g_msg, .g_timedentry .body, .review h4, div.desc,
+p.action, p.mylistadd, td, tr.action td.submit, tr.action td.value
+{ border-top: 1px solid #EEEEEE }
+
+blockquote { border-left: 2px solid lightgray }
+
+.i_award + .i_award { border-left: 1px solid #000000 }
+
+.g_info, .g_msg, .g_timedentry .body, div.desc,	p.action,
+p.mylistadd, tr.action td.submit, tr.action td.value
+{ border-bottom: 1px solid #EEEEEE }
+
+.main_all .rightbar h4 { border-bottom: 1px solid #EAEADA }
+
+.g_info, .g_msg, blockquote, body,
+div.desc, p.action, p.mylistadd, tr.action td.submit, tr.action td.value
+{ background-color: #FFFFFF }
+
+del { background-color: #FFEAEA }
+
+a:hover { background-color: #FFDDAA }
+
+.main_all .rightbar { background-color: #F7F7F2 }
+
+.g_menu.mylist_menu { background-color: #F5F5F5 }
+
+ins, tr.good td, tr.mylist td { background-color: #F2FFF0 }
+
+#layout-footer, .i_icon span, .tab, h4 span:first-child, span a { -user-select: none }
+
+#layout-footer, .i_icon span, .tab, h4 span:first-child, span a { -moz-user-select: none }
+
+/*mech*/
+#layout-menu > li:hover ul{ display: block; }
+
+#layout-menu > li{
+background-color: #FFF;
+display: block;
+float: left;
+border: 1px solid transparent;
+border-top-color: rgb(243, 231, 255);
+border-right-color: rgb(222, 201, 242);
+border-left-color: rgb(243, 231, 255);
+padding-right: 18px;
+padding-left: 18px;
+padding-top: -20px;
+font-weight: bold;
+line-height: 20px;
+}
+
+#layout-menu > li ul{
+display: none;
+position: absolute;
+border: 1px solid #AFBEC7;
+border-top: 0px;
+margin-top: 20px;
+margin-left: -19px;
+padding: 0;
+font-weight: normal;
+line-height: normal;
+}
+
+#layout-menu > li.alert { color: #BB0000; }
+
+#layout-menu a{
+display: block;
+padding: 3px 8px;
+}
+
+#layout-menu a[title^=""] span{ display: none; }
+
+#layout-menu a[title^=""]:after{ content: attr(title); }
+
+th.sortable{ cursor: pointer }
+
+th.ascending{ text-decoration: underline}
+
+th.descending{ text-decoration: overline}
+
+/* overrides */
+#layout-content { 
+	margin-left: 1em;
+	padding-top: 20px;
+}
+#layout-menu span.tab { 
+	display: inline; 
+	float: right;
+}
