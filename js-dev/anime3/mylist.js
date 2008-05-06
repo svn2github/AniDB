@@ -109,7 +109,7 @@ function prepPage() {
 		if (!a) { errorAlert('prepPage','no a link found'); continue; }
 		parseMylistExpandLink(a.href,mylist_settings);
 		ruid = mylist_settings['uid'];
-		if (Number(ruid) == 1) return; // Ajax mylist is currently disabled for exp
+		//if (Number(ruid) == 1) return; // Ajax mylist is currently disabled for exp
 		a.removeAttribute('href');
 		if (a.className.indexOf('i_minus') >= 0) {
 			a.onclick = foldAnime;
@@ -226,8 +226,8 @@ function cleanUpExpands() {
 	if (!aRow) return;
 	var rowIndex = aRow.rowIndex;
 	var tbody = aRow.parentNode;
-	if (!tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
-	if (!tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
+	if (tbody.rows[rowIndex+1] && !tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the episode table row
+	if (tbody.rows[rowIndex+1] && !tbody.rows[rowIndex+1].id) tbody.removeChild(tbody.rows[rowIndex+1]); // the other crapy row
 	// now do my stuff and get this over with
 	var a = aRow.getElementsByTagName('a')[0];
 	if (a) {

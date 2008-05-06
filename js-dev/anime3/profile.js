@@ -138,7 +138,7 @@ function styleNext() {
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('css_styles').item(0);
 	var t1 = new Date();
-	var styleEntries = root.getElementsByTagName('style');
+	var styleEntries = (root) ? root.getElementsByTagName('style') : new Array();;
 	// the first entry is the custom node
 	var optionArray = new Object();
 	var scustom = new Object();
@@ -202,12 +202,12 @@ function remLanguageFromArray(value) {
 /* Converts a language array to text */
 function convLanguagesToText() {
 	this.text = '{'+this.array.join(',')+'}';
-	this.in.value = this.text;
+	this.input.value = this.text;
 }
 
 /* Function that does some changes to the way anidb handles languages */
 function prepLanguages() {
-	var form = audlangs.in.form;
+	var form = audlangs.input.form;
 	// remove the boxes things
 	var audioDiv = getElementsByClassName(form.getElementsByTagName('div'), 'audio', false)[0];
 	var subtitlesDiv = getElementsByClassName(form.getElementsByTagName('div'), 'subtitles', false)[0];
@@ -440,27 +440,27 @@ function prepPage() {
 	style_next = document.getElementById('style_next');
 	style_prev = document.getElementById('style_prev');
 	var inputs = document.getElementsByTagName('input');
-	audlangs.in = getElementsByName(inputs, 'lang.audin', false)[0];
-	if (audlangs.in) {
-		audlangs.text = audlangs.in.value;
+	audlangs.input = getElementsByName(inputs, 'lang.audin', false)[0];
+	if (audlangs.input) {
+		audlangs.text = audlangs.input.value;
 		audlangs.array = audlangs.text.replace(/[{}]/mgi,'').split(',');
 		if (!audlangs.array.length) audlangs.array.push('0');
 		audlangs.add = addLanguageToArray;
 		audlangs.rem = remLanguageFromArray;
 		audlangs.toString = convLanguagesToText;
-		audlangs.in.name = 'lang.filealang';
+		audlangs.input.name = 'lang.filealang';
 	}
-	sublangs.in = getElementsByName(inputs, 'lang.subin', false)[0];
-	if (sublangs.in) {
-		sublangs.text = sublangs.in.value;
+	sublangs.input = getElementsByName(inputs, 'lang.subin', false)[0];
+	if (sublangs.input) {
+		sublangs.text = sublangs.input.value;
 		sublangs.array = sublangs.text.replace(/[{}]/mgi,'').split(',');
 		if (!sublangs.array.length) sublangs.array.push('0');
 		sublangs.add = addLanguageToArray;
 		sublangs.rem = remLanguageFromArray;
 		sublangs.toString = convLanguagesToText;
-		sublangs.in.name = 'lang.fileslang';
+		sublangs.input.name = 'lang.fileslang';
 	}
-	if (audlangs.in && sublangs.in) prepLanguages();
+	if (audlangs.input && sublangs.input) prepLanguages();
 }
  
 //window.onload = prePage;

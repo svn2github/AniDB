@@ -39,7 +39,7 @@ function fetchData(id,type) {
 		else xhttpRequestFetch(req, 'xml/producernsearch.xml', parseData);
   } else {
 		if (id) xhttpRequestFetch(req, 'animedb.pl?show=xml&t='+type+'search&id='+id, parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=producernsearch&search='+searchString, parseData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=producernsearch&search='+escape(searchString), parseData);
 	}
 }
 

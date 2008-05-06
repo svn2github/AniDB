@@ -149,9 +149,8 @@ function do_group_search(){
 		document.getElementById('addfilem.search').disabled = false;
 	}
 	else{
-		//ajaxRequestPage('animedb.pl?show=xml&t=groupsearch&search='+name, 'parse_groups(root);');
 		var req = xhttpRequest();
-		xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+name, parse_groups);
+		xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+escape(name), parse_groups);
 	}
 }
 
