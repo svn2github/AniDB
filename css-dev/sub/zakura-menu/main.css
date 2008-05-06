@@ -132,11 +132,6 @@ tr.action td.value
 
 .g_content, .main_all .news { padding: 6px }
 
-.image, div.desc, p.action,
-p.mylistadd, tr.action td.submit,
-tr.action td.value
-{ padding: 1em }
-
 .g_menu.mylist_menu { padding: 0.4em }
 
 .g_info, .g_timedentry .body { padding: 0.2em 1em }
@@ -216,13 +211,7 @@ tr.mylist td.name a:first-child:after { font-size: 060% }
 .review .bar, td span.icons
 { float: right }
 
-.image { float: left }
-
 .hide { display: none !important }
-
-#menu-user li.user, .file_all dd.group span.time, .grouplist span.completion img,
-.i_audio, .i_video,	.main_all .rightbar h3, td.awards, th.award
-{ display: none }
 
 .g_list li, .main-tabs li, .tabs li.tab { display: inline }
 
@@ -232,7 +221,6 @@ ul.contribution li { display: block }
 
 .i_icon span, th { cursor: default }
 
-.grouplist span.completion:after { content: attr(title) }
 
 /*				option.section:after
 { content: ": " }*/ /*breaks select in opera... (wrong option on submit)*/
@@ -279,23 +267,13 @@ td.rating { color: #0000AA }
 
 tr.newtype td { border-width: 3px }
 
-li.tab, tr.header, ul.g_list li, ul.main-tabs li, ul.tabs li.tab { border-width: 1px 1px 1px 5px }
-
 .g_info, .g_msg, .g_timedentry .body, .review h4, div.desc,
 p.action, p.mylistadd, td, tr.action td.submit, tr.action td.value
 { border-top: 1px solid #EEEEEE }
 
-li.tab, tr.header, ul.g_list li,
-ul.main-tabs li, ul.tabs li.tab
-{ border-style: solid }
-
 blockquote { border-left: 2px solid lightgray }
 
 .i_award + .i_award { border-left: 1px solid #000000 }
-
-li.tab, tr.header, ul.g_list li,
-ul.main-tabs li, ul.tabs li.tab
-{ border-color: #EEEEEE rgb(238, 238, 238) rgb(238, 238, 238) rgb(193, 202, 211) }
 
 .g_info, .g_msg, .g_timedentry .body, div.desc,	p.action,
 p.mylistadd, tr.action td.submit, tr.action td.value

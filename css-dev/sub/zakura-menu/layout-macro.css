@@ -28,6 +28,7 @@ body.nonav form textarea {
 
 #layout-menu li.sub-menu{
 	width: 108px;
+	height: 20px;
 }
 
 #layout-content, #layout-footer {
@@ -71,7 +72,7 @@ padding-left: 200px;
 width: 35em;
 border: none;
 text-align: right;
-display: table;
+/* display: table; */
 margin: 0px;
 }
 

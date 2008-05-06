@@ -1,27 +1,3 @@
-/*.g_content a,
-.g_content a:link {
-	color: #154ef4;
-	text-decoration: none;
-	border-bottom: 1px solid transparent;
-}
-
-.g_content a:visited {
-	color: #7264a6;
-}
-
-.g_content a:hover,
-.g_content a:active {
-	color: #4876fe;
-	border-bottom: 1px dotted #4876fe;
-}
-
-.g_content td.action a,
-.g_content th a,
-.g_content th a img {
-	color: white;
-	border: 0 !important;
-}*/
-
 .g_content {
 	border: 1px solid #f3e7ff;
 	border-bottom-color: #dec9f2;
