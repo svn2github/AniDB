@@ -18,7 +18,7 @@ var newsearchbox = null;
 function fetchData() {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/producersearch.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=producersearch&search='+searchString, parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=producersearch&search='+escape(searchString), parseData);
 }
 
 /* Producer class
