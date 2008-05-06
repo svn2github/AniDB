@@ -365,7 +365,7 @@ function remLangFromBox() {
 	} else {
 		if (sublangs.select[1].value == '') return;
 		if (sublangs.array.length == 1 && sublangs.array[0] == 0) return;
-		sublangs.add(sublangs.select[1].value);
+		sublangs.rem(sublangs.select[1].value);
 		sublangs.select[0].appendChild(sublangs.select[1].options[sublangs.select[1].selectedIndex]);
 		if (!sublangs.select[1].options.length) { // clean
 			for (var i = 0; i < sublangs.select[0].options.length; i++) {
