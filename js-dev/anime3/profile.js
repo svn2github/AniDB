@@ -189,19 +189,20 @@ function selectStyle() {
  * @param value Language to add
  */
 function addLanguageToArray(value) { 
-	if (this.indexOf(value) < 0) this.push(value); 
+	if (this.array.indexOf(value) < 0) this.array.push(value); 
 }
 /* Removes a language
  * @param value Language to remove
  */
 function remLanguageFromArray(value) { 
-	if (this.indexOf(value) >= 0)
-		this.splice(this.indexOf(value),1);
+	if (this.array.indexOf(value) >= 0)
+		this.array.splice(this.array.indexOf(value),1);
 }
 
 /* Converts a language array to text */
 function convLanguagesToText() {
 	this.text = '{'+this.array.join(',')+'}';
+	this.in.value = this.text;
 }
 
 /* Function that does some changes to the way anidb handles languages */
@@ -261,7 +262,8 @@ function prepLanguages() {
 	var addLang = createButton('addAudLang','addAudLang',false,'>>','button');
 	addLang.onclick = addLangToBox;
 	cell.appendChild(addLang);
-	cell.appendChild(document.createTextNode(' '));
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(document.createElement('br'));
 	var remLang = createButton('remAudLang','remAudLang',false,'<<','button');
 	remLang.onclick = remLangFromBox;
 	cell.appendChild(remLang);
@@ -273,11 +275,12 @@ function prepLanguages() {
 	sublangs.row = row;
 	createCell(row, null, sublangs.select[0], null, 1);
 	cell = document.createElement('td');
-	addLang = createButton('addAudLang','addAudLang',false,'>>','button');
+	addLang = createButton('addSubLang','addSubLang',false,'>>','button');
 	addLang.onclick = addLangToBox;
 	cell.appendChild(addLang);
-	cell.appendChild(document.createTextNode(' '));
-	remLang = createButton('remAudLang','remAudLang',false,'<<','button');
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(document.createElement('br'));
+	remLang = createButton('remSubLang','remSubLang',false,'<<','button');
 	remLang.onclick = remLangFromBox;
 	cell.appendChild(remLang);
 	row.appendChild(cell);
@@ -299,11 +302,82 @@ function changeLangType() {
 }
 
 function addLangToBox() {
-	alert('i should be adding a language');
+	var type = (this.id.indexOf('Aud') > 0) ? 'aud' : 'sub';
+	if (type == 'aud') {
+		if (audlangs.select[0].value == '') return;
+		var selectedId = audlangs.select[0].selectedIndex;
+		if (audlangs.select[0].value != '0') {
+			audlangs.add(audlangs.select[0].value);
+			if (audlangs.array.indexOf(0) >= 0) {
+				audlangs.rem(0);
+				for (var i = 0; i < audlangs.select[1].options.length; i++) {
+					if (audlangs.select[1].options[i].value != 0) continue;
+					audlangs.select[0].appendChild(audlangs.select[1].options[i]);
+					break;
+				}
+			}
+			audlangs.select[1].appendChild(audlangs.select[0].options[selectedId]);
+		} else { // we are adding the no language lang, we need to remove all other langs
+			while(audlangs.select[1].options.length) audlangs.select[0].appendChild(audlangs.select[1].options[0]);
+			audlangs.select[1].appendChild(audlangs.select[0].options[selectedId]);
+			audlangs.array = [ 0 ];
+		}
+	} else {
+		if (sublangs.select[0].value == '') return;
+		var selectedId = sublangs.select[0].selectedIndex;
+		if (sublangs.select[0].value != '0') {
+			sublangs.add(sublangs.select[0].value);
+			if (sublangs.array.indexOf(0) >= 0) {
+				sublangs.rem(0);
+				for (var i = 0; i < sublangs.select[1].options.length; i++) {
+					if (sublangs.select[1].options[i].value != 0) continue;
+					sublangs.select[0].appendChild(sublangs.select[1].options[i]);
+					break;
+				}
+			}
+			sublangs.select[1].appendChild(sublangs.select[0].options[selectedId]);
+		} else { // we are adding the no language lang, we need to remove all other langs
+			var selectedId = sublangs.select[0].selectedIndex;
+			while(sublangs.select[1].options.length) sublangs.select[0].appendChild(sublangs.select[1].options[0]);
+			sublangs.select[1].appendChild(sublangs.select[0].options[selectedId]);
+			sublangs.array = [ 0 ];
+		}
+	}
+	audlangs.toString();
+	sublangs.toString();
 }
 
 function remLangFromBox() {
-	alert('i should be removing a language');
+	var type = (this.id.indexOf('Aud') > 0) ? 'aud' : 'sub';
+	if (type == 'aud') {
+		if (audlangs.select[1].value == '') return;
+		if (audlangs.array.length == 1 && audlangs.array[0] == 0) return;
+		audlangs.rem(audlangs.select[1].value);
+		audlangs.select[0].appendChild(audlangs.select[1].options[audlangs.select[1].selectedIndex]);
+		if (!audlangs.select[1].options.length) { // clean
+			for (var i = 0; i < audlangs.select[0].options.length; i++) {
+				if (audlangs.select[0].options[i].value != 0) continue;
+				audlangs.select[1].appendChild(audlangs.select[0].options[i]);
+				break;
+			}
+			audlangs.array = [ 0 ];
+		}
+	} else {
+		if (sublangs.select[1].value == '') return;
+		if (sublangs.array.length == 1 && sublangs.array[0] == 0) return;
+		sublangs.add(sublangs.select[1].value);
+		sublangs.select[0].appendChild(sublangs.select[1].options[sublangs.select[1].selectedIndex]);
+		if (!sublangs.select[1].options.length) { // clean
+			for (var i = 0; i < sublangs.select[0].options.length; i++) {
+				if (sublangs.select[0].options[i].value != 0) continue;
+				sublangs.select[1].appendChild(sublangs.select[0].options[i]);
+				break;
+			}
+			sublangs.array = [ 0 ];
+		}
+	}
+	audlangs.toString();
+	sublangs.toString();
 }
 
 function prepPage() {
@@ -328,17 +402,21 @@ function prepPage() {
 	if (audlangs.in) {
 		audlangs.text = audlangs.in.value;
 		audlangs.array = audlangs.text.replace(/[{}]/mgi,'').split(',');
+		if (!audlangs.array.length) audlangs.array.push(0);
 		audlangs.add = addLanguageToArray;
 		audlangs.rem = remLanguageFromArray;
 		audlangs.toString = convLanguagesToText;
+		audlangs.in.name = 'lang.filealang';
 	}
 	sublangs.in = getElementsByName(inputs, 'lang.subin', false)[0];
 	if (sublangs.in) {
 		sublangs.text = sublangs.in.value;
 		sublangs.array = sublangs.text.replace(/[{}]/mgi,'').split(',');
+		if (!sublangs.array.length) sublangs.array.push(0);
 		sublangs.add = addLanguageToArray;
 		sublangs.rem = remLanguageFromArray;
 		sublangs.toString = convLanguagesToText;
+		sublangs.in.name = 'lang.fileslang';
 	}
 	if (audlangs.in && sublangs.in) prepLanguages();
 }
