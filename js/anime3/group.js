@@ -255,6 +255,8 @@ function updateEpTable() {
 	var updateRows = false;
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';			// X
+	while(headingList[0].childNodes.length) headingList[0].removeChild(headingList[0].firstChild);
+	createCheckBox(headingList[0],'files.all','files.all',toggleFilesFromGroup,false);
 	headingList[1].className += ' c_set';			// Date
 	headingList[2].className += ' c_set';			// ID
 	headingList[3].className += ' c_set';			// EP
@@ -271,16 +273,8 @@ function updateEpTable() {
 	}
 	var tbody = table.tBodies[0];
 	var thead = document.createElement('thead');
-	var tfoot = document.createElement('tfoot');
-	var row = document.createElement('tr');
-	var ck = createCheckBox(null,'files.all','files.all',toggleFilesFromGroup,false);
-	var cell = createCell(null, null, ck, null, headingList.length);
-	cell.appendChild(document.createTextNode(' select files'));
-	row.appendChild(cell);
-	tfoot.appendChild(row);
 	thead.appendChild(tbody.rows[0]);
 	table.insertBefore(thead,tbody);
-	table.appendChild(tfoot);
 	init_sorting(table,'epno','down');
 	
 	updateEpTableRows(false);

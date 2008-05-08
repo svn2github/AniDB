@@ -808,7 +808,7 @@ function changeOptionValue(node) {
 	else if (!node.name && node.id) name = node.id;
 	else return;
 	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);	
-	CookieSet(name,value);
+	CookieSet(name,value,3650);
 }
 
 /* Function that creates the preferences table
