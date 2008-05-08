@@ -86,13 +86,9 @@ div.pagination span strong
 	color: #FFFFFF;
 }
 
-/* DROP DOWN STUFF */
+/* Major Overrides for tabs and drop-down menus */
 
 body.nonav { width: auto }
-
-.g_section > form > table,
-.g_section > table, h4+table
-{ width: 100% }
 
 textarea { width: 099% }
 
@@ -132,7 +128,7 @@ tr.action td.value
 
 .g_content, .main_all .news { padding: 6px }
 
-.g_menu.mylist_menu { padding: 0.4em }
+.g_menu.mylist_menu { padding: 0.4em; margin-left: 1em; }
 
 .g_info, .g_timedentry .body { padding: 0.2em 1em }
 
@@ -170,15 +166,11 @@ td table { margin: 01em }
 
 body.nonav { margin: 0 }
 
-.g_menu.mylist_menu { margin: -06em -12em 0 0 }
-
 .main_all .rightbar { margin-top: 7px }
 
 .animeatt_all .review + .review, .g_timedentry + .g_timedentry { margin-top: 2em }
 
-#layout-tabs, .g_list, .g_msg, .g_section, .tabs { margin-top: 0.5em }
-
-h1 { margin-top: 0.2em }
+h1 { margin-top: 0.2em; }
 
 .g_list, .g_msg, .g_section, .tabs { margin-bottom: 0.5em }
 
@@ -205,12 +197,6 @@ a.filter, span.time, span.user a.id, td.rating span { font-size: 076% }
 
 tr.mylist td.name a:first-child:after { font-size: 060% }
 
-#layout-search,	#layout-tabs,
-.g_menu, .g_menu.mylist_menu, .g_msg h3,
-.main_all .rightbar,
-.review .bar, td span.icons
-{ float: right }
-
 .hide { display: none !important }
 
 .g_list li, .main-tabs li, .tabs li.tab { display: inline }
@@ -221,6 +207,7 @@ ul.contribution li { display: block }
 
 .i_icon span, th { cursor: default }
 
+/* .grouplist span.completion:after { content: attr(title) } */
 
 /*				option.section:after
 { content: ": " }*/ /*breaks select in opera... (wrong option on submit)*/
@@ -267,7 +254,7 @@ td.rating { color: #0000AA }
 
 tr.newtype td { border-width: 3px }
 
-.g_info, .g_msg, .g_timedentry .body, .review h4, div.desc,
+.g_info, .g_msg, .g_timedentry .body, .review h4, div.desc,0
 p.action, p.mylistadd, td, tr.action td.submit, tr.action td.value
 { border-top: 1px solid #EEEEEE }
 
@@ -303,13 +290,13 @@ ins, tr.good td, tr.mylist td { background-color: #F2FFF0 }
 #layout-menu > li:hover ul{ display: block; }
 
 #layout-menu > li{
-background-color: #FFF;
+background-color: transparent;
+background-image: url(images/layout/stripe-pink2.gif);
+background-attachement: scroll;
+color: rgb(222, 71, 153);
 display: block;
 float: left;
-border: 1px solid transparent;
-border-top-color: rgb(243, 231, 255);
-border-right-color: rgb(222, 201, 242);
-border-left-color: rgb(243, 231, 255);
+border: 1px solid rgb(238, 198, 220);
 padding-right: 18px;
 padding-left: 18px;
 padding-top: -20px;
@@ -347,11 +334,51 @@ th.ascending{ text-decoration: underline}
 th.descending{ text-decoration: overline}
 
 /* overrides */
-#layout-content { 
-	margin-left: 1em;
-	padding-top: 20px;
+#layout-content {
+margin-left: 1em;
+padding-top: 20px;
 }
-#layout-menu span.tab { 
-	display: inline; 
-	float: right;
+
+#layout-menu span.tab {
+display: inline;
+float: right;
 }
+
+#layout-tabs, .tabs { 
+	margin-top: 0.5em;
+	color: rgb(222, 71, 153);
+	padding-right: 18px;
+	padding-left: 18px;
+	margin-top: 3em;
+	margin-bottom: -4.5em;
+	font-weight: bold;
+}
+
+#layout-tabs ul.main-tabs li { 
+	background-color: rgb(222, 71, 153);
+	padding: 4px 4px 2px 4px;
+	line-height: 1.6em;
+	border: 1px solid transparent;
+	border-color: rgb(243, 231, 255) rgb(243, 231, 255) rgb(243, 231, 255) rgb(222, 201, 242);
+	text-transform: capitalize;
+	color: white;
+}
+
+#layout-tabs ul li a.selected,
+#layout-tabs ul.main-tabs li.selected a  { background-color: transparent; }
+
+#layout-tabs ul li a.selected,
+#layout-tabs ul.main-tabs li a {
+color: white;
+}
+
+#layout-tabs ul.main-tabs li a:hover,
+#layout-tabs ul.main-tabs li:hover,
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li.selected a
+{
+background-color: rgb(150, 51, 123);
+color: white;
+}
+
+#layout-main h1 { padding-bottom: 1em; }
