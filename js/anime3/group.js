@@ -243,8 +243,6 @@ function toggleFilesFromGroup() {
 		ck.checked = checked;
 		filesChecked++;
 	}
-	if (checked) 
-		alert('Checked '+filesChecked+' of '+totalFiles+' files, please confirm if the selection is correct.');
 }
 
 /* Updates the filelist table with sorting */
