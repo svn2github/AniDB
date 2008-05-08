@@ -214,6 +214,39 @@ function updateEpTableRows(cellClean) {
 	}
 }
 
+/* Function that toogles files for a given group */
+function toggleFilesFromGroup() {
+	var checked = this.checked;
+	var filesChecked = 0;
+	var totalFiles = 0;
+	for (var f in files) {
+		var file = files[f];
+		if (!file) continue;
+		if (file.groupId != gid) continue;
+		totalFiles++;
+		if (checked) {
+			if (Number(group_check_type) != 5 && !file.visible) continue;
+			switch(Number(group_check_type)) {
+				case 0: break;
+				case 1: if (file.fileType != 'mkv' && file.fileType != 'ogm') continue; break;
+				case 2: if (file.fileType != 'avi') continue; break;
+				case 3: if ((!file.videoTracks.length || file.videoTracks[0].resH < 720)) continue; break;
+				case 4: if ((!file.videoTracks.length || file.videoTracks[0].resH >= 720)) continue; break;
+				case 5: break;
+				default: continue;
+			}
+		}
+		var row = document.getElementById('fid_'+file.id);
+		if (!row) continue;
+		var ck = row.getElementsByTagName('input')[0];
+		if (!ck) continue;
+		ck.checked = checked;
+		filesChecked++;
+	}
+	if (checked) 
+		alert('Checked '+filesChecked+' of '+totalFiles+' files, please confirm if the selection is correct.');
+}
+
 /* Updates the filelist table with sorting */
 function updateEpTable() {
 	var table = ep_table;
@@ -238,9 +271,18 @@ function updateEpTable() {
 	}
 	var tbody = table.tBodies[0];
 	var thead = document.createElement('thead');
+	var tfoot = document.createElement('tfoot');
+	var row = document.createElement('tr');
+	var ck = createCheckBox(null,'files.all','files.all',toggleFilesFromGroup,false);
+	var cell = createCell(null, null, ck, null, headingList.length);
+	cell.appendChild(document.createTextNode(' select files'));
+	row.appendChild(cell);
+	tfoot.appendChild(row);
 	thead.appendChild(tbody.rows[0]);
 	table.insertBefore(thead,tbody);
+	table.appendChild(tfoot);
 	init_sorting(table,'epno','down');
+	
 	updateEpTableRows(false);
 }
 

@@ -822,7 +822,7 @@ function createPreferencesTable(type) {
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	items['mylist'] =	[titlePrefs, ed2kPrefs];
 	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs];
-	items['group'] =	[titlePrefs, ed2kPrefs];
+	items['group'] =	[titlePrefs, ed2kPrefs, groupPrefs];
 	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
 	if (!items[type]) return;
 
@@ -1037,7 +1037,15 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var rb = createBasicButton('group_check_type',0,'radio');
+				var rb = createBasicButton('group_check_type',5,'radio');
+				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.checked = (group_check_type == 5);
+				li.appendChild(rb);
+				li.appendChild(document.createTextNode(' Check all files'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				rb = createBasicButton('group_check_type',0,'radio');
 				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
 				rb.checked = (group_check_type == 0);
 				li.appendChild(rb);
