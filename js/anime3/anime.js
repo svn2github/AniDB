@@ -529,9 +529,9 @@ function updateGroupTable() {
 	tfoot.appendChild(tbody.rows[tbody.rows.length-1]);
 	groupTable.appendChild(tfoot);
 	var groupCnt = tbody.rows.length;
-	var lastIndex = 0;
-	for (var g in groups) {
-		var group = groups[g];
+	var newTbody = document.createElement('tbody');
+	for (var g = 0; g < anime.groups.length; g++) {
+		var group = groups[anime.groups[g]];
 		if (!group || group && group.id == 0) continue; // not interested in non groups nor the no group
 		// update existing rows
 		var gid = group.id;
@@ -540,8 +540,7 @@ function updateGroupTable() {
 		if (!row) {
 			row = createGroupRow(group.id, groupCols, groupSkips);
 			row.style.display = 'none';
-			if (lastIndex >= tbody.rows.length) lastIndex = tbody.rows.length-1;
-			if (row && tbody.rows[lastIndex]) tbody.insertBefore(row, tbody.rows[lastIndex]);
+			newTbody.appendChild(row);
 		} else { // update stuff
 			lastKnown = row.rowIndex;
 			group.defaultVisible = true;
@@ -574,8 +573,10 @@ function updateGroupTable() {
 						createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
 				}
 			}
+			newTbody.appendChild(row);
 		}
 	}
+	groupTable.replaceChild(newTbody,tbody);
 	if (LAY_HEADER && thead) {
 		// update thead with sorting functions
 		var headingList = thead.rows[0].getElementsByTagName('th');
@@ -596,7 +597,6 @@ function updateGroupTable() {
 		headingTest = getElementsByClassName(headingList,'cmts',true)[0];
 		if (headingTest) headingTest.className += ' c_set';
 		init_sorting(thead.rows[0],'epno','up');
-		//sortcol(head); // resort the table
 	}
 	// add filtering and stuff to tfoot
 	var row = tfoot.rows[0];
