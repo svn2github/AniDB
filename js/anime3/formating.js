@@ -304,6 +304,30 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
 	}
 }
 
+/* This function creates and inserts spoiler tags at the selection
+ * @param obj The RTE obj
+ * @param fTA The underlying textArea
+ * @param textOnly true if only the text of the link is needed
+ */
+function createSpoiler(obj,fTA,sel,textOnly) {
+	if (!obj && !fTA) return; // can not continue
+	if (!sel) {
+		sel = getSelection(obj);
+		if (!sel) sel = "";
+	}
+	var spoiler = '[spoiler]'+sel+'[/spoiler]';
+	if (textOnly) return spoiler;
+	if (isIE) {	//IE support
+		// IE fails miserably here, don't show the link thingie
+		insertAtSelection(obj, spoiler, true);
+	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+		insertAtSelection(obj, document.createTextNode(spoiler), false);
+	} else {
+		if (seeDebug) alert('getSelection: unknown selection method');
+		return;
+	}
+}
+
 /* Function that formats text
  * @param id 
  * @param n Number of textArea
@@ -316,7 +340,7 @@ function formatText(id, n, selected) {
 	obj.contentWindow.focus();
 	var fTA = document.getElementById('textArea_' + n);
 	// When in Text Mode these execCommands are disabled
-	var formatIDs = new Array("Bold","Italic","Underline","Strikethrough","InsertUnorderedList","InsertOrderedList","CreateLink");
+	var formatIDs = new Array("Bold","Italic","Underline","Strikethrough","InsertUnorderedList","InsertOrderedList","Spoiler","CreateLink");
 	for (var i = 0; i <= formatIDs.length;) { // Check if button clicked is in disabled list
 		if (formatIDs[i] == id)
 			 var disabled_id = 1; 
@@ -327,6 +351,8 @@ function formatText(id, n, selected) {
 	} else {
 		if (id == "CreateLink") { // CreateLink
 			createLink(obj.contentWindow, fTA);
+		} else if (id == "Spoiler") { // Spoiler
+			createSpoiler(obj.contentWindow, fTA);
 		} else if (id == "ViewSource") { // ViewSource
 			viewMode('source',n);
 		} else if (id == "ViewText") { // ViewText
@@ -394,10 +420,10 @@ function cleanHTMLSource(str) {
 	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
 	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
 
-	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|br) [^>]*?\>/mgi,'<$1>');
-	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|br) [^>]*?\>/mgi,'</$1>');
+	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|br|pre) [^>]*?\>/mgi,'<$1>');
+	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|br|pre) [^>]*?\>/mgi,'</$1>');
 	/* waiting on perl release */
-	str = str.replace(/\<p\>/mgi,'<br /><br />');
+	str = str.replace(/\<p\>/mgi,'<br />');
 	str = str.replace(/\<\/p\>/mgi,'');
 	
 	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
@@ -436,12 +462,14 @@ function convert_output(str) {
 
 	str = str.replace(/\n/mgi,'');
 	str = str.replace(/\<br([^>]*)\>/mgi,'[br]');
-	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike) [^>]*?\>/mgi,'[$1]');
-	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike) [^>]*?\>/mgi,'[/$1]');
-	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike)\>/mgi,'[$1]');
-	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike)\>/mgi,'[/$1]');
+	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|pre) [^>]*?\>/mgi,'[$1]');
+	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|pre) [^>]*?\>/mgi,'[/$1]');
+	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|pre)\>/mgi,'[$1]');
+	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|pre)\>/mgi,'[/$1]');
 	str = str.replace(/\[strike\]/mgi,'[s]');
 	str = str.replace(/\[\/strike\]/mgi,'[/s]');
+	str = str.replace(/\[pre\]/mgi,'[code]');
+	str = str.replace(/\[\/pre\]/mgi,'[/code]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 
 	str = str.replace(/\[p\]/mgi,'[br]');
@@ -504,9 +532,10 @@ function init_formating() {
 	               'strikethrough':{'id':"Strikethrough",'desc':"Strike-through text: [s]text[/s] (alt+s)",'accesskey':"S",'text':"s",'start':"--",'end':"--",'active':false},
 	               'orderedlist':{'id':"InsertOrderedList",'desc':"Ordered item: # text (alt+o)",'accesskey':"o",'text':"oLi",'start':"# ",'end':"",'active':false},
 	               'unorderedlist':{'id':"InsertUnorderedList",'desc':"Unordered item: * text (alt+l)",'accesskey':"l",'text':"uLi",'start':"* ",'end':"",'active':false},
+				   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':null,'end':null,'active':false},
 				   'viewsource':{'id':"ViewSource",'desc':"Source Mode",'accesskey':"q",'text':"vSource",'start':null,'end':null,'active':false},
 				   'viewrte':{'id':"ViewText",'desc':"WYSIWYG Mode",'accesskey':"w",'text':"vWYSIWYG",'start':null,'end':null,'active':false},
-				   'cleansource':{'id':"CleanSource",'desc':"Clean Source (alt+b)",'accesskey':"c",'text':"Clean",'start':null,'end':null,'active':false},
+				   'cleansource':{'id':"CleanSource",'desc':"Clean Source (alt+c)",'accesskey':"c",'text':"Clean",'start':null,'end':null,'active':false},
 				   'preview':{'id':"Preview",'desc':"Preview",'accesskey':"",'text':"preview",'start':null,'end':null,'active':false},
 	               'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"LNK",'start':"[",'end':"]",'active':false}};
 	OptionsMap = new Array('anime','ep','file','group','producer','producers','user','mylist','votes','creq','review','titles','genres',
@@ -524,10 +553,11 @@ function init_formating() {
 		// yes, yes, i know, blame IE
 		createLocalButton(span,'bold',FunctionMap['bold']);
 		createLocalButton(span,'italic',FunctionMap['italic']);
-		/* if(!isWK) */ createLocalButton(span,'underline',FunctionMap['underline']);
-		/* if(!isWK) */ createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
+		createLocalButton(span,'underline',FunctionMap['underline']);
+		createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
 		createLocalButton(span,'orderedlist',FunctionMap['orderedlist']);
 		createLocalButton(span,'unorderedlist',FunctionMap['unorderedlist']);
+		createLocalButton(span,'spoiler',FunctionMap['spoiler']);
 		createLocalButton(span,'viewsource',FunctionMap['viewsource']);
 		createLocalButton(span,'viewrte',FunctionMap['viewrte']);
 		createLocalButton(span,'cleansource',FunctionMap['cleansource']);
