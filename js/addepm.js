@@ -158,7 +158,7 @@ function mkButton(id, value, func)
 }
 
 function newEp(event){
-	var eid = event.target.id;
+	var eid = this.id;
 	var cur = my_eps[eid];
 	var nex = cur.next;
 	if(nex && cur.type==nex.type && nex.epno.disabled)
@@ -178,7 +178,7 @@ function newEp(event){
 }
 
 function delEp(event){
-	var eid = event.target.id;
+	var eid = this.id;
 	var cur = my_eps[eid];
 	var pre = cur.prev;
 	var nex = cur.next;
@@ -192,7 +192,7 @@ function delEp(event){
 }
 
 function moveEpDown(event){
-	var eid = event.target.id;
+	var eid = this.id;
 	var cur = my_eps[eid];
 	var pre = cur.prev;
 	var nex = cur.next;
@@ -215,7 +215,7 @@ function moveEpDown(event){
 }
 
 function moveEpUp(event){
-	var eid = event.target.id;
+	var eid = this.id;
 	var cur = my_eps[eid];
 	var pre = cur.prev;
 	var nex = cur.next;
