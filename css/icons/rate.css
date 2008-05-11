@@ -94,9 +94,16 @@
 	background-image: url(../icons/test/thumb_down.gif);
 }
 
-*.i_delete_tag
+*.i_tag_delete
 {
 	width: 16px;
 	height: 16px;
-	background-image: url(../icons/test/delete_tag.png);
+	background-image: url(../icons/test/tag_delete.png);
+}
+
+*.i_tag_edit
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/test/tag_edit.png);
 }
