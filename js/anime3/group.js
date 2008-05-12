@@ -206,9 +206,9 @@ function updateEpTableRows(cellClean) {
 		} else {
 			test = row.cells[11];	// icons Cell
 			if (test) {
-				test.onmouseover = createHashLink;
+				test.onmouseover = createHashLink;/*
 				var a = test.getElementsByTagName('a')[0];
-				if (a) a.href = '!fillme!';
+				if (a) a.href = '!fillme!';*/
 			}
 		}
 	}
