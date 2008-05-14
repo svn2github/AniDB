@@ -285,8 +285,10 @@ function createEpisodeRow(eid) {
 	if (!episode) return;
 	var row = document.createElement('tr');
 	row.id = 'e'+eid;
-	createCell(row, 'epno', createTextInput('addepm.'+eid+'.epno',5,false,false,5,episode.typeChar+episode.epno));
-	var cell = createCell(null, 'title', null);
+	var cell = createCell(null, 'epno', createTextInput('addepm.'+eid+'.epno',5,false,false,5,episode.typeChar+episode.epno));
+	cell.appendChild(createTextInput('addepm.'+eid+'.update',20,false,true,20,episode.update));
+	row.appendChild(cell);
+	cell = createCell(null, 'title', null);
 	var table = document.createElement('table');
 	table.id = 'e'+eid+'langsTable';
 	table.style.display = (showTitles ? '' : 'none');
