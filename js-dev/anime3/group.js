@@ -206,11 +206,54 @@ function updateEpTableRows(cellClean) {
 		} else {
 			test = row.cells[11];	// icons Cell
 			if (test) {
-				test.onmouseover = createHashLink;
+				test.onmouseover = createHashLink;/*
 				var a = test.getElementsByTagName('a')[0];
-				if (a) a.href = '!fillme!';
+				if (a) a.href = '!fillme!';*/
 			}
 		}
+	}
+}
+
+/* Function that toogles files for a given group */
+function toggleFilesFromGroup() {
+	var checked = this.checked;
+	var filesChecked = 0;
+	var totalFiles = 0;
+	for (var f in files) {
+		var file = files[f];
+		if (!file) continue;
+		if (file.groupId != gid) continue;
+		totalFiles++;
+		if (checked) {
+			if (Number(group_check_type) != 5 && !file.visible) continue;
+			switch(Number(group_check_type)) {
+				case 0: break;
+				case 1: if (file.fileType != 'mkv' && file.fileType != 'ogm') continue; break;
+				case 2: if (file.fileType != 'avi') continue; break;
+				case 3: if ((!file.videoTracks.length || file.videoTracks[0].resH < 720)) continue; break;
+				case 4: if ((!file.videoTracks.length || file.videoTracks[0].resH >= 720)) continue; break;
+				case 5: break;
+				default: continue;
+			}
+		}
+		var row = document.getElementById('fid_'+file.id);
+		if (!row) continue;
+		var ck = row.getElementsByTagName('input')[0];
+		if (!ck) continue;
+		ck.checked = checked;
+		filesChecked++;
+	}
+}
+
+function toogleCheckBoxes() {
+	var table = this.parentNode;
+	while (table.nodeName.toLowerCase() != 'table') table = table.parentNode;
+	var tbody = table.tBodies[0];
+	var cks = tbody.getElementsByTagName('input');
+	for (var i = 0; i < cks.length; i++) {
+		var ck = cks[i];
+		if (ck.type != 'checkbox') continue;
+		ck.checked = !ck.checked;
 	}
 }
 
@@ -222,6 +265,11 @@ function updateEpTable() {
 	var updateRows = false;
 	// I know the headings i need so..
 	headingList[0].className += ' c_none';			// X
+	while(headingList[0].childNodes.length) headingList[0].removeChild(headingList[0].firstChild);
+	var ck = createCheckBox(null,'files.all','files.all',toogleCheckBoxes,false);
+	ck.title = 'Toggle files';
+	headingList[0].appendChild(ck);
+	createCheckBox(null,'files.all','files.all',toggleFilesFromGroup,false);
 	headingList[1].className += ' c_set';			// Date
 	headingList[2].className += ' c_set';			// ID
 	headingList[3].className += ' c_set';			// EP
@@ -238,9 +286,18 @@ function updateEpTable() {
 	}
 	var tbody = table.tBodies[0];
 	var thead = document.createElement('thead');
+	var tfoot = document.createElement('tfoot');
+	var row = document.createElement('tr');
+	var ck = createCheckBox(null,'files.all','files.all',toggleFilesFromGroup,false);
+	var cell = createCell(null, null, ck, false, headingList.length)
+	cell.appendChild(document.createTextNode(' select files'));
+	row.appendChild(cell);
+	tfoot.appendChild(row);
 	thead.appendChild(tbody.rows[0]);
 	table.insertBefore(thead,tbody);
+	table.appendChild(tfoot);
 	init_sorting(table,'epno','down');
+	
 	updateEpTableRows(false);
 }
 

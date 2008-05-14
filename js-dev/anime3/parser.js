@@ -36,7 +36,7 @@ function CMylistEntry(node) {
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName) {
+    switch (sNode.nodeName.toLowerCase()) {
       case 'state': this.status = nodeData(sNode); break;
       case 'fstate': this.fstate = nodeData(sNode); break;
       case 'seen': this.seen = Number(nodeData(sNode)); this.seenDate = convertTime(sNode.getAttribute('date')); break;
@@ -77,7 +77,7 @@ function CGroupEntry(node) {
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName) {
+    switch (sNode.nodeName.toLowerCase()) {
       case 'name': this.name = nodeData(sNode); break;
       case 'sname': this.shortName = nodeData(sNode); break;
       case 'state': this.state = nodeData(sNode); this.stateId = Number(sNode.getAttribute('id')); break;
@@ -112,7 +112,7 @@ function CAnimeEntry(node) {
   for (i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName) {
+    switch (sNode.nodeName.toLowerCase()) {
       case 'neps': this.eps = Number(nodeData(sNode)); break;
       case 'epcnt': this.epCount = Number(nodeData(sNode)); break;
       case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
@@ -157,6 +157,7 @@ CAnimeEntry.prototype.getAltTitle = function() {
  */
 function CEpisodeEntry(node) {
   this.id = Number(node.getAttribute('id'));
+  this.epno = '';
   this.type = 'normal';
   this.typeFull = 'Normal Episode';
   this.typeChar = '';
@@ -166,6 +167,7 @@ function CEpisodeEntry(node) {
   this.hiddenFiles = 0;
   this.seenDate = 0;
   this.length = 0;
+  this.playLength = 0;
   this.relDate = 0;
   this.userCount = 0;
   this.fileCount = 0;
@@ -176,10 +178,11 @@ function CEpisodeEntry(node) {
   this.titles = new Array();
   this.files = new Array(); // File IDS of related files are stored in the files array
   this.pseudoFiles = new Array(); // pseudo files are a totaly new thing
+  this.update = (node.getAttribute('update') ? Number(node.getAttribute('update')) : 0);
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName) {
+    switch (sNode.nodeName.toLowerCase()) {
       case 'flags': this.flags = Number(nodeData(sNode)); break;
       case 'epno': this.epno = Number(nodeData(sNode)); break;
       case 'len': this.length = Number(nodeData(sNode)); break;
@@ -192,7 +195,10 @@ function CEpisodeEntry(node) {
         for (var k = 0; k < sNode.childNodes.length; k++) {
           var tNode = sNode.childNodes.item(k);
           if (tNode.nodeType == 3) continue; // Text node, not interested
-          this.titles[tNode.getAttribute('lang')] = nodeData(tNode);
+          this.titles[tNode.getAttribute('lang')] = new Object();
+		  this.titles[tNode.getAttribute('lang')]['title'] = nodeData(tNode);
+		  this.titles[tNode.getAttribute('lang')]['update'] = (tNode.getAttribute('update')) ? tNode.getAttribute('update') : 0;
+		  this.titles[tNode.getAttribute('lang')]['verify'] = (tNode.getAttribute('verify')) ? tNode.getAttribute('verify') : 0;
         }
         break;
 	  case 'files': break;
@@ -207,6 +213,7 @@ function CEpisodeEntry(node) {
   if (this.flags & 32) { this.type = 'trailer'; this.typeFull = 'Trailer/Promo/Ads'; this.typeChar = 'T'; }
   if (this.flags & 64) { this.type = 'parody'; this.typeFull = 'Parody/Fandub'; this.typeChar = 'P'; }
   if (this.flags & 128) { this.type = 'other'; this.typeFull = 'Other Episodes'; this.typeChar = 'O'; }
+  this.playLength = this.length;
   // Format length
   var h, m;
   h = Math.floor(this.length / 60);
@@ -219,28 +226,28 @@ function CEpisodeEntry(node) {
 
 CEpisodeEntry.prototype.getTitle = function() {
   var title = null;
-  if (this.titles[episodeTitleLang]) title = this.titles[episodeTitleLang];
-  if (!title && episodeTitleLang != 'en' && this.titles['en']) title = this.titles['en']; 
-  if (!title && episodeTitleLang != 'x-jat' && this.titles['x-jat']) title = this.titles['x-jat'];
-  if (!title && episodeTitleLang != 'ja' && this.titles['ja']) title = this.titles['ja']; 
-  if (!title) { for (var i in this.titles) { title = this.titles[i]; break; } }
+  if (this.titles[episodeTitleLang]) title = this.titles[episodeTitleLang]['title'];
+  if (!title && episodeTitleLang != 'en' && this.titles['en']) title = this.titles['en']['title']; 
+  if (!title && episodeTitleLang != 'x-jat' && this.titles['x-jat']) title = this.titles['x-jat']['title'];
+  if (!title && episodeTitleLang != 'ja' && this.titles['ja']) title = this.titles['ja']['title']; 
+  if (!title) { for (var i in this.titles) { title = this.titles[i]['title']; break; } }
   if (!title) title = 'Episode '+this.typeChar+this.epno;
   return (title);
 }
 
 CEpisodeEntry.prototype.getAltTitle = function() {
   var title = this.titles[episodeAltTitleLang]; // first option
-  if (!title && episodeAltTitleLang != 'en' && this.titles['en']) title = this.titles['en']; 
-  if (!title && episodeAltTitleLang != 'x-jat' && this.titles['x-jat']) title = this.titles['x-jat'];
-  if (!title && episodeAltTitleLang != 'ja' && this.titles['ja']) title = this.titles['ja']; 
-  if (!title) { for (var i in this.titles) { title = this.titles[i]; break; } }
+  if (!title && episodeAltTitleLang != 'en' && this.titles['en']) title = this.titles['en']['title']; 
+  if (!title && episodeAltTitleLang != 'x-jat' && this.titles['x-jat']) title = this.titles['x-jat']['title'];
+  if (!title && episodeAltTitleLang != 'ja' && this.titles['ja']) title = this.titles['ja']['title']; 
+  if (!title) { for (var i in this.titles) { title = this.titles[i]['title']; break; } }
   if (!title) title = 'Episode '+this.typeChar+this.epno;
   return (title);
 }
 
 CEpisodeEntry.prototype.getTitles = function() {
   var ret = new Array();
-  for (var tid in this.titles) ret.push(tid + ': ' +title);
+  for (var tid in this.titles) ret.push(tid + ': ' +this.titles[tid]['title']);
   return (ret.join(', '));
 }
 
@@ -299,7 +306,7 @@ function CFileEntry(node) {
   // Actualy fill the data;
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode1 = node.childNodes.item(i);
-    switch (sNode1.nodeName) {
+    switch (sNode1.nodeName.toLowerCase()) {
       case 'size': this.size = Number(nodeData(sNode1)); break;
       case 'ed2k': this.ed2k = nodeData(sNode1); break;
       case 'crc': this.crc32 = nodeData(sNode1); break;
@@ -318,7 +325,7 @@ function CFileEntry(node) {
         for (var j = 0; j < sNode1.childNodes.length; j++) {
           var dNode = sNode1.childNodes.item(j);
 		  if (dNode.nodeType == 3) continue;
-          switch (dNode.nodeName) {
+          switch (dNode.nodeName.toLowerCase()) {
             case 'stream':
               var stream = new Object;
               stream.resW = 0;
@@ -329,7 +336,7 @@ function CFileEntry(node) {
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
 				if (stNode.nodeType == 3) continue;
-                switch (stNode.nodeName) {
+                switch (stNode.nodeName.toLowerCase()) {
                   case 'res': 
                     stream.resW = Number(stNode.getAttribute('w')) || 0; 
                     stream.resH = Number(stNode.getAttribute('h')) || 0;                     
@@ -354,7 +361,7 @@ function CFileEntry(node) {
         for (var j = 0; j < sNode1.childNodes.length; j++) {
           var dNode = sNode1.childNodes.item(j);
 		  if (dNode.nodeType == 3) continue;
-          switch (dNode.nodeName) {
+          switch (dNode.nodeName.toLowerCase()) {
             case 'stream':
               var stream = new Object;
               stream.chan = 'unknown';
@@ -364,7 +371,7 @@ function CFileEntry(node) {
               for (var k = 0; k < dNode.childNodes.length; k++) {
                 var stNode = dNode.childNodes.item(k);
 				if (stNode.nodeType == 3) continue;
-                switch (stNode.nodeName) {
+                switch (stNode.nodeName.toLowerCase()) {
                   case 'chan': stream.chan = nodeData(stNode); break;
                   case 'lang': stream.lang = nodeData(stNode); break;
                   case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
@@ -383,7 +390,7 @@ function CFileEntry(node) {
         for (var j = 0; j < sNode1.childNodes.length; j++) {
           var dNode = sNode1.childNodes.item(j);
 		  if (dNode.nodeType == 3) continue;
-          switch (dNode.nodeName) {
+          switch (dNode.nodeName.toLowerCase()) {
             case 'stream':
               var stream = new Object;
               stream.type = 'unknown';
@@ -410,7 +417,7 @@ function CFileEntry(node) {
       case 'users':
         for (var j = 0; j < sNode1.childNodes.length; j++) {
           var sNode2 = sNode1.childNodes.item(j);
-          switch (sNode2.nodeName) {
+          switch (sNode2.nodeName.toLowerCase()) {
             case 'all': this.usersTotal = Number(nodeData(sNode2)); break;
             case 'ukn': this.usersUnknown = Number(nodeData(sNode2)); break;
             case 'del': this.usersDeleted = Number(nodeData(sNode2)); break;

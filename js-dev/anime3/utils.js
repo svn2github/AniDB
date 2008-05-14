@@ -334,7 +334,7 @@ function createTextInput(name,size,disabled,hidden,maxlength,value) {
   if (name != null) { input.name = name; input.id = name; }
   if (size != null) input.size = size;
   if (disabled != null) input.disabled = disabled;
-  if (maxlength != null) input.maxlength = maxlength;
+  if (maxlength != null) input.maxLength = maxlength;
   if (value != null) input.value = value;
   return input;
 }
@@ -380,6 +380,7 @@ function createLanguageSelect(parentNode,name,id,onchange,selected) {
 	var select = createBasicSelect(name,id,onchange);
 	for (var lang in languageMap) {
 		var option = document.createElement('option');
+		option.className = 'icons';
 		var op = languageMap[lang];
 		option.text = op['name'];
 		option.value = lang;
@@ -1129,11 +1130,12 @@ function applyFormat(identifier, file, episode, anime, group) {
 
 function createHashLink() {
   var ahref = this.getElementsByTagName('a')[0];
-  if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
+  //if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
   var parentid = this.parentNode.id;
   var fid = Number((parentid.indexOf('fid_') >= 0) ? this.parentNode.id.split('fid_')[1] : this.parentNode.id.split('f')[1]);
   var file = files[fid];
   if (!file) return;
+  
   var episode = episodes[file.episodeId];
   var curAnime = animes[file.animeId];
   var group = (file.groupId != 0) ? groups[file.groupId] : null;
@@ -1174,6 +1176,7 @@ function createHashLink() {
   if (hashObj.convertSpaces) pattern = pattern.replace(/ /mgi,hashObj.spacesChar);
   //alert('pattern.out: '+pattern);
   ahref.href = pattern+'/';
+  file.ed2klink = pattern+'/';
 }
 
 // TOOLTIP FUNCTIONS //

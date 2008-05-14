@@ -47,7 +47,7 @@ function parseData(xmldoc) {
   var root = xmldoc.getElementsByTagName('root').item(0);
   var t1 = new Date();
   var groupEntries = root.getElementsByTagName('group');
-  var select = document.createElement('SELECT');
+  var select = document.createElement('select');
   select.size = 1;
   select.name = 'addf.group';
   var option = document.createElement("option");
@@ -79,20 +79,20 @@ function createFileAddSelect(source,name,id) {
 
 
 function vidStreams() {
-  this.numStreams = getElementsByName(document.getElementsByTagName('INPUT'),'addf.vid.streams',true)[0];
+  this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.vid.streams',true)[0];
   this.streams = new Array();
   this.streams[0] = new Object();
-  this.streams[0].toggle = getElementsByName(document.getElementsByTagName('INPUT'),'addf.vid.none',true)[0];
-  this.streams[0].width = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.reswidth',true)[0];
-  this.streams[0].height = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.resheight',true)[0];
-  this.streams[0].ar = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.vid.ar',true)[0];
-  this.streams[0].codec = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.vid.vcodecid',true)[0];
-  this.streams[0].bitrate = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.bitrate',true)[0];
-  this.streams[0].fps = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.fps',true)[0];
-  this.streams[0].anamorphic = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.flag.FLAG_ANAMORPHIC',true)[0];
-  this.streams[0].clean = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.flag.FLAG_CLEAN',true)[0];
-  this.streams[0].vfr = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.flag.FLAG_VFR',true)[0];
-  this.streams[0].wrongar = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.vid.flag.FLAG_WRONGAR',true)[0];
+  this.streams[0].toggle = getElementsByName(document.getElementsByTagName('input'),'addf.vid.none',true)[0];
+  this.streams[0].width = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.reswidth',true)[0];
+  this.streams[0].height = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.resheight',true)[0];
+  this.streams[0].ar = getElementsByName(document.getElementsByTagName('select'),'addstrm.vid.ar',true)[0];
+  this.streams[0].codec = getElementsByName(document.getElementsByTagName('select'),'addstrm.vid.vcodecid',true)[0];
+  this.streams[0].bitrate = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.bitrate',true)[0];
+  this.streams[0].fps = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.fps',true)[0];
+  this.streams[0].anamorphic = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.flag.FLAG_ANAMORPHIC',true)[0];
+  this.streams[0].clean = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.flag.FLAG_CLEAN',true)[0];
+  this.streams[0].vfr = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.flag.FLAG_VFR',true)[0];
+  this.streams[0].wrongar = getElementsByName(document.getElementsByTagName('input'),'addstrm.vid.flag.FLAG_WRONGAR',true)[0];
 }
 vidStreams.prototype.disable = function(val, id) {
   if (id == null) id = 0;
@@ -110,15 +110,15 @@ vidStreams.prototype.disable = function(val, id) {
 }
 
 function audStreams() {
-  this.numStreams = getElementsByName(document.getElementsByTagName('INPUT'),'addf.aud.streams',true)[0];
+  this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.aud.streams',true)[0];
   this.streams = new Array();
   this.streams[0] = new Object();
-  this.streams[0].toggle = getElementsByName(document.getElementsByTagName('INPUT'),'addf.aud.none',true)[0];
-  this.streams[0].type = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.aud.type',true)[0];
-  this.streams[0].lang = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.aud.lang',true)[0];
-  this.streams[0].codec = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.aud.acodecid',true)[0];
-  this.streams[0].bitrate = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.aud.bitrate',true)[0];
-  this.streams[0].channels = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.aud.chantype',true)[0];
+  this.streams[0].toggle = getElementsByName(document.getElementsByTagName('input'),'addf.aud.none',true)[0];
+  this.streams[0].type = getElementsByName(document.getElementsByTagName('select'),'addstrm.aud.type',true)[0];
+  this.streams[0].lang = getElementsByName(document.getElementsByTagName('select'),'addstrm.aud.lang',true)[0];
+  this.streams[0].codec = getElementsByName(document.getElementsByTagName('select'),'addstrm.aud.acodecid',true)[0];
+  this.streams[0].bitrate = getElementsByName(document.getElementsByTagName('input'),'addstrm.aud.bitrate',true)[0];
+  this.streams[0].channels = getElementsByName(document.getElementsByTagName('select'),'addstrm.aud.chantype',true)[0];
 }
 audStreams.prototype.disable = function(val, id) {
   if (id == null) id = 0;
@@ -138,18 +138,18 @@ audStreams.prototype.add = function() {
   var lastRow = this.streams[0].channels.parentNode.parentNode;
   var index = lastRow.rowIndex + 1;
   var tbody = table.tBodies[0];
-  var row = document.createElement('TR');
+  var row = document.createElement('tr');
   row.className = "subheader";
-  var cell = document.createElement('TD');
+  var cell = document.createElement('td');
   cell.colSpan = 2;
   cell.appendChild(document.createTextNode('Audio Track Info [stream: '+audTracks+']'));
   row.appendChild(cell);
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // track toogle
-  row = document.createElement('TR'); 
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Track Toggle:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  row = document.createElement('tr'); 
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Track Toggle:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   var checkbox = createCheckbox('addf.aud_'+audTracks+'.none');
   this.streams[str].toggle = checkbox;
   c1.appendChild(checkbox);
@@ -171,9 +171,9 @@ audStreams.prototype.add = function() {
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // type
-  row = document.createElement('TR'); 
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Type:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  row = document.createElement('tr'); 
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Type:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   var select = createFileAddSelect(this.streams[0].type,'addstrm.aud_'+audTracks+'.type');
   this.streams[str].type = select;
   c1.appendChild(select);
@@ -181,9 +181,9 @@ audStreams.prototype.add = function() {
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // language
-  row = document.createElement('TR'); 
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Language:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  row = document.createElement('tr'); 
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Language:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   select = createFileAddSelect(this.streams[0].lang,'addstrm.aud_'+audTracks+'.lang','addfilem.aud_'+audTracks+'.lang');
   this.streams[str].lang = select;
   c1.appendChild(select);
@@ -191,10 +191,10 @@ audStreams.prototype.add = function() {
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // Codec/Bitrate:
-  row = document.createElement('TR');
+  row = document.createElement('tr');
   if (simpleView) row.style.display = 'none';
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Codec/Bitrate:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Codec/Bitrate:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   select = createFileAddSelect(this.streams[0].codec,'addstrm.aud_'+audTracks+'.acodecid');
   this.streams[str].codec = select;
   c1.appendChild(select);
@@ -207,10 +207,10 @@ audStreams.prototype.add = function() {
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // Channels:
-  row = document.createElement('TR');
+  row = document.createElement('tr');
   if (simpleView) row.style.display = 'none';
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Channels:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Channels:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   select = createFileAddSelect(this.streams[0].channels,'addstrm.aud_'+audTracks+'.chantype');
   this.streams[str].channels = select;
   c1.appendChild(select);
@@ -237,18 +237,18 @@ audStreams.prototype.remove = function(id) {
 }
 
 function subStreams() {
-  this.numStreams = getElementsByName(document.getElementsByTagName('INPUT'),'addf.sub.streams',true)[0];
+  this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.sub.streams',true)[0];
   this.streams = new Array();
   this.streams[0] = new Object();
-  this.streams[0].toggle = getElementsByName(document.getElementsByTagName('INPUT'),'addf.sub.none',true)[0];
-  this.streams[0].type = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.sub.type',true)[0];
-  this.streams[0].lang = getElementsByName(document.getElementsByTagName('SELECT'),'addstrm.sub.lang',true)[0];
-  this.streams[0].dubsubbed = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.sub.flag.FLAG_DUBSUBBED',true)[0];
-  this.streams[0].hearingimp = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.sub.flag.FLAG_HEARINGIMP',true)[0];
-  this.streams[0].image = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.sub.flag.FLAG_IMAGE',true)[0];
-  this.streams[0].styled = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.sub.flag.FLAG_STYLED',true)[0];
-  this.streams[0].forcommentary = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.sub.flag.FLAG_FORCOMMENTARY',true)[0];
-  this.streams[0].unstyled = getElementsByName(document.getElementsByTagName('INPUT'),'addstrm.sub.flag.FLAG_UNSTYLED',true)[0];
+  this.streams[0].toggle = getElementsByName(document.getElementsByTagName('input'),'addf.sub.none',true)[0];
+  this.streams[0].type = getElementsByName(document.getElementsByTagName('select'),'addstrm.sub.type',true)[0];
+  this.streams[0].lang = getElementsByName(document.getElementsByTagName('select'),'addstrm.sub.lang',true)[0];
+  this.streams[0].dubsubbed = getElementsByName(document.getElementsByTagName('input'),'addstrm.sub.flag.FLAG_DUBSUBBED',true)[0];
+  this.streams[0].hearingimp = getElementsByName(document.getElementsByTagName('input'),'addstrm.sub.flag.FLAG_HEARINGIMP',true)[0];
+  this.streams[0].image = getElementsByName(document.getElementsByTagName('input'),'addstrm.sub.flag.FLAG_IMAGE',true)[0];
+  this.streams[0].styled = getElementsByName(document.getElementsByTagName('input'),'addstrm.sub.flag.FLAG_STYLED',true)[0];
+  this.streams[0].forcommentary = getElementsByName(document.getElementsByTagName('input'),'addstrm.sub.flag.FLAG_FORCOMMENTARY',true)[0];
+  this.streams[0].unstyled = getElementsByName(document.getElementsByTagName('input'),'addstrm.sub.flag.FLAG_UNSTYLED',true)[0];
 }
 subStreams.prototype.disable = function(val, id) {
   if (id == null) id = 0;
@@ -270,18 +270,18 @@ subStreams.prototype.add = function() {
   var lastRow = this.streams[0].channels.parentNode.parentNode;
   var index = lastRow.rowIndex + 1;
   var tbody = table.tBodies[0];
-  var row = document.createElement('TR');
+  var row = document.createElement('tr');
   row.className = "subheader";
-  var cell = document.createElement('TD');
+  var cell = document.createElement('td');
   cell.colSpan = 2;
   cell.appendChild(document.createTextNode('Subtitle Track Info [stream: '+subTracks+']'));
   row.appendChild(cell);
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // track toogle
-  row = document.createElement('TR'); 
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Track Toggle:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  row = document.createElement('tr'); 
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Track Toggle:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   var checkbox = createCheckbox('addf.sub_'+subTracks+'.none');
   this.streams[str].toggle = checkbox;
   c1.appendChild(checkbox);
@@ -303,9 +303,9 @@ subStreams.prototype.add = function() {
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // type
-  row = document.createElement('TR'); 
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Type:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  row = document.createElement('tr'); 
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Type:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   select = createFileAddSelect(this.streams[0].type,'addstrm.sub_'+subTracks+'.type');
   this.streams[str].type = select;
   c1.appendChild(select);
@@ -313,9 +313,9 @@ subStreams.prototype.add = function() {
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // language
-  row = document.createElement('TR'); 
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Language:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  row = document.createElement('tr'); 
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Language:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   select = createFileAddSelect(this.streams[0].lang,'addstrm.sub_'+subTracks+'.lang','addfilem.sub_'+subTracks+'.lang');
   this.streams[str].lang = select;
   c1.appendChild(select);
@@ -323,9 +323,9 @@ subStreams.prototype.add = function() {
   tbody.insertBefore(row,tbody.rows[index]);
   index++;
   // Flags:
-  row = document.createElement('TR'); 
-  c0 = document.createElement('TD'); c0.appendChild(document.createTextNode('Flags:')); row.appendChild(c0);
-  c1 = document.createElement('TD');
+  row = document.createElement('tr'); 
+  c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Flags:')); row.appendChild(c0);
+  c1 = document.createElement('td');
   var span = document.createElement('SPAN');
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_DUBSUBBED');
   this.streams[str].dubsubbed = checkbox;
@@ -387,8 +387,8 @@ subStreams.prototype.remove = function(id) {
   this.streams.splice(str,1);
 }
 function CView() {
-  var row = document.createElement('TR');
-  var cell = document.createElement('TD');
+  var row = document.createElement('tr');
+  var cell = document.createElement('td');
   cell.colSpan = 2;
   var a = document.createElement('A');
   a.onclick = changeView;
@@ -397,17 +397,17 @@ function CView() {
   cell.appendChild(a);
   row.appendChild(cell);
   table.tBodies[0].insertBefore(row,table.tBodies[0].rows[0]);
-  var test = getElementsByName(document.getElementsByTagName('INPUT'),'addf.md5',true)[0];
+  var test = getElementsByName(document.getElementsByTagName('input'),'addf.md5',true)[0];
   if (test) this.md5 = test.parentNode.parentNode;
-  test = getElementsByName(document.getElementsByTagName('INPUT'),'addf.sha1',true)[0];
+  test = getElementsByName(document.getElementsByTagName('input'),'addf.sha1',true)[0];
   if (test) this.sha1 = test.parentNode.parentNode;
-  test = getElementsByName(document.getElementsByTagName('INPUT'),'addf.size',true)[0];
+  test = getElementsByName(document.getElementsByTagName('input'),'addf.size',true)[0];
   if (test) this.size = test.parentNode.parentNode;
-  test = getElementsByName(document.getElementsByTagName('INPUT'),'addf.length',true)[0];
+  test = getElementsByName(document.getElementsByTagName('input'),'addf.length',true)[0];
   if (test) this.len = test.parentNode.parentNode;
-  test = getElementsByName(document.getElementsByTagName('SELECT'),'addf.filetype',true)[0];
+  test = getElementsByName(document.getElementsByTagName('select'),'addf.filetype',true)[0];
   if (test) this.filetype = test.parentNode.parentNode;
-  test = getElementsByName(document.getElementsByTagName('SELECT'),'addf.fileversion',true)[0];
+  test = getElementsByName(document.getElementsByTagName('select'),'addf.fileversion',true)[0];
   if (test) this.fileversion = test.parentNode.parentNode;
   this.type = typeSelect.parentNode.parentNode;
   if (!isEditPage) {
@@ -607,7 +607,7 @@ function workTemplate() {
 }
 
 function addTemplate() {
-  var row = document.createElement('TR');
+  var row = document.createElement('tr');
   createCell(row, null, document.createTextNode('Template:'), null);
   var optionArray = {"manual":{"text":'manual input'},"raw":{"text":'raw (japanese audio, no subtitles)'},
 					 "fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
@@ -622,8 +622,8 @@ function addTemplate() {
   vidstrm.streams[0].toggle.onclick = function () { vidstrm.disable(vidstrm.streams[0].toggle.checked, 0); }
   audstrm.streams[0].toggle.onclick = function () { audstrm.disable(audstrm.streams[0].toggle.checked, 0); }
   substrm.streams[0].toggle.onclick = function () { substrm.disable(substrm.streams[0].toggle.checked, 0); }
-  qualSelect = getElementsByName(document.getElementsByTagName('SELECT'),'addf.quality',true)[0];
-  sourceSelect = getElementsByName(document.getElementsByTagName('SELECT'),'addf.type',true)[0];
+  qualSelect = getElementsByName(document.getElementsByTagName('select'),'addf.quality',true)[0];
+  sourceSelect = getElementsByName(document.getElementsByTagName('select'),'addf.type',true)[0];
 
 }
 
@@ -656,8 +656,8 @@ function prepPage() {
   else return; // badPage
   if (uriObj['edit'] && uriObj['edit'] != 0) { isEditPage = true; simpleView = false; }
   // find the result cell
-  var input = getElementsByName(document.getElementsByTagName('INPUT'),'addf.do.searchgroup',true)[0];
-  searchbox = getElementsByName(document.getElementsByTagName('INPUT'),'addf.groupsearch',true)[0];
+  var input = getElementsByName(document.getElementsByTagName('input'),'addf.do.searchgroup',true)[0];
+  searchbox = getElementsByName(document.getElementsByTagName('input'),'addf.groupsearch',true)[0];
   if (!input || !searchbox) return;
   var cellId = input.parentNode.cellIndex;
   var prow = input.parentNode.parentNode;
@@ -669,12 +669,12 @@ function prepPage() {
   newinput.onclick = updateSearchString;
   input.parentNode.replaceChild(newinput,input);
   // Stuff for the template part
-  table = getElementsByClassName(document.getElementsByTagName('TABLE'),'file_add',true)[0];
+  table = getElementsByClassName(document.getElementsByTagName('table'),'file_add',true)[0];
   if (!table) return;
   targetRow = table.tBodies[0].rows[8];
   var cell0 = targetRow.cells[0];
   var cell1 = targetRow.cells[1];
-  typeSelect = cell1.getElementsByTagName('SELECT')[0]; // The file type select
+  typeSelect = cell1.getElementsByTagName('select')[0]; // The file type select
   targetRow = table.tBodies[0].rows[1];
   if (!isEditPage) {
     vidstrm = new vidStreams();
@@ -684,20 +684,20 @@ function prepPage() {
     audstrm.streams[0].toggle.onclick = function () { audstrm.disable(audstrm.streams[0].toggle.checked, 0); }
     substrm.streams[0].toggle.onclick = function () { substrm.disable(substrm.streams[0].toggle.checked, 0); }
   }
-  qualSelect = getElementsByName(document.getElementsByTagName('SELECT'),'addf.quality',true)[0];
-  sourceSelect = getElementsByName(document.getElementsByTagName('SELECT'),'addf.type',true)[0];
+  qualSelect = getElementsByName(document.getElementsByTagName('select'),'addf.quality',true)[0];
+  sourceSelect = getElementsByName(document.getElementsByTagName('select'),'addf.type',true)[0];
   if (!typeSelect.disabled && !isEditPage) addTemplate(); // if file is verified don't do more stuff
   currentView = new CView();
   if (!isEditPage) currentView.simpleView();
   else currentView.fullView();
-  input_ed2k = getElementsByName(document.getElementsByTagName('INPUT'),'addf.ed2k',true)[0];
+  input_ed2k = getElementsByName(document.getElementsByTagName('input'),'addf.ed2k',true)[0];
   input_ed2k.onchange = parseEd2k;
-  input_crc32 = getElementsByName(document.getElementsByTagName('INPUT'),'addf.crc',true)[0];
-  input_fileVersion = getElementsByName(document.getElementsByTagName('SELECT'),'addf.fileversion',true)[0];
-  input_size = getElementsByName(document.getElementsByTagName('INPUT'),'addf.size',true)[0];
+  input_crc32 = getElementsByName(document.getElementsByTagName('input'),'addf.crc',true)[0];
+  input_fileVersion = getElementsByName(document.getElementsByTagName('select'),'addf.fileversion',true)[0];
+  input_size = getElementsByName(document.getElementsByTagName('input'),'addf.size',true)[0];
   input_size.onchange = updateSize;
-  input_fileExtension = getElementsByName(document.getElementsByTagName('SELECT'),'addf.filetype',true)[0];
-  getElementsByName(document.getElementsByTagName('INPUT'),'addf.released',true)[0].onchange = updateDates;
+  input_fileExtension = getElementsByName(document.getElementsByTagName('select'),'addf.filetype',true)[0];
+  getElementsByName(document.getElementsByTagName('input'),'addf.released',true)[0].onchange = updateDates;
 }
 
 
