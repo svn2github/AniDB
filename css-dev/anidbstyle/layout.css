@@ -13,19 +13,9 @@
 #menu-login
 {
 	position: absolute;
-	top: 420px;
+	top: 620px;
 	left: 8px;
 	line-height: 2;
-}
-
-#menu-mod
-{
-	position: absolute;
-	top: 600px;
-	left: 23px;
-	padding: 4px;
-	background-color: #1a2238;
-	border: 1px inset #AEAEAE;
 }
 
 #layout-menu ul
@@ -33,13 +23,6 @@
 	line-height: 1.2;
 	width: 96px;
 	margin-bottom: 10px;
-}
-
-#layout-menu li.mymessages, #layout-menu li.mynotifies, #layout-menu li.mywishlist,
-#layout-menu li.myvotes, #layout-menu li.myreviews, #layout-menu li.mydbentries,
-#layout-menu li.mycreqs, #layout-menu li.up2date
-{
-	display: none;
 }
 
 #layout-menu ul.main, #layout-menu li.ed2kdump, #layout-menu ul.lists
@@ -62,7 +45,7 @@
 #layout-search
 {
 	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
-	width: 100%;
+	width: 55%;
 }
 
 #layout-search div.search
