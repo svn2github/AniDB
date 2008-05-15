@@ -4,7 +4,7 @@
 	top: 94px;
 	left: 0;
 	width: 142px;
-	height: 800px;
+	height: 700px;
 	padding: 51px 0px 0px 28px;
 	background: transparent url(../anidbstyle/images/menuback.png) no-repeat top left;
 }
@@ -23,6 +23,13 @@
 	line-height: 1.2;
 	width: 96px;
 	margin-bottom: 10px;
+}
+
+#layout-menu li.mynotifies, #layout-menu li.mywishlist,
+#layout-menu li.myreviews, #layout-menu li.mydbentries,
+#layout-menu li.mycreqs, #layout-menu li.up2date
+{
+	display: none;
 }
 
 #layout-menu ul.main, #layout-menu li.ed2kdump, #layout-menu ul.lists
