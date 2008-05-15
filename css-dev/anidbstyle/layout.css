@@ -83,11 +83,12 @@
 {
 	margin-bottom: 2px;
 	width:60%;
-	clear: left;
+	float: right;
 }
 
 #layout-search div.search form input.submit
 {
+	clear: right;
 	background: url(../icons/orange/button_search.gif) no-repeat top;
 	padding: 20px 0 0 0;
 	overflow: hidden;
