@@ -84,12 +84,11 @@
 	width:120px;
 	float: right;
 	margin-right: 5px;
-	margin-bottom: 4px;
+	margin-bottom: 2px;
 }
 
 #layout-search div.search form input.submit
 {
-	clear: right;
 	background: url(../icons/orange/button_search.gif) no-repeat top;
 	padding: 20px 0 0 0;
 	overflow: hidden;
@@ -99,6 +98,7 @@
 	cursor: pointer;
 	display: block;
 	margin-left: 70px;
+	float:left;
 }
 
 #layout-content
