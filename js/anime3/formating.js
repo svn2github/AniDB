@@ -587,6 +587,7 @@ function init_formating() {
 		var doc = iframe.contentWindow.document;
 		// Write the textarea's content into the iframe
 		doc.open();
+		/*
 		var htmlNode = doc.firstChild; // only works for firefox
 		if (htmlNode) {
 			var head = null;
@@ -614,6 +615,7 @@ function init_formating() {
 			//x.insertRule('body { background-image: none; }',x.cssRules.length);
 			x.insertRule('html { background-image: none; }',x.cssRules.length);
 		}
+		*/
 		doc.write(content);
 		doc.close();
 		// Make the iframe editable in both Mozilla and IE
