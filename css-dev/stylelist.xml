@@ -208,9 +208,9 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-zakura-menu">
 		<title>sub-zakura-menu</title>
 		<creator>fahrenheit</creator>
-		<update/>
+		<update>06.05.2008</update>
 		<status>Test</status>
-		<description>Based on Zakura by Zak and Nice-Day by epoximator</description>
+		<description>Based on Zakura by Zak and Nice-day by Epoximator</description>
 		<path/>
 		<screenshot>sub-zakura-menu/images/screenshot.png</screenshot>
 		<thumbnail>sub-zakura-menu/images/thumbnail.png</thumbnail>

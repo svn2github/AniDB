@@ -131,3 +131,9 @@ div.pagination span strong
 	border-color: #4692BF;
 	color: #FFFFFF;
 }
+
+#layout-main #htmltagcloud
+{
+	border:1px solid #D1D7DC;
+	background-color:#FAFAFA;
+}

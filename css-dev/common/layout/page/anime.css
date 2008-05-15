@@ -28,3 +28,9 @@
 {
 	width: 100%;
 }
+
+#layout-main div.anime_all div.tags
+{
+ margin-top:1em;
+ margin-bottom:1em;
+}

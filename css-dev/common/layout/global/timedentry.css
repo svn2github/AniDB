@@ -71,12 +71,17 @@
 
 #layout-main div.cmt_entries dl.profile dd.user
 {
-	padding-top:4px;
+	padding-top:8pt;
 }
 
 #layout-main div.cmt_entries dl.profile dd strong
 {
 	color:#000000;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user_icons
+{
+	padding-top: 1.6em;
 }
 
 #layout-main div.cmt_entries dl.profile dd.user_icons span.icons
