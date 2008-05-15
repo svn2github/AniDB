@@ -76,6 +76,7 @@
 {
 	display:block !important;
 	float: left;
+	font-size:10px;
 }
 
 #layout-search div.search form input.text
