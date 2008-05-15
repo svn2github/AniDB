@@ -84,6 +84,7 @@
 	width:120px;
 	float: right;
 	margin-right: 5px;
+	margin-bottom: 2px;
 }
 
 #layout-search div.search form input.submit
@@ -96,8 +97,6 @@
 	height: 14px;
 	border: 0;
 	cursor: pointer;
-	margin-right:25%;
-	margin-top:5px;
 }
 
 #layout-content
