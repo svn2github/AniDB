@@ -77,12 +77,10 @@
 	display:block !important;
 	float: left;
 	font-size:10px;
-	margin-bottom: 2px;
 }
 
 #layout-search div.search form input.text
 {
-	margin-bottom: 2px;
 	width:120px;
 	float: right;
 	margin-right: 5px;
@@ -98,6 +96,8 @@
 	height: 14px;
 	border: 0;
 	cursor: pointer;
+	margin-right:6em;
+	margin-top:0.5em;
 }
 
 #layout-content
