@@ -82,7 +82,8 @@
 #layout-search div.search form input.text
 {
 	margin-bottom: 2px;
-	width:55%;
+	width:60%;
+	clear: left;
 }
 
 #layout-search div.search form input.submit
