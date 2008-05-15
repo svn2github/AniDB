@@ -45,7 +45,7 @@
 #layout-search
 {
 	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
-	width: 55%;
+	width: 100%;
 }
 
 #layout-search div.search
@@ -72,9 +72,15 @@
 	margin-left: 32px;
 }
 
+#layout-search div.search form select.show
+{
+	display:block;
+}
+
 #layout-search div.search form input.text
 {
 	margin-bottom: 2px;
+	width:55%;
 }
 
 #layout-search div.search form input.submit
