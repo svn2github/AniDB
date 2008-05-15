@@ -72,9 +72,9 @@
 	margin-left: 32px;
 }
 
-#layout-search div.search form select.show
+#layout-search select
 {
-	display:block;
+	display:inline;
 }
 
 #layout-search div.search form input.text
