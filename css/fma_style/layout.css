@@ -60,10 +60,11 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 	top: 0;
 	right:1em;
 	left: auto;
-	height: 102px;
-	min-height: 102px; 
+	height: 94px;
+	min-height: 94px; 
 	border: none;
 	text-align: right;
+	width: auto;
 }
 
 #layout-menu #menu-account li {
@@ -77,7 +78,8 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
    margin:0;
    padding:30px 10px 53px 10px;
    text-decoration:none;
-   vertical-align: bottom; 
+   vertical-align: bottom;
+	height: 94px;
 } 
 #layout-menu #user-name a span {
 	text-transform: none;
