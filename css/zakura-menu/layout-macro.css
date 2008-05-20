@@ -14,7 +14,7 @@ height: auto;
 width: auto;
 border: none;
 text-align: inherit;
-display: list-item;
+display: none;
 }
 
 #layout-search {
