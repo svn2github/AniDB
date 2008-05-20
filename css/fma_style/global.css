@@ -30,3 +30,9 @@ h4 {
 	margin-bottom: 0.3em;
 	text-align: left;
 }
+
+/*tabbing pane*/
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin: 1px 1px 3px 6px;
+}
