@@ -1,0 +1,71 @@
+/*---------------------------------
+		AniDB CSS - Zakura
+		
+		www.zakness.com
+----------------------------------*/
+
+/* for local testing */
+/*@import "anidb-default.css";*/
+/*@import "anidb-flags.css";*/
+
+/* icons */
+@import "../icons/all.css";
+@import "icons.css";
+
+/* global layout */
+@import "global.css";
+@import "layout.css";
+@import "anime-tables.css";
+
+/* the database */
+@import "main.css";
+@import "search.css";
+@import "calendar.css";
+@import "latest.css";
+@import "genres.css";
+@import "categories.css";
+@import "staff.css";
+
+/* anime meta */
+@import "agcmts.css";
+@import "animeatt.css";
+@import "animehint.css";
+@import "animehist.css";
+@import "animevotes.css";
+@import "ep.css";
+@import "file.css";
+@import "group.css";
+@import "producer.css";
+@import "rel.css";
+@import "showanime.css";
+@import "up2date.css";
+
+/* user info */
+@import "buddylist.css";
+@import "mydb.css";
+@import "myhistory.css";
+@import "mylist.css";
+@import "mylistreport.css";
+@import "mymessages.css";
+@import "mynotifies.css";
+@import "myplace.css";
+@import "myreviews.css";
+@import "myvotes.css";
+@import "mywishlist.css";
+@import "profile.css";
+@import "reviewerlist.css";
+@import "userpage.css";
+
+/* add to anidb */
+@import "addep.css";
+@import "addeptitle.css";
+@import "addfile.css";
+@import "addgroup.css";
+@import "addtoanime.css";
+@import "ed2kdump.css";
+@import "creqs.css";
+
+/* other */
+@import "login.css";
+@import "signup.css";
+@import "../common/style/color/quotebox-default.css";

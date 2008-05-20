@@ -1,0 +1,22 @@
+/*---------------------------------
+			@MYLISTREPORT
+----------------------------------*/
+
+div.mylistreport_form {
+	text-align: center;
+}
+div.mylistreport_form h4 {
+	display: none;
+}
+div.mylistreport_results>* {
+	margin: 1em 0;
+}
+div.mylistreport_results>*:first-child {
+	margin-top: 0;
+}
+div.mylistreport_results table {
+	width: 100%;
+}
+div.mylistreport_results table td[align="right"] {
+	text-align: left;
+}

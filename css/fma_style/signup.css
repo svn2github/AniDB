@@ -1,0 +1,21 @@
+/*---------------------------------
+			@SIGNUP
+----------------------------------*/
+
+div.signup_all hr {
+	display: none;
+}
+
+div.signup_all table {	
+margin: 0 auto;
+	border:1px solid #E1D9F5;
+}
+div.signup_all .g_section caption {
+	width: 100%;
+	text-align: center;
+}
+div.signup_all td[colspan="2"] {
+	text-align: center;
+	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+	padding: 0.7em;
+} 
