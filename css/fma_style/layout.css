@@ -230,6 +230,7 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 #layout-search div.search p{
 	text-align: right;
 	font-size: 10pt;
+	margin-top: 0.5em;
 }
 
 /* search - form */
