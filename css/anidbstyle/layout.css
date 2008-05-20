@@ -4,7 +4,7 @@
 	top: 94px;
 	left: 0;
 	width: 142px;
-	height: 603px;
+	height: 700px;
 	padding: 51px 0px 0px 28px;
 	background: transparent url(../anidbstyle/images/menuback.png) no-repeat top left;
 }
@@ -13,7 +13,7 @@
 #menu-login
 {
 	position: absolute;
-	top: 420px;
+	top: 520px;
 	left: 8px;
 	line-height: 2;
 }
@@ -21,7 +21,7 @@
 #menu-mod
 {
 	position: absolute;
-	top: 600px;
+	top: 700px;
 	left: 23px;
 	padding: 4px;
 	background-color: #1a2238;
@@ -35,8 +35,8 @@
 	margin-bottom: 10px;
 }
 
-#layout-menu li.mymessages, #layout-menu li.mynotifies, #layout-menu li.mywishlist,
-#layout-menu li.myvotes, #layout-menu li.myreviews, #layout-menu li.mydbentries,
+#layout-menu li.mynotifies, #layout-menu li.mywishlist,
+#layout-menu li.myreviews, #layout-menu li.mydbentries,
 #layout-menu li.mycreqs, #layout-menu li.up2date
 {
 	display: none;
@@ -79,7 +79,7 @@
 	left: auto;
 	right: 0;
 	-right: -1px;
-	width: 152px;
+	width: 250px;
 	height: 57px;
 }
 
@@ -89,9 +89,18 @@
 	margin-left: 32px;
 }
 
+#layout-search select
+{
+	display:block !important;
+	float: left;
+	font-size:10px;
+}
+
 #layout-search div.search form input.text
 {
-	margin-bottom: 2px;
+	width:120px;
+	float: right;
+	margin-right: 5px;
 }
 
 #layout-search div.search form input.submit
@@ -103,6 +112,7 @@
 	height: 14px;
 	border: 0;
 	cursor: pointer;
+	margin-top: 2px;
 }
 
 #layout-content
@@ -132,7 +142,7 @@
 #layout-tabs
 {
 	position: absolute;
-	right: 152px;
+	right: 260px;
 	left: 168px;
 	top: 79px;
 }

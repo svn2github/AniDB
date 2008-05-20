@@ -27,9 +27,11 @@
 	border: none;
 }
 
-#layout-main div.admin_menu,
+#layout-main div.admin_menu ul,
 #layout-main div.admin_cat_menu ul
 {
-	margin-left: 25%;
-	margin-right: 25%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 20em;
+	text-align: left;
 }
