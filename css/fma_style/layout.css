@@ -73,7 +73,7 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
    vertical-align: bottom; 
 }
 
-#layout-menu #menu-account a {
+#layout-menu #menu-account li a {
    float:left;
    margin:0;
    padding:30px 10px 53px 10px;
