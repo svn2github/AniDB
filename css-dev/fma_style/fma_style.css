@@ -1,0 +1,187 @@
+@import "../zakura/zakura.css";
+@import "global.css";
+@import "layout.css";
+
+/*---------------------------------
+				@MAIN
+	- news		- top10 rightbar
+----------------------------------*/
+/* container - right sidebar */
+
+#layout-main h1 {
+font-weight:bold;
+font-size:1.5em;
+margin: 0 0 0.3em 0.5em;
+color: #2B5288;
+width:auto;
+text-align: left;
+}
+
+/* rightbar elements */
+div.main_all div.rightbar h3 {
+	font-size:1.3em;
+}
+
+/* news item elements */
+div.main_all div.newsitem {
+	padding-left: 30px;
+	background: transparent url(images/layout/newsitem.png) no-repeat left top;
+}
+div.main_all div.news h4 {
+	font-size:1.2em;
+}
+
+#layout-main div.block > div.image{
+	width: 32%;
+}
+
+#layout-main div.block > div.data{
+	width: 65%;
+}
+
+#layout-main div.main_all div.news p.comment
+{
+float: right;
+margin: -2em 0 0 0;
+padding-left: 20px;
+background: transparent url(images/layout/yellow_cmnt.gif) no-repeat left center;
+}
+
+/*Timed Entry: from sub-zakura*/
+
+#layout-main div.g_timedentry
+{
+	margin-bottom: 2em;
+}
+
+#layout-main div.g_timedentry
+{
+	min-height: 174px;
+	/*IE*/
+	height: auto !important;
+	height: 174px;
+}
+
+#layout-main div.g_timedentry h4
+{
+	padding: 0.1em;
+	margin: 0px;
+	text-align: left;
+}
+
+#layout-main div.g_timedentry div.avatar
+{
+	float: right;
+	margin: 10px;
+}
+
+#layout-main div.g_timedentry div.body
+{
+	padding: 0.2em;
+	text-align: left;
+}
+
+#layout-main div.g_timedentry span.stamp
+{
+	display: block;
+	text-align: right;
+	padding-right: 0.5em;
+}
+
+#layout-main div.g_timedentry span.stamp span.icons.user
+{
+	float: right;
+	margin-top: -1.5em;
+}
+
+#layout-main div.cmt_entries div.comment
+{
+	text-align:left;
+	min-height:0pt;
+	margin-bottom:1em;
+	border: 1px solid #D1D7DC;
+}
+
+#layout-main div.cmt_entries dl.profile
+{
+	border-right: 1px solid #D1D7DC;
+	display:inline;
+	float:left;
+	margin:0pt 8px 8pt 8pt;
+	min-height:80px;
+	width:15em;
+}
+
+#layout-main div.cmt_entries dl.profile dd
+{
+	clear:none;
+	float:none;
+	margin-left:0em;
+	color:#666666;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user
+{
+	padding-top:4px;
+}
+
+#layout-main div.cmt_entries dl.profile dd strong
+{
+	color:#000000;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user_icons span.icons
+{
+	float: none;
+}
+
+#layout-main div.cmt_entries div.postbody div.content
+{
+	margin-left: 17em;
+}
+
+#layout-main div.cmt_entries div.postbody p.author
+{
+	margin:0pt 15em 0.6em 0pt;
+	padding:2pt 0pt 5px;
+}
+
+#layout-main div.cmt_entries div.postbody span.actions a
+{
+	float:right;
+	margin-top: 4px;
+}
+
+#layout-main div.cmt_entries div.postfooter
+{
+	clear:both;
+	height:11px;
+	text-align:right;
+	padding-bottom:0.9em;
+}
+
+#layout-main div.cmt_entries div.postfooter a.i_top
+{
+	display:block;
+	float:right;
+}
+
+#layout-main div.cmt_entries a.username-colored
+{
+	color:#AA0000;
+	font-weight:bold;
+}
+
+#layout-main div.cmt_entries hr
+{
+	border-color: #D1D7DC;
+	border-style: solid none none;
+	border-width: 1px 0pt 0pt;
+	clear: both;
+	display: block;
+	height: 1px;
+	margin: 5px 0pt;
+}
+
+
+

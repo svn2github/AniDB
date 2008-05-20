@@ -1,0 +1,249 @@
+/*---------------------------------
+				@LAYOUT
+	- main nav		- structure
+	- user login	- quick search
+----------------------------------*/
+
+/* container - main nav, login, & search */
+#layout-nav {
+	background: #fff url(images/layout/bg-header.jpg) repeat-x left top;
+	height: 166px;
+}
+
+/* container - main nav links & login */
+#layout-menu {
+	
+	background: transparent url(images/layout/header.jpg) no-repeat left top;
+	padding-top: 164px;
+	padding-left: 12px;
+}
+
+/* jk: Sub Menu container for group of menu items*/
+
+#layout-menu li.sub-menu{
+width: 108px;
+background-color: #111214;
+font-size: 1.1em;
+font-family: "Century Gothic",Arial, Helvetica, sans-serif;
+}
+
+/* main nav link lists */
+#layout-menu ul {
+	border: 1px solid #252628;
+	border-bottom-color: #252628;
+	border-right-color: #252628;
+	line-height: 1.5;
+}
+#layout-menu ul li {
+	color: #bcbcbc;
+	background-color: #0d0d0f;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #252628;
+}
+#layout-menu a, 
+#layout-menu a:link, 
+#layout-menu a:visited {
+	color: #bcbcbc;
+	padding: -1px;
+}
+#layout-menu a:hover, 
+#layout-menu a:active {
+	background-color:#252628;
+	color: #ffffff;
+}
+
+/* jk: Account Menu */ 
+#layout-menu #menu-account {
+	margin: 0;
+	position:absolute;
+	top: 0;
+	right:1em;
+	left: auto;
+	height: 102px;
+	min-height: 102px; 
+	border: none;
+	text-align: right;
+}
+
+#layout-menu #menu-account li {
+   display:inline;
+   margin:0; padding:0;
+   vertical-align: bottom; 
+}
+
+#layout-menu #menu-account a {
+   float:left;
+   margin:0;
+   padding:30px 10px 53px 10px;
+   text-decoration:none;
+   vertical-align: bottom; 
+} 
+#layout-menu #user-name a span {
+	text-transform: none;
+	color:#FFFFFF;
+}
+
+#layout-menu #user-name a:hover,
+#layout-menu #user-name a:active {
+	background: transparent url(images/layout/top_hover.jpg) repeat left top;
+}
+
+#layout-menu #user-profile a,
+#layout-menu #user-profile a:link,
+#layout-menu #user-profile a:visited {
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+#layout-menu #user-profile a:hover,
+#layout-menu #user-profile a:active {
+	background: transparent url(images/layout/top_hover.jpg) repeat left top;
+}
+
+#layout-menu #user-logout a,
+#layout-menu #user-logout a:link,
+#layout-menu #user-logout a:visited {
+	font-weight:bold;
+	color: #ffffff;
+}
+
+#layout-menu #user-logout a:hover,
+#layout-menu #user-logout a:active {
+	background: transparent url(images/layout/top_hover.jpg) repeat left top;
+}
+
+#menu-account .alert a,
+#menu-account .alert a:link,
+#menu-account .alert a:visited {
+	color: #ffffff;
+	font-weight: bold;
+	margin-left: 0.5em;
+}
+
+#menu-account .alert a:hover,
+#menu-account .alert a:active {
+	background: transparent url(images/layout/top_hover.jpg) repeat left top;
+}
+
+#menu-account .alert a.history,
+#menu-account .alert a.history:link,
+#menu-account .alert a.history:visited,
+#menu-account .alert a.nextnotify,
+#menu-account .alert a.nextnotify:link,
+#menu-account .alert a.nextnotify:visited {
+	color: #ffffff;
+	border: 0;
+}
+
+#menu-account .alert a.history:hover,
+#menu-account .alert a.history:active,
+#menu-account .alert a.nextnotify:hover,
+#menu-account .alert a.nextnotify:active  {
+color: #cccccc;
+}
+#menu-account li.alert
+{
+white-space: nowrap;
+}
+/* my nav */
+#layout-menu #menu-private {
+	border: 1px solid #061335;
+	border-bottom-color: #061335;
+	border-right-color: #061335;
+}
+
+#layout-menu #menu-private li {
+	border-bottom-color: #061335;
+}
+
+#layout-menu #menu-private a,
+#layout-menu #menu-private a:link,
+#layout-menu #menu-private a:visited {
+	color: #bcbcbc;
+}
+
+#layout-menu #menu-private a:hover,
+#layout-menu #menu-private a:active {
+	color: #ffffff;
+	background-color: #061335;
+}
+/* mylistreport */
+#layout-menu #menu-mod {
+border: 1px solid #460000;
+border-bottom-color: #460000;
+border-right-color: #460000;
+}
+
+#layout-menu #menu-mod li {
+border-bottom-color: #460000;
+}
+
+#layout-menu #menu-mod a,
+#layout-menu #menu-mod a:link,
+#layout-menu #menu-mod a:visited {
+color: #bcbcbc;
+}
+
+#layout-menu #menu-mod a:hover,
+#layout-menu #menu-mod a:active {
+color: #ffffff;
+background: #460000;
+}
+
+/* help link */
+#layout-menu #menu-support li.help {
+background: transparent url(images/buttons/help-static.png) no-repeat 0.7em center;
+}
+
+#layout-menu #menu-support li.help a {
+padding-left: 30px;
+}
+
+#layout-menu #menu-support  li.help a:hover,
+#layout-menu #menu-support  li.help a:active {
+color: #ffffff;
+background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em center;
+}
+
+/* container - search */
+
+#layout-search {
+	left: auto;
+	width: 35em;
+	margin-top: 103px;
+	padding: 0;
+}
+
+#layout-search div.search p{
+	text-align: right;
+	font-size: 10pt;
+}
+
+/* search - form */
+#layout-search input.text {
+	color:#000033;
+}
+
+#layout-search input.text:hover {
+	border: 1px solid #333333;
+}
+
+/* container - content */
+#layout-content {
+	margin-left: 132px;
+	margin-right: 1em;
+	border-top: 1px solid #f8f7ff;
+	background-color: #F5F5F5;
+}
+
+/* container - footer */
+#layout-footer {
+	margin-left: 132px;
+	margin-right: 1em;
+}
+
+#layout-footer p:after {
+	content: ". Design by jkaze.";
+}

@@ -2,6 +2,7 @@
 ./anidbstyle_hacks/anidbstyle_hacks.css
 ./anidbstyle-dongato/anidbstyle-dongato.css
 ./dark-style/dark-style.css
+./fma_style/fma_style.css
 ./grey/grey.css
 ./haruhistylex/haruhistylex.css
 ./haruhistylex-v1.5/haruhistylex-v1.5.css
@@ -16,9 +17,8 @@
 ./sub/brown2/main.css
 ./sub/norwegian-blue/main.css
 ./sub/silver/main.css
-./sub/zakura/main.css
-./sub/zakura-menu/main.css
 ./simplestyle/simplestyle.css
 #./yukinaga/yukinaga.css
 ./zakura/zakura.css
 ./zakura-fixed_menu/zakura-fixed_menu.css
+./zakura-menu/zakura-menu.css

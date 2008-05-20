@@ -1,0 +1,112 @@
+/*---------------------------------
+				@MAIN
+	- news		- top10 rightbar
+----------------------------------*/
+
+/* container - right sidebar */
+div.main_all div.rightbar {
+	float: right;
+	width: 25%;
+	background: #fcfafb url(images/layout/mamimi.png) no-repeat right top;
+	padding: 0.5em 0 0;
+	font-size: 0.95em;
+	border: 1px solid #e4e4e4;
+	border-right-color: #d5cccc;
+	border-bottom-color: #d5cccc;
+}
+
+/* rightbar elements */
+div.main_all div.rightbar h3 {
+	color: #7762ed;
+	background: #f0f2ff;
+	padding: 0.3em 0.75em;
+	margin: 1.5em 0 0;
+	border-top: 1px solid #ece5ff;
+	border-bottom: 1px solid #ece5ff;
+	font: 1.4em "Century Gothic", "Lucida Grande", sans-serif;
+}
+div.main_all div.rightbar h4 {
+	color: #4d4993;
+	padding: 0.3em 1em;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+div.main_all div.rightbar p {
+	margin: 1em;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
+	border-color: #ffdafc;
+	padding: 0.5em 0.2em;
+	margin: 0;
+	text-align: center;
+}
+div#layout-content div.rightbar p.g_vital a, 
+div#layout-content div.rightbar p.g_vital a:link, 
+div#layout-content div.rightbar p.g_vital a:visited {
+	border-bottom: 1px dotted #fd0576;
+	color: #fd0576;
+	font-weight: bold;
+}
+div#layout-content div.rightbar p.g_vital a:hover, 
+div#layout-content div.rightbar p.g_vital a:active {
+	color: #d90085;
+	border-bottom: 1px dotted #d90085;
+}
+
+/* rightbar top 10 lists */
+div.main_all div.rightbar ol {
+	margin-top: 0;
+	margin-left: 0;
+	padding-left: 0;
+}
+div.main_all div.rightbar ol:last-child {
+	margin-bottom: 0;
+}
+div.main_all div.rightbar ol li {
+	padding: 0.3em;
+	padding-left: 1em;
+	list-style: none;
+	position: relative;
+	border-bottom: 1px solid #e4e4e4;
+}
+div.main_all div.rightbar ol li span {
+	position: absolute;
+	top: 0.3em;
+	left: 1em;
+}
+div.main_all div.rightbar ol li.g_odd {
+	background: #fff;
+}
+div.main_all div.rightbar ol li a {
+	margin-left: 20%;
+	display: block;
+	border-bottom: none !important;
+}
+
+/* container - news */
+div.main_all div.news {
+	margin: 0 28% 1em 0;
+	padding: 0.5em 1em;
+}
+
+/* news item elements */
+div.main_all div.newsitem {
+	padding-left: 40px;
+	background: transparent url(images/layout/flower1.png) no-repeat left top;
+	border-bottom: 1px solid #f3e7ff;
+	padding-bottom: 1.2em;
+}
+div.main_all div.news h4 {
+	margin-top: 0.7em;
+	margin-bottom: -0.1em;
+	font: 1.8em "Century Gothic", "Lucida Grande", sans-serif;
+	color: #000;
+}
+div.main_all div.news span.stamp {
+	display: block;
+	color: #859efd;
+	padding: 0.2em;
+	font-size: 0.85em;
+}
+div.main_all div.newsitem:last-child {
+	border-bottom: 0;
+}

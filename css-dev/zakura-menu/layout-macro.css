@@ -1,0 +1,35 @@
+#layout-menu li.sub-menu{
+	height: 20px;
+}
+
+#layout-menu #menu-account {
+background: none;
+margin: 0;
+position: static;
+top: auto;
+right: auto;
+left: auto;
+padding-left: 0px;
+height: auto;
+width: auto;
+border: none;
+text-align: inherit;
+display: none;
+}
+
+#layout-search {
+position: absolute;
+top: 0;
+left: auto;
+right: 1em;
+width: auto;
+margin-top: 0px;
+padding: 0;
+padding-top: 110px;
+background: transparent url(images/layout/bg-login.png) no-repeat right top;
+padding-left: 200px;
+width: 35em;
+border: none;
+text-align: right;
+margin: 0px;
+}

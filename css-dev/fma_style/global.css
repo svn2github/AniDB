@@ -1,0 +1,32 @@
+/*---------------------------------
+				@GLOBAL
+	- menus			- pagination
+	- sections		- forms
+	- image replacement
+----------------------------------*/
+
+/* setup */
+body {
+	font-family: "Lucida Grande","Lucida Sans Unicode",helvetica,sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	font-size: 9pt;
+	color: #696969;
+	background-color: #111214;
+}
+
+/* page titles */
+h1 {
+	font-weight:bold;
+	font-size:1.5em;
+	margin: 0 0 0.3em 0.5em;
+	color: #2B5288;
+	text-align: left;
+}
+h4 {
+	color: #7762ed;
+	font-size:1.4em;
+	margin-bottom: 0.3em;
+	text-align: left;
+}

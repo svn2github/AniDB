@@ -5,7 +5,7 @@
     this code by ricce
 -------------------------------------*/
 
-@import "../sub/zakura/main.css";
+@import "../zakura/zakura.css";
 
 #layout-nav {
 	position: fixed;
