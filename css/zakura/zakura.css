@@ -1,0 +1,84 @@
+@import "../common/normalize.css";
+@import "../common/layout/default.css";
+@import "../common/layout/common.css";
+
+@import "../common/layout/global/all.css";
+@import "../common/layout/page/all.css";
+
+@import "../icons/all.css";
+@import "../icons/zakura.css";
+
+@import "../common/style/color/special.css";
+
+@import "../common/style/text/default.css";
+
+@import "../common/style/content/page-anime.css";
+
+@import "layout-macro.css";
+
+@import "style-default.css";
+@import "style-menu.css";
+@import "style-usermenu.css";
+@import "style-content.css";
+@import "zakura-old.css";
+
+#layout-main div.block > div.image{
+	width: 32%;
+}
+#layout-main div.block > div.data{
+	width: 65%;
+}
+#layout-main div.block div.data div.tabbed_pane table,
+#layout-main div.block div.data > div > table{
+	width: 99%;
+}
+
+/** TABS **/
+
+#layout-main div.tabbed_pane div.body
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(86, 90, 185);
+}
+#layout-main div.tabbed_pane div.body div.* {
+	left: 0px;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: rgb(53, 58, 143);
+	color: white;
+}
+
+#layout-tabs ul li.selected a
+{
+	background-color: rgb(53, 58, 143);
+}
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: rgb(53, 58, 143);
+	color: white;
+}
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color: rgb(86, 90, 185);
+	color: rgb(255, 255, 255);
+	padding: 4px;
+}
+
+div.pagination span a
+{
+	border: 1px solid rgb(86, 90, 185);
+	background-color: rgb(86, 90, 185);
+	color: rgb(255, 255, 255);
+}
+
+div.pagination span a:hover,
+div.pagination span strong
+{
+	border: 1px solid rgb(53, 58, 143);
+	background-color: rgb(53, 58, 143);
+	color: #FFFFFF;
+}
