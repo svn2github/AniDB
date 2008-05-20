@@ -1,0 +1,35 @@
+/*---------------------------------
+			@UP2DATE
+----------------------------------*/
+
+div.up2date_file_filter .g_filterlist b {
+	font-weight: normal;
+}
+div.up2date_file_list table.files {
+	width: 100%;
+}
+div.up2date_file_list div.mylist_add caption {
+	margin: 1em auto 0;
+}
+div.up2date_file_list div.mylist_add table {
+	border:1px solid #E1D9F5;
+	background: #fff;
+	margin: 0 auto;
+}
+div.up2date_file_list div.mylist_add tr.action,
+div.up2date_sequels_filter form {
+	text-align: center;
+	background: transparent url(images/layout/stripe-ltblue.gif) repeat left top;
+}
+div.up2date_sequels_filter form {
+	border:1px solid #E1D9F5;
+}
+div.up2date_sequels_filter h4 {
+	display: none;
+}
+div.up2date_sequels_list td.date {
+	width: 8%;
+}
+div.up2date_sequels_list td.year {
+	color: #994da9;
+}

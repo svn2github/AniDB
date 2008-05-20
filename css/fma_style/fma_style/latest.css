@@ -1,0 +1,46 @@
+/*---------------------------------
+			@LATEST
+----------------------------------*/
+
+div.latest_all .g_section table {
+	width: 100%;
+}
+div.latest_all .latest_userdata table {
+	width: auto;
+	margin: 0 auto;
+}
+div.latest_all tr.yes.g_odd td {
+	background-color: #e9ffd8;
+}
+div.latest_all tr.yes td {
+	background-color: #f0ffe3;
+}
+div.latest_all td.verified.yes,
+div.latest_all td.vv.yes {
+	color: #4b9b39;
+	font-weight: bold;
+}
+div.latest_categories td.number.weight_100 {color: #7b9174;}
+div.latest_categories td.number.weight_200 {color: #a1be2e;}
+div.latest_categories td.number.weight_300 {color: #5dac3b;}
+div.latest_categories td.number.weight_400 {color: #348d30;}
+div.latest_categories td.number.weight_500 {color: #0e7709;}
+div.latest_categories td.number.weight_600 {color: #054409;}
+div.latest_reviews_list th[colspan="2"] {
+	font-weight: bold;
+	font-size: 0.9em;
+}
+div.latest_all .g_section .g_filterlist {
+	margin: 1em 0;
+}
+div.latest_all .g_section td,
+div.latest_all .g_section th {
+	padding: 0.2em 0.4em;
+}
+div.latest_groups table.agcomments td.text.comment {
+	width: 45%;
+}
+div.latest_all td.rating {color: #aaa;}
+div.latest_all td.rating.low {color: #999;}
+div.latest_all td.rating.mid {color: #444;}
+div.latest_all td.rating.high {color: #000; font-weight: bold;}

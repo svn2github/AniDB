@@ -1,0 +1,111 @@
+/*---------------------------------
+			@ANIMEATT
+----------------------------------*/
+
+div.animeatt_all div.animeatt_header>table {
+	margin: 0 auto;
+	font-size: 1.2em;
+}
+div.animeatt_all div.animeatt_header table td {
+	background-color: #565ab9;
+	color: #fff;
+}
+div.animeatt_all div.animeatt_header table table td {
+	color: #3d3e6e;
+	background-color: #fff;
+}
+div.animeatt_all div.animeatt_reviews div.review {
+	clear: right;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #f3e7ff;
+	margin-bottom: 1em;
+	background: transparent url(images/layout/flower2.png) no-repeat left 2px;
+}
+div.animeatt_all div.animeatt_reviews div.review:last-child {
+	padding-bottom: 0;
+	border-bottom: 0;
+	margin-bottom: 0;
+}
+div.animeatt_all h2 {
+	font-weight: normal;
+	color: #fff;
+	position: relative;
+	padding-left: 30px;
+}
+div.animeatt_all h2 span.approval {
+	font-size: 0.9em;
+	padding-left: 15px;
+	color: #3d3e6e;
+}
+div.animeatt_all div.approved h2 span.approval {
+	background: transparent url(images/layout/checkmark.png) no-repeat left center;
+	color: #5dac3b;
+}
+div.animeatt_all div.disapproved h2 span.approval {
+	background: transparent url(images/layout/deprecated.png) no-repeat left center;
+	color: #8f95ae;
+}
+div.animeatt_all div.disapproved h2 span.approval:before {
+	content: "Dis";
+}
+
+div.animeatt_all h2 span.vote {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+div.animeatt_all h2 span.vote.high {
+	color: #5dac3b;
+}
+div.animeatt_all h2 span.vote.low {
+	color: #e33e23;
+}
+
+div.animeatt_all h2 a.no {
+	font-weight: bold;
+	font-size: 0.8em;
+	position: absolute;
+	left: 9px;
+	top: 8px;
+}
+div.animeatt_all h2 a.by:before {
+	content: "By ";
+	color: #859efd;
+	font-size: 0.8em;
+}
+div.animeatt_all div.review span.stamp {
+	color: #859efd;
+	padding-left: 44px;
+	padding-bottom: 0.5em;
+}
+div.animeatt_all div.review div.body {
+	padding-right: 12em;
+	padding-left: 44px;
+}
+div.animeatt_all div.review div.head {
+	margin-top: -1.4em;
+}
+div.animeatt_all div.review div.head table {
+	width: 100%;
+}
+
+div.animeatt_all div.review div.head, 
+div.animeatt_all div.review div.menu {
+	clear: right;
+	float: right;
+	width: 10em;
+}
+div.animeatt_all div.review div.head div, 
+div.animeatt_all div.review div.menu div {
+	margin-bottom: 1em;
+}
+div.animeatt_all div.review div.head caption, 
+div.animeatt_all div.review div.menu caption {
+	text-align: left;
+}
+div.animeatt_all div.review div.head th {
+	vertical-align: middle;
+}
+div.animeatt_all div.review div.head td.value {
+	text-align: right;
+	font-size: 1.4em;
+}

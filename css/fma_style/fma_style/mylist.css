@@ -1,0 +1,161 @@
+/*---------------------------------
+			@MYLIST
+----------------------------------*/
+
+div.mylist_list ul.g_list.jump {
+	margin-right: 11em;
+}
+div.mylist_list form ul.g_list.jump {
+	margin: 1em 0 0;
+}
+div.mylist_list form,
+div.mylist_list div.compare {
+	margin: 1em 11em 1em 0;
+}
+div.mylist_list table.animelist {
+	width: 100%;
+}
+div.mylist_list>table.animelist {
+	width: inherit;
+}
+div.mylist_list table.filelist {
+	background: #a9b0e1;
+}
+div.mylist_list table.animelist td {
+	padding: 0.2em 0.3em;
+	text-align: left;
+}
+div.mylist_list table.animelist td.eps,
+div.mylist_list table.animelist td.seen,
+div.mylist_list>table.animelist td.state,
+div.mylist_list div.compare table.animelist td.state,
+div.anime_all div.mylist td.state {
+	padding-left: 15px;
+}
+div.mylist_list table.animelist tr.complete>td.stats,
+div.mylist_list table.animelist tr.all_watched>td.stats,
+div.mylist_list>table.animelist td.state.complete,
+div.mylist_list div.compare table.animelist td.state.complete,
+div.anime_all div.mylist td.state.complete,
+div.anime_all div.mylist td.state.watched {
+	color: #000;
+	font-weight: bold;
+	background: transparent url(images/layout/checkmark-grey.png) no-repeat 2px center;
+}
+div.mylist_list table.animelist tr.complete>td.seen,
+div.mylist_list>table.animelist td.state.complete+td.state.complete,
+div.mylist_list div.compare table.animelist td.state.complete+td.state.complete,
+div.anime_all div.mylist td.state,
+div.anime_all div.mylist td.state.complete+td.state.complete {
+	color: #000;
+	font-weight: normal;
+	background: none;
+}
+div.mylist_list table.animelist tr.all_watched>td.seen,
+div.mylist_list>table.animelist td.state.all_watched,
+div.mylist_list div.compare table.animelist td.state.all_watched,
+div.anime_all div.mylist td.state.watched+td.state.watched {
+	color: #4b9b39;
+	background: transparent url(images/layout/checkmark.png) no-repeat 2px center;
+}
+div.mylist_list>table.animelist td.state.all_watched,
+div.mylist_list div.compare table.animelist td.state.all_watched {
+	font-weight: bold;
+}
+div.mylist_list table.animelist td.myvote,
+div.mylist_list table.animelist td.vote {
+	color: #444;
+	text-align: center;
+}
+div.mylist_list table.animelist td.high {
+	color: #000;
+	font-weight: bold;
+}
+div.mylist_list table.animelist td.low {
+	color: #999;
+}
+div.mylist_list table td.check {
+	padding: 1em 0 2em;
+	background-image: none;
+	text-align: center;
+}
+div.mylist_list table td.check select {
+	margin-left: 1em;
+}
+div.mylist_list .g_list,
+div#layout-content div.mylist_list table.eplist td.check {
+	margin: 1em 0;
+	padding: 1em;
+	background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+	border:1px solid #E1D9F5;
+}
+
+/* right side menu */
+div.mylist_menu {
+	margin-top: -1.4em;
+	width: 10em;
+}
+div.mylist_menu ul.filters:before {
+	content: "Filters";
+}
+div.mylist_menu ul.state:before {
+	content: "Show only";
+}
+div.mylist_menu ul.animecat:before {
+	content: "Types";
+}
+div.mylist_menu ul.animecat:before,
+div.mylist_menu ul.state:before,
+div.mylist_menu ul.filters:before {
+	text-transform: none;
+	border-bottom: 1px solid #c0e0f9;
+	color: #76a5e5;
+	margin-bottom: 0.2em;
+	display: block;
+	font-size: 0.9em;
+	padding: 0.5em;
+	background-color: #f1fcff;
+}
+div.mylist_menu ul {
+	font-size: 0.95em;
+}
+div.mylist_menu ul.animecat,
+div.mylist_menu ul.state,
+div.mylist_menu ul.filters {
+	background: #eaf6ff;
+	border: 1px solid #c0e0f9;
+	margin-bottom: 1em;
+}
+div.mylist_menu ul.animecat li,
+div.mylist_menu ul.state li,
+div.mylist_menu ul.filters li {
+	border-top: 0;
+	padding: 0.1em 0.5em;
+}
+div#layout-content div.mylist_menu ul.state li a {
+	display: block;
+	border-bottom: none !important;
+}
+div#layout-content div.mylist_menu ul.state span {
+	padding-left: 18px;
+	text-indent: 0;
+	background-repeat: no-repeat;
+	background-position: left 3px;
+	float: none;
+	display: block;
+	width: 8em;
+	height: auto;
+}
+
+/* add file to mylist */
+div.mylist_all div.mylist_edit table {
+	margin: 0 auto;
+	border:1px solid #E1D9F5;
+}
+div.mylist_all div.mylist_edit table tr.action {
+	background: #fff url(images/layout/stripe-ltblue.gif) repeat left top;
+	text-align: center;
+}
+div.mylist_all div.mylist_edit table tr.action td {
+	padding: 0.7em 0;
+}
