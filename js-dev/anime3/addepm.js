@@ -93,6 +93,25 @@ function toggleEpisodeTitles() {
 	}
 }
 
+/* Toogles one episode title display */
+function toggleEpTitles() {
+	var pnode = this.parentNode;
+	var eidnode = pnode;
+	var eid = -1;
+	while (eidnode.id.indexOf('e') < 0) eidnode = eidnode.parentNode;
+	if (eidnode.id.indexOf('langs') >= 0) eid = Number(eidnode.id.substr(1,eidnode.id.indexOf('langs')-1));
+	if (eid < 0) return;
+	var table = document.getElementById('e'+eid+'langsTable');
+	var span = document.getElementById('e'+eid+'langsSpan');
+	if (pnode.nodeName.toLowerCase() == 'td') {
+		table.style.display = 'none';
+		span.style.display = '';
+	} else {
+		table.style.display = '';
+		span.style.display = 'none';	
+	}
+}
+
 /* Sets all episode lengths/dates to match the given ones */
 function setAllDefaults() {
 	var defLen = document.getElementById('default.len').value;
@@ -107,16 +126,16 @@ function setAllDefaults() {
 }
 
 /* Create a title row */
-function createEpisodeTitleLine(eid,lang,title,update,verify) {
+function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	var container = document.createElement('tr');
 	var cell = createCell(null,null,createTextInput('addepm.'+eid+'.title'+languageMap[lang]['id'],50,false,false,255,title));
 	cell.appendChild(createTextInput('addepm.'+eid+'.update'+languageMap[lang]['id'],50,false,true,null,update));
 	container.appendChild(cell);
-	createCell(container, 'icons', createIcon(null, lang, null, null, 'language: '+mapLanguage(lang), 'i_audio_'+lang));
+	createCell(container, 'icons', createIcon(null, lang, null, toggleEpTitles, 'language: '+mapLanguage(lang), 'i_audio_'+lang));
 	var ck = createCheckbox('addepm.'+eid+'.verify'+languageMap[lang]['id'],(Number(verify) ? true : false));
 	if (!mod) ck.disabled = true;
 	createCell(container, 'verify', ck);
-	createCell(container, 'action', (lang != 'en') ? createIcon(null, 'rem', null, remTitle, 'Remove this title', 'i_minus') : document.createTextNode(' '));
+	createCell(container, 'action', (isUserAdd && lang != 'en') ? createIcon(null, 'rem', null, remTitle, 'Remove this title', 'i_minus') : document.createTextNode(' '));
 	return(container);
 }
 
@@ -125,7 +144,17 @@ function createEpisodeTitleLine(eid,lang,title,update,verify) {
  * @param action Action to execute
  */
 function titlesActions(elem, action) {
-
+	if (action == 'add') {
+		var eid = Number(elem.id.substr(1,elem.id.indexOf('title')-1));
+		var lang = document.getElementById('e'+eid+'title.sel').value;
+		var tbody = document.getElementById('e'+eid+'langsTable').tBodies[0];
+		tbody.appendChild(createEpisodeTitleLine(eid,lang,'',0,0,true));
+	}
+	if (action == 'rem') {
+		var pnode = elem.parentNode;
+		while (pnode.nodeName.toLowerCase() != 'tr') pnode = pnode.parentNode;
+		pnode.parentNode.removeChild(pnode);
+	}
 }
 
 /* Function that removes a title row */
@@ -157,6 +186,7 @@ function episodeWork(elem,action) {
 		epOrder.splice(curIndex-1,0,eid);
 		updateEpisodeRow(row,action);
 		updateEpisodeRow(prevRow,'down');
+		tbody.insertBefore(row,prevRow);
 	}
 	if (action == 'down' && curIndex < maxOrder-1) {
 		var nextRow = tbody.rows[rowIndex+1];
@@ -167,41 +197,13 @@ function episodeWork(elem,action) {
 		epOrder.splice(curIndex+1,0,eid);
 		updateEpisodeRow(row,action);
 		updateEpisodeRow(nextRow,'up');
+		rebuildTable(tbody.parentNode);
 	}
 	if (action == 'add') {
 		if (epType == '' && animes[aid].eps && normalEpsCnt >= animes[aid].eps) return;
-		newEpsCnt++;
-		// create a new episode node
-		var newEp = document.createElement('episode');
-		newEp.setAttribute('id','-'+newEpsCnt);
-		var epno = document.createElement('epno');
-		epno.appendChild(document.createTextNode(epNo+1));
-		newEp.appendChild(epno);
-		if (epType != '') {
-			var flags = document.createElement('flags');
-			var flag = 0;
-			if (epType == 'S') flag = 1;
-			if (epType == 'C') flag = 4;
-			if (epType == 'T') flag = 32;
-			if (epType == 'P') flag = 64;
-			if (epType == 'O') flag = 128;
-			flags.appendChild(document.createTextNode(flag));
-			newEp.appendChild(flags);
-		}
-		var titles = document.createElement('titles');
-		var title = document.createElement('title');
-		title.setAttribute('lang','en');
-		title.setAttribute('update','0');
-		title.setAttribute('verify','0');
-		title.appendChild(document.createTextNode('Episode '+epType+(epNo+1)));
-		titles.appendChild(title);
-		newEp.appendChild(titles);
-		var episodeEntry = new CEpisodeEntry(newEp);
-		episodes[episodeEntry.id] = episodeEntry;
-		epOrder.splice(curIndex+1,0,episodeEntry.id);
-		var newRow = createEpisodeRow(episodeEntry.id);
+		var newRow = addEpisodeWork(epType,epNo,curIndex);
 		tbody.insertBefore(newRow,tbody.rows[rowIndex+1]);
-		updateEpisodeNumbers(curIndex+2,epType,'down')
+		updateEpisodeNumbers(curIndex+2,epType,'down');
 	}
 	if (action == 'rem') {
 		newEpsCnt--;
@@ -210,7 +212,43 @@ function episodeWork(elem,action) {
 		tbody.removeChild(row);
 		updateEpisodeNumbers(curIndex,epType,'up')
 	}
-	rebuildTable(tbody.parentNode);
+}
+
+/* Function that realy does all the episode adding work
+ * @param epType Episode Type
+ * @param epNo Episode Number
+ */
+function addEpisodeWork(epType,epNo,curIndex) {
+	newEpsCnt++;
+	// create a new episode node
+	var newEp = document.createElement('episode');
+	newEp.setAttribute('id','-'+newEpsCnt);
+	var epno = document.createElement('epno');
+	epno.appendChild(document.createTextNode(epNo+1));
+	newEp.appendChild(epno);
+	if (epType != '') {
+		var flags = document.createElement('flags');
+		var flag = 0;
+		if (epType == 'S') flag = 1;
+		if (epType == 'C') flag = 4;
+		if (epType == 'T') flag = 32;
+		if (epType == 'P') flag = 64;
+		if (epType == 'O') flag = 128;
+		flags.appendChild(document.createTextNode(flag));
+		newEp.appendChild(flags);
+	}
+	var titles = document.createElement('titles');
+	var title = document.createElement('title');
+	title.setAttribute('lang','en');
+	title.setAttribute('update','0');
+	title.setAttribute('verify','0');
+	title.appendChild(document.createTextNode('Episode '+epType+(epNo+1)));
+	titles.appendChild(title);
+	newEp.appendChild(titles);
+	var episodeEntry = new CEpisodeEntry(newEp);
+	episodes[episodeEntry.id] = episodeEntry;
+	epOrder.splice(curIndex+1,0,episodeEntry.id);
+	return(createEpisodeRow(episodeEntry.id));
 }
 
 /* Updates episode numbers
@@ -265,7 +303,34 @@ function remEp() { episodeWork(this,'rem'); }
 
 /* function that adds new episodes */
 function addEpisode() {
-
+	var type = document.getElementById('episode.add.sel').value;
+	if (type == 'N' && anime.eps != 0 && anime.eps == normalEpsCnt) return;
+	if (type == 'N') type = '';
+	// start realy work
+	var curIndex = -1;
+	var foundType = false;
+	var epNo = 0;
+	for (var i = 0; i < epOrder.length; i++) {
+		var eid = epOrder[i];
+		var episode = episodes[eid];
+		if (episode.typeChar != type) {
+			if (!foundType) continue;
+			else {
+				curIndex = i;
+				break;
+			}
+		} else {
+			foundType = true;
+			var eNoInput = document.getElementById('addepm.'+eid+'.epno').value;
+			epNo = Number(!isNaN(eNoInput[0]) ? eNoInput : eNoInput.substr(1,eNoInput.length));
+		}
+	}
+	var episodeNumber = type+(epNo+1);
+	var tbody = document.getElementById('eplist').tBodies[0];
+	var nextRow = document.getElementById('e'+epOrder[curIndex]);
+	var newRow = addEpisodeWork(type,epNo,curIndex);
+	tbody.insertBefore(newRow,nextRow);
+	updateEpisodeNumbers(curIndex+2,type,'down');
 }
 
 /* Function that creates Episode action icons for a given eid */
@@ -325,7 +390,7 @@ function createEpisodeRow(eid) {
 	container.style.display = (showTitles ? 'none' : '');
 	var spanLang = document.createElement('span');
 	spanLang.className = 'icons';
-	createIcon(spanLang, episodeTitleLang, null, null, 'language: '+mapLanguage(episodeTitleLang), 'i_audio_'+episodeTitleLang);
+	createIcon(spanLang, episodeTitleLang, null, toggleEpTitles, 'language: '+mapLanguage(episodeTitleLang), 'i_audio_'+episodeTitleLang);
 	container.appendChild(spanLang);
 	var label = document.createElement('label');
 	label.appendChild(document.createTextNode(episode.getTitle()));
@@ -387,7 +452,7 @@ function createEpisodeTable() {
 	createSelectArray(cell,'episode.add.sel','episode.add.sel',null,null,optionArray);
 	cell.appendChild(document.createTextNode(' '));
 	var addInput = createBasicButton(null,'add');
-	addInput.onClick = addEpisode;
+	addInput.onclick = addEpisode;
 	cell.appendChild(addInput);
 	row.appendChild(cell);
 	tfoot.appendChild(row);
