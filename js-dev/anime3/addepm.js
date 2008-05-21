@@ -81,6 +81,53 @@ function parseData(xmldoc) {
 	createEpisodeTable();
 }
 
+/* Function that checks data before submit */
+function checkData() {
+	var errorCnt = 0;
+	for (var i = 0; i < epOrder.length; i++) {
+		var eid = epOrder[i];
+		var episode = episodes[eid];
+		// check episode numbers
+		var epno = document.getElementById('addepm.'+eid+'.epno');
+		var epTypes = [ 's','t','o','p','c' ];
+		if (isNaN(epno.value[0]) && epTypes.indexOf(epno.value[0].toLowerCase()) < 0) {
+			epno.style.backgroundColor = 'red';
+			epno.title = "Wrong episode type.";
+			errorCnt++;
+		}
+		// check lengths
+		var eplen = document.getElementById('addepm.'+eid+'.length');
+		if (isNaN(eplen.value)) {
+			eplen.style.backgroundColor = 'red';
+			eplen.title = "Episode length needs to be an integer.";
+			errorCnt++;
+		}
+		// check titles
+		for (var t = 0; t < episode.titleLangs; t++) {
+			var lang = episode.titleLangs[t];
+			var etitle = document.getElementById('addepm.'+eid+'.title'+languageMap[lang]['id']);
+			if (!etitle.value.length || etitle.value.length > 1000) {
+				etitle.style.backgroundColor = 'red';
+				etitle++;
+				document.getElementById('e'+eid+'langsTable').style.display = '';
+				document.getElementById('e'+eid+'langsSpan').style.display = 'none';
+				etitle.title = 'Episode title can not be null and can not be more than 1000 characters long.';
+			}
+			if ((lang == 'en' || lang == 'x-jat') && (/[^\x20-\x7E]/.test(etitle.value))) {
+				etitle.style.backgroundColor = 'red';
+				errorCnt++;
+				document.getElementById('e'+eid+'langsTable').style.display = '';
+				document.getElementById('e'+eid+'langsSpan').style.display = 'none';
+				var text = "Only printable 7-bit ASCII is allowed for this title.";
+				if (!etitle.title) etitle.title = text;
+				else etitle.title += '\n'+text;				
+			}
+		}
+	}
+	if (errorCnt) 
+		alert('Found '+errorCnt+' error'+(errorCnt > 1 ? 's' : '')+'.\nPlease check your submited data, errors are marked in red.');
+}
+
 /* Show/hide the title table where one can edit all the titles */
 function toggleEpisodeTitles() {
 	for (var eid in episodes) {
@@ -100,6 +147,7 @@ function toggleEpTitles() {
 	var eid = -1;
 	while (eidnode.id.indexOf('e') < 0) eidnode = eidnode.parentNode;
 	if (eidnode.id.indexOf('langs') >= 0) eid = Number(eidnode.id.substr(1,eidnode.id.indexOf('langs')-1));
+	else eid = Number(eidnode.id.substr(1,eidnode.id.indexOf('.')-1));
 	if (eid < 0) return;
 	var table = document.getElementById('e'+eid+'langsTable');
 	var span = document.getElementById('e'+eid+'langsSpan');
@@ -128,6 +176,7 @@ function setAllDefaults() {
 /* Create a title row */
 function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	var container = document.createElement('tr');
+	container.id = 'e'+eid+'.title.'+lang;
 	var cell = createCell(null,null,createTextInput('addepm.'+eid+'.title'+languageMap[lang]['id'],50,false,false,255,title));
 	cell.appendChild(createTextInput('addepm.'+eid+'.update'+languageMap[lang]['id'],50,false,true,null,update));
 	container.appendChild(cell);
@@ -149,11 +198,23 @@ function titlesActions(elem, action) {
 		var lang = document.getElementById('e'+eid+'title.sel').value;
 		var tbody = document.getElementById('e'+eid+'langsTable').tBodies[0];
 		tbody.appendChild(createEpisodeTitleLine(eid,lang,'',0,0,true));
+		episodes[eid].titleLangs.push(lang);
+		var sel = document.getElementById('e'+eid+'title.sel');
+		sel.removeChild(sel.options[sel.selectedIndex]);
 	}
 	if (action == 'rem') {
 		var pnode = elem.parentNode;
 		while (pnode.nodeName.toLowerCase() != 'tr') pnode = pnode.parentNode;
+		var eid = pnode.id.substr(1,pnode.id.indexOf('.')-1);
+		var lang = pnode.id.substr(pnode.id.lastIndexOf('.')+1,pnode.id.length);
+		episodes[eid].titleLangs.splice(episodes[eid].titleLangs.indexOf(lang),1);		
 		pnode.parentNode.removeChild(pnode);
+		var sel = document.getElementById('e'+eid+'title.sel');
+		var option = document.createElement('option');
+		var op = languageMap[lang];
+		option.text = op['name'];
+		option.value = lang;
+		sel.appendChild(option);
 	}
 }
 
@@ -367,16 +428,25 @@ function createEpisodeRow(eid) {
 	thead.appendChild(theadrow);
 	table.appendChild(thead);
 	var tbody = document.createElement('tbody');
-	var episodeLangs = new Array();
+	episode.titleLangs = new Array();
 	for (var lang in episode.titles) {
-		episodeLangs.push(lang);
+		episode.titleLangs.push(lang);
 		tbody.appendChild(createEpisodeTitleLine(eid,lang,episode.titles[lang]['title'],episode.titles[lang]['update'],episode.titles[lang]['verify']));
 	}
 	table.appendChild(tbody);
 	var tfoot = document.createElement('tfoot');
 	var tfootrow = document.createElement('tr');
 	var tfootcell = createCell(null, null, document.createTextNode('Add title: '), null, 4);
-	createLanguageSelect(tfootcell,'e'+eid+'title.sel','e'+eid+'title.sel');
+	var langsel = createBasicSelect('e'+eid+'title.sel','e'+eid+'title.sel',null);
+	for (var lang in languageMap) {
+		if (episode.titleLangs.indexOf(lang) >= 0) continue;
+		var option = document.createElement('option');
+		var op = languageMap[lang];
+		option.text = op['name'];
+		option.value = lang;
+		langsel.appendChild(option);
+	}
+	tfootcell.appendChild(langsel);
 	tfootcell.appendChild(document.createTextNode(' '));
 	var addButton = createBasicButton('e'+eid+'title.add','Add');
 	addButton.onclick = addTitle;
