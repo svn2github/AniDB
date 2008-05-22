@@ -98,6 +98,31 @@
 	background-image: url(../icons/state/anidb_state_unknown.gif);
 }
 
+*.i_state_nodeleted
+{
+	background-image: url(../icons/state/anidb_state_nodeleted.gif);
+}
+
+*.i_state_nomixed
+{
+	background-image: url(../icons/state/anidb_state_nomixed.gif);
+}
+
+*.i_state_nooncd
+{
+	background-image: url(../icons/state/anidb_state_nooncd.gif);
+}
+
+*.i_state_noonhdd
+{
+	background-image: url(../icons/state/anidb_state_noonhdd.gif);
+}
+
+*.i_state_nounknown
+{
+	background-image: url(../icons/state/anidb_state_nounknown.gif);
+}
+
 *.i_vote_pending
 {
 	background-image: url(../icons/icon/anidb_no_vote.gif);
