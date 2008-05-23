@@ -218,7 +218,7 @@ function getNodeElementsByTagName(node, tag) {
  * @param text Text to go in the node
  * @param abbr Text to go in the abbreviation title (or null if you won't use it)
  */
-function createHeader(parentNode, className, text, abbr) {
+function createHeader(parentNode, className, text, abbr, anidbSort, colSpan) {
 	var th = document.createElement('th');
 	if (className != null) th.className = className;
 	if (abbr != null) {
@@ -227,6 +227,11 @@ function createHeader(parentNode, className, text, abbr) {
 		if (text != null) abbreviation.appendChild(document.createTextNode(text));
 		th.appendChild(abbreviation);
 	} else if (text != null) th.appendChild(document.createTextNode(text));
+	if (colSpan != null && colSpan > 1) th.colSpan = colSpan;
+	if (anidbSort != null) {
+		if (th.className) th.className += ' '+anidbSort;
+		else th.className = anidbSort;
+	}
 	if (parentNode != null) parentNode.appendChild(th);
 	else return th;
 }
@@ -1257,3 +1262,21 @@ function initTooltips() {
   document.body.appendChild(divHTMLTOOLTIP);
   document.onmousemove = positionTooltip;
 }
+
+// Something i didn't want to put on anidbscript because, well, i don't want it there :P
+/* a function to confirm revokes for reviews */
+function confirmRevokes() {
+	var divs = ['reviewmenu']; // list of div targets
+	for (var i = 0; i < divs.length; i++) {
+		var div = getElementsByClassName(document.getElementsByTagName('div'), divs[i], false)[0];
+		if (!div) return;
+		var li = div.getElementsByTagName('li')[1];
+		if (li) {
+			var a = li.getElementsByTagName('a')[0];
+			if (a) a.onclick = function confirmRevoke() {	if (!confirm("Are you sure you wish to revoke your vote?")) return false; }
+		}
+	}
+}
+
+// hook up the window onload event
+addLoadEvent(confirmRevokes);
