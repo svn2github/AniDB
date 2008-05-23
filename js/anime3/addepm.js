@@ -570,8 +570,13 @@ function createEpisodeTable() {
 	tfoot.appendChild(row);
 	row = document.createElement('tr');
 	var cell = createCell(null, null, document.createTextNode('Add new episode of type: '), null, 7);
-	var optionArray = { 'N':{'text':"Normal"}, 'S':{'text':"Special"}, 'C':{'text':"Opening/Ending/Credits"},
-						'T':{'text':"Trailer/Promo/Ads"}, 'P':{'text':"Parody/Fandub"}, 'O':{'text':"Other Episodes"}};
+	var optionArray = new Object();
+	if (!anime.eps || normalEpsCnt < anime.eps) optionArray['N']={'text':"Normal"};
+	optionArray['S']={'text':"Special"};
+	optionArray['C']={'text':"Opening/Ending/Credits"};
+	optionArray['T']={'text':"Trailer/Promo/Ads"};
+	optionArray['P']={'text':"Parody/Fandub"};
+	optionArray['O']={'text':"Other Episodes"};
 	createSelectArray(cell,'episode.add.sel','episode.add.sel',null,null,optionArray);
 	cell.appendChild(document.createTextNode(' '));
 	var addInput = createBasicButton(null,'add');
@@ -597,6 +602,13 @@ function prepPage() {
 	var span = document.createElement('span');
 	span.appendChild(document.createTextNode('Please wait while loading data...'));
 	form.insertBefore(span,form.firstChild);
+	var p = form.getElementsByTagName('p')[0];
+	var submitButton = p.getElementsByTagName('input')[0];
+	submitButton.onclick = function checkSubmit() {
+		if (errorCount < 1) return true;
+		alert('There are at least '+errorCount+' error'+(errorCount > 1 ? 's' : '')+'.\nPlease fix the highlighted errors before submiting.');
+		return false;
+	}	
 	fetchData(aid);
 }
 
