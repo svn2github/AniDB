@@ -48,6 +48,11 @@
 	background-image: url(../icons/state/anidb_filestate_selfripped.gif);
 }
 
+*.i_filestate_streamed
+{
+	background-image: url(../icons/state/anidb_filestate_streamed.gif);
+}
+
 *.i_filestate_theater
 {
 	background-image: url(../icons/state/anidb_filestate_theater.gif);
