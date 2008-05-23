@@ -1,3 +1,7 @@
+#layout-menu #menu-account {
+	width: auto;;
+}
+
 #layout-menu #menu-account li {
 	display: table-cell;
 	border-bottom: none;
