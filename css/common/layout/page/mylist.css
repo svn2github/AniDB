@@ -4,3 +4,21 @@
 {
 	width: 98%;
 }
+
+#layout-main div.g_menu.mylist_menu div.filters,
+#layout-main div.g_menu.mylist_menu div.filestatefilters,
+#layout-main div.g_menu.mylist_menu div.user
+{
+	margin-top:1em;
+}
+
+#layout-main div.g_menu.mylist_menu div.filters  ul li,
+#layout-main div.g_menu.mylist_menu div.filestatefilters  ul li
+{
+    padding:5px;
+}
+
+#layout-main div.g_menu.mylist_menu label
+{
+    display:block;
+}
