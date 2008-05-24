@@ -13,6 +13,11 @@
 	background-image: url(../icons/silk/user_feedback.png);
 }
 
+*.i_user_history
+{
+	background-image: url(../icons/silk/user_history.png);
+}
+
 *.i_user_info
 {
 	background-image: url(../icons/silk/user_info.png);

@@ -24,8 +24,12 @@
 #layout-main div.g_menu.mylist_menu div.user span.user
 {
     float: none;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    height: 13px;
+    margin-top: 2px;
+    height: 14px;
     display:block;
+}
+
+#layout-main div.g_menu.mylist_menu p
+{
+    margin-top: 0.2em;
 }
