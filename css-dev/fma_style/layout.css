@@ -60,24 +60,26 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 	top: 0;
 	right:1em;
 	left: auto;
-	height: 102px;
-	min-height: 102px; 
+	height: 55px;
+	min-height: 55px; 
 	border: none;
 	text-align: right;
+	width: auto;
 }
 
 #layout-menu #menu-account li {
-   display:inline;
-   margin:0; padding:0;
-   vertical-align: bottom; 
+	display:inline;
+	margin:0; padding:0;
+	vertical-align: bottom; 
 }
 
-#layout-menu #menu-account a {
-   float:left;
-   margin:0;
-   padding:30px 10px 53px 10px;
-   text-decoration:none;
-   vertical-align: bottom; 
+#layout-menu #menu-account li a {
+	float:left;
+	margin:0;
+	text-decoration:none;
+	vertical-align: bottom;
+	height: 55px;
+	padding: 43px 15px 4px;
 } 
 #layout-menu #user-name a span {
 	text-transform: none;
@@ -95,11 +97,14 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 	text-decoration: none;
 	color: #ffffff;
 	font-weight: bold;
+	border: none;
+	background: none;
 }
 
 #layout-menu #user-profile a:hover,
 #layout-menu #user-profile a:active {
 	background: transparent url(images/layout/top_hover.jpg) repeat left top;
+	border: none;
 }
 
 #layout-menu #user-logout a,
@@ -107,11 +112,14 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 #layout-menu #user-logout a:visited {
 	font-weight:bold;
 	color: #ffffff;
+	border: none;
+	background: none;
 }
 
 #layout-menu #user-logout a:hover,
 #layout-menu #user-logout a:active {
 	background: transparent url(images/layout/top_hover.jpg) repeat left top;
+	border: none;
 }
 
 #menu-account .alert a,
@@ -120,11 +128,14 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 	color: #ffffff;
 	font-weight: bold;
 	margin-left: 0.5em;
+	border: none;
+	background: none;
 }
 
 #menu-account .alert a:hover,
 #menu-account .alert a:active {
 	background: transparent url(images/layout/top_hover.jpg) repeat left top;
+	border: none;
 }
 
 #menu-account .alert a.history,
@@ -219,6 +230,7 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 #layout-search div.search p{
 	text-align: right;
 	font-size: 10pt;
+	margin-top: 0.5em;
 }
 
 /* search - form */

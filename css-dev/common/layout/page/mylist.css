@@ -1,2 +1,6 @@
 #layout-main div.mylist_all table.animelist th.title,
-#layout-main div.mylist_all table.animelist table.eplist { width: 98%; }
+#layout-main div.mylist_all table.animelist table.eplist,
+#layout-main div.mylist_all table.animelist table.filelist
+{
+	width: 98%;
+}

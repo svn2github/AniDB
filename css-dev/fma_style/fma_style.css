@@ -9,12 +9,12 @@
 /* container - right sidebar */
 
 #layout-main h1 {
-font-weight:bold;
-font-size:1.5em;
-margin: 0 0 0.3em 0.5em;
-color: #2B5288;
-width:auto;
-text-align: left;
+	font-weight:bold;
+	font-size:1.5em;
+	margin: 0 0 0.3em 0.5em;
+	color: #2B5288;
+	width:auto;
+	text-align: left;
 }
 
 /* rightbar elements */
@@ -41,10 +41,10 @@ div.main_all div.news h4 {
 
 #layout-main div.main_all div.news p.comment
 {
-float: right;
-margin: -2em 0 0 0;
-padding-left: 20px;
-background: transparent url(images/layout/yellow_cmnt.gif) no-repeat left center;
+	float: right;
+	margin: -2em 0 0 0;
+	padding-left: 20px;
+	background: transparent url(images/layout/yellow_cmnt.gif) no-repeat left center;
 }
 
 /*Timed Entry: from sub-zakura*/

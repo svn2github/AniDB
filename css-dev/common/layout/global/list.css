@@ -30,3 +30,8 @@
 {
 	display: block;
 }
+
+#layout-main ul.jump
+{
+	margin-top: 1em;
+}
