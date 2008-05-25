@@ -23,7 +23,7 @@ var epQueue = new Array();		// episode process queue
 var groupFilter = new Array();	// Filter with group filters
 // settings
 var animeTitleLang = '';
-var animeAltTitleLang = 'en';
+var animeAltTitleLang = 'x-jat';
 var episodeTitleLang = '';
 var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
@@ -314,13 +314,14 @@ function toggleFilesFromGroup() {
 		if (file.groupId != gid) continue;
 		totalFiles++;
 		if (checked) {
-			if (!file.visible) continue;
+			if (Number(group_check_type) != 5 && !file.visible) continue;
 			switch(Number(group_check_type)) {
 				case 0: break;
 				case 1: if (file.fileType != 'mkv' && file.fileType != 'ogm') continue; break;
 				case 2: if (file.fileType != 'avi') continue; break;
 				case 3: if ((!file.videoTracks.length || file.videoTracks[0].resH < 720)) continue; break;
 				case 4: if ((!file.videoTracks.length || file.videoTracks[0].resH >= 720)) continue; break;
+				case 5: break;
 				default: continue;
 			}
 		}
@@ -745,6 +746,8 @@ function updateEpisodeTable() {
 						if (span) {
 							while (span.childNodes.length) span.removeChild(span.firstChild);
 							var icons = createEpisodeIcons(episode);
+							if (icons['recap']) span.appendChild(icons['recap']);
+							if (icons['comment']) span.appendChild(icons['comment']);
 							if (icons['seen']) span.appendChild(icons['seen']);
 							if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
 							if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
@@ -829,6 +832,8 @@ function changeWatchedState() {
 						} else {
 							while (span.childNodes.length) span.removeChild(span.firstChild);
 						}
+						if (icons['recap']) span.appendChild(icons['recap']);
+						if (icons['comment']) span.appendChild(icons['comment']);
 						if (icons['seen']) span.appendChild(icons['seen']);
 						if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
 						if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);

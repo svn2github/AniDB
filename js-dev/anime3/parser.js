@@ -147,7 +147,10 @@ CAnimeEntry.prototype.getTitle = function() {
 CAnimeEntry.prototype.getAltTitle = function() {
   var title = null;
   if (this.titles[animeAltTitleLang]) title = this.titles[animeAltTitleLang]['title'];
-  if (!title) title = '';
+  if (!title) title = this.titles['x-jat']['title'];
+  if (!title) title = this.titles['en']['title'];
+  if (!title) { for (var i in this.titles) { title = this.titles[i]['title']; break; } }
+  if (!title) title = 'Anime '+this.id;
   return (title);
 }
 

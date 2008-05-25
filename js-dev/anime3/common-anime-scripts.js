@@ -168,6 +168,8 @@ function createEpisodeIcons(episode) {
 			}
 		}	
 	}
+	if (episode.isRecap) icons['recap'] = createIcon(null, '[recap] ', null, null, 'This episode is a recap (summary).', 'i_recap');
+	if (episode.other) icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+episode.other, 'i_comment');
 	return icons;
 }
 /* Function that creates an episode table row
@@ -230,10 +232,12 @@ function createEpisodeRow(aid,eid,cols,skips) {
 						eptitle = createTextLink(null, episode.getTitle()+ titleTag +jaTitle+ ')', eptitleURL, null, null, null, null);
 					}
 				} else eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, null, null);
-				if (episode.seenDate != 0) {
+				if (episode.seenDate != 0 || icons['recap'] || icons['comment']) {
 					var watchedState = document.createElement('span');
 					watchedState.className = 'icons';
-					watchedState.appendChild(icons['seen']);
+					if (icons['recap']) watchedState.appendChild(icons['recap']);
+					if (icons['comment']) watchedState.appendChild(icons['comment']);
+					if (icons['seen']) watchedState.appendChild(icons['seen']);
 					var cell = createCell(null, col['classname'], watchedState, null, colSpan);
 					cell.appendChild(eptitle);
 					row.appendChild(cell);
@@ -586,7 +590,13 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 	if (rfid != null) file = pseudoFiles[rfid];
 	var episode = episodes[eid];
 	row.id = 'e'+eid+(file.pseudoFile ? 'r' : '')+'f'+fid;
-	if (file.type == 'generic') row.className = "generic no_sort";
+	classNameAtts = new Array();
+	if (file.type != 'generic') {
+		if (file.crcStatus == 'valid') classNameAtts.push('good');
+		if (file.crcStatus == 'invalid') classNameAtts.push('bad');
+		if (!file.avdumped) classNameAtts.push('undumped');
+	} else classNameAtts.push('generic no_sort');
+	row.className = classNameAtts.join(' ');
 	var icons = createFileIcons(file); // get file icons
 	for (var c = 0; c < cols.length; c++) {
 		var col = cols[c];
@@ -877,6 +887,11 @@ function createPreferencesTable(type) {
 			case 'title-prefs':
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLanguageSelect(li,'animeAltTitleLang','animeAltTitleLang',function() { changeOptionValue(this); animeAltTitleLang = this.value; },animeAltTitleLang);
+				li.appendChild(document.createTextNode(' Anime Alternative Title Language'));
+				ul.appendChild(li);
+				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLanguageSelect(li,'episodeAltTitleLang','episodeAltTitleLang',function() { changeOptionValue(this); episodeAltTitleLang = this.value; },episodeAltTitleLang);
 				li.appendChild(document.createTextNode(' Episode Alternative Title Language'));

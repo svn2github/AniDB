@@ -444,6 +444,7 @@ function prepPage() {
 	if (audlangs.input) {
 		audlangs.text = audlangs.input.value;
 		audlangs.array = audlangs.text.replace(/[{}]/mgi,'').split(',');
+		if (audlangs.array.length == 1 && !audlangs.array[0].length) audlangs.array = new Array();
 		if (!audlangs.array.length) audlangs.array.push('0');
 		audlangs.add = addLanguageToArray;
 		audlangs.rem = remLanguageFromArray;
@@ -454,6 +455,7 @@ function prepPage() {
 	if (sublangs.input) {
 		sublangs.text = sublangs.input.value;
 		sublangs.array = sublangs.text.replace(/[{}]/mgi,'').split(',');
+		if (sublangs.array.length == 1 && !sublangs.array[0].length) sublangs.array = new Array();
 		if (!sublangs.array.length) sublangs.array.push('0');
 		sublangs.add = addLanguageToArray;
 		sublangs.rem = remLanguageFromArray;

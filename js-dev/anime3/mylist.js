@@ -21,7 +21,7 @@ var epQueue = new Array();		// episode process queue
 var hiddenGroups = 0;
 // settings
 var animeTitleLang = '';
-var animeAltTitleLang = 'en';
+var animeAltTitleLang = 'animeAltTitleLang';
 var episodeTitleLang = '';
 var episodeAltTitleLang = 'en';
 var episodeTitleDisplay = 2;
@@ -681,14 +681,17 @@ function createEpisodeTable(aid) {
 		for (var i = 0; i < anime.episodes.length; i++) {
 			var eid = anime.episodes[i];
 			var row = createEpisodeRow(aid,eid,epCols,epSkips);
-			row.className = ((i % 2) ? '' : 'g_odd ') + 'files';
+			var classNames = row.className.split(' ');
+			classNames.push((i % 2) ? '' : 'g_odd');
+			classNames.push('files');
+			row.className = classNames.join(' ');
 			tbody.appendChild(row);
 			row = createFilesTable(eid);
 			tbody.appendChild(row);
 		}
 		table.appendChild(tbody);
 	} else { // only show files
-		table.className = 'eplist';
+		table.className = 'filelist';
 		table.id = 'a'+aid+'_filesTable';
 		colSpan = 12;
 		if (mylist_settings['noeptb']) colSpan++;
@@ -708,8 +711,11 @@ function createEpisodeTable(aid) {
 				tbody.appendChild(row);
 			}
 		}
-		for (var i = 0 ; i < tbody.rows.length; i++)
-			tbody.rows[i].className = ((i % 2) ? '' : 'g_odd ') + 'files';
+		for (var i = 0 ; i < tbody.rows.length; i++) {
+			var classNames = tbody.rows[i].className.split(' ');
+			classNames.push((i % 2) ? '' : 'g_odd');
+			tbody.rows[i].className = classNames.join(' ');
+		}
 		table.appendChild(tbody);
 	}
 	if (uid == ruid) {

@@ -23,7 +23,7 @@ var epQueue = new Array();		// episode process queue
 var groupFilter = new Array();	// Filter with group filters
 // settings
 var animeTitleLang = '';
-var animeAltTitleLang = 'en';
+var animeAltTitleLang = 'x-jat';
 var episodeTitleLang = '';
 var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
@@ -746,6 +746,8 @@ function updateEpisodeTable() {
 						if (span) {
 							while (span.childNodes.length) span.removeChild(span.firstChild);
 							var icons = createEpisodeIcons(episode);
+							if (icons['recap']) span.appendChild(icons['recap']);
+							if (icons['comment']) span.appendChild(icons['comment']);
 							if (icons['seen']) span.appendChild(icons['seen']);
 							if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
 							if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
@@ -830,6 +832,8 @@ function changeWatchedState() {
 						} else {
 							while (span.childNodes.length) span.removeChild(span.firstChild);
 						}
+						if (icons['recap']) span.appendChild(icons['recap']);
+						if (icons['comment']) span.appendChild(icons['comment']);
 						if (icons['seen']) span.appendChild(icons['seen']);
 						if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
 						if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
