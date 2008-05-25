@@ -98,7 +98,7 @@ public class AniAdd extends JApplet {
         System.out.println("Destroyed");
     }
 
-    public static void main(String[] arg){
+    public static void main(String[] arg){      
         runsLocally=true;
         JFrame f=new JFrame("AniAdd");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

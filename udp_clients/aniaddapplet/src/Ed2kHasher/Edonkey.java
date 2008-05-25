@@ -72,7 +72,7 @@ public class Edonkey extends AbstractChecksum {
 			length+=len;
 		} else
 		// |_______________XXX|_____
-		if (platz == zuSchreiben) {
+		if (platz == zuSchreiben) { 
 			md4.update(buffer,offset,len);
 			length+=len;
 			System.arraycopy(md4.digest(), 0, edonkeyHash, 0, 16);
@@ -88,7 +88,7 @@ public class Edonkey extends AbstractChecksum {
 			System.arraycopy(md4.digest(), 0, edonkeyHash, 0, 16);
 			md4final.update(edonkeyHash,0,16);
 
-			md4.reset();
+			md4.reset();    
 
 			md4.update(buffer,offset+platz,zuSchreiben-platz);
 			length+=zuSchreiben-platz;

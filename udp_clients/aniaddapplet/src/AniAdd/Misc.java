@@ -6,12 +6,7 @@ package AniAdd;
 
 import Processing.EpProcessing;
 import java.io.File;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Arrays;
 import java.util.BitSet;
-import java.util.Map;
 
 public class Misc {
     public static final boolean isNumber(final String s) {

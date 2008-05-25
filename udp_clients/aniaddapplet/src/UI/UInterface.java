@@ -162,9 +162,11 @@ public class UInterface extends javax.swing.JPanel {
     }
 
     public void deleteAction(){
-        for (int Index : lstvw_Files.getSelectedRows()) {
-            aniadd.EpProc.DelFile(Index);
-            lstvw_Files.Items.Remove(Index);
+        int Rows[] = lstvw_Files.getSelectedRows();
+        
+        for(int I=Rows.length-1;I>=0; I--) {
+            aniadd.EpProc.DelFile(Rows[I]);
+            lstvw_Files.Items.Remove(Rows[I]);            
         }
     }
 

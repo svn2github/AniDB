@@ -4,6 +4,7 @@
  */
 package UI;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.ArrayList;
@@ -23,12 +24,34 @@ public class ListView extends JTable{
     @Override
     public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
         Component component = super.prepareRenderer(renderer, row, column);
+
+        if(Items.Item(row).Columns.get(column).BGColor != null){
+            component.setBackground(Items.Item(row).Columns.get(column).BGColor);
+        } else {
+            component.setBackground(Color.white);
+        }
         
-        component.setBackground(Items.Item(row).Columns.get(column).BGColor);
+        for(int Index : this.getSelectedRows()) if(Index==row) {
+            component.setBackground(MixColor(Items.Item(row).Columns.get(column).BGColor, Color.lightGray));            
+        }
+        
         return component;
     }
     public boolean isCellEditable(int row, int column) {
         return Items.Rows.get(row).Columns.get(column).IsEditable;
+    }
+    
+    public Color MixColor(Color C1, Color C2) {
+        if(C1 == null && C2 == null) return Color.white;
+        if(C1 == null) return C2;
+        if(C2 == null) return C1;
+        
+        int R, B, G;
+        R = (C1.getRed() + C2.getRed()) / 2;
+        G = (C1.getGreen() + C2.getGreen()) / 2;
+        B = (C1.getBlue() + C2.getBlue()) / 2;
+        Color MColor = new Color(R,G,B);
+        return MColor;
     }
     
     public void SetColumns(String[] Columns) {

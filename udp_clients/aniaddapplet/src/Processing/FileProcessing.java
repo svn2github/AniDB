@@ -71,6 +71,7 @@ public class FileProcessing {
         Ed2kHasher.Edonkey Ed2k;
 
         public void run() {
+            long Timer = System.currentTimeMillis();
             try {
                 Ed2k = new Ed2kHasher.Edonkey();
                 
@@ -87,6 +88,7 @@ public class FileProcessing {
                 in.close();
             } catch (Exception exception) {exception.printStackTrace();}
             
+            System.out.println((System.currentTimeMillis()-Timer) + " " + Ed2k.getHexValue());
             CC.EpProc.ContinueProcessing(ProcFile, Ed2k.getHexValue(), "Parser");
       }
     }
