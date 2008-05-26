@@ -838,6 +838,7 @@ function createPreferencesTable(type) {
 
 	/* load settings from cookie */
 
+	animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
 	episodeAltTitleLang = CookieGet('episodeAltTitleLang') || "x-jat";
 	episodeTitleDisplay = CookieGet('episodeTitleDisplay') || 2;
 	ed2k_pattern = CookieGet('ed2k_pattern') || "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
