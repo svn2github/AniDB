@@ -21,10 +21,10 @@
 /* jk: Sub Menu container for group of menu items*/
 
 #layout-menu li.sub-menu{
-width: 108px;
-background-color: #111214;
-font-size: 1.1em;
-font-family: "Century Gothic",Arial, Helvetica, sans-serif;
+	width: 108px;
+	background-color: #111214;
+	font-size: 1.1em;
+	font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 }
 
 /* main nav link lists */
@@ -33,7 +33,9 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 	border-bottom-color: #252628;
 	border-right-color: #252628;
 	line-height: 1.5;
+	margin-bottom: 1em;
 }
+
 #layout-menu ul li {
 	color: #bcbcbc;
 	background-color: #0d0d0f;
@@ -41,11 +43,20 @@ font-family: "Century Gothic",Arial, Helvetica, sans-serif;
 	border-bottom-style: solid;
 	border-bottom-color: #252628;
 }
+
+#layout-menu ul li:last-child {
+	border-bottom: none;
+}
+
 #layout-menu a, 
 #layout-menu a:link, 
 #layout-menu a:visited {
+	text-decoration: none;
+	text-transform: capitalize;
 	color: #bcbcbc;
+	padding: 0.2em 0.7em;
 	padding: -1px;
+	display: block;
 }
 #layout-menu a:hover, 
 #layout-menu a:active {
@@ -221,6 +232,9 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 /* container - search */
 
 #layout-search {
+    position: absolute;
+	top: 0;
+	right: 1em;
 	left: auto;
 	width: 35em;
 	margin-top: 103px;
@@ -236,10 +250,20 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 /* search - form */
 #layout-search input.text {
 	color:#000033;
+	border: 1px solid #eed0da;
+	padding: 0.3em 0.3em 0;
+	height: 1.5em;
+	width: 16em;
 }
 
 #layout-search input.text:hover {
 	border: 1px solid #333333;
+}
+
+#layout-search input.submit {
+	height: 1.8em;
+	padding-bottom: 0.2em;
+	width: 4.5em;
 }
 
 /* container - content */
@@ -254,8 +278,26 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 #layout-footer {
 	margin-left: 132px;
 	margin-right: 1em;
+	
 }
 
+#layout-footer p {
+	font-size: 0.8em;
+	text-align: center;
+	color: #FFFFFF;
+	padding: 2em 0;
+}
 #layout-footer p:after {
 	content: ". Design by jkaze.";
+}
+
+/*More Defaults!*/
+body.nonav #layout-main {
+	margin: 0 1em 1em 1em;
+	padding: 0;
+	background: transparent;
+}
+
+body.nonav form textarea {
+	width: 99%;
 }

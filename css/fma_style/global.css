@@ -20,16 +20,51 @@ body {
 /* page titles */
 h1 {
 	font-weight:bold;
-	font-size:1.5em;
+	font-size:1.4em;
 	margin: 0 0 0.3em 0.5em;
 	color: #2B5288;
 	text-align: left;
 }
 h4 {
 	color: #7762ed;
-	font-size:1.4em;
+	font-size:1.3em;
 	margin-bottom: 0.3em;
 	text-align: left;
+}
+
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+h1, h2, h3, h4 {
+	margin: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a img, :link img, :visited img {
+	border: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.s_small {
+	font-size: 0.9em;
+}
+
+abbr {
+	cursor: help;
 }
 
 /*tabbing pane*/
