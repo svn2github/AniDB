@@ -4,6 +4,7 @@
  * version 1.1 (31.03.2008) - Group Rows added (createGroupRow, createGroupIcons)
  * version 1.2 (03.04.2008) - Episode Rows added (createEpisodeRow, createEpisodeIcons)
  * version 1.3 (15.04.2008) - Page Preferences added
+ * version 1.4 (26.05.2008)	- Moved stuff from utils to here
  */
 
 /* These are the default file, episode, group and anime cols */
@@ -1154,3 +1155,181 @@ function createPreferencesTable(type) {
 		if (links) links.parentNode.insertBefore(main,links);
 	}
 }
+
+// ED2K/SFV Functions //
+
+// The hash Object holds hashing defaults
+var hashObj = new Object();
+hashObj.usePatterns = true;
+hashObj.convertSpaces = true;
+hashObj.defaultSpacesChar = '_';
+hashObj.spacesChar = hashObj.defaultSpacesChar;
+hashObj.defaultPattern = "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
+hashObj.pattern = hashObj.defaultPattern;
+hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
+hashObj.sfv = hashObj.pattern+".%ext %crc";
+hashObj.validHashes = [ "ed2k", "sfv" ];
+
+var validIdentifiers = ["%ant","%anat","%ept","%epat","%enr","%pn","%fpn","%raw",
+						"%crc","%CRC","%ver","%cen","%dub","%sub","%lang","%flang",
+						"%grp","%grn","%qual","%src","%res","%vcodec","%eps","%atype",
+						"%fid","%aid","%eid","%gid","%dlen","%ext","%ed2k","%uncen",
+						"%acodec","%achans","%hlen","%flen"]
+/* Function that tests if a given identifier is valid
+ * @param identifier The identifier to test
+ * @return true|false
+ */
+function checkIdentifiers(identifier) {
+	for (var i = 0; i < validIdentifiers.length; i++)
+		if (identifier.indexOf(validIdentifiers[i]) >= 0) return true;
+	return false;
+}
+/* Function that creates the link for a given hash
+ * @return void (sets the hash href) 
+ */
+function applyFormat(identifier, file, episode, anime, group) {
+	var originalIdentifier = identifier;
+	var dropIfNull = false;
+	if (identifier.indexOf('<') >= 0) {  
+		originalIdentifier = originalIdentifier.substr(originalIdentifier.indexOf('<')+1,originalIdentifier.indexOf('>')-1);
+		identifier = identifier.match(/(\%[A-Z]+)/i)[0];
+		originalIdentifier = originalIdentifier.replace(identifier,"%replaceme");
+		dropIfNull = true;
+	}
+	//alert('identifier: '+identifier+' ('+originalIdentifier+') exists? '+checkIdentifiers(identifier));
+	if (!checkIdentifiers(identifier)) return ("");
+	identifier = identifier.replace("%ant",anime.getTitle());
+	identifier = identifier.replace("%anat",anime.getAltTitle());
+	identifier = identifier.replace("%ept",episode.getTitle());
+	identifier = identifier.replace("%epat",episode.getAltTitle());
+	if (identifier.indexOf("%enr") >= 0) {
+		var epLen = String((anime.eps) ? anime.eps : anime.epCount);
+		var epFmt = '0000'+episode.epno;
+		epFmt = epFmt.slice(epFmt.length-epLen.length);
+		identifier = identifier.replace("%enr",episode.typeChar+epFmt); 
+	}
+	identifier = identifier.replace("%pn",(anime.type == 'movie') ? "PA" : "EP");
+	identifier = identifier.replace("%fpn",(anime.type == 'movie') ? "Part" : "Episode");
+	if (identifier.indexOf("%raw") >= 0) {
+		if (file.type == 'video' && file.subtitleTracks.length == 0)
+			identifier = identifier.replace("%raw",(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
+		else identifier = identifier.replace("%raw","");
+	}
+	identifier = identifier.replace("%crc",(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
+	identifier = identifier.replace("%CRC",(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
+	identifier = identifier.replace("%ver",(file.version != 'v1') ? file.version : "");
+	identifier = identifier.replace("%cen",(file.isCensored) ? "cen" : "");
+	identifier = identifier.replace("%uncen",(file.isUncensored) ? "uncen" : "");
+	if (identifier.indexOf("%dub") >= 0) {
+		var dub = new Array();
+		for (var i = 0; i < file.audioTracks.length; i++) dub.push(file.audioTracks[i].lang);
+		identifier = identifier.replace("%dub",(dub.length) ? dub.join(',') : "");
+	}
+	if (identifier.indexOf("%sub") >= 0) {
+		var sub = new Array();
+		for (var i = 0; i < file.subtitleTracks.length; i++) sub.push(file.subtitleTracks[i].lang);
+		identifier = identifier.replace("%sub",(sub.length) ? sub.join(',') : "");
+	}
+	if (identifier.indexOf("%lang") >= 0 || identifier.indexOf("%flang") >= 0) {
+		var dub = new Array();
+		for (var i = 0; i < file.audioTracks.length; i++) {
+			if (file.audioTracks[i].lang == "ja") continue;
+			if (identifier.indexOf("%lang") >= 0 && dub.length > 1) { dub.push("+"); break; }
+			dub.push(file.audioTracks[i].lang);
+		}
+		var sub = new Array();
+		for (var i = 0; i < file.subtitleTracks.length; i++) {
+			if (file.subtitleTracks[i].lang == "en") continue;
+			if (identifier.indexOf("%lang") >= 0 && sub.length > 1) { sub.push("+"); break; }
+			sub.push(file.subtitleTracks[i].lang);
+		}
+		var langs = "";
+		if (dub.length) langs += 'dub';
+		if (dub.length && sub.length) langs += '.';
+		if (sub.length) langs += 'sub';
+		if (dub.length || sub.length) langs += '_';
+		langs += dub.join();
+		if (dub.length && sub.length) langs += '.';
+		langs += sub.join();
+		if (langs == 'dub.sub_ja.en') langs = "";
+		if (identifier.indexOf("%lang") >= 0) identifier = identifier.replace("%lang",langs);
+		if (identifier.indexOf("%flang") >= 0) identifier = identifier.replace("%flang",langs);
+	}
+	identifier = identifier.replace("%grp",(group) ? group.shortName : '');
+	identifier = identifier.replace("%grn",(group) ? group.name : '');
+	identifier = identifier.replace("%qual",(file.quality != 'unknown') ? file.quality : "");
+	identifier = identifier.replace("%src",file.source);
+	identifier = identifier.replace("%vcodec",(file.type == 'video') ? file.videoTracks[0].codec : "");
+	identifier = identifier.replace("%acodec",(file.type == 'video' || file.type == 'audio') ? file.audioTracks[0].codec : "");
+	identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
+	identifier = identifier.replace("%res",(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
+	identifier = identifier.replace("%eps",anime.eps);
+	identifier = identifier.replace("%atype",(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");
+	identifier = identifier.replace("%fid",file.id);
+	identifier = identifier.replace("%gid",file.groupId);
+	identifier = identifier.replace("%eid",file.episodeId);
+	identifier = identifier.replace("%aid",file.animeId);
+	identifier = identifier.replace("%flen",file.size);
+	identifier = identifier.replace("%dlen",formatFileSize(file.size,false));
+	identifier = identifier.replace("%hlen",formatFileSize(file.size,true));
+	identifier = identifier.replace("%ext",file.fileType);
+	identifier = identifier.replace("%ed2k",file.ed2k);
+	if (dropIfNull) {
+		if (identifier != '') identifier = originalIdentifier.replace("%replaceme",identifier);
+		else identifier = "";
+	}
+	return (identifier);
+}
+
+/* Function that creates an hash link */
+function createHashLink() {
+	var ahref = this.getElementsByTagName('a')[0];
+	//if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
+	var parentid = this.parentNode.id;
+	var fid = Number((parentid.indexOf('fid_') >= 0) ? this.parentNode.id.split('fid_')[1] : this.parentNode.id.split('f')[1]);
+	var file = files[fid];
+	if (!file) return;
+
+	var episode = episodes[file.episodeId];
+	var curAnime = animes[file.animeId];
+	var group = (file.groupId != 0) ? groups[file.groupId] : null;
+	var possibleHashTypes = this.className.split(' ');
+	var i;
+	var found = false;
+	for (i = 0; i < possibleHashTypes.length; i++) {
+		if (hashObj.validHashes.indexOf(possibleHashTypes[i]) >= 0) { found = true; break; }
+	}
+	if (!found) return;
+	var hashType = possibleHashTypes[i];
+
+	if (!hashObj.usePatterns) hashObj.pattern = hashObj.defaultPattern;
+	var pattern = hashObj[hashType]; 
+	//alert('pattern.in: '+pattern); 
+	var lt = 0; var gt = 0; // Find case '<' and '>' matches
+	for (var i = 0; i < pattern.length; i++) {
+		if (pattern.charAt(i) == '<') lt++;
+		if (pattern.charAt(i) == '>') gt++;
+	}
+	if ((lt == gt) && (lt > 0)) { // only continues if lt == gt
+		while (pattern.lastIndexOf("<") != -1) { // first get rid of the conditional patterns
+			var i = pattern.lastIndexOf("<");
+			var fI = 0;
+			while (pattern.indexOf(">",fI) != -1) {
+				var k = pattern.indexOf(">",fI);
+				if (k < i) {
+					fI = k + 1;
+					continue;
+				} // we have found a pair of thingies
+				var splitstr = pattern.slice(i,k+1);
+				pattern = pattern.replace(splitstr,function(str, offset, s) { return applyFormat(str,file,episode,anime,group); });
+				break; // continue to next match thingie
+			}
+		}
+	}
+	pattern = applyFormat(pattern,file,episode,anime,group);
+	if (hashObj.convertSpaces) pattern = pattern.replace(/ /mgi,hashObj.spacesChar);
+	//alert('pattern.out: '+pattern);
+	ahref.href = pattern+'/';
+	file.ed2klink = pattern+'/';
+}
+

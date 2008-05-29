@@ -1006,8 +1006,6 @@ function sortcol(node) {
 	container.style.display = '';
 }
 
-// ED2K/SFV Functions //
-
 // The hash Object holds hashing defaults
 var hashObj = new Object();
 hashObj.usePatterns = true;
