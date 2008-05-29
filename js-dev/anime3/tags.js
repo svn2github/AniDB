@@ -43,10 +43,10 @@ function showResults() {
 		var tag = tags[i];
 		var b = document.createElement('b');
 		var span = document.createElement('span');
-		var si = tag.name.toLowerCase().indexOf(searchString);
+		var si = tag.name.toLowerCase().indexOf(searchString.toLowerCase());
 		if (si >= 0) {
-			var firstBlock = document.createTextNode(tag.name.substring(0,si-1));
-			var middleBlock = document.createTextNode(tag.name.substring(si,searchString.length));
+			var firstBlock = document.createTextNode(tag.name.substring(0,si));
+			var middleBlock = document.createTextNode(tag.name.substr(si,searchString.length));
 			var lastBlock = document.createTextNode(tag.name.substring(si+searchString.length,tag.name.length));
 			span.appendChild(firstBlock);
 			b.appendChild(middleBlock);
@@ -54,8 +54,8 @@ function showResults() {
 			span.appendChild(lastBlock);
 		} else continue;
 		span.id = 'tag_'+i;
-		span.onmouseout = function onmouseout(event) { this.style.backgroundColor = 'transparent'; }
-		span.onmouseover = function onmouseover(event) { this.style.backgroundColor = '#FFCC99'; }
+		span.onmouseout = function onmouseout(event) { this.style.pointer = 'none'; this.style.textDecoration = 'none'; }
+		span.onmouseover = function onmouseover(event) { this.style.cursor = 'pointer'; this.style.textDecoration = 'underline'; }
 		span.onclick = function onclick(event) {
 			var id = Number(this.id.substr(4,this.id.length));
 			var tag = tags[id];
