@@ -73,7 +73,11 @@ function showResults() {
 }
 
 function checkSearchString() {
-	if (this.value.length < 4 && !override) return;
+	if (this.value.length < 4 && !override) {
+		resultsDiv = document.getElementById('resultsDiv');
+		if (resultsDiv) resultsDiv.parentNode.removeChild(resultsDiv);
+		return;
+	}
 	var ll = lastSearch.length;
 	var cl = this.value.length;
 	var c1 = lastSearch.substr(0,Math.min(ll,cl));
