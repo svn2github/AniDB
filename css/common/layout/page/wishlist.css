@@ -1,4 +1,4 @@
-#layout-main div.mywishlist_all table th.title
+#layout-main div.mywishlist_all table th.comment
 {
-	width: 98%;
+	min-width: 15%;
 }
