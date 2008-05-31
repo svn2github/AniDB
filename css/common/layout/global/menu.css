@@ -32,6 +32,7 @@
 	clear: left;
 }
 
+#layout-main div.g_menu.wishlist_menu,
 #layout-main div.g_menu.mylist_menu
 {
 	width: 15.8em;
