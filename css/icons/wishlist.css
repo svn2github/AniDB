@@ -18,7 +18,7 @@
 	background-image: url(../icons/silk/wishlist_towatch.png);
 }
 
-*.i_wishlist_unknown
+*.i_wishlist_undefined
 {
-	background-image: url(../icons/silk/wishlist_unknown.png);
+	background-image: url(../icons/silk/wishlist_undefined.png);
 }
