@@ -38,22 +38,29 @@
 	margin-left:1em;
 }
 
+#layout-main div.g_menu.wishlist_menu div.wishlistfilters,
+#layout-main div.g_menu.wishlist_menu div.filestatefilters,
 #layout-main div.g_menu.mylist_menu div.filestatefilters
 {
 	margin-top:1em;
 }
 
+#layout-main div.g_menu.wishlist_menu div.filters ul li,
+#layout-main div.g_menu.wishlist_menu div.filestatefilters ul li,
+#layout-main div.g_menu.wishlist_menu div.wishlistfilters ul li,
 #layout-main div.g_menu.mylist_menu div.filters ul li,
 #layout-main div.g_menu.mylist_menu div.filestatefilters ul li
 {
     padding:5px;
 }
 
+#layout-main div.g_menu.wishlist_menu label,
 #layout-main div.g_menu.mylist_menu label
 {
     display:block;
 }
 
+#layout-main div.g_menu.wishlist_menu div.user span.user,
 #layout-main div.g_menu.mylist_menu div.user span.user
 {
     float: none;
@@ -62,6 +69,7 @@
     display:block;
 }
 
+#layout-main div.g_menu.wishlist_menu p,
 #layout-main div.g_menu.mylist_menu p
 {
     margin-top: 0.2em;
