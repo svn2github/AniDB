@@ -1,12 +1,133 @@
-@import "../zakura/zakura.css";
+@import "../common/normalize.css";
+@import "../common/layout/default.css";
+@import "../common/layout/common.css";
+@import "../common/layout/global/all.css";
+@import "../common/layout/page/all.css";
+@import "../icons/all.css";
+@import "../common/style/color/special.css";
+@import "../common/style/text/default.css";
+@import "../common/style/content/page-anime.css";
+
+
+/* FMA specific styles */
+@import "style-content.css";
+@import "style-icons.css";
 @import "global.css";
 @import "layout.css";
 
-/*---------------------------------
-				@MAIN
-	- news		- top10 rightbar
-----------------------------------*/
 /* container - right sidebar */
+div.main_all div.rightbar {
+	float: right;
+	width: 25%;
+	background: #fcfafb url(images/layout/mamimi.png) no-repeat right top;
+	padding: 0.5em 0 0;
+	font-size: 0.95em;
+	border: 1px solid #e4e4e4;
+	border-right-color: #d5cccc;
+	border-bottom-color: #d5cccc;
+}
+
+/* rightbar elements */
+div.main_all div.rightbar h3 {
+	color: #666666;
+	padding: 0.3em 0.75em;
+	margin: 1.5em 0 0;
+	font-size: 1.3em;
+	background-color: #FEF9E9;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #FCECBC;
+	border-bottom-color: #FCECBC;
+}
+div.main_all div.rightbar h4 {
+	color: #2b5288;
+	padding: 0.3em 1em;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+div.main_all div.rightbar p {
+	margin: 1em;
+	background: transparent url(images/layout/trans-white.png) repeat left top;
+	border-color: #ffdafc;
+	padding: 0.5em 0.2em;
+	margin: 0;
+	text-align: center;
+}
+div#layout-content div.rightbar p.g_vital a, 
+div#layout-content div.rightbar p.g_vital a:link, 
+div#layout-content div.rightbar p.g_vital a:visited {
+	border-bottom: 1px dotted #fd0576;
+	color: #fd0576;
+	font-weight: bold;
+}
+div#layout-content div.rightbar p.g_vital a:hover, 
+div#layout-content div.rightbar p.g_vital a:active {
+	color: #d90085;
+	border-bottom: 1px dotted #d90085;
+}
+
+/* rightbar top 10 lists */
+div.main_all div.rightbar ol {
+	margin-top: 0;
+	margin-left: 0;
+	padding-left: 0;
+}
+div.main_all div.rightbar ol:last-child {
+	margin-bottom: 0;
+}
+div.main_all div.rightbar ol li {
+	padding: 0.3em;
+	padding-left: 1em;
+	list-style: none;
+	position: relative;
+	border-bottom: 1px solid #e4e4e4;
+}
+div.main_all div.rightbar ol li span {
+	position: absolute;
+	top: 0.3em;
+	left: 1em;
+}
+div.main_all div.rightbar ol li.g_odd {
+	background: #fff;
+}
+
+div.main_all div.rightbar ol li a {
+	margin-left: 20%;
+	display: table;
+	border-bottom: none !important;
+}
+
+/* container - news */
+div.main_all div.news {
+	margin: 0 28% 1em 0;
+	padding: 0.5em 1em;
+}
+
+/* news item elements */
+div.main_all div.newsitem {
+	padding-left: 40px;
+	background: transparent url(images/layout/flower1.png) no-repeat left top;
+	border-bottom: 1px solid #f3e7ff;
+	padding-bottom: 1.2em;
+}
+div.main_all div.news h4 {
+	margin-top: 0.7em;
+	margin-bottom: -0.1em;
+	font-size: 1.5em;
+	color: #000;
+}
+div.main_all div.news span.stamp {
+	display: block;
+	color: #859efd;
+	padding: 0.2em;
+	font-size: 0.85em;
+}
+div.main_all div.newsitem:last-child {
+	border-bottom: 0;
+}
+
 
 #layout-main h1 {
 	font-weight:bold;
@@ -17,10 +138,7 @@
 	text-align: left;
 }
 
-/* rightbar elements */
-div.main_all div.rightbar h3 {
-	font-size:1.3em;
-}
+
 
 /* news item elements */
 div.main_all div.newsitem {
@@ -37,6 +155,10 @@ div.main_all div.news h4 {
 
 #layout-main div.block > div.data{
 	width: 65%;
+}
+#layout-main div.block div.data div.tabbed_pane table,
+#layout-main div.block div.data > div > table{
+	width: 99%;
 }
 
 #layout-main div.main_all div.news p.comment
@@ -73,6 +195,7 @@ div.main_all div.news h4 {
 {
 	float: right;
 	margin: 10px;
+	display:inline;
 }
 
 #layout-main div.g_timedentry div.body
@@ -183,5 +306,54 @@ div.main_all div.news h4 {
 	margin: 5px 0pt;
 }
 
+/** TABS **/
+
+#layout-main div.tabbed_pane div.body
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgb(86, 90, 185);
+}
+#layout-main div.tabbed_pane div.body div.* {
+	left: 0px;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: rgb(53, 58, 143);
+	color: white;
+}
+
+#layout-tabs ul li.selected a
+{
+	background-color: rgb(53, 58, 143);
+}
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: rgb(53, 58, 143);
+	color: white;
+}
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color: rgb(86, 90, 185);
+	color: rgb(255, 255, 255);
+	padding: 4px;
+}
+
+div.pagination span a
+{
+	border: 1px solid rgb(86, 90, 185);
+	background-color: rgb(86, 90, 185);
+	color: rgb(255, 255, 255);
+}
+
+div.pagination span a:hover,
+div.pagination span strong
+{
+	border: 1px solid rgb(53, 58, 143);
+	background-color: rgb(53, 58, 143);
+	color: #FFFFFF;
+}
 
 

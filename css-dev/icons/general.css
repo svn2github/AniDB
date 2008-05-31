@@ -83,9 +83,9 @@
 	background-image: url(../icons/test/arrow_inactive.png);
 }
 
-*.i_massaddtomylist
+*.i_verified
 {
-	background-image: url(../icons/orange/massaddtomylist.png);
+	background-image: url(../icons/silk/verified.png);
 }
 
 #layout-main th a.inactive{

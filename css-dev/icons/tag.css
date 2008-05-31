@@ -25,3 +25,10 @@
 	height: 16px;
 	background-image: url(../icons/test/tag_edit.png);
 }
+
+*.i_tag_merge
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/test/tag_merge.png);
+}

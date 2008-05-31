@@ -1,0 +1,24 @@
+*.i_wishlist_blacklist
+{
+	background-image: url(../icons/silk/wishlist_blacklist.png);
+}
+
+*.i_wishlist_buddy
+{
+	background-image: url(../icons/silk/wishlist_buddy.png);
+}
+
+*.i_wishlist_toget
+{
+	background-image: url(../icons/silk/wishlist_toget.png);
+}
+
+*.i_wishlist_towatch
+{
+	background-image: url(../icons/silk/wishlist_towatch.png);
+}
+
+*.i_wishlist_undefined
+{
+	background-image: url(../icons/silk/wishlist_undefined.png);
+}
