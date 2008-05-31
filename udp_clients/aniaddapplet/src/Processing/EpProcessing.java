@@ -244,48 +244,47 @@ public class EpProcessing {
         if (FileIndex < 0) return; //File not found (Todo: throw error)
         
         cFileInfo ProcFile = Files.get(FileIndex);
+        ProcFile.Data.put("FuncDBFileInfo", true);
         System.out.println("AniDBInfoRspnd: " + ProcFile.FilePath.getName());
         
-        if (RespID == 322) return; //Multiple files with FId (Todo: Throw error)
-        
-        if (RespID == 320) {
+        if (RespID == 322) {
+            return; //Multiple files with FId (Todo: Throw error)
+        } else if(RespID == 320) {
             ProcFile.MLState = cFileInfo.eMyListState.unknown;
             UpdateFileRow(FileIndex);
-            return;
+        } else {
+            ArrayList<String> DF = Query.RcvdMsg.DataField;
+            ProcFile.Data.put("DB_FId", DF.get(0));
+            ProcFile.Data.put("DB_AId", DF.get(1));
+            ProcFile.Data.put("DB_EId", DF.get(2));
+            ProcFile.Data.put("DB_GId", DF.get(3));
+            ProcFile.Data.put("DB_LId", DF.get(4));
+            ProcFile.Data.put("DB_State", DF.get(5));
+            ProcFile.Data.put("DB_FileName", DF.get(6));
+            ProcFile.Data.put("DB_Group_Long", DF.get(7));
+            ProcFile.Data.put("DB_Group_Short", DF.get(8));
+            ProcFile.Data.put("DB_EpNo", DF.get(9));
+            ProcFile.Data.put("DB_EpN_English", DF.get(10));
+            ProcFile.Data.put("DB_EpN_Romaji", DF.get(11));
+            ProcFile.Data.put("DB_EpN_Kanji", DF.get(12));
+            ProcFile.Data.put("DB_Type", DF.get(13));
+            ProcFile.Data.put("DB_SN_Romaji", DF.get(14));
+            ProcFile.Data.put("DB_SN_Kanji", DF.get(15));
+            ProcFile.Data.put("DB_SN_English", DF.get(16));
+            ProcFile.Data.put("DB_SN_Other", DF.get(17));
+            ProcFile.Data.put("DB_SN_Short", DF.get(18));
+            ProcFile.Data.put("DB_Synonym", DF.get(19));
+
+            ProcFile.FileState = cFileInfo.eFileState.gotfileinfo;
+            ProcFile.Data.put("Renamed", GetRenamedFileName(ProcFile, UserSettings.Type));
+            UpdateFileRow(FileIndex);
+
+            //UploadFileInfo(ProcFile); //no outside communication allowed
         }
-        
-        ArrayList<String> DF = Query.RcvdMsg.DataField;
-        ProcFile.Data.put("DB_FId", DF.get(0));
-        ProcFile.Data.put("DB_AId", DF.get(1));
-        ProcFile.Data.put("DB_EId", DF.get(2));
-        ProcFile.Data.put("DB_GId", DF.get(3));
-        ProcFile.Data.put("DB_LId", DF.get(4));
-        ProcFile.Data.put("DB_State", DF.get(5));
-        ProcFile.Data.put("DB_FileName", DF.get(6));
-        ProcFile.Data.put("DB_Group_Long", DF.get(7));
-        ProcFile.Data.put("DB_Group_Short", DF.get(8));
-        ProcFile.Data.put("DB_EpNo", DF.get(9));
-        ProcFile.Data.put("DB_EpN_English", DF.get(10));
-        ProcFile.Data.put("DB_EpN_Romaji", DF.get(11));
-        ProcFile.Data.put("DB_EpN_Kanji", DF.get(12));
-        ProcFile.Data.put("DB_Type", DF.get(13));
-        ProcFile.Data.put("DB_SN_Romaji", DF.get(14));
-        ProcFile.Data.put("DB_SN_Kanji", DF.get(15));
-        ProcFile.Data.put("DB_SN_English", DF.get(16));
-        ProcFile.Data.put("DB_SN_Other", DF.get(17));
-        ProcFile.Data.put("DB_SN_Short", DF.get(18));
-        ProcFile.Data.put("DB_Synonym", DF.get(19));
-        
-        ProcFile.FileState = cFileInfo.eFileState.gotfileinfo;
-        ProcFile.Data.put("Renamed", GetRenamedFileName(ProcFile, UserSettings.Type));
-        UpdateFileRow(FileIndex);
-        
-        //UploadFileInfo(ProcFile); //not outside communication allowed
-        
-        if (ProcFile.Data.get("FinalProc") != null) {
+          
+        if (!ProcFile.Data.containsKey("FinalProc") && ProcFile.Data.containsKey("FuncMyList")) {
             FinalProcessing(FileIndex); //Call FinalProcessing after AniDBMyListRspnd & AniDBInfoRspnd only once
         } else {
-            ProcFile.Data.put("FinalProc", true);
         }
     }
     
@@ -297,6 +296,7 @@ public class EpProcessing {
         if (FileIndex < 0) return; //File not found (Todo: throw error)
         
         cFileInfo ProcFile = Files.get(FileIndex);
+        ProcFile.Data.put("FuncMyList", true);
         System.out.println("AniDBMyListRspnd: " + ProcFile.FilePath.getName());
         
         if (RespID == 210) {
@@ -312,10 +312,9 @@ public class EpProcessing {
         }
         UpdateFileRow(FileIndex);
         
-        if (ProcFile.Data.get("FinalProc") != null) {
+        if (!ProcFile.Data.containsKey("FinalProc") && ProcFile.Data.containsKey("FuncDBFileInfo")) {
             FinalProcessing(FileIndex); //Call FinalProcessing after AniDBMyListRspnd & AniDBInfoRspnd only once
         } else {
-            ProcFile.Data.put("FinalProc", true);
         }
     }
     
@@ -339,11 +338,13 @@ public class EpProcessing {
     }
     
     void FinalProcessing(int FileIndex) {
+        Files.get(FileIndex).Data.put("FinalProc", true);
+        
         if (Files.get(FileIndex).Data.get("Vote") != null) {
             RequestDBVote(Files.get(FileIndex));
         }
         
-        if (CC.GUI.shouldRename()) { //Check if user want to rename files
+        if (CC.GUI.shouldRename() && Files.get(FileIndex).FileState == cFileInfo.eFileState.gotfileinfo) { //Check if user want to rename files
             File RenamedFile = new File((String)Files.get(FileIndex).Data.get("Renamed"));
             if (Files.get(FileIndex).FilePath.renameTo(RenamedFile)) {
                 System.out.println("File renamed");
@@ -357,6 +358,14 @@ public class EpProcessing {
         
         CC.GUI.editFile(FileIndex);
         System.out.println("I was here");
+        
+        boolean Done=true;
+        for (cFileInfo FileInfo : Files) if(!FileInfo.Data.containsKey("FinalProc")) Done = false;
+        if(Done) {
+            UI.UIProcDone ReportDialog = new UI.UIProcDone(CC);
+            ReportDialog.setSize(400, 200);
+            ReportDialog.setVisible(true);
+        }
     }
     
 /**
