@@ -37,18 +37,18 @@ function fetchData(id,type) {
 	if (''+window.location.hostname == '') {
 		if (id) xhttpRequestFetch(req, 'xml/'+type+'search.xml', parseData);
 		else xhttpRequestFetch(req, 'xml/producernsearch.xml', parseData);
-  } else {
+	} else {
 		if (id) xhttpRequestFetch(req, 'animedb.pl?show=xml&t='+type+'search&id='+id, parseData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=producernsearch&search='+escape(searchString), parseData);
 	}
 }
 
 function CEntity(node) {
-  this.id = 0;
+	this.id = 0;
 	if (node.getAttribute('coid')) this.id = Number(node.getAttribute('coid'));
 	if (node.getAttribute('pid')) this.id = Number(node.getAttribute('pid'));
 	if (node.getAttribute('cid')) this.id = Number(node.getAttribute('cid'));
-  this.name = node.getAttribute('name');
+	this.name = node.getAttribute('name');
 }
 
 function CTitle(node) {
@@ -59,8 +59,8 @@ function CTitle(node) {
 }
 
 function CCompany(node) {
-  this.id = Number(node.getAttribute('coid'));
-  this.name = "";
+	this.id = Number(node.getAttribute('coid'));
+	this.name = "";
 	this.titles = new Array();
 	for (var i = 0; i < node.childNodes.length; i++) {
 		var childNode = node.childNodes[i];
@@ -82,7 +82,7 @@ function CCompany(node) {
 }
 
 function CPerson(node) {
-  this.id = Number(node.getAttribute('pid'));
+	this.id = Number(node.getAttribute('pid'));
 	this.name = "";
 	this.titles = new Array();
 	for (var i = 0; i < node.childNodes.length; i++) {
@@ -105,7 +105,7 @@ function CPerson(node) {
 }
 
 function CCollaboration(node) {
-  this.id = Number(node.getAttribute('cid'));
+	this.id = Number(node.getAttribute('cid'));
 	this.name = "";
 	this.titles = new Array();
 	for (var i = 0; i < node.childNodes.length; i++) {
@@ -334,13 +334,13 @@ function createSearchButton(parentNode,name) {
 function createSearchAgainButton(parentNode,name) {
 	var button = createBasicButton(name,' Search again ');
 	button.onclick = function replaceBox() {	searchbox.value = "";
-																						newsearchbox = searchbox.cloneNode(true);
-																						replaceCell.replaceChild(newsearchbox,globalSelect); 
-																						inputbutton.value = " Search ";
-																						inputbutton.onclick = function updateSearchString() {	searchString = newsearchbox.value; newsearchbox.value = 'please wait while searching...'; fetchData(); }
-																						while (titlesCell.childNodes.length) titlesCell.removeChild(titlesCell.firstChild);
-																						titlesCell.appendChild(document.createTextNode('- search again -'));
-																					}
+												newsearchbox = searchbox.cloneNode(true);
+												replaceCell.replaceChild(newsearchbox,globalSelect); 
+												inputbutton.value = " Search ";
+												inputbutton.onclick = function updateSearchString() {	searchString = newsearchbox.value; newsearchbox.value = 'please wait while searching...'; fetchData(); }
+												while (titlesCell.childNodes.length) titlesCell.removeChild(titlesCell.firstChild);
+												titlesCell.appendChild(document.createTextNode('- search again -'));
+											}
 	if (parentNode && parentNode != '') parentNode.appendChild(button);
 	else return button;
 }
