@@ -358,7 +358,7 @@ div.pagination span strong
 
 
 /*TABS*/
-#layout-content
+#layout-tabs > #layout-content
 {
 	margin-top: 2em;
 }
