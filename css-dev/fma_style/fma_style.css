@@ -357,3 +357,46 @@ div.pagination span strong
 }
 
 
+/*TABS*/
+#layout-content
+{
+	margin-top: 2em;
+}
+
+#layout-tabs { 
+	display: block;
+	margin-top: -1.7em;
+	padding-left: 18px;
+}
+
+#layout-tabs ul.main-tabs li { 
+	background-color: #353A8F;
+	padding: 4px 4px 2px 4px;
+	line-height: 1.6em;
+	text-transform: capitalize;
+	color: white;
+	line-height: 01.6em;
+	padding-left: 02px;
+	display: inline;
+}
+
+#layout-tabs ul li a.selected,
+#layout-tabs ul.main-tabs li.selected a 
+{
+	background-color: transparent;
+}
+
+#layout-tabs ul li a.selected,
+#layout-tabs ul.main-tabs li a
+{
+	color: white;
+}
+
+#layout-tabs ul.main-tabs li a:hover,
+#layout-tabs ul.main-tabs li:hover,
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li.selected a
+{
+	background-color: #565AB9;
+	color: white;
+}
