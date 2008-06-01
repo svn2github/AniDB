@@ -716,13 +716,13 @@ function updateEpisodeTable() {
 					if (titleSpan) curTitle = nodeData(titleSpan);
 					if (episodeTitleLang != episodeAltTitleLang && 
 						episode.titles[episodeAltTitleLang] && 
-						episode.titles[episodeAltTitleLang] != '' &&
-						episode.titles[episodeAltTitleLang] != curTitle) altTitle = episode.titles[episodeAltTitleLang];
+						episode.titles[episodeAltTitleLang]['title'] != '' &&
+						episode.titles[episodeAltTitleLang]['title'] != curTitle) altTitle = episode.titles[episodeAltTitleLang]['title'];
 					if (episodeTitleLang != 'ja' &&
 						episodeAltTitleLang != 'ja' &&
 						episode.titles['ja'] && 
-						episode.titles['ja'] != '' && 
-						episode.titles['ja'] != altTitle) jaTitle = episode.titles['ja'];
+						episode.titles['ja']['title'] != '' && 
+						episode.titles['ja']['title'] != altTitle) jaTitle = episode.titles['ja']['title'];
 					if (altTitle != '' || jaTitle != '') {
 						if (episodeTitleDisplay == 1 || (episodeTitleDisplay == 4 && jaTitle == ''))
 							titleSpan.firstChild.nodeValue += ' ('+altTitle+')';
