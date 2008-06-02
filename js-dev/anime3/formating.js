@@ -235,6 +235,11 @@ function findSelection() {
  * @param textOnly true if only the text of the link is needed
  */
 function createLink(obj,fTA,val,attribute,sel,textOnly) {
+	var acceptedVals = ['anime','creq','ep','file','group','producer','reviews','mylist',
+						'votes','titles','producers','genres','cats','relations','user',
+						'review','groupcmts','wiki','forum','furum.topic','forum.board',
+						'forum.post','tracker'];
+	if (acceptedVals.indexOf(val) < 0) return; // not a valid thingie
 	if (!textOnly && (!obj || !fTA)) return; // can not continue
 	if (!val) {
 		var selects = fTA.form.getElementsByTagName('select');
@@ -380,7 +385,8 @@ function make () {
 
 /* Link replacement functions */
 function convertLinksInput(mstr, m1, m2, m3, offset, s) {
-	return createLink(null,null,m1,m2,m3,true);
+	var link = createLink(null,null,m1,m2,m3,true);
+	return (link == null ? mstr : link);
 }
 function convertLinksOutput(mstr, m1, m2, m3, offset, s) {
 	var href = att = type = "";
@@ -422,7 +428,7 @@ function cleanHTMLSource(str) {
 
 	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|br|pre) [^>]*?\>/mgi,'<$1>');
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|br|pre) [^>]*?\>/mgi,'</$1>');
-	/* waiting on perl release */
+
 	str = str.replace(/\<p\>/mgi,'<br />');
 	str = str.replace(/\<\/p\>/mgi,'');
 	
@@ -587,6 +593,7 @@ function init_formating() {
 		var doc = iframe.contentWindow.document;
 		// Write the textarea's content into the iframe
 		doc.open();
+		/*
 		var htmlNode = doc.firstChild; // only works for firefox
 		if (htmlNode) {
 			var head = null;
@@ -614,6 +621,7 @@ function init_formating() {
 			//x.insertRule('body { background-image: none; }',x.cssRules.length);
 			x.insertRule('html { background-image: none; }',x.cssRules.length);
 		}
+		*/
 		doc.write(content);
 		doc.close();
 		// Make the iframe editable in both Mozilla and IE
