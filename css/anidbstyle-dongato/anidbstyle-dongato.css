@@ -190,12 +190,6 @@ div.review h2
 	height: 10em;
 }
 
-#wysiwyg_0
-{
-	border: 1px solid #CCCCCC;
-	background-color: #FFFFFF;
-}
-
 /* profile styling */
 *.i_inline
 {
@@ -455,9 +449,10 @@ div.permissions span.name
 	min-width: 20em;
 }
 
-/* more fixes for a design fuckup by anidb 'devs' */
+/* right alignement for some icons */
 table.animelist td.name span.icons,
-table.filelist td.name span.icons
+table.filelist td.name span.icons,
+table.wishlist td.name span.icons
 {
 	float: right;
 }
@@ -474,6 +469,13 @@ h4
 }
 
 /* fix for news comment */
+
+#wysiwyg_0
+{
+	border: 1px inset #CCCCCC;
+	margin: 4px;
+	padding: 2px;
+}
 
 div.news p.comment
 {
@@ -496,4 +498,23 @@ div.cmt_all div.topic_actions
 div.g_timedentry.comment dd.user_icons
 {
 	margin-top: 6px;
+}
+
+/* fix for Add button in comments */
+div.g_section.cmt_add input[value="Add"]
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1em;
+	width: 60px;
+}
+
+/* styling for review headers */
+div.g_section.animeatt_reviews > div.review > h4
+{
+	color: #BBBBBB;
+	background-color: #494D59;
+	padding: 2px;
+	width: 80%;
 }
