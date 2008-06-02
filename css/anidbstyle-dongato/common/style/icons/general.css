@@ -84,6 +84,11 @@
 	background-image: url(http://static.anidb.net/css/icons/test/arrow_inactive.png);
 }
 
+*.i_verified
+{
+	background-image: url(../../../images/verified.png);
+}
+
 #layout-main th a.inactive
 {
 	background: url(http://static.anidb.net/css/icons/test/arrow_inactive.png) center left no-repeat;

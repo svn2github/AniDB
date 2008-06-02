@@ -501,7 +501,8 @@ div.g_timedentry.comment dd.user_icons
 }
 
 /* fix for Add button in comments */
-div.g_section.cmt_add input[value="Add"]
+div.g_section.cmt_add input[value="Add"],
+div.g_section.wishlist button[value="Update"]
 {
 	display: block;
 	margin-left: auto;
