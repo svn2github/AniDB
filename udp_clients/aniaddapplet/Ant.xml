@@ -4,7 +4,7 @@
 <!-- (If you delete it and reopen the project it will be recreated.) -->
 <project name="AniAdd" default="default" basedir=".">
     <description>Builds, tests, and runs the project AniAdd.</description>
-    <import file="nbproject/build-impl.xml"/>
+    <import file="nbproject/AniAdd-impl.xml"/>
 	
     <target name="-post-jar">
 		<signjar jar="${dist.dir}/AniAdd.jar" alias="DvdKhl" storepass=""/>
