@@ -1,8 +1,10 @@
 @import "../icons/all.css";
 @import "../common/layout/page/latestanimes.css";
 @import "../common/layout/page/animeatt.css";
+@import "../common/layout/page/tags.css";
 @import "../common/layout/global/tabbed_pane.css";
 @import "../common/layout/global/timedentry.css";
+@import "../common/layout/global/menu.css";
 @import "../common/style/color/quotebox-default.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
@@ -1081,23 +1083,26 @@ body.nonav #layout-content h1
 {
 	text-align: center;
 }
-#layout-content div.genren_all a.i_icon
+#layout-content div.genren_all a.i_icon,
+#layout-content #cattree a.i_icon
 {
 	position: relative;
 	right: 18px;
 	float: left;
 	margin-right: -15px;
 }
-#layout-content div.genren_all li
+#layout-content div.genren_all li,
+#layout-content #cattree li
 {
 	list-style: none outside;
 	line-height: 14px;
 }
-#layout-content div.genren_all li span
+#layout-content div.genren_all li span,
+#layout-content #cattree li span
 {
 	display: block;
 }
-#layout-content div.genren_all li.collapsed ul
+#layout-content #cattree li.collapsed ul
 {
 	display: none;
 }
@@ -1540,7 +1545,8 @@ body.nonav #layout-content h1
 	margin-right: 12em;
 	clear: none;
 }
-#layout-content div.userpage_all
+#layout-content div.userpage_all,
+#layout-content div.myplace_all
 {
 	min-height:60em;
 }
@@ -1709,7 +1715,7 @@ a.i_icon:hover, a.i_inline:hover
 {
 	margin-bottom: 0.5em;
 }
-#layout-content tr th.field
+#layout-main tr th.field
 {
 	background: inherit;
 }
@@ -1840,17 +1846,12 @@ a.i_icon:hover, a.i_inline:hover
 {
 	padding-left: 1em;
 }
-#layout-content div.profile_all > div
-{
-	display: table;
-	margin-left: auto;
-	margin-right: auto;
-}
+
 #layout-content div.profile_all > div > div,
 #layout-content div.profile_all > div form > div
 {
 	display: table-cell;
-	padding: 0.3em;
+
 }
 #layout-content div.profile_all .g_info
 {
@@ -1965,81 +1966,10 @@ a.i_icon:hover, a.i_inline:hover
 }
 #wysiwyg_0
 {
-	background-color: white;
+	background-color: black;
 	border: 0;
 }
-/*formating stuff*/
-#layout-content input.f_buddy
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/user.gif);
-	text-indent: -5000px;
-}
-#layout-content span.f_separator
-{
-	display: block;
-	float: left;
-	width: 5px;
-	height: 20px;
-	background: transparent url(../icons/formating/separator.gif) no-repeat;
-	text-indent: -5000px;
-}
-#layout-content input.f_mouseover,
-#layout-content input.f_selected
-{
-	border-color: #89aad1;
-	background-color: #e8f0fa;
-}
-#layout-content input.f_bold
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/bold.gif);
-	text-indent: -5000px;
-}
-#layout-content input.f_italic
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/italic.gif);
-	text-indent: -5000px;
-}
-#layout-content input.f_underline
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/underline.gif);
-	text-indent: -5000px;
-}
-#layout-content input.f_strikethrough
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/strikethrough.gif);
-	text-indent: -5000px;
-}
-#layout-content input.f_unorderedlist
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/unorderedlist.gif);
-	text-indent: -5000px;
-}
-#layout-content input.f_orderedlist
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/orderedlist.gif);
-	text-indent: -5000px;
-}
-#layout-content input.f_link
-{
-	width: 23px;
-	height: 23px;
-	background-image: url(../icons/formating/link.gif);
-	text-indent: -5000px;
-}
+
 #layout-overlay
 {
 	position: absolute;
@@ -2189,4 +2119,148 @@ text-transform: lowercase;
 #layout-nav #layout-menu li.alert > span
 {
 color: red;
+}
+#layout-main div.animelist_all td.awards  span.i_icon
+{
+display: -moz-inline-box;
+display: inline-block;
+}
+#layout-content #layout-main div.ed2kdump_all table.filelist .not
+{
+background-image: url(images/bluepixel.png);
+}
+#layout-content #layout-main div.ed2kdump_all table.filelist .unknown
+{
+background-image: url(images/badredpixel.png);
+}
+#layout-content #layout-main div.ed2kdump_all table.filelist .in
+{
+background-image: url(images/greenpixel.png);
+}
+#layout-main div.cmt_entries div.comment
+{
+margin-left: 1em;
+margin-right: 1em;
+border: #898989 1px dashed;
+}
+#layout-main div.g_timedentry
+{
+margin-bottom: 0;
+padding-bottom: 0;
+}
+#layout-main div.cmt_entries a.username-colored
+{
+color: #ff6000;
+}
+#layout-main div.cmt_entries dl.profile dd
+{
+color: #5aacd3;
+}
+#layout-main div.cmt_entries dl.profile dd strong
+{
+color: #FFFFFF;
+}
+#layout-main div.cmt_entries dl.profile
+{
+width: 16em;
+border-right: #898989 1px dashed;
+}
+#layout-main div.cmt_entries div.quotebody
+{
+margin-left: 2em;
+background: url(images/bg_2.gif);
+border: #898989 1px dashed;
+}
+#layout-main div.cmt_entries div.quotebody div.quoteof
+{
+color: #5aacd3;
+font-weight: bold;
+margin-left: 0.5em;
+}
+#layout-main div.cmt_entries div.quotebody div.quote
+{
+margin-left: 1.4em;
+margin-bottom: 0.5em;
+}
+div.pagination, div.display_options
+{
+margin-left: 1.5em;
+}
+#layout-main div.cmt_entries hr
+{
+border-top: #898989 1px dashed;
+border-top: #898989 1px dashed;
+}
+#layout-content #layout-main div.myplace_all div.latest,
+#layout-content #layout-main div.userpage_all div.latest,
+#layout-content #layout-main div.userpage_all div.userdetails p,
+#layout-content #layout-main div.userpage_all div.userprefs
+{
+max-width: 650px;
+margin-left: auto;
+margin-right: auto;
+}
+#layout-content #layout-main div.userpage_all div.stats div.stats_roles td,
+#layout-content #layout-main div.myplace_all div.stats div.stats_roles td,
+#layout-content #layout-main div.preferences ul li
+{
+white-space: nowrap;
+}
+div.filters
+{
+margin-left: auto;
+margin-right: auto;
+width: auto;
+}
+#layout-main div.mylisthistory div.image
+{
+background: #FFFFFF;
+}
+#layout-main div.tabbed_pane li.tab
+{
+background: url(images/whitepixel.png);
+}
+#layout-main div.tabbed_pane li.tab.selected
+{
+background: url(images/orangepixel.png);
+}
+#layout-content #layout-main div.tabbed_pane ul.contribute li.g_odd
+{
+background: url(images/bg_2.gif);
+}
+#layout-content #layout-main div.latestanimes_all div.latestanimes_anime h3
+{
+text-align: center;
+}
+#layout-main div.latestanimes_anime
+{
+padding: auto;
+margin: auto;
+width: auto;
+}
+#layout-main div.latestanimes_anime div.g_image img
+{
+float: left;
+padding-left: 30%;
+}
+
+#layout-main div.profile_all div.tabbed_pane
+{
+width: 100%;
+}
+#tab5_pane div.permissions div label select
+{
+display: block;
+margin-left: 13.5em;
+margin-top: -1em;
+width: 250px;
+}
+#tab7_pane textarea
+{
+width: 500px;
+height: 350px;
+}
+#layout-main div.addanime_all textarea
+{
+width: 100%;
 }
