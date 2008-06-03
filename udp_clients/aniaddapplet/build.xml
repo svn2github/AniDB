@@ -6,8 +6,19 @@
     <description>Builds, tests, and runs the project AniAdd.</description>
     <import file="nbproject/build-impl.xml"/>
 	
-    <target name="-post-jar">
-		<signjar jar="${dist.dir}/AniAdd.jar" alias="DvdKhl" storepass=""/>
+    <target depends="FailSafeGenKey" name="-post-jar">
+        <signjar jar="${dist.dir}/AniAdd.jar" alias="AD" keystore=".ad" storepass="secret"/>
+    </target>
+
+    <target name="FailSafeGenKey" if="generatekey">
+        <genkey alias="AD" storepass="secret" keystore=".ad">
+            <dname>
+                <param name="CN" value=""/>
+                <param name="OU" value=""/>
+                <param name="O"  value=""/>
+                <param name="C"  value=""/>
+            </dname>
+        </genkey>
     </target>
     <!--
     There exist several targets which are by default empty and which can be 
