@@ -10,6 +10,7 @@
 #layout-main #htmltagcloud span
 {
 	line-height:25px;
+	white-space: nowrap;
 }
 
 #layout-main #htmltagcloud span + span
