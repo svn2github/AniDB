@@ -1057,7 +1057,7 @@ div.myplace_all div.stats {
 	top:					-320px;
 }
 div.myplace_all div.g_definitionlist {
-	width:					300px;
+	width:					100%;
 	float:					right;
 }
 div.myplace_all div.stats_mylist,
@@ -1142,6 +1142,12 @@ div.mylist_all table.filelist td.ed2k + td.action {
 div.mylist_all td.ed2k {
 	width:					30px;
 	text-align:				center;
+}
+
+#layout-main div.userpage_all div.stats,
+#layout-main div.myplace_all div.stats
+{
+	clear: both
 }
 
 /*														  votes */
