@@ -315,6 +315,11 @@ body.nonav div#layout-content {
 	text-align:				center;
 }
 
+#layout-main div.g_msg h3
+{
+	margin-top: 10px;
+}
+
 /*												                  icons */
 
 div.icons {
@@ -1321,7 +1326,7 @@ div.ed2kdump_all table {
 
 #layout-main div.profile_all div.passwords > div,
 #layout-main div.profile_all div.passwords form > div,
-#layout-main div.profile_all div.titles > div
+div.profile_all #tab3_pane div
 {
 	padding-right:5em;
 }
