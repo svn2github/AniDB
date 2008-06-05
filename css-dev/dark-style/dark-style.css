@@ -1,18 +1,13 @@
 @import "../common/normalize.css";
 @import "../common/layout/default.css";
 @import "../common/layout/common.css";
-
 @import "../common/layout/global/all.css";
 @import "../common/layout/page/all.css";
-
 @import "../common/style/color/msgbox-default.css";
 @import "../common/style/color/quotebox-default.css";
 @import "../common/style/color/special.css";
-
 @import "../common/style/text/default.css";
-
 @import "../common/style/content/page-anime.css";
-
 @import "../icons/all.css";
 
 * {
@@ -309,11 +304,11 @@ body.nonav div#layout-content {
 .g_info,
 .g_actionlist,
 .g_filterlist,
-.g_notebox,
-.g_successbox,
-.g_warnbox {
-	text-align:				center;
-}
+.g_msg.note,
+.g_msg.success,
+.g_msg.warning {
+ 	text-align:				center;
+ }
 
 #layout-main div.g_msg h3
 {
