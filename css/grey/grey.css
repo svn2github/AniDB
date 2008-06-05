@@ -1954,16 +1954,6 @@ a.i_icon:hover, a.i_inline:hover
 	text-align: left;
 	vertical-align: middle;
 }
-*.s_reverse
-{
-	background: transparent url(../iconst/up1.gif) no-repeat center right;
-	padding-right: 10px;
-}
-*.s_forward
-{
-	background: transparent url(../iconst/down1.gif) no-repeat center right;
-	padding-right: 10px;
-}
 /*formatting*/
 #wysiwyg_0
 {
@@ -2041,25 +2031,39 @@ height: 23px;
 background-image: url(../icons/formating/link.gif);
 text-indent: -5000px;
 }
-#layout-content input..f_viewsource
+#layout-content input.f_viewsource
 {
 width: 23px;
 height: 23px;
 background-image: url(../icons/formating/view_text.gif);
 text-indent: -5000px;
 }
-#layout-content input..f_viewrte
+#layout-content input.f_viewrte
 {
 width: 23px;
 height: 23px;
 background-image: url(../icons/formating/view_source.gif);
 text-indent: -5000px;
 }
-#layout-content input..f_cleansource
+#layout-content input.f_cleansource
 {
 width: 23px;
 height: 23px;
 background-image: url(../icons/formating/clean_source.gif);
+text-indent: -5000px;
+}
+#layout-content input.f_preview
+{
+width: 23px;
+height: 23px;
+background-image: url(images/f_preview.png);
+text-indent: -5000px;
+}
+#layout-content input.f_spoiler
+{
+width: 23px;
+height: 23px;
+background-image: url(images/f_spoiler.png);
 text-indent: -5000px;
 }
 #layout-overlay
