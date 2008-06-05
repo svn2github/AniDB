@@ -40,10 +40,10 @@ body.nonav #layout-content h1
 #layout-content div.g_section,
 #layout-content div.g_filterlist,
 #layout-content ul.g_actionlist,
-#layout-content div.g_errorbox,
-#layout-content div.g_warnbox,
-#layout-content div.g_notebox,
-#layout-content div.g_successbox,
+#layout-content div.g_msg.error,
+#layout-content div.g_msg.warning,
+#layout-content div.g_msg.note,
+#layout-content div.g_msg.success,
 #layout-content div.mylist_list ul.g_jumplist,
 #layout-content div.addepm div.ep
 {

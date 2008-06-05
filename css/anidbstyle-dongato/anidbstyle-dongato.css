@@ -274,10 +274,10 @@ div.mylist_list .g_odd.files
 }
 
 /* notification box centering */
-#layout-content div.g_errorbox,
-#layout-content div.g_warnbox,
-#layout-content div.g_notebox,
-#layout-content div.g_successbox
+#layout-content div.g_msg.error,
+#layout-content div.g_msg.warning,
+#layout-content div.g_msg.note,
+#layout-content div.g_msg.success
 {
 	text-align: center;
 }

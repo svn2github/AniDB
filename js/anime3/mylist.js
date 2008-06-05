@@ -192,7 +192,7 @@ function parseData(xmldoc) {
 function showSuccessBox(xmldoc) {
 	if (!g_note) {
 		g_note = document.createElement('div');
-		g_note.className = 'g_section g_notebox';
+		g_note.className = 'g_msg note';
 		var h3 = document.createElement('h3');
 		h3.appendChild(document.createTextNode('NOTE:'));
 		g_note.appendChild(h3);

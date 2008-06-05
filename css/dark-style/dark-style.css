@@ -296,9 +296,9 @@ body.nonav div#layout-content {
 .g_info,
 .g_actionlist,
 .g_filterlist,
-.g_notebox,
-.g_successbox,
-.g_warnbox {
+.g_msg.note,
+.g_msg.success,
+.g_msg.warning {
 	text-align:				center;
 }
 

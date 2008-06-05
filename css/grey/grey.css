@@ -235,7 +235,7 @@ td.action
 	margin: 2em;
 	padding: 1.2em;
 }
-#layout-content div.g_warnbox
+#layout-content div.g_msg.warning
 {
 	border: 1px solid #ff6000;
 	background: url(images/bg_2.gif);
@@ -260,7 +260,7 @@ td.action
 {
 	color: red;
 }
-#layout-content div.g_warnbox h3
+#layout-content div.g_msg.warning h3
 {
 	color: #FF6000;
 }
@@ -273,7 +273,7 @@ td.action
 	color: #2EB42E;
 }
 #layout-content div.g_msg.error *,
-#layout-content div.g_warnbox *,
+#layout-content div.g_msg.warning *,
 #layout-content div.g_msg.note *,
 #layout-content div.g_msg.success *
 {
@@ -1964,12 +1964,104 @@ a.i_icon:hover, a.i_inline:hover
 	background: transparent url(../iconst/down1.gif) no-repeat center right;
 	padding-right: 10px;
 }
+/*formatting*/
 #wysiwyg_0
 {
 	background-color: black;
 	border: 0;
 }
-
+#layout-content input.f_buddy
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/user.gif);
+text-indent: -5000px;
+}
+#layout-content span.f_separator
+{
+display: block;
+float: left;
+width: 5px;
+height: 20px;
+background: transparent url(../icons/formating/separator.gif) no-repeat;
+text-indent: -5000px;
+}
+#layout-content input.f_mouseover,
+#layout-content input.f_selected
+{
+border-color: #89aad1;
+background-color: #e8f0fa;
+}
+#layout-content input.f_bold
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/bold.gif);
+text-indent: -5000px;
+}
+#layout-content input.f_italic
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/italic.gif);
+text-indent: -5000px;
+}
+#layout-content input.f_underline
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/underline.gif);
+text-indent: -5000px;
+}
+#layout-content input.f_strikethrough
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/strikethrough.gif);
+text-indent: -5000px;
+}
+#layout-content input.f_unorderedlist
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/unorderedlist.gif);
+text-indent: -5000px;
+}
+#layout-content input.f_orderedlist
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/orderedlist.gif);
+text-indent: -5000px;
+}
+#layout-content input.f_link
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/link.gif);
+text-indent: -5000px;
+}
+#layout-content input..f_viewsource
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/view_text.gif);
+text-indent: -5000px;
+}
+#layout-content input..f_viewrte
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/view_source.gif);
+text-indent: -5000px;
+}
+#layout-content input..f_cleansource
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/clean_source.gif);
+text-indent: -5000px;
+}
 #layout-overlay
 {
 	position: absolute;
@@ -2165,19 +2257,19 @@ color: #FFFFFF;
 width: 16em;
 border-right: #898989 1px dashed;
 }
-#layout-main div.cmt_entries div.quotebody
+#layout-main div.quotebody
 {
 margin-left: 2em;
 background: url(images/bg_2.gif);
 border: #898989 1px dashed;
 }
-#layout-main div.cmt_entries div.quotebody div.quoteof
+#layout-main div.quotebody div.quoteof
 {
 color: #5aacd3;
 font-weight: bold;
 margin-left: 0.5em;
 }
-#layout-main div.cmt_entries div.quotebody div.quote
+#layout-main div.quotebody div.quote
 {
 margin-left: 1.4em;
 margin-bottom: 0.5em;
@@ -2212,9 +2304,11 @@ margin-left: auto;
 margin-right: auto;
 width: auto;
 }
-#layout-main div.mylisthistory div.image
+#layout-main div.mylisthistory div.image img,
+#layout-main div.g_section.animerel img
 {
 background: #FFFFFF;
+border: 0;
 }
 #layout-main div.tabbed_pane li.tab
 {
