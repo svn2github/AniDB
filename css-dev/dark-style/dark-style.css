@@ -1302,6 +1302,30 @@ div.ed2kdump_all table {
 	margin:					0 auto;
 }
 
+/*														profile */
+
+#layout-main div.tabbed_pane div.pane table td
+{
+	vertical-align:top;
+}
+
+#layout-main div.tabbed_pane div.pane table
+{
+	width: auto;
+}
+
+#tab5_pane div.permissions div label select
+{
+	width: 300px;
+}
+
+#layout-main div.profile_all div.passwords > div,
+#layout-main div.profile_all div.passwords form > div,
+#layout-main div.profile_all div.titles > div
+{
+	padding-right:5em;
+}
+
 /*----------------------------------------------------------------------------------------------------------------LISTS */
 
 div.latest_all table,
