@@ -169,7 +169,7 @@ ul#menu-private {
 ul#menu-mod {
 	position:				relative;
 	top:					0;
-	left:					230px;
+	left:					330px;
 }
 ul#menu-mod li {
 	background-color:			transparent;
@@ -189,6 +189,7 @@ ul#menu-support {
 	position:				relative;
 	top:					0;
 	left:					-15px;
+	width:					50px
 }
 ul#menu-support a {
 	color:					#000;
