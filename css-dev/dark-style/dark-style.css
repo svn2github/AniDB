@@ -976,6 +976,17 @@ div.main_all div.news div.body {
 
 /*														 search */
 
+div.search
+{
+	margin-top: -2.5em;
+}
+
+div.search select.show
+{
+	margin-bottom: 0.5em;
+	margin-left: 20px;
+}
+
 div.search_all div.search_form {
 	width:					600px;
 	margin:					0 auto;
@@ -1027,6 +1038,10 @@ div.latestanimes_all div.data table {
 	width:					100%;
 }
 
+div.latestanimes_all select.month
+{
+	width: 40px;
+}
 /*-------------------------------------------------------------------------------------------------------------MY PLACE */
 
 div.myplace_all div.g_menu {
