@@ -713,6 +713,11 @@ div.animeatt_all div.body {
 	margin:					-120px 0 10px 0;
 }
 
+#layout-main div.animeatt_reviews div.review div.bar
+{
+	width: 15em;
+}
+
 /*														  votes */
 
 div.animevotes_all table {
@@ -1016,7 +1021,6 @@ div.latestanimes_all img {
 	padding:				0;
 }
 div.latestanimes_all div.data {
-	float:					right;
 	width:					750px;
 }
 div.latestanimes_all div.data table {
@@ -1080,7 +1084,7 @@ div.msg_all div.send_form textarea[id="msg.body"] {
 /*														my list */
 
 div.mylist_all table.animelist {
-	width:					100%;
+	width:					80%;
 }
 div.mylist_all table.eplist {
 	margin-left:				33px;
@@ -1970,10 +1974,7 @@ img[src*="nodown1.gif"]:hover {
 img[src*="nopic.gif"],
 div.latestanimes_all img[src*="nopic.gif"] {
 	background:				url(images/nopic.gif) center center no-repeat;
-	display:				inline;				
-	height:					140px;
-	width:					0;
-	padding:				0 75px;
+	display:				inline;
 }
 
 /*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
