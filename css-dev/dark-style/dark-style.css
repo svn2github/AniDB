@@ -1049,7 +1049,13 @@ div.myplace_all div.g_menu {
 	margin:					20px 0;
 	float:					left;
 }
+div.myplace_all div.general
+{
+	margin-top:				-3em;
+}
+
 div.myplace_all div.stats {
+	padding-top:			1.2em;
 	width:					630px;
 	margin:					10px 0 -300px 0;
 	float:					right;
