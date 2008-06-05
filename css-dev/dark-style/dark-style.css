@@ -953,7 +953,7 @@ div.main_all div.news h4 {
 	float:					left;
 	width:					430px;
 }
-div.main_all div.news p.comment
+#layout-main div.main_all div.news p.comment
 {
 	margin: 0pt;
 }
