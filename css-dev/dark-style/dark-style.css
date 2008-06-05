@@ -981,7 +981,7 @@ div.search
 	margin-top: -2.5em;
 }
 
-div.search select.show
+div.search select
 {
 	margin-bottom: 0.5em;
 	margin-left: 20px;
