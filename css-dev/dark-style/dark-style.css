@@ -955,7 +955,7 @@ div.main_all div.news h4 {
 }
 div.main_all div.news p.comment
 {
-	margin: 0;
+	margin: 0pt;
 }
 
 div.main_all div.news span.stamp {
@@ -963,7 +963,7 @@ div.main_all div.news span.stamp {
 	display:				block;
 	text-align:				right;
 	float: 					none;
-	margin-top:				2em;
+	padding-top:				2em;
 }
 div.main_all div.news div.body {
 	margin:					0 0 30px 0;
