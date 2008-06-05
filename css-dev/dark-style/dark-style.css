@@ -1055,12 +1055,13 @@ div.myplace_all div.general
 }
 
 div.myplace_all div.stats {
-	padding-top:			1.2em;
+	padding-top:			4.2em;
 	width:					630px;
 	margin:					10px 0 -300px 0;
 	float:					right;
 	position:				relative;
 	top:					-320px;
+	z-index:				-1;
 }
 div.myplace_all div.g_definitionlist {
 	width:					100%;
@@ -1079,6 +1080,11 @@ div.myplace_all table th {
 }
 div.myplace_all table td{
 	text-align:				center;
+}
+
+#layout-main div.myplace_all div.latest
+{
+	width: 73%;
 }
 
 /*													    my messages */
