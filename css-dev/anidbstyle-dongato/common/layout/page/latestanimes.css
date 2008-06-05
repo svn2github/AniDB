@@ -31,7 +31,7 @@
 	clear: left;
 }
 
-#layout-main div.latestanimes_anime img
+#layout-main div.latestanimes_anime div.g_image img
 {
 	display: block;
 	margin: -2em 1em 2em 1em;

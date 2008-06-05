@@ -88,3 +88,13 @@
 {
 	background-image: url(http://static.anidb.net/css/icons/formating/user.gif);
 }
+
+*.f_preview
+{
+	background-image: url(../../../images/f_preview.png);
+}
+
+*.f_spoiler
+{
+	background-image: url(../../../images/f_spoiler.png);
+}

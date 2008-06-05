@@ -48,6 +48,11 @@
 	background-image: url(http://static.anidb.net/css/icons/state/anidb_filestate_selfripped.gif);
 }
 
+*.i_filestate_streamed
+{
+	background-image: url(http://static.anidb.net/css/icons/state/anidb_filestate_streamed.gif);
+}
+
 *.i_filestate_theater
 {
 	background-image: url(http://static.anidb.net/css/icons/state/anidb_filestate_theater.gif);
@@ -96,4 +101,9 @@
 *.i_state_unknown
 {
 	background-image: url(http://static.anidb.net/css/icons/state/anidb_state_unknown.gif);
+}
+
+*.i_vote_pending
+{
+	background-image: url(http://static.anidb.net/css/icons/icon/anidb_no_vote.gif);
 }

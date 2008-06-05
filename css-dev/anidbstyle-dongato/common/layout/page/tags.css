@@ -1,21 +1,21 @@
 #layout-main #htmltagcloud
 {
+	background-color: #CACACA;
 	text-align: justify;
 	line-height: 1;
-	margin-left:2em;
-	margin-right:2em;
+	margin-left: 2em;
+	margin-right: 2em;
 	padding: 1.5em;
 }
 
 #layout-main #htmltagcloud span
 {
-	line-height:25px;
-	white-space: nowrap;
+	line-height: 25px;
 }
 
 #layout-main #htmltagcloud span + span
 {
-	padding-left:15px;
+	padding-left: 15px;
 }
 
 #layout-main #htmltagcloud span.tagcloud0 { font-size: 12px;}

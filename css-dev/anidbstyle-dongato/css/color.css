@@ -27,7 +27,9 @@ a:visited, a:active, a:hover, a:link {
 }
 
 #layout-main div.main_all div.news h4,
-#layout-main div.main_all div.rightbar h4
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.news_all div.news h4,
+#layout-main div.news_all div.rightbar h4
 {
 	padding: 2px;
 	color: #bbbbbb;
@@ -39,7 +41,8 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #969aa6;
 }
 
-#layout-main div.main_all div.news div.newsitem span.stamp
+#layout-main div.main_all div.news div.newsitem span.stamp,
+#layout-main div.news_all div.news div.newsitem span.stamp
 {
 	background-color: #969aa6;
 }
