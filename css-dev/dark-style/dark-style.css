@@ -317,17 +317,6 @@ body.nonav div#layout-content {
 
 /*												                  icons */
 
-*.i_icon {
-	display:				block;
-	width:					15px;
-	height:					13px;
-	background-repeat:			no-repeat;
-	background-position:			center;
-	text-indent:				-5000px;
-	margin-left:				2px;
-	margin-right:				2px;
-	float:					right;
-}
 div.icons {
 	float:					right;
 }
