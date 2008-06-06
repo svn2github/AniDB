@@ -76,20 +76,28 @@ a:visited, a:active, a:hover, a:link {
 }
 
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-tabs ul li,
-#layout-tabs ul li a
+#layout-tabs ul li
 {
 	background-color: #FAE287;
 	color: black;
 }
 
+#layout-tabs ul li a
+{
+	color: black;
+}
+
 #layout-tabs ul li:hover,
-#layout-tabs ul li a:hover,
 #layout-tabs ul li.selected,
-#layout-tabs ul li.selected a,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	background-color: #338fd2;
+	color: white;
+}
+
+#layout-tabs ul li a:hover,
+#layout-tabs ul li.selected a,
+{
 	color: white;
 }

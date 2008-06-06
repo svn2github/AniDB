@@ -9,3 +9,8 @@
 {
 	background: url(images/banner.png) no-repeat top left;
 }
+
+#layout-menu li.reclinks
+{
+	display: none;
+}
