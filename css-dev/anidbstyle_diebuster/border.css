@@ -61,3 +61,8 @@ img, a
 {
 	border:1px solid #aaaaaa;
 }
+
+#menu-mod
+{
+	border: 1px inset #232323;
+}

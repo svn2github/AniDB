@@ -166,3 +166,13 @@ input[type="submit"]:hover
 #layout-tabs a:hover {
 	color: #DCCFC5;
 }
+
+#menu-mod
+{
+	background-color: #9E2C30;
+}
+
+#menu-mod li a
+{
+	color: white;
+}
