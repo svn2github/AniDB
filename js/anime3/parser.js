@@ -487,7 +487,7 @@ function parseCustom(node) {
           var gvote = groupVotes[gv];
           var urating = nodeData(gvote);
           var agid = gvote.getAttribute('agid');
-          var gid = aGroups[agid].gid;
+          var gid = aGroups[agid] ? aGroups[agid].gid : 0;
           groups[gid].userRating = urating;
         }
         for (var ev = 0; ev < episodeVotes.length; ev++) {

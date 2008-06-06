@@ -49,6 +49,8 @@ var epTableFoot = null;
 var fileTableHead = null;
 var deltimer = null;
 var g_note = null;
+var oneInput = null;
+var twoInput = null;
 // general column definitions
 var fileCols = cloneArray(genFileCols);
 removeColAttribute("check-anime",fileCols);
@@ -120,14 +122,16 @@ function prepPage() {
 	}
 	var filters = getElementsByClassName(document.getElementsByTagName('div'),'filters',true)[0];
 	if (filters) {
-		var a = filters.getElementsByTagName('a')[0];
-		if (a) {
-			if (a.firstChild.nodeValue.indexOf('fileinfo') >= 0) {
-				a.removeAttribute('href');
-				a.onclick = toggleFileMode;
-				a.style.cursor = "pointer";
-			}
-			mylist_settings['filemode'] = (a.firstChild.nodeValue.indexOf('show') >= 0) ? '0' : '1';
+		var inputs = filters.getElementsByTagName('input');
+		oneInput = inputs[0];
+		twoInput = inputs[1];
+		if (oneInput && oneInput.name == 'filemode')	{
+			mylist_settings['filemode'] = oneInput.checked ? '0' : '1';
+			oneInput.onchange = toggleFileMode;
+		}
+		if (twoInput && twoInput.name == 'filemode') {
+			mylist_settings['filemode'] = oneInput.checked ? '1' : '0';
+			twoInput.onchange = toggleFileMode;
 		}
 	}
 	mylist_settings['noeptb'] = true; // force this setting
@@ -192,7 +196,7 @@ function parseData(xmldoc) {
 function showSuccessBox(xmldoc) {
 	if (!g_note) {
 		g_note = document.createElement('div');
-		g_note.className = 'g_msg note';
+		g_note.className = 'g_section g_notebox';
 		var h3 = document.createElement('h3');
 		h3.appendChild(document.createTextNode('NOTE:'));
 		g_note.appendChild(h3);
@@ -324,13 +328,15 @@ function cbToggle() {
 
 /* Function that toogles the current fileinfo mode */
 function toggleFileMode() {
-	var showFiles = (this.firstChild.nodeValue.indexOf('show') >= 0);
+	var showFiles = (this.value == 1 && this.checked ? 1 : 0);
 	if (showFiles) { // hidden files, show them!
 		mylist_settings['filemode'] = '1';
-		this.firstChild.nodeValue = 'hide fileinfo';
+		oneInput.checked = true;
+		twoInput.checked = false;
 	} else { // shown files, hide them!
 		mylist_settings['filemode'] = '0';
-		this.firstChild.nodeValue = 'show fileinfo';
+		oneInput.checked = false;
+		twoInput.checked = true;
 	}
 	for (var a in animes) {
 		var anime = animes[a];
