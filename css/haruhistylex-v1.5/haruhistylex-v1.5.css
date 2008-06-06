@@ -33,11 +33,6 @@ html
 	background: url(../haruhistylex-v1.5/images/searchbg.png) no-repeat 0px 77px;
 }
 
-#layout-search form input.text
-{
-	width: 10.3em;
-}
-
 #layout-search form input.submit
 {
 	background: url(../haruhistylex-v1.5/images/button_search.gif) no-repeat top;
@@ -99,7 +94,7 @@ html
 
 #menu-mod
 {
-	display: block;
+	display: none;
 }
 
 /* e_nd m_enu */
