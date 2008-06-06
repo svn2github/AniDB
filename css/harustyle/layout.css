@@ -132,7 +132,9 @@ body > #layout-content
 
 #layout-search select
 {
-	display: none;
+	display: block;
+	margin-left: 1.5em;
+	margin-top: 3em;
 }
 
 #layout-search div.search form
@@ -141,7 +143,7 @@ body > #layout-content
 	float: right;
 	margin: 0;
 	height: 70px;
-	width: 152px;
+	width: 250px;
 	padding: 70px 0 0 0;
 }
 
@@ -160,8 +162,8 @@ body > #layout-content
 	color: #ffffff;
 	background-color: #272D43;
 	border: #BFC2C9 1px solid;
-	margin: 27px 3px 0 0;
-	width: 90%;
+	margin: -15px 3px 0 0;
+	width: 60%;
 }
 
 #layout-search form input.submit
@@ -173,4 +175,5 @@ body > #layout-content
 	height: 14px;
 	border: 0;
 	cursor: pointer;
+	margin-left: 2em;
 }
