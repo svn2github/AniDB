@@ -94,16 +94,6 @@ background: url(images/backtoo.png);
 {
 	display: none;
 }
-#menu-mod
-{
-	position: absolute;
-	top: 600px;
-	left: 23px;
-	padding: 4px;
-	background-color: #9e2c30;
-	border: 1px inset #232323;
-	color: white;
-}
 
 #layout-main div.anime_all div.mylist th,
 #layout-main tr.g_odd,

@@ -13,7 +13,7 @@ background: transparent url(images/menuback.png) no-repeat top left;
 #menu-login
 {
 	position: absolute;
-	top: 420px;
+	top: 520px;
 	left: 8px;
 	line-height: 2;
 }
@@ -167,4 +167,9 @@ background: transparent url(images/searchback.png)  no-repeat top right;
 #layout-main div.tabbed_pane ul.tabs
 {
 	margin: 6px;
+}
+
+#layout-main div.main_all div.news p.comment
+{
+	margin: -1.5em 0pt 0pt;
 }
