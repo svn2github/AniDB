@@ -33,11 +33,6 @@ html
 	background: url(../haruhistylex-v1.5/images/searchbg.png) no-repeat 0px 77px;
 }
 
-#layout-search div.search form select
-{
-	display: none;
-}
-
 #layout-search form input.text
 {
 	width: 10.3em;

@@ -97,7 +97,7 @@ a:visited, a:active, a:hover, a:link {
 }
 
 #layout-tabs ul li a:hover,
-#layout-tabs ul li.selected a,
+#layout-tabs ul li.selected a
 {
 	color: white;
 }
