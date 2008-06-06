@@ -172,7 +172,7 @@ input[type="submit"]:hover
 	background-color: #9E2C30;
 }
 
-#menu-mod li a
+#menu-mod li a,
 #menu-mod li a:link,
 #menu-mod li a:visited
 {
