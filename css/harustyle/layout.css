@@ -182,3 +182,23 @@ body > #layout-content
 {
 	margin:-1.8em 0pt 0pt;
 }
+
+#layout-tabs
+{
+	position: absolute;
+	right: 260px;
+	left: 168px;
+	top: 110px;
+	display: block;
+}
+
+#layout-tabs ul li
+{
+	display: inline;
+	padding: 1px 6px;
+}
+
+#layout-tabs ul
+{
+	text-align: right;
+}

@@ -75,8 +75,18 @@ a:visited, a:active, a:hover, a:link {
 	font-weight: bold;
 }
 
-#layout-main div.tabbed_pane ul.tabs li
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-tabs ul li
 {
 	background-color: #FAE287;
+	color: black;
+}
+
+#layout-tabs ul li:hover,
+#layout-tabs ul li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: #338fd2;
 	color: white;
 }
