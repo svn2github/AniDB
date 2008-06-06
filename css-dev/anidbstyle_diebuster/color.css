@@ -61,16 +61,9 @@ a:visited, a:active, a:hover, a:link {
 }
 
 #layout-menu a:link,
-#layout-menu a:visited,
-#layout-tabs a
+#layout-menu a:visited
 {
-	color: inherit;
-}
-
-#layout-menu a:active,
-#layout-tabs li.selected a
-{
-	color: red;
+	color: #9E2C30;
 }
 
 #layout-menu,
