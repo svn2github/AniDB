@@ -55,3 +55,9 @@ img, a
 	border-top: 2px groove #BFC2CA;
 	padding: 1em;
 }
+
+#layout-main div.cmt_entries dl.profile,
+#layout-main div.cmt_entries div.comment
+{
+	border:1px solid #aaaaaa;
+}
