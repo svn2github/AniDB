@@ -3,7 +3,7 @@
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
 		<path/>
@@ -20,12 +20,22 @@
 		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle_hacks/images/thumbnail.png</thumbnail>
 	</style>
+	<style name="anidbstyle_diebuster">
+		<title>AniDBstyle</title>
+		<creator>edokun</creator>
+		<update/>
+		<status>up2date</status>
+		<description>based on anidbstyle</description>
+		<path/>
+		<screenshot>none</screenshot>
+		<thumbnail>none</thumbnail>
+	</style>
 	<style name="anidbstyle-dongato">
 		<title>AniDB Style DonGato's revision</title>
 		<creator>DonGato</creator>
-		<update>20.05.2008</update>
-		<status>in sync with 0.1.49c</status>
-		<description>it only works well with Firefox (sorry don't have any more time to spend with IE/Opera</description>
+		<update>01.06.2008</update>
+		<status>in sync with 0.1.50</status>
+		<description>it only works well with Firefox (sorry don't have any more time to spend with IE/Opera)</description>
 		<path/>
 		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
@@ -33,7 +43,7 @@
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>20.05.2008</update>
+		<update>14.11.2007</update>
 		<status>In development</status>
 		<description>Firefox only. (Works also in Opera, but not so well. Don't even try it with IE :D )</description>
 		<path/>
@@ -43,8 +53,8 @@
 	<style name="fma_style">
 		<title>Fullmetal Alchemist Style</title>
 		<creator>jkaze</creator>
-		<update>20.05.2008</update>
-		<status>Test</status>
+		<update>29.05.2008</update>
+		<status>Beta v1</status>
 		<description>Viewing some Fullmetal Alchemist characters in the top, with simple design!</description>
 		<path/>
 		<screenshot>fma_style/images/screenshot.png</screenshot>
@@ -53,7 +63,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>20.05.2008</update>
+		<update>20.02.2008</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -124,7 +134,7 @@
 	<style name="luckystyle">
 		<title>LuckyStyle</title>
 		<creator>Breadstone</creator>
-		<update>20.05.2008</update>
+		<update>12.10.2007</update>
 		<status>In development</status>
 		<description>Thanks to B1nhs help i've finally completed my LuckyStyle. I hope you guys (and gals) like it. If you find any bugs or something you think
 should be fixed just send me a PM.</description>
@@ -145,7 +155,7 @@ should be fixed just send me a PM.</description>
 	<style name="simplestyle">
 		<title>SimpleStyle</title>
 		<creator>b1nh (AniDB: binhkun)</creator>
-		<update>20.05.2008</update>
+		<update>12.12.2007</update>
 		<status>in development</status>
 		<description>This is my newest AniDB CSS style "SimpleStyle".
 Internet Explorer not supported due to a css bug. 
@@ -198,7 +208,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-silver">
 		<title>sub-silver</title>
 		<creator>epoximator</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -208,7 +218,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="zakura">
 		<title>sub-zakura</title>
 		<creator>epoximator</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status>Test</status>
 		<description>Based on Zakura by Zak</description>
 		<path/>
