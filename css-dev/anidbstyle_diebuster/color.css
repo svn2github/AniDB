@@ -165,3 +165,12 @@ input[type="submit"]:hover
 {
     color: white;
 }
+
+#layout-tabs a
+{
+	color: white;
+}
+
+#layout-tabs a:hover {
+	color: #DCCFC5;
+}
