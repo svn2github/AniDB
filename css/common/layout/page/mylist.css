@@ -4,3 +4,9 @@
 {
 	width: 98%;
 }
+
+/*opera fix for linebreaks in mylist */
+#layout-main div.mylist_all td.stats
+{
+	white-space: nowrap;
+}
