@@ -173,6 +173,8 @@ input[type="submit"]:hover
 }
 
 #menu-mod li a
+#menu-mod li a:link,
+#menu-mod li a:visited
 {
 	color: white;
 }
