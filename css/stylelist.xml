@@ -27,8 +27,8 @@
 		<status>up2date</status>
 		<description>based on anidbstyle</description>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>anidbstyle_diebuster/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle_diebuster/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle-dongato">
 		<title>AniDB Style DonGato's revision</title>
@@ -83,27 +83,17 @@
 	<style name="haruhistylex-v1.5">
 		<title/>
 		<creator/>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
 		<screenshot>haruhistylex-v1.5/images/screenshot.png</screenshot>
 		<thumbnail>haruhistylex-v1.5/images/thumbnail.png</thumbnail>
 	</style>
-	<style name="haruhistylex-v2">
-		<title>HaruhiStyleX.AniDB v2</title>
-		<creator>TheJAG</creator>
-		<update>20.05.2008</update>
-		<status>Very Incomplete (In development...)</status>
-		<description>This style features pornographic images commonly known as hentai images of the popular character Haruhi from the Suzumiya Haruhi no Yuuutsu anime series. HaruhiStyleX.AniDB v2 is designed for a screen resolutions of 1024x768 and higher! Currently this stylesheet is compatible with the Opera 9+ browser, Safari 3+ and Firefox 2+ are partially compatible due to their lack of CSS support</description>
-		<path/>
-		<screenshot>haruhistylex-v2/images/screenshot.png</screenshot>
-		<thumbnail>haruhistylex-v2/images/thumbnail.png</thumbnail>
-	</style>
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>20.05.2008</update>
+		<update>19.06.2007</update>
 		<status>In development
 </status>
 		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
@@ -114,7 +104,7 @@
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -238,7 +228,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="zakura-menu">
 		<title>sub-zakura-menu</title>
 		<creator>fahrenheit</creator>
-		<update>20.05.2008</update>
+		<update></update>
 		<status>Test</status>
 		<description>Based on Zakura by Zak and Nice-day by Epoximator</description>
 		<path></path>
