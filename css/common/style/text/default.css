@@ -69,7 +69,7 @@ th.field, td.value, td.name, td.quality, td.title, td.name,
 	text-align: left;
 }
 
-th, h1, h2, h3, h4, form,
+th, h1, h2, h3, h4, form, caption
 tr.action td.value, tr.action td.submit, td.stats,
 td.state, td.type, td.date, td.action, td.icon, td.ignore,
 td.name.user, td.name.owner, td.vote, td.rating, td.check,
