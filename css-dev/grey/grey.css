@@ -235,7 +235,7 @@ td.action
 	margin: 2em;
 	padding: 1.2em;
 }
-#layout-content div.g_warnbox
+#layout-content div.g_msg.warning
 {
 	border: 1px solid #ff6000;
 	background: url(images/bg_2.gif);
@@ -260,7 +260,7 @@ td.action
 {
 	color: red;
 }
-#layout-content div.g_warnbox h3
+#layout-content div.g_msg.warning h3
 {
 	color: #FF6000;
 }
@@ -273,7 +273,7 @@ td.action
 	color: #2EB42E;
 }
 #layout-content div.g_msg.error *,
-#layout-content div.g_warnbox *,
+#layout-content div.g_msg.warning *,
 #layout-content div.g_msg.note *,
 #layout-content div.g_msg.success *
 {
@@ -1954,22 +1954,118 @@ a.i_icon:hover, a.i_inline:hover
 	text-align: left;
 	vertical-align: middle;
 }
-*.s_reverse
-{
-	background: transparent url(../iconst/up1.gif) no-repeat center right;
-	padding-right: 10px;
-}
-*.s_forward
-{
-	background: transparent url(../iconst/down1.gif) no-repeat center right;
-	padding-right: 10px;
-}
+/*formatting*/
 #wysiwyg_0
 {
 	background-color: black;
 	border: 0;
 }
-
+input.f_buddy
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/user.gif);
+text-indent: -5000px;
+}
+span.f_separator
+{
+display: block;
+float: left;
+width: 5px;
+height: 20px;
+background: transparent url(../icons/formating/separator.gif) no-repeat;
+text-indent: -5000px;
+}
+input.f_mouseover,
+input.f_selected
+{
+border-color: #89aad1;
+background-color: #e8f0fa;
+}
+input.f_bold
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/bold.gif);
+text-indent: -5000px;
+}
+input.f_italic
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/italic.gif);
+text-indent: -5000px;
+}
+input.f_underline
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/underline.gif);
+text-indent: -5000px;
+}
+input.f_strikethrough
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/strikethrough.gif);
+text-indent: -5000px;
+}
+input.f_unorderedlist
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/unorderedlist.gif);
+text-indent: -5000px;
+}
+input.f_orderedlist
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/orderedlist.gif);
+text-indent: -5000px;
+}
+input.f_link
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/link.gif);
+text-indent: -5000px;
+}
+input.f_viewsource
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/view_text.gif);
+text-indent: -5000px;
+}
+input.f_viewrte
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/view_source.gif);
+text-indent: -5000px;
+}
+input.f_cleansource
+{
+width: 23px;
+height: 23px;
+background-image: url(../icons/formating/clean_source.gif);
+text-indent: -5000px;
+}
+input.f_preview
+{
+width: 23px;
+height: 23px;
+background-image: url(images/f_preview.png);
+text-indent: -5000px;
+}
+input.f_spoiler
+{
+width: 23px;
+height: 23px;
+background-image: url(images/f_spoiler.png);
+text-indent: -5000px;
+}
 #layout-overlay
 {
 	position: absolute;
@@ -2137,7 +2233,7 @@ background-image: url(images/badredpixel.png);
 {
 background-image: url(images/greenpixel.png);
 }
-#layout-main div.cmt_entries div.comment
+div.cmt_entries div.comment
 {
 margin-left: 1em;
 margin-right: 1em;
@@ -2148,36 +2244,36 @@ border: #898989 1px dashed;
 margin-bottom: 0;
 padding-bottom: 0;
 }
-#layout-main div.cmt_entries a.username-colored
+div.cmt_entries a.username-colored
 {
 color: #ff6000;
 }
-#layout-main div.cmt_entries dl.profile dd
+div.cmt_entries dl.profile dd
 {
 color: #5aacd3;
 }
-#layout-main div.cmt_entries dl.profile dd strong
+div.cmt_entries dl.profile dd strong
 {
 color: #FFFFFF;
 }
-#layout-main div.cmt_entries dl.profile
+div.cmt_entries dl.profile
 {
 width: 16em;
 border-right: #898989 1px dashed;
 }
-#layout-main div.cmt_entries div.quotebody
+div.quotebody
 {
 margin-left: 2em;
 background: url(images/bg_2.gif);
 border: #898989 1px dashed;
 }
-#layout-main div.cmt_entries div.quotebody div.quoteof
+div.quotebody div.quoteof
 {
 color: #5aacd3;
 font-weight: bold;
 margin-left: 0.5em;
 }
-#layout-main div.cmt_entries div.quotebody div.quote
+div.quotebody div.quote
 {
 margin-left: 1.4em;
 margin-bottom: 0.5em;
@@ -2186,7 +2282,7 @@ div.pagination, div.display_options
 {
 margin-left: 1.5em;
 }
-#layout-main div.cmt_entries hr
+div.cmt_entries hr
 {
 border-top: #898989 1px dashed;
 border-top: #898989 1px dashed;
@@ -2212,9 +2308,11 @@ margin-left: auto;
 margin-right: auto;
 width: auto;
 }
-#layout-main div.mylisthistory div.image
+#layout-main div.mylisthistory div.image img,
+#layout-main div.g_section.animerel img
 {
 background: #FFFFFF;
+border: 0;
 }
 #layout-main div.tabbed_pane li.tab
 {

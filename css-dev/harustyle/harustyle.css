@@ -16,9 +16,3 @@ body,
 {
 	content: "design by b1nh"
 }
-
-/*disable new features until it's styled properly by the actual css dev if he wants to use it*/
-#layout-search select,
-#layout-tabs {
-	display: none;
-}

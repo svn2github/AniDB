@@ -93,50 +93,50 @@ body,
 	margin: 0.1em 0.1em 3.1em 0.1em;
 }
 
-#layout-content div.g_notebox
+#layout-content div.g_msg.note
 {
 	color: white;
          background-color: #000000;
          border: 0;
 }
 
-#layout-content div.g_notebox h3
+#layout-content div.g_msg.note h3
 {
 	color: white;
 }
 
-#layout-content div.g_errorbox
+#layout-content div.g_msg.error
 {
 	color: white;
          background-color: #000000;
          border: 1px #e64b73 solid;
 }
 
-#layout-content div.g_errorbox h3
+#layout-content div.g_msg.error h3
 {
 	color: #e64b73;
 }
 
-#layout-content div.g_successbox
+#layout-content div.g_msg.success
 {
 	color: white;
          background-color: #000000;
          border: 1px #FFE681 solid;
 }
 
-#layout-content div.g_successbox h3
+#layout-content div.g_msg.success h3
 {
 	color: #FFE681;
 }
 
-#layout-content div.g_warnbox
+#layout-content div.g_msg.warning
 {
 	color: white;
          background-color: #000000;
          border: 1px #e64b73 solid;
 }
 
-#layout-content div.g_warnbox h3
+#layout-content div.g_msg.warning h3
 {
 	color: #e64b73;
 }
