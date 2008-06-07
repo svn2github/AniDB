@@ -3,7 +3,7 @@
 {
 	float: left;
 	clear: none;
-	width: 14em;
+	width: 16.5em;
 }
 
 #layout-main div.userpage_all div.stats table,
@@ -26,7 +26,7 @@
 
 #layout-main div.myplace_all div.latest
 {
-	margin-left: 15em;
+	margin-left: 17em;
 	margin-right: 11em;
 	clear: none;
 }

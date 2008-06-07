@@ -15,3 +15,8 @@
 {
     display: none;
 }
+
+#layout-main div.animelist_all table.animelist
+{
+	width: 100%
+}
