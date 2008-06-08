@@ -830,29 +830,29 @@ body.nonav #layout-content h1
 {
 	float: right;
 }
-#layout-content *.icons *.i_icon,
-#layout-content div.ep_files table.filelist td .icons .i_icon,
-#layout-content div.anime_group table.grouplist tr td.languages span.i_icon,
-#layout-content div.anime_mylist td div.icons span.i_icon,
-#layout-content div.group_all td div.icons span.i_icon,
-#layout-content div.group_released tr td.languages span.i_icon,
-#layout-content div table td div.icons span.i_icon,
-#layout-content div.anime_all div.groups td.languages span.i_icon,
-#layout-content div.anime_all div.episodes td.action .i_icon,
-#layout-content div.latest_completed td.icon span.i_icon,
-#layout-content div.mylist_all div.icons span.i_icon,
-#layout-content div.group_all div.icons span.i_icon
+#layout-main *.icons *.i_icon,
+#layout-main div.ep_files table.filelist td .icons .i_icon,
+#layout-main div.anime_group table.grouplist tr td.languages span.i_icon,
+#layout-main div.anime_mylist td div.icons span.i_icon,
+#layout-main div.group_all td div.icons span.i_icon,
+#layout-main div.group_released tr td.languages span.i_icon,
+#layout-main div table td div.icons span.i_icon,
+#layout-main div.anime_all div.groups td.languages span.i_icon,
+#layout-main div.anime_all div.episodes td.action .i_icon,
+#layout-main div.latest_completed td.icon span.i_icon,
+#layout-main div.mylist_all div.icons span.i_icon,
+#layout-main div.group_all div.icons span.i_icon
 {
 	float: left;
 	padding: 0px 2px 0px 2px;
 }
-#layout-content div.anime_all div.info th span.i_icon
+#layout-main div.anime_all div.info th span.i_icon
 {
 	display: inline;
 	float: right;
 	padding: 0px 1px 0px 1px;
 }
-#layout-content td.icons.quality *.i_icon
+#layout-main td.icons.quality *.i_icon
 {
 	padding: 0px;
 }
@@ -1866,7 +1866,7 @@ a.i_icon:hover, a.i_inline:hover
 	margin-left: 7em;
 	width: 20em;
 }
-#layout-content dl dd
+#layout-main dl dd
 {
 	margin-left: 10em;
 }
@@ -2233,7 +2233,7 @@ background-image: url(images/badredpixel.png);
 {
 background-image: url(images/greenpixel.png);
 }
-div.cmt_entries div.comment
+#layout-main div.cmt_entries div.comment
 {
 margin-left: 1em;
 margin-right: 1em;
@@ -2244,45 +2244,45 @@ border: #898989 1px dashed;
 margin-bottom: 0;
 padding-bottom: 0;
 }
-div.cmt_entries a.username-colored
+#layout-main div.cmt_entries a.username-colored
 {
 color: #ff6000;
 }
-div.cmt_entries dl.profile dd
+#layout-main div.cmt_entries dl.profile dd
 {
 color: #5aacd3;
 }
-div.cmt_entries dl.profile dd strong
+#layout-main div.cmt_entries dl.profile dd strong
 {
 color: #FFFFFF;
 }
-div.cmt_entries dl.profile
+#layout-main div.cmt_entries dl.profile
 {
 width: 16em;
 border-right: #898989 1px dashed;
 }
-div.quotebody
+#layout-main div.quotebody
 {
 margin-left: 2em;
 background: url(images/bg_2.gif);
 border: #898989 1px dashed;
 }
-div.quotebody div.quoteof
+#layout-main div.quotebody div.quoteof
 {
 color: #5aacd3;
 font-weight: bold;
 margin-left: 0.5em;
 }
-div.quotebody div.quote
+#layout-main div.quotebody div.quote
 {
 margin-left: 1.4em;
 margin-bottom: 0.5em;
 }
-div.pagination, div.display_options
+#layout-main div.pagination, div.display_options
 {
 margin-left: 1.5em;
 }
-div.cmt_entries hr
+#layout-main div.cmt_entries hr
 {
 border-top: #898989 1px dashed;
 border-top: #898989 1px dashed;
