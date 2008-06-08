@@ -3,19 +3,13 @@
 {
 	float: left;
 	clear: none;
-	width: 16.5em;
+	width: 17em;
 }
 
 #layout-main div.userpage_all div.stats table,
 #layout-main div.myplace_all div.stats table
 {
 	width: 95%;
-}
-
-#layout-main div.userpage_all div.stats div table th,
-#layout-main div.myplace_all div.stats div table th
-{
-	width: 60%;
 }
 
 #layout-main div.userpage_all div.stats div table td.value,
@@ -26,7 +20,7 @@
 
 #layout-main div.myplace_all div.latest
 {
-	margin-left: 17em;
+	margin-left: 17.5em;
 	margin-right: 11em;
 	clear: none;
 }
@@ -55,8 +49,8 @@
 #layout-main div.userpage_all div.userdetails,
 #layout-main div.userpage_all div.userprefs
 {
-	margin-left: 15em;
-	margin-right: 12em;
+	margin-left: 17.5em;
+	margin-right: 11em;
 	clear: none;
 }
 
