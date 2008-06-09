@@ -9,14 +9,14 @@ a.inactive {
 }
 
 .i_help {
-	background: transparent url(../icons/zakura/help.png) no-repeat left center;
+	background: transparent url(images/buttons/ask2.gif) no-repeat left center;
 	cursor: help;
 	border: 0 !important;
 	padding: 4px 8px;
 }
 
 .i_help:hover {
-	background-position: -15px center;
+	background: transparent url(images/buttons/ask2_over.gif) no-repeat left center;
 }
 
 .i_down1, .i_up1		{background-position: -11px center;}
@@ -24,8 +24,8 @@ a.inactive {
 .i_noup1, .i_up1		{background-image: url(../icons/zakura/up.gif);}
 .i_minus				{background-image: url(images/icons/minus.gif);}
 .i_plus					{background-image: url(images/icons/plus.gif);}
-.i_minus:hover			{background-position: right}
-.i_plus:hover			{background-position: right}
+.i_minus:hover			{background-image: url(images/icons/minus_over.gif);}
+.i_plus:hover			{background-image: url(images/icons/plus_over.gif);}
 
 /* file state */
 .i_filestate_oncd		{background-image: url(../icons/zakura/state-cd.png);}
@@ -46,17 +46,17 @@ a.inactive {
 
 /* anime state */
 .i_state_all			{background-image: url(../icons/zakura/state-all.png);}
-.i_state_deleted		{background-image: url(../icons/zakura/state-del.png);}
-.i_state_mixed			{background-image: url(../icons/zakura/state-mixed.png);}
+.i_state_deleted		{background-image: url(images/icons/state-del.png);}
+.i_state_mixed			{background-image: url(images/icons/state-mixed.png);}
 .i_state_oncd			{background-image: url(../icons/zakura/state-cd.png);}
-.i_state_onhdd			{background-image: url(../icons/zakura/state-hdd.gif);}
-.i_state_unknown		{background-image: url(../icons/zakura/state-unknown.gif);}
+.i_state_onhdd			{background-image: url(images/icons/state-hdd.png);}
+.i_state_unknown		{background-image: url(images/icons/state-unknown.png);}
 .i_no_vote				{background-image: url(../icons/zakura/vote-no.gif);}
 
 /* seen */
-.i_seen					{background-image: url(../icons/zakura/state-seen.png);}
-.i_seen_no				{background-image: url(../icons/zakura/seen-no.png);}
-.i_seen_yes				{background-image: url(../icons/zakura/seen-yes.png);}
+.i_seen					{background-image: url(images/icons/state-seen.png);}
+.i_seen_no				{background-image: url(images/buttons/seen-no.png);}
+.i_seen_yes				{background-image: url(images/buttons/seen-yes.png);}
 
 /* mylist */
 .i_file_addmylist		{background-image: url(../icons/zakura/mylist-add.png);}
@@ -145,6 +145,14 @@ img[src*="anidb_no_vote.gif"] {
 	width: 0;
 	padding-left: 5px;
 	height: 16px;
+}
+
+/*Show screen shot icon*/
+*.i_enlarge {
+background-image: url(images/icons/enlarge.png);
+float: right;
+height: 16px;
+padding-top: 5px;
 }
 
 /*a:focus .i_up, a:hover .i_up, a:active .i_up,
