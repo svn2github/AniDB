@@ -470,14 +470,14 @@ function parseCustom(node) {
           var ep = episodes[mylistEntry.episodeId];
           if (mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
           var group = groups[mylistEntry.groupId];
-          group.visible = true;
+          if (group) group.visible = true;
         }
         var mylistNodes = childNode.getElementsByTagName('group');
         for (m = 0; m < mylistNodes.length; m++) {
           var mylistNode = mylistNodes[m];
       	  var gid = Number(mylistNode.getAttribute('id'));
           var group = groups[gid];
-          group.isInMylistRange = nodeData(mylistNode.getElementsByTagName('inmylist')[0]);
+          if (group) group.isInMylistRange = nodeData(mylistNode.getElementsByTagName('inmylist')[0]);
         }
         break;
       case 'ratings': // taking care of both episode votes and group ratings
@@ -488,7 +488,8 @@ function parseCustom(node) {
           var urating = nodeData(gvote);
           var agid = gvote.getAttribute('agid');
           var gid = aGroups[agid] ? aGroups[agid].gid : 0;
-          groups[gid].userRating = urating;
+		  var group = groups[gid];
+          if (group) group.userRating = urating;
         }
         for (var ev = 0; ev < episodeVotes.length; ev++) {
           var evote = episodeVotes[ev];
