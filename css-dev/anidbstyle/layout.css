@@ -153,9 +153,33 @@
 	display: inline;
 }
 
-#layout-tabs ul
+#layout-tabs ul li
 {
-	text-align: right;
+  background-image: url(image/tabs-content.gif);
+  background-repeat: repeat-x;
+  color: #d0d2d7;
+  padding: 22px 0px 18px 0px;
+  position: relative;
+  text-align: left;
+  width: auto;
+}
+
+#layout-tabs ul li:before
+{
+  background-image: url(image/tabs-left.gif);
+  background-repeat: no-repeat;
+  content: url('');
+  margin: 0px;
+  padding: 22px 0px 18px 39px;
+}
+
+#layout-tabs ul li:after
+{
+  background-image: url(image/tabs-right.gif);
+  background-repeat: no-repeat;
+  content: url('');
+  margin: 0px;
+  padding: 22px 0px 18px 39px;
 }
 
 #layout-main div.profile_all div.tabbed_pane ul.tabs
