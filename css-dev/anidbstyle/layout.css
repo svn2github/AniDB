@@ -165,7 +165,7 @@
   background-image: url(images/tabs-content.png);
   background-repeat: repeat-x;
   color: #d0d2d7;
-  padding: 0px 0px 23px 0px;
+  padding: 22px 0px 23px 0px;
   position: relative;
   text-align: left;
   width: auto;
@@ -177,7 +177,7 @@
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
-  padding: 0px 0px 23px 10px;
+  padding: 22px 0px 23px 10px;
 }
 
 #layout-tabs ul li:after
@@ -186,7 +186,7 @@
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
-  padding: 0px 0px 23px 10px;
+  padding: 22px 0px 23px 10px;
 }
 
 #layout-main div.profile_all div.tabbed_pane ul.tabs
