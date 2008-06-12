@@ -153,9 +153,14 @@
 	display: inline;
 }
 
+#layout-tabs ul
+{
+	margin-top: 20px;
+}
+
 #layout-tabs ul li
 {
-  background-image: url(image/tabs-content.gif);
+  background-image: url(images/tabs-content.gif);
   background-repeat: repeat-x;
   color: #d0d2d7;
   padding: 22px 0px 18px 0px;
@@ -166,7 +171,7 @@
 
 #layout-tabs ul li:before
 {
-  background-image: url(image/tabs-left.gif);
+  background-image: url(images/tabs-left.gif);
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
@@ -175,7 +180,7 @@
 
 #layout-tabs ul li:after
 {
-  background-image: url(image/tabs-right.gif);
+  background-image: url(images/tabs-right.gif);
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
