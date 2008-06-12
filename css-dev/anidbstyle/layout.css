@@ -161,7 +161,7 @@
 
 #layout-tabs ul li
 {
-  background-image: url(images/tabs-content.gif);
+  background-image: url(images/tabs-content.png);
   background-repeat: repeat-x;
   color: #d0d2d7;
   padding: 22px 0px 18px 0px;
@@ -172,7 +172,7 @@
 
 #layout-tabs ul li:before
 {
-  background-image: url(images/tabs-left.gif);
+  background-image: url(images/tabs-left.png);
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
@@ -181,7 +181,7 @@
 
 #layout-tabs ul li:after
 {
-  background-image: url(images/tabs-right.gif);
+  background-image: url(images/tabs-right.png);
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
