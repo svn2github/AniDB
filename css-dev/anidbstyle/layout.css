@@ -121,6 +121,11 @@
 	padding-top: 0.5em;
 }
 
+#layout-tabs + #layout-main
+{
+    padding-top: 5em;
+}
+
 #layout-main h1
 {
 	margin: 3px 0 18px 37px;
@@ -157,7 +162,6 @@
 {
 	margin-top: 20px;
 	margin-left: 20px;
-	float:right;
 }
 
 #layout-tabs ul li
