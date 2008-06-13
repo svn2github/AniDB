@@ -181,7 +181,7 @@
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
-  padding: 22px 0px 23px 10px;
+  padding: 22px 0px 23px 15px;
 }
 
 #layout-tabs ul li:after
@@ -190,7 +190,7 @@
   background-repeat: no-repeat;
   content: url('');
   margin: 0px;
-  padding: 22px 0px 23px 10px;
+  padding: 22px 0px 23px 15px;
 }
 
 #layout-main div.profile_all div.tabbed_pane ul.tabs
