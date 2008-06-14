@@ -186,7 +186,7 @@ color: #777;
 .g_note h3,
 .g_msg.error h3,
 .g_info h3,
-.g_msg.warning {
+.g_msg.warning h3 {
 margin: 0 0 -0.5em;
 }
 
