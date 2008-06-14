@@ -1271,7 +1271,8 @@ function confirmRevokes() {
 		var li = div.getElementsByTagName('li')[1];
 		if (li) {
 			var a = li.getElementsByTagName('a')[0];
-			if (a) a.onclick = function confirmRevoke() {	if (!confirm("Are you sure you wish to revoke your vote?")) return false; }
+			if (a && a.firstChild.nodeValue.indexOf('revoke') >= 0) 
+				a.onclick = function confirmRevoke() { if (!confirm("Are you sure you wish to revoke your vote?")) return false; }
 		}
 	}
 }
