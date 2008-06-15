@@ -239,7 +239,7 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
 						'votes','titles','producers','genres','cats','relations','user',
 						'review','groupcmts','wiki','forum','furum.topic','forum.board',
 						'forum.post','tracker'];
-	if (acceptedVals.indexOf(val) < 0) return; // not a valid thingie
+	if ((!obj && !fTA) && acceptedVals.indexOf(val) < 0) return; // not a valid thingie
 	if (!textOnly && (!obj || !fTA)) return; // can not continue
 	if (!val) {
 		var selects = fTA.form.getElementsByTagName('select');
@@ -593,35 +593,6 @@ function init_formating() {
 		var doc = iframe.contentWindow.document;
 		// Write the textarea's content into the iframe
 		doc.open();
-		/*
-		var htmlNode = doc.firstChild; // only works for firefox
-		if (htmlNode) {
-			var head = null;
-			for (var n = 0; n < htmlNode.childNodes.length; n++) {
-				if (htmlNode.childNodes[n].nodeName.toLowerCase() == 'head') 
-					head = htmlNode.childNodes[n];
-			}
-			if (!head) {
-				head = document.createElement('head');
-				htmlNode.appendChild(head);
-			}
-			for (var ss = 0; ss < document.styleSheets.length; ss++) {
-				var stylesheet = document.createElement('link');
-				stylesheet.title = document.styleSheets[ss].title;
-				stylesheet.type = 'text/css';
-				stylesheet.href = document.styleSheets[ss].href;
-				stylesheet.rel = (ss ? 'alternate ' : '' ) + 'stylesheet';
-				head.appendChild(stylesheet);
-			}
-			// creating the new stylesheet
-			var stylesheet = document.createElement('style');
-			stylesheet.type = 'text/css';
-			head.appendChild(stylesheet);
-			var x = doc.styleSheets[doc.styleSheets.length - 1];
-			//x.insertRule('body { background-image: none; }',x.cssRules.length);
-			x.insertRule('html { background-image: none; }',x.cssRules.length);
-		}
-		*/
 		doc.write(content);
 		doc.close();
 		// Make the iframe editable in both Mozilla and IE
