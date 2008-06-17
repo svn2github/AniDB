@@ -141,7 +141,7 @@ function createEpisodeIcons(episode) {
 		}
 		for (var st in statusFiles) {
 			var status = statusFiles[st];
-			if (isNaN(status)) continue;
+			if (isNaN(status) || st == 'unknown') continue;
 			//if (status == null || !status) continue;
 			var stClass = 'i_icon i_state_'+mapMEStatusName(st);
 			var txt = status + ' file' + (status > 1 ? 's' : '') + ' with status: '+st;
