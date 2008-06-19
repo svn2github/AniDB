@@ -551,7 +551,7 @@ function createFileIcons(file) {
 			icons['mylist_watch'] = createIcon(null, 'mylist.unwatch ', 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id+'&expand='+ file.animeId+'&showfiles=1&char='+animeFL+'#a'+file.animeId, changeWatchedState, 'mark unwatched', 'i_seen_no');
 		else 
 			icons['mylist_watch'] = createIcon(null, 'mylist.watch ', 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id+'&expand='+file.animeId+'&showfiles=1&char='+animeFL+'#a'+file.animeId, changeWatchedState, 'mark watched', 'i_seen_yes');
-		icons['mylist_edit'] = createIcon(null, 'mylist.edit ', 'animedb.pl?show=mylist&do=add&lid='+mylistEntry.id, null, 'edit mylist entry', 'i_file_edit');
+		icons['mylist_edit'] = createIcon(null, 'mylist.edit ', 'animedb.pl?show=mylist&do=add&lid='+mylistEntry.id+'&fid='+mylistEntry.fileId, null, 'edit mylist entry', 'i_file_edit');
 	} else {
 		// mylist action
 		icons['mylist_add'] = createIcon(null, 'mylist.add ', 'animedb.pl?show=mylist&do=add&fid=' + file.id, addToMylist, 'add to mylist', 'i_file_addmylist');
