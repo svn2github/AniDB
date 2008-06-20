@@ -87,7 +87,8 @@ public class FileProcessing {
                 in.close();
             } catch (Exception exception) {exception.printStackTrace();}
             
-            CC.EpProc.ContinueProcessing(ProcFile, Ed2k.getHexValue(), "Parser");
+            String Ed2kHexVal = Ed2k.getHexValue();
+            CC.EpProc.ContinueProcessing(ProcFile, Ed2kHexVal, "Parser");
       }
     }
 

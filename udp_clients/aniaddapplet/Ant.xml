@@ -4,7 +4,7 @@
 <!-- (If you delete it and reopen the project it will be recreated.) -->
 <project name="AniAdd" default="default" basedir=".">
     <description>Builds, tests, and runs the project AniAdd.</description>
-    <import file="nbproject/AniAdd-impl.xml"/>
+    <import file="nbproject/Aniadd-impl.xml"/>
 	
     <target depends="FailSafeGenKey" name="-post-jar">
         <signjar jar="${dist.dir}/AniAdd.jar" alias="AD" keystore=".ad" storepass="secret"/>
