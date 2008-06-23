@@ -160,37 +160,30 @@
 
 #layout-tabs ul
 {
-	margin-top: 20px;
-	margin-left: 20px;
+	margin-top: 1.4em;
+	margin-left: 2em;
 }
 
 #layout-tabs ul li
 {
-  background-image: url(images/tabs-content.png);
-  background-repeat: repeat-x;
-  color: #d0d2d7;
-  padding: 22px 0px 23px 0px;
+  background-image: none;
+  padding:0px 0px 4px;
   position: relative;
   text-align: left;
   width: auto;
+  border-left: 1px solid #000008;
+  border-right: 1px solid #000008;
+  border-bottom: 1px solid #000008;
+  background-color: #4A4A5A;
 }
 
-#layout-tabs ul li:before
+#layout-tabs ul li a
 {
-  background-image: url(images/tabs-left.png);
-  background-repeat: no-repeat;
-  content: url('');
-  margin: 0px;
-  padding: 22px 0px 23px 15px;
-}
-
-#layout-tabs ul li:after
-{
-  background-image: url(images/tabs-right.png);
-  background-repeat: no-repeat;
-  content: url('');
-  margin: 0px;
-  padding: 22px 0px 23px 15px;
+  padding:0px 8px 3px 8px;
+  border-left: 1px solid #D6DEE7;
+  border-right: 1px solid #D6DEE7;
+  border-bottom: 1px solid #D6DEE7;
+  border-top: 1px solid #4A4A5A;
 }
 
 #layout-main div.profile_all div.tabbed_pane ul.tabs
