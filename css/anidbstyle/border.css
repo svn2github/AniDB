@@ -55,3 +55,29 @@ img, a
 	border-top: 2px groove #BFC2CA;
 	padding: 1em;
 }
+
+#layout-tabs li.selected a
+{
+	border-top: 1px solid #4A4A5A;
+}
+
+#layout-tabs ul li
+{
+	border-left: 1px solid #000008;
+	border-right: 1px solid #000008;
+	border-bottom: 1px solid #000008;
+	border-top: none;
+}
+
+#layout-tabs ul li a
+{
+	border-left: 1px solid #D6DEE7;
+	border-right: 1px solid #D6DEE7;
+	border-bottom: 1px solid #D6DEE7;
+	border-top: none;
+}
+
+#layout-tabs li.selected a
+{
+	border-top: 1px solid #4A4A5A;
+}

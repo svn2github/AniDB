@@ -121,6 +121,11 @@
 	padding-top: 0.5em;
 }
 
+#layout-tabs + #layout-main
+{
+	padding-top: 2em;
+}
+
 #layout-main h1
 {
 	margin: 3px 0 18px 37px;
@@ -155,7 +160,21 @@
 
 #layout-tabs ul
 {
-	text-align: right;
+	margin-top: 1.4em;
+	margin-left: 2em;
+}
+
+#layout-tabs ul li
+{
+	padding:0px 0px 4px;
+	position: relative;
+	text-align: left;
+	width: auto;
+}
+
+#layout-tabs ul li a
+{
+	padding:0px 8px 3px 8px;
 }
 
 #layout-main div.profile_all div.tabbed_pane ul.tabs
