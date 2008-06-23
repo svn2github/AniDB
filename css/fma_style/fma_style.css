@@ -12,6 +12,7 @@
 /* FMA specific styles */
 @import "style-content.css";
 @import "style-icons.css";
+@import "style-flags.css";
 @import "global.css";
 @import "layout.css";
 
@@ -149,13 +150,13 @@ div.main_all div.news h4 {
 	font-size:1.2em;
 }
 
-#layout-main div.block > div.image{
-	width: 32%;
-}
+#layout-main div.block > div.image {
+	width: 49%;
+	}
+#layout-main div.block > div.data {
+	width: 49%;
+	}
 
-#layout-main div.block > div.data{
-	width: 65%;
-}
 #layout-main div.block div.data div.tabbed_pane table,
 #layout-main div.block div.data > div > table{
 	width: 99%;
