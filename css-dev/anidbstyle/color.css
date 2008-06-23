@@ -76,17 +76,17 @@ a:visited, a:active, a:hover, a:link {
 
 #layout-tabs ul li a
 {
-  background-color: #666666;
+	background-color: #666666;
 }
 
 #layout-tabs li.selected a
 {
-  background-color: #4A4A5A;
+	background-color: #4A4A5A;
 }
 
 #layout-tabs li a:hover
 {
-  background-color: #4A4A5A;
+	background-color: #4A4A5A;
 }
 
 #layout-menu,
