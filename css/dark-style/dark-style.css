@@ -483,23 +483,9 @@ div.g_menu ul.state span.i_icon
 	padding-right:3px;
 }
 
-div.anime_all div.image
+#layout-main div.block > div.image
 {
-	background-color:#333;
-	float:left;
 	text-align:center;
-	width:350px;
-}
-
-div.anime_all div.image img
-{
-	max-width:350px;
-}
-
-div.anime_all div.data
-{
-	float:right;
-	width:550px;
 }
 
 div.anime_all div.desc
@@ -1615,3 +1601,6 @@ div.mywishlist_all table,#layout-main div.tabbed_pane div.pane table
 {
 	background-image:url(images/plus_over.gif);
 }
+
+div.anime_all div.image {
+	background-color:black;

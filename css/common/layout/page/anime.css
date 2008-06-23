@@ -34,3 +34,8 @@
  margin-top:1em;
  margin-bottom:1em;
 }
+
+#layout-main div.anime_all div.tabbed_pane ul.contribute
+{
+    border:none;
+}
