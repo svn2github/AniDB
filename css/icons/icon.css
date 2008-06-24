@@ -38,7 +38,7 @@ a.i_icon:hover, a.i_inline:hover
 	display: none;
 }
 
-.icons
+span.icons
 {
 	float: right;
 	white-space:nowrap;
