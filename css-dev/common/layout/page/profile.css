@@ -111,3 +111,9 @@
     clear: left;
     text-align: center;
 }
+
+#tab7_pane div textarea
+{
+    width: 70%;
+    height: 500px;
+}
