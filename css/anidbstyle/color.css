@@ -98,11 +98,12 @@ a:visited, a:active, a:hover, a:link {
 input[type="text"],
 input[type="password"],
 input[type="checkbox"],
-select, textarea
+select,
+textarea
 {
 	color: #CCCCCC;
 	border: #BFC2C9 1px solid;
-	background-color: #34394d;
+	background-color: #34394D;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	font-size: 130%;
 }

@@ -144,3 +144,9 @@ html #layout-content div.g_menu
 	height: 15em;
 	white-space: pre;
 }
+
+/*fixed height for the header as IE can't deal with sibling selectors (+)*/
+#layout-main
+{
+	padding-top: 2em;
+}

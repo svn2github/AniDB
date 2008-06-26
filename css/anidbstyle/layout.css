@@ -170,6 +170,9 @@
 	position: relative;
 	text-align: left;
 	width: auto;
+	float:left;
+	margin-right:0.5em;
+	white-space: nowrap;
 }
 
 #layout-tabs ul li a
