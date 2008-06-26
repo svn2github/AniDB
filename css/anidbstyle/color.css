@@ -71,7 +71,7 @@ a:visited, a:active, a:hover, a:link {
 #layout-menu a:active,
 #layout-tabs li.selected a
 {
-	color: red;
+	color: #FFAA55;
 }
 
 #layout-tabs ul li a
