@@ -95,11 +95,11 @@ a:visited, a:active, a:hover, a:link {
 	color: #bbbbbb;
 }
 
+select,
+textarea,
 input[type="text"],
 input[type="password"],
-input[type="checkbox"],
-select,
-textarea
+input[type="checkbox"]
 {
 	color: #CCCCCC;
 	border: #BFC2C9 1px solid;
