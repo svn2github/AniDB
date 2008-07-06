@@ -481,7 +481,7 @@ function createEpisodeInputs(eid,episode) {
 	}
 	episode.inputs['duration'] = inp;
 	// Episode Air Date
-	episode.inputs['airdate'] = createTextInput('addepm.'+eid+'.aired',10,false,false,10,cTimeDate(episode.date));
+	episode.inputs['airdate'] = createTextInput('addepm.'+eid+'.aired',10,false,false,10,(episode.relDate != 0) ? cTimeDate(episode.date) : '');
 	// Action inputs
 	episode.inputs['epup'] = createIcon(null, 'up', null, moveEpUp, 'Move Episode up', 'i_up1');
 	episode.inputs['epdown'] = createIcon(null, 'down', null, moveEpDown, 'Move Episode down', 'i_down1');
