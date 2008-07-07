@@ -445,6 +445,15 @@ function CFileEntry(node) {
 
 // CORE Functions //
 
+/* Function that creates a pseudo group entry for the times cache fails
+ * @param gid GroupId of the non existing group
+ */
+function createPseudoGroupEntry(gid) {
+	var newGroupEntry = new cloneObject(groups[0]);
+	newGroupEntry.id = gid;
+	groups[gid] = newGroupEntry;
+}
+
 /* Processes a node to extract Custom (user) information
  * @param node Node to process
  * @return boolean (true if processing succeful, false otherwise)
@@ -687,6 +696,8 @@ function buildFileEntry(node, aid, eid) {
     for (var r in efile.relatedGroups)
       fileEntry.relatedGroups[r] = efile.relatedGroups[r];
   }
+  // special trick to fool cache issues
+  if (!groups[fileEntry.groupId]) createPseudoGroupEntry(fileEntry.groupId);
   files[fileEntry.id] = fileEntry;
   if (!episode) return; // This only happens in case of an external file
   if (fileEntry.newFile) episode.newFiles = true;
