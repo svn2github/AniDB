@@ -1602,5 +1602,12 @@ div.mywishlist_all table,#layout-main div.tabbed_pane div.pane table
 	background-image:url(images/plus_over.gif);
 }
 
-div.anime_all div.image {
+div.anime_all div.image
+{
 	background-color:black;
+}
+
+#layout-main ul.g_list.nav
+{
+	display: block;
+}
