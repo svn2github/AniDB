@@ -52,7 +52,7 @@
 }
 
 #layout-main div.g_menu.filter_menu label,
-#layout-main div.g_menu.filter_menu span.options,
+#layout-main div.g_menu.filter_menu span.options
 {
     display:block;
 }
