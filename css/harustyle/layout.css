@@ -133,8 +133,8 @@ body > #layout-content
 #layout-search select
 {
 	display: block;
-	margin-left: 1.5em;
-	margin-top: 3em;
+	float: right;
+	margin: 5px 3px 0px 0px;
 }
 
 #layout-search div.search form
@@ -156,7 +156,7 @@ body > #layout-content
 #layout-search form input.text
 {
 	display: block;
-	float: right;
+	position: relative;
 	font-size: 10px;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	color: #ffffff;
@@ -164,6 +164,8 @@ body > #layout-content
 	border: #BFC2C9 1px solid;
 	margin: -15px 3px 0 0;
 	width: 60%;
+	top: 47px;
+	left: 15px;
 }
 
 #layout-search form input.submit
@@ -176,6 +178,10 @@ body > #layout-content
 	border: 0;
 	cursor: pointer;
 	margin-left: 2em;
+	float: none;
+	position: relative;
+	left: 115px;
+	top: 27px;
 }
 
 #layout-main div.main_all div.news p.comment
@@ -201,4 +207,10 @@ body > #layout-content
 #layout-tabs ul
 {
 	text-align: right;
+}
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	text-align: center;
+	margin: 0px auto 0px auto;
 }
