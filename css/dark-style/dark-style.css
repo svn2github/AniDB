@@ -1607,7 +1607,7 @@ div.anime_all div.image
 	background-color:black;
 }
 
-#layout-main ul.g_list.nav
+#layout-main div.schedule_all ul.g_list.nav
 {
 	display: block;
 }

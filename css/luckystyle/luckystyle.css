@@ -146,3 +146,8 @@ body,
 #layout-tabs {
 	display: none;
 }
+
+#layout-main div.schedule_all ul.g_list.nav
+{
+	display: block;
+}

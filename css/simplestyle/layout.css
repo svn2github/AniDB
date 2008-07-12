@@ -288,7 +288,7 @@ body.nonav
 	width: 300px;
 }
 
-#layout-main ul.g_list.nav
+#layout-main div.schedule_all ul.g_list.nav
 {
 	display: block;
 }
