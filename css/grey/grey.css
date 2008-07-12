@@ -1771,20 +1771,17 @@ a.i_icon:hover, a.i_inline:hover
 	margin-left: 0.5em;
 	min-height: 42em;
 }
-#layout-content div.animeatt_reviews div.review h2
+#layout-content div.animeatt_reviews div.review > h4
 {
 	padding: 0.5em;
-	margin: 0.5em 0.5em 0.5em 0.5em;
-}
-#layout-content div.animeatt_reviews div.review h2
-{
+	margin: 0.5em 15.5em 0.5em 7em;
 	background-image: url(images/bg_2.gif);
 }
-#layout-content div.animeatt_reviews div.review.approved h2
+#layout-content div.animeatt_reviews div.review.approved  > h4
 {
 	background-image: url(images/greenpixel.png);
 }
-#layout-content div.animeatt_reviews div.review.disapproved h2
+#layout-content div.animeatt_reviews div.review.disapproved > h4
 {
 	background-image: url(images/badredpixel.png);
 }
@@ -1813,19 +1810,13 @@ a.i_icon:hover, a.i_inline:hover
 #layout-content div.animeatt_reviews div.review div.text
 {
 	text-align: left;
-	margin: 0 14em 1em 8em;
+	margin: 0 15.5em 1em 7em;
 	padding: 0.5em;
 	background-image: url(images/bg_2.gif);
 }
 #layout-content div.animeatt_reviews div.review div.head table td.value
 {
 	text-align: right;
-}
-#layout-content div.animeatt_reviews div.review span.stamp
-{
-	display: block;
-	padding: 0em 1em 1em 0.5em;
-	margin-left: 0.3em;
 }
 #layout-content div.animeatt_form table
 {
@@ -2368,4 +2359,12 @@ margin-top: -1.4em;
 margin-right: 3pt;
 margin-bottom: 0pt;
 margin-left: 0pt;
+}
+#htmltagcloud span:nth-child(2n+1) a
+{
+color: #99FFB6;
+}
+#htmltagcloud span:nth-child(2n+1) a:active
+{
+color: blue;
 }
