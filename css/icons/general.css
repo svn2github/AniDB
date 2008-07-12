@@ -5,7 +5,7 @@
 }
 
 *.i_enlarge {
-	background-image: url(../icons/enlarge.png);
+	background-image: url(../icons/orange/enlarge.png);
 	float: right;
 	height: 11px;
 	padding-top: 5px;
