@@ -5,6 +5,7 @@
  * version 1.2 (03.04.2008) - Episode Rows added (createEpisodeRow, createEpisodeIcons)
  * version 1.3 (15.04.2008) - Page Preferences added
  * version 1.4 (26.05.2008)	- Moved stuff from utils to here
+ * version 1.4a(14.07.2008) - Fixed some textual errors
  */
 
 /* These are the default file, episode, group and anime cols */
@@ -1066,7 +1067,7 @@ function createPreferencesTable(type) {
 				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
 				rb.checked = (group_check_type == 0);
 				li.appendChild(rb);
-				li.appendChild(document.createTextNode(' Check all non-deprectated files'));
+				li.appendChild(document.createTextNode(' Check all non-deprecated files'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1074,7 +1075,7 @@ function createPreferencesTable(type) {
 				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
 				rb.checked = (group_check_type == 1);
 				li.appendChild(rb);
-				li.appendChild(document.createTextNode(' Check all non-deprectated mkv/ogm files'));
+				li.appendChild(document.createTextNode(' Check all non-deprecated mkv/ogm/mp4 files'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1082,7 +1083,7 @@ function createPreferencesTable(type) {
 				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
 				rb.checked = (group_check_type == 2);
 				li.appendChild(rb);
-				li.appendChild(document.createTextNode(' Check all non-deprectated avi files'));
+				li.appendChild(document.createTextNode(' Check all non-deprecated avi files'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1090,7 +1091,7 @@ function createPreferencesTable(type) {
 				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
 				rb.checked = (group_check_type == 3);
 				li.appendChild(rb);
-				li.appendChild(document.createTextNode(' Check all non-deprectated High Definition files (video resolution height >= 720)'));
+				li.appendChild(document.createTextNode(' Check all non-deprecated High Definition files (video resolution height >= 720)'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1098,7 +1099,7 @@ function createPreferencesTable(type) {
 				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
 				rb.checked = (group_check_type == 4);
 				li.appendChild(rb);
-				li.appendChild(document.createTextNode(' Check all non-deprectated Standard Definition files (video resolution height < 720)'));
+				li.appendChild(document.createTextNode(' Check all non-deprecated Standard Definition files (video resolution height < 720)'));
 				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';
