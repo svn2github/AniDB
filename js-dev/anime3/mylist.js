@@ -147,7 +147,6 @@ function prepPage() {
 function fetchData(aid,uid) {
 	var req = xhttpRequest();
 	var uidstr = (isNaN(Number(ruid)) ? '' : '&uid='+Number(ruid));
-	if (!ruid) { alert('shit happend: '+uidstr); return; }
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_uid'+ruid+'.xml', parseData);
 	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+uidstr, parseData);
 }
