@@ -326,7 +326,7 @@ function createSpoiler(obj,fTA,sel,textOnly) {
 		// IE fails miserably here, don't show the link thingie
 		insertAtSelection(obj, spoiler, true);
 	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
-		insertAtSelection(obj, document.createTextNode(spoiler), false);
+		insertAtSelection(obj, obj.document.createTextNode(spoiler), false);
 	} else {
 		if (seeDebug) alert('getSelection: unknown selection method');
 		return;
