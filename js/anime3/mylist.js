@@ -65,6 +65,7 @@ removeColAttribute("airdate",epCols);
 removeColAttribute("users",epCols);
 var epSkips = null;
 
+var ahdhadhak = 0;
 
 /* This function parses mylist expand links and sets some settings
  * @param href The mylist expand link
@@ -175,6 +176,7 @@ function parseData(xmldoc) {
 	updateStatus('Processing user data...');
 	var t1 = new Date();
 	parseCustom(root.getElementsByTagName('custom').item(0));
+	if (!ruid) ruid = uid;
 	var parseCustomNode = (new Date()) - t1;
 	// do some triming of the definition cols if possible
 	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !LAY_SHOWCRC)
