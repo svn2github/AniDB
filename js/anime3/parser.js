@@ -158,7 +158,7 @@ CAnimeEntry.prototype.getTitle = function() {
 CAnimeEntry.prototype.getAltTitle = function() {
 	var title = null;
 	if (this.titles['main'][animeAltTitleLang]) return(this.titles['main'][animeAltTitleLang]);
-	if (this.titles['official'][animeAltTitleLang]) return(this.titles['official'][animeAltTitleLang);
+	if (this.titles['official'][animeAltTitleLang]) return(this.titles['official'][animeAltTitleLang]);
 	if (this.titles['official']['x-jat']) return(this.titles['official']['x-jat']);
 	if (this.titles['official']['en']) return(this.titles['official']['en']);
 	for (var i in this.titles['official']) return(this.titles['official'][i]);
