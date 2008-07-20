@@ -317,7 +317,7 @@ function toggleFilesFromGroup() {
 			if (Number(group_check_type) != 5 && !file.visible) continue;
 			switch(Number(group_check_type)) {
 				case 0: break;
-				case 1: if (file.fileType != 'mkv' && file.fileType != 'ogm') continue; break;
+				case 1: if (file.fileType != 'mkv' && file.fileType != 'ogm' && file.fileType != 'mp4') continue; break;
 				case 2: if (file.fileType != 'avi') continue; break;
 				case 3: if ((!file.videoTracks.length || file.videoTracks[0].resH < 720)) continue; break;
 				case 4: if ((!file.videoTracks.length || file.videoTracks[0].resH >= 720)) continue; break;
@@ -1375,18 +1375,18 @@ function createMylistAddBox(parentNode,type) {
 	inlineHelp.appendChild(span);
 	row.getElementsByTagName('td')[0].appendChild(inlineHelp);
 	tbody.appendChild(row);
-	if (type == 'files') {
+	//if (type == 'files') {
 		optionArray = {0:{"text":' normal/original '},1:{"text":' corrupted version/invalid crc '},
 						2:{"text":' self edited '},100:{"text":' other '}};
 		select = createSelectArray(null,"addl.filestate","addl.filestate",null,0,optionArray);
 		createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
-	}
-	if (type == 'anime') {
+	//}
+	//if (type == 'anime') {
 		optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
-						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '}};
+						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '},15:{"text":' streamed '}};
 		select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,((type == 'anime') ? 13 : 100),optionArray);
-		createFieldValueRow(tbody,'type'+gODD(i),'Type Gen',select); i++;
-	}
+		createFieldValueRow(tbody,'type'+gODD(i),'Generic Type',select); i++;
+	//}
 	createFieldValueRow(tbody,'source'+gODD(i),'Source',createTextInput("addl.source",30,false,false,100)); i++;
 	createFieldValueRow(tbody,'storage'+gODD(i),'Storage',createTextInput("addl.storage",30,false,false,100)); i++;
 	createFieldValueRow(tbody,'other'+gODD(i),'Other',createTextBox('addl.other',null,25,4,null)); i++;
