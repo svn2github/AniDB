@@ -1,4 +1,5 @@
 import wx,os,subprocessw
+from subprocess import mswindows
 
 class mainFrame(wx.Frame):
     _configfile='config.ini'
@@ -68,7 +69,7 @@ class mainFrame(wx.Frame):
             '''debug option to see what avdump actually get's fed'''
             arg = (u'"%s" -o -exp:"%s" -ac:%s:%s %s') %(avdumppath, exportpath, self.username.GetValue(), self.password.GetValue(), self.filepath.GetValue())
             #self.error(arg)
-            subprocessw.Popen(arg)
+            subprocessw.Popen(arg, shell=not mswindows)
 
     def error(self,text):
         message = wx.MessageDialog(self,text,style=wx.ICON_ERROR | wx.OK)
