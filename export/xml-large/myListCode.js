@@ -53,10 +53,12 @@ animeDetailsUpdater.prototype = {
         if (this.selectedId == 0 || !element) return;
         var newRow = this.createRowElement();
         this.newCol = document.createElement("td");
-        this.newCol.setAttribute("colSpan","7")
+        this.newCol.setAttribute("colSpan", "7")
         newRow.appendChild(this.newCol)
         document.insertAfter(newRow, element);
-        this.animeDocument.load("anime/" + this.selectedId + ".xml",this.fillRowElement())
+        this.animeDocument.load("anime/" + this.selectedId + ".xml", this.fillRowElement())
+
+
     },
     createRowElement: function() {
         var newRow = document.createElement("tr");
@@ -67,8 +69,17 @@ animeDetailsUpdater.prototype = {
         return function() {
             if (this.xslDocument.isLoaded() && this.animeDocument.isLoaded())
             {
-              this.xslDocument.transformIntoElement(this.animeDocument,this.newCol);
+                this.xslDocument.transformIntoElement(this.animeDocument, this.newCol);
             }
-        }.bind(this)
-    }
+            //            var mytree = new dTree('mytree');
+            //
+            //        mytree.add(146, -1, 'Designers', 'team_index.asp?groupe_id=146', 'Designers', '', '');
+            //        mytree.add(145, -1, 'Developers', 'team_index.asp?groupe_id=145', 'Developers', '', '');
+            //	    mytree.add(148, 145, 'Desktop Developers', 'team_index.asp?groupe_id=148', 'Desktop Developers', '', '');
+            //        var treeDiv = document.getElementById('treeDiv');
+            //        alert(treeDiv);
+            //        treeDiv.innerHTML = mytree.toString();
+            //        }.bind(this)
+        }
+    }.bind(this)
 }

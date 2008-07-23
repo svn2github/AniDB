@@ -30,5 +30,4 @@ function setTitle(title) {
 
 window.onload = function (evt) {
     myListRenderer = new myListXsltUpdater();
-
 }

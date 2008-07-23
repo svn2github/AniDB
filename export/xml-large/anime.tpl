@@ -110,9 +110,6 @@ Version 0.2
             </companies>
 
             <synopsis><tmpl_var expr="jsencodexml(data_anime_other)"></synopsis>
-            <!--<whatsthis>-->
-                <!--<tmpl_var name= data_anime_awardicons>-->
-            <!--</whatsthis>-->
         </seriesInfo>
 
         <episodes status="<tmpl_if name=status_anime_iscomplete>complete<tmpl_else>incomplete</tmpl_if>">
