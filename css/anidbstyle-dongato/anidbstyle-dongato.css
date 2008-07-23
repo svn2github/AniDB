@@ -468,13 +468,19 @@ h4
 	margin: 3px;
 }
 
-/* fix for news comment */
+/* some fixes for text comments */
 
 #wysiwyg_0
 {
 	border: 1px inset #CCCCCC;
-	margin: 4px;
+	display: block;
+	margin: 5px auto 5px auto;
 	padding: 2px;
+}
+
+.f_links
+{
+	margin: 4px;
 }
 
 div.news p.comment
