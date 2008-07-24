@@ -25,12 +25,108 @@
     </dl>
   </xsl:template>
 
+  <xsl:template match="group">
+    <tr>
+      <td>
+        <xsl:value-of select="name"/> (<xsl:value-of select="shortName"/>)
+      </td>
+      <td>
+        <xsl:value-of select="releasedEpisodes/@normal"/>+<xsl:value-of select="releasedEpisodes/@special"/>
+      </td>
+      <td>
+        <xsl:value-of select="releasedEpisodes/@range"/>
+      </td>
+      <td>
+        <xsl:value-of select="@state"/>
+      </td>
+    </tr>
+  </xsl:template>
+
   <xsl:template match="episodes">
-    <table width="100%">
-      <tr onMouseOver="overChangeClass(this, 'high1')" onMouseOut="outChangeClass(this)"
-          onClick="myListRenderer.toggle('broadcastDate', 'text')">
+    <br/>
+    <h3>Episodes Summary</h3>
+    <table class="episodesTable">
+      <tr>
+        <th>
+          All Episodes
+        </th>
+        <th>
+          Total <xsl:value-of select="episodeCount/normal/@totalEpisodes"/>+<xsl:value-of select="episodeCount/special/@totalEpisodes"/>
+        </th>
+        <th>Range</th>
+        <th>Status</th>
       </tr>
+        <tr>
+          <td>
+            Owned Episodes
+          </td>
+          <td>
+            <xsl:value-of select="episodeCount/normal/@ownEpisodes"/>+<xsl:value-of select="episodeCount/special/@ownEpisodes"/>
+          </td>
+          <td></td>
+          <td>
+            <xsl:value-of select="@status"/>
+          </td>
+        </tr>
+      <xsl:apply-templates select="groups/group"/>
     </table>
+    <br/>
+    <h3>File Details</h3>
+    <table class="episodesTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Episode</th>
+          <th>Episode Name</th>
+          <th>Released On</th>
+          <th>Downloaded On</th>
+          <th>Released By</th>
+        </tr>
+      </thead>
+      <xsl:apply-templates select="episode/files/file"/>
+    </table>
+  </xsl:template>
+
+  <xsl:template match="file">
+    <tr>
+      <xsl:choose>
+        <xsl:when test="position() mod 2">
+          <xsl:attribute name="class">oddEpisodeTable</xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:attribute name="class">evenEpisodeTable</xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
+      <td>
+        <xsl:value-of select="position()"/>
+      </td>
+      <td>
+        <xsl:value-of select="../../@number"/>
+      </td>
+      <td>
+        <xsl:value-of select="../../name/english"/>
+      </td>
+      <td>
+        <xsl:value-of select="dates/@releaseDate"/>
+      </td> 
+      <td>
+        <xsl:value-of select="dates/@additionDate"/>
+      </td>
+      <td>
+        <xsl:apply-templates select="releasedBy"/>
+      </td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="releasedBy">
+    <xsl:choose>
+      <xsl:when test="@id = 0">
+        Unknown Group
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="name"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="name[other != '' or count(synonym/alias) > 0]" mode="otherNames">
@@ -41,12 +137,6 @@
         <xsl:apply-templates select="synonym/alias" mode="nonEmptyElementInLi"/>
       </ul>
     </dd>
-  </xsl:template>
-
-  <xsl:template match="companies">
-    <dl>
-
-    </dl>
   </xsl:template>
 
   <xsl:template match="name[count(shorts/short) > 0]" mode="shortNames">
@@ -176,5 +266,5 @@ comment()" mode="blah">
            select="@* | * | text() | processing-instruction() | comment()" mode="blah"/>
     </xsl:copy>
   </xsl:template>
-  
+
 </xsl:stylesheet>

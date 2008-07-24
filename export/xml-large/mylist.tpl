@@ -30,25 +30,31 @@ Version 0.2
                    type="<tmpl_var name= data_anime_type_name>" rating="<tmpl_var name= data_anime_rating>"
                    status="<tmpl_if name=status_anime_iscomplete>complete<tmpl_else>incomplete</tmpl_if>"
                    totalEpisodes="<tmpl_var name= data_anime_eps>" ownEpisodes="<tmpl_var name= data_anime_my_eps>">
-            <romanjiName><![CDATA[<tmpl_var name=data_anime_name>]]></romanjiName>
-            <englishName><![CDATA[<tmpl_var name=data_anime_title_eng>]]></englishName>
-            <specialEpisodes totalEpisodes="<tmpl_var name= data_anime_eps_special>"
-                             ownEpisodes="<tmpl_var name= data_anime_my_eps_special>"/>
-            <episodes>
-                <tmpl_loop name= loop_ep>
-                    <episode id="<tmpl_var name=data_ep_id>">
-                        <files>
-                            <tmpl_loop name= loop_file>
-                                <file id="<tmpl_var name=data_file_id>"
-                                      additionDate="<tmpl_var name=data_file_ldate>"/>
-                            </tmpl_loop>
-                        </files>
-                    </episode>
-                </tmpl_loop>
-            </episodes>
-        </anime>
-    </tmpl_loop>
-    <databaseColumnTableSchema date="<tmpl_var name=global_date>"/>
-</animeList>
-        </myList>
+                <romanjiName><![CDATA[<tmpl_var name=data_anime_name>]]></romanjiName>
+                <englishName><![CDATA[<tmpl_var name=data_anime_title_eng>]]></englishName>
+                <specialEpisodes totalEpisodes="<tmpl_var name= data_anime_eps_special>"
+                                 ownEpisodes="<tmpl_var name= data_anime_my_eps_special>"/>
+                <groups>
+                    <tmpl_loop name= loop_anime_groups>
+                        <group id="<tmpl_var name= data_anime_group_id>" state="<tmpl_var name= data_anime_group_state>"/>
+                    </tmpl_loop>
+                </groups>
+
+                <episodes>
+                    <tmpl_loop name= loop_ep>
+                        <episode id="<tmpl_var name=data_ep_id>" number="<tmpl_var name=data_ep_epno>">
+                            <files>
+                                <tmpl_loop name= loop_file>
+                                    <file id="<tmpl_var name=data_file_id>"
+                                          additionDate="<tmpl_var name=data_file_ldate>" releasedBy="<tmpl_var name=data_file_group_id>"/>
+                                </tmpl_loop>
+                            </files>
+                        </episode>
+                    </tmpl_loop>
+                </episodes>
+            </anime>
+        </tmpl_loop>
+        <databaseColumnTableSchema date="<tmpl_var name=global_date>"/>
+    </animeList>
+</myList>
 

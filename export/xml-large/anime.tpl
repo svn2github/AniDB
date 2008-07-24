@@ -134,7 +134,7 @@ Version 0.2
                            rating="<tmpl_var name= data_anime_group_rating>"
                            voteCount="<tmpl_var name= data_anime_group_votes>">
                         <releasedEpisodes normal="<tmpl_var name= data_anime_group_epcnt>"
-                                          special="<tmpl_var name= data_anime_group_sepcnt>"/>
+                                          special="<tmpl_var name= data_anime_group_sepcnt>" range="<tmpl_var name= data_anime_group_eprange>"/>
                         <name><![CDATA[<tmpl_var name=data_anime_group_name>]]></name>
                         <shortName><![CDATA[<tmpl_var name=data_anime_group_sname>]]></shortName>
                     </group>
@@ -224,16 +224,16 @@ Version 0.2
 
                                 </hashInformation>
 
-                                <group id="<tmpl_var name=data_file_group_id>">
+                                <releasedBy id="<tmpl_var name=data_file_group_id>">
 
                                     <name><![CDATA[<tmpl_var name=data_file_group_name>]]></name>
 
                                     <shortName>
                                         <![CDATA[<tmpl_var name= data_file_group_shortname>]]></shortName>
 
-                                </group>
+                                </releasedBy>
 
-                                <dates releaseDate="<tmpl_var name=data_file_released_short>"
+                                <dates releaseDate="<tmpl_var name=data_file_date_short>"
 
                                        additionDate="<tmpl_var name=data_file_ldate>"/>
 

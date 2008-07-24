@@ -17,7 +17,7 @@
     <table width="100%">
       <thead>
         <tr class="thead">
-          <td>#</td>
+          <th>#</th>
           <xsl:call-template name="CreateHeaderCell">
             <xsl:with-param name="displayName">
               <div class="headerRight"></div>
@@ -133,7 +133,7 @@
   <xsl:template match="anime">
     <xsl:variable name="selected" select="0"/>
     <xsl:variable name="position" select="position()"/>
-    <tr onMouseOver="overChangeClass(this, 'high1')" onMouseOut="outChangeClass(this)" id="a{@id}">
+    <tr onMouseOver="overChangeClass(this, 'high1')" onMouseOut="outChangeClass(this)" id="r1-a{@id}">
       <xsl:choose>
         <xsl:when test="position() mod 2">
           <xsl:attribute name="class">even</xsl:attribute>
@@ -159,6 +159,8 @@
             </i>)
           </xsl:otherwise>
         </xsl:choose>
+        -
+        <xsl:value-of select="@completed"/>
       </td>
       <td align="center">
         <xsl:value-of select="@type"/>
@@ -170,6 +172,9 @@
         <xsl:value-of select="@rating"/>
       </td>
       <td align="center">
+          <xsl:if test="@status = 'complete'">
+              <xsl:attribute name="class">complete</xsl:attribute>
+          </xsl:if>
         <b>
           <xsl:apply-templates select="." mode="fileCount"/>
         </b> + 
@@ -187,6 +192,10 @@
       <td align="center">
         <xsl:value-of select="@lastAdditionDate"/>
       </td>
+    </tr>
+    <tr id="r2-a{@id}">
+      <td></td>
+      <td colSpan="6"/>
     </tr>
   </xsl:template>
 </xsl:stylesheet>

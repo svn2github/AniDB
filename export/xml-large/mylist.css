@@ -12,12 +12,33 @@ body {
     height: 100%;
 }
 
+.episodesTable {
+	text-align: left;
+}
+
+table.episodesTable {
+	 width: 90%;
+}
+
+tr.oddEpisodeTable {
+	background-color: Green
+}	
+
+tr.evenEpisodeTable {
+	background-color: #000000;
+}	
+
 .descending {
     background-image: url( images/desc.gif );
 }
 
 .ascending {
     background-image: url( images/asc.gif );
+}
+
+.complete {
+    background-image: url(images/check2.gif);
+    background-position: left;
 }
 
 h1 {

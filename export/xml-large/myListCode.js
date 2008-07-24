@@ -57,8 +57,6 @@ animeDetailsUpdater.prototype = {
         newRow.appendChild(this.newCol)
         document.insertAfter(newRow, element);
         this.animeDocument.load("anime/" + this.selectedId + ".xml", this.fillRowElement())
-
-
     },
     createRowElement: function() {
         var newRow = document.createElement("tr");
@@ -71,15 +69,6 @@ animeDetailsUpdater.prototype = {
             {
                 this.xslDocument.transformIntoElement(this.animeDocument, this.newCol);
             }
-            //            var mytree = new dTree('mytree');
-            //
-            //        mytree.add(146, -1, 'Designers', 'team_index.asp?groupe_id=146', 'Designers', '', '');
-            //        mytree.add(145, -1, 'Developers', 'team_index.asp?groupe_id=145', 'Developers', '', '');
-            //	    mytree.add(148, 145, 'Desktop Developers', 'team_index.asp?groupe_id=148', 'Desktop Developers', '', '');
-            //        var treeDiv = document.getElementById('treeDiv');
-            //        alert(treeDiv);
-            //        treeDiv.innerHTML = mytree.toString();
-            //        }.bind(this)
-        }
-    }.bind(this)
+        }.bind(this)
+    }
 }
