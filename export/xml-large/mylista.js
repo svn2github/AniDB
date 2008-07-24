@@ -1,6 +1,4 @@
-var selectedId = 0;
 var lastClass
-
 
 function over(obj, name) {
     obj.style.cursor = 'pointer';
@@ -20,9 +18,26 @@ function outChangeClass(obj) {
     obj.className = lastClass;
 }
 
-function unlinkParentEvent(element) {
-    element.parentNode.onclick = null;
+function DivDisplayer() {
+    this.reset = function () {
+        this.visibleDivId = 'dummy'
+    }
+    this.toggleDiv = function(divId) {
+        this.hideDiv(this.visibleDivId);
+        (divId == this.visibleDivId) ? this.reset() : this.showDiv(divId);
+    }
+    this.hideDiv = function(divId) {
+        var div = document.getElementById(divId);
+        if (div) div.className = 'invisible';
+    }
+    this.showDiv = function(divId) {
+        var div = document.getElementById(divId);
+        if (div) div.className = '';
+        this.visibleDivId = divId;
+    }
+    this.reset();
 }
+
 
 function setTitle(title) {
     document.title = title;
@@ -30,4 +45,5 @@ function setTitle(title) {
 
 window.onload = function (evt) {
     myListRenderer = new myListXsltUpdater();
+    divDisplayer = new DivDisplayer();
 }

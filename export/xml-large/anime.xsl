@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="UTF-8"/>
   <xsl:key name="companiesByType" match="company" use="@typeId"/>
+  <xsl:variable name="animeId" select="//anime/@id"/>
   <xsl:template match="anime">
     <h3>
       <xsl:value-of select="seriesInfo/name/romanji"/>
@@ -35,7 +36,7 @@
           <xsl:attribute name="class">evenEpisodeTable</xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
-      <td>
+      <td class="clickable" onClick="divDisplayer.toggleDiv('togglingDiv{$animeId}-{@id}')">
         <xsl:apply-templates select="name" mode="htmlContent"/> (<xsl:apply-templates select="shortName" mode="htmlContent"/>)
       </td>
       <td>
@@ -48,6 +49,10 @@
         <xsl:value-of select="@state"/>
       </td>
     </tr>
+    <xsl:call-template name="episodes">
+      <xsl:with-param name="files" select="../../episode/files/file[releasedBy/@id = current()/@id]"/>
+      <xsl:with-param name="id" select="@id"/>
+    </xsl:call-template>
   </xsl:template>
 
   <xsl:template match="episodes">
@@ -64,35 +69,50 @@
         <th>Range</th>
         <th>Status</th>
       </tr>
-        <tr class="oddEpisodeTable" onMouseOver="overChangeClass(this, 'high2')" onMouseOut="outChangeClass(this)">
-          <td>
-            Owned Episodes
-          </td>
-          <td>
-            <xsl:value-of select="episodeCount/normal/@ownEpisodes"/>+<xsl:value-of select="episodeCount/special/@ownEpisodes"/>
-          </td>
-          <td></td>
-          <td>
-            <xsl:value-of select="@status"/>
-          </td>
-        </tr>
+      <tr class="oddEpisodeTable" onMouseOver="overChangeClass(this, 'high2')" onMouseOut="outChangeClass(this)">
+        <td class="clickable" onClick="divDisplayer.toggleDiv('togglingDiv{$animeId}-{0}')" >
+          Owned Episodes
+        </td>
+        <td>
+          <xsl:value-of select="episodeCount/normal/@ownEpisodes"/>+<xsl:value-of select="episodeCount/special/@ownEpisodes"/>
+        </td>
+        <td></td>
+        <td>
+          <xsl:value-of select="@status"/>
+        </td>
+      </tr>
+      <xsl:call-template name="episodes">
+        <xsl:with-param name="files" select="episode/files/file"/>
+        <xsl:with-param name="id" select="'0'"/>
+      </xsl:call-template>
       <xsl:apply-templates select="groups/group"/>
     </table>
-    <br/>
-    <h3>File Details</h3>
-    <table class="innerTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Episode</th>
-          <th>Episode Name</th>
-          <th>Released On</th>
-          <th>Downloaded On</th>
-          <th>Released By</th>
-        </tr>
-      </thead>
-      <xsl:apply-templates select="episode/files/file"/>
-    </table>
+  </xsl:template>
+
+  <xsl:template name="episodes">
+    <xsl:param name="files"/>
+    <xsl:param name="id"/>
+    <tr>
+      <td colSpan="4">
+        <div class="invisible" id="togglingDiv{$animeId}-{$id}">
+          <h3>Files</h3>
+          <table class="innerTable">
+            <thead>
+              <tr>
+                <th>Episode</th>
+                <th>Episode Name</th>
+                <th>Released On</th>
+                <th>Downloaded On</th>
+                <th>Released By</th>
+              </tr>
+            </thead>
+            <xsl:apply-templates select="$files"/>
+          </table>
+          <br/>
+          <br/>
+        </div>
+      </td>
+    </tr>
   </xsl:template>
 
   <xsl:template match="file">
@@ -106,9 +126,6 @@
         </xsl:otherwise>
       </xsl:choose>
       <td>
-        <xsl:value-of select="position()"/>
-      </td>
-      <td>
         <xsl:value-of select="../../@number"/>
       </td>
       <td>
@@ -116,7 +133,7 @@
       </td>
       <td>
         <xsl:value-of select="dates/@releaseDate"/>
-      </td> 
+      </td>
       <td>
         <xsl:value-of select="dates/@additionDate"/>
       </td>
@@ -174,7 +191,7 @@
   <xsl:template match="node()[. != '']" mode="nonEmptyElementInDDWithDT">
     <xsl:param name="DTContent"/>
     <dt>
-      <xsl:copy-of select="$DTContent"/>
+      <xsl:value-of select="$DTContent"/>
     </dt>
     <xsl:apply-templates select="." mode="elementInDD"/>
   </xsl:template>
@@ -185,7 +202,7 @@
   </xsl:template>
   <xsl:template match="node()" mode="elementInDD">
     <dd>
-      <xsl:copy-of select="."/>
+      <xsl:value-of select="."/>
     </dd>
   </xsl:template>
   <xsl:template match="genres"/>
@@ -220,12 +237,12 @@
   <xsl:template match="awardType">
     <dt>
       <a href="{normalize-space(ancestor::awards/award[@awardTypeId = current()/@id]/awardURL)}">
-        <xsl:copy-of select="."/>
+        <xsl:value-of select="."/>
       </a>
     </dt>
     <dd>
       <ul>
-        <xsl:apply-templates select="ancestor::awards/award[@awardTypeId = ./@id]"/>
+        <xsl:apply-templates select="ancestor::awards/award[@awardTypeId = current()/@id]"/>
       </ul>
     </dd>
   </xsl:template>
@@ -264,15 +281,4 @@
   <xsl:template match="text()" mode="htmlContent">
     <xsl:value-of disable-output-escaping="yes" select="."/>
   </xsl:template>
-
-  <xsl:template priority="-1"
-                match="@* | * | text() | processing-instruction() |
-comment()" mode="htmlContent">
-    <!-- Identity transformation. -->
-    <xsl:copy>
-      <xsl:apply-templates
-           select="@* | * | text() | processing-instruction() | comment()" mode="htmlContent"/>
-    </xsl:copy>
-  </xsl:template>
-
 </xsl:stylesheet>

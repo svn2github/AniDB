@@ -21,7 +21,7 @@ tr.oddEpisodeTable {
 }	
 
 tr.evenEpisodeTable {
-	background-color: #000000;
+	background-color: #2a263b;
 }
 
 tr.oddFileTable {		
@@ -49,7 +49,7 @@ tr.evenFileTable {
 .close {
     font-size: 14px;
     font-weight: bold;
-    background-color: brown;
+    background-color: #660000;
     text-align: center;
 }
 
@@ -156,10 +156,7 @@ tr.thead {
     font-weight: bold;
     font-size: 14px;
     background-color: #993300;
-    padding: 0px;
-    padding-bottom: 100px;
     text-align: center;
-
 }
 
 tfoot tr {
@@ -177,10 +174,14 @@ td, th {
 }
 
 a {
-    color: #FFFFFF;
-    text-decoration: none;
+    color: blueviolet;
+    text-decoration: underline;
 }
 
 a:hover {
     color: #99CCFF;
+}
+
+.invisible {
+    display: none;
 }
