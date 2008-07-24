@@ -26,9 +26,17 @@
   </xsl:template>
 
   <xsl:template match="group">
-    <tr>
+    <tr onMouseOver="overChangeClass(this, 'high2')" onMouseOut="outChangeClass(this)">
+      <xsl:choose>
+        <xsl:when test="(position()+1) mod 2">
+          <xsl:attribute name="class">oddEpisodeTable</xsl:attribute>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:attribute name="class">evenEpisodeTable</xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
       <td>
-        <xsl:value-of select="name"/> (<xsl:value-of select="shortName"/>)
+        <xsl:apply-templates select="name" mode="htmlContent"/> (<xsl:apply-templates select="shortName" mode="htmlContent"/>)
       </td>
       <td>
         <xsl:value-of select="releasedEpisodes/@normal"/>+<xsl:value-of select="releasedEpisodes/@special"/>
@@ -45,7 +53,7 @@
   <xsl:template match="episodes">
     <br/>
     <h3>Episodes Summary</h3>
-    <table class="episodesTable">
+    <table class="innerTable">
       <tr>
         <th>
           All Episodes
@@ -56,7 +64,7 @@
         <th>Range</th>
         <th>Status</th>
       </tr>
-        <tr>
+        <tr class="oddEpisodeTable" onMouseOver="overChangeClass(this, 'high2')" onMouseOut="outChangeClass(this)">
           <td>
             Owned Episodes
           </td>
@@ -72,7 +80,7 @@
     </table>
     <br/>
     <h3>File Details</h3>
-    <table class="episodesTable">
+    <table class="innerTable">
       <thead>
         <tr>
           <th>#</th>
@@ -91,10 +99,10 @@
     <tr>
       <xsl:choose>
         <xsl:when test="position() mod 2">
-          <xsl:attribute name="class">oddEpisodeTable</xsl:attribute>
+          <xsl:attribute name="class">oddFileTable</xsl:attribute>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:attribute name="class">evenEpisodeTable</xsl:attribute>
+          <xsl:attribute name="class">evenFileTable</xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
       <td>
@@ -248,22 +256,22 @@
     <dl class="synopsis">
       <dt>Synopsis</dt>
       <dd>
-        <xsl:apply-templates select="." mode="blah"/>
+        <xsl:apply-templates select="." mode="htmlContent"/>
       </dd>
     </dl>
   </xsl:template>
 
-  <xsl:template match="text()" mode="blah">
+  <xsl:template match="text()" mode="htmlContent">
     <xsl:value-of disable-output-escaping="yes" select="."/>
   </xsl:template>
 
   <xsl:template priority="-1"
                 match="@* | * | text() | processing-instruction() |
-comment()" mode="blah">
+comment()" mode="htmlContent">
     <!-- Identity transformation. -->
     <xsl:copy>
       <xsl:apply-templates
-           select="@* | * | text() | processing-instruction() | comment()" mode="blah"/>
+           select="@* | * | text() | processing-instruction() | comment()" mode="htmlContent"/>
     </xsl:copy>
   </xsl:template>
 

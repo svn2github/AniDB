@@ -135,8 +135,8 @@ Version 0.2
                            voteCount="<tmpl_var name= data_anime_group_votes>">
                         <releasedEpisodes normal="<tmpl_var name= data_anime_group_epcnt>"
                                           special="<tmpl_var name= data_anime_group_sepcnt>" range="<tmpl_var name= data_anime_group_eprange>"/>
-                        <name><![CDATA[<tmpl_var name=data_anime_group_name>]]></name>
-                        <shortName><![CDATA[<tmpl_var name=data_anime_group_sname>]]></shortName>
+                        <name><tmpl_var expr="jsencodexml(data_anime_group_name)"></name>
+                        <shortName><tmpl_var expr="jsencodexml(data_anime_group_sname)"></shortName>
                     </group>
                 </tmpl_loop>
             </groups>

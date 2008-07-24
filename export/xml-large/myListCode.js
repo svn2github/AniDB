@@ -7,10 +7,7 @@ function myListXsltUpdater() {
 
 myListXsltUpdater.prototype = {
     loadTopPanel: function() {
-        var topPanelDoc = XmlDocument.getDocumentAndPrepareForLoading('');
-        topPanelDoc.load("topPanel.xml", function displayTopPamel() {
-            topPanelDoc.insertIntoElement(document.getElementById("topPanel"));
-        })
+        insertDocumentIntoElement("topPanel")
     },
     loadDocuments: function() {
         this.xmlDocument = XmlDocument.getDocumentAndPrepareForLoading('');
@@ -34,7 +31,6 @@ myListXsltUpdater.prototype = {
 
 var animeDetailsUpdater = function() {
     this.selectedId = 0;
-    this.animeInfoId = "animeInfo";
     this.xslDocument = XslDocument.getDocumentAndPrepareForLoading();
     this.animeDocument = XmlDocument.getDocumentAndPrepareForLoading('');
     this.xslDocument.load("anime.xsl", this.fillRowElement())
@@ -46,22 +42,14 @@ animeDetailsUpdater.prototype = {
         this.updateDisplay();
     },
     collapseShow: function() {
-        document.removeElementById(this.animeInfoId);
+        clearElementWithId('r2-' + this.selectedId)
+        clearElementWithId('r3-' + this.selectedId)
     },
     updateDisplay: function() {
-        var element = document.getElementById(this.selectedId);
-        if (this.selectedId == 0 || !element) return;
-        var newRow = this.createRowElement();
-        this.newCol = document.createElement("td");
-        this.newCol.setAttribute("colSpan", "7")
-        newRow.appendChild(this.newCol)
-        document.insertAfter(newRow, element);
+        this.newCol = document.getElementById('r2-' + this.selectedId)
+        if (this.selectedId == 0 || !this.newCol) return;
+        insertDocumentIntoElement('r3-'+this.selectedId,"bottomClick.xml")
         this.animeDocument.load("anime/" + this.selectedId + ".xml", this.fillRowElement())
-    },
-    createRowElement: function() {
-        var newRow = document.createElement("tr");
-        newRow.setAttribute("id", this.animeInfoId);
-        return newRow;
     },
     fillRowElement: function() {
         return function() {

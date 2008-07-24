@@ -21,7 +21,7 @@
           <xsl:call-template name="CreateHeaderCell">
             <xsl:with-param name="displayName">
               <div class="headerRight"></div>
-              <div class="headerLeft clickable" 
+              <div class="headerLeft switch" 
                    onClick="unlinkParentEvent(this);myListRenderer.update({{'mainLanguage': '{$oppositeLanguage}'}});">
                 <span class="sub">
                   Switch to <xsl:call-template name="LanguageChoice">
@@ -131,21 +131,20 @@
   </xsl:template>
 
   <xsl:template match="anime">
-    <xsl:variable name="selected" select="0"/>
     <xsl:variable name="position" select="position()"/>
-    <tr onMouseOver="overChangeClass(this, 'high1')" onMouseOut="outChangeClass(this)" id="r1-a{@id}">
+    <tr onMouseOver="overChangeClass(this, 'high1')" onMouseOut="outChangeClass(this)">
       <xsl:choose>
-        <xsl:when test="position() mod 2">
+        <xsl:when test="$position mod 2">
           <xsl:attribute name="class">even</xsl:attribute>
         </xsl:when>
         <xsl:otherwise>
           <xsl:attribute name="class">odd</xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
-      <td align="center" onClick="myListRenderer.selectShow('a{@id}')" style="cursor:pointer;">
+      <td align="center" onClick="myListRenderer.selectShow('a{@id}')" class="clickable">
         <xsl:value-of select="$position"/>
       </td>
-      <td align="left" onClick="myListRenderer.selectShow('a{@id}')" style="cursor:pointer;">
+      <td align="left" onClick="myListRenderer.selectShow('a{@id}')" class="clickable">
         <xsl:choose>
           <xsl:when test="englishName =  '' or englishName = romanjiName">
             <xsl:value-of select="romanjiName"/>
@@ -193,9 +192,12 @@
         <xsl:value-of select="@lastAdditionDate"/>
       </td>
     </tr>
-    <tr id="r2-a{@id}">
-      <td></td>
-      <td colSpan="6"/>
+    <tr >
+      <td onClick="myListRenderer.selectShow('a{@id}')" class="clickable close"></td>
+      <td id="r2-a{@id}" colSpan="6"/>
+    </tr>
+    <tr>
+      <td id="r3-a{@id}" colSpan="7"  onClick="myListRenderer.selectShow('a{@id}')" class="clickable close"/> 
     </tr>
   </xsl:template>
 </xsl:stylesheet>

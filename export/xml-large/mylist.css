@@ -12,21 +12,26 @@ body {
     height: 100%;
 }
 
-.episodesTable {
+.innerTable {
 	text-align: left;
 }
 
-table.episodesTable {
-	 width: 90%;
-}
-
 tr.oddEpisodeTable {
-	background-color: Green
+	background-color: blueviolet;
 }	
 
 tr.evenEpisodeTable {
 	background-color: #000000;
-}	
+}
+
+tr.oddFileTable {		
+	background-color: Green;
+}
+
+tr.evenFileTable {
+	background-color: #000000;
+}
+
 
 .descending {
     background-image: url( images/desc.gif );
@@ -37,8 +42,15 @@ tr.evenEpisodeTable {
 }
 
 .complete {
-    background-image: url(images/check2.gif);
+    background-image: url(images/check.gif);
     background-position: left;
+}
+
+.close {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: brown;
+    text-align: center;
 }
 
 h1 {
@@ -57,8 +69,12 @@ h2 {
     font-size: 10px;
 }
 
-.clickable {
+.switch {
     border: thin outset #993300;
+}
+
+.clickable {
+    cursor:pointer;
 }
 
 .headerCenter {

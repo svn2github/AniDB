@@ -35,7 +35,7 @@ var CollectionNameSpace = {
     },
     ConvertAll: function(ary, converter) {
         var result = new Array();
-        CollectionNameSpace.forEach(ary, function store(item){
+        CollectionNameSpace.forEach(ary, function store(item) {
             result.push(converter(item));
         })
         return result;
@@ -49,17 +49,18 @@ Function.prototype.bind = function(object) {
     }
 }
 
-document.insertAfter = function(newChild, refChild) {
-    if (refChild.nextSibling)
-        refChild.parentNode.insertBefore(newChild, refChild.nextSibling);
-    else refChild.parentNode.appendChild(newChild)
+function insertDocumentIntoElement(elementId, documentName) {
+    var topPanelDoc = XmlDocument.getDocumentAndPrepareForLoading('');
+    if (!documentName) documentName = elementId + ".xml"
+    topPanelDoc.load(documentName, function displayTopPamel() {
+        topPanelDoc.insertIntoElement(document.getElementById(elementId));
+    })
 }
 
-document.removeElementById = function(id) {
-    var element = this.getElementById(id);
-    if (element) element.parentNode.removeChild(element);
+function clearElementWithId(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) element.innerHTML = ''
 }
-
 
 
 
