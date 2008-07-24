@@ -159,6 +159,7 @@
           </xsl:otherwise>
         </xsl:choose>
         -
+        <xsl:value-of select="@completed = 'completedByPreferredGroup'"/>
         <xsl:value-of select="@completed"/>
       </td>
       <td align="center">

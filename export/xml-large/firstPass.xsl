@@ -22,25 +22,21 @@
           <xsl:sort order="descending" select="substring(normalize-space(.),1,2)" data-type="number"/>
         </xsl:apply-templates>
       </xsl:attribute>
-      <xsl:if test="@status='incomplete'">
+      <xsl:variable name="completedGroups" select="groups/group[@state = 'complete' or @state = 'finished']"/>
+      <xsl:if test="@status='incomplete' and $completedGroups">
         <xsl:variable name="lastEpisode">
           <xsl:apply-templates select="episodes/episode/@number" mode="selectFirstEpisode">
             <xsl:sort order="descending" data-type="number"/>
           </xsl:apply-templates>
         </xsl:variable>
-        <xsl:attribute name="completed">
-          <xsl:value-of select="$lastEpisode"/> 
-        </xsl:attribute> 
-<!--        <xsl:if test="groups/group[@state = 'complete' or @state = 'finished']">-->
-<!--          <xsl:attribute name="completeByGroupInMyList">true</xsl:attribute>-->
-<!--        </xsl:if>-->
-<!--        <xsl:apply-templates select="episodes/episode" mode="selectFirstEpisodesGroupStatus">-->
-<!--          <xsl:sort select="@number" order="descending" data-type="number"/>-->
-<!--          <xsl:with-param name="groups" select="groups"/>-->
-<!--        </xsl:apply-templates>-->
-<!--        <xsl:apply-templates select="episodes/episode" mode="selectFirstEpisode">-->
-<!--          <xsl:sort select="@number" order="descending" data-type="number"/>-->
-<!--        </xsl:apply-templates>-->
+          <xsl:choose>
+            <xsl:when test="episodes/episode[@number = $lastEpisode]/files/file[@releasedBy = $completedGroups/@id]">
+              <xsl:attribute name="completed">completedByPreferredGroup</xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="completed">completedByGroupInMyList</xsl:attribute>
+            </xsl:otherwise>
+          </xsl:choose>
       </xsl:if>
       <xsl:apply-templates select="@*|node()[not(self::episodes) and not(self::groups)]"/>
     </xsl:copy>
