@@ -10,6 +10,8 @@
   <xsl:param name="showOther" select="'true'"/>
   <xsl:param name="showIncomplete" select="'true'"/>
   <xsl:param name="mainLanguage" select="'romanji'"/>
+  <xsl:param name="showS1" select="'false'"/>
+  <xsl:param name="showS2" select="'false'"/>
   <xsl:template match="animeList">
     <xsl:variable name="oppositeLanguage">
       <xsl:call-template name="FlipLanguage"/>
@@ -69,7 +71,9 @@
         <xsl:apply-templates select="anime[@type[(. != 'OVA' or $showOVA = 'true') and
                     (. != 'TV Series' or $showTV = 'true') and (. != 'Movie' or $showMovie = 'true') and
                     (. = 'TV Series' or . = 'OVA' or . = 'Movie' or $showOther = 'true')] and
-                    (@status = 'complete' or $showIncomplete = 'true')]">
+                    (@status = 'complete' or $showIncomplete = 'true') and 
+                             (@completed = 'completedByPreferredGroup' or $showS1 = 'false') and
+                             (@completed = 'completedByGroupInMyList' or $showS2 = 'false')]">
           <xsl:sort select="(romanjiName[$mainLanguage = 'romanji' or ../englishName =  ''] | 
                     englishName[$mainLanguage = 'english' and . !=  ''])['name' = $sortNodeName] | 
                     (*|@*)[name() = $sortNodeName]" data-type="{$sortDataType}" 
@@ -158,9 +162,6 @@
             </i>)
           </xsl:otherwise>
         </xsl:choose>
-        -
-        <xsl:value-of select="@completed = 'completedByPreferredGroup'"/>
-        <xsl:value-of select="@completed"/>
       </td>
       <td align="center">
         <xsl:value-of select="@type"/>

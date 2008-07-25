@@ -23,11 +23,11 @@
       Show Incomplete
     </td>
     <td>
-      <input type="checkbox" onclick="myListRenderer.update({'showS1': this.checked.toString()})" checked="checked"/>
+      <input type="checkbox" onclick="myListRenderer.update({'showS1': this.checked.toString()})"/>
       Show S1
     </td>
     <td>
-      <input type="checkbox" onclick="myListRenderer.update({'showS2': this.checked.toString()})" checked="checked"/>
+      <input type="checkbox" onclick="myListRenderer.update({'showS2': this.checked.toString()})"/>
       Show S2
     </td>
   </tr>
