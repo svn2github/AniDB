@@ -1,0 +1,38 @@
+2008-07-26	v0.6
+	added: episodes summary
+	added: episodes selecting with showing a selected summary
+	added: hide/show options button
+	changed: removed debug infos
+	changed: styling for options
+	changed: options selectes in CSS are now id based (new element ids introduced)
+	changed: use one small image file for all awards instead of loading the awards images from anidb.net
+
+2008-07-09	v0.5.1
+	fixed: first click on name col would not start sorting descending
+	added: <colgroup> to make all columns as small as possible, except the name
+	added: 'Temp Rating' and 'Reviews'
+	added: 'maxRows' parameter in XSL for later use
+	changed: some styling
+	changed: separate columns for special (watched) episodes
+	changed: add doSort() via JS to all 'sortable' tags
+	changed: mainLang using language ID instead of name
+	changed: sort order for languages is now: japanese, english, main language (if set), all other alphabetically
+
+2008-07-06	v0.5
+	added: main language selection
+
+
+Future *maybe* features in no particular order:
+- detailed infos for anime (not for episodes!)
+- revamp options, eg. no triple click switch (big lists = long wait when clicking through unwanted option??)
+- possibility to hide/show columns
+- page design where you have max number of animes per page and can navigate through (some users have a bloody big anime list)
+- Awards:
+    - use pics from local dir
+		- titles
+- sort alternative titles: englisch, japanese, rest alphabetically
+- show identical titles only once (if possible without alot of work)
+- user-switchable CSS
+- use more classes to make it easier designing new CSS
+- show summary row for selected (via mouse click) animes
+- show in select-boxes only values from *filtered* data (currently: from all data)

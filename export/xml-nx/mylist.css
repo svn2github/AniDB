@@ -1,0 +1,109 @@
+body {
+	background-color: #000000;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-family: sans-serif;
+	margin: 0;
+	height: 100%;
+}
+th {
+	color: #F0F0F0;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color: #993300;
+	text-align: center;
+	white-space: nowrap;
+}
+th.sortable {
+	cursor: pointer;
+}
+tr {
+	background-color: inherit;
+}
+tr.even {
+	color: #FFFFFF;
+	background-color: inherit;
+}
+tr.odd {
+	color: #FFFFFF;
+	background-color: #330000;
+}
+tr.hover:hover {
+	color: #FFCC00;
+	background-color: #660000;
+}
+tr.ep.even {
+	background-color: #00003A;
+}
+tr.ep.odd {
+	background-color: inherit;
+}
+tr.ep:hover {
+	color: #FFCC00;
+	background-color: #000090;
+}
+tr.ep.selected {
+	background-color: #000090;
+}
+td {
+	padding-left: 1em;
+	padding-right: 1em;
+	white-space: nowrap;
+	border-width: 0;
+	text-align: center;
+}
+td.capitalize:first-letter {
+	text-transform: capitalize;
+}
+tr.invisible {
+	display:none;
+}
+a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+select {
+	font-size: inherit;
+	font-family: inherit;
+}
+a:hover {
+	color: #99CCFF;
+}
+.right {
+	text-align: right;
+}
+.left {
+	text-align: left;
+}
+.invisible {
+	display:none;
+}
+#optionsheader {
+	background-color: #005000;
+	font-weight: bold;
+	text-align: center;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+#options {
+	/* display:none; */
+	margin-left: 2em;
+	margin-right: 2em;
+}
+#options td {
+	color: #F0F0F0;
+	background-color: #005000;
+	font-weight: bold;
+}
+#options .optionbutton {
+	border-style: outset;
+	border-color: #007000;
+	border-width: 3px;
+	font-weight: normal;
+}
+#options .optionbutton.selected {
+	background-color: #003A00;
+	border-style: inset;
+	border-color: #007000;
+	border-width: 3px;
+}
