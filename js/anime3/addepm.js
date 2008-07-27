@@ -343,12 +343,14 @@ function titlesActions(elem, action, eid, lang) {
 function addTitleAllEps() {
 	var sel = document.getElementById('etitle.sel');
 	var lang = sel.value;
-	sel.removeChild(sel.options[sel.selectedIndex]);
+	var type = document.getElementById('etitle.add.sel').value;
+	//sel.removeChild(sel.options[sel.selectedIndex]);
 	for (var e in episodes) {
 		var episode = episodes[e];
+		if (type != 'A' && type != episode.typeChar) continue;
 		if (!episode.titles[lang]) titlesActions(null, 'add', episode.id, lang);
 	}
-	//alert('add title to all eps '+lang);
+	//alert('add '+lang+' to '+type+' eps');
 }
 
 /* Function that removes a title row */
@@ -597,7 +599,18 @@ function createEpisodeTable() {
 	row.appendChild(cell);
 	tfoot.appendChild(row);
 	row = document.createElement('tr');
-	cell = createCell(null, null, document.createTextNode('Add to all episodes title: '), null, 7);
+	cell = createCell(null, null, document.createTextNode('Add to '), null, 7);
+	optionArray = new Object();
+	optionArray['A']={'text':"All"};
+	optionArray['N']={'text':"Normal"};
+	optionArray['S']={'text':"Special"};
+	optionArray['C']={'text':"Opening/Ending/Credits"};
+	optionArray['T']={'text':"Trailer/Promo/Ads"};
+	optionArray['P']={'text':"Parody/Fandub"};
+	optionArray['O']={'text':"Other Episodes"};
+	createSelectArray(cell,'etitle.add.sel','etitle.add.sel',null,'A',optionArray);
+	cell.appendChild(document.createTextNode(' '));
+	cell.appendChild(document.createTextNode(' episodes title: '));
 	var langsel = createBasicSelect('etitle.sel','etitle.sel',null);
 	for (var lang in languageMap) {
 		var option = document.createElement('option');
