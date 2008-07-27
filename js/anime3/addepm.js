@@ -2,6 +2,7 @@
  * @author fahrenheit (alka.setzer@gmail.com)
            some code derived from epoximator work at anidb
  * version 2.0 (23.05.2008) - Reworked version
+ * version 2.1 (27.07.2008) - Addition of mass language add
  */
 
 // GLOBALS //
@@ -313,10 +314,10 @@ function toggleEpTitles() {
  * @param elem Element that triggered the action
  * @param action Action to execute
  */
-function titlesActions(elem, action) {
+function titlesActions(elem, action, eid, lang) {
 	if (action == 'add') {
-		var eid = Number(elem.id.substr(1,elem.id.indexOf('title')-1));
-		var lang = document.getElementById('e'+eid+'title.sel').value;
+		if (!eid) eid = Number(elem.id.substr(1,elem.id.indexOf('title')-1));
+		if (!lang) lang = document.getElementById('e'+eid+'title.sel').value;
 		var tbody = document.getElementById('e'+eid+'langsTable').tBodies[0];
 		tbody.appendChild(createEpisodeTitleLine(eid,lang,languageMap[lang]['name'] + ' title',0,0,true));
 		episodes[eid].titleLangs.push(lang);
@@ -326,8 +327,8 @@ function titlesActions(elem, action) {
 	if (action == 'rem') {
 		var pnode = elem.parentNode;
 		while (pnode.nodeName.toLowerCase() != 'tr') pnode = pnode.parentNode;
-		var eid = pnode.id.substr(1,pnode.id.indexOf('.')-1);
-		var lang = pnode.id.substr(pnode.id.lastIndexOf('.')+1,pnode.id.length);
+		if (!eid) eid = pnode.id.substr(1,pnode.id.indexOf('.')-1);
+		if (!lang) lang = pnode.id.substr(pnode.id.lastIndexOf('.')+1,pnode.id.length);
 		episodes[eid].titleLangs.splice(episodes[eid].titleLangs.indexOf(lang),1);		
 		pnode.parentNode.removeChild(pnode);
 		var sel = document.getElementById('e'+eid+'title.sel');
@@ -337,6 +338,17 @@ function titlesActions(elem, action) {
 		option.value = lang;
 		sel.appendChild(option);
 	}
+}
+
+function addTitleAllEps() {
+	var sel = document.getElementById('etitle.sel');
+	var lang = sel.value;
+	sel.removeChild(sel.options[sel.selectedIndex]);
+	for (var e in episodes) {
+		var episode = episodes[e];
+		if (!episode.titles[lang]) titlesActions(null, 'add', episode.id, lang);
+	}
+	//alert('add title to all eps '+lang);
 }
 
 /* Function that removes a title row */
@@ -581,6 +593,23 @@ function createEpisodeTable() {
 	cell.appendChild(document.createTextNode(' '));
 	var addInput = createBasicButton(null,'add');
 	addInput.onclick = addEpisode;
+	cell.appendChild(addInput);
+	row.appendChild(cell);
+	tfoot.appendChild(row);
+	row = document.createElement('tr');
+	cell = createCell(null, null, document.createTextNode('Add to all episodes title: '), null, 7);
+	var langsel = createBasicSelect('etitle.sel','etitle.sel',null);
+	for (var lang in languageMap) {
+		var option = document.createElement('option');
+		var op = languageMap[lang];
+		option.text = op['name'];
+		option.value = lang;
+		langsel.appendChild(option);
+	}
+	cell.appendChild(langsel);
+	cell.appendChild(document.createTextNode(' '));
+	addInput = createBasicButton(null,'add');
+	addInput.onclick = addTitleAllEps;
 	cell.appendChild(addInput);
 	row.appendChild(cell);
 	tfoot.appendChild(row);
