@@ -11,19 +11,15 @@
     <xsl:apply-templates select="episodes"/>
   </xsl:template>
   <xsl:template match="seriesInfo">
-    <dl class="seriesInfo">
-      <dt>Series Info</dt>
-      <dd>
-        <xsl:apply-templates select="name"/>
-        <xsl:apply-templates select="genres"/>
-        <xsl:apply-templates select="airingDate"/>
-        <xsl:apply-templates select="type"/>
-        <xsl:apply-templates select="rating"/>
-        <xsl:apply-templates select="awards"/>
-        <xsl:apply-templates select="companies"/>
-        <xsl:apply-templates select="synopsis"/>
-      </dd>
-    </dl>
+    <table class="seriesInfo">
+      <xsl:apply-templates select="name"/>
+      <xsl:apply-templates select="airingDate"/>
+      <xsl:apply-templates select="type"/>
+      <xsl:apply-templates select="rating"/>
+      <xsl:apply-templates select="awards"/>
+      <xsl:apply-templates select="companies"/>
+    </table>
+    <xsl:apply-templates select="synopsis"/>
   </xsl:template>
 
   <xsl:template match="group">
@@ -36,14 +32,24 @@
           <xsl:attribute name="class">evenEpisodeTable</xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
+      <xsl:variable name="episodes" select="../../episode[.//releasedBy/@id = current()/@id]"/>
+      <xsl:variable name="numericEpisodes" select="$episodes[boolean(number(@number))]"/>
+
       <td class="clickable" onClick="divDisplayer.toggleDiv('togglingDiv{$animeId}-{@id}')">
         <xsl:apply-templates select="name" mode="htmlContent"/> (<xsl:apply-templates select="shortName" mode="htmlContent"/>)
       </td>
       <td>
-        <xsl:value-of select="releasedEpisodes/@normal"/>+<xsl:value-of select="releasedEpisodes/@special"/>
+        <b>
+          <xsl:value-of select="count($numericEpisodes)"/>/<xsl:value-of select="releasedEpisodes/@normal"/>
+        </b> +
+        <i>
+          <xsl:value-of select="count($episodes) - count($numericEpisodes)"/>/<xsl:value-of select="releasedEpisodes/@special"/>
+        </i>
       </td>
       <td>
-        <xsl:value-of select="releasedEpisodes/@range"/>
+        <xsl:call-template name="findRange">
+          <xsl:with-param name="numericEpisodes" select="$numericEpisodes"/>
+        </xsl:call-template> / <xsl:value-of select="releasedEpisodes/@range"/>
       </td>
       <td>
         <xsl:value-of select="@state"/>
@@ -64,7 +70,7 @@
           All Episodes
         </th>
         <th>
-          Total <xsl:value-of select="episodeCount/normal/@totalEpisodes"/>+<xsl:value-of select="episodeCount/special/@totalEpisodes"/>
+          Total
         </th>
         <th>Range</th>
         <th>Status</th>
@@ -74,9 +80,18 @@
           Owned Episodes
         </td>
         <td>
-          <xsl:value-of select="episodeCount/normal/@ownEpisodes"/>+<xsl:value-of select="episodeCount/special/@ownEpisodes"/>
+          <b>
+            <xsl:value-of select="episodeCount/normal/@ownEpisodes"/>/<xsl:value-of select="episodeCount/normal/@totalEpisodes"/>
+          </b> +
+          <i>
+            <xsl:value-of select="episodeCount/special/@ownEpisodes"/>/<xsl:value-of select="episodeCount/special/@totalEpisodes"/>
+          </i>
         </td>
-        <td></td>
+        <td>
+          <xsl:call-template name="findRange">
+            <xsl:with-param name="numericEpisodes" select="episode[boolean(number(@number))]"/>
+          </xsl:call-template>
+        </td>
         <td>
           <xsl:value-of select="@status"/>
         </td>
@@ -87,6 +102,57 @@
       </xsl:call-template>
       <xsl:apply-templates select="groups/group"/>
     </table>
+  </xsl:template>
+
+  <xsl:template name="findRange">
+    <xsl:param name="numericEpisodes"/>
+    <xsl:if test="not($numericEpisodes)">0</xsl:if>
+    <xsl:variable name="range">
+      <xsl:apply-templates select="$numericEpisodes[1]" mode="range">
+        <xsl:with-param name="numericEpisodes" select="$numericEpisodes[position() > 1]"/>
+      </xsl:apply-templates>
+    </xsl:variable>
+    <xsl:value-of select="translate(normalize-space($range),' ','')"/>
+  </xsl:template>
+
+  <xsl:template match="episode" mode="range">
+    <xsl:param name="numericEpisodes"/>
+    <xsl:param name="previousEpisodeNo"/>
+    <xsl:variable name="nextEpisode" select="$numericEpisodes[1]"/>
+    <xsl:choose>
+      <xsl:when test="not($previousEpisodeNo)">
+        <xsl:value-of select="@number"/>
+      </xsl:when>
+      <xsl:when test="($previousEpisodeNo + 1) &lt; @number">
+        , <xsl:value-of select="@number"/>
+      </xsl:when>
+      <xsl:when test="not($nextEpisode) or $nextEpisode/@number &gt; @number+1">
+        - <xsl:value-of select="@number"/>
+      </xsl:when>
+    </xsl:choose>
+    <xsl:apply-templates select="$nextEpisode" mode="range">
+      <xsl:with-param name="numericEpisodes" select="$numericEpisodes[position() != 1]"/>
+      <xsl:with-param name="previousEpisodeNo" select="@number"/>
+    </xsl:apply-templates>
+  </xsl:template>
+
+  <xsl:template match="episode" mode="terminate">
+    <xsl:param name="previous_episode"/>
+    <xsl:choose>
+      <xsl:when test="$previous_episode">
+        <xsl:value-of select="@number"/>
+      </xsl:when>
+      <xsl:when test="$previous_episode + 1 = @number">
+        -<xsl:value-of select="@number"/>
+      </xsl:when>
+      <xsl:otherwise>
+        ,<xsl:value-of select="@number"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="episode" mode="startRange">
+    <xsl:value-of select="@number"/>
   </xsl:template>
 
   <xsl:template name="episodes">
@@ -155,127 +221,158 @@
   </xsl:template>
 
   <xsl:template match="name[other != '' or count(synonym/alias) > 0]" mode="otherNames">
-    <dt>Other Names</dt>
-    <dd>
-      <ul>
-        <xsl:apply-templates select="other" mode="nonEmptyElementInLi"/>
-        <xsl:apply-templates select="synonym/alias" mode="nonEmptyElementInLi"/>
-      </ul>
-    </dd>
+    <tr>
+      <td class="left">Other Names</td>
+      <td>
+        <ul>
+          <xsl:apply-templates select="other" mode="elementInLi"/>
+          <xsl:apply-templates select="synonym/alias" mode="elementInLi"/>
+        </ul>
+      </td>
+    </tr>
   </xsl:template>
 
   <xsl:template match="name[count(shorts/short) > 0]" mode="shortNames">
-    <dt>Short Names</dt>
-    <dd>
-      <ul>
-        <xsl:apply-templates select="shorts/short" mode="nonEmptyElementInLi"/>
-      </ul>
-    </dd>
+    <tr>
+      <td class="left">Short Names</td>
+      <td>
+        <ul>
+          <xsl:apply-templates select="shorts/short" mode="elementInLi"/>
+        </ul>
+      </td>
+    </tr>
   </xsl:template>
 
   <xsl:template match="name">
-    <dl class="name">
-      <xsl:apply-templates select="romanji" mode="nonEmptyElementInDDWithDT">
-        <xsl:with-param name="DTContent">Romanji Name</xsl:with-param>
-      </xsl:apply-templates>
-      <xsl:apply-templates select="english" mode="nonEmptyElementInDDWithDT">
-        <xsl:with-param name="DTContent">English Name</xsl:with-param>
-      </xsl:apply-templates>
-      <xsl:apply-templates select="kanji" mode="nonEmptyElementInDDWithDT">
-        <xsl:with-param name="DTContent">Kanji Name</xsl:with-param>
-      </xsl:apply-templates>
-      <xsl:apply-templates select="." mode="otherNames"/>
-      <xsl:apply-templates select="." mode="shortNames"/>
-    </dl>
+    <xsl:apply-templates select="romanji" mode="nonEmptyElementInTableRow">
+      <xsl:with-param name="CellContent">Romanji Name</xsl:with-param>
+    </xsl:apply-templates>
+    <xsl:apply-templates select="english" mode="nonEmptyElementInTableRow">
+      <xsl:with-param name="CellContent">English Name</xsl:with-param>
+    </xsl:apply-templates>
+    <xsl:apply-templates select="kanji" mode="nonEmptyElementInTableRow">
+      <xsl:with-param name="CellContent">Kanji Name</xsl:with-param>
+    </xsl:apply-templates>
+    <xsl:apply-templates select="." mode="otherNames"/>
+    <xsl:apply-templates select="." mode="shortNames"/>
   </xsl:template>
-  <xsl:template match="node()[. != '']" mode="nonEmptyElementInDDWithDT">
-    <xsl:param name="DTContent"/>
-    <dt>
-      <xsl:value-of select="$DTContent"/>
-    </dt>
-    <xsl:apply-templates select="." mode="elementInDD"/>
+
+  <xsl:template match="node()[. != '']" mode="nonEmptyElementInTableRow">
+    <xsl:param name="CellContent"/>
+    <tr>
+      <td class="left">
+        <xsl:value-of select="$CellContent"/>
+      </td>
+      <td>
+        <xsl:value-of select="."/>
+      </td>
+    </tr>
   </xsl:template>
-  <xsl:template match="node()[. != '']" mode="nonEmptyElementInLi">
+
+  <xsl:template match="node()[. != '']" mode="elementInDD">
+    <dd>
+      <xsl:value-of select="."/>
+    </dd>
+  </xsl:template>
+
+  <xsl:template match="node()[. != '']" mode="elementInLi">
     <li>
       <xsl:value-of select="."/>
     </li>
   </xsl:template>
-  <xsl:template match="node()" mode="elementInDD">
-    <dd>
-      <xsl:value-of select="."/>
-    </dd>
-  </xsl:template>
+
   <xsl:template match="genres"/>
+
   <xsl:template match="airingDate">
-    <dl class="airingDate">
-      <dt>Aired From</dt>
-      <dd>
+    <tr>
+      <td class="left">Aired From</td>
+      <td>
         <xsl:value-of select="@start"/>
-        to
+      </td>
+    </tr>
+    <tr>
+      <td class="left">Aired Till</td>
+      <td>
         <xsl:value-of select="@end"/>
-      </dd>
-    </dl>
+      </td>
+    </tr>
   </xsl:template>
   <xsl:template match="type">
-    <dl class="type">
-      <dt>Anime Type</dt>
-      <xsl:apply-templates select="." mode="elementInDD"/>
-    </dl>
-  </xsl:template>
-  <xsl:template match="rating">
-    <dl class="rating">
-      <dt>Anidb Rating</dt>
-      <xsl:apply-templates select="." mode="elementInDD"/>
-    </dl>
-  </xsl:template>
-  <xsl:template match="awards">
-    <span>This anime has won the following awards</span>
-    <dl>
-      <xsl:apply-templates select="awardTypes/awardType"/>
-    </dl>
-  </xsl:template>
-  <xsl:template match="awardType">
-    <dt>
-      <a href="{normalize-space(ancestor::awards/award[@awardTypeId = current()/@id]/awardURL)}">
+    <tr>
+      <td class="left">Anime Type</td>
+      <td>
         <xsl:value-of select="."/>
-      </a>
-    </dt>
-    <dd>
-      <ul>
-        <xsl:apply-templates select="ancestor::awards/award[@awardTypeId = current()/@id]"/>
-      </ul>
-    </dd>
+      </td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="rating">
+    <tr>
+      <td class="left">Anidb Rating</td>
+      <td>
+        <xsl:value-of select="."/>
+      </td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="awards">
+    <tr>
+      <td class="left">Awards</td>
+      <td>
+        <xsl:apply-templates select="awardTypes/awardType"/>
+      </td>
+    </tr>
+  </xsl:template>
+
+  <xsl:template match="awardType">
+    <xsl:choose>
+      <xsl:when test="ancestor::awards/award[@awardTypeId = current()/@id]">
+        <dl>
+          <dt>
+            <a href="{normalize-space(ancestor::awards/award[@awardTypeId = current()/@id]/awardURL)}">
+              <xsl:value-of select="."/>
+            </a>
+          </dt>
+          <xsl:apply-templates select="ancestor::awards/award[@awardTypeId = current()/@id]"/>
+        </dl>
+      </xsl:when>
+      <xsl:otherwise>
+        <a href="{normalize-space(ancestor::awards/award[@awardTypeId = current()/@id]/awardURL)}">
+          <xsl:value-of select="."/>
+        </a>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template match="award">
-    <xsl:apply-templates select="awardName" mode="nonEmptyElementInLi"/>
+    <xsl:apply-templates select="awardName" mode="elementInDD"/>
   </xsl:template>
 
   <xsl:template match="companies">
-    <span>The following companies were involved in the production</span>
-    <dl>
-      <xsl:apply-templates select="company[count(. | key('companiesByType', @typeId)[1]) = 1]"/>
-    </dl>
+    <tr>
+      <td class="left">Companies</td>
+      <td>
+        <xsl:apply-templates select="company[count(. | key('companiesByType', @typeId)[1]) = 1]"/>
+      </td>
+    </tr>
   </xsl:template>
 
   <xsl:template match="company">
-    <dt>
-      <xsl:value-of select="type"/>
-    </dt>
     <dd>
-      <ul>
-        <xsl:apply-templates select="key('companiesByType',@typeId)/name" mode="nonEmptyElementInLi"/>
-      </ul>
+      <dl>
+        <dt>
+          <xsl:value-of select="type"/>
+        </dt>
+        <xsl:apply-templates select="key('companiesByType',@typeId)/name" mode="elementInDD"/>
+      </dl>
     </dd>
   </xsl:template>
 
   <xsl:template match="synopsis">
-    <dl class="synopsis">
-      <dt>Synopsis</dt>
-      <dd>
-        <xsl:apply-templates select="." mode="htmlContent"/>
-      </dd>
-    </dl>
+    <h3>Synopsis</h3>
+    <p>
+      <xsl:apply-templates select="." mode="htmlContent"/>
+    </p>
   </xsl:template>
 
   <xsl:template match="text()" mode="htmlContent">
