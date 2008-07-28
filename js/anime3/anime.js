@@ -1237,6 +1237,7 @@ function parseEpisodeData(xmldoc) {
 			var episode = episodes[eid];
 			if (!episode) continue;
 			var eprow = document.getElementById('eid_'+episode.id);
+			if (!eprow) { errorAlert('parseEpisodeData','no episode row for eid: '+episode.id); continue; } // no episode row for some reason
 			var a = eprow.getElementsByTagName('a')[0];
 			if (a) a.onclick = foldEp;
 			if (loadExpand) { // Normal behaviour
