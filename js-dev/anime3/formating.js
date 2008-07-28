@@ -4,6 +4,7 @@
  *           Formating
  * version 1.2 (18.06.2007) - Previous version
  * version 2.0 (20.04.2008) - Rather full support for every major browser Firefox, IE, Opera and Safari
+ * version 2.1 (27.07.2008) - Introduction of Assisted Mode
  */
 
 // GLOBALS
@@ -20,6 +21,10 @@ var isIE = (document.selection != undefined && window.getSelection == undefined)
 var isFF = (document.selection == undefined && window.getSelection != undefined) ? true : false;
 var isOP = (document.selection != undefined && window.getSelection != undefined) ? true : false;
 var isWK = (navigator.userAgent.toLowerCase().indexOf('applewebkit') >= 0);
+var functionModes = {'0':{"name":'Off',"desc":'All modes disabled, functions as if Javascript is disabled'},
+					'1':{"name":'Assisted',"desc":'Textarea with some assistance'},
+					'2':{"name":'Visual',"desc":'WYSIWYG - What You See Is What You (Usualy) Get'}}
+var currentFMode = 1;
 
 /* Change view mode
  * @param type Type of view mode (source,wysiwyg)
@@ -339,25 +344,26 @@ function createSpoiler(obj,fTA,sel,textOnly) {
  * @param selected Is select
  */
 function formatText(id, n, selected) {
-	// When user clicks toolbar button make sure it always targets its respective WYSIWYG
-	var obj = document.getElementById("wysiwyg_" + n);
-	if (!obj) return;
-	obj.contentWindow.focus();
+	if (currentFMode == 2) {
+		// When user clicks toolbar button make sure it always targets its respective WYSIWYG
+		var obj = document.getElementById("wysiwyg_" + n);
+		if (!obj) return;
+		obj.contentWindow.focus();
+	}
 	var fTA = document.getElementById('textArea_' + n);
 	// When in Text Mode these execCommands are disabled
 	var formatIDs = new Array("Bold","Italic","Underline","Strikethrough","InsertUnorderedList","InsertOrderedList","Spoiler","CreateLink");
 	for (var i = 0; i <= formatIDs.length;) { // Check if button clicked is in disabled list
-		if (formatIDs[i] == id)
-			 var disabled_id = 1; 
+		if (formatIDs[i] == id) var disabled_id = 1; 
 		i++;
 	}
 	if (viewTextMode == 1 && disabled_id == 1) { // Check if in Text Mode and disabled button was clicked
 		alert ("You are in TEXT Mode. This feature has been disabled.");	
 	} else {
 		if (id == "CreateLink") { // CreateLink
-			createLink(obj.contentWindow, fTA);
+			createLink(obj.contentWindow, fTA, null, (currentFMode == 1 ? true : false));
 		} else if (id == "Spoiler") { // Spoiler
-			createSpoiler(obj.contentWindow, fTA);
+			createSpoiler(obj.contentWindow, fTA, null, (currentFMode == 1 ? true : false));
 		} else if (id == "ViewSource") { // ViewSource
 			viewMode('source',n);
 		} else if (id == "ViewText") { // ViewText
@@ -367,9 +373,32 @@ function formatText(id, n, selected) {
 		} else if (id == "Preview") { // Preview document
 			previewDoc(obj.contentWindow.document);
 		} else { // Every other command
-			obj.contentWindow.document.execCommand(id, false, null);
+			if (currentFMode == 2)
+				obj.contentWindow.document.execCommand(id, false, null);
+			else
+				textFormatMagic(id,fTA);
 		}
 	}
+}
+
+function textFormatMagic(id,fTA) {
+	alert('i should be doing something of the serious kind, id is: '+id+'\nfTA is: '+fTA);
+	/* just for reference commands are:
+		[b]bold[/b]
+		[i]italic[/i]
+		[s]strike[/s]
+		[u]underline[/u]
+		[spoiler]spoiler[/spoiler]
+		[ul]unordered list[/ul]
+		[ol]ordered list[/ol]
+		[li]list item[/li]
+		
+		How we do this is like this:
+		We check to see if there is a selection
+			[true] - just enclose the selection in the tags
+			[false] - open up or close tag
+	*/
+	alert(getSelection(this.window));
 }
 
 /* Function that inserts RTE commands */
@@ -551,7 +580,7 @@ function init_formating() {
 	for (var i = 0; i < textAreas.length; i++) {
 		var textArea = textAreas[i];
 		textArea.id = "textArea_"+i;
-		textArea.style.display = "none";
+		if (currentFMode == 2) textArea.style.display = "none";
 		var fTA = textArea.form;
 		var span = document.createElement('span');
 		span.className = 'f_controls';
@@ -564,9 +593,11 @@ function init_formating() {
 		createLocalButton(span,'orderedlist',FunctionMap['orderedlist']);
 		createLocalButton(span,'unorderedlist',FunctionMap['unorderedlist']);
 		createLocalButton(span,'spoiler',FunctionMap['spoiler']);
-		createLocalButton(span,'viewsource',FunctionMap['viewsource']);
-		createLocalButton(span,'viewrte',FunctionMap['viewrte']);
-		createLocalButton(span,'cleansource',FunctionMap['cleansource']);
+		if (currentFMode == 2) {
+			createLocalButton(span,'viewsource',FunctionMap['viewsource']);
+			createLocalButton(span,'viewrte',FunctionMap['viewrte']);
+			createLocalButton(span,'cleansource',FunctionMap['cleansource']);
+		}
 		createLocalButton(span,'preview',FunctionMap['preview']);
 		createLocalButton(span,'link',FunctionMap['link']);
 		createSelect(span,OptionsMap,'f_links');
@@ -580,46 +611,48 @@ function init_formating() {
 		if (preview) preview.style.display = '';
 		span.appendChild(document.createElement('br'));
 		textArea.parentNode.insertBefore(span,textArea);
-		// Create iframe which will be used for rich text editing
-		var iframe = document.createElement('iframe');
-		iframe.frameborder = 0;
-		iframe.id = "wysiwyg_" + i;
-		iframe.style.height = wysiwygHeight + "px";
-		iframe.style.width = wysiwygWidth + "px";
-		iframe.borderWidth = 0;
-		textArea.parentNode.insertBefore(iframe,textArea);
-		// Pass the textarea's existing text over to the content variable
-		var content = convert_input(textArea.value);
-		var doc = iframe.contentWindow.document;
-		// Write the textarea's content into the iframe
-		doc.open();
-		doc.write(content);
-		doc.close();
-		// Make the iframe editable in both Mozilla and IE
-		doc.body.contentEditable = true;
-		doc.designMode = "on";
-		// need to activate this on firefox
-		// this is a stupid detection method but it works, 
-		// all browsers support queryCommandSupported (at least there's native code for it)
-		// but only IE and Opera return false for not supported Firefox only styleWithCSS
-		// Firefox trows, you have to love this kind of stuff or else you will go mad
-		try { if (document.queryCommandSupported('styleWithCSS')) true; } 
-		catch(e) { 
-			try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
-			catch (e) {  } // FF 1.5-
+		if (currentFMode == 2) {
+			// Create iframe which will be used for rich text editing
+			var iframe = document.createElement('iframe');
+			iframe.frameborder = 0;
+			iframe.id = "wysiwyg_" + i;
+			iframe.style.height = wysiwygHeight + "px";
+			iframe.style.width = wysiwygWidth + "px";
+			iframe.borderWidth = 0;
+			textArea.parentNode.insertBefore(iframe,textArea);
+			// Pass the textarea's existing text over to the content variable
+			var content = convert_input(textArea.value);
+			var doc = iframe.contentWindow.document;
+			// Write the textarea's content into the iframe
+			doc.open();
+			doc.write(content);
+			doc.close();
+			// Make the iframe editable in both Mozilla and IE
+			doc.body.contentEditable = true;
+			doc.designMode = "on";
+			// need to activate this on firefox
+			// this is a stupid detection method but it works, 
+			// all browsers support queryCommandSupported (at least there's native code for it)
+			// but only IE and Opera return false for not supported Firefox only styleWithCSS
+			// Firefox trows, you have to love this kind of stuff or else you will go mad
+			try { if (document.queryCommandSupported('styleWithCSS')) true; } 
+			catch(e) { 
+				try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
+				catch (e) {  } // FF 1.5-
+			}
 		}
 		var inputs = fTA.getElementsByTagName('input');
 		for (var s = 0; s < inputs.length; s++) {
 			var input = inputs[s];
 			if (input.type != 'submit') continue;
 			input.onclick = updateTextAreaCK;
-			//input.type = 'button';
 			break;
 		}
 	}
 }
 
 function prepPage() {
+	if (!currentFMode) return; // disabled
 	uriObj = parseURI(); // update the uriObj
 	if (!uriObj['show']) return; // go away evil page!
 	switch (uriObj['show']) { // list of pages where to apply formating stuff
