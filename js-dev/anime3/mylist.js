@@ -147,7 +147,7 @@ function prepPage() {
 function fetchData(aid,uid) {
 	var req = xhttpRequest();
 	var uidstr = (isNaN(Number(ruid)) ? '' : '&uid='+Number(ruid));
-	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_uid'+ruid+'.xml', parseData);
+	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_uid1179.xml', parseData);
 	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+uidstr, parseData);
 }
 
@@ -670,11 +670,23 @@ function createEpisodeTable(aid) {
 	form.action = 'animedb.pl';
 	var fieldset = document.createElement('fieldset');
 	fieldset.appendChild(createTextInput('show',null,false,true,null,'mylist'));
+	fieldset.appendChild(createTextInput('aid',null,false,true,null,aid));
 	fieldset.appendChild(createTextInput('expand',null,false,true,null,aid));
 	fieldset.appendChild(createTextInput('uid',null,false,true,null,uid));
-	fieldset.appendChild(createTextInput('filemode',null,false,true,null,mylist_settings['filemode']));
-	fieldset.appendChild(createTextInput('noeptb',null,false,true,null,mylist_settings['noeptb']));
-	fieldset.appendChild(createTextInput('showheader',null,false,true,null,mylist_settings['showheader']));
+	fieldset.appendChild(createTextInput('filemode',null,false,true,null,Number(mylist_settings['filemode'])));
+	fieldset.appendChild(createTextInput('noeptb',null,false,true,null,Number(mylist_settings['noeptb'])));
+	fieldset.appendChild(createTextInput('showheader',null,false,true,null,Number(mylist_settings['showheader'])));
+	var arrayOfNumFields = ['musicvideo','page','review','showonhdd','watchedcomplete','mylist','movie','watchedpartial',
+							'wishlist','showoncd','showdeleted','tvseries','showunknown','ova','other','showmixed',
+							'tvspecial','unwatched','web','h','unknown','showvotes','vote','watchedallihave'];
+	var arrayOfCharFields =['char','pass'];
+	for (var f in arrayOfNumFields)
+		if (mylist_settings[f]) fieldset.appendChild(createTextInput(f,null,false,true,null,Number(mylist_settings[f])));
+	for (var i = 0; i < arrayOfCharFields.length; i++) {
+		var f = arrayOfCharFields[i];
+		alert(f+'='+mylist_settings[f]);
+		if (mylist_settings[f]) fieldset.appendChild(createTextInput(f,null,false,true,null,mylist_settings[f]));
+	}
 	form.appendChild(fieldset);
 	// now for the tables
 	var table = document.createElement('table');
