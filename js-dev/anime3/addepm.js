@@ -319,7 +319,7 @@ function titlesActions(elem, action, eid, lang) {
 		if (!eid) eid = Number(elem.id.substr(1,elem.id.indexOf('title')-1));
 		if (!lang) lang = document.getElementById('e'+eid+'title.sel').value;
 		var tbody = document.getElementById('e'+eid+'langsTable').tBodies[0];
-		tbody.appendChild(createEpisodeTitleLine(eid,lang,languageMap[lang]['name'] + ' title',0,0,true));
+		tbody.appendChild(createEpisodeTitleLine(eid,lang,'',0,0,true));
 		episodes[eid].titleLangs.push(lang);
 		var sel = document.getElementById('e'+eid+'title.sel');
 		sel.removeChild(sel.options[sel.selectedIndex]);
