@@ -331,6 +331,10 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
 	}
 	var hyperLink = '['+val+':'+attribute+':'+sel+']';
 	if (textOnly) return hyperLink;
+	if (currentFMode == 1) {
+		insertAtSelection(fTA, hyperLink, true);
+		return;
+	}
 	if (isIE) {	//IE support
 		// IE fails miserably here, don't show the link thingie
 		insertAtSelection(obj, hyperLink, true);
@@ -411,7 +415,7 @@ function formatText(id, n, selected) {
 			}
 		} else {
 			if (id == "CreateLink") { // CreateLink
-				createLink(obj.contentWindow, fTA, null, false);
+				createLink(fTA, fTA, null, false);
 			} else if (id == "Preview") { // Preview document
 				previewDoc(fTA);
 			} else { // Every other command
