@@ -667,6 +667,16 @@ function tabWork() {
 		body.appendChild(tab);
 	}
 	jsdiv.appendChild(body);
+	jsdiv.appendChild(document.createElement('br'));
+	var ul = document.createElement('ul');
+	var actionLI = document.createElement('li');
+	actionLI.className = 'action';
+	actionLI.appendChild(document.createTextNode('Actions: '));
+	var reloadInput = createBasicButton('do.apply','save preferences');
+	reloadInput.onclick = function reloadPage() { alert('Current preferences saved.'); }
+	actionLI.appendChild(reloadInput);
+	ul.appendChild(actionLI);
+	jsdiv.appendChild(ul);
 	
 	bodyDiv.appendChild(jsdiv);
 }
