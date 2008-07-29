@@ -680,11 +680,12 @@ function createEpisodeTable(aid) {
 							'wishlist','showoncd','showdeleted','tvseries','showunknown','ova','other','showmixed',
 							'tvspecial','unwatched','web','h','unknown','showvotes','vote','watchedallihave'];
 	var arrayOfCharFields =['char','pass'];
-	for (var f in arrayOfNumFields)
+	for (var i = 0; i < arrayOfNumFields.length; i++) {
+		var f = arrayOfNumFields[i];
 		if (mylist_settings[f]) fieldset.appendChild(createTextInput(f,null,false,true,null,Number(mylist_settings[f])));
+	}
 	for (var i = 0; i < arrayOfCharFields.length; i++) {
 		var f = arrayOfCharFields[i];
-		alert(f+'='+mylist_settings[f]);
 		if (mylist_settings[f]) fieldset.appendChild(createTextInput(f,null,false,true,null,mylist_settings[f]));
 	}
 	form.appendChild(fieldset);
