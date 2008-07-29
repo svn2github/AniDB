@@ -21,10 +21,7 @@ var isIE = (document.selection != undefined && window.getSelection == undefined)
 var isFF = (document.selection == undefined && window.getSelection != undefined) ? true : false;
 var isOP = (document.selection != undefined && window.getSelection != undefined) ? true : false;
 var isWK = (navigator.userAgent.toLowerCase().indexOf('applewebkit') >= 0);
-var functionModes = {'0':{"name":'Off',"desc":'All modes disabled, functions as if Javascript is disabled'},
-					'1':{"name":'Assisted',"desc":'Textarea with some assistance'},
-					'2':{"name":'Visual',"desc":'WYSIWYG - What You See Is What You (Usualy) Get'}}
-var currentFMode = 1;
+var currentFMode = CookieGet('currentFMode') || 2;
 
 /* Change view mode
  * @param type Type of view mode (source,wysiwyg)
@@ -176,24 +173,45 @@ function buttonMouseOut() {
  * @param text if true will insert text instead of nodes
  */
 function insertAtSelection(myField, myValue, text) {
-	if (isIE) {	//IE support
-		myField = myField.document;
-		myField.focus();
-		var sel = myField.selection.createRange();
-		if (text) sel.text = myValue;
-		else sel.pasteHTML(myValue);
-		myField.focus();
-	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
-		if (isFF) myField.focus();
-		var sel = myField.getSelection();
-		var range = sel.getRangeAt(0);
-		range.deleteContents();
-		var doc = myField.document;
-		if (text) range.insertNode(doc.createTextNode(myValue));
-		else range.insertNode(myValue);
+	if (currentFMode == 2) {
+		if (isIE) {	//IE support
+			myField = myField.document;
+			myField.focus();
+			var sel = myField.selection.createRange();
+			if (text) sel.text = myValue;
+			else sel.pasteHTML(myValue);
+			myField.focus();
+		} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+			if (isFF) myField.focus();
+			var sel = myField.getSelection();
+			var range = sel.getRangeAt(0);
+			range.deleteContents();
+			var doc = myField.document;
+			if (text) range.insertNode(doc.createTextNode(myValue));
+			else range.insertNode(myValue);
+		} else {
+			if (seeDebug) alert('insertAtSelection: unknown selection method');
+			return;
+		}
 	} else {
-		if (seeDebug) alert('insertAtSelection: unknown selection method');
-		return;
+		if (isIE) {
+			myField.focus();
+			sel = document.selection.createRange();
+			sel.text = myValue;
+			myField.focus();
+		} else if (isFF || isOp) {
+			var startPos = myField.selectionStart;
+			var endPos = myField.selectionEnd;
+			myField.value = myField.value.substring(0, startPos)
+		                + myValue
+		                + myField.value.substring(endPos, myField.value.length);
+			myField.focus();
+			myField.selectionStart = startPos + myValue.length;
+			myField.selectionEnd = startPos + myValue.length;
+		} else {
+			if (seeDebug) alert('insertAtSelection: unknown selection method');
+			return;		
+		}
 	}
 }
 
@@ -202,19 +220,34 @@ function insertAtSelection(myField, myValue, text) {
  * @return 
  */
 function getSelection(myField) {
-	if (isIE) {	//IE support
-		myField = myField.document;
-		myField.focus();
-		var sel = myField.selection.createRange();
-		return (sel.text);
-	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
-		if (isFF) myField.focus();
-		var sel = myField.getSelection();
-		var range = sel.getRangeAt(0);
-		return (range.toString());
+	if (currentFMode == 2) {
+		if (isIE) {	//IE support
+			myField = myField.document;
+			myField.focus();
+			var sel = myField.selection.createRange();
+			return (sel.text);
+		} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+			if (isFF) myField.focus();
+			var sel = myField.getSelection();
+			var range = sel.getRangeAt(0);
+			return (range.toString());
+		} else {
+			if (seeDebug) alert('getSelection: unknown selection method');
+			return;
+		}
 	} else {
-		if (seeDebug) alert('getSelection: unknown selection method');
-		return;
+		if (isIE) { //IE support
+			myField.focus();
+			sel = document.selection.createRange();
+			return (sel.text);
+		} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+			var startPos = myField.selectionStart;
+			var endPos = myField.selectionEnd;
+			return myField.value.substring(startPos, endPos);
+		} else {
+			if (seeDebug) alert('getSelection: unknown selection method');
+			return;
+		}
 	}
 }
 
@@ -360,45 +393,43 @@ function formatText(id, n, selected) {
 	if (viewTextMode == 1 && disabled_id == 1) { // Check if in Text Mode and disabled button was clicked
 		alert ("You are in TEXT Mode. This feature has been disabled.");	
 	} else {
-		if (id == "CreateLink") { // CreateLink
-			createLink(obj.contentWindow, fTA, null, (currentFMode == 1 ? true : false));
-		} else if (id == "Spoiler") { // Spoiler
-			createSpoiler(obj.contentWindow, fTA, null, (currentFMode == 1 ? true : false));
-		} else if (id == "ViewSource") { // ViewSource
-			viewMode('source',n);
-		} else if (id == "ViewText") { // ViewText
-			viewMode('text',n);
-		} else if (id == "CleanSource") { // Clean Source
-			cleanHTML(obj.contentWindow.document);
-		} else if (id == "Preview") { // Preview document
-			previewDoc(obj.contentWindow.document);
-		} else { // Every other command
-			if (currentFMode == 2)
+		if (currentFMode == 2) {
+			if (id == "CreateLink") { // CreateLink
+				createLink(obj.contentWindow, fTA, null, false);
+			} else if (id == "Spoiler") { // Spoiler
+				createSpoiler(obj.contentWindow, fTA, null, false);
+			} else if (id == "ViewSource") { // ViewSource
+				viewMode('source',n);
+			} else if (id == "ViewRte") { // ViewRte
+				viewMode('text',n);
+			} else if (id == "CleanSource") { // Clean Source
+				cleanHTML(obj.contentWindow.document);
+			} else if (id == "Preview") { // Preview document
+				previewDoc(obj.contentWindow.document);
+			} else { // Every other command
 				obj.contentWindow.document.execCommand(id, false, null);
-			else
+			}
+		} else {
+			if (id == "CreateLink") { // CreateLink
+				createLink(obj.contentWindow, fTA, null, false);
+			} else if (id == "Preview") { // Preview document
+				previewDoc(fTA);
+			} else { // Every other command
 				textFormatMagic(id,fTA);
+			}
 		}
 	}
 }
 
+/* Function that takes care of assisted formating
+ * @param id 
+ * @param fTA TextArea
+ */
 function textFormatMagic(id,fTA) {
-	alert('i should be doing something of the serious kind, id is: '+id+'\nfTA is: '+fTA);
-	/* just for reference commands are:
-		[b]bold[/b]
-		[i]italic[/i]
-		[s]strike[/s]
-		[u]underline[/u]
-		[spoiler]spoiler[/spoiler]
-		[ul]unordered list[/ul]
-		[ol]ordered list[/ol]
-		[li]list item[/li]
-		
-		How we do this is like this:
-		We check to see if there is a selection
-			[true] - just enclose the selection in the tags
-			[false] - open up or close tag
-	*/
-	alert(getSelection(this.window));
+	var selection = getSelection(fTA);
+	var action = id.toLowerCase();
+	//if (selection && selection.length) 
+	insertAtSelection(fTA, FunctionMap[action]['start']+selection+FunctionMap[action]['end'], true);
 }
 
 /* Function that inserts RTE commands */
@@ -495,7 +526,7 @@ function convert_output(str) {
 	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
 	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
 
-	str = str.replace(/\n/mgi,'');
+	str = str.replace(/\n/mgi,(currentFMode == 2 ? '' : '[br]'));
 	str = str.replace(/\<br([^>]*)\>/mgi,'[br]');
 	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|pre) [^>]*?\>/mgi,'[$1]');
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|pre) [^>]*?\>/mgi,'[/$1]');
@@ -547,9 +578,17 @@ function cleanHTML(myField) {
  */
 function previewDoc(myField) {
 	if (!myField) return;
-	var html = myField.body.innerHTML;
-	var previewWindow = window.open('','previewWin','height=400,width=500,resizable=yes,scrollbars=yes,toolbar=no,status=no');
-	previewWindow.document.write('<html><body>'+convert_input(convert_output(html))+'</body></html>');
+	var html = (currentFMode == 2 ? myField.body.innerHTML : myField.value);
+	var previewWindow = window.open('','previewWin','height=250,width=500,resizable=yes,scrollbars=yes,toolbar=no,status=no');
+	previewWindow.document.write('<!DOCTYPE html><html lang="en"><head><title>Text Preview</title>');
+	previewWindow.document.write('<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>');
+	previewWindow.document.write('<link rel="icon" href="favicon.ico"/>');
+	previewWindow.document.write('<link rel="stylesheet" href="'+document.styleSheets[0].href+'" type="text/css" title="Style"/>');
+	previewWindow.document.write('</head><body id="anidb" class="nonav">');
+	previewWindow.document.write('<div id="layout-main"><div class="g_content">');
+	previewWindow.document.write(convert_input(convert_output(html)))
+	previewWindow.document.write('</div></div>');
+	previewWindow.document.write('</body></html>');
 	previewWindow.document.close();
 }
 
@@ -561,15 +600,16 @@ function init_formating() {
 	var textAreas = document.getElementsByTagName('textarea');
 	if (!textAreas.length) return; // Still no nodes..
 
-	FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'accesskey':"b",'text':"B",'start':"*",'end':"*",'active':false},
-	               'italic':{'id':"Italic",'desc':"Italic text: [i]text[/i] (alt+i)",'accesskey':"i",'text':"I",'start':"/",'end':"/",'active':false},
-	               'underline':{'id':"Underline",'desc':"Underline text: [u]text[/u] (alt+u)",'accesskey':"u",'text':"U",'start':"__",'end':"__",'active':false},
-	               'strikethrough':{'id':"Strikethrough",'desc':"Strike-through text: [s]text[/s] (alt+s)",'accesskey':"S",'text':"s",'start':"--",'end':"--",'active':false},
-	               'orderedlist':{'id':"InsertOrderedList",'desc':"Ordered item: # text (alt+o)",'accesskey':"o",'text':"oLi",'start':"# ",'end':"",'active':false},
-	               'unorderedlist':{'id':"InsertUnorderedList",'desc':"Unordered item: * text (alt+l)",'accesskey':"l",'text':"uLi",'start':"* ",'end':"",'active':false},
-				   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':null,'end':null,'active':false},
+	FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'accesskey':"b",'text':"B",'start':"[b]",'end':"[/b]",'active':false},
+	               'italic':{'id':"Italic",'desc':"Italic text: [i]text[/i] (alt+i)",'accesskey':"i",'text':"I",'start':"[i]",'end':"[/i]",'active':false},
+	               'underline':{'id':"Underline",'desc':"Underline text: [u]text[/u] (alt+u)",'accesskey':"u",'text':"U",'start':"[u]",'end':"[/u]",'active':false},
+	               'strikethrough':{'id':"Strikethrough",'desc':"Strike-through text: [s]text[/s] (alt+s)",'accesskey':"S",'text':"s",'start':"[s]",'end':"[/s]",'active':false},
+	               'insertorderedlist':{'id':"InsertOrderedList",'desc':"Ordered list: [ol]text[/ol] (alt+o)",'accesskey':"o",'text':"oLi",'start':"[ol]",'end':"[/ol]",'active':false},
+	               'insertunorderedlist':{'id':"InsertUnorderedList",'desc':"Unordered list: [ul]text[/ul] (alt+l)",'accesskey':"l",'text':"uLi",'start':"[ul]",'end':"[/ul]",'active':false},
+				   'insertlistitem':{'id':"InsertListItem",'desc':"List Item: [li]text[/li] (alt+e)",'accesskey':"e",'text':"Li",'start':"[li]",'end':"[/li]",'active':false},
+				   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':'[spoiler]','end':'[/spoiler]','active':false},
 				   'viewsource':{'id':"ViewSource",'desc':"Source Mode",'accesskey':"q",'text':"vSource",'start':null,'end':null,'active':false},
-				   'viewrte':{'id':"ViewText",'desc':"WYSIWYG Mode",'accesskey':"w",'text':"vWYSIWYG",'start':null,'end':null,'active':false},
+				   'viewrte':{'id':"ViewRte",'desc':"WYSIWYG Mode",'accesskey':"w",'text':"vWYSIWYG",'start':null,'end':null,'active':false},
 				   'cleansource':{'id':"CleanSource",'desc':"Clean Source (alt+c)",'accesskey':"c",'text':"Clean",'start':null,'end':null,'active':false},
 				   'preview':{'id':"Preview",'desc':"Preview",'accesskey':"",'text':"preview",'start':null,'end':null,'active':false},
 	               'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"LNK",'start':"[",'end':"]",'active':false}};
@@ -590,8 +630,9 @@ function init_formating() {
 		createLocalButton(span,'italic',FunctionMap['italic']);
 		createLocalButton(span,'underline',FunctionMap['underline']);
 		createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
-		createLocalButton(span,'orderedlist',FunctionMap['orderedlist']);
-		createLocalButton(span,'unorderedlist',FunctionMap['unorderedlist']);
+		createLocalButton(span,'insertorderedlist',FunctionMap['insertorderedlist']);
+		createLocalButton(span,'insertunorderedlist',FunctionMap['insertunorderedlist']);
+		if (currentFMode == 1) createLocalButton(span,'insertlistitem',FunctionMap['insertlistitem']);
 		createLocalButton(span,'spoiler',FunctionMap['spoiler']);
 		if (currentFMode == 2) {
 			createLocalButton(span,'viewsource',FunctionMap['viewsource']);

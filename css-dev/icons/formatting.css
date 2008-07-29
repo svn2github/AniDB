@@ -26,35 +26,39 @@
 }
 
 *.f_bold {
-  background-image: url(../icons/formating/bold.gif);
+background-image: url(../icons/formating/bold.gif);
 }
 
 *.f_italic {
-  background-image: url(../icons/formating/italic.gif);
+background-image: url(../icons/formating/italic.gif);
 }
 
 *.f_underline {
-  background-image: url(../icons/formating/underline.gif);
+background-image: url(../icons/formating/underline.gif);
 }
 
 *.f_strikethrough {
-  background-image: url(../icons/formating/strikethrough.gif);
+background-image: url(../icons/formating/strikethrough.gif);
 }
 
-*.f_orderedlist {
-  background-image: url(../icons/formating/orderedlist.gif);
+*.f_insertorderedlist {
+background-image: url(../icons/formating/orderedlist.gif);
 }
 
-*.f_unorderedlist {
-  background-image: url(../icons/formating/unorderedlist.gif);
+*.f_insertunorderedlist {
+background-image: url(../icons/formating/unorderedlist.gif);
+}
+
+*.f_insertlistitem {
+background-image: url(../icons/formating/list_item.gif);
 }
 
 *.f_link {
-  background-image: url(../icons/formating/link.gif);
+background-image: url(../icons/formating/link.gif);
 }
 
 *.f_separator {
-  background-image: url(../icons/formating/separator.gif);
+background-image: url(../icons/formating/separator.gif);
 }
 
 *.f_viewsource {
@@ -69,6 +73,17 @@ background-image: url(../icons/formating/view_source.gif);
 background-image: url(../icons/formating/clean_source.gif);
 }
 
+*.f_preview {
+background-image: url(../icons/formating/preview.gif);
+}
+
+*.f_preview {
+background-image: url(../icons/formating/preview.gif);
+}
+
+*.f_spoiler {
+background-image: url(../icons/formating/spoiler.gif);
+}
 
 *.f_buddy {
   background-image: url(../icons/formating/user.gif);
