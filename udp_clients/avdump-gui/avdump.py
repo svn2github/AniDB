@@ -9,8 +9,6 @@ __all__ = ['AvdumpThread', 'AvdumpHandler']
 # this is ugly, broken and appallingly magic, the result of much hacking to get it working at all
 class namedproperty(property):
 	def __init__(self, name, *args, **kw):
-		def callit(owner, *a, **k):
-			return f(owner, name, *a, **k)
 		largs = []
 		lkw = {}
 		for f in args:
