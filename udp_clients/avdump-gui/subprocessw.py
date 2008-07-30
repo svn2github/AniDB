@@ -60,7 +60,10 @@ if mswindows:
 				raise NotImplementedError("Can't pass startup stuff for unicode args")
 			
 			if not None in (p2cread, c2pwrite, errwrite):
-				raise NotImplementedError("Can't pass file object bits for unicode args")
+				startupinfo.dwFlags |= STARTF_USESTDHANDLES
+				startupinfo.hStdInput = p2cread
+				startupinfo.hStdOutput = c2pwrite
+				startupinfo.hStdError = errwrite
 
 			if shell:
 				raise NotImplementedError("Can't pick your own shell for unicode args")
