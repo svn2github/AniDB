@@ -81,7 +81,7 @@ class AvdumpThread(Thread):
 				args = u'"%s" -oev -exp:"%s" -ac:%s:%s' % (self.avdumppath, self.exportpath, self.username, self.apikey)
 				args += (u' %s' * len(paths)) % paths
 				self._count = len(paths)
-				process = subprocessw.Popen(args, shell=not mswindows, stdout=PIPE, stderr=STDOUT, bufsize=1)
+				process = subprocessw.Popen(args, shell=not mswindows, stdout=PIPE, stderr=STDOUT, stdin=PIPE, bufsize=1)
 				process.stdin.close()
 				self._processoutput(process.stdout)
 				process.wait()
