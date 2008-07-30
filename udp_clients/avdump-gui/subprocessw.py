@@ -10,6 +10,7 @@ if mswindows:
 	CloseHandle = ctypes.windll.kernel32.CloseHandle
 	GetLastError = ctypes.windll.kernel32.GetLastError
 	
+	from win32process import STARTF_USESTDHANDLES
 	class STARTUPINFOW(ctypes.Structure):
 		_fields_ = (("cb", ctypes.wintypes.DWORD), # should init to 17*4 maybe?
 			("lpReserved", ctypes.wintypes.LPWSTR),
