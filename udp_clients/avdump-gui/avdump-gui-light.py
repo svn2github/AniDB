@@ -1,11 +1,11 @@
-import wx,os,subprocessw
-from subprocess import mswindows
+import wx,os
+from avdump import *
 
-class mainFrame(wx.Frame):
+class mainFrame(wx.Frame, AvdumpHandler):
     _configfile='config.ini'
 
     def __init__(self, parent, title):
-        wx.Frame.__init__(self, parent, -1, u'Avdump GUI', wx.DefaultPosition, (350, 200), style=wx.CLOSE_BOX | wx.SYSTEM_MENU | wx.CAPTION | 0 | 0 | wx.MINIMIZE_BOX)
+        wx.Frame.__init__(self, parent, -1, u'Avdump GUI', wx.DefaultPosition, (350, 365), style=wx.CLOSE_BOX | wx.SYSTEM_MENU | wx.CAPTION | 0 | 0 | wx.MINIMIZE_BOX)
         self.panel = wx.Panel(self, -1)
         self.filepath = wx.TextCtrl(self.panel, -1, '', (95, 25), size=(190, -1))
         self.start = wx.Button(self.panel, -1, 'Start', (130,125), (-1, -1))
@@ -16,9 +16,13 @@ class mainFrame(wx.Frame):
         self.apiuser = wx.StaticText(self.panel, -1, 'Username:', (20,70), (150, 17))
         self.apipass = wx.StaticText(self.panel, -1, 'UDP API-Key:', (175,70), (150, 17))
         self.apilink = wx.HyperlinkCtrl(self.panel, -1, "If you don\'t have an UDP API Key set yet, click here to set it", "http://anidb.net/perl-bin/animedb.pl?show=profile#tab4", (15,153), (300, 17))
+        self.ed2kbox = wx.TextCtrl(self.panel, -1, "", (15, 200), (310, 150), style = wx.TE_MULTILINE | wx.TE_READONLY)
         self.Bind(wx.EVT_BUTTON, self.selectClick, self.select)
         self.Bind(wx.EVT_BUTTON, self.startClick, self.start)
         self.read_config()
+
+        self.avdump = AvdumpThread(self)
+        self.avdump.start()
 
     def read_config(self):
         '''read the config file and return the content'''
@@ -58,22 +62,31 @@ class mainFrame(wx.Frame):
         self.filepath.write(path)
 
     def startClick(self, event):
-        avdumppath = os.path.join(os.getcwd(), "avdump.exe")
-        exportpath = os.path.join(os.getcwd(), "ed2klinks.txt")
+        avdump = self.avdump
+        avdump.avdumppath = os.path.join(os.getcwd(), "avdump.exe")
+        avdump.exportpath = os.path.join(os.getcwd(), "ed2klinks.txt")
+        avdump.username = self.username.GetValue()
+        avdump.apikey = self.password.GetValue()
         self.write_config()
         if self.filepath.GetValue() == '':
             self.error('You have to select some files or folder to scan!')
         elif (self.username.GetValue() == '' or self.password.GetValue() == ''):
             self.error("You didn't enter your username and/or password in the options menu.")
         else:
-            '''debug option to see what avdump actually get's fed'''
-            arg = (u'"%s" -o -exp:"%s" -ac:%s:%s %s') %(avdumppath, exportpath, self.username.GetValue(), self.password.GetValue(), self.filepath.GetValue())
-            #self.error(arg)
-            subprocessw.Popen(arg, shell=not mswindows)
+            avdump.queue(self.filepath.GetValue())
 
     def error(self,text):
         message = wx.MessageDialog(self,text,style=wx.ICON_ERROR | wx.OK)
         message.ShowModal()
+
+    def avdump_idle(self):
+        pass
+
+    def avdump_ed2k(self, ed2k):
+        def doit():
+            self.ed2kbox.AppendText(ed2k)
+        wx.CallAfter(doit)
+        pass
  
 class App(wx.App):
     def OnInit(self):
