@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avinfo", "avinfo\avinfo.vcproj", "{7EB8F5E3-03DB-476A-A06D-E2C5FB4CA045}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E3C2A4E1-3DC5-4B67-A3F1-D8AB645DC750} = {E3C2A4E1-3DC5-4B67-A3F1-D8AB645DC750}
