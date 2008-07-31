@@ -56,7 +56,7 @@ public class AniAdd extends JApplet {
        // File TestFile = new File("E:\\Media\\Anime\\!UnSeen\\Bamboo Blade[Huzzah-Doremi] 12 - Azuma's Circumstances And Mei's Circumstances.Mkv");
       //  EpProc.AddFiles(new File[] {TestFile});
         //EpProc.StartProcessing();
-        
+
         if (API == null) {
             System.out.println("no API");
             return;
@@ -76,11 +76,10 @@ public class AniAdd extends JApplet {
             try {
                 API.Connect();
             } catch (Exception exception) {
-//                displayError("Connect failed: "+exception.getMessage());
-  //              return;
+                displayError("Connect failed: "+exception.getMessage());
+                return;
             }
 
-        
         add(GUI);
         loadConfig();
         System.out.println("Started");

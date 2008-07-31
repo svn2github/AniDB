@@ -6,6 +6,11 @@
     <description>Builds, tests, and runs the project AniAdd.</description>
     <import file="nbproject/build-impl.xml"/>
 	
+    <target name="-init-user">
+	<!-- I have no idea what I'm doing -->
+	<property name="javac.source" value="1.6"/>
+	<property name="javac.target" value="1.6"/>
+    </target>
     <target depends="FailSafeGenKey" name="-post-jar">
         <signjar jar="${dist.dir}/AniAdd.jar" alias="AD" keystore="keystore" storepass="secret"/>
     </target>
