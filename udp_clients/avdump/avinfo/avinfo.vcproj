@@ -18,12 +18,11 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="C:\bin"
-			IntermediateDirectory="C:\obj\$(ProjectName)d"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="1"
-			BuildLogFile="C:\TEMP\$(ProjectName)-BuildLog.htm"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -84,13 +83,12 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="C:\bin"
-			IntermediateDirectory="C:\obj\$(ProjectName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="0"
-			BuildLogFile="C:\TEMP\$(ProjectName)-BuildLog.htm"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -172,13 +170,12 @@
 		</Configuration>
 		<Configuration
 			Name="Static|Win32"
-			OutputDirectory="C:\bin"
-			IntermediateDirectory="C:\obj\$(ProjectName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="0"
-			BuildLogFile="C:\TEMP\$(ProjectName)-BuildLog.htm"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
