@@ -15,7 +15,7 @@
             <dname>
                 <param name="CN" value=""/>
                 <param name="OU" value=""/>
-                <param name="O"  value=""/>
+                <param name="O"  value="AniDB"/>
                 <param name="C"  value=""/>
             </dname>
         </genkey>
