@@ -1,8 +1,3 @@
 Error messages in general, but particularly for auth
 
 Ability to reauthenticate
-
-Mechanism to let us pass params to auth to auth automatically when actually
-loaded from anidb (probably by passing the session, the existing code for
-passing the password is impossible as we don't store that, this will require a
-server change too)
