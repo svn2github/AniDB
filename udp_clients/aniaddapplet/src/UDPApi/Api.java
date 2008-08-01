@@ -95,7 +95,11 @@ public class Api {
         
         cApiCmd Cmd = new cApiCmd("AUTH","auth", false);
         Cmd.Params.put("user", UserInfo.UserName);
-        Cmd.Params.put("pass", UserInfo.Password);
+	if (UserInfo.Session != null) {
+	    Cmd.Params.put("sess", UserInfo.Session);
+	} else {
+	    Cmd.Params.put("pass", UserInfo.Password);
+	}
         Cmd.Params.put("protover",Integer.toString(ConInfo.ProtoVer));
         Cmd.Params.put("client", ConInfo.ClientID);
         Cmd.Params.put("clientver", Integer.toString(ConInfo.ClientVer));
