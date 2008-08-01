@@ -97,8 +97,12 @@ public class Api {
         Cmd.Params.put("user", UserInfo.UserName);
 	if (UserInfo.Session != null) {
 	    Cmd.Params.put("sess", UserInfo.Session);
-	} else {
+	}
+	if (UserInfo.Password != null) {
 	    Cmd.Params.put("pass", UserInfo.Password);
+	}
+	if (UserInfo.Autopass != null) {
+	    Cmd.Params.put("autopass", UserInfo.Autopass);
 	}
         Cmd.Params.put("protover",Integer.toString(ConInfo.ProtoVer));
         Cmd.Params.put("client", ConInfo.ClientID);

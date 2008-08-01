@@ -88,7 +88,7 @@ public class AniAdd extends JApplet {
 		API.UserInfo.UserName = cookies.get("adbsessuser");
 		API.UserInfo.Session = cookies.get("adbsess");
 		if (API.UserInfo.UserName == null)
-			API.UserInfo.UserName = cookies.get("adbautouser");
+		    API.UserInfo.UserName = cookies.get("adbautouser");
 		API.UserInfo.Autopass = cookies.get("adbautopass");
 		if (API.UserInfo.UserName == null || (API.UserInfo.Session == null && API.UserInfo.Autopass == null))
 		    throw new NullPointerException();
