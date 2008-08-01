@@ -415,9 +415,9 @@ public class Api {
             while (true) {
                 java.util.Date Now = new java.util.Date(System.currentTimeMillis());
 
-                if (ConInfo.DownUntil != null && ConInfo.AniDBApiDown && ConInfo.DownUntil.getTime() - Now.getTime() < 0) {
+                /*if (ConInfo.DownUntil != null && ConInfo.AniDBApiDown && ConInfo.DownUntil.getTime() - Now.getTime() < 0) {
                     Authenticate();
-                }
+                }*/
 
                 if (!ConInfo.AniDBApiDown){
                     if (ConInfo.NAT &&
