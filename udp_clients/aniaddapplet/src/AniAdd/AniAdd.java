@@ -67,30 +67,34 @@ public class AniAdd extends JApplet {
 
         java.lang.System.out.println("Authenticate");
         API.UserInfo.ApiPassword="";
-        try {
-	    Hashtable<String,String> cookies = new Hashtable<String,String>();
+	API.UserInfo.UserName = getParameter("user");
+	API.UserInfo.Session = getParameter("sess");
+	if (API.UserInfo.Username == null || API.UserInfo.Session == null) {
+	    try {
+		Hashtable<String,String> cookies = new Hashtable<String,String>();
 
-	    Map<String,List<String>> headers = CookieHandler.getDefault().get(new URI("http://anidb.net/"), new HashMap<String,List<String>>());
-	    List<String> cookie_lists = headers.get("Cookie");
+		Map<String,List<String>> headers = CookieHandler.getDefault().get(new URI("http://anidb.net/"), new HashMap<String,List<String>>());
+		List<String> cookie_lists = headers.get("Cookie");
 
-	    // This isn't a proper parser
-	    for (String cookie_list : cookie_lists)
-		for (String cookie : cookie_list.split(";")) {
-		    String attr = cookie.substring(0, cookie.indexOf('=')).trim();
-		    String value = cookie.substring(cookie.indexOf('=') + 1).trim();
-		    cookies.put(attr, value);
-		}
+		// This isn't a proper parser
+		for (String cookie_list : cookie_lists)
+		    for (String cookie : cookie_list.split(";")) {
+			String attr = cookie.substring(0, cookie.indexOf('=')).trim();
+			String value = cookie.substring(cookie.indexOf('=') + 1).trim();
+			cookies.put(attr, value);
+		    }
 
-	    API.UserInfo.UserName = cookies.get("adbsessuser");
-	    if (API.UserInfo.UserName == null)
-		throw new NullPointerException();
-	    API.UserInfo.Session = cookies.get("adbsess");
-	    if (API.UserInfo.Session == null)
-		throw new NullPointerException();
-        } catch(Exception e) {
-            API.UserInfo.UserName = JOptionPane.showInputDialog(this, "User");
-            API.UserInfo.Password = JOptionPane.showInputDialog(this, "Password");
-        }
+		API.UserInfo.UserName = cookies.get("adbsessuser");
+		if (API.UserInfo.UserName == null)
+		    throw new NullPointerException();
+		API.UserInfo.Session = cookies.get("adbsess");
+		if (API.UserInfo.Session == null)
+		    throw new NullPointerException();
+	    } catch(Exception e) {
+		API.UserInfo.UserName = JOptionPane.showInputDialog(this, "User");
+		API.UserInfo.Password = JOptionPane.showInputDialog(this, "Password");
+	    }
+	}
         if (API.UserInfo.UserName != null)
             try {
                 API.Connect();
