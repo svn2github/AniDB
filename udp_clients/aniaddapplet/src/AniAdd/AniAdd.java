@@ -69,7 +69,7 @@ public class AniAdd extends JApplet {
         API.UserInfo.ApiPassword="";
 	API.UserInfo.UserName = getParameter("user");
 	API.UserInfo.Session = getParameter("sess");
-	if (API.UserInfo.Username == null || API.UserInfo.Session == null) {
+	if (API.UserInfo.UserName == null || API.UserInfo.Session == null) {
 	    try {
 		Hashtable<String,String> cookies = new Hashtable<String,String>();
 
