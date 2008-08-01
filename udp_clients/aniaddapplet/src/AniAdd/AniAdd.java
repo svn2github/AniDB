@@ -69,6 +69,7 @@ public class AniAdd extends JApplet {
         API.UserInfo.ApiPassword="";
 	API.UserInfo.UserName = getParameter("user");
 	API.UserInfo.Session = getParameter("sess");
+	API.UserInfo.Autopass = getParameter("autopass");
 	if (API.UserInfo.UserName == null || API.UserInfo.Session == null) {
 	    try {
 		Hashtable<String,String> cookies = new Hashtable<String,String>();
@@ -85,10 +86,11 @@ public class AniAdd extends JApplet {
 		    }
 
 		API.UserInfo.UserName = cookies.get("adbsessuser");
-		if (API.UserInfo.UserName == null)
-		    throw new NullPointerException();
 		API.UserInfo.Session = cookies.get("adbsess");
-		if (API.UserInfo.Session == null)
+		if (API.UserInfo.UserName == null)
+			API.UserInfo.UserName = cookies.get("adbautouser");
+		API.UserInfo.Autopass = cookies.get("autopass");
+		if (API.UserInfo.UserName == null || (API.UserInfo.Session == null && API.UserInfo.Autopass == null))
 		    throw new NullPointerException();
 	    } catch(Exception e) {
 		API.UserInfo.UserName = JOptionPane.showInputDialog(this, "User");
