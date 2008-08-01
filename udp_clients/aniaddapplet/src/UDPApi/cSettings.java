@@ -8,5 +8,5 @@ public class cSettings {
     public boolean GetInitMessages;
     public boolean GetPushMessages;
     public boolean Encryption;
-    public int PingIntervall;
+    public int PingInterval;
 }

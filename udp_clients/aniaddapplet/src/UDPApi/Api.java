@@ -66,7 +66,7 @@ public class Api {
         Com = new java.net.DatagramSocket(12000);
         java.lang.System.out.println("Con Established");   
         
-        Settings.PingIntervall = 5;
+        Settings.PingInterval = 1;
         Settings.GetInitMessages = true;
         Settings.GetPushMessages = false;
         
@@ -284,9 +284,11 @@ public class Api {
                     Pos = Resp.indexOf(":");
                     RetIP = java.net.InetAddress.getByName(Resp.substring(0, Pos));   
                     
-                    if (!IP.equals(RetIP)) {
                         ConInfo.NAT = true;
-                    }
+		    Resp = Resp.substring(Pos+1);
+                    Pos = Resp.indexOf(" ");
+                    if (!IP.equals(RetIP) || !Resp.substring(0, Pos).equals("12000"))
+                        ConInfo.NAT = true;
                 } catch (Exception exception) {exception.printStackTrace();} 
 
                 if (ApiReply.ResponseID == 201) {
@@ -425,8 +427,8 @@ public class Api {
 
                 if (!ConInfo.AniDBApiDown){
                     if (ConInfo.NAT &&
-                     ((Now.getTime() - ConInfo.LastPackedOn.getTime()) / 60000) > Settings.PingIntervall &&
-                     ((Now.getTime() - LastNATActivity.getTime()) / 60000 > 5)) {
+                     ((Now.getTime() - ConInfo.LastPackedOn.getTime()) / 60000) > Settings.PingInterval &&
+                     ((Now.getTime() - LastNATActivity.getTime()) / 60000 > 1)) {
                         cApiCmd Cmd = new cApiCmd("PING", "ping", false);
                         LastNATActivity.setTime(Now.getTime());
                         QueryCmd(Cmd);
