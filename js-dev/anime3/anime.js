@@ -533,7 +533,7 @@ function updateGroupTable() {
 	var newTbody = document.createElement('tbody');
 	for (var g = 0; g < anime.groups.length; g++) {
 		var group = groups[anime.groups[g]];
-		if (!group || group && group.id == 0) continue; // not interested in non groups nor the no group
+		if (!group || group && (group.id == 0 || group.agid == -1)) continue; // not interested in non groups nor the no group
 		// update existing rows
 		var gid = group.id;
 		if (!groups[gid]) continue; // not interested
