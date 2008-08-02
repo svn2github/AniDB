@@ -6,7 +6,8 @@
  */
  
 // GLOBALS
-var request_eid;				// current eid;
+var request_eid;				// current eid
+var request_aid;				// current aid
 var uid;						// userID
 var mod;						// isMod
 var anime;						// anime Object (used in animePage)
@@ -90,6 +91,7 @@ function prepPage() {
 			var endpos = a.href.indexOf('&',startpos);
 			if (endpos < 0) endpos = a.href.length;
 			aid = Number(a.href.substring(startpos,endpos));
+			request_aid = aid;
 		}
 		if (a.href.indexOf('http://anidb.net/e') >= 0)
 			request_eid = Number(a.href.substring(18,a.href.length));
@@ -169,7 +171,7 @@ function parseData(xmldoc) {
 						'\n\tcustom: '+parseCustomNode+' ms'+
 						'\n\tpreping: '+preparingPage+' ms'+
 						'\n\tTotal: '+(parseAnimeNode+parseCustomNode+preparingPage)+' ms');
-	fetchData(aid,request_eid); // now that we have anime data, fetch the rest of the data
+	fetchData(request_aid,request_eid); // now that we have anime data, fetch the rest of the data
 }
 
 /* Function that parses Episode data
@@ -177,14 +179,11 @@ function parseData(xmldoc) {
  */
 function parseEpisodeData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
-	alert('here');
 	if (!root) return;
 	updateStatus('Processing anime episode(s)...');
 	var animesNode = root.getElementsByTagName('animes')[0];
-	alert('here1');
 	if (!animesNode) return;
 	var animeNodes = animesNode.getElementsByTagName('anime');
-	alert('here2');
 	for (var i = 0; i < animeNodes.length; i++) {
 		if (animeNodes[i].parentNode.nodeName != 'animes') continue; // wrong node
 		var aid = Number(animeNodes[i].getAttribute('id'));
@@ -209,7 +208,6 @@ function parseEpisodeData(xmldoc) {
 		if (seeTimes) alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
 	}
 	updateStatus('');
-	alert('here3');
 	var table = createFileTable(episodes[request_eid]);
 	
 }

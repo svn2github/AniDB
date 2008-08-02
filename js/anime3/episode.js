@@ -6,7 +6,8 @@
  */
  
 // GLOBALS
-var request_eid;				// current eid;
+var request_eid;				// current eid
+var request_aid;				// current aid
 var uid;						// userID
 var mod;						// isMod
 var anime;						// anime Object (used in animePage)
@@ -90,6 +91,7 @@ function prepPage() {
 			var endpos = a.href.indexOf('&',startpos);
 			if (endpos < 0) endpos = a.href.length;
 			aid = Number(a.href.substring(startpos,endpos));
+			request_aid = aid;
 		}
 		if (a.href.indexOf('http://anidb.net/e') >= 0)
 			request_eid = Number(a.href.substring(18,a.href.length));
@@ -169,7 +171,7 @@ function parseData(xmldoc) {
 						'\n\tcustom: '+parseCustomNode+' ms'+
 						'\n\tpreping: '+preparingPage+' ms'+
 						'\n\tTotal: '+(parseAnimeNode+parseCustomNode+preparingPage)+' ms');
-	fetchData(aid,request_eid); // now that we have anime data, fetch the rest of the data
+	fetchData(request_aid,request_eid); // now that we have anime data, fetch the rest of the data
 }
 
 /* Function that parses Episode data
