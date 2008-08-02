@@ -74,7 +74,7 @@ removeColAttribute("state-mylist",fileCols);
 removeColAttribute("actions-mylist",fileCols);
 removeColAttribute("epno",fileCols);
 var fileSkips = null;
-//var animeCols = cloneArray(genAnimeCols);	
+var filelisttable = null;
 
 function prepPage() {
 	// find all the relevant data we want (aid and eid)
@@ -96,7 +96,7 @@ function prepPage() {
 		if (a.href.indexOf('http://anidb.net/e') >= 0)
 			request_eid = Number(a.href.substring(18,a.href.length));
 	}
-	var filelisttable = getElementsByClassName(document.getElementsByTagName('table'), 'filelist', false)[0];
+	filelisttable = getElementsByClassName(document.getElementsByTagName('table'), 'filelist', false)[0];
 	if (!filelisttable) return;
 	var span = document.createElement('span');
 	span.id = 'flist_replace';
@@ -108,9 +108,10 @@ function prepPage() {
 	fieldset.appendChild(createTextInput('show',null,false,true,null,'maddtomylist'));
 	fieldset.appendChild(createTextInput('aid',null,false,true,null,aid));
 	form.appendChild(fieldset);
-	form.appendChild(span);
+	filelisttable.parentNode.appendChild(form);
+	form.appendChild(filelisttable);
 	createMylistAddBox(form,'files');
-	filelisttable.parentNode.replaceChild(form,filelisttable);
+	//filelisttable.parentNode.replaceChild(form,filelisttable);
 	createPreferencesTable('episode');
 	fetchData(aid);
 }
@@ -673,8 +674,9 @@ function createFileTable(episode) {
 	table.appendChild(tbody);
 	table.appendChild(tfoot);
 
-	var epHolder = document.getElementById('flist_replace');
-	epHolder.parentNode.replaceChild(table,epHolder);
+	//var epHolder = document.getElementById('flist_replace');
+	//epHolder.parentNode.replaceChild(table,epHolder);
+	filelisttable.parentNode.replaceChild(table,filelisttable);
 
 	// fix the sorting function
 	if (LAY_HEADER) {

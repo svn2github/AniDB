@@ -384,12 +384,8 @@ function createBasicSelect(name,id,onchange) {
 function createLanguageSelect(parentNode,name,id,onchange,selected) {
 	var select = createBasicSelect(name,id,onchange);
 	for (var lang in languageMap) {
-		var option = document.createElement('option');
 		var op = languageMap[lang];
-		option.text = op['name'];
-		option.value = lang;
-		if (lang == selected) option.selected = true;
-		select.appendChild(option);
+		createSelectOption(select,op['name'],lang,(lang == selected), null, false);
 	}
 	if (parentNode && parentNode != '') parentNode.appendChild(select);
 	else return select;
