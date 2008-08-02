@@ -635,13 +635,14 @@ function createEpisodeTableFoot(colSpan,aid) {
 	}
 	createSelectArrayN(cell,"mylmod.groupsel","mylmod.groupsel",null,0,optionArray);
 	cell.appendChild(document.createTextNode(' files '));
-	optionArray = [	{"value":'0',"text":'Select action',"class":'section',"selected":true},{"value":'seen',"text":'mark watched'},{"value":'unseen',"text":'mark not watched'},
+	optionArray = [	{"value":'0',"text":'Select action',"class":'section',"selected":true},{"value":'0',"text":'-------------------------------',"class":'section',"disabled":'disabled'},
+					{"value":'seen',"text":'mark watched'},{"value":'unseen',"text":'mark not watched'},
 					{"value":'update',"text":'edit (more options)'},{"value":'del',"text":'remove'},
-					{"value":'0',"text":'Change state to',"class":'section',"disabled":'disabled'},
+					{"value":'0',"text":'-------------------------------',"class":'section',"disabled":'disabled'},{"value":'0',"text":'Change state to',"class":'section',"disabled":'disabled'},
 					{"value":'state:0',"text":'unknown'},{"value":'state:1',"text":'internal storage (hdd)'},{"value":'state:2',"text":'external storage (cd/dvd/...)'},{"value":'state:3',"text":'deleted'},
-					{"value":'0',"text":'Change file state to',"class":'section',"disabled":'disabled'},
+					{"value":'0',"text":'-------------------------------',"class":'section',"disabled":'disabled'},{"value":'0',"text":'Change file state to',"class":'section',"disabled":'disabled'},
 					{"value":'fstate:0',"text":'normal/original'},{"value":'fstate:1',"text":'corrupted version/invalid crc'},{"value":'fstate:2',"text":'self edited'},{"value":'fstate:100',"text":'other'},
-					{"value":'0',"text":'Change generic state to',"class":'section',"disabled":'disabled'},
+					{"value":'0',"text":'-------------------------------',"class":'section',"disabled":'disabled'},{"value":'0',"text":'Change generic state to',"class":'section',"disabled":'disabled'},
 					{"value":'gstate:10',"text":'self ripped'},{"value":'gstate:11',"text":'on dvd'},{"value":'gstate:12',"text":'on vhs'},
 					{"value":'gstate:13',"text":'on tv'},{"value":'gstate:14',"text":'theater'},{"value":'gstate:20',"text":'filler ep'},{"value":'gstate:100',"text":'other'}];
 	createSelectArrayN(cell,"mylmod.type","mylmod.type",null,0,optionArray);
