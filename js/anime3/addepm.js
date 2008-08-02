@@ -50,7 +50,7 @@ var errorCount = 0;
 function fetchData(aid) {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+Number(aid)+'.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+Number(aid), parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&nocache=1&aid='+Number(aid), parseData);
 }
 
 /* Function that parses xml response
