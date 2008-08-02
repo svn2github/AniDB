@@ -129,7 +129,6 @@ function CAnimeEntry(node) {
 		  var ttitle = nodeData(tNode);
 		  if (!this.titles[ttype]) this.titles[ttype] = new Object();
 		  this.titles[ttype][tlang] = ttitle;
-          //this.titles[tNode.getAttribute('lang')] = { "type":tNode.getAttribute('type'),"title":nodeData(tNode)};
         }
         break;
       default: showAlert('animeEntry for aid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
@@ -146,13 +145,6 @@ CAnimeEntry.prototype.getTitle = function() {
 	for (var lang in this.titles['main']) { title = this.titles['main'][lang]; break; }
 	if (!title) title = 'unknown';
 	return (title);
-  /*
-  if (this.titles[animeTitleLang]) title = this.titles[animeTitleLang]['title'];
-  if (!title) {
-    for (var lang in this.titles) { // default
-      if (this.titles[lang]['type'] == 'main') { title = this.titles[lang]['title']; break; } 
-    }
-  }*/
 }
 
 CAnimeEntry.prototype.getAltTitle = function() {
@@ -162,14 +154,6 @@ CAnimeEntry.prototype.getAltTitle = function() {
 	if (this.titles['official']['x-jat']) return(this.titles['official']['x-jat']);
 	if (this.titles['official']['en']) return(this.titles['official']['en']);
 	for (var i in this.titles['official']) return(this.titles['official'][i]);
-/*
-  if (this.titles[animeAltTitleLang]) title = this.titles[animeAltTitleLang]['title'];
-  if (!title) title = this.titles['x-jat']['title'];
-  if (!title) title = this.titles['en']['title'];
-  if (!title) { for (var i in this.titles) { title = this.titles[i]['title']; break; } }
-  if (!title) title = 'Anime '+this.id;
-  return (title);
-*/
 }
 
 /* Creates a new Episode Entry from a given node

@@ -26,7 +26,7 @@ var genFileCols = [ {'name':"check-mylist",'classname':"check",'header':"S",'abb
 					{'name':"mylist-storage",'classname':"storage text",'header':"Storage",'headclass':"storage"}, 
 					{'name':"mylist-source",'classname':"source text",'header':"Source",'headclass':"source"},
 					{'name':"state-mylist",'classname':"icons state",'header':"State",'headclass':"state"}, 
-					{'name':"state-anime",'classname':"icons state",'header':"State",'headclass':"state"}, 
+					{'name':"state-anime",'classname':"icons state",'header':"Mylist",'headclass':"state"}, 
 					{'name':"actions-mylist",'classname':"icons action",'header':"Action",'headclass':"action"},
 					{'name':"actions-anime",'classname':"icons action",'header':"Action",'headclass':"action"}	];
 					
