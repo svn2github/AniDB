@@ -482,7 +482,7 @@ function prepareForSort() {
 	var tBody = node.tBodies[0];
 	for (var i = 0; i < tBody.rows.length; i++) {
 		var row = tBody.rows[i];
-		if (row.id.indexOf('_relftHolder') < 0) continue; //not interested
+		//if (row.id.indexOf('_relftHolder') < 0) continue; //not interested
 		var fid = Number(row.id.split('_')[1]);
 		var parentRow = document.getElementById('fid_'+fid);
 		if (!parentRow) { if (seeDebug) alert('Error while preparing for sort at fid: '+fid); continue; }
@@ -512,7 +512,7 @@ function showFiles(hide,passedNode) {
 	var tBody = node.tBodies[0];
 	for (var i = 0; i < tBody.rows.length; i++) {
 		var row = tBody.rows[i];
-		if (row.id.indexOf('_relftHolder') >= 0) continue; //not interested
+		//if (row.id.indexOf('_relftHolder') >= 0) continue; //not interested
 		var file = null;
 		var eLen = String('e'+eid).length;
 		var fid = Number(row.id.substring(row.id.indexOf('f')+1, row.id.length));
