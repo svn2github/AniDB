@@ -126,7 +126,7 @@ function fetchData(aid,eid) {
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
 	} else {
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/eid'+eid+'.xml', parseEpisodeData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid='+eid, parseEpisodeData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+aid+'&eid='+eid, parseEpisodeData);
 	}
 }
 
