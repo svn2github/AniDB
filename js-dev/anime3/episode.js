@@ -177,11 +177,14 @@ function parseData(xmldoc) {
  */
 function parseEpisodeData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
+	alert('here');
 	if (!root) return;
 	updateStatus('Processing anime episode(s)...');
 	var animesNode = root.getElementsByTagName('animes')[0];
+	alert('here1');
 	if (!animesNode) return;
 	var animeNodes = animesNode.getElementsByTagName('anime');
+	alert('here2');
 	for (var i = 0; i < animeNodes.length; i++) {
 		if (animeNodes[i].parentNode.nodeName != 'animes') continue; // wrong node
 		var aid = Number(animeNodes[i].getAttribute('id'));
@@ -206,6 +209,7 @@ function parseEpisodeData(xmldoc) {
 		if (seeTimes) alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
 	}
 	updateStatus('');
+	alert('here3');
 	var table = createFileTable(episodes[request_eid]);
 	
 }
