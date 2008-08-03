@@ -3,6 +3,7 @@
  * version 1.0 (22.03.2007) - Initial version
  * version 1.2 (03.04.2008) - Some fixes and starting 2.0 conversion
  * version 2.0 (xx.04.2008) - Version 2.0 conversion
+ * version 2.1 (03.08.2008) - Added a new group filter and corrected some icon bugs
  */
 
 // GLOBALs //
@@ -214,7 +215,7 @@ function doGroupTableOperations(op) {
 		var row = tbody.rows[g];
 		var gid = Number(row.id.substring(4,row.id.length));
 		var group = groups[gid];
-		if (op == 'expand' || (op == 'fold' && group.defaultVisible) ) {
+		if ((op == 'expand' && !group.langFiltered) || (op == 'fold' && group.defaultVisible) ) {
 			row.style.display = '';
 			gODD(visible,row);
 			visible++;
@@ -537,6 +538,22 @@ function updateGroupTable() {
 		// update existing rows
 		var gid = group.id;
 		if (!groups[gid]) continue; // not interested
+		if (Number(group_langfilter)) {
+			// now we check to see if this group is languaged filtered or not
+			var lafound = lsfound = false;
+			for (var al = 0; al < filterAudLang.length; al++) {
+				for (var gal = 0; gal < group.audioLangs.length; gal++) {
+					if (filterAudLang[al] == group.audioLangs[gal]) { lafound = true; break; }
+				}
+			}
+			for (var sl = 0; sl < filterSubLang.length; sl++) {
+				for (var gsl = 0; gsl < group.subtitleLangs.length; gsl++) {
+					if (filterSubLang[sl] == group.subtitleLangs[gsl]) { lsfound = true; break; }
+				}
+			}
+			if (!group.subtitleLangs.length && !lafound) group.langFiltered = true;
+			if (group.subtitleLangs.length && (!lafound || !lsfound)) group.langFiltered = true;
+		}
 		var row = document.getElementById('gid_'+gid);
 		if (!row) {
 			row = createGroupRow(group.id, groupCols, groupSkips);

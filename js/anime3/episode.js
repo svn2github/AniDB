@@ -77,6 +77,8 @@ var fileSkips = null;
 var filelisttable = null;
 
 function prepPage() {
+	uriObj = parseURI();
+	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
 	// find all the relevant data we want (aid and eid)
 	var aid;
 	var defdiv = getElementsByClassName(document.getElementsByTagName('div'), 'g_definitionlist info', false)[0];

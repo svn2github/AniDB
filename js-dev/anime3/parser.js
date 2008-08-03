@@ -58,6 +58,7 @@ function CGroupEntry(node) {
   this.visible = true;
   this.defaultVisible = false;
   this.filtered = false;
+  this.langFiltered = false;
   this.id = Number(node.getAttribute('id'));
   this.agid = Number(node.getAttribute('agid'));
   this.rating = '-';
