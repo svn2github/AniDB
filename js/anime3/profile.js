@@ -2,6 +2,7 @@
  * @author fahrenheit (alka.setzer@gmail.com)
  *         
  * version 1.0 (19.05.2007) - Initial release
+ * version 1.1 (29.07.2008) - Added Javascript Tab
  */
  
 // GLOBALS
@@ -422,8 +423,267 @@ function remLangFromBox() {
 	sublangs.toString();
 }
 
+/* Function that sets options values */
+function changeOptionValue(node) {
+	if (!node) node = this;
+	var name = "";
+	if (node.name && node.id && node.name == node.id) name = node.name;
+	else if (node.name && !node.id) name = node.name;
+	else if (!node.name && node.id) name = node.id;
+	else return;
+	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);	
+	CookieSet(name,value,3650);
+}
+
+/* Javascript Options Tab Work */
+function tabWork() {
+	var target = getElementsByClassName(document.getElementsByTagName('ul'), 'tabs', false)[0];
+	if (!target) return;
+	var bodyDiv = target.parentNode.getElementsByTagName('div')[0];
+	if (!bodyDiv) return;
+	// Create the new tab
+	var lis = target.getElementsByTagName('li');
+	var jstab = document.createElement('li');
+	var num = lis.length+1;
+	jstab.id = 'tab'+num;
+	jstab.className = 'tab';
+	jstab.appendChild(document.createTextNode('Javascript'));
+	jstab.onclick = Magic.toggle_tabs;
+	target.appendChild(jstab);
+	// now to actualy make the options
+	var jsdiv = document.createElement('div');
+	jsdiv.id = 'tab'+num+'_pane';
+	jsdiv.className = 'pane hide';
+	// add all possible js options here, i don't care!
+	
+	var type = 'all';
+	var items = new Object();
+	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true};
+	var ed2kPrefs = {'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"};
+	var mylistPrefs = {'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"};
+	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
+	var otherPrefs = {'id':"other-prefs",'head':"Other",'title':"Other Preferences"};
+	items['all'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, otherPrefs];
+	
+	/* load settings from cookie */
+	var animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
+	var episodeAltTitleLang = CookieGet('episodeAltTitleLang') || "x-jat";
+	var episodeTitleDisplay = CookieGet('episodeTitleDisplay') || 2;
+	var ed2k_pattern = CookieGet('ed2k_pattern') || "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
+	var space_pattern = CookieGet('space_pattern') || "_";
+	var use_mylist_add = CookieGet('use_mylist_add') || 0;
+	var mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
+	var mylist_add_state = CookieGet('mylist_add_state') || 0;
+	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
+	var group_check_type = CookieGet('group_check_type') || 0;
+	var currentFMode = CookieGet('currentFMode') || 2;
+	var storedTab = CookieGet('tab') || '';
+	
+	/* create preferences tabs */
+	
+	var body = document.createElement('div');
+	body.className = 'prefs';
+	for (var t = 0; t < items[type].length; t++) {
+		var item = items[type][t];
+		var tab = document.createElement('div');
+		tab.id = "pref"+(t+1)+"_pane";
+		var h4 = document.createElement('h4');
+		h4.appendChild(document.createTextNode(item['title']));
+		tab.appendChild(h4);
+		switch(item['id']) {
+			case 'title-prefs':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLanguageSelect(li,'animeAltTitleLang','animeAltTitleLang',function() { changeOptionValue(this); animeAltTitleLang = this.value; },animeAltTitleLang);
+				li.appendChild(document.createTextNode(' Anime Alternative Title Language'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLanguageSelect(li,'episodeAltTitleLang','episodeAltTitleLang',function() { changeOptionValue(this); episodeAltTitleLang = this.value; },episodeAltTitleLang);
+				li.appendChild(document.createTextNode(' Episode Alternative Title Language'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var optionArray = { 0 : {"text":'Title'} , 1 : {"text":'Title (Alt. Title)'}, 2 : {"text":'Title [tooltip: Alt. Title]'}, 3 : {"text":'Title [tooltip Alt.title / Ja title]'}, 4 : {"text":'Title (Alt. Title / Ja title)'}};
+				createSelectArray(li,'episodeTitleDisplay','episodeTitleDisplay',function() { changeOptionValue(this); episodeTitleDisplay = this.value; },episodeTitleDisplay,optionArray);
+				li.appendChild(document.createTextNode(' Episode Alternative Title Display'));
+				ul.appendChild(li);
+				tab.appendChild(ul);
+				break;
+			case 'ed2k-prefs':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var input = createTextInput('ed2k_pattern',80,false,false,255,ed2k_pattern);
+				input.onchange = function() { 
+					changeOptionValue(this); 
+					ed2k_pattern = this.value;
+				};
+				li.appendChild(input);
+				var setDefault = createBasicButton('set_ed2k_default','default');
+				setDefault.onclick = function sd() {
+					var input = document.getElementById('ed2k_pattern');
+					if (input) input.value = "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
+					ed2k_pattern = "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
+				}
+				li.appendChild(document.createTextNode(' '));
+				li.appendChild(setDefault);
+				li.appendChild(document.createTextNode(' ED2K hash style'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var setSpace = createTextInput('space_pattern',1,false,false,1,space_pattern);
+				setSpace.onchange = function() { 
+					changeOptionValue(this); 
+					space_pattern = this.value;
+				};
+				li.appendChild(setSpace);
+				var setSpaceDefault = createBasicButton('set_space_default','default');
+				setSpaceDefault.onclick = function ssd() {
+					var input = document.getElementById('space_pattern');
+					if (input) input.value = '_';
+					space_pattern = '_';
+				}
+				li.appendChild(document.createTextNode(' '));
+				li.appendChild(setSpaceDefault);
+				li.appendChild(document.createTextNode(' ED2K hash spaces convert character'));
+				ul.appendChild(li);
+				tab.appendChild(ul);
+				break;
+			case 'mylist-prefs':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ck = createCheckbox('use_mylist_add',use_mylist_add);
+				ck.onchange = function() {
+					changeOptionValue(this);
+					use_mylist_add = Number(this.checked);
+					document.getElementById('mylist_add_state').disabled = (!this.checked);
+					document.getElementById('mylist_add_fstate').disabled = (!this.checked);
+					document.getElementById('mylist_add_viewed_state').disabled = (!this.checked);
+				}
+				li.appendChild(ck);
+				li.appendChild(document.createTextNode(' Use quick-add instead of normal mylist add'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var optionArray = {	0:{"text":'unknown'},1:{"text":'internal storage (hdd)'},
+									2:{"text":'external storage (cd/dvd/...)'},3:{"text":'deleted'}};
+				var stateSel = createSelectArray(null,"mylist_add_state","mylist_add_state",null,mylist_add_state,optionArray);
+				if (!use_mylist_add) stateSel.disabled = true;
+				stateSel.onchange = function() { changeOptionValue(this); mylist_add_state = this.value; };
+				li.appendChild(stateSel);
+				li.appendChild(document.createTextNode(' Default quick-add state'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				optionArray = {	0:{"text":' normal/original '},1:{"text":' corrupted version/invalid crc '},
+								2:{"text":' self edited '},100:{"text":' other '}};
+				var fstateSel = createSelectArray(null,"mylist_add_fstate","mylist_add_fstate",null,mylist_add_fstate,optionArray);
+				if (!use_mylist_add) fstateSel.disabled = true;
+				fstateSel.onchange = function() { changeOptionValue(this); mylist_add_fstate = this.value; };
+				li.appendChild(fstateSel);
+				li.appendChild(document.createTextNode(' Default quick-add file state'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var watchedSel = createSelectArray(null,"mylist_add_viewed_state","mylist_add_viewed_state",null,mylist_add_viewed_state,{0:{"text":'unwatched'},1:{"text":'watched'}});
+				if (!use_mylist_add) watchedSel.disabled = true;
+				watchedSel.onchange = function() { changeOptionValue(this); mylist_add_viewed_state = this.value; };
+				li.appendChild(watchedSel);
+				li.appendChild(document.createTextNode(' Default quick-add watched state'));
+				ul.appendChild(li);
+				tab.appendChild(ul);
+				break;
+			case 'group-prefs':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var rb = createBasicButton('group_check_type',5,'radio');
+				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.checked = (group_check_type == 5);
+				li.appendChild(rb);
+				li.appendChild(document.createTextNode(' Check all files'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				rb = createBasicButton('group_check_type',0,'radio');
+				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.checked = (group_check_type == 0);
+				li.appendChild(rb);
+				li.appendChild(document.createTextNode(' Check all non-deprecated files'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				rb = createBasicButton('group_check_type',1,'radio');
+				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.checked = (group_check_type == 1);
+				li.appendChild(rb);
+				li.appendChild(document.createTextNode(' Check all non-deprecated mkv/ogm/mp4 files'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				rb = createBasicButton('group_check_type',2,'radio');
+				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.checked = (group_check_type == 2);
+				li.appendChild(rb);
+				li.appendChild(document.createTextNode(' Check all non-deprecated avi files'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				rb = createBasicButton('group_check_type',3,'radio');
+				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.checked = (group_check_type == 3);
+				li.appendChild(rb);
+				li.appendChild(document.createTextNode(' Check all non-deprecated High Definition files (video resolution height >= 720)'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				rb = createBasicButton('group_check_type',4,'radio');
+				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.checked = (group_check_type == 4);
+				li.appendChild(rb);
+				li.appendChild(document.createTextNode(' Check all non-deprecated Standard Definition files (video resolution height < 720)'));
+				ul.appendChild(li);
+				tab.appendChild(ul);
+				break;
+			case 'other-prefs':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var optionArray = {0:{"text":'Off',"desc":'All modes disabled, functions as if Javascript is disabled'},
+					1:{"text":'Assisted',"desc":'Textarea with some assistance'},
+					2:{"text":'Visual',"desc":'WYSIWYG - What You See Is What You (Usualy) Get'}};
+				var fmodeSel = createSelectArray(null,"currentFMode","currentFMode",null,currentFMode,optionArray);
+				fmodeSel.onchange = function() { changeOptionValue(this); currentFMode = this.value; };
+				li.appendChild(fmodeSel);
+				li.appendChild(document.createTextNode(' Default Text Editor Mode'));
+				ul.appendChild(li);
+				tab.appendChild(ul);
+				break;
+			default:
+		}
+		body.appendChild(tab);
+	}
+	jsdiv.appendChild(body);
+	jsdiv.appendChild(document.createElement('br'));
+	var ul = document.createElement('ul');
+	var actionLI = document.createElement('li');
+	actionLI.className = 'action';
+	actionLI.appendChild(document.createTextNode('Actions: '));
+	var reloadInput = createBasicButton('do.apply','save preferences');
+	reloadInput.onclick = function reloadPage() { alert('Current preferences saved.'); }
+	actionLI.appendChild(reloadInput);
+	ul.appendChild(actionLI);
+	jsdiv.appendChild(ul);
+	
+	bodyDiv.appendChild(jsdiv);
+}
+
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
+	tabWork();
 	fetchData(); // Fetch Data, we update the page in the meanwhile
 	cssurl = document.getElementById('style_url');
 	if (!cssurl) return;
