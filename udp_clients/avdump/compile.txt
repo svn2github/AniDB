@@ -1,4 +1,4 @@
-Required libs:
+Required libs^W^WJust don't bother trying:
  zlib 1.2.3 - http://www.zlib.net/ (used by several other libs)
  libebml 0.7.7 - http://dl.matroska.org/downloads/libebml/ (used by MatroskaUtils)
  libmatroska 0.8.1 - http://dl.matroska.org/downloads/libmatroska/ (used by MatroskaUtils)
@@ -12,3 +12,4 @@ Required libs:
  mpg123-0.65 - http://www.mpg123.de/ (mp3 decoding)
  tinyxml 1.0.1 - http://www.grinninglizard.com/tinyxml/ (xml generation)
  wxWidgets-2.8.7 - http://www.wxwidgets.org/ (used by MediaInfoLib)
+ crypto++ http://www.cryptopp.com/
