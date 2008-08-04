@@ -540,7 +540,8 @@ function updateGroupTable() {
 		if (!groups[gid]) continue; // not interested
 		if (Number(group_langfilter)) {
 			// now we check to see if this group is languaged filtered or not
-			var lafound = lsfound = false;
+			var lafound = (!filterAudLang.length ? true : false);
+			var lsfound = (!filterSubLang.length ? true : false);
 			for (var al = 0; al < filterAudLang.length; al++) {
 				for (var gal = 0; gal < group.audioLangs.length; gal++) {
 					if (filterAudLang[al] == group.audioLangs[gal]) { lafound = true; break; }
