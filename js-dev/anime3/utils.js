@@ -473,15 +473,16 @@ function makeCompletionBar(parentNode, range, maps) {
 }
 
 function expandRange(range,limit,map,array) {
-  if (!range && !array) return (new Array(limit));
-  var rangeGroups = range.split(',');
-  for (var r = 0; r < rangeGroups.length; r++) {
-    var rangeGroup = rangeGroups[r];
-    var rg = rangeGroup.split('-');
-    if ( rg.length == 1 ) array[Number(rg[0])-1] = map['type'];
-    else { for( var i = Number(rg[0]); i <= Number(rg[1]); i++) array[ i-1 ] = map['type']; }
-  }
-  return array;
+	if (!range && !array) return (new Array(limit));
+	var rangeGroups = range.split(',');
+	for (var r = 0; r < rangeGroups.length; r++) {
+		var rangeGroup = rangeGroups[r];
+		var rg = rangeGroup.split('-');
+		if (Number(rg[0]) >= 1000) return (new Array(limit)); // don't do this for specials and crap.
+		if ( rg.length == 1 ) array[Number(rg[0])-1] = map['type'];
+		else { for( var i = Number(rg[0]); i <= Number(rg[1]); i++) array[ i-1 ] = map['type']; }
+	}
+	return array;
 }
 
 // GENERAL FUNCTIONS //
@@ -749,6 +750,7 @@ function buildQualityIcon(node,quality) {
 function findMylistEpEntries(eid) {
 	var ret = new Array();
 	var episode = episodes[eid];
+	if (!episode) return ret;
 	for (var sd in mylist) {
 		if (!mylist[sd]) continue;
 		if (mylist[sd].episodeId != eid) continue;
