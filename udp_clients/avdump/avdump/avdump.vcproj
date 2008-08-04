@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\avinfo\src"
+				AdditionalIncludeDirectories="$(SolutionDir)avinfo/src;$(SolutionDir)MPAHeaderInfo/src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -56,6 +56,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=""
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -120,6 +121,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				WholeProgramOptimization="false"
+				AdditionalIncludeDirectories="$(SolutionDir)avinfo/src;$(SolutionDir)MPAHeaderInfo/src"
 				PreprocessorDefinitions="WIN32;NEBUG;_CONSOLE"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -135,6 +137,7 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=""
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -203,7 +206,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="&quot;D:\wxMSW-2.8.7\include&quot;;&quot;D:\wxMSW-2.8.7\include\msvc&quot;;..\avinfo\src"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)avinfo/src&quot;;&quot;$(SolutionDir)&quot;"
 				PreprocessorDefinitions="WIN32;NEBUG;_CONSOLE;ENABLE_WXW;ENABLE_HASH;ENABLE_AC;ENABLE_FP"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -219,17 +222,19 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=""
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="avinfo.lib avhash.lib cryptlib.lib libFooID.lib libebml.lib libmatroska.lib libogg.lib libvorbis.lib MACLib.lib MediaInfo.lib MatroskaUtils.lib MPEGAudioInfo.lib mpg123-0.65.lib OGMInfo.lib tinyxml.lib Ws2_32.lib ZenLib.lib zlib.lib"
+				AdditionalDependencies="avinfo.lib avhash.lib cryptlib.lib libFooID.lib libebml.lib libmatroska.lib MACLib.lib MediaInfo.lib MatroskaUtils.lib MPEGAudioInfo.lib mpg123-0.65.lib ogg_static.lib OGMInfo.lib shlwapi.lib tinyxml.lib vorbis_static.lib Ws2_32.lib wxbase28u.lib ZenLib.lib zlib.lib"
 				OutputFile="$(OutDir)\$(ProjectName)\$(ProjectName).exe"
 				Version=""
 				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib"
+				AdditionalLibraryDirectories="$(SolutionDir)Static;$(SolutionDir)Release"
+				IgnoreDefaultLibraryNames="ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;MSVCRT.lib"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -341,10 +346,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\avdump.rc"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

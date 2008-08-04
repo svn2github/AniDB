@@ -18,7 +18,7 @@
 
 #include "avfp.h"
 #include "libfooid/fooid.h"
-#include "mpg123-0.65/src/mpg123.h"
+#include "mpg123/mpg123.h"
 
 #include <iostream>
 

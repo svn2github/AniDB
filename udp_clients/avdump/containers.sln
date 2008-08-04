@@ -2,7 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avinfo", "avinfo\avinfo.vcproj", "{7EB8F5E3-03DB-476A-A06D-E2C5FB4CA045}"
 	ProjectSection(ProjectDependencies) = postProject
-		{E3C2A4E1-3DC5-4B67-A3F1-D8AB645DC750} = {E3C2A4E1-3DC5-4B67-A3F1-D8AB645DC750}
 		{9C4521D0-FBDA-4256-80BB-972B2F489D58} = {9C4521D0-FBDA-4256-80BB-972B2F489D58}
 	EndProjectSection
 EndProject
@@ -12,10 +11,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OGMInfo", "OGMInfo\OGMInfo.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avdump", "avdump\avdump.vcproj", "{E8877FA3-DE45-42E2-A369-72C5FAAD92C7}"
 	ProjectSection(ProjectDependencies) = postProject
+		{B2C3CE5F-0989-4833-A515-DB270D964BCF} = {B2C3CE5F-0989-4833-A515-DB270D964BCF}
 		{7EB8F5E3-03DB-476A-A06D-E2C5FB4CA045} = {7EB8F5E3-03DB-476A-A06D-E2C5FB4CA045}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avhash", "avhash\avhash.vcproj", "{065EFA1A-E5A6-4973-A6EA-9CD830FB4FE6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MPAHeaderInfo", "MPAHeaderInfo\MPAHeaderInfo.vcproj", "{B2C3CE5F-0989-4833-A515-DB270D964BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,12 @@ Global
 		{065EFA1A-E5A6-4973-A6EA-9CD830FB4FE6}.Release|Win32.Build.0 = Release|Win32
 		{065EFA1A-E5A6-4973-A6EA-9CD830FB4FE6}.Static|Win32.ActiveCfg = Static|Win32
 		{065EFA1A-E5A6-4973-A6EA-9CD830FB4FE6}.Static|Win32.Build.0 = Static|Win32
+		{B2C3CE5F-0989-4833-A515-DB270D964BCF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B2C3CE5F-0989-4833-A515-DB270D964BCF}.Debug|Win32.Build.0 = Debug|Win32
+		{B2C3CE5F-0989-4833-A515-DB270D964BCF}.Release|Win32.ActiveCfg = Release|Win32
+		{B2C3CE5F-0989-4833-A515-DB270D964BCF}.Release|Win32.Build.0 = Release|Win32
+		{B2C3CE5F-0989-4833-A515-DB270D964BCF}.Static|Win32.ActiveCfg = Release|Win32
+		{B2C3CE5F-0989-4833-A515-DB270D964BCF}.Static|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

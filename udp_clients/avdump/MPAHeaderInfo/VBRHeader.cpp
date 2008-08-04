@@ -4,10 +4,12 @@
 #include "xingheader.h"
 #include "vbriheader.h"
 
+#include <assert.h>
+
 // first test with this static method, if it does exist
 CVBRHeader* CVBRHeader::FindHeader(const CMPAFrame* pMPAFrame)
 {
-	_ASSERTE(pMPAFrame);
+	assert(pMPAFrame);
 	CVBRHeader* pVBRHeader = NULL;
 
 	pVBRHeader = CXINGHeader::FindHeader(pMPAFrame);

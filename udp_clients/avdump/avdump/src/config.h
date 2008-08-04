@@ -32,7 +32,7 @@
 
 #include "avfp.h"
 #include "avhash.h"
-#include "..\libebml\ebml\EbmlUnicodeString.h"
+#include "ebml\EbmlUnicodeString.h"
 
 #ifdef ENABLE_AC
 #include "autocreq.h"

@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\OGMInfo;..\MatroskaUtils"
+				AdditionalIncludeDirectories="..\OGMInfo;..\;.."
 				PreprocessorDefinitions="WIN32;_DEBUG;MEDIA_INFO;USING_ATT;USING_CHAPTER_DATA"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\OGMInfo;..\MatroskaUtils"
+				AdditionalIncludeDirectories="..\OGMInfo;..\;.."
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;MEDIA_INFO;USING_ATT;USING_CHAPTER_DATA"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -194,7 +194,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\OGMInfo;..\MatroskaUtils"
+				AdditionalIncludeDirectories="..\OGMInfo;..\;.."
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;MEDIA_INFO;USING_ATT;USING_CHAPTER_DATA"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -258,10 +258,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\avjni.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\avmf.cpp"
 				>
 			</File>
@@ -308,10 +304,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\epox_av_avinfo.h"
-				>
-			</File>
-			<File
 				RelativePath=".\resource.h"
 				>
 			</File>
@@ -325,10 +317,6 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-			<File
-				RelativePath=".\avinfo.rc"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

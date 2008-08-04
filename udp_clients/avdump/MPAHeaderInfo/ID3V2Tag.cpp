@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include ".\id3v2tag.h"
 
+#include <tchar.h>
 
 CID3V2Tag* CID3V2Tag::FindTag(CMPAStream* pMPAStream, bool bAppended, DWORD dwBegin, DWORD dwEnd)
 {

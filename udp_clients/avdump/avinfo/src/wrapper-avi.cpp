@@ -27,9 +27,9 @@
 #include <math.h>
 #include "aviparse.h"
 
-#include <MAC_SDK_399/Shared/All.h>
-#include <MAC_SDK_399/Shared/MACLib.h>
-#include <MAC_SDK_399/Shared/APETag.h>
+#include <MACLib/All.h>
+#include <MACLib/MACLib.h>
+#include <MACLib/APETag.h>
 
 using namespace ZenLib;
 using namespace MediaInfoLib;

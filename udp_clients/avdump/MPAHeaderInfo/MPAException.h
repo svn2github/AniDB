@@ -1,5 +1,8 @@
 #pragma once
 
+#include <windows.h>
+#include <tchar.h>
+
 // exception class
 class CMPAException
 {

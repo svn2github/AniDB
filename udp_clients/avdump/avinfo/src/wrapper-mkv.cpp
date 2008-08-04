@@ -16,8 +16,8 @@
 
 #include "wrappers.h"
 
-#include "MatroskaUtils.h"
-#include "MatroskaUtilsBitrate.h"
+#include "MatroskaUtils/MatroskaUtils.h"
+#include "MatroskaUtils/MatroskaUtilsBitrate.h"
 
 #include "ZenLib/BitStream.h"
 

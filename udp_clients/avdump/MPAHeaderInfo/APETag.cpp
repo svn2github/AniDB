@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include ".\apetag.h"
 
+#include <tchar.h>
+
 CAPETag* CAPETag::FindTag(CMPAStream* pMPAStream, bool bAppended, DWORD dwBegin, DWORD dwEnd)
 {
 	DWORD dwOffset;

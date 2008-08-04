@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include ".\tag.h"
+#include <tchar.h>
 
 CTag::CTag(CMPAStream* pMPAStream, LPCTSTR szName, bool bAppended, DWORD dwOffset, DWORD dwSize):
 	m_pMPAStream(pMPAStream), m_bAppended(bAppended), m_dwOffset(dwOffset), m_dwSize(dwSize)

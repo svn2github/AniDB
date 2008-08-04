@@ -5,6 +5,8 @@
 
 #include <windows.h>	// for CreateFile, CloseHandle, ...
 
+#include <assert.h>
+
 // 1KB is inital buffersize
 const DWORD CMPAStream::m_dwInitBufferSize = 1024;	
 
@@ -104,8 +106,8 @@ BYTE* CMPAStream::ReadBytes(DWORD dwSize, DWORD& dwOffset, bool bMoveOffset, boo
 
 DWORD CMPAStream::ReadLEValue(DWORD dwNumBytes, DWORD& dwOffset, bool bMoveOffset) const
 {
-	_ASSERTE(dwNumBytes > 0);
-	_ASSERTE(dwNumBytes <= 4);	// max 4 byte
+	assert(dwNumBytes > 0);
+	assert(dwNumBytes <= 4);	// max 4 byte
 
 	BYTE* pBuffer = ReadBytes(dwNumBytes, dwOffset, bMoveOffset);
 
@@ -125,8 +127,8 @@ DWORD CMPAStream::ReadLEValue(DWORD dwNumBytes, DWORD& dwOffset, bool bMoveOffse
 // convert from big endian to native format (Intel=little endian) and return as DWORD (32bit)
 DWORD CMPAStream::ReadBEValue(DWORD dwNumBytes, DWORD& dwOffset,  bool bMoveOffset) const
 {	
-	_ASSERTE(dwNumBytes > 0);
-	_ASSERTE(dwNumBytes <= 4);	// max 4 byte
+	assert(dwNumBytes > 0);
+	assert(dwNumBytes <= 4);	// max 4 byte
 
 	BYTE* pBuffer = ReadBytes(dwNumBytes, dwOffset, bMoveOffset);
 

@@ -1342,7 +1342,7 @@ int MatroskaInfoParser::Parse_Tracks(EbmlStream *inputfile_stream, EbmlElement *
 				} else if (EbmlId(*l3) == KaxTrackName::ClassInfos.GlobalId) {
 					KaxTrackName &name = *static_cast<KaxTrackName *>(l3);
 					name.ReadData(inputfile_stream->I_O());
-					matroskaTrack->m_trackName = name.Value.GetUTF8();
+					matroskaTrack->m_trackName = ((UTFstring&)(EbmlUnicodeString&)name).GetUTF8();
 				}else if (EbmlId(*l3) == KaxTrackLanguage::ClassInfos.GlobalId) {
 					KaxTrackLanguage &language = *static_cast<KaxTrackLanguage *>(l3);
 					language.ReadData(inputfile_stream->I_O());
