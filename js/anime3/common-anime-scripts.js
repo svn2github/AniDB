@@ -347,7 +347,7 @@ function createGroupRow(gid,cols,skips) {
 			case 'eps':
 				var maps = {'0' : {'use':true,'type': 0,'desc':"",'img':"blue"},
 							'1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"},
-							'2' : {'use':false,'type': 2,'desc':"in mylist: "+group.inMylistRange,'img':"lime"}};
+							'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime"}};
 				var range = expandRange(null,(anime.eps ? anime.eps : anime.epCount),maps[0],null);
 				if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange,(anime.eps ? anime.eps : anime.epCount),maps[1],range); }
 				if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange,(anime.eps ? anime.eps : anime.epCount),maps[2],range); }

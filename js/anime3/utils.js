@@ -484,6 +484,24 @@ function expandRange(range,limit,map,array) {
 	}
 	return array;
 }
+function convertRangeToText(range) {
+	var text = '';
+	if (!range) return(text);
+	var rangeGroups = range.split(',');
+	for (var r = 0; r < rangeGroups.length; r++) {
+		var rangeGroup = rangeGroups[r];
+		var rg = rangeGroup.split('-');
+		if (rg.length == 1) text += mapReverseEpisodeNumber(rg[0]);
+		else {
+			for (var i = 0; i < rg.length; i++) {
+				text += mapReverseEpisodeNumber(rg[i]);
+				if (i < rg.length-2) text += '-';
+			}
+		}
+		if (r < rg.length-2) text += ',';
+	}
+	return text;
+}
 
 // GENERAL FUNCTIONS //
 
