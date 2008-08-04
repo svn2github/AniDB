@@ -34,7 +34,7 @@ var templateType = 'manual';
 function fetchData() {
   var req = xhttpRequest();
   if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
-  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+escape(searchString), parseData);
+  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
 }
 
 function CGroup(node) {
