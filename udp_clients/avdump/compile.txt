@@ -9,7 +9,7 @@ Required libs^W^WJust don't bother trying:
  ogmtools SVN (13.08.2005) - http://svn.corecodec.org/ogmtools (ogm parsing)
  MatroskaUtils SVN (26.07.2005) - http://svn.matroska.org/viewsvn/trunk/MatroskaUtils/ (mkv parsing)
  libFooID 1.0 - http://foosic.org/libfooid.php (fooid fingerprint)
- mpg123-0.65 - http://www.mpg123.de/ (mp3 decoding)
+ mpg123-0.65 - http://www.mpg123.de/ (mp3 decoding) <-- this is a fucking lie, only http://sageshome.net/oss/mpg123-win32.php works
  tinyxml 1.0.1 - http://www.grinninglizard.com/tinyxml/ (xml generation)
  wxWidgets-2.8.7 - http://www.wxwidgets.org/ (used by MediaInfoLib)
  crypto++ http://www.cryptopp.com/
