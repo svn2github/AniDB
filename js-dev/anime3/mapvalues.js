@@ -279,6 +279,22 @@ function mapEpisodeNumber(epno) {
 	return (!isNaN(Number(result)) ? Number(result) : 0);
 }
 
+/* Function that returns the textual version of a numeral epno
+ * @param epno Int with numeral episode number
+ * @return String vale of episode number
+ */
+function mapReverseEpisodeNumber(epno) {
+	var nepno = Number(epno);
+	if (isNaN(nepno)) return '';
+	epno = String(epno);
+	if (nepno < 1000) return epno;
+	if (nepno >= 1000 && nepno < 2000) return ('S' + epno.substring(1,epno.length));
+	if (nepno >= 2000 && nepno < 3000) return ('C' + epno.substring(1,epno.length));
+	if (nepno >= 3000 && nepno < 4000) return ('T' + epno.substring(1,epno.length));
+	if (nepno >= 4000 && nepno < 10000) return ('P' + epno.substring(1,epno.length));
+	if (nepno > 10000) return ('O' + epno.substring(2,epno.length));
+}
+
 /* Function that returns a string with the mylist state
  *@param stateId Id of the state
  *@return String with mylist state

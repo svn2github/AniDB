@@ -1394,18 +1394,14 @@ function createMylistAddBox(parentNode,type) {
 	inlineHelp.appendChild(span);
 	row.getElementsByTagName('td')[0].appendChild(inlineHelp);
 	tbody.appendChild(row);
-	//if (type == 'files') {
-		optionArray = {0:{"text":' normal/original '},1:{"text":' corrupted version/invalid crc '},
-						2:{"text":' self edited '},100:{"text":' other '}};
-		select = createSelectArray(null,"addl.filestate","addl.filestate",null,0,optionArray);
-		createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
-	//}
-	//if (type == 'anime') {
-		optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
+	optionArray = {0:{"text":' normal/original '},1:{"text":' corrupted version/invalid crc '},
+					2:{"text":' self edited '},100:{"text":' other '}};
+	select = createSelectArray(null,"addl.filestate","addl.filestate",null,0,optionArray);
+	createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
+	optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
 						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '},15:{"text":' streamed '}};
-		select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,((type == 'anime') ? 13 : 100),optionArray);
-		createFieldValueRow(tbody,'type'+gODD(i),'Generic Type',select); i++;
-	//}
+	select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,((type == 'anime') ? 13 : 100),optionArray);
+	createFieldValueRow(tbody,'type'+gODD(i),'Generic Type',select); i++;
 	createFieldValueRow(tbody,'source'+gODD(i),'Source',createTextInput("addl.source",30,false,false,100)); i++;
 	createFieldValueRow(tbody,'storage'+gODD(i),'Storage',createTextInput("addl.storage",30,false,false,100)); i++;
 	createFieldValueRow(tbody,'other'+gODD(i),'Other',createTextBox('addl.other',null,25,4,null)); i++;
