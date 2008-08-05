@@ -23,7 +23,7 @@ BEGIN
             VALUE "FileVersion", "0.35a1"
             VALUE "InternalName", "avdump"
             VALUE "OriginalFilename", "avdump.exe"
-            VALUE "ProductVersion", "AVDump"
+            VALUE "ProductName", "AVDump"
             VALUE "ProductVersion", "0.35a1"
         END
     END
