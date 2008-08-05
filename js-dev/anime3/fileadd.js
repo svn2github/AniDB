@@ -640,9 +640,9 @@ function workTemplate() {
 function addTemplate() {
   var row = document.createElement('tr');
   createCell(row, null, document.createTextNode('Template:'), null);
+  //"dualsubs":{"text":'dual aud/subs (japanese audio, ? audio, ? subtitles, ? subtitles)'},
   var optionArray = {"manual":{"text":'manual input'},"raw":{"text":'raw (japanese audio, no subtitles)'},
 					 "fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
-					 "dualsubs":{"text":'dual aud/subs (japanese audio, ? audio, ? subtitles, ? subtitles)'},
 					 "dub":{"text":'external dub file (? audio)'},"sub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
   var select = createSelectArray(null,null,null,null,null,optionArray);
   select.onchange = workTemplate;
