@@ -25,6 +25,7 @@ function CMylistEntry(node) {
   this.fileId = Number(node.getAttribute('fid'));
   this.episodeId = Number(node.getAttribute('eid'));
   this.groupId = Number(node.getAttribute('gid'));
+  this.filetype = node.getAttribute('type');
   this.fstate = 'unknown';
   this.status = 'unknown';
   this.seen = 0;
@@ -33,6 +34,7 @@ function CMylistEntry(node) {
   this.storage = null;
   this.other = null;
   this.fType = null;
+  this.relatedEids = new Array();
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
@@ -43,6 +45,7 @@ function CMylistEntry(node) {
       case 'source': this.source = nodeData(sNode); break;
       case 'storage': this.storage = nodeData(sNode); break;
       case 'other': this.other = nodeData(sNode); break;
+	  case 'releids': this.realtedEids = nodeData(sNode).split(','); break;
       default: showAlert('mylistEntry for lid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
     }
   }

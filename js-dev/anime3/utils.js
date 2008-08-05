@@ -770,9 +770,10 @@ function findMylistEpEntries(eid) {
 	var episode = episodes[eid];
 	if (!episode) return ret;
 	for (var sd in mylist) {
-		if (!mylist[sd]) continue;
-		if (mylist[sd].episodeId != eid) continue;
-		ret.push(mylist[sd]);
+		var mylistEntry = mylist[sd];
+		if (!mylistEntry) continue;
+		if (mylistEntry.episodeId != eid && mylistEntry.relatedEids.indexOf(eid) < 0) continue;
+		ret.push(mmylistEntry);
 	}
 	return ret;
 }
