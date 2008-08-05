@@ -267,7 +267,7 @@ subStreams.prototype.add = function() {
   if (subTracks > maxSubTracks) return;
   var str = subTracks - 1;
   this.streams[str] = new Object();
-  var lastRow = this.streams[0].channels.parentNode.parentNode;
+  var lastRow = this.streams[0].unstyled.parentNode.parentNode.parentNode;
   var index = lastRow.rowIndex + 1;
   var tbody = table.tBodies[0];
   var row = document.createElement('tr');
@@ -326,42 +326,45 @@ subStreams.prototype.add = function() {
   row = document.createElement('tr'); 
   c0 = document.createElement('td'); c0.appendChild(document.createTextNode('Flags:')); row.appendChild(c0);
   c1 = document.createElement('td');
-  var span = document.createElement('SPAN');
+  var span = document.createElement('span');
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_DUBSUBBED');
   this.streams[str].dubsubbed = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' dubsubbed'));
   span.appendChild(document.createElement('BR'));
   c1.appendChild(span);
-  span = document.createElement('SPAN');
+  span = document.createElement('span');
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_HEARINGIMP');
   this.streams[str].hearingimp = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' hearing impaired subs'));
   span.appendChild(document.createElement('BR'));
   c1.appendChild(span);
-  span = document.createElement('SPAN');
+  span = document.createElement('span');
+  if (simpleView) span.style.display = 'none';
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_IMAGE');
   this.streams[str].image = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' image subs (VOBSUB)'));
   span.appendChild(document.createElement('BR'));
   c1.appendChild(span);
-  span = document.createElement('SPAN');
+  span = document.createElement('span');
+  if (simpleView) span.style.display = 'none';
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_STYLED');
   this.streams[str].styled = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' styled subs (ASS/SSA)'));
   span.appendChild(document.createElement('BR'));
   c1.appendChild(span);
-  span = document.createElement('SPAN');
+  span = document.createElement('span');
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_FORCOMMENTARY');
   this.streams[str].forcommentary = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' subs for commentary audio stream'));
   span.appendChild(document.createElement('BR'));
   c1.appendChild(span);
-  span = document.createElement('SPAN');
+  span = document.createElement('span');
+  if (simpleView) span.style.display = 'none';
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_UNSTYLED');
   this.streams[str].unstyled = checkbox;
   span.appendChild(checkbox);
@@ -563,10 +566,12 @@ function workTemplate() {
       substrm.disable(true,0);
       audstrm.streams[0].lang.value = 2;
       if (audstrm.streams[1]) audstrm.remove(1);
+	  if (substrm.streams[1]) substrm.remove(1);
       break;
     case 'fansub':
       audstrm.streams[0].lang.value = 2;
       if (audstrm.streams[1]) audstrm.remove(1);
+	  if (substrm.streams[1]) substrm.remove(1);
       break;
     case 'dual':
       qualSelect.value = 2;
@@ -582,8 +587,9 @@ function workTemplate() {
       } else {
         audstrm.disable(false,1);
       }
+	  if (substrm.streams[1]) substrm.remove(1);
       break;
-    case 'dual':
+    case 'dualsubs':
       qualSelect.value = 2;
       sourceSelect.value = 7;
       audstrm.streams[0].lang.value = 2;
@@ -610,11 +616,13 @@ function workTemplate() {
       vidstrm.disable(true,0);
       substrm.disable(true,0);
       if (audstrm.streams[1]) audstrm.remove(1);
+	  if (substrm.streams[1]) substrm.remove(1);
       typeSelect.value = 30;
       break;
     case 'sub':
       vidstrm.disable(true,0);
       audstrm.disable(true,0);
+	  if (substrm.streams[1]) substrm.remove(1);
       if (audstrm.streams[1]) audstrm.remove(1);
       typeSelect.value = 20;
       break;
