@@ -583,6 +583,29 @@ function workTemplate() {
         audstrm.disable(false,1);
       }
       break;
+    case 'dual':
+      qualSelect.value = 2;
+      sourceSelect.value = 7;
+      audstrm.streams[0].lang.value = 2;
+      substrm.streams[0].lang.value = 2;
+      substrm.streams[0].type.value = 20;
+      if (!audstrm.streams[1]) { 
+        audstrm.add();
+        audstrm.streams[1].toggle.onclick = function () { audstrm.remove(1); }
+        audstrm.streams[1].lang.value = 4;
+        audstrm.streams[1].type.value = 10;
+      } else {
+        audstrm.disable(false,1);
+      }
+      if (!substrm.streams[1]) { 
+        substrm.add();
+        substrm.streams[1].toggle.onclick = function () { substrm.remove(1); }
+        substrm.streams[1].lang.value = 2;
+        substrm.streams[1].type.value = 20;
+      } else {
+        substrm.disable(false,1);
+      }
+      break;
     case 'dub':
       vidstrm.disable(true,0);
       substrm.disable(true,0);
@@ -611,6 +634,7 @@ function addTemplate() {
   createCell(row, null, document.createTextNode('Template:'), null);
   var optionArray = {"manual":{"text":'manual input'},"raw":{"text":'raw (japanese audio, no subtitles)'},
 					 "fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
+					 "dualsubs":{"text":'dual aud/subs (japanese audio, ? audio, ? subtitles, ? subtitles)'},
 					 "dub":{"text":'external dub file (? audio)'},"sub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
   var select = createSelectArray(null,null,null,null,null,optionArray);
   select.onchange = workTemplate;
