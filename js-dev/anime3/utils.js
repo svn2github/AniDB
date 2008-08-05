@@ -773,7 +773,7 @@ function findMylistEpEntries(eid) {
 		var mylistEntry = mylist[sd];
 		if (!mylistEntry) continue;
 		if (mylistEntry.episodeId != eid && mylistEntry.relatedEids.indexOf(eid) < 0) continue;
-		ret.push(mmylistEntry);
+		ret.push(mylistEntry);
 	}
 	return ret;
 }
