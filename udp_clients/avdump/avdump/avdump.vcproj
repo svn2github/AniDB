@@ -338,11 +338,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\resource.h"
+				RelativePath=".\src\utils.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			>
 			<File
-				RelativePath=".\src\utils.h"
+				RelativePath=".\avdump.rc"
 				>
 			</File>
 		</Filter>
