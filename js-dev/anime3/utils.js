@@ -772,7 +772,7 @@ function findMylistEpEntries(eid) {
 	for (var sd in mylist) {
 		var mylistEntry = mylist[sd];
 		if (!mylistEntry) continue;
-		if (mylistEntry.episodeId != eid && mylistEntry.relatedEids.indexOf(eid) < 0) continue;
+		if (mylistEntry.episodeId != eid && mylistEntry.relatedEids.indexOf(String(eid)) < 0) continue;
 		ret.push(mylistEntry);
 	}
 	return ret;

@@ -45,7 +45,7 @@ function CMylistEntry(node) {
       case 'source': this.source = nodeData(sNode); break;
       case 'storage': this.storage = nodeData(sNode); break;
       case 'other': this.other = nodeData(sNode); break;
-	  case 'releids': this.realtedEids = nodeData(sNode).split(','); break;
+	  case 'releids': this.relatedEids = nodeData(sNode).split(','); break;
       default: showAlert('mylistEntry for lid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
     }
   }
@@ -465,59 +465,64 @@ function createPseudoGroupEntry(gid) {
  * @return boolean (true if processing succeful, false otherwise)
  */
 function parseCustom(node) {
-  if (!node) return false; // no nodes return;
-  for (var nd = 0; nd < node.length; nd++) { // find the right custom entry
-    if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
-  }
-  if (node.length > 1 || node.parentNode.nodeName != 'root') return; 
-  uid = Number(node.getAttribute('uid')) || 0;
-  mod = Number(node.getAttribute('mod')) || 0;
-  for (var i = 0; i < node.childNodes.length; i++) {
-    childNode = node.childNodes.item(i);
-    if (childNode.nodeType == 3) continue;
-    switch (childNode.nodeName) {
-      case 'mylist':
-        var mylistNodes = childNode.getElementsByTagName('file');
-        for (m = 0; m < mylistNodes.length; m++) {
-          var mylistNode = mylistNodes[m];
-      	  mylistEntry = new CMylistEntry(mylistNode);
-          mylist[mylistEntry.fileId] = mylistEntry;
-          var ep = episodes[mylistEntry.episodeId];
-          if (mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
-          var group = groups[mylistEntry.groupId];
-          if (group) group.visible = true;
-        }
-        var mylistNodes = childNode.getElementsByTagName('group');
-        for (m = 0; m < mylistNodes.length; m++) {
-          var mylistNode = mylistNodes[m];
-      	  var gid = Number(mylistNode.getAttribute('id'));
-          var group = groups[gid];
-          if (group) group.isInMylistRange = nodeData(mylistNode.getElementsByTagName('inmylist')[0]);
-        }
-        break;
-      case 'ratings': // taking care of both episode votes and group ratings
-        var groupVotes = childNode.getElementsByTagName('group');
-        var episodeVotes = childNode.getElementsByTagName('ep');
-        for (var gv = 0; gv < groupVotes.length; gv++) { // Group rating entries
-          var gvote = groupVotes[gv];
-          var urating = nodeData(gvote);
-          var agid = gvote.getAttribute('agid');
-          var gid = aGroups[agid] ? aGroups[agid].gid : 0;
-		  var group = groups[gid];
-          if (group) group.userRating = urating;
-        }
-        for (var ev = 0; ev < episodeVotes.length; ev++) {
-          var evote = episodeVotes[ev];
-          var vote = nodeData(evote);
-          var eid = evote.getAttribute('id');
-          episodes[eid].vote = vote;
-        }
-        break;
-      case 'config': parseConfig(childNode); break;
-      default: showAlert('Options',node.nodeName,node.nodeName,childNode.nodeName);
-    }
-  }
-  return true;
+	if (!node) return false; // no nodes return;
+	for (var nd = 0; nd < node.length; nd++) { // find the right custom entry
+		if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
+	}
+	if (node.length > 1 || node.parentNode.nodeName != 'root') return; 
+	uid = Number(node.getAttribute('uid')) || 0;
+	mod = Number(node.getAttribute('mod')) || 0;
+	for (var i = 0; i < node.childNodes.length; i++) {
+		childNode = node.childNodes.item(i);
+		if (childNode.nodeType == 3) continue;
+		switch (childNode.nodeName) {
+			case 'mylist':
+				var mylistNodes = childNode.getElementsByTagName('file');
+				for (m = 0; m < mylistNodes.length; m++) {
+					var mylistNode = mylistNodes[m];
+					mylistEntry = new CMylistEntry(mylistNode);
+					mylist[mylistEntry.fileId] = mylistEntry;
+					var ep = episodes[mylistEntry.episodeId];
+					if (mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
+					// now do the same thing for related episodes
+					for (var e = 0; e < mylistEntry.relatedEids.length; e++) {
+						var episode = episodes[mylistEntry.relatedEids[e]];
+						if (mylistEntry.seenDate && !episode.seenDate) episode.seenDate = mylistEntry.seenDate;
+					}
+					var group = groups[mylistEntry.groupId];
+					if (group) group.visible = true;
+				}
+				var mylistNodes = childNode.getElementsByTagName('group');
+				for (m = 0; m < mylistNodes.length; m++) {
+					var mylistNode = mylistNodes[m];
+					var gid = Number(mylistNode.getAttribute('id'));
+					var group = groups[gid];
+					if (group) group.isInMylistRange = nodeData(mylistNode.getElementsByTagName('inmylist')[0]);
+				}
+				break;
+			case 'ratings': // taking care of both episode votes and group ratings
+				var groupVotes = childNode.getElementsByTagName('group');
+				var episodeVotes = childNode.getElementsByTagName('ep');
+				for (var gv = 0; gv < groupVotes.length; gv++) { // Group rating entries
+					var gvote = groupVotes[gv];
+					var urating = nodeData(gvote);
+					var agid = gvote.getAttribute('agid');
+					var gid = aGroups[agid] ? aGroups[agid].gid : 0;
+					var group = groups[gid];
+					if (group) group.userRating = urating;
+				}
+				for (var ev = 0; ev < episodeVotes.length; ev++) {
+					var evote = episodeVotes[ev];
+					var vote = nodeData(evote);
+					var eid = evote.getAttribute('id');
+					episodes[eid].vote = vote;
+				}
+				break;
+			case 'config': parseConfig(childNode); break;
+			default: showAlert('Options',node.nodeName,node.nodeName,childNode.nodeName);
+		}
+	}
+	return true;
 }
 
 /* Function to parse configuration options
