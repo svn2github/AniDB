@@ -34,10 +34,12 @@ public class EpProcessing {
     
     public enum eRenameStyle {standard, dbstandard, profile, custom}
     public String GetRenamedFileName(cFileInfo FileInfo, eRenameStyle Style) {
-        String SName, EpName, GroupName, EpNo, Ext;
+        String SName, EpName, GroupName, EpNo;
         String FN = "";
         String AbsPath = FileInfo.FilePath.getPath();
         AbsPath = AbsPath.substring(0, AbsPath.lastIndexOf(File.separatorChar));
+	String DB_FN = (String)FileInfo.Data.get("DB_FileName");
+	String Ext = DB_FN.substring(DB_FN.lastIndexOf("."));
         
         switch (Style) {
             case standard:
@@ -46,17 +48,16 @@ public class EpProcessing {
                 GroupName ="[" + (String)FileInfo.Data.get("DB_Group_Short") + "]";
                 EpNo = (String)FileInfo.Data.get("DB_EpNo");
                 
-                FN = GroupName + " " + SName + " " + EpNo + " - " + EpName;
+                FN = GroupName + " " + SName + " " + EpNo + " - " + EpName + Ext;
                 break;
                 
             case dbstandard:
-                FN = (String)FileInfo.Data.get("DB_FileName");
+                FN = DB_FN;
                 break;
                 
             case profile:
                 
             case custom:
-                Ext = FileInfo.FilePath.getName().substring(FileInfo.FilePath.getName().lastIndexOf("."));
                 SName=""; EpName="";
                 for (int I=0;I<3;I++) {
                     if (SName.equals("")) SName = (String)FileInfo.Data.get("DB_SN_" + UserSettings.SeriesLang[I].toString());
