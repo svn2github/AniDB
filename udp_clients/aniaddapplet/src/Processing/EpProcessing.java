@@ -20,7 +20,7 @@ public class EpProcessing {
     public cUser UserSettings = new cUser();
     
     //FIXME: This is a bad idea on its own! (Better to hash a few too many
-    //files than too fewiiiiiiiiiiiii)
+    //files than too few)
     private static String[] supportedFiles={"avi", "mpg", "mpeg", "rm", "rmvb",
 	"asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt",
 	"sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"};
