@@ -19,11 +19,15 @@ public class EpProcessing {
     
     public cUser UserSettings = new cUser();
     
-    private static String[] supportedFiles={"avi", "mkv", "ogm", "mpg", "mp4"}; //to move
+    //FIXME: This is a bad idea on its own! (Better to hash a few too many
+    //files than too fewiiiiiiiiiiiii)
+    private static String[] supportedFiles={"avi", "mpg", "mpeg", "rm", "rmvb",
+	"asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt",
+	"sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"};
     //Check if this file is a video file by looking at extension
     public static boolean isVideoFile(File file){
         for(String s:EpProcessing.supportedFiles)
-            if(file.getName().endsWith(s))
+            if(file.getName().toLowerCase().endsWith(s))
                 return true;
         return false;
     }
