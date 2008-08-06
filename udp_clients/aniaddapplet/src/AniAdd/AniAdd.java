@@ -11,10 +11,7 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.security.AllPermission;
 import java.util.prefs.Preferences;
-import javax.swing.JApplet;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.net.CookieHandler;
 import java.net.URI;
 import java.util.*;
@@ -26,15 +23,15 @@ public class AniAdd extends JApplet {
 
     public static boolean runsLocally=false;
 
-    public void displayError(String msg){
+    public void displayError(String msg)
+    {
         JLabel l=new JLabel(msg);
         add(l);
         //This function can only be called once. it assumes the real GUI is never added
     }
 
-
-    @Override
-    public void init() {
+    private void realinit()
+    {
         try {
             if(!runsLocally){
                 AllPermission perm = new AllPermission();
@@ -53,9 +50,21 @@ public class AniAdd extends JApplet {
         System.out.println("Initialized");
     }
 
-
     @Override
-    public void start() {
+    public void init()
+    {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    realinit();
+                }
+            });
+        } catch (Exception e) {
+        }
+    }
+
+    private void realstart()
+    {
        // File TestFile = new File("E:\\Media\\Anime\\!UnSeen\\Bamboo Blade[Huzzah-Doremi] 12 - Azuma's Circumstances And Mei's Circumstances.Mkv");
       //  EpProc.AddFiles(new File[] {TestFile});
         //EpProc.StartProcessing();
@@ -67,36 +76,36 @@ public class AniAdd extends JApplet {
 
         java.lang.System.out.println("Authenticate");
         API.UserInfo.ApiPassword="";
-	API.UserInfo.UserName = getParameter("user");
-	API.UserInfo.Session = getParameter("sess");
-	API.UserInfo.Autopass = getParameter("autopass");
-	if (API.UserInfo.UserName == null || API.UserInfo.Session == null) {
-	    try {
-		Hashtable<String,String> cookies = new Hashtable<String,String>();
+        API.UserInfo.UserName = getParameter("user");
+        API.UserInfo.Session = getParameter("sess");
+        API.UserInfo.Autopass = getParameter("autopass");
+        if (API.UserInfo.UserName == null || API.UserInfo.Session == null) {
+            try {
+                Hashtable<String,String> cookies = new Hashtable<String,String>();
 
-		Map<String,List<String>> headers = CookieHandler.getDefault().get(new URI("http://anidb.net/"), new HashMap<String,List<String>>());
-		List<String> cookie_lists = headers.get("Cookie");
+                Map<String,List<String>> headers = CookieHandler.getDefault().get(new URI("http://anidb.net/"), new HashMap<String,List<String>>());
+                List<String> cookie_lists = headers.get("Cookie");
 
-		// This isn't a proper parser
-		for (String cookie_list : cookie_lists)
-		    for (String cookie : cookie_list.split(";")) {
-			String attr = cookie.substring(0, cookie.indexOf('=')).trim();
-			String value = cookie.substring(cookie.indexOf('=') + 1).trim();
-			cookies.put(attr, value);
-		    }
+                // This isn't a proper parser
+                for (String cookie_list : cookie_lists)
+                    for (String cookie : cookie_list.split(";")) {
+                        String attr = cookie.substring(0, cookie.indexOf('=')).trim();
+                        String value = cookie.substring(cookie.indexOf('=') + 1).trim();
+                        cookies.put(attr, value);
+                    }
 
-		API.UserInfo.UserName = cookies.get("adbsessuser");
-		API.UserInfo.Session = cookies.get("adbsess");
-		if (API.UserInfo.UserName == null)
-		    API.UserInfo.UserName = cookies.get("adbautouser");
-		API.UserInfo.Autopass = cookies.get("adbautopass");
-		if (API.UserInfo.UserName == null || (API.UserInfo.Session == null && API.UserInfo.Autopass == null))
-		    throw new NullPointerException();
-	    } catch(Exception e) {
-		API.UserInfo.UserName = JOptionPane.showInputDialog(this, "User");
-		API.UserInfo.Password = JOptionPane.showInputDialog(this, "Password");
-	    }
-	}
+                API.UserInfo.UserName = cookies.get("adbsessuser");
+                API.UserInfo.Session = cookies.get("adbsess");
+                if (API.UserInfo.UserName == null)
+                    API.UserInfo.UserName = cookies.get("adbautouser");
+                API.UserInfo.Autopass = cookies.get("adbautopass");
+                if (API.UserInfo.UserName == null || (API.UserInfo.Session == null && API.UserInfo.Autopass == null))
+                    throw new NullPointerException();
+            } catch(Exception e) {
+                API.UserInfo.UserName = JOptionPane.showInputDialog(this, "User");
+                API.UserInfo.Password = JOptionPane.showInputDialog(this, "Password");
+            }
+        }
         if (API.UserInfo.UserName != null)
             try {
                 API.Connect();
@@ -111,18 +120,48 @@ public class AniAdd extends JApplet {
     }
 
     @Override
-    public void stop(){
-       saveConfig();
-       System.out.println("Stopped");
+    public void start()
+    {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    realstart();
+                }
+            });
+        } catch (Exception e) {
+        }
     }
 
     @Override
-    public void destroy(){
-        API.Finalize();
-        System.out.println("Destroyed");
+    public void stop()
+    {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    saveConfig();
+                    System.out.println("Stopped");
+                }
+            });
+        } catch (Exception e) {
+        }
     }
 
-    public static void main(String[] arg){
+    @Override
+    public void destroy()
+    {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    API.Finalize();
+                    System.out.println("Destroyed");
+                }
+            });
+        } catch (Exception e) {
+        }
+    }
+
+    private static void realmain()
+    {
         runsLocally=true;
         JFrame f=new JFrame("AniAdd");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -152,41 +191,54 @@ public class AniAdd extends JApplet {
         });
     }
 
-
-    public void loadConfig(){
-        if(GUI!=null){
-            Preferences prefs = Preferences.userNodeForPackage(AniAdd.class);
-
-            try {
-                String filesWatched=prefs.get("filesWatched", null);
-                GUI.checkFilesWatched.setSelected(Boolean.parseBoolean(filesWatched));
-
-                String renameFiles=prefs.get("renameFiles", null);
-                GUI.checkRenameFiles.setSelected(Boolean.parseBoolean(renameFiles));
-
-                String renameType = prefs.get("renameType", null);
-                EpProc.UserSettings.Type = EpProc.UserSettings.Type.valueOf(renameType);
-
-                String lastDirectory=prefs.get("lastDirectory",null);
-                if(lastDirectory!=null) //In case dialog was never opened. This can happen
-                    GUI.lastDirectory=new File(lastDirectory);
-
-                String Episode, Series;
-                for (int I=0; I<3; I++ ){
-                    Episode = prefs.get("episodeLang"+I, renameFiles);
-                    Series = prefs.get("seriesLang"+I, renameFiles);
-                    EpProc.UserSettings.EpisodeLang[I] = eLanguage.valueOf(Episode);
-                    EpProc.UserSettings.SeriesLang[I] = eLanguage.valueOf(Series);
+    public static void main(String[] args)
+    {
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                public void run() {
+                    realmain();
                 }
-            } catch (Exception exception) {
-                System.out.print("Loading settings failed");
-                exception.printStackTrace();
-            }
-
+            });
+        } catch (Exception e) {
         }
     }
 
-    public void saveConfig(){
+    public void loadConfig()
+    {
+        if (GUI == null)
+            return;
+
+        Preferences prefs = Preferences.userNodeForPackage(AniAdd.class);
+
+        try {
+            String filesWatched=prefs.get("filesWatched", null);
+            GUI.checkFilesWatched.setSelected(Boolean.parseBoolean(filesWatched));
+
+            String renameFiles=prefs.get("renameFiles", null);
+            GUI.checkRenameFiles.setSelected(Boolean.parseBoolean(renameFiles));
+
+            String renameType = prefs.get("renameType", null);
+            EpProc.UserSettings.Type = EpProc.UserSettings.Type.valueOf(renameType);
+
+            String lastDirectory=prefs.get("lastDirectory",null);
+            if(lastDirectory!=null) //In case dialog was never opened. This can happen
+                GUI.lastDirectory=new File(lastDirectory);
+
+            String Episode, Series;
+            for (int I=0; I<3; I++ ){
+                Episode = prefs.get("episodeLang"+I, renameFiles);
+                Series = prefs.get("seriesLang"+I, renameFiles);
+                EpProc.UserSettings.EpisodeLang[I] = eLanguage.valueOf(Episode);
+                EpProc.UserSettings.SeriesLang[I] = eLanguage.valueOf(Series);
+            }
+        } catch (Exception exception) {
+            System.out.print("Loading settings failed");
+            exception.printStackTrace();
+        }
+    }
+
+    public void saveConfig()
+    {
         System.out.println("Saving config");
         Preferences prefs = Preferences.userNodeForPackage(AniAdd.class);
         prefs.put("filesWatched", ""+GUI.checkFilesWatched.isSelected());
@@ -200,7 +252,4 @@ public class AniAdd extends JApplet {
             prefs.put("episodeLang"+I, EpProc.UserSettings.EpisodeLang[I].toString());
         }
     }
-
-
-
 }
