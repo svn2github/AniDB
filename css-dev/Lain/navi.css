@@ -23,7 +23,7 @@
 #user-name>a>span{display: inline !important;}
 
 #menu-lists {
-	background-image: url("Images/Lists.png");
+	background-image: url("images/Lists.png");
 	text-transform: capitalize;
 	position: absolute;
 	left: 1px;
@@ -34,7 +34,7 @@
 	text-align: center;
 }
 #menu-private {
-	background-image: url("Images/Lists.png");
+	background-image: url("images/Lists.png");
 	text-transform: capitalize;
 	position: absolute;
 	left: 100px;
@@ -46,7 +46,7 @@
 }
 
 #menu-main>li.random>a{
-	background-image: url("Images/Random.png");
+	background-image: url("images/Random.png");
 	left: 152px;
 	top: 142px;
 	width: 16px;
@@ -57,14 +57,14 @@
 	top: 126px;
 	width: 14px;
 	height: 16px;
-	background-image: url("Images/Schedule.png");
+	background-image: url("images/Schedule.png");
 }
 #menu-main>li.calendar>a{
 	left: 114px;
 	top: 117px;
 	width: 16px;
 	height: 16px;
-	background-image: url("Images/Calendar.png");
+	background-image: url("images/Calendar.png");
 }
 
 #menu-repl>a{
@@ -72,28 +72,28 @@
 	top: 184px;
 	width: 14px;
 	height: 14px;
-	background-image: url("Images/Report.png");
+	background-image: url("images/Report.png");
 }
 #user-logout>a{
 	left: 75px;
 	top: 115px;
 	width: 20px !important;
 	height: 20px !important;
-	background-image: url("Images/Shutdown.png");
+	background-image: url("images/Shutdown.png");
 }
 #menu-main>li.main>a{
 	left: 45px;
 	top: 132px;
 	width: 14px;
 	height: 14px;
-	background-image: url("Images/Home.png");
+	background-image: url("images/Home.png");
 }
 #menu-support>li.help>a{
 	left: 18px;
 	top: 202px;
 	width: 14px;
 	height: 14px;
-	background-image: url("Images/Help.png");
+	background-image: url("images/Help.png");
 }
 /*#menu-private>li.applet>a{
 	left: 17px;
@@ -107,21 +107,21 @@
 	top: 164px;
 	width: 16px;
 	height: 16px;
-	background-image: url("Images/Search.png");
+	background-image: url("images/Search.png");
 }
 #menu-support>li.forum>a{
 	left: 28px;
 	top: 147px;
 	width: 17px;
 	height: 14px;
-	background-image: url("Images/Forum.png");
+	background-image: url("images/Forum.png");
 }
 #user-profile>a{
 	left: 56px;
 	top: 164px;
 	width: 16px !important;
 	height: 16px !important;
-	background-image: url("Images/Profile.png");
+	background-image: url("images/Profile.png");
 	opacity: 1 !important;
 }
 #alert-notif{
