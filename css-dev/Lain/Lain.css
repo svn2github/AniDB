@@ -1,10 +1,10 @@
 @import "../common/all.css";
 @import "../icons/all.css";
-@import "navi.css";
-@import "nonav.css";
+@import "CSS/navi.css";
+@import "CSS/nonav.css";
 
 html{
-	background:  #114411 url('BG.jpg');
+	background:  #114411 url('Images/BG.jpg');
 	max-width: 1600px;
 	margin-left: auto;
 	margin-right: auto;
@@ -60,7 +60,7 @@ body{
 #layout-menu{
 	width: 200px;
 	height: 199px;
-	background: url('Navi.png');
+	background: url('Images/Navi.png');
 }
 #layout-menu>li.sub-menu>ul{
 	width: 120px;
@@ -91,7 +91,7 @@ tr.header,table.filelist>thead>tr{
 	margin-left: auto;
 	margin-right: auto;
 	width: 800px;
-	background: url('bottom.png');
+	background: url('Images/bottom.png');
 	background-position: bottom left;
 	background-repeat:repeat-x;
 	padding-bottom: 20px; /*bottom.png height*/
@@ -99,7 +99,7 @@ tr.header,table.filelist>thead>tr{
 }
 
 .newsitem>h4{
-	background: url('top.png');
+	background: url('Images/top.png');
 	text-align: center !important;
 	height: 16px;
 	padding: 3px 0 0 0 !important;
@@ -111,7 +111,7 @@ tr.header,table.filelist>thead>tr{
 }
 
 .newsitem>.stamp{
-	background: url('bg_shadow.png');
+	background: url('Images/bg_shadow.png');
 	padding-right: 22px !important;
 }
 .newsitem>.comment{
@@ -121,7 +121,7 @@ tr.header,table.filelist>thead>tr{
 }
 .newsitem>.body{
 	min-height: 100px !important;
-	background: url('bg_shadow.png');
+	background: url('Images/bg_shadow.png');
 	padding: 0px 100px 2px 20px !important;
 }
 .newsitem>.body a {
