@@ -218,7 +218,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="zakura-fixed_menu">
 		<title>Zakura (fixed menu edition)</title>
 		<creator>ricce</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -236,12 +236,12 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<thumbnail>zakura-menu/images/thumbnail.png</thumbnail>
 	</style>
 <style name="Lain">
-		<title/>
-		<creator/>
-		<update/>
-		<status/>
-		<description/>
+		<title>Lain</title>
+		<creator>DvdKhl/Arokh</creator>
+		<update>07.08.2008</update>
+		<status>in development</status>
+		<description>Tested with FireFox, IE may work with some changes. 1280x768 Required.</description>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>Lain/images/screenshot.png</screenshot>
+		<thumbnail>Lain/images/thumbnail.png</thumbnail>
 	</style></css_styles>
