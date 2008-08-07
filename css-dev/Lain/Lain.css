@@ -1,7 +1,7 @@
 @import "../icons/all.css";
-@import "CSS/common.css";
-@import "CSS/navi.css";
-@import "CSS/nonav.css";
+@import "common.css";
+@import "navi.css";
+@import "nonav.css";
 
 html{
 	background:  #114411 url('Images/BG.jpg');
@@ -138,7 +138,7 @@ tr.header,table.filelist>thead>tr{
 }
 
 .rightbar>p,.rightbar>h4:first-child,.rightbar h3{display:none;}
-
+/*.rightbar h4,.rightbar ol{ float: left;}*/
 #layout-footer{
 	/*background: url('Horo.png') !important;*/
 	position: fixed !important;
