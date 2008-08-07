@@ -13,7 +13,7 @@
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>20.05.2008</update>
+		<update>18.02.2008</update>
 		<status>stable (v6)</status>
 		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
@@ -53,8 +53,8 @@
 	<style name="fma_style">
 		<title>Fullmetal Alchemist Style</title>
 		<creator>jkaze</creator>
-		<update>29.05.2008</update>
-		<status>Beta v1</status>
+		<update>09.06.2008</update>
+		<status>Beta v2</status>
 		<description>Viewing some Fullmetal Alchemist characters in the top, with simple design!</description>
 		<path/>
 		<screenshot>fma_style/images/screenshot.png</screenshot>
@@ -63,7 +63,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>20.02.2008</update>
+		<update>12.07.2008</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -73,7 +73,7 @@
 	<style name="haruhistylex">
 		<title>HaruhiStyleX.AniDB</title>
 		<creator>TheJAG</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status>not maintained anymore and replaced by v2</status>
 		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB is developed for Opera at a resolution of 1280x1024 and may not work in any other webbrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
 		<path/>
@@ -114,7 +114,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -135,7 +135,7 @@ should be fixed just send me a PM.</description>
 	<style name="nice-day">
 		<title>Nice Day</title>
 		<creator>epoximator</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status>Experimental</status>
 		<description>Based on "Beautiful Day" by Kaushal Sheth (http://www.kaushalsheth.com)</description>
 		<path/>
@@ -158,7 +158,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-blue">
 		<title>sub-blue</title>
 		<creator>epoximator</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -168,7 +168,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-brown">
 		<title>sub-brown</title>
 		<creator>epoximator</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -178,7 +178,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -188,7 +188,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-norwegian-blue">
 		<title>norwegian-blue</title>
 		<creator>PetriW</creator>
-		<update>20.05.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -235,4 +235,13 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<screenshot>zakura-menu/images/screenshot.png</screenshot>
 		<thumbnail>zakura-menu/images/thumbnail.png</thumbnail>
 	</style>
-</css_styles>
+<style name="Lain">
+		<title/>
+		<creator/>
+		<update/>
+		<status/>
+		<description/>
+		<path/>
+		<screenshot>none</screenshot>
+		<thumbnail>none</thumbnail>
+	</style></css_styles>

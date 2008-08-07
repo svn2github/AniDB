@@ -11,11 +11,8 @@
 {
 	line-height:25px;
 	white-space: nowrap;
-}
-
-#layout-main #htmltagcloud span + span
-{
-	padding-left:15px;
+	padding-left: 0.8em;
+	padding-right: 0.8em;
 }
 
 #layout-main #htmltagcloud span.tagcloud0 { font-size: 12px;}

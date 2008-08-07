@@ -64,36 +64,36 @@
 }
 
 
-#tab7_pane div textarea
+#layout-main div.tabbed_pane #tab7_pane div textarea
 {
     width: 70%;
     height: 500px;
 }
 
-#tab5_pane div.detailed h4
+#layout-main div.tabbed_pane #tab5_pane div.detailed h4
 {
     margin-bottom: 0.5em;
 }
 
-#tab5_pane form
+#layout-main div.tabbed_pane #tab5_pane form
 {
     text-align: left;
 }
 
-#tab5_pane div.permissions div
+#layout-main div.tabbed_pane #tab5_pane div.permissions div
 {
     float: left;
     margin-bottom: 0.5em;
 }
 
-#tab5_pane div.permissions div label
+#layout-main div.tabbed_pane #tab5_pane div.permissions div label
 {
     display: block;
-    line-height: 1.8;
+	line-height: 2.3;
     margin-right: 1em;
 }
 
-#tab5_pane div.permissions div label select
+#layout-main div.tabbed_pane #tab5_pane div.permissions div label select
 {
     display: block;
     margin-left: 13.5em;
@@ -101,19 +101,24 @@
     width: 330px;
 }
 
-#tab5_pane div.permissions div label input
+#layout-main div.tabbed_pane #tab5_pane div.permissions div label input
 {
     width: 326px;
 }
 
-#tab5_pane div.guest
+#layout-main div.tabbed_pane #tab5_pane div.guest
 {
     clear: left;
     text-align: center;
 }
 
-#tab7_pane div textarea
+#layout-main div.tabbed_pane #tab7_pane div textarea
 {
     width: 70%;
     height: 500px;
+}
+
+#layout-main div.tabbed_pane #tab2_pane table tr
+{
+	vertical-align:top;
 }

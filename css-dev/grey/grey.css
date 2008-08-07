@@ -110,7 +110,12 @@ select
 	font-size: 11px;
 	margin-left: 0.3em;
 }
-form input[type="button"],
+#style_next,
+#style_prev,
+#remAudLang,
+#addAudLang,
+#remSubLang,
+#addSubLang,
 form input[type="submit"]
 {
 	margin-top: 0.3em;
@@ -118,7 +123,12 @@ form input[type="submit"]
 	border-style: dashed;
 	background-image: url(images/bg_2.gif);
 }
-form input[type="button"]:hover,
+#style_next:hover,
+#style_prev:hover,
+#remAudLang:hover,
+#addAudLang:hover,
+#remSubLang:hover,
+#addSubLang:hover,
 form input[type="submit"]:hover
 {
 	color: white;
@@ -1396,6 +1406,7 @@ body.nonav #layout-content h1
 	display: block;
 	text-align: right;
 	padding: 0.1em 1em 0.1em 0.1em;
+	background-image: url(images/whitepixel.png);
 }
 #layout-content div.main_all div.news div
 {
@@ -1604,11 +1615,11 @@ body.nonav #layout-content h1
 	color: #EE0000;
 	text-transform: uppercase;
 }
-#layout-content div.myvotes_all table tr.high td
+#layout-content div.myvotes_all table .high
 {
 	background-image: url(images/greenpixel.png);
 }
-#layout-content div.myvotes_all table tr.low td
+#layout-content div.myvotes_all table .low
 {
 	background-image: url(images/badredpixel.png);
 }
@@ -1760,20 +1771,17 @@ a.i_icon:hover, a.i_inline:hover
 	margin-left: 0.5em;
 	min-height: 42em;
 }
-#layout-content div.animeatt_reviews div.review h2
+#layout-content div.animeatt_reviews div.review > h4
 {
 	padding: 0.5em;
-	margin: 0.5em 0.5em 0.5em 0.5em;
-}
-#layout-content div.animeatt_reviews div.review h2
-{
+	margin: 0.5em 15.5em 0.5em 7em;
 	background-image: url(images/bg_2.gif);
 }
-#layout-content div.animeatt_reviews div.review.approved h2
+#layout-content div.animeatt_reviews div.review.approved  > h4
 {
 	background-image: url(images/greenpixel.png);
 }
-#layout-content div.animeatt_reviews div.review.disapproved h2
+#layout-content div.animeatt_reviews div.review.disapproved > h4
 {
 	background-image: url(images/badredpixel.png);
 }
@@ -1802,19 +1810,13 @@ a.i_icon:hover, a.i_inline:hover
 #layout-content div.animeatt_reviews div.review div.text
 {
 	text-align: left;
-	margin: 0 14em 1em 8em;
+	margin: 0 15.5em 1em 7em;
 	padding: 0.5em;
 	background-image: url(images/bg_2.gif);
 }
 #layout-content div.animeatt_reviews div.review div.head table td.value
 {
 	text-align: right;
-}
-#layout-content div.animeatt_reviews div.review span.stamp
-{
-	display: block;
-	padding: 0em 1em 1em 0.5em;
-	margin-left: 0.3em;
 }
 #layout-content div.animeatt_form table
 {
@@ -2330,18 +2332,6 @@ background: url(images/bg_2.gif);
 {
 text-align: center;
 }
-#layout-main div.latestanimes_anime
-{
-padding: auto;
-margin: auto;
-width: auto;
-}
-#layout-main div.latestanimes_anime div.g_image img
-{
-float: left;
-padding-left: 30%;
-}
-
 #layout-main div.profile_all div.tabbed_pane
 {
 width: 100%;
@@ -2361,4 +2351,20 @@ height: 350px;
 #layout-main div.addanime_all textarea
 {
 width: 100%;
+}
+#layout-main div.main_all div.news p.comment
+{
+float: right;
+margin-top: -1.4em;
+margin-right: 3pt;
+margin-bottom: 0pt;
+margin-left: 0pt;
+}
+#htmltagcloud span:nth-child(2n+1) a
+{
+color: #99FFB6;
+}
+#htmltagcloud span:nth-child(2n+1) a:active
+{
+color: blue;
 }
