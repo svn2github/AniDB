@@ -1,0 +1,21 @@
+#layout-search{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 100%;
+	/*background: url('bgx.png');*/
+	background-position: bottom left;
+	height: 100px;
+}
+#layout-search div.search{
+	/*background: url('Banner.png');*/
+	background-repeat: no-repeat;
+	height: 100px;
+}
+#layout-search div.search form{
+	float: right;
+	width: 100px;
+}
+#layout-search div.search form>p>select{width: 96px;}
+#layout-search div.search form>p>input.text{width: 92px;}
+#layout-search div.search form>p>input.submit{width: 96px; }

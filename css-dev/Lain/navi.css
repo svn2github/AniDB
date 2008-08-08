@@ -1,4 +1,19 @@
 /*<Magic>*/
+#layout-nav{
+	width: 200px;
+	position: static;
+	float: left;
+}
+
+#layout-menu{
+	width: 200px;
+	height: 199px;
+	background: url('images/Navi.png');
+}
+#layout-menu>li.sub-menu>ul{
+	width: 120px;
+}
+
 .myreviews,.myentries,.mycreqs,.mysignatures,.ed2kdump,li.report,li.irc,li.staff,li.reclinks,
 #menu-main>li>a>span,#menu-support>li>a>span,#user-logout>a>span,#user-profile>a>span,#menu-repl>a>span{display: none;}
 #menu-main>li>a:hover,#menu-support>li>a:hover,#user-logout>a:hover,#menu-repl>a:hover{opacity: 1;}
