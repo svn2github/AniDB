@@ -10,14 +10,15 @@
   <xsl:param name="showOther" select="'true'"/>
   <xsl:param name="showIncomplete" select="'true'"/>
   <xsl:param name="mainLanguage" select="'romanji'"/>
-  <xsl:param name="showS1" select="'false'"/>
-  <xsl:param name="showS2" select="'false'"/>
+  <xsl:param name="filter" select="'all'"/>
+  
+  
   <xsl:template match="animeList">
     <xsl:variable name="oppositeLanguage">
       <xsl:call-template name="FlipLanguage"/>
     </xsl:variable>
-    <table width="100%">
-      <thead>
+    <table width="100%" class="scrollTable">
+      <thead class="fixedHeader">
         <tr class="thead">
           <th>#</th>
           <xsl:call-template name="CreateHeaderCell">
@@ -67,13 +68,12 @@
           </xsl:call-template>
         </tr>
       </thead>
-      <tbody>
-        <xsl:apply-templates select="anime[@type[(. != 'OVA' or $showOVA = 'true') and
+      <tbody class="scrollContent">
+        <xsl:variable name="anime" select="anime[$filter = 'all' or @completed = $filter]"/>
+        <xsl:apply-templates select="$anime[@type[(. != 'OVA' or $showOVA = 'true') and
                     (. != 'TV Series' or $showTV = 'true') and (. != 'Movie' or $showMovie = 'true') and
                     (. = 'TV Series' or . = 'OVA' or . = 'Movie' or $showOther = 'true')] and
-                    (@status = 'complete' or $showIncomplete = 'true') and 
-                             (@completed = 'completedByPreferredGroup' or $showS1 = 'false') and
-                             (@completed = 'completedByGroupInMyList' or $showS2 = 'false')]">
+                    (@status = 'complete' or $showIncomplete = 'true')]">
           <xsl:sort select="(romanjiName[$mainLanguage = 'romanji' or ../englishName =  ''] | 
                     englishName[$mainLanguage = 'english' and . !=  ''])['name' = $sortNodeName] | 
                     (*|@*)[name() = $sortNodeName]" data-type="{$sortDataType}" 

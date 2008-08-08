@@ -1,4 +1,4 @@
-Version 0.9 (27/07/2008)
+Version 0.9.5 (27/07/2008)
 
 Template created by path (scavenged from xml-xslt and xml-dark)
 The idea is to try and extract almost everything thats useful into the xml. Please feel free to edit this
@@ -14,4 +14,6 @@ latest version. added data test
 Added group information with some css. 
 
 groups are expandable to see their files
+
+filters to see completable shows
 
