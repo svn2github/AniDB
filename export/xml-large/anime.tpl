@@ -51,7 +51,8 @@ Version 0.2
 
                 <tmpl_loop name= loop_anime_genren>
 
-                    <genre name="<tmpl_var name= data_anime_genren_name>" id="<tmpl_var name= data_anime_genren_id>"/>
+                    <genre name="<tmpl_var name= data_anime_genren_name>" id="<tmpl_var name= data_anime_genren_id>"
+                    weight="<tmpl_var name= data_anime_genren_weight>" weightName="<tmpl_var name= data_anime_genren_weight_name>"/>
 
                 </tmpl_loop>
 
