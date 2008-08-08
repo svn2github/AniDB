@@ -11,45 +11,48 @@
         Filters
         <ul>
           <li>
-            <input type="radio" name="filter" value="all" onclick="myListRenderer.update({'filter': this.value})"/>All Shows
+            <input type="radio" id="filterAll" name="filter" value="all" onclick="myListRenderer.update({'filter': this.value})"/>
+            <label for="filterAll">All Shows</label>
           </li>
           <li>
-            <input type="radio" name="filter" value="completedByPreferredGroup"  onclick="myListRenderer.update({'filter': this.value})"/>Shows Completable By Preferred Group
+            <input type="radio" id="filterPreferredGroup" name="filter" value="completedByPreferredGroup"  onclick="myListRenderer.update({'filter': this.value})"/>
+            <label for="filterPreferredGroup">Shows Completable By Preferred Group</label>
           </li>
           <li>
-            <input type="radio" name="filter" value="completedByGroupInMyList" onclick="myListRenderer.update({'filter': this.value})"/>Shows Completable By Any Group
+            <input type="radio" id="filterCompletedByMyListGroup" name="filter" value="completedByGroupInMyList" onclick="myListRenderer.update({'filter': this.value})"/>
+            <label for="filterCompletedByMyListGroup">Shows Completable By Group In MyList</label>
           </li>
         </ul>
       </li>
     </ul>
     <ul>
       <li>
-        <input type="checkbox" onclick="myListRenderer.update({'showOVA': this.checked.toString()})" checked="checked"/>
-        Show OAVs
+        <input type="checkbox" id="showOVA" onclick="myListRenderer.update({'showOVA': this.checked.toString()})" checked="checked"/>
+        <label for="showOVA">Show OAVs</label>
       </li>
     </ul>
     <ul>
       <li>
-        <input type="checkbox" onclick="myListRenderer.update({'showTV': this.checked.toString()})" checked="checked"/>
-        Show TV Series
+        <input type="checkbox" id="showTV" onclick="myListRenderer.update({'showTV': this.checked.toString()})" checked="checked"/>
+        <label for="showTV">Show TV Series</label>
       </li>
     </ul>
     <ul>
       <li>
-        <input type="checkbox" onclick="myListRenderer.update({'showMovie': this.checked.toString()})" checked="checked"/>
-        Show Movies
+        <input type="checkbox" id="showMovies" onclick="myListRenderer.update({'showMovie': this.checked.toString()})" checked="checked"/>
+        <label for="showMovies">Show Movies</label>
       </li>
     </ul>
     <ul>
       <li>
-        <input type="checkbox" onclick="myListRenderer.update({'showOther': this.checked.toString()})" checked="checked"/>
-        Show Others
+        <input type="checkbox" id="showOthers" onclick="myListRenderer.update({'showOther': this.checked.toString()})" checked="checked"/>
+        <label for="showOthers">Show Others</label>
       </li>
     </ul>
     <ul>
       <li>
-        <input type="checkbox" onclick="myListRenderer.update({'showIncomplete': this.checked.toString()})" checked="checked"/>
-        Show Incomplete
+        <input type="checkbox" id="showIncomplete" onclick="myListRenderer.update({'showIncomplete': this.checked.toString()})" checked="checked"/>
+        <label for="showIncomplete">Show Incomplete</label>
       </li>
     </ul>
 
