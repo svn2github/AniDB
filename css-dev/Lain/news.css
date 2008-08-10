@@ -23,21 +23,30 @@
 
 .newsitem>.stamp{
 	background: url('images/bg_shadow.png');
+	width: 778px; /*IE*/
 	padding-right: 22px !important;
 }
 .newsitem>.comment{
+	text-align:center;
+	width:86px;
 	margin-top: -2em !important;
 	padding-right: 38px;
 	color: #1177bb;
 }
+
 .newsitem>.body{
 	min-height: 100px !important;
 	background: url('images/bg_shadow.png');
-	padding: 0px 100px 2px 20px !important;
+	width: 660px; /*IE*/
+	padding: 0px 120px 2px 20px !important;
 }
 .newsitem>.body a {
-	color: blue;
+	color: #009955;
 }
+.newsitem>.body a:hover{
+	color: #ff8844;
+}
+
 .newsitem>.body ul{
 	list-style-type: disc !important;
 	list-style-position: inside;
@@ -46,6 +55,9 @@
 
 .newsitem>div.avatar{
 	margin: 0 22px 0 20px !important;
+	height: 0px;
+}
+.newsitem>div.avatar img{
 }
 
 .rightbar>p,.rightbar>h4:first-child,.rightbar h3{display:none;}

@@ -19,6 +19,8 @@ body{
 	background-position: top left;
 	color: #55bbff;
 }
+a{ color: #55bbff;} /*IE*/
+
 .g_odd{
 	background-color: #002233;
 }
@@ -27,5 +29,9 @@ tr{
 }
 .g_definitionlist{
 	float: left;
+}
+
+td, th {
+	padding: 0px 2px;
 }
 
