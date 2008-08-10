@@ -1,3 +1,8 @@
+2008-08-10	v0.7
+	changed: moved anime details to separate XSL (mylistc.xsl)
+	changed: load anime details on demand (=when clicking on anime) using a separate XSL, should reduce list rendering time
+	changed: use new 'waiting' CSS class
+
 2008-08-10	v0.6.1
 	fixed: awards sorting
 	added: wait cursor while rendering

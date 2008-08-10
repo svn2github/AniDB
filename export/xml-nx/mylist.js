@@ -1,10 +1,12 @@
 var xmlURL = "mylist.xml";
 var xslURL = "mylistb.xsl";
+var xslAnimeURL = "mylistc.xsl";
 var resultElementId = "result";
 
 const XSLNS = "http://www.w3.org/1999/XSL/Transform";
 var xml_document;
 var xsl_document;
+var xsl_anime_document;
 
 
 function loadXMLDoc(fname) {
@@ -38,7 +40,7 @@ function transformation(setParamsFunc) {
 		return false;
 	}
 
-	$("body").css("cursor", "wait");
+	$("body").addClass("waiting");
 
 	// render
 	var xsltProcessor = new XSLTProcessor();
@@ -48,18 +50,12 @@ function transformation(setParamsFunc) {
 	if (typeof setParamsFunc != "undefined")
 		setParamsFunc(xsltProcessor);
 
-	var resultDocument = xsltProcessor.transformToFragment(xml_document, document);
-
 	// show result
-	var resEl = document.getElementById(resultElementId);
-	while (resEl.childNodes.length > 0)
-		resEl.removeChild(resEl.childNodes[0]);
-
-	resEl.appendChild(resultDocument);
-
-	$("body").css("cursor", "auto");
+	$("#" + resultElementId).empty().append(xsltProcessor.transformToFragment(xml_document, document));
 
 	afterTransformation();
+
+	$("body").removeClass("waiting");
 
 	return true;
 }
@@ -97,7 +93,6 @@ function transformationParameters(xsltProcessor) {
 		xsltProcessor.setParameter(null, "optionsVisible", $("#options").hasClass("invisible") ? 0 : 1);
 }
 
-
 function afterTransformation() {
 	// add an arrow the sorted column
 	var sortField = null;
@@ -121,13 +116,12 @@ function afterTransformation() {
 	// make columns sortable
 	$(".sortable").click(function() { doSort(this); });
 
-		// make columns sortable
-	$(".ep").click(function() { doSelectEpisode(this) });
-
+	// show/hide options
 	$("#optionsheader").click(function() { $("#options").toggleClass("invisible"); });
 
-	$("[id$=_comment]").filter("[id^=es]").click( function () { doEpisodeCommentClick(this);	} );
-	
+	// show anime details
+	$(".toggle_ep").click(function() { toggleAnimeDetails(this); });
+
 	fixAwardImages();
 
 /*
@@ -137,6 +131,36 @@ function afterTransformation() {
 	});
 */
 };
+
+function transformationAnimeDetails(animeId, episodesElement) {
+	// initialization
+	if (!xsl_anime_document)
+		xsl_anime_document = loadXMLDoc(xslAnimeURL);
+
+	if (!xsl_anime_document) {
+		alert('Your browser cannot handle XSLT transforming using web standards!');
+		return false;
+	}
+
+	$("body").addClass("waiting");
+
+	// render
+	var xsltProcessor = new XSLTProcessor();
+	xsltProcessor.importStylesheet(xsl_anime_document);
+
+	xsltProcessor.setParameter(null, "animeId", animeId);
+	if (typeof $("#languageList").val() == "undefined")
+		xsltProcessor.setParameter(null, "mainLang", "*");
+	else
+		xsltProcessor.setParameter(null, "mainLang", $("#languageList").val());
+
+	// show result
+	$(episodesElement).empty().append(xsltProcessor.transformToFragment(xml_document, document));
+
+	$("body").removeClass("waiting");
+
+	return true;
+}
 
 function doFilterType() {
 	// re-build list
@@ -217,10 +241,13 @@ function parseAnimeId(element) {
 	if (typeof element == "number")
 		return element;
 
-	if (typeof element == "object") // assume its an element with number in id
+	if (typeof element == "object") { // assume its an element with number in id
+		if ($(element).attr("animeId") != null)
+			return parseInt($(element).attr("animeId"));
 		element = element.id;
+	}
 
-	if (element.substr(0,1) != "e")
+	if (element.substr(0,1) != "a" && element.substr(0,1) != "e")
 		return -1;
 
 	if (element.indexOf("_") > 0)
@@ -235,8 +262,10 @@ function parseAnimeId(element) {
 
 function showEpisodesSummary(ep) {
 	var animeId = parseAnimeId(ep);
-	if (animeId < 0)
+	if (animeId < 0) {
+		alert("showEpisodesSummary: Invalid animeId");
 		return;
+	}
 
 	var parentEl = $("[id^=e"+animeId+"]");
 	var selCount = 0;
@@ -286,12 +315,47 @@ function doEpisodeCommentClick(el) {
 
 function showAllDetails(showing) {
 	// toggle showing details for all animes
-	$("tr[id^=a]").each(function (i) {
-		if (showing)
-			$("#es" + this.id.substr(1)).removeClass("invisible");
-		else
-			$("#es" + this.id.substr(1)).addClass("invisible");
+	$("body").addClass("waiting");
+	$("[animeId]").each(function (i) {
+		toggleAnimeDetails(this, showing);
 	});
+	$("body").removeClass("waiting");
+}
+
+function toggleAnimeDetails(animeEl, doShow) {
+	var animeId = parseAnimeId(animeEl.id);
+	var episodesEl = $("#es" + animeId).get(0);
+
+	if (typeof episodesEl == "undefined" ) {
+		alert("No anime selected");
+		return;
+	}
+
+	if (typeof doShow == "undefined")
+		doShow = 	$(episodesEl).hasClass("invisible");
+	
+	if (doShow) {
+		// show
+		if ($(episodesEl).children().length > 1) {
+			// already loaded
+			$(episodesEl).removeClass("invisible");
+		} else {
+			// load
+			if (transformationAnimeDetails(animeId, episodesEl)) {
+				// make episodes selectable for summary
+				$(episodesEl).find(".ep").click(function() { doSelectEpisode(this) });
+
+				// de-/select all episodes
+				$(episodesEl).find(".ep_comment").click( function () { doEpisodeCommentClick(this);	} );
+
+				$(episodesEl).removeClass("invisible");
+			} else
+				alert("Transformation of episodes failed!");
+		}
+	} else {
+		// hide
+		$(episodesEl).addClass("invisible");
+	}
 }
 
 function fixAwardImages() {

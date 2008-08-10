@@ -78,6 +78,9 @@ a:hover {
 .invisible {
 	display:none;
 }
+.waiting {
+	cursor: wait !important;
+}
 #optionsheader {
 	background-color: #005000;
 	font-weight: bold;
