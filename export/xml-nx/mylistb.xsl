@@ -81,7 +81,7 @@
 					<th class="sortable" colspan="2" sortField="@r" sortType="number" sortOrder="" title="Average rating and total votes">Rating</th>
 					<th class="sortable" colspan="2" sortField="@rt" sortType="number" sortOrder="" title="Average temporary rating and total votes">Temp R.</th>
 					<th class="sortable" colspan="2" sortField="@rr" sortType="number" sortOrder="" title="Average review ratings and total number of reviews">Reviews</th>
-					<th class="sortable" sortField="W" sortType="text" sortOrder="">Awards</th>
+					<th class="sortable" sortField="count(W)" sortType="text" sortOrder="">Awards</th>
 				</tr>
 </xsl:template>
 
@@ -127,7 +127,7 @@
 					<td class="right">&#160;<xsl:if test="@vr &gt; 0">(<xsl:value-of select="@vr"/>)</xsl:if></td>
 					<td class="awards"><xsl:apply-templates select="W[string-length(@n) &gt; 0]"/></td>
 				</tr>
-				<xsl:call-template name="Episodes" />
+				<xsl:call-template name="Episodes"/>
 </xsl:template>
 
 
@@ -190,7 +190,7 @@
 										<xsl:otherwise><xsl:attribute name="class">ep odd hover</xsl:attribute></xsl:otherwise>
 									</xsl:choose>
 									<td id="e{../@i}_{@i}_num" class="right"><xsl:value-of select="@i"/></td>
-									<td id="e{../@i}_{@i}_name" class="left"><xsl:value-of select="N"/></td>
+									<td id="e{../@i}_{@i}_name" class="left"><xsl:value-of select="text()"/></td>
 									<td id="e{../@i}_{@i}_len" class="right"><xsl:value-of select="@l"/> min</td>
 									<td id="e{../@i}_{@i}_w">
 										<xsl:choose>
@@ -205,7 +205,7 @@
 <xsl:template match="NO">
 								<tr>
 									<td class="left capitalize" onclick="doSetMainLanguage({@i})"><xsl:value-of select="@n"/>:</td>
-									<td class="left"><xsl:value-of select="N"/></td>
+									<td class="left"><xsl:value-of select="text()"/></td>
 								</tr>
 </xsl:template>
 

@@ -27,6 +27,7 @@ function transformation(setParamsFunc) {
 		return false;
 	}
 
+	// initialization
 	if (!xml_document)
 		xml_document = loadXMLDoc(xmlURL);
 	if (!xsl_document)
@@ -37,9 +38,11 @@ function transformation(setParamsFunc) {
 		return false;
 	}
 
+	$("body").css("cursor", "wait");
+
+	// render
 	var xsltProcessor = new XSLTProcessor();
 	xsltProcessor.importStylesheet(xsl_document);
-
 	transformationParameters(xsltProcessor);
 
 	if (typeof setParamsFunc != "undefined")
@@ -47,11 +50,14 @@ function transformation(setParamsFunc) {
 
 	var resultDocument = xsltProcessor.transformToFragment(xml_document, document);
 
+	// show result
 	var resEl = document.getElementById(resultElementId);
 	while (resEl.childNodes.length > 0)
 		resEl.removeChild(resEl.childNodes[0]);
 
 	resEl.appendChild(resultDocument);
+
+	$("body").css("cursor", "auto");
 
 	afterTransformation();
 

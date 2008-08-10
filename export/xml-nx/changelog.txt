@@ -1,3 +1,9 @@
+2008-08-10	v0.6.1
+	fixed: awards sorting
+	added: wait cursor while rendering
+	changed: number of total (special) episodes were taken from mylist, not from anime
+	changed: changed mylist template resulting in a bit smaller XML output file
+
 2008-07-26	v0.6
 	added: episodes summary
 	added: episodes selecting with showing a selected summary
@@ -20,19 +26,3 @@
 
 2008-07-06	v0.5
 	added: main language selection
-
-
-Future *maybe* features in no particular order:
-- detailed infos for anime (not for episodes!)
-- revamp options, eg. no triple click switch (big lists = long wait when clicking through unwanted option??)
-- possibility to hide/show columns
-- page design where you have max number of animes per page and can navigate through (some users have a bloody big anime list)
-- Awards:
-    - use pics from local dir
-		- titles
-- sort alternative titles: englisch, japanese, rest alphabetically
-- show identical titles only once (if possible without alot of work)
-- user-switchable CSS
-- use more classes to make it easier designing new CSS
-- show summary row for selected (via mouse click) animes
-- show in select-boxes only values from *filtered* data (currently: from all data)
