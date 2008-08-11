@@ -359,3 +359,10 @@
 	margin:5px;
 	width:96px;
 }
+
+*.i_forum
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/forum_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
