@@ -137,12 +137,8 @@
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
-	color:#FFFFFF;
-}
-
-#layout-main div.forum li.header dd
-{
 	border-left-width:0;
+	color:#FFFFFF;
 	font-family:Arial,Helvetica,sans-serif;
 	font-size:1em;
 	line-height:1em;
