@@ -111,20 +111,6 @@
 	padding-left:.5em;
 }
 
-#layout-main div.forum li.header dt,
-#layout-main div.forum li.header dd
-{
-	border-left-width:0;
-	color:#FFFFFF;
-	font-family:Arial,Helvetica,sans-serif;
-	font-size:1em;
-	line-height:1em;
-	margin:2px 0 4px;
-	padding-bottom:2px;
-	padding-top:2px;
-	text-transform:uppercase;
-}
-
 #layout-main div.forum dl.icon dt
 {
 	background-position:5px 95%;
@@ -166,13 +152,18 @@
 	text-transform:uppercase;
 }
 
+#layout-main div.forum ul.topiclist dd.posts,
+#layout-main div.forum ul.topiclist dd.topics
+{
+	text-align:center;
+	width:8%;
+}
+
 #layout-main div.forum ul.topics dd.posts,
 #layout-main div.forum ul.topics dd.topics
 {
 	font-size:1.2em;
 	line-height:2.2em;
-	text-align:center;
-	width:8%;
 }
 
 #layout-main div.forum a.topictitle
