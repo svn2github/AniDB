@@ -58,250 +58,231 @@
 
 #layout-main div.forum ul.topiclist
 {
-border:none;
+	background-color:inherit;
+	border:none;
+	display:block;
+	list-style-type:none;
+	margin:0;
 }
 
 #layout-main div.forum ul.topiclist dd
 {
-border-left-color:#FFFFFF;
-margin-left:0em;
-border-left:1px solid #FFFFFF;
-display:block;
-float:left;
-padding-left: 0.5em;
-}
-
-#layout-main div.forum ul.topiclist
-{
-display:block;
-list-style-type:none;
-margin:0;
-
+	border-left:1px solid #FFFFFF;
+	border-left-color:#FFFFFF;
+	display:block;
+	float:left;
+	margin-left:0;
+	padding-left:.5em;
 }
 
 #layout-main div.forum ul.topiclist li
 {
-color:#4C5D77;
-display:block;
-list-style-type:none;
-margin:0;
+	color:#4C5D77;
+	display:block;
+	list-style-type:none;
+	margin:0;
 }
 
 #layout-main div.forum li.header dl.icon
 {
-min-height:0;
-width:100%;
+	min-height:0;
+	width:100%;
 }
 
 #layout-main div.forum ul.topiclist dl
 {
-height:1%;
-overflow:hidden;
-position:relative;
-display:block;
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+	position:relative;
 }
 
 #layout-main div.forum dl.icon
 {
-height:auto !important;
-min-height:35px;
-background-position:10px 50%;
-background-repeat:no-repeat;
+	background-position:10px 50%;
+	background-repeat:no-repeat;
+	height:auto!important;
+	min-height:35px;
 }
 
 #layout-main div.forum li.header dl.icon dt
 {
-padding-left: 0.5em;
-}
-
-#layout-main div.forum li.header dt, li.header dd
-{
-color:#FFFFFF;
-}
-
-#layout-main div.forum dl.icon dt
-{
-background-position:5px 95%;
-background-repeat:no-repeat;
-font-weight:bold;
-}
-
-#layout-main div.forum li.header dt, li.header dd
-{
-border-left-width:0;
-font-family:Arial,Helvetica,sans-serif;
-font-size:1em;
-line-height:1em;
-margin:2px 0 4px;
-padding-bottom:2px;
-padding-top:2px;
-text-transform:uppercase;
-}
-
-#layout-main div.forum ul.topiclist dt
-{
-display:block;
-float:left;
-width:50%;
-padding-left: 0.5em;
-}
-
-#layout-main div.forum li.row
-{
-border-bottom-color:#00608F;
-border-top-color:#FFFFFF;
-border-bottom:1px solid #8F8F8F;
-border-top:1px solid #FFFFFF;
+	padding-left:.5em;
 }
 
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
-color:#FFFFFF;
+	border-left-width:0;
+	color:#FFFFFF;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:1em;
+	line-height:1em;
+	margin:2px 0 4px;
+	padding-bottom:2px;
+	padding-top:2px;
+	text-transform:uppercase;
+}
+
+#layout-main div.forum dl.icon dt
+{
+	background-position:5px 95%;
+	background-repeat:no-repeat;
+	font-weight:bold;
+}
+
+#layout-main div.forum ul.topiclist dt
+{
+	display:block;
+	float:left;
+	padding-left:.5em;
+	width:50%;
+}
+
+#layout-main div.forum li.row
+{
+	border-bottom:1px solid #8F8F8F;
+	border-bottom-color:#00608F;
+	border-top:1px solid #FFFFFF;
+	border-top-color:#FFFFFF;
+}
+
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	color:#FFFFFF;
 }
 
 #layout-main div.forum li.header dd
 {
-margin-left:1px;
-border-left-width:0;
-font-family:Arial,Helvetica,sans-serif;
-font-size:1em;
-line-height:1em;
-margin:2px 0 4px;
-padding-bottom:2px;
-padding-top:2px;
-text-transform:uppercase;
+	border-left-width:0;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:1em;
+	line-height:1em;
+	margin:2px 0 4px;
+	padding-bottom:2px;
+	padding-top:2px;
+	text-transform:uppercase;
 }
 
-#layout-main div.forum dd.posts,
-#layout-main div.forum dd.topics
+#layout-main div.forum ul.topiclust dd.posts,
+#layout-main div.forum ul.topiclust dd.topics
 {
-text-align:center;
-width:8%;
-font-size:1.2em;
-line-height:2.2em;
+	font-size:1.2em;
+	line-height:2.2em;
+	text-align:center;
+	width:8%;
 }
 
 #layout-main div.forum a.topictitle
 {
-font-family:"Trebuchet MS",Helvetica,Arial,Sans-serif;
-font-size:1.2em;
-font-weight:bold;
-color:#105289;
+	color:#105289;
+	font-family:"Trebuchet MS",Helvetica,Arial,Sans-serif;
+	font-size:1.2em;
+	font-weight:bold;
 }
 
 #layout-main div.forum a.topictitle:hover
 {
-color:#AA0000;
+	color:#AA0000;
 }
 
 #layout-main div.forum a.username-coloured
 {
-display:inline !important;
-font-weight:bold;
-color:#AA0000;
+	color:#AA0000;
+	display:inline!important;
+	font-weight:bold;
 }
 
 #layout-main div.forum ul.topics dt,
 #layout-main div.forum dd.lastpost
 {
-font-size:1.1em;
+	font-size:1.1em;
 }
 
 #layout-main div.forum ul.topiclist li.row dl
 {
-padding:2px 0;
+	padding:2px 0;
 }
 
-#layout-main div.forum ul.topiclist dl
+#layout-main div.forum ul.topiclist li.row dd.lastpost
 {
-margin: 0;
-}
-
-#layout-main div.forum ul.topiclist  li.row dd.lastpost
-{
-padding-top:2px;
-padding-bottom:4px;
+	padding-bottom:4px;
+	padding-top:2px;
 }
 
 #layout-main div.forum a.lastpost
 {
-height:9px;
-width:11px;
-background: url(http://forum.anidb.net/styles/arsilver/imageset/icon_topic_latest.gif) no-repeat;
-display:inline-block;
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/icon_topic_latest.gif) no-repeat;
+	display:inline-block;
+	height:9px;
+	width:11px;
 }
 
-#layout-main div.forum ul.topiclist  li.row dl.icon dt.icon
+#layout-main div.forum ul.topiclist li.row dl.icon dt.icon
 {
-background: url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
-margin-right:-0.5em;
-margin-top:0.2em;
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
 }
 
-#layout-main div.forum ul.topiclist  li.row dl.icon dt.icon span
+#layout-main div.forum ul.topiclist li.row dl.icon dt.icon span
 {
-display:block;
-margin-top:-0.3em;
-padding-left:3em;
-font-weight:normal;
+	display:block;
+	font-weight:normal;
+	margin-top:-.3em;
+	padding-left:3em;
 }
 
-#layout-main div.forum ul.topiclist  li.row dl.icon
+#layout-main div.forum ul.topiclist li.row dl.icon
 {
-padding-left: 1em;
+	padding-left:1em;
 }
 
 #layout-main div.forum div.threads
 {
-margin-bottom:4px;
-background:#B1B1B1 none repeat-x scroll 0 0;
-background-color:#4992B6;
-background-image:url(http://forum.anidb.net/styles/arsilver/theme/images/bg_list.gif);
+	background:#B1B1B1 none repeat-x scroll 0 0;
+	background-color:#4992B6;
+	background-image:url(http://forum.anidb.net/styles/arsilver/theme/images/bg_list.gif);
+	margin-bottom:4px;
 }
 
 #layout-main div.forum div.topic_actions
 {
-	height: 25px;
-margin-bottom:1em;
+	height:25px;
+	margin-bottom:1em;
 }
 
 #layout-main div.forum div.topic_actions span.icons
 {
-	float: right;
+	float:right;
 }
 
 #layout-main div.forum div.topic_actions div.buttons a
 {
-	float: left;
-}
-
-#layout-main div.forum ul.topiclist
-{
-background-color: inherit;
+	float:left;
 }
 
 #layout-main div.forum ul.topics
 {
-/*background-color:#EEF5F9;
-background:#F9F9F9 none repeat-x scroll 0 0;
-background-image:url(http://forum.anidb.net/styles/arsilver/theme/images/gradient.gif);*/
-border-left: 5px solid #4992B6;
-border-right: 5px solid #4992B6;
+	border-left:5px solid #4992B6;
+	border-right:5px solid #4992B6;
 }
 
 #layout-main div.forum ul.topics li.row
 {
-background-color:#ECF3F7;
+	background-color:#ECF3F7;
 }
 
 #layout-main div.forum ul.topics li.g_odd
 {
-background-color:#E1EBF2;
+	background-color:#E1EBF2;
 }
 
-#layout-main div.forum span.corners-bottom {
-clear:both;
+#layout-main div.forum span.corners-bottom
+{
+	clear:both;
 }
 
 #layout-main div.forum span.corners-top,
@@ -309,43 +290,44 @@ clear:both;
 #layout-main div.forum span.corners-top span,
 #layout-main div.forum span.corners-bottom span
 {
-background-repeat:no-repeat;
-display:block;
-font-size:1px;
-height:5px;
-line-height:1px;
+	background-repeat:no-repeat;
+	display:block;
+	font-size:1px;
+	height:5px;
+	line-height:1px;
 }
 
-#layout-main div.forum hr {
-border-color:#CCCCCC #FFFFFF #FFFFFF;
-border-style:solid none none;
-border-width:1px 0 0;
-clear:both;
-display:block;
-height:1px;
-margin:5px 0;
+#layout-main div.forum hr
+{
+	border-color:#CCCCCC #FFFFFF #FFFFFF;
+	border-style:solid none none;
+	border-width:1px 0 0;
+	clear:both;
+	display:block;
+	height:1px;
+	margin:5px 0;
 }
 
 #layout-main div.forum ul.topics li.row:hover
 {
-background-color: #CBD6DE;
+	background-color:#CBD6DE;
 }
 
 #layout-main div.forum div.navbar div.linklist span
 {
-	font-size:1.1em;
-	line-height:2em;
-	font-weight:bold;
 	display:block;
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:2em;
 	margin-right:5px;
 	width:auto;
 }
 
 #layout-main div.forum div.navbar div.linklist
 {
-	padding-left: 1em;
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
+	padding-bottom:.5em;
+	padding-left:1em;
+	padding-top:.5em;
 }
 
 #layout-main div.forum div.navbar
