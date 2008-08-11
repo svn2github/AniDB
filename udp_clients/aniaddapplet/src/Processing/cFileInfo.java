@@ -28,6 +28,7 @@ public class cFileInfo {
     public enum eMyListState{
         queued,
         inmylist,
+        added,
         unknown
     
     }

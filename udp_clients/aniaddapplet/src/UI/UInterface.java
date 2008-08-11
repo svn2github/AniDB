@@ -355,6 +355,9 @@ public class UInterface extends javax.swing.JPanel {
         } else if (FileInfo.MLState == cFileInfo.eMyListState.inmylist) {
             Cell.BGColor = Color.green;
             Cell.Value = "In MyList";
+        } else if (FileInfo.MLState == cFileInfo.eMyListState.added) {
+            Cell.BGColor = Color.CYAN;
+            Cell.Value = "Added";
         } else if (FileInfo.MLState == cFileInfo.eMyListState.unknown) {
             Cell.BGColor = Color.red;
             Cell.Value = "Unknown File";

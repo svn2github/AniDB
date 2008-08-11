@@ -306,7 +306,7 @@ public class EpProcessing {
         
         if (RespID == 210) {
             //File Added
-            ProcFile.MLState = cFileInfo.eMyListState.inmylist;
+            ProcFile.MLState = cFileInfo.eMyListState.added;
         } else if (RespID == 311) {
             //File Edited
         } else if (RespID == 310) {
