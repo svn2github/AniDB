@@ -207,13 +207,6 @@
 	width:11px;
 }
 
-#layout-main div.forum ul.topiclist li.row dl.icon dt.icon
-{
-	background:url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
-}
-
 #layout-main div.forum ul.topiclist li.row dl.icon dt.icon span
 {
 	display:block;
@@ -320,4 +313,48 @@
 #layout-main div.forum div.navbar
 {
 	background-color:#CADCEB;
+}
+
+*.i_topic_normal
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_topic_sticky
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/sticky_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_topic_announcement
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_topic_global
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_topic_add
+{
+	background:transparent url(http://forum.anidb.net/styles/arsilver/imageset/en/button_topic_new.gif) no-repeat scroll 0 50%;
+	height:25px;
+	margin:5px;
+	width:96px;
+}
+
+*.i_topic_delete
+{
+	background:transparent url(http://forum.anidb.net/styles/arsilver/imageset/en/button_topic_new.gif) no-repeat scroll 0 50%;
+	height:25px;
+	margin:5px;
+	width:96px;
 }
