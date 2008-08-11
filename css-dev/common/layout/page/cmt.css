@@ -166,8 +166,8 @@
 	text-transform:uppercase;
 }
 
-#layout-main div.forum ul.topiclust dd.posts,
-#layout-main div.forum ul.topiclust dd.topics
+#layout-main div.forum ul.topiclist dd.posts,
+#layout-main div.forum ul.topiclist dd.topics
 {
 	font-size:1.2em;
 	line-height:2.2em;
