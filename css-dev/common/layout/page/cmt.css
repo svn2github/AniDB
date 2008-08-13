@@ -208,7 +208,7 @@
 	width:11px;
 }
 
-#layout-main div.forum ul.topiclist li.row dl.icon dt.icon span
+#layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title
 {
 	display:block;
 	font-weight:normal;
