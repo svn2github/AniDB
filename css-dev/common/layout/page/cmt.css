@@ -216,6 +216,11 @@
 	padding-left:3em;
 }
 
+#layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title div.pagination
+{
+	margin-top:0em;
+}
+
 #layout-main div.forum ul.topiclist li.row dl.icon
 {
 	padding-left:0.3em;
