@@ -25,7 +25,7 @@
       <xsl:variable name="completedGroups" select="groups/group[@state = 'complete' or @state = 'finished']"/>
       <xsl:if test="@status='incomplete' and $completedGroups">
         <xsl:variable name="lastEpisode">
-          <xsl:apply-templates select="episodes/episode/@number" mode="selectFirstEpisode">
+          <xsl:apply-templates select="episodes/episode/@number[boolean(number(.))]" mode="selectFirstEpisode">
             <xsl:sort order="descending" data-type="number"/>
           </xsl:apply-templates>
         </xsl:variable>
@@ -40,13 +40,6 @@
       </xsl:if>
       <xsl:apply-templates select="@*|node()[not(self::episodes) and not(self::groups)]"/>
     </xsl:copy>
-  </xsl:template>
-
-  <xsl:template match="*" mode="selectFirstEpisodesGroupStatus">
-    <xsl:param name="groups"/>
-    <xsl:if test="(position() = 1) and files/file[@releasedBy = $groups/group/@id[../@state = 'complete' or ../@state = 'finished']]">
-      <xsl:attribute name="completeByGroupWhoDidLastEp">true</xsl:attribute>
-    </xsl:if>
   </xsl:template>
 
   <xsl:template match="@*" mode="selectFirstEpisode">

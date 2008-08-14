@@ -23,19 +23,18 @@
   </xsl:template>
 
   <xsl:template match="group">
-    <tr onMouseOver="overChangeClass(this, 'high2')" onMouseOut="outChangeClass(this)">
+    <tr onMouseOver="over(this, 'clickable high2')" onClick="divDisplayer.toggleDiv('togglingDiv{$animeId}-{@id}')">
       <xsl:choose>
         <xsl:when test="(position()+1) mod 2">
-          <xsl:attribute name="class">oddEpisodeTable</xsl:attribute>
+          <xsl:attribute name="class">clickable oddEpisodeTable</xsl:attribute>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:attribute name="class">evenEpisodeTable</xsl:attribute>
+          <xsl:attribute name="class">clickable evenEpisodeTable</xsl:attribute>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:variable name="episodes" select="../../episode[.//releasedBy/@id = current()/@id]"/>
       <xsl:variable name="numericEpisodes" select="$episodes[boolean(number(@number))]"/>
-
-      <td class="clickable" onClick="divDisplayer.toggleDiv('togglingDiv{$animeId}-{@id}')">
+      <td>
         <xsl:apply-templates select="name" mode="htmlContent"/> (<xsl:apply-templates select="shortName" mode="htmlContent"/>)
       </td>
       <td>
@@ -75,8 +74,9 @@
         <th>Range</th>
         <th>Status</th>
       </tr>
-      <tr class="oddEpisodeTable" onMouseOver="overChangeClass(this, 'high2')" onMouseOut="outChangeClass(this)">
-        <td class="clickable" onClick="divDisplayer.toggleDiv('togglingDiv{$animeId}-{0}')" >
+      <tr class="oddEpisodeTable clickable" onMouseOver="over(this, 'clickable high2')"
+          onClick="divDisplayer.toggleDiv('togglingDiv{$animeId}-{0}')">
+        <td>
           Owned Episodes
         </td>
         <td>
@@ -166,10 +166,15 @@
             <thead>
               <tr>
                 <th>Episode</th>
-                <th>Episode Name</th>
+                <th>Released By</th>
+                <th>File Size</th>
+                <th>Codec</th>
+                <th>File Type</th>
+                <th>Source</th>
+                <th>Quality</th>
+                <th>Resolution</th>
                 <th>Released On</th>
                 <th>Downloaded On</th>
-                <th>Released By</th>
               </tr>
             </thead>
             <xsl:apply-templates select="$files"/>
@@ -182,7 +187,7 @@
   </xsl:template>
 
   <xsl:template match="file">
-    <tr>
+    <tr onMouseOver="over(this,'high3')">
       <xsl:choose>
         <xsl:when test="position() mod 2">
           <xsl:attribute name="class">oddFileTable</xsl:attribute>
@@ -195,16 +200,31 @@
         <xsl:value-of select="../../@number"/>
       </td>
       <td>
-        <xsl:value-of select="../../name/english"/>
+        <xsl:apply-templates select="releasedBy"/>
+      </td>
+      <td>
+        <xsl:value-of select="@size"/>
+      </td>
+      <td>
+        <xsl:value-of select="quality/video/@codec"/>
+      </td>
+      <td>
+        <xsl:value-of select="@type"/>
+      </td>
+      <td>
+      <xsl:value-of select="quality/@source"/>
+      </td>
+      <td>
+        <xsl:value-of select="quality/@name"/>
+      </td>
+      <td>
+        <xsl:value-of select="quality/video/@resolution"/>
       </td>
       <td>
         <xsl:value-of select="dates/@releaseDate"/>
       </td>
       <td>
         <xsl:value-of select="dates/@additionDate"/>
-      </td>
-      <td>
-        <xsl:apply-templates select="releasedBy"/>
       </td>
     </tr>
   </xsl:template>

@@ -122,7 +122,7 @@
     <xsl:variable name="cssClass">
       <xsl:if test="$paramName = $sortNodeName"><xsl:value-of select="$sortOrder"/></xsl:if>
     </xsl:variable>
-    <th onMouseOver="over(this, 'sort {$cssClass}')" onMouseOut="out(this)" class="{$cssClass}" 
+    <th class="{$cssClass} clickable" 
         onClick="myListRenderer.update({{'sortNodeName': '{$paramName}', 'sortDataType': '{$paramDataType}','sortDirection': '{$sortOrder}'}})">
       <xsl:copy-of select="$displayName"/>
        </th>
@@ -136,7 +136,7 @@
 
   <xsl:template match="anime">
     <xsl:variable name="position" select="position()"/>
-    <tr onMouseOver="overChangeClass(this, 'high1')" onMouseOut="outChangeClass(this)">
+    <tr onMouseOver="over(this, 'high1')">
       <xsl:choose>
         <xsl:when test="$position mod 2">
           <xsl:attribute name="class">even</xsl:attribute>

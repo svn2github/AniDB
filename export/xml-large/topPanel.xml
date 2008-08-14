@@ -7,11 +7,11 @@
       </li>
     </ul>
     <ul>
-      <li>
-        Filters
+      <li class="clickable blah" >
+        Filters <img src="images/dropmenu.gif"/>
         <ul>
           <li>
-            <input type="radio" id="filterAll" name="filter" value="all" onclick="myListRenderer.update({'filter': this.value})"/>
+            <input type="radio" id="filterAll" name="filter" value="all" onclick="myListRenderer.update({'filter': this.value})" checked="checked"/>
             <label for="filterAll">All Shows</label>
           </li>
           <li>

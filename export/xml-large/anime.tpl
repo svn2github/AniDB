@@ -141,7 +141,13 @@ Version 0.2
                     </group>
                 </tmpl_loop>
             </groups>
-
+            
+            <file_ep_relations>
+            <tmpl_loop name= loop_data_file_fileeprel>
+              <file id="<tmpl_var name=data_file_fileeprel_fid>" episode="<tmpl_var name=data_file_fileeprel_eid>" 
+              start="<tmpl_var name=data_file_fileeprel_startp>" end="<tmpl_var name=data_file_fileeprel_endp>"/>
+            </tmpl_loop>
+			</file_ep_relations>
             <tmpl_loop name= loop_ep>
 
                 <episode id="<tmpl_var name=data_ep_id>" number="<tmpl_var name=data_ep_epno>"

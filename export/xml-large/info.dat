@@ -1,4 +1,4 @@
-Version 0.9.7 (08/08/2008)
+Version 1.0 (14/08/2008)
 
 Template created by path (scavenged from xml-xslt and xml-dark)
 The idea is to try and extract almost everything thats useful into the xml. Please feel free to edit this
@@ -17,3 +17,6 @@ groups are expandable to see their files
 
 filters to see completable shows
 
+bug fix on completable
+
+requested file->ep relationship
