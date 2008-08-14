@@ -1,5 +1,5 @@
 xml-singlefile-dataonly anidb.net export template
-Version: 2.0 (19.09.2006)
+Version: 3.0 (12.08.2008)
 
 History: 
      - Version 2.0 by bsdude
@@ -7,12 +7,22 @@ History:
 
 Changelog:
 
+  3.0 (12.08.2008)
+     - Cleaned up some redundancies
+     - Changed all plural table names to singular
+     - Removed deprecated genre table
+     - Renamed old table categories to anime_category, and made new table category for global category information
+     - Consolidated titles tables into new table title
+     - New tables: anime_group, episode_title, file_file (for file<->file relations), file_episode (for file<->episode relations)
+     - Added new fields to several tables
+     - Renamed a few fields
+
   2.1 (21.09.2006)
      - Removed some confusing info from the topic
      - Removed redundant Producer field from animes table (info already in companies table)
 
   2.0 (19.09.2006)
-     - This new version my a different author is not fully backwards compatible!
+     - This new version by a different author is not fully backwards compatible!
      - Fixed various typos
      - Added new fields
      - Removed some redundancies
