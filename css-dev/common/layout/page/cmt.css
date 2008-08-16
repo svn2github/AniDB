@@ -321,6 +321,49 @@
 	background-color:#CADCEB;
 }
 
+#layout-main div.forum ul.linklist li
+{
+	display:block;
+	font-size:1.1em;
+	line-height:2em;
+	list-style-type:none;
+	margin-right:5px;
+	width:auto;
+	margin-bottom: 0.2em;
+}
+
+#layout-main div.forum ul.linklist {
+	display:block;
+	margin:0;
+	background-color: inherit;
+	border: none;
+}
+
+#layout-main div.forum div.signature
+{
+	border-top:1px solid #CCCCCC;
+	font-size:1.1em;
+	line-height:140%;
+	margin-top:1.5em;
+	overflow:hidden;
+	padding-top:0.2em;
+	margin-left:16em;
+	margin-right:1em;
+}
+
+#layout-main div.forum span.postdeleted,
+#layout-main div.forum span.postedited
+{
+	display:block;
+	font-style:italic;
+	padding-top:3em;
+}
+
+#layout-main div.forum div.deleted
+{
+	opacity:0.3;
+}
+
 *.i_topic_normal
 {
 	background:url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
@@ -370,4 +413,5 @@
 	background:url(http://forum.anidb.net/styles/arsilver/imageset/forum_read.gif) no-repeat;
 	margin-right:-.5em;
 	margin-top:.2em;
+	height:2.5em;
 }
