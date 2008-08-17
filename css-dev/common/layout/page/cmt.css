@@ -394,7 +394,7 @@
 
 *.i_topic_add
 {
-	background:transparent url(http://forum.anidb.net/styles/arsilver/imageset/en/button_topic_new.gif) no-repeat scroll 0 50%;
+	background-image: url(../icons/orange/topic_add.png);
 	height:25px;
 	margin:5px;
 	width:96px;
@@ -402,7 +402,7 @@
 
 *.i_topic_delete
 {
-	background:transparent url(http://forum.anidb.net/styles/arsilver/imageset/en/button_topic_new.gif) no-repeat scroll 0 50%;
+	background-image: url(../icons/orange/topic_delete.png);
 	height:25px;
 	margin:5px;
 	width:96px;
@@ -421,7 +421,7 @@
 	width: 40px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_quote.gif);
+	background-image: url(../icons/orange/comment_undelete.png);
 }
 
 *.i_comment_setactive
@@ -429,7 +429,7 @@
 	width: 40px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_quote.gif);
+	background-image: url(../icons/orange/comment_setactive.png);
 }
 
 *.i_comment_revisions
@@ -437,5 +437,5 @@
 	width: 40px;
 	height: 12px;
 	margin: 3px;
-	background-image: url(../icons/orange/comment_quote.gif);
+	background-image: url(../icons/orange/comment_revisions.png);
 }
