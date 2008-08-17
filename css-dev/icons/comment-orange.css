@@ -74,6 +74,46 @@
 	background-image: url(../icons/orange/comment_edit.gif);
 }
 
+*.i_topic_add
+{
+	background-image: url(../icons/orange/topic_add.png);
+	height:12px;
+	margin:5px;
+	width:65px;
+}
+
+*.i_topic_delete
+{
+	background-image: url(../icons/orange/topic_delete.png);
+	height:12px;
+	margin:5px;
+	width:89px;
+}
+
+*.i_comment_undelete
+{
+	width: 89px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/orange/comment_undelete.png);
+}
+
+*.i_comment_setactive
+{
+	width: 71px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/orange/comment_setactive.png);
+}
+
+*.i_comment_revisions
+{
+	width: 87px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/orange/comment_revisions.png);
+}
+
 /*to center the paginationbar vertically*/
 div.pagination
 {
