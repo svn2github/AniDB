@@ -58,6 +58,7 @@ function CMylistEntry(node) {
  */
 function CGroupEntry(node) {
   hiddenGroups++;
+  this.relGroups = '';
   this.visible = true;
   this.defaultVisible = false;
   this.filtered = false;
@@ -82,6 +83,7 @@ function CGroupEntry(node) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
     switch (sNode.nodeName.toLowerCase()) {
+	  case 'relgroups': this.relGroups = nodeData(sNode);	break;
       case 'name': this.name = nodeData(sNode); break;
       case 'sname': this.shortName = nodeData(sNode); break;
       case 'state': this.state = nodeData(sNode); this.stateId = Number(sNode.getAttribute('id')); break;
