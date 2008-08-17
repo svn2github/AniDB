@@ -430,22 +430,36 @@ function createCheckBox(parentNode,name,id,onchange,checked) {
 }
 
 function makeBar(parentNode,start,end,total,map) {
-  var mult = 1;
-  if ( total > 0 && 200 / total >= 1) mult = Math.floor(200 / total);
-
-  var width = 1 + end - start;
-  var img = document.createElement('img');
-  img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
-  img.width = ( width * mult );
-  img.height = 10;
-  img.title = img.alt = '';
-  if (parentNode != null || parentNode != '') parentNode.appendChild(img);
-  else return img;
+	if (start == 1) rest=0;
+	
+	var length = 0;
+	if (usemethod!=0) {	
+		length = (1 + end - start) * (200 / total);	
+	} else {
+		length = (1 + end - start);	
+	}
+	
+	var width = Math.ceil(length - rest);
+	if (width<=0 && usemethod==3) width=1;
+	rest = width - length + rest;
+	
+	
+	var img = document.createElement('img');
+	img.src = base_url + 'anidb_bar_h_'+map['img']+'.gif';
+	img.width = width;
+	img.height = 10;
+	img.title = img.alt = '';
+	
+	if (parentNode != null || parentNode != '') {
+		parentNode.appendChild(img);
+	} else {
+		return img;
+	}
 }
 
 function makeCompletionBar(parentNode, range, maps) {
   var len = range.length;
-  if ( len > 300 ) len = 300;
+  //if ( len > 300 ) len = 300;
   var span = document.createElement('span');
   span.className = 'range eps';
   if (maps[1]['use'] || maps[2]['use']) {
