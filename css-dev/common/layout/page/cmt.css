@@ -415,3 +415,27 @@
 	margin-top:.2em;
 	height:2.5em;
 }
+
+*.i_comment_undelete
+{
+	width: 40px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/orange/comment_quote.gif);
+}
+
+*.i_comment_setactive
+{
+	width: 40px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/orange/comment_quote.gif);
+}
+
+*.i_comment_revisions
+{
+	width: 40px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/orange/comment_quote.gif);
+}
