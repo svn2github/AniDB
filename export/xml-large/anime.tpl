@@ -52,7 +52,8 @@ Version 0.2
                 <tmpl_loop name= loop_anime_genren>
 
                     <genre name="<tmpl_var name= data_anime_genren_name>" id="<tmpl_var name= data_anime_genren_id>"
-                    weight="<tmpl_var name= data_anime_genren_weight>" weightName="<tmpl_var name= data_anime_genren_weight_name>"/>
+                           weight="<tmpl_var name= data_anime_genren_weight>"
+                           weightName="<tmpl_var name= data_anime_genren_weight_name>"/>
 
                 </tmpl_loop>
 
@@ -110,7 +111,9 @@ Version 0.2
                 </tmpl_loop>
             </companies>
 
-            <synopsis><tmpl_var expr="jsencodexml(data_anime_other)"></synopsis>
+            <synopsis>
+                <tmpl_var expr="jsencodexml(data_anime_other)">
+            </synopsis>
         </seriesInfo>
 
         <episodes status="<tmpl_if name=status_anime_iscomplete>complete<tmpl_else>incomplete</tmpl_if>">
@@ -135,19 +138,19 @@ Version 0.2
                            rating="<tmpl_var name= data_anime_group_rating>"
                            voteCount="<tmpl_var name= data_anime_group_votes>">
                         <releasedEpisodes normal="<tmpl_var name= data_anime_group_epcnt>"
-                                          special="<tmpl_var name= data_anime_group_sepcnt>" range="<tmpl_var name= data_anime_group_eprange>"/>
-                        <name><tmpl_var expr="jsencodexml(data_anime_group_name)"></name>
-                        <shortName><tmpl_var expr="jsencodexml(data_anime_group_sname)"></shortName>
+                                          special="<tmpl_var name= data_anime_group_sepcnt>"
+                                          range="<tmpl_var name= data_anime_group_eprange>"/>
+                        <name>
+                            <tmpl_var expr="jsencodexml(data_anime_group_name)">
+                        </name>
+                        <shortName>
+                            <tmpl_var expr="jsencodexml(data_anime_group_sname)">
+                        </shortName>
                     </group>
                 </tmpl_loop>
             </groups>
-            
-            <file_ep_relations>
-            <tmpl_loop name= loop_data_file_fileeprel>
-              <file id="<tmpl_var name=data_file_fileeprel_fid>" episode="<tmpl_var name=data_file_fileeprel_eid>" 
-              start="<tmpl_var name=data_file_fileeprel_startp>" end="<tmpl_var name=data_file_fileeprel_endp>"/>
-            </tmpl_loop>
-			</file_ep_relations>
+
+
             <tmpl_loop name= loop_ep>
 
                 <episode id="<tmpl_var name=data_ep_id>" number="<tmpl_var name=data_ep_epno>"
@@ -197,6 +200,14 @@ Version 0.2
                     <files>
 
                         <tmpl_loop name= loop_file>
+                            <file_ep_relations>
+                                <tmpl_loop name= loop_data_file_fileeprel>
+                                    <file id="<tmpl_var name=data_file_fileeprel_fid>"
+                                          episode="<tmpl_var name=data_file_fileeprel_eid>"
+                                          start="<tmpl_var name=data_file_fileeprel_startp>"
+                                          end="<tmpl_var name=data_file_fileeprel_endp>"/>
+                                </tmpl_loop>
+                            </file_ep_relations>
 
                             <file id="<tmpl_var name=data_file_id>" size="<tmpl_var name=data_file_size_h>"
 

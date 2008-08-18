@@ -11,7 +11,7 @@ function DivDisplayer() {
     }
     this.toggleDiv = function(divId) {
         this.hideDiv(this.visibleDivId);
-        (divId == this.visibleDivId) ? this.reset() : this.showDiv(divId);
+        divId == this.visibleDivId ? this.reset() : this.showDiv(divId);
     }
     this.hideDiv = function(divId) {
         var div = document.getElementById(divId);
@@ -24,7 +24,6 @@ function DivDisplayer() {
     }
     this.reset();
 }
-
 
 function setTitle(title) {
     document.title = title;

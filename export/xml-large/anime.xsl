@@ -5,7 +5,9 @@
   <xsl:variable name="animeId" select="//anime/@id"/>
   <xsl:template match="anime">
     <h3>
-      <xsl:value-of select="seriesInfo/name/romanji"/>
+      <a href="http://anidb.info/a{$animeId}">
+        <xsl:value-of select="seriesInfo/name/romanji"/>
+      </a>
     </h3>
     <xsl:apply-templates select="seriesInfo"/>
     <xsl:apply-templates select="episodes"/>
@@ -240,7 +242,7 @@
     </xsl:choose>
   </xsl:template>
 
-  <xsl:template match="name[other != '' or count(synonym/alias) > 0]" mode="otherNames">
+  <xsl:template match="name" mode="otherNames">
     <tr>
       <td class="left">Other Names</td>
       <td>
@@ -252,7 +254,7 @@
     </tr>
   </xsl:template>
 
-  <xsl:template match="name[count(shorts/short) > 0]" mode="shortNames">
+  <xsl:template match="name" mode="shortNames">
     <tr>
       <td class="left">Short Names</td>
       <td>
@@ -273,8 +275,8 @@
     <xsl:apply-templates select="kanji" mode="nonEmptyElementInTableRow">
       <xsl:with-param name="CellContent">Kanji Name</xsl:with-param>
     </xsl:apply-templates>
-    <xsl:apply-templates select="." mode="otherNames"/>
-    <xsl:apply-templates select="." mode="shortNames"/>
+    <xsl:apply-templates select="current()[other != '' or count(synonym/alias) > 0]" mode="otherNames"/>
+    <xsl:apply-templates select="current()[count(shorts/short) > 0]" mode="shortNames"/>
   </xsl:template>
 
   <xsl:template match="node()[. != '']" mode="nonEmptyElementInTableRow">

@@ -1,16 +1,23 @@
 function myListXsltUpdater() {
     this.resultElement = document.getElementById("resultDiv");
+    this.setDocumentTitle();
     this.loadTopPanel();
     this.animeDetailsRenderer = new animeDetailsUpdater();
     this.loadDocuments();
 }
 
 myListXsltUpdater.prototype = {
+    setDocumentTitle: function() {
+        var setTitle = function(xmlDoc) {
+          document.title = xmlDoc.text();
+        }
+        getTransformationOutput("mylist.xml", "title.xsl", setTitle);
+    },
     loadTopPanel: function() {
-        insertDocumentIntoElement("topPanel")
+        transformXmlIntoElement("topPanel.xml", "topPanel.xsl", document.getElementById("topPanel"));
     },
     loadDocuments: function() {
-        this.xmlDocument = XmlDocument.getDocumentAndPrepareForLoading('');
+        this.xmlDocument = XmlDocument.getDocumentAndPrepareForLoading();
         this.firstXslDocument = XslDocument.getDocumentAndPrepareForLoading();
         this.secondXslDocument = XslDocument.getDocumentAndPrepareForLoading();
         loadDocuments({"mylist.xml": this.xmlDocument, "firstPass.xsl": this.firstXslDocument,
@@ -48,7 +55,7 @@ animeDetailsUpdater.prototype = {
     updateDisplay: function() {
         this.newCol = document.getElementById('r2-' + this.selectedId)
         if (this.selectedId == 0 || !this.newCol) return;
-        insertDocumentIntoElement('r3-'+this.selectedId,"bottomClick.xml")
+        insertDocumentIntoElement('r3-' + this.selectedId, "bottomClick.xml")
         this.animeDocument.load("anime/" + this.selectedId + ".xml", this.fillRowElement())
     },
     fillRowElement: function() {

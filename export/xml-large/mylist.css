@@ -40,13 +40,6 @@ tr.evenFileTable
 	background-color: #000000;
 }
 
-/*.blah
-{
-	background-image: url(images/dropmenu.gif);
-	background-position: bottom;
-	background-repeat: no-repeat;
-}*/
-
 .descending
 {
 	background-image: url( images/desc.gif );
@@ -60,7 +53,7 @@ tr.evenFileTable
 .complete
 {
 	background-image: url(images/check.gif);
-	background-position: left;
+	background-position: right;
 }
 
 .close
@@ -238,8 +231,8 @@ table.seriesInfo
 }
 
 #menu ul ul {
-position: absolute;
-z-index: 500;
+	position: absolute;
+	z-index: 500;
 	background: #005000;
 	width: 20.5em;
 	display: none;
@@ -248,9 +241,23 @@ z-index: 500;
 }
 
 #menu ul li:hover ul
-{display: block;}
+{
+    display: block;
+}
 
-ul ul li
+#menu li span
+{
+	font-weight: bold;	
+	font-size:17px;
+	color: #FFFFFF;
+}	
+
+#menu label, input
+{
+	cursor: pointer;
+}
+
+#menu ul ul li
 {
   width: 22em;	
 }
@@ -260,6 +267,20 @@ ul ul li
 	clear: both;
 }	
 
+.col1
+{
+	width: 3em;
+}
+
+.col3
+{
+	width: 6em;
+}
+
+.col6
+{
+	width: 11em;
+}
 
 
 

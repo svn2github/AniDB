@@ -80,6 +80,10 @@ IEDocument.prototype.xml = function() {
     return this._xmlDocument.xml;
 }
 
+IEDocument.prototype.text = function() {
+    return this._xmlDocument.text;
+}
+
 IEDocument.prototype.selectSingleNode = function(xpath) {
     this._xmlDocument.setProperty('SelectionLanguage', 'XPath');
     this._xmlDocument.setProperty('SelectionNamespaces', 'xmlns:xsl="' + this.xmlNameSpace + '"');
@@ -144,6 +148,11 @@ MozillaDocument.prototype.xml = function () {
     return new XMLSerializer().serializeToString(this._xmlDocument);
 }
 
+MozillaDocument.prototype.text = function() {
+    return this._xmlDocument.lastChild.textContent;
+}
+
+
 MozillaDocument.prototype.nameSpaceResolver = function() {
     var xmlNameSpace = this.xmlNameSpace;
     return function(prefix) {
@@ -166,6 +175,7 @@ MozillaDocument.prototype.selectNodes = function(xpath) {
     }
     return returnVal;
 }
+
 
 MozillaDocument.prototype.createElement = function(name) {
     return this._xmlDocument.createElementNS(this.xmlNameSpace, name)
@@ -268,6 +278,31 @@ MozillaXslDocument.prototype.performTransformIntoElement = function(xmlDocument,
         resultElement.removeChild(resultElement.lastChild);
     }
     resultElement.appendChild(documentFragment);
+}
+
+var getTransformationOutput = function(xmlName, xslName, passOutput) {
+    var xmlDoc = XmlDocument.getDocumentAndPrepareForLoading();
+    var xslDoc = XslDocument.getDocumentAndPrepareForLoading();
+    callback = function() {
+        var output = xslDoc.transformedDocument(xmlDoc);
+        passOutput(output);
+    }
+    var docMap = {}
+    docMap[xmlName] = xmlDoc;
+    docMap[xslName] = xslDoc;
+    loadDocuments(docMap, callback);
+}
+
+var transformXmlIntoElement = function(xmlName, xslName, element) {
+    var xmlDoc = XmlDocument.getDocumentAndPrepareForLoading();
+    var xslDoc = XslDocument.getDocumentAndPrepareForLoading();
+    insertIntoElement = function() {
+        xslDoc.transformIntoElement(xmlDoc, element);
+    }
+    var docMap = {}
+    docMap[xmlName] = xmlDoc
+    docMap[xslName] = xslDoc
+    loadDocuments(docMap, insertIntoElement)
 }
 
 var loadDocuments = function(documentMap, callback) {

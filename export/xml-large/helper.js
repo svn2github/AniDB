@@ -49,9 +49,12 @@ Function.prototype.bind = function(object) {
     }
 }
 
+function unlinkParentClickEvent(element) {
+    element.parentNode.onclick = null;
+  }
+
 function insertDocumentIntoElement(elementId, documentName) {
     var topPanelDoc = XmlDocument.getDocumentAndPrepareForLoading('');
-    if (!documentName) documentName = elementId + ".xml"
     topPanelDoc.load(documentName, function displayTopPamel() {
         topPanelDoc.insertIntoElement(document.getElementById(elementId));
     })

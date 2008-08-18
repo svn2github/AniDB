@@ -4,13 +4,12 @@
   <xsl:param name="sortNodeName" select="'type'"/>
   <xsl:param name="sortDirection" select="'descending'"/>
   <xsl:param name="sortDataType" select="'text'"/>
-  <xsl:param name="showOVA" select="'true'"/>
-  <xsl:param name="showTV" select="'true'"/>
-  <xsl:param name="showMovie" select="'true'"/>
-  <xsl:param name="showOther" select="'true'"/>
-  <xsl:param name="showIncomplete" select="'true'"/>
+  <xsl:param name="showOAVs" select="'true'"/>
+  <xsl:param name="showTVSeries" select="'true'"/>
+  <xsl:param name="showMovies" select="'true'"/>
+  <xsl:param name="showOthers" select="'true'"/>
   <xsl:param name="mainLanguage" select="'romanji'"/>
-  <xsl:param name="filter" select="'all'"/>
+  <xsl:param name="filter" select="'allShows'"/>
   
   
   <xsl:template match="animeList">
@@ -18,6 +17,12 @@
       <xsl:call-template name="FlipLanguage"/>
     </xsl:variable>
     <table width="100%" class="scrollTable">
+      <col class="col1"/>
+      <col />
+      <col class="col3"/>
+      <col/>
+      <col/>
+      <col class="col6"/>
       <thead class="fixedHeader">
         <tr class="thead">
           <th>#</th>
@@ -25,7 +30,7 @@
             <xsl:with-param name="displayName">
               <div class="headerRight"></div>
               <div class="headerLeft switch" 
-                   onClick="unlinkParentEvent(this);myListRenderer.update({{'mainLanguage': '{$oppositeLanguage}'}});">
+                   onClick="unlinkParentClickEvent(this);myListRenderer.update({{'mainLanguage': '{$oppositeLanguage}'}});">
                 <span class="sub">
                   Switch to <xsl:call-template name="LanguageChoice">
                     <xsl:with-param name="flip" select="'true'"/>
@@ -69,11 +74,11 @@
         </tr>
       </thead>
       <tbody class="scrollContent">
-        <xsl:variable name="anime" select="anime[$filter = 'all' or @completed = $filter]"/>
-        <xsl:apply-templates select="$anime[@type[(. != 'OVA' or $showOVA = 'true') and
-                    (. != 'TV Series' or $showTV = 'true') and (. != 'Movie' or $showMovie = 'true') and
-                    (. = 'TV Series' or . = 'OVA' or . = 'Movie' or $showOther = 'true')] and
-                    (@status = 'complete' or $showIncomplete = 'true')]">
+        <xsl:variable name="anime" select="anime[$filter = 'allShows' or @completenessStatus = $filter or 
+                      (@completenessStatus != 'allCompleteShows' and $filter = 'allIncompleteShows')]"/>
+        <xsl:apply-templates select="$anime[@type[(. != 'OVA' or $showOAVs = 'true') and
+                    (. != 'TV Series' or $showTVSeries = 'true') and (. != 'Movie' or $showMovies = 'true') and
+                    (. = 'TV Series' or . = 'OVA' or . = 'Movie' or $showOthers = 'true')]]">
           <xsl:sort select="(romanjiName[$mainLanguage = 'romanji' or ../englishName =  ''] | 
                     englishName[$mainLanguage = 'english' and . !=  ''])['name' = $sortNodeName] | 
                     (*|@*)[name() = $sortNodeName]" data-type="{$sortDataType}" 
