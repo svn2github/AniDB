@@ -399,3 +399,15 @@
 	margin-top:.2em;
 	height:2.5em;
 }
+
+#layout-main div.forum div.spoiler
+{
+	border: 1px inset;
+	padding: 0.6em;
+}
+
+#layout-main div.forum div.spoiler span
+{
+	display:block;
+	margin-bottom: 1em;
+}
