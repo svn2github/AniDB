@@ -299,14 +299,6 @@ var Magic = {
 				}
 			}
 		})
-	'applySpoilerInputs':(function ()
-		{
-			var inputs = document.getElementsByTagName('input');
-			for (var i = 0; i < inputs.length; i++) {
-				var isSpoiler = inputs[i].value.toLowerCase().indexOf('spoiler') >= 0;
-				if (isSpoiler) inputs[i].onclick = toggleSpoiler;
-			}
-		})
 	};
 
 /* init */
@@ -323,11 +315,21 @@ function InitDefault()
 	Magic.enable_hide();				//for h4 collapsing
 	Magic.enable_tabs();				//for global structure ul.tabs
 	Magic.add_validator_interface();
-	Magic.applySpoilerInputs();
-	
+
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
+	
+	applySpoilerInputs();
 }
+
+function applySpoilerInputs() {
+	var inputs = document.getElementsByTagName('input');
+	for (var i = 0; i < inputs.length; i++) {
+		var isSpoiler = inputs[i].value.toLowerCase().indexOf('spoiler') >= 0;
+		if (isSpoiler) inputs[i].onclick = toggleSpoiler;
+	}
+}
+
 
 function enable_sort(func){
 	var tables = document.getElementsByTagName('table');
