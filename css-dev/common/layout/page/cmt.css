@@ -360,7 +360,7 @@
 }
 
 #layout-main div.forum div.deleted,
-#layout-main div.forum li.deleted dt.icon,
+#layout-main div.forum li.deleted dt.icon
 {
 	opacity:0.3;
 }
