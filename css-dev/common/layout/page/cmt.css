@@ -359,7 +359,7 @@
 	padding-top:3em;
 }
 
-#layout-main div.forum div.deleted
+#layout-main div.forum *.deleted
 {
 	opacity:0.3;
 }
