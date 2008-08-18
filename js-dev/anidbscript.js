@@ -299,6 +299,14 @@ var Magic = {
 				}
 			}
 		})
+	'applySpoilerInputs':(function ()
+		{
+			var inputs = document.getElementsByTagName('input');
+			for (var i = 0; i < inputs.length; i++) {
+				var isSpoiler = inputs[i].value.toLowerCase().indexOf('spoiler') >= 0;
+				if (isSpoiler) inputs[i].onclick = toggleSpoiler;
+			}
+		})
 	};
 
 /* init */
@@ -580,37 +588,20 @@ function cbToggle(files) {
     } 
 }
 
-function switchhideshow(where,bool)
-{
-	var children=where.childNodes;
-	var show;
-	var hide;
-
-	for(i=0;i<children.length;i++)
-	{
-		if('hide' == children[i].id)
-		{
-			hide=children[i];
+function toggleSpoiler() {
+	var div = this.parentNode;
+	while (div.nodeName.toLowerCase() != 'div') div = div.parentNode;
+	var spans = div.getElementsByTagName('span');
+	for (var i = 0; i < spans.length; i++) {
+		var span = spans[i];
+		if (span.className.indexOf('spoiler') < 0) continue;
+		var isHidden = (span.className.indexOf('hide') >= 0);
+		if (isHidden) {
+			this.value = 'Hide Spoiler';
+			span.className = span.className.replace(' hide','');
+		} else {
+			this.value = 'Show Spoiler';
+			span.className += ' hide';
 		}
-
-		if('show' == children[i].id)
-		{
-			show=children[i];
-		}
-	}
-
-	switch(bool)
-	{
-		default:
-		case 'hide':
-		case '0':
-			show.style.display = 'none';
-			hide.style.display = '';
-			break;
-		case 'show':
-		case '1':
-			show.style.display = '';
-			hide.style.display = 'none';
-			break;
 	}
 }
