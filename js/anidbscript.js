@@ -318,7 +318,6 @@ var Magic = {
 						break;
 					}
 				}
-				alert('select: '+select+'\ninput: '+input);
 				if (!select || !input) break;
 				select.onchange = function() { input.focus(); }
 				break;
