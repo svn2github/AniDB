@@ -200,9 +200,13 @@ var Magic = {
 				{
 					linklist[i].onclick = BasicPopupSelf;
 				}
-				else if (relstring.indexOf("anidb::") >= 0) // ::extern ::wiki ::forum ::tracker
+				else if (relstring.indexOf("anidb::") >= 0 && relstring.indexOf('extern') < 0) // ::extern ::wiki ::forum ::tracker
 				{
 					linklist[i].onclick = OpenNewWindow;
+				}
+				else if (relstring.indexOf("anidb::") >= 0 && relstring.indexOf('extern') >= 0)
+				{
+					linklist[i].target = '_blank';
 				}
 			}
 		}),
@@ -298,6 +302,53 @@ var Magic = {
 					ClassToggle(pane, 'hide', 2);
 				}
 			}
+		}),
+	'upgrade_search':(function()
+		{
+			var divs = document.getElementsByTagName('div');
+			for (var i = 0; i < divs.length; i++) {
+				var div = divs[i];
+				if (div.className.indexOf('search') < 0) continue;
+				var select = div.getElementsByTagName('select')[0];
+				var inputs = div.getElementsByTagName('input');
+				var input = null;
+				for (var k = 0; k < inputs.length; k++) {
+					if (inputs[k].className && inputs[k].className.indexOf('text') >= 0) {
+						input = inputs[k];
+						break;
+					}
+				}
+				alert('select: '+select+'\ninput: '+input);
+				if (!select || !input) break;
+				select.onchange = function() { input.focus(); }
+				break;
+			}
+		}),
+	'applySpoilerInputs':(function()
+		{
+			var inputs = document.getElementsByTagName('input');
+			for (var i = 0; i < inputs.length; i++) {
+				var isSpoiler = inputs[i].value.toLowerCase().indexOf('spoiler') >= 0;
+				if (isSpoiler) inputs[i].onclick = Magic.toggleSpoiler;
+			}
+		}),
+	'toggleSpoiler':(function()
+		{
+			var div = this.parentNode;
+			while (div.nodeName.toLowerCase() != 'div') div = div.parentNode;
+			var spans = div.getElementsByTagName('span');
+			for (var i = 0; i < spans.length; i++) {
+				var span = spans[i];
+				if (span.className.indexOf('spoiler') < 0) continue;
+				var isHidden = (span.className.indexOf('hide') >= 0);
+				if (isHidden) {
+					this.value = 'Hide Spoiler';
+					span.className = span.className.replace(' hide','');
+				} else {
+					this.value = 'Show Spoiler';
+					span.className += ' hide';
+				}
+			}
 		})
 	};
 
@@ -315,21 +366,12 @@ function InitDefault()
 	Magic.enable_hide();				//for h4 collapsing
 	Magic.enable_tabs();				//for global structure ul.tabs
 	Magic.add_validator_interface();
-
+	Magic.upgrade_search();				//makes the search box take focus after search type change
+	Magic.applySpoilerInputs();			//apply spoiler tag js support
+	
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
-	
-	applySpoilerInputs();
 }
-
-function applySpoilerInputs() {
-	var inputs = document.getElementsByTagName('input');
-	for (var i = 0; i < inputs.length; i++) {
-		var isSpoiler = inputs[i].value.toLowerCase().indexOf('spoiler') >= 0;
-		if (isSpoiler) inputs[i].onclick = toggleSpoiler;
-	}
-}
-
 
 function enable_sort(func){
 	var tables = document.getElementsByTagName('table');
@@ -589,22 +631,4 @@ function cbToggle(files) {
       if (obj)
         obj.checked = !obj.checked; 
     } 
-}
-
-function toggleSpoiler() {
-	var div = this.parentNode;
-	while (div.nodeName.toLowerCase() != 'div') div = div.parentNode;
-	var spans = div.getElementsByTagName('span');
-	for (var i = 0; i < spans.length; i++) {
-		var span = spans[i];
-		if (span.className.indexOf('spoiler') < 0) continue;
-		var isHidden = (span.className.indexOf('hide') >= 0);
-		if (isHidden) {
-			this.value = 'Hide Spoiler';
-			span.className = span.className.replace(' hide','');
-		} else {
-			this.value = 'Show Spoiler';
-			span.className += ' hide';
-		}
-	}
 }
