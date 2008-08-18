@@ -578,4 +578,39 @@ function cbToggle(files) {
       if (obj)
         obj.checked = !obj.checked; 
     } 
-} 
+}
+
+function switchhideshow(where,bool)
+{
+	var children=where.childNodes;
+	var show;
+	var hide;
+
+	for(i=0;i<children.length;i++)
+	{
+		if('hide' == children[i].id)
+		{
+			hide=children[i];
+		}
+
+		if('show' == children[i].id)
+		{
+			show=children[i];
+		}
+	}
+
+	switch(bool)
+	{
+		default:
+		case 'hide':
+		case '0':
+			show.style.display = 'none';
+			hide.style.display = '';
+			break;
+		case 'show':
+		case '1':
+			show.style.display = '';
+			hide.style.display = 'none';
+			break;
+	}
+}
