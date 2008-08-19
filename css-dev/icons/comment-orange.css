@@ -90,6 +90,14 @@
 	width:89px;
 }
 
+*.i_topic_undelete
+{
+	background-image: url(../icons/orange/topic_undelete.png);
+	height:12px;
+	margin:5px;
+	width:101px;
+}
+
 *.i_comment_undelete
 {
 	width: 89px;
