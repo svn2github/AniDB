@@ -136,8 +136,10 @@ function createEpisodeIcons(episode) {
 		icons['fstate'] = new Array();
 		for (var me = 0; me < mylistEpEntries.length; me++) {
 			var mylistEntry = mylistEpEntries[me];
-			if (isNaN(statusFiles[mylistEntry.status])) statusFiles[mylistEntry.status] = 1;
-			else statusFiles[mylistEntry.status]++;
+			if (mylistEntry.filetype != 'generic') {
+				if (isNaN(statusFiles[mylistEntry.status])) statusFiles[mylistEntry.status] = 1;
+				else statusFiles[mylistEntry.status]++;
+			}
 			if (isNaN(stateFiles[mylistEntry.fstate])) stateFiles[mylistEntry.fstate] = 1;
 			else stateFiles[mylistEntry.fstate]++;
 		}
@@ -238,6 +240,8 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				if (episode.seenDate != 0 || icons['recap'] || icons['comment']) {
 					var watchedState = document.createElement('span');
 					watchedState.className = 'icons';
+					if (icons['state'].length) for (var s=0; s < icons['state'].length; s++) watchedState.appendChild(icons['state'][s]);
+					if (icons['fstate'].length) for (var s=0; s < icons['fstate'].length; s++) watchedState.appendChild(icons['fstate'][s]);
 					if (icons['recap']) watchedState.appendChild(icons['recap']);
 					if (icons['comment']) watchedState.appendChild(icons['comment']);
 					if (icons['seen']) watchedState.appendChild(icons['seen']);
@@ -345,12 +349,23 @@ function createGroupRow(gid,cols,skips) {
 				createCell(row, col['classname'], icons['note'], null, colSpan);
 				break;
 			case 'eps':
-				var maps = {'0' : {'use':true,'type': 0,'desc':"",'img':"blue"},
-							'1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"},
-							'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime"}};
-				var range = expandRange(null,(anime.eps ? anime.eps : anime.epCount),maps[0],null);
-				if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange,(anime.eps ? anime.eps : anime.epCount),maps[1],range); }
-				if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange,(anime.eps ? anime.eps : anime.epCount),maps[2],range); }
+				var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue"}, 
+							'1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"}, 
+							'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime"}, 
+							'3' : {'use':false,'type': 3,'desc':"done by: ",'img':"lightblue"}};
+				var totalEps = (anime.eps ? anime.eps : anime.highestEp);
+				var range = expandRange(null, totalEps, maps[0], null);
+				if (group.relatedGroups.length) {
+					maps[3]['use'] = true;
+					for(var i = 0; i < group.relatedGroups.length; i++) {
+						var relGroup = groups[group.relatedGroups[i]]; // ID existance check needed? 
+						if (!relGroup) continue;
+						maps['desc'] += relGroup.Name + ' ';
+						range = expandRange(relGroup.epRange, totalEps, maps[3], range);
+					}
+				}
+				if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange, totalEps, maps[1], range);}
+				if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
 				createCell(row, col['classname'], makeCompletionBar(null,range,maps),String(group.epCnt),colSpan);
 				break;
 			case 'lastep':

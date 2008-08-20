@@ -429,47 +429,47 @@ function createCheckBox(parentNode,name,id,onchange,checked) {
 	else return ck;
 }
 
+// GROUP BAR FUNCTIONS //
 function makeBar(parentNode,start,end,total,map) {
-  var mult = 1;
-  if ( total > 0 && 200 / total >= 1) mult = Math.floor(200 / total);
-
-  var width = 1 + end - start;
-  var img = document.createElement('img');
-  img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
-  img.width = ( width * mult );
-  img.height = 10;
-  img.title = img.alt = '';
-  if (parentNode != null || parentNode != '') parentNode.appendChild(img);
-  else return img;
+	var mult = 1;
+	if ( total > 0 && 200 / total >= 1) mult = Math.floor(200 / total);
+	var width = 1 + end - start;
+	var img = document.createElement('img');
+	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
+	img.width = ( width * mult );
+	img.height = 10;
+	img.title = img.alt = '';
+	if (parentNode != null || parentNode != '') parentNode.appendChild(img);
+	else return img;
 }
 
 function makeCompletionBar(parentNode, range, maps) {
-  var len = range.length;
-  if ( len > 300 ) len = 300;
-  var span = document.createElement('span');
-  span.className = 'range eps';
-  if (maps[1]['use'] || maps[2]['use']) {
-    span.setAttribute('anidb:data',maps);
-    span.onmouseout = hideTooltip;
-    span.onmouseover = function onmouseover(event) {
-      var node = document.createElement('div');
-      if (maps[1]['use']) node.appendChild(document.createTextNode(maps[1]['desc']));
-      if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createElement('br')); 
-      if (maps[2]['use']) node.appendChild(document.createTextNode(maps[2]['desc']));
-      setTooltip(node,true,'auto');
-    }
-  }
+	var len = range.length;
+	if ( len > 300 ) len = 300;
+	var span = document.createElement('span');
+	span.className = 'range eps';
+	if (maps[1]['use'] || maps[2]['use']) {
+		span.setAttribute('anidb:data',maps);
+		span.onmouseout = hideTooltip;
+		span.onmouseover = function onmouseover(event) {
+			var node = document.createElement('div');
+			if (maps[1]['use']) node.appendChild(document.createTextNode(maps[1]['desc']));
+			if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createElement('br')); 
+			if (maps[2]['use']) node.appendChild(document.createTextNode(maps[2]['desc']));
+			setTooltip(node,true,'auto');
+		}
+	}
 
-  for (var i=0; i < len; ) {
-    var v = range[i];
-    var k = i+1;
-    while ( k < len && range[k] == v ) k++;
-    if (!v) v=0;
-    makeBar(span, i+1, k, len, maps[v] );
-    i = k;
-  }
-  if (parentNode != null && parentNode != '') parentNode.appendChild(span);
-  return span;
+	for (var i=0; i < len; ) {
+		var v = range[i];
+		var k = i+1;
+		while ( k < len && range[k] == v ) k++;
+		if (!v) v=0;
+		makeBar(span, i+1, k, len, maps[v] );
+		i = k;
+	}
+	if (parentNode != null && parentNode != '') parentNode.appendChild(span);
+	return span;
 }
 
 function expandRange(range,limit,map,array) {
@@ -770,9 +770,10 @@ function findMylistEpEntries(eid) {
 	var episode = episodes[eid];
 	if (!episode) return ret;
 	for (var sd in mylist) {
-		if (!mylist[sd]) continue;
-		if (mylist[sd].episodeId != eid) continue;
-		ret.push(mylist[sd]);
+		var mylistEntry = mylist[sd];
+		if (!mylistEntry) continue;
+		if (mylistEntry.episodeId != eid && mylistEntry.relatedEids.indexOf(String(eid)) < 0) continue;
+		ret.push(mylistEntry);
 	}
 	return ret;
 }

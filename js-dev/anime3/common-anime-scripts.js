@@ -240,6 +240,8 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				if (episode.seenDate != 0 || icons['recap'] || icons['comment']) {
 					var watchedState = document.createElement('span');
 					watchedState.className = 'icons';
+					if (icons['state'].length) for (var s=0; s < icons['state'].length; s++) watchedState.appendChild(icons['state'][s]);
+					if (icons['fstate'].length) for (var s=0; s < icons['fstate'].length; s++) watchedState.appendChild(icons['fstate'][s]);
 					if (icons['recap']) watchedState.appendChild(icons['recap']);
 					if (icons['comment']) watchedState.appendChild(icons['comment']);
 					if (icons['seen']) watchedState.appendChild(icons['seen']);
@@ -347,26 +349,23 @@ function createGroupRow(gid,cols,skips) {
 				createCell(row, col['classname'], icons['note'], null, colSpan);
 				break;
 			case 'eps':
-				var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue"}, '1' : {'use':false,'type': 1,'desc':"done: ",'img':"darkblue"}, '2' : {'use':false,'type': 2,'desc':"in mylist: ",'img':"lime"}, '3' : {'use':false,'type': 3,'desc':"done by: ",'img':"lightblue"}};
-				var totalEps = anime.eps ? anime.eps : anime.epCount;
+				var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue"}, 
+							'1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"}, 
+							'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime"}, 
+							'3' : {'use':false,'type': 3,'desc':"done by: ",'img':"lightblue"}};
+				var totalEps = (anime.eps ? anime.eps : anime.highestEp);
 				var range = expandRange(null, totalEps, maps[0], null);
-
-				if (group.relGroups != '') {
+				if (group.relatedGroups.length) {
 					maps[3]['use'] = true;
-					
-					var relGroups = new Array();
-					if (group.relGroups) relGroups = group.relGroups.split(',');
-					
-					for(var i = 0; i < relGroups.length; i++) {
-						var relGroup = groups[relGroups[i]]; // ID existance check needed? 
+					for(var i = 0; i < group.relatedGroups.length; i++) {
+						var relGroup = groups[group.relatedGroups[i]]; // ID existance check needed? 
+						if (!relGroup) continue;
 						maps['desc'] += relGroup.Name + ' ';
 						range = expandRange(relGroup.epRange, totalEps, maps[3], range);
 					}
 				}
-				
 				if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange, totalEps, maps[1], range);}
 				if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
-
 				createCell(row, col['classname'], makeCompletionBar(null,range,maps),String(group.epCnt),colSpan);
 				break;
 			case 'lastep':

@@ -25,6 +25,7 @@ function CMylistEntry(node) {
   this.fileId = Number(node.getAttribute('fid'));
   this.episodeId = Number(node.getAttribute('eid'));
   this.groupId = Number(node.getAttribute('gid'));
+  this.filetype = node.getAttribute('type');
   this.fstate = 'unknown';
   this.status = 'unknown';
   this.seen = 0;
@@ -33,6 +34,7 @@ function CMylistEntry(node) {
   this.storage = null;
   this.other = null;
   this.fType = null;
+  this.relatedEids = new Array();
   for (var i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
@@ -43,6 +45,7 @@ function CMylistEntry(node) {
       case 'source': this.source = nodeData(sNode); break;
       case 'storage': this.storage = nodeData(sNode); break;
       case 'other': this.other = nodeData(sNode); break;
+	  case 'releids': this.relatedEids = nodeData(sNode).split(','); break;
       default: showAlert('mylistEntry for lid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
     }
   }
@@ -55,6 +58,7 @@ function CMylistEntry(node) {
  */
 function CGroupEntry(node) {
   hiddenGroups++;
+  this.relGroups = '';
   this.visible = true;
   this.defaultVisible = false;
   this.filtered = false;
@@ -65,7 +69,7 @@ function CGroupEntry(node) {
   this.ratingCount = 0;
   this.commentCount = 0;
   this.userRating = -1; // set later
-  //this.relatedGroups = new Array();
+  this.relatedGroups = new Array();
   this.sepCnt = 0;
   this.epCnt = 0;
   this.isInMylistRange = '';
@@ -79,6 +83,7 @@ function CGroupEntry(node) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
     switch (sNode.nodeName.toLowerCase()) {
+	  case 'relgroups': this.relatedGroups = nodeData(sNode).split(','); break;
       case 'name': this.name = nodeData(sNode); break;
       case 'sname': this.shortName = nodeData(sNode); break;
       case 'state': this.state = nodeData(sNode); this.stateId = Number(sNode.getAttribute('id')); break;
@@ -110,6 +115,7 @@ function CAnimeEntry(node) {
   this.titles = new Array();
   this.episodes = new Array();
   this.groups = new Array();
+  this.highestEp = 0;
   for (i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
@@ -462,59 +468,64 @@ function createPseudoGroupEntry(gid) {
  * @return boolean (true if processing succeful, false otherwise)
  */
 function parseCustom(node) {
-  if (!node) return false; // no nodes return;
-  for (var nd = 0; nd < node.length; nd++) { // find the right custom entry
-    if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
-  }
-  if (node.length > 1 || node.parentNode.nodeName != 'root') return; 
-  uid = Number(node.getAttribute('uid')) || 0;
-  mod = Number(node.getAttribute('mod')) || 0;
-  for (var i = 0; i < node.childNodes.length; i++) {
-    childNode = node.childNodes.item(i);
-    if (childNode.nodeType == 3) continue;
-    switch (childNode.nodeName) {
-      case 'mylist':
-        var mylistNodes = childNode.getElementsByTagName('file');
-        for (m = 0; m < mylistNodes.length; m++) {
-          var mylistNode = mylistNodes[m];
-      	  mylistEntry = new CMylistEntry(mylistNode);
-          mylist[mylistEntry.fileId] = mylistEntry;
-          var ep = episodes[mylistEntry.episodeId];
-          if (mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
-          var group = groups[mylistEntry.groupId];
-          if (group) group.visible = true;
-        }
-        var mylistNodes = childNode.getElementsByTagName('group');
-        for (m = 0; m < mylistNodes.length; m++) {
-          var mylistNode = mylistNodes[m];
-      	  var gid = Number(mylistNode.getAttribute('id'));
-          var group = groups[gid];
-          if (group) group.isInMylistRange = nodeData(mylistNode.getElementsByTagName('inmylist')[0]);
-        }
-        break;
-      case 'ratings': // taking care of both episode votes and group ratings
-        var groupVotes = childNode.getElementsByTagName('group');
-        var episodeVotes = childNode.getElementsByTagName('ep');
-        for (var gv = 0; gv < groupVotes.length; gv++) { // Group rating entries
-          var gvote = groupVotes[gv];
-          var urating = nodeData(gvote);
-          var agid = gvote.getAttribute('agid');
-          var gid = aGroups[agid] ? aGroups[agid].gid : 0;
-		  var group = groups[gid];
-          if (group) group.userRating = urating;
-        }
-        for (var ev = 0; ev < episodeVotes.length; ev++) {
-          var evote = episodeVotes[ev];
-          var vote = nodeData(evote);
-          var eid = evote.getAttribute('id');
-          episodes[eid].vote = vote;
-        }
-        break;
-      case 'config': parseConfig(childNode); break;
-      default: showAlert('Options',node.nodeName,node.nodeName,childNode.nodeName);
-    }
-  }
-  return true;
+	if (!node) return false; // no nodes return;
+	for (var nd = 0; nd < node.length; nd++) { // find the right custom entry
+		if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
+	}
+	if (node.length > 1 || node.parentNode.nodeName != 'root') return; 
+	uid = Number(node.getAttribute('uid')) || 0;
+	mod = Number(node.getAttribute('mod')) || 0;
+	for (var i = 0; i < node.childNodes.length; i++) {
+		childNode = node.childNodes.item(i);
+		if (childNode.nodeType == 3) continue;
+		switch (childNode.nodeName) {
+			case 'mylist':
+				var mylistNodes = childNode.getElementsByTagName('file');
+				for (m = 0; m < mylistNodes.length; m++) {
+					var mylistNode = mylistNodes[m];
+					mylistEntry = new CMylistEntry(mylistNode);
+					mylist[mylistEntry.fileId] = mylistEntry;
+					var ep = episodes[mylistEntry.episodeId];
+					if (mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
+					// now do the same thing for related episodes
+					for (var e = 0; e < mylistEntry.relatedEids.length; e++) {
+						var episode = episodes[mylistEntry.relatedEids[e]];
+						if (mylistEntry.seenDate && !episode.seenDate) episode.seenDate = mylistEntry.seenDate;
+					}
+					var group = groups[mylistEntry.groupId];
+					if (group) group.visible = true;
+				}
+				var mylistNodes = childNode.getElementsByTagName('group');
+				for (m = 0; m < mylistNodes.length; m++) {
+					var mylistNode = mylistNodes[m];
+					var gid = Number(mylistNode.getAttribute('id'));
+					var group = groups[gid];
+					if (group) group.isInMylistRange = nodeData(mylistNode.getElementsByTagName('inmylist')[0]);
+				}
+				break;
+			case 'ratings': // taking care of both episode votes and group ratings
+				var groupVotes = childNode.getElementsByTagName('group');
+				var episodeVotes = childNode.getElementsByTagName('ep');
+				for (var gv = 0; gv < groupVotes.length; gv++) { // Group rating entries
+					var gvote = groupVotes[gv];
+					var urating = nodeData(gvote);
+					var agid = gvote.getAttribute('agid');
+					var gid = aGroups[agid] ? aGroups[agid].gid : 0;
+					var group = groups[gid];
+					if (group) group.userRating = urating;
+				}
+				for (var ev = 0; ev < episodeVotes.length; ev++) {
+					var evote = episodeVotes[ev];
+					var vote = nodeData(evote);
+					var eid = evote.getAttribute('id');
+					episodes[eid].vote = vote;
+				}
+				break;
+			case 'config': parseConfig(childNode); break;
+			default: showAlert('Options',node.nodeName,node.nodeName,childNode.nodeName);
+		}
+	}
+	return true;
 }
 
 /* Function to parse configuration options
@@ -592,13 +603,15 @@ function parseGroups(node,aid) {
   }
   if (node.length > 1 || node.parentNode.nodeName != 'anime') return;
   var groupNodes = node.getElementsByTagName('group');
+  var anime = animes[aid];
   for (var i = 0; i < groupNodes.length; i++) {
     var childNode = groupNodes[i];
     var groupEntry = new CGroupEntry(childNode);
     var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
     groups[groupEntry.id] = groupEntry;
     aGroups[aGroupEntry.id] = aGroupEntry;
-	if (animes[aid].groups.indexOf(groupEntry.id) < 0) animes[aid].groups.push(groupEntry.id);
+	if (anime.groups.indexOf(groupEntry.id) < 0) anime.groups.push(groupEntry.id);
+	if (!isNaN(Number(groupEntry.lastEp)) && Number(groupEntry.lastEp) > anime.highestEp) anime.highestEp = groupEntry.lastEp;
     if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
   }
   // create the "no group" group entry
@@ -618,7 +631,7 @@ function parseGroups(node,aid) {
   groupEntry.stateId = 0;
   groupEntry.hasCherryBeenPoped = false;
   groups[groupEntry.id] = groupEntry;
-  animes[aid].groups.push(0);
+  anime.groups.push(0);
 }
 
 /* Processes a node to extract episode information

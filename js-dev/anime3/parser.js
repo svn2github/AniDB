@@ -69,7 +69,7 @@ function CGroupEntry(node) {
   this.ratingCount = 0;
   this.commentCount = 0;
   this.userRating = -1; // set later
-  //this.relatedGroups = new Array();
+  this.relatedGroups = new Array();
   this.sepCnt = 0;
   this.epCnt = 0;
   this.isInMylistRange = '';
@@ -83,7 +83,7 @@ function CGroupEntry(node) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
     switch (sNode.nodeName.toLowerCase()) {
-	  case 'relgroups': this.relGroups = nodeData(sNode);	break;
+	  case 'relgroups': this.relatedGroups = nodeData(sNode).split(','); break;
       case 'name': this.name = nodeData(sNode); break;
       case 'sname': this.shortName = nodeData(sNode); break;
       case 'state': this.state = nodeData(sNode); this.stateId = Number(sNode.getAttribute('id')); break;
@@ -115,6 +115,7 @@ function CAnimeEntry(node) {
   this.titles = new Array();
   this.episodes = new Array();
   this.groups = new Array();
+  this.highestEp = 0;
   for (i = 0; i < node.childNodes.length; i++) {
     var sNode = node.childNodes.item(i);
     if (sNode.nodeType == 3) continue; // Text node, not interested
@@ -602,13 +603,15 @@ function parseGroups(node,aid) {
   }
   if (node.length > 1 || node.parentNode.nodeName != 'anime') return;
   var groupNodes = node.getElementsByTagName('group');
+  var anime = animes[aid];
   for (var i = 0; i < groupNodes.length; i++) {
     var childNode = groupNodes[i];
     var groupEntry = new CGroupEntry(childNode);
     var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
     groups[groupEntry.id] = groupEntry;
     aGroups[aGroupEntry.id] = aGroupEntry;
-	if (animes[aid].groups.indexOf(groupEntry.id) < 0) animes[aid].groups.push(groupEntry.id);
+	if (anime.groups.indexOf(groupEntry.id) < 0) anime.groups.push(groupEntry.id);
+	if (!isNaN(Number(groupEntry.lastEp)) && Number(groupEntry.lastEp) > anime.highestEp) anime.highestEp = groupEntry.lastEp;
     if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
   }
   // create the "no group" group entry
@@ -628,7 +631,7 @@ function parseGroups(node,aid) {
   groupEntry.stateId = 0;
   groupEntry.hasCherryBeenPoped = false;
   groups[groupEntry.id] = groupEntry;
-  animes[aid].groups.push(0);
+  anime.groups.push(0);
 }
 
 /* Processes a node to extract episode information
