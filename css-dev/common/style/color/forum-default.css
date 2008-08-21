@@ -1,0 +1,98 @@
+div.quotebody
+{
+	background-color:#EBEADD;
+	border:1px solid #DBDBDB;
+}
+
+div.quotebody div.quote div.g_odd
+{
+	background-color:#EFEED9;
+}
+
+#layout-main div.forum ul.topiclist
+{
+	background-color:inherit;
+}
+
+#layout-main div.forum ul.topiclist li
+{
+	color:#4C5D77;
+}
+
+#layout-main div.forum dl.icon
+{
+	background-position:10px 50%;
+	background-repeat:no-repeat;
+}
+
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	color:#FFFFFF;
+}
+
+#layout-main div.forum a.topictitle
+{
+	color:#105289;
+}
+
+#layout-main div.forum dl.icon dt
+{
+	background-position:5px 95%;
+	background-repeat:no-repeat;
+}
+
+#layout-main div.forum div.threads
+{
+	background:#B1B1B1 none repeat-x scroll 0 0;
+	background-color:#4992B6;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	background-color:#ECF3F7;
+}
+
+#layout-main div.forum ul.topics li.g_odd
+{
+	background-color:#E1EBF2;
+}
+
+#layout-main div.forum span.corners-top,
+#layout-main div.forum span.corners-bottom,
+#layout-main div.forum span.corners-top span,
+#layout-main div.forum span.corners-bottom span
+{
+	background-repeat:no-repeat;
+}
+
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-color:#CBD6DE;
+}
+
+#layout-main div.forum div.navbar
+{
+	background-color:#CADCEB;
+}
+
+#layout-main div.forum ul.linklist
+{
+	background-color: inherit;
+}
+
+#layout-main div.forum a.topictitle:hover
+{
+	color:#AA0000;
+}
+
+#layout-main div.forum a.username-coloured
+{
+	color:#AA0000;
+}
+
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+	opacity:0.3;
+}

@@ -132,3 +132,50 @@ div.pagination
 {
 	margin-top:0em;
 }
+
+/*TEMP*/
+*.i_topic_normal
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_topic_sticky
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/sticky_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_topic_announcement
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_topic_global
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+}
+
+*.i_forum
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/forum_read.gif) no-repeat;
+	margin-right:-.5em;
+	margin-top:.2em;
+	height:2.5em;
+}
+
+#layout-main div.forum a.lastpost
+{
+	background:url(http://forum.anidb.net/styles/arsilver/imageset/icon_topic_latest.gif) no-repeat;
+}
+
+#layout-main div.forum div.threads
+{
+	background-image:url(http://forum.anidb.net/styles/arsilver/theme/images/bg_list.gif);
+}

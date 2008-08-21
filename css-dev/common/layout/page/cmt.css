@@ -24,42 +24,23 @@
 	float: left;
 }
 
-#layout-main div.cmt_all div.topic_actions
+#layout-main div.forum div.topic_actions
 {
 	height: 25px;
 }
 
-#layout-main div.cmt_all div.topic_actions span.icons
+#layout-main div.forum div.topic_actions span.icons
 {
 	float: right;
 }
 
-#layout-main div.cmt_all div.topic_actions div.buttons a
+#layout-main div.forum div.topic_actions div.buttons a
 {
 	float: left;
 }
 
-/*
-
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------PURE DEV ENVIROMENT AHEAD----------------------------
------------------JUST PUTTING THIS HERE FOR BACKUP PURPOSE------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
------------------DON'T USE ANYTHING FROM BELOW THIS-------------------
-
-*/
-
 #layout-main div.forum ul.topiclist
 {
-	background-color:inherit;
-	border:none;
 	display:block;
 	list-style-type:none;
 	margin:0;
@@ -67,8 +48,6 @@
 
 #layout-main div.forum ul.topiclist dd
 {
-	border-left:1px solid #FFFFFF;
-	border-left-color:#FFFFFF;
 	display:block;
 	float:left;
 	margin-left:0;
@@ -77,7 +56,6 @@
 
 #layout-main div.forum ul.topiclist li
 {
-	color:#4C5D77;
 	display:block;
 	list-style-type:none;
 	margin:0;
@@ -100,8 +78,6 @@
 
 #layout-main div.forum dl.icon
 {
-	background-position:10px 50%;
-	background-repeat:no-repeat;
 	height:auto!important;
 	min-height:35px;
 }
@@ -109,13 +85,6 @@
 #layout-main div.forum li.header dl.icon dt
 {
 	padding-left:.5em;
-}
-
-#layout-main div.forum dl.icon dt
-{
-	background-position:5px 95%;
-	background-repeat:no-repeat;
-	font-weight:bold;
 }
 
 #layout-main div.forum ul.topiclist dt
@@ -126,27 +95,13 @@
 	width:50%;
 }
 
-#layout-main div.forum li.row
-{
-	border-bottom:1px solid #8F8F8F;
-	border-bottom-color:#00608F;
-	border-top:1px solid #FFFFFF;
-	border-top-color:#FFFFFF;
-}
-
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
-	border-left-width:0;
-	color:#FFFFFF;
-	font-family:Arial,Helvetica,sans-serif;
-	font-size:1em;
-	font-weight:bold;
 	line-height:1em;
 	margin:2px 0 4px;
 	padding-bottom:2px;
 	padding-top:2px;
-	text-transform:uppercase;
 }
 
 #layout-main div.forum ul.topiclist dd.posts,
@@ -159,34 +114,12 @@
 #layout-main div.forum ul.topics dd.posts,
 #layout-main div.forum ul.topics dd.topics
 {
-	font-size:1.2em;
 	line-height:2.2em;
-}
-
-#layout-main div.forum a.topictitle
-{
-	color:#105289;
-	font-family:"Trebuchet MS",Helvetica,Arial,Sans-serif;
-	font-size:1.2em;
-	font-weight:bold;
-}
-
-#layout-main div.forum a.topictitle:hover
-{
-	color:#AA0000;
 }
 
 #layout-main div.forum a.username-coloured
 {
-	color:#AA0000;
 	display:inline!important;
-	font-weight:bold;
-}
-
-#layout-main div.forum ul.topics dt,
-#layout-main div.forum dd.lastpost
-{
-	font-size:1.1em;
 }
 
 #layout-main div.forum ul.topiclist li.row dl
@@ -202,7 +135,6 @@
 
 #layout-main div.forum a.lastpost
 {
-	background:url(http://forum.anidb.net/styles/arsilver/imageset/icon_topic_latest.gif) no-repeat;
 	display:inline-block;
 	height:9px;
 	width:11px;
@@ -211,7 +143,6 @@
 #layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title
 {
 	display:block;
-	font-weight:normal;
 	margin-top:-.3em;
 	padding-left:3em;
 }
@@ -228,9 +159,6 @@
 
 #layout-main div.forum div.threads
 {
-	background:#B1B1B1 none repeat-x scroll 0 0;
-	background-color:#4992B6;
-	background-image:url(http://forum.anidb.net/styles/arsilver/theme/images/bg_list.gif);
 	margin-bottom:4px;
 }
 
@@ -250,22 +178,6 @@
 	float:left;
 }
 
-#layout-main div.forum ul.topics
-{
-	border-left:5px solid #4992B6;
-	border-right:5px solid #4992B6;
-}
-
-#layout-main div.forum ul.topics li.row
-{
-	background-color:#ECF3F7;
-}
-
-#layout-main div.forum ul.topics li.g_odd
-{
-	background-color:#E1EBF2;
-}
-
 #layout-main div.forum span.corners-bottom
 {
 	clear:both;
@@ -276,34 +188,22 @@
 #layout-main div.forum span.corners-top span,
 #layout-main div.forum span.corners-bottom span
 {
-	background-repeat:no-repeat;
 	display:block;
-	font-size:1px;
 	height:5px;
 	line-height:1px;
 }
 
 #layout-main div.forum hr
 {
-	border-color:#CCCCCC #FFFFFF #FFFFFF;
-	border-style:solid none none;
-	border-width:1px 0 0;
 	clear:both;
 	display:block;
 	height:1px;
 	margin:5px 0;
 }
 
-#layout-main div.forum ul.topics li.row:hover
-{
-	background-color:#CBD6DE;
-}
-
 #layout-main div.forum div.navbar div.linklist span
 {
 	display:block;
-	font-size:1.1em;
-	font-weight:bold;
 	line-height:2em;
 	margin-right:5px;
 	width:auto;
@@ -316,15 +216,9 @@
 	padding-top:.5em;
 }
 
-#layout-main div.forum div.navbar
-{
-	background-color:#CADCEB;
-}
-
 #layout-main div.forum ul.linklist li
 {
 	display:block;
-	font-size:1.1em;
 	line-height:2em;
 	list-style-type:none;
 	margin-right:5px;
@@ -335,14 +229,10 @@
 #layout-main div.forum ul.linklist {
 	display:block;
 	margin:0;
-	background-color: inherit;
-	border: none;
 }
 
 #layout-main div.forum div.signature
 {
-	border-top:1px solid #CCCCCC;
-	font-size:1.1em;
 	line-height:140%;
 	margin-top:1.5em;
 	overflow:hidden;
@@ -355,55 +245,11 @@
 #layout-main div.forum span.postedited
 {
 	display:block;
-	font-style:italic;
 	padding-top:3em;
-}
-
-#layout-main div.forum div.deleted,
-#layout-main div.forum li.deleted dl.icon
-{
-	opacity:0.3;
-}
-
-*.i_topic_normal
-{
-	background:url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
-}
-
-*.i_topic_sticky
-{
-	background:url(http://forum.anidb.net/styles/arsilver/imageset/sticky_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
-}
-
-*.i_topic_announcement
-{
-	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
-}
-
-*.i_topic_global
-{
-	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
-}
-
-*.i_forum
-{
-	background:url(http://forum.anidb.net/styles/arsilver/imageset/forum_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
-	height:2.5em;
 }
 
 #layout-main div.forum div.spoiler
 {
-	border: 1px inset;
 	padding: 0.6em;
 }
 
@@ -411,4 +257,57 @@
 {
 	display:block;
 	margin-bottom: 1em;
+}
+
+/*BORDER*/
+#layout-main div.forum ul.topiclist
+{
+	border:none;
+}
+
+#layout-main div.forum ul.topiclist dd
+{
+	border-left:1px solid #FFFFFF;
+	border-left-color:#FFFFFF;
+}
+
+#layout-main div.forum li.row
+{
+	border-bottom:1px solid #8F8F8F;
+	border-bottom-color:#00608F;
+	border-top:1px solid #FFFFFF;
+	border-top-color:#FFFFFF;
+}
+
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	border-left-width:0;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left:5px solid #4992B6;
+	border-right:5px solid #4992B6;
+}
+
+#layout-main div.forum hr
+{
+	border-color:#CCCCCC #FFFFFF #FFFFFF;
+	border-style:solid none none;
+	border-width:1px 0 0;
+}
+
+#layout-main div.forum ul.linklist {
+	border: none;
+}
+
+#layout-main div.forum div.signature
+{
+	border-top:1px solid #CCCCCC;
+}
+
+#layout-main div.forum div.spoiler
+{
+	border: 1px inset;
 }

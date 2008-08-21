@@ -221,3 +221,82 @@ div.quotebody div.quote div.quotebody
 	margin-top: 1em;
 	margin-right: 0.2em;
 }
+
+/*forum stuff*/
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	text-transform:uppercase;
+}
+
+#layout-main div.forum dl.icon dt
+{
+	font-weight:bold;
+}
+
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:1em;
+	font-weight:bold;
+}
+
+#layout-main div.forum ul.topics dd.posts,
+#layout-main div.forum ul.topics dd.topics
+{
+	font-size:1.2em;
+}
+
+#layout-main div.forum a.topictitle
+{
+	font-family:"Trebuchet MS",Helvetica,Arial,Sans-serif;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+#layout-main div.forum a.username-coloured
+{
+	font-weight:bold;
+}
+
+#layout-main div.forum ul.topics dt,
+#layout-main div.forum dd.lastpost
+{
+	font-size:1.1em;
+}
+
+#layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title
+{
+	font-weight:normal;
+}
+
+#layout-main div.forum span.corners-top,
+#layout-main div.forum span.corners-bottom,
+#layout-main div.forum span.corners-top span,
+#layout-main div.forum span.corners-bottom span
+{
+	font-size:1px;
+}
+
+#layout-main div.forum div.navbar div.linklist span
+{
+	font-size:1.1em;
+	font-weight:bold;
+}
+
+#layout-main div.forum ul.linklist li
+{
+	font-size:1.1em;
+}
+
+#layout-main div.forum div.signature
+{
+	font-size:1.1em;
+}
+
+#layout-main div.forum span.postdeleted,
+#layout-main div.forum span.postedited
+{
+	font-style:italic;
+}

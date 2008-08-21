@@ -2,7 +2,7 @@
 @import "../common/layout/default.css";
 @import "../icons/all.css";
 @import "../common/layout/global/timedentry.css";
-@import "../common/style/color/quotebox-default.css";
+@import "../common/style/color/forum-default.css";
 
 				body.nonav
 { width: auto }
