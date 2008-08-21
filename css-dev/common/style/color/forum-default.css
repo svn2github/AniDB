@@ -42,10 +42,11 @@ div.quotebody div.quote div.g_odd
 	background-repeat:no-repeat;
 }
 
-#layout-main div.forum div.threads
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner
 {
-	background:#B1B1B1 none repeat-x scroll 0 0;
-	background-color:#4992B6;
+background-color:#4992B6;
 }
 
 #layout-main div.forum ul.topics li.row
@@ -71,7 +72,9 @@ div.quotebody div.quote div.g_odd
 	background-color:#CBD6DE;
 }
 
-#layout-main div.forum div.navbar
+#layout-main div.forum div.navbar .rtop *,
+#layout-main div.forum div.navbar .rbottom *,
+#layout-main div.forum div.navbar div.linklist
 {
 	background-color:#CADCEB;
 }

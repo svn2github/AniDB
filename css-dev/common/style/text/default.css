@@ -279,7 +279,7 @@ div.quotebody div.quote div.quotebody
 	font-size:1px;
 }
 
-#layout-main div.forum div.navbar div.linklist span
+#layout-main div.forum div.navbar div.linklist span.breadcrumbs
 {
 	font-size:1.1em;
 	font-weight:bold;
