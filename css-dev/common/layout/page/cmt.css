@@ -201,13 +201,34 @@
 	margin:5px 0;
 }
 
-#layout-main div.forum div.navbar div.linklist span.links,
+#layout-main div.forum div.navbar div.linklist span.messages,
 #layout-main div.forum div.navbar div.linklist span.breadcrumbs
 {
 	display:block;
 	line-height:2em;
-	margin-right:5px;
 	width:auto;
+}
+
+#layout-main div.forum div.navbar div.linklist span.breadcrumbs
+{
+	float:left;
+}
+
+#layout-main div.forum div.navbar span.messages
+{
+	margin-top:0.5em;
+}
+
+#layout-main div.forum div.navbar span.icons
+{
+padding-top: 0.5em;
+padding-right: 1em;
+}
+
+#layout-main div.forum div.navbar div.linklist div.bottom
+{
+clear:both;
+margin-right: 1em;
 }
 
 #layout-main div.forum div.navbar div.linklist
@@ -346,7 +367,7 @@
 	border: 1px inset;
 }
 
-#layout-main div.forum div.navbar div.linklist span.breadcrumbs
+#layout-main div.forum div.navbar div.linklist div.bottom
 {
-	border-bottom:1px solid #FFFFFF;
+	border-top:1px solid #FFFFFF;
 }

@@ -9,9 +9,14 @@ body.nonav
 	background-color: #BFC2C9;
 }
 
-a:visited, a:active, a:hover, a:link {
+a:visited, a:active, a:link {
   color: blue;
   text-decoration: none;
+}
+
+a:hover
+{
+	color:#D31141;
 }
 
 #layout-main div.anime_all div.mylist th,
