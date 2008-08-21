@@ -284,6 +284,10 @@ div.quotebody div.quote div.quotebody
 	font-size:1.1em;
 	font-weight:bold;
 }
+#layout-main div.forum div.navbar div.linklist span.messages
+{
+	font-size:1.1em;
+}
 
 #layout-main div.forum ul.linklist li
 {
