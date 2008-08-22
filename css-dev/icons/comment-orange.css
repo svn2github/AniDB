@@ -138,6 +138,217 @@
 	background-image: url(../icons/orange/comment_revisions.png);
 }
 
+/*Smiley*/
+*.i_smiley_tehehe
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_tehehe.gif);
+}
+
+*.i_smiley_sweating
+{
+	width:17px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_sweating.gif);
+}
+
+*.i_smiley_cool
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_cool.gif);
+}
+
+*.i_smiley_sad
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_sad.gif);
+}
+
+*.i_smiley_happy
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_happy.gif);
+}
+
+*.i_smiley_surprised
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_surprised.gif);
+}
+
+*.i_smiley_undecided
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_undecided.gif);
+}
+
+*.i_smiley_confused
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_confused.gif);
+}
+
+*.i_smiley_very_happy
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_very_happy.gif);
+}
+
+*.i_smiley_razz
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_razz.gif);
+}
+
+*.i_smiley_angel
+{
+	width:42px;
+	height:23px;
+	background-image:url(../icons/smiley/smiley_angel.gif);
+}
+
+*.i_smiley_baka
+{
+	width:41px;
+	height:46px;
+	background-image:url(../icons/smiley/smiley_baka.gif);
+}
+
+*.i_smiley_brickwall
+{
+	width:25px;
+	height:20px;
+	background-image:url(../icons/smiley/smiley_brickwall.gif);
+}
+
+*.i_smiley_crying
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_crying.gif);
+}
+
+*.i_smiley_mad
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_mad.gif);
+}
+
+*.i_smiley_laughing
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_laughing.gif);
+}
+
+*.i_smiley_mymaster
+{
+	width:29px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_mymaster.gif);
+}
+
+*.i_smiley_embarassed
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_embarassed.gif);
+}
+
+*.i_smiley_rolleyes
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_rolleyes.gif);
+}
+
+*.i_smiley_shock
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_shock.gif);
+}
+
+*.i_smiley_thumbup
+{
+	width:23px;
+	height:18px;
+	background-image:url(../icons/smiley/smiley_thumbup.gif);
+}
+
+*.i_smiley_twisted
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_twisted.gif);
+}
+
+*.i_smiley_wink
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_wink.gif);
+}
+
+*.i_smiley_zzz
+{
+	width:15px;
+	height:24px;
+	background-image:url(../icons/smiley/smiley_zzz.gif);
+}
+
+*.i_smiley_neutral
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_neutral.gif);
+}
+
+*.i_smiley_nosebleed
+{
+	width:15px;
+	height:19px;
+	background-image:url(../icons/smiley/smiley_nosebleed.gif);
+}
+
+*.i_smiley_disgusted
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_disgusted.gif);
+}
+
+*.i_smiley_thinking
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_thinking.gif);
+}
+
+*.i_smiley_sweatdrop
+{
+	width:17px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_sweatdrop.gif);
+}
+
+*.i_smiley_wtf
+{
+	width:17px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_wtf.gif);
+}
+
 /*to center the paginationbar vertically*/
 div.pagination
 {
