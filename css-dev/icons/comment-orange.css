@@ -98,6 +98,22 @@
 	width:101px;
 }
 
+*.i_topic_history
+{
+	background-image: url(../icons/orange/topic_history.png);
+	height:12px;
+	margin:5px;
+	width:83px;
+}
+
+*.i_topic_move
+{
+	background-image: url(../icons/orange/topic_move.png);
+	height:12px;
+	margin:5px;
+	width:77px;
+}
+
 *.i_comment_undelete
 {
 	width: 89px;
