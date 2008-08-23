@@ -654,7 +654,7 @@ function printTags() {
 			target.appendChild(result);
 			
 			if(i++ < 8) {
-				height += result.offsetHeight;
+				height = target.offsetHeight;
 			}
 		}
 	}
@@ -686,10 +686,10 @@ addLoadEvent(function() {
 		// Find search box and bind stuff to it
 		var textfield = target.getElementsByTagName("input")[0];
 		textfield.onkeyup = search;
-		/*textfield.onfocus = search;
+		textfield.onfocus = search;
 		textfield.onchange = function() {
 			setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
-		}*/
+		}
 		
 		// Find search type dropdown
 		var dropdown = target.getElementsByTagName("select")[0];
