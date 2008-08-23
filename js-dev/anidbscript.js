@@ -652,10 +652,7 @@ function printTags() {
 				}
 			
 			target.appendChild(result);
-			
-			if(i++ < 8) {
-				height = target.offsetHeight;
-			}
+			i++;
 		}
 	}
 	
@@ -665,8 +662,11 @@ function printTags() {
 	target.style.top = search.offsetTop + search.offsetHeight + "px";
 	target.style.width = search.offsetWidth - 2 + "px";
 	
-	if(i >= 8 && height > 0) {
-		target.style.height = height + "px";
+	if(i >= 8) {
+		height = target.firstChild.offsetHeight * 8;
+		if(height > 0) {
+			target.style.height = height + "px";
+		}
 	} else {
 		target.style.height = "auto";
 	}
