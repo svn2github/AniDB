@@ -601,21 +601,6 @@ function CookieGet( check_name )
 var lastSearch = "";
 var searchData = [];
 
-function getPosition(obj) {
-	var left = 0;
-	var top = 0;
-	
-	if(obj.offsetParent) {
-		do {
-			left += obj.offsetLeft;
-			top += obj.offsetTop;
-		} while (obj = obj.offsetParent);
-		return [left, top];
-	}
-	
-	return [0, 0];
-}
-
 function search() {
 	var target = document.getElementById("tagsearch");
 	
@@ -674,15 +659,13 @@ function printTags() {
 		}
 	}
 	
-	// Set auto complete display properties
-	var pos = getPosition(search);
-	
 	target.style.display = "block";
 	target.style.position = "absolute";
 	target.style.left = search.offsetLeft + "px";
 	target.style.top = search.offsetTop + search.offsetHeight + "px";
 	target.style.width = search.offsetWidth - 2 + "px";
 	
+	alert(i + " " + height);
 	if(i >= 8 && height > 0) {
 		target.style.height = height + "px";
 	} else {
@@ -690,7 +673,7 @@ function printTags() {
 	}
 	
 	// Don't display if tag is matched or no tags are matched
-	if(i == 0) {
+	if(i == 0 || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())) {
 		target.style.display = "none";
 	}
 }
@@ -706,7 +689,7 @@ addLoadEvent(function() {
 		textfield.onkeyup = search;
 		textfield.onfocus = search;
 		textfield.onchange = function() {
-			setTimeout('document.getElementById("tagsearch").style.display = "none"', 200);
+			setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
 		}
 		
 		// Find search type dropdown
