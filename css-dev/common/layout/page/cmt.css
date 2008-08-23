@@ -402,7 +402,7 @@ div.posting-box div.smiley-box a
 	margin:.3em;
 }
 
-#layout-main div.cmt_add form div textarea
+#layout-main div.forum form div.message-box textarea
 {
 	height:20em;
 	margin-left:0;
