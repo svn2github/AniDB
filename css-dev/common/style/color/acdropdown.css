@@ -1,0 +1,4 @@
+#layout-search ul.acdropdown li:hover,
+#layout-search ul.acdropdown li.selected {
+	color:#fff; background:#5e81bc;
+}

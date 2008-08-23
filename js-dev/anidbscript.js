@@ -596,6 +596,146 @@ function CookieGet( check_name )
 	return null;
 }
 
+// Tag Search Auto Completion. (C) 2008 antennen 
+// Relies on ajax.js by fahrenheit
+var lastSearch = "";
+var searchData = [];
+
+function getPosition(obj) {
+	var left = 0;
+	var top = 0;
+	
+	if(obj.offsetParent) {
+		do {
+			left += obj.offsetLeft;
+			top += obj.offsetTop;
+		} while (obj = obj.offsetParent);
+		return [left, top];
+	}
+	
+	return [0, 0];
+}
+
+function search() {
+	var target = document.getElementById("tagsearch");
+	
+	if(this.value.length >= 3 && this.parentNode.getElementsByTagName("select")[0].value == "animetag") {
+		// Check if a new search is necessary
+		var ll = lastSearch.length
+		var cl = this.value.length
+		var min = Math.min(ll, cl);
+		
+		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
+			lastSearch = this.value;
+			xhttpRequestFetch(xhttpRequest(), 'tag.xml?test='+escape(this.value), function(xml) {
+				var root = xml.getElementsByTagName('root').item(0);
+				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
+				searchData = root.getElementsByTagName('tag');
+				
+				printTags();
+			});
+		}
+		
+		// Print matched
+		printTags();
+	} else {
+		
+		target.style.display = "none";
+	}
+}
+
+function printTags() {
+	// Clear old result
+	var target = document.getElementById("tagsearch");
+	var search = target.parentNode.parentNode.getElementsByTagName("input")[0]
+	if(target.hasChildNodes()) {
+		while(target.childNodes.length > 0) {
+			target.removeChild(target.firstChild);       
+		} 
+	}
+	
+	// Loop search result and filter
+	var i = 0;
+	var height = 0;
+	for(var n = 0; n < searchData.length; n++) {
+		var tag = searchData[n].getAttribute("name");
+		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
+			var result = document.createElement("li");
+				result.appendChild(document.createTextNode(tag));
+				result.onclick = function() {
+					search.value = this.firstChild.data;
+					target.style.display = "none";
+				}
+			
+			target.appendChild(result);
+			
+			if(i < 8) {
+				height += result.offsetHeight;
+			}
+		}
+	}
+	
+	// Set auto complete display properties
+	var pos = getPosition(search);
+	
+	target.style.display = "block";
+	target.style.position = "absolute";
+	target.style.left = pos[0] + "px";
+	target.style.top = pos[1] + search.offsetHeight + "px";
+	target.style.width = search.offsetWidth - 2 + "px";
+	
+	if(i >= 8 && height > 0) {
+		target.style.height = height + "px";
+	} else {
+		target.style.height = "auto";
+	}
+	
+	// Don't display if tag is matched or no tags are matched
+	if(i == 0 || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())) {
+		target.style.display = "none";
+	}
+}
+
+// Initialize the script
+addLoadEvent(function() {
+	// Find target form
+	var target = document.getElementById("layout-search");
+
+	if(target) {
+		// Find search box and bind stuff to it
+		var textfield = target.getElementsByTagName("input")[0];
+		textfield.onkeyup = search;
+		textfield.onfocus = search;
+		textfield.onchange = function() {
+			document.getElementById("tagsearch").style.display = "none";
+		}
+		
+		// Find search type dropdown
+		var dropdown = target.getElementsByTagName("select")[0];
+		if(dropdown) {
+			dropdown.onchange = function() {
+				if(this.value == "animetag") {
+					textfield.setAttribute("autocomplete", "off");
+				} else {
+					textfield.setAttribute("autocomplete", "on");
+				}
+			}
+			
+			if(dropdown.value == "animetag") {
+				textfield.setAttribute("autocomplete", "off");
+			} else {
+				textfield.setAttribute("autocomplete", "on");
+			}
+		}
+		
+		// Spawn result dropdown
+		result = document.createElement("ul");
+		result.setAttribute("id", "tagsearch");
+		result.className = "acdropdown";
+		textfield.parentNode.appendChild(result);
+	}
+});
+
 //anidb.js code (C) 2003 by PetriW
 function myGetElement(name) { 
     if (document.getElementById) { 

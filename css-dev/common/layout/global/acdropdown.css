@@ -1,0 +1,11 @@
+#layout-search ul.acdropdown {
+	margin:0; padding:0;
+	display:none; overflow:auto;
+	border:1px solid #85878c;
+	font-family:Verdana, sans-serif; font-size:0.7em;
+	list-style-type:none;
+}
+	#layout-search ul.acdropdown li {
+		margin:0px; padding:2px;
+		cursor:default;
+	}
