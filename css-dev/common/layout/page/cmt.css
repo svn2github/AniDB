@@ -359,7 +359,6 @@ margin-right: 1em;
 {
 	margin-bottom:.2em;
 	margin-left:.2em;
-	margin-top:1.5em;
 	text-align:left;
 }
 
@@ -380,6 +379,11 @@ margin-right: 1em;
 #layout-main div.forum div.submit-box div.inner
 {
 	padding:.5em 1em;
+}
+
+#layout-main div.forum dl.subject
+{
+	margin-bottom:1.5em;
 }
 
 #layout-main div.forum dl.subject input
