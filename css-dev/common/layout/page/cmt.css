@@ -468,3 +468,9 @@ div.options-box h3
 {
 	text-align: left;
 }
+
+img.smiley
+{
+	display: -moz-inline-box;
+	display: inline-block;
+}
