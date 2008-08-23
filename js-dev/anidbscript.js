@@ -706,8 +706,8 @@ addLoadEvent(function() {
 		// Find search type dropdown
 		var dropdown = target.getElementsByTagName("select")[0];
 		if(dropdown) {
-			function getSearchTypeChange(value = false) {
-				if(!value)
+			function getSearchTypeChange(value) {
+				if(value == undefined)
 					value = this.value
 				
 				switch(value) {
