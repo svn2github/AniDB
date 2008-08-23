@@ -669,7 +669,9 @@ function printTags() {
 			
 			target.appendChild(result);
 			
-			if(i < 8) {
+			
+			
+			if(i++ < 8) {
 				height += result.offsetHeight;
 			}
 		}
