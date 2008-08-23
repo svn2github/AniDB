@@ -662,8 +662,8 @@ function init_formating() {
 			var iframe = document.createElement('iframe');
 			iframe.frameborder = 0;
 			iframe.id = "wysiwyg_" + i;
-			iframe.style.height = wysiwygHeight + "%";
-			iframe.style.width = wysiwygWidth + "em";
+			iframe.style.height = wysiwygHeight + "em";
+			iframe.style.width = wysiwygWidth + "%";
 			iframe.borderWidth = 0;
 			textArea.parentNode.insertBefore(iframe,textArea);
 			// Pass the textarea's existing text over to the content variable
