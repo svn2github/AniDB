@@ -691,7 +691,7 @@ function printTags() {
 	}
 	
 	// Don't display if tag is matched or no tags are matched
-	if(i == 0 || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())) {
+	if(i == 0) {
 		target.style.display = "none";
 	}
 }
