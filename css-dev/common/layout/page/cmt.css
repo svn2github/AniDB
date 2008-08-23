@@ -366,3 +366,93 @@ margin-right: 1em;
 {
 	border-top:1px solid #FFFFFF;
 }
+
+/*you know the drill don't use the following bits yet*/
+div.posting-box dt
+{
+	clear:none;
+	float:left;
+	font-size:1.1em;
+	font-weight:700;
+	padding-top:3px;
+}
+
+div.posting-box dl
+{
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+}
+
+div.posting-box div.message-box,div.posting-box dl.topic
+{
+	clear:left;
+}
+
+div.posting-box div.smiley-box
+{
+	float:right;
+	width:18%;
+}
+
+div.posting-box div.smiley-box a
+{
+	margin:.3em;
+}
+
+#layout-main div.cmt_add form div textarea
+{
+	height:20em;
+	margin-left:0;
+	width:100%;
+}
+
+div.posting-box div.message-box
+{
+	width:80%;
+}
+
+div.format-buttons
+{
+	margin-bottom:.2em;
+	margin-left:.2em;
+	margin-top:1.5em;
+	text-align:left;
+}
+
+div.format-buttons input + input
+{
+	margin-left:.5em;
+}
+
+div.submit-box,div.options-box
+{
+	margin-top:1em;
+}
+
+div.inner
+{
+	background-color:#CADCEB;
+	padding:.5em 1em;
+}
+
+#layout-main div.forum .rtop *,#layout-main div.forum .rbottom *
+{
+	background-color:#CADCEB;
+}
+
+dl.subject input
+{
+	width:300px;
+}
+
+div.options-box div,div.options-box h3
+{
+	text-align:left;
+}
+
+div.options-box h3
+{
+	padding-bottom:.5em;
+}
