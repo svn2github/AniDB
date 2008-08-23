@@ -201,15 +201,15 @@
 	margin:5px 0;
 }
 
-#layout-main div.forum div.navbar div.linklist span.messages,
-#layout-main div.forum div.navbar div.linklist span.breadcrumbs
+#layout-main div.forum div.navbar div.inner span.messages,
+#layout-main div.forum div.navbar div.inner span.breadcrumbs
 {
 	display:block;
 	line-height:2em;
 	width:auto;
 }
 
-#layout-main div.forum div.navbar div.linklist span.breadcrumbs
+#layout-main div.forum div.navbar div.inner span.breadcrumbs
 {
 	float:left;
 }
@@ -220,13 +220,13 @@ padding-top: 0.5em;
 padding-right: 1em;
 }
 
-#layout-main div.forum div.navbar div.linklist div.bottom
+#layout-main div.forum div.navbar div.inner div.bottom
 {
 clear:both;
 margin-right: 1em;
 }
 
-#layout-main div.forum div.navbar div.linklist
+#layout-main div.forum div.navbar div.inner
 {
 	padding-bottom:.5em;
 	padding-left:1em;
@@ -362,7 +362,7 @@ margin-right: 1em;
 	border: 1px inset;
 }
 
-#layout-main div.forum div.navbar div.linklist div.bottom
+#layout-main div.forum div.navbar div.inner div.bottom
 {
 	border-top:1px solid #FFFFFF;
 }
@@ -438,14 +438,7 @@ div.posting-box div.inner,
 div.options-box div.inner,
 div.submit-box div.inner
 {
-	background-color:#CADCEB;
 	padding:.5em 1em;
-}
-
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *
-{
-	background-color:#CADCEB;
 }
 
 dl.subject input

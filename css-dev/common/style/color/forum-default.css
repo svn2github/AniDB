@@ -72,9 +72,9 @@ background-color:#4992B6;
 	background-color:#CBD6DE;
 }
 
-#layout-main div.forum div.navbar .rtop *,
-#layout-main div.forum div.navbar .rbottom *,
-#layout-main div.forum div.navbar div.linklist
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner
 {
 	background-color:#CADCEB;
 }
@@ -84,11 +84,7 @@ background-color:#4992B6;
 	background-color: inherit;
 }
 
-#layout-main div.forum a.topictitle:hover
-{
-	color:#AA0000;
-}
-
+#layout-main div.forum a.topictitle:hover,
 #layout-main div.forum a.username-coloured
 {
 	color:#AA0000;
