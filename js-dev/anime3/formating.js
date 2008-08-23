@@ -11,8 +11,8 @@
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;
 // WYSIWYG Width and Height
-var wysiwygWidth = 80%;
-var wysiwygHeight = 20em;
+var wysiwygWidth = 80;
+var wysiwygHeight = 20;
 // Create viewTextMode global variable and set to 0
 // enabling all toolbar commands while in HTML mode
 var viewTextMode = 0;
@@ -662,8 +662,8 @@ function init_formating() {
 			var iframe = document.createElement('iframe');
 			iframe.frameborder = 0;
 			iframe.id = "wysiwyg_" + i;
-			iframe.style.height = wysiwygHeight + "px";
-			iframe.style.width = wysiwygWidth + "px";
+			iframe.style.height = wysiwygHeight + "%";
+			iframe.style.width = wysiwygWidth + "em";
 			iframe.borderWidth = 0;
 			textArea.parentNode.insertBefore(iframe,textArea);
 			// Pass the textarea's existing text over to the content variable
