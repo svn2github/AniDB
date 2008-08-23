@@ -11,7 +11,7 @@
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;
 // WYSIWYG Width and Height
-var wysiwygWidth = 80;
+var wysiwygWidth = 100;
 var wysiwygHeight = 20;
 // Create viewTextMode global variable and set to 0
 // enabling all toolbar commands while in HTML mode
