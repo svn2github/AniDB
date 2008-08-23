@@ -603,8 +603,10 @@ var searchData = [];
 
 function search() {
 	var target = document.getElementById("tagsearch");
+	var type = this.parentNode.getElementsByTagName("select")[0].value;
 	
-	if(this.value.length >= 3 && this.parentNode.getElementsByTagName("select")[0].value == "animetag") {
+	
+	if(this.value.length >= 3 && (type == "animetag" || type == "grouplist")) {
 		// Check if a new search is necessary
 		var ll = lastSearch.length
 		var cl = this.value.length
@@ -612,7 +614,17 @@ function search() {
 		
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
 			lastSearch = this.value;
-			xhttpRequestFetch(xhttpRequest(), 'animedb.pl?show=xml&t=tagsearch&search='+encodeURI(this.value), function(xml) {
+			
+			switch(type) {
+				case "grouplist":
+					var url = 'animedb.pl?show=xml&t=groupsearch&search=';
+					break;
+				case "animetag":
+					var url = 'animedb.pl?show=xml&t=tagsearch&search=';
+					break;
+			}
+			
+			xhttpRequestFetch(xhttpRequest(), url + encodeURI(this.value), function(xml) {
 				var root = xml.getElementsByTagName('root').item(0);
 				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
 				searchData = root.getElementsByTagName('tag');
@@ -694,19 +706,21 @@ addLoadEvent(function() {
 		// Find search type dropdown
 		var dropdown = target.getElementsByTagName("select")[0];
 		if(dropdown) {
-			dropdown.onchange = function() {
-				if(this.value == "animetag") {
-					textfield.setAttribute("autocomplete", "off");
-				} else {
-					textfield.setAttribute("autocomplete", "on");
+			function getSearchTypeChange(value = false) {
+				if(!value)
+					value = this.value
+				
+				switch(value) {
+					case "animetag":
+					case "grouplist":
+						textfield.setAttribute("autocomplete", "off");
+						break;
+					default:
+						textfield.setAttribute("autocomplete", "on");
 				}
 			}
-			
-			if(dropdown.value == "animetag") {
-				textfield.setAttribute("autocomplete", "off");
-			} else {
-				textfield.setAttribute("autocomplete", "on");
-			}
+			dropdown.onchange = getSearchTypeChange;
+			getSearchTypeChange(dropdown.value);
 		}
 		
 		// Spawn result dropdown
