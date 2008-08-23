@@ -732,6 +732,7 @@ addLoadEvent(function() {
 		result = document.createElement("ul");
 		result.setAttribute("id", "tagsearch");
 		result.className = "acdropdown";
+		result.style.display = "none";
 		textfield.parentNode.appendChild(result);
 	}
 });
