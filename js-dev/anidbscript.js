@@ -665,7 +665,6 @@ function printTags() {
 	target.style.top = search.offsetTop + search.offsetHeight + "px";
 	target.style.width = search.offsetWidth - 2 + "px";
 	
-	alert(i + " " + height);
 	if(i >= 8 && height > 0) {
 		target.style.height = height + "px";
 	} else {
