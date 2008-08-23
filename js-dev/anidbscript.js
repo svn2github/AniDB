@@ -634,12 +634,11 @@ function search() {
 				
 				printTags();
 			});
+		} else {
+			// Print matched
+			printTags();
 		}
-		
-		// Print matched
-		printTags();
 	} else {
-		
 		target.style.display = "none";
 	}
 }
@@ -707,7 +706,7 @@ addLoadEvent(function() {
 		textfield.onkeyup = search;
 		textfield.onfocus = search;
 		textfield.onchange = function() {
-			document.getElementById("tagsearch").style.display = "none";
+			setTimeout('document.getElementById("tagsearch").style.display = "none"', 200);
 		}
 		
 		// Find search type dropdown
