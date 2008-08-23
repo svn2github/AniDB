@@ -46,37 +46,25 @@ div.quotebody div.quote div.g_odd
 #layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner
 {
-background-color:#4992B6;
+	background-color:#4a4a5a;
 }
 
 #layout-main div.forum ul.topics li.row
 {
-	background-color:#ECF3F7;
+	background-color:#bfc2c9;
 }
 
 #layout-main div.forum ul.topics li.g_odd
 {
-	background-color:#E1EBF2;
-}
-
-#layout-main div.forum span.corners-top,
-#layout-main div.forum span.corners-bottom,
-#layout-main div.forum span.corners-top span,
-#layout-main div.forum span.corners-bottom span
-{
-	background-repeat:no-repeat;
-}
-
-#layout-main div.forum ul.topics li.row:hover
-{
-	background-color:#CBD6DE;
+	background-color:#b0b0b0;
 }
 
 #layout-main div.forum .rtop *,
 #layout-main div.forum .rbottom *,
-#layout-main div.forum div.inner
+#layout-main div.forum div.inner,
+#layout-main div.forum ul.topics li.row:hover
 {
-	background-color:#CADCEB;
+	background-color:#969aa6;
 }
 
 #layout-main div.forum ul.linklist
@@ -94,4 +82,36 @@ background-color:#4992B6;
 #layout-main div.forum li.deleted dl.icon
 {
 	opacity:0.3;
+}
+
+#layout-main div.forum ul.topics dd
+{
+	border-left-color:#4a4a5a;
+}
+
+#layout-main div.forum li.row
+{
+	border-bottom-color:#8F8F8F;
+	border-top-color:#4a4a5a;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left-color: #4a4a5a;
+	border-right-color: #4a4a5a;
+}
+
+#layout-main div.forum hr
+{
+	border-color:#CCCCCC #FFFFFF #FFFFFF;
+}
+
+#layout-main div.forum div.signature
+{
+	border-top-color: #CCCCCC;
+}
+
+#layout-main div.forum div.navbar div.inner div.bottom
+{
+	border-top:1px solid #4a4a5a;
 }

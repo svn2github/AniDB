@@ -309,6 +309,102 @@ margin-right: 1em;
 	height: 2px;
 }
 
+#layout-main div.forum div.posting-box dt
+{
+	clear:none;
+	float:left;
+	font-size:1.1em;
+	font-weight:700;
+	padding-top:3px;
+}
+
+#layout-main div.forum div.posting-box dl
+{
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+}
+
+#layout-main div.forum div.posting-box div.message-box,
+#layout-main div.forum div.posting-box dl.topic
+{
+	clear:left;
+}
+
+#layout-main div.forum div.posting-box div.smiley-box
+{
+	float:right;
+	width:18%;
+}
+
+#layout-main div.forum div.posting-box div.smiley-box a
+{
+	margin:.3em;
+}
+
+#layout-main div.forum div.posting-box div.message-box textarea
+{
+	height:20em;
+	margin-left:0;
+	width:100%;
+}
+
+#layout-main div.forum div.posting-box div.message-box
+{
+	width:80%;
+}
+
+#layout-main div.forum div.format-buttons
+{
+	margin-bottom:.2em;
+	margin-left:.2em;
+	margin-top:1.5em;
+	text-align:left;
+}
+
+#layout-main div.forum div.format-buttons input + input
+{
+	margin-left:.5em;
+}
+
+#layout-main div.forum div.posting-box,
+#layout-main div.forum div.submit-box,
+#layout-main div.forum div.options-box
+{
+	margin-top:1em;
+}
+
+#layout-main div.forum div.posting-box div.inner,
+#layout-main div.forum div.options-box div.inner,
+#layout-main div.forum div.submit-box div.inner
+{
+	padding:.5em 1em;
+}
+
+#layout-main div.forum dl.subject input
+{
+	width:300px;
+}
+
+#layout-main div.forum div.options-box h3
+{
+	padding-bottom:.5em;
+}
+
+img.smiley
+{
+	display: -moz-inline-box;
+	display: inline-block;
+}
+
+#layout-main div.forum div.options-box div,
+#layout-main div.forum div.options-box h3,
+#layout-main div.forum span.messages
+{
+	text-align:left;
+}
+
 /*BORDER*/
 #layout-main div.forum ul.topiclist
 {
@@ -317,16 +413,13 @@ margin-right: 1em;
 
 #layout-main div.forum ul.topiclist dd
 {
-	border-left:1px solid #FFFFFF;
-	border-left-color:#FFFFFF;
+	border-left:1px solid;
 }
 
 #layout-main div.forum li.row
 {
-	border-bottom:1px solid #8F8F8F;
-	border-bottom-color:#00608F;
-	border-top:1px solid #FFFFFF;
-	border-top-color:#FFFFFF;
+	border-bottom:1px solid;
+	border-top:1px solid;
 }
 
 #layout-main div.forum li.header dt,
@@ -337,13 +430,12 @@ margin-right: 1em;
 
 #layout-main div.forum ul.topics
 {
-	border-left:5px solid #4992B6;
-	border-right:5px solid #4992B6;
+	border-left:5px solid;
+	border-right:5px solid;
 }
 
 #layout-main div.forum hr
 {
-	border-color:#CCCCCC #FFFFFF #FFFFFF;
 	border-style:solid none none;
 	border-width:1px 0 0;
 }
@@ -354,7 +446,7 @@ margin-right: 1em;
 
 #layout-main div.forum div.signature
 {
-	border-top:1px solid #CCCCCC;
+	border-top:1px solid;
 }
 
 #layout-main div.forum div.spoiler
@@ -364,106 +456,5 @@ margin-right: 1em;
 
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-	border-top:1px solid #FFFFFF;
-}
-
-/*you know the drill don't use the following bits yet*/
-div.posting-box dt
-{
-	clear:none;
-	float:left;
-	font-size:1.1em;
-	font-weight:700;
-	padding-top:3px;
-}
-
-div.posting-box dl
-{
-	display:block;
-	height:1%;
-	margin:0;
-	overflow:hidden;
-}
-
-div.posting-box div.message-box,
-div.posting-box dl.topic
-{
-	clear:left;
-}
-
-div.posting-box div.smiley-box
-{
-	float:right;
-	width:18%;
-}
-
-div.posting-box div.smiley-box a
-{
-	margin:.3em;
-}
-
-#layout-main div.forum form div.message-box textarea
-{
-	height:20em;
-	margin-left:0;
-	width:100%;
-}
-
-div.posting-box div.message-box
-{
-	width:80%;
-}
-
-div.format-buttons
-{
-	margin-bottom:.2em;
-	margin-left:.2em;
-	margin-top:1.5em;
-	text-align:left;
-}
-
-div.format-buttons input + input
-{
-	margin-left:.5em;
-}
-
-div.posting-box,
-div.submit-box,
-div.options-box
-{
-	margin-top:1em;
-}
-
-div.posting-box div.inner,
-div.options-box div.inner,
-div.submit-box div.inner
-{
-	padding:.5em 1em;
-}
-
-dl.subject input
-{
-	width:300px;
-}
-
-div.options-box div,
-div.options-box h3
-{
-	text-align:left;
-}
-
-div.options-box h3
-{
-	padding-bottom:.5em;
-}
-
-#layout-main div.forum span.messages
-{
-	text-align: left;
-}
-
-img.smiley
-{
-	display: -moz-inline-box;
-	display: inline-block;
+	border-top:1px solid;
 }

@@ -304,3 +304,8 @@ div.quotebody div.quote div.quotebody
 {
 	font-style:italic;
 }
+
+#layout-main div.forum ul.topics dd.lastpost span a
+{
+	font-weight: bold;
+}
