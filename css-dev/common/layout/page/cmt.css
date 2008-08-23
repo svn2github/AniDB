@@ -385,7 +385,8 @@ div.posting-box dl
 	overflow:hidden;
 }
 
-div.posting-box div.message-box,div.posting-box dl.topic
+div.posting-box div.message-box,
+div.posting-box dl.topic
 {
 	clear:left;
 }
@@ -426,18 +427,23 @@ div.format-buttons input + input
 	margin-left:.5em;
 }
 
-div.submit-box,div.options-box
+div.posting-box,
+div.submit-box,
+div.options-box
 {
 	margin-top:1em;
 }
 
-div.inner
+div.posting-box div.inner,
+div.options-box div.inner,
+div.submit-box div.inner
 {
 	background-color:#CADCEB;
 	padding:.5em 1em;
 }
 
-#layout-main div.forum .rtop *,#layout-main div.forum .rbottom *
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *
 {
 	background-color:#CADCEB;
 }
@@ -447,7 +453,8 @@ dl.subject input
 	width:300px;
 }
 
-div.options-box div,div.options-box h3
+div.options-box div,
+div.options-box h3
 {
 	text-align:left;
 }
