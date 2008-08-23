@@ -627,7 +627,7 @@ function search() {
 		
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
 			lastSearch = this.value;
-			xhttpRequestFetch(xhttpRequest(), 'animedb.pl?show=xml&t=tagsearch&search='+escape(this.value), function(xml) {
+			xhttpRequestFetch(xhttpRequest(), 'animedb.pl?show=xml&t=tagsearch&search='+escapeURI(this.value), function(xml) {
 				var root = xml.getElementsByTagName('root').item(0);
 				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
 				searchData = root.getElementsByTagName('tag');
@@ -669,8 +669,6 @@ function printTags() {
 			
 			target.appendChild(result);
 			
-			
-			
 			if(i++ < 8) {
 				height += result.offsetHeight;
 			}
@@ -682,8 +680,8 @@ function printTags() {
 	
 	target.style.display = "block";
 	target.style.position = "absolute";
-	target.style.left = pos[0] + "px";
-	target.style.top = pos[1] + search.offsetHeight + "px";
+	target.style.left = search.offsetLeft + "px";
+	target.style.top = search.offsetTop + search.offsetHeight + "px";
 	target.style.width = search.offsetWidth - 2 + "px";
 	
 	if(i >= 8 && height > 0) {
