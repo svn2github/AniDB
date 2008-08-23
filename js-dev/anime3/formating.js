@@ -626,36 +626,37 @@ function init_formating() {
 		textArea.id = "textArea_"+i;
 		if (currentFMode == 2) textArea.style.display = "none";
 		var fTA = textArea.form;
-		var span = document.createElement('span');
-		span.className = 'f_controls';
-		span.id = 'controls_'+ i;
+		var div = document.createElement('div');
+		div.className = 'format-buttons f_controls';
+		div.id = 'controls_'+ i;
 		// yes, yes, i know, blame IE
-		createLocalButton(span,'bold',FunctionMap['bold']);
-		createLocalButton(span,'italic',FunctionMap['italic']);
-		createLocalButton(span,'underline',FunctionMap['underline']);
-		createLocalButton(span,'strikethrough',FunctionMap['strikethrough']);
-		createLocalButton(span,'insertorderedlist',FunctionMap['insertorderedlist']);
-		createLocalButton(span,'insertunorderedlist',FunctionMap['insertunorderedlist']);
-		if (currentFMode == 1) createLocalButton(span,'insertlistitem',FunctionMap['insertlistitem']);
-		createLocalButton(span,'spoiler',FunctionMap['spoiler']);
+		createLocalButton(div,'bold',FunctionMap['bold']);
+		createLocalButton(div,'italic',FunctionMap['italic']);
+		createLocalButton(div,'underline',FunctionMap['underline']);
+		createLocalButton(div,'strikethrough',FunctionMap['strikethrough']);
+		createLocalButton(div,'insertorderedlist',FunctionMap['insertorderedlist']);
+		createLocalButton(div,'insertunorderedlist',FunctionMap['insertunorderedlist']);
+		if (currentFMode == 1) createLocalButton(div,'insertlistitem',FunctionMap['insertlistitem']);
+		createLocalButton(div,'spoiler',FunctionMap['spoiler']);
 		if (currentFMode == 2) {
-			createLocalButton(span,'viewsource',FunctionMap['viewsource']);
-			createLocalButton(span,'viewrte',FunctionMap['viewrte']);
-			createLocalButton(span,'cleansource',FunctionMap['cleansource']);
+			createLocalButton(div,'viewsource',FunctionMap['viewsource']);
+			createLocalButton(div,'viewrte',FunctionMap['viewrte']);
+			createLocalButton(div,'cleansource',FunctionMap['cleansource']);
 		}
-		createLocalButton(span,'preview',FunctionMap['preview']);
-		createLocalButton(span,'link',FunctionMap['link']);
-		createSelect(span,OptionsMap,'f_links');
-		var html = getElementsByClassName(span.getElementsByTagName('input'),'f_viewsource',true)[0];
-		var text = getElementsByClassName(span.getElementsByTagName('input'),'f_viewrte',true)[0];
-		var clean = getElementsByClassName(span.getElementsByTagName('input'),'f_cleansource',true)[0];
-		var preview = getElementsByClassName(span.getElementsByTagName('input'),'f_preview',true)[0];
+		createLocalButton(div,'preview',FunctionMap['preview']);
+		createLocalButton(div,'link',FunctionMap['link']);
+		createSelect(div,OptionsMap,'f_links');
+		var html = getElementsByClassName(div.getElementsByTagName('input'),'f_viewsource',true)[0];
+		var text = getElementsByClassName(div.getElementsByTagName('input'),'f_viewrte',true)[0];
+		var clean = getElementsByClassName(div.getElementsByTagName('input'),'f_cleansource',true)[0];
+		var preview = getElementsByClassName(div.getElementsByTagName('input'),'f_preview',true)[0];
 		if (html) html.style.display = ''; 
 		if (text) text.style.display = 'none';
 		if (clean) clean.style.display = '';
 		if (preview) preview.style.display = '';
-		span.appendChild(document.createElement('br'));
-		textArea.parentNode.insertBefore(span,textArea);
+		var insertHere = document.getElementById('smiley-box');
+		insertHere.parentNode.insertBefore(div,insertHere);
+		//textArea.parentNode.insertBefore(div,textArea);
 		if (currentFMode == 2) {
 			// Create iframe which will be used for rich text editing
 			var iframe = document.createElement('iframe');
