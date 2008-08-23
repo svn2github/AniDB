@@ -627,7 +627,7 @@ function search() {
 		
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
 			lastSearch = this.value;
-			xhttpRequestFetch(xhttpRequest(), 'animedb.pl?show=xml&t=tagsearch&search='+escapeURI(this.value), function(xml) {
+			xhttpRequestFetch(xhttpRequest(), 'animedb.pl?show=xml&t=tagsearch&search='+encodeURI(this.value), function(xml) {
 				var root = xml.getElementsByTagName('root').item(0);
 				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
 				searchData = root.getElementsByTagName('tag');
