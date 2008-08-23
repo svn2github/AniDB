@@ -279,12 +279,12 @@ div.quotebody div.quote div.quotebody
 	font-size:1px;
 }
 
-#layout-main div.forum div.navbar div.linklist span.breadcrumbs
+#layout-main div.forum div.navbar span.breadcrumbs
 {
 	font-size:1.1em;
 	font-weight:bold;
 }
-#layout-main div.forum div.navbar div.linklist span.messages
+#layout-main div.forum div.navbar span.messages
 {
 	font-size:1.1em;
 }
