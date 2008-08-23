@@ -463,3 +463,8 @@ div.options-box h3
 {
 	padding-bottom:.5em;
 }
+
+div.forum span.messages
+{
+	text-align: left;
+}
