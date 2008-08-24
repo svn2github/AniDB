@@ -135,3 +135,10 @@ div.quotebody div.quote div.g_odd
 {
 	border-top:1px solid #4a4a5a;
 }
+
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *
+{
+	background-color:#a9abb1;
+}
