@@ -126,14 +126,10 @@ div.quotebody div.quote div.g_odd
 	background-color: #4A4A5A;
 }
 
-#layout-main div.forum div.signature
-{
-	border-top-color: #CCCCCC;
-}
-
+#layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-	border-top:1px solid #4a4a5a;
+	border-top-color:#4a4a5a;
 }
 
 #layout-main div.forum div.comment div.inner,
