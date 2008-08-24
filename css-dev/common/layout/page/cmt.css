@@ -11,15 +11,11 @@
 	height: 10em;
 }
 
-#layout-main div.comment
-{
-	line-height: 1.4;
-}
-#layout-main div.comment span.icons
+#layout-main div.cmt_entries div.comment span.icons
 {
 	float: right;
 }
-#layout-main div.comment span.stamp span.icons
+#layout-main div.cmt_entries div.comment span.stamp span.icons
 {
 	float: left;
 }
@@ -29,6 +25,7 @@
 	text-align:left;
 	min-height:0pt;
 	margin-bottom:1em;
+	line-height: 1.4;
 }
 
 #layout-main div.cmt_entries dl.profile
@@ -93,14 +90,6 @@
 {
 	display:block;
 	float:right;
-}
-
-#layout-main div.cmt_entries hr
-{
-	clear: both;
-	display: block;
-	height: 1px;
-	margin: 5px 0pt;
 }
 
 #layout-main div.forum div.topic_actions
@@ -500,11 +489,6 @@ img.smiley
 {
 	border-left:5px solid;
 	border-right:5px solid;
-}
-
-#layout-main div.forum hr
-{
-	border: 1px solid;
 }
 
 #layout-main div.forum ul.linklist {
