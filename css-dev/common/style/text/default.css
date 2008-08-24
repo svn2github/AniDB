@@ -280,3 +280,10 @@ div.quotebody div.quote div.quotebody
 {
 	font-size:1.1em;
 }
+
+#layout-main div.forum div.statistics h3
+{
+	font-size:1.05em;
+	font-weight:bold;
+	text-transform:uppercase;
+}
