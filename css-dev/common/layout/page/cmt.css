@@ -239,8 +239,8 @@
 #layout-main div.forum div.topic_actions
 {
 	height:12px;
-	margin-bottom:1em;
-	margin-top:1em;
+	margin-bottom:1.5em;
+	margin-top:1.5em;
 }
 
 #layout-main div.forum div.topic_actions span.icons
@@ -474,8 +474,8 @@ img.smiley
 
 #layout-main div.forum div.statistics
 {
-	padding-top: 2em;
-	padding-bottom: 2em;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
 }
 
 #layout-main div.forum div.statistics p
@@ -489,9 +489,10 @@ img.smiley
 	margin-left: 1em;
 }
 
-#layout-main div.forum div.linklist
+#layout-main div.forum div.topic_actions div.linklist
 {
 	float:left;
+	margin-top: 1em;
 }
 
 /*BORDER*/
