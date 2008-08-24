@@ -463,6 +463,7 @@ img.smiley
 }
 
 /*BORDER*/
+#layout-main div.forum hr,
 #layout-main div.forum ul.topiclist
 {
 	border:none;
