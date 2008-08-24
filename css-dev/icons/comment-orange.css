@@ -77,7 +77,6 @@
 {
 	background-image: url(../icons/orange/topic_add.png);
 	height:12px;
-	margin:5px;
 	width:65px;
 }
 
@@ -85,7 +84,6 @@
 {
 	background-image: url(../icons/orange/topic_delete.png);
 	height:12px;
-	margin:5px;
 	width:89px;
 }
 
@@ -93,7 +91,6 @@
 {
 	background-image: url(../icons/orange/topic_undelete.png);
 	height:12px;
-	margin:5px;
 	width:101px;
 }
 
@@ -101,7 +98,6 @@
 {
 	background-image: url(../icons/orange/topic_history.png);
 	height:12px;
-	margin:5px;
 	width:83px;
 }
 
@@ -109,7 +105,6 @@
 {
 	background-image: url(../icons/orange/topic_move.png);
 	height:12px;
-	margin:5px;
 	width:77px;
 }
 
@@ -353,17 +348,6 @@
 	width:16px;
 	height:16px;
 	background-image:url(../icons/smiley/smiley_dead.gif);
-}
-
-/*to center the paginationbar vertically*/
-div.pagination
-{
-	margin-top:0.66em;
-}
-/*exception for this*/
-#layout-main div.news_all div.news div.topic_actions div.pagination
-{
-	margin-top:0em;
 }
 
 /*TEMP*/

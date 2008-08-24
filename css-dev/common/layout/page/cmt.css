@@ -238,8 +238,9 @@
 
 #layout-main div.forum div.topic_actions
 {
-	height:25px;
+	height:12px;
 	margin-bottom:1em;
+	margin-top:1em;
 }
 
 #layout-main div.forum div.topic_actions span.icons
