@@ -271,14 +271,6 @@ div.quotebody div.quote div.quotebody
 	font-weight:normal;
 }
 
-#layout-main div.forum span.corners-top,
-#layout-main div.forum span.corners-bottom,
-#layout-main div.forum span.corners-top span,
-#layout-main div.forum span.corners-bottom span
-{
-	font-size:1px;
-}
-
 #layout-main div.forum div.navbar span.breadcrumbs
 {
 	font-size:1.1em;
@@ -308,4 +300,9 @@ div.quotebody div.quote div.quotebody
 #layout-main div.forum ul.topics dd.lastpost span a
 {
 	font-weight: bold;
+}
+
+#layout-main div.cmt_entries a.username-colored
+{
+	font-weight:bold;
 }

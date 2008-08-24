@@ -9,6 +9,26 @@ div.quotebody div.quote div.g_odd
 	background-color:#EFEED9;
 }
 
+#layout-main div.cmt_entries dl.profile
+{
+	border-right-color: #4A4A5A;
+}
+
+#layout-main div.cmt_entries dl.profile dd
+{
+	color:#666666;
+}
+
+#layout-main div.cmt_entries dl.profile dd strong
+{
+	color:#000000;
+}
+
+#layout-main div.cmt_entries a.username-colored
+{
+	color:#AA0000;
+}
+
 #layout-main div.forum ul.topiclist
 {
 	background-color:inherit;
@@ -103,7 +123,7 @@ div.quotebody div.quote div.g_odd
 
 #layout-main div.forum hr
 {
-	border-color:#CCCCCC #FFFFFF #FFFFFF;
+	border-color: #4A4A5A;
 }
 
 #layout-main div.forum div.signature

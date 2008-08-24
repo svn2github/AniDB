@@ -24,6 +24,85 @@
 	float: left;
 }
 
+#layout-main div.cmt_entries div.comment
+{
+	text-align:left;
+	min-height:0pt;
+	margin-bottom:1em;
+}
+
+#layout-main div.cmt_entries dl.profile
+{
+	display:inline;
+	float:left;
+	margin:0pt 8px 8pt 8pt;
+	min-height:80px;
+	width:15em;
+}
+
+#layout-main div.cmt_entries dl.profile dd
+{
+	clear:none;
+	float:none;
+	margin-left:0em;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user
+{
+	padding-top:8pt;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user_icons
+{
+	padding-top: 1.6em;
+}
+
+#layout-main div.cmt_entries dl.profile dd.user_icons span.icons
+{
+	float: none;
+}
+
+#layout-main div.cmt_entries div.postbody div.content
+{
+	margin-left: 17em;
+	margin-right: 1em;
+}
+
+#layout-main div.cmt_entries div.postbody p.author
+{
+	margin:0pt 15em 0.6em 0pt;
+	padding:2pt 0pt 5px;
+}
+
+#layout-main div.cmt_entries div.postbody span.actions a
+{
+	float:right;
+	margin-top: 4px;
+}
+
+#layout-main div.cmt_entries div.postfooter
+{
+	clear:both;
+	height:11px;
+	text-align:right;
+	padding-bottom:0.9em;
+	padding-right:1em;
+}
+
+#layout-main div.cmt_entries div.postfooter a.i_top
+{
+	display:block;
+	float:right;
+}
+
+#layout-main div.cmt_entries hr
+{
+	clear: both;
+	display: block;
+	height: 1px;
+	margin: 5px 0pt;
+}
+
 #layout-main div.forum div.topic_actions
 {
 	height: 25px;
@@ -176,21 +255,6 @@
 #layout-main div.forum div.topic_actions div.buttons a
 {
 	float:left;
-}
-
-#layout-main div.forum span.corners-bottom
-{
-	clear:both;
-}
-
-#layout-main div.forum span.corners-top,
-#layout-main div.forum span.corners-bottom,
-#layout-main div.forum span.corners-top span,
-#layout-main div.forum span.corners-bottom span
-{
-	display:block;
-	height:5px;
-	line-height:1px;
 }
 
 #layout-main div.forum hr
@@ -440,17 +504,11 @@ img.smiley
 
 #layout-main div.forum hr
 {
-	border-style:solid none none;
-	border-width:1px 0 0;
+	border: 1px solid;
 }
 
 #layout-main div.forum ul.linklist {
 	border: none;
-}
-
-#layout-main div.forum div.signature
-{
-	border-top:1px solid;
 }
 
 #layout-main div.forum div.spoiler
@@ -458,7 +516,13 @@ img.smiley
 	border: 1px inset;
 }
 
+#layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
 	border-top:1px solid;
+}
+
+#layout-main div.cmt_entries dl.profile
+{
+	border-right: 1px solid;
 }
