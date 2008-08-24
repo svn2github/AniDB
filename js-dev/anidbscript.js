@@ -618,16 +618,18 @@ function search() {
 			switch(type) {
 				case "grouplist":
 					var url = 'animedb.pl?show=xml&t=groupsearch&search=';
+					var element = 'group';
 					break;
 				case "animetag":
 					var url = 'animedb.pl?show=xml&t=tagsearch&search=';
+					var element = 'tag';
 					break;
 			}
 			
 			xhttpRequestFetch(xhttpRequest(), url + encodeURI(this.value), function(xml) {
 				var root = xml.getElementsByTagName('root').item(0);
 				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
-				searchData = root.getElementsByTagName('tag');
+				searchData = root.getElementsByTagName(element);
 				
 				printTags();
 			});
