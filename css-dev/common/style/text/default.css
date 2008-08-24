@@ -229,11 +229,6 @@ div.quotebody div.quote div.quotebody
 	text-transform:uppercase;
 }
 
-#layout-main div.forum dl.icon dt
-{
-	font-weight:bold;
-}
-
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
@@ -255,40 +250,18 @@ div.quotebody div.quote div.quotebody
 	font-weight:bold;
 }
 
-#layout-main div.forum a.username-coloured
-{
-	font-weight:bold;
-}
-
-#layout-main div.forum ul.topics dt,
-#layout-main div.forum dd.lastpost
-{
-	font-size:1.1em;
-}
-
 #layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title
 {
 	font-weight:normal;
 }
 
-#layout-main div.forum div.navbar span.breadcrumbs
+#layout-main div.forum a.username-coloured,
+#layout-main div.forum div.navbar span.breadcrumbs,
+#layout-main div.forum ul.topics dd.lastpost span a,
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum dl.icon dt
 {
-	font-size:1.1em;
 	font-weight:bold;
-}
-#layout-main div.forum div.navbar span.messages
-{
-	font-size:1.1em;
-}
-
-#layout-main div.forum ul.linklist li
-{
-	font-size:1.1em;
-}
-
-#layout-main div.forum div.signature
-{
-	font-size:1.1em;
 }
 
 #layout-main div.forum span.postdeleted,
@@ -297,12 +270,13 @@ div.quotebody div.quote div.quotebody
 	font-style:italic;
 }
 
-#layout-main div.forum ul.topics dd.lastpost span a
+#layout-main div.forum div.navbar span.breadcrumbs,
+#layout-main div.forum div.navbar span.info,
+#layout-main div.forum div.navbar span.messages,
+#layout-main div.forum ul.linklist li,
+#layout-main div.forum div.signature,
+#layout-main div.forum ul.topics dt,
+#layout-main div.forum dd.lastpost
 {
-	font-weight: bold;
-}
-
-#layout-main div.cmt_entries a.username-colored
-{
-	font-weight:bold;
+	font-size:1.1em;
 }

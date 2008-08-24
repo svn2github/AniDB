@@ -71,6 +71,12 @@
 	padding:2pt 0pt 5px;
 }
 
+#layout-main div.cmt_entries div.postbody span.actions
+{
+	display:block;
+	padding-right: 0.5em;
+}
+
 #layout-main div.cmt_entries div.postbody span.actions a
 {
 	float:right;
@@ -254,8 +260,14 @@
 	margin:5px 0;
 }
 
+#layout-main div.forum div.navbar
+{
+	margin-bottom: 1em;
+}
+
 #layout-main div.forum div.navbar div.inner span.messages,
-#layout-main div.forum div.navbar div.inner span.breadcrumbs
+#layout-main div.forum div.navbar div.inner span.breadcrumbs,
+#layout-main div.forum div.navbar div.inner span.info
 {
 	display:block;
 	line-height:2em;
@@ -284,6 +296,17 @@ margin-right: 1em;
 	padding-bottom:.5em;
 	padding-left:1em;
 	padding-top:.5em;
+}
+
+#layout-main div.forum div.navbar span.info
+{
+	float:right;
+	padding-right: 1em;
+}
+
+#layout-main div.forum div.navbar div.fake
+{
+	clear:both;
 }
 
 #layout-main div.forum ul.linklist li
