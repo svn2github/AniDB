@@ -310,21 +310,6 @@ margin-right: 1em;
 	clear:both;
 }
 
-#layout-main div.forum ul.linklist li
-{
-	display:block;
-	line-height:2em;
-	list-style-type:none;
-	margin-right:5px;
-	width:auto;
-	margin-bottom: 0.2em;
-}
-
-#layout-main div.forum ul.linklist {
-	display:block;
-	margin:0;
-}
-
 #layout-main div.forum div.signature
 {
 	line-height:140%;
@@ -499,6 +484,16 @@ img.smiley
 	padding: 0;
 }
 
+#layout-main div.forum div.buttons a + a
+{
+	margin-left: 1em;
+}
+
+#layout-main div.forum div.linklist
+{
+	float:left;
+}
+
 /*BORDER*/
 #layout-main div.forum hr,
 #layout-main div.forum ul.topiclist
@@ -527,10 +522,6 @@ img.smiley
 {
 	border-left:5px solid;
 	border-right:5px solid;
-}
-
-#layout-main div.forum ul.linklist {
-	border: none;
 }
 
 #layout-main div.forum div.spoiler
