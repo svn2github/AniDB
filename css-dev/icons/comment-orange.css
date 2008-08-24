@@ -348,6 +348,13 @@
 	background-image:url(../icons/smiley/smiley_wtf.gif);
 }
 
+*.i_smiley_dead
+{
+	width:16px;
+	height:16px;
+	background-image:url(../icons/smiley/smiley_dead.gif);
+}
+
 /*to center the paginationbar vertically*/
 div.pagination
 {
