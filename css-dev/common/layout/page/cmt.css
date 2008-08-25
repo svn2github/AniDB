@@ -495,9 +495,15 @@ img.smiley
 	margin-top: 1em;
 }
 
-#layout-main div.forum div.options-box
+#layout-main div.forum div.options-box,
+#layout-main div.forum div.posting-box dl.vote
 {
 	margin-bottom: 1em;
+}
+
+#layout-main div.forum div.posting-box div.format-buttons select
+{
+	margin-left: 0.5em;
 }
 
 /*BORDER*/
