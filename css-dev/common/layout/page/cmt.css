@@ -762,3 +762,22 @@ img.smiley
 	padding:0;
 	text-align:left;
 }
+
+#layout-main div.forum div.poll div.pollbar
+{
+background-color:#F81157;
+color:#FFFFFF;
+font-weight:bold;
+min-width:2%;
+overflow:visible;
+padding:0 2px;
+text-align:right;
+border-right-color:#D11A4E;
+border-bottom:1px solid #D11A4E;
+border-right:1px solid #D11A4E;
+}
+
+#layout-main div.forum div.poll dl dd.resultbar
+{
+width: 50%;
+}
