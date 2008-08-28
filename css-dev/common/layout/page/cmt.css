@@ -604,8 +604,8 @@ img.smiley
 	clear:none;
 	float:left;
 	font-size:1em;
-font-weight: bold;
-font-size:1.1em;
+	font-weight: bold;
+	font-size:1.1em;
 }
 
 #layout-main div.forum div.options-box dl
@@ -619,8 +619,8 @@ font-size:1.1em;
 #layout-main div.forum dl.question input
 {
 	width:85%;
-padding-left:4px;
-padding-right:4px;
+	padding-left:4px;
+	padding-right:4px;
 }
 
 #layout-main div.forum div.options-box textarea
@@ -643,19 +643,122 @@ padding-right:4px;
 #layout-main div.forum div.posting-box dl + dl,
 #layout-main div.forum div.options-box dl + dl
 {
- margin-top: 0.5em;
+	margin-top: 0.5em;
 }
 
 #layout-main div.forum div.options-box div.polls
 {
-margin-top: 0.5em;
+	margin-top: 0.5em;
 }
 
-span.desc
+#layout-main div.forum span.desc
 {
-display:block;
-width: 12em;
-margin-top: 0.5em;
-font-style: italic; 
-font-weight: normal;
+	display:block;
+	width: 12em;
+	margin-top: 0.5em;
+	font-style: italic; 
+	font-weight: normal;
+}
+
+#layout-main div.forum div.poll
+{
+	border-bottom:1px solid #4A4A5A;
+	margin-bottom:.5em;
+	padding-bottom:.5em;
+}
+
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *
+{
+	background-color:#A9ABB1;
+}
+
+#layout-main div.forum div.poll div.question,
+#layout-main div.forum div.poll form
+{
+	display:block;
+	margin-left:1em;
+	margin-right:1em;
+	padding-bottom:1em;
+	padding-top:.5em;
+}
+
+#layout-main div.forum div.poll dl
+{
+	border-top:1px solid #989898;
+	color:#666666;
+	height:1%;
+	line-height:120%;
+	margin-top:5px;
+	padding:5px 0 0;
+	width:100%;
+}
+
+#layout-main div.forum div.poll dl dd
+{
+	border-left:medium none;
+	color:#666666;
+	display:block;
+	float:left;
+	font-size:1.1em;
+	line-height:120%;
+	margin-bottom:3px;
+	margin-left:0;
+	padding:0 5px;
+	vertical-align:top;
+	width:10%;
+}
+
+#layout-main div.forum div.poll dl dt
+{
+	border-right:medium none;
+	color:#555555;
+	display:block;
+	float:left;
+	font-size:1.1em;
+	font-weight:bold;
+	line-height:120%;
+	margin:0;
+	padding:0 5px 0 0;
+	text-align:left;
+	width:30%;
+}
+
+#layout-main div.forum div.poll form div.resultbar
+{
+	margin-left:30%;
+	margin-top:1em;
+	text-align:left;
+}
+
+#layout-main div.forum div.poll form div.resultbar a,
+#layout-main div.forum div.poll form div.resultbar input
+{
+	margin-left:10px;
+}
+
+#layout-main div.forum div.poll h2
+{
+	border-bottom:1px solid #989898;
+	color:#006699;
+	display:block;
+	font-size:1.6em;
+	font-weight:bold;
+	line-height:1.4em;
+	padding-bottom:.5em;
+	text-align:left;
+}
+
+#layout-main div.forum div.poll p
+{
+	font-size:1em;
+	line-height:1.2em;
+	margin-left:1em;
+	margin-right:1em;
+	padding:0;
+	text-align:left;
 }
