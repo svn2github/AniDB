@@ -637,7 +637,7 @@ img.smiley
 
 #layout-main div.forum dl.enddate input
 {
-	width:25px;
+	width:75px;
 }
 
 #layout-main div.forum div.posting-box dl + dl,
@@ -765,19 +765,29 @@ img.smiley
 
 #layout-main div.forum div.poll div.pollbar
 {
-background-color:#F81157;
-color:#FFFFFF;
-font-weight:bold;
-min-width:2%;
-overflow:visible;
-padding:0 2px;
-text-align:right;
-border-right-color:#D11A4E;
-border-bottom:1px solid #D11A4E;
-border-right:1px solid #D11A4E;
+	background-color:#F81157;
+	color:#FFFFFF;
+	font-weight:bold;
+	min-width:2%;
+	overflow:visible;
+	padding:0 2px;
+	text-align:right;
+	border-right-color:#D11A4E;
+	border-bottom:1px solid #D11A4E;
+	border-right:1px solid #D11A4E;
 }
 
 #layout-main div.forum div.poll dl dd.resultbar
 {
-width: 50%;
+	width: 50%;
+}
+
+#layout-main div.forum dl.useroptions input
+{
+	width:25px;
+}
+
+#layout-main div.forum div.poll dl dd.votebox
+{
+	width:15px;
 }
