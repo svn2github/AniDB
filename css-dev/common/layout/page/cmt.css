@@ -506,6 +506,196 @@ img.smiley
 	margin-left: 0.5em;
 }
 
+#layout-main div.forum div.postbody dl.codebox
+{
+	display:block;
+	line-height:1.4em;
+	padding:3px;
+}
+
+#layout-main div.forum div.postbody dl.codebox dt
+{
+	display:block;
+	margin-bottom:3px;
+	text-transform:uppercase;
+	clear: none;
+	float: none;
+}
+
+#layout-main div.forum div.postbody dl.codebox dd
+{
+	margin:0;
+}
+
+#layout-main div.forum div.postbody dl.codebox code
+{
+	display:block;
+	height:auto;
+	line-height:1.3em;
+	margin:2px 0;
+	max-height:200px;
+	overflow:auto;
+	padding-top:5px;
+	white-space:normal;
+}
+
+#layout-main div.forum div.options-box dt
+{
+	clear:none;
+	float:left;
+}
+
+#layout-main div.forum div.options-box dl
+{
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+}
+
+#layout-main div.forum div.options-box dl.question input
+{
+	width:85%;
+	padding-left:4px;
+	padding-right:4px;
+}
+
+#layout-main div.forum div.options-box textarea
+{
+	height:10em;
+	margin-left:0;
+	width:85%;
+}
+
+#layout-main div.forum div.options-box dl dd
+{
+	margin-left:15em;
+}
+
+#layout-main div.forum div.options-box dl.enddate input
+{
+	width:75px;
+}
+
+#layout-main div.forum div.options-box dl.useroptions input
+{
+	width:25px;
+}
+
+#layout-main div.forum div.posting-box dl + dl,
+#layout-main div.forum div.options-box dl + dl
+{
+	margin-top: 0.5em;
+}
+
+#layout-main div.forum div.options-box div.polls
+{
+	margin-top: 0.5em;
+}
+
+#layout-main div.forum div.options-box span.desc
+{
+	display:block;
+	width: 12em;
+	margin-top: 0.5em;
+}
+
+#layout-main div.forum div.poll
+{
+	margin-bottom:.5em;
+	padding-bottom:.5em;
+}
+
+#layout-main div.forum div.poll div.question,
+#layout-main div.forum div.poll form
+{
+	display:block;
+	margin-left:1em;
+	margin-right:1em;
+	padding-bottom:1em;
+	padding-top:.5em;
+}
+
+#layout-main div.forum div.poll dl
+{
+	height:1%;
+	line-height:120%;
+	margin-top:5px;
+	padding:5px 0 0;
+	width:100%;
+}
+
+#layout-main div.forum div.poll dl dd
+{
+	display:block;
+	float:left;
+	line-height:120%;
+	margin-bottom:3px;
+	margin-left:0;
+	padding:0 5px;
+	vertical-align:top;
+	width:10%;
+}
+
+#layout-main div.forum div.poll dl dt
+{
+	display:block;
+	float:left;
+	line-height:120%;
+	margin:0;
+	padding:0 5px 0 0;
+	text-align:left;
+	width:30%;
+}
+
+#layout-main div.forum div.poll form div.resultbar
+{
+	margin-left:30%;
+	margin-top:1em;
+	text-align:left;
+}
+
+#layout-main div.forum div.poll form div.resultbar a,
+#layout-main div.forum div.poll form div.resultbar input
+{
+	margin-left:10px;
+}
+
+#layout-main div.forum div.poll h2
+{
+	display:block;
+	line-height:1.4em;
+	padding-bottom:.5em;
+	text-align:left;
+}
+
+#layout-main div.forum div.poll p
+{
+	line-height:1.2em;
+	margin-left:1em;
+	margin-right:1em;
+	padding:0;
+	text-align:left;
+}
+
+#layout-main div.forum div.poll div.pollbar
+{
+	min-width:2%;
+	overflow:visible;
+	padding:0 2px;
+	text-align:right;
+}
+
+#layout-main div.forum div.poll dl dd.resultbar
+{
+	width: 50%;
+}
+
+#layout-main div.forum div.poll dl dd.votebox
+{
+	width:15px;
+}
+
 /*BORDER*/
 #layout-main div.forum hr,
 #layout-main div.forum ul.topiclist
@@ -552,242 +742,33 @@ img.smiley
 	border-right: 1px solid;
 }
 
-/*playthign test code*/
 #layout-main div.forum div.postbody dl.codebox
 {
-	background-color:#FFFFFF;
 	border:1px solid;
-	border-color:#C9D2D8;
-	display:block;
-	font-size:1em;
-	line-height:1.4em;
-	padding:3px;
 }
 
-#layout-main div.forum div.postbody dl.codebox dt
-{
-	border-bottom:1px solid #CCCCCC;
-	color:#000000;
-	display:block;
-	font-family:"Lucida Grande","Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
-	font-size:1em;
-	font-weight:bold;
-	margin-bottom:3px;
-	text-transform:uppercase;
-	clear: none;
-	float: none;
-}
-
-#layout-main div.forum div.postbody dl.codebox dd
-{
-	margin:0;
-}
-
-#layout-main div.forum div.postbody dl.codebox code
-{
-	-x-system-font:none;
-	color:#2E8B57;
-	display:block;
-	font-family:Monaco,"Andale Mono","Courier New",Courier,mono;
-	font-size:1.2em;
-	height:auto;
-	line-height:1.3em;
-	margin:2px 0;
-	max-height:200px;
-	overflow:auto;
-	padding-top:5px;
-	white-space:normal;
-}
-
-#layout-main div.forum div.options-box dt
-{
-	clear:none;
-	float:left;
-	font-size:1em;
-	font-weight: bold;
-	font-size:1.1em;
-}
-
-#layout-main div.forum div.options-box dl
-{
-	display:block;
-	height:1%;
-	margin:0;
-	overflow:hidden;
-}
-
-#layout-main div.forum dl.question input
-{
-	width:85%;
-	padding-left:4px;
-	padding-right:4px;
-}
-
-#layout-main div.forum div.options-box textarea
-{
-	height:10em;
-	margin-left:0;
-	width:85%;
-}
-
-#layout-main div.forum div.options-box dl dd
-{
-	margin-left:15em;
-}
-
-#layout-main div.forum dl.enddate input
-{
-	width:75px;
-}
-
-#layout-main div.forum div.posting-box dl + dl,
-#layout-main div.forum div.options-box dl + dl
-{
-	margin-top: 0.5em;
-}
-
-#layout-main div.forum div.options-box div.polls
-{
-	margin-top: 0.5em;
-}
-
-#layout-main div.forum span.desc
-{
-	display:block;
-	width: 12em;
-	margin-top: 0.5em;
-	font-style: italic; 
-	font-weight: normal;
-}
-
+#layout-main div.forum div.postbody dl.codebox dt,
 #layout-main div.forum div.poll
 {
-	border-bottom:1px solid #4A4A5A;
-	margin-bottom:.5em;
-	padding-bottom:.5em;
-}
-
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *
-{
-	background-color:#A9ABB1;
-}
-
-#layout-main div.forum div.poll div.question,
-#layout-main div.forum div.poll form
-{
-	display:block;
-	margin-left:1em;
-	margin-right:1em;
-	padding-bottom:1em;
-	padding-top:.5em;
+	border-bottom:1px solid;
 }
 
 #layout-main div.forum div.poll dl
 {
-	border-top:1px solid #989898;
-	color:#666666;
-	height:1%;
-	line-height:120%;
-	margin-top:5px;
-	padding:5px 0 0;
-	width:100%;
+	border-top:1px solid;
 }
 
+#layout-main div.forum div.poll dl dt,
 #layout-main div.forum div.poll dl dd
 {
-	border-left:medium none;
-	color:#666666;
-	display:block;
-	float:left;
-	font-size:1.1em;
-	line-height:120%;
-	margin-bottom:3px;
-	margin-left:0;
-	padding:0 5px;
-	vertical-align:top;
-	width:10%;
+	border-left:none;
 }
-
-#layout-main div.forum div.poll dl dt
-{
-	border-right:medium none;
-	color:#555555;
-	display:block;
-	float:left;
-	font-size:1.1em;
-	font-weight:bold;
-	line-height:120%;
-	margin:0;
-	padding:0 5px 0 0;
-	text-align:left;
-	width:30%;
-}
-
-#layout-main div.forum div.poll form div.resultbar
-{
-	margin-left:30%;
-	margin-top:1em;
-	text-align:left;
-}
-
-#layout-main div.forum div.poll form div.resultbar a,
-#layout-main div.forum div.poll form div.resultbar input
-{
-	margin-left:10px;
-}
-
 #layout-main div.forum div.poll h2
 {
-	border-bottom:1px solid #989898;
-	color:#006699;
-	display:block;
-	font-size:1.6em;
-	font-weight:bold;
-	line-height:1.4em;
-	padding-bottom:.5em;
-	text-align:left;
+	border-bottom:1px solid;
 }
-
-#layout-main div.forum div.poll p
-{
-	font-size:1em;
-	line-height:1.2em;
-	margin-left:1em;
-	margin-right:1em;
-	padding:0;
-	text-align:left;
-}
-
 #layout-main div.forum div.poll div.pollbar
 {
-	background-color:#F81157;
-	color:#FFFFFF;
-	font-weight:bold;
-	min-width:2%;
-	overflow:visible;
-	padding:0 2px;
-	text-align:right;
-	border-right-color:#D11A4E;
-	border-bottom:1px solid #D11A4E;
-	border-right:1px solid #D11A4E;
-}
-
-#layout-main div.forum div.poll dl dd.resultbar
-{
-	width: 50%;
-}
-
-#layout-main div.forum dl.useroptions input
-{
-	width:25px;
-}
-
-#layout-main div.forum div.poll dl dd.votebox
-{
-	width:15px;
+	border-bottom:1px solid;
+	border-right:1px solid;
 }
