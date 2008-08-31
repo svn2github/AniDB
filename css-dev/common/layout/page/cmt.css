@@ -806,3 +806,74 @@ div.forum div.statistics span.legend
 {
 	font-style:italic;
 }
+
+#layout-main div.forum ul.topiclist dd.actions
+{
+	text-align:center;
+	float:right;
+	padding-left: 8em;
+	padding-right: 8em;
+}
+
+#layout-main div.forum ul.topics dd.actions
+{
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 1em;
+	line-height:2.2em;
+}
+
+#layout-main div.forum ul.topics dd.actions a +a
+{
+	margin-left: 0.5em;
+}
+
+#layout-main div.forum div.topic_actions div.buttons a.i_forum_add
+{
+	float:right;
+	margin-right: 1.5em;
+}
+
+#layout-main div.forum div.add-box dl dt
+{
+	font-size:1.1em;
+	font-weight:bold;
+	clear:none;
+	float:left;
+}
+
+#layout-main div.forum div.add-box dl + dl
+{
+	margin-top:0.5em;
+}
+
+#layout-main div.forum div.add-box dl
+{
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+}
+
+#layout-main div.forum div.add-box dl dd
+{
+	margin-left: 20em;
+}
+
+#layout-main div.forum div.add-box form
+{
+	padding: 1em;
+}
+
+#layout-main div.forum div.add-box dl.name input,
+#layout-main div.forum div.add-box dl.description input
+{
+	width: 50%;
+}
+
+#layout-main div.forum div.add-box dl.name input,
+#layout-main div.forum div.add-box dl.description input,
+#layout-main div.forum div.add-box dl.parentmanual input
+{
+	padding-left: 4px;
+}
