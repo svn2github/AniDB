@@ -123,21 +123,21 @@
 
 *.i_forum_add
 {
-	background-image: url(../icons/orange/forum_add.png);
+	background-image: url(../icons/orange/forum_add.gif);
 	height:12px;
 	width:65px;
 }
 
 *.i_forum_edit
 {
-	background-image: url(../icons/orange/forum_edit.png);
+	background-image: url(../icons/orange/forum_edit.gif);
 	height:12px;
 	width:71px;
 }
 
 *.i_forum_delete
 {
-	background-image: url(../icons/orange/forum_delete.png);
+	background-image: url(../icons/orange/forum_delete.gif);
 	height:12px;
 	width:83px;
 }
