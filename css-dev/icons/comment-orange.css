@@ -121,6 +121,27 @@
 	background-image: url(../icons/orange/comment_revisions.png);
 }
 
+*.i_forum_add
+{
+	background-image: url(../icons/orange/forum_add.png);
+	height:12px;
+	width:65px;
+}
+
+*.i_forum_edit
+{
+	background-image: url(../icons/orange/forum_edit.png);
+	height:12px;
+	width:71px;
+}
+
+*.i_forum_delete
+{
+	background-image: url(../icons/orange/forum_delete.png);
+	height:12px;
+	width:83px;
+}
+
 /*Smiley*/
 *.i_smiley_tehehe
 {
