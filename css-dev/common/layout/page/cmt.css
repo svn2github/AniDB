@@ -772,3 +772,37 @@ img.smiley
 	border-bottom:1px solid;
 	border-right:1px solid;
 }
+
+/*teststuff*/
+div.forum div.statistics span.admin,
+div.forum div.statistics a.admin
+{
+	color:#AA0000;
+	font-weight:bold;
+}
+
+div.forum div.statistics span.mod,
+div.forum div.statistics a.mod
+{
+	color:#019e17;
+	font-weight:bold;
+}
+
+div.forum div.statistics span.minimod,
+div.forum div.statistics a.minimod
+{
+	color:#ce7c00;
+	font-weight:bold;
+}
+
+div.forum div.statistics span.forummod,
+div.forum div.statistics a.forummod
+{
+	color:#105289;
+	font-weight:bold;
+}
+
+div.forum div.statistics span.legend
+{
+	font-style:italic;
+}
