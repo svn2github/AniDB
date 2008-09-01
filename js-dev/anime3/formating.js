@@ -622,6 +622,7 @@ function init_formating() {
 	
 	// This will create the formating icons for each TextArea
 	for (var i = 0; i < textAreas.length; i++) {
+		if (textArea.className.indexOf('norte') >= 0) continue;
 		var textArea = textAreas[i];
 		textArea.id = "textArea_"+i;
 		if (currentFMode == 2) textArea.style.display = "none";
