@@ -20,6 +20,7 @@ var msgListAction = null;
 var msgNewAction = null;
 var msgListH1 = null;
 var msgNewH1 = null;
+var oldMsgTable = null;
 
 /* Function that fetches buddylist data */
 function fetchData() {
@@ -178,6 +179,15 @@ function selectMessages() {
 function createReply() {
 	var quoted = false;
 	if (this.name == 'msg.replyq') quoted = true;
+	// alter the header
+	var h1 = document.getElementById('layout-content').getElementsByTagName('h1')[0];
+	if (!h1) return;
+	msgListH1 = h1.cloneNode(true);
+	if (!msgNewH1) {
+		msgNewH1 = document.createElement('h1');
+		msgNewH1.appendChild(document.createTextNode('New Message'));
+	}
+	h1.parentNode.replaceChild(msgNewH1,h1);
 	// fetched required data
 	var divA = getElementsByClassName(document.getElementsByTagName('div'),'g_section message entity',true)[0];
 	divA.className = divA.className.replace('entity','form');
@@ -202,9 +212,11 @@ function createReply() {
 	}
 	msgBODYval.parentNode.removeChild(msgBODYval);
 	var div = getElementsByClassName(document.getElementsByTagName('div'),'g_definitionlist message',true)[0];
+	if (!div) return;
+	div.className = 'g_section message form forum';
 	var table = div.getElementsByTagName('table')[0];
-	createMessageInput(msgToValue,msgTitleValue,msgBodyValue);
-	table.parentNode.replaceChild(msgNewTable,table);
+	div.replaceChild(createMessageInput(msgToValue,msgTitleValue,msgBodyValue),table);
+	div.appendChild(createMessageActions());
 	if (init_formating) init_formating(); // should be loaded but you never know
 }
 
@@ -222,23 +234,16 @@ function createNewMessage() {
 	var div = getElementsByClassName(document.getElementsByTagName('div'),'g_section message',true)[0];
 	if (!div) return;
 	var msg_all = div.parentNode;
-	div.className = 'g_section message form';
+	div.className = 'g_section message form forum';
 	var form = document.createElement('form');
 	form.method = 'post';
 	form.action = 'animedb.pl';
 	var fieldSet = document.createElement('fieldset');
-	var ishow = createTextInput('show',null,false,true,null);
-	ishow.value = "msg";
-	fieldSet.appendChild(ishow);
-	var ido = createTextInput('do',null,false,true,null);
-	ido.value = "send";
-	fieldSet.appendChild(ido);
+	fieldSet.appendChild(createTextInput('show',null,false,true,null,'msg'));
+	fieldSet.appendChild(createTextInput('do',null,false,true,null,'send'));
 	form.appendChild(fieldSet);
-	var deflist = document.createElement('div');
-	deflist.className = 'g_definitionlist message';
-	createMessageInput();
-	deflist.appendChild(msgNewTable);
-	form.appendChild(deflist);
+	form.appendChild(createMessageInput());
+	form.appendChild(createMessageActions());
 	while(div.childNodes.length) div.removeChild(div.firstChild);
 	div.appendChild(form);
 	// reset action list
@@ -276,10 +281,24 @@ function createNewMessageAction() {
 	var a = document.createElement('a');
 	a.onclick = showMsgList;
 	a.appendChild(document.createTextNode('Back'));
+	a.style.cursor = 'pointer';
 	li.appendChild(a);
 	ul.appendChild(li);
 	msgNewAction = ul;
 	return msgNewAction;
+}
+
+/* Function that creates corners
+ * @param isTop true if we are doing the top corner */
+function createCorners(isTop) {
+	var corners = document.createElement('b');
+	corners.className = 'r'+(isTop ? 'top' : 'bottom');
+	for (var i = 1; i < 5; i++) {
+		var corner = document.createElement('b');
+		corner.className = 'r'+i;
+		corners.appendChild(corner);
+	}
+	return corners;
 }
 
 /* Function that creates the new message table
@@ -288,53 +307,101 @@ function createNewMessageAction() {
  * @param msgBodyValue Message contents
  */
 function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
-	var table = document.createElement('table');
-	var caption = document.createElement('caption');
-	caption.appendChild(document.createTextNode('New Message'));
-	table.appendChild(caption);
-	var tbody = document.createElement('tbody');
-	var row = document.createElement('tr');
-	row.className = 'g_odd to';
-	createHeader(row, 'field', 'To', null);
-	input_msgTO = createTextInput('msg.to','20',false,false,'16');
+	var div = document.createElement('div');
+	div.className = 'posting-box'
+	div.appendChild(createCorners(true));
+	var innerDiv = document.createElement('div');
+	innerDiv.className = 'inner';
+	var dl = document.createElement('dl');
+	dl.className = 'to';
+	createDT(dl,null,'To:');
+	input_msgTO = createTextInput('msg.to','20',false,false,'16',(msgToValue) ? msgToValue : '');
 	input_msgTO.tabIndex = 1;
-	if (msgToValue) input_msgTO.value = msgToValue;
-	var cell = createCell(null, 'value', input_msgTO, null);
+	var dd = createDD(null, null, input_msgTO);
 	var curItem = {'id':"Buddy",'desc':"Buddy list",'text':"Buddy",'onclick':showBuddyList,'active':false};
-	createLocalButton(cell,'buddy',curItem);
-	var i = document.createElement('I');
-	i.appendChild(document.createTextNode(' (username or id)'));
-	cell.appendChild(i);
-	row.appendChild(cell);
-	tbody.appendChild(row);
-	row = document.createElement('tr');
-	row.className = 'title';
-	createHeader(row, 'field', 'Title', null);
-	var msgTitle = createTextInput('msg.title','80',false,false,'50');
+	createLocalButton(dd,'buddy',curItem);
+	var i = document.createElement('i');
+	i.appendChild(document.createTextNode(' (username or uid)'));
+	dd.appendChild(i);
+	dl.appendChild(dd);
+	innerDiv.appendChild(dl);
+	dl = document.createElement('dl');
+	dl.className = 'subject';
+	createDT(dl,null,'Subject:');
+	var msgTitle = createTextInput('msg.title','80',false,false,'50',(msgTitleValue) ? msgTitleValue : '');
 	msgTitle.tabIndex = 2;
-	if (msgTitleValue) msgTitle.value = msgTitleValue;
-	createCell(row, 'value', msgTitle, null);
-	tbody.appendChild(row);
-	row = document.createElement('tr');
-	row.className = 'g_odd body';
-	createHeader(row, 'field', 'Body', null);
+	createDD(dl, null, msgTitle);
+	innerDiv.appendChild(dl);
+	// Create the stupid smiley-box
+	var smileyBox = document.createElement('div');
+	smileyBox.className = 'smiley-box icons';
+	smileyBox.id = 'smiley-box';
+	var h3 = document.createElement('h3');
+	h3.appendChild(document.createTextNode('Smilies'));
+	smileyBox.appendChild(h3);
+	var smileys = [
+		{'id':"01",'name':"very_happy",'title':"very happy",'text':":grin:"},
+		{'id':"02",'name':"happy",'title':"happy",'text':':smile:'},
+		{'id':"03",'name':"sad",'title':"sad",'text':':sad:'},
+		{'id':"04",'name':"shock",'title':"shocked",'text':':shock:'},
+		{'id':"05",'name':"confused",'title':"confused",'text':':S'},
+		{'id':"06",'name':"cool",'title':"cool",'text':':cool:'},
+		{'id':"07",'name':"laughing",'title':"laughing",'text':':lol:'},
+		{'id':"08",'name':"razz",'title':"razz",'text':':razz:'},
+		{'id':"09",'name':"embarassed",'title':"embarassed",'text':':oops:'},
+		{'id':"10",'name':"crying",'title':"crying or very sad",'text':':cry:'},
+		{'id':"11",'name':"mad",'title':"evil or very mad",'text':':evil:'},
+		{'id':"12",'name':"twisted",'title':"twisted evil",'text':':twisted:'},
+		{'id':"13",'name':"rolleyes",'title':"rolling eyes",'text':':roll:'},
+		{'id':"14",'name':"wink",'title':"wink",'text':':wink:'},
+		{'id':"15",'name':"neutral",'title':"neutral",'text':':neutral:'},
+		{'id':"16",'name':"sweating",'title':"upset, sighing",'text':'-_-'},
+		{'id':"17",'name':"undecided",'title':"undecided",'text':':/'},
+		{'id':"18",'name':"thinking",'title':"thinking",'text':'O_o'},
+		{'id':"19",'name':"wtf",'title':"huh?/wtf?",'text':'o_O'},
+		{'id':"20",'name':"tehehe",'title':"tehehe",'text':'-.-'},
+		{'id':"21",'name':"sweatdrop",'title':"sweat drop",'text':'^_^'},
+		{'id':"22",'name':"disgusted",'title':"in pain/frustration",'text':'>_<'},
+		{'id':"23",'name':"surprised",'title':"surprised",'text':':O'},
+		{'id':"24",'name':"dead",'title':"dead",'text':'x_X'},
+		{'id':"25",'name':"nosebleed",'title':"nosebleed",'text':':nosebleed:'},
+		{'id':"26",'name':"brickwall",'title':"bullheaded",'text':':brickwall:'},
+		{'id':"27",'name':"zzz",'title':"sleepy",'text':':zZz:'},
+		{'id':"28",'name':"mymaster",'title':"my master",'text':':mymaster:'},
+		{'id':"29",'name':"thumbup",'title':"thumb up",'text':':thumbup:'},
+		{'id':"30",'name':"angel",'title':"innocent",'text':':angel:'},
+		{'id':"31",'name':"baka",'title':"idiot",'text':':baka:'}
+	];
+	for (var i = 0; i < smileys.length; i++)
+		createIcon(smileyBox, smileys[i]['text'], 'removeme', null, smileys[i]['title'], 'i_smiley_'+smileys[i]['name']);
+	innerDiv.appendChild(smileyBox);
+	// textarea
+	var messageBox = document.createElement('div');
+	messageBox.className = 'message-box';
 	var msgBody = document.createElement('textarea');
 	msgBody.tabIndex = 3;
-	msgBody.rows = "15";
-	msgBody.cols = "60";
 	msgBody.name = msgBody.id = "msg.body";
 	if (msgBodyValue) msgBody.appendChild(document.createTextNode(msgBodyValue));
-	createCell(row, 'value', msgBody, null);
-	tbody.appendChild(row);
-	row = document.createElement('tr');
-	row.className = 'action'; 
-	cell = createCell(null, 'value', createButton('do','msg.send',false,'Send','submit'), null);
-	cell.colSpan = "2";
-	row.appendChild(cell);
-	tbody.appendChild(row);
-	table.appendChild(tbody);
-	msgNewTable = table;
-	return msgNewTable;
+	messageBox.appendChild(msgBody);
+	innerDiv.appendChild(messageBox);
+	div.appendChild(innerDiv);
+	div.appendChild(createCorners(false));
+	return div;
+}
+
+/* function that creates message actions */
+function createMessageActions() {
+	var div = document.createElement('div');
+	div.className = 'submit-box'
+	div.appendChild(createCorners(true));
+	var innerDiv = document.createElement('div');
+	innerDiv.className = 'inner';
+	var p = document.createElement('p');
+	p.appendChild(createButton('do','msg.send',false,'Send','submit'));
+	innerDiv.appendChild(p);
+	div.appendChild(innerDiv);
+	div.appendChild(createCorners(false));
+	return div;
 }
 
 /* Function that updates the message list */

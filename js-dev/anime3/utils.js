@@ -235,6 +235,18 @@ function createHeader(parentNode, className, text, abbr, anidbSort, colSpan) {
 	if (parentNode != null) parentNode.appendChild(th);
 	else return th;
 }
+function createDT(parentNode, className, text, abbr) {
+	var dt = document.createElement('dt');
+	if (className) dt.className = className;
+	if (abbr != null) {
+		var abbreviation = document.createElement('abbr');
+		abbreviation.title = abbr;
+		if (text != null) abbreviation.appendChild(document.createTextNode(text));
+		dt.appendChild(abbreviation);
+	} else if (text != null) dt.appendChild(document.createTextNode(text));
+	if (parentNode) parentNode.appendChild(dt);
+	else return dt;
+}
 
 /* This function creates a simple cell with an optional element
  * @param parentNode The parent node (or null if you want to return the object)
@@ -249,6 +261,13 @@ function createCell(parentNode, className, someElement, anidbSort, colSpan) {
 	if (colSpan != null && colSpan > 1) td.colSpan = colSpan;
 	if (parentNode != null) parentNode.appendChild(td);
 	else return td;
+}
+function createDD(parentNode, className, someElement) {
+	var dd = document.createElement('dd');
+	if (className != null) dd.className = className;
+	if (someElement != null) dd.appendChild(someElement);
+	if (parentNode != null) parentNode.appendChild(dd);
+	else return dd;
 }
 
 /* Creates icons
