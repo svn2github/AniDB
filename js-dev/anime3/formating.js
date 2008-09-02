@@ -21,7 +21,9 @@ var isIE = (document.selection != undefined && window.getSelection == undefined)
 var isFF = (document.selection == undefined && window.getSelection != undefined) ? true : false;
 var isOP = (document.selection != undefined && window.getSelection != undefined) ? true : false;
 var isWK = (navigator.userAgent.toLowerCase().indexOf('applewebkit') >= 0);
+if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) isIE = true; // new ie's work for everything
 var currentFMode = CookieGet('currentFMode') || 2;
+if (isWK) currentFMode = 1;
 
 /* Change view mode
  * @param type Type of view mode (source,wysiwyg)
@@ -660,7 +662,12 @@ function init_formating() {
 		//textArea.parentNode.insertBefore(div,textArea);
 		if (currentFMode == 2) {
 			// Create iframe which will be used for rich text editing
+			var backgroundColor = getStyleInformation(textArea,'backgroundColor');
+			var color = getStyleInformation(textArea,'color');
+			var fontFamily = getStyleInformation(textArea,'fontFamily');
+			var fontSize = getStyleInformation(textArea,'fontSize');
 			var iframe = document.createElement('iframe');
+			
 			iframe.frameborder = 0;
 			iframe.id = "wysiwyg_" + i;
 			iframe.style.height = wysiwygHeight + "em";
@@ -676,6 +683,10 @@ function init_formating() {
 			doc.close();
 			// Make the iframe editable in both Mozilla and IE
 			doc.body.contentEditable = true;
+			if (color && color != '') doc.body.style.color = color;
+			if (fontFamily && fontFamily != '') doc.body.style.fontFamily = fontFamily;
+			if (!isIE && fontSize && fontSize != '') doc.body.style.fontSize = fontSize;
+			if (backgroundColor && backgroundColor != '') doc.body.style.backgroundColor = backgroundColor;
 			doc.designMode = "on";
 			// need to activate this on firefox
 			// this is a stupid detection method but it works, 

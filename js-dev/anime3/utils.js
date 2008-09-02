@@ -124,6 +124,30 @@ function cTimeDateHour(data) {
 
 // DOM NODE FUNCTIONS //
 
+/* returns computed style information about a specific element
+ * @param element where to get attributes
+ * @param attribute what to get 
+ */
+function getStyleInformation(element,attribute) {
+	if (!element) return;
+	var useCurrentStyle = (element.currentStyle) ? true : false;
+	var useGetCumputedStyle = (window.getComputedStyle) ? true : false;
+	if (!attribute) {
+		if (useGetCumputedStyle)
+			return window.getComputedStyle(element,null);
+		else if (useCurrentStyle)
+			return element.currentStyle;
+		else return '';
+	} else {
+		if (useGetCumputedStyle)
+			return window.getComputedStyle(element,null)[attribute];
+		else if (useCurrentStyle)
+			return element.currentStyle[attribute];
+		else return '';
+	}
+	return null;
+}
+
 /* Returns the nodeValue of a given node
  * @param node The node where to extract information
  * @return String containing node data
@@ -566,8 +590,9 @@ function showAlert(func, process, pNode, cNode) {
  */
 function errorAlert(funcName,whereIs) {
 	if (seeDebug) {
-		alert('There was an error while processing '+funcName+' ('+whereIs+')'+
-					'\nPlease inform an AniDB mod about this error.');
+		alert('There was an error while processing '+funcName+'.'+
+			'\nDetails: '+whereIs+
+			'\nPlease inform an AniDB mod about this error.');
 	}
 	return;
 }
