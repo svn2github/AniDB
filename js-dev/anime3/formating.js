@@ -23,7 +23,7 @@ var isOP = (document.selection != undefined && window.getSelection != undefined)
 var isWK = (navigator.userAgent.toLowerCase().indexOf('applewebkit') >= 0);
 if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) isIE = true; // new ie's work for everything
 var currentFMode = CookieGet('currentFMode') || 2;
-if (isWK) currentFMode = 1;
+if (isWK && currentFMode == 2) currentFMode = 1;
 
 /* Change view mode
  * @param type Type of view mode (source,wysiwyg)

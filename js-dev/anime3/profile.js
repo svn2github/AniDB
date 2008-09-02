@@ -116,7 +116,7 @@ function changeStyle() {
 	// else cssurl.style.display = "none";
 	var curStyle = styleList[style_index];
 	if (curStyle.path != "none") {
-		if (curStyle.path == "") cssurl.value = base_url+"css/"+curStyle.name+"/"+curStyle.name+".css";
+		if (curStyle.path == "") cssurl.value = base_url+"css"+(window.location.hostname.indexOf('dev.anidb') >= 0) ? "-dev" : "")+"/"+curStyle.name+"/"+curStyle.name+".css";
 		else cssurl.value = curStyle.path;
 	} else cssurl.value = "";
 	updateCurrentStyle();
