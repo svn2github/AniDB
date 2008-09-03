@@ -5,6 +5,7 @@
  * version 1.2 (18.06.2007) - Previous version
  * version 2.0 (20.04.2008) - Rather full support for every major browser Firefox, IE, Opera and Safari
  * version 2.1 (27.07.2008) - Introduction of Assisted Mode
+ * version 2.2 (02.09.2008) - Rewrote somestuff
  */
 
 // GLOBALS
@@ -20,7 +21,7 @@ var current_ed; // current editor
 var isIE = (document.selection != undefined && window.getSelection == undefined) ? true : false;
 var isFF = (document.selection == undefined && window.getSelection != undefined) ? true : false;
 var isOP = (document.selection != undefined && window.getSelection != undefined) ? true : false;
-var isWK = (navigator.userAgent.toLowerCase().indexOf('applewebkit') >= 0);
+var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
 if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) isIE = true; // new ie's work for everything
 var currentFMode = CookieGet('currentFMode') || 2;
 if (isWK && currentFMode == 2) currentFMode = 1;
@@ -129,8 +130,6 @@ function createLocalButton(node,item,curItem) {
 	button.alt = item;
 	if (curItem['accesskey']) button.accessKey = curItem['accesskey'];
 	if (curItem['accesskey']) button.setAttribute('accessKey',curItem['accesskey']);
-	button.onmouseover = buttonMouseOver;
-	button.onmouseout = buttonMouseOut;
 	try {
 		if (curItem['text']) button.appendChild(document.createTextNode(curItem['text']));
 	} catch(e) { // making ie work
@@ -157,16 +156,6 @@ function buttonMouseFReplace(node,type) {
 	else if (node.className.indexOf('f_mouseout') > 0)  node.className = node.className.replace('f_mouseout','replaceme');
 	else node.className += ' replaceme';
 	return;
-}
-/* Function that adds the mouseover class */
-function buttonMouseOver() {
-	buttonMouseFReplace(this);
-	buttonMouseReplace(this,'f_mouseover');
-}
-/* Function that adds the mouseout class */
-function buttonMouseOut() {
-	buttonMouseFReplace(this);
-	buttonMouseReplace(this,'f_mouseout');
 }
 
 /* Function that inserts text or Nodes at the current cursor position/selection
@@ -441,7 +430,7 @@ function textFormatMagic(id,fTA) {
 /* Function that inserts RTE commands */
 function make () {
 	var start = this.className.indexOf('f_button f_')+11;
-	var formatingFunc = this.className.substring(start,this.className.indexOf(' ',start));
+	var formatingFunc = this.className.substring(start);
 	var fMap = FunctionMap[formatingFunc];
 	allowOut = false;
 	var execID = fMap.id;
@@ -517,6 +506,7 @@ function convert_input(str) {
 	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)+?\]/mgi,'</$1>');
 	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
 	str = str.replace(/\[br\]/mgi,'<br />');
+	str = str.replace(/\n/mgi,'<br />');
 	str = str.replace(/\n/mgi,'');
 	/* IE and opera support */
 	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
@@ -598,14 +588,106 @@ function previewDoc(myField) {
 	previewWindow.document.close();
 }
 
+function changeFMode() {
+	var id = Number(this.parentNode.id.substring(6));
+	var mode = Number(this.className.substring(6,7));
+	if (mode == currentFMode) return;
+	// clear selected
+	var lis = this.parentNode.getElementsByTagName('li');
+	for (var i = 0; i < lis.length; i++) lis[i].className = lis[i].className.replace(' selected','');
+	this.className += ' selected';
+	var controls = document.getElementById('controls_'+id);
+	var iframe = document.getElementById("wysiwyg_" + id);
+	var fTA = document.getElementById("textArea_"+id);
+	if (controls) {
+		if (mode == 0) controls.style.display = 'none';
+		else {
+			var newControls = createControls(null, id, mode);
+			controls.parentNode.replaceChild(newControls,controls);
+		}
+	}
+	if (iframe) iframe.style.display = (mode != 2 ? 'none' : '');
+	if (currentFMode == 2) {
+		updateTextArea(id);
+		fTA.value = fTA.value.replace(/\[br\]/mgi,'\n');
+	} else {
+		var content = convert_input(fTA.value);
+		iframe.contentWindow.document.body.innerHTML = content;
+	}
+	if (fTA) fTA.style.display = (mode != 2 ? '' : 'none');
+	currentFMode = mode;
+}
+
+/* Function that creates the controls */
+function createControls(parentNode, id, mode) {
+	if (!mode) mode = currentFMode;
+	buttonList = {'0':[],
+				  '1':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','insertlistitem','spoiler','link'],
+				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','spoiler','viewsource','viewrte','cleansource','link']};
+
+	var div = document.createElement('div');
+	div.className = 'format-buttons f_controls';
+	div.id = 'controls_'+ id;
+	var buttons = buttonList[mode];
+	for (var b = 0; b < buttons.length; b++)
+	createLocalButton(div,buttons[b],FunctionMap[buttons[b]]);
+	createSelect(div,OptionsMap,'f_links');
+	var text = getElementsByClassName(div.getElementsByTagName('input'),'f_viewrte',true)[0];
+	if (text) text.style.display = 'none';
+	if (parentNode) parentNode.appendChild(div);
+	else return div;
+}
+
+/* Function that creates the RTE iframe */
+function createIframe(parentNode, id, textArea) {
+	var backgroundColor = getStyleInformation(textArea,'backgroundColor');
+	var color = getStyleInformation(textArea,'color');
+	var fontFamily = getStyleInformation(textArea,'fontFamily');
+	var fontSize = getStyleInformation(textArea,'fontSize');
+	var border = getStyleInformation(textArea,'border');
+
+	var iframe = document.createElement('iframe');
+	iframe.frameborder = 0;
+	iframe.id = "wysiwyg_" + id;
+	iframe.style.height = wysiwygHeight;
+	iframe.style.width = wysiwygWidth;
+	iframe.style.display = '';
+	if (iframe.style.border) iframe.style.border = border;
+	if (backgroundColor) iframe.style.backgroundColor = backgroundColor;
+	if (!parentNode) textArea.parentNode.insertBefore(iframe,textArea);
+	else parentNode.insertBefore(iframe, textArea);
+	
+	// Pass the textarea's existing text over to the content variable
+	var content = convert_input(textArea.value);
+	var doc = iframe.contentWindow.document;
+	doc.open();
+	doc.write(content);
+	doc.close();
+	// Make the iframe editable in both Mozilla and IE
+	doc.body.contentEditable = true;
+	if (color && color != '') doc.body.style.color = color;
+	if (fontFamily && fontFamily != '') doc.body.style.fontFamily = fontFamily;
+	if (!isIE && fontSize && fontSize != '') doc.body.style.fontSize = fontSize;
+	if (backgroundColor && backgroundColor != '') doc.body.style.backgroundColor = backgroundColor;
+	doc.body.style.margin = '2px';
+	doc.designMode = "on";
+	try { if (document.queryCommandSupported('styleWithCSS')) true; } 
+	catch(e) { 
+		try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
+		catch (e) {  } // FF 1.5-
+	}
+	return iframe;
+}
+
 /* Initializes RTE's */
 function init_formating() {
-	// detection rar wants for his shinny firefox 1.0.7
-	if (!document.getElementsByTagName) return; // Can't do a thing..
-	if (!document.designMode) return;
+	var errorMsg = '';
+	if (!document.getElementsByTagName) errorMsg = 'document.getElementsByTagName: fail\n';
+	if (!document.designMode) errorMsg += 'document.designMode: fail\n';
 	var textAreas = document.getElementsByTagName('textarea');
-	if (!textAreas.length) return; // Still no nodes..
-
+	if (!textAreas.length) errorMsg += 'textAreas: fail'; // Still no nodes..
+	if (errorMsg != '') { errorAlert('init_formating',errorMsg); return; }
+	
 	FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'accesskey':"b",'text':"B",'start':"[b]",'end':"[/b]",'active':false},
 	               'italic':{'id':"Italic",'desc':"Italic text: [i]text[/i] (alt+i)",'accesskey':"i",'text':"I",'start':"[i]",'end':"[/i]",'active':false},
 	               'underline':{'id':"Underline",'desc':"Underline text: [u]text[/u] (alt+u)",'accesskey':"u",'text':"U",'start':"[u]",'end':"[/u]",'active':false},
@@ -621,88 +703,49 @@ function init_formating() {
 	               'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"LNK",'start':"[",'end':"]",'active':false}};
 	OptionsMap = new Array('anime','ep','file','group','producer','producers','user','mylist','votes','creq','review','titles','genres',
 							'cats','relations','groupcmts','reviews','tracker','wiki','forum.board','forum.topic','forum.post');
+
 	
 	// This will create the formating icons for each TextArea
 	for (var i = 0; i < textAreas.length; i++) {
 		var textArea = textAreas[i];
 		if (textArea.className.indexOf('norte') >= 0) continue;
 		textArea.id = "textArea_"+i;
+		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
+		if (smileyBox) smileyBox.id = 'smiley-box_'+i;
+		wysiwygHeight = getStyleInformation(textArea,'height');
+		wysiwygWidth = getStyleInformation(textArea,'width');
 		if (currentFMode == 2) textArea.style.display = "none";
 		var fTA = textArea.form;
-		var div = document.createElement('div');
-		div.className = 'format-buttons f_controls';
-		div.id = 'controls_'+ i;
-		// yes, yes, i know, blame IE
-		createLocalButton(div,'bold',FunctionMap['bold']);
-		createLocalButton(div,'italic',FunctionMap['italic']);
-		createLocalButton(div,'underline',FunctionMap['underline']);
-		createLocalButton(div,'strikethrough',FunctionMap['strikethrough']);
-		createLocalButton(div,'insertorderedlist',FunctionMap['insertorderedlist']);
-		createLocalButton(div,'insertunorderedlist',FunctionMap['insertunorderedlist']);
-		if (currentFMode == 1) createLocalButton(div,'insertlistitem',FunctionMap['insertlistitem']);
-		createLocalButton(div,'spoiler',FunctionMap['spoiler']);
-		if (currentFMode == 2) {
-			createLocalButton(div,'viewsource',FunctionMap['viewsource']);
-			createLocalButton(div,'viewrte',FunctionMap['viewrte']);
-			createLocalButton(div,'cleansource',FunctionMap['cleansource']);
+		
+		// create and append the controls
+		var controls = createControls(null, i);
+		if (currentFMode == 0) controls.style.display = 'none';
+		textArea.parentNode.parentNode.insertBefore(controls,(smileyBox ? smileyBox : textArea));
+
+		// Create iframe which will be used for rich text editing
+		var iframe = createIframe(null, i, textArea);
+		if (currentFMode != 2) iframe.style.display = 'none';
+		
+		// create the mode change ul
+		var ul = document.createElement('ul');
+		ul.className = 'format-modes';
+		ul.id = 'fmode_'+i;
+		var options = ["Off","Assisted","Visual"];
+		for (var o = 0; o < options.length; o++) {
+			var li = document.createElement('li');
+			li.className = 'fmode_'+o;
+			if (o == currentFMode) li.className += ' selected';
+			li.onclick = changeFMode;
+			li.appendChild(document.createTextNode(options[o]));
+			ul.appendChild(li);
 		}
-		createLocalButton(div,'preview',FunctionMap['preview']);
-		createLocalButton(div,'link',FunctionMap['link']);
-		createSelect(div,OptionsMap,'f_links');
-		var html = getElementsByClassName(div.getElementsByTagName('input'),'f_viewsource',true)[0];
-		var text = getElementsByClassName(div.getElementsByTagName('input'),'f_viewrte',true)[0];
-		var clean = getElementsByClassName(div.getElementsByTagName('input'),'f_cleansource',true)[0];
-		var preview = getElementsByClassName(div.getElementsByTagName('input'),'f_preview',true)[0];
-		if (html) html.style.display = ''; 
-		if (text) text.style.display = 'none';
-		if (clean) clean.style.display = '';
-		if (preview) preview.style.display = '';
-		var insertHere = document.getElementById('smiley-box');
-		insertHere.parentNode.insertBefore(div,insertHere);
-		//textArea.parentNode.insertBefore(div,textArea);
-		if (currentFMode == 2) {
-			// Create iframe which will be used for rich text editing
-			var backgroundColor = getStyleInformation(textArea,'backgroundColor');
-			var color = getStyleInformation(textArea,'color');
-			var fontFamily = getStyleInformation(textArea,'fontFamily');
-			var fontSize = getStyleInformation(textArea,'fontSize');
-			var iframe = document.createElement('iframe');
-			
-			iframe.frameborder = 0;
-			iframe.id = "wysiwyg_" + i;
-			iframe.style.height = wysiwygHeight + "em";
-			iframe.style.width = wysiwygWidth + "%";
-			iframe.borderWidth = 0;
-			textArea.parentNode.insertBefore(iframe,textArea);
-			// Pass the textarea's existing text over to the content variable
-			var content = convert_input(textArea.value);
-			var doc = iframe.contentWindow.document;
-			// Write the textarea's content into the iframe
-			doc.open();
-			doc.write(content);
-			doc.close();
-			// Make the iframe editable in both Mozilla and IE
-			doc.body.contentEditable = true;
-			if (color && color != '') doc.body.style.color = color;
-			if (fontFamily && fontFamily != '') doc.body.style.fontFamily = fontFamily;
-			if (!isIE && fontSize && fontSize != '') doc.body.style.fontSize = fontSize;
-			if (backgroundColor && backgroundColor != '') doc.body.style.backgroundColor = backgroundColor;
-			doc.designMode = "on";
-			// need to activate this on firefox
-			// this is a stupid detection method but it works, 
-			// all browsers support queryCommandSupported (at least there's native code for it)
-			// but only IE and Opera return false for not supported Firefox only styleWithCSS
-			// Firefox trows, you have to love this kind of stuff or else you will go mad
-			try { if (document.queryCommandSupported('styleWithCSS')) true; } 
-			catch(e) { 
-				try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
-				catch (e) {  } // FF 1.5-
-			}
-		}
+		textArea.parentNode.insertBefore(ul,(currentFMode != 2) ? textArea : iframe);
+
+		// Update inputs
 		var inputs = fTA.getElementsByTagName('input');
 		for (var s = 0; s < inputs.length; s++) {
 			var input = inputs[s];
-			if (input.type != 'submit') continue;
+			if (input.type.toLowerCase() != 'submit') continue;
 			input.onclick = updateTextAreaCK;
 			break;
 		}
@@ -712,6 +755,8 @@ function init_formating() {
 function prepPage() {
 	if (!currentFMode) return; // disabled
 	uriObj = parseURI(); // update the uriObj
+	init_formating();
+	/*
 	if (!uriObj['show']) return; // go away evil page!
 	switch (uriObj['show']) { // list of pages where to apply formating stuff
 		case 'animeatt':
@@ -730,6 +775,7 @@ function prepPage() {
 			break;
 		default: return;
 	}
+	*/
 }
 
 //window.onload = prepPage;

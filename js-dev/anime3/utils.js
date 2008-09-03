@@ -398,10 +398,11 @@ function createBasicButton(name,value,type) {
 	return button;
 }
 
-function createButton(name,id,disabled,value,type) {
+function createButton(name,id,disabled,value,type,onclick) {
 	var button = createBasicButton(name,value,type);
 	if (id && id != '') button.id = id;
 	if (disabled != null) button.disabled = (disabled);
+	if (onclick != null) button.onclick = onclick;
 	return button;
 }
 
