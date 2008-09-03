@@ -613,7 +613,6 @@ function search() {
 		
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
 			lastSearch = this.value;
-			
 			switch(type) {
 				case "grouplist":
 					var url = 'animedb.pl?show=xml&t=groupsearch&search=';
@@ -628,20 +627,14 @@ function search() {
 					var element = 'producer';
 					break;
 			}
-			
 			xhttpRequestFetch(xhttpRequest(), url + encodeURI(this.value), function(xml) {
 				var root = xml.getElementsByTagName('root').item(0);
 				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
 				searchData = root.getElementsByTagName(element);
 				printTags();
 			});
-		} else {
-			// Print matched
-			printTags();
-		}
-	} else {
-		target.style.display = "none";
-	}
+		} else printTags(); // Print matched
+	} else target.style.display = "none";
 }
 
 function printTags() {
@@ -653,7 +646,6 @@ function printTags() {
 			target.removeChild(target.firstChild);       
 		} 
 	}
-	
 	// Loop search result and filter
 	var i = 0;
 	var height = 0;
@@ -680,6 +672,8 @@ function printTags() {
 				search.value = tag;
 				target.style.display = "none";
 			}
+			result.ondblclick = function() { this.onclick(); }
+			result.onmousedown = function() { this.onclick(); }
 			target.appendChild(result);
 			i++;
 		}

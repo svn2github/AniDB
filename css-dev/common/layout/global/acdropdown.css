@@ -14,6 +14,8 @@ ul.acdropdown li {
 	cursor: pointer;
 }
 
+ul.acdropdown li.selected,
 ul.acdropdown li:hover {
-	background-color: rgb(230, 230, 230);
+	color:#FFFFFF;
+	background:#5e81bc;
 }

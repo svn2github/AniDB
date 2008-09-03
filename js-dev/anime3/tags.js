@@ -65,6 +65,8 @@ function showResults() {
 			radioBox2.checked = !tag.is_spoiler;
 			resultsDiv.style.display = 'none';
 		}
+		span.ondblclick = function() { this.onclick(); };
+		span.onmousedown = function() { this.onclick(); };
 		div.appendChild(span);
 	}
 	if(tags.length >= 8) {
