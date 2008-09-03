@@ -705,7 +705,6 @@ function createIframe(parentNode, id, textArea) {
 	iframe.id = "wysiwyg_" + id;
 	iframe.style.height = wysiwygHeight;
 	iframe.style.width = wysiwygWidth;
-	iframe.style.display = 'none';
 	if (iframe.style.border) iframe.style.border = border;
 	if (backgroundColor) iframe.style.backgroundColor = backgroundColor;
 	if (!parentNode) textArea.parentNode.insertBefore(iframe,textArea);
@@ -725,6 +724,7 @@ function createIframe(parentNode, id, textArea) {
 	if (backgroundColor && backgroundColor != '') doc.body.style.backgroundColor = backgroundColor;
 	doc.body.style.margin = '2px';
 	doc.designMode = "on";
+	iframe.style.display = 'none';
 	try { if (document.queryCommandSupported('styleWithCSS')) true; } 
 	catch(e) { 
 		try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
