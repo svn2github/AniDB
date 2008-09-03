@@ -603,8 +603,7 @@ var searchData = [];
 function search() {
 	var target = document.getElementById("tagsearch");
 	var type = this.parentNode.getElementsByTagName("select")[0].value;
-	
-	
+
 	if(this.value.length >= 3 && (type == "animetag" || type == "grouplist" || type == "producerlist")) {
 		// Check if a new search is necessary
 		var ll = lastSearch.length
@@ -633,7 +632,6 @@ function search() {
 				var root = xml.getElementsByTagName('root').item(0);
 				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
 				searchData = root.getElementsByTagName(element);
-				
 				printTags();
 			});
 		} else {
@@ -662,12 +660,22 @@ function printTags() {
 		var tag = searchData[n].getAttribute("name");
 		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
 			var result = document.createElement("li");
-				result.appendChild(document.createTextNode(tag));
-				result.onclick = function() {
-					search.value = this.firstChild.data;
-					target.style.display = "none";
-				}
-			
+			// do a bit of highlighting //
+			var b = document.createElement('b');
+			var si = tag.toLowerCase().indexOf(search.value.toLowerCase());
+			if (si >= 0) {
+				var firstBlock = document.createTextNode(tag.substring(0,si));
+				var middleBlock = document.createTextNode(tag.substr(si,search.value.length));
+				var lastBlock = document.createTextNode(tag.substring(si+search.value.length,tag.length));
+				result.appendChild(firstBlock);
+				b.appendChild(middleBlock);
+				result.appendChild(b);
+				result.appendChild(lastBlock);
+			} else continue;
+			result.onclick = function() {
+				search.value = this.firstChild.data;
+				target.style.display = "none";
+			}
 			target.appendChild(result);
 			i++;
 		}
@@ -681,12 +689,8 @@ function printTags() {
 	
 	if(i >= 8) {
 		height = target.firstChild.offsetHeight * 8;
-		if(height > 0) {
-			target.style.height = height + "px";
-		}
-	} else {
-		target.style.height = "auto";
-	}
+		if(height > 0) target.style.height = height + "px";
+	} else target.style.height = "auto";
 	
 	// Don't display if tag is matched or no tags are matched
 	if(i == 0 || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())) {
@@ -702,6 +706,7 @@ addLoadEvent(function() {
 	if(target) {
 		// Find search box and bind stuff to it
 		var textfield = target.getElementsByTagName("input")[0];
+		textfield.id = 'adb.search';
 		textfield.onkeyup = search;
 		textfield.onfocus = search;
 		textfield.onchange = function() {
@@ -712,9 +717,7 @@ addLoadEvent(function() {
 		var dropdown = target.getElementsByTagName("select")[0];
 		if(dropdown) {
 			function getSearchTypeChange(value) {
-				if(value == undefined)
-					value = this.value
-				
+				if(value == undefined) value = this.value
 				switch(value) {
 					case "animetag":
 					case "grouplist":
@@ -728,7 +731,7 @@ addLoadEvent(function() {
 			dropdown.onchange = getSearchTypeChange;
 			getSearchTypeChange(dropdown.value);
 		}
-		
+
 		// Spawn result dropdown
 		result = document.createElement("ul");
 		result.setAttribute("id", "tagsearch");
