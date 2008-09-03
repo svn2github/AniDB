@@ -624,7 +624,7 @@ function search() {
 					var element = 'tag';
 					break;
 				case "producerlist":
-					bar url = 'animedb.pl?show=xml&t=producersearch&search=';
+					var url = 'animedb.pl?show=xml&t=producersearch&search=';
 					var element = 'producer';
 					break;
 			}
