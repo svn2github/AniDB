@@ -1,10 +1,20 @@
-#layout-search ul.acdropdown {
-	margin:0; padding:0;
+/* This way it applies to all ul's */
+ul.acdropdown {
+	margin:0; 
+	padding:0;
 	overflow:auto;
 	border:1px solid #85878c;
 	list-style-type:none;
+	background-color: white;
 }
-	#layout-search ul.acdropdown li {
-		margin:0px; padding:2px;
-		cursor:default;
-	}
+
+ul.acdropdown li {
+	margin:0px;
+	padding:2px;
+	cursor: pointer;
+}
+
+ul.acdropdown li:hover {
+	text-decoration: underline;
+	background-color: rgb(230, 230, 230);
+}
