@@ -778,6 +778,7 @@ function init_formating() {
 		var textArea = textAreas[i];
 		if (textArea.className.indexOf('norte') >= 0 || textArea.name.indexOf('norte') >= 0) continue;
 		textArea.id = "textArea_"+i;
+		textArea.value = textArea.value.replace(/\[br\]/mgi,'\n');
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
 		var newSmileyBox = createSmileyBox(null,i);
 		smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
