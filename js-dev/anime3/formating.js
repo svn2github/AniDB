@@ -27,7 +27,7 @@ var currentFMode = CookieGet('currentFMode') || 2;
 if (isWK && currentFMode == 2) currentFMode = 1;
 var smileyList = ['very_happy','happy','sad','shock','confused','cool','laughing','razz','embarassed','crying',
 				  'mad','twisted','rolleyes','wink','neutral','sweating','undecided','thinking','wtf','tehehe',
-				  'sweatdrop','disgusted','surprised','dead','noseblead','brickwall','zzz','mymaster','thumbup','angel',
+				  'sweatdrop','disgusted','surprised','dead','nosebleed','brickwall','zzz','mymaster','thumbup','angel',
 				  'baka'];
 var smileys = [
 		{'id':"01",'name':"very_happy",'title':"very happy",'text':":grin:",'targets':'(?<=[^;]):-?D|:grin:'},
