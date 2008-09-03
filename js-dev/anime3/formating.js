@@ -776,11 +776,11 @@ function init_formating() {
 	// This will create the formating icons for each TextArea
 	for (var i = 0; i < textAreas.length; i++) {
 		var textArea = textAreas[i];
-		if (textArea.className.indexOf('norte') >= 0) continue;
+		if (textArea.className.indexOf('norte') >= 0 || textArea.name.indexOf('norte') >= 0) continue;
 		textArea.id = "textArea_"+i;
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
 		var newSmileyBox = createSmileyBox(null,i);
-		textArea.parentNode.parentNode.replaceChild(newSmileyBox,smileyBox);
+		smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
 		smileyBox = newSmileyBox;
 		if (smileyBox) smileyBox.id = 'smiley-box_'+i;
 		wysiwygHeight = getStyleInformation(textArea,'height');
