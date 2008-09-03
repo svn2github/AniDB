@@ -678,7 +678,7 @@ function printTags() {
 				var id = Number(this.id.substr(4,this.id.length));
 				var tag = searchData[id].getAttribute("name");
 				search.value = tag;
-				setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
+				target.style.display = "none";
 			}
 			target.appendChild(result);
 			i++;
