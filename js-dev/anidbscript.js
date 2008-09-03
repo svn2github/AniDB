@@ -598,6 +598,7 @@ function CookieGet( check_name )
 // Tag Search Auto Completion. (C) 2008 antennen 
 // Relies on ajax.js by fahrenheit
 var lastSearch = "";
+var seeDebug = false;
 var searchData = [];
 
 function search() {
