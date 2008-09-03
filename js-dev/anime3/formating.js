@@ -780,7 +780,7 @@ function init_formating() {
 		textArea.id = "textArea_"+i;
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
 		var newSmileyBox = createSmileyBox(null,i);
-		smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
+		textArea.parentNode.parentNode.replaceChild(newSmileyBox,smileyBox);
 		smileyBox = newSmileyBox;
 		if (smileyBox) smileyBox.id = 'smiley-box_'+i;
 		wysiwygHeight = getStyleInformation(textArea,'height');
