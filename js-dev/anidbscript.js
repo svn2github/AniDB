@@ -675,7 +675,7 @@ function printTags() {
 			result.id = 'tag_'+n;
 			result.onclick = function() {
 				var id = Number(this.id.substr(4,this.id.length));
-				var tag = searchData[id];
+				var tag = searchData[id].getAttribute("name");
 				search.value = tag;
 				target.style.display = "none";
 			}
