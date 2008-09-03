@@ -672,8 +672,11 @@ function printTags() {
 				result.appendChild(b);
 				result.appendChild(lastBlock);
 			} else continue;
+			result.id = 'tag_'+n;
 			result.onclick = function() {
-				search.value = this.firstChild.data;
+				var id = Number(this.id.substr(4,this.id.length));
+				var tag = searchData[id];
+				search.value = tag;
 				target.style.display = "none";
 			}
 			target.appendChild(result);
