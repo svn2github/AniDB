@@ -96,7 +96,7 @@ function updateTextAreaCK() {
 	var tx = this.form.getElementsByTagName('textarea')[0];
 	if (!tx) return;
 	var n = tx.id.replace('textArea_','');
-	updateTextArea(n);
+	if (currentFMode == 2) updateTextArea(n);
 }
 
 /* Creates a select, this function is diferent from the ones in utils
