@@ -15,6 +15,5 @@ ul.acdropdown li {
 }
 
 ul.acdropdown li:hover {
-	text-decoration: underline;
 	background-color: rgb(230, 230, 230);
 }
