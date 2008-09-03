@@ -25,6 +25,43 @@ var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
 if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) isIE = true; // new ie's work for everything
 var currentFMode = CookieGet('currentFMode') || 2;
 if (isWK && currentFMode == 2) currentFMode = 1;
+var smileyList = ['very_happy','happy','sad','shock','confused','cool','laughing','razz','embarassed',
+				  'mad','twisted','rolleyes','wink','neutral','sweating','undecided','thinking','wtf','tehehe',
+				  'sweatdrop','disgusted','surprised','dead','noseblead','brickwall','zzz','mymaster','thumbup','angel',
+				  'baka'];
+var smileys = [
+		{'id':"01",'name':"very_happy",'title':"very happy",'text':":grin:",'targets':'(?<=[^;]):-?D|:grin:'},
+		{'id':"02",'name':"happy",'title':"happy",'text':':smile:','targets':'(?<=[^;]):-?\)|\^\^;?|:smile:'},
+		{'id':"03",'name':"sad",'title':"sad",'text':':sad:','targets':'(?<=[^;]):-?\(|:sad:'},
+		{'id':"04",'name':"shock",'title':"shocked",'text':':shock:','targets':'O_O|:shock:'},
+		{'id':"05",'name':"confused",'title':"confused",'text':':S','targets':':-?\?|:s|:S'},
+		{'id':"06",'name':"cool",'title':"cool",'text':':cool:','targets':'(?<=[ >a-zA-Z])8-?\)|^8-?\)|:cool:'},
+		{'id':"07",'name':"laughing",'title':"laughing",'text':':lol:','targets':':lol:'},
+		{'id':"08",'name':"razz",'title':"razz",'text':':razz:','targets':':-?[Pp]|:razz:'},
+		{'id':"09",'name':"embarassed",'title':"embarassed",'text':':oops:','targets':':oops:'},
+		{'id':"10",'name':"crying",'title':"crying or very sad",'text':':cry:','targets':';_;|:cry:'},
+		{'id':"11",'name':"mad",'title':"evil or very mad",'text':':evil:','targets':'&gt;[:;]?\(|:evil:'},
+		{'id':"12",'name':"twisted",'title':"twisted evil",'text':':twisted:','targets':'&gt;[;:]?:?D|:twisted:'},
+		{'id':"13",'name':"rolleyes",'title':"rolling eyes",'text':':roll:','targets':':roll:|:rolleyes:'},
+		{'id':"14",'name':"wink",'title':"wink",'text':':wink:','targets':';-?\)|:wink:'},
+		{'id':"15",'name':"neutral",'title':"neutral",'text':':neutral:','targets':':-?\||:neutral:'},
+		{'id':"16",'name':"sweating",'title':"upset, sighing",'text':'-_-','targets':'-_-;?'},
+		{'id':"17",'name':"undecided",'title':"undecided",'text':':/','targets':'(?<=[^p]):-?\/'},
+		{'id':"18",'name':"thinking",'title':"thinking",'text':'O_o','targets':'O_o'},
+		{'id':"19",'name':"wtf",'title':"huh?/wtf?",'text':'o_O','targets':'o_O;?'},
+		{'id':"20",'name':"tehehe",'title':"tehehe",'text':'-.-','targets':'-\.-'},
+		{'id':"21",'name':"sweatdrop",'title':"sweat drop",'text':'^_^','targets':'\^_?\^;?'},
+		{'id':"22",'name':"disgusted",'title':"in pain/frustration",'text':'>_<','targets':'&gt;_&lt;'},
+		{'id':"23",'name':"surprised",'title':"surprised",'text':':O','targets':':-?[oO]'},
+		{'id':"24",'name':"dead",'title':"dead",'text':'x_X','targets':'[xX]_[xX]'},
+		{'id':"25",'name':"nosebleed",'title':"nosebleed",'text':':nosebleed:','targets':'&gt;,&lt;|:nosebleed:'},
+		{'id':"26",'name':"brickwall",'title':"bullheaded",'text':':brickwall:','targets':':brickwall:|:bash:'},
+		{'id':"27",'name':"zzz",'title':"sleepy",'text':':zZz:','targets':':z[zZ]z:'},
+		{'id':"28",'name':"mymaster",'title':"my master",'text':':mymaster:','targets':':mymaster:'},
+		{'id':"29",'name':"thumbup",'title':"thumb up",'text':':thumbup:','targets':':thumbup:'},
+		{'id':"30",'name':"angel",'title':"innocent",'text':':angel:','targets':':angel:'},
+		{'id':"31",'name':"baka",'title':"idiot",'text':':baka:','targets':':baka:'}
+	];
 
 /* Change view mode
  * @param type Type of view mode (source,wysiwyg)
@@ -190,7 +227,7 @@ function insertAtSelection(myField, myValue, text) {
 			sel = document.selection.createRange();
 			sel.text = myValue;
 			myField.focus();
-		} else if (isFF || isOp) {
+		} else if (isFF || isOP) {
 			var startPos = myField.selectionStart;
 			var endPos = myField.selectionEnd;
 			myField.value = myField.value.substring(0, startPos)
@@ -329,7 +366,7 @@ function createLink(obj,fTA,val,attribute,sel,textOnly) {
 	if (isIE) {	//IE support
 		// IE fails miserably here, don't show the link thingie
 		insertAtSelection(obj, hyperLink, true);
-	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
+	} else if (isFF || isOP || isWK) { //MOZILLA/NETSCAPE support
 		hyperLink = obj.document.createElement('a');
 		hyperLink.href = base+type+attribute;
 		hyperLink.type = val;
@@ -425,6 +462,23 @@ function textFormatMagic(id,fTA) {
 	var action = id.toLowerCase();
 	//if (selection && selection.length) 
 	insertAtSelection(fTA, FunctionMap[action]['start']+selection+FunctionMap[action]['end'], true);
+}
+
+function insertSmiley() {
+	var start = this.className.indexOf('i_smiley_')+9;
+	var name = this.className.substring(start);
+	var id = Number(this.parentNode.id.substring(11));
+	var text = smileys[smileyList.indexOf(name)]['text'];
+	var obj = null;
+	if (currentFMode != 2) obj = document.getElementById('textArea_'+id);
+	else {
+		var obj = document.getElementById("wysiwyg_"+id);
+		if (!obj) return;
+		obj.contentWindow.focus();
+		obj = obj.contentWindow;
+	}
+	var selection = getSelection(obj);
+	insertAtSelection(obj, (currentFMode != 2 ? text : obj.document.createTextNode(text)), (currentFMode != 2 ? true : false));
 }
 
 /* Function that inserts RTE commands */
@@ -679,6 +733,20 @@ function createIframe(parentNode, id, textArea) {
 	return iframe;
 }
 
+/* Function that creates the smiley list with my nice and current actions */
+function createSmileyBox(parentNode, id) {
+	var smileyBox = document.createElement('div');
+	smileyBox.className = 'smiley-box icons';
+	smileyBox.id = 'smiley-box_'+id;
+	var h3 = document.createElement('h3');
+	h3.appendChild(document.createTextNode('Smilies'));
+	smileyBox.appendChild(h3);
+	for (var i = 0; i < smileys.length; i++)
+		createIcon(smileyBox, smileys[i]['text'], 'removeme', insertSmiley, smileys[i]['title'], 'i_smiley_'+smileys[i]['name']);
+	if (parentNode) parentNode.appendChild(smileyBox);
+	else return smileyBox;
+}
+
 /* Initializes RTE's */
 function init_formating() {
 	var errorMsg = '';
@@ -711,6 +779,9 @@ function init_formating() {
 		if (textArea.className.indexOf('norte') >= 0) continue;
 		textArea.id = "textArea_"+i;
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
+		var newSmileyBox = createSmileyBox(null,i);
+		smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
+		smileyBox = newSmileyBox;
 		if (smileyBox) smileyBox.id = 'smiley-box_'+i;
 		wysiwygHeight = getStyleInformation(textArea,'height');
 		wysiwygWidth = getStyleInformation(textArea,'width');

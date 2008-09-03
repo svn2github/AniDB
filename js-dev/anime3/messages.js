@@ -318,8 +318,7 @@ function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 	input_msgTO = createTextInput('msg.to','20',false,false,'16',(msgToValue) ? msgToValue : '');
 	input_msgTO.tabIndex = 1;
 	var dd = createDD(null, null, input_msgTO);
-	var curItem = {'id':"Buddy",'desc':"Buddy list",'text':"Buddy",'onclick':showBuddyList,'active':false};
-	createLocalButton(dd,'buddy',curItem);
+	dd.appendChild(createButton('buddy','buddy',false,"Buddy",'button',showBuddyList));
 	var i = document.createElement('i');
 	i.appendChild(document.createTextNode(' (username or uid)'));
 	dd.appendChild(i);
@@ -336,44 +335,6 @@ function createMessageInput(msgToValue,msgTitleValue,msgBodyValue) {
 	var smileyBox = document.createElement('div');
 	smileyBox.className = 'smiley-box icons';
 	smileyBox.id = 'smiley-box';
-	var h3 = document.createElement('h3');
-	h3.appendChild(document.createTextNode('Smilies'));
-	smileyBox.appendChild(h3);
-	var smileys = [
-		{'id':"01",'name':"very_happy",'title':"very happy",'text':":grin:"},
-		{'id':"02",'name':"happy",'title':"happy",'text':':smile:'},
-		{'id':"03",'name':"sad",'title':"sad",'text':':sad:'},
-		{'id':"04",'name':"shock",'title':"shocked",'text':':shock:'},
-		{'id':"05",'name':"confused",'title':"confused",'text':':S'},
-		{'id':"06",'name':"cool",'title':"cool",'text':':cool:'},
-		{'id':"07",'name':"laughing",'title':"laughing",'text':':lol:'},
-		{'id':"08",'name':"razz",'title':"razz",'text':':razz:'},
-		{'id':"09",'name':"embarassed",'title':"embarassed",'text':':oops:'},
-		{'id':"10",'name':"crying",'title':"crying or very sad",'text':':cry:'},
-		{'id':"11",'name':"mad",'title':"evil or very mad",'text':':evil:'},
-		{'id':"12",'name':"twisted",'title':"twisted evil",'text':':twisted:'},
-		{'id':"13",'name':"rolleyes",'title':"rolling eyes",'text':':roll:'},
-		{'id':"14",'name':"wink",'title':"wink",'text':':wink:'},
-		{'id':"15",'name':"neutral",'title':"neutral",'text':':neutral:'},
-		{'id':"16",'name':"sweating",'title':"upset, sighing",'text':'-_-'},
-		{'id':"17",'name':"undecided",'title':"undecided",'text':':/'},
-		{'id':"18",'name':"thinking",'title':"thinking",'text':'O_o'},
-		{'id':"19",'name':"wtf",'title':"huh?/wtf?",'text':'o_O'},
-		{'id':"20",'name':"tehehe",'title':"tehehe",'text':'-.-'},
-		{'id':"21",'name':"sweatdrop",'title':"sweat drop",'text':'^_^'},
-		{'id':"22",'name':"disgusted",'title':"in pain/frustration",'text':'>_<'},
-		{'id':"23",'name':"surprised",'title':"surprised",'text':':O'},
-		{'id':"24",'name':"dead",'title':"dead",'text':'x_X'},
-		{'id':"25",'name':"nosebleed",'title':"nosebleed",'text':':nosebleed:'},
-		{'id':"26",'name':"brickwall",'title':"bullheaded",'text':':brickwall:'},
-		{'id':"27",'name':"zzz",'title':"sleepy",'text':':zZz:'},
-		{'id':"28",'name':"mymaster",'title':"my master",'text':':mymaster:'},
-		{'id':"29",'name':"thumbup",'title':"thumb up",'text':':thumbup:'},
-		{'id':"30",'name':"angel",'title':"innocent",'text':':angel:'},
-		{'id':"31",'name':"baka",'title':"idiot",'text':':baka:'}
-	];
-	for (var i = 0; i < smileys.length; i++)
-		createIcon(smileyBox, smileys[i]['text'], 'removeme', null, smileys[i]['title'], 'i_smiley_'+smileys[i]['name']);
 	innerDiv.appendChild(smileyBox);
 	// textarea
 	var messageBox = document.createElement('div');
