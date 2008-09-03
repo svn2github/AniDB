@@ -22,8 +22,7 @@ Array.prototype.sum = function(){
 
 /* generic */
 
-/**
- * Adds onload events to window.onload
+/* Adds onload events to window.onload
  * usage: addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
  *    or: addLoadEvent(function() {
  *           more code to run on page load 
@@ -606,7 +605,7 @@ function search() {
 	var type = this.parentNode.getElementsByTagName("select")[0].value;
 	
 	
-	if(this.value.length >= 3 && (type == "animetag" || type == "grouplist")) {
+	if(this.value.length >= 3 && (type == "animetag" || type == "grouplist" || type == "producerlist")) {
 		// Check if a new search is necessary
 		var ll = lastSearch.length
 		var cl = this.value.length
@@ -623,6 +622,10 @@ function search() {
 				case "animetag":
 					var url = 'animedb.pl?show=xml&t=tagsearch&search=';
 					var element = 'tag';
+					break;
+				case "producerlist":
+					bar url = 'animedb.pl?show=xml&t=producersearch&search=';
+					var element = 'producer';
 					break;
 			}
 			
@@ -715,6 +718,7 @@ addLoadEvent(function() {
 				switch(value) {
 					case "animetag":
 					case "grouplist":
+					case "producerlist":
 						textfield.setAttribute("autocomplete", "off");
 						break;
 					default:
