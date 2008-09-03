@@ -705,7 +705,7 @@ function createIframe(parentNode, id, textArea) {
 	iframe.id = "wysiwyg_" + id;
 	iframe.style.height = wysiwygHeight;
 	iframe.style.width = wysiwygWidth;
-	iframe.style.display = '';
+	iframe.style.display = 'none';
 	if (iframe.style.border) iframe.style.border = border;
 	if (backgroundColor) iframe.style.backgroundColor = backgroundColor;
 	if (!parentNode) textArea.parentNode.insertBefore(iframe,textArea);
@@ -795,7 +795,7 @@ function init_formating() {
 
 		// Create iframe which will be used for rich text editing
 		var iframe = createIframe(null, i, textArea);
-		if (currentFMode != 2) iframe.style.display = 'none';
+		if (currentFMode == 2) iframe.style.display = '';
 		
 		// create the mode change ul
 		var ul = document.createElement('ul');
