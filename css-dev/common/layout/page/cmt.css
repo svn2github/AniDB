@@ -850,3 +850,38 @@ div.forum div.statistics span.legend
 {
 	padding-left: 4px;
 }
+
+#layout-main div.forum ul.topiclist dd
+{
+	padding-right:0.5em;
+}
+
+#layout-main div.forum ul.topiclist dd.actions
+{
+	float:right;
+	text-align:center;
+	width: 8.5em;
+}
+
+#layout-main div.forum ul.topics dd.actions
+{
+	padding-top: 0.3em;
+	line-height:2.2em;
+}
+
+#layout-main div.forum ul.topics dd.actions a +a
+{
+	margin-top: 0.5em;
+}
+
+#layout-main div.forum div.topic_actions div.buttons a.i_forum_add,
+#layout-main div.forum div.topic_actions div.buttons a.i_forum_group
+{
+	float:right;
+	margin-right: 1.5em;
+}
+
+#layout-main div.forum_all ul.links
+{
+	margin-top: 2em;
+}
