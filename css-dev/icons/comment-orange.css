@@ -163,6 +163,13 @@
 	width:83px;
 }
 
+*.i_forum_group
+{
+	background-image: url(../icons/orange/forum_group.gif);
+	height:12px;
+	width:106px;
+}
+
 /*Smiley*/
 *.i_smiley_tehehe
 {
