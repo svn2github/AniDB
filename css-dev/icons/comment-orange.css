@@ -404,7 +404,7 @@
 	background-image:url(../icons/phpbb/topic_announce.gif);
 }
 
-*.i_topic_locked
+*.i_topic_islocked
 {
 	background-image:url(../icons/phpbb/topic_locked.gif);
 }
