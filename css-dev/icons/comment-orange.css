@@ -186,21 +186,20 @@
 	background-image:url(../icons/phpbb/topic_announce.gif);
 }
 
-*.i_topic_islocked
+*.i_topic_normal_locked
 {
-	background-image:url(../icons/phpbb/topic_locked.gif);
+	background-image:url(../icons/phpbb/topic_normal_locked.gif);
 }
 
-*.i_forum
+*.i_topic_sticky_locked
 {
-	background-image:url(../icons/phpbb/forum_normal.gif);
-	height:2.5em;
+	background-image:url(../icons/phpbb/topic_sticky_locked.gif);
 }
 
-*.i_forum_sticky
+*.i_topic_announcement_locked,
+*.i_topic_global_locked
 {
-	background-image:url(../icons/phpbb/forum_sticky.gif);
-	height:2.5em;
+	background-image:url(../icons/phpbb/topic_announce_locked.gif);
 }
 
 *.i_topic_normal_unread
@@ -219,20 +218,31 @@
 	background-image:url(../icons/phpbb/topic_announce_unread.gif);
 }
 
-*.i_topic_islocked_unread
+*.i_topic_normal_locked_unread
 {
-	background-image:url(../icons/phpbb/topic_locked_unread.gif);
+	background-image:url(../icons/phpbb/topic_normal_locked_unread.gif);
+}
+
+*.i_topic_sticky_locked_unread
+{
+	background-image:url(../icons/phpbb/topic_sticky_locked_unread.gif);
+}
+
+*.i_topic_announcement_locked_unread,
+*.i_topic_global_locked_unread,
+{
+	background-image:url(../icons/phpbb/topic_announce_locked_unread.gif);
+}
+
+*.i_forum
+{
+	background-image:url(../icons/phpbb/forum_normal.gif);
+	height:2.5em;
 }
 
 *.i_forum_unread
 {
 	background-image:url(../icons/phpbb/forum_normal_unread.gif);
-	height:2.5em;
-}
-
-*.i_forum_sticky_unread
-{
-	background-image:url(../icons/phpbb/forum_sticky_unread.gif);
 	height:2.5em;
 }
 
