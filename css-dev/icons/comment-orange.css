@@ -388,7 +388,6 @@
 	background-image:url(../icons/smiley/smiley_dead.gif);
 }
 
-/*TEMP*/
 *.i_topic_normal
 {
 	background-image:url(../icons/phpbb/topic_normal.gif);
@@ -413,6 +412,12 @@
 *.i_forum
 {
 	background-image:url(../icons/phpbb/forum_normal.gif);
+	height:2.5em;
+}
+
+*.i_forum_sticky
+{
+	background-image:url(../icons/phpbb/forum_sticky.gif);
 	height:2.5em;
 }
 
