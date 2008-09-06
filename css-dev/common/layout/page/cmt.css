@@ -860,3 +860,24 @@ img.smiley
 {
 	margin-top: 2em;
 }
+
+#layout-main div.forum div.quickreply form
+{
+	text-align: left;
+}
+
+#layout-main div.forum div.quickreply textarea
+{
+	border:1px inset #A9A9A9;
+	font-size:1.1em;
+	line-height:1.2em;
+	padding:2px;
+	width:40%;
+	height: 10em;
+}
+
+#layout-main div.forum div.quickreply p
+{
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+}
