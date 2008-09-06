@@ -229,7 +229,7 @@
 }
 
 *.i_topic_announcement_locked_unread,
-*.i_topic_global_locked_unread,
+*.i_topic_global_locked_unread
 {
 	background-image:url(../icons/phpbb/topic_announce_locked_unread.gif);
 }
