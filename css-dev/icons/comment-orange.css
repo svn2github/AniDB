@@ -392,36 +392,26 @@
 *.i_topic_normal
 {
 	background:url(http://forum.anidb.net/styles/arsilver/imageset/topic_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
 }
 
 *.i_topic_sticky
 {
 	background:url(http://forum.anidb.net/styles/arsilver/imageset/sticky_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
 }
 
 *.i_topic_announcement
 {
 	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
 }
 
 *.i_topic_global
 {
 	background:url(http://forum.anidb.net/styles/arsilver/imageset/announce_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
 }
 
 *.i_forum
 {
 	background:url(http://forum.anidb.net/styles/arsilver/imageset/forum_read.gif) no-repeat;
-	margin-right:-.5em;
-	margin-top:.2em;
 	height:2.5em;
 }
 

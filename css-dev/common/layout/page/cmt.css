@@ -165,7 +165,9 @@
 {
 	display:block;
 	float:left;
-	padding-left:.5em;
+	padding-left:0.5em;
+	padding-right: 0.5em;
+	padding-top: 0.2em;
 	width:50%;
 }
 
@@ -176,6 +178,12 @@
 	margin:2px 0 4px;
 	padding-bottom:2px;
 	padding-top:2px;
+}
+
+#layout-main div.forum ul.topiclist span.title span.description
+{
+	display:block;
+	float:left;
 }
 
 #layout-main div.forum ul.topiclist dd.posts,
@@ -774,39 +782,6 @@ img.smiley
 }
 
 /*teststuff*/
-div.forum div.statistics span.admin,
-div.forum div.statistics a.admin
-{
-	color:#AA0000;
-	font-weight:bold;
-}
-
-div.forum div.statistics span.mod,
-div.forum div.statistics a.mod
-{
-	color:#019e17;
-	font-weight:bold;
-}
-
-div.forum div.statistics span.minimod,
-div.forum div.statistics a.minimod
-{
-	color:#ce7c00;
-	font-weight:bold;
-}
-
-div.forum div.statistics span.forummod,
-div.forum div.statistics a.forummod
-{
-	color:#105289;
-	font-weight:bold;
-}
-
-div.forum div.statistics span.legend
-{
-	font-style:italic;
-}
-
 #layout-main div.forum div.add-box dl dt
 {
 	font-size:1.1em;
