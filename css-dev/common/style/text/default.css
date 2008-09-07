@@ -238,6 +238,7 @@ div.quotebody div.quote div.quotebody
 }
 
 #layout-main div.forum ul.topics dd.posts,
+#layout-main div.forum ul.topics dd.views,
 #layout-main div.forum ul.topics dd.topics
 {
 	font-size:1.2em;
