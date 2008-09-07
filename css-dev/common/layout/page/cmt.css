@@ -181,6 +181,7 @@
 }
 
 #layout-main div.forum ul.topiclist dd.posts,
+#layout-main div.forum ul.topiclist dd.views,
 #layout-main div.forum ul.topiclist dd.topics
 {
 	text-align:center;
@@ -188,6 +189,7 @@
 }
 
 #layout-main div.forum ul.topics dd.posts,
+#layout-main div.forum ul.topics dd.views,
 #layout-main div.forum ul.topics dd.topics
 {
 	line-height:2.2em;
