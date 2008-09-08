@@ -712,6 +712,7 @@ function createIframe(parentNode, id, textArea) {
 	
 	// Pass the textarea's existing text over to the content variable
 	var content = convert_input(textArea.value);
+	if (!content) content = '<p>&#xA0;</p>';
 	var doc = iframe.contentWindow.document;
 	doc.open();
 	doc.write(content);
@@ -780,10 +781,11 @@ function init_formating() {
 		textArea.id = "textArea_"+i;
 		textArea.value = textArea.value.replace(/\[br\]/mgi,'\n');
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
-		var newSmileyBox = createSmileyBox(null,i);
-		smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
-		smileyBox = newSmileyBox;
-		if (smileyBox) smileyBox.id = 'smiley-box_'+i;
+		if (smileyBox) {
+			var newSmileyBox = createSmileyBox(null,i);
+			smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
+			smileyBox = newSmileyBox;
+		}
 		wysiwygHeight = getStyleInformation(textArea,'height');
 		wysiwygWidth = getStyleInformation(textArea,'width');
 		if (currentFMode == 2) textArea.style.display = "none";
@@ -828,26 +830,6 @@ function prepPage() {
 	if (!currentFMode) return; // disabled
 	uriObj = parseURI(); // update the uriObj
 	init_formating();
-	/*
-	if (!uriObj['show']) return; // go away evil page!
-	switch (uriObj['show']) { // list of pages where to apply formating stuff
-		case 'animeatt':
-			if      (uriObj['new'] && uriObj['new'] == '1') init_formating();
-			else if (uriObj['showcomment'] && uriObj['showcomment'] == '1') init_formating();
-			else if (uriObj['edit'] && uriObj['edit'] == '1') init_formating();
-			else return;
-			break;
-		case 'msg':
-			if      (uriObj['do'] && uriObj['do'] == 'new') init_formating();
-			else return;
-			break;
-		case 'cmt':
-			if      (uriObj['cmt.do.add'] || uriObj['cmt.do.edit']) init_formating();
-			else return;
-			break;
-		default: return;
-	}
-	*/
 }
 
 //window.onload = prepPage;
