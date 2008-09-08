@@ -3,7 +3,8 @@
 	background-position: center;
 	width: 21px;
 	height: 21px;
-	text-indent: -5000px;
+	/* This once causes serious issues in IE 7 */
+	/* text-indent: -5000px; */
 	margin-left: 0;
 	margin-right: 0;
   border: 1px solid;

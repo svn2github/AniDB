@@ -169,7 +169,7 @@ ul.format-modes li {
 	margin: 2px;
 	background-color: rgb(191, 194, 201);
 	cursor: pointer;
-	text-decoration: underline;
+	/*text-decoration: underline;*/
 }
 
 ul.format-modes li.selected, ul.format-modes li:hover {
