@@ -464,6 +464,7 @@ function textFormatMagic(id,fTA) {
 	insertAtSelection(fTA, FunctionMap[action]['start']+selection+FunctionMap[action]['end'], true);
 }
 
+/* Function that inserts smileys */
 function insertSmiley() {
 	var start = this.className.indexOf('i_smiley_')+9;
 	var name = this.className.substring(start);
@@ -478,7 +479,7 @@ function insertSmiley() {
 		obj = obj.contentWindow;
 	}
 	var selection = getSelection(obj);
-	insertAtSelection(obj, (currentFMode != 2 ? text : obj.document.createTextNode(text)), (currentFMode != 2 ? true : false));
+	insertAtSelection(obj, (currentFMode != 2 || isIE ? text : obj.document.createTextNode(text)), (currentFMode != 2 || isIE ? true : false));
 }
 
 /* Function that inserts RTE commands */
@@ -642,6 +643,30 @@ function previewDoc(myField) {
 	previewWindow.document.close();
 }
 
+function createFauxDocument(doc, content, style) {
+	if (!doc) return;
+	var style = '<style type="text/css" media="screen, projection">';
+	style += 'body {';
+	if (backgroundColor) style += 'background-color: '+backgroundColor+';';
+	style += 'background-image: none;';
+	if (color) style += 'color: '+color+';';
+	if (fontFamily) style += 'font-family: '+fontFamily+';';
+	if (fontSize) style += 'font-size: '+fontSize+';';
+	if (!margin) style += 'margin: 2px;';
+	style += '}';
+	style += '</style>';
+	
+	doc.write('<!DOCTYPE html><html lang="en"><head><title>Text Preview</title>');
+	doc.write('<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>');
+	doc.write('<link rel="icon" href="favicon.ico"/>');
+	doc.write('<link rel="stylesheet" href="'+document.styleSheets[0].href+'" type="text/css" title="Style"/>');
+	if (style) doc.write(style);
+	doc.write('</head><body>');
+	doc.write(content)
+	doc.write('</body></html>');
+}
+
+/* Function that changes the Function mode */
 function changeFMode() {
 	var id = Number(this.parentNode.id.substring(6));
 	var mode = Number(this.className.substring(6,7));
@@ -653,8 +678,9 @@ function changeFMode() {
 	var controls = document.getElementById('controls_'+id);
 	var iframe = document.getElementById("wysiwyg_" + id);
 	var fTA = document.getElementById("textArea_"+id);
+	var smileyBox = document.getElementById("smiley-box_"+id);
 	if (controls) {
-		if (mode == 0) controls.style.display = 'none';
+		if (mode != 0) controls.style.display = '';
 		else {
 			var newControls = createControls(null, id, mode);
 			controls.parentNode.replaceChild(newControls,controls);
@@ -669,6 +695,7 @@ function changeFMode() {
 		iframe.contentWindow.document.body.innerHTML = content;
 	}
 	if (fTA) fTA.style.display = (mode != 2 ? '' : 'none');
+	if (smileyBox) smileyBox.style.display = (mode != 0 ? '' : 'none');
 	currentFMode = mode;
 }
 
@@ -682,6 +709,7 @@ function createControls(parentNode, id, mode) {
 	var div = document.createElement('div');
 	div.className = 'format-buttons f_controls';
 	div.id = 'controls_'+ id;
+	div.style.display = 'none';
 	var buttons = buttonList[mode];
 	for (var b = 0; b < buttons.length; b++)
 	createLocalButton(div,buttons[b],FunctionMap[buttons[b]]);
@@ -699,6 +727,7 @@ function createIframe(parentNode, id, textArea) {
 	var fontFamily = getStyleInformation(textArea,'fontFamily');
 	var fontSize = getStyleInformation(textArea,'fontSize');
 	var border = getStyleInformation(textArea,'border');
+	var margin = getStyleInformation(document.body,'marginTop');
 
 	var iframe = document.createElement('iframe');
 	iframe.frameborder = 0;
@@ -712,18 +741,30 @@ function createIframe(parentNode, id, textArea) {
 	
 	// Pass the textarea's existing text over to the content variable
 	var content = convert_input(textArea.value);
-	if (!content) content = '<p>&#xA0;</p>';
+	if (!content && isOP && !isIE) content = '<p>&#xA0;</p>';
 	var doc = iframe.contentWindow.document;
 	doc.open();
-	doc.write(content);
+	doc.write(content)
 	doc.close();
 	// Make the iframe editable in both Mozilla and IE
 	doc.body.contentEditable = true;
+	/* uncomment this when buttons are wanted, will not work on IE
+	var head = doc.getElementsByTagName('head')[0];
+	if (head) {
+		var linkElem = doc.createElement('link');
+		linkElem.rel	= 'stylesheet';
+		linkElem.href	= document.styleSheets[0].href;
+		linkElem.type	= 'text/css';
+		linkElem.title	= 'Style';
+		head.appendChild(linkElem);
+	}
+	*/
 	if (color && color != '') doc.body.style.color = color;
 	if (fontFamily && fontFamily != '') doc.body.style.fontFamily = fontFamily;
 	if (!isIE && fontSize && fontSize != '') doc.body.style.fontSize = fontSize;
 	if (backgroundColor && backgroundColor != '') doc.body.style.backgroundColor = backgroundColor;
-	doc.body.style.margin = '2px';
+	doc.body.style.backgroundImage = 'none';
+	if (!margin) doc.body.style.margin = '2px';
 	doc.designMode = "on";
 	iframe.style.display = 'none';
 	try { if (document.queryCommandSupported('styleWithCSS')) true; } 
@@ -793,7 +834,7 @@ function init_formating() {
 		
 		// create and append the controls
 		var controls = createControls(null, i);
-		if (currentFMode == 0) controls.style.display = 'none';
+		if (currentFMode != 0) controls.style.display = '';
 		textArea.parentNode.parentNode.insertBefore(controls,(smileyBox ? smileyBox : textArea));
 
 		// Create iframe which will be used for rich text editing
@@ -813,7 +854,8 @@ function init_formating() {
 			li.appendChild(document.createTextNode(options[o]));
 			ul.appendChild(li);
 		}
-		textArea.parentNode.insertBefore(ul,(currentFMode != 2) ? textArea : iframe);
+		//(currentFMode != 2) ? textArea : iframe
+		textArea.parentNode.insertBefore(ul,textArea.nextSibling);
 
 		// Update inputs
 		var inputs = fTA.getElementsByTagName('input');
