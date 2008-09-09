@@ -40,3 +40,36 @@
 #layout-main #htmltagcloud span.tagcloud22 { font-size: 34px;}
 #layout-main #htmltagcloud span.tagcloud23 { font-size: 35px;}
 #layout-main #htmltagcloud span.tagcloud24 { font-size: 36px;}
+
+#layout-main div.animetag_all div.animetag_list table
+{
+	width:95%;
+}
+
+#layout-main div.animetag_all div.animetag_list table th
+{
+	width:5%;
+}
+
+#layout-main div.animetag_all div.animetag_list table th.name
+{
+	width:50%;
+}
+
+#layout-main div.animetag_all div.animetag_list table th.action,
+#layout-main div.animetag_all div.animetag_list table th.date
+{
+	width:20%;
+}
+
+#layout-main div.animetag_all div.animetag_list table td.globalcnt,
+#layout-main div.animetag_all div.animetag_list table td.spoiler,
+#layout-main div.animetag_all div.animetag_list table td.approval
+{
+	text-align: center;
+}
+
+#layout-main div.animetag_all div.animetag_list table + div.spoiler
+{
+	margin-top: 1.5em;
+}
