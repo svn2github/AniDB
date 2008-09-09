@@ -24,7 +24,7 @@ var isOP = (document.selection != undefined && window.getSelection != undefined)
 var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
 if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) isIE = true; // new ie's work for everything
 var currentFMode = CookieGet('currentFMode') || 2;
-if (isWK && currentFMode == 2) currentFMode = 1;
+if ((isWK || isIE) && currentFMode == 2) currentFMode = 1;
 var smileyList = ['very_happy','happy','sad','shock','confused','cool','laughing','razz','embarassed','crying',
 				  'mad','twisted','rolleyes','wink','neutral','sweating','undecided','thinking','wtf','tehehe',
 				  'sweatdrop','disgusted','surprised','dead','nosebleed','brickwall','zzz','mymaster','thumbup','angel',
@@ -680,9 +680,10 @@ function changeFMode() {
 	var fTA = document.getElementById("textArea_"+id);
 	var smileyBox = document.getElementById("smiley-box_"+id);
 	if (controls) {
-		if (mode != 0) controls.style.display = '';
+		if (mode == 0) controls.style.display = 'none';
 		else {
 			var newControls = createControls(null, id, mode);
+			newControls.style.display = '';
 			controls.parentNode.replaceChild(newControls,controls);
 		}
 	}
@@ -695,7 +696,7 @@ function changeFMode() {
 		iframe.contentWindow.document.body.innerHTML = content;
 	}
 	if (fTA) fTA.style.display = (mode != 2 ? '' : 'none');
-	if (smileyBox) smileyBox.style.display = (mode != 0 ? '' : 'none');
+	//if (smileyBox) smileyBox.style.display = (mode != 0 ? '' : 'none');
 	currentFMode = mode;
 }
 
