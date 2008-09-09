@@ -24,7 +24,7 @@ var isOP = (document.selection != undefined && window.getSelection != undefined)
 var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
 if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) isIE = true; // new ie's work for everything
 var currentFMode = CookieGet('currentFMode') || 2;
-if ((isWK || isIE) && currentFMode == 2) currentFMode = 1;
+if (isWK && currentFMode == 2) currentFMode = 1;
 var smileyList = ['very_happy','happy','sad','shock','confused','cool','laughing','razz','embarassed','crying',
 				  'mad','twisted','rolleyes','wink','neutral','sweating','undecided','thinking','wtf','tehehe',
 				  'sweatdrop','disgusted','surprised','dead','nosebleed','brickwall','zzz','mymaster','thumbup','angel',
@@ -643,29 +643,6 @@ function previewDoc(myField) {
 	previewWindow.document.close();
 }
 
-function createFauxDocument(doc, content, style) {
-	if (!doc) return;
-	var style = '<style type="text/css" media="screen, projection">';
-	style += 'body {';
-	if (backgroundColor) style += 'background-color: '+backgroundColor+';';
-	style += 'background-image: none;';
-	if (color) style += 'color: '+color+';';
-	if (fontFamily) style += 'font-family: '+fontFamily+';';
-	if (fontSize) style += 'font-size: '+fontSize+';';
-	if (!margin) style += 'margin: 2px;';
-	style += '}';
-	style += '</style>';
-	
-	doc.write('<!DOCTYPE html><html lang="en"><head><title>Text Preview</title>');
-	doc.write('<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>');
-	doc.write('<link rel="icon" href="favicon.ico"/>');
-	doc.write('<link rel="stylesheet" href="'+document.styleSheets[0].href+'" type="text/css" title="Style"/>');
-	if (style) doc.write(style);
-	doc.write('</head><body>');
-	doc.write(content)
-	doc.write('</body></html>');
-}
-
 /* Function that changes the Function mode */
 function changeFMode() {
 	var id = Number(this.parentNode.id.substring(6));
@@ -736,13 +713,15 @@ function createIframe(parentNode, id, textArea) {
 	iframe.style.height = wysiwygHeight;
 	iframe.style.width = wysiwygWidth;
 	if (iframe.style.border) iframe.style.border = border;
+	iframe.style.border = '1px solid';
+	iframe.style.borderColor = getStyleInformation(textArea,'borderColor');
 	if (backgroundColor) iframe.style.backgroundColor = backgroundColor;
 	if (!parentNode) textArea.parentNode.insertBefore(iframe,textArea);
 	else parentNode.insertBefore(iframe, textArea);
 	
 	// Pass the textarea's existing text over to the content variable
 	var content = convert_input(textArea.value);
-	if (!content && isOP && !isIE) content = '<p>&#xA0;</p>';
+	if (!content && isOP && !isIE) content = '&#xA0;';
 	var doc = iframe.contentWindow.document;
 	doc.open();
 	doc.write(content)
@@ -828,6 +807,7 @@ function init_formating() {
 			smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
 			smileyBox = newSmileyBox;
 		}
+		
 		wysiwygHeight = getStyleInformation(textArea,'height');
 		wysiwygWidth = getStyleInformation(textArea,'width');
 		if (currentFMode == 2) textArea.style.display = "none";
@@ -841,7 +821,11 @@ function init_formating() {
 		// Create iframe which will be used for rich text editing
 		var iframe = createIframe(null, i, textArea);
 		if (currentFMode == 2) iframe.style.display = '';
-		
+/*		
+		alert('wysiwyg.width: '+getStyleInformation(textArea,'width')+'\ntextArea.clientWidth: '+textArea.clientWidth+'\ntextArea.offsetWidth: '+textArea.offsetWidth+
+		'\n---------------------'+
+		'\niframe.width: '+getStyleInformation(iframe,'width')+'\niframe.clientWidth: '+iframe.clientWidth+'\niframe.offsetWidth: '+iframe.offsetWidth);
+*/
 		// create the mode change ul
 		var ul = document.createElement('ul');
 		ul.className = 'format-modes';
@@ -855,7 +839,7 @@ function init_formating() {
 			li.appendChild(document.createTextNode(options[o]));
 			ul.appendChild(li);
 		}
-		//(currentFMode != 2) ? textArea : iframe
+
 		textArea.parentNode.insertBefore(ul,textArea.nextSibling);
 
 		// Update inputs
