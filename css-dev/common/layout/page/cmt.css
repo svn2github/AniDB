@@ -331,17 +331,6 @@ margin-right: 1em;
 	padding-top:3em;
 }
 
-#layout-main div.forum div.spoiler
-{
-	padding: 0.6em;
-}
-
-#layout-main div.forum div.spoiler span
-{
-	display:block;
-	margin-bottom: 1em;
-}
-
 #layout-main div.forum .rtop, .rbottom
 {
 	display:block;
@@ -728,11 +717,6 @@ span.smiley
 {
 	border-left:5px solid;
 	border-right:5px solid;
-}
-
-#layout-main div.forum div.spoiler
-{
-	border: 1px inset;
 }
 
 #layout-main div.forum div.signature,
