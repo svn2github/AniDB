@@ -12,6 +12,13 @@
 	background-image: url(../icons/test/thumb_down.gif);
 }
 
+*.i_vote_revoke
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/test/vote_revoke.gif);
+}
+
 *.i_tag_delete
 {
 	width: 16px;
