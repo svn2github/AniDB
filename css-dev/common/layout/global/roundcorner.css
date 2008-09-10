@@ -1,0 +1,28 @@
+#layout-main .rtop *,
+#layout-main .rbottom *
+{
+	display: block;
+	height: 1px;
+	overflow: hidden;
+}
+
+#layout-main .r1
+{
+	margin: 0 5px;
+}
+
+#layout-main .r2
+{
+	margin: 0 3px;
+}
+
+#layout-main .r3
+{
+	margin: 0 2px;
+}
+
+#layout-main .r4
+{
+	margin: 0 1px;
+	height: 2px;
+}
