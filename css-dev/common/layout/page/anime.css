@@ -39,3 +39,8 @@
 {
     border:none;
 }
+
+#layout-main div.anime_all div.data td.value form
+{
+	text-align:left;
+}
