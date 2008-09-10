@@ -193,3 +193,10 @@ div.quotebody div.quote div.g_odd
 	border-bottom-color:#CCCCCC;
 	color:#000000;
 }
+
+#layout-main div.credits_all div.inner,
+#layout-main div.credits_all .rbottom *,
+#layout-main div.credits_all .rtop *
+{
+	background-color:#A9ABB1;
+}
