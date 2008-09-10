@@ -165,14 +165,14 @@
 
 *.i_forum_group
 {
-	background-image: url(../icons/orange/forum_link.gif);
+	background-image: url(../icons/orange/forum_group.gif);
 	height:12px;
 	width:41px;
 }
 
 *.i_forum_link
 {
-	background-image: url(../icons/orange/forum_group.gif);
+	background-image: url(../icons/orange/forum_link.gif);
 	height:12px;
 	width:106px;
 }
