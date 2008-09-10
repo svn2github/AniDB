@@ -1,0 +1,16 @@
+(C) 2008 by fahrenheit [alka.setzer[at]gmail.com]
+version svn0.1.0 (07.08.2008):
+
+THIS TEMPLATE IS NOT YET COMPLETE, BASIC FUNCTIONALITY AVAILABLE
+
+html-xstyle theme:
+- Features will be added as soon as i code them
+
+note: requires a browser capable of doing the following:
+- javascript version 1.5+
+- XMLHTTPRequest support
+- HTTP 1.1 (required by XMLHTTPREQUEST for assync gets)
+- css v1 and v2
+- cookies (optional, but prefered for saving preferences)
+
+<a href="http://forum.anidb.net/viewtopic.php?t=2517">Support, Feature Requests, Bug Reports?</a>

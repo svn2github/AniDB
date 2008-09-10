@@ -1,0 +1,11 @@
+Template: html-xstyle - ChangeLog
+Version: 0.1.0 - 07.08.2008
+(C) 2003-2008 by fahrenheit
+
+Get new versions here: http://forum.anidb.net/viewtopic.php?t=2517
+SVN: http://dev.anidb.info/websvn/listing.php?repname=AniDB+CSS&path=/trunk/export/html-xstyle
+
+----------------------------------------------------------------------------------------------
+
+0.1 - 07.08.2008
+        - Initial release (testing only)

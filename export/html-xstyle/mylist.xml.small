@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root anidb="http://anidb.info/perl-bin/animedb.pl">
+	<custom uid="32">
+	<userinfo>
+		<name>test</name>
+		<animes added="1" user="345" />
+		<eps added="3" dbviewedp="3%" dbownedp="5%" viewedp="62%" viewed="68" user="562" />
+		<files added="49" lamecnt="0" user="5075" />
+		<groups added="2" />
+		<size longn="123.375.452.160" shortn="115 GB" />
+		<stats votes="1" reviews="65" />
+		<date>26.06.2007 12:00</date>
+	</userinfo>
+	</custom>
+	<cats>
+	</cats>
+	<animes>
+		<anime id="128" type="OVA" year="2002-2003">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="3" seen="0" cnt="4" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[アーケードゲーマーふぶき]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Arcade Gamer Fubuki]]></title>
+				<title type="short" lang="x-unk"><![CDATA[fubuki]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="558.112.768" shortn="532 MB" />
+			<rating type="normal" votes="58" rating="5.58" />
+			<reviews cnt="1" rating="4.16" />
+			<dates added="23.08.02" update="31.07.06" start="25.02.2002" end="25.01.2003" />
+		</anime>
+		<anime id="106" type="TV Series" year="2002">
+			<status complete="1" watched="1" hasawards="1" restricted="0" />
+			<neps user="26" seen="26" cnt="26" />
+			<seps user="2" seen="1" cnt="11" /> 
+			<titles>
+				<title type="official" lang="ko"><![CDATA[아즈망가 대왕]]></title>
+				<title type="short" lang="x-jat"><![CDATA[AD]]></title>
+				<title type="official" lang="vi"><![CDATA[AZ Manga King]]></title>
+				<title type="short" lang="x-jat"><![CDATA[azu]]></title>
+				<title type="short" lang="x-jat"><![CDATA[AzuDai]]></title>
+				<title type="short" lang="x-jat"><![CDATA[Azumanga]]></title>
+				<title type="official" lang="fr"><![CDATA[Azu Manga Daioh]]></title>
+				<title type="official" lang="en"><![CDATA[Azumanga Daioh]]></title>
+				<title type="official" lang="de"><![CDATA[Azumanga Daioh]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Azumanga Daiou]]></title>
+				<title type="short" lang="ru"><![CDATA[Адзуманга]]></title>
+				<title type="syn" lang="ru"><![CDATA[Адзуманга Дайо]]></title>
+				<title type="official" lang="ja"><![CDATA[あずまんが大王]]></title>
+				<title type="syn" lang="zh"><![CDATA[阿滋漫画大王]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>mixed state</state>
+			<size longn="4.661.936.128" shortn="4445 MB" />
+			<rating type="normal" votes="4379" rating="8.56" />
+			<reviews cnt="20" rating="8.09" />
+			<dates added="20.08.02" update="25.02.07" start="08.04.2002" end="30.09.2002" />
+		</anime>
+		<anime id="4897" type="TV Series" year="2007">
+			<status complete="1" watched="1" hasawards="0" restricted="0" />
+			<neps user="13" seen="13" cnt="13" />
+			<seps user="1" seen="1" cnt="2" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[バッカーノ!]]></title>
+				<title type="short" lang="x-jat"><![CDATA[baccano]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Baccano!]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="1.497.844.476" shortn="1428 MB" />
+			<rating type="normal" votes="674" rating="8.73" />
+			<reviews cnt="2" rating="8.50" />
+			<dates added="17.12.06" update="19.01.08" start="27.07.2007" end="02.11.2007" />
+		</anime>
+		<anime id="167" type="OVA" year="1992-1994">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="1" seen="1" cnt="6" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="en"><![CDATA[All Purpose Cultural Cat Girl Nuku Nuku OVA 1]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Bannou Bunka Nekomusume]]></title>
+				<title type="short" lang="x-jat"><![CDATA[bbn]]></title>
+				<title type="syn" lang="en"><![CDATA[Catgirl Nuku Nuku OVA]]></title>
+				<title type="official" lang="fr"><![CDATA[L`invincible Nuku Nuku]]></title>
+				<title type="syn" lang="ru"><![CDATA[Универсальная современная девyшка-кошка OVA-1]]></title>
+				<title type="official" lang="ja"><![CDATA[万能文化猫娘]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="134.782.976" shortn="128 MB" />
+			<rating type="normal" votes="388" rating="6.43" />
+			<reviews cnt="2" rating="6.99" />
+			<dates added="26.08.02" update="07.08.06" start="21.10.1992" end="25.05.1994" />
+		</anime>
+		<anime id="416" type="TV Series" year="1999-2000">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="3" seen="0" cnt="26" />
+			<seps user="0" seen="0" cnt="2" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ブルージェンダー]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Blue Gender]]></title>
+				<title type="official" lang="fr"><![CDATA[Blue Gender]]></title>
+				<title type="official" lang="ro"><![CDATA[Blue Gender]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[虫袭]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>mixed state</state>
+			<size longn="684.320.768" shortn="652 MB" />
+			<rating type="normal" votes="1018" rating="6.88" />
+			<reviews cnt="9" rating="7.94" />
+			<dates added="22.12.02" update="24.06.07" start="08.10.1999" end="31.03.2000" />
+		</anime>
+		<anime id="5101" type="TV Series" year="2007-2008">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="9" seen="0" cnt="24" />
+			<seps user="0" seen="0" cnt="8" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ＣＬＡＮＮＡＤ　-クラナド-]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Clannad]]></title>
+				<title type="short" lang="ja"><![CDATA[clannad tv]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>mixed state</state>
+			<size longn="1.791.970.372" shortn="1708 MB" /><rating type="temp" votes="741" rating="8.70" />
+			<dates added="16.03.07" update="13.01.08" start="05.10.2007" end="04.04.2008" />
+		</anime>
+		<anime id="4345" type="TV Series" year="2007">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="12" seen="11" cnt="26" />
+			<seps user="0" seen="0" cnt="5" /> 
+			<titles>
+				<title type="syn" lang="x-unk"><![CDATA[Coil - A Circle of Children]]></title>
+				<title type="official" lang="en"><![CDATA[Cyber Coil]]></title>
+				<title type="short" lang="x-jat"><![CDATA[DenCo]]></title>
+				<title type="syn" lang="en"><![CDATA[Denno Coil]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Dennou Coil]]></title>
+				<title type="syn" lang="ru"><![CDATA[Кибер-виток]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[电脑线圈]]></title>
+				<title type="official" lang="ja"><![CDATA[電脳コイル]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>mixed state</state>
+			<size longn="367.034.788" shortn="350 MB" />
+			<rating type="normal" votes="599" rating="8.92" />
+			<reviews cnt="2" rating="8.24" />
+			<dates added="21.02.06" update="04.11.07" start="12.05.2007" end="01.12.2007" />
+		</anime>
+		<anime id="4549" type="TV Series" year="2006">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="1" seen="0" cnt="0" />
+			<seps user="0" seen="0" cnt="2" /> 
+			<titles>
+				<title type="syn" lang="ja"><![CDATA[ディー・グレイマン]]></title>
+				<title type="short" lang="x-unk"><![CDATA[D.g]]></title>
+				<title type="short" lang="x-unk"><![CDATA[DGM]]></title>
+				<title type="main" lang="x-jat"><![CDATA[D.Gray-man]]></title>
+				<title type="official" lang="ja"><![CDATA[D.Gray-man]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[D.格雷少年]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Grayman]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="179.763.721" shortn="171 MB" />
+			<rating type="normal" votes="6" rating="6.63" />
+			<reviews cnt="2" rating="6.33" />
+			<dates added="08.07.06" update="04.10.07" start="03.10.2006" end="?" />
+		</anime>
+		<anime id="490" type="OVA" year="1998">
+			<status complete="1" watched="1" hasawards="0" restricted="0" />
+			<neps user="1" seen="1" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="main" lang="x-jat"><![CDATA[Fake]]></title>
+				<title type="official" lang="ru"><![CDATA[Подделка]]></title>
+				<title type="syn" lang="ru"><![CDATA[Фальшивка]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<myvote type="normal" date="17.11.07" vote="8.5" />
+			<size longn="488.529.920" shortn="465 MB" />
+			<rating type="normal" votes="198" rating="6.25" />
+			<reviews cnt="1" rating="7.33" />
+			<dates added="21.01.03" update="14.01.06" start="21.04.1998" end="21.04.1998" />
+		</anime>
+		<anime id="163" type="OVA" year="1996-1997">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="2" seen="1" cnt="3" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="syn" lang="fr"><![CDATA[Fushigi Yûgi OAV]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Fushigi Yugi OVA - The Mysterious Play]]></title>
+				<title type="official" lang="fr"><![CDATA[Fushigi Yûgi - The Mysterious Play]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Fushigi Yuugi (1996)]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Fushigi Yuugi OVA 1]]></title>
+				<title type="short" lang="x-unk"><![CDATA[FY OVA1]]></title>
+				<title type="official" lang="pl"><![CDATA[Tajemnica Przeszłości OVA]]></title>
+				<title type="official" lang="en"><![CDATA[The Mysterious Play - OVA 1]]></title>
+				<title type="official" lang="ja"><![CDATA[ふしぎ遊戯 (1996)]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="425.998.336" shortn="406 MB" />
+			<rating type="normal" votes="393" rating="6.41" />
+			<reviews cnt="1" rating="6.16" />
+			<dates added="26.08.02" update="15.03.06" start="25.10.1996" end="25.02.1997" />
+		</anime>
+		<anime id="1783" type="TV Series" year="2004">
+			<status complete="0" watched="0" hasawards="1" restricted="0" />
+			<neps user="2" seen="0" cnt="12" />
+			<seps user="0" seen="0" cnt="3" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[げんしけん]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[Gendai Shikaku Bunka Kenkyuu Kai]]></title>
+				<title type="official" lang="de"><![CDATA[Genshiken]]></title>
+				<title type="official" lang="sv"><![CDATA[Genshiken]]></title>
+				<title type="official" lang="pl"><![CDATA[Genshiken]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Genshiken]]></title>
+				<title type="official" lang="fr"><![CDATA[Genshiken - Club d`étude de la culture visuelle moderne]]></title>
+				<title type="syn" lang="de"><![CDATA[Genshiken - Gesellschaft zum Studium moderner visueller Kultur]]></title>
+				<title type="syn" lang="en"><![CDATA[Genshiken TV]]></title>
+				<title type="syn" lang="en"><![CDATA[Society for the Study of Modern Visual Culture]]></title>
+				<title type="syn" lang="ru"><![CDATA[Гэнсикэн]]></title>
+				<title type="syn" lang="uk"><![CDATA[Ґеншікен]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[现视研]]></title>
+				<title type="syn" lang="ja"><![CDATA[現代視覚文化研究会]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="360.732.672" shortn="344 MB" />
+			<rating type="normal" votes="3647" rating="8.34" />
+			<reviews cnt="6" rating="8.44" />
+			<dates added="24.04.04" update="03.06.07" start="10.10.2004" end="26.12.2004" />
+		</anime>
+		<anime id="5210" type="TV Series" year="2007">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="1" seen="0" cnt="12" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[げんしけん２]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[genshiken2]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Genshiken 2]]></title>
+				<title type="syn" lang="en"><![CDATA[Genshiken TV 2]]></title>
+				<title type="syn" lang="uk"><![CDATA[Ґеншікен 2]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="180.479.744" shortn="172 MB" />
+			<rating type="normal" votes="712" rating="8.44" />
+			<reviews cnt="1" rating="8.50" />
+			<dates added="08.05.07" update="04.11.07" start="10.10.2007" end="26.12.2007" />
+		</anime>
+		<anime id="5188" type="TV Series" year="2007">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="1" seen="0" cnt="12" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="main" lang="x-jat"><![CDATA[Goshuushou-sama Ninomiya-kun]]></title>
+				<title type="official" lang="x-jat"><![CDATA[Gosyusho Sama Ninomiya Kun]]></title>
+				<title type="syn" lang="en"><![CDATA[My Heartfelt Sympathy, Ninomiya-kun]]></title>
+				<title type="short" lang="x-jat"><![CDATA[ninomiya-kun]]></title>
+				<title type="syn" lang="bg"><![CDATA[Нашите съболезнования, Ниномия]]></title>
+				<title type="syn" lang="ru"><![CDATA[Примите наши соболезнования, Ниномия-кун]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[忧伤大人二之宫]]></title>
+				<title type="official" lang="ja"><![CDATA[ご愁傷さま二ノ宮くん]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="178.151.723" shortn="169 MB" />
+			<rating type="normal" votes="520" rating="6.40" />
+			<reviews cnt="1" rating="3.83" />
+			<dates added="05.09.07" update="08.12.07" start="05.10.2007" end="21.12.2007" />
+		</anime>
+		<anime id="222" type="OVA" year="2002-2003">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="3" seen="0" cnt="4" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="short" lang="x-jat"><![CDATA[HackLim]]></title>
+				<title type="official" lang="ja"><![CDATA[.hack//Liminality]]></title>
+				<title type="main" lang="x-jat"><![CDATA[.hack//Liminality]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[hack//Liminality]]></title>
+				<title type="short" lang="x-jat"><![CDATA[HackOVA]]></title>
+				<title type="short" lang="x-jat"><![CDATA[H/L]]></title>
+				<title type="syn" lang="ru"><![CDATA[.хак//Лиминалити]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>deleted</state>
+			<size longn="716.843.008" shortn="683 MB" />
+			<rating type="normal" votes="1228" rating="6.05" />
+			<reviews cnt="2" rating="6.33" />
+			<dates added="03.10.02" update="30.01.06" start="20.06.2002" end="12.04.2003" />
+		</anime>
+		<anime id="301" type="TV Series" year="2001">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="7" seen="0" cnt="10" />
+			<seps user="0" seen="0" cnt="5" /> 
+			<titles>
+				<title type="main" lang="x-jat"><![CDATA[Hakaima Sadamitsu]]></title>
+				<title type="official" lang="hu"><![CDATA[Hakaima Sadamitsu]]></title>
+				<title type="official" lang="ro"><![CDATA[Hakaima Sadamitsu]]></title>
+				<title type="short" lang="x-unk"><![CDATA[sadamitsu]]></title>
+				<title type="official" lang="fr"><![CDATA[Sadamitsu le destructeur]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Sadamitsu the Destroyer]]></title>
+				<title type="official" lang="ja"><![CDATA[破壊魔定光]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="1.379.684.352" shortn="1315 MB" />
+			<rating type="normal" votes="139" rating="6.84" />
+			<reviews cnt="1" rating="6.83" />
+			<dates added="10.11.02" update="09.02.06" start="17.01.2001" end="21.03.2001" />
+		</anime>
+		<anime id="4917" type="TV Series" year="2007-2008">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="1" seen="0" cnt="52" />
+			<seps user="0" seen="0" cnt="2" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ハヤテのごとく！]]></title>
+				<title type="syn" lang="vi"><![CDATA[Chàng quản gia]]></title>
+				<title type="short" lang="x-jat"><![CDATA[Hayate]]></title>
+				<title type="syn" lang="fr"><![CDATA[Hayate le majordome]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[Hayate no Gotoku]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Hayate no Gotoku!]]></title>
+				<title type="syn" lang="en"><![CDATA[Hayate the Combat Butler]]></title>
+				<title type="short" lang="en"><![CDATA[HnG!]]></title>
+				<title type="syn" lang="ar"><![CDATA[الخادم المصارع هاياتي]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[旋风管家]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="244.380.629" shortn="233 MB" /><rating type="temp" votes="1076" rating="8.18" />
+			<dates added="03.01.07" update="13.01.08" start="01.04.2007" end="30.03.2008" />
+		</anime>
+		<anime id="890" type="Movie" year="2004">
+			<status complete="1" watched="0" hasawards="1" restricted="0" />
+			<neps user="6" seen="0" cnt="1" />
+			<seps user="0" seen="0" cnt="13" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[イノセンス]]></title>
+				<title type="syn" lang="pt-BR"><![CDATA[Fantasma do Futuro 2: Inocente]]></title>
+				<title type="syn" lang="pt"><![CDATA[Fantasma na Carapaça: Inocência]]></title>
+				<title type="syn" lang="en"><![CDATA[Ghost in the shell 2]]></title>
+				<title type="official" lang="de"><![CDATA[Ghost in the Shell 2 - Innocence]]></title>
+				<title type="official" lang="fr"><![CDATA[Ghost in the Shell 2 - Innocence]]></title>
+				<title type="official" lang="en"><![CDATA[Ghost in the Shell 2: INNOCENCE]]></title>
+				<title type="official" lang="fi"><![CDATA[Ghost in the Shell 2: Innocence]]></title>
+				<title type="syn" lang="en"><![CDATA[Ghost in the Shell - Innocence]]></title>
+				<title type="short" lang="en"><![CDATA[GitS2]]></title>
+				<title type="short" lang="en"><![CDATA[Gits INNOCENCE]]></title>
+				<title type="official" lang="et"><![CDATA[Hing anumas 2: Süütus]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Innocence]]></title>
+				<title type="syn" lang="tr"><![CDATA[Kabuktaki Hayalet 2: Masumiyet]]></title>
+				<title type="syn" lang="uk"><![CDATA[Дух в оболонці: Невинність]]></title>
+				<title type="official" lang="ru"><![CDATA[Призрак в доспехах 2: Невинность]]></title>
+				<title type="syn" lang="ru"><![CDATA[Призрак в доспехах: Невинность]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<wishlist type="to watch" pri="medium"><![CDATA[some comment]]></wishlist>
+			<size longn="2.743.483.085" shortn="2616 MB" />
+			<rating type="normal" votes="3416" rating="7.59" />
+			<reviews cnt="7" rating="7.71" />
+			<dates added="26.07.03" update="16.03.07" start="06.03.2004" end="06.03.2004" />
+		</anime>
+		<anime id="26" type="TV Series" year="2002-2003">
+			<status complete="0" watched="0" hasawards="1" restricted="0" />
+			<neps user="5" seen="0" cnt="45" />
+			<seps user="0" seen="0" cnt="4" /> 
+			<titles>
+				<title type="syn" lang="th"><![CDATA[12 อาณาจักรเทพยุทธ์]]></title>
+				<title type="syn" lang="ro"><![CDATA[12 Împărăţii]]></title>
+				<title type="short" lang="en"><![CDATA[12K]]></title>
+				<title type="syn" lang="lt"><![CDATA[12 Karalysčių]]></title>
+				<title type="syn" lang="en"><![CDATA[12 Kingdoms]]></title>
+				<title type="official" lang="de"><![CDATA[12 Kingdoms]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[12 Kokuki]]></title>
+				<title type="syn" lang="tr"><![CDATA[12 Krallık]]></title>
+				<title type="syn" lang="pl"><![CDATA[12 Królestw]]></title>
+				<title type="official" lang="es"><![CDATA[12 Reinos]]></title>
+				<title type="syn" lang="ar"><![CDATA[12 مملكة]]></title>
+				<title type="syn" lang="pt-BR"><![CDATA[Doze Reinos]]></title>
+				<title type="syn" lang="pl"><![CDATA[Dwanaście Królestw]]></title>
+				<title type="short" lang="x-jat"><![CDATA[JK]]></title>
+				<title type="short" lang="x-jat"><![CDATA[Juuni]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[Juuni Kokki]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Juuni Kokuki]]></title>
+				<title type="official" lang="fr"><![CDATA[Les 12 royaumes]]></title>
+				<title type="syn" lang="en"><![CDATA[Record of 12 countries]]></title>
+				<title type="official" lang="pt-BR"><![CDATA[The Twelve Kingdoms]]></title>
+				<title type="official" lang="en"><![CDATA[The Twelve Kingdoms]]></title>
+				<title type="official" lang="he"><![CDATA[שתים עשרה הממלכות]]></title>
+				<title type="syn" lang="ru"><![CDATA[Двенадцать королевств]]></title>
+				<title type="syn" lang="ru"><![CDATA[Хроники Двенадцати Королевств]]></title>
+				<title type="syn" lang="uk"><![CDATA[Хроніки дванадцяти королівств]]></title>
+				<title type="official" lang="ja"><![CDATA[十二国記]]></title>
+				<title type="official" lang="zh"><![CDATA[十二国记]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="1.187.091.439" shortn="1132 MB" />
+			<rating type="normal" votes="4699" rating="8.67" />
+			<reviews cnt="19" rating="8.74" />
+			<dates added="26.04.02" update="13.06.06" start="09.04.2002" end="30.08.2003" />
+		</anime>
+		<anime id="2179" type="OVA" year="2005-2007">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="5" seen="5" cnt="6" />
+			<seps user="0" seen="0" cnt="13" /> 
+			<titles>
+				<title type="official" lang="th"><![CDATA[คาราส อหังการปักษาทมิฬ]]></title>
+				<title type="syn" lang="en"><![CDATA[Crow]]></title>
+				<title type="official" lang="de"><![CDATA[Karas]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Karas]]></title>
+				<title type="official" lang="pl"><![CDATA[Karas]]></title>
+				<title type="official" lang="fr"><![CDATA[Karas]]></title>
+				<title type="syn" lang="tr"><![CDATA[Karga]]></title>
+				<title type="syn" lang="pl"><![CDATA[Kruk]]></title>
+				<title type="official" lang="en"><![CDATA[The Karas]]></title>
+				<title type="syn" lang="lt"><![CDATA[Varnas]]></title>
+				<title type="syn" lang="ar"><![CDATA[كاراس]]></title>
+				<title type="official" lang="ru"><![CDATA[Карас]]></title>
+				<title type="official" lang="ja"><![CDATA[鴉 -KARAS-]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>deleted</state>
+			<size longn="2.184.138.853" shortn="2082 MB" />
+			<rating type="normal" votes="563" rating="8.33" />
+			<reviews cnt="4" rating="8.03" />
+			<dates added="03.07.04" update="22.10.07" start="25.03.2005" end="23.10.2007" />
+		</anime>
+		<anime id="795" type="OVA" year="1995">
+			<status complete="1" watched="1" hasawards="0" restricted="1" />
+			<neps user="1" seen="1" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="main" lang="x-jat"><![CDATA[Keiraku no Houteishiki Level-C]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Level C]]></title>
+				<title type="official" lang="en"><![CDATA[Level-C]]></title>
+				<title type="official" lang="de"><![CDATA[Level-C]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Pleasure Education Level-C]]></title>
+				<title type="official" lang="ja"><![CDATA[快楽の方程式 LEVEL-C]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="129" rating="5.51" />
+			<dates added="12.06.03" update="03.07.06" start="14.07.1995" end="14.07.1995" />
+		</anime>
+		<anime id="2186" type="TV Series" year="2004-2005">
+			<status complete="0" watched="0" hasawards="1" restricted="0" />
+			<neps user="1" seen="0" cnt="50" />
+			<seps user="0" seen="0" cnt="35" /> 
+			<titles>
+				<title type="short" lang="x-jat"><![CDATA[destiny]]></title>
+				<title type="short" lang="x-jat"><![CDATA[gs2]]></title>
+				<title type="short" lang="x-jat"><![CDATA[GSD]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[Gundam Seed 2]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[Gundam Seed Destiny]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Kidou Senshi Gundam SEED Destiny]]></title>
+				<title type="official" lang="fr"><![CDATA[Mobile Suit Gundam Seed Destiny]]></title>
+				<title type="official" lang="en"><![CDATA[Mobile Suit Gundam SEED Destiny]]></title>
+				<title type="short" lang="x-jat"><![CDATA[SEED2]]></title>
+				<title type="syn" lang="ar"><![CDATA[جندام سيد دستني]]></title>
+				<title type="official" lang="zh"><![CDATA[机动战士高达SEED Destiny]]></title>
+				<title type="official" lang="ja"><![CDATA[機動戦士ガンダムSEED DESTINY]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="244.037.632" shortn="232 MB" />
+			<rating type="normal" votes="1894" rating="7.38" />
+			<reviews cnt="23" rating="7.02" />
+			<dates added="03.07.04" update="07.07.06" start="09.10.2004" end="01.10.2005" />
+		</anime>
+		<anime id="896" type="TV Series" year="2003-2004">
+			<status complete="0" watched="0" hasawards="1" restricted="0" />
+			<neps user="2" seen="0" cnt="14" />
+			<seps user="0" seen="0" cnt="10" /> 
+			<titles>
+				<title type="syn" lang="pt-BR"><![CDATA[A eternidade desejada por você]]></title>
+				<title type="official" lang="de"><![CDATA[Die Ewigkeit, die du dir wünschst]]></title>
+				<title type="short" lang="x-unk"><![CDATA[kgne]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Kimi ga Nozomu Eien]]></title>
+				<title type="short" lang="x-unk"><![CDATA[kiminozo]]></title>
+				<title type="short" lang="x-unk"><![CDATA[KiNoEi]]></title>
+				<title type="official" lang="en"><![CDATA[Rumbling Hearts]]></title>
+				<title type="syn" lang="en"><![CDATA[The Eternity You Wish For]]></title>
+				<title type="official" lang="pl"><![CDATA[Wieczność, której pragniesz]]></title>
+				<title type="syn" lang="uk"><![CDATA[Бажана тобою вічність]]></title>
+				<title type="official" lang="ru"><![CDATA[Беспокойные сердца]]></title>
+				<title type="syn" lang="ru"><![CDATA[Вечность на твой выбор]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[君望永远]]></title>
+				<title type="official" lang="ja"><![CDATA[君が望む永遠]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="489.076.203" shortn="466 MB" />
+			<rating type="normal" votes="4588" rating="8.27" />
+			<reviews cnt="23" rating="7.83" />
+			<dates added="28.07.03" update="27.12.07" start="05.10.2003" end="04.01.2004" />
+		</anime>
+		<anime id="247" type="TV Series" year="2002-2003">
+			<status complete="0" watched="0" hasawards="1" restricted="0" />
+			<neps user="15" seen="11" cnt="26" />
+			<seps user="6" seen="3" cnt="56" /> 
+			<titles>
+				<title type="syn" lang="x-unk"><![CDATA[Ghost in the Shell SAC]]></title>
+				<title type="official" lang="fr"><![CDATA[Ghost in the Shell - Stand Alone Complex]]></title>
+				<title type="official" lang="it"><![CDATA[Ghost in the Shell - Stand Alone Complex]]></title>
+				<title type="official" lang="fi"><![CDATA[Ghost in the Shell: Stand Alone Complex]]></title>
+				<title type="official" lang="de"><![CDATA[Ghost in the Shell: Stand Alone Complex]]></title>
+				<title type="official" lang="pl"><![CDATA[Ghost in the Shell: Stand Alone Complex]]></title>
+				<title type="official" lang="en"><![CDATA[Ghost in the Shell: Stand Alone Complex]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Ghost in the Shell: STAND ALONE COMPLEX]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Ghost in the Shell TV]]></title>
+				<title type="short" lang="x-unk"><![CDATA[GitSSAC]]></title>
+				<title type="short" lang="x-unk"><![CDATA[GitS SAC]]></title>
+				<title type="short" lang="x-unk"><![CDATA[GitS:SAC]]></title>
+				<title type="short" lang="x-unk"><![CDATA[gitssac1]]></title>
+				<title type="short" lang="x-unk"><![CDATA[GitSTV]]></title>
+				<title type="short" lang="x-unk"><![CDATA[GitS TV]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Koukaku Kidoutai Stand Alone Complex]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Mobile Armoured Riot Police STAND ALONE COMPLEX]]></title>
+				<title type="short" lang="x-unk"><![CDATA[sac1]]></title>
+				<title type="official" lang="sv"><![CDATA[Stand Alone Complex]]></title>
+				<title type="syn" lang="uk"><![CDATA[Дух в оболонці: комплекс окремості]]></title>
+				<title type="syn" lang="ru"><![CDATA[Призрак в доспехах: Автономный комплекс]]></title>
+				<title type="official" lang="ru"><![CDATA[Призрак в доспехах: Синдром одиночки]]></title>
+				<title type="short" lang="zh"><![CDATA[攻壳]]></title>
+				<title type="official" lang="zh"><![CDATA[攻壳机动队]]></title>
+				<title type="official" lang="ja"><![CDATA[攻殻機動隊 STAND ALONE COMPLEX]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="3.027.974.144" shortn="2887 MB" />
+			<rating type="normal" votes="4645" rating="8.70" />
+			<reviews cnt="16" rating="8.91" />
+			<dates added="08.10.02" update="24.08.06" start="01.10.2002" end="01.10.2003" />
+		</anime>
+		<anime id="7" type="Movie" year="1997">
+			<status complete="1" watched="1" hasawards="1" restricted="0" />
+			<neps user="2" seen="2" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="hu"><![CDATA[A vadon hercegnője]]></title>
+				<title type="official" lang="pl"><![CDATA[Księżniczka Mononoke]]></title>
+				<title type="official" lang="es"><![CDATA[La Princesa Mononoke]]></title>
+				<title type="syn" lang="it"><![CDATA[La Principessa Mononoke]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Mononoke Hime]]></title>
+				<title type="official" lang="tr"><![CDATA[Prenses Mononoke]]></title>
+				<title type="official" lang="sl"><![CDATA[Princesa Mononoke]]></title>
+				<title type="official" lang="pt-BR"><![CDATA[Princesa Mononoke]]></title>
+				<title type="official" lang="pt"><![CDATA[Princesa Mononoke]]></title>
+				<title type="official" lang="lv"><![CDATA[Princese Mononoke]]></title>
+				<title type="official" lang="lt"><![CDATA[Princesė Mononoke]]></title>
+				<title type="official" lang="fr"><![CDATA[Princesse Mononoké]]></title>
+				<title type="official" lang="en"><![CDATA[Princess Mononoke]]></title>
+				<title type="official" lang="hr"><![CDATA[Princeza Mononoke]]></title>
+				<title type="official" lang="cs"><![CDATA[Princezna Mononoke]]></title>
+				<title type="official" lang="sk"><![CDATA[Princezná Mononoke]]></title>
+				<title type="official" lang="fi"><![CDATA[Prinsessa Mononoke]]></title>
+				<title type="official" lang="ro"><![CDATA[Prinţesa Mononoke]]></title>
+				<title type="official" lang="et"><![CDATA[Printsess Mononoke]]></title>
+				<title type="official" lang="de"><![CDATA[Prinzessin Mononoke]]></title>
+				<title type="official" lang="ar"><![CDATA[الأميرة مونونوكي]]></title>
+				<title type="official" lang="he"><![CDATA[הנסיכה מונונוקי]]></title>
+				<title type="official" lang="bg"><![CDATA[Принцеса Мононоке]]></title>
+				<title type="syn" lang="uk"><![CDATA[Принцеса Мононоке]]></title>
+				<title type="official" lang="ru"><![CDATA[Принцесса Мононоке]]></title>
+				<title type="syn" lang="ru"><![CDATA[Принцесса Мононокэ]]></title>
+				<title type="official" lang="ja"><![CDATA[もののけ姫]]></title>
+				<title type="official" lang="zh"><![CDATA[幽灵公主]]></title>
+				<title type="syn" lang="zh"><![CDATA[魔法公主]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>external storage (cd/dvd/...)</state>
+			<size longn="1.467.181.056" shortn="1399 MB" />
+			<rating type="normal" votes="5179" rating="8.64" />
+			<reviews cnt="5" rating="9.19" />
+			<dates added="21.04.02" update="06.04.07" start="12.07.1997" end="12.07.1997" />
+		</anime>
+		<anime id="1122" type="TV Series" year="2003-2004">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="3" seen="0" cnt="52" />
+			<seps user="0" seen="0" cnt="1" /> 
+			<titles>
+				<title type="main" lang="x-jat"><![CDATA[Mujin Wakusei Survive]]></title>
+				<title type="short" lang="x-unk"><![CDATA[MuWa]]></title>
+				<title type="official" lang="fr"><![CDATA[Survivants]]></title>
+				<title type="short" lang="x-unk"><![CDATA[Survive]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Survive! - Uninhabited Planet]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Uninhabited Planet Survival]]></title>
+				<title type="syn" lang="en"><![CDATA[Uninhabited Planet SURVIVE]]></title>
+				<title type="short" lang="x-unk"><![CDATA[ups]]></title>
+				<title type="syn" lang="ar"><![CDATA[مغامرات الكوكب المهجور]]></title>
+				<title type="official" lang="he"><![CDATA[כוכב ההישרדות]]></title>
+				<title type="official" lang="ja"><![CDATA[無人惑星サヴァイヴ]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="552.933.376" shortn="527 MB" />
+			<rating type="normal" votes="400" rating="8.10" />
+			<reviews cnt="4" rating="8.53" />
+			<dates added="22.10.03" update="04.07.06" start="16.10.2003" end="28.10.2004" />
+		</anime>
+		<anime id="115" type="OVA" year="1999-2000">
+			<status complete="1" watched="0" hasawards="0" restricted="0" />
+			<neps user="6" seen="2" cnt="6" />
+			<seps user="0" seen="0" cnt="1" /> 
+			<titles>
+				<title type="official" lang="en"><![CDATA[Amazing Nurse Nanako]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Nanako Kaitai Shinsho]]></title>
+				<title type="official" lang="fr"><![CDATA[Nanako, manuel de génétique criminelle]]></title>
+				<title type="official" lang="ja"><![CDATA[菜々子解体診書]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="1.067.295.744" shortn="1017 MB" />
+			<rating type="normal" votes="352" rating="5.72" />
+			<reviews cnt="2" rating="5.99" />
+			<dates added="21.08.02" update="25.02.07" start="05.07.1999" end="24.03.2000" />
+		</anime>
+		<anime id="239" type="TV Series" year="2002-2007">
+			<status complete="0" watched="0" hasawards="1" restricted="0" />
+			<neps user="1" seen="0" cnt="220" />
+			<seps user="0" seen="0" cnt="36" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ナルト]]></title>
+				<title type="official" lang="es"><![CDATA[Naruto]]></title>
+				<title type="official" lang="pt-BR"><![CDATA[Naruto]]></title>
+				<title type="official" lang="en"><![CDATA[Naruto]]></title>
+				<title type="official" lang="de"><![CDATA[Naruto]]></title>
+				<title type="official" lang="fr"><![CDATA[Naruto]]></title>
+				<title type="official" lang="cs"><![CDATA[Naruto]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Naruto]]></title>
+				<title type="official" lang="ro"><![CDATA[Naruto]]></title>
+				<title type="official" lang="it"><![CDATA[Naruto]]></title>
+				<title type="official" lang="pl"><![CDATA[Naruto]]></title>
+				<title type="official" lang="fi"><![CDATA[Naruto]]></title>
+				<title type="official" lang="hu"><![CDATA[Naruto]]></title>
+				<title type="syn" lang="vi"><![CDATA[Naruto]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[Naruto TV]]></title>
+				<title type="short" lang="x-jat"><![CDATA[NTV]]></title>
+				<title type="syn" lang="fr"><![CDATA[Phénomène Naruto]]></title>
+				<title type="official" lang="ar"><![CDATA[ناروتو]]></title>
+				<title type="official" lang="he"><![CDATA[נארוטו]]></title>
+				<title type="syn" lang="uk"><![CDATA[Наруто]]></title>
+				<title type="syn" lang="ru"><![CDATA[Наруто]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="170.582.016" shortn="162 MB" />
+			<rating type="normal" votes="2802" rating="7.24" />
+			<reviews cnt="47" rating="7.55" />
+			<dates added="05.10.02" update="15.02.07" start="03.10.2002" end="08.02.2007" />
+		</anime>
+		<anime id="2386" type="TV Series" year="2004">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="1" seen="0" cnt="12" />
+			<seps user="0" seen="0" cnt="5" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ローゼンメイデン]]></title>
+				<title type="short" lang="x-unk"><![CDATA[rm]]></title>
+				<title type="official" lang="fr"><![CDATA[Rozen Maiden]]></title>
+				<title type="official" lang="de"><![CDATA[Rozen Maiden]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Rozen Maiden]]></title>
+				<title type="syn" lang="ru"><![CDATA[Дева-роза]]></title>
+				<title type="syn" lang="bg"><![CDATA[Момичето на Розен]]></title>
+				<title type="official" lang="zh-Hant"><![CDATA[蔷薇少女]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="183.500.800" shortn="175 MB" />
+			<rating type="normal" votes="1912" rating="7.72" />
+			<reviews cnt="7" rating="8.21" />
+			<dates added="15.07.04" update="24.06.06" start="08.10.2004" end="24.12.2004" />
+		</anime>
+		<anime id="1" type="TV Series" year="1999">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="2" seen="0" cnt="13" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="short" lang="en"><![CDATA[CotS]]></title>
+				<title type="official" lang="pl"><![CDATA[Crest of the Stars]]></title>
+				<title type="official" lang="en"><![CDATA[Crest of the Stars]]></title>
+				<title type="official" lang="fr"><![CDATA[Crest of the Stars]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Seikai no Monshou]]></title>
+				<title type="short" lang="x-jat"><![CDATA[SnM]]></title>
+				<title type="official" lang="ja"><![CDATA[星界の紋章]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="407.879.787" shortn="388 MB" />
+			<rating type="normal" votes="2214" rating="8.53" />
+			<reviews cnt="9" rating="9.01" />
+			<dates added="21.04.02" update="25.08.07" start="03.01.1999" end="28.03.1999" />
+		</anime>
+		<anime id="112" type="Movie" year="2001">
+			<status complete="1" watched="0" hasawards="1" restricted="0" />
+			<neps user="1" seen="0" cnt="1" />
+			<seps user="0" seen="0" cnt="5" /> 
+			<titles>
+				<title type="official" lang="hr"><![CDATA[Avanture male Chihiro]]></title>
+				<title type="official" lang="pt"><![CDATA[A Viagem de Chihiro]]></title>
+				<title type="official" lang="pt-BR"><![CDATA[A viagem de Chihiro]]></title>
+				<title type="official" lang="cs"><![CDATA[Cesta do fantazie]]></title>
+				<title type="official" lang="sk"><![CDATA[Cesta do fantázie]]></title>
+				<title type="short" lang="x-jat"><![CDATA[Chihiro]]></title>
+				<title type="official" lang="no"><![CDATA[Chihiro Og Heksene]]></title>
+				<title type="official" lang="de"><![CDATA[Chihiros Reise ins Zauberland]]></title>
+				<title type="official" lang="hu"><![CDATA[Chihiro Szellemországban]]></title>
+				<title type="official" lang="sl"><![CDATA[Čudežno potovanje]]></title>
+				<title type="official" lang="nl"><![CDATA[De reis van Chihiro]]></title>
+				<title type="official" lang="es"><![CDATA[El viaje de Chihiro]]></title>
+				<title type="official" lang="lv"><![CDATA[Gariem līdzi]]></title>
+				<title type="official" lang="fi"><![CDATA[Henkien kätkemä]]></title>
+				<title type="official" lang="it"><![CDATA[La Città Incantata]]></title>
+				<title type="official" lang="fr"><![CDATA[Le voyage de Chihiro]]></title>
+				<title type="official" lang="tr"><![CDATA[Ruhların Kaçışı]]></title>
+				<title type="short" lang="en"><![CDATA[SA]]></title>
+				<title type="short" lang="x-jat"><![CDATA[Sen to Chihiro]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Sen to Chihiro no Kamikakushi]]></title>
+				<title type="official" lang="sv"><![CDATA[Spirited Away]]></title>
+				<title type="official" lang="en"><![CDATA[Spirited Away]]></title>
+				<title type="official" lang="pl"><![CDATA[Spirited Away: W krainie bogów]]></title>
+				<title type="short" lang="x-jat"><![CDATA[StCnK]]></title>
+				<title type="official" lang="lt"><![CDATA[Stebuklingi Šihiros nuotykiai Dvasių pasaulyje]]></title>
+				<title type="official" lang="et"><![CDATA[Vaimudest viidud]]></title>
+				<title type="syn" lang="pl"><![CDATA[W Krainie Bogów]]></title>
+				<title type="official" lang="ar"><![CDATA[جيهيرو]]></title>
+				<title type="official" lang="he"><![CDATA[המסע המופלא]]></title>
+				<title type="official" lang="el"><![CDATA[Ταξίδι στη Χώρα των Θαυμάτων]]></title>
+				<title type="short" lang="uk"><![CDATA[Сен та Чіхіро]]></title>
+				<title type="syn" lang="uk"><![CDATA[Сен та Чіхіро в полоні у духів]]></title>
+				<title type="official" lang="ru"><![CDATA[Унесённые призраками]]></title>
+				<title type="official" lang="ja"><![CDATA[千と千尋の神隠し]]></title>
+				<title type="official" lang="zh"><![CDATA[千與千尋]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="715.405.312" shortn="682 MB" />
+			<rating type="normal" votes="4957" rating="8.63" />
+			<reviews cnt="9" rating="8.44" />
+			<dates added="21.08.02" update="06.04.07" start="20.07.2001" end="20.07.2001" />
+		</anime>
+		<anime id="853" type="TV Series" year="2002">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="2" seen="0" cnt="25" />
+			<seps user="0" seen="0" cnt="3" /> 
+			<titles>
+				<title type="short" lang="en"><![CDATA[7o7]]></title>
+				<title type="official" lang="fr"><![CDATA[7 of 7]]></title>
+				<title type="syn" lang="en"><![CDATA[7 of Seven]]></title>
+				<title type="syn" lang="en"><![CDATA[NaNa 7 of 7]]></title>
+				<title type="syn" lang="en"><![CDATA[Nana Seven of Seven]]></title>
+				<title type="official" lang="en"><![CDATA[Seven of Seven]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Shichinin no Nana]]></title>
+				<title type="official" lang="ja"><![CDATA[七人のナナ]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="475.510.784" shortn="453 MB" />
+			<rating type="normal" votes="46" rating="6.52" />
+			<dates added="14.07.03" update="01.02.06" start="10.01.2002" end="27.06.2002" />
+		</anime>
+		<anime id="75" type="TV Series" year="2002-2003">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="1" seen="0" cnt="50" />
+			<seps user="0" seen="0" cnt="1" /> 
+			<titles>
+				<title type="syn" lang="en"><![CDATA[A cheeky angel]]></title>
+				<title type="official" lang="en"><![CDATA[Cheeky Angel]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Tenshi na Konamaiki]]></title>
+				<title type="short" lang="x-jat"><![CDATA[tnk]]></title>
+				<title type="official" lang="ja"><![CDATA[天使な小生意気]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[鲁莽天使]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="242.677.890" shortn="231 MB" />
+			<rating type="normal" votes="737" rating="7.92" />
+			<reviews cnt="5" rating="7.16" />
+			<dates added="30.05.02" update="30.01.06" start="06.04.2002" end="29.03.2003" />
+		</anime>
+		<anime id="5039" type="TV Series" year="2007">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="5" seen="0" cnt="24" />
+			<seps user="0" seen="0" cnt="4" /> 
+			<titles>
+				<title type="syn" lang="ja"><![CDATA[Chikyuu he…]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Terra e... (2007)]]></title>
+				<title type="syn" lang="en"><![CDATA[Toward the Terra (2007)]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[toward the terra tv]]></title>
+				<title type="short" lang="x-unk"><![CDATA[tttv]]></title>
+				<title type="syn" lang="uk"><![CDATA[До Землі]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[向地球]]></title>
+				<title type="official" lang="ja"><![CDATA[地球へ… (2007)]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>internal storage (hdd)</state>
+			<size longn="937.911.355" shortn="894 MB" />
+			<rating type="normal" votes="430" rating="8.45" />
+			<reviews cnt="5" rating="8.72" />
+			<dates added="20.02.07" update="21.09.07" start="07.04.2007" end="22.09.2007" />
+		</anime>
+		<anime id="1223" type="OVA" year="1991">
+			<status complete="1" watched="1" hasawards="0" restricted="0" />
+			<neps user="1" seen="1" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="en"><![CDATA[Judge]]></title>
+				<title type="syn" lang="en"><![CDATA[Magistrate of Darkness: Judge]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Yami no Shihoukan Judge]]></title>
+				<title type="official" lang="ja"><![CDATA[闇の司法官ジャッジ]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="706.758.656" shortn="674 MB" />
+			<rating type="normal" votes="43" rating="5.16" />
+			<dates added="13.12.03" update="04.08.06" start="15.06.1991" end="15.06.1991" />
+		</anime>
+		<anime id="1305" type="TV Series" year="1994-1995">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="52" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="syn" lang="th"><![CDATA[ไร ซามูไรอวกาศ]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Ginga Sengoku Gun Yuuden Rai]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Rai: Galactic Civil War Chronicle]]></title>
+				<title type="official" lang="en"><![CDATA[Thunder Jet]]></title>
+				<title type="official" lang="ar"><![CDATA[هزيم الرعد]]></title>
+				<title type="official" lang="ja"><![CDATA[銀河戦国群雄伝ライ]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<wishlist type="undefined" pri="medium"><![CDATA[]]></wishlist>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="10" rating="8.16" />
+			<dates added="13.01.04" update="03.08.06" start="08.04.1994" end="31.03.1995" />
+		</anime>
+		<anime id="2839" type="TV Series" year="2005">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="26" />
+			<seps user="0" seen="0" cnt="2" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ガン×ソード]]></title>
+				<title type="official" lang="en"><![CDATA[Gun Sword]]></title>
+				<title type="syn" lang="en"><![CDATA[Gun VS Sword]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[GUNxSWORD]]></title>
+				<title type="official" lang="fr"><![CDATA[Gun x Sword]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Gun x Sword]]></title>
+				<title type="short" lang="x-jat"><![CDATA[GxS]]></title>
+				<title type="syn" lang="ar"><![CDATA[مسدس×سيف]]></title>
+				<title type="syn" lang="ru"><![CDATA[Огнём и мечом]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<wishlist type="undefined" pri="high"><![CDATA[]]></wishlist>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="922" rating="7.24" />
+			<reviews cnt="1" rating="6.00" />
+			<dates added="07.01.05" update="30.01.06" start="05.07.2005" end="27.12.2005" />
+		</anime>
+		<anime id="2870" type="Movie" year="1963">
+			<status complete="0" watched="0" hasawards="1" restricted="0" />
+			<neps user="0" seen="0" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ラヴ]]></title>
+				<title type="syn" lang="x-jat"><![CDATA[Ai]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Love]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="5" rating="4.88" />
+			<dates added="18.01.05" update="17.07.07" start="01.01.1963" end="31.12.1963" />
+		</anime>
+		<anime id="3216" type="TV Series" year="2005-2006">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="26" />
+			<seps user="0" seen="0" cnt="16" /> 
+			<titles>
+				<title type="syn" lang="th"><![CDATA[ไม-โอโตเมะ]]></title>
+				<title type="syn" lang="th"><![CDATA[ศึกอัญมณีสาวน้อยแห่งดวงดาว]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Mai Oto-Hime]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Mai-OtoHiME]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Mai Otome]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Mai-Otome]]></title>
+				<title type="official" lang="x-jat"><![CDATA[Mai-Z HiME]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[My Otome]]></title>
+				<title type="official" lang="en"><![CDATA[My-OTOME]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[My ZHiME]]></title>
+				<title type="short" lang="x-unk"><![CDATA[otome]]></title>
+				<title type="syn" lang="ar"><![CDATA[ماي-أوتومي]]></title>
+				<title type="syn" lang="ru"><![CDATA[Май-Отомэ]]></title>
+				<title type="official" lang="th"><![CDATA[ไม-乙HiME]]></title>
+				<title type="syn" lang="zh-Hans"><![CDATA[舞-乙HiME]]></title>
+				<title type="official" lang="ja"><![CDATA[舞-乙HiME]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<myvote type="temp" date="17.11.07" vote="6" />
+			<wishlist type="to watch" pri="medium"><![CDATA[]]></wishlist>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="2294" rating="7.70" />
+			<reviews cnt="6" rating="8.58" />
+			<dates added="11.04.05" update="30.03.06" start="07.10.2005" end="31.03.2006" />
+		</anime>
+		<anime id="3411" type="Movie" year="2004">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ko"><![CDATA[망치]]></title>
+				<title type="official" lang="en"><![CDATA[Hammerboy]]></title>
+				<title type="official" lang="fr"><![CDATA[Hammerboy]]></title>
+				<title type="official" lang="pt"><![CDATA[Hammerboy, O Rapaz do Martelo]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Mangchi]]></title>
+				<title type="official" lang="ru"><![CDATA[Хаммербой]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<myvote type="normal" date="17.11.07" vote="5" />
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="18" rating="5.17" />
+			<dates added="12.06.05" update="03.07.06" start="06.08.2004" end="06.08.2004" />
+		</anime>
+		<anime id="2855" type="TV Series" year="2005-2007">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="102" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[メル]]></title>
+				<title type="official" lang="th"><![CDATA[อิทธิฤทธิ์พิชิตมายา]]></title>
+				<title type="main" lang="x-jat"><![CDATA[MAR]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[MÄR]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Marchen Awakens Romance]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Märchen Awakens Romance]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[MAR-Heaven]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[MÄR Heaven]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Maruhebun]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="57" rating="6.67" />
+			<reviews cnt="3" rating="6.55" />
+			<dates added="13.01.05" update="06.03.07" start="03.04.2005" end="25.03.2007" />
+		</anime>
+		<anime id="998" type="TV Series" year="2004">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="13" />
+			<seps user="0" seen="0" cnt="14" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[メゾ]]></title>
+				<title type="official" lang="de"><![CDATA[Mezzo]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Mezzo Danger Service Agency]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Mezzo DSA]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Mezzo Forte TV]]></title>
+				<title type="short" lang="x-unk"><![CDATA[Mezzo TV]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Mezzo TV Danger Service Agency]]></title>
+				<title type="official" lang="ru"><![CDATA[Mezzo: Игра со смертью]]></title>
+				<title type="short" lang="x-unk"><![CDATA[MFTV]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<wishlist type="to get" pri="medium"><![CDATA[]]></wishlist>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="622" rating="6.53" />
+			<reviews cnt="3" rating="6.83" />
+			<dates added="24.08.03" update="01.09.07" start="04.01.2004" end="28.03.2004" />
+		</anime>
+		<anime id="46" type="TV Series" year="2000">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="13" />
+			<seps user="0" seen="0" cnt="2" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[ニア アンダーセブン]]></title>
+				<title type="short" lang="x-unk"><![CDATA[NieA]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[NieA 7]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[NieA_7]]></title>
+				<title type="official" lang="de"><![CDATA[NieA_7]]></title>
+				<title type="official" lang="fr"><![CDATA[NieA_7]]></title>
+				<title type="main" lang="x-jat"><![CDATA[NieA Under 7]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="606" rating="7.01" />
+			<reviews cnt="5" rating="7.03" />
+			<dates added="20.05.02" update="10.03.07" start="26.04.2000" end="19.07.2000" />
+		</anime>
+		<anime id="3474" type="Movie" year="1962">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[おす]]></title>
+				<title type="official" lang="en"><![CDATA[Male]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Osu]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<wishlist type="to watch" pri="medium"><![CDATA[]]></wishlist>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="105" rating="5.57" />
+			<reviews cnt="1" rating="5.00" />
+			<dates added="08.07.05" update="09.04.07" start="05.11.1962" end="05.11.1962" />
+		</anime>
+		<anime id="2596" type="Web" year="2000">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="44" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ko"><![CDATA[푸카]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Funny Love]]></title>
+				<title type="official" lang="pt"><![CDATA[Pucca]]></title>
+				<title type="official" lang="hu"><![CDATA[Pucca]]></title>
+				<title type="official" lang="ro"><![CDATA[Pucca]]></title>
+				<title type="main" lang="ko"><![CDATA[Pucca]]></title>
+				<title type="official" lang="fr"><![CDATA[Pucca Funny Love]]></title>
+				<title type="official" lang="en"><![CDATA[Pucca Funny Love]]></title>
+				<title type="syn" lang="ko"><![CDATA[Pucca: Funny Love]]></title>
+				<title type="official" lang="da"><![CDATA[Pucca Funny Love Story]]></title>
+				<title type="official" lang="he"><![CDATA[פוקה]]></title>
+				<title type="official" lang="ru"><![CDATA[Пукка]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<wishlist type="to get" pri="medium"><![CDATA[]]></wishlist>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="11" rating="6.57" />
+			<dates added="28.08.04" update="03.06.07" start="01.01.2000" end="31.12.2000" />
+		</anime>
+		<anime id="1009" type="TV Series" year="1990-1991">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="78" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ko"><![CDATA[무민 잉글리쉬]]></title>
+				<title type="syn" lang="en"><![CDATA[Delightful Moomin Family]]></title>
+				<title type="syn" lang="en"><![CDATA[Fun Family Moomin]]></title>
+				<title type="official" lang="sv"><![CDATA[I Mumindalen]]></title>
+				<title type="official" lang="fr"><![CDATA[Les Moomins]]></title>
+				<title type="short" lang="x-unk"><![CDATA[Los Mumins]]></title>
+				<title type="official" lang="es"><![CDATA[Moomin]]></title>
+				<title type="official" lang="en"><![CDATA[Moomin]]></title>
+				<title type="official" lang="nl"><![CDATA[Moomin]]></title>
+				<title type="official" lang="is"><![CDATA[Múmínálfarnir]]></title>
+				<title type="official" lang="pl"><![CDATA[Muminki]]></title>
+				<title type="official" lang="de"><![CDATA[Mumins]]></title>
+				<title type="official" lang="da"><![CDATA[Mumitroldene]]></title>
+				<title type="official" lang="no"><![CDATA[Mummitrollet]]></title>
+				<title type="official" lang="fi"><![CDATA[Muumilaakson tarinoita]]></title>
+				<title type="official" lang="et"><![CDATA[Muumioru lood]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Muumit]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Tanoshii Muumin Ikka]]></title>
+				<title type="syn" lang="en"><![CDATA[The Moomins]]></title>
+				<title type="syn" lang="en"><![CDATA[The Tales from Moominvalley]]></title>
+				<title type="short" lang="x-unk"><![CDATA[TMI]]></title>
+				<title type="official" lang="ar"><![CDATA[وادي الأمان]]></title>
+				<title type="official" lang="he"><![CDATA[המומינים]]></title>
+				<title type="official" lang="zh"><![CDATA[小肥肥一族]]></title>
+				<title type="official" lang="ja"><![CDATA[楽しいムーミン一家]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<wishlist type="to watch" pri="high"><![CDATA[]]></wishlist>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="85" rating="7.55" />
+			<dates added="25.08.03" update="14.08.07" start="12.04.1990" end="03.10.1991" />
+		</anime>
+		<anime id="2999" type="Movie" year="1991">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="official" lang="ja"><![CDATA[とべ! くじらのピーク]]></title>
+				<title type="syn" lang="x-unk"><![CDATA[Fly! Peek the Whale]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Tobe! Kujira no Peek]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="1" rating="7.51" />
+			<dates added="28.02.05" update="04.07.06" start="22.05.1991" end="22.05.1991" />
+		</anime>
+		<anime id="4726" type="Movie" year="1981">
+			<status complete="0" watched="0" hasawards="0" restricted="0" />
+			<neps user="0" seen="0" cnt="1" />
+			<seps user="0" seen="0" cnt="0" /> 
+			<titles>
+				<title type="syn" lang="x-other"><![CDATA[❄]]></title>
+				<title type="official" lang="ja"><![CDATA[ゆき]]></title>
+				<title type="syn" lang="sr"><![CDATA[Snežana]]></title>
+				<title type="syn" lang="en"><![CDATA[Snow]]></title>
+				<title type="syn" lang="en"><![CDATA[Snow Fairy]]></title>
+				<title type="main" lang="x-jat"><![CDATA[Yuki]]></title>
+				<title type="official" lang="fr"><![CDATA[Yuki - Le combat des Shoguns]]></title>
+				<title type="official" lang="pl"><![CDATA[Yuki - Śniegowa Wróżka]]></title>
+			</titles>
+			<tags>
+			</tags>
+			<state>unknown</state>
+			<myvote type="normal" date="17.11.07" vote="9" />
+			<size longn="0" shortn="0 Bytes" />
+			<rating type="normal" votes="6" rating="7.45" />
+			<dates added="22.08.06" update="23.10.07" start="09.08.1981" end="09.08.1981" />
+		</anime>
+	</animes>
+</root>

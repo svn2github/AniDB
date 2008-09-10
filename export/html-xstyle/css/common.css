@@ -1,0 +1,714 @@
+#statusBox { 
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	min-width: 120px;
+	z-index: 0;
+	font-family: Arial,Helvetica,sans-serif;
+	text-decoration: none;
+	color: #000000;
+	text-align: left;
+	background-color: #FFFFFF;
+	font-size: x-small; /*
+	padding: 2px;
+	border: 1px solid rgb(227, 227, 227); */
+}
+
+div.loadingbar {
+	background: white top left no-repeat;
+	padding: 0;
+	margin: 5px 0 0 0;
+	background-position: 1px 0;
+	width: 120px;
+	height: 12px;
+	border: 1px solid black;
+}
+
+div.loadingbar_green { background: url(images/loadingbar_green.png); }
+div.loadingbar_red { background: url(images/loadingbar_red.png); }
+div.loadingbar_orange { background: url(images/loadingbar_orange.png); }
+div.loadingbar_yellow { background: url(images/loadingbar_yellow.png); }
+div.loadingbar_blue { background: url(images/loadingbar_blue.png); }
+
+body { background-color: rgb(227, 227, 227); }
+
+div.preferences {
+	position: absolute;
+	top: 70px;
+	right: 27px;
+	z-index: 50px;
+}
+
+div.preferences ul {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	color: rgb(27,27,27);
+	background-color: rgb(247, 247, 247);
+	border: 1px solid rgb(204, 204, 204);
+}
+
+div.preferences ul li {
+	border-top: 1px solid rgb(204, 204, 204);
+	line-height: 1.5;
+	color: rgb(27,27,27);
+	padding: 1px 5px 1px 5px;
+	text-transform: capitalize;
+}
+div.preferences ul li:hover {
+	background-color: rgb(204, 204, 204);
+	cursor: pointer;
+}
+
+a, .horizontalOptions ul li, div.mylist_menu ul li {
+	font-weight: normal;
+	color: rgb(1, 135, 197);
+	text-decoration: none;
+	outline: invert none medium;
+}
+
+div.mylist_menu ul li:hover,
+a:hover { text-decoration: underline; }
+
+ul, ul li { 
+	list-style: none; 
+	margin: 0pt;
+	padding: 0pt;
+}
+ul.g_list { 
+	display: block; 
+	text-align: center; 
+	margin: 10px 0px 10px 0px;
+}
+.g_list li { 
+	padding: 1px 5px 1px 5px;
+	display: inline; 
+	text-transform: capitalize;
+	font-weight: bold;
+	border: 1px solid transparent;
+	border-bottom: 2px solid black;
+	margin: 0px 2px 0px 2px;
+}
+.g_list li:hover,
+.g_list li.selected { 
+	border-bottom: 2px solid rgb(227, 227, 227); 
+	border-top: 1px dotted rgb(227, 227, 227);
+	border-right: 1px dotted rgb(227, 227, 227);
+	border-left: 1px dotted rgb(227, 227, 227);
+	background-color: rgb(247, 247, 247);
+	cursor: pointer;
+}
+.g_list li.page { margin: 0px; }
+.g_list li.prev { margin-left: 15px; }
+.g_list li.next { margin-right: 15px; }
+
+.horizontalOptions {
+	display: block;
+	margin: 0pt;
+	margin-bottom: 15px;
+	border-bottom: 1px solid rgb(204, 204, 204);
+}
+.horizontalOptions ul { overflow-x: hidden; overflow-y: hidden; margin-bottom: -1px; }
+.horizontalOptions ul li {
+	margin: 0pt;
+	margin-right: 5px;
+	padding: 0px 5px 1px 5px;
+	display: inline;
+	text-transform: capitalize;
+	
+}
+.horizontalOptions ul li.selected,
+.horizontalOptions ul li:hover {
+	border: 1px solid rgb(204, 204, 204);
+	border-top: 1px solid rgb(204, 204, 204);
+	border-bottom: 1px solid white;
+	cursor: pointer;
+}
+.horizontalOptions ul li.selected {
+	color: rgb(105, 105, 105);
+	text-decoration: none;
+	cursor: auto;
+}
+
+#layout-content {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	line-height: 1.5;
+	color: rgb(27,27,27);
+	background-color: white;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 5px;
+	border: 1px solid rgb(204, 204, 204);
+}
+
+.mylist_menu {
+	position: absolute;
+	top: 75px;
+	left: 30px;
+	float: right;
+	background-color: white;
+	z-index: 99;
+	border: 1px solid rgb(204, 204, 204);
+}
+
+div.mylist_menu ul {
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	min-width: 130px;
+}
+div.mylist_menu ul li { cursor: pointer }
+
+ul.filters:before, ul.state:before, ul.animecat:before, ul.wishlistpri:before, ul.wishlisttype:before {
+	color: white;
+	font-weight: bold;
+	background: white url(images/heading-gray.png) no-repeat scroll right top;
+	line-height: 13px;
+	padding: 2px 15px 2px 10px;
+}
+
+ul.filters { padding-top: 5px; }
+ul.filters:before { content: "Filters";}
+ul.state:before { content: "Show"; }
+ul.animecat:before { content: "Types"; }
+ul.wishlistpri:before { content: "Wishlist Priority"; }
+ul.wishlisttype:before { content: "Wishlist Type"; }
+
+#animelist, .eplist, .filelist {
+	border-collapse: separate;
+	border-spacing: 0pt;
+	min-width: 500px;
+	width: 100%;
+}
+
+table.eplist, table.filelist {
+	padding-left: 25px;
+}
+
+table.animelist th, table.eplist th, table.filelist th {
+	text-align: left;
+	font-weight: bold;
+	text-transform: capitalize;
+	vertical-align: bottom;
+	padding: 0.3em 0.4em 0.3em 0.4em;
+	border-bottom: 2px solid black;
+}
+
+table.animelist th.my, table.animelist th.attavg {
+	padding-right: 15px;
+}
+
+table.animelist caption {
+	text-align: left;
+	text-transform: capitalize;
+	background: url(images/heading.png) no-repeat scroll left top;
+	color: rgb(255, 255, 255);
+	padding: 2px 15px 0px 15px;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 15px;
+	border-bottom: 2px solid rgb(58, 58, 58);
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+table.animelist caption span.icons {
+	margin-right: 40px;
+}
+
+table.animelist caption:hover > span.icons .i_icon {
+	display: block;
+}
+
+table.animelist tbody { 
+	min-width: 500px;
+}
+table.animelist tr { line-height: 1.81em; }
+table.animelist tbody tr:hover, table.filelist tbody tr:hover, table.eplist tbody tr:hover { 
+	background-color: rgb(250, 250, 250);
+	border-right: 1px dotted rgb(227, 227, 227);
+	border-left: 1px dotted rgb(227, 227, 227);
+	border-bottom: 1px dotted rgb(227, 227, 227);
+}
+table.animelist tbody tr.eplist_container,
+table.eplist tbody tr.filelist_container { background-color: transparent; }
+
+table.animelist tr.complete > td.eps,
+table.animelist tr.all_watched > td.eps { 
+	font-weight: bold; 
+	background: transparent url(images/checkmark-grey.png) no-repeat scroll center left;
+	padding-left: 13px;
+}
+table.animelist tr.all_watched > td.seen { 
+	font-weight: bold;
+	color: rgb(75, 155, 57);
+	background: transparent url(images/checkmark.png) no-repeat scroll center left;
+	padding-left: 13px;
+}
+table.animelist tr.odd { background-color: rgb(235, 235, 235); }
+table.animelist td {
+	border-top: 1px solid #eeeeee;
+	padding: 0.1em 0.3em 0.1em 0.3em;
+}
+
+table.animelist td.title { padding-right: 55px; }
+span.count { font-size: 80%; color: rgb(143, 149, 174); vertical-align: top; }
+
+th:hover { background-color: rgb(247, 247, 247); }
+th.c_set:hover, th.c_setlatin:hover, th.c_latin:hover, th.c_date:hover, th.c_number:hover { 
+	background-color: rgb(247, 247, 247);
+	cursor: pointer; 
+}
+
+th.s_forward:hover, th.s_reverse:hover {
+	background-color: rgb(247, 247, 247);
+}
+th.c_set, th.c_setlatin, th.c_latin, th.c_date, th.c_number {
+	background: transparent no-repeat right center url(images/updown.gif);
+	padding-right: 15px;
+}
+th.s_forward { background: transparent no-repeat right center url(images/srtdown.gif); }
+th.s_reverse { background: transparent no-repeat right center url(images/srtup.gif); }
+table.eplist th:hover, table.filelist th:hover { background-color: white; }
+
+/*
+table.eplist th:hover, table.eplist th.s_forward:hover, table.eplist th.s_reverse:hover,
+table.eplist th.c_set:hover, table.eplist th.c_setlatin:hover, table.eplist th.c_latin:hover, 
+table.eplist th.c_date:hover, table.eplist th.c_number:hover { background-color: rgb(255, 255, 255); }
+
+table.filelist th:hover { background-color: white; }
+table.filelist th.s_forward:hover, table.filelist th.s_reverse:hover,
+table.filelist th.c_set:hover, table.filelist th.c_setlatin:hover, table.filelist th.c_latin:hover, 
+table.filelist th.c_date:hover, table.filelist th.c_number:hover { background-color: rgb(247, 247, 247); }
+*/
+table.filelist td.id { padding-left: 16px; }
+table.filelist tr.good td { background-color: rgb(240, 255, 227); }
+table.filelist tr.g_odd td { background-color: #f2f2f2; }
+table.filelist tr.good.g_odd td { background-color: #e9ffd8; }
+table.filelist tr.deprecated td { background-color: #ddd; }
+table.filelist tr.good td.id { background-image: url(images/checkmark.png); background-repeat: no-repeat; background-position: 2px center; }
+table.filelist tr.deprecated td.id { background-image: url(images/deprecated.png); background-repeat: no-repeat; background-position: 2px center; }
+
+#layout-content .icons .i_icon { float: left; }
+
+span.icons {
+	position: relative;
+	left: 50px;
+	margin-left: -50px;
+	float: right; 
+	white-space: nowrap; 
+	display: inline;
+	vertical-align: bottom;
+}
+
+a.i_icon:hover, a.i_inline:hover { text-decoration: none; }
+
+.i_icon {
+	background-repeat: no-repeat;
+	display: block;
+	width: 15px;
+	height: 13px;
+	margin-left: 1px;
+	margin-right: 0px;
+}
+
+.i_inline {
+	padding: 0px 8px 0px 7px;
+	margin: 4px;
+}
+
+.i_icon span, .i_button span, .i_inline span { display: none; }
+
+.i_award {
+	width: 300px;
+	height: 50px;
+	padding: 0.2em;
+	display: inline-block;
+}
+
+ul.state > li,
+ul.wishlistpri > li,
+ul.filters > li,
+ul.animecat > li,
+ul.wishlisttype > li {
+	padding-left: 17px;
+	background: transparent no-repeat scroll center left;
+}
+
+ul.filters > li.restricted,
+ul.state > li.all,
+ul.animecat > li.all,
+ul.wishlistpri > li.all,
+ul.wishlisttype > li.all { 
+	border-top: 2px solid rgb(147, 147, 147); 
+}
+
+.i_audio { display: none; }
+*.i_expand { background-image: url(images/icon_expand.gif); }
+*.i_collapse { background-image: url(images/icon_collapse.gif); }
+*.i_state_all, 
+ul.state > li.all, 
+ul.animecat > li.all,
+ul.wishlistpri > li.all,
+ul.wishlisttype > li.all { background-image: url(images/state/state-all.png); }
+*.i_state_deleted, ul.state > li.deleted { background-image: url(images/state/state-del.png); }
+*.i_state_mixed, ul.state > li.mixed { background-image: url(images/state/state-mixed.png); }
+*.i_state_oncd, ul.state > li.cd { background-image: url(images/state/state-cd.png); }
+*.i_state_onhdd, ul.state > li.hdd { background-image: url(images/state/state-hdd.gif); }
+*.i_state_unknown, ul.state > li.unknown, ul.animecat > li.other { background-image: url(images/state/state-unknown.gif); }
+*.i_tv_series, ul.animecat > li.series { width: 15px; height: 15px; background-image: url(images/state/anidb_atype_tv_series.gif); }
+*.i_movie, ul.animecat > li.movies { width: 15px; height: 15px; background-image: url(images/state/anidb_atype_movie.gif); }
+*.i_ova, ul.animecat > li.ovas { width: 15px; height: 15px; background-image: url(images/state/anidb_atype_ova.gif); }
+*.i_web { width: 15px; height: 15px; background-image: url(images/state/anidb_atype_web.gif); }
+*.i_tv_special { width: 15px; height: 15px; background-image: url(images/state/anidb_atype_tv_special.gif); }
+*.i_other, *.i_unknown { width: 15px; height: 15px; background-image: url(images/state/anidb_type_other.gif); }
+*.i_recap { background-image: url(images/state/state-recap.gif); }
+*.i_araward { background-image: url(images/star.png); }
+*.i_pri_low, ul.wishlistpri > li.low { background-image: url(images/priority-low.png); }
+*.i_pri_medium, ul.wishlistpri > li.medium { background-image: url(images/priority-med.png); }
+*.i_pri_high, ul.wishlistpri > li.high { background-image: url(images/priority-high.png); }
+*.i_checkmark,
+ul.filters > li.active,
+ul.state > li.active,
+ul.animecat > li.active,
+ul.wishlisttype > li.active,
+ul.wishlistpri > li.active { background-image: url(images/checkmark.png); }
+*.i_checkmark_grey,
+ul.filters > li.inactive,
+ul.animecat > li.inactive,
+ul.wishlisttype > li.inactive { background-image: url(images/checkmark-grey.png); }
+*.i_settings { 
+	width: 26px;
+	height: 15px;
+	background: transparent url(images/settings.png) no-repeat right top;
+	display: none;
+}
+/* wishlist */
+ul.wishlisttype > li.blacklisted, *.i_wishlist_blacklist { background-image: url(images/state/wishlist_blacklist.png); }
+ul.wishlisttype > li.buddy, *.i_wishlist_buddy { background-image: url(images/state/wishlist_buddy.png); }
+ul.wishlisttype > li.toget, *.i_wishlist_toget { background-image: url(images/state/wishlist_toget.png); }
+ul.wishlisttype > li.towatch, *.i_wishlist_towatch { background-image: url(images/state/wishlist_towatch.png); }
+ul.wishlisttype > li.unknown, *.i_wishlist_undefined { background-image: url(images/state/wishlist_undefined.png); }
+
+*.i_settings_active,
+*.i_settings:hover { background-position: right -15px !important; }
+*.i_settings_active { 
+	width: 26px;
+	height: 15px;
+	background: transparent url(images/settings.png) no-repeat right top;
+	display: block; 
+}
+
+.i_help {
+	background: transparent url(images/state/help.png) no-repeat left center;
+	cursor: help;
+	border: 0 !important;
+	padding: 4px 8px;
+}
+
+.i_help:hover {
+	background-position: -15px center;
+}
+
+.i_down1, .i_up1		{background-position: -11px center;}
+.i_nodown1, .i_down1	{background-image: url(images/state/down.gif);}
+.i_noup1, .i_up1		{background-image: url(images/state/up.gif);}
+.i_minus				{background-image: url(images/state/minus.gif);}
+.i_plus					{background-image: url(images/state/plus.gif);}
+.i_minus:hover			{background-position: right}
+.i_plus:hover			{background-position: right}
+
+/* file attributes */
+.i_comment,
+.i_group_comment		{background-image: url(images/state/comment.png); height: 15px !important; background-position: center bottom !important;}
+.i_crc_yes				{background-image: url(images/state/crc-yes.png); height: 15px !important;}
+.i_new_icon				{background-image: url(images/state/epfile-new.png);}
+.i_uncensored			{background-image: url(images/state/uncensored.gif);}
+.i_video				{background-image: url(images/state/video.gif);}
+.i_vrs_2				{background-image: url(images/state/v2.png); height: 15px !important;}
+.i_vrs_3				{background-image: url(images/state/v3.png); height: 15px !important;}
+.i_seen					{background-image: url(images/state/state-seen.png);}
+.i_seen_no				{background-image: url(images/state/seen-no.png);}
+.i_seen_yes				{background-image: url(images/state/seen-yes.png);}
+
+*.i_file_delete { background-image: url(images/icons/anidb_file_delete.gif); }
+*.i_file_edit {	background-image: url(images/icons/anidb_file_edit.gif); }
+*.i_file_details {background-image: url(images/icons/anidb_file_details.gif); }
+*.i_file_ed2k { background-image: url(images/icons/anidb_file_ed2k.gif); }
+*.i_file_ed2k_corrupt { background-image: url(images/icons/anidb_file_ed2k_corrupt.gif); }
+*.i_av_yes { background-image: url(images/icons/anidb_av_yes.gif); }
+*.i_crc_no { background-image: url(images/icons/anidb_crc_no.gif); }
+*.i_censored { background-image: url(images/icons/anidb_censored.gif); }
+*.i_uncensored { background-image: url(images/icons/anidb_uncensored.gif); }
+*.i_vrs_1 { background-image: url(images/icons/anidb_vrs_1.gif); }
+*.i_vrs_4 { background-image: url(images/icons/anidb_vrs_4.gif); }
+*.i_vrs_5 { background-image: url(images/icons/anidb_vrs_5.gif); }
+*.i_crc_unv { background-image: url(images/icons/anidb_crc_unv.gif); }
+*.i_video { background-image: url(images/icons/anidb_video.gif); }
+*.i_video.xvid, *.i_video.divx5 { background-image: url(images/icons/anidb_video_asp.gif); }
+*.i_video.avc { background-image: url(images/icons/anidb_video_avc.gif); }
+*.i_video.wmv9 { background-image: url(images/icons/anidb_video_wmv.gif); }
+*.i_ext { background-image: url(images/icons/anidb_other.gif); }
+*.i_ext.mkv { background-image: url(images/icons/anidb_ext_mkv.gif); }
+*.i_ext.ogm { background-image: url(images/icons/anidb_ext_ogm.gif); }
+*.i_ext.avi { background-image: url(images/icons/anidb_ext_avi.gif); }
+*.i_ext.mp4 { background-image: url(images/icons/anidb_ext_mp4.gif); }
+*.i_ext.wmv { background-image: url(images/icons/anidb_ext_wmv.gif); }
+*.i_ext.srt { background-image: url(images/icons/anidb_ext_srt.gif); }
+*.i_ftype_video { background-image: url(images/icons/anidb_video.gif); }
+*.i_ftype_video2 { background-image: url(images/icons/anidb_video2.gif); }
+*.i_ftype_subtitle { background-image: url(images/icons/anidb_subtitles.gif); }
+*.i_ftype_subtitle2 { background-image: url(images/icons/anidb_subtitles2.gif); }
+*.i_ftype_audio { background-image: url(images/icons/anidb_audio.gif); }
+*.i_ftype_other { background-image: url(images/icons/anidb_other.gif); }
+*.i_file2ep_rel { width: 20px; background-image: url(images/icons/anidb_file2ep2.gif); }
+*.i_file2file_rel { width: 20px; background-image: url(images/icons/anidb_file2file2.gif); }
+
+
+/* mylist */
+.i_file_addmylist		{background-image: url(images/state/mylist-add.png);}
+.i_file_removemylist	{background-image: url(images/state/mylist-remove.png);}
+.i_mylist				{background-image: url(images/state/state-inmylist.png);}
+*.i_filestate_corrupted { background-image: url(images/state/anidb_filestate_corrupted.gif); }
+*.i_filestate_edited { background-image: url(images/state/anidb_filestate_edited.gif); }
+*.i_filestate_ondvd { background-image: url(images/state/anidb_filestate_ondvd.gif); }
+*.i_filestate_ontv { background-image: url(images/state/anidb_filestate_ontv.gif); }
+*.i_filestate_onvhs { background-image: url(images/state/anidb_filestate_onvhs.gif); }
+*.i_filestate_other { background-image: url(images/state/anidb_filestate_other.gif); }
+*.i_filestate_selfripped { background-image: url(images/state/anidb_filestate_selfripped.gif); }
+*.i_filestate_streamed { background-image: url(images/state/anidb_filestate_streamed.gif); }
+*.i_filestate_theater { background-image: url(images/state/anidb_filestate_theater.gif); }
+*.i_filestate_fillerep { background-image: url(images/state/comment.png);}
+*.i_filestate_normal { display: none; }
+*.i_vote_pending { background-image: url(images/icon/anidb_no_vote.gif); }
+
+/* actions */
+.i_file_add				{background-image: url(images/state/epfile-add.gif);}
+.i_ep_edit,
+.i_file_edit			{background-image: url(images/state/edit.png);}
+.i_file_ed2k			{background-image: url(images/state/ed2k.gif);}
+.i_ep_vote,
+.i_group_vote,
+.i_vote					{background-image: url(images/state/vote.png);}
+
+/* flags */
+*.i_audio_al { background-image: url(images/flags/anidb_audio_albanian.gif); }
+*.i_sub_al { background-image: url(images/flags/anidb_sub_albanian.gif); }
+*.i_audio_ar { background-image: url(images/flags/anidb_audio_arabic.gif); }
+*.i_sub_ar { background-image: url(images/flags/anidb_sub_arabic.gif); }
+*.i_audio_bg { 	background-image: url(images/flags/anidb_audio_bulgarian.gif); }
+*.i_sub_bg { background-image: url(images/flags/anidb_sub_bulgarian.gif); }
+*.i_audio_ca { 	background-image: url(images/flags/anidb_audio_catalan.gif); }
+*.i_sub_ca { background-image: url(images/flags/anidb_sub_catalan.gif); }
+*.i_audio_cs { background-image: url(images/flags/anidb_audio_czech.gif); }
+*.i_sub_cs { background-image: url(images/flags/anidb_sub_czech.gif); }
+*.i_audio_da { background-image: url(images/flags/anidb_audio_danish.gif); }
+*.i_sub_da { background-image: url(images/flags/anidb_sub_danish.gif); }
+*.i_audio_de { background-image: url(images/flags/anidb_audio_german.gif); }
+*.i_sub_de { background-image: url(images/flags/anidb_sub_german.gif); }
+*.i_audio_et { background-image: url(images/flags/anidb_audio_estonian.gif); }
+*.i_sub_et { background-image: url(images/flags/anidb_sub_estonian.gif); }
+*.i_audio_es { background-image: url(images/flags/anidb_audio_spanish.gif); }
+*.i_sub_es { background-image: url(images/flags/anidb_sub_spanish.gif); }
+*.i_audio_el { background-image: url(images/flags/anidb_audio_greek.gif); }
+*.i_sub_el { background-image: url(images/flags/anidb_sub_greek.gif); }
+*.i_audio_en { background-image: url(images/flags/anidb_audio_english.gif); }
+*.i_sub_en { background-image: url(images/flags/anidb_sub_english.gif); }
+*.i_audio_fi { background-image: url(images/flags/anidb_audio_finnish.gif); }
+*.i_sub_fi { background-image: url(images/flags/anidb_sub_finnish.gif); }
+*.i_audio_fr { background-image: url(images/flags/anidb_audio_french.gif); }
+*.i_sub_fr { background-image: url(images/flags/anidb_sub_french.gif); }
+*.i_audio_he { background-image: url(images/flags/anidb_audio_hebrew.gif); }
+*.i_sub_he { background-image: url(images/flags/anidb_sub_hebrew.gif); }
+*.i_audio_hr { background-image: url(images/flags/anidb_audio_croatian.gif); }
+*.i_sub_hr { background-image: url(images/flags/anidb_sub_croatian.gif); }
+*.i_audio_hu { background-image: url(images/flags/anidb_audio_hungarian.gif); }
+*.i_sub_hu { background-image: url(images/flags/anidb_sub_hungarian.gif); }
+*.i_audio_id { background-image: url(images/flags/anidb_audio_indonesian.gif); }
+*.i_sub_id { background-image: url(images/flags/anidb_sub_indonesian.gif); }
+*.i_audio_is { background-image: url(images/flags/anidb_audio_icelandic.gif); }
+*.i_sub_is { background-image: url(images/flags/anidb_sub_icelandic.gif); }
+*.i_audio_it { background-image: url(images/flags/anidb_audio_italian.gif); }
+*.i_sub_it { background-image: url(images/flags/anidb_sub_italian.gif); }
+*.i_audio_ja { background-image: url(images/flags/anidb_audio_japanese.gif); }
+*.i_sub_ja { background-image: url(images/flags/anidb_sub_japanese.gif); }
+*.i_audio_ka { background-image: url(images/flags/anidb_audio_georgian.gif); }
+*.i_sub_ka { background-image: url(images/flags/anidb_sub_georgian.gif); }
+*.i_audio_ko { 	background-image: url(images/flags/anidb_audio_korean.gif); }
+*.i_sub_ko { background-image: url(images/flags/anidb_sub_korean.gif); }
+*.i_audio_la { background-image: url(images/flags/anidb_audio_latin.gif); }
+*.i_sub_la { background-image: url(images/flags/anidb_sub_latin.gif); }
+*.i_audio_lv { background-image: url(images/flags/anidb_audio_latvian.gif); }
+*.i_sub_lv { background-image: url(images/flags/anidb_sub_latvian.gif); }
+*.i_audio_lt { background-image: url(images/flags/anidb_audio_lithuanian.gif); }
+*.i_sub_lt { 	background-image: url(images/flags/anidb_sub_lithuanian.gif); }
+*.i_audio_my { background-image: url(images/flags/anidb_audio_malay.gif); }
+*.i_sub_my { background-image: url(images/flags/anidb_sub_malay.gif); }
+*.i_audio_nl { background-image: url(images/flags/anidb_audio_dutch.gif); }
+*.i_sub_nl { background-image: url(images/flags/anidb_sub_dutch.gif); }
+*.i_audio_no { background-image: url(images/flags/anidb_audio_norwegian.gif); }
+*.i_sub_no { background-image: url(images/flags/anidb_sub_norwegian.gif); }
+*.i_audio_pl { background-image: url(images/flags/anidb_audio_polish.gif); }
+*.i_sub_pl { background-image: url(images/flags/anidb_sub_polish.gif); }
+*.i_audio_pt { 	background-image: url(images/flags/anidb_audio_portuguese.gif); }
+*.i_sub_pt { background-image: url(images/flags/anidb_sub_portuguese.gif); }
+*.i_audio_pt-BR { background-image: url(images/flags/anidb_audio_brasilian.gif); }
+*.i_sub_pt-BR { background-image: url(images/flags/anidb_sub_brasilian.gif); }
+*.i_audio_ro { background-image: url(images/flags/anidb_audio_romanian.gif); }
+*.i_sub_ro { background-image: url(images/flags/anidb_sub_romanian.gif); }
+*.i_audio_ru { 	background-image: url(images/flags/anidb_audio_russian.gif); }
+*.i_sub_ru { background-image: url(images/flags/anidb_sub_russian.gif); }
+*.i_audio_sk { background-image: url(images/flags/anidb_audio_slovak.gif); }
+*.i_sub_sk { background-image: url(images/flags/anidb_sub_slovak.gif); }
+*.i_audio_sl { background-image: url(images/flags/anidb_audio_slovenian.gif); }
+*.i_sub_sl { background-image: url(images/flags/anidb_sub_slovenian.gif); }
+*.i_audio_sr { background-image: url(images/flags/anidb_audio_serbian.gif); }
+*.i_sub_sr { background-image: url(images/flags/anidb_sub_serbian.gif); }
+*.i_audio_sv { background-image: url(images/flags/anidb_audio_swedish.gif); }
+*.i_sub_sv { background-image: url(images/flags/anidb_sub_swedish.gif); }
+*.i_audio_ta { background-image: url(images/flags/anidb_audio_tamil.gif); }
+*.i_sub_ta { background-image: url(images/flags/anidb_sub_tamil.gif); }
+*.i_audio_tt { background-image: url(images/flags/anidb_audio_tartar.gif); }
+*.i_sub_tt { background-image: url(images/flags/anidb_sub_tartar.gif); }
+*.i_audio_th { background-image: url(images/flags/anidb_audio_thai.gif); }
+*.i_sub_th { background-image: url(images/flags/anidb_sub_thai.gif); }
+*.i_audio_tr { background-image: url(images/flags/anidb_audio_turkish.gif); }
+*.i_sub_tr { background-image: url(images/flags/anidb_sub_turkish.gif); }
+*.i_audio_uk { background-image: url(images/flags/anidb_audio_ukrainian.gif); }
+*.i_sub_uk { background-image: url(images/flags/anidb_sub_ukrainian.gif); }
+*.i_audio_vi { 	background-image: url(images/flags/anidb_audio_vietnamese.gif); }
+*.i_sub_vi { background-image: url(images/flags/anidb_sub_vietnamese.gif); }
+*.i_audio_x-in { background-image: url(images/flags/anidb_audio_instrumental.gif); }
+*.i_audio_x-jat { background-image: url(images/flags/anidb_audio_japanese-transcription.gif); }
+*.i_sub_x-jat { background-image: url(images/flags/anidb_sub_japanese-transcription.gif); }
+*.i_audio_x-other { background-image: url(images/flags/anidb_audio_unknown.gif); }
+*.i_sub_x-other { background-image: url(images/flags/anidb_sub_unknown.gif); }
+*.i_audio_x-unk { background-image: url(images/flags/anidb_audio_unknown.gif); }
+*.i_sub_x-unk { 	background-image: url(images/flags/anidb_sub_unknown.gif); }
+*.i_audio_zh { background-image: url(images/flags/anidb_audio_chinese.gif); }
+*.i_sub_zh { background-image: url(images/flags/anidb_sub_chinese.gif); }
+*.i_audio_zh-x-yue { 	background-image: url(images/flags/anidb_audio_cantonese.gif); }
+*.i_audio_zh-x-cmn { background-image: url(images/flags/anidb_audio_mandarin.gif); }
+*.i_audio_zh-x-nan { background-image: url(images/flags/anidb_audio_taiwanese.gif); }
+*.i_audio_zh-Hans { background-image: url(images/flags/anidb_audio_simplified.gif); }
+*.i_sub_zh-Hans { background-image: url(images/flags/anidb_sub_simplified.gif); }
+*.i_audio_zh-Hant { background-image: url(images/flags/anidb_audio_traditional.gif); }
+*.i_sub_zh-Hant { background-image: url(images/flags/anidb_sub_traditional.gif); }
+
+/* audio+sub flags */
+.i_audio_fi				{background-image: url(images/flags/audio-finnish.gif);}
+.i_sub_fi				{background-image: url(images/flags/audio-sub-finnish.gif);}
+.i_audio_ja				{background-image: url(images/flags/audio-japanese.gif);}
+.i_sub_ja				{background-image: url(images/flags/audio-sub-japanese.gif);}
+.i_audio_x-jat			{background-image: url(images/flags/audio-x-japanese.gif);}
+.i_sub_x-jat			{background-image: url(images/flags/audio-sub-x-japanese.gif);}
+.i_audio_pl				{background-image: url(images/flags/audio-polish.gif);}
+.i_sub_pl				{background-image: url(images/flags/audio-sub-polish.gif);}
+.i_audio_ru				{background-image: url(images/flags/audio-russian.gif);}
+.i_sub_ru				{background-image: url(images/flags/audio-sub-russian.gif);}
+.i_audio_sl				{background-image: url(images/flags/audio-slovenian.gif);}
+.i_sub_sl				{background-image: url(images/flags/audio-sub-slovenian.gif);}
+.i_audio_x-other		{background-image: url(images/flags/audio-unknown.gif);}
+.i_sub_x-other			{background-image: url(images/flags/audio-sub-unknown.gif);}
+.i_audio_x-unk			{background-image: url(images/flags/audio-unknown.gif);}
+.i_sub_x-unk			{background-image: url(images/flags/audio-sub-unknown.gif);}
+
+/* rating */
+.i_rate_veryhigh,
+.i_rate_high,
+.i_rate_med,
+.i_rate_low,
+.i_rate_verylow {
+	background-repeat: repeat-x !important;
+	background-position: left !important;
+	padding: 0 !important;
+	background-image: url(images/state/star.png);
+}
+
+.i_rate_veryhigh		{width: 45px !important;}
+.i_rate_high			{width: 37px !important;}
+.i_rate_med				{width: 30px !important;}
+.i_rate_low				{width: 22px !important;}
+.i_rate_verylow			{width: 15px !important;}
+.i_rate_unknown		{
+	background-image: url(images/state/star-un.png);
+	padding: 0 !important;
+	height: 15px !important;
+}
+
+/* DIALOG BOX */
+
+.dialogBox {
+	background:#FFFFFF none repeat scroll 0 0;
+	border:5px solid #333333;
+}
+
+.dialogBox h3 {
+	background: #333333 none repeat scroll 0 0;
+	border-bottom:1px solid #AAAAAA;
+	font-size:11px;
+	margin:0;
+	padding:3px 15px;
+	color: white;
+	font-weight: bold;
+}
+
+.dialogBox h3:hover { cursor: move; }
+
+.dialogBox .dialogButtons {
+	background:#EEEEEE none repeat scroll 0 0;
+	border-top:1px solid #AAAAAA;
+	clear:both;
+	overflow:hidden;
+	padding:10px 15px;
+	text-align:right;
+}
+
+input.dialogConfirm { margin-left:8px; }
+a.confirmButton, input.confirmButton, button.confirmButton {
+	background:#515151 url(images/confirm_button.png) repeat-x scroll left top;
+	border-color:#505050 #404040 #2D2D2D;
+	font-weight:bold;
+	text-shadow:0 -1px 1px #515151;
+}
+
+a.button,
+input.button,
+button.button,
+a.confirmButton,
+input.confirmButton,
+button.confirmButton {
+	background:#9B9B9B url(images/button.png) repeat-x scroll left top;
+	border-color:#999999 #858585 #666666;
+	border-style:solid;
+	border-width:1px;
+	color:#FFFFFF;
+	cursor:pointer;
+	font-size:11px;
+	font-weight:bold;
+	line-height:16px;
+	padding:0 4px;
+	text-decoration:none;
+	text-shadow:0 -1px 1px #9B9B9B;
+	vertical-align:baseline;
+}
+
+.dialogBox a.i_close {
+	background:transparent url(images/delete_inactive.png) no-repeat scroll 50% 50%;
+	display:block;
+	float:right;
+	height:16px;
+	margin:5px;
+	text-decoration:none;
+	width:16px;
+}
+
+.dialogBox a.i_close:hover {
+	background:transparent url(images/delete_active.png) no-repeat scroll 50% 50%;
+	display:block;
+	float:right;
+	height:16px;
+	margin:5px;
+	text-decoration:none;
+	width:16px;
+}
