@@ -295,7 +295,7 @@ function createGroupIcons(group) {
 	a.style.cursor = 'pointer';
 	icons['expand'] = a;
 	icons['note'] = document.createTextNode(' ');
-	icons['comment'] = createLink(null,'cmt','animedb.pl?show=threads&do=animegroup&id='+group.agid,null,null,'Comment on this release','i_icon i_group_comment');
+	icons['comment'] = createLink(null,'cmt','animedb.pl?show=threads&do=animegroup&id='+group.agid,null,null,'Comment on this release','i_icon i_forum_link');
 	icons['vote'] = createLink(null,
 				   (group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=agvote&id='+group.agid,
 				   'anidb::popup',
