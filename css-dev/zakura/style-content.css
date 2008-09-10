@@ -458,3 +458,13 @@ background-image: url(images/layout/deprecated.png);
 background-repeat: no-repeat;
 background-position: 2px center;
 }
+
+#layout-main td ins
+{
+	background-color:#E9FFD8;
+}
+
+#layout-main td del
+{
+	background-color:#FFD7C2;
+}

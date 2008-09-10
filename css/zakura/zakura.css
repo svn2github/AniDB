@@ -133,3 +133,13 @@ div.pagination span strong
 	background-color: #565AB9;
 	color: white;
 }
+
+#layout-main td ins
+{
+	background-color:#E9FFD8;
+}
+
+#layout-main td del
+{
+	background-color:#FFD7C2;
+}
