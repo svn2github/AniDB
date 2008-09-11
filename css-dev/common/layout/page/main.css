@@ -100,15 +100,17 @@
 
 #layout-main div.main_all div.register
 {
-	margin-left: 4em;
-	margin-right: 4em;
+	margin-left: 3em;
+	margin-right: 3em;
 	margin-bottom: 2em;
 	font-weight: bold;
 	font-size: 1.1em;
 }
 
-#layout-main div.main_all div.register div.inner
+#layout-main div.main_all div.inner div.text
 {
+	padding-left: 1.5em;
+	padding-right: 1.5em;
 	padding-bottom:2.5em;
 	padding-top:2.5em;
 }
