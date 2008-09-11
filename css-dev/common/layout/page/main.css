@@ -85,8 +85,10 @@
 
 #layout-main div.main_all div.info div.right
 {
-float:right;
-width: 28em;
+	float:right;
+	width:25em;
+	margin-top: 2em;
+
 }
 
 #layout-main div.main_all div.register div.inner,
@@ -107,8 +109,8 @@ width: 28em;
 
 #layout-main div.main_all div.register div.inner
 {
-	padding-top: 3em;
-	padding-bottom: 3em;
+	padding-bottom:2.5em;
+	padding-top:2.5em;
 }
 
 #layout-main div.main_all div.login INPUT[type="text"],
@@ -120,7 +122,7 @@ width: 28em;
 #layout-main div.main_all div.info div.left
 {
 	text-align: left;
-	margin-right: 28em;
+	margin-right: 2em;
 }
 
 #layout-main div.main_all div.info div.left dl dd
