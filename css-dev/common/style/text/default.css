@@ -331,3 +331,14 @@ div.quotebody div.quote div.quotebody
 	font-size:1.6em;
 	font-weight:bold;
 }
+
+#layout-main div.msg_all div.header dt
+{
+	font-size:1.1em;
+	font-weight:700;
+}
+
+#layout-main div.msg_all div.header dd
+{
+	font-size:1.1em;
+}
