@@ -177,6 +177,20 @@
 	width:41px;
 }
 
+*.i_pm_reply
+{
+	background-image: url(../icons/orange/pm_reply.gif);
+	height:12px;
+	width:41px;
+}
+
+*.i_pm_delete
+{
+	background-image: url(../icons/orange/pm_delete.gif);
+	height:12px;
+	width:47px;
+}
+
 *.i_topic_normal
 {
 	background-image:url(../icons/phpbb/topic_normal.gif);
