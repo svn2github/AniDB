@@ -721,7 +721,7 @@ function createIframe(parentNode, id, textArea) {
 	
 	// Pass the textarea's existing text over to the content variable
 	var content = convert_input(textArea.value);
-	if (!content && isOP && !isIE) content = '&#xA0;';
+	if (!content && isOP && !isIE) content = '<p>&#xA0;</p>';
 	var doc = iframe.contentWindow.document;
 	doc.open();
 	doc.write(content)
