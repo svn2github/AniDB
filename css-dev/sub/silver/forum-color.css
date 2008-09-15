@@ -208,7 +208,7 @@ background-color:#4992B6;
 	color:#000000;
 }
 
-#layout-main div.forum div.posting-box ul.format-modes
+#layout-main ul.format-modes
 {
-	background-color: none;
+	background-color: inherit;
 }
