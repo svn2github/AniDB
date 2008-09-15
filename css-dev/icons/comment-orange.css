@@ -194,82 +194,97 @@
 *.i_topic_normal
 {
 	background-image:url(../icons/phpbb/topic_normal.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_sticky
 {
 	background-image:url(../icons/phpbb/topic_sticky.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_announcement,
 *.i_topic_global
 {
 	background-image:url(../icons/phpbb/topic_announce.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_normal_locked
 {
 	background-image:url(../icons/phpbb/topic_normal_locked.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_sticky_locked
 {
 	background-image:url(../icons/phpbb/topic_sticky_locked.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_announcement_locked,
 *.i_topic_global_locked
 {
 	background-image:url(../icons/phpbb/topic_announce_locked.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_normal_unread
 {
 	background-image:url(../icons/phpbb/topic_normal_unread.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_sticky_unread
 {
 	background-image:url(../icons/phpbb/topic_sticky_unread.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_announcement_unread,
 *.i_topic_global_unread
 {
 	background-image:url(../icons/phpbb/topic_announce_unread.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_normal_locked_unread
 {
 	background-image:url(../icons/phpbb/topic_normal_locked_unread.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_sticky_locked_unread
 {
 	background-image:url(../icons/phpbb/topic_sticky_locked_unread.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_topic_announcement_locked_unread,
 *.i_topic_global_locked_unread
 {
 	background-image:url(../icons/phpbb/topic_announce_locked_unread.gif);
+	background-repeat: no-repeat;
 }
 
 *.i_forum
 {
 	background-image:url(../icons/phpbb/forum_normal.gif);
 	height:2.5em;
+	background-repeat: no-repeat;
 }
 
 *.i_forum_unread
 {
 	background-image:url(../icons/phpbb/forum_normal_unread.gif);
 	height:2.5em;
+	background-repeat: no-repeat;
 }
 
 #layout-main div.forum a.lastpost
 {
 	background-image:url(../icons/phpbb/topic_latest.gif);
+	background-repeat: no-repeat;
 }
 
 /*Smiley*/
