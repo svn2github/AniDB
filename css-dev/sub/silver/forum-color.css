@@ -208,9 +208,7 @@ background-color:#4992B6;
 	color:#000000;
 }
 
-#layout-main div.credits_all div.inner,
-#layout-main div.credits_all .rbottom *,
-#layout-main div.credits_all .rtop *
+#layout-main div.forum div.posting-box ul.format-modes
 {
-	background-color:#A9ABB1;
+	background-color: none;
 }
