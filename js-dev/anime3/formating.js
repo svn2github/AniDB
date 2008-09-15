@@ -670,6 +670,7 @@ function changeFMode() {
 		fTA.value = fTA.value.replace(/\[br\]/mgi,'\n');
 	} else {
 		var content = convert_input(fTA.value);
+		if (!content.length) content = '&#xA0;';
 		iframe.contentWindow.document.body.innerHTML = content;
 	}
 	if (fTA) fTA.style.display = (mode != 2 ? '' : 'none');
@@ -721,7 +722,7 @@ function createIframe(parentNode, id, textArea) {
 	
 	// Pass the textarea's existing text over to the content variable
 	var content = convert_input(textArea.value);
-	if (!content && isOP && !isIE) content = '<p>&#xA0;</p>';
+	if (!content && isOP && !isIE) content = '&#xA0;';
 	var doc = iframe.contentWindow.document;
 	doc.open();
 	doc.write(content)
