@@ -828,3 +828,23 @@ span.smiley
 	margin-top: 0.5em;
 	margin-bottom: 1em;
 }
+
+#layout-main div.forum div.rules div.inner,
+#layout-main div.forum div.rules .rtop *,
+#layout-main div.forum div.rules .rbottom *
+{
+	background-color:#ECD5D8;
+}
+
+#layout-main div.forum div.rules div.inner
+{
+	color:#BC2A4D;
+	font-size:1.1em;
+	padding:10px;
+	text-align: left
+}
+
+#layout-main div.forum div.comment
+{
+	background-color: inherit;
+}
