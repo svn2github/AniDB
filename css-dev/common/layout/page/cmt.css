@@ -848,3 +848,22 @@ span.smiley
 {
 	background-color: inherit;
 }
+
+#layout-main div.forum div.navbar span.notify
+{
+	font-size: 1.1em;
+	text-align: right;
+	display: block;
+	float: right;
+	line-height:2em;
+}
+
+#layout-main div.forum div.navbar div.inner span.messages
+{
+	float: left;
+}
+
+#layout-main div.forum div.navbar div.inner div.fake,
+{
+	clear: both;
+}
