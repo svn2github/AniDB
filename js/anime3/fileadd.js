@@ -478,9 +478,9 @@ function MyFile(name, size, ed2k){
     else return('');
 	}
 	this.find_version = function(text){
-		var regx = /(\d)v(\d)/;
+		var regx = /v(\d)[\s\_\.\(\[]/i;
 		if(regx.test(text))
-			return (RegExp.$2)*1
+			return (RegExp.$1)*1
     else return(1);
 	}
   this.find_filetype = function(text){
