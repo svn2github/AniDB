@@ -93,6 +93,7 @@
 {
 	background-color:#F5F5F5;
 	padding:4px;
+	z-index:5;
 }
 
 #layout-menu
@@ -114,7 +115,6 @@
 	width:100%;
 	left:0;
 	top:3em;
-	z-index: -1;
 }
 
 #layout-search div.search
