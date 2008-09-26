@@ -1,6 +1,5 @@
 #layout-main h1.main,
-#layout-main div.main_all,
-#layout-nav ul.main_menu
+#layout-main div.main_all
 {
 	display:none;
 }
@@ -9,6 +8,72 @@
 {
 	width: 268px;
 	height: 110px;
-	margin-bottom: 2em;
-	background-image: url(../images/logo.gif);
+	background-image: url(images/logo.gif);
+	background-repeat: no-repeat;
+	left:43%;
+	margin-top: 5em;
+	width:40em;
+}
+
+#layout-nav div.main_search div.search
+{
+	padding-top:1em;
+	margin-left:-7em;
+	margin-right:7em;
+}
+
+#layout-nav div.main_search div.search p
+{
+	margin-top: 10em;
+}
+
+#anidb div.main_nav
+{
+	height:25em;
+}
+
+#layout-nav div.main_search input.text
+{
+	font-size:1.2em;
+	padding:3px;
+	width:75%;
+}
+
+#layout-nav div.main_search select
+{
+	font-size:1.2em;
+	padding:2px;
+}
+
+#layout-nav div.main_search input.submit
+{
+	margin-top:0.2em;
+}
+
+#layout-menu > li:hover ul
+{
+	display:block;
+}
+
+#layout-menu > li ul {
+	display:none;
+	position:absolute;
+}
+
+#layout-menu span.tab
+{
+	display: block;
+	position:relative;
+}
+
+#layout-menu > li {
+	display:block;
+	float:left;
+	padding-left:0.5em;
+	padding-right:0.5em;
+}
+
+#layout-menu ul li
+{
+	display:block;
 }
