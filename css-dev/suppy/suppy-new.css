@@ -101,6 +101,7 @@
 {
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
+	z-index:5;
 }
 
 #layout-nav div.menu_hr
@@ -176,4 +177,27 @@
 {
 	padding:4px;
 	text-align:left;
+}
+
+#layout-tabs
+{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	display: block;
+	font-size:1.2em;
+	margin-right:0.5em;
+}
+
+#layout-tabs ul li
+{
+	display: inline;
+	padding: 4px 6px;
+}
+
+#layout-tabs ul
+{
+	text-align: right;
+	margin-bottom:0.5em;
+	margin-top:0.5em;
 }
