@@ -25,7 +25,6 @@
 	background-repeat: no-repeat;
 	left:43%;
 	margin-top: 5em;
-	width:40em;
 }
 
 #layout-nav div.main_search div.search
@@ -49,7 +48,6 @@
 {
 	font-size:1.2em;
 	padding:3px;
-	width:75%;
 }
 
 #layout-nav div.main_search select
@@ -109,4 +107,73 @@
 	margin-top: 2.5em;
 	border-top: 1px solid #c9d7f1;
 	display:block;
+}
+
+#layout-search
+{
+	margin-left:1em;
+	width:100%;
+	left:0;
+	top:3em;
+	z-index: -1;
+}
+
+#layout-search div.search
+{
+	margin-left:16em;
+	margin-top:1.3em;
+}
+
+#layout-search div.search form
+{
+	text-align: left;
+}
+
+#layout-search input.text,
+#layout-search input.submit
+{
+	float:none;
+}
+
+#layout-nav input,
+#layout-nav button
+{
+	padding-left:0;
+}
+
+#layout-search select
+{
+	font-size:1.1em;
+	padding:4px;
+}
+
+#layout-search input.text
+{
+	width:200px;
+	font-size:1.2em;
+	padding:4px;
+}
+
+#layout-search input.submit
+{
+	width:100px;
+}
+
+#layout-nav div.search_main input.text,
+#layout-nav div.search_main input.submit
+{
+	float:left;
+}
+
+#layout-nav div.search_main input,
+#layout-nav div.search_main button
+{
+	padding-left:5em;
+	width:20em;
+}
+
+#layout-main > h1
+{
+	padding:4px;
+	text-align:left;
 }
