@@ -1,4 +1,3 @@
-
 #layout-content div.mynotifies_all
 {
 	text-align: center;
@@ -11,6 +10,6 @@
 
 #layout-content div.mynotifies_all table
 {
-  margin-left: auto;
-  margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }

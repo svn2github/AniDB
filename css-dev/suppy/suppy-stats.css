@@ -1,59 +1,58 @@
-
 #layout-content div.stats_all
 {
-	padding-left: 9.6em;
-	padding-right: 8em;
+	padding-left:9.6em;
+	padding-right:8em;
 }
 
 #layout-content div.stats_all div.stat
 {
-	float: left;
-	margin: 0.3em 0.1em 0.1em 0.3em;
-	border-top: 1px blue solid;
-	min-width: 15em;
+	border-top:1px blue solid;
+	float:left;
+	margin:.3em .1em .1em .3em;
+	min-width:15em;
 }
 
 #layout-content div.stats_all div.actions
 {
-	clear: left;
-	text-align: center;
+	clear:left;
+	text-align:center;
 }
 
 #layout-content div.stats_all h4
 {
-	background-color: #e5ecf9;
-	color: #000000;
-	font-weight: bold;
-	font-size: 100%;
-	margin: 0;
-	text-align: center;
-	padding: 0.3em;
+	background-color:#e5ecf9;
+	color:#000000;
+	font-size:100%;
+	font-weight:bold;
+	margin:0;
+	padding:.3em;
+	text-align:center;
 }
 
 #layout-content div.stats_all div.stat ol
 {
-	margin: 0;
-	padding: 0;
+	margin:0;
+	padding:0;
 }
 
 #layout-content div.stats_all div.stat li
 {
-	list-style: none;
-	text-align: left;
+	list-style:none;
+	text-align:left;
 }
 
 #layout-content div.stats_all div.stat li span
 {
-	display: block;
-	float: left;
-	height: 100%;
-	width: 5.2em;
-	text-align: right;
-	white-space: nowrap;
+	display:block;
+	float:left;
+	height:100%;
+	text-align:right;
+	white-space:nowrap;
+	width:5.2em;
 }
 
 #layout-content div.stats_all div.stat li a
 {
-	display: block;
-	margin-left: 6.8em;	
+	display:block;
+	margin-left:6.8em;
 }

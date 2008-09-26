@@ -1,292 +1,261 @@
 #layout-content div.image
 {
-  float: right;
-  clear: none;
-
+	clear:none;
+	float:right;
 }
 
 #layout-content div.data
 {
-  display: table;
-  vertical-align: middle;
-  padding-left: 7px;
-  width: auto;
+	display:table;
+	padding-left:7px;
+	vertical-align:middle;
+	width:auto;
 }
-
 
 #layout-content div.anime_info div.data dt
 {
-	margin-top: 0.36em;
-	margin-bottom: -1.2em;
-	margin-right: 10em;
+	margin-bottom:-1.2em;
+	margin-right:10em;
+	margin-top:.36em;
 }
 
 #layout-content div.anime_info div.data dt:after
 {
-	content: ": ";
+	content:": ";
 }
 
 #layout-content div.anime_info div.data dd
 {
-	min-height: 1.3em;
-	overflow: hidden;
-	margin-left: 10em;
+	margin-left:10em;
+	min-height:1.3em;
+	overflow:hidden;
 }
 
 #layout-content div.anime_info div.data dd.anirec
 {
-	overflow: visible;
+	overflow:visible;
 }
 
 #layout-content div.anime_info div.data dd.anirec a.i_help
 {
-	padding: 7px 8px 7px 12px;
+	padding:7px 8px 7px 12px;
 }
-
-
 
 #layout-content .anime_vote:before
 {
-  display: block;
-  width: auto;
-  content: "Vote";
-  border-top: 1px solid blue;
-  background-color: #e5ecf9;
+	background-color:#e5ecf9;
+	border-top:1px solid blue;
+	content:"Vote";
+	display:block;
+	width:auto;
 }
-
-
 
 #layout-content .anime_vote
 {
-  margin-top: 2em;
-  margin-bottom: 5em;
-  display: block;
-  clear: both;
-
+	clear:both;
+	display:block;
+	margin-bottom:5em;
+	margin-top:2em;
 }
-
 
 #layout-content div.anime_vote form
 {
-	margin-bottom: 0.5em;
+	margin-bottom:.5em;
 }
 
 #layout-content div.anime_vote form *
 {
-	margin: 0;
+	margin:0;
 }
 
 #layout-content div.anime_vote form label
 {
-	display: block;
+	display:block;
 }
-
-/*#layout-content div.anime_info div.desc
-{
-	margin: 0.7em 0.3em 0.3em 0.3em;
-}*/
 
 #layout-content div.anime_vote form.permvote
 {
-	margin: 1.1em 0 1.1em 0;
+	margin:1.1em 0;
 }
 
 #layout-content div.anime_vote form.tempvote
 {
-	width: 50%;
-	margin: 1.1em 0.6em 1.1em 0;
-	float: left;
+	float:left;
+	margin:1.1em .6em 1.1em 0;
+	width:50%;
 }
 
 #layout-content div.anime_vote form.tempvote div
 {
-	padding-right: 6px;
-	float: right;
+	float:right;
+	padding-right:6px;
 }
 
 #layout-content div.anime_group,
 #layout-content div.anime_mylist
 {
-  margin-top: 2em;
-  margin-bottom: 5em;
-  display: block;
+	display:block;
+	margin-bottom:5em;
+	margin-top:2em;
 }
 
 #layout-content div.anime_group table,
 #layout-content div.anime_mylist table
 {
-  margin-left: auto;
-  margin-right: auto;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 #layout-content div.anime_mylist th,
 #layout-content div.anime_group th
 {
-	font-weight: normal;
-  border-top: 1px solid blue;
-  background-color: #e5ecf9;
+	background-color:#e5ecf9;
+	border-top:1px solid blue;
+	font-weight:normal;
 }
 
 #layout-content div.anime_mylist th.heading,
 #layout-content div.anime_group th.info
 {
-	font-weight: bold;
-	padding: 0.1em 0.9em 0.1em 0.9em;
+	font-weight:bold;
+	padding:.1em .9em;
 }
 
 #layout-content div.anime_mylist th.anime
 {
-	width: 30em;
-	text-align: left;
+	text-align:left;
+	width:30em;
 }
 
 #layout-content div.anime_mylist td.eps,
 #layout-content div.anime_mylist td.seen
 {
-	padding: 0.1em 0.9em 0.1em 0.9em;
-	text-align: center;
-}
-
-#layout-content div.anime_group th.group
-{
-	text-align: left;
-}
-
-#layout-content div.anime_group td
-{
-	text-align: center;
-}
-
-#layout-content div.anime_group td.lastep,
-#layout-content div.anime_group td.cmts
-{
-	text-align: right;
-}
-
-#layout-content div.anime_group td.group,
-#layout-content div.anime_group td.lastupdate
-{
-	text-align: left;
+	padding:.1em .9em;
+	text-align:center;
 }
 
 #layout-content div.anime_group td.state.complete,
 #layout-content div.anime_group td.state.finished
 {
-	font-weight: bold;
+	font-weight:bold;
 }
 
 #layout-content div.anime_group td.state.stalled
 {
-	font-style: italic;
+	font-style:italic;
 }
 
 #layout-content div.anime_table table
 {
-	width: 100%;
+	width:100%;
 }
 
 #layout-content div.anime_table th
 {
-	font-weight: normal;
-	text-align: left;
+	font-weight:normal;
+	text-align:left;
 }
 
 #layout-content div.anime_table td
 {
-	height: 1.6em;
-	padding: 0.1em 0.1em 0.1em 0.1em;
-	vertical-align: middle;
+	height:1.6em;
+	padding:.1em;
+	vertical-align:middle;
 }
 
 #layout-content div.anime_table table.eplist
 {
-	padding: 0;
-	margin-bottom: 15px;
+	margin-bottom:15px;
+	padding:0;
 }
 
 #layout-content div.anime_table table.filelist
 {
-	padding: 2px 3px 15px 57px;
+	padding:2px 3px 15px 57px;
 }
 
 #layout-content div.anime_table tr.heading th
 {
-	padding: 4px 1px 7px 1px;
-	border-bottom: blue 1px solid;
+	border-bottom:blue 1px solid;
+	padding:4px 1px 7px;
 }
 
 #layout-content div.anime_table tr.good td
 {
-	background-color: #6fc279;
+	background-color:#6fc279;
 }
 
 #layout-content div.anime_table tr.deprecated td
 {
-	background-color: #999999;
+	background-color:#999999;
 }
 
 #layout-content div.anime_table tr.generic td
 {
-	background-color: #eeeeee;
-}
-
-#layout-content div.anime_table td.epusers,
-#layout-content div.anime_table td.files
-{
-	text-align: right;
-}
-
-#layout-content div.anime_table th.expand,
-#layout-content div.anime_table td.expand,
-#layout-content div.anime_table td.check,
-#layout-content div.anime_table td.ed2k,
-#layout-content div.anime_table td.fileaction
-{
-	text-align: center; /* Not actually much use, doesn't center block images */
+	background-color:#eeeeee;
 }
 
 #layout-content div.anime_table td.stat .i_icon
 {
-	float: left;
+	float:left;
 }
 
 #layout-content div.anime_table td.stat .i_crc_yes
 {
-	margin-left: 3px;
+	margin-left:3px;
 }
 
 #layout-content div.anime_table td.qual .i_icon
 {
-	margin-left: 0;
+	margin-left:0;
 }
 
 #layout-content div.anime_table td.title div
 {
-	float: right;
+	float:right;
 }
 
 #layout-content div.anime_table .icons .i_icon
 {
-	float: left;
-	padding: 0px 2px 0px 2px;
+	float:left;
+	padding:0 2px;
 }
 
 #layout-content div.anime_table div.actions
 {
-	text-align: center;
-	margin: auto;
-}
-
-
-#layout-content div.anime_edit
-{
-	text-align: center;
+	margin:auto;
+	text-align:center;
 }
 
 #layout-content div.anime_edit div
 {
-	padding-left: 19%;
-	padding-right: 19%;
-	margin-top: 1.2em;
+	margin-top:1.2em;
+	padding-left:19%;
+	padding-right:19%;
 }
 
+#layout-content div.anime_group th.group,
+#layout-content div.anime_group td.group,
+#layout-content div.anime_group td.lastupdate
+{
+	text-align:left;
+}
+
+#layout-content div.anime_group td,
+#layout-content div.anime_table th.expand,
+#layout-content div.anime_table td.expand,
+#layout-content div.anime_table td.check,
+#layout-content div.anime_table td.ed2k,
+#layout-content div.anime_table td.fileaction,
+#layout-content div.anime_edit
+{
+	text-align:center;
+}
+
+#layout-content div.anime_group td.lastep,
+#layout-content div.anime_group td.cmts,
+#layout-content div.anime_table td.epusers,
+#layout-content div.anime_table td.files
+{
+	text-align:right;
+}
