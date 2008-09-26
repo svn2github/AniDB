@@ -1,0 +1,14 @@
+#layout-main h1.main,
+#layout-main div.main_all,
+#layout-nav ul.main_menu
+{
+	display:none;
+}
+
+#layout-nav div.main_search
+{
+	width: 268px;
+	height: 110px;
+	margin-bottom: 2em;
+	background-image: url(../images/logo.gif);
+}
