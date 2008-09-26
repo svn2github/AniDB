@@ -69,3 +69,8 @@
 {
     margin-top: 0.2em;
 }
+
+#layout-nav div.menu_hr
+{
+	display:none;
+}

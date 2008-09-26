@@ -69,11 +69,30 @@
 #layout-menu > li {
 	display:block;
 	float:left;
-	padding-left:0.5em;
-	padding-right:0.5em;
+	padding-left:0.7em;
+	padding-right:0.7em;
+	font-size: 1.2em;
 }
 
 #layout-menu ul li
 {
 	display:block;
+}
+
+#layout-menu > li ul
+{
+	background-color:#F5F5F5;
+	padding:4px;
+}
+
+#layout-menu
+{
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+#layout-nav div.menu_hr
+{
+	margin-top: 2.5em;
+	border-top: 1px solid #c9d7f1;
 }
