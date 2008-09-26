@@ -1,3 +1,16 @@
+#layout-search
+{
+	width: 150px;
+	height: 53px;
+	background-image: url(images/logo_small.gif);
+	background-repeat: no-repeat;
+}
+
+#layout-nav
+{
+	height:6em;
+}
+
 #layout-main h1.main,
 #layout-main div.main_all
 {
