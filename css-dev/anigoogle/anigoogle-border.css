@@ -10,7 +10,16 @@ table
 	border-top:none;
 }
 
-#layout-tabs ul.main-tabs > li.selected,
+#layout-tabs ul.main-tabs > li
+{
+	border-bottom:none;
+}
+
+#layout-tabs ul.main-tabs > li.selected
+{
+	border-bottom:2px solid;
+}
+
 #layout-main div.pagination span a,
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong,
@@ -20,7 +29,11 @@ table
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-search select.type,
 #layout-search input.text,
-#layout-menu > li ul,
+#layout-menu > li ul
+{
+	border:1px solid;
+}
+
 #layout-main > h1,
 #layout-nav div.menu_hr
 {
