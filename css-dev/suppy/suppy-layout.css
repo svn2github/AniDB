@@ -4,6 +4,12 @@
 	height:6em;
 }
 
+#layout-main
+{
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
 #layout-menu
 {
 	display:block;
@@ -68,7 +74,6 @@
 	display:block;
 	padding:4px;
 	text-align:left;
-	width:100%;
 }
 
 #layout-footer p
@@ -229,7 +234,7 @@
 	text-align:right;
 }
 
-#layout-menu li.sub-menu span
+#layout-menu li.sub-menu span.tab
 {
 	padding-bottom:.5em;
 	padding-top:.5em;
