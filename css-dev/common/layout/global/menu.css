@@ -70,7 +70,9 @@
     margin-top: 0.2em;
 }
 
-#layout-nav div.menu_hr
+#layout-nav div.menu_hr,
+#layout-search a.advsearch,
+#layout-search form.random
 {
 	display:none;
 }

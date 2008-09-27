@@ -145,7 +145,7 @@ li.producerlist
 
 #layout-nav div.main_search div.search p
 {
-	margin-top: 10em;
+	margin-top: 9em;
 }
 
 #anidb div.main_nav
@@ -380,4 +380,32 @@ li.producerlist
 #layout-main table  tr.header
 {
 	background-color:#E5ECF9;
+}
+
+#layout-nav div.main_search a.advsearch
+{
+	color:#0000CC;
+	float:right;
+	font-family:arial,sans-serif;
+	margin-top:-2em;
+	text-decoration:underline;
+	text-transform:capitalize;
+}
+
+#layout-nav div.main_search input.submit
+{
+	float:left;
+	margin-left:5em;
+	width: 150px;
+}
+
+#layout-nav div.main_search input.random
+{
+	margin-left:0.5em;
+}
+
+#layout-nav main_search a.advsearch,
+#layout-nav main_search form.random
+{
+	display: block;
 }
