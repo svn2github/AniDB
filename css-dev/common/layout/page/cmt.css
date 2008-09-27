@@ -863,7 +863,7 @@ span.smiley
 	float: left;
 }
 
-#layout-main div.forum div.navbar div.inner div.fake,
+#layout-main div.forum div.navbar div.inner div.fake
 {
 	clear: both;
 }
