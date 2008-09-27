@@ -1,14 +1,126 @@
+#layout-nav
+{
+	display:block;
+	height:6em;
+}
+
+#layout-menu
+{
+	display:block;
+	left:0;
+	position:absolute;
+	top:0;
+	z-index:5;
+}
+}
+
+#layout-menu ul li
+{
+	display:inline;
+}
+
+#layout-search
+{
+	display:block;
+	left:50%;
+	position:absolute;
+	top:2em;
+	width:43em;
+}
+
+#layout-search p,
+#layout-search form
+{
+	margin:0;
+	padding:0;
+}
+
+#layout-search select.type
+{
+	border:1px solid;
+	float:right;
+	margin:0;
+	position:relative;
+	width:5em;
+}
+
+#layout-search input.text
+{
+	border:1px solid;
+	float:left;
+	margin:0;
+	width:80%;
+}
+
+#layout-search input.submit
+{
+	float:right;
+	font-size:1.2em;
+	margin:0;
+	text-transform:capitalize;
+}
+
+li.animelist
+{
+	display:block;
+	left:1em;
+	position:absolute;
+	top:.5em;
+}
+
+li.grouplist
+{
+	left:7em;
+	position:absolute;
+	top:.5em;
+	white-space:nowrap;
+}
+
+li.userlist
+{
+	left:14em;
+	position:absolute;
+	top:.5em;
+	white-space:nowrap;
+}
+
+li.producerlist
+{
+	left:20em;
+	position:absolute;
+	top:.5em;
+	white-space:nowrap;
+}
+
+#layout-main > h1
+{
+	background-color:#e5ecf9;
+	border-top:1px solid blue;
+	display:block;
+	width:100%;
+}
+
+#layout-footer
+{
+	text-align:center;
+}
+
+#layout-footer p
+{
+	margin-bottom:0;
+}
+
+#layout-footer:after
+{
+	content:"design by hrm & deridiot inspired by google";
+}
+
 #layout-search
 {
 	width: 150px;
 	height: 53px;
 	background-image: url(images/logo_small.gif);
 	background-repeat: no-repeat;
-}
-
-#layout-nav
-{
-	height:6em;
 }
 
 #layout-main h1.main,
@@ -94,13 +206,6 @@
 {
 	background-color:#F5F5F5;
 	padding:4px;
-	z-index:5;
-}
-
-#layout-menu
-{
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
 	z-index:5;
 }
 
@@ -215,12 +320,6 @@
 	padding-top:0.5em;
 }
 
-#layout-menu
-{
-	margin-bottom:0;
-	margin-top:0;
-}
-
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
@@ -263,5 +362,5 @@
 
 #layout-main div.tabbed_pane ul.tabs
 {
-text-align: center;
+	text-align: center;
 }

@@ -1,6 +1,6 @@
 @import "../sub/common.css";
 @import "../sub/silver/forum-color.css";
-@import "suppy_layout.css";
+@import "suppy-layout.css";
 @import "suppy-main.css";
 @import "suppy-msg.css";
 @import "suppy-anime.css";
@@ -8,7 +8,6 @@
 @import "suppy-hint2.css";
 @import "suppy-mynotifies.css";
 @import "suppy-stats.css";
-@import "suppy-new.css";
 
 html
 {
