@@ -1,0 +1,70 @@
+table
+{
+	border-top:1px solid;
+	border-collapse:separate;
+}
+
+#layout-main div.pagination span a
+{
+	border:1px solid;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	border:1px solid;
+}
+
+#layout-main #htmltagcloud
+{
+	border:1px solid;
+}
+
+#layout-main div.hint2_all table,
+#layout-main div.anime_all div.info div.data table
+{
+	border-top:none;
+}
+
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border:1px solid;
+}
+
+#layout-tabs ul.main-tabs > li
+{
+	border-bottom:none;
+}
+
+#layout-tabs ul.main-tabs > li.selected
+{
+	border-bottom:2px solid;
+}
+
+#layout-search select.type
+{
+	border:1px solid;
+}
+
+#layout-search input.text
+{
+	border:1px solid;
+}
+
+#layout-main > h1
+{
+	border-top:1px solid;
+}
+
+#layout-menu > li ul
+{
+	border:1px solid;
+}
+
+#layout-nav div.menu_hr
+{
+	border-top:1px solid;
+}

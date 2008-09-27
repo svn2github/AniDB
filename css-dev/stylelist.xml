@@ -235,7 +235,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<screenshot>zakura-menu/images/screenshot.png</screenshot>
 		<thumbnail>zakura-menu/images/thumbnail.png</thumbnail>
 	</style>
-<style name="Lain">
+	<style name="Lain">
 		<title>Lain</title>
 		<creator>DvdKhl/Arokh</creator>
 		<update>23.08.2008</update>
@@ -244,13 +244,5 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<path/>
 		<screenshot>Lain/images/screenshot.png</screenshot>
 		<thumbnail>Lain/images/thumbnail.png</thumbnail>
-	</style><style name="suppy">
-		<title/>
-		<creator/>
-		<update>27.09.2008</update>
-		<status/>
-		<description/>
-		<path/>
-		<screenshot>suppy/images/screenshot.png</screenshot>
-		<thumbnail>suppy/images/thumbnail.png</thumbnail>
-	</style></css_styles>
+	</style>
+</css_styles>

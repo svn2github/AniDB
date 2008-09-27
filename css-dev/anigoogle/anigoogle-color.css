@@ -1,0 +1,110 @@
+html
+{
+	background:white;
+}
+
+a
+{
+	color:#105289;
+}
+
+a:hover
+{
+	color:#AA0000;
+}
+
+table
+{
+	border-top-color:blue;
+}
+
+tr.g_odd,
+li.g_odd,
+span.g_odd
+{
+	background-color:#e5ecf9;
+}
+
+#layout-search
+{
+	background-image:url(images/logo_small.gif);
+	background-repeat:no-repeat;
+}
+
+#layout-main > h1
+{
+	background-color:#e5ecf9;
+	border-top-color: blue;
+}
+
+#layout-nav div.main_search
+{
+	background-image:url(images/logo.gif);
+	background-repeat:no-repeat;
+}
+
+#layout-menu > li ul
+{
+	background-color:#FFF;
+	border-color: #000;
+}
+
+#layout-tabs ul.main-tabs > li.selected
+{
+	background-color:#FFF;
+	border-bottom-color:#FFF;
+}
+
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-menu li.sub-menu:hover,
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#E5ECF9;
+}
+
+#layout-main table tr.header
+{
+	background-color: #c3d9ff;
+}
+
+#layout-main div.pagination span a
+{
+	background-color:#ECEDEE;
+	border-color:#B4BAC0;
+	color:#5C758C;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	background-color:#4692BF;
+	border-color:#4692BF;
+	color:#FFFFFF;
+}
+
+#layout-main #htmltagcloud
+{
+	background-color:#FAFAFA;
+	border-color:#D1D7DC;
+}
+
+#layout-main div.news_all div.g_timedentry h4
+{
+	background-color: #c3d9ff;
+}
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border-color:#E5ECF9;
+}
+
+#layout-nav div.menu_hr
+{
+	border-top-color:#c9d7f1;
+}

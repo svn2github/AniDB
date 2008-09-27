@@ -1,0 +1,45 @@
+a:hover
+{
+	text-decoration:underline;
+}
+
+a.i_icon:hover,
+a.i_inline:hover,
+a.i_button:hover
+{
+	text-decoration:none;
+}
+
+#layout-search input.submit
+{
+	text-transform:capitalize;
+}
+
+#layout-nav div.main_search a.advsearch
+{
+	text-decoration:underline;
+	text-transform:capitalize;
+}
+
+#layout-search input.text,
+#layout-search input.submit,
+#layout-nav div.main_search input.text,
+#layout-nav div.main_search select,
+#layout-menu > li,
+#layout-tabs
+{
+	font-size:1.2em;
+}
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-search select
+{
+	font-size:1.1em;
+}
+
+#layout-nav div.main_search a.advsearch
+{
+	font-family:arial,sans-serif;
+}

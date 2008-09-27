@@ -6,8 +6,8 @@
 
 #layout-main
 {
-	margin-left: 1em;
-	margin-right: 1em;
+	margin-left:1em;
+	margin-right:1em;
 }
 
 #layout-menu
@@ -21,8 +21,6 @@
 
 #layout-search
 {
-	background-image:url(images/logo_small.gif);
-	background-repeat:no-repeat;
 	display:block;
 	height:53px;
 	left:0;
@@ -41,7 +39,6 @@
 
 #layout-search select.type
 {
-	border:1px solid;
 	float:right;
 	margin:0;
 	position:relative;
@@ -50,9 +47,7 @@
 
 #layout-search input.text
 {
-	border:1px solid;
 	float:left;
-	font-size:1.2em;
 	margin:0;
 	padding:4px;
 	width:200px;
@@ -61,16 +56,12 @@
 #layout-search input.submit
 {
 	float:right;
-	font-size:1.2em;
 	margin:0;
-	text-transform:capitalize;
 	width:100px;
 }
 
 #layout-main > h1
 {
-	background-color:#e5ecf9;
-	border-top:1px solid blue;
 	display:block;
 	padding:4px;
 	text-align:left;
@@ -94,22 +85,18 @@
 
 #layout-nav div.main_search
 {
-	background-image:url(images/logo.gif);
-	background-repeat:no-repeat;
 	height:110px;
-	left:43%;
-	margin-top:5em;
-	width:42em;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:3em;
+	position:relative;
+	width:268px;
 }
 
 #layout-nav div.main_search div.search
 {
 	margin-left:-7em;
-}
-
-#layout-nav div.main_search div.search p
-{
-	margin-top:9em;
+	margin-top:0;
 }
 
 #anidb div.main_nav
@@ -119,13 +106,11 @@
 
 #layout-nav div.main_search input.text
 {
-	font-size:1.2em;
 	padding:3px;
 }
 
 #layout-nav div.main_search select
 {
-	font-size:1.2em;
 	padding:2px;
 }
 
@@ -139,8 +124,6 @@
 
 #layout-menu > li ul
 {
-	background-color:#FFF;
-	border:1px solid #000;
 	display:none;
 	padding:0;
 	position:absolute;
@@ -157,14 +140,12 @@
 {
 	display:block;
 	float:left;
-	font-size:1.2em;
 	padding-left:.7em;
 	padding-right:.7em;
 }
 
 #layout-nav div.menu_hr
 {
-	border-top:1px solid #c9d7f1;
 	display:block;
 	margin-top:2.5em;
 }
@@ -194,7 +175,6 @@
 
 #layout-search select
 {
-	font-size:1.1em;
 	padding:4px 4px 3px;
 }
 
@@ -214,7 +194,6 @@
 #layout-tabs
 {
 	display:block;
-	font-size:1.2em;
 	margin-right:.5em;
 	position:absolute;
 	right:0;
@@ -245,28 +224,9 @@
 	padding:2px 8px;
 }
 
-#layout-main ul.g_list li,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li
-{
-	border:1px solid #E5ECF9;
-	font-size:1.1em;
-}
-
-#layout-tabs ul.main-tabs > li
-{
-	border-bottom:none;
-}
-
-#layout-tabs ul.main-tabs > li.selected
-{
-	background-color:#FFF;
-	border-bottom:2px solid #FFF;
-}
-
 #layout-nav div.main_search div.search form
 {
-	width:45em;
+	width:40.5em;
 }
 
 #layout-nav div.main_search div.search input.text
@@ -276,12 +236,8 @@
 
 #layout-nav div.main_search a.advsearch
 {
-	color:#00C;
 	float:right;
-	font-family:arial,sans-serif;
 	margin-top:-2em;
-	text-decoration:underline;
-	text-transform:capitalize;
 }
 
 #layout-nav div.main_search input.random
@@ -303,62 +259,14 @@
 	text-align:center;
 }
 
-#layout-main ul.g_list li:hover,
-#layout-main ul.g_list li.selected,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-menu li.sub-menu:hover,
-#layout-menu li.sub-menu ul li:hover
-{
-	background-color:#E5ECF9;
-}
-
-#layout-main table tr.header
-{
-	background-color: #c3d9ff;
-}
-
 #layout-content div.dbstats_all
 {
 	padding-left:9.6em;
 	padding-right:8em;
 }
 
-#layout-main div.pagination span a
-{
-	background-color:#ECEDEE;
-	border:1px solid #BABABA;
-	border-color:#B4BAC0;
-	color:#5C758C;
-}
-
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
-{
-	background-color:#4692BF;
-	border:1px solid #BFBFBF;
-	border-color:#4692BF;
-	color:#FFFFFF;
-}
-
-#layout-main #htmltagcloud
-{
-	background-color:#FAFAFA;
-	border:1px solid #D1D7DC;
-}
-
+h4,
 #layout-main div.g_timedentry h4
 {
 	padding:.3em;
-}
-
-#layout-main div.anime_all div.info div.data table
-{
-	border-top:none;
-}
-
-#layout-main div.news_all div.g_timedentry h4
-{
-	background-color: #c3d9ff;
 }
