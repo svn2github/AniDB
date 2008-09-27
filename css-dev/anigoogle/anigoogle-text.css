@@ -17,6 +17,7 @@ a.i_button:hover
 
 #layout-nav div.main_search a.advsearch
 {
+	font-family:arial,sans-serif;
 	text-decoration:underline;
 	text-transform:capitalize;
 }
@@ -37,9 +38,4 @@ a.i_button:hover
 #layout-search select
 {
 	font-size:1.1em;
-}
-
-#layout-nav div.main_search a.advsearch
-{
-	font-family:arial,sans-serif;
 }

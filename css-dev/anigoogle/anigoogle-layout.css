@@ -112,6 +112,7 @@
 #layout-nav div.main_search select
 {
 	padding:2px;
+	margin-top: 7em;
 }
 
 #layout-nav div.main_search input.submit
@@ -238,6 +239,7 @@
 {
 	float:right;
 	margin-top:-2em;
+	margin-right:-12.5em;
 }
 
 #layout-nav div.main_search input.random
