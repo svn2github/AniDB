@@ -318,29 +318,25 @@
 
 #layout-main div.pagination span a
 {
-	border: 1px solid #BABABA;
-}
-
-#layout-main div.pagination span a
-{
-	background-color: #ECEDEE;
-	border-color: #B4BAC0;
-	color: #5C758C;
+	background-color:#ECEDEE;
+	border:1px solid #BABABA;
+	border-color:#B4BAC0;
+	color:#5C758C;
 }
 
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	border: 1px solid #BFBFBF;
-	background-color: #4692BF;
-	border-color: #4692BF;
-	color: #FFFFFF;
+	background-color:#4692BF;
+	border:1px solid #BFBFBF;
+	border-color:#4692BF;
+	color:#FFFFFF;
 }
 
 #layout-main #htmltagcloud
 {
-	border:1px solid #D1D7DC;
 	background-color:#FAFAFA;
+	border:1px solid #D1D7DC;
 }
 
 #layout-main div.g_timedentry h4
@@ -350,5 +346,5 @@
 
 #layout-content div.anime_info div.data table
 {
-	border-top: none;
+	border-top:none;
 }

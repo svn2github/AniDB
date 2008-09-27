@@ -1,11 +1,6 @@
 @import "../sub/common.css";
 @import "../sub/silver/forum-color.css";
 @import "suppy-layout.css";
-/*@import "suppy-main.css";
-@import "suppy-msg.css";
-@import "suppy-anime.css";
-@import "suppy-hint2.css";
-@import "suppy-stats.css";*/
 
 html
 {
@@ -32,7 +27,7 @@ table
 
 tr.g_odd,
 li.g_odd,
-span.g_odd,
+span.g_odd
 {
 	background-color:#e5ecf9;
 }
