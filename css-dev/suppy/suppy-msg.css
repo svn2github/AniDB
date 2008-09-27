@@ -1,28 +1,6 @@
-#layout-content div.msg_all table,
-#layout-content div.msg_all div.menu
+#layout-content div.msg_all table
 {
-	background-color:#ffffff;
-	border-color:blue;
-	border-style:solid;
-	border-width:1px 0 0;
-	margin:0;
-}
-
-#layout-content div.msg_all div.menu
-{
-	float:right;
-	margin-left:4px;
-	margin-right:10%;
-	width:15em;
-}
-
-#layout-content div.msg_all table.messages
-{
-	border-collapse:collapse;
-	margin-left:3em;
-	margin-top:1px;
-	text-align:center;
-	width:auto;
+	margin-top 1em;
 }
 
 #layout-content div.msg_all th,

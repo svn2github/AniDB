@@ -136,14 +136,12 @@ li.producerlist
 	background-repeat: no-repeat;
 	left:43%;
 	margin-top: 5em;
-	width:45em;
+	width:42em;
 }
 
 #layout-nav div.main_search div.search
 {
-	padding-top:1em;
 	margin-left:-7em;
-	margin-right:7em;
 }
 
 #layout-nav div.main_search div.search p
@@ -363,4 +361,24 @@ li.producerlist
 #layout-main div.tabbed_pane ul.tabs
 {
 	text-align: center;
+}
+
+#layout-nav div.main_search div.search form
+{
+	width:45em;
+}
+
+#layout-nav div.main_search div.search input.text
+{
+	width: 300px;
+}
+
+#layout-main table
+{
+	border-top:1px solid blue;
+}
+
+#layout-main table  tr.header
+{
+	background-color:#E5ECF9;
 }
