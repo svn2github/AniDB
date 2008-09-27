@@ -115,9 +115,3 @@
 	margin-left: auto;
 	margin-right: auto;
 }
-
-#layout-main div.myplace_all div.latest div + div,
-#layout-main div.myplace_all div.stats div + div
-{
-	margin-top: 1em;
-}
