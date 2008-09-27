@@ -201,3 +201,67 @@
 	margin-bottom:0.5em;
 	margin-top:0.5em;
 }
+
+#layout-menu > li ul
+{
+	border: 1px solid #000000;
+	background-color:#FFFFFF;
+	padding: 0px;
+}
+
+#layout-menu li.sub-menu span
+{
+	padding-bottom:0.5em;
+	padding-top:0.5em;
+}
+
+#layout-menu
+{
+	margin-bottom:0;
+	margin-top:0;
+}
+
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-menu li.sub-menu:hover,
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#E5ECF9;
+}
+
+#layout-menu li.sub-menu ul li
+{
+	padding: 2px 8px;
+}
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border: 1px solid #E5ECF9;
+	font-size: 1.1em;
+}
+
+#layout-tabs ul.main-tabs > li
+{
+	border-bottom: none;
+}
+
+#layout-tabs ul.main-tabs > li.selected
+{
+	border-bottom: 2px solid #FFFFFF;
+	background-color: #FFFFFF;
+}
+
+#layout-tabs ul li
+{
+	padding:4px 6px 3px;
+}
+
+#layout-main div.tabbed_pane ul.tabs
+{
+text-align: center;
+}

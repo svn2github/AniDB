@@ -1,4 +1,5 @@
 @import "../sub/common.css";
+@import "../sub/silver/forum-colors.css";
 @import "suppy_layout.css";
 @import "suppy-main.css";
 @import "suppy-msg.css";
@@ -32,15 +33,9 @@ table
 	border-collapse:separate;
 }
 
-*[bgcolor="#494D59"]
-{
-	background-color:#3366cc;
-	color:white;
-}
-
-tr.g_odd,li.g_odd,span.g_odd,
-*[bgcolor="#b0b0b0"],
-*[bgcolor="#969aa6"]
+tr.g_odd,
+li.g_odd,
+span.g_odd,
 {
 	background-color:#e5ecf9;
 }
