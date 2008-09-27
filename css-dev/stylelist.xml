@@ -40,6 +40,16 @@
 		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
 	</style>
+	<style name="anigoogle">
+		<title>Anigoogle</title>
+		<creator>hrm &amp; Der Idiot</creator>
+		<update>27.09.2008</update>
+		<status>in development</status>
+		<description>Style inspired by Google. Initially started by hrm 2 years ago and currently maintained by Der idiot.</description>
+		<path/>
+		<screenshot>anigoogle/images/screenshot.png</screenshot>
+		<thumbnail>anigoogle/images/thumbnail.png</thumbnail>
+	</style>
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
