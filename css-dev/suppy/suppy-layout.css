@@ -13,18 +13,17 @@
 	z-index:5;
 }
 
-#layout-menu ul li
-{
-	display:inline;
-}
-
 #layout-search
 {
+	background-image:url(images/logo_small.gif);
+	background-repeat:no-repeat;
 	display:block;
-	left:50%;
+	height:53px;
+	left:0;
+	margin-left:1em;
 	position:absolute;
-	top:2em;
-	width:43em;
+	top:3em;
+	width:60em;
 }
 
 #layout-search p,
@@ -47,8 +46,10 @@
 {
 	border:1px solid;
 	float:left;
+	font-size:1.2em;
 	margin:0;
-	width:80%;
+	padding:4px;
+	width:200px;
 }
 
 #layout-search input.submit
@@ -57,6 +58,7 @@
 	font-size:1.2em;
 	margin:0;
 	text-transform:capitalize;
+	width:100px;
 }
 
 li.animelist
@@ -96,12 +98,9 @@ li.producerlist
 	background-color:#e5ecf9;
 	border-top:1px solid blue;
 	display:block;
+	padding:4px;
+	text-align:left;
 	width:100%;
-}
-
-#layout-footer
-{
-	text-align:center;
 }
 
 #layout-footer p
@@ -114,14 +113,6 @@ li.producerlist
 	content:"design by hrm & deridiot inspired by google";
 }
 
-#layout-search
-{
-	width: 150px;
-	height: 53px;
-	background-image: url(images/logo_small.gif);
-	background-repeat: no-repeat;
-}
-
 #layout-main h1.main,
 #layout-main div.main_all
 {
@@ -130,11 +121,11 @@ li.producerlist
 
 #layout-nav div.main_search
 {
-	height: 110px;
-	background-image: url(images/logo.gif);
-	background-repeat: no-repeat;
+	background-image:url(images/logo.gif);
+	background-repeat:no-repeat;
+	height:110px;
 	left:43%;
-	margin-top: 5em;
+	margin-top:5em;
 	width:42em;
 }
 
@@ -145,7 +136,7 @@ li.producerlist
 
 #layout-nav div.main_search div.search p
 {
-	margin-top: 9em;
+	margin-top:9em;
 }
 
 #anidb div.main_nav
@@ -167,58 +158,42 @@ li.producerlist
 
 #layout-nav div.main_search input.submit
 {
-	margin-top:0.2em;
-}
-
-#layout-menu > li:hover ul
-{
-	display:block;
-}
-
-#layout-menu > li ul {
-	display:none;
-	position:absolute;
-}
-
-#layout-menu span.tab
-{
-	display: block;
-	position:relative;
-}
-
-#layout-menu > li {
-	display:block;
 	float:left;
-	padding-left:0.7em;
-	padding-right:0.7em;
-	font-size: 1.2em;
-}
-
-#layout-menu ul li
-{
-	display:block;
+	margin-left:5em;
+	margin-top:.2em;
+	width:150px;
 }
 
 #layout-menu > li ul
 {
-	background-color:#F5F5F5;
-	padding:4px;
+	background-color:#FFF;
+	border:1px solid #000;
+	display:none;
+	padding:0;
+	position:absolute;
 	z-index:5;
+}
+
+#layout-menu span.tab
+{
+	display:block;
+	position:relative;
+}
+
+#layout-menu > li
+{
+	display:block;
+	float:left;
+	font-size:1.2em;
+	padding-left:.7em;
+	padding-right:.7em;
 }
 
 #layout-nav div.menu_hr
 {
-	margin-top: 2.5em;
-	border-top: 1px solid #c9d7f1;
+	border-top:1px solid #c9d7f1;
 	display:block;
-}
-
-#layout-search
-{
-	margin-left:1em;
-	width:60em;
-	left:0;
-	top:3em;
+	margin-top:2.5em;
 }
 
 #layout-search div.search
@@ -229,7 +204,7 @@ li.producerlist
 
 #layout-search div.search form
 {
-	text-align: left;
+	text-align:left;
 }
 
 #layout-search input.text,
@@ -250,18 +225,6 @@ li.producerlist
 	padding:4px 4px 3px;
 }
 
-#layout-search input.text
-{
-	width:200px;
-	font-size:1.2em;
-	padding:4px;
-}
-
-#layout-search input.submit
-{
-	width:100px;
-}
-
 #layout-nav div.search_main input.text,
 #layout-nav div.search_main input.submit
 {
@@ -275,91 +238,57 @@ li.producerlist
 	width:20em;
 }
 
-#layout-main > h1
-{
-	padding:4px;
-	text-align:left;
-}
-
 #layout-tabs
 {
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	display: block;
+	display:block;
 	font-size:1.2em;
-	margin-right:0.5em;
+	margin-right:.5em;
+	position:absolute;
+	right:0;
+	top:0;
 }
 
 #layout-tabs ul li
 {
-	display: inline;
-	padding: 4px 6px;
+	display:inline;
+	padding:4px 6px 3px;
 }
 
 #layout-tabs ul
 {
-	text-align: right;
-	margin-bottom:0.5em;
-	margin-top:0.5em;
-}
-
-#layout-menu > li ul
-{
-	border: 1px solid #000000;
-	background-color:#FFFFFF;
-	padding: 0px;
+	margin-bottom:.5em;
+	margin-top:.5em;
+	text-align:right;
 }
 
 #layout-menu li.sub-menu span
 {
-	padding-bottom:0.5em;
-	padding-top:0.5em;
-}
-
-#layout-main ul.g_list li:hover,
-#layout-main ul.g_list li.selected,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-menu li.sub-menu:hover,
-#layout-menu li.sub-menu ul li:hover
-{
-	background-color:#E5ECF9;
+	padding-bottom:.5em;
+	padding-top:.5em;
 }
 
 #layout-menu li.sub-menu ul li
 {
-	padding: 2px 8px;
+	padding:2px 8px;
 }
 
 #layout-main ul.g_list li,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	border: 1px solid #E5ECF9;
-	font-size: 1.1em;
+	border:1px solid #E5ECF9;
+	font-size:1.1em;
 }
 
 #layout-tabs ul.main-tabs > li
 {
-	border-bottom: none;
+	border-bottom:none;
 }
 
 #layout-tabs ul.main-tabs > li.selected
 {
-	border-bottom: 2px solid #FFFFFF;
-	background-color: #FFFFFF;
-}
-
-#layout-tabs ul li
-{
-	padding:4px 6px 3px;
-}
-
-#layout-main div.tabbed_pane ul.tabs
-{
-	text-align: center;
+	background-color:#FFF;
+	border-bottom:2px solid #FFF;
 }
 
 #layout-nav div.main_search div.search form
@@ -369,7 +298,7 @@ li.producerlist
 
 #layout-nav div.main_search div.search input.text
 {
-	width: 300px;
+	width:300px;
 }
 
 #layout-main table
@@ -377,14 +306,9 @@ li.producerlist
 	border-top:1px solid blue;
 }
 
-#layout-main table  tr.header
-{
-	background-color:#E5ECF9;
-}
-
 #layout-nav div.main_search a.advsearch
 {
-	color:#0000CC;
+	color:#00C;
 	float:right;
 	font-family:arial,sans-serif;
 	margin-top:-2em;
@@ -392,20 +316,33 @@ li.producerlist
 	text-transform:capitalize;
 }
 
-#layout-nav div.main_search input.submit
-{
-	float:left;
-	margin-left:5em;
-	width: 150px;
-}
-
 #layout-nav div.main_search input.random
 {
-	margin-left:0.5em;
+	margin-left:.5em;
 }
 
+#layout-menu ul li,
+#layout-menu > li:hover ul,
 #layout-nav div.main_search a.advsearch,
 #layout-nav div.main_search form.random
 {
-	display: block;
+	display:block;
+}
+
+#layout-footer,
+#layout-main div.tabbed_pane ul.tabs
+{
+	text-align:center;
+}
+
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-menu li.sub-menu:hover,
+#layout-menu li.sub-menu ul li:hover,
+#layout-main table tr.header
+{
+	background-color:#E5ECF9;
 }
