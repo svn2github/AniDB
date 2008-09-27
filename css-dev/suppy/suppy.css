@@ -1,12 +1,11 @@
 @import "../sub/common.css";
 @import "../sub/silver/forum-color.css";
 @import "suppy-layout.css";
-@import "suppy-main.css";
+/*@import "suppy-main.css";
 @import "suppy-msg.css";
 @import "suppy-anime.css";
-@import "suppy-dbstats.css";
 @import "suppy-hint2.css";
-@import "suppy-stats.css";
+@import "suppy-stats.css";*/
 
 html
 {
@@ -27,7 +26,7 @@ a.i_button:hover
 
 table
 {
-	border:0;
+	border-top:1px solid blue;
 	border-collapse:separate;
 }
 
@@ -36,4 +35,11 @@ li.g_odd,
 span.g_odd,
 {
 	background-color:#e5ecf9;
+}
+
+h4
+{
+	background-color:#e5ecf9;
+	padding:.3em;
+	margin-bottom: 1em;
 }
