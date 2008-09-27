@@ -404,8 +404,8 @@ li.producerlist
 	margin-left:0.5em;
 }
 
-#layout-nav main_search a.advsearch,
-#layout-nav main_search form.random
+#layout-nav div.main_search a.advsearch,
+#layout-nav div.main_search form.random
 {
 	display: block;
 }
