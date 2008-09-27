@@ -352,3 +352,8 @@
 {
 	border-top:none;
 }
+
+#layout-main div.news_all g_timedentry h4
+{
+	background-color: #c3d9ff;
+}
