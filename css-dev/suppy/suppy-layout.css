@@ -304,10 +304,14 @@
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-menu li.sub-menu:hover,
-#layout-menu li.sub-menu ul li:hover,
-#layout-main table tr.header
+#layout-menu li.sub-menu ul li:hover
 {
 	background-color:#E5ECF9;
+}
+
+#layout-main table tr.header
+{
+	background-color: #c3d9ff;
 }
 
 #layout-content div.dbstats_all
@@ -344,7 +348,7 @@
 	padding:.3em;
 }
 
-#layout-content div.anime_info div.data table
+#layout-main div.anime_all div.info div.data table
 {
 	border-top:none;
 }
