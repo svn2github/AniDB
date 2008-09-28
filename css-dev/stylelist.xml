@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <css_styles>
+	<style name="aniblackle">
+		<title>Aniblackle</title>
+		<creator>Der Idiot</creator>
+		<update>28.09.2008</update>
+		<status>in development</status>
+		<description>Style inspired by blackle.com</description>
+		<path/>
+		<screenshot>aniblackle/images/screenshot.png</screenshot>
+		<thumbnail>aniblackle/images/thumbnail.png</thumbnail>
+	</style>
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
