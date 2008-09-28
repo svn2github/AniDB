@@ -13,7 +13,8 @@
 button,
 select,
 textarea,
-input
+input,
+#layout-search input.text
 {
 	border:1px solid #888888;
 }
