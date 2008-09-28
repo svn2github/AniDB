@@ -125,11 +125,3 @@ a:hover,
 {
 	background-color:#888888;
 }
-
-button,
-select,
-textarea,
-input[type="submit"]
-{
-	border-color:#888888;
-}
