@@ -1,2 +1,16 @@
 @import "../anigoogle/anigoogle.css";
 @import "aniblackle-color.css";
+
+#layout-footer:after
+{
+	content:"design by hrm & deridiot inspired by blackle";
+}
+
+button,
+select,
+textarea,
+input[type="submit"]
+{
+	border-color:#888888;
+	border:1px solid;
+}

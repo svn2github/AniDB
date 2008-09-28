@@ -84,7 +84,7 @@ select,
 textarea,
 input[type="submit"]
 {
-	border:1px solid #888888;
+	border-color:#888888;
 }
 
 button:hover
