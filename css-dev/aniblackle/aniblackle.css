@@ -15,6 +15,5 @@ select,
 textarea,
 input[type="submit"]
 {
-	border-color:#888888;
 	border:1px solid;
 }
