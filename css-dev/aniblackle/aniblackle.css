@@ -3,7 +3,7 @@
 @import "../anigoogle/anigoogle-text.css";
 @import "../anigoogle/anigoogle-border.css";
 @import "../anigoogle/anigoogle-color.css";
-@import "../anigoogle/aniblackle-color.css";
+@import "aniblackle-color.css";
 
 #layout-footer:after
 {
