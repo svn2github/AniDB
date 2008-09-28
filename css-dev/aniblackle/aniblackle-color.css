@@ -1,58 +1,111 @@
+button,
+select,
+input,
+textarea,
 html
 {
-	background:white;
-}
-
-a
-{
-	color:#105289;
-}
-
-a:hover
-{
-	color:#AA0000;
+	background:#000000;
+	color:#728972;
 }
 
 table
 {
-	border-top-color:blue;
+	border-top-color:#888888;
 }
 
 tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-color:#e5ecf9;
-}
-
-#layout-search
-{
-	background-image:url(images/logo_small.gif);
-	background-repeat:no-repeat;
+	background-color:#888888;
+	color:#cccccc;
 }
 
 #layout-main > h1
 {
-	background-color:#e5ecf9;
-	border-top-color:blue;
-}
-
-#layout-nav div.main_search
-{
-	background-image:url(images/logo.gif);
-	background-repeat:no-repeat;
+	background-color:#000000;
+	border-top-color:#888888;
 }
 
 #layout-menu > li ul
 {
-	background-color:#FFF;
-	border-color:#000;
+	background-color:#888888;
+	border-color:#000000;
 }
 
 #layout-tabs ul.main-tabs > li.selected
 {
-	background-color:#FFFFFF;
-	border-bottom-color:#FFFFFF;
+	background-color:#000000;
+	border-bottom-color:#000000;
+}
+
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#AAAAAA;
+}
+
+#layout-main div.pagination span a
+{
+	background-color:#728189;
+	border-color:#888888;
+	color:#CCCCCC;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	color:#000000;
+}
+
+#layout-main #htmltagcloud
+{
+	background-color:#888888;
+	border-color:#888888;
+}
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li,
+input,
+#layout-search input.text,
+textarea,
+#layout-nav div.menu_hr
+{
+	border-color:#888888;
+}
+
+#layout-main table tr.header
+{
+	background-color:#BBBBBB;
+}
+
+button,
+select,
+textarea,
+input[type="submit"]
+{
+	border:1px solid #888888;
+}
+
+button:hover
+{
+	background-color:#888888;
+	color:#CCCCCC;
+}
+
+a,
+#layout-tabs ul.main-tabs > li.selected a,
+ul.g_list li,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	color:#CCCCCC;
+}
+
+a:hover,
+#layout-menu li.sub-menu:hover
+{
+	color:#FFFFFF;
 }
 
 #layout-main ul.g_list li:hover,
@@ -61,46 +114,7 @@ span.g_odd
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-menu li.sub-menu:hover,
-#layout-menu li.sub-menu ul li:hover
-{
-	background-color:#E5ECF9;
-}
-
-#layout-main div.pagination span a
-{
-	background-color:#ECEDEE;
-	border-color:#B4BAC0;
-	color:#5C758C;
-}
-
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
-{
-	background-color:#4692BF;
-	border-color:#4692BF;
-	color:#FFFFFF;
-}
-
-#layout-main #htmltagcloud
-{
-	background-color:#FAFAFA;
-	border-color:#D1D7DC;
-}
-
-#layout-main ul.g_list li,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li
-{
-	border-color:#E5ECF9;
-}
-
-#layout-nav div.menu_hr
-{
-	border-top-color:#c9d7f1;
-}
-
-#layout-main table tr.header,
 #layout-main div.news_all div.g_timedentry h4
 {
-	background-color:#c3d9ff;
+	background-color:#888888;
 }

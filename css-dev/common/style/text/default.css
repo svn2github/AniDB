@@ -41,6 +41,12 @@ h4 span
 	-cursor: hand;
 }
 
+button:hover,
+input[type="submit"]:hover
+{
+	cursor:pointer;
+}
+
 th, td.action, td.date, td.year,
 span.date, span.user, td.rating,
 #menu-account li.alert,
