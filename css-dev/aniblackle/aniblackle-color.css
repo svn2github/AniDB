@@ -17,8 +17,8 @@ tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-color:#888888;
-	color:#cccccc;
+	background-color:inherit;
+	color:#999999;
 }
 
 #layout-main table ul li.g_odd,
@@ -70,28 +70,9 @@ span.g_odd
 	border-color:#888888;
 }
 
-#layout-main ul.g_list li,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li,
-input,
-#layout-search input.text,
-textarea,
-#layout-nav div.menu_hr
-{
-	border-color:#888888;
-}
-
 #layout-main table tr.header
 {
 	background-color:#BBBBBB;
-}
-
-button,
-select,
-textarea,
-input[type="submit"]
-{
-	border-color:#888888;
 }
 
 button:hover
@@ -115,13 +96,68 @@ a:hover,
 	color:#FFFFFF;
 }
 
+#layout-main div.msg_all tr.mod
+{
+	background-color:#728972;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left-color:#888888;
+	border-right-color:#888888;
+}
+
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-color:#999999;
+}
+
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main #htmltagcloud
+{
+	background-color:#666666;
+}
+
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *,
+#layout-main table tr.header
+{
+	background-color:#999999;
+	color:#000000;
+}
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li,
+input,
+#layout-search input.text,
+textarea,
+#layout-nav div.menu_hr,
+button,
+select,
+textarea,
+input[type="submit"]
+{
+	border-color:#888888;
+}
+
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-menu li.sub-menu:hover,
-#layout-main div.news_all div.g_timedentry h4
+#layout-main div.news_all div.g_timedentry h4,
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner
 {
 	background-color:#888888;
 }
