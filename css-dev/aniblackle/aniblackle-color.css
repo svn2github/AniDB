@@ -17,7 +17,7 @@ tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-color:inherit;
+	background-color:#444444;
 	color:#999999;
 }
 
@@ -91,7 +91,9 @@ ul.g_list li,
 }
 
 a:hover,
-#layout-menu li.sub-menu:hover
+#layout-menu li.sub-menu:hover,
+button:hover,
+input[type="submit"]:hover
 {
 	color:#FFFFFF;
 }
@@ -141,6 +143,8 @@ a:hover,
 	border-color:#888888;
 }
 
+button:hover,
+input[type="submit"]:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
