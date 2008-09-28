@@ -2,7 +2,8 @@ button,
 select,
 input,
 textarea,
-html
+html,
+#layout-main div.mylist_list tr.all_watched td.stats
 {
 	background:#000000;
 	color:#728972;
@@ -156,19 +157,20 @@ input[type="submit"]:hover,
 
 #layout-main td ins,
 #layout-main table.filelist tr.good,
-#layout-main div.producer_all table tr.mylist,
-#layout-content div.group_released table tr.mylist
+#layout-main div.producer_related_anime table tr.mylist,
+#layout-main div.group_released table tr.mylist,
+#layout-main table.animelist tr.mylist
 {
-	background-color: #364a36;
+	background-color:#364a36;
 }
 
-#layout-content td.g_odd ins,
-#layout-content table.filelist tr.g_odd.good,
-#layout-content div.myvotes_all table tr.g_odd.high td,
-#layout-content div.producer_all table tr.g_odd.mylist,
-#layout-content div.group_released table tr.g_odd.mylist
+#layout-main td.g_odd ins,
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.producer_related_anime table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main table.animelist tr.g_odd.mylist
 {
-	background-color: #4c614c;
+	background-color:#4c614c;
 }
 
 #layout-main td del,
@@ -177,10 +179,20 @@ input[type="submit"]:hover,
 #layout-main table.filelist tr.invalid,
 #layout-main table.filelist tr.g_odd.deprecated
 {
-	background-color: #564444;
+	background-color:#564444;
 }
 
 #layout-main table.filelist tr.generic
 {
-	background-color: #444444;
+	background-color:#444444;
+}
+
+#layout-main td del,
+#layout-main td ins,
+#layout-main table.filelist,
+#layout-main table.animelist,
+#layout-main div.group_released table,
+#layout-main div.producer_related_anime table
+{
+	color:#909090;
 }
