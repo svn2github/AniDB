@@ -136,14 +136,7 @@ a:hover,
 #layout-main ul.g_list li,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li,
-input,
-#layout-search input.text,
-textarea,
-#layout-nav div.menu_hr,
-button,
-select,
-textarea,
-input[type="submit"]
+#layout-nav div.menu_hr
 {
 	border-color:#888888;
 }
