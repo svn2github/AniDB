@@ -104,3 +104,35 @@ span.g_odd
 {
 	background-color:#c3d9ff;
 }
+
+#layout-main td ins,
+#layout-main table.filelist tr.good,
+#layout-main div.producer_related_anime table tr.mylist,
+#layout-main div.group_released table tr.mylist,
+#layout-main table.animelist tr.mylist
+{
+	background-color:#94c694;
+}
+
+#layout-main td.g_odd ins,
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.producer_related_anime table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main table.animelist tr.g_odd.mylist
+{
+	background-color:#86b186;
+}
+
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main table.filelist tr.g_odd.deprecated
+{
+	background-color:#c9aaaa;
+}
+
+#layout-main table.filelist tr.generic
+{
+	background-color:#EEEEEE;
+}
