@@ -69,11 +69,6 @@ span.g_odd
 	border-color:#888888;
 }
 
-#layout-main table tr.header
-{
-	background-color:#BBBBBB;
-}
-
 button:hover
 {
 	background-color:#888888;
@@ -128,7 +123,8 @@ input[type="submit"]:hover
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main table tr.header
+#layout-main table tr.header,
+#layout-main table thead tr
 {
 	background-color:#999999;
 	color:#000000;
@@ -156,4 +152,35 @@ input[type="submit"]:hover,
 #layout-main div.forum div.threads div.inner
 {
 	background-color:#888888;
+}
+
+#layout-main td ins,
+#layout-main table.filelist tr.good,
+#layout-main div.producer_all table tr.mylist,
+#layout-content div.group_released table tr.mylist
+{
+	background-color: #364a36;
+}
+
+#layout-content td.g_odd ins,
+#layout-content table.filelist tr.g_odd.good,
+#layout-content div.myvotes_all table tr.g_odd.high td,
+#layout-content div.producer_all table tr.g_odd.mylist,
+#layout-content div.group_released table tr.g_odd.mylist
+{
+	background-color: #4c614c;
+}
+
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main table.filelist tr.g_odd.deprecated
+{
+	background-color: #564444;
+}
+
+#layout-main table.filelist tr.generic
+{
+	background-color: #444444;
 }
