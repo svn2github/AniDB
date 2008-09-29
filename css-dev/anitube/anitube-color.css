@@ -45,7 +45,7 @@ span.g_odd
 #layout-tabs ul.main-tabs > li.selected
 {
 	background-color:#DBDBDB;
-	border-bottom-color:#d5d5d5;
+	border-bottom-color:#DBDBDB;
 }
 
 #layout-main ul.g_list li:hover,
