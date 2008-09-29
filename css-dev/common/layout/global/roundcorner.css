@@ -1,3 +1,9 @@
+.rtop,
+.rbottom
+{
+	display: block;
+}
+
 .rtop *,
 .rbottom *
 {

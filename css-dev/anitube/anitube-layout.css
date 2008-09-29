@@ -16,7 +16,7 @@
 
 #layout-search
 {
-	padding-top:9em;
+	padding-top:6em;
 }
 
 #layout-search p,
@@ -92,13 +92,17 @@
 {
 	margin-left:auto;
 	margin-right:auto;
-	padding:0.5em 25%;
-	width:41.2em;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	width:75%;
 }
 
 #layout-search div.search form
 {
+	margin-left:auto;
+	margin-right:auto;
 	text-align:left;
+	width:40.7em;
 }
 
 #layout-search input.text,
@@ -121,7 +125,7 @@
 #layout-tabs
 {
 	display:block;
-	margin-top:-5em;
+	margin-top:-5.2em;
 	position:relative;
 }
 
@@ -169,4 +173,13 @@ h4,
 #layout-main div.g_timedentry h4
 {
 	padding:.3em;
+}
+
+#layout-search .rtop,
+#layout-search .rbottom
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:75%;
+	display:block;
 }
