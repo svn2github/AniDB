@@ -196,3 +196,10 @@ input[type="submit"]:hover,
 {
 	color:#A0A0A0;
 }
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	background-color:#728972;
+	border-color:#888888;
+}
