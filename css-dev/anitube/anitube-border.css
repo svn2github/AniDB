@@ -34,7 +34,11 @@ table
 	border-bottom:none;
 }
 
-#layout-menu li.sub-menu + li.sub-menu,
+#layout-menu li.sub-menu + li.sub-menu
+{
+	border-left:1px solid #CCCCCC;
+}
+
 #layout-main > h1
 {
 	border-bottom:1px solid #CCCCCC;
