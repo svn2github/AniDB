@@ -25,19 +25,13 @@ span.g_odd
 	background-color:#e5ecf9;
 }
 
-#layout-search
-{
-	background-image:url(images/logo_small.gif);
-	background-repeat:no-repeat;
-}
-
 #layout-main > h1
 {
 	background-color:#e5ecf9;
 	border-top-color:blue;
 }
 
-#layout-nav div.main_search
+#layout-nav
 {
 	background-image:url(images/logo.gif);
 	background-repeat:no-repeat;

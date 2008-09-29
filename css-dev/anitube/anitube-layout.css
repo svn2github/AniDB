@@ -1,33 +1,17 @@
-#layout-nav
-{
-	display:block;
-	height:6em;
-}
-
 #layout-main
 {
 	margin-left:1em;
 	margin-right:1em;
+	margin-top:5em;
 }
 
 #layout-menu
 {
 	display:block;
-	left:0;
+	right:0;
 	position:absolute;
 	top:0;
 	z-index:5;
-}
-
-#layout-search
-{
-	display:block;
-	height:53px;
-	left:0;
-	margin-left:1em;
-	position:absolute;
-	top:3em;
-	width:60em;
 }
 
 #layout-search p,
@@ -107,8 +91,10 @@
 
 #layout-search div.search
 {
-	margin-left:16em;
-	margin-top:1.3em;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:5em;
+	width:41.2em;
 }
 
 #layout-search div.search form
@@ -136,10 +122,8 @@
 #layout-tabs
 {
 	display:block;
-	margin-right:.5em;
-	position:absolute;
-	right:0;
-	top:0;
+	margin-top:-5em;
+	position:relative;
 }
 
 #layout-tabs ul li
@@ -150,9 +134,7 @@
 
 #layout-tabs ul
 {
-	margin-bottom:.5em;
-	margin-top:.5em;
-	text-align:right;
+	text-align:center;
 }
 
 #layout-menu li.sub-menu span.tab
