@@ -2,6 +2,10 @@
 {
 	margin-left:1em;
 	margin-right:1em;
+}
+
+#layut-tabs + #layout-main
+{
 	margin-top:5em;
 }
 
