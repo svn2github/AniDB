@@ -26,14 +26,6 @@
 	padding:0;
 }
 
-#layout-search select.type
-{
-	float:right;
-	margin:0;
-	position:relative;
-	width:5em;
-}
-
 #layout-search input.text
 {
 	float:left;
@@ -115,6 +107,7 @@
 #layout-search select
 {
 	padding:4px 4px 3px;
+	margin-left: 0.5em;
 }
 
 #layout-tabs
