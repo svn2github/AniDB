@@ -95,7 +95,7 @@
 	margin-left:auto;
 	margin-right:auto;
 	text-align:left;
-	width:40.7em;
+	width:41.5em;
 }
 
 #layout-nav input,
@@ -120,7 +120,7 @@
 #layout-tabs ul li
 {
 	display:inline;
-	padding:4px 6px 3px;
+	padding:4px 20px 3px;
 }
 
 #layout-tabs ul
