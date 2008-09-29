@@ -27,8 +27,7 @@ span.g_odd
 
 #layout-main > h1
 {
-	background-color:#e5ecf9;
-	border-top-color:blue;
+	border-top-color:#CCCCCC;
 }
 
 #layout-nav
@@ -86,11 +85,6 @@ span.g_odd
 #layout-main div.tabbed_pane ul.tabs li
 {
 	border-color:#E5ECF9;
-}
-
-#layout-nav div.menu_hr
-{
-	border-top-color:#c9d7f1;
 }
 
 #layout-main table tr.header,

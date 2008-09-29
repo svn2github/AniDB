@@ -14,6 +14,11 @@
 	z-index:5;
 }
 
+#layout-search
+{
+	padding-top:9em;
+}
+
 #layout-search p,
 #layout-search form
 {
@@ -83,17 +88,10 @@
 	padding-right:.7em;
 }
 
-#layout-nav div.menu_hr
-{
-	display:block;
-	margin-top:2.5em;
-}
-
 #layout-search div.search
 {
 	margin-left:auto;
 	margin-right:auto;
-	padding-top:5em;
 	width:41.2em;
 }
 

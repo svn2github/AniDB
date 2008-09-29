@@ -34,8 +34,7 @@ table
 	border-bottom:none;
 }
 
-#layout-main > h1,
-#layout-nav div.menu_hr
+#layout-main > h1
 {
-	border-top:1px solid;
+	border-bottom:1px solid;
 }
