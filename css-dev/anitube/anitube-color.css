@@ -124,3 +124,11 @@ span.g_odd
 {
 	background-color:#EEEEEE;
 }
+
+#layout-search div.search,
+#layout-search .rbottom *,
+#layout-search .rtop *
+{
+	background-color:#dbdbdb;
+	color:#000000;
+}
