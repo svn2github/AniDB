@@ -3,7 +3,7 @@
 	<style name="aniblackle">
 		<title>Aniblackle</title>
 		<creator>Der Idiot</creator>
-		<update>28.09.2008</update>
+		<update>29.09.2008</update>
 		<status>in development</status>
 		<description>Style inspired by blackle.com</description>
 		<path/>
@@ -53,12 +53,22 @@
 	<style name="anigoogle">
 		<title>Anigoogle</title>
 		<creator>hrm &amp; Der Idiot</creator>
-		<update>27.09.2008</update>
+		<update>29.09.2008</update>
 		<status>in development</status>
 		<description>Style inspired by Google. Initially started by hrm 2 years ago and currently maintained by Der idiot.</description>
 		<path/>
 		<screenshot>anigoogle/images/screenshot.png</screenshot>
 		<thumbnail>anigoogle/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="anitube">
+		<title>Anitube</title>
+		<creator>Der Idiot</creator>
+		<update>29.09.2008</update>
+		<status>in development</status>
+		<description>Style inspired by Youtube.</description>
+		<path/>
+		<screenshot>none</screenshot>
+		<thumbnail>none</thumbnail>
 	</style>
 	<style name="dark-style">
 		<title>Dark Style</title>
@@ -140,6 +150,16 @@
 		<path/>
 		<screenshot>harustyle-fixed_menu/images/screenshot.png</screenshot>
 		<thumbnail>harustyle-fixed_menu/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="Lain">
+		<title>Lain</title>
+		<creator>DvdKhl/Arokh</creator>
+		<update>23.08.2008</update>
+		<status>in development</status>
+		<description>Tested with FireFox, IE may work with some changes. 1280x768 Required.</description>
+		<path/>
+		<screenshot>Lain/images/screenshot.png</screenshot>
+		<thumbnail>Lain/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="luckystyle">
 		<title>LuckyStyle</title>
@@ -254,15 +274,5 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<path></path>
 		<screenshot>zakura-menu/images/screenshot.png</screenshot>
 		<thumbnail>zakura-menu/images/thumbnail.png</thumbnail>
-	</style>
-	<style name="Lain">
-		<title>Lain</title>
-		<creator>DvdKhl/Arokh</creator>
-		<update>23.08.2008</update>
-		<status>in development</status>
-		<description>Tested with FireFox, IE may work with some changes. 1280x768 Required.</description>
-		<path/>
-		<screenshot>Lain/images/screenshot.png</screenshot>
-		<thumbnail>Lain/images/thumbnail.png</thumbnail>
 	</style>
 </css_styles>
