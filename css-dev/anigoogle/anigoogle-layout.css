@@ -129,6 +129,7 @@
 	padding:0;
 	position:absolute;
 	z-index:5;
+	margin-left:-0.7em;
 }
 
 #layout-menu span.tab
