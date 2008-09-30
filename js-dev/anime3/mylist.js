@@ -255,6 +255,7 @@ function expandAnime() {
 	if (!animes[aid]) {
 		var nrow = createLoadingRow(row.cells.length);
 		nrow.id = 'a'+aid+'_epsRow';
+		nrow.className = 'epsrow';
 		row.parentNode.insertBefore(nrow,row.nextSibling);
 		fetchData(aid,uid); // need to fetch data
 	} else {	// show stuff
@@ -663,6 +664,7 @@ function createEpisodeTable(aid) {
 	// Create the insert row for later insertion
 	var insertRow = document.createElement('tr');
 	insertRow.id = 'a'+aid+'_epsRow';
+	insertRow.className = 'epsrow';
 	var insertCell = document.createElement('td');
 	insertCell.colSpan = pRow.cells.length;
 	// create the form
