@@ -76,3 +76,9 @@ body,
 {
 	margin-top: 3px;
 }
+
+#layout-search .rtop,
+#layout-search .rbottom
+{
+	display:none;
+}
