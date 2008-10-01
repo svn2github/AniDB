@@ -16,3 +16,15 @@ body,
 {
 	content: "design by b1nh"
 }
+
+#layout-search .rtop,
+#layout-search .rbottom,
+#layout-search div.search form.random
+{
+	display:none;
+}
+
+#layout-main
+{
+margin-top: 1em;
+}
