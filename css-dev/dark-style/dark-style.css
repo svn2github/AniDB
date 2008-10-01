@@ -1611,3 +1611,10 @@ div.anime_all div.image
 {
 	display: block;
 }
+
+#layout-search .rtop,
+#layout-search .rbottom,
+#layout-search div.search form.random
+{
+	display:none;
+}

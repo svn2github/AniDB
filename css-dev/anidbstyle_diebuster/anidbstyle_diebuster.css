@@ -107,3 +107,10 @@ background: url(images/backtoo.png);
 {
 	background-color: #BFC2C9;
 }
+
+#layout-search .rtop,
+#layout-search .rbottom,
+#layout-search div.search form.random
+{
+	display:none;
+}
