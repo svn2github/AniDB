@@ -697,7 +697,8 @@ ul.contribution li,
 
 #layout-search .rtop,
 #layout-search .rbottom,
-#layout-search div.search form.random
+#layout-search div.search form.random,
+#layout-search div.search a.advsearch
 {
 	display:none;
 }
