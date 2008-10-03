@@ -217,7 +217,7 @@ function createReply() {
 	var table = div.getElementsByTagName('table')[0];
 	div.replaceChild(createMessageInput(msgToValue,msgTitleValue,msgBodyValue),table);
 	div.appendChild(createMessageActions());
-	if (init_formating) init_formating(); // should be loaded but you never know
+	if (initFormating) initFormating(); // should be loaded but you never know
 }
 
 /* creates new message */
