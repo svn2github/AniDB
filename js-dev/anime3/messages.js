@@ -251,7 +251,7 @@ function createNewMessage() {
 	var newmsgListAction = msgListAction;
 	msg_all.replaceChild(msgNewAction,msgListAction);
 	msgListAction = newmsgListAction;
-	if (init_formating) init_formating(); // should be loaded but you never know
+	if (initFormating) initFormating(); // should be loaded but you never know
 }
 
 /* Shows the message list */
