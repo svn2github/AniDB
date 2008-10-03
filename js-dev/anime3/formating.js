@@ -6,23 +6,20 @@
  * version 2.0 (20.04.2008) - Rather full support for every major browser Firefox, IE, Opera and Safari
  * version 2.1 (27.07.2008) - Introduction of Assisted Mode
  * version 2.2 (02.09.2008) - Rewrote somestuff
+ * version 3.0 (22.09.2008) - Major rewrite
  */
 
 // GLOBALS
-var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
-// WYSIWYG Width and Height
-var wysiwygWidth = 100;
-var wysiwygHeight = 20;
-// Create viewTextMode global variable and set to 0
-// enabling all toolbar commands while in HTML mode
+var seeDebug = CookieGet('seeDebug') || 0;
+var wysiwygWidth = "100%";
+var wysiwygHeight = "20em";
 var viewTextMode = 0;
-var current_ed; // current editor
-var isIE = (document.selection != undefined && window.getSelection == undefined) ? true : false;
-var isFF = (document.selection == undefined && window.getSelection != undefined) ? true : false;
-var isOP = (document.selection != undefined && window.getSelection != undefined) ? true : false;
+var dS = (document.selection != undefined) ? true : false;
+var wGS = (window.getSelection != undefined) ? true : false;
 var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
-if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) isIE = true; // new ie's work for everything
+var isIE = (navigator.userAgent.toLowerCase().indexOf('msie') >= 0);
+var isOP = (navigator.userAgent.toLowerCase().indexOf('presto') >= 0 || navigator.userAgent.toLowerCase().indexOf('opera') >= 0);
+var isFF = (!isWK && navigator.userAgent.toLowerCase().indexOf('gecko') >= 0 || navigator.userAgent.toLowerCase().indexOf('firefox') >= 0);
 var currentFMode = CookieGet('currentFMode') || 2;
 if (isWK && currentFMode == 2) currentFMode = 1;
 var smileyList = ['very_happy','happy','sad','shock','confused','cool','laughing','razz','embarassed','crying',
@@ -63,93 +60,250 @@ var smileys = [
 		{'id':"31",'name':"baka",'title':"idiot",'text':':baka:','targets':':baka:'}
 	];
 
-/* Change view mode
- * @param type Type of view mode (source,wysiwyg)
- * @param n Number of the textarea
+FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'accesskey':"b",'text':"b",'start':"[b]",'end':"[/b]",'active':false},
+               'italic':{'id':"Italic",'desc':"Italic text: [i]text[/i] (alt+i)",'accesskey':"i",'text':"i",'start':"[i]",'end':"[/i]",'active':false},
+               'underline':{'id':"Underline",'desc':"Underline text: [u]text[/u] (alt+u)",'accesskey':"u",'text':"u",'start':"[u]",'end':"[/u]",'active':false},
+               'strikethrough':{'id':"Strikethrough",'desc':"Strike-through text: [s]text[/s] (alt+s)",'accesskey':"S",'text':"s",'start':"[s]",'end':"[/s]",'active':false},
+               'insertorderedlist':{'id':"InsertOrderedList",'desc':"Ordered list: [ol]text[/ol] (alt+o)",'accesskey':"o",'text':"ol",'start':"[ol]",'end':"[/ol]",'active':false},
+               'insertunorderedlist':{'id':"InsertUnorderedList",'desc':"Unordered list: [ul]text[/ul] (alt+l)",'accesskey':"l",'text':"ul",'start':"[ul]",'end':"[/ul]",'active':false},
+			   'insertlistitem':{'id':"InsertListItem",'desc':"List Item: [li]text[/li] (alt+e)",'accesskey':"e",'text':"li",'start':"[li]",'end':"[/li]",'active':false},
+			   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':'[spoiler]','end':'[/spoiler]','active':false},
+               'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"href",'start':"[",'end':"]",'active':false},
+			   'unlink':{'id':"RemoveLink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false}
+			   };
+OptionsMap = {	'anime':{'text':"anime",'attribute':"anime id [aid]",'type':"a"},
+				'ep':{'text':"ep",'attribute':"episode id [eid]",'type':"e"},
+				'file':{'text':"file",'attribute':"file id [fid]",'type':"f"},
+				'group':{'text':"group",'attribute':"group id [gid]",'type':"g"},
+				'producer':{'text':"producer",'attribute':"producer id [prid]",'type':"p"},
+				'producers':{'text':"producers",'attribute':"producers for a given anime id [aid]",'type':"ap"},
+				'user':{'text':"user",'attribute':"user id [uid]",'type':"up"},
+				'mylist':{'text':"mylist",'attribute':"mylist for a given user id [uid]",'type':"u"},
+				'votes':{'text':"votes",'attribute':"votes for a given user id [uid]",'type':"v"},
+				'creq':{'text':"creq",'attribute':"change request id [creqid]",'type':"c"},
+				'review':{'text':"review",'attribute':"specific review for a given anime id, text is the review id [aid]",'type':"rs"},
+				'titles':{'text':"titles",'attribute':"titles for a given anime id [aid]",'type':"at"},
+				'cats':{'text':"cats",'attribute':"categories for a given anime id [aid]",'type':"ac"},
+				'relations':{'text':"relations",'attribute':"relations for a given anime id [aid]",'type':"ar"},
+				'groupcmts':{'text':"groupcmts",'attribute':"group comments for a given anime id [aid]",'type':"agc"},
+				'reviews':{'text':"reviews",'attribute':"reviews for a given anime id [aid]",'type':"r"},
+				'tracker':{'text':"tracker",'attribute':"tracker item id [id]",'url':"http://tracker.anidb.net/view.php?id="},
+				'wiki':{'text':"wiki",'attribute':"[no use]",'url':"http://wiki.anidb.net/w/"},
+				'forum.board':{'text':"forum.board",'attribute':"anidb forum board id [id]",'url':"http://forum.anidb.net/viewforum.php?f="},
+				'forum.topic':{'text':"forum.topic",'attribute':"anidb forum topic [id]",'url':"http://forum.anidb.net/viewtopic.php?t="},
+				'forum.post':{'text':"forum.post",'attribute':"anidb forum post [id]",'url':"http://forum.anidb.net/viewtopic.php?p="}
+			};
+//						21:{'text':"genres",'attribute':"old genres for a given anime id [aid]"},
+ModeMap = new Array('Mode: Off','Mode: Assisted','Mode: Visual');
+
+/* Function that gets the current selection
+ * @param field Where the cursor/selection is located
+ * @param myValue text that will replace the current
+ * @param isText if true will insert text instead of nodes
  */
-function viewMode(type,n) {
-	var getDocument = document.getElementById("wysiwyg_" + n).contentWindow.document;
-	if (!getDocument) return;
-	var fTA = document.getElementById('textArea_'+n);
-	var browserName = navigator.appName;
-	if (browserName == "Microsoft Internet Explorer") { // View Source for IE 	 
-		if (type == 'source') {
-			var iHTML = getDocument.body.innerHTML;
-			getDocument.body.innerText = iHTML;
-		} else {
-			var iText = getDocument.body.innerText;
-			getDocument.body.innerHTML = iText;
+function selectionMagic(field, myValue, isText) {
+	var selectionObject;
+	if (field.nodeName && field.nodeName.toLowerCase() == 'textarea') { // our nice textArea
+		if (wGS) { // window.getSelection does not work for textareas (why? i have no fucking clue)
+			var startPos = field.selectionStart;
+			var endPos = field.selectionEnd;
+			if (!myValue) return field.value.substring(startPos, endPos);
+			field.value = field.value.substring(0, startPos) + myValue + field.value.substring(endPos, field.value.length);
+			// this clears the current selection
+			field.selectionStart = startPos + myValue.length;
+			field.selectionEnd = startPos + myValue.length;
+			return myValue;
+		} else { // Microsoft Model (this has 3 hacks in it, find them!)
+			var range = field.document.selection.createRange();
+			if (!myValue) return range.text;
+			var startPos = field.selectionStart();
+			var endPos = field.selectionEnd();
+			field.value = field.value.substring(0, startPos) + myValue + field.value.substring(endPos, field.value.length);
+			// this clears the current selection
+			range.move("character", startPos+myValue.length); 
+			range.select();
+			return myValue;
 		}
-	} else { // View Source for Mozilla/Netscape
-		if (type == 'source') {
-			var html = document.createTextNode(getDocument.body.innerHTML);
-			getDocument.body.innerHTML = "";
-			getDocument.body.appendChild(html);
-		} else {
-			var html = getDocument.body.ownerDocument.createRange();
-			html.selectNodeContents(getDocument.body);
-			getDocument.body.innerHTML = html.toString();
+	} else { // field should be a window, if not, it's hell
+		try {
+			if (wGS) selectionObject = field.getSelection();
+			else if (dS) {
+				//field.document.body.focus();
+				var sel = field.document.selection.createRange();
+				if (!myValue) return sel.text;
+				alert(sel.text);
+				if (isText) sel.text = myValue;
+				else sel.pasteHTML(myValue);
+				return myValue;
+			}
+			else { errorAlert('selectionMagic','unknown selection method'); return; }
+			if (selectionObject.getRangeAt) {
+				range = selectionObject.getRangeAt(0);
+			} else { // very old webkit support
+				range = field.document.selection.createRange();
+				range.setStart(selectionObject.anchorNode,selectionObject.anchorOffset);
+				range.setEnd(selectionObject.focusNode,selectionObject.focusOffset);
+			}
+			if (myValue) {
+				range.deleteContents();
+				var doc = field.document;
+				if (isText) range.insertNode(doc.createTextNode(myValue));
+				else range.insertNode(myValue);
+			}
+			return range.toString();
+		} catch(error) {
+			errorAlert('selectionMagic','trying to do window work on something that probably is not a window...');
+			return '';
 		}
 	}
-	// Hide the HTML Mode button and show the Text Mode button
-	var html = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_viewsource',true)[0];
-	var text = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_viewrte',true)[0];
-	var clean = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_cleansource',true)[0];
-	var preview = getElementsByClassName(fTA.form.getElementsByTagName('input'),'f_preview',true)[0];
-	if (!html && !text && !clean && !preview) return; // no buttons nothing, to do
-	if (type == 'source') {
-		if (html) html.style.display = 'none'; 
-		if (text) text.style.display = '';
-		if (clean) clean.style.display = 'none';
-		if (preview) preview.style.display = 'none';
-		// set the font values for displaying HTML source
-		getDocument.body.style.fontSize = "12px";
-		getDocument.body.style.fontFamily = "Courier New"; 
-		viewTextMode = 1;
+}
+
+/* Get the caret position in a textarea (black magic IE hack) */
+function getCaretPosition() {
+	var caretPos = null;
+	var range = this.document.selection.createRange(); // get current selection
+	var range_all = this.document.body.createTextRange(); // a new selection of the whole textarea
+	range_all.moveToElementText(this); 	// calculate selection start point by moving beginning of range_all to beginning of range
+	var sel_start;
+	for (sel_start = 0; range_all.compareEndPoints('StartToStart', range) < 0; sel_start++)
+		range_all.moveStart('character', 1);
+	return sel_start;
+}
+
+/* Get the start of a selection (black magic IE hack) */
+function textAreaSelectionStart() { return this.getCaretPosition(); }
+/* Get the end of a selection (black magic IE hack) */
+function textAreaSelectionEnd() {
+	var selection = this.document.selection.createRange().text;
+	return this.selectionStart() + selection.length;
+}
+
+/* Function that formats text
+ * @param id 
+ * @param n Number of textArea
+ * @param selected Is select
+ */
+function formatText(id, n, selected, element) {
+	if (n == null) n = Number(this.parentNode.id.substring(iframe.id.indexOf('_')+1));
+	var rte = document.getElementById("wysiwyg_" + n);
+	var fta = document.getElementById('textArea_' + n);
+	if (!rte || !fta) { errorAlert('formatText','no rte or no fta'); return; }
+	var doc = rte.contentWindow.document;
+	if (currentFMode == 2) rte.contentWindow.focus();
+	else fta.focus();
+	switch(id.toLowerCase()) {
+		case 'createlink':
+			var addLinkWidget = document.getElementById('widget_addlink');
+			if (!addLinkWidget) { errorAlert('formatText','no addlink widget'); return; }
+			addLinkWidget.style.display = '';
+			addLinkWidget.style.left = element.offsetLeft + "px";
+			addLinkWidget.style.top = element.offsetTop + element.offsetHeight + "px";
+			var field = (currentFMode == 2 ? rte.contentWindow : fta);
+			//if (currentFMode == 2) rte.contentWindow.focus(); else fta.focus();
+			var selectionText = selectionMagic(field);
+			var textField = document.getElementById('f_links_text');
+			if (textField) textField.value = selectionText;
+			var confirmButton = document.getElementById('f_links_ok');
+			confirmButton.onclick = function addLink() {
+				var addLinkWidget = document.getElementById('widget_addlink');
+				if (!addLinkWidget) { errorAlert('formatText','no addlink widget'); return; }
+				var rte = document.getElementById('wysiwyg_'+n);
+				var fta = document.getElementById('textArea_'+n);
+				var field = (currentFMode == 2 ? rte.contentWindow : fta);
+				var typeField = document.getElementById('f_links').value;
+				var textField = document.getElementById('f_links_text').value || '';
+				var attrField = document.getElementById('f_links_attr').value;
+				if (!textField.length) textField = typeField + " " + attrField;
+				var option = OptionsMap[typeField];
+				var base = (option['url'] ? option['url'] : "http://anidb.net/");
+				var type = option['type'];
+				var hyperLink = '['+typeField+':'+attrField+':'+textField+']';
+				if (currentFMode != 2) {
+					selectionMagic(field, hyperLink, true);
+					addLinkWidget.style.display = 'none';
+					return;
+				}
+				if (wGS) {
+					hyperLink = field.document.createElement('a');
+					hyperLink.href = base+type+attrField;
+					hyperLink.type = typeField;
+					if (typeField != 'wiki') hyperLink.setAttribute('att',attrField);
+					hyperLink.appendChild(document.createTextNode(textField));
+					selectionMagic(field, hyperLink, false);
+				} else {
+					hyperLink = '<a href="'+(base+type+attrField)+'" type="'+typeField+'"'+(typeField!='wiki' ? ' att="'+attrField+'"' : '')+'>'+textField+'</a>';
+					selectionMagic(field, hyperLink, false);
+				}
+				addLinkWidget.style.display = 'none';
+				return;
+			}
+			break;
+		case 'spoiler':
+			if (currentFMode == 2) {
+				var selection = selectionMagic(rte.contentWindow);
+				if (selection && selection.length)
+					selectionMagic(rte.contentWindow, FunctionMap['spoiler']['start']+selection+FunctionMap['spoiler']['end'], true);
+			} else fta.execCommand(id);
+			break;
+		default:
+			if (currentFMode == 2) doc.execCommand(id, false, null);
+			else fta.execCommand(id);
+			break;
+	}
+}
+
+/* Function that inserts smileys */
+function insertSmiley() {
+	var start = this.className.indexOf('i_smiley_')+9;
+	var name = this.className.substring(start);
+	var id = Number(this.parentNode.id.substring(11));
+	var text = smileys[smileyList.indexOf(name)]['text'];
+	var fta = document.getElementById('textArea_'+id);
+	var rte = document.getElementById("wysiwyg_"+id);
+	var field = (currentFMode == 2 ? rte.contentWindow : fta);
+	var selection = getSelection(field);
+	selectionMagic(field, text, true);
+}
+
+/* This function should be added to a textArea */
+function textAreaExecCommand(id) {
+	var selection = selectionMagic(this);
+	var n = Number(this.id.substring(this.id.indexOf('_')+1));
+	var controls = document.getElementById('controls_'+n);
+	var action = id.toLowerCase();
+	if (selection && selection.length) {
+		selectionMagic(this, FunctionMap[action]['start']+selection+FunctionMap[action]['end'], true);
+		FunctionMap[action]['active'] = false;
+		setButtonState(controls, id.toLowerCase(), false);
+	} else if (!selection || !selection.length) {
+		if (FunctionMap[action]['active']) {
+			selectionMagic(this, FunctionMap[action]['end'], true);
+			FunctionMap[action]['active'] = false;
+			setButtonState(controls, id.toLowerCase(), false);
+		} else {
+			selectionMagic(this, FunctionMap[action]['start'], true);
+			FunctionMap[action]['active'] = true;
+			setButtonState(controls, id.toLowerCase(), true);
+		}
+	}
+}
+
+/* Function that inserts RTE commands */
+function make () {
+	var cname = this.className;
+	if (cname.indexOf('selected') >= 0) cname = cname.replace(' selected','');
+	var start = cname.indexOf('f_button f_')+11;
+	var formatingFunc = cname.substring(start);
+	if (currentFMode == 2) {
+		if (this.className.indexOf('selected') < 0) this.className += ' selected';
+		else this.className = this.className.replace(' selected','');
 	} else {
-		if (html) html.style.display = ''; 
-		if (text) text.style.display = 'none';
-		if (clean) clean.style.display = '';
-		if (preview) preview.style.display = '';
-		// reset the font values
-		getDocument.body.style.fontSize = "";
-		getDocument.body.style.fontFamily = ""; 
-		viewTextMode = 0;
+		if (this.className.indexOf('selected') >= 0) this.className = this.className.replace(' selected','');
 	}
-	var cln = this.className;
-	if (cln && cln.indexOf('f_selected') > 0) this.className = this.className.replace(' f_selected','');
-}
-
-/* Updates a textarea
- * @param n Number of the textarea to update
- */
-function updateTextArea(n) {
-	document.getElementById("textArea_"+n).value = document.getElementById("wysiwyg_" + n).contentWindow.document.body.innerHTML;
-	format_output(n);
-}
-
-/* Updates something */
-function updateTextAreaCK() {
-	var tx = this.form.getElementsByTagName('textarea')[0];
-	if (!tx) return;
-	var n = tx.id.replace('textArea_','');
-	if (currentFMode == 2) updateTextArea(n);
-}
-
-/* Creates a select, this function is diferent from the ones in utils
- * @param node Node where to append this select
- * @param item Item to create
- * @param className Class name of the select
- */
-function createSelect(node,item,className) {
-	var select = document.createElement('select');
-	select.className = 'f_'+item;
-	for (var i=0; i < item.length; i++) {
-		var curItem = item[i];
-		createSelectOption(select,curItem,curItem,false);
-	}
-	select.className = className;
-	node.appendChild(select);
+	var fMap = FunctionMap[formatingFunc];
+	var execID = fMap.id;
+	var iframeId = this.parentNode.id.replace('controls_','');
+	formatText(execID, iframeId, null, this);
 }
 
 /* Creates a button, this function is diferent from the ones in utils
@@ -167,338 +321,220 @@ function createLocalButton(node,item,curItem) {
 	button.alt = item;
 	if (curItem['accesskey']) button.accessKey = curItem['accesskey'];
 	if (curItem['accesskey']) button.setAttribute('accessKey',curItem['accesskey']);
-	try {
-		if (curItem['text']) button.appendChild(document.createTextNode(curItem['text']));
-	} catch(e) { // making ie work
-		true;
-	}
+	//if (curItem['text']) button.value = curItem['text'];
 	if (node) node.appendChild(button);
 	else return(button);
 }
 
-/* Function that replaces classnames
- * @param node Node to replace className
- * @param replaceText replace text
+/* Change button mode
+ * @params controls The element where the buttons are located
+ * @params button Identifier of the button to locate
+ * @params state True if button should be set to activated, false otherwise
  */
-function buttonMouseReplace(node,replaceText) {
-	node.className = node.className.replace('replaceme',replaceText);
+function setButtonState(controls, button, state) {
+	if (!controls || !button) return;
+	var inputs = controls.getElementsByTagName('input');
+	var targetButton = getElementsByClassName(inputs, button, true)[0];
+	if (!targetButton) return;
+	if (state && targetButton.className.indexOf('selected') < 0) 
+		targetButton.className += ' selected';
+	else if (!state && targetButton.className.indexOf('selected') >= 0) 
+		targetButton.className = targetButton.className.replace(' selected','');
+	else return;
 }
 
-/* Function that replaces clears mouseover classes
- * @param node Node to replace stuff
- * @param type Unnused it seems..
+/* Check the nesting of the current cursor position/selection
+ * @params iframe Iframe which holds the RTE
+ * @params resubmit Allow browser to update selection before using the selection
  */
-function buttonMouseFReplace(node,type) {
-	if      (node.className.indexOf('f_mouseover') > 0) node.className = node.className.replace('f_mouseover','replaceme');
-	else if (node.className.indexOf('f_mouseout') > 0)  node.className = node.className.replace('f_mouseout','replaceme');
-	else node.className += ' replaceme';
-	return;
-}
+function checkButtonState(iframe, resubmit) {
+	if (!iframe) return;
+	if (!resubmit)
+		setTimeout(function(){checkButtonState(iframe, true); return true;}, 500);
 
-/* Function that inserts text or Nodes at the current cursor position/selection
- * @param myField Where the cursor/selection is located
- * @param myValue text that will replace the current
- * @param text if true will insert text instead of nodes
- */
-function insertAtSelection(myField, myValue, text) {
-	if (currentFMode == 2) {
-		if (isIE) {	//IE support
-			myField = myField.document;
-			myField.focus();
-			var sel = myField.selection.createRange();
-			if (text) sel.text = myValue;
-			else sel.pasteHTML(myValue);
-			myField.focus();
-		} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
-			if (isFF) myField.focus();
-			var sel = myField.getSelection();
-			var range = sel.getRangeAt(0);
-			range.deleteContents();
-			var doc = myField.document;
-			if (text) range.insertNode(doc.createTextNode(myValue));
-			else range.insertNode(myValue);
-		} else {
-			if (seeDebug) alert('insertAtSelection: unknown selection method');
-			return;
+	var theSelection = null;
+	var theRange = null;
+	var theParentNode = null;
+	var theLevel = 0;
+	
+	// Turn off all the buttons
+	var id = Number(iframe.id.substring(iframe.id.indexOf('_')+1));
+	var controls = document.getElementById('controls_'+id);
+	var buttons = controls.getElementsByTagName('input');
+	for (var i = 0; i < buttons.length; i++)
+		buttons[i].className = buttons[i].className.replace(' selected','');
+	
+	/* IE selections */
+	if (iframe.contentWindow.document.selection) {
+		theSelection = iframe.document.selection;
+		theRange = theSelection.createRange();
+		try {
+			theParentNode = theRange.parentElement();
+		} catch (e) {
+			return false;
 		}
-	} else {
-		if (isIE) {
-			myField.focus();
-			sel = document.selection.createRange();
-			sel.text = myValue;
-			myField.focus();
-		} else if (isFF || isOP) {
-			var startPos = myField.selectionStart;
-			var endPos = myField.selectionEnd;
-			myField.value = myField.value.substring(0, startPos)
-		                + myValue
-		                + myField.value.substring(endPos, myField.value.length);
-			myField.focus();
-			myField.selectionStart = startPos + myValue.length;
-			myField.selectionEnd = startPos + myValue.length;
-		} else {
-			if (seeDebug) alert('insertAtSelection: unknown selection method');
-			return;		
+	} else { /* Mozilla selections */
+		try {
+			theSelection = iframe.contentWindow.getSelection();
+		} catch (e) {
+			return false;
 		}
+		theRange = theSelection.getRangeAt(0);
+		theParentNode = theRange.commonAncestorContainer;
 	}
-}
-
-/* Function that gets the current selection
- * @param myField Where the cursor/selection is located
- * @return 
- */
-function getSelection(myField) {
-	if (currentFMode == 2) {
-		if (isIE) {	//IE support
-			myField = myField.document;
-			myField.focus();
-			var sel = myField.selection.createRange();
-			return (sel.text);
-		} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
-			if (isFF) myField.focus();
-			var sel = myField.getSelection();
-			var range = sel.getRangeAt(0);
-			return (range.toString());
-		} else {
-			if (seeDebug) alert('getSelection: unknown selection method');
-			return;
+	
+	while (theParentNode.nodeType == 3)
+		theParentNode = theParentNode.parentNode;
+	
+	while (theParentNode.nodeName.toLowerCase() != "body") {
+		switch (theParentNode.nodeName.toLowerCase()) {
+			case "a":
+				setButtonState(controls, 'link', true);
+				break;
+			case "i":
+			case "em":
+				setButtonState(controls, 'italic', true);
+				break;
+			case "b":
+			case "strong":
+				setButtonState(controls, 'bold', true);
+				break;
+			case "u":
+				setButtonState(controls, 'underline', true);
+				break;
+			case "strike":
+				setButtonState(controls, 'strikethrough', true);
+				break;
+			case "li":
+				setButtonState(controls, 'insertlistitem', false);
+				break;
+			case "ul":
+				setButtonState(controls, 'insertorderedlist', false);
+				setButtonState(controls, 'insertunorderedlist', true);
+				break;
+			case "ol":
+				setButtonState(controls, 'insertorderedlist', true);
+				setButtonState(controls, 'insertunorderedlist', false);
+				break;
+			case "span":
+				var style = theParentNode.getAttribute("style").toLowerCase();
+				if (style.indexOf('font-weight') >= 0 && style.indexOf('bold') >= 0)
+					setButtonState(controls, 'bold', true);
+				if (style.indexOf('font-style') >= 0 && style.indexOf('italic') >= 0)
+					setButtonState(controls, 'italic', true);
+				if (style.indexOf('text-decoration') >= 0 && style.indexOf('underline') >= 0)
+					setButtonState(controls, 'underline', true);
+				if (style.indexOf('text-decoration') >= 0 && style.indexOf('line-through') >= 0)
+					setButtonState(controls, 'strikethrough', true);
+				break;
+			default:
+				//alert('other/unknown: '+theParentNode.nodeName.toLowerCase());
+				break;
 		}
-	} else {
-		if (isIE) { //IE support
-			myField.focus();
-			sel = document.selection.createRange();
-			return (sel.text);
-		} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
-			var startPos = myField.selectionStart;
-			var endPos = myField.selectionEnd;
-			return myField.value.substring(startPos, endPos);
-		} else {
-			if (seeDebug) alert('getSelection: unknown selection method');
-			return;
+		theParentNode = theParentNode.parentNode;
+		theLevel++;
+	}
+	return true;			
+}
+
+// -------------------------------------------
+// CONVERTING FUNCTIONS
+// -------------------------------------------
+
+/* Make "valid" tags
+ * @param str String to parse
+ */
+function makeValidTags(str) {
+	/* Replace uppercase element names with lowercase */
+	str = str.replace(/<[^> ]*/g, function(match){return match.toLowerCase();});
+	
+	/* Replace uppercase attribute names with lowercase */
+	str = str.replace(/<[^>]*>/g, function(match) {
+			match = match.replace(/ [^=]+=/g, function(match2){return match2.toLowerCase();});
+			return match;
+		});
+		
+	/* Put quotes around unquoted attributes */
+	str = str.replace(/<[^>]*>/g, function(match) {
+			match = match.replace(/( [^=]+=)([^"][^ >]*)/g, "$1\"$2\"");
+			return match;
+		});
+
+	return str;
+}
+
+/* Function that converts spans to equivalents
+ * @param id, this works at DOM level
+ */
+function convertSPANs(id) {
+	/* Replace styled spans with their semantic equivalent */
+	var iframe = document.getElementById('wysiwyg_'+id);
+	if (!iframe) return;
+	
+	var theSPANs = iframe.contentWindow.document.getElementsByTagName("span");
+
+	while(theSPANs.length > 0) {
+		var theChildren = new Array();
+		var theReplacementElement = null;
+		var theParentElement = null;
+		
+		for (var j = 0; j < theSPANs[0].childNodes.length; j++)
+			theChildren.push(theSPANs[0].childNodes[j].cloneNode(true));
+		
+		/* Detect type of span style */
+		switch (theSPANs[0].getAttribute("style")) {
+			case "font-weight: bold;":
+				theReplacementElement = iframe.contentWindow.document.createElement("b");
+				theParentElement = theReplacementElement;
+				break;
+			case "font-style: italic;":
+				theReplacementElement = iframe.contentWindow.document.createElement("i");
+				theParentElement = theReplacementElement;
+				break;
+			case "text-decoration: underline;":
+				theReplacementElement = iframe.contentWindow.document.createElement("u");
+				theParentElement = theReplacementElement;
+				break;
+			case "text-decoration: line-through;":
+				theReplacementElement = iframe.contentWindow.document.createElement("strike");
+				theParentElement = theReplacementElement;
+				break;
+			case "font-weight: bold; font-style: italic;":
+				theParentElement = iframe.contentWindow.document.createElement("i");
+				theReplacementElement = iframe.contentWindow.document.createElement("b");
+				theReplacementElement.appendChild(theParentElement);
+				break;
+			case "font-style: italic; font-weight: bold;":
+				theParentElement = iframe.contentWindow.document.createElement("b");
+				theReplacementElement = iframe.contentWindow.document.createElement("i");
+				theReplacementElement.appendChild(theParentElement);
+				break;
+			default:
+				replaceNodeWithChildren(theSPANs[0]);
+				break;
 		}
-	}
-}
-
-/* Find current selection */
-function findSelection() {
-	var myField = this;
-	myField.focus();
-	var sel = myField.getSelection();
-	var range = sel.getRangeAt(0);
-	if (range.toString().length) {
-		// check to see if we have some node
-		var aux = range.cloneContents();
-		for (var i = 0; i < aux.childNodes.length; i++)
-			var node = aux.childNodes[i];
-	}
-}
-
-/* This function creates and inserts an href at the selection
- * @param obj The RTE obj
- * @param fTA The underlying textArea
- * @param val The type of the link
- * @param attribute The attribute of the link
- * @param textOnly true if only the text of the link is needed
- */
-function createLink(obj,fTA,val,attribute,sel,textOnly) {
-	var acceptedVals = ['anime','creq','ep','file','group','producer','reviews','mylist',
-						'votes','titles','producers','genres','cats','relations','user',
-						'review','groupcmts','wiki','forum','furum.topic','forum.board',
-						'forum.post','tracker'];
-	if ((!obj && !fTA) && acceptedVals.indexOf(val) < 0) return; // not a valid thingie
-	if (!textOnly && (!obj || !fTA)) return; // can not continue
-	if (!val) {
-		var selects = fTA.form.getElementsByTagName('select');
-		for (var s in selects) {
-			var select = selects[s];
-			if (select.className && select.className.indexOf('f_links') >= 0) { val = select.value; break; }
+		
+		if (theReplacementElement != null) {
+			for (var j = 0; j < theChildren.length; j++)
+				theParentElement.appendChild(theChildren[j]);
+			theSPANs[0].parentNode.replaceChild(theReplacementElement, theSPANs[0]);
 		}
-		if (!val) return; // there is some error
+		
+		theSPANs = iframe.contentWindow.document.getElementsByTagName("span");
 	}
-	var base = "http://anidb.net/";
-	var type = ""; // link type
-	if (!attribute && val != 'wiki') {
-		attribute = window.prompt("Please type in the attribute for your "+val+" link.");
-		if (!attribute || attribute == '') return; // the attribute doesn't conform to rules
-	}
-	switch (val) {
-		case 'anime':
-		case 'creq':
-		case 'ep':
-		case 'file':
-		case 'group':
-		case 'producer':
-		case 'reviews':
-		case 'mylist':
-		case 'votes': type = val.charAt(0); break;
-		case 'titles': type = 'at'; break;
-		case 'producers': type = 'ap'; break;
-		case 'genres': type = 'ag'; break;
-		case 'cats': type = 'ac'; break;
-		case 'relations': type = 'ar'; break;
-		case 'user': type = 'up'; break;
-		case 'review': type = 'rs'; break;
-		case 'groupcmts': type = 'agc'; break;
-		case 'wiki': base = "http://wiki.anidb.net/w/"; break;
-		case 'forum':
-		case 'forum.topic':
-		case 'forum.board':
-		case 'forum.post': 
-			base = "http://forum.anidb.net/";
-			if      (val == 'forum.board') base += "viewforum.php?f=";
-			else if (val == 'forum.topic') base += "viewtopic.php?t=";
-			else if (val == 'forum.post' ) base += "viewtopic.php?p=";
-			break;
-		case 'tracker': base = "http://tracker.anidb.net/view.php?id="; break;
-		default: base = "";
-	}
-	if (base == "") return; //no base no link
-	if (!sel) {
-		sel = getSelection(obj);
-		if (!sel) sel = val + " " + attribute;
-	}
-	var hyperLink = '['+val+':'+attribute+':'+sel+']';
-	if (textOnly) return hyperLink;
-	if (currentFMode == 1) {
-		insertAtSelection(fTA, hyperLink, true);
-		return;
-	}
-	if (isIE) {	//IE support
-		// IE fails miserably here, don't show the link thingie
-		insertAtSelection(obj, hyperLink, true);
-	} else if (isFF || isOP || isWK) { //MOZILLA/NETSCAPE support
-		hyperLink = obj.document.createElement('a');
-		hyperLink.href = base+type+attribute;
-		hyperLink.type = val;
-		hyperLink.setAttribute('att',attribute);
-		hyperLink.appendChild(document.createTextNode(sel));
-		insertAtSelection(obj, hyperLink, false);
-	} else {
-		if (seeDebug) alert('getSelection: unknown selection method');
-		return;
-	}
-}
-
-/* This function creates and inserts spoiler tags at the selection
- * @param obj The RTE obj
- * @param fTA The underlying textArea
- * @param textOnly true if only the text of the link is needed
- */
-function createSpoiler(obj,fTA,sel,textOnly) {
-	if (!obj && !fTA) return; // can not continue
-	if (!sel) {
-		sel = getSelection(obj);
-		if (!sel) sel = "";
-	}
-	var spoiler = '[spoiler]'+sel+'[/spoiler]';
-	if (textOnly) return spoiler;
-	if (isIE) {	//IE support
-		// IE fails miserably here, don't show the link thingie
-		insertAtSelection(obj, spoiler, true);
-	} else if (isFF || isOP) { //MOZILLA/NETSCAPE support
-		insertAtSelection(obj, obj.document.createTextNode(spoiler), false);
-	} else {
-		if (seeDebug) alert('getSelection: unknown selection method');
-		return;
-	}
-}
-
-/* Function that formats text
- * @param id 
- * @param n Number of textArea
- * @param selected Is select
- */
-function formatText(id, n, selected) {
-	if (currentFMode == 2) {
-		// When user clicks toolbar button make sure it always targets its respective WYSIWYG
-		var obj = document.getElementById("wysiwyg_" + n);
-		if (!obj) return;
-		obj.contentWindow.focus();
-	}
-	var fTA = document.getElementById('textArea_' + n);
-	// When in Text Mode these execCommands are disabled
-	var formatIDs = new Array("Bold","Italic","Underline","Strikethrough","InsertUnorderedList","InsertOrderedList","Spoiler","CreateLink");
-	for (var i = 0; i <= formatIDs.length;) { // Check if button clicked is in disabled list
-		if (formatIDs[i] == id) var disabled_id = 1; 
-		i++;
-	}
-	if (viewTextMode == 1 && disabled_id == 1) { // Check if in Text Mode and disabled button was clicked
-		alert ("You are in TEXT Mode. This feature has been disabled.");	
-	} else {
-		if (currentFMode == 2) {
-			if (id == "CreateLink") { // CreateLink
-				createLink(obj.contentWindow, fTA, null, false);
-			} else if (id == "Spoiler") { // Spoiler
-				createSpoiler(obj.contentWindow, fTA, null, false);
-			} else if (id == "ViewSource") { // ViewSource
-				viewMode('source',n);
-			} else if (id == "ViewRte") { // ViewRte
-				viewMode('text',n);
-			} else if (id == "CleanSource") { // Clean Source
-				cleanHTML(obj.contentWindow.document);
-			} else if (id == "Preview") { // Preview document
-				previewDoc(obj.contentWindow.document);
-			} else { // Every other command
-				obj.contentWindow.document.execCommand(id, false, null);
-			}
-		} else {
-			if (id == "CreateLink") { // CreateLink
-				createLink(fTA, fTA, null, false);
-			} else if (id == "Preview") { // Preview document
-				previewDoc(fTA);
-			} else { // Every other command
-				textFormatMagic(id,fTA);
-			}
-		}
-	}
-}
-
-/* Function that takes care of assisted formating
- * @param id 
- * @param fTA TextArea
- */
-function textFormatMagic(id,fTA) {
-	var selection = getSelection(fTA);
-	var action = id.toLowerCase();
-	//if (selection && selection.length) 
-	insertAtSelection(fTA, FunctionMap[action]['start']+selection+FunctionMap[action]['end'], true);
-}
-
-/* Function that inserts smileys */
-function insertSmiley() {
-	var start = this.className.indexOf('i_smiley_')+9;
-	var name = this.className.substring(start);
-	var id = Number(this.parentNode.id.substring(11));
-	var text = smileys[smileyList.indexOf(name)]['text'];
-	var obj = null;
-	if (currentFMode != 2) obj = document.getElementById('textArea_'+id);
-	else {
-		var obj = document.getElementById("wysiwyg_"+id);
-		if (!obj) return;
-		obj.contentWindow.focus();
-		obj = obj.contentWindow;
-	}
-	var selection = getSelection(obj);
-	insertAtSelection(obj, (currentFMode != 2 || isIE ? text : obj.document.createTextNode(text)), (currentFMode != 2 || isIE ? true : false));
-}
-
-/* Function that inserts RTE commands */
-function make () {
-	var start = this.className.indexOf('f_button f_')+11;
-	var formatingFunc = this.className.substring(start);
-	var fMap = FunctionMap[formatingFunc];
-	allowOut = false;
-	var execID = fMap.id;
-	var iframeId = this.parentNode.id.replace('controls_','');
-	formatText(execID, iframeId, null);
 }
 
 /* Link replacement functions */
-function convertLinksInput(mstr, m1, m2, m3, offset, s) {
-	var link = createLink(null,null,m1,m2,m3,true);
-	return (link == null ? mstr : link);
+function convertLinksInput(mstr, type, attr, text, offset, s) {
+	if (type.toLowerCase() == 'wiki') {
+		text = attr;
+		attr = '';
+	}
+	var option = OptionsMap[type];
+	var base = (option['url'] ? option['url'] : "http://anidb.net/");
+	return '<a href="'+(base+type+attr)+'" type="'+type+'"'+(type != 'wiki' ? ' att="'+attr+'"' : '' )+'>'+text+'</a>';
 }
-function convertLinksOutput(mstr, m1, m2, m3, offset, s) {
+function convertLinksOutput(mstr, inner, text, offset, s) {
 	var href = att = type = "";
 	var hrefIndex = mstr.indexOf('href');
 	if (hrefIndex >= 0) {
@@ -510,6 +546,7 @@ function convertLinksOutput(mstr, m1, m2, m3, offset, s) {
 	if (attIndex >= 0) {
 		var attIndex0 = mstr.indexOf('"',attIndex)+1;
 		var attIndex1 = mstr.indexOf('"',attIndex0+1);
+		alert(mstr.charAt(attIndex0) +' - '+ mstr.charAt(attIndex1));
 		att = mstr.substring(attIndex0,attIndex1);
 	}
 	var typeIndex = mstr.indexOf('type');
@@ -518,185 +555,281 @@ function convertLinksOutput(mstr, m1, m2, m3, offset, s) {
 		var typeIndex1 = mstr.indexOf('"',typeIndex0+1);
 		type = mstr.substring(typeIndex0,typeIndex1);
 	}
-	if (href.indexOf('anidb.net') < 0) return ('(link: ' + m2+' - '+href+')');
-	return ("["+type+":"+att+":"+m2+"]");
-}
-
-function areTwoEqual(mstr,s1,s2) {
-	if (s1 == s2) return ' ';
-	else return mstr;
-}
-
-/* Function that cleans up html source
- * @param str String
- */
-function cleanHTMLSource(str) {
-	str = str.replace(/\n/mgi,'');
-	
-	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
-	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
-
-	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|br|pre) [^>]*?\>/mgi,'<$1>');
-	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|br|pre) [^>]*?\>/mgi,'</$1>');
-
-	str = str.replace(/\<p\>/mgi,'<br />');
-	str = str.replace(/\<\/p\>/mgi,'');
-	
-	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
-	
-	/* IE and opera support */
-	str = str.replace(/\<([/])?strong ([^>]*)\>/mgi,'<$1b>');
-	str = str.replace(/\<([/])?em ([^>]*)\>/mgi,'<$1i>');
-	/* Extra stuff, mostly word paste */
-	/* Remove empty tags */
-	str = str.replace(/\<(p|u|b|i|ul|ol|li)\>\<\/(p|u|b|i|ul|ol|li)\>/mgi,areTwoEqual);
-	return (str)
-}
-
-/* Replacement functions
- * @param str String to replace identifiers
- */
-function convert_input(str) {
-	str = str.replace(/\[(p|b|i|u|ul|ol|li)+?\]/mgi,'<$1>');
-	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)+?\]/mgi,'</$1>');
-	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
-	str = str.replace(/\[br\]/mgi,'<br />');
-	str = str.replace(/\n/mgi,'<br />');
-	str = str.replace(/\n/mgi,'');
-	/* IE and opera support */
-	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
-	return (str);
+	if (href.indexOf('anidb.net') < 0) return ('(link: ' + text +' - '+href+')');
+	return ("["+type+":"+att+":"+text+"]");
 }
 
 /* Function that formats an output string
  * @param str String to format
  */
 function convert_output(str) {
+	str = makeValidTags(str);
 	/* Extra stuff, mostly word paste */
 	str = str.replace(/\&nbsp\;/mgi,' ');
+	/* convert stupid webkit div's to br's */
+	str = str.replace(/\<div\>/mgi,'');
+	str = str.replace(/\<\/div\>/mgi,'<br />');
+	// Word crap
 	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
 	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
+	str = str.replace(/\<\?xml[^>]*\>/g, "");
+	str = str.replace(/\<[^ >]+:[^>]*\>/g, "");
+	str = str.replace(/\<\/[^ >]+:[^>]*\>/g, "");
+	/* Remove leading and trailing whitespace */
+	str = str.replace(/^\s+/, "");
+	str = str.replace(/\s+$/, "");
+	/* Remove style attribute inside any tag */
+	str = str.replace(/ style="[^"]*"/g, "");
+	/* Replace improper BRs */
+	str = str.replace(/\<br\>/g, "<br />");
+	/* Remove BRs right before the end of blocks */
+	str = str.replace(/\<br \/\>\s*\<\/(h1|h2|h3|h4|h5|h6|li|p)/g, "</$1");
+	/* convert stupid webkit div's to br's */
+	str = str.replace(/\<div\>/mgi,'');
+	str = str.replace(/\<\/div\>/mgi,'<br />');
 
-	str = str.replace(/\n/mgi,(currentFMode == 2 ? '' : '[br]'));
-	str = str.replace(/\<br([^>]*)\>/mgi,'[br]');
+	str = str.replace(/\<br([^>]*)\>/mgi,'\n');
 	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|pre) [^>]*?\>/mgi,'[$1]');
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|pre) [^>]*?\>/mgi,'[/$1]');
 	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|pre)\>/mgi,'[$1]');
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|pre)\>/mgi,'[/$1]');
+	
+	str = str.replace(/\<([/])?strong([^>]*)\>/mgi,'[$1b]');
+	str = str.replace(/\<([/])?em([^>]*)\>/mgi,'[$1i]');
+
 	str = str.replace(/\[strike\]/mgi,'[s]');
 	str = str.replace(/\[\/strike\]/mgi,'[/s]');
 	str = str.replace(/\[pre\]/mgi,'[code]');
 	str = str.replace(/\[\/pre\]/mgi,'[/code]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 
-	str = str.replace(/\[p\]/mgi,'[br]');
-	str = str.replace(/\[\/p\]/mgi,'');
-
-	/* Safari support */
-/*
-	str = str.replace(/\<span.+?font\-weight\: bold.+?\>(.+?)\<\/span\>/mgi,'[b]$1[/b]');
-	str = str.replace(/\<span.+?text\-style\: italic.+?\>(.+?)\<\/span\>/mgi,'[i]$1[/i]');
-	str = str.replace(/\<span.+?text\-decoration\: underline.+?\>(.+?)\<\/span\>/mgi,'[u]$1[/u]');
-	str = str.replace(/\<span.+?text\-decoration\: line\-through.+?\>(.+?)\<\/span\>/mgi,'[s]$1[/s]');	
-*/
-	/* IE and opera support */
-	str = str.replace(/\<([/])?strong([^>]*)\>/mgi,'[$1b]');
-	str = str.replace(/\<([/])?em([^>]*)\>/mgi,'[$1i]');
+	str = str.replace(/\[p\]/mgi,'');
+	str = str.replace(/\[\/p\]/mgi,'\n');
 	/* Remove empty tags */
-	str = str.replace(/\[(p|u|b|i|ul|ol|li)\]\[\/(p|u|b|i|ul|ol|li)\]/mgi,areTwoEqual);
+	str = str.replace(/\[(p|u|b|i|ul|ol|li)\]\[\/(p|u|b|i|ul|ol|li)\]/mgi,	function areTwoEqual(mstr,s1,s2) { 
+																				if (s1 == s2) return ' ';
+																				else return mstr;
+																			}
+																		);
 	return (str);
 }
 
-/* Function that formats outputs
- * @param n Number of the textArea
+/* Replacement functions
+ * @param str String to replace identifiers
  */
-function format_output(n) {
-	var textArea = document.getElementById('textArea_'+n);
-	if (!textArea) return;
-	textArea.value = convert_output(textArea.value);
+function convert_input(str) {
+	str = str.replace(/\[(p|b|i|u|ul|ol|li)\]/mgi,'<$1>');
+	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)\]/mgi,'</$1>');
+	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
+	str = str.replace(/\<p\>/mgi,'');
+	str = str.replace(/\<\/p\>/mgi,'<br />');
+	str = str.replace(/\[br\]/mgi,'<br />');
+	str = str.replace(/\n/mgi,'<br />');
+	//str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
+	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
+	str = str.replace(/\[([a-z].+?)\:\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
+	return (str);
 }
 
-/* Function that cleans the html of an RTE window
- * @param myField Editor document
+/* Converts text from the RTE to the TEXTAREA and vice versa
+ * @param mode If true/defined will convert from the textArea to the RTE, otherwise from RTE to textArea
  */
-function cleanHTML(myField) {
-	if (!myField) return;
-	myField.body.innerHTML = cleanHTMLSource(myField.body.innerHTML);
-}
-
-/* Function tha opens up a preview window
- * @param myField Editor document
- */
-function previewDoc(myField) {
-	if (!myField) return;
-	var html = (currentFMode == 2 ? myField.body.innerHTML : myField.value);
-	var previewWindow = window.open('','previewWin','height=250,width=500,resizable=yes,scrollbars=yes,toolbar=no,status=no');
-	previewWindow.document.write('<!DOCTYPE html><html lang="en"><head><title>Text Preview</title>');
-	previewWindow.document.write('<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>');
-	previewWindow.document.write('<link rel="icon" href="favicon.ico"/>');
-	previewWindow.document.write('<link rel="stylesheet" href="'+document.styleSheets[0].href+'" type="text/css" title="Style"/>');
-	previewWindow.document.write('</head><body id="anidb" class="nonav">');
-	previewWindow.document.write('<div id="layout-main"><div class="g_content">');
-	previewWindow.document.write(convert_input(convert_output(html)))
-	previewWindow.document.write('</div></div>');
-	previewWindow.document.write('</body></html>');
-	previewWindow.document.close();
-}
-
-/* Function that changes the Function mode */
-function changeFMode() {
-	var id = Number(this.parentNode.id.substring(6));
-	var mode = Number(this.className.substring(6,7));
-	if (mode == currentFMode) return;
-	// clear selected
-	var lis = this.parentNode.getElementsByTagName('li');
-	for (var i = 0; i < lis.length; i++) lis[i].className = lis[i].className.replace(' selected','');
-	this.className += ' selected';
-	var controls = document.getElementById('controls_'+id);
-	var iframe = document.getElementById("wysiwyg_" + id);
-	var fTA = document.getElementById("textArea_"+id);
-	var smileyBox = document.getElementById("smiley-box_"+id);
-	if (controls) {
-		if (mode == 0) controls.style.display = 'none';
-		else {
-			var newControls = createControls(null, id, mode);
-			newControls.style.display = '';
-			controls.parentNode.replaceChild(newControls,controls);
-		}
-	}
-	if (iframe) iframe.style.display = (mode != 2 ? 'none' : '');
-	if (currentFMode == 2) {
-		updateTextArea(id);
-		fTA.value = fTA.value.replace(/\[br\]/mgi,'\n');
-	} else {
+function convertText(id, mode) {
+	if (id == null && mode == null) return;
+	var rte = document.getElementById('wysiwyg_'+id);
+	var fTA = document.getElementById('textArea_'+id);
+	if (!rte || !fTA) return;
+	rte = rte.contentWindow.document;
+	if (mode) { // 
 		var content = convert_input(fTA.value);
-		if (!content.length) content = '&#xA0;';
-		iframe.contentWindow.document.body.innerHTML = content;
+		//if (!content.length) content = '&#xA0;';
+		rte.body.innerHTML = content;
+	} else {
+		convertSPANs(id);
+		fTA.value = convert_output(rte.body.innerHTML);
 	}
-	if (fTA) fTA.style.display = (mode != 2 ? '' : 'none');
-	//if (smileyBox) smileyBox.style.display = (mode != 0 ? '' : 'none');
+}
+
+function showRTEinPRE(id) {
+	var rte = document.getElementById('wysiwyg_'+id);
+	var codeview = document.getElementById("codeview");
+	var innerdoc = rte.contentDocument;
+	if (typeof(document.documentElement.textContent) == "undefined" || !window.XMLSerializer || !document.addEventListener)
+	{
+		var display_code = (function _display_code_ie()
+			{
+				codeview.value = innerdoc.body.outerHTML;
+			});
+		innerdoc.onkeyup = display_code;
+	}
+	else
+	{
+		var stringer = new XMLSerializer();
+		var display_code = (function _display_code_moz()
+			{
+				codeview.value = stringer.serializeToString(innerdoc.body); // innerdoc.body.innerHTML;
+			});
+		innerdoc.addEventListener("keyup", display_code, true);
+	}
+	display_code();
+}
+
+function showConvertedRTEinPRE(id) {
+	var rte = document.getElementById('wysiwyg_'+id);
+	var codeview = document.getElementById("codeview");
+	var innerdoc = rte.contentDocument;
+	var display_code = (function _display_code_ie()
+		{
+			convertSPANs(0);
+			codeview.value = convert_output(innerdoc.body.innerHTML);
+		});
+	innerdoc.onkeyup = display_code;
+	display_code();
+}
+
+function changeFMode() {
+	var controls = this.parentNode;
+	var id = Number(controls.id.substring(controls.id.indexOf('_')+1));
+	var mode = this.selectedIndex;
+	if (mode == currentFMode) return;
+	var rte = document.getElementById("wysiwyg_" +id);
+	var fta = document.getElementById("textArea_"+id);
+	if (currentFMode == 2)
+		convertText(id, false);
+	else
+		convertText(id, true);
+	if (controls) {
+		var newControls = createControls(null, id, mode);
+		newControls.style.display = '';
+		controls.parentNode.replaceChild(newControls,controls);
+	}
+	if (rte) rte.style.display = (mode != 2 ? 'none' : '');
+	if (fta) fta.style.display = (mode != 2 ? '' : 'none');
 	currentFMode = mode;
+}
+
+// -----------------------------------------------
+// Creator functions
+// -----------------------------------------------
+
+/* Updates the attribute note text */
+function updateAttributeHelpText() {
+	var option = this.value;
+	var attrHelp = document.getElementById('f_links_attr');
+	attrHelp.title = OptionsMap[option]['attribute'];
+	var attr = document.getElementById('f_links_attr');
+	if (option == 'wiki') { attr.disabled = true; attr.value = ''; }
+	else attr.disabled = false;
+}
+
+/* Function that creates the link window */
+function createLinkWindow(parentNode) {
+	var div = document.createElement('div');
+	div.id = 'widget_addlink';
+	div.className = 'dialogBox';
+	div.style.display = 'none';
+	var table = document.createElement('table');
+	var tbody = document.createElement('tbody');
+	var row = document.createElement('tr');
+	createHeader(row, null, 'Type');
+	createCell(row, null, createSelectArray(null,'f_links','f_links',updateAttributeHelpText,null,OptionsMap));
+	tbody.appendChild(row);
+	row = document.createElement('tr');
+	tbody.appendChild(row);
+	createHeader(row, null, 'Attribute');
+	var attrInput = createTextInput('f_links_attr',null,false,false,50,null);
+	attrInput.title = OptionsMap['anime']['attribute'];
+	createCell(row, null, attrInput);
+	row = document.createElement('tr');
+	createHeader(row, null, 'Text');
+	createCell(row, null, createTextInput('f_links_text',null,false,false,50,null));
+	tbody.appendChild(row);
+	table.appendChild(tbody);
+	div.appendChild(table);
+	// Create buttons for the drag window //
+	var buttons = new Array();
+	buttons.push(createButton('f_links_cancel','f_links_cancel',false,'Cancel','button',function hideBox() { document.getElementById('widget_addlink').style.display = 'none'; }, 'button dialogButton dialogCancel'));
+	buttons.push(createButton('f_links_ok','f_links_ok',false,'Add','button',null,'confirmButton dialogButton dialogConfirm'));
+	// add drag and drop behaviour
+	dragDrop.initElement(div,'Create link', null, buttons);
+	if (parentNode) parentNode.appendChild(div);
+	else return div;
 }
 
 /* Function that creates the controls */
 function createControls(parentNode, id, mode) {
-	if (!mode) mode = currentFMode;
+	if (mode == null) mode = currentFMode;
 	buttonList = {'0':[],
 				  '1':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','insertlistitem','spoiler','link'],
-				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','spoiler','viewsource','viewrte','cleansource','link']};
+				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','spoiler','link']};
 
 	var div = document.createElement('div');
 	div.className = 'format-buttons f_controls';
 	div.id = 'controls_'+ id;
-	div.style.display = 'none';
+	if (mode == 0) div.style.display = 'none';
 	var buttons = buttonList[mode];
-	for (var b = 0; b < buttons.length; b++)
-	createLocalButton(div,buttons[b],FunctionMap[buttons[b]]);
-	createSelect(div,OptionsMap,'f_links');
-	var text = getElementsByClassName(div.getElementsByTagName('input'),'f_viewrte',true)[0];
-	if (text) text.style.display = 'none';
+	for (var b = 0; b < buttons.length; b++) {
+		var button = createLocalButton(null,buttons[b],FunctionMap[buttons[b]]);
+		if (mode == 0) button.disabled = true;
+		div.appendChild(button);
+	}
+	createSelectArrayN(div,'f_mode','f_mode',changeFMode,ModeMap[mode],ModeMap);
 	if (parentNode) parentNode.appendChild(div);
 	else return div;
+}
+
+/* function that adds RTE abilites to a given iframe */
+function createRTE(iframe, textArea) {
+	if (!iframe) return;
+	
+	var backgroundColor = getStyleInformation(textArea,'backgroundColor');
+	var color = getStyleInformation(textArea,'color');
+	var fontFamily = getStyleInformation(textArea,'fontFamily');
+	var fontSize = getStyleInformation(textArea,'fontSize');
+	var border = getStyleInformation(textArea,'border');
+	var margin =	getStyleInformation(textArea,'marginTop') + ' ' + getStyleInformation(textArea,'marginRight') + ' ' +
+					getStyleInformation(textArea,'marginBottom') + ' ' + getStyleInformation(textArea,'marginLeft');
+	var padding = 	getStyleInformation(textArea,'paddingTop') + ' ' + getStyleInformation(textArea,'paddingRight') + ' ' +
+					getStyleInformation(textArea,'paddingBottom') + ' ' + getStyleInformation(textArea,'paddingLeft');
+
+	var doc = iframe.contentWindow.document;
+
+	var documentContent = '';
+	if (!isIE) {
+		documentContent  = '\x3C!DOCTYPE html>\x3Chtml>\x3Chead>\x3Cstyle>body {';
+		documentContent += 'margin: '+margin+';'
+		documentContent += 'padding: '+padding+';';
+		documentContent += 'background-image: none;';
+		if (backgroundColor) documentContent += 'background-color: '+backgroundColor+';\n';
+		if (fontFamily) documentContent += 'font-family: '+fontFamily+';\n';
+		if (fontSize) documentContent += 'font-size: '+fontSize+';\n';
+		if (color) documentContent += 'color: '+color+';\n';
+		documentContent += '}\x3C/style>\x3C/head>\x3Cbody>'+convert_input(textArea.value)+'\x3C/body>\x3C/html>';
+	} else documentContent = convert_input(textArea.value);
+
+	doc.open();
+	doc.write(documentContent);
+	doc.close();
+	doc.designMode = "on";
+	/* Mozilla event capturing */
+	if (typeof document.addEventListener == "function") {
+		doc.addEventListener("mouseup", function(){checkButtonState(iframe); return true;}, false);
+		doc.addEventListener("keyup", function(){checkButtonState(iframe); return true;}, false);
+	} else { /* IE event capturing */
+		doc.attachEvent("onmouseup", function(){checkButtonState(iframe); return true;});
+		doc.attachEvent("onkeyup", function(){checkButtonState(iframe); return true;});
+	}
+	try { if (document.queryCommandSupported('styleWithCSS')) true; } 
+	catch(e) { 
+		try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
+		catch (e) {  } // FF 1.5-
+	}
+	try { if (document.queryCommandSupported('useCSS')) true; } 
+	catch(e) { 
+		try { doc.execCommand('useCSS', null, true); }
+		catch (e) {  } // FF 1.5-
+	}
+	if (currentFMode != 2) iframe.style.display = 'none';
 }
 
 /* Function that creates the RTE iframe */
@@ -706,54 +839,28 @@ function createIframe(parentNode, id, textArea) {
 	var fontFamily = getStyleInformation(textArea,'fontFamily');
 	var fontSize = getStyleInformation(textArea,'fontSize');
 	var border = getStyleInformation(textArea,'border');
-	var margin = getStyleInformation(document.body,'marginTop');
-
+	var margin =	getStyleInformation(textArea,'marginTop') + ' ' + getStyleInformation(textArea,'marginRight') + ' ' +
+					getStyleInformation(textArea,'marginBottom') + ' ' + getStyleInformation(textArea,'marginLeft');
+	var padding = 	getStyleInformation(textArea,'paddingTop') + ' ' + getStyleInformation(textArea,'paddingRight') + ' ' +
+					getStyleInformation(textArea,'paddingBottom') + ' ' + getStyleInformation(textArea,'paddingLeft');
+	
 	var iframe = document.createElement('iframe');
-	iframe.frameborder = 0;
+	iframe.frameBorder = 0;
 	iframe.id = "wysiwyg_" + id;
 	iframe.style.height = wysiwygHeight;
-	iframe.style.width = wysiwygWidth;
-	if (iframe.style.border) iframe.style.border = border;
-	iframe.style.border = '1px solid';
-	iframe.style.borderColor = getStyleInformation(textArea,'borderColor');
-	if (backgroundColor) iframe.style.backgroundColor = backgroundColor;
-	if (!parentNode) textArea.parentNode.insertBefore(iframe,textArea);
-	else parentNode.insertBefore(iframe, textArea);
+	iframe.style.width = wysiwygWidth; //(isIE ? wysiwygWidth : (parseFloat(wysiwygWidth) - 14 + (isFF ? 1 : 0))+'px');
+	iframe.src = 'about:blank';
+	iframe.style.margin = margin;
+	iframe.style.padding = padding;
 	
-	// Pass the textarea's existing text over to the content variable
-	var content = convert_input(textArea.value);
-	if (!content && isOP && !isIE) content = '&#xA0;';
-	var doc = iframe.contentWindow.document;
-	doc.open();
-	doc.write(content)
-	doc.close();
-	// Make the iframe editable in both Mozilla and IE
-	doc.body.contentEditable = true;
-	/* uncomment this when buttons are wanted, will not work on IE
-	var head = doc.getElementsByTagName('head')[0];
-	if (head) {
-		var linkElem = doc.createElement('link');
-		linkElem.rel	= 'stylesheet';
-		linkElem.href	= document.styleSheets[0].href;
-		linkElem.type	= 'text/css';
-		linkElem.title	= 'Style';
-		head.appendChild(linkElem);
+	if (border) iframe.style.border = border;
+	else {
+		iframe.style.borderColor = getStyleInformation(textArea,'borderTopColor') || 'black';
+		iframe.style.borderWidth = getStyleInformation(textArea,'borderTopWidth') || '1px';
+		iframe.style.borderStyle = getStyleInformation(textArea,'borderTopStyle') || 'solid';
 	}
-	*/
-	if (color && color != '') doc.body.style.color = color;
-	if (fontFamily && fontFamily != '') doc.body.style.fontFamily = fontFamily;
-	if (!isIE && fontSize && fontSize != '') doc.body.style.fontSize = fontSize;
-	if (backgroundColor && backgroundColor != '') doc.body.style.backgroundColor = backgroundColor;
-	doc.body.style.backgroundImage = 'none';
-	if (!margin) doc.body.style.margin = '2px';
-	doc.designMode = "on";
-	iframe.style.display = 'none';
-	try { if (document.queryCommandSupported('styleWithCSS')) true; } 
-	catch(e) { 
-		try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
-		catch (e) {  } // FF 1.5-
-	}
-	return iframe;
+	if (backgroundColor) iframe.style.backgroundColor = backgroundColor;
+	return iframe;	
 }
 
 /* Function that creates the smiley list with my nice and current actions */
@@ -770,38 +877,29 @@ function createSmileyBox(parentNode, id) {
 	else return smileyBox;
 }
 
-/* Initializes RTE's */
-function init_formating() {
+/* Initiates Formating */
+function initFormating() {
 	var errorMsg = '';
 	if (!document.getElementsByTagName) errorMsg = 'document.getElementsByTagName: fail\n';
 	if (!document.designMode) errorMsg += 'document.designMode: fail\n';
 	var textAreas = document.getElementsByTagName('textarea');
 	if (!textAreas.length) errorMsg += 'textAreas: fail'; // Still no nodes..
 	if (errorMsg != '') { errorAlert('init_formating',errorMsg); return; }
-	
-	FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'accesskey':"b",'text':"B",'start':"[b]",'end':"[/b]",'active':false},
-	               'italic':{'id':"Italic",'desc':"Italic text: [i]text[/i] (alt+i)",'accesskey':"i",'text':"I",'start':"[i]",'end':"[/i]",'active':false},
-	               'underline':{'id':"Underline",'desc':"Underline text: [u]text[/u] (alt+u)",'accesskey':"u",'text':"U",'start':"[u]",'end':"[/u]",'active':false},
-	               'strikethrough':{'id':"Strikethrough",'desc':"Strike-through text: [s]text[/s] (alt+s)",'accesskey':"S",'text':"s",'start':"[s]",'end':"[/s]",'active':false},
-	               'insertorderedlist':{'id':"InsertOrderedList",'desc':"Ordered list: [ol]text[/ol] (alt+o)",'accesskey':"o",'text':"oLi",'start':"[ol]",'end':"[/ol]",'active':false},
-	               'insertunorderedlist':{'id':"InsertUnorderedList",'desc':"Unordered list: [ul]text[/ul] (alt+l)",'accesskey':"l",'text':"uLi",'start':"[ul]",'end':"[/ul]",'active':false},
-				   'insertlistitem':{'id':"InsertListItem",'desc':"List Item: [li]text[/li] (alt+e)",'accesskey':"e",'text':"Li",'start':"[li]",'end':"[/li]",'active':false},
-				   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':'[spoiler]','end':'[/spoiler]','active':false},
-				   'viewsource':{'id':"ViewSource",'desc':"Source Mode",'accesskey':"q",'text':"vSource",'start':null,'end':null,'active':false},
-				   'viewrte':{'id':"ViewRte",'desc':"WYSIWYG Mode",'accesskey':"w",'text':"vWYSIWYG",'start':null,'end':null,'active':false},
-				   'cleansource':{'id':"CleanSource",'desc':"Clean Source (alt+c)",'accesskey':"c",'text':"Clean",'start':null,'end':null,'active':false},
-				   'preview':{'id':"Preview",'desc':"Preview",'accesskey':"",'text':"preview",'start':null,'end':null,'active':false},
-	               'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"LNK",'start':"[",'end':"]",'active':false}};
-	OptionsMap = new Array('anime','ep','file','group','producer','producers','user','mylist','votes','creq','review','titles','genres',
-							'cats','relations','groupcmts','reviews','tracker','wiki','forum.board','forum.topic','forum.post');
 
-	
 	// This will create the formating icons for each TextArea
 	for (var i = 0; i < textAreas.length; i++) {
 		var textArea = textAreas[i];
 		if (textArea.className.indexOf('norte') >= 0 || textArea.name.indexOf('norte') >= 0) continue;
 		textArea.id = "textArea_"+i;
 		textArea.value = textArea.value.replace(/\[br\]/mgi,'\n');
+		textArea.execCommand = textAreaExecCommand;
+
+		if (dS) {
+			textArea.getCaretPosition = getCaretPosition;
+			textArea.selectionStart = textAreaSelectionStart;
+			textArea.selectionEnd = textAreaSelectionEnd;
+		}
+
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
 		if (smileyBox) {
 			var newSmileyBox = createSmileyBox(null,i);
@@ -811,53 +909,36 @@ function init_formating() {
 		
 		wysiwygHeight = getStyleInformation(textArea,'height');
 		wysiwygWidth = getStyleInformation(textArea,'width');
-		if (currentFMode == 2) textArea.style.display = "none";
-		var fTA = textArea.form;
-		
-		// create and append the controls
+
 		var controls = createControls(null, i);
-		if (currentFMode != 0) controls.style.display = '';
-		textArea.parentNode.parentNode.insertBefore(controls,(smileyBox ? smileyBox : textArea));
-
-		// Create iframe which will be used for rich text editing
 		var iframe = createIframe(null, i, textArea);
-		if (currentFMode == 2) iframe.style.display = '';
-/*		
-		alert('wysiwyg.width: '+getStyleInformation(textArea,'width')+'\ntextArea.clientWidth: '+textArea.clientWidth+'\ntextArea.offsetWidth: '+textArea.offsetWidth+
-		'\n---------------------'+
-		'\niframe.width: '+getStyleInformation(iframe,'width')+'\niframe.clientWidth: '+iframe.clientWidth+'\niframe.offsetWidth: '+iframe.offsetWidth);
-*/
-		// create the mode change ul
-		var ul = document.createElement('ul');
-		ul.className = 'format-modes';
-		ul.id = 'fmode_'+i;
-		var options = ["Off","Assisted","Visual"];
-		for (var o = 0; o < options.length; o++) {
-			var li = document.createElement('li');
-			li.className = 'fmode_'+o;
-			if (o == currentFMode) li.className += ' selected';
-			li.onclick = changeFMode;
-			li.appendChild(document.createTextNode(options[o]));
-			ul.appendChild(li);
-		}
-
-		textArea.parentNode.insertBefore(ul,textArea.nextSibling);
-
-		// Update inputs
-		var inputs = fTA.getElementsByTagName('input');
-		for (var s = 0; s < inputs.length; s++) {
-			var input = inputs[s];
-			if (input.type.toLowerCase() != 'submit') continue;
-			input.onclick = updateTextAreaCK;
-			break;
-		}
+		textArea.parentNode.insertBefore(iframe,textArea);
+		if (currentFMode == 2) textArea.style.display = 'none';
+		textArea.parentNode.insertBefore(controls,iframe);
+		createRTE(iframe,textArea);
+	}
+	
+	// Update inputs
+	var inputs = fTA.getElementsByTagName('input');
+	for (var s = 0; s < inputs.length; s++) {
+		var input = inputs[s];
+		if (input.type.toLowerCase() != 'submit') continue;
+		input.onclick = function updateText() {
+			var tx = this.form.getElementsByTagName('textarea');
+			for (var i = 0; i < tx.length; i++) {
+				var textArea = tx[i];
+				if (textArea.id.indexOf('textArea_') < 0) continue;
+				var id = Number(tx.id.replace('textArea_',''));
+				if (currentFMode == 2) convertText(id, false);
+			}
+		};
+		break;
 	}
 }
 
 function prepPage() {
-	if (!currentFMode) return; // disabled
-	uriObj = parseURI(); // update the uriObj
-	init_formating();
+	initFormating();
+	createLinkWindow(document.getElementById('layout-content'));
 }
 
 //window.onload = prepPage;

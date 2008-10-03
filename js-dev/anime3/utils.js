@@ -128,10 +128,32 @@ function cTimeDateHour(data) {
  * @param element where to get attributes
  * @param attribute what to get 
  */
-function getStyleInformation(element,attribute) {
-	if (!element) return;
+function getStyleInformation(element,attribute,debug) {
+	if (!element && attribute) return;
 	var useCurrentStyle = (element.currentStyle) ? true : false;
 	var useGetCumputedStyle = (window.getComputedStyle) ? true : false;
+
+	if (debug) {
+		var result = '';
+		if (!attribute) {
+			if (useGetCumputedStyle)
+				result += '\n!attribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null);
+			if (useCurrentStyle)
+				result += '\n!attribute>useCurrentStyle: ' + element.currentStyle;
+		} else {
+			if (useGetCumputedStyle)
+				result += '\nattribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null)[attribute];
+			if (useCurrentStyle)
+				result += '\nattribute>useCurrentStyle: ' + element.currentStyle[attribute];
+		}
+		alert('useCurrentStyle: '+useCurrentStyle+
+			'\nuseGetCumputedStyle: '+useGetCumputedStyle+
+			'\nelement: '+element+
+			'\nattribute: '+attribute+
+			'\nresult: '+result
+		);
+	}
+	
 	if (!attribute) {
 		if (useGetCumputedStyle)
 			return window.getComputedStyle(element,null);
@@ -161,6 +183,24 @@ function nodeData(node) {
 // STUBS //
 function doNothing() { return false; }
 function notImplemented() { alert('Not implemented yet'); }
+
+/* Replace a node with its children -- delete the item and move its children up one level in the hierarchy */
+function replaceNodeWithChildren(theNode) {
+	var theChildren = new Array();
+	var theParent = theNode.parentNode;
+	
+	if (theParent != null) 	{
+		for (var i = 0; i < theNode.childNodes.length; i++)
+			theChildren.push(theNode.childNodes[i].cloneNode(true));
+			
+		for (var i = 0; i < theChildren.length; i++)
+			theParent.insertBefore(theChildren[i], theNode);	
+			
+		theParent.removeChild(theNode);
+		return theParent;
+	}
+	return true;
+}
 
 /* Debug function that shows the dom tree of a node
  * @param node The node to show the tree
@@ -398,11 +438,12 @@ function createBasicButton(name,value,type) {
 	return button;
 }
 
-function createButton(name,id,disabled,value,type,onclick) {
+function createButton(name,id,disabled,value,type,onclick, className) {
 	var button = createBasicButton(name,value,type);
 	if (id && id != '') button.id = id;
 	if (disabled != null) button.disabled = (disabled);
 	if (onclick != null) button.onclick = onclick;
+	if (className != null) button.className = className;
 	return button;
 }
 
@@ -448,7 +489,10 @@ function createSelectArrayN(parentNode,name,id,onchange,selected,optionArray) {
 	var select = createBasicSelect(name,id,onchange);
 	for (var i = 0; i < optionArray.length; i++) {
 		var op = optionArray[i];
-		createSelectOption(select, op['text'], op['value'], (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
+		if (typeof(op) == 'object')
+			createSelectOption(select, op['text'], (op['value'] ? op[value] : op['text']), (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
+		else
+			createSelectOption(select, op, op, (op == selected), null, null);
 	}
 	if (parentNode && parentNode != '') parentNode.appendChild(select);
 	else return select;
