@@ -867,3 +867,27 @@ span.smiley
 {
 	clear: both;
 }
+
+#layout-main div.forum div.search form
+{
+	text-align:left;
+	margin-left: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+#layout-main div.forum div.search form input.search
+{
+	width: 200px;
+}
+
+#layout-main div.forum div.search form input,
+#layout-main div.forum div.search form select
+{
+	padding: 2px 3px;
+}
+
+#layout-main div.forum div.search form input[type="submit"]
+{
+	padding: 3px;
+}
