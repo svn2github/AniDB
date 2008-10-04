@@ -5,15 +5,7 @@
 
 // GLOBALs //
 
-var seeDebug = false;			// should we display debug info (can be very verbose)
-var seeTimes = false;			// should we display timing info?
 var globalStatus = new statusInformation(); // Global status information
-
-/* Fetches data
- * @param url URL of the data to fetch
- * @param func Parsing function
- */
-function fetchData(url,func) { xhttpRequestFetch(xhttpRequest(), url, func); }
 
 /* Removes rows from a given TBody */
 function clearTableRows(tbody) { while (tbody.rows.length) tbody.removeChild(tbody.rows[0]); }
