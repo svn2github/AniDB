@@ -7,7 +7,8 @@
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
+var seeDebug = CookieGet('seeDebug') || 0;
+var useInlineActions = CookieGet('inlineActions') || 0;
 var msgTable;
 var headingList;
 var input_msgTO;
@@ -422,12 +423,14 @@ function updateMsgList() {
 		a.onclick = deleteMessage;
 	}
 	
-	//update the new message link
-	var newMsg = getElementsByClassName(actionList.getElementsByTagName('li'), 'new', true)[0];
-	var a = newMsg.getElementsByTagName('a')[0];
-	a.removeAttribute('href');
-	a.onclick = createNewMessage;
-	a.style.cursor = 'pointer';
+	if (useInlineActions) {
+		//update the new message link
+		var newMsg = getElementsByClassName(actionList.getElementsByTagName('li'), 'new', true)[0];
+		var a = newMsg.getElementsByTagName('a')[0];
+		a.removeAttribute('href');
+		a.onclick = createNewMessage;
+		a.style.cursor = 'pointer';
+	}
 	
 	// now do some clean up of the table to allow for cleaner sort
 	var tbody = msgTable.tBodies[0];

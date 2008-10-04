@@ -916,23 +916,23 @@ function initFormating() {
 		if (currentFMode == 2) textArea.style.display = 'none';
 		textArea.parentNode.insertBefore(controls,iframe);
 		createRTE(iframe,textArea);
-	}
-	
-	// Update inputs
-	var inputs = fTA.getElementsByTagName('input');
-	for (var s = 0; s < inputs.length; s++) {
-		var input = inputs[s];
-		if (input.type.toLowerCase() != 'submit') continue;
-		input.onclick = function updateText() {
-			var tx = this.form.getElementsByTagName('textarea');
-			for (var i = 0; i < tx.length; i++) {
-				var textArea = tx[i];
-				if (textArea.id.indexOf('textArea_') < 0) continue;
-				var id = Number(tx.id.replace('textArea_',''));
-				if (currentFMode == 2) convertText(id, false);
-			}
-		};
-		break;
+		
+		// Update inputs
+		var inputs = textArea.form.getElementsByTagName('input');
+		for (var s = 0; s < inputs.length; s++) {
+			var input = inputs[s];
+			if (input.type.toLowerCase() != 'submit') continue;
+			input.onclick = function updateText() {
+				var tx = this.form.getElementsByTagName('textarea');
+				for (var i = 0; i < tx.length; i++) {
+					var fta = tx[i];
+					if (fta.id.indexOf('textArea_') < 0) continue;
+					var id = Number(fta.id.replace('textArea_',''));
+					if (currentFMode == 2) convertText(id, false);
+				}
+			};
+			break;
+		}
 	}
 }
 
