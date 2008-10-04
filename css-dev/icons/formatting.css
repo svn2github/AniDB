@@ -152,6 +152,7 @@ ul.format-modes li.selected, ul.format-modes li:hover {
 	padding:3px 15px;
 	color: white;
 	font-weight: bold;
+	text-align: left;
 }
 
 .dialogBox h3:hover { cursor: move; }
@@ -171,7 +172,7 @@ button.button,
 a.confirmButton,
 input.confirmButton,
 button.confirmButton {
-	background:#9B9B9B url(images/button.png) repeat-x scroll left top;
+	background:#9B9B9B url(formating/button.png) repeat-x scroll left top;
 	border-color:#999999 #858585 #666666;
 	border-style:solid;
 	border-width:1px;
@@ -188,14 +189,14 @@ button.confirmButton {
 
 input.dialogConfirm { margin-left:8px; }
 a.confirmButton, input.confirmButton, button.confirmButton {
-	background:#515151 url(images/confirm_button.png) repeat-x scroll left top;
+	background:#515151 url(formating/confirm_button.png) repeat-x scroll left top;
 	border-color:#505050 #404040 #2D2D2D;
 	font-weight:bold;
 	text-shadow:0 -1px 1px #515151;
 }
 
 .dialogBox a.i_close {
-	background:transparent url(images/delete_inactive.png) no-repeat scroll 50% 50%;
+	background:transparent url(formating/delete_inactive.png) no-repeat scroll 50% 50%;
 	display:block;
 	float:right;
 	height:16px;
@@ -205,7 +206,7 @@ a.confirmButton, input.confirmButton, button.confirmButton {
 }
 
 .dialogBox a.i_close:hover {
-	background:transparent url(images/delete_active.png) no-repeat scroll 50% 50%;
+	background:transparent url(formating/delete_active.png) no-repeat scroll 50% 50%;
 	display:block;
 	float:right;
 	height:16px;
