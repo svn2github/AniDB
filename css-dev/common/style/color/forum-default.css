@@ -11,27 +11,12 @@ div.quotebody div.quote div.g_odd
 
 #layout-main div.cmt_entries dl.profile
 {
-	border-right-color: #4A4A5A;
-}
-
-#layout-main div.cmt_entries dl.profile dd
-{
-	color:#666666;
+	border-right-color:#4A4A5A;
 }
 
 #layout-main div.cmt_entries dl.profile dd strong
 {
 	color:#000000;
-}
-
-#layout-main div.cmt_entries a.username-colored
-{
-	color:#AA0000;
-}
-
-#layout-main div.forum ul.topiclist
-{
-	background-color:inherit;
 }
 
 #layout-main div.forum ul.topiclist li
@@ -87,17 +72,6 @@ div.quotebody div.quote div.g_odd
 	background-color:#969aa6;
 }
 
-#layout-main div.forum ul.linklist
-{
-	background-color: inherit;
-}
-
-#layout-main div.forum a.topictitle:hover,
-#layout-main div.forum a.username-coloured
-{
-	color:#AA0000;
-}
-
 #layout-main div.forum div.deleted,
 #layout-main div.forum li.deleted dl.icon
 {
@@ -117,13 +91,13 @@ div.quotebody div.quote div.g_odd
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #4a4a5a;
-	border-right-color: #4a4a5a;
+	border-left-color:#4a4a5a;
+	border-right-color:#4a4a5a;
 }
 
 #layout-main div.forum hr
 {
-	background-color: #4A4A5A;
+	background-color:#4A4A5A;
 }
 
 #layout-main div.forum div.signature,
@@ -145,9 +119,9 @@ div.quotebody div.quote div.g_odd
 #layout-main div.forum div.poll div.pollbar
 {
 	background-color:#105289;
+	border-bottom-color:#092e4d;
+	border-right-color:#092e4d;
 	color:#FFFFFF;
-	border-bottom-color: #092e4d;
-	border-right-color: #092e4d;
 }
 
 #layout-main div.forum div.poll h2
@@ -165,11 +139,6 @@ div.quotebody div.quote div.g_odd
 #layout-main div.forum div.poll dl dt
 {
 	color:#555555;
-}
-
-#layout-main div.forum div.poll dl dd
-{
-	color:#666666;
 }
 
 #layout-main div.forum div.poll
@@ -192,4 +161,41 @@ div.quotebody div.quote div.g_odd
 {
 	border-bottom-color:#CCCCCC;
 	color:#000000;
+}
+
+#layout-main div.forum div.rules div.inner,
+#layout-main div.forum div.rules .rtop *,
+#layout-main div.forum div.rules .rbottom *
+{
+	background-color:#ECD5D8;
+}
+
+#layout-main div.forum div.rules div.inner
+{
+	color:#BC2A4D;
+}
+
+#layout-main div.forum div.quickreply textarea
+{
+	border-color:#A9A9A9;
+}
+
+#layout-main div.cmt_entries dl.profile dd,
+#layout-main div.forum div.poll dl dd
+{
+	color:#666666;
+}
+
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum a.username-coloured
+{
+	color:#AA0000;
+}
+
+#layout-main div.forum ul.topiclist,
+#layout-main div.forum ul.linklist,
+#layout-main div.forum div.comment
+{
+	background-color:inherit;
 }

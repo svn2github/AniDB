@@ -1,38 +1,26 @@
-#layout-main div.cmt_add p.g_howto
-{
-	text-align: left;
-}
-
 #layout-main div.cmt_add form div textarea
 {
-	display: block;
-	width: 80%;
-	margin-left: 10%;
-	height: 10em;
-}
-
-#layout-main div.cmt_entries div.comment span.icons
-{
-	float: right;
-}
-#layout-main div.cmt_entries div.comment span.stamp span.icons
-{
-	float: left;
+	display:block;
+	height:10em;
+	margin-left:10%;
+	width:80%;
 }
 
 #layout-main div.cmt_entries div.comment
 {
-	text-align:left;
-	min-height:0pt;
+	line-height:1.4;
 	margin-bottom:1em;
-	line-height: 1.4;
+	min-height:0;
+	text-align:left;
+	word-wrap:break-word;
 }
 
 #layout-main div.cmt_entries dl.profile
 {
+	border-right:1px solid;
 	display:inline;
 	float:left;
-	margin:0pt 8px 8pt 8pt;
+	margin:0 8px 8pt 8pt;
 	min-height:80px;
 	width:15em;
 }
@@ -41,7 +29,7 @@
 {
 	clear:none;
 	float:none;
-	margin-left:0em;
+	margin-left:0;
 }
 
 #layout-main div.cmt_entries dl.profile dd.user
@@ -51,45 +39,45 @@
 
 #layout-main div.cmt_entries dl.profile dd.user_icons
 {
-	padding-top: 1.6em;
+	padding-top:1.6em;
 }
 
 #layout-main div.cmt_entries dl.profile dd.user_icons span.icons
 {
-	float: none;
+	float:none;
 }
 
 #layout-main div.cmt_entries div.postbody div.content
 {
-	margin-left: 17em;
-	margin-right: 1em;
+	margin-left:17em;
+	margin-right:1em;
 }
 
 #layout-main div.cmt_entries div.postbody p.author
 {
-	margin:0pt 15em 0.6em 0pt;
-	padding:2pt 0pt 5px;
+	margin:0 15em .6em 0;
+	padding:2pt 0 5px;
 }
 
 #layout-main div.cmt_entries div.postbody span.actions
 {
 	display:block;
-	padding-right: 0.5em;
+	padding-right:.5em;
 }
 
 #layout-main div.cmt_entries div.postbody span.actions a
 {
 	float:right;
-	margin-top: 4px;
+	margin-top:4px;
 }
 
 #layout-main div.cmt_entries div.postfooter
 {
 	clear:both;
 	height:11px;
-	text-align:right;
-	padding-bottom:0.9em;
+	padding-bottom:.9em;
 	padding-right:1em;
+	text-align:right;
 }
 
 #layout-main div.cmt_entries div.postfooter a.i_top
@@ -100,39 +88,19 @@
 
 #layout-main div.forum div.topic_actions
 {
-	height: 25px;
-}
-
-#layout-main div.forum div.topic_actions span.icons
-{
-	float: right;
-}
-
-#layout-main div.forum div.topic_actions div.buttons a
-{
-	float: left;
-}
-
-#layout-main div.forum ul.topiclist
-{
-	display:block;
-	list-style-type:none;
-	margin:0;
+	height:12px;
+	margin-bottom:1.5em;
+	margin-top:1.5em;
 }
 
 #layout-main div.forum ul.topiclist dd
 {
+	border-left:1px solid;
 	display:block;
 	float:left;
 	margin-left:0;
 	padding-left:.5em;
-}
-
-#layout-main div.forum ul.topiclist li
-{
-	display:block;
-	list-style-type:none;
-	margin:0;
+	padding-right:.5em;
 }
 
 #layout-main div.forum li.header dl.icon
@@ -165,15 +133,16 @@
 {
 	display:block;
 	float:left;
-	padding-left:0.5em;
-	padding-right: 0.5em;
-	padding-top: 0.2em;
+	padding-left:.5em;
+	padding-right:.5em;
+	padding-top:.2em;
 	width:50%;
 }
 
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
+	border-left-width:0;
 	line-height:1em;
 	margin:2px 0 4px;
 	padding-bottom:2px;
@@ -227,34 +196,17 @@
 
 #layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title div.pagination
 {
-	margin-top:0em;
+	margin-top:0;
 }
 
 #layout-main div.forum ul.topiclist li.row dl.icon
 {
-	padding-left:0.3em;
+	padding-left:.3em;
 }
 
 #layout-main div.forum div.threads
 {
 	margin-bottom:4px;
-}
-
-#layout-main div.forum div.topic_actions
-{
-	height:12px;
-	margin-bottom:1.5em;
-	margin-top:1.5em;
-}
-
-#layout-main div.forum div.topic_actions span.icons
-{
-	float:right;
-}
-
-#layout-main div.forum div.topic_actions div.buttons a
-{
-	float:left;
 }
 
 #layout-main div.forum hr
@@ -263,11 +215,6 @@
 	display:block;
 	height:1px;
 	margin:5px 0;
-}
-
-#layout-main div.forum div.navbar
-{
-	margin-bottom: 1em;
 }
 
 #layout-main div.forum div.navbar div.inner span.messages,
@@ -279,21 +226,16 @@
 	width:auto;
 }
 
-#layout-main div.forum div.navbar div.inner span.breadcrumbs
-{
-	float:left;
-}
-
 #layout-main div.forum div.navbar span.icons
 {
-padding-top: 0.5em;
-padding-right: 1em;
+	padding-right:1em;
+	padding-top:.5em;
 }
 
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-clear:both;
-margin-right: 1em;
+	clear:both;
+	margin-right:1em;
 }
 
 #layout-main div.forum div.navbar div.inner
@@ -306,22 +248,17 @@ margin-right: 1em;
 #layout-main div.forum div.navbar span.info
 {
 	float:right;
-	padding-right: 1em;
-}
-
-#layout-main div.forum div.navbar div.fake
-{
-	clear:both;
+	padding-right:1em;
 }
 
 #layout-main div.forum div.signature
 {
 	line-height:140%;
-	margin-top:1.5em;
-	overflow:hidden;
-	padding-top:0.2em;
 	margin-left:16em;
 	margin-right:1em;
+	margin-top:1.5em;
+	overflow:hidden;
+	padding-top:.2em;
 }
 
 #layout-main div.forum span.postdeleted,
@@ -338,14 +275,6 @@ margin-right: 1em;
 	font-size:1.1em;
 	font-weight:700;
 	padding-top:3px;
-}
-
-#layout-main div.forum div.posting-box dl
-{
-	display:block;
-	height:1%;
-	margin:0;
-	overflow:hidden;
 }
 
 #layout-main div.forum div.posting-box div.message-box,
@@ -384,11 +313,6 @@ margin-right: 1em;
 	text-align:left;
 }
 
-#layout-main div.forum div.format-buttons input + input
-{
-	margin-left:.5em;
-}
-
 #layout-main div.forum div.posting-box,
 #layout-main div.forum div.submit-box,
 #layout-main div.forum div.options-box
@@ -418,56 +342,32 @@ margin-right: 1em;
 	padding-bottom:.5em;
 }
 
-span.smiley
-{
-	display: -moz-inline-box;
-	display: inline-block;
-}
-
-#layout-main div.forum div.options-box div,
-#layout-main div.forum div.options-box h3,
-#layout-main div.forum span.messages,
-#layout-main div.forum div.statistics h3
-{
-	text-align:left;
-}
-
 #layout-main div.forum div.statistics
 {
-	padding-top: 1.5em;
-	padding-bottom: 1.5em;
+	padding-bottom:1.5em;
+	padding-top:1.5em;
 }
 
 #layout-main div.forum div.statistics p
 {
-	margin: 0;
-	padding: 0;
+	margin:0;
+	padding:0;
 }
 
 #layout-main div.forum div.buttons a + a
 {
-	margin-left: 1em;
+	margin-left:1em;
 }
 
 #layout-main div.forum div.topic_actions div.linklist
 {
 	float:left;
-	margin-top: 1em;
-}
-
-#layout-main div.forum div.options-box,
-#layout-main div.forum div.posting-box dl.vote
-{
-	margin-bottom: 1em;
-}
-
-#layout-main div.forum div.posting-box div.format-buttons select
-{
-	margin-left: 0.5em;
+	margin-top:1em;
 }
 
 #layout-main div.forum div.postbody dl.codebox
 {
+	border:1px solid;
 	display:block;
 	line-height:1.4em;
 	padding:3px;
@@ -475,11 +375,11 @@ span.smiley
 
 #layout-main div.forum div.postbody dl.codebox dt
 {
+	clear:none;
 	display:block;
+	float:none;
 	margin-bottom:3px;
 	text-transform:uppercase;
-	clear: none;
-	float: none;
 }
 
 #layout-main div.forum div.postbody dl.codebox dd
@@ -499,25 +399,11 @@ span.smiley
 	white-space:normal;
 }
 
-#layout-main div.forum div.options-box dt
-{
-	clear:none;
-	float:left;
-}
-
-#layout-main div.forum div.options-box dl
-{
-	display:block;
-	height:1%;
-	margin:0;
-	overflow:hidden;
-}
-
 #layout-main div.forum div.options-box dl.question input
 {
-	width:85%;
 	padding-left:4px;
 	padding-right:4px;
+	width:85%;
 }
 
 #layout-main div.forum div.options-box textarea
@@ -542,22 +428,11 @@ span.smiley
 	width:25px;
 }
 
-#layout-main div.forum div.posting-box dl + dl,
-#layout-main div.forum div.options-box dl + dl
-{
-	margin-top: 0.5em;
-}
-
-#layout-main div.forum div.options-box div.polls
-{
-	margin-top: 0.5em;
-}
-
 #layout-main div.forum div.options-box span.desc
 {
 	display:block;
-	width: 12em;
-	margin-top: 0.5em;
+	margin-top:.5em;
+	width:12em;
 }
 
 #layout-main div.forum div.poll
@@ -578,6 +453,7 @@ span.smiley
 
 #layout-main div.forum div.poll dl
 {
+	border-top:1px solid;
 	height:1%;
 	line-height:120%;
 	margin-top:5px;
@@ -623,6 +499,7 @@ span.smiley
 
 #layout-main div.forum div.poll h2
 {
+	border-bottom:1px solid;
 	display:block;
 	line-height:1.4em;
 	padding-bottom:.5em;
@@ -640,15 +517,12 @@ span.smiley
 
 #layout-main div.forum div.poll div.pollbar
 {
+	border-bottom:1px solid;
+	border-right:1px solid;
 	min-width:2%;
 	overflow:visible;
 	padding:0 2px;
 	text-align:right;
-}
-
-#layout-main div.forum div.poll dl dd.resultbar
-{
-	width: 50%;
 }
 
 #layout-main div.forum div.poll dl dd.votebox
@@ -656,28 +530,131 @@ span.smiley
 	width:15px;
 }
 
-/*BORDER*/
+#layout-main div.forum div.add-box dl dd
+{
+	margin-left:20em;
+}
+
+#layout-main div.forum div.add-box dl.name input,
+#layout-main div.forum div.add-box dl.description input,
+#layout-main div.forum div.add-box dl.parentmanual input
+{
+	padding-left:4px;
+}
+
+#layout-main div.forum ul.topiclist dd.actions
+{
+	float:right;
+	text-align:center;
+	width:8.5em;
+}
+
+#layout-main div.forum ul.topics dd.actions
+{
+	line-height:2.2em;
+	padding-top:.3em;
+}
+
+#layout-main div.forum div.topic_actions div.buttons a.i_forum_add,
+#layout-main div.forum div.topic_actions div.buttons a.i_forum_group
+{
+	float:right;
+	margin-right:1.5em;
+}
+
+#layout-main div.forum_all ul.links
+{
+	margin-top:2em;
+}
+
+#layout-main div.forum div.quickreply textarea
+{
+	border:1px inset;
+	height:10em;
+	line-height:1.2em;
+	padding:2px;
+	width:40%;
+}
+
+#layout-main div.forum div.quickreply p
+{
+	margin-bottom:1em;
+	margin-top:.5em;
+}
+
+#layout-main div.forum div.rules div.inner
+{
+	padding:10px;
+	text-align:left;
+}
+
+#layout-main div.forum div.navbar span.notify
+{
+	display:block;
+	float:right;
+	line-height:2em;
+	text-align:right;
+}
+
+#layout-main div.forum div.search form
+{
+	margin-left:1em;
+	padding-bottom:.5em;
+	padding-top:.5em;
+	text-align:left;
+}
+
+#layout-main div.forum div.search form input.search
+{
+	width:200px;
+}
+
+#layout-main div.forum div.search form input,
+#layout-main div.forum div.search form select
+{
+	padding:2px 3px;
+}
+
+#layout-main div.forum div.search form input[type="submit"]
+{
+	padding:3px;
+}
+
+#layout-main div.forumsearch_form dt
+{
+	clear:none;
+	float:left;
+	margin-right:1em;
+	padding-top:3px;
+	text-align:left;
+	width:30%;
+}
+
+#layout-main div.forumsearch_form dt span.desc
+{
+	display:block;
+}
+
+#layout-main div.forumsearch_form dd
+{
+	margin-left:30%;
+}
+
+#layout-main div.forumsearch_form div.inner input[type="text"]
+{
+	width:250px;
+}
+
 #layout-main div.forum hr,
 #layout-main div.forum ul.topiclist
 {
 	border:none;
 }
 
-#layout-main div.forum ul.topiclist dd
-{
-	border-left:1px solid;
-}
-
 #layout-main div.forum li.row
 {
 	border-bottom:1px solid;
 	border-top:1px solid;
-}
-
-#layout-main div.forum li.header dt,
-#layout-main div.forum li.header dd
-{
-	border-left-width:0;
 }
 
 #layout-main div.forum ul.topics
@@ -692,25 +669,10 @@ span.smiley
 	border-top:1px solid;
 }
 
-#layout-main div.cmt_entries dl.profile
-{
-	border-right: 1px solid;
-}
-
-#layout-main div.forum div.postbody dl.codebox
-{
-	border:1px solid;
-}
-
 #layout-main div.forum div.postbody dl.codebox dt,
 #layout-main div.forum div.poll
 {
 	border-bottom:1px solid;
-}
-
-#layout-main div.forum div.poll dl
-{
-	border-top:1px solid;
 }
 
 #layout-main div.forum div.poll dl dt,
@@ -718,180 +680,55 @@ span.smiley
 {
 	border-left:none;
 }
-#layout-main div.forum div.poll h2
+
+#layout-main div.cmt_add p.g_howto,
+#layout-main div.forum div.options-box div,
+#layout-main div.forum div.options-box h3,
+#layout-main div.forum span.messages,
+#layout-main div.forum div.statistics h3,
+#layout-main div.forum div.quickreply form
 {
-	border-bottom:1px solid;
-}
-#layout-main div.forum div.poll div.pollbar
-{
-	border-bottom:1px solid;
-	border-right:1px solid;
+	text-align:left;
 }
 
-/*teststuff*/
-#layout-main div.forum div.add-box dl dt
+#layout-main div.cmt_entries div.comment span.icons,
+#layout-main div.forum div.topic_actions span.icons
 {
-	font-size:1.1em;
-	font-weight:bold;
-	clear:none;
+	float:right;
+}
+
+#layout-main div.cmt_entries div.comment span.stamp span.icons,
+#layout-main div.forum div.topic_actions div.buttons a,
+#layout-main div.forum div.navbar div.inner span.breadcrumbs,
+#layout-main div.forum div.navbar div.inner span.messages
+{
 	float:left;
 }
 
-#layout-main div.forum div.add-box dl + dl
-{
-	margin-top:0.5em;
-}
-
-#layout-main div.forum div.add-box dl
+#layout-main div.forum ul.topiclist,
+#layout-main div.forum ul.topiclist li
 {
 	display:block;
-	height:1%;
+	list-style-type:none;
 	margin:0;
-	overflow:hidden;
 }
 
-#layout-main div.forum div.add-box dl dd
+#layout-main div.forum div.navbar,
+#layout-main div.forum div.options-box,
+#layout-main div.forum div.posting-box dl.vote
 {
-	margin-left: 20em;
+	margin-bottom:1em;
 }
 
-#layout-main div.forum div.add-box form
-{
-	padding: 1em;
-}
-
-#layout-main div.forum div.add-box dl.name input,
-#layout-main div.forum div.add-box dl.description input
-{
-	width: 50%;
-}
-
-#layout-main div.forum div.add-box dl.name input,
-#layout-main div.forum div.add-box dl.description input,
-#layout-main div.forum div.add-box dl.parentmanual input
-{
-	padding-left: 4px;
-}
-
-#layout-main div.forum ul.topiclist dd
-{
-	padding-right:0.5em;
-}
-
-#layout-main div.forum ul.topiclist dd.actions
-{
-	float:right;
-	text-align:center;
-	width: 8.5em;
-}
-
-#layout-main div.forum ul.topics dd.actions
-{
-	padding-top: 0.3em;
-	line-height:2.2em;
-}
-
-#layout-main div.forum ul.topics dd.actions a +a
-{
-	margin-top: 0.5em;
-}
-
-#layout-main div.forum div.topic_actions div.buttons a.i_forum_add,
-#layout-main div.forum div.topic_actions div.buttons a.i_forum_group
-{
-	float:right;
-	margin-right: 1.5em;
-}
-
-#layout-main div.forum_all ul.links
-{
-	margin-top: 2em;
-}
-
-#layout-main div.forum div.quickreply form
-{
-	text-align: left;
-}
-
-#layout-main div.forum div.quickreply textarea
-{
-	border:1px inset #A9A9A9;
-	font-size:1.1em;
-	line-height:1.2em;
-	padding:2px;
-	width:40%;
-	height: 10em;
-}
-
-#layout-main div.forum div.quickreply p
-{
-	margin-top: 0.5em;
-	margin-bottom: 1em;
-}
-
-#layout-main div.forum div.rules div.inner,
-#layout-main div.forum div.rules .rtop *,
-#layout-main div.forum div.rules .rbottom *
-{
-	background-color:#ECD5D8;
-}
-
-#layout-main div.forum div.rules div.inner
-{
-	color:#BC2A4D;
-	font-size:1.1em;
-	padding:10px;
-	text-align: left
-}
-
-#layout-main div.forum div.comment
-{
-	background-color: inherit;
-}
-
-#layout-main div.forum div.navbar span.notify
-{
-	font-size: 1.1em;
-	text-align: right;
-	display: block;
-	float: right;
-	line-height:2em;
-}
-
-#layout-main div.forum div.navbar div.inner span.messages
-{
-	float: left;
-}
-
+#layout-main div.forum div.navbar div.fake,
 #layout-main div.forum div.navbar div.inner div.fake
 {
-	clear: both;
+	clear:both;
 }
 
-#layout-main div.forum div.search form
-{
-	text-align:left;
-	margin-left: 1em;
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
-}
-
-#layout-main div.forum div.search form input.search
-{
-	width: 200px;
-}
-
-#layout-main div.forum div.search form input,
-#layout-main div.forum div.search form select
-{
-	padding: 2px 3px;
-}
-
-#layout-main div.forum div.search form input[type="submit"]
-{
-	padding: 3px;
-}
-
+#layout-main div.forum div.posting-box dl,
+#layout-main div.forum div.options-box dl,
+#layout-main div.forum div.add-box dl,
 #layout-main div.forumsearch_form dl
 {
 	display:block;
@@ -900,40 +737,51 @@ span.smiley
 	overflow:hidden;
 }
 
+#layout-main div.forum div.format-buttons input + input,
+#layout-main div.forum div.posting-box div.format-buttons select
+{
+	margin-left:.5em;
+}
+
+#layout-main div.forum div.options-box dt,
+#layout-main div.forum div.add-box dl dt
+{
+	clear:none;
+	float:left;
+}
+
+#layout-main div.forum div.posting-box dl + dl,
+#layout-main div.forum div.options-box dl + dl,
+#layout-main div.forum div.options-box div.polls,
+#layout-main div.forum div.add-box dl + dl,
+#layout-main div.forum ul.topics dd.actions a +a,
 #layout-main div.forumsearch_form dl + dl
 {
 	margin-top:.5em;
 }
 
-#layout-main div.forumsearch_form dt
+#layout-main div.forum div.poll dl dd.resultbar,
+#layout-main div.forum div.add-box dl.name input,
+#layout-main div.forum div.add-box dl.description input
 {
-	clear:none;
-	float:left;
-	font-size:1.1em;
-	font-weight:700;
-	margin-right:1em;
-	padding-top:3px;
-	text-align:left;
-	width:30%;
+	width:50%;
 }
 
-#layout-main div.forumsearch_form dt span.desc
-{
-	display:block;
-	font-weight:normal;
-}
-
-#layout-main div.forumsearch_form dd
-{
-	margin-left:30%;
-}
-
+#layout-main div.forum div.add-box form,
 #layout-main div.forumsearch_form div.inner form
 {
 	padding:1em;
 }
 
-#layout-main div.forumsearch_form div.inner input[type="text"]
+div.quotebody
 {
-	width:250px;
+	margin-left:1em;
+	margin-right:.5em;
+	padding:.4em;
+}
+
+div.quotebody div.quote div.quotebody
+{
+	margin-right:.2em;
+	margin-top:1em;
 }
