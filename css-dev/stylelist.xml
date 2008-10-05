@@ -90,6 +90,16 @@
 		<screenshot>fma_style/images/screenshot.png</screenshot>
 		<thumbnail>fma_style/images/thumbnail.png</thumbnail>
 	</style>
+	<style name="geassmode">
+		<title>Geass Mode</title>
+		<creator>antennen</creator>
+		<update>05.10.2008</update>
+		<status>Very Alpha</status>
+		<description>Aiming to be a clean and usable design. Banner features C.C. and Kallen from Code Geass. Everything may change without further notice.</description>
+		<path/>
+		<screenshot>geassmode/images/screenshot.png</screenshot>
+		<thumbnail>geassmode/images/thumbnail.png</thumbnail>
+	</style>
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
@@ -124,8 +134,7 @@
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
 		<update>23.08.2008</update>
-		<status>In development
-</status>
+		<status>In development</status>
 		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
@@ -166,8 +175,7 @@
 		<creator>Breadstone</creator>
 		<update>23.08.2008</update>
 		<status>In development</status>
-		<description>Thanks to B1nhs help i've finally completed my LuckyStyle. I hope you guys (and gals) like it. If you find any bugs or something you think
-should be fixed just send me a PM.</description>
+		<description>Thanks to B1nhs help i've finally completed my LuckyStyle. I hope you guys (and gals) like it. If you find any bugs or something you think should be fixed just send me a PM.</description>
 		<path/>
 		<screenshot>luckystyle/images/screenshot.png</screenshot>
 		<thumbnail>luckystyle/images/thumbnail.png</thumbnail>
