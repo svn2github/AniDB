@@ -1,0 +1,25 @@
+#layout-footer {
+	clear:both;
+	color:#ababab;
+	font-size:0.7em;
+	text-align:center;
+}
+	#layout-footer p {
+		margin:0;
+		padding:20px 0;
+	}
+		#layout-footer p:after {
+			content:". Design by antennen";
+		}
+	#layout-footer form {
+		position:relative; top:-20px;
+		padding:20px 0;
+	}
+		#layout-footer form a,
+		#layout-footer form a:visited {
+			color:#ad2100;
+		}
+		#layout-footer form a:hover {
+			color:#ffa500;
+			border:none;
+		}

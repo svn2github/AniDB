@@ -1,0 +1,111 @@
+#layout-menu {
+	padding:220px 20px;
+	width:155px;
+	background:url(./images/layout/header-cc.png) no-repeat left 92px;
+	list-style-type:none;
+}
+	#layout-menu li.sub-menu {
+		margin:0 0 20px;
+		border-right:5px solid #ad2100;
+		font-size:0.85em;
+	}
+		#layout-menu li.sub-menu span.tab {
+			padding:5px 7px 5px 14px;
+			position:static; display:block;
+			color:#ffffff; background:#ad2100;
+			font-size:1.3em;
+			cursor:default;
+		}
+		#layout-menu li.sub-menu ul {
+			list-style-type:none;
+		}
+			#layout-menu li.sub-menu li { }
+			#layout-menu li.sub-menu a,
+			#layout-menu li.sub-menu a:visited {
+				display:block;
+				color:#ababab;
+				border:none; border-bottom:1px solid #582100;
+				text-decoration:none;
+			}
+				#layout-menu li.sub-menu a:hover {
+					color:#dbdbdb; background:url(./images/layout/menu-arrow-red.png) no-repeat right center;
+					border-bottom:1px solid #ad2100;
+				}
+				#layout-menu li.sub-menu a span {
+					padding:3px 7px 3px 14px;
+					display:block;
+					text-transform:capitalize;
+				}
+	
+	/* Custom colors for each menu group */
+	#layout-menu li.sub-menu[title="Listings"],
+	#layout-menu li.sub-menu[title="Support"] {
+		border-right:5px solid #21ad00;
+	}
+		#layout-menu li.sub-menu[title="Listings"] span.tab,
+		#layout-menu li.sub-menu[title="Support"] span.tab {
+			background:#21ad00;
+		}
+		#layout-menu li.sub-menu[title="Listings"] a,
+		#layout-menu li.sub-menu[title="Support"] a,
+		#layout-menu li.sub-menu[title="Listings"] a:visited,
+		#layout-menu li.sub-menu[title="Support"] a:visited {
+			border-bottom-color:#215800;
+		}
+		#layout-menu li.sub-menu[title="Listings"] a:hover,
+		#layout-menu li.sub-menu[title="Support"] a:hover {
+			background:url(./images/layout/menu-arrow-green.png) no-repeat right center;
+			border-bottom-color:#21ad00;
+		}
+	#layout-menu li.sub-menu[title="My stuff"] {
+		border-right:5px solid #0041cd;
+	}
+		#layout-menu li.sub-menu[title="My stuff"] span.tab {
+			background:#0041cd;
+		}
+		#layout-menu li.sub-menu[title="My stuff"] a,
+		#layout-menu li.sub-menu[title="My stuff"] a:visited {
+			border-bottom-color:#0021ad;
+		}
+		#layout-menu li.sub-menu[title="My stuff"] a:hover {
+			background:url(./images/layout/menu-arrow-blue.png) no-repeat right center;
+			border-bottom-color:#0041cd;
+		}
+/* Fix annoying menu names */
+#menu-main li.main a span,
+#menu-mod li#menu-creqs a span,
+#menu-mod li#menu-tags a span,
+#menu-mod li#menu-uinfo a span,
+#menu-mod li#menu-bulk a span, 
+#menu-mod li#menu-stats a span,
+#menu-mod li#menu-avmf a span {
+	visibility:hidden;
+}
+#menu-main li.main a span:before {
+	visibility:visible;
+	content:"News";
+}
+#menu-mod li#menu-creqs a span:before {
+	visibility:visible;
+	content:"CREQ List";
+}
+#menu-mod li#menu-tags a span:before {
+	visibility:visible;
+	content:"Tag List";
+}
+#menu-mod li#menu-uinfo a span:before {
+	visibility:visible;
+	content:"User Info";
+}
+#menu-mod li#menu-bulk a span:before {
+	visibility:visible;
+	content:"Bulk Message";
+}
+#menu-mod li#menu-stats a span:before {
+	visibility:visible;
+	content:"DB Stats";
+}
+#menu-mod li#menu-avmf a span:before {
+	visibility:visible;
+	content:"AV Dumps";
+}

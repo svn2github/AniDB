@@ -1,0 +1,26 @@
+#layout-main ul.g_list {
+	margin:0 0 10px; padding:5px 14px;
+	width:auto;
+	background:#393634;
+}
+	#layout-main ul.g_list li {
+		color:#ababab;
+		font-style:italic;
+	}
+		#layout-main ul.g_list li a {
+			color:#ababab;
+			font-style:normal;
+		}
+		#layout-main ul.g_list li.selected,
+		#layout-main ul.g_list li a:hover {
+			color:#dbdbdb;
+			font-style:normal;
+		}
+		#layout-main ul.g_list li.selected {
+			font-weight:bold;
+		}
+	#layout-main ul.g_list li.selected.prev,
+	#layout-main ul.g_list li.selected.next {
+		color:#ababab;
+		font-style:italic; font-weight:normal;
+	}

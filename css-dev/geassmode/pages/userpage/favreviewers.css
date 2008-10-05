@@ -1,0 +1,9 @@
+#layout-main div.userpage_all div.g_section.favreviewers {
+	width:145px;
+}
+	#layout-main div.userpage_all div.g_section.favreviewers p {
+		padding:2px 8px 2px 14px;
+			text-transform:capitalize;
+			border-bottom:1px solid #dbdbdb;
+			font-size:0.85em;
+	}
