@@ -207,12 +207,6 @@ a.confirmButton, input.confirmButton, button.confirmButton {
 
 .dialogBox a.i_close:hover {
 	background:transparent url(../icons/formating/delete_active.png) no-repeat scroll 50% 50%;
-	display:block;
-	float:right;
-	height:16px;
-	margin:0;
-	text-decoration:none;
-	width:16px;
 }
 
 .dialogBox div.buttons {
