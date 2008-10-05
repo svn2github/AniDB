@@ -71,29 +71,6 @@ FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'acce
                'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"href",'start':"[",'end':"]",'active':false},
 			   'unlink':{'id':"RemoveLink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false}
 			   };
-OptionsMap = {	'anime':{'text':"anime",'attribute':"anime id [aid]",'type':"a"},
-				'ep':{'text':"ep",'attribute':"episode id [eid]",'type':"e"},
-				'file':{'text':"file",'attribute':"file id [fid]",'type':"f"},
-				'group':{'text':"group",'attribute':"group id [gid]",'type':"g"},
-				'producer':{'text':"producer",'attribute':"producer id [prid]",'type':"p"},
-				'producers':{'text':"producers",'attribute':"producers for a given anime id [aid]",'type':"ap"},
-				'user':{'text':"user",'attribute':"user id [uid]",'type':"up"},
-				'mylist':{'text':"mylist",'attribute':"mylist for a given user id [uid]",'type':"u"},
-				'votes':{'text':"votes",'attribute':"votes for a given user id [uid]",'type':"v"},
-				'creq':{'text':"creq",'attribute':"change request id [creqid]",'type':"c"},
-				'review':{'text':"review",'attribute':"specific review for a given anime id, text is the review id [aid]",'type':"rs"},
-				'titles':{'text':"titles",'attribute':"titles for a given anime id [aid]",'type':"at"},
-				'cats':{'text':"cats",'attribute':"categories for a given anime id [aid]",'type':"ac"},
-				'relations':{'text':"relations",'attribute':"relations for a given anime id [aid]",'type':"ar"},
-				'groupcmts':{'text':"groupcmts",'attribute':"group comments for a given anime id [aid]",'type':"agc"},
-				'reviews':{'text':"reviews",'attribute':"reviews for a given anime id [aid]",'type':"r"},
-				'tracker':{'text':"tracker",'attribute':"tracker item id [id]",'url':"http://tracker.anidb.net/view.php?id="},
-				'wiki':{'text':"wiki",'attribute':"[no use]",'url':"http://wiki.anidb.net/w/"},
-				'forum.board':{'text':"forum.board",'attribute':"anidb forum board id [id]",'url':"http://forum.anidb.net/viewforum.php?f="},
-				'forum.topic':{'text':"forum.topic",'attribute':"anidb forum topic [id]",'url':"http://forum.anidb.net/viewtopic.php?t="},
-				'forum.post':{'text':"forum.post",'attribute':"anidb forum post [id]",'url':"http://forum.anidb.net/viewtopic.php?p="}
-			};
-//						21:{'text':"genres",'attribute':"old genres for a given anime id [aid]"},
 ModeMap = new Array('Mode: Off','Mode: Assisted','Mode: Visual');
 
 /* Function that gets the current selection
@@ -210,14 +187,10 @@ function formatText(id, n, selected, element) {
 				var rte = document.getElementById('wysiwyg_'+n);
 				var fta = document.getElementById('textArea_'+n);
 				var field = (currentFMode == 2 ? rte.contentWindow : fta);
-				var typeField = document.getElementById('f_links').value;
 				var textField = document.getElementById('f_links_text').value || '';
-				var attrField = document.getElementById('f_links_attr').value;
-				if (!textField.length) textField = typeField + " " + attrField;
-				var option = OptionsMap[typeField];
-				var base = (option['url'] ? option['url'] : "http://anidb.net/");
-				var type = option['type'];
-				var hyperLink = '['+typeField+':'+attrField+':'+textField+']';
+				var hrefField = document.getElementById('f_links_href').value || '';
+				if (textField == '') textField = hrefField;
+				var hyperLink = '[url='+hrefField+']'+textField+'[/url]';
 				if (currentFMode != 2) {
 					selectionMagic(field, hyperLink, true);
 					addLinkWidget.style.display = 'none';
@@ -225,13 +198,11 @@ function formatText(id, n, selected, element) {
 				}
 				if (wGS) {
 					hyperLink = field.document.createElement('a');
-					hyperLink.href = base+type+attrField;
-					hyperLink.type = typeField;
-					if (typeField != 'wiki') hyperLink.setAttribute('att',attrField);
+					hyperLink.href = hrefField;
 					hyperLink.appendChild(document.createTextNode(textField));
 					selectionMagic(field, hyperLink, false);
 				} else {
-					hyperLink = '<a href="'+(base+type+attrField)+'" type="'+typeField+'"'+(typeField!='wiki' ? ' att="'+attrField+'"' : '')+'>'+textField+'</a>';
+					hyperLink = '<a href="'+hrefField+'">'+textField+'</a>';
 					selectionMagic(field, hyperLink, false);
 				}
 				addLinkWidget.style.display = 'none';
@@ -524,19 +495,7 @@ function convertSPANs(id) {
 	}
 }
 
-/* Link replacement functions */
-function convertLinksInput(mstr, type, attr, text, offset, s) {
-	var validTypes = [	'anime','ep','file','group','producer','producers','user','mylist','votes','creq','review','titles',
-						'cats','relations','groupcmts','reviews','tracker','wiki','forum.board','forum.topic','forum.post']
-	if (validTypes.indexOf(type) < 0) return mstr;
-	if (type.toLowerCase() == 'wiki') {
-		text = attr;
-		attr = '';
-	}
-	var option = OptionsMap[type];
-	var base = (option['url'] ? option['url'] : "http://anidb.net/");
-	return '<a href="'+(base+type+attr)+'" type="'+type+'"'+(type != 'wiki' ? ' att="'+attr+'"' : '' )+'>'+text+'</a>';
-}
+/* Convert links */
 function convertLinksOutput(mstr, inner, text, offset, s) {
 	var href = att = type = "";
 	var hrefIndex = mstr.indexOf('href');
@@ -557,8 +516,7 @@ function convertLinksOutput(mstr, inner, text, offset, s) {
 		var typeIndex1 = mstr.indexOf('"',typeIndex0+1);
 		type = mstr.substring(typeIndex0,typeIndex1);
 	}
-	if (href.indexOf('anidb.net') < 0) return ('(link: ' + text +' - '+href+')');
-	return ("["+type+":"+att+":"+text+"]");
+	return ("[url="+href+"]"+text+"[/url]");
 }
 
 /* Function that formats an output string
@@ -637,8 +595,8 @@ function convert_input(str) {
 	str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
 	str = str.replace(/\<\/ul\>\<br \/\>\<br \/\>/mgi,'</ul></br>');
 	str = str.replace(/\<\/ol\>\<br \/\>\<br \/\>/mgi,'</ol></br>');
-	str = str.replace(/\[([a-z]+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
-	str = str.replace(/\[([a-z]+?)\:\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
+	str = str.replace(/\[url=([^\[\]].+?)\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$2</a>');
+	str = str.replace(/\[url\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$1</a>');
 	return (str);
 }
 
@@ -689,8 +647,7 @@ function showConvertedRTEinPRE(id) {
 	var rte = document.getElementById('wysiwyg_'+id);
 	var codeview = document.getElementById("codeview");
 	var innerdoc = rte.contentDocument;
-	var display_code = (function _display_code_ie()
-		{
+	var display_code = (function _display_code_ie() {
 			convertSPANs(0);
 			codeview.value = convert_output(innerdoc.body.innerHTML);
 		});
@@ -742,15 +699,9 @@ function createLinkWindow(parentNode) {
 	var table = document.createElement('table');
 	var tbody = document.createElement('tbody');
 	var row = document.createElement('tr');
-	createHeader(row, null, 'Type');
-	createCell(row, null, createSelectArray(null,'f_links','f_links',updateAttributeHelpText,null,OptionsMap));
+	createHeader(row, null, 'URL');
+	createCell(row, null, createTextInput('f_links_href',null,false,false,50,null));
 	tbody.appendChild(row);
-	row = document.createElement('tr');
-	tbody.appendChild(row);
-	createHeader(row, null, 'Attribute');
-	var attrInput = createTextInput('f_links_attr',null,false,false,50,null);
-	attrInput.title = OptionsMap['anime']['attribute'];
-	createCell(row, null, attrInput);
 	row = document.createElement('tr');
 	createHeader(row, null, 'Text');
 	createCell(row, null, createTextInput('f_links_text',null,false,false,50,null));
