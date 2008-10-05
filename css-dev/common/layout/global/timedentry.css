@@ -42,3 +42,25 @@
 	float: right;
 	margin-top: -1.5em;
 }
+
+#layout-main div.g_timedentry ol,
+#layout-main div.g_timedentry ul
+{
+	background-color:inherit;
+	border:none;
+	list-style-type:disc;
+	margin-top:0.5em;
+	padding-left:4em;
+}
+
+#layout-main div.g_timedentry ol li + br,
+#layout-main div.g_timedentry ul li + br
+{
+	display:none
+}
+
+#layout-main div.g_timedentry ol
+{
+	list-style-type:decimal;
+	padding-left:2.5em;
+}
