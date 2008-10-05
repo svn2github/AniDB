@@ -777,7 +777,7 @@ function createControls(parentNode, id, mode) {
 	var div = document.createElement('div');
 	div.className = 'format-buttons f_controls';
 	div.id = 'controls_'+ id;
-	if (mode == 0) div.style.display = 'none';
+	//if (mode == 0) div.style.display = 'none';
 	var buttons = buttonList[mode];
 	for (var b = 0; b < buttons.length; b++) {
 		var button = createLocalButton(null,buttons[b],FunctionMap[buttons[b]]);
