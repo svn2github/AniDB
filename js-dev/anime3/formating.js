@@ -700,11 +700,11 @@ function createLinkWindow(parentNode) {
 	var tbody = document.createElement('tbody');
 	var row = document.createElement('tr');
 	createHeader(row, null, 'URL');
-	createCell(row, null, createTextInput('f_links_href',null,false,false,50,null));
+	createCell(row, null, createTextInput('f_links_href',null,false,false,null,null));
 	tbody.appendChild(row);
 	row = document.createElement('tr');
 	createHeader(row, null, 'Text');
-	createCell(row, null, createTextInput('f_links_text',null,false,false,50,null));
+	createCell(row, null, createTextInput('f_links_text',null,false,false,null,null));
 	tbody.appendChild(row);
 	table.appendChild(tbody);
 	div.appendChild(table);
