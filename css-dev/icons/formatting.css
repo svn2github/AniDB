@@ -149,7 +149,7 @@ ul.format-modes li.selected, ul.format-modes li:hover {
 	border-bottom:1px solid #AAAAAA;
 	font-size:11px;
 	margin:0;
-	padding:3px 15px;
+	padding:3px 15px 5px;
 	color: white;
 	font-weight: bold;
 	text-align: left;
@@ -210,7 +210,7 @@ a.confirmButton, input.confirmButton, button.confirmButton {
 	display:block;
 	float:right;
 	height:16px;
-	margin:5px;
+	margin:0;
 	text-decoration:none;
 	width:16px;
 }
@@ -231,9 +231,20 @@ a.confirmButton, input.confirmButton, button.confirmButton {
 	position: absolute;
 	top: 75px;
 	left: 30px;
-	width: 220px;
+	width: 400px;
 }
 
 #widget_addlink th {
 	text-align: left;
+}
+
+#widget_addlink div.content table
+{
+	border: none;
+	margin: 0.5em;
+}
+
+#widget_addlink div.content table input
+{
+	width: 350px;
 }
