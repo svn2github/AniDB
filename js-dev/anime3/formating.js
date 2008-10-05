@@ -526,6 +526,9 @@ function convertSPANs(id) {
 
 /* Link replacement functions */
 function convertLinksInput(mstr, type, attr, text, offset, s) {
+	var validTypes = [	'anime','ep','file','group','producer','producers','user','mylist','votes','creq','review','titles',
+						'cats','relations','groupcmts','reviews','tracker','wiki','forum.board','forum.topic','forum.post']
+	if (validTypes.indexOf(type) < 0) return mstr;
 	if (type.toLowerCase() == 'wiki') {
 		text = attr;
 		attr = '';
@@ -546,7 +549,6 @@ function convertLinksOutput(mstr, inner, text, offset, s) {
 	if (attIndex >= 0) {
 		var attIndex0 = mstr.indexOf('"',attIndex)+1;
 		var attIndex1 = mstr.indexOf('"',attIndex0+1);
-		alert(mstr.charAt(attIndex0) +' - '+ mstr.charAt(attIndex1));
 		att = mstr.substring(attIndex0,attIndex1);
 	}
 	var typeIndex = mstr.indexOf('type');
@@ -602,6 +604,13 @@ function convert_output(str) {
 	str = str.replace(/\[pre\]/mgi,'[code]');
 	str = str.replace(/\[\/pre\]/mgi,'[/code]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
+	
+	/* Just a bit of beautifier */
+	str = str.replace(/\[\/li\]\[li\]/mgi,'[/li]\n[li]');
+	str = str.replace(/\[\/li\]\[\/ul\]/mgi,'[/li]\n[/ul]');
+	str = str.replace(/\[\/li\]\[\/ol\]/mgi,'[/li]\n[/ol]');
+	str = str.replace(/\[\/ul\]\[(u|b|i|s|code|quote)\]/mgi,'[/ul]\n[$1]');
+	str = str.replace(/\[\/ol\]\[(u|b|i|s|code|quote)\]/mgi,'[/ol]\n[$1]');
 
 	str = str.replace(/\[p\]/mgi,'');
 	str = str.replace(/\[\/p\]/mgi,'\n');
@@ -625,9 +634,11 @@ function convert_input(str) {
 	str = str.replace(/\<\/p\>/mgi,'<br />');
 	str = str.replace(/\[br\]/mgi,'<br />');
 	str = str.replace(/\n/mgi,'<br />');
-	//str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
-	str = str.replace(/\[([a-z].+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
-	str = str.replace(/\[([a-z].+?)\:\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
+	str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
+	str = str.replace(/\<\/ul\>\<br \/\>\<br \/\>/mgi,'</ul></br>');
+	str = str.replace(/\<\/ol\>\<br \/\>\<br \/\>/mgi,'</ol></br>');
+	str = str.replace(/\[([a-z]+?)\:(\d+)\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
+	str = str.replace(/\[([a-z]+?)\:\:([^\:\\\/\[\]].+?)\]/mgi,convertLinksInput);
 	return (str);
 }
 
@@ -918,20 +929,22 @@ function initFormating() {
 		createRTE(iframe,textArea);
 		
 		// Update inputs
-		var inputs = textArea.form.getElementsByTagName('input');
-		for (var s = 0; s < inputs.length; s++) {
-			var input = inputs[s];
-			if (input.type.toLowerCase() != 'submit') continue;
-			input.onclick = function updateText() {
-				var tx = this.form.getElementsByTagName('textarea');
-				for (var i = 0; i < tx.length; i++) {
-					var fta = tx[i];
-					if (fta.id.indexOf('textArea_') < 0) continue;
-					var id = Number(fta.id.replace('textArea_',''));
-					if (currentFMode == 2) convertText(id, false);
-				}
-			};
-			break;
+		if (textArea.form) {
+			var inputs = textArea.form.getElementsByTagName('input');
+			for (var s = 0; s < inputs.length; s++) {
+				var input = inputs[s];
+				if (input.type.toLowerCase() != 'submit') continue;
+				input.onclick = function updateText() {
+					var tx = this.form.getElementsByTagName('textarea');
+					for (var i = 0; i < tx.length; i++) {
+						var fta = tx[i];
+						if (fta.id.indexOf('textArea_') < 0) continue;
+						var id = Number(fta.id.replace('textArea_',''));
+						if (currentFMode == 2) convertText(id, false);
+					}
+				};
+				break;
+			}
 		}
 	}
 }
