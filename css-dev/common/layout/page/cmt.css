@@ -396,7 +396,7 @@
 	max-height:200px;
 	overflow:auto;
 	padding-top:5px;
-	white-space:normal;
+	white-space:pre;
 }
 
 #layout-main div.forum div.options-box dl.question input
