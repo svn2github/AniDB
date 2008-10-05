@@ -14,21 +14,21 @@
 			text-transform: uppercase;
 		}
 #layout-main div.g_content div.note {
-	background:#e9e9fe url(../images/icons/information.png) no-repeat 5px center;
+	background:#e9e9fe url(images/icons/information.png) no-repeat 5px center;
 	border-color:#b1bafe;
 }
 
 #layout-main div.g_content div.error {
-	background:#ffcdcd url(../images/icons/exclamation.png) no-repeat 5px center;
+	background:#ffcdcd url(images/icons/exclamation.png) no-repeat 5px center;
 	border-color:#dd3c3c;
 }
 
 #layout-main div.g_content div.warning {
-	background:#feffba url(../images/icons/error.png) no-repeat 5px center;
+	background:#feffba url(images/icons/error.png) no-repeat 5px center;
 	border-color:#ffb786;
 }
 
 #layout-main div.g_content div.success {
-	background:#ddffd0 url(../images/icons/accept.png) no-repeat 5px center;
+	background:#ddffd0 url(images/icons/accept.png) no-repeat 5px center;
 	border-color:#7fe059;
 }
