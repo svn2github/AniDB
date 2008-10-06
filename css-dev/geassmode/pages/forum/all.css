@@ -1,0 +1,4 @@
+/* Quick fix for font in forum */
+#layout-main div.forum_all {
+	font-size:0.8em;
+}
