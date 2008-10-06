@@ -200,7 +200,7 @@ a.confirmButton, input.confirmButton, button.confirmButton {
 	display:block;
 	float:right;
 	height:16px;
-	margin:5px;
+	margin:0px;
 	text-decoration:none;
 	width:16px;
 }
