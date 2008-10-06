@@ -28,6 +28,12 @@
 	background-image: url(../icons/state/anidb_atype_tv_special.gif); 
 }
 
+*.i_music_video { 
+	width: 15px; 
+	height: 15px; 
+	background-image: url(../icons/state/anidb_atype_music_video.gif); 
+}
+
 *.i_other, *.i_unknown { 
 	display: none; 
 }
