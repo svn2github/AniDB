@@ -204,7 +204,7 @@ dragDrop = {
 		// header
 		var h3 = document.createElement('h3');
 		h3.title = 'Click to fold/unfold';
-		h3.onclick = function() {
+		h3.ondblclick = function() {
 			var content = getElementsByClassName(this.parentNode.getElementsByTagName('div'), 'content', true)[0];
 			var buttons = getElementsByClassName(this.parentNode.getElementsByTagName('div'), 'buttons', true)[0];
 			if (!content) return;
