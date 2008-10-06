@@ -25,6 +25,5 @@
 	}
 
 #layout-footer {
-	margin:0 80px 0 195px; padding:0;
-	position:relative; top:-120px; bottom:-120px;
+	margin:-120px 80px -120px 195px; padding:0;
 }

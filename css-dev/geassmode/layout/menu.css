@@ -28,7 +28,6 @@
 				text-decoration:none;
 			}
 				#layout-menu li.sub-menu a:hover {
-					color:#dbdbdb; background:url(./images/layout/menu-arrow-red.png) no-repeat right center;
 					border-bottom:1px solid #ad2100;
 				}
 				#layout-menu li.sub-menu a span {
@@ -54,7 +53,6 @@
 		}
 		#layout-menu li.sub-menu[title="Listings"] a:hover,
 		#layout-menu li.sub-menu[title="Support"] a:hover {
-			background:url(./images/layout/menu-arrow-green.png) no-repeat right center;
 			border-bottom-color:#21ad00;
 		}
 	#layout-menu li.sub-menu[title="My stuff"] {
@@ -68,7 +66,6 @@
 			border-bottom-color:#0021ad;
 		}
 		#layout-menu li.sub-menu[title="My stuff"] a:hover {
-			background:url(./images/layout/menu-arrow-blue.png) no-repeat right center;
 			border-bottom-color:#0041cd;
 		}
 /* Fix annoying menu names */
