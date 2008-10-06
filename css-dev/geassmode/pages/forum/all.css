@@ -1,4 +1,10 @@
 /* Quick fix for font in forum */
-#layout-main div.forum_all {
-	font-size:0.8em;
+#layout-main div.forum_all,
+#layout-main div.threads_all,
+#layout-main div.cmt_all {
+	font-size:0.85em;
+}
+
+#layout-main div.cmt_all div.postbody {
+	font-size:1.1em;
 }
