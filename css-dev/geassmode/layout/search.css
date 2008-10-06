@@ -8,7 +8,8 @@
 		margin:0; padding:0;
 	}
 	#layout-search form.random,
-	#layout-search a.advsearch {
+	#layout-search a.advsearch,
+	#layout-search b {
 		display:none;
 	}
 	#layout-search form select {
