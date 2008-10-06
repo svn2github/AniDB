@@ -69,7 +69,8 @@ FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'acce
 			   'insertlistitem':{'id':"InsertListItem",'desc':"List Item: [li]text[/li] (alt+e)",'accesskey':"e",'text':"li",'start':"[li]",'end':"[/li]",'active':false},
 			   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':'[spoiler]','end':'[/spoiler]','active':false},
                'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"href",'start':"[",'end':"]",'active':false},
-			   'unlink':{'id':"RemoveLink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false}
+			   'unlink':{'id':"RemoveLink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false},
+			   'code':{'id':"Code",'desc':"Code",'accesskey':null,'text':"code",'start':"[code]",'end':"[/code]",'active':false},
 			   };
 ModeMap = new Array('Mode: Off','Mode: Assisted','Mode: Visual');
 
@@ -209,11 +210,12 @@ function formatText(id, n, selected, element) {
 				return;
 			}
 			break;
+		case 'code':
 		case 'spoiler':
 			if (currentFMode == 2) {
 				var selection = selectionMagic(rte.contentWindow);
 				if (selection && selection.length)
-					selectionMagic(rte.contentWindow, FunctionMap['spoiler']['start']+selection+FunctionMap['spoiler']['end'], true);
+					selectionMagic(rte.contentWindow, FunctionMap[id.toLowerCase()]['start']+selection+FunctionMap[id.toLowerCase()]['end'], true);
 			} else fta.execCommand(id);
 			break;
 		default:
@@ -359,6 +361,9 @@ function checkButtonState(iframe, resubmit) {
 	
 	while (theParentNode.nodeName.toLowerCase() != "body") {
 		switch (theParentNode.nodeName.toLowerCase()) {
+			case "pre":
+				setButtonState(controls, 'code', true);
+				break;
 			case "a":
 				setButtonState(controls, 'link', true);
 				break;
@@ -588,6 +593,7 @@ function convert_input(str) {
 	str = str.replace(/\[(p|b|i|u|ul|ol|li)\]/mgi,'<$1>');
 	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)\]/mgi,'</$1>');
 	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
+	str = str.replace(/\[([/])?code\]/mgi,'<$1pre>');
 	str = str.replace(/\<p\>/mgi,'');
 	str = str.replace(/\<\/p\>/mgi,'<br />');
 	str = str.replace(/\[br\]/mgi,'<br />');
@@ -722,8 +728,8 @@ function createLinkWindow(parentNode) {
 function createControls(parentNode, id, mode) {
 	if (mode == null) mode = currentFMode;
 	buttonList = {'0':[],
-				  '1':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','insertlistitem','spoiler','link'],
-				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','spoiler','link']};
+				  '1':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','insertlistitem','code','spoiler','link'],
+				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','code','spoiler','link']};
 
 	var div = document.createElement('div');
 	div.className = 'format-buttons f_controls';
