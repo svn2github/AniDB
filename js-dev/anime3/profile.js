@@ -674,6 +674,10 @@ function tabWork() {
 		}
 		body.appendChild(tab);
 	}
+	var header = document.createElement('h4');
+	header.className = 'header';
+	header.appendChild(document.createTextNode('Javascript'));
+	jsdiv.appendChild(header);
 	jsdiv.appendChild(body);
 	jsdiv.appendChild(document.createElement('br'));
 	var ul = document.createElement('ul');
