@@ -137,3 +137,10 @@ div.pagination span strong
 	border:1px solid #D1D7DC;
 	background-color:#FAFAFA;
 }
+
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *
+{
+	background-color:#CADCEB;
+}

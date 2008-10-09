@@ -203,3 +203,10 @@ input[type="submit"]:hover,
 	background-color:#728972;
 	border-color:#888888;
 }
+
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *
+{
+	background-color:#888888;
+}

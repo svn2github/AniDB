@@ -161,3 +161,10 @@ span.g_odd
 {
 	color:#AA0000;
 }
+
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *
+{
+	background-color:#CADCEB;
+}
