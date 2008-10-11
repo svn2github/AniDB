@@ -489,10 +489,11 @@ function createSelectArrayN(parentNode,name,id,onchange,selected,optionArray) {
 	var select = createBasicSelect(name,id,onchange);
 	for (var i = 0; i < optionArray.length; i++) {
 		var op = optionArray[i];
-		if (typeof(op) == 'object')
-			createSelectOption(select, op['text'], (op['value'] ? op[value] : op['text']), (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
-		else
-			createSelectOption(select, op, op, (op == selected), null, null);
+		createSelectOption(select, op['text'], op['value'], (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
+		//if (typeof(op) == 'object')
+		//	createSelectOption(select, op['text'], (op['value'] ? op[value] : op['text']), (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
+		//else
+		//	createSelectOption(select, op, op, (op == selected), null, null);
 	}
 	if (parentNode && parentNode != '') parentNode.appendChild(select);
 	else return select;
