@@ -1,0 +1,5 @@
+#layout-main div.g_timedentry ol,
+#layout-main div.g_timedentry ul {
+	list-style-type:square;
+	padding-left:2em;
+}

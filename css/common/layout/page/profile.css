@@ -41,6 +41,11 @@
 	margin-left: 0;
 }
 
+#layout-main div.profile_all h4.header
+{
+	display:none;
+}
+
 #style_url
 {
 	width: 75%;

@@ -1,0 +1,29 @@
+/* NO */
+#layout-nav {
+	height:199px;
+	background:transparent url(./images/layout/header-kallen.png) no-repeat right bottom;
+	border-bottom:1px solid #666;
+	clear:both;
+}
+#layout-content {
+	margin:0 80px 0 195px; padding:20px 40px;
+	min-width:700px;
+	position:relative; top:-147px;
+	overflow:hidden;
+	background:#f2f8f6;
+	border:1px solid #666;
+}
+	#layout-main h1 {
+		margin:0 0 10px; padding:0 30px 0 50px;
+		width:100%;
+		position:relative; top:-20px; left:-40px;
+		color:#eee; background:#333 url(./images/layout/emblem.png) no-repeat 10px center;
+		border-bottom:1px solid #666;
+		font-weight:normal; font-size:1.4em;
+		text-align:left;
+		line-height:45px;
+	}
+
+#layout-footer {
+	margin:-120px 80px -120px 195px; padding:0;
+}

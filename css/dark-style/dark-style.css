@@ -4,7 +4,7 @@
 @import "../common/layout/global/all.css";
 @import "../common/layout/page/all.css";
 @import "../common/style/color/msgbox-default.css";
-@import "../common/style/color/quotebox-default.css";
+@import "../common/style/color/forum-default.css";
 @import "../common/style/color/special.css";
 @import "../common/style/text/default.css";
 @import "../common/style/content/page-anime.css";
@@ -1610,4 +1610,11 @@ div.anime_all div.image
 #layout-main div.schedule_all ul.g_list.nav
 {
 	display: block;
+}
+
+#layout-search .rtop,
+#layout-search .rbottom,
+#layout-search div.search form.random
+{
+	display:none;
 }

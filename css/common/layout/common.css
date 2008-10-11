@@ -156,3 +156,23 @@ body.nonav #layout-main h1
 	background-color: #FFFFDF;
 	text-align: center;
 }
+
+/* this is in common/layout/common.css, put it in someother place if it irks you :P */
+ul.format-modes {
+	list-style: none;
+}
+
+ul.format-modes li {
+	display: inline;
+	padding: 0px 5px 2px 5px;
+	border: solid 1px black;
+	margin: 2px;
+	background-color: rgb(191, 194, 201);
+	cursor: pointer;
+	/*text-decoration: underline;*/
+}
+
+ul.format-modes li.selected, ul.format-modes li:hover {
+	background-color: #8492B5;
+	text-decoration: none;
+}

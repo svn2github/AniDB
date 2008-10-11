@@ -1,0 +1,34 @@
+#layout-main div.g_content div.g_msg {
+	margin:0 0 10px; padding:0 5px 0 26px;
+	width:auto;
+	background:#cfd6b4;
+	border:1px solid #b9bfa0;
+}
+	#layout-main div.g_content div.g_msg h3 {
+		display:none;
+	}
+	#layout-main div.g_content div.g_msg p {
+		margin:0; padding:5px 0;
+	}
+		#layout-main div.g_content div.g_msg p:first-letter {
+			text-transform: uppercase;
+		}
+#layout-main div.g_content div.note {
+	background:#e9e9fe url(images/icons/information.png) no-repeat 5px center;
+	border-color:#b1bafe;
+}
+
+#layout-main div.g_content div.error {
+	background:#ffcdcd url(images/icons/exclamation.png) no-repeat 5px center;
+	border-color:#dd3c3c;
+}
+
+#layout-main div.g_content div.warning {
+	background:#feffba url(images/icons/error.png) no-repeat 5px center;
+	border-color:#ffb786;
+}
+
+#layout-main div.g_content div.success {
+	background:#ddffd0 url(images/icons/accept.png) no-repeat 5px center;
+	border-color:#7fe059;
+}

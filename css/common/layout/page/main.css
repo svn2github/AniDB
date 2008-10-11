@@ -74,3 +74,89 @@
 	margin-left: auto;
 	margin-right: auto;
 }
+
+/*CRAZY TESTING!*/
+#layout-main div.main_all div.info
+{
+	clear:none;
+	margin-right:20em;
+	margin-bottom: 1em;
+}
+
+#layout-main div.main_all div.info div.right
+{
+	float:right;
+	width:25em;
+	margin-top: 2em;
+
+}
+
+#layout-main div.main_all div.register div.inner,
+#layout-main div.main_all div.register .rbottom *,
+#layout-main div.main_all div.register .rtop *
+{
+	background-color:#A9ABB1;
+}
+
+#layout-main div.main_all div.register
+{
+	margin-left: 3em;
+	margin-right: 3em;
+	margin-bottom: 2em;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+#layout-main div.main_all div.inner div.text
+{
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	padding-bottom:2.5em;
+	padding-top:2.5em;
+}
+
+#layout-main div.main_all div.login INPUT[type="text"],
+#layout-main div.main_all div.login INPUT[type="password"]
+{
+	width: 7em;
+}
+
+#layout-main div.main_all div.info div.left
+{
+	text-align: left;
+	margin-right: 2em;
+}
+
+#layout-main div.main_all div.info div.left dl dd
+{
+	line-height:1.5em;
+	margin-bottom:0.1em;
+	margin-left:2em;
+}
+
+#layout-main div.main_all div.info div.left dl
+{
+	display:block;
+	margin:0.2em 0 0.5em 0;
+}
+
+#layout-main div.main_all div.info div.left ul
+{
+	list-style-type: square;
+}
+
+#layout-main div.main_all div.info div.about
+{
+	padding-bottom: 1em;
+	border-bottom:2px groove #BFC2CA;
+}
+
+#layout-main div.main_all div.info div.signup
+{
+	padding-top: 1em;
+}
+
+#layout-main div.main_all div.info h2
+{
+	font-size:150%;
+}

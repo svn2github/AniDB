@@ -1,0 +1,26 @@
+@import "../icons/all.css";
+@import "common.css";
+@import "navi.css";
+@import "nonav.css";
+@import "news.css";
+@import "search.css";
+@import "comments.css";
+@import "misc.css";
+@import "wishlist.css";
+@import "mylist.css";
+@import "global.css";
+@import "animelist.css";
+
+table.filelist{
+	border: medium double black;
+	border-collapse: separate;
+	padding-bottom: 10px;
+}
+tr.header,table.filelist>thead>tr{
+	background-color: black;
+}
+#layout-main .g_section, #layout-main .g_list{
+	clear: none !important;
+}
+
+

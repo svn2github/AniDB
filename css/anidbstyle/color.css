@@ -9,9 +9,14 @@ body.nonav
 	background-color: #BFC2C9;
 }
 
-a:visited, a:active, a:hover, a:link {
-  color: blue;
+a:visited, a:active, a:link {
+  color: #105289;
   text-decoration: none;
+}
+
+a:hover
+{
+	color:#AA0000;
 }
 
 #layout-main div.anime_all div.mylist th,
@@ -180,4 +185,11 @@ input[type="checkbox"]
 	background-color: #34394D;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	font-size: 130%;
+}
+
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *
+{
+	background-color:#A9ABB1;
 }

@@ -99,6 +99,7 @@ img, a
 	border-right: 1px #FFFFFF solid;
 }
 
+#layout-main div.forum div.comment,
 #layout-main div.tabbed_pane ul.contribute
 {
     border:none;

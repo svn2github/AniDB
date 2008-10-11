@@ -1,0 +1,178 @@
+#layout-main
+{
+	margin-left:1em;
+	margin-right:1em;
+}
+
+#layout-tabs + #layout-main
+{
+	margin-top:5em;
+}
+
+#layout-menu
+{
+	display:block;
+	right:4em;
+	position:absolute;
+	top:0;
+	z-index:5;
+}
+
+#layout-search
+{
+	padding-top:6em;
+}
+
+#layout-search p,
+#layout-search form
+{
+	margin:0;
+	padding:0;
+}
+
+#layout-search input.text
+{
+	float:left;
+	margin:0;
+	padding:4px;
+	width:200px;
+}
+
+#layout-search input.submit
+{
+	float:right;
+	margin:0;
+	width:100px;
+}
+
+#layout-main > h1
+{
+	display:block;
+	padding:4px;
+	text-align:left;
+}
+
+#layout-footer p
+{
+	margin-bottom:0;
+}
+
+#layout-footer:after
+{
+	content:"deridiot inspired by youtube";
+}
+
+#layout-menu > li ul
+{
+	display:none;
+	padding:0;
+	position:absolute;
+	z-index:5;
+	margin-left:-0.7em;
+}
+
+#layout-menu span.tab
+{
+	display:block;
+	position:relative;
+}
+
+#layout-menu > li
+{
+	display:block;
+	float:left;
+	padding-left:.7em;
+	padding-right:.7em;
+	margin-top:0.5em;
+}
+
+#layout-search div.search
+{
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	width:75%;
+}
+
+#layout-search div.search form
+{
+	margin-left:auto;
+	margin-right:auto;
+	text-align:left;
+	width:41.5em;
+}
+
+#layout-nav input,
+#layout-nav button
+{
+	padding-left:0;
+}
+
+#layout-search select
+{
+	padding:4px 4px 3px;
+	margin-left: 0.5em;
+}
+
+#layout-tabs
+{
+	display:block;
+	margin-top:-5.25em;
+	position:relative;
+}
+
+#layout-tabs ul li
+{
+	display:inline;
+	padding:4px 20px 3px;
+}
+
+#layout-tabs ul
+{
+	text-align:center;
+}
+
+#layout-menu li.sub-menu span.tab
+{
+	padding-bottom:.5em;
+	padding-top:.5em;
+}
+
+#layout-menu li.sub-menu ul li
+{
+	padding:2px 8px;
+}
+
+#layout-menu ul li,
+#layout-menu > li:hover ul
+{
+	display:block;
+}
+
+#layout-footer,
+#layout-main div.tabbed_pane ul.tabs
+{
+	text-align:center;
+}
+
+#layout-content div.dbstats_all
+{
+	padding-left:9.6em;
+	padding-right:8em;
+}
+
+h4,
+#layout-main div.g_timedentry h4
+{
+	padding:.3em;
+}
+
+#layout-search .rtop,
+#layout-search .rbottom
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:75%;
+	display:block;
+}

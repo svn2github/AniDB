@@ -43,3 +43,9 @@ span.icons
 	float: right;
 	white-space:nowrap;
 }
+
+span.smiley
+{
+	display: -moz-inline-box;
+	display:inline-block;
+}

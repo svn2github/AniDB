@@ -9,7 +9,7 @@
 @import "../icons/zakura.css";
 
 @import "../common/style/color/special.css";
-
+@import "../common/style/color/forum-default.css";
 @import "../common/style/text/default.css";
 
 @import "../common/style/content/page-anime.css";
@@ -132,14 +132,4 @@ div.pagination span strong
 {
 	background-color: #565AB9;
 	color: white;
-}
-
-#layout-main td ins
-{
-	background-color:#E9FFD8;
-}
-
-#layout-main td del
-{
-	background-color:#FFD7C2;
 }

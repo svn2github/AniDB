@@ -41,6 +41,12 @@ h4 span
 	-cursor: hand;
 }
 
+button:hover,
+input[type="submit"]:hover
+{
+	cursor:pointer;
+}
+
 th, td.action, td.date, td.year,
 span.date, span.user, td.rating,
 #menu-account li.alert,
@@ -203,21 +209,126 @@ th.sortable{ cursor: pointer }
 	text-decoration: overline;
 }
 
-/*quotes (comments, news, messages, etc.)*/
-div.quotebody
+/*forum*/
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
 {
-	margin-right: 0.5em;
-	margin-left: 1em;
-	padding: 0.4em;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:1em;
+	font-weight:bold;
+	text-transform:uppercase;
 }
 
-div.quotebody div.quoteof
+#layout-main div.forum ul.topics dd.posts,
+#layout-main div.forum ul.topics dd.views,
+#layout-main div.forum ul.topics dd.topics
 {
-	font-weight: bold;
+	font-size:1.2em;
 }
 
-div.quotebody div.quote div.quotebody
+#layout-main div.forum a.topictitle
 {
-	margin-top: 1em;
-	margin-right: 0.2em;
+	font-family:"Trebuchet MS",Helvetica,Arial,Sans-serif;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+#layout-main div.forum span.postdeleted,
+#layout-main div.forum span.postedited
+{
+	font-style:italic;
+}
+
+#layout-main div.forum div.statistics h3
+{
+	font-size:1.05em;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+#layout-main div.forum div.statistics p
+{
+	font-size:1.1em;
+	line-height:1.3em;
+}
+
+#layout-main div.forum div.poll p,
+#layout-main div.forum div.postbody dl.codebox
+{
+	font-size:1em;
+}
+
+#layout-main div.forum div.postbody dl.codebox dt
+{
+	font-family:"Lucida Grande","Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+	font-size:1em;
+	font-weight:bold;
+}
+
+#layout-main div.forum div.postbody dl.codebox code
+{
+	font-family:Monaco,"Andale Mono","Courier New",Courier,mono;
+	font-size:1.2em;
+}
+
+#layout-main div.forum div.options-box span.desc
+{
+	font-style:italic;
+	font-weight:normal;
+}
+
+#layout-main div.forum div.poll h2
+{
+	font-size:1.6em;
+	font-weight:bold;
+}
+
+#layout-main div.msg_all div.header dt
+{
+	font-size:1.1em;
+	font-weight:bold;
+}
+
+#layout-main div.forumsearch_form dt,
+#layout-main div.forum div.add-box dl dt
+{
+	font-size:1.1em;
+	font-weight:bold;
+}
+
+div.quotebody div.quoteof,
+#layout-main div.forum a.username-coloured,
+#layout-main div.forum div.navbar span.breadcrumbs,
+#layout-main div.forum ul.topics dd.lastpost span a,
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum dl.icon dt,
+#layout-main div.forum div.options-box dt,
+#layout-main div.forum div.poll dl dt,
+#layout-main div.forum div.poll div.pollbar
+{
+	font-weight:bold;
+}
+
+#layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title,
+#layout-main div.forumsearch_form dt span.desc
+{
+	font-weight:normal;
+}
+
+#layout-main div.forum div.navbar span.breadcrumbs,
+#layout-main div.forum div.navbar span.info,
+#layout-main div.forum div.navbar span.messages,
+#layout-main div.forum div.linklist,
+#layout-main div.forum div.signature,
+#layout-main div.forum ul.topics dt,
+#layout-main div.forum dd.lastpost,
+#layout-main div.forum div.options-box dt,
+#layout-main div.forum div.poll dl dd,
+#layout-main div.forum div.poll dl dt,
+#layout-main div.msg_all div.header dd,
+#layout-main div.forum div.rules div.inner,
+#layout-main div.forum div.navbar span.notify,
+#layout-main div.forum div.quickreply textarea
+{
+	font-size:1.1em;
 }

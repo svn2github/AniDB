@@ -1,0 +1,20 @@
+@import "../sub/common.css";
+@import "../anigoogle/anigoogle-layout.css";
+@import "../anigoogle/anigoogle-text.css";
+@import "../anigoogle/anigoogle-border.css";
+@import "../anigoogle/anigoogle-color.css";
+@import "aniblackle-color.css";
+
+#layout-footer:after
+{
+	content:"design by hrm & deridiot inspired by blackle";
+}
+
+button,
+select,
+textarea,
+input,
+#layout-search input.text
+{
+	border:1px solid #888888;
+}
