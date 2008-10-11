@@ -22,8 +22,32 @@ Array.prototype.sum = function(){
 
 /* generic */
 
-/**
- * Adds onload events to window.onload
+function findPos(obj) {
+	var curleft = curtop = 0;
+	if (obj.offsetParent) {
+		do {
+			curleft += obj.offsetLeft;
+			curtop += obj.offsetTop;
+		} while (obj = obj.offsetParent);
+	}
+	return [curleft,curtop];
+}
+
+function addEventSimple(obj,evt,fn) {
+	if (obj.addEventListener)
+		obj.addEventListener(evt,fn,false);
+	else if (obj.attachEvent)
+		obj.attachEvent('on'+evt,fn);
+}
+
+function removeEventSimple(obj,evt,fn) {
+	if (obj.removeEventListener)
+		obj.removeEventListener(evt,fn,false);
+	else if (obj.detachEvent)
+		obj.detachEvent('on'+evt,fn);
+}
+
+/* Adds onload events to window.onload
  * usage: addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
  *    or: addLoadEvent(function() {
  *           more code to run on page load 
@@ -596,6 +620,150 @@ function CookieGet( check_name )
 	return null;
 }
 
+// Tag Search Auto Completion. (C) 2008 antennen 
+// Relies on ajax.js by fahrenheit
+var lastSearch = "";
+var seeDebug = false;
+var searchData = [];
+
+function search() {
+	var target = document.getElementById("tagsearch");
+	var type = this.parentNode.getElementsByTagName("select")[0].value;
+
+	if(this.value.length >= 3 && (type == "animetag" || type == "grouplist" || type == "producerlist")) {
+		// Check if a new search is necessary
+		var ll = lastSearch.length
+		var cl = this.value.length
+		var min = Math.min(ll, cl);
+		
+		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
+			lastSearch = this.value;
+			switch(type) {
+				case "grouplist":
+					var url = 'animedb.pl?show=xml&t=groupsearch&search=';
+					var element = 'group';
+					break;
+				case "animetag":
+					var url = 'animedb.pl?show=xml&t=tagsearch&search=';
+					var element = 'tag';
+					break;
+				case "producerlist":
+					var url = 'animedb.pl?show=xml&t=producersearch&search=';
+					var element = 'producer';
+					break;
+			}
+			xhttpRequestFetch(xhttpRequest(), url + encodeURI(this.value), function(xml) {
+				var root = xml.getElementsByTagName('root').item(0);
+				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
+				searchData = root.getElementsByTagName(element);
+				printTags();
+			});
+		} else printTags(); // Print matched
+	} else target.style.display = "none";
+}
+
+function printTags() {
+	// Clear old result
+	var target = document.getElementById("tagsearch");
+	var search = target.parentNode.parentNode.getElementsByTagName("input")[0]
+	if(target.hasChildNodes()) {
+		while(target.childNodes.length > 0) {
+			target.removeChild(target.firstChild);       
+		} 
+	}
+	// Loop search result and filter
+	var i = 0;
+	var height = 0;
+	for(var n = 0; n < searchData.length; n++) {
+		var tag = searchData[n].getAttribute("name");
+		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
+			var result = document.createElement("li");
+			// do a bit of highlighting //
+			var b = document.createElement('b');
+			var si = tag.toLowerCase().indexOf(search.value.toLowerCase());
+			if (si >= 0) {
+				var firstBlock = document.createTextNode(tag.substring(0,si));
+				var middleBlock = document.createTextNode(tag.substr(si,search.value.length));
+				var lastBlock = document.createTextNode(tag.substring(si+search.value.length,tag.length));
+				result.appendChild(firstBlock);
+				b.appendChild(middleBlock);
+				result.appendChild(b);
+				result.appendChild(lastBlock);
+			} else continue;
+			result.id = 'tag_'+n;
+			result.onclick = function() {
+				var id = Number(this.id.substr(4,this.id.length));
+				var tag = searchData[id].getAttribute("name");
+				search.value = tag;
+				target.style.display = "none";
+			}
+			result.ondblclick = function() { this.onclick(); }
+			result.onmousedown = function() { this.onclick(); }
+			target.appendChild(result);
+			i++;
+		}
+	}
+	
+	target.style.display = "block";
+	target.style.position = "absolute";
+	target.style.left = search.offsetLeft + "px";
+	target.style.top = search.offsetTop + search.offsetHeight + "px";
+	target.style.width = search.offsetWidth - 2 + "px";
+	
+	if(i >= 8) {
+		height = target.firstChild.offsetHeight * 8;
+		if(height > 0) target.style.height = height + "px";
+	} else target.style.height = "auto";
+	
+	// Don't display if tag is matched or no tags are matched
+	if(i == 0 || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())) {
+		target.style.display = "none";
+	}
+}
+
+// Initialize the script
+addLoadEvent(function() {
+	// Find target form
+	var target = document.getElementById("layout-search");
+
+	if(target) {
+		// Find search box and bind stuff to it
+		var textfield = target.getElementsByTagName("input")[0];
+		textfield.id = 'adb.search';
+		textfield.onkeyup = search;
+		textfield.onfocus = search;
+		textfield.onchange = function() {
+			setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
+		}
+		
+		// Find search type dropdown
+		var dropdown = target.getElementsByTagName("select")[0];
+		if(dropdown) {
+			function getSearchTypeChange(value) {
+				if(value == undefined) value = this.value
+				switch(value) {
+					case "animetag":
+					case "grouplist":
+					case "producerlist":
+						textfield.setAttribute("autocomplete", "off");
+						break;
+					default:
+						textfield.setAttribute("autocomplete", "on");
+				}
+			}
+			dropdown.onchange = getSearchTypeChange;
+			getSearchTypeChange(dropdown.value);
+		}
+
+		// Spawn result dropdown
+		result = document.createElement("ul");
+		result.setAttribute("id", "tagsearch");
+		result.className = "acdropdown";
+		result.style.display = "none";
+		textfield.parentNode.appendChild(result);
+	}
+});
+
 //anidb.js code (C) 2003 by PetriW
 function myGetElement(name) { 
     if (document.getElementById) { 
@@ -630,4 +798,4 @@ function cbToggle(files) {
       if (obj)
         obj.checked = !obj.checked; 
     } 
-} 
+}

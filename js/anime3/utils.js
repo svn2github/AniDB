@@ -124,6 +124,52 @@ function cTimeDateHour(data) {
 
 // DOM NODE FUNCTIONS //
 
+/* returns computed style information about a specific element
+ * @param element where to get attributes
+ * @param attribute what to get 
+ */
+function getStyleInformation(element,attribute,debug) {
+	if (!element && attribute) return;
+	var useCurrentStyle = (element.currentStyle) ? true : false;
+	var useGetCumputedStyle = (window.getComputedStyle) ? true : false;
+
+	if (debug) {
+		var result = '';
+		if (!attribute) {
+			if (useGetCumputedStyle)
+				result += '\n!attribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null);
+			if (useCurrentStyle)
+				result += '\n!attribute>useCurrentStyle: ' + element.currentStyle;
+		} else {
+			if (useGetCumputedStyle)
+				result += '\nattribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null)[attribute];
+			if (useCurrentStyle)
+				result += '\nattribute>useCurrentStyle: ' + element.currentStyle[attribute];
+		}
+		alert('useCurrentStyle: '+useCurrentStyle+
+			'\nuseGetCumputedStyle: '+useGetCumputedStyle+
+			'\nelement: '+element+
+			'\nattribute: '+attribute+
+			'\nresult: '+result
+		);
+	}
+	
+	if (!attribute) {
+		if (useGetCumputedStyle)
+			return window.getComputedStyle(element,null);
+		else if (useCurrentStyle)
+			return element.currentStyle;
+		else return '';
+	} else {
+		if (useGetCumputedStyle)
+			return window.getComputedStyle(element,null)[attribute];
+		else if (useCurrentStyle)
+			return element.currentStyle[attribute];
+		else return '';
+	}
+	return null;
+}
+
 /* Returns the nodeValue of a given node
  * @param node The node where to extract information
  * @return String containing node data
@@ -137,6 +183,24 @@ function nodeData(node) {
 // STUBS //
 function doNothing() { return false; }
 function notImplemented() { alert('Not implemented yet'); }
+
+/* Replace a node with its children -- delete the item and move its children up one level in the hierarchy */
+function replaceNodeWithChildren(theNode) {
+	var theChildren = new Array();
+	var theParent = theNode.parentNode;
+	
+	if (theParent != null) 	{
+		for (var i = 0; i < theNode.childNodes.length; i++)
+			theChildren.push(theNode.childNodes[i].cloneNode(true));
+			
+		for (var i = 0; i < theChildren.length; i++)
+			theParent.insertBefore(theChildren[i], theNode);	
+			
+		theParent.removeChild(theNode);
+		return theParent;
+	}
+	return true;
+}
 
 /* Debug function that shows the dom tree of a node
  * @param node The node to show the tree
@@ -235,6 +299,18 @@ function createHeader(parentNode, className, text, abbr, anidbSort, colSpan) {
 	if (parentNode != null) parentNode.appendChild(th);
 	else return th;
 }
+function createDT(parentNode, className, text, abbr) {
+	var dt = document.createElement('dt');
+	if (className) dt.className = className;
+	if (abbr != null) {
+		var abbreviation = document.createElement('abbr');
+		abbreviation.title = abbr;
+		if (text != null) abbreviation.appendChild(document.createTextNode(text));
+		dt.appendChild(abbreviation);
+	} else if (text != null) dt.appendChild(document.createTextNode(text));
+	if (parentNode) parentNode.appendChild(dt);
+	else return dt;
+}
 
 /* This function creates a simple cell with an optional element
  * @param parentNode The parent node (or null if you want to return the object)
@@ -249,6 +325,13 @@ function createCell(parentNode, className, someElement, anidbSort, colSpan) {
 	if (colSpan != null && colSpan > 1) td.colSpan = colSpan;
 	if (parentNode != null) parentNode.appendChild(td);
 	else return td;
+}
+function createDD(parentNode, className, someElement) {
+	var dd = document.createElement('dd');
+	if (className != null) dd.className = className;
+	if (someElement != null) dd.appendChild(someElement);
+	if (parentNode != null) parentNode.appendChild(dd);
+	else return dd;
 }
 
 /* Creates icons
@@ -355,10 +438,12 @@ function createBasicButton(name,value,type) {
 	return button;
 }
 
-function createButton(name,id,disabled,value,type) {
+function createButton(name,id,disabled,value,type,onclick, className) {
 	var button = createBasicButton(name,value,type);
 	if (id && id != '') button.id = id;
 	if (disabled != null) button.disabled = (disabled);
+	if (onclick != null) button.onclick = onclick;
+	if (className != null) button.className = className;
 	return button;
 }
 
@@ -405,6 +490,10 @@ function createSelectArrayN(parentNode,name,id,onchange,selected,optionArray) {
 	for (var i = 0; i < optionArray.length; i++) {
 		var op = optionArray[i];
 		createSelectOption(select, op['text'], op['value'], (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
+		//if (typeof(op) == 'object')
+		//	createSelectOption(select, op['text'], (op['value'] ? op[value] : op['text']), (op['selected'] || op['value'] == selected), (op['class'] ? op['class'] : null), (op['disabled'] ? op['disabled'] : null));
+		//else
+		//	createSelectOption(select, op, op, (op == selected), null, null);
 	}
 	if (parentNode && parentNode != '') parentNode.appendChild(select);
 	else return select;
@@ -547,8 +636,9 @@ function showAlert(func, process, pNode, cNode) {
  */
 function errorAlert(funcName,whereIs) {
 	if (seeDebug) {
-		alert('There was an error while processing '+funcName+' ('+whereIs+')'+
-					'\nPlease inform an AniDB mod about this error.');
+		alert('There was an error while processing '+funcName+'.'+
+			'\nDetails: '+whereIs+
+			'\nPlease inform an AniDB mod about this error.');
 	}
 	return;
 }

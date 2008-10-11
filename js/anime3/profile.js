@@ -116,7 +116,7 @@ function changeStyle() {
 	// else cssurl.style.display = "none";
 	var curStyle = styleList[style_index];
 	if (curStyle.path != "none") {
-		if (curStyle.path == "") cssurl.value = base_url+"css/"+curStyle.name+"/"+curStyle.name+".css";
+		if (curStyle.path == "") cssurl.value = base_url+"css"+((""+window.location.hostname.indexOf('dev.anidb') >= 0) ? "-dev" : "")+"/"+curStyle.name+"/"+curStyle.name+".css";
 		else cssurl.value = curStyle.path;
 	} else cssurl.value = "";
 	updateCurrentStyle();
@@ -674,6 +674,10 @@ function tabWork() {
 		}
 		body.appendChild(tab);
 	}
+	var header = document.createElement('h4');
+	header.className = 'header';
+	header.appendChild(document.createTextNode('Javascript'));
+	jsdiv.appendChild(header);
 	jsdiv.appendChild(body);
 	jsdiv.appendChild(document.createElement('br'));
 	var ul = document.createElement('ul');

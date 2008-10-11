@@ -36,13 +36,16 @@ function parseData(xmldoc) {
 function showResults() {
 	resultsDiv = document.getElementById('resultsDiv');
 	if (resultsDiv) resultsDiv.parentNode.removeChild(resultsDiv);
-	var div = document.createElement('div');
+	var div = document.createElement('ul');
 	div.id = 'resultsDiv';
-	div.className = 'quickResults';
+	div.className = 'acdropdown';
+	div.style.display = "block";
+	div.style.position = "absolute";
+	div.style.width = inputBox.offsetWidth - 3 + "px";
 	for (var i = 0; i < tags.length; i++) {
 		var tag = tags[i];
 		var b = document.createElement('b');
-		var span = document.createElement('span');
+		var span = document.createElement('li');
 		var si = tag.name.toLowerCase().indexOf(searchString.toLowerCase());
 		if (si >= 0) {
 			var firstBlock = document.createTextNode(tag.name.substring(0,si));
@@ -54,8 +57,6 @@ function showResults() {
 			span.appendChild(lastBlock);
 		} else continue;
 		span.id = 'tag_'+i;
-		span.onmouseout = function onmouseout(event) { this.style.pointer = 'none'; this.style.textDecoration = 'none'; }
-		span.onmouseover = function onmouseover(event) { this.style.cursor = 'pointer'; this.style.textDecoration = 'underline'; }
 		span.onclick = function onclick(event) {
 			var id = Number(this.id.substr(4,this.id.length));
 			var tag = tags[id];
@@ -64,10 +65,15 @@ function showResults() {
 			radioBox2.checked = !tag.is_spoiler;
 			resultsDiv.style.display = 'none';
 		}
+		span.ondblclick = function() { this.onclick(); };
+		span.onmousedown = function() { this.onclick(); };
 		div.appendChild(span);
-		div.appendChild(document.createElement('br'));
 	}
-	//div.onmouseout = function onmouseout(event) { this.style.display = 'none'; }
+	if(tags.length >= 8) {
+		height = div.firstChild.offsetHeight * 8;
+		if (height > 0) div.style.height = height + "px";
+	} else div.style.height = "auto";
+	
 	inputBox.parentNode.appendChild(div);
 	resultsDiv = div;
 }
@@ -82,7 +88,6 @@ function checkSearchString() {
 	var cl = this.value.length;
 	var c1 = lastSearch.substr(0,Math.min(ll,cl));
 	var c2 = this.value.substr(0,Math.min(ll,cl));
-	//alert('lastSearch: '+lastSearch+'\nsearch: '+this.value+'\nc1: '+c1+'\nc2: '+c2);
 	var doSearch = false;
 	if (c1.toLowerCase() == c2.toLowerCase() && ll && cl) doSearch = false;
 	else doSearch = true;
