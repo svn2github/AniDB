@@ -1,11 +1,28 @@
 AnimeDB Template SDK - ChangeLog
-Version: 0.13 - 09.09.2007
-(C) 2003-2007 by EXP
+Version: 0.13.2 - 10.10.2008
+(C) 2003-2008 by EXP, fahrenheit
 
 Get new Versions here: http://forum.anidb.net/viewtopic.php?t=429
 Wiki Page: http://wiki.anidb.info/w/Mylist_export_template_guidelines
 
 ----------------------------------------------------------------------------------------------
+
+ 0.13.3 - 10.10.2008
+   - data files updated
+   - files that have episode relations now show up in the related episode listing
+   - file->ep relations for a given episode are now handled in loop_ep and are called loop_data_ep_fileeprel
+
+ 0.13.2 - 28.07.2008
+   - data files updated
+   - updated jsencodexml
+   - additions in loop_anime_genren:
+       data_anime_genren_weight : Weight of the category
+       data_anime_genren_weight_name : Textual notation of the category weight
+
+ 0.13.1 - 18.02.2008
+   - data files updated (global_genren_loop is not on the dump)
+   - added a new function: jsencodexml (check export_funcs.pm)
+   - Removed the picurl for awards as they aren't present on the anidb and are styled with css instead.
 
  0.13 - 09.09.2007
    - data files updated (global_genren_loop is not on the dump)
