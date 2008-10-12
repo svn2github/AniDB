@@ -508,6 +508,7 @@ function convertLinksOutput(mstr, inner, text, offset, s) {
 		var hrefIndex0 = mstr.indexOf('"',hrefIndex)+1;
 		var hrefIndex1 = mstr.indexOf('"',hrefIndex0+1);
 		href = mstr.substring(hrefIndex0,hrefIndex1);
+		href = href.replace('&amp;','&');
 	}
 	var attIndex = mstr.indexOf('att');
 	if (attIndex >= 0) {
