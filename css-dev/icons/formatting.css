@@ -78,6 +78,11 @@ background-image: url(../icons/formating/list_item.gif);
 background-image: url(../icons/formating/link.gif);
 }
 
+*.f_unlink {
+background-image: url(../icons/formating/unlink.gif);
+opacity: 0.60;
+}
+
 *.f_separator {
 background-image: url(../icons/formating/separator.gif);
 }
@@ -104,6 +109,10 @@ background-image: url(../icons/formating/preview.gif);
 
 *.f_spoiler {
 background-image: url(../icons/formating/spoiler.gif);
+}
+
+*.f_code {
+background-image: url(../icons/formating/code.gif);
 }
 
 *.f_buddy {

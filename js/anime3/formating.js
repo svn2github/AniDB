@@ -68,9 +68,9 @@ FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'acce
                'insertunorderedlist':{'id':"InsertUnorderedList",'desc':"Unordered list: [ul]text[/ul] (alt+l)",'accesskey':"l",'text':"ul",'start':"[ul]",'end':"[/ul]",'active':false},
 			   'insertlistitem':{'id':"InsertListItem",'desc':"List Item: [li]text[/li] (alt+e)",'accesskey':"e",'text':"li",'start':"[li]",'end':"[/li]",'active':false},
 			   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':'[spoiler]','end':'[/spoiler]','active':false},
-               'link':{'id':"CreateLink",'desc':"Link text: [type:attribute:text] (alt+h)",'accesskey':"h",'text':"href",'start':"[",'end':"]",'active':false},
-			   'unlink':{'id':"RemoveLink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false},
-			   'code':{'id':"Code",'desc':"Code",'accesskey':null,'text':"code",'start':"[code]",'end':"[/code]",'active':false},
+               'link':{'id':"CreateLink",'desc':"Link text: [url=href]text[/url] (alt+h)",'accesskey':"h",'text':"href",'start':"[",'end':"]",'active':false},
+			   'unlink':{'id':"unlink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false},
+			   'code':{'id':"Code",'desc':"Code: [code]text[/code]",'accesskey':null,'text':"code",'start':"[code]",'end':"[/code]",'active':false},
 			   };
 ModeMap = new Array('Mode: Off','Mode: Assisted','Mode: Visual');
 
@@ -365,7 +365,8 @@ function checkButtonState(iframe, resubmit) {
 				setButtonState(controls, 'code', true);
 				break;
 			case "a":
-				setButtonState(controls, 'link', true);
+				setButtonState(controls, 'link', false);
+				setButtonState(controls, 'unlink', true);
 				break;
 			case "i":
 			case "em":
@@ -730,7 +731,7 @@ function createControls(parentNode, id, mode) {
 	if (mode == null) mode = currentFMode;
 	buttonList = {'0':[],
 				  '1':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','insertlistitem','code','spoiler','link'],
-				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','code','spoiler','link']};
+				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','code','spoiler','link','unlink']};
 
 	var div = document.createElement('div');
 	div.className = 'format-buttons f_controls';
