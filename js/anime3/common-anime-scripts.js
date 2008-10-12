@@ -295,7 +295,8 @@ function createGroupIcons(group) {
 	a.style.cursor = 'pointer';
 	icons['expand'] = a;
 	icons['note'] = document.createTextNode(' ');
-	icons['comment'] = createLink(null,'cmt','animedb.pl?show=threads&do=animegroup&id='+group.agid,null,null,'Comment on this release','i_icon i_forum_link');
+	icons['comment'] = createLink(null,'cmt','animedb.pl?show=threads&do=animegroup&cmt=1&id='+group.agid,'anidb::popup',null,'Comment on this release','i_icon i_group_comment 600.500.1.1.agcmts');
+	icons['forum'] = createLink(null,'forum','animedb.pl?show=threads&do=animegroup&id='+group.agid,'anidb::popup',null,'View the forum for this release','i_icon i_forum_link 600.500.1.1.agcmts');
 	icons['vote'] = createLink(null,
 				   (group.userRating > -1) ? '['+group.userRating+']' : 'rate it','animedb.pl?show=agvote&id='+group.agid,
 				   'anidb::popup',
@@ -394,6 +395,7 @@ function createGroupRow(gid,cols,skips) {
 				var cell = createCell(null, col['classname'], null, null, colSpan);
 				if (uid) {
 					cell.appendChild(icons['comment']);
+					cell.appendChild(icons['forum']);
 					cell.appendChild(icons['vote']);
 					cell.appendChild(icons['edit']);
 					row.appendChild(cell);
