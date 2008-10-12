@@ -68,6 +68,7 @@ var g_note = null;
 // remove some cols from the default definitions
 var fileCols = cloneArray(genFileCols);
 removeColAttribute("check-mylist",fileCols);
+removeColAttribute("mylist-hashes",fileCols);
 removeColAttribute("mylist-storage",fileCols);
 removeColAttribute("mylist-source",fileCols);
 removeColAttribute("state-mylist",fileCols);
@@ -1030,9 +1031,9 @@ function prepareForSort() {
 		var parentRow = document.getElementById('fid_'+fid);
 		if (!parentRow) { if (seeDebug) alert('Error while preparing for sort at fid: '+fid); continue; }
 		row.parentNode.removeChild(row);
-		var cell = getElementsByClassName(parentRow.getElementsByTagName('TD'),'file expand',true)[0];
+		var cell = getElementsByClassName(parentRow.getElementsByTagName('td'),'file expand',true)[0];
 		if (cell) {
-			var span = cell.getElementsByTagName('SPAN')[0];
+			var span = cell.getElementsByTagName('span')[0];
 			if (span && span.className.indexOf('i_minus') >= 0) span.className = span.className.replace('i_minus','i_plus'); 
 		}
 	}

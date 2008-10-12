@@ -29,6 +29,7 @@ var entriesPerPage = 30;
 var uriObj = new Array();		// Object that holds the URI
 var LAY_FORMATFILESIZE = false;
 var LAY_SHOWCRC = false;
+var IRC_SHOWFILESOURCE = false;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
@@ -55,6 +56,7 @@ var twoInput = null;
 var fileCols = cloneArray(genFileCols);
 removeColAttribute("check-anime",fileCols);
 removeColAttribute("state-anime",fileCols);
+removeColAttribute("anime-hashes",fileCols);
 removeColAttribute("actions-anime",fileCols);
 removeColAttribute("anime-source",fileCols);
 removeColAttribute("resolution",fileCols);
