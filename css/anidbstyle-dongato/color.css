@@ -146,3 +146,33 @@ input[type="submit"]:hover
 {
 	background-color: #CACACA;
 }
+
+#layout-tabs a
+{
+	color: white;
+}
+
+#layout-tabs li.selected a
+{
+	color: #FFAA55;
+}
+
+#layout-tabs ul li a
+{
+	background-color: #666666;
+}
+
+#layout-tabs li.selected a
+{
+	background-color: #4A4A5A;
+}
+
+#layout-tabs li a:hover
+{
+	background-color: #4A4A5A;
+}
+
+#layout-tabs a:hover
+{
+	color: #bbbbbb;
+}
