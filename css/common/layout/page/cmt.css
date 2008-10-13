@@ -788,5 +788,5 @@ div.quotebody div.quote div.quotebody
 
 #layout-main div.forum div.content img
 {
-	width:100%
+	max-width:100%
 }
