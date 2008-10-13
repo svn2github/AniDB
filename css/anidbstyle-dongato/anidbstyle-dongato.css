@@ -447,12 +447,6 @@ div.data caption
 	float: left;
 }
 
-/* hide search options */
-#layout-search div.search form p select
-{
-	display: none !important;
-}
-
 /* improved search options spacing */
 #layout-main ul#cattree .cat a,
 div.permissions span.name
