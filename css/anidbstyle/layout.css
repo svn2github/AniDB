@@ -89,7 +89,7 @@
 	margin-left: 32px;
 }
 
-#layout-search select
+#layout-search div.search form p select
 {
 	display:block !important;
 	float: left;
