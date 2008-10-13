@@ -45,10 +45,17 @@
 
 #layout-main div.latestanimes_anime div.data table
 {
-width: 500px;
+	width: 500px;
 }
 
 #layout-main div.latestanimes_anime div.data table tbody td
 {
-width: 100%;
+	width: 100%;
+}
+
+
+#layout-main div.latestanimes_form form input.year
+{
+	width: 4em;
+	text-align: center;
 }

@@ -1,0 +1,41 @@
+*.i_tv_series
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_tv.gif);
+}
+
+*.i_ova
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_ova.gif);
+}
+
+*.i_tv_special
+{
+	width: 15px;
+	height: 15px;
+	background-image: url(images/type_special.gif);
+}
+
+*.i_ext,
+*.i_ftype_other
+{
+	background-image: url(images/anidb_other.gif);
+}
+
+*.f_spoiler
+{
+	background-image: url(images/f_spoiler.png);
+}
+
+*.i_group_comment
+{
+	background-image: url(images/groupcmnt.gif);
+}
+
+*.i_user_wishlist
+{
+	background-image: url(images/user_wishlist.png);
+}

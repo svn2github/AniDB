@@ -35,7 +35,9 @@
 }
 
 *.i_other, *.i_unknown { 
-	display: none; 
+	width: 15px;
+	height: 15px;
+	background-image: url(../icons/state/anidb_atype_other.gif); 
 }
 
 *.i_recap

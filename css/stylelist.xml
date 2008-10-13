@@ -3,7 +3,7 @@
 	<style name="aniblackle">
 		<title>Aniblackle</title>
 		<creator>Der Idiot</creator>
-		<update>29.09.2008</update>
+		<update>27.09.2008</update>
 		<status>in development</status>
 		<description>Style inspired by blackle.com</description>
 		<path/>
@@ -23,7 +23,7 @@
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>23.08.2008</update>
+		<update>18.02.2008</update>
 		<status>stable (v6)</status>
 		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
@@ -33,7 +33,7 @@
 	<style name="anidbstyle_diebuster">
 		<title>AniDBstyle</title>
 		<creator>edokun</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status>up2date</status>
 		<description>based on anidbstyle</description>
 		<path/>
@@ -43,7 +43,7 @@
 	<style name="anidbstyle-dongato">
 		<title>AniDB Style DonGato's revision</title>
 		<creator>DonGato</creator>
-		<update>23.08.2008</update>
+		<update>01.06.2008</update>
 		<status>in sync with 0.1.50</status>
 		<description>it only works well with Firefox (sorry don't have any more time to spend with IE/Opera)</description>
 		<path/>
@@ -53,7 +53,7 @@
 	<style name="anigoogle">
 		<title>Anigoogle</title>
 		<creator>hrm &amp; Der Idiot</creator>
-		<update>29.09.2008</update>
+		<update>27.09.2008</update>
 		<status>in development</status>
 		<description>Style inspired by Google. Initially started by hrm 2 years ago and currently maintained by Der idiot.</description>
 		<path/>
@@ -63,17 +63,17 @@
 	<style name="anitube">
 		<title>Anitube</title>
 		<creator>Der Idiot</creator>
-		<update>29.09.2008</update>
+		<update>27.09.2008</update>
 		<status>in development</status>
 		<description>Style inspired by Youtube.</description>
 		<path/>
-		<screenshot>none</screenshot>
-		<thumbnail>none</thumbnail>
+		<screenshot>anitube/images/screenshot.png</screenshot>
+		<thumbnail>anitube/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>23.08.2008</update>
+		<update>14.11.2007</update>
 		<status>In development</status>
 		<description>Firefox only. (Works also in Opera, but not so well. Don't even try it with IE :D )</description>
 		<path/>
@@ -83,7 +83,7 @@
 	<style name="fma_style">
 		<title>Fullmetal Alchemist Style</title>
 		<creator>jkaze</creator>
-		<update>23.08.2008</update>
+		<update>09.06.2008</update>
 		<status>Beta v2</status>
 		<description>Viewing some Fullmetal Alchemist characters in the top, with simple design!</description>
 		<path/>
@@ -93,7 +93,7 @@
 	<style name="geassmode">
 		<title>Geass Mode</title>
 		<creator>antennen</creator>
-		<update>05.10.2008</update>
+		<update/>
 		<status>Very Alpha</status>
 		<description>Aiming to be a clean and usable design. Banner features C.C. and Kallen from Code Geass. Everything may change without further notice.</description>
 		<path/>
@@ -103,7 +103,7 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>23.08.2008</update>
+		<update>12.07.2008</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
@@ -113,7 +113,7 @@
 	<style name="haruhistylex">
 		<title>HaruhiStyleX.AniDB</title>
 		<creator>TheJAG</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status>not maintained anymore and replaced by v2</status>
 		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB is developed for Opera at a resolution of 1280x1024 and may not work in any other webbrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
 		<path/>
@@ -123,7 +123,7 @@
 	<style name="haruhistylex-v1.5">
 		<title/>
 		<creator/>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -133,8 +133,9 @@
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>23.08.2008</update>
-		<status>In development</status>
+		<update>19.06.2007</update>
+		<status>In development
+</status>
 		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
@@ -143,7 +144,7 @@
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -153,7 +154,7 @@
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -163,7 +164,7 @@
 	<style name="Lain">
 		<title>Lain</title>
 		<creator>DvdKhl/Arokh</creator>
-		<update>23.08.2008</update>
+		<update>07.08.2008</update>
 		<status>in development</status>
 		<description>Tested with FireFox, IE may work with some changes. 1280x768 Required.</description>
 		<path/>
@@ -173,9 +174,10 @@
 	<style name="luckystyle">
 		<title>LuckyStyle</title>
 		<creator>Breadstone</creator>
-		<update>23.08.2008</update>
+		<update>12.10.2007</update>
 		<status>In development</status>
-		<description>Thanks to B1nhs help i've finally completed my LuckyStyle. I hope you guys (and gals) like it. If you find any bugs or something you think should be fixed just send me a PM.</description>
+		<description>Thanks to B1nhs help i've finally completed my LuckyStyle. I hope you guys (and gals) like it. If you find any bugs or something you think
+should be fixed just send me a PM.</description>
 		<path/>
 		<screenshot>luckystyle/images/screenshot.png</screenshot>
 		<thumbnail>luckystyle/images/thumbnail.png</thumbnail>
@@ -183,7 +185,7 @@
 	<style name="nice-day">
 		<title>Nice Day</title>
 		<creator>epoximator</creator>
-		<update>26.09.2008</update>
+		<update/>
 		<status>Experimental</status>
 		<description>Based on "Beautiful Day" by Kaushal Sheth (http://www.kaushalsheth.com)</description>
 		<path/>
@@ -193,7 +195,7 @@
 	<style name="simplestyle">
 		<title>SimpleStyle</title>
 		<creator>b1nh (AniDB: binhkun)</creator>
-		<update>23.08.2008</update>
+		<update>12.12.2007</update>
 		<status>in development</status>
 		<description>This is my newest AniDB CSS style "SimpleStyle".
 Internet Explorer not supported due to a css bug. 
@@ -206,7 +208,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-blue">
 		<title>sub-blue</title>
 		<creator>epoximator</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -216,7 +218,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-brown">
 		<title>sub-brown</title>
 		<creator>epoximator</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -226,7 +228,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -236,7 +238,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-norwegian-blue">
 		<title>norwegian-blue</title>
 		<creator>PetriW</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -246,7 +248,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-silver">
 		<title>sub-silver</title>
 		<creator>epoximator</creator>
-		<update>27.09.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -266,7 +268,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="zakura-fixed_menu">
 		<title>Zakura (fixed menu edition)</title>
 		<creator>ricce</creator>
-		<update>23.08.2008</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
@@ -276,7 +278,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="zakura-menu">
 		<title>sub-zakura-menu</title>
 		<creator>fahrenheit</creator>
-		<update>23.08.2008</update>
+		<update></update>
 		<status>Test</status>
 		<description>Based on Zakura by Zak and Nice-day by Epoximator</description>
 		<path></path>

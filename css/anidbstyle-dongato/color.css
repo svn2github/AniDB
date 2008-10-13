@@ -141,3 +141,8 @@ input[type="submit"]:hover
 {
 	background-color: #B0B0B1;
 }
+
+#layout-main #htmltagcloud
+{
+	background-color: #CACACA;
+}

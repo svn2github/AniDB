@@ -3,13 +3,19 @@
 {
 	float: left;
 	clear: none;
-	width: 17em;
+	width: 20em;
 }
 
 #layout-main div.userpage_all div.stats table,
 #layout-main div.myplace_all div.stats table
 {
 	width: 95%;
+}
+
+#layout-main div.userpage_all div.stats div table th,
+#layout-main div.myplace_all div.stats div table th
+{
+	width: 60%;
 }
 
 #layout-main div.userpage_all div.stats div table td.value,
@@ -20,8 +26,8 @@
 
 #layout-main div.myplace_all div.latest
 {
-	margin-left: 17.5em;
-	margin-right: 11em;
+	margin-left: 21em;
+	margin-right: 10em;
 	clear: none;
 }
 
@@ -30,14 +36,14 @@
 {
 	float: right;
 	clear: right;
-	margin-bottom: 1em;	
+	margin-bottom: 1em;
 }
 
 #layout-main div.userpage_all div.g_menu,
 #layout-main div.userpage_all div.buddies,
 #layout-main div.userpage_all div.favreviewers
 {
-	width: 10em;
+	width: 11em;
 }
 
 #layout-main div.userpage_all div.buddies ul li,
@@ -49,8 +55,8 @@
 #layout-main div.userpage_all div.userdetails,
 #layout-main div.userpage_all div.userprefs
 {
-	margin-left: 17.5em;
-	margin-right: 11em;
+	margin-left: 18em;
+	margin-right: 13.5em;
 	clear: none;
 }
 
@@ -78,7 +84,7 @@
 
 #layout-main div.userpage_all div.charts
 {
-	width: 700px;
+	width: 800px;
 	height: 600px;
 	margin-left:auto;
 	margin-right:auto;	

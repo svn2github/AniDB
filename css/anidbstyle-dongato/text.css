@@ -1,0 +1,74 @@
+#layout-main .g_list li:first-child:before
+{
+	content: "";
+}
+#layout-main .g_list.limit:before
+{
+	content: "show: ";
+}
+
+#layout-main div.main_all h4,
+#layout-main div.news_all h4
+{
+	font-size: 100%;
+	line-height: 1.2;	
+	font-weight: normal;
+}
+
+#layout-main p.g_vital a
+{
+	color: red;
+	font-weight: bolder;
+}
+
+#layout-menu li.genren:before
+{
+	content: "(";
+}
+
+#layout-menu li.genren:after
+{
+	content: ")";
+}
+
+#layout-main table.filelist tr.undumped td.id a
+{
+	font-weight: bold;
+}
+
+#layout-main table.filelist tr.virtual,
+#layout-main ul.g_list li.selected
+{
+	font-style: italic;
+}
+
+.v_high, .v_med, span.diff,
+#layout-main div.creqmod_all .state.new,
+#layout-main div.creqmod_all .state.return,
+#layout-main div.creqmod_all span.type.del,
+#layout-main div.msg_all tr.new td.state,
+#layout-main div.msg_all tr td.type,
+#layout-main div.mylist_list tr.complete td.stats,
+#layout-main div.mylist_list tr.all_watched td.stats,
+#layout-main div.anime_all div.groups td.lastupdate.new,
+#layout-main div.anime_all div.groups td.state.finished a,
+#layout-main div.anime_all div.groups td.state.complete a,
+#layout-main div.group_released td.state.finished a,
+#layout-main div.group_released td.state.complete a
+{
+ 	font-weight: bold;
+}
+
+#layout-main div.anime_all div.groups td.state.stalled,
+#layout-main div.anime_all div.groups td.state.unknown,
+#layout-main div.group_released td.state.stalled,
+#layout-main div.group_released td.state.unknown
+{
+	font-style: italic;
+}
+
+#layout-main div.anime_all div.groups td.state.dropped,
+#layout-main div.group_released td.state.dropped
+{
+	text-decoration: underline;
+}

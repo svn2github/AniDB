@@ -1,3 +1,10 @@
+*
+{
+	color: inherit;
+	font-size: inherit;
+	font-family: inherit;
+}
+
 #layout-menu
 {
 	position: absolute;

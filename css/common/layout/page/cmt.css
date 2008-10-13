@@ -785,3 +785,8 @@ div.quotebody div.quote div.quotebody
 	margin-right:.2em;
 	margin-top:1em;
 }
+
+#layout-main div.forum div.content img
+{
+	width:100%
+}
