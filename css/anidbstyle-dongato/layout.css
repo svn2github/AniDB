@@ -11,9 +11,9 @@
 	top: 94px;
 	left: 0;
 	width: 142px;
-	height: 603px;
+	height: 700px;
 	padding: 51px 0px 0px 28px;
-	background: transparent url(images/menuback.png) no-repeat top left;
+	background: transparent url(../anidbstyle/images/menuback.png) no-repeat top left;
 }
 
 #layout-menu ul
@@ -26,7 +26,7 @@
 #menu-login
 {
 	position: absolute;
-	top: 420px;
+	top: 520px;
 	left: 8px;
 	line-height: 2;
 }
@@ -34,7 +34,7 @@
 #menu-mod
 {
 	position: absolute;
-	top: 600px;
+	top: 700px;
 	left: 23px;
 	padding: 4px;
 	background-color: #1a2238;
