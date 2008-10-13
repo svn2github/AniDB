@@ -60,25 +60,25 @@
 
 #layout-search
 {
-	background: transparent url(images/backlame.png) repeat-x top;
+	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
 	width: 100%;
 }
 
 #layout-search div.search
 {
-	background: transparent url(images/anidb01toosimple.png) no-repeat top left;
+	background: transparent url(../anidbstyle/images/anidb01toosimple.png) no-repeat top left;
 	height: 94px;
 }
 
 #layout-search div.search form
 {
-	background: transparent url(images/searchback.png) no-repeat top right;
+	background: transparent url(../anidbstyle/images/searchback.png) no-repeat top right;
 	position: absolute;
 	top: 77px;
 	left: auto;
 	right: 0;
 	-right: -1px;
-	width: 152px;
+	width: 250px;
 	height: 57px;
 }
 
@@ -88,20 +88,30 @@
 	margin-left: 32px;
 }
 
+#layout-search select
+{
+	display:block !important;
+	float: left;
+	font-size:10px;
+}
+
 #layout-search div.search form input.text
 {
-	margin-bottom: 2px;
+	width:120px;
+	float: right;
+	margin-right: 5px;
 }
 
 #layout-search div.search form input.submit
 {
-	background: url(http://static.anidb.net/css/icons/orange/button_search.gif) no-repeat top;
+	background: url(../icons/orange/button_search.gif) no-repeat top;
 	padding: 20px 0 0 0;
-	overflow: hidden;
 	width: 63px;
 	height: 14px;
 	border: 0;
 	cursor: pointer;
+	margin-top: 2px;
+	text-indent: -9999px;
 }
 
 #layout-content
