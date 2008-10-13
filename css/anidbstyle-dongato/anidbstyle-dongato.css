@@ -327,12 +327,6 @@ div.cmt_entries div.g_timedentry
 	margin: 2.5em 0 2.5em 0;
 }
 
-/* search input box fix */
-div.search input.text
-{
-	width: 90% !important;
-}
-
 /* add section fix */
 div.mylistadd table,
 div.ed2kdump_options table
