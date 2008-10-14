@@ -572,3 +572,13 @@ table tr.g_odd
 {
 	background-color:#f5f7ff;
 }
+
+a
+{
+	color:#6470C3;
+}
+
+a:hover
+{
+	color:#AA0000;
+}
