@@ -23,3 +23,8 @@
 	padding: 1px 6px 1px 6px;
 	border-bottom: 0;
 }
+
+#layout-tabs li.news
+{
+	display:none;
+}

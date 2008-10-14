@@ -273,3 +273,8 @@ h4,
 {
 	padding:.3em;
 }
+
+#layout-tabs li.news
+{
+	display:inline;
+}
