@@ -161,7 +161,7 @@
 	font-size:150%;
 }
 
-#layout-tabs li.news
+#layout-tabs ul.main-tabs li.news
 {
 	display:none;
 }

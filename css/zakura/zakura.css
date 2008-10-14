@@ -21,6 +21,7 @@
 @import "style-usermenu.css";
 @import "style-content.css";
 @import "zakura-old.css";
+@import "forum-color.css";
 
 #layout-main div.block > div.image{
 	width: 32%;
