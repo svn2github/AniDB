@@ -99,8 +99,3 @@ body.nonav form textarea {
 #layout-footer p:after {
 	content: ". Design by zakness.";
 }
-
-#layout-main div.forum div.topic_actions
-{
-	margin-bottom:2em;
-}
