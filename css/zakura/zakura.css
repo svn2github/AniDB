@@ -133,3 +133,10 @@ div.pagination span strong
 	background-color: #565AB9;
 	color: white;
 }
+
+#layout-tabs ul.main-tabs li a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}

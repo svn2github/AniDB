@@ -21,7 +21,7 @@ div.main_all div.rightbar {
 	float: right;
 	width: 25%;
 	background: #fcfafb url(images/layout/mamimi.png) no-repeat right top;
-	padding: 0.5em 0 0;
+	padding: 14em 0 0;
 	font-size: 0.95em;
 	border: 1px solid #e4e4e4;
 	border-right-color: #d5cccc;
@@ -400,4 +400,11 @@ div.pagination span strong
 {
 	background-color: #565AB9;
 	color: white;
+}
+
+#layout-tabs ul.main-tabs li a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
