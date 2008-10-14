@@ -21,6 +21,7 @@
 @import "style-usermenu.css";
 @import "style-content.css";
 @import "zakura-old.css";
+@import "forum-color.css";
 
 #layout-main div.block > div.image{
 	width: 32%;
@@ -132,4 +133,11 @@ div.pagination span strong
 {
 	background-color: #565AB9;
 	color: white;
+}
+
+#layout-tabs ul.main-tabs li a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }

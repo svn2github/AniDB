@@ -83,6 +83,10 @@ background-image: url(../icons/formating/unlink.gif);
 opacity: 0.60;
 }
 
+.f_img {
+background-image: url(../icons/formating/image.gif);
+}
+
 *.f_separator {
 background-image: url(../icons/formating/separator.gif);
 }

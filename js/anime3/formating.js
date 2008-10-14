@@ -69,6 +69,7 @@ FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'acce
 			   'insertlistitem':{'id':"InsertListItem",'desc':"List Item: [li]text[/li] (alt+e)",'accesskey':"e",'text':"li",'start':"[li]",'end':"[/li]",'active':false},
 			   'spoiler':{'id':"Spoiler",'desc':"Spoiler: [spoiler]text[/spoiler]",'accesskey':"",'text':"spoiler",'start':'[spoiler]','end':'[/spoiler]','active':false},
                'link':{'id':"CreateLink",'desc':"Link text: [url=href]text[/url] (alt+h)",'accesskey':"h",'text':"href",'start':"[",'end':"]",'active':false},
+			   'img':{'id':"insertImage",'desc':"Add an image: [img]url[/img]",'accesskey':null,'text':"img",'start':"[img]",'end':"[/img]",'active':false},
 			   'unlink':{'id':"unlink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false},
 			   'code':{'id':"Code",'desc':"Code: [code]text[/code]",'accesskey':null,'text':"code",'start':"[code]",'end':"[/code]",'active':false},
 			   };
@@ -170,33 +171,15 @@ function formatText(id, n, selected, element) {
 	if (currentFMode == 2) rte.contentWindow.focus();
 	else fta.focus();
 	switch(id.toLowerCase()) {
+		case 'insertimage':
 		case 'createlink':
-			var addLinkWidget = document.getElementById('widget_addlink');
-			if (!addLinkWidget) { errorAlert('formatText','no addlink widget'); return; }
-			addLinkWidget.style.display = '';
-			addLinkWidget.style.left = element.offsetLeft + "px";
-			addLinkWidget.style.top = element.offsetTop + element.offsetHeight + "px";
 			var field = (currentFMode == 2 ? rte.contentWindow : fta);
-			//if (currentFMode == 2) rte.contentWindow.focus(); else fta.focus();
-			var selectionText = selectionMagic(field);
-			var textField = document.getElementById('f_links_text');
-			if (textField) textField.value = selectionText;
-			var confirmButton = document.getElementById('f_links_ok');
-			confirmButton.onclick = function addLink() {
-				var addLinkWidget = document.getElementById('widget_addlink');
-				if (!addLinkWidget) { errorAlert('formatText','no addlink widget'); return; }
-				var rte = document.getElementById('wysiwyg_'+n);
-				var fta = document.getElementById('textArea_'+n);
-				var field = (currentFMode == 2 ? rte.contentWindow : fta);
-				var textField = document.getElementById('f_links_text').value || '';
-				var hrefField = document.getElementById('f_links_href').value || '';
-				if (textField == '') textField = hrefField;
+			var textField = selectionMagic(field) || '';
+			var hrefField = '';
+			if (textField == '' || (textField.indexOf('http://') < 0 && textField.indexOf('https://') < 0)) hrefField = window.prompt("Please type in url.");
+			else hrefField = textField;
+			if (id.toLowerCase() == 'createlink') {
 				var hyperLink = '[url='+hrefField+']'+textField+'[/url]';
-				if (currentFMode != 2) {
-					selectionMagic(field, hyperLink, true);
-					addLinkWidget.style.display = 'none';
-					return;
-				}
 				if (wGS) {
 					hyperLink = field.document.createElement('a');
 					hyperLink.href = hrefField;
@@ -206,8 +189,17 @@ function formatText(id, n, selected, element) {
 					hyperLink = '<a href="'+hrefField+'">'+textField+'</a>';
 					selectionMagic(field, hyperLink, false);
 				}
-				addLinkWidget.style.display = 'none';
-				return;
+			} else if (id.toLowerCase() == 'insertimage') {
+				var hyperLink = '[img]'+hrefField+'[/img]';
+				if (wGS) {
+					hyperLink = field.document.createElement('img');
+					hyperLink.src = hrefField;
+					hyperLink.alt = '';
+					selectionMagic(field, hyperLink, false);
+				} else {
+					hyperLink = '<img src="'+hrefField+'" alt="" />';
+					selectionMagic(field, hyperLink, false);
+				}
 			}
 			break;
 		case 'code':
@@ -361,6 +353,9 @@ function checkButtonState(iframe, resubmit) {
 	
 	while (theParentNode.nodeName.toLowerCase() != "body") {
 		switch (theParentNode.nodeName.toLowerCase()) {
+			case "img":
+				setButtonState(controls, 'img', true);
+				break;
 			case "pre":
 				setButtonState(controls, 'code', true);
 				break;
@@ -526,6 +521,19 @@ function convertLinksOutput(mstr, inner, text, offset, s) {
 	return ("[url="+href+"]"+text+"[/url]");
 }
 
+/* Convert images */
+function convertImagesOutput(mstr, inner, offset, s) {
+	var href = "";
+	var hrefIndex = mstr.indexOf('src');
+	if (hrefIndex >= 0) {
+		var hrefIndex0 = mstr.indexOf('"',hrefIndex)+1;
+		var hrefIndex1 = mstr.indexOf('"',hrefIndex0+1);
+		href = mstr.substring(hrefIndex0,hrefIndex1);
+		href = href.replace('&amp;','&');
+	}
+	return ("[img]"+href+"[/img]");
+}
+
 /* Function that formats an output string
  * @param str String to format
  */
@@ -537,7 +545,7 @@ function convert_output(str) {
 	str = str.replace(/\<div\>/mgi,'');
 	str = str.replace(/\<\/div\>/mgi,'<br />');
 	// Word crap
-	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|img|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
+	str = str.replace(/\<[/]?(div|font|span|xml|del|ins|h\d|[ovwxp]:\w+)[^>]*?\>/mgi,'');
 	str = str.replace(/\<\!\-\-\[.+?\]\-\-\>/mgi,'');
 	str = str.replace(/\<\?xml[^>]*\>/g, "");
 	str = str.replace(/\<[^ >]+:[^>]*\>/g, "");
@@ -569,6 +577,7 @@ function convert_output(str) {
 	str = str.replace(/\[pre\]/mgi,'[code]');
 	str = str.replace(/\[\/pre\]/mgi,'[/code]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
+	str = str.replace(/\<img([^\>].+?)\>/mgi,convertImagesOutput);
 	
 	/* Just a bit of beautifier */
 	str = str.replace(/\[\/li\]\[li\]/mgi,'[/li]\n[li]');
@@ -605,6 +614,7 @@ function convert_input(str) {
 	str = str.replace(/\<\/ol\>\<br \/\>\<br \/\>/mgi,'</ol></br>');
 	str = str.replace(/\[url=([^\[\]].+?)\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$2</a>');
 	str = str.replace(/\[url\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$1</a>');
+	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
 	return (str);
 }
 
@@ -730,8 +740,8 @@ function createLinkWindow(parentNode) {
 function createControls(parentNode, id, mode) {
 	if (mode == null) mode = currentFMode;
 	buttonList = {'0':[],
-				  '1':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','insertlistitem','code','spoiler','link'],
-				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','code','spoiler','link','unlink']};
+				  '1':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','insertlistitem','code','spoiler','link','img'],
+				  '2':['bold','italic','underline','strikethrough','insertorderedlist','insertunorderedlist','code','spoiler','link','unlink','img']};
 
 	var div = document.createElement('div');
 	div.className = 'format-buttons f_controls';
