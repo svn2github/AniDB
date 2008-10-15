@@ -178,8 +178,14 @@ function formatText(id, n, selected, element) {
 			var hrefField = '';
 			if (textField == '' || (textField.indexOf('http://') < 0 && textField.indexOf('https://') < 0)) hrefField = window.prompt("Please type in url.");
 			else hrefField = textField;
+			var hyperLink = textField;
+			if (id.toLowerCase() == 'createlink') hyperLink = '[url='+hrefField+']'+textField+'[/url]';
+			else if (id.toLowerCase() == 'insertimage') hyperLink = '[img]'+hrefField+'[/img]';
+			if (currentFMode != 2) { 
+				selectionMagic(field, hyperLink, true);
+				return;
+			}
 			if (id.toLowerCase() == 'createlink') {
-				var hyperLink = '[url='+hrefField+']'+textField+'[/url]';
 				if (wGS) {
 					hyperLink = field.document.createElement('a');
 					hyperLink.href = hrefField;
@@ -190,7 +196,7 @@ function formatText(id, n, selected, element) {
 					selectionMagic(field, hyperLink, false);
 				}
 			} else if (id.toLowerCase() == 'insertimage') {
-				var hyperLink = '[img]'+hrefField+'[/img]';
+				hyperLink = '[img]'+hrefField+'[/img]';
 				if (wGS) {
 					hyperLink = field.document.createElement('img');
 					hyperLink.src = hrefField;
@@ -708,34 +714,6 @@ function updateAttributeHelpText() {
 	else attr.disabled = false;
 }
 
-/* Function that creates the link window */
-function createLinkWindow(parentNode) {
-	var div = document.createElement('div');
-	div.id = 'widget_addlink';
-	div.className = 'dialogBox';
-	div.style.display = 'none';
-	var table = document.createElement('table');
-	var tbody = document.createElement('tbody');
-	var row = document.createElement('tr');
-	createHeader(row, null, 'URL');
-	createCell(row, null, createTextInput('f_links_href',null,false,false,null,null));
-	tbody.appendChild(row);
-	row = document.createElement('tr');
-	createHeader(row, null, 'Text');
-	createCell(row, null, createTextInput('f_links_text',null,false,false,null,null));
-	tbody.appendChild(row);
-	table.appendChild(tbody);
-	div.appendChild(table);
-	// Create buttons for the drag window //
-	var buttons = new Array();
-	buttons.push(createButton('f_links_cancel','f_links_cancel',false,'Cancel','button',function hideBox() { document.getElementById('widget_addlink').style.display = 'none'; }, 'button dialogButton dialogCancel'));
-	buttons.push(createButton('f_links_ok','f_links_ok',false,'Add','button',null,'confirmButton dialogButton dialogConfirm'));
-	// add drag and drop behaviour
-	dragDrop.initElement(div,'Create link', null, buttons);
-	if (parentNode) parentNode.appendChild(div);
-	else return div;
-}
-
 /* Function that creates the controls */
 function createControls(parentNode, id, mode) {
 	if (mode == null) mode = currentFMode;
@@ -920,7 +898,6 @@ function initFormating() {
 
 function prepPage() {
 	initFormating();
-	createLinkWindow(document.getElementById('layout-content'));
 }
 
 //window.onload = prepPage;
