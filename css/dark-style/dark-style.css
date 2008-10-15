@@ -953,12 +953,6 @@ div.genren_all li span
 	background-image:url(images/anidb_uncensored.gif);
 }
 
-*.i_audio
-{
-	background-image:url(images/anidb_audio.gif);
-	display:none;
-}
-
 *.i_video
 {
 	background-image:url(images/anidb_video.gif);
