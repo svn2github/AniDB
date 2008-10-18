@@ -1,10 +1,16 @@
 (C) 2008 by Nyxx, Styling based on "XML-Dark" template by epoximator
-Version: 0.7 (2008-08-10)
+Version: 0.7.1 (2008-10-18)
 
-Small (but growing) all-in-one list using the XSLT rendering capabilities of
-modern W3C standard compliant browsers. No (ed2k-)files or subtitle related
-informations!
+The intention of this list is to have a small (by file sizes) list with
+all basic informations about the animes and their episodes on your list.
+So you can show this list to everyone and even put it on your website.
+The list does *not* contain any informations about your files or the subs!
 
-For useful feedback use the AniDB Forum.
+The main focus is using the XSLT rendering capabilities of modern W3C
+standard compliant browsers. And keeping everything small and simple
+but still with some useful features.
+
+For feedback use the AniDB forum.
 
 Tested with Opera 9.5 and Firefox 2/3.
+Internet Explorer is not tested but generally should work fine too.

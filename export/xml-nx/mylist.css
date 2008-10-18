@@ -59,15 +59,16 @@ tr.invisible {
 	display:none;
 }
 a {
-	color: #FFFFFF;
+	color: #D0E0FF;
 	text-decoration: none;
+}
+a:hover {
+	color: #99CCFF;
+	text-decoration: underline;
 }
 select {
 	font-size: inherit;
 	font-family: inherit;
-}
-a:hover {
-	color: #99CCFF;
 }
 .right {
 	text-align: right;
@@ -80,6 +81,13 @@ a:hover {
 }
 .waiting {
 	cursor: wait !important;
+}
+.copyright {
+	background-color: #000000;
+	color: #404090 !important;
+}
+.ep_comment {
+	font-weight: normal;
 }
 #optionsheader {
 	background-color: #005000;

@@ -11,12 +11,14 @@
 <xsl:param name="optionsVisible" select="0"/>
 
 <xsl:template match="AC">
+		<xsl:variable name="colcount" select="15"/>
+		<a name="top"/>
 		<xsl:call-template name="Options"/>
 		<table width="100%" border="0">
 			<colgroup width="1%">
 				<col/>
 				<col width="86%"/>
-				<col span="13"/>
+				<col><xsl:attribute name="span"><xsl:value-of select="$colcount"/></xsl:attribute></col>
 			</colgroup>
 			<thead>
 				<xsl:call-template name="Headers"/>
@@ -27,7 +29,18 @@
 			<tbody>
 				<xsl:apply-templates select="A[($typeFilter='*' or T=$typeFilter) and ($ratingFilter&lt;0 or floor(@r)=$ratingFilter) and ($watchedFilter=-1 or ($watchedFilter=0 and @we=0) or ($watchedFilter=1 and @we&gt;0) or ($watchedFilter=2 and @we&gt;0 and @w=0) or ($watchedFilter=3 and @w=1)) and ($completeFilter=-1 or (@c=$completeFilter)) and position()&lt;=$maxRows]">
 					<xsl:sort select="N" data-type="text" order="ascending" />
+					<xsl:sort select="N" data-type="text" order="ascending" />
 				</xsl:apply-templates>
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<tr>
+					<td><a href="#top">&#8657; top</a></td>
+					<td id="copyright" class="copyright"><xsl:attribute name="colspan"><xsl:value-of select="$colcount - 1"/></xsl:attribute>
+						<a href="http://anidb.net/" target="anidb" class="copyright">AniDB</a> Mylist Template (c) 2008 by <a href="http://anidb.net/up56351" target="anidb" class="copyright">Nyxx</a>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 </xsl:template>
@@ -103,7 +116,7 @@
 					<td class="left"><xsl:value-of select="$title"/> &#160;(<a target="anidb" href="http://anidb.net/a{@i}" onclick="event.stopPropagation();">&#35;<xsl:value-of select="@i"/></a>)</td>
 					<td class="right"><xsl:value-of select="@y"/></td>
 					<td><xsl:value-of select="T"/></td>
-					<td class="right"><xsl:value-of select="@e"/></td>
+					<td class="right"><xsl:choose><xsl:when test="@e=0">&#8734;</xsl:when><xsl:otherwise><xsl:value-of select="@e"/></xsl:otherwise></xsl:choose></td>
 					<td class="right"><xsl:if test="@es &gt; 0"><xsl:value-of select="@es"/></xsl:if></td>
 					<td class="right"><xsl:if test="@we &gt; 0"><xsl:value-of select="@we"/></xsl:if></td>
 					<td class="right"><xsl:if test="@ws &gt; 0"><xsl:value-of select="@ws"/></xsl:if></td>

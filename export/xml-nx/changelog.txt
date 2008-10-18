@@ -1,3 +1,9 @@
+2008-10-18	v0.7.1
+	added: bottom line with link to top and copyright message
+	changed: styling (css): links, selected episodes summary line
+	changed: sort always by name descending as second sort criteria
+	changed: when no number of episodes given (almost endlessly running animes like Naruto), use infinite symbol
+
 2008-08-10	v0.7
 	changed: moved anime details to separate XSL (mylistc.xsl)
 	changed: load anime details on demand (=when clicking on anime) using a separate XSL, should reduce list rendering time
