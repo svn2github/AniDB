@@ -621,6 +621,8 @@ function updateGroupTable() {
 			headingTest.className = headingTest.className.replace('cmts','threads');
 			headingTest.className += ' c_set';
 		}
+		headingTest = getElementsByClassName(headingList,'threads',true)[0];
+		if (headingTest) headingTest.className += ' c_set';
 		init_sorting(thead.rows[0],'epno','up');
 	}
 	// add filtering and stuff to tfoot
