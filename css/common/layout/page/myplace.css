@@ -3,19 +3,13 @@
 {
 	float: left;
 	clear: none;
-	width: 20em;
+	width: 18em;
 }
 
 #layout-main div.userpage_all div.stats table,
 #layout-main div.myplace_all div.stats table
 {
 	width: 95%;
-}
-
-#layout-main div.userpage_all div.stats div table th,
-#layout-main div.myplace_all div.stats div table th
-{
-	width: 60%;
 }
 
 #layout-main div.userpage_all div.stats div table td.value,
@@ -26,7 +20,7 @@
 
 #layout-main div.myplace_all div.latest
 {
-	margin-left: 21em;
+	margin-left: 19em;
 	margin-right: 10em;
 	clear: none;
 }
@@ -84,7 +78,7 @@
 
 #layout-main div.userpage_all div.charts
 {
-	width: 800px;
+	width: 700px;
 	height: 600px;
 	margin-left:auto;
 	margin-right:auto;	
