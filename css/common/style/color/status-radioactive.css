@@ -7,8 +7,8 @@
 }
 
 #layout-main td del,
-#layout-content div.myvotes_all table tr.g_odd.low td,
-#layout-content div.myvotes_all table tr.low td
+#layout-main div.myvotes_all table tr.g_odd.low td,
+#layout-main div.myvotes_all table tr.low td
 {
 	background-color: #BF6269;
 }
@@ -17,18 +17,20 @@
 #layout-main table.filelist tr.good,
 #layout-main div.myvotes_all table tr.high td,
 #layout-main div.producer_all table tr.mylist,
-#layout-content div.group_released table tr.mylist,
+#layout-main div.group_released table tr.mylist,
+#layout-main div.schedule_all table tr.mylist,
 #layout-main div.forum div.comment div.content strong,
 #layout-main div.forum a.topictitle strong
 {
 	background-color: #6FCF7F;
 }
 
-#layout-content td.g_odd ins,
-#layout-content table.filelist tr.g_odd.good,
-#layout-content div.myvotes_all table tr.g_odd.high td,
-#layout-content div.producer_all table tr.g_odd.mylist,
-#layout-content div.group_released table tr.g_odd.mylist
+#layout-main td.g_odd ins,
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.myvotes_all table tr.g_odd.high td,
+#layout-main div.producer_all table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main div.schedule_all table tr.g_odd.mylist
 {
 	background-color: #6FC279;
 }
