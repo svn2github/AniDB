@@ -21,7 +21,8 @@ var genFileCols = [ {'name':"check-mylist",'classname':"check",'header':"S",'abb
 					{'name':"resolution",'classname':"resolution",'nogenerics':true,'header':"Resolution",'sort':"c_set"},
 					{'name':"anime-source",'classname':"source",'nogenerics':true,'header':"Source",'sort':"c_latin"},
 					{'name':"quality",'classname':"quality",'nogenerics':true,'header':"Quality",'sort':"c_set"}, 
-					{'name':"hashes",'classname':"hash icons ed2k",'nogenerics':true,'header':"Hash",'headclass':"hash"},
+					{'name':"mylist-hashes",'classname':"misc icons",'nogenerics':true,'header':"Misc",'headclass':"hash"},
+					{'name':"anime-hashes",'classname':"hash icons ed2k",'nogenerics':true,'header':"Hash",'headclass':"hash"},
 					{'name':"users",'classname':"users count",'header':"Users",'headclass':"users",'sort':"c_set"},
 					{'name':"mylist-storage",'classname':"storage text",'header':"Storage",'headclass':"storage"}, 
 					{'name':"mylist-source",'classname':"source text",'header':"Source",'headclass':"source"},
@@ -50,7 +51,7 @@ var genGroupCols = [{'name':"expand",'classname':"expand",'header':"X",'abbr':"E
 					{'name':"specials",'classname':"specials number",'nogenerics':true,'header':"SP",'headclass':"specials",'abbr':"Number of specials"},
 					{'name':"langs",'classname':"languages",'nogenerics':true,'header':"Languages"}, 
 					{'name':"rating",'classname':"rating",'nogenerics':true,'header':"Rating"},
-					{'name':"cmts",'classname':"cmts number",'nogenerics':true,'header':"Cmts",'headclass':"cmts",'abbr':"Comments"}, 
+					{'name':"cmts",'classname':"threads number",'nogenerics':true,'header':"Cmts",'headclass':"threads",'abbr':"Comments"}, 
 					{'name':"actions",'classname':"icons action",'nogenerics':true,'header':"Action",'headclass':"action"}	];
 					
 var genAnimeCols = [{'name':"expand",'classname':"expand",'header':"X",'abbr':"Expand/fold"},
@@ -701,7 +702,9 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 				createCell(row, col['classname'], document.createTextNode((mylistEntry.storage ? mylistEntry.storage : "")), null, colSpan);
 				break;
 			case 'mylist-source':
-				createCell(row, col['classname'], document.createTextNode((mylistEntry.source ? mylistEntry.source : "")), null, colSpan);
+				var text = (mylistEntry.source ? mylistEntry.source : "");
+				if (IRC_SHOWFILESOURCE) text = file.source;
+				createCell(row, col['classname'], document.createTextNode(text), null, colSpan);
 				break;
 			case 'users':
 				cell = createCell(null, col['classname'],createLink(null, file.usersTotal, 'animedb.pl?show=userlist&fid=' + file.id, null, null, 'total users', null),file.usersTotal, colSpan);
@@ -775,10 +778,17 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 			case 'quality':
 				createCell(row, 'quality '+file.quality, icons['quality'], mapQuality(file.quality), null, colSpan);
 				break;
-			case 'hashes':
+			case 'anime-hashes':
 				cell = createCell(null, col['classname'], null, null, colSpan);
 				if (uid != undefined && file.ed2k != '') cell.onmouseover = createHashLink;
 				if (icons['ed2k']) cell.appendChild(icons['ed2k']);
+				if (icons['crc']) cell.appendChild(icons['crc']);
+				if (icons['avdump']) cell.appendChild(icons['avdump']);
+				row.appendChild(cell);
+				break;
+			case 'mylist-hashes':
+				cell = createCell(null, col['classname'], null, null, colSpan);
+				if (uid != undefined && file.ed2k != '') cell.onmouseover = createHashLink;
 				if (icons['crc']) cell.appendChild(icons['crc']);
 				if (icons['avdump']) cell.appendChild(icons['avdump']);
 				row.appendChild(cell);

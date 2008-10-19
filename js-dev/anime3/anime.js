@@ -588,6 +588,8 @@ function updateGroupTable() {
 					cell.setAttribute('anidb:sort',(group.rating == '-') ? '0' : group.rating);
 				if (className.indexOf('cmts') >= 0)
 					cell.setAttribute('anidb:sort',group.commentCount);
+				if (className.indexOf('threads') >= 0)
+					cell.setAttribute('anidb:sort',group.commentCount);
 				if (className.indexOf('action') >= 0) {
 					if (uriObj['gid'] && uriObj['gid'] == gid && gid >= 0)
 						createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
@@ -615,7 +617,10 @@ function updateGroupTable() {
 		headingTest = getElementsByClassName(headingList,'rating',true)[0];
 		if (headingTest) headingTest.className += ' c_set';
 		headingTest = getElementsByClassName(headingList,'cmts',true)[0];
-		if (headingTest) headingTest.className += ' c_set';
+		if (headingTest) {
+			headingTest.className = headingTest.className.replace('cmts','threads');
+			headingTest.className += ' c_set';
+		}
 		init_sorting(thead.rows[0],'epno','up');
 	}
 	// add filtering and stuff to tfoot

@@ -51,7 +51,7 @@ var genGroupCols = [{'name':"expand",'classname':"expand",'header':"X",'abbr':"E
 					{'name':"specials",'classname':"specials number",'nogenerics':true,'header':"SP",'headclass':"specials",'abbr':"Number of specials"},
 					{'name':"langs",'classname':"languages",'nogenerics':true,'header':"Languages"}, 
 					{'name':"rating",'classname':"rating",'nogenerics':true,'header':"Rating"},
-					{'name':"cmts",'classname':"cmts number",'nogenerics':true,'header':"Cmts",'headclass':"cmts",'abbr':"Comments"}, 
+					{'name':"cmts",'classname':"threads number",'nogenerics':true,'header':"Cmts",'headclass':"threads",'abbr':"Comments"}, 
 					{'name':"actions",'classname':"icons action",'nogenerics':true,'header':"Action",'headclass':"action"}	];
 					
 var genAnimeCols = [{'name':"expand",'classname':"expand",'header':"X",'abbr':"Expand/fold"},
