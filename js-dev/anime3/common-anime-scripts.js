@@ -882,7 +882,7 @@ function createPreferencesTable(type) {
 	mylist_add_state = CookieGet('mylist_add_state') || 0;
 	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	group_check_type = CookieGet('group_check_type') || 0;
-	//group_langfilter = CookieGet('group_langfilter') || 1;
+	group_langfilter = CookieGet('group_langfilter') || 1;
 	var storedTab = CookieGet('tab') || '';
 	
 	/* create preferences tabs */
@@ -1130,15 +1130,13 @@ function createPreferencesTable(type) {
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprecated Standard Definition files (video resolution height < 720)'));
 				ul.appendChild(li);
-/*
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var ck = createCheckbox('group_langfilter',Number(group_langfilter));
 				ck.onchange = function() { changeOptionValue(this); group_langfilter = Number(this.checked); }
 				li.appendChild(ck);
-				li.appendChild(document.createTextNode(' Filter groups in group table according  to language preferences'));
+				li.appendChild(document.createTextNode(' Filter groups in group table according to language preferences (bypasses profile option if enabled)'));
 				ul.appendChild(li);
-*/
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';
 				actionLI.appendChild(document.createTextNode('Actions: '));
@@ -1149,7 +1147,7 @@ function createPreferencesTable(type) {
 				var saveInput = createBasicButton('do.save','save preferences');
 				saveInput.onclick = function saveSettings() {
 					CookieSet('group_check_type',group_check_type);
-					//CookieSet('group_langfilter',group_langfilter);
+					CookieSet('group_langfilter',group_langfilter);
 					alert('Current Group preferences saved.');
 				}
 				actionLI.appendChild(saveInput);
