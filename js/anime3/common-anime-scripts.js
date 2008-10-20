@@ -73,6 +73,7 @@ var mylist_add_state = 0;
 var mylist_add_fstate = 0;
 var group_check_type = 0;
 var group_langfilter = 1;
+var IRC_SHOWFILESOURCE = false;
 
 /* This is an auxiliar function that removes a given attribute from the cols
  * @param name Name of the column to remove
