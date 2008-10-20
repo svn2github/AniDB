@@ -72,8 +72,7 @@ var mylist_add_viewed_state = 0;
 var mylist_add_state = 0;
 var mylist_add_fstate = 0;
 var group_check_type = 0;
-var group_langfilter = 1;
-var IRC_SHOWFILESOURCE = false;
+var group_langfilter = 0;
 
 /* This is an auxiliar function that removes a given attribute from the cols
  * @param name Name of the column to remove
@@ -1136,7 +1135,7 @@ function createPreferencesTable(type) {
 				var ck = createCheckbox('group_langfilter',Number(group_langfilter));
 				ck.onchange = function() { changeOptionValue(this); group_langfilter = Number(this.checked); }
 				li.appendChild(ck);
-				li.appendChild(document.createTextNode(' Filter groups in group table according  to language preferences'));
+				li.appendChild(document.createTextNode(' Filter groups in group table according to language preferences (bypasses profile option if enabled)'));
 				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';

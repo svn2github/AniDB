@@ -476,7 +476,7 @@ function tabWork() {
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	var group_check_type = CookieGet('group_check_type') || 0;
-	var group_langfilter = CookieGet('group_langfilter') || 1;
+	//var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 2;
 	var storedTab = CookieGet('tab') || '';
 	
@@ -652,7 +652,7 @@ function tabWork() {
 				var ck = createCheckbox('group_langfilter',group_langfilter);
 				ck.onchange = function() { changeOptionValue(this); group_langfilter = Number(this.checked); }
 				li.appendChild(ck);
-				li.appendChild(document.createTextNode(' Filter groups in group table according  to language preferences'));
+				li.appendChild(document.createTextNode(' Filter groups in group table according to language preferences (bypasses profile option if enabled)'));
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
