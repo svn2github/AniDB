@@ -19,21 +19,27 @@ public class EpProcessing {
     
     public cUser UserSettings = new cUser();
     
-    private static String[] supportedFiles={"avi", "mkv", "ogm", "mpg", "mp4"}; //to move
+    //FIXME: This is a bad idea on its own! (Better to hash a few too many
+    //files than too few)
+    private static String[] supportedFiles={"avi", "mpg", "mpeg", "rm", "rmvb",
+	"asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt",
+	"sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"};
     //Check if this file is a video file by looking at extension
     public static boolean isVideoFile(File file){
         for(String s:EpProcessing.supportedFiles)
-            if(file.getName().endsWith(s))
+            if(file.getName().toLowerCase().endsWith(s))
                 return true;
         return false;
     }
     
     public enum eRenameStyle {standard, dbstandard, profile, custom}
     public String GetRenamedFileName(cFileInfo FileInfo, eRenameStyle Style) {
-        String SName, EpName, GroupName, EpNo, Ext;
+        String SName, EpName, GroupName, EpNo;
         String FN = "";
         String AbsPath = FileInfo.FilePath.getPath();
         AbsPath = AbsPath.substring(0, AbsPath.lastIndexOf(File.separatorChar));
+	String DB_FN = (String)FileInfo.Data.get("DB_FileName");
+	String Ext = DB_FN.substring(DB_FN.lastIndexOf("."));
         
         switch (Style) {
             case standard:
@@ -42,17 +48,16 @@ public class EpProcessing {
                 GroupName ="[" + (String)FileInfo.Data.get("DB_Group_Short") + "]";
                 EpNo = (String)FileInfo.Data.get("DB_EpNo");
                 
-                FN = GroupName + " " + SName + " " + EpNo + " - " + EpName;
+                FN = GroupName + " " + SName + " " + EpNo + " - " + EpName + Ext;
                 break;
                 
             case dbstandard:
-                FN = (String)FileInfo.Data.get("DB_FileName");
+                FN = DB_FN;
                 break;
                 
             case profile:
                 
             case custom:
-                Ext = FileInfo.FilePath.getName().substring(FileInfo.FilePath.getName().lastIndexOf("."));
                 SName=""; EpName="";
                 for (int I=0;I<3;I++) {
                     if (SName.equals("")) SName = (String)FileInfo.Data.get("DB_SN_" + UserSettings.SeriesLang[I].toString());
@@ -301,7 +306,7 @@ public class EpProcessing {
         
         if (RespID == 210) {
             //File Added
-            ProcFile.MLState = cFileInfo.eMyListState.inmylist;
+            ProcFile.MLState = cFileInfo.eMyListState.added;
         } else if (RespID == 311) {
             //File Edited
         } else if (RespID == 310) {

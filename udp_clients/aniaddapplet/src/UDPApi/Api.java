@@ -63,7 +63,7 @@ public class Api {
         Com = new java.net.DatagramSocket(12000);
         java.lang.System.out.println("Con Established");   
         
-        Settings.PingInterval = 5;
+        Settings.PingInterval = 1;
         Settings.GetInitMessages = true;
         Settings.GetPushMessages = false;
         
@@ -91,11 +91,10 @@ public class Api {
     void Authenticate(){ 
         cApiCmd Cmd = new cApiCmd("AUTH","auth", false);
         Cmd.Params.put("user", UserInfo.UserName);
-	if (UserInfo.Session != null) {
+	if (UserInfo.Session != null)
 	    Cmd.Params.put("sess", UserInfo.Session);
-	} else {
+        if (UserInfo.Password != null)
 	    Cmd.Params.put("pass", UserInfo.Password);
-	}
         Cmd.Params.put("protover",Integer.toString(ConInfo.ProtoVer));
         Cmd.Params.put("client", ConInfo.ClientID);
         Cmd.Params.put("clientver", Integer.toString(ConInfo.ClientVer));
@@ -262,9 +261,10 @@ public class Api {
                     Pos = Resp.indexOf(":");
                     RetIP = java.net.InetAddress.getByName(Resp.substring(0, Pos));   
                     
-                    if (!IP.equals(RetIP)) {
+                    Resp = Resp.substring(Pos + 1);
+                    Pos = Resp.indexOf(" ");
+                    if (!IP.equals(RetIP) || !Resp.substring(0, Pos).equals("12000"))
                         ConInfo.NAT = true;
-                    }
                 } catch (Exception exception) {exception.printStackTrace();} 
 
                 if (ApiReply.ResponseID == 201) {
@@ -380,8 +380,8 @@ public class Api {
                 if (!ConInfo.AniDBApiDown){
                     if (ConInfo.NAT && ConInfo.LastPackedOn != null &&
                      ((Now.getTime() - ConInfo.LastPackedOn.getTime()) / 60000) > Settings.PingInterval &&
-                     ((Now.getTime() - LastNATActivity.getTime()) / 60000 > 5)) {
-                        cApiCmd Cmd = new cApiCmd("UPTIME", "uptime", true);
+                     ((Now.getTime() - LastNATActivity.getTime()) / 60000 > 1)) {
+                        cApiCmd Cmd = new cApiCmd("PING", "ping", false);
                         LastNATActivity.setTime(Now.getTime());
                         QueryCmd(Cmd);
                     }
