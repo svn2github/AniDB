@@ -12,12 +12,12 @@ public class cConnectionInfo {
 
     public int ProtoVer = 3;
     public String ClientID = "aniadd";
-    public int ClientVer = 1;
+    public int ClientVer = 2;
 
     public String Session;
     public boolean EncodingSet;
     public boolean NAT;
-    public boolean Connected;
+    public boolean IsAuthed;
     public Date ConnectedOn;
     public Date LastPackedOn;
 

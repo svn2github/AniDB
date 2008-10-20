@@ -10,19 +10,22 @@ import java.util.Map;
 import AniAdd.*;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.TreeMap;
 
 public class Api {
     AniAdd CC;
 
     public ArrayList<cQuery> Queries = new ArrayList<cQuery>();
     public ArrayList<cApiReply> ServerReply = new ArrayList<cApiReply>();
+    int ReplysPending;
+    ArrayList<String> NoDelay = new ArrayList<String>();
 
     java.net.DatagramSocket Com;
     
     Thread Sender = new Thread(new SendData(), "Sender");
     Thread SysCall = new Thread(new IdleTasks(), "SysCall");
     Thread Reciever = new Thread(new RecievedData(),"Reciever");
-    ArrayList<cReqFlag> RegFuncs = new ArrayList<cReqFlag>();
+    Map<String, cReqFlag> RegFuncs = new TreeMap<String, cReqFlag>();
     
     boolean IsFinalizing;
     
@@ -34,21 +37,15 @@ public class Api {
     
     public Api(AniAdd CallingClass){
         CC = CallingClass;
-
-        Method Func = null;
-                
+           
         try {
-            Func = this.getClass().getMethod("InternalReplyErrorHandling", new Class[] {int.class});
-            int[] Codes = {501, 502, 505, 506, 555, 598, 600, 601, 602};
-            RegisterEvent(null, Codes, Func, this.getClass());
+            Method ErrorHandlerFunc = this.getClass().getMethod("InternalReplyErrorHandling", new Class[] {int.class});
+            RegisterEvent(ErrorHandlerFunc, this, "501", "502", "505", "506", "555", "598", "600", "601", "60");
             
-            Func = this.getClass().getMethod("InternalReplyHandling", new Class[] {int.class});
-            RegisterEvent(new String[] {"auth"}, null, Func, this);
-            RegisterEvent(new String[] {"logout"}, null, Func, this);
-            RegisterEvent(new String[] {"ping"}, null, Func, this);
+            Method DefaultHandlerFunc = this.getClass().getMethod("InternalReplyHandling", new Class[] {int.class});
+            RegisterEvent(DefaultHandlerFunc, this, "auth", "logout", "ping", "uptime");
         } catch (Exception exception) {java.lang.System.out.println("Event Reg: " + exception);}
         
-
     }
     
     public void Logout(boolean SendCmd) {
@@ -58,7 +55,7 @@ public class Api {
         }
         
         ConInfo.EncodingSet = false;
-        ConInfo.Connected = false;
+        ConInfo.IsAuthed = false;
     }
     
     public void Connect() throws Exception  {
@@ -66,7 +63,7 @@ public class Api {
         Com = new java.net.DatagramSocket(12000);
         java.lang.System.out.println("Con Established");   
         
-        Settings.PingInterval = 1;
+        Settings.PingInterval = 5;
         Settings.GetInitMessages = true;
         Settings.GetPushMessages = false;
         
@@ -91,18 +88,13 @@ public class Api {
         Authenticate();
     }
     
-    void Authenticate(){
-        
+    void Authenticate(){ 
         cApiCmd Cmd = new cApiCmd("AUTH","auth", false);
         Cmd.Params.put("user", UserInfo.UserName);
 	if (UserInfo.Session != null) {
 	    Cmd.Params.put("sess", UserInfo.Session);
-	}
-	if (UserInfo.Password != null) {
+	} else {
 	    Cmd.Params.put("pass", UserInfo.Password);
-	}
-	if (UserInfo.Autopass != null) {
-	    Cmd.Params.put("autopass", UserInfo.Autopass);
 	}
         Cmd.Params.put("protover",Integer.toString(ConInfo.ProtoVer));
         Cmd.Params.put("client", ConInfo.ClientID);
@@ -116,8 +108,7 @@ public class Api {
 
     public void QueryCmd(cApiCmd Cmd) {
         CmdToSend.add(Cmd);
-        
-        
+                
         if (Sender.getState() == java.lang.Thread.State.NEW) {
             Sender.start();
         } else if (Sender.getState() == java.lang.Thread.State.TERMINATED) {
@@ -145,7 +136,19 @@ public class Api {
     byte[] TransformCmd(cApiCmd Cmd) {
         String CmdString;
         
-        CmdString = Cmd.Action + " tag=" + Cmd.Tag + "-" + Queries.size();
+        cQuery Query;
+        if(Cmd.QueryID == -1) {
+            Cmd.QueryID = Queries.size();
+            Query = new cQuery();
+            Query.SendCmd=Cmd;
+            Queries.add(Query);
+        } else {
+            Query = Queries.get(Cmd.QueryID);
+        }
+        Query.SendOn = new java.util.Date(System.currentTimeMillis());
+        
+        
+        CmdString = Cmd.Action + " tag=" + Cmd.Tag + "-" + Cmd.QueryID;
         
         if (ConInfo.Session != null) CmdString += "&s=" + ConInfo.Session;
         
@@ -222,41 +225,16 @@ public class Api {
     }
     
     void DeliverReply(cApiReply ApiReply) {
-        cReqFlag Flag = new cReqFlag(new String[] {ApiReply.Tag},new int[] {ApiReply.ResponseID}, null, null);
-        
-        for (cReqFlag RF : RegFuncs) {
-            if (cReqFlag.Compare(RF, Flag)) {
-                System.out.println("Invoking: " + RF.Func.getName());
-                try {
-                    if (ApiReply.Tag.equals("[Server]")) {
-                        RF.Func.invoke(RF.MethodContainer, ApiReply.CmdId ^ -1);
-                    } else {
-                        RF.Func.invoke(RF.MethodContainer, ApiReply.CmdId);
-                    }
-                } catch (Exception exception) {exception.printStackTrace();}
-                return;
-            }
+        cReqFlag ReqFlag = RegFuncs.get(ApiReply.Tag);
+        if(ReqFlag == null) ReqFlag = RegFuncs.get(ApiReply.ResponseID);
+        if(ReqFlag != null) {
+            try {ReqFlag.Func.invoke(ReqFlag.MethodContainer, ApiReply.CmdId);} catch (Exception e) {}
         }
+        if(ReqFlag == null) System.out.println("Msg didn't have any registered events: ID " + ApiReply.ResponseID);
     }
     
-    public void RegisterEvent(String[]Tag, int[] IDs, Method Func, Object MethodContainer) {
-        cReqFlag Flag = new cReqFlag(Tag, IDs, null, null);
-        if (Func != null) {
-            for (cReqFlag RF : RegFuncs) {
-                if (cReqFlag.Compare(RF, Flag)) {
-                    RF.Func = Func;
-                    return;
-                }
-            }
-            RegFuncs.add(new cReqFlag(Tag, IDs, Func, MethodContainer));
-        } else {
-            for (cReqFlag RF : RegFuncs) {
-                if (cReqFlag.Compare(RF, Flag)) {
-                    RegFuncs.remove(RF);
-                    return;
-                }
-            }
-        }
+    public void RegisterEvent(Method Func, Object MethodContainer, String... Tags) {        
+        for(String Tag : Tags) RegFuncs.put(Tag, new cReqFlag(Tag, Func, MethodContainer));    
     }
     
     public void InternalReplyHandling(int ReplyIndex) {
@@ -265,7 +243,7 @@ public class Api {
         
         if (ApiReply.Tag.equals("auth")) {
             if (Misc.ContainsNumber(new int[] {200, 201}, ApiReply.ResponseID)) {
-                if (ConInfo.Connected) Logout(false);
+                if (ConInfo.IsAuthed) Logout(false);
                 
                 Resp = ApiReply.Response;
                 Pos = Resp.indexOf(" ");
@@ -273,7 +251,7 @@ public class Api {
                 Resp = Resp.substring(Pos+1);
                 
                 ConInfo.ConnectedOn = new Date(System.currentTimeMillis());
-                ConInfo.Connected = true;
+                ConInfo.IsAuthed = true;
                 ConInfo.AniDBApiDown = false;
                 
                 java.net.InetAddress IP;
@@ -284,11 +262,9 @@ public class Api {
                     Pos = Resp.indexOf(":");
                     RetIP = java.net.InetAddress.getByName(Resp.substring(0, Pos));   
                     
+                    if (!IP.equals(RetIP)) {
                         ConInfo.NAT = true;
-		    Resp = Resp.substring(Pos+1);
-                    Pos = Resp.indexOf(" ");
-                    if (!IP.equals(RetIP) || !Resp.substring(0, Pos).equals("12000"))
-                        ConInfo.NAT = true;
+                    }
                 } catch (Exception exception) {exception.printStackTrace();} 
 
                 if (ApiReply.ResponseID == 201) {
@@ -349,118 +325,91 @@ public class Api {
     }
     
     class SendData implements Runnable {
+        Date LastDelayPacket = null;
+        Date Now;
+        
         public void run() {
-            int Continuity = 0;
             java.net.DatagramPacket Packet;
-            
-            //java.lang.System.out.println("Beginning");
 
             while (CmdToSend.size() > 0) {
                 if (IsFinalizing) break;
-                //java.lang.System.out.print("Middle ");
                 
-                if (!CmdToSend.get(0).LoginReq || ConInfo.Connected) {
-                    //java.lang.System.out.println("0");
+                Now = new java.util.Date(System.currentTimeMillis());
+                
+                if(ReplysPending < 3 || !ConInfo.IsAuthed) {
+                    if((!CmdToSend.get(0).LoginReq || ConInfo.IsAuthed) && 
+                     (NoDelay.contains(CmdToSend.get(0).Action) ||
+                     LastDelayPacket == null || (Now.getTime() - LastDelayPacket.getTime()) > 2200)) {
+                        byte[] CmdBin = TransformCmd(CmdToSend.get(0));
+                        Packet = new java.net.DatagramPacket(CmdBin, CmdBin.length, ConInfo.AniDBIP, 9000);
 
-                    ConInfo.LastPackedOn = new java.util.Date(System.currentTimeMillis());
-
-                    byte[] CmdBin = TransformCmd(CmdToSend.get(0));
-                    Packet = new java.net.DatagramPacket(CmdBin, CmdBin.length, ConInfo.AniDBIP, 9000);
-
-                    try {
-                        Com.send(Packet);
-                    } catch (Exception exception) {
-                        java.lang.System.out.println(exception);
-                    }
-                    java.lang.System.out.println("... sent");
-
-
-                    cQuery Query = new cQuery();
-                    Query.SendCmd = CmdToSend.get(0);
-                    Query.SendOn = new java.util.Date(System.currentTimeMillis());
-                    Queries.add(Query);
-
-                    Continuity += 1;
-
-                    CmdToSend.remove(0);
-                } else {
-                    //Cmd needs login but client is not logged in
-                    //Move cmds without login req. to top else wait a sec before trying again if all of them req. login
-                    //java.lang.System.out.println("1");
-
-                    for (int I = 0; I < CmdToSend.size(); I++) {
-                        if (!CmdToSend.get(I).LoginReq) {
-                            CmdToSend.add(0, CmdToSend.get(I));
-                            CmdToSend.remove(I + 1);
+                        try {Com.send(Packet);} catch (Exception exception) {java.lang.System.out.println(exception);}
+                        ConInfo.LastPackedOn = new Date(Now.getTime());
+                        java.lang.System.out.println("... sent");
+                        
+                        if(!NoDelay.contains(CmdToSend.get(0).Action)) LastDelayPacket = new Date(Now.getTime());
+                        CmdToSend.remove(0);
+                        
+                    } else {
+                        for (int I = 0; I < CmdToSend.size(); I++) {
+                            if (!CmdToSend.get(I).LoginReq) {
+                                CmdToSend.add(0, CmdToSend.get(I));
+                                CmdToSend.remove(I + 1);
+                                break;
+                            }
                         }
                     }
-                    try {Thread.sleep(1000);} catch (Exception exception) {}
-                    continue;
+                        
                 }
-
-                if (!ConInfo.Connected || Continuity <= 20) {
-                    try {Thread.sleep(100);} catch (Exception exception) {}
-                } else {
-                    try {Thread.sleep(30000);} catch (Exception exception) {}
-                    Continuity = 0;
-                }
-                
             }
-            
-            //java.lang.System.out.println("Ending");
+
+            try {Thread.sleep(200);} catch (Exception exception) {}
         }
     }
     
     class IdleTasks implements Runnable{
         public void run() {
+            int PendingCount;
             java.util.Date LastNATActivity = new java.util.Date();
-            java.util.Date LastInitMsgRet = new java.util.Date();
 
             try {Thread.sleep(1000);} catch (Exception exception) {} //avoid immediate ping
 
             while (true) {
                 java.util.Date Now = new java.util.Date(System.currentTimeMillis());
 
-                /*if (ConInfo.DownUntil != null && ConInfo.AniDBApiDown && ConInfo.DownUntil.getTime() - Now.getTime() < 0) {
-                    Authenticate();
-                }*/
-
                 if (!ConInfo.AniDBApiDown){
-                    if (ConInfo.NAT &&
+                    if (ConInfo.NAT && ConInfo.LastPackedOn != null &&
                      ((Now.getTime() - ConInfo.LastPackedOn.getTime()) / 60000) > Settings.PingInterval &&
-                     ((Now.getTime() - LastNATActivity.getTime()) / 60000 > 1)) {
-                        cApiCmd Cmd = new cApiCmd("PING", "ping", false);
+                     ((Now.getTime() - LastNATActivity.getTime()) / 60000 > 5)) {
+                        cApiCmd Cmd = new cApiCmd("UPTIME", "uptime", true);
                         LastNATActivity.setTime(Now.getTime());
                         QueryCmd(Cmd);
                     }
 
-                    if (ConInfo.Connected) {
-                        if (Settings.GetInitMessages && ((Now.getTime() - LastInitMsgRet.getTime()) / 60000 > 20)) {
-                            cApiCmd Cmd = new cApiCmd("NOTIFY", "notify", true);
-                            Cmd.Params.put("buddy", "1");
-                            LastNATActivity.setTime(Now.getTime());
-                            QueryCmd(Cmd);
-                            Settings.GetInitMessages = false;
-                        }
-                    }
-
+                    PendingCount = 0;
                     for (int I = 0; I < Queries.size(); I++) {
                         cQuery Query = Queries.get(I);
 
-                        if (!Query.Success && Query.SendOn != null && ((Now.getTime() - Query.SendOn.getTime()) / 1000) > 10) {
-                            if (Query.Retries < 2) {
-                                Query.SendOn = null; //needs change
-                                Query.Retries += 1;
-                                QueryCmd(Query.SendCmd);
-                                System.out.println(Query.Retries);
-                            } else {
-                                //Faild to send the packet 2 times.. stopped trying
+                        if (!Query.Success && Query.SendOn != null) {
+                            if(((Now.getTime() - Query.SendOn.getTime()) / 1000) > 20) {
+                                if(Query.Retries < 3) {
+                                    Query.Retries += 1;
+                                    Query.SendOn = null;
+                                    System.out.print("TimeOut");
+                                    
+                                    QueryCmd(Query.SendCmd);
+                                } else {
+                                    Query.Success = false;
+                                }
+                            } else if(Query.Retries <= 3) {
+                                PendingCount += 1;
                             }
                         }
                     }
+                    ReplysPending = PendingCount;
                 }
 
-                try {Thread.sleep(5000);} catch (Exception exception) {}
+                try {Thread.sleep(1000);} catch (Exception exception) {}
                 if (IsFinalizing) break;
             }
         }

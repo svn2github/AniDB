@@ -63,11 +63,11 @@ public class UIRenameStyle extends javax.swing.JDialog {
         switch (CC.EpProc.UserSettings.Type) {
             case custom:
                 ptn_RenCust.setSelected(true);
-            break;
+                break;
             
             case dbstandard:
                 ptn_RenStanDB.setSelected(true);
-            break;
+                break;
         }
         
         JPanel LayoutGrid = new javax.swing.JPanel(new GridBagLayout());

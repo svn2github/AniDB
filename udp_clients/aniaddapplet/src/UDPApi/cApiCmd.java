@@ -8,6 +8,7 @@ public class cApiCmd {
     public String Tag;
     public String Action;
     public boolean LoginReq;
+    public int QueryID = -1;
     public java.util.Map<String, String> Params = new java.util.TreeMap<String, String>();
 
     public cApiCmd(String SetAction, String SetTag, boolean SetLoginReq) {
