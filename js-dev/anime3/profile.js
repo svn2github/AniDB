@@ -476,7 +476,7 @@ function tabWork() {
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	var group_check_type = CookieGet('group_check_type') || 0;
-	var group_langfilter = CookieGet('group_langfilter') || 1;
+	//var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 2;
 	var storedTab = CookieGet('tab') || '';
 	
@@ -647,6 +647,7 @@ function tabWork() {
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprecated Standard Definition files (video resolution height < 720)'));
 				ul.appendChild(li);
+				/*
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var ck = createCheckbox('group_langfilter',group_langfilter);
@@ -654,6 +655,7 @@ function tabWork() {
 				li.appendChild(ck);
 				li.appendChild(document.createTextNode(' Filter groups in group table according  to language preferences'));
 				ul.appendChild(li);
+				*/
 				tab.appendChild(ul);
 				break;
 			case 'other-prefs':

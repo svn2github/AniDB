@@ -41,6 +41,7 @@ var LAY_SHOWFID = false;
 var LAY_SHOWCRC = false;
 var LAY_FORMATFILESIZE = false;
 var LAY_HIDEFILTEREDGROUPS = true;
+var IRC_FILTERRELEASESBYLANG = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
@@ -539,7 +540,7 @@ function updateGroupTable() {
 		// update existing rows
 		var gid = group.id;
 		if (!groups[gid]) continue; // not interested
-		if (Number(group_langfilter)) {
+		if (IRC_FILTERRELEASESBYLANG) {
 			// now we check to see if this group is languaged filtered or not
 			var lafound = (!filterAudLang.length ? true : false);
 			var lsfound = (!filterSubLang.length ? true : false);
@@ -586,8 +587,10 @@ function updateGroupTable() {
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
 				if (className.indexOf('rating') >= 0)
 					cell.setAttribute('anidb:sort',(group.rating == '-') ? '0' : group.rating);
+/*
 				if (className.indexOf('cmts') >= 0)
 					cell.setAttribute('anidb:sort',group.commentCount);
+*/
 				if (className.indexOf('threads') >= 0)
 					cell.setAttribute('anidb:sort',group.commentCount);
 				if (className.indexOf('action') >= 0) {
@@ -616,11 +619,13 @@ function updateGroupTable() {
 		if (headingTest) headingTest.className += ' c_date';
 		headingTest = getElementsByClassName(headingList,'rating',true)[0];
 		if (headingTest) headingTest.className += ' c_set';
+/*
 		headingTest = getElementsByClassName(headingList,'cmts',true)[0];
 		if (headingTest) {
 			headingTest.className = headingTest.className.replace('cmts','threads');
 			headingTest.className += ' c_set';
 		}
+*/
 		headingTest = getElementsByClassName(headingList,'threads',true)[0];
 		if (headingTest) headingTest.className += ' c_set';
 		init_sorting(thead.rows[0],'epno','up');

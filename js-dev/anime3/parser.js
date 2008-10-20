@@ -533,62 +533,73 @@ function parseCustom(node) {
  * @return void Options will be set
  */
 function parseConfig(node) {
-  for (var i = 0; i < node.childNodes.length; i++) {
-    var sNode = node.childNodes.item(i);
-    if (sNode.nodeType == 3) continue;
-    switch (sNode.nodeName) {
-      case 'epp': preferredEntriesPerPage = parseInt(nodeData(sNode)) || 25; break;
-      case 'lay':
-        var lay = Number(nodeData(sNode)) || 0;
-        LAY_HEADER = (lay & 1) ? true : false;
-        LAY_NOANIMEGROUPREL = (lay & 32) ? true : false;
-        LAY_HIDEFILES = (lay & 512) ? true : false;
-        LAY_HIDERAWS = (lay & 1024) ? true : false;
-        LAY_HIDEGENERICFILES = (lay & 4096) ? true : false;
-        LAY_HIDEPARODYEPS = (lay & 131072) ? true : false;
-		LAY_SHOWFID = (lay & 268435456) ? true : false;
-		LAY_SHOWCRC = (lay & 536870912) ? true : false;
-        break;
-      case 'animelang':
-        for (var j = 0; j < sNode.childNodes.length; j++) {
-          var dNode = sNode.childNodes.item(j);
-          switch (dNode.nodeName) {
-            case 'lang': animeTitleLang = nodeData(dNode); animeAltTitleLang = dNode.getAttribute('alt') || 'en'; break;
-            default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-          }
-        }
-        break;
-      case 'eplang':
-        for (var j = 0; j < sNode.childNodes.length; j++) {
-          var dNode = sNode.childNodes.item(j);
-          switch (dNode.nodeName) {
-            case 'lang': episodeTitleLang = nodeData(dNode); episodeAltTitleLang = dNode.getAttribute('alt') || 'x-jat'; break;
-            default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-          }
-        }
-        break;
-      case 'filealang':
-      	for (var j = 0; j < sNode.childNodes.length; j++) {
-      	  var dNode = sNode.childNodes.item(j);
-      	  switch (dNode.nodeName) {
-      	  	case 'lang': filterAudLang.push(nodeData(dNode)); break;
-      	  	default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-      	  }
-      	}
-      	break;
-      case 'fileslang':
-      	for (var j = 0; j < sNode.childNodes.length; j++) {
-      	  var dNode = sNode.childNodes.item(j);
-      	  switch (dNode.nodeName) {
-      	  	case 'lang': filterSubLang.push(nodeData(dNode)); break;
-      	  	default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
-      	  }
-      	}
-      	break;
-      case 'ed2k': break;
-      default: showAlert('Options','config',sNode.nodeName,dNode.nodeName);
-    }
-  }
+	for (var i = 0; i < node.childNodes.length; i++) {
+		var sNode = node.childNodes.item(i);
+		if (sNode.nodeType == 3) continue;
+		switch (sNode.nodeName) {
+			case 'epp': preferredEntriesPerPage = parseInt(nodeData(sNode)) || 25; break;
+			case 'lay':
+				var lay = Number(nodeData(sNode)) || 0;
+				LAY_HEADER = (lay & 1) ? true : false;
+				LAY_NOANIMEGROUPREL = (lay & 32) ? true : false;
+				LAY_HIDEFILES = (lay & 512) ? true : false;
+				LAY_HIDERAWS = (lay & 1024) ? true : false;
+				LAY_HIDEGENERICFILES = (lay & 4096) ? true : false;
+				LAY_HIDEPARODYEPS = (lay & 131072) ? true : false;
+				LAY_SHOWFID = (lay & 268435456) ? true : false;
+				LAY_SHOWCRC = (lay & 536870912) ? true : false;
+				break;
+			case 'irc':
+				var irc = Number(nodeData(sNode)) || 0;
+				IRC_USEAJAX = (irc & 32) ? true : false;
+				IRC_HIDETHUMBNAILS = (irc & 64) ? true : false;
+				IRC_HIDETAGS = (irc & 512) ? true : false;
+				IRC_HIDEGROUPJOINTS = (irc & 2048) ? true : false;
+				IRC_HIDEANIMEPICS = (irc & 4096) ? true : false;
+				IRC_FILTERRELEASESBYLANG = (irc & 32768) ? true : false;
+				IRC_SHOWFILESOURCE = (irc & 65536) ? true : false;
+				IRC_HIDEAVATAR = (irc & 131072) ? true : false;
+				break;
+			case 'animelang':
+				for (var j = 0; j < sNode.childNodes.length; j++) {
+					var dNode = sNode.childNodes.item(j);
+					switch (dNode.nodeName) {
+						case 'lang': animeTitleLang = nodeData(dNode); animeAltTitleLang = dNode.getAttribute('alt') || 'en'; break;
+						default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
+					}
+				}
+				break;
+			case 'eplang':
+				for (var j = 0; j < sNode.childNodes.length; j++) {
+					var dNode = sNode.childNodes.item(j);
+					switch (dNode.nodeName) {
+						case 'lang': episodeTitleLang = nodeData(dNode); episodeAltTitleLang = dNode.getAttribute('alt') || 'x-jat'; break;
+						default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
+					}
+				}
+				break;
+			case 'filealang':
+				for (var j = 0; j < sNode.childNodes.length; j++) {
+					var dNode = sNode.childNodes.item(j);
+					switch (dNode.nodeName) {
+						case 'lang': filterAudLang.push(nodeData(dNode)); break;
+						default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
+					}
+				}
+				break;
+			case 'fileslang':
+				for (var j = 0; j < sNode.childNodes.length; j++) {
+					var dNode = sNode.childNodes.item(j);
+					switch (dNode.nodeName) {
+						case 'lang': filterSubLang.push(nodeData(dNode)); break;
+						default: showAlert('Options',sNode.nodeName,sNode.nodeName,dNode.nodeName);
+					}
+				}
+				break;
+			case 'ed2k': break;
+			default: showAlert('Options','config',sNode.nodeName,dNode.nodeName);
+		}
+	}
 }
 
 /* Processes a node to extract group information
