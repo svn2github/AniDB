@@ -476,7 +476,7 @@ function tabWork() {
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	var group_check_type = CookieGet('group_check_type') || 0;
-	//var group_langfilter = CookieGet('group_langfilter') || 1;
+	var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 2;
 	var storedTab = CookieGet('tab') || '';
 	
