@@ -1,0 +1,212 @@
+button,
+select,
+input,
+textarea,
+html,
+#layout-main div.mylist_list tr.all_watched td.stats
+{
+	background:#000000;
+	color:#728972;
+}
+
+table
+{
+	border-top-color:#888888;
+}
+
+tr.g_odd,
+li.g_odd,
+span.g_odd
+{
+	background-color:#393939;
+}
+
+#layout-main table ul li.g_odd,
+#layout-main table table td.g_odd,
+#layout-main ul.g_list li.g_odd
+{
+	color:#728972;
+}
+
+#layout-main > h1
+{
+	background-color:#000000;
+	border-top-color:#888888;
+}
+
+#layout-menu > li ul
+{
+	background-color:#888888;
+	border-color:#000000;
+}
+
+#layout-tabs ul.main-tabs > li.selected
+{
+	background-color:#000000;
+	border-bottom-color:#000000;
+}
+
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#AAAAAA;
+}
+
+#layout-main div.pagination span a
+{
+	background-color:#728189;
+	border-color:#888888;
+	color:#CCCCCC;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	color:#000000;
+}
+
+#layout-main #htmltagcloud
+{
+	background-color:#888888;
+	border-color:#888888;
+}
+
+button:hover
+{
+	background-color:#888888;
+	color:#CCCCCC;
+}
+
+a,
+#layout-tabs ul.main-tabs > li.selected a,
+ul.g_list li,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	color:#CCCCCC;
+}
+
+a:hover,
+#layout-menu li.sub-menu:hover,
+button:hover,
+input[type="submit"]:hover
+{
+	color:#FFFFFF;
+}
+
+#layout-main div.msg_all tr.mod
+{
+	background-color:#728972;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left-color:#888888;
+	border-right-color:#888888;
+}
+
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-color:#999999;
+}
+
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main #htmltagcloud
+{
+	background-color:#666666;
+}
+
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *,
+#layout-main table tr.header,
+#layout-main table thead tr
+{
+	background-color:#999999;
+	color:#000000;
+}
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-nav div.menu_hr
+{
+	border-color:#888888;
+}
+
+button:hover,
+input[type="submit"]:hover,
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-menu li.sub-menu:hover,
+#layout-main div.news_all div.g_timedentry h4,
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner
+{
+	background-color:#888888;
+}
+
+#layout-main td ins,
+#layout-main table.filelist tr.good,
+#layout-main div.producer_related_anime table tr.mylist,
+#layout-main div.group_released table tr.mylist,
+#layout-main table.animelist tr.mylist
+{
+	background-color:#364a36;
+}
+
+#layout-main td.g_odd ins,
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.producer_related_anime table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main table.animelist tr.g_odd.mylist
+{
+	background-color:#4c614c;
+}
+
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main table.filelist tr.g_odd.deprecated
+{
+	background-color:#564444;
+}
+
+#layout-main table.filelist tr.generic
+{
+	background-color:#444444;
+}
+
+#layout-main td del,
+#layout-main td ins,
+#layout-main table.filelist,
+#layout-main table.animelist,
+#layout-main div.group_released table,
+#layout-main div.producer_related_anime table
+{
+	color:#A0A0A0;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	background-color:#728972;
+	border-color:#888888;
+}
+
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *
+{
+	background-color:#888888;
+}

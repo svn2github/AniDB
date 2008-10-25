@@ -1,0 +1,74 @@
+.newsitem{ /*g_timedentry newsitem*/
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+	background: url('images/bottom.png');
+	background-position: bottom left;
+	background-repeat:repeat-x;
+	padding-bottom: 20px; /*bottom.png height*/
+	min-height: 0 !important;
+}
+
+.newsitem>h4{
+	background: url('Images/top.png');
+	text-align: center !important;
+	height: 16px;
+	padding: 3px 0 0 0 !important;
+	margin: 0 !important;
+	color: #1177bb;
+}
+.newsitem>h4 a {
+	color: darkred;
+}
+
+.newsitem>.stamp{
+	background: url('images/bg_shadow.png');
+	width: 778px; /*IE*/
+	padding-right: 22px !important;
+}
+.newsitem>.comment{
+	text-align:center;
+	width:86px;
+	margin-top: -2em !important;
+	padding-right: 38px;
+	color: #1177bb;
+}
+
+.newsitem>.body{
+	min-height: 100px !important;
+	background: url('images/bg_shadow.png');
+	width: 660px; /*IE*/
+	padding: 0px 120px 2px 20px !important;
+}
+.newsitem>.body a {
+	color: #009955;
+}
+.newsitem>.body a:hover{
+	color: #ff8844;
+}
+
+.newsitem>.body ul{
+	list-style-type: disc !important;
+	list-style-position: inside;
+	padding-left: 10px;
+}
+
+.newsitem>div.avatar{
+	margin: 0 22px 0 20px !important;
+	height: 0px;
+}
+.newsitem>div.avatar img{
+}
+
+.rightbar>p,.rightbar>h4:first-child,.rightbar h3{display:none;}
+/*.rightbar h4,.rightbar ol{ float: left;}*/
+#layout-footer{
+	/*background: url('Horo.png') !important;*/
+	position: fixed !important;
+	right: 0px !important;
+	bottom: 0px !important;
+	margin-left: auto;
+	height: 500px;
+	width: 800px;
+	z-index: -1;	
+}

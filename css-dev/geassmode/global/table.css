@@ -1,0 +1,31 @@
+#layout-main table {
+	color:#333;
+	border:1px solid #b9bfa0;
+	border-collapse:collapse;
+}
+	#layout-main table tr.header {
+		background:#333;
+	}
+		#layout-main table tr.header th {
+			color:#eee;
+			font-weight:bold;
+			text-align:left;
+		}
+			#layout-main table tr.header th a {
+				padding:5px;
+				display:block;
+				color:#dbdbdb; background-position:right center;
+			}
+			#layout-main table tr.header th a:hover {
+				color:#ababab; background-color:#444;
+			}
+	#layout-main table tr {
+		background:#eee;
+		border:1px solid #666;
+	}
+	#layout-main table tr.g_odd {
+		background:#ddd;
+	}
+		#layout-main table tr td {
+			font-size:0.8em;
+		}

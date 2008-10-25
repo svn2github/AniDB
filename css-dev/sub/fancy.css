@@ -1,0 +1,102 @@
+#layout-nav:before
+{
+	background-image: url(../icons/test/shun23fv.png);
+	display: block;
+	height: 100px;
+	width: 100px;
+	margin: 1.5em auto -0.8em auto;
+	border: 1px #98AAB1 solid;
+	content:"";
+}
+
+#layout-menu
+{
+	margin-top: 1em;
+	padding: 6px;
+}
+
+#layout-menu > li+li
+{
+	margin-top: 3px;
+}
+
+#user-name
+{
+	position: absolute;
+	left: 0;
+	width: 146px;
+	top: 0.2em;
+	text-align: center;
+}
+
+#layout-menu #user-name:hover
+{
+	background-color: transparent;
+}
+
+#user-name a:before
+{
+	content: "Hi, ";
+}
+#user-name a:after
+{
+	content: "!";
+}
+
+#layout-menu ul li a
+{
+	display: block;
+	-display: inline;
+}
+
+#layout-menu ul li.alert a
+{
+	display: inline;
+}
+
+#menu-user form[enctype]
+{
+	position: absolute;
+	top: 22px;
+	left: 175px;
+	width: 6em;
+}
+
+#layout-menu a.i_button+a.i_button
+{
+	margin-left: 0.8em;
+}
+
+/*#layout-menu div.menu ul.my li.mynotifies,
+#layout-menu div.menu ul.my li.myreviews,
+#layout-menu div.menu ul.my li.mywishlist,
+#layout-menu div.menu ul.other
+{
+	display: none;
+}*/
+
+#layout-nav
+{
+	margin-left: 6px;
+	margin-right: 6px;
+}
+
+#layout-main div.g_timedentry h4 span.id
+{
+	display: none;
+}
+
+/*#layout-main tr.all_watched td.name
+{
+	text-decoration: line-through;
+}*/
+
+#layout-nav input
+{
+	width: 96%;
+}
+
+#layout-menu ul li
+{
+	padding: 1px 2px;
+}

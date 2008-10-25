@@ -1,0 +1,162 @@
+#layout-content div.userpage_all div.stats,
+#layout-content div.myplace_all div.stats
+{
+	float: left;
+	clear: none;
+	width: 14em;
+}
+
+#layout-content div.userpage_all div.stats table,
+#layout-content div.myplace_all div.stats table
+{
+	width: 95%;
+}
+
+#layout-content div.userpage_all div.stats div table th,
+#layout-content div.myplace_all div.stats div table th
+{
+	width: 60%;
+}
+
+#layout-content div.userpage_all div.stats div table td.value,
+#layout-content div.myplace_all div.stats div table td.value
+{
+	text-align: right;
+}
+
+#layout-content div.myplace_all div.latest
+{
+	margin-left: 185px;
+	margin-right: 9em;
+	clear: none;
+}
+
+#layout-content div.myplace_all div.latest h4,
+#layout-content div.myplace_all div.g_menu h4,
+#layout-content div.userpage_all div.userprefs h4,
+#layout-content div.mylist_list div.mylist_menu h4
+
+{
+         font-size: 14px;
+	color: #46C5FF;
+}
+
+#layout-content div.myplace_all div.latest_votes li
+{
+		border-top: 1px #9CCD17 solid;
+}
+
+#layout-content div.myplace_all li,
+#layout-content div.userpage_all li,
+#layout-content div.notify_all li
+{
+	padding: 3px;
+}
+
+#layout-content div.myplace_all li,
+#layout-content div.myplace_all li a,
+#layout-content div.userpage_all li,
+#layout-content div.userpage_all li a,
+#layout-content div.mylist_menu li,
+#layout-content div.mylist_menu li a,
+#layout-content div.notify_all li,
+#layout-content div.notify_all li a,
+#layout-content div.profile_all li,
+#layout-content div.profile_all li a
+{
+         color: #46C5FF;
+}
+
+#layout-content div.myplace_all li.g_odd,
+#layout-content div.userpage_all li.g_odd,
+#layout-content div.mylist_menu li.g_odd,
+#layout-content div.notify_all li.g_odd,
+#layout-content div.profile_all li.g_odd
+{
+         background-color: #9CCD17;
+         color: #FFFFFF;
+}
+
+#layout-content div.myplace_all li.g_odd a,
+#layout-content div.userpage_all li.g_odd a,
+#layout-content div.mylist_menu li.g_odd a,
+#layout-content div.notify_all li.g_odd a,
+#layout-content div.profile_all li.g_odd a
+{
+         color: #FFFFFF;
+}
+
+
+#layout-content div.userpage_all div.buddies,
+#layout-content div.userpage_all div.favreviewers
+{
+	float: right;
+	clear: right;
+	margin-bottom: 1em;
+}
+
+#layout-content div.userpage_all div.g_menu h4,
+#layout-content div.userpage_all div.buddies h4,
+#layout-content div.userpage_all div.favreviewers h4
+{
+	width: 9em;
+         font-size: 14px;
+         color: #46C5FF;
+}
+
+#layout-content div.userpage_all div.buddies ul li,
+#layout-content div.userpage_all div.favreviewers ul li
+{
+	padding: 1px 6px 1px 6px;
+}
+
+#layout-content div.userpage_all div.userdetails,
+#layout-content div.userpage_all div.userprefs
+{
+	margin-left: 15em;
+	margin-right: 11.5em;
+	clear: none;
+}
+
+#layout-content div.userpage_all div.userprefs h4
+{
+	text-align: center;
+}
+
+#layout-content div.userpage_all div.charts
+{
+	width: 710px;
+	height: 600px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#layout-content div.userpage_all div.charts div
+{
+	float: left;
+}
+
+#layout-content div.userpage_all div.charts div.votedistribution
+{
+	margin-left: 50px;
+}
+
+#layout-content div.userpage_all div.userdetails p
+{
+	text-align: left;
+	margin-left: 4em;
+	margin-right: 2em;
+	margin-top: 2em;
+}
+#layout-content div.userpage_all ul.g_navlist
+{
+	float: none;
+	text-align: center;
+}
+
+#layout-content div.userpage_all div.latest div
+{
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}

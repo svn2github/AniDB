@@ -1,0 +1,28 @@
+#layout-main ul#cattree ul
+{
+	margin-left: 2em;
+}
+#layout-main ul#cattree *.cat
+{
+	display: block;
+	line-height: 2;
+	margin-left: 2em;
+	margin-right: 2em;
+}
+#layout-main ul#cattree a.i_icon
+{
+	float: left;
+	/* an unsatisfactory nudge to get better vertical centering */
+	margin-top: 0.3em; 
+}
+#layout-main ul#cattree *.cat a
+{
+	display: -moz-inline-box;
+	display: inline-block;
+	min-width: 20em;
+}
+
+#layout-main ul#cattree li.collapsed ul
+{
+	display: none;
+}

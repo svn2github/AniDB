@@ -1,0 +1,11 @@
+#layout-main div.g_content div.wishlist div.filter_menu {
+	width:200px;
+}
+	#layout-main div.g_content div.wishlist div.filter_menu div.filters ul li {
+		padding:0;
+		border:none;
+	}
+		#layout-main div.g_content div.wishlist div.filter_menu div.filters ul li label {
+			padding:3px;
+			border-top:1px solid #b9bfa0;
+		}

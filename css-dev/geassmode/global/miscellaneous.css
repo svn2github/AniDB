@@ -1,0 +1,7 @@
+a, a:hover, a:active, a:visited {
+	color:#ad2100;
+	text-decoration:none;
+}
+a:hover {
+	color:#800100;
+}

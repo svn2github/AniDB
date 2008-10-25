@@ -1,0 +1,17 @@
+#layout-main div.credits_all div.inner
+{
+	padding-bottom:.5em;
+	padding-left:1em;
+	padding-right:1em;
+	padding-top:.5em;
+}
+
+#layout-main div.credits_all table th
+{
+	width: 40%;
+}
+
+#layout-main div.credits_all table th.website
+{
+	width: 20%;
+}

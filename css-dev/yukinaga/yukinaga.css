@@ -1,0 +1,23 @@
+@import "../sub/zakura/main.css";
+
+#layout-nav {
+	background: #fff url(images/top_bg.gif) repeat-x left top;
+	height: 225px;
+}
+
+#layout-menu {
+	background: transparent url(images/top_yuki.jpg) no-repeat left top;
+	padding-top: 225px;
+	padding-left: 12px;
+}
+
+#layout-search
+{
+	background: transparent url(images/top_search_bg.gif) no-repeat top right;
+	top: -36px;
+	padding-top: 116px;
+}
+
+#layout-search select{
+	display: none;
+}

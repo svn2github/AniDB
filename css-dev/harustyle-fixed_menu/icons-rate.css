@@ -1,0 +1,34 @@
+span.i_rate_vhigh {
+	width: 45px;
+	background-image: url('../icons/icon/anidb_rate_star.gif');
+	background-repeat: repeat-x;
+	background-position:  left 50%;
+}
+
+span.i_rate_high {
+	width: 37px;
+	background-image: url('../icons/icon/anidb_rate_star.gif');
+	background-repeat: repeat-x;
+	background-position:  left 50%;
+}
+
+span.i_rate_med {
+	width: 30px;
+	background-image: url('../icons/icon/anidb_rate_star.gif');
+	background-repeat: repeat-x;
+	background-position:  left 50%;
+}
+
+span.i_rate_low {
+	width: 22px;
+	background-image: url('../icons/icon/anidb_rate_star.gif');
+	background-repeat: repeat-x;
+	background-position:  left 50%;
+}
+
+span.i_rate_vlow {
+	width: 15px;
+	background-image: url('../icons/icon/anidb_rate_star.gif');
+	background-repeat: repeat-x;
+	background-position:  left 50%;
+}

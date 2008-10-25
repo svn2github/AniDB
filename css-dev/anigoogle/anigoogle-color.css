@@ -1,0 +1,165 @@
+html
+{
+	background:white;
+}
+
+a
+{
+	color:#105289;
+}
+
+a:hover
+{
+	color:#AA0000;
+}
+
+table
+{
+	border-top-color:blue;
+}
+
+tr.g_odd,
+li.g_odd,
+span.g_odd
+{
+	background-color:#e5ecf9;
+}
+
+#layout-search
+{
+	background-image:url(images/logo_small.gif);
+	background-repeat:no-repeat;
+}
+
+#layout-main > h1
+{
+	background-color:#e5ecf9;
+	border-top-color:blue;
+}
+
+#layout-nav div.main_search
+{
+	background-image:url(images/logo.gif);
+	background-repeat:no-repeat;
+}
+
+#layout-menu > li ul
+{
+	background-color:#FFF;
+	border-color:#000;
+}
+
+#layout-tabs ul.main-tabs > li.selected
+{
+	background-color:#FFFFFF;
+	border-bottom-color:#FFFFFF;
+}
+
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-menu li.sub-menu:hover,
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#E5ECF9;
+}
+
+#layout-main div.pagination span a
+{
+	background-color:#ECEDEE;
+	border-color:#B4BAC0;
+	color:#5C758C;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	background-color:#4692BF;
+	border-color:#4692BF;
+	color:#FFFFFF;
+}
+
+#layout-main #htmltagcloud
+{
+	background-color:#FAFAFA;
+	border-color:#D1D7DC;
+}
+
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border-color:#E5ECF9;
+}
+
+#layout-nav div.menu_hr
+{
+	border-top-color:#c9d7f1;
+}
+
+#layout-main table tr.header,
+#layout-main div.news_all div.g_timedentry h4
+{
+	background-color:#c3d9ff;
+}
+
+#layout-main td ins,
+#layout-main table.filelist tr.good,
+#layout-main div.producer_related_anime table tr.mylist,
+#layout-main div.group_released table tr.mylist,
+#layout-main table.animelist tr.mylist
+{
+	background-color:#94c694;
+}
+
+#layout-main td.g_odd ins,
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.producer_related_anime table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main table.animelist tr.g_odd.mylist
+{
+	background-color:#86b186;
+}
+
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main table.filelist tr.g_odd.deprecated
+{
+	background-color:#c9aaaa;
+}
+
+#layout-main table.filelist tr.generic
+{
+	background-color:#EEEEEE;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	background-color:#E5ECF9;
+	border-color:#E5ECF9;
+	color: #000000;
+}
+
+#layout-main div.pagination span a
+{
+	background-color:#FFFFFF;
+	border-color:#E5ECF9;
+	color: #000000;
+}
+
+#layout-main div.pagination span a:hover
+{
+	color:#AA0000;
+}
+
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *
+{
+	background-color:#CADCEB;
+}

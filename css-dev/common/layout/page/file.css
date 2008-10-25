@@ -1,0 +1,36 @@
+#layout-main div.file_info dl .type,
+#layout-main div.file_info dl .censored,
+#layout-main div.file_info dl .stats,
+#layout-main div.file_info dl .owner
+{
+	margin-top: 0.4em;
+}
+
+#layout-main div.file_tracks div,
+#layout-main div.file_relations div
+{
+	margin-top: 0.6em;
+}
+
+#layout-main div.addfilem.form div.dump textarea
+{
+	width: 100%;
+	height: 30em;
+	white-space: nowrap;
+}
+
+#layout-main div.addfilem.form dl.options dt
+{
+	text-align: left;
+}
+
+#layout-main div.addfilem.form dl.options dd
+{
+	margin-left: 8em;
+}
+
+#layout-main div.addfilem.form dl.options dd select
+{
+	min-width: 10em;
+	max-width: 20.4em;
+}

@@ -1,0 +1,9 @@
+#layout-main div.mylist_all div.g_section form table.animelist {
+	margin:0 20px 0 1px;
+}
+	#layout-main div.mylist_all div.g_section form table.animelist th {
+		font-size:0.8em;
+	}
+		#layout-main div.mylist_all div.g_section form table.animelist th abbr {
+			display:none;
+		}
