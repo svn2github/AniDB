@@ -115,6 +115,26 @@ function prepPage() {
 		radioBox2 = getElementsByName(inputs, 'addtag.spoiler', true)[1];
 		inputBox.onkeyup = checkSearchString;
 	}
+	// more stuff for me to worry, sorting
+	var divTagList = getElementsByClassName(divs, 'animetag_list', true)[0];
+	if (divTagList) {
+		var tables = divTagList.getElementsByTagName('table');
+		for (var t = 0; t < tables.length; t++) {
+			var table = tables[t];
+			var tbody = table.tBodies[0];
+			var thead = document.createElement('thead');
+			thead.appendChild(tbody.rows[0]);
+			table.insertBefore(thead,tbody);
+			// now add the sorting things
+			var ths = thead.getElementsByTagName('th');
+			ths[0].className += ' c_latin'; // name
+			ths[1].className += ' c_latin'; // spoiler
+			ths[2].className += ' c_number'; // approval
+			ths[3].className += ' c_number'; // global cnt
+			ths[4].className += ' c_date'; // date
+			init_sorting(thead,'name','down')
+		}
+	}
 }
 
 // hook up the window onload event
