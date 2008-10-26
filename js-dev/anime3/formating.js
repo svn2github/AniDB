@@ -20,7 +20,7 @@ var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
 var isIE = (navigator.userAgent.toLowerCase().indexOf('msie') >= 0);
 var isOP = (navigator.userAgent.toLowerCase().indexOf('presto') >= 0 || navigator.userAgent.toLowerCase().indexOf('opera') >= 0);
 var isFF = (!isWK && navigator.userAgent.toLowerCase().indexOf('gecko') >= 0 || navigator.userAgent.toLowerCase().indexOf('firefox') >= 0);
-var currentFMode = CookieGet('currentFMode') || 2;
+var currentFMode = CookieGet('currentFMode') || 1;
 if (isWK && currentFMode == 2) currentFMode = 1;
 var smileyList = ['very_happy','happy','sad','shock','confused','cool','laughing','razz','embarassed','crying',
 				  'mad','twisted','rolleyes','wink','neutral','sweating','undecided','thinking','wtf','tehehe',
