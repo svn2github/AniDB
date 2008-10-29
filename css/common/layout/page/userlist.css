@@ -2,3 +2,8 @@
 {
 	width: 100%
 }
+
+#layout-main div.userlist_all table.users td.user a.i_icon
+{
+	float:right;
+}
