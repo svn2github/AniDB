@@ -792,3 +792,9 @@ div.quotebody div.quote div.quotebody
 {
 	max-width:100%
 }
+
+#layout-main div.forum div.preview-box
+{
+	text-align:left;
+	word-wrap:break-word;
+}
