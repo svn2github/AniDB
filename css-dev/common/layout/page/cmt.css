@@ -315,14 +315,16 @@
 
 #layout-main div.forum div.posting-box,
 #layout-main div.forum div.submit-box,
-#layout-main div.forum div.options-box
+#layout-main div.forum div.options-box,
+#layout-main div.forum div.preview-box
 {
 	margin-top:1em;
 }
 
 #layout-main div.forum div.posting-box div.inner,
 #layout-main div.forum div.options-box div.inner,
-#layout-main div.forum div.submit-box div.inner
+#layout-main div.forum div.submit-box div.inner,
+#layout-main div.forum div.preview-box div.inner
 {
 	padding:.5em 1em;
 }
