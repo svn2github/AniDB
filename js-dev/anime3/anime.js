@@ -80,6 +80,27 @@ var groupCols = cloneArray(genGroupCols);
 var groupSkips = buildSkipCols(groupCols);
 //var animeCols = cloneArray(genAnimeCols);	
 
+/* function that changes mylist state for the anime without reload */
+function applyMylistState() {
+	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', false)[0];
+	if (!actionRow) return;
+	// now find everthing i want to act upon
+	// first get data in the fieldset
+	var fieldset = actionRow.getElementsByTagName('fieldset')[0];
+	//if (!fieldset) return;
+	var href = fieldset.form.action;
+	var inputs = fieldset.getElementsByTagName('input');
+	if (inputs.length) href += '?';
+	for (var i = 0; i < inputs.length; i++)
+		href += inputs[i].name + '=' + inputs[i].value + "&";
+	// now get the select value
+	var selectType = getElementsByName(actionRow.getElementsByTagName('select'), 'myamod.type', false)[0];
+	if (!selectType) return;
+	href += selectType.name + '=' + selectType.value;
+	// yei, i have the full action defined
+	postData(href);
+}
+
 /* This function prepares the mylist page for use with my scripts */
 function prepPage() {
 	// some other stuff, used only in dev 
@@ -89,6 +110,14 @@ function prepPage() {
 	} else base_url = '';
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
+	// apply a function
+	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', false)[0];
+	if (actionRow) {
+		var submit = getElementsByName(actionRow.getElementsByTagName('input'), 'myamod.doit', false)[0];
+		// i can't change the type of an already set input button on IE so i have to hack around stuff
+		var newSubmit = createButton(submit.name,submit.id,submit.disabled,submit.value,'button',applyMylistState,null);
+		submit.parentNode.replaceChild(newSubmit,submit);
+	}
 	initTooltips();
 	aid = Number(uriObj['aid']);
 	if (isNaN(aid)) return;
