@@ -96,9 +96,12 @@ function applyMylistState() {
 	// now get the select value
 	var selectType = getElementsByName(actionRow.getElementsByTagName('select'), 'myamod.type', false)[0];
 	if (!selectType) return;
-	href += selectType.name + '=' + selectType.value;
+	href += selectType.name + '=' + selectType.value + '&';
+	href += 'myamod.doit=1'; // forgot this
 	// yei, i have the full action defined
 	postData(href);
+	var userReply = window.confirm('Submited mylist action change.\nPlease note that you need to reload this page to see the changes.\nDo you wish to reload now?');
+	if (userReply) window.location = window.location;
 }
 
 /* This function prepares the mylist page for use with my scripts */
