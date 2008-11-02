@@ -179,6 +179,7 @@ function formatText(id, n, selected, element) {
 			if (textField == '' || (textField.indexOf('http://') < 0 && textField.indexOf('https://') < 0)) hrefField = window.prompt("Please type in url.");
 			else hrefField = textField;
 			var hyperLink = textField;
+			if (textField == '') textField = hrefField;
 			if (id.toLowerCase() == 'createlink') hyperLink = '[url='+hrefField+']'+textField+'[/url]';
 			else if (id.toLowerCase() == 'insertimage') hyperLink = '[img]'+hrefField+'[/img]';
 			if (currentFMode != 2) { 
@@ -890,7 +891,6 @@ function initFormating() {
 						if (currentFMode == 2) convertText(id, false);
 					}
 				};
-				break;
 			}
 		}
 	}
