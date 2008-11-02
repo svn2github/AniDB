@@ -349,7 +349,7 @@ function createIcon(parentNode, text, url, onclick, title, className) {
 		obj = document.createElement('a');
 		obj.href = url;
 	}
-	if (onclick != null || onclick != '') {
+	if (onclick != null && onclick != '') {
 		obj.onclick = onclick;
 		obj.style.cursor = 'pointer';
 		obj.setAttribute('role','link');
@@ -363,7 +363,7 @@ function createIcon(parentNode, text, url, onclick, title, className) {
 		label.appendChild(document.createTextNode(text));
 		obj.appendChild(label);
 	}
-	if (title != null || title != '') {
+	if (title != null && title != '') {
 		obj.title = title;
 		obj.alt = title;
 	}
