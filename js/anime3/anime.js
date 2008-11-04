@@ -100,8 +100,9 @@ function applyMylistState() {
 	href += 'myamod.doit=1'; // forgot this
 	// yei, i have the full action defined
 	postData(href);
-	if (mylist_confirm_action) return;
-	var userReply = window.confirm('Submited mylist action change.\nPlease note that you need to reload this page to see the changes.\nDo you wish to reload now?');
+	var action = Number(mylist_confirm_action);
+	if (action == 1) return;
+	var userReply = (!action ? window.confirm('Submited mylist action change.\nPlease note that you need to reload this page to see the changes.\nDo you wish to reload now?') : true);
 	if (userReply) window.location = window.location;
 }
 

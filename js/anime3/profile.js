@@ -598,9 +598,9 @@ function tabWork() {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var ck = createCheckbox('mylist_confirm_action',mylist_confirm_action);
-				ck.onchange = function() { changeOptionValue(this); mylist_confirm_action = Number(this.checked); 	}
-				li.appendChild(ck);
+				var mylistActionSel = createSelectArray(null,"mylist_confirm_action","mylist_confirm_action",null,mylist_confirm_action,{0:{"text":'ask for action'},1:{"text":'always reload'},2:{"text":'stay on page'}});
+				mylistActionSel.onchange = function() { changeOptionValue(this); mylist_confirm_action = Number(this.value); 	}
+				li.appendChild(mylistActionSel);
 				li.appendChild(document.createTextNode(' Don\'t show the reload needed warning after changing mylist state in anime pages.'));
 				ul.appendChild(li);
 				tab.appendChild(ul);
