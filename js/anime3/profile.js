@@ -475,6 +475,7 @@ function tabWork() {
 	var mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
+	var mylist_confirm_action = CookieGet('mylist_confirm_action') || 0;
 	var group_check_type = CookieGet('group_check_type') || 0;
 	var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 1;
@@ -594,6 +595,13 @@ function tabWork() {
 				watchedSel.onchange = function() { changeOptionValue(this); mylist_add_viewed_state = this.value; };
 				li.appendChild(watchedSel);
 				li.appendChild(document.createTextNode(' Default quick-add watched state'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ck = createCheckbox('mylist_confirm_action',mylist_confirm_action);
+				ck.onchange = function() { changeOptionValue(this); mylist_confirm_action = Number(this.checked); 	}
+				li.appendChild(ck);
+				li.appendChild(document.createTextNode(' Don\'t show the reload needed warning after changing mylist state in anime pages.'));
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
