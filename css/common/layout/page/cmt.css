@@ -788,7 +788,8 @@ div.quotebody div.quote div.quotebody
 	margin-top:1em;
 }
 
-#layout-main div.forum div.content img
+#layout-main div.forum div.content img,
+#layout-main div.news div.newsitem img
 {
 	max-width:100%
 }
