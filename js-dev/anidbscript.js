@@ -343,7 +343,8 @@ var Magic = {
 					}
 				}
 				if (!select || !input) break;
-				select.onchange = function() { input.focus(); }
+				addEventSimple(select,'change',function() { input.focus(); });
+				//select.onchange = function() { input.focus(); }
 				break;
 			}
 		}),
@@ -751,7 +752,8 @@ addLoadEvent(function() {
 						textfield.setAttribute("autocomplete", "on");
 				}
 			}
-			dropdown.onchange = getSearchTypeChange;
+			addEventSimple(dropdown,'change',getSearchTypeChange)
+			//dropdown.onchange = getSearchTypeChange;
 			getSearchTypeChange(dropdown.value);
 		}
 
