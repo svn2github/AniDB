@@ -8,6 +8,7 @@
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;
 var seeTimes = false;
+var submitQueue = new Array();	// This is kind of fake, but oh well...
 
 /* Function that fetches anime data
  * @param aid Anime ID
@@ -25,8 +26,14 @@ function fetchData(url) {
 function postData(url) {
 	var req = xhttpRequest();
 	var data = url.substr(url.indexOf('?')+1,url.length);
-	if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', null, data);
-	else xhttpRequestPost(req, 'animedb.pl', null, data);
+	if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', acceptChanges, data);
+	else xhttpRequestPost(req, 'animedb.pl', acceptChanges, data);
+}
+
+function acceptChanges() {
+	var input =submitQueue.shift();
+	input.value = 'Update';
+	input.disabled = false;
 }
 
 function createSubmitRequest() {
@@ -45,6 +52,9 @@ function createSubmitRequest() {
 		url += select.name + '=' + select.value + '&';
 	}
 	if (url[url.length-1] == '&') url = url.substr(0,url.length-1);
+	this.value = 'Submiting...';
+	this.disabled = true;
+	submitQueue.push(this);
 	postData(url);
 }
 
