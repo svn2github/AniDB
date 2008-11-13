@@ -39,22 +39,31 @@ function acceptChanges() {
 function createSubmitRequest() {
 	var cell = this.parentNode;
 	var url = 'animedb.pl?';
-	var inputs = cell.getElementsByTagName('input');
-	var selects = cell.getElementsByTagName('select');
-	for (var i = 0; i < inputs.length; i++) {
-		var input = inputs[i];
-		if (input.id == 'adba.update' || input.value == '-1') continue;
-		url += input.name + '=' + input.value + '&';
-	}
-	for (var i = 0; i < selects.length; i++) {
-		var select = selects[i];
-		if (select.value == '-1') continue;
-		url += select.name + '=' + select.value + '&';
+	var rows = cell.parentNode.parentNode.getElementsByTagName('tr');
+	var cells = new Array();
+	cells.push(cell);
+	cells.push(getElementsByClassName(rows, 'wishlist', true)[0]);
+	cells.push(getElementsByClassName(rows, 'notification', true)[0]);
+	for (var c = 0; c < cells.length; c++) {
+		var cell = cells[c];
+		var inputs = cell.getElementsByTagName('input');
+		var selects = cell.getElementsByTagName('select');
+		for (var i = 0; i < inputs.length; i++) {
+			var input = inputs[i];
+			if (input.id == 'adba.update' || input.value == '-1') continue;
+			url += input.name + '=' + input.value + '&';
+		}
+		for (var i = 0; i < selects.length; i++) {
+			var select = selects[i];
+			if (select.value == '-1') continue;
+			url += select.name + '=' + select.value + '&';
+		}
 	}
 	if (url[url.length-1] == '&') url = url.substr(0,url.length-1);
 	this.value = 'Submiting...';
 	this.disabled = true;
 	submitQueue.push(this);
+	//alert(url);
 	postData(url);
 }
 
@@ -98,13 +107,11 @@ function createWishlistRow(parentNode, wishlistState, className) {
 	//alert('aid: '+wishlistState.aid+'\nstate: '+wishlistState.state+'\ntype: '+wishlistState.type+'\npri: '+wishlistState.pri);
 	if (!wishlistState) return;
 	var row = document.createElement('tr');
-	if (className) row.className = className;
+	row.className = ((className) ? className + ' ' : '') + 'wishlist';
 	var head = createHeader(null, 'field');
-	createTextLink(head, 'Wishlist', 'animedb.pl?show=mywishlist');
+	createTextLink(head, 'Wishlist', 'animedb.pl?show=mywishlist#a'+wishlistState.aid);
 	row.appendChild(head);
-	var cell = createCell(null, 'value',createTextInput('aid',10,false,true,null,wishlistState.aid));
-	cell.appendChild(createTextInput('show',10,false,true,null,'latestanimes'));
-	cell.appendChild(createTextInput('adba.wishlist',10,false,true,null,wishlistState.state));
+	var cell = createCell(null, 'value',createTextInput('adba.wishlist',10,false,true,null,wishlistState.state));
 	var optionArray = {	'-1':{"text":'type: not set'},'0':{"text":'type: undefined'},
 						'1':{"text":'type: to watch'},'2':{"text":'type: to get'},'3':{"text":'type: blacklisted'}};
 	var stateSel = createSelectArray(cell,"adba.wishlisttype","adba.wishlisttype",togglePrioritySelect,wishlistState.type,optionArray);
@@ -114,8 +121,6 @@ function createWishlistRow(parentNode, wishlistState, className) {
 	var priSel = createSelectArray(null,"adba.wishlistpri","adba.wishlistpri",null,wishlistState.pri,optionArray);
 	if (wishlistState.pri == '-1') priSel.disabled = true;
 	cell.appendChild(priSel);
-	cell.appendChild(document.createTextNode(' '));
-	cell.appendChild(createButton('adba.update','adba.update',false,'Update','button',createSubmitRequest,null));
 	row.appendChild(cell);
 	if (parentNode) parentNode.appendChild(row);
 	else return row;
@@ -129,9 +134,7 @@ function createNotificationRow(parentNode, notificationState, className) {
 	var head = createHeader(null, 'field');
 	createTextLink(head, 'Notification', 'animedb.pl?show=mynotifies#a'+notificationState.aid);
 	row.appendChild(head);
-	var cell = createCell(null, 'value',createTextInput('aid',10,false,true,null,notificationState.aid));
-	cell.appendChild(createTextInput('show',10,false,true,null,'latestanimes'));
-	cell.appendChild(createTextInput('adba.notify',10,false,true,null,notificationState.state));
+	var cell = createCell(null, 'value',createTextInput('adba.notify',10,false,true,null,notificationState.state));
 	var optionArray = {	'-1':{"text":'type: not set'},'0':{"text":'type: all'},
 						'1':{"text":'type: new'},'2':{"text":'type: group'},'3':{"text":'type: complete'}};
 	var stateSel = createSelectArray(cell,"adba.notifytype","adba.notifytype",togglePrioritySelect,notificationState.type,optionArray);
@@ -141,7 +144,19 @@ function createNotificationRow(parentNode, notificationState, className) {
 	var priSel = createSelectArray(null,"adba.notifypri","adba.notifypri",null,notificationState.pri,optionArray);
 	if (notificationState.pri == '-1') priSel.disabled = true;
 	cell.appendChild(priSel);
-	cell.appendChild(document.createTextNode(' '));
+	row.appendChild(cell);
+	if (parentNode) parentNode.appendChild(row);
+	else return row;
+}
+
+function createActionRow(parentNode, aid, className) {
+	var row = document.createElement('tr');
+	row.className = ((className) ? className + ' ' : '') + 'action';
+	var head = createHeader(null, 'field');
+	createTextLink(head, 'Action', 'removeme');
+	row.appendChild(head);
+	var cell = createCell(null, 'value',createTextInput('aid',10,false,true,null,aid));
+	cell.appendChild(createTextInput('show',10,false,true,null,'latestanimes'));
 	cell.appendChild(createButton('adba.update','adba.update',false,'Update','button',createSubmitRequest,null));
 	row.appendChild(cell);
 	if (parentNode) parentNode.appendChild(row);
@@ -208,6 +223,8 @@ function parseCalendarEntry(entry) {
 		a.parentNode.appendChild(document.createTextNode(' | '));
 		createTextLink(a.parentNode, 'to buddy', 'animedb.pl?show=buddyrec&aid='+aid, 'anidb::popup',BasicPopupSelf, null, '560.340.1.1.atbuddyrec');
 	}
+	// Action row
+	createActionRow(recomendationRow.parentNode, aid, recomendationRow.className.indexOf('g_odd') >= 0 ? '' : 'g_odd');
 }
 
 function prepPage() {
