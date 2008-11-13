@@ -63,8 +63,8 @@ function createSubmitRequest() {
 	this.value = 'Submiting...';
 	this.disabled = true;
 	submitQueue.push(this);
-	//alert(url);
-	postData(url);
+	alert(url);
+	//postData(url);
 }
 
 function togglePrioritySelect() {
@@ -72,7 +72,7 @@ function togglePrioritySelect() {
 	if (!select) return;
 	select.disabled = (this.value == '-1');
 	select.value = (this.value == '-1') ? '-1' : '1';
-	var stateInput = this.parentNode.getElementsByTagName('input')[2];
+	var stateInput = this.parentNode.getElementsByTagName('input')[0];
 	stateInput.value = (this.value == '-1') ? 'off' : 'on';
 }
 
