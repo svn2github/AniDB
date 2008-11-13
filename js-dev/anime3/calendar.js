@@ -63,8 +63,8 @@ function createSubmitRequest() {
 	this.value = 'Submiting...';
 	this.disabled = true;
 	submitQueue.push(this);
-	alert(url);
-	//postData(url);
+	//alert(url);
+	postData(url);
 }
 
 function togglePrioritySelect() {
