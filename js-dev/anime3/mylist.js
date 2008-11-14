@@ -529,7 +529,7 @@ function removeFromMylist() {
 							var valueTotal = text.split('/')[1];
 							if (valueTotal.indexOf('+') < 0) valueTotal = Number(valueTotal);
 							else valueTotal = Number(valueTotal.split('+')[0]);
-							cell2.firstChild.nodeValue = text.replace(valueSeen+'/'+valueTotal,((valueSeen && valueSeen > 0) ? (valueSeen-1) : '0') +'/'+(valueTotal-1));
+							cell2.firstChild.nodeValue = text.replace(valueSeen+'/'+valueTotal,((valueSeen && valueSeen > 0) ? (episode.seenDate > 0 ? valueSeen-1 : valueSeen) : '0') +'/'+(valueTotal-1));
 						}
 					} else if (episode.typeChar == 'S') { // episode is special
 						if (cell1) {
