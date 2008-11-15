@@ -107,6 +107,51 @@ function ClassToggle(elem, name, mode)
 	}	
 }
 
+function enhanceCheckboxes(parent) {
+	parent._shiftKey = false;
+	parent._lastCheck = null;
+
+	addEventSimple(parent,"click",function(event) { parent._shiftKey = event.shiftKey; });
+	addEventSimple(parent,"change",function(event) {
+			var currentIndex, checkbox, start, end;
+
+			if (event.target.nodeName.toLowerCase() == "label") {
+				if (event.target.hasAttribute("for"))
+					checkbox = document.getElementById(event.target.getAttribute("for")) || document.getElementsByName(event.target.getAttribute("for")).item(0);
+				else
+					checkbox = event.target.getElementsByTagName("input").item(0);
+			} else
+				checkbox = event.target;
+
+			if (parent._shiftKey && parent._lastCheck != null && parent._lastCheck != checkbox) {
+				for (var i = 0; i < checkbox.form.elements.length; i++) {
+					if (checkbox.form.elements[i] == checkbox) {
+						start = checkbox;
+						end = parent._lastCheck;
+						currentIndex = i;
+						break;
+					} else if (checkbox.form.elements[i] == parent._lastCheck) {
+						start = parent._lastCheck;
+						end = checkbox;
+						currentIndex = i;
+						break;
+					}
+				}
+				for (currentIndex += 1; currentIndex < checkbox.form.elements.length && checkbox.form.elements[currentIndex] != end; currentIndex++) {
+					if (checkbox.form.elements[currentIndex].type == "checkbox") {
+						checkbox.form.elements[currentIndex].checked = checkbox.checked;
+					}
+				}
+
+				parent._lastCheck = end;
+			} else
+				parent._lastCheck = checkbox;
+
+			parent._shiftKey = false;
+		}
+	);
+}
+
 /* specific */
 var Magic = {
 	'add_validator_interface':(function ()
@@ -373,6 +418,13 @@ var Magic = {
 					span.className += ' hide';
 				}
 			}
+		}),
+	'enhanceCheckboxes':(function()
+		{
+			var formElems = document.getElementsByTagName('form');
+			for (var i = 0; i < formElems.length; i++)
+				enhanceCheckboxes(formElems[i]);
+		
 		})
 	};
 
@@ -392,6 +444,7 @@ function InitDefault()
 	Magic.add_validator_interface();
 	Magic.upgrade_search();				//makes the search box take focus after search type change
 	Magic.applySpoilerInputs();			//apply spoiler tag js support
+	Magic.enhanceCheckboxes();			//add gmail like checkbox select and the like
 	
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
