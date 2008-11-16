@@ -56,6 +56,7 @@ var hiddenGroups = 0;
 var loadExpand = false;
 var internalExpand = false;
 var expandedGroups = 0;
+var groupsNeedingExpand = new Array();
 var showNoGroup = true;
 var expandNoGroup = false;
 var expandAllG = false;
@@ -100,9 +101,7 @@ function applyMylistState() {
 	href += 'myamod.doit=1'; // forgot this
 	// yei, i have the full action defined
 	postData(href);
-	var action = Number(mylist_confirm_action);
-	if (action == 1) return;
-	var userReply = (!action ? window.confirm('Submited mylist action change.\nPlease note that you need to reload this page to see the changes.\nDo you wish to reload now?') : true);
+	var userReply = window.confirm('Submited mylist action change.\nPlease note that you need to reload this page to see the changes.\nDo you wish to reload now?');
 	if (userReply) window.location = window.location;
 }
 
@@ -110,8 +109,8 @@ function applyMylistState() {
 function prepPage() {
 	// some other stuff, used only in dev 
 	if (''+window.location.hostname != '') {
-		var mylist3 = getElementsByClassName(document.getElementsByTagName('div'), 'mylist3', true)[0];
-		if (mylist3) mylist3.className = mylist3.className.replace("mylist3","mylist"); // this will correct css used in dev
+		var anime3 = getElementsByClassName(document.getElementsByTagName('div'), 'anime3', true)[0];
+		if (anime3) anime3.className = anime3.className.replace("anime3","anime"); // this will correct css used in dev
 	} else base_url = '';
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
@@ -125,7 +124,16 @@ function prepPage() {
 	}
 	initTooltips();
 	aid = Number(uriObj['aid']);
-	if (isNaN(aid)) return;
+	if (isNaN(aid)) {
+		var as = getElementsByClassName(document.getElementsByTagName('a'), 'short_link', true);
+		for (var a = 0; a < as.length; as++) {
+			var href = as[a].href;
+			if (href.indexOf('anidb.net/a') < 0) continue;
+			aid = Number(href.substr(href.indexOf('anidb.net/a')+11,href.length));
+			break;
+		}
+		if (isNaN(aid)) return;
+	}
 	fetchData(aid);
 	createPreferencesTable('anime');
 }
@@ -182,6 +190,20 @@ function parseData(xmldoc) {
 	updateEpisodeTable();
 	var uET = new Date() - t2;
 	t2 = new Date();
+	// fetch group data if needed
+	for (var g = 0; g < groupsNeedingExpand.length; g++) {
+		// i hope this is just one group, but you never know
+		var gid = groupsNeedingExpand[g];
+		var a = document.getElementById('href_gid_'+gid);
+		expandedGroups--;
+		if (a) {
+			a.onclick = expandFilesByGroup;
+			a.onclick();
+			a.onclick = foldFilesByGroup;
+		}
+	}
+	var gEGD = new Date() - t2;
+	t2 = new Date();
 	updateAddToMylistBox();
 	var uAB = new Date() - t2;
 	var preparingPage = (new Date() - t1);
@@ -192,6 +214,7 @@ function parseData(xmldoc) {
 						'\n\t\tupdateGroupTable: '+uGT+' ms'+
 						'\n\t\tupdateEpisodeTable: '+uET+' ms'+
 						'\n\t\tupdateAddToMylistBox: '+uAB+' ms'+
+						'\n\t\tgetExtraGroupData: '+gEGD+' ms'+
 						'\n\tTotal: '+(parseAnimeNode+parseCustomNode+preparingPage)+' ms');
 }
 
@@ -606,8 +629,16 @@ function updateGroupTable() {
 				var className = cell.className;
 				if (className.indexOf('expand') >= 0) {
 					var ahref = cell.getElementsByTagName('a')[0];
+					if (ahref.href.indexOf('gid='+gid) < 0) {
+						expandedGroups++;
+						groupsNeedingExpand.push(gid);
+						ahref.onclick = foldFilesByGroup;
+					} else ahref.onclick = expandFilesByGroup;
+					/*
 					if (uriObj['gid'] && uriObj['gid'] == group.id) ahref.onclick = foldFilesByGroup;
 					else ahref.onclick = expandFilesByGroup;
+					*/
+					ahref.id = 'href_gid_'+gid;
 					ahref.removeAttribute('href');
 					ahref.style.cursor = 'pointer';
 				}
@@ -741,9 +772,17 @@ function updateEpisodeTable() {
 	var tbody = episodeTable.tBodies[0];
 	if (LAY_HEADER) {
 		var thead = document.createElement('thead');
-		thead.appendChild(tbody.rows[0]);
+		var row = tbody.rows[0];
+		var cell = row.cells[0];
+		if (cell.getElementsByTagName('a').length) {
+			while (cell.childNodes.length) cell.removeChild(cell.firstChild);
+			cell.appendChild(document.createTextNode('X'));
+		}
+		thead.appendChild(row);
 		episodeTable.insertBefore(thead,tbody);
 	}
+	//alert(expandedGroups);
+	var epsToExpand = new Array();
 	for (var e in episodes) {
 		var episode = episodes[e];
 		if (!episode) continue;
@@ -757,11 +796,22 @@ function updateEpisodeTable() {
 				if (cname.indexOf('expand') >= 0) {
 					var ahref = cell.getElementsByTagName('a')[0];
 					if (ahref) {
-						if (uriObj['eid'] && uriObj['eid'] == eid) ahref.onclick = foldEp;
-						else ahref.onclick = expandEp;
+						/* if (uriObj['eid'] && uriObj['eid'] == eid) ahref.onclick = foldEp;
+						else ahref.onclick = expandEp; */
+						if (ahref.href.indexOf('eid='+eid) < 0) {
+							tbody.removeChild(tbody.rows[row.rowIndex]);
+							if (!expandedGroups) {
+								ahref.onclick = expandEp;
+								ahref.onclick();
+								epsToExpand.push(eid);
+							}
+							ahref.onclick = foldEp;
+						} else ahref.onclick = expandEp;
 						ahref.removeAttribute('href');
-					} else // someone called expand gid, add the ep expand icon
-						ahref = createIcon(cell, '+', 'removeme', foldEp, "Expand this entry", 'i_plus');
+					} else {	// someone called expand gid, add the ep expand icon
+						ahref = createIcon(cell, '-', 'removeme', foldEp, "Fold this entry", 'i_minus');
+						tbody.removeChild(tbody.rows[row.rowIndex]);
+					}
 				}
 				if (cname.indexOf('title') >= 0) {
 					var mylistEpEntries = findMylistEpEntries(eid);
@@ -815,6 +865,7 @@ function updateEpisodeTable() {
 			}
 		}
 	}
+	//alert(epsToExpand.join(','));
 }
 
 /* Function that gives some indicators to what is happening
