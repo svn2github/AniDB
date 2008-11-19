@@ -36,7 +36,7 @@ function prepPage() {
 		var hiddenInput = createTextInput(name,20,false,true,null,0);
 		spinCtrl.SetHiddenInput(hiddenInput);
 		spinCtrl.GetInput().value = value;
-		spinCtrl.AttachValueChangedListener(function updateHiddenInputValue(sender,newval) { sender.GetHiddenInput().value = newval; });
+		spinCtrl.AttachValueChangedListener(function updateHiddenInputValue(sender,newval) { sender.GetHiddenInput().value = Number(newval)*100; });
 		cell.appendChild(hiddenInput);
 		spinCtrl.StartListening();
 	}
