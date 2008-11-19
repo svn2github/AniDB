@@ -47,7 +47,7 @@ var smileys = [
 		{'id':"18",'name':"thinking",'title':"thinking",'text':'O_o','targets':'O_o'},
 		{'id':"19",'name':"wtf",'title':"huh?/wtf?",'text':'o_O','targets':'o_O;?'},
 		{'id':"20",'name':"tehehe",'title':"tehehe",'text':'-.-','targets':'-\.-'},
-		{'id':"21",'name':"sweatdrop",'title':"sweat drop",'text':'^_^','targets':'\^_?\^;?'},
+		{'id':"21",'name':"sweatdrop",'title':"sweat drop",'text':'^_^;','targets':'\^_?\^;?'},
 		{'id':"22",'name':"disgusted",'title':"in pain/frustration",'text':'>_<','targets':'&gt;_&lt;'},
 		{'id':"23",'name':"surprised",'title':"surprised",'text':':O','targets':':-?[oO]'},
 		{'id':"24",'name':"dead",'title':"dead",'text':'x_X','targets':'[xX]_[xX]'},
