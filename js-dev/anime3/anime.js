@@ -1487,7 +1487,16 @@ function createMylistAddBox(parentNode,type) {
 	createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
 	optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
 						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '},15:{"text":' streamed '}};
-	select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,((type == 'anime') ? 13 : 100),optionArray);
+	var defaultAddType = ((type == 'anime') ? 13 : 100);
+	if (type == 'anime') {
+		switch(anime.type) {
+			case 'movie': defaultAddType = 14; break;
+			case 'ova': defaultAddType = 11; break;
+			case 'www': defaultAddType = 15; break;
+			default: defaultAddType = 13; break;
+		}
+	}
+	select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,defaultAddType,optionArray);
 	createFieldValueRow(tbody,'type'+gODD(i),'Generic Type',select); i++;
 	createFieldValueRow(tbody,'source'+gODD(i),'Source',createTextInput("addl.source",30,false,false,100)); i++;
 	createFieldValueRow(tbody,'storage'+gODD(i),'Storage',createTextInput("addl.storage",30,false,false,100)); i++;
@@ -1535,6 +1544,17 @@ function updateAddToMylistBox() {
 	// replace the existing box with my box :P (box in a box, funny? well, i guessed not)
 	simpleaddanimetomylistbox = getElementsByClassName(document.getElementsByTagName('p'),'mylistadd',false)[0];
 	if (simpleaddanimetomylistbox) {
+		var select = simpleaddanimetomylistbox.getElementsByTagName('select')[0];
+		if (select) {
+			var defaultAddType = 13;
+			switch(anime.type) {
+				case 'movie': defaultAddType = 14; break;
+				case 'ova': defaultAddType = 11; break;
+				case 'www': defaultAddType = 15; break;
+				default: defaultAddType = 13; break;
+			}
+			select.value = defaultAddType;
+		}
 		// Add an expand inline icon to allow expanding to a full version of the generic add thing
 		var span = simpleaddanimetomylistbox.getElementsByTagName('span')[0];
 		if (span) {
