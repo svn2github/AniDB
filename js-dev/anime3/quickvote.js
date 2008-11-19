@@ -1,0 +1,45 @@
+/* file Quickvote interface 
+ * @author fahrenheit (alka.setzer@gmail.com)
+ * version 1.0 (19.11.2008) - Initial version
+ */
+ 
+function prepPage() {
+	var table = getElementsByClassName(document.getElementsByTagName('table'), 'animelist', false)[0];
+	if (!table) return;
+	var tbody = table.tBodies[0];
+	var thead = document.createElement('thead');
+	var row = tbody.rows[0];
+	row.cells[2].colSpan = 1;
+	thead.appendChild(row);
+	table.insertBefore(thead,tbody);
+	var tfoot = document.createElement('tfoot');
+	row = tbody.rows[tbody.rows.length-1];
+	row.cells[0].colSpan = 3;
+	tfoot.appendChild(row);
+	table.appendChild(tfoot);
+	// okay, fun begins now!
+	for (var i = 0; i < tbody.rows.length; i++) {
+		var row = tbody.rows[i];
+		while (row.cells.length > 3) row.removeChild(row.cells[3]);
+		var cell = row.cells[2];
+		var input = cell.getElementsByTagName('input')[0];
+		var name = input.name;
+		var value = (row.cells[1].firstChild ? Number(row.cells[1].firstChild.nodeValue) : 0);
+		while (cell.childNodes.length) cell.removeChild(cell.firstChild);
+		spinCtrl = new SpinControl();
+		spinCtrl.SetMaxValue(10);
+		spinCtrl.SetMinValue(1);
+		spinCtrl.SetCurrentValue(value);
+		spinCtrl.GetAccelerationCollection().Add(new SpinControlAcceleration(0.10,  500));
+		spinCtrl.GetAccelerationCollection().Add(new SpinControlAcceleration(0.50, 1000));
+		cell.appendChild(spinCtrl.GetContainer());
+		var hiddenInput = createTextInput(name,20,false,true,null,0);
+		spinCtrl.SetHiddenInput(hiddenInput);
+		spinCtrl.GetInput().value = value;
+		spinCtrl.AttachValueChangedListener(function updateHiddenInputValue(sender,newval) { sender.GetHiddenInput().value = newval; });
+		cell.appendChild(hiddenInput);
+		spinCtrl.StartListening();
+	}
+}
+
+addLoadEvent(prepPage);
