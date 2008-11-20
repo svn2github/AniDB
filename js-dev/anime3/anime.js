@@ -1492,7 +1492,7 @@ function createMylistAddBox(parentNode,type) {
 		switch(anime.type) {
 			case 'movie': defaultAddType = 14; break;
 			case 'ova': defaultAddType = 11; break;
-			case 'www': defaultAddType = 15; break;
+			case 'web': defaultAddType = 15; break;
 			default: defaultAddType = 13; break;
 		}
 	}
@@ -1550,7 +1550,7 @@ function updateAddToMylistBox() {
 			switch(anime.type) {
 				case 'movie': defaultAddType = 14; break;
 				case 'ova': defaultAddType = 11; break;
-				case 'www': defaultAddType = 15; break;
+				case 'web': defaultAddType = 15; break;
 				default: defaultAddType = 13; break;
 			}
 			select.value = defaultAddType;

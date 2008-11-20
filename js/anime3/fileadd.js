@@ -28,46 +28,36 @@ var isEditPage = false;
 var seeDebug = false;
 var LAY_FORMATFILESIZE = false;
 var templateType = 'manual';
+var animeType = 0;
 
 // FUNCTIONS
 
 function fetchData() {
-  var req = xhttpRequest();
-  if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
-  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
+	var req = xhttpRequest();
+	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
 }
 
 function CGroup(node) {
-  this.id = Number(node.getAttribute('gid'));
-  this.name = node.getAttribute('name');
-  this.sname = node.getAttribute('sname');
+	this.id = Number(node.getAttribute('gid'));
+	this.name = node.getAttribute('name');
+	this.sname = node.getAttribute('sname');
 }
 
 function parseData(xmldoc) {
-  var root = xmldoc.getElementsByTagName('root').item(0);
-  var t1 = new Date();
-  var groupEntries = root.getElementsByTagName('group');
-  var select = document.createElement('select');
-  select.size = 1;
-  select.name = 'addf.group';
-  var option = document.createElement("option");
-  option.value = '-1';
-  option.appendChild(document.createTextNode('ignore'));
-  select.appendChild(option);
-  option = document.createElement("option");
-  option.value = '0';
-  option.appendChild(document.createTextNode('no or unknown group'));
-  select.appendChild(option);
-  for (var i = 0; i < groupEntries.length; i++) {
-    var groupEntry = new CGroup(groupEntries[i]);
-    option = document.createElement("option");
-    option.value = groupEntry.id;
-    option.appendChild(document.createTextNode('['+groupEntry.sname+'] '+groupEntry.name));
-    select.appendChild(option);
-  }
-  while (replaceCell.childNodes.length)
-    replaceCell.removeChild(replaceCell.childNodes[0]);
-  replaceCell.appendChild(select);
+	var root = xmldoc.getElementsByTagName('root').item(0);
+	var t1 = new Date();
+	var groupEntries = root.getElementsByTagName('group');
+	var select = createBasicSelect('addf.group','addf.group');
+	createSelectOption(select, 'ignore', '1', true, null, false);
+	createSelectOption(select, 'no or unknown group', '0', false, null, false);
+	for (var i = 0; i < groupEntries.length; i++) {
+		var groupEntry = new CGroup(groupEntries[i]);
+		createSelectOption(select, '['+groupEntry.sname+'] '+groupEntry.name, groupEntry.id, false, null, false);
+	}
+	while (replaceCell.childNodes.length)
+		replaceCell.removeChild(replaceCell.childNodes[0]);
+	replaceCell.appendChild(select);
 }
 
 function createFileAddSelect(source,name,id) {
@@ -331,14 +321,14 @@ subStreams.prototype.add = function() {
   this.streams[str].dubsubbed = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' dubsubbed'));
-  span.appendChild(document.createElement('BR'));
+  span.appendChild(document.createElement('br'));
   c1.appendChild(span);
   span = document.createElement('span');
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_HEARINGIMP');
   this.streams[str].hearingimp = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' hearing impaired subs'));
-  span.appendChild(document.createElement('BR'));
+  span.appendChild(document.createElement('br'));
   c1.appendChild(span);
   span = document.createElement('span');
   if (simpleView) span.style.display = 'none';
@@ -346,7 +336,7 @@ subStreams.prototype.add = function() {
   this.streams[str].image = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' image subs (VOBSUB)'));
-  span.appendChild(document.createElement('BR'));
+  span.appendChild(document.createElement('br'));
   c1.appendChild(span);
   span = document.createElement('span');
   if (simpleView) span.style.display = 'none';
@@ -354,14 +344,14 @@ subStreams.prototype.add = function() {
   this.streams[str].styled = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' styled subs (ASS/SSA)'));
-  span.appendChild(document.createElement('BR'));
+  span.appendChild(document.createElement('br'));
   c1.appendChild(span);
   span = document.createElement('span');
   checkbox = createCheckbox('addstrm.sub_'+subTracks+'.flag.FLAG_FORCOMMENTARY');
   this.streams[str].forcommentary = checkbox;
   span.appendChild(checkbox);
   span.appendChild(document.createTextNode(' subs for commentary audio stream'));
-  span.appendChild(document.createElement('BR'));
+  span.appendChild(document.createElement('br'));
   c1.appendChild(span);
   span = document.createElement('span');
   if (simpleView) span.style.display = 'none';
@@ -393,7 +383,7 @@ function CView() {
   var row = document.createElement('tr');
   var cell = document.createElement('td');
   cell.colSpan = 2;
-  var a = document.createElement('A');
+  var a = document.createElement('a');
   a.onclick = changeView;
   if (simpleView) a.appendChild(document.createTextNode('[switch to full view]'));
   else a.appendChild(document.createTextNode('[switch to simple view]'));
@@ -441,31 +431,31 @@ CView.prototype.simpleView = function() {
   }
 }
 CView.prototype.fullView = function() {
-  simpleView = false;
-  for (var e in this) {
-    if (this[e] && this[e].style) this[e].style.display = "";
-  }
-  if (!isEditPage) {
-    for (var i in audstrm.streams) {
-      var stream = audstrm.streams[i];
-      if (!stream) continue;
-      if (stream.codec) stream.codec.parentNode.parentNode.style.display = "";
-      if (stream.channels) stream.channels.parentNode.parentNode.style.display = "";
-    }
-    for (var i in substrm.streams) {
-      var stream = substrm.streams[i];
-      if (!stream) continue;
-      if (stream.image) stream.image.parentNode.style.display = "";
-      if (stream.styled) stream.styled.parentNode.style.display = "";
-      if (stream.unstyled) stream.unstyled.parentNode.style.display = "";
-    }
-  }
+	simpleView = false;
+	for (var e in this) {
+		if (this[e] && this[e].style) this[e].style.display = "";
+	}
+	if (!isEditPage) {
+		for (var i in audstrm.streams) {
+			var stream = audstrm.streams[i];
+			if (!stream) continue;
+			if (stream.codec) stream.codec.parentNode.parentNode.style.display = "";
+			if (stream.channels) stream.channels.parentNode.parentNode.style.display = "";
+		}
+		for (var i in substrm.streams) {
+			var stream = substrm.streams[i];
+			if (!stream) continue;
+			if (stream.image) stream.image.parentNode.style.display = "";
+			if (stream.styled) stream.styled.parentNode.style.display = "";
+			if (stream.unstyled) stream.unstyled.parentNode.style.display = "";
+		}
+	}
 }
 function changeView() {
-  if (!currentView) return;
-  while (this.childNodes.length) this.removeChild(this.childNodes[0]);
-  if (simpleView) { this.appendChild(document.createTextNode('[switch to simple view]')); currentView.fullView(); }
-  else { this.appendChild(document.createTextNode('[switch to full view]')); currentView.simpleView(); }
+	if (!currentView) return;
+	while (this.childNodes.length) this.removeChild(this.childNodes[0]);
+	if (simpleView) { this.appendChild(document.createTextNode('[switch to simple view]')); currentView.fullView(); }
+	else { this.appendChild(document.createTextNode('[switch to full view]')); currentView.simpleView(); }
 }
 
 /** ed2k link parsing functions by epoximator **/
@@ -473,190 +463,185 @@ function changeView() {
 function MyFile(name, size, ed2k){
 	this.find_crc = function(text){
 		var regx = /[\[\(]([a-f0-9]{8})[\]\)]/i;
-		if(regx.test(text))
-			return (RegExp.$1).toLowerCase();
-    else return('');
+		if(regx.test(text)) return (RegExp.$1).toLowerCase();
+		else return('');
 	}
 	this.find_version = function(text){
-		var regx = /v(\d)[\s\_\.\(\[]/i;
-		if(regx.test(text))
-			return (RegExp.$1)*1
-    else return(1);
+		var regx = /(\d)v(\d)/;
+		if(regx.test(text)) return (RegExp.$2)*1
+		else return(1);
 	}
-  this.find_filetype = function(text){
+	this.find_filetype = function(text){
 		var regx = /\.([a-z0-9]{2,4})$/i;
-		if(regx.test(text))
-			return RegExp.$1.toLowerCase();
+		if(regx.test(text)) return RegExp.$1.toLowerCase();
 	}
-  this.find_group = function(text){
-    var regx = /(\[|\{)(.+?)(\]|\})(\[|\(|\.|_).+$/i;
-    if(regx.test(text))
-			return (RegExp.$2)
-    else return('');
-  }
+	this.find_group = function(text){
+		var regx = /(\[|\{)(.+?)(\]|\})(\[|\(|\.|_).+$/i;
+		if(regx.test(text)) return (RegExp.$2)
+		else return('');
+	}
 	this.crc = this.find_crc(name);
 	this.version = this.find_version(name);
-  this.filetype = this.find_filetype(name);
-  this.group = this.find_group(name);
-  this.size = size;
+	this.filetype = this.find_filetype(name);
+	this.group = this.find_group(name);
+	this.size = size;
 }
 
 function parseEd2k() {
-  var re_ed2k_link = /ed2k\:\/\/\|file\|(.+)\|(\d+)\|([a-f0-9]{32})\|/i;
-  var file = null;
-  if(re_ed2k_link.test(this.value)) {
+	var re_ed2k_link = /ed2k\:\/\/\|file\|(.+)\|(\d+)\|([a-f0-9]{32})\|/i;
+	var file = null;
+	if(re_ed2k_link.test(this.value)) {
 		file = new MyFile(RegExp.$1, RegExp.$2, RegExp.$3);
-  } else return;
-  // we have a file let's update some fields
-  input_crc32.value = file.crc;
-  input_fileVersion.value = file.version;
-  input_fileExtension.value = file.filetype;
-  input_size.value = formatFileSize(file.size);
-  searchbox.value = file.group;
-  workEd2k(file);
+	} else return;
+	// we have a file let's update some fields
+	input_crc32.value = file.crc;
+	input_fileVersion.value = file.version;
+	input_fileExtension.value = file.filetype;
+	input_size.value = formatFileSize(file.size);
+	searchbox.value = file.group;
+	workEd2k(file);
 }
 
 function workEd2k(file) {
-  // Stuff that i'll possibly edit
-  if (templateType == 'dub' || templateType == 'sub') vidstrm.disable(true); else vidstrm.disable(false);
-  if (templateType == 'sub') audstrm.disable(true); else audstrm.disable(false);
-  if (templateType == 'raw' || templateType == 'dub') substrm.disable(true); else substrm.disable(false);
-  switch (file.filetype) {
-    case 'srt':
-      vidstrm.disable(true,0);
-      audstrm.disable(true,0);
-      if (audstrm.streams[1]) audstrm.remove(1);
-      typeSelect.value = 20;
-      substrm.streams[0].type.value = 20;
-      substrm.streams[0].image.checked = false;
-      substrm.streams[0].styled.checked = false;
-      substrm.streams[0].unstyled.checked = true;
-      break;
-    case 'ssa':
-    case 'ass':
-      vidstrm.disable(true,0);
-      audstrm.disable(true,0);
-      if (audstrm.streams[1]) audstrm.remove(1);
-      typeSelect.value = 20;
-      substrm.streams[0].type.value = 20;
-      substrm.streams[0].image.checked = false;
-      substrm.streams[0].styled.checked = true;
-      substrm.streams[0].unstyled.checked = false;
-      break;
-    default:
-      break;
-  }
+	// Stuff that i'll possibly edit
+	if (templateType == 'dub' || templateType == 'sub') vidstrm.disable(true); else vidstrm.disable(false);
+	if (templateType == 'sub') audstrm.disable(true); else audstrm.disable(false);
+	if (templateType == 'raw' || templateType == 'dub') substrm.disable(true); else substrm.disable(false);
+	switch (file.filetype) {
+		case 'srt':
+			vidstrm.disable(true,0);
+			audstrm.disable(true,0);
+			if (audstrm.streams[1]) audstrm.remove(1);
+			typeSelect.value = 20;
+			substrm.streams[0].type.value = 20;
+			substrm.streams[0].image.checked = false;
+			substrm.streams[0].styled.checked = false;
+			substrm.streams[0].unstyled.checked = true;
+			break;
+		case 'ssa':
+		case 'ass':
+			vidstrm.disable(true,0);
+			audstrm.disable(true,0);
+			if (audstrm.streams[1]) audstrm.remove(1);
+			typeSelect.value = 20;
+			substrm.streams[0].type.value = 20;
+			substrm.streams[0].image.checked = false;
+			substrm.streams[0].styled.checked = true;
+			substrm.streams[0].unstyled.checked = false;
+			break;
+		default:
+			break;
+	}
 }
 
 function workTemplate() {
-  // Stuff that i'll possibly edit
-  qualSelect.value = 3;
-  sourceSelect.value = 5;
-  typeSelect.value = 10;
-  vidstrm.disable(false);
-  audstrm.disable(false);
-  substrm.disable(false);
-  templateType = this.value;
-  //typeSelect.disabled = true;
-  switch (this.value) {
-    case 'manual':
-      typeSelect.disabled = false;
-      break;
-    case 'raw':
-      substrm.disable(true,0);
-      audstrm.streams[0].lang.value = 2;
-      if (audstrm.streams[1]) audstrm.remove(1);
-	  if (substrm.streams[1]) substrm.remove(1);
-      break;
-    case 'fansub':
-      audstrm.streams[0].lang.value = 2;
-      if (audstrm.streams[1]) audstrm.remove(1);
-	  if (substrm.streams[1]) substrm.remove(1);
-      break;
-    case 'dual':
-      qualSelect.value = 2;
-      sourceSelect.value = 7;
-      audstrm.streams[0].lang.value = 2;
-      substrm.streams[0].lang.value = 2;
-      substrm.streams[0].type.value = 20;
-      if (!audstrm.streams[1]) { 
-        audstrm.add();
-        audstrm.streams[1].toggle.onclick = function () { audstrm.remove(1); }
-        audstrm.streams[1].lang.value = 4;
-        audstrm.streams[1].type.value = 10;
-      } else {
-        audstrm.disable(false,1);
-      }
-	  if (substrm.streams[1]) substrm.remove(1);
-      break;
-    case 'dualsubs':
-      qualSelect.value = 2;
-      sourceSelect.value = 7;
-      audstrm.streams[0].lang.value = 2;
-      substrm.streams[0].lang.value = 2;
-      substrm.streams[0].type.value = 20;
-      if (!audstrm.streams[1]) { 
-        audstrm.add();
-        audstrm.streams[1].toggle.onclick = function () { audstrm.remove(1); }
-        audstrm.streams[1].lang.value = 4;
-        audstrm.streams[1].type.value = 10;
-      } else {
-        audstrm.disable(false,1);
-      }
-      if (!substrm.streams[1]) { 
-        substrm.add();
-        substrm.streams[1].toggle.onclick = function () { substrm.remove(1); }
-        substrm.streams[1].lang.value = 2;
-        substrm.streams[1].type.value = 20;
-      } else {
-        substrm.disable(false,1);
-      }
-      break;
-    case 'dub':
-      vidstrm.disable(true,0);
-      substrm.disable(true,0);
-      if (audstrm.streams[1]) audstrm.remove(1);
-	  if (substrm.streams[1]) substrm.remove(1);
-      typeSelect.value = 30;
-      break;
-    case 'sub':
-      vidstrm.disable(true,0);
-      audstrm.disable(true,0);
-	  if (substrm.streams[1]) substrm.remove(1);
-      if (audstrm.streams[1]) audstrm.remove(1);
-      typeSelect.value = 20;
-      break;
-    case 'other':
-      vidstrm.disable(true,0);
-      typeSelect.value = 100;
-      qualSelect.value = 1;
-      if (audstrm.streams[1]) audstrm.remove(1);
-      sourceSelect.value = 1;
-      break;
-    default: return;
-  }
+	// Stuff that i'll possibly edit
+	qualSelect.value = 3;
+	sourceSelect.value = (animeType != 6 ? 14 : 11);
+	typeSelect.value = 10;
+	vidstrm.disable(false);
+	audstrm.disable(false);
+	substrm.disable(false);
+	templateType = this.value;
+	//typeSelect.disabled = true;
+	switch (this.value) {
+		case 'manual':
+			typeSelect.disabled = false;
+			break;
+		case 'raw':
+			substrm.disable(true,0);
+			audstrm.streams[0].lang.value = 2;
+			if (audstrm.streams[1]) audstrm.remove(1);
+			if (substrm.streams[1]) substrm.remove(1);
+			break;
+		case 'fansub':
+			audstrm.streams[0].lang.value = 2;
+			if (audstrm.streams[1]) audstrm.remove(1);
+			if (substrm.streams[1]) substrm.remove(1);
+			break;
+		case 'dual':
+			qualSelect.value = 2;
+			sourceSelect.value = 7;
+			audstrm.streams[0].lang.value = 2;
+			substrm.streams[0].lang.value = 4;
+			substrm.streams[0].type.value = 20;
+			if (!audstrm.streams[1]) { 
+				audstrm.add();
+				audstrm.streams[1].toggle.onclick = function () { audstrm.remove(1); }
+				audstrm.streams[1].lang.value = 4;
+				audstrm.streams[1].type.value = 10;
+			} else {
+				audstrm.disable(false,1);
+			}
+			if (substrm.streams[1]) substrm.remove(1);
+			break;
+		case 'dualsubs':
+			qualSelect.value = 2;
+			sourceSelect.value = 7;
+			audstrm.streams[0].lang.value = 2;
+			substrm.streams[0].lang.value = 2;
+			substrm.streams[0].type.value = 20;
+			if (!audstrm.streams[1]) { 
+				audstrm.add();
+				audstrm.streams[1].toggle.onclick = function () { audstrm.remove(1); }
+				audstrm.streams[1].lang.value = 4;
+				audstrm.streams[1].type.value = 10;
+			} else {
+				audstrm.disable(false,1);
+			}
+			if (!substrm.streams[1]) { 
+				substrm.add();
+				substrm.streams[1].toggle.onclick = function () { substrm.remove(1); }
+				substrm.streams[1].lang.value = 2;
+				substrm.streams[1].type.value = 20;
+			} else {
+				substrm.disable(false,1);
+			}
+			break;
+		case 'dub':
+			vidstrm.disable(true,0);
+			substrm.disable(true,0);
+			if (audstrm.streams[1]) audstrm.remove(1);
+			if (substrm.streams[1]) substrm.remove(1);
+			typeSelect.value = 30;
+			break;
+		case 'sub':
+			vidstrm.disable(true,0);
+			audstrm.disable(true,0);
+			if (substrm.streams[1]) substrm.remove(1);
+			if (audstrm.streams[1]) audstrm.remove(1);
+			typeSelect.value = 20;
+			break;
+		case 'other':
+			vidstrm.disable(true,0);
+			typeSelect.value = 100;
+			qualSelect.value = 1;
+			if (audstrm.streams[1]) audstrm.remove(1);
+			sourceSelect.value = 1;
+			break;
+		default: return;
+	}
 }
 
 function addTemplate() {
-  var row = document.createElement('tr');
-  createCell(row, null, document.createTextNode('Template:'), null);
-  //"dualsubs":{"text":'dual aud/subs (japanese audio, ? audio, ? subtitles, ? subtitles)'},
-  var optionArray = {"manual":{"text":'manual input'},"raw":{"text":'raw (japanese audio, no subtitles)'},
-					 "fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
-					 "dub":{"text":'external dub file (? audio)'},"sub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
-  var select = createSelectArray(null,null,null,null,null,optionArray);
-  select.onchange = workTemplate;
-  createCell(row, null, select, null);
-  table.tBodies[0].insertBefore(row,targetRow);
-  vidstrm = new vidStreams();
-  audstrm = new audStreams();
-  substrm = new subStreams();
-  vidstrm.streams[0].toggle.onclick = function () { vidstrm.disable(vidstrm.streams[0].toggle.checked, 0); }
-  audstrm.streams[0].toggle.onclick = function () { audstrm.disable(audstrm.streams[0].toggle.checked, 0); }
-  substrm.streams[0].toggle.onclick = function () { substrm.disable(substrm.streams[0].toggle.checked, 0); }
-  qualSelect = getElementsByName(document.getElementsByTagName('select'),'addf.quality',true)[0];
-  sourceSelect = getElementsByName(document.getElementsByTagName('select'),'addf.type',true)[0];
-
+	var row = document.createElement('tr');
+	createCell(row, null, document.createTextNode('Template:'), null);
+	//"dualsubs":{"text":'dual aud/subs (japanese audio, ? audio, ? subtitles, ? subtitles)'},
+	var optionArray = {"manual":{"text":'manual input'},"raw":{"text":'raw (japanese audio, no subtitles)'},
+						"fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
+						"dub":{"text":'external dub file (? audio)'},"sub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
+	var select = createSelectArray(null,null,null,null,null,optionArray);
+	select.onchange = workTemplate;
+	createCell(row, null, select, null);
+	table.tBodies[0].insertBefore(row,targetRow);
+	vidstrm = new vidStreams();
+	audstrm = new audStreams();
+	substrm = new subStreams();
+	vidstrm.streams[0].toggle.onclick = function () { vidstrm.disable(vidstrm.streams[0].toggle.checked, 0); }
+	audstrm.streams[0].toggle.onclick = function () { audstrm.disable(audstrm.streams[0].toggle.checked, 0); }
+	substrm.streams[0].toggle.onclick = function () { substrm.disable(substrm.streams[0].toggle.checked, 0); }
+	qualSelect = getElementsByName(document.getElementsByTagName('select'),'addf.quality',true)[0];
+	sourceSelect = getElementsByName(document.getElementsByTagName('select'),'addf.type',true)[0];
 }
 
 function updateSize() {
@@ -671,65 +656,66 @@ function updateDates() {
 	this.value = this.value.replace(replace,'.');
 	replace = new RegExp("\-+","mgi");
 	this.value = this.value.replace(replace,'.');
-
 }
 
 function updateSearchString() { 
 	while (replaceCell.childNodes.length)
-    replaceCell.removeChild(replaceCell.childNodes[0]);
-  replaceCell.appendChild(document.createTextNode('please wait while searching...'));
-  searchString = searchbox.value;
-  fetchData(); 
+		replaceCell.removeChild(replaceCell.childNodes[0]);
+	replaceCell.appendChild(document.createTextNode('please wait while searching...'));
+	searchString = searchbox.value;
+	fetchData(); 
 }
 
 function prepPage() {
-  uriObj = parseURI(); // update the uriObj
-  if (uriObj['eid'] && uriObj['show'] && uriObj['show'].indexOf('addfile') >= 0) eid = uriObj['eid'];
-  else return; // badPage
-  if (uriObj['edit'] && uriObj['edit'] != 0) { isEditPage = true; simpleView = false; }
-  // find the result cell
-  var input = getElementsByName(document.getElementsByTagName('input'),'addf.do.searchgroup',true)[0];
-  searchbox = getElementsByName(document.getElementsByTagName('input'),'addf.groupsearch',true)[0];
-  if (!input || !searchbox) return;
-  var cellId = input.parentNode.cellIndex;
-  var prow = input.parentNode.parentNode;
-  var rowId = prow.rowIndex;
-  var nrow = prow.parentNode.rows[rowId+1];
-  replaceCell = nrow.cells[cellId];
-  if (!replaceCell) errorAlert('prepPage','noReplaceCell');
-  var newinput = createBasicButton('addf.do.searchgroup',' Search ');
-  newinput.onclick = updateSearchString;
-  input.parentNode.replaceChild(newinput,input);
-  // Stuff for the template part
-  table = getElementsByClassName(document.getElementsByTagName('table'),'file_add',true)[0];
-  if (!table) return;
-  targetRow = table.tBodies[0].rows[8];
-  var cell0 = targetRow.cells[0];
-  var cell1 = targetRow.cells[1];
-  typeSelect = cell1.getElementsByTagName('select')[0]; // The file type select
-  targetRow = table.tBodies[0].rows[1];
-  if (!isEditPage) {
-    vidstrm = new vidStreams();
-    audstrm = new audStreams();
-    substrm = new subStreams();
-    vidstrm.streams[0].toggle.onclick = function () { vidstrm.disable(vidstrm.streams[0].toggle.checked, 0); }
-    audstrm.streams[0].toggle.onclick = function () { audstrm.disable(audstrm.streams[0].toggle.checked, 0); }
-    substrm.streams[0].toggle.onclick = function () { substrm.disable(substrm.streams[0].toggle.checked, 0); }
-  }
-  qualSelect = getElementsByName(document.getElementsByTagName('select'),'addf.quality',true)[0];
-  sourceSelect = getElementsByName(document.getElementsByTagName('select'),'addf.type',true)[0];
-  if (!typeSelect.disabled && !isEditPage) addTemplate(); // if file is verified don't do more stuff
-  currentView = new CView();
-  if (!isEditPage) currentView.simpleView();
-  else currentView.fullView();
-  input_ed2k = getElementsByName(document.getElementsByTagName('input'),'addf.ed2k',true)[0];
-  input_ed2k.onchange = parseEd2k;
-  input_crc32 = getElementsByName(document.getElementsByTagName('input'),'addf.crc',true)[0];
-  input_fileVersion = getElementsByName(document.getElementsByTagName('select'),'addf.fileversion',true)[0];
-  input_size = getElementsByName(document.getElementsByTagName('input'),'addf.size',true)[0];
-  input_size.onchange = updateSize;
-  input_fileExtension = getElementsByName(document.getElementsByTagName('select'),'addf.filetype',true)[0];
-  getElementsByName(document.getElementsByTagName('input'),'addf.released',true)[0].onchange = updateDates;
+	uriObj = parseURI(); // update the uriObj
+	if (uriObj['eid'] && uriObj['show'] && uriObj['show'].indexOf('addfile') >= 0) eid = uriObj['eid'];
+	else return; // badPage
+	if (uriObj['edit'] && uriObj['edit'] != 0) { isEditPage = true; simpleView = false; }
+	// find the result cell
+	var input = getElementsByName(document.getElementsByTagName('input'),'addf.do.searchgroup',true)[0];
+	searchbox = getElementsByName(document.getElementsByTagName('input'),'addf.groupsearch',true)[0];
+	if (!input || !searchbox) return;
+	var cellId = input.parentNode.cellIndex;
+	var prow = input.parentNode.parentNode;
+	var rowId = prow.rowIndex;
+	var nrow = prow.parentNode.rows[rowId+1];
+	replaceCell = nrow.cells[cellId];
+	if (!replaceCell) errorAlert('prepPage','noReplaceCell');
+	var newinput = createBasicButton('addf.do.searchgroup',' Search ');
+	newinput.onclick = updateSearchString;
+	input.parentNode.replaceChild(newinput,input);
+	// Stuff for the template part
+	table = getElementsByClassName(document.getElementsByTagName('table'),'file_add',true)[0];
+	if (!table) return;
+	targetRow = table.tBodies[0].rows[8];
+	var cell0 = targetRow.cells[0];
+	var cell1 = targetRow.cells[1];
+	typeSelect = cell1.getElementsByTagName('select')[0]; // The file type select
+	targetRow = table.tBodies[0].rows[1];
+	if (!isEditPage) {
+		vidstrm = new vidStreams();
+		audstrm = new audStreams();
+		substrm = new subStreams();
+		vidstrm.streams[0].toggle.onclick = function () { vidstrm.disable(vidstrm.streams[0].toggle.checked, 0); }
+		audstrm.streams[0].toggle.onclick = function () { audstrm.disable(audstrm.streams[0].toggle.checked, 0); }
+		substrm.streams[0].toggle.onclick = function () { substrm.disable(substrm.streams[0].toggle.checked, 0); }
+	}
+	qualSelect = getElementsByName(document.getElementsByTagName('select'),'addf.quality',true)[0];
+	sourceSelect = getElementsByName(document.getElementsByTagName('select'),'addf.type',true)[0];
+	if (!typeSelect.disabled && !isEditPage) addTemplate(); // if file is verified don't do more stuff
+	currentView = new CView();
+	if (!isEditPage) currentView.simpleView();
+	else currentView.fullView();
+	input_ed2k = getElementsByName(document.getElementsByTagName('input'),'addf.ed2k',true)[0];
+	input_ed2k.onchange = parseEd2k;
+	input_crc32 = getElementsByName(document.getElementsByTagName('input'),'addf.crc',true)[0];
+	input_fileVersion = getElementsByName(document.getElementsByTagName('select'),'addf.fileversion',true)[0];
+	input_size = getElementsByName(document.getElementsByTagName('input'),'addf.size',true)[0];
+	input_size.onchange = updateSize;
+	input_fileExtension = getElementsByName(document.getElementsByTagName('select'),'addf.filetype',true)[0];
+	getElementsByName(document.getElementsByTagName('input'),'addf.released',true)[0].onchange = updateDates;
+	var atype = getElementsByName(document.getElementsByTagName('input'),'atype',false)[0];
+	if (atype) animeType = Number(atype.value);
 }
 
 
