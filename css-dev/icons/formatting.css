@@ -291,9 +291,6 @@ a.confirmButton, input.confirmButton, button.confirmButton {
   border: 0px;
   height: 15px;
   /* Change this to modify the default spin control font, font color, and font size*/
-  color: Black;
-  font-size: 9pt;
-  font-family: Arial;
 }
 
 .spinUpBtn, 
