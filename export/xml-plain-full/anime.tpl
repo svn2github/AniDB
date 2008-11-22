@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- 
   AniDB mylist anime template 
-  Version 1.0.0.$Rev: 10 $ 
+  Version 1.0.0.$Rev: 12 $ 
   (C) 2008 Finalspace
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <tmpl_loop name=loop_anime>
 <anime>
   <id><tmpl_var name=data_anime_id></id>
@@ -343,7 +343,7 @@
           </container>
           
           <type id="<tmpl_var name=data_file_type_id>">
-            <value><![CDATA[<tmpl_var name=data_file_type>]]></value>
+            <value><tmpl_var name=data_file_type></value>
             <name><![CDATA[<tmpl_var name=data_file_type_name>]]></name>
           </type>
           

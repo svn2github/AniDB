@@ -1,0 +1,4 @@
+Version 1.0.1:
+
+- Fixed invalid xml, because of comments on top level
+- Fixed mylist list/epcount

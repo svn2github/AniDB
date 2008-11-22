@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   AniDB mylist template
-  Version 1.0.0.$Rev: 10 $
+  Version 1.0.0.$Rev: 12 $
   (C) 2008 Finalspace
-s-->
-<?xml version="1.0" encoding="UTF-8"?>
+-->
 <mylist>
 
   <info>
@@ -21,7 +21,7 @@ s-->
   
   <list>
     <animecount><tmpl_var name=global_animecount></animecount>
-    <epcount><tmpl_var name=global_animecount></epcount>
+    <epcount><tmpl_var name=global_epcount></epcount>
     <filecount><tmpl_var name=global_filecount></filecount>
     <bytecount normal="<tmpl_var name=global_bytecount>" formated="<tmpl_var name=global_bytecount_h>" />
   </list>
