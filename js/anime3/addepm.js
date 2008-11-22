@@ -76,6 +76,7 @@ function parseData(xmldoc) {
 	for (var i = 0; i < animes[aid].eps; i++) {
 		var eid = epOrder[i];
 		var episode = episodes[eid];
+		if (!episode) continue;
 		if (episode.typeChar == '') normalEpsCnt++;
 		else break;
 	}
