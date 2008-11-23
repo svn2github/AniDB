@@ -384,9 +384,9 @@ meta_href_2  = function(args)
 	switch (bits.length)
 	{
 	case 3:
-		return (function (t) { t.href = "http://anidb.info/perl-bin/" + "anidb.pl?" + bits[0].concat(bits[1]+arguments[whats[0]],bits[2]).join("&"); });
+		return (function (t) { t.href = "http://anidb.net/perl-bin/" + "animedb.pl?" + bits[0].concat(bits[1]+arguments[whats[0]],bits[2]).join("&"); });
 	case 5:
-		return (function (t) { t.href = "http://anidb.info/perl-bin/" + "anidb.pl?" + bits[0].concat(bits[1]+arguments[whats[0]],bits[2],bits[3]+arguments[whats[1]],bits[4]).join("&"); });
+		return (function (t) { t.href = "http://anidb.net/perl-bin/" + "animedb.pl?" + bits[0].concat(bits[1]+arguments[whats[0]],bits[2],bits[3]+arguments[whats[1]],bits[4]).join("&"); });
 	default:
 		return (function (t)
 			{
@@ -396,7 +396,7 @@ meta_href_2  = function(args)
 					temp = temp.concat(bits[(i*2)+1]+arguments[whats[i]],bits[(i*2)+2]);
 				}
 				//Debug && Log.push("should be setting link", temp.join("&"));
-				t.href = "http://anidb.info/perl-bin/" + "anidb.pl?" + temp.join("&");
+				t.href = "http://anidb.net/perl-bin/" + "animedb.pl?" + temp.join("&");
 			});
 	}
 }
