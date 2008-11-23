@@ -275,7 +275,7 @@ function MyFile(name, size, ed2k){
 		}
 	}
 	this.find_version = function(text){
-		var regx = /v(\d)[\s\_\.\(\[]/i;
+		var regx = /v([1..5])[\s\_\.\(\[]/i;
 		if(regx.test(text))
 			return (RegExp.$1)*1
 	}
