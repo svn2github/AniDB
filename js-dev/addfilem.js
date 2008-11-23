@@ -275,7 +275,7 @@ function MyFile(name, size, ed2k){
 		}
 	}
 	this.find_version = function(text){
-		var regx = /v(\d)[\_\.\(\[]/;
+		var regx = /v(\d)[\s\_\.\(\[]/i;
 		if(regx.test(text))
 			return (RegExp.$1)*1
 	}
@@ -341,7 +341,10 @@ make_select_version = (function(id, version)
 			//t.appendChild(new Option('v'+i, i, false, i==a[version.key]));
 			add_option(t, i, 'v'+i);
 		}
-		t.selectedIndex = (a[version.key]||1) - 1;
+		var key = a[version.key]||1;
+		if (isNaN(Number(key))) key = 1;
+		if (key > 5) key = 1; // probably an error, let the user sort it out.
+		t.selectedIndex = (key) - 1;
 	});
 
 	func.outline = select;
