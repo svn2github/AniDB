@@ -1374,11 +1374,13 @@ function confirmRevokes() {
 	for (var i = 0; i < divs.length; i++) {
 		var div = getElementsByClassName(document.getElementsByTagName('div'), divs[i], false)[0];
 		if (!div) return;
-		var li = div.getElementsByTagName('li')[1];
-		if (li) {
-			var a = li.getElementsByTagName('a')[0];
-			if (a && a.firstChild.nodeValue.indexOf('revoke') >= 0) 
-				a.onclick = function confirmRevoke() { if (!confirm("Are you sure you wish to revoke your vote?")) return false; }
+		var as = div.getElementsByTagName('a');
+		for (var k = 0; k < as.length; k++) {
+			var a = as[k];
+			var text = a.firstChild.nodeValue;
+			if (text.indexOf('revoke') >= 0) a.onclick = function confirmRevoke() { if (!confirm("Are you sure you wish to revoke your vote?")) return false; }
+			else if (text.indexOf('delete') >= 0) a.onclick = function confirmDelete() { if (!confirm("Are you sure you wish to delete this review?")) return false; }
+			else continue;
 		}
 	}
 }
