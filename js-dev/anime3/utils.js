@@ -288,9 +288,15 @@ function createHeader(parentNode, className, text, abbr, anidbSort, colSpan) {
 	if (abbr != null) {
 		var abbreviation = document.createElement('abbr');
 		abbreviation.title = abbr;
-		if (text != null) abbreviation.appendChild(document.createTextNode(text));
+		if (text != null) {
+			if(typeof(text) == 'string') abbreviation.appendChild(document.createTextNode(text));
+			else abbreviation.appendChild(text);
+		}
 		th.appendChild(abbreviation);
-	} else if (text != null) th.appendChild(document.createTextNode(text));
+	} else if (text != null) {
+		if(typeof(text) == 'string') th.appendChild(document.createTextNode(text));
+		else th.appendChild(text);
+	}
 	if (colSpan != null && colSpan > 1) th.colSpan = colSpan;
 	if (anidbSort != null) {
 		if (th.className) th.className += ' '+anidbSort;
@@ -1307,20 +1313,23 @@ function ietruebody(){
 }
 
 /* Sets the tooltip */
-function setTooltip(thetext, dom, thewidth, thecolor){
-  while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
-  if (!thetext) return;
+function setTooltip(thetext, dom, thewidth, thecolor, minWidth){
+	while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
+	if (!thetext) return;
 	if (typeof thewidth != "undefined") {
-	  if (thewidth != 'auto') divHTMLTOOLTIP.style.width = thewidth + 'px';
-	  else divHTMLTOOLTIP.style.width = thewidth;
+		if (thewidth != 'auto') divHTMLTOOLTIP.style.width = thewidth + 'px';
+		else divHTMLTOOLTIP.style.width = thewidth;
 	}
 	if (typeof thecolor != "undefined" && thecolor != "") divHTMLTOOLTIP.style.backgroundColor = thecolor;
-  if (typeof dom != "undefined") {
-    if (dom) divHTMLTOOLTIP.appendChild(thetext);
-    else divHTMLTOOLTIP.innerHTML = thetext;
-  }
+	if (typeof dom != "undefined") {
+		if (dom) divHTMLTOOLTIP.appendChild(thetext);
+		else divHTMLTOOLTIP.innerHTML = thetext;
+	}
+	if (typeof minWidth != "undefined") {
+		divHTMLTOOLTIP.style.minWidth = minWidth + 'px';
+	}
 	enabletip = true;
-  divHTMLTOOLTIP.style.visibility = "visible";
+	divHTMLTOOLTIP.style.visibility = "visible";
 	return false;
 }
 
@@ -1352,19 +1361,19 @@ function positionTooltip(e){
 }
 
 function hideTooltip(){
-  enabletip = false;
-  divHTMLTOOLTIP.style.visibility = "hidden";
-  while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
+	enabletip = false;
+	divHTMLTOOLTIP.style.visibility = "hidden";
+	while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
 	divHTMLTOOLTIP.style.left = "-5000px";
 	divHTMLTOOLTIP.style.backgroundColor = '';
 	divHTMLTOOLTIP.style.width = '';
 }
 
-function initTooltips() {
-  divHTMLTOOLTIP = document.createElement('div');
-  divHTMLTOOLTIP.id = "obj-tooltip"
-  document.body.appendChild(divHTMLTOOLTIP);
-  document.onmousemove = positionTooltip;
+function initTooltips(nostyle) {
+	divHTMLTOOLTIP = document.createElement('div');
+	if (!nostyle) divHTMLTOOLTIP.id = "obj-tooltip"
+	document.body.appendChild(divHTMLTOOLTIP);
+	document.onmousemove = positionTooltip;
 }
 
 // Something i didn't want to put on anidbscript because, well, i don't want it there :P

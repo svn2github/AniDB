@@ -66,8 +66,9 @@ var epCols = cloneArray(genEpCols);
 removeColAttribute("airdate",epCols);
 removeColAttribute("users",epCols);
 var epSkips = null;
-
-var ahdhadhak = 0;
+// thumbnails and whatnot
+var picbase = 'http://img5.anidb.net/pics/anime/thumbs/150/';
+var AnimeInfos = new Array();
 
 /* This function parses mylist expand links and sets some settings
  * @param href The mylist expand link
@@ -114,7 +115,6 @@ function prepPage() {
 		if (!a) { errorAlert('prepPage','no a link found'); continue; }
 		parseMylistExpandLink(a.href,mylist_settings);
 		ruid = mylist_settings['uid'];
-		//if (Number(ruid) == 1) return; // Ajax mylist is currently disabled for exp
 		a.removeAttribute('href');
 		if (a.className.indexOf('i_minus') >= 0) {
 			a.onclick = foldAnime;
@@ -122,6 +122,13 @@ function prepPage() {
 		}
 		else a.onclick = expandAnime;
 		a.style.cursor = "pointer";
+		cell = getElementsByClassName(row.getElementsByTagName('td'),'name',true)[0];
+		if (!cell) { errorAlert('prepPage','no name cell found'); continue; }
+		var label = cell.getElementsByTagName('label')[0];
+		if (!label) { errorAlert('prepPage','no label found on name cell'); continue; }
+		a = label.getElementsByTagName('a')[0];
+		if (!a) { errorAlert('prepPage','no a link found'); continue; }
+		hookEvent(a,'mouseover',showAnimeInfo);
 	}
 	var filters = getElementsByClassName(document.getElementsByTagName('div'),'filters',true)[0];
 	if (filters) {
@@ -140,6 +147,63 @@ function prepPage() {
 	mylist_settings['noeptb'] = true; // force this setting
 	createPreferencesTable('mylist');
 	cleanUpExpands();
+	initTooltips(false);
+}
+
+/* Function that actualy shows the tooltip
+ * @param obj The object that will be base for the tooltip position
+ * @param info The AnimeInfo object
+ */
+function showAnimeInfoWork(obj,info) {
+	var minWidth = 600;
+	hookEvent(obj,'mouseout',hideTooltip);
+	var table = document.createElement('table');
+	table.className = 'animeInfo';
+	table.style.minWidth = minWidth + 'px';
+	var thead = document.createElement('thead');
+	var row = document.createElement('tr');
+	var title = document.createElement('span');
+	title.className = 'title';
+	title.appendChild(document.createTextNode(info.title));
+	var year = document.createElement('span');
+	year.className = 'year';
+	year.appendChild(document.createTextNode('('+info.year+')'));
+	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
+	cell.appendChild(document.createTextNode(' '));
+	cell.appendChild(year);
+	row.appendChild(cell);
+	thead.appendChild(row);
+	table.appendChild(thead);
+	var tbody = document.createElement('tbody');
+	row = document.createElement('tr');
+	var img = document.createElement('img');
+	img.src = info.picurl;
+	img.alt = '['+info.aid+']';
+	createCell(row, 'animeInfoThumb', img);
+	var span = document.createElement('span');
+	span.innerHTML = info.desc;
+	createCell(row, 'animeInfoDesc', span);
+	tbody.appendChild(row);
+	table.appendChild(tbody);
+	setTooltip(table, true, minWidth);
+}
+
+/* Function that shows anime info (or not) */
+function showAnimeInfo() {
+	var href = this.href;
+	if (!href) { errorAlert('showAnimeInfo','link has no href attribute'); return; }
+	var start = href.indexOf('aid=')+4;
+	var end = href.indexOf('&',start);
+	if (end < 0) end = href.length;
+	var aid = Number(href.substring(start,end));
+	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number'); return; }
+	var info = AnimeInfos[aid];
+	if (!info) { // fetch data and display later
+		this.id = 'aid_'+aid+'_href';
+		fetchInfoData(aid);
+	} else { // display the data
+		showAnimeInfoWork(this,info);
+	}
 }
 
 /* Function that fetches anime data
@@ -153,6 +217,16 @@ function fetchData(aid,uid) {
 	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+uidstr, parseData);
 }
 
+/* Function that fetches anime information
+ * @param aid Anime ID
+ * @param uid User ID
+ */
+function fetchInfoData(aid) {
+	var req = xhttpRequest();
+	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_info.xml', parseInfoData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=animeinfo&aid='+aid, parseInfoData);
+}
+
 /* Function that posts data
  * @param url URL to post
  */
@@ -161,6 +235,23 @@ function postData(url) {
 	var data = url.substr(url.indexOf('?')+1,url.length);
 	if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showSuccessBox, data);
 	else xhttpRequestPost(req, 'animedb.pl', showSuccessBox, data);
+}
+
+/* Function that parses animeInfo xml response
+ * @param xmldoc The xml response
+ */
+function parseInfoData(xmldoc) {
+	var root = xmldoc.getElementsByTagName('root').item(0);
+	if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
+	var animeInfo = root.getElementsByTagName('animeinfo')[0];
+	if (!animeInfo) { errorAlert('parseInfoData','no animeinfo nodes found'); return; }
+	var newData = new CAnimeInfo(animeInfo);
+	var picurl = newData.picurl.substr(newData.picurl.lastIndexOf('/'));
+	if (picurl != 'nopic.gif') newData.picurl = picbase+picurl+'-thumb.jpg';
+	if (newData.desc == '') newData.desc = '<i>no description</i>'
+	AnimeInfos[newData.aid] = newData;
+	var a = document.getElementById('aid_'+newData.aid+'_href');
+	showAnimeInfoWork(a,newData);
 }
 
 /* Function that parses xml response

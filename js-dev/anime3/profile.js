@@ -475,7 +475,7 @@ function tabWork() {
 	var mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
-	var mylist_confirm_action = CookieGet('mylist_confirm_action') || 0;
+	var mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
 	var group_check_type = CookieGet('group_check_type') || 0;
 	var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 1;
@@ -598,10 +598,10 @@ function tabWork() {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var mylistActionSel = createSelectArray(null,"mylist_confirm_action","mylist_confirm_action",null,mylist_confirm_action,{0:{"text":'ask for action'},1:{"text":'stay on page'},2:{"text":'always reload'}});
-				mylistActionSel.onchange = function() { changeOptionValue(this); mylist_confirm_action = Number(this.value); 	}
-				li.appendChild(mylistActionSel);
-				li.appendChild(document.createTextNode(' Don\'t show the reload needed warning after changing mylist state in anime pages.'));
+				var ck = createCheckbox('mylist_get_animeinfo',mylist_get_animeinfo);
+				ck.onchange = function() { changeOptionValue(this); mylist_get_animeinfo = Number(this.checked); }
+				li.appendChild(ck);
+				li.appendChild(document.createTextNode(' Get anime information on link hover'));
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;

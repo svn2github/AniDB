@@ -881,9 +881,9 @@ function createPreferencesTable(type) {
 	mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
 	mylist_add_state = CookieGet('mylist_add_state') || 0;
 	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
+	mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
 	group_check_type = CookieGet('group_check_type') || 0;
 	group_langfilter = CookieGet('group_langfilter') || 1;
-	mylist_confirm_action = CookieGet('mylist_confirm_action') || 0;
 	var storedTab = CookieGet('tab') || '';
 	
 	/* create preferences tabs */
@@ -1062,13 +1062,6 @@ function createPreferencesTable(type) {
 				li.appendChild(watchedSel);
 				li.appendChild(document.createTextNode(' Default quick-add watched state'));
 				ul.appendChild(li);
-				li = document.createElement('li');
-				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var mylistActionSel = createSelectArray(null,"mylist_confirm_action","mylist_confirm_action",null,mylist_confirm_action,{0:{"text":'ask for action'},1:{"text":'stay on page'},2:{"text":'always reload'}});
-				mylistActionSel.onchange = function() { changeOptionValue(this); mylist_confirm_action = Number(this.value); 	}
-				li.appendChild(mylistActionSel);
-				li.appendChild(document.createTextNode(' Default action to take on the "reload needed" confirmation dialog after changing mylist state in anime pages.'));
-				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';
 				actionLI.appendChild(document.createTextNode('Actions: '));
@@ -1082,7 +1075,6 @@ function createPreferencesTable(type) {
 					CookieSet('mylist_add_state',mylist_add_state);
 					CookieSet('mylist_add_fstate',mylist_add_fstate);
 					CookieSet('mylist_add_viewed_state',mylist_add_viewed_state);
-					CookieSet('mylist_confirm_action',mylist_confirm_action);
 					alert('Current Mylist preferences saved.');
 				}
 				actionLI.appendChild(saveInput);
