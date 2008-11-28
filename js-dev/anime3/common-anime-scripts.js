@@ -75,6 +75,7 @@ var group_check_type = 0;
 var group_langfilter = 0;
 var mylist_get_animeinfo = 0;
 var mylist_get_animeinfo_sz = '150';
+var mylist_get_animeinfo_mw = '450';
 
 /* This is an auxiliar function that removes a given attribute from the cols
  * @param name Name of the column to remove
@@ -886,6 +887,7 @@ function createPreferencesTable(type) {
 	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
 	mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
+	mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
 	group_check_type = CookieGet('group_check_type') || 0;
 	group_langfilter = CookieGet('group_langfilter') || 1;
 	var storedTab = CookieGet('tab') || '';
@@ -1094,6 +1096,7 @@ function createPreferencesTable(type) {
 					changeOptionValue(this); 
 					mylist_get_animeinfo = Number(this.checked); 
 					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
+					document.getElementById('mylist_get_animeinfo_mw').disabled = !this.checked;
 				}
 				li.appendChild(ck);
 				li.appendChild(document.createTextNode(' Get anime information on link hover'));
@@ -1106,11 +1109,20 @@ function createPreferencesTable(type) {
 				li.appendChild(ainfoSZ);
 				li.appendChild(document.createTextNode(' Default anime information thumbnail size'));
 				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ainfoMW = createSelectArray(null,"mylist_get_animeinfo_mw","mylist_get_animeinfo_mw",null,mylist_get_animeinfo_mw,{'300':{"text":'small'},'450':{"text":'medium'},'600':{"text":'large'}});
+				if (!mylist_get_animeinfo) ainfoMW.disabled = true;
+				ainfoMW.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_mw = this.value; };
+				li.appendChild(ainfoMW);
+				li.appendChild(document.createTextNode(' Default anime information box width'));
+				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';
 				actionLI.appendChild(document.createTextNode('Actions: '));
 				var saveInput = createBasicButton('do.save','save preferences');
 				saveInput.onclick = function saveSettings() {
+					CookieSet('mylist_get_animeinfo_mw',mylist_get_animeinfo_mw);
 					CookieSet('mylist_get_animeinfo_sz',mylist_get_animeinfo_sz);
 					CookieSet('mylist_get_animeinfo',mylist_get_animeinfo);
 					alert('Current Mylist preferences saved.');

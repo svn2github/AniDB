@@ -159,7 +159,8 @@ function prepPage() {
  * @param info The AnimeInfo object
  */
 function showAnimeInfoWork(obj,info) {
-	var minWidth = 600;
+	var minWidth = Number(mylist_get_animeinfo_mw);
+	if (isNaN(minWidth)) minWidth = 450;
 	hookEvent(obj,'mouseout',hideTooltip);
 	var table = document.createElement('table');
 	table.className = 'animeInfo';
