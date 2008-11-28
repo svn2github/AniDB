@@ -861,8 +861,9 @@ function createPreferencesTable(type) {
 	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true};
 	var ed2kPrefs = {'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"};
 	var mylistPrefs = {'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"};
+	var mylistPrefs2 = {'id':"mylist-prefs2",'head':"Mylist",'title':"Mylist Preferences"};
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
-	items['mylist'] =	[titlePrefs, ed2kPrefs];
+	items['mylist'] =	[titlePrefs, ed2kPrefs, mylistPrefs2];
 	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs];
 	items['group'] =	[titlePrefs, ed2kPrefs, groupPrefs];
 	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
@@ -1078,6 +1079,40 @@ function createPreferencesTable(type) {
 					CookieSet('mylist_add_state',mylist_add_state);
 					CookieSet('mylist_add_fstate',mylist_add_fstate);
 					CookieSet('mylist_add_viewed_state',mylist_add_viewed_state);
+					alert('Current Mylist preferences saved.');
+				}
+				actionLI.appendChild(saveInput);
+				ul.appendChild(actionLI);
+				tab.appendChild(ul);
+				break;
+			case 'mylist-prefs2':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ck = createCheckbox('mylist_get_animeinfo',mylist_get_animeinfo);
+				ck.onchange = function() { 
+					changeOptionValue(this); 
+					mylist_get_animeinfo = Number(this.checked); 
+					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
+				}
+				li.appendChild(ck);
+				li.appendChild(document.createTextNode(' Get anime information on link hover'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ainfoSZ = createSelectArray(null,"mylist_get_animeinfo_sz","mylist_get_animeinfo_sz",null,mylist_get_animeinfo_sz,{'150':{"text":'large'},'50x65':{"text":'small'}});
+				if (!mylist_get_animeinfo) ainfoSZ.disabled = true;
+				ainfoSZ.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_sz = this.value; };
+				li.appendChild(ainfoSZ);
+				li.appendChild(document.createTextNode(' Default anime information thumbnail size'));
+				ul.appendChild(li);
+				var actionLI = document.createElement('li');
+				actionLI.className = 'action';
+				actionLI.appendChild(document.createTextNode('Actions: '));
+				var saveInput = createBasicButton('do.save','save preferences');
+				saveInput.onclick = function saveSettings() {
+					CookieSet('mylist_get_animeinfo_sz',mylist_get_animeinfo_sz);
+					CookieSet('mylist_get_animeinfo',mylist_get_animeinfo);
 					alert('Current Mylist preferences saved.');
 				}
 				actionLI.appendChild(saveInput);

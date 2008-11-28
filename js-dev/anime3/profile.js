@@ -461,9 +461,10 @@ function tabWork() {
 	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true};
 	var ed2kPrefs = {'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"};
 	var mylistPrefs = {'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"};
+	var mylistPrefs2 = {'id':"mylist-prefs2",'head':"Mylist",'title':"Mylist Preferences"};
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	var otherPrefs = {'id':"other-prefs",'head':"Other",'title':"Other Preferences"};
-	items['all'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, otherPrefs];
+	items['all'] =	[titlePrefs, ed2kPrefs, mylistPrefs, mylistPrefs2, groupPrefs, otherPrefs];
 	
 	/* load settings from cookie */
 	var animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
@@ -597,7 +598,11 @@ function tabWork() {
 				li.appendChild(watchedSel);
 				li.appendChild(document.createTextNode(' Default quick-add watched state'));
 				ul.appendChild(li);
-				li = document.createElement('li');
+				tab.appendChild(ul);
+				break;
+			case 'mylist-prefs2':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var ck = createCheckbox('mylist_get_animeinfo',mylist_get_animeinfo);
 				ck.onchange = function() { 
