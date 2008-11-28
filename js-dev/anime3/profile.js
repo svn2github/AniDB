@@ -476,6 +476,7 @@ function tabWork() {
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	var mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
+	var mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
 	var group_check_type = CookieGet('group_check_type') || 0;
 	var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 1;
@@ -599,9 +600,21 @@ function tabWork() {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var ck = createCheckbox('mylist_get_animeinfo',mylist_get_animeinfo);
-				ck.onchange = function() { changeOptionValue(this); mylist_get_animeinfo = Number(this.checked); }
+				ck.onchange = function() { 
+					changeOptionValue(this); 
+					mylist_get_animeinfo = Number(this.checked); 
+					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
+				}
 				li.appendChild(ck);
 				li.appendChild(document.createTextNode(' Get anime information on link hover'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ainfoSZ = createSelectArray(null,"mylist_get_animeinfo_sz","mylist_get_animeinfo_sz",null,mylist_get_animeinfo_sz,{'150':{"text":'large'},'50x65':{"text":'small'}});
+				if (!mylist_get_animeinfo) ainfoSZ.disabled = true;
+				ainfoSZ.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_sz = this.value; };
+				li.appendChild(ainfoSZ);
+				li.appendChild(document.createTextNode(' Default anime information thumbnail size'));
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;

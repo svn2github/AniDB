@@ -73,6 +73,8 @@ var mylist_add_state = 0;
 var mylist_add_fstate = 0;
 var group_check_type = 0;
 var group_langfilter = 0;
+var mylist_get_animeinfo = 0;
+var mylist_get_animeinfo_sz = '150';
 
 /* This is an auxiliar function that removes a given attribute from the cols
  * @param name Name of the column to remove
@@ -882,6 +884,7 @@ function createPreferencesTable(type) {
 	mylist_add_state = CookieGet('mylist_add_state') || 0;
 	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
+	mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
 	group_check_type = CookieGet('group_check_type') || 0;
 	group_langfilter = CookieGet('group_langfilter') || 1;
 	var storedTab = CookieGet('tab') || '';

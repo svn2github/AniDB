@@ -107,3 +107,10 @@
 {
 	background-image: url(../icons/icon/anidb_no_vote.gif);
 }
+
+*.i_mylist_ainfo
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/formating/information.png);
+}
