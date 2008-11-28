@@ -103,6 +103,7 @@ function prepPage() {
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
 	initTooltips();
+	createPreferencesTable('mylist');
 	// find the mylist table and update the links
 	var mylistTable = getElementsByClassName(document.getElementsByTagName('table'),'animelist',true)[0];
 	if (!mylistTable) { errorAlert('prepPage','no mylist table found'); return; }
@@ -149,7 +150,6 @@ function prepPage() {
 		}
 	}
 	mylist_settings['noeptb'] = true; // force this setting
-	createPreferencesTable('mylist');
 	cleanUpExpands();
 	initTooltips(false);
 }
