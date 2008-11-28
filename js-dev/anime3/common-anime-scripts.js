@@ -73,7 +73,7 @@ var mylist_add_state = 0;
 var mylist_add_fstate = 0;
 var group_check_type = 0;
 var group_langfilter = 0;
-//var mylist_get_animeinfo = 0;
+var mylist_get_animeinfo = 0;
 var mylist_get_animeinfo_sz = '150';
 
 /* This is an auxiliar function that removes a given attribute from the cols
