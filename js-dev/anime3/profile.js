@@ -453,7 +453,7 @@ function tabWork() {
 	// now to actualy make the options
 	var jsdiv = document.createElement('div');
 	jsdiv.id = 'tab0_'+num+'_pane';
-	jsdiv.className = 'pane hide';
+	jsdiv.className = 'pane hide javascript';
 	// add all possible js options here, i don't care!
 	
 	var type = 'all';
