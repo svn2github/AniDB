@@ -57,7 +57,8 @@ h1
 	margin-top:20px;
 }
 
-h2,h3
+h2,
+h3
 {
 	color:#fff;
 	font-size:12px;
@@ -84,7 +85,9 @@ table caption
 	text-align:left;
 }
 
-input,select,textarea
+input,
+select,
+textarea
 {
 	background-color:#000;
 	border:#666 1px solid;
@@ -180,7 +183,8 @@ ul#menu-account
 	top:-5px;
 }
 
-*#user-logout a,*#user-profile a
+*#user-logout a,
+*#user-profile a
 {
 	float:right;
 	height:12px;
@@ -315,7 +319,8 @@ body.nonav div#layout-content
 	width:42px;
 }
 
-ul,ol
+ul,
+ol
 {
 	list-style:none outside;
 	margin:0;
@@ -355,7 +360,8 @@ table
 	width:600px;
 }
 
-.nonav table,.nonav table caption
+.nonav table,
+.nonav table caption
 {
 	margin:0;
 	width:100%;
@@ -373,7 +379,10 @@ tr.newtype td
 	padding-top:0;
 }
 
-tr.episode:hover td,tr.file:hover td,tr.anime:hover td,tr.files:hover td
+tr.episode:hover td,
+tr.file:hover td,
+tr.anime:hover td,
+tr.files:hover td
 {
 	border-bottom:1px solid #666;
 	border-top:1px solid #666;
@@ -381,7 +390,8 @@ tr.episode:hover td,tr.file:hover td,tr.anime:hover td,tr.files:hover td
 	padding-top:0;
 }
 
-div.data th,div.addgenren_all div.add th
+div.data th,
+div.addgenren_all div.add th
 {
 	text-align:left;
 	width:100px;
@@ -442,7 +452,10 @@ ul.g_jumplist li a
 	padding-right:10px;
 }
 
-ul.g_jumplist li.all,ul.g_jumplist li.other,ul.g_jumplist li.prev,ul.g_jumplist li.next
+ul.g_jumplist li.all,
+ul.g_jumplist li.other,
+ul.g_jumplist li.prev,
+ul.g_jumplist li.next
 {
 	background:none;
 }
@@ -453,19 +466,28 @@ ul.g_jumplist li.all:before
 	font-style:normal;
 }
 
-ul.g_list,ul.g_navlist,div.mylist_menu ul,div.messages ul
+ul.g_list,
+ul.g_navlist,
+div.mylist_menu ul,
+div.messages ul
 {
 	clear:both;
 	margin:5px auto;
 	text-align:center;
 }
 
-ul.g_list li,ul.g_navlist li,div.mylist_menu ul li,div.messages ul li
+ul.g_list li,
+ul.g_navlist li,
+div.mylist_menu ul li,
+div.messages ul li
 {
 	display:inline;
 }
 
-ul.g_list li a,ul.g_navlist li a,div.mylist_menu ul li a,div.messages ul li a
+ul.g_list li a,
+ul.g_navlist li a,
+div.mylist_menu ul li a,
+div.messages ul li a
 {
 	padding:0 3px;
 }
@@ -518,17 +540,30 @@ div.anime_all div.groups td.eps
 	width:200px;
 }
 
-div.anime_all div.groups td.action a.i_icon,div.anime_all div.episodes td.file a.i_icon
+div.anime_all div.groups td.action a.i_icon,
+div.anime_all div.episodes td.file a.i_icon
 {
 	margin:0 3px;
 }
 
-div.anime_all *.i_vrs_1,div.anime_all *.i_vrs_2,div.anime_all *.i_vrs_3,div.anime_all *.i_vrs_4,div.anime_all *.i_vrs_5,div.anime_all *.i_censored,div.anime_all *.i_uncensored,div.anime_all *.i_new_icon,div.anime_all *.i_comment
+div.anime_all *.i_vrs_1,
+div.anime_all *.i_vrs_2,
+div.anime_all *.i_vrs_3,
+div.anime_all *.i_vrs_4,
+div.anime_all *.i_vrs_5,
+div.anime_all *.i_censored,
+div.anime_all *.i_uncensored,
+div.anime_all *.i_new_icon,
+div.anime_all *.i_comment
 {
 	margin-left:-15px;
 }
 
-div.anime_all *.i_vrs_1,div.anime_all *.i_vrs_2,div.anime_all *.i_vrs_3,div.anime_all *.i_vrs_4,div.anime_all *.i_vrs_5
+div.anime_all *.i_vrs_1,
+div.anime_all *.i_vrs_2,
+div.anime_all *.i_vrs_3,
+div.anime_all *.i_vrs_4,
+div.anime_all *.i_vrs_5
 {
 	position:relative;
 	right:110px;
@@ -584,7 +619,11 @@ div.animeatt_all h2 span.approval
 	margin-top:-13px;
 }
 
-div.animeatt_all span.stamp,div.animeatt_all div.g_definitionlist,div.animeatt_all div.g_definitionlist table,div.animeatt_all div.head,div.animeatt_all div.menu
+div.animeatt_all span.stamp,
+div.animeatt_all div.g_definitionlist,
+div.animeatt_all div.g_definitionlist table,
+div.animeatt_all div.head,
+div.animeatt_all div.menu
 {
 	clear:left;
 	float:left;
@@ -636,7 +675,8 @@ div.addgenren_all table td.action
 	width:175px;
 }
 
-div.animehist_all div.users,div.animehist_all div.files
+div.animehist_all div.users,
+div.animehist_all div.files
 {
 	margin:15px auto;
 	width:600px;
@@ -800,7 +840,8 @@ div.mylist_all table.filelist td.ed2k + td.action
 	width:65px;
 }
 
-#layout-main div.userpage_all div.stats,#layout-main div.myplace_all div.stats
+#layout-main div.userpage_all div.stats,
+#layout-main div.myplace_all div.stats
 {
 	clear:both;
 }
@@ -822,7 +863,9 @@ div.hint2_all th
 	padding:10px 0 5px;
 }
 
-#layout-main div.profile_all div.passwords > div,#layout-main div.profile_all div.passwords form > div,div.profile_all #tab3_pane div
+#layout-main div.profile_all div.passwords > div,
+#layout-main div.profile_all div.passwords form > div,
+#layout-main div.profile_all div.tabbed_pane div.default_languages div
 {
 	padding-right:5em;
 }
@@ -832,7 +875,8 @@ div.latest_all td.status
 	width:250px;
 }
 
-div.latest_all td.name,div.animelist_all td.name
+div.latest_all td.name,
+div.animelist_all td.name
 {
 	text-align:left;
 	width:auto;
@@ -928,12 +972,16 @@ div.genren_all li span
 	background-image:url(images/anidb_araward.gif);
 }
 
-*.i_group_vote,*.i_ep_vote,*.i_vote
+*.i_group_vote,
+*.i_ep_vote,
+*.i_vote
 {
 	background-image:url(images/anidb_vote.gif);
 }
 
-*.i_group_revote,*.i_ep_revote,*.i_revote
+*.i_group_revote,
+*.i_ep_revote,
+*.i_revote
 {
 	background-image:url(images/anidb_revote.gif);
 }
@@ -963,7 +1011,8 @@ div.genren_all li span
 	background-image:url(images/anidb_video_avc.gif);
 }
 
-*.i_video.xvid,*.i_video.divx5
+*.i_video.xvid,
+*.i_video.divx5
 {
 	background-image:url(images/anidb_video_asp.gif);
 }
@@ -1053,7 +1102,11 @@ div.genren_all li span
 	background-image:url(images/anidb_rate_halfstar.gif);
 }
 
-*.i_rate_veryhigh,*.i_rate_high,*.i_rate_med,*.i_rate_low,*.i_rate_verylow
+*.i_rate_veryhigh,
+*.i_rate_high,
+*.i_rate_med,
+*.i_rate_low,
+*.i_rate_verylow
 {
 	background:url(images/anidb_rate_star.gif) left center repeat-x;
 }
@@ -1358,7 +1411,12 @@ img[src*="anidb_mainichiaward.gif"]
 	width:0;
 }
 
-img[src*="anidb_ar2002award.gif"],img[src*="anidb_ar2003award.gif"],img[src*="anidb_ar2004award.gif"],img[src*="anidb_ar2005award.gif"],img[src*="anidb_ar2006award.gif"],img[src*="anidb_ar2007award.gif"]
+img[src*="anidb_ar2002award.gif"],
+img[src*="anidb_ar2003award.gif"],
+img[src*="anidb_ar2004award.gif"],
+img[src*="anidb_ar2005award.gif"],
+img[src*="anidb_ar2006award.gif"],
+img[src*="anidb_ar2007award.gif"]
 {
 	background:url(images/anidb_awardar.gif) center center no-repeat;
 	padding-right:15px;
@@ -1442,156 +1500,427 @@ img[src*="nodown1.gif"]:hover
 	background-image:url(images/down1_over.gif);
 }
 
-img[src*="nopic.gif"],div.latestanimes_all img[src*="nopic.gif"]
+img[src*="nopic.gif"],
+div.latestanimes_all img[src*="nopic.gif"]
 {
 	background:url(images/nopic.gif) center center no-repeat;
 	display:inline;
 }
 
-a:hover,input[type="submit"]:hover,ul#menu-main a:hover,ul#menu-support a:hover
+a:hover,
+input[type="submit"]:hover,
+ul#menu-main a:hover,
+ul#menu-support a:hover
 {
 	color:#c9f;
 }
 
-.g_list a,.g_actionlist a,.g_jumplist a,.latestanimes_form a,.g_vital a,.news a,ul#menu-lists a
+.g_list a,
+.g_actionlist a,
+.g_jumplist a,
+.latestanimes_form a,
+.g_vital a,
+.news a,
+ul#menu-lists a
 {
 	color:#E6D4B5;
 }
 
-.g_list a:hover,.g_actionlist a:hover,.g_jumplist a:hover,.latestanimes_form a:hover,.g_vital a:hover,.news a:hover,ul#menu-lists a:hover,div.main_all div.news b
+.g_list a:hover,
+.g_actionlist a:hover,
+.g_jumplist a:hover,
+.latestanimes_form a:hover,
+.g_vital a:hover,
+.news a:hover,
+ul#menu-lists a:hover,
+div.main_all div.news b
 {
 	color:#fff;
 }
 
-.hide,fieldset,#layout-menu span.tab,#layout-tabs,#user-profile a span,#user-logout a span,div.search_all li.collapsed ul,div.genren_all li.collapsed ul,*.i_icon span,*.i_button span,*.i_inline span,#layout-tabs
+.hide,
+fieldset,
+#layout-menu span.tab,
+#layout-tabs,
+#user-profile a span,
+#user-logout a span,
+div.search_all li.collapsed ul,
+div.genren_all li.collapsed ul,
+*.i_icon span,
+*.i_button span,
+*.i_inline span,
+#layout-tabs
 {
 	display:none;
 }
 
-ul#menu-main a,ul#menu-support a
+ul#menu-main a,
+ul#menu-support a
 {
 	background-color:#fff;
 	color:#000;
 }
 
-ul#menu-mod li,ul.g_list .g_odd,ul.g_actionlist .g_odd,ul.g_jumplist .g_odd,ul.g_navlist .g_odd,div.mylist_menu .g_odd,ul.state .g_odd
+ul#menu-mod li,
+ul.g_list .g_odd,
+ul.g_actionlist .g_odd,
+ul.g_jumplist .g_odd,
+ul.g_navlist .g_odd,
+div.mylist_menu .g_odd,
+ul.state .g_odd
 {
 	background-color:transparent;
 }
 
-.g_info,.g_actionlist,.g_filterlist,.g_msg.note,.g_msg.success,.g_msg.warning,tr.action,td.action,tr.action td,div.creq_all p,div.producer_all div.block,div.group_all div.block,div.main_all div.rightbar p,div.latestanimes_all div.latestanimes_form,div.myplace_all table td,div.genren_all div.controls
+.g_info,
+.g_actionlist,
+.g_filterlist,
+.g_msg.note,
+.g_msg.success,
+.g_msg.warning,
+tr.action,
+td.action,
+tr.action td,
+div.creq_all p,
+div.producer_all div.block,
+div.group_all div.block,
+div.main_all div.rightbar p,
+div.latestanimes_all div.latestanimes_form,
+div.myplace_all table td,
+div.genren_all div.controls
 {
 	text-align:center;
 }
 
-div.icons,ul.g_jumplist li.next,a.g_navnext
+div.icons,
+ul.g_jumplist li.next,
+a.g_navnext
 {
 	float:right;
 }
 
-div.icons .i_icon,ul.g_jumplist li.prev,div.g_menu ul.state li,a.g_navprev,div.anime_all div.episodes td.quality span.i_icon,div.ep_all td.quality span.i_icon,div.latestanimes_all div.g_image,div.myplace_all div.stats_mylist,div.myplace_all div.stats_roles
+div.icons .i_icon,
+ul.g_jumplist li.prev,
+div.g_menu ul.state li,
+a.g_navprev,
+div.anime_all div.episodes td.quality span.i_icon,
+div.ep_all td.quality span.i_icon,
+div.latestanimes_all div.g_image,
+div.myplace_all div.stats_mylist,
+div.myplace_all div.stats_roles
 {
 	float:left;
 }
 
-.g_odd,div.anime_all div.mylist td
+.g_odd,
+div.anime_all div.mylist td
 {
 	background-color:#333;
 }
 
-th,#layout-main div.tabbed_pane div.pane table td
+th,
+#layout-main div.tabbed_pane div.pane table td
 {
 	vertical-align:top;
 }
 
-div.data td,div.animevotes_all table td
+div.data td,
+div.animevotes_all table td
 {
 	text-align:left;
 }
 
-ul.g_actionlist,div.mylist_all div.mylist_action
+ul.g_actionlist,
+div.mylist_all div.mylist_action
 {
 	margin:20px 0;
 }
 
-div.anime_all div.data table,div.anime_all table.grouplist,div.anime_all table.eplist,div.animevotes_all table,div.addseq_all table,div.addanime_all textarea,div.creq_all textarea,div.addep_all textarea,div.creq_entry_hist table,div.ep_all table,div.file_all table,div.producer_all div.producer_related_anime table,div.group_all div.group_released table,div.search_all table,div.search_all table tr.title td input,div.latestanimes_all div.data table,div.myplace_all table,div.msg_all div.send_form input[id="msg.title"],div.msg_all div.send_form textarea[id="msg.body"],div.hint2_all table,div.hint2_all input[type="text"],div.hint2_all select,div.creq_all div.creq_list_closed table,div.up2date_all table.files,div.up2date_all table.sequels,div.latest_all table,div.animelist_all table,div.grouplist_all table,div.userlist_all table,div.producerlist_all table
+div.anime_all div.data table,
+div.anime_all table.grouplist,
+div.anime_all table.eplist,
+div.animevotes_all table,
+div.addseq_all table,
+div.addanime_all textarea,
+div.creq_all textarea,
+div.addep_all textarea,
+div.creq_entry_hist table,
+div.ep_all table,
+div.file_all table,
+div.producer_all div.producer_related_anime table,
+div.group_all div.group_released table,
+div.search_all table,
+div.search_all table tr.title td input,
+div.latestanimes_all div.data table,
+div.myplace_all table,
+div.msg_all div.send_form input[id="msg.title"],
+div.msg_all div.send_form textarea[id="msg.body"],
+div.hint2_all table,
+div.hint2_all input[type="text"],
+div.hint2_all select,
+div.creq_all div.creq_list_closed table,
+div.up2date_all table.files,
+div.up2date_all table.sequels,
+div.latest_all table,
+div.animelist_all table,
+div.grouplist_all table,
+div.userlist_all table,
+div.producerlist_all table
 {
 	width:100%;
 }
 
-div.anime_all div.mylist table,div.anime_all div.mylist_add table,div.animevotes_all table table,div.creq_all div.creq_stats table,div.up2date_all div.mylist_add table,div.up2date_all div.up2date_sequels_filter,#tab5_pane div.permissions div label select
+div.anime_all div.mylist table,
+div.anime_all div.mylist_add table,
+div.animevotes_all table table,
+div.creq_all div.creq_stats table,
+div.up2date_all div.mylist_add table,
+div.up2date_all div.up2date_sequels_filter,
+#layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label select
 {
 	width:300px;
 }
 
-div.anime_all div.episodes td.action,div.anime_all div.episodes td.codec,div.latestanimes_all select.month
+div.anime_all div.episodes td.action,
+div.anime_all div.episodes td.codec,
+div.latestanimes_all select.month
 {
 	width:40px;
 }
 
-div.anime_all div.mylist td.state,div.anime_all div.groups td.expand,div.anime_all div.groups td.note,div.anime_all div.groups td.epno,div.anime_all div.groups td.specials,div.anime_all div.groups td.cmts,div.anime_all div.episodes td.expand,div.anime_all div.episodes td.id,div.anime_all div.episodes td.duration,div.anime_all div.episodes td.files,div.addgenren_list td.id,div.addgenren_list td.weight,div.animehist_all td.eps,div.animehist_all td.files,div.animehist_all td.groups,div.ep_all td.id,div.ep_all td.ed2k,div.file_all div.file_tracks td.id,div.file_all td.ar,div.file_all td[class="icon language"],div.file_all td.epno,div.producer_all td.eps,div.group_all td.eps,div.group_all td.last_ep,div.msg_all td.state,div.msg_all td.action,div.msg_all td.date,div.msg_all td.from,div.msg_all td.type,div.mylist_all td.epno,div.mylist_all td.duration,div.mylist_all td.files,div.mylist_all td.mylist,div.mylist_all td.action,div.mylist_all td.ed2k,div.myvotes_all td.vote,div.myvotes_all td.epno,div.mynotifies_all td.check,div.mynotifies_all td.priority,div.mywishlist_all td.expand,div.mywishlist_all td.pri,div.mywishlist_all td.nfy,div.mywishlist_all td.releaseinfo,div.mywishlist_all td.state,div.up2date_all td.ed2k,div.up2date_all td.epno,div.up2date_all td.eps,div.latest_all td.count,div.latest_all td.number,div.latest_all td.vote,div.userlist_all td.acnt,div.userlist_all td.epcnt,div.userlist_all td.fcnt,div.animelist_all td.eps
+div.anime_all div.mylist td.state,
+div.anime_all div.groups td.expand,
+div.anime_all div.groups td.note,
+div.anime_all div.groups td.epno,
+div.anime_all div.groups td.specials,
+div.anime_all div.groups td.cmts,
+div.anime_all div.episodes td.expand,
+div.anime_all div.episodes td.id,
+div.anime_all div.episodes td.duration,
+div.anime_all div.episodes td.files,
+div.addgenren_list td.id,
+div.addgenren_list td.weight,
+div.animehist_all td.eps,
+div.animehist_all td.files,
+div.animehist_all td.groups,
+div.ep_all td.id,
+div.ep_all td.ed2k,
+div.file_all div.file_tracks td.id,
+div.file_all td.ar,
+div.file_all td[class="icon language"],
+div.file_all td.epno,
+div.producer_all td.eps,
+div.group_all td.eps,
+div.group_all td.last_ep,
+div.msg_all td.state,
+div.msg_all td.action,
+div.msg_all td.date,
+div.msg_all td.from,
+div.msg_all td.type,
+div.mylist_all td.epno,
+div.mylist_all td.duration,
+div.mylist_all td.files,
+div.mylist_all td.mylist,
+div.mylist_all td.action,
+div.mylist_all td.ed2k,
+div.myvotes_all td.vote,
+div.myvotes_all td.epno,
+div.mynotifies_all td.check,
+div.mynotifies_all td.priority,
+div.mywishlist_all td.expand,
+div.mywishlist_all td.pri,
+div.mywishlist_all td.nfy,
+div.mywishlist_all td.releaseinfo,
+div.mywishlist_all td.state,
+div.up2date_all td.ed2k,
+div.up2date_all td.epno,
+div.up2date_all td.eps,
+div.latest_all td.count,
+div.latest_all td.number,
+div.latest_all td.vote,
+div.userlist_all td.acnt,
+div.userlist_all td.epcnt,
+div.userlist_all td.fcnt,
+div.animelist_all td.eps
 {
 	text-align:center;
 	width:30px;
 }
 
-div.anime_all div.groups td.name,div.anime_all div.groups td.state,div.anime_all div.groups td.date,div.anime_all div.groups td.rating,div.anime_all div.groups td.action,div.anime_all div.episodes td.date,div.anime_all div.episodes td.epusers,div.anime_all div.episodes td.size,div.anime_all div.episodes td.resolution,div.anime_all div.episodes td.source,div.anime_all div.episodes td.hash,div.anime_all div.episodes td.users,div.anime_all div.episodes td.mylist,div.anime_all div.episodes td.file,div.anime_all table.filelist td.title,div.addgenren_list td.action,div.addgenren_form td.weight,div.addgenren_form td.check,div.animehist_all td.users,div.animehist_all td.review,div.addanimetitle_all td.date,div.addseq_all td.date,div.addaproducer_all td.date,div.ep_all td.title,div.ep_all td.size,div.ep_all td.resolution,div.ep_all td.source,div.ep_all td.hash,div.ep_all td.users,div.ep_all td.mylist,div.ep_all td.file,div.file_all td.size,div.file_all td.type,div.file_all td[class="text language"],div.file_all td.channels,div.file_all td.action,div.producer_all td.date,div.producer_all td.type,div.group_all td.releases,div.group_all td.state,div.group_all td.rating,div.group_all td.update,div.group_all td.date,div.mylist_all td.stats,div.mylist_all td.rating,div.mylist_all td.vote,div.mylist_all td.date,div.mylist_all td.group,div.mylist_all td.size,div.mylist_all td.quality,div.mylist_all td.status,div.myvotes_all td.state,div.buddylist_all td.state,div.mynotifies_all td.type,div.mynotifies_all td.action,div.mywishlist_all td.mylist,div.mywishlist_all td.seen,div.mywishlist_all td.date,div.mywishlist_all td.rating,div.mywishlist_all td.tmprating,div.mywishlist_all td.revrating,div.mywishlist_all td.cmts,div.up2date_all td.action,div.up2date_all td.date,div.up2date_all td.size,div.up2date_all td.group,div.up2date_all td.mylist,div.up2date_all td.relation,div.up2date_all td.year,div.latest_all td.action,div.latest_all td.size,div.latest_all td.type,div.latest_all td.short,div.latest_all td.user,div.latest_all td.rating,div.latest_all td.tmprating,div.latest_all td.dub,div.animelist_all td,div.userlist_all td.size
+div.anime_all div.groups td.name,
+div.anime_all div.groups td.state,
+div.anime_all div.groups td.date,
+div.anime_all div.groups td.rating,
+div.anime_all div.groups td.action,
+div.anime_all div.episodes td.date,
+div.anime_all div.episodes td.epusers,
+div.anime_all div.episodes td.size,
+div.anime_all div.episodes td.resolution,
+div.anime_all div.episodes td.source,
+div.anime_all div.episodes td.hash,
+div.anime_all div.episodes td.users,
+div.anime_all div.episodes td.mylist,
+div.anime_all div.episodes td.file,
+div.anime_all table.filelist td.title,
+div.addgenren_list td.action,
+div.addgenren_form td.weight,
+div.addgenren_form td.check,
+div.animehist_all td.users,
+div.animehist_all td.review,
+div.addanimetitle_all td.date,
+div.addseq_all td.date,
+div.addaproducer_all td.date,
+div.ep_all td.title,
+div.ep_all td.size,
+div.ep_all td.resolution,
+div.ep_all td.source,
+div.ep_all td.hash,
+div.ep_all td.users,
+div.ep_all td.mylist,
+div.ep_all td.file,
+div.file_all td.size,
+div.file_all td.type,
+div.file_all td[class="text language"],
+div.file_all td.channels,
+div.file_all td.action,
+div.producer_all td.date,
+div.producer_all td.type,
+div.group_all td.releases,
+div.group_all td.state,
+div.group_all td.rating,
+div.group_all td.update,
+div.group_all td.date,
+div.mylist_all td.stats,
+div.mylist_all td.rating,
+div.mylist_all td.vote,
+div.mylist_all td.date,
+div.mylist_all td.group,
+div.mylist_all td.size,
+div.mylist_all td.quality,
+div.mylist_all td.status,
+div.myvotes_all td.state,
+div.buddylist_all td.state,
+div.mynotifies_all td.type,
+div.mynotifies_all td.action,
+div.mywishlist_all td.mylist,
+div.mywishlist_all td.seen,
+div.mywishlist_all td.date,
+div.mywishlist_all td.rating,
+div.mywishlist_all td.tmprating,
+div.mywishlist_all td.revrating,
+div.mywishlist_all td.cmts,
+div.up2date_all td.action,
+div.up2date_all td.date,
+div.up2date_all td.size,
+div.up2date_all td.group,
+div.up2date_all td.mylist,
+div.up2date_all td.relation,
+div.up2date_all td.year,
+div.latest_all td.action,
+div.latest_all td.size,
+div.latest_all td.type,
+div.latest_all td.short,
+div.latest_all td.user,
+div.latest_all td.rating,
+div.latest_all td.tmprating,
+div.latest_all td.dub,
+div.animelist_all td,
+div.userlist_all td.size
 {
 	text-align:center;
 	width:70px;
 }
 
-div.anime_all div.episodes td.quality,div.addanimetitle_all td.id,div.addaproducer_all td.id,div.ep_all td.codec,div.ep_all td.quality,div.mylist_all td.id,div.up2date_all td.id,div.latest_all td.id
+div.anime_all div.episodes td.quality,
+div.addanimetitle_all td.id,
+div.addaproducer_all td.id,
+div.ep_all td.codec,
+div.ep_all td.quality,
+div.mylist_all td.id,
+div.up2date_all td.id,
+div.latest_all td.id
 {
 	text-align:center;
 	width:40px;
 }
 
-div.animehist_all td.anime,div.animehist_all td.tmpanime,div.addanimetitle_all td.action,div.file_all td.codec,div.myvotes_all td.date,div.myvotes_all td.action,div.buddylist_all td.date,div.mynotifies_all td.date,div.latest_all td.category,div.latest_all td.date,div.userlist_all td.date
+div.animehist_all td.anime,
+div.animehist_all td.tmpanime,
+div.addanimetitle_all td.action,
+div.file_all td.codec,
+div.myvotes_all td.date,
+div.myvotes_all td.action,
+div.buddylist_all td.date,
+div.mynotifies_all td.date,
+div.latest_all td.category,
+div.latest_all td.date,
+div.userlist_all td.date
 {
 	text-align:center;
 	width:100px;
 }
 
-div.maddtomylist_all div.maddtomylist,div.ep_all div.info table,div.ep_all div.ep_vote form,div.file_all div.file_relations,div.buddylist_all div.buddy_wait table,div.buddylist_all div.buddy_add form,div.ed2kdump_all div.ed2kdump_box,div.ed2kdump_all table
+div.maddtomylist_all div.maddtomylist,
+div.ep_all div.info table,
+div.ep_all div.ep_vote form,
+div.file_all div.file_relations,
+div.buddylist_all div.buddy_wait table,
+div.buddylist_all div.buddy_add form,
+div.ed2kdump_all div.ed2kdump_box,
+div.ed2kdump_all table
 {
 	margin:0 auto;
 	width:300px;
 }
 
-div.addseq_all td.action,div.addaproducer_all td.action,div.file_all td.flags,div.latest_all div.latest_aproducer td.type
+div.addseq_all td.action,
+div.addaproducer_all td.action,
+div.file_all td.flags,
+div.latest_all div.latest_aproducer td.type
 {
 	text-align:center;
 	width:175px;
 }
 
-div.addanimetitle_all form,div.addaproducer_all form,div.producer_all div.producer_info table,div.group_all div.group_info table,div.group_all div.group_vote,div.search_all div.search_form,div.reviewerlist_all h4,div.creq_all div.states
+div.addanimetitle_all form,
+div.addaproducer_all form,
+div.producer_all div.producer_info table,
+div.group_all div.group_info table,
+div.group_all div.group_vote,
+div.search_all div.search_form,
+div.reviewerlist_all h4,
+div.creq_all div.states
 {
 	margin:0 auto;
 	width:600px;
 }
 
-div.mylist_all table.animelist,div.mywishlist_all div table
+div.mylist_all table.animelist,
+div.mywishlist_all div table
 {
 	width:80%;
 }
 
-div.mywishlist_all table,#layout-main div.tabbed_pane div.pane table
+div.mywishlist_all table,
+#layout-main div.tabbed_pane div.pane table
 {
 	width:auto;
 }
 
-*.i_help:hover,img[src*="ask2.gif"]:hover
+*.i_help:hover,
+img[src*="ask2.gif"]:hover
 {
 	background-image:url(images/ask2_over.gif);
 }
 
-*.i_minus:hover,img[src*="minus.gif"]:hover
+*.i_minus:hover,
+img[src*="minus.gif"]:hover
 {
 	background-image:url(images/minus_over.gif);
 }
 
-*.i_plus:hover,img[src*="plus.gif"]:hover
+*.i_plus:hover,
+img[src*="plus.gif"]:hover
 {
 	background-image:url(images/plus_over.gif);
 }

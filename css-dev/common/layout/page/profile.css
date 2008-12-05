@@ -1,124 +1,116 @@
-#layout-main div.profile_all div.passwords
-{
-	display: table;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#layout-main div.profile_all div.passwords > div,
-#layout-main div.profile_all div.passwords form > div
-{
-	display: table-cell;
-}
-
-#layout-main div.profile_all div.preferences
-{
-	width: 100%;
-}
-#layout-main div.profile_all div.tabbed_pane
-{
-	width: 100%;
-}
-
 #layout-main div.profile_all table
 {
-	border: none;
+	border:none;
 }
 
 #layout-main div.css_style div.info dl dd
 {
-	margin-left: 7em;
-	width: 60%;
+	margin-left:7em;
+	width:60%;
 }
 
 #layout-main div.profile_all div.block div.image
 {
-	width: 40%;
+	width:40%;
 }
 
 #layout-main div.profile_all div.block div.info dl
 {
-	margin-left: 0;
+	margin-left:0;
 }
 
 #style_url
 {
-	width: 75%;
+	width:75%;
 }
 
 #style_thumbnail
 {
-	width: 220px;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #cccccc;
-	padding: 3px;
-	background-color: #f9f9f9;
-	font-size: 94%;
-	text-align: center;
+	background-color:#f9f9f9;
+	border-color:#cccccc;
+	border-style:solid;
+	border-width:1px;
+	font-size:94%;
+	padding:3px;
+	text-align:center;
+	width:220px;
 }
 
 #image_viewer
 {
-	margin: 50px;
+	margin:50px;
 }
 
-
-#layout-main div.tabbed_pane #tab7_pane div textarea
+#layout-main div.profile_all div.tabbed_pane div.user_css div textarea
 {
-    width: 70%;
-    height: 500px;
+	height:500px;
+	width:70%;
 }
 
-#layout-main div.tabbed_pane #tab5_pane div.detailed h4
+#layout-main div.profile_all div.tabbed_pane div.permissions div.detailed h4
 {
-    margin-bottom: 0.5em;
+	margin-bottom:.5em;
 }
 
-#layout-main div.tabbed_pane #tab5_pane form
+#layout-main div.profile_all div.tabbed_pane div.permissions form
 {
-    text-align: left;
+	text-align:left;
 }
 
-#layout-main div.tabbed_pane #tab5_pane div.permissions div
+#layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div
 {
-    float: left;
-    margin-bottom: 0.5em;
+	float:left;
+	margin-bottom:.5em;
 }
 
-#layout-main div.tabbed_pane #tab5_pane div.permissions div label
+#layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label
 {
-    display: block;
-	line-height: 2.3;
-    margin-right: 1em;
+	display:block;
+	line-height:2.3;
+	margin-right:1em;
 }
 
-#layout-main div.tabbed_pane #tab5_pane div.permissions div label select
+#layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label select
 {
-    display: block;
-    margin-left: 13.5em;
-    margin-top: -1.8em;
-    width: 330px;
+	display:block;
+	margin-left:13.5em;
+	margin-top:-1.8em;
+	width:330px;
 }
 
-#layout-main div.tabbed_pane #tab5_pane div.permissions div label input
+#layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label input
 {
-    width: 326px;
+	width:326px;
 }
 
-#layout-main div.tabbed_pane #tab5_pane div.guest
+#layout-main div.profile_all div.tabbed_pane div.permissions div.guest
 {
-    clear: left;
-    text-align: center;
+	clear:left;
+	text-align:center;
 }
 
-#layout-main div.tabbed_pane #tab7_pane div textarea
-{
-    width: 70%;
-    height: 500px;
-}
-
-#layout-main div.tabbed_pane #tab2_pane table tr
+#layout-main div.profile_all div.tabbed_pane div.general table tr
 {
 	vertical-align:top;
+}
+
+#layout-main div.profile_all div.passwords,
+#layout-main div.profile_all div.tabbed_pane div.default_languages
+{
+	display:table;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#layout-main div.profile_all div.passwords > div,
+#layout-main div.profile_all div.passwords form > div,
+#layout-main div.profile_all div.tabbed_pane div.default_languages div
+{
+	display:table-cell;
+}
+
+#layout-main div.profile_all div.preferences,
+#layout-main div.profile_all div.tabbed_pane
+{
+	width:100%;
 }

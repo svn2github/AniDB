@@ -44,7 +44,10 @@
 }
 
 #layout-main div.g_timedentry ol,
-#layout-main div.g_timedentry ul
+#layout-main div.g_timedentry ul,
+#layout-main div.cmt_add div.preview-box ol,
+#layout-main div.cmt_add div.preview-box ul
+
 {
 	background-color:inherit;
 	border:none;
