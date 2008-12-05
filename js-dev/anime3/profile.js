@@ -452,7 +452,7 @@ function tabWork() {
 	target.appendChild(jstab);
 	// now to actualy make the options
 	var jsdiv = document.createElement('div');
-	jsdiv.id = 'tab'+num+'_pane';
+	jsdiv.id = 'tab0_'+num+'_pane';
 	jsdiv.className = 'pane hide';
 	// add all possible js options here, i don't care!
 	
