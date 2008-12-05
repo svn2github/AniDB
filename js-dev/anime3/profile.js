@@ -446,7 +446,7 @@ function tabWork() {
 	var jstab = document.createElement('li');
 	var num = lis.length+1;
 	jstab.id = 'tab0_'+num;
-	jstab.className = 'tab';
+	jstab.className = 'tab javascript';
 	jstab.appendChild(document.createTextNode('Javascript'));
 	jstab.onclick = Magic.toggle_tabs;
 	target.appendChild(jstab);
