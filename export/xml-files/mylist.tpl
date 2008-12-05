@@ -12,6 +12,7 @@
 		<status complete="<tmpl_var name=status_anime_iscomplete>" watched="<tmpl_var name=status_anime_iswatched>" size="<tmpl_var name=data_anime_my_size>" />
 		<files><tmpl_loop name=loop_ep><tmpl_loop name=loop_file>
 			<file
+				lid="<tmpl_var name=data_file_lid>"
 				fid="<tmpl_var name=data_file_id>"
 				eid="<tmpl_var name=data_ep_id>"
 				epno="<tmpl_var name=data_ep_epno>"
