@@ -2337,14 +2337,14 @@ text-align: center;
 {
 width: 100%;
 }
-#tab5_pane div.permissions div label select
+#layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label select
 {
 display: block;
 margin-left: 13.5em;
 margin-top: -1em;
 width: 250px;
 }
-#tab7_pane textarea
+#layout-main div.profile_all div.tabbed_pane div.user_css textarea
 {
 width: 500px;
 height: 350px;
