@@ -114,3 +114,17 @@
 	height: 16px;
 	background-image: url(../icons/formating/information.png);
 }
+
+*.i_mylist_ainfo_greyed
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/formating/information_greyed.png);
+}
+
+*.i_mylist_ainfo_loading
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/formating/loading.gif);
+}
