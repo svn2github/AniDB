@@ -490,6 +490,52 @@ function remColFromBox() {
 	defsAnimeLayoutSelect.appendChild(option);
 }
 
+/* Moves a Column in the user selected cols up */
+function moveColUpBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var selIndex = userAnimeLayoutSelect.selectedIndex;
+	if (selIndex < 1) return; // either no selection or selection is the top option
+	var curOption = userAnimeLayoutSelect.options[selIndex];
+	var prevOption = userAnimeLayoutSelect.options[selIndex-1];
+	userAnimeLayoutSelect.insertBefore(curOption,prevOption);
+}
+
+/* Moves a Column in the user selected cols down */
+function moveColDownBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var selIndex = userAnimeLayoutSelect.selectedIndex;
+	if (selIndex < 0 || selIndex > userAnimeLayoutSelect.options.length-1) return; // either no selection or selection is the bottom option
+	var curOption = userAnimeLayoutSelect.options[selIndex];
+	var nextOption = userAnimeLayoutSelect.options[selIndex+2];
+	userAnimeLayoutSelect.insertBefore(curOption,nextOption);
+
+}
+
+/* Resets both cols */
+function resetColsBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var defsAnimeLayoutSelect = document.getElementById('defsAnimeLayoutSelect');
+	// first clear them
+	while (userAnimeLayoutSelect.childNodes.length) userAnimeLayoutSelect.removeChild(userAnimeLayoutSelect.firstChild);
+	while (defsAnimeLayoutSelect.childNodes.length) defsAnimeLayoutSelect.removeChild(defsAnimeLayoutSelect.firstChild);
+	var tempArray = new cloneArray(animePage_defLayout);
+	// Current User Layout
+	for (var lc = 0; lc < animePage_curLayout.length; lc++) {
+		var option = animePage_curLayout[lc];
+		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
+		newOption.ondblclick = remColFromBox; 
+		userAnimeLayoutSelect.appendChild(newOption);
+		tempArray.splice(tempArray.indexOf(option),1);
+	}
+	// Layout Columns
+	for (var lc = 0; lc < tempArray.length; lc++) {
+		var option = tempArray[lc];
+		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
+		newOption.ondblclick = addColToBox; 
+		defsAnimeLayoutSelect.appendChild(newOption);
+	}
+}
+
 /* Function that makes the FileTable Column layout preferences */
 function makeLayoutPreferencesTable() {
 	var table = document.createElement('table');
@@ -521,7 +567,9 @@ function makeLayoutPreferencesTable() {
 		defsAnimeLayoutSelect.appendChild(newOption);
 	}
 	userAnimeLayoutSelect.size = defsAnimeLayoutSelect.size = 14;
+	// Defaults Cell
 	createCell(row, null, defsAnimeLayoutSelect);
+	// Switch Boxes Cell
 	var cell = document.createElement('td');
 	var addCol = createButton('addCol','addCol',false,'>>','button');
 	addCol.onclick = addColToBox;
@@ -532,7 +580,24 @@ function makeLayoutPreferencesTable() {
 	remCol.onclick = remColFromBox;
 	cell.appendChild(remCol);
 	row.appendChild(cell);
+	// User Selects Cell
 	createCell(row, null, userAnimeLayoutSelect);
+	// Up and Down Cell
+	cell = document.createElement('td');
+	var upCol = createButton('upCol','upCol',false,'\u2191','button');
+	upCol.onclick = moveColUpBox;
+	cell.appendChild(upCol);
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(document.createElement('br'));
+	var resetCol = createButton('resetCol','resetCol',false,'x','button');
+	resetCol.onclick = resetColsBox;	
+	cell.appendChild(resetCol);
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(document.createElement('br'));
+	var downCol = createButton('downCol','downCol',false,'\u2193','button');
+	downCol.onclick = moveColDownBox;
+	cell.appendChild(downCol);
+	row.appendChild(cell);
 	tbody.appendChild(row);
 	table.appendChild(tbody);
 	return table;

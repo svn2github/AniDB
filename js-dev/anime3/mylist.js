@@ -200,7 +200,7 @@ function showAnimeInfo() {
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later
 		this.id = 'a'+aid+'_info';
-		this.title = null;
+		this.title = "";
 		setTooltip('please wait while loading data...');
 		this.className = this.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
 		fetchInfoData(aid);
