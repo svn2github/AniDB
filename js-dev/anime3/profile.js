@@ -544,6 +544,7 @@ function makeLayoutPreferencesTable() {
 	createHeader(row, null, "Available columns");
 	createHeader(row, null, null);
 	createHeader(row, null, "Selected columns");
+	createHeader(row, null, null);
 	tbody.appendChild(row);
 	row = document.createElement('tr');
 	// first build users personal layout table
