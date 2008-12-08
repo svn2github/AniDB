@@ -326,7 +326,10 @@ function createDT(parentNode, className, text, abbr) {
 function createCell(parentNode, className, someElement, anidbSort, colSpan) {
 	var td = document.createElement('td');
 	if (className != null) td.className = className;
-	if (someElement != null) td.appendChild(someElement);
+	if (someElement != null) {
+		if (typeof(someElement) == 'string') td.appendChild(document.createTextNode(someElement));
+		else td.appendChild(someElement);
+	}
 	if (anidbSort != null) td.setAttribute('anidb:sort',anidbSort);
 	if (colSpan != null && colSpan > 1) td.colSpan = colSpan;
 	if (parentNode != null) parentNode.appendChild(td);
