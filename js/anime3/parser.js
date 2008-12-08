@@ -452,6 +452,16 @@ function CFileEntry(node) {
   if (this.vidCnt && !this.subCnt) { this.isRaw = true; }
 }
 
+/* Creates a new AnimeInfo node */
+function CAnimeInfo(node) {
+	this.aid = Number(node.getAttribute('id'));
+	this.desc = node.getAttribute('desc');
+	this.title = node.getAttribute('name');
+	this.picurl = node.getAttribute('picurl');
+	this.restricted = Number(node.getAttribute('restricted'));
+	this.year = node.getAttribute('year');
+}
+
 // CORE Functions //
 
 /* Function that creates a pseudo group entry for the times cache fails
