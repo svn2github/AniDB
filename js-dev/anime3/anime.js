@@ -1326,7 +1326,7 @@ function createFileTable(episode) {
 		}
 		// apply sort, users will regret this, but oh well.. what you want may not always be what you get
 		if (animePage_curSort != 'default' && th != null) {
-			alert('animePage_curSort: '+animePage_curSort+'\nanimePage_curSortOrder: '+animePage_curSortOrder+'\nth.className: '+th.className);
+			//alert('animePage_curSort: '+animePage_curSort+'\nanimePage_curSortOrder: '+animePage_curSortOrder+'\nth.className: '+th.className);
 			sortcol(th);
 		}
 	}
