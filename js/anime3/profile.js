@@ -435,6 +435,175 @@ function changeOptionValue(node) {
 	CookieSet(name,value,3650);
 }
 
+// Quick reference Table
+var animeFileColsList = {
+	'default':{'text':"Default"},
+	'check-anime':{'text':"(Un)Check file"},
+	'fid':{'text':"File details/FID"},
+	'group':{'text':"Group"},
+	'size':{'text':"Size"},
+	'crc':{'text':"CRC (profile dependent)"},
+	'langs':{'text':"Languages"},
+	'cf':{'text':"Container Format"},
+	'resolution':{'text':"Resolution"},
+	'anime-source':{'text':"Source"},
+	'quality':{'text':"Quality"},
+	'anime-hashes':{'text':"Hashes"},
+	'users':{'text':"Users"},
+	'state-anime':{'text':"Mylist"},
+	'actions-anime':{'text':"Actions"}
+}
+var animePage_defLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
+var animePage_curLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
+var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-source','users'];
+var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
+var animePage_curSort = 'default'; // whatever the db spits out 
+
+/* Function that adds file columns */
+function addColToBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var defsAnimeLayoutSelect = document.getElementById('defsAnimeLayoutSelect');
+	var option;
+	if (this.nodeName.toLowerCase() == 'input') // we are dealing with the button
+		option = defsAnimeLayoutSelect.options[defsAnimeLayoutSelect.selectedIndex];
+	else // we are dealing with an option
+		option = this;
+	option.ondblclick = remColFromBox;
+	var selIndex = userAnimeLayoutSelect.selectedIndex;
+	if (selIndex < 0)
+		userAnimeLayoutSelect.appendChild(option);
+	else
+		userAnimeLayoutSelect.insertBefore(option,userAnimeLayoutSelect.options[selIndex]);
+}
+
+/* Function that removes file columns */
+function remColFromBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var defsAnimeLayoutSelect = document.getElementById('defsAnimeLayoutSelect');
+	var option;
+	if (this.nodeName.toLowerCase() == 'input') { // we are dealing with the button
+		var selIndex = userAnimeLayoutSelect.selectedIndex;
+		option = userAnimeLayoutSelect.options[selIndex];
+	} else // we are dealing with an option
+		option = this;
+	option.ondblclick = addColToBox;
+	defsAnimeLayoutSelect.appendChild(option);
+}
+
+/* Moves a Column in the user selected cols up */
+function moveColUpBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var selIndex = userAnimeLayoutSelect.selectedIndex;
+	if (selIndex < 1) return; // either no selection or selection is the top option
+	var curOption = userAnimeLayoutSelect.options[selIndex];
+	var prevOption = userAnimeLayoutSelect.options[selIndex-1];
+	userAnimeLayoutSelect.insertBefore(curOption,prevOption);
+}
+
+/* Moves a Column in the user selected cols down */
+function moveColDownBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var selIndex = userAnimeLayoutSelect.selectedIndex;
+	if (selIndex < 0 || selIndex > userAnimeLayoutSelect.options.length-1) return; // either no selection or selection is the bottom option
+	var curOption = userAnimeLayoutSelect.options[selIndex];
+	var nextOption = userAnimeLayoutSelect.options[selIndex+2];
+	userAnimeLayoutSelect.insertBefore(curOption,nextOption);
+
+}
+
+/* Resets both cols */
+function resetColsBox() {
+	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+	var defsAnimeLayoutSelect = document.getElementById('defsAnimeLayoutSelect');
+	// first clear them
+	while (userAnimeLayoutSelect.childNodes.length) userAnimeLayoutSelect.removeChild(userAnimeLayoutSelect.firstChild);
+	while (defsAnimeLayoutSelect.childNodes.length) defsAnimeLayoutSelect.removeChild(defsAnimeLayoutSelect.firstChild);
+	var tempArray = new cloneArray(animePage_defLayout);
+	// Current User Layout
+	for (var lc = 0; lc < animePage_curLayout.length; lc++) {
+		var option = animePage_curLayout[lc];
+		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
+		newOption.ondblclick = remColFromBox; 
+		userAnimeLayoutSelect.appendChild(newOption);
+		tempArray.splice(tempArray.indexOf(option),1);
+	}
+	// Layout Columns
+	for (var lc = 0; lc < tempArray.length; lc++) {
+		var option = tempArray[lc];
+		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
+		newOption.ondblclick = addColToBox; 
+		defsAnimeLayoutSelect.appendChild(newOption);
+	}
+}
+
+/* Function that makes the FileTable Column layout preferences */
+function makeLayoutPreferencesTable() {
+	var table = document.createElement('table');
+	var tbody = document.createElement('tbody');
+	var row = document.createElement('tr');
+	createHeader(row, null, "Available columns");
+	createHeader(row, null, null);
+	createHeader(row, null, "Selected columns");
+	createHeader(row, null, null);
+	tbody.appendChild(row);
+	row = document.createElement('tr');
+	// first build users personal layout table
+	// reference: animeFileColsList, animePage_defLayout, animePage_curLayout
+	var userAnimeLayoutSelect = createBasicSelect('userAnimeLayoutSelect','userAnimeLayoutSelect',null);
+	var defsAnimeLayoutSelect = createBasicSelect('defsAnimeLayoutSelect','defsAnimeLayoutSelect',null);
+	var tempArray = new cloneArray(animePage_defLayout);
+	// Current User Layout
+	for (var lc = 0; lc < animePage_curLayout.length; lc++) {
+		var option = animePage_curLayout[lc];
+		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
+		newOption.ondblclick = remColFromBox; 
+		userAnimeLayoutSelect.appendChild(newOption);
+		tempArray.splice(tempArray.indexOf(option),1);
+	}
+	// Layout Columns
+	for (var lc = 0; lc < tempArray.length; lc++) {
+		var option = tempArray[lc];
+		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
+		newOption.ondblclick = addColToBox; 
+		defsAnimeLayoutSelect.appendChild(newOption);
+	}
+	userAnimeLayoutSelect.size = defsAnimeLayoutSelect.size = 14;
+	// Defaults Cell
+	createCell(row, null, defsAnimeLayoutSelect);
+	// Switch Boxes Cell
+	var cell = document.createElement('td');
+	var addCol = createButton('addCol','addCol',false,'>>','button');
+	addCol.onclick = addColToBox;
+	cell.appendChild(addCol);
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(document.createElement('br'));
+	var remCol = createButton('remCol','remCol',false,'<<','button');
+	remCol.onclick = remColFromBox;
+	cell.appendChild(remCol);
+	row.appendChild(cell);
+	// User Selects Cell
+	createCell(row, null, userAnimeLayoutSelect);
+	// Up and Down Cell
+	cell = document.createElement('td');
+	var upCol = createButton('upCol','upCol',false,'\u2191','button');
+	upCol.onclick = moveColUpBox;
+	cell.appendChild(upCol);
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(document.createElement('br'));
+	var resetCol = createButton('resetCol','resetCol',false,'x','button');
+	resetCol.onclick = resetColsBox;	
+	cell.appendChild(resetCol);
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(document.createElement('br'));
+	var downCol = createButton('downCol','downCol',false,'\u2193','button');
+	downCol.onclick = moveColDownBox;
+	cell.appendChild(downCol);
+	row.appendChild(cell);
+	tbody.appendChild(row);
+	table.appendChild(tbody);
+	return table;
+}
+
 /* Javascript Options Tab Work */
 function tabWork() {
 	var target = getElementsByClassName(document.getElementsByTagName('ul'), 'tabs', false)[0];
@@ -445,15 +614,15 @@ function tabWork() {
 	var lis = target.getElementsByTagName('li');
 	var jstab = document.createElement('li');
 	var num = lis.length+1;
-	jstab.id = 'tab'+num;
-	jstab.className = 'tab';
+	jstab.id = 'tab0_'+num;
+	jstab.className = 'tab javascript';
 	jstab.appendChild(document.createTextNode('Javascript'));
 	jstab.onclick = Magic.toggle_tabs;
 	target.appendChild(jstab);
 	// now to actualy make the options
 	var jsdiv = document.createElement('div');
-	jsdiv.id = 'tab'+num+'_pane';
-	jsdiv.className = 'pane hide';
+	jsdiv.id = 'tab0_'+num+'_pane';
+	jsdiv.className = 'pane hide javascript';
 	// add all possible js options here, i don't care!
 	
 	var type = 'all';
@@ -461,9 +630,11 @@ function tabWork() {
 	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true};
 	var ed2kPrefs = {'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"};
 	var mylistPrefs = {'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"};
+	var mylistPrefs2 = {'id':"mylist-prefs2",'head':"Mylist",'title':"Mylist Preferences"};
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	var otherPrefs = {'id':"other-prefs",'head':"Other",'title':"Other Preferences"};
-	items['all'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, otherPrefs];
+	var animeLayoutPrefs = {'id':"anime-layout",'head':"Layout",'title':"Anime page Layout Preferences"};
+	items['all'] =	[titlePrefs, ed2kPrefs, mylistPrefs, mylistPrefs2, groupPrefs, animeLayoutPrefs, otherPrefs];
 	
 	/* load settings from cookie */
 	var animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
@@ -475,11 +646,20 @@ function tabWork() {
 	var mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
-	var mylist_confirm_action = CookieGet('mylist_confirm_action') || 0;
+	var mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
+	var mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
+	var mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
 	var group_check_type = CookieGet('group_check_type') || 0;
 	var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 1;
 	var storedTab = CookieGet('tab') || '';
+	var animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
+	var animePage_curSort = CookieGet('animePage_curSort') || 'default';
+	var animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
+	animePageLayout = animePageLayout.split(',');
+	animePage_curLayout = new Array();
+	for (var ci = 0; ci < animePageLayout.length; ci++)
+		animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
 	
 	/* create preferences tabs */
 	
@@ -596,12 +776,37 @@ function tabWork() {
 				li.appendChild(watchedSel);
 				li.appendChild(document.createTextNode(' Default quick-add watched state'));
 				ul.appendChild(li);
+				tab.appendChild(ul);
+				break;
+			case 'mylist-prefs2':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ck = createCheckbox('mylist_get_animeinfo',mylist_get_animeinfo);
+				ck.onchange = function() { 
+					changeOptionValue(this); 
+					mylist_get_animeinfo = Number(this.checked); 
+					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
+					document.getElementById('mylist_get_animeinfo_mw').disabled = !this.checked;
+				}
+				li.appendChild(ck);
+				li.appendChild(document.createTextNode(' Get anime information on link hover'));
+				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var mylistActionSel = createSelectArray(null,"mylist_confirm_action","mylist_confirm_action",null,mylist_confirm_action,{0:{"text":'ask for action'},1:{"text":'stay on page'},2:{"text":'always reload'}});
-				mylistActionSel.onchange = function() { changeOptionValue(this); mylist_confirm_action = Number(this.value); 	}
-				li.appendChild(mylistActionSel);
-				li.appendChild(document.createTextNode(' Don\'t show the reload needed warning after changing mylist state in anime pages.'));
+				var ainfoSZ = createSelectArray(null,"mylist_get_animeinfo_sz","mylist_get_animeinfo_sz",null,mylist_get_animeinfo_sz,{'150':{"text":'large'},'50x65':{"text":'small'}});
+				if (!mylist_get_animeinfo) ainfoSZ.disabled = true;
+				ainfoSZ.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_sz = this.value; };
+				li.appendChild(ainfoSZ);
+				li.appendChild(document.createTextNode(' Default anime information thumbnail size'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ainfoMW = createSelectArray(null,"mylist_get_animeinfo_mw","mylist_get_animeinfo_mw",null,mylist_get_animeinfo_mw,{'300':{"text":'small'},'450':{"text":'medium'},'600':{"text":'large'}});
+				if (!mylist_get_animeinfo) ainfoMW.disabled = true;
+				ainfoMW.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_mw = this.value; };
+				li.appendChild(ainfoMW);
+				li.appendChild(document.createTextNode(' Default anime information box width'));
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
@@ -678,6 +883,32 @@ function tabWork() {
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
+			case 'anime-layout':
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				li.appendChild(document.createTextNode('File table column layout'));
+				li.appendChild(makeLayoutPreferencesTable());
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var defaultSort = createSelectArray(null,"animePage_curSort","animePage_curSort");
+				for (var si = 0; si < animePage_sorts.length; si++) {
+					var option = animePage_sorts[si];
+					var value = animePage_sortsV[si];
+					var text = animeFileColsList[option]['text'];
+					createSelectOption(defaultSort, text, value, (value == animePage_curSort));
+				}
+				defaultSort.onchange = function() { changeOptionValue(this); animePage_curSort = this.value; };
+				li.appendChild(defaultSort);
+				li.appendChild(document.createTextNode(' '));
+				var defaultSortOrder = createSelectArray(null,"animePage_curSortOrder","animePage_curSortOrder",null,animePage_curSortOrder,{'down':{'text':"descending"},'up':{'text':"ascending"}});
+				defaultSortOrder.onchange = function() { changeOptionValue(this); animePage_curSortOrder = this.value; };
+				li.appendChild(defaultSortOrder);
+				li.appendChild(document.createTextNode(' Default sorted column'));
+				ul.appendChild(li);
+				tab.appendChild(ul);
+				break;
 			default:
 		}
 		body.appendChild(tab);
@@ -693,7 +924,18 @@ function tabWork() {
 	actionLI.className = 'action';
 	actionLI.appendChild(document.createTextNode('Actions: '));
 	var reloadInput = createBasicButton('do.apply','save preferences');
-	reloadInput.onclick = function reloadPage() { alert('Current preferences saved.'); }
+	reloadInput.onclick = function reloadPage() { 
+		var tempArray = new Array();
+		var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+		animePage_curLayout = new Array();
+		for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
+			var value = userAnimeLayoutSelect.options[oi].value;
+			tempArray.push(animePage_defLayout.indexOf(value));
+			animePage_curLayout.push(value);
+		}
+		CookieSet('animePageLayout',tempArray.join(','));
+		alert('Current preferences saved.'); 
+	}
 	actionLI.appendChild(reloadInput);
 	ul.appendChild(actionLI);
 	jsdiv.appendChild(ul);

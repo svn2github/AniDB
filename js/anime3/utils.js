@@ -288,9 +288,15 @@ function createHeader(parentNode, className, text, abbr, anidbSort, colSpan) {
 	if (abbr != null) {
 		var abbreviation = document.createElement('abbr');
 		abbreviation.title = abbr;
-		if (text != null) abbreviation.appendChild(document.createTextNode(text));
+		if (text != null) {
+			if(typeof(text) == 'string') abbreviation.appendChild(document.createTextNode(text));
+			else abbreviation.appendChild(text);
+		}
 		th.appendChild(abbreviation);
-	} else if (text != null) th.appendChild(document.createTextNode(text));
+	} else if (text != null) {
+		if(typeof(text) == 'string') th.appendChild(document.createTextNode(text));
+		else th.appendChild(text);
+	}
 	if (colSpan != null && colSpan > 1) th.colSpan = colSpan;
 	if (anidbSort != null) {
 		if (th.className) th.className += ' '+anidbSort;
@@ -320,7 +326,10 @@ function createDT(parentNode, className, text, abbr) {
 function createCell(parentNode, className, someElement, anidbSort, colSpan) {
 	var td = document.createElement('td');
 	if (className != null) td.className = className;
-	if (someElement != null) td.appendChild(someElement);
+	if (someElement != null) {
+		if (typeof(someElement) == 'string') td.appendChild(document.createTextNode(someElement));
+		else td.appendChild(someElement);
+	}
 	if (anidbSort != null) td.setAttribute('anidb:sort',anidbSort);
 	if (colSpan != null && colSpan > 1) td.colSpan = colSpan;
 	if (parentNode != null) parentNode.appendChild(td);
@@ -1307,30 +1316,34 @@ function ietruebody(){
 }
 
 /* Sets the tooltip */
-function setTooltip(thetext, dom, thewidth, thecolor){
-  while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
-  if (!thetext) return;
+function setTooltip(thetext, dom, thewidth, thecolor, minWidth){
+	while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
+	if (!thetext) return;
 	if (typeof thewidth != "undefined") {
-	  if (thewidth != 'auto') divHTMLTOOLTIP.style.width = thewidth + 'px';
-	  else divHTMLTOOLTIP.style.width = thewidth;
+		if (thewidth != 'auto') divHTMLTOOLTIP.style.width = thewidth + 'px';
+		else divHTMLTOOLTIP.style.width = thewidth;
 	}
 	if (typeof thecolor != "undefined" && thecolor != "") divHTMLTOOLTIP.style.backgroundColor = thecolor;
-  if (typeof dom != "undefined") {
-    if (dom) divHTMLTOOLTIP.appendChild(thetext);
-    else divHTMLTOOLTIP.innerHTML = thetext;
-  }
+	if (typeof dom != "undefined") {
+		if (dom) divHTMLTOOLTIP.appendChild(thetext);
+		else divHTMLTOOLTIP.innerHTML = thetext;
+	}
+	if (typeof minWidth != "undefined") {
+		divHTMLTOOLTIP.style.minWidth = minWidth + 'px';
+	}
 	enabletip = true;
-  divHTMLTOOLTIP.style.visibility = "visible";
+	divHTMLTOOLTIP.style.visibility = "visible";
 	return false;
 }
 
 function positionTooltip(e){
 	if (!enabletip) return;
 	divHTMLTOOLTIP.style.position = 'absolute';
+	divHTMLTOOLTIP.style.visibility = "visible";
 	var nondefaultpos = false;
 	var curX = 0;
 	var curY = 0;
-	if (!e) var e = window.event;
+	if (!e) e = window.event;
 	if (e.pageX || e.pageY) { curX = e.pageX; curY = e.pageY; }
 	else if (e.clientX || e.clientY) { curX = e.clientX + document.documentElement.scrollLeft; curY = e.clientY + document.documentElement.scrollTop; }
 	//Find out how close the mouse is to the corner of the window
@@ -1348,23 +1361,24 @@ function positionTooltip(e){
 	else { divHTMLTOOLTIP.style.left = (curX + offsetfromcursorX - offsetdivfrompointerX) + 'px'; 	} //position the horizontal position of the menu where the mouse is positioned
 	if (bottomedge < divHTMLTOOLTIP.offsetHeight) { divHTMLTOOLTIP.style.top = (curY - divHTMLTOOLTIP.offsetHeight - offsetfromcursorY) + 'px'; nondefaultpos = true; } //same concept with the vertical position
 	else { divHTMLTOOLTIP.style.top = (curY + offsetfromcursorY + offsetdivfrompointerY) + 'px';	}
-	divHTMLTOOLTIP.style.visibility = "visible";
 }
 
 function hideTooltip(){
-  enabletip = false;
-  divHTMLTOOLTIP.style.visibility = "hidden";
-  while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
+	enabletip = false;
+	divHTMLTOOLTIP.style.visibility = "hidden";
+	while (divHTMLTOOLTIP.childNodes.length) divHTMLTOOLTIP.removeChild(divHTMLTOOLTIP.firstChild);
 	divHTMLTOOLTIP.style.left = "-5000px";
 	divHTMLTOOLTIP.style.backgroundColor = '';
 	divHTMLTOOLTIP.style.width = '';
 }
 
-function initTooltips() {
-  divHTMLTOOLTIP = document.createElement('div');
-  divHTMLTOOLTIP.id = "obj-tooltip"
-  document.body.appendChild(divHTMLTOOLTIP);
-  document.onmousemove = positionTooltip;
+function initTooltips(nostyle) {
+	if (!document.getElementById('obj-tooltip')){
+		divHTMLTOOLTIP = document.createElement('div');
+		if (!nostyle) divHTMLTOOLTIP.id = "obj-tooltip"
+		document.body.appendChild(divHTMLTOOLTIP);
+		document.onmousemove = positionTooltip;
+	}
 }
 
 // Something i didn't want to put on anidbscript because, well, i don't want it there :P
