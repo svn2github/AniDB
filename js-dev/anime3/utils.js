@@ -1339,10 +1339,11 @@ function setTooltip(thetext, dom, thewidth, thecolor, minWidth){
 function positionTooltip(e){
 	if (!enabletip) return;
 	divHTMLTOOLTIP.style.position = 'absolute';
+	divHTMLTOOLTIP.style.visibility = "visible";
 	var nondefaultpos = false;
 	var curX = 0;
 	var curY = 0;
-	if (!e) var e = window.event;
+	if (!e) e = window.event;
 	if (e.pageX || e.pageY) { curX = e.pageX; curY = e.pageY; }
 	else if (e.clientX || e.clientY) { curX = e.clientX + document.documentElement.scrollLeft; curY = e.clientY + document.documentElement.scrollTop; }
 	//Find out how close the mouse is to the corner of the window
@@ -1360,7 +1361,6 @@ function positionTooltip(e){
 	else { divHTMLTOOLTIP.style.left = (curX + offsetfromcursorX - offsetdivfrompointerX) + 'px'; 	} //position the horizontal position of the menu where the mouse is positioned
 	if (bottomedge < divHTMLTOOLTIP.offsetHeight) { divHTMLTOOLTIP.style.top = (curY - divHTMLTOOLTIP.offsetHeight - offsetfromcursorY) + 'px'; nondefaultpos = true; } //same concept with the vertical position
 	else { divHTMLTOOLTIP.style.top = (curY + offsetfromcursorY + offsetdivfrompointerY) + 'px';	}
-	divHTMLTOOLTIP.style.visibility = "visible";
 }
 
 function hideTooltip(){
@@ -1373,10 +1373,12 @@ function hideTooltip(){
 }
 
 function initTooltips(nostyle) {
-	divHTMLTOOLTIP = document.createElement('div');
-	if (!nostyle) divHTMLTOOLTIP.id = "obj-tooltip"
-	document.body.appendChild(divHTMLTOOLTIP);
-	document.onmousemove = positionTooltip;
+	if (!document.getElementById('obj-tooltip')){
+		divHTMLTOOLTIP = document.createElement('div');
+		if (!nostyle) divHTMLTOOLTIP.id = "obj-tooltip"
+		document.body.appendChild(divHTMLTOOLTIP);
+		document.onmousemove = positionTooltip;
+	}
 }
 
 // Something i didn't want to put on anidbscript because, well, i don't want it there :P

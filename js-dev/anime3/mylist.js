@@ -129,10 +129,10 @@ function prepPage() {
 			if (!cell) { errorAlert('prepPage','no name cell found'); continue; }
 			var span = cell.getElementsByTagName('span')[0];
 			if (!span) { errorAlert('prepPage','no span found on name cell'); continue; }
-			var infoIcon = createIcon(null, 'anime info', 'removeme', null, null, 'i_mylist_ainfo');
+			var infoIcon = createIcon(null, 'anime info', 'removeme', showAnimeInfo, 'Click to show anime information', 'i_mylist_ainfo_greyed');
 			infoIcon._aid = aid;
 			span.insertBefore(infoIcon,span.firstChild);
-			hookEvent(infoIcon,'mouseover',showAnimeInfo);
+			//hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		}
 	}
 	var filters = getElementsByClassName(document.getElementsByTagName('div'),'filters',true)[0];
@@ -161,7 +161,7 @@ function prepPage() {
 function showAnimeInfoWork(obj,info) {
 	var minWidth = Number(mylist_get_animeinfo_mw);
 	if (isNaN(minWidth)) minWidth = 450;
-	hookEvent(obj,'mouseout',hideTooltip);
+	//hookEvent(obj,'mouseout',hideTooltip);
 	var table = document.createElement('table');
 	table.className = 'animeInfo';
 	table.style.minWidth = minWidth + 'px';
@@ -200,8 +200,12 @@ function showAnimeInfo() {
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later
 		this.id = 'a'+aid+'_info';
-		setTooltip(document.createTextNode('please wait while loading data...'), true);
+		this.title = null;
+		setTooltip('please wait while loading data...');
+		this.className = this.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
 		fetchInfoData(aid);
+		this.onmouseover = showAnimeInfo;
+		this.onmouseout = hideTooltip;
 	} else { // display the data
 		showAnimeInfoWork(this,info);
 	}
@@ -252,6 +256,7 @@ function parseInfoData(xmldoc) {
 	if (newData.desc == '') newData.desc = '<i>no description</i>'
 	AnimeInfos[newData.aid] = newData;
 	var a = document.getElementById('a'+newData.aid+'_info');
+	a.className = a.className.replace('i_mylist_ainfo_loading','i_mylist_ainfo');
 	showAnimeInfoWork(a,newData);
 }
 
