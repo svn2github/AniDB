@@ -177,6 +177,13 @@ function parseData(xmldoc) {
 	// do some triming of the definition cols if possible
 	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !LAY_SHOWCRC)
 		removeColAttribute('crc',fileCols);
+	// Okay now that i have the preferences i can rebuild fileCols
+	var newFileCols = new Array();
+	for (var i = 0; i < animePage_curLayout.length; i++) {
+		var name = animePage_curLayout[i];
+		newFileCols = addColAttribute(name,fileCols,newFileCols);
+	}
+	fileCols = newFileCols;
 	fileSkips = buildSkipCols(fileCols);
 	updateStatus('');
 	var aid = root.getElementsByTagName('anime')[0];
@@ -1306,9 +1313,22 @@ function createFileTable(episode) {
 	cell.replaceChild(table,cell.firstChild);
 	// fix the sorting function
 	if (LAY_HEADER) {
-		init_sorting(table,'title','down');
+		var idCol = animePage_sorts[animePage_sortsV.indexOf(animePage_curSort)];
+		if (animePage_curLayout.indexOf(idCol) < 0) animePage_curSort = 'default';
+		var sortCol = (animePage_curSort == 'default') ? 'group' : animePage_curSort;
+		var sortOrder = (animePage_curSort == 'default') ? 'down': animePage_curSortOrder;
+		init_sorting(table, sortCol,sortOrder);
 		var ths = table.tHead.getElementsByTagName('th');
-		for (var i = 0; i < ths.length; i++) ths[i].onclick = prepareForSort;
+		var th = null;
+		for (var i = 0; i < ths.length; i++) {
+			ths[i].onclick = prepareForSort;
+			if (animePage_curSort != 'default' && ths[i].className.indexOf(animePage_curSort) >= 0) th = ths[i];
+		}
+		// apply sort, users will regret this, but oh well.. what you want may not always be what you get
+		if (animePage_curSort != 'default' && th != null) {
+			alert('animePage_curSort: '+animePage_curSort+'\nanimePage_curSortOrder: '+animePage_curSortOrder+'\nth.className: '+th.className);
+			sortcol(th);
+		}
 	}
 	return table;
 }

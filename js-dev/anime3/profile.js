@@ -456,6 +456,7 @@ var animeFileColsList = {
 var animePage_defLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
 var animePage_curLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
 var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-source','users'];
+var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
 var animePage_curSort = 'default'; // whatever the db spits out 
 
 /* Function that adds file columns */
@@ -581,12 +582,13 @@ function tabWork() {
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
 	var mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
 	var mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
-	mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
+	var mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
 	var group_check_type = CookieGet('group_check_type') || 0;
 	var group_langfilter = CookieGet('group_langfilter') || 1;
 	var currentFMode = CookieGet('currentFMode') || 1;
 	var storedTab = CookieGet('tab') || '';
-	animePage_curSort = CookieGet('animePage_curSort') || 'default';
+	var animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
+	var animePage_curSort = CookieGet('animePage_curSort') || 'default';
 	var animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
 	animePageLayout = animePageLayout.split(',');
 	animePage_curLayout = new Array();
@@ -826,32 +828,19 @@ function tabWork() {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var defaultSort = createSelectArray(null,"animePage_curSort","animePage_curSort");
 				for (var si = 0; si < animePage_sorts.length; si++) {
-					var value = animePage_sorts[si];
-					createSelectOption(defaultSort, animeFileColsList[value]['text'], value, (value == animePage_curSort));
+					var option = animePage_sorts[si];
+					var value = animePage_sortsV[si];
+					var text = animeFileColsList[option]['text'];
+					createSelectOption(defaultSort, text, value, (value == animePage_curSort));
 				}
 				defaultSort.onchange = function() { changeOptionValue(this); animePage_curSort = this.value; };
 				li.appendChild(defaultSort);
+				li.appendChild(document.createTextNode(' '));
+				var defaultSortOrder = createSelectArray(null,"animePage_curSortOrder","animePage_curSortOrder",null,animePage_curSortOrder,{'down':{'text':"descending"},'up':{'text':"ascending"}});
+				defaultSortOrder.onchange = function() { changeOptionValue(this); animePage_curSortOrder = this.value; };
+				li.appendChild(defaultSortOrder);
 				li.appendChild(document.createTextNode(' Default sorted column'));
 				ul.appendChild(li);
-				var actionLI = document.createElement('li');
-				actionLI.className = 'action';
-				actionLI.appendChild(document.createTextNode('Actions: '));
-				var saveInput = createBasicButton('do.save','save preferences');
-				saveInput.onclick = function saveSettings() {
-					var tempArray = new Array();
-					var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
-					animePage_curLayout = new Array();
-					for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
-						var value = userAnimeLayoutSelect.options[oi].value;
-						tempArray.push(animePage_defLayout.indexOf(value));
-						animePage_curLayout.push(value);
-					}
-					CookieSet('animePageLayout',tempArray.join(','));
-					CookieSet('animePage_curSort',animePage_curSort);
-					alert('Current Layout preferences saved.');
-				}
-				actionLI.appendChild(saveInput);
-				ul.appendChild(actionLI);
 				tab.appendChild(ul);
 				break;
 			default:

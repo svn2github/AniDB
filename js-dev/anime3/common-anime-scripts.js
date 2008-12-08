@@ -98,7 +98,9 @@ var mylist_get_animeinfo_mw = '450';
 var animePage_defLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
 var animePage_curLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
 var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-source','users'];
-var animePage_curSort = 'default'; // whatever the db spits out 
+var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
+var animePage_curSort = 'default'; // whatever the db spits out
+var animePage_curSortOrder = 'down'; // default sort direction
 
 /* This is an auxiliar function that removes a given attribute from the cols
  * @param name Name of the column to remove
@@ -114,6 +116,23 @@ function removeColAttribute(name,cols) {
 	}
 	if (index > -1) cols.splice(index,1);
 	return cols;
+}
+
+/* This is an auxiliar function that adds a given attribute from the cols to another Array
+ * @param name Name of The column to add
+ * @param cols Cols var
+ * @param array Array which will get the new col
+ * @return The given array with the added col
+ */
+function addColAttribute(name,cols,array) {
+	var index = -1;
+	for (var i = 0; i < cols.length; i++) {
+		if (cols[i]['name'] != name) continue;
+		index = i;
+		break;
+	}
+	if (index > -1) array.push(cols[index]);
+	return array;
 }
 
 /* This function will build a col skip array
@@ -994,6 +1013,7 @@ function createPreferencesTable(type) {
 	group_check_type = CookieGet('group_check_type') || 0;
 	group_langfilter = CookieGet('group_langfilter') || 1;
 	animePage_curSort = CookieGet('animePage_curSort') || 'default';
+	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
 	var animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
 	animePageLayout = animePageLayout.split(',');
 	animePage_curLayout = new Array();
@@ -1325,11 +1345,17 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var defaultSort = createSelectArray(null,"animePage_curSort","animePage_curSort");
 				for (var si = 0; si < animePage_sorts.length; si++) {
-					var value = animePage_sorts[si];
-					createSelectOption(defaultSort, animeFileColsList[value]['text'], value, (value == animePage_curSort));
+					var option = animePage_sorts[si];
+					var value = animePage_sortsV[si];
+					var text = animeFileColsList[option]['text'];
+					createSelectOption(defaultSort, text, value, (value == animePage_curSort));
 				}
 				defaultSort.onchange = function() { changeOptionValue(this); animePage_curSort = this.value; };
 				li.appendChild(defaultSort);
+				li.appendChild(document.createTextNode(' '));
+				var defaultSortOrder = createSelectArray(null,"animePage_curSortOrder","animePage_curSortOrder",null,animePage_curSortOrder,{'down':{'text':"descending"},'up':{'text':"ascending"}});
+				defaultSortOrder.onchange = function() { changeOptionValue(this); animePage_curSortOrder = this.value; };
+				li.appendChild(defaultSortOrder);
 				li.appendChild(document.createTextNode(' Default sorted column'));
 				ul.appendChild(li);
 				var actionLI = document.createElement('li');
