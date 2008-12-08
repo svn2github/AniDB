@@ -257,7 +257,8 @@ function parseInfoData(xmldoc) {
 	AnimeInfos[newData.aid] = newData;
 	var a = document.getElementById('a'+newData.aid+'_info');
 	a.className = a.className.replace('i_mylist_ainfo_loading','i_mylist_ainfo');
-	showAnimeInfoWork(a,newData);
+	// actualy don't show this right away user can come back to check this later
+	//showAnimeInfoWork(a,newData);
 }
 
 /* Function that parses xml response
