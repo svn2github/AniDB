@@ -71,7 +71,7 @@ function fetchData(searchString) {
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert('parseData','no root node'); return; }
-	var descNodes = root.getElementsByTagName('animedesc');
+	var descNodes = root.getElementsByTagName('animedescaid');
 	descs = new Array();
 	for (var d = 0; d < descNodes.length; d++)
 		descs.push(new CDesc(descNodes[d]));
