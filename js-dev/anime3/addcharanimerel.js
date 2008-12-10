@@ -178,7 +178,7 @@ function showAnimeInfoWork(obj,info) {
 
 /* Function that shows anime info (or not) */
 function showAnimeInfo() {
-	var aid = this.getAttribute('_aid');
+	var aid = Number(this.getAttribute('_aid'));
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later
@@ -248,7 +248,7 @@ function showResults() {
 		if (existTitles) 
 			div.appendChild(createIcon(null, '[+]', 'removeme', expandTitles, 'click to expand all titles matched', 'i_plus'));
 		var infoIcon = createIcon(null, 'anime info', null, null, null, 'i_mylist_ainfo');
-		infoIcon.setAttribute('_aid',desc.aid);
+		infoIcon.setAttribute('_aid',""+desc.aid);
 		hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		hookEvent(infoIcon,'mouseout',hideTooltip);
 		div.appendChild(infoIcon);
