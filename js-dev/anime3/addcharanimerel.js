@@ -178,7 +178,7 @@ function showAnimeInfoWork(obj,info) {
 
 /* Function that shows anime info (or not) */
 function showAnimeInfo() {
-	var aid = this._aid;
+	var aid = this.getAttribute('_aid');
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later
@@ -193,7 +193,7 @@ function showAnimeInfo() {
 function expandTitles() {
 	var node = this.parentNode;
 	while (node.nodeName.toLowerCase() != 'td') node = node.parentNode;
-	var altTitles = getElementsByClassName(node.getElementsByTagName('span'), 'alt titles', false)[0];
+	var altTitles = getElementsByClassName(node.getElementsByTagName('ul'), 'alt titles', false)[0];
 	if (!altTitles)  { errorAlert('expandTitles','could not find alternative titles span'); return; }
 	if (this.className.indexOf('i_plus') >= 0) {
 		this.className = this.className.replace('i_plus','i_minus');
@@ -248,7 +248,7 @@ function showResults() {
 		if (existTitles) 
 			div.appendChild(createIcon(null, '[+]', 'removeme', expandTitles, 'click to expand all titles matched', 'i_plus'));
 		var infoIcon = createIcon(null, 'anime info', null, null, null, 'i_mylist_ainfo');
-		infoIcon._aid = desc.aid;
+		infoIcon.setAttribute('_aid',desc.aid);
 		hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		hookEvent(infoIcon,'mouseout',hideTooltip);
 		div.appendChild(infoIcon);
@@ -275,7 +275,7 @@ function showResults() {
 		cell.appendChild(mainTitleSpan);
 		// now i cycle other tiles matched for this anime
 		if (existTitles) {
-			var altTitleSpan = document.createElement('span');
+			var altTitleSpan = document.createElement('ul');
 			altTitleSpan.className = 'alt titles';
 			altTitleSpan.style.display = "none";
 			var types = ['Official','Synonym','Short'];
@@ -298,9 +298,9 @@ function showResults() {
 				for (var title in groups) {
 					for (var v = 1; v >= 0; v--) {
 						if (groups[title][v]) { // verified titles first
-							altTitleSpan.appendChild(document.createElement('br'));
+							//altTitleSpan.appendChild(document.createElement('br'));
 							var b = document.createElement('b');
-							var span = document.createElement('span');
+							var span = document.createElement('li');
 							var icons = document.createElement('div');
 							icons.className = 'icons';
 							for (var l = 0; l < groups[title][v].length; l++) {
