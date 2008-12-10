@@ -15,16 +15,38 @@ var picbase = 'http://img5.anidb.net/pics/anime/';
 var descInfo = new Array();
 var aids = new Array();
 
+/* Replacement functions
+ * @param str String to replace identifiers
+ * @source anime3.formating::convert_input
+ */
+function convert_input(str) {
+	str = str.replace(/\[(p|b|i|u|ul|ol|li)\]/mgi,'<$1>');
+	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)\]/mgi,'</$1>');
+	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
+	str = str.replace(/\[([/])?code\]/mgi,'<$1pre>');
+	str = str.replace(/\<p\>/mgi,'');
+	str = str.replace(/\<\/p\>/mgi,'<br />');
+	str = str.replace(/\[br\]/mgi,'<br />');
+	str = str.replace(/\n/mgi,'<br />');
+	str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
+	str = str.replace(/\<\/ul\>\<br \/\>\<br \/\>/mgi,'</ul></br>');
+	str = str.replace(/\<\/ol\>\<br \/\>\<br \/\>/mgi,'</ol></br>');
+	str = str.replace(/\[url=([^\[\]].+?)\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$2</a>');
+	str = str.replace(/\[url\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$1</a>');
+	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
+	return (str);
+}
+
 /* Creates a new AnimeInfo node */
 function CAnimeInfo(node) {
 	this.aid = Number(node.getAttribute('id'));
-	this.desc = node.getAttribute('desc');
+	this.desc = convert_input(node.getAttribute('desc'));
 	if (this.desc == '') this.desc = '<i>no description</i>'
 	// @todo: parse bbstyles
 	this.title = node.getAttribute('title');
 	this.picurl = node.getAttribute('picurl');
 	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic.gif';
+	else this.picurl = 'http://static.anidb.net/pics/nopic_150.gif';
 	this.restricted = Number(node.getAttribute('restricted'));
 	this.airdate = javascriptDate(node.getAttribute('airdate'));
 	this.enddate = javascriptDate(node.getAttribute('enddate'));
@@ -39,10 +61,10 @@ function CDesc(node) {
 	this.aid = Number(node.getAttribute('aid'));
 	this.picurl = node.getAttribute('picurl');
 	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/50x65/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic.gif';
+	else this.picurl = 'http://static.anidb.net/pics/nopic_50x65.gif';
 	this.airdate = convertTime(node.getAttribute('airdate'));
 	this.enddate = convertTime(node.getAttribute('enddate'));
-	this.desc = node.getAttribute('desc');
+	this.desc = convert_input(node.getAttribute('desc'));
 	this.name = node.getAttribute('name');
 	this.verified = (Number(node.getAttribute('verifydate')) > 0);
 	this.lang = node.getAttribute('lang');
@@ -84,6 +106,11 @@ function parseData(xmldoc) {
 	if (!root) { errorAlert('parseData','no root node'); return; }
 	var descNodes = root.getElementsByTagName('animedesc');
 	descs = new Array();
+	aids = new Array();
+	if (!descNodes.length) { // no matches found
+		alert('Search for "'+searchString+'" resulted in no matches.');
+		return;
+	}
 	for (var d = 0; d < descNodes.length; d++) {
 		var descNode = new CDesc(descNodes[d]);
 		descs.push(descNode);
@@ -271,9 +298,9 @@ function showResults() {
 				for (var title in groups) {
 					for (var v = 1; v >= 0; v--) {
 						if (groups[title][v]) { // verified titles first
+							altTitleSpan.appendChild(document.createElement('br'));
 							var b = document.createElement('b');
 							var span = document.createElement('span');
-							altTitleSpan.appendChild(document.createElement('br'));
 							var icons = document.createElement('div');
 							icons.className = 'icons';
 							for (var l = 0; l < groups[title][v].length; l++) {
@@ -282,6 +309,7 @@ function showResults() {
 							}
 							if (v) icons.appendChild(createIcon(null, '[V]', null, null, 'these title are considered to be correct for the corresponding language(s)', 'i_verified'));
 							altTitleSpan.appendChild(icons);
+							var si = title.toLowerCase().indexOf(searchString.toLowerCase());
 							var firstBlock = document.createTextNode(title.substring(0,si));
 							var middleBlock = document.createTextNode(title.substr(si,searchString.length));
 							var lastBlock = document.createTextNode(title.substring(si+searchString.length,title.length));
@@ -290,8 +318,8 @@ function showResults() {
 							span.appendChild(b);
 							span.appendChild(lastBlock);
 							span.appendChild(document.createTextNode(' ('+type+')'));
+							altTitleSpan.appendChild(span);
 						}
-						altTitleSpan.appendChild(span);
 					}
 				}
 			}
@@ -304,14 +332,13 @@ function showResults() {
 	var tfoot = document.createElement('tfoot');
 	row = document.createElement('tr');
 	row.className = 'action';
-	createCell(row, 'value', createButton('add.doadd',null,false,'Add relation','submit'), null, 4);
+	createCell(row, 'value', createButton('add.doadd',null,false,'Add relation','submit'), null, 3);
 	tfoot.appendChild(row);
 	table.appendChild(tfoot);
 }
 
 /* Prepares the page for my scripts */
 function prepPage() {
-	return;
 	var div = document.getElementById('addrelform');
 	if (!div) { errorAlert('prepPage','no matching div'); return; }
 	fieldset = div.getElementsByTagName('fieldset')[0];
