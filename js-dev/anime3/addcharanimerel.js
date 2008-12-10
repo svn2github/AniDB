@@ -12,6 +12,8 @@ var searchString = "";
 var AnimeInfos = new Array(); // indexed by aid
 var descs = new Array();
 var picbase = 'http://img5.anidb.net/pics/anime/';
+var descInfo = new Array();
+var aids = new Array();
 
 /* Creates a new AnimeInfo node */
 function CAnimeInfo(node) {
@@ -29,6 +31,7 @@ function CAnimeInfo(node) {
 	var airDateYear = this.airdate.getFullYear();
 	var endDateYear = this.enddate.getFullYear();
 	this.year = (airDateYear == endDateYear ? airDateYear : airDateYear + '-' +endDateYear);
+	this.lang = node.getAttribute('mainlang');
 }
 
 /* AnimeDesc Node Parser */
@@ -41,7 +44,10 @@ function CDesc(node) {
 	this.enddate = convertTime(node.getAttribute('enddate'));
 	this.desc = node.getAttribute('desc');
 	this.name = node.getAttribute('name');
+	this.verified = (Number(node.getAttribute('verifydate')) > 0);
+	this.lang = node.getAttribute('lang');
 	this.title = node.getAttribute('title');
+	this.mainlang = node.getAttribute('mainlang');
 	this.restricted = Number(node.getAttribute('restricted'));
 	this.type = Number(node.getAttribute('type'));
 	var type = "main";
@@ -53,6 +59,11 @@ function CDesc(node) {
 		default: type = "unknown"; break;
 	}
 	this.type = type;
+	this.titles = new Array();
+	if (this.type != 'Main') {
+		this.titles[this.type] = new Array();
+		this.titles[this.type].push({'title':this.name,'lang':this.lang,'verified':this.verified});
+	}
 	// now, build the anime info node
 	if (!AnimeInfos[this.aid])
 		AnimeInfos[this.aid] = new CAnimeInfo(node);
@@ -62,7 +73,7 @@ function CDesc(node) {
 function fetchData(searchString) {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/animesearch.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=animedescaid&search='+escape(searchString), parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=animedesc&limit=100&search='+escape(searchString), parseData);
 }
 
 /* XMLHTTP RESPONSE parser
@@ -71,16 +82,26 @@ function fetchData(searchString) {
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert('parseData','no root node'); return; }
-	var descNodes = root.getElementsByTagName('animedescaid');
+	var descNodes = root.getElementsByTagName('animedesc');
 	descs = new Array();
-	for (var d = 0; d < descNodes.length; d++)
-		descs.push(new CDesc(descNodes[d]));
+	for (var d = 0; d < descNodes.length; d++) {
+		var descNode = new CDesc(descNodes[d]);
+		descs.push(descNode);
+		if (aids.indexOf(descNode.aid) < 0) aids.push(descNode.aid);
+		if (!descInfo[descNode.aid]) descInfo[descNode.aid] = descNode;
+		else if (descNode.type != 'Main') {
+			if (!descInfo[descNode.aid].titles[descNode.type]) descInfo[descNode.aid].titles[descNode.type] = new Array();
+			descInfo[descNode.aid].titles[descNode.type].push({'title':descNode.name,'lang':descNode.lang,'verified':descNode.verified});
+		} else
+			continue; // a bit pointless, i know :P
+	}
 	showResults();
 }
 
 /* Function that starts a search */
 function doSearch() {
 	searchString = addRelInput.value;
+	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
 	fetchData(searchString);
 }
 
@@ -96,6 +117,11 @@ function showAnimeInfoWork(obj,info) {
 	table.style.minWidth = minWidth + 'px';
 	var thead = document.createElement('thead');
 	var row = document.createElement('tr');
+/*	
+	var icons = document.createElement('div');
+	icons.className = 'icons';
+	icons.appendChild(createIcon(null, '['+info.lang+']', null, null, 'Language: '+languageMap[info.lang]['name'], 'i_audio_'+info.lang));
+*/
 	var title = document.createElement('span');
 	title.className = 'title';
 	title.appendChild(document.createTextNode(info.title));
@@ -105,6 +131,7 @@ function showAnimeInfoWork(obj,info) {
 	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
 	cell.appendChild(document.createTextNode(' '));
 	cell.appendChild(year);
+	//cell.appendChild(icons);
 	row.appendChild(cell);
 	thead.appendChild(row);
 	table.appendChild(thead);
@@ -125,7 +152,7 @@ function showAnimeInfoWork(obj,info) {
 /* Function that shows anime info (or not) */
 function showAnimeInfo() {
 	var aid = this._aid;
-	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number'); return; }
+	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later
 		errorAlert('showAnimeInfo','no AnimeInfos data for aid'+aid); 
@@ -135,11 +162,30 @@ function showAnimeInfo() {
 	}
 }
 
+/* Function that expands all the titles for a given anime */
+function expandTitles() {
+	var node = this.parentNode;
+	while (node.nodeName.toLowerCase() != 'td') node = node.parentNode;
+	var altTitles = getElementsByClassName(node.getElementsByTagName('span'), 'alt titles', false)[0];
+	if (!altTitles)  { errorAlert('expandTitles','could not find alternative titles span'); return; }
+	if (this.className.indexOf('i_plus') >= 0) {
+		this.className = this.className.replace('i_plus','i_minus');
+		this.title = 'click to fold all titles matched';
+		this.alt = this.firstChild.firstChild.nodeValue = '[-]';
+		altTitles.style.display = '';
+	} else {
+		this.className = this.className.replace('i_minus','i_plus');
+		this.title = 'click to expand all titles matched';
+		this.alt = this.firstChild.firstChild.nodeValue = '[+]';
+		altTitles.style.display = 'none';
+	}
+}
+
 /* Function that shows the results of the search */
 function showResults() {
 	if (!table) { errorAlert('showResults','no table'); return; }
 	var caption = table.getElementsByTagName('caption')[0];
-	if (caption) caption.firstChild.nodeValue = "Characters matching \""+searchString+"\"";
+	if (caption) caption.firstChild.nodeValue = "Animes matching \""+searchString+"\"";
 	var tbody = table.tBodies[0];
 	// clear table
 	while (tbody.childNodes.length) tbody.removeChild(tbody.firstChild);
@@ -148,50 +194,109 @@ function showResults() {
 	var row = document.createElement('tr');
 	createHeader(row, null, 'X');
 	createHeader(row, null, 'Image');
-	createHeader(row, null, 'Matched Name');
-	createHeader(row, null, 'Name');
+	createHeader(row, null, 'Name'); // Matched Name
+	//createHeader(row, null, 'Name');
 	thead.appendChild(row);
 	table.insertBefore(thead,tbody);
 	// var create tbody rows
-	for (var i = 0; i < descs.length; i++) {
-		var desc = descs[i];
+	for (var i = 0; i < aids.length; i++) {
+		var desc = descInfo[aids[i]];
 		var row = document.createElement('tr');
-		row.className = (i % 1 ? 'g_odd' : '');
+		row.className = (i % 2 ? 'g_odd' : '');
 		// checkbox
 		var ck = createCheckbox('addcarel.aid[]',false);
 		ck.value = desc.aid;
-		createCell(row, null, ck);
+		createCell(row, 'check', ck);
 		// image
 		var img = document.createElement('img');
 		img.src = desc.picurl;
 		img.alt = "thumbnail";
 		img.title = desc.name;
-		createCell(row, null, img);
+		createCell(row, 'thumbs', img);
 		// matched name
-		var b = document.createElement('b');
-		var span = document.createElement('span');
-		var si = desc.name.toLowerCase().indexOf(searchString.toLowerCase());
-		if (si >= 0) {
-			var firstBlock = document.createTextNode(desc.name.substring(0,si));
-			var middleBlock = document.createTextNode(desc.name.substr(si,searchString.length));
-			var lastBlock = document.createTextNode(desc.name.substring(si+searchString.length,desc.name.length));
-			span.appendChild(firstBlock);
-			b.appendChild(middleBlock);
-			span.appendChild(b);
-			span.appendChild(lastBlock);
-			span.appendChild(document.createTextNode(' ('+desc.type+')'));
-		} else span.appendChild(document.createTextNode(desc.name+' ('+desc.type+')'));
-		createCell(row, null, span);
-		// Original name and anime link
+		// first, let's create the icons i want
 		var div = document.createElement('div');
 		div.className = 'icons';
+		var existTitles = (desc.titles['Official'] || desc.titles['Short'] || desc.titles['Synonym']);
+		if (existTitles) 
+			div.appendChild(createIcon(null, '[+]', 'removeme', expandTitles, 'click to expand all titles matched', 'i_plus'));
 		var infoIcon = createIcon(null, 'anime info', null, null, null, 'i_mylist_ainfo');
 		infoIcon._aid = desc.aid;
 		hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		hookEvent(infoIcon,'mouseout',hideTooltip);
 		div.appendChild(infoIcon);
-		var cell = createCell(null, null, div);
-		cell.appendChild(createTextLink(null, desc.title, 'animedb.pl?show=anime&aid='+desc.aid));
+		var cell = createCell(null, 'titles', div);
+		// now, create the titles and what not.
+		// first, main title, always present, so default showing
+		var mainTitleSpan = document.createElement('span');
+		mainTitleSpan.className = 'main title';
+		var b = document.createElement('b');
+		var a = document.createElement('a');
+		a.href = 'animedb.pl?show=anime&aid='+desc.aid;
+		var si = desc.title.toLowerCase().indexOf(searchString.toLowerCase());
+		if (si >= 0) {
+			var firstBlock = document.createTextNode(desc.title.substring(0,si));
+			var middleBlock = document.createTextNode(desc.title.substr(si,searchString.length));
+			var lastBlock = document.createTextNode(desc.title.substring(si+searchString.length,desc.title.length));
+			a.appendChild(firstBlock);
+			b.appendChild(middleBlock);
+			a.appendChild(b);
+			a.appendChild(lastBlock);
+			a.appendChild(document.createTextNode(' (Main)'));
+		} else a.appendChild(document.createTextNode(desc.title+' (Main)'));
+		mainTitleSpan.appendChild(a);
+		cell.appendChild(mainTitleSpan);
+		// now i cycle other tiles matched for this anime
+		if (existTitles) {
+			var altTitleSpan = document.createElement('span');
+			altTitleSpan.className = 'alt titles';
+			altTitleSpan.style.display = "none";
+			var types = ['Official','Synonym','Short'];
+			for (var tt = 0; tt < types.length; tt++) {
+				var type = types[tt];
+				if (!desc.titles[type]) continue;
+				// Group titles
+				var groups = new Array();
+				for (var t = 0; t < desc.titles[type].length; t++) {
+					var title = desc.titles[type][t]['title'];
+					var lang = desc.titles[type][t]['lang'];
+					var verified = desc.titles[type][t]['verified'];
+					var si = title.toLowerCase().indexOf(searchString.toLowerCase());
+					if (si < 0) continue; // title provides no match, so ignore it
+					if (!groups[title]) groups[title] = new Array();
+					if (!groups[title][Number(verified)]) groups[title][Number(verified)] = new Array();
+					groups[title][Number(verified)].push(lang);
+				}
+				// display said groups of titles that provide matches
+				for (var title in groups) {
+					for (var v = 1; v >= 0; v--) {
+						if (groups[title][v]) { // verified titles first
+							var b = document.createElement('b');
+							var span = document.createElement('span');
+							altTitleSpan.appendChild(document.createElement('br'));
+							var icons = document.createElement('div');
+							icons.className = 'icons';
+							for (var l = 0; l < groups[title][v].length; l++) {
+								var lang = groups[title][v][l];
+								icons.appendChild(createIcon(null, '['+lang+']', null, null, 'Language: '+languageMap[lang]['name'], 'i_audio_'+lang));
+							}
+							if (v) icons.appendChild(createIcon(null, '[V]', null, null, 'these title are considered to be correct for the corresponding language(s)', 'i_verified'));
+							altTitleSpan.appendChild(icons);
+							var firstBlock = document.createTextNode(title.substring(0,si));
+							var middleBlock = document.createTextNode(title.substr(si,searchString.length));
+							var lastBlock = document.createTextNode(title.substring(si+searchString.length,title.length));
+							span.appendChild(firstBlock);
+							b.appendChild(middleBlock);
+							span.appendChild(b);
+							span.appendChild(lastBlock);
+							span.appendChild(document.createTextNode(' ('+type+')'));
+						}
+						altTitleSpan.appendChild(span);
+					}
+				}
+			}
+			cell.appendChild(altTitleSpan);
+		}
 		row.appendChild(cell);
 		tbody.appendChild(row);
 	}
