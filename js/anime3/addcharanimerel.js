@@ -311,6 +311,7 @@ function showResults() {
 
 /* Prepares the page for my scripts */
 function prepPage() {
+	return;
 	var div = document.getElementById('addrelform');
 	if (!div) { errorAlert('prepPage','no matching div'); return; }
 	fieldset = div.getElementsByTagName('fieldset')[0];
