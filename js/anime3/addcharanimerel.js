@@ -23,9 +23,8 @@ function CAnimeInfo(node) {
 	// @todo: parse bbstyles
 	this.title = node.getAttribute('title');
 	this.picurl = node.getAttribute('picurl');
-	if (this.picurl != 'nopic.gif') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
-	else if (this.picurl != '') this.picurl = 'http://static.anidb.net/pics/nopic.gif';
-	else this.picurl = picbase+'nopic.gif';
+	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
+	else this.picurl = 'http://static.anidb.net/pics/nopic.gif';
 	this.restricted = Number(node.getAttribute('restricted'));
 	this.airdate = javascriptDate(node.getAttribute('airdate'));
 	this.enddate = javascriptDate(node.getAttribute('enddate'));
@@ -40,7 +39,7 @@ function CDesc(node) {
 	this.aid = Number(node.getAttribute('aid'));
 	this.picurl = node.getAttribute('picurl');
 	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/50x65/'+this.picurl+'-thumb.jpg';
-	else this.picurl = picbase+'nopic.gif';
+	else this.picurl = 'http://static.anidb.net/pics/nopic.gif';
 	this.airdate = convertTime(node.getAttribute('airdate'));
 	this.enddate = convertTime(node.getAttribute('enddate'));
 	this.desc = node.getAttribute('desc');
