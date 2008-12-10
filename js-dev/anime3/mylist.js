@@ -130,7 +130,7 @@ function prepPage() {
 			var span = cell.getElementsByTagName('span')[0];
 			if (!span) { errorAlert('prepPage','no span found on name cell'); continue; }
 			var infoIcon = createIcon(null, 'anime info', 'removeme', showAnimeInfo, 'Click to show anime information', 'i_mylist_ainfo_greyed');
-			infoIcon._aid = aid;
+			infoIcon.setAttribute('_aid',aid);
 			span.insertBefore(infoIcon,span.firstChild);
 			//hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		}
@@ -195,7 +195,7 @@ function showAnimeInfoWork(obj,info) {
 
 /* Function that shows anime info (or not) */
 function showAnimeInfo() {
-	var aid = this._aid;
+	var aid = this.getAttribute('_aid');
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number'); return; }
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later

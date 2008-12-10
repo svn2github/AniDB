@@ -308,7 +308,7 @@ function showResults() {
 								icons.appendChild(createIcon(null, '['+lang+']', null, null, 'Language: '+languageMap[lang]['name'], 'i_audio_'+lang));
 							}
 							if (v) icons.appendChild(createIcon(null, '[V]', null, null, 'these title are considered to be correct for the corresponding language(s)', 'i_verified'));
-							altTitleSpan.appendChild(icons);
+							span.appendChild(icons);
 							var si = title.toLowerCase().indexOf(searchString.toLowerCase());
 							var firstBlock = document.createTextNode(title.substring(0,si));
 							var middleBlock = document.createTextNode(title.substr(si,searchString.length));
