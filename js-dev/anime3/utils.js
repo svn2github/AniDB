@@ -3,7 +3,6 @@
            some code derived from work done by PetriW and Rar at anidb
  * version 2.2 (07.07.2007)
  */
-
 // TIME/DATE FUNCTIONS //
 
 function padLeft(text, padChar, count) {
@@ -878,6 +877,7 @@ function findMylistEpEntries(eid) {
 
 // SORTING Functions //
 
+.0
 function c_undefined_simp(a, b) {
 	if (a < b) return -1;
 	if (a > b) return 1;

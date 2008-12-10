@@ -2,6 +2,13 @@
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (09.12.2008) - Initial Version
  */
+jsVersionArray.push({
+	"file":"anime3/addcharanimerel.js",
+	"version":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"work in progress"
+});
 
 var addRelInput;
 var addRelSubmit;

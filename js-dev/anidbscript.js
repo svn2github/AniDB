@@ -1,3 +1,21 @@
+/* This var will hold information about the currently loaded javascript files
+ * minimal format of entries is: {"file":"path to file","version":"file version"}
+ * other attributes that can go on the entry can be any of the following
+ * "author":"author name", author of the last change
+ * "date":"dd.mm.yyyy", date of last release, please use only the following formats: dd.mm.yyyy hh:mm or dd.mm.yyyy hh:mm:ss
+ * "changelog":"last change"
+ * Add your information to jsVersionArray like so:
+ * jsVersionArray.push({"file":"anidbscript.js","version":"1.0"});
+ */
+var jsVersionArray = new Array();
+jsVersionArray.push({
+	"file":"anidbscript.js",
+	"version":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"adding jsVersionArray"
+});
+
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
 	Array.prototype.indexOf = function(it) {
@@ -101,6 +119,27 @@ function hookEvent(element, eventName, callback) { addEventSimple(element, event
 function unhookEvent(element, eventName, callback) { removeEventSimple(element, eventName, callback); }
 
 /* Generic ANIDB functions */
+
+/* Adds some text to the footer, useful for debug and stuff
+ * @param text String with text to show
+ * @param append Boolean which if set to true will append the current text to any other text existing
+ */
+function addInfoToFooter(text, append) {
+	if (!text || typeof text != 'string') return;
+	var footer = document.getElementByTagName('layout-footer');
+	var p = document.getElementById('layout-footer-info');
+	if (!p) {
+		p = document.createElement('p');
+		p.id = 'layout-footer-info';
+		p.appendChild(document.createTextNode(text));
+		footer.appendChild(p);
+	} else {
+		if (!append) p.firstChild.nodeValue = text;
+		else p.firstChild.nodeValue += text;
+	}
+}
+
+
 function BasicPopup(a) {
 	p = a.className.substring(a.className.lastIndexOf(' ')).split('.');
 	var url = (a.href.indexOf("animedb.pl?") != -1 && a.href.indexOf("&nonav") == -1) ? a.href+"&nonav=1" : a.href;
