@@ -67,7 +67,7 @@ removeColAttribute("airdate",epCols);
 removeColAttribute("users",epCols);
 var epSkips = null;
 // thumbnails and whatnot
-var picbase = 'http://img5.anidb.net/pics/anime/thumbs/';
+var picbase = 'http://img5.anidb.net/pics/anime/';
 var AnimeInfos = new Array();
 
 /* This function parses mylist expand links and sets some settings
@@ -252,7 +252,8 @@ function parseInfoData(xmldoc) {
 	if (!animeInfo) { errorAlert('parseInfoData','no animeinfo nodes found'); return; }
 	var newData = new CAnimeInfo(animeInfo);
 	var picurl = newData.picurl.substr(newData.picurl.lastIndexOf('/'));
-	if (picurl != 'nopic.gif') newData.picurl = picbase+mylist_get_animeinfo_sz+'/'+picurl+'-thumb.jpg';
+	if (picurl != 'nopic.gif' && this.picurl != '') newData.picurl = picbase+'thumbs/'+mylist_get_animeinfo_sz+'/'+picurl+'-thumb.jpg';
+	else this.picurl = picbase+'nopic.gif';
 	if (newData.desc == '') newData.desc = '<i>no description</i>'
 	AnimeInfos[newData.aid] = newData;
 	var a = document.getElementById('a'+newData.aid+'_info');
