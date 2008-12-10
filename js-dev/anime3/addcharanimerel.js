@@ -24,7 +24,7 @@ function CAnimeInfo(node) {
 	this.title = node.getAttribute('title');
 	this.picurl = node.getAttribute('picurl');
 	if (this.picurl != 'nopic.gif') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
-	else if (this.picurl != '') this.picurl = picbase+this.picurl;
+	else if (this.picurl != '') this.picurl = 'http://static.anidb.net/pics/nopic.gif';
 	else this.picurl = picbase+'nopic.gif';
 	this.restricted = Number(node.getAttribute('restricted'));
 	this.airdate = javascriptDate(node.getAttribute('airdate'));

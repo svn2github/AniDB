@@ -253,7 +253,7 @@ function parseInfoData(xmldoc) {
 	var newData = new CAnimeInfo(animeInfo);
 	var picurl = newData.picurl.substr(newData.picurl.lastIndexOf('/'));
 	if (picurl != 'nopic.gif' && this.picurl != '') newData.picurl = picbase+'thumbs/'+mylist_get_animeinfo_sz+'/'+picurl+'-thumb.jpg';
-	else this.picurl = picbase+'nopic.gif';
+	else this.picurl = 'http://static.anidb.net/pics/nopic.gif';
 	if (newData.desc == '') newData.desc = '<i>no description</i>'
 	AnimeInfos[newData.aid] = newData;
 	var a = document.getElementById('a'+newData.aid+'_info');
