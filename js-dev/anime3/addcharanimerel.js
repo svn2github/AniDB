@@ -182,7 +182,7 @@ function showAnimeInfo() {
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later
-		errorAlert('showAnimeInfo','no AnimeInfos data for aid'+aid); 
+		errorAlert('showAnimeInfo','no AnimeInfos data for aid: '+aid); 
 		return;
 	} else { // display the data
 		showAnimeInfoWork(this,info);
@@ -193,7 +193,7 @@ function showAnimeInfo() {
 function expandTitles() {
 	var node = this.parentNode;
 	while (node.nodeName.toLowerCase() != 'td') node = node.parentNode;
-	var altTitles = getElementsByClassName(node.getElementsByTagName('ul'), 'alt titles', false)[0];
+	var altTitles = getElementsByClassName(node.getElementsByTagName('ul'), 'alt_titles', false)[0];
 	if (!altTitles)  { errorAlert('expandTitles','could not find alternative titles span'); return; }
 	if (this.className.indexOf('i_plus') >= 0) {
 		this.className = this.className.replace('i_plus','i_minus');
@@ -256,7 +256,7 @@ function showResults() {
 		// now, create the titles and what not.
 		// first, main title, always present, so default showing
 		var mainTitleSpan = document.createElement('span');
-		mainTitleSpan.className = 'main title';
+		mainTitleSpan.className = 'title main';
 		var b = document.createElement('b');
 		var a = document.createElement('a');
 		a.href = 'animedb.pl?show=anime&aid='+desc.aid;
@@ -276,7 +276,7 @@ function showResults() {
 		// now i cycle other tiles matched for this anime
 		if (existTitles) {
 			var altTitleSpan = document.createElement('ul');
-			altTitleSpan.className = 'alt titles';
+			altTitleSpan.className = 'alt_titles';
 			altTitleSpan.style.display = "none";
 			var types = ['Official','Synonym','Short'];
 			for (var tt = 0; tt < types.length; tt++) {
@@ -298,9 +298,9 @@ function showResults() {
 				for (var title in groups) {
 					for (var v = 1; v >= 0; v--) {
 						if (groups[title][v]) { // verified titles first
-							//altTitleSpan.appendChild(document.createElement('br'));
+							var span = document.createElement('li'); // i know it's not a span!
+							span.className = 'title '+type.toLowerCase();
 							var b = document.createElement('b');
-							var span = document.createElement('li');
 							var icons = document.createElement('div');
 							icons.className = 'icons';
 							for (var l = 0; l < groups[title][v].length; l++) {
