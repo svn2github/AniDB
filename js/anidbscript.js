@@ -1,3 +1,23 @@
+/* This var will hold information about the currently loaded javascript files
+ * minimal format of entries is: {"file":"path to file","version":"file version"}
+ * other attributes that can go on the entry can be any of the following
+ * "revision":"svn revision number", Number of the svn revision that change this text
+ * "author":"author name", author of the last change
+ * "date":"dd.mm.yyyy", date of last release, please use only the following formats: dd.mm.yyyy hh:mm or dd.mm.yyyy hh:mm:ss
+ * "changelog":"last change"
+ * Add your information to jsVersionArray like so:
+ * jsVersionArray.push({"file":"anidbscript.js","version":"1.0"});
+ */
+var jsVersionArray = new Array();
+jsVersionArray.push({
+	"file":"anidbscript.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"adding jsVersionArray"
+});
+
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
 	Array.prototype.indexOf = function(it) {
@@ -20,55 +40,144 @@ Array.prototype.sum = function(){
     window.open(urlp,title,'toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars='+scr+',resizable='+re+',width='+w+',height='+h);
 }*/
 
-/* generic */
+/* generic event functions */
 
-function findPos(obj) {
+/* Finds the position of a given element */
+function findPos(element) {
 	var curleft = curtop = 0;
-	if (obj.offsetParent) {
+	if (element.offsetParent) {
 		do {
-			curleft += obj.offsetLeft;
-			curtop += obj.offsetTop;
-		} while (obj = obj.offsetParent);
+			curleft += element.offsetLeft;
+			curtop += element.offsetTop;
+		} while (obj = element.offsetParent);
 	}
 	return [curleft,curtop];
 }
 
-function addEventSimple(obj,evt,fn) {
-	if (obj.addEventListener)
-		obj.addEventListener(evt,fn,false);
-	else if (obj.attachEvent)
-		obj.attachEvent('on'+evt,fn);
-}
-
-function removeEventSimple(obj,evt,fn) {
-	if (obj.removeEventListener)
-		obj.removeEventListener(evt,fn,false);
-	else if (obj.detachEvent)
-		obj.detachEvent('on'+evt,fn);
-}
-
-/* Adds onload events to window.onload
- * usage: addLoadEvent(nameOfSomeFunctionToRunOnPageLoad);
- *    or: addLoadEvent(function() {
- *           more code to run on page load 
- *         });
+/* Adds an event to an element
+ * @param element Element to which the event will be added
+ * @param eventName Name of the event ["click", "load", "unload", "mouseover", etc]
+ * @param callback Function that will be executed
  */
-function addLoadEvent(func) {
-	var oldonload = window.onload;
-	if (typeof window.onload != 'function') {
-		window.onload = func;
+function addEventSimple(element, eventName, callback) {
+	if(typeof(element) == "string")
+		element = document.getElementById(element);
+	if(element == null)
+		return;
+	if(element.addEventListener) {
+		element.addEventListener(eventName, callback, false);
+	} else if(element.attachEvent)
+		element.attachEvent("on" + eventName, callback);
+}
+
+/* Removes an event from an element
+ * @param element Element from which the event will be removed
+ * @param eventName Name of the event ["click", "load", "unload", "mouseover", etc]
+ * @param callback Function that will be executed
+ */
+function removeEventSimple(element, eventName, callback) {
+	if(typeof(element) == "string")
+		element = document.getElementById(element);
+	if(element == null)
+		return;
+	if(element.removeEventListener)
+		element.removeEventListener(eventName, callback, false);
+	else if(element.detachEvent)
+		element.detachEvent("on" + eventName, callback);
+}
+
+/* Gets the target of an event */
+function getEventTarget(e) {
+	e = e ? e : window.event;
+	return e.target ? e.target : e.srcElement;
+}
+
+/* Cancels one event */
+function cancelEvent(e) {
+	e = e ? e : window.event;
+	if(e.stopPropagation)
+		e.stopPropagation();
+	if(e.preventDefault)
+		e.preventDefault();
+	e.cancelBubble = true;
+	e.cancel = true;
+	e.returnValue = false;
+	return false;
+}
+
+/* finds out what key was pressed */
+function getPressedKey(e) {
+	if (!e) e= event;
+	if(window.event) // IE
+		keynum = e.keyCode;
+	else if(e.which) // Netscape/Firefox/Opera
+		keynum = e.which;
+	return keynum;
+}
+
+/* Alias */
+function addLoadEvent(func) { addEventSimple(window, "load", func); }
+function hookEvent(element, eventName, callback) { addEventSimple(element, eventName, callback); }
+function unhookEvent(element, eventName, callback) { removeEventSimple(element, eventName, callback); }
+
+/* Generic ANIDB functions */
+
+/* Adds some text to the footer, useful for debug and stuff
+ * @param text String with text to show
+ * @param append Boolean which if set to true will append the current text to any other text existing
+ */
+function addInfoToFooter(text, append) {
+	var footer = document.getElementById('layout-footer');
+	var p = document.getElementById('layout-footer-info');
+	if (!p) {
+		p = document.createElement('p');
+		p.id = 'layout-footer-info';
+		p.appendChild((typeof text == 'string' ? document.createTextNode(text) : text));
+		footer.appendChild(p);
 	} else {
-		window.onload = function() {
-			if (oldonload) {
-				oldonload();
-			}
-			func();
-		}
+		if (!append) while (p.childNodes.length) p.removeChild(p.firstChild);
+		p.appendChild((typeof text == 'string' ? document.createTextNode(text) : text));
 	}
 }
 
-function BasicPopup(a)
-{
+/* Get's a JS file version from the Array */
+function getJsFileVersionArrayInfo(id) {
+	var array = new Array();
+	if (!jsVersionArray[id]) return null;
+	for (var elem in jsVersionArray[id])
+		array.push(elem+"="+jsVersionArray[id][elem]);
+	return array;
+}
+
+/* Shows an alert with the loaded scripts */
+function alertJsFileVersionArray() {
+	var text = "Loaded scripts:";
+	for (var id = 0; id < jsVersionArray.length; id++) {
+		for (var elem in jsVersionArray[id]) {
+			if (elem == 'file') text += '\n'+jsVersionArray[id][elem];
+			else text += '\n\t'+elem+"="+jsVersionArray[id][elem];
+		}
+	}
+	alert(text);
+}
+
+/* Writes the Javascript Footer */
+function writeJsFooter() {
+	var last = jsVersionArray[jsVersionArray.length - 1];
+	if (!last) return;
+	addInfoToFooter('Javascript: ');
+	var link = document.createElement('a');
+	link.onclick = alertJsFileVersionArray;
+	link.title = 'click to see a list of loaded scripts';
+	link.appendChild(document.createTextNode(last['file']));
+	addInfoToFooter(link,true);
+	addInfoToFooter(' '+last['revision']+', '+last['date'],true);
+}
+
+addLoadEvent(writeJsFooter);
+
+/* Creates a basic popup */
+function BasicPopup(a) {
 	p = a.className.substring(a.className.lastIndexOf(' ')).split('.');
 	var url = (a.href.indexOf("animedb.pl?") != -1 && a.href.indexOf("&nonav") == -1) ? a.href+"&nonav=1" : a.href;
 	if (window.open(url, p[4] || "_blank", 'toolbar=0,location=0,directories=0,status=0,menubar=0'.concat(
@@ -79,19 +188,11 @@ function BasicPopup(a)
 		{ return false; }
 }
 
-function BasicPopupSelf()
-{
-	return BasicPopup(this);
-}
+function BasicPopupSelf() { return BasicPopup(this); }
 
-function OpenNewWindow()
-{
-	window.open(this.href);
-	return false;
-}
+function OpenNewWindow() { window.open(this.href); return false; }
 
-function ClassToggle(elem, name, mode)
-{
+function ClassToggle(elem, name, mode) {
 	var classes = elem.className.split(" ");
 	var index = classes.indexOf(name);
 	if(index<0){
@@ -633,12 +734,12 @@ function sort_text_r(a,b){
 	return b[2]-a[2];
 }
 
-
 window.onload = InitDefault;
 
+/* Cookie Functions */
 
-function CookieSet( name, value, expires, path, domain, secure ) 
-{
+/* Sets a cookie */
+function CookieSet( name, value, expires, path, domain, secure ) {
 	var today = new Date();
 	today.setTime( today.getTime() );
 
@@ -654,8 +755,8 @@ function CookieSet( name, value, expires, path, domain, secure )
 	( ( secure ) ? ";secure" : "" );
 }
 
-function CookieGet( check_name )
-{
+/* Gets a Cookie */
+function CookieGet( check_name ) {
 	var a_all_cookies = document.cookie.split( ';' );
 	var a_temp_cookie, cookie_name, cookie_value;
 	
@@ -819,38 +920,424 @@ addLoadEvent(function() {
 	}
 });
 
+/* Legacy code */
+
 //anidb.js code (C) 2003 by PetriW
 function myGetElement(name) { 
-    if (document.getElementById) { 
-      // Standards 
-      return document.getElementById(name); 
-    } else if (document.layers) { 
-      // NS 4 
-      return document.layers[name]; 
-    } else if (document.all) { 
-      // IE 4 
-      return document.all[name]; 
-    } else { 
-      return false;
-    } 
+	if (document.getElementById) { 
+		// Standards 
+		return document.getElementById(name); 
+	} else if (document.layers) { 
+		// NS 4 
+		return document.layers[name]; 
+	} else if (document.all) { 
+		// IE 4 
+		return document.all[name]; 
+	} else { 
+		return false;
+	} 
 }
 
 function cbSelect(files) { 
-    for (var i = 0; i < files.length; i++) { 
-      myGetElement('mylmod.f.' + files[i]).checked = true; 
-    } 
+	for (var i = 0; i < files.length; i++) { 
+		myGetElement('mylmod.f.' + files[i]).checked = true; 
+	} 
 } 
 
 function cbDeselect(files) { 
-    for (var i = 0; i < files.length; i++) { 
-      myGetElement('mylmod.f.' + files[i]).checked = false; 
-    } 
+	for (var i = 0; i < files.length; i++) { 
+		myGetElement('mylmod.f.' + files[i]).checked = false; 
+	} 
 } 
 
 function cbToggle(files) { 
-    for (var i = 0; i < files.length; i++) { 
-      obj = myGetElement('mylmod.f.' + files[i]);
-      if (obj)
-        obj.checked = !obj.checked; 
-    } 
+	for (var i = 0; i < files.length; i++) { 
+		obj = myGetElement('mylmod.f.' + files[i]);
+		if (obj)
+			obj.checked = !obj.checked; 
+	} 
+}
+
+/* SPINNERs */
+
+function SpinControlAcceleration(increment, milliseconds) {
+	increment = parseFloat(increment);
+	if(isNaN(increment) || increment < 0) increment = 0;
+  
+	milliseconds = parseInt(milliseconds); 
+	if(isNaN(milliseconds) || milliseconds < 0) milliseconds = 0;
+    
+	this.GetIncrement = function() { return increment; }
+	this.GetMilliseconds = function() { return milliseconds; }    
+}
+
+function SpinControlAccelerationCollection() {
+	var _array = new Array();
+
+	this.GetCount = function() { return _array.length; }
+  
+	this.GetIndex = function(index) {
+		if(index < 0 || index >= _array.length) return null;
+		return _array[index];
+	}
+  
+	this.RemoveIndex = function(index) {
+		if(index < 0 || index >= _array.length) return;
+
+		newArray = new Array(); 
+		for(var i=0; i<_array.length; i++) {
+			if(i == index) continue;
+			newArray.push(_array[i]);
+		}
+		_array = newArray;
+	}
+  
+	this.Clear = function() { _array = new Array(); }  
+	
+	this.Add = function(spa) { 
+		if(spa.constructor != SpinControlAcceleration) return;
+		if(_array.length == 0) { _array.push(spa); return; }
+
+		var newSec = spa.GetMilliseconds();
+		if(newSec > _array[_array.length-1].GetMilliseconds()) { _array.push(spa); return; }
+    
+		var added = false;
+		var newArray = new Array();    
+		var indexSec;
+		for(var i=0; i<_array.length; i++) {
+			if(added) newArray.push(_array[i]);
+			else {
+				indexSec = _array[i].GetMilliseconds();
+				if(indexSec < newSec) newArray.push(_array[i]);        
+				else if(indexSec == newSec) { newArray.push(spa); added = true; }
+				else { newArray.push(_array[i]); newArray.push(spa); added = true; }
+			}
+		}
+		_array = newArray;
+		return;     
+	}
+}
+
+function SpinControl() {
+	var _this = this;
+
+	var _accelerationCollection = new SpinControlAccelerationCollection();
+	var _callbackArray = new Array();
+	var _currentValue = 1;
+	var _maximumVal = 100;
+	var _minimumVal = 0;
+	var _increment = 0.01;
+	var _width = 50;
+	var _updateInterval = 600;
+	var _isDisabled = false;
+
+	var _running = 0;
+	var _interval = -1;  
+	var _timeStart = 0;
+
+	var _bodyEventHooked = false;
+	
+	var _hiddenInput = null;
+
+	var _container = document.createElement("div");
+	_container.className = 'spinContainer';
+
+	var _textBox = document.createElement("input");
+	_textBox.type = 'text';
+	_textBox.className = 'spinInput';
+	_textBox.value = _currentValue;
+  
+	var _upButton = document.createElement("div");
+	_upButton.className = 'spinUpBtn';
+
+	var _downButton = document.createElement("div");
+	_downButton.className = 'spinDownBtn';
+
+	_container.appendChild(_textBox);
+	_container.appendChild(_upButton);
+	_container.appendChild(_downButton);  
+  
+	function Run() {
+		if(_isDisabled) return;
+		if(_running == 0) return;
+
+		var elapsed = new Date().getTime() - _timeStart;
+		var inc = _increment;
+
+		if(_accelerationCollection.GetCount() != 0) {
+			inc = 0;
+			for(var i = 0; i<_accelerationCollection.GetCount(); i++) {
+				if(elapsed < _accelerationCollection.GetIndex(i).GetMilliseconds()) break;
+				inc = _accelerationCollection.GetIndex(i).GetIncrement();
+			}    
+		} else if(elapsed < _updateInterval) {
+			return;
+		}
+    
+		DoChange(inc);
+	}
+  
+	function CancelRunning() {
+		if(_isDisabled) return;
+		_running = 0;
+		if(_interval != -1) { clearInterval(_interval); _interval = -1; }
+	}
+
+	function DoChange(inc) {
+		var newVal = _currentValue + inc * _running;
+		UpdateCurrentValue(newVal);
+	}
+  
+	function StartRunning(newState) {
+		if(_isDisabled) return;
+		if(_running != 0) CancelRunning();
+
+		_running = newState;
+
+		DoChange(_increment);
+
+		_timeStart = new Date().getTime();
+		_interval = setInterval(Run, 150);
+	}
+  
+	function UpdateCurrentValue(newVal) {
+		if(newVal <_minimumVal) newVal = _minimumVal;
+		if(newVal > _maximumVal) newVal = _maximumVal;
+
+		newVal = Math.round(1000*newVal)/1000;
+
+		_textBox.value = newVal;
+		if(newVal == _currentValue) return;
+
+		_currentValue = newVal;
+
+		for(var i=0; i<_callbackArray.length; i++)
+			_callbackArray[i](_this, _currentValue);
+	}
+  
+	function UpPress(e) {
+		_upButton.className = 'spinUpBtnPress';
+		_downButton.className = 'spinDownBtn';
+		StartRunning(1);
+		_textBox.focus();
+		return cancelEvent(e);
+	}
+  
+	function DownPress(e) {
+		_upButton.className = 'spinUpBtn';
+		_downButton.className = 'spinDownBtnPress';
+		StartRunning(-1);
+		_textBox.focus();
+		return cancelEvent(e);
+	}
+ 
+	function UpHover(e) {
+		if(!_bodyEventHooked)
+			hookEvent(document.body, 'mouseover', ClearBtns);
+      
+		_upButton.className = 'spinUpBtnHover';
+		_downButton.className = 'spinDownBtn';
+		CancelRunning();
+		return cancelEvent(e);
+	}
+  
+	function DownHover(e) {
+		if(!_bodyEventHooked)
+			hookEvent(document.body, 'mouseover', ClearBtns);
+
+		_upButton.className = 'spinUpBtn';
+		_downButton.className = 'spinDownBtnHover';
+		CancelRunning();
+		return cancelEvent(e);
+	}
+  
+	function ClearBtns(e) {
+		var target = getEventTarget(e);
+		if(target == _upButton || target == _downButton)
+			return;
+		_upButton.className = 'spinUpBtn';
+		_downButton.className = 'spinDownBtn';
+		CancelRunning();
+    
+		if(_bodyEventHooked) {
+			unhookEvent(document.body, 'mouseover', ClearBtns);
+			_bodyEventHooked = false;
+		}
+		return cancelEvent(e);
+	}
+  
+	function BoxChange() {
+		var val = parseFloat(_textBox.value);
+		if(isNaN(val)) val = _currentValue;
+
+		UpdateCurrentValue(val);
+	}
+  
+	function MouseWheel(e) {
+		e = e ? e : window.event;
+		var movement = e.detail ? e.detail / -3 : e.wheelDelta/120;
+		UpdateCurrentValue(_currentValue + _increment * movement);
+		return cancelEvent(e);
+	}
+  
+	function TextFocused(e) {
+		hookEvent(window, 'DOMMouseScroll', MouseWheel);
+		hookEvent(document, 'mousewheel', MouseWheel);
+		return cancelEvent(e);
+	}
+  
+	function TextBlur(e) {
+		unhookEvent(window, 'DOMMouseScroll', MouseWheel);
+		unhookEvent(document, 'mousewheel', MouseWheel);
+		return cancelEvent(e);
+	}
+	
+	function keysPressed(e) {
+		var keynum = getPressedKey(e);
+		switch (keynum) {
+			case 40: DownPress(e); break;
+			case 38: UpPress(e); break;
+			default: break;
+		}
+	}
+	
+	function keysReleased(e) {
+		var keynum = getPressedKey(e);
+		switch (keynum) {
+			case 40: DownHover(e); break;
+			case 38: UpHover(e); break;
+			default: break;
+		}
+	}
+  
+	this.StartListening = function() {
+		hookEvent(_upButton, 'mousedown', UpPress); 
+		hookEvent(_upButton, 'mouseup', UpHover);
+		hookEvent(_upButton, 'mouseover', UpHover);
+
+		hookEvent(_downButton, 'mousedown', DownPress); 
+		hookEvent(_downButton, 'mouseup', DownHover);
+		hookEvent(_downButton, 'mouseover', DownHover);
+
+		hookEvent(_textBox, 'change', BoxChange);
+		hookEvent(_textBox, 'focus', TextFocused);
+		hookEvent(_textBox, 'blur', TextBlur);
+		hookEvent(_textBox, 'keydown', keysPressed);
+		hookEvent(_textBox, 'keyup', keysReleased);
+	}
+   
+	this.StopListening = function() {
+		unhookEvent(_upButton, 'mousedown', UpPress); 
+		unhookEvent(_upButton, 'mouseup', UpHover);
+		unhookEvent(_upButton, 'mouseover', UpHover);
+    
+		unhookEvent(_downButton, 'mousedown', DownPress); 
+		unhookEvent(_downButton, 'mouseup', DownHover);
+		unhookEvent(_downButton, 'mouseover', DownHover);
+
+		unhookEvent(_textBox, 'change', BoxChange);
+		unhookEvent(_textBox, 'focus', TextFocused);
+		unhookEvent(_textBox, 'blur', TextBlur);
+		unhookEvent(_textBox, 'keydown', keysPressed);
+		unhookEvent(_textBox, 'keyup', keysReleased);
+    
+		if(_bodyEventHooked) {
+			unhookEvent(document.body, 'mouseover', ClearBtns);
+			_bodyEventHooked = false;
+		}
+	}
+  
+	this.SetMaxValue = function(value) {
+		value = parseFloat(value);
+		if(isNaN(value)) value = 1;
+		_maximumVal = value;
+		UpdateCurrentValue(_currentValue);
+	}
+
+	this.SetMinValue = function(value) {
+		value = parseFloat(value);
+		if(isNaN(value)) value = 0;
+		_minimumVal = value;
+		UpdateCurrentValue(_currentValue);
+	}
+
+	this.SetCurrentValue = function(value) {
+		value = parseFloat(value);
+		if(isNaN(value)) value = 0;	
+		UpdateCurrentValue(value);
+	}
+  
+	this.SetWidth = function(value) {
+		value = parseInt(value);
+		if(isNaN(value) || value < 25) value = 25;
+		_width = value;
+    	_container.style.width = _width + 'px';
+		_textBox.style.width = (_width - 20) + 'px';  
+	}
+	
+	this.SetUpdateInterval = function(value) {
+		value = Number(value);
+		if(isNaN(value)) value = 600;
+		if (value < 300) value = 300; // this kind of update is ridiculous
+		if (value > 10000) value = 10000; // more than 10 seconds between updates !?
+		_updateInterval = value;
+	}
+  
+	this.SetIncrement = function(value) {
+		value = parseFloat(value);
+		if(isNaN(value)) value = 0;
+		if(value < 0) value = -value;
+    
+		_increment = value;
+	}
+	
+	this.SetInputName = function(name) { _textBox.name = name; }
+	this.SetInputId = function(id) { _textBox.id = id; }
+	this.SetInputValue = function(value) { _textBox.value = value; }
+	this.SetInputFields = function(name, id, value) { 
+		if (name != null) _textBox.name = name;
+		if (id != null) _textBox.id = id;
+		if (value != null) _textBox.value = value;
+	}
+	
+	this.SetDisabled = function(value) { 
+		_isDisabled = value; 
+		_textBox.disabled = value;
+	}
+	
+	this.SetHiddenInput = function(element) {
+		_hiddenInput = element;
+		_textBox._hiddenInput = _hiddenInput;
+	}
+  
+	this.AttachValueChangedListener = function(listener) {
+		for(var i=0; i<_callbackArray.length; i++)
+			if(_callbackArray[i] == listener)
+				return;
+        
+		_callbackArray.push(listener);  
+	}
+  
+	this.DetachValueChangedListener = function(listener) {
+		newArray = new Array();
+		for(var i=0; i<_callbackArray.length; i++)
+			if(_callbackArray[i] != listener)
+				newArray.push(_callbackArray[i]);
+
+		_callbackArray = newArray;  
+	}
+
+	this.GetContainer = function() { return _container; }
+	this.GetCurrentValue = function() { return _currentValue; }
+	this.GetMaxValue = function() { return _maximumVal; }
+	this.GetMinValue = function() { return _minimumVal; }
+	this.GetWidth = function() { return _width; }
+	this.GetIncrement = function() { return _increment; }
+	this.GetUpdateInterval = function() { return _updateInterval; }
+	this.GetAccelerationCollection = function() { return _accelerationCollection; }
+	this.GetInput = function() { return _textBox; }
+	this.GetDisabled = function() { return _isDisabled; }
+	this.GetHiddenInput = function() { return _hiddenInput; }
+
+	_this.SetWidth(_width);
 }
