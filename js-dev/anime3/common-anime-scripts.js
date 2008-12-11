@@ -668,8 +668,10 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 	classNameAtts = new Array();
 	if (file.type != 'generic') {
 		if (file.crcStatus == 'valid') classNameAtts.push('good');
-		if (file.crcStatus == 'invalid') classNameAtts.push('bad');
+		if (file.crcStatus == 'invalid') classNameAtts.push('invalid');
 		if (!file.avdumped) classNameAtts.push('undumped');
+		else classNameAtts.push('verified');
+		if (file.pseudoFile) classNameAtts.push('virtual');
 	} else classNameAtts.push('generic no_sort');
 	row.className = classNameAtts.join(' ');
 	var icons = createFileIcons(file); // get file icons
