@@ -166,7 +166,10 @@ function writeJsFooter() {
 	var last = jsVersionArray[jsVersionArray.length - 1];
 	if (!last) return;
 	addInfoToFooter('Javascript: ');
-	var link = createTextLink(null, last['file'], 'removeme', null, alertJsFileVersionArray, 'click to see a list of loaded scripts');
+	var link = document.createElement('a');
+	link.onclick = alertJsFileVersionArray;
+	link.title = 'click to see a list of loaded scripts';
+	link.appendChild(document.createTextNode(last['file']));
 	addInfoToFooter(link,true);
 	addInfoToFooter(' '+last['revision']+', '+last['date'],true);
 }
