@@ -186,12 +186,6 @@ function showAnimeInfoWork(obj,info) {
 
 /* Function that shows anime info (or not) */
 function showAnimeInfo() {
-	alert(
-		(this && this.id ? 'this.id: '+this.id : 'no this.id')+'\n'+
-		(this && this.parentNode && this.parentNode.id ? 'this.parentNode.id: '+this.parentNode.id : 'no this.parentNode.id')+'\n'+
-		(this && this.nodeName ? 'this.nodeName: '+this.nodeName : 'no this.nodeName')+'\n'+
-		this
-	);
 	var aid = Number(this.id.substring(7));
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
 	var info = AnimeInfos[aid];
@@ -263,7 +257,8 @@ function showResults() {
 			div.appendChild(createIcon(null, '[+]', 'removeme', expandTitles, 'click to expand all titles matched', 'i_plus'));
 		var infoIcon = createIcon(null, 'anime info', null, null, null, 'i_mylist_ainfo');
 		infoIcon.id = 'ainfo_a'+desc.aid;
-		hookEvent(infoIcon,'mouseover',showAnimeInfo);
+		if (!isIE) hookEvent(infoIcon,'mouseover',showAnimeInfo);
+		else hookEvent(infoIcon,'click',showAnimeInfo);
 		hookEvent(infoIcon,'mouseout',hideTooltip);
 		div.appendChild(infoIcon);
 		var cell = createCell(null, 'titles', div);
