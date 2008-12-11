@@ -186,6 +186,11 @@ function showAnimeInfoWork(obj,info) {
 
 /* Function that shows anime info (or not) */
 function showAnimeInfo() {
+	alert(
+		(this && this.id ? 'this.id: '+this.id : 'no this.id')+'\n'+
+		(this && this.parentNode && this.parentNode.id ? 'this.parentNode.id: '+this.parentNode.id : 'no this.parentNode.id')+'\n'+
+		(this && this.nodeName ? 'this.nodeName: '+this.nodeName)
+	);
 	var aid = Number(this.id.substring(7));
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
 	var info = AnimeInfos[aid];
