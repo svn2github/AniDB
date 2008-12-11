@@ -127,20 +127,20 @@ function unhookEvent(element, eventName, callback) { removeEventSimple(element, 
  * @param append Boolean which if set to true will append the current text to any other text existing
  */
 function addInfoToFooter(text, append) {
-	if (!text || typeof text != 'string') return;
 	var footer = document.getElementById('layout-footer');
 	var p = document.getElementById('layout-footer-info');
 	if (!p) {
 		p = document.createElement('p');
 		p.id = 'layout-footer-info';
-		p.appendChild(document.createTextNode(text));
+		p.appendChild((typeof text == 'string' ? document.createTextNode(text) : text));
 		footer.appendChild(p);
 	} else {
-		if (!append) p.firstChild.nodeValue = text;
-		else p.firstChild.nodeValue += text;
+		if (!append) while (p.childNodes.length) p.removeChild(p.firstChild);
+		p.appendChild((typeof text == 'string' ? document.createTextNode(text) : text));
 	}
 }
 
+/* Get's a JS file version from the Array */
 function getJsFileVersionArrayInfo(id) {
 	var array = new Array();
 	if (!jsVersionArray[id]) return null;
@@ -149,7 +149,30 @@ function getJsFileVersionArrayInfo(id) {
 	return array;
 }
 
+/* Shows an alert with the loaded scripts */
+function alertJsFileVersionArray() {
+	var text = "Loaded scripts:";
+	for (var id = 0; id < jsVersionArray.length; id++) {
+		for (var elem in jsVersionArray[id]) {
+			if (elem == 'file') text += '\n'+jsVersionArray[id][elem];
+			else text += '\n\t'+elem+"="+jsVersionArray[id][elem];
+		}
+	}
+	alert(text);
+}
 
+/* Writes the Javascript Footer */
+function writeJsFooter() {
+	addInfoToFooter('Javascript: ');
+	var last = jsVersionArray[jsVersionArray.length - 1];	
+	var link = createTextLink(null, last['file'], 'removeme', null, alertJsFileVersionArray, 'click to see a list of loaded scripts');
+	addInfoToFooter(link,true);
+	addInfoToFooter(' '+last['revision']+', '+last['date'],true);
+}
+
+addLoadEvent(writeJsFooter);
+
+/* Creates a basic popup */
 function BasicPopup(a) {
 	p = a.className.substring(a.className.lastIndexOf(' ')).split('.');
 	var url = (a.href.indexOf("animedb.pl?") != -1 && a.href.indexOf("&nonav") == -1) ? a.href+"&nonav=1" : a.href;
