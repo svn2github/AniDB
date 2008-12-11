@@ -460,6 +460,10 @@ function CFileEntry(node) {
   if (this.vidCnt && !this.subCnt) { this.isRaw = true; }
 }
 
+CFileEntry.prototype.isVirtual = function(eid) {
+	return (this.episodeId != eid);
+}
+
 /* Creates a new AnimeInfo node */
 function CAnimeInfo(node) {
 	this.aid = Number(node.getAttribute('id'));

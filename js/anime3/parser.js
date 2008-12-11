@@ -7,6 +7,14 @@
  *           Filtering Functions
  * @version 2.1.2 (26.06.2007)
  */
+jsVersionArray.push({
+	"file":"anime3/parser.js",
+	"version":"2.1.3",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"Added CAnimeInfo"
+});
 
 // CORE Vars //
 
@@ -450,6 +458,10 @@ function CFileEntry(node) {
   if (this.flags & 64) { this.isUncensored = 1; }
   if (this.flags & 128) { this.isCensored = 1; }
   if (this.vidCnt && !this.subCnt) { this.isRaw = true; }
+}
+
+CFileEntry.prototype.isVirtual = function(eid) {
+	return (this.episodeId != eid);
 }
 
 /* Creates a new AnimeInfo node */
