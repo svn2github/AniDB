@@ -128,7 +128,7 @@ function unhookEvent(element, eventName, callback) { removeEventSimple(element, 
  */
 function addInfoToFooter(text, append) {
 	if (!text || typeof text != 'string') return;
-	var footer = document.getElementByTagName('layout-footer');
+	var footer = document.getElementById('layout-footer');
 	var p = document.getElementById('layout-footer-info');
 	if (!p) {
 		p = document.createElement('p');
