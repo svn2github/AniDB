@@ -163,8 +163,9 @@ function alertJsFileVersionArray() {
 
 /* Writes the Javascript Footer */
 function writeJsFooter() {
+	var last = jsVersionArray[jsVersionArray.length - 1];
+	if (!last) return;
 	addInfoToFooter('Javascript: ');
-	var last = jsVersionArray[jsVersionArray.length - 1];	
 	var link = createTextLink(null, last['file'], 'removeme', null, alertJsFileVersionArray, 'click to see a list of loaded scripts');
 	addInfoToFooter(link,true);
 	addInfoToFooter(' '+last['revision']+', '+last['date'],true);
