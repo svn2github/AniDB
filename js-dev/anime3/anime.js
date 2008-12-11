@@ -10,7 +10,7 @@ jsVersionArray.push({
 	"file":"anime3/anime.js",
 	"version":"2.2",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                             $",
 	"author":"$Author$",
 	"changelog":"Allowed for file table layout changes"
 });
@@ -1294,6 +1294,7 @@ function createFileTable(episode) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
 			if (!file.visible || (file.type == 'generic' && LAY_HIDEGENERICFILES)) row.style.display = 'none';		
 		}
+/*
 		if (file.type == 'generic') row.className = "generic no_sort";
 		else {
 			if (file.crcStatus == 'valid') row.className = 'good';
@@ -1301,6 +1302,7 @@ function createFileTable(episode) {
 			if (file.isDeprecated) row.className = 'deprecated';
 			if (!file.avdumped) row.className += ' undumped';
 		}
+*/
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
 	}
