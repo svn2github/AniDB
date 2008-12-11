@@ -18,16 +18,6 @@ jsVersionArray.push({
 	"changelog":"adding jsVersionArray"
 });
 
-/* Simple browser detection 
- * Do note that i'm mostly just interested in retarded IE..
- */
-var dS = (document.selection != undefined) ? true : false;
-var wGS = (window.getSelection != undefined) ? true : false;
-var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
-var isIE = (navigator.userAgent.toLowerCase().indexOf('msie') >= 0);
-var isOP = (navigator.userAgent.toLowerCase().indexOf('presto') >= 0 || navigator.userAgent.toLowerCase().indexOf('opera') >= 0);
-var isFF = (!isWK && navigator.userAgent.toLowerCase().indexOf('gecko') >= 0 || navigator.userAgent.toLowerCase().indexOf('firefox') >= 0);
-
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
 	Array.prototype.indexOf = function(it) {

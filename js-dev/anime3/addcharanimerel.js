@@ -258,11 +258,7 @@ function showResults() {
 		var infoIcon = createIcon(null, 'anime info', null, null, null, 'i_mylist_ainfo');
 		infoIcon.id = 'ainfo_a'+desc.aid;
 		infoIcon.onmouseover = showAnimeInfo;
-		/*
-		if (!isIE) hookEvent(infoIcon,'mouseover',showAnimeInfo);
-		else hookEvent(infoIcon,'click',showAnimeInfo);
-		*/
-		hookEvent(infoIcon,'mouseout',hideTooltip);
+		infoIcon.onmouseout = hideTooltip;
 		div.appendChild(infoIcon);
 		var cell = createCell(null, 'titles', div);
 		// now, create the titles and what not.
@@ -351,6 +347,8 @@ function showResults() {
 
 /* Prepares the page for my scripts */
 function prepPage() {
+	var uriObj = parseURI();
+	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
 	var div = document.getElementById('addrelform');
 	if (!div) { errorAlert('prepPage','no matching div'); return; }
 	fieldset = div.getElementsByTagName('fieldset')[0];
