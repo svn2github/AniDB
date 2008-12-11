@@ -141,6 +141,14 @@ function addInfoToFooter(text, append) {
 	}
 }
 
+function getJsFileVersionArrayInfo(id) {
+	var array = new Array();
+	if (!jsVersionArray[id]) return null;
+	for (var elem in jsVersionArray[id])
+		array.push(elem+"="+jsVersionArray[id][elem]);
+	return array;
+}
+
 
 function BasicPopup(a) {
 	p = a.className.substring(a.className.lastIndexOf(' ')).split('.');

@@ -359,7 +359,7 @@ function prepPage() {
 	addRelSubmit.parentNode.replaceChild(newSubmitClone,addRelSubmit);
 	addRelSubmit = newSubmitClone;
 	initTooltips();
-	addInfoToFooter("revision:"+jsVersionArray[0]['revision'], true);
+	addInfoToFooter(getJsFileVersionArrayInfo(jsVersionArray.length - 1).join(','), true);
 }
 
 // hook up the window onload event
