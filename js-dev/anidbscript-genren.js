@@ -1,3 +1,12 @@
+jsVersionArray.push({
+	"file":"anidbscript-genren.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
+
 function InitGenren()
 {
 	if(document.getElementById && document.getElementsByTagName) // && CSS works, really

@@ -1,6 +1,7 @@
 /* This var will hold information about the currently loaded javascript files
  * minimal format of entries is: {"file":"path to file","version":"file version"}
  * other attributes that can go on the entry can be any of the following
+ * "revision":"svn revision number", Number of the svn revision that change this text
  * "author":"author name", author of the last change
  * "date":"dd.mm.yyyy", date of last release, please use only the following formats: dd.mm.yyyy hh:mm or dd.mm.yyyy hh:mm:ss
  * "changelog":"last change"
@@ -10,7 +11,8 @@
 var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
-	"version":"$Revision$",
+	"version":"1.0",
+	"revision":"$Revision$",
 	"date":"$Date$",
 	"author":"$Author$",
 	"changelog":"adding jsVersionArray"

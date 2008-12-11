@@ -1,7 +1,16 @@
 /* file mylist interface 
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (03.04.2008) - Initial version
+ * version 1.5 (24.11.2008) - Addition of AnimeInfo tooltips
  */
+jsVersionArray.push({
+	"file":"anime3/mylist.js",
+	"version":"1.5",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"Adition of AnimeInfo Tooltips"
+});
 
 // GLOBALs //
 

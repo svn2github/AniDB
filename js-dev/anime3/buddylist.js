@@ -3,6 +3,14 @@
  *         
  * version 1.0 (02.04.2008) - Initial release
  */
+jsVersionArray.push({
+	"file":"anime3/buddylist.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"Initital version"
+});
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
@@ -23,20 +31,6 @@ function updateBuddyListRows() {
 			var a = row.cells[2].getElementsByTagName('a')[0];
 			if (a) row.cells[2].setAttribute('anidb:sort',a.firstChild.nodeValue);
 		}
-		/*
-		if (row.cells[3]) {
-			if (row.cells[3].childNodes.length) {
-				var date = row.cells[3].firstChild.nodeValue;
-				row.cells[3].setAttribute('anidb:sort',javascriptDate(date));
-			} else row.cells[3].setAttribute('anidb:sort',0);
-		}
-		if (row.cells[4]) {
-			if (row.cells[4].childNodes.length) {
-				var date = row.cells[4].firstChild.nodeValue;
-				row.cells[4].setAttribute('anidb:sort',javascriptDate(date));
-			} else row.cells[4].setAttribute('anidb:sort',0);
-		}
-		*/
 	}
 }
 

@@ -4,10 +4,11 @@
  */
 jsVersionArray.push({
 	"file":"anime3/addcharanimerel.js",
-	"version":"$Revision$",
+	"version":"1.0",
+	"revision":"$Revision$",
 	"date":"$Date$",
 	"author":"$Author$",
-	"changelog":"work in progress"
+	"changelog":"Initial Version"
 });
 
 var addRelInput;
@@ -358,6 +359,7 @@ function prepPage() {
 	addRelSubmit.parentNode.replaceChild(newSubmitClone,addRelSubmit);
 	addRelSubmit = newSubmitClone;
 	initTooltips();
+	addInfoToFooter("revision:"+jsVersionArray[0]['revision'], true);
 }
 
 // hook up the window onload event

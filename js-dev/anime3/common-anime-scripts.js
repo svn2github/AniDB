@@ -6,7 +6,16 @@
  * version 1.3 (15.04.2008) - Page Preferences added
  * version 1.4 (26.05.2008)	- Moved stuff from utils to here
  * version 1.4a(14.07.2008) - Fixed some textual errors
+ * version 1.5 (07.12.2008) - AnimePage file table column layout
  */
+jsVersionArray.push({
+	"file":"anime3/common-anime-scripts.js",
+	"version":"1.5",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"AnimePage file table column layout "
+});
 
 /* These are the default file, episode, group and anime cols */
 var genFileCols = [ {'name':"check-mylist",'classname':"check",'header':"S",'abbr':"Check/uncheck files"},

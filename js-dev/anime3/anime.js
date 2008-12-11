@@ -4,7 +4,16 @@
  * version 1.2 (03.04.2008) - Some fixes and starting 2.0 conversion
  * version 2.0 (xx.04.2008) - Version 2.0 conversion
  * version 2.1 (03.08.2008) - Added a new group filter and corrected some icon bugs
+ * version 2.2 (07.12.2008) - Allowed for file table layout changes
  */
+jsVersionArray.push({
+	"file":"anime3/anime.js",
+	"version":"2.2",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"Allowed for file table layout changes"
+});
 
 // GLOBALs //
 

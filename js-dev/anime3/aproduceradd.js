@@ -4,7 +4,15 @@
  * version 1.1 (22.01.2008) - previous release
  * version 1.2 (18.04.2008) - Fixed the page to load without checks
  */
- 
+jsVersionArray.push({
+	"file":"anime3/aproduceradd.js",
+	"version":"1.2",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"Fixed the page to load without checks"
+});
+
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;

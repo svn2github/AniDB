@@ -3,6 +3,14 @@
            some code derived from work done by PetriW and Rar at anidb
  * version 2.2 (07.07.2007)
  */
+jsVersionArray.push({
+	"file":"anime3/utils.js",
+	"version":"2.2",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":""
+});
 // TIME/DATE FUNCTIONS //
 
 function padLeft(text, padChar, count) {

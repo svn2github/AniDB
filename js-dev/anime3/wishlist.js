@@ -4,6 +4,14 @@
  * version 1.5 (07.07.2007)
  * version 1.6 (03.08.2008) - fixed this again
  */
+jsVersionArray.push({
+	"file":"anime3/aproduceradd.js",
+	"version":"1.6",
+	"revision":"$Revision$",
+	"date":"$Date$",
+	"author":"$Author$",
+	"changelog":"Fixed this again"
+});
  
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
