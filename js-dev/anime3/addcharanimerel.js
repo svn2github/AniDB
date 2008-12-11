@@ -189,7 +189,7 @@ function showAnimeInfo() {
 	alert(
 		(this && this.id ? 'this.id: '+this.id : 'no this.id')+'\n'+
 		(this && this.parentNode && this.parentNode.id ? 'this.parentNode.id: '+this.parentNode.id : 'no this.parentNode.id')+'\n'+
-		(this && this.nodeName ? 'this.nodeName: '+this.nodeName)
+		(this && this.nodeName ? 'this.nodeName: '+this.nodeName : 'no this.nodeName')
 	);
 	var aid = Number(this.id.substring(7));
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
