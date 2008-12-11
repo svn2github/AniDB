@@ -257,8 +257,11 @@ function showResults() {
 			div.appendChild(createIcon(null, '[+]', 'removeme', expandTitles, 'click to expand all titles matched', 'i_plus'));
 		var infoIcon = createIcon(null, 'anime info', null, null, null, 'i_mylist_ainfo');
 		infoIcon.id = 'ainfo_a'+desc.aid;
+		infoIcon.onmouseover = showAnimeInfo;
+		/*
 		if (!isIE) hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		else hookEvent(infoIcon,'click',showAnimeInfo);
+		*/
 		hookEvent(infoIcon,'mouseout',hideTooltip);
 		div.appendChild(infoIcon);
 		var cell = createCell(null, 'titles', div);
