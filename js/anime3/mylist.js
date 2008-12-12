@@ -139,7 +139,7 @@ function prepPage() {
 			var span = cell.getElementsByTagName('span')[0];
 			if (!span) { errorAlert('prepPage','no span found on name cell'); continue; }
 			var infoIcon = createIcon(null, 'anime info', 'removeme', showAnimeInfo, 'Click to show anime information', 'i_mylist_ainfo_greyed');
-			infoIcon.id = 'ainfo_a'+desc.aid;
+			infoIcon.id = 'ainfo_a'+aid;
 			span.insertBefore(infoIcon,span.firstChild);
 			//hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		}
