@@ -116,7 +116,7 @@ function CDesc(node) {
 
 /* CharDesc Node Parser */
 function CCDesc(node) {
-	this.aid = Number(node.getAttribute('charid'));
+	this.charid = Number(node.getAttribute('charid'));
 	this.picurl = node.getAttribute('picurl');
 	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/50x65/'+this.picurl+'-thumb.jpg';
 	else this.picurl = 'http://static.anidb.net/pics/nopic_50x65.gif';
