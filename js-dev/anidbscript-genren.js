@@ -2,7 +2,7 @@ jsVersionArray.push({
 	"file":"anidbscript-genren.js",
 	"version":"1.0",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Initial version"
 });

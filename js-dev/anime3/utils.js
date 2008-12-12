@@ -7,9 +7,8 @@ jsVersionArray.push({
 	"file":"anime3/utils.js",
 	"version":"2.2",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":""
 });
 // TIME/DATE FUNCTIONS //
 

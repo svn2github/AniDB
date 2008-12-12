@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"file":"anime3/messages.js",
 	"version":"1.3",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Anidb 0.1.50 version update"
 });

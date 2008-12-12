@@ -12,7 +12,7 @@ jsVersionArray.push({
 	"file":"anime3/common-anime-scripts.js",
 	"version":"1.5",
 	"revision":"$Revision$",
-	"date":"$Date::                             $",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"AnimePage file table column layout "
 });

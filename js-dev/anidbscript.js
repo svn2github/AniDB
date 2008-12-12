@@ -13,7 +13,7 @@ jsVersionArray.push({
 	"file":"anidbscript.js",
 	"version":"1.0",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"adding jsVersionArray"
 });

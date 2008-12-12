@@ -11,7 +11,7 @@ jsVersionArray.push({
 	"file":"anime3/parser.js",
 	"version":"2.1.3",
 	"revision":"$Revision$",
-	"date":"$Date::                             $",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Added CAnimeInfo"
 });

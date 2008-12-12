@@ -7,7 +7,7 @@ jsVersionArray.push({
 	"file":"anime3/mapvalues.js",
 	"version":"2.1",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Revised version"
 });

@@ -12,7 +12,7 @@ jsVersionArray.push({
 	"file":"anime3/formating.js",
 	"version":"3.0",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Major rewrite"
 });

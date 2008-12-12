@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"file":"anime3/episode.js",
 	"version":"2.0",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Updated version, added show all ajax function"
 });

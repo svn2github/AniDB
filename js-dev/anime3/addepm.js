@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"file":"anime3/addepm.js",
 	"version":"2.1",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Addition of mass language add"
 });
@@ -661,6 +661,7 @@ function prepPage() {
 		return false;
 	}	
 	fetchData(aid);
+	addInfoToFooter(getJsFileVersionArrayInfo(jsVersionArray.length - 1).join(','), true);
 }
 
 // hook up the window onload event

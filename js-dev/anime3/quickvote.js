@@ -6,13 +6,12 @@ jsVersionArray.push({
 	"file":"anime3/quickvote.js",
 	"version":"1.0",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Initial version"
 });
  
 function prepPage() {
-	return;
 	var table = getElementsByClassName(document.getElementsByTagName('table'), 'animelist', false)[0];
 	if (!table) return;
 	var tbody = table.tBodies[0];
@@ -51,4 +50,4 @@ function prepPage() {
 	}
 }
 
-addLoadEvent(prepPage);
+//addLoadEvent(prepPage);

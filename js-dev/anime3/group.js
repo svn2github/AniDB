@@ -7,7 +7,7 @@ jsVersionArray.push({
 	"file":"anime3/aproduceradd.js",
 	"version":"1.1",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Re-added and fixed stuff"
 });

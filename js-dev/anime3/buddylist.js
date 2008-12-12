@@ -7,7 +7,7 @@ jsVersionArray.push({
 	"file":"anime3/buddylist.js",
 	"version":"1.0",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Initital version"
 });

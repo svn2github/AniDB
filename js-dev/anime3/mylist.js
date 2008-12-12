@@ -7,7 +7,7 @@ jsVersionArray.push({
 	"file":"anime3/mylist.js",
 	"version":"1.5",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Adition of AnimeInfo Tooltips"
 });

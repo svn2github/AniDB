@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"file":"anime3/profile.js",
 	"version":"1.1",
 	"revision":"$Revision$",
-	"date":"$Date$",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Added javascript tab"
 });

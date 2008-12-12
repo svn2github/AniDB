@@ -10,7 +10,7 @@ jsVersionArray.push({
 	"file":"anime3/anime.js",
 	"version":"2.2",
 	"revision":"$Revision$",
-	"date":"$Date::                             $",
+	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"Allowed for file table layout changes"
 });
