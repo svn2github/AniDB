@@ -318,7 +318,7 @@ function showResults() {
 	var ids = (aids.length ? aids : cids);
 	var isChar = (cids.length > 0);
 	for (var i = 0; i < ids.length; i++) {
-		var desc = descInfo[ids[i]];
+		var desc = (!isChar ? descInfo[ids[i]] : charInfo[ids[i]]);
 		var row = document.createElement('tr');
 		row.className = (i % 2 ? 'g_odd' : '');
 		// checkbox
