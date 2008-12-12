@@ -652,6 +652,7 @@ function errorAlert(funcName,whereIs) {
 	if (seeDebug) {
 		alert('There was an error while processing '+funcName+'.'+
 			'\nDetails: '+whereIs+
+			'\nLocation: '+window.location+
 			'\nPlease inform an AniDB mod about this error.');
 	}
 	return;

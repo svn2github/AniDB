@@ -466,12 +466,21 @@ CFileEntry.prototype.isVirtual = function(eid) {
 
 /* Creates a new AnimeInfo node */
 function CAnimeInfo(node) {
-	this.aid = Number(node.getAttribute('id'));
+	this.aid = Number(node.getAttribute('aid'));
 	this.desc = node.getAttribute('desc');
 	this.title = node.getAttribute('name');
 	this.picurl = node.getAttribute('picurl');
 	this.restricted = Number(node.getAttribute('restricted'));
 	this.year = node.getAttribute('year');
+}
+
+/* Creates a new CharInfo node */
+function CAnimeInfo(node) {
+	this.charid = Number(node.getAttribute('charid'));
+	this.desc = node.getAttribute('desc');
+	this.title = node.getAttribute('name');
+	this.picurl = node.getAttribute('picurl');
+	this.restricted = false;
 }
 
 // CORE Functions //
