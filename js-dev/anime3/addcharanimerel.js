@@ -182,7 +182,7 @@ function parseData(xmldoc) {
 			continue; // a bit pointless, i know :P
 	}
 	for (var d = 0; d < cdescNodes.length; d++) {
-		var descNode = new CDesc(cdescNodes[d]);
+		var descNode = new CCDesc(cdescNodes[d]);
 		if (cids.indexOf(descNode.charid) < 0) cids.push(descNode.charid);
 		if (!charInfo[descNode.charid]) charInfo[descNode.charid] = descNode;
 		else if (descNode.type != 'Main') {
