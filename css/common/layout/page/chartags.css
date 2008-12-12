@@ -1,0 +1,51 @@
+#layout-main div.chartags_all div.addbox textarea
+{
+	height:200px;
+	margin-top:1em;
+	width:400px;
+}
+
+#layout-main div.chartagsmod_all div.addbox input,
+#layout-main div.chartags_all div.addbox input
+{
+	display:block;
+	margin:1em auto;
+}
+
+#layout-main div.chartagsmod_all dl,
+#layout-main div.chartags_all dl
+{
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+}
+
+#layout-main div.chartagsmod_all dl dt,
+#layout-main div.chartags_all dl dt
+{
+	clear:none;
+	float:left;
+}
+
+#layout-main div.chartagsmod_all dl dd,
+#layout-main div.chartags_all dl dd
+{
+	margin-left:20em;
+}
+
+#layout-main div.chartagsmod_all div.inner,
+#layout-main div.chartags_all div.inner
+{
+	margin-bottom:1em;
+	margin-left:auto;
+	margin-right:auto;
+	width:40em;
+}
+
+#layout-main div.chartagsmod_all table.charactertags,
+#layout-main div.chartagsmod_all table.charactertaggroups,
+#layout-main div.chartags_all table.charactertags
+{
+	width:100%;
+}
