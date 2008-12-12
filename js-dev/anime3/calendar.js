@@ -1,14 +1,15 @@
 /* file Calendar interface 
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (11.11.2008) - Initial version
+ * version 1.1 (11.12.2008) - Added icons to h3
  */
 jsVersionArray.push({
 	"file":"anime3/calendar.js",
-	"version":"1.0",
+	"version":"1.1",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Initial version"
+	"changelog":"Added icons to h3"
 });
 
 // GLOBALs //
@@ -17,6 +18,26 @@ var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;
 var seeTimes = false;
 var submitQueue = new Array();	// This is kind of fake, but oh well...
+
+var priMap = [
+	{'title':"low","css":"i_pri_low"},
+	{'title':"medium","css":"i_pri_med"},
+	{'title':"high","css":"i_pri_high"}
+];
+
+var notifyMap = [
+	{'title':"all","css":"i_notify"},
+	{'title':"new","css":"i_notify"},
+	{'title':"group","css":"i_notify"},
+	{'title':"complete","css":"i_notify"}
+];
+
+var wishlistMap = [
+	{'title':"undefined","css":"i_wishlist_undefined"},
+	{'title':"to watch","css":"i_wishlist_towatch"},
+	{'title':"to get","css":"i_wishlist_toget"},
+	{'title':"blacklisted","css":"i_wishlist_blacklist"}
+];
 
 /* Function that fetches anime data
  * @param aid Anime ID
@@ -233,6 +254,25 @@ function parseCalendarEntry(entry) {
 	}
 	// Action row
 	createActionRow(recomendationRow.parentNode, aid, recomendationRow.className.indexOf('g_odd') >= 0 ? '' : 'g_odd');
+	// Update the title with icons and stuff for a glance status
+	var h3 = entry.getElementsByTagName('h3')[0];
+	if (h3) {
+		var icons = document.createElement('div');
+		icons.className = 'icons';
+		if (wishlistState.type != '-1') {
+			var text = wishlistMap[wishlistState.type]['title'];
+			createIcon(icons, '[wt:'+text+']', null, null, 'wishlist type: '+text, wishlistMap[wishlistState.type]['css']);
+		}
+		if (wishlistState.pri != '-1') {
+			var text = priMap[wishlistState.pri]['title'];
+			createIcon(icons, '[wp'+text+']', null, null, 'wishlist priority: '+text, priMap[wishlistState.pri]['css']);
+		}
+		if (notificationState.type != '-1') {
+			createIcon(icons, '[notification enabled]', null, null, 'notification is enabled: '+notifyMap[notificationState.type]['title']+(notificationState.pri != -1 ? ' [priority: '+priMap[notificationState.pri]['title']+']' : ''), notifyMap[notificationState.type]['css']);
+		} else
+			createIcon(icons, '[notification disabled]', null, null, 'notification is disabled', 'i_nonotify');
+		h3.insertBefore(icons,h3.firstChild);
+	}
 }
 
 function prepPage() {
