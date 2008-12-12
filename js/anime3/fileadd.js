@@ -4,6 +4,14 @@
  *         
  * @version 1.0 (17.05.2007)
  */
+jsVersionArray.push({
+	"file":"anime3/fileadd.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI

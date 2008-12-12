@@ -1,7 +1,16 @@
 /* file mylist interface 
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (03.04.2008) - Initial version
+ * version 1.5 (24.11.2008) - Addition of AnimeInfo tooltips
  */
+jsVersionArray.push({
+	"file":"anime3/mylist.js",
+	"version":"1.5",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Adition of AnimeInfo Tooltips"
+});
 
 // GLOBALs //
 
@@ -130,7 +139,7 @@ function prepPage() {
 			var span = cell.getElementsByTagName('span')[0];
 			if (!span) { errorAlert('prepPage','no span found on name cell'); continue; }
 			var infoIcon = createIcon(null, 'anime info', 'removeme', showAnimeInfo, 'Click to show anime information', 'i_mylist_ainfo_greyed');
-			infoIcon._aid = aid;
+			infoIcon.id = 'ainfo_a'+desc.aid;
 			span.insertBefore(infoIcon,span.firstChild);
 			//hookEvent(infoIcon,'mouseover',showAnimeInfo);
 		}
@@ -195,7 +204,7 @@ function showAnimeInfoWork(obj,info) {
 
 /* Function that shows anime info (or not) */
 function showAnimeInfo() {
-	var aid = this._aid;
+	var aid = Number(this.id.substring(7));
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number'); return; }
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later

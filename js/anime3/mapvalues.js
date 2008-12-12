@@ -3,8 +3,16 @@
  *         Based on code from PetriW's work at anidb
  * @version 2.1 (22.03.2007)
  */
- 
- // CORE Maps //
+jsVersionArray.push({
+	"file":"anime3/mapvalues.js",
+	"version":"2.1",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Revised version"
+});
+
+// CORE Maps //
  
  /* Function that maps file states to textual values
   * @param fstate The fstate to convert

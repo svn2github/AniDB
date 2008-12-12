@@ -4,6 +4,14 @@
  * version 1.0 (19.01.2008) - Initial release
  * version 2.0 (02.08.2008) - Updated version, added show all ajax function
  */
+jsVersionArray.push({
+	"file":"anime3/episode.js",
+	"version":"2.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Updated version, added show all ajax function"
+});
  
 // GLOBALS
 var request_eid;				// current eid

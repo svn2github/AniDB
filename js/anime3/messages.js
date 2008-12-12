@@ -4,6 +4,14 @@
  * version 1.2 (15.01.2008)
  * version 1.3 (17.04.2008) - Anidb 0.1.50 version update
  */
+jsVersionArray.push({
+	"file":"anime3/messages.js",
+	"version":"1.3",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Anidb 0.1.50 version update"
+});
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI

@@ -2,6 +2,14 @@
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (27.05.2008) - Initial Version
  */
+jsVersionArray.push({
+	"file":"anime3/tags.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
 
 var tags = new Array();
 var lastSearch = "";

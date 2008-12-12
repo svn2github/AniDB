@@ -2,6 +2,14 @@
  * author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (25.07.2007)
  */
+jsVersionArray.push({
+	"file":"anime3/animations.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
 
 // GLOBALs //
 

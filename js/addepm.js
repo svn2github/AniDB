@@ -1,3 +1,12 @@
+jsVersionArray.push({
+	"file":"addepm.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
+
 function main_addepm() {
 	makeElement = (document.body ? (function (n) // would be just document.createElement but foxy throws
 		{

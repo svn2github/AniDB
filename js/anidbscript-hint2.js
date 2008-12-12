@@ -1,3 +1,12 @@
+jsVersionArray.push({
+	"file":"anidbscript-hint2.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
+
 function InitHint2()
 {
 	if(document.getElementById && document.getElementsByTagName) // && CSS works, really

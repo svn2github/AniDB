@@ -8,6 +8,14 @@
  * version 2.2 (02.09.2008) - Rewrote somestuff
  * version 3.0 (22.09.2008) - Major rewrite
  */
+jsVersionArray.push({
+	"file":"anime3/formating.js",
+	"version":"3.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Major rewrite"
+});
 
 // GLOBALS
 var seeDebug = CookieGet('seeDebug') || 0;

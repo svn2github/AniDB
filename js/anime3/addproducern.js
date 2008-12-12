@@ -1,10 +1,16 @@
-/* *
- * @file addproducern page support scripts
+/* @file addproducern page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- *         
  * @version 1.0 (02.01.2008)
  */
- 
+jsVersionArray.push({
+	"file":"anime3/addproducern.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
+
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;

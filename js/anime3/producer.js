@@ -4,6 +4,14 @@
  *         
  * @version 1.0 (08.01.2008)
  */
+jsVersionArray.push({
+	"file":"anime3/producer.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
  
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI

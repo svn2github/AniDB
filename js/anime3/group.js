@@ -3,7 +3,15 @@
  * version 1.0 (22.11.2007) - Initial Release
  * version 1.1 (17.04.2008) - Re-added and fixed stuff
  */
- 
+jsVersionArray.push({
+	"file":"anime3/aproduceradd.js",
+	"version":"1.1",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Re-added and fixed stuff"
+});
+
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
 var seeDebug = false;

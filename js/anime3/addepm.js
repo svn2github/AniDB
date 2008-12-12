@@ -4,6 +4,14 @@
  * version 2.0 (23.05.2008) - Reworked version
  * version 2.1 (27.07.2008) - Addition of mass language add
  */
+jsVersionArray.push({
+	"file":"anime3/addepm.js",
+	"version":"2.1",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Addition of mass language add"
+});
 
 // GLOBALS //
 var uid;						// userID
@@ -653,6 +661,7 @@ function prepPage() {
 		return false;
 	}	
 	fetchData(aid);
+	addInfoToFooter(getJsFileVersionArrayInfo(jsVersionArray.length - 1).join(','), true);
 }
 
 // hook up the window onload event

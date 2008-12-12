@@ -3,7 +3,13 @@
            some code derived from work done by PetriW and Rar at anidb
  * version 2.2 (07.07.2007)
  */
-
+jsVersionArray.push({
+	"file":"anime3/utils.js",
+	"version":"2.2",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+});
 // TIME/DATE FUNCTIONS //
 
 function padLeft(text, padChar, count) {
@@ -646,6 +652,7 @@ function errorAlert(funcName,whereIs) {
 	if (seeDebug) {
 		alert('There was an error while processing '+funcName+'.'+
 			'\nDetails: '+whereIs+
+			'\nLocation: '+window.location+
 			'\nPlease inform an AniDB mod about this error.');
 	}
 	return;
@@ -878,6 +885,7 @@ function findMylistEpEntries(eid) {
 
 // SORTING Functions //
 
+.0
 function c_undefined_simp(a, b) {
 	if (a < b) return -1;
 	if (a > b) return 1;

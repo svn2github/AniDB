@@ -1,3 +1,12 @@
+jsVersionArray.push({
+	"file":"jsplay.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
+
 !Array.prototype.indexOf && (Array.prototype.indexOf = function (it)
 {
 	for (var i = 0, l = this.length; i < l; i++)

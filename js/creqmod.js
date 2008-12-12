@@ -1,3 +1,12 @@
+jsVersionArray.push({
+	"file":"creqmod.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"Initial version"
+});
+
 window.onload = (function(){
 	InitDefault();
 	my_mark = false;
