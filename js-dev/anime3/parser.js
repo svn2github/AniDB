@@ -466,7 +466,7 @@ CFileEntry.prototype.isVirtual = function(eid) {
 
 /* Creates a new AnimeInfo node */
 function CAnimeInfo(node) {
-	this.aid = Number(node.getAttribute('aid'));
+	this.aid = Number(node.getAttribute('id'));
 	this.desc = node.getAttribute('desc');
 	this.title = node.getAttribute('name');
 	this.picurl = node.getAttribute('picurl');
@@ -475,7 +475,7 @@ function CAnimeInfo(node) {
 }
 
 /* Creates a new CharInfo node */
-function CAnimeInfo(node) {
+function CCharInfo(node) {
 	this.charid = Number(node.getAttribute('charid'));
 	this.desc = node.getAttribute('desc');
 	this.title = node.getAttribute('name');

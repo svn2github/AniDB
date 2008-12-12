@@ -208,7 +208,7 @@ function showAnimeInfo() {
 	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number'); return; }
 	var info = AnimeInfos[aid];
 	if (!info) { // fetch data and display later
-		this.id = 'a'+aid+'_info';
+		this.id = 'ainfo_a'+aid;
 		this.title = "";
 		setTooltip('please wait while loading data...');
 		this.className = this.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
@@ -265,7 +265,7 @@ function parseInfoData(xmldoc) {
 	else this.picurl = 'http://static.anidb.net/pics/nopic_'+mylist_get_animeinfo_sz+'.gif';
 	if (newData.desc == '') newData.desc = '<i>no description</i>'
 	AnimeInfos[newData.aid] = newData;
-	var a = document.getElementById('a'+newData.aid+'_info');
+	var a = document.getElementById('ainfo_a'+newData.aid);
 	a.className = a.className.replace('i_mylist_ainfo_loading','i_mylist_ainfo');
 	// actualy don't show this right away user can come back to check this later
 	//showAnimeInfoWork(a,newData);
