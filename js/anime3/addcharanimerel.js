@@ -354,4 +354,4 @@ function prepPage() {
 }
 
 // hook up the window onload event
-addLoadEvent(prepPage);
+//addLoadEvent(prepPage);
