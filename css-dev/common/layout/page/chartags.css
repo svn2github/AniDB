@@ -1,7 +1,6 @@
 #layout-main div.chartags_all div.addbox textarea
 {
 	height:200px;
-	margin-top:1em;
 	width:400px;
 }
 
@@ -48,4 +47,9 @@
 #layout-main div.chartags_all table.charactertags
 {
 	width:100%;
+}
+
+#layout-main div.chartags_all table.charactertags
+{
+	margin-bottom: 1em;
 }
