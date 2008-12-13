@@ -228,12 +228,14 @@ function showInfoWork(obj,info,isChar) {
 	var title = document.createElement('span');
 	title.className = 'title';
 	title.appendChild(document.createTextNode(info.title));
-	var year = document.createElement('span');
-	year.className = 'year';
-	year.appendChild(document.createTextNode('('+info.year+')'));
-	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
-	cell.appendChild(document.createTextNode(' '));
-	cell.appendChild(year);
+	if (!isChar) {
+		var year = document.createElement('span');
+		year.className = 'year';
+		year.appendChild(document.createTextNode('('+info.year+')'));
+		var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
+		cell.appendChild(document.createTextNode(' '));
+		cell.appendChild(year);
+	}
 	//cell.appendChild(icons);
 	row.appendChild(cell);
 	thead.appendChild(row);
