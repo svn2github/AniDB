@@ -16,7 +16,7 @@ var addCRelInput; // For character addition to a given anime
 var addRelSubmit;
 var fieldset;
 var table;
-var seeDebug = true;
+var seeDebug = false;
 var searchString = "";
 var AnimeInfos = new Array(); // indexed by aid
 var CharInfos = new Array(); // indexed by Charid
