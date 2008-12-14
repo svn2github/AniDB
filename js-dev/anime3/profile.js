@@ -889,6 +889,10 @@ function tabWork() {
 				li.appendChild(fmodeSel);
 				li.appendChild(document.createTextNode(' Default Text Editor Mode'));
 				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLabledCheckBox(li,'usejspopup','usejspopup',function() { changeOptionValue(this); usejspopup = this.value; },(usejspopup),' Use Javascript popups for anidb::popup',className)
+				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
 			case 'anime-layout':

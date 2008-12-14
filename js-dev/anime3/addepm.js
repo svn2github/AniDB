@@ -3,14 +3,15 @@
            some code derived from epoximator work at anidb
  * version 2.0 (23.05.2008) - Reworked version
  * version 2.1 (27.07.2008) - Addition of mass language add
+ * version 2.2 (14.12.2008) - Language filter
  */
 jsVersionArray.push({
 	"file":"anime3/addepm.js",
-	"version":"2.1",
+	"version":"2.2",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Addition of mass language add"
+	"changelog":"Language filter"
 });
 
 // GLOBALS //
@@ -353,11 +354,19 @@ function addTitleAllEps() {
 	var sel = document.getElementById('etitle.sel');
 	var lang = sel.value;
 	var type = document.getElementById('etitle.add.sel').value;
-	//sel.removeChild(sel.options[sel.selectedIndex]);
 	for (var e in episodes) {
 		var episode = episodes[e];
 		if (type != 'A' && type != episode.typeChar) continue;
 		if (!episode.titles[lang]) titlesActions(null, 'add', episode.id, lang);
+	}
+	// now filter only for this language and trigger the filter
+	var langfiltersel = document.getElementById('fetitle.sel');
+	langfiltersel.value = lang;
+	langfiltersel.onchange();
+	var checkbox = document.getElementById('toggletitlescheck');
+	if (checkbox && !checkbox.checked) {
+		checkbox.checked = true;
+		checkbox.onchange();
 	}
 	//alert('add '+lang+' to '+type+' eps');
 }
@@ -555,6 +564,25 @@ function createEpisodeRow(eid,episode) {
 	return row;
 }
 
+function filterTitleLangs() {
+	var langFilter = this.value;
+	for (var i = 0; i < epOrder.length; i++) {
+		var eid = epOrder[i];
+		var table = document.getElementById('e'+eid+'langsTable');
+		if (!table) continue;
+		var tbody = table.tBodies[0];
+		var rows = tbody.getElementsByTagName('tr');
+		for (var k = 0; k < rows.length; k++) {
+			var row = rows[k];
+			if (langFilter == 'all') row.style.display = '';
+			else {
+				if (row.id != 'e'+eid+'.title.'+langFilter) row.style.display = 'none';
+				else row.style.display = '';
+			}
+		}
+	}
+}
+
 /* Function that creates the episode table */
 function createEpisodeTable() {
 	var table = document.createElement('table');
@@ -582,8 +610,15 @@ function createEpisodeTable() {
 	var tfoot = document.createElement('tfoot');
 	row = document.createElement('tr');
 	createCell(row, null, document.createTextNode('Options'), null, 2);
-	var cell = createCell(null, null, createCheckBox(null,null,null,toggleEpisodeTitles,false));
-	cell.appendChild(document.createTextNode(' toggle titles'));
+	var cell = createCell(null, null, createLabledCheckBox(null,null,'toggletitlescheck',toggleEpisodeTitles,false,' toggle titles'));
+	cell.appendChild(document.createTextNode(' '));
+	var filterlangsel = createBasicSelect('fetitle.sel','fetitle.sel',filterTitleLangs);
+	createSelectOption(filterlangsel, 'show all titles', 'all', false, null, false);
+	for (var lang in languageMap) {
+		var op = languageMap[lang];
+		createSelectOption(filterlangsel, op['name'], lang, false, null, false);
+	}
+	cell.appendChild(filterlangsel);
 	row.appendChild(cell);
 	createCell(row, 'duration', createTextInput('default.len',5,false,false,5,null));
 	createCell(row, 'date', createTextInput('default.date',10,false,false,10,null));
@@ -622,11 +657,8 @@ function createEpisodeTable() {
 	cell.appendChild(document.createTextNode(' episodes title: '));
 	var langsel = createBasicSelect('etitle.sel','etitle.sel',null);
 	for (var lang in languageMap) {
-		var option = document.createElement('option');
 		var op = languageMap[lang];
-		option.text = op['name'];
-		option.value = lang;
-		langsel.appendChild(option);
+		createSelectOption(langsel, op['name'], lang, false, null, false);
 	}
 	cell.appendChild(langsel);
 	cell.appendChild(document.createTextNode(' '));
