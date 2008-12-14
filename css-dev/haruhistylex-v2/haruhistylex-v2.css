@@ -4,22 +4,9 @@
  * A style for AniDB.net by TheJAG
  * 
  * This style is designed for a screen resolutions of 1024×768 and higher!
- * 
- * Currently known supported browsers: (Tested on Windows XP!)
- * Opera 9+
- * Currently known partially supported browsers:
- * Firefox 2+ (No suppport for CSS2: content:"";)
- * Safari 3+ (No suppport for CSS2: content:"";)
- * Currently known unsupported browsers:
- * Microsoft Internet Explorer 6- (Version 6 and below.)
- * Windows Internet Explorer 7 (Aka. Microsoft Internet Explorer 7)
 **/
 
-*
-{
-	margin:0;
-	padding:0;
-}
+@import url(../sub/common.css);
 
 html
 {
@@ -28,7 +15,7 @@ html
 	background-image:url(images/Background.png);
 	background-position:right bottom;
 	background-repeat:no-repeat;
-	font-family:Calibri, "Times New Roman", Times, serif;
+	font-family:"Times New Roman", Times, serif;
 }
 
 #anidb
@@ -38,14 +25,34 @@ html
 	background-repeat:no-repeat;
 }
 
-a
+*
+{
+	color:#000000;
+	margin:0;
+	padding:0;
+}
+
+*::selection
+{
+	background-color:#0099FF;
+	color:#FFFFFF;
+}
+
+a,
+#layout-main > div.g_content > div.rightbar > p.g_vital > a
 {
 	color:#000000;
 	font-weight:bold;
 	text-decoration:none;
 }
 
-a:hover
+a:hover,
+#layout-main > div.g_content > div.rightbar > p.g_vital > a:hover,
+#layout-menu > li.sub-menu > ul > li > a > span:hover,
+#layout-menu > li.sub-menu > ul > li.search > a > span:hover,
+#alert-notif > span > a:hover,
+#alert-news > span > a:hover,
+#alert-msg > span > a:hover
 {
 	color:#0099FF;
 }
@@ -56,10 +63,32 @@ ul
 	list-style-type:none;
 }
 
+#menu-main > li.random,
+#menu-support > li.report,
+#menu-support > li.reclinks,
+#menu-support > li.staff,
+#menu-private > li.mymessages,
+#menu-private > li.mynotifies,
+#menu-private > li.mywishlist,
+#menu-private > li.myvotes,
+#menu-private > li.myreviews,
+#menu-private > li.myentries,
+#menu-private > li.mycreqs,
+#menu-private > li.up2date,
+#user-name,
+#layout-search > div.search > form > p > input.submit,
+#layout-main > h1,
+#layout-main > div.g_content > div.rightbar > ol > li > span,
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar
+{
+	display:none;
+}
+
 #layout-nav
 {
-	float:left;
-	width:200px;
+	position:absolute;
+	top:0;
+	left:0;
 	z-index:2;
 }
 
@@ -68,7 +97,8 @@ ul
 	background-image:url(images/menuClean.png);
 	background-position:left top;
 	background-repeat:no-repeat;
-	height:300px;
+	height:320px;
+	width:200px;
 	padding-top:5px;
 }
 
@@ -80,64 +110,34 @@ ul
 #layout-menu > li.sub-menu
 {
 	visibility:hidden;
+	margin-left:10px;
 }
 
-#layout-menu:hover > li.sub-menu
+#layout-menu:hover > li.sub-menu,
+#menu-main > li.search,
+#menu-support > li.help,
+#menu-support > li.forum,
+#menu-support > li.irc
 {
 	visibility:visible;
 }
 
-#layout-menu > li.sub-menu > span.tab
+#layout-menu > li.sub-menu > ul > li
 {
-	display:none;
+	height:16px;
 }
 
-#menu-main,
-#menu-lists,
-#menu-private
+#layout-menu > li.sub-menu > ul > li > a > span,
+#alert-notif > span > a,
+#alert-news > span > a,
+#alert-msg > span > a
 {
-	clear:both;
-	float:left;
-	padding-left:5px;
-	width:80px;
-}
-
-#menu-account
-{
-	padding-top:24px;
-}
-
-#menu-main > li,
-#menu-lists > li,
-#menu-private > li,
-#menu-mod > li,
-#menu-support > li,
-#menu-account > li
-{
-	height:12px;
-}
-
-#menu-main > li > a,
-#menu-lists > li > a,
-#menu-private > li > a,
-#menu-mod > li > a,
-#menu-support > li > a,
-#menu-account > li > a,
-#menu-account > li > span > a
-{
-	color:#FFFFFF;
-	font-size:12px;
+	font-size:16px;
 	text-transform:capitalize;
-	font-variant:small-caps;
+	color:#FFFFFF;
 }
 
-#menu-main > li > a:hover,
-#menu-lists > li > a:hover,
-#menu-private > li > a:hover,
-#menu-mod > li > a:hover,
-#menu-support > li > a:hover,
-#menu-account > li > a:hover,
-#menu-account > li > span > a:hover
+#layout-menu > li.sub-menu > ul > li.search > a > span
 {
 	color:#000000;
 }
@@ -147,50 +147,97 @@ ul
 	content:"news";
 }
 
-#layout-search
+#menu-main > li.search > a > span
 {
-	background-image:url(images/Search.png);
-	background-repeat:no-repeat;
+	content:"advanced search";
 }
 
-#layout-search > div.search
+#user-profile > a > span
 {
-	padding-top:210px;
+	content:"my profile";
 }
 
+#menu-main > li.search,
+#menu-support > li.help,
+#menu-support > li.forum,
+#menu-support > li.irc
+{
+	position:absolute;
+	top:300px;
+}
+
+#menu-main > li.search > a > span
+{
+	position:absolute; /* Prevents the link from spanning the entire line. */
+	left:65px;
+	width:120px;
+}
+
+#menu-support > li.help > a > span
+{
+	content:url(images/wiki.gif);
+	position:relative;
+	left:-5px;
+}
+
+#menu-support > li.forum > a > span
+{
+	content:url(images/phpbb.gif);
+	position:relative;
+	left:17px;
+}
+
+#menu-support > li.irc > a > span
+{
+	content:url(images/mirc.gif);
+	position:relative;
+	left:39px;
+}
+
+#alert-notif
+{
+	position:absolute;
+	left:90px;
+	top:5px;
+}
+
+#alert-msg
+{
+	position:absolute;
+	left:90px;
+	top:21px;
+}
+
+#alert-news
+{
+	position:absolute;
+	left:90px;
+	top:37px;
+}
+
+#layout-search > div.search > form > p > select,
 #layout-search > div.search > form > p > input.text
 {
-	width:190px;
+	position:absolute;
+	top:320px;
+	left:5px;
 	height:20px;
-	margin-left:4px;
+	width:60px;
 	border-color:#000000;
 	border-width:1px;
 }
 
-#layout-search > div.search > form > p > select,
-#layout-search > div.search > form > p > input.submit
+#layout-search > div.search > form > p > input.text
 {
-	display:none;
-}
-
-#layout-content
-{
-	padding-top:100px;
-	margin-left:200px;
-}
-
-#layout-main > h1
-{
-	text-align:center;
-	font-variant:small-caps;
-	color:#0099FF;
-	font-size:36px;
+	left:70px;
+	height:18px;
+	width:120px;
 }
 
 #layout-main > div.g_content > div.rightbar
 {
 	position:absolute;
-	top:540px;
+	top:350px;
 	left:0;
 	width:200px;
 }
@@ -221,8 +268,8 @@ ul
 	background-image:url(images/SmallGlassMiddle2.png);
 }
 
-#layout-main > div.g_content > div.rightbar > p + p + p,
-#layout-main > div.g_content > div.rightbar > ol > li + li + li + li + li + li + li + li + li + li
+#layout-main > div.g_content > div.rightbar > p:last-of-type,
+#layout-main > div.g_content > div.rightbar > ol > li:last-of-type
 {
 	background-image:url(images/SmallGlassBottom.png);
 	background-repeat:no-repeat;
@@ -234,12 +281,14 @@ ul
 	text-align:center;
 	font-variant:small-caps;
 	color:#0099FF;
-	padding:10px 0;
+	padding-bottom:10px;
+	margin-top:10px;
 	font-size:20px;
 }
 
-#layout-main > div.g_content > div.rightbar > ol
+#layout-main > div.g_content > div.rightbar > h3:first-of-type
 {
+	margin:0;
 }
 
 #layout-main > div.g_content > div.rightbar > ol > li
@@ -248,20 +297,25 @@ ul
 	padding-left:10px;
 }
 
-#layout-main > div.g_content > div.rightbar > ol > li > span
+#layout-content
 {
-	display:none;
+	padding-top:100px;
+	padding-left:200px;
+}
+
+#layout-main > div.g_content > div.g_section
+{
+	width:100%;
 }
 
 #layout-main > div.g_content > div.g_section > div.g_timedentry
 {
-	margin:0 auto;
+	margin:0 auto 50px auto;
 	width:650px;
 	background-image:url(images/GlassBottom.png);
 	background-repeat:no-repeat;
 	background-position:bottom left;
 	padding-bottom:60px;
-	margin-bottom:50px;
 }
 
 #layout-main > div.g_content > div.g_section > div.g_timedentry > h4
@@ -269,6 +323,7 @@ ul
 	background-image:url(images/GlassTop.png);
 	background-repeat:no-repeat;
 	padding-top:30px;
+	padding-bottom:0;
 	text-align:center;
 	font-variant:small-caps;
 	color:#0099FF;
@@ -276,52 +331,71 @@ ul
 	font-size:20px;
 }
 
-#layout-main > div.g_content > div.g_section > div.g_timedentry > span.stamp,
-#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar,
-#layout-main > div.g_content > div.g_section > div.g_timedentry > div.body
+#layout-main > div.g_content > div.g_section > div.g_timedentry > p.comment,
+#layout-main > div.g_content > div.g_section > div.g_timedentry > span.stamp
 {
+	padding-right:40px;
 }
 
 #layout-main > div.g_content > div.g_section > div.g_timedentry > span.stamp
 {
 	display:block;
-	width:200px;
-	height:20px;
-	padding-left:40px;
-}
-
-#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar
-{
-	width:200px;
-	padding-left:60px;
-	height:100px;
-}
-
-#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar > a
-{
-	text-decoration:none;
-}
-
-#layout-main > div.g_content > div.g_section > div.g_timedentry > div.avatar > a > img
-{
-	border:none;
-	height:100px;
-	width:100px;
+	background-image:url(images/GlassMiddle.png);
+	background-repeat:repeat-y;
 }
 
 #layout-main > div.g_content > div.g_section > div.g_timedentry > div.body
 {
 	background-image:url(images/GlassMiddle.png);
 	background-repeat:repeat-y;
-	padding:0 40px 0 200px;
-	margin-top:-120px;
+	padding:0 40px;
 	overflow:hidden;
+	font-size:14px;
+	font-weight:bold;
 	min-height:120px;
 }
 
 #layout-main > div.g_content > div.g_section > div.g_timedentry > div.body > img
 {
-	max-width:420px;
+	max-width:570px;
+}
+
+#layout-main > div.g_content > div.g_section > div.g_timedentry > div.body > strong
+{
+	font-size:16px;
+	font-weight:bold;
+}
+
+#layout-main > div.g_content > div.g_section > div.topic_actions > div.pagination
+{
+	width:100%;
+	text-align:center;
+	font-size:14px;
+	margin:0 0 40px 0;
+}
+
+#layout-main > div.g_content > ul.g_list
+{
+	font-size:14px;
+}
+
+*.i_comment_add
+{
+	background:none;
+	font-size:14px;
+	margin:0 0 40px 0;
+	position:relative;
+	left:50%;
+	width:140px;
+	margin-left:-70px;
+}
+
+*.i_comment_add > span
+{
+	display:inline;
+	content:"Add a new comment";
+	width:auto;
+	text-align:center;
 }
 
 #layout-footer
@@ -329,6 +403,7 @@ ul
 	padding-left:200px;
 	margin-bottom:50px;
 	text-align:center;
+	font-size:14px;
 }
 
 #layout-footer:before
