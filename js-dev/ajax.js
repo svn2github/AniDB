@@ -4,6 +4,7 @@
  * version 1.0 (20.03.2007) - Initial Version
  * version 1.1 (30.04.2008) - Some minor cleanup
  */
+if (!isIE) {
 jsVersionArray.push({
 	"file":"ajax.js",
 	"version":"1.1",
@@ -12,6 +13,7 @@ jsVersionArray.push({
 	"author":"$Author$",
 	"changelog":"Some minor cleanup"
 });
+}
 
 // CORE Functions //
 

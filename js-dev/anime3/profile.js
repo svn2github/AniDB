@@ -4,6 +4,7 @@
  * version 1.0 (19.05.2007) - Initial release
  * version 1.1 (29.07.2008) - Added Javascript Tab
  */
+if (!isIE) {
 jsVersionArray.push({
 	"file":"anime3/profile.js",
 	"version":"1.1",
@@ -12,6 +13,7 @@ jsVersionArray.push({
 	"author":"$Author$",
 	"changelog":"Added javascript tab"
 });
+}
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
