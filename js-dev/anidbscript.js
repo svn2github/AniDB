@@ -8,18 +8,15 @@
  * Add your information to jsVersionArray like so:
  * jsVersionArray.push({"file":"anidbscript.js","version":"1.0"});
  */
-var isIE = (navigator.userAgent.toLowerCase().indexOf('msie') >= 0);
 var jsVersionArray = new Array();
-if (!isIE) {
-	jsVersionArray.push({
-		"file":"anidbscript.js",
-		"version":"1.0",
-		"revision":"$Revision$",
-		"date":"$Date::                           $",
-		"author":"$Author$",
-		"changelog":"adding jsVersionArray"
-	});
-}
+jsVersionArray.push({
+	"file":"anidbscript.js",
+	"version":"1.0",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
+	"changelog":"adding jsVersionArray"
+});
 
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
@@ -177,7 +174,7 @@ function writeJsFooter() {
 	addInfoToFooter(' '+last['revision']+', '+last['date'],true);
 }
 
-if (!isIE) addLoadEvent(writeJsFooter);
+addLoadEvent(writeJsFooter);
 
 /* Creates a basic popup */
 function BasicPopup(a) {
