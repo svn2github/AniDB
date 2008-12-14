@@ -891,7 +891,7 @@ function tabWork() {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.value; },(usejspopups),' Use Javascript popups for anidb::popup',className)
+				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.value; },(usejspopups),' Use Javascript popups for anidb::popup',null);
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
