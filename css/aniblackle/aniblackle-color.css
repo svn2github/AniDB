@@ -78,6 +78,7 @@ button:hover
 }
 
 a,
+span.link,
 #layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
 #layout-main div.tabbed_pane ul.tabs li.selected,
@@ -87,6 +88,7 @@ ul.g_list li,
 }
 
 a:hover,
+span.link:hover,
 #layout-menu li.sub-menu:hover,
 button:hover,
 input[type="submit"]:hover

@@ -48,6 +48,7 @@
 	border-bottom: none;
 }
 
+span.link,
 #layout-menu a, 
 #layout-menu a:link, 
 #layout-menu a:visited {
@@ -58,6 +59,7 @@
 	padding: -1px;
 	display: block;
 }
+span.link:hover,
 #layout-menu a:hover, 
 #layout-menu a:active {
 	background-color:#252628;

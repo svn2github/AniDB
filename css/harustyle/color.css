@@ -31,12 +31,14 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #3496DA;
 }
 
+span.link,
 #layout-menu a:link,
 #layout-menu a:visited
 {
 	color: #000000;
 }
 
+span.link:hover,
 #layout-menu a:active
 {
 	color: #ff0000;

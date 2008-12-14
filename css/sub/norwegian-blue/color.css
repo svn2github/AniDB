@@ -5,6 +5,7 @@ html
 	background: #e7ebff;
 }
 
+span.link,
 a
 {
 text-decoration: none;
@@ -12,6 +13,7 @@ color: blue;
 cursor: pointer;
 }
 
+span.link:hover,
 a:active
 {
 color: red;

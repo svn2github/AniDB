@@ -5,6 +5,7 @@ html
 	background: #f2f3ee;
 }
 
+span.link,
 a
 {
 	text-decoration: none;
@@ -12,6 +13,7 @@ a
 	cursor: pointer;
 }
 
+span.link:hover,
 a:hover
 {
 	text-decoration: underline;

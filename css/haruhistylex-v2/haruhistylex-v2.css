@@ -38,6 +38,7 @@ html
 	background-repeat:no-repeat;
 }
 
+span.link,
 a
 {
 	color:#000000;
@@ -45,6 +46,7 @@ a
 	text-decoration:none;
 }
 
+span.link:hover,
 a:hover
 {
 	color:#0099FF;

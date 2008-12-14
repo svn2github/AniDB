@@ -73,12 +73,15 @@ body
 	border: 0;
 	color: white;
 }
+
+span.link,
 a
 {
 	text-decoration: none;
 	color: #ADD8E6;
 	cursor: pointer;
 }
+span.link:hover,
 a:active
 {
 	color: red;

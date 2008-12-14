@@ -9,11 +9,13 @@ body.nonav
 	background-color: #BFC2C9;
 }
 
+span.link,
 a:visited, a:active, a:link {
   color: #105289;
   text-decoration: none;
 }
 
+span.link:hover,
 a:hover
 {
 	color:#AA0000;

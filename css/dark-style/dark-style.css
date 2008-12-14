@@ -33,6 +33,7 @@ body
 	height:100%;
 }
 
+span.link,
 a
 {
 	color:#fff;
@@ -1507,6 +1508,7 @@ div.latestanimes_all img[src*="nopic.gif"]
 	display:inline;
 }
 
+span.link:hover,
 a:hover,
 input[type="submit"]:hover,
 ul#menu-main a:hover,

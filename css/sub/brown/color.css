@@ -15,6 +15,7 @@ a:link,a:active,a:visited
 	font-weight: bold;
 }
 
+span.link,
 a:hover,
 #layout-nav a:hover
 {

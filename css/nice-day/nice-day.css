@@ -71,6 +71,7 @@ tr.mylist td.name a:after
 	vertical-align:top;
 }
 
+span.link,
 a
 {
 	text-decoration:none;
@@ -443,6 +444,7 @@ tr.mylist td.name a:after
 	color:#DD5533;
 }
 
+span.link:hover,
 a:hover
 {
 	background-color:#FFDDAA;
