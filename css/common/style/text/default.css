@@ -378,3 +378,25 @@ th.ascending
 	font-size:1.1em;
 	font-weight:bold;
 }
+
+#layout-main div.chartags_all div.addbox div.taggrouplist span.link,
+#layout-main div.chartags_all div.addbox div.tag-column span.link
+{
+	line-height:1.5em;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column h5,
+#layout-main div.chartags_all div.addbox div.taggrouplist span.link
+{
+	font-size:1.1em;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column h5
+{
+	font-weight:bold;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-group h3
+{
+	font-size:1.2em;
+}
