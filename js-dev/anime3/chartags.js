@@ -82,7 +82,7 @@ function parseData(xmldoc) {
 }
 
 function writeTag() {
-	var node = this.parentNode;
+	var node = this;
 	var tagid = Number(node.id.substring(1));
 	var tag = tags[tagid]
 	if (!tag) { errorAlert('writeTag','bad tag with id: '+tagid); return; }
@@ -137,7 +137,7 @@ function writeDeepTags(group,tagsDiv) {
 }
 
 function showTagsForGroup() {
-	var node = this.parentNode;
+	var node = this;
 	var gid = Number(node.id.substring(1));
 	var group = groups[gid];
 	if (!group) { errorAlert('showTagsForGroup','bad group with id: '+gid); return; }
