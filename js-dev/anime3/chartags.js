@@ -107,9 +107,8 @@ function writeGroupTags(group,isSelf) {
 		for (var t = start; t < end; t++) {
 			var tag = tags[group.tags[t]];
 			if (!tag) continue;
-			var span = document.createElement('span');
+			var span = createTextLink(null, tag.name, null, null, writeTag, null, 'link')
 			span.id = 't'+tag.id;
-			createTextLink(span, tag.name, 'removeme', null, writeTag, null, null);
 			tagCol.appendChild(span);
 		}
 		start = end;
