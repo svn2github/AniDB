@@ -175,7 +175,6 @@ function writeTagGroups() {
 		var group = groups[level0groups[g]];
 		if (!group) continue;
 		var span = document.createElement('span');
-		span.className = "link";
 		span.id = 'g'+group.gid;
 		createTextLink(span, group.name, 'removeme', null, showTagsForGroup, null, null);
 		div.appendChild(span);
