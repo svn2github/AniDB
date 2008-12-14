@@ -400,7 +400,7 @@ function createLink(parentNode, text, url, rel, onclick, title, className) {
 
 function createTextLink(parentNode, text, url, rel, onclick, title, className) {
 	var obj = createLink(null, text, url, rel, onclick, title, className);
-	obj.className = className;
+	if (className) obj.className = className;
 	if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
   else return(obj);
 }

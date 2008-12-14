@@ -92,22 +92,31 @@ function writeTag() {
 
 function writeGroupTags(group,isSelf) {
 	if (!group) return null;
-	var tagCol = document.createElement('div');
-	tagCol.className = 'tag-column';
-	if(isSelf) {
-		var h5 = document.createElement('h5');
-		h5.appendChild(document.createTextNode(group.name));
-		tagCol.appendChild(h5);
+	var tagCols = new Array();
+	var step = 9; // as in, number of items you want to show - 1;
+	var start = 0;
+	var end = (group.tags.length > step ? step : group.tags.length);
+	while (start != group.tags.length) {
+		var tagCol = document.createElement('div');
+		tagCol.className = 'tag-column';
+		if(isSelf) {
+			var h5 = document.createElement('h5');
+			h5.appendChild(document.createTextNode(group.name));
+			tagCol.appendChild(h5);
+		}
+		for (var t = start; t < end; t++) {
+			var tag = tags[group.tags[t]];
+			if (!tag) continue;
+			var span = document.createElement('span');
+			span.id = 't'+tag.id;
+			createTextLink(span, tag.name, 'removeme', null, writeTag, null, null);
+			tagCol.appendChild(span);
+		}
+		start = end;
+		end = (group.tags.length > start+step ? start+step : group.tags.length);
+		tagCols.push(tagCol);
 	}
-	for (var t = 0; t < group.tags.length; t++) {
-		var tag = tags[group.tags[t]];
-		if (!tag) continue;
-		var span = document.createElement('span');
-		span.id = 't'+tag.id;
-		createTextLink(span, tag.name, 'removeme', null, writeTag, null, null);
-		tagCol.appendChild(span);
-	}
-	return tagCol;
+	return tagCols;
 }
 
 /* Recursive hell */
@@ -116,10 +125,15 @@ function writeDeepTags(group,tagsDiv) {
 		var childGroup = groups[group.childGroups[g]];
 		if (!childGroup) continue;
 		if (childGroup.childGroups.length) {
-			if (childGroup.tags.length) tagsDiv.appendChild(writeGroupTags(childGroup,true));
+			var tagCols = writeGroupTags(childGroup,true);
+			for (var i = 0; i < tagCols.length; i++) 
+				tagsDiv.appendChild(tagCols[i]);
 			writeDeepTags(childGroup,tagsDiv);
 		} else {
-			if (childGroup.tags.length) tagsDiv.appendChild(writeGroupTags(childGroup,true));
+			var tagCols = writeGroupTags(childGroup,true);
+			for (var i = 0; i < tagCols.length; i++) 
+				tagsDiv.appendChild(tagCols[i]);
+			//if (childGroup.tags.length) tagsDiv.appendChild(writeGroupTags(childGroup,true));
 		}
 	}
 }
@@ -139,10 +153,16 @@ function showTagsForGroup() {
 	var tagsDiv = document.createElement('div');
 	tagsDiv.className = 'tag-list';
 	if (group.childGroups.length) {
-		if (group.tags.length) tagsDiv.appendChild(writeGroupTags(group,true));
+		//if (group.tags.length) tagsDiv.appendChild(writeGroupTags(group,true));
+		var tagCols = writeGroupTags(group,true);
+			for (var i = 0; i < tagCols.length; i++) 
+				tagsDiv.appendChild(tagCols[i]);
 		writeDeepTags(group,tagsDiv);
 	} else {
-		if (group.tags.length) tagsDiv.appendChild(writeGroupTags(group,false));
+		var tagCols = writeGroupTags(group,false);
+			for (var i = 0; i < tagCols.length; i++) 
+				tagsDiv.appendChild(tagCols[i]);
+		//if (group.tags.length) tagsDiv.appendChild(writeGroupTags(group,false));
 	}
 	innerDiv.appendChild(tagsDiv);
 	tagHolder.appendChild(innerDiv);
