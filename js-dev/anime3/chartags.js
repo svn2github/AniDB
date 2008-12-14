@@ -132,7 +132,6 @@ function writeDeepTags(group,tagsDiv) {
 			var tagCols = writeGroupTags(childGroup,true);
 			for (var i = 0; i < tagCols.length; i++) 
 				tagsDiv.appendChild(tagCols[i]);
-			//if (childGroup.tags.length) tagsDiv.appendChild(writeGroupTags(childGroup,true));
 		}
 	}
 }
@@ -152,7 +151,6 @@ function showTagsForGroup() {
 	var tagsDiv = document.createElement('div');
 	tagsDiv.className = 'tag-list';
 	if (group.childGroups.length) {
-		//if (group.tags.length) tagsDiv.appendChild(writeGroupTags(group,true));
 		var tagCols = writeGroupTags(group,true);
 			for (var i = 0; i < tagCols.length; i++) 
 				tagsDiv.appendChild(tagCols[i]);
@@ -161,7 +159,6 @@ function showTagsForGroup() {
 		var tagCols = writeGroupTags(group,false);
 			for (var i = 0; i < tagCols.length; i++) 
 				tagsDiv.appendChild(tagCols[i]);
-		//if (group.tags.length) tagsDiv.appendChild(writeGroupTags(group,false));
 	}
 	innerDiv.appendChild(tagsDiv);
 	tagHolder.appendChild(innerDiv);
@@ -173,9 +170,8 @@ function writeTagGroups() {
 	for (var g = 0; g < level0groups.length; g++) {
 		var group = groups[level0groups[g]];
 		if (!group) continue;
-		var span = document.createElement('span');
+		var span = createTextLink(null, group.name, null, null, showTagsForGroup, null, 'link');
 		span.id = 'g'+group.gid;
-		createTextLink(span, group.name, 'removeme', null, showTagsForGroup, null, null);
 		div.appendChild(span);
 		if (g < level0groups.length - 1) div.appendChild(document.createTextNode(' | '));
 	}
