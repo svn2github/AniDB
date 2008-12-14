@@ -531,6 +531,18 @@ function createCheckBox(parentNode,name,id,onchange,checked) {
 	if (parentNode && parentNode != '') parentNode.appendChild(ck);
 	else return ck;
 }
+function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className) {
+	var ck = createCheckBox(null,name,id,onchange,checked);
+	var label = document.createElement('label');
+	label.appendChild(ck);
+	if (className) label.className = className;
+	if (text) {
+		if (typeof(text) == 'string') label.appendChild(document.createTextNode(text));
+		else label.appendChild(text);
+	}
+	if (parentNode && parentNode != '') parentNode.appendChild(label);
+	else return label;
+}
 
 // GROUP BAR FUNCTIONS //
 function makeBar(parentNode,start,end,total,map) {

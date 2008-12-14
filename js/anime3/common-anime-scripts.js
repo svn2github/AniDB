@@ -1235,16 +1235,13 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var ck = createCheckbox('use_mylist_add',use_mylist_add);
-				ck.onchange = function() {
+				createLabledCheckBox(li,'use_mylist_add','use_mylist_add',function() {
 					changeOptionValue(this);
 					use_mylist_add = Number(this.checked);
 					document.getElementById('mylist_add_state').disabled = (!this.checked);
 					document.getElementById('mylist_add_fstate').disabled = (!this.checked);
 					document.getElementById('mylist_add_viewed_state').disabled = (!this.checked);
-				}
-				li.appendChild(ck);
-				li.appendChild(document.createTextNode(' Use quick-add instead of normal mylist add'));
+				},(use_mylist_add),' Use quick-add instead of normal mylist add',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1297,15 +1294,12 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var ck = createCheckbox('mylist_get_animeinfo',mylist_get_animeinfo);
-				ck.onchange = function() { 
+				createLabledCheckBox(li,'mylist_get_animeinfo','mylist_get_animeinfo',function() { 
 					changeOptionValue(this); 
 					mylist_get_animeinfo = Number(this.checked); 
 					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
 					document.getElementById('mylist_get_animeinfo_mw').disabled = !this.checked;
-				}
-				li.appendChild(ck);
-				li.appendChild(document.createTextNode(' Get anime information on link hover'));
+				},(mylist_get_animeinfo),' Get anime information on link hover',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1389,10 +1383,7 @@ function createPreferencesTable(type) {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var ck = createCheckbox('group_langfilter',Number(group_langfilter));
-				ck.onchange = function() { changeOptionValue(this); group_langfilter = Number(this.checked); }
-				li.appendChild(ck);
-				li.appendChild(document.createTextNode(' Filter groups in group table according to language preferences (bypasses profile option if enabled)'));
+				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { changeOptionValue(this); group_langfilter = this.value; },(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
 				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';

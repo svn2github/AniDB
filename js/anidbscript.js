@@ -17,6 +17,7 @@ jsVersionArray.push({
 	"author":"$Author$",
 	"changelog":"adding jsVersionArray"
 });
+var usejspopups = true;
 
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
@@ -366,7 +367,7 @@ var Magic = {
 			for (var i = 0; i < linklist.length; i++)
 			{
 				var relstring = linklist[i].getAttribute("rel") || "";
-				if (relstring.indexOf("anidb::popup") >= 0)
+				if (usejspopups && relstring.indexOf("anidb::popup") >= 0)
 				{
 					linklist[i].onclick = BasicPopupSelf;
 				}
