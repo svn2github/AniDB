@@ -953,7 +953,7 @@ function tabWork() {
 
 function prepPage() {
 	//uriObj = parseURI(); // update the uriObj
-	tabWork();
+	//tabWork();
 	fetchData(); // Fetch Data, we update the page in the meanwhile
 	cssurl = document.getElementById('style_url');
 	if (!cssurl) return;
