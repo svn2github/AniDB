@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"version":"1.0",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author$",
+	"author":"$Author$"
 });
 
 var seeDebug = false;
