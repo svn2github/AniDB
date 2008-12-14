@@ -11,7 +11,7 @@ jsVersionArray.push({
 	"author":"$Author$",
 });
 
-var seeDebug = true;
+var seeDebug = false;
 var groups = new Array();
 var tags = new Array();
 var level0groups = new Array(); // top level tag groups
