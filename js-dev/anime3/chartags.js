@@ -16,6 +16,7 @@ var groups = new Array();
 var tags = new Array();
 var level0groups = new Array(); // top level tag groups
 var textArea;
+var insertButton;
 
 /* TagGroupClass */
 function CCTagGroup(node) {
@@ -163,7 +164,7 @@ function writeTagGroups() {
 	var tagdiv = document.createElement('div');
 	tagdiv.className = 'tag-group';
 	tagdiv.id = 'tagsholder';
-	textArea.parentNode.insertBefore(tagdiv,div.nextSibling);
+	textArea.parentNode.appendChild(tagdiv);
 }
 
 /* Prepares the page for my scripts */
@@ -177,6 +178,7 @@ function prepPage() {
 	var charidInput = getElementsByName(inputs, 'ctag.charid', false)[0];
 	var charid = (!charidInput ? null : charidInput.value);
 	textArea = div.getElementsByTagName('textarea')[0];
+	insertButton = getElementsByName(div.getElementsByTagName('input'), 'do.add', false)[0];
 	fetchData(Number(charid));
 }
 
