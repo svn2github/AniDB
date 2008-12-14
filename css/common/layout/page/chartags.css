@@ -87,10 +87,10 @@
 
 #layout-main div.chartags_all div.addbox div.tag-column h5
 {
-	margin:0 0 .5em;
+	text-align:left;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-group h3
 {
-	text-align:left;
+	margin-bottom: 0.5em;
 }
