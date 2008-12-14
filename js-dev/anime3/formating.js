@@ -79,7 +79,7 @@ FunctionMap = {'bold':{'id':"Bold",'desc':"Bold text: [b]text[/b] (alt+b)",'acce
                'link':{'id':"CreateLink",'desc':"Link text: [url=href]text[/url] (alt+h)",'accesskey':"h",'text':"href",'start':"[",'end':"]",'active':false},
 			   'img':{'id':"insertImage",'desc':"Add an image: [img]url[/img]",'accesskey':null,'text':"img",'start':"[img]",'end':"[/img]",'active':false},
 			   'unlink':{'id':"unlink",'desc':"Unlink",'accesskey':null,'text':"href",'start':"[",'end':"]",'active':false},
-			   'code':{'id':"Code",'desc':"Code: [code]text[/code]",'accesskey':null,'text':"code",'start':"[code]",'end':"[/code]",'active':false},
+			   'code':{'id':"Code",'desc':"Code: [code]text[/code]",'accesskey':null,'text':"code",'start':"[code]",'end':"[/code]",'active':false}
 			   };
 ModeMap = new Array('Mode: Off','Mode: Assisted','Mode: Visual');
 
