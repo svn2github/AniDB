@@ -6,7 +6,6 @@
 @import "../common/layout/global/tabbed_pane.css";
 @import "../common/layout/global/timedentry.css";
 @import "../common/layout/global/menu.css";
-@import "../common/style/color/forum-default.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
 padding:0;
@@ -27,6 +26,10 @@ cursor: default;
 #layout-main div.cmt_all div.topic_actions
 {
 margin-bottom: 1em;
+}
+#layout-main div.forum ul.topiclist li.row
+{
+background: inherit;
 }
 #layout-main .g_end
 {
@@ -170,7 +173,6 @@ h2
 {
 	text-align: center;
 	font-size: 117%;
-	clear: both;
 }
 h4
 {
@@ -1338,13 +1340,14 @@ body.nonav #layout-content h1
 	display: inline;
 }
 #layout-content div.main_all h4,
-#layout-content div.main_edit h4
+#layout-content div.main_edit h4,
+#layout-content div.news_all h4
 {
 	background-image: url(images/redpixel.png);
 	font-weight: normal;
 	margin: 0;
 }
-#layout-content div.main_all div.news h4
+#layout-content div.news h4
 {
 	text-align: left;
 }
@@ -1401,18 +1404,19 @@ body.nonav #layout-content h1
 {
 	margin: 0.3em 17em 0.3em 0.3em;
 }
-#layout-content div.main_all div.news h4
+#layout-content div.main_all div.news h4,
+#layout-content div.news_all div.news h4
 {
 	padding: 0.1em;
 }
-#layout-content div.main_all div.news span.stamp
+#layout-content div.news span.stamp
 {
 	display: block;
 	text-align: right;
 	padding: 0.1em 1em 0.1em 0.1em;
 	background-image: url(images/whitepixel.png);
 }
-#layout-content div.main_all div.news div
+#layout-content div.news  > div
 {
 	margin: 0.1em 0.1em 3.1em 0.1em;
 }
@@ -2250,15 +2254,11 @@ border: #898989 1px dashed;
 margin-bottom: 0;
 padding-bottom: 0;
 }
-#layout-main div.cmt_entries a.username-colored
-{
-color: #ff6000;
-}
-#layout-main div.cmt_entries dl.profile dd
+#layout-main dl.profile dd
 {
 color: #5aacd3;
 }
-#layout-main div.cmt_entries dl.profile dd strong
+#layout-main dl.profile dd strong
 {
 color: #FFFFFF;
 }
@@ -2356,7 +2356,7 @@ height: 350px;
 {
 width: 100%;
 }
-#layout-main div.main_all div.news p.comment
+#layout-main div.news p.comment
 {
 float: right;
 margin-top: -1.4em;
@@ -2371,4 +2371,209 @@ color: #99FFB6;
 #htmltagcloud span:nth-child(2n+1) a:active
 {
 color: blue;
+}
+
+/*FORUM*/
+div.quotebody
+{
+	background-color:#EBEADD;
+	border:1px solid #DBDBDB;
+}
+
+div.quotebody div.quote div.g_odd
+{
+	background-color:#EFEED9;
+}
+
+#layout-main div.forum ul.topiclist li
+{
+	background-image: url(images/redpixel.png);
+}
+
+#layout-main div.forum dl.icon
+{
+	background-position:10px 50%;
+	background-repeat:no-repeat;
+}
+
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	color:#FFFFFF;
+}
+
+#layout-main div.forum dl.icon dt
+{
+	background-position:5px 50%;
+	background-repeat:no-repeat;
+}
+
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner
+{
+	background: inherit;
+}
+
+#layout-main div.forum ul.topics li.g_odd
+{
+	background-image: url(images/bg_2.gif)
+}
+
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner,
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-image: url(images/bg_3.gif)
+}
+
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+	opacity:0.3;
+}
+#layout-main div.forum hr
+{
+	background-image: url(images/bg_2.gif)
+}
+
+#layout-main div.forum div.signature,
+#layout-main div.forum div.navbar div.inner div.bottom
+{
+	border-top-color:#121212;
+}
+
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *
+{
+	background-color:#A9ABB1;
+}
+
+#layout-main div.forum div.poll div.pollbar
+{
+	background-color:#105289;
+	border-bottom-color:#092e4d;
+	border-right-color:#092e4d;
+	color:#FFFFFF;
+}
+
+#layout-main div.forum div.poll h2
+{
+	border-bottom-color:#989898;
+	color:#006699;
+}
+
+#layout-main div.forum div.poll dl
+{
+	border-top-color:#989898;
+	color:#666666;
+}
+
+#layout-main div.forum div.poll dl dt
+{
+	color: white;
+}
+
+#layout-main div.forum div.poll
+{
+	border-bottom-color:#4A4A5A;
+}
+
+#layout-main div.forum div.postbody dl.codebox code
+{
+	color:#2E8B57;
+}
+
+#layout-main div.forum div.postbody dl.codebox
+{
+	background-color:#FFFFFF;
+	border-color:#C9D2D8;
+}
+
+#layout-main div.forum div.postbody dl.codebox dt
+{
+	border-bottom-color:#CCCCCC;
+	color:#000000;
+}
+
+#layout-main div.forum div.rules div.inner,
+#layout-main div.forum div.rules .rtop *,
+#layout-main div.forum div.rules .rbottom *
+{
+	background-color:#ECD5D8;
+}
+
+#layout-main div.forum div.rules div.inner
+{
+	color:#BC2A4D;
+}
+
+#layout-main div.forum div.quickreply textarea
+{
+	border-color:#A9A9A9;
+}
+#layout-main div.forum div.poll dl dd
+{
+	color:#666666;
+}
+
+#layout-main a.username-coloured,
+#layout-main div.forum a.topictitle:hover
+{
+	color: #ff6000;
+}
+#layout-main a.username-coloured:hover
+{
+color: #006600;
+}
+h1,
+h2,
+h3,
+h4,
+caption,
+#layout-main table.filelist tr.undumped td.id a,
+.v_high,
+.v_med,
+span.diff,
+#layout-main div.creqmod_all .state.new,
+#layout-main div.creqmod_all .state.return,
+#layout-main div.creqmod_all span.type.del,
+#layout-main div.msg_all tr.new td.state,
+#layout-main div.msg_all tr td.type,
+#layout-main div.mylist_list tr.complete td.stats,
+#layout-main div.mylist_list tr.all_watched td.stats,
+#layout-main div.anime_all div.groups td.lastupdate.new,
+#layout-main div.anime_all div.groups td.state.finished a,
+#layout-main div.anime_all div.groups td.state.complete a,
+#layout-main div.group_released td.state.finished a,
+#layout-main div.group_released td.state.complete a,
+div.quotebody div.quoteof,
+#layout-main div.forum a.username-coloured,
+#layout-main div.forum div.navbar span.breadcrumbs,
+#layout-main div.forum ul.topics dd.lastpost span a,
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum dl.icon dt,
+#layout-main div.forum div.options-box dt,
+#layout-main div.forum div.poll dl dt,
+#layout-main div.forum div.poll div.pollbar
+{
+font-weight:bold;
+}
+#layout-main div.forum ul.topics
+{
+border-left-width: 0;
+border-right-width: 0;
+}
+#layout-main div.forum li.row
+{
+border: 0;
+}
+#layout-main div.forum a.topictitle
+{
+font-size: 120%;
 }
