@@ -110,6 +110,9 @@ var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-s
 var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
 var animePage_curSort = 'default'; // whatever the db spits out
 var animePage_curSortOrder = 'down'; // default sort direction
+var virtualDiv = document.createElement('div');
+var arePrefsShown = false;
+var defPrefTab = 0;
 
 /* This is an auxiliar function that removes a given attribute from the cols
  * @param name Name of the column to remove
@@ -1052,19 +1055,48 @@ function makeLayoutPreferencesTable() {
 	return table;
 }
 
+function createProfileGroup(parentNode, headText, options) {
+	var div = document.createElement('div');
+	var h4 = document.createElement('h3');
+	if (headText) {
+		if (typeof(headText) == 'string') h4.appendChild(document.createTextNode(headText));
+		else h4.appendChild(headText);
+		div.appendChild(h4);
+	}
+	var ul = document.createElement('ul');
+	for (var e in options) {
+		var option = options[e];
+		var li = document.createElement('li');
+		if (option['url']) {
+			createLink(li, '?', option['url'], 'anidb::wiki', null, null, 'i_inline i_help');
+			li.appendChild(document.createTextNode(' '));
+		}
+		var ckname = option['type']+'.'+option['var'];
+		var ckchecked = false;
+		if (config && config[option['type']] && config[option['type']][option['var']]) ckchecked = config[option['type']][option['var']];
+		createLabledCheckBox(li,ckname,null,null,ckchecked, option['text'], null);
+		ul.appendChild(li);
+	}
+	div.appendChild(ul);
+	if (parentNode) parentNode.appendChild(div);
+	else return div;
+}
+
 /* Function that creates the preferences table
  * @param type Type can be either mylist or anime
  */
 function createPreferencesTable(type) {
 	var items = new Object();
-	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true};
+	var animeProfile = {'id':"profile-anime",'head':"Profile",'title':"Profile Preferences",'default':true};
+	var mylistProfile = {'id':"profile-mylist",'head':"Profile",'title':"Profile Preferences",'default':true};
+	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences"};
 	var ed2kPrefs = {'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"};
 	var mylistPrefs = {'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"};
 	var mylistPrefs2 = {'id':"mylist-prefs2",'head':"Mylist",'title':"Mylist Preferences"};
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	var animeLayoutPrefs = {'id':"anime-layout",'head':"Layout",'title':"Anime page Layout Preferences"};
 	items['mylist'] =	[titlePrefs, ed2kPrefs, mylistPrefs2];
-	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, animeLayoutPrefs];
+	items['anime'] =	[animeProfile, titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, animeLayoutPrefs];
 	items['group'] =	[titlePrefs, ed2kPrefs, groupPrefs];
 	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
 	if (!items[type]) return;
@@ -1103,7 +1135,7 @@ function createPreferencesTable(type) {
 	var main = document.createElement('div');
 	main.className = "g_section preferences";
 	main.style.display = 'none';
-	main.id = 'page_prefs';
+	main.id = 'layout-prefs';
 	var panes = document.createElement('div');
 	panes.className = "tabbed_pane";
 	var ul_tabs = document.createElement('ul');
@@ -1129,6 +1161,158 @@ function createPreferencesTable(type) {
 		h4.appendChild(document.createTextNode(item['title']));
 		tab.appendChild(h4);
 		switch(item['id']) {
+			case 'profile-anime':
+				var form = document.createElement('form');
+				form.action = 'animedb.pl';
+				form.method = 'post';
+				var fieldset = document.createElement('fieldset');
+				fieldset.appendChild(createTextInput('show',null,false,true,null,'profile'));
+				fieldset.appendChild(createTextInput('do.general',null,false,true,null,'apply'));
+				form.appendChild(fieldset);
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				var options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HEADER','type':'lay','var':'LAY_HEADER','text':' Show table headers'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_FINEVOTES','type':'lay','var':'LAY_FINEVOTES','text':' Show fine grained vote options'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEHENTAIPICS','type':'lay','var':'LAY_HIDEHENTAIPICS','text':' Hide pictures with adult content'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_USEAJAX','type':'irc','var':'IRC_USEAJAX','text':' Use ajax on anime and mylist page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_SHOWSPOILERTAGS','type':'irc','var':'IRC_SHOWSPOILERTAGS','text':' Show tags marked as spoiler'}
+				];
+				createProfileGroup(li, 'General', options);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEAWARDS','type':'lay','var':'LAY_HIDEAWARDS','text':' Hide awards on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_NOANIMEGROUPREL','type':'lay','var':'LAY_NOANIMEGROUPREL','text':' Hide group info box on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDECATEGORIES','type':'irc','var':'IRC_HIDECATEGORIES','text':' Hide categories on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDETAGS','type':'irc','var':'IRC_HIDETAGS','text':' Hide tags on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDEANIMEPICS','type':'irc','var':'IRC_HIDEANIMEPICS','text':' Hide anime pictures'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDERAWS','type':'lay','var':'LAY_HIDERAWS','text':' Hide audio only releases on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_FILTERRELEASESBYLANG','type':'irc','var':'IRC_FILTERRELEASESBYLANG','text':' Filter releases on Animepage by your prefered language'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_SHOWTABS"','type':'lay','var':'LAY_SHOWTABS','text':' Use JS tabs on anime page'}
+				];
+				createProfileGroup(li, 'Anime Page - General', options);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEOTHERTITLES','type':'lay','var':'LAY_HIDEOTHERTITLES','text':' Hide foreign titles on anime page (see: lang prefs)'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEANIMEPAGESTITLE"','type':'lay','var':'LAY_HIDEANIMEPAGESTITLE','text':' Hide short titles on anime page'}
+				];
+				createProfileGroup(li, 'Anime Page - Titles', options);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_ETLANGFLAGS','type':'lay','var':'LAY_ETLANGFLAGS','text':' Show language of ep titles on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_NOSPOILER','type':'lay','var':'LAY_NOSPOILER','text':' Hide titles of unwatched episodes'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEPARODYEPS"','type':'lay','var':'LAY_HIDEPARODYEPS','text':' Hide parody eps on anime page'}
+				];
+				createProfileGroup(li, 'Anime Page - Episodes', options);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEFILES','type':'lay','var':'LAY_HIDEFILES','text':' Hide deprecated files on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEGENERICFILES','type':'lay','var':'LAY_HIDEGENERICFILES','text':' Hide generic files on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_SHOWFID','type':'lay','var':'LAY_SHOWFID','text':' Show file ids on anime page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_SHOWCRC"','type':'lay','var':'LAY_SHOWCRC','text':' Show file crc sums on anime page'}
+				];
+				createProfileGroup(li, 'Anime Page - Files', options);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDEGROUPJOINTS"','type':'irc','var':'IRC_HIDEGROUPJOINTS','text':' Hide group joints'}
+				];
+				createProfileGroup(li, 'Grouplist', options);
+				ul.appendChild(li);
+				var actionLI = document.createElement('li');
+				actionLI.className = 'action';
+				actionLI.appendChild(document.createTextNode('Actions: '));
+				var reloadInput = createBasicButton('do.reload','reload page');
+				reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
+				actionLI.appendChild(reloadInput);
+				actionLI.appendChild(document.createTextNode(' '));
+				var saveInput = createBasicButton('do.save','save preferences');
+				saveInput.onclick = function saveSettings() {
+					var form = this.form;
+					var inputs = form.getElementsByTagName('input');
+					var dataFields = new Array();
+					for (var i = 0; i < inputs.length; i++) {
+						var input = inputs[i];
+						dataFields.push(input.name + '=' + (input.type == 'checkbox' ? Number(input.checked) : input.value));
+					}
+					var req = xhttpRequest();
+					xhttpRequestPost(req, 'animedb.pl', null, dataFields.join('&'));
+					alert('Changes submited to server.\nPlease reload to see changes.');
+				}
+				actionLI.appendChild(saveInput);
+				ul.appendChild(actionLI);
+				form.appendChild(ul);
+				tab.appendChild(form);
+				break;
+			case 'profile-mylist':
+				var form = document.createElement('form');
+				form.action = 'animedb.pl';
+				form.method = 'post';
+				var fieldset = document.createElement('fieldset');
+				fieldset.appendChild(createTextInput('show',null,false,true,null,'profile'));
+				fieldset.appendChild(createTextInput('do.general',null,false,true,null,'apply'));
+				form.appendChild(fieldset);
+				var ul = document.createElement('ul');
+				var li = document.createElement('li');
+				var options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HEADER','type':'lay','var':'LAY_HEADER','text':' Show table headers'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_FINEVOTES','type':'lay','var':'LAY_FINEVOTES','text':' Show fine grained vote options'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_SHOWHENTAI','type':'lay','var':'LAY_SHOWHENTAI','text':' Show adult content (hentai)'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEHENTAIPICS','type':'lay','var':'LAY_HIDEHENTAIPICS','text':' Hide pictures with adult content'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_USEAJAX','type':'irc','var':'IRC_USEAJAX','text':' Use ajax on anime and mylist page'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_SHOWSPOILERTAGS','type':'irc','var':'IRC_SHOWSPOILERTAGS','text':' Show tags marked as spoiler'}
+				];
+				createProfileGroup(li, 'General', options);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_FILES','type':'lay','var':'LAY_FILES','text':' Show file info in mylist by default'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_SHOWFILESOURCE','type':'irc','var':'IRC_SHOWFILESOURCE','text':' Display file source instead of personal source in mylist'}
+				];
+				createProfileGroup(li, 'Mylist', options);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				var eppDiv = document.createElement('div');
+				var h4 = document.createElement('h3');
+				h4.appendChild(document.createTextNode('Performance Options'));
+				eppDiv.appendChild(h4);
+				var p = document.createElement('p');
+				p.appendChild(document.createTextNode('Default number of entries per page: '));
+				var optionArray = {	10:{"text":'10'},20:{"text":'20'},30:{"text":'30'},50:{"text":'50'},
+									100:{"text":'100'},250:{"text":'250'},500:{"text":'500'},1000:{"text":'1000'}};
+				createSelectArray(p,"perf.maxentries",null,null,preferredEntriesPerPage,optionArray);
+				eppDiv.appendChild(p);
+				li.appendChild(eppDiv);
+				ul.appendChild(li);
+				var actionLI = document.createElement('li');
+				actionLI.className = 'action';
+				actionLI.appendChild(document.createTextNode('Actions: '));
+				var reloadInput = createBasicButton('do.reload','reload page');
+				reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
+				actionLI.appendChild(reloadInput);
+				actionLI.appendChild(document.createTextNode(' '));
+				var saveInput = createBasicButton('do.save','save preferences');
+				saveInput.onclick = function saveSettings() {
+					var form = this.form;
+					var inputs = form.getElementsByTagName('input');
+					var dataFields = new Array();
+					for (var i = 0; i < inputs.length; i++) {
+						var input = inputs[i];
+						dataFields.push(input.name + '=' + (input.type == 'checkbox' ? Number(input.checked) : input.value));
+					}
+					var req = xhttpRequest();
+					xhttpRequestPost(req, 'animedb.pl', null, dataFields.join('&'));
+					alert('Changes submited to server.\nPlease reload to see changes.');
+				}
+				actionLI.appendChild(saveInput);
+				ul.appendChild(actionLI);
+				form.appendChild(ul);
+				tab.appendChild(form);
+				break;
 			case 'title-prefs':
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
@@ -1454,36 +1638,99 @@ function createPreferencesTable(type) {
 	panes.appendChild(body);
 	main.appendChild(panes);
 
-	// set this before the links
-	if (type != 'mylist') {
-		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true);
-		if (!links) return;
-		links = links[links.length-1];
-		if (links) {
-			var lastLi = links.getElementsByTagName('li');
-			lastLi = lastLi[lastLi.length-1];
-			var li = document.createElement('li');
-			li.className = (lastLi.className.indexOf('g_odd') < 0 ? 'g_odd' : '');
-			createLink(li, 'Page Preferences', 'removeme', null, function () { var pagePrefs = document.getElementById('page_prefs'); if(!pagePrefs) return; pagePrefs.style.display = (pagePrefs.style.display == 'none' ? '' : 'none'); }, null, null);
-			links.appendChild(li);
-			links.parentNode.insertBefore(main,links);
+	// first find the main tabs
+	var laytabs = document.getElementById('layout-tabs');
+	var laycontent = document.getElementById('layout-content');
+	if (!laytabs) {
+		laytabs = document.createElement('div');
+		laytabs.id = 'layout-tabs';
+		var ultabs = document.createElement('ul');
+		ultabs.className = 'main-tabs';
+		var li = document.createElement('li');
+		li.className = 'g_odd entry selected';
+		createTextLink(li, 'entry', 'url');
+		ultabs.appendChild(li);
+		laytabs.appendChild(ultabs);
+		if (laycontent) laycontent.insertBefore(laytabs,laycontent.firstChild);
+/* // backup
+		// set this before the links
+		if (type != 'mylist') {
+			var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true);
+			if (!links) return;
+			links = links[links.length-1];
+			if (links) {
+				var lastLi = links.getElementsByTagName('li');
+				lastLi = lastLi[lastLi.length-1];
+				var li = document.createElement('li');
+				li.className = (lastLi.className.indexOf('g_odd') < 0 ? 'g_odd' : '');
+				createLink(li, 'Page Preferences', 'removeme', null, function () { var pagePrefs = document.getElementById('layout-prefs'); if(!pagePrefs) return; pagePrefs.style.display = (pagePrefs.style.display == 'none' ? '' : 'none'); }, null, null);
+				links.appendChild(li);
+				links.parentNode.insertBefore(main,links);
+			}
+		}
+		if (type == 'mylist') {
+			var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list jump', true);
+			var userLinks = getElementsByClassName(document.getElementsByTagName('div'),'user', false)[0];
+			if (!links) return;
+			links = links[links.length-1];
+			if (userLinks) {
+				var ul = userLinks.getElementsByTagName('ul')[0];
+				var lastLi = ul.getElementsByTagName('li');
+				lastLi = lastLi[lastLi.length-1];
+				var li = document.createElement('li');
+				li.className = (lastLi.className.indexOf('g_odd') < 0 ? 'g_odd' : '');
+				createLink(li, 'Page Prefs', 'removeme', null, function () { var pagePrefs = document.getElementById('layout-prefs'); if(!pagePrefs) return; pagePrefs.style.display = (pagePrefs.style.display == 'none' ? '' : 'none'); }, null, null);
+				ul.appendChild(li);			
+			}
+			if (links) links.parentNode.insertBefore(main,links);
+		}
+*/
+	}
+	var ul = laytabs.getElementsByTagName('ul')[0];
+	if (ul) {
+		var lis = ul.getElementsByTagName('li');
+		defPrefTab = 0;
+		for (var i = 0; i < lis.length; i++) if (lis[i].className.indexOf('selected') >= 0) defPrefTab = i;
+		var li = document.createElement('li');
+		li.className = 'customize' + (lis[lis.length-1].className.indexOf('g_odd') < 0 ? ' g_odd' : '');
+		createTextLink(li, 'customize', 'removeme', null, toggleCustomizeBody, null, null)
+		ul.appendChild(li);
+		if (lis[defPrefTab]) {
+			var a = lis[defPrefTab].getElementsByTagName('a')[0];
+			if (a) {
+				a.removeAttribute('href');
+				a.onclick = toggleCustomizeBody;
+				a.style.cursor = 'pointer';
+				a.setAttribute('role','link');
+			}
 		}
 	}
-	if (type == 'mylist') {
-		var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list jump', true);
-		var userLinks = getElementsByClassName(document.getElementsByTagName('div'),'user', false)[0];
-		if (!links) return;
-		links = links[links.length-1];
-		if (userLinks) {
-			var ul = userLinks.getElementsByTagName('ul')[0];
-			var lastLi = ul.getElementsByTagName('li');
-			lastLi = lastLi[lastLi.length-1];
-			var li = document.createElement('li');
-			li.className = (lastLi.className.indexOf('g_odd') < 0 ? 'g_odd' : '');
-			createLink(li, 'Page Prefs', 'removeme', null, function () { var pagePrefs = document.getElementById('page_prefs'); if(!pagePrefs) return; pagePrefs.style.display = (pagePrefs.style.display == 'none' ? '' : 'none'); }, null, null);
-			ul.appendChild(li);			
-		}
-		if (links) links.parentNode.insertBefore(main,links);
+	if (laycontent) laycontent.appendChild(main);
+}
+
+/* function that shows or hides the customize body */
+function toggleCustomizeBody() {
+	var laycontent = document.getElementById('layout-content');
+	var laytabs = document.getElementById('layout-tabs');
+	var laymain = document.getElementById('layout-main');
+	var layprefs = document.getElementById('layout-prefs');
+	var bodyContent = getElementsByClassName(laymain.getElementsByTagName('div'), 'g_content', true)[0];
+	var lis = laytabs.getElementsByTagName('li');
+	if (!laymain || !layprefs) return;
+	if (!arePrefsShown) { // flushOut the elem
+		while(bodyContent.childNodes.length) virtualDiv.appendChild(bodyContent.firstChild);
+		bodyContent.appendChild(layprefs);
+		layprefs.style.display = '';
+		lis[defPrefTab].className = lis[defPrefTab].className.replace(' selected','');
+		lis[lis.length - 1].className += ' selected';
+		arePrefsShown = true;
+	} else {
+		layprefs.style.display = 'none';
+		while(bodyContent.childNodes.length) laycontent.appendChild(bodyContent.firstChild);
+		while(virtualDiv.childNodes.length) bodyContent.appendChild(virtualDiv.firstChild);
+		lis[lis.length - 1].className = lis[lis.length - 1].className.replace(' selected','');
+		lis[defPrefTab].className += ' selected';
+		arePrefsShown = false;
 	}
 }
 
