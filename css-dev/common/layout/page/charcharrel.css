@@ -1,0 +1,22 @@
+#layout-main div.addcharcharrel_all div.explanation div.description
+{
+	margin:1em auto;
+	width:51em;
+}
+
+#layout-main div.addcharcharrel_all div.explanation div.description dl
+{
+	margin:0;
+	text-align:left
+}
+
+#layout-main div.addcharcharrel_all div.explanation div.description dt
+{
+	width: 20em;
+}
+
+#layout-main div.addcharcharrel_all div.explanation div.description dd
+{
+	margin-left: 21em;
+	width: 30em;
+}
