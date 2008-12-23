@@ -144,7 +144,6 @@ function prepPage() {
 		if (isNaN(aid)) return;
 	}
 	fetchData(aid);
-	createPreferencesTable('anime');
 }
 
 /* Function that fetches anime data
@@ -232,6 +231,7 @@ function parseData(xmldoc) {
 						'\n\t\tupdateAddToMylistBox: '+uAB+' ms'+
 						'\n\t\tgetExtraGroupData: '+gEGD+' ms'+
 						'\n\tTotal: '+(parseAnimeNode+parseCustomNode+preparingPage)+' ms');
+	createPreferencesTable('anime');
 }
 
 /* Shows a success box for a brief time */
@@ -246,7 +246,7 @@ function showSuccessBox(xmldoc) {
 		p.appendChild(document.createTextNode('Action done.'));
 		g_note.appendChild(p);
 	}
-	var msg_all = getElementsByClassName(document.getElementsByTagName('DIV'), 'g_content msg_all', true)[0];
+	var msg_all = getElementsByClassName(document.getElementsByTagName('div'), 'g_content msg_all', true)[0];
 	if (!msg_all) return;
 	msg_all.insertBefore(g_note,msg_all.firstChild);
 	self.clearTimeout(deltimer);
@@ -713,7 +713,7 @@ function updateGroupTable() {
 	}
 	// append some group status filters
 	cell = row.cells[row.cells.length-2]; // second to last cell
-	cell.className = 'action filter';
+	cell.className = 'filter';
 	var span = document.createElement('span');
 	span.className = 'icons';
 	createGroupFilters(span)

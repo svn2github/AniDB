@@ -39,6 +39,7 @@ var uriObj = new Array();		// Object that holds the URI
 var LAY_FORMATFILESIZE = false;
 var LAY_SHOWCRC = false;
 var IRC_SHOWFILESOURCE = false;
+var preferredEntriesPerPage = 30;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
