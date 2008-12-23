@@ -35,3 +35,35 @@
 	width: 20em;
 	text-align: left;
 }
+
+#layout-main div.admin_all div.characterrelation dl
+{
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+}
+
+#layout-main div.admin_all div.characterrelation dl dt
+{
+	clear:none;
+	float:left;
+}
+
+#layout-main div.admin_all div.characterrelation dl dd
+{
+	margin-left:20em;
+}
+
+#layout-main div.admin_all div.characterrelation div.inner
+{
+	margin-bottom:1em;
+	margin-left:auto;
+	margin-right:auto;
+	width:40em;
+}
+
+#layout-main div.admin_all div.characterrelation input
+{
+	width:190px;
+}
