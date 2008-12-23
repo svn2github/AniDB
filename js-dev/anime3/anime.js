@@ -713,7 +713,7 @@ function updateGroupTable() {
 	}
 	// append some group status filters
 	cell = row.cells[row.cells.length-2]; // second to last cell
-	cell.className = 'action filter';
+	cell.className = 'filter';
 	var span = document.createElement('span');
 	span.className = 'icons';
 	createGroupFilters(span)

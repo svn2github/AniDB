@@ -839,6 +839,7 @@ function parseEpisode(node, aid) {
   var eid = Number(node.getAttribute('id'));
   var fileNodes = node.getElementsByTagName('file');
   var episode = episodes[eid];
+  episode.files = new Array();
   var nodeTime = new Date();
   for (var i = 0; i < fileNodes.length; i++)
     buildFileEntry(fileNodes[i],aid, eid);
