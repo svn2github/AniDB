@@ -63,7 +63,7 @@
 	width:40em;
 }
 
-#layout-main div.admin_all div.characterrelation input["text"]
+#layout-main div.admin_all div.characterrelation input[type="text"]
 {
 	width:190px;
 }
