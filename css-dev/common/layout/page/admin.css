@@ -60,10 +60,15 @@
 	margin-bottom:1em;
 	margin-left:auto;
 	margin-right:auto;
-	width:40em;
+	width:45em;
 }
 
 #layout-main div.admin_all div.characterrelation input[type="text"]
 {
 	width:190px;
+}
+
+#layout-main div.admin_all div.characterrelation dl dd label
+{
+	display:block;
 }
