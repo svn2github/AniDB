@@ -269,32 +269,38 @@ function createEpisodeRow(aid,eid,cols,skips) {
 			case 'title':
 				var eptitle;
 				var eptitleURL = 'animedb.pl?show=ep&aid='+aid+'&eid='+eid;
-				var altTitle = jaTitle = curTitle = '';
-				if (episodeTitleLang != episodeAltTitleLang && 
-					episode.titles[episodeAltTitleLang] && 
-					episode.titles[episodeAltTitleLang]['title'] != '' &&
-					episode.titles[episodeAltTitleLang]['title'] != curTitle) altTitle = episode.titles[episodeAltTitleLang]['title'];
-				if (episodeTitleLang != 'ja' &&
-					episodeAltTitleLang != 'ja' &&
-					episode.titles['ja'] && 
-					episode.titles['ja']['title'] != '' && 
-					episode.titles['ja']['title'] != altTitle) jaTitle = episode.titles['ja']['title'];
-				if (altTitle != '' || jaTitle != '') {
-					if (episodeTitleDisplay == 1 || (episodeTitleDisplay == 4 && jaTitle == '')) 
-						eptitle = createTextLink(null, episode.getTitle()+' ('+altTitle+')', eptitleURL, null, null, null, null);
-					if (episodeTitleDisplay == 2 || (episodeTitleDisplay == 3 && jaTitle == '')) 
-						eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle, null);
-					if (episodeTitleDisplay == 3 && jaTitle != '') {
-						var titleTag = '';
-						if (altTitle != '') titleTag = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle + ' / ';
-						eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, titleTag += jaTitle, null);
-					}
-					if (episodeTitleDisplay == 4 && jaTitle != '') {
-						var titleTag = ' (';
-						if (altTitle != '') titleTag += altTitle+' / ';
-						eptitle = createTextLink(null, episode.getTitle()+ titleTag +jaTitle+ ')', eptitleURL, null, null, null, null);
-					}
-				} else eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, null, null);
+				var eptitleText = "";
+				if (episode.seenDate == 0 && config && config['lay'] && config['lay']['LAY_NOSPOILER']) {
+					eptitleText = (anime.type != 'movie' ? 'Episode' : 'Part') + ' ' + episode.epno;
+					eptitle = createTextLink(null, eptitleText, eptitleURL, null, null, null, null);
+				} else {
+					var altTitle = jaTitle = curTitle = '';
+					if (episodeTitleLang != episodeAltTitleLang && 
+						episode.titles[episodeAltTitleLang] && 
+						episode.titles[episodeAltTitleLang]['title'] != '' &&
+						episode.titles[episodeAltTitleLang]['title'] != curTitle) altTitle = episode.titles[episodeAltTitleLang]['title'];
+					if (episodeTitleLang != 'ja' &&
+						episodeAltTitleLang != 'ja' &&
+						episode.titles['ja'] && 
+						episode.titles['ja']['title'] != '' && 
+						episode.titles['ja']['title'] != altTitle) jaTitle = episode.titles['ja']['title'];
+					if (altTitle != '' || jaTitle != '') {
+						if (episodeTitleDisplay == 1 || (episodeTitleDisplay == 4 && jaTitle == '')) 
+							eptitle = createTextLink(null, episode.getTitle()+' ('+altTitle+')', eptitleURL, null, null, null, null);
+						if (episodeTitleDisplay == 2 || (episodeTitleDisplay == 3 && jaTitle == '')) 
+							eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle, null);
+						if (episodeTitleDisplay == 3 && jaTitle != '') {
+							var titleTag = '';
+							if (altTitle != '') titleTag = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle + ' / ';
+							eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, titleTag += jaTitle, null);
+						}
+						if (episodeTitleDisplay == 4 && jaTitle != '') {
+							var titleTag = ' (';
+							if (altTitle != '') titleTag += altTitle+' / ';
+							eptitle = createTextLink(null, episode.getTitle()+ titleTag +jaTitle+ ')', eptitleURL, null, null, null, null);
+						}
+					} else eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, null, null);
+				}
 				if (episode.seenDate != 0 || icons['recap'] || icons['comment']) {
 					var watchedState = document.createElement('span');
 					watchedState.className = 'icons';
