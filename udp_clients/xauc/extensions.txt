@@ -1,0 +1,7 @@
+# Valid extensions, one per line
+# comments can only be the whole of the line
+avi
+mkv
+ogm
+mp4
+wmv
