@@ -38,70 +38,64 @@ margin: 0;
 clear: right;
 border: none;
 }
-
 #layout-main .g_section,
 #layout-main .g_list
 {
 clear: both;
 }
-
 #layout-main .g_list.type
 {
 float: left;
 }
-
 #layout-main .g_list.limit
 {
 float: right;
 }
-
-
 html
 {
-	width: 100%;
-	height: 100%;
-	font-weight: normal;
-	font-size: 10px;
-	line-height: 1.2;
-	font-family: "Arial Unicode MS", Verdana, Tahoma, Arial, Helvetica, sans-serif;
-	color: white;
-	background-image: url(images/bg_1.gif);
+width: 100%;
+height: 100%;
+font-weight: normal;
+font-size: 10px;
+line-height: 1.2;
+font-family: "Arial Unicode MS", Verdana, Tahoma, Arial, Helvetica, sans-serif;
+color: white;
+background-image: url(images/bg_1.gif);
 }
 body
 {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	color: white;
+width: 100%;
+height: 100%;
+margin: 0;
+padding: 0;
+border: 0;
+color: white;
 }
-
 span.link,
 a
 {
-	text-decoration: none;
-	color: #ADD8E6;
-	cursor: pointer;
+text-decoration: none;
+color: #ADD8E6;
+cursor: pointer;
 }
 span.link:hover,
 a:active
 {
-	color: red;
+color: red;
 }
 a img
 {
-	border: 0;
+border: 0;
 }
 th
 {
-	font-weight: normal;
-	text-align: left;
-	background-image: url(images/redpixel.png)
+font-weight: normal;
+text-align: left;
+background-image: url(images/redpixel.png)
 }
 fieldset
 {
-	display: none;
+display: none;
 }
 form input[type="text"],
 form input[type="checkbox"],
@@ -110,12 +104,12 @@ form textarea,
 form select,
 select
 {
-	color: white;
-	background-color: black;
-	border: 0;
-	font-family: Arial Unicode MS;
-	font-size: 11px;
-	margin-left: 0.3em;
+color: white;
+background-color: black;
+border: 0;
+font-family: Arial Unicode MS;
+font-size: 11px;
+margin-left: 0.3em;
 }
 #style_next,
 #style_prev,
@@ -123,12 +117,18 @@ select
 #addAudLang,
 #remSubLang,
 #addSubLang,
-form input[type="submit"]
+form input[type="submit"],
+a.button,
+input.button,
+button.button,
+a.confirmButton,
+input.confirmButton,
+button.confirmButton
 {
-	margin-top: 0.3em;
-	color: #797979;
-	border-style: dashed;
-	background-image: url(images/bg_2.gif);
+margin-top: 0.3em;
+color: #797979;
+border-style: dashed;
+background-image: url(images/bg_2.gif);
 }
 #style_next:hover,
 #style_prev:hover,
@@ -136,236 +136,245 @@ form input[type="submit"]
 #addAudLang:hover,
 #remSubLang:hover,
 #addSubLang:hover,
-form input[type="submit"]:hover
+form input[type="submit"]:hover,
+a.button:hover,
+input.button:hover,
+button.button:hover,
+a.confirmButton:hover,
+input.confirmButton:hover,
+button.confirmButton:hover
 {
-	color: white;
-	background-image: url(images/blackpixel.png);
-	border-color: #797979;
+color: white;
+background-image: url(images/blackpixel.png);
+border-color: #797979;
 }
 ul,
 ol
 {
-	list-style-type: none;
-	list-style-image: none;
-	list-style-position: outside;
+list-style-type: none;
+list-style-image: none;
+list-style-position: outside;
 }
 dl dt
 {
-	float: left;
-	clear: left;
+float: left;
+clear: left;
 }
 dl
 {
-	display: table;
-	margin: 1px auto 1px auto;
+display: table;
+margin: 1px auto 1px auto;
 }
 caption
 {
-	margin: 0.7em 0 0.4em 0;
-	font-weight: bold;
-	font-size: 110%;
+margin: 0.7em 0 0.4em 0;
+font-weight: bold;
+font-size: 110%;
 }
 span
 {
-	display: inline;
+display: inline;
 }
 h2
 {
-	text-align: center;
-	font-size: 117%;
+text-align: center;
+font-size: 117%;
 }
 h4
 {
-	font-size: 100%;
-	text-align: center;
+font-size: 100%;
+text-align: center;
 }
 table
 {
-	border-spacing: 0;
+border-spacing: 0;
 }
 *.g_note
 {
-	font-style: italic;
-	font-weight: normal;
+font-style: italic;
+font-weight: normal;
 }
 *.g_note *
 {
-	font-style: normal;
+font-style: normal;
 }
 *.g_note li
 {
-	font-style: italic;
+font-style: italic;
 }
 *.g_note em
 {
-	font-style: italic;
-	text-decoration: underline;
+font-style: italic;
+text-decoration: underline;
 }
 div.g_note h4
 {
-	display: inline;
+display: inline;
 }
 *.g_vital, *.g_vital *
 {
-	color: red;
-	font-weight: bolder;
+color: red;
+font-weight: bolder;
 }
 tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-image: url(images/bg_2.gif);
+background-image: url(images/bg_2.gif);
 }
 *.g_navprev
 {
-	float: left;
-	padding-left: 0.3em;
+float: left;
+padding-left: 0.3em;
 }
 *.g_navnext
 {
-	float: right;
-	padding-right: 0.3em;
+float: right;
+padding-right: 0.3em;
 }
 span.g_navprev,
 span.g_navnext
 {
-	font-style: italic;
+font-style: italic;
 }
 #layout-content div.userpage_all ul.g_list
 {
-	float: none;
-	text-align: center;
+float: none;
+text-align: center;
 }
 #layout-content ul.g_list li
 {
-	padding: 0 0 0 0;
+padding: 0 0 0 0;
 }
 td.action
 {
-	text-align: center;
+text-align: center;
+}
+*.hide
+{
+display: none !important;
 }
 #layout-content div.g_msg.error
 {
-	border: 1px solid #c40d0d;
-	background: url(images/bg_2.gif);
-	margin: 2em;
-	padding: 1.2em;
+border: 1px solid #c40d0d;
+background: url(images/bg_2.gif);
+margin: 2em;
+padding: 1.2em;
 }
 #layout-content div.g_msg.warning
 {
-	border: 1px solid #ff6000;
-	background: url(images/bg_2.gif);
-	margin: 2em;
-	padding: 1.2em;
+border: 1px solid #ff6000;
+background: url(images/bg_2.gif);
+margin: 2em;
+padding: 1.2em;
 }
 #layout-content div.g_msg.note
 {
-	border: 1px solid maroon;
-	background: url(images/bg_2.gif);
-	margin: 2em;
-	padding: 1.2em;
+border: 1px solid maroon;
+background: url(images/bg_2.gif);
+margin: 2em;
+padding: 1.2em;
 }
 #layout-content div.g_msg.success
 {
-	border: 1px solid #1D6125;
-	background: url(images/bg_2.gif);
-	margin: 2em;
-	padding: 1.2em;
+border: 1px solid #1D6125;
+background: url(images/bg_2.gif);
+margin: 2em;
+padding: 1.2em;
 }
 #layout-content div.g_msg.error h3
 {
-	color: red;
+color: red;
 }
 #layout-content div.g_msg.warning h3
 {
-	color: #FF6000;
+color: #FF6000;
 }
 #layout-content div.g_msg.note h3
 {
-	color: #006600;
+color: #006600;
 }
 #layout-content div.g_msg.success h3
 {
-	color: #2EB42E;
+color: #2EB42E;
 }
 #layout-content div.g_msg.error *,
 #layout-content div.g_msg.warning *,
 #layout-content div.g_msg.note *,
 #layout-content div.g_msg.success *
 {
-	display: inline;
+display: inline;
 }
 #layout-content ul.g_numonpage
 {
-	float: right;
+float: right;
 }
 /* Transitional Hacks */
 #layout-content *[align="left"]
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content *[align="left"] > *
 {
-	margin-left: 0;
+margin-left: 0;
 }
 #layout-content *[align="center"]
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content *[align="center"] > *
 {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: left;
+margin-left: auto;
+margin-right: auto;
+text-align: left;
 }
 #layout-content *[align="right"]
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content *[align="right"] > *
 {
-	margin-right: 0;
+margin-right: 0;
 }
 #layout-content > h1
 {
-	text-align: left;
+text-align: left;
 }
-
 #layout-content table,
 #layout-content table caption
 {
-	margin-left: auto;
-	margin-right: auto;
+margin-left: auto;
+margin-right: auto;
 }
 #layout-content .g_filterlist,
 #layout-content .g_list.links,
 #layout-content .g_info
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content .g_list.links .g_odd
 {
-	background: inherit;
+background: inherit;
 }
 #layout-content div.g_menu
 {
-	float: right;
+float: right;
 }
 #layout-content div.g_filterlist
 {
-	clear: both;
+clear: both;
 }
 #layout-content div.block
 {
-	display: table;
-	margin-left: auto;
-	margin-right: auto;
+display: table;
+margin-left: auto;
+margin-right: auto;
 }
 #layout-content div.block div.image
 {
-	display: table-cell;
-	vertical-align: middle;
-	padding-right: 10px;
+display: table-cell;
+vertical-align: middle;
+padding-right: 10px;
 }
 #layout-content td.state,
 #layout-content td.type,
@@ -374,22 +383,22 @@ td.action
 #layout-content td.vote,
 #layout-content td.action
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content td.count
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content ul.g_list.nav,
 #layout-content ul.g_list.jump,
 #layout-content ul.g_list.limit,
 #layout-tabs ul.main-tabs
 {
-	padding-left: 0;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	width: 100%;
-	text-align: center;
+padding-left: 0;
+padding-top: 2px;
+padding-bottom: 2px;
+width: 100%;
+text-align: center;
 }
 #layout-content ul.g_list.nav li,
 #layout-content ul.g_list.links li,
@@ -397,11 +406,11 @@ td.action
 #layout-content ul.g_list.limit li,
 #layout-tabs ul.main-tabs li
 {
-	display: inline;
-	margin-left: 0;
-	margin-right: 0;
-	padding-left: 0;
-	padding-right: 0;
+display: inline;
+margin-left: 0;
+margin-right: 0;
+padding-left: 0;
+padding-right: 0;
 }
 #layout-content ul.g_list.nav li a,
 #layout-content ul.g_list.links li a,
@@ -409,14 +418,14 @@ td.action
 #layout-content ul.g_list.limit li a,
 #layout-tabs ul.main-tabs
 {
-	display: inline;
-	font-style: normal;
+display: inline;
+font-style: normal;
 }
 #layout-content ul.g_list.jump li+li:before,
 #layout-content ul.g_list.limit li+li:before
 {
-	font-style: normal;
-	content: " | ";
+font-style: normal;
+content: " | ";
 }
 #layout-content ul.g_list.nav li.prev:after,
 #layout-content ul.g_list.nav li.next:after,
@@ -425,91 +434,91 @@ td.action
 #layout-content ul.g_list.jump li.next:before,
 #layout-content ul.g_list.jump li.all:before
 {
-	content: "";
+content: "";
 }
 #layout-content ul.g_list.jump li.prev
 {
-	padding-left: 1em;
-	float: left;
+padding-left: 1em;
+float: left;
 }
 #layout-content ul.g_list.jump li.next
 {
-	padding-right: 1em;
-	float: right;
+padding-right: 1em;
+float: right;
 }
 #layout-content ul.g_list.links li+li:before,
 #layout-content ul.g_list.nav li+li:before,
 #layout-content ul.main-tabs li+li:before
 {
-	content: " - ";
+content: " - ";
 }
 #layout-tabs ul.main-tabs li
 {
-	background: inherit;
-	padding: 0 0 0 0;
-	margin: 0 0 0 0;
+background: inherit;
+padding: 0 0 0 0;
+margin: 0 0 0 0;
 }
 #layout-tabs ul.main-tabs li.selected a
 {
-	color: #FF6600;
+color: #FF6600;
 }
 #layout-nav
 {
-	position: fixed;
-	width: 100%;
-	height: 2em;
-	padding-top: 0px;
-	/*background: #232323;*/
-	background-image: url(images/bg_2.gif);
+position: fixed;
+width: 100%;
+height: 2em;
+padding-top: 0px;
+/*background: #232323;*/
+background-image: url(images/bg_2.gif);
 }
 #layout-menu
 {
-	text-align: left;
-	margin-left: 1em;
-	margin-right: 1em;
-	margin-bottom: 1em;
-	margin-top: 0.4em;
-	display: block;
+text-align: left;
+margin-left: 1em;
+margin-right: 1em;
+margin-bottom: 1em;
+margin-top: 0.4em;
+display: block;
 }
 #layout-menu ul
 {
-	list-style: none;
-	margin: 0;
-	padding-left: 2px;
-	padding-top: 3px;
-	padding-bottom: 1px;
+list-style: none;
+margin: 0;
+padding-left: 2px;
+padding-top: 3px;
+padding-bottom: 1px;
 }
 #layout-menu ul li
 {
-	list-style: none;
-	margin-top: 0px;
-	height: 1em;
+list-style: none;
+margin-top: 0px;
+height: 1em;
 }
 #layout-menu div.menu li.calendar, #layout-menu div.menu li.ed2kdump, #layout-menu div.menu li.genre
 {
-	margin-bottom: 0.3em;
+margin-bottom: 0.3em;
 }
 #layout-menu div.menu li.creqmod
 {
-	margin-top: 0.3em;
+margin-top: 0.3em;
 }
 #layout-menu div.menu .g_odd
 {
-	background: none;
+background: none;
 }
 #layout-menu div.menu li.forum
 {
-	font-weight: bold;
+font-weight: bold;
 }
 #layout-menu span.login,
 #layout-menu span.user
 {
-	text-align: left;
-	display: block;
+text-align: left;
+display: block;
 }
 #layout-menu span.login a
 {
-	display: inline;
+display: inline;
 }
 #layout-menu #newnews:before,
 #layout-menu #newnews:after,
@@ -518,18 +527,18 @@ td.action
 #layout-menu #newmessages:after,
 #layout-menu a.history:after
 {
-	content: "!";
-	font-weight: bold;
-	color: red;
-	margin: 0.2em;
+content: "!";
+font-weight: bold;
+color: red;
+margin: 0.2em;
 }
 #layout-menu #newmessages,
 #layout-menu #newnews
 {
-	display: table-caption;
-	text-align: center;
-	white-space: nowrap;
-	margin: auto;
+display: table-caption;
+text-align: center;
+white-space: nowrap;
+margin: auto;
 }
 #layout-search
 {
@@ -541,224 +550,225 @@ clear: right;
 }
 #layout-search form input.text
 {
-	width: 11.4em;
-	font-size: 10px;
-	margin: 0;
-	padding: 0;
-	background: url(images/whitepixel.png);
+width: 11.4em;
+font-size: 10px;
+margin: 0;
+padding: 0;
+background: url(images/whitepixel.png);
 }
 #layout-search form p
 {
-	text-align: right;
+text-align: right;
 }
 #layout-search form input.submit,
 form button[type="submit"]
 {
-	margin: 0;
-	padding: 0;
-	color: white;
-	font-size: 11px;
-	border-style: dashed;
-	border-color: #565656;
-	background: url(images/whitepixel.png);
+margin: 0;
+padding: 0;
+color: white;
+font-size: 11px;
+font-weight: normal;
+border-style: dashed;
+border-color: #565656;
+background: url(images/whitepixel.png);
 }
 #layout-search form input.submit:hover,
 form button[type="submit"]:hover
 {
-	color: #ff6000;
-	background: url(images/redpixel.png);
-	border-color: #797979;
+color: #ff6000;
+background: url(images/redpixel.png);
+border-color: #797979;
 }
 #layout-content
 {
-	margin: 0 0 0 0;
-	padding-top: 3em;
-	padding-bottom: 0.1em;
-	width: 100%;
+margin: 0 0 0 0;
+padding-top: 3em;
+padding-bottom: 0.1em;
+width: 100%;
 }
 body.nonav #layout-content
 {
-	width: auto;
-	height: auto;
-	margin: 0;
+width: auto;
+height: auto;
+margin: 0;
 }
 body.nonav #layout-content h1
 {
-	display: none;
+display: none;
 }
 #layout-content h1
 {
-	text-align: center;
-	font-size: 14pt;
-	font-weight: lighter;
-	font-family:"Arial Unicode MS", Arial,Verdana, sans-serif;
-	margin-top: 0;
-	padding-top: 1.1em;
+text-align: center;
+font-size: 14pt;
+font-weight: lighter;
+font-family:"Arial Unicode MS", Arial,Verdana, sans-serif;
+margin-top: 0;
+padding-top: 1.1em;
 }
 #layout-nav a
 {
-	color: white;
+color: white;
 }
 #layout-nav li li:hover a
 {
-	color: #ff6000;
-	cursor: default;
-	display:block;
-	background-image: url(images/whitepixel.png);
+color: #ff6000;
+cursor: default;
+display:block;
+background-image: url(images/whitepixel.png);
 }
 #layout-content div.section
 {
-	border-top: 2px groove #486187;
-	padding: 0.7em 0 0.5em 0;
+border-top: 2px groove #486187;
+padding: 0.7em 0 0.5em 0;
 }
 #layout-content div.section.vote form
 {
-	margin-bottom: 0.5em;
+margin-bottom: 0.5em;
 }
 #layout-content div.section.vote form *
 {
-	margin: 0;
+margin: 0;
 }
 #layout-content div.section.vote form label
 {
-	display: block;
+display: block;
 }
 #layout-footer
 {
-	text-align: center;
-	margin-left: 0;
-	background-image: url(images/bg_2.gif);
+text-align: center;
+margin-left: 0;
+background-image: url(images/bg_2.gif);
 }
 #layout-footer p
 {
-	margin-top: 3em;
-	padding-bottom: 0.3em;
+margin-top: 3em;
+padding-bottom: 0.3em;
 }
 #layout-content div.anime_info div.data dd.anirec
 {
-	overflow: visible;
+overflow: visible;
 }
 #layout-content div.anime_info div.data dd.anirec a.i_help
 {
-	padding: 7px 8px 7px 12px;
+padding: 7px 8px 7px 12px;
 }
 #layout-content div.anime_vote form
 {
-	margin-bottom: 0.5em;
+margin-bottom: 0.5em;
 }
 #layout-content div.anime_vote form *
 {
-	margin: 0;
+margin: 0;
 }
 #layout-content div.anime_vote form label
 {
-	display: block;
+display: block;
 }
 #layout-content div.anime_info div.desc
 {
-	margin: 0.7em 0.3em 0.3em 0.3em;
+margin: 0.7em 0.3em 0.3em 0.3em;
 }
 #layout-content div.anime_vote form.permvote
 {
-	margin: 1.1em 0 1.1em 0;
+margin: 1.1em 0 1.1em 0;
 }
 #layout-content div.anime_vote form.tempvote
 {
-	width: 50%;
-	margin: 1.1em 0.6em 1.1em 0;
-	float: left;
+width: 50%;
+margin: 1.1em 0.6em 1.1em 0;
+float: left;
 }
 #layout-content div.anime_vote form.tempvote div
 {
-	padding-right: 6px;
-	float: right;
+padding-right: 6px;
+float: right;
 }
 #layout-content div.anime_mylist
 {
-	clear: left;
+clear: left;
 }
 #layout-content div.anime_mylist th,
 #layout-content div.anime_group th
 {
-	font-weight: normal;
-	background-image: url(images/redpixel.png);
+font-weight: normal;
+background-image: url(images/redpixel.png);
 }
 #layout-content div.anime_mylist th.heading,
 #layout-content div.anime_group th.info
 {
-	font-weight: bold;
-	padding: 0.1em 0.9em 0.1em 0.9em;
+font-weight: bold;
+padding: 0.1em 0.9em 0.1em 0.9em;
 }
 #layout-content div.anime_mylist th.anime
 {
-	width: 300px;
-	text-align: left;
+width: 300px;
+text-align: left;
 }
 #layout-content div.anime_mylist td.eps,
 #layout-content div.anime_mylist td.seen
 {
-	padding: 0.1em 0.9em 0.1em 0.9em;
-	text-align: center;
+padding: 0.1em 0.9em 0.1em 0.9em;
+text-align: center;
 }
 #layout-content div.anime_group th.group
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content div.anime_group td
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.anime_group td.lastep,
 #layout-content div.anime_group td.cmts
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.anime_group td.group,
 #layout-content div.anime_group td.lastupdate
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content div.anime_group td.state.complete,
 #layout-content div.anime_group td.state.finished
 {
-	font-weight: bold;
+font-weight: bold;
 }
 #layout-content div.anime_group td.state.stalled,
 #layout-content div.anime_group td.state.unknown
 {
-	font-style: italic;
+font-style: italic;
 }
 #layout-content div.anime_group td.state.unknown
 {
-	content: "N/A";
+content: "N/A";
 }
 #layout-content div.anime_all div.episodes table.eplist,
 #layout-content div.anime_all div.episodes table.filelist
 {
-	width: 99%;
+width: 99%;
 }
 #layout-content div.anime_all th
 {
-	font-weight: normal;
-	text-align: left;
+font-weight: normal;
+text-align: left;
 }
 #layout-content div.anime_all td
 {
-	height: 1.6em;
-	padding: 0.1em 0.1em 0.1em 0.1em;
+height: 1.6em;
+padding: 0.1em 0.1em 0.1em 0.1em;
 }
 #layout-content div.anime_all table.eplist
 {
-	padding: 0;
-	margin-bottom: 15px;
+padding: 0;
+margin-bottom: 15px;
 }
 #layout-content div.anime_all table.filelist
 {
-	padding: 2px 3px 15px 57px;
+padding: 2px 3px 15px 57px;
 }
 #layout-content div.anime_all tr.newtype td
 {
-	border-top: #c12312 1px dotted;
+border-top: #c12312 1px dotted;
 }
 #layout-content div.anime_all tr.good td,
 #layout-content div.group_all tr.good td,
@@ -766,59 +776,59 @@ body.nonav #layout-content h1
 #layout-content tr.verified.yes td,
 #layout-content tr.verified.yes th
 {
-	background-image: url(images/greenpixel.png);
+background-image: url(images/greenpixel.png);
 }
 #layout-content div.anime_all tr.invalid td,
 #layout-content div.group_all tr.invalid td,
 #layout-content div.ep_all tr.invalid td,
 #layout-content div.mydb_all tr.lame td
 {
-	background-image: url(images/badredpixel.png);
+background-image: url(images/badredpixel.png);
 }
 #layout-content div.anime_all tr.deprecated td,
 #layout-content div.group_all tr.deprecated td,
 #layout-content div.ep_all tr.deprecated td
 {
-	background-image: url(images/whitepixel.png);
+background-image: url(images/whitepixel.png);
 }
 #layout-content div.anime_all tr.generic,
 #layout-content div.ep_all tr.generic
 {
-	background-image: url(images/bg_3.gif)
+background-image: url(images/bg_3.gif)
 }
 #layout-content div.anime_all tr.generic td,
 #layout-content div.ep_all tr.generic td
 {
-	border-style: dotted;
-	border-color: #565656;
-	border-width: 1px;
-	border-right-width: 0;
-	border-left-width: 0;
+border-style: dotted;
+border-color: #565656;
+border-width: 1px;
+border-right-width: 0;
+border-left-width: 0;
 }
 #layout-content div.anime_all tr.generic td:first-child,
 #layout-content div.ep_all tr.generic td:first-child
 {
-	border-style: dotted;
-	border-color: #565656;
-	border-width: 1px;
-	border-left-width: 1px;
-	border-right-width: 0;
+border-style: dotted;
+border-color: #565656;
+border-width: 1px;
+border-left-width: 1px;
+border-right-width: 0;
 }
 #layout-content div.anime_all tr.generic td:last-child,
 #layout-content div.ep_all tr.generic td:last-child
 {
-	border-style: dotted;
-	border-color: #565656;
-	border-width: 1px;
-	border-right-width: 1px;
-	border-left-width: 0;
+border-style: dotted;
+border-color: #565656;
+border-width: 1px;
+border-right-width: 1px;
+border-left-width: 0;
 }
 #layout-content div.anime_all td.epusers,
 #layout-content div.anime_all td.files,
 #layout-content div.anime_all td.id,
 #layout-content div.anime_all td.size
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.anime_all th.expand,
 #layout-content div.anime_all td.expand,
@@ -828,23 +838,23 @@ body.nonav #layout-content h1
 #layout-content div.anime_all td.resolution,
 #layout-content div.anime_all td.source
 {
-	text-align: center; /* Not actually much use, doesn't center block images */
+text-align: center; /* Not actually much use, doesn't center block images */
 }
 #layout-content div.anime_all td.stat .i_icon
 {
-	float: left;
+float: left;
 }
 #layout-content div.anime_all td.stat .i_crc_yes
 {
-	margin-left: 3px;
+margin-left: 3px;
 }
 #layout-content div.anime_all td.qual .i_icon
 {
-	margin-left: 0;
+margin-left: 0;
 }
 #layout-content div.anime_all td.title div
 {
-	float: right;
+float: right;
 }
 #layout-main *.icons *.i_icon,
 #layout-main div.ep_files table.filelist td .icons .i_icon,
@@ -859,106 +869,105 @@ body.nonav #layout-content h1
 #layout-main div.mylist_all div.icons span.i_icon,
 #layout-main div.group_all div.icons span.i_icon
 {
-	float: left;
-	padding: 0px 2px 0px 2px;
+float: left;
+padding: 0px 2px 0px 2px;
 }
 #layout-main div.anime_all div.info th span.i_icon
 {
-	display: inline;
-	float: right;
-	padding: 0px 1px 0px 1px;
+display: inline;
+float: right;
+padding: 0px 1px 0px 1px;
 }
 #layout-main td.icons.quality *.i_icon
 {
-	padding: 0px;
+padding: 0px;
 }
 #layout-content div.anime_all div.actions
 {
-	text-align: center;
-	margin: auto;
+text-align: center;
+margin: auto;
 }
 #layout-content div.anime_edit
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.anime_edit div
 {
-	padding-left: 19%;
-	padding-right: 19%;
-	margin-top: 1.2em;
+padding-left: 19%;
+padding-right: 19%;
+margin-top: 1.2em;
 }
 #layout-content div.anime_awards
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.anime_group td.mylist
 {
-	font-weight: bold;
-	text-align: center;
+font-weight: bold;
+text-align: center;
 }
 #layout-content div.anime_group td.mylist.new
 {
-	color: red;
+color: red;
 }
 #layout-content div.anime_group td.mylist:before
 {
-	content: "* ";
+content: "* ";
 }
 #layout-content div.anime_group td.mylist:after
 {
-	content: " *";
+content: " *";
 }
 #layout-content div.ed2kdump_box
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.anime_all a.action:before
 {
-	content: "[";
+content: "[";
 }
 #layout-content div.anime_all a.action:after
 {
-	content: "]";
+content: "]";
 }
 #layout-content div.ep_info div.info table
 {
-	margin-left: auto;
-	margin-right: auto;
+margin-left: auto;
+margin-right: auto;
 }
 #layout-content div.ep_files h4,
 #layout-content div.ep_vote p
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.agcmts_entries
 {
-	padding-left: 2em;
-	padding-right: 2em;
+padding-left: 2em;
+padding-right: 2em;
 }
 #layout-content div.agcmts_entries div.comment + div.comment
 {
-	margin-top: 2em;
+margin-top: 2em;
 }
 #layout-content div.agcmts_entries div.comment h4
 {
-	text-align: left;
-	background-image: url(images/redpixel.png);
-	margin-bottom: 0;
-	
+text-align: left;
+background-image: url(images/redpixel.png);
+margin-bottom: 0;
 }
 #layout-content div.agcmts_entries div.comment h4 a
 {
-	color: white;
+color: white;
 }
 #layout-content div.agcmts_entries div.comment span.stamp
 {
-	display: block;
-	text-align: right;
-	padding-right: 0.5em;
+display: block;
+text-align: right;
+padding-right: 0.5em;
 }
 #layout-content div.agcmts_add p.g_howto
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content div.agcmts_add form div textarea,
 #layout-content div.animegroup_all form div textarea,
@@ -966,10 +975,10 @@ body.nonav #layout-content h1
 #layout-content div.creqmod_all form div textarea,
 #layout-content div.addfilem_all div form div textarea
 {
-	display: block !important;
-	width: 80% !important;
-	margin-left: 10% !important;
-	height: 20em !important;
+display: block !important;
+width: 80% !important;
+margin-left: 10% !important;
+height: 20em !important;
 }
 #layout-content div.agcmts_add form div input,
 #layout-content div.animegroup_all label,
@@ -979,559 +988,558 @@ body.nonav #layout-content h1
 #layout-content div.creqmod_all div.creq_messages > p,
 #layout-content div.addfilem_all form div input
 {
-	margin: 0.3em 0 0 10%;
+margin: 0.3em 0 0 10%;
 }
 #layout-content div.agcmts_all div.agcmts_head,
 #layout-content div.agcmts_all div.agcmts_add
 {
-	margin: 1em;
+margin: 1em;
 }
-
 #layout-content div.animelist_list table
 {
-	margin-left: auto;
-	margin-right: auto;
+margin-left: auto;
+margin-right: auto;
 }
 #layout-content div.animelist_list table th *.i_icon
 {
-	float: left;
+float: left;
 }
 
 #layout-content div.animelist_list .g_list ul:before
 {
-	content: "Jump to"
+content: "Jump to"
 }
 #layout-content div.animelist_list .g_list il:before,
 #layout-content div.animelist_list .g_list il:after
 {
-	content: ""
+content: ""
 }
 #layout-content div.dbstats_all
 {
-	width: 80%;
+width: 80%;
 }
 #layout-content div.dbstats_all div.stat
 {
-	float: left;
-	margin: 0.3em 0.1em 0.1em 0.3em;
-	border: 2px #BFC2CA ridge;
-	width: 20em;
+float: left;
+margin: 0.3em 0.1em 0.1em 0.3em;
+border: 2px #BFC2CA ridge;
+width: 20em;
 }
 #layout-content div.dbstats_all div.actions
 {
-	clear: left;
-	text-align: center;
+clear: left;
+text-align: center;
 }
 #layout-content div.dbstats_all h3
 {
-	clear: left;
-	font-size: 100%;
-	text-align: center;
+clear: left;
+font-size: 100%;
+text-align: center;
 }
 #layout-content div.dbstats_all h4
 {
-	background-image: url(images/redpixel.png);
-	color: white;
-	font-weight: bold;
-	font-size: 100%;
-	margin: 0;
-	text-align: center;
-	padding: 0.3em;
-	margin-bottom: 0.1em;
+background-image: url(images/redpixel.png);
+color: white;
+font-weight: bold;
+font-size: 100%;
+margin: 0;
+text-align: center;
+padding: 0.3em;
+margin-bottom: 0.1em;
 }
 #layout-content div.dbstats_all div.dbstats ol
 {
-	margin: 0;
-	padding: 0;
+margin: 0;
+padding: 0;
 }
 #layout-content div.dbstats_all div.dbstats li
 {
-	list-style: none;
-	text-align: left;
-	padding: 0.1em;
+list-style: none;
+text-align: left;
+padding: 0.1em;
 }
 #layout-content div.dbstats_all div.dbstats li span
 {
-	display: block;
-	float: left;
-	height: 100%;
-	width: 4.2em;
-	text-align: right;
-	white-space: nowrap;
+display: block;
+float: left;
+height: 100%;
+width: 4.2em;
+text-align: right;
+white-space: nowrap;
 }
 #layout-content div.dbstats_all div.dbstats li a
 {
-	display: table;
-	margin-left: 0.3em;
+display: table;
+margin-left: 0.3em;
 }
 #layout-content div.dbstats_all div.dbstats table
 {
-	width: 100%;
+width: 100%;
 }
 /* Default center is probably too zealous... */
 #layout-content div.ep_info table
 {
-	margin-left: 0;
+margin-left: 0;
 }
 #layout-content div.ep_vote form
 {
-	margin-bottom: 0.5em;
+margin-bottom: 0.5em;
 }
 #layout-content div.ep_vote form *
 {
-	margin: 0;
+margin: 0;
 }
 #layout-content div.ep_vote form label
 {
-	display: block;
+display: block;
 }
 #layout-content div.genren_all
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.genren_all div.categories
 {
-	width: 90%;
-	margin: 1em auto 1em auto;
-	text-align: left;
+width: 90%;
+margin: 1em auto 1em auto;
+text-align: left;
 }
 #layout-content div.genren_all div.controls
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.genren_all a.i_icon,
 #layout-content #cattree a.i_icon
 {
-	position: relative;
-	right: 18px;
-	float: left;
-	margin-right: -15px;
+position: relative;
+right: 18px;
+float: left;
+margin-right: -15px;
 }
 #layout-content div.genren_all li,
 #layout-content #cattree li
 {
-	list-style: none outside;
-	line-height: 14px;
+list-style: none outside;
+line-height: 14px;
 }
 #layout-content div.genren_all li span,
 #layout-content #cattree li span
 {
-	display: block;
+display: block;
 }
 #layout-content #cattree li.collapsed ul
 {
-	display: none;
+display: none;
 }
 #layout-content div.group_released td.state.complete,
 #layout-content div.group_released td.state.finished
 {
-	font-weight: bold;
+font-weight: bold;
 }
 #layout-content div.group_released td.state.stalled
 {
-	font-style: italic;
+font-style: italic;
 }
 #layout-content div.group_released td.count
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.group_vote,
 #layout-content div.group_released td.state,
 #layout-content div.group_released td.rating
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.hint2_note
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.hint2_hinter
 {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
-	text-align: center;
+padding-left: 0.5em;
+padding-right: 0.5em;
+text-align: center;
 }
 #layout-content div.hint2_jscontrols
 {
-	float: right;
-	padding: 0 0 0.5em 0;
+float: right;
+padding: 0 0 0.5em 0;
 }
 #layout-content div.hint2_results
 {
-	clear: both;
+clear: both;
 }
 #layout-content div.hint2_jscontrols h4
 {
-	background-color: #494D59;
-	color: #bbbbbb;
-	font-weight: normal;
-	margin: 0;
+background-color: #494D59;
+color: #bbbbbb;
+font-weight: normal;
+margin: 0;
 }
 #layout-content div.hint2_jscontrols ul,
 #layout-content div.hint2_jscontrols li
 {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+list-style: none;
+margin: 0;
+padding: 0;
 }
 #layout-content div.hint2_hinter.jason form
 {
-	margin-right: 12em;
+margin-right: 12em;
 }
 #layout-content div.hint2_hinter div.collapse *
 {
-	display: none;
+display: none;
 }
 #layout-content div.hint2_hinter *.g_note
 {
-	display: block;
+display: block;
 }
 #layout-content div.hint2_hinter.nonote *.g_note
 {
-	display: none;
+display: none;
 }
 #layout-content div.hint2_hinter h2
 {
-	font-size: 160%;
-	margin: 0.5em 0 0 0;
+font-size: 160%;
+margin: 0.5em 0 0 0;
 }
 #layout-content div.hint2_hinter li
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content div.hint2_hinter label
 {
-	white-space: nowrap;
-	line-height: 300%;
-	padding: 0 0.3em 0 0.2em;
+white-space: nowrap;
+line-height: 300%;
+padding: 0 0.3em 0 0.2em;
 }
 #layout-content div.hint2_hinter #Filter
 {
-	padding-bottom: 2em;
+padding-bottom: 2em;
 }
 #layout-content div.hint2_hinter div.genre
 {
-	margin-left: auto;
-	margin-right: auto;
-	padding-bottom: 0.5em;
-	display: table;
+margin-left: auto;
+margin-right: auto;
+padding-bottom: 0.5em;
+display: table;
 }
 #layout-content div.hint2_hinter div.genre label
 {
-	display: table-cell;
+display: table-cell;
 }
 #layout-content div.hint2_hinter div.collapse div.genre
 {
-	display: none;
+display: none;
 }
 #layout-content div.hint2_all ol
 {
-	height: 8em;
-	list-style: none;
-	overflow: auto;
-	padding: 0 !important;
-	margin: 0;
-	border: 2px transparent solid !important;
-	background: black !important;
-	color: white !important;
+height: 8em;
+list-style: none;
+overflow: auto;
+padding: 0 !important;
+margin: 0;
+border: 2px transparent solid !important;
+background: black !important;
+color: white !important;
 }
 #layout-content div.hint2_all ol li
 {
-	list-style: none;
+list-style: none;
 }
 #layout-content div.hint2_hinter ol li input
 {
-	margin: 0.3em 0.3em 0 0;
+margin: 0.3em 0.3em 0 0;
 }
 #layout-content div.hint2_hinter label input
 {
-	width: 4em;
+width: 4em;
 }
 #layout-content div.hint2_hinter select input
 {
-	width: auto;
+width: auto;
 }
 #layout-content div.latest
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.latest table
 {
-	margin-left: auto;
-	margin-right: auto;
-	min-width: 40%;
-	padding: 1em;
-	clear: both;
+margin-left: auto;
+margin-right: auto;
+min-width: 40%;
+padding: 1em;
+clear: both;
 }
 #layout-content div.latest table td,
 #layout-content div.latest table th
 {
-	padding: 2px;
-	text-align: left;
+padding: 2px;
+text-align: left;
 }
 #layout-content div.latest table td.weight,
 #layout-content div.latest table td.addedby,
 #layout-content div.latest table td.action
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.latest table td.size,
 #layout-content div.latest table td.rating
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.latest table td.date
 {
-	white-space: nowrap;
+white-space: nowrap;
 }
 #layout-content div.latest ul.type
 {
-	float: left;
+float: left;
 }
 #layout-content div.latest ul li
 {
-	list-style: none;
+list-style: none;
 }
 #layout-content div.latest ul.type li:first-child:before
 {
-	content: "type: ";
-	font-style: normal;
+content: "type: ";
+font-style: normal;
 }
 #layout-content div.latestreviews_all ul.g_list
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.latestreviews_all ul.g_list:before
 {
-	content: "show: ";
+content: "show: ";
 }
 #layout-content div.latestreviews_all ul li:first-child:before
 {
-	content: "";
+content: "";
 }
 #layout-content div.latestreviews_all table
 {
-	margin: 0 auto;
+margin: 0 auto;
 }
 #layout-content div.latestreviews_all table th
 {
-	padding: 2px;
-	font-weight: normal;
-	text-align: left;
+padding: 2px;
+font-weight: normal;
+text-align: left;
 }
 #layout-content div.latestreviews_all table td
 {
-	padding: 2px;
+padding: 2px;
 }
 #layout-content div.latestreviews_all td.date
 {
-	white-space: nowrap;
+white-space: nowrap;
 }
 #layout-content div.latestreviews_all div.footer
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.latestreviews_all div.filter
 {
-	margin: 1em 0 1em 0;
+margin: 1em 0 1em 0;
 }
 #layout-content div.latestreviews_all h4
 {
-	display: inline;
+display: inline;
 }
 #layout-content div.main_all h4,
 #layout-content div.main_edit h4,
 #layout-content div.news_all h4
 {
-	background-image: url(images/redpixel.png);
-	font-weight: normal;
-	margin: 0;
+background-image: url(images/redpixel.png);
+font-weight: normal;
+margin: 0;
 }
 #layout-content div.news h4
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content div.main_all div.rightbar
 {
-	width: 16em;
-	clear: right;
-	float: right;
-	text-align: center;
-	margin: 0 0.3em 0 0;
+width: 16em;
+clear: right;
+float: right;
+text-align: center;
+margin: 0 0.3em 0 0;
 }
 #layout-content div.main_all div.rightbar p
 {
-	margin: 1.2em 0 0 0;
+margin: 1.2em 0 0 0;
 }
 #layout-content div.main_all div.rightbar h3
 {
-	font-size: 100%;
-	margin: 1.5em 0 0.4em 0;
+font-size: 100%;
+margin: 1.5em 0 0.4em 0;
 }
 #layout-content div.main_all div.rightbar h4
 {
-	padding: 0.1em;
+padding: 0.1em;
 }
 #layout-content div.main_all div.rightbar ol
 {
-	margin: 0em 0 0.4em 0;
-	padding: 0;
+margin: 0em 0 0.4em 0;
+padding: 0;
 }
 #layout-content div.main_all div.rightbar li
 {
-	list-style: none;
-	text-align: left;
+list-style: none;
+text-align: left;
 }
 #layout-content div.main_all > div.news
 {
-	clear: none;
-	margin-right: 20em;
+clear: none;
+margin-right: 20em;
 }
 #layout-content div.main_all div.rightbar li span
 {
-	display: block;
-	float: left;
-	height: 100%;
-	width: 4em;
-	text-align: center;
+display: block;
+float: left;
+height: 100%;
+width: 4em;
+text-align: center;
 }
 #layout-content div.main_all div.rightbar li a
 {
-	display: block;
-	margin-left: 4em;	
+display: block;
+margin-left: 4em;
 }
 #layout-content div.main_all div.news
 {
-	margin: 0.3em 17em 0.3em 0.3em;
+margin: 0.3em 17em 0.3em 0.3em;
 }
 #layout-content div.main_all div.news h4,
 #layout-content div.news_all div.news h4
 {
-	padding: 0.1em;
+padding: 0.1em;
 }
 #layout-content div.news span.stamp
 {
-	display: block;
-	text-align: right;
-	padding: 0.1em 1em 0.1em 0.1em;
-	background-image: url(images/whitepixel.png);
+display: block;
+text-align: right;
+padding: 0.1em 1em 0.1em 0.1em;
+background-image: url(images/whitepixel.png);
 }
 #layout-content div.news  > div
 {
-	margin: 0.1em 0.1em 3.1em 0.1em;
+margin: 0.1em 0.1em 3.1em 0.1em;
 }
 #layout-content div.main_edit
 {
-	text-align: center;
-	padding-left: 5%;
-	padding-right: 5%;
+text-align: center;
+padding-left: 5%;
+padding-right: 5%;
 }
 #layout-content div.main_edit label
 {
-	display: block;
-	text-align: left;
-	vertical-align: top;
-	margin: auto;
-	padding: 0.6em;
+display: block;
+text-align: left;
+vertical-align: top;
+margin: auto;
+padding: 0.6em;
 }
 #layout-content div.main_edit label *
 {
-	display: block;
-	margin-top: -1em;
-	margin-left: 4em;
+display: block;
+margin-top: -1em;
+margin-left: 4em;
 }
 #layout-content div.main_edit textarea
 {
-	height: 30em;
-	width: 90%;
+height: 30em;
+width: 90%;
 }
 #layout-content div.g_menu ul.state
 {
-	height: 15px;
-	padding-top: 2px;
-	padding-bottom: 1px;
+height: 15px;
+padding-top: 2px;
+padding-bottom: 1px;
 }
 #layout-content div.g_menu ul.state li
 {
-	float: left;
-	padding: 0px 2px 0px 1px;
+float: left;
+padding: 0px 2px 0px 1px;
 }
 #layout-content div.g_menu ul + ul
 {
-	margin-top: 2px;
+margin-top: 2px;
 }
 #layout-content div.g_menu ul.state + ul
 {
-	clear: left;
+clear: left;
 }
 #layout-content div.mylist_list table.animelist
 {
-	width: 75%;
+width: 75%;
 }
 #layout-content div.mylist_list td.title div
 {
-	float: right;
+float: right;
 }
 #layout-content div.mylist_list table table
 {
-	width: 100%;
+width: 100%;
 }
 #layout-content div.mylist_list table table table tr.good td
 {
-	background-image: url(images/greenpixel.png);
+background-image: url(images/greenpixel.png);
 }
 #layout-content div.mylist_all ul li
 {
-	list-style: none;
-	text-align: left;
+list-style: none;
+text-align: left;
 }
 #layout-content div.mynotifies_all
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.mynotifies_all label
 {
-	display: block;
+display: block;
 }
 #layout-content div.userpage_all div.stats,
 #layout-content div.myplace_all div.stats
 {
-	position: absolute;
-	width: 13.1em;
-	margin-top: 2em;
+position: absolute;
+width: 13.1em;
+margin-top: 2em;
 }
 #layout-content div.userpage_all div.stats table,
 #layout-content div.userpage_all div.stats table caption,
 #layout-content div.myplace_all div.stats table,
 #layout-content div.myplace_all div.stats table caption
 {
-	margin-left: 1em;
+margin-left: 1em;
 }
 #layout-content div.userpage_all div.stats table,
 #layout-content div.myplace_all div.stats table
 {
-	width: 14em;
+width: 14em;
 }
 #layout-content div.userpage_all div.stats table caption,
 #layout-content div.myplace_all div.stats table caption
 {
-	width: 12em;
+width: 12em;
 }
 #layout-content div.userpage_all div.stats div table td.value,
 #layout-content div.myplace_all div.stats div table td.value
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.myplace_all div.latest
 {
-	margin-left: 14em;
-	margin-right: 10em;
-	clear: none;
+margin-left: 14em;
+margin-right: 10em;
+clear: none;
 }
 #layout-content div.userpage_all,
 #layout-content div.myplace_all
 {
-	padding-right: 1em;
+padding-right: 1em;
 }
 #layout-content div.userpage_all div.buddies li,
 #layout-content div.userpage_all div.favreviewers li,
@@ -1540,435 +1548,433 @@ body.nonav #layout-content h1
 #layout-content div.msg_all div.g_menu li,
 #layout-content div.animeatt_all div.menu li
 {
-	padding-left: 6px;
-	padding-right: 6px;
-	text-align: left;
-	margin-left: -3em;
-	list-style-type: none;
+padding-left: 6px;
+padding-right: 6px;
+text-align: left;
+margin-left: -3em;
+list-style-type: none;
 }
 #layout-content div.userpage_all div.buddies,
 #layout-content div.userpage_all div.favreviewers
 {
-	float: right;
-	margin-bottom: 1em;
+float: right;
+margin-bottom: 1em;
 }
 #layout-content div.userpage_all div.buddies ul li,
 #layout-content div.userpage_all div.favreviewers ul li
 {
-	padding: 1px 6px 1px 6px;
+padding: 1px 6px 1px 6px;
 }
 #layout-content div.userpage_all div.userdetails,
 #layout-content div.userpage_all div.userprefs
 {
-	margin-left: 15em;
-	margin-right: 12em;
-	clear: none;
+margin-left: 15em;
+margin-right: 12em;
+clear: none;
 }
 #layout-content div.userpage_all,
 #layout-content div.myplace_all
 {
-	min-height:60em;
+min-height:60em;
 }
 #layout-content div.userpage_all div.userprefs h4
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.userpage_all div.userprefs ol
 {
-	margin-left: 4em;
+margin-left: 4em;
 }
 #layout-content div.userpage_all div.charts div
 {
-	float: left;
+float: left;
 }
 #layout-content div.userpage_all div.charts div h4
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.userpage_all div.charts div.votedistribution
 {
-	margin-left: 50px;
+margin-left: 50px;
 }
 #layout-content div.userpage_all ul.g_list.links,
 #layout-content div.userpage_all div.charts div.mylisthistory
 {
-	clear: both;
+clear: both;
 }
 #layout-content div.myvotes_all
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.myvotes_all table
 {
-	margin-left: auto;
-	margin-right: auto;
-	min-width: 80%;
-	padding: 1em;
-	clear: both;
+margin-left: auto;
+margin-right: auto;
+min-width: 80%;
+padding: 1em;
+clear: both;
 }
 #layout-content div.myvotes_all table td,
 #layout-content div.myvotes_all table th
 {
-	padding: 2px;
-	text-align: left;
+padding: 2px;
+text-align: left;
 }
 #layout-content div.myvotes_all table td.date,
 #layout-content div.myvotes_all table td.reviewed,
 #layout-content div.myvotes_all table td.action
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.myvotes_all table td.reviewed.no a
 {
-	color: #EE0000;
-	text-transform: uppercase;
+color: #EE0000;
+text-transform: uppercase;
 }
 #layout-content div.myvotes_all table .high
 {
-	background-image: url(images/greenpixel.png);
+background-image: url(images/greenpixel.png);
 }
 #layout-content div.myvotes_all table .low
 {
-	background-image: url(images/badredpixel.png);
+background-image: url(images/badredpixel.png);
 }
 #layout-content div.myvotes_all table td.vote,
 #layout-content div.myvotes_all table td.epno
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.myvotes_all table th,
 #layout-content div.myvotes_all table td.date
 {
-	white-space: nowrap;
+white-space: nowrap;
 }
 #layout-content div.myvotes_all ul.type
 {
-	float: left;
+float: left;
 }
 #layout-content div.stats_all div.stats
 {
-	margin: 0.3em 0.1em 0.1em 0.3em;
-	min-width: 15em;
+margin: 0.3em 0.1em 0.1em 0.3em;
+min-width: 15em;
 }
 #layout-content div.stats_all div.actions
 {
-	clear: left;
-	text-align: center;
+clear: left;
+text-align: center;
 }
 #layout-content div.stats_all h4
 {
-	background-image: url(images/redpixel.png);
-	color: white;
-	font-weight: bold;
-	font-size: 100%;
-	margin-bottom: 0.1em;
-	text-align: center;
-	padding: 0.3em;
+background-image: url(images/redpixel.png);
+color: white;
+font-weight: bold;
+font-size: 100%;
+margin-bottom: 0.1em;
+text-align: center;
+padding: 0.3em;
 }
 #layout-content div.stats_all div.stats ol
 {
-	margin: 0;
-	padding: 0;
+margin: 0;
+padding: 0;
 }
 #layout-content div.stats_all div.stats li
 {
-	list-style: none;
-	text-align: left;
+list-style: none;
+text-align: left;
 }
 #layout-content div.stats_all div.stats li span
 {
-	display: block;
-	float: left;
-	height: 100%;
-	width: 5.2em;
-	text-align: right;
-	white-space: nowrap;
+display: block;
+float: left;
+height: 100%;
+width: 5.2em;
+text-align: right;
+white-space: nowrap;
 }
 #layout-content div.stats_all div.stats li a
 {
-	display: table;
-	margin-left: 0.5em;	
+display: table;
+margin-left: 0.5em;
 }
 a.i_icon:hover, a.i_inline:hover
 {
-	text-decoration: none;
+text-decoration: none;
 }
 /* Transitional Hacks */
 *[bgcolor="#b0b0b0"], *[bgcolor="#969aa6"]
 {
-	background-image: url(images/redpixel.png);
+background-image: url(images/redpixel.png);
 }
 *[bgcolor="#494D59"]
 {
-	background-image: url(images/redpixel.png);
+background-image: url(images/redpixel.png);
 }
 /* zeromind */
 #layout-content div.producer_related_anime tr.mylist td
 {
-	background-image: url(images/greenpixel.png);
+background-image: url(images/greenpixel.png);
 }
 #layout-content div.msg_all tr.new td.state
 {
-	font-weight: bold;
-	color: red;
+font-weight: bold;
+color: red;
 }
 #layout-content div.creq_all tr.granted td
 {
-	background: url(images/greenpixel.png);
+background: url(images/greenpixel.png);
 }
 #layout-content div.creq_all tr.denied td
 {
-	background-image: url(images/badredpixel.png);
+background-image: url(images/badredpixel.png);
 }
 #layout-content div.creq_all tr.revoked td
 {
-	background-image: url(images/bg_2.gif);
+background-image: url(images/bg_2.gif);
 }
 #layout-content div.creq_all tr.deleted td
 {
-	color: red;
-	background-image: url(images/bg_2.gif);
+color: red;
+background-image: url(images/bg_2.gif);
 }
 #layout-content div.creq_all dd,
 #layout-content div.creqmod_all dd
 {
-	margin-bottom: 0.5em;
+margin-bottom: 0.5em;
 }
 #layout-main tr th.field
 {
-	background: inherit;
+background: inherit;
 }
 #layout-content div.creq_data ins
 {
-	background-image: url(images/greenpixel.png);
-	text-decoration: none;
+background-image: url(images/greenpixel.png);
+text-decoration: none;
 }
 #layout-content div.creq_data del
 {
-	background-image: url(images/badredpixel.png);
-	text-decoration: none;
+background-image: url(images/badredpixel.png);
+text-decoration: none;
 }
 #layout-content div.creq_list_open h4
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.group_info div.desc
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.anime_all div.data table.relationlist
 {
-	margin: 0;
-	border: 0;
+margin: 0;
+border: 0;
 }
 #layout-content div.animegroup_all div.form
 {
-	margin-left: 0.3em;
+margin-left: 0.3em;
 }
 #layout-content div.animegroup_all div.form textarea
 {
-	display: block;
-	width: 80%;
-	margin-left: 10%;
-	height: 10em;
+display: block;
+width: 80%;
+margin-left: 10%;
+height: 10em;
 }
 #layout-content div.animeatt_reviews div.review
 {
-	border: #898989 1px dashed;
-	margin-right: 0.5em;
-	margin-left: 0.5em;
-	min-height: 42em;
+border: #898989 1px dashed;
+margin-right: 0.5em;
+margin-left: 0.5em;
+min-height: 42em;
 }
 #layout-content div.animeatt_reviews div.review > h4
 {
-	padding: 0.5em;
-	margin: 0.5em 15.5em 0.5em 7em;
-	background-image: url(images/bg_2.gif);
+padding: 0.5em;
+margin: 0.5em 15.5em 0.5em 7em;
+background-image: url(images/bg_2.gif);
 }
 #layout-content div.animeatt_reviews div.review.approved  > h4
 {
-	background-image: url(images/greenpixel.png);
+background-image: url(images/greenpixel.png);
 }
 #layout-content div.animeatt_reviews div.review.disapproved > h4
 {
-	background-image: url(images/badredpixel.png);
+background-image: url(images/badredpixel.png);
 }
 #layout-content div.animeatt_reviews div.review+div.review
 {
-	margin-top: 1.5em;
+margin-top: 1.5em;
 }
 #layout-content div.animeatt_reviews div.review div.head,
 #layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
-	float: right;
-	width: 10em;
-	padding-right: 2em;
+float: right;
+width: 10em;
+padding-right: 2em;
 }
 #layout-content div.animeatt_reviews div.review div.avatar
 {
-	margin-top: -2em;
+margin-top: -2em;
 }
 #layout-content div.animeatt_reviews div.review div.head table,
 #layout-content div.animeatt_reviews div.review div.avatar,
 #layout-content div.animeatt_reviews div.review div.menu
 {
-	width: 10em;
+width: 10em;
 }
 #layout-content div.animeatt_reviews div.review div.text
 {
-	text-align: left;
-	margin: 0 15.5em 1em 7em;
-	padding: 0.5em;
-	background-image: url(images/bg_2.gif);
+text-align: left;
+margin: 0 15.5em 1em 7em;
+padding: 0.5em;
+background-image: url(images/bg_2.gif);
 }
 #layout-content div.animeatt_reviews div.review div.head table td.value
 {
-	text-align: right;
+text-align: right;
 }
 #layout-content div.animeatt_form table
 {
-	width: 80%;
+width: 80%;
 }
 #layout-content div.animeatt_form textarea
 {
-	width: 99%;
+width: 99%;
 }
 #layout-content div.animeatt_comment
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content div.animeatt_comment textarea
 {
-	width: 96%;
-	height: 10em;
+width: 96%;
+height: 10em;
 }
 #layout-content div.group_all div.ep_files table
 {
-	width: 99%;
+width: 99%;
 }
 #layout-content div.addeptitle_all div.addeptitle_form p,
 #layout-content div.addanimetitle_all div.addanimetitle_form p
 {
-	text-align: center;
+text-align: center;
 }
 #layout-content div.latest_all td.name.file
 {
-	padding-left: 1em;
+padding-left: 1em;
 }
-
 #layout-content div.profile_all > div > div,
 #layout-content div.profile_all > div form > div
 {
-	display: table-cell;
-
+display: table-cell;
 }
 #layout-content div.profile_all .g_info
 {
-	text-align: left;
+text-align: left;
 }
 #layout-content div.profile_all div.css_style div.info dl dt
 {
-	font-weight: bold;
+font-weight: bold;
 }
 #layout-content div.profile_all div.css_style div.info dl dd
 {
-	margin-left: 7em;
-	width: 20em;
+margin-left: 7em;
+width: 20em;
 }
 #layout-main dl dd
 {
-	margin-left: 10em;
+margin-left: 10em;
 }
 #style_thumbnail
 {
-	width: 220px;
-	margin: 3px;
-	font-size: 94%;
-	text-align: center;
-	overflow: hidden;
+width: 220px;
+margin: 3px;
+font-size: 94%;
+text-align: center;
+overflow: hidden;
 }
 #layout-content div.profile_all div.css_style div.block div.image
 {
-	background-image: url(images/bg_2.gif);
-	border: 2px solid #565656;
+background-image: url(images/bg_2.gif);
+border: 2px solid #565656;
 }
 #layout-content div.profile_all div.css_style div.block div.info
 {
-	margin-left: 0.7em;
-	text-align: left;
+margin-left: 0.7em;
+text-align: left;
 }
 #style_description
 {
-	width: 20em;
+width: 20em;
 }
 #image_viewer
 {
-	margin: 50px;
+margin: 50px;
 }
 #style_url
 {
-	margin-bottom: 1em;
+margin-bottom: 1em;
 }
 *.i_group_vote,
 *.i_ep_vote,
 *.i_vote
 {
-	background-image: url(images/anidb_vote.gif);
+background-image: url(images/anidb_vote.gif);
 }
 *.i_group_revote,
 *.i_ep_revote,
 *.i_revote
 {
-	background-image: url(images/anidb_revote.gif);
+background-image: url(images/anidb_revote.gif);
 }
 *.i_crc_no
 {
-	background-image: url(images/anidb_crc_no.gif);
+background-image: url(images/anidb_crc_no.gif);
 }
 *.i_crc_yes
 {
-	background-image: url(images/anidb_crc_yes.gif);
+background-image: url(images/anidb_crc_yes.gif);
 }
 *.i_crc_unv
 {
-	background-image: url(images/anidb_crc_unv.gif);
+background-image: url(images/anidb_crc_unv.gif);
 }
 *.i_av_yes
 {
-	background-image: url(images/anidb_av_yes.gif);
+background-image: url(images/anidb_av_yes.gif);
 }
 *.releaseinfotooltip div.icons span.i_icon
 {
-	float: left;
+float: left;
 }
 #obj-tooltip
 {
-	width: auto !important;
-	height: auto !important;
-	background-color: maroon;
-	color: white;
-	visibility: hidden;
-	z-index: 100;
+width: auto !important;
+height: auto !important;
+background-color: maroon;
+color: white;
+visibility: hidden;
+z-index: 100;
 }
 #obj-tooltip h1
 {
-	display: none;
+display: none;
 }
 #obj-tooltip ul li,
 #obj-tooltip ul
 {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	vertical-align: middle;
+list-style-type: none;
+margin: 0;
+padding: 0;
+text-align: left;
+vertical-align: middle;
 }
 /*formatting*/
 #wysiwyg_0
 {
-	background-color: black;
-	border: 0;
+background-color: black;
+border: 0;
 }
 input.f_buddy
 {
@@ -2078,94 +2084,94 @@ text-indent: -5000px;
 }
 #layout-overlay
 {
-	position: absolute;
-	z-index:100000;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	min-height:100%;
-	background-color:#000000;
-	opacity: 0.6;
+position: absolute;
+z-index:100000;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+min-height:100%;
+background-color:#000000;
+opacity: 0.6;
 }
 #layout-content span.preview-box
 {
-	display: block;
-	width: 100%;
-	width: 365px;
-	/*overflow: auto; */
-	border-width: 2px;
-	border-style: solid;
-	border-color: #000000;
-	background: #b0b0b0;
+display: block;
+width: 100%;
+width: 365px;
+/*overflow: auto; */
+border-width: 2px;
+border-style: solid;
+border-color: #000000;
+background: #b0b0b0;
 }
 #layout-content span.preview-title
 {
-	display: block;
-	font-weight: bold;
-	text-align: center;
-	width: 100%;
-	background-color: #494d59;
-	color: #bbbbbb;
-	padding: 1px;
+display: block;
+font-weight: bold;
+text-align: center;
+width: 100%;
+background-color: #494d59;
+color: #bbbbbb;
+padding: 1px;
 }
 #layout-content span.preview-text
 {
-	text-align: left;
-	padding: 1px;
+text-align: left;
+padding: 1px;
 }
 #layout-content div.animelist_all tr.mylist td
 {
-	background-image: url(images/orangepixel.png);
+background-image: url(images/orangepixel.png);
 }
 #layout-content div.animelist_all tr.mylist.complete td,
 #layout-content div.mylist_list tr.complete td
 {
-	background-image: url(images/bluepixel.png);
+background-image: url(images/bluepixel.png);
 }
 #layout-content div.animelist_all tr.mylist.all_watched td,
 #layout-content div.mylist_list tr.all_watched td
 {
-	background-image: url(images/greenpixel.png);
+background-image: url(images/greenpixel.png);
 }
 #layout-content div.latest_all div.latest_files_list tr td a.filter
 {
-	color: orange;
+color: orange;
 }
 #layout-content div.mylist_list tr td.vote.temp,
 #layout-content div.myplace_all div.latest div.latest_votes span.vote.temp,
 #layout-content div.userpage_all div.latest div.latest_votes span.vote.temp
 {
-	font-style: italic;
+font-style: italic;
 }
 #layout-content div.g_timedentry div.avatar
 {
-	float: right;
-	margin: 10px;
+float: right;
+margin: 10px;
 }
 #layout-content div.g_timedentry div.body
 {
-	padding: 0.2em;
-	text-align: left;
+padding: 0.2em;
+text-align: left;
 }
 #layout-content div.g_timedentry
 {
-	min-height: 150px;
+min-height: 150px;
 }
 #layout-content div.g_timedentry+div.g_timedentry 
 {
-	margin-top: 2em;
+margin-top: 2em;
 }
 #layout-content div.anime_all div.episodes table table.filelist td.id .i_icon
 {
-	text-align: left;
+text-align: left;
 }
 #menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account
 {
-	display: none;
-	z-index: 7;
-	position: absolute;
-	top: 16px;
+display: none;
+z-index: 7;
+position: absolute;
+top: 16px;
 }
 ul#layout-menu li:hover ul {
 display: block;
@@ -2210,13 +2216,13 @@ left: 0;
 }
 #layout-content div.group_all div.group_released table td.undumped
 {
-	visibility: hidden;
+visibility: hidden;
 }
 #layout-content div.group_all div.group_released table td.notalldumped
 {
-	visibility: visible;
-	color: red;
-	font-weight: bold;
+visibility: visible;
+color: red;
+font-weight: bold;
 }
 #layout-nav #layout-menu li.sub-menu span.tab
 {
@@ -2372,78 +2378,66 @@ color: #99FFB6;
 {
 color: blue;
 }
-
 /*FORUM*/
 div.quotebody
 {
-	background-color:#EBEADD;
-	border:1px solid #DBDBDB;
+background-color:#EBEADD;
+border:1px solid #DBDBDB;
 }
-
 div.quotebody div.quote div.g_odd
 {
-	background-color:#EFEED9;
+background-color:#EFEED9;
 }
-
 #layout-main div.forum ul.topiclist li
 {
-	background-image: url(images/redpixel.png);
+background-image: url(images/redpixel.png);
 }
-
 #layout-main div.forum dl.icon
 {
-	background-position:10px 50%;
-	background-repeat:no-repeat;
+background-position:10px 50%;
+background-repeat:no-repeat;
 }
-
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
-	color:#FFFFFF;
+color:#FFFFFF;
 }
-
 #layout-main div.forum dl.icon dt
 {
-	background-position:5px 50%;
-	background-repeat:no-repeat;
+background-position:5px 50%;
+background-repeat:no-repeat;
 }
-
 #layout-main div.forum div.threads .rtop *,
 #layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner
 {
-	background: inherit;
+background: inherit;
 }
-
 #layout-main div.forum ul.topics li.g_odd
 {
-	background-image: url(images/bg_2.gif)
+background-image: url(images/bg_2.gif)
 }
-
 #layout-main div.forum .rtop *,
 #layout-main div.forum .rbottom *,
 #layout-main div.forum div.inner,
 #layout-main div.forum ul.topics li.row:hover
 {
-	background-image: url(images/bg_3.gif)
+background-image: url(images/bg_3.gif)
 }
-
 #layout-main div.forum div.deleted,
 #layout-main div.forum li.deleted dl.icon
 {
-	opacity:0.3;
+opacity:0.3;
 }
 #layout-main div.forum hr
 {
-	background-image: url(images/bg_2.gif)
+background-image: url(images/bg_2.gif)
 }
-
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-	border-top-color:#121212;
+border-top-color:#121212;
 }
-
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.poll .rbottom *,
 #layout-main div.forum div.poll .rtop *,
@@ -2451,81 +2445,69 @@ div.quotebody div.quote div.g_odd
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *
 {
-	background-color:#A9ABB1;
+background-color:#A9ABB1;
 }
-
 #layout-main div.forum div.poll div.pollbar
 {
-	background-color:#105289;
-	border-bottom-color:#092e4d;
-	border-right-color:#092e4d;
-	color:#FFFFFF;
+background-color:#105289;
+border-bottom-color:#092e4d;
+border-right-color:#092e4d;
+color:#FFFFFF;
 }
-
 #layout-main div.forum div.poll h2
 {
-	border-bottom-color:#989898;
-	color:#006699;
+border-bottom-color:#989898;
+color:#006699;
 }
-
 #layout-main div.forum div.poll dl
 {
-	border-top-color:#989898;
-	color:#666666;
+border-top-color:#989898;
+color:#666666;
 }
-
 #layout-main div.forum div.poll dl dt
 {
-	color: white;
+color: white;
 }
-
 #layout-main div.forum div.poll
 {
-	border-bottom-color:#4A4A5A;
+border-bottom-color:#4A4A5A;
 }
-
 #layout-main div.forum div.postbody dl.codebox code
 {
-	color:#2E8B57;
+color:#2E8B57;
 }
-
 #layout-main div.forum div.postbody dl.codebox
 {
-	background-color:#FFFFFF;
-	border-color:#C9D2D8;
+background-color:#FFFFFF;
+border-color:#C9D2D8;
 }
-
 #layout-main div.forum div.postbody dl.codebox dt
 {
-	border-bottom-color:#CCCCCC;
-	color:#000000;
+border-bottom-color:#CCCCCC;
+color:#000000;
 }
-
 #layout-main div.forum div.rules div.inner,
 #layout-main div.forum div.rules .rtop *,
 #layout-main div.forum div.rules .rbottom *
 {
-	background-color:#ECD5D8;
+background-color:#ECD5D8;
 }
-
 #layout-main div.forum div.rules div.inner
 {
-	color:#BC2A4D;
+color:#BC2A4D;
 }
-
 #layout-main div.forum div.quickreply textarea
 {
-	border-color:#A9A9A9;
+border-color:#A9A9A9;
 }
 #layout-main div.forum div.poll dl dd
 {
-	color:#666666;
+color:#666666;
 }
-
 #layout-main a.username-coloured,
 #layout-main div.forum a.topictitle:hover
 {
-	color: #ff6000;
+color: #ff6000;
 }
 #layout-main a.username-coloured:hover
 {
@@ -2576,4 +2558,47 @@ border: 0;
 #layout-main div.forum a.topictitle
 {
 font-size: 120%;
+}
+#layout-main div.animetag_all div.animetag_list table + div.spoiler
+{
+margin-top: 1.5em;
+}
+#layout-main div.tabbed_pane div.pane.hide
+{
+display: none;
+}
+div.spoiler
+{
+padding: 0.6em;
+border: #898989 1px dashed;
+}
+div.spoiler span.spoiler
+{
+display:block;
+margin-bottom: 1em;
+}
+a.button,
+input.button,
+button.button,
+a.confirmButton,
+input.confirmButton,
+button.confirmButton {
+margin-top: 0.3em;
+color: #797979;
+border: 1px dashed;
+background: url(images/bg_2.gif);
+}
+#layout-main div.animetag_all div.animetag_list div.spoiler
+{
+text-align: center;
+}
+#layout-main div.animetag_all div.animetag_list table td.globalcnt,
+#layout-main div.animetag_all div.animetag_list table td.spoiler,
+#layout-main div.animetag_all div.animetag_list table td.approval
+{
+text-align: center;
+}
+#layout-main div.animetag_all div.animetag_list table td.name
+{
+text-align: left;
 }
