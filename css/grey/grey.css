@@ -2,7 +2,11 @@
 @import "../common/layout/page/latestanimes.css";
 @import "../common/layout/page/animeatt.css";
 @import "../common/layout/page/tags.css";
+@import "../common/layout/page/chartags.css";
+@import "../common/layout/page/charcharrel.css";
+@import "../common/layout/page/charlist.css";
 @import "../common/layout/page/cmt.css";
+@import "../common/layout/page/addentity.css";
 @import "../common/layout/global/tabbed_pane.css";
 @import "../common/layout/global/timedentry.css";
 @import "../common/layout/global/menu.css";
@@ -83,7 +87,7 @@ a:active
 {
 color: red;
 }
-a img
+a img, img
 {
 border: 0;
 }
@@ -2601,4 +2605,20 @@ text-align: center;
 #layout-main div.animetag_all div.animetag_list table td.name
 {
 text-align: left;
+}
+#layout-main div.chartags_all div.addbox div.tag-column h5
+{
+font-size: 100%;
+background-image: url(images/bg_2.gif);
+}
+#layout-main div.chartags_all div.addbox div.tag-group h3
+{
+text-align: center;
+}
+#layout-main div.addcharcharrel_all div.explanation div.description
+{
+background: url(images/bg_2.gif);
+border:1px solid #D1D7DC;
+margin:1em 0;
+padding:4px;
 }
