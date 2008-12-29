@@ -421,6 +421,7 @@ function createEpisodeTitles(eid,episode) {
 	var tbody = document.createElement('tbody');
 	episode.titleLangs = new Array();
 	for (var lang in episode.titles) {
+		if (episode.titles[lang] == null || !episode.titles[lang]) continue;
 		episode.titleLangs.push(lang);
 		tbody.appendChild(createEpisodeTitleLine(eid,lang,episode.titles[lang]['title'],episode.titles[lang]['update'],episode.titles[lang]['verify']));
 	}
