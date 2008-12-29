@@ -355,6 +355,7 @@ function addTitleAllEps() {
 	var lang = sel.value;
 	var type = document.getElementById('etitle.add.sel').value;
 	for (var e in episodes) {
+		if (e == 'indexOf') continue;
 		var episode = episodes[e];
 		if (type != 'A' && type != episode.typeChar) continue;
 		if (!episode.titles[lang]) titlesActions(null, 'add', episode.id, lang);
@@ -421,7 +422,7 @@ function createEpisodeTitles(eid,episode) {
 	var tbody = document.createElement('tbody');
 	episode.titleLangs = new Array();
 	for (var lang in episode.titles) {
-		if (episode.titles[lang] == null || !episode.titles[lang]) continue;
+		if (lang == 'indexOf') continue;
 		episode.titleLangs.push(lang);
 		tbody.appendChild(createEpisodeTitleLine(eid,lang,episode.titles[lang]['title'],episode.titles[lang]['update'],episode.titles[lang]['verify']));
 	}
@@ -431,6 +432,7 @@ function createEpisodeTitles(eid,episode) {
 	var tfootcell = createCell(null, null, document.createTextNode('Add title: '), null, 4);
 	var langsel = createBasicSelect('e'+eid+'title.sel','e'+eid+'title.sel',null);
 	for (var lang in languageMap) {
+		if (lang == 'indexOf') continue;
 		if (episode.titleLangs.indexOf(lang) >= 0) continue;
 		var option = document.createElement('option');
 		var op = languageMap[lang];
@@ -616,6 +618,7 @@ function createEpisodeTable() {
 	var filterlangsel = createBasicSelect('fetitle.sel','fetitle.sel',filterTitleLangs);
 	createSelectOption(filterlangsel, 'show all titles', 'all', false, null, false);
 	for (var lang in languageMap) {
+		if (lang == 'indexOf') continue;
 		var op = languageMap[lang];
 		createSelectOption(filterlangsel, op['name'], lang, false, null, false);
 	}
@@ -658,6 +661,7 @@ function createEpisodeTable() {
 	cell.appendChild(document.createTextNode(' episodes title: '));
 	var langsel = createBasicSelect('etitle.sel','etitle.sel',null);
 	for (var lang in languageMap) {
+		if (lang == 'indexOf') continue;
 		var op = languageMap[lang];
 		createSelectOption(langsel, op['name'], lang, false, null, false);
 	}
