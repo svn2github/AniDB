@@ -1061,6 +1061,11 @@ function makeLayoutPreferencesTable() {
 	return table;
 }
 
+/* Creates Profile options groups for the customize tab
+ * @param parentNode If supplied will append resulting div to given node
+ * @param headText The heading text
+ * @param options A list with the options
+ */
 function createProfileGroup(parentNode, headText, options) {
 	var div = document.createElement('div');
 	var h4 = document.createElement('h3');
@@ -1243,10 +1248,15 @@ function createPreferencesTable(type) {
 					var dataFields = new Array();
 					for (var i = 0; i < inputs.length; i++) {
 						var input = inputs[i];
-						dataFields.push(input.name + '=' + (input.type == 'checkbox' ? Number(input.checked) : input.value));
+						if (input.type == 'checkbox' && input.checked == true) dataFields.push(input.name + '=on');
+						else if (input.type != 'checkbox') dataFields.push(input.name + '=' + input.value);
+						//dataFields.push(input.name + '=' + (input.type == 'checkbox' ? Number(input.checked) : input.value));
 					}
+					//alert(dataFields.join('&'));
+					
 					var req = xhttpRequest();
 					xhttpRequestPost(req, 'animedb.pl', null, dataFields.join('&'));
+					
 					alert('Changes submited to server.\nPlease reload to see changes.');
 				}
 				actionLI.appendChild(saveInput);
