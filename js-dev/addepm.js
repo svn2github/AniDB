@@ -31,11 +31,9 @@ function main_addepm() {
 		my_form.removeChild(my_template);
 		
 		my_eps = [];
-		for (var i = 0, n = my_form.firstChild, last; n; i++)
-		{
+		for (var i = 0, n = my_form.firstChild, last; n; i++) {
 			var t = n.nextSibling;
-			if ( n.id && n.className == 'ep' )
-			{
+			if ( n.id && n.className == 'ep' )	{
 				var ep = new MyEp(n);
 				if(last){
 					last.next = ep;
@@ -71,8 +69,7 @@ function do_submit(){
 }
 
 function removeWS(elem){
-	for (var i = 0, n = elem.firstChild; n; i++)
-	{
+	for (var i = 0, n = elem.firstChild; n; i++) {
 		var t = n.nextSibling;
 		if ( n.nodeType==3 )
 			elem.removeChild(n);
@@ -82,33 +79,27 @@ function removeWS(elem){
 	}
 }
 
-function only7bit(n)
-{
+function only7bit(n) {
 	var isascii = !/[^\x20-\x7E]/.test(n.value);
 	var ismarkederror = n.className.indexOf("g_error") >= 0;
 	if (isascii && ismarkederror) { n.className = n.className.replace(/\s*g_error/,""); }
 	else if (!isascii && !ismarkederror) { n.className += " g_error"; }
 }
-function onchange_check7bit()
-{
+function onchange_check7bit() {
 	only7bit(this);
 }
 
-function MyEp(elem, id)
-{
+function MyEp(elem, id){
 	this.elem = elem;
 	this.id = id || elem.id.substring(1);
 
 	this.epno = elem.firstChild.firstChild;
 
 	var regexp = /^(s|c|t|p|o)(\d+)$/i;
-	if(regexp.test(this.epno.value))
-	{
+	if(regexp.test(this.epno.value)) {
 		this.type = RegExp.$1;
 		this.numb = RegExp.$2*1;
-	}
-	else
-	{
+	} else {
 		this.type = '';
 		this.numb = this.epno.value*1;
 	}
@@ -144,11 +135,13 @@ function MyEp(elem, id)
 	if(id<0)
 		this.elem.appendChild(mkButton(this.id, 'del', delEp));
 	
-	this.setEpno = ( function(type,numb){
-		this.type = type;
-		this.numb = numb;
-		this.epno.value = type+numb;
-	});
+	this.setEpno = ( 
+		function(type,numb){
+			this.type = type;
+			this.numb = numb;
+			this.epno.value = type+numb;
+		}
+	);
 	
 	only7bit(this.name);
 	only7bit(this.romaji);
@@ -156,8 +149,7 @@ function MyEp(elem, id)
 	this.romaji.onchange = onchange_check7bit;
 }
 
-function mkButton(id, value, func)
-{
+function mkButton(id, value, func) {
 	var butt = makeElement('input');
 	butt.id = id;
 	butt.type = 'button';
@@ -182,8 +174,8 @@ function newEp(event){
 	ep.prev = cur;
 	cur.next = ep;
 	if(nex)	nex.prev = ep;
-	
-  updateEpno(ep.next, ep.type, 1);
+
+	updateEpno(ep.next, ep.type, 1);
 }
 
 function delEp(event){
@@ -247,21 +239,21 @@ function moveEpUp(event){
 }
 
 function parseEpNum(str,type,val) {
-  var num = (!type) ? Number(str) : Number(str.substr(1));
-  if (val) num += val;
-  return num;
+	var num = (!type) ? Number(str) : Number(str.substr(1));
+	if (val) num += val;
+	return num;
 }
 
 function updateEpno(elem, type, val){
 	if(elem && elem.type==type){
-    var cur = parseEpNum(elem.epno.value,type);
-    var after = parseEpNum(elem.epno.value,type,val);
-    var prev = parseEpNum(elem.prev.epno.value,type);
-    var next = parseEpNum(elem.next.epno.value,type);
-    var tgt = (val > 0) ? next : prev;
-		if (!isNaN(tgt)) elem.setEpno(type, elem.numb+val);
-    if (isNaN(tgt) && ((after == next) || (cur == prev))) elem.setEpno(type, elem.numb+val);
-    updateEpno(elem.next, type, val);
+		var cur = parseEpNum(elem.epno.value,type);
+		var after = parseEpNum(elem.epno.value,type,val);
+		var prev = parseEpNum(elem.prev.epno.value,type);
+		var next = parseEpNum(elem.next.epno.value,type);
+		var tgt = (val > 0) ? next : prev;
+			if (!isNaN(tgt)) elem.setEpno(type, elem.numb+val);
+		if (isNaN(tgt) && ((after == next) || (cur == prev))) elem.setEpno(type, elem.numb+val);
+		if (elem && elem.next) updateEpno(elem.next, type, val);
 	}
 }
 
