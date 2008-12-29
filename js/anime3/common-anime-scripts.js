@@ -1061,6 +1061,11 @@ function makeLayoutPreferencesTable() {
 	return table;
 }
 
+/* Creates Profile options groups for the customize tab
+ * @param parentNode If supplied will append resulting div to given node
+ * @param headText The heading text
+ * @param options A list with the options
+ */
 function createProfileGroup(parentNode, headText, options) {
 	var div = document.createElement('div');
 	var h4 = document.createElement('h3');
@@ -1102,7 +1107,7 @@ function createPreferencesTable(type) {
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	var animeLayoutPrefs = {'id':"anime-layout",'head':"Layout",'title':"Anime page Layout Preferences"};
 	items['mylist'] =	[titlePrefs, ed2kPrefs, mylistPrefs2];
-	items['anime'] =	[animeProfile, titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, animeLayoutPrefs];
+	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, animeLayoutPrefs];
 	items['group'] =	[titlePrefs, ed2kPrefs, groupPrefs];
 	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
 	if (!items[type]) return;
@@ -1243,7 +1248,8 @@ function createPreferencesTable(type) {
 					var dataFields = new Array();
 					for (var i = 0; i < inputs.length; i++) {
 						var input = inputs[i];
-						dataFields.push(input.name + '=' + (input.type == 'checkbox' ? Number(input.checked) : input.value));
+						if (input.type == 'checkbox' && input.checked == true) dataFields.push(input.name + '=on');
+						else if (input.type != 'checkbox') dataFields.push(input.name + '=' + input.value);
 					}
 					var req = xhttpRequest();
 					xhttpRequestPost(req, 'animedb.pl', null, dataFields.join('&'));
