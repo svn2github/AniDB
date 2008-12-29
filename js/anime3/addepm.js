@@ -693,7 +693,6 @@ function prepPage() {
 		return false;
 	}	
 	fetchData(aid);
-	addInfoToFooter(getJsFileVersionArrayInfo(jsVersionArray.length - 1).join(','), true);
 }
 
 // hook up the window onload event
