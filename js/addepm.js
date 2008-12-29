@@ -249,11 +249,11 @@ function updateEpno(elem, type, val){
 		var cur = parseEpNum(elem.epno.value,type);
 		var after = parseEpNum(elem.epno.value,type,val);
 		var prev = parseEpNum(elem.prev.epno.value,type);
-		var next = if (elem.next) parseEpNum(elem.next.epno.value,type);
+		var next = parseEpNum(elem.next.epno.value,type);
 		var tgt = (val > 0) ? next : prev;
 			if (!isNaN(tgt)) elem.setEpno(type, elem.numb+val);
 		if (isNaN(tgt) && ((after == next) || (cur == prev))) elem.setEpno(type, elem.numb+val);
-		if (elem && elem.next) updateEpno(elem.next, type, val);
+		updateEpno(elem.next, type, val);
 	}
 }
 

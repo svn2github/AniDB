@@ -253,7 +253,7 @@ function updateEpno(elem, type, val){
 		var tgt = (val > 0) ? next : prev;
 			if (!isNaN(tgt)) elem.setEpno(type, elem.numb+val);
 		if (isNaN(tgt) && ((after == next) || (cur == prev))) elem.setEpno(type, elem.numb+val);
-		if (elem && elem.next) updateEpno(elem.next, type, val);
+		updateEpno(elem.next, type, val);
 	}
 }
 
