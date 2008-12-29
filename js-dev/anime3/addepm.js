@@ -7,11 +7,11 @@
  */
 jsVersionArray.push({
 	"file":"anime3/addepm.js",
-	"version":"2.2",
+	"version":"2.4",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Language filter"
+	"changelog":"Type filter"
 });
 
 // GLOBALS //
@@ -291,12 +291,27 @@ function addEpisode() {
 /* Function that toggles all episode titles display */
 function toggleEpisodeTitles() {
 	showTitles = this.checked;
+	var typeFilter = document.getElementById('fetitle.type.sel').value;
 	for (var eid in episodes) {
-		if (!episodes[eid]) continue;
+		var episode = episodes[eid];
+		if (!episode) continue;
 		var table = document.getElementById('e'+eid+'langsTable');
 		var span = document.getElementById('e'+eid+'langsSpan');
-		if (table) table.style.display = (showTitles ? '' : 'none');
-		if (span) span.style.display = (showTitles ? 'none' : '');
+		if (!table || !span) continue;
+		if (!showTitles) {
+			table.style.display = 'none';
+			span.style.display = '';
+		} else {
+			if (typeFilter == 'A' || (typeFilter == 'N' && episode.typeChar == '') || (typeFilter != 'N' && episode.typeChar == typeFilter)) {
+				table.style.display = '';
+				span.style.display = 'none';
+			} else {
+				table.style.display = 'none';
+				span.style.display = '';		
+			}
+		}
+		//if (table) table.style.display = (showTitles ? '' : 'none');
+		//if (span) span.style.display = (showTitles ? 'none' : '');
 	}
 }
 
@@ -350,6 +365,7 @@ function titlesActions(elem, action, eid, lang) {
 	}
 }
 
+/* Function that add a title lang to all episodes */
 function addTitleAllEps() {
 	var sel = document.getElementById('etitle.sel');
 	var lang = sel.value;
@@ -357,13 +373,18 @@ function addTitleAllEps() {
 	for (var e in episodes) {
 		if (e == 'indexOf') continue;
 		var episode = episodes[e];
-		if (type != 'A' && type != episode.typeChar) continue;
+		if (type == 'N' && episode.typeChar != '') continue;
+		else if (type != 'N' && type != 'A' && type != episode.typeChar) continue;
 		if (!episode.titles[lang]) titlesActions(null, 'add', episode.id, lang);
 	}
 	// now filter only for this language and trigger the filter
 	var langfiltersel = document.getElementById('fetitle.sel');
 	langfiltersel.value = lang;
 	langfiltersel.onchange();
+	// now filter only for this ep type and trigger the filter
+	var epfiltersel = document.getElementById('fetitle.type.sel');
+	epfiltersel.value = type;
+	epfiltersel.onchange();
 	var checkbox = document.getElementById('toggletitlescheck');
 	if (checkbox && !checkbox.checked) {
 		checkbox.checked = true;
@@ -567,6 +588,7 @@ function createEpisodeRow(eid,episode) {
 	return row;
 }
 
+/* Function that filters episode titles by language */
 function filterTitleLangs() {
 	var langFilter = this.value;
 	for (var i = 0; i < epOrder.length; i++) {
@@ -582,6 +604,27 @@ function filterTitleLangs() {
 				if (row.id != 'e'+eid+'.title.'+langFilter) row.style.display = 'none';
 				else row.style.display = '';
 			}
+		}
+	}
+}
+
+/* Function that filters episode titles by type */
+function filterEpTypes() {
+	var toggled = document.getElementById('toggletitlescheck');
+	if (!toggled.checked) return;
+	var typeFilter = this.value;
+	for (var i = 0; i < epOrder.length; i++) {
+		var eid = epOrder[i];
+		var episode = episodes[eid];
+		var table = document.getElementById('e'+eid+'langsTable');
+		var span = document.getElementById('e'+eid+'langsSpan');
+		if (!table || !span) continue;
+		if ((typeFilter == 'N' && episode.typeChar != '') || (typeFilter != 'N' && typeFilter != 'A' && episode.typeChar != typeFilter)) {
+			table.style.display = 'none';
+			span.style.display = '';
+		} else {
+			table.style.display = '';
+			span.style.display = 'none';		
 		}
 	}
 }
@@ -612,8 +655,16 @@ function createEpisodeTable() {
 	table.appendChild(tbody);
 	var tfoot = document.createElement('tfoot');
 	row = document.createElement('tr');
-	createCell(row, null, document.createTextNode('Options'), null, 2);
-	var cell = createCell(null, null, createLabledCheckBox(null,null,'toggletitlescheck',toggleEpisodeTitles,false,' toggle titles'));
+	createCell(row, null, 'Options', null, 3);
+	createCell(row, 'duration', createTextInput('default.len',5,false,false,5,null));
+	createCell(row, 'date', createTextInput('default.date',10,false,false,10,null));
+	var inputButton = createBasicButton(null,'Apply these values');
+	inputButton.onclick = setAllDefaults;
+	createCell(row, 'action', inputButton, null, 2);
+	tfoot.appendChild(row);
+	row = document.createElement('tr');
+	createCell(row, null, 'Show', null, 2);
+	var cell = createCell(null, null, createLabledCheckBox(null,null,'toggletitlescheck',toggleEpisodeTitles,false,' toggle titles'), null, 5);
 	cell.appendChild(document.createTextNode(' '));
 	var filterlangsel = createBasicSelect('fetitle.sel','fetitle.sel',filterTitleLangs);
 	createSelectOption(filterlangsel, 'show all titles', 'all', false, null, false);
@@ -623,16 +674,22 @@ function createEpisodeTable() {
 		createSelectOption(filterlangsel, op['name'], lang, false, null, false);
 	}
 	cell.appendChild(filterlangsel);
+	cell.appendChild(document.createTextNode(' for '));
+	var optionArray = new Object();
+	optionArray['A']={'text':"All"};
+	optionArray['N']={'text':"Normal"};
+	optionArray['S']={'text':"Special"};
+	optionArray['C']={'text':"Opening/Ending/Credits"};
+	optionArray['T']={'text':"Trailer/Promo/Ads"};
+	optionArray['P']={'text':"Parody/Fandub"};
+	optionArray['O']={'text':"Other Episodes"};
+	createSelectArray(cell,'fetitle.type.sel','fetitle.type.sel',filterEpTypes,null,optionArray);
+	cell.appendChild(document.createTextNode(' eps'));
 	row.appendChild(cell);
-	createCell(row, 'duration', createTextInput('default.len',5,false,false,5,null));
-	createCell(row, 'date', createTextInput('default.date',10,false,false,10,null));
-	var inputButton = createBasicButton(null,'Apply these values');
-	inputButton.onclick = setAllDefaults;
-	createCell(row, 'action', inputButton, null, 2);
 	tfoot.appendChild(row);
 	row = document.createElement('tr');
-	var cell = createCell(null, null, document.createTextNode('Add new episode of type: '), null, 7);
-	var optionArray = new Object();
+	cell = createCell(null, null, document.createTextNode('Add new episode of type: '), null, 7);
+	optionArray = new Object();
 	if (!anime.eps || normalEpsCnt < anime.eps) optionArray['N']={'text':"Normal"};
 	optionArray['S']={'text':"Special"};
 	optionArray['C']={'text':"Opening/Ending/Credits"};
