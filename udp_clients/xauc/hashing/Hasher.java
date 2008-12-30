@@ -89,7 +89,7 @@ public class Hasher {
 			if (enableSHA1) sha1.update(buffer, 0, last_read);
 			total_read += last_read;
 			curprogress = (float)total_read/len;
-			progress.setProgress(curprogress);
+			if (progress != null) progress.setProgress(curprogress);
 		}
 		log.println("\nCompleted hashing of \""+file.getName()+"\" in "+(System.currentTimeMillis() - start)+"ms");
 		if (enableED2K) {

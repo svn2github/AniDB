@@ -1,4 +1,5 @@
 import hashing.Hasher;
+import avparsing.AVparser;
 import utils.*;
 import xml.XmlObjectException;
 import structures.*;
@@ -19,9 +20,11 @@ public class Xauc {
 		if (args.length < 1) { System.out.println("No file"); return; }
 
 		File file = new File(args[0]);
-		Hasher filehasher = new Hasher(file);
-		filehasher.setLog(new Log("log.txt")); //"log.txt"
+		Log log = new Log("log.txt");
 		Progress progress = new Progress();
+/*
+		Hasher filehasher = new Hasher(file);
+		filehasher.setLog(log);
 		progress.setAction("hashing");
 		progress.setShowProgress(true);
 		filehasher.setProgress(progress);
@@ -30,6 +33,13 @@ public class Xauc {
 		
 		AniDBFile afile = new AniDBFile(file,filehasher);
 		afile.writeXml();
+*/
+		AVparser avparser = new AVparser(file);
+		avparser.setLog(log);
+		progress.setAction("parsing");
+		progress.setShowProgress(false);
+		avparser.setProgress(progress);
+		avparser.startWork();
 /*
 		long start = System.currentTimeMillis();
 		DirectoryParser parser = new DirectoryParser();
