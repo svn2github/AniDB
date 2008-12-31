@@ -2461,12 +2461,12 @@ color:#FFFFFF;
 #layout-main div.forum div.poll h2
 {
 border-bottom-color:#989898;
-color:#006699;
+color: #ff6000;
 }
 #layout-main div.forum div.poll dl
 {
 border-top-color:#989898;
-color:#666666;
+color:#676767;
 }
 #layout-main div.forum div.poll dl dt
 {
@@ -2506,7 +2506,7 @@ border-color:#A9A9A9;
 }
 #layout-main div.forum div.poll dl dd
 {
-color:#666666;
+color:#878787;
 }
 #layout-main a.username-coloured,
 #layout-main div.forum a.topictitle:hover
@@ -2621,4 +2621,9 @@ background: url(images/bg_2.gif);
 border:1px solid #D1D7DC;
 margin:1em 0;
 padding:4px;
+}
+.format-buttons select
+{
+background-color: black;
+color: white;
 }
