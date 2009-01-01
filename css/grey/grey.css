@@ -121,6 +121,8 @@ margin-left: 0.3em;
 #addAudLang,
 #remSubLang,
 #addSubLang,
+div.addfilem input[id="addfilem.next"],
+div.result input,
 form input[type="submit"],
 a.button,
 input.button,
@@ -133,6 +135,7 @@ margin-top: 0.3em;
 color: #797979;
 border-style: dashed;
 background-image: url(images/bg_2.gif);
+text-shadow: none;
 }
 #style_next:hover,
 #style_prev:hover,
@@ -140,6 +143,8 @@ background-image: url(images/bg_2.gif);
 #addAudLang:hover,
 #remSubLang:hover,
 #addSubLang:hover,
+div.addfilem input[id="addfilem.next"]:hover,
+div.result input:hover,
 form input[type="submit"]:hover,
 a.button:hover,
 input.button:hover,
@@ -1572,9 +1577,13 @@ padding: 1px 6px 1px 6px;
 #layout-content div.userpage_all div.userdetails,
 #layout-content div.userpage_all div.userprefs
 {
-margin-left: 15em;
-margin-right: 12em;
+margin-left: 19em;
+margin-right: 13em;
 clear: none;
+}
+#layout-main div.userpage_all div.userdetails
+{
+display: table;
 }
 #layout-content div.userpage_all,
 #layout-content div.myplace_all
@@ -2276,6 +2285,7 @@ color: #FFFFFF;
 {
 width: 16em;
 border-right: #898989 1px dashed;
+margin-right: 0;
 }
 #layout-main div.quotebody
 {
@@ -2302,15 +2312,6 @@ margin-left: 1.5em;
 {
 border-top: #898989 1px dashed;
 border-top: #898989 1px dashed;
-}
-#layout-content #layout-main div.myplace_all div.latest,
-#layout-content #layout-main div.userpage_all div.latest,
-#layout-content #layout-main div.userpage_all div.userdetails p,
-#layout-content #layout-main div.userpage_all div.userprefs
-{
-max-width: 650px;
-margin-left: auto;
-margin-right: auto;
 }
 #layout-content #layout-main div.userpage_all div.stats div.stats_roles td,
 #layout-content #layout-main div.myplace_all div.stats div.stats_roles td,
@@ -2626,4 +2627,48 @@ padding:4px;
 {
 background-color: black;
 color: white;
+}
+#layout-main div.cmt_entries div.postbody div.content
+{
+margin-left: 18em;
+margin-right:1em;
+}
+#layout-main div.cmt_entries div.postbody p.author,
+#layout-main div.cmt_entries div.postbody div.signature
+{
+margin-left: 18em;
+}
+#layout-main div.latestanimes_anime
+{
+padding-left: auto;
+padding-right: auto;
+margin-left: auto;
+margin-right: auto;
+clear: none;
+max-width: 800px;
+}
+#layout-main div.latestanimes_anime .i_icon
+{
+float: right;
+}
+#layout-main div.latestanimes_anime div.g_image
+{
+float: none;
+display: table-cell;
+margin-left: auto;
+margin-right: auto;
+}
+#layout-main .g_image image, #layout-main .g_definitionlist
+{
+display: table-cell;
+vertical-align: top;
+margin-left: auto;
+margin-right: auto;
+}
+#layout-main div.latestanimes_anime h3
+{
+margin-left: auto;
+margin-right: auto;
+display: table-caption;
+width: auto;
 }
