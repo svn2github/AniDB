@@ -2,6 +2,7 @@ package hashing;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
@@ -12,7 +13,7 @@ import utils.Log;
  * General Hasher Class
  * @author fahrenheit
  */
-public class Hasher {
+public class Hasher implements Runnable {
 	protected String crc32 = "";
 	protected String ed2k = "";
 	protected String ed2klink = "";
@@ -30,6 +31,7 @@ public class Hasher {
 	protected Log log;
 	protected Progress progress;
 	protected boolean showDebug = false;
+	protected String errorMessage = "";
 	
 	public Hasher() {}
 	public Hasher(File file) { 
@@ -44,6 +46,7 @@ public class Hasher {
 		this.enableMD5 = options.isEnableMD5();
 		this.enableSHA1 = options.isEnableSHA1();
 		this.enableTTH = options.isEnableTTH();
+		this.showDebug = options.isSeeDebug();
 	}
 	public Hasher(String file, HasherOptions options) {
 		this(new File(file), options);
@@ -64,58 +67,63 @@ public class Hasher {
 	
 	/**
 	 * Method that runs over a file and gets its hashes
-	 * @return 0 if operation is sucessful
-	 * @throws NoSuchAlgorithmException
-	 * @throws IOException
 	 */
-	public synchronized int startWork() throws NoSuchAlgorithmException, IOException {
-		InputStream in = new FileInputStream(file);
+	public synchronized void run() {
+		InputStream in;
+		try {
+			in = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			this.errorMessage = e.getLocalizedMessage() + " (hasher.run)";
+			return;
+		}
 		int last_read;
 		long total_read = 0, len = file.length();
 		float curprogress = 0;
 		byte[] buffer = new byte[BUFSIZE];
-		AbstractChecksum ed2k = new Edonkey();
-		AbstractChecksum crc32 = new Crc32();
-		AbstractChecksum md5 = new MD5();
-		AbstractChecksum tth = new TTH();
-		AbstractChecksum sha1 = new MD("sha1");
+		AbstractChecksum ed2k = null;
+		AbstractChecksum crc32 = null;
+		AbstractChecksum md5 = null;
+		AbstractChecksum tth = null;
+		AbstractChecksum sha1 = null;
+		try {
+			ed2k = new Edonkey();
+			crc32 = new Crc32();
+			md5 = new MD5();
+			tth = new TTH();
+			sha1 = new MD("sha1");
+		} catch (NoSuchAlgorithmException e) {
+			this.errorMessage = e.getLocalizedMessage() + " (hasher.run)";
+			return;
+		}
 		if (showDebug) System.out.println("Started hashing of \""+file.getName()+"\" ["+file.length()+" bytes]");
 		long start = System.currentTimeMillis();
-		while ((last_read = in.read(buffer)) != -1){
-			if (enableED2K) ed2k.update(buffer, 0, last_read);
-			if (enableCRC32) crc32.update(buffer, 0, last_read);
-			if (enableMD5) md5.update(buffer, 0, last_read);
-			if (enableTTH) tth.update(buffer, 0, last_read);
-			if (enableSHA1) sha1.update(buffer, 0, last_read);
-			total_read += last_read;
-			curprogress = (float)total_read/len;
-			if (progress != null) progress.setProgress(curprogress);
+		try {
+			while ((last_read = in.read(buffer)) != -1){
+				if (enableED2K) ed2k.update(buffer, 0, last_read);
+				if (enableCRC32) crc32.update(buffer, 0, last_read);
+				if (enableMD5) md5.update(buffer, 0, last_read);
+				if (enableTTH) tth.update(buffer, 0, last_read);
+				if (enableSHA1) sha1.update(buffer, 0, last_read);
+				total_read += last_read;
+				curprogress = (float)total_read/len;
+				if (progress != null) progress.setProgress(curprogress);
+			}
+		} catch (IOException e) {
+			this.errorMessage = e.getLocalizedMessage() + " (hasher.run)";
+			return;
 		}
-		log.println("\nCompleted hashing of \""+file.getName()+"\" in "+(System.currentTimeMillis() - start)+"ms");
+		log.println("completed hashing of \""+file.getName()+"\" in "+(System.currentTimeMillis() - start)+"ms");
 		if (enableED2K) {
 			this.ed2k = ed2k.getHexValue();
 			this.ed2klink = "ed2k://|file|"+file.getName()+"|"+file.length()+"|"+this.ed2k+"|";
-			log.println("ed2k: "+this.ed2k);
-			log.println("ed2k link: "+this.ed2klink);
 		}
-		if (enableCRC32) {
-			this.crc32 = crc32.getHexValue();
-			log.println("crc32: "+this.crc32);
-		}
-		if (enableMD5) {
-			this.md5 = md5.getHexValue();
-			log.println("md5: "+this.md5);
-		}
-		if (enableSHA1) {
-			this.sha1 = sha1.getHexValue();
-			log.println("sha1: "+this.sha1);
-		}
-		if (enableTTH) {
-			this.tth = tth.getHexValue();
-			log.println("tth: "+this.tth);
-		}
-		return 0;
+		if (enableCRC32) this.crc32 = crc32.getHexValue();
+		if (enableMD5) this.md5 = md5.getHexValue();
+		if (enableSHA1) this.sha1 = sha1.getHexValue();
+		if (enableTTH) this.tth = tth.getHexValue();
+		return;
 	}
+	
 	/** @return the log */
 	public synchronized Log getLog() { return log; }
 	/** @param log the log to set */ 
@@ -148,4 +156,6 @@ public class Hasher {
 	public synchronized String getSha1() { return sha1; }
 	/** @return the tth */
 	public synchronized String getTth() { return tth; }
+	/** @return the errorMessage */
+	public synchronized String getErrorMessage() { return errorMessage; }
 }

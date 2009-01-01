@@ -10,6 +10,7 @@ public class HasherOptions implements Serializable {
 	protected boolean enableMD5 = false;
 	protected boolean enableSHA1 = false;
 	protected boolean enableTTH = false;
+	protected boolean seeDebug = false;
 	
 	public HasherOptions() {}
 	public HasherOptions(boolean ed, boolean crc, boolean md, boolean sha, boolean tth) {
@@ -39,12 +40,8 @@ public class HasherOptions implements Serializable {
 	public synchronized boolean isEnableTTH() { return enableTTH; }
 	/** @param enableTTH the enableTTH to set */
 	public synchronized void setEnableTTH(boolean enableTTH) { this.enableTTH = enableTTH; }
-	
-	public synchronized void writeObject() {
-		this.writeObject();
-	}
-	
-	public synchronized HasherOptions getObject() {
-		return this.getObject();
-	}
+	/** @return the seeDebug */
+	public synchronized boolean isSeeDebug() { return seeDebug; }
+	/** @param seeDebug the seeDebug to set */
+	public synchronized void setSeeDebug(boolean seeDebug) { this.seeDebug = seeDebug; }
 }

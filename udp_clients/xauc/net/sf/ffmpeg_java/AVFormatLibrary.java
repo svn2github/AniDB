@@ -11,7 +11,7 @@ import com.sun.jna.ptr.PointerByReference;
 /**
  * Based on FFMPEG revision 12162, Feb 20 2008.
  * From avformat.h, avio.h
- * @author Ken Larson
+ * @author Ken Larson, Miguel Gomes
  *
  */
 public interface AVFormatLibrary extends FFMPEGLibrary 
@@ -29,20 +29,6 @@ public interface AVFormatLibrary extends FFMPEGLibrary
     public static final int LIBAVFORMAT_BUILD       = LIBAVFORMAT_VERSION_INT;
 
     public static final String LIBAVFORMAT_IDENT       = "Lavf" + LIBAVFORMAT_VERSION;
-    
-    
-	//	typedef struct AVPacket {
-	//    int64_t pts;                            ///< presentation time stamp in time_base units
-	//    int64_t dts;                            ///< decompression time stamp in time_base units
-	//    uint8_t *data;
-	//    int   size;
-	//    int   stream_index;
-	//    int   flags;
-	//    int   duration;                         ///< presentation duration in time_base units (0 if not available)
-	//    void  (*destruct)(struct AVPacket *);
-	//    void  *priv;
-	//    int64_t pos;                            ///< byte position in stream, -1 if unknown
-	//} AVPacket;
 	
     interface Destruct extends Callback 
     {
@@ -51,16 +37,20 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 
 	public static class AVPacket extends Structure
 	{
-		public long pts;                           
-		public long dts;                           
+		/** < presentation time stamp in time_base units */
+		public long pts;
+		/** < decompression time stamp in time_base units */
+		public long dts;
 		public Pointer data;
-		public int   size;
-		public int   stream_index;
-		public int   flags;
-		public int   duration;                        
+		public int size;
+		public int stream_index;
+		public int flags;
+		/** < presentation duration in time_base units (0 if not available) */
+		public int duration;
 		public Destruct destruct;
 		public Pointer priv;
-		public long pos;   
+		/** < byte position in stream, -1 if unknown */
+		public long pos;
 	}
 	
 	public static final int PKT_FLAG_KEY   = 0x0001;
@@ -84,6 +74,12 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 //	        pkt->destruct(pkt);
 //	    }
 //	}
+	/**
+	 * Free a packet<br />
+	 * <b>note:</b> this won't work with JNA, since it is inlined.<br />
+	 * use: if (pkt.destruct != null) pkt.destruct.callback(pkt);
+	 * @param pkt packet to free
+	 */
 	void av_free_packet(AVPacket pkt);	// TODO: this won't work with JNA, since it is inlined.
 	
 	//	typedef struct AVFrac {
@@ -96,16 +92,6 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	    public long num;
 	    public long den;
 	}
-	
-//	/** this structure contains the data a format has to probe a file */
-//	typedef struct AVProbeData {
-//	    const char *filename;
-//	    unsigned char *buf;
-//	    int buf_size;
-//	} AVProbeData;
-//
-//	#define AVPROBE_SCORE_MAX 100               ///< max score, half of that is used for file extension based detection
-//	#define AVPROBE_PADDING_SIZE 32             ///< extra allocated bytes at the end of the probe buffer
 
 	/** this structure contains the data a format has to probe a file */
 	public static class AVProbeData extends Structure
@@ -117,7 +103,7 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 
 	public static final int AVPROBE_SCORE_MAX =100;               ///< max score, half of that is used for file extension based detection
 	public static final int AVPROBE_PADDING_SIZE =32;             ///< extra allocated bytes at the end of the probe buffer
-
+	
 	public static class AVFormatParameters extends Structure
 	{
 	    public AVRational time_base;
@@ -126,8 +112,10 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	    public int width;
 	    public int height;
 	    public int pix_fmt;
-	    public int channel; /**< used to select dv channel */
-	    public Pointer standard; /**< tv standard, NTSC, PAL, SECAM */
+	    /**< used to select dv channel */
+	    public int channel; 
+	    /**< tv standard, NTSC, PAL, SECAM */
+	    public Pointer standard; 
 		public int bitFields;	// bit fields not supported by JNA
 //	    int mpeg2ts_raw:1;  /**< force raw MPEG2 transport stream output, if possible */
 //	    int mpeg2ts_compute_pcr:1; /**< compute exact PCR for each transport
@@ -143,63 +131,47 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 }
 	
 	public static final int AVFMT_NOFILE        =0x0001;
-	public static final int AVFMT_NEEDNUMBER    =0x0002; /**< needs '%d' in filename */
-	public static final int AVFMT_SHOW_IDS      =0x0008; /**< show format stream IDs numbers */
-	public static final int AVFMT_RAWPICTURE    =0x0020; /**< format wants AVPicture structure for
-	                                      raw picture data */
-	public static final int AVFMT_GLOBALHEADER  =0x0040; /**< format wants global header */
-	public static final int AVFMT_NOTIMESTAMPS  =0x0080; /**< format does not need / have any timestamps */
-	public static final int AVFMT_GENERIC_INDEX =0x0100; /**< use generic index building code */
-	
-	
-//	typedef struct AVOutputFormat {
-//	    const char *name;
-//	    const char *long_name;
-//	    const char *mime_type;
-//	    const char *extensions; /**< comma separated filename extensions */
-//	    /** size of private data so that it can be allocated in the wrapper */
-//	    int priv_data_size;
-//	    /* output support */
-//	    enum CodecID audio_codec; /**< default audio codec */
-//	    enum CodecID video_codec; /**< default video codec */
-//	    int (*write_header)(struct AVFormatContext *);
-//	    int (*write_packet)(struct AVFormatContext *, AVPacket *pkt);
-//	    int (*write_trailer)(struct AVFormatContext *);
-//	    /** can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER, AVFMT_GLOBALHEADER */
-//	    int flags;
-//	    /** currently only used to set pixel format if not YUV420P */
-//	    int (*set_parameters)(struct AVFormatContext *, AVFormatParameters *);
-//	    int (*interleave_packet)(struct AVFormatContext *, AVPacket *out, AVPacket *in, int flush);
-//
-//	    /**
-//	     * list of supported codec_id-codec_tag pairs, ordered by "better choice first"
-//	     * the arrays are all CODEC_ID_NONE terminated
-//	     */
-//	    const struct AVCodecTag **codec_tag;
-//
-//	    enum CodecID subtitle_codec; /**< default subtitle codec */
-//
-//	    /* private fields */
-//	    struct AVOutputFormat *next;
-//	} AVOutputFormat;
+	/**< needs '%d' in filename */
+	public static final int AVFMT_NEEDNUMBER    =0x0002; 
+	/**< show format stream IDs numbers */
+	public static final int AVFMT_SHOW_IDS      =0x0008; 
+	/**< format wants AVPicture structure for raw picture data */
+	public static final int AVFMT_RAWPICTURE    =0x0020; 
+	/**< format wants global header */
+	public static final int AVFMT_GLOBALHEADER  =0x0040; 
+	/**< format does not need / have any timestamps */
+	public static final int AVFMT_NOTIMESTAMPS  =0x0080; 
+	/**< use generic index building code */
+	public static final int AVFMT_GENERIC_INDEX =0x0100; 
 	
 	public static class AVOutputFormat extends Structure
 	{
 	    public String name;
 	    public String long_name;
 	    public String mime_type;
-	    public String extensions; /**< comma separated filename extensions */
+	    /**< comma separated filename extensions */
+	    public String extensions;
 	    public int priv_data_size;
-	    public int audio_codec; /**< default audio codec */
-	    public int video_codec; /**< default video codec */
+	    /**< default audio codec */
+	    public int audio_codec;
+	    /**< default video codec */
+	    public int video_codec; 
 	    public Pointer write_header;
 	    public Pointer write_packet;
 	    public Pointer write_trailer;
+	    /** can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER, AVFMT_GLOBALHEADER */
 	    public int flags;
+	    /** currently only used to set pixel format if not YUV420P */
 	    public Pointer set_parameters;
 	    public Pointer interleave_packet;
+	    /**
+	     * list of supported codec_id-codec_tag pairs, ordered by "better choice first"
+	     * the arrays are all CODEC_ID_NONE terminated
+	     */
 	    public Pointer codec_tag;
-	    public int subtitle_codec; /**< default subtitle codec */
+	    /**< default subtitle codec */
+	    public int subtitle_codec; 
+	    /* private fields */
 	    public Pointer next;
 
 	    public AVOutputFormat() {
@@ -246,19 +218,13 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	
 	//enum AVStreamParseType:
     public static final int AVSTREAM_PARSE_NONE = 0;
-    public static final int AVSTREAM_PARSE_FULL = 1;       /**< full parsing and repack */
-    public static final int AVSTREAM_PARSE_HEADERS = 2;    /**< only parse headers, don't repack */
-    public static final int AVSTREAM_PARSE_TIMESTAMPS = 3; /**< full parsing and interpolation of timestamps for frames not starting on packet boundary */
+    /**< full parsing and repack */
+    public static final int AVSTREAM_PARSE_FULL = 1;
+    /**< only parse headers, don't repack */
+    public static final int AVSTREAM_PARSE_HEADERS = 2;
+    /**< full parsing and interpolation of timestamps for frames not starting on packet boundary */
+    public static final int AVSTREAM_PARSE_TIMESTAMPS = 3; 
 
-//    typedef struct AVIndexEntry {
-//        int64_t pos;
-//        int64_t timestamp;
-//    #define AVINDEX_KEYFRAME 0x0001
-//        int flags:2;
-//        int size:30; //Yeah, trying to keep the size of this small to reduce memory requirements (it is 24 vs 32 byte due to possible 8byte align).
-//        int min_distance;         /**< min distance between this and the previous keyframe, used to avoid unneeded searching */
-//    } AVIndexEntry;
-    
    public static class AVIndexEntry extends Structure
 	{
     	public long pos;
@@ -267,39 +233,97 @@ public interface AVFormatLibrary extends FFMPEGLibrary
         public int bit_fields; // JNA does not support bit fields
 //        int flags:2;
 //        int size:30; //Yeah, trying to keep the size of this small to reduce memory requirements (it is 24 vs 32 byte due to possible 8byte align).
-        public int min_distance;         /**< min distance between this and the previous keyframe, used to avoid unneeded searching */
+        /**< min distance between this and the previous keyframe, used to avoid unneeded searching */
+        public int min_distance;         
     }
 	
 
-	public static class AVStream extends Structure
-	{
-	   public int index;   
-	   public int id;      
-	   public Pointer codec; 
-	   public AVRational r_frame_rate;
-	   public Pointer priv_data;
-	   public long first_dts;
-	   public AVFrac pts;
-	   public AVRational time_base;
-	   public int pts_wrap_bits; 
-	   public int stream_copy; 
-	   public int discard; 
-	   public float quality;
-	   public long start_time;
-	   public long duration;
-	   public byte[] language = new byte[4]; 
-	   public int need_parsing;
-	   public Pointer parser;
-	   public long cur_dts;
-	   public int last_IP_duration;
-	   public long last_IP_pts;
-	   public Pointer index_entries; 
-	   public int nb_index_entries;
-	   public int index_entries_allocated_size;
-	   public long nb_frames;              
-	   public static final int MAX_REORDER_DELAY = 4;
-	   public long[] pts_buffer = new long[MAX_REORDER_DELAY+1];
-	   public Pointer filename; /**< source filename of the stream */
+	public static class AVStream extends Structure {
+		/**< stream index in AVFormatContext */
+		public int index;
+		/**< format-specific stream ID */
+		public int id;
+		/**< codec context */
+		public Pointer codec;
+	    /**
+	     * Real base frame rate of the stream.
+	     * This is the lowest frame rate with which all timestamps can be
+	     * represented accurately (it is the least common multiple of all
+	     * frame rates in the stream). Note, this value is just a guess!
+	     * For example if the time base is 1/90000 and all frames have either
+	     * approximately 3600 or 1800 timer ticks, then r_frame_rate will be 50/1.
+	     */
+		public AVRational r_frame_rate;
+		public Pointer priv_data;
+		/* internal data used in av_find_stream_info() */
+		public long first_dts;
+		/** encoding: pts generation when outputting stream */
+		public AVFrac pts;
+		/**
+	     * This is the fundamental unit of time (in seconds) in terms
+	     * of which frame timestamps are represented. For fixed-fps content,
+	     * time base should be 1/frame rate and timestamp increments should be 1.
+	     */
+		public AVRational time_base;
+		/**< number of bits in pts (used for wrapping control) */
+		public int pts_wrap_bits; 
+		/* ffmpeg.c private use */
+		/**< If set, just copy stream. */
+		public int stream_copy; 
+		/**< Selects which packets can be discarded at will and do not need to be demuxed. */
+		public int discard; 
+		//FIXME move stuff to a flags field?
+	    /** Quality, as it has been removed from AVCodecContext and put in AVVideoFrame.
+	     * MN: dunno if that is the right place for it */
+		public float quality;
+		/**
+	     * Decoding: pts of the first frame of the stream, in stream time base.
+	     * Only set this if you are absolutely 100% sure that the value you set
+	     * it to really is the pts of the first frame.
+	     * This may be undefined (AV_NOPTS_VALUE).
+	     * @note The ASF header does NOT contain a correct start_time the ASF
+	     * demuxer must NOT set this.
+	     */
+		public long start_time;
+		/**
+	     * Decoding: duration of the stream, in stream time base.
+	     * If a source file does not specify a duration, but does specify
+	     * a bitrate, this value will be estimated from bitrate and file size.
+	     */
+		public long duration;
+		/** ISO 639 3-letter language code (empty string if undefined) */
+		public byte[] language = new byte[4];
+
+		/* av_read_frame() support */
+		public int need_parsing;
+		public Pointer parser;
+		public long cur_dts;
+		public int last_IP_duration;
+		public long last_IP_pts;
+		
+		/* av_seek_frame() support */
+		/**< Only used if the format does not support seeking natively. */
+		public Pointer index_entries; 
+		public int nb_index_entries;
+		public int index_entries_allocated_size;
+		/**< number of frames in this stream if known or 0 */
+		public long nb_frames;              
+		//public static final int MAX_REORDER_DELAY = 4;
+		public long[] unused = new long[4+1];
+		/**< source filename of the stream */
+		public Pointer filename;
+		/**< AV_DISPOSITION_* bit field */
+		public int disposition;
+	    public AVProbeData probe_data;
+		public static final int MAX_REORDER_DELAY = 16;
+	    public long[] pts_buffer = new long [MAX_REORDER_DELAY+1];
+	    /**
+	     * sample aspect ratio (0 if unknown)
+	     * - encoding: Set by user.
+	     * - decoding: Set by libavformat.
+	     */
+	    public AVRational sample_aspect_ratio;
+
 		public AVStream()
 		{
 			super();
@@ -321,23 +345,27 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	 */
 	public static class AVProgram extends Structure
 	{
-	    public int            id;
-	    public Pointer provider_name; ///< Network name for DVB streams
-	    public Pointer name;          ///< Service name for DVB streams
-	    public int            flags;
-	    public int discard;        ///< selects which program to discard and which to feed to the caller
+	    public int id;
+	    /**< Network name for DVB streams */
+	    public Pointer provider_name;
+	    /**< Service name for DVB streams */
+	    public Pointer name;
+	    public int flags;
+	    /**< selects which program to discard and which to feed to the caller */
+	    public int discard;
 	    public Pointer stream_index;
 	    public /*unsigned*/ int   nb_stream_indexes;
 	};
 	
-	public static final int AVFMTCTX_NOHEADER      = 0x0001; /**< signal that no header is present
-    (streams are added dynamically) */
+	/**< signal that no header is present (streams are added dynamically) */
+	public static final int AVFMTCTX_NOHEADER      = 0x0001; 
 
 	public static final int MAX_STREAMS = 20;
 	
 
 	public static class AVFormatContext extends Structure
 	{
+		/**< Set by av_alloc_format_context. */
 		public Pointer av_class;
 		public Pointer iformat;
 		public Pointer oformat;
@@ -391,6 +419,7 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 			};
 		}
 		//public Pointer[] streams = new Pointer[MAX_STREAMS]; //	    AVStream *streams[MAX_STREAMS];
+		/**< input or output filename */
 		public byte[] filename = new byte[1024]; 
 		public long timestamp;
 		public byte[] title = new byte[512];
@@ -398,19 +427,40 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 		public byte[] copyright = new byte[512];
 		public byte[] comment = new byte[512];
 		public byte[] album = new byte[512];
-		public int year;  
+		/**< ID3 year, 0 if none */
+		public int year;
+		/**< track number, 0 if none */
 		public int track; 
-		public byte[] genre = new byte[32]; 
+		/**< ID3 genre */
+		public byte[] genre = new byte[32];
+		/**< Format-specific flags, see AVFMTCTX_xx */
 		public int ctx_flags; 
+	    /* private data for pts handling (do not modify directly). */
+	    /** This buffer is only needed when packets were already buffered but
+	       not decoded, for example to get the codec parameters in MPEG
+	       streams. */
 		public Pointer packet_buffer;
+	    /** Decoding: position of the first frame of the component, in
+	       AV_TIME_BASE fractional seconds. NEVER set this value directly:
+	       It is deduced from the AVStream values.  */
 		public long start_time;
+	    /** Decoding: duration of the stream, in AV_TIME_BASE fractional
+	       seconds. NEVER set this value directly: it is deduced from the
+	       AVStream values.  */
 		public long duration;
+		/** decoding: total file size, 0 if unknown */
 		public long file_size;
+		/** Decoding: total stream bitrate in bit/s, 0 if not
+	       available. Never set it directly if the file_size and the
+	       duration are known as ffmpeg can compute it automatically. */
 		public int bit_rate;
+		/* av_read_frame() support */
 		public Pointer cur_st;
 		public Pointer cur_ptr;
 		public int cur_len;
 		public AVPacket cur_pkt;
+		/* av_seek_frame() support */
+		/** offset of the first packet */
 		public long data_offset;
 		public int index_built;
 		public int mux_rate;
@@ -419,13 +469,22 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 		public int max_delay;
 			public static final int AVFMT_NOOUTPUTLOOP = -1;
 			public static final int AVFMT_INFINITEOUTPUTLOOP = 0;
+		/** number of times to loop output in formats that support it */
 		public int loop_output;
 		public int flags;
-			public static final int AVFMT_FLAG_GENPTS       =0x0001; ///< generate pts if missing even if it requires parsing future frames
-			public static final int AVFMT_FLAG_IGNIDX       =0x0002; ///< ignore index
-			public static final int AVFMT_FLAG_NONBLOCK     =0x0004; ///< do not block when reading packets from input
+		/**< generate pts if missing even if it requires parsing future frames */
+			public static final int AVFMT_FLAG_GENPTS       =0x0001;
+		/**< ignore index */
+			public static final int AVFMT_FLAG_IGNIDX       =0x0002;
+		/**< do not block when reading packets from input */
+			public static final int AVFMT_FLAG_NONBLOCK     =0x0004;
 		public int loop_input;
+		/** Decoding: size of data to probe; encoding: unused. */
 		public int probesize;
+	    /**
+	     * Maximum time (in AV_TIME_BASE units) during which the input should
+	     * be analyzed in av_find_stream_info().
+	     */
 		public int max_analyze_duration;
 		public Pointer key;
 		public int keylen;
@@ -447,7 +506,6 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	     * demuxing: set by user
 	     */
 	    public int /*enum CodecID*/ subtitle_codec_id;
-
 	    /**
 	     * Maximum amount of memory in bytes to use per stream for the index.
 	     * If the needed index exceeds this size entries will be discarded as
@@ -459,7 +517,33 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	     * demuxing: set by user
 	     */
 	    public /*unsigned*/ int max_index_size;
-		
+	    /**
+	     * Maximum amount of memory in bytes to use for buffering frames
+	     * obtained from realtime capture devices.
+	     */
+	    public /*unsigned*/ int max_picture_buffer;
+	    /** Number of chapters */
+	    public /*unsigned*/ int nb_chapters;
+	    /** AVChapter */
+	    public Pointer chapters;
+	    /**
+	     * Flags to enable debugging.
+	     */
+	    public int debug;
+	    	public static int FF_FDEBUG_TS        = 0x0001;
+	    /**
+	     * Raw packets from the demuxer, prior to parsing and decoding.
+	     * This buffer is used for buffering packets until the codec can
+	     * be identified, as parsing cannot be done without knowing the
+	     * codec.
+	     * AVPacketList
+	     */
+	    public Pointer raw_packet_buffer;
+	    /** AVPacketList */
+	    public Pointer raw_packet_buffer_end;
+	    /** AVPacketList */
+	    public Pointer packet_buffer_end;
+	    
 		public AVFormatContext()
 		{
 			super();
@@ -471,11 +555,6 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 			read();
 		}
 	}
-	
-//	typedef struct AVPacketList {
-//	    AVPacket pkt;
-//	    struct AVPacketList *next;
-//	} AVPacketList;
 	
 	public static class AVPacketList extends Structure
 	{
@@ -601,9 +680,12 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	                     int pts_num, int pts_den);
 
 	
-	public static final int AVSEEK_FLAG_BACKWARD =1; ///< seek backward
-	public static final int AVSEEK_FLAG_BYTE     =2; ///< seeking based on position in bytes
-	public static final int AVSEEK_FLAG_ANY      =4; ///< seek to any frame, even non keyframes
+	/**< seek backward */
+	public static final int AVSEEK_FLAG_BACKWARD =1;
+	/**< seeking based on position in bytes */
+	public static final int AVSEEK_FLAG_BYTE     =2;
+	/**< seek to any frame, even non keyframes */
+	public static final int AVSEEK_FLAG_ANY      =4;
 	
 	
 	int av_find_default_stream_index(AVFormatContext s);
@@ -707,17 +789,14 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	{
 	    public Pointer prot;
 	    public int flags;
-	    public int is_streamed;  /**< true if streamed (no seek possible), default = false */
-	    public int max_packet_size;  /**< if non zero, the stream is packetized with this max packet size */
+	    /**< true if streamed (no seek possible), default = false */
+	    public int is_streamed;  
+	    /**< if non zero, the stream is packetized with this max packet size */
+	    public int max_packet_size;
 	    public Pointer priv_data;
-	    public Pointer /* char * */ filename; /**< specified filename */
+	    /**< specified filename */
+	    public Pointer /* char * */ filename;
 	}
-	
-//	typedef struct URLPollEntry {
-//	    URLContext *handle;
-//	    int events;
-//	    int revents;
-//	} URLPollEntry;
 	
 	public static class URLPollEntry extends Structure
 	{
@@ -807,28 +886,6 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 
 	int register_protocol(URLProtocol protocol);
 
-	
-	
-//	typedef struct {
-//	    unsigned char *buffer;
-//	    int buffer_size;
-//	    unsigned char *buf_ptr, *buf_end;
-//	    void *opaque;
-//	    int (*read_packet)(void *opaque, uint8_t *buf, int buf_size);
-//	    int (*write_packet)(void *opaque, uint8_t *buf, int buf_size);
-//	    offset_t (*seek)(void *opaque, offset_t offset, int whence);
-//	    offset_t pos; /**< position in the file of the current buffer */
-//	    int must_flush; /**< true if the next seek should flush */
-//	    int eof_reached; /**< true if eof reached */
-//	    int write_flag;  /**< true if open for writing */
-//	    int is_streamed;
-//	    int max_packet_size;
-//	    unsigned long checksum;
-//	    unsigned char *checksum_ptr;
-//	    unsigned long (*update_checksum)(unsigned long checksum, const uint8_t *buf, unsigned int size);
-//	    int error;         ///< contains the error code or 0 if no error happened
-//	} ByteIOContext;
-
 	public static class ByteIOContext extends Structure
 	{
 		public Pointer buffer;
@@ -839,15 +896,20 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 		public Pointer read_packet;
 		public Pointer write_packet;
 		public Pointer seek;
+		/**< position in the file of the current buffer */
 		public long pos; 
-		public int must_flush; 
+		/**< true if the next seek should flush */
+		public int must_flush;
+		/**< true if eof reached */
 		public int eof_reached; 
+		/**< true if open for writing */
 		public int write_flag; 
 		public int is_streamed;
 		public int max_packet_size;
 		public NativeLong checksum;	
 		public Pointer checksum_ptr;
 		public Pointer update_checksum;
+		/**< contains the error code or 0 if no error happened */
 		public int error;  
 		public Pointer read_pause;
 	    public Pointer read_seek;

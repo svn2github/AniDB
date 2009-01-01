@@ -20,11 +20,13 @@ import utils.Progress;
 /**
  * Audio/Video file parser
  */
-public class AVparser {
+public class AVparser implements Runnable {
 	protected File file;
 	protected Log log;
 	protected Progress progress;
 	protected boolean showDebug = false;
+	protected boolean parseFile = false;
+	protected String errorMessage = "";
 
 	// Public fields
 	public String filename;
@@ -35,13 +37,21 @@ public class AVparser {
 	public int numStreams = 0;
 	public AVStreamData[] streams = null;
 	
-	public AVparser() {}
+	public AVparser() {
+		this.log = new Log();
+		this.progress = new Progress();
+	}
 	public AVparser(File file) {
 		this();
 		this.filename = file.getAbsolutePath();
 		this.file = file;
 	}
-	public AVparser(String file) { this(new File(file)); }
+	public AVparser(String filename) { this(new File(filename)); }
+	public AVparser(File file, AVParserOptions avparserOptions) {
+		this(file);
+		this.parseFile = avparserOptions.isFullParse();
+		this.showDebug = avparserOptions.isSeeDebug();
+	}
 	
 	/** @return the log */
 	public synchronized Log getLog() { return log; }
@@ -55,7 +65,13 @@ public class AVparser {
 	public synchronized boolean isShowDebug() { return showDebug; }
 	/** @param showDebug the showDebug to set */
 	public synchronized void setShowDebug(boolean showDebug) { this.showDebug = showDebug; }
-	
+	/** @return the parseFile */
+	public synchronized boolean isParseFile() { return parseFile; }
+	/** @param parseFile the parseFile to set */
+	public synchronized void setParseFile(boolean parseFile) { this.parseFile = parseFile; }
+	/** @return the errorMessage */
+	public synchronized String getErrorMessage() { return errorMessage;	}
+
 	/**
 	 * Gets the codec type
 	 * @param codecType AVCodecContext codec_type
@@ -187,12 +203,12 @@ public class AVparser {
 	 * Method that parses a file
 	 * @return 0 if operation is sucessful
 	 */
-	public synchronized int startWork() {
+	public synchronized void run() {
 		final AVFormatLibrary AVFORMAT = AVFormatLibrary.INSTANCE;
 		final AVCodecLibrary AVCODEC = AVCodecLibrary.INSTANCE;
 
 		// not sure what the consequences of such a mismatch are, but it is worth logging a warning:
-		if (AVCODEC.avcodec_version() != AVCodecLibrary.LIBAVCODEC_VERSION_INT)
+		if (showDebug && AVCODEC.avcodec_version() != AVCodecLibrary.LIBAVCODEC_VERSION_INT)
 			System.err.println("ffmpeg-java and ffmpeg versions do not match: avcodec_version=" + AVCODEC.avcodec_version() + " LIBAVCODEC_VERSION_INT=" + AVCodecLibrary.LIBAVCODEC_VERSION_INT);
 		
 		// register formats
@@ -201,8 +217,8 @@ public class AVparser {
 		
 		// Open video file
 		if (AVFORMAT.av_open_input_file(ppFormatCtx, filename, null, 0, null) != 0) {
-			System.err.println("Couldn't open file"); // Couldn't open file
-			return 1;
+			this.errorMessage = "couldn't open file (avparser.run)";
+			return;
 		}
 		
 		// Get pointer
@@ -210,8 +226,8 @@ public class AVparser {
 			
 		// Retrieve stream information
 		if (AVFORMAT.av_find_stream_info(formatCtx) < 0) {
-		    System.err.println("Couldn't find stream information"); // Couldn't find stream information
-		    return 1;
+			this.errorMessage = "couldn't find stream information (avparser.run)";
+		    return;
 		}
 		
 		AVInputFormat format = new AVInputFormat(formatCtx.iformat);
@@ -223,6 +239,8 @@ public class AVparser {
 		this.bitrate = (formatCtx.bit_rate > 0 ? formatCtx.bit_rate/1000 : 0);
 		this.format = format.name;
 		this.numStreams = formatCtx.nb_streams;
+		
+		//AVFORMAT.dump_format(formatCtx, 0, filename, 0);
 		
 		// Now get stream data
 		Pointer[] streams = formatCtx.getStreams();
@@ -236,10 +254,10 @@ public class AVparser {
 			switch (codecCtx.codec_type) {
 				case AVCodecLibrary.CODEC_TYPE_VIDEO:
 					codec = AVCODEC.avcodec_find_decoder(codecCtx.codec_id);
-					if (codec == null)
-						System.err.println("Codec not found for codec_id " + codecCtx.codec_id); // Codec not found
+					if (codec == null)						
+						log.println("codec not found for codec_id " + codecCtx.codec_id + " (avparser.run)");
 					if (codec != null && AVCODEC.avcodec_open(codecCtx, codec) < 0)
-						System.err.println("Could not open codec"); // Could not open codec
+						log.println("could not open codec (avparser.run)");
 					AVStreamDataVideo vidstream = new AVStreamDataVideo();
 					vidstream.timebase = stream.time_base.toDouble();
 					vidstream.type = codecCtx.codec_type;
@@ -254,18 +272,23 @@ public class AVparser {
 			        	vidstream.fps = 1/codecCtx.time_base.av_q2d();
 					vidstream.width = codecCtx.width;
 					vidstream.height = codecCtx.height;
+					vidstream.cwidth = codecCtx.coded_width;
+					vidstream.cheight = codecCtx.coded_height;
 					vidstream.resolution = vidstream.width + "x" + vidstream.height;
+					vidstream.cresolution = vidstream.cwidth + "x" + vidstream.cheight;
 					vidstream.ar = (double)codecCtx.width / (double)codecCtx.height;
+					vidstream.car = (double)codecCtx.coded_width / (double)codecCtx.coded_height;
 					vidstream.pictureFormat = AVCODEC.avcodec_get_pix_fmt_name(codecCtx.pix_fmt);
+					if (codecCtx.bit_rate > 0) vidstream.bitrate = codecCtx.bit_rate;
 					this.streams[i] = vidstream;
 					streamId++;
 					break;
 				case AVCodecLibrary.CODEC_TYPE_AUDIO:
 					codec = AVCODEC.avcodec_find_decoder(codecCtx.codec_id);
-					if (codec == null)
-						System.err.println("Codec not found for codec_id " + codecCtx.codec_id); // Codec not found
+					if (codec == null)						
+						log.println("codec not found for codec_id " + codecCtx.codec_id + " (avparser.run)");
 					if (codec != null && AVCODEC.avcodec_open(codecCtx, codec) < 0)
-						System.err.println("Could not open codec"); // Could not open codec
+						log.println("could not open codec (avparser.run)");
 					AVStreamDataAudio audstream = new AVStreamDataAudio();
 					audstream.timebase = stream.time_base.toDouble();
 					audstream.type = codecCtx.codec_type;
@@ -278,6 +301,7 @@ public class AVparser {
 					audstream.layout = mapAudioChannels(codecCtx.channel_layout);
 					audstream.sampleFormat = getSampleFormat(codecCtx.sample_fmt);
 					audstream.sampleRate = codecCtx.sample_rate;
+					if (codecCtx.bit_rate > 0) audstream.bitrate = codecCtx.bit_rate;
 					this.streams[i] = audstream;
 					streamId++;
 					break;
@@ -289,7 +313,11 @@ public class AVparser {
 					substream.streamId = streamId;
 					substream.codecName = mapSubtitleCodec(codecCtx.codec_id);
 					substream.codecTag = (codecCtx.codec_tag != 0 ? getCodecTag(codecCtx.codec_tag) : "");
+					substream.subtitleType = 20; // soft subtitle otherwise we wouldn't find it
 					substream.language = convertByteArray(stream.language);
+					if (codecCtx.codec_id == AVCodecLibrary.CODEC_ID_TEXT) substream.isUnstyledSubs = true;
+					if (codecCtx.codec_id == AVCodecLibrary.CODEC_ID_SSA) substream.isStyledSubs = true;
+					if (codecCtx.codec_id == AVCodecLibrary.CODEC_ID_DVD_SUBTITLE) substream.isImageSubs = true;
 					this.streams[i] = substream;
 					streamId++;
 					break;
@@ -305,27 +333,41 @@ public class AVparser {
 			if (codec != null) AVCODEC.avcodec_close(codecCtx);
 		}
 
-		final AVPacket packet = new AVPacket();
-		long totalSize = formatCtx.file_size;
-		long parsedSize = 0;
-		float curprogress = 0;
-	    while (AVFORMAT.av_read_frame(formatCtx, packet) >= 0) {
-	    	this.streams[packet.stream_index].size += packet.size;
-	    	this.streams[packet.stream_index].duration += packet.duration;
-	    	parsedSize += packet.size;
-	    	curprogress = (parsedSize/totalSize);
-	    	if (progress != null) progress.setProgress(curprogress);
-	    }
-	    
-	    // fill in computed bitrate for audio and video streams
-	    for (int i = 0; i < formatCtx.nb_streams; i++) {
-	    	if (this.streams[i].type != AVCodecLibrary.CODEC_TYPE_VIDEO && this.streams[i].type != AVCodecLibrary.CODEC_TYPE_AUDIO) continue;
-	    	if (this.streams[i].duration == 0) continue; // can't have this
-	    	this.streams[i].bitrate = (this.streams[i].size * 8) / (this.streams[i].duration * this.streams[i].timebase);
-	    	this.streams[i].formatedDuration = formatDurationSecs(this.streams[i].duration); 
-	    }
+		// this ocasionaly crashes, so it's disabled by default
+		if (this.parseFile) {
+			final AVPacket packet = new AVPacket();
+			long totalSize = formatCtx.file_size;
+			long parsedSize = 0;
+			float curprogress = 0;
+		    while (AVFORMAT.av_read_frame(formatCtx, packet) >= 0) {
+		    	if (this.streams[packet.stream_index] == null) this.streams[packet.stream_index] = new AVStreamData();
+		    	this.streams[packet.stream_index].size += packet.size;
+		    	this.streams[packet.stream_index].duration += packet.duration;
+		    	parsedSize += packet.size;
+		    	curprogress = (parsedSize/totalSize);
+		    	if (progress != null) progress.setProgress(curprogress);
+		    	
+		    	// Free the packet that was allocated by av_read_frame
+		        // AVFORMAT.av_free_packet(packet.getPointer()) - cannot be called because it is an inlined function.
+		        // so we'll just do the JNA equivalent of the inline:
+		    	if (packet.destruct != null)
+		        	packet.destruct.callback(packet);
+		    }
+		    
+		    // fill in computed bitrate for audio and video streams
+		    for (int i = 0; i < formatCtx.nb_streams; i++) {
+		    	if (this.streams[i] == null) continue;
+		    	if (this.streams[i].type != AVCodecLibrary.CODEC_TYPE_VIDEO && this.streams[i].type != AVCodecLibrary.CODEC_TYPE_AUDIO) continue;
+		    	if (this.streams[i].duration <= 0) continue; // can't have this
+		    	int den = (int)(this.streams[i].duration * this.streams[i].timebase);
+		    	this.streams[i].duration = den;
+		    	long num = this.streams[i].size * 8;
+		    	this.streams[i].bitrate = num / den;
+		    	this.streams[i].formatedDuration = formatDurationSecs(this.streams[i].duration); 
+		    }
+		}
 	    
 	    AVFORMAT.av_close_input_file(formatCtx);
-		return 0;
+		return;
 	}
 }

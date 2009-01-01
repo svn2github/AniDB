@@ -123,7 +123,7 @@ public class PlayerExample
 		}
 		
 		// Parser
-/*
+
 		final AVPacket packet = new AVPacket();
 		AVStreamData[] data = new AVStreamData[formatCtx.nb_streams];
 		long totalSize = formatCtx.file_size;
@@ -142,7 +142,7 @@ public class PlayerExample
 	    		data[i].bitrate = data[i].size * 8 / data[i].duration;
 	    	System.out.println("Stream "+i+": size: "+data[i].size+" | duration: "+data[i].duration+" | bitrate: "+data[i].bitrate+" kb/s");
 	    }
-*/
+
 	    // Close the video file
 	    AVFORMAT.av_close_input_file(formatCtx);
 	}

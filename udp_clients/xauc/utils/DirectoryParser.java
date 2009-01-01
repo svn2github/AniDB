@@ -9,15 +9,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * This class is the directory parser
+ * A recursive directory parser
  */
 public class DirectoryParser {
 	protected ArrayList<String> extensions;
 	protected String extensionFilter = "";
+	protected boolean recurseDir = false;
 	
 	public DirectoryParser() {
 		this.extensions = new ArrayList<String>();
 		loadExtensions();
+	}
+	public DirectoryParser(boolean recurseDir) {
+		this();
+		this.recurseDir = recurseDir;
 	}
 		
 	public ArrayList<String> getExtensions() { return this.extensions; }
@@ -26,7 +31,8 @@ public class DirectoryParser {
 	 * Loads the extensions for filtering files
 	 */
 	public void loadExtensions() {
-		File file = new File("extensions.txt");
+		String extFile = System.getProperty("user.home") + File.separator + ".xauc" + File.separator + "extensions.txt";
+		File file = new File(extFile);
 		BufferedReader in;
 		try {
 			in = new BufferedReader(new FileReader(file));
@@ -39,9 +45,9 @@ public class DirectoryParser {
 				this.extensionFilter += extensions.get(i);
 				if (i < extensions.size() - 1) this.extensionFilter += '|';
 			}
+			in.close();
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getLocalizedMessage());
-			e.printStackTrace();
+			this.extensionFilter = "avi|mkv|ogm|mp4|wmv";
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
 			e.printStackTrace();
@@ -64,8 +70,10 @@ public class DirectoryParser {
 			File dir = directories.remove(0);
 			File[] files = dir.listFiles(filefilter);
 			for (int i = 0; i < files.length; i++) retfiles.add(files[i]);
-			File[] dirs = dir.listFiles(dirfilter);
-			for (int i = 0; i < dirs.length; i++) directories.add(dirs[i]);
+			if (this.recurseDir) {
+				File[] dirs = dir.listFiles(dirfilter);
+				for (int i = 0; i < dirs.length; i++) directories.add(dirs[i]);
+			}
 		}
 		return retfiles;
 	}
