@@ -1,29 +1,28 @@
-/* file add anime as a relation support scripts
+/* @file addcharacter page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- * version 1.0 (09.12.2008) - Initial Version
+ *         
+ * @version 1.0 (17.05.2007)
  */
 jsVersionArray.push({
-	"file":"anime3/addcharanimerel.js",
-	"version":"1.5",
+	"file":"anime3/addcharacter.js",
+	"version":"1.0",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Added support for both types of relations"
+	"changelog":"Initial version"
 });
 
-var addRelInput; // For anime addition to a given char
-var addCRelInput; // For character addition to a given anime
-var addRelSubmit;
-var fieldset;
-var table;
-var seeDebug = false;
+var seeDebug = true;
+var magicRows = new Array();
+var tbody = null;
+var resulttable = null;
+var guiseinput = null;
+var newguiseinput = null;
+var searchinput = null;
 var searchString = "";
-var AnimeInfos = new Array(); // indexed by aid
 var CharInfos = new Array(); // indexed by Charid
 var picbase = 'http://img5.anidb.net/pics/anime/';
-var descInfo = new Array();
 var charInfo = new Array();
-var aids = new Array();
 var cids = new Array();
 
 /* Replacement functions
@@ -48,22 +47,49 @@ function convert_input(str) {
 	return (str);
 }
 
-/* Creates a new AnimeInfo node */
-function CAnimeInfo(node) {
-	this.aid = Number(node.getAttribute('aid'));
-	this.desc = convert_input(node.getAttribute('desc'));
-	if (this.desc == '') this.desc = '<i>no description</i>';
-	this.title = node.getAttribute('title');
-	this.picurl = node.getAttribute('picurl');
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_150.gif';
-	this.restricted = Number(node.getAttribute('restricted'));
-	this.airdate = javascriptDate(node.getAttribute('airdate'));
-	this.enddate = javascriptDate(node.getAttribute('enddate'));
-	var airDateYear = this.airdate.getFullYear();
-	var endDateYear = this.enddate.getFullYear();
-	this.year = (airDateYear == endDateYear ? airDateYear : airDateYear + '-' +endDateYear);
-	this.lang = node.getAttribute('mainlang');
+/* Function that changes the layout of the page */
+function changeLayout() {
+	var type = Number(this.value);
+	switch(type) {
+		case 1: // character
+			magicRows['gender'].style.display = '';
+			magicRows['bloodtype'].style.display = '';
+			magicRows['height'].style.display = '';
+			magicRows['weight'].style.display = '';
+			magicRows['bust'].style.display = '';
+			magicRows['waist'].style.display = '';
+			magicRows['hips'].style.display = '';
+			break;
+		case 2: // mecha
+			magicRows['gender'].style.display = 'none';
+			magicRows['bloodtype'].style.display = 'none';
+			magicRows['height'].style.display = '';
+			magicRows['weight'].style.display = '';
+			magicRows['bust'].style.display = 'none';
+			magicRows['waist'].style.display = 'none';
+			magicRows['hips'].style.display = 'none';
+			break;
+		default: // organization and future types?
+			magicRows['gender'].style.display = 'none';
+			magicRows['bloodtype'].style.display = 'none';
+			magicRows['height'].style.display = 'none';
+			magicRows['weight'].style.display = 'none';
+			magicRows['bust'].style.display = 'none';
+			magicRows['waist'].style.display = 'none';
+			magicRows['hips'].style.display = 'none';
+			break;
+	}
+	// repaint stripes (i guess someone will complain about this, so i better do it..
+	if (!tbody) { errorAlert('changeLayout',"tbody is missing"); return; }
+	var rows = tbody.rows;
+	var k = 0;
+	for (var i = 0; i < rows.length; i++) {
+		var row = rows[i];
+		if (row.style.display == 'none') continue;
+		row.className = row.className.replace('g_odd ','');
+		row.className = (k % 2 ? '' : 'g_odd ') + row.className;
+		k++;
+	}
 }
 
 /* Creates a new CharInfo node */
@@ -77,41 +103,6 @@ function CCharInfo(node) {
 	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
 	else this.picurl = 'http://static.anidb.net/pics/nopic_150.gif';
 	this.lang = node.getAttribute('mainlang');
-}
-
-/* AnimeDesc Node Parser */
-function CDesc(node) {
-	this.aid = Number(node.getAttribute('aid'));
-	this.picurl = node.getAttribute('picurl');
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/50x65/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_50x65.gif';
-	this.airdate = convertTime(node.getAttribute('airdate'));
-	this.enddate = convertTime(node.getAttribute('enddate'));
-	this.desc = convert_input(node.getAttribute('desc'));
-	this.name = node.getAttribute('name');
-	this.verified = (Number(node.getAttribute('verifydate')) > 0);
-	this.lang = node.getAttribute('lang');
-	this.title = node.getAttribute('title');
-	this.mainlang = node.getAttribute('mainlang');
-	this.restricted = Number(node.getAttribute('restricted'));
-	this.type = Number(node.getAttribute('type'));
-	var type = "Main";
-	switch(this.type) {
-		case 1: type = "Main"; break;
-		case 2: type = "Synonym"; break;
-		case 3: type = "Short"; break;
-		case 4: type = "Official"; break;
-		default: type = "unknown"; break;
-	}
-	this.type = type;
-	this.titles = new Array();
-	if (this.type != 'Main') {
-		this.titles[this.type] = new Array();
-		this.titles[this.type].push({'title':this.name,'lang':this.lang,'verified':this.verified});
-	}
-	// now, build the anime info node
-	if (!AnimeInfos[this.aid])
-		AnimeInfos[this.aid] = new CAnimeInfo(node);
 }
 
 /* CharDesc Node Parser */
@@ -149,38 +140,29 @@ function CCDesc(node) {
 		CharInfos[this.charid] = new CCharInfo(node);
 }
 
-/* Function that fetches data */
-function fetchData(searchString,charSearch) {
+/* Function that fetches char data
+ * @param type Type of data to fetch
+ * @param search Search string
+ */
+function fetchData(type,searchString) {
 	var req = xhttpRequest();
-	if (!charSearch) {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/animesearch.xml', parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=animedesc&limit=100&search='+escape(searchString), parseData);
+	if (type == "charbyid") {
+		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/char'+searchString+'_desc.xml', prepAjaxSearch);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=characterdescbyid&id='+searchString, prepAjaxSearch);
 	} else {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/charactersearch.xml', parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=characterdesc&limit=100&search='+escape(searchString), parseData);
+		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/characterdescsearch.xml', parseData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=characterdesc&search='+escape(searchString), parseData);
 	}
 }
 
 /* XMLHTTP RESPONSE parser
  * @param xmldoc Response document
  */
-function parseData(xmldoc) {
+function prepAjaxSearch(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert('parseData','no root node'); return; }
-	var descNodes = root.getElementsByTagName('animedesc');
-	var cdescNodes = root.getElementsByTagName('characterdesc');
-	aids = new Array();
+	var cdescNodes = root.getElementsByTagName('characterdescbyid');
 	cids = new Array();
-	for (var d = 0; d < descNodes.length; d++) {
-		var descNode = new CDesc(descNodes[d]);
-		if (aids.indexOf(descNode.aid) < 0) aids.push(descNode.aid);
-		if (!descInfo[descNode.aid]) descInfo[descNode.aid] = descNode;
-		else if (descNode.type != 'Main') {
-			if (!descInfo[descNode.aid].titles[descNode.type]) descInfo[descNode.aid].titles[descNode.type] = new Array();
-			descInfo[descNode.aid].titles[descNode.type].push({'title':descNode.name,'lang':descNode.lang,'verified':descNode.verified});
-		} else
-			continue; // a bit pointless, i know :P
-	}
 	for (var d = 0; d < cdescNodes.length; d++) {
 		var descNode = new CCDesc(cdescNodes[d]);
 		if (cids.indexOf(descNode.charid) < 0) cids.push(descNode.charid);
@@ -191,25 +173,35 @@ function parseData(xmldoc) {
 		} else
 			continue; // a bit pointless, i know :P
 	}
-	if (!descNodes.length && !cdescNodes.length) { // no matches found
+	// now work up some magic
+	guiseinput.value = charInfo[cids[0]].title;
+}
+
+/* XMLHTTP RESPONSE parser
+ * @param xmldoc Response document
+ */
+function parseData(xmldoc) {
+	var root = xmldoc.getElementsByTagName('root').item(0);
+	if (!root) { errorAlert('parseData','no root node'); return; }
+	var cdescNodes = root.getElementsByTagName('characterdesc');
+	cids = new Array();
+	for (var d = 0; d < cdescNodes.length; d++) {
+		var descNode = new CCDesc(cdescNodes[d]);
+		if (cids.indexOf(descNode.charid) < 0) cids.push(descNode.charid);
+		if (!charInfo[descNode.charid]) charInfo[descNode.charid] = descNode;
+		else if (descNode.type != 'Main') {
+			if (!charInfo[descNode.charid].titles[descNode.type]) charInfo[descNode.charid].titles[descNode.type] = new Array();
+			charInfo[descNode.charid].titles[descNode.type].push({'title':descNode.name,'lang':descNode.lang,'verified':descNode.verified});
+		} else
+			continue; // a bit pointless, i know :P
+	}
+	if (!cdescNodes.length) { // no matches found
 		alert('Search for "'+searchString+'" resulted in no matches.');
 		return;
 	}
 	showResults();
-}
-
-/* Function that starts a search */
-function doSearch() {
-	searchString = addRelInput.value;
-	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
-	fetchData(searchString);
-}
-
-/* Function that starts a char search */
-function doSearchChar() {
-	searchString = addCRelInput.value;
-	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
-	fetchData(searchString,true);
+	searchinput.value = "search";
+	searchinput.onclick = doSearch;
 }
 
 /* Function that actualy shows the tooltip
@@ -221,50 +213,28 @@ function showInfoWork(obj,info,isChar) {
 	// i don't have the profile value options so, just use defaults
 	var minWidth = 450;
 	var table = document.createElement('table');
-	table.className = (!isChar ? 'animeInfo' : 'characterInfo');
+	table.className = 'characterInfo';
 	table.style.minWidth = minWidth + 'px';
 	var thead = document.createElement('thead');
 	var row = document.createElement('tr');
 	var title = document.createElement('span');
 	title.className = 'title';
 	title.appendChild(document.createTextNode(info.title));
-	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
-	if (!isChar) {
-		var year = document.createElement('span');
-		year.className = 'year';
-		year.appendChild(document.createTextNode('('+info.year+')'));
-		cell.appendChild(document.createTextNode(' '));
-		cell.appendChild(year);
-	}
-	//cell.appendChild(icons);
-	row.appendChild(cell);
+	createHeader(row, (info.restricted ? 'restricted' : null), title, null, null, 2);
 	thead.appendChild(row);
 	table.appendChild(thead);
 	var tbody = document.createElement('tbody');
 	row = document.createElement('tr');
 	var img = document.createElement('img');
 	img.src = info.picurl;
-	img.alt = '['+(!isChar ? info.aid : info.charid)+']';
-	createCell(row, (!isChar ? 'anime' : 'character') + 'InfoThumb', img);
+	img.alt = '['+info.charid+']';
+	createCell(row, 'characterInfoThumb', img);
 	var span = document.createElement('span');
 	span.innerHTML = info.desc;
-	createCell(row, (!isChar ? 'anime' : 'character') + 'InfoDesc', span);
+	createCell(row, 'characterInfoDesc', span);
 	tbody.appendChild(row);
 	table.appendChild(tbody);
 	setTooltip(table, true, minWidth);
-}
-
-/* Function that shows anime info (or not) */
-function showAnimeInfo() {
-	var aid = Number(this.id.substring(7));
-	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
-	var info = AnimeInfos[aid];
-	if (!info) { // fetch data and display later
-		errorAlert('showAnimeInfo','no AnimeInfos data for aid: '+aid); 
-		return;
-	} else { // display the data
-		showInfoWork(this,info);
-	}
 }
 
 /* Function that shows char info (or not) */
@@ -299,33 +269,30 @@ function expandTitles() {
 	}
 }
 
+function setCharId() { 
+	newguiseinput.value = this.value; 
+	guiseinput.value = charInfo[this.value].title; 
+	resulttable.style.display = "none";
+}
+
 /* Function that shows the results of the search */
 function showResults() {
+	var table = resulttable;
 	if (!table) { errorAlert('showResults','no table'); return; }
 	var caption = table.getElementsByTagName('caption')[0];
-	if (caption) caption.firstChild.nodeValue = (aids.length ? "Animes" : "Character")+" matching \""+searchString+"\"";
+	if (caption) caption.firstChild.nodeValue = "Characters matching \""+searchString+"\"";
 	var tbody = table.tBodies[0];
 	// clear table
 	while (tbody.childNodes.length) tbody.removeChild(tbody.firstChild);
-	// Create table head
-	var thead = document.createElement('thead');
-	var row = document.createElement('tr');
-	createHeader(row, null, 'X');
-	createHeader(row, null, 'Image');
-	createHeader(row, null, 'Name'); // Matched Name
-	//createHeader(row, null, 'Name');
-	thead.appendChild(row);
-	table.insertBefore(thead,tbody);
 	// var create tbody rows
-	var ids = (aids.length ? aids : cids);
-	var isChar = (cids.length > 0);
+	var ids = cids;
+	var isChar = true;
 	for (var i = 0; i < ids.length; i++) {
-		var desc = (!isChar ? descInfo[ids[i]] : charInfo[ids[i]]);
+		var desc = charInfo[ids[i]];
 		var row = document.createElement('tr');
 		row.className = (i % 2 ? 'g_odd' : '');
-		// checkbox
-		var ck = createCheckbox((!isChar ? 'addcarel.aid[]' : 'addcarel.charid[]'),false);
-		ck.value = (!isChar ? desc.aid : desc.charid);
+		// radio button
+		var ck = createButton("char",null,false,desc.charid,"radio",setCharId, null);
 		createCell(row, 'check', ck);
 		// image
 		var img = document.createElement('img');
@@ -337,11 +304,7 @@ function showResults() {
 		// first, let's create the icons i want
 		var div = document.createElement('div');
 		div.className = 'icons';
-		var existTitles = (!isChar ?
-							(desc.titles['Official'] || desc.titles['Short'] || desc.titles['Synonym'])
-							:
-							(desc.titles['Official'] || desc.titles['Short'] || desc.titles['Maiden'] || desc.titles['other'] || desc.titles['Alias'] || desc.titles['Nick'])
-						);
+		var existTitles = (desc.titles['Official'] || desc.titles['Short'] || desc.titles['Maiden'] || desc.titles['other'] || desc.titles['Alias'] || desc.titles['Nick']);
 		var altTitleSpan = null;
 		if (existTitles) {
 			altTitleSpan = document.createElement('ul');
@@ -395,9 +358,9 @@ function showResults() {
 			if (altTitleSpan.childNodes && altTitleSpan.childNodes.length)
 				div.appendChild(createIcon(null, '[+]', 'removeme', expandTitles, 'click to expand all titles matched', 'i_plus'));
 		}
-		var infoIcon = createIcon(null, (!isChar ? 'anime' : 'character')+' info', null, null, null, 'i_mylist_ainfo');
-		infoIcon.id = (!isChar ? 'ainfo_a'+desc.aid : 'cinfo_c'+desc.charid);
-		infoIcon.onmouseover = (!isChar ? showAnimeInfo : showCharacterInfo);
+		var infoIcon = createIcon(null, 'character  info', null, null, null, 'i_mylist_ainfo');
+		infoIcon.id = 'cinfo_c'+desc.charid;
+		infoIcon.onmouseover = showCharacterInfo;
 		infoIcon.onmouseout = hideTooltip;
 		div.appendChild(infoIcon);
 		var cell = createCell(null, 'titles', div);
@@ -427,33 +390,77 @@ function showResults() {
 		row.appendChild(cell);
 		tbody.appendChild(row);
 	}
-	// create tfoot
-	var tfoot = document.createElement('tfoot');
-	row = document.createElement('tr');
-	row.className = 'action';
-	createCell(row, 'value', createButton('add.doadd',null,false,'Add relation','submit'), null, 3);
-	tfoot.appendChild(row);
-	table.appendChild(tfoot);
+	table.style.display = "";
 }
 
-/* Prepares the page for my scripts */
+
+/* Function that handles search */
+function doSearch() {
+	if (guiseinput.value == searchString) { resulttable.style.display = ""; return; }
+	searchString = guiseinput.value;
+	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
+	searchinput.value = "wait....";
+	searchinput.onclick = null;
+	fetchData("chardesc",searchString);
+}
+
+/* Function that prepares the page */
 function prepPage() {
-	var uriObj = parseURI();
+	var uriObj = parseURI(); // update the uriObj
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
-	var div = document.getElementById('addrelform');
-	if (!div) { errorAlert('prepPage','no matching div'); return; }
-	fieldset = div.getElementsByTagName('fieldset')[0];
-	table = div.getElementsByTagName('table')[0];
-	var inputs = div.getElementsByTagName('input');
-	addRelInput = getElementsByName(inputs, 'addcarel.aname', false)[0];
-	addCRelInput = getElementsByName(inputs, 'addcarel.charname', false)[0];
-	addRelSubmit = getElementsByName(inputs, 'add.doadd', false)[0];
-	if (!addRelSubmit || (!addRelInput && !addCRelInput)) { errorAlert('prepPage','no valid inputs'); return; }
-	var newSubmitClone = createButton(addRelSubmit.name,addRelSubmit.id,false,addRelSubmit.value,'button',(addRelInput ? doSearch : doSearchChar), null);
-	addRelSubmit.parentNode.replaceChild(newSubmitClone,addRelSubmit);
-	addRelSubmit = newSubmitClone;
+	var div = getElementsByClassName(document.getElementsByTagName('div'), 'g_definitionlist g_section character_form', false)[0];
+	if (!div) { errorAlert('prepPage',"no div found, this might not be an error"); return; }
+	var table = div.getElementsByTagName('table')[0];
+	if (!table) { errorAlert('prepPage',"no table found"); return; }
+	tbody = table.tBodies[0];
+	var rows = tbody.rows;
+	// create a pretty row array with indexes and all
+	for (var i = 0; i < rows.length; i++) {
+		var row = rows[i];
+		var name = row.className;
+		name = name.replace('g_odd ','');
+		name = name.split(' ')[0];
+		magicRows[name] = row; // magic rows will have rows indexed by the first item in the classname
+	}
+	// okay, now that i have done that i can do some magic
+	var select = magicRows['type'].getElementsByTagName('select')[0];
+	if (!select) { errorAlert('prepPage',"no select found"); return; }
+	select.onchange = changeLayout;
+	select.onchange(); // run the script to change the layout in case it's needed
+	// okay, next bit, the guise thingie
+	guiseinput = magicRows['parent'].getElementsByTagName('input')[0];
+	if (!guiseinput) { errorAlert('prepPage',"no guise input"); return; }
+	// create a copy of this input and hide it (this is an IE hack btw)
+	newguiseinput = createTextInput(guiseinput.name,5,false,true,guiseinput.maxlength,guiseinput.value);
+	guiseinput.parentNode.insertBefore(newguiseinput,guiseinput);
+	guiseinput.name = "";
+	guiseinput.value = "";
+	guiseinput.size = guiseinput.size;
+	// this will make sure that if the name thingie is cleared also will the actual place where the id goes
+	guiseinput.onkeyup = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
+	guiseinput.onchange = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
+	if (newguiseinput.value != "" && !isNaN(Number(newguiseinput.value)))
+		fetchData("charbyid",Number(newguiseinput.value));
+	searchinput = createButton('do.search','do.search',false,"search","button",doSearch,null);
+	guiseinput.parentNode.insertBefore(document.createTextNode(' '),guiseinput.nextSibling);
+	guiseinput.parentNode.insertBefore(searchinput,guiseinput.nextSibling);
+	guiseinput.parentNode.insertBefore(document.createTextNode(' '),searchinput);
+	// create a basic table for results
+	resulttable = document.createElement('table');
+	resulttable.style.display = "none";
+	var caption = document.createElement('caption');
+	caption.appendChild(document.createTextNode("Characters"));
+	resulttable.appendChild(caption);
+	var thead = document.createElement('thead');
+	var row = document.createElement('tr');
+	createHeader(row, null, 'X');
+	createHeader(row, null, 'Image');
+	createHeader(row, null, 'Name'); // Matched Name
+	thead.appendChild(row);
+	resulttable.appendChild(thead);
+	resulttable.appendChild(document.createElement('tbody'));
+	guiseinput.parentNode.appendChild(resulttable);
 	initTooltips();
 }
 
-// hook up the window onload event
 addLoadEvent(prepPage);
