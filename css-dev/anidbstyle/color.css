@@ -193,3 +193,19 @@ input[type="checkbox"]
 {
 	background-color:#A9ABB1;
 }
+
+#layout-main div.tabbed_pane div.body
+{
+	background-color:#b8bac0;
+}
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#D3D5D9;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background:#b8bac0;
+}
