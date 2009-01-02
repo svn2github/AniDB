@@ -131,7 +131,6 @@ input[size="60"]
 
 span.test,
 button,
-#layout-main div.tabbed_pane ul.tabs li,
 #layout-main .g_list li a,
 #layout-main div.pagination span a,
 input[type="button"],
@@ -142,7 +141,6 @@ input[type="submit"]
 	background-color: #BFC2C9;
 }
 
-#layout-main div.tabbed_pane ul.tabs li.selected,
 .g_list li.selected,
 div.pagination span strong
 {
@@ -152,7 +150,6 @@ div.pagination span strong
 
 span.test:hover,
 button:hover,
-#layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main .g_list li a:hover,
 #layout-main .g_list li.g_odd a:hover,
 div.pagination span strong:hover,
@@ -194,4 +191,20 @@ input[type="checkbox"]
 #layout-main div.export_all div.exportblock .rtop *
 {
 	background-color:#A9ABB1;
+}
+
+#layout-main div.tabbed_pane div.body
+{
+	background-color:#b8bac0;
+}
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#D3D5D9;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background:#b8bac0;
 }
