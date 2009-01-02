@@ -396,7 +396,7 @@ function showResults() {
 
 /* Function that handles search */
 function doSearch() {
-	if (guiseinput.value == searchString) { resulttable.style.display = ""; return; }
+	if (guiseinput.value != "" && guiseinput.value == searchString) { resulttable.style.display = ""; return; }
 	searchString = guiseinput.value;
 	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
 	searchinput.value = "wait....";
