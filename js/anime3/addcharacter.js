@@ -12,7 +12,7 @@ jsVersionArray.push({
 	"changelog":"Initial version"
 });
 
-var seeDebug = true;
+var seeDebug = false;
 var magicRows = new Array();
 var tbody = null;
 var resulttable = null;
