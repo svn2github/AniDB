@@ -49,3 +49,13 @@
 {
 	margin-left: 0.5em;
 }
+
+#layout-main div.anime_all div.groups table.grouplist,
+#layout-main div.anime_all div.character table.character,
+#layout-main div.anime_all div.seiyuu table.seiyuu,
+#layout-main div.anime_all div.relations table.relations,
+#layout-main div.anime_all div.mylist table,
+#layout-main div.anime_all div.episodes table.eplist
+{
+	width: 98%;
+}
