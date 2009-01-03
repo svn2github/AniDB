@@ -337,15 +337,21 @@ public class AVparser implements Runnable {
 		if (this.parseFile) {
 			final AVPacket packet = new AVPacket();
 			long totalSize = formatCtx.file_size;
+			long step = totalSize/100;
 			long parsedSize = 0;
+			long curStep = 0;
 			float curprogress = 0;
 		    while (AVFORMAT.av_read_frame(formatCtx, packet) >= 0) {
 		    	if (this.streams[packet.stream_index] == null) this.streams[packet.stream_index] = new AVStreamData();
 		    	this.streams[packet.stream_index].size += packet.size;
 		    	this.streams[packet.stream_index].duration += packet.duration;
 		    	parsedSize += packet.size;
-		    	curprogress = (parsedSize/totalSize);
-		    	if (progress != null) progress.setProgress(curprogress);
+		    	curStep += packet.size;
+		    	if (curStep >= step) { // this is needed because otherwise it would update too many times
+		    		curprogress = (parsedSize/totalSize);
+		    		if (progress != null) progress.setProgress(curprogress);
+		    		curStep = curStep % step; // reset step
+		    	}
 		    	
 		    	// Free the packet that was allocated by av_read_frame
 		        // AVFORMAT.av_free_packet(packet.getPointer()) - cannot be called because it is an inlined function.

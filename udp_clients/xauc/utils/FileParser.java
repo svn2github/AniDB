@@ -27,20 +27,25 @@ public class FileParser implements Runnable {
 		this.progress = new Progress();
 		this.avparserOptions = new AVParserOptions();
 		this.hasherOptions = new HasherOptions();
+		this.hashingEnabled = this.hasherOptions.isEnabled();
+		this.parsingEnabled = this.avparserOptions.isEnabled();
 	}
 	public FileParser(File file) { this(); this.file = file; }
 	public FileParser(String filename) { this(new File(filename)); }
 	public FileParser(File file, HasherOptions hasherOptions) { 
 		this(file);
 		this.hasherOptions = hasherOptions;
+		this.hashingEnabled = this.hasherOptions.isEnabled();
 	}
 	public FileParser(File file, AVParserOptions avparserOptions) { 
 		this(file);
 		this.avparserOptions = avparserOptions;
+		this.parsingEnabled = this.avparserOptions.isEnabled();
 	}
 	public FileParser(File file, HasherOptions hasherOptions, AVParserOptions avparserOptions) {
 		this(file, hasherOptions);
 		this.avparserOptions = avparserOptions;
+		this.parsingEnabled = this.avparserOptions.isEnabled();
 	}
 	public FileParser(String filename, HasherOptions hasherOptions) {
 		this (new File(filename), hasherOptions);
@@ -103,7 +108,7 @@ public class FileParser implements Runnable {
 			filehasher = new Hasher(file,hasherOptions);
 			filehasher.setLog(log);
 			progress.setAction("hashing");
-			progress.setShowProgress(true);
+			progress.setShowProgress(false);
 			filehasher.setProgress(progress);
 			filehasher.run();
 			if (!filehasher.getErrorMessage().equals("")) this.errorMessage = filehasher.getErrorMessage();
@@ -113,7 +118,7 @@ public class FileParser implements Runnable {
 			avparser = new AVparser(file,avparserOptions);
 			avparser.setLog(log);
 			progress.setAction("parsing");
-			progress.setShowProgress(true);
+			progress.setShowProgress(false);
 			avparser.setProgress(progress);
 			avparser.run();
 			if (!avparser.getErrorMessage().equals("")) this.errorMessage = avparser.getErrorMessage();

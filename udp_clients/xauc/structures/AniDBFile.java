@@ -24,26 +24,26 @@ public class AniDBFile implements Serializable {
 	private static final int LOCALONLY = 0x00000010;
 	private static final int ADDEDANIDB = 0x00000020;
 	
-	protected String ed2k = "";
-	protected String crc32 = "";
-	protected String md5 = "";
-	protected String sha1 = "";
-	protected String tth = "";
-	protected String ed2klink = "";
-	protected String extension = "";
-	protected String filename = "";
-	protected String filetype = "";
-	protected int aid;
-	protected int eid;
-	protected int gid;
-	protected long lid;
-	protected int fid = -1;
-	protected long length = 0;
-	protected float duration = 0;
-	protected String formatedDuration = "";
-	protected String format = "";
-	protected AVStreamData[] streams = null;
-	protected int state = AniDBFile.UNKNOWN;
+	public String ed2k = "";
+	public String crc32 = "";
+	public String md5 = "";
+	public String sha1 = "";
+	public String tth = "";
+	public String ed2klink = "";
+	public String extension = "";
+	public String filename = "";
+	public String filetype = "";
+	public int aid;
+	public int eid;
+	public int gid;
+	public long lid;
+	public int fid = -1;
+	public long length = 0;
+	public float duration = 0;
+	public String formatedDuration = "";
+	public String format = "";
+	public AVStreamData[] streams = null;
+	public int state = AniDBFile.UNKNOWN;
 	
 	public AniDBFile() {}
 	public AniDBFile(File file) {
@@ -75,7 +75,7 @@ public class AniDBFile implements Serializable {
 		this.formatedDuration = avparser.formatedDuration;
 		this.format = avparser.format;
 		this.streams = avparser.streams;
-		this.state = this.state&AniDBFile.PARSED;
+		this.state = this.state|AniDBFile.PARSED;
 	}
 	
 	/**

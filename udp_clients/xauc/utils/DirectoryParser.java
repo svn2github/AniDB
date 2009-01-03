@@ -26,6 +26,7 @@ public class DirectoryParser {
 	}
 		
 	public ArrayList<String> getExtensions() { return this.extensions; }
+	public String getExtensionFilter() { return this.extensionFilter; }
 	
 	/**
 	 * Loads the extensions for filtering files

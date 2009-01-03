@@ -12,6 +12,7 @@ import hashing.HasherOptions;
 import utils.*;
 import structures.AniDBFile;
 
+/** Xauc Cli (Console) frontend */
 public class XaucConsole {
 	protected static int versionMajor = 0;
 	protected static int versionMinor = 1;
@@ -105,8 +106,6 @@ public class XaucConsole {
 	public static void main(String[] args) {
 		boolean recurseDir = false;
 		boolean seeDebug = false;
-		boolean hashingEnabled = true;
-		boolean parsingEnabled = true;
 		boolean writeXMLtoDisk = true;
 		boolean writeFILEtoConsole = false;
 		HasherOptions hasherOptions = new HasherOptions();
@@ -141,8 +140,8 @@ public class XaucConsole {
 				else if (type.equals("d")) seeDebug = true;
 				else if (type.equals("h")) { // parse hashing options
 					if (option.equals("")) {
-						if (value.equals("on")) hashingEnabled = true;
-						else if (value.equals("off")) hashingEnabled = false;
+						if (value.equals("on")) hasherOptions.setEnabled(true);
+						else if (value.equals("off")) hasherOptions.setEnabled(false);
 						else printOptionError(args[i]);
 					} else if (option.equals("ed2k")) {
 						if (value.equals("on")) hasherOptions.setEnableED2K(true);
@@ -167,8 +166,8 @@ public class XaucConsole {
 					} else printOptionError(args[i]);
 				} else if (type.equals("a")) { // parse avparsing options
 					if (option.equals("")) {
-						if (value.equals("on")) parsingEnabled = true;
-						else if (value.equals("off")) parsingEnabled = false;
+						if (value.equals("on")) avparserOptions.setEnabled(true);
+						else if (value.equals("off")) avparserOptions.setEnabled(false);
 						else printOptionError(args[i]);
 					} else if (option.equals("fp")) {
 						if (value.equals("on")) avparserOptions.setFullParse(true);
@@ -214,8 +213,6 @@ public class XaucConsole {
 				parser = new FileParser(file,hasherOptions,avparserOptions);
 				parser.setLog(log);
 				parser.setProgress(progress);
-				parser.setHashingEnabled(hashingEnabled);
-				parser.setParsingEnabled(parsingEnabled);
 				parser.run();
 				processedFiles++;
 				process.setProgress(processedFiles/files.size());

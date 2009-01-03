@@ -11,6 +11,7 @@ public class HasherOptions implements Serializable {
 	protected boolean enableSHA1 = false;
 	protected boolean enableTTH = false;
 	protected boolean seeDebug = false;
+	protected boolean enabled = true;
 	
 	public HasherOptions() {}
 	public HasherOptions(boolean ed, boolean crc, boolean md, boolean sha, boolean tth) {
@@ -44,4 +45,8 @@ public class HasherOptions implements Serializable {
 	public synchronized boolean isSeeDebug() { return seeDebug; }
 	/** @param seeDebug the seeDebug to set */
 	public synchronized void setSeeDebug(boolean seeDebug) { this.seeDebug = seeDebug; }
+	/** @return the enabled */
+	public synchronized boolean isEnabled() { return enabled; }
+	/** @param enabled the enabled to set */
+	public synchronized void setEnabled(boolean enabled) { this.enabled = enabled; }
 }
