@@ -2658,7 +2658,8 @@ display: table-cell;
 margin-left: auto;
 margin-right: auto;
 }
-#layout-main .g_image image, #layout-main .g_definitionlist
+#layout-main div.latestanimes_all  .g_image image,
+#layout-main div.latestanimes_all div.g_definitionlist
 {
 display: table-cell;
 vertical-align: top;
