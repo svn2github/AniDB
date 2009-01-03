@@ -111,8 +111,6 @@ body.nonav #layout-main h1
 	padding: 0px;
 }
 
-#layout-main div.anime_all div.groups table.grouplist,
-#layout-main div.anime_all div.episodes table.eplist,
 #layout-main div.ep_all table.filelist,
 #layout-main div.ed2kdump_box textarea,
 #layout-main div.schedule table

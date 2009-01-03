@@ -11,12 +11,14 @@
 	overflow: hidden;
 	text-align: right;
 	margin-right: 1em;
+	margin-bottom: 1em;
 }
 #layout-main div.block > div.data
 {
 	float: left;
 	width: 49%;
 	text-align: left;
+	margin-bottom: 1em;
 }
 #layout-main .css_style + p
 {
