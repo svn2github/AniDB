@@ -54,14 +54,14 @@
 #layout-main div.anime_all div.character table.characterlist,
 #layout-main div.anime_all div.seiyuu table.seiyuulist,
 #layout-main div.anime_all div.relations table.relationslist,
-#layout-main div.anime_all div.relations table.recommendationslist,
-#layout-main div.anime_all div.relations table.reviewlist,
+#layout-main div.anime_all div.recommendations table.recommendationslist,
+#layout-main div.anime_all div.reviews table.reviewlist,
 #layout-main div.anime_all div.episodes table.eplist
 {
 	width: 98%;
 }
 
-#layout-main div.anime_all div.#tabbed_pane_main
+#layout-main div.anime_all #tabbed_pane_main
 {
 	margin:1.5em 1em 1em;
 }
