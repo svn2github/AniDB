@@ -58,3 +58,8 @@
 {
 	width: 98%;
 }
+
+#layout-main div.anime_all div.#tabbed_pane_main
+{
+	margin:1.5em 1em 1em;
+}
