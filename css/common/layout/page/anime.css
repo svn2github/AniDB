@@ -49,3 +49,24 @@
 {
 	margin-left: 0.5em;
 }
+
+#layout-main div.anime_all div.groups table.grouplist,
+#layout-main div.anime_all div.character table.characterlist,
+#layout-main div.anime_all div.seiyuu table.seiyuulist,
+#layout-main div.anime_all div.relations table.relationslist,
+#layout-main div.anime_all div.recommendations table.recommendationslist,
+#layout-main div.anime_all div.reviews table.reviewlist,
+#layout-main div.anime_all div.episodes table.eplist
+{
+	width: 98%;
+}
+
+#layout-main div.anime_all #tabbed_pane_main
+{
+	margin:1.5em 1em 1em;
+}
+
+#layout-main div.anime_all div.reviews table.reviewlist th.approval
+{
+	width:12em;
+}
