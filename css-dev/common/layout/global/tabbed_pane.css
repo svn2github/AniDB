@@ -40,3 +40,8 @@
 {
 	clear:both;
 }
+
+#layout-main div.tabbed_pane_main table
+{
+	width: 98%
+}
