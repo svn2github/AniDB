@@ -69,8 +69,8 @@
 #layout-main div.chartags_all div.addbox div.tag-column
 {
 	float:left;
-	height:20em;
-	max-width:12em;
+	height:15em;
+	width:15em;
 	padding:0 2em 2em 0;
 }
 
@@ -82,27 +82,15 @@
 #layout-main div.chartags_all div.addbox div.taggrouplist span,
 #layout-main div.chartags_all div.addbox div.tag-column span
 {
-	color:blue;
-	cursor:pointer;
 	text-align:left;
-	text-decoration:underline;
-}
-
-#layout-main div.chartags_all div.addbox div.taggrouplist span:hover,
-#layout-main div.chartags_all div.addbox div.tag-column span:hover
-{
-	color:red;
-}
-
-#layout-main div.chartags_all div.addbox div.tag-column span.alreadyset
-{
-	color:inherit;
-	cursor:default;
-	text-decoration:none;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-column h5
 {
-	font-weight:bold;
-	margin:0 0 .5em;
+	text-align:left;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-group h3
+{
+	margin-bottom: 0.5em;
 }

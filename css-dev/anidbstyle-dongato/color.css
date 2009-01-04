@@ -8,6 +8,7 @@ body.nonav
 	background-color: #BFC2C9;
 }
 
+span.link,
 a:visited, a:active, a:hover, a:link {
   color: blue;
   text-decoration: none;

@@ -3,11 +3,13 @@ html
 	background:white;
 }
 
+span.link,
 a
 {
 	color:#105289;
 }
 
+span.link:hover,
 a:hover
 {
 	color:#AA0000;

@@ -15,6 +15,7 @@ a:link,a:active,a:visited
 	color: #EFEFEF;
 }
 
+span.link,
 a:hover,
 #layout-nav a:hover
 {

@@ -6,11 +6,13 @@ html,
 	background: #E5E5E5 url(images/sub-bg-body.gif) repeat-x;
 }
 
+span.link,
 a:link,a:active,a:visited
 {
 	color : #006699;
 }
 
+span.link:hover,
 a:hover
 {
 	color : #f26522/*#DD6900*/;
