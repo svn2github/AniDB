@@ -36,12 +36,12 @@
 	border-bottom: 0;
 }
 
-#layout-main div.tabbed_pane div.pane table tr
+#layout-main div.tabbed_pane_main
 {
-	/*background-color: transparent;*/
+	clear:both;
 }
 
-#layout-main div.tabbed_pane div.pane table td
+#layout-main div.tabbed_pane_main table
 {
-	/*vertical-align: top;*/
+	width: 98%
 }
