@@ -72,3 +72,8 @@
 {
 	width: 98%;
 }
+
+#layout-main div.creqmod_all div.creq_head dl dd
+{
+	margin-left: 15em;
+}
