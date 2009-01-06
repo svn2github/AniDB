@@ -16,11 +16,12 @@ import com.sun.jna.ptr.PointerByReference;
 
 import utils.Log;
 import utils.Progress;
+import utils.ThreadedWorker;
 
 /**
  * Audio/Video file parser
  */
-public class AVparser implements Runnable {
+public class AVparser extends ThreadedWorker {
 	protected File file;
 	protected Log log;
 	protected Progress progress;
@@ -72,6 +73,19 @@ public class AVparser implements Runnable {
 	/** @return the errorMessage */
 	public synchronized String getErrorMessage() { return errorMessage;	}
 
+	/**
+	 * Method that calculates the parsing rate in MB/s
+	 * @param filesize File size (in bytes)
+	 * @param time Hashing time (in ms)
+	 * @return String with parsing rate
+	 */
+	protected String calculateParseRate(long filesize, long time) {
+		double sizeInMBs = filesize / 1000000;
+		double timeInSecs = time / 1000;
+		double rate = sizeInMBs / timeInSecs;
+		return rate+" MB/s";
+	}
+	
 	/**
 	 * Gets the codec type
 	 * @param codecType AVCodecContext codec_type
@@ -203,7 +217,7 @@ public class AVparser implements Runnable {
 	 * Method that parses a file
 	 * @return 0 if operation is sucessful
 	 */
-	public synchronized void run() {
+	public synchronized void work() {
 		final AVFormatLibrary AVFORMAT = AVFormatLibrary.INSTANCE;
 		final AVCodecLibrary AVCODEC = AVCodecLibrary.INSTANCE;
 
@@ -231,6 +245,9 @@ public class AVparser implements Runnable {
 		}
 		
 		AVInputFormat format = new AVInputFormat(formatCtx.iformat);
+		
+		if (showDebug) System.out.println("Started parsing of \""+file.getName()+"\" ["+file.length()+" bytes]");
+		long start = System.currentTimeMillis();
 
 		// Okay, let's do this by steps
 		// Basic fields
@@ -344,7 +361,7 @@ public class AVparser implements Runnable {
 		    while (AVFORMAT.av_read_frame(formatCtx, packet) >= 0) {
 		    	if (this.streams[packet.stream_index] == null) this.streams[packet.stream_index] = new AVStreamData();
 		    	this.streams[packet.stream_index].size += packet.size;
-		    	this.streams[packet.stream_index].duration += packet.duration;
+		    	this.streams[packet.stream_index].duration += packet.duration * this.streams[packet.stream_index].timebase;
 		    	parsedSize += packet.size;
 		    	curStep += packet.size;
 		    	if (curStep >= step) { // this is needed because otherwise it would update too many times
@@ -365,13 +382,16 @@ public class AVparser implements Runnable {
 		    	if (this.streams[i] == null) continue;
 		    	if (this.streams[i].type != AVCodecLibrary.CODEC_TYPE_VIDEO && this.streams[i].type != AVCodecLibrary.CODEC_TYPE_AUDIO) continue;
 		    	if (this.streams[i].duration <= 0) continue; // can't have this
-		    	int den = (int)(this.streams[i].duration * this.streams[i].timebase);
-		    	this.streams[i].duration = den;
+		    	//int den = (int)(this.streams[i].duration * this.streams[i].timebase);
+		    	//this.streams[i].duration = den;
 		    	long num = this.streams[i].size * 8;
-		    	this.streams[i].bitrate = num / den;
+		    	this.streams[i].bitrate = num / this.streams[i].duration;
 		    	this.streams[i].formatedDuration = formatDurationSecs(this.streams[i].duration); 
 		    }
 		}
+		
+		long time = (System.currentTimeMillis() - start);
+		log.println("completed parsing of \""+file.getName()+"\" in "+time+"ms @"+calculateParseRate(file.length(),time));
 	    
 	    AVFORMAT.av_close_input_file(formatCtx);
 		return;

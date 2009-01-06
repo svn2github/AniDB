@@ -48,7 +48,8 @@ public class AniDBFile implements Serializable {
 	public AniDBFile() {}
 	public AniDBFile(File file) {
 		this.filename = file.getName();
-		this.length = file.length();		
+		this.length = file.length();
+		this.extension = getExtension(file);
 	}
 	public AniDBFile(File file, Hasher filehasher) {
 		this(file);
@@ -58,7 +59,6 @@ public class AniDBFile implements Serializable {
 		this.sha1 = filehasher.getSha1();
 		this.tth = filehasher.getTth();
 		this.md5 = filehasher.getMd5();
-		this.extension = filehasher.getExtension();
 		this.state = AniDBFile.HASHED;
 	}
 	public AniDBFile(File file, AVparser avparser) {
@@ -76,6 +76,16 @@ public class AniDBFile implements Serializable {
 		this.format = avparser.format;
 		this.streams = avparser.streams;
 		this.state = this.state|AniDBFile.PARSED;
+	}
+	
+	/**
+	 * Gets the file Extension
+	 * @param file
+	 */
+	protected synchronized String getExtension(File file) {
+		int i = file.getName().lastIndexOf(".");
+		if(i<0) this.extension = "";
+		return file.getName().substring(i+1).toLowerCase();
 	}
 	
 	/**

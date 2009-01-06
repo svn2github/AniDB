@@ -213,7 +213,7 @@ public class XaucConsole {
 				parser = new FileParser(file,hasherOptions,avparserOptions);
 				parser.setLog(log);
 				parser.setProgress(progress);
-				parser.run();
+				parser.work();
 				processedFiles++;
 				process.setProgress(processedFiles/files.size());
 				if (!parser.getErrorMessage().equals(""))

@@ -6,21 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
+
 import utils.Progress;
 import utils.Log;
+import utils.ThreadedWorker;
 
 /**
  * General Hasher Class
  * @author fahrenheit
  */
-public class Hasher implements Runnable {
+public class Hasher extends ThreadedWorker {
 	protected String crc32 = "";
 	protected String ed2k = "";
 	protected String ed2klink = "";
 	protected String md5 = "";
 	protected String sha1 = "";
 	protected String tth = "";
-	protected String extension = "";
 	protected File file;
 	protected boolean enableED2K = true;
 	protected boolean enableCRC32 = false;
@@ -34,10 +35,7 @@ public class Hasher implements Runnable {
 	protected String errorMessage = "";
 	
 	public Hasher() {}
-	public Hasher(File file) { 
-		this.file = file;
-		setExtension(this.file);
-	}
+	public Hasher(File file) { this.file = file; }
 	public Hasher(String file) { this(new File(file)); }
 	public Hasher(File file, HasherOptions options) {
 		this(file);
@@ -51,24 +49,24 @@ public class Hasher implements Runnable {
 	public Hasher(String file, HasherOptions options) {
 		this(new File(file), options);
 	}
-	
+
 	/**
-	 * Get's and sets the file Extension
-	 * @param file
+	 * Method that calculates the hashing rate in MB/s
+	 * @param filesize File size (in bytes)
+	 * @param time Hashing time (in ms)
+	 * @return String with hashing rate
 	 */
-	protected synchronized void setExtension(File file) {
-		int i = file.getName().lastIndexOf(".");
-		if(i<0) this.extension = "";
-		this.extension = file.getName().substring(i+1).toLowerCase();
+	protected String calculateHashRate(long filesize, long time) {
+		double sizeInMBs = filesize / 1000000;
+		double timeInSecs = time / 1000;
+		double rate = sizeInMBs / timeInSecs;
+		return rate+" MB/s";
 	}
-	
-	/** @return Returns the file extension */
-	public synchronized String getExtension() { return this.extension; }
 	
 	/**
 	 * Method that runs over a file and gets its hashes
 	 */
-	public synchronized void run() {
+	public synchronized void work() {
 		InputStream in;
 		try {
 			in = new FileInputStream(file);
@@ -112,7 +110,8 @@ public class Hasher implements Runnable {
 			this.errorMessage = e.getLocalizedMessage() + " (hasher.run)";
 			return;
 		}
-		log.println("completed hashing of \""+file.getName()+"\" in "+(System.currentTimeMillis() - start)+"ms");
+		long time = (System.currentTimeMillis() - start);
+		log.println("completed hashing of \""+file.getName()+"\" in "+time+"ms @"+calculateHashRate(file.length(),time));
 		if (enableED2K) {
 			this.ed2k = ed2k.getHexValue();
 			this.ed2klink = "ed2k://|file|"+file.getName()+"|"+file.length()+"|"+this.ed2k+"|";
@@ -135,7 +134,7 @@ public class Hasher implements Runnable {
 	/** @return the file */
 	public synchronized File getFile() { return file; }
 	/** @param file the file to set */
-	public synchronized void setFile(File file) { this.file = file; setExtension(this.file); }
+	public synchronized void setFile(File file) { this.file = file; }
 	/** @return the BUFSIZE */
 	public synchronized int getBUFSIZE() { return BUFSIZE; }
 	/** @param bufsize the bUFSIZE to set */

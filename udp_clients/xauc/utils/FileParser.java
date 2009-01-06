@@ -11,7 +11,8 @@ import avparsing.AVParserOptions;
 /**
  * A file parser
  */
-public class FileParser implements Runnable {
+public class FileParser extends ThreadedWorker {
+	protected String threadName = "fileParser";
 	protected File file = null;
 	protected HasherOptions hasherOptions = null;
 	protected AVParserOptions avparserOptions = null;
@@ -95,7 +96,7 @@ public class FileParser implements Runnable {
 	 * Executes the file parser.<br />
 	 * If process is sucessful getAniDBFile() will <b>not</b> return null
 	 */
-	public synchronized void run() {
+	public synchronized void work() {
 		if (file == null) {
 			this.errorMessage = "no file supplied to file parser, skipping... (fileparser.run)";
 			return;
@@ -110,7 +111,7 @@ public class FileParser implements Runnable {
 			progress.setAction("hashing");
 			progress.setShowProgress(false);
 			filehasher.setProgress(progress);
-			filehasher.run();
+			filehasher.work();
 			if (!filehasher.getErrorMessage().equals("")) this.errorMessage = filehasher.getErrorMessage();
 		}
 		
@@ -120,7 +121,7 @@ public class FileParser implements Runnable {
 			progress.setAction("parsing");
 			progress.setShowProgress(false);
 			avparser.setProgress(progress);
-			avparser.run();
+			avparser.work();
 			if (!avparser.getErrorMessage().equals("")) this.errorMessage = avparser.getErrorMessage();
 		}
 		

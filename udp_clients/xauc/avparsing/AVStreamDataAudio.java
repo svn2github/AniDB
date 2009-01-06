@@ -16,6 +16,7 @@ public class AVStreamDataAudio extends AVStreamData {
 	public int channels = 0;
 	public String layout = "";
 	public int audioType = 10;
+	public boolean isVBR = false;
 	public AVStreamDataAudio() { super(); }
 	
 	public synchronized String mapAudioType() {

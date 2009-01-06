@@ -45,29 +45,13 @@ public class AVStreamDataVideo extends AVStreamData {
 	 */
 	public synchronized String getVideoAR() {
 		String temp = String.format("%1.2f", this.ar);
-		if (temp.equals("1.33")) return "4:3";
-		else if (temp.equals("1.77")) return "16:9";
-		else if (temp.equals("1.66")) return "1.66:1";
-		else if (temp.equals("1.85")) return "1.85:1";
-		else if (temp.equals("2.00")) return "2.00:1";
-		else if (temp.equals("2.21")) return "2.21:1";
-		else if (temp.equals("2.35")) return "2.35:1";
-		else return "other";
-	}
-	
-	/**
-	 * Gets the stream AR
-	 * @return Aspect Ratio
-	 */
-	public synchronized String getVideoCAR() {
-		String temp = String.format("%1.2f", this.car);
-		if (temp.equals("1.33")) return "4:3";
-		else if (temp.equals("1.77")) return "16:9";
-		else if (temp.equals("1.66")) return "1.66:1";
-		else if (temp.equals("1.85")) return "1.85:1";
-		else if (temp.equals("2.00")) return "2.00:1";
-		else if (temp.equals("2.21")) return "2.21:1";
-		else if (temp.equals("2.35")) return "2.35:1";
+		if (temp.equals("1,33")) return "4:3";
+		else if (temp.equals("1,77")) return "16:9";
+		else if (temp.equals("1,66")) return "1.66:1";
+		else if (temp.equals("1,85")) return "1.85:1";
+		else if (temp.equals("2,00")) return "2.00:1";
+		else if (temp.equals("2,21")) return "2.21:1";
+		else if (temp.equals("2,35")) return "2.35:1";
 		else return "other";
 	}
 	
@@ -77,14 +61,12 @@ public class AVStreamDataVideo extends AVStreamData {
 	 */
 	public synchronized void writeToFile(PrintStream out) {
 		out.println("\tstream [video]:");
-		out.println("\t\tcodec: "+this.codecName);
+		out.println("\t\tcodec: "+this.codecName+(this.codecTag != "" ? " ["+this.codecTag+"]" : ""));
 		if (this.size > 0) out.println("\t\tsize: "+this.size+" bytes");
 		if (this.duration > 0) out.println("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")");
 		if (this.bitrate > 0) out.println("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps");
 		if (this.resolution != "") out.println("\t\tresolution: "+this.resolution);
 		if (this.ar > 0) out.println("\t\taspect ratio: "+getVideoAR());
-		//if (this.cresolution != "") out.println("\t\tresolution: "+this.cresolution);
-		//if (this.car > 0) out.println("\t\taspect ratio: "+getVideoCAR());
 		if (this.fps > 0) out.printf("\t\tfps: %2.3f\n",this.fps);
 		if (this.pictureFormat != "") out.println("\t\tpicture format: "+this.pictureFormat);
 		if (this.isAnamorphic) out.println("\t\tanamorphic");

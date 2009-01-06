@@ -3,6 +3,8 @@ package utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Logger class
@@ -27,15 +29,22 @@ public class Log {
 		this(file);
 		this.logToConsole = logToConsole;
 	}
-
 	public Log(String filename, boolean logToConsole) {
 		this(filename);
 		this.logToConsole = logToConsole;
 	}
 	
 	/**
-	 * Prints a message in the log (without a new line) at end
-	 * @param message Message to print
+	 * Appends the current date time to the log (without a trailing new line)
+	 */
+	public void printDateTime() {
+		String message = "["+(new SimpleDateFormat("dd.MM.yyyy kk:mm:ss").format(new Date()))+"] ";
+		print(message);
+	}
+	
+	/**
+	 * Appends a message in the text log (without a trailing new line)
+	 * @param message Message to append
 	 */
 	public void print(String message) {
 		if (logToConsole) System.out.print(message);
@@ -43,10 +52,11 @@ public class Log {
 	}
 
 	/**
-	 * Prints a message in the log (with a new line) at end
-	 * @param message Message to print
+	 * Appends a message in the log (with a trailing new line)
+	 * @param message Message to append
 	 */
 	public void println(String message) {
+		message = "["+(new SimpleDateFormat("dd.MM.yyyy kk:mm:ss").format(new Date()))+"] "+message+"\n";
 		if (logToConsole) System.out.println(message);
 		out.println(message);
 	}
