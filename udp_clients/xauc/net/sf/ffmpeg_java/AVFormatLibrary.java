@@ -672,7 +672,15 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	 * Use av_read_play() to resume it.
 	 */
 	int av_read_pause(AVFormatContext s);
+	/**
+	 * Free a AVFormatContext allocated by av_open_input_stream.
+	 * @param s context to free
+	 */
 	void av_close_input_stream(AVFormatContext s);
+	/**
+	 * Close a media file (but not its codecs).
+	 * @param s media file handle
+	 */
 	void av_close_input_file(AVFormatContext s);
 	AVStream av_new_stream(AVFormatContext s, int id);
 	AVProgram av_new_program(AVFormatContext s, int id);

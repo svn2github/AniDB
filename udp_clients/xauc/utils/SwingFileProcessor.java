@@ -9,6 +9,11 @@ import java.util.Set;
 
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTree;
+import javax.swing.text.Position;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 import avparsing.AVParserOptions;
 import clients.XaucConsole;
@@ -27,6 +32,7 @@ public class SwingFileProcessor extends ThreadedWorker {
 	protected JTextArea hashesArea = null;
 	protected Log log = null;
 	protected XaucSwing parent = null;
+	protected JTree filesTree = null;
 	
 	public SwingFileProcessor(){
 		this.files = new HashMap<File,SwingFile>();
@@ -76,6 +82,14 @@ public class SwingFileProcessor extends ThreadedWorker {
 	public synchronized JTextArea getHashesArea() { return hashesArea; }
 	/** @param hashesArea the hashesArea to set */
 	public synchronized void setHashesArea(JTextArea hashesArea) { this.hashesArea = hashesArea; }
+	/** @return the threadName */
+	public synchronized String getThreadName() { return threadName;	}
+	/** @param threadName the threadName to set */
+	public synchronized void setThreadName(String threadName) { this.threadName = threadName; }
+	/** @return the filesTree */
+	public synchronized JTree getFilesTree() { return filesTree; }
+	/** @param filesTree the filesTree to set */
+	public synchronized void setFilesTree(JTree filesTree) { this.filesTree = filesTree; }
 	
 	/**
 	 * Parses files and sets states
@@ -133,6 +147,16 @@ public class SwingFileProcessor extends ThreadedWorker {
 			if (this.parsingOptions.isEnabled()) {
 				sf.setPARSED();
 				if (this.filesTable != null) this.filesTable.setValueAt("parsed", sf.getRowId(), 2);
+			}
+			if (this.filesTree != null) {
+				DefaultTreeModel model = (DefaultTreeModel)this.filesTree.getModel();
+				//DefaultMutableTreeNode treeFile = new DefaultMutableTreeNode(file.getName());
+				TreePath path = this.filesTree.getNextMatch("unidentified", 0, Position.Bias.Forward);
+				DefaultMutableTreeNode unidentified = (DefaultMutableTreeNode)path.getLastPathComponent();
+				DefaultMutableTreeNode node = new DefaultMutableTreeNode(file.getName());
+				node.setUserObject(sf);
+				unidentified.add(node);
+				model.reload();
 			}
 		}
 		// warn parent window

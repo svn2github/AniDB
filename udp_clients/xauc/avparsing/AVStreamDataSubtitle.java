@@ -63,6 +63,29 @@ public class AVStreamDataSubtitle extends AVStreamData {
 	}
 	
 	/**
+	 * Writes the Stream to a string.
+	 * <p>Uses the same format as writeToFile()</p>
+	 * @see writeToFile
+	 */
+	public synchronized String writeToString() {
+		StringBuffer out = new StringBuffer();
+		out.append("\tstream [subtitle]:"+'\n');
+		out.append("\t\ttype: "+mapSubtitleTypeLong()+'\n');
+		out.append("\t\tcodec: "+this.codecName+'\n');
+		if (this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
+		if (this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+'\n');
+		if (this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
+		if (this.language != "") out.append("\t\tlanguage: "+this.language+'\n');
+		if (this.isForForeignDub) out.append("\t\tfor foreign dub"+'\n');
+		if (this.isForHearingImpaired) out.append("\t\tfor hearing impaired"+'\n');
+		if (this.isForCommentary) out.append("\t\tfor commentary audio stream"+'\n');
+		if (this.isStyledSubs) out.append("\t\tstyled subs (ASS/SSA)"+'\n');
+		if (this.isImageSubs) out.append("\t\timage subs (VOBSUB)"+'\n');
+		if (this.isUnstyledSubs) out.append("\t\tunstyled subs (SRT)"+'\n');
+		return out.toString();
+	}
+	
+	/**
 	 * Writes the Stream to a file
 	 * @param out PrintStream where to output the stream
 	 */

@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -30,8 +31,14 @@ import javax.swing.TransferHandler;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
+
 import structures.SwingFile;
 import hashing.HasherOptions;
+import ui.XaucFilesTreeSelectionListener;
 import utils.DirectoryParser;
 import utils.SwingLog;
 import utils.SwingFileProcessor;
@@ -43,7 +50,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 	
 	protected static String appName = "xAUC";
 	protected static int versionMajor = 0;
-	protected static int versionMinor = 2;
+	protected static int versionMinor = 3;
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddFile;
@@ -60,6 +67,9 @@ public class XaucSwing extends JFrame implements WindowListener {
     private javax.swing.JTextArea hashesArea;
     private javax.swing.JPanel hashesPane;
     private javax.swing.JScrollPane hashesScrollPane;
+    private javax.swing.JPanel infoFilesPane;
+    private javax.swing.JEditorPane infoPaneEditor;
+    private javax.swing.JScrollPane infoScrollPane;
     private javax.swing.JTextArea logArea;
     private javax.swing.JPanel logPane;
     private javax.swing.JScrollPane logScrollPane;
@@ -78,6 +88,10 @@ public class XaucSwing extends JFrame implements WindowListener {
     private javax.swing.JLabel statusIcon;
     private javax.swing.JTextField statusText;
     private javax.swing.JTabbedPane tabsPane;
+    private javax.swing.JTree treeFiles;
+    private javax.swing.JPanel treeFilesPane;
+    private javax.swing.JScrollPane treeFilesScrollPane;
+    private javax.swing.JPanel treePane;
     private javax.swing.JPanel workspacePane;
     // End of variables declaration//GEN-END:variables
 	protected boolean disableFileAdd = false;
@@ -99,15 +113,37 @@ public class XaucSwing extends JFrame implements WindowListener {
 	protected Thread pthread = null; // file processor thread
 	protected SwingFileProcessor fileProcessor = null;
 
+	/** @return the hashingOptions */
+	public synchronized HasherOptions getHashingOptions() { return hashingOptions; }
+	/** @param hashingOptions the hashingOptions to set */
+	public synchronized void setHashingOptions(HasherOptions hashingOptions) { this.hashingOptions = hashingOptions; }
+	/** @return the parsingOptions */
+	public synchronized AVParserOptions getParsingOptions() { return parsingOptions; }
+	/** @param parsingOptions the parsingOptions to set */
+	public synchronized void setParsingOptions(AVParserOptions parsingOptions) { this.parsingOptions = parsingOptions; }
+	/** @return the seeDebug */
+	public synchronized boolean isSeeDebug() { return seeDebug; }
+	/** @param seeDebug the seeDebug to set */
+	public synchronized void setSeeDebug(boolean seeDebug) { this.seeDebug = seeDebug; }
+	/** @return the writeXMLtoDisk */
+	public synchronized boolean isWriteXMLtoDisk() { return writeXMLtoDisk; }
+	/** @param writeXMLtoDisk the writeXMLtoDisk to set */
+	public synchronized void setWriteXMLtoDisk(boolean writeXMLtoDisk) { this.writeXMLtoDisk = writeXMLtoDisk; }
+	/** @return the writeFILEtoConsole */
+	public synchronized boolean isWriteFILEtoConsole() { return writeFILEtoConsole; }
+	/** @param writeFILEtoConsole the writeFILEtoConsole to set */
+	public synchronized void setWriteFILEtoConsole(boolean writeFILEtoConsole) { this.writeFILEtoConsole = writeFILEtoConsole; }
+
 	/** Creates new form XaucSwing */
 	public XaucSwing() {
 		XaucConsole.checkAppDir();
 		initComponents();
 		setFilesTableLayout();
+		createFilesTree();
 		this.addWindowListener(this);
 		attachDragAndDrop(this.filesTable,new FSTransfer());
-		log.setLogArea(this.logArea);
-		log.println("Initializing "+XaucSwing.appName+" (v"+XaucSwing.versionMajor+"."+XaucSwing.versionMinor+")");
+		this.log.setLogArea(this.logArea);
+		this.log.println("Initializing "+XaucSwing.appName+" (v"+XaucSwing.versionMajor+"."+XaucSwing.versionMinor+")");
 	}
 
 	/** This method is called from within the constructor to
@@ -132,6 +168,13 @@ public class XaucSwing extends JFrame implements WindowListener {
         filesTable = new javax.swing.JTable();
         progressFiles = new javax.swing.JProgressBar();
         progressOverall = new javax.swing.JProgressBar();
+        treePane = new javax.swing.JPanel();
+        treeFilesPane = new javax.swing.JPanel();
+        treeFilesScrollPane = new javax.swing.JScrollPane();
+        treeFiles = new javax.swing.JTree();
+        infoFilesPane = new javax.swing.JPanel();
+        infoScrollPane = new javax.swing.JScrollPane();
+        infoPaneEditor = new javax.swing.JEditorPane();
         hashesPane = new javax.swing.JPanel();
         hashesScrollPane = new javax.swing.JScrollPane();
         hashesArea = new javax.swing.JTextArea();
@@ -259,7 +302,7 @@ public class XaucSwing extends JFrame implements WindowListener {
         );
         filesFrameLayout.setVerticalGroup(
             filesFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(filesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+            .addComponent(filesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
         );
 
         progressFiles.setFont(progressFiles.getFont().deriveFont(progressFiles.getFont().getSize()-1f));
@@ -284,7 +327,7 @@ public class XaucSwing extends JFrame implements WindowListener {
                 .addGap(5, 5, 5)
                 .addComponent(progressOverall, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(workspacePaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, workspacePaneLayout.createSequentialGroup()
                 .addGap(5, 5, 5)
                 .addComponent(progressFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
                 .addContainerGap())
@@ -299,7 +342,7 @@ public class XaucSwing extends JFrame implements WindowListener {
                     .addComponent(buttonAddFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonRemoveAll, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonStartHash, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 354, Short.MAX_VALUE)
                 .addComponent(progressFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(progressOverall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,10 +351,66 @@ public class XaucSwing extends JFrame implements WindowListener {
                 .addGroup(workspacePaneLayout.createSequentialGroup()
                     .addGap(28, 28, 28)
                     .addComponent(filesFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(46, Short.MAX_VALUE)))
+                    .addContainerGap(52, Short.MAX_VALUE)))
         );
 
         tabsPane.addTab("Workspace", new javax.swing.ImageIcon(getClass().getResource("/icons/table.png")), workspacePane); // NOI18N
+
+        treeFilesPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tree", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10))); // NOI18N
+
+        treeFiles.setFont(treeFiles.getFont().deriveFont(treeFiles.getFont().getSize()-1f));
+        treeFiles.setShowsRootHandles(true);
+        treeFilesScrollPane.setViewportView(treeFiles);
+
+        javax.swing.GroupLayout treeFilesPaneLayout = new javax.swing.GroupLayout(treeFilesPane);
+        treeFilesPane.setLayout(treeFilesPaneLayout);
+        treeFilesPaneLayout.setHorizontalGroup(
+            treeFilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(treeFilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+        );
+        treeFilesPaneLayout.setVerticalGroup(
+            treeFilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(treeFilesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+        );
+
+        infoFilesPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10))); // NOI18N
+
+        infoPaneEditor.setEditable(false);
+        infoPaneEditor.setFont(infoPaneEditor.getFont().deriveFont(infoPaneEditor.getFont().getSize()-1f));
+        infoScrollPane.setViewportView(infoPaneEditor);
+
+        javax.swing.GroupLayout infoFilesPaneLayout = new javax.swing.GroupLayout(infoFilesPane);
+        infoFilesPane.setLayout(infoFilesPaneLayout);
+        infoFilesPaneLayout.setHorizontalGroup(
+            infoFilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(infoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+        );
+        infoFilesPaneLayout.setVerticalGroup(
+            infoFilesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(infoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout treePaneLayout = new javax.swing.GroupLayout(treePane);
+        treePane.setLayout(treePaneLayout);
+        treePaneLayout.setHorizontalGroup(
+            treePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(treePaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(treeFilesPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(infoFilesPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        treePaneLayout.setVerticalGroup(
+            treePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, treePaneLayout.createSequentialGroup()
+                .addGroup(treePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(infoFilesPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(treeFilesPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        tabsPane.addTab("Files", new javax.swing.ImageIcon(getClass().getResource("/icons/page_white_stack.png")), treePane); // NOI18N
 
         hashesArea.setColumns(20);
         hashesArea.setRows(5);
@@ -351,13 +450,13 @@ public class XaucSwing extends JFrame implements WindowListener {
         );
         hashesPaneLayout.setVerticalGroup(
             hashesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hashesPaneLayout.createSequentialGroup()
-                .addComponent(hashesScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hashesPaneLayout.createSequentialGroup()
+                .addComponent(hashesScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(hashesPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonHashesClear)
                     .addComponent(buttonHashesCopy))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(9, 9, 9))
         );
 
         tabsPane.addTab("Hashes", new javax.swing.ImageIcon(getClass().getResource("/icons/page_white_link.png")), hashesPane); // NOI18N
@@ -402,7 +501,7 @@ public class XaucSwing extends JFrame implements WindowListener {
         logPaneLayout.setVerticalGroup(
             logPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(logPaneLayout.createSequentialGroup()
-                .addComponent(logScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(logPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonLogClear)
@@ -494,8 +593,8 @@ public class XaucSwing extends JFrame implements WindowListener {
                     .addComponent(statusIcon)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(tabsPane, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
-                    .addContainerGap(19, Short.MAX_VALUE)))
+                    .addComponent(tabsPane, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
         );
 
         pack();
@@ -584,6 +683,23 @@ public class XaucSwing extends JFrame implements WindowListener {
 		});
 		this.filesTable.setFillsViewportHeight(true);
 		this.filesTable.getColumnModel().getColumn(2).setCellRenderer(new ui.ProcessingCellRenderer());
+	}
+
+	/**
+	 * Creates the default file tree
+	 */
+	public void createFilesTree() {
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("xauc");
+		root.add(new DefaultMutableTreeNode("unidentified"));
+		root.add(new DefaultMutableTreeNode("identified"));
+		DefaultTreeModel model = ((DefaultTreeModel)this.treeFiles.getModel());
+		model.setRoot(root);
+		this.treeFiles.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		ImageIcon leafIcon = new ImageIcon(XaucSwing.class.getResource("/icons/page_white.png"));
+		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+		if (leafIcon != null) { renderer.setLeafIcon(leafIcon); }
+		this.treeFiles.setCellRenderer(renderer);
+		this.treeFiles.addTreeSelectionListener(new XaucFilesTreeSelectionListener(this.treeFiles,this.infoPaneEditor,this.log));
 	}
 	
 	/**
@@ -786,6 +902,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 		fileProcessor.setFilesTable(this.filesTable);
 		fileProcessor.setLog(this.log);
 		fileProcessor.setHashesArea(this.hashesArea);
+		fileProcessor.setFilesTree(this.treeFiles);
 		fileProcessor.setEnabled(true);
 	}
 	

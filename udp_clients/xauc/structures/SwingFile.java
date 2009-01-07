@@ -56,5 +56,5 @@ public class SwingFile {
 	public synchronized boolean isIDENTIFIED() { return checkFlag(IDENTIFIED); }
 	public synchronized boolean isADDEDTOMYLIST() { return checkFlag(ADDEDTOMYLIST); }
 	public synchronized boolean isUNKNOWN() { return checkFlag(UNKNOWN); }
-
+	public synchronized String toString() { return this.file.getName(); }
 }

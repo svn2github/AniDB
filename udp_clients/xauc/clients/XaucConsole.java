@@ -15,7 +15,7 @@ import structures.AniDBFile;
 /** Xauc Cli (Console) frontend */
 public class XaucConsole {
 	protected static int versionMajor = 0;
-	protected static int versionMinor = 1;
+	protected static int versionMinor = 3;
 	
 	/**
 	 * Displays help
@@ -208,6 +208,7 @@ public class XaucConsole {
 			Iterator<File> it = files.iterator();
 			FileParser parser;
 			int processedFiles = 0;
+			float curprogress = 0;
 			while(it.hasNext()) {
 				file = it.next();
 				parser = new FileParser(file,hasherOptions,avparserOptions);
@@ -215,7 +216,8 @@ public class XaucConsole {
 				parser.setProgress(progress);
 				parser.work();
 				processedFiles++;
-				process.setProgress(processedFiles/files.size());
+				curprogress = ((float)processedFiles / (float)files.size());
+				process.setProgress(curprogress);
 				if (!parser.getErrorMessage().equals(""))
 					log.println(parser.getErrorMessage());
 				AniDBFile afile = parser.getAnidbFile();

@@ -89,6 +89,52 @@ public class AniDBFile implements Serializable {
 	}
 	
 	/**
+	 * Outputs the file data to a string.
+	 * <p>Same format as writeToFile()</p>
+	 * @see writeToFile
+	 */
+	public synchronized String writeToString() {
+		StringBuffer out = new StringBuffer();
+		out.append("file: "+filename+'\n');
+		if (this.fid > 0) out.append("\tid: "+this.fid+'\n');
+		if (this.filetype != "") out.append("\ttype: "+this.filetype+'\n');
+		if (this.format != "") out.append("\tformat: "+this.format+'\n');
+		out.append("\tsize: "+this.length+" bytes"+'\n');
+		out.append("\textension: "+(this.extension != "" ? this.extension : "unk")+'\n');
+		if (this.duration > 0) out.append("\tduration: "+this.formatedDuration+" ("+this.duration+")"+'\n');
+		out.append("hashes:"+'\n');
+		if (this.ed2k != "") {
+			out.append("\ted2k: "+this.ed2k+'\n');
+			out.append("\ted2k link: "+this.ed2klink+'\n');
+		}
+		if (this.crc32 != "") out.append("\tcrc32: "+this.crc32+'\n');
+		if (this.md5 != "") out.append("\tmd5: "+this.md5+'\n');
+		if (this.sha1 != "") out.append("\tsha1: "+this.sha1+'\n');
+		if (this.tth != "") out.append("\ttth: "+this.tth+'\n');
+		out.append("streams:"+'\n');
+		// vid streams
+		for (int i = 0; i < this.streams.length; i++) {
+			switch(this.streams[i].type) {
+				case AVCodecLibrary.CODEC_TYPE_VIDEO:
+					AVStreamDataVideo viddata = (AVStreamDataVideo)this.streams[i];
+					out.append(viddata.writeToString());
+					break;
+				case AVCodecLibrary.CODEC_TYPE_AUDIO:
+					AVStreamDataAudio auddata = (AVStreamDataAudio)this.streams[i];
+					out.append(auddata.writeToString());
+					break;
+				case AVCodecLibrary.CODEC_TYPE_SUBTITLE:
+					AVStreamDataSubtitle subdata = (AVStreamDataSubtitle)this.streams[i];
+					out.append(subdata.writeToString());
+					break;
+				default:
+					out.append(this.streams[i].writeToString());
+			}
+		}
+		return out.toString();
+	}
+	
+	/**
 	 * Outputs the file data to a file
 	 */
 	public synchronized void writeToFile(PrintStream out) {

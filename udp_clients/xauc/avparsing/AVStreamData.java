@@ -41,6 +41,21 @@ public class AVStreamData {
 	}
 
 	/**
+	 * Writes the Stream to a string.
+	 * <p>Uses the same format as writeToFile()</p>
+	 * @see writeToFile
+	 */
+	public synchronized String writeToString() {
+		StringBuffer out = new StringBuffer();
+		out.append("\tstream [other]:"+'\n');
+		out.append("\t\tcodec: "+this.codecName+'\n');
+		if (this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
+		if (this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+'\n');
+		if (this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
+		return out.toString();
+	}
+	
+	/**
 	 * Writes the Stream to a file
 	 * @param out PrintStream where to output the stream
 	 */

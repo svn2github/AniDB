@@ -28,6 +28,8 @@ public class AVparser extends ThreadedWorker {
 	protected boolean showDebug = false;
 	protected boolean parseFile = false;
 	protected String errorMessage = "";
+	protected AVFormatLibrary AVFORMAT = null;
+	protected AVCodecLibrary AVCODEC = null;
 
 	// Public fields
 	public String filename;
@@ -37,7 +39,7 @@ public class AVparser extends ThreadedWorker {
 	public String format = "";
 	public int numStreams = 0;
 	public AVStreamData[] streams = null;
-	
+
 	public AVparser() {
 		this.log = new Log();
 		this.progress = new Progress();
@@ -52,8 +54,10 @@ public class AVparser extends ThreadedWorker {
 		this(file);
 		this.parseFile = avparserOptions.isFullParse();
 		this.showDebug = avparserOptions.isSeeDebug();
+		this.AVCODEC = avparserOptions.getAVCODEC();
+		this.AVFORMAT = avparserOptions.getAVFORMAT();
 	}
-	
+
 	/** @return the log */
 	public synchronized Log getLog() { return log; }
 	/** @param log the log to set */
@@ -72,6 +76,14 @@ public class AVparser extends ThreadedWorker {
 	public synchronized void setParseFile(boolean parseFile) { this.parseFile = parseFile; }
 	/** @return the errorMessage */
 	public synchronized String getErrorMessage() { return errorMessage;	}
+	/** @return the aVFORMAT */
+	public synchronized AVFormatLibrary getAVFORMAT() { return AVFORMAT; }
+	/** @param avformat the aVFORMAT to set */
+	public synchronized void setAVFORMAT(AVFormatLibrary avformat) { AVFORMAT = avformat; }
+	/** @return the aVCODEC */
+	public synchronized AVCodecLibrary getAVCODEC() { return AVCODEC; }
+	/** @param avcodec the aVCODEC to set */
+	public synchronized void setAVCODEC(AVCodecLibrary avcodec) { AVCODEC = avcodec; }
 
 	/**
 	 * Method that calculates the parsing rate in MB/s
@@ -85,7 +97,7 @@ public class AVparser extends ThreadedWorker {
 		double rate = sizeInMBs / timeInSecs;
 		return rate+" MB/s";
 	}
-	
+
 	/**
 	 * Gets the codec type
 	 * @param codecType AVCodecContext codec_type
@@ -103,7 +115,7 @@ public class AVparser extends ThreadedWorker {
 		}
 		return trackType;
 	}
-	
+
 	/**
 	 * Formats a duration time in seconds to an hh:mm:ss representation
 	 * @param time The time
@@ -120,7 +132,7 @@ public class AVparser extends ThreadedWorker {
 		}
 		return hours+":"+minutes+":"+seconds;
 	}
-	
+
 	/**
 	 * Formats a duration time in nanoseconds to an hh:mm:ss representation
 	 * @param timeMillis The time
@@ -130,7 +142,7 @@ public class AVparser extends ThreadedWorker {
 		long time = timeMillis / 1000000;
 		return formatDurationSecs(time);
 	}
-	
+
 	/**
 	 * Converts a Byte Array to a String
 	 * @param array The Byte Array to convert
@@ -141,7 +153,7 @@ public class AVparser extends ThreadedWorker {
 		for (int i = 0; i < array.length; i++) if ((int) array[i] != 0) string += (char)array[i];
 		return string;
 	}
-	
+
 	/**
 	 * Because AVCodec doesn't have codecs for Subtitles, mapping is done here
 	 * @param id CODEC_ID for unknown types
@@ -159,7 +171,7 @@ public class AVparser extends ThreadedWorker {
 			default: return "unknown";
 		}
 	}
-	
+
 	/**
 	 * Audio Channels layout
 	 * @param layout Audio Channels Layout Id (CH_LAYOUT_*)
@@ -179,7 +191,7 @@ public class AVparser extends ThreadedWorker {
 		else if (layout == AVCodecLibrary.CH_LAYOUT_STEREO_DOWNMIX) return "stereo downmix";
 		else return "unknown";
 	}
-	
+
 	/**
 	 * Gets a string representation of a codec tag
 	 * @param codec_tag A codecCtx.codec_tag reference
@@ -194,7 +206,7 @@ public class AVparser extends ThreadedWorker {
 			name = String.format("0x%04x", codec_tag); 
 		return name;
 	}
-	
+
 	/**
 	 * Gets an audio sample format
 	 * @param sample_fmt A codecCtx.sample_fmt reference
@@ -209,43 +221,45 @@ public class AVparser extends ThreadedWorker {
 			case AVCodecLibrary.SAMPLE_FMT_S32: return "s32";
 			case AVCodecLibrary.SAMPLE_FMT_FLT: return "flt";
 			case AVCodecLibrary.SAMPLE_FMT_DBL: return "dbl";
-			default: return "";
+		default: return "";
 		}
 	}
-	
+
 	/**
 	 * Method that parses a file
 	 * @return 0 if operation is sucessful
 	 */
 	public synchronized void work() {
-		final AVFormatLibrary AVFORMAT = AVFormatLibrary.INSTANCE;
-		final AVCodecLibrary AVCODEC = AVCodecLibrary.INSTANCE;
+		//final AVFormatLibrary AVFORMAT = AVFormatLibrary.INSTANCE;
+		//final AVCodecLibrary AVCODEC = AVCodecLibrary.INSTANCE;
+		if (AVFORMAT == null) AVFORMAT = AVFormatLibrary.INSTANCE;
+		if (AVCODEC == null) AVCODEC = AVCodecLibrary.INSTANCE;
 
 		// not sure what the consequences of such a mismatch are, but it is worth logging a warning:
 		if (showDebug && AVCODEC.avcodec_version() != AVCodecLibrary.LIBAVCODEC_VERSION_INT)
 			System.err.println("ffmpeg-java and ffmpeg versions do not match: avcodec_version=" + AVCODEC.avcodec_version() + " LIBAVCODEC_VERSION_INT=" + AVCodecLibrary.LIBAVCODEC_VERSION_INT);
-		
+
 		// register formats
 		AVFORMAT.av_register_all();
 		final PointerByReference ppFormatCtx = new PointerByReference();
-		
+
 		// Open video file
 		if (AVFORMAT.av_open_input_file(ppFormatCtx, filename, null, 0, null) != 0) {
 			this.errorMessage = "couldn't open file (avparser.run)";
 			return;
 		}
-		
+
 		// Get pointer
 		final AVFormatContext formatCtx = new AVFormatContext(ppFormatCtx.getValue());
-			
+
 		// Retrieve stream information
 		if (AVFORMAT.av_find_stream_info(formatCtx) < 0) {
 			this.errorMessage = "couldn't find stream information (avparser.run)";
-		    return;
+			return;
 		}
-		
+
 		AVInputFormat format = new AVInputFormat(formatCtx.iformat);
-		
+
 		if (showDebug) System.out.println("Started parsing of \""+file.getName()+"\" ["+file.length()+" bytes]");
 		long start = System.currentTimeMillis();
 
@@ -256,9 +270,9 @@ public class AVparser extends ThreadedWorker {
 		this.bitrate = (formatCtx.bit_rate > 0 ? formatCtx.bit_rate/1000 : 0);
 		this.format = format.name;
 		this.numStreams = formatCtx.nb_streams;
-		
+
 		//AVFORMAT.dump_format(formatCtx, 0, filename, 0);
-		
+
 		// Now get stream data
 		Pointer[] streams = formatCtx.getStreams();
 		this.streams = new AVStreamData[formatCtx.nb_streams];
@@ -285,8 +299,8 @@ public class AVparser extends ThreadedWorker {
 					// Video specific
 					if(stream.r_frame_rate.den != 0 && stream.r_frame_rate.num != 0)
 						vidstream.fps = stream.r_frame_rate.av_q2d();
-			        else
-			        	vidstream.fps = 1/codecCtx.time_base.av_q2d();
+					else
+						vidstream.fps = 1/codecCtx.time_base.av_q2d();
 					vidstream.width = codecCtx.width;
 					vidstream.height = codecCtx.height;
 					vidstream.cwidth = codecCtx.coded_width;
@@ -358,42 +372,42 @@ public class AVparser extends ThreadedWorker {
 			long parsedSize = 0;
 			long curStep = 0;
 			float curprogress = 0;
-		    while (AVFORMAT.av_read_frame(formatCtx, packet) >= 0) {
-		    	if (this.streams[packet.stream_index] == null) this.streams[packet.stream_index] = new AVStreamData();
-		    	this.streams[packet.stream_index].size += packet.size;
-		    	this.streams[packet.stream_index].duration += packet.duration * this.streams[packet.stream_index].timebase;
-		    	parsedSize += packet.size;
-		    	curStep += packet.size;
-		    	if (curStep >= step) { // this is needed because otherwise it would update too many times
-		    		curprogress = (parsedSize/totalSize);
-		    		if (progress != null) progress.setProgress(curprogress);
-		    		curStep = curStep % step; // reset step
-		    	}
-		    	
-		    	// Free the packet that was allocated by av_read_frame
-		        // AVFORMAT.av_free_packet(packet.getPointer()) - cannot be called because it is an inlined function.
-		        // so we'll just do the JNA equivalent of the inline:
-		    	if (packet.destruct != null)
-		        	packet.destruct.callback(packet);
-		    }
-		    
-		    // fill in computed bitrate for audio and video streams
-		    for (int i = 0; i < formatCtx.nb_streams; i++) {
-		    	if (this.streams[i] == null) continue;
-		    	if (this.streams[i].type != AVCodecLibrary.CODEC_TYPE_VIDEO && this.streams[i].type != AVCodecLibrary.CODEC_TYPE_AUDIO) continue;
-		    	if (this.streams[i].duration <= 0) continue; // can't have this
-		    	//int den = (int)(this.streams[i].duration * this.streams[i].timebase);
-		    	//this.streams[i].duration = den;
-		    	long num = this.streams[i].size * 8;
-		    	this.streams[i].bitrate = num / this.streams[i].duration;
-		    	this.streams[i].formatedDuration = formatDurationSecs(this.streams[i].duration); 
-		    }
+			while (AVFORMAT.av_read_frame(formatCtx, packet) >= 0) {
+				if (this.streams[packet.stream_index] == null) this.streams[packet.stream_index] = new AVStreamData();
+				this.streams[packet.stream_index].size += packet.size;
+				this.streams[packet.stream_index].duration += packet.duration * this.streams[packet.stream_index].timebase;
+				parsedSize += packet.size;
+				curStep += packet.size;
+				if (curStep >= step) { // this is needed because otherwise it would update too many times
+					curprogress = (parsedSize/totalSize);
+					if (progress != null) progress.setProgress(curprogress);
+					curStep = curStep % step; // reset step
+				}
+
+				// Free the packet that was allocated by av_read_frame
+				// AVFORMAT.av_free_packet(packet.getPointer()) - cannot be called because it is an inlined function.
+				// so we'll just do the JNA equivalent of the inline:
+				if (packet.destruct != null)
+					packet.destruct.callback(packet);
+			}
+
+			// fill in computed bitrate for audio and video streams
+			for (int i = 0; i < formatCtx.nb_streams; i++) {
+				if (this.streams[i] == null) continue;
+				if (this.streams[i].type != AVCodecLibrary.CODEC_TYPE_VIDEO && this.streams[i].type != AVCodecLibrary.CODEC_TYPE_AUDIO) continue;
+				if (this.streams[i].duration <= 0) continue; // can't have this
+				//int den = (int)(this.streams[i].duration * this.streams[i].timebase);
+				//this.streams[i].duration = den;
+				long num = this.streams[i].size * 8;
+				this.streams[i].bitrate = num / this.streams[i].duration;
+				this.streams[i].formatedDuration = formatDurationSecs(this.streams[i].duration); 
+			}
 		}
-		
+
 		long time = (System.currentTimeMillis() - start);
 		log.println("completed parsing of \""+file.getName()+"\" in "+time+"ms @"+calculateParseRate(file.length(),time));
-	    
-	    AVFORMAT.av_close_input_file(formatCtx);
+
+		//AVFORMAT.av_close_input_file(formatCtx);
 		return;
 	}
 }

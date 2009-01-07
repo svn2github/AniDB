@@ -56,6 +56,29 @@ public class AVStreamDataVideo extends AVStreamData {
 	}
 	
 	/**
+	 * Writes the Stream to a string.
+	 * <p>Uses the same format as writeToFile()</p>
+	 * @see writeToFile
+	 */
+	public synchronized String writeToString() {
+		StringBuffer out = new StringBuffer();
+		out.append("\tstream [video]:"+'\n');
+		out.append("\t\tcodec: "+this.codecName+(this.codecTag != "" ? " ["+this.codecTag+"]" : "")+'\n');
+		if (this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
+		if (this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
+		if (this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
+		if (this.resolution != "") out.append("\t\tresolution: "+this.resolution+'\n');
+		if (this.ar > 0) out.append("\t\taspect ratio: "+getVideoAR()+'\n');
+		if (this.fps > 0) out.append(String.format("\t\tfps: %2.3f\n",this.fps));
+		if (this.pictureFormat != "") out.append("\t\tpicture format: "+this.pictureFormat+'\n');
+		if (this.isAnamorphic) out.append("\t\tanamorphic"+'\n');
+		if (this.isWrongAR) out.append("\t\twrong aspect ratio"+'\n');
+		if (this.isVFR) out.append("\t\tvariable frame rate"+'\n');
+		if (this.isCleanVideo) out.append("\t\tclean video (no hardsubs...)"+'\n');
+		return out.toString();
+	}
+	
+	/**
 	 * Writes the Stream to a file
 	 * @param out PrintStream where to output the stream
 	 */

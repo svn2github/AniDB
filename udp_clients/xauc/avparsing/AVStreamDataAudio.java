@@ -47,6 +47,26 @@ public class AVStreamDataAudio extends AVStreamData {
 			default: return "other";
 		}
 	}
+
+	/**
+	 * Writes the Stream to a string.
+	 * <p>Uses the same format as writeToFile()</p>
+	 * @see writeToFile
+	 */
+	public synchronized String writeToString() {
+		StringBuffer out = new StringBuffer();
+		out.append("\tstream [audio]:"+'\n');
+		out.append("\t\ttype: "+mapAudioType()+'\n');
+		out.append("\t\tcodec: "+this.codecName+'\n');
+		if (this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
+		if (this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
+		if (this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
+		if (this.language != "") out.append("\t\tlanguage: "+this.language+'\n');
+		out.append("\t\tchannels: "+this.layout+'\n');
+		if (this.sampleRate > 0) out.append("\t\tsample rate: "+this.sampleRate+ " Hz"+'\n');
+		if (this.sampleFormat != "") out.append("\t\tsample format: "+this.sampleFormat+'\n');
+		return out.toString();
+	}
 	
 	/**
 	 * Writes the Stream to a file

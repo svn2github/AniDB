@@ -38,9 +38,9 @@ public class SwingLog extends Log {
 	 * @param message Message to append
 	 */
 	public void println(String message) {
-		message = "["+(new SimpleDateFormat("dd.MM.yyyy kk:mm:ss").format(new Date()))+"] "+message+"\n";
+		message = "["+(new SimpleDateFormat("dd.MM.yyyy kk:mm:ss").format(new Date()))+"] "+message;
 		if (logToConsole) System.out.println(message);
 		out.println(message);
-		if (logArea != null) logArea.append(message);
+		if (logArea != null) logArea.append(message+"\n");
 	}
 }

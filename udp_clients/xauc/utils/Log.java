@@ -56,7 +56,7 @@ public class Log {
 	 * @param message Message to append
 	 */
 	public void println(String message) {
-		message = "["+(new SimpleDateFormat("dd.MM.yyyy kk:mm:ss").format(new Date()))+"] "+message+"\n";
+		message = "["+(new SimpleDateFormat("dd.MM.yyyy kk:mm:ss").format(new Date()))+"] "+message;
 		if (logToConsole) System.out.println(message);
 		out.println(message);
 	}
