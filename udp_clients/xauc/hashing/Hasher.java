@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 
+import structures.AniDBFile;
 import utils.Progress;
 import utils.Log;
 import utils.ThreadedWorker;
@@ -23,6 +24,7 @@ public class Hasher extends ThreadedWorker {
 	protected String sha1 = "";
 	protected String tth = "";
 	protected File file;
+	protected AniDBFile anidbFile = null;
 	protected boolean enableED2K = true;
 	protected boolean enableCRC32 = false;
 	protected boolean enableMD5 = false;
@@ -112,14 +114,44 @@ public class Hasher extends ThreadedWorker {
 		}
 		long time = (System.currentTimeMillis() - start);
 		log.println("completed hashing of \""+file.getName()+"\" in "+time+"ms @"+calculateHashRate(file.length(),time));
+		if (this.anidbFile != null) this.anidbFile.state |= AniDBFile.HASHED;
 		if (enableED2K) {
 			this.ed2k = ed2k.getHexValue();
 			this.ed2klink = "ed2k://|file|"+file.getName()+"|"+file.length()+"|"+this.ed2k+"|";
+			if (this.anidbFile != null) {
+				this.anidbFile.ed2k = this.ed2k;
+				this.anidbFile.ed2klink = this.ed2klink;
+				this.anidbFile.state |= AniDBFile.HASHED_ED2K;
+			}
 		}
-		if (enableCRC32) this.crc32 = crc32.getHexValue();
-		if (enableMD5) this.md5 = md5.getHexValue();
-		if (enableSHA1) this.sha1 = sha1.getHexValue();
-		if (enableTTH) this.tth = tth.getHexValue();
+		if (enableCRC32) {
+			this.crc32 = crc32.getHexValue();
+			if (this.anidbFile != null) {
+				this.anidbFile.crc32 = this.crc32;
+				this.anidbFile.state |= AniDBFile.HASHED_CRC32;
+			}
+		}
+		if (enableMD5) {
+			this.md5 = md5.getHexValue();
+			if (this.anidbFile != null) {
+				this.anidbFile.md5 = this.md5;
+				this.anidbFile.state |= AniDBFile.HASHED_MD5;
+			}
+		}
+		if (enableSHA1) {
+			this.sha1 = sha1.getHexValue();
+			if (this.anidbFile != null) {
+				this.anidbFile.sha1 = this.sha1;
+				this.anidbFile.state |= AniDBFile.HASHED_SHA1;
+			}
+		}
+		if (enableTTH) {
+			this.tth = tth.getHexValue();
+			if (this.anidbFile != null) {
+				this.anidbFile.tth = this.tth;
+				this.anidbFile.state |= AniDBFile.HASHED_TTH;
+			}
+		}
 		return;
 	}
 	
@@ -135,6 +167,10 @@ public class Hasher extends ThreadedWorker {
 	public synchronized File getFile() { return file; }
 	/** @param file the file to set */
 	public synchronized void setFile(File file) { this.file = file; }
+	/** @return the anidbFile */
+	public synchronized AniDBFile getAnidbFile() { return anidbFile; }
+	/** @param anidbFile the anidbFile to set */
+	public synchronized void setAnidbFile(AniDBFile anidbFile) { this.anidbFile = anidbFile; }
 	/** @return the BUFSIZE */
 	public synchronized int getBUFSIZE() { return BUFSIZE; }
 	/** @param bufsize the bUFSIZE to set */

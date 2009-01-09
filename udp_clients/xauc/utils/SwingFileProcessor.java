@@ -99,7 +99,7 @@ public class SwingFileProcessor extends ThreadedWorker {
 		Set<File> filesToCheck = this.files.keySet();
 		Iterator<File> it = filesToCheck.iterator();
 		this.mainProgressBar.setAction("processing");
-		this.mainProgressBar.setShowProgress(true);
+		//this.mainProgressBar.setShowProgress(true);
 		FileParser parser;
 		int processedFiles = 0;
 		float curprogress = 0;

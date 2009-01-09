@@ -5,24 +5,31 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
-import hashing.Hasher;
-import avparsing.*;
 import xml.*;
-import net.sf.ffmpeg_java.AVCodecLibrary;
 
 /**
  * AniDB File Implementation
  */
 public class AniDBFile implements Serializable {
 	private static final long serialVersionUID = -5117159935625276750L;
-	private static final int UNKNOWN = 0x00000000;
-	private static final int HASHED = 0x00000001;
-	private static final int PARSED = 0x00000002;
-	private static final int IDENTIFIED = 0x00000004;
-	private static final int NOTPRESENT = 0x00000008;
-	private static final int LOCALONLY = 0x00000010;
-	private static final int ADDEDANIDB = 0x00000020;
+	public static final int DEFAULT = 0;
+	public static final int ADDED = 1;
+	public static final int HASHED = 2;
+	public static final int PARSED = 4;
+	public static final int ANIDBQUERIED = 8;
+	public static final int IDENTIFIED = 16;
+	public static final int ADDEDTOMYLIST = 32;
+	public static final int UNKNOWN = 64;
+	// Hashed states
+	public static final int HASHED_ED2K = 0x10000;
+	public static final int HASHED_CRC32 = 0x10001;
+	public static final int HASHED_MD5 = 0x10002;
+	public static final int HASHED_SHA1 = 0x10004;
+	public static final int HASHED_TTH = 0x10008;
+	// Parsed state
+	public static final int PARSED_FULL = 0x20000;
 	
 	public String ed2k = "";
 	public String crc32 = "";
@@ -40,42 +47,27 @@ public class AniDBFile implements Serializable {
 	public int fid = -1;
 	public long length = 0;
 	public float duration = 0;
+	public int numStreams = 0;
 	public String formatedDuration = "";
 	public String format = "";
+	public ArrayList<AVStreamDataVideo> vidstreams = null;
+	public ArrayList<AVStreamDataAudio> audstreams = null;
+	public ArrayList<AVStreamDataSubtitle> substreams = null;
+	public ArrayList<AVStreamData> othstreams = null;
 	public AVStreamData[] streams = null;
-	public int state = AniDBFile.UNKNOWN;
+	public int state = DEFAULT;
+	
+	public synchronized int getState() { return this.state; }
 	
 	public AniDBFile() {}
 	public AniDBFile(File file) {
 		this.filename = file.getName();
 		this.length = file.length();
 		this.extension = getExtension(file);
-	}
-	public AniDBFile(File file, Hasher filehasher) {
-		this(file);
-		this.crc32 = filehasher.getCrc32();
-		this.ed2k = filehasher.getEd2k();
-		this.ed2klink = filehasher.getEd2klink();
-		this.sha1 = filehasher.getSha1();
-		this.tth = filehasher.getTth();
-		this.md5 = filehasher.getMd5();
-		this.state = AniDBFile.HASHED;
-	}
-	public AniDBFile(File file, AVparser avparser) {
-		this(file);
-		this.duration = avparser.duration;
-		this.formatedDuration = avparser.formatedDuration;
-		this.format = avparser.format;
-		this.streams = avparser.streams;
-		this.state = AniDBFile.PARSED;
-	}
-	public AniDBFile(File file, Hasher filehasher, AVparser avparser) {
-		this (file, filehasher);
-		this.duration = avparser.duration;
-		this.formatedDuration = avparser.formatedDuration;
-		this.format = avparser.format;
-		this.streams = avparser.streams;
-		this.state = this.state|AniDBFile.PARSED;
+		this.vidstreams = new ArrayList<AVStreamDataVideo>(1);
+		this.audstreams = new ArrayList<AVStreamDataAudio>(1);
+		this.substreams = new ArrayList<AVStreamDataSubtitle>(1);
+		this.othstreams = new ArrayList<AVStreamData>(1);
 	}
 	
 	/**
@@ -111,25 +103,16 @@ public class AniDBFile implements Serializable {
 		if (this.md5 != "") out.append("\tmd5: "+this.md5+'\n');
 		if (this.sha1 != "") out.append("\tsha1: "+this.sha1+'\n');
 		if (this.tth != "") out.append("\ttth: "+this.tth+'\n');
-		out.append("streams:"+'\n');
-		// vid streams
-		for (int i = 0; i < this.streams.length; i++) {
-			switch(this.streams[i].type) {
-				case AVCodecLibrary.CODEC_TYPE_VIDEO:
-					AVStreamDataVideo viddata = (AVStreamDataVideo)this.streams[i];
-					out.append(viddata.writeToString());
-					break;
-				case AVCodecLibrary.CODEC_TYPE_AUDIO:
-					AVStreamDataAudio auddata = (AVStreamDataAudio)this.streams[i];
-					out.append(auddata.writeToString());
-					break;
-				case AVCodecLibrary.CODEC_TYPE_SUBTITLE:
-					AVStreamDataSubtitle subdata = (AVStreamDataSubtitle)this.streams[i];
-					out.append(subdata.writeToString());
-					break;
-				default:
-					out.append(this.streams[i].writeToString());
-			}
+		if (this.numStreams > 0) {
+			out.append("streams:"+'\n');
+			for (int i = 0; i < this.vidstreams.size(); i++)
+				out.append(this.vidstreams.get(i).writeToString());
+			for (int i = 0; i < this.audstreams.size(); i++)
+				out.append(this.audstreams.get(i).writeToString());
+			for (int i = 0; i < this.substreams.size(); i++)
+				out.append(this.substreams.get(i).writeToString());
+			for (int i = 0; i < this.othstreams.size(); i++)
+				out.append(this.othstreams.get(i).writeToString());
 		}
 		return out.toString();
 	}
@@ -154,25 +137,16 @@ public class AniDBFile implements Serializable {
 		if (this.md5 != "") out.println("\tmd5: "+this.md5);
 		if (this.sha1 != "") out.println("\tsha1: "+this.sha1);
 		if (this.tth != "") out.println("\ttth: "+this.tth);
-		out.println("streams:");
-		// vid streams
-		for (int i = 0; i < this.streams.length; i++) {
-			switch(this.streams[i].type) {
-				case AVCodecLibrary.CODEC_TYPE_VIDEO:
-					AVStreamDataVideo viddata = (AVStreamDataVideo)this.streams[i];
-					viddata.writeToFile(out);
-					break;
-				case AVCodecLibrary.CODEC_TYPE_AUDIO:
-					AVStreamDataAudio auddata = (AVStreamDataAudio)this.streams[i];
-					auddata.writeToFile(out);
-					break;
-				case AVCodecLibrary.CODEC_TYPE_SUBTITLE:
-					AVStreamDataSubtitle subdata = (AVStreamDataSubtitle)this.streams[i];
-					subdata.writeToFile(out);
-					break;
-				default:
-					this.streams[i].writeToFile(out);
-			}
+		if (this.numStreams > 0) {
+			out.println("streams:"+'\n');
+			for (int i = 0; i < this.vidstreams.size(); i++)
+				this.vidstreams.get(i).writeToFile(out);
+			for (int i = 0; i < this.audstreams.size(); i++)
+				this.audstreams.get(i).writeToFile(out);
+			for (int i = 0; i < this.substreams.size(); i++)
+				this.substreams.get(i).writeToFile(out);
+			for (int i = 0; i < this.othstreams.size(); i++)
+				this.othstreams.get(i).writeToFile(out);
 		}
 	}
 	
@@ -202,54 +176,35 @@ public class AniDBFile implements Serializable {
 		if (this.md5 != "") xml.addValue(new XmlObject("md5",this.md5));
 		if (this.sha1 != "") xml.addValue(new XmlObject("sha1",this.sha1));
 		if (this.tth != "") xml.addValue(new XmlObject("tth",this.tth));
-		// vid streams
-		XmlObject vid = new XmlObject("vid");
-		XmlObject aud = new XmlObject("aud");
-		XmlObject sub = new XmlObject("sub");
-		XmlObject other = new XmlObject("oth");
-		int vidcnt = 0;
-		int audcnt = 0;
-		int subcnt = 0;
-		int othercnt = 0;
-		for (int i = 0; i < this.streams.length; i++) {
-			switch(this.streams[i].type) {
-				case AVCodecLibrary.CODEC_TYPE_VIDEO:
-					AVStreamDataVideo viddata = (AVStreamDataVideo)this.streams[i];
-					vid.addValue(viddata.getXmlObject());
-					vidcnt++;
-					break;
-				case AVCodecLibrary.CODEC_TYPE_AUDIO:
-					AVStreamDataAudio auddata = (AVStreamDataAudio)this.streams[i];
-					aud.addValue(auddata.getXmlObject());
-					audcnt++;
-					break;
-				case AVCodecLibrary.CODEC_TYPE_SUBTITLE:
-					AVStreamDataSubtitle subdata = (AVStreamDataSubtitle)this.streams[i];
-					sub.addValue(subdata.getXmlObject());
-					subcnt++;
-					break;
-				default:
-					other.addValue(this.streams[i].getXmlObject());
-					othercnt++;
+		if (this.numStreams > 0) {
+			if (this.vidstreams.size() > 0) {
+				XmlObject vid = new XmlObject("vid");
+				for (int i = 0; i < this.vidstreams.size(); i++)
+					vid.addValue(this.vidstreams.get(i).getXmlObject());
+				vid.addAttribute("cnt", ""+this.vidstreams.size());
+				xml.addValue(vid);
 			}
-		}
-		if (vidcnt > 0) {
-			vid.addAttribute("cnt", ""+vidcnt);
-			xml.addValue(vid);
-		}
-		// aud streams
-		if (audcnt > 0) {
-			aud.addAttribute("cnt", ""+audcnt);
-			xml.addValue(aud);
-		}
-		// sub streams
-		if (subcnt > 0) {
-			sub.addAttribute("cnt", ""+subcnt);
-			xml.addValue(sub);
-		}
-		if (othercnt > 0) {
-			other.addAttribute("cnt", ""+othercnt);
-			xml.addValue(other);
+			if (this.audstreams.size() > 0) {
+				XmlObject aud = new XmlObject("aud");
+				for (int i = 0; i < this.audstreams.size(); i++)
+					aud.addValue(this.audstreams.get(i).getXmlObject());
+				aud.addAttribute("cnt", ""+this.audstreams.size());
+				xml.addValue(aud);
+			}
+			if (this.substreams.size() > 0) {
+				XmlObject sub = new XmlObject("sub");
+				for (int i = 0; i < this.substreams.size(); i++)
+					sub.addValue(this.substreams.get(i).getXmlObject());
+				sub.addAttribute("cnt", ""+this.substreams.size());
+				xml.addValue(sub);
+			}
+			if (this.othstreams.size() > 0) {
+				XmlObject oth = new XmlObject("oth");
+				for (int i = 0; i < this.othstreams.size(); i++)
+					oth.addValue(this.othstreams.get(i).getXmlObject());
+				oth.addAttribute("cnt", ""+this.othstreams.size());
+				xml.addValue(oth);
+			}
 		}
 		return xml;
 	}

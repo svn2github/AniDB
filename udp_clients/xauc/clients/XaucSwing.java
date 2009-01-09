@@ -50,7 +50,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 	
 	protected static String appName = "xAUC";
 	protected static int versionMajor = 0;
-	protected static int versionMinor = 3;
+	protected static int versionMinor = 6;
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddFile;
@@ -895,6 +895,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 		mainProgressBar.setProgressBar(this.progressOverall);
 		SwingProgress fileProgressBar = new SwingProgress();
 		fileProgressBar.setProgressBar(this.progressFiles);
+		//this.parsingOptions.setFullParse(true);
 		fileProcessor = new SwingFileProcessor(this.files,this.hashingOptions,this.parsingOptions);
 		fileProcessor.setMainProgressBar(mainProgressBar);
 		fileProcessor.setFileProgressBar(fileProgressBar);

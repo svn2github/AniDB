@@ -5,7 +5,7 @@ import java.io.File;
 import structures.AniDBFile;
 import hashing.Hasher;
 import hashing.HasherOptions;
-import avparsing.AVparser;
+import avparsing.AVParser;
 import avparsing.AVParserOptions;
 
 /**
@@ -19,8 +19,6 @@ public class FileParser extends ThreadedWorker {
 	protected Log log = null;
 	protected Progress progress = null;
 	protected AniDBFile anidbFile = null;
-	protected boolean hashingEnabled = true;
-	protected boolean parsingEnabled = true;
 	protected String errorMessage = "";
 	
 	public FileParser() {
@@ -28,25 +26,20 @@ public class FileParser extends ThreadedWorker {
 		this.progress = new Progress();
 		this.avparserOptions = new AVParserOptions();
 		this.hasherOptions = new HasherOptions();
-		this.hashingEnabled = this.hasherOptions.isEnabled();
-		this.parsingEnabled = this.avparserOptions.isEnabled();
 	}
 	public FileParser(File file) { this(); this.file = file; }
 	public FileParser(String filename) { this(new File(filename)); }
 	public FileParser(File file, HasherOptions hasherOptions) { 
 		this(file);
 		this.hasherOptions = hasherOptions;
-		this.hashingEnabled = this.hasherOptions.isEnabled();
 	}
 	public FileParser(File file, AVParserOptions avparserOptions) { 
 		this(file);
 		this.avparserOptions = avparserOptions;
-		this.parsingEnabled = this.avparserOptions.isEnabled();
 	}
 	public FileParser(File file, HasherOptions hasherOptions, AVParserOptions avparserOptions) {
 		this(file, hasherOptions);
 		this.avparserOptions = avparserOptions;
-		this.parsingEnabled = this.avparserOptions.isEnabled();
 	}
 	public FileParser(String filename, HasherOptions hasherOptions) {
 		this (new File(filename), hasherOptions);
@@ -81,14 +74,6 @@ public class FileParser extends ThreadedWorker {
 	public synchronized AniDBFile getAnidbFile() { return anidbFile; }
 	/** @param anidbFile the anidbFile to set */
 	public synchronized void setAnidbFile(AniDBFile anidbFile) { this.anidbFile = anidbFile; }
-	/** @return the hashingEnabled */
-	public synchronized boolean isHashingEnabled() { return hashingEnabled; }
-	/** @param hashingEnabled the hashingEnabled to set */
-	public synchronized void setHashingEnabled(boolean hashingEnabled) { this.hashingEnabled = hashingEnabled; }
-	/** @return the avparsingEnabled */
-	public synchronized boolean isParsingEnabled() { return parsingEnabled; }
-	/** @param avparsingEnabled the avparsingEnabled to set */
-	public synchronized void setParsingEnabled(boolean parsingEnabled) { this.parsingEnabled = parsingEnabled; }
 	/** @return the errorMessage */
 	public synchronized String getErrorMessage() { return errorMessage;	}
 
@@ -102,34 +87,30 @@ public class FileParser extends ThreadedWorker {
 			return;
 		}
 		
+		this.anidbFile = new AniDBFile(file);
 		Hasher filehasher = null;
-		AVparser avparser = null;
+		AVParser avparser = null;
 		
-		if (this.hashingEnabled) {
+		if (this.hasherOptions.isEnabled()) {
 			filehasher = new Hasher(file,hasherOptions);
 			filehasher.setLog(log);
+			filehasher.setAnidbFile(this.anidbFile);
 			progress.setAction("hashing");
-			progress.setShowProgress(false);
+			//progress.setShowProgress(false);
 			filehasher.setProgress(progress);
 			filehasher.work();
 			if (!filehasher.getErrorMessage().equals("")) this.errorMessage = filehasher.getErrorMessage();
 		}
 		
-		if (this.parsingEnabled) {
-			avparser = new AVparser(file,avparserOptions);
+		if (this.avparserOptions.isEnabled()) {
+			avparser = new AVParser(file,avparserOptions);
 			avparser.setLog(log);
+			avparser.setAnidbFile(this.anidbFile);
 			progress.setAction("parsing");
-			progress.setShowProgress(false);
+			//progress.setShowProgress(false);
 			avparser.setProgress(progress);
 			avparser.work();
 			if (!avparser.getErrorMessage().equals("")) this.errorMessage = avparser.getErrorMessage();
 		}
-		
-		if (this.hashingEnabled)
-			this.anidbFile = new AniDBFile(file,filehasher);
-		if (this.parsingEnabled)
-			this.anidbFile = new AniDBFile(file,avparser);
-		if (this.hashingEnabled && this.parsingEnabled)
-			this.anidbFile = new AniDBFile(file,filehasher,avparser);
 	}
 }

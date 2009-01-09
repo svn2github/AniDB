@@ -593,247 +593,15 @@ public interface AVCodecLibrary extends FFMPEGLibrary
 	    public short[] position = new short[3*2];	// JNA doesn't support multidimensional arrays (I don't think), so we'll just use a larger 1-dimensional array, which is equivalent memory-wise.
 	};
 	
-	
-//	#define FF_COMMON_FRAME \
-//  /**\
-//   * pointer to the picture planes.\
-//   * This might be different from the first allocated byte\
-//   * - encoding: \
-//   * - decoding: \
-//   */\
-//  uint8_t *data[4];\
-//  int linesize[4];\
-//  /**\
-//   * pointer to the first allocated byte of the picture. Can be used in get_buffer/release_buffer.\
-//   * This isn't used by libavcodec unless the default get/release_buffer() is used.\
-//   * - encoding: \
-//   * - decoding: \
-//   */\
-//  uint8_t *base[4];\
-//  /**\
-//   * 1 -> keyframe, 0-> not\
-//   * - encoding: Set by libavcodec.\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int key_frame;\
-//\
-//  /**\
-//   * Picture type of the frame, see ?_TYPE below.\
-//   * - encoding: Set by libavcodec. for coded_picture (and set by user for input).\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int pict_type;\
-//\
-//  /**\
-//   * presentation timestamp in time_base units (time when frame should be shown to user)\
-//   * If AV_NOPTS_VALUE then frame_rate = 1/time_base will be assumed.\
-//   * - encoding: MUST be set by user.\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int64_t pts;\
-//\
-//  /**\
-//   * picture number in bitstream order\
-//   * - encoding: set by\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int coded_picture_number;\
-//  /**\
-//   * picture number in display order\
-//   * - encoding: set by\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int display_picture_number;\
-//\
-//  /**\
-//   * quality (between 1 (good) and FF_LAMBDA_MAX (bad)) \
-//   * - encoding: Set by libavcodec. for coded_picture (and set by user for input).\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int quality; \
-//\
-//  /**\
-//   * buffer age (1->was last buffer and dint change, 2->..., ...).\
-//   * Set to INT_MAX if the buffer has not been used yet.\
-//   * - encoding: unused\
-//   * - decoding: MUST be set by get_buffer().\
-//   */\
-//  int age;\
-//\
-//  /**\
-//   * is this picture used as reference\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec. (before get_buffer() call)).\
-//   */\
-//  int reference;\
-//\
-//  /**\
-//   * QP table\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int8_t *qscale_table;\
-//  /**\
-//   * QP store stride\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int qstride;\
-//\
-//  /**\
-//   * mbskip_table[mb]>=1 if MB didn't change\
-//   * stride= mb_width = (width+15)>>4\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  uint8_t *mbskip_table;\
-//\
-//  /**\
-//   * motion vector table\
-//   * @code\
-//   * example:\
-//   * int mv_sample_log2= 4 - motion_subsample_log2;\
-//   * int mb_width= (width+15)>>4;\
-//   * int mv_stride= (mb_width << mv_sample_log2) + 1;\
-//   * motion_val[direction][x + y*mv_stride][0->mv_x, 1->mv_y];\
-//   * @endcode\
-//   * - encoding: Set by user.\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int16_t (*motion_val[2])[2];\
-//\
-//  /**\
-//   * macroblock type table\
-//   * mb_type_base + mb_width + 2\
-//   * - encoding: Set by user.\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  uint32_t *mb_type;\
-//\
-//  /**\
-//   * log2 of the size of the block which a single vector in motion_val represents: \
-//   * (4->16x16, 3->8x8, 2-> 4x4, 1-> 2x2)\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  uint8_t motion_subsample_log2;\
-//\
-//  /**\
-//   * for some private data of the user\
-//   * - encoding: unused\
-//   * - decoding: Set by user.\
-//   */\
-//  void *opaque;\
-//\
-//  /**\
-//   * error\
-//   * - encoding: Set by libavcodec. if flags&CODEC_FLAG_PSNR.\
-//   * - decoding: unused\
-//   */\
-//  uint64_t error[4];\
-//\
-//  /**\
-//   * type of the buffer (to keep track of who has to deallocate data[*])\
-//   * - encoding: Set by the one who allocates it.\
-//   * - decoding: Set by the one who allocates it.\
-//   * Note: User allocated (direct rendering) & internal buffers cannot coexist currently.\
-//   */\
-//  int type;\
-//  \
-//  /**\
-//   * When decoding, this signals how much the picture must be delayed.\
-//   * extra_delay = repeat_pict / (2*fps)\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int repeat_pict;\
-//  \
-//  /**\
-//   * \
-//   */\
-//  int qscale_type;\
-//  \
-//  /**\
-//   * The content of the picture is interlaced.\
-//   * - encoding: Set by user.\
-//   * - decoding: Set by libavcodec. (default 0)\
-//   */\
-//  int interlaced_frame;\
-//  \
-//  /**\
-//   * If the content is interlaced, is top field displayed first.\
-//   * - encoding: Set by user.\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int top_field_first;\
-//  \
-//  /**\
-//   * Pan scan.\
-//   * - encoding: Set by user.\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  AVPanScan *pan_scan;\
-//  \
-//  /**\
-//   * Tell user application that palette has changed from previous frame.\
-//   * - encoding: ??? (no palette-enabled encoder yet)\
-//   * - decoding: Set by libavcodec. (default 0).\
-//   */\
-//  int palette_has_changed;\
-//  \
-//  /**\
-//   * codec suggestion on buffer type if != 0\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec. (before get_buffer() call)).\
-//   */\
-//  int buffer_hints;\
-//\
-//  /**\
-//   * DCT coefficients\
-//   * - encoding: unused\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  short *dct_coeff;\
-//\
-//  /**\
-//   * motion referece frame index\
-//   * - encoding: Set by user.\
-//   * - decoding: Set by libavcodec.\
-//   */\
-//  int8_t *ref_index[2];
-//
-//#define FF_QSCALE_TYPE_MPEG1 0
-//#define FF_QSCALE_TYPE_MPEG2 1
-//#define FF_QSCALE_TYPE_H264  2
-//
-//#define FF_BUFFER_TYPE_INTERNAL 1
-//#define FF_BUFFER_TYPE_USER     2 ///< direct rendering buffers (image is (de)allocated by user)
-//#define FF_BUFFER_TYPE_SHARED   4 ///< Buffer from somewhere else; don't deallocate image (data/base), all other tables are not shared.
-//#define FF_BUFFER_TYPE_COPY     8 ///< Just a (modified) copy of some other buffer, don't deallocate anything.
-//
-//
-//#define FF_I_TYPE 1 // Intra
-//#define FF_P_TYPE 2 // Predicted
-//#define FF_B_TYPE 3 // Bi-dir predicted
-//#define FF_S_TYPE 4 // S(GMC)-VOP MPEG4
-//#define FF_SI_TYPE 5
-//#define FF_SP_TYPE 6
-//
-//#define FF_BUFFER_HINTS_VALID    0x01 // Buffer hints value is meaningful (if 0 ignore).
-//#define FF_BUFFER_HINTS_READABLE 0x02 // Codec will read from buffer.
-//#define FF_BUFFER_HINTS_PRESERVE 0x04 // User must not alter buffer content.
-//#define FF_BUFFER_HINTS_REUSABLE 0x08 // Codec will reuse the buffer (update).
-
-//	/**
-//	 * Audio Video Frame.
-//	 */
-//	typedef struct AVFrame {
-//	    FF_COMMON_FRAME
-//	} AVFrame;
-	
 	public static class AVFrame extends Structure
 	{
 		//uint8_t *data[4];
+		/**
+	     * pointer to the picture planes.
+	     * This might be different from the first allocated byte
+	     * - encoding: 
+	     * - decoding: 
+	     */
 	    public Pointer data0;
 	    public Pointer data1;
 	    public Pointer data2;
@@ -842,42 +610,194 @@ public interface AVCodecLibrary extends FFMPEGLibrary
 	    public int[] linesize = new int[4];
 	   
 	    //uint8_t *base[4];
+	    /**
+	     * pointer to the first allocated byte of the picture. Can be used in get_buffer/release_buffer.
+	     * This isn't used by libavcodec unless the default get/release_buffer() is used.
+	     * - encoding: 
+	     * - decoding: 
+	     */
 	    public Pointer base0;
 	    public Pointer base1;
 	    public Pointer base2;
 	    public Pointer base3;
-	    
+	    /**
+	     * 1 -> keyframe, 0-> not
+	     * - encoding: Set by libavcodec.
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int key_frame;
+	    /**
+	     * Picture type of the frame, see ?_TYPE below.
+	     * - encoding: Set by libavcodec. for coded_picture (and set by user for input).
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int pict_type;
+	    /**
+	     * presentation timestamp in time_base units (time when frame should be shown to user)
+	     * If AV_NOPTS_VALUE then frame_rate = 1/time_base will be assumed.
+	     * - encoding: MUST be set by user.
+	     * - decoding: Set by libavcodec.
+	     */
 	    public long pts;
+	    /**
+	     * picture number in bitstream order
+	     * - encoding: set by
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int coded_picture_number;
+	    /**
+	     * picture number in display order
+	     * - encoding: set by
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int display_picture_number;
+	    /**
+	     * quality (between 1 (good) and FF_LAMBDA_MAX (bad)) 
+	     * - encoding: Set by libavcodec. for coded_picture (and set by user for input).
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int quality;
+	    /**
+	     * buffer age (1->was last buffer and dint change, 2->..., ...).
+	     * Set to INT_MAX if the buffer has not been used yet.
+	     * - encoding: unused
+	     * - decoding: MUST be set by get_buffer().
+	     */
 	    public int age;
+	    /**
+	     * is this picture used as reference
+	     * The values for this are the same as the MpegEncContext.picture_structure
+	     * variable, that is 1->top field, 2->bottom field, 3->frame/both fields.
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec. (before get_buffer() call)).
+	     */
 	    public int reference;
+	    /**
+	     * QP table
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec.
+	     */
 	    public Pointer qscale_table;
+	    /**
+	     * QP store stride
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int qstride;
+	    /**
+	     * mbskip_table[mb]>=1 if MB didn't change
+	     * stride= mb_width = (width+15)>>4
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec.
+	     */
 	    public Pointer mbskip_table;
 	    //int16_t (*motion_val[2])[2];
+	    /**
+	     * motion vector table
+	     * @code
+	     * example:
+	     * int mv_sample_log2= 4 - motion_subsample_log2;
+	     * int mb_width= (width+15)>>4;
+	     * int mv_stride= (mb_width << mv_sample_log2) + 1;
+	     * motion_val[direction][x + y*mv_stride][0->mv_x, 1->mv_y];
+	     * @endcode
+	     * - encoding: Set by user.
+	     * - decoding: Set by libavcodec.
+	     */
 	    public Pointer motion_val0;
 	    public Pointer motion_val1;
+	    /**
+	     * macroblock type table
+	     * mb_type_base + mb_width + 2
+	     * - encoding: Set by user.
+	     * - decoding: Set by libavcodec.
+	     */
 	    public Pointer mb_type;
+	    /**
+	     * log2 of the size of the block which a single vector in motion_val represents: 
+	     * (4->16x16, 3->8x8, 2-> 4x4, 1-> 2x2)
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec.
+	     */
 	    public byte motion_subsample_log2;
+	    /**
+	     * for some private data of the user
+	     * - encoding: unused
+	     * - decoding: Set by user.
+	     */
 	    public Pointer opaque;
+	    /**
+	     * error
+	     * - encoding: Set by libavcodec. if flags&CODEC_FLAG_PSNR.
+	     * - decoding: unused
+	     */
 	    public long[] error = new long[4];
+	    /**
+	     * type of the buffer (to keep track of who has to deallocate data[*])
+	     * - encoding: Set by the one who allocates it.
+	     * - decoding: Set by the one who allocates it.
+	     * Note: User allocated (direct rendering) & internal buffers cannot coexist currently.
+	     */
 	    public int type;
+	    /**
+	     * When decoding, this signals how much the picture must be delayed.
+	     * extra_delay = repeat_pict / (2*fps)
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int repeat_pict;
 	    public int qscale_type;
+	    /**
+	     * The content of the picture is interlaced.
+	     * - encoding: Set by user.
+	     * - decoding: Set by libavcodec. (default 0)
+	     */
 	    public int interlaced_frame;
+	    /**
+	     * If the content is interlaced, is top field displayed first.
+	     * - encoding: Set by user.
+	     * - decoding: Set by libavcodec.
+	     */
 	    public int top_field_first;
-		/** AVPanScan */
+	    /**
+	     * AVPanScan
+	     * Pan scan.
+	     * - encoding: Set by user.
+	     * - decoding: Set by libavcodec.
+	     */
 	    public Pointer pan_scan;
+	    /**
+	     * Tell user application that palette has changed from previous frame.
+	     * - encoding: ??? (no palette-enabled encoder yet)
+	     * - decoding: Set by libavcodec. (default 0).
+	     */
 	    public int palette_has_changed;
+	    /**
+	     * codec suggestion on buffer type if != 0
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec. (before get_buffer() call)).
+	     */
 	    public int buffer_hints;
+	    /**
+	     * DCT coefficients
+	     * - encoding: unused
+	     * - decoding: Set by libavcodec.
+	     */
 	    public Pointer dct_coeff;
 		//int8_t *ref_index[2];
+	    /**
+	     * motion referece frame index
+	     * - encoding: Set by user.
+	     * - decoding: Set by libavcodec.
+	     */
 	    public Pointer ref_index0;
 	    public Pointer ref_index1;
+	    /**
+	     * reordered opaque 64bit number (generally a PTS) from AVCodecContext.reordered_opaque
+	     * output in AVFrame.reordered_opaque
+	     * - encoding: unused
+	     * - decoding: Read by user.
+	     */
 		public long reordered_opaque;
 	    
 		public static final int FF_QSCALE_TYPE_MPEG1 =0;
@@ -2231,24 +2151,11 @@ public interface AVCodecLibrary extends FFMPEGLibrary
     	public long offset;      ///< byte offset from starting packet start
     	public long last_offset;
 	} 
-	
-	
-//	typedef struct AVCodecParser {
-//	    int codec_ids[5]; /* several codec IDs are permitted */
-//	    int priv_data_size;
-//	    int (*parser_init)(AVCodecParserContext *s);
-//	    int (*parser_parse)(AVCodecParserContext *s,
-//	                        AVCodecContext *avctx,
-//	                        const uint8_t **poutbuf, int *poutbuf_size,
-//	                        const uint8_t *buf, int buf_size);
-//	    void (*parser_close)(AVCodecParserContext *s);
-//	    int (*split)(AVCodecContext *avctx, const uint8_t *buf, int buf_size);
-//	    struct AVCodecParser *next;
-//	} AVCodecParser;
-	
+
 	public static class AVCodecParser extends Structure 
 	{
-	    public int[] codec_ids = new int[5]; /* several codec IDs are permitted */
+		/* several codec IDs are permitted */
+	    public int[] codec_ids = new int[5];
 	    public int priv_data_size;
 	    public Pointer parser_init;
 	    public Pointer parser_parse;

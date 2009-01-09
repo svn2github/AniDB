@@ -9,7 +9,7 @@ public class Progress {
 	protected float progress = 0;
 	protected String action = "";
 	protected String state = "Stopped";
-	protected boolean showProgress = false;
+	protected boolean showProgress = true;
 
 	public Progress() {};
 	public Progress(float progress) { this.progress = progress; };

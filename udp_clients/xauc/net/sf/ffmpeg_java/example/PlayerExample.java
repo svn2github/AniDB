@@ -2,6 +2,8 @@ package net.sf.ffmpeg_java.example;
 
 import java.util.ArrayList;
 
+import structures.AVStreamData;
+
 import net.sf.ffmpeg_java.AVCodecLibrary;
 import net.sf.ffmpeg_java.AVFormatLibrary;
 import net.sf.ffmpeg_java.AVUtilLibrary;
@@ -18,8 +20,7 @@ import com.sun.jna.Pointer;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
-import avparsing.AVStreamData;
-import avparsing.AVparser;
+import avparsing.AVParser;
 
 /**
  * Based on AVCodecSample, but shows the movie in a window.
@@ -63,7 +64,7 @@ public class PlayerExample
 
 		//AVFORMAT.dump_format(formatCtx, 0, filename, 0);
 		
-		AVparser avparser = new AVparser();
+		AVParser avparser = new AVParser();
 		
 		// Okay, let's do this by steps
 		long timeMillis = formatCtx.duration;
@@ -107,7 +108,7 @@ public class PlayerExample
 				if (codecCtx.height > 0 && codecCtx.width > 0) System.out.println("\tresolution: "+codecCtx.width+"x"+codecCtx.height);
 			}
 			if (codecCtx.codec_type == AVCodecLibrary.CODEC_TYPE_AUDIO) {
-				if (codecCtx.channels > 0) System.out.println("\tchannels: "+avparser.mapAudioChannels(codecCtx.channel_layout));
+				if (codecCtx.channels > 0) System.out.println("\tchannels: "+avparser.mapAudioChannels((int)codecCtx.channel_layout));
 				if (codecCtx.sample_rate > 0) System.out.println("\tsample rate: "+codecCtx.sample_rate+" Hz");
 				System.out.println("\tsample format: "+avparser.getSampleFormat(codecCtx.sample_fmt));
 			}

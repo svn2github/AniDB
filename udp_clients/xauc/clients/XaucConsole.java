@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import avparsing.AVParser;
 import avparsing.AVParserOptions;
 import hashing.HasherOptions;
 import utils.*;
@@ -15,7 +16,7 @@ import structures.AniDBFile;
 /** Xauc Cli (Console) frontend */
 public class XaucConsole {
 	protected static int versionMajor = 0;
-	protected static int versionMinor = 3;
+	protected static int versionMinor = 6;
 	
 	/**
 	 * Displays help
@@ -29,15 +30,20 @@ public class XaucConsole {
 		System.out.println("\t--r Recurse directory (if a directory is supplied)");
 		System.out.println("\t--d See debug messages");
 		System.out.println("\t--h:(on|off) Enable/disable file hashing (default: on)");
+		System.out.println("\t--h:save:(on|off) Enable/disable saving of hashing options (default: off)");
+		System.out.println("\t--h:load:(on|off) Enable/disable loading of hashing options (will overide current settings, default: off)");
 		System.out.println("\t--h:ed2k:(on|off) Hash file with the ed2k algorithm (default: on)");
 		System.out.println("\t--h:crc32:(on|off) Hash file with the crc32 algorithm (default: off)");
 		System.out.println("\t--h:md5:(on|off) Hash file with the md5 algorithm (default: off)");
 		System.out.println("\t--h:sha1:(on|off) Hash file with the sha1 algorithm (default: off)");
 		System.out.println("\t--h:tth:(on|off) Hash file with the sha1 algorithm (default: off)");
 		System.out.println("\t--a:(on|off) Enable/disable file av parsing (default: on)");
+		System.out.println("\t--a:save:(on|off) Enable/disable saving of av parsing options (default: off)");
+		System.out.println("\t--a:load:(on|off) Enable/disable loading of av parsing options (will overide current settings, default: off)");
 		System.out.println("\t--a:fp:(on|off) Enable/disable full file av parsing (slower if enabled but more information is supplied, default: off)");
-		System.out.println("\t--f:xml:(on|off) Enable/disable writing of parsed files xml to disk (see below for directory, default: on)");
-		System.out.println("\t--f:console:(on|off) Enable/disable writing of parsed files data to console (default: off)");
+		System.out.println("\t--a:vbrmode:(size|bitrate) Set vbr calculation mode in full file av parsing (size should be faster but less accurate, default: bitrate)");
+		System.out.println("\t--f:xml:(on|off) Enable/disable writing of parsed files xml to disk (see below for directory, default: off)");
+		System.out.println("\t--f:console:(on|off) Enable/disable writing of parsed files data to console (default: on)");
 		System.out.println();
 		System.out.println("Application directory: "+System.getProperty("user.home") + File.separator + ".xauc");
 		return;
@@ -102,12 +108,16 @@ public class XaucConsole {
 			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		boolean recurseDir = false;
 		boolean seeDebug = false;
-		boolean writeXMLtoDisk = true;
-		boolean writeFILEtoConsole = false;
+		boolean writeXMLtoDisk = false;
+		boolean writeFILEtoConsole = true;
+		boolean saveParsingSettings = false;
+		boolean saveHashingSettings = false;
+		boolean autoLoadParsingSettings = false;
+		boolean autoLoadHashingSettings = false;
 		HasherOptions hasherOptions = new HasherOptions();
 		AVParserOptions avparserOptions = new AVParserOptions();
 		File file = null;
@@ -163,6 +173,14 @@ public class XaucConsole {
 						if (value.equals("on")) hasherOptions.setEnableTTH(true);
 						else if (value.equals("off")) hasherOptions.setEnableTTH(false);
 						else printOptionError(args[i]);
+					} else if (option.equals("save")) {
+						if (value.equals("on")) saveHashingSettings = true;
+						else if (value.equals("off")) saveHashingSettings = false;
+						else printOptionError(args[i]);
+					} else if (option.equals("load")) {
+						if (value.equals("on")) autoLoadHashingSettings = true;
+						else if (value.equals("off")) autoLoadHashingSettings = false;
+						else printOptionError(args[i]);
 					} else printOptionError(args[i]);
 				} else if (type.equals("a")) { // parse avparsing options
 					if (option.equals("")) {
@@ -172,6 +190,18 @@ public class XaucConsole {
 					} else if (option.equals("fp")) {
 						if (value.equals("on")) avparserOptions.setFullParse(true);
 						else if (value.equals("off")) avparserOptions.setFullParse(false);
+						else printOptionError(args[i]);
+					} else if (option.equals("vbrmode")) {
+						if (value.equals("bitrate")) avparserOptions.setVbr_calc_mode(AVParser.VBR_BY_PACKET_BITRATE);
+						else if (value.equals("size")) avparserOptions.setVbr_calc_mode(AVParser.VBR_BY_PACKET_SIZE);
+						else printOptionError(args[i]);
+					} else if (option.equals("save")) {
+						if (value.equals("on")) saveParsingSettings = true;
+						else if (value.equals("off")) saveParsingSettings = false;
+						else printOptionError(args[i]);
+					} else if (option.equals("load")) {
+						if (value.equals("on")) autoLoadParsingSettings = true;
+						else if (value.equals("off")) autoLoadParsingSettings = false;
 						else printOptionError(args[i]);
 					} else printOptionError(args[i]);
 				} else if (type.equals("f")) {
@@ -196,10 +226,15 @@ public class XaucConsole {
 			}
 		}
 		
+		hasherOptions.setSeeDebug(seeDebug);
+		avparserOptions.setSeeDebug(seeDebug);
+		if (saveHashingSettings) hasherOptions.saveSettings(appDir);
+		if (autoLoadHashingSettings) hasherOptions.loadSettings(appDir);
+		if (saveParsingSettings) avparserOptions.saveSettings(appDir);
+		if (autoLoadParsingSettings) avparserOptions.loadSettings(appDir);
+		
 		System.out.println("Found "+files.size()+" file(s)");
 		if (files.size() > 0) {
-			hasherOptions.setSeeDebug(seeDebug);
-			avparserOptions.setSeeDebug(seeDebug);
 			Log log = new Log(logFile,false);
 			Progress process = new Progress();
 			process.setAction("processing");

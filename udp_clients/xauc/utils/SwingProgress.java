@@ -8,7 +8,7 @@ import javax.swing.JProgressBar;
 public class SwingProgress extends Progress {
 	protected JProgressBar progressBar;
 
-	public SwingProgress() { super(); }
+	public SwingProgress() { super(); this.showProgress = false; }
 	public SwingProgress(float progress) { super(progress); };
 	public SwingProgress(float progress, String action) { super(progress,action); }
 	public SwingProgress(JProgressBar progressBar) { this.progressBar = progressBar; }
