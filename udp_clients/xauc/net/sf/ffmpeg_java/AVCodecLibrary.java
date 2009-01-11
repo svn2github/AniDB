@@ -6,16 +6,16 @@ import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Based on FFMPEG revision 12162, Feb 20 2008.  
+ * Based on FFMPEG revision 15968, Dez 03 2008.
  * From avcodec.h, opt.h.
  * @author Ken Larson
  *
  */
 public interface AVCodecLibrary extends FFMPEGLibrary 
 {
-    public static final AVCodecLibrary INSTANCE = (AVCodecLibrary) Native.loadLibrary(
-    		System.getProperty("os.name").startsWith("Windows") ? "avcodec-52" : "avcodec",
-    		AVCodecLibrary.class);
+	public static final String libname = System.getProperty("os.name").startsWith("Windows") ? "avcodec-52" : "avcodec";
+    public static final AVCodecLibrary INSTANCE = (AVCodecLibrary) Native.loadLibrary(libname,AVCodecLibrary.class);
+    public static final AVCodecLibrary SYNC_INSTANCE = (AVCodecLibrary) Native.synchronizedLibrary(INSTANCE);
 
     
 //------------------------------------------------------------------------------------------------------------------------

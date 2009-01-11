@@ -178,17 +178,6 @@ public class AVParser extends ThreadedWorker {
 	}
 
 	/**
-	 * Converts a Byte Array to a String
-	 * @param array The Byte Array to convert
-	 * @return Converted String
-	 */
-	public String convertByteArray(byte[] array) {
-		String string = "";
-		for (int i = 0; i < array.length; i++) if ((int) array[i] != 0) string += (char)array[i];
-		return string;
-	}
-
-	/**
 	 * Because AVCodec doesn't have codecs for Subtitles, mapping is done here
 	 * @param id CODEC_ID for unknown types
 	 * @return A string with the codec name if known
@@ -197,13 +186,17 @@ public class AVParser extends ThreadedWorker {
 		switch (id) {
 			case AVCodecLibrary.CODEC_ID_DVD_SUBTITLE: return "vobsub/dvd subtitle";
 			case AVCodecLibrary.CODEC_ID_DVB_SUBTITLE: return "dvb subtitle";
-			case AVCodecLibrary.CODEC_ID_TEXT: return "text/utf8";
+			case AVCodecLibrary.CODEC_ID_TEXT: return "text/srt/utf8";
 			case AVCodecLibrary.CODEC_ID_XSUB: return "xsub";
 			case AVCodecLibrary.CODEC_ID_SSA: return "ass/ssa";
 			case AVCodecLibrary.CODEC_ID_MOV_TEXT: return "mov text";
 			case AVCodecLibrary.CODEC_ID_TTF: return "ttf";
 			case AVCodecLibrary.CODEC_ID_BMP: return "bmp";
-			default: return "unknown";
+			case AVCodecLibrary.CODEC_ID_GIF: return "gif";
+			case AVCodecLibrary.CODEC_ID_PNG: return "png";
+			case AVCodecLibrary.CODEC_ID_JPEG2000: return "jpeg2000";
+			case AVCodecLibrary.CODEC_ID_JPEGLS: return "jpegls";
+			default: return "other/unknown";
 		}
 	}
 
@@ -237,6 +230,17 @@ public class AVParser extends ThreadedWorker {
 	}
 
 	/**
+	 * Converts a Byte Array to a String (also creates a new string in the process)
+	 * @param array The Byte Array to convert
+	 * @return Converted String
+	 */
+	public String convertByteArray(byte[] array) {
+		String string = "";
+		for (int i = 0; i < array.length; i++) if ((int) array[i] != 0) string += (char)array[i];
+		return string;
+	}
+	
+	/**
 	 * Gets a string representation of a codec tag
 	 * @param codec_tag A codecCtx.codec_tag reference
 	 * @return A codec tag
@@ -268,27 +272,14 @@ public class AVParser extends ThreadedWorker {
 		default: return "";
 		}
 	}
-
-	/**
-	 * Public method for getting codec name out of codec id
-	 * @param codec_id AVCodecLibrary.CODEC_ID_* id
-	 * @return A String array in which the first field is the short name and the second the long name
-	 */
-	public synchronized String[] getCodecName(int codec_id) {
-		if (codec_id == 0) return new String[]{"",""};
-		AVCodec codec = AVCODEC.avcodec_find_decoder(codec_id);
-		if (codec == null) return new String[]{"",""};
-		return new String[]{codec.name,codec.long_name};
-	}
-	
 	
 	/**
 	 * Method that parses a file
 	 * @return 0 if operation is sucessful
 	 */
 	public synchronized void work() {
-		if (AVFORMAT == null) { AVFORMAT = AVFormatLibrary.INSTANCE; AVFORMAT.av_register_all(); }
-		if (AVCODEC == null) { AVCODEC = AVCodecLibrary.INSTANCE; AVCODEC.avcodec_init(); }
+		if (AVFORMAT == null) { AVFORMAT = AVFormatLibrary.SYNC_INSTANCE; AVFORMAT.av_register_all(); }
+		if (AVCODEC == null) { AVCODEC = AVCodecLibrary.SYNC_INSTANCE; AVCODEC.avcodec_init(); }
 
 		final PointerByReference ppFormatCtx = new PointerByReference();
 
@@ -319,16 +310,20 @@ public class AVParser extends ThreadedWorker {
 		this.bitrate = (formatCtx.bit_rate > 0 ? formatCtx.bit_rate/1000 : 0);
 		this.format = format.name;
 		this.numStreams = formatCtx.nb_streams;
+		if (this.anidbFile != null) {
+			this.anidbFile.duration = (float)formatCtx.duration / 1000000;
+			this.anidbFile.formatedDuration = formatDuration(formatCtx.duration);
+			this.anidbFile.bitrate = (formatCtx.bit_rate > 0 ? formatCtx.bit_rate/1000 : 0);
+			this.anidbFile.format = format.name;
+			this.anidbFile.numStreams = formatCtx.nb_streams;
+			this.anidbFile.state |= AniDBFile.PARSED;
+		}
 
 		//AVFORMAT.dump_format(formatCtx, 0, filename, 0);
 
 		// Now get stream data
 		Pointer[] streams = formatCtx.getStreams();
 		this.streams = new AVStreamData[formatCtx.nb_streams];
-		if (this.anidbFile != null) {
-			this.anidbFile.numStreams = formatCtx.nb_streams;
-			this.anidbFile.state |= AniDBFile.PARSED;
-		}
 		int streamId = 1;
 		int vidStreamIndex = 0;
 		int audStreamIndex = 0;
@@ -361,10 +356,8 @@ public class AVParser extends ThreadedWorker {
 					vidstream.timebase = stream.time_base.toDouble();
 					vidstream.type = codecCtx.codec_type;
 					vidstream.codec_id = codecCtx.codec_id;
-					
-					vidstream.codecName = (codec != null ? codec.name : "");
-					vidstream.codecNameLong = (codec != null ? codec.long_name : "");
-					vidstream.codecTag = (codecCtx.codec_tag != 0 ? getCodecTag(codecCtx.codec_tag) : "");
+
+					vidstream.setAniDBVideoCodec(codecCtx.codec_id, getCodecTag(codecCtx.codec_tag));
 					if(stream.r_frame_rate.den != 0 && stream.r_frame_rate.num != 0) vidstream.fps = stream.r_frame_rate.av_q2d();
 					else vidstream.fps = 1/codecCtx.time_base.av_q2d();
 					vidstream.p_width = codecCtx.width;
@@ -405,9 +398,7 @@ public class AVParser extends ThreadedWorker {
 					audstream.type = codecCtx.codec_type;
 					audstream.codec_id = codecCtx.codec_id;
 
-					audstream.codecName = (codec != null ? codec.name : "");
-					audstream.codecNameLong = (codec != null ? codec.long_name : "");
-					audstream.codecTag = (codecCtx.codec_tag != 0 ? getCodecTag(codecCtx.codec_tag) : "");
+					audstream.setAniDBAudioCodec(codecCtx.codec_id);
 					audstream.language = convertByteArray(stream.language);
 					audstream.channels = codecCtx.channels;
 					audstream.layout = mapAudioChannels((int)codecCtx.channel_layout);

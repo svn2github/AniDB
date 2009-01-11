@@ -12,6 +12,9 @@ import xml.XmlObjectException;
  * Video stream data wrapper
  */
 public class AVStreamDataVideo extends AVStreamData {
+	/** Video Aspect Ratio Tolerance */
+	protected static final double AR_TOLERANCE = 0.01;
+	
 	/** Picture format */
 	public String pictureFormat = "";
 	/** Picture Pixel Width */
@@ -38,9 +41,55 @@ public class AVStreamDataVideo extends AVStreamData {
 	public boolean isWrongAR = false;
 	/** True if stream is clean (no hard subs) */
 	public boolean isCleanVideo = false;
-	/** Video Aspect Ratio Tolerance */
-	protected static final double AR_TOLERANCE = 0.01; 
-	
+	// ANIDB data
+	/** AnidbCodec Id use AnidbCodec getters for the rest */
+	public AnidbCodec anidbcodecid = AnidbCodec.UNKNOWN;
+	/** Codec mappings for anidb */
+	public enum AnidbCodec {
+		OTHER (1,"unknown","unk","other"),
+		UNKNOWN (1,"unknown","unk","unknown"),
+		DX00 (2,"DivX UNK","divxu","mpeg4-unk"),
+		DX30 (3,"DivX3","divx3","mpeg4-dx30"),
+		DX31 (3,"DivX3","divx3","mpeg4-dx31"),
+		DX40 (5,"DivX4","divx4","mpeg4-dx40"),
+		DX50 (7,"DivX5/6","divx5","mpeg4-dx50"),
+		DX60 (7,"DivX5/6","divx5","mpeg4-dx60"),
+		MPEG1 (9,"MPEG-1","mpeg1","mpeg1video"),
+		MPEG2 (10,"MPEG-2","mpeg2","mpeg2video"),
+		MPEG4ASP (11,"Other (MPEG-4 ASP)","asp","mpeg4-asp"),
+		MPEG4SP (12,"Other (MPEG-4 SP)","other","mpeg4-sp"),
+		RV (14,"RealVideo Other (RV1x-RV3x)","rvo","rv10-rv30"),
+		RV10 (14,"RealVideo Other (RV1x-RV3x)","rvo","rv10"),
+		RV20 (14,"RealVideo Other (RV1x-RV3x)","rvo","rv20"),
+		RV30 (14,"RealVideo Other (RV1x-RV3x)","rvo","rv30"),
+		XVID (17,"XviD","xvid","mpeg4-xvid"),
+		MSMPEG4 (18,"MS MP4x (also WMV1/2)","msmp4x","msmpeg4"),
+		WMV1 (18,"MS MP4x (also WMV1/2)","msmp4x","msmpeg4-wmv1"),
+		WMV2 (18,"MS MP4x (also WMV1/2)","msmp4x","msmpeg4-wmv2"),
+		MSMPEG4V1 (18,"MS MP4x (also WMV1/2)","msmp4x","msmpeg4-v1"),
+		MSMPEG4V2 (18,"MS MP4x (also WMV1/2)","msmp4x","msmpeg4-v2"),
+		MSMPEG4V3 (18,"MS MP4x (also WMV1/2)","msmp4x","msmpeg4-v3"),
+		WMV3 (19,"WMV9 (also WMV3/VC1)","wmv9","msvc1-wmv3"),
+		VC1 (19,"WMV9 (also WMV3/VC1)","wmv9","msvc1-wvc1"),
+		RV40 (20,"RealVideo 9/10 (RV40)","rv40","rv40"),
+		AVC (22,"H264/AVC","avc","avc");
+		
+		private final int id;
+		private final String name;
+		private final String shortname;
+		private final String codecname;
+		AnidbCodec (int id, String name, String shortname, String codecname) {
+			this.id = id;
+			this.name = name;
+			this.shortname = shortname;
+			this.codecname = codecname;
+		}
+		public int getAnidbID() { return id; };
+		public String getAnidbName() { return name; };
+		public String getAnidbShortName() { return shortname; }
+		public String getCodecName() { return codecname; }
+		public String getCodecString() { return name+" ("+codecname+")"; }
+	}
 	
 	/** Default Video Stream Data constructor */ 
 	public AVStreamDataVideo() { super(); }
@@ -94,36 +143,44 @@ public class AVStreamDataVideo extends AVStreamData {
 		return width+"x"+height;
 	}
 	
-	public String[] getAniDBVideoCodec(int codec_id, String codec_tag) {
+	/**
+	 * Sets Anidb's Video codec ids
+	 * @param codec_id AVCodecLibrary.CODEC_ID_* identifier
+	 */
+	public synchronized void setAniDBVideoCodec(int codec_id, String codec_tag) {
 		codec_tag = codec_tag.toUpperCase();
-		String[] result = null;// shortname, name, id
 		switch (codec_id) {
-			case AVCodecLibrary.CODEC_ID_H264: result = new String[]{"avc","H264/AVC","22"}; break;
-			case AVCodecLibrary.CODEC_ID_MPEG1VIDEO: result = new String[]{"mpeg1","MPEG-1","9"}; break;
+			case AVCodecLibrary.CODEC_ID_H264: this.anidbcodecid = AnidbCodec.AVC; break;
+			case AVCodecLibrary.CODEC_ID_MPEG1VIDEO: this.anidbcodecid = AnidbCodec.MPEG1; break;
 			case AVCodecLibrary.CODEC_ID_MPEG2VIDEO:
-			case AVCodecLibrary.CODEC_ID_MPEG2VIDEO_XVMC: result = new String[]{"mpeg2","MPEG-2","10"}; break;
+			case AVCodecLibrary.CODEC_ID_MPEG2VIDEO_XVMC: this.anidbcodecid = AnidbCodec.MPEG2; break;
 			case AVCodecLibrary.CODEC_ID_MPEG4: // the mother of all avi codecs
-				if (codec_tag.equals("DX50") || codec_tag.equals("DX60")) result = new String[]{"divx5","DivX5/6","7"};
-				else if (codec_tag.equals("DIV3") || codec_tag.equals("DIV4")) result = new String[]{"divx3","DivX3","3"};
-				else if (codec_tag.equals("DIVX")) result = new String[]{"divx4","DivX 4","5"};
-				else if (codec_tag.equals("XVID")) result = new String[]{"xvid","XviD","3"};
-				else if (codec_tag.equals("FMP4")) result = new String[]{"asp","Other (MPEG-4 ASP)","4"};
-				else if (codec_tag.contains("MP4")) result = new String[]{"msmp4x","MS MP4x (also WMV1/2)","11"};
-				else result = new String[]{"other","Other (MPEG-4 non-ASP)","15"};
+				if (codec_tag.equals("DX50")) this.anidbcodecid = AnidbCodec.DX50;
+				else if (codec_tag.equals("DX60")) this.anidbcodecid = AnidbCodec.DX60;
+				else if (codec_tag.equals("DIV3")) this.anidbcodecid = AnidbCodec.DX30;
+				else if (codec_tag.equals("DIV4")) this.anidbcodecid = AnidbCodec.DX31;
+				else if (codec_tag.equals("DIVX")) this.anidbcodecid = AnidbCodec.DX40;
+				else if (codec_tag.equals("XVID")) this.anidbcodecid = AnidbCodec.XVID;
+				else if (codec_tag.equals("FMP4")) this.anidbcodecid = AnidbCodec.MPEG4ASP;
+				else if (codec_tag.equals("MP41")) this.anidbcodecid = AnidbCodec.MSMPEG4V1;
+				else if (codec_tag.equals("MP42")) this.anidbcodecid = AnidbCodec.MSMPEG4V2;
+				else if (codec_tag.equals("MP43")) this.anidbcodecid = AnidbCodec.MSMPEG4V3;
+				else if (codec_tag.equals("WMV7")) this.anidbcodecid = AnidbCodec.WMV1;
+				else if (codec_tag.equals("WMV8")) this.anidbcodecid = AnidbCodec.WMV2;
+				else this.anidbcodecid = AnidbCodec.MPEG4SP;
 				break;
-			case AVCodecLibrary.CODEC_ID_RV10:
-			case AVCodecLibrary.CODEC_ID_RV20:
-			case AVCodecLibrary.CODEC_ID_RV30: result = new String[]{"rvo","RealVideo Other (6,G2,8)","14"}; break;
-			case AVCodecLibrary.CODEC_ID_MSMPEG4V1:
-			case AVCodecLibrary.CODEC_ID_MSMPEG4V2:
-			case AVCodecLibrary.CODEC_ID_MSMPEG4V3:
-			case AVCodecLibrary.CODEC_ID_WMV1:
-			case AVCodecLibrary.CODEC_ID_WMV2: result = new String[]{"msmp4x","MS MP4x (also WMV1/2)","11"}; break;
-			case AVCodecLibrary.CODEC_ID_VC1:
-			case AVCodecLibrary.CODEC_ID_WMV3: result = new String[]{"wmv9","WMV9 (also WMV3/VC1)","19"}; break;
-			default: result = new String[]{"unk","unknown","1"}; 
+			case AVCodecLibrary.CODEC_ID_RV10: this.anidbcodecid = AnidbCodec.RV10; break;
+			case AVCodecLibrary.CODEC_ID_RV20: this.anidbcodecid = AnidbCodec.RV20; break;
+			case AVCodecLibrary.CODEC_ID_RV30: this.anidbcodecid = AnidbCodec.RV30; break;
+			case AVCodecLibrary.CODEC_ID_MSMPEG4V1: this.anidbcodecid = AnidbCodec.MSMPEG4V1; break;
+			case AVCodecLibrary.CODEC_ID_MSMPEG4V2: this.anidbcodecid = AnidbCodec.MSMPEG4V2; break;
+			case AVCodecLibrary.CODEC_ID_MSMPEG4V3: this.anidbcodecid = AnidbCodec.MSMPEG4V3; break;
+			case AVCodecLibrary.CODEC_ID_WMV1: this.anidbcodecid = AnidbCodec.WMV1; break;
+			case AVCodecLibrary.CODEC_ID_WMV2: this.anidbcodecid = AnidbCodec.WMV1; break;
+			case AVCodecLibrary.CODEC_ID_VC1: this.anidbcodecid = AnidbCodec.VC1; break;
+			case AVCodecLibrary.CODEC_ID_WMV3: this.anidbcodecid = AnidbCodec.WMV3; break;
+			default: this.anidbcodecid = AnidbCodec.OTHER; break;
 		}
-		return result;
 	}
 	
 	/**
@@ -133,13 +190,8 @@ public class AVStreamDataVideo extends AVStreamData {
 	 */
 	public synchronized String writeToString() {
 		StringBuffer out = new StringBuffer();
-//		AVParser parser = new AVParser();
-//		String[] codecInfo = parser.getCodecName(this.codec_id);
-//		this.codecName = codecInfo[0];
-//		this.codecNameLong = codecInfo[1];
 		out.append("\tstream [video:"+this.relStreamId+"]:"+'\n');
-		out.append("\t\tcodec: "+this.codecName+(!this.codecTag.equals("") ? " ["+this.codecTag+"]" : "")+(!this.codecNameLong.equals("") ? " ("+this.codecNameLong+")" : "")+'\n');
-		//out.append("\t\tcodec: "+this.anidbCodec[1]+'\n');//+" ("+this.codecName+(!this.codecTag.equals("") ? " ["+this.codecTag+"]" : "")+")"+'\n');
+		out.append("\t\tcodec: "+this.anidbcodecid.getCodecString()+'\n');
 		if (this.fullParsed && this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
 		if (this.fullParsed && this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
 		if (this.fullParsed && this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
@@ -161,12 +213,8 @@ public class AVStreamDataVideo extends AVStreamData {
 	 * @param out PrintStream where to output the stream
 	 */
 	public synchronized void writeToFile(PrintStream out) {
-//		AVParser parser = new AVParser();
-//		String[] codecInfo = parser.getCodecName(this.codec_id);
-//		this.codecName = codecInfo[0];
-//		this.codecNameLong = codecInfo[1];
 		out.println("\tstream [video"+this.relStreamId+"]:");
-		out.println("\t\tcodec: "+this.codecName+(!this.codecTag.equals("") ? " ["+this.codecTag+"]" : "")+(!this.codecNameLong.equals("") ? " ("+this.codecNameLong+")" : ""));
+		out.println("\t\tcodec: "+this.anidbcodecid.getCodecString());
 		if (this.fullParsed && this.size > 0) out.println("\t\tsize: "+this.size+" bytes");
 		if (this.fullParsed && this.duration > 0) out.println("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")");
 		if (this.fullParsed && this.bitrate > 0) out.println("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps");
@@ -194,7 +242,7 @@ public class AVStreamDataVideo extends AVStreamData {
 		if (this.duration > 0) xml.addValue(new XmlObject("len",""+(int)(this.duration*this.timebase)));
 		if (this.bitrate > 0) xml.addValue(new XmlObject("br",""+(int)this.bitrate));
 		xml.addValue(new XmlObject("res",this.p_resolution));
-		xml.addValue(new XmlObject("codec",this.codecName));
+		xml.addValue(new XmlObject("codec",this.anidbcodecid.getAnidbName()));
 		if (this.fps > 0) xml.addValue(new XmlObject("fps",String.format("%2.3f",this.fps)));
 		if (this.p_ar > 0) xml.addValue(new XmlObject("ar",getAspectRatio(this.p_ar)));
 		if (this.pictureFormat != "") xml.addValue(new XmlObject("pf",this.pictureFormat));

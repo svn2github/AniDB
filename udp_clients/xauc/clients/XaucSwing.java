@@ -896,6 +896,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 		SwingProgress fileProgressBar = new SwingProgress();
 		fileProgressBar.setProgressBar(this.progressFiles);
 		//this.parsingOptions.setFullParse(true);
+		this.parsingOptions.setEnabled(true);
 		fileProcessor = new SwingFileProcessor(this.files,this.hashingOptions,this.parsingOptions);
 		fileProcessor.setMainProgressBar(mainProgressBar);
 		fileProcessor.setFileProgressBar(fileProgressBar);

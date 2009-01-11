@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import com.sun.jna.Native;
+
 import net.sf.ffmpeg_java.AVCodecLibrary;
 import net.sf.ffmpeg_java.AVFormatLibrary;
 
@@ -21,7 +23,7 @@ public class AVParserOptions implements Serializable {
 	/** Enable to see debug messages on AVParser */
 	protected boolean seeDebug = false;
 	/** User set for AVParser state */
-	protected boolean enabled = true;
+	protected boolean enabled = false;
 	/** Internaly set if init failed */
 	protected transient boolean disabled = false;
 	/** FFmpeg libavformat reference */
@@ -33,7 +35,7 @@ public class AVParserOptions implements Serializable {
 	 * Default AVParserOptions constructor
 	 */
 	public AVParserOptions() {
-		initFFmpeg();
+		if (this.enabled) initFFmpeg();
 	}
 	/**
 	 * AVParserOptions constructor where FullParse option is specified
@@ -48,8 +50,48 @@ public class AVParserOptions implements Serializable {
 	 * Initializes FFmpeg libraries
 	 */
 	public synchronized void initFFmpeg() {
-		this.AVFORMAT = AVFormatLibrary.INSTANCE;
-		this.AVCODEC = AVCodecLibrary.INSTANCE;
+		// First check that we can load the libraries or not
+		try {
+			System.loadLibrary(AVCodecLibrary.libname);
+		} catch (UnsatisfiedLinkError e) {
+			System.err.println("You do not have FFmpeg libavcodec in your library path, disabling file parsing.");
+			this.enabled = false;
+			this.disabled = true;
+			return;
+		} catch (SecurityException e1) {
+			System.err.println("The Security Manager prevents you from loading FFmpeg lib avcodec, disabling file parsing.");
+			this.enabled = false;
+			this.disabled = true;
+			return;
+		} catch (NullPointerException e2) {
+			System.err.println("The programmer of this application has made a stupid error that prevents you from loading any library, disabling file parsing.");
+			this.enabled = false;
+			this.disabled = true;
+			return;			
+		}
+		try {
+			System.loadLibrary(AVFormatLibrary.libname);
+		} catch (UnsatisfiedLinkError e) {
+			System.err.println("You do not have FFmpeg libavformat in your library path, disabling file parsing.");
+			this.enabled = false;
+			this.disabled = true;
+			return;
+		} catch (SecurityException e1) {
+			System.err.println("The Security Manager prevents you from loading FFmpeg libavformat, disabling file parsing.");
+			this.enabled = false;
+			this.disabled = true;
+			return;
+		} catch (NullPointerException e2) {
+			System.err.println("The programmer of this application has made a stupid error that prevents you from loading any library, disabling file parsing.");
+			this.enabled = false;
+			this.disabled = true;
+			return;			
+		}
+		// if i survided until here the rest should be safe
+		// Set protected mode
+		Native.setProtected(true);
+		this.AVFORMAT = AVFormatLibrary.SYNC_INSTANCE;
+		this.AVCODEC = AVCodecLibrary.SYNC_INSTANCE;
 		if (this.AVCODEC == null || this.AVFORMAT == null) {
 			System.err.println("AVCODEC and/or AVFORMAT initialization went sour, disabling avparsing.");
 			this.disabled = true;
@@ -74,7 +116,10 @@ public class AVParserOptions implements Serializable {
 	/** @return the enabled */
 	public synchronized boolean isEnabled() { return (disabled ? false : enabled); }
 	/** @param enabled the enabled to set */
-	public synchronized void setEnabled(boolean enabled) { this.enabled = enabled; }
+	public synchronized void setEnabled(boolean enabled) { 
+		this.enabled = enabled;
+		if (this.enabled) initFFmpeg();
+	}
 	/** @return the disabled */
 	public synchronized boolean isDisabled() { return disabled; }
 	/** @return the aVFORMAT */

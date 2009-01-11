@@ -25,57 +25,117 @@ public class AVStreamDataAudio extends AVStreamData {
 	// ANIDB data
 	/** Stream audio type */
 	public int audioType = 10;
-
+	/** AnidbCodec Id use AnidbCodec getters for the rest */
+	public AnidbCodec anidbcodecid = AnidbCodec.UNKNOWN;
+	/** Codec mappings for anidb */
+	public enum AnidbCodec {
+		OTHER (15,"other","other","other"),
+		UNKNOWN (1,"unknown","unk","unknown"),
+		AC3 (2,"AC3","ac3","ac3"),
+		WMA (3,"WMA (also DivX Audio)","wma","wma"),
+		WMAV1 (3,"WMA (also DivX Audio)","wma","wma-v1"),
+		WMAV2 (3,"WMA (also DivX Audio)","wma","wma-v2"),
+		WMAPRO (3,"WMA (also DivX Audio)","wma","wma-pro"),
+		WMAVOICE (3,"WMA (also DivX Audio)","wma","wma-voice"),
+		WMALOSSLESS (3,"WMA (also DivX Audio)","wma","wma-lossless"),
+		MP3 (5,"MP3","mp3","mp3"), // hack, need to merge both
+		MP3CBR (5,"MP3 CBR","mp3cbr","mp3-cbr"),
+		MP3VBR (6,"MP3 VBR","mp3vbr","mp3-vbr"),
+		MSAUDIO (7,"MSAudio","msaudio","msaudio"),
+		VORBIS (8,"Vorbis (Ogg Vorbis)","vorbis","vorbis"),
+		AAC (9,"AAC","aac","aac"),
+		PMC (10,"PCM","pcm","pcm"),
+		PCM_ALAW (10,"PCM","pcm","pcm-alaw"),
+		PCM_DVD (10,"PCM","pcm","pcm-dvd"),
+		PCM_S8 (10,"PCM","pcm","pcm-s8"),
+		PCM_S16BE (10,"PCM","pcm","pcm-s16be"),
+		PCM_S16LE (10,"PCM","pcm","pcm-s16le"),
+		PCM_S16LE_PLANAR (10,"PCM","pcm","pcm-s16le-planar"),
+		PCM_S24BE (10,"PCM","pcm","pcm-s24be"),
+		PCM_S24DAUD (10,"PCM","pcm","pcm-s24daud"),
+		PCM_S24LE (10,"PCM","pcm","pcm-f24le"),
+		PCM_F32BE (10,"PCM","pcm","pcm-f32be"),
+		PCM_F32LE (10,"PCM","pcm","pcm-f32le"),
+		PCM_F64BE (10,"PCM","pcm","pcm-f64be"),
+		PCM_F64LE (10,"PCM","pcm","pcm-f64le"),
+		PCM_U8 (10,"PCM","pcm","pcm-u8"),
+		PCM_U16BE (10,"PCM","pcm","pcm-u16be"),
+		PCM_U16LE (10,"PCM","pcm","pcm-u16le"),
+		PCM_U24BE (10,"PCM","pcm","pcm-u24be"),
+		PCM_U24LE (10,"PCM","pcm","pcm-u24le"),
+		PCM_U32BE (10,"PCM","pcm","pcm-u32be"),
+		PCM_U32LE (10,"PCM","pcm","pcm-u32le"),
+		PCM_MULAW (10,"PCM","pcm","pcm-mulaw"),
+		PCM_ZORK (10,"PCM","pcm","pcm-zork"),
+		MP2 (11,"MP2","mp2","mp2"),
+		DTS (13,"DTS","dts","dts");
+		
+		private final int id;
+		private final String name;
+		private final String shortname;
+		private final String codecname;
+		AnidbCodec (int id, String name, String shortname, String codecname) {
+			this.id = id;
+			this.name = name;
+			this.shortname = shortname;
+			this.codecname = codecname;
+		}
+		public int getAnidbID() { return id; };
+		public String getAnidbName() { return name; };
+		public String getAnidbShortName() { return shortname; }
+		public String getCodecName() { return codecname; }
+		public String getCodecString() { return name+" ("+codecname+")"; }
+	}
+	
 	/** Default AVStreamDataAudio constructor */
 	public AVStreamDataAudio() { super(); }
 
-	public String[] getAniDBAudioCodec(int codec_id, String codec_tag) {
-		codec_tag = codec_tag.toUpperCase();
-		String[] result = null;// shortname, name, id
+	/**
+	 * Sets Anidb's Audio codec ids
+	 * @param codec_id AVCodecLibrary.CODEC_ID_* identifier
+	 */
+	public void setAniDBAudioCodec(int codec_id) {
 		switch (codec_id) {
-			case AVCodecLibrary.CODEC_ID_AAC: result = new String[]{"aac","AAC","9"}; break;
-			case AVCodecLibrary.CODEC_ID_AC3: result = new String[]{"ac3","AC3","2"}; break;
-			case AVCodecLibrary.CODEC_ID_DTS: result = new String[]{"dts","DTS","13"}; break;
-			case AVCodecLibrary.CODEC_ID_MP2: result = new String[]{"mp2","MP2","11"}; break;
+			case AVCodecLibrary.CODEC_ID_AAC: this.anidbcodecid = AnidbCodec.AAC; break;
+			case AVCodecLibrary.CODEC_ID_AC3: this.anidbcodecid = AnidbCodec.AC3; break;
+			case AVCodecLibrary.CODEC_ID_DTS: this.anidbcodecid = AnidbCodec.DTS; break;
+			case AVCodecLibrary.CODEC_ID_MP2: this.anidbcodecid = AnidbCodec.MP2; break;
 			case AVCodecLibrary.CODEC_ID_MP3:
 				if (this.fullParsed) {
-					if (!this.isVBR) result = new String[]{"mp3cbr","MP3 CBR","5"};
-					else result = new String[]{"mp3vbr","MP3 VBR","6"};
-				} else result = new String[]{"mp3","MP3","4"};
+					if (!this.isVBR) this.anidbcodecid = AnidbCodec.MP3CBR;
+					else this.anidbcodecid = AnidbCodec.MP3VBR;
+				} else this.anidbcodecid = AnidbCodec.MP3;
 				break;
-			case AVCodecLibrary.CODEC_ID_VORBIS:  result = new String[]{"vorbis","Vorbis (Ogg Vorbis)","10"}; break;
-			case AVCodecLibrary.CODEC_ID_WMAV1:
-			case AVCodecLibrary.CODEC_ID_WMAV2:
-			case AVCodecLibrary.CODEC_ID_WMAVOICE:
-			case AVCodecLibrary.CODEC_ID_WMAPRO:
-			case AVCodecLibrary.CODEC_ID_WMALOSSLESS:
-				result = new String[]{"wma","WMA (also DivX Audio)","3"}; break;
-			case AVCodecLibrary.CODEC_ID_PCM_ALAW:
-			case AVCodecLibrary.CODEC_ID_PCM_DVD:
-			case AVCodecLibrary.CODEC_ID_PCM_S8:
-			case AVCodecLibrary.CODEC_ID_PCM_S16BE:
-			case AVCodecLibrary.CODEC_ID_PCM_S16LE:
-			case AVCodecLibrary.CODEC_ID_PCM_S16LE_PLANAR:
-			case AVCodecLibrary.CODEC_ID_PCM_S24BE:
-			case AVCodecLibrary.CODEC_ID_PCM_S24DAUD:
-			case AVCodecLibrary.CODEC_ID_PCM_S24LE:
-			case AVCodecLibrary.CODEC_ID_PCM_F32BE:
-			case AVCodecLibrary.CODEC_ID_PCM_F32LE:
-			case AVCodecLibrary.CODEC_ID_PCM_F64BE:
-			case AVCodecLibrary.CODEC_ID_PCM_F64LE:
-			case AVCodecLibrary.CODEC_ID_PCM_U8:
-			case AVCodecLibrary.CODEC_ID_PCM_U16BE:
-			case AVCodecLibrary.CODEC_ID_PCM_U16LE:
-			case AVCodecLibrary.CODEC_ID_PCM_U24BE:
-			case AVCodecLibrary.CODEC_ID_PCM_U24LE:
-			case AVCodecLibrary.CODEC_ID_PCM_U32BE:
-			case AVCodecLibrary.CODEC_ID_PCM_U32LE:
-			case AVCodecLibrary.CODEC_ID_PCM_MULAW:
-			case AVCodecLibrary.CODEC_ID_PCM_ZORK:
-				result = new String[]{"pcm","PCM","10"}; break;
-			default: result = new String[]{"unk","unknown","1"}; 
+			case AVCodecLibrary.CODEC_ID_VORBIS: this.anidbcodecid = AnidbCodec.VORBIS; break;
+			case AVCodecLibrary.CODEC_ID_WMAV1: this.anidbcodecid = AnidbCodec.WMAV1; break;
+			case AVCodecLibrary.CODEC_ID_WMAV2: this.anidbcodecid = AnidbCodec.WMAV2; break;
+			case AVCodecLibrary.CODEC_ID_WMAVOICE: this.anidbcodecid = AnidbCodec.WMAVOICE; break;
+			case AVCodecLibrary.CODEC_ID_WMAPRO: this.anidbcodecid = AnidbCodec.WMAPRO; break;
+			case AVCodecLibrary.CODEC_ID_WMALOSSLESS: this.anidbcodecid = AnidbCodec.WMALOSSLESS; break;
+			case AVCodecLibrary.CODEC_ID_PCM_ALAW: this.anidbcodecid = AnidbCodec.PCM_ALAW; break;
+			case AVCodecLibrary.CODEC_ID_PCM_DVD: this.anidbcodecid = AnidbCodec.PCM_DVD; break;
+			case AVCodecLibrary.CODEC_ID_PCM_S8: this.anidbcodecid = AnidbCodec.PCM_S8; break;
+			case AVCodecLibrary.CODEC_ID_PCM_S16BE: this.anidbcodecid = AnidbCodec.PCM_S16BE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_S16LE: this.anidbcodecid = AnidbCodec.PCM_S16LE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_S16LE_PLANAR: this.anidbcodecid = AnidbCodec.PCM_S16LE_PLANAR; break;
+			case AVCodecLibrary.CODEC_ID_PCM_S24BE: this.anidbcodecid = AnidbCodec.PCM_S24BE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_S24DAUD: this.anidbcodecid = AnidbCodec.PCM_S24DAUD; break;
+			case AVCodecLibrary.CODEC_ID_PCM_S24LE: this.anidbcodecid = AnidbCodec.PCM_S24LE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_F32BE: this.anidbcodecid = AnidbCodec.PCM_F32BE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_F32LE: this.anidbcodecid = AnidbCodec.PCM_F32LE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_F64BE: this.anidbcodecid = AnidbCodec.PCM_F64BE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_F64LE: this.anidbcodecid = AnidbCodec.PCM_F64LE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_U8: this.anidbcodecid = AnidbCodec.PCM_U8; break;
+			case AVCodecLibrary.CODEC_ID_PCM_U16BE: this.anidbcodecid = AnidbCodec.PCM_U16BE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_U16LE: this.anidbcodecid = AnidbCodec.PCM_U16LE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_U24BE: this.anidbcodecid = AnidbCodec.PCM_U24BE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_U24LE: this.anidbcodecid = AnidbCodec.PCM_U24LE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_U32BE: this.anidbcodecid = AnidbCodec.PCM_U32BE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_U32LE: this.anidbcodecid = AnidbCodec.PCM_U32LE; break;
+			case AVCodecLibrary.CODEC_ID_PCM_MULAW: this.anidbcodecid = AnidbCodec.PCM_MULAW; break;
+			case AVCodecLibrary.CODEC_ID_PCM_ZORK: this.anidbcodecid = AnidbCodec.PCM_ZORK; break;
+			default: this.anidbcodecid = AnidbCodec.OTHER; break;
 		}
-		return result;
 	}
 	
 	/**
@@ -120,7 +180,7 @@ public class AVStreamDataAudio extends AVStreamData {
 		StringBuffer out = new StringBuffer();
 		out.append("\tstream [audio:"+this.relStreamId+"]:"+'\n');
 		out.append("\t\ttype: "+mapAudioType()+'\n');
-		out.append("\t\tcodec: "+this.codecName+(!this.codecTag.equals("") ? " ["+this.codecTag+"]" : "")+(!this.codecNameLong.equals("") ? " ("+this.codecNameLong+")" : "")+'\n');
+		out.append("\t\tcodec: "+this.anidbcodecid.getCodecString()+'\n');
 		if (this.fullParsed && this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
 		if (this.fullParsed && this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
 		if (this.fullParsed && this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
@@ -139,7 +199,7 @@ public class AVStreamDataAudio extends AVStreamData {
 	public synchronized void writeToFile(PrintStream out) {
 		out.println("\tstream [audio:"+this.relStreamId+"]:");
 		out.println("\t\ttype: "+mapAudioType());
-		out.println("\t\tcodec: "+this.codecName+(!this.codecTag.equals("") ? " ["+this.codecTag+"]" : "")+(!this.codecNameLong.equals("") ? " ("+this.codecNameLong+")" : ""));
+		out.println("\t\tcodec: "+this.anidbcodecid.getCodecString());
 		if (this.fullParsed && this.size > 0) out.println("\t\tsize: "+this.size+" bytes");
 		if (this.fullParsed && this.duration > 0) out.println("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")");
 		if (this.fullParsed && this.bitrate > 0) out.println("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps");
@@ -163,7 +223,7 @@ public class AVStreamDataAudio extends AVStreamData {
 		if (this.bitrate > 0) xml.addValue(new XmlObject("br",""+(int)this.bitrate));
 		xml.addValue(new XmlObject("type",mapAudioType()));
 		if (this.language != "") xml.addValue(new XmlObject("lang",this.language));
-		xml.addValue(new XmlObject("codec",this.codecName));
+		xml.addValue(new XmlObject("codec",this.anidbcodecid.getAnidbName()));
 		xml.addValue(new XmlObject("chan",mapAudioChannels()));
 		if (this.sampleRate > 0) xml.addValue(new XmlObject("sr",""+this.sampleRate));
 		if (this.sampleFormat != "") xml.addValue(new XmlObject("sf",this.sampleFormat));

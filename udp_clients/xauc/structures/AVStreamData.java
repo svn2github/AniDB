@@ -24,10 +24,6 @@ public class AVStreamData {
 	public int codec_id;
 	/** Codec name */
 	public String codecName = "";
-	/** Long codec name (more informative) */
-	public String codecNameLong = "";
-	/** Codec tag (for stuff like XVID in mpeg4 codecs) */
-	public String codecTag = "";
 	/** True if stream is VFR (only use this if fullParsed == true) */
 	public boolean isVFR = false;
 	/** True if stream is VBR (only use this if fullParsed == true) */

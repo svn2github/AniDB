@@ -37,7 +37,7 @@ public class XaucConsole {
 		System.out.println("\t--h:md5:(on|off) Hash file with the md5 algorithm (default: off)");
 		System.out.println("\t--h:sha1:(on|off) Hash file with the sha1 algorithm (default: off)");
 		System.out.println("\t--h:tth:(on|off) Hash file with the sha1 algorithm (default: off)");
-		System.out.println("\t--a:(on|off) Enable/disable file av parsing (default: on)");
+		System.out.println("\t--a:(on|off) Enable/disable file av parsing (default: off)");
 		System.out.println("\t--a:save:(on|off) Enable/disable saving of av parsing options (default: off)");
 		System.out.println("\t--a:load:(on|off) Enable/disable loading of av parsing options (will overide current settings, default: off)");
 		System.out.println("\t--a:fp:(on|off) Enable/disable full file av parsing (slower if enabled but more information is supplied, default: off)");

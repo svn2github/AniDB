@@ -8,8 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import avparsing.AVParserOptions;
-
 /** Defines Hasher Options */
 public class HasherOptions implements Serializable {
 	private static final long serialVersionUID = 6688562230469350398L;

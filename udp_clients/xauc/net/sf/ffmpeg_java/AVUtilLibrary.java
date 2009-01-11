@@ -10,9 +10,9 @@ import com.sun.jna.Pointer;
  */
 public interface AVUtilLibrary extends FFMPEGLibrary 
 {
-    public static final AVUtilLibrary INSTANCE = (AVUtilLibrary) Native.loadLibrary(
-    		System.getProperty("os.name").startsWith("Windows") ? "avutil-49" : "avutil", 
-    		AVUtilLibrary.class);
+	public static final String libname = System.getProperty("os.name").startsWith("Windows") ? "avutil-49" : "avutil";
+    public static final AVUtilLibrary INSTANCE = (AVUtilLibrary) Native.loadLibrary(libname,AVUtilLibrary.class);
+    public static final AVUtilLibrary SYNC_INSTANCE = (AVUtilLibrary) Native.synchronizedLibrary(INSTANCE);
 
 // avutil.h
     

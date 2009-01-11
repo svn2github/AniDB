@@ -9,16 +9,16 @@ import com.sun.jna.ptr.LongByReference;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Based on FFMPEG revision 12162, Feb 20 2008.
+ * Based on FFMPEG revision 15968, Dez 03 2008.
  * From avformat.h, avio.h
  * @author Ken Larson, Miguel Gomes
  *
  */
 public interface AVFormatLibrary extends FFMPEGLibrary 
 {
-    public static final AVFormatLibrary INSTANCE = (AVFormatLibrary) Native.loadLibrary(
-    		System.getProperty("os.name").startsWith("Windows") ? "avformat-52" : "avformat",
-    		AVFormatLibrary.class);
+	public static final String libname = System.getProperty("os.name").startsWith("Windows") ? "avformat-52" : "avformat";
+    public static final AVFormatLibrary INSTANCE = (AVFormatLibrary) Native.loadLibrary(libname,AVFormatLibrary.class);
+    public static final AVFormatLibrary SYNC_INSTANCE = (AVFormatLibrary) Native.synchronizedLibrary(INSTANCE);
 
 //------------------------------------------------------------------------------------------------------------------------
 // avformat.h
@@ -147,10 +147,16 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	public static class AVOutputFormat extends Structure
 	{
 	    public String name;
+	    /**
+	     * Descriptive name for the format, meant to be more human-readable
+	     * than \p name. You \e should use the NULL_IF_CONFIG_SMALL() macro
+	     * to define it.
+	     */
 	    public String long_name;
 	    public String mime_type;
 	    /**< comma separated filename extensions */
 	    public String extensions;
+	    /** Size of private data so that it can be allocated in the wrapper. */
 	    public int priv_data_size;
 	    /**< default audio codec */
 	    public int audio_codec;
@@ -189,18 +195,59 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 	public static class AVInputFormat extends Structure
 	{
 	    public String name;
+	    /**
+	     * Descriptive name for the format, meant to be more human-readable
+	     * than \p name. You \e should use the NULL_IF_CONFIG_SMALL() macro
+	     * to define it.
+	     */
 	    public String long_name;
+	    /** Size of private data so that it can be allocated in the wrapper. */
 	    public int priv_data_size;
+	    /**
+	     * Tell if a given file has a chance of being parsed by this format.
+	     * The buffer provided is guaranteed to be AVPROBE_PADDING_SIZE bytes
+	     * big so you do not have to check for that unless you need more.
+	     */
 	    public Pointer read_probe;
+	    /** Read the format header and initialize the AVFormatContext
+	       structure. Return 0 if OK. 'ap' if non-NULL contains
+	       additional parameters. Only used in raw format right
+	       now. 'av_new_stream' should be called to create new streams.  */
 	    public Pointer read_header;
+	    /** Read one packet and put it in 'pkt'. pts and flags are also
+	       set. 'av_new_stream' can be called only if the flag
+	       AVFMTCTX_NOHEADER is used. */
 	    public Pointer read_packet;
+	    /** Close the stream. The AVFormatContext and AVStreams are not
+	       freed by this function */
 	    public Pointer read_close;
+	    /**
+	     * Seek to a given timestamp relative to the frames in
+	     * stream component stream_index.
+	     * @param stream_index must not be -1
+	     * @param flags selects which direction should be preferred if no exact
+	     *              match is available
+	     * @return >= 0 on success (but not necessarily the new offset)
+	     */
 	    public Pointer read_seek;
+	    /**
+	     * Gets the next timestamp in stream[stream_index].time_base units.
+	     * @return the timestamp or AV_NOPTS_VALUE if an error occurred
+	     */
 	    public Pointer read_timestamp;
+	    /** Can use flags: AVFMT_NOFILE, AVFMT_NEEDNUMBER. */
 	    public int flags;
+	    /** If extensions are defined, then no probe is done. You should
+	       usually not use extension format guessing because it is not
+	       reliable enough */
 	    public String extensions;
+	    /** General purpose read-only value that the format can use. */
 	    public int value;
+	    /** Start/resume playing - only meaningful if using a network-based format
+	       (RTSP). */
 	    public Pointer read_play;
+	    /** Pause playing - only meaningful if using a network-based format
+	       (RTSP). */
 	    public Pointer read_pause;
 	    public Pointer codec_tag;
 	    public Pointer next;
@@ -237,7 +284,13 @@ public interface AVFormatLibrary extends FFMPEGLibrary
         public int min_distance;         
     }
 	
-
+   /**
+    * Stream structure.
+    * New fields can be added to the end with minor version bumps.
+    * Removal, reordering and changes to existing fields require a major
+    * version bump.
+    * sizeof(AVStream) must not be used outside libav*.
+    */
 	public static class AVStream extends Structure {
 		/**< stream index in AVFormatContext */
 		public int index;
@@ -273,7 +326,7 @@ public interface AVFormatLibrary extends FFMPEGLibrary
 		/**< Selects which packets can be discarded at will and do not need to be demuxed. */
 		public int discard; 
 		//FIXME move stuff to a flags field?
-	    /** Quality, as it has been removed from AVCodecContext and put in AVVideoFrame.
+	    /** Quality, as it has been removed from Context and put in AVVideoFrame.
 	     * MN: dunno if that is the right place for it */
 		public float quality;
 		/**

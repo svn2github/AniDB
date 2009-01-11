@@ -47,6 +47,7 @@ public class AniDBFile implements Serializable {
 	public int fid = -1;
 	public long length = 0;
 	public float duration = 0;
+	public float bitrate = 0;
 	public int numStreams = 0;
 	public String formatedDuration = "";
 	public String format = "";
