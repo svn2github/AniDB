@@ -1850,8 +1850,8 @@ function applyFormat(identifier, file, episode, anime, group) {
 	identifier = identifier.replace("%qual",(file.quality != 'unknown') ? file.quality : "");
 	identifier = identifier.replace("%src",file.source);
 	identifier = identifier.replace("%vcodec",(file.type == 'video') ? file.videoTracks[0].codec : "");
-	identifier = identifier.replace("%acodec",(file.type == 'video' || file.type == 'audio') ? file.audioTracks[0].codec : "");
-	identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
+	identifier = identifier.replace("%acodec",(file.type == 'video' || file.type == 'audio') && file.audioTracks.length ? file.audioTracks[0].codec : "");
+	identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks.length && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
 	identifier = identifier.replace("%res",(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
 	identifier = identifier.replace("%eps",anime.eps);
 	identifier = identifier.replace("%atype",(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");

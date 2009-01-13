@@ -1107,7 +1107,7 @@ function createPreferencesTable(type) {
 	var groupPrefs = {'id':"group-prefs",'head':"Group",'title':"Group select Preferences"};
 	var animeLayoutPrefs = {'id':"anime-layout",'head':"Layout",'title':"Anime page Layout Preferences"};
 	items['mylist'] =	[titlePrefs, ed2kPrefs, mylistPrefs2];
-	items['anime'] =	[animeProfile, titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, animeLayoutPrefs];
+	items['anime'] =	[titlePrefs, ed2kPrefs, mylistPrefs, groupPrefs, animeLayoutPrefs];
 	items['group'] =	[titlePrefs, ed2kPrefs, groupPrefs];
 	items['episode'] =	[titlePrefs, ed2kPrefs, mylistPrefs];
 	if (!items[type]) return;
@@ -1250,13 +1250,9 @@ function createPreferencesTable(type) {
 						var input = inputs[i];
 						if (input.type == 'checkbox' && input.checked == true) dataFields.push(input.name + '=on');
 						else if (input.type != 'checkbox') dataFields.push(input.name + '=' + input.value);
-						//dataFields.push(input.name + '=' + (input.type == 'checkbox' ? Number(input.checked) : input.value));
 					}
-					//alert(dataFields.join('&'));
-					
 					var req = xhttpRequest();
 					xhttpRequestPost(req, 'animedb.pl', null, dataFields.join('&'));
-					
 					alert('Changes submited to server.\nPlease reload to see changes.');
 				}
 				actionLI.appendChild(saveInput);
@@ -1854,8 +1850,8 @@ function applyFormat(identifier, file, episode, anime, group) {
 	identifier = identifier.replace("%qual",(file.quality != 'unknown') ? file.quality : "");
 	identifier = identifier.replace("%src",file.source);
 	identifier = identifier.replace("%vcodec",(file.type == 'video') ? file.videoTracks[0].codec : "");
-	identifier = identifier.replace("%acodec",(file.type == 'video' || file.type == 'audio') ? file.audioTracks[0].codec : "");
-	identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
+	identifier = identifier.replace("%acodec",(file.type == 'video' || file.type == 'audio') && file.audioTracks.length ? file.audioTracks[0].codec : "");
+	identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks.length && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
 	identifier = identifier.replace("%res",(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
 	identifier = identifier.replace("%eps",anime.eps);
 	identifier = identifier.replace("%atype",(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");
