@@ -2,6 +2,9 @@ package utils;
 
 import java.io.File;
 
+import clients.XaucOptions;
+import clients.XaucShared;
+
 import structures.AniDBFile;
 import hashing.Hasher;
 import hashing.HasherOptions;
@@ -14,8 +17,10 @@ import avparsing.AVParserOptions;
 public class FileParser extends ThreadedWorker {
 	protected String threadName = "fileParser";
 	protected File file = null;
-	protected HasherOptions hasherOptions = null;
-	protected AVParserOptions avparserOptions = null;
+	protected XaucShared sharedParent = null;
+	protected HasherOptions hasherOptions = new HasherOptions();
+	protected AVParserOptions avparserOptions = new AVParserOptions();
+	protected XaucOptions clientOptions = new XaucOptions();
 	protected Log log = null;
 	protected Progress progress = null;
 	protected AniDBFile anidbFile = null;
@@ -24,44 +29,30 @@ public class FileParser extends ThreadedWorker {
 	public FileParser() {
 		this.log = new Log();
 		this.progress = new Progress();
-		this.avparserOptions = new AVParserOptions();
-		this.hasherOptions = new HasherOptions();
 	}
-	public FileParser(File file) { this(); this.file = file; }
-	public FileParser(String filename) { this(new File(filename)); }
-	public FileParser(File file, HasherOptions hasherOptions) { 
-		this(file);
+	public FileParser(XaucShared sharedParent, File file) { 
+		this(); 
+		this.sharedParent = sharedParent;
+		hasherOptions = sharedParent.getHashingOptions();
+		avparserOptions = sharedParent.getParsingOptions();
+		clientOptions = sharedParent.getClientOptions();
+		this.file = file;
+	}
+	public FileParser(XaucShared sharedParent, String filename) { this(sharedParent,new File(filename)); }
+	public FileParser(File file, HasherOptions hasherOptions, AVParserOptions avparserOptions, XaucOptions clientOptions) {
+		this();
+		this.file = file;
 		this.hasherOptions = hasherOptions;
-	}
-	public FileParser(File file, AVParserOptions avparserOptions) { 
-		this(file);
 		this.avparserOptions = avparserOptions;
+		this.clientOptions = clientOptions;
 	}
-	public FileParser(File file, HasherOptions hasherOptions, AVParserOptions avparserOptions) {
-		this(file, hasherOptions);
-		this.avparserOptions = avparserOptions;
-	}
-	public FileParser(String filename, HasherOptions hasherOptions) {
-		this (new File(filename), hasherOptions);
-	}
-	public FileParser(String filename, AVParserOptions avparserOptions) {
-		this (new File(filename), avparserOptions);
-	}
-	public FileParser(String filename, HasherOptions hasherOptions, AVParserOptions avparserOptions) {
-		this (new File(filename), hasherOptions, avparserOptions);
-	}
+
 	/** @return the file */
 	public synchronized File getFile() { return file; }
 	/** @param file the file to set */
 	public synchronized void setFile(File file) { this.file = file; }
-	/** @return the hasherOptions */
-	public synchronized HasherOptions getHasherOptions() { return hasherOptions; }
-	/** @param hasherOptions the hasherOptions to set */
-	public synchronized void setHasherOptions(HasherOptions hasherOptions) { this.hasherOptions = hasherOptions; }
-	/** @return the avparserOptions */ 
-	public synchronized AVParserOptions getAvparserOptions() { return avparserOptions; }
-	/** @param avparserOptions the avparserOptions to set */
-	public synchronized void setAvparserOptions(AVParserOptions avparserOptions) { this.avparserOptions = avparserOptions; }
+	/** @param sharedParent the sharedParent to set */
+	public synchronized void setSharedParent(XaucShared sharedParent) { this.sharedParent = sharedParent; }
 	/** @return the log */
 	public synchronized Log getLog() { return log; }
 	/** @param log the log to set */
@@ -96,7 +87,6 @@ public class FileParser extends ThreadedWorker {
 			filehasher.setLog(log);
 			filehasher.setAnidbFile(this.anidbFile);
 			progress.setAction("hashing");
-			//progress.setShowProgress(false);
 			filehasher.setProgress(progress);
 			filehasher.work();
 			if (!filehasher.getErrorMessage().equals("")) this.errorMessage = filehasher.getErrorMessage();
@@ -107,7 +97,6 @@ public class FileParser extends ThreadedWorker {
 			avparser.setLog(log);
 			avparser.setAnidbFile(this.anidbFile);
 			progress.setAction("parsing");
-			//progress.setShowProgress(false);
 			avparser.setProgress(progress);
 			avparser.work();
 			if (!avparser.getErrorMessage().equals("")) this.errorMessage = avparser.getErrorMessage();

@@ -48,10 +48,6 @@ import utils.SwingProgress;
 public class XaucSwing extends JFrame implements WindowListener {
 	private static final long serialVersionUID = 6222926566397039140L;
 	
-	protected static String appName = "xAUC";
-	protected static int versionMajor = 0;
-	protected static int versionMinor = 6;
-	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddFile;
     private javax.swing.JButton buttonAddFolder;
@@ -94,23 +90,16 @@ public class XaucSwing extends JFrame implements WindowListener {
     private javax.swing.JPanel treePane;
     private javax.swing.JPanel workspacePane;
     // End of variables declaration//GEN-END:variables
+    protected XaucShared sharedParent = new XaucShared();
 	protected boolean disableFileAdd = false;
 	protected HashMap<File,SwingFile> files = new HashMap<File,SwingFile>();
 	protected HashMap<Integer,File> filesToRows = new HashMap<Integer,File>();
-	protected HasherOptions hashingOptions = new HasherOptions();
-	protected AVParserOptions parsingOptions = new AVParserOptions();
-	protected boolean recurseDir = false;
-	protected boolean seeDebug = false;
-	protected boolean hashingEnabled = true;
-	protected boolean parsingEnabled = false; // not enabled for the moment
-	protected boolean writeXMLtoDisk = false;
-	protected boolean writeFILEtoConsole = false;
-	protected String appDir = System.getProperty("user.home") + File.separator + ".xauc";
-	protected String logFile = appDir + File.separator + "log.txt";
-	protected SwingLog log = new SwingLog(logFile);
-	protected DirectoryParser dirparser = new DirectoryParser(true);
+	protected HasherOptions hashingOptions = sharedParent.getHashingOptions();
+	protected AVParserOptions parsingOptions = sharedParent.getParsingOptions();
+	protected XaucOptions clientOptions = sharedParent.getClientOptions();
+	protected SwingLog log = new SwingLog(XaucShared.getLogFile());
+	protected DirectoryParser dirparser = new DirectoryParser(clientOptions.isRecurseDir());
 	protected File lastDirectory = null;
-	protected Thread pthread = null; // file processor thread
 	protected SwingFileProcessor fileProcessor = null;
 
 	/** @return the hashingOptions */
@@ -120,30 +109,25 @@ public class XaucSwing extends JFrame implements WindowListener {
 	/** @return the parsingOptions */
 	public synchronized AVParserOptions getParsingOptions() { return parsingOptions; }
 	/** @param parsingOptions the parsingOptions to set */
-	public synchronized void setParsingOptions(AVParserOptions parsingOptions) { this.parsingOptions = parsingOptions; }
-	/** @return the seeDebug */
-	public synchronized boolean isSeeDebug() { return seeDebug; }
-	/** @param seeDebug the seeDebug to set */
-	public synchronized void setSeeDebug(boolean seeDebug) { this.seeDebug = seeDebug; }
-	/** @return the writeXMLtoDisk */
-	public synchronized boolean isWriteXMLtoDisk() { return writeXMLtoDisk; }
-	/** @param writeXMLtoDisk the writeXMLtoDisk to set */
-	public synchronized void setWriteXMLtoDisk(boolean writeXMLtoDisk) { this.writeXMLtoDisk = writeXMLtoDisk; }
-	/** @return the writeFILEtoConsole */
-	public synchronized boolean isWriteFILEtoConsole() { return writeFILEtoConsole; }
-	/** @param writeFILEtoConsole the writeFILEtoConsole to set */
-	public synchronized void setWriteFILEtoConsole(boolean writeFILEtoConsole) { this.writeFILEtoConsole = writeFILEtoConsole; }
+	public synchronized void setParsingOptions(AVParserOptions parsingOptions) { this.parsingOptions = parsingOptions; }	
+	/** @return the clientOptions */
+	public synchronized XaucOptions getClientOptions() { return clientOptions; }
+	/** @param clientOptions the clientOptions to set */
+	public synchronized void setClientOptions(XaucOptions clientOptions) { this.clientOptions = clientOptions; }
 
 	/** Creates new form XaucSwing */
 	public XaucSwing() {
-		XaucConsole.checkAppDir();
+		sharedParent.initApp();
+		XaucShared.clientVersionMajor = 0;
+		XaucShared.clientVersionMinor = 6;
+		XaucShared.clientVersionPatch = 7;
 		initComponents();
 		setFilesTableLayout();
 		createFilesTree();
 		this.addWindowListener(this);
 		attachDragAndDrop(this.filesTable,new FSTransfer());
 		this.log.setLogArea(this.logArea);
-		this.log.println("Initializing "+XaucSwing.appName+" (v"+XaucSwing.versionMajor+"."+XaucSwing.versionMinor+")");
+		this.log.println("Initializing XAUC (v"+XaucShared.getClientVersion()+"/v"+XaucShared.getInternalVersion()+")");
 	}
 
 	/** This method is called from within the constructor to
@@ -359,6 +343,12 @@ public class XaucSwing extends JFrame implements WindowListener {
         treeFilesPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tree", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10))); // NOI18N
 
         treeFiles.setFont(treeFiles.getFont().deriveFont(treeFiles.getFont().getSize()-1f));
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("xauc");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("unidentified");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("identified");
+        treeNode1.add(treeNode2);
+        treeFiles.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         treeFiles.setShowsRootHandles(true);
         treeFilesScrollPane.setViewportView(treeFiles);
 
@@ -558,6 +548,11 @@ public class XaucSwing extends JFrame implements WindowListener {
         menuEditPreferences.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         menuEditPreferences.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cog.png"))); // NOI18N
         menuEditPreferences.setText("Preferences");
+        menuEditPreferences.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditPreferencesActionPerformed(evt);
+            }
+        });
         menuEdit.add(menuEditPreferences);
 
         menuBar.add(menuEdit);
@@ -618,23 +613,23 @@ public class XaucSwing extends JFrame implements WindowListener {
 
 	private void buttonAddFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddFolderActionPerformed
 		addFolderAction();
-}//GEN-LAST:event_buttonAddFolderActionPerformed
+	}//GEN-LAST:event_buttonAddFolderActionPerformed
 
 	private void buttonAddFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddFileActionPerformed
 		addFileAction();
-}//GEN-LAST:event_buttonAddFileActionPerformed
+	}//GEN-LAST:event_buttonAddFileActionPerformed
 
 	private void buttonRemoveAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoveAllActionPerformed
 		removeFilesAction();
-}//GEN-LAST:event_buttonRemoveAllActionPerformed
+	}//GEN-LAST:event_buttonRemoveAllActionPerformed
 
 	private void statusTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusTextActionPerformed
 		// TODO add your handling code here:
-}//GEN-LAST:event_statusTextActionPerformed
+	}//GEN-LAST:event_statusTextActionPerformed
 
 	private void buttonStartHashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStartHashActionPerformed
 		startProcessing();
-}//GEN-LAST:event_buttonStartHashActionPerformed
+	}//GEN-LAST:event_buttonStartHashActionPerformed
 
 	private void buttonLogClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLogClearActionPerformed
 		this.logArea.setText("");
@@ -646,11 +641,15 @@ public class XaucSwing extends JFrame implements WindowListener {
 
 	private void buttonHashesCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHashesCopyActionPerformed
 		this.hashesArea.copy();
-}//GEN-LAST:event_buttonHashesCopyActionPerformed
+	}//GEN-LAST:event_buttonHashesCopyActionPerformed
 
 	private void buttonHashesClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHashesClearActionPerformed
 		this.hashesArea.setText("");
 	}//GEN-LAST:event_buttonHashesClearActionPerformed
+
+	private void menuEditPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditPreferencesActionPerformed
+		showPreferencesDialog();
+	}//GEN-LAST:event_menuEditPreferencesActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -699,7 +698,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
 		if (leafIcon != null) { renderer.setLeafIcon(leafIcon); }
 		this.treeFiles.setCellRenderer(renderer);
-		this.treeFiles.addTreeSelectionListener(new XaucFilesTreeSelectionListener(this.treeFiles,this.infoPaneEditor,this.log));
+		this.treeFiles.addTreeSelectionListener(new XaucFilesTreeSelectionListener(this.treeFiles,this.infoPaneEditor,this.log,this.sharedParent));
 	}
 	
 	/**
@@ -827,6 +826,13 @@ public class XaucSwing extends JFrame implements WindowListener {
 	}	
 	
 	/**
+	 * Shows the preferences dialog
+	 */
+	public void showPreferencesDialog() {
+		new ui.Preferences(this.sharedParent);
+	}
+	
+	/**
 	 * File filter class
 	 */
 	public class xaucFilesFilter extends javax.swing.filechooser.FileFilter {
@@ -897,7 +903,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 		fileProgressBar.setProgressBar(this.progressFiles);
 		//this.parsingOptions.setFullParse(true);
 		this.parsingOptions.setEnabled(true);
-		fileProcessor = new SwingFileProcessor(this.files,this.hashingOptions,this.parsingOptions);
+		fileProcessor = new SwingFileProcessor(this.sharedParent,this.files);
 		fileProcessor.setMainProgressBar(mainProgressBar);
 		fileProcessor.setFileProgressBar(fileProgressBar);
 		fileProcessor.setParent(this);
@@ -941,7 +947,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		log.println("Quiting "+XaucSwing.appName+", have a nice day.");
+		log.println("Quiting XAUC, have a nice day.");
 	//throw new UnsupportedOperationException("Not supported yet.");
 	}
 

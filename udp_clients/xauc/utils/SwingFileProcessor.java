@@ -17,6 +17,8 @@ import javax.swing.tree.TreePath;
 
 import avparsing.AVParserOptions;
 import clients.XaucConsole;
+import clients.XaucOptions;
+import clients.XaucShared;
 import clients.XaucSwing;
 import structures.AniDBFile;
 import structures.SwingFile;
@@ -24,8 +26,10 @@ import structures.SwingFile;
 public class SwingFileProcessor extends ThreadedWorker {
 	protected String threadName = "file processor";
 	protected HashMap<File,SwingFile> files = null;
-	protected HasherOptions hashingOptions = null;
-	protected AVParserOptions parsingOptions = null;
+	protected XaucShared sharedParent = null;
+	protected HasherOptions hashingOptions = new HasherOptions();
+	protected AVParserOptions parsingOptions = new AVParserOptions();
+	protected XaucOptions clientOptions = new XaucOptions();
 	protected SwingProgress mainProgressBar = null;
 	protected SwingProgress fileProgressBar = null;
 	protected JTable filesTable = null;
@@ -36,28 +40,21 @@ public class SwingFileProcessor extends ThreadedWorker {
 	
 	public SwingFileProcessor(){
 		this.files = new HashMap<File,SwingFile>();
-		this.hashingOptions = new HasherOptions();
-		this.parsingOptions = new AVParserOptions();
 		this.mainProgressBar = new SwingProgress();
 		this.fileProgressBar = new SwingProgress();
 	}
-	public SwingFileProcessor(HashMap<File,SwingFile> files,HasherOptions hashingOptions, AVParserOptions parsingOptions) {
+	public SwingFileProcessor(XaucShared sharedParent, HashMap<File,SwingFile> files) {
+		this();
+		this.sharedParent = sharedParent;
 		this.files = files;
-		this.hashingOptions = hashingOptions;
-		this.parsingOptions = parsingOptions;
+		hashingOptions = sharedParent.getHashingOptions();
+		parsingOptions = sharedParent.getParsingOptions();
+		clientOptions = sharedParent.getClientOptions();
 	}
 	/** @return the files */
 	public synchronized HashMap<File, SwingFile> getFiles() { return files; }
 	/** @param files the files to set */
 	public synchronized void setFiles(HashMap<File, SwingFile> files) { this.files = files; }
-	/** @return the hashingOptions */
-	public synchronized HasherOptions getHashingOptions() { return hashingOptions; }
-	/** @param hashingOptions the hashingOptions to set */
-	public synchronized void setHashingOptions(HasherOptions hashingOptions) { this.hashingOptions = hashingOptions; }
-	/** @return the parsingOptions */
-	public synchronized AVParserOptions getParsingOptions() { return parsingOptions; }
-	/** @param parsingOptions the parsingOptions to set */
-	public synchronized void setParsingOptions(AVParserOptions parsingOptions) { this.parsingOptions = parsingOptions; }
 	/** @return the mainProgressBar */
 	public synchronized SwingProgress getMainProgressBar() { return mainProgressBar; }
 	/** @param mainProgressBar the mainProgressBar to set */
@@ -121,7 +118,7 @@ public class SwingFileProcessor extends ThreadedWorker {
 			if (this.filesTable != null) {
 				this.filesTable.setValueAt("processing", sf.getRowId(), 2);
 			}
-			parser = new FileParser(file,this.hashingOptions,this.parsingOptions);
+			parser = new FileParser(this.sharedParent,file);
 			parser.setLog(this.log);
 			this.fileProgressBar.setProgress(0);
 			parser.setProgress(this.fileProgressBar);

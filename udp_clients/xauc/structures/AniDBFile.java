@@ -1,11 +1,14 @@
 package structures;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Serializable;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+
+import clients.XaucShared;
 
 import xml.*;
 
@@ -151,12 +154,21 @@ public class AniDBFile implements Serializable {
 		}
 	}
 	
-	/**
-	 * Outputs the file data to System.out
-	 */
-	public synchronized void writeToConsole() {
+	/** Outputs the file txt data to System.out */
+	public synchronized void writeTXTtoConsole() {
 		writeToFile(System.out);
 	}
+	
+	/** Outputs the file xml data to System.out */
+	public synchronized void writeXMLtoConsole() {
+		try {
+			writeXmlToFile(System.out);
+		} catch (UnsupportedEncodingException e) {
+			XaucShared.printError("your system doesn't support the encoding used to write xml files (utf-8).");
+		} catch (XmlObjectException e) {
+			XaucShared.printError("an exception occured while trying to write the xml file ("+e.getLocalizedMessage()+").");
+		}
+	}	
 	
 	/**
 	 * Creates a xml object of the file
@@ -213,13 +225,37 @@ public class AniDBFile implements Serializable {
 	/**
 	 * Gets a valid XML Document complete with header for the current object
 	 * @return XML document
-	 * @throws XmlObjectException
-	 * @throws UnsupportedEncodingException
 	 */
-	public synchronized String getXml() throws XmlObjectException, UnsupportedEncodingException {
-		XmlDoc doc = new XmlDoc();
-		doc.addChild(getXmlObject());
-		return doc.toString();
+	public synchronized String getXml() {
+		// basic fail safe error message
+		String result = "<?xml version=\"1.0\"?>\n<root>\n<error>ERROR<error>\n<root>\n";
+		XmlDoc doc = null;
+		try {
+			doc = new XmlDoc();
+		} catch (XmlObjectException e) {
+			XaucShared.printError("an exception occured while trying to write the xml file ("+e.getLocalizedMessage()+").");
+		}
+		try {
+			if (doc != null) {
+				doc.addChild(getXmlObject());
+				result = doc.toString();
+			}
+		} catch (UnsupportedEncodingException e) {
+			XaucShared.printError("your system doesn't support the encoding used to write xml files (utf-8).");
+		} catch (XmlObjectException e) {
+			XaucShared.printError("an exception occured while trying to write the xml file ("+e.getLocalizedMessage()+").");
+		}
+		return result;
+	}
+	
+	/**
+	 * Writes objects XML document to a file/printStream
+	 * @param out PrintStream where to write the xml object
+	 * @throws UnsupportedEncodingException
+	 * @throws XmlObjectException
+	 */
+	public synchronized void writeXmlToFile(PrintStream out) throws UnsupportedEncodingException, XmlObjectException {
+		out.print(getXml());
 	}
 	
 	/**
@@ -229,11 +265,16 @@ public class AniDBFile implements Serializable {
 	 * @throws IOException
 	 */
 	public synchronized void writeXml() throws XmlObjectException, UnsupportedEncodingException, IOException {
-		String appDir = System.getProperty("user.home") + File.separator + ".xauc";
-		String outputfile = appDir+File.separator+"file"+File.separator+(this.fid > 0 ? this.fid : this.ed2k)+".xml";
-		File dir = new File("file");
-		if (!dir.exists() || (dir.exists() && !dir.isDirectory())) dir.mkdir();
-		PrintStream out = new PrintStream(outputfile);
-		out.print(getXml());
+		String outputfile = XaucShared.getAppDir()+File.separator+"file"+File.separator+this.ed2k+".xml";
+		writeXmlToFile(new PrintStream(outputfile));
+	}
+	
+	/**
+	 * Writes the objects TEXT document to a folder
+	 * @throws FileNotFoundException 
+	 */
+	public synchronized void writeText() throws FileNotFoundException {
+		String outputfile = XaucShared.getAppDir()+File.separator+"file"+File.separator+this.ed2k+".txt";
+		writeToFile(new PrintStream(outputfile));
 	}
 }

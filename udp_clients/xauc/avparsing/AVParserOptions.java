@@ -30,6 +30,8 @@ public class AVParserOptions implements Serializable {
 	protected transient AVFormatLibrary AVFORMAT = null;
 	/** FFmpeg libavcodec reference */
 	protected transient AVCodecLibrary AVCODEC = null;
+	/** Serialization filename */
+	protected String serFilename = "parsingSettings.ser";
 	
 	/**
 	 * Default AVParserOptions constructor
@@ -130,6 +132,11 @@ public class AVParserOptions implements Serializable {
 	public synchronized int getVbr_calc_mode() { return vbr_calc_mode; }
 	/** @param vbr_calc_mode the vbr_calc_mode to set */
 	public synchronized void setVbr_calc_mode(int vbr_calc_mode) { this.vbr_calc_mode = vbr_calc_mode; }
+	/**
+	 * Gets the serialization filename
+	 * @return the filename
+	 */
+	public synchronized String getSerFilename() { return serFilename; }
 	
 	/**
 	 * Serializes AVParserOptions to disk
@@ -139,13 +146,13 @@ public class AVParserOptions implements Serializable {
 	public synchronized boolean saveSettings(String appDir) {
 		FileOutputStream fOut=null;
 		ObjectOutputStream oOut=null;
-		String filename = appDir + File.separator + "parsingSettings.ser";
+		String filename = appDir + File.separator + serFilename;
 		boolean isOK = true;
 		try{
 			fOut= new FileOutputStream(filename);
 			oOut = new ObjectOutputStream(fOut);
 			oOut.writeObject(this);
-			System.out.println("Saved parsing settings to: "+filename);
+			if (seeDebug) System.out.println("Saved parsing settings to: "+filename);
 			isOK = true;
 		} catch(IOException e){
 			System.err.println("Error while saving parsing settings to: "+filename);
@@ -171,7 +178,7 @@ public class AVParserOptions implements Serializable {
 	 * @return True if success, false otherwise
 	 */
 	public synchronized boolean loadSettings(String appDir) {
-		String filename = appDir + File.separator + "parsingSettings.ser";
+		String filename = appDir + File.separator + serFilename;
 		boolean isOK = true;
 		FileInputStream fIn=null;
 		ObjectInputStream oIn=null;
@@ -184,7 +191,7 @@ public class AVParserOptions implements Serializable {
 			this.enabled = options.enabled;
 			this.seeDebug = options.seeDebug;
 			this.vbr_calc_mode = options.vbr_calc_mode;
-			System.out.println("Loaded parsing settings from: "+filename);
+			if (seeDebug) System.out.println("Loaded parsing settings from: "+filename);
 		} catch(IOException e) {
 			System.err.println("Error while loading parsing settings from: "+filename);
 			System.err.println(e.getLocalizedMessage());

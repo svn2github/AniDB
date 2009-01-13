@@ -25,6 +25,8 @@ public class HasherOptions implements Serializable {
 	protected boolean seeDebug = false;
 	/** If true Hasher will process files */
 	protected boolean enabled = true;
+	/** Serialization filename */
+	protected String serFilename = "hashingSettings.ser";
 	
 	/** Default HasherOptions constructor */
 	public HasherOptions() {}
@@ -71,6 +73,11 @@ public class HasherOptions implements Serializable {
 	public synchronized boolean isEnabled() { return enabled; }
 	/** @param enabled the enabled to set */
 	public synchronized void setEnabled(boolean enabled) { this.enabled = enabled; }
+	/**
+	 * Gets the serialization filename
+	 * @return the filename
+	 */
+	public synchronized String getSerFilename() { return serFilename; }
 	
 	/**
 	 * Serializes HasherOptions to disk
@@ -80,13 +87,13 @@ public class HasherOptions implements Serializable {
 	public synchronized boolean saveSettings(String appDir) {
 		FileOutputStream fOut=null;
 		ObjectOutputStream oOut=null;
-		String filename = appDir + File.separator + "hashingSettings.ser";
+		String filename = appDir + File.separator + serFilename;
 		boolean isOK = true;
 		try{
 			fOut= new FileOutputStream(filename);
 			oOut = new ObjectOutputStream(fOut);
 			oOut.writeObject(this);
-			System.out.println("Saved hashing settings to: "+filename);
+			if (seeDebug) System.out.println("Saved hashing settings to: "+filename);
 			isOK = true;
 		} catch(IOException e){
 			System.err.println("Error while saving hashing settings to: "+filename);
@@ -112,7 +119,7 @@ public class HasherOptions implements Serializable {
 	 * @return True if success, false otherwise
 	 */
 	public synchronized boolean loadSettings(String appDir) {
-		String filename = appDir + File.separator + "hashingSettings.ser";
+		String filename = appDir + File.separator + serFilename;
 		boolean isOK = true;
 		FileInputStream fIn=null;
 		ObjectInputStream oIn=null;
@@ -128,7 +135,7 @@ public class HasherOptions implements Serializable {
 			this.enableMD5 = options.enableMD5;
 			this.enableSHA1 = options.enableSHA1;
 			this.enableTTH = options.enableTTH;
-			System.out.println("Loaded hashing settings from: "+filename);
+			if (seeDebug) System.out.println("Loaded hashing settings from: "+filename);
 		} catch(IOException e) {
 			System.err.println("Error while loading hashing settings from: "+filename);
 			System.err.println(e.getLocalizedMessage());
