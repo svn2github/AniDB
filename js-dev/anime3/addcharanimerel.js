@@ -153,11 +153,11 @@ function CCDesc(node) {
 function fetchData(searchString,charSearch) {
 	var req = xhttpRequest();
 	if (!charSearch) {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/animesearch.xml', parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=animedesc&limit=100&search='+escape(searchString), parseData);
+		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/animedescsearch.xml', parseData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=animedesc&limit=200&search='+escape(searchString), parseData);
 	} else {
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/charactersearch.xml', parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=characterdesc&limit=100&search='+escape(searchString), parseData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=characterdesc&limit=200&search='+escape(searchString), parseData);
 	}
 }
 
@@ -191,6 +191,7 @@ function parseData(xmldoc) {
 		} else
 			continue; // a bit pointless, i know :P
 	}
+	//alert("Results:\ndescNodes: "+descNodes.length+" ["+aids.length+"]\ncdescNodes: "+cdescNodes.length+" ["+cids.length+"]");
 	if (!descNodes.length && !cdescNodes.length) { // no matches found
 		alert('Search for "'+searchString+'" resulted in no matches.');
 		return;
