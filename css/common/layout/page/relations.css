@@ -24,7 +24,7 @@
 {
 	border-top:1px solid #D1D7DC;
 	margin-top:0.25em;
-	padding:0.25em;
+	padding: 0 0.25em;
 }
 
 #layout-main div.addcharcharrel_all div.explanation div.description dl,
@@ -32,20 +32,20 @@
 #layout-main div.addcreatoranimerel_all div.explanation div.description dl
 {
 	margin:0;
-	text-align:left
+	text-align:left;
+	width:100%;
 }
 
 #layout-main div.addcharcharrel_all div.explanation div.description dt,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description dt,
 #layout-main div.addcreatoranimerel_all div.explanation div.description dt
 {
-	font-weight: bold;
-	width: 20em;
+	width: 30em;
 }
 
 #layout-main div.addcharcharrel_all div.explanation div.description dd,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description dd,
 #layout-main div.addcreatoranimerel_all div.explanation div.description dd
 {
-	margin-left: 21em;
+	margin-left: 31em;
 }
