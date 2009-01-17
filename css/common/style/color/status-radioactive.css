@@ -1,14 +1,16 @@
 #layout-main tr.g_fs_lame,
 #layout-main input.exclude,
 #layout-main table.filelist tr.invalid,
-#layout-main div.myvotes_all table tr.low td
+#layout-main div.myvotes_all table tr.low td,
+#layout-main div.addcreatoranimerel_all tr.left_only
 {
 	background-color: #AAAAAA;
 }
 
 #layout-main td del,
 #layout-main div.myvotes_all table tr.g_odd.low td,
-#layout-main div.myvotes_all table tr.low td
+#layout-main div.myvotes_all table tr.low td,
+#layout-main div.addcreatoranimerel_all tr.right_only
 {
 	background-color: #BF6269;
 }
@@ -20,7 +22,8 @@
 #layout-main div.group_released table tr.mylist,
 #layout-main div.schedule_all table tr.mylist,
 #layout-main div.forum div.comment div.content strong,
-#layout-main div.forum a.topictitle strong
+#layout-main div.forum a.topictitle strong,
+#layout-main div.addcreatoranimerel_all tr.identical
 {
 	background-color: #6FCF7F;
 }
