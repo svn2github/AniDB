@@ -45,3 +45,8 @@
 {
 	width: 98%
 }
+
+#layout-main div.tabbed_pane_main + ul.links
+{
+	margin-top: 1em;
+}
