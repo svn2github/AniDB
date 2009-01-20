@@ -61,16 +61,14 @@
 
 #layout-main div.chartags_all div.addbox div.tag-group div.inner
 {
-	margin-left:auto;
-	margin-right:auto;
-	width:50%;
+	width:80em;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-column
 {
 	float:left;
-	min-height:15em;
-	width:15em;
+	min-height:17.5em;
+	width:17.5em;
 	margin:0 2em 2em 0;
 	padding:4px;
 	border:1px solid darkgrey;
