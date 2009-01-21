@@ -1,7 +1,7 @@
 #layout-main div.g_content div.news div.poll {
 	margin-left:290px; margin-bottom:25px; padding:0;
 	background:url(images/layout/border-hack.gif) repeat-x left bottom;
-	border-left:5px solid #393634;
+	border-bottom:none; border-left:5px solid #393634;
 }
 	#layout-main div.g_content div.news div.poll .rtop,
 	#layout-main div.g_content div.news div.poll .rbottom {
