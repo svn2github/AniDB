@@ -1,0 +1,71 @@
+#layout-menu {
+	padding:220px 20px 0;
+	width:155px;
+	background:url(images/header/cc.png) no-repeat left 92px;
+	list-style-type:none;
+}
+	#layout-menu li.sub-menu {
+		margin:0 0 20px;
+		border-right:5px solid #ad2100;
+		font-size:0.85em;
+	}
+		#layout-menu li.sub-menu span.tab {
+			padding:5px 7px 5px 14px;
+			position:static; display:block;
+			color:#ffffff; background:#ad2100;
+			font-size:1.3em;
+			cursor:default;
+		}
+		#layout-menu li.sub-menu ul {
+			list-style-type:none;
+		}
+			#layout-menu li.sub-menu li { }
+			#layout-menu li.sub-menu a,
+			#layout-menu li.sub-menu a:visited {
+				display:block;
+				color:#ababab;
+				border:none; border-bottom:1px solid #582100;
+				text-decoration:none;
+			}
+				#layout-menu li.sub-menu a:hover {
+					color:#dbdbdb;
+					border-bottom:1px solid #ad2100;
+				}
+				#layout-menu li.sub-menu a span {
+					padding:3px 7px 3px 14px;
+					display:block;
+					text-transform:capitalize;
+				}
+	
+	/* Custom colors for each menu group */
+	#layout-menu li.sub-menu[title="Listings"],
+	#layout-menu li.sub-menu[title="Support"] {
+		border-right:5px solid #21ad00;
+	}
+		#layout-menu li.sub-menu[title="Listings"] span.tab,
+		#layout-menu li.sub-menu[title="Support"] span.tab {
+			background:#21ad00;
+		}
+		#layout-menu li.sub-menu[title="Listings"] a,
+		#layout-menu li.sub-menu[title="Support"] a,
+		#layout-menu li.sub-menu[title="Listings"] a:visited,
+		#layout-menu li.sub-menu[title="Support"] a:visited {
+			border-bottom-color:#215800;
+		}
+		#layout-menu li.sub-menu[title="Listings"] a:hover,
+		#layout-menu li.sub-menu[title="Support"] a:hover {
+			border-bottom-color:#21ad00;
+		}
+	#layout-menu li.sub-menu[title="My stuff"] {
+		border-right:5px solid #0041cd;
+	}
+		#layout-menu li.sub-menu[title="My stuff"] span.tab {
+			background:#0041cd;
+		}
+		#layout-menu li.sub-menu[title="My stuff"] a,
+		#layout-menu li.sub-menu[title="My stuff"] a:visited {
+			border-bottom-color:#0021ad;
+		}
+		#layout-menu li.sub-menu[title="My stuff"] a:hover {
+			border-bottom-color:#0041cd;
+		}

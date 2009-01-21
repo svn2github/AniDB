@@ -1,0 +1,12 @@
+*.i_icon:hover {
+	border:none;
+}
+*.i_minus {
+	background-image:url(images/icons/a_contract.png);
+}
+*.i_plus {
+	background-image:url(images/icons/a_expand.png);
+}
+*.i_help {
+	background-image:url(images/icons/help.png);
+}
