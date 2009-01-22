@@ -94,3 +94,9 @@
 {
 	margin-top:1em;
 }
+
+#layout-main div.userpage_all div.charts div.error
+{
+	clear:none;
+	float:none;
+}
