@@ -61,7 +61,7 @@
 
 #layout-main div.chartags_all div.addbox div.tag-group div.inner
 {
-	width:80em;
+	width:78em;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-column
@@ -69,7 +69,7 @@
 	float:left;
 	min-height:17.5em;
 	width:17.5em;
-	margin:0 2em 2em 0;
+	margin:0 1em 1em 0;
 	padding:4px;
 	border:1px solid darkgrey;
 }
