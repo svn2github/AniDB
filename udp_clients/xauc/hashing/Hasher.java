@@ -11,34 +11,73 @@ import structures.AniDBFile;
 import utils.Progress;
 import utils.Log;
 import utils.ThreadedWorker;
+import utils.Utils;
 
 /**
- * General Hasher Class
+ * The Hasher Class does the work of coordinating file hashing.<br>
+ * <p><b>Workflow:</b><br>
+ * <ol><li>Instantiate class using Hasher hasher = new Hasher(File file); or any of the other constructors</li>
+ * <li>Optionally use setters to set class parameters</li>
+ * <li>If you wish to directly execute the hashing use work() method</li>
+ * <li>If you wish to run this in a new thread, first enable the thread using the setEnabled(true) method and the use the run() method</li></ol>
+ * <p><b>Error handling:</b><br>To know if there was some non-critical error, as in no native crash, just use the getErrorMessage() method, if it's a null string, there was no error.
  * @author fahrenheit
  */
 public class Hasher extends ThreadedWorker {
+	/** CRC32 hash if enabled */
 	protected String crc32 = "";
+	/** ED2K hash if enabled */
 	protected String ed2k = "";
+	/** ED2K link of the file is enabled */
 	protected String ed2klink = "";
+	/** MD5 hash if enabled */
 	protected String md5 = "";
+	/** SHA1 hash if enabled */
 	protected String sha1 = "";
+	/** TTH hash if enabled */
 	protected String tth = "";
+	/** File reference */
 	protected File file;
+	/** AniDBFile for this file */
 	protected AniDBFile anidbFile = null;
+	/** If set to true, the file will be processed to get it's ED2K hash */
 	protected boolean enableED2K = true;
+	/** If set to true, the file will be processed to get it's CRC32 hash */
 	protected boolean enableCRC32 = false;
+	/** If set to true, the file will be processed to get it's MD5 hash */
 	protected boolean enableMD5 = false;
+	/** If set to true, the file will be processed to get it's SHA1 hash */
 	protected boolean enableSHA1 = false;
+	/** If set to true, the file will be processed to get it's TTH hash */
 	protected boolean enableTTH = false;
+	/** Buffer size */
 	protected int BUFSIZE = 1048576*3;
+	/** Log where messages will be written to */
 	protected Log log;
+	/** The current hashing progress will be shown here */
 	protected Progress progress;
+	/** If set to true debug messages will be shown */
 	protected boolean showDebug = false;
+	/** If some error occours during processing its error message will be stored here */
 	protected String errorMessage = "";
 	
-	public Hasher() {}
+	/** Hasher Class constructor */
+	protected Hasher() {}
+	/**
+	 * Hasher Class constructor
+	 * @param file File to hash
+	 */
 	public Hasher(File file) { this.file = file; }
-	public Hasher(String file) { this(new File(file)); }
+	/**
+	 * Hasher Class constructor
+	 * @param filename Filename of the file to hash
+	 */
+	public Hasher(String filename) { this(new File(filename)); }
+	/**
+	 * Hasher Class constructor
+	 * @param file File to hash
+	 * @param options Hashing Options
+	 */
 	public Hasher(File file, HasherOptions options) {
 		this(file);
 		this.enableED2K = options.isEnableED2K();
@@ -48,21 +87,13 @@ public class Hasher extends ThreadedWorker {
 		this.enableTTH = options.isEnableTTH();
 		this.showDebug = options.isSeeDebug();
 	}
+	/**
+	 * Hasher Class constructor
+	 * @param filename Filename of the file to hash
+	 * @param options Hashing Options
+	 */
 	public Hasher(String file, HasherOptions options) {
 		this(new File(file), options);
-	}
-
-	/**
-	 * Method that calculates the hashing rate in MB/s
-	 * @param filesize File size (in bytes)
-	 * @param time Hashing time (in ms)
-	 * @return String with hashing rate
-	 */
-	protected String calculateHashRate(long filesize, long time) {
-		double sizeInMBs = filesize / 1000000;
-		double timeInSecs = time / 1000;
-		double rate = sizeInMBs / timeInSecs;
-		return rate+" MB/s";
 	}
 	
 	/**
@@ -113,7 +144,7 @@ public class Hasher extends ThreadedWorker {
 			return;
 		}
 		long time = (System.currentTimeMillis() - start);
-		log.println("completed hashing of \""+file.getName()+"\" in "+time+"ms @"+calculateHashRate(file.length(),time));
+		log.println("completed hashing of \""+file.getName()+"\" in "+time+"ms @"+Utils.calculateProcessingRate(file.length(),time));
 		if (this.anidbFile != null) this.anidbFile.state |= AniDBFile.HASHED;
 		if (enableED2K) {
 			this.ed2k = ed2k.getHexValue();
@@ -155,42 +186,61 @@ public class Hasher extends ThreadedWorker {
 		return;
 	}
 	
-	/** @return the log */
+	/** Gets the Log associated with this parser instance
+	 * @return the log */
 	public synchronized Log getLog() { return log; }
-	/** @param log the log to set */ 
+	/** Sets the Log associated with this parser instance 
+	 * @param log the Log to set */
 	public synchronized void setLog(Log log) { this.log = log; }
-	/** @return the progress */ 
+	/** Gets the Progress instance associated with this parser instance
+	 * @return the progress */
 	public synchronized Progress getProgress() { return progress; }
-	/** @param progress the progress to set */
+	/** Sets the Progress instance associated with this parser instance 
+	 * @param progress the Progress to set */
 	public synchronized void setProgress(Progress progress) { this.progress = progress; }
-	/** @return the file */
+	/** Gets the file associated with this parser instance
+	 * @return the file */
 	public synchronized File getFile() { return file; }
-	/** @param file the file to set */
+	/** Sets the file associated with this parser instance
+	 * @param file the file to set */
 	public synchronized void setFile(File file) { this.file = file; }
-	/** @return the anidbFile */
+	/** Gets the AniDBFile associated with this parser instance
+	 * @return the anidbFile */
 	public synchronized AniDBFile getAnidbFile() { return anidbFile; }
-	/** @param anidbFile the anidbFile to set */
+	/** Sets the AniDBFile associated with this parser instance
+	 * @param anidbFile the AniDBFile to set */
 	public synchronized void setAnidbFile(AniDBFile anidbFile) { this.anidbFile = anidbFile; }
-	/** @return the BUFSIZE */
+	/** Gets the current buffer size 
+	 * @return the buffer size */
 	public synchronized int getBUFSIZE() { return BUFSIZE; }
-	/** @param bufsize the bUFSIZE to set */
+	/** Sets the buffer size for hashing 
+	 * @param bufsize the buffer size to set */
 	public synchronized void setBUFSIZE(int bufsize) { BUFSIZE = bufsize; }
-	/** @return the showDebug */
+	/** Checks if debug messages should be displayed or not
+	 * @return true if debug messages should be displayed, false otherwise */
 	public synchronized boolean isShowDebug() { return showDebug; }
-	/** @param showDebug the showDebug to set */
+	/** Defines if debug messages should be displayed or not 
+	 * @param showDebug debug messages will be displayed if set to true, otherwise will be hidden */
 	public synchronized void setShowDebug(boolean showDebug) { this.showDebug = showDebug; }
-	/** @return the crc32 */
+	/** Gets the file's CRC32 hash (or empty string if it was not enabled) 
+	 * @return the crc32 */
 	public synchronized String getCrc32() { return crc32; }
-	/** @return the ed2k */
+	/** Gets the file's ED2K hash (or empty string if it was not enabled)
+	 * @return the ed2k */
 	public synchronized String getEd2k() { return ed2k; }
-	/** @return the ed2klink */
+	/** Gets the file's ED2K link (or empty string if it was not enabled)
+	 * @return the ed2klink */
 	public synchronized String getEd2klink() { return ed2klink; }
-	/** @return the md5 */
+	/** Gets the file's MD5 hash (or empty string if it was not enabled)
+	 * @return the md5 */
 	public synchronized String getMd5() { return md5; }
-	/** @return the sha1 */
+	/** Gets the file's SHA1 hash (or empty string if it was not enabled)
+	 * @return the sha1 */
 	public synchronized String getSha1() { return sha1; }
-	/** @return the tth */
+	/** Gets the file's TTH hash (or empty string if it was not enabled)
+	 * @return the tth */
 	public synchronized String getTth() { return tth; }
-	/** @return the errorMessage */
+	/** Gets any error messages encountered during processing 
+	 * @return the errorMessage */
 	public synchronized String getErrorMessage() { return errorMessage; }
 }

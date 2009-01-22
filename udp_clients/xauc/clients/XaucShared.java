@@ -112,6 +112,17 @@ public class XaucShared {
 			out.write("mp4"); out.newLine();
 			out.write("ogm"); out.newLine();
 			out.write("wmv"); out.newLine();
+			out.write("mpg"); out.newLine();
+			out.write("mpeg"); out.newLine();
+			out.write("rm"); out.newLine();
+			out.write("rmvb"); out.newLine();
+			out.write("asf"); out.newLine();
+			out.write("mov"); out.newLine();
+			out.write("swf"); out.newLine();
+			out.write("flv"); out.newLine();
+/*			"avi", "mpg", "mpeg", "rm", "rmvb",
+			"asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt",
+			"sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"*/
 			out.close();
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());

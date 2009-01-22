@@ -23,6 +23,12 @@ import clients.XaucSwing;
 import structures.AniDBFile;
 import structures.SwingFile;
 
+/**
+ * This class serves as a coordinator for file processing in the GUI version of XAUC.
+ * <p>It, currently, handles file hashing and parsing.</p>
+ * @author fahrenheit
+ *
+ */
 public class SwingFileProcessor extends ThreadedWorker {
 	protected String threadName = "file processor";
 	protected HashMap<File,SwingFile> files = null;
@@ -96,7 +102,6 @@ public class SwingFileProcessor extends ThreadedWorker {
 		Set<File> filesToCheck = this.files.keySet();
 		Iterator<File> it = filesToCheck.iterator();
 		this.mainProgressBar.setAction("processing");
-		//this.mainProgressBar.setShowProgress(true);
 		FileParser parser;
 		int processedFiles = 0;
 		float curprogress = 0;

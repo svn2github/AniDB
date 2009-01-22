@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import net.sf.ffmpeg_java.AVCodecLibrary;
 
+import utils.Utils;
 import xml.XmlObject;
 import xml.XmlObjectException;
 
@@ -70,20 +71,36 @@ public class AVStreamDataAudio extends AVStreamData {
 		MP2 (11,"MP2","mp2","mp2"),
 		DTS (13,"DTS","dts","dts");
 		
+		/** AniDB codec ID */
 		private final int id;
+		/** AniDB codec name */
 		private final String name;
+		/** AniDB short codec name */
 		private final String shortname;
+		/** FFmpeg codec name reference */
 		private final String codecname;
+		/**
+		 * AniDBCodec enumeration
+		 * @param id AniDB codec id 
+		 * @param name AniDB codec name
+		 * @param shortname AniDB codec shortname
+		 * @param codecname FFmpeg codec name reference
+		 */
 		AnidbCodec (int id, String name, String shortname, String codecname) {
 			this.id = id;
 			this.name = name;
 			this.shortname = shortname;
 			this.codecname = codecname;
 		}
+		/** Gets the AniDB codec id associated with the current Codec */
 		public int getAnidbID() { return id; };
+		/** Gets the AniDB codec name associated with the current Codec */
 		public String getAnidbName() { return name; };
+		/** Gets the AniDB codec shortname associated with the current Codec */
 		public String getAnidbShortName() { return shortname; }
+		/** Gets the FFmpeg codec reference associated with the current Codec */
 		public String getCodecName() { return codecname; }
+		/** Gets the AniDB codec name plus the FFmpeg codec reference associated with the current Codec */
 		public String getCodecString() { return name+" ("+codecname+")"; }
 	}
 	
@@ -140,7 +157,7 @@ public class AVStreamDataAudio extends AVStreamData {
 	
 	/**
 	 * Get the Audio Type
-	 * @return
+	 * @return Audio type name
 	 */
 	public synchronized String mapAudioType() {
 		switch (this.audioType) {
@@ -155,7 +172,7 @@ public class AVStreamDataAudio extends AVStreamData {
 	
 	/**
 	 * Convert audio channels to anidb representation
-	 * @return
+	 * @return Audio channels representation
 	 */
 	public synchronized String mapAudioChannels() {
 		switch(this.channels) {
@@ -182,7 +199,7 @@ public class AVStreamDataAudio extends AVStreamData {
 		out.append("\t\ttype: "+mapAudioType()+'\n');
 		out.append("\t\tcodec: "+this.anidbcodecid.getCodecString()+'\n');
 		if (this.fullParsed && this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
-		if (this.fullParsed && this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
+		if (this.fullParsed && this.duration > 0) out.append("\t\tduration: "+Utils.formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
 		if (this.fullParsed && this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
 		if (this.language != "") out.append("\t\tlanguage: "+this.language+'\n');
 		out.append("\t\tchannels: "+this.channels+" ("+mapAudioChannels()+")"+'\n');
@@ -201,7 +218,7 @@ public class AVStreamDataAudio extends AVStreamData {
 		out.println("\t\ttype: "+mapAudioType());
 		out.println("\t\tcodec: "+this.anidbcodecid.getCodecString());
 		if (this.fullParsed && this.size > 0) out.println("\t\tsize: "+this.size+" bytes");
-		if (this.fullParsed && this.duration > 0) out.println("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")");
+		if (this.fullParsed && this.duration > 0) out.println("\t\tduration: "+Utils.formatDurationSecs(this.duration)+" ("+this.duration+")");
 		if (this.fullParsed && this.bitrate > 0) out.println("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps");
 		if (this.language != "") out.println("\t\tlanguage: "+this.language);
 		out.println("\t\tchannels: "+this.channels+" ("+mapAudioChannels()+")");

@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import net.sf.ffmpeg_java.AVCodecLibrary;
 
+import utils.Utils;
 import xml.XmlObject;
 import xml.XmlObjectException;
 
@@ -74,21 +75,37 @@ public class AVStreamDataVideo extends AVStreamData {
 		RV40 (20,"RealVideo 9/10 (RV40)","rv40","rv40"),
 		AVC (22,"H264/AVC","avc","avc");
 		
+		/** AniDB codec ID */
 		private final int id;
+		/** AniDB codec name */
 		private final String name;
+		/** AniDB short codec name */
 		private final String shortname;
+		/** FFmpeg codec name reference */
 		private final String codecname;
+		/**
+		 * AniDBCodec enumeration
+		 * @param id AniDB codec id 
+		 * @param name AniDB codec name
+		 * @param shortname AniDB codec shortname
+		 * @param codecname FFmpeg codec name reference
+		 */
 		AnidbCodec (int id, String name, String shortname, String codecname) {
 			this.id = id;
 			this.name = name;
 			this.shortname = shortname;
 			this.codecname = codecname;
 		}
+		/** Gets the AniDB codec id associated with the current Codec */
 		public int getAnidbID() { return id; };
+		/** Gets the AniDB codec name associated with the current Codec */
 		public String getAnidbName() { return name; };
+		/** Gets the AniDB codec shortname associated with the current Codec */
 		public String getAnidbShortName() { return shortname; }
+		/** Gets the FFmpeg codec reference associated with the current Codec */
 		public String getCodecName() { return codecname; }
-		public String getCodecString() { return name+" ("+codecname+")"; }
+		/** Gets the AniDB codec name plus the FFmpeg codec reference associated with the current Codec */
+		public String getCodecString() { return  name+" ("+codecname+")"; }
 	}
 	
 	/** Default Video Stream Data constructor */ 
@@ -96,7 +113,7 @@ public class AVStreamDataVideo extends AVStreamData {
 
 	/**
 	 * Gets the integer with the video flags
-	 * @return flags
+	 * @return Video flags
 	 */
 	public synchronized int getVideoFlags() {
 		int flags = 0;
@@ -191,9 +208,9 @@ public class AVStreamDataVideo extends AVStreamData {
 	public synchronized String writeToString() {
 		StringBuffer out = new StringBuffer();
 		out.append("\tstream [video:"+this.relStreamId+"]:"+'\n');
-		out.append("\t\tcodec: "+this.anidbcodecid.getCodecString()+'\n');
+		out.append("\t\tcodec: "+this.anidbcodecid.getCodecString()+(this.anidbcodecid.getCodecName().equals("other") ? " ["+this.codec_id+"]" : "")+'\n');
 		if (this.fullParsed && this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
-		if (this.fullParsed && this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
+		if (this.fullParsed && this.duration > 0) out.append("\t\tduration: "+Utils.formatDurationSecs(this.duration)+" ("+this.duration+")"+'\n');
 		if (this.fullParsed && this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
 		if (!this.p_resolution.equals("")) out.append("\t\tpixel resolution: "+this.p_resolution+'\n');
 		if (this.p_ar > 0) out.append("\t\tpixel aspect ratio: "+getAspectRatio(this.p_ar)+'\n');
@@ -214,9 +231,9 @@ public class AVStreamDataVideo extends AVStreamData {
 	 */
 	public synchronized void writeToFile(PrintStream out) {
 		out.println("\tstream [video"+this.relStreamId+"]:");
-		out.println("\t\tcodec: "+this.anidbcodecid.getCodecString());
+		out.println("\t\tcodec: "+this.anidbcodecid.getCodecString()+(this.anidbcodecid.getCodecName().equals("other") ? " ["+this.codec_id+"]" : ""));
 		if (this.fullParsed && this.size > 0) out.println("\t\tsize: "+this.size+" bytes");
-		if (this.fullParsed && this.duration > 0) out.println("\t\tduration: "+formatDurationSecs(this.duration)+" ("+this.duration+")");
+		if (this.fullParsed && this.duration > 0) out.println("\t\tduration: "+Utils.formatDurationSecs(this.duration)+" ("+this.duration+")");
 		if (this.fullParsed && this.bitrate > 0) out.println("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps");
 		if (!this.p_resolution.equals("")) out.println("\t\tpixel resolution: "+this.p_resolution);
 		if (this.p_ar > 0) out.println("\t\tpixel aspect ratio: "+getAspectRatio(this.p_ar));

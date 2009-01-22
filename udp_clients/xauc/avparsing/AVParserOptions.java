@@ -8,8 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import com.sun.jna.Native;
-
 import net.sf.ffmpeg_java.AVCodecLibrary;
 import net.sf.ffmpeg_java.AVFormatLibrary;
 
@@ -24,6 +22,8 @@ public class AVParserOptions implements Serializable {
 	protected boolean seeDebug = false;
 	/** User set for AVParser state */
 	protected boolean enabled = false;
+	/** Parsing implementation to use */
+	protected AVParser.ParserImplementations parserImp = AVParser.ParserImplementations.NONE;
 	/** Internaly set if init failed */
 	protected transient boolean disabled = false;
 	/** FFmpeg libavformat reference */
@@ -52,6 +52,8 @@ public class AVParserOptions implements Serializable {
 	 * Initializes FFmpeg libraries
 	 */
 	public synchronized void initFFmpeg() {
+		// If no parser implmentation is selected no need to check for ffmpeg
+		if (this.parserImp == AVParser.ParserImplementations.NONE) return;
 		// First check that we can load the libraries or not
 		try {
 			System.loadLibrary(AVCodecLibrary.libname);
@@ -90,54 +92,88 @@ public class AVParserOptions implements Serializable {
 			return;			
 		}
 		// if i survided until here the rest should be safe
-		// Set protected mode
-		Native.setProtected(true);
-		this.AVFORMAT = AVFormatLibrary.SYNC_INSTANCE;
-		this.AVCODEC = AVCodecLibrary.SYNC_INSTANCE;
-		if (this.AVCODEC == null || this.AVFORMAT == null) {
-			System.err.println("AVCODEC and/or AVFORMAT initialization went sour, disabling avparsing.");
-			this.disabled = true;
+		if (this.parserImp == AVParser.ParserImplementations.FFMPEGJAVA) {
+			this.AVFORMAT = AVFormatLibrary.SYNC_INSTANCE;
+			this.AVCODEC = AVCodecLibrary.SYNC_INSTANCE;
+			if (this.AVCODEC == null || this.AVFORMAT == null) {
+				System.err.println("AVCODEC and/or AVFORMAT initialization went sour, disabling avparsing.");
+				this.disabled = true;
+			}
+			// register formats
+			if (this.AVFORMAT != null) this.AVFORMAT.av_register_all();
+			// not sure what the consequences of such a mismatch are, but it is worth logging a warning:
+			if (seeDebug && this.AVCODEC != null && this.AVCODEC.avcodec_version() != AVCodecLibrary.LIBAVCODEC_VERSION_INT)
+				System.err.println("ffmpeg-java and ffmpeg versions do not match: avcodec_version=" + AVCODEC.avcodec_version() + " LIBAVCODEC_VERSION_INT=" + AVCodecLibrary.LIBAVCODEC_VERSION_INT);
+			// register codecs and all
+			if (this.AVCODEC != null) this.AVCODEC.avcodec_init();
 		}
-		// register formats
-		if (this.AVFORMAT != null) this.AVFORMAT.av_register_all();
-		// not sure what the consequences of such a mismatch are, but it is worth logging a warning:
-		if (seeDebug && this.AVCODEC != null && this.AVCODEC.avcodec_version() != AVCodecLibrary.LIBAVCODEC_VERSION_INT)
-			System.err.println("ffmpeg-java and ffmpeg versions do not match: avcodec_version=" + AVCODEC.avcodec_version() + " LIBAVCODEC_VERSION_INT=" + AVCodecLibrary.LIBAVCODEC_VERSION_INT);
-		// register codecs and all
-		if (this.AVCODEC != null) this.AVCODEC.avcodec_init();
 	}
 	
-	/** @return the fullParse */
+	/** Checks if the parsing instance should fully process the given file
+	 * @return true if full process is enabled, false otherwise */
 	public synchronized boolean isFullParse() { return fullParse; }
-	/** @param fullParse the fullParse to set */
+	/** Defines if the parsing instance should fully parse a file or not.
+	 * <p><b>Warning:</b><br>Check if the current ffmpeg interface implementation is prone to crashing with this setting enabled before using</p> 
+	 * @param fullParse if set to true parser will fully process file */
 	public synchronized void setFullParse(boolean fullParse) { this.fullParse = fullParse; }
-	/** @return the seeDebug */
+	/** Checks if debug messages should be displayed or not
+	 * @return true if debug messages should be displayed, false otherwise */
 	public synchronized boolean isSeeDebug() { return seeDebug; }
-	/** @param seeDebug the seeDebug to set */
+	/** Defines if debug messages should be displayed or not 
+	 * @param seeDebug debug messages will be displayed if set to true, otherwise will be hidden */
 	public synchronized void setSeeDebug(boolean seeDebug) { this.seeDebug = seeDebug; }
-	/** @return the enabled */
+	/** Checks if the user has enabled parsing or not 
+	 * @return true if enabled, false otherwise */
 	public synchronized boolean isEnabled() { return (disabled ? false : enabled); }
-	/** @param enabled the enabled to set */
+	/** Defines if parsing should be enabled or not.
+	 * <p><b>Note:</b><br>This will try to load FFmpeg libraries and if it fails will disable parsing</p> 
+	 * @param enabled the enabled to set */
 	public synchronized void setEnabled(boolean enabled) { 
 		this.enabled = enabled;
 		if (this.enabled) initFFmpeg();
 	}
-	/** @return the disabled */
+	/** Checks if parsing is disabled, this will only be true if it's impossible to load FFmpeg libraries 
+	 * @return true if disabled, false otherwise */
 	public synchronized boolean isDisabled() { return disabled; }
-	/** @return the aVFORMAT */
+	/** Gets the libavformat java interface instance used by ffmpeg-java
+	 * @return AVFORMAT instance */
 	public synchronized AVFormatLibrary getAVFORMAT() { return AVFORMAT; }
-	/** @return the aVCODEC */
+	/** Gets the libavcodec java interface instance used by ffmpeg-java
+	 * @return AVCODEC instance */
 	public synchronized AVCodecLibrary getAVCODEC() { return AVCODEC; }
-	/** @return the vbr_calc_mode */
+	/** Gets the current VBR calculation mode
+	 * <p><b>Note:</b><br>VBR calculation is only done if full parse is enabled</p>
+	 * @see AVParser.VBR_DELTA_SIZE
+	 * @see AVParser.VBR_DELTA_BITRATE
+	 * @return the vbr_calc_mode */
 	public synchronized int getVbr_calc_mode() { return vbr_calc_mode; }
-	/** @param vbr_calc_mode the vbr_calc_mode to set */
+	/** Sets the current VBR calculation mode
+	 * <p><b>Note:</b><br>VBR calculation is only done if full parse is enabled</p>
+	 * @see AVParser.VBR_DELTA_SIZE
+	 * @see AVParser.VBR_DELTA_BITRATE
+	 * @param vbr_calc_mode the VBR calculation mode to use, should be one of the mentioned values */
 	public synchronized void setVbr_calc_mode(int vbr_calc_mode) { this.vbr_calc_mode = vbr_calc_mode; }
 	/**
 	 * Gets the serialization filename
 	 * @return the filename
 	 */
 	public synchronized String getSerFilename() { return serFilename; }
-	
+	/**
+	 * Gets the current AVParser Implementation
+	 * @return The Parser implementation
+	 * @see AVParser.ParserImplementations
+	 */
+	public synchronized AVParser.ParserImplementations getParserImp() {
+		return parserImp;
+	}
+	/** Sets the AVParser implementation to use
+	 * @param parserImp the AVParser Implementation to use 
+	 * @see AVParser.ParserImplementations
+	 */
+	public synchronized void setParserImp(AVParser.ParserImplementations parserImp) {
+		this.parserImp = parserImp;
+	}
+
 	/**
 	 * Serializes AVParserOptions to disk
 	 * @param appDir Application directory where file will be saved to

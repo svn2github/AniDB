@@ -3,20 +3,32 @@ package structures;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
+import utils.Utils;
 import xml.*;
 
 /**
  * Subtitle stream data wrapper
  */
 public class AVStreamDataSubtitle extends AVStreamData {
+	/** Stream subtitle language */
 	public String language = "";
+	// ANIDB data
+	/** Stream subtitle type */
 	public int subtitleType = 0;
+	/** If subtitle stream is used for subbing commentaries this is set to true */
 	public boolean isForCommentary = false;
+	/** If subtitle stream is used for subbing foreign dubs this is set to true */
 	public boolean isForForeignDub = false;
+	/** If subtitle stream is used for hearing impaired subs this is set to true */
 	public boolean isForHearingImpaired = false;
+	/** If subtitle stream is a type of image subs (vobsub) this is set to true */
 	public boolean isImageSubs = false;
+	/** If subtitle stream is a type of style subs (ass/ssa) this is set to true */
 	public boolean isStyledSubs = false;
+	/** If subtitle stream is a type of unstylled subs (srt/text) this is set to true */
 	public boolean isUnstyledSubs = false;
+	
+	/** Default AVStreamDataSubtitle constructor */
 	public AVStreamDataSubtitle() { super(); }
 	
 	/**
@@ -73,7 +85,7 @@ public class AVStreamDataSubtitle extends AVStreamData {
 		out.append("\t\ttype: "+mapSubtitleTypeLong()+'\n');
 		out.append("\t\tcodec: "+this.codecName+'\n');
 		if (this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
-		if (this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+'\n');
+		if (this.duration > 0) out.append("\t\tduration: "+Utils.formatDurationSecs(this.duration)+'\n');
 		if (this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
 		if (this.language != "") out.append("\t\tlanguage: "+this.language+'\n');
 		if (this.isForForeignDub) out.append("\t\tfor foreign dub"+'\n');
@@ -94,7 +106,7 @@ public class AVStreamDataSubtitle extends AVStreamData {
 		out.println("\t\ttype: "+mapSubtitleTypeLong());
 		out.println("\t\tcodec: "+this.codecName);
 		if (this.size > 0) out.println("\t\tsize: "+this.size+" bytes");
-		if (this.duration > 0) out.println("\t\tduration: "+formatDurationSecs(this.duration));
+		if (this.duration > 0) out.println("\t\tduration: "+Utils.formatDurationSecs(this.duration));
 		if (this.bitrate > 0) out.println("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps");
 		if (this.language != "") out.println("\t\tlanguage: "+this.language);
 		if (this.isForForeignDub) out.println("\t\tfor foreign dub");

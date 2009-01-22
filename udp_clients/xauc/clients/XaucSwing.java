@@ -88,6 +88,11 @@ public class XaucSwing extends JFrame implements WindowListener {
     private javax.swing.JPanel treeFilesPane;
     private javax.swing.JScrollPane treeFilesScrollPane;
     private javax.swing.JPanel treePane;
+    private javax.swing.JPanel udpPane;
+    private javax.swing.JScrollPane udpScrollPane;
+    private javax.swing.JButton udpSendButton;
+    private javax.swing.JTextArea udpTextArea;
+    private javax.swing.JTextField udpTextField;
     private javax.swing.JPanel workspacePane;
     // End of variables declaration//GEN-END:variables
     protected XaucShared sharedParent = new XaucShared();
@@ -101,6 +106,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 	protected DirectoryParser dirparser = new DirectoryParser(clientOptions.isRecurseDir());
 	protected File lastDirectory = null;
 	protected SwingFileProcessor fileProcessor = null;
+	protected String newline = System.getProperty("line.separator");
 
 	/** @return the hashingOptions */
 	public synchronized HasherOptions getHashingOptions() { return hashingOptions; }
@@ -169,6 +175,11 @@ public class XaucSwing extends JFrame implements WindowListener {
         logArea = new javax.swing.JTextArea();
         buttonLogClear = new javax.swing.JButton();
         buttonLogCopy = new javax.swing.JButton();
+        udpPane = new javax.swing.JPanel();
+        udpScrollPane = new javax.swing.JScrollPane();
+        udpTextArea = new javax.swing.JTextArea();
+        udpTextField = new javax.swing.JTextField();
+        udpSendButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
         menuFileAddFile = new javax.swing.JMenuItem();
@@ -501,6 +512,53 @@ public class XaucSwing extends JFrame implements WindowListener {
 
         tabsPane.addTab("Log", new javax.swing.ImageIcon(getClass().getResource("/icons/page_white_text.png")), logPane); // NOI18N
 
+        udpTextArea.setColumns(20);
+        udpTextArea.setEditable(false);
+        udpTextArea.setRows(5);
+        udpScrollPane.setViewportView(udpTextArea);
+
+        udpTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                udpTextFieldActionPerformed(evt);
+            }
+        });
+
+        udpSendButton.setFont(udpSendButton.getFont().deriveFont(udpSendButton.getFont().getSize()-1f));
+        udpSendButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/textfield_add.png"))); // NOI18N
+        udpSendButton.setText("Send");
+        udpSendButton.setBorder(null);
+        udpSendButton.setContentAreaFilled(false);
+        udpSendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                udpSendButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout udpPaneLayout = new javax.swing.GroupLayout(udpPane);
+        udpPane.setLayout(udpPaneLayout);
+        udpPaneLayout.setHorizontalGroup(
+            udpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(udpScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
+            .addGroup(udpPaneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(udpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(udpSendButton, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        udpPaneLayout.setVerticalGroup(
+            udpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(udpPaneLayout.createSequentialGroup()
+                .addComponent(udpScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(udpPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(udpTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(udpSendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        tabsPane.addTab("UDP Terminal", new javax.swing.ImageIcon(getClass().getResource("/icons/application_xp_terminal.png")), udpPane); // NOI18N
+
         menuBar.setName("menuBar"); // NOI18N
 
         menuFile.setText("File");
@@ -650,6 +708,16 @@ public class XaucSwing extends JFrame implements WindowListener {
 	private void menuEditPreferencesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditPreferencesActionPerformed
 		showPreferencesDialog();
 	}//GEN-LAST:event_menuEditPreferencesActionPerformed
+
+	private void udpSendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_udpSendButtonActionPerformed
+		String text = this.udpTextField.getText();
+		this.udpTextArea.append("< " +text + newline);
+	}//GEN-LAST:event_udpSendButtonActionPerformed
+
+	private void udpTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_udpTextFieldActionPerformed
+		String text = this.udpTextField.getText();
+		this.udpTextArea.append("< " +text + newline);
+	}//GEN-LAST:event_udpTextFieldActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -902,7 +970,9 @@ public class XaucSwing extends JFrame implements WindowListener {
 		SwingProgress fileProgressBar = new SwingProgress();
 		fileProgressBar.setProgressBar(this.progressFiles);
 		//this.parsingOptions.setFullParse(true);
+		this.parsingOptions.setParserImp(avparsing.AVParser.ParserImplementations.XUGGLE);
 		this.parsingOptions.setEnabled(true);
+		// hack to get xuggle file info
 		fileProcessor = new SwingFileProcessor(this.sharedParent,this.files);
 		fileProcessor.setMainProgressBar(mainProgressBar);
 		fileProcessor.setFileProgressBar(fileProgressBar);

@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import utils.Utils;
 import xml.XmlDoc;
 import xml.XmlObject;
 import xml.XmlObjectException;
@@ -53,23 +54,6 @@ public class AVStreamData {
 	
 	/** Default AVStreamData constructor */
 	public AVStreamData() {}
-	
-	/**
-	 * Formats a duration time in seconds to an hh:mm:ss representation
-	 * @param time The time
-	 * @return Formated time
-	 */
-	public String formatDurationSecs(double time) {
-		String seconds = Integer.toString((int)(time % 60));
-		String minutes = Integer.toString((int)((time % 3600) / 60));
-		String hours = Integer.toString((int)(time / 3600));
-		for (int i = 0; i < 2; i++) {
-			if (seconds.length() < 2) seconds = "0" + seconds;
-			if (minutes.length() < 2) minutes = "0" + minutes;
-			if (hours.length() < 2) hours = "0" + hours;
-		}
-		return hours+":"+minutes+":"+seconds;
-	}
 
 	/**
 	 * Writes the Stream to a string.
@@ -81,7 +65,7 @@ public class AVStreamData {
 		out.append("\tstream [other:"+this.relStreamId+"]:"+'\n');
 		out.append("\t\tcodec: "+this.codecName+'\n');
 		if (this.size > 0) out.append("\t\tsize: "+this.size+" bytes"+'\n');
-		if (this.duration > 0) out.append("\t\tduration: "+formatDurationSecs(this.duration)+'\n');
+		if (this.duration > 0) out.append("\t\tduration: "+Utils.formatDurationSecs(this.duration)+'\n');
 		if (this.bitrate > 0) out.append("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps"+'\n');
 		return out.toString();
 	}
@@ -94,7 +78,7 @@ public class AVStreamData {
 		out.println("\tstream [other:"+this.relStreamId+"]:");
 		out.println("\t\tcodec: "+this.codecName);
 		if (this.size > 0) out.println("\t\tsize: "+this.size+" bytes");
-		if (this.duration > 0) out.println("\t\tduration: "+formatDurationSecs(this.duration));
+		if (this.duration > 0) out.println("\t\tduration: "+Utils.formatDurationSecs(this.duration));
 		if (this.bitrate > 0) out.println("\t\tbitrate: "+(int)(this.bitrate/1000)+" kbps");
 	}
 	

@@ -8,8 +8,7 @@ import clients.XaucShared;
 import structures.AniDBFile;
 import hashing.Hasher;
 import hashing.HasherOptions;
-import avparsing.AVParser;
-import avparsing.AVParserOptions;
+import avparsing.*;
 
 /**
  * A file parser
@@ -93,7 +92,13 @@ public class FileParser extends ThreadedWorker {
 		}
 		
 		if (this.avparserOptions.isEnabled()) {
-			avparser = new AVParser(file,avparserOptions);
+			AVParser.ParserImplementations parserImp = this.avparserOptions.getParserImp();
+			if (parserImp == AVParser.ParserImplementations.XUGGLE)
+				avparser = new AVParserXuggle(file,avparserOptions);
+			else if (parserImp == AVParser.ParserImplementations.FFMPEGJAVA)
+				avparser = new AVParserFFmpegJava(file,avparserOptions);
+			else // fall back to none 
+				avparser = new AVParserNone(file,avparserOptions);
 			avparser.setLog(log);
 			avparser.setAnidbFile(this.anidbFile);
 			progress.setAction("parsing");

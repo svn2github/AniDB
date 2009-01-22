@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import avparsing.AVParser;
+import avparsing.AVParserFFmpegJava;
 import utils.*;
 import structures.AniDBFile;
 
@@ -112,8 +112,8 @@ public class XaucConsole extends XaucShared{
 						else if (value.equals("off")) parsingOptions.setFullParse(false);
 						else printOptionError(args[i]);
 					} else if (option.equals("vbrmode")) {
-						if (value.equals("bitrate")) parsingOptions.setVbr_calc_mode(AVParser.VBR_BY_PACKET_BITRATE);
-						else if (value.equals("size")) parsingOptions.setVbr_calc_mode(AVParser.VBR_BY_PACKET_SIZE);
+						if (value.equals("bitrate")) parsingOptions.setVbr_calc_mode(AVParserFFmpegJava.VBR_BY_PACKET_BITRATE);
+						else if (value.equals("size")) parsingOptions.setVbr_calc_mode(AVParserFFmpegJava.VBR_BY_PACKET_SIZE);
 						else printOptionError(args[i]);
 					} else if (option.equals("save")) {
 						if (value.equals("on")) saveParsingSettings = true;
