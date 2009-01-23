@@ -3,6 +3,17 @@ html
 	background:white;
 }
 
+tr
+{
+	background-color: white;
+}
+
+input[type="text"]
+{
+	background-color: white;
+	color:black;
+}
+
 span.link,
 a
 {
@@ -164,4 +175,11 @@ span.g_odd
 #layout-main div.export_all div.exportblock .rtop *
 {
 	background-color:#CADCEB;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: #E5ECF9;
 }

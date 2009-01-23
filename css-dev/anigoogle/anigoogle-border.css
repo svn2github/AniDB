@@ -39,3 +39,23 @@ table
 {
 	border-top:1px solid;
 }
+
+
+#layout-main div.tabbed_pane div.body
+{
+	border:1px solid #C9D7F1;
+}
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border:1px solid #C9D7F1;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom:1px double #E5ECF9;
+	border-left:1px solid #C9D7F1;
+	border-right:1px solid #C9D7F1;
+	border-top:1px solid #C9D7F1;
+}
