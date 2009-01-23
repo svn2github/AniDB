@@ -15,14 +15,16 @@
 	text-align:right;
 }
 
-#layout-main div.userpage_all div.g_menu,
-#layout-main div.userpage_all div.buddies,
-#layout-main div.userpage_all div.favreviewers
+#layout-main div.userpage_all div.g_menu
 {
 	clear:right;
 	float:right;
-	margin-bottom:1em;
 	width:11em;
+}
+
+#layout-main div.userpage_all div.g_menu div + div
+{
+	margin-top:1em;
 }
 
 #layout-main div.userpage_all div.buddies ul li,
