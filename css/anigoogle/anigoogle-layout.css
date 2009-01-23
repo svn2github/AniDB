@@ -240,7 +240,7 @@
 {
 	float:right;
 	margin-top:-2em;
-	margin-right:-12.5em;
+	margin-right:-15.5em;
 }
 
 #layout-nav div.main_search input.random
@@ -277,4 +277,9 @@ h4,
 #layout-tabs li.news
 {
 	display:inline;
+}
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin:0 0 1px;
 }

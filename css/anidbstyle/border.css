@@ -94,6 +94,7 @@ img, a
 	border-top:1px solid #9A9CA1;
 }
 
+#layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	border-bottom:1px double #b8bac0;
