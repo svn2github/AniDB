@@ -36,7 +36,7 @@ A complete list of required libs is:
 	libspeexdsp-1 (needed by Xuggle)
 	
 I'll provide windows bundles of these libs at:
-	http://static.anidb.net/client/xauc/required_windows_libs.7z
+	http://static.anidb.net/tmp/xauc/required_windows_libs.7z
 	
 Note, these libs were compiled against: 
 	Xuggle: 1.17 RC3
