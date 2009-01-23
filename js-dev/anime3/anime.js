@@ -201,6 +201,7 @@ function parseData(xmldoc) {
 	var t2 = new Date();
 	updateGroupTable();
 	var uGT = new Date() - t2;
+	createPreferencesTable('anime');
 	t2 = new Date();
 	updateEpisodeTable();
 	var uET = new Date() - t2;
@@ -231,7 +232,6 @@ function parseData(xmldoc) {
 						'\n\t\tupdateAddToMylistBox: '+uAB+' ms'+
 						'\n\t\tgetExtraGroupData: '+gEGD+' ms'+
 						'\n\tTotal: '+(parseAnimeNode+parseCustomNode+preparingPage)+' ms');
-	createPreferencesTable('anime');
 }
 
 /* Shows a success box for a brief time */
