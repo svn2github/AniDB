@@ -104,3 +104,8 @@ img, a
 {
     border:none;
 }
+
+#layout-main div.report_all div.body ul li
+{
+	border-top:1px solid #FFFFFF;
+}
