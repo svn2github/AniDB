@@ -124,9 +124,9 @@ function prepPage() {
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
 	// apply a function
-	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', false)[0];
+	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', true)[0];
 	if (actionRow) {
-		var submit = getElementsByName(actionRow.getElementsByTagName('input'), 'myamod.doit', false)[0];
+		var submit = getElementsByName(actionRow.getElementsByTagName('input'), 'myamod.doit', true)[0];
 		// i can't change the type of an already set input button on IE so i have to hack around stuff
 		var newSubmit = createButton(submit.name,submit.id,submit.disabled,submit.value,'button',applyMylistState,null);
 		submit.parentNode.replaceChild(newSubmit,submit);
@@ -1520,11 +1520,11 @@ function createMylistAddBox(parentNode,type) {
 		row.getElementsByTagName('td')[0].appendChild(input);
 		tbody.appendChild(row); i++;
 	}
-	select = createSelectArray(null,"addl.viewed","addl.viewed",null,((type == 'anime') ? 1 : 0),{0:{"text":'unwatched'},1:{"text":'watched'}});
+	select = createSelectArray(null,"addl.viewed","addl.viewed",null,Number(mylist_add_viewed_state),{0:{"text":'unwatched'},1:{"text":'watched'}});
 	createFieldValueRow(tbody,'watched'+gODD(i),'Watched',select); i++;
 	var optionArray = {0:{"text":'unknown'},1:{"text":'internal storage (hdd)'},
 						2:{"text":'external storage (cd/dvd/...)'},3:{"text":'deleted'}};
-	select = createSelectArray(null,"addl.state","addl.state",null,0,optionArray);
+	select = createSelectArray(null,"addl.state","addl.state",null,mylist_add_state,optionArray);
 	var row = createFieldValueRow(null,'state'+gODD(i),'State',select); i++;
 	var inlineHelp = document.createElement('a');
 	inlineHelp.className = 'i_inline i_help';
@@ -1537,7 +1537,7 @@ function createMylistAddBox(parentNode,type) {
 	tbody.appendChild(row);
 	optionArray = {0:{"text":' normal/original '},1:{"text":' corrupted version/invalid crc '},
 					2:{"text":' self edited '},100:{"text":' other '}};
-	select = createSelectArray(null,"addl.filestate","addl.filestate",null,0,optionArray);
+	select = createSelectArray(null,"addl.filestate","addl.filestate",null,mylist_add_fstate,optionArray);
 	createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
 	optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
 						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '},15:{"text":' streamed '}};
