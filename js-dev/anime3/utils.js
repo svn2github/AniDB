@@ -600,22 +600,25 @@ function expandRange(range,limit,map,array) {
 	return array;
 }
 function convertRangeToText(range) {
+	//javascript:alert(convertRangeToText("1-3,1001-1002,10001"));
 	var text = '';
 	if (!range) return(text);
 	var rangeGroups = range.split(',');
+	var newRangeGroup = new Array();
 	for (var r = 0; r < rangeGroups.length; r++) {
+		var rangeText = "";
 		var rangeGroup = rangeGroups[r];
 		var rg = rangeGroup.split('-');
-		if (rg.length == 1) text += mapReverseEpisodeNumber(rg[0]);
+		if (rg.length == 1) rangeText += mapReverseEpisodeNumber(rg[0]);
 		else {
-			for (var i = 0; i < rg.length; i++) {
-				text += mapReverseEpisodeNumber(rg[i]);
-				if (i < rg.length-2) text += '-';
-			}
+			var rgGroup = new Array();
+			for (var i = 0; i < rg.length; i++)
+				rgGroup.push(mapReverseEpisodeNumber(rg[i]));
+			rangeText += rgGroup.join('-');
 		}
-		if (r < rg.length-2) text += ',';
+		newRangeGroup.push(rangeText);
 	}
-	return text;
+	return newRangeGroup.join(',');
 }
 
 // GENERAL FUNCTIONS //

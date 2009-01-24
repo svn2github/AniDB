@@ -683,7 +683,8 @@ function updateGroupTable() {
 							}
 						}
 						if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange, totalEps, maps[1], range);}
-						if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
+						//if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
+						//if (group.id == 748) alert(range);
 						cell.replaceChild(makeCompletionBar(null, range, maps), epbar);
 					}
 				}
