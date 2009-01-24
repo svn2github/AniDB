@@ -593,9 +593,14 @@ function expandRange(range,limit,map,array) {
 	for (var r = 0; r < rangeGroups.length; r++) {
 		var rangeGroup = rangeGroups[r];
 		var rg = rangeGroup.split('-');
-		if (Number(rg[0]) >= 1000) return (new Array(limit)); // don't do this for specials and crap.
-		if ( rg.length == 1 ) array[Number(rg[0])-1] = map['type'];
-		else { for( var i = Number(rg[0]); i <= Number(rg[1]); i++) array[ i-1 ] = map['type']; }
+		if (Number(rg[0]) >= 1000) 
+			continue; //return (new Array(limit)); // don't do this for specials and crap.
+		if ( rg.length == 1 ) 
+			array[Number(rg[0])-1] = map['type'];
+		else {
+			for( var i = Number(rg[0]); i <= Number(rg[1]); i++) 
+				array[ i-1 ] = map['type']; 
+		}
 	}
 	return array;
 }
