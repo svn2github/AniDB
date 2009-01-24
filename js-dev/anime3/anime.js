@@ -662,8 +662,31 @@ function updateGroupTable() {
 					cell.setAttribute('anidb:sort',(group.shortName ? group.shortName.toLowerCase() : 'no group'));
 				if (className.indexOf('status') >= 0)
 					cell.setAttribute('anidb:sort',(group.epsInMyListArray && group.epsInMyListArray.length) ? String(group.epsInMyListArray.length) : '0');
-				if (className.indexOf('epbar') >= 0)
+				if (className.indexOf('epbar') >= 0) {
 					cell.setAttribute('anidb:sort',String(group.epCnt));
+					// also do another thing
+					var epbar = getElementsByClassName(cell.getElementsByTagName('span'), 'completion', true)[0];
+					if (epbar != null) {
+						var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue"}, 
+									'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue"}, 
+									'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime"}, 
+									'3' : {'use':false,'type': 3,'desc':"Done by: ",'img':"lightblue"}};
+						var totalEps = (anime.eps ? anime.eps : anime.highestEp);
+						var range = expandRange(null, totalEps, maps[0], null);
+						if (group.relatedGroups.length) {
+							maps[3]['use'] = true;
+							for(var i = 0; i < group.relatedGroups.length; i++) {
+								var relGroup = groups[group.relatedGroups[i]]; // ID existance check needed? 
+								if (!relGroup) continue;
+								maps['desc'] += relGroup.Name + ' ';
+								range = expandRange(relGroup.epRange, totalEps, maps[3], range);
+							}
+						}
+						if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange, totalEps, maps[1], range);}
+						if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
+						cell.replaceChild(makeCompletionBar(null, range, maps), epbar);
+					}
+				}
 				if (className.indexOf('lastep') >= 0)
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
 				if (className.indexOf('rating') >= 0)
@@ -864,8 +887,15 @@ function updateEpisodeTable() {
 						// Loop to see if an entry should get a status, and file state
 						var span = cell.getElementsByTagName('span')[0];
 						if (span) {
-							while (span.childNodes.length) span.removeChild(span.firstChild);
+							// first check if we have the new files icon (because i can't realy figure that out
+							var newFilesIcon = null;
+							while (span.childNodes.length) {
+								if (span.firstChild.nodeName.toLowerCase() == 'span' && span.firstChild.className.indexOf('i_new_icon') >= 0)
+									newFilesIcon = span.firstChild;
+								span.removeChild(span.firstChild);
+							}
 							var icons = createEpisodeIcons(episode);
+							if (newFilesIcon) span.appendChild(newFilesIcon);
 							if (icons['recap']) span.appendChild(icons['recap']);
 							if (icons['comment']) span.appendChild(icons['comment']);
 							if (icons['seen']) span.appendChild(icons['seen']);
@@ -1280,7 +1310,6 @@ function createFileTable(episode) {
 		var file = files[episode.files[f]];
 		if (!file) continue;
 		if (expandedGroups && groupFilter.indexOf(file.groupId) < 0) continue;
-		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		// Filtering stuff
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
@@ -1290,19 +1319,11 @@ function createFileTable(episode) {
 			filterObj.markHidden(file);
 			if (!file.visible) episode.hiddenFiles++;
 		} else file.visible = false; // STUB files should be very hidden, very hidden indeed..
+		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		if (!expandedGroups) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
 			if (!file.visible || (file.type == 'generic' && LAY_HIDEGENERICFILES)) row.style.display = 'none';		
 		}
-/*
-		if (file.type == 'generic') row.className = "generic no_sort";
-		else {
-			if (file.crcStatus == 'valid') row.className = 'good';
-			if (file.crcStatus == 'invalid') row.className = 'bad';
-			if (file.isDeprecated) row.className = 'deprecated';
-			if (!file.avdumped) row.className += ' undumped';
-		}
-*/
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
 	}
@@ -1341,6 +1362,8 @@ function createFileTable(episode) {
 			sortcol(th);
 		}
 	}
+	// add event to file table
+	addCheckboxesEvent(tbody);
 	return table;
 }
 

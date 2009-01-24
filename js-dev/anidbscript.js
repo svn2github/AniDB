@@ -11,13 +11,18 @@
 var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
-	"version":"1.0",
+	"version":"1.02",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"adding jsVersionArray"
+	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
 var usejspopups = true;
+var curPageID = null;
+if (document.getElementById('layout-nav')) {
+	var nav = document.getElementById('layout-nav');
+	curPageID = nav.className.substring(0,nav.indexOf('_nav'));
+}
 
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
@@ -129,6 +134,7 @@ function unhookEvent(element, eventName, callback) { removeEventSimple(element, 
  */
 function addInfoToFooter(text, append) {
 	var footer = document.getElementById('layout-footer');
+	if (!footer) return; // nonav page
 	var p = document.getElementById('layout-footer-info');
 	if (!p) {
 		p = document.createElement('p');
@@ -209,6 +215,46 @@ function ClassToggle(elem, name, mode) {
 	}	
 }
 
+/* This function makes a checkbox change the parent row classname based on it's checked state
+ * @param parent The node where checkboxes will be given this event */
+function addCheckboxesEvent(parent) {
+	var checkboxes = parent.getElementsByTagName('input');
+	for (var i = 0; i < checkboxes.length; i++) {
+		if (checkboxes[i].type != 'checkbox') continue;
+		// apply to the onclick event of the checkboxes a new function
+		addEventSimple(checkboxes[i],"click",function(event) {
+		//checkboxes[i].onclick = function(event) {
+			if (this._parentTR == null) {
+				var MAX_PARENT_DEPTH = 3;
+				var node = this.parentNode;
+				var depth = 0;
+				while (node.nodeName.toLowerCase() != 'tr' && depth < MAX_PARENT_DEPTH) {
+					node = node.parentNode;
+					depth++;
+				}
+				// last check, if this fails ignore this checkbox
+				if (node.nodeName.toLowerCase() == 'tr') {
+					this._parentTR = node;
+					if (node.className.indexOf(' checked') >= 0)
+						node.className =  node.className.replace(' checked','');
+					if (this.checked) node.className += ' checked';
+				} else
+					this._parentTR = 'undefined'; // stop further searches
+			} else if (this._parentTR == 'undefined') {
+				//alert('undefined, boring i know..');
+				return;
+			} else {
+				var node = this._parentTR;
+				if (node.className.indexOf(' checked') >= 0)
+					node.className = node.className.replace(' checked','');
+				if (this.checked) node.className += ' checked';
+			}
+		});
+	}
+}
+
+/* This function gives SHIFT-SELECT abilities to checkboxes
+ * @param parent The node where checkboxes will be given this event */
 function enhanceCheckboxes(parent) {
 	parent._shiftKey = false;
 	parent._lastCheck = null;
@@ -433,20 +479,20 @@ var Magic = {
 	'enable_tabs':(function ()
 		{
 			var elems = document.getElementsByTagName('ul');
-			var selected = CookieGet('tab') || 'tab1';
+			// find out page name
+			var selected = CookieGet((curPageID ? curPageID + "_" : "")+'tab') || 'tab1';
 			for (var i = 0; i < elems.length; i++){				
 				if(elems[i].className == "tabs"){
 					var li = elems[i].getElementsByTagName('li');
 					for (var j = 0; j < li.length; j++){
 						var tab = li[j];
-						if(tab.id == selected)
-						{
+						if(tab.id == selected) {
 							Magic.toggle_tabs(0, tab);
 							selected = 0;
 						}
 						tab.onclick = Magic.toggle_tabs;
 					}
-					if( li.length>0 && selected ){
+					if( li.length>0 && selected ) {
 						Magic.toggle_tabs('tab1', li[0]);
 					}
 				}
@@ -463,7 +509,7 @@ var Magic = {
 						ClassToggle(elems[i], 'selected', 2);						
 					}
 					ClassToggle(tab, 'selected', 1);
-					CookieSet('tab', tab.id);
+					CookieSet((curPageID ? curPageID + "_" : "")+'tab', tab.id);
 					elems = tab.parentNode.parentNode.getElementsByTagName('div');
 					for (var i = 0; i < elems.length; i++){
 						// this isn't a pane so no need to hide it
@@ -491,7 +537,6 @@ var Magic = {
 				}
 				if (!select || !input) break;
 				addEventSimple(select,'change',function() { input.focus(); });
-				//select.onchange = function() { input.focus(); }
 				break;
 			}
 		}),
@@ -524,8 +569,10 @@ var Magic = {
 	'enhanceCheckboxes':(function()
 		{
 			var formElems = document.getElementsByTagName('form');
-			for (var i = 0; i < formElems.length; i++)
+			for (var i = 0; i < formElems.length; i++) {
 				enhanceCheckboxes(formElems[i]);
+				addCheckboxesEvent(formElems[i]);
+			}
 		
 		})
 	};

@@ -751,7 +751,7 @@ function tabWork() {
 					document.getElementById('mylist_add_state').disabled = (!this.checked);
 					document.getElementById('mylist_add_fstate').disabled = (!this.checked);
 					document.getElementById('mylist_add_viewed_state').disabled = (!this.checked);
-				},(use_mylist_add),' Use quick-add instead of normal mylist add',null);
+				},Number(use_mylist_add),' Use quick-add instead of normal mylist add',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -792,7 +792,7 @@ function tabWork() {
 					mylist_get_animeinfo = Number(this.checked); 
 					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
 					document.getElementById('mylist_get_animeinfo_mw').disabled = !this.checked;
-				},(mylist_get_animeinfo),' Get anime information on link hover',null);
+				},Number(mylist_get_animeinfo),' Get anime information on link hover',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -864,7 +864,7 @@ function tabWork() {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { changeOptionValue(this); group_langfilter = this.value; },(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
+				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { changeOptionValue(this); group_langfilter = this.value; },Number(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
@@ -882,7 +882,7 @@ function tabWork() {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.value; },(usejspopups),' Use Javascript popups for anidb::popup',null);
+				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.value; },Number(usejspopups),' Use Javascript popups for anidb::popup',null);
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;

@@ -225,7 +225,7 @@ function createEpisodeIcons(episode) {
 			var fid = episode.files[fe];
 			if (!mylist[fid]) continue;
 			if (mylist[fid].seenDate) {
-				episode.seenDate = mylist[fid].seenDate;
+				if (!episode.seenDate || mylist[fid].seenDate < episode.seenDate) episode.seenDate = mylist[fid].seenDate;
 				icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(episode.seenDate), 'i_seen');
 				break;
 			}
@@ -415,9 +415,9 @@ function createGroupRow(gid,cols,skips) {
 				break;
 			case 'eps':
 				var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue"}, 
-							'1' : {'use':false,'type': 1,'desc':"done: "+group.epRange,'img':"darkblue"}, 
+							'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue"}, 
 							'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime"}, 
-							'3' : {'use':false,'type': 3,'desc':"done by: ",'img':"lightblue"}};
+							'3' : {'use':false,'type': 3,'desc':"Done by: ",'img':"lightblue"}};
 				var totalEps = (anime.eps ? anime.eps : anime.highestEp);
 				var range = expandRange(null, totalEps, maps[0], null);
 				if (group.relatedGroups.length) {
@@ -681,6 +681,7 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 		if (!file.avdumped) classNameAtts.push('undumped');
 		else classNameAtts.push('verified');
 		if (file.pseudoFile || file.isVirtual(eid)) classNameAtts.push('virtual');
+		if (file.isDeprecated) classNameAtts.push('deprecated');
 	} else classNameAtts.push('generic no_sort');
 	row.className = classNameAtts.join(' ');
 	var icons = createFileIcons(file); // get file icons
@@ -1100,7 +1101,7 @@ function createPreferencesTable(type) {
 	var items = new Object();
 	var animeProfile = {'id':"profile-anime",'head':"Profile",'title':"Profile Preferences",'default':true};
 	var mylistProfile = {'id':"profile-mylist",'head':"Profile",'title':"Profile Preferences",'default':true};
-	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences"};
+	var titlePrefs = {'id':"title-prefs",'head':"Title",'title':"Title Preferences",'default':true};
 	var ed2kPrefs = {'id':"ed2k-prefs",'head':"ED2K",'title':"ED2K Link Preferences"};
 	var mylistPrefs = {'id':"mylist-prefs",'head':"Mylist",'title':"Mylist Quick-Add Preferences"};
 	var mylistPrefs2 = {'id':"mylist-prefs2",'head':"Mylist",'title':"Mylist Preferences"};
@@ -1437,7 +1438,7 @@ function createPreferencesTable(type) {
 					document.getElementById('mylist_add_state').disabled = (!this.checked);
 					document.getElementById('mylist_add_fstate').disabled = (!this.checked);
 					document.getElementById('mylist_add_viewed_state').disabled = (!this.checked);
-				},(use_mylist_add),' Use quick-add instead of normal mylist add',null);
+				},Number(use_mylist_add),' Use quick-add instead of normal mylist add',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1579,7 +1580,7 @@ function createPreferencesTable(type) {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { changeOptionValue(this); group_langfilter = this.value; },(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
+				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { changeOptionValue(this); group_langfilter = this.value; },Number(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
 				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';

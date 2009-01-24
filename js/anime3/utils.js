@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"version":"2.2",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author$"
+	"author":"$Author$",
 });
 // TIME/DATE FUNCTIONS //
 
@@ -562,14 +562,14 @@ function makeCompletionBar(parentNode, range, maps) {
 	var len = range.length;
 	if ( len > 300 ) len = 300;
 	var span = document.createElement('span');
-	span.className = 'range eps';
+	span.className = 'completion';
 	if (maps[1]['use'] || maps[2]['use']) {
-		span.setAttribute('anidb:data',maps);
+		//span.setAttribute('anidb:data',maps);
 		span.onmouseout = hideTooltip;
 		span.onmouseover = function onmouseover(event) {
 			var node = document.createElement('div');
 			if (maps[1]['use']) node.appendChild(document.createTextNode(maps[1]['desc']));
-			if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createElement('br')); 
+			if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createTextNode(', ')); 
 			if (maps[2]['use']) node.appendChild(document.createTextNode(maps[2]['desc']));
 			setTooltip(node,true,'auto');
 		}

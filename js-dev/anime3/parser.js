@@ -45,18 +45,18 @@ function CMylistEntry(node) {
   this.fType = null;
   this.relatedEids = new Array();
   for (var i = 0; i < node.childNodes.length; i++) {
-    var sNode = node.childNodes.item(i);
-    if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName.toLowerCase()) {
-      case 'state': this.status = nodeData(sNode); break;
-      case 'fstate': this.fstate = nodeData(sNode); break;
-      case 'seen': this.seen = Number(nodeData(sNode)); this.seenDate = convertTime(sNode.getAttribute('date')); break;
-      case 'source': this.source = nodeData(sNode); break;
-      case 'storage': this.storage = nodeData(sNode); break;
-      case 'other': this.other = nodeData(sNode); break;
+	var sNode = node.childNodes.item(i);
+	if (sNode.nodeType == 3) continue; // Text node, not interested
+	switch (sNode.nodeName.toLowerCase()) {
+	  case 'state': this.status = nodeData(sNode); break;
+	  case 'fstate': this.fstate = nodeData(sNode); break;
+	  case 'seen': this.seen = Number(nodeData(sNode)); this.seenDate = convertTime(sNode.getAttribute('date')); break;
+	  case 'source': this.source = nodeData(sNode); break;
+	  case 'storage': this.storage = nodeData(sNode); break;
+	  case 'other': this.other = nodeData(sNode); break;
 	  case 'releids': this.relatedEids = nodeData(sNode).split(','); break;
-      default: showAlert('mylistEntry for lid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
-    }
+	  default: showAlert('mylistEntry for lid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
+	}
   }
   this.fType = mapFState(this.fstate);
 }
@@ -89,28 +89,28 @@ function CGroupEntry(node) {
   this.stateId = 0;
   this.hasCherryBeenPoped = false; // just to know if we have the files related to this group on list
   for (var i = 0; i < node.childNodes.length; i++) {
-    var sNode = node.childNodes.item(i);
-    if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName.toLowerCase()) {
+	var sNode = node.childNodes.item(i);
+	if (sNode.nodeType == 3) continue; // Text node, not interested
+	switch (sNode.nodeName.toLowerCase()) {
 	  case 'relgroups': this.relatedGroups = nodeData(sNode).split(','); break;
-      case 'name': this.name = nodeData(sNode); break;
-      case 'sname': this.shortName = nodeData(sNode); break;
-      case 'state': this.state = nodeData(sNode); this.stateId = Number(sNode.getAttribute('id')); break;
-      case 'lastep': this.lastEp = epNoToString(nodeData(sNode)); break;
-      case 'lastup': this.lastUp = convertTime(nodeData(sNode)); break;
-      case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
-      case 'cmts': this.commentCount = Number(sNode.getAttribute('cnt')); break;
-      case 'epcnt': this.epCnt = Number(nodeData(sNode)); break;
-      case 'sepcnt': this.sepCnt = Number(nodeData(sNode)); break;
-      case 'eprange': this.epRange = nodeData(sNode); break;
-      case 'aud': var langs = sNode.getElementsByTagName('lang');
+	  case 'name': this.name = nodeData(sNode); break;
+	  case 'sname': this.shortName = nodeData(sNode); break;
+	  case 'state': this.state = nodeData(sNode); this.stateId = Number(sNode.getAttribute('id')); break;
+	  case 'lastep': this.lastEp = epNoToString(nodeData(sNode)); break;
+	  case 'lastup': this.lastUp = convertTime(nodeData(sNode)); break;
+	  case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
+	  case 'cmts': this.commentCount = Number(sNode.getAttribute('cnt')); break;
+	  case 'epcnt': this.epCnt = Number(nodeData(sNode)); break;
+	  case 'sepcnt': this.sepCnt = Number(nodeData(sNode)); break;
+	  case 'eprange': this.epRange = nodeData(sNode); break;
+	  case 'aud': var langs = sNode.getElementsByTagName('lang');
   		  for (var k = 0; k < langs.length; k++) this.audioLangs.push(nodeData(langs[k]));
   		  break;
   		case 'sub': var langs = sNode.getElementsByTagName('lang');
   		  for (var k = 0; k < langs.length; k++) this.subtitleLangs.push(nodeData(langs[k]));
   		  break;
-      default: showAlert('groupEntry for gid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
-    }
+	  default: showAlert('groupEntry for gid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
+	}
   }
 }
 
@@ -126,29 +126,29 @@ function CAnimeEntry(node) {
   this.groups = new Array();
   this.highestEp = 0;
   for (i = 0; i < node.childNodes.length; i++) {
-    var sNode = node.childNodes.item(i);
-    if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName.toLowerCase()) {
-      case 'neps': this.eps = Number(nodeData(sNode)); break;
-      case 'epcnt': this.epCount = Number(nodeData(sNode)); break;
-      case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
-      case 'gcnt': this.groupCount = Number(nodeData(sNode)); break;
+	var sNode = node.childNodes.item(i);
+	if (sNode.nodeType == 3) continue; // Text node, not interested
+	switch (sNode.nodeName.toLowerCase()) {
+	  case 'neps': this.eps = Number(nodeData(sNode)); break;
+	  case 'epcnt': this.epCount = Number(nodeData(sNode)); break;
+	  case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
+	  case 'gcnt': this.groupCount = Number(nodeData(sNode)); break;
 	  case 'filedata':
-      case 'eps': 
-      case 'groups': break; // Will be taken care elsewhere 
-      case 'titles':
-        for (var k = 0; k < sNode.childNodes.length; k++) {
-          var tNode = sNode.childNodes.item(k);
-          if (tNode.nodeType == 3) continue; // Text node, not interested
+	  case 'eps': 
+	  case 'groups': break; // Will be taken care elsewhere 
+	  case 'titles':
+	    for (var k = 0; k < sNode.childNodes.length; k++) {
+	      var tNode = sNode.childNodes.item(k);
+	      if (tNode.nodeType == 3) continue; // Text node, not interested
 		  var ttype = tNode.getAttribute('type');
 		  var tlang = tNode.getAttribute('lang');
 		  var ttitle = nodeData(tNode);
 		  if (!this.titles[ttype]) this.titles[ttype] = new Object();
 		  this.titles[ttype][tlang] = ttitle;
-        }
-        break;
-      default: showAlert('animeEntry for aid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
-    }
+	    }
+	    break;
+	  default: showAlert('animeEntry for aid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
+	}
   }
 }
 
@@ -201,30 +201,30 @@ function CEpisodeEntry(node) {
   this.pseudoFiles = new Array(); // pseudo files are a totaly new thing
   this.update = (node.getAttribute('update') ? Number(node.getAttribute('update')) : 0);
   for (var i = 0; i < node.childNodes.length; i++) {
-    var sNode = node.childNodes.item(i);
-    if (sNode.nodeType == 3) continue; // Text node, not interested
-    switch (sNode.nodeName.toLowerCase()) {
-      case 'flags': this.flags = Number(nodeData(sNode)); break;
-      case 'epno': this.epno = Number(nodeData(sNode)); break;
-      case 'len': this.length = Number(nodeData(sNode)); break;
-      case 'date': this.addDate = convertTime(nodeData(sNode)); this.relDate = convertTime(sNode.getAttribute('rel')) || 0; break;
-      case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
-      case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
-      case 'other': this.other = nodeData(sNode); break;
-      case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
-      case 'titles':
-        for (var k = 0; k < sNode.childNodes.length; k++) {
-          var tNode = sNode.childNodes.item(k);
-          if (tNode.nodeType == 3) continue; // Text node, not interested
-          this.titles[tNode.getAttribute('lang')] = new Object();
+	var sNode = node.childNodes.item(i);
+	if (sNode.nodeType == 3) continue; // Text node, not interested
+	switch (sNode.nodeName.toLowerCase()) {
+	  case 'flags': this.flags = Number(nodeData(sNode)); break;
+	  case 'epno': this.epno = Number(nodeData(sNode)); break;
+	  case 'len': this.length = Number(nodeData(sNode)); break;
+	  case 'date': this.addDate = convertTime(nodeData(sNode)); this.relDate = convertTime(sNode.getAttribute('rel')) || 0; break;
+	  case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
+	  case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
+	  case 'other': this.other = nodeData(sNode); break;
+	  case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
+	  case 'titles':
+	    for (var k = 0; k < sNode.childNodes.length; k++) {
+	      var tNode = sNode.childNodes.item(k);
+	      if (tNode.nodeType == 3) continue; // Text node, not interested
+	      this.titles[tNode.getAttribute('lang')] = new Object();
 		  this.titles[tNode.getAttribute('lang')]['title'] = nodeData(tNode);
 		  this.titles[tNode.getAttribute('lang')]['update'] = (tNode.getAttribute('update')) ? tNode.getAttribute('update') : 0;
 		  this.titles[tNode.getAttribute('lang')]['verify'] = (tNode.getAttribute('verify')) ? tNode.getAttribute('verify') : 0;
-        }
-        break;
+	    }
+	    break;
 	  case 'files': break;
-      default: showAlert('episodeEntry for gid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
-    }
+	  default: showAlert('episodeEntry for gid: '+this.id, node.nodeName, node.nodeName,sNode.nodeName);
+	}
   }
   if (this.relDate == 0) this.date = this.addDate;
   else this.date = this.relDate;
@@ -240,8 +240,8 @@ function CEpisodeEntry(node) {
   h = Math.floor(this.length / 60);
   m = this.length % 60;
   if (h > 0) {
-    if (m > 0) this.length = h + 'h ' + m + 'm';
-    else this.length = h + 'h';
+	if (m > 0) this.length = h + 'h ' + m + 'm';
+	else this.length = h + 'h';
   } else this.length = m + 'm';
 }
 
@@ -326,127 +326,127 @@ function CFileEntry(node) {
   this.isRaw = false;
   // Actualy fill the data;
   for (var i = 0; i < node.childNodes.length; i++) {
-    var sNode1 = node.childNodes.item(i);
-    switch (sNode1.nodeName.toLowerCase()) {
-      case 'size': this.size = Number(nodeData(sNode1)); break;
-      case 'ed2k': this.ed2k = nodeData(sNode1); break;
-      case 'crc': this.crc32 = nodeData(sNode1); break;
-      case 'len': this.length = Number(nodeData(sNode1)); break;
-      case 'ftype': this.fileType = nodeData(sNode1); break;
-      case 'group': this.groupId = Number(sNode1.getAttribute('id')); this.relatedGroups.push(this.groupId); break; 
-      case 'flags': this.flags = Number(nodeData(sNode1)); break;
-      case 'date': 
-        this.date = convertTime(nodeData(sNode1));
-        if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
-        this.relDate = convertTime(sNode1.getAttribute('rel'));
-        break;
-      case 'avdumped': this.avdumped = Number(nodeData(sNode1)); break;
-      case 'vid':
-        this.vidCnt = Number(sNode1.getAttribute('cnt')) || 0;
-        for (var j = 0; j < sNode1.childNodes.length; j++) {
-          var dNode = sNode1.childNodes.item(j);
+	var sNode1 = node.childNodes.item(i);
+	switch (sNode1.nodeName.toLowerCase()) {
+	  case 'size': this.size = Number(nodeData(sNode1)); break;
+	  case 'ed2k': this.ed2k = nodeData(sNode1); break;
+	  case 'crc': this.crc32 = nodeData(sNode1); break;
+	  case 'len': this.length = Number(nodeData(sNode1)); break;
+	  case 'ftype': this.fileType = nodeData(sNode1); break;
+	  case 'group': this.groupId = Number(sNode1.getAttribute('id')); this.relatedGroups.push(this.groupId); break; 
+	  case 'flags': this.flags = Number(nodeData(sNode1)); break;
+	  case 'date': 
+	    this.date = convertTime(nodeData(sNode1));
+	    if (Number(new Date()/1000 - javascriptDate(this.date)/1000) < 86400) this.newFile = true;
+	    this.relDate = convertTime(sNode1.getAttribute('rel'));
+	    break;
+	  case 'avdumped': this.avdumped = Number(nodeData(sNode1)); break;
+	  case 'vid':
+	    this.vidCnt = Number(sNode1.getAttribute('cnt')) || 0;
+	    for (var j = 0; j < sNode1.childNodes.length; j++) {
+	      var dNode = sNode1.childNodes.item(j);
 		  if (dNode.nodeType == 3) continue;
-          switch (dNode.nodeName.toLowerCase()) {
-            case 'stream':
-              var stream = new Object;
-              stream.resW = 0;
-              stream.resH = 0;
-              stream.ar = 'unknown';
-              stream.codec = 'unknown';
-              stream.codec_sname = 'unk';
-              for (var k = 0; k < dNode.childNodes.length; k++) {
-                var stNode = dNode.childNodes.item(k);
+	      switch (dNode.nodeName.toLowerCase()) {
+	        case 'stream':
+	          var stream = new Object;
+	          stream.resW = 0;
+	          stream.resH = 0;
+	          stream.ar = 'unknown';
+	          stream.codec = 'unknown';
+	          stream.codec_sname = 'unk';
+	          for (var k = 0; k < dNode.childNodes.length; k++) {
+	            var stNode = dNode.childNodes.item(k);
 				if (stNode.nodeType == 3) continue;
-                switch (stNode.nodeName.toLowerCase()) {
-                  case 'res': 
-                    stream.resW = Number(stNode.getAttribute('w')) || 0; 
-                    stream.resH = Number(stNode.getAttribute('h')) || 0;                     
-                    if (stream.resW && stream.resH) {
+	            switch (stNode.nodeName.toLowerCase()) {
+	              case 'res': 
+	                stream.resW = Number(stNode.getAttribute('w')) || 0; 
+	                stream.resH = Number(stNode.getAttribute('h')) || 0;                     
+	                if (stream.resW && stream.resH) {
 						this.resolution = stream.resW + 'x' + stream.resH;
 						this.pixelarea = Number(stream.resW)*Number(stream.resH);
 					}
-                    break;
-                  case 'ar': stream.ar = nodeData(stNode); break;
-                  case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
-                  default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStream['+k+']', dNode.nodeName,stNode.nodeName);
-                }
-              } 
-              this.videoTracks.push(stream);
-              break;
-            default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStreams', dNode.nodeName,stNode.nodeName);
-          }
-        }
-        break;
-      case 'aud':
-        this.audCnt = Number(sNode1.getAttribute('cnt')) || 0;
-        for (var j = 0; j < sNode1.childNodes.length; j++) {
-          var dNode = sNode1.childNodes.item(j);
+	                break;
+	              case 'ar': stream.ar = nodeData(stNode); break;
+	              case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
+	              default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStream['+k+']', dNode.nodeName,stNode.nodeName);
+	            }
+	          } 
+	          this.videoTracks.push(stream);
+	          break;
+	        default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'videoStreams', dNode.nodeName,stNode.nodeName);
+	      }
+	    }
+	    break;
+	  case 'aud':
+	    this.audCnt = Number(sNode1.getAttribute('cnt')) || 0;
+	    for (var j = 0; j < sNode1.childNodes.length; j++) {
+	      var dNode = sNode1.childNodes.item(j);
 		  if (dNode.nodeType == 3) continue;
-          switch (dNode.nodeName.toLowerCase()) {
-            case 'stream':
-              var stream = new Object;
-              stream.chan = 'unknown';
-              stream.codec = 'unknown';
-              stream.codec_sname = 'unknown';
-              stream.type = 'normal';
-              for (var k = 0; k < dNode.childNodes.length; k++) {
-                var stNode = dNode.childNodes.item(k);
+	      switch (dNode.nodeName.toLowerCase()) {
+	        case 'stream':
+	          var stream = new Object;
+	          stream.chan = 'unknown';
+	          stream.codec = 'unknown';
+	          stream.codec_sname = 'unknown';
+	          stream.type = 'normal';
+	          for (var k = 0; k < dNode.childNodes.length; k++) {
+	            var stNode = dNode.childNodes.item(k);
 				if (stNode.nodeType == 3) continue;
-                switch (stNode.nodeName.toLowerCase()) {
-                  case 'chan': stream.chan = nodeData(stNode); break;
-                  case 'lang': stream.lang = nodeData(stNode); break;
-                  case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
-                  case 'type': stream.type = nodeData(stNode); break;
-                  default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStream['+k+']', dNode.nodeName,stNode.nodeName);
-                }
-              }
-              this.audioTracks.push(stream);
-              break;
-            default:  showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStreams', dNode.nodeName,stNode.nodeName);
-          }
-        }
-        break;
-      case 'sub':
-        this.subCnt = Number(sNode1.getAttribute('cnt')) || 0;
-        for (var j = 0; j < sNode1.childNodes.length; j++) {
-          var dNode = sNode1.childNodes.item(j);
+	            switch (stNode.nodeName.toLowerCase()) {
+	              case 'chan': stream.chan = nodeData(stNode); break;
+	              case 'lang': stream.lang = nodeData(stNode); break;
+	              case 'codec': stream.codec_sname = stNode.getAttribute('sname'); stream.codec = nodeData(stNode); break;
+	              case 'type': stream.type = nodeData(stNode); break;
+	              default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStream['+k+']', dNode.nodeName,stNode.nodeName);
+	            }
+	          }
+	          this.audioTracks.push(stream);
+	          break;
+	        default:  showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStreams', dNode.nodeName,stNode.nodeName);
+	      }
+	    }
+	    break;
+	  case 'sub':
+	    this.subCnt = Number(sNode1.getAttribute('cnt')) || 0;
+	    for (var j = 0; j < sNode1.childNodes.length; j++) {
+	      var dNode = sNode1.childNodes.item(j);
 		  if (dNode.nodeType == 3) continue;
-          switch (dNode.nodeName.toLowerCase()) {
-            case 'stream':
-              var stream = new Object;
-              stream.type = 'unknown';
-              stream.flags = 0;
-              for (var k = 0; k < dNode.childNodes.length; k++) {
-                var stNode = dNode.childNodes.item(k);
+	      switch (dNode.nodeName.toLowerCase()) {
+	        case 'stream':
+	          var stream = new Object;
+	          stream.type = 'unknown';
+	          stream.flags = 0;
+	          for (var k = 0; k < dNode.childNodes.length; k++) {
+	            var stNode = dNode.childNodes.item(k);
 				if (stNode.nodeType == 3) continue;
-                switch (stNode.nodeName) {
-                  case 'lang': stream.lang = nodeData(stNode); break;
-                  case 'type': stream.type = nodeData(stNode); break;
-                  case 'flags': stream.flags = Number(nodeData(stNode)); break;
-                  default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'subtitleStream['+k+']', dNode.nodeName,stNode.nodeName);
-                }
-              }
-              this.subtitleTracks.push(stream);
-              break;
-            default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'subtitleStreams', sNode1.nodeName,dNode.nodeName);
-          }
-        }
-        break;
-      case 'qual': this.quality = nodeData(sNode1); break;
-      case 'source': this.source = nodeData(sNode1); break;
-      case 'other': this.other = nodeData(sNode1); break;
-      case 'users':
-        for (var j = 0; j < sNode1.childNodes.length; j++) {
-          var sNode2 = sNode1.childNodes.item(j);
-          switch (sNode2.nodeName.toLowerCase()) {
-            case 'all': this.usersTotal = Number(nodeData(sNode2)); break;
-            case 'ukn': this.usersUnknown = Number(nodeData(sNode2)); break;
-            case 'del': this.usersDeleted = Number(nodeData(sNode2)); break;
-          }
-        }
-        break;
-      default: showAlert('fileEntry for fid: '+this.id, node.nodeName, node.nodeName,sNode1.nodeName);
-    }
+	            switch (stNode.nodeName) {
+	              case 'lang': stream.lang = nodeData(stNode); break;
+	              case 'type': stream.type = nodeData(stNode); break;
+	              case 'flags': stream.flags = Number(nodeData(stNode)); break;
+	              default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'subtitleStream['+k+']', dNode.nodeName,stNode.nodeName);
+	            }
+	          }
+	          this.subtitleTracks.push(stream);
+	          break;
+	        default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'subtitleStreams', sNode1.nodeName,dNode.nodeName);
+	      }
+	    }
+	    break;
+	  case 'qual': this.quality = nodeData(sNode1); break;
+	  case 'source': this.source = nodeData(sNode1); break;
+	  case 'other': this.other = nodeData(sNode1); break;
+	  case 'users':
+	    for (var j = 0; j < sNode1.childNodes.length; j++) {
+	      var sNode2 = sNode1.childNodes.item(j);
+	      switch (sNode2.nodeName.toLowerCase()) {
+	        case 'all': this.usersTotal = Number(nodeData(sNode2)); break;
+	        case 'ukn': this.usersUnknown = Number(nodeData(sNode2)); break;
+	        case 'del': this.usersDeleted = Number(nodeData(sNode2)); break;
+	      }
+	    }
+	    break;
+	  default: showAlert('fileEntry for fid: '+this.id, node.nodeName, node.nodeName,sNode1.nodeName);
+	}
   }
   // do some clean up
   if (this.relDate == '') this.relDate = 0;
@@ -708,20 +708,20 @@ function parseConfig(node) {
 function parseGroups(node,aid) {
   if (!node) return false; // no nodes return;
   for (var nd = 0; nd < node.length; nd++) { // find the right groups entry
-    if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
+	if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
   }
   if (node.length > 1 || node.parentNode.nodeName != 'anime') return;
   var groupNodes = node.getElementsByTagName('group');
   var anime = animes[aid];
   for (var i = 0; i < groupNodes.length; i++) {
-    var childNode = groupNodes[i];
-    var groupEntry = new CGroupEntry(childNode);
-    var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
-    groups[groupEntry.id] = groupEntry;
-    aGroups[aGroupEntry.id] = aGroupEntry;
+	var childNode = groupNodes[i];
+	var groupEntry = new CGroupEntry(childNode);
+	var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
+	groups[groupEntry.id] = groupEntry;
+	aGroups[aGroupEntry.id] = aGroupEntry;
 	if (anime.groups.indexOf(groupEntry.id) < 0) anime.groups.push(groupEntry.id);
 	if (!isNaN(Number(groupEntry.lastEp)) && Number(groupEntry.lastEp) > anime.highestEp) anime.highestEp = groupEntry.lastEp;
-    if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
+	if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
   }
   // create the "no group" group entry
   var groupEntry = new Object();
@@ -751,19 +751,19 @@ function parseGroups(node,aid) {
 function parseEpisodes(node,aid) {
   if (!node) return false; // no nodes return;
   for (var nd = 0; nd < node.length; nd++) { // find the right episode entry
-    if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
+	if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
   }
   if (node.length > 1 || node.parentNode.nodeName != 'anime') return; 
   var epNodes = node.getElementsByTagName('ep');
   for (var i = 0; i < epNodes.length; i++) {
-    var childNode = epNodes[i];
-    var episodeEntry = new CEpisodeEntry(childNode);
-    episodeEntry.animeId = aid;
-    episodes[episodeEntry.id] = episodeEntry;
-    epOrder.push(episodeEntry.id);
+	var childNode = epNodes[i];
+	var episodeEntry = new CEpisodeEntry(childNode);
+	episodeEntry.animeId = aid;
+	episodes[episodeEntry.id] = episodeEntry;
+	epOrder.push(episodeEntry.id);
 	parseEpisode(childNode,aid);
 	if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.id);
-    if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
+	if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
   }
 }
 
@@ -775,23 +775,23 @@ function parseAnimes(node) {
   if (!node) return false; // no nodes return;
   var isAnimePage = (uriObj && uriObj['show'] && uriObj['show'].indexOf('anime') >= 0) ? true : false;
   for (var nd = 0; nd < node.length; nd++) { // find the right animes entry
-    if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
+	if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
   }
   if (node.length > 1 || node.parentNode.nodeName != 'root') return; 
   var animeNodes = node.getElementsByTagName('anime');
   for (var i = 0; i < animeNodes.length; i++) {
-    if (animeNodes[i].parentNode.nodeName != 'animes') continue; // there could be other anime nodes
-    var childNode = animeNodes[i];
-    var animeEntry = new CAnimeEntry(childNode);
-    animes[animeEntry.id] = animeEntry;
-    //if (isAnimePage) anime = animes[animeEntry.id]; // assigning a shortcut
+	if (animeNodes[i].parentNode.nodeName != 'animes') continue; // there could be other anime nodes
+	var childNode = animeNodes[i];
+	var animeEntry = new CAnimeEntry(childNode);
+	animes[animeEntry.id] = animeEntry;
+	//if (isAnimePage) anime = animes[animeEntry.id]; // assigning a shortcut
 	anime = animes[animeEntry.id]; // assigning a shortcut
-    var groupNodes = childNode.getElementsByTagName('groups');
-    parseGroups(groupNodes,animeEntry.id); // Parsing Groups
-    var epNodes = childNode.getElementsByTagName('eps');
-    parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
-    animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
-    if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
+	var groupNodes = childNode.getElementsByTagName('groups');
+	parseGroups(groupNodes,animeEntry.id); // Parsing Groups
+	var epNodes = childNode.getElementsByTagName('eps');
+	parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
+	animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
+	if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
   }
 }
 
@@ -809,17 +809,17 @@ function buildFileEntry(node, aid, eid) {
   fileEntry.episodeId = eid;
   fileEntry.animeId = aid;
   if (files[fileEntry.id] && files[fileEntry.id].type == 'stub') { // In case we had a stub file, copy relevant entries
-    var efile = files[fileEntry.id];
-    for (var r in efile.epRelations)
-      fileEntry.epRelations[r] = efile.epRelations[r];
-    for (var r in efile.fileRelations)
-      fileEntry.fileRelations[r] = efile.fileRelations[r];
-    for (var r in efile.relatedFiles)
-      fileEntry.relatedFiles[r] = efile.relatedFiles[r];
-    for (var r in efile.relatedPS)
-      fileEntry.relatedPS[r] = efile.relatedPS[r];
-    for (var r in efile.relatedGroups)
-      fileEntry.relatedGroups[r] = efile.relatedGroups[r];
+	var efile = files[fileEntry.id];
+	for (var r in efile.epRelations)
+	  fileEntry.epRelations[r] = efile.epRelations[r];
+	for (var r in efile.fileRelations)
+	  fileEntry.fileRelations[r] = efile.fileRelations[r];
+	for (var r in efile.relatedFiles)
+	  fileEntry.relatedFiles[r] = efile.relatedFiles[r];
+	for (var r in efile.relatedPS)
+	  fileEntry.relatedPS[r] = efile.relatedPS[r];
+	for (var r in efile.relatedGroups)
+	  fileEntry.relatedGroups[r] = efile.relatedGroups[r];
   }
   // special trick to fool cache issues
   if (!groups[fileEntry.groupId]) createPseudoGroupEntry(fileEntry.groupId);
@@ -841,7 +841,7 @@ function parseEpisode(node, aid) {
   var episode = episodes[eid];
   var nodeTime = new Date();
   for (var i = 0; i < fileNodes.length; i++)
-    buildFileEntry(fileNodes[i],aid, eid);
+	buildFileEntry(fileNodes[i],aid, eid);
   //if (seeTimes) alert('Processing files for eid.'+eid+' took: '+(new Date() - nodeTime)+' ms');
   //var fileTable = createFileTable(episode);
   //document.getElementById('eid_'+episode.id+'_ftHolder').cells[0].className = '';
@@ -854,10 +854,10 @@ function parseEpisode(node, aid) {
 function parseExtraFiles(nodes,eid) {
   if (!nodes) return;
   for (var i = 0; i < nodes.length; i++) {
-    //var fid = Number(nodes[i].getAttribute('id'));
-    var eid = Number(nodes[i].getAttribute('eid'));
-    var aid = Number(nodes[i].getAttribute('aid'));
-    buildFileEntry(nodes[i], aid, eid);
+	//var fid = Number(nodes[i].getAttribute('id'));
+	var eid = Number(nodes[i].getAttribute('eid'));
+	var aid = Number(nodes[i].getAttribute('aid'));
+	buildFileEntry(nodes[i], aid, eid);
   }
 }
 
@@ -868,24 +868,24 @@ function parseExtraFiles(nodes,eid) {
 function parseEpRelations(nodes) {
   if (!nodes) return;
   for (var i = 0; i < nodes.length; i++) {
-    if (nodes[i].nodeName != 'rel') continue;
-    var fid = Number(nodes[i].getAttribute('fid'));
-    var eid = Number(nodes[i].getAttribute('eid'));
-    var startp = Number(nodes[i].getAttribute('startp'));
-    var endp = Number(nodes[i].getAttribute('endp'));
-    var file = files[fid];
-    var episode = episodes[eid];
-    if (!file) { // can happen, the trick is to create a stub fileEntry
-      var node = document.createElement('file');
-      node.setAttribute('id',fid);
-      node.setAttribute('type','stub');
-      file = new CFileEntry(node);
-      file.visible = false;
-      files[fid] = file;
-    }
-    if (!episode) { if (seeDebug) alert('ERR.parseEpRelations: no episode'); continue; } // this realy should not happen
-    if (episode.files.indexOf(fid) < 0) episode.files.push(fid); // add this file to the eps files
-    file.epRelations[eid] = {"startp":startp,"endp":endp};
+	if (nodes[i].nodeName != 'rel') continue;
+	var fid = Number(nodes[i].getAttribute('fid'));
+	var eid = Number(nodes[i].getAttribute('eid'));
+	var startp = Number(nodes[i].getAttribute('startp'));
+	var endp = Number(nodes[i].getAttribute('endp'));
+	var file = files[fid];
+	var episode = episodes[eid];
+	if (!file) { // can happen, the trick is to create a stub fileEntry
+	  var node = document.createElement('file');
+	  node.setAttribute('id',fid);
+	  node.setAttribute('type','stub');
+	  file = new CFileEntry(node);
+	  file.visible = false;
+	  files[fid] = file;
+	}
+	if (!episode) { if (seeDebug) alert('ERR.parseEpRelations: no episode'); continue; } // this realy should not happen
+	if (episode.files.indexOf(fid) < 0) episode.files.push(fid); // add this file to the eps files
+	file.epRelations[eid] = {"startp":startp,"endp":endp};
   }
 }
 
@@ -896,50 +896,50 @@ function parseEpRelations(nodes) {
 function parseFileRelations(nodes) {
   if (!nodes) return;
   for (var i = 0; i < nodes.length; i++) {
-    if (nodes[i].nodeName != 'rel') continue;
-    var fid = Number(nodes[i].getAttribute('fid'));
-    var otherfid = Number(nodes[i].getAttribute('otherfid'));
-    var type = nodes[i].getAttribute('type');
-    if (pseudoFiles.create) {
-      var found = false;
-      for (var pfR in pseudoFiles.relations) {
-        var rel = pseudoFiles.relations[pfR];
-        if (((rel['fid'] == otherfid && rel['otherfid'] == fid) || (rel['fid'] == fid && rel['otherfid'] == otherfid)) && rel['type'] == type) { found = true; break; } 
-      }
-      if (!found) pseudoFiles.relations.push({"fid":fid,"otherfid":otherfid,"type":type,"resolved":false}); // Store this relation
-    }
-    var fileA = files[fid];
-    var fileB = files[otherfid];
-    if (!fileA) { // can happen, the trick is to create a stub fileEntry
-      var node = document.createElement('file');
-      node.setAttribute('id',fid);
-      node.setAttribute('type','stub');
-      fileA = new CFileEntry(node);
-      fileA.visible = false;
-      files[fid] = fileA;
-    }
-    if (!fileB) { // can happen, the trick is to create a stub fileEntry
-      var node = document.createElement('file');
-      node.setAttribute('id',otherfid);
-      node.setAttribute('type','stub');
-      fileB = new CFileEntry(node);
-      fileB.visible = false;
-      files[otherfid] = fileB;
-    }
-    var found = false;
-    for (var fR in fileA.fileRelations) {
-      var rel = fileA.fileRelations[fR];
-      if (rel['dir'] == '=>' && rel['relfile'] == otherfid && rel['type'] == type) { found = true; break; }
-    }
-    if (!found) fileA.fileRelations.push({"dir":'=>',"relfile":otherfid,"type":type});
-    if (fileA.relatedFiles.indexOf(otherfid) < 0) fileA.relatedFiles.push(otherfid);
-    found = false;
-    for (var fR in fileB.fileRelations) {
-      var rel = fileB.fileRelations[fR];
-      if (rel['dir'] == '<=' && rel['relfile'] == fid && rel['type'] == type) { found = true; break; }
-    }
-    if (!found) fileB.fileRelations.push({"dir":'<=',"relfile":fid,"type":type});
-    if (fileB.relatedFiles.indexOf(fid) < 0) fileB.relatedFiles.push(fid);
+	if (nodes[i].nodeName != 'rel') continue;
+	var fid = Number(nodes[i].getAttribute('fid'));
+	var otherfid = Number(nodes[i].getAttribute('otherfid'));
+	var type = nodes[i].getAttribute('type');
+	if (pseudoFiles.create) {
+	  var found = false;
+	  for (var pfR in pseudoFiles.relations) {
+	    var rel = pseudoFiles.relations[pfR];
+	    if (((rel['fid'] == otherfid && rel['otherfid'] == fid) || (rel['fid'] == fid && rel['otherfid'] == otherfid)) && rel['type'] == type) { found = true; break; } 
+	  }
+	  if (!found) pseudoFiles.relations.push({"fid":fid,"otherfid":otherfid,"type":type,"resolved":false}); // Store this relation
+	}
+	var fileA = files[fid];
+	var fileB = files[otherfid];
+	if (!fileA) { // can happen, the trick is to create a stub fileEntry
+	  var node = document.createElement('file');
+	  node.setAttribute('id',fid);
+	  node.setAttribute('type','stub');
+	  fileA = new CFileEntry(node);
+	  fileA.visible = false;
+	  files[fid] = fileA;
+	}
+	if (!fileB) { // can happen, the trick is to create a stub fileEntry
+	  var node = document.createElement('file');
+	  node.setAttribute('id',otherfid);
+	  node.setAttribute('type','stub');
+	  fileB = new CFileEntry(node);
+	  fileB.visible = false;
+	  files[otherfid] = fileB;
+	}
+	var found = false;
+	for (var fR in fileA.fileRelations) {
+	  var rel = fileA.fileRelations[fR];
+	  if (rel['dir'] == '=>' && rel['relfile'] == otherfid && rel['type'] == type) { found = true; break; }
+	}
+	if (!found) fileA.fileRelations.push({"dir":'=>',"relfile":otherfid,"type":type});
+	if (fileA.relatedFiles.indexOf(otherfid) < 0) fileA.relatedFiles.push(otherfid);
+	found = false;
+	for (var fR in fileB.fileRelations) {
+	  var rel = fileB.fileRelations[fR];
+	  if (rel['dir'] == '<=' && rel['relfile'] == fid && rel['type'] == type) { found = true; break; }
+	}
+	if (!found) fileB.fileRelations.push({"dir":'<=',"relfile":fid,"type":type});
+	if (fileB.relatedFiles.indexOf(fid) < 0) fileB.relatedFiles.push(fid);
   }
 }
 
@@ -995,18 +995,18 @@ function makePseudoFile(fileA,fileB,type) {
   file.episodeId = (fileA.episodeId == fileB.episodeId) ? fileA.episodeId : null;
   file.crcStatus = (fileA.crcStatus == fileB.crcStatus) ? fileA.crcStatus : '';
   // Some tests
-    if (file.relatedFiles.indexOf(fileA.id) < 0) file.relatedFiles.push(fileA.id);
-    if (file.relatedFiles.indexOf(fileB.id) < 0) file.relatedFiles.push(fileB.id);
-    if (file.relatedGroups.indexOf(fileA.groupId) < 0) file.relatedGroups.push(fileA.groupId);
-    if (file.relatedGroups.indexOf(fileB.groupId) < 0) file.relatedGroups.push(fileB.groupId);
+	if (file.relatedFiles.indexOf(fileA.id) < 0) file.relatedFiles.push(fileA.id);
+	if (file.relatedFiles.indexOf(fileB.id) < 0) file.relatedFiles.push(fileB.id);
+	if (file.relatedGroups.indexOf(fileA.groupId) < 0) file.relatedGroups.push(fileA.groupId);
+	if (file.relatedGroups.indexOf(fileB.groupId) < 0) file.relatedGroups.push(fileB.groupId);
   // End of tests;
   file.size = fileA.size + fileB.size;
   file.date = (javascriptDate(fileA.date) > javascriptDate(fileB.date)) ? fileA.date : fileB.date;
   if (fileA.relDate > 0 || fileB.relDate > 0) {
-    if (fileA.relDate > 0 && fileB.relDate > 0) file.relDate = (javascriptDate(fileA.relDate) > javascriptDate(fileB.relDate)) ? fileA.relDate : fileB.relDate;
-    else if (fileA.relDate > 0) file.relDate = fileA.relDate;
-    else if (fileB.relDate > 0) file.relDate = fileB.relDate;
-    else file.relDate = 0;
+	if (fileA.relDate > 0 && fileB.relDate > 0) file.relDate = (javascriptDate(fileA.relDate) > javascriptDate(fileB.relDate)) ? fileA.relDate : fileB.relDate;
+	else if (fileA.relDate > 0) file.relDate = fileA.relDate;
+	else if (fileB.relDate > 0) file.relDate = fileB.relDate;
+	else file.relDate = 0;
   }
   file.length = fileA.length + fileB.length;
   file.groupId = (fileA.groupId == fileB.groupId) ? fileA.groupId : 0;
@@ -1014,16 +1014,16 @@ function makePseudoFile(fileA,fileB,type) {
   file.isCensored = (fileA.isCensored == fileB.isCensored) ? fileA.isCensored : 0;
   file.isUncensored = (fileA.isUncensored == fileB.isUncensored) ? fileA.isUncensored : 0;
   if (fileA.type == 'video' || fileB.type == 'video') {
-    if (fileA.type == 'video' && fileB.type == 'video')
-      file.quality = (mapQuality(fileA.quality) > mapQuality(fileB.quality)) ? fileA.quality : fileB.quality;
-    else file.quality = (fileA.type == 'video') ? fileA.quality : fileB.quality;
+	if (fileA.type == 'video' && fileB.type == 'video')
+	  file.quality = (mapQuality(fileA.quality) > mapQuality(fileB.quality)) ? fileA.quality : fileB.quality;
+	else file.quality = (fileA.type == 'video') ? fileA.quality : fileB.quality;
   } else file.quality = fileA.quality;
   if (fileA.resolution == fileB.resolution) file.resolution = fileA.resolution;
   else {
-    if (fileA.resolution != 'unknown' || fileB.resolution  != 'unknown' ) {
-      if (fileA.resolution != 'unknown') file.resolution = fileA.resolution;
-      else file.resolution = fileB.resolution;
-    }
+	if (fileA.resolution != 'unknown' || fileB.resolution  != 'unknown' ) {
+	  if (fileA.resolution != 'unknown') file.resolution = fileA.resolution;
+	  else file.resolution = fileB.resolution;
+	}
   }
   file.source = (fileA.source == fileB.source) ? fileA.source : 'unknown';
   file.usersTotal = fileA.usersTotal + fileB.usersTotal;
@@ -1035,24 +1035,24 @@ function makePseudoFile(fileA,fileB,type) {
   file.newFile = (fileA.newFile || fileB.newFile) ? true : false;
   // This one is a bit dubious (i'm choosing the videoTrack of the file with the greatest version
   if (file.vidCnt) { 
-    if (fileA.vidCnt && fileB.vidCnt)
-      file.videoTracks = (Number(fileA.version.charAt(1)) > Number(fileB.version.charAt(1))) ? fileA.videoTracks : fileB.videoTracks;
-    else if (fileA.vidCnt) file.videoTracks = fileA.videoTracks;
-    else if (fileB.vidCnt) file.videoTracks = fileB.videoTracks;
+	if (fileA.vidCnt && fileB.vidCnt)
+	  file.videoTracks = (Number(fileA.version.charAt(1)) > Number(fileB.version.charAt(1))) ? fileA.videoTracks : fileB.videoTracks;
+	else if (fileA.vidCnt) file.videoTracks = fileA.videoTracks;
+	else if (fileB.vidCnt) file.videoTracks = fileB.videoTracks;
   }
   if (file.audCnt) {
-    for (var a = 0; a < fileA.audioTracks.length; a++)
-      file.audioTracks.push(fileA.audioTracks[a]);
-    for (var a = 0; a < fileB.audioTracks.length; a++)
-      file.audioTracks.push(fileB.audioTracks[a]);
+	for (var a = 0; a < fileA.audioTracks.length; a++)
+	  file.audioTracks.push(fileA.audioTracks[a]);
+	for (var a = 0; a < fileB.audioTracks.length; a++)
+	  file.audioTracks.push(fileB.audioTracks[a]);
   }
   if (file.subCnt) {
-    if (fileA.fileType != 'idx') { // Bogus no sub lang content files
-      for (var s = 0; s < fileA.subtitleTracks.length; s++) file.subtitleTracks.push(fileA.subtitleTracks[s]);
-    }
-    if (fileB.fileType != 'idx') {
-      for (var s = 0; s < fileB.subtitleTracks.length; s++) file.subtitleTracks.push(fileB.subtitleTracks[s]);
-    }
+	if (fileA.fileType != 'idx') { // Bogus no sub lang content files
+	  for (var s = 0; s < fileA.subtitleTracks.length; s++) file.subtitleTracks.push(fileA.subtitleTracks[s]);
+	}
+	if (fileB.fileType != 'idx') {
+	  for (var s = 0; s < fileB.subtitleTracks.length; s++) file.subtitleTracks.push(fileB.subtitleTracks[s]);
+	}
   }
   if (file.crcStatus == 'valid') file.flags += 1;
   if (file.crcStatus == 'invalid') { file.flags += 2; this.isDeprecated = true; }
@@ -1067,16 +1067,16 @@ function makePseudoFile(fileA,fileB,type) {
   fileA.relatedPS.push(file.id);
   fileB.relatedPS.push(file.id);
   if (file.episodeId) {
-    if (!pseudoFiles.listByEp[file.episodeId]) pseudoFiles.listByEp[file.episodeId] = new Array();
-    if (pseudoFiles.listByEp[file.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[file.episodeId].push(file.id);
-    if (episodes[file.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[file.episodeId].pseudoFiles.push(file.id);
+	if (!pseudoFiles.listByEp[file.episodeId]) pseudoFiles.listByEp[file.episodeId] = new Array();
+	if (pseudoFiles.listByEp[file.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[file.episodeId].push(file.id);
+	if (episodes[file.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[file.episodeId].pseudoFiles.push(file.id);
   } else {
-    if (!pseudoFiles.listByEp[fileA.episodeId]) pseudoFiles.listByEp[fileA.episodeId] = new Array();
-    if (!pseudoFiles.listByEp[fileB.episodeId]) pseudoFiles.listByEp[fileB.episodeId] = new Array();
-    if (pseudoFiles.listByEp[fileA.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileA.episodeId].push(file.id);
-    if (pseudoFiles.listByEp[fileB.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileB.episodeId].push(file.id);
-    if (episodes[fileA.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileA.episodeId].pseudoFiles.push(file.id);
-    if (episodes[fileB.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileB.episodeId].pseudoFiles.push(file.id);
+	if (!pseudoFiles.listByEp[fileA.episodeId]) pseudoFiles.listByEp[fileA.episodeId] = new Array();
+	if (!pseudoFiles.listByEp[fileB.episodeId]) pseudoFiles.listByEp[fileB.episodeId] = new Array();
+	if (pseudoFiles.listByEp[fileA.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileA.episodeId].push(file.id);
+	if (pseudoFiles.listByEp[fileB.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileB.episodeId].push(file.id);
+	if (episodes[fileA.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileA.episodeId].pseudoFiles.push(file.id);
+	if (episodes[fileB.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileB.episodeId].pseudoFiles.push(file.id);
   }
 }
 
@@ -1087,59 +1087,59 @@ function makePseudoFile(fileA,fileB,type) {
 function pseudoFilesCreator() {
   if (!pseudoFiles.create || (pseudoFiles.relations && !pseudoFiles.relations.length)) return; // Nothing to do
   for (var i = 0; i < pseudoFiles.relations.length; i++) {
-    var rel = pseudoFiles.relations[i];
-    var fid = rel['fid'];
-    var otherfid = rel['otherfid'];
-    var type = rel['type'];
-    var fileA = files[fid];
-    var fileB = files[otherfid];
-    var resolved = rel['resolved'];
-    if (resolved) continue;
-    if (!fileA || !fileB) { if (seeDebug) alert('ERR.pseudoFilesCreator: borked files'); continue; } // this realy should not happen
-    /*alert('working on relation of type: '+type+' for files\nfid: '+fid+'\notherfid: '+otherfid+
-          '\nrelatedFile.relatedPS['+fileB.relatedPS.length+']: '+fileB.relatedPS);*/
-    if (type == 'bundle') makePseudoFile(fileA,fileB,type);
-    if (type == 'op/end-for' || type == 'external-sub-for' || type == 'external-audio-for') {
-      var file = null;
-      if (fileB.relatedPS && fileB.relatedPS.length) {
-        for (var k = 0; k < fileB.relatedPS.length; k++) {
-          //alert('searching pseudoFiles of fid '+fileB.id+' pF['+fileB.relatedPS[k]+'].type: '+pseudoFiles.list[fileB.relatedPS[k]].type);
-          if (pseudoFiles.list[fileB.relatedPS[k]].type == 'video') { file = pseudoFiles.list[fileB.relatedPS[k]]; break; }
-        }
-        //if (file) alert('id['+(file.pseudoFile ? 'Y' : 'N')+']: '+file.id+' type: '+file.type); 
-        if (!file) makePseudoFile(fileA,fileB,type);
-        else {
-          if (type == 'external-sub-for') {
-            file.subCnt += fileA.subCnt;
-            for (var k = 0; k < fileA.subtitleTracks.length; k++)
-              file.subtitleTracks.push(fileA.subtitleTracks[k]);
-          }
-          if (type == 'external-aud-for') {
-            file.audCnt += fileA.audCnt;
-            for (var k = 0; k < fileA.audioTracks.length; k++)
-              file.audioTracks.push(fileA.audioTracks[k]);
-          }
-          // if (type == 'op/end-for') Nothing should be done in this case
-          file.usersTotal += fileA.usersTotal;
-          file.usersUnknown += fileA.usersUnknown;
-          file.usersDeleted += fileA.usersDeleted;
-          file.size += fileA.size;
-          if (file.relatedFiles.indexOf(fileA.id) < 0) file.relatedFiles.push(fileA.id);
-          if (fileA.relatedPS.indexOf(file.id) < 0) fileA.relatedPS.push(file.id);
-        }
-      } else makePseudoFile(fileA,fileB,type);
-    }
-    pseudoFiles.relations[i]['resolved'] = true;
+	var rel = pseudoFiles.relations[i];
+	var fid = rel['fid'];
+	var otherfid = rel['otherfid'];
+	var type = rel['type'];
+	var fileA = files[fid];
+	var fileB = files[otherfid];
+	var resolved = rel['resolved'];
+	if (resolved) continue;
+	if (!fileA || !fileB) { if (seeDebug) alert('ERR.pseudoFilesCreator: borked files'); continue; } // this realy should not happen
+	/*alert('working on relation of type: '+type+' for files\nfid: '+fid+'\notherfid: '+otherfid+
+	      '\nrelatedFile.relatedPS['+fileB.relatedPS.length+']: '+fileB.relatedPS);*/
+	if (type == 'bundle') makePseudoFile(fileA,fileB,type);
+	if (type == 'op/end-for' || type == 'external-sub-for' || type == 'external-audio-for') {
+	  var file = null;
+	  if (fileB.relatedPS && fileB.relatedPS.length) {
+	    for (var k = 0; k < fileB.relatedPS.length; k++) {
+	      //alert('searching pseudoFiles of fid '+fileB.id+' pF['+fileB.relatedPS[k]+'].type: '+pseudoFiles.list[fileB.relatedPS[k]].type);
+	      if (pseudoFiles.list[fileB.relatedPS[k]].type == 'video') { file = pseudoFiles.list[fileB.relatedPS[k]]; break; }
+	    }
+	    //if (file) alert('id['+(file.pseudoFile ? 'Y' : 'N')+']: '+file.id+' type: '+file.type); 
+	    if (!file) makePseudoFile(fileA,fileB,type);
+	    else {
+	      if (type == 'external-sub-for') {
+	        file.subCnt += fileA.subCnt;
+	        for (var k = 0; k < fileA.subtitleTracks.length; k++)
+	          file.subtitleTracks.push(fileA.subtitleTracks[k]);
+	      }
+	      if (type == 'external-aud-for') {
+	        file.audCnt += fileA.audCnt;
+	        for (var k = 0; k < fileA.audioTracks.length; k++)
+	          file.audioTracks.push(fileA.audioTracks[k]);
+	      }
+	      // if (type == 'op/end-for') Nothing should be done in this case
+	      file.usersTotal += fileA.usersTotal;
+	      file.usersUnknown += fileA.usersUnknown;
+	      file.usersDeleted += fileA.usersDeleted;
+	      file.size += fileA.size;
+	      if (file.relatedFiles.indexOf(fileA.id) < 0) file.relatedFiles.push(fileA.id);
+	      if (fileA.relatedPS.indexOf(file.id) < 0) fileA.relatedPS.push(file.id);
+	    }
+	  } else makePseudoFile(fileA,fileB,type);
+	}
+	pseudoFiles.relations[i]['resolved'] = true;
   }
   // make the rows
   for (var e in pseudoFiles.listByEp) {
-    var epFileTable = document.getElementById('episode'+e+'files');
-    if (!epFileTable) { if (seeDebug) alert('ERR.pseudoFilesCreator: no fileTable'); continue; }
-    for (var k in pseudoFiles.listByEp[e]) {
-      var curPF = document.getElementById('rfid_'+pseudoFiles.listByEp[e][k]+'_eid_'+e);
-      if (!curPF)
-        epFileTable.tBodies[0].appendChild(createFileTableRow(episodes[e],pseudoFiles.list[pseudoFiles.listByEp[e][k]]));
-    }
+	var epFileTable = document.getElementById('episode'+e+'files');
+	if (!epFileTable) { if (seeDebug) alert('ERR.pseudoFilesCreator: no fileTable'); continue; }
+	for (var k in pseudoFiles.listByEp[e]) {
+	  var curPF = document.getElementById('rfid_'+pseudoFiles.listByEp[e][k]+'_eid_'+e);
+	  if (!curPF)
+	    epFileTable.tBodies[0].appendChild(createFileTableRow(episodes[e],pseudoFiles.list[pseudoFiles.listByEp[e][k]]));
+	}
   }
 }
 
@@ -1150,227 +1150,227 @@ filterObj.useDefaultFilters = false;
 filterObj.processingFiles = new Array(); // Auxiliar object that holds temporary results
 /* RULES */
 filterObj.defaultUnfiltered = {0:2,
-                               1:{"fdate":"<,172800"},
-                               2:{"ftype":"==,generic"}};
+								1:{"fdate":"<,172800"},
+								2:{"ftype":"==,generic"}};
 filterObj.unfiltered = filterObj.defaultUnfiltered;
 filterObj.defaultDeprecated = {0:5,
-                            1:{"eusers":">=,50","fusers":"<=,3","fcrc":"!=,valid"},
-                            2:{"fcrc":"==,invalid"},
-                            3:{"fqual":"<=,5"},
-                            4:{"c_sf_fgroup":"==,this","c_rf_fversion":"==,this","c_rf_fcrc":"==,valid","fcrc":"!=,valid","fgroup":"!=,0"},
-                            5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"}}
+							1:{"eusers":">=,50","fusers":"<=,3","fcrc":"!=,valid"},
+							2:{"fcrc":"==,invalid"},
+							3:{"fqual":"<=,5"},
+							4:{"c_sf_fgroup":"==,this","c_rf_fversion":"==,this","c_rf_fcrc":"==,valid","fcrc":"!=,valid","fgroup":"!=,0"},
+							5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"}}
 filterObj.deprecated = filterObj.defaultDeprecated;
 filterObj.defaultVisible = {0:5,
-                            1:{"fdeprecated":"==,true"},
-                            2:{"finmylist":"==,true"},
-                            3:{"fusers":">=,50"},
-                            4:{"fdate":"<,604800"},
-                            5:{"efvisible":"<,1"}};
+							1:{"fdeprecated":"==,true"},
+							2:{"finmylist":"==,true"},
+							3:{"fusers":">=,50"},
+							4:{"fdate":"<,604800"},
+							5:{"efvisible":"<,1"}};
 filterObj.visible = filterObj.defaultVisible;
 filterObj.defaultHidden = {0:4,
-                           1:{"falang":"==,obj.filterAudLang"},
-                           2:{"fslang":"==,obj.filterSubLang"},
-						   3:{"fraw":"==,LAY_HIDERAWS"},
-						   4:{"fgroupfiltered":"==,LAY_HIDEFILTEREDGROUPS"}};
+							1:{"falang":"==,obj.filterAudLang"},
+							2:{"fslang":"==,obj.filterSubLang"},
+							3:{"fraw":"==,LAY_HIDERAWS"},
+							4:{"fgroupfiltered":"==,LAY_HIDEFILTEREDGROUPS"}};
 filterObj.hidden = filterObj.defaultHidden;
 /* AUXILIAR COMPARE FUNCTION */
 filterObj.compare = function compare(symbol, a, b) {
-  switch (symbol) {
-    case '>' : return (a >  b);
-    case '<' : return (a <  b);
-    case '<=': return (a <= b);
-    case '>=': return (a >= b);
-    case '==': return (a == b);
-    case '!=': return (a != b);
-  }
-  return 0;
+	switch (symbol) {
+		case '>' : return (a >  b);
+		case '<' : return (a <  b);
+		case '<=': return (a <= b);
+		case '>=': return (a >= b);
+		case '==': return (a == b);
+		case '!=': return (a != b);
+	}
+	return 0;
 };
 /* TEST FUNCTIONS */
 filterObj['fdate'] = function fdate(file,symbol,value,rthis) {
-  var curDate = Number(new Date()) / 1000;
-  var fDate = Number(javascriptDate(cTimeDate(file.date))) / 1000;
-  if (rthis) return (fDate);
-  return (filterObj.compare(symbol, curDate - fDate, value));
+	var curDate = Number(new Date()) / 1000;
+	var fDate = Number(javascriptDate(cTimeDate(file.date))) / 1000;
+	if (rthis) return (fDate);
+	return (filterObj.compare(symbol, curDate - fDate, value));
 };
 filterObj['eusers'] = function eusers(file,symbol,value,rthis) {
-  var episode = episodes[file.episodeId];
-  if (!episode) return false;
-  if (rthis) return (episode.userCount);
-  return (filterObj.compare(symbol, episode.userCount, value));
+	var episode = episodes[file.episodeId];
+	if (!episode) return false;
+	if (rthis) return (episode.userCount);
+	return (filterObj.compare(symbol, episode.userCount, value));
 };
 filterObj['fusers'] = function fusers(file,symbol,value,rthis) {
-  if (rthis) return (file.usersTotal);
-  return (filterObj.compare(symbol, file.usersTotal, value));
+	if (rthis) return (file.usersTotal);
+	return (filterObj.compare(symbol, file.usersTotal, value));
 };
 filterObj['fcrc'] = function fcrc(file,symbol,value,rthis) {
-  if (rthis) return (file.crcStatus);
-  return (filterObj.compare(symbol, file.crcStatus, value));
+	if (rthis) return (file.crcStatus);
+	return (filterObj.compare(symbol, file.crcStatus, value));
 };
 filterObj['fqual'] = function fqual(file,symbol,value,rthis) {
-  if (rthis) return (mapQuality(file.quality));
-  return (filterObj.compare(symbol, mapQuality(file.quality), value));
+	if (rthis) return (mapQuality(file.quality));
+	return (filterObj.compare(symbol, mapQuality(file.quality), value));
 };
 filterObj['fgroup'] = function fgroup(file,symbol,value,rthis) {
-  if (rthis) return (file.groupId);
-  return (filterObj.compare(symbol, file.groupId, value));
+	if (rthis) return (file.groupId);
+	return (filterObj.compare(symbol, file.groupId, value));
 };
 filterObj['fversion'] = function fversion(file,symbol,value,rthis) {
-  if (rthis) return (file.version);
-  return (filterObj.compare(symbol, file.version, value));
+	if (rthis) return (file.version);
+	return (filterObj.compare(symbol, file.version, value));
 };
 filterObj['finmylist'] = function finmylist(file,symbol,value,rthis) {
-  if (rthis) return ((mylist[file.id]) ? true : false);
-  return (filterObj.compare(symbol, (mylist[file.id]) ? true : false, value));
+	if (rthis) return ((mylist[file.id]) ? true : false);
+	return (filterObj.compare(symbol, (mylist[file.id]) ? true : false, value));
 };
 filterObj['efvisible'] = function efvisible(file,symbol,value,rthis) {
-  var episode = episodes[file.episodeId];
-  if (!episode) return false;
-  if (rthis) return (episode.fileCount - episode.hiddenFiles);
-  return (filterObj.compare(symbol, episode.fileCount - episode.hiddenFiles, value));
+	var episode = episodes[file.episodeId];
+	if (!episode) return false;
+	if (rthis) return (episode.fileCount - episode.hiddenFiles);
+	return (filterObj.compare(symbol, episode.fileCount - episode.hiddenFiles, value));
 };
 filterObj['falang'] = function falang(file,symbol,value,rthis) {
-  if (rthis) return (false);
-  if (file.audioTracks && !file.audioTracks.length) return false;
-  var isInStream = false;
-  if (value == 'obj.filterAudLang') {
-    if (!filterAudLang.length) return (false);
-    for (var al = 0; al < filterAudLang.length; al++) {
-      for (var fal = 0; fal < file.audioTracks.length; fal++) {
-        if (filterObj.compare(symbol, file.audioTracks[fal].lang, filterAudLang[al])) return (false);
-      }    
-    }
-    return (true);
-  } else {
-    for (var fal = 0; fal < file.audioTracks.length; fal++) {
-      if (filterObj.compare(symbol, file.audioTracks[fal].lang, value)) return (false);
-    }
-    return (true);
-  }
-  return (false);    
+	if (rthis) return (false);
+	if (file.audioTracks && !file.audioTracks.length) return false;
+	var isInStream = false;
+	if (value == 'obj.filterAudLang') {
+		if (!filterAudLang.length) return (false);
+		for (var al = 0; al < filterAudLang.length; al++) {
+			for (var fal = 0; fal < file.audioTracks.length; fal++) {
+				if (filterObj.compare(symbol, file.audioTracks[fal].lang, filterAudLang[al])) return (false);
+			}    
+		}
+		return (true);
+	} else {
+		for (var fal = 0; fal < file.audioTracks.length; fal++) {
+			if (filterObj.compare(symbol, file.audioTracks[fal].lang, value)) return (false);
+		}
+		return (true);
+	}
+	return (false);    
 };
 filterObj['fslang'] = function fslang(file,symbol,value,rthis) {
-  if (rthis) return (false);
-  if (file.subtitleTracks && !file.subtitleTracks.length) return false;
-  var isInStream = false;
-  if (value == 'obj.filterSubLang') {
-    if (!filterSubLang.length) return (false);
-    for (var sl = 0; sl < filterSubLang.length; sl++) {
-      for (var fsl = 0; fsl < file.subtitleTracks.length; fsl++) {
-        if (filterObj.compare(symbol, file.subtitleTracks[fsl].lang, filterSubLang[sl])) return (false);
-      }    
-    }
-    return (true); // not found
-  } else {
-    for (var fsl = 0; fsl < file.subtitleTracks.length; fsl++) {
-      if (filterObj.compare(symbol, file.subtitleTracks[fsl].lang, value)) return (false);
-    }
-    return (true); // not found
-  }
-  return (false);    
+	if (rthis) return (false);
+	if (file.subtitleTracks && !file.subtitleTracks.length) return false;
+	var isInStream = false;
+	if (value == 'obj.filterSubLang') {
+		if (!filterSubLang.length) return (false);
+		for (var sl = 0; sl < filterSubLang.length; sl++) {
+			for (var fsl = 0; fsl < file.subtitleTracks.length; fsl++) {
+				if (filterObj.compare(symbol, file.subtitleTracks[fsl].lang, filterSubLang[sl])) return (false);
+			}    
+		}
+		return (true); // not found
+	} else {
+		for (var fsl = 0; fsl < file.subtitleTracks.length; fsl++) {
+			if (filterObj.compare(symbol, file.subtitleTracks[fsl].lang, value)) return (false);
+		}
+		return (true); // not found
+	}
+	return (false);    
 };
 filterObj['ftype'] = function ftype(file,symbol,value,rthis) {
-  if (rthis) return (file.type);
-  return (filterObj.compare(symbol, file.type, value));
+	if (rthis) return (file.type);
+	return (filterObj.compare(symbol, file.type, value));
 };
 filterObj['fsource'] = function fsource(file,symbol,value,rthis) {
-  if (rthis) return (file.source);
-  return (filterObj.compare(symbol, file.source, value));
+	if (rthis) return (file.source);
+	return (filterObj.compare(symbol, file.source, value));
 };
 filterObj['fdeprecated'] = function fdeprecated(file,symbol,value,rthis) {
-  if (rthis) return (file.isDeprecated);
-  return (filterObj.compare(symbol, file.isDeprecated, value));
+	if (rthis) return (file.isDeprecated);
+	return (filterObj.compare(symbol, file.isDeprecated, value));
 };
 filterObj['fraw'] = function fraw(file,symbol,value,rthis) {
-  if (rthis) return (file.isRaw);
-  if (LAY_HIDERAWS && file.isRaw) return true;
-  else return false;
-  //return (filterObj.compare(symbol, file.isRaw, !LAY_HIDERAWS));
+	if (rthis) return (file.isRaw);
+	if (LAY_HIDERAWS && file.isRaw) return true;
+	else return false;
+	//return (filterObj.compare(symbol, file.isRaw, !LAY_HIDERAWS));
 };
 filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
-  var group = groups[file.groupId];
-  if (!group) return false;
-  if (rthis) return (group.filtered);
-  return (filterObj.compare(symbol, group.filtered, LAY_HIDEFILTEREDGROUPS));
+	var group = groups[file.groupId];
+	if (!group) return false;
+	if (rthis) return (group.filtered);
+	return (filterObj.compare(symbol, group.filtered, LAY_HIDEFILTEREDGROUPS));
 };
 
 /* PROCESSING FUCTIONS */
 filterObj.processFile = function processFile(file, operation) {
-  if (!file) return false;
-  var episode = episodes[file.episodeId];
-  if (!episode) return false;
-  var work;
-  switch (operation) {
-    case 'deprecated': if (filterObj.useDefaultFilters) work = filterObj.deprecated; else work = filterObj.defaultDeprecated; break;
-    case 'unfiltered': if (filterObj.useDefaultFilters) work = filterObj.unfiltered; else work = filterObj.defaultUnfiltered; break;
-    case 'visible': if (filterObj.useDefaultFilters) work = filterObj.visible; else work = filterObj.defaultVisible; break;
-    case 'hidden': if (filterObj.useDefaultFilters) work = filterObj.hidden; else work = filterObj.defaultHidden; break;
-    default: return;
-  }
-  for (var r = 1; r <= work[0]; r++) {
-    var priority = work[r];
-    filterObj.processingFiles = new Array();
-    var rulePrResult = null;
-    for (rule in priority) {
-      var initRule = (rule.indexOf('c_sf_') >= 0 || rule.indexOf('c_rf_') >= 0) ? rule.indexOf('c_')+5 : 0; 
-      var ruleName = rule.substr(initRule,rule.length);
-      if (!filterObj[ruleName]) return; // INVALID RULENAME!!!!
-      var sf = (rule.indexOf('c_sf_') >= 0) ? true : false;
-      var rf = (rule.indexOf('c_rf_') >= 0) ? true : false;
-      var symbol = priority[rule].split(',')[0];
-      var value = priority[rule].split(',')[1];
-      if (value == 'this') value = filterObj[ruleName](file,symbol,value,true);
-      var ret;
-      if (sf) {
-        for (var lf = 0; lf < episode.files.length; lf++) {
-          if (episode.files[lf] == file.id) continue;
-          if (filterObj[ruleName](files[episode.files[lf]],symbol,value)) filterObj.processingFiles.push(episode.files[lf]);
-        }
-      } else if (rf) {
-        var result = new Array();
-        for (var lf = 0; lf < filterObj.processingFiles.length; lf++) {
-          if (filterObj[ruleName](files[filterObj.processingFiles[lf]],symbol,value)) result.push(filterObj.processingFiles[lf]);
-        }
-        filterObj.processingFiles = result;
-        if (filterObj.processingFiles && filterObj.processingFiles.length) {
-          if (rulePrResult == null) rulePrResult = true;
-          rulePrResult = rulePrResult & true;
-        } else {
-          if (rulePrResult == null) rulePrResult = false;
-          rulePrResult = rulePrResult & false;
-        }
-      } else {
-        ret = filterObj[ruleName](file,symbol,value);
-        if (rulePrResult == null) rulePrResult = ret;
-        rulePrResult = rulePrResult & ret;
-      }
-    }
-    if (rulePrResult) {
-      switch (operation) {
-        case 'deprecated': file.isDeprecated = true; return file.isDeprecated;
-        case 'unfiltered': file.isDeprecated = false; return file.isDeprecated;
-        case 'visible': file.visible = true; return file.visible;
-        case 'hidden': file.visible = false; return file.visible;
-        default: return;
-      }
-    }
-  }
-  switch (operation) {
-    case 'deprecated': 
-    case 'unfiltered': return file.isDeprecated;
-    case 'visible': 
-    case 'hidden': return file.visible;
-    default: return;
-  }
+	if (!file) return false;
+	var episode = episodes[file.episodeId];
+	if (!episode) return false;
+	var work;
+	switch (operation) {
+		case 'deprecated': if (filterObj.useDefaultFilters) work = filterObj.deprecated; else work = filterObj.defaultDeprecated; break;
+		case 'unfiltered': if (filterObj.useDefaultFilters) work = filterObj.unfiltered; else work = filterObj.defaultUnfiltered; break;
+		case 'visible': if (filterObj.useDefaultFilters) work = filterObj.visible; else work = filterObj.defaultVisible; break;
+		case 'hidden': if (filterObj.useDefaultFilters) work = filterObj.hidden; else work = filterObj.defaultHidden; break;
+		default: return;
+	}
+	for (var r = 1; r <= work[0]; r++) {
+		var priority = work[r];
+		filterObj.processingFiles = new Array();
+		var rulePrResult = null;
+		for (rule in priority) {
+			var initRule = (rule.indexOf('c_sf_') >= 0 || rule.indexOf('c_rf_') >= 0) ? rule.indexOf('c_')+5 : 0; 
+			var ruleName = rule.substr(initRule,rule.length);
+			if (!filterObj[ruleName]) return; // INVALID RULENAME!!!!
+			var sf = (rule.indexOf('c_sf_') >= 0) ? true : false;
+			var rf = (rule.indexOf('c_rf_') >= 0) ? true : false;
+			var symbol = priority[rule].split(',')[0];
+			var value = priority[rule].split(',')[1];
+			if (value == 'this') value = filterObj[ruleName](file,symbol,value,true);
+			var ret;
+			if (sf) {
+				for (var lf = 0; lf < episode.files.length; lf++) {
+					if (episode.files[lf] == file.id) continue;
+					if (filterObj[ruleName](files[episode.files[lf]],symbol,value)) filterObj.processingFiles.push(episode.files[lf]);
+				}
+			} else if (rf) {
+				var result = new Array();
+				for (var lf = 0; lf < filterObj.processingFiles.length; lf++) {
+					if (filterObj[ruleName](files[filterObj.processingFiles[lf]],symbol,value)) result.push(filterObj.processingFiles[lf]);
+				}
+				filterObj.processingFiles = result;
+				if (filterObj.processingFiles && filterObj.processingFiles.length) {
+					if (rulePrResult == null) rulePrResult = true;
+					rulePrResult = rulePrResult & true;
+				} else {
+					if (rulePrResult == null) rulePrResult = false;
+					rulePrResult = rulePrResult & false;
+				}
+			} else {
+				ret = filterObj[ruleName](file,symbol,value);
+				if (rulePrResult == null) rulePrResult = ret;
+				rulePrResult = rulePrResult & ret;
+			}
+		}
+		if (rulePrResult) {
+			switch (operation) {
+				case 'deprecated': file.isDeprecated = true; return file.isDeprecated;
+				case 'unfiltered': file.isDeprecated = false; return file.isDeprecated;
+				case 'visible': file.visible = true; return file.visible;
+				case 'hidden': file.visible = false; return file.visible;
+				default: return;
+			}
+		}
+	}
+	switch (operation) {
+		case 'deprecated': 
+		case 'unfiltered': return file.isDeprecated;
+		case 'visible': 
+		case 'hidden': return file.visible;
+		default: return;
+	}
 };
 filterObj.markDeprecated = function markDeprecated(file) {
-  return (filterObj.processFile(file,'deprecated'));
+	return (filterObj.processFile(file,'deprecated'));
 }
 filterObj.markUnfiltered = function markUnfiltered(file) {
-  return (filterObj.processFile(file,'unfiltered'));
+	return (filterObj.processFile(file,'unfiltered'));
 }
 filterObj.markVisible = function markVisible(file) {
-  return (filterObj.processFile(file,'visible'));
+	return (filterObj.processFile(file,'visible'));
 }
 filterObj.markHidden = function markHidden(file) {
-  return (filterObj.processFile(file,'hidden'));
+	return (filterObj.processFile(file,'hidden'));
 }
