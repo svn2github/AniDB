@@ -1156,9 +1156,9 @@ filterObj.unfiltered = filterObj.defaultUnfiltered;
 filterObj.defaultDeprecated = {0:5,
 							1:{"eusers":">=,50","fusers":"<=,3","fcrc":"!=,valid"},
 							2:{"fcrc":"==,invalid"},
-							3:{"fqual":"<=,5"},
-							4:{"c_sf_fgroup":"==,this","c_rf_fversion":"==,this","c_rf_fcrc":"==,valid","fcrc":"!=,valid","fgroup":"!=,0"},
-							5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"}}
+							3:{"fqual":">,1","fqual":"<=,5"},
+							4:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":"==,this","c_rf_fextension":"==,this","c_rf_fcrc":"==,valid","fcrc":"!=,valid","fgroup":"!=,0"},
+							5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fextension":"==,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"}}
 filterObj.deprecated = filterObj.defaultDeprecated;
 filterObj.defaultVisible = {0:5,
 							1:{"fdeprecated":"==,true"},
@@ -1275,6 +1275,10 @@ filterObj['ftype'] = function ftype(file,symbol,value,rthis) {
 filterObj['fsource'] = function fsource(file,symbol,value,rthis) {
 	if (rthis) return (file.source);
 	return (filterObj.compare(symbol, file.source, value));
+};
+filterObj['fextension'] = function fextension(file,symbol,value,rthis) {
+	if (rthis) return (file.fileType);
+	return (filterObj.compare(symbol, file.fileType, value));
 };
 filterObj['fdeprecated'] = function fdeprecated(file,symbol,value,rthis) {
 	if (rthis) return (file.isDeprecated);
