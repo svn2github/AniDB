@@ -19,10 +19,6 @@ jsVersionArray.push({
 });
 var usejspopups = true;
 var curPageID = null;
-if (document.getElementById('layout-nav')) {
-	var nav = document.getElementById('layout-nav');
-	curPageID = nav.className.substring(0,nav.className.indexOf('_nav'));
-}
 
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
@@ -585,6 +581,11 @@ function InitDefault()
 		return;
 	}
 
+	if (document.getElementById('layout-nav')) {
+		var nav = document.getElementById('layout-nav');
+		curPageID = nav.className.substring(0,nav.className.indexOf('_nav'));
+	}
+
 	//Magic.enable_hover_menu();
 	Magic.enable_a_onclick_by_rel();	//for popup and "open in new window"
 	//Magic.enable_row_kid_classes();		//for styling entire rows by td classes
@@ -597,6 +598,7 @@ function InitDefault()
 	
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
+		
 }
 
 function enable_sort(func){
