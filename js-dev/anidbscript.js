@@ -21,7 +21,7 @@ var usejspopups = true;
 var curPageID = null;
 if (document.getElementById('layout-nav')) {
 	var nav = document.getElementById('layout-nav');
-	curPageID = nav.className.substring(0,nav.indexOf('_nav'));
+	curPageID = nav.className.substring(0,nav.className.indexOf('_nav'));
 }
 
 /* compat */
