@@ -100,9 +100,11 @@ var mylist_add_state = 0;
 var mylist_add_fstate = 0;
 var group_check_type = 0;
 var group_langfilter = 0;
+var anime_get_entityinfo = 1;
 var mylist_get_animeinfo = 0;
 var mylist_get_animeinfo_sz = '150';
 var mylist_get_animeinfo_mw = '450';
+var collapseThumbnails = 1;
 // Just for reference i'll be using this table to convert stuf back and forth
 var animePage_defLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
 var animePage_curLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
@@ -676,7 +678,7 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 	row.id = 'e'+eid+(file.pseudoFile ? 'r' : '')+'f'+fid;
 	classNameAtts = new Array();
 	if (file.type != 'generic') {
-		if (file.crcStatus == 'valid') classNameAtts.push('good');
+		if (file.crcStatus == 'valid' && !file.isDeprecated) classNameAtts.push('good');
 		if (file.crcStatus == 'invalid') classNameAtts.push('invalid');
 		if (!file.avdumped) classNameAtts.push('undumped');
 		else classNameAtts.push('verified');

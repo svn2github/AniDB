@@ -628,14 +628,36 @@ function convertRangeToText(range) {
 
 // GENERAL FUNCTIONS //
 
+/* Replacement functions
+ * @param str String to replace identifiers
+ * @source anime3.formating::convert_input
+ */
+function convert_input(str) {
+	str = str.replace(/\[(p|b|i|u|ul|ol|li)\]/mgi,'<$1>');
+	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)\]/mgi,'</$1>');
+	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
+	str = str.replace(/\[([/])?code\]/mgi,'<$1pre>');
+	str = str.replace(/\<p\>/mgi,'');
+	str = str.replace(/\<\/p\>/mgi,'<br />');
+	str = str.replace(/\[br\]/mgi,'<br />');
+	str = str.replace(/\n/mgi,'<br />');
+	str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
+	str = str.replace(/\<\/ul\>\<br \/\>\<br \/\>/mgi,'</ul></br>');
+	str = str.replace(/\<\/ol\>\<br \/\>\<br \/\>/mgi,'</ol></br>');
+	str = str.replace(/\[url=([^\[\]].+?)\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$2</a>');
+	str = str.replace(/\[url\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$1</a>');
+	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
+	return (str);
+}
+
 /* Function that repaints the stripes of a table
  * @param table Table (or tbody) to paint stripes 
  * @param startAt optional index where to start painting stripes
  */
 function repaintStripes(table, startAt) {
-	if (!table || (table && (table.nodeName != 'TABLE' && table.nodeName != 'TBODY'))) return;
+	if (!table || (table && (table.nodeName.toLowerCase() != 'table' && table.nodeName.toLowerCase() != 'tbody'))) return;
 	if (!startAt) startAt = 0;
-	var tbody = (table.nodeName == 'TABLE') ? table.getElementsByTagName('tbody')[0] : table;
+	var tbody = (table.nodeName.toLowerCase() == 'table') ? table.tBodies[0] : table;
 	if (!tbody) return;
 	var rows = tbody.rows;
 	var g_odd = "";
@@ -643,8 +665,8 @@ function repaintStripes(table, startAt) {
 		var row = rows[i];
 		g_odd = (i % 2) ? "g_odd" : "";
 		if (row.className.indexOf('g_odd') >= 0) row.className = row.className.replace("g_odd","");
-		if (row.className.length > 0) g_odd = " " + g_odd;
-		row.className += g_odd;
+		if (row.className.length > 0) g_odd = g_odd+" ";
+		row.className = g_odd + row.className;
 	}
 }
 
