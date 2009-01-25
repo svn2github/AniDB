@@ -101,7 +101,7 @@ var creatorInfos = new Array(); 	// Creator information
 
 /* Creates a new CharInfo node */
 function CInfo(node) {
-	var type = (node.nodeName.toLowerCase == 'characterdescbyid' ? 'character' : 'creator');
+	var type = (node.nodeName.toLowerCase() == 'characterdescbyid' ? 'character' : 'creator');
 	this.id = Number(node.getAttribute((type == 'character' ? 'charid' : 'creatorid')));
 	this.desc = convert_input(node.getAttribute('desc'));
 	if (this.desc == '') this.desc = '<i>no description</i>';
@@ -134,7 +134,6 @@ function fetchInfoData(type,searchString) {
 function parseEntityData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert('parseData','no root node'); return; }
-	
 	var type = 'character';
 	var cdescNodes = root.getElementsByTagName('characterdescbyid');
 	if (!cdescNodes.length) { type = 'creator'; cdescNodes = root.getElementsByTagName('creatordescbyid'); }
@@ -143,8 +142,18 @@ function parseEntityData(xmldoc) {
 		var infoNode = new CInfo(cdescNodes[d]);
 		if (type == 'character') charInfos[infoNode.id] = infoNode;
 		else creatorInfos[infoNode.id] = infoNode;
-		var a = document.getElementById('cinfo_c'+infoNode.id);
-		if (a) a.className = a.className.replace('i_mylist_ainfo_loading','i_mylist_ainfo');
+		var acid = 'cinfo_c'+(type == 'character' ? 'h' : 'r');
+		var a1 = document.getElementById(acid+'c'+infoNode.id);
+		var a2 = document.getElementById(acid+'s'+infoNode.id);
+		var as = [a1,a2];
+		for (var i = 0; i < as.length; i++) {
+			a = as[i];
+			if (!a) continue;
+			if (a.className.indexOf('i_mylist_ainfo_loading') >= 0)
+				a.className = a.className.replace('i_mylist_ainfo_loading','i_mylist_ainfo');
+			if (a.className.indexOf('i_mylist_ainfo_greyed') >= 0)
+				a.className = a.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo');
+		}
 	}
 }
 
@@ -183,16 +192,25 @@ function showInfoWork(obj,info,isChar) {
 
 /* Function that shows char info (or not) */
 function showCharacterInfo() {
-	var id = Number(this.id.substring(7));
+	var id = Number(this.id.substring(9));
 	if (isNaN(id)) { errorAlert('showCharacterInfo','charid is not a number ['+id+']'); return; }
 	var info = charInfos[id];
 	if (!info) { // fetch data and display later
-		this.title = "";
 		setTooltip('please wait while loading data...');
 		this.className = this.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
 		fetchInfoData("characterbyid",id);
-		this.onmouseover = showCharacterInfo;
-		this.onmouseout = hideTooltip;
+		var acid = 'cinfo_ch';
+		var a1 = document.getElementById(acid+'c'+id);
+		var a2 = document.getElementById(acid+'s'+id);
+		var as = [a1,a2];
+		for (var i = 0; i < as.length; i++) {
+			a = as[i];
+			if (!a) continue;
+			a.title = "";
+			a.className = a.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
+			a.onmouseover = showCharacterInfo;
+			a.onmouseout = hideTooltip;
+		}		
 	} else { // display the data
 		showInfoWork(this,info,true);
 	}
@@ -200,16 +218,24 @@ function showCharacterInfo() {
 
 /* Function that shows char info (or not) */
 function showCreatorInfo() {
-	var id = Number(this.id.substring(7));
+	var id = Number(this.id.substring(9));
 	if (isNaN(id)) { errorAlert('showCreatorInfo','creatorid is not a number ['+id+']'); return; }
 	var info = creatorInfos[id];
 	if (!info) { // fetch data and display later
-		this.title = "";
 		setTooltip('please wait while loading data...');
-		this.className = this.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
 		fetchInfoData("creatorbyid",id);
-		this.onmouseover = showCreatorInfo;
-		this.onmouseout = hideTooltip;
+		var acid = 'cinfo_cr';
+		var a1 = document.getElementById(acid+'c'+id);
+		var a2 = document.getElementById(acid+'s'+id);
+		var as = [a1,a2];
+		for (var i = 0; i < as.length; i++) {
+			a = as[i];
+			if (!a) continue;
+			a.title = "";
+			a.className = a.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
+			a.onmouseover = showCreatorInfo;
+			a.onmouseout = hideTooltip;
+		}	
 	} else { // display the data
 		showInfoWork(this,info,true);
 	}
@@ -272,80 +298,6 @@ function prepPage() {
 			break;
 		}
 		if (isNaN(aid)) return;
-	}
-	// add a collapse function to character and what not rows
-	if (collapseThumbnails || anime_get_entityinfo) {
-		var tables = new Array();
-		var tester = document.getElementById('characterlist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('creatorlist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('seiyuulist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('stafflist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('recomlist');
-		if (tester) tables.push(tester);
-		for (var t = 0; t < tables.length; t++) {
-			var table = tables[t];
-			var tbody = table.tBodies[0];
-			var thead = table.getElementsByTagName('thead')[0];
-			if (!thead) {
-				thead = document.createElement('thead');
-				thead.appendChild(tbody.rows[0]);
-				table.insertBefore(thead,tbody);
-			}
-			for (var r = 0; r < tbody.rows.length; r++) {
-				var row = tbody.rows[r];
-				if (collapseThumbnails) {
-					// add onmouseover/onmouseout effects
-					addEventSimple(row, "mouseover", function showImages(event) {
-						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-						for (var i = 0; i < images.length; i++) {
-							var imageCell = images[i];
-							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-							if (img) img.style.display = '';
-						}
-					});
-					addEventSimple(row, "mouseout", function showImages(event) {
-						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-						for (var i = 0; i < images.length; i++) {
-							var imageCell = images[i];
-							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-							if (img) img.style.display = 'none';
-						}
-					});
-					// collapse images
-					var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
-					for (var i = 0; i < images.length; i++) {
-						var imageCell = images[i];
-						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-						if (img) img.style.display = 'none';
-					}
-				}
-				if (anime_get_entityinfo) {
-					if (table.id != 'characterlist' && table.id != 'creatorlist' && table.id != 'seiyuulist' && table.id != 'stafflist') continue;
-					var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
-					for (var n = 0; n < names.length; n++) {
-						var nameCell = names[n];
-						var a = nameCell.getElementsByTagName('a')[0];
-						if (!a) continue;
-						var id = a.href.substring(a.href.indexOf('id=')+3);
-						var icons = document.createElement('span');
-						icons.className = 'icons';
-						var infoIcon = createIcon(null, 'cinfo', 'removeme', (table.id == 'characterlist' ? showCharacterInfo : showCreatorInfo), 'Click to show information', 'i_mylist_ainfo_greyed');
-						infoIcon.id = 'cinfo_c'+id;
-						//infoIcon.onmouseover = showCharacterInfo;
-						//infoIcon.onmouseout = hideTooltip;
-						icons.appendChild(infoIcon);
-						var label = document.createElement('label');
-						label.appendChild(a);
-						nameCell.appendChild(label);
-						nameCell.insertBefore(icons,label);
-					}
-				}
-			}
-		}
 	}
 	fetchData(aid);
 }
@@ -423,6 +375,81 @@ function parseData(xmldoc) {
 		}
 	}
 	var gEGD = new Date() - t2;
+	// add a collapse function to character and what not rows
+	if (Number(collapseThumbnails) || Number(anime_get_entityinfo)) {
+		var tables = new Array();
+		var tester = document.getElementById('characterlist');
+		if (tester) tables.push(tester);
+		tester = document.getElementById('creatorlist');
+		if (tester) tables.push(tester);
+		tester = document.getElementById('seiyuulist');
+		if (tester) tables.push(tester);
+		tester = document.getElementById('stafflist');
+		if (tester) tables.push(tester);
+		tester = document.getElementById('recomlist');
+		if (tester) tables.push(tester);
+		for (var t = 0; t < tables.length; t++) {
+			var table = tables[t];
+			var tbody = table.tBodies[0];
+			var thead = table.getElementsByTagName('thead')[0];
+			if (!thead) {
+				thead = document.createElement('thead');
+				thead.appendChild(tbody.rows[0]);
+				table.insertBefore(thead,tbody);
+			}
+			for (var r = 0; r < tbody.rows.length; r++) {
+				var row = tbody.rows[r];
+				if (Number(collapseThumbnails)) {
+					// add onmouseover/onmouseout effects
+					addEventSimple(row, "mouseover", function showImages(event) {
+						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+						for (var i = 0; i < images.length; i++) {
+							var imageCell = images[i];
+							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+							if (img) img.style.display = '';
+						}
+					});
+					addEventSimple(row, "mouseout", function showImages(event) {
+						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+						for (var i = 0; i < images.length; i++) {
+							var imageCell = images[i];
+							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+							if (img) img.style.display = 'none';
+						}
+					});
+					// collapse images
+					var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
+					for (var i = 0; i < images.length; i++) {
+						var imageCell = images[i];
+						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+						if (img) img.style.display = 'none';
+					}
+				}
+				if (Number(anime_get_entityinfo)) {
+					if (table.id != 'characterlist' && table.id != 'creatorlist' && table.id != 'seiyuulist' && table.id != 'stafflist') continue;
+					var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
+					for (var n = 0; n < names.length; n++) {
+						var nameCell = names[n];
+						var a = nameCell.getElementsByTagName('a')[0];
+						if (!a) continue;
+						var type = (a.href.indexOf('creator') >= 0 ? 'creator' : 'character');
+						var id = a.href.substring(a.href.indexOf('id=')+3);
+						var icons = document.createElement('span');
+						icons.className = 'icons';
+						var infoIcon = createIcon(null, 'cinfo', 'removeme', (type == 'character' ? showCharacterInfo : showCreatorInfo), 'Click to show information', 'i_mylist_ainfo_greyed');
+						infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+(table.id == 'characterlist' ? 'c' : 's')+id;
+						//infoIcon.onmouseover = showCharacterInfo;
+						//infoIcon.onmouseout = hideTooltip;
+						icons.appendChild(infoIcon);
+						var label = document.createElement('label');
+						label.appendChild(a);
+						nameCell.appendChild(label);
+						nameCell.insertBefore(icons,label);
+					}
+				}
+			}
+		}
+	}
 	t2 = new Date();
 	updateAddToMylistBox();
 	var uAB = new Date() - t2;

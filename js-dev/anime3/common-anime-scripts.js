@@ -100,11 +100,11 @@ var mylist_add_state = 0;
 var mylist_add_fstate = 0;
 var group_check_type = 0;
 var group_langfilter = 0;
-var anime_get_entityinfo = 1;
+var collapseThumbnails = 0;
+var anime_get_entityinfo = 0;
 var mylist_get_animeinfo = 0;
 var mylist_get_animeinfo_sz = '150';
 var mylist_get_animeinfo_mw = '450';
-var collapseThumbnails = 1;
 // Just for reference i'll be using this table to convert stuf back and forth
 var animePage_defLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
 var animePage_curLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
@@ -1135,6 +1135,8 @@ function createPreferencesTable(type) {
 	mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
 	group_check_type = CookieGet('group_check_type') || 0;
 	group_langfilter = CookieGet('group_langfilter') || 1;
+	collapseThumbnails = CookieGet('collapseThumbnails') || 0;
+	anime_get_entityinfo = CookieGet('anime_get_entityinfo') || 0;
 	animePage_curSort = CookieGet('animePage_curSort') || 'default';
 	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
 	var animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
@@ -1498,7 +1500,7 @@ function createPreferencesTable(type) {
 					mylist_get_animeinfo = Number(this.checked); 
 					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
 					document.getElementById('mylist_get_animeinfo_mw').disabled = !this.checked;
-				},(mylist_get_animeinfo),' Get anime information on link hover',null);
+				},Number(mylist_get_animeinfo),' Get anime information on link hover',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1506,7 +1508,7 @@ function createPreferencesTable(type) {
 				if (!mylist_get_animeinfo) ainfoSZ.disabled = true;
 				ainfoSZ.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_sz = this.value; };
 				li.appendChild(ainfoSZ);
-				li.appendChild(document.createTextNode(' Default anime information thumbnail size'));
+				li.appendChild(document.createTextNode(' Default information thumbnail size'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -1514,7 +1516,7 @@ function createPreferencesTable(type) {
 				if (!mylist_get_animeinfo) ainfoMW.disabled = true;
 				ainfoMW.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_mw = this.value; };
 				li.appendChild(ainfoMW);
-				li.appendChild(document.createTextNode(' Default anime information box width'));
+				li.appendChild(document.createTextNode(' Default information box width'));
 				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';
@@ -1625,6 +1627,38 @@ function createPreferencesTable(type) {
 				li.appendChild(defaultSortOrder);
 				li.appendChild(document.createTextNode(' Default sorted column'));
 				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLabledCheckBox(li,'collapseThumbnails','collapseThumbnails',function() { 
+					changeOptionValue(this); 
+					collapseThumbnails = Number(this.checked); 
+				},Number(collapseThumbnails),' Collapse thumbnails on Information tabs',null);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLabledCheckBox(li,'anime_get_entityinfo','anime_get_entityinfo',function() { 
+					changeOptionValue(this); 
+					anime_get_entityinfo = Number(this.checked); 
+					document.getElementById('mylist_get_animeinfo_sz').disabled = !this.checked;
+					document.getElementById('mylist_get_animeinfo_mw').disabled = !this.checked;
+				},Number(anime_get_entityinfo),' Get information on link hover',null);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ainfoSZ = createSelectArray(null,"mylist_get_animeinfo_sz","mylist_get_animeinfo_sz",null,mylist_get_animeinfo_sz,{'150':{"text":'large'},'50x65':{"text":'small'}});
+				if (!anime_get_entityinfo) ainfoSZ.disabled = true;
+				ainfoSZ.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_sz = this.value; };
+				li.appendChild(ainfoSZ);
+				li.appendChild(document.createTextNode(' Default information thumbnail size'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var ainfoMW = createSelectArray(null,"mylist_get_animeinfo_mw","mylist_get_animeinfo_mw",null,mylist_get_animeinfo_mw,{'300':{"text":'small'},'450':{"text":'medium'},'600':{"text":'large'}});
+				if (!anime_get_entityinfo) ainfoMW.disabled = true;
+				ainfoMW.onchange = function() { changeOptionValue(this); mylist_get_animeinfo_mw = this.value; };
+				li.appendChild(ainfoMW);
+				li.appendChild(document.createTextNode(' Default information box width'));
+				ul.appendChild(li);
 				var actionLI = document.createElement('li');
 				actionLI.className = 'action';
 				actionLI.appendChild(document.createTextNode('Actions: '));
@@ -1640,6 +1674,10 @@ function createPreferencesTable(type) {
 					}
 					CookieSet('animePageLayout',tempArray.join(','));
 					CookieSet('animePage_curSort',animePage_curSort);
+					CookieSet('mylist_get_animeinfo_mw',mylist_get_animeinfo_mw);
+					CookieSet('mylist_get_animeinfo_sz',mylist_get_animeinfo_sz);
+					CookieSet('anime_get_entityinfo',anime_get_entityinfo);
+					CookieSet('collapseThumbnails',collapseThumbnails);
 					alert('Current Layout preferences saved.');
 				}
 				actionLI.appendChild(saveInput);
@@ -1667,39 +1705,6 @@ function createPreferencesTable(type) {
 		ultabs.appendChild(li);
 		laytabs.appendChild(ultabs);
 		if (laycontent) laycontent.insertBefore(laytabs,laycontent.firstChild);
-/* // backup
-		// set this before the links
-		if (type != 'mylist') {
-			var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list links', true);
-			if (!links) return;
-			links = links[links.length-1];
-			if (links) {
-				var lastLi = links.getElementsByTagName('li');
-				lastLi = lastLi[lastLi.length-1];
-				var li = document.createElement('li');
-				li.className = (lastLi.className.indexOf('g_odd') < 0 ? 'g_odd' : '');
-				createLink(li, 'Page Preferences', 'removeme', null, function () { var pagePrefs = document.getElementById('layout-prefs'); if(!pagePrefs) return; pagePrefs.style.display = (pagePrefs.style.display == 'none' ? '' : 'none'); }, null, null);
-				links.appendChild(li);
-				links.parentNode.insertBefore(main,links);
-			}
-		}
-		if (type == 'mylist') {
-			var links = getElementsByClassName(document.getElementsByTagName('ul'),'g_list jump', true);
-			var userLinks = getElementsByClassName(document.getElementsByTagName('div'),'user', false)[0];
-			if (!links) return;
-			links = links[links.length-1];
-			if (userLinks) {
-				var ul = userLinks.getElementsByTagName('ul')[0];
-				var lastLi = ul.getElementsByTagName('li');
-				lastLi = lastLi[lastLi.length-1];
-				var li = document.createElement('li');
-				li.className = (lastLi.className.indexOf('g_odd') < 0 ? 'g_odd' : '');
-				createLink(li, 'Page Prefs', 'removeme', null, function () { var pagePrefs = document.getElementById('layout-prefs'); if(!pagePrefs) return; pagePrefs.style.display = (pagePrefs.style.display == 'none' ? '' : 'none'); }, null, null);
-				ul.appendChild(li);			
-			}
-			if (links) links.parentNode.insertBefore(main,links);
-		}
-*/
 	}
 	var ul = laytabs.getElementsByTagName('ul')[0];
 	if (ul) {
