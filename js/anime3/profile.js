@@ -654,6 +654,8 @@ function tabWork() {
 	var mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
 	var mylist_add_state = CookieGet('mylist_add_state') || 0;
 	var mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
+	var collapseThumbnails = CookieGet('collapseThumbnails') || 0;
+	var anime_get_entityinfo = CookieGet('anime_get_entityinfo') || 0;
 	var mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
 	var mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
 	var mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
