@@ -280,6 +280,10 @@ function prepPage() {
 		if (tester) tables.push(tester);
 		tester = document.getElementById('creatorlist');
 		if (tester) tables.push(tester);
+		tester = document.getElementById('seiyuulist');
+		if (tester) tables.push(tester);
+		tester = document.getElementById('stafflist');
+		if (tester) tables.push(tester);
 		tester = document.getElementById('recomlist');
 		if (tester) tables.push(tester);
 		for (var t = 0; t < tables.length; t++) {
@@ -320,7 +324,7 @@ function prepPage() {
 					}
 				}
 				if (anime_get_entityinfo) {
-					if (table.id != 'characterlist' && table.id != 'creatorlist') continue;
+					if (table.id != 'characterlist' && table.id != 'creatorlist' && table.id != 'seiyuulist' && table.id != 'stafflist') continue;
 					var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
 					for (var n = 0; n < names.length; n++) {
 						var nameCell = names[n];
