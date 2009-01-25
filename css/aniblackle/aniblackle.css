@@ -21,6 +21,11 @@ input,
 	border:1px solid #888888;
 }
 
+tr
+{
+	background-color: #000000;
+}
+
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
