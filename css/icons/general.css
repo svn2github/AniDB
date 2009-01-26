@@ -88,16 +88,23 @@
 	background-image: url(../icons/silk/verified.png);
 }
 
-#layout-main th a.inactive{
+th.c_set,
+th.c_setlatin,
+th.c_date,
+th.c_latin,
+th.c_number,
+#layout-main th a.inactive {
 	background: url(../icons/test/arrow_inactive.png) center left no-repeat;
 	padding-left: 11px;
 }
 
-#layout-main th a.descending{
+th.s_forward, 
+#layout-main th a.descending {
 	background: url(../icons/test/arrow_down.png) center left no-repeat;
 	padding-left: 11px;
 }
 
+th.s_reverse,
 #layout-main th a.ascending{
 	background: url(../icons/test/arrow_up.png) center left no-repeat;
 	padding-left: 11px;
