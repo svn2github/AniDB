@@ -1,0 +1,21 @@
+(C) 2009 by sadjoker
+Version: 0.1 (26.01.2009)
+
+A very simple sfv file creator usefull to check the CRC of your files.
+The formate generated is the following:
+;<Anime name>
+<episode n°> <CRC>
+
+Exemple:
+  ;Azumanga Daioh
+  1 1B3DEE5D 
+  2 1349AAFB
+  ...
+  26 443D4DB2
+ 
+  ;Baccano!
+  1 754D61DF
+  ...
+  16 5B4201A9
+
+You will have to replace the episode n° by the name of your file.
