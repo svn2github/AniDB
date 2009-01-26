@@ -213,11 +213,13 @@ div.pagination span a
 	text-transform:capitalize;
 }
 
+/*
 .s_forward,
 th.descending
 {
 	text-decoration:overline;
 }
+*/
 
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
@@ -363,10 +365,11 @@ th.sortable
 	font-style:italic;
 }
 
-#layout-main div.anime_all div.groups td.state.dropped,
-#layout-main div.group_released td.state.dropped,
+/*
 .s_reverse,
-th.ascending
+th.ascending */
+#layout-main div.anime_all div.groups td.state.dropped,
+#layout-main div.group_released td.state.dropped
 {
 	text-decoration:underline;
 }
