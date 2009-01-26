@@ -17,6 +17,7 @@
 			
 		}
 			#layout-main table tr.header th a {
+				margin:-5px; padding:5px;
 				display:block;
 				color:#dbdbdb; background-position:right center;
 			}
