@@ -1,0 +1,16 @@
+sfv-simple anidb.net export template
+Version: 0.3 (27.01.2009)
+
+Changelog:
+
+  0.3 (27.01.2009)
+     - Removed blank lines.
+
+  0.2 (26.01.2009)
+     - Changed file identification to episode number.
+     - Added the date and time of export file generation in the sfv comments
+
+  0.1 (26.01.2009)
+     - First version
+     - Intended use: generating quickly a .sfv file for your whole anime collection in order to check its integrity.
+	 - Tested the identification of files with the AniDB episode name. But not satifactory.
