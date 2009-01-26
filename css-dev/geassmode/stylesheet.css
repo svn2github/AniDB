@@ -1,0 +1,27 @@
+/* Geass Mode 0.1a
+ * by antennen
+ */
+
+/* Import common files */
+@import "../sub/common.css";
+
+/* Import global elements */
+@import "./global/all.css";
+
+/* Import basic layout */
+@import "./layout/all.css";
+
+/* Import pages */
+@import "./pages/all.css";
+
+/* Basic settings */
+body {
+	color:#333;
+	font:normal 13px Helvetica, Verdana, sans-serif;
+	text-align:left;
+}
+
+/* No background when navigation is not present */
+body.nonav {
+	background:#1d1d1d none;
+}

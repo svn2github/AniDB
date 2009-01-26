@@ -1,0 +1,30 @@
+#layout-main .g_content .g_menu {
+	font-size:0.85em;
+}
+	#layout-main .g_content .g_menu h4 {
+		padding:5px 7px 5px 14px;
+		color:#eee; background:#393634;
+		font-size:1.3em; font-weight:normal;
+		text-align:left;
+	}
+	#layout-main .g_content .g_menu h3 {
+		padding:4px 0;
+		text-align:left;
+	}
+	#layout-main .g_content .g_menu div {
+		border-left:5px solid #393634;
+	}
+		#layout-main .g_content .g_menu ul li {
+			padding:0;
+			text-transform:capitalize;
+		}
+			#layout-main .g_content .g_menu ul li > a {
+				padding:2px 8px 2px 14px;
+				display:block;
+				color:#333;
+				border-bottom:1px solid #dbdbdb;
+			}
+			#layout-main .g_content .g_menu ul li > a:hover {
+				color:#000;
+				border-bottom-color:#333;
+			}

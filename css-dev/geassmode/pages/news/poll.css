@@ -1,0 +1,23 @@
+#layout-main div.g_content div.news div.poll {
+	margin-left:290px; margin-bottom:25px; padding:0;
+	background:url(images/layout/border-hack.gif) repeat-x left bottom;
+	border-bottom:none; border-left:5px solid #393634;
+}
+	#layout-main div.g_content div.news div.poll .rtop,
+	#layout-main div.g_content div.news div.poll .rbottom {
+		display:none;
+	}
+	
+	#layout-main div.g_content div.news div.poll div.inner {
+		padding:0;
+		background:none; 
+	}
+		#layout-main div.g_content div.news div.poll div.inner div.question {
+			margin:0; padding:0;
+		}
+			#layout-main div.g_content div.news div.poll div.inner div.question h2 {
+				margin-bottom:1.5em; padding:5px 7px 5px 14px;
+				color:#eee; background:#393634;
+				font-size:1.1em; font-weight: normal;
+				border:none;
+			}

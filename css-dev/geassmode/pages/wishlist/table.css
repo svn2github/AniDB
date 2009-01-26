@@ -1,0 +1,18 @@
+#layout-main div.mywishlist_all div.g_section form table.wishlist {
+	margin:0 0 20px 3px;
+}
+	#layout-main div.mywishlist_all div.g_section form table.wishlist th {
+		font-size:0.8em;
+	}
+		#layout-main div.mywishlist_all div.g_section form table.wishlist th abbr {
+			display:none;
+		}
+	#layout-main div.mywishlist_all div.g_section form table.wishlist tr.action td {
+		padding:3px 0;
+	}
+		#layout-main div.mywishlist_all div.g_section form table.wishlist tr.action td textarea,
+		#layout-main div.mywishlist_all div.g_section form table.wishlist tr.action td select,
+		#layout-main div.mywishlist_all div.g_section form table.wishlist tr.action td button,
+		#layout-main div.mywishlist_all div.g_section form table.wishlist tr.action td input {
+			vertical-align:middle;
+		}

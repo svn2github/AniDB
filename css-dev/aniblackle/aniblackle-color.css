@@ -213,3 +213,10 @@ input[type="submit"]:hover,
 {
 	background-color:#888888;
 }
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: #000000;
+}

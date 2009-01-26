@@ -281,5 +281,6 @@ h4,
 
 #layout-main div.tabbed_pane ul.tabs
 {
-	margin:0 0 1px;
+	text-align:left;
+	margin:1px 1px 1px 6px;
 }

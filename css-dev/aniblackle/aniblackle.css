@@ -14,7 +14,23 @@ button,
 select,
 textarea,
 input,
-#layout-search input.text
+#layout-search input.text,
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main div.tabbed_pane div.body
 {
 	border:1px solid #888888;
+}
+
+tr
+{
+	background-color: #000000;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom:1px double #000000;
+	border-left:1px solid #888888;
+	border-right:1px solid #888888;
+	border-top:1px solid #888888;
 }
