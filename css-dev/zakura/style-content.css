@@ -409,6 +409,7 @@ th.c_number,
 	background-image:url(images/buttons/updown.gif);
 	background-position:right center;
 	background-repeat:no-repeat;
+	background-color:#565ab9;
 	cursor:pointer;
 	padding-right:16px;
 }
