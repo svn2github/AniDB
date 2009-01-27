@@ -1,11 +1,11 @@
 (C) 2009 by sadjoker
-Version: 0.4 (26.01.2009)
+Version: 0.5 (28.01.2009)
 
-A very simple sfv file creator usefull to check the CRC of your files.
-The formate generated is the following:
+A very simple sfv file creator useful to check the CRC of your files.
+The format generated is the following:
 ;"Anime name"
 "episode number (2 digits)" "CRC"
 
 If there is no CRC defined, the CRC will be replace by "no_CRC".
-Of cource, you will have to replace the episode number by the actual names of your files
-before being able to use it.
+The files with the generic or deleted status are not listed.
+Of course, you will have to replace the episode number by the actual names of your files before being able to use it.

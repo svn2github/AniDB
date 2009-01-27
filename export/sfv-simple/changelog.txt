@@ -1,7 +1,11 @@
 sfv-simple anidb.net export template
-Version: 0.4 (27.01.2009)
+Version: 0.5 (28.01.2009)
 
 Changelog:
+
+  0.5 (28.01.2009)
+     - Doesn't list animes with deleted status.
+     - Doesn't list files with generic or deleted status.
 
   0.4 (27.01.2009)
      - Add check to see if there no CRC.
