@@ -712,13 +712,17 @@ function createFilesTable(eid) {
 	for (var i = 0; i < episode.files.length; i++) {
 		var fid = episode.files[i];
 		if (!mylist[fid]) continue;
+		var file = files[fid];
+		filterObj.markDeprecated(file);
+		//if (Number(fid) == 162496) alert(file.isDeprecated);
 		var row = createFileRow(eid,fid,fileCols,fileSkips);
-		row.className = ((i % 2) ? '' : 'g_odd ') + 'files';
+		//row.className = ((i % 2) ? '' : 'g_odd ') + 'files';
 		tbody.appendChild(row);
 	}
+	repaintStripes(tbody);
 	// Piece it all together
 	table.appendChild(tbody);
-	init_sorting(table);
+	init_sorting(table,'epno','down');
 	insertCell.appendChild(table);
 	insertRow.appendChild(insertCell);
 	return insertRow;
@@ -818,14 +822,13 @@ function createEpisodeTable(aid) {
 			var eid = anime.episodes[i];
 			var row = createEpisodeRow(aid,eid,epCols,epSkips);
 			var classNames = row.className.split(' ');
-			classNames.push((i % 2) ? '' : 'g_odd');
+			//classNames.push((i % 2) ? '' : 'g_odd');
 			classNames.push('files');
 			row.className = classNames.join(' ');
 			tbody.appendChild(row);
 			row = createFilesTable(eid);
 			tbody.appendChild(row);
 		}
-		table.appendChild(tbody);
 	} else { // only show files
 		table.className = 'filelist';
 		table.id = 'a'+aid+'_filesTable';
@@ -843,17 +846,16 @@ function createEpisodeTable(aid) {
 			for (var f = 0; f < episode.files.length; f++) {
 				var fid = episode.files[f];
 				if (!mylist[fid]) continue;
+				var file = files[fid];
+				filterObj.markDeprecated(file);
 				var row = createFileRow(eid,fid,fileCols,fileSkips);
 				tbody.appendChild(row);
 			}
 		}
-		for (var i = 0 ; i < tbody.rows.length; i++) {
-			var classNames = tbody.rows[i].className.split(' ');
-			classNames.push((i % 2) ? '' : 'g_odd');
-			tbody.rows[i].className = classNames.join(' ');
-		}
-		table.appendChild(tbody);
 	}
+	repaintStripes(tbody);
+	table.appendChild(tbody);
+	init_sorting(table,'epno','down');
 	if (uid == ruid) {
 		var tfoot = createEpisodeTableFoot(colSpan,aid);
 		var inputs = tfoot.getElementsByTagName('input');

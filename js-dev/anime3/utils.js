@@ -927,7 +927,6 @@ function findMylistEpEntries(eid) {
 
 // SORTING Functions //
 
-.0
 function c_undefined_simp(a, b) {
 	if (a < b) return -1;
 	if (a > b) return 1;
@@ -1063,7 +1062,7 @@ function init_sorting(node,ident,sortico) {
 			var identifier = headinglist[i].className.substring(0,headinglist[i].className.indexOf(" ")) || headinglist[i].className;
 			if (identifier.indexOf(ident) >= 0) {
 				if (sortico && sortico.length > 0) {
-					if (sortico == 'up')		headinglist[i].className += ' s_forward';
+					if (sortico == 'up')	headinglist[i].className += ' s_forward';
 					if (sortico == 'down')	headinglist[i].className += ' s_reverse';
 				}
 			}
@@ -1273,9 +1272,9 @@ function applyFormat(identifier, file, episode, anime, group) {
   identifier = identifier.replace("%grn",(group) ? group.name : '');
   identifier = identifier.replace("%qual",(file.quality != 'unknown') ? file.quality : "");
   identifier = identifier.replace("%src",file.source);
-  identifier = identifier.replace("%vcodec",(file.type == 'video') ? file.videoTracks[0].codec : "");
-  identifier = identifier.replace("%acodec",(file.type == 'video' || file.type == 'audio') ? file.audioTracks[0].codec : "");
-  identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
+  identifier = identifier.replace("%vcodec",(file.type == 'video' && file.videoTracks.length) ? file.videoTracks[0].codec : "");
+  identifier = identifier.replace("%acodec",((file.type == 'video' || file.type == 'audio') && file.audioTracks.length) ? file.audioTracks[0].codec : "");
+  identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks.length && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
   identifier = identifier.replace("%res",(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
   identifier = identifier.replace("%eps",anime.eps);
   identifier = identifier.replace("%atype",(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");

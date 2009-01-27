@@ -21,7 +21,7 @@ jsVersionArray.push({
 var genFileCols = [ {'name':"check-mylist",'classname':"check",'header':"S",'abbr':"Check/uncheck files"},
 					{'name':"check-anime",'classname':"check",'header':"S",'abbr':"Check/uncheck files"},
 					{'name':"fid",'classname':"file id icons",'header':"F",'abbr':"File details/FID",'headclass':"file",'sort':"c_set"},
-					{'name':"epno",'classname':"epno",'header':"Epno",'abbr':"Episode number",'sort':"c_setlatin"}, 
+					{'name':"epno",'classname':"epno",'header':"Epno",'abbr':"Episode number",'sort':"c_set"}, 
 					{'name':"group",'classname':"name group",'header':"Group",'headclass':"group",'sort':"c_setlatin"},
 					{'name':"size",'classname':"size",'nogenerics':true,'header':"Size",'sort':"c_set"}, 
 					{'name':"crc",'classname':"crc",'nogenerics':true,'header':"CRC",'sort':"c_latin"},
@@ -723,7 +723,7 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 				break;
 			case 'epno':
 				var epno = createTextLink(null, episode.typeChar+episode.epno, 'animedb.pl?show=ep&eid='+eid, null, null, null, null);
-				createCell(row, col['classname'], epno, null, colSpan);
+				createCell(row, col['classname'], epno, mapEpisodeNumber(episode.typeChar+episode.epno), colSpan);
 				break;
 			case 'group':
 				if (file.type == 'generic') {
