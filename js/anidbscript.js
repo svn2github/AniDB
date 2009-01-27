@@ -224,12 +224,12 @@ function addCheckboxesEvent(parent) {
 				var MAX_PARENT_DEPTH = 3;
 				var node = this.parentNode;
 				var depth = 0;
-				while (node.nodeName && node.nodeName.toLowerCase() != 'tr' && depth < MAX_PARENT_DEPTH) {
+				while (node && node.nodeName && node.nodeName.toLowerCase() != 'tr' && depth < MAX_PARENT_DEPTH) {
 					node = node.parentNode;
 					depth++;
 				}
 				// last check, if this fails ignore this checkbox
-				if (node.nodeName && node.nodeName.toLowerCase() == 'tr') {
+				if (node && node.nodeName && node.nodeName.toLowerCase() == 'tr') {
 					this._parentTR = node;
 					if (node.className.indexOf(' checked') >= 0)
 						node.className =  node.className.replace(' checked','');
@@ -241,7 +241,7 @@ function addCheckboxesEvent(parent) {
 				return;
 			} else {
 				var node = this._parentTR;
-				if (node.className && node.className.indexOf(' checked') >= 0)
+				if (node && node.className && node.className.indexOf(' checked') >= 0)
 					node.className = node.className.replace(' checked','');
 				if (this.checked) node.className += ' checked';
 			}
