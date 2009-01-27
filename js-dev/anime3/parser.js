@@ -940,6 +940,9 @@ function parseFileRelations(nodes) {
 	}
 	if (!found) fileB.fileRelations.push({"dir":'<=',"relfile":fid,"type":type});
 	if (fileB.relatedFiles.indexOf(fid) < 0) fileB.relatedFiles.push(fid);
+	// deprecate files based on this
+	if (type == 'newer-ver-of')
+		fileB.isDeprecated = true;
   }
 }
 
@@ -1367,6 +1370,7 @@ filterObj.processFile = function processFile(file, operation) {
 	}
 };
 filterObj.markDeprecated = function markDeprecated(file) {
+	if (file.isDeprecated) return true;
 	return (filterObj.processFile(file,'deprecated'));
 }
 filterObj.markUnfiltered = function markUnfiltered(file) {
