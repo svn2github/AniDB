@@ -1,7 +1,11 @@
 sfv-simple anidb.net export template
-Version: 0.3 (27.01.2009)
+Version: 0.4 (27.01.2009)
 
 Changelog:
+
+  0.4 (27.01.2009)
+     - Add check to see if there no CRC.
+	 - Episode number on 2 digits.
 
   0.3 (27.01.2009)
      - Removed blank lines.
