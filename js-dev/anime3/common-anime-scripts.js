@@ -116,6 +116,22 @@ var virtualDiv = document.createElement('div');
 var arePrefsShown = false;
 var defPrefTab = 0;
 
+/* This is an auxiliar function that adds/alters a new definition to a given attribute from the cols
+ * @param name Name of the column
+ * @param cols Cols var
+ * @param defName Definition name
+ * @param defValue Definition value
+ */
+function addColDefinition(name,cols,defName,defValue) {
+	var index = -1;
+	for (var i = 0; i < cols.length; i++) {
+		if (cols[i]['name'] != name) continue;
+		index = i;
+		break;
+	}
+	if (index > -1)
+		cols[index][defName] = defValue;
+}
 /* This is an auxiliar function that removes a given attribute from the cols
  * @param name Name of the column to remove
  * @param cols Cols var

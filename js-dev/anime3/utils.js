@@ -968,8 +968,9 @@ function get_blank(node) {
 	return "";
 }
 function get_anidbsort(node) {
-  // Should be using node.getAttributeNS("http://anidb.info/markup","sort");
-	return node.getAttribute("anidb:sort");
+	// Should be using node.getAttributeNS("http://anidb.info/markup","sort");
+	var ret = node.getAttribute("anidb:sort");
+	return (ret ? ret : 0);
 }
 
 function get_date(node) {
@@ -1131,8 +1132,11 @@ function sortcol(node) {
 	//alert(identifier+' at '+sortIndex+' in '+rowlist.length);
 	while (rowlist.length > sortIndex) {
 		var cRow = rowlist[sortIndex];
-		var cellList = cRow.getElementsByTagName('td');
-		if (cellList[cellIdx].className.indexOf(identifier) < 0) { // do this the hard way
+		var cellList = cRow.cells;
+		if (!cellList[cellIdx]) { // odd case?
+			found = false;
+		} else if (cellList[cellIdx].className.indexOf(identifier) < 0) { // do this the hard way
+			var found = false;
 			for (var k = 0; k < cellList.length; k++) {
 				var cell = cellList[k];
 				if (cell.className.indexOf(identifier) < 0) continue; // next cell
@@ -1141,11 +1145,22 @@ function sortcol(node) {
 				cloneTB.appendChild(cRow);
 				sortmap[cellid] = cloneTB.lastChild;
 				cellIdx = k;
+				found  = true;
 				break; // we allready found our cell no need to continue;
 			}
 		} else { // we allready know the index just do the simple version
 			var cell = cellList[cellIdx];
-			var cellid = i+"|"+funcmap['getval'](cell);
+			if (cell.className.indexOf(identifier) >= 0) { // skip if this cell is for example a colspan
+				var cellid = i+"|"+funcmap['getval'](cell);
+				sortlist.push(cellid);
+				cloneTB.appendChild(cRow);
+				sortmap[cellid] = cloneTB.lastChild;
+				found = true;
+			}
+		}
+		// We do this in case we hit a colspan for example.
+		if (!found) {
+			var cellid = i+"|"+0;
 			sortlist.push(cellid);
 			cloneTB.appendChild(cRow);
 			sortmap[cellid] = cloneTB.lastChild;
@@ -1163,10 +1178,9 @@ function sortcol(node) {
 
 	for (var i = 0; i < sortlist.length; i++) {
 		var row = sortmap[sortlist[i]];
-		if (!(i%2)) { row.className = row.className.replace(/ g_odd|g_odd/,"") + " g_odd"; }
-		else { row.className = row.className.replace(/ g_odd|g_odd/,""); }
 		pContainer.appendChild(row);
 	}
+	repaintStripes(pContainer);
 	container.style.display = '';
 }
 

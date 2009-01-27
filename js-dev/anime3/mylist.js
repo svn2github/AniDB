@@ -303,6 +303,9 @@ function parseData(xmldoc) {
 	var aid = root.getElementsByTagName('anime')[0];
 	if (!aid) { errorAlert('parseData','no anime node'); return; }
 	aid = Number(aid.getAttribute('id'));
+	// we now have the prefereces, so i can add a new sorting col if avaialable (?)
+	if (config['irc']['IRC_SHOWFILESOURCE'])
+		addColDefinition('mylist-source',fileCols,'sort',"c_latin");
 	createEpisodeTable(aid);
 }
 
