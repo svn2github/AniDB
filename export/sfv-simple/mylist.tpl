@@ -2,5 +2,5 @@
 ; http://anidb.info/
 <tmpl_loop name=loop_anime>
 ;<tmpl_var name=data_anime_name><tmpl_loop name=loop_ep><tmpl_loop name=loop_file>
-<tmpl_if expr="data_ep_epno < 10">0</tmpl_if><tmpl_var name=data_ep_epno> <tmpl_if name=data_file_crc><tmpl_var name=data_file_crc><tmpl_else>no_CRC</tmpl_loop></tmpl_loop>
+<tmpl_if expr="data_ep_epno < 10">0</tmpl_if><tmpl_var name=data_ep_epno> <tmpl_if name=data_file_crc><tmpl_var name=data_file_crc><tmpl_else>no_CRC</tmpl_if></tmpl_loop></tmpl_loop>
 </tmpl_loop>
