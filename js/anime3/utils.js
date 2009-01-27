@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"version":"2.2",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author$",
+	"author":"$Author$"
 });
 // TIME/DATE FUNCTIONS //
 
