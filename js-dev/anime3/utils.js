@@ -649,27 +649,6 @@ function convert_input(str) {
 	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
 	return (str);
 }
-
-/* Function that repaints the stripes of a table
- * @param table Table (or tbody) to paint stripes 
- * @param startAt optional index where to start painting stripes
- */
-function repaintStripes(table, startAt) {
-	if (!table || (table && (table.nodeName.toLowerCase() != 'table' && table.nodeName.toLowerCase() != 'tbody'))) return;
-	if (!startAt) startAt = 0;
-	var tbody = (table.nodeName.toLowerCase() == 'table') ? table.tBodies[0] : table;
-	if (!tbody) return;
-	var rows = tbody.rows;
-	var g_odd = "";
-	for (var i = startAt; i < rows.length; i++) {
-		var row = rows[i];
-		g_odd = (i % 2) ? "g_odd" : "";
-		if (row.className.indexOf('g_odd') >= 0) row.className = row.className.replace("g_odd","");
-		if (row.className.length > 0) g_odd = g_odd+" ";
-		row.className = g_odd + row.className;
-	}
-}
-
 /* Function that alerts the user for errors
  * @param func Name of the function
  * @param process 
@@ -928,32 +907,33 @@ function findMylistEpEntries(eid) {
 // SORTING Functions //
 
 function c_undefined_simp(a, b) {
-	if (a < b) return -1;
-	if (a > b) return 1;
+	if (a[1] < b[1]) return -1;
+	if (a[1] > b[1]) return 1;
 	return 0;
 }
 function c_undefined(a, b) {
-  return a.split('|')[0] - b.split('|')[0];
+	return a[1] - b[1];
 }
-function c_undefined_r(b, a) {
-  return b.split('|')[0] - a.split('|')[0];
+function c_undefined_r(a, b) {
+	return c_undefined(b, a);
 }
 function c_string(a, b) {
-  if (a.split('|')[1] < b.split('|')[1]) return -1;
-  if (a.split('|')[1] > b.split('|')[1]) return 1;
-	return a.split('|')[0] - b.split('|')[0];	
+	if (a[1] < b[1]) return -1;
+	if (a[1] > b[1]) return 1;
+	return a[0] - b[0];	
 }
-function c_string_r(b, a) {
-  if (a.split('|')[1] < b.split('|')[1]) return -1;
-  if (a.split('|')[1] > b.split('|')[1]) return 1;
-  return b.split('|')[0] - a.split('|')[0];
+function c_string_r(a, b) {
+	return c_string(b, a);
 }
 function c_number(a, b) {
-  val =  Number(a.split('|')[1]) - Number(b.split('|')[1]);
-  return val || Number((a.split('|')[0]) - Number(b.split('|')[0]));
+	var aN = Number(a[1]);
+	var bN = Number(b[1]);
+	if (isNaN(aN)) aN = 0;
+	if (isNaN(bN)) bN = 0;
+	return aN - bN;
 }
-function c_number_r(b, a) {
-  return c_number(a, b);
+function c_number_r(a, b) {
+  return c_number(b, a);
 }
 function dig_text(node) {
 	if (!node) return ("");
@@ -970,6 +950,7 @@ function get_blank(node) {
 function get_anidbsort(node) {
 	// Should be using node.getAttributeNS("http://anidb.info/markup","sort");
 	var ret = node.getAttribute("anidb:sort");
+	if (!ret) ret = dig_text(node); // backup
 	return (ret ? ret : 0);
 }
 
@@ -1054,17 +1035,49 @@ function init_sorting(node,ident,sortico) {
 	var headinglist;
 	if (document.getElementsByTagName) headinglist = node.getElementsByTagName('th');
 	else return;
+	var table = (node.nodeName.toLowerCase() == 'table' ? node : null);
+	if (!table) {
+		var MAX_RECURSE = 3;
+		var table = node.parentNode;
+		var depth = 0;
+		while (table.nodeName.toLowerCase() != 'table' && depth < MAX_RECURSE) {
+			table = table.parentNode;
+			depth++
+		}
+		if (table.nodeName.toLowerCase() != 'table') { errorAlert("init_sorting","either could not find table node or reached MAX_RECURSE ("+depth+")."); return; }
+	}
 	// The Sorting functions, see FunctionMap for the actual function names
 	var sortFuncs = new Array('c_latin','c_number','c_date','c_set','c_setlatin');
 	for (var i = 0; i < headinglist.length; i++) {
-		headinglist[i].onclick = sortcol; // This applies the actual sorting behaviour
+		var header = headinglist[i];
+		// We find out if our header is in the tBody of the Table
+		// If it's not create a Table Head and move the node there, stuff like this is the reason THEAD exists
+		if (header.parentNode.parentNode.nodeName.toLowerCase() == 'tbody') {
+			var thead = table.getElementsByTagName('thead');
+			if (!thead) {
+				thead = document.createElement('thead');
+				thead.appendChild(header.parentNode);
+				table.insertBefore(thead,tbody);
+			} else 
+				thead.appendChild(header.parentNode);
+		}
+		// Add some accelerators to this
+		// Parent Table
+		header._parentTable = table;
+		// Sorting Function
+		var sortfunc = header.className.substring(header.className.indexOf(" c_")+1,(header.className.indexOf(" ",header.className.indexOf(" c_")+1)+1 || header.className.length+1)-1);
+		header._sortFunction = (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none' ? 'c_none' : sortfunc);
+		// Cell identifier
+		header._identifier = (header.className && header.className.length > 0 ? header.className.substring(0,header.className.indexOf(" ")) || header.className : null);
+		if (header._sortFunction == 'c_none') continue;
+		header.onclick = sortcol; // This applies the actual sorting behaviour
 		// And the following adds the icons (Optional, it's just a visual input)
 		if (ident && ident.length) {
-			var identifier = headinglist[i].className.substring(0,headinglist[i].className.indexOf(" ")) || headinglist[i].className;
+			var identifier = header.className.substring(0,header.className.indexOf(" ")) || header.className;
 			if (identifier.indexOf(ident) >= 0) {
 				if (sortico && sortico.length > 0) {
-					if (sortico == 'up')	headinglist[i].className += ' s_forward';
-					if (sortico == 'down')	headinglist[i].className += ' s_reverse';
+					if (sortico == 'up')	header.className += ' s_forward';
+					if (sortico == 'down')	header.className += ' s_reverse';
 				}
 			}
 		}
@@ -1095,93 +1108,142 @@ function findSortCol(node) {
   }
   return null;
 }
-
+/* Function that actualy sorts a column */
 function sortcol(node) {
-	if (!node) node = this; // ie funkyness
-	if (!node.nodeName || (node.nodeName && node.nodeName.toLowerCase() != 'th')) node = this;
-	var here = node;
-	// We find out if our header is in the tBody of the Table
-	// Because if it's not we are going to sort the whole TBody
-	var sortIndex = 0;
-	if (here.parentNode.parentNode.nodeName.toLowerCase() == 'tbody') sortIndex = Number(here.parentNode.rowIndex)+1; 
-	// We now find out which sort function to apply to the column or none
-	var sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
-	if (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none') return; // There will be no sorting for this column.
-	// clear other sorting that could be present
-	for (var i = 0; i < node.parentNode.childNodes.length; i++) {
-		var cell = node.parentNode.childNodes[i];
-		if (cell.nodeName.toLowerCase() != 'th' || cell.className == node.className) continue; // our node
-		if (cell.className.indexOf(' s_forward') > -1) cell.className = cell.className.replace(' s_forward','');
-		if (cell.className.indexOf(' s_reverse') > -1) cell.className = cell.className.replace(' s_reverse','');
-	}
-	// Finding the actual Table node
-	while (here.nodeName.toLowerCase() != 'table') here = here.parentNode;
-	var container = here;
-	container.style.display = 'none';
-	// An identifier so we can track this column
-	var identifier = node.className.substring(0,node.className.indexOf(" ")) || node.className;
-	var sortlist = new Array();
-	var sortmap = new Object();
-	var pContainer = container.tBodies[0];
-	var rowlist = pContainer.getElementsByTagName('tr');
-	var funcmap = FunctionMap[sortfunc] || FunctionMap['c_none'];
-	// We now build a construct that will hold the sorting data
-	var cellIdx = 0;
-	var i = sortIndex;
-	var cloneTB = document.createElement('tbody'); // a clone table body, cloneNode doesn't work as expected
-	//alert(identifier+' at '+sortIndex+' in '+rowlist.length);
-	while (rowlist.length > sortIndex) {
-		var cRow = rowlist[sortIndex];
-		var cellList = cRow.cells;
-		if (!cellList[cellIdx]) { // odd case?
-			found = false;
-		} else if (cellList[cellIdx].className.indexOf(identifier) < 0) { // do this the hard way
-			var found = false;
-			for (var k = 0; k < cellList.length; k++) {
-				var cell = cellList[k];
-				if (cell.className.indexOf(identifier) < 0) continue; // next cell
-				var cellid = i+"|"+funcmap['getval'](cell);
-				sortlist.push(cellid);
-				cloneTB.appendChild(cRow);
-				sortmap[cellid] = cloneTB.lastChild;
-				cellIdx = k;
-				found  = true;
-				break; // we allready found our cell no need to continue;
-			}
-		} else { // we allready know the index just do the simple version
-			var cell = cellList[cellIdx];
-			if (cell.className.indexOf(identifier) >= 0) { // skip if this cell is for example a colspan
-				var cellid = i+"|"+funcmap['getval'](cell);
-				sortlist.push(cellid);
-				cloneTB.appendChild(cRow);
-				sortmap[cellid] = cloneTB.lastChild;
-				found = true;
-			}
+	var start = new Date();
+	var MAX_RECURSE = 3;
+	if (!node || !node.nodeName || (node.nodeName && node.nodeName.toLowerCase() != 'th')) node = this;
+	if (node.nodeName && node.nodeName.toLowerCase() != 'th') return; //only allow sorting for THs
+	// Okay, now for some assumptions (i can live without each, but they are nice to have):
+	// #1 - init_sorting should have moved every th row to thead
+	// #2 - init_sorting should have assigned each TH it's sort function
+	// #3 - init_sorting should have assigned each TH it's parent Table node
+	// #4 - init_sorting should have assigned each TH it's identifier
+	var table = this._parentTable;
+	if (!table || (table && table.nodeName.toLowerCase() != 'table')) {
+		table = node.parentNode;
+		// find the table node up to a given recursive depth and jumpstart this
+		var depth = 0;
+		while (table.nodeName.toLowerCase() != 'table' && depth < MAX_RECURSE) {
+			table = table.parentNode;
+			depth++
 		}
-		// We do this in case we hit a colspan for example.
-		if (!found) {
-			var cellid = i+"|"+0;
-			sortlist.push(cellid);
-			cloneTB.appendChild(cRow);
-			sortmap[cellid] = cloneTB.lastChild;
-		}
-		i++;
+		if (table.nodeName.toLowerCase() != 'table') { errorAlert("sortcol","either could not find table node or reached MAX_RECURSE ("+depth+")."); return; }
+		node._parentTable = table;
 	}
-	// Are we sorting forward or reverse? If no info, we apply a Forward sort
-	if (node.className.indexOf("s_reverse") >= 0) {
-		sortlist.sort(funcmap['sortr']);
-		node.className = node.className.replace("s_reverse", "s_forward");
-	} else {
-		sortlist.sort(funcmap['sortf']);
-		node.className = node.className.replace(" s_forward","") + " s_reverse";
+	var tbody = table.tBodies[0];
+	if (!tbody) { errorAlert("sortcol","could not find tbody node."); return; }
+	// if this th is not in thead there is probably a reason so just ignore it and go with the flow
+	var startIndex = 0;
+	if (node.parentNode.parentNode.nodeName.toLowerCase() == 'tbody')
+		startIndex = Number(node.parentNode.rowIndex)+1; 
+	var sortfunc = this._sortFunction;
+	if (!sortfunc) {
+		//  We now find out which sort function to apply to the column or none
+		sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
+		node._sortFunction = (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none' ? 'c_none' : sortfunc);
+	}
+	var funcmap = FunctionMap[sortfunc];
+	// sorting mode
+	var sortingMode = (node.className.indexOf("s_reverse") >= 0 ? "sortr" : "sortf");
+	// reset headers
+	var headingNodes = node.parentNode.getElementsByTagName('th');
+	for (var i = 0; i < headingNodes.length; i++) {
+		var cell = headingNodes[i];
+		cell.className = cell.className.replace(/ s_forward|s_forward|s_reverse| s_reverse/ig,"");
+	}
+	// reset our node sorting classname
+	node.className += (sortingMode == 'sortr' ? ' s_forward' : ' s_reverse');
+
+	// Now actualy do some stuff
+	var sortMap = new Array();
+	var rows = tbody.getElementsByTagName('tr');
+	var cellIndex = node.cellIndex; // by default use this, faster
+	var identifier = node._identifier; // use this if a row's cells length is lesser than the heading row cells length
+	if (!identifier) {
+		identifier = node.className.substring(0,node.className.indexOf(" ")) || node.className;
+		node._identifier = identifier;
 	}
 
-	for (var i = 0; i < sortlist.length; i++) {
-		var row = sortmap[sortlist[i]];
-		pContainer.appendChild(row);
+	tbody.style.display = 'none';
+
+	// @TODO: update this to support multiple rows
+	var rowIndex = -1;
+	var tmpRows = new Array();
+	var cellValue = "";
+	var lastRowSpan = false;
+	var auxRows = new Array();
+	while (rows.length > startIndex) {
+		var row = rows[startIndex];
+		tbody.removeChild(row);
+		var rowSpan = (row.className.indexOf('rowspan') >= 0);
+		if (!rowSpan) rowIndex++;
+		if (!auxRows[rowIndex]) auxRows[rowIndex] = new Array();
+		auxRows[rowIndex].push(row);
+		var cells = row.getElementsByTagName('td');
+		var cell = null;
+		if (cells.length == headingNodes.length) // do this the easy way
+			cell = cells[cellIndex];
+		else { // hard way, find the cell by identifier
+			for (var k = 0; k < cells.length; k++) {
+				if (cells[k].className.indexOf(identifier) < 0) continue;
+				cell = cells[k];
+				break;
+			}
+		}
+		if (!rowSpan) {
+			sortMap.push([rowIndex,(cell ? funcmap['getval'](cell) : "0")]);
+			cellValue = "";
+			lastRowSpan = rowSpan;
+		}
 	}
-	repaintStripes(pContainer);
-	container.style.display = '';
+	// now sort the map
+	sortMap.sort(funcmap[sortingMode]);
+	// and re-add the sorted rows and repaint the rows
+	for (var i = 0; i < sortMap.length; i++) {
+		var map = sortMap[i];
+		var tmpRows = auxRows[map[0]];
+		var rl = tmpRows.length;
+		var ik = i;
+		for (var k = 0; k < rl; k++) {
+			var row = tmpRows[k];
+			if (rl < 3) // single row case or just one extra rowspan
+				row.className = ((i % 2) ? "g_odd " : "")+row.className.replace(/ g_odd|g_odd/ig,"");
+			else {	// multi row case, not so easy one
+				row.className = ((ik % 2) ? "g_odd " : "")+row.className.replace(/ g_odd|g_odd/ig,"");
+				ik++;
+			}
+			tbody.appendChild(row);
+		}
+	}
+	
+	// this should do something
+	if (table.normalize) table.normalize();
+	
+	// DO NOT USE repaintStripes, takes too long to execute and locks up
+	tbody.style.display = '';
+
+	if (seeDebug) {
+		alert("sorted in "+(new Date() - start)+" ms"+
+			"\nsorting function to apply: "+sortfunc+"\nsorting order: "+sortingMode+"\nidentifier: "+identifier+"\ntable.id: "+table.id);
+	}
+}
+
+/* Function that repaints the stripes of a table
+ * Note: this function for some odd reason can lock up rendering for a while
+ * @param table Table (or tbody) to paint stripes 
+ * @param startAt optional index where to start painting stripes
+ */
+function repaintStripes(table, startAt) {
+	if (!table || (table && (table.nodeName.toLowerCase() != 'table' && table.nodeName.toLowerCase() != 'tbody'))) return;
+	if (!startAt) startAt = 0;
+	var tbody = (table.nodeName.toLowerCase() == 'table') ? table.tBodies[0] : table;
+	if (!tbody) return;
+	var rows = tbody.getElementsByTagName('tr');
+	for (var i = startAt; i < rows.length; i++) {
+		var row = rows[i];
+		row.className = ((i % 2) ? "g_odd " : "")+row.className.replace(/ g_odd|g_odd/ig,"");
+	}
 }
 
 // The hash Object holds hashing defaults
