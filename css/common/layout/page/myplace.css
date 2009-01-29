@@ -1,116 +1,104 @@
-#layout-main div.userpage_all div.stats,
-#layout-main div.myplace_all div.stats
+#layout-main div.userpage_all div.stats
 {
-	float: left;
-	clear: none;
-	width: 18em;
+	clear:none;
+	float:left;
+	width:18em;
 }
 
-#layout-main div.userpage_all div.stats table,
-#layout-main div.myplace_all div.stats table
+#layout-main div.userpage_all div.stats table
 {
-	width: 95%;
+	width:95%;
 }
 
-#layout-main div.userpage_all div.stats div table td.value,
-#layout-main div.myplace_all div.stats div table td.value
+#layout-main div.userpage_all div.stats div table td.value
 {
-	text-align: right;
+	text-align:right;
 }
 
-#layout-main div.myplace_all div.latest
+#layout-main div.userpage_all div.g_menu
 {
-	margin-left: 19em;
-	margin-right: 10em;
-	clear: none;
+	clear:right;
+	float:right;
+	width:11em;
 }
 
-#layout-main div.userpage_all div.buddies,
-#layout-main div.userpage_all div.favreviewers
+#layout-main div.userpage_all div.g_menu div + div
 {
-	float: right;
-	clear: right;
-	margin-bottom: 1em;
-}
-
-#layout-main div.userpage_all div.g_menu,
-#layout-main div.userpage_all div.buddies,
-#layout-main div.userpage_all div.favreviewers
-{
-	width: 11em;
+	margin-top:1em;
 }
 
 #layout-main div.userpage_all div.buddies ul li,
 #layout-main div.userpage_all div.favreviewers ul li
 {
-	padding: 1px 6px 1px 6px;
+	padding:1px 6px;
 }
 
 #layout-main div.userpage_all div.userdetails,
 #layout-main div.userpage_all div.userprefs
 {
-	margin-left: 19em;
-	margin-right: 12.5em;
-	clear: none;
+	clear:none;
+	margin-left:19em;
+	margin-right:12.5em;
 }
 
-#layout-main div.userpage_all div.userdetails
+#layout-main div.userpage_all div.userdetails .block > div
 {
-	display: table;
-}
-
-#layout-main div.userpage_all div.userdetails .block > div{
-	float: none;
-	width: auto;
-	display: table-cell;
-	vertical-align: top;
+	display:table-cell;
+	float:none;
+	vertical-align:top;
+	width:auto;
 }
 
 #layout-main div.userpage_all div.userdetails img
 {
-	margin-right: 1em;
+	margin-right:1em;
 }
 
 #layout-main div.userpage_all div.userprefs h4
 {
-	text-align: center;
-}
-
-#layout-main div.userpage_all div.charts
-{
-	width: 700px;
-	height: 600px;
-	margin-left:auto;
-	margin-right:auto;	
+	text-align:center;
 }
 
 #layout-main div.userpage_all div.charts div
 {
-	float: left;
+	float:left;
 }
 
 #layout-main div.userpage_all div.charts div.votedistribution
 {
-	padding-left: 50px; /*margin doesn't work for ie6, should be ok w/o borders*/
+	padding-left:50px;
 }
 
 #layout-main div.userpage_all div.userdetails p
 {
-	text-align: left;
-	margin-left: 4em;
-	margin-right: 2em;
-	margin-top: 2em;
+	margin-left:4em;
+	margin-right:2em;
+	margin-top:2em;
+	text-align:left;
 }
 
-#layout-main div.userpage_all div.latest div
+#layout-main div.userpage_all div.charts
 {
-	display: table;
-	margin-left: auto;
-	margin-right: auto;
+	height:540px;
 }
 
-#layout-main div.myplace_all div.latest div + div,
-#layout-main div.myplace_all div.stats div + div
+#layout-main div.userpage_all div.charts,
+#layout-main div.userpage_all div.latest
 {
-	margin-top: 1em;
+	clear:none;
+	margin-left:18.5em;
+	margin-right:12em;
+}
+
+#layout-main div.userpage_all div.latest div + div,
+#layout-main div.userpage_all div.stats div + div,
+#layout-main div.userpage_all div.userprefs div + div
+{
+	margin-top:1em;
+}
+
+#layout-main div.userpage_all div.charts div.error
+{
+	clear:none;
+	float:none;
 }
