@@ -65,7 +65,7 @@ span.g_odd
 	color:#000000;
 }
 
-#layout-main #htmltagcloud
+#layout-main div.tagcloud
 {
 	background-color:#888888;
 	border-color:#888888;
@@ -116,7 +116,7 @@ input[type="submit"]:hover
 #layout-main div.forum .rbottom *,
 #layout-main div.forum div.inner,
 #layout-main div.forum ul.topics li.row:hover,
-#layout-main #htmltagcloud
+#layout-main div.tagcloud
 {
 	background-color:#666666;
 }

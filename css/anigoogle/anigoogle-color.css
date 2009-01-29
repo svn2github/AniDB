@@ -88,7 +88,7 @@ span.g_odd
 	color:#FFFFFF;
 }
 
-#layout-main #htmltagcloud
+#layout-main div.tagcloud
 {
 	background-color:#FAFAFA;
 	border-color:#D1D7DC;
