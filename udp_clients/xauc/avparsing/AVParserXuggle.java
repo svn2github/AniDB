@@ -295,7 +295,7 @@ public class AVParserXuggle extends ThreadedWorker implements AVParser {
 					vidstream.type = this.streams[i].type;
 					vidstream.codec_id = this.streams[i].codec_id;
 					
-					vidstream.setAniDBVideoCodec(vidstream.codec_id, ""); //codecCtx.getCodecTag()
+					vidstream.setAniDBVideoCodec(vidstream.codec_id, getCodecTag(codecCtx.getCodecTag()));
 					if(stream.getFrameRate().getDenominator() != 0 && stream.getFrameRate().getNumerator() != 0) vidstream.fps = stream.getFrameRate().getDouble();
 					else vidstream.fps = 1/codecCtx.getTimeBase().getDouble();
 					vidstream.p_width = codecCtx.getWidth();

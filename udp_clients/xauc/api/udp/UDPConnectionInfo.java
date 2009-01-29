@@ -1,12 +1,15 @@
 package api.udp;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.net.InetAddress;
 
 import api.ConnectionInfo;
 
 /**
- * Describes UDP API Connection information 
+ * Describes UDP API Connection information.
+ * <p>Also stores all the relevant fields that are used across all the Threads.</p>
  * @author fahrenheit
  * @author Arokh
  */
@@ -25,6 +28,8 @@ public class UDPConnectionInfo implements ConnectionInfo {
 	/** Client version */
 	protected int clientVer = 2;
 
+	/** Local port to use (0 for random > 1024) */
+	public int localPort = 0;
 	/** Session key */
 	public String session;
 	/** If should use a encoding set */
@@ -55,4 +60,19 @@ public class UDPConnectionInfo implements ConnectionInfo {
 	public String getClientName() { return this.clientID; }
 	public int getClientVersion() { return this.clientVer; }
 	public int getProtocolVersion() { return this.protoVer; }
+	
+	// Connection relevant stuff
+	/** Comunication socket (UDP) */
+	public java.net.DatagramSocket socket = null;
+	/** How many queued replies do we have */
+	public volatile int pendingReplies;
+	/** An array of queued queries */
+	public ArrayList<UDPApiQuery> queuedQueries = new ArrayList<UDPApiQuery>();
+	/** An array of queued replies */
+	public ArrayList<UDPApiReply> queuedReplies = new ArrayList<UDPApiReply>();
+	/** A linked array of queued commands to send */
+	public LinkedBlockingQueue<UDPApiCommand> queuedCommands = new LinkedBlockingQueue<UDPApiCommand>();
+	/** Express packets */
+	public ArrayList<String> expressPackets = new ArrayList<String>();
+
 }

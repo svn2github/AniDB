@@ -155,6 +155,7 @@ public class XaucConsole extends XaucShared{
 		hashingOptions.setSeeDebug(seeDebug);
 		parsingOptions.setSeeDebug(seeDebug);
 		clientOptions.setSeeDebug(seeDebug);
+		parsingOptions.setParserImp(avparsing.AVParser.ParserImplementations.XUGGLE);
 		if (saveHashingSettings) hashingOptions.saveSettings(appDir);
 		if (saveParsingSettings) parsingOptions.saveSettings(appDir);
 		if (saveClientSettings) clientOptions.saveSettings(appDir);

@@ -123,7 +123,7 @@ public class XaucSwing extends JFrame implements WindowListener {
 
 	/** Creates new form XaucSwing */
 	public XaucSwing() {
-		sharedParent.initApp();
+		XaucShared.initApp();
 		XaucShared.clientVersionMajor = 0;
 		XaucShared.clientVersionMinor = 6;
 		XaucShared.clientVersionPatch = 7;

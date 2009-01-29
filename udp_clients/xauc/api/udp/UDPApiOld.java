@@ -27,7 +27,7 @@ public class UDPApiOld {
 	Thread Sender = new Thread(new SendData(), "Sender");
 	Thread SysCall = new Thread(new IdleTasks(), "SysCall");
 	Thread Reciever = new Thread(new RecievedData(),"Reciever");
-	Map<String, UDPRequestFlag> RegFuncs = new TreeMap<String, UDPRequestFlag>();
+	Map<String, UDPRequestHandler> RegFuncs = new TreeMap<String, UDPRequestHandler>();
 
 	boolean IsFinalizing;
 
@@ -224,16 +224,16 @@ public class UDPApiOld {
 	}
 
 	void DeliverReply(UDPApiReply ApiReply) {
-		UDPRequestFlag ReqFlag = RegFuncs.get(ApiReply.tag);
+		UDPRequestHandler ReqFlag = RegFuncs.get(ApiReply.tag);
 		if(ReqFlag == null) ReqFlag = RegFuncs.get(ApiReply.responseID);
 		if(ReqFlag != null) {
-			try {ReqFlag.func.invoke(ReqFlag.methodContainer, ApiReply.cmdId);} catch (Exception e) {}
+			try {ReqFlag.method.invoke(ReqFlag.methodContainer, ApiReply.cmdId);} catch (Exception e) {}
 		}
 		if(ReqFlag == null) System.out.println("Msg didn't have any registered events: ID " + ApiReply.responseID);
 	}
 
 	public void RegisterEvent(Method Func, Object MethodContainer, String... Tags) {        
-		for(String Tag : Tags) RegFuncs.put(Tag, new UDPRequestFlag(Tag, Func, MethodContainer));    
+		for(String Tag : Tags) RegFuncs.put(Tag, new UDPRequestHandler(Tag, Func, MethodContainer));    
 	}
 
 	public void InternalReplyHandling(int ReplyIndex) {
