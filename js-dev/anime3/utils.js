@@ -1087,8 +1087,8 @@ function init_sorting(node,ident,sortico) {
 					if (sortico && sortico.length > 0) {
 						if (sortico == 'up')	header.className += ' s_forward';
 						if (sortico == 'down')	header.className += ' s_reverse';
-					}
-				} else header.className += ' s_reverse';
+					} else header.className += ' s_reverse';
+				}
 			}
 		} else { // passed an actual th node
 			if (header == ident) {
