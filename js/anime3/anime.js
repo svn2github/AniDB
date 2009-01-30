@@ -397,14 +397,11 @@ function parseData(xmldoc) {
 	};
 	if (true) { // just wanted a nice toggle switch :P
 		var tables = new Array();
-		var tester = document.getElementById('characterlist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('relationslist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('recomlist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('reviewlist');
-		if (tester) tables.push(tester);
+		var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist'];
+		for (var t = 0; t < tableNames.length; t++) {
+			var tester = document.getElementById(tableNames[t]);
+			if (tester) tables.push(tester);
+		}
 		for (var t = 0; t < tables.length; t++) {
 			var table = tables[t];
 			var tbody = table.tBodies[0];
@@ -429,7 +426,7 @@ function parseData(xmldoc) {
 						}
 					}
 					init_sorting(table,defaultTh,defaultSort);
-				} else { errorAlert("parseData",'Collumn definitions for a given table do not match processed table: '+table.id); return; }
+				} else { errorAlert("parseData",'Collumn definitions ('+ths.length+' vs '+sortingCol.length+') for a given table do not match processed table: '+table.id); return; }
 			}
 			if (table.id == 'reviewlist') continue; // i don't want to process reviews
 			if (!Number(collapseThumbnails) && !Number(anime_get_entityinfo)) continue; // don't do the rest of the stuff
