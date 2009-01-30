@@ -1,5 +1,5 @@
 (C) 2009 by sadjoker
-Version: 0.5 (28.01.2009)
+Version: 0.6 (29.01.2009)
 
 A very simple sfv file creator useful to check the CRC of your files.
 The format generated is the following:
@@ -7,5 +7,5 @@ The format generated is the following:
 "episode number (2 digits)" "CRC"
 
 If there is no CRC defined, the CRC will be replace by "no_CRC".
-The files with the generic or deleted status are not listed.
+The files with the generic, self-edited or deleted status are not listed.
 Of course, you will have to replace the episode number by the actual names of your files before being able to use it.

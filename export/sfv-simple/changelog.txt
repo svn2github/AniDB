@@ -1,8 +1,12 @@
 sfv-simple anidb.net export template
-Version: 0.5 (28.01.2009)
+Version: 0.6 (29.01.2009)
 
 Changelog:
 
+  0.6 (29.01.2009)
+     - Doesn't list animes with self-edited status.
+     - Correct 2 digits ep number bug for special episodes.
+	 
   0.5 (28.01.2009)
      - Doesn't list animes with deleted status.
      - Doesn't list files with generic or deleted status.
