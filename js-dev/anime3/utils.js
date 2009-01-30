@@ -649,6 +649,15 @@ function convert_input(str) {
 	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
 	return (str);
 }
+/* Function that cleans some input
+ * @param str String to replace identifiers
+ * @source anime3.formating
+ */
+function clean_input(str) {
+	str = str.replace(/\&amp\;/mgi,'&');
+	return (str);
+}
+
 /* Function that alerts the user for errors
  * @param func Name of the function
  * @param process 
@@ -1072,13 +1081,21 @@ function init_sorting(node,ident,sortico) {
 		if (header._sortFunction == 'c_none') continue;
 		header.onclick = sortcol; // This applies the actual sorting behaviour
 		// And the following adds the icons (Optional, it's just a visual input)
-		if (ident && ident.length) {
-			var identifier = header.className.substring(0,header.className.indexOf(" ")) || header.className;
-			if (identifier.indexOf(ident) >= 0) {
+		if (typeof(ident) == 'string') {
+			if (ident && ident.length) {
+				if (header._identifier.indexOf(ident) >= 0) {
+					if (sortico && sortico.length > 0) {
+						if (sortico == 'up')	header.className += ' s_forward';
+						if (sortico == 'down')	header.className += ' s_reverse';
+					}
+				} else header.className += ' s_reverse';
+			}
+		} else { // passed an actual th node
+			if (header == ident) {
 				if (sortico && sortico.length > 0) {
 					if (sortico == 'up')	header.className += ' s_forward';
 					if (sortico == 'down')	header.className += ' s_reverse';
-				}
+				} else header.className += ' s_reverse';
 			}
 		}
 	}

@@ -93,24 +93,31 @@ var groupSkips = buildSkipCols(groupCols);
 var picbase = 'http://img5.anidb.net/pics/anime/';
 var charInfos = new Array(); 		// Character information
 var creatorInfos = new Array(); 	// Creator information
+var animeInfos = new Array();		// Anime information
 
 /* -[ENTITIES]----------------------
  * ENTITY RELATED FUNCTIONS
  * ---------------------------------
  */
 
-/* Creates a new CharInfo node */
+/* Creates a new Info node */
 function CInfo(node) {
-	var type = (node.nodeName.toLowerCase() == 'characterdescbyid' ? 'character' : 'creator');
-	this.id = Number(node.getAttribute((type == 'character' ? 'charid' : 'creatorid')));
+	var type = 'character';
+	switch (node.nodeName.toLowerCase()) {
+		case 'characterdescbyid': type = 'character'; break;
+		case 'creatordescbyid': type = 'creator'; break;
+		case 'animeinfo': type = 'anime'; break;
+	}
+	this.id = Number(node.getAttribute((type == 'character' ? 'charid' : (type == 'creator' ? 'creatorid' : 'id'))));
 	this.desc = convert_input(node.getAttribute('desc'));
 	if (this.desc == '') this.desc = '<i>no description</i>';
-	this.title = node.getAttribute('title');
+	this.title = (type != 'anime' ? node.getAttribute('title') : node.getAttribute('name'));
 	this.picurl = node.getAttribute('picurl');
-	this.restricted = false; // override
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_150.gif';
-	this.lang = node.getAttribute('mainlang');
+	this.restricted = (type != 'anime' ? false : Number(node.getAttribute('restricted'))); // override
+	this.year = (type != 'anime' ? null : node.getAttribute('year'));
+	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/'+mylist_get_animeinfo_sz+'/'+this.picurl+'-thumb.jpg';
+	else this.picurl = 'http://static.anidb.net/pics/nopic_'+mylist_get_animeinfo_sz+'.gif';
+	this.lang = (type != 'anime' ? node.getAttribute('mainlang') : null);
 }
 
 /* Function that fetches char/creator data
@@ -125,6 +132,9 @@ function fetchInfoData(type,searchString) {
 	} else if (type == "creatorbyid") {
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/creator'+searchString+'_desc.xml', parseEntityData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=creatordescbyid&id='+searchString, parseEntityData);
+	} else if (type == "animebyid") { // replace this by animedescbyid
+		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+searchString+'_info.xml', parseEntityData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=animeinfo&aid='+searchString, parseEntityData);
 	}
 }
 
@@ -137,23 +147,19 @@ function parseEntityData(xmldoc) {
 	var type = 'character';
 	var cdescNodes = root.getElementsByTagName('characterdescbyid');
 	if (!cdescNodes.length) { type = 'creator'; cdescNodes = root.getElementsByTagName('creatordescbyid'); }
+	if (!cdescNodes.length) { type = 'anime'; cdescNodes = root.getElementsByTagName('animeinfo'); }
 	if (!cdescNodes.length) return;
 	for (var d = 0; d < cdescNodes.length; d++) {
 		var infoNode = new CInfo(cdescNodes[d]);
-		if (type == 'character') charInfos[infoNode.id] = infoNode;
-		else creatorInfos[infoNode.id] = infoNode;
-		var acid = 'cinfo_c'+(type == 'character' ? 'h' : 'r');
-		var a1 = document.getElementById(acid+'c'+infoNode.id);
-		var a2 = document.getElementById(acid+'s'+infoNode.id);
-		var as = [a1,a2];
-		for (var i = 0; i < as.length; i++) {
-			a = as[i];
-			if (!a) continue;
-			if (a.className.indexOf('i_mylist_ainfo_loading') >= 0)
-				a.className = a.className.replace('i_mylist_ainfo_loading','i_mylist_ainfo');
-			if (a.className.indexOf('i_mylist_ainfo_greyed') >= 0)
-				a.className = a.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo');
+		var acid = "";
+		switch (type) {
+			case 'character': charInfos[infoNode.id] = infoNode; acid = 'cinfo_ch' + infoNode.id; break;
+			case 'creator': creatorInfos[infoNode.id] = infoNode; acid = 'cinfo_cr' + infoNode.id;  break;
+			case 'anime': animeInfos[infoNode.id] = infoNode; acid = 'ainfo_' + infoNode.id;  break;
 		}
+		var a = document.getElementById(acid);
+		if (!a) continue;
+		a.className = a.className.replace(/i_mylist_ainfo_loading|i_mylist_ainfo_greyed/gi,'i_mylist_ainfo');
 	}
 }
 
@@ -162,18 +168,26 @@ function parseEntityData(xmldoc) {
  * @param info The AnimeInfo object
  * @param isChar If set to true we are displaying character info
  */
-function showInfoWork(obj,info,isChar) {
+function showInfoWork(obj,info,isAnime) {
 	var minWidth = Number(mylist_get_animeinfo_mw);
 	if (isNaN(minWidth)) minWidth = 450;
 	var table = document.createElement('table');
-	table.className = 'characterInfo';
+	table.className = (!isAnime ? 'characterInfo' : 'animeInfo');
 	table.style.minWidth = minWidth + 'px';
 	var thead = document.createElement('thead');
 	var row = document.createElement('tr');
 	var title = document.createElement('span');
 	title.className = 'title';
 	title.appendChild(document.createTextNode(info.title));
-	createHeader(row, (info.restricted ? 'restricted' : null), title, null, null, 2);
+	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
+	if (isAnime) {
+		var year = document.createElement('span');
+		year.className = 'year';
+		year.appendChild(document.createTextNode('('+info.year+')'));
+		cell.appendChild(document.createTextNode(' '));
+		cell.appendChild(year);
+	}
+	row.appendChild(cell);
 	thead.appendChild(row);
 	table.appendChild(thead);
 	var tbody = document.createElement('tbody');
@@ -181,63 +195,42 @@ function showInfoWork(obj,info,isChar) {
 	var img = document.createElement('img');
 	img.src = info.picurl;
 	img.alt = '['+info.id+']';
-	createCell(row, 'characterInfoThumb', img);
+	createCell(row, (!isAnime ? 'characterInfoThumb' : 'animeInfoThumb'), img);
 	var span = document.createElement('span');
 	span.innerHTML = info.desc;
-	createCell(row, 'characterInfoDesc', span);
+	createCell(row, (!isAnime ? 'characterInfoDesc' : 'animeInfoDesc'), span);
 	tbody.appendChild(row);
 	table.appendChild(tbody);
 	setTooltip(table, true, minWidth);
 }
 
-/* Function that shows char info (or not) */
-function showCharacterInfo() {
-	var id = Number(this.id.substring(9));
-	if (isNaN(id)) { errorAlert('showCharacterInfo','charid is not a number ['+id+']'); return; }
-	var info = charInfos[id];
+/* Function that shows info (or not) */
+function showInfo() {
+	var type = 'character';
+	if (this.id.indexOf('cinfo_ch') >= 0) type = 'character';
+	else if (this.id.indexOf('cinfo_cr') >= 0) type = 'creator';
+	else if (this.id.indexOf('ainfo_') >= 0) type = 'anime';
+	else { errorAlert('showInfo','info type is unknown ['+this.id+']'); return; }
+	var id = Number(this.id.substring((type != 'anime' ? 8 : 6)));
+	if (isNaN(id)) { errorAlert('showInfo','id is not a number ['+id+']'); return; }
+	var info = null;
+	switch (type) {
+		case 'character': info = charInfos[id]; break;
+		case 'creator': info = creatorInfos[id]; break;
+		case 'anime': info = animeInfos[id]; break;
+	}
 	if (!info) { // fetch data and display later
 		setTooltip('please wait while loading data...');
 		this.className = this.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
-		fetchInfoData("characterbyid",id);
-		var acid = 'cinfo_ch';
-		var a1 = document.getElementById(acid+'c'+id);
-		var a2 = document.getElementById(acid+'s'+id);
-		var as = [a1,a2];
-		for (var i = 0; i < as.length; i++) {
-			a = as[i];
-			if (!a) continue;
-			a.title = "";
-			a.className = a.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
-			a.onmouseover = showCharacterInfo;
-			a.onmouseout = hideTooltip;
-		}		
+		switch (type) {
+			case 'character': fetchInfoData("characterbyid",id); break;
+			case 'creator': fetchInfoData("creatorbyid",id); break;
+			case 'anime': fetchInfoData("animebyid",id); break;
+		}
+		this.onmouseover = showInfo;
+		this.onmouseout = hideTooltip;
 	} else { // display the data
-		showInfoWork(this,info,true);
-	}
-}
-
-/* Function that shows char info (or not) */
-function showCreatorInfo() {
-	var id = Number(this.id.substring(9));
-	if (isNaN(id)) { errorAlert('showCreatorInfo','creatorid is not a number ['+id+']'); return; }
-	var info = creatorInfos[id];
-	if (!info) { // fetch data and display later
-		setTooltip('please wait while loading data...');
-		fetchInfoData("creatorbyid",id);
-		var acid = 'cinfo_cr';
-		var a1 = document.getElementById(acid+'c'+id);
-		var a2 = document.getElementById(acid+'s'+id);
-		var as = [a1,a2];
-		for (var i = 0; i < as.length; i++) {
-			a = as[i];
-			if (!a) continue;
-			a.title = "";
-			a.className = a.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
-			a.onmouseover = showCreatorInfo;
-			a.onmouseout = hideTooltip;
-		}	
-	} else { // display the data
-		showInfoWork(this,info,true);
+		showInfoWork(this,info,(type == 'anime'));
 	}
 }
 
@@ -327,7 +320,7 @@ function postData(url) {
  */
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
-	if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
+	if (!root) { errorAlert("parseData",'Could not get root node'); return; }
 	updateStatus('Processing anime data...');
 	t1 = new Date();
 	parseAnimes(root.getElementsByTagName('animes'));
@@ -376,17 +369,37 @@ function parseData(xmldoc) {
 	}
 	var gEGD = new Date() - t2;
 	// add a collapse function to character and what not rows
-	if (Number(collapseThumbnails) || Number(anime_get_entityinfo)) {
+	// also add sorting classes (needs all cols defined)
+	var sortingCols = {
+		'characterlist': [	{"type":'c_none',"isDefault":false},	// image
+							{"type":'c_setlatin',"isDefault":true},// name
+							{"type":'c_latin',"isDefault":false},	// entitiy
+							{"type":'c_setlatin',"isDefault":false},// seiyuu
+							{"type":'c_latin',"isDefault":false},	// primary
+							{"type":'c_latin',"isDefault":false},	// comment
+							{"type":'c_latin',"isDefault":false},	// relation
+							{"type":'c_setlatin',"isDefault":false},// rating
+							{"type":'c_none',"isDefault":false}	],	// action
+		'relationslist': [	{"type":'c_none',"isDefault":false},	// image
+							{"type":'c_setlatin',"isDefault":true},// name
+							{"type":'c_latin',"isDefault":false},	// type
+							{"type":'c_number',"isDefault":false},	// episodes
+							{"type":'c_latin',"isDefault":false}],	// relation
+		'reviewlist': [		{"type":'c_none',"isDefault":false},	// image
+							{"type":'c_setlatin',"isDefault":true},// name
+							{"type":'c_latin',"isDefault":false},	// avg rating
+							{"type":'c_latin',"isDefault":false},	// approval
+							{"type":'c_none',"isDefault":false}	]	// action
+	};
+	if (true) { // just wanted a nice toggle switch :P
 		var tables = new Array();
 		var tester = document.getElementById('characterlist');
 		if (tester) tables.push(tester);
-		tester = document.getElementById('creatorlist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('seiyuulist');
-		if (tester) tables.push(tester);
-		tester = document.getElementById('stafflist');
+		tester = document.getElementById('relationslist');
 		if (tester) tables.push(tester);
 		tester = document.getElementById('recomlist');
+		if (tester) tables.push(tester);
+		tester = document.getElementById('reviewlist');
 		if (tester) tables.push(tester);
 		for (var t = 0; t < tables.length; t++) {
 			var table = tables[t];
@@ -397,6 +410,25 @@ function parseData(xmldoc) {
 				thead.appendChild(tbody.rows[0]);
 				table.insertBefore(thead,tbody);
 			}
+			// apply sorting
+			var sortingCol = sortingCols[table.id];
+			if (sortingCol != undefined) {
+				var ths = thead.getElementsByTagName('th');
+				if (ths.length == sortingCol.length) { 
+					var defaultTh = null;
+					var defaultSort = null;
+					for (var i = 0; i < ths.length; i++) {
+						ths[i].className += ' '+sortingCol[i]['type'];
+						if (sortingCol[i]['isDefault']) {
+							defaultTh = ths[i];
+							defaultSort = 'down';
+						}
+					}
+					init_sorting(table,defaultTh,defaultSort);
+				} else { errorAlert("parseData",'Collumn definitions for a given table do not match processed table: '+table.id); return; }
+			}
+			if (table.id == 'reviewlist') continue; // i don't want to process reviews
+			if (!Number(collapseThumbnails) && !Number(anime_get_entityinfo)) continue; // don't do the rest of the stuff
 			for (var r = 0; r < tbody.rows.length; r++) {
 				var row = tbody.rows[r];
 				if (Number(collapseThumbnails)) {
@@ -426,20 +458,20 @@ function parseData(xmldoc) {
 					}
 				}
 				if (Number(anime_get_entityinfo)) {
-					if (table.id != 'characterlist' && table.id != 'creatorlist' && table.id != 'seiyuulist' && table.id != 'stafflist') continue;
+					if (table.id != 'characterlist' && table.id != 'relationslist') continue;
 					var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
 					for (var n = 0; n < names.length; n++) {
 						var nameCell = names[n];
 						var a = nameCell.getElementsByTagName('a')[0];
 						if (!a) continue;
-						var type = (a.href.indexOf('creator') >= 0 ? 'creator' : 'character');
+						nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
+						var type = (a.href.indexOf('creator') >= 0 ? 'creator' : (a.href.indexOf('character') >= 0 ? 'character' : 'anime'));
 						var id = a.href.substring(a.href.indexOf('id=')+3);
 						var icons = document.createElement('span');
 						icons.className = 'icons';
-						var infoIcon = createIcon(null, 'cinfo', 'removeme', (type == 'character' ? showCharacterInfo : showCreatorInfo), 'Click to show information', 'i_mylist_ainfo_greyed');
-						infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+(table.id == 'characterlist' ? 'c' : 's')+id;
-						//infoIcon.onmouseover = showCharacterInfo;
-						//infoIcon.onmouseout = hideTooltip;
+						var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show information', 'i_mylist_ainfo_greyed');
+						if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
+						else infoIcon.id = 'ainfo_'+id;
 						icons.appendChild(infoIcon);
 						var label = document.createElement('label');
 						label.appendChild(a);
