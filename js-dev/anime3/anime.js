@@ -115,7 +115,8 @@ function CInfo(node) {
 	this.picurl = node.getAttribute('picurl');
 	this.restricted = (type != 'anime' ? false : Number(node.getAttribute('restricted'))); // override
 	this.year = (type != 'anime' ? null : node.getAttribute('year'));
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/'+mylist_get_animeinfo_sz+'/'+this.picurl+'-thumb.jpg';
+	var picurl = this.picurl.substr(this.picurl.lastIndexOf('/'));
+	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/'+mylist_get_animeinfo_sz+'/'+(type != 'anime' ? this.picurl : picurl)+'-thumb.jpg';
 	else this.picurl = 'http://static.anidb.net/pics/nopic_'+mylist_get_animeinfo_sz+'.gif';
 	this.lang = (type != 'anime' ? node.getAttribute('mainlang') : null);
 }
