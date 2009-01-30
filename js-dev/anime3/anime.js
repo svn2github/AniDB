@@ -385,6 +385,10 @@ function parseData(xmldoc) {
 							{"type":'c_latin',"isDefault":false},	// type
 							{"type":'c_number',"isDefault":false},	// episodes
 							{"type":'c_latin',"isDefault":false}],	// relation
+		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
+							{"type":'c_none',"isDefault":false},	// name
+							{"type":'c_none',"isDefault":false},	// episode restriction
+							{"type":'c_none',"isDefault":false}],	// comment
 		'reviewlist': [		{"type":'c_none',"isDefault":false},	// image
 							{"type":'c_setlatin',"isDefault":true},// name
 							{"type":'c_latin',"isDefault":false},	// avg rating

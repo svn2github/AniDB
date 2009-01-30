@@ -423,7 +423,7 @@ function createGroupRow(gid,cols,skips) {
 				createCell(row, col['classname']+newFile, document.createTextNode(cTimeDate(group.lastUp)), null, colSpan);
 				break;
 			case 'group':
-				createCell(row, col['classname'], createLink(null,group.shortName,'animedb.pl?show=group&gid=' + group.id, null, null, group.name, null), group.shortName.toLowerCase(), colSpan);
+				createCell(row, col['classname'], createLink(null,group.shortName,'animedb.pl?show=group&gid=' + group.id, null, null, clean_input(group.name), null), group.shortName.toLowerCase(), colSpan);
 				break;
 			case 'state':
 				createCell(row, col['classname']+ ' '+group.state, createLink(null,group.state,'animedb.pl?show=group&gid='+group.id+'&aid='+anime.id,null,null,null,null), null, colSpan);
