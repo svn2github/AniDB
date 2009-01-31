@@ -7,9 +7,9 @@
 jsVersionArray.push({
 	"file":"ajax.js",
 	"version":"1.1",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 1931 $",
+	"date":"$Date:: 2008-12-14 15:37:27 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Some minor cleanup"
 });
 

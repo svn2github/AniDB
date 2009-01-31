@@ -6,9 +6,9 @@
 jsVersionArray.push({
 	"file":"anime3/addfilerel.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2109 $",
+	"date":"$Date:: 2009-01-29 19:54:28 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });
 

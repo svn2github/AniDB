@@ -12,9 +12,9 @@ var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
 	"version":"1.02",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2093 $",
+	"date":"$Date:: 2009-01-27 15:18:14 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
 var usejspopups = true;

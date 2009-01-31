@@ -5,9 +5,9 @@
 jsVersionArray.push({
 	"file":"anime3/quickvote.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 1911 $",
+	"date":"$Date:: 2008-12-14 03:02:40 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });
  

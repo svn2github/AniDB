@@ -1,9 +1,9 @@
 jsVersionArray.push({
 	"file":"addepm.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 1968 $",
+	"date":"$Date:: 2008-12-29 14:34:08 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });
 

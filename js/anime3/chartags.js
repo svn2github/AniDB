@@ -6,9 +6,9 @@
 jsVersionArray.push({
 	"file":"anime3/chartags.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$"
+	"revision":"$Revision: 1933 $",
+	"date":"$Date:: 2008-12-14 15:52:49 +0000#$",
+	"author":"$Author: fahrenheit $"
 });
 
 var seeDebug = false;

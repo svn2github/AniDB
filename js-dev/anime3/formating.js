@@ -11,9 +11,9 @@
 jsVersionArray.push({
 	"file":"anime3/formating.js",
 	"version":"3.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 1934 $",
+	"date":"$Date:: 2008-12-14 15:56:57 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Major rewrite"
 });
 

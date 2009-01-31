@@ -1,9 +1,9 @@
 jsVersionArray.push({
 	"file":"jsplay.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 1893 $",
+	"date":"$Date:: 2008-12-12 00:01:19 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });
 

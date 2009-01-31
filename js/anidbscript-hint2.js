@@ -1,9 +1,9 @@
 jsVersionArray.push({
 	"file":"anidbscript-hint2.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 1900 $",
+	"date":"$Date:: 2008-12-12 17:40:38 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });
 
