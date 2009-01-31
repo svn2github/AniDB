@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"version":"1.0",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author: fahrenheit $",
+	"author":"$Author$",
 	"changelog":"Initial version"
 });
 

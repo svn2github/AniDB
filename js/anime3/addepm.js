@@ -10,7 +10,7 @@ jsVersionArray.push({
 	"version":"2.4",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author: fahrenheit $",
+	"author":"$Author$",
 	"changelog":"Type filter"
 });
 

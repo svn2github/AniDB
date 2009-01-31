@@ -14,7 +14,7 @@ jsVersionArray.push({
 	"version":"1.02",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author: fahrenheit $",
+	"author":"$Author$",
 	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
 var usejspopups = true;

@@ -13,7 +13,7 @@ jsVersionArray.push({
 	"version":"3.0",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author: fahrenheit $",
+	"author":"$Author$",
 	"changelog":"Major rewrite"
 });
 

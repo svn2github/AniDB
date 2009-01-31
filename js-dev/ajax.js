@@ -9,7 +9,7 @@ jsVersionArray.push({
 	"version":"1.1",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author: fahrenheit $",
+	"author":"$Author$",
 	"changelog":"Some minor cleanup"
 });
 

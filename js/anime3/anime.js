@@ -11,7 +11,7 @@ jsVersionArray.push({
 	"version":"2.2",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author: fahrenheit $",
+	"author":"$Author$",
 	"changelog":"Allowed for file table layout changes"
 });
 

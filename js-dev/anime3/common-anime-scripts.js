@@ -13,7 +13,7 @@ jsVersionArray.push({
 	"version":"1.5",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author: fahrenheit $",
+	"author":"$Author$",
 	"changelog":"AnimePage file table column layout "
 });
 
