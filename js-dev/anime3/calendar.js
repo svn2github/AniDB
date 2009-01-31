@@ -79,7 +79,7 @@ function createSubmitRequest() {
 		var selects = cell.getElementsByTagName('select');
 		for (var i = 0; i < inputs.length; i++) {
 			var input = inputs[i];
-			if (input.id == 'adba.update' || input.value == '-1') continue;
+			if (input.id == 'adba_update' || input.value == '-1') continue;
 			url += input.name + '=' + input.value + '&';
 		}
 		for (var i = 0; i < selects.length; i++) {
@@ -143,11 +143,11 @@ function createWishlistRow(parentNode, wishlistState, className) {
 	var cell = createCell(null, 'value',createTextInput('adba.wishlist',10,false,true,null,wishlistState.state));
 	var optionArray = {	'-1':{"text":'type: not set'},'0':{"text":'type: undefined'},
 						'1':{"text":'type: to watch'},'2':{"text":'type: to get'},'3':{"text":'type: blacklisted'}};
-	var stateSel = createSelectArray(cell,"adba.wishlisttype","adba.wishlisttype",togglePrioritySelect,wishlistState.type,optionArray);
+	var stateSel = createSelectArray(cell,"adba.wishlisttype","adba_wishlisttype",togglePrioritySelect,wishlistState.type,optionArray);
 	cell.appendChild(document.createTextNode(' '));
 	optionArray = {	'-1':{"text":'priority: not set'},'0':{"text":'priority: low'},
 						'1':{"text":'priority: medium'},'2':{"text":'priority: high'}};
-	var priSel = createSelectArray(null,"adba.wishlistpri","adba.wishlistpri",null,wishlistState.pri,optionArray);
+	var priSel = createSelectArray(null,"adba.wishlistpri","adba_wishlistpri",null,wishlistState.pri,optionArray);
 	if (wishlistState.pri == '-1') priSel.disabled = true;
 	cell.appendChild(priSel);
 	row.appendChild(cell);
@@ -166,11 +166,11 @@ function createNotificationRow(parentNode, notificationState, className) {
 	var cell = createCell(null, 'value',createTextInput('adba.notify',10,false,true,null,notificationState.state));
 	var optionArray = {	'-1':{"text":'type: not set'},'0':{"text":'type: all'},
 						'1':{"text":'type: new'},'2':{"text":'type: group'},'3':{"text":'type: complete'}};
-	var stateSel = createSelectArray(cell,"adba.notifytype","adba.notifytype",togglePrioritySelect,notificationState.type,optionArray);
+	var stateSel = createSelectArray(cell,"adba.notifytype","adba_notifytype",togglePrioritySelect,notificationState.type,optionArray);
 	cell.appendChild(document.createTextNode(' '));
 	optionArray = {	'-1':{"text":'priority: not set'},'0':{"text":'priority: low'},
 						'1':{"text":'priority: medium'},'2':{"text":'priority: high'}};
-	var priSel = createSelectArray(null,"adba.notifypri","adba.notifypri",null,notificationState.pri,optionArray);
+	var priSel = createSelectArray(null,"adba.notifypri","adba_notifypri",null,notificationState.pri,optionArray);
 	if (notificationState.pri == '-1') priSel.disabled = true;
 	cell.appendChild(priSel);
 	row.appendChild(cell);
@@ -186,7 +186,7 @@ function createActionRow(parentNode, aid, className) {
 	row.appendChild(head);
 	var cell = createCell(null, 'value',createTextInput('aid',10,false,true,null,aid));
 	cell.appendChild(createTextInput('show',10,false,true,null,'latestanimes'));
-	cell.appendChild(createButton('adba.update','adba.update',false,'Update','button',createSubmitRequest,null));
+	cell.appendChild(createButton('adba.update','adba_update',false,'Update','button',createSubmitRequest,null));
 	row.appendChild(cell);
 	if (parentNode) parentNode.appendChild(row);
 	else return row;
