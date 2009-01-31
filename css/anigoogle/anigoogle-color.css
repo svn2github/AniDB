@@ -175,3 +175,9 @@ span.g_odd
 {
 	background-color: #E5ECF9;
 }
+
+#layout-main div.anime_all div.desc
+{
+	background-color:#E5ECF9;
+	border-color:#C9D7F1;
+}
