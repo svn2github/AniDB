@@ -1,8 +1,8 @@
 jsVersionArray.push({
 	"file":"creqmod.js",
 	"version":"1.0",
-	"revision":"$Revision: 1893 $",
-	"date":"$Date:: 2008-12-12 00:01:19 +0000#$",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
 	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });

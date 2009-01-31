@@ -11,8 +11,8 @@
 jsVersionArray.push({
 	"file":"anime3/common-anime-scripts.js",
 	"version":"1.5",
-	"revision":"$Revision: 2124 $",
-	"date":"$Date:: 2009-01-31 13:44:07 +0000#$",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
 	"author":"$Author: fahrenheit $",
 	"changelog":"AnimePage file table column layout "
 });

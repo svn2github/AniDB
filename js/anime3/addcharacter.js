@@ -6,8 +6,8 @@
 jsVersionArray.push({
 	"file":"anime3/addcharacter.js",
 	"version":"1.0",
-	"revision":"$Revision: 1996 $",
-	"date":"$Date:: 2009-01-03 23:18:53 +0000#$",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
 	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });

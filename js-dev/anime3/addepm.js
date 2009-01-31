@@ -8,8 +8,8 @@
 jsVersionArray.push({
 	"file":"anime3/addepm.js",
 	"version":"2.4",
-	"revision":"$Revision: 1969 $",
-	"date":"$Date:: 2008-12-29 22:13:32 +0000#$",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
 	"author":"$Author: fahrenheit $",
 	"changelog":"Type filter"
 });
