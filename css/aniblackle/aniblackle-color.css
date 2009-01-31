@@ -54,8 +54,8 @@ span.g_odd
 
 #layout-main div.pagination span a
 {
-	background-color:#728189;
-	border-color:#888888;
+	background-color:#555555;
+	border-color:#666666;
 	color:#CCCCCC;
 }
 
@@ -118,7 +118,7 @@ input[type="submit"]:hover
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.tagcloud
 {
-	background-color:#666666;
+	background-color:#444444;
 }
 
 #layout-main div.forum div.poll div.inner,
@@ -130,8 +130,8 @@ input[type="submit"]:hover
 #layout-main table tr.header,
 #layout-main table thead tr
 {
-	background-color:#999999;
-	color:#000000;
+	background-color:inherit;
+	color:inherit;
 }
 
 #layout-main ul.g_list li,
@@ -228,7 +228,7 @@ input[type="submit"]:hover,
 #layout-main div.pagination span strong
 {
 	background-color:#728972;
-	border-color:#888888;
+	border-color:#666666;
 }
 
 #layout-main div.export_all div.exportblock div.inner,
@@ -249,4 +249,16 @@ input[type="submit"]:hover,
 {
 	background-color:#000000;
 	border-color:#888888;
+}
+
+div.quotebody
+{
+	background-color:#404040;
+	border:1px solid #555555;
+	color:#ABABAB;
+}
+
+#layout-main div.cmt_entries dl.profile dd strong
+{
+	color:#666666;
 }
