@@ -1055,6 +1055,7 @@ function init_sorting(node,ident,sortico) {
 		}
 		if (table.nodeName.toLowerCase() != 'table') { errorAlert("init_sorting","either could not find table node or reached MAX_RECURSE ("+depth+")."); return; }
 	}
+	var tbody = table.tBodies[0];
 	// The Sorting functions, see FunctionMap for the actual function names
 	var sortFuncs = new Array('c_latin','c_number','c_date','c_set','c_setlatin');
 	for (var i = 0; i < headinglist.length; i++) {
