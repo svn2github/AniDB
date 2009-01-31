@@ -1062,7 +1062,7 @@ function init_sorting(node,ident,sortico) {
 		// We find out if our header is in the tBody of the Table
 		// If it's not create a Table Head and move the node there, stuff like this is the reason THEAD exists
 		if (header.parentNode.parentNode.nodeName.toLowerCase() == 'tbody') {
-			var thead = table.getElementsByTagName('thead');
+			var thead = table.getElementsByTagName('thead')[0];
 			if (!thead) {
 				thead = document.createElement('thead');
 				thead.appendChild(header.parentNode);
