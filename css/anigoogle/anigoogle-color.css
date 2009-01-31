@@ -181,3 +181,8 @@ span.g_odd
 	background-color:#E5ECF9;
 	border-color:#C9D7F1;
 }
+
+#layout-main div.profile_all div.tabbed_pane div.general table tr
+{
+	background-color: inherit;
+}
