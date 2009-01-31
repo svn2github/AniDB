@@ -77,3 +77,8 @@
 	width:100%;
 	margin: 0;
 }
+
+#layout-main div.anime_all div.info div.data table th
+{
+	width: 10em;
+}
