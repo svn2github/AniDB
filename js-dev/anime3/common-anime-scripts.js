@@ -112,9 +112,11 @@ var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-s
 var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
 var animePage_curSort = 'default'; // whatever the db spits out
 var animePage_curSortOrder = 'down'; // default sort direction
+var animePageLayout = null;
 var virtualDiv = document.createElement('div');
 var arePrefsShown = false;
 var defPrefTab = 0;
+var storedTab = '';
 
 /* This is an auxiliar function that adds/alters a new definition to a given attribute from the cols
  * @param name Name of the column
@@ -935,6 +937,38 @@ function changeOptionValue(node) {
 	CookieSet(name,value,3650);
 }
 
+/* Function that loads cookie settings */
+function loadSettings() {
+	animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
+	episodeAltTitleLang = CookieGet('episodeAltTitleLang') || "x-jat";
+	episodeTitleDisplay = CookieGet('episodeTitleDisplay') || 2;
+	ed2k_pattern = CookieGet('ed2k_pattern') || "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
+	hashObj.pattern = ed2k_pattern;
+	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
+	hashObj.sfv = hashObj.pattern+".%ext %crc";
+	space_pattern = CookieGet('space_pattern') || "_";
+	hashObj.spacesChar = space_pattern;
+	use_mylist_add = CookieGet('use_mylist_add') || 0;
+	mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
+	mylist_add_state = CookieGet('mylist_add_state') || 0;
+	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
+	mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
+	mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
+	mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
+	group_check_type = CookieGet('group_check_type') || 0;
+	group_langfilter = CookieGet('group_langfilter') || 1;
+	collapseThumbnails = CookieGet('collapseThumbnails') || 0;
+	anime_get_entityinfo = CookieGet('anime_get_entityinfo') || 0;
+	animePage_curSort = CookieGet('animePage_curSort') || 'default';
+	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
+	animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
+	animePageLayout = animePageLayout.split(',');
+	animePage_curLayout = new Array();
+	for (var ci = 0; ci < animePageLayout.length; ci++)
+		animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
+	storedTab = CookieGet('tab') || '';
+}
+
 /* Function that adds file columns */
 function addColToBox() {
 	var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
@@ -1133,34 +1167,7 @@ function createPreferencesTable(type) {
 
 	/* load settings from cookie */
 
-	animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
-	episodeAltTitleLang = CookieGet('episodeAltTitleLang') || "x-jat";
-	episodeTitleDisplay = CookieGet('episodeTitleDisplay') || 2;
-	ed2k_pattern = CookieGet('ed2k_pattern') || "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
-	hashObj.pattern = ed2k_pattern;
-	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
-	hashObj.sfv = hashObj.pattern+".%ext %crc";
-	space_pattern = CookieGet('space_pattern') || "_";
-	hashObj.spacesChar = space_pattern;
-	use_mylist_add = CookieGet('use_mylist_add') || 0;
-	mylist_add_viewed_state = CookieGet('mylist_add_viewed_state') || 0;
-	mylist_add_state = CookieGet('mylist_add_state') || 0;
-	mylist_add_fstate = CookieGet('mylist_add_fstate') || 0;
-	mylist_get_animeinfo = CookieGet('mylist_get_animeinfo') || 0;
-	mylist_get_animeinfo_sz = CookieGet('mylist_get_animeinfo_sz') || '150';
-	mylist_get_animeinfo_mw = CookieGet('mylist_get_animeinfo_mw') || '450';
-	group_check_type = CookieGet('group_check_type') || 0;
-	group_langfilter = CookieGet('group_langfilter') || 1;
-	collapseThumbnails = CookieGet('collapseThumbnails') || 0;
-	anime_get_entityinfo = CookieGet('anime_get_entityinfo') || 0;
-	animePage_curSort = CookieGet('animePage_curSort') || 'default';
-	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
-	var animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
-	animePageLayout = animePageLayout.split(',');
-	animePage_curLayout = new Array();
-	for (var ci = 0; ci < animePageLayout.length; ci++)
-		animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
-	var storedTab = CookieGet('tab') || '';
+	loadSettings();
 	
 	/* create preferences tabs */
 
@@ -1692,7 +1699,7 @@ function createPreferencesTable(type) {
 					CookieSet('animePage_curSort',animePage_curSort);
 					CookieSet('mylist_get_animeinfo_mw',mylist_get_animeinfo_mw);
 					CookieSet('mylist_get_animeinfo_sz',mylist_get_animeinfo_sz);
-					CookieSet('anime_get_entityinfo',anime_get_entityinfo);
+					CookieSet('anime_get_entityinfo',Number(anime_get_entityinfo));
 					CookieSet('collapseThumbnails',collapseThumbnails);
 					alert('Current Layout preferences saved.');
 				}

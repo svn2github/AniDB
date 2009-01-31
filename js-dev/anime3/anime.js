@@ -54,7 +54,7 @@ var IRC_FILTERRELEASESBYLANG = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
-var seeDebug = false;
+var seeDebug = true;
 var seeTimes = false;
 var epInterval = 250; // This one needs work
 var epInt; // Interval ID
@@ -293,6 +293,126 @@ function prepPage() {
 		}
 		if (isNaN(aid)) return;
 	}
+	loadSettings();
+	// add a collapse function to character and what not rows
+	// also add sorting classes (needs all cols defined)
+	var sortingCols = {
+		'characterlist': [	{"type":'c_none',"isDefault":false},	// image
+							{"type":'c_setlatin',"isDefault":true},// name
+							{"type":'c_latin',"isDefault":false},	// entitiy
+							{"type":'c_setlatin',"isDefault":false},// seiyuu
+							{"type":'c_latin',"isDefault":false},	// primary
+							{"type":'c_latin',"isDefault":false},	// comment
+							{"type":'c_latin',"isDefault":false},	// relation
+							{"type":'c_setlatin',"isDefault":false},// rating
+							{"type":'c_none',"isDefault":false}	],	// action
+		'relationslist': [	{"type":'c_none',"isDefault":false},	// image
+							{"type":'c_setlatin',"isDefault":true},// name
+							{"type":'c_latin',"isDefault":false},	// type
+							{"type":'c_number',"isDefault":false},	// episodes
+							{"type":'c_date',"isDefault":false},	// year
+							{"type":'c_setlatin',"isDefault":false},// rating
+							{"type":'c_latin',"isDefault":false},	// relation
+							{"type":'c_setlatin',"isDefault":false},// mylist
+							{"type":'c_setlatin',"isDefault":false}],// seen
+		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
+							{"type":'c_none',"isDefault":false},	// name
+							{"type":'c_none',"isDefault":false},	// episode restriction
+							{"type":'c_none',"isDefault":false}],	// comment
+		'reviewlist': [		{"type":'c_none',"isDefault":false},	// image
+							{"type":'c_setlatin',"isDefault":true},// name
+							{"type":'c_latin',"isDefault":false},	// avg rating
+							{"type":'c_latin',"isDefault":false},	// approval
+							{"type":'c_none',"isDefault":false}	]	// action
+	};
+	if (true) { // just wanted a nice toggle switch :P
+		var tables = new Array();
+		var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist'];
+		for (var t = 0; t < tableNames.length; t++) {
+			var tester = document.getElementById(tableNames[t]);
+			if (tester) tables.push(tester);
+		}
+		for (var t = 0; t < tables.length; t++) {
+			var table = tables[t];
+			var tbody = table.tBodies[0];
+			var thead = table.getElementsByTagName('thead')[0];
+			if (!thead) {
+				thead = document.createElement('thead');
+				thead.appendChild(tbody.rows[0]);
+				table.insertBefore(thead,tbody);
+			}
+			// apply sorting
+			var sortingCol = sortingCols[table.id];
+			if (sortingCol != undefined) {
+				var ths = thead.getElementsByTagName('th');
+				if (sortingCol.length >= ths.length) { 
+					var defaultTh = null;
+					var defaultSort = null;
+					for (var i = 0; i < ths.length; i++) {
+						ths[i].className += ' '+sortingCol[i]['type'];
+						if (sortingCol[i]['isDefault']) {
+							defaultTh = ths[i];
+							defaultSort = 'down';
+						}
+					}
+					init_sorting(table,defaultTh,defaultSort);
+				} else { errorAlert("parseData",'Collumn definitions ('+sortingCol.length+' vs '+ths.length+') for a given table do not match processed table: '+table.id); return; }
+			}
+			if (table.id == 'reviewlist') continue; // i don't want to process reviews
+			if (!Number(collapseThumbnails) && !Number(anime_get_entityinfo)) continue; // don't do the rest of the stuff
+			for (var r = 0; r < tbody.rows.length; r++) {
+				var row = tbody.rows[r];
+				if (Number(collapseThumbnails)) {
+					// add onmouseover/onmouseout effects
+					addEventSimple(row, "mouseover", function showImages(event) {
+						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+						for (var i = 0; i < images.length; i++) {
+							var imageCell = images[i];
+							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+							if (img) img.style.display = '';
+						}
+					});
+					addEventSimple(row, "mouseout", function showImages(event) {
+						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+						for (var i = 0; i < images.length; i++) {
+							var imageCell = images[i];
+							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+							if (img) img.style.display = 'none';
+						}
+					});
+					// collapse images
+					var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
+					for (var i = 0; i < images.length; i++) {
+						var imageCell = images[i];
+						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+						if (img) img.style.display = 'none';
+					}
+				}
+				if (Number(anime_get_entityinfo)) {
+					if (table.id != 'characterlist' && table.id != 'relationslist') continue;
+					var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
+					for (var n = 0; n < names.length; n++) {
+						var nameCell = names[n];
+						var a = nameCell.getElementsByTagName('a')[0];
+						if (!a) continue;
+						nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
+						var type = (a.href.indexOf('creator') >= 0 ? 'creator' : (a.href.indexOf('character') >= 0 ? 'character' : 'anime'));
+						var id = a.href.substring(a.href.indexOf('id=')+3);
+						var icons = document.createElement('span');
+						icons.className = 'icons';
+						var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show information', 'i_mylist_ainfo_greyed');
+						if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
+						else infoIcon.id = 'ainfo_'+id;
+						icons.appendChild(infoIcon);
+						var label = document.createElement('label');
+						label.appendChild(a);
+						nameCell.appendChild(label);
+						nameCell.insertBefore(icons,label);
+					}
+				}
+			}
+		}
+	}
 	fetchData(aid);
 }
 
@@ -369,121 +489,6 @@ function parseData(xmldoc) {
 		}
 	}
 	var gEGD = new Date() - t2;
-	// add a collapse function to character and what not rows
-	// also add sorting classes (needs all cols defined)
-	var sortingCols = {
-		'characterlist': [	{"type":'c_none',"isDefault":false},	// image
-							{"type":'c_setlatin',"isDefault":true},// name
-							{"type":'c_latin',"isDefault":false},	// entitiy
-							{"type":'c_setlatin',"isDefault":false},// seiyuu
-							{"type":'c_latin',"isDefault":false},	// primary
-							{"type":'c_latin',"isDefault":false},	// comment
-							{"type":'c_latin',"isDefault":false},	// relation
-							{"type":'c_setlatin',"isDefault":false},// rating
-							{"type":'c_none',"isDefault":false}	],	// action
-		'relationslist': [	{"type":'c_none',"isDefault":false},	// image
-							{"type":'c_setlatin',"isDefault":true},// name
-							{"type":'c_latin',"isDefault":false},	// type
-							{"type":'c_number',"isDefault":false},	// episodes
-							{"type":'c_latin',"isDefault":false}],	// relation
-		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
-							{"type":'c_none',"isDefault":false},	// name
-							{"type":'c_none',"isDefault":false},	// episode restriction
-							{"type":'c_none',"isDefault":false}],	// comment
-		'reviewlist': [		{"type":'c_none',"isDefault":false},	// image
-							{"type":'c_setlatin',"isDefault":true},// name
-							{"type":'c_latin',"isDefault":false},	// avg rating
-							{"type":'c_latin',"isDefault":false},	// approval
-							{"type":'c_none',"isDefault":false}	]	// action
-	};
-	if (true) { // just wanted a nice toggle switch :P
-		var tables = new Array();
-		var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist'];
-		for (var t = 0; t < tableNames.length; t++) {
-			var tester = document.getElementById(tableNames[t]);
-			if (tester) tables.push(tester);
-		}
-		for (var t = 0; t < tables.length; t++) {
-			var table = tables[t];
-			var tbody = table.tBodies[0];
-			var thead = table.getElementsByTagName('thead')[0];
-			if (!thead) {
-				thead = document.createElement('thead');
-				thead.appendChild(tbody.rows[0]);
-				table.insertBefore(thead,tbody);
-			}
-			// apply sorting
-			var sortingCol = sortingCols[table.id];
-			if (sortingCol != undefined) {
-				var ths = thead.getElementsByTagName('th');
-				if (ths.length == sortingCol.length) { 
-					var defaultTh = null;
-					var defaultSort = null;
-					for (var i = 0; i < ths.length; i++) {
-						ths[i].className += ' '+sortingCol[i]['type'];
-						if (sortingCol[i]['isDefault']) {
-							defaultTh = ths[i];
-							defaultSort = 'down';
-						}
-					}
-					init_sorting(table,defaultTh,defaultSort);
-				} else { errorAlert("parseData",'Collumn definitions ('+ths.length+' vs '+sortingCol.length+') for a given table do not match processed table: '+table.id); return; }
-			}
-			if (table.id == 'reviewlist') continue; // i don't want to process reviews
-			if (!Number(collapseThumbnails) && !Number(anime_get_entityinfo)) continue; // don't do the rest of the stuff
-			for (var r = 0; r < tbody.rows.length; r++) {
-				var row = tbody.rows[r];
-				if (Number(collapseThumbnails)) {
-					// add onmouseover/onmouseout effects
-					addEventSimple(row, "mouseover", function showImages(event) {
-						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-						for (var i = 0; i < images.length; i++) {
-							var imageCell = images[i];
-							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-							if (img) img.style.display = '';
-						}
-					});
-					addEventSimple(row, "mouseout", function showImages(event) {
-						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-						for (var i = 0; i < images.length; i++) {
-							var imageCell = images[i];
-							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-							if (img) img.style.display = 'none';
-						}
-					});
-					// collapse images
-					var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
-					for (var i = 0; i < images.length; i++) {
-						var imageCell = images[i];
-						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-						if (img) img.style.display = 'none';
-					}
-				}
-				if (Number(anime_get_entityinfo)) {
-					if (table.id != 'characterlist' && table.id != 'relationslist') continue;
-					var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
-					for (var n = 0; n < names.length; n++) {
-						var nameCell = names[n];
-						var a = nameCell.getElementsByTagName('a')[0];
-						if (!a) continue;
-						nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
-						var type = (a.href.indexOf('creator') >= 0 ? 'creator' : (a.href.indexOf('character') >= 0 ? 'character' : 'anime'));
-						var id = a.href.substring(a.href.indexOf('id=')+3);
-						var icons = document.createElement('span');
-						icons.className = 'icons';
-						var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show information', 'i_mylist_ainfo_greyed');
-						if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
-						else infoIcon.id = 'ainfo_'+id;
-						icons.appendChild(infoIcon);
-						var label = document.createElement('label');
-						label.appendChild(a);
-						nameCell.appendChild(label);
-						nameCell.insertBefore(icons,label);
-					}
-				}
-			}
-		}
-	}
 	t2 = new Date();
 	updateAddToMylistBox();
 	var uAB = new Date() - t2;
