@@ -423,7 +423,7 @@ function createGroupRow(gid,cols,skips) {
 				createCell(row, col['classname']+newFile, document.createTextNode(cTimeDate(group.lastUp)), null, colSpan);
 				break;
 			case 'group':
-				createCell(row, col['classname'], createLink(null,group.shortName,'animedb.pl?show=group&gid=' + group.id, null, null, clean_input(group.name), null), group.shortName.toLowerCase(), colSpan);
+				createCell(row, col['classname'], createLink(null,clean_input(group.shortName),'animedb.pl?show=group&gid=' + group.id, null, null, clean_input(group.name), null), group.shortName.toLowerCase(), colSpan);
 				break;
 			case 'state':
 				createCell(row, col['classname']+ ' '+group.state, createLink(null,group.state,'animedb.pl?show=group&gid='+group.id+'&aid='+anime.id,null,null,null,null), null, colSpan);
@@ -760,7 +760,7 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 					var label = document.createElement('label');
 					if (!file.pseudoFile) {
 						if (groupEntry) 
-							label.appendChild(createLink(null, groupEntry.shortName, 'animedb.pl?show=group&gid=' + file.groupId, 'extern anidb', null, 'group name: ' + groupEntry.name, null));
+							label.appendChild(createLink(null, clean_input(groupEntry.shortName), 'animedb.pl?show=group&gid=' + file.groupId, 'extern anidb', null, 'group name: ' + clean_input(groupEntry.name), null));
 						else 
 							label.appendChild(document.createTextNode('no group'));
 					} else {
