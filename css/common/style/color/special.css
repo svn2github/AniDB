@@ -50,36 +50,6 @@ th a, h1 a.short_link
 	color: inherit;
 }
 
-#layout-main div.addseq_all div.explanation div.description,
-#layout-main div.addcharcharrel_all div.explanation div.description,
-#layout-main div.addcreatorcreatorrel_all div.explanation div.description,
-#layout-main div.addcreatoranimerel_all div.explanation div.description
-{
-	background-color:#F4F4F4;
-	border:1px solid #D1D7DC;
-}
-
-#layout-main div.addseq_all div.explanation div.description dl + dl,
-#layout-main div.addcharcharrel_all div.explanation div.description dl + dl,
-#layout-main div.addcreatorcreatorrel_all div.explanation div.description dl + dl,
-#layout-main div.addcreatoranimerel_all div.explanation div.description dl + dl
-{
-	border-top:1px solid #D1D7DC;
-}
-
-#layout-main div.main_all div.profile_all #style_thumbnail
-{
-	background-color:#F9F9F9;
-	border:1px solid #CCCCCC;
-}
-
-#layout-main div.main_all div.register div.inner,
-#layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *
-{
-	background-color:#A9ABB1;
-}
-
 #layout-main div.tabbed_pane ul.tabs
 {
 	background-color:transparent;
