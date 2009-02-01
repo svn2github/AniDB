@@ -945,10 +945,14 @@ function c_number_r(a, b) {
   return c_number(b, a);
 }
 function dig_text(node) {
-	if (!node) return ("");
-	while (node && !node.nodeValue) { node = node.firstChild; }
-	if (!node) return (""); 
-	return node.nodeValue;
+	if (!node) return ("0");
+	if (node.childNodes.length == 1 && node.firstChild.nodeValue) return node.firstChild.nodeValue;
+	for (var i = 0; i < node.childNodes.length; i++) {
+		var childNode = node.childNodes[i];
+		if (childNode.nodeType == 3) continue; // #text node
+		return dig_text(childNode); // recursive mode, the first node has to have everything!
+	}
+	return ("0");
 }
 function dig_text_lower(node) {
 	return dig_text(node).toLowerCase();
@@ -1185,7 +1189,6 @@ function sortcol(node) {
 
 	tbody.style.display = 'none';
 
-	// @TODO: update this to support multiple rows
 	var rowIndex = -1;
 	var tmpRows = new Array();
 	var cellValue = "";
@@ -1196,8 +1199,6 @@ function sortcol(node) {
 		tbody.removeChild(row);
 		var rowSpan = (row.className.indexOf('rowspan') >= 0);
 		if (!rowSpan) rowIndex++;
-		if (!auxRows[rowIndex]) auxRows[rowIndex] = new Array();
-		auxRows[rowIndex].push(row);
 		var cells = row.getElementsByTagName('td');
 		var cell = null;
 		if (cells.length == headingNodes.length) // do this the easy way
@@ -1209,14 +1210,27 @@ function sortcol(node) {
 				break;
 			}
 		}
+		if (!auxRows[rowIndex]) auxRows[rowIndex] = new Array();
+		auxRows[rowIndex].push([auxRows[rowIndex].length,(cell ? funcmap['getval'](cell) : '0'),row]);
 		if (!rowSpan) {
-			sortMap.push([rowIndex,(cell ? funcmap['getval'](cell) : "0")]);
+			// okay, i'll have to sort first the auxRows for this index
+			auxRows[rowIndex].sort(funcmap[sortingMode]);
+			sortMap.push([rowIndex,auxRows[rowIndex][0][1]]);
 			cellValue = "";
 			lastRowSpan = rowSpan;
 		}
 	}
+	/*
+	var sortText = new Array();
+	for (var i = 0; i < sortMap.length; i++) sortText.push(sortMap[i][0]+'|'+sortMap[i][1]);
+	alert('in:\n'+sortText.join('\n')); */
 	// now sort the map
 	sortMap.sort(funcmap[sortingMode]);
+	/*
+	sortText = new Array();
+	for (var i = 0; i < sortMap.length; i++) sortText.push(sortMap[i][0]+'|'+sortMap[i][1]);
+	alert('out:\n'+sortText.join('\n'));
+	*/
 	// and re-add the sorted rows and repaint the rows
 	for (var i = 0; i < sortMap.length; i++) {
 		var map = sortMap[i];
@@ -1224,7 +1238,7 @@ function sortcol(node) {
 		var rl = tmpRows.length;
 		var ik = i;
 		for (var k = 0; k < rl; k++) {
-			var row = tmpRows[k];
+			var row = tmpRows[k][2];
 			if (rl < 3) // single row case or just one extra rowspan
 				row.className = ((i % 2) ? "g_odd " : "")+row.className.replace(/ g_odd|g_odd/ig,"");
 			else {	// multi row case, not so easy one
