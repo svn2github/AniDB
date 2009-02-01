@@ -252,7 +252,7 @@ div.quotebody
 #layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner
 {
-	background-color: inherit;
+	background-color: #3B3B3B;
 }
 
 #layout-main div.forum div.signature,
@@ -263,11 +263,11 @@ div.quotebody
 
 #layout-main div.forum ul.topics
 {
-	border-left-color:#000000;
-	border-right-color:#000000;
+	border-left-color:#3B3B3B;
+	border-right-color:#3B3B3B;
 }
 
-#layout-main div.forum ul.topiclist li
+#layout-main div.forum ul.topics li.row
 {
 	border-bottom:1px solid #777777;
 	border-top: none;
