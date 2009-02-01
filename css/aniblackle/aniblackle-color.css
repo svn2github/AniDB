@@ -269,8 +269,8 @@ div.quotebody
 
 #layout-main div.forum ul.topics li.row
 {
-	border-bottom:1px solid #777777;
-	border-top: none;
+	border-top:1px solid #777777;
+	border-bottom: none;
 }
 
 #layout-main div.forum ul.topics li.row
@@ -281,13 +281,6 @@ div.quotebody
 #layout-main div.forum ul.topics li.g_odd
 {
 	background-color:#3F3F3F;
-}
-
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
-{
-	background-color:#000000;
 }
 
 #layout-main div.forum a.topictitle
