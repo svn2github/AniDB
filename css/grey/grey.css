@@ -934,9 +934,13 @@ content: " *";
 {
 text-align: center;
 }
-#layout-content div.ed2kdump_box textarea
+#layout-content div.ed2kdump_box textarea,
 {
 width: 80%;
+}
+#layout-main div.profile_all div.tabbed_pane div.user_css div textarea
+{
+width: 80em;
 }
 #layout-content div.anime_all a.action:before
 {
@@ -1536,7 +1540,9 @@ margin-top: 2em;
 clear: none;
 }
 #layout-main div.userpage_all div.charts,
-#layout-main div.userpage_all div.latest
+#layout-main div.userpage_all div.latest,
+#layout-content div.userpage_all div.userdetails,
+#layout-content div.userpage_all div.userprefs
 {
 clear: none;
 margin-left: 19.5em;
@@ -1603,13 +1609,6 @@ margin-bottom: 1em;
 {
 padding: 1px 6px 1px 6px;
 }
-#layout-content div.userpage_all div.userdetails,
-#layout-content div.userpage_all div.userprefs
-{
-margin-left: 19em;
-margin-right: 13em;
-clear: none;
-}
 #layout-main div.userpage_all div.userdetails
 {
 display: table;
@@ -1642,7 +1641,7 @@ margin-left: 50px;
 #layout-content div.userpage_all ul.g_list.links,
 #layout-content div.userpage_all div.charts div.mylisthistory
 {
-clear: both;
+clear: none;
 }
 #layout-content div.myvotes_all
 {
