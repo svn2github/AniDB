@@ -54,7 +54,7 @@ var IRC_FILTERRELEASESBYLANG = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
-var seeDebug = true;
+var seeDebug = false;
 var seeTimes = false;
 var epInterval = 250; // This one needs work
 var epInt; // Interval ID
@@ -413,6 +413,7 @@ function prepPage() {
 			}
 		}
 	}
+	prepareTabs();
 	fetchData(aid);
 }
 
