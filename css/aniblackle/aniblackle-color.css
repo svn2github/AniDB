@@ -262,3 +262,9 @@ div.quotebody
 {
 	color:#666666;
 }
+
+#layout-main div.forum div.signature,
+#layout-main div.forum div.navbar div.inner div.bottom
+{
+	border-top-color:#888888;
+}
