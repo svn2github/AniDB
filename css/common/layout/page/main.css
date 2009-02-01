@@ -91,13 +91,6 @@
 
 }
 
-#layout-main div.main_all div.register div.inner,
-#layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *
-{
-	background-color:#A9ABB1;
-}
-
 #layout-main div.main_all div.register
 {
 	margin-left: 3em;

@@ -10,12 +10,6 @@
 	border-spacing: 1em;
 }
 
-#layout-main div.stats_all table tr,
-#layout-main div.dbstats_all table tr
-{
-	background-color: transparent;
-}
-
 #layout-main div.stats_all table td,
 #layout-main div.dbstats_all table td
 {

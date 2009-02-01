@@ -124,7 +124,8 @@ body.nonav #layout-main h1
 	display: none;
 }
 
-#obj-tooltip {
+#obj-tooltip
+{
 	position: absolute;
 	left: 0px;
 	width: 300px;
@@ -136,11 +137,12 @@ body.nonav #layout-main h1
 	font-size: x-small;
 }
 
-#obj-pointer {
+#obj-pointer
+{
 	position: absolute;
 	left: -300px;
-  width: 15px;
-  height: 13px;
+	width: 15px;
+	height: 13px;
 	z-index: 101;
 	visibility: hidden;
 }
@@ -156,21 +158,23 @@ body.nonav #layout-main h1
 }
 
 /* this is in common/layout/common.css, put it in someother place if it irks you :P */
-ul.format-modes {
+ul.format-modes
+{
 	list-style: none;
 }
 
-ul.format-modes li {
+ul.format-modes li
+{
 	display: inline;
 	padding: 0px 5px 2px 5px;
 	border: solid 1px black;
 	margin: 2px;
 	background-color: rgb(191, 194, 201);
 	cursor: pointer;
-	/*text-decoration: underline;*/
 }
 
-ul.format-modes li.selected, ul.format-modes li:hover {
+ul.format-modes li.selected, ul.format-modes li:hover
+{
 	background-color: #8492B5;
 	text-decoration: none;
 }

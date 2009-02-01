@@ -1,11 +1,10 @@
 /* This way it applies to all ul's */
-ul.acdropdown {
+ul.acdropdown
+{
 	margin:0; 
 	padding:0;
 	overflow:auto;
-	border:1px solid #85878c;
 	list-style-type:none;
-	background-color: white;
 }
 
 ul.acdropdown li {
@@ -14,8 +13,3 @@ ul.acdropdown li {
 	cursor: pointer;
 }
 
-ul.acdropdown li.selected,
-ul.acdropdown li:hover {
-	color:#FFFFFF;
-	background:#5e81bc;
-}
