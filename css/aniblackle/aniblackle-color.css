@@ -37,7 +37,7 @@ span.g_odd
 
 #layout-menu > li ul
 {
-	background-color:#888888;
+	background-color:#555555;
 	border-color:#000000;
 }
 
@@ -45,11 +45,6 @@ span.g_odd
 {
 	background-color:#000000;
 	border-bottom-color:#000000;
-}
-
-#layout-menu li.sub-menu ul li:hover
-{
-	background-color:#555555;
 }
 
 #layout-main div.pagination span a
@@ -314,8 +309,7 @@ div.quotebody
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-menu li.sub-menu:hover,
-#layout-menu li.sub-menu ul li:hover
+#layout-menu li.sub-menu:hover
 {
 	background-color:#555555;
 }
@@ -323,4 +317,9 @@ div.quotebody
 #layout-main div.cmt_entries dl.profile
 {
 	border-right-color:#666666;
+}
+
+#layout-menu li.sub-menu ul li:hover
+{
+    background-color:#888888;
 }
