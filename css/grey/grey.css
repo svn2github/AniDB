@@ -1,12 +1,13 @@
 @import "../icons/all.css";
 @import "../common/layout/page/all.css";
-/*@import "../common/layout/page/latestanimes.css";
+@import "../common/layout/page/latestanimes.css";
 @import "../common/layout/page/animeatt.css";
+@import "../common/layout/page/export.css";
 @import "../common/layout/page/tags.css";
 @import "../common/layout/page/chartags.css";
 @import "../common/layout/page/charlist.css";
 @import "../common/layout/page/cmt.css";
-@import "../common/layout/page/addentity.css";*/
+@import "../common/layout/page/addentity.css";
 @import "../common/layout/global/tabbed_pane.css";
 @import "../common/layout/global/timedentry.css";
 @import "../common/layout/global/menu.css";
@@ -115,6 +116,7 @@ font-family: Arial Unicode MS;
 font-size: 11px;
 margin-left: 0.3em;
 }
+#adba_update,
 #style_next,
 #style_prev,
 #remAudLang,
@@ -137,6 +139,7 @@ border-style: dashed;
 background-image: url(images/bg_2.gif);
 text-shadow: none;
 }
+#adba_update:hover,
 #style_next:hover,
 #style_prev:hover,
 #remAudLang:hover,
@@ -931,6 +934,10 @@ content: " *";
 {
 text-align: center;
 }
+#layout-content div.ed2kdump_box textarea
+{
+width: 80%;
+}
 #layout-content div.anime_all a.action:before
 {
 content: "[";
@@ -1023,29 +1030,36 @@ content: "Jump to"
 {
 content: ""
 }
-#layout-content div.dbstats_all
+#layout-content div.dbstats_all,
+#layout-content div.stats_all
 {
-width: 80%;
+max-width: 80%;
+padding: auto;
+margin: auto;
 }
-#layout-content div.dbstats_all div.stat
+#layout-content div.dbstats_all div.stat,
+#layout-content div.stats_all div.stat
 {
 float: left;
 margin: 0.3em 0.1em 0.1em 0.3em;
 border: 2px #BFC2CA ridge;
 width: 20em;
 }
-#layout-content div.dbstats_all div.actions
+#layout-content div.dbstats_all div.actions,
+#layout-content div.stats_all div.actions
 {
 clear: left;
 text-align: center;
 }
-#layout-content div.dbstats_all h3
+#layout-content div.dbstats_all h3,
+#layout-content div.stats_all h3
 {
 clear: left;
 font-size: 100%;
 text-align: center;
 }
-#layout-content div.dbstats_all h4
+#layout-content div.dbstats_all h4,
+#layout-content div.stats_all h4
 {
 background-image: url(images/redpixel.png);
 color: white;
@@ -1056,34 +1070,37 @@ text-align: center;
 padding: 0.3em;
 margin-bottom: 0.1em;
 }
-#layout-content div.dbstats_all div.dbstats ol
+#layout-content div.dbstats_all div.dbstats ol,
+#layout-content div.stats_all div.stats ol
 {
 margin: 0;
 padding: 0;
+width: 100%;
 }
-#layout-content div.dbstats_all div.dbstats li
+#layout-content div.dbstats_all div.dbstats li,
+#layout-content div.stats_all div.stats li
 {
 list-style: none;
 text-align: left;
 padding: 0.1em;
 }
-#layout-content div.dbstats_all div.dbstats li span
+#layout-content div.dbstats_all div.dbstats li span,
+#layout-content div.stats_all div.stats li span
 {
-display: block;
-float: left;
-height: 100%;
-width: 4.2em;
+display: table-cell;
+width: 5.2em;
 text-align: right;
 white-space: nowrap;
 }
-#layout-content div.dbstats_all div.dbstats li a
+#layout-content div.dbstats_all div.dbstats li a,
+#layout-content div.stats_all div.stats li a
 {
-display: table;
-margin-left: 0.3em;
+display: table-cell;
+padding-left: 0.7em;
 }
-#layout-content div.dbstats_all div.dbstats table
+#layout-main div.stats_all table, #layout-main div.dbstats_all table
 {
-width: 100%;
+border-spacing: 0;
 }
 /* Default center is probably too zealous... */
 #layout-content div.ep_info table
@@ -1513,9 +1530,21 @@ display: block;
 #layout-content div.userpage_all div.stats,
 #layout-content div.myplace_all div.stats
 {
-position: absolute;
+float: left;
 width: 13.1em;
 margin-top: 2em;
+clear: none;
+}
+#layout-main div.userpage_all div.charts,
+#layout-main div.userpage_all div.latest
+{
+clear: none;
+margin-left: 19.5em;
+margin-right: 14em;
+}
+#layout-main div.userpage_all div.g_menu
+{
+width: 10em;
 }
 #layout-content div.userpage_all div.stats table,
 #layout-content div.userpage_all div.stats table caption,
@@ -1665,50 +1694,6 @@ white-space: nowrap;
 #layout-content div.myvotes_all ul.type
 {
 float: left;
-}
-#layout-content div.stats_all div.stats
-{
-margin: 0.3em 0.1em 0.1em 0.3em;
-min-width: 15em;
-}
-#layout-content div.stats_all div.actions
-{
-clear: left;
-text-align: center;
-}
-#layout-content div.stats_all h4
-{
-background-image: url(images/redpixel.png);
-color: white;
-font-weight: bold;
-font-size: 100%;
-margin-bottom: 0.1em;
-text-align: center;
-padding: 0.3em;
-}
-#layout-content div.stats_all div.stats ol
-{
-margin: 0;
-padding: 0;
-}
-#layout-content div.stats_all div.stats li
-{
-list-style: none;
-text-align: left;
-}
-#layout-content div.stats_all div.stats li span
-{
-display: block;
-float: left;
-height: 100%;
-width: 5.2em;
-text-align: right;
-white-space: nowrap;
-}
-#layout-content div.stats_all div.stats li a
-{
-display: table;
-margin-left: 0.5em;
 }
 a.i_icon:hover, a.i_inline:hover
 {
@@ -2223,7 +2208,7 @@ padding: 1px;
 border: none;
 margin: 0;
 }
-html, body, div, form, table, tr, td, ol, dl, li, dt, dd, h1, h2, h3, h4, p, caption
+html, body, div, form, table
 {
 left: 0;
 }
@@ -2290,8 +2275,13 @@ margin-right: 0;
 #layout-main div.quotebody
 {
 margin-left: 2em;
-background: url(images/bg_2.gif);
+background: url(images/bg_3.gif);
 border: #898989 1px dashed;
+}
+#layout-main div.quotebody div.quotebody:nth-of-type(2n+1),
+#layout-main div.forum div.postbody dl.codebox
+{
+background: url(images/bg_1.gif);
 }
 #layout-main div.quotebody div.quoteof
 {
@@ -2367,7 +2357,7 @@ height: 350px;
 {
 width: 100%;
 }
-#layout-main div.news p.comment
+#layout-main div.main_all div.news p.comment
 {
 float: right;
 margin-top: -1.4em;
@@ -2384,14 +2374,9 @@ div.tagcloud span:nth-child(2n+1) a:active
 color: blue;
 }
 /*FORUM*/
-div.quotebody
-{
-background-color:#EBEADD;
-border:1px solid #DBDBDB;
-}
 div.quotebody div.quote div.g_odd
 {
-background-color:#EFEED9;
+background-image: url(images/bg_2.gif);
 }
 #layout-main div.forum ul.topiclist li
 {
@@ -2412,20 +2397,19 @@ color:#FFFFFF;
 background-position:5px 50%;
 background-repeat:no-repeat;
 }
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner
 {
 background: inherit;
 }
+#layout-main div.forum div.comment div.inner,
 #layout-main div.forum ul.topics li.g_odd
 {
 background-image: url(images/bg_2.gif)
 }
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *,
 #layout-main div.forum div.inner,
-#layout-main div.forum ul.topics li.row:hover
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum div.poll div.inner,
+#layout-main div.export_all div.exportblock div.inner
 {
 background-image: url(images/bg_3.gif)
 }
@@ -2439,18 +2423,8 @@ opacity:0.3;
 background-image: url(images/bg_2.gif)
 }
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
 {
 border-top-color:#121212;
-}
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *
-{
-background-color:#A9ABB1;
 }
 #layout-main div.forum div.poll div.pollbar
 {
@@ -2479,21 +2453,21 @@ border-bottom-color:#4A4A5A;
 }
 #layout-main div.forum div.postbody dl.codebox code
 {
-color:#2E8B57;
+color: white;
 }
 #layout-main div.forum div.postbody dl.codebox
 {
-background-color:#FFFFFF;
+background-image: url(images/bg_1.gif);
 border-color:#C9D2D8;
 }
 #layout-main div.forum div.postbody dl.codebox dt
 {
+background-image: url(images/bg_3.gif);
 border-bottom-color:#CCCCCC;
-color:#000000;
+color: white;
+font-weight: bold;
 }
-#layout-main div.forum div.rules div.inner,
-#layout-main div.forum div.rules .rtop *,
-#layout-main div.forum div.rules .rbottom *
+#layout-main div.forum div.rules div.inner
 {
 background-color:#ECD5D8;
 }
@@ -2672,4 +2646,50 @@ margin-left: auto;
 margin-right: auto;
 display: table-caption;
 width: auto;
+}
+th.c_set,
+th.c_setlatin,
+th.c_date,
+th.c_latin,
+th.c_number,
+#layout-main th a.inactive {
+background: url(images/redpixel.png);
+padding-left: inherit;
+}
+th.s_forward, 
+#layout-main th a.descending {
+background: url(images/redpixel.png);
+padding-left: inherit;
+text-decoration: overline;
+}
+th.s_reverse,
+#layout-main th a.ascending{
+background: url(images/redpixel.png);
+padding-left: inherit;
+text-decoration: underline;
+}
+#layout-main div.addseq_all div.explanation div.description,
+#layout-main div.addcharcharrel_all div.explanation div.description,
+#layout-main div.addcreatorcreatorrel_all div.explanation div.description,
+#layout-main div.addcreatoranimerel_all div.explanation div.description
+{
+background: url(images/bg_2.gif);
+border:1px solid #D1D7DC;
+}
+
+#layout-main div.addseq_all div.explanation div.description dl + dl,
+#layout-main div.addcharcharrel_all div.explanation div.description dl + dl,
+#layout-main div.addcreatorcreatorrel_all div.explanation div.description dl + dl,
+#layout-main div.addcreatoranimerel_all div.explanation div.description dl + dl
+{
+border-top:1px solid #D1D7DC;
+}
+*.rbottom,
+*.rtop
+{
+display: none;
+}
+*.rating
+{
+white-space: nowrap;
 }
