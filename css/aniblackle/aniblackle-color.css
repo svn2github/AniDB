@@ -234,6 +234,27 @@ div.quotebody
 	color:#666666;
 }
 
+#layout-main div.tagcloud
+{
+    background-color:#444444;
+}
+
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner,
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *,
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner
+{
+	background-color: inherit;
+}
+
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
