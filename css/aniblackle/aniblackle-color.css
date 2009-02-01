@@ -308,3 +308,14 @@ div.quotebody
 {
 	opacity:0.6;
 }
+
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-menu li.sub-menu:hover,
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#555555;
+}
