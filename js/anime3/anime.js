@@ -555,6 +555,7 @@ function doGroupTableOperations(op) {
 	var groupTable = document.getElementById('grouplist');
 	if (!groupTable) return;
 	var tbody = groupTable.tBodies[0];
+	tbody.style.display = 'none';
 	var tfoot = groupTable.tFoot;
 	var visible = 0;
 	for (var g = 0; g < tbody.rows.length; g++) {
@@ -563,12 +564,14 @@ function doGroupTableOperations(op) {
 		var group = groups[gid];
 		if ((op == 'expand' && !group.langFiltered) || (op == 'fold' && group.defaultVisible) ) {
 			row.style.display = '';
-			gODD(visible,row);
+			row.className = row.className.replace(/ g_odd|g_odd/ig,'');
+			if (visible % 2) row.className = 'g_odd '+row.className;
 			visible++;
 		}
 		else row.style.display = 'none';
 	}
-	gODD(visible,tfoot.rows[0]);
+	tfoot.rows[0].className = tfoot.rows[0].className.replace(/ g_odd|g_odd/ig,'');
+	if (visible % 2) tfoot.rows[0].className = 'g_odd '+tfoot.rows[0].className;
 	var cell = getElementsByClassName(tfoot.rows[0].getElementsByTagName('td'), 'action', false)[0];
 	if (cell) {
 		var ahref = cell.getElementsByTagName('a')[0];
@@ -584,6 +587,7 @@ function doGroupTableOperations(op) {
 			}
 		}
 	}
+	tbody.style.display = '';
 }
 
 
@@ -1577,6 +1581,7 @@ function createFileTable(episode) {
 		table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
+	var odd = 0;
 	for (var f = 0; f < episode.files.length; f++) {
 		var file = files[episode.files[f]];
 		if (!file) continue;
@@ -1597,8 +1602,11 @@ function createFileTable(episode) {
 		}
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
+		row.className = row.className.replace(/ g_odd|g_odd/ig,'');
+		if (odd % 2) row.className = 'g_odd '+row.className;
+		odd++;
 	}
-	repaintStripes(tbody);
+	//repaintStripes(tbody);
 	if (!expandedGroups && episode.hiddenFiles) {
 		var row = document.createElement('tr');
 		var i = document.createElement('i');
