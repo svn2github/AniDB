@@ -413,7 +413,7 @@ function prepPage() {
 			}
 		}
 	}
-	prepareTabs();
+	//prepareTabs();
 	fetchData(aid);
 }
 
