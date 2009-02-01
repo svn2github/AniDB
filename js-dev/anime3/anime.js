@@ -316,9 +316,9 @@ function prepPage() {
 							{"type":'c_setlatin',"isDefault":false},// mylist
 							{"type":'c_setlatin',"isDefault":false}],// seen
 		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
-							{"type":'c_none',"isDefault":false},	// name
-							{"type":'c_none',"isDefault":false},	// episode restriction
-							{"type":'c_none',"isDefault":false}],	// comment
+							{"type":'c_setlatin',"isDefault":false},// name
+							{"type":'c_setlatin',"isDefault":false},// episode restriction
+							{"type":'c_latin',"isDefault":false}],	// comment
 		'reviewlist': [		{"type":'c_none',"isDefault":false},	// image
 							{"type":'c_setlatin',"isDefault":true},// name
 							{"type":'c_latin',"isDefault":false},	// avg rating
