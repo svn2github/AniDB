@@ -225,7 +225,7 @@ input[type="submit"]:hover,
 div.quotebody
 {
 	background-color:#404040;
-	border:1px solid #555555;
+	border:1px solid #666666;
 	color:#ABABAB;
 }
 
@@ -318,4 +318,9 @@ div.quotebody
 #layout-menu li.sub-menu ul li:hover
 {
 	background-color:#555555;
+}
+
+#layout-main div.cmt_entries dl.profile
+{
+	border-right-color:#666666;
 }
