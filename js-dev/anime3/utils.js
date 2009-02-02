@@ -826,6 +826,7 @@ function statusInformation() {
 	this.textElement = null;
 	this.brElement = document.createElement('br');
 	this.clearContainer = function() {
+		if (!this.container) { updateStatus(''); return; }
 		this.container.nodeValue = '';
 		while (this.container.childNodes.length) this.container.removeChild(this.container.firstChild);
 		this.barElement = null;
@@ -840,6 +841,7 @@ function statusInformation() {
 		this.container.appendChild(this.createBar());
 	}
 	this.createText = function() {
+		if (!this.container) return;
 		var span = document.createElement('span');
 		span.style.dispaly = 'none';
 		span.style.align = 'center';
@@ -848,6 +850,7 @@ function statusInformation() {
 		return span;
 	}
 	this.createBar = function() {
+		if (!this.container) return;
 		var div = document.createElement('div');
 		div.className = 'loadingbar loadingbar_'+this.loadingbar_color;
 		div.style.display = 'none';
@@ -855,11 +858,13 @@ function statusInformation() {
 		return div;
 	}
 	this.createBr = function() { 
+		if (!this.container) return;
 		this.brElement = document.createElement('br'); 
 		this.brElement.style.display = 'none';
 		return this.brElement;
 	}
 	this.updateText = function(text, doAppend) {
+		if (!this.container) { updateStatus(text,doAppend); return }
 		if (!this.textElement) this.init();
 		this.text = text;
 		if (!doAppend) this.textElement.firstChild.nodeValue = text;
@@ -869,6 +874,7 @@ function statusInformation() {
 		this.barElement.style.display = 'none';
 	}
 	this.updateBar = function(percentage, tooltip) {
+		if (!this.container) { updateStatus(tooltip+percentage); return }
 		if (!this.barElement) this.init();
 		this.loadingbar_tooltip = tooltip;
 		this.loadingbar_percentage = percentage;
@@ -881,6 +887,7 @@ function statusInformation() {
 		this.barElement.style.display = '';
 	}
 	this.updateBarWithText = function(text, percentage, tooltip) {
+		if (!this.container) { updateStatus(text+' - '+tooltip+percentage); return }
 		this.updateText(text);
 		this.updateBar(percentage,tooltip);
 		this.textElement.style.display = '';
