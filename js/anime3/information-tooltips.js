@@ -17,10 +17,14 @@ var charInfos = new Array(); 		// Character information
 var creatorInfos = new Array(); 	// Creator information
 var animeInfos = new Array();		// Anime information
 
+get_info_sz = null;
+get_info_mw = null;
+
 /* -[ENTITIES]----------------------
  * ENTITY RELATED FUNCTIONS
  * ---------------------------------
  */
+
 
 /* Creates a new Info node */
 function CInfo(node) {
