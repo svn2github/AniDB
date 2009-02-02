@@ -706,41 +706,41 @@ function parseConfig(node) {
  * @return void (sets groups)
  */
 function parseGroups(node,aid) {
-  if (!node) return false; // no nodes return;
-  for (var nd = 0; nd < node.length; nd++) { // find the right groups entry
-	if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
-  }
-  if (node.length > 1 || node.parentNode.nodeName != 'anime') return;
-  var groupNodes = node.getElementsByTagName('group');
-  var anime = animes[aid];
-  for (var i = 0; i < groupNodes.length; i++) {
-	var childNode = groupNodes[i];
-	var groupEntry = new CGroupEntry(childNode);
-	var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
+	if (!node) return false; // no nodes return;
+	for (var nd = 0; nd < node.length; nd++) { // find the right groups entry
+		if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
+	}
+	if (node.length > 1 || node.parentNode.nodeName != 'anime') return;
+	var groupNodes = node.getElementsByTagName('group');
+	var anime = animes[aid];
+	for (var i = 0; i < groupNodes.length; i++) {
+		var childNode = groupNodes[i];
+		var groupEntry = new CGroupEntry(childNode);
+		var aGroupEntry = {'id': groupEntry.agid, 'gid': groupEntry.id};
+		groups[groupEntry.id] = groupEntry;
+		aGroups[aGroupEntry.id] = aGroupEntry;
+		if (anime.groups.indexOf(groupEntry.id) < 0) anime.groups.push(groupEntry.id);
+		if (!isNaN(Number(groupEntry.lastEp)) && Number(groupEntry.lastEp) > anime.highestEp) anime.highestEp = groupEntry.lastEp;
+		if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
+	}
+	// create the "no group" group entry
+	var groupEntry = new Object();
+	groupEntry.id = groupEntry.agid = 0;
+	groupEntry.name = "no group";
+	groupEntry.shortName = "no group";
+	groupEntry.visible = true;
+	groupEntry.rating = '-';
+	groupEntry.ratingCount = groupEntry.commentCount = 0;
+	groupEntry.userRating = -1;
+	groupEntry.sepCnt = groupEntry.epCnt = 0;
+	groupEntry.isInMylistRange = '';
+	groupEntry.epRange = '';
+	groupEntry.audioLangs = groupEntry.subtitleLangs = new Array();
+	groupEntry.state = 'unknown';
+	groupEntry.stateId = 0;
+	groupEntry.hasCherryBeenPoped = false;
 	groups[groupEntry.id] = groupEntry;
-	aGroups[aGroupEntry.id] = aGroupEntry;
-	if (anime.groups.indexOf(groupEntry.id) < 0) anime.groups.push(groupEntry.id);
-	if (!isNaN(Number(groupEntry.lastEp)) && Number(groupEntry.lastEp) > anime.highestEp) anime.highestEp = groupEntry.lastEp;
-	if (seeDebug) updateStatus('processed group '+(i+1)+' of '+groupNodes.length);
-  }
-  // create the "no group" group entry
-  var groupEntry = new Object();
-  groupEntry.id = groupEntry.agid = 0;
-  groupEntry.name = "no group";
-  groupEntry.shortName = "no group";
-  groupEntry.visible = true;
-  groupEntry.rating = '-';
-  groupEntry.ratingCount = groupEntry.commentCount = 0;
-  groupEntry.userRating = -1;
-  groupEntry.sepCnt = groupEntry.epCnt = 0;
-  groupEntry.isInMylistRange = '';
-  groupEntry.epRange = '';
-  groupEntry.audioLangs = groupEntry.subtitleLangs = new Array();
-  groupEntry.state = 'unknown';
-  groupEntry.stateId = 0;
-  groupEntry.hasCherryBeenPoped = false;
-  groups[groupEntry.id] = groupEntry;
-  anime.groups.push(0);
+	anime.groups.push(0);
 }
 
 /* Processes a node to extract episode information
@@ -749,22 +749,22 @@ function parseGroups(node,aid) {
  * @return void (sets episodes)
  */
 function parseEpisodes(node,aid) {
-  if (!node) return false; // no nodes return;
-  for (var nd = 0; nd < node.length; nd++) { // find the right episode entry
-	if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
-  }
-  if (node.length > 1 || node.parentNode.nodeName != 'anime') return; 
-  var epNodes = node.getElementsByTagName('ep');
-  for (var i = 0; i < epNodes.length; i++) {
-	var childNode = epNodes[i];
-	var episodeEntry = new CEpisodeEntry(childNode);
-	episodeEntry.animeId = aid;
-	episodes[episodeEntry.id] = episodeEntry;
-	epOrder.push(episodeEntry.id);
-	parseEpisode(childNode,aid);
-	if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.id);
-	if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
-  }
+	if (!node) return false; // no nodes return;
+	for (var nd = 0; nd < node.length; nd++) { // find the right episode entry
+		if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
+	}
+	if (node.length > 1 || node.parentNode.nodeName != 'anime') return; 
+	var epNodes = node.getElementsByTagName('ep');
+	for (var i = 0; i < epNodes.length; i++) {
+		var childNode = epNodes[i];
+		var episodeEntry = new CEpisodeEntry(childNode);
+		episodeEntry.animeId = aid;
+		episodes[episodeEntry.id] = episodeEntry;
+		epOrder.push(episodeEntry.id);
+		parseEpisode(childNode,aid);
+		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.id);
+		if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
+	}
 }
 
 /* Processes a node to extract anime information
@@ -772,27 +772,27 @@ function parseEpisodes(node,aid) {
  * @return void (sets anime)
  */
 function parseAnimes(node) {
-  if (!node) return false; // no nodes return;
-  var isAnimePage = (uriObj && uriObj['show'] && uriObj['show'].indexOf('anime') >= 0) ? true : false;
-  for (var nd = 0; nd < node.length; nd++) { // find the right animes entry
-	if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
-  }
-  if (node.length > 1 || node.parentNode.nodeName != 'root') return; 
-  var animeNodes = node.getElementsByTagName('anime');
-  for (var i = 0; i < animeNodes.length; i++) {
-	if (animeNodes[i].parentNode.nodeName != 'animes') continue; // there could be other anime nodes
-	var childNode = animeNodes[i];
-	var animeEntry = new CAnimeEntry(childNode);
-	animes[animeEntry.id] = animeEntry;
-	//if (isAnimePage) anime = animes[animeEntry.id]; // assigning a shortcut
-	anime = animes[animeEntry.id]; // assigning a shortcut
-	var groupNodes = childNode.getElementsByTagName('groups');
-	parseGroups(groupNodes,animeEntry.id); // Parsing Groups
-	var epNodes = childNode.getElementsByTagName('eps');
-	parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
-	animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
-	if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
-  }
+	if (!node) return false; // no nodes return;
+	var isAnimePage = (uriObj && uriObj['show'] && uriObj['show'].indexOf('anime') >= 0) ? true : false;
+		for (var nd = 0; nd < node.length; nd++) { // find the right animes entry
+		if (node[nd].parentNode.nodeName == 'root') { node = node[nd]; break; }
+	}
+	if (node.length > 1 || node.parentNode.nodeName != 'root') return; 
+		var animeNodes = node.getElementsByTagName('anime');
+	for (var i = 0; i < animeNodes.length; i++) {
+		if (animeNodes[i].parentNode.nodeName != 'animes') continue; // there could be other anime nodes
+		var childNode = animeNodes[i];
+		var animeEntry = new CAnimeEntry(childNode);
+		animes[animeEntry.id] = animeEntry;
+		//if (isAnimePage) anime = animes[animeEntry.id]; // assigning a shortcut
+		anime = animes[animeEntry.id]; // assigning a shortcut
+		var groupNodes = childNode.getElementsByTagName('groups');
+		parseGroups(groupNodes,animeEntry.id); // Parsing Groups
+		var epNodes = childNode.getElementsByTagName('eps');
+		parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
+		animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
+		if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
+	}
 }
 
 /* Builds a fileEntry
@@ -802,31 +802,31 @@ function parseAnimes(node) {
  * @return void (adds file to "files" and adds the file id to the ep.files list
  */
 function buildFileEntry(node, aid, eid) {
-  if (!node || !aid || !eid) return; // invalid call
-  if (node.nodeName != 'file') return; // invalid node
-  var fileEntry = new CFileEntry(node);
-  var episode = episodes[eid];
-  fileEntry.episodeId = eid;
-  fileEntry.animeId = aid;
-  if (files[fileEntry.id] && files[fileEntry.id].type == 'stub') { // In case we had a stub file, copy relevant entries
-	var efile = files[fileEntry.id];
-	for (var r in efile.epRelations)
-	  fileEntry.epRelations[r] = efile.epRelations[r];
-	for (var r in efile.fileRelations)
-	  fileEntry.fileRelations[r] = efile.fileRelations[r];
-	for (var r in efile.relatedFiles)
-	  fileEntry.relatedFiles[r] = efile.relatedFiles[r];
-	for (var r in efile.relatedPS)
-	  fileEntry.relatedPS[r] = efile.relatedPS[r];
-	for (var r in efile.relatedGroups)
-	  fileEntry.relatedGroups[r] = efile.relatedGroups[r];
-  }
-  // special trick to fool cache issues
-  if (!groups[fileEntry.groupId]) createPseudoGroupEntry(fileEntry.groupId);
-  files[fileEntry.id] = fileEntry;
-  if (!episode) return; // This only happens in case of an external file
-  if (fileEntry.newFile) episode.newFiles = true;
-  if (episode.files.indexOf(fileEntry.id) < 0) episode.files.push(fileEntry.id)
+	if (!node || !aid || !eid) return; // invalid call
+	if (node.nodeName != 'file') return; // invalid node
+	var fileEntry = new CFileEntry(node);
+	var episode = episodes[eid];
+	fileEntry.episodeId = eid;
+	fileEntry.animeId = aid;
+	if (files[fileEntry.id] && files[fileEntry.id].type == 'stub') { // In case we had a stub file, copy relevant entries
+		var efile = files[fileEntry.id];
+		for (var r in efile.epRelations)
+			fileEntry.epRelations[r] = efile.epRelations[r];
+		for (var r in efile.fileRelations)
+			fileEntry.fileRelations[r] = efile.fileRelations[r];
+		for (var r in efile.relatedFiles)
+			fileEntry.relatedFiles[r] = efile.relatedFiles[r];
+		for (var r in efile.relatedPS)
+			fileEntry.relatedPS[r] = efile.relatedPS[r];
+		for (var r in efile.relatedGroups)
+			fileEntry.relatedGroups[r] = efile.relatedGroups[r];
+	}
+	// special trick to fool cache issues
+	if (!groups[fileEntry.groupId]) createPseudoGroupEntry(fileEntry.groupId);
+	files[fileEntry.id] = fileEntry;
+	if (!episode) return; // This only happens in case of an external file
+	if (fileEntry.newFile) episode.newFiles = true;
+	if (episode.files.indexOf(fileEntry.id) < 0) episode.files.push(fileEntry.id)
 }
 
 /* Processes a node to extract file information for a given episode
@@ -835,16 +835,15 @@ function buildFileEntry(node, aid, eid) {
  * @return void (sets files)
  */
 function parseEpisode(node, aid) {
-  if (!node || node.parentNode.nodeName != 'eps') return;
-  var eid = Number(node.getAttribute('id'));
-  var fileNodes = node.getElementsByTagName('file');
-  var episode = episodes[eid];
-  var nodeTime = new Date();
-  for (var i = 0; i < fileNodes.length; i++)
-	buildFileEntry(fileNodes[i],aid, eid);
-  //if (seeTimes) alert('Processing files for eid.'+eid+' took: '+(new Date() - nodeTime)+' ms');
-  //var fileTable = createFileTable(episode);
-  //document.getElementById('eid_'+episode.id+'_ftHolder').cells[0].className = '';
+	if (!node || node.parentNode.nodeName != 'eps') return;
+	var eid = Number(node.getAttribute('id'));
+	var fileNodes = node.getElementsByTagName('file');
+	var episode = episodes[eid];
+	var nodeTime = new Date();
+	for (var i = 0; i < fileNodes.length; i++)
+		buildFileEntry(fileNodes[i],aid, eid);
+	if (seeTimes) 
+		alert('Processing files for eid.'+eid+' took: '+(new Date() - nodeTime)+' ms');
 }
 
 /* Function that parses extra files, needed by relations
@@ -852,13 +851,13 @@ function parseEpisode(node, aid) {
  * @return void (sets info for files)
  */
 function parseExtraFiles(nodes,eid) {
-  if (!nodes) return;
-  for (var i = 0; i < nodes.length; i++) {
-	//var fid = Number(nodes[i].getAttribute('id'));
-	var eid = Number(nodes[i].getAttribute('eid'));
-	var aid = Number(nodes[i].getAttribute('aid'));
-	buildFileEntry(nodes[i], aid, eid);
-  }
+	if (!nodes) return;
+	for (var i = 0; i < nodes.length; i++) {
+		//var fid = Number(nodes[i].getAttribute('id'));
+		var eid = Number(nodes[i].getAttribute('eid'));
+		var aid = Number(nodes[i].getAttribute('aid'));
+		buildFileEntry(nodes[i], aid, eid);
+	}
 }
 
 /* Function that parses file<->ep relations
@@ -866,27 +865,27 @@ function parseExtraFiles(nodes,eid) {
  * @return void (sets info for files)
  */ 
 function parseEpRelations(nodes) {
-  if (!nodes) return;
-  for (var i = 0; i < nodes.length; i++) {
-	if (nodes[i].nodeName != 'rel') continue;
-	var fid = Number(nodes[i].getAttribute('fid'));
-	var eid = Number(nodes[i].getAttribute('eid'));
-	var startp = Number(nodes[i].getAttribute('startp'));
-	var endp = Number(nodes[i].getAttribute('endp'));
-	var file = files[fid];
-	var episode = episodes[eid];
-	if (!file) { // can happen, the trick is to create a stub fileEntry
-	  var node = document.createElement('file');
-	  node.setAttribute('id',fid);
-	  node.setAttribute('type','stub');
-	  file = new CFileEntry(node);
-	  file.visible = false;
-	  files[fid] = file;
+	if (!nodes) return;
+	for (var i = 0; i < nodes.length; i++) {
+		if (nodes[i].nodeName != 'rel') continue;
+		var fid = Number(nodes[i].getAttribute('fid'));
+		var eid = Number(nodes[i].getAttribute('eid'));
+		var startp = Number(nodes[i].getAttribute('startp'));
+		var endp = Number(nodes[i].getAttribute('endp'));
+		var file = files[fid];
+		var episode = episodes[eid];
+		if (!file) { // can happen, the trick is to create a stub fileEntry
+			var node = document.createElement('file');
+			node.setAttribute('id',fid);
+			node.setAttribute('type','stub');
+			file = new CFileEntry(node);
+			file.visible = false;
+			files[fid] = file;
+		}
+		if (!episode) { if (seeDebug) alert('ERR.parseEpRelations: no episode'); continue; } // this realy should not happen
+		if (episode.files.indexOf(fid) < 0) episode.files.push(fid); // add this file to the eps files
+		file.epRelations[eid] = {"startp":startp,"endp":endp};
 	}
-	if (!episode) { if (seeDebug) alert('ERR.parseEpRelations: no episode'); continue; } // this realy should not happen
-	if (episode.files.indexOf(fid) < 0) episode.files.push(fid); // add this file to the eps files
-	file.epRelations[eid] = {"startp":startp,"endp":endp};
-  }
 }
 
 /* Function that parses file<->file relations
@@ -894,56 +893,56 @@ function parseEpRelations(nodes) {
  * @return void (sets info for files)
  */ 
 function parseFileRelations(nodes) {
-  if (!nodes) return;
-  for (var i = 0; i < nodes.length; i++) {
-	if (nodes[i].nodeName != 'rel') continue;
-	var fid = Number(nodes[i].getAttribute('fid'));
-	var otherfid = Number(nodes[i].getAttribute('otherfid'));
-	var type = nodes[i].getAttribute('type');
-	if (pseudoFiles.create) {
-	  var found = false;
-	  for (var pfR in pseudoFiles.relations) {
-	    var rel = pseudoFiles.relations[pfR];
-	    if (((rel['fid'] == otherfid && rel['otherfid'] == fid) || (rel['fid'] == fid && rel['otherfid'] == otherfid)) && rel['type'] == type) { found = true; break; } 
-	  }
-	  if (!found) pseudoFiles.relations.push({"fid":fid,"otherfid":otherfid,"type":type,"resolved":false}); // Store this relation
+	if (!nodes) return;
+	for (var i = 0; i < nodes.length; i++) {
+		if (nodes[i].nodeName != 'rel') continue;
+		var fid = Number(nodes[i].getAttribute('fid'));
+		var otherfid = Number(nodes[i].getAttribute('otherfid'));
+		var type = nodes[i].getAttribute('type');
+		if (pseudoFiles.create) {
+			var found = false;
+			for (var pfR in pseudoFiles.relations) {
+				var rel = pseudoFiles.relations[pfR];
+				if (((rel['fid'] == otherfid && rel['otherfid'] == fid) || (rel['fid'] == fid && rel['otherfid'] == otherfid)) && rel['type'] == type) { found = true; break; } 
+			}
+			if (!found) pseudoFiles.relations.push({"fid":fid,"otherfid":otherfid,"type":type,"resolved":false}); // Store this relation
+		}
+		var fileA = files[fid];
+		var fileB = files[otherfid];
+		if (!fileA) { // can happen, the trick is to create a stub fileEntry
+			var node = document.createElement('file');
+			node.setAttribute('id',fid);
+			node.setAttribute('type','stub');
+			fileA = new CFileEntry(node);
+			fileA.visible = false;
+			files[fid] = fileA;
+		}
+		if (!fileB) { // can happen, the trick is to create a stub fileEntry
+			var node = document.createElement('file');
+			node.setAttribute('id',otherfid);
+			node.setAttribute('type','stub');
+			fileB = new CFileEntry(node);
+			fileB.visible = false;
+			files[otherfid] = fileB;
+		}
+		var found = false;
+		for (var fR in fileA.fileRelations) {
+			var rel = fileA.fileRelations[fR];
+			if (rel['dir'] == '=>' && rel['relfile'] == otherfid && rel['type'] == type) { found = true; break; }
+		}
+		if (!found) fileA.fileRelations.push({"dir":'=>',"relfile":otherfid,"type":type});
+		if (fileA.relatedFiles.indexOf(otherfid) < 0) fileA.relatedFiles.push(otherfid);
+		found = false;
+		for (var fR in fileB.fileRelations) {
+			var rel = fileB.fileRelations[fR];
+			if (rel['dir'] == '<=' && rel['relfile'] == fid && rel['type'] == type) { found = true; break; }
+		}
+		if (!found) fileB.fileRelations.push({"dir":'<=',"relfile":fid,"type":type});
+		if (fileB.relatedFiles.indexOf(fid) < 0) fileB.relatedFiles.push(fid);
+		// deprecate files based on this
+		if (type == 'newer-ver-of')
+			fileB.isDeprecated = true;
 	}
-	var fileA = files[fid];
-	var fileB = files[otherfid];
-	if (!fileA) { // can happen, the trick is to create a stub fileEntry
-	  var node = document.createElement('file');
-	  node.setAttribute('id',fid);
-	  node.setAttribute('type','stub');
-	  fileA = new CFileEntry(node);
-	  fileA.visible = false;
-	  files[fid] = fileA;
-	}
-	if (!fileB) { // can happen, the trick is to create a stub fileEntry
-	  var node = document.createElement('file');
-	  node.setAttribute('id',otherfid);
-	  node.setAttribute('type','stub');
-	  fileB = new CFileEntry(node);
-	  fileB.visible = false;
-	  files[otherfid] = fileB;
-	}
-	var found = false;
-	for (var fR in fileA.fileRelations) {
-	  var rel = fileA.fileRelations[fR];
-	  if (rel['dir'] == '=>' && rel['relfile'] == otherfid && rel['type'] == type) { found = true; break; }
-	}
-	if (!found) fileA.fileRelations.push({"dir":'=>',"relfile":otherfid,"type":type});
-	if (fileA.relatedFiles.indexOf(otherfid) < 0) fileA.relatedFiles.push(otherfid);
-	found = false;
-	for (var fR in fileB.fileRelations) {
-	  var rel = fileB.fileRelations[fR];
-	  if (rel['dir'] == '<=' && rel['relfile'] == fid && rel['type'] == type) { found = true; break; }
-	}
-	if (!found) fileB.fileRelations.push({"dir":'<=',"relfile":fid,"type":type});
-	if (fileB.relatedFiles.indexOf(fid) < 0) fileB.relatedFiles.push(fid);
-	// deprecate files based on this
-	if (type == 'newer-ver-of')
-		fileB.isDeprecated = true;
-  }
 }
 
 /* Processes a node to extract filedata information
@@ -952,15 +951,16 @@ function parseFileRelations(nodes) {
  * @return void (sets files)
  */
 function parseFiledata(node, aid) {
-  if (!node || node.parentNode.nodeName != 'anime') return;
-  var extraFiles = (node.getElementsByTagName('extrafiles').length) ? node.getElementsByTagName('extrafiles')[0].getElementsByTagName('file') : null;
-  var fileRel = (node.getElementsByTagName('filerel').length) ? node.getElementsByTagName('filerel')[0].getElementsByTagName('rel') : null;
-  var fileEpRel = (node.getElementsByTagName('fileeprel').length) ? node.getElementsByTagName('fileeprel')[0].getElementsByTagName('rel') : null;
-  var nodeTime = new Date();
-  parseExtraFiles(extraFiles);
-  parseEpRelations(fileEpRel);
-  parseFileRelations(fileRel);
-  //if (seeTimes) alert('Processing filedata for aid.'+aid+' took: '+(new Date() - nodeTime)+' ms');
+	if (!node || node.parentNode.nodeName != 'anime') return;
+	var extraFiles = (node.getElementsByTagName('extrafiles').length) ? node.getElementsByTagName('extrafiles')[0].getElementsByTagName('file') : null;
+	var fileRel = (node.getElementsByTagName('filerel').length) ? node.getElementsByTagName('filerel')[0].getElementsByTagName('rel') : null;
+	var fileEpRel = (node.getElementsByTagName('fileeprel').length) ? node.getElementsByTagName('fileeprel')[0].getElementsByTagName('rel') : null;
+	var nodeTime = new Date();
+	parseExtraFiles(extraFiles);
+	parseEpRelations(fileEpRel);
+	parseFileRelations(fileRel);
+	if (seeTimes) 
+		alert('Processing filedata for aid.'+aid+' took: '+(new Date() - nodeTime)+' ms');
 }
 
 // PseudoFiles Functions //
@@ -978,109 +978,109 @@ pseudoFiles.nextSequence = function nextSequence() {
 };
 
 function makePseudoFile(fileA,fileB,type) {
-  var found = false;
-  var node = document.createElement('file');
-  node.type = (fileA.type == fileB.type) ? fileA.type : 'pseudo';
-  node.id = pseudoFiles.nextSequence();
-  var file = new CFileEntry(node);
-  file.pseudoFile = true;
-  // FIX VALUES
-  if (fileA.type == fileB.type) file.type = fileA.type;
-  // Just so you know i tried with a switch, didn't work
-  else if (type == 'external-sub-for') file.type = 'video';
+	var found = false;
+	var node = document.createElement('file');
+	node.type = (fileA.type == fileB.type) ? fileA.type : 'pseudo';
+	node.id = pseudoFiles.nextSequence();
+	var file = new CFileEntry(node);
+	file.pseudoFile = true;
+	// FIX VALUES
+	if (fileA.type == fileB.type) file.type = fileA.type;
+	// Just so you know i tried with a switch, didn't work
+	else if (type == 'external-sub-for') file.type = 'video';
 	else if (type == 'newer-ver-of') file.type = 'other';
 	else if (type == 'bundle') file.type = 'other';
 	else if (type == 'op/end-for') file.type = 'video';
 	else if (type == 'external-audio-for') file.type = 'video'; 
 	else if (type == 'other') file.type = 'other';
-  //alert('type of relation: '+type+'\nfileA.type: '+fileA.type+'\nfileB.type: '+fileB.type+'\nfile.type: '+file.type);
-  file.animeId = (fileA.animeId == fileB.animeId) ? fileA.animeId : null;
-  file.episodeId = (fileA.episodeId == fileB.episodeId) ? fileA.episodeId : null;
-  file.crcStatus = (fileA.crcStatus == fileB.crcStatus) ? fileA.crcStatus : '';
-  // Some tests
+	//alert('type of relation: '+type+'\nfileA.type: '+fileA.type+'\nfileB.type: '+fileB.type+'\nfile.type: '+file.type);
+	file.animeId = (fileA.animeId == fileB.animeId) ? fileA.animeId : null;
+	file.episodeId = (fileA.episodeId == fileB.episodeId) ? fileA.episodeId : null;
+	file.crcStatus = (fileA.crcStatus == fileB.crcStatus) ? fileA.crcStatus : '';
+	// Some tests
 	if (file.relatedFiles.indexOf(fileA.id) < 0) file.relatedFiles.push(fileA.id);
 	if (file.relatedFiles.indexOf(fileB.id) < 0) file.relatedFiles.push(fileB.id);
 	if (file.relatedGroups.indexOf(fileA.groupId) < 0) file.relatedGroups.push(fileA.groupId);
 	if (file.relatedGroups.indexOf(fileB.groupId) < 0) file.relatedGroups.push(fileB.groupId);
-  // End of tests;
-  file.size = fileA.size + fileB.size;
-  file.date = (javascriptDate(fileA.date) > javascriptDate(fileB.date)) ? fileA.date : fileB.date;
-  if (fileA.relDate > 0 || fileB.relDate > 0) {
-	if (fileA.relDate > 0 && fileB.relDate > 0) file.relDate = (javascriptDate(fileA.relDate) > javascriptDate(fileB.relDate)) ? fileA.relDate : fileB.relDate;
-	else if (fileA.relDate > 0) file.relDate = fileA.relDate;
-	else if (fileB.relDate > 0) file.relDate = fileB.relDate;
-	else file.relDate = 0;
-  }
-  file.length = fileA.length + fileB.length;
-  file.groupId = (fileA.groupId == fileB.groupId) ? fileA.groupId : 0;
-  file.version = (Number(fileA.version.charAt(1)) > Number(fileB.version.charAt(1))) ? fileA.version : fileB.version;
-  file.isCensored = (fileA.isCensored == fileB.isCensored) ? fileA.isCensored : 0;
-  file.isUncensored = (fileA.isUncensored == fileB.isUncensored) ? fileA.isUncensored : 0;
-  if (fileA.type == 'video' || fileB.type == 'video') {
-	if (fileA.type == 'video' && fileB.type == 'video')
-	  file.quality = (mapQuality(fileA.quality) > mapQuality(fileB.quality)) ? fileA.quality : fileB.quality;
-	else file.quality = (fileA.type == 'video') ? fileA.quality : fileB.quality;
-  } else file.quality = fileA.quality;
-  if (fileA.resolution == fileB.resolution) file.resolution = fileA.resolution;
-  else {
-	if (fileA.resolution != 'unknown' || fileB.resolution  != 'unknown' ) {
-	  if (fileA.resolution != 'unknown') file.resolution = fileA.resolution;
-	  else file.resolution = fileB.resolution;
+	// End of tests;
+	file.size = fileA.size + fileB.size;
+	file.date = (javascriptDate(fileA.date) > javascriptDate(fileB.date)) ? fileA.date : fileB.date;
+	if (fileA.relDate > 0 || fileB.relDate > 0) {
+		if (fileA.relDate > 0 && fileB.relDate > 0) file.relDate = (javascriptDate(fileA.relDate) > javascriptDate(fileB.relDate)) ? fileA.relDate : fileB.relDate;
+		else if (fileA.relDate > 0) file.relDate = fileA.relDate;
+		else if (fileB.relDate > 0) file.relDate = fileB.relDate;
+		else file.relDate = 0;
 	}
-  }
-  file.source = (fileA.source == fileB.source) ? fileA.source : 'unknown';
-  file.usersTotal = fileA.usersTotal + fileB.usersTotal;
-  file.usersUnknown = fileA.usersUnknown + fileB.usersUnknown;
-  file.usersDeleted = fileA.usersDeleted + fileB.usersDeleted;
-  file.vidCnt = (fileA.vidCnt || fileB.vidCnt) ? 1 : 0;
-  file.audCnt = fileA.audCnt + fileB.audCnt;
-  file.subCnt = fileA.subCnt + fileB.subCnt;
-  file.newFile = (fileA.newFile || fileB.newFile) ? true : false;
-  // This one is a bit dubious (i'm choosing the videoTrack of the file with the greatest version
-  if (file.vidCnt) { 
-	if (fileA.vidCnt && fileB.vidCnt)
-	  file.videoTracks = (Number(fileA.version.charAt(1)) > Number(fileB.version.charAt(1))) ? fileA.videoTracks : fileB.videoTracks;
-	else if (fileA.vidCnt) file.videoTracks = fileA.videoTracks;
-	else if (fileB.vidCnt) file.videoTracks = fileB.videoTracks;
-  }
-  if (file.audCnt) {
-	for (var a = 0; a < fileA.audioTracks.length; a++)
-	  file.audioTracks.push(fileA.audioTracks[a]);
-	for (var a = 0; a < fileB.audioTracks.length; a++)
-	  file.audioTracks.push(fileB.audioTracks[a]);
-  }
-  if (file.subCnt) {
-	if (fileA.fileType != 'idx') { // Bogus no sub lang content files
-	  for (var s = 0; s < fileA.subtitleTracks.length; s++) file.subtitleTracks.push(fileA.subtitleTracks[s]);
+	file.length = fileA.length + fileB.length;
+	file.groupId = (fileA.groupId == fileB.groupId) ? fileA.groupId : 0;
+	file.version = (Number(fileA.version.charAt(1)) > Number(fileB.version.charAt(1))) ? fileA.version : fileB.version;
+	file.isCensored = (fileA.isCensored == fileB.isCensored) ? fileA.isCensored : 0;
+	file.isUncensored = (fileA.isUncensored == fileB.isUncensored) ? fileA.isUncensored : 0;
+	if (fileA.type == 'video' || fileB.type == 'video') {
+		if (fileA.type == 'video' && fileB.type == 'video')
+		file.quality = (mapQuality(fileA.quality) > mapQuality(fileB.quality)) ? fileA.quality : fileB.quality;
+		else file.quality = (fileA.type == 'video') ? fileA.quality : fileB.quality;
+	} else file.quality = fileA.quality;
+	if (fileA.resolution == fileB.resolution) file.resolution = fileA.resolution;
+	else {
+		if (fileA.resolution != 'unknown' || fileB.resolution  != 'unknown' ) {
+			if (fileA.resolution != 'unknown') file.resolution = fileA.resolution;
+			else file.resolution = fileB.resolution;
+		}
 	}
-	if (fileB.fileType != 'idx') {
-	  for (var s = 0; s < fileB.subtitleTracks.length; s++) file.subtitleTracks.push(fileB.subtitleTracks[s]);
+	file.source = (fileA.source == fileB.source) ? fileA.source : 'unknown';
+	file.usersTotal = fileA.usersTotal + fileB.usersTotal;
+	file.usersUnknown = fileA.usersUnknown + fileB.usersUnknown;
+	file.usersDeleted = fileA.usersDeleted + fileB.usersDeleted;
+	file.vidCnt = (fileA.vidCnt || fileB.vidCnt) ? 1 : 0;
+	file.audCnt = fileA.audCnt + fileB.audCnt;
+	file.subCnt = fileA.subCnt + fileB.subCnt;
+	file.newFile = (fileA.newFile || fileB.newFile) ? true : false;
+	// This one is a bit dubious (i'm choosing the videoTrack of the file with the greatest version
+	if (file.vidCnt) { 
+		if (fileA.vidCnt && fileB.vidCnt)
+			file.videoTracks = (Number(fileA.version.charAt(1)) > Number(fileB.version.charAt(1))) ? fileA.videoTracks : fileB.videoTracks;
+		else if (fileA.vidCnt) file.videoTracks = fileA.videoTracks;
+		else if (fileB.vidCnt) file.videoTracks = fileB.videoTracks;
 	}
-  }
-  if (file.crcStatus == 'valid') file.flags += 1;
-  if (file.crcStatus == 'invalid') { file.flags += 2; this.isDeprecated = true; }
-  if (file.version == 'v2') file.flags += 4;
-  if (file.version == 'v3') file.flags += 8;
-  if (file.version == 'v4') file.flags += 16;
-  if (file.version == 'v5') file.flags += 32;
-  if (file.isCensored) file.flags += 64;
-  if (file.isUncensored) file.flags += 128;
-  // Add this file to the pseudoFiles.list
-  pseudoFiles.list[file.id] = file;
-  fileA.relatedPS.push(file.id);
-  fileB.relatedPS.push(file.id);
-  if (file.episodeId) {
-	if (!pseudoFiles.listByEp[file.episodeId]) pseudoFiles.listByEp[file.episodeId] = new Array();
-	if (pseudoFiles.listByEp[file.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[file.episodeId].push(file.id);
-	if (episodes[file.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[file.episodeId].pseudoFiles.push(file.id);
-  } else {
-	if (!pseudoFiles.listByEp[fileA.episodeId]) pseudoFiles.listByEp[fileA.episodeId] = new Array();
-	if (!pseudoFiles.listByEp[fileB.episodeId]) pseudoFiles.listByEp[fileB.episodeId] = new Array();
-	if (pseudoFiles.listByEp[fileA.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileA.episodeId].push(file.id);
-	if (pseudoFiles.listByEp[fileB.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileB.episodeId].push(file.id);
-	if (episodes[fileA.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileA.episodeId].pseudoFiles.push(file.id);
-	if (episodes[fileB.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileB.episodeId].pseudoFiles.push(file.id);
-  }
+	if (file.audCnt) {
+		for (var a = 0; a < fileA.audioTracks.length; a++)
+			file.audioTracks.push(fileA.audioTracks[a]);
+		for (var a = 0; a < fileB.audioTracks.length; a++)
+			file.audioTracks.push(fileB.audioTracks[a]);
+	}
+	if (file.subCnt) {
+		if (fileA.fileType != 'idx') { // Bogus no sub lang content files
+			for (var s = 0; s < fileA.subtitleTracks.length; s++) file.subtitleTracks.push(fileA.subtitleTracks[s]);
+		}
+		if (fileB.fileType != 'idx') {
+			for (var s = 0; s < fileB.subtitleTracks.length; s++) file.subtitleTracks.push(fileB.subtitleTracks[s]);
+		}
+	}
+	if (file.crcStatus == 'valid') file.flags += 1;
+	if (file.crcStatus == 'invalid') { file.flags += 2; this.isDeprecated = true; }
+	if (file.version == 'v2') file.flags += 4;
+	if (file.version == 'v3') file.flags += 8;
+	if (file.version == 'v4') file.flags += 16;
+	if (file.version == 'v5') file.flags += 32;
+	if (file.isCensored) file.flags += 64;
+	if (file.isUncensored) file.flags += 128;
+	// Add this file to the pseudoFiles.list
+	pseudoFiles.list[file.id] = file;
+	fileA.relatedPS.push(file.id);
+	fileB.relatedPS.push(file.id);
+	if (file.episodeId) {
+		if (!pseudoFiles.listByEp[file.episodeId]) pseudoFiles.listByEp[file.episodeId] = new Array();
+		if (pseudoFiles.listByEp[file.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[file.episodeId].push(file.id);
+		if (episodes[file.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[file.episodeId].pseudoFiles.push(file.id);
+	} else {
+		if (!pseudoFiles.listByEp[fileA.episodeId]) pseudoFiles.listByEp[fileA.episodeId] = new Array();
+		if (!pseudoFiles.listByEp[fileB.episodeId]) pseudoFiles.listByEp[fileB.episodeId] = new Array();
+		if (pseudoFiles.listByEp[fileA.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileA.episodeId].push(file.id);
+		if (pseudoFiles.listByEp[fileB.episodeId].indexOf(file.id) < 0) pseudoFiles.listByEp[fileB.episodeId].push(file.id);
+		if (episodes[fileA.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileA.episodeId].pseudoFiles.push(file.id);
+		if (episodes[fileB.episodeId].pseudoFiles.indexOf(file.id) < 0) episodes[fileB.episodeId].pseudoFiles.push(file.id);
+	}
 }
 
 /* Creates pseudoFiles
@@ -1088,62 +1088,62 @@ function makePseudoFile(fileA,fileB,type) {
  * @return void (creates a pseudoFile)
  */
 function pseudoFilesCreator() {
-  if (!pseudoFiles.create || (pseudoFiles.relations && !pseudoFiles.relations.length)) return; // Nothing to do
-  for (var i = 0; i < pseudoFiles.relations.length; i++) {
-	var rel = pseudoFiles.relations[i];
-	var fid = rel['fid'];
-	var otherfid = rel['otherfid'];
-	var type = rel['type'];
-	var fileA = files[fid];
-	var fileB = files[otherfid];
-	var resolved = rel['resolved'];
-	if (resolved) continue;
-	if (!fileA || !fileB) { if (seeDebug) alert('ERR.pseudoFilesCreator: borked files'); continue; } // this realy should not happen
-	/*alert('working on relation of type: '+type+' for files\nfid: '+fid+'\notherfid: '+otherfid+
-	      '\nrelatedFile.relatedPS['+fileB.relatedPS.length+']: '+fileB.relatedPS);*/
-	if (type == 'bundle') makePseudoFile(fileA,fileB,type);
-	if (type == 'op/end-for' || type == 'external-sub-for' || type == 'external-audio-for') {
-	  var file = null;
-	  if (fileB.relatedPS && fileB.relatedPS.length) {
-	    for (var k = 0; k < fileB.relatedPS.length; k++) {
-	      //alert('searching pseudoFiles of fid '+fileB.id+' pF['+fileB.relatedPS[k]+'].type: '+pseudoFiles.list[fileB.relatedPS[k]].type);
-	      if (pseudoFiles.list[fileB.relatedPS[k]].type == 'video') { file = pseudoFiles.list[fileB.relatedPS[k]]; break; }
-	    }
-	    //if (file) alert('id['+(file.pseudoFile ? 'Y' : 'N')+']: '+file.id+' type: '+file.type); 
-	    if (!file) makePseudoFile(fileA,fileB,type);
-	    else {
-	      if (type == 'external-sub-for') {
-	        file.subCnt += fileA.subCnt;
-	        for (var k = 0; k < fileA.subtitleTracks.length; k++)
-	          file.subtitleTracks.push(fileA.subtitleTracks[k]);
-	      }
-	      if (type == 'external-aud-for') {
-	        file.audCnt += fileA.audCnt;
-	        for (var k = 0; k < fileA.audioTracks.length; k++)
-	          file.audioTracks.push(fileA.audioTracks[k]);
-	      }
-	      // if (type == 'op/end-for') Nothing should be done in this case
-	      file.usersTotal += fileA.usersTotal;
-	      file.usersUnknown += fileA.usersUnknown;
-	      file.usersDeleted += fileA.usersDeleted;
-	      file.size += fileA.size;
-	      if (file.relatedFiles.indexOf(fileA.id) < 0) file.relatedFiles.push(fileA.id);
-	      if (fileA.relatedPS.indexOf(file.id) < 0) fileA.relatedPS.push(file.id);
-	    }
-	  } else makePseudoFile(fileA,fileB,type);
+	if (!pseudoFiles.create || (pseudoFiles.relations && !pseudoFiles.relations.length)) return; // Nothing to do
+	for (var i = 0; i < pseudoFiles.relations.length; i++) {
+		var rel = pseudoFiles.relations[i];
+		var fid = rel['fid'];
+		var otherfid = rel['otherfid'];
+		var type = rel['type'];
+		var fileA = files[fid];
+		var fileB = files[otherfid];
+		var resolved = rel['resolved'];
+		if (resolved) continue;
+		if (!fileA || !fileB) { if (seeDebug) alert('ERR.pseudoFilesCreator: borked files'); continue; } // this realy should not happen
+		/*alert('working on relation of type: '+type+' for files\nfid: '+fid+'\notherfid: '+otherfid+
+			'\nrelatedFile.relatedPS['+fileB.relatedPS.length+']: '+fileB.relatedPS);*/
+		if (type == 'bundle') makePseudoFile(fileA,fileB,type);
+		if (type == 'op/end-for' || type == 'external-sub-for' || type == 'external-audio-for') {
+			var file = null;
+			if (fileB.relatedPS && fileB.relatedPS.length) {
+				for (var k = 0; k < fileB.relatedPS.length; k++) {
+					//alert('searching pseudoFiles of fid '+fileB.id+' pF['+fileB.relatedPS[k]+'].type: '+pseudoFiles.list[fileB.relatedPS[k]].type);
+					if (pseudoFiles.list[fileB.relatedPS[k]].type == 'video') { file = pseudoFiles.list[fileB.relatedPS[k]]; break; }
+				}
+				//if (file) alert('id['+(file.pseudoFile ? 'Y' : 'N')+']: '+file.id+' type: '+file.type); 
+				if (!file) makePseudoFile(fileA,fileB,type);
+				else {
+					if (type == 'external-sub-for') {
+						file.subCnt += fileA.subCnt;
+						for (var k = 0; k < fileA.subtitleTracks.length; k++)
+							file.subtitleTracks.push(fileA.subtitleTracks[k]);
+					}
+					if (type == 'external-aud-for') {
+						file.audCnt += fileA.audCnt;
+						for (var k = 0; k < fileA.audioTracks.length; k++)
+							file.audioTracks.push(fileA.audioTracks[k]);
+					}
+					// if (type == 'op/end-for') Nothing should be done in this case
+					file.usersTotal += fileA.usersTotal;
+					file.usersUnknown += fileA.usersUnknown;
+					file.usersDeleted += fileA.usersDeleted;
+					file.size += fileA.size;
+					if (file.relatedFiles.indexOf(fileA.id) < 0) file.relatedFiles.push(fileA.id);
+					if (fileA.relatedPS.indexOf(file.id) < 0) fileA.relatedPS.push(file.id);
+				}
+			} else makePseudoFile(fileA,fileB,type);
+		}
+		pseudoFiles.relations[i]['resolved'] = true;
 	}
-	pseudoFiles.relations[i]['resolved'] = true;
-  }
-  // make the rows
-  for (var e in pseudoFiles.listByEp) {
-	var epFileTable = document.getElementById('episode'+e+'files');
-	if (!epFileTable) { if (seeDebug) alert('ERR.pseudoFilesCreator: no fileTable'); continue; }
-	for (var k in pseudoFiles.listByEp[e]) {
-	  var curPF = document.getElementById('rfid_'+pseudoFiles.listByEp[e][k]+'_eid_'+e);
-	  if (!curPF)
-	    epFileTable.tBodies[0].appendChild(createFileTableRow(episodes[e],pseudoFiles.list[pseudoFiles.listByEp[e][k]]));
+	// make the rows
+	for (var e in pseudoFiles.listByEp) {
+		var epFileTable = document.getElementById('episode'+e+'files');
+		if (!epFileTable) { if (seeDebug) alert('ERR.pseudoFilesCreator: no fileTable'); continue; }
+		for (var k in pseudoFiles.listByEp[e]) {
+			var curPF = document.getElementById('rfid_'+pseudoFiles.listByEp[e][k]+'_eid_'+e);
+			if (!curPF)
+				epFileTable.tBodies[0].appendChild(createFileTableRow(episodes[e],pseudoFiles.list[pseudoFiles.listByEp[e][k]]));
+		}
 	}
-  }
 }
 
 // FILTERING Functions //

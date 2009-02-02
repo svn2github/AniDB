@@ -87,10 +87,10 @@ function xhttpRequestReadData(obj, handler,method) {
 	var rootDoc = 'root';
 	//try {
 	switch (obj.readyState) {
-		case 2: xhttpRequestUpdateStatus('requesting data...'); break;
-		case 3: xhttpRequestUpdateStatus('receiving data...'); break;
+		case 2: xhttpRequestUpdateStatus('requesting data...',25); break;
+		case 3: xhttpRequestUpdateStatus('receiving data...',50); break;
 		case 4:
-			xhttpRequestUpdateStatus('data transfer completed...');
+			xhttpRequestUpdateStatus('data transfer completed...',100);
 			switch (obj.status) {
 				case 0:
 				case 200:
@@ -120,14 +120,21 @@ function xhttpRequestReadData(obj, handler,method) {
 
 /* This function is used to update the status of the Request
  * @param text Text to show
+ * @param percentage Percentage done
  * @return void
  */
-function xhttpRequestUpdateStatus(text) {
+function xhttpRequestUpdateStatus(text,percentage) {
 	try {
 		if (document.getElementById('statusBox')) {
-			var statusBox = document.getElementById('statusBox');
-			if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
-			statusBox.appendChild(document.createTextNode(text));
+			if (globalStatus && globalStatus.container) {
+				globalStatus.loadingbar_color = 'red';
+				globalStatus.updateBarWithText(text,percentage,'Data request completion: ');
+				globalStatus.loadingbar_color = 'green';
+			} else {
+				var statusBox = document.getElementById('statusBox');
+				if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
+				statusBox.appendChild(document.createTextNode(text));
+			}
 		}
 		else window.status = text;
 	} catch (e) { }

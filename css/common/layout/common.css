@@ -178,3 +178,36 @@ ul.format-modes li.selected, ul.format-modes li:hover
 	background-color: #8492B5;
 	text-decoration: none;
 }
+
+/* status bar stuff for anime3 scripts (it's in common/layout/common.css) */
+#statusBox { 
+	position: fixed;
+	left: 2px;
+	top: 2px;
+	min-width: 120px;
+	z-index: 0;
+	font-family: Arial,Helvetica,sans-serif;
+	text-decoration: none;
+	color: #000000;
+	text-align: left;
+	background-color: #FFFFFF;
+	font-size: x-small; /*
+	padding: 2px;
+	border: 1px solid rgb(227, 227, 227); */
+}
+
+div.loadingbar {
+	background: white top left no-repeat;
+	padding: 0;
+	margin: 5px 0 0 0;
+	background-position: 1px 0;
+	width: 120px;
+	height: 12px;
+	border: 1px solid black;
+}
+
+div.loadingbar_green { background: url(../icons/layout/loadingbar_green.png); }
+div.loadingbar_red { background: url(../icons/layout/loadingbar_red.png); }
+div.loadingbar_orange { background: url(../icons/layout/loadingbar_orange.png); }
+div.loadingbar_yellow { background: url(../icons/layout/loadingbar_yellow.png); }
+div.loadingbar_blue { background: url(../icons/layout/loadingbar_blue.png); }

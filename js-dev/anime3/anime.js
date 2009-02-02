@@ -273,6 +273,7 @@ function prepPage() {
 	} else base_url = '';
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
+	initStatusBox();
 	// apply a function
 	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', true)[0];
 	if (actionRow) {
@@ -294,6 +295,8 @@ function prepPage() {
 		if (isNaN(aid)) return;
 	}
 	loadSettings();
+	globalStatus.loadingbar_color = 'green';
+	globalStatus.updateBarWithText('Preparing tabs',0,'Total progress: ');
 	// add a collapse function to character and what not rows
 	// also add sorting classes (needs all cols defined)
 	var sortingCols = {
@@ -333,6 +336,7 @@ function prepPage() {
 			if (tester) tables.push(tester);
 		}
 		for (var t = 0; t < tables.length; t++) {
+			globalStatus.updateBarWithText('Preparing tabs',parseInt(t+1/tables.length*100),'Total progress: ');
 			var table = tables[t];
 			var tbody = table.tBodies[0];
 			var thead = table.getElementsByTagName('thead')[0];
@@ -443,16 +447,19 @@ function postData(url) {
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert("parseData",'Could not get root node'); return; }
-	updateStatus('Processing anime data...');
+	//updateStatus('Processing anime data...');
+	globalStatus.loadingbar_color = 'green';
+	globalStatus.updateBarWithText('Parsing Custom node',15,'Total progress: ');
 	t1 = new Date();
 	parseAnimes(root.getElementsByTagName('animes'));
 	var parseAnimeNode = (new Date()) - t1;
 	var filedataNodes = root.getElementsByTagName('filedata');
 	for (var k = 0; k < filedataNodes.length; k++) parseFiledata(filedataNodes[k], aid);
-	updateStatus('Processing user data...');
+	//updateStatus('Processing user data...');
 	var t1 = new Date();
 	parseCustom(root.getElementsByTagName('custom').item(0));
 	var parseCustomNode = (new Date()) - t1;
+	globalStatus.updateBarWithText('Processing animes...',45,'Total progress: ');
 	// do some triming of the definition cols if possible
 	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !LAY_SHOWCRC)
 		removeColAttribute('crc',fileCols);
@@ -464,15 +471,15 @@ function parseData(xmldoc) {
 	}
 	fileCols = newFileCols;
 	fileSkips = buildSkipCols(fileCols);
-	updateStatus('');
+	//updateStatus('');
 	var aid = root.getElementsByTagName('anime')[0];
 	if (!aid) { errorAlert('parseData','no anime node'); return; }
 	aid = Number(aid.getAttribute('id'));
 	t1 = new Date();
+	globalStatus.updateBarWithText('Rendering...',65,'Total progress: ');
 	var t2 = new Date();
 	updateGroupTable();
 	var uGT = new Date() - t2;
-	createPreferencesTable('anime');
 	t2 = new Date();
 	updateEpisodeTable();
 	var uET = new Date() - t2;
@@ -491,9 +498,12 @@ function parseData(xmldoc) {
 	}
 	var gEGD = new Date() - t2;
 	t2 = new Date();
+	createPreferencesTable('anime');
 	updateAddToMylistBox();
 	var uAB = new Date() - t2;
 	var preparingPage = (new Date() - t1);
+	globalStatus.updateBarWithText('Done.',100,'Total progress: ');
+	globalStatus.clearAfterTimeout('globalStatus',1000);
 	if (seeTimes) alert('Processing...\n'+
 						'\n\tanimes: '+parseAnimeNode+'ms'+
 						'\n\tcustom: '+parseCustomNode+' ms'+
@@ -744,6 +754,7 @@ function expandFilesByGroup() {
 	uriObj['expandall'] = 1;
 	if (getXML) { // *Need* to fetch the xml so we need to do the following:
 		var req = xhttpRequest(); // #2 Fetch data
+		globalStatus.updateBarWithText('Fetching '+group.name+' episode data...',0,'Loading episode data: ');
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid=all&gid='+gid, parseEpisodeData);
 	}
@@ -1652,7 +1663,8 @@ function createFileTable(episode) {
 function parseEpisodeData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) return;
-	updateStatus('Processing anime episode(s)...');
+	//updateStatus('Processing anime episode(s)...');
+	globalStatus.updateBarWithText('Processing anime episode(s)...',0,'Total progress: ');
 	var animesNode = root.getElementsByTagName('animes')[0];
 	if (!animesNode) return;
 	var animeNodes = animesNode.getElementsByTagName('anime');
@@ -1671,6 +1683,7 @@ function parseEpisodeData(xmldoc) {
 			// if we are handling just one episode do stuff now otherwise defer execution
 			var eid = Number(epNodes[k].getAttribute('id'));
 			updateLoadingStatus(eid, 'parsing episode data', false);
+			globalStatus.updateBarWithText('Processed '+(k+1)+' episode(s)',Math.round((k+1)/epNodes.length*100),'Total progress: ');
 			parseEpisode(epNodes[k], aid);
 			var episode = episodes[eid];
 			if (!episode) continue;
@@ -1695,7 +1708,8 @@ function parseEpisodeData(xmldoc) {
 		processingEps = false;
 		pseudoFilesCreator(); // create pseudo files
 		if (loadExpand) loadExpand = false;
-		if (seeTimes) alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
+		if (seeTimes) 
+			alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
 	}
 	// Little Hack for the expand all by group
 	if (internalExpand) {
@@ -1706,7 +1720,9 @@ function parseEpisodeData(xmldoc) {
 			forceFileTableRedraw(episode);
 		}
 	}
-	updateStatus('');
+	//updateStatus('');
+	globalStatus.updateBarWithText('Done.',100,'Total progress: ');
+	globalStatus.clearAfterTimeout('globalStatus',1000);
 }
 
 /* -[ADDTOMYLIST]---------------------

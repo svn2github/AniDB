@@ -5,12 +5,14 @@
  */
 jsVersionArray.push({
 	"file":"anime3/utils.js",
-	"version":"2.2",
+	"version":"2.3",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$"
 });
 // TIME/DATE FUNCTIONS //
+
+var globalStatus = new statusInformation(); // Global status information
 
 function padLeft(text, padChar, count) {
   var result = '';
@@ -795,19 +797,109 @@ if (typeof Array.prototype.sum != "undefined") {
  * @return void
  */
 function updateStatus(text,add,targetName) {
-  try {
-	if (!targetName) targetName = 'statusBox';
-    if (document.getElementById(targetName)) {
-      var statusBox = document.getElementById(targetName);
-      if (!add) { 
-        if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
-        statusBox.appendChild(document.createTextNode(text)); 
-      } else {
-        statusBox.firstChild.nodeValue += text;
-      }
-    }
-    else window.status = text;
-  } catch (e) { }
+	try {
+		if (!targetName) targetName = 'statusBox';
+		if (document.getElementById(targetName)) {
+			var statusBox = document.getElementById(targetName);
+			if (!add) { 
+				if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
+				statusBox.appendChild(document.createTextNode(text)); 
+			} else {
+				statusBox.firstChild.nodeValue += text;
+			}
+		}
+		else window.status = text;
+	} catch (e) { }
+}
+
+/* statusInformation Object */
+function statusInformation() {
+	this.container = null;
+	this.text = '';
+	this.loadingbar_color = 'green';
+	this.loadingbar_initial = -120;
+	this.loadingbar_imageWidth = 240;
+	this.loadingbar_eachPercent = (this.loadingbar_imageWidth/2)/100;
+	this.loadingbar_percentage = 0;
+	this.loadingbar_tooltip = '';
+	this.barElement = null;
+	this.textElement = null;
+	this.brElement = document.createElement('br');
+	this.clearContainer = function() {
+		this.container.nodeValue = '';
+		while (this.container.childNodes.length) this.container.removeChild(this.container.firstChild);
+		this.barElement = null;
+		this.textElement = null;
+		this.brElement = null;
+	}
+	this.init = function() {
+		if (!this.container) return;
+		this.clearContainer();
+		this.container.appendChild(this.createText());
+		this.container.appendChild(this.createBr());
+		this.container.appendChild(this.createBar());
+	}
+	this.createText = function() {
+		var span = document.createElement('span');
+		span.style.dispaly = 'none';
+		span.style.align = 'center';
+		span.appendChild(document.createTextNode(' '));
+		this.textElement = span;
+		return span;
+	}
+	this.createBar = function() {
+		var div = document.createElement('div');
+		div.className = 'loadingbar loadingbar_'+this.loadingbar_color;
+		div.style.display = 'none';
+		this.barElement = div;
+		return div;
+	}
+	this.createBr = function() { 
+		this.brElement = document.createElement('br'); 
+		this.brElement.style.display = 'none';
+		return this.brElement;
+	}
+	this.updateText = function(text, doAppend) {
+		if (!this.textElement) this.init();
+		this.text = text;
+		if (!doAppend) this.textElement.firstChild.nodeValue = text;
+		else this.textElement.firstChild.nodeValue += text;
+		this.textElement.style.display = '';
+		this.brElement.style.display = 'none';
+		this.barElement.style.display = 'none';
+	}
+	this.updateBar = function(percentage, tooltip) {
+		if (!this.barElement) this.init();
+		this.loadingbar_tooltip = tooltip;
+		this.loadingbar_percentage = percentage;
+		var percentageWidth = this.loadingbar_eachPercent * percentage;
+		var newProgress = (this.loadingbar_initial+percentageWidth)+'px';
+		this.barElement.style.backgroundPosition = newProgress+' 0';
+		this.barElement.title = tooltip + percentage + '%';
+		this.textElement.style.display = 'none';
+		this.brElement.style.display = 'none';
+		this.barElement.style.display = '';
+	}
+	this.updateBarWithText = function(text, percentage, tooltip) {
+		this.updateText(text);
+		this.updateBar(percentage,tooltip);
+		this.textElement.style.display = '';
+		this.brElement.style.display = '';
+		this.barElement.style.display = '';
+	}
+	this.clearAfterTimeout = function(obj,timeout) {
+		setTimeout(obj+".clearContainer()", timeout);
+	}
+}
+
+/* Function that initializes the status div */
+function initStatusBox() {
+	if (!document.getElementById('statusBox')){
+		var statusBox = document.createElement('div');
+		statusBox.id = "statusBox"
+		document.body.appendChild(statusBox);
+		globalStatus.container = statusBox;
+	}
 }
 
 /* Converts episode numbers from exp notation to interface notation
