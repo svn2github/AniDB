@@ -273,7 +273,7 @@ function prepPage() {
 	} else base_url = '';
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
-	initStatusBox();
+	//initStatusBox();
 	// apply a function
 	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', true)[0];
 	if (actionRow) {
