@@ -1076,6 +1076,7 @@ function expandEp() {
 		row.parentNode.insertBefore(nRow,row.nextSibling);
 		getXML = true;
 		var req = xhttpRequest();
+		globalStatus.updateBarWithText('Fetching episode '+eid+' data...',0,'Loading episode data: ');
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/eid'+eid+'.xml', parseEpisodeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid='+eid, parseEpisodeData);
 	} else {
