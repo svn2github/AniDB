@@ -89,151 +89,6 @@ var fileSkips = null;
 var groupCols = cloneArray(genGroupCols);
 var groupSkips = buildSkipCols(groupCols);
 //var animeCols = cloneArray(genAnimeCols);
-// stuff
-var picbase = 'http://img5.anidb.net/pics/anime/';
-var charInfos = new Array(); 		// Character information
-var creatorInfos = new Array(); 	// Creator information
-var animeInfos = new Array();		// Anime information
-
-/* -[ENTITIES]----------------------
- * ENTITY RELATED FUNCTIONS
- * ---------------------------------
- */
-
-/* Creates a new Info node */
-function CInfo(node) {
-	var type = 'character';
-	switch (node.nodeName.toLowerCase()) {
-		case 'characterdescbyid': type = 'character'; break;
-		case 'creatordescbyid': type = 'creator'; break;
-		case 'animeinfo': type = 'anime'; break;
-	}
-	this.id = Number(node.getAttribute((type == 'character' ? 'charid' : (type == 'creator' ? 'creatorid' : 'id'))));
-	this.desc = convert_input(node.getAttribute('desc'));
-	if (this.desc == '') this.desc = '<i>no description</i>';
-	this.title = (type != 'anime' ? node.getAttribute('title') : node.getAttribute('name'));
-	this.picurl = node.getAttribute('picurl');
-	this.restricted = (type != 'anime' ? false : Number(node.getAttribute('restricted'))); // override
-	this.year = (type != 'anime' ? null : node.getAttribute('year'));
-	var picurl = this.picurl.substr(this.picurl.lastIndexOf('/'));
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/'+mylist_get_animeinfo_sz+'/'+(type != 'anime' ? this.picurl : picurl)+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_'+mylist_get_animeinfo_sz+'.gif';
-	this.lang = (type != 'anime' ? node.getAttribute('mainlang') : null);
-}
-
-/* Function that fetches char/creator data
- * @param type Type of data to fetch
- * @param search Search string
- */
-function fetchInfoData(type,searchString) {
-	var req = xhttpRequest();
-	if (type == "characterbyid") {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/char'+searchString+'_desc.xml', parseEntityData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=characterdescbyid&id='+searchString, parseEntityData);
-	} else if (type == "creatorbyid") {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/creator'+searchString+'_desc.xml', parseEntityData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=creatordescbyid&id='+searchString, parseEntityData);
-	} else if (type == "animebyid") { // replace this by animedescbyid
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+searchString+'_info.xml', parseEntityData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=animeinfo&aid='+searchString, parseEntityData);
-	}
-}
-
-/* XMLHTTP RESPONSE parser
- * @param xmldoc Response document
- */
-function parseEntityData(xmldoc) {
-	var root = xmldoc.getElementsByTagName('root').item(0);
-	if (!root) { errorAlert('parseData','no root node'); return; }
-	var type = 'character';
-	var cdescNodes = root.getElementsByTagName('characterdescbyid');
-	if (!cdescNodes.length) { type = 'creator'; cdescNodes = root.getElementsByTagName('creatordescbyid'); }
-	if (!cdescNodes.length) { type = 'anime'; cdescNodes = root.getElementsByTagName('animeinfo'); }
-	if (!cdescNodes.length) return;
-	for (var d = 0; d < cdescNodes.length; d++) {
-		var infoNode = new CInfo(cdescNodes[d]);
-		var acid = "";
-		switch (type) {
-			case 'character': charInfos[infoNode.id] = infoNode; acid = 'cinfo_ch' + infoNode.id; break;
-			case 'creator': creatorInfos[infoNode.id] = infoNode; acid = 'cinfo_cr' + infoNode.id;  break;
-			case 'anime': animeInfos[infoNode.id] = infoNode; acid = 'ainfo_' + infoNode.id;  break;
-		}
-		var a = document.getElementById(acid);
-		if (!a) continue;
-		a.className = a.className.replace(/i_mylist_ainfo_loading|i_mylist_ainfo_greyed/gi,'i_mylist_ainfo');
-	}
-}
-
-/* Function that actualy shows the tooltip
- * @param obj The object that will be base for the tooltip position
- * @param info The AnimeInfo object
- * @param isChar If set to true we are displaying character info
- */
-function showInfoWork(obj,info,isAnime) {
-	var minWidth = Number(mylist_get_animeinfo_mw);
-	if (isNaN(minWidth)) minWidth = 450;
-	var table = document.createElement('table');
-	table.className = (!isAnime ? 'characterInfo' : 'animeInfo');
-	table.style.minWidth = minWidth + 'px';
-	var thead = document.createElement('thead');
-	var row = document.createElement('tr');
-	var title = document.createElement('span');
-	title.className = 'title';
-	title.appendChild(document.createTextNode(info.title));
-	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
-	if (isAnime) {
-		var year = document.createElement('span');
-		year.className = 'year';
-		year.appendChild(document.createTextNode('('+info.year+')'));
-		cell.appendChild(document.createTextNode(' '));
-		cell.appendChild(year);
-	}
-	row.appendChild(cell);
-	thead.appendChild(row);
-	table.appendChild(thead);
-	var tbody = document.createElement('tbody');
-	row = document.createElement('tr');
-	var img = document.createElement('img');
-	img.src = info.picurl;
-	img.alt = '['+info.id+']';
-	createCell(row, (!isAnime ? 'characterInfoThumb' : 'animeInfoThumb'), img);
-	var span = document.createElement('span');
-	span.innerHTML = info.desc;
-	createCell(row, (!isAnime ? 'characterInfoDesc' : 'animeInfoDesc'), span);
-	tbody.appendChild(row);
-	table.appendChild(tbody);
-	setTooltip(table, true, minWidth);
-}
-
-/* Function that shows info (or not) */
-function showInfo() {
-	var type = 'character';
-	if (this.id.indexOf('cinfo_ch') >= 0) type = 'character';
-	else if (this.id.indexOf('cinfo_cr') >= 0) type = 'creator';
-	else if (this.id.indexOf('ainfo_') >= 0) type = 'anime';
-	else { errorAlert('showInfo','info type is unknown ['+this.id+']'); return; }
-	var id = Number(this.id.substring((type != 'anime' ? 8 : 6)));
-	if (isNaN(id)) { errorAlert('showInfo','id is not a number ['+id+']'); return; }
-	var info = null;
-	switch (type) {
-		case 'character': info = charInfos[id]; break;
-		case 'creator': info = creatorInfos[id]; break;
-		case 'anime': info = animeInfos[id]; break;
-	}
-	if (!info) { // fetch data and display later
-		setTooltip('please wait while loading data...');
-		this.className = this.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
-		switch (type) {
-			case 'character': fetchInfoData("characterbyid",id); break;
-			case 'creator': fetchInfoData("creatorbyid",id); break;
-			case 'anime': fetchInfoData("animebyid",id); break;
-		}
-		this.onmouseover = showInfo;
-		this.onmouseout = hideTooltip;
-	} else { // display the data
-		showInfoWork(this,info,(type == 'anime'));
-	}
-}
 
 /* -[STARTUP]-----------------------
  * START UP RELATED FUNCTIONS
@@ -273,6 +128,7 @@ function prepPage() {
 	} else base_url = '';
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
+	//initStatusBox();
 	// apply a function
 	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', true)[0];
 	if (actionRow) {
@@ -294,8 +150,8 @@ function prepPage() {
 		if (isNaN(aid)) return;
 	}
 	loadSettings();
-	// add a collapse function to character and what not rows
-	// also add sorting classes (needs all cols defined)
+	globalStatus.loadingbar_color = 'green';
+	globalStatus.updateBarWithText('Preparing tabs',0,'Total progress: ');
 	var sortingCols = {
 		'characterlist': [	{"type":'c_none',"isDefault":false},	// image
 							{"type":'c_setlatin',"isDefault":true},// name
@@ -325,94 +181,9 @@ function prepPage() {
 							{"type":'c_latin',"isDefault":false},	// approval
 							{"type":'c_none',"isDefault":false}	]	// action
 	};
-	if (true) { // just wanted a nice toggle switch :P
-		var tables = new Array();
-		var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist'];
-		for (var t = 0; t < tableNames.length; t++) {
-			var tester = document.getElementById(tableNames[t]);
-			if (tester) tables.push(tester);
-		}
-		for (var t = 0; t < tables.length; t++) {
-			var table = tables[t];
-			var tbody = table.tBodies[0];
-			var thead = table.getElementsByTagName('thead')[0];
-			if (!thead) {
-				thead = document.createElement('thead');
-				thead.appendChild(tbody.rows[0]);
-				table.insertBefore(thead,tbody);
-			}
-			// apply sorting
-			var sortingCol = sortingCols[table.id];
-			if (sortingCol != undefined) {
-				var ths = thead.getElementsByTagName('th');
-				if (sortingCol.length >= ths.length) { 
-					var defaultTh = null;
-					var defaultSort = null;
-					for (var i = 0; i < ths.length; i++) {
-						ths[i].className += ' '+sortingCol[i]['type'];
-						if (sortingCol[i]['isDefault']) {
-							defaultTh = ths[i];
-							defaultSort = 'down';
-						}
-					}
-					init_sorting(table,defaultTh,defaultSort);
-				} else { errorAlert("parseData",'Collumn definitions ('+sortingCol.length+' vs '+ths.length+') for a given table do not match processed table: '+table.id); return; }
-			}
-			if (table.id == 'reviewlist') continue; // i don't want to process reviews
-			if (!Number(collapseThumbnails) && !Number(anime_get_entityinfo)) continue; // don't do the rest of the stuff
-			for (var r = 0; r < tbody.rows.length; r++) {
-				var row = tbody.rows[r];
-				if (Number(collapseThumbnails)) {
-					// add onmouseover/onmouseout effects
-					addEventSimple(row, "mouseover", function showImages(event) {
-						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-						for (var i = 0; i < images.length; i++) {
-							var imageCell = images[i];
-							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-							if (img) img.style.display = '';
-						}
-					});
-					addEventSimple(row, "mouseout", function showImages(event) {
-						var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-						for (var i = 0; i < images.length; i++) {
-							var imageCell = images[i];
-							var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-							if (img) img.style.display = 'none';
-						}
-					});
-					// collapse images
-					var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
-					for (var i = 0; i < images.length; i++) {
-						var imageCell = images[i];
-						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-						if (img) img.style.display = 'none';
-					}
-				}
-				if (Number(anime_get_entityinfo)) {
-					if (table.id != 'characterlist' && table.id != 'relationslist') continue;
-					var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
-					for (var n = 0; n < names.length; n++) {
-						var nameCell = names[n];
-						var a = nameCell.getElementsByTagName('a')[0];
-						if (!a) continue;
-						nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
-						var type = (a.href.indexOf('creator') >= 0 ? 'creator' : (a.href.indexOf('character') >= 0 ? 'character' : 'anime'));
-						var id = a.href.substring(a.href.indexOf('id=')+3);
-						var icons = document.createElement('span');
-						icons.className = 'icons';
-						var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show information', 'i_mylist_ainfo_greyed');
-						if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
-						else infoIcon.id = 'ainfo_'+id;
-						icons.appendChild(infoIcon);
-						var label = document.createElement('label');
-						label.appendChild(a);
-						nameCell.appendChild(label);
-						nameCell.insertBefore(icons,label);
-					}
-				}
-			}
-		}
-	}
+	var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist'];
+	var skipTables = ['recomlist','reviewlist'];
+	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_info_panime);
 	//prepareTabs();
 	fetchData(aid);
 }
@@ -443,16 +214,19 @@ function postData(url) {
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert("parseData",'Could not get root node'); return; }
-	updateStatus('Processing anime data...');
+	//updateStatus('Processing anime data...');
+	globalStatus.loadingbar_color = 'green';
+	globalStatus.updateBarWithText('Parsing Custom node',15,'Total progress: ');
 	t1 = new Date();
 	parseAnimes(root.getElementsByTagName('animes'));
 	var parseAnimeNode = (new Date()) - t1;
 	var filedataNodes = root.getElementsByTagName('filedata');
 	for (var k = 0; k < filedataNodes.length; k++) parseFiledata(filedataNodes[k], aid);
-	updateStatus('Processing user data...');
+	//updateStatus('Processing user data...');
 	var t1 = new Date();
 	parseCustom(root.getElementsByTagName('custom').item(0));
 	var parseCustomNode = (new Date()) - t1;
+	globalStatus.updateBarWithText('Processing animes...',45,'Total progress: ');
 	// do some triming of the definition cols if possible
 	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !LAY_SHOWCRC)
 		removeColAttribute('crc',fileCols);
@@ -464,15 +238,15 @@ function parseData(xmldoc) {
 	}
 	fileCols = newFileCols;
 	fileSkips = buildSkipCols(fileCols);
-	updateStatus('');
+	//updateStatus('');
 	var aid = root.getElementsByTagName('anime')[0];
 	if (!aid) { errorAlert('parseData','no anime node'); return; }
 	aid = Number(aid.getAttribute('id'));
 	t1 = new Date();
+	globalStatus.updateBarWithText('Rendering...',65,'Total progress: ');
 	var t2 = new Date();
 	updateGroupTable();
 	var uGT = new Date() - t2;
-	createPreferencesTable('anime');
 	t2 = new Date();
 	updateEpisodeTable();
 	var uET = new Date() - t2;
@@ -491,9 +265,12 @@ function parseData(xmldoc) {
 	}
 	var gEGD = new Date() - t2;
 	t2 = new Date();
+	createPreferencesTable('anime');
 	updateAddToMylistBox();
 	var uAB = new Date() - t2;
 	var preparingPage = (new Date() - t1);
+	globalStatus.updateBarWithText('Done.',100,'Total progress: ');
+	globalStatus.clearAfterTimeout('globalStatus',1000);
 	if (seeTimes) alert('Processing...\n'+
 						'\n\tanimes: '+parseAnimeNode+'ms'+
 						'\n\tcustom: '+parseCustomNode+' ms'+
@@ -744,6 +521,7 @@ function expandFilesByGroup() {
 	uriObj['expandall'] = 1;
 	if (getXML) { // *Need* to fetch the xml so we need to do the following:
 		var req = xhttpRequest(); // #2 Fetch data
+		globalStatus.updateBarWithText('Fetching '+group.name+' episode data...',0,'Loading episode data: ');
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid=all&gid='+gid, parseEpisodeData);
 	}
@@ -1065,6 +843,7 @@ function expandEp() {
 		row.parentNode.insertBefore(nRow,row.nextSibling);
 		getXML = true;
 		var req = xhttpRequest();
+		globalStatus.updateBarWithText('Fetching episode '+eid+' data...',0,'Loading episode data: ');
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/eid'+eid+'.xml', parseEpisodeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid='+eid, parseEpisodeData);
 	} else {
@@ -1652,7 +1431,8 @@ function createFileTable(episode) {
 function parseEpisodeData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) return;
-	updateStatus('Processing anime episode(s)...');
+	//updateStatus('Processing anime episode(s)...');
+	globalStatus.updateBarWithText('Processing anime episode(s)...',0,'Total progress: ');
 	var animesNode = root.getElementsByTagName('animes')[0];
 	if (!animesNode) return;
 	var animeNodes = animesNode.getElementsByTagName('anime');
@@ -1671,6 +1451,7 @@ function parseEpisodeData(xmldoc) {
 			// if we are handling just one episode do stuff now otherwise defer execution
 			var eid = Number(epNodes[k].getAttribute('id'));
 			updateLoadingStatus(eid, 'parsing episode data', false);
+			globalStatus.updateBarWithText('Processed '+(k+1)+' episode(s)',Math.round((k+1)/epNodes.length*100),'Total progress: ');
 			parseEpisode(epNodes[k], aid);
 			var episode = episodes[eid];
 			if (!episode) continue;
@@ -1695,7 +1476,8 @@ function parseEpisodeData(xmldoc) {
 		processingEps = false;
 		pseudoFilesCreator(); // create pseudo files
 		if (loadExpand) loadExpand = false;
-		if (seeTimes) alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
+		if (seeTimes) 
+			alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
 	}
 	// Little Hack for the expand all by group
 	if (internalExpand) {
@@ -1706,7 +1488,9 @@ function parseEpisodeData(xmldoc) {
 			forceFileTableRedraw(episode);
 		}
 	}
-	updateStatus('');
+	//updateStatus('');
+	globalStatus.updateBarWithText('Done.',100,'Total progress: ');
+	globalStatus.clearAfterTimeout('globalStatus',1000);
 }
 
 /* -[ADDTOMYLIST]---------------------

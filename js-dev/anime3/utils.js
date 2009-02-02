@@ -1376,9 +1376,9 @@ function sortcol(node) {
 		for (var k = 0; k < rl; k++) {
 			var row = tmpRows[k][2];
 			if (rl < 3) // single row case or just one extra rowspan
-				row.className = ((i % 2) ? "g_odd " : "")+row.className.replace(/ g_odd|g_odd/ig,"");
+				row.className = ((i % 2) ? "" : "g_odd ")+row.className.replace(/ g_odd|g_odd/ig,"");
 			else {	// multi row case, not so easy one
-				row.className = ((ik % 2) ? "g_odd " : "")+row.className.replace(/ g_odd|g_odd/ig,"");
+				row.className = ((ik % 2) ? "" : "g_odd ")+row.className.replace(/ g_odd|g_odd/ig,"");
 				ik++;
 			}
 			tbody.appendChild(row);

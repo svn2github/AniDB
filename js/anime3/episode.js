@@ -6,11 +6,11 @@
  */
 jsVersionArray.push({
 	"file":"anime3/episode.js",
-	"version":"2.0",
+	"version":"2.1",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Updated version, added show all ajax function"
+	"changelog":"Updated to support chardb"
 });
  
 // GLOBALS
@@ -108,6 +108,7 @@ function prepPage() {
 	}
 	filelisttable = getElementsByClassName(document.getElementsByTagName('table'), 'filelist', false)[0];
 	if (!filelisttable) return;
+	initTooltips();
 	var span = document.createElement('span');
 	span.id = 'flist_replace';
 	span.appendChild(document.createTextNode('Please wait while loading data...'));
@@ -123,6 +124,16 @@ function prepPage() {
 	createMylistAddBox(form,'files');
 	//filelisttable.parentNode.replaceChild(form,filelisttable);
 	createPreferencesTable('episode');
+	// handles tables
+	var sortingCols = {
+		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
+							{"type":'c_setlatin',"isDefault":false},// name
+							{"type":'c_latin',"isDefault":false},	// episode restriction
+							{"type":'c_latin',"isDefault":false}]	// comment
+	};
+	var tableNames = ['stafflist'];
+	var skipTables = null;
+	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,true);
 	fetchData(aid);
 }
 
