@@ -5,12 +5,14 @@
  */
 jsVersionArray.push({
 	"file":"anime3/utils.js",
-	"version":"2.2",
+	"version":"2.3",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$"
 });
 // TIME/DATE FUNCTIONS //
+
+var globalStatus = new statusInformation(); // Global status information
 
 function padLeft(text, padChar, count) {
   var result = '';
@@ -795,19 +797,116 @@ if (typeof Array.prototype.sum != "undefined") {
  * @return void
  */
 function updateStatus(text,add,targetName) {
-  try {
-	if (!targetName) targetName = 'statusBox';
-    if (document.getElementById(targetName)) {
-      var statusBox = document.getElementById(targetName);
-      if (!add) { 
-        if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
-        statusBox.appendChild(document.createTextNode(text)); 
-      } else {
-        statusBox.firstChild.nodeValue += text;
-      }
-    }
-    else window.status = text;
-  } catch (e) { }
+	try {
+		if (!targetName) targetName = 'statusBox';
+		if (document.getElementById(targetName)) {
+			var statusBox = document.getElementById(targetName);
+			if (!add) { 
+				if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
+				statusBox.appendChild(document.createTextNode(text)); 
+			} else {
+				statusBox.firstChild.nodeValue += text;
+			}
+		}
+		else window.status = text;
+	} catch (e) { }
+}
+
+/* statusInformation Object */
+function statusInformation() {
+	this.container = null;
+	this.text = '';
+	this.loadingbar_color = 'green';
+	this.loadingbar_initial = -120;
+	this.loadingbar_imageWidth = 240;
+	this.loadingbar_eachPercent = (this.loadingbar_imageWidth/2)/100;
+	this.loadingbar_percentage = 0;
+	this.loadingbar_tooltip = '';
+	this.barElement = null;
+	this.textElement = null;
+	this.brElement = document.createElement('br');
+	this.clearContainer = function() {
+		if (!this.container) { updateStatus(''); return; }
+		this.container.nodeValue = '';
+		while (this.container.childNodes.length) this.container.removeChild(this.container.firstChild);
+		this.barElement = null;
+		this.textElement = null;
+		this.brElement = null;
+	}
+	this.init = function() {
+		if (!this.container) return;
+		this.clearContainer();
+		this.container.appendChild(this.createText());
+		this.container.appendChild(this.createBr());
+		this.container.appendChild(this.createBar());
+	}
+	this.createText = function() {
+		if (!this.container) return;
+		var span = document.createElement('span');
+		span.style.dispaly = 'none';
+		span.style.align = 'center';
+		span.appendChild(document.createTextNode(' '));
+		this.textElement = span;
+		return span;
+	}
+	this.createBar = function() {
+		if (!this.container) return;
+		var div = document.createElement('div');
+		div.className = 'loadingbar loadingbar_'+this.loadingbar_color;
+		div.style.display = 'none';
+		this.barElement = div;
+		return div;
+	}
+	this.createBr = function() { 
+		if (!this.container) return;
+		this.brElement = document.createElement('br'); 
+		this.brElement.style.display = 'none';
+		return this.brElement;
+	}
+	this.updateText = function(text, doAppend) {
+		if (!this.container) { updateStatus(text,doAppend); return }
+		if (!this.textElement) this.init();
+		this.text = text;
+		if (!doAppend) this.textElement.firstChild.nodeValue = text;
+		else this.textElement.firstChild.nodeValue += text;
+		this.textElement.style.display = '';
+		this.brElement.style.display = 'none';
+		this.barElement.style.display = 'none';
+	}
+	this.updateBar = function(percentage, tooltip) {
+		if (!this.container) { updateStatus(tooltip+percentage); return }
+		if (!this.barElement) this.init();
+		this.loadingbar_tooltip = tooltip;
+		this.loadingbar_percentage = percentage;
+		var percentageWidth = this.loadingbar_eachPercent * percentage;
+		var newProgress = (this.loadingbar_initial+percentageWidth)+'px';
+		this.barElement.style.backgroundPosition = newProgress+' 0';
+		this.barElement.title = tooltip + percentage + '%';
+		this.textElement.style.display = 'none';
+		this.brElement.style.display = 'none';
+		this.barElement.style.display = '';
+	}
+	this.updateBarWithText = function(text, percentage, tooltip) {
+		if (!this.container) { updateStatus(text+' - '+tooltip+percentage); return }
+		this.updateText(text);
+		this.updateBar(percentage,tooltip);
+		this.textElement.style.display = '';
+		this.brElement.style.display = '';
+		this.barElement.style.display = '';
+	}
+	this.clearAfterTimeout = function(obj,timeout) {
+		setTimeout(obj+".clearContainer()", timeout);
+	}
+}
+
+/* Function that initializes the status div */
+function initStatusBox() {
+	if (!document.getElementById('statusBox')){
+		var statusBox = document.createElement('div');
+		statusBox.id = "statusBox"
+		document.body.appendChild(statusBox);
+		globalStatus.container = statusBox;
+	}
 }
 
 /* Converts episode numbers from exp notation to interface notation
@@ -927,6 +1026,9 @@ function c_undefined_r(a, b) {
 	return c_undefined(b, a);
 }
 function c_string(a, b) {
+	var aN = parseInt(a[1],10);
+	var bN = parseInt(b[1],10);
+	if (!isNaN(aN) && !isNaN(bN)) return aN - bN;
 	if (a[1] < b[1]) return -1;
 	if (a[1] > b[1]) return 1;
 	return a[0] - b[0];	
@@ -963,7 +1065,7 @@ function get_blank(node) {
 function get_anidbsort(node) {
 	// Should be using node.getAttributeNS("http://anidb.info/markup","sort");
 	var ret = node.getAttribute("anidb:sort");
-	if (!ret) ret = dig_text(node); // backup
+	if (ret == null) ret = dig_text(node); // backup
 	return (ret ? ret : 0);
 }
 
@@ -1212,25 +1314,59 @@ function sortcol(node) {
 		}
 		if (!auxRows[rowIndex]) auxRows[rowIndex] = new Array();
 		auxRows[rowIndex].push([auxRows[rowIndex].length,(cell ? funcmap['getval'](cell) : '0'),row]);
+		auxRows[rowIndex].sort(funcmap[sortingMode]);
 		if (!rowSpan) {
-			// okay, i'll have to sort first the auxRows for this index
-			auxRows[rowIndex].sort(funcmap[sortingMode]);
 			sortMap.push([rowIndex,auxRows[rowIndex][0][1]]);
 			cellValue = "";
 			lastRowSpan = rowSpan;
 		}
 	}
-	/*
-	var sortText = new Array();
-	for (var i = 0; i < sortMap.length; i++) sortText.push(sortMap[i][0]+'|'+sortMap[i][1]);
-	alert('in:\n'+sortText.join('\n')); */
+	// now i have to make sure the inner rows of a row span are correct (this is insanity)
+	for (var i = 0; i < auxRows.length; i++) {
+		var rowMap = auxRows[i];
+		if (rowMap.length == 1) continue; //no need for special handling
+		// i'll assume the row with index 0 is allways the parent row, if this is not right, it will blow in your face
+		if (rowMap[0][0] != 0) { // special handling
+			var parentRow = null;
+			var pRowIndex = 0;
+			for (var k = 0; k < rowMap.length; k++) {
+				var map = rowMap[k];
+				if (map[0] != 0) continue;
+				parentRow = map[2];
+				pRowIndex = k;
+				break; // no need to continue;
+			}
+			// okay found the fucking parent row
+			// how to do this the sane way, which is wrong, because there is no sane way to do this, if i was sane i would drop this
+			var fakeRow = document.createElement('tr');
+			fakeRow.id = parentRow.id;
+			fakeRow.className = parentRow.className.replace(/rowspan| rowspan|rowspan /ig,'');
+			var newPRow = document.createElement('tr');
+			newPRow.className = parentRow.className + ' rowspan';
+			var fakeCell = 0;
+			// What am i doing? (besides being insane)
+			// For every cell in the original Row, if it's rowSpan is > 1 (meaning it's a shared cell)
+			// 		move the contents to the new fakeRow (which will be row 0, in rowMap[0])
+			// otherwise,
+			//		copy the contents of the given cell in rowMap[0][2].cells[cellIndex] to the fakeRow
+			//		also move the contents of the cell to the newPRow (otherwise known as the row that used to be the original row)
+			// Because javascript does its thing by copy by reference this magic can work otherwise it would be hell
+			while(parentRow.cells.length) {
+				var cell = parentRow.cells[0];
+				if (cell.rowSpan > 1) {
+					fakeRow.appendChild(cell);
+				} else {
+					fakeRow.appendChild(rowMap[0][2].cells[fakeCell].cloneNode(true));
+					newPRow.appendChild(cell);
+					fakeCell++;
+				}
+			}
+			rowMap[0][2] = fakeRow;
+			rowMap[pRowIndex][2] = newPRow;
+		}
+	}
 	// now sort the map
 	sortMap.sort(funcmap[sortingMode]);
-	/*
-	sortText = new Array();
-	for (var i = 0; i < sortMap.length; i++) sortText.push(sortMap[i][0]+'|'+sortMap[i][1]);
-	alert('out:\n'+sortText.join('\n'));
-	*/
 	// and re-add the sorted rows and repaint the rows
 	for (var i = 0; i < sortMap.length; i++) {
 		var map = sortMap[i];
