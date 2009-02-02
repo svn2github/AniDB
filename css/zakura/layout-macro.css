@@ -36,7 +36,7 @@ body.nonav form textarea {
 }
 
 #layout-content{
-	margin-top: 160px;
+	/* margin-top: 160px; */
 	border-top: 1px solid #f8f7ff;
 	background-color: #f8f7ff;
 }
