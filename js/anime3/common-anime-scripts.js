@@ -468,8 +468,8 @@ function createGroupRow(gid,cols,skips) {
 				break;
 			case 'rating':
 				createCell(row, col['classname'],
-							createLink(null,((group.rating == '-') ? 'N/A' : group.rating) + ' ('+group.ratingCount+')','animedb.pl?show=animegroupvotes&agid='+group.agid,'anidb::popup',null,null,'350.400.1.1.agvotes'),
-							((group.rating == '-') ? '0' : group.rating), colSpan);
+							createLink(null,((group.rating == '-' || group.rating < 0) ? 'N/A' : group.rating) + ' ('+group.ratingCount+')','animedb.pl?show=animegroupvotes&agid='+group.agid,'anidb::popup',null,null,'350.400.1.1.agvotes'),
+							((group.rating == '-' || group.rating < 0) ? '0' : group.rating), colSpan);
 				break;
 			case 'cmts':
 				createCell(row, col['classname'],
