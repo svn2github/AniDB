@@ -97,7 +97,7 @@ var groupSkips = buildSkipCols(groupCols);
 
 /* function that changes mylist state for the anime without reload */
 function applyMylistState() {
-	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', false)[0];
+	var actionRow = getElementsByClassName(document.getElementsByTagName('tr'), 'mylistaction', true)[0];
 	if (!actionRow) return;
 	// now find everthing i want to act upon
 	// first get data in the fieldset
