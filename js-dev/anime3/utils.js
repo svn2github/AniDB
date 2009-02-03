@@ -1267,6 +1267,7 @@ function sortcol(node) {
 		sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
 		node._sortFunction = (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none' ? 'c_none' : sortfunc);
 	}
+	if (sortfunc == 'c_none') return;
 	var funcmap = FunctionMap[sortfunc];
 	// sorting mode
 	var sortingMode = (node.className.indexOf("s_reverse") >= 0 ? "sortr" : "sortf");
