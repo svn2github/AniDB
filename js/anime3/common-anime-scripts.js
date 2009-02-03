@@ -473,8 +473,8 @@ function createGroupRow(gid,cols,skips) {
 				break;
 			case 'cmts':
 				createCell(row, col['classname'],
-							createLink(null,group.commentCount,'animedb.pl?show=cmt&do=animegroup&id='+group.agid,'anidb::popup',null,null,'600.500.1.1.agcmts action'),
-							group.commentCount, colSpan);
+							createLink(null,(group.commentCount < 0 ? '0' : group.commentCount),'animedb.pl?show=cmt&do=animegroup&id='+group.agid,'anidb::popup',null,null,'600.500.1.1.agcmts action'),
+							(group.commentCount < 0 ? '0' : group.commentCount), colSpan);
 				break;
 			case 'actions':
 				var cell = createCell(null, col['classname'], null, null, colSpan);
