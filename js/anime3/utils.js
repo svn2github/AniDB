@@ -1321,6 +1321,8 @@ function sortcol(node) {
 			lastRowSpan = rowSpan;
 		}
 	}
+	//var text = new Array();
+	//for (var i = 0; i < sortMap.length; i++) text.push(sortMap[i][0]+'|'+sortMap[i][1]+'\t');
 	// now i have to make sure the inner rows of a row span are correct (this is insanity)
 	for (var i = 0; i < auxRows.length; i++) {
 		var rowMap = auxRows[i];
@@ -1351,22 +1353,33 @@ function sortcol(node) {
 			//		copy the contents of the given cell in rowMap[0][2].cells[cellIndex] to the fakeRow
 			//		also move the contents of the cell to the newPRow (otherwise known as the row that used to be the original row)
 			// Because javascript does its thing by copy by reference this magic can work otherwise it would be hell
+			var cellValue = sortMap[i][1];
 			while(parentRow.cells.length) {
 				var cell = parentRow.cells[0];
 				if (cell.rowSpan > 1) {
 					fakeRow.appendChild(cell);
+					if (cell.className.indexOf(identifier) >= 0) 
+						cellValue = funcmap['getval'](cell);
 				} else {
 					fakeRow.appendChild(rowMap[0][2].cells[fakeCell].cloneNode(true));
+					if (fakeRow.cells[fakeRow.cells.length-1].className.indexOf(identifier) >= 0)
+						cellValue = funcmap['getval'](fakeRow.cells[fakeRow.cells.length-1]);
 					newPRow.appendChild(cell);
 					fakeCell++;
 				}
 			}
 			rowMap[0][2] = fakeRow;
 			rowMap[pRowIndex][2] = newPRow;
+			sortMap[i][1] = cellValue;
 		}
 	}
 	// now sort the map
+	//for (var i = 0; i < sortMap.length; i++) text[i]+=sortMap[i][0]+'|'+sortMap[i][1]+'\t';
+	//alert('[before-sortMap]:\n'+text.join('\n'));
 	sortMap.sort(funcmap[sortingMode]);
+	//for (var i = 0; i < sortMap.length; i++) text.push(sortMap[i][0]+'|'+sortMap[i][1]);
+	//for (var i = 0; i < sortMap.length; i++) text[i]+=sortMap[i][0]+'|'+sortMap[i][1];
+	//alert('[in]\t[ms]\t[out]:\n'+text.join('\n'));
 	// and re-add the sorted rows and repaint the rows
 	for (var i = 0; i < sortMap.length; i++) {
 		var map = sortMap[i];
