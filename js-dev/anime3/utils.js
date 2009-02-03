@@ -1265,7 +1265,8 @@ function sortcol(node) {
 	if (!sortfunc) {
 		//  We now find out which sort function to apply to the column or none
 		sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
-		node._sortFunction = (sortfunc.indexOf('c_') == -1 || sortfunc == 'c_none' ? 'c_none' : sortfunc);
+		sortfunc = (sortfunc.indexOf('c_') < 0 || sortfunc == 'c_none' ? 'c_none' : sortfunc);
+		node._sortFunction = ;
 	}
 	if (sortfunc == 'c_none') return;
 	var funcmap = FunctionMap[sortfunc];
