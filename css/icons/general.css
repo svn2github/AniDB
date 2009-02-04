@@ -105,7 +105,6 @@ th.s_forward,
 #layout-main th a.descending {
 	background-image: url(../icons/test/arrow_down.png);
 	background-repeat: no-repeat;
-	background-attachment: scroll;
 	background-position: center left;
 	padding-left: 11px;
 }
@@ -114,7 +113,6 @@ th.s_reverse,
 #layout-main th a.ascending{
 	background-image: url(../icons/test/arrow_up.png);
 	background-repeat: no-repeat;
-	background-attachment: scroll;
 	background-position: center left;
 	padding-left: 11px;
 }
