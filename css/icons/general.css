@@ -94,19 +94,28 @@ th.c_date,
 th.c_latin,
 th.c_number,
 #layout-main th a.inactive {
-	background: url(../icons/test/arrow_inactive.png) center left no-repeat;
+	background-image: url(../icons/test/arrow_inactive.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center left;
 	padding-left: 11px;
 }
 
 th.s_forward, 
 #layout-main th a.descending {
-	background: url(../icons/test/arrow_down.png) center left no-repeat;
+	background-image: url(../icons/test/arrow_down.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center left;
 	padding-left: 11px;
 }
 
 th.s_reverse,
 #layout-main th a.ascending{
-	background: url(../icons/test/arrow_up.png) center left no-repeat;
+	background-image: url(../icons/test/arrow_up.png);
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center left;
 	padding-left: 11px;
 }
 /*
