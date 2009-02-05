@@ -1,0 +1,46 @@
+#layout-main div.test_all div.dayblock
+{
+margin-right: 17.2em;
+}
+
+#layout-main div.test_all div.dayblock + div.dayblock
+{
+margin-top: 3em;
+}
+
+#layout-main div.test_all div.dayblock h4
+{
+font-size: 2em;
+text-align: left;
+}
+
+#layout-main div.test_all div.dayblock table
+{
+width: 100%;
+}
+
+#layout-main div.test_all div.dayblock th.anime
+{
+width: 40%;
+}
+
+#layout-main div.test_all div.dayblock th.group
+{
+width: 30%;
+}
+
+#layout-main div.test_all div.dayblock td.status
+{
+width: 20em;
+}
+
+#layout-main div.test_all div.dayblock td.episode
+{
+width: 5em;
+text-align: right;
+}
+
+#layout-main div.test_all div.dayblock td.action
+{
+width: 3em;
+}
