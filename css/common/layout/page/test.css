@@ -1,46 +1,52 @@
 #layout-main div.test_all div.content
 {
-margin-right: 17.2em;
+	margin-right: 17.2em;
 }
 
 #layout-main div.test_all div.content + div.content
 {
-margin-top: 3em;
+	margin-top: 3em;
 }
 
 #layout-main div.test_all div.content h4
 {
-font-size: 2em;
-text-align: left;
+	font-size: 1.5em;
+	text-align: left;
 }
 
 #layout-main div.test_all div.content table
 {
-width: 100%;
+	width: 100%;
 }
 
-#layout-main div.test_all div.content th.anime
+#layout-main div.test_all div.content td.anime
 {
-width: 40%;
+	width: 40%;
 }
 
-#layout-main div.test_all div.content th.group
+#layout-main div.test_all div.content td.group
 {
-width: 30%;
+	width: 30%;
 }
 
-#layout-main div.test_all div.content td.status
+#layout-main div.test_all div.content td.info
 {
-width: 20em;
+	width: 20em;
+}
+
+#layout-main div.test_all div.content td.info a.fid
+{
+	float:left;
+	margin-right:0.5em;
 }
 
 #layout-main div.test_all div.content td.episode
 {
-width: 5em;
-text-align: right;
+	width: 5em;
+	text-align: right;
 }
 
 #layout-main div.test_all div.content td.action
 {
-width: 3em;
+	width: 3em;
 }
