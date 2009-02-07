@@ -8,15 +8,15 @@ margin-right: 17.2em;
 margin-top: 3em;
 }
 
+#layout-main div.test_all table
+{
+width: 100%;
+}
+
 #layout-main div.test_all div.dayblock h4
 {
 font-size: 2em;
 text-align: left;
-}
-
-#layout-main div.test_all div.dayblock table
-{
-width: 100%;
 }
 
 #layout-main div.test_all div.dayblock th.anime
