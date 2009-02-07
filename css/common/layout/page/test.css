@@ -1,46 +1,46 @@
-#layout-main div.test_all div.block
+#layout-main div.test_all div.content
 {
 margin-right: 17.2em;
 }
 
-#layout-main div.test_all div.block + div.block
+#layout-main div.test_all div.content + div.content
 {
 margin-top: 3em;
 }
 
-#layout-main div.test_all div.block h4
+#layout-main div.test_all div.content h4
 {
 font-size: 2em;
 text-align: left;
 }
 
-#layout-main div.test_all div.block table
+#layout-main div.test_all div.content table
 {
 width: 100%;
 }
 
-#layout-main div.test_all div.block th.anime
+#layout-main div.test_all div.content th.anime
 {
 width: 40%;
 }
 
-#layout-main div.test_all div.block th.group
+#layout-main div.test_all div.content th.group
 {
 width: 30%;
 }
 
-#layout-main div.test_all div.block td.status
+#layout-main div.test_all div.content td.status
 {
 width: 20em;
 }
 
-#layout-main div.test_all div.block td.episode
+#layout-main div.test_all div.content td.episode
 {
 width: 5em;
 text-align: right;
 }
 
-#layout-main div.test_all div.block td.action
+#layout-main div.test_all div.content td.action
 {
 width: 3em;
 }
