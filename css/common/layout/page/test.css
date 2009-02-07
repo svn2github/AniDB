@@ -19,12 +19,12 @@
 	width: 100%;
 }
 
-#layout-main div.test_all div.content td.anime
+#layout-main div.test_all div.content th.anime
 {
 	width: 40%;
 }
 
-#layout-main div.test_all div.content td.group
+#layout-main div.test_all div.content th.group
 {
 	width: 30%;
 }
