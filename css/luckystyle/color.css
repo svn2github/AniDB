@@ -142,3 +142,13 @@ a:visited, a:active, a:hover, a:link {
 	background-color: #88fe90;
          color: #000000;
 }
+
+#layout-content table.filelist tr.deprecated
+{
+	background-color: #999999;
+}
+
+#layout-content div.anime_all div.episodes tr.generic td
+{
+	background-color: #000000;
+}

@@ -103,3 +103,8 @@ span.link:hover,
 {
 	color: white;
 }
+
+#layout-content table.filelist tr.deprecated
+{
+	background-color: #999999;
+}
