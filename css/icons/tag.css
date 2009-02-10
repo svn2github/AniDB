@@ -39,3 +39,17 @@
 	height: 16px;
 	background-image: url(../icons/test/tag_merge.png);
 }
+
+*.i_tag_unverify
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/test/tag_unverify.gif);
+}
+
+*.i_tag_verify
+{
+	width: 16px;
+	height: 16px;
+	background-image: url(../icons/test/tag_verify.gif);
+}
