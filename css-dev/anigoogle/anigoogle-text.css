@@ -35,7 +35,8 @@ a.i_button:hover
 #layout-main ul.g_list li,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-search select
+#layout-search select,
+#layout-main div.report_all div.body ul li
 {
 	font-size:1.1em;
 }

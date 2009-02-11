@@ -134,7 +134,7 @@ div.pagination span strong
 	color: #FFFFFF;
 }
 
-#layout-main #htmltagcloud
+#layout-main div.tagcloud
 {
 	border:1px solid #D1D7DC;
 	background-color:#FAFAFA;
@@ -145,4 +145,12 @@ div.pagination span strong
 #layout-main div.export_all div.exportblock .rtop *
 {
 	background-color:#CADCEB;
+}
+
+#layout-main div.addseq_all div.explanation div.description,
+#layout-main div.addcharcharrel_all div.explanation div.description,
+#layout-main div.addcreatorcreatorrel_all div.explanation div.description,
+#layout-main div.addcreatoranimerel_all div.explanation div.description
+{
+	background-color:#F4F4F4;
 }

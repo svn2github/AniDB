@@ -13,8 +13,6 @@
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description,
 #layout-main div.addcreatoranimerel_all div.explanation div.description
 {
-	background-color:#F4F4F4;
-	border:1px solid #D1D7DC;
 	margin:1em 0;
 	padding:4px;
 }
@@ -24,7 +22,6 @@
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description dl + dl,
 #layout-main div.addcreatoranimerel_all div.explanation div.description dl + dl
 {
-	border-top:1px solid #D1D7DC;
 	margin-top:0.25em;
 	padding: 0.25em 0;
 }

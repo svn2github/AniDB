@@ -1,0 +1,354 @@
+@import "../common/normalize.css";
+@import "../common/layout/default.css";
+@import "../common/layout/common.css";
+@import "../common/layout/global/all.css";
+@import "../common/layout/global/roundcorner.css";
+@import "../common/layout/page/all.css";
+@import "../common/style/text/default.css";
+@import "../common/style/content/page-anime.css";
+@import "../icons/all.css";
+span.link,
+a
+{
+text-decoration: none;
+color: #ADD8E6;
+cursor: pointer;
+}
+#layout-tabs
+{
+display:block;
+margin-right:.5em;
+position:absolute;
+right:0;
+top:2.1em;
+}
+#layout-tabs ul li
+{
+display:inline;
+padding:4px 6px 3px;
+}
+#layout-tabs ul
+{
+margin-bottom:.5em;
+margin-top:.5em;
+text-align:right;
+}
+#layout-tabs li.news
+{
+	display:inline;
+}
+#layout-tabs ul.main-tabs > li.selected
+{
+border-bottom:2px solid;
+}
+#layout-tabs ul.main-tabs > li
+{
+	border-bottom:none;
+}
+#layout-main > h1
+{
+display:block;
+padding:4px;
+text-align:left;
+}
+#layout-main > h1,
+#layout-nav div.menu_hr
+{
+margin-top: 0.3em;
+border-top:1px solid;
+}
+#layout-menu span.tab
+{
+display: inherit;
+}
+#layout-menu span.tab
+{
+position: static;
+}
+html
+{
+font-size: 10px;
+line-height: 1.2;
+font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
+color: white
+}
+form input[type="text"],
+form input[type="checkbox"],
+form input[type="password"],
+form textarea,
+form select,
+select
+{
+color: white;
+background: black;
+border: none;
+font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
+font-size: 10px;
+margin-left: 0.3em;
+}
+#adba_update,
+#style_next,
+#style_prev,
+#remAudLang,
+#addAudLang,
+#remSubLang,
+#addSubLang,
+div.addfilem input[id="addfilem.next"],
+div.result input,
+form input[type="submit"],
+a.button,
+input.button,
+button.button,
+a.confirmButton,
+input.confirmButton,
+button.confirmButton
+{
+margin-top: 0.3em;
+color: #c1c1c1;
+border-style: dashed;
+text-shadow: none;
+border-color: #565656;
+}
+#layout-nav
+{
+position: fixed;
+width: 100%;
+height: 2.1em;
+padding-top: 0px;
+}
+#layout-menu
+{
+text-align: left;
+height: 2.1em;
+display: block;
+}
+#layout-menu span,
+#layout-menu a
+{
+cursor: default;
+}
+#layout-menu ul
+{
+list-style: none;
+margin-left: -0.3em;
+}
+#layout-menu ul li a
+{
+display: block;
+padding: 0 0.3em 0 0.3em;
+}
+#layout-menu > li
+{
+padding-bottom: 1em;
+}
+#layout-menu div.menu .g_odd
+{
+background: none;
+}
+#layout-menu div.menu li.forum
+{
+font-weight: bold;
+}
+#layout-menu span.login,
+#layout-menu span.user
+{
+text-align: left;
+display: block;
+}
+#layout-menu span.login a
+{
+display: inline;
+}
+#layout-menu #newnews:before,
+#layout-menu #newnews:after,
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
+{
+content: "!";
+font-weight: bold;
+color: red;
+margin: 0 0.2em 0 0.2em;
+}
+#layout-search
+{
+display: block;
+position: absolute;
+top: -0.5em;
+right: 0;
+height: 2em;
+left: auto;
+}
+#layout-search form input.text
+{
+width: 11.4em;
+font-size: 10px;
+margin: 0;
+padding: 0;
+}
+#layout-search form p
+{
+text-align: right;
+padding: 0;
+margin: 0;
+}
+#layout-search form input.submit,
+form button[type="submit"]
+{
+font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
+margin: 0;
+padding: 0;
+color: white;
+font-size: 11px;
+font-weight: normal;
+border-style: dashed;
+border-color: #565656;
+}
+#layout-content
+{
+margin: 0 0 0 0;
+padding-top: 3em;
+padding-bottom: 0.1em;
+width: 100%;
+}
+body.nonav #layout-content
+{
+width: auto;
+height: auto;
+margin: 0;
+}
+#layout-menu
+{
+text-align: left;
+margin-left: 1em;
+margin-right: 1em;
+margin-bottom: 1em;
+margin-top: 0.4em;
+display: block;
+}
+#layout-content ul.g_list.nav,
+#layout-content ul.g_list.jump,
+#layout-content ul.g_list.limit
+{
+padding-left: 0;
+padding-top: 2px;
+padding-bottom: 2px;
+width: 100%;
+text-align: center;
+}
+#layout-content ul.g_list.nav li,
+#layout-content ul.g_list.links li,
+#layout-content ul.g_list.jump li,
+#layout-content ul.g_list.limit li,
+#layout-tabs ul.main-tabs li
+{
+display: inline;
+margin-left: 0;
+margin-right: 0;
+padding-left: 0;
+padding-right: 0;
+}
+#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account
+{
+display: none;
+z-index: 7;
+position: absolute;
+top: 2.1em;
+}
+ul#layout-menu li:hover ul {
+display: block;
+position: absolute;
+}
+ul#layout-menu li ul li{
+float: none;
+display: block;
+line-height: normal;
+white-space: nowrap;
+margin-left: 0;
+margin-right: 0;
+}
+ul#layout-menu li {
+float: left;
+margin-left: 10px;
+}
+#layout-main .g_image image,
+#layout-main .g_definitionlist
+{
+padding: 1px;
+}
+#layout-main .block .g_definitionlist table
+{
+border: none;
+margin: 0;
+}
+html, body, div, form, table
+{
+left: 0;
+}
+*.hide
+{
+display: none !important;
+}
+#layout-nav input,
+#layout-nav button
+{
+width: auto;
+}
+#layout-content div.group_all div.group_released table td.undumped
+{
+visibility: hidden;
+}
+#layout-content div.group_all div.group_released table td.notalldumped
+{
+visibility: visible;
+color: red;
+font-weight: bold;
+}
+#layout-nav #layout-menu li.sub-menu span.tab
+{
+text-transform: lowercase;
+}
+#layout-nav #layout-menu li.alert > span
+{
+color: red;
+}
+#layout-nav a
+{
+color: white;
+}
+#layout-nav li li:hover a
+{
+color: #ff6000;
+background-image: url(images/whitepixel.png);
+}
+#layout-content div.g_msg
+{
+margin: 2em;
+padding: 1.2em;
+}
+#layout-content div.g_msg h3
+{
+float: left;
+}
+#layout-content div.g_msg p
+{
+display: block;
+margin-left: 4.5em;
+padding: 0;
+text-align: left;
+}
+#layout-main div.forum li.row
+{
+border-bottom-width: 0px;
+border-top-width: 0px;
+}
+#layout-main div.forum li.row:last-of-type
+{
+border-bottom-width: 1px;
+}
+#layout-main div.forum div.search form input, #layout-main div.forum div.search form select, #layout-main div.forum div.search form input[type="submit"]
+{
+padding: 0;
+margin: 0;
+}

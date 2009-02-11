@@ -1,6 +1,7 @@
 #layout-search ul.acdropdown
 {
-	background:#FFFFFF;
+	background-color:#FFFFFF;
+	border:1px solid #85878C;
 }
 
 #layout-search ul.acdropdown li:hover,

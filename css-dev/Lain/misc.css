@@ -17,16 +17,34 @@
 #layout-main table.filelist tr.good,
 #layout-main div.myvotes_all table tr.high td,
 #layout-main div.producer_all table tr.mylist,
+#layout-main div.latest2_all table tr.mylist,
+#layout-main div.latest2_all table tr td.mylist,
+#layout-main div.character_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.animelist_all table tr.mylist,
-#layout-main div.group_released table tr.mylist{
+#layout-main div.group_released table tr.mylist,
+#layout-main div.schedule_all table tr.mylist,
+#layout-main div.forum div.comment div.content strong,
+#layout-main div.forum a.topictitle strong,
+#layout-main div.addcreatoranimerel_all tr.identical
+{
 	background-color: #442233;
 }
 
+#layout-main td.g_odd ins,
 #layout-main table.filelist tr.g_odd.good,
 #layout-main div.myvotes_all table tr.g_odd.high td,
 #layout-main div.producer_all table tr.g_odd.mylist,
+#layout-main div.latest2_all table tr.g_odd.mylist,
+#layout-main div.latest2_all table tr.g_odd td.mylist,
+#layout-main div.character_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.creator_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.animelist_all table tr.g_odd.mylist,
-#layout-main div.group_released table tr.g_odd.mylist{
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main div.schedule_all table tr.g_odd.mylist
+{
 	background-color: #331122;
 }
 /* /Color */
