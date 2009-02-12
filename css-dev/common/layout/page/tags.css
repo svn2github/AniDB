@@ -121,11 +121,15 @@
 #layout-main div.chartagsmod_all table,
 #layout-main div.animetagmod_all table
 {
-	width: 95%;
+	width: 98%;
 }
 
 #layout-main div.chartagsmod_all table td.action,
-#layout-main div.animetagmod_all table td.action,
+#layout-main div.animetagmod_all table td.action
+{
+	width: 11em;
+}
+
 #layout-main div.chartags_all table td.action,
 #layout-main div.animetag_all table td.action
 {
