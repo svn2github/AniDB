@@ -130,19 +130,19 @@
 #layout-main div.chartagsmod_all table,
 #layout-main div.animetagmod_all table
 {
-	width: 98%;
+	width: 100%;
 }
 
 #layout-main div.chartagsmod_all table td.action,
 #layout-main div.animetagmod_all table td.action
 {
-	width: 11em;
+	min-width: 11em;
 }
 
 #layout-main div.chartags_all table td.action,
 #layout-main div.animetag_all table td.action
 {
-	width: 14em;
+	min-width: 14em;
 }
 
 #layout-main div.chartagsmod_all table td.count,
@@ -152,7 +152,7 @@
 #layout-main div.animetag_all table td.status,
 #layout-main div.animetag_all table td.count
 {
-	width: 5em;
+	min-width: 5em;
 }
 
 #layout-main div.chartagsmod_all table td.date,
@@ -160,7 +160,7 @@
 #layout-main div.chartags_all table td.date,
 #layout-main div.animetag_all table td.date
 {
-	width: 10em;
+	min-width: 10em;
 }
 
 #layout-main div.chartagsmod_all table td.name.tag,
