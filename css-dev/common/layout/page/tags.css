@@ -15,16 +15,18 @@
 }
 
 #layout-main div.chartags_all div.editbox input,
-#layout-main div.animetag_all div.editbox input
+#layout-main div.animetag_all div.editbox input,
+#layout-main div.animetagmod_all div.editbox input
 {
-	width:300px;
+	width:400px;
 }
 
 #layout-main div.chartags_all div.editbox textarea,
-#layout-main div.animetag_all div.editbox textarea
+#layout-main div.animetag_all div.editbox textarea,
+#layout-main div.animetagmod_all div.editbox textarea
 {
 	height:100px;
-	width:300px;
+	width:400px;
 }
 
 #layout-main div.chartagsmod_all dl,
