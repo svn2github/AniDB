@@ -1,19 +1,13 @@
-*.i_general_delete
+*.i_general_delete,
+*.i_general_delete_request
 {
 	background-image:url(../icons/silk/general_delete.png);
 	height:16px;
 	width:16px;
 }
 
-*.i_general_delete_request
-{
-	background-image:url(../icons/silk/general_delete_request.png);
-	height:16px;
-	width:16px;
-}
-
-
-*.i_general_edit
+*.i_general_edit,
+*.i_general_edit_request
 {
 	background-image:url(../icons/silk/general_edit.png);
 	height:16px;
