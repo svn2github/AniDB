@@ -118,12 +118,22 @@
 	margin-top: 1.5em;
 }
 
+#layout-main div.chartagsmod_all table,
+#layout-main div.animetagmod_all table
+{
+	width: 95%;
+}
+
+#layout-main div.chartagsmod_all table td.action,
+#layout-main div.animetagmod_all table td.action,
 #layout-main div.chartags_all table td.action,
 #layout-main div.animetag_all table td.action
 {
 	width: 14em;
 }
 
+#layout-main div.chartagsmod_all table td.count,
+#layout-main div.animetagmod_all table td.count,
 #layout-main div.chartags_all table td.status,
 #layout-main div.chartags_all table td.count,
 #layout-main div.animetag_all table td.status,
@@ -132,14 +142,19 @@
 	width: 5em;
 }
 
+#layout-main div.chartagsmod_all table td.icons,
+#layout-main div.animetagmod_all table td.icons,
 #layout-main div.chartags_all table td.icons,
 #layout-main div.animetag_all table td.icons
 {
 	float:right;
 }
 
+#layout-main div.chartagsmod_all table td.name.tag,
+#layout-main div.animetagmod_all table td.name.tag,
 #layout-main div.chartags_all table td.name.tag,
 #layout-main div.animetag_all table td.name.tag
 {
 	width:50%;
 }
+
