@@ -14,6 +14,19 @@
 	margin:1em auto;
 }
 
+#layout-main div.chartags_all div.editbox input,
+#layout-main div.animetag_all div.editbox input
+{
+	width:300px;
+}
+
+#layout-main div.chartags_all div.editbox textarea,
+#layout-main div.animetag_all div.editbox textarea
+{
+	height:100px;
+	width:300px;
+}
+
 #layout-main div.chartagsmod_all dl,
 #layout-main div.chartags_all dl,
 #layout-main div.animetagmod_all dl,
@@ -21,7 +34,6 @@
 {
 	display:block;
 	height:1%;
-	margin:0;
 	overflow:hidden;
 }
 
@@ -48,9 +60,6 @@
 #layout-main div.animetag_all div.inner
 {
 	margin-bottom:1em;
-	margin-left:auto;
-	margin-right:auto;
-	width:40em;
 }
 
 #layout-main div.chartagsmod_all table.charactertags,
