@@ -1,3 +1,118 @@
+#layout-main div.chartags_all div.addbox textarea,
+#layout-main div.animetag_all div.addbox textarea
+{
+	height:200px;
+	width:400px;
+}
+
+#layout-main div.chartagsmod_all div.addbox input,
+#layout-main div.chartags_all div.addbox input,
+#layout-main div.animetagmod_all div.addbox input,
+#layout-main div.animetag_all div.addbox input
+{
+	display:block;
+	margin:1em auto;
+}
+
+#layout-main div.chartagsmod_all dl,
+#layout-main div.chartags_all dl,
+#layout-main div.animetagmod_all dl,
+#layout-main div.animetag_all dl
+{
+	display:block;
+	height:1%;
+	margin:0;
+	overflow:hidden;
+}
+
+#layout-main div.chartagsmod_all dl dt,
+#layout-main div.chartags_all dl dt,
+#layout-main div.animetagmod_all dl dt,
+#layout-main div.animetag_all dl dt
+{
+	clear:none;
+	float:left;
+}
+
+#layout-main div.chartagsmod_all dl dd,
+#layout-main div.chartags_all dl dd,
+#layout-main div.animetagmod_all dl dd,
+#layout-main div.animetag_all dl dd
+{
+	margin-left:20em;
+}
+
+#layout-main div.chartagsmod_all div.inner,
+#layout-main div.chartags_all div.inner,
+#layout-main div.animetagmod_all div.inner,
+#layout-main div.animetag_all div.inner
+{
+	margin-bottom:1em;
+	margin-left:auto;
+	margin-right:auto;
+	width:40em;
+}
+
+#layout-main div.chartagsmod_all table.charactertags,
+#layout-main div.chartagsmod_all table.charactertaggroups,
+#layout-main div.chartags_all table.charactertags,
+#layout-main div.animetag_all table.charactertags
+{
+	width:100%;
+}
+
+#layout-main div.chartags_all table.charactertags,
+#layout-main div.animetag_all table.animetag
+{
+	margin-bottom: 1em;
+}
+
+#layout-main div.chartags_all div.addbox div.taggrouplist
+{
+	margin-top:.5em;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-group div.inner
+{
+	width:78em;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column
+{
+	float:left;
+	min-height:17.5em;
+	width:17.5em;
+	margin:0 1em 1em 0;
+	padding:4px;
+	border:1px solid darkgrey;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column span
+{
+	display:block;
+}
+
+#layout-main div.chartags_all div.addbox div.taggrouplist span,
+#layout-main div.chartags_all div.addbox div.tag-column span
+{
+	text-align:left;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column h5
+{
+	text-align:center;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-group h3
+{
+	margin-bottom: 0.5em;
+}
+
+#layout-main div.chartags_all div.fake
+{
+	clear:both;
+}
+
 #layout-main div.animetag_all div.animetag_entries_spoiler table + div.animetag_entries_spoiler
 {
 	margin-top: 1.5em;
@@ -8,17 +123,21 @@
 	width: 14em;
 }
 
+#layout-main div.chartags_all table td.status,
+#layout-main div.chartags_all table td.count,
 #layout-main div.animetag_all table td.status,
 #layout-main div.animetag_all table td.count
 {
 	width: 5em;
 }
 
+#layout-main div.chartags_all table td.icons,
 #layout-main div.animetag_all table td.icons
 {
 	float:right;
 }
 
+#layout-main div.chartags_all table td.name.tag,
 #layout-main div.animetag_all table td.name.tag
 {
 	width:50%;
