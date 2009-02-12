@@ -146,12 +146,12 @@
 	width: 5em;
 }
 
-#layout-main div.chartagsmod_all table td.icons,
-#layout-main div.animetagmod_all table td.icons,
-#layout-main div.chartags_all table td.icons,
-#layout-main div.animetag_all table td.icons
+#layout-main div.chartagsmod_all table td.date,
+#layout-main div.animetagmod_all table td.date,
+#layout-main div.chartags_all table td.date,
+#layout-main div.animetag_all table td.date
 {
-	float:right;
+	width: 10em;
 }
 
 #layout-main div.chartagsmod_all table td.name.tag,
@@ -159,6 +159,6 @@
 #layout-main div.chartags_all table td.name.tag,
 #layout-main div.animetag_all table td.name.tag
 {
-	width:50%;
+	width: 50%;
 }
 
