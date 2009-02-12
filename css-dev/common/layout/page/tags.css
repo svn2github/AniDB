@@ -118,6 +118,7 @@
 	margin-top: 1.5em;
 }
 
+#layout-main div.chartags_all table td.action,
 #layout-main div.animetag_all table td.action
 {
 	width: 14em;
