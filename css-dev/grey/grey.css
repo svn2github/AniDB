@@ -1,14 +1,7 @@
 @import "../icons/all.css";
 @import "../common/layout/page/all.css";
-@import "../common/layout/page/latestanimes.css";
-@import "../common/layout/page/animeatt.css";
-@import "../common/layout/page/export.css";
-@import "../common/layout/page/tags.css";
-@import "../common/layout/page/chartags.css";
-@import "../common/layout/page/charlist.css";
-@import "../common/layout/page/cmt.css";
-@import "../common/layout/page/addentity.css";
 @import "../common/layout/global/tabbed_pane.css";
+@import "../common/layout/global/tagcloud.css";
 @import "../common/layout/global/timedentry.css";
 @import "../common/layout/global/menu.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
