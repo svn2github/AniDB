@@ -54,3 +54,23 @@ th,
 {
 	background-color: #dcddd9;
 }
+
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#A9ACA3;
+	color:black;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: #F2F3EE;
+}
+
+#layout-tabs ul li.selected a,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: #F2F3EE;
+}

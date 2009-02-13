@@ -1,6 +1,7 @@
 @import "../common/normalize.css";
 @import "../common/layout/default.css";
 @import "../common/layout/common.css";
+@import "../common/layout/macro/tabs.css";
 
 @import "../common/layout/global/all.css";
 @import "../common/layout/page/all.css";
@@ -15,3 +16,13 @@
 @import "../common/style/content/page-anime.css";
 
 @import "../icons/all.css";
+
+#layout-tabs ul li
+{
+	margin:0;
+}
+
+#layout-tabs ul li:first-child
+{
+	margin-left: 6px;
+}

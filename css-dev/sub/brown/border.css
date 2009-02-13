@@ -71,3 +71,17 @@ img, a
 {
 	border: 1px solid #8c8673;
 }
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border: 1px dotted #999380;
+}
+
+#layout-tabs ul li.selected a,
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	border-bottom: 1px #E9E6D9 double;
+}

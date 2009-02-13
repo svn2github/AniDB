@@ -21,8 +21,14 @@
 {
 	margin-left: auto;
 	margin-right: auto;
-	width: 20em;
+	width: 22em;
 	text-align: left;
+}
+
+#layout-main div.admin_menu ul li,
+#layout-main div.admin_cat_menu ul li
+{
+	padding: 0px 4px;
 }
 
 #layout-main div.admin_all div.creatoranimerelation dl,

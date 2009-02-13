@@ -49,7 +49,31 @@ img, a
 	border-top: black 2px solid;
 }
 
-#layout-main div.profile_all div.g_section
+#layout-main div.profile_all div.g_section div.body
 {
-	border: 3px solid #486187;
+	border: 1px solid #486187;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-tabs ul li a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border: 1px solid #486187;
+}
+
+#layout-tabs + #layout-main
+{
+	border-top: 1px solid #486187;
+}
+
+#layout-tabs ul li.selected a,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom: 1px #e7ebff double;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	border-bottom: 1px #e7ebff double;
 }
