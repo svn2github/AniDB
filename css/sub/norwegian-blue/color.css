@@ -8,35 +8,27 @@ html
 span.link,
 a
 {
-text-decoration: none;
-color: blue;
-cursor: pointer;
+	text-decoration: none;
+	color: #006699;
+	cursor: pointer;
 }
 
 span.link:hover,
-a:active
+a:active,
+a:hover
 {
-color: red;
-}
-
-#layout-main a:hover
-{
-text-decoration: underline;
+	color:#AA0000;
+	text-decoration: underline;
 }
 
 a.i_icon:hover, a.i_inline:hover
 {
-text-decoration: none;
+	text-decoration: none;
 }
 
 #layout-nav a
 {
 	color: #FFFFFF;
-}
-
-#layout-nav a:hover
-{
-	color : #FFFFFF;
 }
 
 #layout-nav
@@ -79,4 +71,29 @@ th,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd
 {
 	background-color: #DFDFF6;
+}
+
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color: #CBD6E5;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: #e7ebff;
+	color:#006699;
+}
+
+#layout-tabs ul li.selected a,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: #e7ebff;
+}
+
+#layout-tabs
+{
+	background-color:#DFDFF6;
 }

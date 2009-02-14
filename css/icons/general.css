@@ -83,32 +83,6 @@
 	background-image: url(../icons/test/arrow_inactive.png);
 }
 
-*.i_verified
-{
-	background-image: url(../icons/silk/verified.png);
-}
-
-*.i_unverify
-{
-	width: 16px;
-	height: 16px;
-	background-image: url(../icons/test/unverify.gif);
-}
-
-*.i_verify
-{
-	width: 16px;
-	height: 16px;
-	background-image: url(../icons/test/verify.gif);
-}
-
-*.i_history
-{
-	width: 16px;
-	height: 16px;
-	background-image: url(../icons/test/history.png);
-}
-
 th.c_set,
 th.c_setlatin,
 th.c_date,

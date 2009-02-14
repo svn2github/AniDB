@@ -54,3 +54,27 @@ img, a
 {
 	border: 1px solid #cbd6e5;
 }
+
+#layout-tabs + #layout-main
+{
+	border-top: 1px dotted #98AAB1;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-tabs ul li a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border: 1px dotted #98AAB1;
+}
+
+#layout-tabs ul li.selected a,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom: 1px #F2F3EE double;
+}
+
+#layout-tabs ul li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	border-bottom: 1px #F2F3EE double;
+}

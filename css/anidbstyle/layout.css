@@ -148,8 +148,8 @@
 {
 	position: absolute;
 	right: 260px;
-	left: 168px;
-	top: 79px;
+	left: 180px;
+	top: 92px;
 }
 
 #layout-tabs ul li,
@@ -178,14 +178,4 @@
 #layout-tabs ul li a
 {
 	padding:0px 8px 3px 8px;
-}
-
-#layout-main div.profile_all div.tabbed_pane ul.tabs
-{
-	text-align: center;
-}
-
-#layout-main div.tabbed_pane ul.tabs
-{
-	margin:0 0 1px;
 }

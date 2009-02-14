@@ -80,7 +80,10 @@ th,
 	background-color: #e0dbc9;
 }
 
-#layout-tabs ul li.selected a
+#layout-tabs ul li.selected a,
+#layout-tabs ul li.selected a:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover
 {
-	border-bottom: 1px #E5E5E5 double;
+	background-color: #E9E6D9;
 }

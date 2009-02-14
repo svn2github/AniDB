@@ -1,0 +1,147 @@
+*.i_general_blacklist
+{
+	background-image:url(../icons/silk/general_blacklist.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_delete,
+*.i_general_delete_request
+{
+	background-image:url(../icons/silk/general_delete.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_edit,
+*.i_general_edit_request
+{
+	background-image:url(../icons/silk/general_edit.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_history
+{
+	background-image:url(../icons/silk/general_history.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_merge
+{
+	background-image:url(../icons/silk/general_merge.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_unverify
+{
+	background-image:url(../icons/silk/general_unverify.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_verify
+{
+	background-image:url(../icons/silk/general_verify.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_vote_down
+{
+	background-image:url(../icons/silk/general_vote_down.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_vote_revoke
+{
+	background-image:url(../icons/silk/general_vote_revoke.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_general_vote_up
+{
+	background-image:url(../icons/silk/general_vote_up.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_search_blue
+{
+	background-image:url(../icons/silk/search_type_b.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_search_orange
+{
+	background-image:url(../icons/silk/search_type_a.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_state_verified
+{
+	background-image:url(../icons/silk/state_verified.png);
+	height:16px;
+	width:16px;
+}
+
+*.i_user_add
+{
+	background-image: url(../icons/silk/user_add.png);
+}
+
+*.i_user_delete
+{
+	background-image: url(../icons/silk/user_delete.png);
+}
+
+*.i_user_feedback
+{
+	background-image: url(../icons/silk/user_feedback.png);
+}
+
+*.i_user_history
+{
+	background-image: url(../icons/silk/user_history.png);
+}
+
+*.i_user_info
+{
+	background-image: url(../icons/silk/user_info.png);
+}
+
+*.i_user_mylist
+{
+	background-image: url(../icons/silk/user_mylist.png);
+}
+
+*.i_user_page
+{
+	background-image: url(../icons/silk/user_page.png);
+}
+
+*.i_user_reviews
+{
+	background-image: url(../icons/silk/user_reviews.png);
+}
+
+*.i_user_send
+{
+	background-image: url(../icons/silk/user_send.png);
+}
+
+*.i_user_wishlist
+{
+	background-image: url(../icons/silk/user_wishlist.png);
+}
+
+*.i_user_votes
+{
+	background-image: url(../icons/silk/user_votes.png);
+}

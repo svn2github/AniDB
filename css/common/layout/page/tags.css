@@ -1,75 +1,179 @@
-#layout-main div.tagcloud
+#layout-main div.chartags_all div.addbox textarea,
+#layout-main div.animetag_all div.addbox textarea
 {
-	text-align: justify;
-	line-height: 1;
-	margin-left:2em;
-	margin-right:2em;
-	padding: 1.5em;
+	height:200px;
+	width:400px;
 }
 
-#layout-main div.tagcloud span
+#layout-main div.chartagsmod_all div.addbox input,
+#layout-main div.chartags_all div.addbox input,
+#layout-main div.animetagmod_all div.addbox input,
+#layout-main div.animetag_all div.addbox input
 {
-	line-height:25px;
-	white-space: nowrap;
-	padding-left: 0.8em;
-	padding-right: 0.8em;
+	display:block;
+	margin:1em auto;
 }
 
-#layout-main div.tagcloud span.tagcloud0 { font-size: 9px;}
-#layout-main div.tagcloud span.tagcloud1 { font-size: 10px;}
-#layout-main div.tagcloud span.tagcloud2 { font-size: 11px;}
-#layout-main div.tagcloud span.tagcloud3 { font-size: 12px;}
-#layout-main div.tagcloud span.tagcloud4 { font-size: 14px;}
-#layout-main div.tagcloud span.tagcloud5 { font-size: 16px;}
-#layout-main div.tagcloud span.tagcloud6 { font-size: 18px;}
-#layout-main div.tagcloud span.tagcloud7 { font-size: 19px;}
-#layout-main div.tagcloud span.tagcloud8 { font-size: 20px;}
-#layout-main div.tagcloud span.tagcloud9 { font-size: 21px;}
-#layout-main div.tagcloud span.tagcloud10 { font-size: 22px;}
-#layout-main div.tagcloud span.tagcloud11 { font-size: 23px;}
-#layout-main div.tagcloud span.tagcloud12 { font-size: 24px;}
-#layout-main div.tagcloud span.tagcloud13 { font-size: 25px;}
-#layout-main div.tagcloud span.tagcloud14 { font-size: 26px;}
-#layout-main div.tagcloud span.tagcloud15 { font-size: 27px;}
-#layout-main div.tagcloud span.tagcloud16 { font-size: 28px;}
-#layout-main div.tagcloud span.tagcloud17 { font-size: 29px;}
-#layout-main div.tagcloud span.tagcloud18 { font-size: 30px;}
-#layout-main div.tagcloud span.tagcloud19 { font-size: 31px;}
-#layout-main div.tagcloud span.tagcloud20 { font-size: 32px;}
-#layout-main div.tagcloud span.tagcloud21 { font-size: 33px;}
-#layout-main div.tagcloud span.tagcloud22 { font-size: 34px;}
-#layout-main div.tagcloud span.tagcloud23 { font-size: 35px;}
-#layout-main div.tagcloud span.tagcloud24 { font-size: 36px;}
-
-#layout-main div.animetag_all div.animetag_list table
+#layout-main div.chartags_all div.editbox input[type="text"],
+#layout-main div.animetag_all div.editbox input[type="text"],
+#layout-main div.animetagmod_all div.editbox input[type="text"]
 {
-	width:95%;
+	width:400px;
 }
 
-#layout-main div.animetag_all div.animetag_list table th
+#layout-main div.chartags_all div.editbox textarea,
+#layout-main div.animetag_all div.editbox textarea,
+#layout-main div.animetagmod_all div.editbox textarea
 {
-	width:5%;
+	height:100px;
+	width:400px;
 }
 
-#layout-main div.animetag_all div.animetag_list table th.name
+#layout-main div.chartagsmod_all dl,
+#layout-main div.chartags_all dl,
+#layout-main div.animetagmod_all dl,
+#layout-main div.animetag_all dl
 {
-	width:50%;
+	display:block;
+	height:1%;
+	overflow:hidden;
 }
 
-#layout-main div.animetag_all div.animetag_list table th.action,
-#layout-main div.animetag_all div.animetag_list table th.date
+#layout-main div.chartagsmod_all dl dt,
+#layout-main div.chartags_all dl dt,
+#layout-main div.animetagmod_all dl dt,
+#layout-main div.animetag_all dl dt
 {
-	width:20%;
+	clear:none;
+	float:left;
 }
 
-#layout-main div.animetag_all div.animetag_list table td.globalcnt,
-#layout-main div.animetag_all div.animetag_list table td.spoiler,
-#layout-main div.animetag_all div.animetag_list table td.approval
+#layout-main div.chartagsmod_all dl dd,
+#layout-main div.chartags_all dl dd,
+#layout-main div.animetagmod_all dl dd,
+#layout-main div.animetag_all dl dd
 {
-	text-align: center;
+	margin-left:20em;
 }
 
-#layout-main div.animetag_all div.animetag_list table + div.spoiler
+#layout-main div.chartagsmod_all div.inner,
+#layout-main div.chartags_all div.inner,
+#layout-main div.animetagmod_all div.inner,
+#layout-main div.animetag_all div.inner
+{
+	margin-bottom:1em;
+}
+
+#layout-main div.chartagsmod_all table.charactertags,
+#layout-main div.chartagsmod_all table.charactertaggroups,
+#layout-main div.chartags_all table.charactertags,
+#layout-main div.animetag_all table.charactertags
+{
+	width:100%;
+}
+
+#layout-main div.chartags_all table.charactertags,
+#layout-main div.animetag_all table.animetag
+{
+	margin-bottom: 1em;
+}
+
+#layout-main div.chartags_all div.addbox div.taggrouplist
+{
+	margin-top:.5em;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-group div.inner
+{
+	width:78em;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column
+{
+	float:left;
+	min-height:17.5em;
+	width:17.5em;
+	margin:0 1em 1em 0;
+	padding:4px;
+	border:1px solid darkgrey;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column span
+{
+	display:block;
+}
+
+#layout-main div.chartags_all div.addbox div.taggrouplist span,
+#layout-main div.chartags_all div.addbox div.tag-column span
+{
+	text-align:left;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-column h5
+{
+	text-align:center;
+}
+
+#layout-main div.chartags_all div.addbox div.tag-group h3
+{
+	margin-bottom: 0.5em;
+}
+
+#layout-main div.chartags_all div.fake
+{
+	clear:both;
+}
+
+#layout-main div.animetag_all div.animetag_entries_spoiler table + div.animetag_entries_spoiler
 {
 	margin-top: 1.5em;
 }
+
+#layout-main div.chartagsmod_all table,
+#layout-main div.animetagmod_all table
+{
+	width: 100%;
+}
+
+#layout-main div.chartagsmod_all table td.action,
+#layout-main div.animetagmod_all table td.action
+{
+	min-width: 11em;
+	max-width: 11em;
+}
+
+#layout-main div.chartags_all table td.action,
+#layout-main div.animetag_all table td.action
+{
+	min-width: 15.3em;
+	max-width: 15.3em;
+}
+
+#layout-main div.chartagsmod_all table td.count,
+#layout-main div.animetagmod_all table td.count,
+#layout-main div.chartags_all table td.status,
+#layout-main div.chartags_all table td.count,
+#layout-main div.animetag_all table td.status,
+#layout-main div.animetag_all table td.count
+{
+	min-width: 5em;
+	max-width: 5em;
+}
+
+#layout-main div.chartagsmod_all table td.date,
+#layout-main div.animetagmod_all table td.date,
+#layout-main div.chartags_all table td.date,
+#layout-main div.animetag_all table td.date
+{
+	min-width: 10em;
+	max-width: 10em;
+}
+
+#layout-main div.chartagsmod_all table td.name.tag,
+#layout-main div.animetagmod_all table td.name.tag,
+#layout-main div.chartags_all table td.name.tag,
+#layout-main div.animetag_all table td.name.tag
+{
+	width: 50%;
+}
+

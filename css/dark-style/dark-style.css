@@ -1542,8 +1542,7 @@ div.main_all div.news b
 
 .hide,
 fieldset,
-#layout-menu span.tab,
-#layout-tabs,
+#layout-menu span.tab,,
 #user-profile a span,
 #user-logout a span,
 div.search_all li.collapsed ul,
@@ -1551,7 +1550,6 @@ div.genren_all li.collapsed ul,
 *.i_icon span,
 *.i_button span,
 *.i_inline span,
-#layout-tabs
 {
 	display:none;
 }
@@ -1939,7 +1937,47 @@ div.anime_all div.image
 
 #layout-search .rtop,
 #layout-search .rbottom,
-#layout-search div.search form.random
+#layout-search div.search form.random,
+#layout-tabs
 {
 	display:none;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border: 1px solid #FFFFFF;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom: 1px #000000 double;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	border-bottom: 1px #000000 double;
+}
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color: #444444;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color: #000000;
+	color:#FFFFFF;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color: #000000;
+}
+
+button,
+input[type="button"],
+input[type="submit"]
+{
+	color: #000000;
 }
