@@ -33,14 +33,14 @@
 	background-image: url(../icons/icon/anidb_new_icon.gif);
 }
 
-*.i_file_search
+*.i_search_orange
 {
 	background-image: url(../icons/test/transmit.png);
 	width: 16px;
 	height: 16px;
 }
 
-*.i_file_search2
+*.i_search_blue
 {
 	background-image: url(../icons/test/transmit_blue.png);
 	width: 16px;
