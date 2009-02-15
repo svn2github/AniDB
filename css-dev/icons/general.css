@@ -124,17 +124,17 @@ th.s_reverse,
 }
 */
 
-a:hover span.tooltip span.top
+#tooltip span.top
 {
 	background:url(../icons/test/bubble.gif) no-repeat top;
 }
 
-a:hover span.tooltip span.middle
+#tooltip span.middle
 {
 	background:url(../icons/test/bubble_filler.gif) repeat bottom;
 }
 
-a:hover span.tooltip span.bottom
+#tooltip span.bottom
 {
 	background:url(../icons/test/bubble.gif) no-repeat bottom;
 }
