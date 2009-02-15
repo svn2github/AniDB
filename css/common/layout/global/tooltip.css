@@ -23,13 +23,15 @@
 
 a:hover #tooltip
 {
-	display:block;
-	padding:0;
-	margin:0;
-	margin-top:7px;
+	display: block;
+	line-height: normal;
+	padding: 0;
+	margin: 0;
+	margin-top: 7px;
 	position: absolute;
-	text-align:center;
-	width:200px;
+	text-align: center;
+	white-space: normal;
+	width: 200px;
 }
 
 a:hover #tooltip span.top
