@@ -25,6 +25,8 @@ a:hover #tooltip
 {
 	display:block;
 	padding:0;
+	margin:0;
+	position: absolute;
 	text-align:center;
 	width:200px;
 }

@@ -7,7 +7,7 @@
 	padding: 1.5em;
 }
 
-#layout-main div.tagcloud span
+#layout-main div.tagcloud span.tag
 {
 	line-height:25px;
 	white-space: nowrap;
