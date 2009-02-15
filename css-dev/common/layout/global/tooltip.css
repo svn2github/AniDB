@@ -16,12 +16,12 @@
 }
 
 /*Bubble Tooltip*/
-span.tooltip
+#layout-main span.tooltip
 {
 	display:none;
 }
 
-a:hover span.tooltip
+#layout-main a:hover span.tooltip
 {
 	display:block;
 	left:0;
