@@ -43,5 +43,6 @@
 	khtmlopacity:0.90;
 	mozopacity:0.90;
 	opacity:0.90;
-	font-size: 12px;
+	font-size: 10px;
+	word-wrap: break-word;
 }
