@@ -120,3 +120,18 @@ th.s_reverse,
 	text-decoration: overline;
 }
 */
+
+#layout-main a:hover span.tooltip span.top
+{
+	background:url(../icons/test/bubble.gif) no-repeat top;
+}
+
+#layout-main a:hover span.tooltip span.middle
+{
+	background:url(../icons/test/bubble_filler.gif) repeat bottom;
+}
+
+#layout-main a:hover span.tooltip span.bottom
+{
+	background:url(../icons/test/bubble.gif) no-repeat bottom;
+}
