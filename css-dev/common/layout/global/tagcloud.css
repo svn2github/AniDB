@@ -13,6 +13,8 @@
 	white-space: nowrap;
 	padding-left: 0.8em;
 	padding-right: 0.8em;
+	display: -moz-inline-box;
+	display: inline-block;
 }
 
 #layout-main div.tagcloud span.tagcloud0 { font-size: 9px;}
