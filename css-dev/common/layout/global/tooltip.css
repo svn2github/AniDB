@@ -21,10 +21,10 @@
 	display:none;
 }
 
+a #tooltip:hover
 a:hover #tooltip
 {
 	display:block;
-	padding:15px 0 0;
 	text-align:center;
 	width:200px;
 }
