@@ -16,12 +16,17 @@
 }
 
 /*Bubble Tooltip*/
-#layout-main span.tooltip span
+#layout-main a span.tooltip span
 {
 	display:none;
 }
 
 #layout-main a:hover span.tooltip span
+{
+	display:block;
+}
+
+#layout-main a span.tooltip span
 {
 	display:block;
 	left:0;
@@ -32,19 +37,19 @@
 	width:200px;
 }
 
-#layout-main a:hover span.tooltip span.top
+#layout-main a span.tooltip span.top
 {
 	display:block;
 	padding:30px 8px 0;
 }
 
-#layout-main a:hover span.tooltip span.middle
+#layout-main a span.tooltip span.middle
 {
 	display:block;
 	padding:0 8px;
 }
 
-#layout-main a:hover span.tooltip span.bottom
+#layout-main a span.tooltip span.bottom
 {
 	display:block;
 	padding:3px 8px 10px;

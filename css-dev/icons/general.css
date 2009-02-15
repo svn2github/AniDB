@@ -88,7 +88,8 @@ th.c_setlatin,
 th.c_date,
 th.c_latin,
 th.c_number,
-#layout-main th a.inactive {
+#layout-main th a.inactive
+{
 	background-image: url(../icons/test/arrow_inactive.png);
 	background-repeat: no-repeat;
 	background-attachment: scroll;
@@ -97,7 +98,8 @@ th.c_number,
 }
 
 th.s_forward, 
-#layout-main th a.descending {
+#layout-main th a.descending
+{
 	background-image: url(../icons/test/arrow_down.png);
 	background-repeat: no-repeat;
 	background-position: center left;
@@ -105,7 +107,8 @@ th.s_forward,
 }
 
 th.s_reverse,
-#layout-main th a.ascending{
+#layout-main th a.ascending
+{
 	background-image: url(../icons/test/arrow_up.png);
 	background-repeat: no-repeat;
 	background-position: center left;
@@ -121,17 +124,17 @@ th.s_reverse,
 }
 */
 
-#layout-main a:hover span.tooltip span.top
+a:hover span.tooltip span.top
 {
 	background:url(../icons/test/bubble.gif) no-repeat top;
 }
 
-#layout-main a:hover span.tooltip span.middle
+a:hover span.tooltip span.middle
 {
 	background:url(../icons/test/bubble_filler.gif) repeat bottom;
 }
 
-#layout-main a:hover span.tooltip span.bottom
+a:hover span.tooltip span.bottom
 {
 	background:url(../icons/test/bubble.gif) no-repeat bottom;
 }

@@ -36,7 +36,7 @@
 	color: #2EB42E;
 }
 
-#layout-main a:hover span.tooltip
+#layout-main a span.tooltip
 {
 	color:#993300;
 	filter:alpha(opacity:90);
@@ -45,7 +45,7 @@
 	opacity:0.90;
 }
 
-#layout-main a:hover span.tooltip span.bottom
+#layout-main a span.tooltip span.bottom
 {
 	color:#548912;
 }
