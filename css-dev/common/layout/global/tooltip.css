@@ -24,11 +24,8 @@
 a:hover #tooltip span
 {
 	display:block;
-	left:0;
 	padding:15px 0 0;
-	position:absolute;
 	text-align:center;
-	top:0;
 	width:200px;
 }
 
