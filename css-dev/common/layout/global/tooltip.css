@@ -21,7 +21,7 @@
 	display:none;
 }
 
-a:hover #tooltip span
+a:hover #tooltip
 {
 	display:block;
 	padding:15px 0 0;
