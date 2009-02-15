@@ -4,6 +4,7 @@
 @import "../common/layout/global/tagcloud.css";
 @import "../common/layout/global/timedentry.css";
 @import "../common/layout/global/menu.css";
+@import "../common/layout/global/tooltip.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
 padding:0;
@@ -2684,4 +2685,50 @@ display: none;
 *.rating
 {
 white-space: nowrap;
+}
+/*Bubble Tooltip*/
+#tooltip span
+{
+display:none;
+font-size: 10px;
+color: white;
+}
+a:hover #tooltip
+{
+display: block;
+line-height: normal;
+padding: 0;
+margin: 0;
+margin-top: 7px;
+position: absolute;
+text-align: center;
+white-space: normal;
+width: 200px;
+}
+a:hover #tooltip span.top
+{
+display:block;
+padding:30px 8px 0;
+}
+a:hover #tooltip span.middle
+{
+display:block;
+padding:0 8px;
+}
+a:hover #tooltip span.bottom
+{
+display:block;
+padding:3px 8px 10px;
+}
+#tooltip span.top
+{
+background:url(images/bubble.png) no-repeat top;
+}
+#tooltip span.middle
+{
+background:url(images/bubble_filler.png) repeat bottom;
+}
+#tooltip span.bottom
+{
+background:url(images/bubble.png) no-repeat bottom;
 }

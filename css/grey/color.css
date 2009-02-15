@@ -202,3 +202,33 @@ div.threads .rbottom > *,
 {
 background-color: hsla(0, 100%, 25%, 0.4);
 }
+#tooltip span.top
+{
+background:url(images/bubble.png) no-repeat top;
+}
+
+#tooltip span.middle
+{
+background:url(images/bubble_filler.png) repeat bottom;
+}
+
+#tooltip span.bottom
+{
+background:url(images/bubble.png) no-repeat bottom;
+}
+#tooltip
+{
+color: white;
+}
+#layout-tabs ul.main-tabs > li.selected
+{
+border-bottom-color: #FF6000;
+}
+#layout-main div.tagcloud span:nth-child(2n+1) a
+{
+color: #99FFB6;
+}
+#layout-main div.tagcloud span:nth-child(2n+1) a:active
+{
+color: blue;
+}
