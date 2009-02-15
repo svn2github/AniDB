@@ -7,12 +7,14 @@
 	padding: 1.5em;
 }
 
-#layout-main div.tagcloud span
+#layout-main div.tagcloud span.tag
 {
 	line-height:25px;
 	white-space: nowrap;
 	padding-left: 0.8em;
 	padding-right: 0.8em;
+	display: -moz-inline-box;
+	display: inline-block;
 }
 
 #layout-main div.tagcloud span.tagcloud0 { font-size: 9px;}
