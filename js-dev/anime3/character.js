@@ -102,43 +102,24 @@ function showEntityDo(index,type) {
 /* Show previous Entity in sequence */
 function showPrevEntity() {
 	var index = selector.selectedIndex;
-	if (index <= 0) return; // can't show any more Entities as there are any other Entities to show
+	if (index == 0) index = selector.options.length; // can't show any more Entities as there are any other Entities to show
 	index--;
 	selector.selectedIndex = index;
-	if (index == 0) { 
-		this.disabled = true;
-		selector_next.disabled = false;
-	}
 	showEntityDo(index,curPageID);
 }
 
 /* Show next Entity in sequence */
 function showNextEntity() {
 	var index = selector.selectedIndex;
-	if (index+1 == selector.options.length) return; // can't show any more Entities as there are any other Entities to show
+	if (index+1 == selector.options.length) index = -1; // can't show any more Entities as there are any other Entities to show
 	index++;
 	selector.selectedIndex = index;
-	if (index+1 == selector.options.length) {
-		this.disabled = true;
-		selector_prev.disabled = false;
-	}
 	showEntityDo(index,curPageID);
 }
 
 /* Show a specific Entity based on it's index */
 function showEntity() {
-	var index = this.value;
-	showEntityDo(index,curPageID);
-	if (index+1 == selector.options.length) {
-		selector_next.disabled = true;
-		selector_prev.disabled = false;
-	} else if (index == 0) { 
-		selector_prev.disabled = true;
-		selector_next.disabled = false;
-	} else {
-		selector_prev.disabled = false;
-		selector_next.disabled = false
-	}
+	showEntityDo(this.value,curPageID);
 }
 
 /* This function prepares the show=character page for use with my scripts */
@@ -174,7 +155,7 @@ function prepPageEntity() {
 	if (divs && divs.length > 1) {
 		var selectorDiv = document.createElement('div');
 		selectorDiv.className = 'selector';
-		selector_prev = createButton(null,'prev',true,'Previous','button',showPrevEntity, 'prev');
+		selector_prev = createButton(null,'prev',false,'Previous','button',showPrevEntity, 'prev');
 		selector_next = createButton(null,'next',false,'Next','button',showNextEntity, 'next');
 		selector = createBasicSelect(null,'char_sel',showEntity);
 		for (var i = 0; i < charNames.length; i++)
