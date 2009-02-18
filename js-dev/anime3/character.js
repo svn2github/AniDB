@@ -13,11 +13,24 @@ jsVersionArray.push({
 });
 
 var sortingCols = {
+	'stafflist': 	{	"name":{"type":'c_setlatin',"isDefault":true},
+						"type":{"type":'c_latin'},
+						"eps":{"type":'c_number'},
+						"year":{"type":'c_date'},
+						"rating":{"type":'c_latin'},
+						"credit":{"type":'c_latin'},
+						"eprange":{"type":'c_latin'},
+						"comment":{"type":'c_latin'}},
 	'characterlist': {	"name":{"type":'c_setlatin',"isDefault":true},
 						"bloodtype":{"type":'c_latin'},
 						"age":{"type":'c_number'},
 						"gender":{"type":'c_latin'},
+						"entity":{"type":'c_setlatin'},
+						"eps":{"type":'c_number'},
+						"year":{"type":'c_date'},
+						"comment":{"type":'c_latin'},
 						"relation":{"type":'c_latin'},
+						"ismainseiyuu":{"type":'c_latin'},
 						"rating":{"type":'c_setlatin'}},
 	'animelist': {		"name":{"type":'c_setlatin',"isDefault":true},
 						"type":{"type":'c_latin'},
@@ -47,6 +60,7 @@ var sortingCols = {
 };
 var tableNames = new Array();
 var skipTables = null;
+var creatordivs = new Array();
 var chardivs = new Array();
 var selector = null;
 var selector_next = null;
@@ -71,71 +85,80 @@ var newguiseinput = null;
 var searchinput = null;
 var magicRows = new Array();
 
-/* ====[ CHARACTER ]====
+/* ====[ CHARACTER/CREATOR ]====
  * Character page scripts
  */
 
-/* Show a given character */
-function showCharDo(index) {
-	for (var i = 0; i < chardivs.length; i++) {
-		var chardiv = chardivs[i];
-		chardiv.className = chardiv.className.replace(/ hide|hide/ig,'');
-		chardiv.className += (i != index ? ' hide' : '');
+/* Show a given Entity */
+function showEntityDo(index,type) {
+	var divs = (type == 'character' ? chardivs : creatordivs);
+	for (var i = 0; i < divs.length; i++) {
+		var div = divs[i];
+		div.className = div.className.replace(/ hide|hide/ig,'');
+		div.className += (i != index ? ' hide' : '');
 	}
 }
 
-/* Show previous character in sequence */
-function showPrevChar() {
+/* Show previous Entity in sequence */
+function showPrevEntity() {
 	var index = selector.selectedIndex;
-	if (index <= 0) return; // can't show any more chars as there are any other chars to show
+	if (index <= 0) return; // can't show any more Entities as there are any other Entities to show
 	index--;
 	selector.selectedIndex = index;
 	if (index == 0) { 
 		this.disabled = true;
 		selector_next.disabled = false;
 	}
-	showCharDo(index);
+	showEntityDo(index,curPageID);
 }
 
-/* Show next character in sequence */
-function showNextChar() {
+/* Show next Entity in sequence */
+function showNextEntity() {
 	var index = selector.selectedIndex;
-	if (index+1 == selector.options.length) return; // can't show any more chars as there are any other chars to show
+	if (index+1 == selector.options.length) return; // can't show any more Entities as there are any other Entities to show
 	index++;
 	selector.selectedIndex = index;
 	if (index+1 == selector.options.length) {
 		this.disabled = true;
 		selector_prev.disabled = false;
 	}
-	showCharDo(index);
+	showEntityDo(index,curPageID);
 }
 
-/* Show a specific character based on it's index */
-function showChar() { showCharDo(this.value); }
+/* Show a specific Entity based on it's index */
+function showEntity() { showEntityDo(this.value,curPageID); }
 
 /* This function prepares the show=character page for use with my scripts */
-function prepPageCharacter() {
+function prepPageEntity() {
 	var charNames = new Array();
-	chardivs = getElementsByClassName(document.getElementsByTagName('div'), 'g_section characters', true);
-	var tbNames = ['characterlist','animelist','seiyuulist'];
-	for (var i = 0; i < chardivs.length; i++) {
-		var chardiv = chardivs[i];
-		var tables = chardiv.getElementsByTagName('table');
+	var divs = null;
+	if (curPageID == 'character') {
+		chardivs = getElementsByClassName(document.getElementsByTagName('div'), 'g_section characters', true);
+		var tbNames = ['characterlist','animelist','seiyuulist'];
+		divs = chardivs;
+	} else {
+		creatordivs = getElementsByClassName(document.getElementsByTagName('div'), 'g_section creators', true);
+		var tbNames = ['characterlist','stafflist'];
+		divs = creatordivs;
+	}
+	for (var i = 0; i < divs.length; i++) {
+		var div = divs[i];
+		var tables = div.getElementsByTagName('table');
 		for (var t = 0; t < tables.length; t++) {
 			if (tbNames.indexOf(tables[t].id) < 0) continue;
 			tables[t].id += '_'+i;
 			tableNames.push(tables[t].id);
 		}
-		chardiv.className += (i > 0 ? ' hide' : '');
-		chardiv.id = 'section_'+i;
-		var h4 = chardiv.getElementsByTagName('h4')[0];
+		div.className += (i > 0 ? ' hide' : '');
+		div.id = 'section_'+i;
+		var h4 = div.getElementsByTagName('h4')[0];
 		if (h4) charNames.push(dig_text(h4).substring(6));
 	}
 	// clear horizontal rule nodes
 	var hrNodes = document.getElementsByTagName('hr');
 	while(hrNodes.length) hrNodes[0].parentNode.removeChild(hrNodes[0]);
 	// add the selector if we have more than one char
-	if (chardivs && chardivs.length > 1) {
+	if (div && div.length > 1) {
 		var selectorDiv = document.createElement('div');
 		selectorDiv.className = 'selector';
 		selector_prev = createButton(null,'prev',true,'Previous','button',showPrevChar, 'prev');
@@ -148,7 +171,7 @@ function prepPageCharacter() {
 		selectorDiv.appendChild(selector);
 		selectorDiv.appendChild(document.createTextNode(' '));
 		selectorDiv.appendChild(selector_next);
-		chardivs[0].parentNode.insertBefore(selectorDiv,chardivs[0]);
+		div[0].parentNode.insertBefore(selectorDiv,div[0]);
 	}
 	// add sorting and other info tooltips
 	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,(get_info & 16));
@@ -691,7 +714,8 @@ function prepPage() {
 	initTooltips();
 
 	switch(curPageID) {
-		case 'character': prepPageCharacter(); break;
+		case 'creator':
+		case 'character': prepPageEntity(); break;
 		case 'addcreator':
 		case 'addcharacter': prepPageAddEntity(); break;
 		case 'addcharanimerel': prepPageAddCharAnimeRel(); break;
