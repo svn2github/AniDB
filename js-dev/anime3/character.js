@@ -126,7 +126,20 @@ function showNextEntity() {
 }
 
 /* Show a specific Entity based on it's index */
-function showEntity() { showEntityDo(this.value,curPageID); }
+function showEntity() {
+	var index = this.value;
+	showEntityDo(index,curPageID);
+	if (index+1 == selector.options.length) {
+		selector_next.disabled = true;
+		selector_prev.disabled = false;
+	} else if (index == 0) { 
+		selector_prev.disabled = true;
+		selector_next.disabled = false;
+	} else {
+		selector_prev.disabled = false;
+		selector_next.disabled = false
+	}
+}
 
 /* This function prepares the show=character page for use with my scripts */
 function prepPageEntity() {
@@ -158,12 +171,12 @@ function prepPageEntity() {
 	var hrNodes = document.getElementsByTagName('hr');
 	while(hrNodes.length) hrNodes[0].parentNode.removeChild(hrNodes[0]);
 	// add the selector if we have more than one char
-	if (div && div.length > 1) {
+	if (divs && divs.length > 1) {
 		var selectorDiv = document.createElement('div');
 		selectorDiv.className = 'selector';
-		selector_prev = createButton(null,'prev',true,'Previous','button',showPrevChar, 'prev');
-		selector_next = createButton(null,'next',false,'Next','button',showNextChar, 'next');
-		selector = createBasicSelect(null,'char_sel',showChar);
+		selector_prev = createButton(null,'prev',true,'Previous','button',showPrevEntity, 'prev');
+		selector_next = createButton(null,'next',false,'Next','button',showNextEntity, 'next');
+		selector = createBasicSelect(null,'char_sel',showEntity);
 		for (var i = 0; i < charNames.length; i++)
 			createSelectOption(selector, charNames[i], i, 0, null, false);
 		selectorDiv.appendChild(selector_prev);
@@ -171,7 +184,7 @@ function prepPageEntity() {
 		selectorDiv.appendChild(selector);
 		selectorDiv.appendChild(document.createTextNode(' '));
 		selectorDiv.appendChild(selector_next);
-		div[0].parentNode.insertBefore(selectorDiv,div[0]);
+		divs[0].parentNode.insertBefore(selectorDiv,divs[0]);
 	}
 	// add sorting and other info tooltips
 	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,(get_info & 16));
