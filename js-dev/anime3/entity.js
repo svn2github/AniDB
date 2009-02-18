@@ -14,9 +14,6 @@ jsVersionArray.push({
 
 var seeDebug = false;
 var isCreatorPage = false;
-// overrides
-var get_info_pentity = 1;
-var collapseThumbnails = 0;
 
 /* Function that prepares the page */
 function prepPage() {
@@ -25,30 +22,29 @@ function prepPage() {
 	var idDiv = document.getElementById('layout-nav');
 	isCreatorPage = (idDiv.className.indexOf('creator') >= 0);
 	if (isCreatorPage) {
+		loadSettings();
 		initTooltips();
 		var tableNames = ['characterlist','stafflist'];
 		var sortingCols = {
-			'characterlist': [	{"type":'c_none',"isDefault":false},	// image
-								{"type":'c_setlatin',"isDefault":true},// name
-								{"type":'c_setlatin',"isDefault":false},// anime
-								{"type":'c_latin',"isDefault":false},	// type
-								{"type":'c_number',"isDefault":false},	// eps
-								{"type":'c_date',"isDefault":false},	// year
-								{"type":'c_latin',"isDefault":false},	// rating
-								{"type":'c_latin',"isDefault":false},	// main
-								{"type":'c_latin',"isDefault":false}	],// comment
-			'stafflist': 	[	{"type":'c_none',"isDefault":false},	// image
-								{"type":'c_setlatin',"isDefault":true},// name
-								{"type":'c_latin',"isDefault":false},	// type
-								{"type":'c_number',"isDefault":false},	// eps
-								{"type":'c_date',"isDefault":false},	// year
-								{"type":'c_latin',"isDefault":false},	// rating
-								{"type":'c_latin',"isDefault":false},	// credit
-								{"type":'c_latin',"isDefault":false},	// episode restriction
-								{"type":'c_latin',"isDefault":false}]	// comment
+			'characterlist': {	"name":{"type":'c_setlatin',"isDefault":true},
+								"entity":{"type":'c_setlatin'},
+								"type":{"type":'c_latin'},
+								"eps":{"type":'c_number'},
+								"year":{"type":'c_date'},
+								"rating":{"type":'c_latin'},
+								"ismainseiyuu":{"type":'c_latin'},
+								"comment":{"type":'c_latin'}	},
+			'stafflist': 	{	"name":{"type":'c_setlatin',"isDefault":true},
+								"type":{"type":'c_latin'},
+								"eps":{"type":'c_number'},
+								"year":{"type":'c_date'},
+								"rating":{"type":'c_latin'},
+								"credit":{"type":'c_latin'},
+								"eprange":{"type":'c_latin'},
+								"comment":{"type":'c_latin'}}
 		};
 		var skipTables = null;
-		handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_info_pentity);
+		handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,(get_info & 32));
 	}
 }
 

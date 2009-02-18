@@ -1,14 +1,16 @@
 /* file add anime as a relation support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (09.12.2008) - Initial Version
+ * version 1.5 (??.??.2008) - Added support for both types of relations
+ * version 1.6 (04.02.2009) - Revised version to use shared scripts and customize tab
  */
 jsVersionArray.push({
 	"file":"anime3/addcharanimerel.js",
-	"version":"1.5",
+	"version":"1.6",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Added support for both types of relations"
+	"changelog":"Revised version to use shared scripts and customize tab"
 });
 
 var addRelInput; // For anime addition to a given char
@@ -18,114 +20,8 @@ var fieldset;
 var table;
 var seeDebug = false;
 var searchString = "";
-var AnimeInfos = new Array(); // indexed by aid
-var CharInfos = new Array(); // indexed by Charid
-var picbase = 'http://img5.anidb.net/pics/anime/';
-var descInfo = new Array();
-var charInfo = new Array();
 var aids = new Array();
 var cids = new Array();
-
-/* Creates a new AnimeInfo node */
-function CAnimeInfo(node) {
-	this.aid = Number(node.getAttribute('aid'));
-	this.desc = convert_input(node.getAttribute('desc'));
-	if (this.desc == '') this.desc = '<i>no description</i>';
-	this.title = node.getAttribute('title');
-	this.picurl = node.getAttribute('picurl');
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_150.gif';
-	this.restricted = Number(node.getAttribute('restricted'));
-	this.airdate = javascriptDate(node.getAttribute('airdate'));
-	this.enddate = javascriptDate(node.getAttribute('enddate'));
-	var airDateYear = this.airdate.getFullYear();
-	var endDateYear = this.enddate.getFullYear();
-	this.year = (airDateYear == endDateYear ? airDateYear : airDateYear + '-' +endDateYear);
-	this.lang = node.getAttribute('mainlang');
-}
-
-/* Creates a new CharInfo node */
-function CCharInfo(node) {
-	this.charid = Number(node.getAttribute('charid'));
-	this.desc = convert_input(node.getAttribute('desc'));
-	if (this.desc == '') this.desc = '<i>no description</i>';
-	this.title = node.getAttribute('title');
-	this.picurl = node.getAttribute('picurl');
-	this.restricted = false; // override
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/150/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_150.gif';
-	this.lang = node.getAttribute('mainlang');
-}
-
-/* AnimeDesc Node Parser */
-function CDesc(node) {
-	this.aid = Number(node.getAttribute('aid'));
-	this.picurl = node.getAttribute('picurl');
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/50x65/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_50x65.gif';
-	this.airdate = convertTime(node.getAttribute('airdate'));
-	this.enddate = convertTime(node.getAttribute('enddate'));
-	this.desc = convert_input(node.getAttribute('desc'));
-	this.name = node.getAttribute('name');
-	this.verified = (Number(node.getAttribute('verifydate')) > 0);
-	this.lang = node.getAttribute('lang');
-	this.title = node.getAttribute('title');
-	this.mainlang = node.getAttribute('mainlang');
-	this.restricted = Number(node.getAttribute('restricted'));
-	this.type = Number(node.getAttribute('type'));
-	var type = "Main";
-	switch(this.type) {
-		case 1: type = "Main"; break;
-		case 2: type = "Synonym"; break;
-		case 3: type = "Short"; break;
-		case 4: type = "Official"; break;
-		default: type = "unknown"; break;
-	}
-	this.type = type;
-	this.titles = new Array();
-	if (this.type != 'Main') {
-		this.titles[this.type] = new Array();
-		this.titles[this.type].push({'title':this.name,'lang':this.lang,'verified':this.verified});
-	}
-	// now, build the anime info node
-	if (!AnimeInfos[this.aid])
-		AnimeInfos[this.aid] = new CAnimeInfo(node);
-}
-
-/* CharDesc Node Parser */
-function CCDesc(node) {
-	this.charid = Number(node.getAttribute('charid'));
-	this.picurl = node.getAttribute('picurl');
-	if (this.picurl != 'nopic.gif' && this.picurl != '') this.picurl = picbase+'thumbs/50x65/'+this.picurl+'-thumb.jpg';
-	else this.picurl = 'http://static.anidb.net/pics/nopic_50x65.gif';
-	this.desc = convert_input(node.getAttribute('desc'));
-	this.name = node.getAttribute('name');
-	this.verified = (Number(node.getAttribute('verifydate')) > 0);
-	this.lang = node.getAttribute('lang');
-	this.title = node.getAttribute('title');
-	this.mainlang = node.getAttribute('mainlang');
-	this.type = Number(node.getAttribute('type'));
-	var type = "Main";
-	switch(this.type) {
-		case 1: type = "Main"; break;
-		case 2: type = "Official"; break;
-		case 3: type = "Alias"; break;
-		case 4: type = "Maiden"; break;
-		case 5: type = "Nick"; break;
-		case 6: type = "Short"; break;
-		case 7: type = "other"; break;
-		default: type = "unknown"; break;
-	}
-	this.type = type;
-	this.titles = new Array();
-	if (this.type != 'Main') {
-		this.titles[this.type] = new Array();
-		this.titles[this.type].push({'title':this.name,'lang':this.lang,'verified':this.verified});
-	}
-	// now, build the anime info node
-	if (!CharInfos[this.charid])
-		CharInfos[this.charid] = new CCharInfo(node);
-}
 
 /* Function that fetches data */
 function fetchData(searchString,charSearch) {
@@ -146,35 +42,28 @@ function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert('parseData','no root node'); return; }
 	var descNodes = root.getElementsByTagName('animedesc');
-	var cdescNodes = root.getElementsByTagName('characterdesc');
-	aids = new Array();
-	cids = new Array();
-	for (var d = 0; d < descNodes.length; d++) {
-		var descNode = new CDesc(descNodes[d]);
-		if (aids.indexOf(descNode.aid) < 0) aids.push(descNode.aid);
-		if (!descInfo[descNode.aid]) descInfo[descNode.aid] = descNode;
-		else if (descNode.type != 'Main') {
-			if (!descInfo[descNode.aid].titles[descNode.type]) descInfo[descNode.aid].titles[descNode.type] = new Array();
-			descInfo[descNode.aid].titles[descNode.type].push({'title':descNode.name,'lang':descNode.lang,'verified':descNode.verified});
-		} else
-			continue; // a bit pointless, i know :P
-	}
-	for (var d = 0; d < cdescNodes.length; d++) {
-		var descNode = new CCDesc(cdescNodes[d]);
-		if (cids.indexOf(descNode.charid) < 0) cids.push(descNode.charid);
-		if (!charInfo[descNode.charid]) charInfo[descNode.charid] = descNode;
-		else if (descNode.type != 'Main') {
-			if (!charInfo[descNode.charid].titles[descNode.type]) charInfo[descNode.charid].titles[descNode.type] = new Array();
-			charInfo[descNode.charid].titles[descNode.type].push({'title':descNode.name,'lang':descNode.lang,'verified':descNode.verified});
-		} else
-			continue; // a bit pointless, i know :P
-	}
-	//alert("Results:\ndescNodes: "+descNodes.length+" ["+aids.length+"]\ncdescNodes: "+cdescNodes.length+" ["+cids.length+"]");
-	if (!descNodes.length && !cdescNodes.length) { // no matches found
+	if (!descNodes) descNodes = root.getElementsByTagName('characterdesc');
+	if (!descNodes) {
 		alert('Search for "'+searchString+'" resulted in no matches.');
 		return;
 	}
+	aids = new Array();
+	cids = new Array();
+	for (var d = 0; d < descNodes.length; d++) {
+		var descNode = new CInfo(descNodes[d]);
+		var ids = (descNode.type == 'anime' ? aids : cids);
+		var descs = (descNode.type == 'anime' ? animeInfos : charInfos);
+		if (ids.indexOf(descNode.id) < 0) ids.push(descNode.id);
+		if (!descs[descNode.id]) 
+			descs[descNode.id] = descNode;
+		else if (descNode.type != 1)
+			descs[descNode.id].addTitle(descNode.titletype,descNode.name,descNode.lang,descNode.verified);
+		else
+			continue; // a bit pointless, i know :P
+	}
+	//alert("Results:\ndescNodes: "+descNodes.length+" ["+aids.length+"|"+cids.length+"]");
 	showResults();
+	handleTables(new Object(),['resultslist'],null,collapseThumbnails,false);
 }
 
 /* Function that starts a search */
@@ -189,74 +78,6 @@ function doSearchChar() {
 	searchString = addCRelInput.value;
 	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
 	fetchData(searchString,true);
-}
-
-/* Function that actualy shows the tooltip
- * @param obj The object that will be base for the tooltip position
- * @param info The AnimeInfo object
- * @param isChar If set to true we are displaying character info
- */
-function showInfoWork(obj,info,isChar) {
-	// i don't have the profile value options so, just use defaults
-	var minWidth = 450;
-	var table = document.createElement('table');
-	table.className = (!isChar ? 'animeInfo' : 'characterInfo');
-	table.style.minWidth = minWidth + 'px';
-	var thead = document.createElement('thead');
-	var row = document.createElement('tr');
-	var title = document.createElement('span');
-	title.className = 'title';
-	title.appendChild(document.createTextNode(info.title));
-	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
-	if (!isChar) {
-		var year = document.createElement('span');
-		year.className = 'year';
-		year.appendChild(document.createTextNode('('+info.year+')'));
-		cell.appendChild(document.createTextNode(' '));
-		cell.appendChild(year);
-	}
-	//cell.appendChild(icons);
-	row.appendChild(cell);
-	thead.appendChild(row);
-	table.appendChild(thead);
-	var tbody = document.createElement('tbody');
-	row = document.createElement('tr');
-	var img = document.createElement('img');
-	img.src = info.picurl;
-	img.alt = '['+(!isChar ? info.aid : info.charid)+']';
-	createCell(row, (!isChar ? 'anime' : 'character') + 'InfoThumb', img);
-	var span = document.createElement('span');
-	span.innerHTML = info.desc;
-	createCell(row, (!isChar ? 'anime' : 'character') + 'InfoDesc', span);
-	tbody.appendChild(row);
-	table.appendChild(tbody);
-	setTooltip(table, true, minWidth);
-}
-
-/* Function that shows anime info (or not) */
-function showAnimeInfo() {
-	var aid = Number(this.id.substring(7));
-	if (isNaN(aid)) { errorAlert('showAnimeInfo','aid is not a number ['+aid+']'); return; }
-	var info = AnimeInfos[aid];
-	if (!info) { // fetch data and display later
-		errorAlert('showAnimeInfo','no AnimeInfos data for aid: '+aid); 
-		return;
-	} else { // display the data
-		showInfoWork(this,info);
-	}
-}
-
-/* Function that shows char info (or not) */
-function showCharacterInfo() {
-	var charid = Number(this.id.substring(7));
-	if (isNaN(charid)) { errorAlert('showCharacterInfo','charid is not a number ['+charid+']'); return; }
-	var info = CharInfos[charid];
-	if (!info) { // fetch data and display later
-		errorAlert('showCharacterInfo','no CharInfos data for charid: '+charid); 
-		return;
-	} else { // display the data
-		showInfoWork(this,info,true);
-	}
 }
 
 /* Function that expands all the titles for a given anime */
@@ -281,6 +102,7 @@ function expandTitles() {
 /* Function that shows the results of the search */
 function showResults() {
 	if (!table) { errorAlert('showResults','no table'); return; }
+	table.id = "resultslist";
 	var caption = table.getElementsByTagName('caption')[0];
 	if (caption) caption.firstChild.nodeValue = (aids.length ? "Animes" : "Character")+" matching \""+searchString+"\"";
 	var tbody = table.tBodies[0];
@@ -289,9 +111,10 @@ function showResults() {
 	// Create table head
 	var thead = document.createElement('thead');
 	var row = document.createElement('tr');
-	createHeader(row, null, 'X');
-	createHeader(row, null, 'Image');
-	createHeader(row, null, 'Name'); // Matched Name
+	createHeader(row, 'check', 'X');
+	if (!HIDETHUMBNAILS) 
+		createHeader(row, 'image', 'Image');
+	createHeader(row, 'name', 'Name'); // Matched Name
 	//createHeader(row, null, 'Name');
 	thead.appendChild(row);
 	table.insertBefore(thead,tbody);
@@ -299,19 +122,21 @@ function showResults() {
 	var ids = (aids.length ? aids : cids);
 	var isChar = (cids.length > 0);
 	for (var i = 0; i < ids.length; i++) {
-		var desc = (!isChar ? descInfo[ids[i]] : charInfo[ids[i]]);
+		var desc = (!isChar ? animeInfos[ids[i]] : charInfos[ids[i]]);
 		var row = document.createElement('tr');
-		row.className = (i % 2 ? 'g_odd' : '');
+		row.className = ((i+1) % 2 ? 'g_odd' : '');
 		// checkbox
 		var ck = createCheckbox((!isChar ? 'addcarel.aid[]' : 'addcarel.charid[]'),false);
 		ck.value = (!isChar ? desc.aid : desc.charid);
 		createCell(row, 'check', ck);
-		// image
-		var img = document.createElement('img');
-		img.src = desc.picurl;
-		img.alt = "thumbnail";
-		img.title = desc.name;
-		createCell(row, 'thumbs', img);
+		if (!HIDETHUMBNAILS) {
+			// image
+			var img = document.createElement('img');
+			img.src = desc.thumbnail;
+			img.alt = "thumbnail";
+			img.title = desc.name;
+			createCell(row, 'image', img);
+		}
 		// matched name
 		// first, let's create the icons i want
 		var div = document.createElement('div');
@@ -374,19 +199,21 @@ function showResults() {
 			if (altTitleSpan.childNodes && altTitleSpan.childNodes.length)
 				div.appendChild(createIcon(null, '[+]', 'removeme', expandTitles, 'click to expand all titles matched', 'i_plus'));
 		}
-		var infoIcon = createIcon(null, (!isChar ? 'anime' : 'character')+' info', null, null, null, 'i_mylist_ainfo');
-		infoIcon.id = (!isChar ? 'ainfo_a'+desc.aid : 'cinfo_c'+desc.charid);
-		infoIcon.onmouseover = (!isChar ? showAnimeInfo : showCharacterInfo);
-		infoIcon.onmouseout = hideTooltip;
-		div.appendChild(infoIcon);
-		var cell = createCell(null, 'titles', div);
+		if (get_info & 16) {
+			var infoIcon = createIcon(null, 'Click to show '+(!isChar ? 'anime' : 'character')+' information', 'removeme', null, null, 'i_mylist_ainfo');
+			infoIcon.id = (!isChar ? 'ainfo_'+desc.id : 'cinfo_ch'+desc.id);
+			infoIcon.onmouseover = showInfo;
+			infoIcon.onmouseout = hideTooltip;
+			div.appendChild(infoIcon);
+		}
+		var cell = createCell(null, 'name', div);
 		// now, create the titles and what not.
 		// first, main title, always present, so default showing
 		var mainTitleSpan = document.createElement('span');
 		mainTitleSpan.className = 'title main';
 		var b = document.createElement('b');
 		var a = document.createElement('a');
-		a.href = 'animedb.pl?show='+(!isChar ? 'anime&aid='+desc.aid : 'character&charid='+desc.charid);
+		a.href = 'animedb.pl?show='+(!isChar ? 'anime&aid='+desc.id : 'character&charid='+desc.id);
 		var si = desc.title.toLowerCase().indexOf(searchString.toLowerCase());
 		if (si >= 0) {
 			var firstBlock = document.createTextNode(desc.title.substring(0,si));
@@ -431,7 +258,31 @@ function prepPage() {
 	var newSubmitClone = createButton(addRelSubmit.name,addRelSubmit.id,false,addRelSubmit.value,'button',(addRelInput ? doSearch : doSearchChar), null);
 	addRelSubmit.parentNode.replaceChild(newSubmitClone,addRelSubmit);
 	addRelSubmit = newSubmitClone;
+	createPreferencesTable('global');
 	initTooltips();
+	// update curtable
+	var tables = new Array();
+	var reldivs = getElementsByClassName(document.getElementsByTagName('div'),'g_section reltable',true);
+	for (var i = 0; i < reldivs.length; i++) {
+		var curdiv = reldivs[i];
+		var tb = curdiv.getElementsByTagName('table')[0];
+		if (tb) {
+			tb.id = 'relationslist_'+i;
+			tables.push(tb.id);
+		}
+	}
+	var sortingCols = {
+		'relationslist': {	"name entity":{"type":'c_setlatin',"isDefault":true},
+							"name anime":{"type":'c_setlatin'},
+							"date added":{"type":'c_date'},
+							"owner":{"type":'c_setlatin'},
+							"rating":{"type":'c_setlatin'},
+							"type":{"type":'c_latin'},
+							"stats eps":{"type":'c_setlatin'},
+							"stats seen":{"type":'c_setlatin'}}
+	};
+	// @TODO: when table cells have proper class names add sorting support
+	handleTables(new Object(),tables,null,collapseThumbnails,(get_info & 16));
 }
 
 // hook up the window onload event

@@ -5,11 +5,11 @@
  */
 jsVersionArray.push({
 	"file":"anime3/addfilerel.js",
-	"version":"1.0",
+	"version":"1.5",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Initial version"
+	"changelog":"Filtered some more stuff"
 });
 
 // GLOBALS

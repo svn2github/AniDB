@@ -126,14 +126,14 @@ function prepPage() {
 	createPreferencesTable('episode');
 	// handles tables
 	var sortingCols = {
-		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
-							{"type":'c_setlatin',"isDefault":false},// name
-							{"type":'c_latin',"isDefault":false},	// episode restriction
-							{"type":'c_latin',"isDefault":false}]	// comment
+		'stafflist': 	{	"credit":{"type":'c_latin',"isDefault":true},
+							"name":{"type":'c_setlatin'},
+							"eprange":{"type":'c_latin'},
+							"comment":{"type":'c_latin'}}
 	};
 	var tableNames = ['stafflist'];
 	var skipTables = null;
-	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,true);
+	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,(get_info & 4));
 	fetchData(aid);
 }
 

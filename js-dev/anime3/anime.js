@@ -90,6 +90,42 @@ var groupCols = cloneArray(genGroupCols);
 var groupSkips = buildSkipCols(groupCols);
 //var animeCols = cloneArray(genAnimeCols);
 
+var sortingCols = {
+	'characterlist': {	"name character":{"type":'c_setlatin',"isDefault":true},
+						"entity":{"type":'c_latin'},
+						"name seiyuu":{"type":'c_setlatin'},
+						"ismainseiyuu":{"type":'c_latin'},
+						"comment":{"type":'c_latin'},
+						"relation":{"type":'c_latin'},
+						"rating":{"type":'c_setlatin'}},
+	'relationslist': {	"name":{"type":'c_setlatin',"isDefault":true},
+						"type":{"type":'c_latin'},
+						"eps":{"type":'c_number'},
+						"year":{"type":'c_date'},
+						"rating":{"type":'c_setlatin'},
+						"relation":{"type":'c_latin'},
+						"stats eps":{"type":'c_setlatin'},
+						"stats seen":{"type":'c_setlatin'}},
+	'stafflist': 	{	"credit":{"type":'c_latin',"isDefault":true},
+						"name":{"type":'c_setlatin'},
+						"eprange":{"type":'c_latin'},
+						"comment":{"type":'c_latin'}},
+	'reviewlist': {		"name":{"type":'c_setlatin',"isDefault":true},
+						"average":{"type":'c_latin'},
+						"approval":{"type":'c_latin'}},
+	'recomlist': {		"name":{"type":'c_setlatin',"isDefault":true}},
+	'grouplist': {		"date lastupdate":{"type":'c_date'},
+						"name group":{"type":'c_setlatin'},
+						"state":{"type":'c_latin'},
+						"epbar":{"type":'c_set'},
+						"epno lastep":{"type":'c_number',"isDefault":true},
+						"specials":{"type":'c_number'},
+						"rating":{"type":'c_number'},
+						"threads":{"type":'c_number'}}
+};
+var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist','grouplist'];
+var skipTables = ['recomlist','reviewlist','grouplist'];
+
 /* -[STARTUP]-----------------------
  * START UP RELATED FUNCTIONS
  * ---------------------------------
@@ -119,7 +155,7 @@ function applyMylistState() {
 	if (userReply) window.location = window.location;
 }
 
-/* This function prepares the mylist page for use with my scripts */
+/* This function prepares the page for use with my scripts */
 function prepPage() {
 	// some other stuff, used only in dev 
 	if (''+window.location.hostname != '') {
@@ -152,38 +188,7 @@ function prepPage() {
 	loadSettings();
 	globalStatus.loadingbar_color = 'green';
 	globalStatus.updateBarWithText('Preparing tabs',0,'Total progress: ');
-	var sortingCols = {
-		'characterlist': [	{"type":'c_none',"isDefault":false},	// image
-							{"type":'c_setlatin',"isDefault":true},// name
-							{"type":'c_latin',"isDefault":false},	// entitiy
-							{"type":'c_setlatin',"isDefault":false},// seiyuu
-							{"type":'c_latin',"isDefault":false},	// primary
-							{"type":'c_latin',"isDefault":false},	// comment
-							{"type":'c_latin',"isDefault":false},	// relation
-							{"type":'c_setlatin',"isDefault":false},// rating
-							{"type":'c_none',"isDefault":false}	],	// action
-		'relationslist': [	{"type":'c_none',"isDefault":false},	// image
-							{"type":'c_setlatin',"isDefault":true},// name
-							{"type":'c_latin',"isDefault":false},	// type
-							{"type":'c_number',"isDefault":false},	// episodes
-							{"type":'c_date',"isDefault":false},	// year
-							{"type":'c_setlatin',"isDefault":false},// rating
-							{"type":'c_latin',"isDefault":false},	// relation
-							{"type":'c_setlatin',"isDefault":false},// mylist
-							{"type":'c_setlatin',"isDefault":false}],// seen
-		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
-							{"type":'c_setlatin',"isDefault":false},// name
-							{"type":'c_latin',"isDefault":false},	// episode restriction
-							{"type":'c_latin',"isDefault":false}],	// comment
-		'reviewlist': [		{"type":'c_none',"isDefault":false},	// image
-							{"type":'c_setlatin',"isDefault":true},// name
-							{"type":'c_latin',"isDefault":false},	// avg rating
-							{"type":'c_latin',"isDefault":false},	// approval
-							{"type":'c_none',"isDefault":false}	]	// action
-	};
-	var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist'];
-	var skipTables = ['recomlist','reviewlist'];
-	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_info_panime);
+	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,(get_info & 1));
 	//prepareTabs();
 	fetchData(aid);
 }
@@ -332,7 +337,7 @@ function doGroupTableOperations(op) {
 	var groupTable = document.getElementById('grouplist');
 	if (!groupTable) return;
 	var tbody = groupTable.tBodies[0];
-	tbody.style.display = 'none';
+	//tbody.style.display = 'none';
 	var tfoot = groupTable.tFoot;
 	var visible = 0;
 	for (var g = 0; g < tbody.rows.length; g++) {
@@ -364,7 +369,7 @@ function doGroupTableOperations(op) {
 			}
 		}
 	}
-	tbody.style.display = '';
+	//tbody.style.display = '';
 }
 
 
@@ -649,12 +654,6 @@ function updateGroupTable() {
 	var groupTable = document.getElementById('grouplist');
 	if (!groupTable) return;
 	var tbody = groupTable.tBodies[0];
-	var thead = null;
-	if (LAY_HEADER) {
-		thead = document.createElement('thead');
-		thead.appendChild(tbody.rows[0]);
-		groupTable.insertBefore(thead,tbody);
-	}
 	var tfoot = document.createElement('tfoot');
 	tfoot.appendChild(tbody.rows[tbody.rows.length-1]);
 	groupTable.appendChild(tfoot);
@@ -703,18 +702,10 @@ function updateGroupTable() {
 						groupsNeedingExpand.push(gid);
 						ahref.onclick = foldFilesByGroup;
 					} else ahref.onclick = expandFilesByGroup;
-					/*
-					if (uriObj['gid'] && uriObj['gid'] == group.id) ahref.onclick = foldFilesByGroup;
-					else ahref.onclick = expandFilesByGroup;
-					*/
 					ahref.id = 'href_gid_'+gid;
 					ahref.removeAttribute('href');
 					ahref.style.cursor = 'pointer';
 				}
-				if (className.indexOf('group') >= 0)
-					cell.setAttribute('anidb:sort',(group.shortName ? group.shortName.toLowerCase() : 'no group'));
-				if (className.indexOf('status') >= 0)
-					cell.setAttribute('anidb:sort',(group.epsInMyListArray && group.epsInMyListArray.length) ? String(group.epsInMyListArray.length) : '0');
 				if (className.indexOf('epbar') >= 0) {
 					cell.setAttribute('anidb:sort',String(group.epCnt));
 					// also do another thing
@@ -742,10 +733,6 @@ function updateGroupTable() {
 				}
 				if (className.indexOf('lastep') >= 0)
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
-				if (className.indexOf('rating') >= 0)
-					cell.setAttribute('anidb:sort',(group.rating == '-') ? '0' : group.rating);
-				if (className.indexOf('threads') >= 0)
-					cell.setAttribute('anidb:sort',group.commentCount);
 				if (className.indexOf('action') >= 0) {
 					if (uriObj['gid'] && uriObj['gid'] == gid && gid >= 0)
 						createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
@@ -755,27 +742,6 @@ function updateGroupTable() {
 		}
 	}
 	groupTable.replaceChild(newTbody,tbody);
-	if (LAY_HEADER && thead) {
-		// update thead with sorting functions
-		var headingList = thead.rows[0].getElementsByTagName('th');
-		headingTest = getElementsByClassName(headingList,'group',true)[0];
-		if (headingTest) headingTest.className += ' c_setlatin';
-		headingTest = getElementsByClassName(headingList,'eps',true)[0];
-		if (headingTest) headingTest.className = headingTest.className.replace('eps','epbar') + ' c_set';
-		headingTest = getElementsByClassName(headingList,'specials',true)[0];
-		if (headingTest) headingTest.className += ' c_latin';
-		var head = headingTest = getElementsByClassName(headingList,'epno last',true)[0];
-		if (headingTest) headingTest.className = headingTest.className.replace('epno last','epno lastep') + ' c_set';
-		headingTest = getElementsByClassName(headingList,'state',true)[0];
-		if (headingTest) headingTest.className += ' c_latin';
-		headingTest = getElementsByClassName(headingList,'lastupdate',true)[0];
-		if (headingTest) headingTest.className += ' c_date';
-		headingTest = getElementsByClassName(headingList,'rating',true)[0];
-		if (headingTest) headingTest.className += ' c_set';
-		headingTest = getElementsByClassName(headingList,'threads',true)[0];
-		if (headingTest) headingTest.className += ' c_set';
-		init_sorting(thead.rows[0],'epno','up');
-	}
 	// add filtering and stuff to tfoot
 	var row = tfoot.rows[0];
 	var cells = row.getElementsByTagName('td');

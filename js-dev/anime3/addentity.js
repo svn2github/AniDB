@@ -469,5 +469,4 @@ function prepPage() {
 	initTooltips();
 }
 
-
 addLoadEvent(prepPage);
