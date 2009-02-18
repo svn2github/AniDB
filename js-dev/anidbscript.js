@@ -507,8 +507,17 @@ var Magic = {
 					ClassToggle(tab, 'selected', 1);
 					CookieSet((curPageID ? curPageID + "_" : "")+'tab', tab.id);
 					elems = tab.parentNode.parentNode.getElementsByTagName('div');
+					var topTab = null;
 					for (var i = 0; i < elems.length; i++){
 						// this isn't a pane so no need to hide it
+						if (elems[i].className.indexOf('tabbed_pane') >= 0) {
+							// also show first item
+							topTab = elems[i];
+							continue;
+						}
+						if (topTab && elems[i].parentNode.parentNode == topTab) {
+							continue;
+						} 
 						if (elems[i].className.indexOf('pane') < 0) continue;
 						ClassToggle(elems[i], 'hide', 1);
 					}
@@ -846,7 +855,7 @@ function search() {
 			switch(type) {
 				case "chartags":
 					var url = 'animedb.pl?show=xmln&t=search&type=chartags&search=';
-					var element = 'group';
+					var element = 'chartags';
 					break;
 				case "animetag":
 				case "modtag":
@@ -954,8 +963,8 @@ addLoadEvent(function() {
 				switch(value) {
 					case "animetag":
 					case "chartags":
-					case "grouplist":
 					case "modtag":
+					case "grouplist":
 					case "producerlist":
 						textfield.setAttribute("autocomplete", "off");
 						break;
