@@ -1,32 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<tmpl_loop name=loop_anime>
-<!--
-An anime info page
-© 2005 by Siddhi Pittayachawan
-Version 0.1
--->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tmpl_loop name=loop_anime>
+
+<!--
+
+An anime info page
+
+© 2005 by Siddhi Pittayachawan
+
+Version 0.1
+
+-->
+
 <?xml-stylesheet type="text/xsl" href="../anime.xsl"?>
 	<anime>
 		<id><tmpl_var name=data_anime_id></id>
 		<name>
-			<romanji><tmpl_var name=data_anime_name></romanji>
-			<kanji><tmpl_var name=data_anime_title_jap_kanji></kanji>
-			<english><tmpl_var name=data_anime_title_eng></english>
-			<other><tmpl_var name=data_anime_title_other></other>
+			<romanji><![CDATA[<tmpl_var name=data_anime_name>]]></romanji>
+			<kanji><![CDATA[<tmpl_var name=data_anime_title_jap_kanji>]]></kanji>
+			<english><![CDATA[<tmpl_var name=data_anime_title_eng>]]></english>
+			<other><![CDATA[<tmpl_var name=data_anime_title_other>]]></other>
 			<synonym>
 				<tmpl_loop name=loop_anime_title_alias>
-					<alias><tmpl_var name=data_anime_title_alias_name></alias>
+					<alias><![CDATA[<tmpl_var name=data_anime_title_alias_name>]]></alias>
 				</tmpl_loop>
 			</synonym>
 			<shorts>
 				<tmpl_loop name=loop_anime_title_short>
-					<short><tmpl_var name=data_anime_title_short_name></short>
+					<short><![CDATA[<tmpl_var name=data_anime_title_short_name>]]></short>
 				</tmpl_loop>
 			</shorts>
 		</name>
 		<genres>
 			<tmpl_loop name=loop_anime_genre>
-				<genre><tmpl_var name=data_anime_genre_name></genre>
+				<genre><![CDATA[<tmpl_var name=data_anime_genre_name>]]></genre>
 			</tmpl_loop>
 		</genres>
 		<type><tmpl_var name=data_anime_type_name></type>
@@ -75,7 +82,7 @@ Version 0.1
 				<epdetail>
 					<id><tmpl_var name=data_ep_id></id>
 					<number><tmpl_var name=data_ep_epno></number>
-					<name><tmpl_var name=data_ep_name></name>
+					<name><![CDATA[<tmpl_var name=data_ep_name>]]></name>
 					<length><tmpl_var name=data_ep_length></length>
 					<date><tmpl_if expr="data_ep_aired_short"><tmpl_var name=data_ep_aired_short><tmpl_else><tmpl_var name=data_ep_date_short></tmpl_if></date>
 					<files>
