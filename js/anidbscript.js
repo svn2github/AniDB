@@ -507,8 +507,17 @@ var Magic = {
 					ClassToggle(tab, 'selected', 1);
 					CookieSet((curPageID ? curPageID + "_" : "")+'tab', tab.id);
 					elems = tab.parentNode.parentNode.getElementsByTagName('div');
+					var topTab = null;
 					for (var i = 0; i < elems.length; i++){
 						// this isn't a pane so no need to hide it
+						if (elems[i].className.indexOf('tabbed_pane') >= 0) {
+							// also show first item
+							topTab = elems[i];
+							continue;
+						}
+						if (topTab && elems[i].parentNode.parentNode == topTab) {
+							continue;
+						} 
 						if (elems[i].className.indexOf('pane') < 0) continue;
 						ClassToggle(elems[i], 'hide', 1);
 					}
@@ -835,7 +844,7 @@ function search() {
 	var target = document.getElementById("tagsearch");
 	var type = this.parentNode.getElementsByTagName("select")[0].value;
 
-	if(this.value.length >= 3 && (type == "animetag" || type == "grouplist" || type == "producerlist")) {
+	if(this.value.length >= 3 && (type == "chartags" || type == "animetag" || type == "grouplist" || type == "modtag" || type == "producerlist")) {
 		// Check if a new search is necessary
 		var ll = lastSearch.length
 		var cl = this.value.length
@@ -844,13 +853,18 @@ function search() {
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
 			lastSearch = this.value;
 			switch(type) {
+				case "chartags":
+					var url = 'animedb.pl?show=xmln&t=search&type=chartags&search=';
+					var element = 'chartags';
+					break;
+				case "animetag":
+				case "modtag":
+					var url = 'animedb.pl?show=xml&t=tagsearch&search=';
+					var element = 'tag';
+					break;
 				case "grouplist":
 					var url = 'animedb.pl?show=xml&t=groupsearch&search=';
 					var element = 'group';
-					break;
-				case "animetag":
-					var url = 'animedb.pl?show=xml&t=tagsearch&search=';
-					var element = 'tag';
 					break;
 				case "producerlist":
 					var url = 'animedb.pl?show=xml&t=producersearch&search=';
@@ -948,6 +962,8 @@ addLoadEvent(function() {
 				if(value == undefined) value = this.value
 				switch(value) {
 					case "animetag":
+					case "chartags":
+					case "modtag":
 					case "grouplist":
 					case "producerlist":
 						textfield.setAttribute("autocomplete", "off");

@@ -523,18 +523,19 @@ function createMultiSelectArray(parentNode,name,id,onchange,selected,optionArray
 	else return select;
 }
 
-function createCheckBox(parentNode,name,id,onchange,checked) {
+function createCheckBox(parentNode,name,id,onchange,checked,disabled) {
 	var ck = document.createElement('input');
 	ck.type = 'checkbox';
 	if (name && name != '') ck.name = name;
 	if (id && id != '') ck.id = id;
 	if (onchange && onchange != '') ck.onchange = onchange;
 	if (checked) ck.checked = true;
+	if (disabled) ck.disabled = true;
 	if (parentNode && parentNode != '') parentNode.appendChild(ck);
 	else return ck;
 }
-function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className) {
-	var ck = createCheckBox(null,name,id,onchange,checked);
+function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className,disabled) {
+	var ck = createCheckBox(null,name,id,onchange,checked,disabled);
 	var label = document.createElement('label');
 	label.appendChild(ck);
 	if (className) label.className = className;
@@ -629,36 +630,6 @@ function convertRangeToText(range) {
 }
 
 // GENERAL FUNCTIONS //
-
-/* Replacement functions
- * @param str String to replace identifiers
- * @source anime3.formating::convert_input
- */
-function convert_input(str) {
-	str = str.replace(/\[(p|b|i|u|ul|ol|li)\]/mgi,'<$1>');
-	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)\]/mgi,'</$1>');
-	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
-	str = str.replace(/\[([/])?code\]/mgi,'<$1pre>');
-	str = str.replace(/\<p\>/mgi,'');
-	str = str.replace(/\<\/p\>/mgi,'<br />');
-	str = str.replace(/\[br\]/mgi,'<br />');
-	str = str.replace(/\n/mgi,'<br />');
-	str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
-	str = str.replace(/\<\/ul\>\<br \/\>\<br \/\>/mgi,'</ul></br>');
-	str = str.replace(/\<\/ol\>\<br \/\>\<br \/\>/mgi,'</ol></br>');
-	str = str.replace(/\[url=([^\[\]].+?)\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$2</a>');
-	str = str.replace(/\[url\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$1</a>');
-	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
-	return (str);
-}
-/* Function that cleans some input
- * @param str String to replace identifiers
- * @source anime3.formating
- */
-function clean_input(str) {
-	str = str.replace(/\&amp\;/mgi,'&');
-	return (str);
-}
 
 /* Function that alerts the user for errors
  * @param func Name of the function
@@ -1047,13 +1018,24 @@ function c_number_r(a, b) {
   return c_number(b, a);
 }
 function dig_text(node) {
-	if (!node) return ("0");
-	if (node.childNodes.length == 1 && node.firstChild.nodeValue) return node.firstChild.nodeValue;
+	if (!node) {
+		//alert('mode -1: '+node.nodeValue);
+		return ("0");
+	}
+	if (node.childNodes.length == 1 && node.firstChild.nodeValue) {
+		//alert('mode 0a: '+node.firstChild.nodeValue);
+		return node.firstChild.nodeValue;
+	} else if (!node.childNodes.length) {
+		//alert('mode 0b: '+node.nodeValue);
+		return (node.nodeValue ? node.nodeValue : "0");
+	}
 	for (var i = 0; i < node.childNodes.length; i++) {
 		var childNode = node.childNodes[i];
-		if (childNode.nodeType == 3) continue; // #text node
+		if (childNode.nodeType == 3 && childNode.nodeValue.replace(/\s/ig,'') == '') { continue; } // #text node }
+		//alert('mode 1: '+ childNode.childNodes.length+'\nnodeValue: <'+childNode.nodeValue+'>');
 		return dig_text(childNode); // recursive mode, the first node has to have everything!
 	}
+	//alert('mode 2: 0');
 	return ("0");
 }
 function dig_text_lower(node) {
@@ -1148,8 +1130,7 @@ function get_date(node) {
 function init_sorting(node,ident,sortico) {
 	if (!node) node = document;
 	var headinglist;
-	if (document.getElementsByTagName) headinglist = node.getElementsByTagName('th');
-	else return;
+	if (!document.getElementsByTagName) return;
 	var table = (node.nodeName.toLowerCase() == 'table' ? node : null);
 	if (!table) {
 		var MAX_RECURSE = 3;
@@ -1164,19 +1145,18 @@ function init_sorting(node,ident,sortico) {
 	var tbody = table.tBodies[0];
 	// The Sorting functions, see FunctionMap for the actual function names
 	var sortFuncs = new Array('c_latin','c_number','c_date','c_set','c_setlatin');
+	// We find out if our header is in the tBody of the Table
+	// If it's not create a Table Head and move the node there, stuff like this is the reason THEAD exists
+	var thead = table.getElementsByTagName('thead')[0];
+	var headRow = (tbody.rows[0] && tbody.rows[0].className.indexOf('header') >= 0);
+	if (!thead && headRow) {
+		thead = document.createElement('thead');
+		thead.appendChild(tbody.rows[0]);
+		table.insertBefore(thead,tbody);
+	}
+	headinglist = thead.getElementsByTagName('th');
 	for (var i = 0; i < headinglist.length; i++) {
 		var header = headinglist[i];
-		// We find out if our header is in the tBody of the Table
-		// If it's not create a Table Head and move the node there, stuff like this is the reason THEAD exists
-		if (header.parentNode.parentNode.nodeName.toLowerCase() == 'tbody') {
-			var thead = table.getElementsByTagName('thead')[0];
-			if (!thead) {
-				thead = document.createElement('thead');
-				thead.appendChild(header.parentNode);
-				table.insertBefore(thead,tbody);
-			} else 
-				thead.appendChild(header.parentNode);
-		}
 		// Add some accelerators to this
 		// Parent Table
 		header._parentTable = table;
@@ -1323,8 +1303,10 @@ function sortcol(node) {
 			lastRowSpan = rowSpan;
 		}
 	}
-	//var text = new Array();
-	//for (var i = 0; i < sortMap.length; i++) text.push(sortMap[i][0]+'|'+sortMap[i][1]+'\t');
+	if (seeDebug) {
+		var text = new Array();
+		for (var i = 0; i < sortMap.length; i++) text.push(sortMap[i][0]+'|'+sortMap[i][1]+'\t');
+	}
 	// now i have to make sure the inner rows of a row span are correct (this is insanity)
 	for (var i = 0; i < auxRows.length; i++) {
 		var rowMap = auxRows[i];
@@ -1356,16 +1338,23 @@ function sortcol(node) {
 			//		also move the contents of the cell to the newPRow (otherwise known as the row that used to be the original row)
 			// Because javascript does its thing by copy by reference this magic can work otherwise it would be hell
 			var cellValue = sortMap[i][1];
+			//alert('original cell value for row ['+i+']: '+cellValue);
 			while(parentRow.cells.length) {
 				var cell = parentRow.cells[0];
 				if (cell.rowSpan > 1) {
 					fakeRow.appendChild(cell);
-					if (cell.className.indexOf(identifier) >= 0) 
+					if (cell.className.indexOf(identifier) >= 0) {
 						cellValue = funcmap['getval'](cell);
+						//alert('for row ['+i+'] (not rowspan) i found this cellValue: '+cellValue);
+					}
 				} else {
 					fakeRow.appendChild(rowMap[0][2].cells[fakeCell].cloneNode(true));
-					if (fakeRow.cells[fakeRow.cells.length-1].className.indexOf(identifier) >= 0)
-						cellValue = funcmap['getval'](fakeRow.cells[fakeRow.cells.length-1]);
+					if (fakeRow.cells[fakeRow.cells.length-1].className.indexOf(identifier) >= 0) {
+						cellValue = funcmap['getval'](fakeRow.cells[fakeRow.cells.length-1]);/*
+						alert('for row ['+i+'] (rowspan) i found this cellValue: '+cellValue+
+							'\nidentifier: '+identifier+
+							'\nclassName: '+fakeRow.cells[fakeRow.cells.length-1].className);*/
+					}
 					newPRow.appendChild(cell);
 					fakeCell++;
 				}
@@ -1376,12 +1365,12 @@ function sortcol(node) {
 		}
 	}
 	// now sort the map
-	//for (var i = 0; i < sortMap.length; i++) text[i]+=sortMap[i][0]+'|'+sortMap[i][1]+'\t';
-	//alert('[before-sortMap]:\n'+text.join('\n'));
+	if (seeDebug) for (var i = 0; i < sortMap.length; i++) text[i]+=sortMap[i][0]+'|'+sortMap[i][1]+'\t';
 	sortMap.sort(funcmap[sortingMode]);
-	//for (var i = 0; i < sortMap.length; i++) text.push(sortMap[i][0]+'|'+sortMap[i][1]);
-	//for (var i = 0; i < sortMap.length; i++) text[i]+=sortMap[i][0]+'|'+sortMap[i][1];
-	//alert('[in]\t[ms]\t[out]:\n'+text.join('\n'));
+	if (seeDebug) {
+		for (var i = 0; i < sortMap.length; i++) text[i]+=sortMap[i][0]+'|'+sortMap[i][1];
+		alert('[in]\t[ms]\t[out]:\n'+text.join('\n'));
+	}
 	// and re-add the sorted rows and repaint the rows
 	for (var i = 0; i < sortMap.length; i++) {
 		var map = sortMap[i];
@@ -1390,11 +1379,13 @@ function sortcol(node) {
 		var ik = i;
 		for (var k = 0; k < rl; k++) {
 			var row = tmpRows[k][2];
-			if (rl < 3) // single row case or just one extra rowspan
-				row.className = ((i % 2) ? "" : "g_odd ")+row.className.replace(/ g_odd|g_odd/ig,"");
-			else {	// multi row case, not so easy one
-				row.className = ((ik % 2) ? "" : "g_odd ")+row.className.replace(/ g_odd|g_odd/ig,"");
-				ik++;
+			if (row.style.display != 'none') {
+				if (rl < 3) // single row case or just one extra rowspan
+					row.className = ((i % 2) ? "" : "g_odd ")+row.className.replace(/ g_odd|g_odd/ig,"");
+				else {	// multi row case, not so easy one
+					row.className = ((ik % 2) ? "" : "g_odd ")+row.className.replace(/ g_odd|g_odd/ig,"");
+					ik++;
+				}
 			}
 			tbody.appendChild(row);
 		}
