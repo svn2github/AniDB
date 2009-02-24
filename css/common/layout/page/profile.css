@@ -110,6 +110,11 @@
 	width:100%;
 }
 
+#layout-main div.profile_all div.pane.general div.body div.pane
+{
+	text-align: center;
+}
+
 #layout-main div.profile_all div.pane.general div.body div.pane div
 {
 	display:inline-block;
