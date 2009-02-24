@@ -84,11 +84,6 @@
 	text-align:center;
 }
 
-#layout-main div.profile_all div.tabbed_pane div.general table tr
-{
-	vertical-align:top;
-}
-
 #layout-main div.profile_all div.passwords,
 #layout-main div.profile_all div.tabbed_pane div.default_languages
 {
