@@ -115,3 +115,9 @@
 	float:left;
 	width:100%;
 }
+
+#layout-main div.userpage_all div.forum div.error
+{
+	clear:none;
+	float:none;
+}
