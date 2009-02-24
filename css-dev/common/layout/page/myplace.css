@@ -82,6 +82,7 @@
 	height:540px;
 }
 
+#layout-main div.userpage_all div.forum,
 #layout-main div.userpage_all div.charts,
 #layout-main div.userpage_all div.latest
 {
@@ -101,12 +102,6 @@
 {
 	clear:none;
 	float:none;
-}
-
-#layout-main div.userpage_all div.forum
-{
-	margin-right:12.5em;
-	margin-left:19em;
 }
 
 #layout-main div.userpage_all div.cmt_entries
