@@ -109,3 +109,32 @@
 {
 	width:100%;
 }
+
+#layout-main div.profile_all div.pane.general div.body div.pane div
+{
+	display:inline-block;
+	width: 40em;
+	margin-right: 1.5em;
+	margin-top: 1em;
+}
+
+#layout-main div.profile_all div.pane.general div.body div.pane div ul
+{
+	padding:4px;
+}
+
+#layout-main div.profile_all div.pane.general div.body div.pane div ul li
+{
+	line-height: 15px;
+}
+
+#layout-main div.profile_all div.pane.general div.body div.pane div ul li a.i_inline
+{
+	padding:5px 10px 0;
+	margin:0;
+}
+
+#layout-main div.profile_all div.pane.general ul.tabs li.tab
+{
+	margin-right: 4px;
+}
