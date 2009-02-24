@@ -102,3 +102,16 @@
 	clear:none;
 	float:none;
 }
+
+#layout-main div.userpage_all div.forum
+{
+	margin-right:12.5em;
+	margin-left:19em;
+}
+
+#layout-main div.userpage_all div.cmt_entries
+{
+	clear:none;
+	float:left;
+	width:100%;
+}
