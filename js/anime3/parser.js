@@ -573,7 +573,6 @@ function parseConfig(node) {
 			case 'lay':
 				var lay = Number(nodeData(sNode)) || 0;
 				config[sNode.nodeName] = new Array();
-				LAY_HEADER = (lay & 1) ? true : false;
 				LAY_NOANIMEGROUPREL = (lay & 32) ? true : false;
 				LAY_HIDEFILES = (lay & 512) ? true : false;
 				LAY_HIDERAWS = (lay & 1024) ? true : false;
@@ -581,7 +580,6 @@ function parseConfig(node) {
 				LAY_HIDEPARODYEPS = (lay & 131072) ? true : false;
 				LAY_SHOWFID = (lay & 268435456) ? true : false;
 				LAY_SHOWCRC = (lay & 536870912) ? true : false;
-				config[sNode.nodeName]['LAY_HEADER'] = (lay & 1);
 				config[sNode.nodeName]['LAY_FILES'] = (lay & 2);
 				config[sNode.nodeName]['LAY_NOTIFYPOPUP'] = (lay & 4);
 				config[sNode.nodeName]['LAY_NOTIFYMAIL'] = (lay & 8);

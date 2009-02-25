@@ -38,7 +38,6 @@ var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
 var uriObj = new Array();      // Object that holds the URI
-var LAY_HEADER = false;
 var LAY_NOANIMEGROUPREL = false;
 var LAY_HIDEFILES = false;
 var LAY_HIDERAWS = false;
@@ -585,8 +584,7 @@ function expandFiles() {
 		var table = document.createElement('table');
 		table.className = 'filelist';
 		table.id = 'file'+rfid+'relations';
-		if (LAY_HEADER)
-			table.appendChild(createTableHead(fileCols));
+		table.appendChild(createTableHead(fileCols));
 		var tfoot = document.createElement('tfoot');
 		var tbody = document.createElement('tbody');
 		// TableBody
@@ -650,8 +648,7 @@ function createFileTable(episode) {
 	var table = document.createElement('table');
 	table.className = 'filelist';
 	table.id = 'episode'+eid+'files';
-	if (LAY_HEADER)
-		table.appendChild(createTableHead(fileCols));
+	table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
 	for (var f = 0; f < episode.files.length; f++) {
@@ -700,11 +697,9 @@ function createFileTable(episode) {
 	filelisttable.parentNode.replaceChild(table,filelisttable);
 
 	// fix the sorting function
-	if (LAY_HEADER) {
-		init_sorting(table,'title','down');
-		var ths = table.tHead.getElementsByTagName('th');
-		for (var i = 0; i < ths.length; i++) ths[i].onclick = prepareForSort;
-	}
+	init_sorting(table,'title','down');
+	var ths = table.tHead.getElementsByTagName('th');
+	for (var i = 0; i < ths.length; i++) ths[i].onclick = prepareForSort;
 	return table;
 }
 

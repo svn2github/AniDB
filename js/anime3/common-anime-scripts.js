@@ -1212,7 +1212,6 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				var options = [
-					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HEADER','type':'lay','var':'LAY_HEADER','text':' Show table headers'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_FINEVOTES','type':'lay','var':'LAY_FINEVOTES','text':' Show fine grained vote options'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEHENTAIPICS','type':'lay','var':'LAY_HIDEHENTAIPICS','text':' Hide pictures with adult content'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_USEAJAX','type':'irc','var':'IRC_USEAJAX','text':' Use ajax on anime and mylist page'},
@@ -1300,7 +1299,6 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				var options = [
-					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HEADER','type':'lay','var':'LAY_HEADER','text':' Show table headers'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_FINEVOTES','type':'lay','var':'LAY_FINEVOTES','text':' Show fine grained vote options'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_SHOWHENTAI','type':'lay','var':'LAY_SHOWHENTAI','text':' Show adult content (hentai)'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEHENTAIPICS','type':'lay','var':'LAY_HIDEHENTAIPICS','text':' Hide pictures with adult content'},
