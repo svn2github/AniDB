@@ -39,7 +39,6 @@ var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
 var uriObj = new Array();      // Object that holds the URI
-var LAY_HEADER = true;
 var LAY_NOANIMEGROUPREL = false;
 var LAY_HIDEFILES = false;
 var LAY_HIDERAWS = false;
@@ -650,11 +649,11 @@ function updateGroupTable() {
 	if (!groupTable) return;
 	var tbody = groupTable.tBodies[0];
 	var thead = null;
-	if (LAY_HEADER) {
-		thead = document.createElement('thead');
-		thead.appendChild(tbody.rows[0]);
-		groupTable.insertBefore(thead,tbody);
-	}
+
+	thead = document.createElement('thead');
+	thead.appendChild(tbody.rows[0]);
+	groupTable.insertBefore(thead,tbody);
+
 	var tfoot = document.createElement('tfoot');
 	tfoot.appendChild(tbody.rows[tbody.rows.length-1]);
 	groupTable.appendChild(tfoot);
@@ -755,7 +754,7 @@ function updateGroupTable() {
 		}
 	}
 	groupTable.replaceChild(newTbody,tbody);
-	if (LAY_HEADER && thead) {
+	if (thead) {
 		// update thead with sorting functions
 		var headingList = thead.rows[0].getElementsByTagName('th');
 		headingTest = getElementsByClassName(headingList,'group',true)[0];
@@ -863,17 +862,16 @@ function updateEpisodeTable() {
 	var episodeTable = document.getElementById('eplist');
 	if (!episodeTable) return;
 	var tbody = episodeTable.tBodies[0];
-	if (LAY_HEADER) {
-		var thead = document.createElement('thead');
-		var row = tbody.rows[0];
-		var cell = row.cells[0];
-		if (cell.getElementsByTagName('a').length) {
-			while (cell.childNodes.length) cell.removeChild(cell.firstChild);
-			cell.appendChild(document.createTextNode('X'));
-		}
-		thead.appendChild(row);
-		episodeTable.insertBefore(thead,tbody);
+	var thead = document.createElement('thead');
+	var row = tbody.rows[0];
+	var cell = row.cells[0];
+	if (cell.getElementsByTagName('a').length) {
+		while (cell.childNodes.length) cell.removeChild(cell.firstChild);
+		cell.appendChild(document.createTextNode('X'));
 	}
+	thead.appendChild(row);
+	episodeTable.insertBefore(thead,tbody);
+
 	//alert(expandedGroups);
 	var epsToExpand = new Array();
 	for (var e in episodes) {
@@ -1291,8 +1289,7 @@ function expandFiles() {
 		var table = document.createElement('table');
 		table.className = 'filelist';
 		table.id = 'file'+rfid+'relations';
-		if (LAY_HEADER)
-			table.appendChild(createTableHead(fileCols));
+		table.appendChild(createTableHead(fileCols));
 		var tfoot = document.createElement('tfoot');
 		var tbody = document.createElement('tbody');
 		// TableBody
@@ -1356,8 +1353,7 @@ function createFileTable(episode) {
 	var table = document.createElement('table');
 	table.className = 'filelist';
 	table.id = 'episode'+eid+'files';
-	if (LAY_HEADER)
-		table.appendChild(createTableHead(fileCols));
+	table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
 	var odd = 0;
@@ -1402,23 +1398,21 @@ function createFileTable(episode) {
 	cell.className = '';
 	cell.replaceChild(table,cell.firstChild);
 	// fix the sorting function
-	if (LAY_HEADER) {
-		var idCol = animePage_sorts[animePage_sortsV.indexOf(animePage_curSort)];
-		if (animePage_curLayout.indexOf(idCol) < 0) animePage_curSort = 'default';
-		var sortCol = (animePage_curSort == 'default') ? 'group' : animePage_curSort;
-		var sortOrder = (animePage_curSort == 'default') ? 'down': animePage_curSortOrder;
-		init_sorting(table, sortCol,sortOrder);
-		var ths = table.tHead.getElementsByTagName('th');
-		var th = null;
-		for (var i = 0; i < ths.length; i++) {
-			ths[i].onclick = prepareForSort;
-			if (animePage_curSort != 'default' && ths[i].className.indexOf(animePage_curSort) >= 0) th = ths[i];
-		}
-		// apply sort, users will regret this, but oh well.. what you want may not always be what you get
-		if (animePage_curSort != 'default' && th != null) {
-			//alert('animePage_curSort: '+animePage_curSort+'\nanimePage_curSortOrder: '+animePage_curSortOrder+'\nth.className: '+th.className);
-			sortcol(th);
-		}
+	var idCol = animePage_sorts[animePage_sortsV.indexOf(animePage_curSort)];
+	if (animePage_curLayout.indexOf(idCol) < 0) animePage_curSort = 'default';
+	var sortCol = (animePage_curSort == 'default') ? 'group' : animePage_curSort;
+	var sortOrder = (animePage_curSort == 'default') ? 'down': animePage_curSortOrder;
+	init_sorting(table, sortCol,sortOrder);
+	var ths = table.tHead.getElementsByTagName('th');
+	var th = null;
+	for (var i = 0; i < ths.length; i++) {
+		ths[i].onclick = prepareForSort;
+		if (animePage_curSort != 'default' && ths[i].className.indexOf(animePage_curSort) >= 0) th = ths[i];
+	}
+	// apply sort, users will regret this, but oh well.. what you want may not always be what you get
+	if (animePage_curSort != 'default' && th != null) {
+		//alert('animePage_curSort: '+animePage_curSort+'\nanimePage_curSortOrder: '+animePage_curSortOrder+'\nth.className: '+th.className);
+		sortcol(th);
 	}
 	// add event to file table
 	addCheckboxesEvent(tbody);
