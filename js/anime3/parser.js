@@ -604,7 +604,7 @@ function parseConfig(node) {
 				config[sNode.nodeName]['LAY_NOTIFYONLYMYLANG'] = (lay & 1048576);
 				config[sNode.nodeName]['LAY_SEQNOTIFY'] = (lay & 2097152);
 				config[sNode.nodeName]['LAY_HISTCLEARSNOTIFY'] = (lay & 4194304);
-				config[sNode.nodeName]['LAY_HIDEANIMEPAGESTITLE'] = (lay & 8388608);
+				config[sNode.nodeName]['LAY_HIDESHORTTITLE'] = (lay & 8388608);
 				config[sNode.nodeName]['LAY_HIDEOTHERTITLES'] = (lay & 16777216);
 				config[sNode.nodeName]['LAY_ETLANGFLAGS'] = (lay & 33554432);
 				config[sNode.nodeName]['LAY_HIDESYNONYMS'] = (lay & 67108864);
@@ -620,7 +620,7 @@ function parseConfig(node) {
 				IRC_HIDETHUMBNAILS = (irc & 64) ? true : false;
 				IRC_HIDETAGS = (irc & 512) ? true : false;
 				IRC_HIDEGROUPJOINTS = (irc & 2048) ? true : false;
-				IRC_HIDEANIMEPICS = (irc & 4096) ? true : false;
+				IRC_HIDEPICS = (irc & 4096) ? true : false;
 				IRC_FILTERRELEASESBYLANG = (irc & 32768) ? true : false;
 				IRC_SHOWFILESOURCE = (irc & 65536) ? true : false;
 				IRC_HIDEAVATAR = (irc & 131072) ? true : false;
@@ -636,7 +636,7 @@ function parseConfig(node) {
 				config[sNode.nodeName]['IRC_HIDETAGS'] = (irc & 512);
 				config[sNode.nodeName]['IRC_SHOWSPOILERTAGS'] = (irc & 1024);
 				config[sNode.nodeName]['IRC_HIDEGROUPJOINTS'] = (irc & 2048);
-				config[sNode.nodeName]['IRC_HIDEANIMEPICS'] = (irc & 4096);
+				config[sNode.nodeName]['IRC_HIDEPICS'] = (irc & 4096);
 				config[sNode.nodeName]['IRC_HIDESIGNATURE'] = (irc & 8192);
 				config[sNode.nodeName]['IRC_DONTPARSESMILEYS'] = (irc & 16384);
 				config[sNode.nodeName]['IRC_FILTERRELEASESBYLANG'] = (irc & 32768);

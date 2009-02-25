@@ -1226,7 +1226,7 @@ function createPreferencesTable(type) {
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_NOANIMEGROUPREL','type':'lay','var':'LAY_NOANIMEGROUPREL','text':' Hide group info box on anime page'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDECATEGORIES','type':'irc','var':'IRC_HIDECATEGORIES','text':' Hide categories on anime page'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDETAGS','type':'irc','var':'IRC_HIDETAGS','text':' Hide tags on anime page'},
-					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDEANIMEPICS','type':'irc','var':'IRC_HIDEANIMEPICS','text':' Hide anime pictures'},
+					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_HIDEPICS','type':'irc','var':'IRC_HIDEPICS','text':' Hide anime pictures'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDERAWS','type':'lay','var':'LAY_HIDERAWS','text':' Hide audio only releases on anime page'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_FILTERRELEASESBYLANG','type':'irc','var':'IRC_FILTERRELEASESBYLANG','text':' Filter releases on Animepage by your prefered language'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_SHOWTABS"','type':'lay','var':'LAY_SHOWTABS','text':' Use JS tabs on anime page'}
@@ -1236,7 +1236,7 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				options = [
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEOTHERTITLES','type':'lay','var':'LAY_HIDEOTHERTITLES','text':' Hide foreign titles on anime page (see: lang prefs)'},
-					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEANIMEPAGESTITLE"','type':'lay','var':'LAY_HIDEANIMEPAGESTITLE','text':' Hide short titles on anime page'}
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDESHORTTITLE"','type':'lay','var':'LAY_HIDESHORTTITLE','text':' Hide short titles on anime page'}
 				];
 				createProfileGroup(li, 'Anime Page - Titles', options);
 				ul.appendChild(li);
