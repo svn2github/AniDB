@@ -57,6 +57,7 @@ var mylist_add_fstate = 0;
 var group_check_type = 0;
 var group_langfilter = 0;
 var collapseThumbnails = 0;
+var def_search = 'none';
 var get_info = 0; // bit var
 var get_info_sz = '150';
 var get_info_mw = '450';
@@ -111,6 +112,8 @@ function loadSettings() {
 	currentFMode = Number(CookieGet('currentFMode') || 1);
 	LAY_FORMATFILESIZE = format_size = Number(CookieGet('format_size') || 0);
 	collapseThumbnails = Number(CookieGet('collapseThumbnails') || 0);
+	def_search = CookieGet('def_search') || 'none';
+	if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
 	animePage_curSort = CookieGet('animePage_curSort') || 'default';
 	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
 	animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
@@ -845,6 +848,19 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.value; },Number(usejspopups),' Use Javascript popups for anidb::popup',null);
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var dfsearch = createBasicSelect('def_search','def_search',function() { changeOptionValue(this); def_search = this.value; if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;});
+				createSelectOption(dfsearch, 'default', 'none', (def_search == 'none'));
+				if (searchTypeSelect && searchTypeSelect.options) {
+					for (var sto = 0; sto < searchTypeSelect.options.length; sto++) {
+						var opt = searchTypeSelect.options[sto];
+						createSelectOption(dfsearch, opt.text, opt.value, (def_search == opt.value));
+					}
+				}
+				li.appendChild(dfsearch);
+				li.appendChild(document.createTextNode(' Default Search Type'));
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;

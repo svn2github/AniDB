@@ -19,6 +19,7 @@ jsVersionArray.push({
 });
 var usejspopups = true;
 var curPageID = null;
+var searchTypeSelect = null;
 
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
@@ -531,7 +532,7 @@ var Magic = {
 			for (var i = 0; i < divs.length; i++) {
 				var div = divs[i];
 				if (div.className.indexOf('search') < 0) continue;
-				var select = div.getElementsByTagName('select')[0];
+				searchTypeSelect = div.getElementsByTagName('select')[0];
 				var inputs = div.getElementsByTagName('input');
 				var input = null;
 				for (var k = 0; k < inputs.length; k++) {
@@ -540,8 +541,10 @@ var Magic = {
 						break;
 					}
 				}
-				if (!select || !input) break;
-				addEventSimple(select,'change',function() { input.focus(); });
+				if (!searchTypeSelect || !input) break;
+				def_search = CookieGet('def_search') || 'none';
+				if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
+				addEventSimple(searchTypeSelect,'change',function() { input.focus(); });
 				break;
 			}
 		}),
