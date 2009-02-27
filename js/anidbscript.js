@@ -20,6 +20,7 @@ jsVersionArray.push({
 var usejspopups = true;
 var curPageID = null;
 var searchTypeSelect = null;
+var searchTypeAssist = true;
 
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
@@ -945,6 +946,8 @@ function printTags() {
 
 // Initialize the script
 addLoadEvent(function() {
+	searchTypeAssist = Number(CookieGet('searchTypeAssist')) || true;
+	if (!searchTypeAssist) return;
 	// Find target form
 	var target = document.getElementById("layout-search");
 

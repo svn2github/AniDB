@@ -644,7 +644,6 @@ function changeLayout() {
 
 /* Prepares the page for my scripts */
 function prepPageAddEntity() {
-	seeDebug = true;
 	isCreatorPage = (curPageID == 'addcreator');
 	var div = getElementsByClassName(document.getElementsByTagName('div'), 'g_definitionlist g_section '+(!isCreatorPage ? 'character' : 'creator') +'_form', false)[0];
 	if (!div) { errorAlert('prepPage',"no div found, this might not be an error"); return; }

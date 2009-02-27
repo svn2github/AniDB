@@ -847,7 +847,7 @@ function createPreferencesTable(type) {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.value; },Number(usejspopups),' Use Javascript popups for anidb::popup',null);
+				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.checked; },Number(usejspopups),' Use Javascript popups for anidb::popup',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -861,6 +861,10 @@ function createPreferencesTable(type) {
 				}
 				li.appendChild(dfsearch);
 				li.appendChild(document.createTextNode(' Default Search Type'));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLabledCheckBox(li,'searchTypeAssist','searchTypeAssist',function() { changeOptionValue(this); searchTypeAssist = this.checked; },Number(searchTypeAssist),' Use anidb search assist',null);
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
