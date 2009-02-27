@@ -573,13 +573,7 @@ function parseConfig(node) {
 			case 'lay':
 				var lay = Number(nodeData(sNode)) || 0;
 				config[sNode.nodeName] = new Array();
-				LAY_NOANIMEGROUPREL = (lay & 32) ? true : false;
-				LAY_HIDEFILES = (lay & 512) ? true : false;
-				LAY_HIDERAWS = (lay & 1024) ? true : false;
-				LAY_HIDEGENERICFILES = (lay & 4096) ? true : false;
-				LAY_HIDEPARODYEPS = (lay & 131072) ? true : false;
-				LAY_SHOWFID = (lay & 268435456) ? true : false;
-				LAY_SHOWCRC = (lay & 536870912) ? true : false;
+				config[sNode.nodeName]['LAY_HEADER'] = true;
 				config[sNode.nodeName]['LAY_FILES'] = (lay & 2);
 				config[sNode.nodeName]['LAY_NOTIFYPOPUP'] = (lay & 4);
 				config[sNode.nodeName]['LAY_NOTIFYMAIL'] = (lay & 8);
@@ -610,18 +604,18 @@ function parseConfig(node) {
 				config[sNode.nodeName]['LAY_SHOWFID'] = (lay & 268435456);
 				config[sNode.nodeName]['LAY_SHOWCRC'] = (lay & 536870912);
 				config[sNode.nodeName]['LAY_SHOWTABS'] = (lay & 1073741824);
+				LAY_HEADER = config[sNode.nodeName]['LAY_HEADER'];
+				LAY_NOANIMEGROUPREL = config[sNode.nodeName]['LAY_NOANIMEGROUPREL'];
+				LAY_HIDEFILES = config[sNode.nodeName]['LAY_HIDEFILES'];
+				LAY_HIDERAWS = config[sNode.nodeName]['LAY_HIDERAWS'];
+				LAY_HIDEGENERICFILES = config[sNode.nodeName]['LAY_HIDEGENERICFILES'];
+				LAY_HIDEPARODYEPS = config[sNode.nodeName]['LAY_HIDEPARODYEPS'];
+				LAY_SHOWFID = config[sNode.nodeName]['LAY_SHOWFID'];
+				LAY_SHOWCRC = config[sNode.nodeName]['LAY_SHOWCRC'];
 				break;
 			case 'irc':
 				var irc = Number(nodeData(sNode)) || 0;
 				config[sNode.nodeName] = new Array();
-				IRC_USEAJAX = (irc & 32) ? true : false;
-				IRC_HIDETHUMBNAILS = (irc & 64) ? true : false;
-				IRC_HIDETAGS = (irc & 512) ? true : false;
-				IRC_HIDEGROUPJOINTS = (irc & 2048) ? true : false;
-				IRC_HIDEPICS = (irc & 4096) ? true : false;
-				IRC_FILTERRELEASESBYLANG = (irc & 32768) ? true : false;
-				IRC_SHOWFILESOURCE = (irc & 65536) ? true : false;
-				IRC_HIDEAVATAR = (irc & 131072) ? true : false;
 				config[sNode.nodeName]['IRC_NICKWATCH'] = (irc & 1);
 				config[sNode.nodeName]['IRC_NICKWATCH_COMMENT'] = (irc & 2);
 				config[sNode.nodeName]['IRC_ED2KWATCH'] = (irc & 4);
@@ -655,6 +649,14 @@ function parseConfig(node) {
 				config[sNode.nodeName]['IRC_SHOWCRC'] = (irc & 536870912);
 				config[sNode.nodeName]['IRC_SHOWTABS'] = (irc & 1073741824);
 				*/
+				IRC_USEAJAX = config[sNode.nodeName]['IRC_USEAJAX'];
+				IRC_HIDETHUMBNAILS = config[sNode.nodeName]['IRC_HIDETHUMBNAILS'];
+				IRC_HIDETAGS = config[sNode.nodeName]['IRC_HIDETAGS'];
+				IRC_HIDEGROUPJOINTS = config[sNode.nodeName]['IRC_HIDEGROUPJOINTS'];
+				IRC_HIDEPICS = config[sNode.nodeName]['IRC_HIDEPICS'];
+				IRC_FILTERRELEASESBYLANG = config[sNode.nodeName]['IRC_FILTERRELEASESBYLANG'];
+				IRC_SHOWFILESOURCE = config[sNode.nodeName]['IRC_SHOWFILESOURCE'];
+				IRC_HIDEAVATAR = config[sNode.nodeName]['IRC_HIDEAVATAR'];
 				break;
 			case 'animelang':
 				for (var j = 0; j < sNode.childNodes.length; j++) {

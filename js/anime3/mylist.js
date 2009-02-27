@@ -131,7 +131,7 @@ function prepPage() {
 		}
 		else a.onclick = expandAnime;
 		a.style.cursor = "pointer";
-		if (get_info_pmylist) {
+		if ((get_info & 2)) {
 			cell = getElementsByClassName(row.getElementsByTagName('td'),'name',true)[0];
 			if (!cell) { errorAlert('prepPage','no name cell found'); continue; }
 			var span = cell.getElementsByTagName('span')[0];

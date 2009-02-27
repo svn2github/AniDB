@@ -39,6 +39,7 @@ var episodeTitleLang = '';
 var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
+var LAY_HEADER = true;
 var LAY_NOANIMEGROUPREL = false;
 var LAY_HIDEFILES = false;
 var LAY_HIDERAWS = false;

@@ -38,6 +38,7 @@ var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
 var uriObj = new Array();      // Object that holds the URI
+var LAY_HEADER = true;
 var LAY_NOANIMEGROUPREL = false;
 var LAY_HIDEFILES = false;
 var LAY_HIDERAWS = false;
@@ -125,14 +126,14 @@ function prepPage() {
 	createPreferencesTable('episode');
 	// handles tables
 	var sortingCols = {
-		'stafflist': 	[	{"type":'c_latin',"isDefault":true},	// credit
-							{"type":'c_setlatin',"isDefault":false},// name
-							{"type":'c_latin',"isDefault":false},	// episode restriction
-							{"type":'c_latin',"isDefault":false}]	// comment
+		'stafflist': 	{	"credit":{"type":'c_latin',"isDefault":true},
+							"name":{"type":'c_setlatin'},
+							"eprange":{"type":'c_latin'},
+							"comment":{"type":'c_latin'}}
 	};
 	var tableNames = ['stafflist'];
 	var skipTables = null;
-	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,true);
+	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,(get_info & 4));
 	fetchData(aid);
 }
 
@@ -584,7 +585,8 @@ function expandFiles() {
 		var table = document.createElement('table');
 		table.className = 'filelist';
 		table.id = 'file'+rfid+'relations';
-		table.appendChild(createTableHead(fileCols));
+		if (LAY_HEADER)
+			table.appendChild(createTableHead(fileCols));
 		var tfoot = document.createElement('tfoot');
 		var tbody = document.createElement('tbody');
 		// TableBody
@@ -648,7 +650,8 @@ function createFileTable(episode) {
 	var table = document.createElement('table');
 	table.className = 'filelist';
 	table.id = 'episode'+eid+'files';
-	table.appendChild(createTableHead(fileCols));
+	if (LAY_HEADER)
+		table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
 	for (var f = 0; f < episode.files.length; f++) {
@@ -697,9 +700,11 @@ function createFileTable(episode) {
 	filelisttable.parentNode.replaceChild(table,filelisttable);
 
 	// fix the sorting function
-	init_sorting(table,'title','down');
-	var ths = table.tHead.getElementsByTagName('th');
-	for (var i = 0; i < ths.length; i++) ths[i].onclick = prepareForSort;
+	if (LAY_HEADER) {
+		init_sorting(table,'title','down');
+		var ths = table.tHead.getElementsByTagName('th');
+		for (var i = 0; i < ths.length; i++) ths[i].onclick = prepareForSort;
+	}
 	return table;
 }
 

@@ -7,9 +7,9 @@
 jsVersionArray.push({
 	"file":"anime3/customize.js",
 	"version":"1.5",
-	"revision":"$Revision: 2250 $",
-	"date":"$Date:: 2009-02-18 19:40:33 +0100#$",
-	"author":"$Author: fahrenheit $",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
 	"changelog":"Merged information tooltips"
 });
 
@@ -67,6 +67,7 @@ var defPrefTab = 0;
 var storedTab = '';
 var currentFMode = 1;
 var HIDETHUMBNAILS = false;
+var LAY_FORMATFILESIZE = false;
 var picbase = 'http://img5.anidb.net/pics/anime/';
 var charInfos = new Array(); 		// Character information	(indexed by charid)
 var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
@@ -108,6 +109,7 @@ function loadSettings() {
 	group_check_type = Number(CookieGet('group_check_type') || 0);
 	group_langfilter = Number(CookieGet('group_langfilter') || 1);
 	currentFMode = Number(CookieGet('currentFMode') || 1);
+	LAY_FORMATFILESIZE = format_size = Number(CookieGet('format_size') || 0);
 	collapseThumbnails = Number(CookieGet('collapseThumbnails') || 0);
 	animePage_curSort = CookieGet('animePage_curSort') || 'default';
 	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
@@ -332,7 +334,7 @@ function createPreferencesTable(type) {
 	for (var t = 0; t < items[type].length; t++) {
 		var li = document.createElement('li');
 		li.id = "pref"+(t+1);
-		li.className = "tab" + (((items[type][t]['default'] && storedTab.indexOf('pref') < 0) || storedTab == li.id) ? ' selected' : '');
+		li.className = "tab" + (t > 0 ? ' selected' : '');
 		li.appendChild(document.createTextNode(items[type][t]['head']));
 		li.onclick = Magic.toggle_tabs;
 		ul_tabs.appendChild(li);
@@ -345,7 +347,6 @@ function createPreferencesTable(type) {
 		main.className = "g_section preferences";
 		main.style.display = 'none';
 		main.id = 'layout-prefs';
-	
 		body.className = 'body';
 	} else {
 		var target = getElementsByClassName(document.getElementsByTagName('ul'), 'tabs', false)[0];
@@ -360,22 +361,6 @@ function createPreferencesTable(type) {
 		jstab.className = 'tab javascript';
 		jstab.appendChild(document.createTextNode('Javascript'));
 		jstab.onclick = Magic.toggle_tabs;
-/*
-		function() {
-			Magic.toggle_tabs(null,this);
-			// now show my tabs
-			var num = Number(this.id.substring(4));
-			var div = document.getElementById('tab_'+num+'_pane');
-			var panediv = getElementsByClassName(div.getElementsByTagName('div'), 'tabbed_pane', true)[0];
-			if (panediv) panediv.className = panediv.className.replace(/hide| hide|hide /ig,'');
-			var selectedTab = getElementsByClassName(div.getElementsByTagName('li'), 'selected', true)[0];
-			if (selectedTab) {
-				var name = selectedTab.id;
-				var prefdiv = document.getElementById(name+'_pane');
-				if (prefdiv) prefdiv.className = prefdiv.className.replace(/hide| hide|hide /ig,'');
-			}
-		};
-*/
 		target.appendChild(jstab);
 		// now to actualy make the options
 		jsdiv = document.createElement('div');
@@ -388,10 +373,7 @@ function createPreferencesTable(type) {
 		var item = items[type][t];
 		var tab = document.createElement('div');
 		tab.id = "pref"+(t+1)+"_pane";
-		if (type != 'profile') 
-			tab.className = "pane" + (((item['default'] && storedTab.indexOf('pref') < 0) || storedTab == "pref"+(t+1)) ? '' : ' hide');
-		else
-			tab.className = "pane" + (t > 1 ? ' hide' : '');
+		tab.className = "pane" + (t > 0 ? ' hide' : '');
 		var h4 = document.createElement('h4');
 		h4.appendChild(document.createTextNode(item['title']));
 		tab.appendChild(h4);
@@ -407,6 +389,7 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				var options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HEADER','type':'lay','var':'LAY_HEADER','text':' Show table headers'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_FINEVOTES','type':'lay','var':'LAY_FINEVOTES','text':' Show fine grained vote options'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEHENTAIPICS','type':'lay','var':'LAY_HIDEHENTAIPICS','text':' Hide pictures with adult content'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_IRC_USEAJAX','type':'irc','var':'IRC_USEAJAX','text':' Use ajax on anime and mylist page'},
@@ -496,6 +479,7 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				var options = [
+					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HEADER','type':'lay','var':'LAY_HEADER','text':' Show table headers'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_FINEVOTES','type':'lay','var':'LAY_FINEVOTES','text':' Show fine grained vote options'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_SHOWHENTAI','type':'lay','var':'LAY_SHOWHENTAI','text':' Show adult content (hentai)'},
 					{'url':'http://wiki.anidb.net/w/PROFILE_LAY_HIDEHENTAIPICS','type':'lay','var':'LAY_HIDEHENTAIPICS','text':' Hide pictures with adult content'},
@@ -815,6 +799,13 @@ function createPreferencesTable(type) {
 				li.appendChild(defaultSortOrder);
 				li.appendChild(document.createTextNode(' Default sorted column'));
 				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				var szformatSel = createSelectArray(null,"format_size","format_size",null,format_size,{0:{"text":'no'},1:{"text":'yes'}});
+				szformatSel.onchange = function() { changeOptionValue(this); format_size = LAY_FORMATFILESIZE = this.value; };
+				li.appendChild(szformatSel);
+				li.appendChild(document.createTextNode(' Format file size'));
+				ul.appendChild(li);
 				if (type != 'profile') {
 					var actionLI = document.createElement('li');
 					actionLI.className = 'action';
@@ -831,6 +822,7 @@ function createPreferencesTable(type) {
 						}
 						CookieSet('animePageLayout',tempArray.join(','));
 						CookieSet('animePage_curSort',animePage_curSort);
+						CookieSet('format_size',format_size);
 						alert('Current Layout preferences saved.');
 					}
 					actionLI.appendChild(saveInput);
