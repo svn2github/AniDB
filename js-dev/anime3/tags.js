@@ -119,10 +119,10 @@ function checkSearchString() {
 /* Tag Node Parser */
 function CTag(node) {
 	this.id = Number(node.getAttribute('id'));
-	this.is_spoiler = Number(node.getAttribute('is_spoiler'));
+	this.is_spoiler = Number(node.getAttribute('is_spoiler')) || 0;
 	this.name = node.getAttribute('name');
 	this.desc = node.getAttribute('description') || "";
-	this.is_verified = Number(node.getAttribute('is_verified'));
+	this.is_verified = Number(node.getAttribute('is_verified')) || 0;
 }
 
 /* Function that prepares the page */
