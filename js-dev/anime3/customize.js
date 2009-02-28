@@ -93,7 +93,7 @@ function changeOptionValue(node) {
 function loadSettings() {
 	animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
 	episodeAltTitleLang = CookieGet('episodeAltTitleLang') || "x-jat";
-	episodeTitleDisplay = CookieGet('episodeTitleDisplay') || 2;
+	episodeTitleDisplay = Number(CookieGet('episodeTitleDisplay') || 2);
 	ed2k_pattern = CookieGet('ed2k_pattern') || "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
 	hashObj.pattern = ed2k_pattern;
 	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
@@ -114,6 +114,7 @@ function loadSettings() {
 	collapseThumbnails = Number(CookieGet('collapseThumbnails') || 0);
 	def_search = CookieGet('def_search') || 'none';
 	if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
+	searchTypeAssist = search_assist = Number(CookieGet('search_assist') || 1);
 	animePage_curSort = CookieGet('animePage_curSort') || 'default';
 	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
 	animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
@@ -864,7 +865,7 @@ function createPreferencesTable(type) {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'searchTypeAssist','searchTypeAssist',function() { changeOptionValue(this); searchTypeAssist = this.checked; },Number(searchTypeAssist),' Use anidb search assist',null);
+				createLabledCheckBox(li,'search_assist','search_assist',function() { changeOptionValue(this); searchTypeAssist = this.checked; },Number(search_assist),' Use anidb search assist',null);
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;

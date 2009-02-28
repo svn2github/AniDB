@@ -944,53 +944,54 @@ function printTags() {
 	}
 }
 
-// Initialize the script
-addLoadEvent(function() {
-	searchTypeAssist = Number(CookieGet('searchTypeAssist')) || true;
-	if (!searchTypeAssist) return;
-	// Find target form
-	var target = document.getElementById("layout-search");
+searchTypeAssist = Number(CookieGet('search_assist') || 1);
+if (searchTypeAssist) {
+	// Initialize the script
+	addLoadEvent(function() {
+		// Find target form
+		var target = document.getElementById("layout-search");
 
-	if(target) {
-		// Find search box and bind stuff to it
-		var textfield = target.getElementsByTagName("input")[0];
-		textfield.id = 'adb.search';
-		textfield.onkeyup = search;
-		textfield.onfocus = search;
-		textfield.onchange = function() {
-			setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
-		}
-		
-		// Find search type dropdown
-		var dropdown = target.getElementsByTagName("select")[0];
-		if(dropdown) {
-			function getSearchTypeChange(value) {
-				if(value == undefined) value = this.value
-				switch(value) {
-					case "animetag":
-					case "chartags":
-					case "modtag":
-					case "grouplist":
-					case "producerlist":
-						textfield.setAttribute("autocomplete", "off");
-						break;
-					default:
-						textfield.setAttribute("autocomplete", "on");
-				}
+		if(target) {
+			// Find search box and bind stuff to it
+			var textfield = target.getElementsByTagName("input")[0];
+			textfield.id = 'adb.search';
+			textfield.onkeyup = search;
+			textfield.onfocus = search;
+			textfield.onchange = function() {
+				setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
 			}
-			addEventSimple(dropdown,'change',getSearchTypeChange)
-			//dropdown.onchange = getSearchTypeChange;
-			getSearchTypeChange(dropdown.value);
-		}
+			
+			// Find search type dropdown
+			var dropdown = target.getElementsByTagName("select")[0];
+			if(dropdown) {
+				function getSearchTypeChange(value) {
+					if(value == undefined) value = this.value
+					switch(value) {
+						case "animetag":
+						case "chartags":
+						case "modtag":
+						case "grouplist":
+						case "producerlist":
+							textfield.setAttribute("autocomplete", "off");
+							break;
+						default:
+							textfield.setAttribute("autocomplete", "on");
+					}
+				}
+				addEventSimple(dropdown,'change',getSearchTypeChange)
+				//dropdown.onchange = getSearchTypeChange;
+				getSearchTypeChange(dropdown.value);
+			}
 
-		// Spawn result dropdown
-		result = document.createElement("ul");
-		result.setAttribute("id", "tagsearch");
-		result.className = "acdropdown";
-		result.style.display = "none";
-		textfield.parentNode.appendChild(result);
-	}
-});
+			// Spawn result dropdown
+			result = document.createElement("ul");
+			result.setAttribute("id", "tagsearch");
+			result.className = "acdropdown";
+			result.style.display = "none";
+			textfield.parentNode.appendChild(result);
+		}
+	});
+}
 
 /* Legacy code */
 
