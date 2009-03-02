@@ -65,7 +65,7 @@ function findPos(element) {
  * @param callback Function that will be executed
  */
 function addEventSimple(element, eventName, callback) {
-	if (username == 'worf') return;
+	if (username == 'worf' || username == 'fahrenheit') return;
 	if(typeof(element) == "string")
 		element = document.getElementById(element);
 	if(element == null)
