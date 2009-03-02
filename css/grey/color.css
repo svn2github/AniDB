@@ -94,6 +94,7 @@ background-color: hsla(0, 100%, 50%, 0.3);
 #layout-main div.quotebody,
 #layout-main div.forum div.postbody dl.codebox dt,
 #layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.events div.inner,
 #layout-main div.export_all div.exportblock div.inner
 {
 background-image: url(images/bg_3.gif);

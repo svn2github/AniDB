@@ -2402,6 +2402,7 @@ background-image: url(images/bg_2.gif)
 #layout-main div.forum div.inner,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.events div.inner,
 #layout-main div.export_all div.exportblock div.inner
 {
 background-image: url(images/bg_3.gif)
@@ -2426,20 +2427,24 @@ border-bottom-color:#092e4d;
 border-right-color:#092e4d;
 color:#FFFFFF;
 }
-#layout-main div.forum div.poll h2
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events h2
 {
 border-bottom-color:#989898;
 color: #ff6000;
 }
+#layout-main div.forum div.events dl,
 #layout-main div.forum div.poll dl
 {
 border-top-color:#989898;
 color:#676767;
 }
+#layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt
 {
 color: white;
 }
+#layout-main div.forum div.events,
 #layout-main div.forum div.poll
 {
 border-bottom-color:#4A4A5A;
@@ -2472,6 +2477,7 @@ color:#BC2A4D;
 {
 border-color:#A9A9A9;
 }
+#layout-main div.forum div.events dl dd,
 #layout-main div.forum div.poll dl dd
 {
 color:#878787;
@@ -2513,6 +2519,7 @@ div.quotebody div.quoteof,
 #layout-main div.cmt_entries a.username-colored,
 #layout-main div.forum dl.icon dt,
 #layout-main div.forum div.options-box dt,
+#layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt,
 #layout-main div.forum div.poll div.pollbar
 {
