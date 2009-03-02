@@ -109,6 +109,9 @@ div.quotebody div.quote div.g_odd
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.poll .rbottom *,
 #layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.events .rbottom *,
+#layout-main div.forum div.events .rtop *,
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *
@@ -124,23 +127,27 @@ div.quotebody div.quote div.g_odd
 	color:#FFFFFF;
 }
 
+#layout-main div.forum div.events h2,
 #layout-main div.forum div.poll h2
 {
 	border-bottom-color:#989898;
 	color:#006699;
 }
 
+#layout-main div.forum div.events dl,
 #layout-main div.forum div.poll dl
 {
 	border-top-color:#989898;
 	color:#666666;
 }
 
+#layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt
 {
 	color:#555555;
 }
 
+#layout-main div.forum div.events,
 #layout-main div.forum div.poll
 {
 	border-bottom-color:#4A4A5A;
@@ -181,7 +188,8 @@ div.quotebody div.quote div.g_odd
 }
 
 #layout-main div.cmt_entries dl.profile dd,
-#layout-main div.forum div.poll dl dd
+#layout-main div.forum div.poll dl dd,
+#layout-main div.forum div.events dl dd
 {
 	color:#666666;
 }

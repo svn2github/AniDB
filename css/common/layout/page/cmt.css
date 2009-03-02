@@ -436,22 +436,40 @@
 	width:12em;
 }
 
+#layout-main div.forum div.events,
 #layout-main div.forum div.poll
 {
 	margin-bottom:.5em;
 	padding-bottom:.5em;
 }
 
+#layout-main div.forum div.events div.event,
+#layout-main div.forum div.events div.data,
 #layout-main div.forum div.poll div.question,
-#layout-main div.forum div.poll form
+#layout-main div.forum div.poll div.data
 {
 	display:block;
 	margin-left:1em;
 	margin-right:1em;
 	padding-bottom:1em;
+}
+
+#layout-main div.forum div.events div.event,
+#layout-main div.forum div.poll div.question
+{
 	padding-top:.5em;
 }
 
+#layout-main div.forum div.events div.data p,
+#layout-main div.forum div.poll div.data p
+{
+	line-height:1.2em;
+	padding:0;
+	text-align:left;
+	padding-bottom:0.5em;
+}
+
+#layout-main div.forum div.events dl,
 #layout-main div.forum div.poll dl
 {
 	border-top:1px solid;
@@ -462,6 +480,7 @@
 	width:100%;
 }
 
+#layout-main div.forum div.events dl dd,
 #layout-main div.forum div.poll dl dd
 {
 	display:block;
@@ -474,6 +493,12 @@
 	width:10%;
 }
 
+#layout-main div.forum div.events dl dd
+{
+	width:60%;
+}
+
+#layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt
 {
 	display:block;
@@ -485,34 +510,26 @@
 	width:30%;
 }
 
-#layout-main div.forum div.poll form div.resultbar
+#layout-main div.forum div.poll div.data div.resultbar
 {
 	margin-left:30%;
 	margin-top:1em;
 	text-align:left;
 }
 
-#layout-main div.forum div.poll form div.resultbar a,
-#layout-main div.forum div.poll form div.resultbar input
+#layout-main div.forum div.poll div.data div.resultbar a,
+#layout-main div.forum div.poll div.data div.resultbar input
 {
 	margin-left:10px;
 }
 
+#layout-main div.forum div.events h2,
 #layout-main div.forum div.poll h2
 {
 	border-bottom:1px solid;
 	display:block;
 	line-height:1.4em;
 	padding-bottom:.5em;
-	text-align:left;
-}
-
-#layout-main div.forum div.poll p
-{
-	line-height:1.2em;
-	margin-left:1em;
-	margin-right:1em;
-	padding:0;
 	text-align:left;
 }
 
@@ -671,11 +688,14 @@
 }
 
 #layout-main div.forum div.postbody dl.codebox dt,
+#layout-main div.forum div.events,
 #layout-main div.forum div.poll
 {
 	border-bottom:1px solid;
 }
 
+#layout-main div.forum div.events dl dt,
+#layout-main div.forum div.events dl dd,
 #layout-main div.forum div.poll dl dt,
 #layout-main div.forum div.poll dl dd
 {

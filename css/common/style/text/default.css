@@ -257,6 +257,7 @@ th.descending
 	line-height:1.3em;
 }
 
+#layout-main div.forum div.events p,
 #layout-main div.forum div.poll p,
 #layout-main div.forum div.postbody dl.codebox
 {
@@ -282,6 +283,7 @@ th.descending
 	font-weight:normal;
 }
 
+#layout-main div.forum div.events h2,
 #layout-main div.forum div.poll h2
 {
 	font-size:1.6em;
@@ -304,6 +306,8 @@ th.descending
 #layout-main div.forum div.options-box dt,
 #layout-main div.forum div.poll dl dd,
 #layout-main div.forum div.poll dl dt,
+#layout-main div.forum div.events dl dd,
+#layout-main div.forum div.events dl dt,
 #layout-main div.msg_all div.header dd,
 #layout-main div.forum div.rules div.inner,
 #layout-main div.forum div.navbar span.notify,
@@ -340,6 +344,7 @@ div.quotebody div.quoteof,
 #layout-main div.cmt_entries a.username-colored,
 #layout-main div.forum dl.icon dt,
 #layout-main div.forum div.options-box dt,
+#layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt,
 #layout-main div.forum div.poll div.pollbar
 {
@@ -404,20 +409,23 @@ th.ascending */
 	font-size:1.2em;
 }
 
-ul.acdropdown {
-background-color: white;
-border: black 1px solid;
-color: black;
+ul.acdropdown
+{
+	background-color: white;
+	border: black 1px solid;
+	color: black;
 }
 
-ul.acdropdown li {
-background-color: transparent;
-color:none;
-font-weight: normal;
+ul.acdropdown li
+{
+	background-color: transparent;
+	color:none;
+	font-weight: normal;
 }
 
-ul.acdropdown li:hover {
-background-color: blue;
-color:white;
-font-weight: bold;
+ul.acdropdown li:hover
+{
+	background-color: blue;
+	color:white;
+	font-weight: bold;
 }
