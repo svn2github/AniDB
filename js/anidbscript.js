@@ -22,6 +22,12 @@ var curPageID = null;
 var searchTypeSelect = null;
 var searchTypeAssist = true;
 var username = null;
+var un = document.getElementById('user-name');
+if (un) {
+	var sp = un.getElementsByTagName('span')[0];
+	if (sp)
+		username = sp.firstChild.nodeValue;
+}
 
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
@@ -613,13 +619,6 @@ function InitDefault()
 	
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
-	
-	var un = document.getElementById('user-name');
-	if (un) {
-		var sp = un.getElementsByTagName('span')[0];
-		if (sp)
-			username = sp.firstChild.nodeValue;
-	}
 }
 
 function enable_sort(func){
