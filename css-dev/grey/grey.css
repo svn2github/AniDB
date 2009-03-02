@@ -4,6 +4,7 @@
 @import "../common/layout/global/tagcloud.css";
 @import "../common/layout/global/timedentry.css";
 @import "../common/layout/global/menu.css";
+@import "../common/layout/global/tooltip.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
 padding:0;
@@ -2401,6 +2402,7 @@ background-image: url(images/bg_2.gif)
 #layout-main div.forum div.inner,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.events div.inner,
 #layout-main div.export_all div.exportblock div.inner
 {
 background-image: url(images/bg_3.gif)
@@ -2425,20 +2427,24 @@ border-bottom-color:#092e4d;
 border-right-color:#092e4d;
 color:#FFFFFF;
 }
-#layout-main div.forum div.poll h2
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events h2
 {
 border-bottom-color:#989898;
 color: #ff6000;
 }
+#layout-main div.forum div.events dl,
 #layout-main div.forum div.poll dl
 {
 border-top-color:#989898;
 color:#676767;
 }
+#layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt
 {
 color: white;
 }
+#layout-main div.forum div.events,
 #layout-main div.forum div.poll
 {
 border-bottom-color:#4A4A5A;
@@ -2471,6 +2477,7 @@ color:#BC2A4D;
 {
 border-color:#A9A9A9;
 }
+#layout-main div.forum div.events dl dd,
 #layout-main div.forum div.poll dl dd
 {
 color:#878787;
@@ -2512,6 +2519,7 @@ div.quotebody div.quoteof,
 #layout-main div.cmt_entries a.username-colored,
 #layout-main div.forum dl.icon dt,
 #layout-main div.forum div.options-box dt,
+#layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt,
 #layout-main div.forum div.poll div.pollbar
 {
@@ -2684,4 +2692,50 @@ display: none;
 *.rating
 {
 white-space: nowrap;
+}
+/*Bubble Tooltip*/
+#tooltip span
+{
+display:none;
+font-size: 10px;
+color: white;
+}
+a:hover #tooltip
+{
+display: block;
+line-height: normal;
+padding: 0;
+margin: 0;
+margin-top: 7px;
+position: absolute;
+text-align: center;
+white-space: normal;
+width: 200px;
+}
+a:hover #tooltip span.top
+{
+display:block;
+padding:30px 8px 0;
+}
+a:hover #tooltip span.middle
+{
+display:block;
+padding:0 8px;
+}
+a:hover #tooltip span.bottom
+{
+display:block;
+padding:3px 8px 10px;
+}
+#tooltip span.top
+{
+background:url(images/bubble.png) no-repeat top;
+}
+#tooltip span.middle
+{
+background:url(images/bubble_filler.png) repeat bottom;
+}
+#tooltip span.bottom
+{
+background:url(images/bubble.png) no-repeat bottom;
 }
