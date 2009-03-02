@@ -371,7 +371,7 @@ function createPreferencesTable(type) {
 		jsdiv.id = 'tab_'+num+'_pane';
 		jsdiv.className = 'pane hide javascript';
 	
-		body.className = 'prefs';
+		body.className = 'body';
 	}
 	for (var t = 0; t < items[type].length; t++) {
 		var item = items[type][t];
