@@ -183,7 +183,7 @@ function fetchData(searchString,searchType) {
 	
 	if (searchType != 'characterdescbyrel' && searchType != 'characterdescbyid' && searchType != 'creatordescbyid') {
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/'+searchType+'search.xml', parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&search='+escape(searchString), parseData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&search='+encodeURI(searchString), parseData);
 	} else {
 		if (''+window.location.hostname == '') {
 			switch(searchType) {
@@ -195,7 +195,7 @@ function fetchData(searchString,searchType) {
 					xhttpRequestFetch(req, 'xml/creator'+searchString+'_desc.xml', parseData); break;
 			}
 		} else
-			xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&id='+escape(searchString), parseData);
+			xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&id='+encodeURI(searchString), parseData);
 	}
 }
 
@@ -213,6 +213,10 @@ function parseData(xmldoc) {
 	if (!descNodes.length) descNodes = root.getElementsByTagName('creatordescbyid');
 	if (!descNodes.length) {
 		alert('Search for "'+searchString+'" resulted in no matches.');
+		if (curPageID == 'addcreator' || curPageID == 'addcharacter') {
+			searchinput.value = "search";
+			searchinput.onclick = doEntitySearch;
+		}
 		return;
 	}
 	aids = new Array();

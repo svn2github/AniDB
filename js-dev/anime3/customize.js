@@ -1,8 +1,8 @@
 /* file customization support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
  *         
- * version 1.0 (03.02.2008) - Initial release
- * version 1.5 (18.02.2008) - Merged information tooltips
+ * version 1.0 (03.02.2009) - Initial release
+ * version 1.5 (18.02.2009) - Merged information tooltips
  */
 jsVersionArray.push({
 	"file":"anime3/customize.js",

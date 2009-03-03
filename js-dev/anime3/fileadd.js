@@ -43,7 +43,7 @@ var animeType = 0;
 function fetchData() {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=group&limit=500&search='+encodeURI(searchString), parseData);
 }
 
 function CGroup(node) {
