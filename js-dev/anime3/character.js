@@ -354,7 +354,8 @@ function showResults(single,filter) {
 			ck.value = desc.id;
 			ck.onclick = ckNames[curPageID]['func'];
 		} else {
-			ck = createButton(ckNames[curPageID]['single'],null,false,desc.id,'radio',ckNames[curPageID]['func']);
+			//ck = createButton(ckNames[curPageID]['single'],null,false,desc.id,'radio',ckNames[curPageID]['func']);
+			ck = createButton(ckNames[curPageID]['single'],null,false,desc.id,'radio',null);
 		}
 		createCell(row, 'check', ck);
 		if (!HIDETHUMBNAILS) {
