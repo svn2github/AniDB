@@ -958,7 +958,7 @@ function updateLoadingStatus(eid, msg, append) {
 function changeWatchedState() {
 	var row = this.parentNode;
 	var isWatched = (this.className.indexOf('i_seen_yes') >= 0);
-	while (row.nodeName != 'TR') row = row.parentNode;
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
 	var fid = Number(row.id.substr(row.id.indexOf('f')+1,row.id.length));
 	if (this.href) this.removeAttribute('href');
 	var mylistEntry = mylist[fid];
@@ -966,7 +966,9 @@ function changeWatchedState() {
 	var now = new Date();
 	var day = (now.getDate() > 9 ? now.getDate() : '0'+now.getDate());
 	var month = (((now.getMonth() + 1) > 9) ? (now.getMonth()+1) : '0'+(now.getMonth()+1));
-	now = day + '.' + month + '.' + now.getFullYear();
+	var hour = (now.getHours() > 9  ? now.getHours() : '0'+now.getHours());
+	var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
+	now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
 	mylistEntry.seenDate = (isWatched ? now : 0);
 	var url;
 	var file = files[fid];

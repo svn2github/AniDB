@@ -372,129 +372,227 @@ function toggleFileMode() {
 	}
 }
 
+/* Function that changes the watched count for a given anime row
+ * @param aid Anime id of the row to change
+ * @param isWatched If false will decrease value, true will increase
+ * @param epType only types that need change are normal and special eps
+ */
+function changeAnimeRowWatchedState(aid,isWatched,epType) {
+	if (epType != '' && epType != 'S') return;
+	var arow = document.getElementById('a'+aid);
+	var cellSeen = (arow ? getElementsByClassName(arow.getElementsByTagName('td'),'stats seen',true)[0] : null);
+	// update anime watched count
+	if (cellSeen) {
+		if (epType == '') { // episode is one of the normal episodes
+			var text = cellSeen.firstChild.nodeValue;
+			var valueSeen =  Number(text.split('/')[0]);
+			if (!isWatched) {
+				var newVal = (valueSeen-1);
+				if (newVal >= 0) cellSeen.firstChild.nodeValue = text.replace(valueSeen+'/',newVal+'/');
+				if (arow.className.indexOf('all_watched') >= 0) arow.className = arow.className.replace('all_watched','complete');
+			} else {
+				cellSeen.firstChild.nodeValue = text.replace(valueSeen+'/',(valueSeen+1)+'/');
+				if ((valueSeen+1) == animes[aid].eps && (arow.className.indexOf('complete') >= 0))
+					arow.className = arow.className.replace('complete','all_watched');
+			}
+		} else if (epType == 'S') { // episode is special
+			var text = cellSeen.firstChild.nodeValue;
+			var value = Number(text.split('+')[1]);
+			if (!isWatched) {
+				if (!value) cellSeen.firstChild.nodeValue += '+1';
+				else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value+1));
+			} else {
+				if (!value) cellSeen.firstChild.nodeValue += '+1';
+				else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value+1));
+			}
+		}
+	}
+}
+
+/* Function that changes the watched icons for a given file row
+ * @param eid Episode id of the file row
+ * @param fid File id of the file row
+ * @param isWatched If file is watched
+ */
+function changeFileRowWatchedState(eid,fid,isWatched) {
+	var mylistEntry = mylist[fid];
+	var episode = episodes[eid];
+	var row = document.getElementById('e'+eid+'f'+fid);
+	var stateCell = getElementsByClassName(row.getElementsByTagName('td'),'icons state',true)[0];
+	var actionCell = getElementsByClassName(row.getElementsByTagName('td'),'icons action',true)[0];
+	var ico = getElementsByClassName(actionCell.getElementsByTagName('a'),'i_seen_',true)[0];
+	// change action icon
+	ico.className = ico.className.replace(/i_seen_yes|i_seen_no/ig,'');
+	ico.className += ' '+(isWatched ? 'i_seen_no' : 'i_seen_yes');
+	ico.title = (isWatched ? 'Mark as unwatched' : 'Mark as watched');
+	ico.firstChild.firstChild.nodeValue = (isWatched ? 'MU' : 'MW');
+	// update state icon
+	ico = getElementsByClassName(stateCell.getElementsByTagName('span'),'i_seen',true)[0];
+	if (ico && !isWatched) { // remove icon
+		//alert('ico && !isWatched');
+		mylistEntry.seenDate = 0;
+		stateCell.removeChild(ico);
+	} else if (!ico && isWatched) {
+		//alert('!ico && !isWatched');
+		var now = new Date();
+		var day = (now.getDate() > 9 ? now.getDate() : '0'+now.getDate());
+		var month = (((now.getMonth() + 1) > 9) ? (now.getMonth()+1) : '0'+(now.getMonth()+1));
+		var hour = (now.getHours() > 9  ? now.getHours() : '0'+now.getHours());
+		var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
+		now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
+		mylistEntry.seenDate = now;
+		if (stateCell) 
+			createIcon(stateCell, 'seen ', null, null, 'seen on: '+cTimeDateHour(mylistEntry.seenDate), 'i_seen');
+	}
+}
+
+/* Function that changes the watched icons for a given episode row
+ * @param eid Episode id of the episode row
+ * @param isWatched If file is watched
+ */
+function changeEpisodeRowWatchedState(eid,isWatched) {
+	var row = document.getElementById('e'+eid);
+	if (!row) return;
+	var episode = episodes[eid];
+	var titleCell = getElementsByClassName(row.getElementsByTagName('td'), 'title', false)[0];
+	var actionCell = getElementsByClassName(row.getElementsByTagName('td'), 'action', false)[0];
+	if (titleCell) { // do the state icon work
+		var now = new Date();
+		var day = (now.getDate() > 9 ? now.getDate() : '0'+now.getDate());
+		var month = (((now.getMonth() + 1) > 9) ? (now.getMonth()+1) : '0'+(now.getMonth()+1));
+		var hour = (now.getHours() > 9  ? now.getHours() : '0'+now.getHours());
+		var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
+		now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
+		var iconsElem = getElementsByClassName(titleCell.getElementsByTagName('span'), 'icons', false)[0];
+		if (iconsElem) { // now look for the seen icon
+			var ico = getElementsByClassName(iconsElem.getElementsByTagName('span'), 'i_seen', true)[0];
+			if (ico && !isWatched) { // remove icon
+				episode.seenDate = 0;
+				iconsElem.removeChild(ico);
+			} else if (!ico && isWatched) {
+				episode.seenDate = now;
+				var icons = createEpisodeIcons(episode);
+				while (iconsElem.childNodes.length) 
+					iconsElem.removeChild(iconsElem.firstChild);
+				if (icons['seen']) iconsElem.appendChild(icons['seen']);
+				if (icons['state']) for (var st = 0; st < icons['state'].length; st++) iconsElem.appendChild(icons['state'][st]);
+				if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) iconsElem.appendChild(icons['fstate'][st]);
+				
+			}
+		} else {
+			if (isWatched) { // create new icons cell and add a new watched icon
+				episode.seenDate = now;
+				var icons = createEpisodeIcons(episode);
+				var span = document.createElement('span');
+				span.className = 'icons';
+				if (icons['seen']) span.appendChild(icons['seen']);
+				if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
+				if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
+				titleCell.insertBefore(span,titleCell.firstChild);
+			}
+		}
+	}
+	if (actionCell) { // do the action cell work
+		var ico = actionCell.getElementsByTagName('a')[0];
+		if (ico) {
+			ico.className = ico.className.replace(/i_seen_yes|i_seen_no/ig,"");
+			ico.className += ' '+(isWatched ? 'i_seen_no' : 'i_seen_yes');
+			ico.title = (isWatched ? 'Mark as unwatched' : 'Mark as watched');
+			ico.firstChild.firstChild.nodeValue = (isWatched ? 'MU' : 'MW');
+		}
+	}
+}
+
+/* Function that marks an episode (un)watched */
+function changeEpWatchedState() {
+	var row = this.parentNode;
+	var isWatched = (this.className.indexOf('i_seen_yes') >= 0);
+	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
+	var eid = Number(row.id.substr(row.id.indexOf('e')+1,row.id.length));
+	if (this.href) this.removeAttribute('href');
+	var episode = episodes[eid];
+	if (!episode) return;
+	// all mylist entries for this episode
+	var mylistEpEntries = findMylistEpEntries(episode.id);
+	var lid = 0;
+	if (mylistEpEntries.length) {
+		for (var i = 0; i < mylistEpEntries.length; i++) {
+			var entry = mylistEpEntries[i];
+			lid = entry.id;
+			var fid = entry.fileId;
+			var now = new Date();
+			var day = (now.getDate() > 9 ? now.getDate() : '0'+now.getDate());
+			var month = (((now.getMonth() + 1) > 9) ? (now.getMonth()+1) : '0'+(now.getMonth()+1));
+			var hour = (now.getHours() > 9  ? now.getHours() : '0'+now.getHours());
+			var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
+			now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
+			entry.seenDate = (!isWatched ? 0 : now);
+			var eids = new Array();
+			var file = files[fid];
+			eids[entry.episodeId] = 1;
+			eids[file.episodeId] = 1;
+			for (var e in file.epRelations) eids[e] = 1;
+			for (var e in eids) {
+				if (!eids[e]) continue;
+				changeFileRowWatchedState(e,fid,isWatched)
+			}
+		}
+	}
+	// replace episode icons
+	changeEpisodeRowWatchedState(eid,isWatched);
+	// Update anime watched count
+	changeAnimeRowWatchedState(episode.animeId,isWatched,episode.typeChar);
+	
+	var url = "animedb.pl?show=mylist&do=seen&watchedallihave="+(isWatched ? 0 : 1)+"&lid="+lid; 
+	postData(url);
+	//alert("posting:\n"+url);
+	return true;
+}
+
 /* Function that marks a file (un)watched */
 function changeWatchedState() {
 	var row = this.parentNode;
 	var isWatched = (this.className.indexOf('i_seen_yes') >= 0);
 	while (row.nodeName.toLowerCase() != 'tr') row = row.parentNode;
-	var fid = Number(row.id.substr(row.id.indexOf('f')+1,row.id.length));
+	var fid = Number(row.id.substring(row.id.indexOf('f')+1,row.id.length));
+	var eid = Number(row.id.substring(1,row.id.indexOf('f')));
 	if (this.href) this.removeAttribute('href');
 	var mylistEntry = mylist[fid];
 	mylistEntry.seen = isWatched;
 	var now = new Date();
 	var day = (now.getDate() > 9 ? now.getDate() : '0'+now.getDate());
 	var month = (((now.getMonth() + 1) > 9) ? (now.getMonth()+1) : '0'+(now.getMonth()+1));
-	now = day + '.' + month + '.' + now.getFullYear();
+	var hour = (now.getHours() > 9  ? now.getHours() : '0'+now.getHours());
+	var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
+	now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
 	mylistEntry.seenDate = (isWatched ? now : 0);
-	var url;
+	var url = 'animedb.pl?show=mylist&do=seen&seen='+(isWatched ? 1 : 0)+'&lid='+mylistEntry.id;
 	var file = files[fid];
 	var eids = new Array();
 	eids[file.episodeId] = 1;
+	eids[eid] = 1;
 	for (var eid in file.epRelations) eids[eid] = 1;
 	for (var eid in eids) {
 		if (!eids[eid]) continue;
 		var episode = episodes[eid];
-		var row = document.getElementById('e'+eid+'f'+file.id);
-		var stateCell = getElementsByClassName(row.getElementsByTagName('td'),'icons state',true)[0];
-		var actionCell = getElementsByClassName(row.getElementsByTagName('td'),'icons action',true)[0];
-		var ico = getElementsByClassName(actionCell.getElementsByTagName('a'),'i_seen_',true)[0];
-		var arow = document.getElementById('a'+episode.animeId);
-		var cellSeen = (arow ? getElementsByClassName(arow.getElementsByTagName('td'),'stats seen',true)[0] : null);
-		if (mylistEntry.seen) {
-			url = 'animedb.pl?show=mylist&do=seen&seen=1&lid='+mylistEntry.id;
-			ico.title = 'mark unwatched';
-			ico.className = 'i_icon i_seen_no';
-			ico.getElementsByTagName('span')[0].nodeValue = 'mylist.unwatch';
-			// add seen icon
-			if (stateCell) createIcon(stateCell, 'seen ', null, null, 'seen on: '+cTimeDate(mylistEntry.seenDate), 'i_seen');
-			// if episode is unwatched, mark it watched
-			if (!episode.seenDate) {
-				episode.seenDate = now; // updated episode entry
-				var erow = document.getElementById('e'+eid);
-				if (erow) { // we got the episode row, add the span
-					var cell = getElementsByClassName(erow.getElementsByTagName('td'), 'title', true)[0];
-					if (cell) {
-						var icons = createEpisodeIcons(episode);
-						var span = getElementsByClassName(cell.getElementsByTagName('span'),'icons', true)[0];
-						if (!span) { // no span, add one to the dom and add the icon
-							span = document.createElement('span');
-							span.className = 'icons';
-							cell.insertBefore(span,cell.firstChild);
-						} else {
-							while (span.childNodes.length) span.removeChild(span.firstChild);
-						}
-						if (icons['seen']) span.appendChild(icons['seen']);
-						if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
-						if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
-						// update anime row
-						if (cellSeen) {
-							if (episode.typeChar == '') { // episode is one of the normal episodes
-								var text = cellSeen.firstChild.nodeValue;
-								var valueSeen =  Number(text.split('/')[0]);
-								cellSeen.firstChild.nodeValue = text.replace(valueSeen+'/',(valueSeen+1)+'/');
-								if ((valueSeen+1) == animes[episode.animeId].eps && (arow.className.indexOf('complete') >= 0))
-									arow.className = arow.className.replace('complete','all_watched');
-							} else if (episode.typeChar == 'S') { // episode is special
-								var text = cellSeen.firstChild.nodeValue;
-								var value = Number(text.split('+')[1]);
-								if (!value) cellSeen.firstChild.nodeValue += '+1';
-								else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value+1));
-							}
-						}
-					}
-				}
-			}
-		} else {
-			url = 'animedb.pl?show=mylist&do=seen&seen=0&lid='+mylistEntry.id;
-			ico.title = 'mark watched';
-			ico.className = 'i_icon i_seen_yes';
-			ico.getElementsByTagName('span')[0].nodeValue = 'mylist.watch';
-			// remove seen icon
-			if (stateCell) {
-				var ico = getElementsByClassName(stateCell.getElementsByTagName('span'),'i_seen',true)[0];
-				if (ico) stateCell.removeChild(ico);
-			}
-			// this one is a bit more trick, if this is the only file or all other files are unwatched, remove the ep watched icon
+		// update file row watched state
+		changeFileRowWatchedState(eid,fid,isWatched);
+		// update episode row watched state
+		// this one is a bit more trick, if this is the only file or all other files are unwatched, remove the ep watched icon
+		if (!mylistEntry.seen) {
 			var epWatchedCount = 0;
 			for (var fe in episode.files) { // find how many watched files we have (the current file has already been marked unwatched)
 				if (mylist[episode.files[fe]].seenDate) epWatchedCount++;
 			}
-			if (episode.files.length == 1 || !epWatchedCount) { // there are now more watched files
-				episode.seenDate = 0; // updated episode entry
-				var erow = document.getElementById('e'+eid);
-				if (erow) { // we got the episode row, add the span
-					var cell = getElementsByClassName(erow.getElementsByTagName('td'), 'title', true)[0];
-					if (cell) {
-						var spans = cell.getElementsByTagName('span');
-						for (var sp = 0; sp < spans.length; sp++) {
-							var span = spans[sp];
-							var ico = getElementsByClassName(span.getElementsByTagName('span'),'i_seen',true)[0];
-							if (ico) { // we found our target, delete icon and span if unused.
-								span.removeChild(ico);
-								if (!span.childNodes.length) span.parentNode.removeChild(span);
-								// update anime row
-								if (cellSeen) {
-									if (episode.typeChar == '') { // episode is one of the normal episodes
-										var text = cellSeen.firstChild.nodeValue;
-										var valueSeen =  Number(text.split('/')[0]);
-										var newVal = (valueSeen-1);
-										if (newVal >= 0) cellSeen.firstChild.nodeValue = text.replace(valueSeen+'/',newVal+'/');
-										if (arow.className.indexOf('all_watched') >= 0) arow.className = arow.className.replace('all_watched','complete');
-									} else if (episode.typeChar == 'S') { // episode is special
-										var text = cellSeen.firstChild.nodeValue;
-										var value = Number(text.split('+')[1]);
-										if (!value) cellSeen.firstChild.nodeValue += '+1';
-										else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value+1));
-									}
-								}
-								break;
-							}
-						}
-					}
-				}
+			if (episode.files.length == 1 || !epWatchedCount) { // there are no more watched files
+				changeEpisodeRowWatchedState(eid,isWatched);
 			}
-		}
+		} else
+			changeEpisodeRowWatchedState(eid,isWatched);
+		// Update anime watched count
+		changeAnimeRowWatchedState(episode.animeId,isWatched,episode.typeChar);
 	}
+	//alert('posting:\n'+url);
 	postData(url);
 	return true;
 }

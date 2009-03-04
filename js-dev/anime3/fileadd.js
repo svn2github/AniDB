@@ -47,9 +47,9 @@ function fetchData() {
 }
 
 function CGroup(node) {
-	this.id = Number(node.getAttribute('gid'));
+	this.id = Number(node.getAttribute('id'));
 	this.name = node.getAttribute('name');
-	this.sname = node.getAttribute('sname');
+	this.sname = node.getAttribute('shortname');
 }
 
 function parseData(xmldoc) {
