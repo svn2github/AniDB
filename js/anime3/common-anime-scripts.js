@@ -211,9 +211,9 @@ function createEpisodeIcons(episode) {
 	}
 	if (episode.seenDate) {
 		icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(episode.seenDate), 'i_seen');
-		if (mylistEpEntries.length) icons['mylist'] = createIcon(null, 'MU', 'removeme', changeEpWatchedState, 'Mark as unwatched', 'i_seen_no');
+		if (mylistEpEntries.length && mylistEpEntries.length == 1) icons['mylist'] = createIcon(null, 'MU', 'removeme', changeEpWatchedState, 'Mark as unwatched', 'i_seen_no');
 	} else {
-		if (mylistEpEntries.length) icons['mylist'] = createIcon(null, 'MW', 'removeme', changeEpWatchedState, 'Mark as watched', 'i_seen_yes');
+		if (mylistEpEntries.length && mylistEpEntries.length == 1) icons['mylist'] = createIcon(null, 'MW', 'removeme', changeEpWatchedState, 'Mark as watched', 'i_seen_yes');
 	}
 	if (episode.isRecap) icons['recap'] = createIcon(null, '[recap] ', null, null, 'This episode is a recap (summary).', 'i_recap');
 	if (episode.other) icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+episode.other, 'i_comment');
