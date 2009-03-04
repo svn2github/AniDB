@@ -543,7 +543,7 @@ function changeEpWatchedState() {
 	// Update anime watched count
 	changeAnimeRowWatchedState(episode.animeId,isWatched,episode.typeChar);
 	
-	var url = "animedb.pl?show=mylist&do=seen&watchedallihave="+(isWatched ? 0 : 1)+"&lid="+lid; 
+	var url = 'animedb.pl?show=mylist&do=seen&seen='+(isWatched ? 1 : 0)+'&lid='+lid;
 	postData(url);
 	//alert("posting:\n"+url);
 	return true;
