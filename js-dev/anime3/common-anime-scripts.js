@@ -285,7 +285,7 @@ function createEpisodeRow(aid,eid,cols,skips) {
 						}
 					} else eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, null, null);
 				}
-				if (episode.seenDate != 0 || icons['recap'] || icons['comment']) {
+				if (true) {
 					var watchedState = document.createElement('span');
 					watchedState.className = 'icons';
 					if (icons['state'].length) for (var s=0; s < icons['state'].length; s++) watchedState.appendChild(icons['state'][s]);
