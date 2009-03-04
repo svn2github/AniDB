@@ -146,6 +146,9 @@ function buildSkipCols(cols) {
 	return skips;
 }
 
+/* Dummy function, this should be overwritten by specific functions */
+function changeEpWatchedState() {}
+
 /* This function creates and returns an Object with all the possible icons for a given episode
  * @param group Group to build icon object
  * @return an Object with the icons
@@ -195,8 +198,6 @@ function createEpisodeIcons(episode) {
 			var txt = state + ' file' + (state > 1 ? 's' : '') + ' with state: '+st;
 			icons['fstate'].push(createLink(null, txt, 'http://wiki.anidb.net/w/Filetype', 'anidb::wiki', null, txt, stClass));
 		}
-		if (episode.seenDate)
-			icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(episode.seenDate), 'i_seen');
 	} else if (mylist.length) { // for the case where the episode is related to some file
 		for (var fe = 0; fe < episode.files.length; fe++) {
 			var fid = episode.files[fe];
@@ -207,6 +208,12 @@ function createEpisodeIcons(episode) {
 				break;
 			}
 		}	
+	}
+	if (episode.seenDate) {
+		icons['seen'] = createIcon(null, 'seen ', null, null, 'seen on: '+cTimeDateHour(episode.seenDate), 'i_seen');
+		if (mylistEpEntries.length) icons['mylist'] = createIcon(null, 'MU', 'removeme', changeEpWatchedState, 'Mark as unwatched', 'i_seen_no');
+	} else {
+		if (mylistEpEntries.length) icons['mylist'] = createIcon(null, 'MW', 'removeme', changeEpWatchedState, 'Mark as watched', 'i_seen_yes');
 	}
 	if (episode.isRecap) icons['recap'] = createIcon(null, '[recap] ', null, null, 'This episode is a recap (summary).', 'i_recap');
 	if (episode.other) icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+episode.other, 'i_comment');
@@ -278,7 +285,7 @@ function createEpisodeRow(aid,eid,cols,skips) {
 						}
 					} else eptitle = createTextLink(null, episode.getTitle(), eptitleURL, null, null, null, null);
 				}
-				if (episode.seenDate != 0 || icons['recap'] || icons['comment']) {
+				if (true) {
 					var watchedState = document.createElement('span');
 					watchedState.className = 'icons';
 					if (icons['state'].length) for (var s=0; s < icons['state'].length; s++) watchedState.appendChild(icons['state'][s]);
@@ -303,7 +310,7 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				createCell(row, col['classname'], document.createTextNode(episode.files.length), null, colSpan);
 				break;
 			case 'actions':
-				createCell(row, col['classname'], document.createTextNode(' '), null, colSpan);
+				createCell(row, col['classname'], (icons['mylist'] ? icons['mylist'] : document.createTextNode(' ')), null, colSpan);
 				break;
 			default:
 				errorAlert('createEpisodeRow','unknown column with name: '+col['name']);

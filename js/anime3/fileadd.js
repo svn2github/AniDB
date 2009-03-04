@@ -676,6 +676,7 @@ function updateSearchString() {
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
+	if (uriObj['ajax'] && uriObj['ajax'] == 0) return;
 	if (uriObj['eid'] && uriObj['show'] && uriObj['show'].indexOf('addfile') >= 0) eid = uriObj['eid'];
 	else return; // badPage
 	if (uriObj['edit'] && uriObj['edit'] != 0) { isEditPage = true; simpleView = false; }
