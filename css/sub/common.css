@@ -16,13 +16,3 @@
 @import "../common/style/content/page-anime.css";
 
 @import "../icons/all.css";
-
-#layout-tabs ul li
-{
-	margin:0;
-}
-
-#layout-tabs ul li:first-child
-{
-	margin-left: 6px;
-}
