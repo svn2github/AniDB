@@ -549,12 +549,14 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 
 // GROUP BAR FUNCTIONS //
 function makeBar(parentNode,start,end,total,map) {
+	var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
 	var mult = 1;
-	if ( total > 0 && 200 / total >= 1) mult = Math.floor(200 / total);
-	var width = 1 + end - start;
+	if ( total > 0 && MAX_BAR_WIDTH / total >= 1) mult = Math.floor(MAX_BAR_WIDTH / total);
+	var max_width = (total > MAX_BAR_WIDTH ? MAX_BAR_WIDTH : total);
 	var img = document.createElement('img');
 	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
-	img.width = ( width * mult );
+	//img.width = ( width * mult );
+	img.width = Math.round(max_width * ((1+end - start) / total))*mult;
 	img.height = 10;
 	img.title = img.alt = '';
 	if (parentNode != null || parentNode != '') parentNode.appendChild(img);
@@ -563,7 +565,6 @@ function makeBar(parentNode,start,end,total,map) {
 
 function makeCompletionBar(parentNode, range, maps) {
 	var len = range.length;
-	if ( len > 300 ) len = 300;
 	var span = document.createElement('span');
 	span.className = 'completion';
 	if (maps[1]['use'] || maps[2]['use']) {
@@ -578,12 +579,12 @@ function makeCompletionBar(parentNode, range, maps) {
 		}
 	}
 
-	for (var i=0; i < len; ) {
+	for (var i=0; i < range.length; ) {
 		var v = range[i];
 		var k = i+1;
-		while ( k < len && range[k] == v ) k++;
+		while ( k < range.length && range[k] == v ) k++;
 		if (!v) v=0;
-		makeBar(span, i+1, k, len, maps[v] );
+		makeBar(span, i+1, k, range.length, maps[v]);
 		i = k;
 	}
 	if (parentNode != null && parentNode != '') parentNode.appendChild(span);

@@ -549,16 +549,14 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 
 // GROUP BAR FUNCTIONS //
 function makeBar(parentNode,start,end,total,map) {
-/*
+	var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
 	var mult = 1;
-	if ( total > 0 && 250 / total >= 1) mult = Math.floor(250 / total);
-	var width = (1 + end - start) % 250;
-*/	
-	var max_width = (total > 300 ? 300 : total);
+	if ( total > 0 && MAX_BAR_WIDTH / total >= 1) mult = Math.floor(MAX_BAR_WIDTH / total);
+	var max_width = (total > MAX_BAR_WIDTH ? MAX_BAR_WIDTH : total);
 	var img = document.createElement('img');
 	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
 	//img.width = ( width * mult );
-	img.width = Math.round(max_width * ((1+end - start) / total));
+	img.width = Math.round(max_width * ((1+end - start) / total))*mult;
 	img.height = 10;
 	img.title = img.alt = '';
 	if (parentNode != null || parentNode != '') parentNode.appendChild(img);
