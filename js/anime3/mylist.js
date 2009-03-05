@@ -724,12 +724,13 @@ function createFilesTable(eid) {
 		if (!mylist[fid]) continue;
 		var file = files[fid];
 		filterObj.markDeprecated(file);
-		//if (Number(fid) == 162496) alert(file.isDeprecated);
 		var row = createFileRow(eid,fid,fileCols,fileSkips);
-		//row.className = ((i % 2) ? '' : 'g_odd ') + 'files';
+		var classNames = row.className.split(' ');
+		classNames.push((i % 2) ? '' : 'g_odd');
+		classNames.push('files');
+		row.className = classNames.join(' ');
 		tbody.appendChild(row);
 	}
-	repaintStripes(tbody);
 	// Piece it all together
 	table.appendChild(tbody);
 	init_sorting(table,'epno','down');
@@ -832,7 +833,7 @@ function createEpisodeTable(aid) {
 			var eid = anime.episodes[i];
 			var row = createEpisodeRow(aid,eid,epCols,epSkips);
 			var classNames = row.className.split(' ');
-			//classNames.push((i % 2) ? '' : 'g_odd');
+			classNames.push((i % 2) ? '' : 'g_odd');
 			classNames.push('files');
 			row.className = classNames.join(' ');
 			tbody.appendChild(row);
@@ -850,6 +851,7 @@ function createEpisodeTable(aid) {
 		var tbody = document.createElement('tbody');
 		var anime = animes[aid];
 		// Add files		
+		var odd = 1;
 		for (var e = 0; e < anime.episodes.length; e++) {
 			var eid = anime.episodes[e];
 			var episode = episodes[eid];
@@ -859,11 +861,14 @@ function createEpisodeTable(aid) {
 				var file = files[fid];
 				filterObj.markDeprecated(file);
 				var row = createFileRow(eid,fid,fileCols,fileSkips);
+				var classNames = row.className.split(' ');
+				classNames.push((odd % 2) ? '' : 'g_odd');
+				row.className = classNames.join(' ');
 				tbody.appendChild(row);
+				odd++;
 			}
 		}
 	}
-	repaintStripes(tbody);
 	table.appendChild(tbody);
 	init_sorting(table,'epno','down');
 	if (uid == ruid) {
