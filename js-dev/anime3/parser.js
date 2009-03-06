@@ -405,6 +405,19 @@ function CFileEntry(node) {
 	        default:  showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'audioStreams', dNode.nodeName,stNode.nodeName);
 	      }
 	    }
+		// @TODO remove this miserable hack
+		if (this.audCnt > this.audioTracks.length && this.audioTracks.length == 3) {
+			// grab the last stream and copy it :P
+			for (var k = 3; k < this.audCnt; k++) {
+				var stream = new Object();
+				stream.chan = 'unknown';
+				stream.codec = 'unknown';
+				stream.codec_sname = 'unknown';
+				stream.type = 'unknown';
+				stream.lang = this.audioTracks[2]['lang'];
+				this.audioTracks.push(stream);
+			}
+		}
 	    break;
 	  case 'sub':
 	    this.subCnt = Number(sNode1.getAttribute('cnt')) || 0;
@@ -431,6 +444,17 @@ function CFileEntry(node) {
 	        default: showAlert('fileEntry for fid: '+this.id+' (type: '+this.type+')', 'subtitleStreams', sNode1.nodeName,dNode.nodeName);
 	      }
 	    }
+		// @TODO remove this miserable hack
+		if (this.subCnt > this.subtitleTracks.length && this.subtitleTracks.length == 3) {
+			// grab the last stream and copy it :P
+			for (var k = 3; k < this.subCnt; k++) {
+				var stream = new Object();
+				stream.type = 'unknown';
+				stream.flags = 0;
+				stream.lang = this.subtitleTracks[2]['lang'];
+				this.subtitleTracks.push(stream);
+			}
+		}
 	    break;
 	  case 'qual': this.quality = nodeData(sNode1); break;
 	  case 'source': this.source = nodeData(sNode1); break;
