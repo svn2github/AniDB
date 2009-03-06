@@ -415,7 +415,10 @@ function createGroupRow(gid,cols,skips) {
 				}
 				if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange, totalEps, maps[1], range);}
 				if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
-				createCell(row, col['classname'], makeCompletionBar(null,range,maps),String(group.epCnt),colSpan);
+				var cell = createCell(null, col['classname'], makeCompletionBar(null,range,maps),String(group.epCnt),colSpan);
+				// @TODO remove this to CSS
+				cell.style.minWidth = (screen.width < 1280 ? '205px' : '305px');
+				row.appendChild(cell);
 				break;
 			case 'lastep':
 				createCell(row, col['classname'], document.createTextNode(group.lastEp), mapEpisodeNumber(group.lastEp), colSpan);

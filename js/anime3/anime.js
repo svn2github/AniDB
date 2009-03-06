@@ -730,6 +730,8 @@ function updateGroupTable() {
 						if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
 						cell.replaceChild(makeCompletionBar(null, range, maps), epbar);
 					}
+					// @TODO remove this to CSS
+					cell.style.minWidth = (screen.width < 1280 ? '205px' : '305px');
 				}
 				if (className.indexOf('lastep') >= 0)
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
