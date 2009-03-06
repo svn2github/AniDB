@@ -731,7 +731,10 @@ function updateGroupTable() {
 						cell.replaceChild(makeCompletionBar(null, range, maps), epbar);
 					}
 					// @TODO remove this to CSS
-					cell.style.minWidth = (screen.width < 1280 ? '205px' : '305px');
+					var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
+					var widthval = (screen.width < 1280 ? (totalEps < 200 ? totalEps : 200) : (totalEps < 300 ? totalEps : 300));
+					var mult = ( totalEps > 0 && MAX_BAR_WIDTH / totalEps >= 1 ? mult = Math.floor(MAX_BAR_WIDTH / totalEps) : 1);
+					cell.style.minWidth = (widthval*mult+5) + 'px'
 				}
 				if (className.indexOf('lastep') >= 0)
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
