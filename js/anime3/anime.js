@@ -200,7 +200,7 @@ function prepPage() {
 function fetchData(aid) {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=anime&aid='+aid, parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
 }
 
 /* Function that posts data
