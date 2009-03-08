@@ -485,7 +485,7 @@ var Magic = {
 					var li = elems[i].getElementsByTagName('li');
 					for (var j = 0; j < li.length; j++){
 						var tab = li[j];
-						if(tab.id == selected) {
+						if(tab.className.indexOf('_default') >= 0 || tab.id == selected) {
 							Magic.toggle_tabs(0, tab);
 							selected = 0;
 						}
