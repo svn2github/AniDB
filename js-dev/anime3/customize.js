@@ -829,8 +829,8 @@ function createPreferencesTable(type) {
 			defPrefTab = 0;
 			for (var i = 0; i < lis.length; i++) if (lis[i].className.indexOf('selected') >= 0) defPrefTab = i;
 			var li = document.createElement('li');
-			li.className = 'customize' + (lis[lis.length-1].className.indexOf('g_odd') < 0 ? ' g_odd' : '');
-			createTextLink(li, 'customize', 'removeme', null, toggleCustomizeBody, null, null);
+			li.className = 'customise' + (lis[lis.length-1].className.indexOf('g_odd') < 0 ? ' g_odd' : '');
+			createTextLink(li, 'customise', 'removeme', null, toggleCustomizeBody, null, null);
 			ul.appendChild(document.createTextNode(' '));
 			ul.appendChild(li);
 			if (lis[defPrefTab]) {
