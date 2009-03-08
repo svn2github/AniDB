@@ -340,6 +340,7 @@ function createPreferencesTable(type) {
 		li.appendChild(document.createTextNode(items[type][t]['head']));
 		li.onclick = Magic.toggle_tabs;
 		ul_tabs.appendChild(li);
+		if (t < items[type].length) ul_tabs.appendChild(document.createTextNode(' '));
 	}
 	
 	panes.appendChild(ul_tabs);
@@ -829,7 +830,8 @@ function createPreferencesTable(type) {
 			for (var i = 0; i < lis.length; i++) if (lis[i].className.indexOf('selected') >= 0) defPrefTab = i;
 			var li = document.createElement('li');
 			li.className = 'customize' + (lis[lis.length-1].className.indexOf('g_odd') < 0 ? ' g_odd' : '');
-			createTextLink(li, 'customize', 'removeme', null, toggleCustomizeBody, null, null)
+			createTextLink(li, 'customize', 'removeme', null, toggleCustomizeBody, null, null);
+			ul.appendChild(document.createTextNode(' '));
 			ul.appendChild(li);
 			if (lis[defPrefTab]) {
 				var a = lis[defPrefTab].getElementsByTagName('a')[0];
