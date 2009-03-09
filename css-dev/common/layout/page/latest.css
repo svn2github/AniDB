@@ -1,6 +1,6 @@
-#layout-main h1
+#layout-main h1.latest2
 {
-	margin-bottom: 2.2em;
+	margin-bottom:0.5em;
 }
 
 #layout-main div.latest2_all div.content
@@ -10,14 +10,13 @@
 
 #layout-main div.latest2_all div.content + div.content
 {
-	margin-top: 3em;
+	margin-top: 0.3em;
 }
 
 #layout-main div.latest2_all div.content h4
 {
 	font-size: 1.2em;
 	text-align: left;
-	margin-top: -2.4em;
 }
 
 #layout-main div.latest2_all div.content table
