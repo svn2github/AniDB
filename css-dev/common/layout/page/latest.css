@@ -1,3 +1,8 @@
+#layout-main h1
+{
+	margin-bottom: 2.2em;
+}
+
 #layout-main div.latest2_all div.content
 {
 	margin-right: 17.2em;
@@ -10,8 +15,9 @@
 
 #layout-main div.latest2_all div.content h4
 {
-	font-size: 0.5em;
+	font-size: 1.2em;
 	text-align: left;
+	margin-top: -2.4em;
 }
 
 #layout-main div.latest2_all div.content table
@@ -31,7 +37,7 @@
 
 #layout-main div.latest2_all div.content td.info
 {
-	width: 20em;
+	width: 22em;
 }
 
 #layout-main div.latest2_all div.content td.info a.fid
