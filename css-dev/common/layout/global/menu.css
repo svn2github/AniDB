@@ -76,3 +76,26 @@
 {
 	display:none;
 }
+
+#layout-main div.g_menu.filter_menu div.settings select
+{
+	width:100%;
+}
+
+#layout-main div.g_menu.filter_menu div.settings div.inner
+{
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+#layout-main div.g_menu.filter_menu div.settings input[type="text"]
+{
+	width: 10.5em;
+}
+
+#layout-main div.g_menu.filter_menu div.settings span
+{
+	display: block;
+	margin-top: 0.3em;
+	text-align:center;
+}
