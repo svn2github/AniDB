@@ -10,3 +10,8 @@
 {
 	white-space: nowrap;
 }
+
+#layout-main div.mylist_all div.filter_menu div.settings
+{
+	margin-top: 0.5em;
+}

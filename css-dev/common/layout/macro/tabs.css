@@ -13,8 +13,13 @@
 #layout-tabs ul li
 {
 	display: inline;
-	margin: 0 0 0 6px;
+	margin:0 0 0 3px;
 	padding: 0;
+}
+
+#layout-tabs ul li:first-child
+{
+	margin:0 0 0 6px;
 }
 
 #layout-tabs ul li a

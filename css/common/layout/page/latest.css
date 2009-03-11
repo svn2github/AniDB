@@ -10,12 +10,12 @@
 
 #layout-main div.latest2_all div.content + div.content
 {
-	margin-top: 0.3em;
+	margin-top: 1em;
 }
 
 #layout-main div.latest2_all div.content h4
 {
-	font-size: 1.2em;
+	font-size: 1.4em;
 	text-align: left;
 }
 
@@ -31,7 +31,7 @@
 
 #layout-main div.latest2_all div.content th.group
 {
-	width: 30%;
+	width: 15%;
 }
 
 #layout-main div.latest2_all div.content td.info
@@ -53,5 +53,11 @@
 
 #layout-main div.latest2_all div.content td.action
 {
-	width: 7em;
+	min-width: 7em;
+}
+
+#layout-main div.latest2_all div.content td.mylist,
+#layout-main div.latest2_all div.content td.seen
+{
+	width: 5em;
 }
