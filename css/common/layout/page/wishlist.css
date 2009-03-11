@@ -7,3 +7,8 @@
 {
 	width: 98%;
 }
+
+#layout-main div.mywishlist_all div.filter_menu div.settings
+{
+	margin-top: 0.5em;
+}
