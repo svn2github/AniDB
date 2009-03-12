@@ -234,7 +234,7 @@ function addCheckboxesEvent(parent) {
 				// last check, if this fails ignore this checkbox
 				if (node && node.nodeName && node.nodeName.toLowerCase() == 'tr') {
 					this._parentTR = node;
-					if (node.className.indexOf(' checked') >= 0)
+					if (node.className.indexOf('checked') >= 0)
 						node.className =  node.className.replace(/ checked|checked|checked /ig,'');
 					if (this.checked) node.className = 'checked '+node.className;
 				} else
@@ -244,7 +244,7 @@ function addCheckboxesEvent(parent) {
 				return;
 			} else {
 				var node = this._parentTR;
-				if (node && node.className && node.className.indexOf(' checked') >= 0)
+				if (node && node.className && node.className.indexOf('checked') >= 0)
 					node.className = node.className.replace(/ checked|checked|checked /ig,'');
 				if (this.checked) node.className = 'checked '+node.className;
 			}
