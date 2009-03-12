@@ -235,8 +235,8 @@ function addCheckboxesEvent(parent) {
 				if (node && node.nodeName && node.nodeName.toLowerCase() == 'tr') {
 					this._parentTR = node;
 					if (node.className.indexOf(' checked') >= 0)
-						node.className =  node.className.replace(' checked','');
-					if (this.checked) node.className += ' checked';
+						node.className =  node.className.replace(/ checked|checked|checked /ig,'');
+					if (this.checked) node.className = 'checked '+node.className;
 				} else
 					this._parentTR = 'undefined'; // stop further searches
 			} else if (this._parentTR == 'undefined') {
@@ -245,8 +245,8 @@ function addCheckboxesEvent(parent) {
 			} else {
 				var node = this._parentTR;
 				if (node && node.className && node.className.indexOf(' checked') >= 0)
-					node.className = node.className.replace(' checked','');
-				if (this.checked) node.className += ' checked';
+					node.className = node.className.replace(/ checked|checked|checked /ig,'');
+				if (this.checked) node.className = 'checked '+node.className;
 			}
 		});
 	}
