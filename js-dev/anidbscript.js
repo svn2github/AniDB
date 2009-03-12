@@ -285,7 +285,7 @@ function enhanceCheckboxes(parent) {
 					}
 				}
 				for (currentIndex += 1; currentIndex < checkbox.form.elements.length && checkbox.form.elements[currentIndex] != end; currentIndex++) {
-					if (checkbox.form.elements[currentIndex].type == "checkbox") {
+					if (checkbox.form.elements[currentIndex].type == "checkbox" && !checkbox.form.elements[currentIndex].disabled) {
 						checkbox.form.elements[currentIndex].checked = checkbox.checked;
 					}
 				}
