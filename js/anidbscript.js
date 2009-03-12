@@ -214,6 +214,34 @@ function ClassToggle(elem, name, mode) {
 	}	
 }
 
+function ckChangeEvnt() {
+	if (this._parentTR == null) {
+		var MAX_PARENT_DEPTH = 3;
+		var node = this.parentNode;
+		var depth = 0;
+		while (node && node.nodeName && node.nodeName.toLowerCase() != 'tr' && depth < MAX_PARENT_DEPTH) {
+			node = node.parentNode;
+			depth++;
+		}
+		// last check, if this fails ignore this checkbox
+		if (node && node.nodeName && node.nodeName.toLowerCase() == 'tr') {
+			this._parentTR = node;
+			if (node.className.indexOf('checked') >= 0)
+				node.className =  node.className.replace(/ checked|checked|checked /ig,'');
+			if (this.checked) node.className = 'checked '+node.className;
+		} else
+			this._parentTR = 'undefined'; // stop further searches
+	} else if (this._parentTR == 'undefined') {
+		//alert('undefined, boring i know..');
+		return;
+	} else {
+		var node = this._parentTR;
+		if (node && node.className && node.className.indexOf('checked') >= 0)
+			node.className = node.className.replace(/ checked|checked|checked /ig,'');
+		if (this.checked) node.className = 'checked '+node.className;
+	}
+}
+
 /* This function makes a checkbox change the parent row classname based on it's checked state
  * @param parent The node where checkboxes will be given this event */
 function addCheckboxesEvent(parent) {
@@ -221,34 +249,8 @@ function addCheckboxesEvent(parent) {
 	for (var i = 0; i < checkboxes.length; i++) {
 		if (checkboxes[i].type != 'checkbox') continue;
 		// apply to the onclick event of the checkboxes a new function
-		addEventSimple(checkboxes[i],"click",function(event) {
-		//checkboxes[i].onclick = function(event) {
-			if (this._parentTR == null) {
-				var MAX_PARENT_DEPTH = 3;
-				var node = this.parentNode;
-				var depth = 0;
-				while (node && node.nodeName && node.nodeName.toLowerCase() != 'tr' && depth < MAX_PARENT_DEPTH) {
-					node = node.parentNode;
-					depth++;
-				}
-				// last check, if this fails ignore this checkbox
-				if (node && node.nodeName && node.nodeName.toLowerCase() == 'tr') {
-					this._parentTR = node;
-					if (node.className.indexOf('checked') >= 0)
-						node.className =  node.className.replace(/ checked|checked|checked /ig,'');
-					if (this.checked) node.className = 'checked '+node.className;
-				} else
-					this._parentTR = 'undefined'; // stop further searches
-			} else if (this._parentTR == 'undefined') {
-				//alert('undefined, boring i know..');
-				return;
-			} else {
-				var node = this._parentTR;
-				if (node && node.className && node.className.indexOf('checked') >= 0)
-					node.className = node.className.replace(/ checked|checked|checked /ig,'');
-				if (this.checked) node.className = 'checked '+node.className;
-			}
-		});
+		addEventSimple(checkboxes[i],"click",ckChangeEvnt);
+		addEventSimple(checkboxes[i],"change",ckChangeEvnt);
 	}
 }
 
