@@ -214,10 +214,11 @@ function ClassToggle(elem, name, mode) {
 	}	
 }
 
-function ckChangeEvnt() {
-	if (this._parentTR == null) {
+function ckChangeEvnt(event,object) {
+	var ck = object || this;
+	if (ck._parentTR == null) {
 		var MAX_PARENT_DEPTH = 3;
-		var node = this.parentNode;
+		var node = ck.parentNode;
 		var depth = 0;
 		while (node && node.nodeName && node.nodeName.toLowerCase() != 'tr' && depth < MAX_PARENT_DEPTH) {
 			node = node.parentNode;
@@ -225,20 +226,20 @@ function ckChangeEvnt() {
 		}
 		// last check, if this fails ignore this checkbox
 		if (node && node.nodeName && node.nodeName.toLowerCase() == 'tr') {
-			this._parentTR = node;
+			ck._parentTR = node;
 			if (node.className.indexOf('checked') >= 0)
 				node.className =  node.className.replace(/ checked|checked|checked /ig,'');
-			if (this.checked) node.className = 'checked '+node.className;
+			if (ck.checked) node.className = 'checked '+node.className;
 		} else
 			this._parentTR = 'undefined'; // stop further searches
-	} else if (this._parentTR == 'undefined') {
+	} else if (ck._parentTR == 'undefined') {
 		//alert('undefined, boring i know..');
 		return;
 	} else {
-		var node = this._parentTR;
+		var node = ck._parentTR;
 		if (node && node.className && node.className.indexOf('checked') >= 0)
 			node.className = node.className.replace(/ checked|checked|checked /ig,'');
-		if (this.checked) node.className = 'checked '+node.className;
+		if (ck.checked) node.className = 'checked '+node.className;
 	}
 }
 
@@ -289,7 +290,7 @@ function enhanceCheckboxes(parent) {
 				for (currentIndex += 1; currentIndex < checkbox.form.elements.length && checkbox.form.elements[currentIndex] != end; currentIndex++) {
 					if (checkbox.form.elements[currentIndex].type == "checkbox" && !checkbox.form.elements[currentIndex].disabled) {
 						checkbox.form.elements[currentIndex].checked = checkbox.checked;
-						checkbox.form.elements[currentIndex].onclick();
+						ckChangeEvnt(null,checkbox.form.elements[currentIndex]);
 					}
 				}
 
