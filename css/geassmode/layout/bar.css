@@ -59,7 +59,8 @@
 			}
 			#layout-menu li.sub-menu #menu-account li span a#newnotifies:before { content:"Notifies: "; }
 			#layout-menu li.sub-menu #menu-account li span a.history:before { content:"("; }
-			#layout-menu li.sub-menu #menu-account li span a.nextnotify:after { content:")"; }
+			#layout-menu li.sub-menu #menu-account li span a.history:after { content:"istory"; }
+			#layout-menu li.sub-menu #menu-account li span a.nextnotify:after { content:"ext)"; }
 		#layout-menu li.sub-menu #menu-account li#user-profile a {
 			background-image:url(images/bar/tick.png);
 			background-repeat:no-repeat;
