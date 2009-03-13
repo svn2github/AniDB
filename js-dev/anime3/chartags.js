@@ -61,16 +61,34 @@ function parseData(xmldoc) {
 	// Add the general tag group
 	groups[0] = {'gid':0,'name':'ungroupped','pid':0,'tags':new Array(),'childGroups':new Array()};
 	level0groups.push(0);
+	var pidlist = new Array();
+	pidlist.push(0);
 	for (var d = 0; d < groupNodes.length; d++) {
 		var taggroup = new CCTagGroup(groupNodes[d]);
 		groups[taggroup.gid] = taggroup;
 		if (!taggroup.pid) level0groups.push(taggroup.gid);
+		else {
+			if (pidlist.indexOf(taggroup.pid < 0))
+				pidlist.push(taggroup.pid);
+		}
 	}
 	// now go over the tag groups again and set relations
 	for (var g in groups) {
 		var group = groups[g];
 		if (!group) continue;
 		if (group.pid) groups[group.pid].childGroups.push(group.gid);
+	}
+	// sort child groups
+	for (var i = 0; i < pidlist.length; i++) {
+		var group = groups[pidlist[i]];
+		if (!group.childGroups.length) continue;
+		group.childGroups.sort(function(a,b) {
+			a = groups[a];
+			b = groups[b];
+			if (a['name'] < b['name']) return -1;
+			if (a['name'] > b['name']) return 1;
+			return 0;
+		});
 	}
 	// go over tags
 	for (var d = 0; d < tagNodes.length; d++) {
