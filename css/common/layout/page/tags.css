@@ -83,14 +83,9 @@
 	margin-top:.5em;
 }
 
-#layout-main div.chartags_all div.addbox div.tag-group div.inner
-{
-	width:78em;
-}
-
 #layout-main div.chartags_all div.addbox div.tag-column
 {
-	float:left;
+	display:inline-block;
 	min-height:17.5em;
 	width:17.5em;
 	margin:0 1em 1em 0;
@@ -100,7 +95,7 @@
 
 #layout-main div.chartags_all div.addbox div.tag-column span
 {
-	display:block;
+	display:table;
 }
 
 #layout-main div.chartags_all div.addbox div.taggrouplist span,
