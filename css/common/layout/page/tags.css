@@ -95,7 +95,7 @@
 
 #layout-main div.chartags_all div.addbox div.tag-column span
 {
-	display:table;
+	display:table-row;
 }
 
 #layout-main div.chartags_all div.addbox div.taggrouplist span,
