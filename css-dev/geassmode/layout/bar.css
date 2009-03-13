@@ -45,6 +45,24 @@
 			background-repeat:no-repeat;
 			background-position:4px center;
 		}
+		#layout-menu li.sub-menu #menu-account li#alert-notif a {
+			background-image:url(images/bar/bell.png);
+			background-repeat:no-repeat;
+			background-position:4px center;
+		}
+			#layout-menu li.sub-menu #menu-account li#alert-notif span {
+				color:#ABABAB;
+				display:block;
+				margin:2px 0 0 10px;
+				padding:3px 4px 3px 24px;
+			}
+				#layout-menu li.sub-menu #menu-account li#alert-notif span a {
+					margin:0 !important; padding:0 !important;
+					display:inline !important;
+				}
+				#layout-menu li.sub-menu #menu-account li span a#newnotifies:before { content:"Notifies: "; }
+				#layout-menu li.sub-menu #menu-account li span a.history:before { content:"("; }
+				#layout-menu li.sub-menu #menu-account li span a.nextnotify:after { content:")"; }
 		#layout-menu li.sub-menu #menu-account li#user-profile a {
 			background-image:url(images/bar/tick.png);
 			background-repeat:no-repeat;
