@@ -250,7 +250,7 @@ function addCheckboxesEvent(parent) {
 		if (checkboxes[i].type != 'checkbox') continue;
 		// apply to the onclick event of the checkboxes a new function
 		addEventSimple(checkboxes[i],"click",ckChangeEvnt);
-		addEventSimple(checkboxes[i],"change",ckChangeEvnt);
+		//addEventSimple(checkboxes[i],"change",ckChangeEvnt);
 	}
 }
 
@@ -289,6 +289,7 @@ function enhanceCheckboxes(parent) {
 				for (currentIndex += 1; currentIndex < checkbox.form.elements.length && checkbox.form.elements[currentIndex] != end; currentIndex++) {
 					if (checkbox.form.elements[currentIndex].type == "checkbox" && !checkbox.form.elements[currentIndex].disabled) {
 						checkbox.form.elements[currentIndex].checked = checkbox.checked;
+						checkbox.form.elements[currentIndex].onclick();
 					}
 				}
 
