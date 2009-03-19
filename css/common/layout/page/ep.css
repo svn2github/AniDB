@@ -1,0 +1,17 @@
+#layout-main div.ep_all table.stafflist td.credit,
+#layout-main div.ep_all table.stafflist td.name
+{
+	width:40%;
+}
+
+#layout-main div.ep_all table.stafflist td.comment,
+#layout-main div.ep_all table.stafflist td.eprange
+{
+	min-width:10em;
+}
+
+#layout-main div.ep_all table.stafflist + table.stafflist
+{
+	margin-top: 0.5em;
+}
+

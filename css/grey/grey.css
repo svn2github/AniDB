@@ -2680,7 +2680,7 @@ border:1px solid #D1D7DC;
 #layout-main div.addseq_all div.explanation div.description dl + dl,
 #layout-main div.addcharcharrel_all div.explanation div.description dl + dl,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description dl + dl,
-#layout-main div.addcreatoranimerel_all div.explanation div.description dl + dl
+#layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr td
 {
 border-top:1px solid #D1D7DC;
 }
