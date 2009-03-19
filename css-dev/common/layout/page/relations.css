@@ -20,7 +20,7 @@
 #layout-main div.addseq_all div.explanation div.description dl + dl,
 #layout-main div.addcharcharrel_all div.explanation div.description dl + dl,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description dl + dl,
-#layout-main div.addcreatoranimerel_all div.explanation div.description dl + dl
+#layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr
 {
 	margin-top:0.25em;
 	padding: 0.25em 0;
@@ -28,8 +28,7 @@
 
 #layout-main div.addseq_all div.explanation div.description dl,
 #layout-main div.addcharcharrel_all div.explanation div.description dl,
-#layout-main div.addcreatorcreatorrel_all div.explanation div.description dl,
-#layout-main div.addcreatoranimerel_all div.explanation div.description dl
+#layout-main div.addcreatorcreatorrel_all div.explanation div.description dl
 {
 	margin:0;
 	text-align:left;
@@ -38,16 +37,14 @@
 
 #layout-main div.addseq_all div.explanation div.description dt,
 #layout-main div.addcharcharrel_all div.explanation div.description dt,
-#layout-main div.addcreatorcreatorrel_all div.explanation div.description dt,
-#layout-main div.addcreatoranimerel_all div.explanation div.description dt
+#layout-main div.addcreatorcreatorrel_all div.explanation div.description dt
 {
 	width: 30em;
 }
 
 #layout-main div.addseq_all div.explanation div.description dd,
 #layout-main div.addcharcharrel_all div.explanation div.description dd,
-#layout-main div.addcreatorcreatorrel_all div.explanation div.description dd,
-#layout-main div.addcreatoranimerel_all div.explanation div.description dd
+#layout-main div.addcreatorcreatorrel_all div.explanation div.description dd
 {
 	margin-left: 31em;
 }
@@ -66,4 +63,21 @@
 #layout-main div.addcreatoranimerel_all div.explanation
 {
 	margin-top:1em;
+}
+
+#layout-main div.addcharanimerel_all div.editcarel table
+{
+    width:100%;
+}
+
+#layout-main div.addcreatoranimerel_all div.explanation div.description table
+{
+	width: 100%;
+	padding: 4px;
+}
+
+#layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr td
+{
+	margin-top:0.25em;
+	padding:0.25em 0 0.3em;
 }

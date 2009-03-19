@@ -29,9 +29,14 @@
 	width: 40%;
 }
 
-#layout-main div.latest2_all div.content th.group
+#layout-main div.latest2_all div.content table.filelist th.group
 {
 	width: 15%;
+}
+
+#layout-main div.latest2_all div.content table.completed th.group
+{
+	width: 30%;
 }
 
 #layout-main div.latest2_all div.content td.info
@@ -60,4 +65,10 @@
 #layout-main div.latest2_all div.content td.seen
 {
 	width: 5em;
+}
+
+
+#layout-main div.latest2_all div.content td.group
+{
+	white-space: nowrap;
 }

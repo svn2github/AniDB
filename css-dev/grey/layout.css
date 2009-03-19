@@ -299,11 +299,11 @@ width: auto;
 }
 #layout-content div.group_all div.group_released table td.undumped
 {
-visibility: hidden;
+font-size: 0px;
 }
 #layout-content div.group_all div.group_released table td.notalldumped
 {
-visibility: visible;
+font-size: inherit;
 color: red;
 font-weight: bold;
 }

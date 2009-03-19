@@ -56,7 +56,7 @@ button.button,
 a.confirmButton,
 input.confirmButton,
 button.confirmButton,
-tr.g_odd td,
+tr.g_odd,
 tr.g_odd th,
 li.g_odd,
 span.g_odd,
@@ -66,9 +66,20 @@ span.g_odd,
 #layout-content div.animeatt_reviews div.review div.text,
 ul#layout-menu li:hover ul ,
 div.quotebody div.quote div.g_odd,
-#layout-main div.chartags_all div.addbox div.tag-column h5
+#layout-main div.chartags_all div.addbox div.tag-column h5,
+#layout-main div.tabbed_pane div.pane table tr.g_odd td
 {
+background-image: none;
 background-color: hsla(0, 0%, 0%, 0.4);
+}
+#layout-content div.animelist_all tr.mylist td
+{
+background-color: hsla(34, 95%, 44%, 0.4);
+}
+#layout-content div.animelist_all tr.complete td,
+#layout-content div.mylist_list tr.complete td
+{
+background-color: hsla(207, 86%, 44%, 0.4);
 }
 #layout-content div.anime_all tr.good,
 #layout-content div.group_all tr.good,
@@ -81,8 +92,8 @@ background-color: hsla(0, 0%, 0%, 0.4);
 #layout-content div.creq_all tr.granted,
 #layout-content div.creq_data ins,
 #layout-content div.animeatt_reviews div.review.approved  > h4,
-#layout-content div.animelist_all tr.mylist.all_watched,
-#layout-content div.mylist_list tr.all_watched,
+#layout-content div.animelist_all tr.all_watched td,
+#layout-content div.mylist_list tr.all_watched td,
 #layout-content #layout-main div.ed2kdump_all table.filelist .in
 {
 background-color: hsla(127, 54%, 25%, 0.6);
@@ -146,6 +157,7 @@ input[type="submit"]:hover,
 form button[type="submit"]:hover,
 input[type="submit"]:hover
 {
+background-image: none;
 background-color: hsla(0, 100%, 25%, 0.8);
 color: #ff6000;
 border-color: #797979;
@@ -187,7 +199,8 @@ input[disabled], input[readonly], select[disabled], select[readonly], checkbox[d
 color: #898989;
 }
 tr:hover td,
-#layout-main div.forum ul.topics li.row:hover
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.pane table tr:hover td
 {
 background-image: url(images/whitepixel.png);
 /*background-color: hsla(0, 100%, 100%, 0.2);*/
@@ -232,4 +245,8 @@ color: #99FFB6;
 #layout-main div.tagcloud span:nth-child(2n+1) a:active
 {
 color: blue;
+}
+#layout-main div.anime_all div.episodes tr.newtype td
+{
+border-top: 1px dashed #c1c1c1;
 }
