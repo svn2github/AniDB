@@ -16,7 +16,7 @@
 {
 	width: 100%;
 	height: 30em;
-	white-space: nowrap;
+	white-space: pre;
 }
 
 #layout-main div.addfilem.form dl.options dt

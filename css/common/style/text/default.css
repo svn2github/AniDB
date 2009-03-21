@@ -142,12 +142,6 @@ td.check,
 	text-align:center;
 }
 
-h4.collapsed span,
-#layout-main table.filelist tr.deprecated
-{
-	text-decoration:line-through;
-}
-
 .tiny,
 small,
 #layout-main .name span.main,
