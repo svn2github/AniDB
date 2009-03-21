@@ -423,3 +423,8 @@ ul.acdropdown li:hover
 	color:white;
 	font-weight: bold;
 }
+
+h4.collapsed span
+{
+    text-decoration:line-through;
+}
