@@ -93,7 +93,7 @@ namespace AVDumpCL {
             ProcessMediaFile(media.Dequeue());
 
             if((switches & eSwitches.PrintTotalTimeUsed) != 0) Console.WriteLine("Total time elapsed: " + (DateTime.Now - startTime).TotalMilliseconds.ToString());
-            if((switches & eSwitches.PauseWhenDone) !=0) Console.ReadKey();
+            if((switches & eSwitches.PauseWhenDone) != 0) Console.ReadKey();
         }
 
         private static void ProcessMediaFile(string filePath) {
@@ -244,7 +244,7 @@ options:    (one letter switches can be put in one string)
    m       Monitor folder(s) (not implemented)
    n       Add extra newline after each file (not implemented)
    p       pause when done (hold cmd window) (not implemented)
-   t       print Time used for each file (not implemented)
+   t       print Time used for each file  (not implemented)
    q       pause after each file (not implemented)
    r       random file Order (not implemented)
    z       delete files after parsing (not implemented)
@@ -264,7 +264,7 @@ options:    (one letter switches can be put in one string)
    e       print ed2k link (not implemented)
    d       Print anidb link (not implemented)
    g       print and goto anidb link (not implemented)
-   u       print time used (not implemented)
+   u       print time used
 
 press any key to exit";
         #endregion
@@ -272,42 +272,42 @@ press any key to exit";
 
     [FlagsAttribute]
     enum eSwitches : long {
-        None = 0,
+        None = 0L,
 
         //Output
-        ShortOutput = 1 << 0,
-        ListCodecs = 1 << 1,
-        OldXmlFormat = 1 << 2,
-        CreqCmlFormat = 1 << 3,
-        NoDataOutput = 1 << 4,
+        ShortOutput = 1L << 0,
+        ListCodecs = 1L << 1,
+        OldXmlFormat = 1L << 2,
+        CreqCmlFormat = 1L << 3,
+        NoDataOutput = 1L << 4,
 
         //Control
-        IncludeSubFolders = 1 << 16,
-        SkipFullParsing = 1 << 17,
-        MonitorFolder = 1 << 18,
-        AddNewLine = 1 << 19,
-        PauseWhenDone = 1 << 20,
-        PauseWhenFileDone = 1 << 21,
-        RandomFileOrder = 1 << 22,
-        PrintTimeUsedPerFile = 1 << 23,
-        DeleteFileWhenDone = 1 << 24,
-        WaitForDumpReply = 1 << 25,
-        UseLfForProgress = 1 << 26,
-        SupressProgress = 1 << 27,
+        IncludeSubFolders = 1L << 16,
+        SkipFullParsing = 1L << 17,
+        MonitorFolder = 1L << 18,
+        AddNewLine = 1L << 19,
+        PauseWhenDone = 1L << 20,
+        PauseWhenFileDone = 1L << 21,
+        RandomFileOrder = 1L << 22,
+        PrintTimeUsedPerFile = 1L << 23,
+        DeleteFileWhenDone = 1L << 24,
+        WaitForDumpReply = 1L << 25,
+        UseLfForProgress = 1L << 26,
+        SupressProgress = 1L << 27,
 
         //Hash
-        Crc32 = 1 << 40,
-        Ed2k = 1 << 41,
-        Md5 = 1 << 42,
-        Sha1 = 1 << 43,
-        Tth = 1 << 44,
-        Aich = 1 << 45,
-        Mp3Hash = 1 << 46,
-        UseAllHashes = 1 << 47,
-        HashingOnly = 1 << 48,
-        PrintEd2kLink = 1 << 49,
-        PrintAniDBLink = 1 << 50,
-        GotoAniDBLink = 1 << 51,
-        PrintTotalTimeUsed = 1 << 52
+        Crc32 = 1L << 40,
+        Ed2k = 1L << 41,
+        Md5 = 1L << 42,
+        Sha1 = 1L << 43,
+        Tth = 1L << 44,
+        Aich = 1L << 45,
+        Mp3Hash = 1L << 46,
+        UseAllHashes = 1L << 47,
+        HashingOnly = 1L << 48,
+        PrintEd2kLink = 1L << 49,
+        PrintAniDBLink = 1L << 50,
+        GotoAniDBLink = 1L << 51,
+        PrintTotalTimeUsed = 1L << 52
     }
 }
