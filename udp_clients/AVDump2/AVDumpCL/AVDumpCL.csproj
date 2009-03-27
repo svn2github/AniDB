@@ -42,11 +42,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="gpl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AVDump2\AVDump2Lib.csproj">
       <Project>{C827397B-B9F8-4741-B1BB-FC0A17E39550}</Project>
       <Name>AVDump2Lib</Name>
