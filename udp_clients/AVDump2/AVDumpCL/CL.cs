@@ -94,18 +94,23 @@ namespace AVDumpCL {
         private static void ProcessMedia() {
             Stream stream = System.IO.File.OpenRead(media[0]);
 
-            Hasher hasher = new Hasher(stream, blockCount, blockSize * 1024);
-            hasher.AddHash(new Crc32(), "crc");
-            hasher.AddHash(new Ed2k(), "ed2k");
-            hasher.AddHash(new Tiger(), "tth");
-            hasher.AddHash(new System.Security.Cryptography.MD5CryptoServiceProvider(), "md5");
-            hasher.AddHash(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "sha1");
+            if((switches & (eSwitches.Aich | eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | eSwitches.Mp3Hash | eSwitches.Sha1 | eSwitches.Tth | eSwitches.UseAllHashes)) != 0) {
+                Hasher hasher = new Hasher(stream, blockCount, blockSize * 1024);
+                if((switches & (eSwitches.Crc32 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Crc32(), "crc");
+                if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
+                if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
+                if((switches & (eSwitches.Md5 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.MD5CryptoServiceProvider(), "md5");
+                if((switches & (eSwitches.Sha1 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "sha1");
+                hasher.Start();
+                DisplayHashBuffer(hasher);
+            }
 
-            hasher.Start();
-            DisplayHashBuffer(hasher);
-
-            System.Xml.XmlDocument xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(media[0], eLogType.AVDump, hasher.HashStringDict, stream.Length);
-            xmlDoc.Save(logStream);
+            if((switches & eSwitches.HashingOnly) == 0) {
+                System.Xml.XmlDocument xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(media[0], eLogType.AVDump, hasher.HashStringDict, stream.Length);
+                if(logStream != null) xmlDoc.Save(logStream);
+            } else {
+                //TODO
+            }
         }
 
         private static void DisplayHashBuffer(Hasher hasher) {
@@ -216,11 +221,11 @@ options:    (one letter switches can be put in one string)
    ms      monitor sleep duration in milliseconds, default is " + monitorSleepDuration.ToString() + @" (not implemented)
    exp     export Ed2k-links to file (not implemented)
    ext     comma separated extension list (not implemented)
-   log     write output to file (not implemented)
+   log     write output to file
    port    udp Port used by ac (not implemented)
    done	   save processed-file-paths to file and exclude existing from proc (not implemented)
    tout    timeout: '-tout:<seconds>:<number Of retries>' (not implemented)
-   bsize   buffer for hashing: '-bsize:<size in kb (" + blockSize.ToString() + @")>:<num of bufs (" + blockCount.ToString() + @")>' (not implemented)
+   bsize   buffer for hashing: '-bsize:<size in kb (" + blockSize.ToString() + @")>:<num of bufs (" + blockCount.ToString() + @")>'
    host    host name of anidb udp api server, default is '" + host + @"' (not implemented)
   output:   (exclusive)
    s       short (creq friendly) (not implemented)
@@ -242,15 +247,15 @@ options:    (one letter switches can be put in one string)
    v       use \n instead of \r @ progress (not implemented)
    w       supress progress (silent) (not implemented)
   hash:
-   0       CRC32 (cyclic Redundancy check) (not implemented)
-   1       ED2K  (edonkey2000 hash) (not implemented)
-   2       MD5   (message-digest algorithm 5) (not implemented)
-   3       SHA1  (secure hash algorithm 1) (not implemented)
-   5       TTH   (tiger tree Hash) (not implemented)
+   0       CRC32 (cyclic Redundancy check)
+   1       ED2K  (edonkey2000 hash)
+   2       MD5   (message-digest algorithm 5)
+   3       SHA1  (secure hash algorithm 1)
+   5       TTH   (tiger tree Hash)
    6       AICH  (advanced Intelligent corruption Handler) (not implemented)
    9       mp3hash w/o metadata + foosic fingerprint (test) (not implemented)
-   a       all hash algorithms (not implemented)
-   h       hash mode (no a/v parsing) (not implemented)
+   a       all (available) hash algorithms
+   h       hash mode (no a/v parsing)
    e       print ed2k link (not implemented)
    d       Print anidb link (not implemented)
    g       print and goto anidb link (not implemented)
