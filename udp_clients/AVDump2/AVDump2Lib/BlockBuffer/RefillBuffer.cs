@@ -70,7 +70,7 @@ namespace AVDump2Lib.BlockBuffer {
             while(numRead != 0) {
                 lock(rb) {
 
-                    while(!rb.CanWrite()) Thread.Sleep(200);
+                    while(!rb.CanWrite()) Thread.Sleep(50);
                     lastBlockSize = numRead;
                     numRead = rb.Write(stream);
                 }

@@ -28,7 +28,7 @@ namespace AVDump2Lib.MediaInfoLib {
             object result = null;
             MediaInfo mi = new MediaInfo();
             mi.Option("Internet", "No");
-            mi.Option("Info_Version", "0.7.0.0;AVDump2;0.1");
+            mi.Option("Info_Version", "0.7.0.0;AVDump2;1");
 
             if(!System.IO.Path.IsPathRooted(filePath)) filePath = System.IO.Path.Combine(Environment.CurrentDirectory, filePath);
 

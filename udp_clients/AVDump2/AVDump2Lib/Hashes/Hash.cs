@@ -55,7 +55,7 @@ namespace AVDump2Lib.Hashes {
             numRead = b.Read(readerID, out block, out isLastBlock);
             while(!isLastBlock) {
                 hashAlgorithm.TransformBlock(block, 0, numRead, block, 0);
-                while(!b.CanRead(readerID)) Thread.Sleep(0);
+                while(!b.CanRead(readerID)) Thread.Sleep(50);
                 numRead = b.Read(readerID, out block, out isLastBlock);
             }
             hashAlgorithm.TransformFinalBlock(block, 0, numRead);

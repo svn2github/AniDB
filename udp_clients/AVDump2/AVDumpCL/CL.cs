@@ -33,22 +33,23 @@ namespace AVDumpCL {
         static string host = "";
         static int port = 9001;
 
-        static List<string> media;
+        static Queue<string> media;
         static Stream logStream;
         static Stream ed2kListStream;
         static Stream doneListStream;
         static string[] doneListContent;
 
-        static string processExtensions = "mkv,avi,mpg,mpeg,vob,wmv,asf,qt,mov,ogm,mp4";
+        static string dumpableExtensions = "avi,mkv,ogm,mp4,mov,mpg,rm";
+        static string processExtensions = "mkv,avi,mpg,mpeg,vob,wmv,asf,qt,mov,rm,ogm,mp4";
         static int retries = 3;
         static int timeout = 10;
-        static int blockCount = 64;
-        static int blockSize = 1024;
+        static int blockCount = 8;
+        static int blockSize = 2048;
         static int monitorSleepDuration = 60000;
         #endregion
 
         static CL() {
-            media = new List<string>();
+            media = new Queue<string>();
 
             char2SwitchEnum = new Dictionary<char, eSwitches>();
             char2SwitchEnum['s'] = eSwitches.ShortOutput;
@@ -88,14 +89,18 @@ namespace AVDumpCL {
         static void Main(string[] args) {
             if(!ParseClOptions(args)) return;
 
-            ProcessMedia();
+            DateTime startTime = DateTime.Now;
+            ProcessMediaFile(media.Dequeue());
+
+            if((switches & eSwitches.PrintTotalTimeUsed) != 0) Console.WriteLine("Total time elapsed: " + (DateTime.Now - startTime).TotalMilliseconds.ToString());
+            if((switches & eSwitches.PauseWhenDone) !=0) Console.ReadKey();
         }
 
-        private static void ProcessMedia() {
-            Stream stream = System.IO.File.OpenRead(media[0]);
+        private static void ProcessMediaFile(string filePath) {
+            Stream stream = System.IO.File.OpenRead(filePath);
 
+            Hasher hasher = new Hasher(stream, blockCount, blockSize * 1024);
             if((switches & (eSwitches.Aich | eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | eSwitches.Mp3Hash | eSwitches.Sha1 | eSwitches.Tth | eSwitches.UseAllHashes)) != 0) {
-                Hasher hasher = new Hasher(stream, blockCount, blockSize * 1024);
                 if((switches & (eSwitches.Crc32 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Crc32(), "crc");
                 if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
                 if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
@@ -106,7 +111,7 @@ namespace AVDumpCL {
             }
 
             if((switches & eSwitches.HashingOnly) == 0) {
-                System.Xml.XmlDocument xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(media[0], eLogType.AVDump, hasher.HashStringDict, stream.Length);
+                System.Xml.XmlDocument xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(filePath, eLogType.AVDump, hasher.HashStringDict, stream.Length);
                 if(logStream != null) xmlDoc.Save(logStream);
             } else {
                 //TODO
@@ -147,7 +152,7 @@ namespace AVDumpCL {
                     args[i] = args[i].Substring(1);
                     parts = args[i].Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
                 } else {
-                    media.Add(args[i]);
+                    media.Enqueue(args[i]);
                     continue;
                 }
 
