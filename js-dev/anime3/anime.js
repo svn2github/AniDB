@@ -200,7 +200,7 @@ function prepPage() {
 function fetchData(aid) {
 	var req = xhttpRequest();
 	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
-	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=anime&aid='+aid, parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
 }
 
 /* Function that posts data
@@ -337,6 +337,26 @@ function doGroupTableOperations(op) {
 	var groupTable = document.getElementById('grouplist');
 	if (!groupTable) return;
 	var tbody = groupTable.tBodies[0];
+	// okay check for group rows
+	if (op == 'expand' && tbody.rows.length < anime.groups.length) {
+		// create missing group rows
+		var newTbody = document.createElement('tbody');
+		for (var g = 0; g < anime.groups.length; g++) {
+			var group = groups[anime.groups[g]];
+			if (!group || group && (group.id == 0 || group.agid == -1)) continue; // not interested in non groups nor the no group
+			// update existing rows
+			var gid = group.id;
+			if (!groups[gid]) continue; // not interested
+			var row = document.getElementById('gid_'+gid);
+			if (!row) {
+				row = createGroupRow(group.id, groupCols, groupSkips);
+				row.style.display = 'none';
+			}
+			newTbody.appendChild(row);
+		}
+		groupTable.replaceChild(newTbody,tbody);
+		tbody=newTbody;
+	}
 	//tbody.style.display = 'none';
 	var tfoot = groupTable.tFoot;
 	var visible = 0;
@@ -658,7 +678,6 @@ function updateGroupTable() {
 	tfoot.appendChild(tbody.rows[tbody.rows.length-1]);
 	groupTable.appendChild(tfoot);
 	var groupCnt = tbody.rows.length;
-	var newTbody = document.createElement('tbody');
 	for (var g = 0; g < anime.groups.length; g++) {
 		var group = groups[anime.groups[g]];
 		if (!group || group && (group.id == 0 || group.agid == -1)) continue; // not interested in non groups nor the no group
@@ -683,11 +702,7 @@ function updateGroupTable() {
 			if (group.subtitleLangs.length && (!lafound || !lsfound)) group.langFiltered = true;
 		}
 		var row = document.getElementById('gid_'+gid);
-		if (!row) {
-			row = createGroupRow(group.id, groupCols, groupSkips);
-			row.style.display = 'none';
-			newTbody.appendChild(row);
-		} else { // update stuff
+		if (row) { // update stuff, show all will be dealt with later
 			lastKnown = row.rowIndex;
 			group.defaultVisible = true;
 			var cells = row.getElementsByTagName('td');
@@ -743,10 +758,9 @@ function updateGroupTable() {
 						createCheckBox(cell,'ck_g'+group.id,'ck_g'+group.id,toggleFilesFromGroup,false);
 				}
 			}
-			newTbody.appendChild(row);
 		}
 	}
-	groupTable.replaceChild(newTbody,tbody);
+	//groupTable.replaceChild(newTbody,tbody);
 	// add filtering and stuff to tfoot
 	var row = tfoot.rows[0];
 	var cells = row.getElementsByTagName('td');
