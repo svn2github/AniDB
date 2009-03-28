@@ -27,6 +27,8 @@ namespace AVDump2Lib.Hashes {
 
         private string name;
         private string hashString;
+        private long bytesProcessed;
+
         private HashAlgorithm hashAlgorithm;
         private RefillBuffer b;
         private Thread t;
@@ -46,6 +48,7 @@ namespace AVDump2Lib.Hashes {
         public void Start() { t.Start(); }
         public void Join() { t.Join(); }
         public bool IsDone() { return hashString != null; }
+        public long BytesProcessed { get { return bytesProcessed; } }
 
         private void DoWork() {
             byte[] block = null;
@@ -56,9 +59,11 @@ namespace AVDump2Lib.Hashes {
             while(!isLastBlock) {
                 hashAlgorithm.TransformBlock(block, 0, numRead, block, 0);
                 while(!b.CanRead(readerID)) Thread.Sleep(50);
-                numRead = b.Read(readerID, out block, out isLastBlock);
+                bytesProcessed += numRead;
+                b.Read(readerID, out block, out isLastBlock);
             }
             hashAlgorithm.TransformFinalBlock(block, 0, numRead);
+            bytesProcessed += numRead;
 
             hashString = "";
             for(int i = 0;i < hashAlgorithm.Hash.Length;i++) {

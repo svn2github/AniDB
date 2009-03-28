@@ -43,7 +43,7 @@ namespace AVDumpCL {
         static string processExtensions = "mkv,avi,mpg,mpeg,vob,wmv,asf,qt,mov,rm,ogm,mp4";
         static int retries = 3;
         static int timeout = 10;
-        static int blockCount = 8;
+        static int blockCount = 16;
         static int blockSize = 2048;
         static int monitorSleepDuration = 60000;
         #endregion
@@ -62,7 +62,7 @@ namespace AVDumpCL {
             char2SwitchEnum['i'] = eSwitches.SkipFullParsing;
             char2SwitchEnum['m'] = eSwitches.MonitorFolder;
             char2SwitchEnum['n'] = eSwitches.AddNewLine;
-            char2SwitchEnum['p'] = eSwitches.PauseWhenDone;
+            char2SwitchEnum['p'] = eSwitches.PauseWhenDone; //Done
             char2SwitchEnum['q'] = eSwitches.PauseWhenFileDone;
             char2SwitchEnum['r'] = eSwitches.RandomFileOrder;
             char2SwitchEnum['t'] = eSwitches.PrintTimeUsedPerFile;
@@ -70,37 +70,48 @@ namespace AVDumpCL {
             char2SwitchEnum['o'] = eSwitches.WaitForDumpReply;
             char2SwitchEnum['v'] = eSwitches.UseLfForProgress;
             char2SwitchEnum['w'] = eSwitches.SupressProgress;
+            char2SwitchEnum['T'] = eSwitches.PrintTotalTimeUsed; //Done
 
-            char2SwitchEnum['0'] = eSwitches.Crc32;
-            char2SwitchEnum['1'] = eSwitches.Ed2k;
-            char2SwitchEnum['2'] = eSwitches.Md5;
-            char2SwitchEnum['3'] = eSwitches.Sha1;
-            char2SwitchEnum['5'] = eSwitches.Tth;
+            char2SwitchEnum['0'] = eSwitches.Crc32; //Done
+            char2SwitchEnum['1'] = eSwitches.Ed2k; //Done
+            char2SwitchEnum['2'] = eSwitches.Md5; //Done
+            char2SwitchEnum['3'] = eSwitches.Sha1; //Done
+            char2SwitchEnum['5'] = eSwitches.Tth; //Done
             char2SwitchEnum['6'] = eSwitches.Aich;
             char2SwitchEnum['9'] = eSwitches.Mp3Hash;
-            char2SwitchEnum['a'] = eSwitches.UseAllHashes;
-            char2SwitchEnum['h'] = eSwitches.HashingOnly;
+            char2SwitchEnum['a'] = eSwitches.UseAllHashes; //Done
+            char2SwitchEnum['h'] = eSwitches.HashingOnly; //Done
             char2SwitchEnum['e'] = eSwitches.PrintEd2kLink;
             char2SwitchEnum['d'] = eSwitches.PrintAniDBLink;
             char2SwitchEnum['g'] = eSwitches.GotoAniDBLink;
-            char2SwitchEnum['u'] = eSwitches.PrintTotalTimeUsed;
+            char2SwitchEnum['u'] = eSwitches.PrintElapsedHashingTime;
         }
 
         static void Main(string[] args) {
             if(!ParseClOptions(args)) return;
+            Console.CursorVisible = false;
 
             DateTime startTime = DateTime.Now;
             ProcessMediaFile(media.Dequeue());
+
+            if((switches & eSwitches.MonitorFolder) != 0) MonitorFiles();
 
             if((switches & eSwitches.PrintTotalTimeUsed) != 0) Console.WriteLine("Total time elapsed: " + (DateTime.Now - startTime).TotalMilliseconds.ToString());
             if((switches & eSwitches.PauseWhenDone) != 0) Console.ReadKey();
         }
 
+        private static void MonitorFiles() {
+            while(true) Thread.Sleep(1000);
+        }
+
         private static void ProcessMediaFile(string filePath) {
             Stream stream = System.IO.File.OpenRead(filePath);
 
+            DateTime startTime = DateTime.Now;
             Hasher hasher = new Hasher(stream, blockCount, blockSize * 1024);
             if((switches & (eSwitches.Aich | eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | eSwitches.Mp3Hash | eSwitches.Sha1 | eSwitches.Tth | eSwitches.UseAllHashes)) != 0) {
+                Console.WriteLine("Hashing: " + System.IO.Path.GetFileName(filePath));
+
                 if((switches & (eSwitches.Crc32 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Crc32(), "crc");
                 if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
                 if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
@@ -109,6 +120,7 @@ namespace AVDumpCL {
                 hasher.Start();
                 DisplayHashBuffer(hasher);
             }
+            if((switches & eSwitches.PrintElapsedHashingTime) != 0) Console.WriteLine("Time elapsed after Hashing: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
 
             if((switches & eSwitches.HashingOnly) == 0) {
                 System.Xml.XmlDocument xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(filePath, eLogType.AVDump, hasher.HashStringDict, stream.Length);
@@ -119,16 +131,22 @@ namespace AVDumpCL {
         }
 
         private static void DisplayHashBuffer(Hasher hasher) {
-            Console.Clear();
-            int bufferSize = 0;
-            int charCount = 0;
+            Console.WriteLine("*: Buffersize available for Hashalgorithm");
+
+            DateTime startTime = DateTime.Now;
             int[] mean = new int[hasher.Hashes.Count];
+            long fileSize = hasher.Buffer.BaseStream.Length;
+            int bufferSize = 0; int charCount = 0; long bytesProcessed = 0; int timeElapsed;
+            int cursorPos = Console.CursorTop;
+
             while(!hasher.IsDone()) {
+                Console.CursorTop = cursorPos;
                 Console.CursorLeft = 0;
-                Console.CursorTop = 0;
+                bytesProcessed = 0;
                 foreach(Hash hash in hasher.Hashes) {
                     bufferSize = hasher.Buffer.Count(hash.ReaderID);
-                    bufferSize = mean[hash.ReaderID] = (int)(((double)(mean[hash.ReaderID] * 4 + bufferSize)) / (double)5);
+                    //bufferSize = mean[hash.ReaderID] = (int)(((double)(mean[hash.ReaderID] * 1 + bufferSize)) / (double)2);
+                    if(bytesProcessed > hash.BytesProcessed || bytesProcessed == 0) bytesProcessed = hash.BytesProcessed;
 
                     charCount = bufferSize != 0 ? (int)((double)bufferSize / (double)blockCount * 68) : 0;
                     charCount = hash.IsDone() ? 0 : charCount;
@@ -137,8 +155,16 @@ namespace AVDumpCL {
                     Console.CursorLeft = 8;
                     Console.WriteLine("[" + "".PadLeft(charCount, '*') + "".PadRight(68 - charCount, ' ') + "]");
                 }
-                Debug.Print(bufferSize.ToString());
+
                 Thread.Sleep(100);
+
+                timeElapsed = (int)(DateTime.Now - startTime).TotalMilliseconds;
+                Console.Write("\n" +
+                  "Position: " + ((double)bytesProcessed / (1 << 20)).ToString("# MB") + "/" + ((double)fileSize / (1 << 20)).ToString("# MB") + "  " +
+                  "Elapsed time: " + (timeElapsed / 1000).ToString().PadLeft(3) + "s  " +
+                  "Speed: " + (((double)fileSize / (1 << 20)) / (timeElapsed / 1000d)).ToString("#.00 MB/s") +
+                  "".PadLeft(80 - Console.CursorLeft)
+                );
             }
         }
 
@@ -245,6 +271,7 @@ options:    (one letter switches can be put in one string)
    n       Add extra newline after each file (not implemented)
    p       pause when done (hold cmd window) (not implemented)
    t       print Time used for each file  (not implemented)
+   T       print total elapsed time
    q       pause after each file (not implemented)
    r       random file Order (not implemented)
    z       delete files after parsing (not implemented)
@@ -264,7 +291,7 @@ options:    (one letter switches can be put in one string)
    e       print ed2k link (not implemented)
    d       Print anidb link (not implemented)
    g       print and goto anidb link (not implemented)
-   u       print time used
+   u       print elapsed time after hashing
 
 press any key to exit";
         #endregion
@@ -294,6 +321,7 @@ press any key to exit";
         WaitForDumpReply = 1L << 25,
         UseLfForProgress = 1L << 26,
         SupressProgress = 1L << 27,
+        PrintTotalTimeUsed = 1L << 28,
 
         //Hash
         Crc32 = 1L << 40,
@@ -308,6 +336,6 @@ press any key to exit";
         PrintEd2kLink = 1L << 49,
         PrintAniDBLink = 1L << 50,
         GotoAniDBLink = 1L << 51,
-        PrintTotalTimeUsed = 1L << 52
+        PrintElapsedHashingTime = 1L << 52 //depreciated?
     }
 }

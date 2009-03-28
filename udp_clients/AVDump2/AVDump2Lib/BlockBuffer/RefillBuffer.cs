@@ -24,6 +24,7 @@ namespace AVDump2Lib.BlockBuffer {
     public class RefillBuffer {
         RingBuffer rb;
         Stream stream;
+
         Thread filler;
 
         int blockCount;
@@ -64,6 +65,7 @@ namespace AVDump2Lib.BlockBuffer {
 
         public int Count(int reader) { return rb.Count(reader); }
         public int BlockCount { get { return blockCount; } }
+        public Stream BaseStream { get { return stream; } }
 
         private void RingFiller() {
             int numRead = lastBlockSize = rb.Write(stream);
