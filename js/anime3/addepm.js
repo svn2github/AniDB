@@ -269,6 +269,8 @@ function addEpisode() {
 			epNo = Number(!isNaN(eNoInput[0]) ? eNoInput : eNoInput.substr(1,eNoInput.length));
 		}
 	}
+	// create new episodeEntry if no eps exist
+	if (!episode) episode = createNewEpisode(type,0)
 	var newEp = createNewEpisode(type,epNo);
 	var newRow = createEpisodeRow('-'+newEpsCnt,newEp);
 	newEp.epRow = newRow;

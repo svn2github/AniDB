@@ -436,7 +436,7 @@ function createTextInput(name,size,disabled,hidden,maxlength,value) {
   var input = document.createElement('input');
   if (!hidden) input.type = 'text';
   else input.type = 'hidden';
-  if (name != null) { input.name = name; input.id = name/*.replace('.','_');*/ }
+  if (name != null) { input.name = name; input.id = name;/*.replace('.','_')*/; }
   if (size != null) input.size = size;
   if (disabled != null) input.disabled = disabled;
   if (maxlength != null) input.maxLength = maxlength;
