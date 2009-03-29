@@ -55,17 +55,21 @@ table
 	border-top:1px solid #C9D7F1;
 }
 
-#layout-main div.tabbed_pane_cfg div.body,
-#layout-main div.tabbed_pane_cfg ul.tabs li
+#layout-main div.tabbed_pane_cfg div.body
 {
 	border:1px solid #ACC3DF;
+}
+
+#layout-main div.tabbed_pane_cfg ul.tabs li
+{
+	border-bottom:1px solid #ACC3DF;
+	border-left:1px solid #ACC3DF;
+	border-right:1px solid #ACC3DF;
+	border-top:1px solid #ACC3DF;
 }
 
 #layout-main div.tabbed_pane_cfg ul.tabs li:hover,
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected
 {
 	border-bottom:1px double #D4E6FC;
-	border-left:1px solid #ACC3DF;
-	border-right:1px solid #ACC3DF;
-	border-top:1px solid #ACC3DF;
 }
