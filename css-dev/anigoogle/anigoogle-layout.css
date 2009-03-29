@@ -240,6 +240,7 @@
 
 #layout-nav div.main_search a.advsearch
 {
+	left:350px;
 	margin:0;
 	position:absolute;
 	top:105px;
