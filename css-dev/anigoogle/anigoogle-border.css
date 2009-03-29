@@ -40,12 +40,7 @@ table
 	border-top:1px solid;
 }
 
-
-#layout-main div.tabbed_pane div.body
-{
-	border:1px solid #C9D7F1;
-}
-
+#layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	border:1px solid #C9D7F1;
@@ -58,4 +53,19 @@ table
 	border-left:1px solid #C9D7F1;
 	border-right:1px solid #C9D7F1;
 	border-top:1px solid #C9D7F1;
+}
+
+#layout-main div.tabbed_pane_cfg div.body,
+#layout-main div.tabbed_pane_cfg ul.tabs li
+{
+	border:1px solid #ACC3DF #BDCAD8;
+}
+
+#layout-main div.tabbed_pane_cfg ul.tabs li:hover,
+#layout-main div.tabbed_pane_cfg ul.tabs li.selected
+{
+	border-bottom:1px double #D4E6FC;
+	border-left:1px solid #ACC3DF #BDCAD8;
+	border-right:1px solid #ACC3DF #BDCAD8;
+	border-top:1px solid #ACC3DF #BDCAD8;
 }
