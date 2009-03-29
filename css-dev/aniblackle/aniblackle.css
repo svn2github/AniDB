@@ -18,7 +18,7 @@ input,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane div.body
 {
-	border-color:#888888;
+	border:1px solid #888888;
 }
 
 tr
