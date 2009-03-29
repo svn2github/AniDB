@@ -195,6 +195,13 @@ span.g_odd
 	background-color: #E5ECF9;
 }
 
+#layout-main div.tabbed_pane_cfg div.body ,
+#layout-main div.tabbed_pane_cfg ul.tabs li:hover,
+#layout-main div.tabbed_pane_cfg ul.tabs li.selected
+{
+	background-color: #D4E6FC;
+}
+
 #layout-main div.anime_all div.desc
 {
 	background-color:#E5ECF9;
