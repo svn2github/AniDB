@@ -14,6 +14,7 @@ button,
 select,
 textarea,
 input,
+#layout-search select,
 #layout-search input.text,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane div.body
