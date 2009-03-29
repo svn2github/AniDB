@@ -65,8 +65,6 @@ span.g_odd
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-menu li.sub-menu:hover,
 #layout-menu li.sub-menu ul li:hover
 {
@@ -95,8 +93,7 @@ span.g_odd
 }
 
 #layout-main ul.g_list li,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-tabs ul.main-tabs > li
 {
 	border-color:#C9D7F1;
 }
