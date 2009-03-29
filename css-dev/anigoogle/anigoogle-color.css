@@ -29,7 +29,7 @@ tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-color:#e5ecf9;
+	background-color:#ECF4FD;
 }
 
 #layout-search
@@ -40,7 +40,7 @@ span.g_odd
 
 #layout-main > h1
 {
-	background-color:#e5ecf9;
+	background-color:#ECF4FD;
 	border-top-color:blue;
 }
 
@@ -52,8 +52,8 @@ span.g_odd
 
 #layout-menu > li ul
 {
-	background-color:#FFF;
-	border-color:#000;
+	background-color:#FFFFFF;
+	border-color:#000000;
 }
 
 #layout-tabs ul.main-tabs > li.selected
@@ -70,7 +70,7 @@ span.g_odd
 #layout-menu li.sub-menu:hover,
 #layout-menu li.sub-menu ul li:hover
 {
-	background-color:#E5ECF9;
+	background-color:#ECF4FD;
 }
 
 #layout-main div.pagination span a
@@ -166,7 +166,7 @@ span.g_odd
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	background-color:#E5ECF9;
+	background-color:#ECF4FD;
 	color: #000000;
 }
 
@@ -192,12 +192,12 @@ span.g_odd
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	background-color: #E5ECF9;
+	background-color: #ECF4FD;
 }
 
 #layout-main div.anime_all div.desc
 {
-	background-color:#E5ECF9;
+	background-color:#ECF4FD;
 	border-color:#C9D7F1;
 }
 
