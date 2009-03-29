@@ -22,7 +22,7 @@ table
 #layout-main ul.g_list li,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-search select.type,
+#layout-search select,
 #layout-search input.text,
 #layout-menu > li ul
 {
@@ -40,12 +40,7 @@ table
 	border-top:1px solid;
 }
 
-
-#layout-main div.tabbed_pane div.body
-{
-	border:1px solid #C9D7F1;
-}
-
+#layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	border:1px solid #C9D7F1;
@@ -55,7 +50,16 @@ table
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	border-bottom:1px double #E5ECF9;
-	border-left:1px solid #C9D7F1;
-	border-right:1px solid #C9D7F1;
-	border-top:1px solid #C9D7F1;
+}
+
+#layout-main div.tabbed_pane_cfg div.body,
+#layout-main div.tabbed_pane_cfg ul.tabs li
+{
+	border:1px solid #ACC3DF;
+}
+
+#layout-main div.tabbed_pane_cfg ul.tabs li:hover,
+#layout-main div.tabbed_pane_cfg ul.tabs li.selected
+{
+	border-bottom:1px double #D4E6FC;
 }

@@ -37,14 +37,6 @@
 	padding:0;
 }
 
-#layout-search select.type
-{
-	float:right;
-	margin:0;
-	position:relative;
-	width:5em;
-}
-
 #layout-search input.text
 {
 	float:left;
@@ -95,8 +87,7 @@
 
 #layout-nav div.main_search div.search
 {
-	margin-left:-7em;
-	margin-top:0;
+	margin-left:-11em;
 }
 
 #anidb div.main_nav
@@ -118,7 +109,7 @@
 #layout-nav div.main_search input.submit
 {
 	float:left;
-	margin-left:5em;
+	margin-left:6.5em;
 	margin-top:.2em;
 	width:150px;
 }
@@ -156,6 +147,7 @@
 {
 	margin-left:16em;
 	margin-top:1.3em;
+	width: 100%;
 }
 
 #layout-search div.search form
@@ -230,7 +222,7 @@
 
 #layout-nav div.main_search div.search form
 {
-	width:40.5em;
+	width:45.5em;
 }
 
 #layout-nav div.main_search div.search input.text
@@ -240,9 +232,11 @@
 
 #layout-nav div.main_search a.advsearch
 {
-	float:right;
-	margin-top:-2em;
-	margin-right:-15.5em;
+	left:350px;
+	margin:0;
+	position:absolute;
+	top:105px;
+	width:100px;
 }
 
 #layout-nav div.main_search input.random
