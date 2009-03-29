@@ -147,10 +147,7 @@ div.pagination span strong
 	background-color:#CADCEB;
 }
 
-#layout-main div.addseq_all div.explanation div.description,
-#layout-main div.addcharcharrel_all div.explanation div.description,
-#layout-main div.addcreatorcreatorrel_all div.explanation div.description,
-#layout-main div.addcreatoranimerel_all div.explanation div.description
+#layout-main div.* div.explanation div.description
 {
 	background-color:#F4F4F4;
 }
