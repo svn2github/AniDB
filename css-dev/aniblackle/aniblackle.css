@@ -19,6 +19,7 @@ input,
 #layout-main div.tabbed_pane div.body
 {
 	border:1px solid #888888;
+	border-color:#888888;
 }
 
 tr
