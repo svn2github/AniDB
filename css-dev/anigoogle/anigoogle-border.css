@@ -65,7 +65,7 @@ table
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected
 {
 	border-bottom:1px double #D4E6FC;
-	border-left:1px solid #ACC3DF #BDCAD8;
-	border-right:1px solid #ACC3DF #BDCAD8;
-	border-top:1px solid #ACC3DF #BDCAD8;
+	border-left:1px solid #ACC3DF;
+	border-right:1px solid #ACC3DF;
+	border-top:1px solid #ACC3DF;
 }
