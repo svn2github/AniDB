@@ -240,9 +240,10 @@
 
 #layout-nav div.main_search a.advsearch
 {
-	float:right;
-	margin-top:-2em;
-	margin-right:-16em;
+	margin:0;
+	position:absolute;
+	top:105px;
+	width:100px;
 }
 
 #layout-nav div.main_search input.random
