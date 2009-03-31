@@ -37,7 +37,7 @@ function filterFileList(type,filterEp) {
 			var ftype = option.text.substr(option.text.indexOf('TYPE')+5,option.text.length);
 			var fgid = option.text.substring(option.text.indexOf('GID')+4,option.text.indexOf(' ',option.text.indexOf('GID')+4));
 			if (ftype.indexOf(type) >= 0 && 
-					(!fileGid ? true : (Number(fgid) == fileGid)) && // (Number(fgid) == fileGid || Number(fgid) == 0)
+					(!fileGid || relType.value == 10 ? true : (Number(fgid) == fileGid)) && // (Number(fgid) == fileGid || Number(fgid) == 0)
 					(!filterEp ? true : (fep == fileEp)))
 				relFile.appendChild(option); 
 		}

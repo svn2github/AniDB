@@ -26,7 +26,7 @@ function createTooltips(node) {
 		var span = parentNode.getElementsByTagName('span')[0];
 		if (!span) continue;
 		if (span.className.indexOf('i_gstate_none') >= 0) continue;
-		span.title = null;
+		span.title = "";
 		parentNode.onmouseout = hideTooltip;
 		parentNode.onmouseover = function onmouseover(event) { 
 			var div = getElementsByClassName(this.getElementsByTagName('div'),'releaseinfotooltip',false)[0];

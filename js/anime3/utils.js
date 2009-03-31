@@ -938,9 +938,9 @@ function formatFileLength(length, format) {
   var tsec = length % 60;
   var tmin = Math.floor(length/60);
   tmin = tmin % 60;
-  var thr = Math.floor(tmin/60);
+  var thr = Math.floor(length/3600);
   thr = thr % 60;
-  var tday = Math.floor(thr/60);
+  var tday = Math.floor(length/86400);
   var output = '';
   if (format == 'long') {
     if (tday) output += tday + ':';
