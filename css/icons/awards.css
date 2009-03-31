@@ -728,6 +728,11 @@
 	background-image: url(../icons/awards/arc2000_animation.jpg);
 }
 
+#arc2000_anime_overall
+{
+	background-image: url(../icons/awards/arc2000_anime_overall.jpg);
+}
+
 #arc2000_character_development
 {
 	background-image: url(../icons/awards/arc2000_character_development.jpg);
@@ -771,11 +776,6 @@
 #arc2000_op-ed
 {
 	background-image: url(../icons/awards/arc2000_op-ed.jpg);
-}
-
-#arc2000_overall
-{
-	background-image: url(../icons/awards/arc2000_overall.jpg);
 }
 
 #arc2000_quick_watch
@@ -823,9 +823,9 @@
 	background-image: url(../icons/awards/arc2008_anime_overall.png);
 }
 
-#arc2008_art
+#arc2008_animation
 {
-	background-image: url(../icons/awards/arc2008_art.png);
+	background-image: url(../icons/awards/arc2008_animation.png);
 }
 
 #arc2008_character_development
