@@ -35,14 +35,14 @@ using System.Diagnostics;
 
 namespace AVDump2Lib.Hashes {
     /// <summary>Broken: Blocks need to be Blocksize*n=9500*1024 (n as int)</summary>
-    public class Ed2k : HashAlgorithm {
+    public class Ed2kAlt : HashAlgorithm {
         private static int BLOCKSIZE;
         private byte[] md4HashBlock;
         private long length;
         private HashAlgorithm md4;
         private HashAlgorithm md4final;
 
-        public Ed2k() {
+        public Ed2kAlt() {
             md4HashBlock = new byte[16];
             md4 = new Md4();
             md4final = new Md4();
@@ -52,7 +52,7 @@ namespace AVDump2Lib.Hashes {
             int toWrite = cbSize - ibStart;
             int space = BLOCKSIZE - (int)(length % BLOCKSIZE);
 
-            if(space > toWrite){
+            if(space > toWrite) {
                 md4.TransformBlock(array, ibStart, cbSize, array, 0);
                 length += cbSize;
             } else if(space == toWrite) {
@@ -61,7 +61,7 @@ namespace AVDump2Lib.Hashes {
                 md4.Initialize();
                 length += cbSize;
 
-            } else if(space < toWrite){
+            } else if(space < toWrite) {
                 //TODO: BROKEN
                 md4.TransformFinalBlock(array, ibStart, space);
                 md4final.TransformBlock(md4.Hash, 0, 16, md4.Hash, 0);
@@ -77,9 +77,9 @@ namespace AVDump2Lib.Hashes {
         protected override byte[] HashFinal() {
             md4.TransformFinalBlock(new byte[0], 0, 0);
 
-            if(length < BLOCKSIZE){
+            if(length < BLOCKSIZE) {
                 md4final = md4;
-            }else{
+            } else {
                 md4final.TransformFinalBlock(md4.Hash, 0, 16);
             }
 
@@ -95,13 +95,14 @@ namespace AVDump2Lib.Hashes {
         }
     }
 
-    public class Ed2kAlt : HashAlgorithm {
+    public class Ed2k : HashAlgorithm {
         private static int BLOCKSIZE;
         private List<byte[]> md4HashBlocks;
-        private long length;
         private HashAlgorithm md4;
+        private byte[] blueHash;
+        private long length;
 
-        public Ed2kAlt() {
+        public Ed2k() {
             md4HashBlocks = new List<byte[]>();
             md4 = new Md4();
         }
@@ -110,19 +111,19 @@ namespace AVDump2Lib.Hashes {
             int toWrite = cbSize - ibStart;
             int space = BLOCKSIZE - (int)(length % BLOCKSIZE);
 
-            if(space > toWrite){
+            if(space > toWrite) {
                 md4.TransformBlock(array, ibStart, cbSize, array, 0);
                 length += cbSize;
             } else if(space == toWrite) {
                 md4.TransformFinalBlock(array, ibStart, cbSize);
-                md4HashBlocks.Add(md4.Hash); 
+                md4HashBlocks.Add(md4.Hash);
                 md4.Initialize();
                 length += cbSize;
 
-            } else if(space < toWrite){
+            } else if(space < toWrite) {
                 //TODO: BROKEN
                 md4.TransformFinalBlock(array, ibStart, space);
-                md4HashBlocks.Add(md4.Hash); 
+                md4HashBlocks.Add(md4.Hash);
                 md4.Initialize();
                 length += space;
 
@@ -132,26 +133,44 @@ namespace AVDump2Lib.Hashes {
 
         }
 
+        /// <summary>Calculates both ed2k hashes</summary>
+        /// <returns>Always returns the red hash</returns>
         protected override byte[] HashFinal() {
             md4.TransformFinalBlock(new byte[0], 0, 0);
+            md4HashBlocks.Add(md4.Hash);
 
-            if(length >= BLOCKSIZE){
-                md4HashBlocks.Add(md4.Hash);
+
+            //Blue Hash
+            if(length >= BLOCKSIZE) {
                 md4.Initialize();
                 for(int i = 0;i < md4HashBlocks.Count;i++) {
                     md4.TransformBlock(md4HashBlocks[i], 0, 16, md4HashBlocks[i], 0);
                 }
                 md4.TransformFinalBlock(new byte[0], 0, 0);
+                blueHash = md4.Hash;
+            }
+
+            //Red Hash
+            if(length % BLOCKSIZE == 0) {
+                md4.Initialize();
+                for(int i = 0;i < md4HashBlocks.Count;i++) {
+                    md4.TransformBlock(md4HashBlocks[i], 0, 16, md4HashBlocks[i], 0);
+                }
+                md4.TransformFinalBlock(md4.ComputeHash(new byte[0]), 0, 0);
             }
 
             return md4.Hash;
         }
 
         public override void Initialize() {
-            md4HashBlocks.Clear();
             length = 0;
-            BLOCKSIZE = 9728000;
+            blueHash = null;
             md4.Initialize();
+            BLOCKSIZE = 9728000;
+            md4HashBlocks.Clear();
         }
+
+        public bool BlueIsRed() { return length % BLOCKSIZE != 0; }
+        public byte[] BlueHash { get { return blueHash; } }
     }
 }

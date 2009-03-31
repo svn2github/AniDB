@@ -69,6 +69,17 @@ namespace AVDump2Lib.Hashes {
             for(int i = 0;i < hashAlgorithm.Hash.Length;i++) {
                 hashString += hashAlgorithm.Hash[i].ToString("X");
             }
+
+            if(hashAlgorithm is Ed2k) { //TODO Handle more nicely
+                Ed2k ed2k = (Ed2k)hashAlgorithm;
+                if(!ed2k.BlueIsRed()) {
+                    hashString += ";";
+                    for(int i = 0;i < ed2k.BlueHash.Length;i++) {
+                        hashString += ed2k.BlueHash[i].ToString("X");
+                    }
+                }
+            }
+
         }
     }
 }

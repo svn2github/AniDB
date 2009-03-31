@@ -21,6 +21,7 @@ using AVDump2Lib.MediaInfoLib;
 using System.Reflection;
 using System.IO;
 using System.Xml;
+using AVDump2Lib.Hashes;
 
 namespace AVDump2Lib.MediaInfoLib {
     public class Info {
@@ -49,56 +50,64 @@ namespace AVDump2Lib.MediaInfoLib {
             int streamCount;
 
             node = xmlDoc.AppendChild(xmlDoc.CreateElement("file"));
-            if(hashes != null) foreach(KeyValuePair<string, string> kvp in hashes) {
-                AppendLeaf(xmlDoc, node, kvp.Key, kvp.Value);
+            if(hashes != null) {
+                foreach(KeyValuePair<string, string> kvp in hashes) {
+                    if(kvp.Value.Contains(";")) {
+                        string[] hashSplit = kvp.Value.Split(';');
+                        for(int i = 0;i < hashSplit.Length;i++) AppendLeaf(xmlDoc, node, kvp.Key, kvp.Value, null);
+                    } else {
+                        AppendLeaf(xmlDoc, node, kvp.Key, kvp.Value, null);
+                    }
+                }
             }
-            AppendLeaf(xmlDoc, node, "size", size.ToString());
+
+            AppendLeaf(xmlDoc, node, "size", size.ToString(), null);
 
             node = node.AppendChild(xmlDoc.CreateElement("avmf"));
-            AppendLeaf(xmlDoc, node, "duration", mi.Get(StreamKind.General, 0, "Duration"));
-            AppendLeaf(xmlDoc, node, "extension", mi.Get(StreamKind.General, 0, "FileExtension"));
+            AppendLeaf(xmlDoc, node, "duration", mi.Get(StreamKind.General, 0, "Duration"), null);
+            AppendLeaf(xmlDoc, node, "extension", mi.Get(StreamKind.General, 0, "FileExtension"), null);
             //AppendLeaf(xmlDoc, node, "date", mi.Get(StreamKind.General, 0, ""));
-            AppendLeaf(xmlDoc, node, "chapters", mi.Get(StreamKind.General, 0, "ChaptersCount"));
-            AppendLeaf(xmlDoc, node, "app", mi.Get(StreamKind.General, 0, "Encoded_Application"));
-            AppendLeaf(xmlDoc, node, "lib", mi.Get(StreamKind.General, 0, "Encoded_Library"));
+            AppendLeaf(xmlDoc, node, "chapters", mi.Get(StreamKind.General, 0, "ChaptersCount"), null);
+            AppendLeaf(xmlDoc, node, "app", mi.Get(StreamKind.General, 0, "Encoded_Application"), null);
+            AppendLeaf(xmlDoc, node, "lib", mi.Get(StreamKind.General, 0, "Encoded_Library"), null);
 
             streamCount = mi.Count_Get(StreamKind.Video);
             for(int i = 0;i < streamCount;i++) {
                 subNode = node.AppendChild(xmlDoc.CreateElement("video"));
-                AppendLeaf(xmlDoc, subNode, "size", mi.Get(StreamKind.Video, i, "StreamSize"));
-                AppendLeaf(xmlDoc, subNode, "title", mi.Get(StreamKind.Video, i, "Title"));
-                AppendLeaf(xmlDoc, subNode, "duration", mi.Get(StreamKind.Video, i, "Duration"));
+                AppendLeaf(xmlDoc, subNode, "size", mi.Get(StreamKind.Video, i, "StreamSize"), null);
+                AppendLeaf(xmlDoc, subNode, "title", mi.Get(StreamKind.Video, i, "Title"), null);
+                AppendLeaf(xmlDoc, subNode, "duration", mi.Get(StreamKind.Video, i, "Duration"), null);
                 //AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Video, i, ""));
-                AppendLeaf(xmlDoc, subNode, "bitrate", mi.Get(StreamKind.Video, i, "BitRate"));
-                AppendLeaf(xmlDoc, subNode, "fourcc", mi.Get(StreamKind.Video, i, "CodecID")); //Codec/CC
-                AppendLeaf(xmlDoc, subNode, "fps", mi.Get(StreamKind.Video, i, "FrameRate"));
-                AppendLeaf(xmlDoc, subNode, "setting", mi.Get(StreamKind.Video, i, "Encoded_Library") + " - " + mi.Get(StreamKind.Video, i, "Encoded_Library_Settings"));
+                AppendLeaf(xmlDoc, subNode, "bitrate", mi.Get(StreamKind.Video, i, "BitRate"), null);
+                AppendLeaf(xmlDoc, subNode, "fourcc", mi.Get(StreamKind.Video, i, "CodecID"), null); //Codec/CC
+                AppendLeaf(xmlDoc, subNode, "fps", mi.Get(StreamKind.Video, i, "FrameRate"), null);
+                AppendLeaf(xmlDoc, subNode, "setting", mi.Get(StreamKind.Video, i, "Encoded_Library") + " - " + mi.Get(StreamKind.Video, i, "Encoded_Library_Settings"), null);
                 //AppendLeaf(xmlDoc, subNode, "private", mi.Get(StreamKind.Video, i, ""));
-                AppendLeaf(xmlDoc, subNode, "encoder", mi.Get(StreamKind.Video, i, "Encoded_Library"));
-                AppendLeaf(xmlDoc, subNode, "sample_count", mi.Get(StreamKind.Video, i, "FrameCount"));
-                AppendLeaf(xmlDoc, subNode, "chroma", mi.Get(StreamKind.Video, i, "Colorimetry"));
-                AppendLeaf(xmlDoc, subNode, "structure", mi.Get(StreamKind.Video, i, "Interlacement"));
+                AppendLeaf(xmlDoc, subNode, "encoder", mi.Get(StreamKind.Video, i, "Encoded_Library"), null);
+                AppendLeaf(xmlDoc, subNode, "sample_count", mi.Get(StreamKind.Video, i, "FrameCount"), null);
+                AppendLeaf(xmlDoc, subNode, "chroma", mi.Get(StreamKind.Video, i, "Colorimetry"), null);
+                AppendLeaf(xmlDoc, subNode, "structure", mi.Get(StreamKind.Video, i, "Interlacement"), null);
 
                 Dictionary<string, string> attrDict = new Dictionary<string, string>();
                 attrDict["width"] = mi.Get(StreamKind.Video, i, "Width");
                 attrDict["height"] = mi.Get(StreamKind.Video, i, "Height");
-                AppendLeaf(xmlDoc, subNode, "res_p", attrDict);
+                AppendLeaf(xmlDoc, subNode, "res_p", null, attrDict);
                 //AppendLeaf(xmlDoc, subNode, "res_d", mi.Get(StreamKind.Video, i, ""));
             }
 
             streamCount = mi.Count_Get(StreamKind.Audio);
             for(int i = 0;i < streamCount;i++) {
                 subNode = node.AppendChild(xmlDoc.CreateElement("audio"));
-                AppendLeaf(xmlDoc, subNode, "size", mi.Get(StreamKind.Audio, i, "StreamSize"));
-                AppendLeaf(xmlDoc, subNode, "duration", mi.Get(StreamKind.Audio, i, "Duration"));
-                AppendLeaf(xmlDoc, subNode, "title", mi.Get(StreamKind.Audio, i, "Title"));
-                AppendLeaf(xmlDoc, subNode, "language", mi.Get(StreamKind.Audio, i, "Language"));
+                AppendLeaf(xmlDoc, subNode, "size", mi.Get(StreamKind.Audio, i, "StreamSize"), null);
+                AppendLeaf(xmlDoc, subNode, "duration", mi.Get(StreamKind.Audio, i, "Duration"), null);
+                AppendLeaf(xmlDoc, subNode, "title", mi.Get(StreamKind.Audio, i, "Title"), null);
+                AppendLeaf(xmlDoc, subNode, "language", mi.Get(StreamKind.Audio, i, "Language"), null);
                 //AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Audio, i, ""));
-                AppendLeaf(xmlDoc, subNode, "twocc", mi.Get(StreamKind.Audio, i, "Codec"));
-                AppendLeaf(xmlDoc, subNode, "channels", mi.Get(StreamKind.Audio, i, "Channel(s)"));
-                AppendLeaf(xmlDoc, subNode, "sampling_rate", mi.Get(StreamKind.Audio, i, "SamplingRate"));
-                AppendLeaf(xmlDoc, subNode, "mode", mi.Get(StreamKind.Audio, i, "BitRate_Mode"));
-                AppendLeaf(xmlDoc, subNode, "sample_count", mi.Get(StreamKind.Audio, i, "SamplingCount"));
+                AppendLeaf(xmlDoc, subNode, "twocc", mi.Get(StreamKind.Audio, i, "Codec"), null);
+                AppendLeaf(xmlDoc, subNode, "channels", mi.Get(StreamKind.Audio, i, "Channel(s)"), null);
+                AppendLeaf(xmlDoc, subNode, "sampling_rate", mi.Get(StreamKind.Audio, i, "SamplingRate"), null);
+                AppendLeaf(xmlDoc, subNode, "mode", mi.Get(StreamKind.Audio, i, "BitRate_Mode"), null);
+                AppendLeaf(xmlDoc, subNode, "sample_count", mi.Get(StreamKind.Audio, i, "SamplingCount"), null);
 
             }
 
@@ -106,29 +115,27 @@ namespace AVDump2Lib.MediaInfoLib {
             for(int i = 0;i < streamCount;i++) {
                 subNode = node.AppendChild(xmlDoc.CreateElement("subtitles"));
                 //AppendLeaf(xmlDoc, subNode, "size", mi.Get(StreamKind.Text, i, ""));
-                AppendLeaf(xmlDoc, subNode, "title", mi.Get(StreamKind.Text, i, "Title"));
-                AppendLeaf(xmlDoc, subNode, "language", mi.Get(StreamKind.Text, i, "Language"));
-                AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Text, i, "Codec"));
+                AppendLeaf(xmlDoc, subNode, "title", mi.Get(StreamKind.Text, i, "Title"), null);
+                AppendLeaf(xmlDoc, subNode, "language", mi.Get(StreamKind.Text, i, "Language"), null);
+                AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Text, i, "Codec"), null);
             }
 
             return xmlDoc;
         }
 
-        static void AppendLeaf(XmlDocument xmlDoc, XmlNode node, string name, Dictionary<string, string> attributes) {
-            if(attributes == null || attributes.Count == 0) return;
+
+        static void AppendLeaf(XmlDocument xmlDoc, XmlNode node, string name, string value, Dictionary<string, string> attributes) {
+            if((attributes == null || attributes.Count == 0) && string.IsNullOrEmpty(value)) return;
 
             XmlNode leaf = xmlDoc.CreateElement(name);
-            foreach(KeyValuePair<string, string> kvp in attributes) {
-                leaf.Attributes.Append(xmlDoc.CreateAttribute(kvp.Key)).Value = kvp.Value;
+            if(!string.IsNullOrEmpty(value)) leaf.AppendChild(xmlDoc.CreateTextNode(value));
+
+            if(attributes != null && attributes.Count == 0) {
+                foreach(KeyValuePair<string, string> kvp in attributes) {
+                    leaf.Attributes.Append(xmlDoc.CreateAttribute(kvp.Key)).Value = kvp.Value;
+                }
             }
-            node.AppendChild(leaf);
 
-        }
-        static void AppendLeaf(XmlDocument xmlDoc, XmlNode node, string name, string value) {
-            if(string.IsNullOrEmpty(value)) return;
-
-            XmlNode leaf = xmlDoc.CreateElement(name);
-            leaf.AppendChild(xmlDoc.CreateTextNode(value));
             node.AppendChild(leaf);
         }
     }
