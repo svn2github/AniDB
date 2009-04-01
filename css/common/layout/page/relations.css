@@ -94,3 +94,37 @@
 	margin-top:0.25em;
 	padding:0.25em 0 0.3em;
 }
+
+
+#layout-main div.addsongcollectionrel_all div.massadd textarea
+{
+	height:200px;
+	width:500px;
+}
+
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.mediumno,
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.trackno,
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.length
+{
+	width:7em;
+}
+
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.name
+{
+	width:20%;
+}
+
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.anisonurl
+{
+	width:15em;
+}
+
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs td input
+{
+	width:100%;
+}
+
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs td
+{
+	padding: 2px 4px;
+}

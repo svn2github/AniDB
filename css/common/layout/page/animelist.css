@@ -20,3 +20,8 @@
 {
 	width: 100%
 }
+
+#layout-main div.animelist_all div.animelist_table
+{
+	margin-right:17.2em;
+}
