@@ -97,6 +97,8 @@ namespace AVDump2CL {
             if(!ParseClOptions(args)) return;
             Console.CursorVisible = false;
 
+            if((switches & eSwitches.NoDataOutput) != 0) Console.SetOut(new System.IO.StringWriter());
+
             DateTime startTime = DateTime.Now;
             ProcessMedia(new Queue<string>(mediaLst));
 
@@ -135,7 +137,7 @@ namespace AVDump2CL {
         private static void ProcessMediaFile(string filePath) {
             bool error = false;
             string fileExt = System.IO.Path.GetExtension(filePath).Substring(1);
-            if(doneListContent.Contains(filePath) || !fileExt.Contains(processExtensions)) return;
+            if(doneListContent.Contains(filePath) || !processExtensions.Contains(fileExt)) return;
 
             Stream stream = System.IO.File.OpenRead(filePath);
             DateTime startTime = DateTime.Now;
@@ -342,7 +344,7 @@ options:    (one letter switches can be put in one string)
    l       list (codecs) (not implemented)
    x       Xml old format (not implemented)
    y       XML creq format
-   N       no data output.  (not implemented)
+   N       no data output.
   control:
    c       do _not_ recurse Into subfolders
    i       skip full parsing (only for Testing) (not implemented)
