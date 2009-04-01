@@ -55,6 +55,7 @@
 #layout-main div.g_menu.filter_menu span.options
 {
     display:block;
+    text-align:left;
 }
 
 #layout-main div.g_menu.filter_menu div.user span.user
