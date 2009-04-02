@@ -16,13 +16,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using AVDump2Lib.Hashes;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Diagnostics;
+using AVDump2Lib.Hashes;
 using AVDump2Lib.MediaInfoLib;
-using System.Runtime.InteropServices;
 
 
 
@@ -226,7 +224,7 @@ namespace AVDump2CL {
                 bytesProcessed = 0;
                 foreach(Hash hash in hasher.Hashes) {
                     mean[hash.ReaderID].Add(hasher.Buffer.Count(hash.ReaderID));
-                    bufferSize = mean[hash.ReaderID].Calc(4);
+                    bufferSize = mean[hash.ReaderID].Calc(5);
                     if(bytesProcessed > hash.BytesProcessed || bytesProcessed == 0) bytesProcessed = hash.BytesProcessed;
 
                     charCount = bufferSize != 0 ? (int)(bufferSize / (double)(blockCount - 1) * 68) : 0;
@@ -247,6 +245,7 @@ namespace AVDump2CL {
                   "".PadLeft(80 - Console.CursorLeft)
                 );
             }
+            Console.WriteLine();
         }
 
         private static bool ParseClOptions(string[] args) {

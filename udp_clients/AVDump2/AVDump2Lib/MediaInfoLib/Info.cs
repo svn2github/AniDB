@@ -52,7 +52,7 @@ namespace AVDump2Lib.MediaInfoLib {
             node = xmlDoc.AppendChild(xmlDoc.CreateElement("file"));
             if(hashes != null) {
                 foreach(KeyValuePair<string, string> kvp in hashes) {
-                    if(kvp.Value.Contains(";")) {
+                    if(kvp.Value.Contains(";")) { //Handle Ed2k screwup
                         string[] hashSplit = kvp.Value.Split(';');
                         for(int i = 0;i < hashSplit.Length;i++) AppendLeaf(xmlDoc, node, kvp.Key, kvp.Value, null);
                     } else {

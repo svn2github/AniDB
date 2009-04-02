@@ -70,7 +70,7 @@ namespace AVDump2Lib.Hashes {
                 hashString += hashAlgorithm.Hash[i].ToString("X");
             }
 
-            if(hashAlgorithm is Ed2k) { //TODO Handle more nicely
+            if(hashAlgorithm is Ed2k) { //Handle Ed2k screwup
                 Ed2k ed2k = (Ed2k)hashAlgorithm;
                 if(!ed2k.BlueIsRed()) {
                     hashString += ";";
