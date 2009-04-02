@@ -89,3 +89,9 @@
 {
 	margin-left: 15em;
 }
+
+#layout-main div.admin_all div.admin_genren_edit textarea
+{
+	width:500px;
+	height:300px;
+}
