@@ -14,8 +14,6 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 
 namespace AVDump2Lib.BlockBuffer {
@@ -66,15 +64,11 @@ namespace AVDump2Lib.BlockBuffer {
             buffer[writePos] = data;
             writePos = (writePos + 1) & blockMask;
             lastBlockReached = isLastBlock;
-            /*if(readPos == writePos)
-                throw new Exception("Buffer full");*/
         }
         public int Write(Stream stream) {
             int numRead = stream.Read(buffer[writePos], 0, blockSize);
             if(numRead != 0) {
-                if(stream.Position != stream.Length) {
-                    writePos = (writePos + 1) & blockMask;
-                }
+                if(stream.Position != stream.Length) writePos = (writePos + 1) & blockMask;
             } else {
                 lastBlockReached = true;
             }
@@ -95,62 +89,47 @@ namespace AVDump2Lib.BlockBuffer {
             get { return buffer[(readPos[reader] + index) & blockMask]; }
             set { buffer[(writePos + index) & blockMask] = value; }
         }
-        public byte[] Peek(int reader) {
-            return buffer[readPos[reader]];
-        }
+        public byte[] Peek(int reader) { return buffer[readPos[reader]]; }
         public byte[] Read(int reader) {
             int pos = readPos[reader];
             readPos[reader] = (readPos[reader] + 1) & blockMask;
             return buffer[pos];
         }
-        public void Read(byte[][] buffer, int offset, int len, int reader) {
-            for(int i = 0;i < len;++i) buffer[i] = Read(reader);
-        }
-        public bool CanRead(int reader) {
-            return Count(reader) != 0 || (lastBlockReached && Count(reader) == 0);
-        }
+        public void Read(byte[][] buffer, int offset, int len, int reader) { for(int i = 0;i < len;++i) buffer[i] = Read(reader); }
+        public bool CanRead(int reader) { return Count(reader) != 0 || (lastBlockReached && Count(reader) == 0); }
 
         public void Discard(int bytes, int reader) {
             if(Count(reader) < bytes) bytes = Count(reader);
-
             readPos[reader] = (readPos[reader] + bytes) & blockMask;
         }
 
-        public string getString(int pos, int length, int reader) {
+        /*public string getString(int pos, int length, int reader) {
             string s = "";
             for(int i = pos;i < pos + length;++i) {
-                if(this[i, reader][0] >= 32 && this[i, reader][0] <= 127)
-                    s += (char)this[i, reader][0];
+                if(this[i, reader][0] >= 32 && this[i, reader][0] <= 127) s += (char)this[i, reader][0];
             }
             return s.Trim();
         }
         public void displayBuffer(int Length, int reader) {
             int i = 0;
             while(i < Length) {
-                System.Diagnostics.Debug.Write(i.ToString("X2") + " : ");
+                Debug.Write(i.ToString("X2") + " : ");
                 for(int j = i;j < i + 16;++j) {
-                    if(j < Length)
-                        System.Diagnostics.Debug.Write(this[j, reader][0].ToString("X2"));
-                    else
-                        System.Diagnostics.Debug.Write("  ");
-                    System.Diagnostics.Debug.Write(' ');
+                    if(j < Length) System.Diagnostics.Debug.Write(this[j, reader][0].ToString("X2")); else Debug.Write("  ");
+                    Debug.Write(' ');
                 }
-                System.Diagnostics.Debug.Write(": ");
+                Debug.Write(": ");
                 for(int j = i;j < i + 16;++j) {
                     char c;
-                    if(j < Length)
-                        c = (char)this[j, reader][0];
-                    else
-                        c = ' ';
-                    if(c < ' ' || c > '~')
-                        c = '.';
-                    System.Diagnostics.Debug.Write(c);
+                    if(j < Length) c = (char)this[j, reader][0]; else c = ' ';
+                    if(c < ' ' || c > '~') c = '.';
+                    Debug.Write(c);
                 }
                 i += 16;
-                System.Diagnostics.Debug.WriteLine(" :");
+               Debug.WriteLine(" :");
             }
-            System.Diagnostics.Debug.WriteLine("");
-        }
+            Debug.WriteLine("");
+        }*/
     }
 
 }

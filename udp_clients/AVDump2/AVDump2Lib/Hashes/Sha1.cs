@@ -24,9 +24,7 @@ namespace AVDump2Lib.Hashes {
     public class Sha1 : HashAlgorithm {
         HashAlgorithm hash;
 
-        public Sha1() {
-            hash = new System.Security.Cryptography.SHA1CryptoServiceProvider();
-        }
+        public Sha1() { hash = new System.Security.Cryptography.SHA1CryptoServiceProvider(); }
 
         protected override void HashCore(byte[] array, int ibStart, int cbSize) {
             hash.TransformBlock(array, ibStart, cbSize, array, 0);
@@ -37,8 +35,6 @@ namespace AVDump2Lib.Hashes {
             return hash.Hash;
         }
 
-        public override void Initialize() {
-            hash.Initialize();
-        }
+        public override void Initialize() { hash.Initialize(); }
     }
 }

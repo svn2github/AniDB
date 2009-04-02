@@ -24,9 +24,7 @@ namespace AVDump2Lib.Hashes {
     class Md5 : HashAlgorithm {
         HashAlgorithm hash;
 
-        public Md5() {
-            hash = new System.Security.Cryptography.MD5CryptoServiceProvider();
-        }
+        public Md5() { hash = new System.Security.Cryptography.MD5CryptoServiceProvider(); }
 
 
         protected override void HashCore(byte[] array, int ibStart, int cbSize) {
@@ -38,8 +36,6 @@ namespace AVDump2Lib.Hashes {
             return hash.Hash;
         }
 
-        public override void Initialize() {
-            hash.Initialize();
-        }
+        public override void Initialize() { hash.Initialize(); }
     }
 }

@@ -45,7 +45,6 @@
     <Compile Include="Hashes\Md5.cs" />
     <Compile Include="Hashes\Sha1.cs" />
     <Compile Include="MediaInfoLib\Info.cs" />
-    <Compile Include="BlockBuffer\CircularBuffer.cs" />
     <Compile Include="BlockBuffer\RefillBuffer.cs" />
     <Compile Include="BlockBuffer\RingBuffer.cs" />
     <Compile Include="Hashes\Crc32.cs" />

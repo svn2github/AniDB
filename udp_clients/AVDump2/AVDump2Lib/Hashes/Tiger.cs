@@ -153,16 +153,14 @@ namespace AVDump2Lib.Hashes {
 				-3650491565905270770L, -4529053496248414107L, -4021111997381021802L, -4350414089199835873L };
             Tiger.T = _Vb_t_array_0;
         }
-
         public Tiger() {
             this.buf = new byte[64];
             this.block = new long[8];
             this.Initialize();
         }
+        ~Tiger() { }
 
-        public override bool CanTransformMultipleBlocks {
-            get { return true; }
-        }
+        public override bool CanTransformMultipleBlocks { get { return true; } }
 
         public void Compress() {
             long aa = 0L;
@@ -202,11 +200,6 @@ namespace AVDump2Lib.Hashes {
             this.a ^= aa;
             this.b -= bb;
             this.c += cc;
-        }
-
-
-        ~Tiger() {
-
         }
 
         protected override void HashCore(byte[] data, int nStart, int nSize) {
@@ -293,7 +286,6 @@ namespace AVDump2Lib.Hashes {
             }
             this.Compress();
         }
-
         public void RoundABC(long x, int mul) {
             long c = 0L;
             int ch = 0;
@@ -309,7 +301,6 @@ namespace AVDump2Lib.Hashes {
             this.b *= ((long)mul);
             this.c = c;
         }
-
         public void RoundBCA(long x, int mul) {
             long a = 0L;
             int ah = 0;
@@ -325,7 +316,6 @@ namespace AVDump2Lib.Hashes {
             this.c *= ((long)mul);
             this.a = a;
         }
-
         public void RoundCAB(long x, int mul) {
             long b = 0L;
             int bh = 0;
@@ -341,7 +331,6 @@ namespace AVDump2Lib.Hashes {
             this.a *= ((long)mul);
             this.b = b;
         }
-
         public void Schedule(long[] x) {
             int _Vb_t_i4_0 = 0;
             _Vb_t_i4_0 = 0;
@@ -402,6 +391,5 @@ namespace AVDump2Lib.Hashes {
             }
             return true;
         }
-
     }
 }

@@ -14,20 +14,15 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
-using System;
 using System.Collections.Generic;
-using System.Text;
-using AVDump2Lib.BlockBuffer;
-using System.Security.Cryptography;
-using System.Threading;
 using System.IO;
+using System.Security.Cryptography;
+using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.Hashes {
     public class Hasher {
         private Dictionary<string, string> hashStringDict;
-
         private List<Hash> hashes;
-
         private RefillBuffer b;
 
 
@@ -37,34 +32,24 @@ namespace AVDump2Lib.Hashes {
             hashes = new List<Hash>();
         }
 
-
         public Dictionary<string, string> HashStringDict { get { return hashStringDict; } }
-        public void AddHash(HashAlgorithm hash, string name) {
-            hash.Initialize();
-            hashes.Add(new Hash(b, hashes.Count, hash, name));
-        }
-        public void Join() {
-            for(int i = 0;i < hashes.Count;i++) {
-                hashes[i].Join();
-                hashStringDict[hashes[i].Name] = hashes[i].HashString;
-            }
-
-        }
-        public void Start() {
-            b.Start(hashes.Count);
-
-            for(int i = 0;i < hashes.Count;i++) {
-                hashes[i].Start();
-            }
-        }
-        public bool IsDone() {
-            for(int i = 0;i < hashes.Count;i++) {
-                if(!hashes[i].IsDone()) return false;
-            }
-            return true;
+        public void AddHash(HashAlgorithm hashAlgorithm, string name) {
+            hashAlgorithm.Initialize();
+            Hash hash = new Hash(b, hashes.Count, hashAlgorithm, name);
+            hash.HashDone += (s, e) => { hashStringDict[((Hash)s).Name] = ((Hash)s).HashString; };
+            hashes.Add(hash);
         }
         public List<Hash> Hashes { get { return hashes; } }
         public RefillBuffer Buffer { get { return b; } }
 
+        public void Join() { for(int i = 0;i < hashes.Count;i++) hashes[i].Join(); }
+        public void Start() {
+            b.Start(hashes.Count);
+            for(int i = 0;i < hashes.Count;i++) hashes[i].Start();
+        }
+        public bool IsDone() {
+            for(int i = 0;i < hashes.Count;i++) if(!hashes[i].IsDone()) return false;
+            return true;
+        }
     }
 }

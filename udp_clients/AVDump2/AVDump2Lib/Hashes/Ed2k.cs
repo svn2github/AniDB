@@ -27,74 +27,10 @@
  * Modified and ported to C# by DvdKhl
  *****************************************************************************/
 
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Security.Cryptography;
-using System.Diagnostics;
 
 namespace AVDump2Lib.Hashes {
-    /// <summary>Broken: Blocks need to be Blocksize*n=9500*1024 (n as int)</summary>
-    public class Ed2kAlt : HashAlgorithm {
-        private static int BLOCKSIZE;
-        private byte[] md4HashBlock;
-        private long length;
-        private HashAlgorithm md4;
-        private HashAlgorithm md4final;
-
-        public Ed2kAlt() {
-            md4HashBlock = new byte[16];
-            md4 = new Md4();
-            md4final = new Md4();
-        }
-
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) {
-            int toWrite = cbSize - ibStart;
-            int space = BLOCKSIZE - (int)(length % BLOCKSIZE);
-
-            if(space > toWrite) {
-                md4.TransformBlock(array, ibStart, cbSize, array, 0);
-                length += cbSize;
-            } else if(space == toWrite) {
-                md4.TransformFinalBlock(array, ibStart, cbSize);
-                md4final.TransformBlock(md4.Hash, 0, 16, md4.Hash, 0);
-                md4.Initialize();
-                length += cbSize;
-
-            } else if(space < toWrite) {
-                //TODO: BROKEN
-                md4.TransformFinalBlock(array, ibStart, space);
-                md4final.TransformBlock(md4.Hash, 0, 16, md4.Hash, 0);
-                md4.Initialize();
-                length += space;
-
-                md4.TransformBlock(array, ibStart + space, toWrite - space, array, 0);
-                length += toWrite - space;
-            }
-
-        }
-
-        protected override byte[] HashFinal() {
-            md4.TransformFinalBlock(new byte[0], 0, 0);
-
-            if(length < BLOCKSIZE) {
-                md4final = md4;
-            } else {
-                md4final.TransformFinalBlock(md4.Hash, 0, 16);
-            }
-
-            return md4final.Hash;
-        }
-
-        public override void Initialize() {
-            Array.Clear(md4HashBlock, 0, md4HashBlock.Length);
-            length = 0;
-            BLOCKSIZE = 9728000;
-            md4.Initialize();
-            md4final.Initialize();
-        }
-    }
-
     public class Ed2k : HashAlgorithm {
         private static int BLOCKSIZE;
         private List<byte[]> md4HashBlocks;
@@ -114,6 +50,7 @@ namespace AVDump2Lib.Hashes {
             if(space > toWrite) {
                 md4.TransformBlock(array, ibStart, cbSize, array, 0);
                 length += cbSize;
+
             } else if(space == toWrite) {
                 md4.TransformFinalBlock(array, ibStart, cbSize);
                 md4HashBlocks.Add(md4.Hash);
@@ -121,7 +58,6 @@ namespace AVDump2Lib.Hashes {
                 length += cbSize;
 
             } else if(space < toWrite) {
-                //TODO: BROKEN
                 md4.TransformFinalBlock(array, ibStart, space);
                 md4HashBlocks.Add(md4.Hash);
                 md4.Initialize();

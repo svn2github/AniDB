@@ -15,17 +15,17 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Security.Cryptography;
 using System.Threading;
 using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.Hashes {
     public class Hash {
+        public event EventHandler HashDone;
         private int readerID;
 
         private string name;
+        private bool isDone;
         private string hashString;
         private long bytesProcessed;
 
@@ -38,6 +38,7 @@ namespace AVDump2Lib.Hashes {
             this.readerID = readerID;
             this.name = name;
             this.b = b;
+            isDone = false;
             t = new Thread(new ThreadStart(DoWork));
         }
 
@@ -47,7 +48,7 @@ namespace AVDump2Lib.Hashes {
 
         public void Start() { t.Start(); }
         public void Join() { t.Join(); }
-        public bool IsDone() { return hashString != null; }
+        public bool IsDone() { return isDone; }
         public long BytesProcessed { get { return bytesProcessed; } }
 
         private void DoWork() {
@@ -55,19 +56,21 @@ namespace AVDump2Lib.Hashes {
             bool isLastBlock = false;
             int numRead = 0;
 
+            while(!b.CanRead(readerID)) Thread.Sleep(50);
             numRead = b.Read(readerID, out block, out isLastBlock);
             while(!isLastBlock) {
                 hashAlgorithm.TransformBlock(block, 0, numRead, block, 0);
                 while(!b.CanRead(readerID)) Thread.Sleep(50);
                 bytesProcessed += numRead;
-                b.Read(readerID, out block, out isLastBlock);
+                numRead = b.Read(readerID, out block, out isLastBlock);
             }
             hashAlgorithm.TransformFinalBlock(block, 0, numRead);
             bytesProcessed += numRead;
 
+
             hashString = "";
             for(int i = 0;i < hashAlgorithm.Hash.Length;i++) {
-                hashString += hashAlgorithm.Hash[i].ToString("X");
+                hashString += hashAlgorithm.Hash[i].ToString("X2");
             }
 
             if(hashAlgorithm is Ed2k) { //Handle Ed2k screwup
@@ -75,11 +78,13 @@ namespace AVDump2Lib.Hashes {
                 if(!ed2k.BlueIsRed()) {
                     hashString += ";";
                     for(int i = 0;i < ed2k.BlueHash.Length;i++) {
-                        hashString += ed2k.BlueHash[i].ToString("X");
+                        hashString += ed2k.BlueHash[i].ToString("X2");
                     }
                 }
             }
 
+            if(HashDone != null) HashDone(this, new EventArgs());
+            isDone = true;
         }
     }
 }

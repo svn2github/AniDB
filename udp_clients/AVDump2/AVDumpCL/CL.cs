@@ -107,6 +107,10 @@ namespace AVDump2CL {
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
             }
+
+            if(ed2kListStream != null) ed2kListStream.Dispose();
+            if(doneListStream != null) doneListStream.Dispose();
+            if(logStream != null) logStream.Dispose();
         }
 
         private static void MonitorFiles() {
@@ -148,10 +152,11 @@ namespace AVDump2CL {
                 if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
                 if((switches & (eSwitches.Md5 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.MD5CryptoServiceProvider(), "md5");
                 if((switches & (eSwitches.Sha1 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "sha1");
-                hasher.Start();
 
+                hasher.Start();
                 if((switches & eSwitches.SupressProgress) == 0) DisplayHashBuffer(hasher);
             }
+
             if((switches & eSwitches.PrintElapsedHashingTime) != 0) Console.WriteLine("Time elapsed after Hashing: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
 
             if((switches & eSwitches.HashingOnly) == 0) {
@@ -167,19 +172,17 @@ namespace AVDump2CL {
                 doneListContent.Add(filePath);
             }
 
-
             if(hasher.HashStringDict.ContainsKey("ed2k")) {
                 if(ed2kListStream != null) {
                     byte[] ed2kBytes = System.Text.Encoding.UTF8.GetBytes(hasher.HashStringDict["ed2k"] + '\n');
                     ed2kListStream.Write(ed2kBytes, 0, ed2kBytes.Length);
                 }
 
-                if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine(hasher.HashStringDict["ed2k"]);
+                if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine("Ed2k: " + hasher.HashStringDict["ed2k"]);
                 if((switches & eSwitches.PrintAniDBLink) != 0) Console.WriteLine(String.Format(gotoLink, stream.Length, hasher.HashStringDict["ed2k"]));
                 if((switches & eSwitches.GotoAniDBLink) != 0) Process.Start(String.Format(gotoLink, stream.Length, hasher.HashStringDict["ed2k"]));
             }
 
-            stream.Close();
             stream.Dispose();
             if((switches & eSwitches.DeleteFileWhenDone) != 0 && !error) System.IO.File.Delete(filePath);
 
@@ -209,16 +212,19 @@ namespace AVDump2CL {
         }
 
         private static void DisplayHashBuffer(Hasher hasher) {
-            Console.WriteLine("*: Buffersize available for hashalgorithm");
+            Console.WriteLine("*: Buffersize available for hashalgorithm blocksize: " + blockSize + "  kb blockCount: " + blockCount);
 
             DateTime startTime = DateTime.Now;
-            Average[] mean = new Average[hasher.Hashes.Count];
-            long fileSize = hasher.Buffer.BaseStream.Length;
-            double bufferSize = 0; int charCount = 0; long bytesProcessed = 0; int timeElapsed;
             int cursorPos = Console.CursorTop;
+            long fileSize = hasher.Buffer.BaseStream.Length;
+            Average[] mean = new Average[hasher.Hashes.Count];
+            double bufferSize = 0; int charCount = 0; long bytesProcessed = 0; int timeElapsed;
 
             for(int i = 0;i < mean.Length;i++) mean[i] = new Average();
-            while(!hasher.IsDone()) {
+            bool doLoop = !hasher.IsDone();
+            while(doLoop) {
+                doLoop = !hasher.IsDone();
+
                 Console.CursorTop = cursorPos;
                 Console.CursorLeft = 0;
                 bytesProcessed = 0;
@@ -271,14 +277,12 @@ namespace AVDump2CL {
                     } else if(parts[0] == "exp") {
                         try {
                             ed2kListStream = System.IO.File.Open(parts[1], FileMode.Append, FileAccess.Write);
-                            //ed2kListPath = parts[1];
                         } catch(Exception) { invalidCl = true; }
                     } else if(parts[0] == "ext") {
                         processExtensions = parts[1];
                     } else if(parts[0] == "log") {
                         try {
                             logStream = System.IO.File.Open(parts[1], FileMode.Append, FileAccess.Write);
-                            //logPath = parts[1];
                         } catch(Exception) { invalidCl = true; }
                     } else if(parts[0] == "port") {
                         if(!int.TryParse(parts[1], out port)) invalidCl = true;
@@ -289,8 +293,6 @@ namespace AVDump2CL {
                             doneListContent.AddRange(sr.ReadToEnd().Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries));
                             sr.Dispose();
                         } catch(Exception) { invalidCl = true; }
-
-                        //doneListPath = parts[1];
                     } else if(parts[0] == "tout" && parts.Length == 3) {
                         if(!int.TryParse(parts[1], out timeout)) invalidCl = true;
                         if(!int.TryParse(parts[2], out retries)) invalidCl = true;
@@ -304,13 +306,7 @@ namespace AVDump2CL {
                         invalidCl = true;
                     }
                 } else {
-                    foreach(char sw in parts[0]) {
-                        if(char2SwitchEnum.ContainsKey(sw)) {
-                            switches |= char2SwitchEnum[sw];
-                        } else {
-                            invalidCl = true;
-                        }
-                    }
+                    foreach(char sw in parts[0]) if(char2SwitchEnum.ContainsKey(sw)) switches |= char2SwitchEnum[sw]; else invalidCl = true;
                 }
 
                 if(invalidCl) {
@@ -363,7 +359,7 @@ options:    (one letter switches can be put in one string)
    1       ED2K  (edonkey2000 hash)
    2       MD5   (message-digest algorithm 5)
    3       SHA1  (secure hash algorithm 1)
-   5       TTH   (tiger tree Hash)
+   5       TTH   (tiger tree Hash) (slow!)
    6       AICH  (advanced Intelligent corruption Handler) (not implemented)
    9       mp3hash w/o metadata + foosic fingerprint (test) (not implemented)
    a       all (available) hash algorithms

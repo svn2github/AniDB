@@ -14,9 +14,6 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Threading;
 
@@ -48,17 +45,10 @@ namespace AVDump2Lib.BlockBuffer {
         }
 
         public int Read(int reader, out byte[] b, out bool isLastBlock) {
-            int numRead;
-            bool test = rb.IsLastBlock(reader);
+            isLastBlock = rb.IsLastBlock(reader);
             b = rb.Read(reader);
-
-            if(test) {
-                isLastBlock = true;
-                numRead = lastBlockSize;
-            } else {
-                isLastBlock = false;
-                numRead = rb.BlockSize;
-            }
+            int numRead;
+            if(isLastBlock) numRead = lastBlockSize; else numRead = rb.BlockSize;
             return numRead;
         }
         public bool CanRead(int reader) { return rb.CanRead(reader); }
@@ -70,15 +60,11 @@ namespace AVDump2Lib.BlockBuffer {
         private void RingFiller() {
             int numRead = lastBlockSize = rb.Write(stream);
             while(numRead != 0) {
-                lock(rb) {
-
-                    while(!rb.CanWrite()) Thread.Sleep(50);
-                    lastBlockSize = numRead;
-                    numRead = rb.Write(stream);
-                }
+                while(!rb.CanWrite()) Thread.Sleep(50);
+                lastBlockSize = numRead;
+                numRead = rb.Write(stream);
             }
             endOfBuffer = true;
-            //Debug.Print("EOF");
         }
     }
 }
