@@ -25,3 +25,10 @@
 {
 	margin-right:17.2em;
 }
+
+#layout-main div.animelist_all div.note,
+#layout-main div.animelist_all div.fullsearch_form
+{
+	clear:none;
+	margin-right:17.2em;
+}
