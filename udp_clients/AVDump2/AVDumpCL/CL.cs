@@ -90,7 +90,7 @@ namespace AVDump2CL {
             char2SwitchEnum['g'] = eSwitches.GotoAniDBLink; //Done
             char2SwitchEnum['u'] = eSwitches.PrintElapsedHashingTime; //Done
         }
-
+         
         static void Main(string[] args) {
             if(!ParseClOptions(args)) return;
             Console.CursorVisible = false;
@@ -103,7 +103,7 @@ namespace AVDump2CL {
             if((switches & eSwitches.MonitorFolder) != 0) MonitorFiles();
 
             if((switches & eSwitches.PrintTotalTimeUsed) != 0) Console.WriteLine("Total time elapsed: " + (DateTime.Now - startTime).TotalMilliseconds.ToString());
-            if((switches & eSwitches.PauseWhenDone) == 0) {
+            if((switches & eSwitches.PauseWhenDone) != 0) {
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
             }
@@ -143,8 +143,8 @@ namespace AVDump2CL {
 
             Stream stream = System.IO.File.OpenRead(filePath);
             DateTime startTime = DateTime.Now;
-            Hasher hasher = new Hasher(stream, blockCount, blockSize * 1024);
-            if((switches & (eSwitches.Aich | eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | eSwitches.Mp3Hash | eSwitches.Sha1 | eSwitches.Tth | eSwitches.UseAllHashes)) != 0) {
+            Hasher hasher = new Hasher(stream, blockCount, blockSize *1024);
+            if((switches & (/*eSwitches.Aich |*/ eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | /*eSwitches.Mp3Hash |*/ eSwitches.Sha1 | eSwitches.Tth | eSwitches.UseAllHashes)) != 0) {
                 Console.WriteLine("Hashing: " + System.IO.Path.GetFileName(filePath));
 
                 if((switches & (eSwitches.Crc32 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Crc32(), "crc");
@@ -188,11 +188,11 @@ namespace AVDump2CL {
 
             if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
    
-            if((switches & eSwitches.PauseWhenFileDone) == 0) {
+            if((switches & eSwitches.PauseWhenFileDone) != 0) {
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
             }
-            if((switches & eSwitches.AddNewLine) == 0) Console.WriteLine("");
+            if((switches & eSwitches.AddNewLine) != 0) Console.WriteLine("");
        }
 
         private static eLogType ToLogFormatSwitch(eSwitches sw) {

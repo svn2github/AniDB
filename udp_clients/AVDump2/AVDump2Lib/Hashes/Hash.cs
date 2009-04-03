@@ -59,8 +59,9 @@ namespace AVDump2Lib.Hashes {
             while(!b.CanRead(readerID)) Thread.Sleep(50);
             numRead = b.Read(readerID, out block, out isLastBlock);
             while(!isLastBlock) {
-                hashAlgorithm.TransformBlock(block, 0, numRead, block, 0);
+                hashAlgorithm.TransformBlock(block, 0, numRead, null, 0);
                 while(!b.CanRead(readerID)) Thread.Sleep(50);
+                //if(name.StartsWith("ed2k")) Thread.Sleep(50);
                 bytesProcessed += numRead;
                 numRead = b.Read(readerID, out block, out isLastBlock);
             }

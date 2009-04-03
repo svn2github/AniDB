@@ -29,8 +29,10 @@
 
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace AVDump2Lib.Hashes {
+    /// <summary>Broken: Blocks need to be Blocksize*n=9500*1024 (n as int)</summary>
     public class Ed2k : HashAlgorithm {
         private static int BLOCKSIZE;
         private List<byte[]> md4HashBlocks;
@@ -48,7 +50,7 @@ namespace AVDump2Lib.Hashes {
             int space = BLOCKSIZE - (int)(length % BLOCKSIZE);
 
             if(space > toWrite) {
-                md4.TransformBlock(array, ibStart, cbSize, array, 0);
+                md4.TransformBlock(array, ibStart, cbSize, null, 0);
                 length += cbSize;
 
             } else if(space == toWrite) {
@@ -63,7 +65,7 @@ namespace AVDump2Lib.Hashes {
                 md4.Initialize();
                 length += space;
 
-                md4.TransformBlock(array, ibStart + space, toWrite - space, array, 0);
+                md4.TransformBlock(array, ibStart + space, toWrite - space, null, 0);
                 length += toWrite - space;
             }
 
@@ -80,7 +82,7 @@ namespace AVDump2Lib.Hashes {
             if(length >= BLOCKSIZE) {
                 md4.Initialize();
                 for(int i = 0;i < md4HashBlocks.Count;i++) {
-                    md4.TransformBlock(md4HashBlocks[i], 0, 16, md4HashBlocks[i], 0);
+                    md4.TransformBlock(md4HashBlocks[i], 0, 16, null, 0);
                 }
                 md4.TransformFinalBlock(new byte[0], 0, 0);
                 blueHash = md4.Hash;
@@ -90,7 +92,7 @@ namespace AVDump2Lib.Hashes {
             if(length % BLOCKSIZE == 0) {
                 md4.Initialize();
                 for(int i = 0;i < md4HashBlocks.Count;i++) {
-                    md4.TransformBlock(md4HashBlocks[i], 0, 16, md4HashBlocks[i], 0);
+                    md4.TransformBlock(md4HashBlocks[i], 0, 16, null, 0);
                 }
                 md4.TransformFinalBlock(md4.ComputeHash(new byte[0]), 0, 0);
             }

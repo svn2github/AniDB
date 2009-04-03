@@ -28,7 +28,7 @@ namespace AVDump2Lib.Hashes {
 
 
         protected override void HashCore(byte[] array, int ibStart, int cbSize) {
-            hash.TransformBlock(array, ibStart, cbSize, array, 0);
+            hash.TransformBlock(array, ibStart, cbSize, null, 0);
         }
 
         protected override byte[] HashFinal() {

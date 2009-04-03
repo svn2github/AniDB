@@ -43,6 +43,8 @@ namespace AVDump2Lib.Hashes {
         private long length;
         private byte[] buffer;
 
+        static string bla = "astr";
+
         public Md4() {
             A0 = 0x67452301U;
             B0 = 0xEFCDAB89U;
@@ -57,19 +59,18 @@ namespace AVDump2Lib.Hashes {
             int i = 0;
             length += cbSize;
 
-            if(cbSize >= partLen){
+
+            if(cbSize >= partLen) {
                 System.Buffer.BlockCopy(array, ibStart, buffer, n, partLen);
                 TransformMd4Block(buffer, 0);
                 i = partLen;
-                while(i + BLOCKLENGTH - 1 < cbSize){
+                while(i + BLOCKLENGTH - 1 < cbSize) {
                     TransformMd4Block(array, ibStart + i);
                     i += BLOCKLENGTH;
                 }
                 n = 0;
             }
-            if(i < cbSize){
-                System.Buffer.BlockCopy(array, ibStart + i, buffer, n, cbSize - i);
-            }
+            if(i < cbSize) System.Buffer.BlockCopy(array, ibStart + i, buffer, n, cbSize - i);
         }
 
         protected override byte[] HashFinal() {
