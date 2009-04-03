@@ -235,6 +235,8 @@ function parseData(xmldoc) {
 	// do some triming of the definition cols if possible
 	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !LAY_SHOWCRC)
 		removeColAttribute('crc',fileCols);
+	if (!uid) 
+		removeColAttribute('expand',groupCols);
 	// Okay now that i have the preferences i can rebuild fileCols
 	var newFileCols = new Array();
 	for (var i = 0; i < animePage_curLayout.length; i++) {
