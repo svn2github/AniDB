@@ -90,7 +90,7 @@ namespace AVDump2CL {
             char2SwitchEnum['g'] = eSwitches.GotoAniDBLink; //Done
             char2SwitchEnum['u'] = eSwitches.PrintElapsedHashingTime; //Done
         }
-         
+
         static void Main(string[] args) {
             if(!ParseClOptions(args)) return;
             Console.CursorVisible = false;
@@ -115,6 +115,7 @@ namespace AVDump2CL {
 
         private static void MonitorFiles() {
             while(true) {
+                Console.WriteLine("Monitoring folders, press Ctrl+C to stop");
                 Thread.Sleep(monitorSleepDuration);
                 ProcessMedia(new Queue<string>(mediaLst));
             }
@@ -128,8 +129,12 @@ namespace AVDump2CL {
                 if(System.IO.File.Exists(media)) {
                     ProcessMediaFile(media);
                 } else if(System.IO.Directory.Exists(media)) {
-                    string[] files = System.IO.Directory.GetFiles(media, "*." + processExtensions.Replace(",", "*."), searchOption);
-                    for(int i = 0;i < files.Length;i++) ProcessMediaFile(files[i]);
+                    List<string> files = new List<string>();
+                    foreach(string ext in processExtensions.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)) {
+                        files.AddRange(System.IO.Directory.GetFiles(media, "*." + ext, searchOption));
+                    }
+                    System.IO.Directory.GetFiles(media, "*." + processExtensions.Replace(",", ",*."), searchOption);
+                    for(int i = 0;i < files.Count;i++) ProcessMediaFile(files[i]);
                 } else {
                     //TODO Error?
                 }
@@ -143,13 +148,13 @@ namespace AVDump2CL {
 
             Stream stream = System.IO.File.OpenRead(filePath);
             DateTime startTime = DateTime.Now;
-            Hasher hasher = new Hasher(stream, blockCount, blockSize *1024);
+            Hasher hasher = new Hasher(stream, blockCount, blockSize * 1024);
             if((switches & (/*eSwitches.Aich |*/ eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | /*eSwitches.Mp3Hash |*/ eSwitches.Sha1 | eSwitches.Tth | eSwitches.UseAllHashes)) != 0) {
                 Console.WriteLine("Hashing: " + System.IO.Path.GetFileName(filePath));
 
                 if((switches & (eSwitches.Crc32 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Crc32(), "crc");
                 if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
-                if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
+                //if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
                 if((switches & (eSwitches.Md5 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.MD5CryptoServiceProvider(), "md5");
                 if((switches & (eSwitches.Sha1 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "sha1");
 
@@ -161,7 +166,12 @@ namespace AVDump2CL {
 
             if((switches & eSwitches.HashingOnly) == 0) {
                 System.Xml.XmlDocument xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(filePath, ToLogFormatSwitch(switches), hasher.HashStringDict, stream.Length);
-                if(logStream != null) xmlDoc.Save(logStream);
+                if(logStream != null) {
+                    byte[] filePathBytes = System.Text.Encoding.UTF8.GetBytes(filePath);
+                    logStream.Write(filePathBytes, 0, filePathBytes.Length);
+                    xmlDoc.Save(logStream);
+                    logStream.Write(new byte[] { 13, 10 }, 0, 2);
+                }
             } else {
                 //TODO
             }
@@ -187,13 +197,13 @@ namespace AVDump2CL {
             if((switches & eSwitches.DeleteFileWhenDone) != 0 && !error) System.IO.File.Delete(filePath);
 
             if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
-   
+
             if((switches & eSwitches.PauseWhenFileDone) != 0) {
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
             }
-            if((switches & eSwitches.AddNewLine) != 0) Console.WriteLine("");
-       }
+            if((switches & eSwitches.AddNewLine) != 0) Console.WriteLine();
+        }
 
         private static eLogType ToLogFormatSwitch(eSwitches sw) {
             switch(sw) {
@@ -291,7 +301,7 @@ namespace AVDump2CL {
                             doneListStream = System.IO.File.Open(parts[1], FileMode.OpenOrCreate, FileAccess.ReadWrite);
                             StreamReader sr = new StreamReader(doneListStream);
                             doneListContent.AddRange(sr.ReadToEnd().Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries));
-                            sr.Dispose();
+                            //sr.Dispose();
                         } catch(Exception) { invalidCl = true; }
                     } else if(parts[0] == "tout" && parts.Length == 3) {
                         if(!int.TryParse(parts[1], out timeout)) invalidCl = true;
