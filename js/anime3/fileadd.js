@@ -57,7 +57,7 @@ function parseData(xmldoc) {
 	var t1 = new Date();
 	var groupEntries = root.getElementsByTagName('group');
 	var select = createBasicSelect('addf.group','addf.group');
-	createSelectOption(select, 'ignore', '1', true, null, false);
+	createSelectOption(select, 'ignore', '-1', true, null, false);
 	createSelectOption(select, 'no or unknown group', '0', false, null, false);
 	for (var i = 0; i < groupEntries.length; i++) {
 		var groupEntry = new CGroup(groupEntries[i]);

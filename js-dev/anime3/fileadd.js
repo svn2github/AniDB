@@ -57,7 +57,7 @@ function parseData(xmldoc) {
 	var t1 = new Date();
 	var groupEntries = root.getElementsByTagName('group');
 	var select = createBasicSelect('addf.group','addf.group');
-	createSelectOption(select, 'ignore', '1', true, null, false);
+	createSelectOption(select, 'ignore', '-1', true, null, false);
 	createSelectOption(select, 'no or unknown group', '0', false, null, false);
 	for (var i = 0; i < groupEntries.length; i++) {
 		var groupEntry = new CGroup(groupEntries[i]);
@@ -676,6 +676,7 @@ function updateSearchString() {
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
+	if (uriObj['ajax'] && uriObj['ajax'] == 0) return;
 	if (uriObj['eid'] && uriObj['show'] && uriObj['show'].indexOf('addfile') >= 0) eid = uriObj['eid'];
 	else return; // badPage
 	if (uriObj['edit'] && uriObj['edit'] != 0) { isEditPage = true; simpleView = false; }
