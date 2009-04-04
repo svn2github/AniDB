@@ -3,13 +3,15 @@
 #layout-main input.exclude,
 #layout-main table.filelist tr.invalid,
 #layout-main div.myvotes_all table tr.low td,
-#layout-main div.addcreatoranimerel_all tr.left_only
+#layout-main div.addcreatoranimerel_all tr.left_only,
+#layout-main div.addcreatorsongrel_all tr.left_only
 {
 	background-color: #ffd7c2;
 }
 
 #layout-main div.myvotes_all table tr.g_odd.low td,
-#layout-main div.addcreatoranimerel_all tr.right_only
+#layout-main div.addcreatoranimerel_all tr.right_only,
+#layout-main div.addcreatorsongrel_all tr.right_only
 {
 	background-color: #efc7b2;
 }
@@ -31,7 +33,8 @@
 #layout-main div.schedule_all table tr.mylist,
 #layout-main div.forum div.comment div.content strong,
 #layout-main div.forum a.topictitle strong,
-#layout-main div.addcreatoranimerel_all tr.identical
+#layout-main div.addcreatoranimerel_all tr.identical,
+#layout-main div.addcreatorsongrel_all tr.identical
 {
 	background-color: #f2ffe9;
 }
@@ -55,6 +58,7 @@
 }
 
 #layout-main div.addcreatoranimerel_all tr.same_name,
+#layout-main div.addcreatorsongrel_all tr.same_name,
 #layout-main div.addsongcollectionrel_all tr.same_name
 {
 	background-color: #FFFFDF;
