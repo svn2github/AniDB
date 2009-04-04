@@ -24,6 +24,8 @@
 #layout-main div.latest2_all table tr td.mylist,
 #layout-main div.character_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.animelist_all table tr.mylist,
 #layout-main div.group_released table tr.mylist,
@@ -43,6 +45,8 @@
 #layout-main div.latest2_all table tr.g_odd td.mylist,
 #layout-main div.character_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.creator_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.animelist_all table tr.g_odd.mylist,
 #layout-main div.group_released table tr.g_odd.mylist,
@@ -61,7 +65,8 @@
 	background-color: #EEEEEE;
 }
 
-#layout-main div.addcreatoranimerel_all tr.same_name
+#layout-main div.addcreatoranimerel_all tr.same_name,
+#layout-main div.addsonganimerel_all tr.same_name
 {
 	background-color: #FFFFDF;
 }

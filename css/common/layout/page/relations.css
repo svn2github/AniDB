@@ -109,6 +109,11 @@
 	width:7em;
 }
 
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.set
+{
+	min-width:15em;
+}
+
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.name
 {
 	width:20%;
@@ -119,7 +124,7 @@
 	width:15em;
 }
 
-#layout-main div.addsongcollectionrel_all div.massadd_new_songs td input
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs td input[type="text"]
 {
 	width:100%;
 }
