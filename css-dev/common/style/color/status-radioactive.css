@@ -2,7 +2,8 @@
 #layout-main input.exclude,
 #layout-main table.filelist tr.invalid,
 #layout-main div.myvotes_all table tr.low td,
-#layout-main div.addcreatoranimerel_all tr.left_only
+#layout-main div.addcreatoranimerel_all tr.left_only,
+#layout-main div.addcreatorsongrel_all tr.left_only
 {
 	background-color: #AAAAAA;
 }
@@ -10,7 +11,8 @@
 #layout-main td del,
 #layout-main div.myvotes_all table tr.g_odd.low td,
 #layout-main div.myvotes_all table tr.low td,
-#layout-main div.addcreatoranimerel_all tr.right_only
+#layout-main div.addcreatoranimerel_all tr.right_only,
+#layout-main div.addcreatorsongrel_all tr.right_only
 {
 	background-color: #BF6269;
 }
@@ -24,13 +26,16 @@
 #layout-main div.latest2_all table tr td.mylist,
 #layout-main div.character_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.animelist_all table tr.mylist,
 #layout-main div.group_released table tr.mylist,
 #layout-main div.schedule_all table tr.mylist,
 #layout-main div.forum div.comment div.content strong,
 #layout-main div.forum a.topictitle strong,
-#layout-main div.addcreatoranimerel_all tr.identical
+#layout-main div.addcreatoranimerel_all tr.identical,
+#layout-main div.addcreatorsongrel_all tr.identical
 {
 	background-color: #6FCF7F;
 }
@@ -43,6 +48,8 @@
 #layout-main div.latest2_all table tr.g_odd td.mylist,
 #layout-main div.character_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.creator_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.animelist_all table tr.g_odd.mylist,
 #layout-main div.group_released table tr.g_odd.mylist,
@@ -61,7 +68,9 @@
 	background-color: #EEEEEE;
 }
 
-#layout-main div.addcreatoranimerel_all tr.same_name
+#layout-main div.addcreatoranimerel_all tr.same_name,
+#layout-main div.addcreatorsongrel_all tr.same_name,
+#layout-main div.addsongcollectionrel_all tr.same_name
 {
 	background-color: #FFFFDF;
 }
