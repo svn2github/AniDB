@@ -281,8 +281,11 @@ h4,
 	margin:1px 1px 1px 6px;
 }
 
-#layout-main div.anime_all div.desc
+#layout-main div.desc
 {
 	border: 1px solid;
 	padding:4px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
 }
