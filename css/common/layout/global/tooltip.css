@@ -26,9 +26,9 @@ a:hover #tooltip
 	display: block;
 	line-height: normal;
 	padding: 0;
-	margin: 7px -5em 0 0;
+	margin: 7px 0em 0em -7em;
 	position: absolute;
-	text-align: left;
+	text-align: center;
 	white-space: normal;
 	width: 250px;
 }
