@@ -11,34 +11,34 @@
 {
 	line-height:25px;
 	white-space: nowrap;
-	padding-left: 0.8em;
-	padding-right: 0.8em;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
 	display: -moz-inline-box;
 	display: inline-block;
 }
 
-#layout-main div.tagcloud span.tagcloud0 { font-size: 9px;}
-#layout-main div.tagcloud span.tagcloud1 { font-size: 10px;}
-#layout-main div.tagcloud span.tagcloud2 { font-size: 11px;}
-#layout-main div.tagcloud span.tagcloud3 { font-size: 12px;}
-#layout-main div.tagcloud span.tagcloud4 { font-size: 14px;}
-#layout-main div.tagcloud span.tagcloud5 { font-size: 16px;}
-#layout-main div.tagcloud span.tagcloud6 { font-size: 18px;}
-#layout-main div.tagcloud span.tagcloud7 { font-size: 19px;}
-#layout-main div.tagcloud span.tagcloud8 { font-size: 20px;}
-#layout-main div.tagcloud span.tagcloud9 { font-size: 21px;}
-#layout-main div.tagcloud span.tagcloud10 { font-size: 22px;}
-#layout-main div.tagcloud span.tagcloud11 { font-size: 23px;}
-#layout-main div.tagcloud span.tagcloud12 { font-size: 24px;}
-#layout-main div.tagcloud span.tagcloud13 { font-size: 25px;}
-#layout-main div.tagcloud span.tagcloud14 { font-size: 26px;}
-#layout-main div.tagcloud span.tagcloud15 { font-size: 27px;}
-#layout-main div.tagcloud span.tagcloud16 { font-size: 28px;}
-#layout-main div.tagcloud span.tagcloud17 { font-size: 29px;}
-#layout-main div.tagcloud span.tagcloud18 { font-size: 30px;}
-#layout-main div.tagcloud span.tagcloud19 { font-size: 31px;}
-#layout-main div.tagcloud span.tagcloud20 { font-size: 32px;}
-#layout-main div.tagcloud span.tagcloud21 { font-size: 33px;}
-#layout-main div.tagcloud span.tagcloud22 { font-size: 34px;}
-#layout-main div.tagcloud span.tagcloud23 { font-size: 35px;}
-#layout-main div.tagcloud span.tagcloud24 { font-size: 36px;}
+#layout-main div.tagcloud span.tagcloud0 { font-size: 8px;}
+#layout-main div.tagcloud span.tagcloud1 { font-size: 8px;}
+#layout-main div.tagcloud span.tagcloud2 { font-size: 9px;}
+#layout-main div.tagcloud span.tagcloud3 { font-size: 9px;}
+#layout-main div.tagcloud span.tagcloud4 { font-size: 10px;}
+#layout-main div.tagcloud span.tagcloud5 { font-size: 11px;}
+#layout-main div.tagcloud span.tagcloud6 { font-size: 12px;}
+#layout-main div.tagcloud span.tagcloud7 { font-size: 13px;}
+#layout-main div.tagcloud span.tagcloud8 { font-size: 13px;}
+#layout-main div.tagcloud span.tagcloud9 { font-size: 14px;}
+#layout-main div.tagcloud span.tagcloud10 { font-size: 14px;}
+#layout-main div.tagcloud span.tagcloud11 { font-size: 16px;}
+#layout-main div.tagcloud span.tagcloud12 { font-size: 16px;}
+#layout-main div.tagcloud span.tagcloud13 { font-size: 18px;}
+#layout-main div.tagcloud span.tagcloud14 { font-size: 18px;}
+#layout-main div.tagcloud span.tagcloud15 { font-size: 20px;}
+#layout-main div.tagcloud span.tagcloud16 { font-size: 21px;}
+#layout-main div.tagcloud span.tagcloud17 { font-size: 21px;}
+#layout-main div.tagcloud span.tagcloud18 { font-size: 22px;}
+#layout-main div.tagcloud span.tagcloud19 { font-size: 22px;}
+#layout-main div.tagcloud span.tagcloud20 { font-size: 23px;}
+#layout-main div.tagcloud span.tagcloud21 { font-size: 23px;}
+#layout-main div.tagcloud span.tagcloud22 { font-size: 24px;}
+#layout-main div.tagcloud span.tagcloud23 { font-size: 24px;}
+#layout-main div.tagcloud span.tagcloud24 { font-size: 25px;}
