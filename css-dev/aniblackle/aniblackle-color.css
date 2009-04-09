@@ -147,7 +147,8 @@ input[type="submit"]:hover,
 	background-color: #000000;
 }
 
-#layout-main div.anime_all div.desc
+#layout-main div.anime_all div.desc,
+#layout-main div.desc,
 {
 	background-color:#000000;
 	border-color:#666666;
