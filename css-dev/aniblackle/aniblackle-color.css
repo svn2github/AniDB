@@ -62,8 +62,7 @@ span.g_odd
 
 #layout-main div.tagcloud
 {
-	background-color:#888888;
-	border-color:#888888;
+	border-color:#666666;
 }
 
 button:hover
@@ -108,7 +107,7 @@ input[type="submit"]:hover
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-nav div.menu_hr
 {
-	border-color:#888888;
+	border-color:#666666;
 }
 
 button:hover,
@@ -221,7 +220,7 @@ input[type="submit"]:hover,
 #layout-main div.anime_all div.desc
 {
 	background-color:#000000;
-	border-color:#888888;
+	border-color:#666666;
 }
 
 div.quotebody
@@ -263,7 +262,7 @@ div.quotebody
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-	border-top-color:#888888;
+	border-top-color:#666666;
 }
 
 #layout-main div.forum ul.topics
