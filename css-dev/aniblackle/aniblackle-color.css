@@ -95,7 +95,11 @@ input[type="submit"]:hover
 	background-color:#728972;
 }
 
-th,
+th
+{
+	background-color: #000000;
+}
+
 #layout-main table tr.header,
 #layout-main table thead tr
 {
