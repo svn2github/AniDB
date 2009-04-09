@@ -83,6 +83,12 @@ tr + tr td,
 	border-top:1px solid #C9D7F1;
 }
 
+#layout-main div.g_definitionlist tr th
+{
+	border-top:1px solid #C9D7F1;
+	border-right:1px solid #C9D7F1;
+}
+
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4
 {

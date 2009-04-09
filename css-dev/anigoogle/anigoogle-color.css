@@ -10,7 +10,8 @@ th
 }
 
 span.link,
-a
+a,
+th a
 {
 	color:#105289;
 }
