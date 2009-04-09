@@ -266,9 +266,14 @@ tr + tr td,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
 #layout-main div.anime_all div.episodes tr.newtype td,
-#layout-main div.g_definitionlist tr th + th
+#layout-main div.g_definitionlist tr th
 {
 	border-top-color: #555555;
+}
+
+#layout-main div.g_definitionlist tr:first-child th
+{
+	border-top:none;
 }
 
 #layout-main div.g_timedentry h4,

@@ -79,9 +79,14 @@ h4,
 tr + tr td,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
-#layout-main div.g_definitionlist tr th + th
+#layout-main div.g_definitionlist tr th
 {
 	border-top:1px solid #C9D7F1;
+}
+
+#layout-main div.g_definitionlist tr:first-child th
+{
+	border-top:none;
 }
 
 #layout-main div.g_timedentry h4,
