@@ -21,13 +21,13 @@
 	border-color: #666666;
 }
 
-#layout-menu,
-#layout-menu li.sub-menu:hover
+#layout-menu
 {
 	background-color:#000000;
 }
 
-#layout-menu li.sub-menu
+#layout-menu li.sub-menu,
+#layout-menu li.sub-menu:hover
 {
 	background-color:#444444;
 }
