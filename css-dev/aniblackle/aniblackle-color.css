@@ -302,3 +302,8 @@ tr + tr td,
 {
 	background-color: #000000;
 }
+
+#layout-main a.filter
+{
+	color:#888888;
+}
