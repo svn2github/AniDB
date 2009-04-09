@@ -222,13 +222,13 @@ div.quotebody
 	color: inherit;
 }
 
-#layout-main div.forum ul.topics li.row:hover,
-#layout-main div.g_timedentry
+#layout-main div.forum ul.topics li.row:hover
 {
 	background-color:#666666;
 }
 
-#layout-main div.forum ul.topics li.row:hover
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.g_timedentry h4
 {
 	background-color:#555555;
 }
