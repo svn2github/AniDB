@@ -20,6 +20,7 @@
 #layout-main td ins,
 #layout-main input.include,
 #layout-main table.filelist tr.good,
+#layout-main div.msg_all tr.mod,
 #layout-main div.myvotes_all table tr.high td,
 #layout-main div.producer_all table tr.mylist,
 #layout-main div.latest2_all table tr.mylist,
@@ -44,6 +45,7 @@
 
 #layout-main td.g_odd ins,
 #layout-main table.filelist tr.g_odd.good,
+#layout-main div.msg_all tr.g_odd.mod,
 #layout-main div.myvotes_all table tr.g_odd.high td,
 #layout-main div.producer_all table tr.g_odd.mylist,
 #layout-main div.latest2_all table tr.g_odd.mylist,
@@ -77,6 +79,7 @@
 #layout-main td del,
 #layout-main td ins,
 #layout-main table.filelist,
+#layout-main div.msg_all tr.mod,
 #layout-main table.animelist,
 #layout-main div.group_released table,
 #layout-main div.producer_related_anime table,

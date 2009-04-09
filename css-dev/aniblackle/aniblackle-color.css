@@ -91,11 +91,6 @@ input[type="submit"]:hover
 	color:#FFFFFF;
 }
 
-#layout-main div.msg_all tr.mod
-{
-	background-color:#728972;
-}
-
 th
 {
 	background-color: inherit;
