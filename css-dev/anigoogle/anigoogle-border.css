@@ -49,7 +49,7 @@ table
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom:1px double #E5ECF9;
+	border-bottom:1px double #ECF4FD;
 }
 
 #layout-main div.tabbed_pane_cfg div.body,
@@ -62,4 +62,29 @@ table
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected
 {
 	border-bottom:1px double #D4E6FC;
+}
+
+#layout-main div.tagcloud,
+#layout-main div.catcloud,
+#layout-main h1,
+h4,
+#layout-main .latest_all .g_list.filter li,
+#layout-main ul.g_list li
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+#layout-main div div.explanation div.description dl + dl,
+#layout-main div div.explanation div.description tr + tr td
+#layout-main div.report_all div.body ul li + li
+{
+	border-top:1px solid #C9D7F1;
+}
+
+#layout-main div.g_timedentry h4,
+#layout-main div.animeatt_all div.review > h4
+{
+	border-top:1px solid blue;
 }

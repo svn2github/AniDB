@@ -1,0 +1,29 @@
+#layout-content
+{
+	border-bottom:1px solid #C9D7F1;
+}
+
+#layout-content,
+#layout-nav
+{
+	border-left:1px solid #C9D7F1;
+}
+
+#layout-menu > li ul
+{
+	border:none;
+}
+
+#layout-menu,
+#layout-nav
+{
+	border-top:1px solid #C9D7F1;
+}
+
+#layout-menu li.sub-menu
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px dotted #C9D7F1;
+	border-radius:5px;
+}

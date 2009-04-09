@@ -1,6 +1,6 @@
 import os, sys
 
-__out = "../../flat/"
+__out = "E:/Program Files/Apache/htdocs/css/"
 
 def cssmerge(fullpath, outfile):
     path, filename = os.path.split(os.path.normpath(fullpath))

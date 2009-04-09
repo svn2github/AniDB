@@ -1,11 +1,12 @@
-html
-{
-	background:white;
-}
-
+html,
 tr
 {
-	background-color: white;
+	background-color:#FFFFFF;
+}
+
+th
+{
+	background-color:#C3D9FF;
 }
 
 span.link,
@@ -14,8 +15,14 @@ a
 	color:#105289;
 }
 
+#layout-main a.filter
+{
+	color:darkblue;
+}
+
 span.link:hover,
-a:hover
+a:hover,
+#layout-main a.filter:hover
 {
 	color:#AA0000;
 }
@@ -29,7 +36,7 @@ tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-color:#e5ecf9;
+	background-color:#ECF4FD;
 }
 
 #layout-search
@@ -40,7 +47,7 @@ span.g_odd
 
 #layout-main > h1
 {
-	background-color:#e5ecf9;
+	background-color:#ECF4FD;
 	border-top-color:blue;
 }
 
@@ -66,9 +73,10 @@ span.g_odd
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
 #layout-menu li.sub-menu:hover,
-#layout-menu li.sub-menu ul li:hover
+#layout-menu li.sub-menu ul li:hover,
+#layout-main div.g_timedentry h4
 {
-	background-color:#E5ECF9;
+	background-color:#ECF4FD;
 }
 
 #layout-main div.pagination span a
@@ -81,14 +89,14 @@ span.g_odd
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	background-color:#4692BF;
+	background-color:#ECF4FD;
 	border-color:#4692BF;
 	color:#FFFFFF;
 }
 
 #layout-main div.tagcloud
 {
-	background-color:#FAFAFA;
+	background-color:#ECF4FD;
 	border-color:#D1D7DC;
 }
 
@@ -103,65 +111,9 @@ span.g_odd
 	border-top-color:#c9d7f1;
 }
 
-#layout-main table tr.header,
-#layout-main div.news_all div.g_timedentry h4
+#layout-main table tr.header
 {
 	background-color:#c3d9ff;
-}
-
-
-#layout-main td ins,
-#layout-main input.include,
-#layout-main table.filelist tr.good,
-#layout-main div.myvotes_all table tr.high td,
-#layout-main div.producer_all table tr.mylist,
-#layout-main div.latest2_all table tr.mylist,
-#layout-main div.latest2_all table tr td.mylist,
-#layout-main div.character_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.collection_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.song_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.animelist_all table tr.mylist,
-#layout-main div.group_released table tr.mylist,
-#layout-main div.schedule_all table tr.mylist,
-#layout-main div.addcreatoranimerel_all tr.identical,
-#layout-main table.animelist tr.mylist
-{
-	background-color:#94c694;
-}
-
-#layout-main td.g_odd ins,
-#layout-main table.filelist tr.g_odd.good,
-#layout-main div.myvotes_all table tr.g_odd.high td,
-#layout-main div.producer_all table tr.g_odd.mylist,
-#layout-main div.latest2_all table tr.g_odd.mylist,
-#layout-main div.latest2_all table tr.g_odd td.mylist,
-#layout-main div.character_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.creator_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.collection_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.song_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.animelist_all table tr.g_odd.mylist,
-#layout-main div.group_released table tr.g_odd.mylist,
-#layout-main div.schedule_all table tr.g_odd.mylist,
-#layout-main table.animelist tr.g_odd.mylist
-{
-	background-color:#86b186;
-}
-
-#layout-main td del,
-#layout-main tr.g_fs_lame,
-#layout-main input.exclude,
-#layout-main table.filelist tr.invalid,
-#layout-main table.filelist tr.g_odd.deprecated
-{
-	background-color:#c9aaaa;
-}
-
-#layout-main table.filelist tr.generic
-{
-	background-color:#EEEEEE;
 }
 
 #layout-main div.pagination span a:hover,
@@ -191,25 +143,43 @@ span.g_odd
 
 #layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected
-{
-	background-color: #E5ECF9;
-}
-
+#layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.tabbed_pane_cfg div.body ,
 #layout-main div.tabbed_pane_cfg ul.tabs li:hover,
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected
 {
-	background-color: #D4E6FC;
+	background-color:#ECF4FD;
 }
 
-#layout-main div.anime_all div.desc
+#layout-main div.desc
 {
-	background-color:#E5ECF9;
+	background-color:#ECF4FD;
 	border-color:#C9D7F1;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.general table tr
 {
 	background-color: inherit;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	background-color:#FFFFFF;
+}
+
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.events .rbottom *,
+#layout-main div.forum div.events .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *,
+#layout-main div.forum ul.topics li.g_odd,
+#layout-main div div.addrelform table tr,
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.profile_all div.default_languages table tr
+{
+	background-color:#ECF4FD;
 }

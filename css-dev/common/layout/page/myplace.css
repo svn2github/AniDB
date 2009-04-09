@@ -116,3 +116,8 @@
 	clear:none;
 	float:none;
 }
+
+#layout-main div.userpage_all div.stats table th
+{
+	width:9em;
+}

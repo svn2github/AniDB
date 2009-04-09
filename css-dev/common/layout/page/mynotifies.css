@@ -1,4 +1,5 @@
-#layout-main div.mynotifies_all table.mynotifies_list
+#layout-main div.mynotifies_all table.mynotifies_list,
+#layout-main div.mynotifies_all div.mynotifies_list table
 {
 	width: 100%
 }

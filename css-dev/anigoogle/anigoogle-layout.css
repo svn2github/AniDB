@@ -33,7 +33,7 @@
 #layout-search p,
 #layout-search form
 {
-	margin:0;
+	margin:-.5em 0;
 	padding:0;
 }
 
@@ -90,7 +90,7 @@
 	margin-left:-11em;
 }
 
-#anidb div.main_nav
+#layout-nav.main_nav
 {
 	height:25em;
 }
@@ -109,7 +109,7 @@
 #layout-nav div.main_search input.submit
 {
 	float:left;
-	margin-left:6.5em;
+	margin-left:7.5em;
 	margin-top:.2em;
 	width:150px;
 }
@@ -281,8 +281,19 @@ h4,
 	margin:1px 1px 1px 6px;
 }
 
-#layout-main div.anime_all div.desc
+#layout-main div.desc
 {
 	border: 1px solid;
 	padding:4px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+}
+
+#layout-main div.tagcloud,
+#layout-main div.catcloud
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
 }

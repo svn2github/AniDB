@@ -10,10 +10,11 @@
 	text-align: left;	
 }
 
-
 #layout-main ul.g_list li
 {
-	display: inline;
+	display: block;
+	display: -moz-inline-block;
+	display: inline-block;
 }
 
 #layout-main ul.g_list li.prev
@@ -29,9 +30,28 @@
 #layout-main .latest_all .g_list.filter li
 {
 	display: block;
+	display: -moz-inline-block;
+	display: inline-block;
 }
 
 #layout-main ul.jump
 {
 	margin-top: 1em;
+}
+
+#layout-main ul.g_list + ul.g_list
+{
+	margin-top:-1em;
+}
+
+#layout-main .latest_all .g_list.filter
+{
+	margin-top:0;
+}
+
+#layout-main .latest_all .g_list.filter li,
+#layout-main ul.g_list li
+{
+	margin-top:0.5em;
+	margin-right:0.3em;
 }
