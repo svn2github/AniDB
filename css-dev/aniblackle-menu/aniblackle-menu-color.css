@@ -15,12 +15,14 @@
 	border-top-color:#666666;
 }
 
-#layout-menu li.sub-menu
+#layout-menu li.sub-menu,
+#layout-menu li.sub-menu:hover
 {
 	border-color: #666666;
 }
 
-#layout-menu
+#layout-menu,
+#layout-menu li.sub-menu:hover
 {
 	background-color:#000000;
 }
