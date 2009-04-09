@@ -150,3 +150,11 @@
 {
 	background-image: url(../icons/silk/events_birthday.png);
 }
+*.i_events_event
+{
+	background-image: url(../icons/silk/events_event.png);
+}
+*.i_events_maintenance
+{
+	background-image: url(../icons/silk/events_maintenance.png);
+}
