@@ -97,14 +97,7 @@
 }
 
 #layout-main div.avmf_all div.avmf_list table,
-#layout-main div.admin_all div.admin_blacklist.list table,
-#layout-main div.admin_all div.admin_genren table,
-#layout-main div.admin_all div.searchassist table,
-#layout-main div.admin_all div.admin_user_avatars table,
-#layout-main div.admin_all div.admin_user.list table,
-#layout-main div.admin_all table.creatorrelation,
-#layout-main div.admin_all table.creatoranimerel,
-#layout-main div.log_all div.log_list table
+#layout-main div.admin_all div.admin_genren table
 {
 	width:100%;
 }
@@ -112,11 +105,6 @@
 #layout-main div.admin_all table.creatoranimerel td.count
 {
 	width:6em;
-}
-
-#layout-main div.log_all div.log_list
-{
-	margin-top: -3em;
 }
 
 #layout-main div.avmf_all div.avmf_list ul.g_list + table,
