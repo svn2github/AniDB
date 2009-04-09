@@ -654,11 +654,11 @@ function createFileTable(episode) {
 		table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
+	var odd = 0;
 	for (var f = 0; f < episode.files.length; f++) {
 		var file = files[episode.files[f]];
 		if (!file) continue;
 		if (expandedGroups && groupFilter.indexOf(file.groupId) < 0) continue;
-		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		// Filtering stuff
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
@@ -668,21 +668,18 @@ function createFileTable(episode) {
 			filterObj.markHidden(file);
 			if (!file.visible) episode.hiddenFiles++;
 		} else file.visible = false; // STUB files should be very hidden, very hidden indeed..
+		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		if (!expandedGroups) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
 			if (!file.visible || (file.type == 'generic' && LAY_HIDEGENERICFILES)) row.style.display = 'none';		
 		}
-		if (file.type == 'generic') row.className = "generic no_sort";
-		else {
-			if (file.crcStatus == 'valid') row.className = 'good';
-			if (file.crcStatus == 'invalid') row.className = 'bad';
-			if (file.isDeprecated) row.className = 'deprecated';
-			if (!file.avdumped) row.className += ' undumped';
-		}
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
+		row.className = row.className.replace(/ g_odd|g_odd/ig,'');
+		if (odd % 2) row.className = 'g_odd '+row.className;
+		odd++;
 	}
-	repaintStripes(tbody);
+	//repaintStripes(tbody);
 	if (!expandedGroups && episode.hiddenFiles) {
 		var row = document.createElement('tr');
 		var i = document.createElement('i');
