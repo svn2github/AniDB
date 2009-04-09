@@ -9,6 +9,7 @@ import utils.Logger;
 import utils.Progress;
 
 import hashing.Hasher;
+import options.RemoteOptions;
 
 public class Tester {
 
@@ -29,25 +30,35 @@ public class Tester {
 		String appDir = System.getProperty("user.home") + File.separator + ".xauc";
 		
 		HasherOptions hasherOptions = new HasherOptions();
+		RemoteOptions remoteOptions = new RemoteOptions();
+
 		if (!(new File(appDir+File.separator+hasherOptions.serFilename).exists())) 
 			hasherOptions.saveSettings(appDir);
 		else
 			hasherOptions.loadSettings(appDir);
-		
+		if (!(new File(appDir+File.separator+remoteOptions.serFilename).exists()))
+			remoteOptions.saveSettings(appDir);
+		else
+			remoteOptions.loadSettings(appDir);
+	
 		final SwingOptionsEditor editor = new SwingOptionsEditor();
 		editor.setAppDir(appDir);
+		editor.setHasherOptions(hasherOptions);
+		editor.setRemoteOptions(remoteOptions);
+		editor.loadSettings();
 		
 		java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
             	editor.setVisible(true);
             }
         });
-		
+/*
 		int num_tests = 1;
 		for (int i = 0; i < num_tests; i++) {
 			Hasher hasher = new Hasher(file);
 			hasher.setLog(log);
 			hasher.setProgress(progress);
+			hasher.setHasherOptions(hasherOptions);
 			hasher.work();
 			System.out.println("ed2k: "+hasher.ed2k);
 			System.out.println("crc32: "+hasher.crc32);
@@ -55,6 +66,7 @@ public class Tester {
 			System.out.println("sha1: "+hasher.sha1);
 			System.out.println("tth: "+hasher.tth);
 		}
+*/
 /*	
 		System.out.println("completed hashing of \""+file.getName()+"\" in "+cputime+"ms @"+Utils.calculateProcessingRate(file.length(),cputime));
 		System.out.println("ed2k: "+hasher.ed2k);

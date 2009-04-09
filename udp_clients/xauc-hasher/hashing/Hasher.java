@@ -102,6 +102,11 @@ public class Hasher {
 	 * @param progress The Progress object to use
 	 */
 	public synchronized void setProgress(Progress progress) { this.progress = progress; }
+	/**
+	 * Sets the Hasher Options object to use
+	 * @param options The Hasher Options object to use
+	 */
+	public synchronized void setHasherOptions(HasherOptions options) { this.options = options; }
 
 	// MAIN WORK METHODS
 	/**
