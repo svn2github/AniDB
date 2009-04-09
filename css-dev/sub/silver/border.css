@@ -116,7 +116,6 @@ img, a
 }
 
 #layout-main div div.explanation div.description dl + dl,
-#layout-main div div.explanation div.description tr + tr td,
 #layout-main div.report_all div.body ul li + li
 {
 	border-top:1px solid #D1D7DC;

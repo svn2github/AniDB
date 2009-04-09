@@ -297,3 +297,26 @@ h4,
 	-webkit-border-radius:5px;
 	border-radius: 5px;
 }
+
+#layout-main ul.g_list li
+{
+	display: -moz-inline-block;
+	display: inline-block;
+}
+
+#layout-main ul.g_list + ul.g_list
+{
+	margin-top:-1em;
+}
+
+#layout-main .latest_all .g_list.filter
+{
+	margin-top:0;
+}
+
+#layout-main .latest_all .g_list.filter li,
+#layout-main ul.g_list li
+{
+	margin-top:0.5em;
+	margin-right:0.3em;
+}

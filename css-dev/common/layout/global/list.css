@@ -10,7 +10,6 @@
 	text-align: left;	
 }
 
-
 #layout-main ul.g_list li
 {
 	display: inline;
@@ -24,11 +23,6 @@
 #layout-main ul.g_list li.next
 {
 	text-align: right;
-}
-
-#layout-main .latest_all .g_list.filter li
-{
-	display: block;
 }
 
 #layout-main ul.jump
