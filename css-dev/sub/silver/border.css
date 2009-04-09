@@ -118,7 +118,7 @@ img, a
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li
 {
-	border-top:1px solid #D1D7DC;
+	border-top:1px solid #FFFFFF;
 }
 
 #layout-main div div.explanation div.description table
