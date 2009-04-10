@@ -3,7 +3,7 @@
 	<style name="aniblackle">
 		<title>Aniblackle</title>
 		<creator>Der Idiot</creator>
-		<update>18.03.2009</update>
+		<update>09.04.2009</update>
 		<status>in development</status>
 		<description>Style inspired by blackle.com</description>
 		<path/>
@@ -19,6 +19,7 @@
 		<path/>
 		<screenshot>aniblackle-menu/images/screenshot.png</screenshot>
 		<thumbnail>aniblackle-menu/images/thumbnail.png</thumbnail>
+	</style>
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
@@ -61,20 +62,20 @@
 	</style>
 	<style name="anigoogle">
 		<title>Anigoogle</title>
-		<creator>hrm &amp; Der Idiot</creator>
-		<update>27.09.2008</update>
+		<creator>Der Idiot</creator>
+		<update>09.04.2009</update>
 		<status>in development</status>
-		<description>Style inspired by Google. Initially started by hrm 2 years ago and currently maintained by Der idiot.</description>
+		<description>Style inspired by Google.</description>
 		<path/>
 		<screenshot>anigoogle/images/screenshot.png</screenshot>
 		<thumbnail>anigoogle/images/thumbnail.png</thumbnail>
 	</style>
-	</style><style name="anigoogle-menu">
-		<title>Anigoogle</title>
-		<creator>hrm &amp; Der Idiot</creator>
-		<update>27.09.2008</update>
+	<style name="anigoogle-menu">
+		<title>Anigoogle with Menu</title>
+		<creator>Der Idiot</creator>
+		<update>09.04.2009</update>
 		<status>in development</status>
-		<description>Style inspired by Google. Initially started by hrm 2 years ago and currently maintained by Der idiot.</description>
+		<description>Style inspired by blackle.com</description>
 		<path/>
 		<screenshot>anigoogle-menu/images/screenshot.png</screenshot>
 		<thumbnail>anigoogle-menu/images/thumbnail.png</thumbnail>
@@ -153,7 +154,8 @@
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
 		<update>19.06.2007</update>
-		<status>In development</status>
+		<status>In development
+</status>
 		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
