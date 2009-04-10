@@ -3,12 +3,22 @@
 	<style name="aniblackle">
 		<title>Aniblackle</title>
 		<creator>Der Idiot</creator>
-		<update>27.09.2008</update>
+		<update>09.04.2009</update>
 		<status>in development</status>
 		<description>Style inspired by blackle.com</description>
 		<path/>
 		<screenshot>aniblackle/images/screenshot.png</screenshot>
 		<thumbnail>aniblackle/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="aniblackle-menu">
+		<title>Aniblackle with Menu</title>
+		<creator>Der Idiot</creator>
+		<update>09.04.2009</update>
+		<status>in development</status>
+		<description>Style inspired by blackle.com</description>
+		<path/>
+		<screenshot>aniblackle-menu/images/screenshot.png</screenshot>
+		<thumbnail>aniblackle-menu/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
@@ -52,13 +62,23 @@
 	</style>
 	<style name="anigoogle">
 		<title>Anigoogle</title>
-		<creator>hrm &amp; Der Idiot</creator>
-		<update>27.09.2008</update>
+		<creator>Der Idiot</creator>
+		<update>09.04.2009</update>
 		<status>in development</status>
-		<description>Style inspired by Google. Initially started by hrm 2 years ago and currently maintained by Der idiot.</description>
+		<description>Style inspired by Google.</description>
 		<path/>
 		<screenshot>anigoogle/images/screenshot.png</screenshot>
 		<thumbnail>anigoogle/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="anigoogle-menu">
+		<title>Anigoogle with Menu</title>
+		<creator>Der Idiot</creator>
+		<update>09.04.2009</update>
+		<status>in development</status>
+		<description>Style inspired by blackle.com</description>
+		<path/>
+		<screenshot>anigoogle-menu/images/screenshot.png</screenshot>
+		<thumbnail>anigoogle-menu/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anitube">
 		<title>Anitube</title>
@@ -256,11 +276,11 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<thumbnail>sub-silver/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="zakura">
-		<title>sub-zakura</title>
-		<creator>epoximator</creator>
+		<title>Zakura</title>
+		<creator>Zak</creator>
 		<update/>
-		<status>Test</status>
-		<description>Based on Zakura by Zak</description>
+		<status/>
+		<description/>
 		<path/>
 		<screenshot>zakura/images/screenshot.png</screenshot>
 		<thumbnail>zakura/images/thumbnail.png</thumbnail>
