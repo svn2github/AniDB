@@ -33,7 +33,7 @@
 #layout-search p,
 #layout-search form
 {
-	margin:0;
+	margin:-.5em 0;
 	padding:0;
 }
 
@@ -90,7 +90,7 @@
 	margin-left:-11em;
 }
 
-#anidb div.main_nav
+#layout-nav.main_nav
 {
 	height:25em;
 }
@@ -109,7 +109,7 @@
 #layout-nav div.main_search input.submit
 {
 	float:left;
-	margin-left:6.5em;
+	margin-left:7.5em;
 	margin-top:.2em;
 	width:150px;
 }
@@ -296,4 +296,27 @@ h4,
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius: 5px;
+}
+
+#layout-main ul.g_list li
+{
+	display: -moz-inline-block;
+	display: inline-block;
+}
+
+#layout-main ul.g_list + ul.g_list
+{
+	margin-top:-1em;
+}
+
+#layout-main .latest_all .g_list.filter
+{
+	margin-top:0;
+}
+
+#layout-main .latest_all .g_list.filter li,
+#layout-main ul.g_list li
+{
+	margin-top:0.5em;
+	margin-right:0.3em;
 }

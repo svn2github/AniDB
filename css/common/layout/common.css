@@ -211,3 +211,8 @@ div.loadingbar_red { background: url(../icons/layout/loadingbar_red.png); }
 div.loadingbar_orange { background: url(../icons/layout/loadingbar_orange.png); }
 div.loadingbar_yellow { background: url(../icons/layout/loadingbar_yellow.png); }
 div.loadingbar_blue { background: url(../icons/layout/loadingbar_blue.png); }
+
+table + select
+{
+	margin-top:1em;
+}

@@ -27,3 +27,8 @@
 	margin-top:0;
 	margin-bottom:1em;
 }
+
+#layout-main div.msg_all div.message.list table
+{
+	width:100%;
+}

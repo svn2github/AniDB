@@ -6,9 +6,9 @@
 }
 #layout-main div.animeatt_reviews div.review div.bar
 {
+	margin-top:1em;
 	float: right;
 	width: 11em;
-	margin-top: -2em;
 }
 #layout-main div.animeatt_reviews div.review div.bar table
 {

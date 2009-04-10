@@ -1,0 +1,43 @@
+#layout-content
+{
+	border-bottom-color:#666666;
+}
+
+#layout-content,
+#layout-nav
+{
+	border-left-color:#666666;
+}
+
+#layout-menu,
+#layout-nav
+{
+	border-top-color:#666666;
+}
+
+#layout-menu li.sub-menu,
+#layout-menu li.sub-menu:hover
+{
+	border-color: #666666;
+}
+
+#layout-menu
+{
+	background-color:#000000;
+}
+
+#layout-menu li.sub-menu,
+#layout-menu li.sub-menu:hover
+{
+	background-color:#444444;
+}
+
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#888888;
+}
+
+#layout-menu > li ul
+{
+	background-color:#444444;
+}

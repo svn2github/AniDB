@@ -1,0 +1,96 @@
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main div.myvotes_all table tr.low td,
+#layout-main div.addcreatoranimerel_all tr.left_only,
+#layout-main div.addcreatorsongrel_all tr.left_only,
+#layout-main table.filelist tr.g_odd.deprecated
+{
+	background-color:#564444
+}
+
+#layout-main div.myvotes_all table tr.g_odd.low td,
+#layout-main div.addcreatoranimerel_all tr.right_only,
+#layout-main div.addcreatorsongrel_all tr.right_only
+{
+	background-color: #efc7b2;
+}
+
+#layout-main td ins,
+#layout-main input.include,
+#layout-main table.filelist tr.good,
+#layout-main div.msg_all tr.mod,
+#layout-main div.myvotes_all table tr.high td,
+#layout-main div.producer_all table tr.mylist,
+#layout-main div.latest2_all table tr.mylist,
+#layout-main div.latest2_all table tr td.mylist,
+#layout-main div.character_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.animelist_all table tr.mylist,
+#layout-main div.group_released table tr.mylist,
+#layout-main div.schedule_all table tr.mylist,
+#layout-main div.forum div.comment div.content strong,
+#layout-main div.forum a.topictitle strong,
+#layout-main div.addcreatoranimerel_all tr.identical,
+#layout-main div.addcreatorsongrel_all tr.identical,
+#layout-main table.animelist tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr td.mylist
+{
+	background-color:#364a36;
+}
+
+#layout-main td.g_odd ins,
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.msg_all tr.g_odd.mod,
+#layout-main div.myvotes_all table tr.g_odd.high td,
+#layout-main div.producer_all table tr.g_odd.mylist,
+#layout-main div.latest2_all table tr.g_odd.mylist,
+#layout-main div.latest2_all table tr.g_odd td.mylist,
+#layout-main div.character_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.creator_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.animelist_all table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main div.schedule_all table tr.g_odd.mylist,
+#layout-main table.animelist tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd td.mylist
+{
+	background-color:#4c614c;
+}
+
+#layout-main table.filelist tr.generic
+{
+	background-color:#444444;
+}
+
+#layout-main div.addcreatoranimerel_all tr.same_name,
+#layout-main div.addcreatorsongrel_all tr.same_name,
+#layout-main div.addsongcollectionrel_all tr.same_name
+{
+	background-color: #FFFFDF;
+}
+
+#layout-main td del,
+#layout-main td ins,
+#layout-main table.filelist,
+#layout-main div.msg_all tr.mod,
+#layout-main table.animelist,
+#layout-main div.group_released table,
+#layout-main div.producer_related_anime table,
+#layout-main td ins,
+#layout-main div.myvotes_all table tr.high td,
+#layout-main div.character_all div.tabbed_pane_main table,
+#layout-main div.creator_all div.tabbed_pane_main table,
+#layout-main div.anime_all div.tabbed_pane_main table,
+#layout-main div.animelist_all table,
+#layout-main div.schedule_all table,
+#layout-main div.addcreatoranimerel_all table
+{
+	color:#A0A0A0;
+}

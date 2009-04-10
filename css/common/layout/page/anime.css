@@ -88,3 +88,7 @@
 	margin-top: 0.5em;
 }
 
+#layout-main div.anime_all div.songs table th.credit
+{
+	min-width:15em;
+}

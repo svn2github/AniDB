@@ -1,4 +1,5 @@
 @import "../sub/common.css";
+@import "../common/style/color/status-black.css";
 @import "../anigoogle/anigoogle-layout.css";
 @import "../anigoogle/anigoogle-text.css";
 @import "../anigoogle/anigoogle-border.css";
@@ -7,7 +8,7 @@
 
 #layout-footer:after
 {
-	content:"design by hrm & deridiot inspired by blackle";
+	content:"design by deridiot inspired by blackle";
 }
 
 button,
@@ -19,7 +20,7 @@ input,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane div.body
 {
-	border:1px solid #888888;
+	border:1px solid #666666;
 }
 
 tr
@@ -31,7 +32,7 @@ tr
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	border-bottom:1px double #000000;
-	border-left:1px solid #888888;
-	border-right:1px solid #888888;
-	border-top:1px solid #888888;
+	border-left:1px solid #666666;
+	border-right:1px solid #666666;
+	border-top:1px solid #666666;
 }

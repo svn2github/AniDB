@@ -62,8 +62,7 @@ span.g_odd
 
 #layout-main div.tagcloud
 {
-	background-color:#888888;
-	border-color:#888888;
+	border-color:#666666;
 }
 
 button:hover
@@ -73,6 +72,7 @@ button:hover
 }
 
 a,
+th a,
 span.link,
 #layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
@@ -91,15 +91,15 @@ input[type="submit"]:hover
 	color:#FFFFFF;
 }
 
-#layout-main div.msg_all tr.mod
+th
 {
-	background-color:#728972;
+	background-color: inherit;
 }
 
 #layout-main table tr.header,
 #layout-main table thead tr
 {
-	background-color:#999999;
+	background-color:#777777;
 	color:#000000;
 }
 
@@ -108,7 +108,7 @@ input[type="submit"]:hover
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-nav div.menu_hr
 {
-	border-color:#888888;
+	border-color:#666666;
 }
 
 button:hover,
@@ -116,85 +116,9 @@ input[type="submit"]:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
-#layout-menu li.sub-menu:hover,
-#layout-main div.news_all div.g_timedentry h4,
-{
-	background-color:#888888;
-}
-
-
-#layout-main td ins,
-#layout-main input.include,
-#layout-main table.filelist tr.good,
-#layout-main div.myvotes_all table tr.high td,
-#layout-main div.producer_all table tr.mylist,
-#layout-main div.latest2_all table tr.mylist,
-#layout-main div.latest2_all table tr td.mylist,
-#layout-main div.character_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.collection_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.song_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.animelist_all table tr.mylist,
-#layout-main div.group_released table tr.mylist,
-#layout-main div.schedule_all table tr.mylist,
-#layout-main div.forum div.comment div.content strong,
-#layout-main div.forum a.topictitle strong,
-#layout-main div.addcreatoranimerel_all tr.identical,
-#layout-main table.animelist tr.mylist
-{
-	background-color:#364a36;
-}
-
-#layout-main td.g_odd ins,
-#layout-main table.filelist tr.g_odd.good,
-#layout-main div.myvotes_all table tr.g_odd.high td,
-#layout-main div.producer_all table tr.g_odd.mylist,
-#layout-main div.latest2_all table tr.g_odd.mylist,
-#layout-main div.latest2_all table tr.g_odd td.mylist,
-#layout-main div.character_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.creator_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.collection_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.song_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
-#layout-main div.animelist_all table tr.g_odd.mylist,
-#layout-main div.group_released table tr.g_odd.mylist,
-#layout-main div.schedule_all table tr.g_odd.mylist,
-#layout-main table.animelist tr.g_odd.mylist
-{
-	background-color:#4c614c;
-}
-
-#layout-main td del,
-#layout-main tr.g_fs_lame,
-#layout-main input.exclude,
-#layout-main table.filelist tr.invalid,
-#layout-main table.filelist tr.g_odd.deprecated
-{
-	background-color:#564444;
-}
-
-#layout-main table.filelist tr.generic
+#layout-main div.news_all div.g_timedentry h4
 {
 	background-color:#444444;
-}
-
-#layout-main td del,
-#layout-main td ins,
-#layout-main table.filelist,
-#layout-main table.animelist,
-#layout-main div.group_released table,
-#layout-main div.producer_related_anime table,
-#layout-main td ins,
-#layout-main div.myvotes_all table tr.high td,
-#layout-main div.character_all div.tabbed_pane_main table,
-#layout-main div.creator_all div.tabbed_pane_main table,
-#layout-main div.anime_all div.tabbed_pane_main table,
-#layout-main div.animelist_all table,
-#layout-main div.schedule_all table,
-#layout-main div.addcreatoranimerel_all table
-{
-	color:#A0A0A0;
 }
 
 #layout-main div.pagination span a:hover,
@@ -218,10 +142,11 @@ input[type="submit"]:hover,
 	background-color: #000000;
 }
 
-#layout-main div.anime_all div.desc
+#layout-main div.anime_all div.desc,
+#layout-main div.desc
 {
 	background-color:#000000;
-	border-color:#888888;
+	border-color:#666666;
 }
 
 div.quotebody
@@ -263,7 +188,7 @@ div.quotebody
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-	border-top-color:#888888;
+	border-top-color:#666666;
 }
 
 #layout-main div.forum ul.topics
@@ -303,7 +228,8 @@ div.quotebody
 	background-color:#666666;
 }
 
-#layout-main div.forum ul.topics li.row:hover
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.g_timedentry h4
 {
 	background-color:#555555;
 }
@@ -330,4 +256,54 @@ div.quotebody
 #layout-menu li.sub-menu ul li:hover
 {
     background-color:#888888;
+}
+
+tr + tr td,
+#layout-main div div.explanation div.description dl + dl,
+#layout-main div.report_all div.body ul li + li,
+#layout-main div.g_definitionlist tr th
+{
+	border-top-color: #555555;
+}
+
+#layout-main div.anime_all div.episodes tr.newtype td
+{
+	border-top-color: #777777;
+}
+
+#layout-main div.g_definitionlist tr:first-child th
+{
+	border-top:none;
+}
+
+#layout-main div.g_timedentry h4,
+#layout-main div.animeatt_all div.review > h4
+{
+	border-top-color:#666666;
+}
+
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2 
+{
+	color:inherit;
+}
+
+#layout-main div.forum div.events dl dt,
+#layout-main div.forum div.poll dl dt
+#layout-main div.cmt_entries dl.profile dd,
+#layout-main div.forum div.poll dl dd,
+#layout-main div.forum div.events dl dd
+{
+	color:#888888;
+}
+
+#layout-main div div.addrelform table tr,
+#layout-main div.animeatt_all div.review > h4
+{
+	background-color: #000000;
+}
+
+#layout-main a.filter
+{
+	color:#888888;
 }
