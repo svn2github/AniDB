@@ -7,7 +7,7 @@
  */
 jsVersionArray.push({
 	"file":"anime3/addepm.js",
-	"version":"2.4",
+	"version":"2.4.1",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
@@ -245,9 +245,10 @@ function setAllDefaults() {
 /* function that adds episodes */
 function addEpisode() {
 	var type = document.getElementById('episode.add.sel').value;
+	var quant = Number(document.getElementById('episode.add.quant').value);
+	if (quant < 1) quant = 1;
 	if (type == 'N' && anime.eps != 0 && anime.eps == normalEpsCnt) return;
 	if (type == 'N') type = '';
-	// start real work
 	var curIndex = -1;
 	var foundType = false;
 	var epNo = 0;
@@ -269,23 +270,28 @@ function addEpisode() {
 			epNo = Number(!isNaN(eNoInput[0]) ? eNoInput : eNoInput.substr(1,eNoInput.length));
 		}
 	}
-	// create new episodeEntry if no eps exist
-	if (!episode) episode = createNewEpisode(type,0)
-	var newEp = createNewEpisode(type,epNo);
-	var newRow = createEpisodeRow('-'+newEpsCnt,newEp);
-	newEp.epRow = newRow;
-	var tbody = document.getElementById('eplist').tBodies[0];
-	if (episode.nextEp) tbody.insertBefore(newRow,episode.nextEp.epRow);
-	else tbody.appendChild(newRow);
-	newEp.prevEp = episode;
-	newEp.nextEp = (episode ? episode.nextEp : null);
-	if (episode && episode.nextEp) {
-		episode.nextEp.prevEp = newEp;
-		episode.nextEp = newEp;
-	} else episode.nextEp = newEp;
-	updateEpisodeNumbers(newEp.nextEp,type,'down');
-	if (curIndex >= 0) epOrder.splice(curIndex+1,0,newEp.id);
-	else epOrder.push(newEp.id);
+	for(var x = 1; x <= quant; x++){ //process the quantity
+		console.log('epno: '+ epNo);
+		// create new episodeEntry if no eps exist
+		if (!episode) episode = createNewEpisode(type,0)
+		var newEp = createNewEpisode(type,epNo);
+		var newRow = createEpisodeRow('-'+newEpsCnt,newEp);
+		newEp.epRow = newRow;
+		var tbody = document.getElementById('eplist').tBodies[0];
+		if (episode.nextEp) tbody.insertBefore(newRow,episode.nextEp.epRow);
+		else tbody.appendChild(newRow);
+		newEp.prevEp = episode;
+		newEp.nextEp = (episode ? episode.nextEp : null);
+		if (episode && episode.nextEp) {
+			episode.nextEp.prevEp = newEp;
+			episode.nextEp = newEp;
+		} else episode.nextEp = newEp;
+		updateEpisodeNumbers(newEp.nextEp,type,'down');
+		if (curIndex >= 0) epOrder.splice(curIndex+1,0,newEp.id);
+		else epOrder.push(newEp.id);
+		eid++;epNo++;curIndex++;
+		episode = episode.nextEp;
+	}
 }
 
 // EPISODE TITLE FUNCTIONS //
@@ -699,6 +705,8 @@ function createEpisodeTable() {
 	optionArray['P']={'text':"Parody/Fandub"};
 	optionArray['O']={'text':"Other Episodes"};
 	createSelectArray(cell,'episode.add.sel','episode.add.sel',null,null,optionArray);
+	cell.appendChild(document.createTextNode('Episodes to add:'));
+	cell.appendChild(createTextInput('episode.add.quant',3, false, false, 3, 1));
 	cell.appendChild(document.createTextNode(' '));
 	var addInput = createBasicButton(null,'add');
 	addInput.onclick = addEpisode;
