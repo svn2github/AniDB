@@ -98,3 +98,8 @@
 {
 	text-align:right;
 }
+
+#layout-main div.anime_all ul.links_top
+{
+	display:none;
+}
