@@ -1,18 +1,20 @@
 #layout-main div.edit_actions
 {
 	float:right;
-	font-style:italic;
 	margin-top:-1.3em;
 	margin-right:2em;
 }
 
-#layout-main div.edit_actions span + span:before
+#layout-main div.edit_actions span:before
 {
-	content:" - ";
+	content: "[";
+}
+#layout-main div.edit_actions span:after
+{
+	content: "]";
 }
 
-#layout-main div.anime_all div.tags div.edit_actions,
-#layout-main div.anime_all div.categories div.edit_actions
+#layout-main div.edit_actions span + span:before
 {
-	margin-right:12em;
+	content:" - [";
 }
