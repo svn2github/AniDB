@@ -31,6 +31,7 @@ a:hover #tooltip
 	text-align: center;
 	white-space: normal;
 	width: 250px;
+	z-index: 5;
 }
 
 a:hover #tooltip span.top
