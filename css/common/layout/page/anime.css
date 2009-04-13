@@ -92,3 +92,9 @@
 {
 	min-width:15em;
 }
+
+#layout-main div.anime_all div.recommendations td.action,
+#layout-main div.anime_all div.reviews td.action
+{
+	text-align:right;
+}
