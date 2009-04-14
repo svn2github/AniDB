@@ -212,6 +212,6 @@ body > #layout-content
 #layout-main div.tabbed_pane ul.tabs
 {
 	text-align:left;
-	padding-bottom:1px;
+	padding-bottom:0px;
 	padding-left:6px;
 }
