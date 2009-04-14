@@ -1,7 +1,20 @@
+html, tr
+{
+	background-color:#FFFFFF;
+}
 
-a:visited, a:active, a:hover, a:link {
-  color: blue;
-  text-decoration: none;
+select,
+input[type="text"]
+{
+	background-color:#272D43;
+	border:1px solid #BFC2C9;
+	color:#FFFFFF;
+}
+
+a:visited, a:active, a:hover, a:link
+{
+	color: #1979BE;
+	text-decoration: none;
 }
 
 #layout-content div.anime_all div.mylist th,
@@ -107,4 +120,28 @@ span.link:hover,
 #layout-content table.filelist tr.deprecated
 {
 	background-color: #999999;
+}
+
+#layout-main div.tabbed_pane div.body
+{
+	background-color:#FAE287;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.tab
+{
+	background-color:#E8DDB3;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background-color:#FAE287;
+	color:#000000;
+}
+
+#layout-main div.tagcloud,
+#layout-main div.anime_all div.desc,
+#layout-main div.desc
+{
+	background-color:#FAE287;
 }

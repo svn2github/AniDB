@@ -134,7 +134,7 @@ body > #layout-content
 {
 	display: block;
 	float: right;
-	margin: 5px 3px 0px 0px;
+	margin:26px 5px 0 0;
 }
 
 #layout-search div.search form
@@ -163,7 +163,7 @@ body > #layout-content
 	background-color: #272D43;
 	border: #BFC2C9 1px solid;
 	margin: -15px 3px 0 0;
-	width: 60%;
+	width: 155px;
 	top: 47px;
 	left: 15px;
 }
@@ -180,8 +180,8 @@ body > #layout-content
 	margin-left: 2em;
 	float: none;
 	position: relative;
-	left: 115px;
-	top: 27px;
+	left:143px;
+	top:32px;
 }
 
 #layout-main div.main_all div.news p.comment
@@ -211,6 +211,7 @@ body > #layout-content
 
 #layout-main div.tabbed_pane ul.tabs
 {
-	text-align: center;
-	margin: 0px auto 0px auto;
+	text-align:left;
+	padding-bottom:1px;
+	padding-left:6px;
 }
