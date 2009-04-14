@@ -653,6 +653,15 @@ function prepPageAddEntity() {
 	if (!div) { errorAlert('prepPage',"no div found, this might not be an error"); return; }
 	var ttable = div.getElementsByTagName('table')[0];
 	if (!ttable) { errorAlert('prepPage',"no table found"); return; }
+	// find current id of the entity to ignore it
+	var fieldset = getElementsByClassName(document.getElementsByTagName('div'), 'g_section '+(!isCreatorPage ? 'character' : 'creator') +'_add', false)[0];
+	if (fieldset) {
+		fieldset = fieldset.getElementsByTagName('fieldset')[0];
+		if (fieldset) {
+			var cidinput = getElementsByName(fieldset.getElementsByTagName('input'), (!isCreatorPage ? 'charid' : 'creatorid'), false)[0];
+			if (cidinput) currentIds.push(Number(cidinput.value));
+		}
+	}
 	tbody = ttable.tBodies[0];
 	var rows = tbody.rows;
 	// create a pretty row array with indexes and all
@@ -680,7 +689,6 @@ function prepPageAddEntity() {
 	// this will make sure that if the name thingie is cleared also will the actual place where the id goes
 	guiseinput.onkeyup = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
 	guiseinput.onchange = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
-	// no fetch data to fill up value
 	if (newguiseinput.value != "" && !isNaN(Number(newguiseinput.value))) {
 		var curid = Number(newguiseinput.value);
 		currentIds.push(curid);
