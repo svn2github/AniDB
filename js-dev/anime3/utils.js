@@ -572,7 +572,7 @@ function makeBar(parentNode,start,end,total,map) {
 	
 	//Create image
 	var img = document.createElement('img');
-	img.src = base_url + 'anidb_bar_h_'+map['img']+'.gif';
+	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
 	img.width = width;
 	img.height = 10;
 	img.title = img.alt = '';
