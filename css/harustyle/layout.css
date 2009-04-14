@@ -215,3 +215,8 @@ body > #layout-content
 	padding-bottom:0px;
 	padding-left:6px;
 }
+
+#layout-main div.g_timedentry span.stamp
+{
+	margin-top:0.2em;
+}
