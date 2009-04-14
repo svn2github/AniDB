@@ -35,3 +35,44 @@ img, a
 {
 	border-top: black 2px solid;
 }
+
+#layout-main div.tabbed_pane div.body
+{
+	border:1px solid #AFAF00;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.tab
+{
+	border:1px solid #AFAF00;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	border-bottom:1px double #FAE287;
+}
+
+tr + tr td,
+#layout-main div div.explanation div.description dl + dl,
+#layout-main div.report_all div.body ul li + li,
+#layout-main div.g_definitionlist tr th
+{
+	border-top: 1px solid #AFAF00;
+}
+
+#layout-main div.g_definitionlist tr:first-child th
+{
+	border-top:none;
+}
+
+#layout-main div.tagcloud,
+#layout-main div.anime_all div.desc,
+#layout-main div.desc
+{
+	border:1px solid #AFAF00;
+}
+
+#layout-main ul.g_list li
+{
+	border:1px solid #AFAF00;
+}
