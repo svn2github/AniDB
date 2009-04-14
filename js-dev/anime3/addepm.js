@@ -271,7 +271,6 @@ function addEpisode() {
 		}
 	}
 	for(var x = 1; x <= quant; x++){ //process the quantity
-		console.log('epno: '+ epNo);
 		// create new episodeEntry if no eps exist
 		if (!episode) episode = createNewEpisode(type,0)
 		var newEp = createNewEpisode(type,epNo);
