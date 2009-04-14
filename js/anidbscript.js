@@ -505,30 +505,33 @@ var Magic = {
 		{
 			var tab = o || this;
 			if(tab){
-				var pane = document.getElementById(tab.id+'_pane');
-				if(pane){
-					var elems = tab.parentNode.getElementsByTagName('li');
-					for (var i = 0; i < elems.length; i++){
-						ClassToggle(elems[i], 'selected', 2);						
-					}
-					ClassToggle(tab, 'selected', 1);
-					CookieSet((curPageID ? curPageID + "_" : "")+'tab', tab.id);
-					elems = tab.parentNode.parentNode.getElementsByTagName('div');
-					var topTab = null;
-					for (var i = 0; i < elems.length; i++){
-						// this isn't a pane so no need to hide it
-						if (elems[i].className.indexOf('tabbed_pane') >= 0) {
-							// also show first item
-							topTab = elems[i];
-							continue;
+				var classes = tab.className.split(" ");
+				if (classes.indexOf("fake")<0) {
+					var pane = document.getElementById(tab.id+'_pane');
+					if(pane){
+						var elems = tab.parentNode.getElementsByTagName('li');
+						for (var i = 0; i < elems.length; i++){
+							ClassToggle(elems[i], 'selected', 2);						
 						}
-						if (topTab && elems[i].parentNode.parentNode == topTab) {
-							continue;
-						} 
-						if (elems[i].className.indexOf('pane') < 0) continue;
-						ClassToggle(elems[i], 'hide', 1);
+						ClassToggle(tab, 'selected', 1);
+						CookieSet((curPageID ? curPageID + "_" : "")+'tab', tab.id);
+						elems = tab.parentNode.parentNode.getElementsByTagName('div');
+						var topTab = null;
+						for (var i = 0; i < elems.length; i++){
+							// this isn't a pane so no need to hide it
+							if (elems[i].className.indexOf('tabbed_pane') >= 0) {
+								// also show first item
+								topTab = elems[i];
+								continue;
+							}
+							if (topTab && elems[i].parentNode.parentNode == topTab) {
+								continue;
+							} 
+							if (elems[i].className.indexOf('pane') < 0) continue;
+							ClassToggle(elems[i], 'hide', 1);
+						}
+						ClassToggle(pane, 'hide', 2);
 					}
-					ClassToggle(pane, 'hide', 2);
 				}
 			}
 		}),
