@@ -548,19 +548,36 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 }
 
 // GROUP BAR FUNCTIONS //
+var makeBar_rest = 0;
 function makeBar(parentNode,start,end,total,map) {
 	var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
-	var mult = 1;
-	if ( total > 0 && MAX_BAR_WIDTH / total >= 1) mult = Math.floor(MAX_BAR_WIDTH / total);
-	var max_width = (total > MAX_BAR_WIDTH ? MAX_BAR_WIDTH : total);
+
+	//Initialize makeBar_rest var
+	if (start == 1) makeBar_rest=0; 
+	
+	//Theoretical length of range
+	var length = (1 + end - start) * (MAX_BAR_WIDTH / total);
+	
+	//Correct error made by last length calculation and cut of decimals
+	var width = Math.ceil(length - makeBar_rest);
+	
+	//Make lone episodes in animes with high ep count visible again 
+	if (width<=0) width=1; 
+	
+	//Dampen IOIOIOIO effect
+	if(makeBar_rest > 2 && total != end) { makeBar_rest -= length; return;}
+	
+	//Calculate new error made by cutting of decimals
+	makeBar_rest = width - length + makeBar_rest;
+	
+	//Create image
 	var img = document.createElement('img');
 	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
-	//img.width = ( width * mult );
-	img.width = Math.round(max_width * ((1+end - start) / total))*mult;
+	img.width = width;
 	img.height = 10;
 	img.title = img.alt = '';
-	if (parentNode != null || parentNode != '') parentNode.appendChild(img);
-	else return img;
+	
+	if (parentNode != null || parentNode != '') parentNode.appendChild(img); else return img;
 }
 
 function makeCompletionBar(parentNode, range, maps) {
