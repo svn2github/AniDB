@@ -998,12 +998,12 @@ function c_undefined_r(a, b) {
 	return c_undefined(b, a);
 }
 function c_string(a, b) {
-	var aN = parseInt(a[1],10);
-	var bN = parseInt(b[1],10);
+	var aN = parseFloat(a[1]);
+	var bN = parseFloat(b[1]);
 	if (!isNaN(aN) && !isNaN(bN)) return aN - bN;
 	if (a[1] < b[1]) return -1;
 	if (a[1] > b[1]) return 1;
-	return a[0] - b[0];	
+	return a[0] - b[0];
 }
 function c_string_r(a, b) {
 	return c_string(b, a);
