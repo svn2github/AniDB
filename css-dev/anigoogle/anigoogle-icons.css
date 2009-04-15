@@ -7,3 +7,11 @@
 {
 	background-image: url(../icons/blue/minus.gif);
 }
+
+*.i_forum_link {
+  background-image:url(../icons/blue/forum_link.gif);
+}
+
+*.i_help {
+  background:transparent url(../icons/blue/ask2.gif) no-repeat scroll right center;
+}
