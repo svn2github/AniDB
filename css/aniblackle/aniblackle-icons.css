@@ -15,3 +15,47 @@
 *.i_help {
   background:transparent url(../icons/grey/ask2.gif) no-repeat scroll right center;
 }
+
+*.i_comment_add {
+background:transparent url(../icons/grey/comment_add.gif) no-repeat scroll 0 50%;
+}
+
+*.i_topic_add {
+background-image:url(../icons/grey/topic_add.gif);
+}
+
+*.i_topic_history {
+background-image:url(../icons/grey/topic_history.gif);
+}
+
+*.i_topic_delete {
+background-image:url(../icons/grey/topic_delete.gif);
+}
+
+*.i_topic_move {
+background-image:url(../icons/grey/topic_move.gif);
+}
+
+*.i_comment_revisions {
+background-image:url(../icons/grey/comment_revisions.gif);
+}
+
+*.i_comment_move {
+background-image:url(../icons/grey/comment_move.gif);
+}
+
+*.i_topic_lock {
+background-image:url(../icons/grey/topic_lock.gif);
+}
+
+*.i_comment_edit {
+background-image:url(../icons/grey/comment_edit.gif);
+}
+
+*.i_comment_quote {
+background-image:url(../icons/grey/comment_quote.gif);
+}
+
+*.i_comment_delete {
+background-image:url(../icons/grey/comment_delete.gif);
+}
