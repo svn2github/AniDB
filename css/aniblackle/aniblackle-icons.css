@@ -1,0 +1,17 @@
+*.i_plus
+{
+	background-image: url(../icons/grey/plus.gif);
+}
+
+*.i_minus
+{
+	background-image: url(../icons/grey/minus.gif);
+}
+
+*.i_forum_link {
+  background-image:url(../icons/grey/forum_link.gif);
+}
+
+*.i_help {
+  background:transparent url(../icons/grey/ask2.gif) no-repeat scroll right center;
+}
