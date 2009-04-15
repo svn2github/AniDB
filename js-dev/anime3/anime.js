@@ -749,9 +749,10 @@ function updateGroupTable() {
 					}
 					// @TODO remove this to CSS
 					var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
-					var widthval = (screen.width < 1280 ? (totalEps < 200 ? totalEps : 200) : (totalEps < 300 ? totalEps : 300));
+					/*var widthval = (screen.width < 1280 ? (totalEps < 200 ? totalEps : 200) : (totalEps < 300 ? totalEps : 300));
 					var mult = ( totalEps > 0 && MAX_BAR_WIDTH / totalEps >= 1 ? mult = Math.floor(MAX_BAR_WIDTH / totalEps) : 1);
-					cell.style.minWidth = (widthval*mult+5) + 'px'
+					cell.style.minWidth = (widthval*mult+5) + 'px'*/
+					cell.style.minWidth = MAX_BAR_WIDTH + 'px';
 				}
 				if (className.indexOf('lastep') >= 0)
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
