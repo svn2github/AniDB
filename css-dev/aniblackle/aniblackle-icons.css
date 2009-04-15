@@ -43,3 +43,7 @@ background-image:url(../icons/grey/comment_revisions.gif);
 *.i_comment_move {
 background-image:url(../icons/grey/comment_move.gif);
 }
+
+*.i_topic_lock {
+background-image:url(../icons/grey/topic_lock.gif);
+}

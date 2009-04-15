@@ -17,29 +17,33 @@
 }
 
 *.i_comment_add {
-background:transparent url(../icons/blue/comment_add.png) no-repeat scroll 0 50%;
+background:transparent url(../icons/blue/comment_add.gif) no-repeat scroll 0 50%;
 }
 
 *.i_topic_add {
-background-image:url(../icons/blue/topic_add.png);
+background-image:url(../icons/blue/topic_add.gif);
 }
 
 *.i_topic_history {
-background-image:url(../icons/blue/topic_history.png);
+background-image:url(../icons/blue/topic_history.gif);
 }
 
 *.i_topic_delete {
-background-image:url(../icons/blue/topic_delete.png);
+background-image:url(../icons/blue/topic_delete.gif);
 }
 
 *.i_topic_move {
-background-image:url(../icons/blue/topic_move.png);
+background-image:url(../icons/blue/topic_move.gif);
 }
 
 *.i_comment_revisions {
-background-image:url(../icons/blue/comment_revisions.png);
+background-image:url(../icons/blue/comment_revisions.gif);
 }
 
 *.i_comment_move {
-background-image:url(../icons/blue/comment_move.png);
+background-image:url(../icons/blue/comment_move.gif);
+}
+
+*.i_topic_lock {
+background-image:url(../icons/blue/topic_lock.gif);
 }
