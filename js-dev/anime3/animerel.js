@@ -4,7 +4,7 @@
  * version 1 (14.04.2009)
  */
 jsVersionArray.push({
-    "file": "anime3/addseq.js",
+    "file": "anime3/animerel.js",
     "version": "1",
     "revision": "$Revision: 2495 $",
     "date": "$Date:: 2009-04-14 17:50:06 -0400#$",
@@ -50,9 +50,8 @@ function fetchData(searchString, searchType) {
     }
 
     if ('' + window.location.hostname == '') {
-        console.log('xml/creator' + searchString + '_desc.xml');
         xhttpRequestFetch(req, 'xml/creator' + searchString + '_desc.xml', parseData);
-    } else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=' + searchType + '&id=' + encodeURI(searchString), parseData);
+    } else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=' + searchType + '&search=' + encodeURI(searchString), parseData);
 }
 
 function parseData(xmldoc) {
@@ -333,7 +332,6 @@ function prepPageAddAnimeAnimeRel() {
         if (!a) break;
         currentIds.push(Number(a.href.substring(a.href.indexOf('id=') + 3)));
     }
-    console.log(currentIds);
     // @TODO: when table cells have proper class names add sorting support
     handleTables(sortingCols, tables, null, collapseThumbnails, (get_info & 16));
 
