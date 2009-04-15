@@ -6,9 +6,9 @@
 jsVersionArray.push({
     "file": "anime3/animerel.js",
     "version": "1",
-    "revision": "$Revision: 2495 $",
-    "date": "$Date:: 2009-04-14 17:50:06 -0400#$",
-    "author": "$Author: arokh $"
+    "revision": "$Revision: 2504 $",
+    "date": "$Date:: 2009-04-15 16:08:40 -0400#$",
+    "author": "$Author: lrudor $"
 });
 
 var sortingCols = {
@@ -277,8 +277,7 @@ function showResults(single, filter) {
         tfoot = document.createElement('tfoot');
         row = document.createElement('tr');
         row.className = 'action';
-        var buttonName = 'add.doadd';
-        if (curPageID == 'addcharcharrel') buttonName = 'addccrel.do.add';
+        var buttonName = 'adds.do.add';
         createCell(row, 'value', createButton(buttonName, null, false, 'Add relation', 'submit'), null, 3);
         tfoot.appendChild(row);
         table.appendChild(tfoot);
