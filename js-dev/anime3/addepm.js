@@ -270,26 +270,27 @@ function addEpisode() {
 			epNo = Number(!isNaN(eNoInput[0]) ? eNoInput : eNoInput.substr(1,eNoInput.length));
 		}
 	}
-	for(var x = 1; x <= quant; x++){ //process the quantity
+	for (var x = 0; x < quant; x++) { //process the quantity
 		// create new episodeEntry if no eps exist
-		if (!episode) episode = createNewEpisode(type,0)
 		var newEp = createNewEpisode(type,epNo);
 		var newRow = createEpisodeRow('-'+newEpsCnt,newEp);
 		newEp.epRow = newRow;
 		var tbody = document.getElementById('eplist').tBodies[0];
-		if (episode.nextEp) tbody.insertBefore(newRow,episode.nextEp.epRow);
+		if (episode && episode.nextEp) tbody.insertBefore(newRow,episode.nextEp.epRow);
 		else tbody.appendChild(newRow);
 		newEp.prevEp = episode;
 		newEp.nextEp = (episode ? episode.nextEp : null);
 		if (episode && episode.nextEp) {
 			episode.nextEp.prevEp = newEp;
 			episode.nextEp = newEp;
-		} else episode.nextEp = newEp;
+		} else if (episode) episode.nextEp = newEp;
 		updateEpisodeNumbers(newEp.nextEp,type,'down');
 		if (curIndex >= 0) epOrder.splice(curIndex+1,0,newEp.id);
 		else epOrder.push(newEp.id);
-		eid++;epNo++;curIndex++;
-		episode = episode.nextEp;
+		eid++;
+		epNo++;
+		curIndex++;
+		if (episode) episode = episode.nextEp;
 	}
 }
 
@@ -704,7 +705,7 @@ function createEpisodeTable() {
 	optionArray['P']={'text':"Parody/Fandub"};
 	optionArray['O']={'text':"Other Episodes"};
 	createSelectArray(cell,'episode.add.sel','episode.add.sel',null,null,optionArray);
-	cell.appendChild(document.createTextNode('Episodes to add:'));
+	cell.appendChild(document.createTextNode(' Episodes to add:'));
 	cell.appendChild(createTextInput('episode.add.quant',3, false, false, 3, 1));
 	cell.appendChild(document.createTextNode(' '));
 	var addInput = createBasicButton(null,'add');
