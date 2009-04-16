@@ -83,3 +83,31 @@
 *.i_topic_locked {
   background-image:url(../icons/grey/topic_locked.gif);
 }
+
+*.i_pm_delete {
+  background-image:url(../icons/grey/pm_delete.gif);
+}
+
+*.i_comment_undelete {
+  background-image:url(../icons/grey/comment_undelete.gif);
+}
+
+*.i_pm_delete {
+  background-image:url(../icons/grey/pm_delete.gif);
+}
+
+*.i_vrs_2 {
+  background-image:url(../icons/grey/anidb_vrs_2.gif);
+}
+
+*.i_vrs_3 {
+  background-image:url(../icons/grey/anidb_vrs_3.gif);
+}
+
+*.i_vrs_4 {
+  background-image:url(../icons/grey/anidb_vrs_4.gif);
+}
+
+*.i_vrs_5 {
+  background-image:url(../icons/grey/anidb_vrs_5.gif);
+}
