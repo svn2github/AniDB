@@ -752,7 +752,7 @@ function updateGroupTable() {
 					/*var widthval = (screen.width < 1280 ? (totalEps < 200 ? totalEps : 200) : (totalEps < 300 ? totalEps : 300));
 					var mult = ( totalEps > 0 && MAX_BAR_WIDTH / totalEps >= 1 ? mult = Math.floor(MAX_BAR_WIDTH / totalEps) : 1);
 					cell.style.minWidth = (widthval*mult+5) + 'px'*/
-					cell.style.minWidth = MAX_BAR_WIDTH + 'px'
+					cell.style.minWidth = MAX_BAR_WIDTH + 'px';
 				}
 				if (className.indexOf('lastep') >= 0)
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
@@ -996,7 +996,9 @@ function changeWatchedState() {
 	var file = files[fid];
 	var eids = new Array();
 	eids[file.episodeId] = 1;
-	for (var eid in file.epRelations) eids[eid] = 1;
+	for (var eid in file.epRelations) {
+		if (typeof file.epRelations[eid] != "function") eids[eid] = 1;
+	}
 	for (var eid in eids) {
 		if (!eids[eid]) continue;
 		var episode = episodes[eid];
