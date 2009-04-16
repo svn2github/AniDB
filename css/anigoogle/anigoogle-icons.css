@@ -17,45 +17,69 @@
 }
 
 *.i_comment_add {
-background:transparent url(../icons/blue/comment_add.gif) no-repeat scroll 0 50%;
+  background:transparent url(../icons/blue/comment_add.gif) no-repeat scroll 0 50%;
 }
 
 *.i_topic_add {
-background-image:url(../icons/blue/topic_add.gif);
+  background-image:url(../icons/blue/topic_add.gif);
 }
 
 *.i_topic_history {
-background-image:url(../icons/blue/topic_history.gif);
+  background-image:url(../icons/blue/topic_history.gif);
 }
 
 *.i_topic_delete {
-background-image:url(../icons/blue/topic_delete.gif);
+  background-image:url(../icons/blue/topic_delete.gif);
 }
 
 *.i_topic_move {
-background-image:url(../icons/blue/topic_move.gif);
+  background-image:url(../icons/blue/topic_move.gif);
 }
 
 *.i_comment_revisions {
-background-image:url(../icons/blue/comment_revisions.gif);
+  background-image:url(../icons/blue/comment_revisions.gif);
 }
 
 *.i_comment_move {
-background-image:url(../icons/blue/comment_move.gif);
+  background-image:url(../icons/blue/comment_move.gif);
 }
 
 *.i_topic_lock {
-background-image:url(../icons/blue/topic_lock.gif);
+  background-image:url(../icons/blue/topic_lock.gif);
 }
 
 *.i_comment_edit {
-background-image:url(../icons/blue/comment_edit.gif);
+  background-image:url(../icons/blue/comment_edit.gif);
 }
 
 *.i_comment_quote {
-background-image:url(../icons/blue/comment_quote.gif);
+  background-image:url(../icons/blue/comment_quote.gif);
 }
 
 *.i_comment_delete {
-background-image:url(../icons/blue/comment_delete.gif);
+  background-image:url(../icons/blue/comment_delete.gif);
+}
+
+*.i_comment_info {
+  background-image:url(../icons/blue/comment_info.gif);
+}
+
+*.i_top {
+  background:transparent url(../icons/blue/icon_back_top.gif) no-repeat scroll 0 50%;
+}
+
+*.i_topic_undelete {
+  background-image:url(../icons/blue/topic_undelete.gif);
+}
+
+*.i_topic_unlock {
+  background-image:url(../icons/blue/topic_unlock.gif);
+}
+
+*.i_comment_setactive {
+  background-image:url(../icons/blue/comment_setactive.gif);
+}
+
+*.i_topic_locked {
+  background-image:url(../icons/blue/topic_locked.gif);
 }
