@@ -6,11 +6,11 @@
  */
 jsVersionArray.push({
 	"file":"anime3/aproduceradd.js",
-	"version":"1.6",
+	"version":"1.7",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Fixed this again"
+	"changelog":"Added infotips"
 });
  
 // GLOBALS
@@ -37,9 +37,11 @@ function createTooltips(node) {
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
+	createPreferencesTable('global');
 	initTooltips();
 	var table = getElementsByClassName(document.getElementsByTagName('table'),'wishlist',false)[0];
 	if (!table) return;
+	table.id = 'wishlist';
 	var tbody = table.tBodies[0];
 	var thead = document.createElement('thead');
 	var tfoot = document.createElement('tfoot');
@@ -66,6 +68,7 @@ function prepPage() {
 		}
 	}
 	createTooltips(table);
+	handleTables(new Array(),['wishlist'],null,collapseThumbnails,(get_info & 64));
 }
 
 addLoadEvent(prepPage);

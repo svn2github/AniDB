@@ -731,7 +731,7 @@ function createPreferencesTable(type) {
 					document.getElementById('get_info_pgroup').disabled = !this.checked;
 					document.getElementById('get_info_pcharacter').disabled = !this.checked;
 					document.getElementById('get_info_pcreator').disabled = !this.checked;
-					
+					document.getElementById('get_info_pwishlist').disabled = !this.checked;
 				},get_info,' Enable/disable information tooltips',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
@@ -757,6 +757,10 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GLOBAL', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLabledCheckBox(li,'get_info_pcreator','get_info_pcreator',null,(get_info & 32),' Use information tooltips on Creator pages',null,(!get_info));
+				ul.appendChild(li);
+				li = document.createElement('li');
+				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GLOBAL', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+				createLabledCheckBox(li,'get_info_pwishlist','get_info_pwishlist',null,(get_info & 64),' Use information tooltips on Wishlist',null,(!get_info));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GLOBAL', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -790,6 +794,7 @@ function createPreferencesTable(type) {
 							if (document.getElementById('get_info_pgroup').checked) get_info += 8;
 							if (document.getElementById('get_info_pcharacter').checked) get_info += 16;
 							if (document.getElementById('get_info_pcreator').checked) get_info += 32;
+							if (document.getElementById('get_info_pwishlist').checked) get_info += 64;
 						}
 						CookieSet('get_info',get_info);
 						CookieSet('collapseThumbnails',collapseThumbnails);
@@ -1282,7 +1287,8 @@ function handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_i
 				var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
 				for (var n = 0; n < names.length; n++) {
 					var nameCell = names[n];
-					var a = nameCell.getElementsByTagName('a')[0];
+					var label = nameCell.getElementsByTagName('label')[0];
+					var a = (!label ? nameCell.getElementsByTagName('a')[0] : label.getElementsByTagName('a')[0]);
 					if (!a) continue;
 					nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
 					var type = null;
@@ -1292,14 +1298,19 @@ function handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_i
 					else continue;
 					if (!type) continue;
 					var id = a.href.substring(a.href.indexOf('id=')+3);
-					var icons = document.createElement('span');
-					icons.className = 'icons';
 					var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show '+type+' information', 'i_mylist_ainfo_greyed');
 					if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
 					else infoIcon.id = 'ainfo_'+id;
+					var icons = getElementsByClassName(nameCell.getElementsByTagName('span'),'icons',false)[0];
+					if (!icons) {
+						icons = document.createElement('span');
+						icons.className = 'icons';
+					}
 					icons.appendChild(infoIcon);
-					var label = document.createElement('label');
-					label.appendChild(a);
+					if (!label) {
+						label = document.createElement('label');
+						label.appendChild(a);
+					}
 					nameCell.appendChild(label);
 					nameCell.insertBefore(icons,label);
 				}
