@@ -340,3 +340,8 @@ h4,
 {
 	display: block;
 }
+
+#layout-menu li.sub-menu ul li.alert span
+{
+	display:inline;
+}
