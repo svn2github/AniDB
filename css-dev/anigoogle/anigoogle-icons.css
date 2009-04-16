@@ -79,3 +79,7 @@
 *.i_comment_setactive {
   background-image:url(../icons/blue/comment_setactive.gif);
 }
+
+*.i_topic_locked {
+  background-image:url(../icons/blue/topic_locked.gif);
+}
