@@ -39,6 +39,9 @@ var addRelInput;
 var aid;
 var currentIds = new Array();
 var table;
+var useSingleMode = false;
+var useFilterMode = true;
+
 
 /* Function that fetches data */
 function fetchData(searchString, searchType) {
@@ -117,7 +120,6 @@ function showResults(single, filter) {
         itype = 'anime';
         infos = animeInfos;
     } else return;
-    table.id = "resultslist";
     var caption = table.getElementsByTagName('caption')[0];
     if (caption) caption.firstChild.nodeValue = itype.charAt(0).toUpperCase() + itype.substring(1) + "(s) matching \"" + searchString + "\"";
     var tbody = table.getElementsByTagName('tbody')[0];
