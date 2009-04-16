@@ -4,11 +4,11 @@
  * version 1 (14.04.2009)
  */
 jsVersionArray.push({
-    "file": "anime3/animerel.js",
+    "file": "anime3/addseq.js",
     "version": "1",
-    "revision": "$Revision: 2504 $",
-    "date": "$Date:: 2009-04-15 16:08:40 -0400#$",
-    "author": "$Author: lrudor $"
+    "revision": "$Revision: 2495 $",
+    "date": "$Date:: 2009-04-14 17:50:06 -0400#$",
+    "author": "$Author: arokh $"
 });
 
 var sortingCols = {
@@ -39,9 +39,8 @@ var addRelInput;
 var aid;
 var currentIds = new Array();
 var table;
-var useSingleMode = false;
-var useFilterMode = true;
-
+var useSingleMode = true;
+var useFilterMode = false;
 
 /* Function that fetches data */
 function fetchData(searchString, searchType) {
@@ -54,7 +53,7 @@ function fetchData(searchString, searchType) {
 
     if ('' + window.location.hostname == '') {
         xhttpRequestFetch(req, 'xml/creator' + searchString + '_desc.xml', parseData);
-    } else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=' + searchType + '&search=' + encodeURI(searchString), parseData);
+    } else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=' + searchType + '&id=' + encodeURI(searchString), parseData);
 }
 
 function parseData(xmldoc) {
@@ -120,6 +119,7 @@ function showResults(single, filter) {
         itype = 'anime';
         infos = animeInfos;
     } else return;
+    table.id = "resultslist";
     var caption = table.getElementsByTagName('caption')[0];
     if (caption) caption.firstChild.nodeValue = itype.charAt(0).toUpperCase() + itype.substring(1) + "(s) matching \"" + searchString + "\"";
     var tbody = table.getElementsByTagName('tbody')[0];
@@ -279,7 +279,8 @@ function showResults(single, filter) {
         tfoot = document.createElement('tfoot');
         row = document.createElement('tr');
         row.className = 'action';
-        var buttonName = 'adds.do.add';
+        var buttonName = 'add.doadd';
+        if (curPageID == 'addcharcharrel') buttonName = 'addccrel.do.add';
         createCell(row, 'value', createButton(buttonName, null, false, 'Add relation', 'submit'), null, 3);
         tfoot.appendChild(row);
         table.appendChild(tfoot);
