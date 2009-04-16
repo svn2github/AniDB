@@ -341,7 +341,7 @@ h4,
 	display: block;
 }
 
-#layout-menu li.sub-menu ul li.alert span
+#layout-menu li.sub-menu ul li.alert span a
 {
 	display:inline;
 }
