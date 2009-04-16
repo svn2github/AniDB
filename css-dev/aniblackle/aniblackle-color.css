@@ -325,7 +325,7 @@ tr + tr td,
 }
 #layout-main div.g_msg.success
 {
-	border: 1px solid #108610;
+	border: 1px solid #066506;
 	background-color: #769E76;
 }
 
@@ -346,7 +346,7 @@ tr + tr td,
 
 #layout-main div.g_msg.success h3
 {
-	color:#108610;
+	color:#066506;
 }
 
 #layout-main div.g_msg
