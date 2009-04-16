@@ -318,6 +318,7 @@ tr + tr td,
 	border: 1px solid #64320C;
 	background-color: #9A6D4C;
 }
+#layout-hint,
 #layout-main div.g_msg.note
 {
 	border: 1px solid #6E6E50;
@@ -349,6 +350,7 @@ tr + tr td,
 	color:#066506;
 }
 
+#layout-hint,
 #layout-main div.g_msg
 {
 	color: #000000;
