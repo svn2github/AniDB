@@ -356,11 +356,13 @@ tr + tr td,
 	color: #000000;
 }
 
+#layout-hint a,
 #layout-main div.g_msg a
 {
 	color:#105086;
 }
 
+#layout-hint a:hover,
 #layout-main div.g_msg a:hover
 {
 	color:#AA0000;
