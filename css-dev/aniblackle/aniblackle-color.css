@@ -307,3 +307,59 @@ tr + tr td,
 {
 	color:#888888;
 }
+
+#layout-main div.g_msg.error
+{
+	border: 1px solid #6F1212;
+	background-color: #916A6A;
+}
+#layout-main div.g_msg.warning
+{
+	border: 1px solid #64320C;
+	background-color: #9A6D4C;
+}
+#layout-main div.g_msg.note
+{
+	border: 1px solid #6E6E50;
+	background-color: #B3B379;
+}
+#layout-main div.g_msg.success
+{
+	border: 1px solid #108610;
+	background-color: #769E76;
+}
+
+#layout-main div.g_msg.error h3
+{
+	color:#6F1212;
+}
+
+#layout-main div.g_msg.warning h3
+{
+	color:#64320C;
+}
+
+#layout-main div.g_msg.note h3
+{
+	color: #6E6E50;
+}
+
+#layout-main div.g_msg.success h3
+{
+	color:#108610;
+}
+
+#layout-main div.g_msg
+{
+	color: #000000;
+}
+
+#layout-main div.g_msg a
+{
+	color:#105086;
+}
+
+#layout-main div.g_msg a:hover
+{
+	color:#AA0000;
+}
