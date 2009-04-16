@@ -335,3 +335,8 @@ h4,
 {
 	margin-top:1.1em;
 }
+
+#layout-menu li.sub-menu ul li a
+{
+	display: block;
+}
