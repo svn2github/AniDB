@@ -1011,7 +1011,6 @@ function CInfo(node) {
 	
 	this.titles = new Array();
 	var dataNodes = node.getElementsByTagName('data');
-	alert(dataNodes.length);
 	for (var i = 0; i < dataNodes.length; i++) {
 		var child = dataNodes[i];
 		var lang = child.getAttribute('lang')
