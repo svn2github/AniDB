@@ -1031,7 +1031,7 @@ CInfo.prototype.addTitle = function(type,title,lang,verified) {
 			case 4: titletype = "Official"; break;
 			default: titletype = "unknown"; break;
 		}
-	} else if (this.type == 'character') {
+	} else if (this.type == 'character' || this.type == 'creator') {
 		switch(this.titletype) {
 			case 1: titletype = "Main"; break;
 			case 2: titletype = "Official"; break;
