@@ -1056,7 +1056,7 @@ CInfo.prototype.getTitles = function(type) {
 				case "official": type = 4; break;
 				default: type = 0; break;
 			}
-		} else if (this.type == 'character') {
+		} else if (this.type == 'character' || this.type == 'creator') {
 			switch(type.toLowerCase()) {
 				case "main": type = 1; break;
 				case "official": type = 2; break;

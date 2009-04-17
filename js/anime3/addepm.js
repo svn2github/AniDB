@@ -503,28 +503,34 @@ function createEpisodeInputs(eid,episode) {
 	var inp = createTextInput('addepm.'+eid+'.epno',5,false,false,5,episode.typeChar+episode.epno);
 	inp.onchange = function testForEpisodeType() {
 		var regexp = /^(s|c|t|p|o)(\d+)$/i;
-		if(!regexp.test(this.value)) {
-			this.style.backgroundColor = 'red';
-			this.title = "Wrong Episode type.";
-			errorCount++;
-		} else {
-			this.style.backgroundColor = null;
-			this.title = null;
+		var regexp2 = /^(\d+)$/i;
+		var eptype = null;
+		var epno = null;
+		if(regexp.test(this.value)) {
 			var eptype = RegExp.$1;
 			var epno = RegExp.$2;
-			var eid = this.id.substring(this.id.indexOf('.')+1,this.id.lastIndexOf('.'));
-			var episode = episodes[eid];
-			if (episode.typeChar.toLowerCase() != eptype.toLowerCase()) {
-				this.style.backgroundColor = 'red';
-				this.title = "Wrong Episode type.";
-				errorCount++;
-			} else {
-				this.style.backgroundColor = null;
-				this.title = null;
-				episode.epno = eptype+epno;
-				episode.typeChar = eptype.toUpperCase();
-				errorCount--;
-			}
+		} else if(regexp2.test(this.value)) {
+			var eptype = "";
+			var epno = RegExp.$1;
+		}
+		this.style.backgroundColor = null;
+		this.title = null;
+		var eid = this.id.substring(this.id.indexOf('.')+1,this.id.lastIndexOf('.'));
+		var episode = episodes[eid];
+		if (eptype != null && epno != null && episode.typeChar.toLowerCase() != eptype.toLowerCase()) {
+			this.style.backgroundColor = 'red';
+			this.title = "Wrong Episode type - "+episode.type+" episodes can not be turned into other types by using massep.";
+			errorCount++;
+		} else if (eptype != null && epno != null && episode.typeChar.toLowerCase() == eptype.toLowerCase()) {
+			this.style.backgroundColor = null;
+			this.title = null;
+			episode.epno = eptype+epno;
+			episode.typeChar = eptype.toUpperCase();
+			errorCount--;
+		} else {
+			this.style.backgroundColor = 'red';
+			this.title = "Wrong Episode number - the episode number you suplied is not valid.";
+			errorCount++;
 		}
 	}
 	episode.inputs['epno'] = inp;
