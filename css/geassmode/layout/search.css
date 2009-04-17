@@ -1,6 +1,8 @@
+#tagsearch { z-index:5000; }
 #layout-search {
 	margin-left:-265px; padding:0;
 	width:250px; height:24px;
+	z-index:5000;
 	left:100%;top:0;
 	position:absolute; float:right;
 }

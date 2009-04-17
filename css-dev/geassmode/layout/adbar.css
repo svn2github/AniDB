@@ -1,0 +1,42 @@
+#layout-hint {
+	width:100px; height:24px;
+	top:0; left:auto; right:265px;
+	overflow:hidden; z-index:4000;
+	background:none;
+	border:none;
+	font-size:10px; text-align:left;
+}
+	#layout-hint:hover {
+		width:345px; height:auto;
+		right:20px;
+		overflow:hidden;
+	}
+#layout-hint span.head {
+	width:0;
+	display:block; visibility:hidden;
+}
+	#layout-hint span.head:before {
+		padding:5px 4px 6px 24px;
+		width:72px;
+		display:block; visibility:visible;
+		color:#ababab; background:transparent url(http://static.anidb.net/css/geassmode/images/bar/lock.png) no-repeat 4px 3px;
+		content:"Did you know?"; cursor:default;
+	}
+	#layout-hint:hover span.head:before {
+		padding:5px 3px 6px 23px;
+		width:72px;
+		color:#dbdbdb; background-position:3px 3px;
+		border-left:1px solid #666;
+		border-right:1px solid #666;
+		border-bottom:1px solid #1d1d1d;
+	}
+#layout-hint span.msg {
+	margin-top:-13px; padding:10px 20px;
+	width:auto;
+	display:block; visibility:hidden;
+	color:#ababab; background:#1d1d1d;
+	border:none;
+	font-size:12px;
+	border:1px solid #666; border-top:none;
+}
+	#layout-hint:hover span.msg { visibility:visible; }
