@@ -26,3 +26,36 @@
 {
 	display: none;
 }
+
+#layout-main ul#cattree .cat span.edit
+{
+	float:right;
+	margin-right: 1em;
+	margin-top:-2em;
+}
+
+#layout-main ul#cattree .cat span.edit a
+{
+	min-width:1em;
+}
+
+#layout-main ul#cattree .cat span.edit a:before
+{
+	content: "["
+}
+
+#layout-main ul#cattree .cat span.edit a:after
+{
+	content: "]";
+}
+
+#layout-main div.genren_all div.genren_edit textarea
+{
+	height:300px;
+	width:500px;
+}
+
+#layout-main div.genren_all div.genren_edit input[type="text"]
+{
+	width:200px;
+}
