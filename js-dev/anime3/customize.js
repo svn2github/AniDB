@@ -1011,17 +1011,19 @@ function CInfo(node) {
 	
 	this.titles = new Array();
 	var dataNodes = node.getElementsByTagName('data');
+	alert(dataNodes.length);
 	for (var i = 0; i < dataNodes.length; i++) {
 		var child = dataNodes[i];
 		var lang = child.getAttribute('lang')
 		var name = child.getAttribute('name');
 		var titletype = Number(child.getAttribute('type'));
 		var verified = (child.getAttribute('verifydate') ? (Number(child.getAttribute('verifydate')) > 0) : false);
-		if (titletype != 1 && lang && name && verified)
+		if (titletype != 1 && lang && name)
 			this.addTitle(titletype,name,lang,verified);
 	}
 }
 CInfo.prototype.addTitle = function(type,title,lang,verified) {
+	//alert('adding title: '+'\ntype: '+type+'\ntitle: '+title+'\nlang: '+lang+'\nverified: '+verified);
 	var titletype = 'Main';
 	if (this.type == 'anime') {
 		switch(this.titletype) {

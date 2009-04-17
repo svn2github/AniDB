@@ -47,7 +47,13 @@ var sortingCols = {
 	'relationslist': {	"name entity":{"type":'c_setlatin',"isDefault":true},
 						"name anime":{"type":'c_setlatin'},
 						"date added":{"type":'c_date'},
+						"date deleted":{"type":'c_date'},
 						"owner":{"type":'c_setlatin'},
+						"name user added":{"type":'c_setlatin'},
+						"name user deleted":{"type":'c_setlatin'},
+						"name user":{"type":'c_setlatin'},
+						"name seiyuu":{"type":'c_setlatin'},
+						"ismainseiyuu":{"type":'c_latin'},
 						"rating":{"type":'c_setlatin'},
 						"type":{"type":'c_latin'},
 						"stats eps":{"type":'c_setlatin'},
@@ -182,7 +188,7 @@ function fetchData(searchString,searchType) {
 	if (allowedTypes.indexOf(searchType) < 0) { errorAlert('fetchData','Invalid search type: '+searchType); return; }
 	
 	if (searchType != 'characterdescbyrel' && searchType != 'characterdescbyid' && searchType != 'creatordescbyid') {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/'+searchType+'search.xml', parseData);
+		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&search='+encodeURI(searchString), parseData);
 	} else {
 		if (''+window.location.hostname == '') {
@@ -219,6 +225,7 @@ function parseData(xmldoc) {
 		}
 		return;
 	}
+	var filtered = 0;
 	aids = new Array();
 	cids = new Array();
 	crids = new Array();
@@ -226,6 +233,7 @@ function parseData(xmldoc) {
 		var descNode = new CInfo(descNodes[d]);
 		var ids = (descNode.type == 'anime' ? aids : (descNode.type == 'character' ? cids : crids));
 		var descs = (descNode.type == 'anime' ? animeInfos : (descNode.type == 'character' ? charInfos : creatorInfos));
+		if (currentIds.indexOf(descNode.id) >= 0) { filtered++; continue; }
 		if (ids.indexOf(descNode.id) < 0) ids.push(descNode.id);
 		if (!descs[descNode.id]) {
 			descs[descNode.id] = descNode;
@@ -234,6 +242,14 @@ function parseData(xmldoc) {
 				guiseinput.value = descNode.title;
 		} else
 			continue; // a bit pointless, i know :P
+	}
+	if (!aids.length && !cids.length && !crids.length) {
+		alert('Search for "'+searchString+'" resulted in no matches.'+(filtered ? '\n('+filtered+' filtered matches)' : ''));
+		if (curPageID == 'addcreator' || curPageID == 'addcharacter') {
+			searchinput.value = "search";
+			searchinput.onclick = doEntitySearch;
+		}
+		return;
 	}
 	//alert("Results:\ndescNodes: "+descNodes.length+" ["+aids.length+"|"+cids.length+"|"+crids.length+"]");
 	if (!(curPageID == 'addcreator' && descNodes[0].nodeName == 'creatordescbyid') && 
@@ -251,7 +267,7 @@ function parseData(xmldoc) {
 /* Function that starts a search */
 function doSearch() {
 	searchString = addRelInput.value;
-	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
+	if (searchString.length < 1) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
 	fetchData(searchString,'animedesc');
 	useFilterMode = false;
 }
@@ -259,7 +275,7 @@ function doSearch() {
 /* Function that starts a char search */
 function doSearchChar() {
 	searchString = addCRelInput.value;
-	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
+	if (searchString.length < 1) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
 	fetchData(searchString,'characterdesc');
 	useSingleMode = (curPageID == 'addcharcharrel');
 	useFilterMode = false;
@@ -509,7 +525,7 @@ function prepPageAddCharAnimeRel() {
 		}
 	}
 	// @TODO: when table cells have proper class names add sorting support
-	handleTables(new Object(),tables,null,collapseThumbnails,(get_info & 16));
+	handleTables(sortingCols,tables,null,collapseThumbnails,(get_info & 16));
 	if (!addRelSubmit || (!addRelInput && !addCRelInput)) { errorAlert('prepPage','no valid inputs'); return; }
 	var newSubmitClone = createButton(addRelSubmit.name,addRelSubmit.id,false,addRelSubmit.value,'button',(addRelInput ? doSearch : doSearchChar), null);
 	addRelSubmit.parentNode.replaceChild(newSubmitClone,addRelSubmit);
@@ -582,7 +598,7 @@ function prepPageAddCharCharRel() {
 function doEntitySearch() {
 	if (guiseinput.value != "" && guiseinput.value == searchString) { table.style.display = ""; return; }
 	searchString = guiseinput.value;
-	if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
+	if (searchString.length < 1) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
 	searchinput.value = "wait....";
 	searchinput.onclick = null;
 	fetchData(searchString,!isCreatorPage ? "characterdesc" : "creatordesc");
