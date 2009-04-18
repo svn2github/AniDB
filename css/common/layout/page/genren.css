@@ -15,6 +15,8 @@
 	/* an unsatisfactory nudge to get better vertical centering */
 	margin-top: 0.3em; 
 }
+
+#layout-main ul#cattree *.cat span.name,
 #layout-main ul#cattree *.cat a
 {
 	display: -moz-inline-box;
