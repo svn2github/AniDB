@@ -21,6 +21,7 @@
 	display:none;
 }
 
+span.cat:hover #tooltip,
 a:hover #tooltip
 {
 	display: block;
@@ -34,18 +35,21 @@ a:hover #tooltip
 	z-index: 5;
 }
 
+span.cat:hover #tooltip span.top,
 a:hover #tooltip span.top
 {
 	display:block;
 	padding:30px 8px 0;
 }
 
+span.cat:hover #tooltip span.middle,
 a:hover #tooltip span.middle
 {
 	display:block;
 	padding:0 8px;
 }
 
+span.cat:hover #tooltip span.bottom,
 a:hover #tooltip span.bottom
 {
 	display:block;
