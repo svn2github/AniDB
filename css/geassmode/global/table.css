@@ -1,5 +1,4 @@
 #layout-main table {
-	margin-bottom:10px;
 	color:#333;
 	border-collapse:collapse;
 }
@@ -29,7 +28,16 @@
 		border-left:1px solid #cbcbcb;
 		border-right:1px solid #cbcbcb;
 	}
+	#layout-main table tr.g_odd {
+		background:#e2e8e6;
+	}
 		#layout-main table tr td {
 			padding:3px;
 			font-size:11px;
 		}
+#layout-main table tr.mylist {
+	background:#e6ffe6;
+}
+#layout-main table tr.g_odd.mylist {
+	background:#dcffdc;
+}

@@ -1,0 +1,14 @@
+#layout-main div.g_content div.filter_menu form p input {
+	text-transform:capitalize;
+}
+#layout-main div.g_content div.filter_menu form div.filters ul li {
+	padding:2px 8px 6px 14px;
+	color:#333;
+	border-bottom:1px solid #dbdbdb;
+}
+	#layout-main div.g_content div.filter_menu form div.filters ul li label {
+		padding:1px 0;
+	}
+		#layout-main div.g_content div.filter_menu form div.filters ul li label input {
+			vertical-align:middle;
+		}
