@@ -192,16 +192,10 @@ function fetchData(searchString,searchType) {
 		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&search='+encodeURI(searchString), parseData);
 	} else {
 		if (''+window.location.hostname == '') {
-			switch(searchType) {
-				case 'characterdescbyrel':
-					xhttpRequestFetch(req, 'xml/character'+searchString+'_rels.xml', parseData); break;
-				case 'characterdescbyid':
-					xhttpRequestFetch(req, 'xml/character'+searchString+'_desc.xml', parseData); break;
-				case 'creatordescbyid':
-					xhttpRequestFetch(req, 'xml/creator'+searchString+'_desc.xml', parseData); break;
-			}
+			//alert('xml/'+searchType+'_'+encodeURI(searchString)+'.xml');
+			xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
 		} else
-			xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&id='+encodeURI(searchString), parseData);
+			xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&id='+encodeURI(searchString), parseData);
 	}
 }
 
