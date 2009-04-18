@@ -1,0 +1,10 @@
+#layout-main .animerel {
+	margin: 0 !important;
+	height:auto !important; height:600px; max-height:600px;
+	background:#e6e6e6;
+	border-top: 10px solid #393634; border-right: 2px solid #393634; border-left: 2px solid #393634;
+	overflow:auto;
+}
+	#layout-main .animerel img {
+		background:#fff;
+	}
