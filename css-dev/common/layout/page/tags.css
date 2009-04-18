@@ -172,3 +172,7 @@
 	width: 50%;
 }
 
+#layout-main div.chartagsmod_all dl dd label
+{
+	display:block;
+}
