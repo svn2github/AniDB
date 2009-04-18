@@ -107,3 +107,11 @@
 *.i_vrs_5 {
   background-image:url(../icons/blue/anidb_vrs_5.gif);
 }
+
+*.i_review_add {
+  background:transparent url(../icons/blue/review_add.png) no-repeat scroll 0 50%;
+}
+
+*.i_pm_reply {
+  background-image:url(../icons/blue/pm_reply.gif);
+}
