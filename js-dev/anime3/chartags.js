@@ -104,7 +104,7 @@ function writeTag() {
 	var tagid = Number(node.id.substring(1));
 	var tag = tags[tagid]
 	if (!tag) { errorAlert('writeTag','bad tag with id: '+tagid); return; }
-	textArea.value += (textArea.value.length > 0 ? ';' : '')+ tag.name;
+	textArea.value += (textArea.value.length > 0 ? '\n' : '')+ tag.name;
 	node.parentNode.removeChild(node);
 }
 
