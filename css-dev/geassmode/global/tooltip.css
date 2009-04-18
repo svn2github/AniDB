@@ -1,0 +1,13 @@
+a:hover #tooltip {
+	background:none;
+	border:1px solid #393634;
+}
+a:hover #tooltip span.top,
+a:hover #tooltip span.bottom {
+	display:none;
+}
+a:hover #tooltip span.middle {
+	margin:0; padding:5px 10px;
+	color:#eee; background:#393634; opacity:0.97;
+	border:1px solid #eee;
+}
