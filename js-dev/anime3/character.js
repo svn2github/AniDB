@@ -189,7 +189,7 @@ function fetchData(searchString,searchType) {
 	
 	if (searchType != 'characterdescbyrel' && searchType != 'characterdescbyid' && searchType != 'creatordescbyid') {
 		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
-		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&search='+encodeURI(searchString), parseData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&search='+encodeURI(searchString), parseData);
 	} else {
 		if (''+window.location.hostname == '') {
 			switch(searchType) {
