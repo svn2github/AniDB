@@ -9,6 +9,7 @@
 @import "../common/style/text/default.css";
 @import "../common/style/content/page-anime.css";
 @import "../icons/all.css";
+@import "../icons/comment-grey.css";
 
 *
 {
@@ -19,13 +20,12 @@
 
 html
 {
-	background-color:#000;
+	background-color: black;
 	color:#ccc;
 	font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif;
 	font-size:10px;
 	font-weight:400;
 	height:100%;
-	line-height:1.2;
 }
 
 body
@@ -36,7 +36,7 @@ body
 span.link,
 a
 {
-	color:#fff;
+	color:white;
 	text-decoration:none;
 }
 
@@ -61,16 +61,16 @@ h1
 h2,
 h3
 {
-	color:#fff;
+	color:white;
 	font-size:12px;
-	margin:30px 0 0;
+	margin:0 0 0;
 	text-align:center;
 }
-
+#layout-main div.g_timedentry h4,
 h4
 {
 	background:url(images/h4.gif) left top no-repeat;
-	color:#fff;
+	color:white;
 	font-size:10px;
 	margin:10px 0 0;
 	padding:3px 0 3px 18px;
@@ -79,7 +79,7 @@ h4
 table caption
 {
 	background:url(images/h4.gif) left top no-repeat;
-	color:#fff;
+	color: white;
 	font-size:10px;
 	margin:20px auto 0;
 	padding:3px 0 3px 18px;
@@ -90,98 +90,114 @@ input,
 select,
 textarea
 {
-	background-color:#000;
+	background-color:black;
 	border:#666 1px solid;
-	color:#fff;
+	color: white;
 	font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif;
 	font-size:10px;
 }
 
+button,
+input[type="button"],
 input[type="submit"]
 {
-	background-color:#333;
-	border:none;
-	color:#fff;
+	background-color:#200e3d;
+	border:#5323a0 1px dotted;
+	color:white;
 	cursor:pointer;
 	font-family:Arial, Helvetica, Verdana, Tahoma, sans-serif;
 	font-size:10px;
 	padding:1px;
 }
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover
+{
+	border:white 1px dotted;
+}
 
 .g_odd input[type="submit"]
 {
-	background-color:#000;
+	background-color:black;
+	color: white;
 }
 
 #layout-nav
 {
-	left:50%;
-	overflow:visible;
-	position:fixed;
-	width:0;
+	margin:0 auto;
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	height: 174px;
 }
-
 #layout-menu
 {
-	background:url(images/dark.gif) 1px top no-repeat;
-	height:200px;
-	left:-478px;
 	margin:0 auto;
-	overflow:visible;
-	position:relative;
 	width:955px;
+	height:174px;
+	background:url(images/dark_new.gif) 0px top no-repeat;
+	line-height: 110%;
 }
-
 #layout-menu ul
 {
-	display:block;
 	float:left;
-	width:150px;
+	position: relative
 }
-
 ul#menu-main
 {
-	left:215px;
+	left:182px;
 	position:relative;
-	top:100px;
+	background: url(images/dark_new2.gif) no-repeat;
+	width: 209px;
+	height: 97px;
+	top:0;
+	padding-left: 32px;
+	padding-top: 100px;
+	margin-top: -1px;
+	margin-right: -200px;
 }
 
 ul#menu-private
 {
-	left:20px;
+	left:220px;
 	position:relative;
 	top:0;
+	z-index:2;
 }
 
 ul#menu-mod
 {
-	left:240px;
+	left:530px;
 	position:relative;
 	top:0;
 }
 
 ul#menu-lists
 {
-	left:320px;
+	left:425px;
 	position:relative;
-	top:60px;
+}
+ul#menu-lists li.creator
+{
+padding-top: 15px;
 }
 
 ul#menu-support
 {
-	left:-15px;
+	left:375px;
 	position:relative;
 	top:0;
-	width:50px;
 }
 
 ul#menu-account
 {
 	float:right;
-	margin-right:10px;
+	padding-right:10px;
 	position:relative;
 	text-align:right;
 	top:-5px;
+	width: 150px;
 }
 
 *#user-logout a,
@@ -190,14 +206,15 @@ ul#menu-account
 	float:right;
 	height:12px;
 	width:42px;
+	font-size: 0;
 }
 
 *#user-logout a
 {
 	background-image:url(images/button_logout.gif);
-	left:10px;
 	position:relative;
 	top:-3px;
+	left: 5px;
 }
 
 *#user-logout a:hover
@@ -219,43 +236,40 @@ ul#menu-account
 
 #layout-search
 {
-	float:left;
-	left:260px;
-	position:relative;
-	top:-60px;
+	margin: 0 auto;
+	top: -59px;
+	left: 365px;
 	width:210px;
-}
-
-#layout-search div.search form
-{
-	display:block;
-	float:right;
+	position: relative;
 }
 
 #layout-search form input.text
 {
-	float:left;
 	width:140px;
+}
+
+#layout-search select
+{
+	display: table-caption;
+	margin: 0 40px 5px auto;
 }
 
 #layout-search form input.submit
 {
-	background:url(images/button_search.gif) no-repeat top;
+	background:url(images/button_search.gif) no-repeat;
 	border:none;
-	content:"";
 	cursor:pointer;
-	display:block;
-	float:right;
 	height:14px;
+	width: 39px;
 	margin:0 3px;
-	overflow:hidden;
-	text-indent:-5000px;
-	width:50px;
+	color: transparent;
+	font-size: 0;
+
 }
 
 #layout-search form input.submit:hover
 {
-	background:url(images/button_search_over.gif) no-repeat top;
+	background:url(images/button_search_over.gif) no-repeat;
 }
 
 #layout-content
@@ -263,7 +277,6 @@ ul#menu-account
 	border-left:1px solid #fff;
 	border-right:1px solid #fff;
 	margin:0 auto;
-	min-height:100%;
 	overflow:hidden;
 	width:955px;
 }
@@ -285,7 +298,7 @@ body.nonav div#layout-content
 {
 	clear:both;
 	margin:0 auto;
-	width:100%;
+	width:auto;
 }
 
 .g_end
@@ -342,12 +355,12 @@ dt
 	margin:0 0 -17px;
 	padding:5px 0;
 }
-
+/*
 dt:after
 {
 	content:": ";
 }
-
+*/
 dd
 {
 	margin:0 0 0 90px;
@@ -541,12 +554,12 @@ div.anime_all div.groups td.eps
 	width:200px;
 }
 
-div.anime_all div.groups td.action a.i_icon,
-div.anime_all div.episodes td.file a.i_icon
+div.anime_all div.groups td.action,
+div.anime_all div.episodes td.file
 {
-	margin:0 3px;
-}
+	white-space: nowrap;
 
+}
 div.anime_all *.i_vrs_1,
 div.anime_all *.i_vrs_2,
 div.anime_all *.i_vrs_3,
@@ -557,7 +570,7 @@ div.anime_all *.i_uncensored,
 div.anime_all *.i_new_icon,
 div.anime_all *.i_comment
 {
-	margin-left:-15px;
+	/*margin-left:-15px;*/
 }
 
 div.anime_all *.i_vrs_1,
@@ -569,11 +582,11 @@ div.anime_all *.i_vrs_5
 	position:relative;
 	right:110px;
 }
-
-div.anime_all *.i_new_icon
+table.filelist span.icons.new span.i_new_icon
 {
-	position:relative;
-	right:127px;
+position: absolute;
+left:105px;
+
 }
 
 div.animeatt_all div.animeatt_header table
@@ -590,7 +603,7 @@ div.animeatt_all div.animeatt_header table table
 
 div.animeatt_all div.animeatt_header big
 {
-	color:#fff;
+	color:white;
 	display:block;
 	font-size:18px;
 	font-weight:700;
@@ -608,7 +621,7 @@ div.animeatt_all div.review
 
 div.animeatt_all h2
 {
-	color:#000;
+	color:black;
 	margin-left:170px;
 	text-align:left;
 }
@@ -728,17 +741,6 @@ div.main_all div.news div.body
 	margin:0 0 30px;
 }
 
-div.search
-{
-	margin-top:-2.5em;
-}
-
-div.search select
-{
-	margin-bottom:.5em;
-	margin-left:20px;
-}
-
 div.search_all li a.i_icon
 {
 	float:left;
@@ -841,12 +843,6 @@ div.mylist_all table.filelist td.ed2k + td.action
 	width:65px;
 }
 
-#layout-main div.userpage_all div.stats,
-#layout-main div.myplace_all div.stats
-{
-	clear:both;
-}
-
 div.mynotifies_all div.action
 {
 	margin:20px auto;
@@ -860,7 +856,7 @@ div.hint2_all td
 
 div.hint2_all th
 {
-	color:#fff;
+	color:white;
 	padding:10px 0 5px;
 }
 
@@ -1162,7 +1158,8 @@ div.genren_all li span
 	background-image:url(images/anidb_file_ed2k.gif);
 }
 
-*.i_file_edit
+*.i_file_edit,
+*.i_ep_edit
 {
 	background-image:url(images/anidb_file_edit.gif);
 }
@@ -1512,7 +1509,10 @@ span.link:hover,
 a:hover,
 input[type="submit"]:hover,
 ul#menu-main a:hover,
-ul#menu-support a:hover
+ul#menu-support a:hover,
+div.tabbed_pane ul.tabs li.tab:hover,
+button:hover,
+input[type="button"]:hover
 {
 	color:#c9f;
 }
@@ -1537,7 +1537,7 @@ ul#menu-lists a
 ul#menu-lists a:hover,
 div.main_all div.news b
 {
-	color:#fff;
+	color:white;
 }
 
 .hide,
@@ -1553,12 +1553,15 @@ div.genren_all li.collapsed ul,
 {
 	display:none;
 }
+span.i_inline.i_help
+{
+	color: transparent;
+}
 
 ul#menu-main a,
 ul#menu-support a
 {
-	background-color:#fff;
-	color:#000;
+	color: black;
 }
 
 ul#menu-mod li,
@@ -1687,14 +1690,30 @@ div.latestanimes_all select.month
 {
 	width:40px;
 }
-
-div.anime_all div.mylist td.state,
+div.anime_all div.episodes td.crc
+{
+width: 5em;
+}
+div.mywishlist_all td.expand,
 div.anime_all div.groups td.expand,
+div.anime_all div.episodes td.expand
+{
+	text-align:center;
+	width:15px;
+	padding:0;
+	border-left: none;
+}
+div.mywishlist_all td.expand a.i_icon,
+div.anime_all div.groups td.expand a.i_icon,
+div.anime_all div.episodes td.expand a.i_icon
+{
+margin-left: 0;
+}
+div.anime_all div.mylist td.state,
 div.anime_all div.groups td.note,
 div.anime_all div.groups td.epno,
 div.anime_all div.groups td.specials,
 div.anime_all div.groups td.cmts,
-div.anime_all div.episodes td.expand,
 div.anime_all div.episodes td.id,
 div.anime_all div.episodes td.duration,
 div.anime_all div.episodes td.files,
@@ -1727,7 +1746,6 @@ div.myvotes_all td.vote,
 div.myvotes_all td.epno,
 div.mynotifies_all td.check,
 div.mynotifies_all td.priority,
-div.mywishlist_all td.expand,
 div.mywishlist_all td.pri,
 div.mywishlist_all td.nfy,
 div.mywishlist_all td.releaseinfo,
@@ -1744,7 +1762,7 @@ div.userlist_all td.fcnt,
 div.animelist_all td.eps
 {
 	text-align:center;
-	width:30px;
+	width:25px;
 }
 
 div.anime_all div.groups td.name,
@@ -1828,7 +1846,7 @@ div.animelist_all td,
 div.userlist_all td.size
 {
 	text-align:center;
-	width:70px;
+	/*width:70px;*/
 }
 
 div.anime_all div.episodes td.quality,
@@ -1975,9 +1993,204 @@ div.anime_all div.image
 	background-color: #000000;
 }
 
-button,
-input[type="button"],
-input[type="submit"]
+/*common overwrite stuff*/
+#layout-main div.latestanimes_anime h3
 {
-	color: #000000;
+	margin: 10px auto;
+}
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner
+{
+	background-color:#170a2b;
+}
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.events .rbottom *,
+#layout-main div.forum div.events .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *,
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-color:#1a1a1a;
+}
+#layout-main div.cmt_entries dl.profile dd strong
+{
+	color: white;
+}
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum a.username-coloured
+{
+	color:#8266b8;
+}
+div.quotebody
+{
+	background-color: black;
+}
+
+div.quotebody div.quoteof
+{
+	background-color: #545270;
+	color:white;
+	padding-left: 5px;
+}
+#layout-main div.forum div.poll div.pollbar
+{
+	background-color:#412b5e;
+	border-bottom-color:#261937;
+	border-right-color:#261937;
+	color:#FFFFFF;
+}
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum a.topictitle
+{
+	color:#d3adec;
+}
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner
+{
+	background-color: #2a2a2a;
+}
+#layout-main div.forum ul.topics
+{
+	border-left-color:#2a2a2a;
+	border-right-color:#2a2a2a;
+}
+#layout-main div.forum ul.topics li.row
+{
+	background-color: #333;
+}
+#layout-main div.forum ul.topics li.g_odd
+{
+	background-color:black;
+}
+#layout-main div.forum ul.topiclist li
+{
+	color: #7c668d;
+}
+
+#layout-main div.g_msg.error
+{
+	border: 1px solid #7c0000;
+	background-color: #250000;
+}
+#layout-main div.g_msg.warning
+{
+	border: 1px solid #4c2e00;
+	background-color: #201400;
+}
+#layout-main div.g_msg.note
+{
+	border: 1px solid #575757;
+	background-color:#171717;
+}
+#layout-main div.g_msg.success
+{
+	border: 1px solid #002710;
+	background-color: #001107;
+}
+
+#layout-main div.g_msg.error h3
+{
+	color: #FF0000;
+}
+#layout-main div.g_msg.warning h3
+{
+	color: #af6b00;
+}
+#layout-main div.g_msg.note h3
+{
+	color: white;
+}
+#layout-main div.g_msg.success h3
+{
+	color: #01702e;
+}
+
+#tooltip
+{
+	color:#993300;
+	filter:alpha(opacity=90);
+	khtmlopacity:0.90;
+	mozopacity:0.90;
+	opacity:0.90;
+	font-size: 10px;
+	word-wrap: break-word;
+}
+button + button
+{
+margin-left: 5px;
+}
+a.button,
+input.button,
+button.button,
+a.confirmButton,
+input.confirmButton,
+button.confirmButton
+{
+	background-image: none;
+	text-shadow: none;
+}
+#layout-main div.forum div.postbody dl.codebox
+{
+background-color:black;
+border-color:#C9D2D8;
+}
+#layout-main div.forum div.postbody dl.codebox dt
+{
+	color: white;
+}
+#layout-main div.forum div.postbody dl.codebox code
+{
+	color: #8266B8;
+}
+*.i_top
+{
+	background-image: url(images/icon_back_top.gif);
+}
+/*Bubble Tooltip*/
+#tooltip span
+{
+font-size: 10px;
+color: white;
+}
+#tooltip span.top
+{
+background:url(images/bubble.png) no-repeat top;
+}
+#tooltip span.middle
+{
+background:url(images/bubble_filler.png) repeat-y bottom;
+}
+#tooltip span.bottom
+{
+background:url(images/bubble.png) no-repeat bottom;
+}
+#obj-tooltip
+{
+width: auto !important;
+height: auto !important;
+background-color: black;
+color: white;
+visibility: hidden;
+z-index: 100;
+}
+#obj-tooltip h1
+{
+display: none;
+}
+#obj-tooltip ul li,
+#obj-tooltip ul
+{
+list-style-type: none;
+margin: 0;
+padding: 0;
+text-align: left;
+vertical-align: middle;
 }
