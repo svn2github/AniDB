@@ -1,0 +1,514 @@
+*.i_comment_add
+{
+	width: 72px;
+	height: 12px;
+	background:transparent none no-repeat scroll 0pt;
+	background-image: url(../icons/grey/comment_add.gif);
+}
+
+*.i_review_add
+{
+	width: 61px;
+	height: 12px;
+	background:transparent none no-repeat scroll 0pt;
+	background-image: url(../icons/grey/review_add.gif);
+}
+
+*.i_top
+{
+	width: 11px;
+	height: 11px;
+	background:transparent none no-repeat scroll 0pt;
+	background-image: url(../icons/phpbb/icon_back_top.gif);
+}
+
+*.i_comment_info
+{
+	width: 15px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_info.gif);
+}
+
+*.i_comment_quote
+{
+	width: 40px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_quote.gif);
+}
+
+*.i_comment_delete
+{
+	width: 45px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_delete.gif);
+}
+
+*.i_comment_move
+{
+	width: 35px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_move.gif);
+}
+
+*.i_comment_creq
+{
+	width: 94px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_creq.gif);
+}
+
+*.i_comment_edit
+{
+	width: 32px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_edit.gif);
+}
+
+*.i_comment_undelete
+{
+	width: 89px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_undelete.gif);
+}
+
+*.i_comment_setactive
+{
+	width: 71px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_setactive.gif);
+}
+
+*.i_topic_add
+{
+	background-image: url(../icons/grey/topic_add.gif);
+	height:12px;
+	width:65px;
+}
+
+*.i_topic_delete
+{
+	background-image: url(../icons/grey/topic_delete.gif);
+	height:12px;
+	width:89px;
+}
+
+*.i_topic_undelete
+{
+	background-image: url(../icons/grey/topic_undelete.gif);
+	height:12px;
+	width:101px;
+}
+
+*.i_topic_history
+{
+	background-image: url(../icons/grey/topic_history.gif);
+	height:12px;
+	width:83px;
+}
+
+*.i_topic_lock
+{
+	background-image: url(../icons/grey/topic_lock.gif);
+	height:12px;
+	width:77px;
+}
+
+*.i_topic_locked
+{
+	background-image: url(../icons/grey/topic_locked.gif);
+	height:12px;
+	width:47px;
+}
+
+*.i_topic_unlock
+{
+	background-image: url(../icons/grey/topic_unlock.gif);
+	height:12px;
+	width:89px;
+}
+
+*.i_topic_move
+{
+	background-image: url(../icons/grey/topic_move.gif);
+	height:12px;
+	width:77px;
+}
+
+*.i_comment_revisions
+{
+	width: 87px;
+	height: 12px;
+	margin: 3px;
+	background-image: url(../icons/grey/comment_revisions.gif);
+}
+
+*.i_forum_add
+{
+	background-image: url(../icons/grey/forum_add.gif);
+	height:12px;
+	width:65px;
+}
+
+*.i_forum_edit
+{
+	background-image: url(../icons/grey/forum_edit.gif);
+	height:12px;
+	width:71px;
+}
+
+*.i_forum_delete
+{
+	background-image: url(../icons/grey/forum_delete.gif);
+	height:12px;
+	width:83px;
+}
+
+*.i_forum_group
+{
+	background-image: url(../icons/grey/forum_group.gif);
+	height:12px;
+	width:106px;
+}
+
+*.i_forum_link
+{
+	background-image: url(../icons/grey/forum_link.gif);
+	height:12px;
+	width:41px;
+}
+
+*.i_pm_reply
+{
+	background-image: url(../icons/grey/pm_reply.gif);
+	height:12px;
+	width:41px;
+}
+
+*.i_pm_delete
+{
+	background-image: url(../icons/grey/pm_delete.gif);
+	height:12px;
+	width:47px;
+}
+
+*.i_topic_normal
+{
+	background-image:url(../icons/phpbb/topic_normal.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_sticky
+{
+	background-image:url(../icons/phpbb/topic_sticky.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_announcement,
+*.i_topic_global
+{
+	background-image:url(../icons/phpbb/topic_announce.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_normal_locked
+{
+	background-image:url(../icons/phpbb/topic_normal_locked.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_sticky_locked
+{
+	background-image:url(../icons/phpbb/topic_sticky_locked.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_announcement_locked,
+*.i_topic_global_locked
+{
+	background-image:url(../icons/phpbb/topic_announce_locked.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_normal_unread
+{
+	background-image:url(../icons/phpbb/topic_normal_unread.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_sticky_unread
+{
+	background-image:url(../icons/phpbb/topic_sticky_unread.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_announcement_unread,
+*.i_topic_global_unread
+{
+	background-image:url(../icons/phpbb/topic_announce_unread.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_normal_locked_unread
+{
+	background-image:url(../icons/phpbb/topic_normal_locked_unread.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_sticky_locked_unread
+{
+	background-image:url(../icons/phpbb/topic_sticky_locked_unread.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_topic_announcement_locked_unread,
+*.i_topic_global_locked_unread
+{
+	background-image:url(../icons/phpbb/topic_announce_locked_unread.gif);
+	background-repeat: no-repeat;
+}
+
+*.i_forum
+{
+	background-image:url(../icons/phpbb/forum_normal.gif);
+	height:2.5em;
+	background-repeat: no-repeat;
+}
+
+*.i_forum_unread
+{
+	background-image:url(../icons/phpbb/forum_normal_unread.gif);
+	height:2.5em;
+	background-repeat: no-repeat;
+}
+
+#layout-main div.forum a.lastpost
+{
+	background-image:url(../icons/phpbb/topic_latest.gif);
+	background-repeat: no-repeat;
+}
+
+/*Smiley*/
+*.i_smiley_tehehe
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_tehehe.gif);
+}
+
+*.i_smiley_sweating
+{
+	width:17px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_sweating.gif);
+}
+
+*.i_smiley_cool
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_cool.gif);
+}
+
+*.i_smiley_sad
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_sad.gif);
+}
+
+*.i_smiley_happy
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_happy.gif);
+}
+
+*.i_smiley_surprised
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_surprised.gif);
+}
+
+*.i_smiley_undecided
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_undecided.gif);
+}
+
+*.i_smiley_confused
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_confused.gif);
+}
+
+*.i_smiley_very_happy
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_very_happy.gif);
+}
+
+*.i_smiley_razz
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_razz.gif);
+}
+
+*.i_smiley_angel
+{
+	width:42px;
+	height:23px;
+	background-image:url(../icons/smiley/smiley_angel.gif);
+}
+
+*.i_smiley_baka
+{
+	width:41px;
+	height:46px;
+	background-image:url(../icons/smiley/smiley_baka.gif);
+}
+
+*.i_smiley_brickwall
+{
+	width:25px;
+	height:20px;
+	background-image:url(../icons/smiley/smiley_brickwall.gif);
+}
+
+*.i_smiley_crying
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_crying.gif);
+}
+
+*.i_smiley_mad
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_mad.gif);
+}
+
+*.i_smiley_laughing
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_laughing.gif);
+}
+
+*.i_smiley_mymaster
+{
+	width:29px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_mymaster.gif);
+}
+
+*.i_smiley_embarassed
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_embarassed.gif);
+}
+
+*.i_smiley_rolleyes
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_rolleyes.gif);
+}
+
+*.i_smiley_shock
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_shock.gif);
+}
+
+*.i_smiley_thumbup
+{
+	width:23px;
+	height:18px;
+	background-image:url(../icons/smiley/smiley_thumbup.gif);
+}
+
+*.i_smiley_twisted
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_twisted.gif);
+}
+
+*.i_smiley_wink
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_wink.gif);
+}
+
+*.i_smiley_zzz
+{
+	width:15px;
+	height:24px;
+	background-image:url(../icons/smiley/smiley_zzz.gif);
+}
+
+*.i_smiley_neutral
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_neutral.gif);
+}
+
+*.i_smiley_nosebleed
+{
+	width:15px;
+	height:19px;
+	background-image:url(../icons/smiley/smiley_nosebleed.gif);
+}
+
+*.i_smiley_disgusted
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_disgusted.gif);
+}
+
+*.i_smiley_thinking
+{
+	width:15px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_thinking.gif);
+}
+
+*.i_smiley_sweatdrop
+{
+	width:17px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_sweatdrop.gif);
+}
+
+*.i_smiley_wtf
+{
+	width:17px;
+	height:15px;
+	background-image:url(../icons/smiley/smiley_wtf.gif);
+}
+
+*.i_smiley_dead
+{
+	width:16px;
+	height:16px;
+	background-image:url(../icons/smiley/smiley_dead.gif);
+}
