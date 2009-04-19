@@ -3,11 +3,6 @@
 	margin-bottom:0.5em;
 }
 
-#layout-main div.latest2_all div.content
-{
-	margin-right: 17.2em;
-}
-
 #layout-main div.latest2_all div.content + div.content
 {
 	margin-top: 1em;
@@ -19,14 +14,9 @@
 	text-align: left;
 }
 
-#layout-main div.latest2_all div.content table
-{
-	width: 100%;
-}
-
 #layout-main div.latest2_all div.content th.anime
 {
-	width: 40%;
+	width: 60%;
 }
 
 #layout-main div.latest2_all div.content table.filelist th.group
@@ -41,7 +31,8 @@
 
 #layout-main div.latest2_all div.content td.info
 {
-	width: 22em;
+	min-width: 22em;
+	max-width: 22em;
 }
 
 #layout-main div.latest2_all div.content td.info a.fid
@@ -52,19 +43,22 @@
 
 #layout-main div.latest2_all div.content td.episode
 {
-	width: 5em;
+	min-width: 5em;
+	max-width: 5em;
 	text-align: right;
 }
 
 #layout-main div.latest2_all div.content td.action
 {
 	min-width: 7em;
+	max-width: 7em;
 }
 
 #layout-main div.latest2_all div.content td.mylist,
 #layout-main div.latest2_all div.content td.seen
 {
-	width: 5em;
+	min-width: 5em;
+	max-width: 5em;
 }
 
 

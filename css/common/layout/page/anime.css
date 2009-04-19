@@ -24,9 +24,9 @@
 	text-align: center;
 }
 
-#layout-main table.eplist table.filelist
+#layout-main table.eplist table.filelist th.name
 {
-	width: 100%;
+	width: 98%;
 }
 
 #layout-main div.anime_all div.tags
