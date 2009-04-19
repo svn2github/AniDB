@@ -15,6 +15,12 @@
 			text-align:left;
 			
 		}
+		#layout-main table tr.header th.sortable {
+			color:#dbdbdb; background-position:right center;
+		}
+		#layout-main table tr.header th.sortable:hover {
+			color:#ababab; background-color:#444;
+		}
 			#layout-main table tr.header th a {
 				margin:-5px; padding:5px;
 				display:block;
@@ -29,7 +35,7 @@
 		border-right:1px solid #cbcbcb;
 	}
 	#layout-main table tr.g_odd {
-		background:#e2e8e6;
+		background:#e4eae8;
 	}
 		#layout-main table tr td {
 			padding:3px;
@@ -39,5 +45,11 @@
 	background:#e6ffe6;
 }
 #layout-main table tr.g_odd.mylist {
-	background:#dcffdc;
+	background:#c7ffc7;
+}
+#layout-main table tr.deprecated {
+	background:#ffe6e6;
+}
+#layout-main table tr.g_odd.deprecated {
+	background:#ffc7c7;
 }

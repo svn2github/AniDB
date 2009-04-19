@@ -5,3 +5,10 @@ a, a:hover, a:active, a:visited {
 a:hover {
 	color:#800100;
 }
+
+ins {
+	background:#afa;
+}
+del {
+	background:#faa;
+}
