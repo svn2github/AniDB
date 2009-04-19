@@ -8,7 +8,7 @@
 		margin:0;
 		padding:20px 0;
 	}
-		#layout-footer p:first:after {
+		#layout-footer p:first-child:after {
 			content:". Design by antennen";
 		}
 	#layout-footer form {

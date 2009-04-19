@@ -1,6 +1,7 @@
 #layout-main ul.g_list {
 	margin:0 0 10px; padding:5px 14px;
 	width:auto;
+	clear:both;
 	background:#393634;
 }
 	#layout-main ul.g_list li {

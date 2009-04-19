@@ -1,7 +1,15 @@
-#layout-main div.userpage_all div.g_section.buddies {
-	width:145px;
-	border-left:5px solid #393634;
+#layout-main div.userpage_all div.g_menu div.buddies ul li {
+	padding:2px 8px 2px 0;
+	display:block;
+	color:#333;
+	border-bottom:1px solid #dbdbdb;
 }
-	#layout-main div.userpage_all div.g_section.buddies p {
-		font-size:0.85em;
+	#layout-main div.userpage_all div.g_menu div.buddies ul li a {
+		display:inline;
+		color:#ad2100;
+		border:none;
+	}
+	#layout-main div.userpage_all div.g_menu div.buddies ul li a:hover {
+		display:inline;
+		color:#800100;
 	}
