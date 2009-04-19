@@ -64,7 +64,7 @@
 #layout-main table tr.filesrow table.filelist,
 #layout-main table tr.epsrow table {
 	margin:0;
-	width:100%;
+	width:100% !important;
 }
 
 /* Colored rows */
