@@ -181,8 +181,12 @@ function prepPageEntity() {
  * show=addcharanimerel page scripts
  */
 
-/* Function that fetches data */
-function fetchData(searchString,searchType) {
+/* Function that fetches data 
+ * @param searchString Usualy the search string unless we are dealing with a search by id search in that case it's the ID
+ * @param searchType Type of search
+ * @param extraSearchString When searchString is an ID this can be used to pass a filter down Search String (not an ID)
+ */
+function fetchData(searchString,searchType,extraSearchString) {
 	var req = xhttpRequest();
 	var allowedTypes = ['characterdesc','creatordesc','animedesc','characterdescbyrel','characterdescbyid','creatordescbyid'];
 	if (allowedTypes.indexOf(searchType) < 0) { errorAlert('fetchData','Invalid search type: '+searchType); return; }
@@ -195,7 +199,7 @@ function fetchData(searchString,searchType) {
 			//alert('xml/'+searchType+'_'+encodeURI(searchString)+'.xml');
 			xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
 		} else
-			xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&id='+encodeURI(searchString), parseData);
+			xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&id='+encodeURI(searchString)+(extraSearchString ? '&search='+encodeURI(extraSearchString) : ''), parseData);
 	}
 }
 
@@ -539,7 +543,7 @@ function doSearchRelated() {
 		useSingleMode = false;
 	else
 		useSingleMode = true;
-	fetchData(charid,'characterdescbyrel');
+	fetchData(charid,'characterdescbyrel',searchString);
 }
 
 /* Prepares the page for my scripts */
