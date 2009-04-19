@@ -15,9 +15,14 @@
 			text-align:left;
 			
 		}
+		#layout-main table tr.header th.c_set,
+		#layout-main table tr.header th.c_setlatin,
 		#layout-main table tr.header th.sortable {
 			color:#dbdbdb; background-position:right center;
+			cursor:pointer;
 		}
+		#layout-main table tr.header th.c_set:hover,
+		#layout-main table tr.header th.c_setlatin:hover,
 		#layout-main table tr.header th.sortable:hover {
 			color:#ababab; background-color:#444;
 		}
@@ -30,9 +35,13 @@
 				color:#ababab; background-color:#444;
 			}
 	#layout-main table tr {
+		background:#f2f8f6;
 		border-bottom:1px solid #cbcbcb;
 		border-left:1px solid #cbcbcb;
 		border-right:1px solid #cbcbcb;
+	}
+	#layout-main table tr:first-child {
+		border-top:1px solid #cbcbcb;
 	}
 	#layout-main table tr.g_odd {
 		background:#e4eae8;

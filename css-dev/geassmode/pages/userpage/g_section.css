@@ -5,7 +5,8 @@
 			border-bottom:1px solid #dbdbdb;
 			font-size:0.85em;
 		}
-#layout-main div.userpage_all div.g_section.latest {
+#layout-main div.userpage_all div.g_section.latest,
+#layout-main div.userpage_all div.forum {
 	margin-left:230px; margin-right:190px;
 	border:none;
 }
