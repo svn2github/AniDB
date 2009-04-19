@@ -21,11 +21,8 @@
 	width: 98%
 }
 
-#layout-main div.animelist_all div.filter_menu ~ div.note,
-#layout-main div.animelist_all div.filter_menu ~ div.fullsearch_form,
-#layout-main div.animelist_all div.expanded ~ div.note,
-#layout-main div.animelist_all div.expanded ~ div.fullsearch_form
+#layout-main div.animelist_all div.note,
+#layout-main div.animelist_all div.fullsearch_form
 {
 	clear:none;
-	margin-right:17.2em;
 }
