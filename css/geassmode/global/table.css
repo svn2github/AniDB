@@ -40,9 +40,6 @@
 		border-left:1px solid #cbcbcb;
 		border-right:1px solid #cbcbcb;
 	}
-	#layout-main table tr:first-child {
-		border-top:1px solid #cbcbcb;
-	}
 	#layout-main table tr.g_odd {
 		background:#e4eae8;
 	}
@@ -50,6 +47,27 @@
 			padding:3px;
 			font-size:11px;
 		}
+
+/* Table within table */
+#layout-main table tr.filesrow > td,
+#layout-main table tr.epsrow > td {
+	margin:0; padding:0 0 0 23px;
+	background:#dbdbdb;
+}
+#layout-main table tr.filesrow table.filelist,
+#layout-main table tr.epsrow form {
+	margin:0 -1px -1px 0 !important;
+}
+#layout-main table tr.filesrow table.filelist tr {
+	border-right:none;
+}
+#layout-main table tr.filesrow table.filelist,
+#layout-main table tr.epsrow table {
+	margin:0;
+	width:100%;
+}
+
+/* Colored rows */
 #layout-main table tr.mylist {
 	background:#e6ffe6;
 }

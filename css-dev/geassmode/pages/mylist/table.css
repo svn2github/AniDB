@@ -7,14 +7,3 @@
 	#layout-main div.mylist_all div.g_section form table.animelist tr.action td {
 		padding:3px 0;
 	}
-#layout-main div.mylist_all div.g_section table.animelist tr.epsrow > td {
-	padding:0 0 0 23px;
-	background:#dbdbdb;
-}
-#layout-main div.mylist_all div.g_section table.animelist tr.epsrow form {
-	margin:0 -1px -1px 0;
-}
-#layout-main div.mylist_all div.g_section table.animelist tr.epsrow table {
-	margin:0;
-	width:100%;
-}
