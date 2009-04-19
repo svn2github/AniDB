@@ -303,6 +303,38 @@ function enhanceCheckboxes(parent) {
 	);
 }
 
+function compressMenus() {
+	if (!document.getElementsByTagName) return;
+	//return;
+	var divs = document.getElementsByTagName('div');
+	var insertArray = new Array();
+	var i = 0;
+	while (i < divs.length) {
+		var obj = new Object();
+		//alert('i='+i+'/'+divs.length);
+		var div = divs[i];
+		if (!div.className || div.className.indexOf('g_menu') < 0) { i++; continue; }
+		obj.parent = div.parentNode;
+		obj.nextChild = div.nextSibling;
+		var containerDiv = document.createElement('div');
+		containerDiv.className = 'g_mcontainer expanded';
+		containerDiv.appendChild(div);
+		addEventSimple(containerDiv,"click",function(event) { 
+			var expand = this.firstChild.style.display == 'none';
+			this.firstChild.style.display = (expand ? '' : 'none'); 
+			this.className = this.className.replace(/expanded|collapsed/img,'');
+			this.className += (expand ? ' expanded' : ' collapsed');
+		});
+		obj.container = containerDiv;
+		insertArray.push(obj);
+	}
+	//alert('i have '+insertArray.length+' new objects to insert');
+	for (var i = 0; i < insertArray.length; i++) {
+		var obj = insertArray[i];
+		obj.parent.insertBefore(obj.container,obj.nextChild);
+	}
+}
+
 /* specific */
 var Magic = {
 	'add_validator_interface':(function ()
@@ -616,6 +648,7 @@ function InitDefault()
 	Magic.upgrade_search();				//makes the search box take focus after search type change
 	Magic.applySpoilerInputs();			//apply spoiler tag js support
 	Magic.enhanceCheckboxes();			//add gmail like checkbox select and the like
+	compressMenus();
 	
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);

@@ -100,3 +100,18 @@
 	margin-top: 0.3em;
 	text-align:center;
 }
+
+/** Thingie to hide/show g_menu's */
+div.g_mcontainer {
+	width: auto;
+	min-width: 16px;
+	min-height: 16px;
+}
+
+div.g_mcontainer.expanded { 
+	background: transparent url(../icons/formating/icon_contract.gif) top right no-repeat;
+}
+
+div.g_mcontainer.collapsed { 
+	background: transparent url(../icons/formating/icon_expand.gif) top right no-repeat;
+}
