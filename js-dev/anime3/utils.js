@@ -548,32 +548,41 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 }
 
 // GROUP BAR FUNCTIONS //
-var makeBar_rest = 0;
+//var makeBar_rest = 0;
+//var MAKEBAR_MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
+var makeBar_relRest = 0;
+var MAKEBAR_MIN_EP_SIZE = screen.width < 1600?(screen.width < 1280 ? 1/200 : 1/300):0;
 function makeBar(parentNode,start,end,total,map) {
-	var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
-
 	//Initialize makeBar_rest var
-	if (start == 1) makeBar_rest=0; 
+	//if (start == 1) makeBar_rest=0; 
+	if (start == 1) makeBar_relRest=0; 
 	
 	//Theoretical length of range
-	var length = (1 + end - start) * (MAX_BAR_WIDTH / total);
+	//var length = (1 + end - start) * (MAKEBAR_MAX_BAR_WIDTH / total);	
+	var relLength = (1 + end - start) / total;
 	
 	//Correct error made by last length calculation and cut of decimals
-	var width = Math.ceil(length - makeBar_rest);
+	//var width = Math.ceil(length - makeBar_rest);
+	var relWidth = relLength - makeBar_relRest;
 	
 	//Make lone episodes in animes with high ep count visible again 
-	if (width<=0) width=1; 
+	//if (width<=0) width=1; 
+	if(end != total && relWidth <= MAKEBAR_MIN_EP_SIZE) relWidth = MAKEBAR_MIN_EP_SIZE; 
 	
 	//Dampen IOIOIOIO effect
-	if(makeBar_rest > 2 && total != end) { makeBar_rest -= length; return;}
+	//if(makeBar_rest > 2 && total != end) { makeBar_rest -= length; return;}
+	if(end != total && makeBar_relRest > MAKEBAR_MIN_EP_SIZE*2) { makeBar_relRest -= relLength; return;}
 	
 	//Calculate new error made by cutting of decimals
-	makeBar_rest = width - length + makeBar_rest;
+	//makeBar_rest = width - length + makeBar_rest;
+	makeBar_relRest = relWidth - relLength + makeBar_relRest;
+	
 	
 	//Create image
 	var img = document.createElement('img');
 	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
-	img.width = width;
+	//img.width = width;
+	img.style.width = (relWidth*100) + "%";
 	img.height = 10;
 	img.title = img.alt = '';
 	
