@@ -19,7 +19,7 @@
 		padding:5px 4px 6px 24px;
 		width:72px;
 		display:block; visibility:visible;
-		color:#ababab; background:transparent url(http://static.anidb.net/css/geassmode/images/bar/lock.png) no-repeat 4px 3px;
+		color:#ababab; background:transparent url(images/bar/question.png) no-repeat 4px 3px;
 		content:"Did you know?"; cursor:default;
 	}
 	#layout-hint:hover span.head:before {
