@@ -533,7 +533,8 @@ function expandFilesByGroup() {
 		var tRow = document.getElementById(row.id+'_ftHolder');
 		if (tRow) tRow.parentNode.removeChild(tRow);
 		var nRow = createLoadingRow(10); //the new episode row
-		nRow.id = 'eid_' + eid + '_ftHolder';		
+		nRow.id = 'eid_' + eid + '_ftHolder';
+		nRow.className = 'filesrow';
 		row.parentNode.insertBefore(nRow,row.nextSibling);
 		var cell = getElementsByClassName(row.getElementsByTagName('td'), 'expand', true)[0];
 		var ahref = cell.getElementsByTagName('a')[0];
@@ -600,7 +601,8 @@ function foldFilesByGroup() {
 			ahref.className = 'i_icon i_plus';
 		} else { // we still have expanded groups
 			var nRow = createLoadingRow(10); //the new episode row
-			nRow.id = 'eid_' + eid + '_ftHolder';		
+			nRow.id = 'eid_' + eid + '_ftHolder';
+			nRow.className = 'filesrow';
 			row.parentNode.insertBefore(nRow,row.nextSibling);
 			forceFileTableRedraw(episode); // Force a redraw of the fileTable
 		}
@@ -827,7 +829,8 @@ function expandEp() {
 	var getXML = false;
 	if (!document.getElementById('eid_'+eid+'_ftHolder')) {
 		var nRow = createLoadingRow(10); //the new episode row
-		nRow.id = 'eid_' + eid + '_ftHolder';		
+		nRow.id = 'eid_' + eid + '_ftHolder';
+		nRow.className = 'filesrow';
 		row.parentNode.insertBefore(nRow,row.nextSibling);
 		getXML = true;
 		var req = xhttpRequest();
