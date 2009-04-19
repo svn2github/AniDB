@@ -57,12 +57,18 @@
 #layout-main div.latest2_all div.content td.mylist,
 #layout-main div.latest2_all div.content td.seen
 {
-	min-width: 5em;
-	max-width: 5em;
+	min-width: 7em;
+	max-width: 7em;
 }
 
 
 #layout-main div.latest2_all div.content td.group
 {
 	white-space: nowrap;
+}
+
+#layout-main div.latest2_all div.filter_menu ~ div.content,
+#layout-main div.latest2_all div.expanded ~ div.content
+{
+	margin-right:17.2em;
 }
