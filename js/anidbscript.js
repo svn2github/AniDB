@@ -648,7 +648,7 @@ function InitDefault()
 	Magic.upgrade_search();				//makes the search box take focus after search type change
 	Magic.applySpoilerInputs();			//apply spoiler tag js support
 	Magic.enhanceCheckboxes();			//add gmail like checkbox select and the like
-	compressMenus();
+	//compressMenus();
 	
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
