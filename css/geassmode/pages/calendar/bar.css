@@ -1,0 +1,31 @@
+#layout-main div.latestanimes_all div.g_section.top {
+	padding:0 20px;
+	height:30px;
+	background:#393634;
+}
+	#layout-main div.latestanimes_all div.g_section.top a.g_navprev,
+	#layout-main div.latestanimes_all div.g_section.top a.g_navnext {
+		margin:0; padding:0;
+		width:30px; height:30px;
+		display:block;
+		color:#ababab;
+		line-height:30px;
+	}
+	#layout-main div.latestanimes_all div.g_section.top a.g_navprev {
+		float:left;
+	}
+	#layout-main div.latestanimes_all div.g_section.top a.g_navnext {
+		float:right;
+		text-align:right;
+	}
+	#layout-main div.latestanimes_all div.g_section.top a:hover {
+		color:#dbdbdb;
+	}
+	#layout-main div.latestanimes_all div.g_section.top form {
+		margin:0; padding:0;
+		line-height:30px;
+		text-align:center;
+	}
+		#layout-main div.latestanimes_all div.g_section.top form p {
+			margin:0; padding:0;
+		}
