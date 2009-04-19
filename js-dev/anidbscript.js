@@ -313,7 +313,7 @@ function compressMenus() {
 		var obj = new Object();
 		//alert('i='+i+'/'+divs.length);
 		var div = divs[i];
-		if (!div.className || div.className.indexOf('g_menu') < 0) { i++; continue; }
+		if (!div.className || div.className.indexOf('g_menu filter_menu') < 0) { i++; continue; }
 		obj.parent = div.parentNode;
 		obj.nextChild = div.nextSibling;
 		var containerDiv = document.createElement('div');
