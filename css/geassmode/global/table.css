@@ -53,6 +53,7 @@
 #layout-main table tr.epsrow > td {
 	margin:0; padding:0 0 0 23px;
 	background:#dbdbdb;
+	overflow:hidden;
 }
 #layout-main table tr.filesrow table.filelist,
 #layout-main table tr.epsrow form {

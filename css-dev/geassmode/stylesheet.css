@@ -31,7 +31,6 @@ body.nonav {
 	margin:0 80px 0 195px; padding:20px 40px;
 	min-width:700px; max-width:1200px;
 	position:relative; top:-147px;
-	overflow:hidden;
 	background:#f2f8f6;
 	border:1px solid #666;
 }
