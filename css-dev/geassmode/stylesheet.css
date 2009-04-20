@@ -45,6 +45,10 @@ body.nonav {
 		text-align:left;
 		line-height:45px;
 	}
+	div#layout-tabs + div#layout-main h1 {
+		/* If tabs are available, move header */
+		top:-56px;
+	}
 #layout-footer {
 	margin:-120px 80px -120px 195px; /* Negative margins here prevent weird whitespace at the page's bottom */
 	min-width:700px; max-width:1200px;
