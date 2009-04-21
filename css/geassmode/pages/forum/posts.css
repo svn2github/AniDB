@@ -7,21 +7,24 @@
 #layout-main div.cmt_all div.g_timedentry div.inner {
 	margin:0; padding:0;
 	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y;
-	border:5px solid #393634;
+	border:5px solid #595654;
 }
 
 /* Profile box */
 #layout-main div.cmt_all div.g_timedentry div.inner dl.profile {
 	margin:0; padding:0 20px;
 	width:120px;
-	background:#393634 url(images/layout/forum-post-arrow.png) no-repeat right 45px;
+	background:#595654 url(images/layout/forum-post-arrow.png) no-repeat right 45px;
 	border:none;
 }
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.user {
 		margin-top:31px; padding:0;
-		color:#aaa !important;
+	}
+	#layout-main div.cmt_all div.g_timedentry div.inner dl dd.rank {
+		color:#aaa;
 	}
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile img {
+		background:#fff;
 		border:5px solid #eee;
 	}
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd {
