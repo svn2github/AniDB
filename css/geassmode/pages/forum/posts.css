@@ -20,7 +20,10 @@
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.user {
 		margin-top:31px; padding:0;
 	}
-	#layout-main div.cmt_all div.g_timedentry div.inner dl dd.rank {
+		#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.user a {
+			color:#ccc;
+		}
+	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.rank {
 		color:#aaa;
 	}
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile img {
