@@ -133,3 +133,18 @@
 {
 	padding: 2px 4px;
 }
+
+#layout-main div.addcreatoranimerel_all div.content
+{
+	margin-top: 1em;
+}
+
+#layout-main div.addcreatoranimerel_all div.content + div.content
+{
+	margin-top: 2em;
+}
+
+#layout-main div.addcreatoranimerel_all div.content caption
+{
+	text-align:left;
+}
