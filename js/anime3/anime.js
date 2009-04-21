@@ -489,7 +489,7 @@ function toggleFilesFromGroup() {
 	}
 	if (checked) 
 		alert('Checked '+filesChecked+' of '+totalFiles+' files, please confirm if the selection is correct.'+
-			'\nManual adding is not recommend. The best way to add files to your mylist is by using an AniDB Client. There is also a ready-to-run Java Applet.');
+			'\nManual adding is not recommended. The best way to add files to your mylist is by using an AniDB Client. There is also a ready-to-run Java Applet.');
 	showAddToMylistBox();
 }
 
