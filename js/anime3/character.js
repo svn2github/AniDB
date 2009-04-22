@@ -705,7 +705,6 @@ function prepPageAddEntity() {
 	guiseinput.onkeyup = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
 	guiseinput.onchange = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
 	if (newguiseinput.value != "" && !isNaN(Number(newguiseinput.value))) {
-		alert('here: '+newguiseinput.value);
 		var curid = Number(newguiseinput.value);
 		currentIds.push(curid);
 		if (!isCreatorPage) fetchData(curid,"characterdescbyid");
