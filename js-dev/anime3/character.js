@@ -209,12 +209,13 @@ function fetchData(searchString,searchType,extraSearchString) {
 function parseData(xmldoc) {
 	var root = xmldoc.getElementsByTagName('root').item(0);
 	if (!root) { errorAlert('parseData','no root node'); return; }
+	var allowCurIds = false;
 	var descNodes = root.getElementsByTagName('animedesc');
 	if (!descNodes.length) descNodes = root.getElementsByTagName('characterdesc');
 	if (!descNodes.length) descNodes = root.getElementsByTagName('creatordesc');
 	if (!descNodes.length) descNodes = root.getElementsByTagName('characterdescbyrel');
-	if (!descNodes.length) descNodes = root.getElementsByTagName('characterdescbyid');
-	if (!descNodes.length) descNodes = root.getElementsByTagName('creatordescbyid');
+	if (!descNodes.length) { allowCurIds = true; descNodes = root.getElementsByTagName('characterdescbyid'); }
+	if (!descNodes.length) { allowCurIds = true; descNodes = root.getElementsByTagName('creatordescbyid'); }
 	if (!descNodes.length) {
 		alert('Search for "'+searchString+'" resulted in no matches.');
 		if (curPageID == 'addcreator' || curPageID == 'addcharacter') {
@@ -231,7 +232,7 @@ function parseData(xmldoc) {
 		var descNode = new CInfo(descNodes[d]);
 		var ids = (descNode.type == 'anime' ? aids : (descNode.type == 'character' ? cids : crids));
 		var descs = (descNode.type == 'anime' ? animeInfos : (descNode.type == 'character' ? charInfos : creatorInfos));
-		if (currentIds.indexOf(descNode.id) >= 0) { filtered++; continue; }
+		if (!allowCurIds && currentIds.indexOf(descNode.id) >= 0) { filtered++; continue; }
 		if (ids.indexOf(descNode.id) < 0) ids.push(descNode.id);
 		if (!descs[descNode.id]) {
 			descs[descNode.id] = descNode;
@@ -704,6 +705,7 @@ function prepPageAddEntity() {
 	guiseinput.onkeyup = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
 	guiseinput.onchange = function checkBlank() { if (this.value == "") newguiseinput.value = ""; };
 	if (newguiseinput.value != "" && !isNaN(Number(newguiseinput.value))) {
+		alert('here: '+newguiseinput.value);
 		var curid = Number(newguiseinput.value);
 		currentIds.push(curid);
 		if (!isCreatorPage) fetchData(curid,"characterdescbyid");
