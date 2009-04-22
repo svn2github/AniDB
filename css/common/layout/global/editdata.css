@@ -18,3 +18,10 @@
 {
 	content:" - [";
 }
+
+#layout-main div.anime_all ul.links_top,
+#layout-main div.creator_all ul.links_top,
+#layout-main div.character_all ul.links_top
+{
+	display:none;
+}
