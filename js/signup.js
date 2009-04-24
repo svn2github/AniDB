@@ -19,7 +19,7 @@ var _username = "";
 function fetchData() {
 	_username = document.getElementsByName('signup.user')[0].value.toLowerCase();
 	var req = xhttpRequest();
-	if (isLocalHost) xhttpRequestFetch(req, 'xml/user_'+encodeURI(_username.toLowerCase())+'.xml', parseData);
+	if (isLocalHost()) xhttpRequestFetch(req, 'xml/user_'+encodeURI(_username.toLowerCase())+'.xml', parseData);
 	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type=user&search='+encodeURI(_username.toLowerCase()), parseData);
 }
 
