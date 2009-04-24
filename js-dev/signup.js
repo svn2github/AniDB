@@ -41,11 +41,11 @@ function parseData(xmldoc) {
 	testNode.id = 'signup.user.result';
 	if (existsUser) {
 		//document.getElementById(name).innerHTML = "<h1>User Exists</h1>";
-		testNode.src = 'css/icons/formating/icon_error.gif';
+		testNode.src = 'http://static.anidb.net/css/icons/formating/icon_error.gif';
 		testNode.title = 'This username already exists, please chose another';
 	}else{
 		//document.getElementById(name).innerHTML = "<h1>User Does Not Exists</h1>";
-		testNode.src = 'css/icons/formating/icon_message.gif';
+		testNode.src = 'http://static.anidb.net/css/icons/formating/icon_message.gif';
 		testNode.title = 'This username is free!';
 	}
 	parentNode.insertBefore(testNode,node.nextSibling);
