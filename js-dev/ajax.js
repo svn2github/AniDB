@@ -1,16 +1,18 @@
 /* file XMLHttpRequest (AJAX) implementation 
  * @author fahrenheit (alka.setzer@gmail.com)
+ * @author paziel ()
  *         Some code derived from PetriW work at anidb
  * version 1.0 (20.03.2007) - Initial Version
  * version 1.1 (30.04.2008) - Some minor cleanup
+ * version 1.2 (24.04.2009) - Addition of paziek's XHR element, plus update of IE's MSXML methods.
  */
 jsVersionArray.push({
 	"file":"ajax.js",
-	"version":"1.1",
+	"version":"1.2",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Some minor cleanup"
+	"changelog":"Addition of paziek's XHR element, plus update of IE's MSXML methods"
 });
 
 // CORE Functions //
@@ -27,13 +29,14 @@ function xhttpRequest() {
 		httpRequest = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // IE
 		isIE = true;
-		try {
-			httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-		} catch (e) {
-			try {
-				httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e) {}
-		}
+		var progIDs = [ 'Msxml2.XMLHTTP.6.0', 'Msxml2.XMLHTTP.3.0', 'Msxml2.XMLHTTP', 'Microsoft.XMLHTTP' ]; // MSXML5.0, MSXML4.0 and Msxml2.DOMDocument all have issues
+        for (var i = 0; i < progIDs.length; i++) {
+            try {
+                return new ActiveXObject(progIDs[i]);
+            }
+            catch (ex) {
+            }
+        }
 	}
 	if (!httpRequest) {
 		if (seeDebug) alert('Error\nCould not create an XMLHTTP instance.');
@@ -43,7 +46,7 @@ function xhttpRequest() {
 }
 
 /* Does the request
- * @param obj The XMLHttpRequest object
+ * @param obj The XMLHttpRequest object, or its wrapper (in that case, XHR should be in obj.xhr)
  * @param url HTTP protcol URL
  * @param handler Function that will handle the results
  * @param override Overrides the document mime-type with given override
@@ -53,17 +56,24 @@ function xhttpRequest() {
  */
 function doRequest(obj, url, handler, override, method, data) {
 	if (!obj) return;
-	obj.onreadystatechange = function() { xhttpRequestReadData(obj,handler,method); };
-	if (data) obj.open('POST', url, true); // POST
-	else obj.open('GET', url, true); // GET
-	if (obj.overrideMimeType && override) obj.overrideMimeType(override); // Setting the override type
-	if (disableCaching) obj.setRequestHeader('Cache-Control','no-cache'); // disables caching
-	if (data) {
-		obj.setRequestHeader('Content-Type','application/x-www-form-urlencoded'); // Setting the correct header
-		obj.send(data);
-	} else {
-		if (isIE) obj.setRequestHeader('Content-Type','application/xml'); // IE compatibility
-		obj.send(null);
+	try {
+		if(typeof obj.responseText === 'undefined') { // Checkes if we got XHR object, or its wrapper. Does this check works cross-browser? It should.
+			var xhr = obj.xhr;
+		} else var xhr = obj;
+		xhr.onreadystatechange = function() { xhttpRequestReadData(obj,handler,method); };
+		if (data) xhr.open('POST', url, true); // POST
+		else xhr.open('GET', url, true); // GET
+		if (xhr.overrideMimeType && override) xhr.overrideMimeType(override); // Setting the override type
+		if (disableCaching) xhr.setRequestHeader('Cache-Control','no-cache'); // disables caching
+		if (data) {
+			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded'); // Setting the correct header
+			xhr.send(data);
+		} else {
+			if (isIE) xhr.setRequestHeader('Content-Type','application/xml'); // IE compatibility
+			xhr.send(null);
+		}
+	} catch(e) {
+		alert('error: '+ e.description+'\nurl: '+url);
 	}
 }
 
@@ -86,29 +96,40 @@ function xhttpRequestReadData(obj, handler,method) {
 	if (!obj) { xhttpRequestUpdateStatus('object is null...'); return; }
 	var rootDoc = 'root';
 	//try {
-	switch (obj.readyState) {
+	if(typeof obj.responseText === 'undefined') { // Checkes if we got XHR object, or its wrapper. Does this check works cross-browser? It should.
+		var xhr = obj.xhr;
+	} else var xhr = obj;
+	switch (xhr.readyState) {
 		case 2: xhttpRequestUpdateStatus('requesting data...',25); break;
 		case 3: xhttpRequestUpdateStatus('receiving data...',50); break;
 		case 4:
 			xhttpRequestUpdateStatus('data transfer completed...',100);
-			switch (obj.status) {
+			switch (xhr.status) {
 				case 0:
 				case 200:
 				case 304:
 					var data = null;
 					if (!method || method == 'xml') {
-						if (window.XMLHttpRequest) data = obj.responseXML; // Mozilla and likes
+						if (window.XMLHttpRequest) data = xhr.responseXML; // Mozilla and likes
 						else { // The original IE implementation
-							data = new ActiveXObject("MSXML2.DOMDocument");
-							data.loadXML(obj.responseText);
+							var progIDs = [ 'Msxml2.DOMDocument.6.0', 'Msxml2.DOMDocument.3.0']; // MSXML5.0, MSXML4.0 and Msxml2.DOMDocument all have issues
+							for (var i = 0; i < progIDs.length; i++) {
+								try {
+									data = new ActiveXObject(progIDs[i]);
+									data.loadXML(xhr.responseText);
+									break;
+								}
+								catch (ex) {
+								}
+							}
 						}
 					} else if (method == 'text') {
-						data = obj.responseText;
+						data = xhr.responseText;
 					}
-					if (handler) handler(data);
+					if (handler) handler(data, obj);
 				break;
 				default:
-					alert('There was a problem with the request.\nServer returned: '+obj.status+': '+obj.statusText);
+					alert('There was a problem with the request.\nServer returned: '+xhr.status+': '+xhr.statusText);
 			break;
 		}
 		break;

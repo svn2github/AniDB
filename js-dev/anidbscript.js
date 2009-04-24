@@ -23,6 +23,11 @@ var searchTypeSelect = null;
 var searchTypeAssist = true;
 var username = null;
 
+/* returns true if the script is being executed on localhost */
+function isLocalHost() {
+	return (''+window.location.hostname == '' || ''+window.location.hostname.toLowerCase() == 'localhost');
+}
+
 /* compat */
 if (typeof Array.prototype.indexOf == "undefined") {
 	Array.prototype.indexOf = function(it) {
