@@ -336,7 +336,7 @@ function createPreferencesTable(type) {
 	for (var t = 0; t < items[type].length; t++) {
 		var li = document.createElement('li');
 		li.id = "pref"+(t+1);
-		li.className = "tab" + (t > 0 ? ' selected' : '');
+		li.className = "tab" + (t < 1 ? ' selected' : '');
 		li.appendChild(document.createTextNode(items[type][t]['head']));
 		li.onclick = Magic.toggle_tabs;
 		ul_tabs.appendChild(li);
