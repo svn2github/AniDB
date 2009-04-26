@@ -104,7 +104,5 @@
 /** Thingie to hide/show g_menu's */
 .filter_menu h3 a {
 	cursor: pointer;
-	width: 16px;
-	height: 16px;
 	float: right;
 }
