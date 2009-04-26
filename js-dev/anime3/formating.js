@@ -105,7 +105,10 @@ function selectionMagic(field, myValue, isText) {
 			if (!myValue) return range.text;
 			var startPos = field.selectionStart();
 			var endPos = field.selectionEnd();
-			field.value = field.value.substring(0, startPos) + myValue + field.value.substring(endPos, field.value.length);
+			var startText = field.value.substring(0, startPos);
+			var endText = field.value.substring(endPos, field.value.length);
+			//alert('myValue: '+myValue+'\nstartPos: '+startPos+'\nendPos: '+endPos+'\ntext: '+range.text+'\nstartText: '+startText+'\nendText: '+endText);
+			field.value = startText + myValue + endText;
 			// this clears the current selection
 			range.move("character", startPos+myValue.length); 
 			range.select();
@@ -147,13 +150,22 @@ function selectionMagic(field, myValue, isText) {
 
 /* Get the caret position in a textarea (black magic IE hack) */
 function getCaretPosition() {
+	var isTextArea = this.nodeName.toLowerCase() == 'textarea';
+	var textarea = this;
 	var caretPos = null;
 	var range = this.document.selection.createRange(); // get current selection
-	var range_all = this.document.body.createTextRange(); // a new selection of the whole textarea
-	range_all.moveToElementText(this); 	// calculate selection start point by moving beginning of range_all to beginning of range
+	var range_all = (!isTextArea ? this.document.body.createTextRange() : this.createTextRange()); // a new selection of the whole textarea
+	//alert('range: '+range.text+'\nrange_all: '+range_all.text);
 	var sel_start;
-	for (sel_start = 0; range_all.compareEndPoints('StartToStart', range) < 0; sel_start++)
-		range_all.moveStart('character', 1);
+	if (!isTextArea) {
+		range_all.moveToElementText(this); 	// calculate selection start point by moving beginning of range_all to beginning of range
+		for (sel_start = 0; range_all.compareEndPoints('StartToStart', range) < 0; sel_start++)
+			range_all.moveStart('character', 1);
+	} else {
+		//alert(range_all.compareEndPoints('EndToEnd', range));
+		var idx = range_all.text.indexOf(range.text);
+		sel_start = (idx >= 0 ? idx : 0);
+	}
 	return sel_start;
 }
 

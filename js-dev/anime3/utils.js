@@ -132,52 +132,6 @@ function cTimeDateHour(data) {
 
 // DOM NODE FUNCTIONS //
 
-/* returns computed style information about a specific element
- * @param element where to get attributes
- * @param attribute what to get 
- */
-function getStyleInformation(element,attribute,debug) {
-	if (!element && attribute) return;
-	var useCurrentStyle = (element.currentStyle) ? true : false;
-	var useGetCumputedStyle = (window.getComputedStyle) ? true : false;
-
-	if (debug) {
-		var result = '';
-		if (!attribute) {
-			if (useGetCumputedStyle)
-				result += '\n!attribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null);
-			if (useCurrentStyle)
-				result += '\n!attribute>useCurrentStyle: ' + element.currentStyle;
-		} else {
-			if (useGetCumputedStyle)
-				result += '\nattribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null)[attribute];
-			if (useCurrentStyle)
-				result += '\nattribute>useCurrentStyle: ' + element.currentStyle[attribute];
-		}
-		alert('useCurrentStyle: '+useCurrentStyle+
-			'\nuseGetCumputedStyle: '+useGetCumputedStyle+
-			'\nelement: '+element+
-			'\nattribute: '+attribute+
-			'\nresult: '+result
-		);
-	}
-	
-	if (!attribute) {
-		if (useGetCumputedStyle)
-			return window.getComputedStyle(element,null);
-		else if (useCurrentStyle)
-			return element.currentStyle;
-		else return '';
-	} else {
-		if (useGetCumputedStyle)
-			return window.getComputedStyle(element,null)[attribute];
-		else if (useCurrentStyle)
-			return element.currentStyle[attribute];
-		else return '';
-	}
-	return null;
-}
-
 /* Returns the nodeValue of a given node
  * @param node The node where to extract information
  * @return String containing node data
@@ -1473,43 +1427,43 @@ function applyFormat(identifier, file, episode, anime, group) {
   var dropIfNull = false;
   if (identifier.indexOf('<') >= 0) {  
     originalIdentifier = originalIdentifier.substr(originalIdentifier.indexOf('<')+1,originalIdentifier.indexOf('>')-1);
-    identifier = identifier.match(/(\%[A-Z]+)/i)[0];
+    identifier = identifier.match(/(\%[A-Z]+)/mgi)[0];
     originalIdentifier = originalIdentifier.replace(identifier,"%replaceme");
     dropIfNull = true;
   }
   //alert('identifier: '+identifier+' ('+originalIdentifier+') exists? '+checkIdentifiers(identifier));
   if (!checkIdentifiers(identifier)) return ("");
-  identifier = identifier.replace("%ant",anime.getTitle());
-  identifier = identifier.replace("%anat",anime.getAltTitle());
-  identifier = identifier.replace("%ept",episode.getTitle());
-  identifier = identifier.replace("%epat",episode.getAltTitle());
+  identifier = identifier.replace(/\%ant/mgi,anime.getTitle());
+  identifier = identifier.replace(/\%anat/mgi,anime.getAltTitle());
+  identifier = identifier.replace(/\%ept/mgi,episode.getTitle());
+  identifier = identifier.replace(/\%epat/mgi,episode.getAltTitle());
   if (identifier.indexOf("%enr") >= 0) {
     var epLen = String((anime.eps) ? anime.eps : anime.epCount);
     var epFmt = '0000'+episode.epno;
     epFmt = epFmt.slice(epFmt.length-epLen.length);
-    identifier = identifier.replace("%enr",episode.typeChar+epFmt); 
+    identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
   }
-  identifier = identifier.replace("%pn",(anime.type == 'movie') ? "PA" : "EP");
-  identifier = identifier.replace("%fpn",(anime.type == 'movie') ? "Part" : "Episode");
+  identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");
+  identifier = identifier.replace(/\%fpn/mgi,(anime.type == 'movie') ? "Part" : "Episode");
   if (identifier.indexOf("%raw") >= 0) {
     if (file.type == 'video' && file.subtitleTracks.length == 0)
-      identifier = identifier.replace("%raw",(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
-    else identifier = identifier.replace("%raw","");
+      identifier = identifier.replace(/\%raw/mgi,(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
+    else identifier = identifier.replace(/\%raw/mgi,"");
   }
-  identifier = identifier.replace("%crc",(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
-  identifier = identifier.replace("%CRC",(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
-  identifier = identifier.replace("%ver",(file.version != 'v1') ? file.version : "");
-  identifier = identifier.replace("%cen",(file.isCensored) ? "cen" : "");
-  identifier = identifier.replace("%uncen",(file.isUncensored) ? "uncen" : "");
+  identifier = identifier.replace(/\%crc/mgi,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
+  identifier = identifier.replace(/\%CRC/mgi,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
+  identifier = identifier.replace(/\%ver/mgi,(file.version != 'v1') ? file.version : "");
+  identifier = identifier.replace(/\%cen/mgi,(file.isCensored) ? "cen" : "");
+  identifier = identifier.replace(/\%uncen/mgi,(file.isUncensored) ? "uncen" : "");
   if (identifier.indexOf("%dub") >= 0) {
     var dub = new Array();
     for (var i = 0; i < file.audioTracks.length; i++) dub.push(file.audioTracks[i].lang);
-    identifier = identifier.replace("%dub",(dub.length) ? dub.join(',') : "");
+    identifier = identifier.replace(/\%dub/mgi,(dub.length) ? dub.join(',') : "");
   }
   if (identifier.indexOf("%sub") >= 0) {
     var sub = new Array();
     for (var i = 0; i < file.subtitleTracks.length; i++) sub.push(file.subtitleTracks[i].lang);
-    identifier = identifier.replace("%sub",(sub.length) ? sub.join(',') : "");
+    identifier = identifier.replace(/\%sub/mgi,(sub.length) ? sub.join(',') : "");
   }
   if (identifier.indexOf("%lang") >= 0 || identifier.indexOf("%flang") >= 0) {
     var dub = new Array();
@@ -1533,30 +1487,30 @@ function applyFormat(identifier, file, episode, anime, group) {
     if (dub.length && sub.length) langs += '.';
     langs += sub.join();
     if (langs == 'dub.sub_ja.en') langs = "";
-    if (identifier.indexOf("%lang") >= 0) identifier = identifier.replace("%lang",langs);
-    if (identifier.indexOf("%flang") >= 0) identifier = identifier.replace("%flang",langs);
+    if (identifier.indexOf("%lang") >= 0) identifier = identifier.replace(/\%lang/mgi,langs);
+    if (identifier.indexOf("%flang") >= 0) identifier = identifier.replace(/\%flang/mgi,langs);
   }
-  identifier = identifier.replace("%grp",(group) ? group.shortName : '');
-  identifier = identifier.replace("%grn",(group) ? group.name : '');
-  identifier = identifier.replace("%qual",(file.quality != 'unknown') ? file.quality : "");
-  identifier = identifier.replace("%src",file.source);
-  identifier = identifier.replace("%vcodec",(file.type == 'video' && file.videoTracks.length) ? file.videoTracks[0].codec : "");
-  identifier = identifier.replace("%acodec",((file.type == 'video' || file.type == 'audio') && file.audioTracks.length) ? file.audioTracks[0].codec : "");
-  identifier = identifier.replace("%achans",((file.type == 'video' || file.type == 'audio') && file.audioTracks.length && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
-  identifier = identifier.replace("%res",(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
-  identifier = identifier.replace("%eps",anime.eps);
-  identifier = identifier.replace("%atype",(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");
-  identifier = identifier.replace("%fid",file.id);
-  identifier = identifier.replace("%gid",file.groupId);
-  identifier = identifier.replace("%eid",file.episodeId);
-  identifier = identifier.replace("%aid",file.animeId);
-  identifier = identifier.replace("%flen",file.size);
-  identifier = identifier.replace("%dlen",formatFileSize(file.size,false));
-  identifier = identifier.replace("%hlen",formatFileSize(file.size,true));
-  identifier = identifier.replace("%ext",file.fileType);
-  identifier = identifier.replace("%ed2k",file.ed2k);
+  identifier = identifier.replace(/\%grp/mgi,(group) ? group.shortName : '');
+  identifier = identifier.replace(/\%grn/mgi,(group) ? group.name : '');
+  identifier = identifier.replace(/\%qual/mgi,(file.quality != 'unknown') ? file.quality : "");
+  identifier = identifier.replace(/\%src/mgi,file.source);
+  identifier = identifier.replace(/\%vcodec/mgi,(file.type == 'video' && file.videoTracks.length) ? file.videoTracks[0].codec : "");
+  identifier = identifier.replace(/\%acodec/mgi,((file.type == 'video' || file.type == 'audio') && file.audioTracks.length) ? file.audioTracks[0].codec : "");
+  identifier = identifier.replace(/\%achans/mgi,((file.type == 'video' || file.type == 'audio') && file.audioTracks.length && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
+  identifier = identifier.replace(/\%res/mgi,(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
+  identifier = identifier.replace(/\%eps/mgi,anime.eps);
+  identifier = identifier.replace(/\%atype/mgi,(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");
+  identifier = identifier.replace(/\%fid/mgi,file.id);
+  identifier = identifier.replace(/\%gid/mgi,file.groupId);
+  identifier = identifier.replace(/\%eid/mgi,file.episodeId);
+  identifier = identifier.replace(/\%aid/mgi,file.animeId);
+  identifier = identifier.replace(/\%flen/mgi,file.size);
+  identifier = identifier.replace(/\%dlen/mgi,formatFileSize(file.size,false));
+  identifier = identifier.replace(/\%hlen/mgi,formatFileSize(file.size,true));
+  identifier = identifier.replace(/\%ext/mgi,file.fileType);
+  identifier = identifier.replace(/\%ed2k/mgi,file.ed2k);
   if (dropIfNull) {
-    if (identifier != '') identifier = originalIdentifier.replace("%replaceme",identifier);
+    if (identifier != '') identifier = originalIdentifier.replace(/\%replaceme/mgi,identifier);
     else identifier = "";
   }
   return (identifier);

@@ -187,7 +187,7 @@ function writeTagGroups() {
 	div.className = "taggrouplist";
 	for (var g = 0; g < level0groups.length; g++) {
 		var group = groups[level0groups[g]];
-		if (!group) continue;
+		if (!group || !group.tags.length) continue;
 		var span = createTextLink(null, group.name, null, null, showTagsForGroup, null, 'link');
 		span.id = 'g'+group.gid;
 		div.appendChild(span);

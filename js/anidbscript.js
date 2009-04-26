@@ -52,6 +52,52 @@ Array.prototype.sum = function(){
 
 /* generic event functions */
 
+/* returns computed style information about a specific element
+ * @param element where to get attributes
+ * @param attribute what to get 
+ */
+function getStyleInformation(element,attribute,debug) {
+	if (!element && attribute) return;
+	var useCurrentStyle = (element.currentStyle) ? true : false;
+	var useGetCumputedStyle = (window.getComputedStyle) ? true : false;
+
+	if (debug) {
+		var result = '';
+		if (!attribute) {
+			if (useGetCumputedStyle)
+				result += '\n!attribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null);
+			if (useCurrentStyle)
+				result += '\n!attribute>useCurrentStyle: ' + element.currentStyle;
+		} else {
+			if (useGetCumputedStyle)
+				result += '\nattribute>useGetCumputedStyle: ' + window.getComputedStyle(element,null)[attribute];
+			if (useCurrentStyle)
+				result += '\nattribute>useCurrentStyle: ' + element.currentStyle[attribute];
+		}
+		alert('useCurrentStyle: '+useCurrentStyle+
+			'\nuseGetCumputedStyle: '+useGetCumputedStyle+
+			'\nelement: '+element+
+			'\nattribute: '+attribute+
+			'\nresult: '+result
+		);
+	}
+	
+	if (!attribute) {
+		if (useGetCumputedStyle)
+			return window.getComputedStyle(element,null);
+		else if (useCurrentStyle)
+			return element.currentStyle;
+		else return '';
+	} else {
+		if (useGetCumputedStyle)
+			return window.getComputedStyle(element,null)[attribute];
+		else if (useCurrentStyle)
+			return element.currentStyle[attribute];
+		else return '';
+	}
+	return null;
+}
+
 /* Finds the position of a given element */
 function findPos(element) {
 	var curleft = curtop = 0;
@@ -310,33 +356,36 @@ function enhanceCheckboxes(parent) {
 
 function compressMenus() {
 	if (!document.getElementsByTagName) return;
-	//return;
 	var divs = document.getElementsByTagName('div');
-	var insertArray = new Array();
 	var i = 0;
 	while (i < divs.length) {
-		var obj = new Object();
-		//alert('i='+i+'/'+divs.length);
 		var div = divs[i];
 		if (!div.className || div.className.indexOf('g_menu filter_menu') < 0) { i++; continue; }
-		obj.parent = div.parentNode;
-		obj.nextChild = div.nextSibling;
-		var containerDiv = document.createElement('div');
-		containerDiv.className = 'g_mcontainer expanded';
-		containerDiv.appendChild(div);
-		addEventSimple(containerDiv,"click",function(event) { 
-			var expand = this.firstChild.style.display == 'none';
-			this.firstChild.style.display = (expand ? '' : 'none'); 
-			this.className = this.className.replace(/expanded|collapsed/img,'');
-			this.className += (expand ? ' expanded' : ' collapsed');
-		});
-		obj.container = containerDiv;
-		insertArray.push(obj);
-	}
-	//alert('i have '+insertArray.length+' new objects to insert');
-	for (var i = 0; i < insertArray.length; i++) {
-		var obj = insertArray[i];
-		obj.parent.insertBefore(obj.container,obj.nextChild);
+		var header = document.createElement('h3');
+		header.width = 'auto';
+		var toggleIcon = document.createElement('a');
+		toggleIcon._pwidth = getStyleInformation(div,'width');
+		toggleIcon.className = 'i_icon i_expanded';
+		toggleIcon.title = 'Toggle display of menu';
+		toggleIcon.alt = 'toggle display';
+		toggleIcon.onclick = function toogle() {
+			var expand = (this.className.indexOf('i_expanded') >= 0);
+			this.className = this.className.replace(/i_expanded|i_collapsed/mgi,'');
+			this.className += (expand ? ' i_collapsed' : ' i_expanded');
+			var rootNode = this.parentNode.parentNode;
+			var cdiv = rootNode.getElementsByTagName('div')[0];
+			if (cdiv.className == 'content')
+				cdiv.style.display = (expand ? 'none' : '');
+			// (re)set root div
+			rootNode.style.width = (expand ? 'auto' : this._pwidth);
+		}
+		header.appendChild(toggleIcon);
+		var content = document.createElement('div');
+		content.className = 'content';
+		while(div.childNodes.length) content.appendChild(div.childNodes[0]);
+		div.appendChild(header);
+		div.appendChild(content);
+		i++;
 	}
 }
 
@@ -653,7 +702,7 @@ function InitDefault()
 	Magic.upgrade_search();				//makes the search box take focus after search type change
 	Magic.applySpoilerInputs();			//apply spoiler tag js support
 	Magic.enhanceCheckboxes();			//add gmail like checkbox select and the like
-	//compressMenus();
+	compressMenus();
 	
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
