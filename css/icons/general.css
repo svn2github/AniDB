@@ -138,3 +138,11 @@ th.s_reverse,
 {
 	background:url(../icons/test/bubble.gif) no-repeat bottom;
 }
+
+*.i_expanded { 
+	background: transparent url(../icons/formating/icon_contract.gif) top right no-repeat;
+}
+
+*.i_collapsed { 
+	background: transparent url(../icons/formating/icon_expand.gif) top right no-repeat;
+}
