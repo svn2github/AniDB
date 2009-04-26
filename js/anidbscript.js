@@ -378,6 +378,8 @@ function compressMenus() {
 				cdiv.style.display = (expand ? 'none' : '');
 			// (re)set root div
 			rootNode.style.width = (expand ? 'auto' : this._pwidth);
+			rootNode.className = rootNode.className.replace(/expanded/collapsed/mgi,'');
+			rootNode.className += (expand ? ' collapsed' : ' expanded');
 		}
 		header.appendChild(toggleIcon);
 		var content = document.createElement('div');
