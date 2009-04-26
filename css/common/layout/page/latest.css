@@ -67,8 +67,7 @@
 	white-space: nowrap;
 }
 
-#layout-main div.latest2_all div.filter_menu ~ div.content,
-#layout-main div.latest2_all div.expanded ~ div.content
+#layout-main div.latest2_all div.filter_menu.expanded ~ div.content
 {
 	margin-right:17.2em;
 }
