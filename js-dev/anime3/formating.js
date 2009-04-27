@@ -99,18 +99,25 @@ function selectionMagic(field, myValue, isText) {
 			// this clears the current selection
 			field.selectionStart = startPos + myValue.length;
 			field.selectionEnd = startPos + myValue.length;
+			var evt = document.createEvent("KeyboardEvent");
+			evt.initKeyEvent("keypress", true, true, null, false, false, false, false, 0, 32);
+			field.dispatchEvent(evt);
+			// Trigger a "backspace" keypress.
+			evt = document.createEvent("KeyboardEvent");
+			evt.initKeyEvent("keypress", true, true, null, false, false, false, false, 8, 0);
+			field.dispatchEvent(evt);
 			return myValue;
 		} else { // Microsoft Model (this has 3 hacks in it, find them!)
 			var range = field.document.selection.createRange();
 			if (!myValue) return range.text;
-			var startPos = field.selectionStart();
-			var endPos = field.selectionEnd();
+			var startPos = field.selectionStart;
+			var endPos = field.selectionEnd;
 			var startText = field.value.substring(0, startPos);
 			var endText = field.value.substring(endPos, field.value.length);
 			//alert('myValue: '+myValue+'\nstartPos: '+startPos+'\nendPos: '+endPos+'\ntext: '+range.text+'\nstartText: '+startText+'\nendText: '+endText);
 			field.value = startText + myValue + endText;
 			// this clears the current selection
-			range.move("character", startPos+myValue.length); 
+			range.move("character", endPos+1); 
 			range.select();
 			return myValue;
 		}
@@ -151,9 +158,10 @@ function selectionMagic(field, myValue, isText) {
 /* Get the caret position in a textarea (black magic IE hack) */
 function getCaretPosition() {
 	var isTextArea = this.nodeName.toLowerCase() == 'textarea';
-	var textarea = this;
 	var caretPos = null;
-	var range = this.document.selection.createRange(); // get current selection
+	var range = this.document.selection.createRange();
+	var stored_range = range.duplicate();
+
 	var range_all = (!isTextArea ? this.document.body.createTextRange() : this.createTextRange()); // a new selection of the whole textarea
 	//alert('range: '+range.text+'\nrange_all: '+range_all.text);
 	var sel_start;
@@ -162,11 +170,14 @@ function getCaretPosition() {
 		for (sel_start = 0; range_all.compareEndPoints('StartToStart', range) < 0; sel_start++)
 			range_all.moveStart('character', 1);
 	} else {
-		//alert(range_all.compareEndPoints('EndToEnd', range));
-		var idx = range_all.text.indexOf(range.text);
-		sel_start = (idx >= 0 ? idx : 0);
+		stored_range.moveToElementText(this);
+		stored_range.setEndPoint('EndToEnd',range);
+		this.selectionStart = stored_range.text.length - range.text.length;
+		this.selectionEnd = this.selectionStart + range.text.length;
+		sel_start = this.selectionStart;
+		//alert('selectionStart: '+this.selectionStart+'\nselectionEnd: '+this.selectionEnd);
 	}
-	return sel_start;
+	//return sel_start;
 }
 
 /* Get the start of a selection (black magic IE hack) */
@@ -875,8 +886,11 @@ function initFormating() {
 
 		if (dS) {
 			textArea.getCaretPosition = getCaretPosition;
-			textArea.selectionStart = textAreaSelectionStart;
-			textArea.selectionEnd = textAreaSelectionEnd;
+			textArea.selectionStart = 0;
+			textArea.selectionEnd = 0;
+			textArea.onchange = getCaretPosition;
+			textArea.onmousedown = getCaretPosition;
+			textArea.onkeydown = getCaretPosition;
 		}
 
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
