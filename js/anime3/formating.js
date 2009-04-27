@@ -128,7 +128,6 @@ function selectionMagic(field, myValue, isText) {
 				//field.document.body.focus();
 				var sel = field.document.selection.createRange();
 				if (!myValue) return sel.text;
-				alert(sel.text);
 				if (isText) sel.text = myValue;
 				else sel.pasteHTML(myValue);
 				return myValue;
