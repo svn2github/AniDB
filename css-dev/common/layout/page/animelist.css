@@ -26,3 +26,8 @@
 {
 	clear:none;
 }
+
+#layout-main div.latest2_all div.animelist_all td.type
+{
+	white-space:nowrap;
+}

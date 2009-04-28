@@ -19,6 +19,28 @@
 	width: 60%;
 }
 
+#layout-main div.latest2_all div.latest_hotanime div.content th.anime,
+#layout-main div.latest2_all div.latest_reviews div.content th.anime
+{
+	width: 80%;
+}
+
+#layout-main div.latest2_all div.latest_sequels div.content th.anime_a,
+#layout-main div.latest2_all div.latest_sequels div.content th.anime_b
+{
+	width:50%;
+}
+
+#layout-main div.latest2_all div.latest_anime div.content th.name
+{
+	width: 90%;
+}
+
+#layout-main div.latest2_all div.latest_anime div.content td.type
+{
+	white-space:nowrap;
+}
+
 #layout-main div.latest2_all div.content table.filelist th.group
 {
 	width: 15%;
@@ -67,8 +89,12 @@
 	white-space: nowrap;
 }
 
-#layout-main div.latest2_all div.filter_menu ~ div.content,
-#layout-main div.latest2_all div.expanded ~ div.content
+#layout-main div.latest2_all div.filter_menu ~ div.content
 {
 	margin-right:17.2em;
+}
+
+#layout-main div.latest2_all div.filter_menu.collapsed ~ div.content
+{
+	margin-right:0;
 }

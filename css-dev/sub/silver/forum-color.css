@@ -78,3 +78,13 @@
 {
 	background-color: inherit;
 }
+
+#layout-main div.cmt_all div.cmt_add h4
+{
+	border-bottom-color: #CCCCCC;
+}
+
+#layout-main div.cmt_all div.cmt_add hr
+{
+	background-color:#CCCCCC;
+}
