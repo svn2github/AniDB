@@ -98,3 +98,14 @@
 {
 	text-align:right;
 }
+
+#layout-main div.anime_all div.groups td.epbar
+{
+	width:30%;
+}
+
+#layout-main div.anime_all div.groups td.epbar div
+{
+	float:left;
+	height:8px;
+}
