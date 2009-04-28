@@ -95,7 +95,9 @@ function selectionMagic(field, myValue, isText) {
 			var startPos = field.selectionStart;
 			var endPos = field.selectionEnd;
 			if (!myValue) return field.value.substring(startPos, endPos);
-			field.value = field.value.substring(0, startPos) + myValue + field.value.substring(endPos, field.value.length);
+			var startText = field.value.substring(0, startPos);
+			var endText = field.value.substring(endPos, field.value.length);
+			field.value = startText + myValue + endText;
 			// this clears the current selection
 			field.selectionStart = startPos + myValue.length;
 			field.selectionEnd = startPos + myValue.length;
@@ -161,7 +163,6 @@ function getCaretPosition() {
 	var caretPos = null;
 	var range = this.document.selection.createRange();
 	var stored_range = range.duplicate();
-
 	var range_all = (!isTextArea ? this.document.body.createTextRange() : this.createTextRange()); // a new selection of the whole textarea
 	//alert('range: '+range.text+'\nrange_all: '+range_all.text);
 	var sel_start;
@@ -180,14 +181,6 @@ function getCaretPosition() {
 	//return sel_start;
 }
 
-/* Get the start of a selection (black magic IE hack) */
-function textAreaSelectionStart() { return this.getCaretPosition(); }
-/* Get the end of a selection (black magic IE hack) */
-function textAreaSelectionEnd() {
-	var selection = this.document.selection.createRange().text;
-	return this.selectionStart() + selection.length;
-}
-
 /* Function that formats text
  * @param id 
  * @param n Number of textArea
@@ -199,8 +192,10 @@ function formatText(id, n, selected, element) {
 	var fta = document.getElementById('textArea_' + n);
 	if (!rte || !fta) { errorAlert('formatText','no rte or no fta'); return; }
 	var doc = rte.contentWindow.document;
-	if (currentFMode == 2) rte.contentWindow.focus();
-	else fta.focus();
+	if (currentFMode == 2) {
+		rte.contentWindow.focus();
+		//alert(selectionMagic(rte.contentWindow));
+	} else fta.focus();
 	switch(id.toLowerCase()) {
 		case 'insertimage':
 		case 'createlink':
@@ -211,6 +206,7 @@ function formatText(id, n, selected, element) {
 			else hrefField = textField;
 			var hyperLink = textField;
 			if (textField == '') textField = hrefField;
+			hrefField = hrefField.replace(':','%3A');
 			if (id.toLowerCase() == 'createlink') hyperLink = '[url='+hrefField+']'+textField+'[/url]';
 			else if (id.toLowerCase() == 'insertimage') hyperLink = '[img]'+hrefField+'[/img]';
 			if (currentFMode != 2) { 
@@ -539,7 +535,6 @@ function convertSPANs(id) {
 		if (theReplacementElement != null) {
 			var theRootNode = theParentElement;
 			while (theRootNode.parentNode != null) theRootNode = theRootNode.parentNode;
-			//showDOMtree(theRootNode);
 			for (var j = 0; j < theChildren.length; j++)
 				theReplacementElement.appendChild(theChildren[j]);
 			theSPANs[0].parentNode.replaceChild(theRootNode, theSPANs[0]);
