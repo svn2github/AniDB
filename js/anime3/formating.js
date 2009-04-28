@@ -539,7 +539,7 @@ function convertSPANs(id) {
 		if (theReplacementElement != null) {
 			var theRootNode = theParentElement;
 			while (theRootNode.parentNode != null) theRootNode = theRootNode.parentNode;
-			showDOMtree(theRootNode);
+			//showDOMtree(theRootNode);
 			for (var j = 0; j < theChildren.length; j++)
 				theReplacementElement.appendChild(theChildren[j]);
 			theSPANs[0].parentNode.replaceChild(theRootNode, theSPANs[0]);
