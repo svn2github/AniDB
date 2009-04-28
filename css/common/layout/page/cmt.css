@@ -818,3 +818,17 @@ div.quotebody div.quote div.quotebody
 	text-align:left;
 	word-wrap:break-word;
 }
+
+#layout-main div.cmt_all div.cmt_add h4
+{
+	text-align:left;
+	border-bottom: 1px solid;
+	padding-bottom:0.2em;
+}
+
+#layout-main div.cmt_all div.cmt_add div.review
+{
+	overflow:auto;
+	height:300px;
+	margin-top: 0.3em;
+}

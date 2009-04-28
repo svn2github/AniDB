@@ -207,3 +207,13 @@ div.quotebody div.quote div.g_odd
 {
 	background-color:inherit;
 }
+
+#layout-main div.cmt_all div.cmt_add h4
+{
+	border-bottom-color: #4A4A5A;
+}
+
+#layout-main div.cmt_all div.cmt_add hr
+{
+	background-color:#4A4A5A;
+}

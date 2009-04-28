@@ -185,6 +185,7 @@ div.quotebody
 	background-color: #3B3B3B;
 }
 
+#layout-main div.cmt_all div.cmt_add h4,
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
@@ -366,4 +367,9 @@ tr + tr td,
 #layout-main div.g_msg a:hover
 {
 	color:#AA0000;
+}
+
+#layout-main div.cmt_all div.cmt_add hr
+{
+	background-color:#666666;
 }
