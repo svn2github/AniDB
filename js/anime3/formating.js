@@ -128,6 +128,7 @@ function selectionMagic(field, myValue, isText) {
 				//field.document.body.focus();
 				var sel = field.document.selection.createRange();
 				if (!myValue) return sel.text;
+				//alert(sel.text);
 				if (isText) sel.text = myValue;
 				else sel.pasteHTML(myValue);
 				return myValue;
@@ -490,43 +491,58 @@ function convertSPANs(id) {
 		for (var j = 0; j < theSPANs[0].childNodes.length; j++)
 			theChildren.push(theSPANs[0].childNodes[j].cloneNode(true));
 		
+		var style = theSPANs[0].getAttribute("style").toLowerCase();
+		//alert(style);
+		
 		/* Detect type of span style */
-		switch (theSPANs[0].getAttribute("style")) {
-			case "font-weight: bold;":
+		if (style.indexOf('bold') < 0 && style.indexOf('italic') < 0 && style.indexOf('underline') < 0 && style.indexOf('line-through') < 0) {
+			replaceNodeWithChildren(theSPANs[0]);
+		} else {
+			if (style.indexOf('bold') >= 0) {
 				theReplacementElement = iframe.contentWindow.document.createElement("b");
-				theParentElement = theReplacementElement;
-				break;
-			case "font-style: italic;":
+				if (!theParentElement)
+					theParentElement = theReplacementElement;
+				else {
+					theParentElement.appendChild(theReplacementElement);
+					theParentElement = theReplacementElement;
+				}
+			}
+			if (style.indexOf('italic') >= 0) {
 				theReplacementElement = iframe.contentWindow.document.createElement("i");
-				theParentElement = theReplacementElement;
-				break;
-			case "text-decoration: underline;":
+				if (!theParentElement)
+					theParentElement = theReplacementElement;
+				else {
+					theParentElement.appendChild(theReplacementElement);
+					theParentElement = theReplacementElement;
+				}
+			}
+			if (style.indexOf('underline') >= 0) {
 				theReplacementElement = iframe.contentWindow.document.createElement("u");
-				theParentElement = theReplacementElement;
-				break;
-			case "text-decoration: line-through;":
+				if (!theParentElement)
+					theParentElement = theReplacementElement;
+				else {
+					theParentElement.appendChild(theReplacementElement);
+					theParentElement = theReplacementElement;
+				}
+			}
+			if (style.indexOf('line-through') >= 0) {
 				theReplacementElement = iframe.contentWindow.document.createElement("strike");
-				theParentElement = theReplacementElement;
-				break;
-			case "font-weight: bold; font-style: italic;":
-				theParentElement = iframe.contentWindow.document.createElement("i");
-				theReplacementElement = iframe.contentWindow.document.createElement("b");
-				theReplacementElement.appendChild(theParentElement);
-				break;
-			case "font-style: italic; font-weight: bold;":
-				theParentElement = iframe.contentWindow.document.createElement("b");
-				theReplacementElement = iframe.contentWindow.document.createElement("i");
-				theReplacementElement.appendChild(theParentElement);
-				break;
-			default:
-				replaceNodeWithChildren(theSPANs[0]);
-				break;
+				if (!theParentElement)
+					theParentElement = theReplacementElement;
+				else {
+					theParentElement.appendChild(theReplacementElement);
+					theParentElement = theReplacementElement;
+				}
+			}
 		}
 		
 		if (theReplacementElement != null) {
+			var theRootNode = theParentElement;
+			while (theRootNode.parentNode != null) theRootNode = theRootNode.parentNode;
+			showDOMtree(theRootNode);
 			for (var j = 0; j < theChildren.length; j++)
-				theParentElement.appendChild(theChildren[j]);
-			theSPANs[0].parentNode.replaceChild(theReplacementElement, theSPANs[0]);
+				theReplacementElement.appendChild(theChildren[j]);
+			theSPANs[0].parentNode.replaceChild(theRootNode, theSPANs[0]);
 		}
 		
 		theSPANs = iframe.contentWindow.document.getElementsByTagName("span");
@@ -808,14 +824,35 @@ function createRTE(iframe, textArea) {
 		doc.attachEvent("onmouseup", function(){checkButtonState(iframe); return true;});
 		doc.attachEvent("onkeyup", function(){checkButtonState(iframe); return true;});
 	}
-	try { if (document.queryCommandSupported('styleWithCSS')) true; } 
+	var cssStyled = true;
+	try { 
+		if (document.queryCommandSupported('styleWithCSS')) 
+			doc.execCommand('styleWithCSS', null, false);
+		cssStyled = false;
+	} 
 	catch(e) { 
-		try { doc.execCommand('styleWithCSS', null, false); } // FF 1.5+
+		try { 
+			if (cssStyled) {
+				doc.execCommand('styleWithCSS', null, false); 
+				cssStyled = false;
+			}
+		} // FF 1.5+
 		catch (e) {  } // FF 1.5-
 	}
-	try { if (document.queryCommandSupported('useCSS')) true; } 
+	try {
+		if (cssStyled) {
+			if (document.queryCommandSupported('useCSS')) true; 
+				doc.execCommand('useCSS', null, true);
+			cssStyled = false;
+		}
+	} 
 	catch(e) { 
-		try { doc.execCommand('useCSS', null, true); }
+		try {
+			if (cssStyled) {
+				doc.execCommand('useCSS', null, true); 
+				cssStyled = false;
+			}
+		}
 		catch (e) {  } // FF 1.5-
 	}
 	if (currentFMode != 2) iframe.style.display = 'none';
