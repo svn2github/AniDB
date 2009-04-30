@@ -58,7 +58,7 @@ var errorCount = 0;
  */
 function fetchData(aid) {
 	var req = xhttpRequest();
-	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+Number(aid)+'.xml', parseData);
+	if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+Number(aid)+'.xml', parseData);
 	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&nocache=1&aid='+Number(aid), parseData);
 }
 
@@ -244,6 +244,17 @@ function setAllDefaults() {
 
 /* function that adds episodes */
 function addEpisode() {
+	if (!epOrder.length) { // remove dumb version help
+		var table = document.getElementById('eplist');
+		if (table) {
+			var tbody = table.tBodies[0];
+			var tfoot = table.tFoot;
+			tbody.removeChild(tbody.rows[0]);
+			tfoot.rows[0].style.display = '';
+			tfoot.rows[1].style.display = '';
+			tfoot.rows[3].style.display = '';
+		}
+	}
 	var type = document.getElementById('episode.add.sel').value;
 	var quant = Number(document.getElementById('episode.add.quant').value);
 	if (quant < 1) quant = 1;
@@ -666,9 +677,17 @@ function createEpisodeTable() {
 		episode.nextEp = (i < epOrder.length - 1) ? episodes[epOrder[i+1]] : null;
 		tbody.appendChild(createEpisodeRow(eid,episode));
 	}
+	// dumbed down version help
+	if (!epOrder.length) {
+		var row = document.createElement('tr');
+		createCell(row, 'help', document.createTextNode('No episodes to show, please use the options below to add new episodes.'), null, cols.length);
+		tbody.appendChild(row);
+	}
 	table.appendChild(tbody);
 	var tfoot = document.createElement('tfoot');
+	// Options row
 	row = document.createElement('tr');
+	if (!epOrder.length) row.style.display = 'none';
 	createCell(row, null, 'Options', null, 3);
 	createCell(row, 'duration', createTextInput('default.len',5,false,false,5,null));
 	createCell(row, 'date', createTextInput('default.date',10,false,false,10,null));
@@ -676,7 +695,9 @@ function createEpisodeTable() {
 	inputButton.onclick = setAllDefaults;
 	createCell(row, 'action', inputButton, null, 2);
 	tfoot.appendChild(row);
+	// Show row
 	row = document.createElement('tr');
+	if (!epOrder.length) row.style.display = 'none';
 	createCell(row, null, 'Show', null, 2);
 	var cell = createCell(null, null, createLabledCheckBox(null,null,'toggletitlescheck',toggleEpisodeTitles,false,' toggle titles'), null, 5);
 	cell.appendChild(document.createTextNode(' '));
@@ -701,8 +722,11 @@ function createEpisodeTable() {
 	cell.appendChild(document.createTextNode(' eps'));
 	row.appendChild(cell);
 	tfoot.appendChild(row);
+	// Add new eps row
 	row = document.createElement('tr');
-	cell = createCell(null, null, document.createTextNode('Add new episode of type: '), null, 7);
+	cell = createCell(null, null, document.createTextNode('Add '), null, 7);
+	cell.appendChild(createTextInput('episode.add.quant',3, false, false, 3, 1));
+	cell.appendChild(document.createTextNode(' new episode(s) of type: '));
 	optionArray = new Object();
 	if (!anime.eps || normalEpsCnt < anime.eps) optionArray['N']={'text':"Normal"};
 	optionArray['S']={'text':"Special"};
@@ -711,15 +735,15 @@ function createEpisodeTable() {
 	optionArray['P']={'text':"Parody/Fandub"};
 	optionArray['O']={'text':"Other Episodes"};
 	createSelectArray(cell,'episode.add.sel','episode.add.sel',null,null,optionArray);
-	cell.appendChild(document.createTextNode(' Episodes to add:'));
-	cell.appendChild(createTextInput('episode.add.quant',3, false, false, 3, 1));
 	cell.appendChild(document.createTextNode(' '));
 	var addInput = createBasicButton(null,'add');
 	addInput.onclick = addEpisode;
 	cell.appendChild(addInput);
 	row.appendChild(cell);
 	tfoot.appendChild(row);
+	// Add titles to eps row
 	row = document.createElement('tr');
+	if (!epOrder.length) row.style.display = 'none';
 	cell = createCell(null, null, document.createTextNode('Add to '), null, 7);
 	optionArray = new Object();
 	optionArray['A']={'text':"All"};
