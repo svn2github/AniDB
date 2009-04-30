@@ -503,14 +503,12 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 
 // GROUP BAR FUNCTIONS //
 var makeBar_rest = 0;
-function makeBar(parentNode,start,end,total,map) {
-	var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
-
+function makeBar(parentNode,start,end,total,map,barSize) {
 	//Initialize makeBar_rest var
 	if (start == 1) makeBar_rest=0; 
 	
 	//Theoretical length of range
-	var length = (1 + end - start) * (MAX_BAR_WIDTH / total);
+	var length = (1 + end - start) * (barSize / total);
 	
 	//Correct error made by last length calculation and cut of decimals
 	var width = Math.ceil(length - makeBar_rest);
@@ -524,17 +522,22 @@ function makeBar(parentNode,start,end,total,map) {
 	//Calculate new error made by cutting of decimals
 	makeBar_rest = width - length + makeBar_rest;
 	
+	//Trim 1 pixel if needed
+	if(total == end && makeBar_rest>0.1) width--;
+	
 	//Create image
 	var img = document.createElement('img');
 	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
 	img.width = width;
 	img.height = 10;
 	img.title = img.alt = '';
-	
+
 	if (parentNode != null || parentNode != '') parentNode.appendChild(img); else return img;
 }
 
-function makeCompletionBar(parentNode, range, maps) {
+function makeCompletionBar(parentNode, range, maps, barSize) {
+	if(!barSize) barSize = screen.width < 1280 ? 200 : 300;
+	
 	var len = range.length;
 	var span = document.createElement('span');
 	span.className = 'completion';
@@ -555,7 +558,7 @@ function makeCompletionBar(parentNode, range, maps) {
 		var k = i+1;
 		while ( k < range.length && range[k] == v ) k++;
 		if (!v) v=0;
-		makeBar(span, i+1, k, range.length, maps[v]);
+		makeBar(span, i+1, k, range.length, maps[v],barSize);
 		i = k;
 	}
 	if (parentNode != null && parentNode != '') parentNode.appendChild(span);
