@@ -503,26 +503,21 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 
 // GROUP BAR FUNCTIONS //
 var makeBar_rest = 0;
-function makeBar(parentNode,start,end,total,map) {
-	var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
-
+function makeBar(parentNode,start,end,total,map,barSize) {
 	//Initialize makeBar_rest var
 	if (start == 1) makeBar_rest=0; 
-	
 	//Theoretical length of range
-	var length = (1 + end - start) * (MAX_BAR_WIDTH / total);
-	
+	var length = (1 + end - start) * (barSize / total);
 	//Correct error made by last length calculation and cut of decimals
 	var width = Math.ceil(length - makeBar_rest);
-	
 	//Make lone episodes in animes with high ep count visible again 
 	if (width<=0) width=1; 
-	
 	//Dampen IOIOIOIO effect
 	if(makeBar_rest > 2 && total != end) { makeBar_rest -= length; return;}
-	
 	//Calculate new error made by cutting of decimals
 	makeBar_rest = width - length + makeBar_rest;
+	//Trim 1 pixel if needed
+	if(total == end && makeBar_rest>0.1) width--;
 	
 	//Create image
 	var img = document.createElement('img');
@@ -530,11 +525,11 @@ function makeBar(parentNode,start,end,total,map) {
 	img.width = width;
 	img.height = 10;
 	img.title = img.alt = '';
-	
 	if (parentNode != null || parentNode != '') parentNode.appendChild(img); else return img;
 }
 
-function makeCompletionBar(parentNode, range, maps) {
+function makeCompletionBar(parentNode, range, maps, barSize) {
+	if(!barSize) barSize = screen.width < 1280 ? 200 : 300;
 	var len = range.length;
 	var span = document.createElement('span');
 	span.className = 'completion';
@@ -555,7 +550,7 @@ function makeCompletionBar(parentNode, range, maps) {
 		var k = i+1;
 		while ( k < range.length && range[k] == v ) k++;
 		if (!v) v=0;
-		makeBar(span, i+1, k, range.length, maps[v]);
+		makeBar(span, i+1, k, range.length, maps[v],barSize);
 		i = k;
 	}
 	if (parentNode != null && parentNode != '') parentNode.appendChild(span);
@@ -1310,22 +1305,22 @@ function sortcol(node) {
 			//		also move the contents of the cell to the newPRow (otherwise known as the row that used to be the original row)
 			// Because javascript does its thing by copy by reference this magic can work otherwise it would be hell
 			var cellValue = sortMap[i][1];
-			//alert('original cell value for row ['+i+']: '+cellValue);
+			alert('original cell value for row ['+i+']: '+cellValue);
 			while(parentRow.cells.length) {
 				var cell = parentRow.cells[0];
 				if (cell.rowSpan > 1) {
 					fakeRow.appendChild(cell);
 					if (cell.className.indexOf(identifier) >= 0) {
 						cellValue = funcmap['getval'](cell);
-						//alert('for row ['+i+'] (not rowspan) i found this cellValue: '+cellValue);
+						alert('for row ['+i+'] (not rowspan) i found this cellValue: '+cellValue);
 					}
 				} else {
 					fakeRow.appendChild(rowMap[0][2].cells[fakeCell].cloneNode(true));
 					if (fakeRow.cells[fakeRow.cells.length-1].className.indexOf(identifier) >= 0) {
-						cellValue = funcmap['getval'](fakeRow.cells[fakeRow.cells.length-1]);/*
+						cellValue = funcmap['getval'](fakeRow.cells[fakeRow.cells.length-1]);
 						alert('for row ['+i+'] (rowspan) i found this cellValue: '+cellValue+
 							'\nidentifier: '+identifier+
-							'\nclassName: '+fakeRow.cells[fakeRow.cells.length-1].className);*/
+							'\nclassName: '+fakeRow.cells[fakeRow.cells.length-1].className);
 					}
 					newPRow.appendChild(cell);
 					fakeCell++;
@@ -1426,10 +1421,10 @@ function applyFormat(identifier, file, episode, anime, group) {
   var originalIdentifier = identifier;
   var dropIfNull = false;
   if (identifier.indexOf('<') >= 0) {  
-    originalIdentifier = originalIdentifier.substr(originalIdentifier.indexOf('<')+1,originalIdentifier.indexOf('>')-1);
-    identifier = identifier.match(/(\%[A-Z]+)/mgi)[0];
-    originalIdentifier = originalIdentifier.replace(identifier,"%replaceme");
-    dropIfNull = true;
+	originalIdentifier = originalIdentifier.substr(originalIdentifier.indexOf('<')+1,originalIdentifier.indexOf('>')-1);
+	identifier = identifier.match(/(\%[A-Z]+)/mgi)[0];
+	originalIdentifier = originalIdentifier.replace(identifier,"%replaceme");
+	dropIfNull = true;
   }
   //alert('identifier: '+identifier+' ('+originalIdentifier+') exists? '+checkIdentifiers(identifier));
   if (!checkIdentifiers(identifier)) return ("");
@@ -1438,17 +1433,17 @@ function applyFormat(identifier, file, episode, anime, group) {
   identifier = identifier.replace(/\%ept/mgi,episode.getTitle());
   identifier = identifier.replace(/\%epat/mgi,episode.getAltTitle());
   if (identifier.indexOf("%enr") >= 0) {
-    var epLen = String((anime.eps) ? anime.eps : anime.epCount);
-    var epFmt = '0000'+episode.epno;
-    epFmt = epFmt.slice(epFmt.length-epLen.length);
-    identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
+	var epLen = String((anime.eps) ? anime.eps : anime.epCount);
+	var epFmt = '0000'+episode.epno;
+	epFmt = epFmt.slice(epFmt.length-epLen.length);
+	identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
   }
   identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");
   identifier = identifier.replace(/\%fpn/mgi,(anime.type == 'movie') ? "Part" : "Episode");
   if (identifier.indexOf("%raw") >= 0) {
-    if (file.type == 'video' && file.subtitleTracks.length == 0)
-      identifier = identifier.replace(/\%raw/mgi,(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
-    else identifier = identifier.replace(/\%raw/mgi,"");
+	if (file.type == 'video' && file.subtitleTracks.length == 0)
+	  identifier = identifier.replace(/\%raw/mgi,(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
+	else identifier = identifier.replace(/\%raw/mgi,"");
   }
   identifier = identifier.replace(/\%crc/mgi,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
   identifier = identifier.replace(/\%CRC/mgi,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
@@ -1456,39 +1451,39 @@ function applyFormat(identifier, file, episode, anime, group) {
   identifier = identifier.replace(/\%cen/mgi,(file.isCensored) ? "cen" : "");
   identifier = identifier.replace(/\%uncen/mgi,(file.isUncensored) ? "uncen" : "");
   if (identifier.indexOf("%dub") >= 0) {
-    var dub = new Array();
-    for (var i = 0; i < file.audioTracks.length; i++) dub.push(file.audioTracks[i].lang);
-    identifier = identifier.replace(/\%dub/mgi,(dub.length) ? dub.join(',') : "");
+	var dub = new Array();
+	for (var i = 0; i < file.audioTracks.length; i++) dub.push(file.audioTracks[i].lang);
+	identifier = identifier.replace(/\%dub/mgi,(dub.length) ? dub.join(',') : "");
   }
   if (identifier.indexOf("%sub") >= 0) {
-    var sub = new Array();
-    for (var i = 0; i < file.subtitleTracks.length; i++) sub.push(file.subtitleTracks[i].lang);
-    identifier = identifier.replace(/\%sub/mgi,(sub.length) ? sub.join(',') : "");
+	var sub = new Array();
+	for (var i = 0; i < file.subtitleTracks.length; i++) sub.push(file.subtitleTracks[i].lang);
+	identifier = identifier.replace(/\%sub/mgi,(sub.length) ? sub.join(',') : "");
   }
   if (identifier.indexOf("%lang") >= 0 || identifier.indexOf("%flang") >= 0) {
-    var dub = new Array();
-    for (var i = 0; i < file.audioTracks.length; i++) {
-      if (file.audioTracks[i].lang == "ja") continue;
-      if (identifier.indexOf("%lang") >= 0 && dub.length > 1) { dub.push("+"); break; }
-      dub.push(file.audioTracks[i].lang);
-    }
-    var sub = new Array();
-    for (var i = 0; i < file.subtitleTracks.length; i++) {
-      if (file.subtitleTracks[i].lang == "en") continue;
-      if (identifier.indexOf("%lang") >= 0 && sub.length > 1) { sub.push("+"); break; }
-      sub.push(file.subtitleTracks[i].lang);
-    }
-    var langs = "";
-    if (dub.length) langs += 'dub';
-    if (dub.length && sub.length) langs += '.';
-    if (sub.length) langs += 'sub';
-    if (dub.length || sub.length) langs += '_';
-    langs += dub.join();
-    if (dub.length && sub.length) langs += '.';
-    langs += sub.join();
-    if (langs == 'dub.sub_ja.en') langs = "";
-    if (identifier.indexOf("%lang") >= 0) identifier = identifier.replace(/\%lang/mgi,langs);
-    if (identifier.indexOf("%flang") >= 0) identifier = identifier.replace(/\%flang/mgi,langs);
+	var dub = new Array();
+	for (var i = 0; i < file.audioTracks.length; i++) {
+	  if (file.audioTracks[i].lang == "ja") continue;
+	  if (identifier.indexOf("%lang") >= 0 && dub.length > 1) { dub.push("+"); break; }
+	  dub.push(file.audioTracks[i].lang);
+	}
+	var sub = new Array();
+	for (var i = 0; i < file.subtitleTracks.length; i++) {
+	  if (file.subtitleTracks[i].lang == "en") continue;
+	  if (identifier.indexOf("%lang") >= 0 && sub.length > 1) { sub.push("+"); break; }
+	  sub.push(file.subtitleTracks[i].lang);
+	}
+	var langs = "";
+	if (dub.length) langs += 'dub';
+	if (dub.length && sub.length) langs += '.';
+	if (sub.length) langs += 'sub';
+	if (dub.length || sub.length) langs += '_';
+	langs += dub.join();
+	if (dub.length && sub.length) langs += '.';
+	langs += sub.join();
+	if (langs == 'dub.sub_ja.en') langs = "";
+	if (identifier.indexOf("%lang") >= 0) identifier = identifier.replace(/\%lang/mgi,langs);
+	if (identifier.indexOf("%flang") >= 0) identifier = identifier.replace(/\%flang/mgi,langs);
   }
   identifier = identifier.replace(/\%grp/mgi,(group) ? group.shortName : '');
   identifier = identifier.replace(/\%grn/mgi,(group) ? group.name : '');
@@ -1510,8 +1505,8 @@ function applyFormat(identifier, file, episode, anime, group) {
   identifier = identifier.replace(/\%ext/mgi,file.fileType);
   identifier = identifier.replace(/\%ed2k/mgi,file.ed2k);
   if (dropIfNull) {
-    if (identifier != '') identifier = originalIdentifier.replace(/\%replaceme/mgi,identifier);
-    else identifier = "";
+	if (identifier != '') identifier = originalIdentifier.replace(/\%replaceme/mgi,identifier);
+	else identifier = "";
   }
   return (identifier);
 }
