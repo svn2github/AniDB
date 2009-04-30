@@ -207,6 +207,8 @@ function formatText(id, n, selected, element) {
 			var hyperLink = textField;
 			if (textField == '') textField = hrefField;
 			hrefField = hrefField.replace(':','%3A');
+			// i'm lazy i know
+			hrefField = hrefField.replace('%3A//','://');
 			if (id.toLowerCase() == 'createlink') hyperLink = '[url='+hrefField+']'+textField+'[/url]';
 			else if (id.toLowerCase() == 'insertimage') hyperLink = '[img]'+hrefField+'[/img]';
 			if (currentFMode != 2) { 
