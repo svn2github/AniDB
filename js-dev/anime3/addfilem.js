@@ -283,7 +283,9 @@ vidStreams.prototype.add = function() {
 	this.streams[i] = new Object();
 	var ck = createLabelCheckbox('addf.vid.none',null,false,'check to disable video track (check for subtitle files)');
 	ck.onchange = function toggle() { vidstrm.disable(this.checked,i); }
+	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
+/*
 	var optionArray = {"10":{"text":'4:3'},"20":{"text":'16:9'},"30":{"text":'1.66:1'},"40":{"text":'1.85:1'},
 						"50":{"text":'2.00:1'},"60":{"text":'2.21:1'},"70":{"text":'2.35:1'},
 						"100":{"text":'other'},"200":{"text":'unknown'}};
@@ -291,20 +293,21 @@ vidStreams.prototype.add = function() {
 	select.title = 'Video track aspect ratio';
 	this.streams[i].ar = select;
 	this.streams[i].anamorphic = createLabelCheckbox('addstrm.vid.flag.FLAG_ANAMORPHIC',null,false,'anamorphic');
+*/
 	this.streams[i].cleanvideo = createLabelCheckbox('addstrm.vid.flag.FLAG_CLEAN',null,false,'clean video');
-	this.streams[i].vfr = createLabelCheckbox('addstrm.vid.flag.FLAG_VFR',null,false,'vfr');
+//	this.streams[i].vfr = createLabelCheckbox('addstrm.vid.flag.FLAG_VFR',null,false,'vfr');
 	this.streams[i].wrongar = createLabelCheckbox('addstrm.vid.flag.FLAG_WRONGAR',null,false,'wrong aspect ratio');
 	var cell = createCell(null,'value',this.streams[i].enabled);
-	cell.appendChild(createText(' '));
-	cell.appendChild(this.streams[i].ar);
-	cell.appendChild(document.createElement('br'));
+	//cell.appendChild(createText(' '));
+	//cell.appendChild(this.streams[i].ar);
+	//cell.appendChild(document.createElement('br'));
 	//cell.appendChild(createText('Flags: '));
-	cell.appendChild(this.streams[i].anamorphic);
-	cell.appendChild(createText(' anamorphic '));
+	//cell.appendChild(this.streams[i].anamorphic);
+	//cell.appendChild(createText(' anamorphic '));
 	cell.appendChild(this.streams[i].cleanvideo);
 	cell.appendChild(createText(' clean video '));
-	cell.appendChild(this.streams[i].vfr);
-	cell.appendChild(createText(' vfr '));
+	//cell.appendChild(this.streams[i].vfr);
+	//cell.appendChild(createText(' vfr '));
 	cell.appendChild(this.streams[i].wrongar);
 	cell.appendChild(createText(' wrong ar'));
 	var row = createRow(null,createCell(null,'field',createText('Video Track '+(i+1)+':')),cell);
@@ -354,6 +357,7 @@ audStreams.prototype.add = function() {
 	this.streams[i] = new Object();
 	var ck = createLabelCheckbox('addf.aud'+id+'.none',null,false,'check to disable audio track');
 	ck.onchange = function toggle() { audstrm.disable(this.checked,i); }
+	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
 	var optionArray = {"10":{'text':"normal audio"},"20":{'text':"commentary"},"30":{'text':"fandub"},
 						"40":{'text':"alternative voiceover"},"100":{'text':"other"},"200":{'text':"unknown"}};
@@ -416,6 +420,7 @@ subStreams.prototype.add = function() {
 	this.streams[i] = new Object();
 	var ck = createLabelCheckbox('addf.sub'+id+'.none',null,false,'check to disable subtitle track (no internal subtitles / RAW)');
 	ck.onchange = function toggle() { substrm.disable(this.checked,i); }
+	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
 	var optionArray = {"10":{'text':"hard sub"},"20":{'text':"soft sub"},"30":{'text':"sup. soft sub"},
 						"100":{'text':"other"},"200":{'text':"unknown"}};

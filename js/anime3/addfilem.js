@@ -28,6 +28,9 @@ var maxSubTracks = 3;
 var seeDebug = false;
 var LAY_FORMATFILESIZE = false;
 var templateType = 'manual';
+var groupList = null;
+var group = null;
+var groupSearch = null;
 var episodeList = null;
 var audLangs = null;
 var subLangs = null;
@@ -39,12 +42,16 @@ var vidSection = null;
 var audSection = null;
 var subSection = null;
 var nextButton = null;
+var my_dump = null;
+var my_back = null;
+var my_submit = null;
 
 /* Function that fetches data */
 function fetchData() {
-  var req = xhttpRequest();
-  if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
-  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
+	alert(searchString);
+	var req = xhttpRequest();
+	if (isLocalHost()) xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
 }
 
 /* Function that creates a Group object 
@@ -65,14 +72,24 @@ function parseData(xmldoc) {
 	var target = document.getElementById('addfilem.group.list');
 	if (!target) { errorAlert('parseData','no group select present'); return; }
 	var select = createBasicSelect('addf.group','addfilem.group.list');
+	createSelectOption(select, 'ignore', '-1', true, null, false);
 	createSelectOption(select, 'no or unknown group', '0', true, null, false);
 	for (var i = 0; i < groupEntries.length; i++) {
 		var groupEntry = new CGroup(groupEntries[i]);
 		createSelectOption(select, '['+groupEntry.sname+'] '+groupEntry.name, groupEntry.id, false, null, false);
 	}
 	target.parentNode.replaceChild(select,target);
+	groupSearch.disabled = false;
+	groupSearch.value = 'Search';
 }
 
+/* Updates the search button to indicate search is ongoing */
+function updateSearchString() { 
+	this.value = 'searching...';
+	searchString = group.value;
+	this.disabled = true;
+	fetchData(); 
+}
 
 /* [ ED2K PARSING ] */
 
@@ -114,6 +131,24 @@ function MyFile(name, size, ed2k){
 	this.filetype = this.find_filetype(name);
 	this.group = this.find_group(name);
 	this.epno = this.find_epno(name);
+}
+
+// Function that submits data
+function do_submit(){
+	if( my_data.length<1 ){
+		alert('Nothing to submit!');
+		return false;
+	}
+	var my_result = document.getElementById('addfilem.result');
+
+	my_fieldset = form.getElementsByTagName('fieldset')[0];
+	if (my_fieldset) my_fieldset = document.createElement('fieldset');
+	for (var i = 0, file = null; (file = my_data[i]); i++){
+		my_fieldset.appendChild(createButton('addfilem.data.'+i,null,false,file.size+"."+file.ed2k+"."+file.filetype+"."+(file.crc||''),'hidden'));
+	}
+	my_fieldset.appendChild(createButton('addfilem.action','results_hidden',false,'1','hidden'));
+	form.appendChild(my_fieldset);
+	return true;
 }
 
 /* Function that parses the dump text */
@@ -190,7 +225,22 @@ function parseDump(text) {
 	}
 	table.appendChild(tbody);
 	div.appendChild(table);
+	// create Back/Add Files buttons
+	my_back = createButton(null,'results_back',false,'Back','button',restore_dump, null);
+	div.appendChild(my_back);
+	div.appendChild(document.createTextNode(' '));
+	my_submit = createButton('addf.mass','results_submit',false,'Add files','submit',do_submit);
+	div.appendChild(my_submit);
 	form.replaceChild(div,my_dump);
+}
+
+/* function that restores the dump textarea */
+function restore_dump() {
+	if (!my_dump) return;
+	var my_result = document.getElementById('addfilem.result');
+	if (!my_result) return;
+	my_result.parentNode.replaceChild(my_dump,my_result);
+	nextButton.disabled = false;
 }
 
 /* [ INTERFACE ] */
@@ -223,7 +273,7 @@ function createLabelCheckbox(name,id,checked,title) {
 }
 
 function vidStreams() {
-	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.vid.streams',true)[0];
+	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.vid.streams',false)[0];
 	this.streams = new Array();
 }
 vidStreams.prototype.add = function() {
@@ -233,7 +283,9 @@ vidStreams.prototype.add = function() {
 	this.streams[i] = new Object();
 	var ck = createLabelCheckbox('addf.vid.none',null,false,'check to disable video track (check for subtitle files)');
 	ck.onchange = function toggle() { vidstrm.disable(this.checked,i); }
+	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
+/*
 	var optionArray = {"10":{"text":'4:3'},"20":{"text":'16:9'},"30":{"text":'1.66:1'},"40":{"text":'1.85:1'},
 						"50":{"text":'2.00:1'},"60":{"text":'2.21:1'},"70":{"text":'2.35:1'},
 						"100":{"text":'other'},"200":{"text":'unknown'}};
@@ -241,20 +293,21 @@ vidStreams.prototype.add = function() {
 	select.title = 'Video track aspect ratio';
 	this.streams[i].ar = select;
 	this.streams[i].anamorphic = createLabelCheckbox('addstrm.vid.flag.FLAG_ANAMORPHIC',null,false,'anamorphic');
+*/
 	this.streams[i].cleanvideo = createLabelCheckbox('addstrm.vid.flag.FLAG_CLEAN',null,false,'clean video');
-	this.streams[i].vfr = createLabelCheckbox('addstrm.vid.flag.FLAG_VFR',null,false,'vfr');
+//	this.streams[i].vfr = createLabelCheckbox('addstrm.vid.flag.FLAG_VFR',null,false,'vfr');
 	this.streams[i].wrongar = createLabelCheckbox('addstrm.vid.flag.FLAG_WRONGAR',null,false,'wrong aspect ratio');
 	var cell = createCell(null,'value',this.streams[i].enabled);
-	cell.appendChild(createText(' '));
-	cell.appendChild(this.streams[i].ar);
-	cell.appendChild(document.createElement('br'));
+	//cell.appendChild(createText(' '));
+	//cell.appendChild(this.streams[i].ar);
+	//cell.appendChild(document.createElement('br'));
 	//cell.appendChild(createText('Flags: '));
-	cell.appendChild(this.streams[i].anamorphic);
-	cell.appendChild(createText(' anamorphic '));
+	//cell.appendChild(this.streams[i].anamorphic);
+	//cell.appendChild(createText(' anamorphic '));
 	cell.appendChild(this.streams[i].cleanvideo);
 	cell.appendChild(createText(' clean video '));
-	cell.appendChild(this.streams[i].vfr);
-	cell.appendChild(createText(' vfr '));
+	//cell.appendChild(this.streams[i].vfr);
+	//cell.appendChild(createText(' vfr '));
 	cell.appendChild(this.streams[i].wrongar);
 	cell.appendChild(createText(' wrong ar'));
 	var row = createRow(null,createCell(null,'field',createText('Video Track '+(i+1)+':')),cell);
@@ -268,9 +321,19 @@ vidStreams.prototype.disable = function(val,id) {
 		this.streams[id][elem].disabled = val;
 	}
 	this.streams[id]['enabled'].checked = val;
+	if (vidTracks == 1 && val) {
+		this.numStreams.value = 0;
+	} else {
+		this.numStreams.value = vidTracks;
+	}
 }
 vidStreams.prototype.remove = function(id) {
-	if (!id) id = 0;
+	if (vidTracks-1 < 1) {
+		this.disable(true,0);
+		this.numStreams.value = 0;
+		return;
+	}
+	if (!id) id = (vidTracks-1);
 	var target = this.streams[id].enabled;
 	var row = target.parentNode.parentNode;
 	row.parentNode.removeChild(row);
@@ -280,17 +343,21 @@ vidStreams.prototype.remove = function(id) {
 }
 
 function audStreams() {
-	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.aud.streams',true)[0];
+	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.aud.streams',false)[0];
 	this.streams = new Array();
 }
 audStreams.prototype.add = function() {
 	if (audTracks >= maxAudTracks) return;
+	// if we are adding a new stream all other streams must be enabled
+	for (var i = 0; i < audTracks; i++)
+		this.disable(false,i);
 	var i = audTracks;
 	this.numStreams.value = audTracks+1;
 	var id = (i > 0) ? '_'+(i+1) : '';
 	this.streams[i] = new Object();
 	var ck = createLabelCheckbox('addf.aud'+id+'.none',null,false,'check to disable audio track');
 	ck.onchange = function toggle() { audstrm.disable(this.checked,i); }
+	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
 	var optionArray = {"10":{'text':"normal audio"},"20":{'text':"commentary"},"30":{'text':"fandub"},
 						"40":{'text':"alternative voiceover"},"100":{'text':"other"},"200":{'text':"unknown"}};
@@ -319,32 +386,41 @@ audStreams.prototype.disable = function(val,id) {
 		this.streams[id][elem].disabled = val;
 	}
 	this.streams[id]['enabled'].checked = val;
+	if (audTracks == 1 && val) {
+		this.numStreams.value = 0;
+	} else {
+		this.numStreams.value = audTracks;
+	}
 }
 audStreams.prototype.remove = function(id) {
 	if (audTracks-1 < 1) {
 		this.disable(true,0);
+		this.numStreams.value = 0;
 		return;
 	}
 	if (!id) id = (audTracks-1);
 	var target = this.streams[id].enabled;
 	var row = target.parentNode.parentNode;
 	row.parentNode.removeChild(row);
+	audTracks--;
 	this.numStreams.value = audTracks;
 	this.streams[id] = null;
-	audTracks--;
 }
 function subStreams() {
-	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.sub.streams',true)[0];
+	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.sub.streams',false)[0];
 	this.streams = new Array();
 }
 subStreams.prototype.add = function() {
 	if (subTracks >= maxSubTracks) return;
+	for (var i = 0; i < subTracks; i++)
+		this.disable(false,i);
 	var i = subTracks;
 	this.numStreams.value = subTracks+1;
 	var id = (i > 0) ? '_'+(i+1) : '';
 	this.streams[i] = new Object();
 	var ck = createLabelCheckbox('addf.sub'+id+'.none',null,false,'check to disable subtitle track (no internal subtitles / RAW)');
 	ck.onchange = function toggle() { substrm.disable(this.checked,i); }
+	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
 	var optionArray = {"10":{'text':"hard sub"},"20":{'text':"soft sub"},"30":{'text':"sup. soft sub"},
 						"100":{'text':"other"},"200":{'text':"unknown"}};
@@ -384,10 +460,16 @@ subStreams.prototype.disable = function(val,id) {
 		this.streams[id][elem].disabled = val;
 	}
 	this.streams[id]['enabled'].checked = val;
+	if (subTracks == 1 && val) {
+		this.numStreams.value = 0;
+	} else {
+		this.numStreams.value = subTracks;
+	}
 }
 subStreams.prototype.remove = function(id) {
 	if (subTracks-1 < 1) {
 		this.disable(true,0);
+		this.numStreams.value = 0;
 		return;
 	}
 	if (!id) id = (subTracks-1);
@@ -491,12 +573,20 @@ function buildTable() {
 	table.id = 'addfilem.options';
 	var tbody = document.createElement('tbody');
 	createRow(tbody,createCell(null,'field',createBoldText('General'),null,2));
+	var cell = createCell(null,'value',groupList);
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(group);
+	cell.appendChild(document.createTextNode(' '));
+	var newinput = createButton(groupSearch.name, groupSearch.id, groupSearch.disabled, groupSearch.value, groupSearch.type, updateSearchString, groupSearch.className);
+	cell.appendChild(newinput);
+	groupSearch = newinput;
+	createRow(tbody,createCell(null,'field',createText('Group:')),cell);
 	var optionArray = {"manual":{"text":'manual input'},"rawsub":{"text":'raw (japanese audio, no subtitles)'},
 						"fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
 						"extdub":{"text":'external dub file (? audio)'},"extsub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
 	var select = createSelectArray(null,null,null,doTemplateWork,null,optionArray);
 	createRow(tbody,createCell(null,'field',createText('Template:')),createCell(null,'value',select));
-	var cell = createCell(null,'value',crcStatus);
+	cell = createCell(null,'value',crcStatus);
 	cell.appendChild(createText(' (Needs CRC in filename)'));
 	createRow(tbody,createCell(null,'field',createText('CRC Status:')),cell);
 	if (censorSel.nodeName.toLowerCase() != 'input')
@@ -532,6 +622,9 @@ function prepPage() {
 	substrm = 		new subStreams();
 	aid =			document.getElementById('addfilem.aid') ? Number(document.getElementById('addfilem.aid').value) : 0;
 	form =			document.getElementById('addfilem.form');
+	groupList =     document.getElementById('addfilem.group.list');
+	group =         document.getElementById('addfilem.group');
+	groupSearch =   document.getElementById('addfilem.search');
 	episodeList =	document.getElementById('addfilem.episodes');
 	audLangs =		document.getElementById('addfilem.aud.lang').cloneNode(true);
 	subLangs =		document.getElementById('addfilem.sub.lang').cloneNode(true);
