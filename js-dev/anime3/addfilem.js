@@ -140,9 +140,9 @@ function do_submit(){
 		return false;
 	}
 	var my_result = document.getElementById('addfilem.result');
-	my_result.removeChild(my_submit);
+	//my_result.removeChild(my_submit);
 	my_result.removeChild(my_back);
-	my_submit = null;
+	//my_submit = null;
 	my_back = null;
 
 	my_fieldset = form.getElementsByTagName('fieldset')[0];
