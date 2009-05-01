@@ -273,7 +273,7 @@ function createLabelCheckbox(name,id,checked,title) {
 }
 
 function vidStreams() {
-	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.vid.streams',true)[0];
+	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.vid.streams',false)[0];
 	this.streams = new Array();
 }
 vidStreams.prototype.add = function() {
@@ -318,9 +318,19 @@ vidStreams.prototype.disable = function(val,id) {
 		this.streams[id][elem].disabled = val;
 	}
 	this.streams[id]['enabled'].checked = val;
+	if (vidTracks == 1 && val) {
+		this.numStreams.value = 0;
+	} else {
+		this.numStreams.value = vidTracks;
+	}
 }
 vidStreams.prototype.remove = function(id) {
-	if (!id) id = 0;
+	if (vidTracks-1 < 1) {
+		this.disable(true,0);
+		this.numStreams.value = 0;
+		return;
+	}
+	if (!id) id = (vidTracks-1);
 	var target = this.streams[id].enabled;
 	var row = target.parentNode.parentNode;
 	row.parentNode.removeChild(row);
@@ -330,11 +340,14 @@ vidStreams.prototype.remove = function(id) {
 }
 
 function audStreams() {
-	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.aud.streams',true)[0];
+	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.aud.streams',false)[0];
 	this.streams = new Array();
 }
 audStreams.prototype.add = function() {
 	if (audTracks >= maxAudTracks) return;
+	// if we are adding a new stream all other streams must be enabled
+	for (var i = 0; i < audTracks; i++)
+		this.disable(false,i);
 	var i = audTracks;
 	this.numStreams.value = audTracks+1;
 	var id = (i > 0) ? '_'+(i+1) : '';
@@ -369,26 +382,34 @@ audStreams.prototype.disable = function(val,id) {
 		this.streams[id][elem].disabled = val;
 	}
 	this.streams[id]['enabled'].checked = val;
+	if (audTracks == 1 && val) {
+		this.numStreams.value = 0;
+	} else {
+		this.numStreams.value = audTracks;
+	}
 }
 audStreams.prototype.remove = function(id) {
 	if (audTracks-1 < 1) {
 		this.disable(true,0);
+		this.numStreams.value = 0;
 		return;
 	}
 	if (!id) id = (audTracks-1);
 	var target = this.streams[id].enabled;
 	var row = target.parentNode.parentNode;
 	row.parentNode.removeChild(row);
+	audTracks--;
 	this.numStreams.value = audTracks;
 	this.streams[id] = null;
-	audTracks--;
 }
 function subStreams() {
-	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.sub.streams',true)[0];
+	this.numStreams = getElementsByName(document.getElementsByTagName('input'),'addf.sub.streams',false)[0];
 	this.streams = new Array();
 }
 subStreams.prototype.add = function() {
 	if (subTracks >= maxSubTracks) return;
+	for (var i = 0; i < subTracks; i++)
+		this.disable(false,i);
 	var i = subTracks;
 	this.numStreams.value = subTracks+1;
 	var id = (i > 0) ? '_'+(i+1) : '';
@@ -434,10 +455,16 @@ subStreams.prototype.disable = function(val,id) {
 		this.streams[id][elem].disabled = val;
 	}
 	this.streams[id]['enabled'].checked = val;
+	if (subTracks == 1 && val) {
+		this.numStreams.value = 0;
+	} else {
+		this.numStreams.value = subTracks;
+	}
 }
 subStreams.prototype.remove = function(id) {
 	if (subTracks-1 < 1) {
 		this.disable(true,0);
+		this.numStreams.value = 0;
 		return;
 	}
 	if (!id) id = (subTracks-1);
