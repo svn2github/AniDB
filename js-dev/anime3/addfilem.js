@@ -190,6 +190,10 @@ function parseDump(text) {
 	}
 	table.appendChild(tbody);
 	div.appendChild(table);
+	// create Back/Add Files buttons
+	div.appendChild(createButton(null,'results_back',false,'Back','button',function onclick() { alert('i should be going back :/'); }, null));
+	div.appendChild(document.createTextNode(' '));
+	div.appendChild(createButton('addf.mass','results_submit',false,'Add files','submit'));
 	form.replaceChild(div,my_dump);
 }
 
