@@ -40,6 +40,8 @@ var audSection = null;
 var subSection = null;
 var nextButton = null;
 var my_dump = null;
+var my_back = null;
+var my_submit = null;
 
 /* Function that fetches data */
 function fetchData() {
@@ -117,6 +119,31 @@ function MyFile(name, size, ed2k){
 	this.epno = this.find_epno(name);
 }
 
+// Function that submits data
+function do_submit(){
+	if( my_data.length<1 ){
+		alert('Nothing to submit!');
+		return false;
+	}
+	my_result.removeChild(my_submit);
+	my_result.removeChild(my_back);
+	my_submit = null;
+	my_back = null;
+
+	my_fieldset = makeElement('fieldset');
+	for (var i = 0, file = null; (file = my_data[i]); i++){
+		var input = makeElement('input');
+		input.type = 'hidden';
+		input.name = 'addfilem.data.'+i;
+		input.value = file.size+"."+file.ed2k+"."+file.filetype+"."+(file.crc||'');
+		my_fieldset.appendChild(input);
+	}
+	my_fieldset.appendChild(createButton('addfilem.action','results_hidden',false,'1','hidden'));
+	form.appendChild(my_fieldset);
+	
+	return true;
+}
+
 /* Function that parses the dump text */
 function parseDump(text) {
 	if( text.length<1 ){
@@ -192,13 +219,15 @@ function parseDump(text) {
 	table.appendChild(tbody);
 	div.appendChild(table);
 	// create Back/Add Files buttons
-	div.appendChild(createButton(null,'results_back',false,'Back','button',restore_dump, null));
+	my_back = createButton(null,'results_back',false,'Back','button',restore_dump, null);
+	div.appendChild(my_back);
 	div.appendChild(document.createTextNode(' '));
-	div.appendChild(createButton('addf.mass','results_submit',false,'Add files','submit'));
-	div.appendChild(createButton('addfilem.action','results_hidden',false,'1','hidden'));
+	my_submit = createButton('addf.mass','results_submit',false,'Add files','submit',do_submit);
+	div.appendChild(my_submit);
 	form.replaceChild(div,my_dump);
 }
 
+/* function that restores the dump textarea */
 function restore_dump() {
 	if (!my_dump) return;
 	var my_result = document.getElementById('addfilem.result');
