@@ -310,7 +310,7 @@ vidStreams.prototype.add = function() {
 	//cell.appendChild(createText(' vfr '));
 	cell.appendChild(this.streams[i].wrongar);
 	cell.appendChild(createText(' wrong ar'));
-	var row = createRow(null,createCell(null,'field',createText('Video Track '+(i+1)+':')),cell);
+	var row = createRow(null,createCell(null,'field',createText('Video Track:')),cell);
 	audSection.parentNode.insertBefore(row,audSection);
 	vidTracks++;
 }
