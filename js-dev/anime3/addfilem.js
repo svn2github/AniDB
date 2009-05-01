@@ -139,22 +139,19 @@ function do_submit(){
 		alert('Nothing to submit!');
 		return false;
 	}
+	var my_result = document.getElementById('addfilem.result');
 	my_result.removeChild(my_submit);
 	my_result.removeChild(my_back);
 	my_submit = null;
 	my_back = null;
 
-	my_fieldset = makeElement('fieldset');
+	my_fieldset = form.getElementsByTagName('fieldset')[0];
+	if (my_fieldset) my_fieldset = document.createElement('fieldset');
 	for (var i = 0, file = null; (file = my_data[i]); i++){
-		var input = makeElement('input');
-		input.type = 'hidden';
-		input.name = 'addfilem.data.'+i;
-		input.value = file.size+"."+file.ed2k+"."+file.filetype+"."+(file.crc||'');
-		my_fieldset.appendChild(input);
+		my_fieldset.appendChild(createButton('addfilem.data.'+i,null,false,file.size+"."+file.ed2k+"."+file.filetype+"."+(file.crc||''),'hidden'));
 	}
 	my_fieldset.appendChild(createButton('addfilem.action','results_hidden',false,'1','hidden'));
 	form.appendChild(my_fieldset);
-	
 	return true;
 }
 
