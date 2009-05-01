@@ -586,6 +586,7 @@ function buildTable() {
 						"extdub":{"text":'external dub file (? audio)'},"extsub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
 	var select = createSelectArray(null,null,null,doTemplateWork,null,optionArray);
 	createRow(tbody,createCell(null,'field',createText('Template:')),createCell(null,'value',select));
+	createRow(tbody,createCell(null,'field',createBoldText('File Settings'),null,2));
 	cell = createCell(null,'value',crcStatus);
 	cell.appendChild(createText(' (Needs CRC in filename)'));
 	createRow(tbody,createCell(null,'field',createText('CRC Status:')),cell);
