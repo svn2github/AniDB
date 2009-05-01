@@ -285,21 +285,21 @@ vidStreams.prototype.add = function() {
 	ck.onchange = function toggle() { vidstrm.disable(this.checked,i); }
 	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
-/*
+
 	var optionArray = {"10":{"text":'4:3'},"20":{"text":'16:9'},"30":{"text":'1.66:1'},"40":{"text":'1.85:1'},
 						"50":{"text":'2.00:1'},"60":{"text":'2.21:1'},"70":{"text":'2.35:1'},
 						"100":{"text":'other'},"200":{"text":'unknown'}};
 	var select = createSelectArray(null,'addstrm.vid.ar','addstrm.vid.ar',null,"200",optionArray);
 	select.title = 'Video track aspect ratio';
+	select.style.display = 'none';
 	this.streams[i].ar = select;
 	this.streams[i].anamorphic = createLabelCheckbox('addstrm.vid.flag.FLAG_ANAMORPHIC',null,false,'anamorphic');
-*/
 	this.streams[i].cleanvideo = createLabelCheckbox('addstrm.vid.flag.FLAG_CLEAN',null,false,'clean video');
-//	this.streams[i].vfr = createLabelCheckbox('addstrm.vid.flag.FLAG_VFR',null,false,'vfr');
+	this.streams[i].vfr = createLabelCheckbox('addstrm.vid.flag.FLAG_VFR',null,false,'vfr');
 	this.streams[i].wrongar = createLabelCheckbox('addstrm.vid.flag.FLAG_WRONGAR',null,false,'wrong aspect ratio');
 	var cell = createCell(null,'value',this.streams[i].enabled);
 	//cell.appendChild(createText(' '));
-	//cell.appendChild(this.streams[i].ar);
+	cell.appendChild(this.streams[i].ar);
 	//cell.appendChild(document.createElement('br'));
 	//cell.appendChild(createText('Flags: '));
 	//cell.appendChild(this.streams[i].anamorphic);
