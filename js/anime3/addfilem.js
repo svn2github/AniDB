@@ -135,7 +135,7 @@ function parseDump(text) {
 		}
 		else if(/ed2k\:/.test(lines[i])) skipped += "\n"+lines[i];
 	}
-	if( my_data.length>26){
+	if(my_data.length>26){
 		alert('Too many links. Max 26 is allowed.');
 		nextButton.disabled = false;
 		return;
@@ -321,7 +321,11 @@ audStreams.prototype.disable = function(val,id) {
 	this.streams[id]['enabled'].checked = val;
 }
 audStreams.prototype.remove = function(id) {
-	if (!id) id = 0;
+	if (audTracks-1 < 1) {
+		this.disable(true,0);
+		return;
+	}
+	if (!id) id = (audTracks-1);
 	var target = this.streams[id].enabled;
 	var row = target.parentNode.parentNode;
 	row.parentNode.removeChild(row);
@@ -370,7 +374,7 @@ subStreams.prototype.add = function() {
 	cell.appendChild(this.streams[i].comment);
 	cell.appendChild(createText(' commentary audio'));
 	var row = createRow(null,createCell(null,'field',createText('Subtitle Track '+(i+1)+':')),cell);
-	subSection.parentNode.insertBefore(row,subSection.nextSibling);
+	subSection.parentNode.appendChild(row);
 	subTracks++;
 }
 subStreams.prototype.disable = function(val,id) {
@@ -382,7 +386,11 @@ subStreams.prototype.disable = function(val,id) {
 	this.streams[id]['enabled'].checked = val;
 }
 subStreams.prototype.remove = function(id) {
-	if (!id) id = 0;
+	if (subTracks-1 < 1) {
+		this.disable(true,0);
+		return;
+	}
+	if (!id) id = (subTracks-1);
 	var target = this.streams[id].enabled;
 	var row = target.parentNode.parentNode;
 	row.parentNode.removeChild(row);
@@ -398,6 +406,9 @@ function doTemplateWork() {
 	vidstrm.disable(false);
 	audstrm.disable(false);
 	substrm.disable(false);
+	// reset track count to default values
+	while(audTracks > 1) audstrm.remove();
+	while(subTracks > 1) substrm.remove();
 	templateType = this.value;
 	switch(this.value) {
 		case 'manual':
@@ -468,6 +479,11 @@ function doTemplateWork() {
 	}
 }
 
+function doAudStreamsAdd() { audstrm.add(); }
+function doAudStreamsRemove() { audstrm.remove(); }
+function doSubStreamsAdd() { substrm.add(); }
+function doSubStreamsRemove() { substrm.remove(); }
+
 /* Function that builds the mass-file table */
 function buildTable() {
 	var table = document.createElement('table');
@@ -491,8 +507,16 @@ function buildTable() {
 	cell.appendChild(sourceSel);
 	createRow(tbody,createCell(null,'field',createText('Quality / Source:')),cell);
 	vidSection = createRow(tbody,createCell(null,'field',createBoldText('Video Track Info'),null,2));
-	audSection = createRow(tbody,createCell(null,'field',createBoldText('Audio Track Info'),null,2));
-	subSection = createRow(tbody,createCell(null,'field',createBoldText('Subtitle Track Info'),null,2));
+	cell = createCell(null,'field',createBoldText('Audio Track Info '),null,2);
+	createTextLink(cell, '[+]', 'removeme', null, doAudStreamsAdd, 'Add audio track', null);
+	cell.appendChild(document.createTextNode(' '));
+	createTextLink(cell, '[-]', 'removeme', null, doAudStreamsRemove, 'Remove audio track', null);
+	audSection = createRow(tbody,cell);
+	cell = createCell(null,'field',createBoldText('Subtitle Track Info '),null,2);
+	createTextLink(cell, '[+]', 'removeme', null, doSubStreamsAdd, 'Add subtitle track', null);
+	cell.appendChild(document.createTextNode(' '));
+	createTextLink(cell, '[-]', 'removeme', null, doSubStreamsRemove, 'Remove subtitle track', null);
+	subSection = createRow(tbody,cell);
 	vidstrm.add();
 	audstrm.add();
 	substrm.add();
