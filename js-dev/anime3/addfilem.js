@@ -28,6 +28,9 @@ var maxSubTracks = 3;
 var seeDebug = false;
 var LAY_FORMATFILESIZE = false;
 var templateType = 'manual';
+var groupList = null;
+var group = null;
+var groupSearch = null;
 var episodeList = null;
 var audLangs = null;
 var subLangs = null;
@@ -45,9 +48,10 @@ var my_submit = null;
 
 /* Function that fetches data */
 function fetchData() {
-  var req = xhttpRequest();
-  if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
-  else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
+	alert(searchString);
+	var req = xhttpRequest();
+	if (isLocalHost()) xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
 }
 
 /* Function that creates a Group object 
@@ -68,14 +72,24 @@ function parseData(xmldoc) {
 	var target = document.getElementById('addfilem.group.list');
 	if (!target) { errorAlert('parseData','no group select present'); return; }
 	var select = createBasicSelect('addf.group','addfilem.group.list');
+	createSelectOption(select, 'ignore', '-1', true, null, false);
 	createSelectOption(select, 'no or unknown group', '0', true, null, false);
 	for (var i = 0; i < groupEntries.length; i++) {
 		var groupEntry = new CGroup(groupEntries[i]);
 		createSelectOption(select, '['+groupEntry.sname+'] '+groupEntry.name, groupEntry.id, false, null, false);
 	}
 	target.parentNode.replaceChild(select,target);
+	groupSearch.disabled = false;
+	groupSearch.value = 'Search';
 }
 
+/* Updates the search button to indicate search is ongoing */
+function updateSearchString() { 
+	this.value = 'searching...';
+	searchString = group.value;
+	this.disabled = true;
+	fetchData(); 
+}
 
 /* [ ED2K PARSING ] */
 
@@ -534,12 +548,20 @@ function buildTable() {
 	table.id = 'addfilem.options';
 	var tbody = document.createElement('tbody');
 	createRow(tbody,createCell(null,'field',createBoldText('General'),null,2));
+	var cell = createCell(null,'value',groupList);
+	cell.appendChild(document.createElement('br'));
+	cell.appendChild(group);
+	cell.appendChild(document.createTextNode(' '));
+	var newinput = createButton(groupSearch.name, groupSearch.id, groupSearch.disabled, groupSearch.value, groupSearch.type, updateSearchString, groupSearch.className);
+	cell.appendChild(newinput);
+	groupSearch = newinput;
+	createRow(tbody,createCell(null,'field',createText('Group:')),cell);
 	var optionArray = {"manual":{"text":'manual input'},"rawsub":{"text":'raw (japanese audio, no subtitles)'},
 						"fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
 						"extdub":{"text":'external dub file (? audio)'},"extsub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
 	var select = createSelectArray(null,null,null,doTemplateWork,null,optionArray);
 	createRow(tbody,createCell(null,'field',createText('Template:')),createCell(null,'value',select));
-	var cell = createCell(null,'value',crcStatus);
+	cell = createCell(null,'value',crcStatus);
 	cell.appendChild(createText(' (Needs CRC in filename)'));
 	createRow(tbody,createCell(null,'field',createText('CRC Status:')),cell);
 	if (censorSel.nodeName.toLowerCase() != 'input')
@@ -575,6 +597,9 @@ function prepPage() {
 	substrm = 		new subStreams();
 	aid =			document.getElementById('addfilem.aid') ? Number(document.getElementById('addfilem.aid').value) : 0;
 	form =			document.getElementById('addfilem.form');
+	groupList =     document.getElementById('addfilem.group.list');
+	group =         document.getElementById('addfilem.group');
+	groupSearch =   document.getElementById('addfilem.search');
 	episodeList =	document.getElementById('addfilem.episodes');
 	audLangs =		document.getElementById('addfilem.aud.lang').cloneNode(true);
 	subLangs =		document.getElementById('addfilem.sub.lang').cloneNode(true);
