@@ -62,7 +62,14 @@ var sortingCols = {
 						"name character":{"type":'c_setlatin',"isDefault":true},
 						"type crel":{"type":'c_latin'},
 						"name character next":{"type":'c_setlatin'},
-						"name owner":{"type":'c_setlatin'}}
+						"name owner":{"type":'c_setlatin'}},
+	'creatorrellist': {	"date":{"type":'c_date',"isDefault":true},
+						"name creator":{"type":'c_setlatin'},
+						"type crel":{"type":'c_latin'},
+						"name creator next":{"type":'c_setlatin'},
+						"orderno":{"type":'c_number'},
+						"has_ended":{"type":'c_latin'},
+						"name user added":{"type":'c_setlatin'}}
 };
 var tableNames = new Array();
 var skipTables = null;
@@ -192,11 +199,10 @@ function fetchData(searchString,searchType,extraSearchString) {
 	if (allowedTypes.indexOf(searchType) < 0) { errorAlert('fetchData','Invalid search type: '+searchType); return; }
 	
 	if (searchType != 'characterdescbyrel' && searchType != 'characterdescbyid' && searchType != 'creatordescbyid') {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
+		if (isLocalHost()) xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&search='+encodeURI(searchString), parseData);
 	} else {
-		if (''+window.location.hostname == '') {
-			//alert('xml/'+searchType+'_'+encodeURI(searchString)+'.xml');
+		if (isLocalHost()) {
 			xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
 		} else
 			xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&id='+encodeURI(searchString)+(extraSearchString ? '&search='+encodeURI(extraSearchString) : ''), parseData);
@@ -264,21 +270,39 @@ function parseData(xmldoc) {
 }
 
 /* Function that starts a search */
-function doSearch() {
-	searchString = addRelInput.value;
-	if (searchString.length < 1) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
-	fetchData(searchString,'animedesc');
-	useFilterMode = false;
+function doSearch(type) {
+	if (!type || type == 'anime') {
+		searchString = addRelInput.value;
+		if (searchString.length < 1) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
+		fetchData(searchString,'animedesc');
+		useFilterMode = false;
+	} else {
+		searchString = addCRelInput.value;
+		if (searchString.length < 1) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
+		fetchData(searchString,type);
+		useSingleMode = (curPageID.indexOf('add') >= 0 && curPageID.indexOf('rel') >=0);
+		useFilterMode = false;
+	}
+}
+
+/* Exectutes a related search */
+function doSearchRelated(type,id) {
+	if (!(type && id)) { errorAlert('doSearchRelated','no type set'); return; }
+	searchString = addCRelInput.value;
+	//if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
+	useFilterMode = true;
+	if (searchString.length < 3)
+		useSingleMode = false;
+	else
+		useSingleMode = true;
+	fetchData(id,type,searchString);
 }
 
 /* Function that starts a char search */
-function doSearchChar() {
-	searchString = addCRelInput.value;
-	if (searchString.length < 1) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
-	fetchData(searchString,'characterdesc');
-	useSingleMode = (curPageID == 'addcharcharrel');
-	useFilterMode = false;
-}
+function doSearchChar() { doSearch('characterdesc'); }
+
+/* Function that starts a char search */
+function doSearchCreator() { doSearch('creatordesc'); }
 
 /* Function that expands all the titles for a given anime */
 function expandTitles() {
@@ -341,6 +365,7 @@ function showResults(single,filter) {
 	// now figure out the names of the checkboxes / radio buttons
 	var ckNames = {
 		'addcharcharrel':{'single':"addccrel.next",'multi':"addccrel.nextchar[]",'func':null},
+		'addcreatorcreatorrel':{'single':"addccrel.next",'multi':"addccrel.nextcreator[]",'func':null},
 		'addcharanimerel':{'single':"addcarel.charid[]",'multi':"addcarel.charid[]",'func':null},
 		'addcreator':{'single':"creator",'multi':"creator[]",'func':function setCreatorId() { 
 				newguiseinput.value = this.value; 
@@ -531,53 +556,71 @@ function prepPageAddCharAnimeRel() {
 	addRelSubmit = newSubmitClone;
 }
 
-/* =====[ ADDCHARCHARREL ]=====
+/* =====[ ADDENTITYENTITYREL ]=====
  * show=addcharcharrel page scripts
+ * show=addcreatorcreatorrel page scripts
  */
 
 /* Function that starts a related char search */
-function doSearchRelated() {
-	searchString = addCRelInput.value;
-	//if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
-	useFilterMode = true;
-	if (searchString.length < 3)
-		useSingleMode = false;
-	else
-		useSingleMode = true;
-	fetchData(charid,'characterdescbyrel',searchString);
-}
+function doSearchRelatedChar() { doSearchRelated('characterdescbyrel',charid); }
+/* Function that starts a related creator search */
+function doSearchRelatedCreator() { doSearchRelated('creatordescbyrel',charid); }
 
 /* Prepares the page for my scripts */
-function prepPageAddCharCharRel() {
+function prepPageAddEntityEntityRel() {
 	var div = document.getElementById('addrelform');
-	if (!div) { errorAlert('prepPageAddCharCharRel','no matching div'); return; }
+	if (!div) { errorAlert('prepPageAddEntityEntityRel','no matching div'); return; }
 	fieldset = div.getElementsByTagName('fieldset')[0];
 	var inputs = div.getElementsByTagName('input');
-	addRelInput = getElementsByName(inputs, 'addccrel.charid', false)[0];
-	charid = getElementsByName(inputs, 'charid', false)[0].value;
+	var relinputid,charinputid, searchFunc, relatedSearchFunc, ginfo, tableid, reldivs;
+	switch(curPageID) {
+		case 'addcharcharrel': 
+			relinputid = 'addccrel.charid';
+			charinputid = 'charid';
+			searchFunc = doSearchChar;
+			relatedSearchFunc = doSearchRelatedChar;
+			ginfo = 16;
+			tableid = 'characterrellist_';
+			reldivs = 'g_section addcharcharrel_entries';
+			break;
+		case 'addcreatorcreatorrel': 
+			relinputid = 'addccrel.creatorid'; 
+			charinputid = 'creatorid';
+			searchFunc = doSearchCreator;
+			relatedSearchFunc = doSearchRelatedCreator;
+			ginfo = 32;
+			tableid = 'creatorrellist_';
+			reldivs = 'g_section addcreatorcreatorrel_entries';
+			break;
+		default:
+			errorAlert('prepPageAddEntityEntityRel','no matching page'); 
+			return;
+	}
+	addRelInput = getElementsByName(inputs, relinputid, false)[0];
+	charid = getElementsByName(inputs, charinputid, false)[0].value;
 	currentIds.push(Number(charid));
 	addCRelInput = getElementsByName(inputs, 'search', false)[0];
 	showRelatedInput = getElementsByName(inputs, 'do.showrelated', false)[0];
 	searchInput = getElementsByName(inputs, 'do.search', false)[0];
 	var tables = new Array();
-	var reldivs = getElementsByClassName(document.getElementsByTagName('div'),'g_section addcharcharrel_entries',true);
+	var reldivs = getElementsByClassName(document.getElementsByTagName('div'),reldivs,true);
 	for (var i = 0; i < reldivs.length; i++) {
 		var curdiv = reldivs[i];
 		var tb = curdiv.getElementsByTagName('table')[0];
 		if (tb) {
-			tb.id = 'characterrellist_'+i;
+			tb.id = tableid+i;
 			tables.push(tb.id);
 		}
 	}
 	// @TODO: when table cells have proper class names add sorting support
-	handleTables(sortingCols,tables,null,collapseThumbnails,(get_info & 16));
+	handleTables(sortingCols,tables,null,collapseThumbnails,(get_info & ginfo));
 	if (!showRelatedInput && !searchInput) return;
 	if (showRelatedInput) {
-		var showRelatedClone = createButton(showRelatedInput.name,showRelatedInput.id,false,showRelatedInput.value,'button',doSearchRelated,null);
+		var showRelatedClone = createButton(showRelatedInput.name,showRelatedInput.id,false,showRelatedInput.value,'button',relatedSearchFunc,null);
 		showRelatedInput.parentNode.replaceChild(showRelatedClone,showRelatedInput);
 	}
 	if (searchInput) {
-		var searchInputClone = createButton(searchInput.name,searchInput.id,false,searchInput.value,'button',doSearchChar,null);
+		var searchInputClone = createButton(searchInput.name,searchInput.id,false,searchInput.value,'button',searchFunc,null);
 		searchInput.parentNode.replaceChild(searchInputClone,searchInput);
 	}
 	// append results table to the page
@@ -739,7 +782,8 @@ function prepPage() {
 		case 'addcreator':
 		case 'addcharacter': prepPageAddEntity(); break;
 		case 'addcharanimerel': prepPageAddCharAnimeRel(); break;
-		case 'addcharcharrel': prepPageAddCharCharRel(); break;
+		case 'addcharcharrel':
+		case 'addcreatorcreatorrel': prepPageAddEntityEntityRel(); break;
 		default:
 			errorAlert('prepPage',"unknown page identifier ("+curPageID+"), will not continue.");
 			return;
