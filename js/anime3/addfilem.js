@@ -123,8 +123,9 @@ function MyFile(name, size, ed2k){
 			if(regx.test(text)) return (RegExp.$2)*1 || RegExp.$2;
 		}
 	}
+	name = decodeURI(name);
 	this.name = name;
-	this.ed2k = ed2k;
+	this.ed2k = ed2k.toLowerCase();
 	this.size = size;
 	this.crc = this.find_crc(name);
 	this.version = this.find_version(name);
@@ -158,7 +159,7 @@ function parseDump(text) {
 		return;
 	}
 	nextButton.disabled = true;
-	var re_ed2k_link = /ed2k\:\/\/\|file\|(.+)\|(\d+)\|([a-f0-9]{32})\|/i;	
+	var re_ed2k_link = /ed2k\:\/\/\|file\|(.+)\|(\d+)\|([a-f0-9]{32})\|.*/i;	
 	var lines = text.split("\n");
 	var index = 0;
 	var skipped = '';
@@ -184,7 +185,7 @@ function parseDump(text) {
 	my_dump = document.getElementById('addfilem.dump');
 	
 	var div = document.createElement('div');
-	div.className = 'result';
+	div.className = 'g_section result';
 	div.id = 'addfilem.result';
 	var h4 = document.createElement('h4');
 	h4.appendChild(createText('Result'));
@@ -226,11 +227,13 @@ function parseDump(text) {
 	table.appendChild(tbody);
 	div.appendChild(table);
 	// create Back/Add Files buttons
+	var p = document.createElement('p');
 	my_back = createButton(null,'results_back',false,'Back','button',restore_dump, null);
-	div.appendChild(my_back);
-	div.appendChild(document.createTextNode(' '));
-	my_submit = createButton('addf.mass','results_submit',false,'Add files','submit',do_submit);
-	div.appendChild(my_submit);
+	p.appendChild(my_back);
+	p.appendChild(document.createTextNode(' '));
+	my_submit = createButton('addf.mass','results_submit',false,'Add files','button',do_submit);
+	p.appendChild(my_submit);
+	div.appendChild(p);
 	form.replaceChild(div,my_dump);
 }
 
@@ -250,12 +253,13 @@ function restore_dump() {
  * @param field A field Node (usually a TH)
  * @param value A value node (usually a TD)
  */
-function createRow(table, field, value) {
+function createRow(table, field, value, classname) {
 	if (!field && !value) { errorAlert('createRow','no cells to add'); return; }
 	var row = document.createElement('tr');
 	if (field) row.appendChild(field);
 	if (value) row.appendChild(value);
 	if (table) table.appendChild(row);
+	if (classname && classname != '') row.className = classname;
 	return row;
 }
 
@@ -569,7 +573,7 @@ function doSubStreamsRemove() { substrm.remove(); }
 /* Function that builds the mass-file table */
 function buildTable() {
 	var table = document.createElement('table');
-	table.className = 'options';
+	table.className = 'g_section options';
 	table.id = 'addfilem.options';
 	var tbody = document.createElement('tbody');
 	createRow(tbody,createCell(null,'field',createBoldText('General'),null,2));
@@ -580,12 +584,12 @@ function buildTable() {
 	var newinput = createButton(groupSearch.name, groupSearch.id, groupSearch.disabled, groupSearch.value, groupSearch.type, updateSearchString, groupSearch.className);
 	cell.appendChild(newinput);
 	groupSearch = newinput;
-	createRow(tbody,createCell(null,'field',createText('Group:')),cell);
+	createRow(tbody,createCell(null,'field',createText('Group:')),cell,'important');
 	var optionArray = {"manual":{"text":'manual input'},"rawsub":{"text":'raw (japanese audio, no subtitles)'},
 						"fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
 						"extdub":{"text":'external dub file (? audio)'},"extsub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
 	var select = createSelectArray(null,null,null,doTemplateWork,null,optionArray);
-	createRow(tbody,createCell(null,'field',createText('Template:')),createCell(null,'value',select));
+	createRow(tbody,createCell(null,'field',createText('Template:')),createCell(null,'value',select),'important');
 	createRow(tbody,createCell(null,'field',createBoldText('File Settings'),null,2));
 	cell = createCell(null,'value',crcStatus);
 	cell.appendChild(createText(' (Needs CRC in filename)'));
@@ -638,6 +642,9 @@ function prepPage() {
 	else censorSel =getElementsByName(form.getElementsByTagName('input'),'addf.censored',false)[0].cloneNode(true);
 	nextButton =	document.getElementById('addfilem.next');
 	nextButton.onclick = function do_process_dump() { parseDump(document.getElementById('addfilem.ed2k').value); };
+	var p =         document.createElement('p');
+	nextButton.parentNode.insertBefore(p,nextButton);
+	p.appendChild(nextButton);
 	var dl =		document.getElementById('addfilem.options');
 	dl.parentNode.replaceChild(buildTable(),dl);
 }
