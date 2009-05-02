@@ -311,9 +311,10 @@ function createDD(parentNode, className, someElement) {
  * @param url HREF
  * @param onclick Onclick action
  * @param title ALT and Title attribute
- * @param cname Class name
+ * @param className Class name
+ * @param isText If set to true will not add spans around text
  */
-function createIcon(parentNode, text, url, onclick, title, className) {
+function createIcon(parentNode, text, url, onclick, title, className, isText) {
 	var obj;
 	if (url == '' || url == null) obj = document.createElement('span');
 	else {
@@ -330,9 +331,12 @@ function createIcon(parentNode, text, url, onclick, title, className) {
 		obj.removeAttribute('href');
 	}
 	if (text != null) {
-		var label = document.createElement('span');
-		label.appendChild(document.createTextNode(text));
-		obj.appendChild(label);
+		if (!isText) {
+			var label = document.createElement('span');
+			label.appendChild(document.createTextNode(text));
+			obj.appendChild(label);
+		} else
+			obj.appendChild(document.createTextNode(text));
 	}
 	if (title != null && title != '') {
 		obj.title = title;
@@ -343,8 +347,8 @@ function createIcon(parentNode, text, url, onclick, title, className) {
 	else return(obj);
 }
 
-function createLink(parentNode, text, url, rel, onclick, title, className) {
-	var obj = createIcon('', text, url, onclick, title, className);
+function createLink(parentNode, text, url, rel, onclick, title, className, isText) {
+	var obj = createIcon('', text, url, onclick, title, className, isText);
 	if (rel == '' || rel == null) {
 		obj.rel = rel;
 		if (rel == 'wiki') obj.target = '_blank';
@@ -354,8 +358,8 @@ function createLink(parentNode, text, url, rel, onclick, title, className) {
 	else return(obj);
 }
 
-function createTextLink(parentNode, text, url, rel, onclick, title, className) {
-	var obj = createLink(null, text, url, rel, onclick, title, className);
+function createTextLink(parentNode, text, url, rel, onclick, title, className, isText) {
+	var obj = createLink(null, text, url, rel, onclick, title, className, isText);
 	if (className) obj.className = className;
 	if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
   else return(obj);

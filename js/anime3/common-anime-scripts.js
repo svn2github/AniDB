@@ -436,7 +436,7 @@ function createGroupRow(gid,cols,skips) {
 				row.appendChild(cell);
 				break;
 			case 'rating':
-				var a = createLink(null,(group.rating == '-' ? 'N/A' : group.rating),'animedb.pl?show=animegroupvotes&agid='+group.agid,'anidb::popup',null,null,'350.400.1.1.agvotes');
+				var a = createLink(null,(group.rating == '-' ? 'N/A' : group.rating),'animedb.pl?show=animegroupvotes&agid='+group.agid,'anidb::popup',null,null,'350.400.1.1.agvotes',true);
 				a.appendChild(document.createTextNode(' '));
 				var cnt = document.createElement('span');
 				cnt.className = 'count';
