@@ -152,5 +152,5 @@
 #layout-main div.addcreatoranimerel_all div.content h4 span.nolink
 {
 	-moz-user-select:text;
-	pointer: default;
+	cursor: default;
 }
