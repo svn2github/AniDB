@@ -1309,22 +1309,22 @@ function sortcol(node) {
 			//		also move the contents of the cell to the newPRow (otherwise known as the row that used to be the original row)
 			// Because javascript does its thing by copy by reference this magic can work otherwise it would be hell
 			var cellValue = sortMap[i][1];
-			alert('original cell value for row ['+i+']: '+cellValue);
+			//alert('original cell value for row ['+i+']: '+cellValue);
 			while(parentRow.cells.length) {
 				var cell = parentRow.cells[0];
 				if (cell.rowSpan > 1) {
 					fakeRow.appendChild(cell);
 					if (cell.className.indexOf(identifier) >= 0) {
 						cellValue = funcmap['getval'](cell);
-						alert('for row ['+i+'] (not rowspan) i found this cellValue: '+cellValue);
+						//alert('for row ['+i+'] (not rowspan) i found this cellValue: '+cellValue);
 					}
 				} else {
 					fakeRow.appendChild(rowMap[0][2].cells[fakeCell].cloneNode(true));
 					if (fakeRow.cells[fakeRow.cells.length-1].className.indexOf(identifier) >= 0) {
-						cellValue = funcmap['getval'](fakeRow.cells[fakeRow.cells.length-1]);
+						cellValue = funcmap['getval'](fakeRow.cells[fakeRow.cells.length-1]);/*
 						alert('for row ['+i+'] (rowspan) i found this cellValue: '+cellValue+
 							'\nidentifier: '+identifier+
-							'\nclassName: '+fakeRow.cells[fakeRow.cells.length-1].className);
+							'\nclassName: '+fakeRow.cells[fakeRow.cells.length-1].className);*/
 					}
 					newPRow.appendChild(cell);
 					fakeCell++;
