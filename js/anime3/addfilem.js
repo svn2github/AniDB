@@ -231,7 +231,7 @@ function parseDump(text) {
 	my_back = createButton(null,'results_back',false,'Back','button',restore_dump, null);
 	p.appendChild(my_back);
 	p.appendChild(document.createTextNode(' '));
-	my_submit = createButton('addf.mass','results_submit',false,'Add files','button',do_submit);
+	my_submit = createButton('addf.mass','results_submit',false,'Add files','submit',do_submit);
 	p.appendChild(my_submit);
 	div.appendChild(p);
 	form.replaceChild(div,my_dump);
