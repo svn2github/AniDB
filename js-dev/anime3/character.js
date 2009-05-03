@@ -300,7 +300,6 @@ function doSearchRelated(type,id) {
 
 /* Function that starts a char search */
 function doSearchChar() { doSearch('characterdesc'); }
-
 /* Function that starts a char search */
 function doSearchCreator() { doSearch('creatordesc'); }
 
@@ -519,7 +518,7 @@ function showResults(single,filter) {
 			row = document.createElement('tr');
 			row.className = 'action';
 			var buttonName = 'add.doadd';
-			if (curPageID == 'addcharcharrel') buttonName = 'addccrel.do.add';
+			if (curPageID == 'addcharcharrel' || curPageID == 'addcreatorcreatorrel') buttonName = 'addccrel.do.add';
 			createCell(row, 'value', createButton(buttonName,null,false,'Add relation','submit'), null, 3);
 			tfoot.appendChild(row);
 			table.appendChild(tfoot);
