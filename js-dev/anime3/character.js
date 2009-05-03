@@ -291,10 +291,10 @@ function doSearchRelated(type,id) {
 	searchString = addCRelInput.value;
 	//if (searchString.length < 3) { alert('Error:\nSearch string has an insufficient number of characters.'); return; }
 	useFilterMode = true;
-	if (searchString.length < 3)
+	//if (searchString.length < 3)
 		useSingleMode = false;
-	else
-		useSingleMode = true;
+	//else
+	//	useSingleMode = true;
 	fetchData(id,type,searchString);
 }
 
