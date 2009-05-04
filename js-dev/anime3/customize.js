@@ -448,25 +448,6 @@ function createPreferencesTable(type) {
 				createSelectArray(li,'episodeTitleDisplay','episodeTitleDisplay',function() { episodeTitleDisplay = this.value; }, settings['title']['eTD'], optionArray);
 				li.appendChild(document.createTextNode(' Episode Alternative Title Display'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.reload','reload page');
-					reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						settings['title']['eTD'] = document.getElementById('episodeTitleDisplay').value;
-						settings['title']['aATL'] = document.getElementById('animeAltTitleLang').value;
-						settings['title']['eATL'] = document.getElementById('episodeAltTitleLang').value;
-						CookieSetFromArray('title', settings['title'], 3650);
-						alert('Current Title preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'ed2k-prefs':
@@ -513,28 +494,6 @@ function createPreferencesTable(type) {
 				li.appendChild(setSpaceDefault);
 				li.appendChild(document.createTextNode(' ED2K hash spaces convert character'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.reload','reload page');
-					reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var applyInput = createBasicButton('do.apply','apply changes');
-					applyInput.onclick = function reloadPage() { alert('Settings applied\nYou may need to reload page before seeing results.'); }
-					actionLI.appendChild(applyInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						settings['ed2k']['pattern'] = document.getElementById('ed2k_pattern').value;
-						settings['ed2k']['space'] = document.getElementById('space_pattern').value;
-						CookieSetFromArray('ed2k', settings['ed2k'], 3650);
-						alert('Current ED2K preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'mylist-prefs':
@@ -576,26 +535,6 @@ function createPreferencesTable(type) {
 				li.appendChild(watchedSel);
 				li.appendChild(document.createTextNode(' Default quick-add watched state'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.apply','apply changes');
-					reloadInput.onclick = function reloadPage() { alert('Settings applied.'); }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						settings['mylist']['use'] = Number(document.getElementById('use_mylist_add').checked)+'';
-						settings['mylist']['state'] = document.getElementById('mylist_add_state').value;
-						settings['mylist']['fstate'] = document.getElementById('mylist_add_fstate').value;
-						settings['mylist']['viewed'] = document.getElementById('mylist_add_viewed_state').value;
-						CookieSetFromArray('mylist', settings['mylist'], 3650);
-						alert('Current Mylist preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'group-prefs':
@@ -652,24 +591,6 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { group_langfilter = this.value; },Number(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.apply','apply changes');
-					reloadInput.onclick = function reloadPage() { alert('Settings applied.'); }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						settings['group']['type'] = Number(group_check_type);
-						settings['group']['filter'] = document.getElementById('group_langfilter').value;
-						CookieSetFromArray('group', settings['group'], 3650);
-						alert('Current Group preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'anime-layout':
@@ -703,30 +624,6 @@ function createPreferencesTable(type) {
 				li.appendChild(szformatSel);
 				li.appendChild(document.createTextNode(' Format file size'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						var tempArray = new Array();
-						var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
-						animePage_curLayout = new Array();
-						for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
-							var value = userAnimeLayoutSelect.options[oi].value;
-							tempArray.push(animePage_defLayout.indexOf(value));
-							animePage_curLayout.push(value);
-						}
-						settings['aLayout']['aPL'] = tempArray.join(',');
-						settings['aLayout']['aCS'] = document.getElementById('animePage_curSort').value;
-						settings['aLayout']['aCSO'] = document.getElementById('animePage_curSortOrder').value;
-						settings['aLayout']['fsize'] = document.getElementById('format_size').value;
-						CookieSetFromArray('aLayout', settings['aLayout'], 3650);
-						alert('Current Layout preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'other-prefs': // only available on the profile page
@@ -762,22 +659,6 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLabledCheckBox(li,'search_assist','search_assist',function() { searchTypeAssist = this.checked; },Number(search_assist),' Use anidb search assist',null);
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						settings['other']['jsp'] = Number(document.getElementById('usejspopups').checked)+'';
-						settings['other']['emode'] = document.getElementById('currentFMode').value;
-						settings['other']['dsearch'] = document.getElementById('def_search').value;
-						settings['other']['asearch'] = Number(document.getElementById('search_assist').checked)+'';
-						CookieSetFromArray('other', settings['other'], 3650);
-						alert('Current preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'global':
@@ -846,41 +727,93 @@ function createPreferencesTable(type) {
 				li.appendChild(ainfoMW);
 				li.appendChild(document.createTextNode(' Default information box width'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						get_info = 0;
-						if (document.getElementById('get_info').checked) {
-							if (document.getElementById('get_info_panime').checked) get_info += 1;
-							if (document.getElementById('get_info_pmylist').checked) get_info += 2;
-							if (document.getElementById('get_info_pepisode').checked) get_info += 4;
-							if (document.getElementById('get_info_pgroup').checked) get_info += 8;
-							if (document.getElementById('get_info_pcharacter').checked) get_info += 16;
-							if (document.getElementById('get_info_pcreator').checked) get_info += 32;
-							if (document.getElementById('get_info_pwishlist').checked) get_info += 64;
-						}
-						settings['global']['info'] = get_info+'';
-						settings['global']['infosz'] = document.getElementById('get_info_sz').value;
-						settings['global']['infomw'] = document.getElementById('get_info_mw').value;
-						settings['global']['collapse'] = Number(document.getElementById('collapseThumbnails').checked)+'';
-						CookieSetFromArray('global', settings['global'], 3650);
-						alert('Current Global Layout Preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			default:
 		}
 		body.appendChild(tab);
 	}
+	
+	var p = document.createElement('p');
+	var reloadInput = document.createElement('button');
+	reloadInput.name = 'do.apply';
+	reloadInput.value = "apply";
+	reloadInput.appendChild(document.createTextNode((type != 'profile' ? 'Save' : 'Apply')));
+	reloadInput.onclick = function reloadPage() {
+		if (document.getElementById('animeAltTitleLang')) {
+			settings['title']['aATL'] = document.getElementById('animeAltTitleLang').value;
+			settings['title']['eATL'] = document.getElementById('episodeAltTitleLang').value;
+			settings['title']['eTD'] = document.getElementById('episodeTitleDisplay').value;
+			CookieSetFromArray('title', settings['title'], 3650);
+		}
+		if (document.getElementById('ed2k_pattern')) {
+			settings['ed2k']['pattern'] = document.getElementById('ed2k_pattern').value;
+			settings['ed2k']['space'] = document.getElementById('space_pattern').value;
+			CookieSetFromArray('ed2k', settings['ed2k'], 3650);
+		}
+		if (document.getElementById('use_mylist_add')) {
+			settings['mylist']['use'] = Number(document.getElementById('use_mylist_add').checked)+'';
+			settings['mylist']['state'] = document.getElementById('mylist_add_state').value;
+			settings['mylist']['fstate'] = document.getElementById('mylist_add_fstate').value;
+			settings['mylist']['viewed'] = document.getElementById('mylist_add_viewed_state').value;
+			CookieSetFromArray('mylist', settings['mylist'], 3650);
+		}
+		if (document.getElementById('group_langfilter')) {
+			var gradios = document.getElementsByName('group_check_type');
+			for (var gi = 0; gi < gradios.length; gi++) {
+				if (!gradios[gi].checked) continue;
+				settings['group']['type'] = Number(gradios[gi].value)+'';
+				break;
+			}
+			settings['group']['filter'] = Number(document.getElementById('group_langfilter').checked)+'';
+			CookieSetFromArray('group', settings['group'], 3650);
+		}
+		if (document.getElementById('userAnimeLayoutSelect')) {
+			var tempArray = new Array();
+			var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+			animePage_curLayout = new Array();
+			for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
+				var value = userAnimeLayoutSelect.options[oi].value;
+				tempArray.push(animePage_defLayout.indexOf(value));
+				animePage_curLayout.push(value);
+			}
+			settings['aLayout']['aPL'] = tempArray.join(',');
+			settings['aLayout']['aCS'] = document.getElementById('animePage_curSort').value;
+			settings['aLayout']['aCSO'] = document.getElementById('animePage_curSortOrder').value;
+			settings['aLayout']['fsize'] = document.getElementById('format_size').value;
+			CookieSetFromArray('aLayout', settings['aLayout'], 3650);
+		}
+		if (document.getElementById('usejspopups')) {
+			settings['other']['jsp'] = Number(document.getElementById('usejspopups').checked)+'';
+			settings['other']['emode'] = document.getElementById('currentFMode').value;
+			settings['other']['dsearch'] = document.getElementById('def_search').value;
+			settings['other']['asearch'] = Number(document.getElementById('search_assist').checked)+'';
+			CookieSetFromArray('other', settings['other'], 3650);
+		}
+		if (document.getElementById('get_info_sz')) {
+			get_info = 0;
+			if (document.getElementById('get_info_panime').checked) get_info += 1;
+			if (document.getElementById('get_info_pmylist').checked) get_info += 2;
+			if (document.getElementById('get_info_pepisode').checked) get_info += 4;
+			if (document.getElementById('get_info_pgroup').checked) get_info += 8;
+			if (document.getElementById('get_info_pcharacter').checked) get_info += 16;
+			if (document.getElementById('get_info_pcreator').checked) get_info += 32;
+			if (document.getElementById('get_info_pwishlist').checked) get_info += 64;
+			settings['global']['info'] = get_info+'';
+			settings['global']['infosz'] = document.getElementById('get_info_sz').value;
+			settings['global']['infomw'] = document.getElementById('get_info_mw').value;
+			settings['global']['collapse'] = Number(document.getElementById('collapseThumbnails').checked)+'';
+			CookieSetFromArray('global', settings['global'], 3650);
+		}
+		alert('Current preferences saved.');
+	}
+	p.appendChild(reloadInput);
+
+
 	if (type != 'profile') {
 		panes.appendChild(body);
 		main.appendChild(panes);
+		main.appendChild(p);
 
 		// first find the main tabs
 		var laytabs = document.getElementById('layout-tabs');
@@ -925,68 +858,7 @@ function createPreferencesTable(type) {
 		jsdiv.appendChild(header);
 		panes.appendChild(body);
 		jsdiv.appendChild(panes);
-		var p = document.createElement('p');
-		var reloadInput = document.createElement('button');
-		reloadInput.name = 'do.apply';
-		reloadInput.value = "apply";
-		reloadInput.appendChild(document.createTextNode('Apply'));
-		reloadInput.onclick = function reloadPage() { 
-			var tempArray = new Array();
-			var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
-			animePage_curLayout = new Array();
-			for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
-				var value = userAnimeLayoutSelect.options[oi].value;
-				tempArray.push(animePage_defLayout.indexOf(value));
-				animePage_curLayout.push(value);
-			}
-			get_info = 0;
-			if (document.getElementById('get_info_panime').checked) get_info += 1;
-			if (document.getElementById('get_info_pmylist').checked) get_info += 2;
-			if (document.getElementById('get_info_pepisode').checked) get_info += 4;
-			if (document.getElementById('get_info_pgroup').checked) get_info += 8;
-			if (document.getElementById('get_info_pcharacter').checked) get_info += 16;
-			if (document.getElementById('get_info_pcreator').checked) get_info += 32;
-			if (document.getElementById('get_info_pwishlist').checked) get_info += 64;
-			settings['title']['aATL'] = document.getElementById('animeAltTitleLang').value;
-			settings['title']['eATL'] = document.getElementById('episodeAltTitleLang').value;
-			settings['title']['eTD'] = document.getElementById('episodeTitleDisplay').value;
-			CookieSetFromArray('title', settings['title'], 3650);
-			settings['ed2k']['pattern'] = document.getElementById('ed2k_pattern').value;
-			settings['ed2k']['space'] = document.getElementById('space_pattern').value;
-			CookieSetFromArray('ed2k', settings['ed2k'], 3650);
-			settings['mylist']['use'] = Number(document.getElementById('use_mylist_add').checked)+'';
-			settings['mylist']['state'] = document.getElementById('mylist_add_state').value;
-			settings['mylist']['fstate'] = document.getElementById('mylist_add_fstate').value;
-			settings['mylist']['viewed'] = document.getElementById('mylist_add_viewed_state').value;
-			CookieSetFromArray('mylist', settings['mylist'], 3650);
-			var gradios = document.getElementsByName('group_check_type');
-			for (var gi = 0; gi < gradios.length; gi++) {
-				if (!gradios[gi].checked) continue;
-				settings['group']['type'] = Number(gradios[gi].value)+'';
-				break;
-			}
-			settings['group']['filter'] = Number(document.getElementById('group_langfilter').checked)+'';
-			CookieSetFromArray('group', settings['group'], 3650);
-			settings['aLayout']['aPL'] = tempArray.join(',');
-			settings['aLayout']['aCS'] = document.getElementById('animePage_curSort').value;
-			settings['aLayout']['aCSO'] = document.getElementById('animePage_curSortOrder').value;
-			settings['aLayout']['fsize'] = document.getElementById('format_size').value;
-			CookieSetFromArray('aLayout', settings['aLayout'], 3650);
-			settings['other']['jsp'] = Number(document.getElementById('usejspopups').checked)+'';
-			settings['other']['emode'] = document.getElementById('currentFMode').value;
-			settings['other']['dsearch'] = document.getElementById('def_search').value;
-			settings['other']['asearch'] = Number(document.getElementById('search_assist').checked)+'';
-			CookieSetFromArray('other', settings['other'], 3650);
-			settings['global']['info'] = get_info+'';
-			settings['global']['infosz'] = document.getElementById('get_info_sz').value;
-			settings['global']['infomw'] = document.getElementById('get_info_mw').value;
-			settings['global']['collapse'] = Number(document.getElementById('collapseThumbnails').checked)+'';
-			CookieSetFromArray('global', settings['global'], 3650);
-			alert('Current preferences saved.');
-		}
-		p.appendChild(reloadInput);
-		jsdiv.appendChild(p);
-		
+		jsdiv.appendChild(p);		
 		bodyDiv.appendChild(jsdiv);
 	}
 }
