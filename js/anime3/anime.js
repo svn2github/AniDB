@@ -199,7 +199,7 @@ function prepPage() {
  */
 function fetchData(aid) {
 	var req = xhttpRequest();
-	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
+	if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
 	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
 }
 
@@ -209,7 +209,7 @@ function fetchData(aid) {
 function postData(url) {
 	var req = xhttpRequest();
 	var data = url.substr(url.indexOf('?')+1,url.length);
-	if (''+window.location.hostname == '') xhttpRequestPost(req, 'msg_del.html', showSuccessBox, data);
+	if (isLocalHost()) xhttpRequestPost(req, 'msg_del.html', showSuccessBox, data);
 	else xhttpRequestPost(req, 'animedb.pl', showSuccessBox, data);
 }
 

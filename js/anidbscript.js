@@ -17,11 +17,12 @@ jsVersionArray.push({
 	"author":"$Author$",
 	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
-var usejspopups = true;
+var usejspopups = CookieGetByKey('other', 'jsp') || true;
 var curPageID = null;
 var searchTypeSelect = null;
 var searchTypeAssist = true;
 var username = null;
+var defaultTabs = tabCookieGet();
 
 /* returns true if the script is being executed on localhost */
 function isLocalHost() {
@@ -393,16 +394,14 @@ function compressMenus() {
 
 /* specific */
 var Magic = {
-	'add_validator_interface':(function ()
-		{
+	'add_validator_interface':(function () {
 			if (document.evaluate && window.XMLSerializer) // interested people don't use IE anyway
 			{
 				var footernode = document.getElementById('layout-footer');
 				if (footernode) { footernode.onclick = Magic.noreallydoitthistime; }
 			}
 		}),
-	'noreallydoitthistime':(function ()
-		{
+	'noreallydoitthistime':(function () {
 			// this is going to be horrible for a bit
 			//options:
 			// * tell validator to get current uri (will always be guest access, and sometimes denied)
@@ -442,8 +441,7 @@ var Magic = {
 				f.appendChild(n);
 			}
 		}),
-	'asxmlfixup':(function (s)
-		{
+	'asxmlfixup':(function (s) {
 			return "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/tr/xhtml11/DTD/xhtml11.dtd\" [ <!ATTLIST td anidb:sort CDATA #IMPLIED> <!ATTLIST select value CDATA #IMPLIED> ]>"
 				+s
 				.replace(/<[^! >]+/g, function(m){return m.toLowerCase();})
@@ -458,15 +456,13 @@ var Magic = {
 				.replace(/\ class=""/g,'') //for js disabled classes
 			;
 		}),
-	'check_current':(function ()
-		{
+	'check_current':(function () {
 			var serialator = new XMLSerializer();
 			Magic.checkfield.value = Magic.asxmlfixup(serialator.serializeToString(document));
 			Magic.valiform.submit();
 			return false;
 		}),
-	'check_base':(function ()
-		{
+	'check_base':(function () {
 			if (!window.location.search) { alert("Page seems to have been POST-ed, can't re-fetch"); }
 			else
 			{
@@ -482,8 +478,7 @@ var Magic = {
 			}
 			return false;
 		}),
-	'enable_row_kid_classes':(function ()
-		{
+	'enable_row_kid_classes':(function () {
 			var rowlist = document.getElementsByTagName('tr');
 			for (var i = 0; i < rowlist.length; i++)
 			{
@@ -498,8 +493,7 @@ var Magic = {
 				}
 			}
 		}),
-	'enable_a_onclick_by_rel':(function ()
-		{
+	'enable_a_onclick_by_rel':(function () {
 			var linklist = document.getElementsByTagName('a');
 			for (var i = 0; i < linklist.length; i++)
 			{
@@ -518,8 +512,7 @@ var Magic = {
 				}
 			}
 		}),
-	'enable_hover_menu':(function (m)
-		{
+	'enable_hover_menu':(function (m) {
 			var m = document.getElementById('layout-menu');
 			if (m) {
 				var i, ul, s;
@@ -549,8 +542,7 @@ var Magic = {
 				}
 			}
 		}),
-	'enable_hide':(function ()
-		{
+	'enable_hide':(function () {
 			var elems = document.getElementsByTagName('h4');
 			for (var i = 0; i < elems.length; i++){
 				var spans = elems[i].getElementsByTagName('span');
@@ -558,8 +550,7 @@ var Magic = {
 					spans[0].onclick = Magic.toggle_hide;
 			}
 		}),
-	'toggle_hide':(function (e)
-		{
+	'toggle_hide':(function (e) {
 			var block = this.parentNode;
 			ClassToggle(block, 'collapsed'); 
 			while ( block = block.nextSibling ){
@@ -567,11 +558,10 @@ var Magic = {
 					ClassToggle(block, 'hide');
 			}
 		}),
-	'enable_tabs':(function ()
-		{
+	'enable_tabs':(function () {
 			var elems = document.getElementsByTagName('ul');
 			// find out page name
-			var selected = CookieGet((curPageID ? curPageID + "_" : "")+'tab') || 'tab1';
+			var selected = (defaultTabs[(curPageID ? curPageID : 'tab')] ? defaultTabs[(curPageID ? curPageID : 'tab')] : 'tab1');//CookieGet((curPageID ? curPageID + "_" : "")+'tab') || 'tab1';
 			for (var i = 0; i < elems.length; i++){				
 				if(elems[i].className == "tabs"){
 					var li = elems[i].getElementsByTagName('li');
@@ -589,8 +579,7 @@ var Magic = {
 				}
 			}
 		}),
-	'toggle_tabs':(function (e, o)
-		{
+	'toggle_tabs':(function (e, o) {
 			var tab = o || this;
 			if(tab){
 				var classes = tab.className.split(" ");
@@ -602,7 +591,7 @@ var Magic = {
 							ClassToggle(elems[i], 'selected', 2);						
 						}
 						ClassToggle(tab, 'selected', 1);
-						CookieSet((curPageID ? curPageID + "_" : "")+'tab', tab.id);
+						tabCookieSet((curPageID ? curPageID : 'tab'), tab.id);
 						elems = tab.parentNode.parentNode.getElementsByTagName('div');
 						var topTab = null;
 						for (var i = 0; i < elems.length; i++){
@@ -623,8 +612,7 @@ var Magic = {
 				}
 			}
 		}),
-	'upgrade_search':(function()
-		{
+	'upgrade_search':(function() {
 			var divs = document.getElementsByTagName('div');
 			for (var i = 0; i < divs.length; i++) {
 				var div = divs[i];
@@ -645,16 +633,14 @@ var Magic = {
 				break;
 			}
 		}),
-	'applySpoilerInputs':(function()
-		{
+	'applySpoilerInputs':(function() {
 			var inputs = document.getElementsByTagName('input');
 			for (var i = 0; i < inputs.length; i++) {
 				var isSpoiler = inputs[i].value.toLowerCase().indexOf('spoiler') >= 0;
 				if (isSpoiler) inputs[i].onclick = Magic.toggleSpoiler;
 			}
 		}),
-	'toggleSpoiler':(function()
-		{
+	'toggleSpoiler':(function() {
 			var div = this.parentNode;
 			while (div.nodeName.toLowerCase() != 'div') div = div.parentNode;
 			var spans = div.getElementsByTagName('span');
@@ -671,8 +657,7 @@ var Magic = {
 				}
 			}
 		}),
-	'enhanceCheckboxes':(function()
-		{
+	'enhanceCheckboxes':(function() {
 			var formElems = document.getElementsByTagName('form');
 			for (var i = 0; i < formElems.length; i++) {
 				enhanceCheckboxes(formElems[i]);
@@ -680,12 +665,10 @@ var Magic = {
 			}
 		
 		})
-	};
+};
 
 /* init */
-
-function InitDefault()
-{
+function InitDefault() {
 	if (!document.getElementsByTagName){
 		return;
 	}
@@ -903,6 +886,32 @@ window.onload = InitDefault;
 
 /* Cookie Functions */
 
+/* This is a special function to get tab cookies */
+function tabCookieGet() {
+	return CookieGetToArray('default_tabs')
+}
+
+/* This is a special function to store tab cookies */
+function tabCookieSet(name, value, expires, path, domain, secure) {
+	defaultTabs[name] = value;
+	CookieSetFromArray('default_tabs', defaultTabs, expires, path, domain, secure);
+}
+
+/* Stores cookies from values in an array
+ * @param name Name of the cookie
+ * @param array Array which holds the key/value array which will be stored in the cookie
+ * @param expires Number of days the cookie will last
+ */
+function CookieSetFromArray(name, array, expires, path, domain, secure) {
+	var aux = new Array();
+	for (var k in array) {
+		var val = array[k];
+		if (typeof(val) != 'string') continue;
+		aux.push(k+':'+val);
+	}
+	CookieSet(name,aux.join('|'));
+}
+
 /* Sets a cookie */
 function CookieSet( name, value, expires, path, domain, secure ) {
 	var today = new Date();
@@ -912,12 +921,18 @@ function CookieSet( name, value, expires, path, domain, secure ) {
 		expires = expires * 1000 * 60 * 60 * 24;
 	}
 	var expires_date = new Date( today.getTime() + (expires) );
-
-	document.cookie = name + "=" +escape( value ) +
+	
+	//alert('CookieSet: '+name+'='+value);
+	
+	var text = name + "=" +escape( value ) +
 	( ( expires ) ? ";expires=" + expires_date.toGMTString() : "" ) + 
 	( ( path ) ? ";path=" + path : "" ) + 
 	( ( domain ) ? ";domain=" + domain : "" ) +
 	( ( secure ) ? ";secure" : "" );
+	
+	//alert('cookie['+text.length+']:\n'+text);
+
+	document.cookie = text;
 }
 
 /* Gets a Cookie */
@@ -938,6 +953,42 @@ function CookieGet( check_name ) {
 		}
 	}
 	return null;
+}
+
+/* Gets a cookie value stored on a serialized cookie
+ * @param holder The cookie name
+ * @param key The Key of the value we want to get
+ * @return Value associated with given key or null if not found
+ */
+function CookieGetByKey(holder, key) {
+	var cookie = CookieGet(holder);
+	if (!cookie) return null;
+	var aux = new Array();
+	var elems = cookie.split('|');
+	for (var i = 0; i < elems.length; i++) {
+		var kv = elems[i].split(':');
+		if (kv[0] == key) return kv[1];
+	}
+	return null;
+}
+
+/* Fetchs a serialized cookie and restores it's array
+ * @param name Name of the cookie
+ * @param array Array where to store the contents of the cookie
+ * @return Array with de-serialized cookie
+ */
+function CookieGetToArray(name, array) {
+	if (!name) return null;
+	if (!array) array = new Array();
+	var cookie = CookieGet(name);
+	if (!cookie) return array;
+	//alert(name+'='+cookie);
+	var elems = cookie.split('|');
+	for (var i = 0; i < elems.length; i++) {
+		var kv = elems[i].split(':');
+		array[kv[0]] = kv[1];
+	}
+	return array;
 }
 
 // Tag Search Auto Completion. (C) 2008 antennen 

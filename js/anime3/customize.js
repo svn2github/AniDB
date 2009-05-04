@@ -73,6 +73,38 @@ var picbase = 'http://img5.anidb.net/pics/anime/';
 var charInfos = new Array(); 		// Character information	(indexed by charid)
 var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
 var animeInfos = new Array();		// Anime information		(indexed by aid)
+// This is the Preference set holders, I will also define defaults now
+var settings = new Array();
+settings['title'] = new Array();
+settings['title']['aATL'] = 'x-jat'; // animeAltTitleLang
+settings['title']['eATL'] = 'x-jat'; // episodeAltTitleLang
+settings['title']['eTD'] = 2; // episodeTitleDisplay
+settings['ed2k'] = new Array();
+settings['ed2k']['pattern'] = (hashObj && hashObj.pattern ? hashObj.pattern : "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>"); // ed2k_pattern
+settings['ed2k']['space'] = (hashObj && hashObj.spacesChar ? hashObj.spacesChar : "_"); // space_pattern
+settings['mylist'] = new Array();
+settings['mylist']['use'] = 0; // use_mylist_add
+settings['mylist']['state'] = 0; // mylist_add_state
+settings['mylist']['viewed'] = 0; // mylist_add_viewed_state
+settings['mylist']['fstate'] = 0; // mylist_add_fstate
+settings['group'] = new Array();
+settings['group']['type'] = 0; // group_check_type
+settings['group']['filter'] = 0; // group_langfilter
+settings['aLayout'] = new Array();
+settings['aLayout']['aCS'] = 'default'; // animePage_curSort
+settings['aLayout']['aCSO'] = 'down'; // animePage_curSortOrder
+settings['aLayout']['aPL'] = '0,1,2,3,4,5,6,7,8,9,10,11,12,13'; // animePageLayout
+settings['aLayout']['fsize'] = 0; // format_size
+settings['global'] = new Array();
+settings['global']['collapse'] = 0; //collapseThumbnails
+settings['global']['info'] = 0; // get_info
+settings['global']['infosz'] = 150; // get_info_sz
+settings['global']['infomw'] = 450; // get_info_mw
+settings['other'] = new Array();
+settings['other']['emode'] = 1; // currentFMode
+settings['other']['jsp'] = 1; // usejspopups
+settings['other']['dsearch'] = 'none'; // def_search
+settings['other']['asearch'] = 0; // search_assist
 
 //get_info_sz = null;
 //get_info_mw = null;
@@ -91,38 +123,51 @@ function changeOptionValue(node) {
 
 /* Function that loads cookie settings */
 function loadSettings() {
-	animeAltTitleLang = CookieGet('animeAltTitleLang') || "x-jat";
-	episodeAltTitleLang = CookieGet('episodeAltTitleLang') || "x-jat";
-	episodeTitleDisplay = Number(CookieGet('episodeTitleDisplay') || 2);
-	ed2k_pattern = CookieGet('ed2k_pattern') || "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
+	// TITLE
+	settings['title'] = CookieGetToArray('title',settings['title']);
+	animeAltTitleLang = settings['title']['aATL'];
+	episodeAltTitleLang = settings['title']['eATL'];
+	episodeTitleDisplay = Number(settings['title']['eTD']);
+	// ED2K
+	settings['ed2k'] = CookieGetToArray('ed2k',settings['ed2k']);
+	ed2k_pattern = settings['ed2k']['pattern'];
 	hashObj.pattern = ed2k_pattern;
-	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
+	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|/";
 	hashObj.sfv = hashObj.pattern+".%ext %crc";
-	space_pattern = CookieGet('space_pattern') || "_";
+	space_pattern = settings['ed2k']['space'];
 	hashObj.spacesChar = space_pattern;
-	use_mylist_add = Number(CookieGet('use_mylist_add') || 0);
-	mylist_add_viewed_state = Number(CookieGet('mylist_add_viewed_state') || 0);
-	mylist_add_state = Number(CookieGet('mylist_add_state') || 0);
-	mylist_add_fstate = Number(CookieGet('mylist_add_fstate') || 0);
-	get_info = Number(CookieGet('get_info') || 0); // bitwise value
-	get_info_sz = Number(CookieGet('get_info_sz') || 150);
-	get_info_mw = Number(CookieGet('get_info_mw') || 450);
-	group_check_type = Number(CookieGet('group_check_type') || 0);
-	group_langfilter = Number(CookieGet('group_langfilter') || 1);
-	currentFMode = Number(CookieGet('currentFMode') || 1);
-	LAY_FORMATFILESIZE = format_size = Number(CookieGet('format_size') || 0);
-	collapseThumbnails = Number(CookieGet('collapseThumbnails') || 0);
-	def_search = CookieGet('def_search') || 'none';
+	// MYLIST
+	settings['mylist'] = CookieGetToArray('mylist',settings['mylist']);
+	use_mylist_add = Number(settings['mylist']['use']);
+	mylist_add_viewed_state = Number(settings['mylist']['viewed']);
+	mylist_add_state = Number(settings['mylist']['state']);
+	mylist_add_fstate = Number(settings['mylist']['fstate']);
+	// GLOBAL
+	settings['global'] = CookieGetToArray('global',settings['global']);
+	collapseThumbnails = Number(settings['global']['collapse']);
+	get_info = Number(settings['global']['info']); // bitwise value
+	get_info_sz = Number(settings['global']['infosz']);
+	get_info_mw = Number(settings['global']['infomw']);
+	// GROUP
+	settings['group'] = CookieGetToArray('group',settings['group']);
+	group_check_type = Number(settings['group']['type']);
+	group_langfilter = Number(settings['group']['filter']);
+	// OTHER
+	settings['other'] = CookieGetToArray('other',settings['other']);
+	def_search = settings['other']['dsearch'];
+	currentFMode = Number(settings['other']['emode']);
 	if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
-	searchTypeAssist = search_assist = Number(CookieGet('search_assist') || 1);
-	animePage_curSort = CookieGet('animePage_curSort') || 'default';
-	animePage_curSortOrder = CookieGet('animePage_curSortOrder') || 'down';
-	animePageLayout = CookieGet('animePageLayout') || '0,1,2,3,4,5,6,7,8,9,10,11,12,13';
+	searchTypeAssist = search_assist = Number(settings['other']['asearch']);
+	// LAYOUT
+	settings['aLayout'] = CookieGetToArray('aLayout',settings['aLayout']);
+	LAY_FORMATFILESIZE = format_size = Number(settings['aLayout']['fsize']);
+	animePage_curSort = settings['aLayout']['aCS'];
+	animePage_curSortOrder = settings['aLayout']['aCSO'];
+	animePageLayout = settings['aLayout']['aPL'];
 	animePageLayout = animePageLayout.split(',');
 	animePage_curLayout = new Array();
 	for (var ci = 0; ci < animePageLayout.length; ci++)
 		animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
-	storedTab = CookieGet('tab') || '';
 }
 
 /* Function that adds file columns */
@@ -186,13 +231,16 @@ function resetColsBox() {
 	while (defsAnimeLayoutSelect.childNodes.length) defsAnimeLayoutSelect.removeChild(defsAnimeLayoutSelect.firstChild);
 	var tempArray = new cloneArray(animePage_defLayout);
 	// Current User Layout
-	for (var lc = 0; lc < animePage_curLayout.length; lc++) {
-		var option = animePage_curLayout[lc];
+	//for (var lc = 0; lc < animePage_curLayout.length; lc++) {
+	//	var option = animePage_curLayout[lc];
+	for (var lc = 0; lc < tempArray.length; lc++) {
+		var option = tempArray[lc];
 		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
 		newOption.ondblclick = remColFromBox; 
 		userAnimeLayoutSelect.appendChild(newOption);
-		tempArray.splice(tempArray.indexOf(option),1);
+		//tempArray.splice(tempArray.indexOf(option),1);
 	}
+/*
 	// Layout Columns
 	for (var lc = 0; lc < tempArray.length; lc++) {
 		var option = tempArray[lc];
@@ -200,6 +248,7 @@ function resetColsBox() {
 		newOption.ondblclick = addColToBox; 
 		defsAnimeLayoutSelect.appendChild(newOption);
 	}
+*/
 }
 
 /* Function that makes the FileTable Column layout preferences */
@@ -385,37 +434,20 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLanguageSelect(li,'animeAltTitleLang','animeAltTitleLang',function() { changeOptionValue(this); animeAltTitleLang = this.value; },animeAltTitleLang);
+				createLanguageSelect(li,'animeAltTitleLang','animeAltTitleLang',function() { animeAltTitleLang = this.value; }, settings['title']['aATL']);
 				li.appendChild(document.createTextNode(' Anime Alternative Title Language'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLanguageSelect(li,'episodeAltTitleLang','episodeAltTitleLang',function() { changeOptionValue(this); episodeAltTitleLang = this.value; },episodeAltTitleLang);
+				createLanguageSelect(li,'episodeAltTitleLang','episodeAltTitleLang',function() { episodeAltTitleLang = this.value; }, settings['title']['eATL']);
 				li.appendChild(document.createTextNode(' Episode Alternative Title Language'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_TITLE', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var optionArray = { 0 : {"text":'Title'} , 1 : {"text":'Title (Alt. Title)'}, 2 : {"text":'Title [tooltip: Alt. Title]'}, 3 : {"text":'Title [tooltip Alt.title / Ja title]'}, 4 : {"text":'Title (Alt. Title / Ja title)'}};
-				createSelectArray(li,'episodeTitleDisplay','episodeTitleDisplay',function() { changeOptionValue(this); episodeTitleDisplay = this.value; },episodeTitleDisplay,optionArray);
+				createSelectArray(li,'episodeTitleDisplay','episodeTitleDisplay',function() { episodeTitleDisplay = this.value; }, settings['title']['eTD'], optionArray);
 				li.appendChild(document.createTextNode(' Episode Alternative Title Display'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.reload','reload page');
-					reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						CookieSet('episodeAltTitleLang',episodeAltTitleLang);
-						CookieSet('episodeTitleDisplay',episodeTitleDisplay);
-						alert('Current Title preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'ed2k-prefs':
@@ -424,7 +456,6 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var input = createTextInput('ed2k_pattern',80,false,false,255,ed2k_pattern);
 				input.onchange = function() { 
-					changeOptionValue(this); 
 					ed2k_pattern = this.value;
 					hashObj.pattern = ed2k_pattern;
 					hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
@@ -448,7 +479,6 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var setSpace = createTextInput('space_pattern',1,false,false,1,space_pattern);
 				setSpace.onchange = function() { 
-					changeOptionValue(this); 
 					space_pattern = this.value;
 					hashObj.spacesChar = space_pattern;
 				};
@@ -464,27 +494,6 @@ function createPreferencesTable(type) {
 				li.appendChild(setSpaceDefault);
 				li.appendChild(document.createTextNode(' ED2K hash spaces convert character'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.reload','reload page');
-					reloadInput.onclick = function reloadPage() { document.location.href = document.location.href; }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var applyInput = createBasicButton('do.apply','apply changes');
-					applyInput.onclick = function reloadPage() { alert('Settings applied\nYou may need to reload page before seeing results.'); }
-					actionLI.appendChild(applyInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						CookieSet('ed2k_pattern',ed2k_pattern);
-						CookieSet('space_pattern',space_pattern);
-						alert('Current ED2K preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'mylist-prefs':
@@ -492,7 +501,6 @@ function createPreferencesTable(type) {
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLabledCheckBox(li,'use_mylist_add','use_mylist_add',function() {
-					changeOptionValue(this);
 					use_mylist_add = Number(this.checked);
 					document.getElementById('mylist_add_state').disabled = (!this.checked);
 					document.getElementById('mylist_add_fstate').disabled = (!this.checked);
@@ -505,7 +513,7 @@ function createPreferencesTable(type) {
 									2:{"text":'external storage (cd/dvd/...)'},3:{"text":'deleted'}};
 				var stateSel = createSelectArray(null,"mylist_add_state","mylist_add_state",null,mylist_add_state,optionArray);
 				if (!use_mylist_add) stateSel.disabled = true;
-				stateSel.onchange = function() { changeOptionValue(this); mylist_add_state = this.value; };
+				stateSel.onchange = function() { mylist_add_state = this.value; };
 				li.appendChild(stateSel);
 				li.appendChild(document.createTextNode(' Default quick-add state'));
 				ul.appendChild(li);
@@ -515,7 +523,7 @@ function createPreferencesTable(type) {
 								2:{"text":' self edited '},100:{"text":' other '}};
 				var fstateSel = createSelectArray(null,"mylist_add_fstate","mylist_add_fstate",null,mylist_add_fstate,optionArray);
 				if (!use_mylist_add) fstateSel.disabled = true;
-				fstateSel.onchange = function() { changeOptionValue(this); mylist_add_fstate = this.value; };
+				fstateSel.onchange = function() { mylist_add_fstate = this.value; };
 				li.appendChild(fstateSel);
 				li.appendChild(document.createTextNode(' Default quick-add file state'));
 				ul.appendChild(li);
@@ -523,37 +531,18 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var watchedSel = createSelectArray(null,"mylist_add_viewed_state","mylist_add_viewed_state",null,mylist_add_viewed_state,{0:{"text":'unwatched'},1:{"text":'watched'}});
 				if (!use_mylist_add) watchedSel.disabled = true;
-				watchedSel.onchange = function() { changeOptionValue(this); mylist_add_viewed_state = this.value; };
+				watchedSel.onchange = function() { mylist_add_viewed_state = this.value; };
 				li.appendChild(watchedSel);
 				li.appendChild(document.createTextNode(' Default quick-add watched state'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.apply','apply changes');
-					reloadInput.onclick = function reloadPage() { alert('Settings applied.'); }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						CookieSet('use_mylist_add',use_mylist_add);
-						CookieSet('mylist_add_state',mylist_add_state);
-						CookieSet('mylist_add_fstate',mylist_add_fstate);
-						CookieSet('mylist_add_viewed_state',mylist_add_viewed_state);
-						alert('Current Mylist preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'group-prefs':
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var rb = createBasicButton('group_check_type',5,'radio');
-				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				var rb = createBasicButton('group_check_type_5',5,'radio');
+				rb.onchange = function() { group_check_type = this.value; };
 				rb.checked = (group_check_type == 5);
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all files'));
@@ -561,7 +550,7 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				rb = createBasicButton('group_check_type',0,'radio');
-				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.onchange = function() { group_check_type = this.value; };
 				rb.checked = (group_check_type == 0);
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprecated files'));
@@ -569,7 +558,7 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				rb = createBasicButton('group_check_type',1,'radio');
-				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.onchange = function() { group_check_type = this.value; };
 				rb.checked = (group_check_type == 1);
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprecated mkv/ogm/mp4 files'));
@@ -577,7 +566,7 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				rb = createBasicButton('group_check_type',2,'radio');
-				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.onchange = function() { group_check_type = this.value; };
 				rb.checked = (group_check_type == 2);
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprecated avi files'));
@@ -585,7 +574,7 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				rb = createBasicButton('group_check_type',3,'radio');
-				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.onchange = function() { group_check_type = this.value; };
 				rb.checked = (group_check_type == 3);
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprecated High Definition files (video resolution height >= 720)'));
@@ -593,32 +582,15 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				rb = createBasicButton('group_check_type',4,'radio');
-				rb.onchange = function() { changeOptionValue(this); group_check_type = this.value; };
+				rb.onchange = function() { group_check_type = this.value; };
 				rb.checked = (group_check_type == 4);
 				li.appendChild(rb);
 				li.appendChild(document.createTextNode(' Check all non-deprecated Standard Definition files (video resolution height < 720)'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { changeOptionValue(this); group_langfilter = this.value; },Number(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
+				createLabledCheckBox(li,'group_langfilter','group_langfilter',function() { group_langfilter = this.value; },Number(group_langfilter),' Filter groups in group table according to language preferences (bypasses profile option if enabled)',null);
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var reloadInput = createBasicButton('do.apply','apply changes');
-					reloadInput.onclick = function reloadPage() { alert('Settings applied.'); }
-					actionLI.appendChild(reloadInput);
-					actionLI.appendChild(document.createTextNode(' '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						CookieSet('group_check_type',group_check_type);
-						CookieSet('group_langfilter',group_langfilter);
-						alert('Current Group preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			case 'anime-layout':
@@ -637,46 +609,24 @@ function createPreferencesTable(type) {
 					var text = animeFileColsList[option]['text'];
 					createSelectOption(defaultSort, text, value, (value == animePage_curSort));
 				}
-				defaultSort.onchange = function() { changeOptionValue(this); animePage_curSort = this.value; };
+				defaultSort.onchange = function() { animePage_curSort = this.value; };
 				li.appendChild(defaultSort);
 				li.appendChild(document.createTextNode(' '));
 				var defaultSortOrder = createSelectArray(null,"animePage_curSortOrder","animePage_curSortOrder",null,animePage_curSortOrder,{'down':{'text':"descending"},'up':{'text':"ascending"}});
-				defaultSortOrder.onchange = function() { changeOptionValue(this); animePage_curSortOrder = this.value; };
+				defaultSortOrder.onchange = function() { animePage_curSortOrder = this.value; };
 				li.appendChild(defaultSortOrder);
 				li.appendChild(document.createTextNode(' Default sorted column'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var szformatSel = createSelectArray(null,"format_size","format_size",null,format_size,{0:{"text":'no'},1:{"text":'yes'}});
-				szformatSel.onchange = function() { changeOptionValue(this); format_size = LAY_FORMATFILESIZE = this.value; };
+				szformatSel.onchange = function() { format_size = LAY_FORMATFILESIZE = this.value; };
 				li.appendChild(szformatSel);
 				li.appendChild(document.createTextNode(' Format file size'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						var tempArray = new Array();
-						var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
-						animePage_curLayout = new Array();
-						for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
-							var value = userAnimeLayoutSelect.options[oi].value;
-							tempArray.push(animePage_defLayout.indexOf(value));
-							animePage_curLayout.push(value);
-						}
-						CookieSet('animePageLayout',tempArray.join(','));
-						CookieSet('animePage_curSort',animePage_curSort);
-						CookieSet('format_size',format_size);
-						alert('Current Layout preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
-			case 'other-prefs':
+			case 'other-prefs': // only available on the profile page
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
@@ -684,17 +634,17 @@ function createPreferencesTable(type) {
 					1:{"text":'Assisted',"desc":'Textarea with some assistance'},
 					2:{"text":'Visual',"desc":'WYSIWYG - What You See Is What You (Usualy) Get'}};
 				var fmodeSel = createSelectArray(null,"currentFMode","currentFMode",null,currentFMode,optionArray);
-				fmodeSel.onchange = function() { changeOptionValue(this); currentFMode = this.value; };
+				fmodeSel.onchange = function() { currentFMode = this.value; };
 				li.appendChild(fmodeSel);
 				li.appendChild(document.createTextNode(' Default Text Editor Mode'));
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'usejspopups','usejspopups',function() { changeOptionValue(this); usejspopups = this.checked; },Number(usejspopups),' Use Javascript popups for anidb::popup',null);
+				createLabledCheckBox(li,'usejspopups','usejspopups',function() { usejspopups = this.checked; },Number(usejspopups),' Use Javascript popups for anidb::popup',null);
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var dfsearch = createBasicSelect('def_search','def_search',function() { changeOptionValue(this); def_search = this.value; if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;});
+				var dfsearch = createBasicSelect('def_search','def_search',function() { def_search = this.value; if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;});
 				createSelectOption(dfsearch, 'default', 'none', (def_search == 'none'));
 				if (searchTypeSelect && searchTypeSelect.options) {
 					for (var sto = 0; sto < searchTypeSelect.options.length; sto++) {
@@ -707,7 +657,7 @@ function createPreferencesTable(type) {
 				ul.appendChild(li);
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				createLabledCheckBox(li,'search_assist','search_assist',function() { changeOptionValue(this); searchTypeAssist = this.checked; },Number(search_assist),' Use anidb search assist',null);
+				createLabledCheckBox(li,'search_assist','search_assist',function() { searchTypeAssist = this.checked; },Number(search_assist),' Use anidb search assist',null);
 				ul.appendChild(li);
 				tab.appendChild(ul);
 				break;
@@ -716,7 +666,6 @@ function createPreferencesTable(type) {
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GLOBAL', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLabledCheckBox(li,'collapseThumbnails','collapseThumbnails',function() { 
-					changeOptionValue(this); 
 					collapseThumbnails = Number(this.checked); 
 				},Number(collapseThumbnails),' Collapse thumbnails on rows',null);
 				ul.appendChild(li);
@@ -766,7 +715,7 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GLOBAL', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var ainfoSZ = createSelectArray(null,"get_info_sz","get_info_sz",null,get_info_sz,{'150':{"text":'large'},'50x65':{"text":'small'}});
 				if (!get_info) ainfoSZ.disabled = true;
-				ainfoSZ.onchange = function() { changeOptionValue(this); get_info_sz = this.value; };
+				ainfoSZ.onchange = function() { get_info_sz = this.value; };
 				li.appendChild(ainfoSZ);
 				li.appendChild(document.createTextNode(' Default information thumbnail size'));
 				ul.appendChild(li);
@@ -774,44 +723,97 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GLOBAL', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var ainfoMW = createSelectArray(null,"get_info_mw","get_info_mw",null,get_info_mw,{'300':{"text":'small'},'450':{"text":'medium'},'600':{"text":'large'}});
 				if (!get_info) ainfoMW.disabled = true;
-				ainfoMW.onchange = function() { changeOptionValue(this); get_info_mw = this.value; };
+				ainfoMW.onchange = function() { get_info_mw = this.value; };
 				li.appendChild(ainfoMW);
 				li.appendChild(document.createTextNode(' Default information box width'));
 				ul.appendChild(li);
-				if (type != 'profile') {
-					var actionLI = document.createElement('li');
-					actionLI.className = 'action';
-					actionLI.appendChild(document.createTextNode('Actions: '));
-					var saveInput = createBasicButton('do.save','save preferences');
-					saveInput.onclick = function saveSettings() {
-						CookieSet('get_info_mw',get_info_mw);
-						CookieSet('get_info_sz',get_info_sz);
-						get_info = 0;
-						if (document.getElementById('get_info').checked) {
-							if (document.getElementById('get_info_panime').checked) get_info += 1;
-							if (document.getElementById('get_info_pmylist').checked) get_info += 2;
-							if (document.getElementById('get_info_pepisode').checked) get_info += 4;
-							if (document.getElementById('get_info_pgroup').checked) get_info += 8;
-							if (document.getElementById('get_info_pcharacter').checked) get_info += 16;
-							if (document.getElementById('get_info_pcreator').checked) get_info += 32;
-							if (document.getElementById('get_info_pwishlist').checked) get_info += 64;
-						}
-						CookieSet('get_info',get_info);
-						CookieSet('collapseThumbnails',collapseThumbnails);
-						alert('Current Global Layout Preferences saved.');
-					}
-					actionLI.appendChild(saveInput);
-					ul.appendChild(actionLI);
-				}
 				tab.appendChild(ul);
 				break;
 			default:
 		}
 		body.appendChild(tab);
 	}
+	
+	var p = document.createElement('p');
+	var reloadInput = document.createElement('button');
+	reloadInput.name = 'do.apply';
+	reloadInput.value = "apply";
+	reloadInput.appendChild(document.createTextNode((type != 'profile' ? 'Save' : 'Apply')));
+	reloadInput.onclick = function reloadPage() {
+		if (document.getElementById('animeAltTitleLang')) {
+			settings['title']['aATL'] = document.getElementById('animeAltTitleLang').value;
+			settings['title']['eATL'] = document.getElementById('episodeAltTitleLang').value;
+			settings['title']['eTD'] = document.getElementById('episodeTitleDisplay').value;
+			CookieSetFromArray('title', settings['title'], 3650);
+		}
+		if (document.getElementById('ed2k_pattern')) {
+			settings['ed2k']['pattern'] = document.getElementById('ed2k_pattern').value;
+			settings['ed2k']['space'] = document.getElementById('space_pattern').value;
+			CookieSetFromArray('ed2k', settings['ed2k'], 3650);
+		}
+		if (document.getElementById('use_mylist_add')) {
+			settings['mylist']['use'] = Number(document.getElementById('use_mylist_add').checked)+'';
+			settings['mylist']['state'] = document.getElementById('mylist_add_state').value;
+			settings['mylist']['fstate'] = document.getElementById('mylist_add_fstate').value;
+			settings['mylist']['viewed'] = document.getElementById('mylist_add_viewed_state').value;
+			CookieSetFromArray('mylist', settings['mylist'], 3650);
+		}
+		if (document.getElementById('group_langfilter')) {
+			var gradios = document.getElementsByName('group_check_type');
+			for (var gi = 0; gi < gradios.length; gi++) {
+				if (!gradios[gi].checked) continue;
+				settings['group']['type'] = Number(gradios[gi].value)+'';
+				break;
+			}
+			settings['group']['filter'] = Number(document.getElementById('group_langfilter').checked)+'';
+			CookieSetFromArray('group', settings['group'], 3650);
+		}
+		if (document.getElementById('userAnimeLayoutSelect')) {
+			var tempArray = new Array();
+			var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
+			animePage_curLayout = new Array();
+			for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
+				var value = userAnimeLayoutSelect.options[oi].value;
+				tempArray.push(animePage_defLayout.indexOf(value));
+				animePage_curLayout.push(value);
+			}
+			settings['aLayout']['aPL'] = tempArray.join(',');
+			settings['aLayout']['aCS'] = document.getElementById('animePage_curSort').value;
+			settings['aLayout']['aCSO'] = document.getElementById('animePage_curSortOrder').value;
+			settings['aLayout']['fsize'] = document.getElementById('format_size').value;
+			CookieSetFromArray('aLayout', settings['aLayout'], 3650);
+		}
+		if (document.getElementById('usejspopups')) {
+			settings['other']['jsp'] = Number(document.getElementById('usejspopups').checked)+'';
+			settings['other']['emode'] = document.getElementById('currentFMode').value;
+			settings['other']['dsearch'] = document.getElementById('def_search').value;
+			settings['other']['asearch'] = Number(document.getElementById('search_assist').checked)+'';
+			CookieSetFromArray('other', settings['other'], 3650);
+		}
+		if (document.getElementById('get_info_sz')) {
+			get_info = 0;
+			if (document.getElementById('get_info_panime').checked) get_info += 1;
+			if (document.getElementById('get_info_pmylist').checked) get_info += 2;
+			if (document.getElementById('get_info_pepisode').checked) get_info += 4;
+			if (document.getElementById('get_info_pgroup').checked) get_info += 8;
+			if (document.getElementById('get_info_pcharacter').checked) get_info += 16;
+			if (document.getElementById('get_info_pcreator').checked) get_info += 32;
+			if (document.getElementById('get_info_pwishlist').checked) get_info += 64;
+			settings['global']['info'] = get_info+'';
+			settings['global']['infosz'] = document.getElementById('get_info_sz').value;
+			settings['global']['infomw'] = document.getElementById('get_info_mw').value;
+			settings['global']['collapse'] = Number(document.getElementById('collapseThumbnails').checked)+'';
+			CookieSetFromArray('global', settings['global'], 3650);
+		}
+		alert('Current preferences saved.');
+	}
+	p.appendChild(reloadInput);
+
+
 	if (type != 'profile') {
 		panes.appendChild(body);
 		main.appendChild(panes);
+		main.appendChild(p);
 
 		// first find the main tabs
 		var laytabs = document.getElementById('layout-tabs');
@@ -856,34 +858,7 @@ function createPreferencesTable(type) {
 		jsdiv.appendChild(header);
 		panes.appendChild(body);
 		jsdiv.appendChild(panes);
-		var p = document.createElement('p');
-		var reloadInput = document.createElement('button');
-		reloadInput.name = 'do.apply';
-		reloadInput.value = "apply";
-		reloadInput.appendChild(document.createTextNode('Apply'));
-		reloadInput.onclick = function reloadPage() { 
-			var tempArray = new Array();
-			var userAnimeLayoutSelect = document.getElementById('userAnimeLayoutSelect');
-			animePage_curLayout = new Array();
-			for (var oi = 0; oi < userAnimeLayoutSelect.options.length; oi++) {
-				var value = userAnimeLayoutSelect.options[oi].value;
-				tempArray.push(animePage_defLayout.indexOf(value));
-				animePage_curLayout.push(value);
-			}
-			CookieSet('animePageLayout',tempArray.join(','));
-			get_info = 0;
-			if (document.getElementById('get_info_panime').checked) get_info += 1;
-			if (document.getElementById('get_info_pmylist').checked) get_info += 2;
-			if (document.getElementById('get_info_pepisode').checked) get_info += 4;
-			if (document.getElementById('get_info_pgroup').checked) get_info += 8;
-			if (document.getElementById('get_info_pcharacter').checked) get_info += 16;
-			if (document.getElementById('get_info_pcreator').checked) get_info += 32;
-			CookieSet('get_info',get_info);
-			alert('Current preferences saved.'); 
-		}
-		p.appendChild(reloadInput);
-		jsdiv.appendChild(p);
-		
+		jsdiv.appendChild(p);		
 		bodyDiv.appendChild(jsdiv);
 	}
 }
