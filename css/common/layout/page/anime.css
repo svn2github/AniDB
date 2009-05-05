@@ -99,11 +99,13 @@
 	text-align:right;
 }
 
+#layout-main div.group_all div.group_released td.epbar,
 #layout-main div.anime_all div.groups td.epbar
 {
 	width:30%;
 }
 
+#layout-main div.group_all div.group_released td.epbar div,
 #layout-main div.anime_all div.groups td.epbar div
 {
 	float:left;
