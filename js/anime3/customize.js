@@ -132,7 +132,7 @@ function loadSettings() {
 	settings['ed2k'] = CookieGetToArray('ed2k',settings['ed2k']);
 	ed2k_pattern = settings['ed2k']['pattern'];
 	hashObj.pattern = ed2k_pattern;
-	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|/";
+	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
 	hashObj.sfv = hashObj.pattern+".%ext %crc";
 	space_pattern = settings['ed2k']['space'];
 	hashObj.spacesChar = space_pattern;
