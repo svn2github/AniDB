@@ -366,6 +366,7 @@ function doGroupTableOperations(op) {
 		var row = tbody.rows[g];
 		var gid = Number(row.id.substring(4,row.id.length));
 		var group = groups[gid];
+		if (!group || group && (group.id == 0 || group.agid == -1)) continue;
 		if ((op == 'expand' && !group.langFiltered) || (op == 'fold' && group.defaultVisible) ) {
 			row.style.display = '';
 			row.className = row.className.replace(/ g_odd|g_odd/ig,'');
