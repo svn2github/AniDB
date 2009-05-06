@@ -25,6 +25,7 @@ function CCTagGroup(node) {
 	this.pid = Number(node.getAttribute('pid'));
 	this.childGroups = new Array();
 	this.tags = new Array();
+	this.hasTags = false; // set this to true if this group or any of its childgroups has tags
 }
 
 /* TagClass */
@@ -93,7 +94,19 @@ function parseData(xmldoc) {
 	// go over tags
 	for (var d = 0; d < tagNodes.length; d++) {
 		var tag = new CCTag(tagNodes[d]);
-		groups[tag.gid].tags.push(tag.id);
+		var group = groups[tag.gid];
+		group.tags.push(tag.id);
+		if (!group.hasTags) { // recursive hell, i guess
+			// first set this group hasTags
+			group.hasTags = true;
+			if (group.gid != 0) {
+				var pGroup = groups[group.pid];
+				while (pGroup.gid != 0 && !pGroup.hasTags) {
+					pGroup.hasTags = true;
+					pGroup = pGroup = groups[pGroup.pid];
+				}
+			}
+		}
 		tags[tag.id] = tag;
 	}
 	writeTagGroups();
@@ -187,11 +200,17 @@ function writeTagGroups() {
 	div.className = "taggrouplist";
 	for (var g = 0; g < level0groups.length; g++) {
 		var group = groups[level0groups[g]];
-		if (!group || !group.tags.length && !group.childGroups.length) continue;
+		if (!group || !group.hasTags) continue;
 		var span = createTextLink(null, group.name, null, null, showTagsForGroup, null, 'link');
 		span.id = 'g'+group.gid;
 		div.appendChild(span);
-		if (g < level0groups.length - 1) div.appendChild(document.createTextNode(' | '));
+	}
+	var aux = new Array();
+	for (var i = 0; i < div.childNodes.length; i++) 
+		aux.push(div.childNodes[i]);
+	// don't want to handle changeable lists
+	for (var i = 0; i < aux.length; i++) {
+		if (i < aux.length - 1) div.insertBefore(document.createTextNode('|'),aux[i].nextSibling);
 	}
 	textArea.parentNode.insertBefore(div,textArea.nextSibling);
 	var tagdiv = document.createElement('div');
