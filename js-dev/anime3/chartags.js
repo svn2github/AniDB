@@ -210,7 +210,7 @@ function writeTagGroups() {
 		aux.push(div.childNodes[i]);
 	// don't want to handle changeable lists
 	for (var i = 0; i < aux.length; i++) {
-		if (i < aux.length - 1) div.insertBefore(document.createTextNode('|'),aux[i].nextSibling);
+		if (i < aux.length - 1) div.insertBefore(document.createTextNode(' | '),aux[i].nextSibling);
 	}
 	textArea.parentNode.insertBefore(div,textArea.nextSibling);
 	var tagdiv = document.createElement('div');
