@@ -48,7 +48,7 @@ var my_submit = null;
 
 /* Function that fetches data */
 function fetchData() {
-	alert(searchString);
+	//alert(searchString);
 	var req = xhttpRequest();
 	if (isLocalHost()) xhttpRequestFetch(req, 'xml/groupsearch.xml', parseData);
 	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=groupsearch&search='+encodeURI(searchString), parseData);
@@ -426,7 +426,7 @@ subStreams.prototype.add = function() {
 	ck.onchange = function toggle() { substrm.disable(this.checked,i); }
 	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
-	var optionArray = {"10":{'text':"hard sub"},"20":{'text':"soft sub"},"30":{'text':"sup. soft sub"},
+	var optionArray = {"10":{'text':"hard sub"},"20":{'text':"soft sub"},"30":{'text':"suplementary soft sub"},
 						"100":{'text':"other"},"200":{'text':"unknown"}};
 	var select = createSelectArray(null,'addstrm.sub'+id+'.type','addstrm.sub'+id+'.type',null,"200",optionArray);
 	select.title = 'Subtitle track type';
