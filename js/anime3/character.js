@@ -167,7 +167,7 @@ function prepPageEntity() {
 	// add the selector if we have more than one char
 	if (divs && divs.length > 1) {
 		var selectorDiv = document.createElement('div');
-		selectorDiv.className = 'selector';
+		selectorDiv.className = 'g_section selector';
 		selector_prev = createButton(null,'prev',false,'Previous','button',showPrevEntity, 'prev');
 		selector_next = createButton(null,'next',false,'Next','button',showNextEntity, 'next');
 		selector = createBasicSelect(null,'char_sel',showEntity);
