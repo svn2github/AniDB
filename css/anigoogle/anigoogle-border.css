@@ -6,7 +6,8 @@ table
 
 #layout-main div.ep_all div.info table,
 #layout-main div.hint2_all table,
-#layout-main div.anime_all div.info div.data table
+#layout-main div.anime_all div.info div.data table,
+#layout-main div.song_all div.info table
 {
 	border-top:none;
 }
