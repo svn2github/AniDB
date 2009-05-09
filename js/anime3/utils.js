@@ -508,32 +508,50 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 // GROUP BAR FUNCTIONS //
 var makeBar_rest = 0;
 function makeBar(parentNode,start,end,total,map,barSize) {
-	//Initialize makeBar_rest var
-	if (start == 1) makeBar_rest=0; 
-	//Theoretical length of range
-	var length = (1 + end - start) * (barSize / total);
-	//Correct error made by last length calculation and cut of decimals
-	var width = Math.ceil(length - makeBar_rest);
-	//Make lone episodes in animes with high ep count visible again 
-	if (width<=0) width=1; 
-	//Dampen IOIOIOIO effect
-	if(makeBar_rest > 2 && total != end) { makeBar_rest -= length; return;}
-	//Calculate new error made by cutting of decimals
-	makeBar_rest = width - length + makeBar_rest;
-	//Trim 1 pixel if needed
-	if(total == end && makeBar_rest>0.1) width--;
-	
 	//Create image
-	var img = document.createElement('img');
-	img.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
-	img.width = width;
-	img.height = 10;
-	img.title = img.alt = '';
-	if (parentNode != null || parentNode != '') parentNode.appendChild(img); else return img;
+	var bar;
+	if(map['class']){
+		bar = document.createElement('div');
+		bar.className = map['class'];
+	} else {
+		//Compatibility purposes
+		bar = document.createElement('img');
+		bar.src = base_url + 'pics/anidb_bar_h_'+map['img']+'.gif';
+		bar.height = 10;
+	}
+	bar.title = bar.alt = '';
+	
+	if (start == 1) makeBar_rest=0; //Initialize makeBar_rest var
+	
+	var length, width;
+	if(barSize>=1){
+		//Fixed Size
+		length = (1 + end - start) * (barSize / total);	//Theoretical length of range
+		width = Math.ceil(length - makeBar_rest); //Correct error made by last length calculation and cut of decimals
+		if (width<=0) width=1; //Make lone episodes in animes with high ep count visible again 
+		if(makeBar_rest > 1 && total != end) { makeBar_rest -= length; return null;}//Dampen IOIOIOIO effect
+		makeBar_rest = width - length + makeBar_rest;//Calculate new error made by cutting of decimals
+		if(total == end && makeBar_rest>0.1) width--;//Trim last pixel if needed and set image width		
+		bar.style.width=width+"px";//img.width = width;
+	} else {
+		//Relative Size
+		length = (1 + end - start) / total;
+    	width = length - makeBar_rest;
+    	if(end != total){
+        	if(width <= makeBar_rest) width = makeBar_rest; 
+        	if(makeBar_rest > barSize) { makeBar_rest -= length; return null;}
+    	}
+    	makeBar_rest = width - length + makeBar_rest;
+    	bar.style.width = (width*100) + "%";
+	}
+		
+	if (parentNode != null || parentNode != '') parentNode.appendChild(bar); else return bar;
+	return null;
 }
 
 function makeCompletionBar(parentNode, range, maps, barSize) {
-	if(!barSize) barSize = screen.width < 1280 ? 200 : 300;
+	if(!barSize) barSize = screen.width < 1600 ? (screen.width < 1280 ? 1/200 : 1/300) : 0;
+	
 	var len = range.length;
 	var span = document.createElement('span');
 	span.className = 'completion';
@@ -554,7 +572,7 @@ function makeCompletionBar(parentNode, range, maps, barSize) {
 		var k = i+1;
 		while ( k < range.length && range[k] == v ) k++;
 		if (!v) v=0;
-		makeBar(span, i+1, k, range.length, maps[v],barSize);
+		makeBar(span, i+1, k, range.length, maps[v], barSize);
 		i = k;
 	}
 	if (parentNode != null && parentNode != '') parentNode.appendChild(span);

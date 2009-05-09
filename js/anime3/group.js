@@ -324,9 +324,15 @@ function prepPage() {
 	initTooltips();
 	aid = Number(uriObj['aid']);
 	gid = Number(uriObj['gid']);
-	if (isNaN(aid) || isNaN(gid)) return;
-	fetchData(aid);
+	
 	createPreferencesTable('group');
+	if (!isNaN(aid) && !isNaN(gid)) {
+		//Group-Anime Page
+		fetchData(aid);
+	} else if(!isNaN(gid)) {
+		//Group Page
+		fetchData(null, gid);
+	}
 }
 
 /* Function that fetches anime data
@@ -336,11 +342,17 @@ function prepPage() {
 function fetchData(aid,gid) {
 	var req = xhttpRequest();
 	if (gid == null) {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
+		//First get for group-anime page
+		if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
-	} else {
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
+	} else if(gid != null && aid != null) {
+		//Second get for group-anime page
+		if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+aid+'&eid=all&gid='+gid, parseEpisodeData);
+	} else if(gid != null && aid == null) {
+		//Get for group page
+		if (isLocalHost()) xhttpRequestFetch(req, 'xml/gid'+gid+'_range.xml', parseGroupRangeData);
+		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=agranges&gid=' + gid, parseGroupRangeData);
 	}
 }
 
@@ -411,7 +423,118 @@ function parseEpisodeData(xmldoc) {
 	updateStatus('');
 	// now that we have all the data actualy update the hash nodes
 	updateEpTableRows(true);
+	
+	addEpBar();
 }
 
+function parseGroupRangeData(xmlDoc){
+	var groupReleases = new Object();
+	var id;
+	
+	var epRange, totalEps;
+	var animes = xmlDoc.getElementsByTagName('animes')[0].childNodes;
+	for(var i =0; i < animes.length; i++){
+		id = animes[i].getAttribute('id');
+		
+		epRange = nodeData(animes[i].getElementsByTagName('eprange')[0])
+		groupReleases[id + '_eprange'] = epRange;
+				
+		totalEps = nodeData(animes[i].getElementsByTagName('neps')[0])
+		groupReleases[id + '_neps'] = totalEps;
+	}
+	
+	var mlRange;
+	var mylist = xmlDoc.getElementsByTagName('mylist');
+	var mlGroups = mylist[0].getElementsByTagName('group');
+	var mlEntries = mylist[0].getElementsByTagName('inmylist');
+	
+	for(var j=0; j<mlEntries.length; j++) {
+		id = mlGroups[j].getAttribute('aid');
+		mlRange = nodeData(mlEntries[j]);
+		groupReleases[id + '_mlrange'] = totalEps;
+	}
+	addEpBars(groupReleases);
+}
+ 
+ 
+ /* Adds epbars below each anime row */
+function addEpBars(groupReleases){
+	var div = document.getElementById('tab_main_1_pane'); //Need more reliable way?
+	
+	var cell;
+	var colIndex = 0;
+	var thead = div.getElementsByTagName('thead')[0];
+	var thChildNodes = thead.firstChild.getElementsByTagName('th');
+	for (colIndex = 0; colIndex < thChildNodes.length; colIndex++) {
+		if(thChildNodes[colIndex].className && thChildNodes[colIndex].className.indexOf("undumped")>=0){
+			cell = document.createElement('th');
+			cell.appendChild(document.createTextNode('Progress'));
+			thead.firstChild.insertBefore(cell, thChildNodes[colIndex]);
+			break;
+		}
+	}
+	
+	var range;
+	var aid, link;
+	var maps, totalEps;
+	var tbody = div.getElementsByTagName('tbody')[0];
+	var rows = tbody.getElementsByTagName('tr');
+	for(var i=0; i < rows.length; i++){
+		link = rows[i].getElementsByTagName('td')[2].getElementsByTagName('a')[0].getAttribute('href');
+		aid = link.substr(link.indexOf('aid=')+4);
+		
+		maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
+				'1' : {'use':false,'type': 1,'desc':"Done: "+groupReleases[aid + '_eprange'],'img':"darkblue",'class':"done"}, 
+				'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(groupReleases[aid + '_eprange']),'img':"lime",'class':"done mylist"}};
+
+		totalEps = parseInt(groupReleases[aid + '_neps']);
+		if(isNaN(totalEps)) totalEps = 0;
+		
+		range = expandRange(null, totalEps, maps[0], null);
+		
+		if(groupReleases[aid + '_eprange'] != '' && groupReleases[aid + '_eprange']) {
+			maps[1]['use'] = true;
+			range = expandRange(groupReleases[aid + '_eprange'], totalEps, maps[1], range);
+		}
+		
+		if(groupReleases[aid + '_mlrange'] != '' && groupReleases[aid + '_mlrange']) {
+			maps[2]['use'] = true;
+			range = expandRange(groupReleases[aid + '_eprange'], totalEps, maps[2], range);
+		}
+
+		cell = rows[i].insertCell(colIndex);
+		cell.style.width = 100+"px";
+		cell.className = "epbar";
+		makeCompletionBar(cell, range, maps, 100);
+	}
+}
+
+ /* Appends an epbar below the last file */
+function addEpBar(){
+	var fileList;
+	var tables = document.getElementsByTagName('table');
+	for(var i=0; i<tables.length;i++) if(tables[i].className == 'filelist') fileList = tables[i];
+
+	var totalEps = (anime.eps ? anime.eps : anime.highestEp);
+	var group = groups[gid];
+	
+	var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
+				'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"}, 
+				'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime",'class':"done mylist"}};
+	
+	var range = expandRange(null, totalEps, maps[0], null);
+	if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange, totalEps, maps[1], range);}
+	if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
+	
+	var row = document.createElement('tr');
+	var td = document.createElement('td');
+	row.appendChild(td);
+	
+	td.setAttribute('colspan', fileList.tBodies[0].rows[0].cells.length)
+	td.className = "epbar";
+	makeCompletionBar(td, range, maps);
+	fileList.tBodies[0].appendChild(row);
+}
+ 
 //window.onload = prepPage;
 addLoadEvent(prepPage);
