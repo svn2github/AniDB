@@ -909,7 +909,7 @@ function CookieSetFromArray(name, array, expires, path, domain, secure) {
 		if (typeof(val) != 'string') continue;
 		aux.push(k+':'+val);
 	}
-	CookieSet(name,aux.join('|'));
+	CookieSet(name,aux.join('|'),expires, path, domain, secure);
 }
 
 /* Sets a cookie */
