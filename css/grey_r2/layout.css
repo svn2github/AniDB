@@ -17,29 +17,19 @@ cursor: pointer;
 {
 display:block;
 margin-right:.5em;
-float: right;
 }
 #layout-tabs ul li
 {
-padding:4px 6px 3px;
+padding:4px 6px 3px 0;
 }
 #layout-tabs ul
 {
-margin-bottom:.5em;
-margin-top:.5em;
+margin-top:0.2em;
 text-align:right;
 }
 #layout-tabs li.news
 {
-	display:inline;
-}
-#layout-tabs ul.main-tabs > li.selected
-{
-border-bottom:2px solid;
-}
-#layout-tabs ul.main-tabs > li
-{
-	border-bottom:none;
+display:inline;
 }
 #layout-main > h1
 {
@@ -69,6 +59,11 @@ line-height: 1.2;
 font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
 color: white
 }
+ul li #tooltip,
+tr #tooltip
+{
+left: 10em;
+}
 form input[type="text"],
 form input[type="checkbox"],
 form input[type="password"],
@@ -95,12 +90,9 @@ margin-left: 0.3em;
 input#addfilem\.next,
 input#addfilem\.search,
 form input[type="submit"],
-a.button,
-input.button,
-button.button,
-a.confirmButton,
-input.confirmButton,
-button.confirmButton
+*.button,
+button,
+*.confirmButton
 {
 margin-top: 0.3em;
 color: #c1c1c1;
@@ -209,22 +201,18 @@ text-align: right;
 padding: 0;
 margin: 0;
 }
-#layout-search form input.submit,
-form button[type="submit"]
+#layout-search form input.submit
 {
 font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
 margin: 0;
 padding: 0;
-color: white;
 font-size: 11px;
 font-weight: normal;
-border-style: dashed;
-border-color: #565656;
 }
 #layout-content
 {
 margin: 0 0 0 0;
-padding-top: 3em;
+padding-top: 2.5em;
 padding-bottom: 0.1em;
 width: 100%;
 }
@@ -333,11 +321,6 @@ color: red;
 {
 color: white;
 }
-#layout-nav li li:hover a
-{
-color: #ff6000;
-background-image: url(images/whitepixel.png);
-}
 #layout-content div.g_msg
 {
 margin: 2em;
@@ -358,7 +341,9 @@ border-top-width: 0px;
 {
 border-bottom-width: 1px;
 }
-#layout-main div.forum div.search form input, #layout-main div.forum div.search form select, #layout-main div.forum div.search form input[type="submit"]
+#layout-main div.forum div.search form input,
+#layout-main div.forum div.search form select,
+#layout-main div.forum div.search form input[type="submit"]
 {
 padding: 0;
 margin: 0;
@@ -378,4 +363,47 @@ width: 5em;
 #layout-main div.forum div.quickreply textarea
 {
 border: none
+}
+button + button
+{
+margin-left: 0.5em;
+}
+#layout-main div.tabbed_pane ul.tabs
+{
+margin-bottom: 2px;
+}
+#layout-main div.tabbed_pane div.pane ul
+{
+width: auto;
+}
+#layout-main div.tabbed_pane div.pane ul
+{
+display: block;
+}
+#layout-tabs ul.main-tabs li + li
+{
+margin-left: 0.5em;
+}
+#layout-tabs ul.main-tabs li
+{
+padding: 0 6px 0px 6px;
+border-bottom: none;
+}
+#layout-tabs + #layout-main
+{
+margin-top: -4px;
+}
+#layout-content #layout-main div.userpage_all div.stats div.stats_roles td,
+#layout-content #layout-main div.myplace_all div.stats div.stats_roles td,
+#layout-content #layout-main div.preferences ul li
+{
+white-space: nowrap;
+}
+span.time,
+span.user a.id,
+td.rating span,
+a.filter
+{
+font-size: 100%;
+color: #a1a1a1;
 }

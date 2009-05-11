@@ -6,6 +6,7 @@
 @import "../common/layout/global/menu.css";
 @import "../common/layout/global/block.css";
 @import "../common/layout/global/tooltip.css";
+@import "../common/layout/global/editdata.css";
 @import "acdropdown.css";
 @import "../icons/comment-grey.css";
 @import "icons.css";
@@ -1167,11 +1168,6 @@ margin-right: -15px;
 list-style: none outside;
 line-height: 14px;
 }
-#layout-content div.genren_all li span,
-#layout-content #cattree li span
-{
-display: block;
-}
 #layout-content #cattree li.collapsed ul
 {
 display: none;
@@ -1877,11 +1873,6 @@ text-align: center;
 {
 padding-left: 1em;
 }
-#layout-content div.profile_all > div > div,
-#layout-content div.profile_all > div form > div
-{
-display: table-cell;
-}
 #layout-content div.profile_all .g_info
 {
 text-align: left;
@@ -1898,14 +1889,6 @@ width: 20em;
 #layout-main dl dd
 {
 margin-left: 10em;
-}
-#style_thumbnail
-{
-width: 220px;
-margin: 3px;
-font-size: 94%;
-text-align: center;
-overflow: hidden;
 }
 #layout-content div.profile_all div.css_style div.block div.image
 {
@@ -2320,10 +2303,6 @@ background: url(images/bg_2.gif);
 {
 text-align: center;
 }
-#layout-main div.profile_all div.tabbed_pane
-{
-width: 100%;
-}
 #layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label select
 {
 display: block;
@@ -2685,13 +2664,13 @@ white-space: nowrap;
 }
 #tooltip
 {
-	color:#993300;
-	filter:alpha(opacity=90);
-	khtmlopacity:0.90;
-	mozopacity:0.90;
-	opacity:0.90;
-	font-size: 10px;
-	word-wrap: break-word;
+color:#993300;
+filter:alpha(opacity=90);
+khtmlopacity:0.90;
+mozopacity:0.90;
+opacity:0.90;
+font-size: 10px;
+word-wrap: break-word;
 }
 /*Bubble Tooltip*/
 #tooltip span
@@ -2723,7 +2702,7 @@ border-bottom: 2px solid grey;
 #layout-main div.group_all div.group_released td.epbar div.done
 {
 background-color:#343434;
-border-bottom: 2px solid #a16000;
+border-bottom: 2px solid #515151;
 }
 
 #layout-main div.anime_all div.groups td.epbar div.done.mylist,
@@ -2734,4 +2713,19 @@ border-bottom: 2px solid #008800;
 span.i_help
 {
 color: transparent;
+}
+#layout-main div.profile_all div.block div.image
+{
+width: 220px;
+padding-left: 40% -220px;
+}
+#layout-main div.tabbed_pane ul.tabs
+{
+margin: 0;
+padding-left: 4px;
+}
+ul li #tooltip,
+tr #tooltip
+{
+left: 10em;
 }
