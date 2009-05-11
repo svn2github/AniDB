@@ -398,10 +398,10 @@ function createGroupRow(gid,cols,skips) {
 				createCell(row, col['classname'], icons['note'], null, colSpan);
 				break;
 			case 'eps':
-				var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue"}, 
-							'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue"}, 
-							'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime"}, 
-							'3' : {'use':false,'type': 3,'desc':"Done by: ",'img':"lightblue"}};
+				var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
+							'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"}, 
+							'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime",'class':"done mylist"}, 
+							'3' : {'use':false,'type': 3,'desc':"Done by: ",'img':"lightblue",'class':"doneby"}};
 				var totalEps = (anime.eps ? anime.eps : anime.highestEp);
 				var range = expandRange(null, totalEps, maps[0], null);
 				if (group.relatedGroups.length) {
