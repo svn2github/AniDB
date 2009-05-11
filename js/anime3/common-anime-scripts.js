@@ -417,10 +417,10 @@ function createGroupRow(gid,cols,skips) {
 				if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
 				var cell = createCell(null, col['classname'], makeCompletionBar(null,range,maps),String(group.epCnt),colSpan);
 				// @TODO remove this to CSS
-				var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
-				var widthval = (screen.width < 1280 ? (totalEps < 200 ? totalEps : 200) : (totalEps < 300 ? totalEps : 300));
-				var mult = ( totalEps > 0 && MAX_BAR_WIDTH / totalEps >= 1 ? mult = Math.floor(MAX_BAR_WIDTH / totalEps) : 1);
-				cell.style.minWidth = (widthval*mult+5) + 'px'
+				//var MAX_BAR_WIDTH = (screen.width < 1280 ? 200 : 300);
+				//var widthval = (screen.width < 1280 ? (totalEps < 200 ? totalEps : 200) : (totalEps < 300 ? totalEps : 300));
+				//var mult = ( totalEps > 0 && MAX_BAR_WIDTH / totalEps >= 1 ? mult = Math.floor(MAX_BAR_WIDTH / totalEps) : 1);
+				//cell.style.minWidth = (widthval*mult+5) + 'px'
 				row.appendChild(cell);
 				break;
 			case 'lastep':
