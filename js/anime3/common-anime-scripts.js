@@ -216,7 +216,7 @@ function createEpisodeIcons(episode) {
 		if (mylistEpEntries.length && mylistEpEntries.length == 1) icons['mylist'] = createIcon(null, 'MW', 'removeme', changeEpWatchedState, 'Mark as watched', 'i_seen_yes');
 	}
 	if (episode.isRecap) icons['recap'] = createIcon(null, '[recap] ', null, null, 'This episode is a recap (summary).', 'i_recap');
-	if (episode.other) icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+episode.other, 'i_comment');
+	if (episode.other) icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+clean_input(episode.other), 'i_comment');
 	return icons;
 }
 /* Function that creates an episode table row
@@ -593,7 +593,7 @@ function createFileIcons(file) {
 	}
 	// FILE COMMENT
 	if ((file.other) && (file.other != '') && (file.other != undefined)) 
-		icons['cmt'] = createIcon(null, 'comment ', null, null, 'comment: '+file.other, 'i_comment');
+		icons['cmt'] = createIcon(null, 'comment ', null, null, 'comment: '+clean_input(file.other), 'i_comment');
 	// NEW FILE
 	if (file.newFile)
 		icons['date'] = createIcon(null, 'new.file ', null, null, '*new file* (last 24h)', 'i_new_icon');

@@ -921,6 +921,10 @@ function convert_input(str) {
  */
 function clean_input(str) {
 	str = str.replace(/\&amp\;/mgi,'&');
+	str = str.replace(/\&lt\;/mgi,'<');
+	str = str.replace(/\&gt\;/mgi,'>');
+	str = str.replace(/\<br\>/mgi,'\n');
+	str = str.replace(/\<br \/\>/mgi,'\n');
 	return (str);
 }
 
