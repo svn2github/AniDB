@@ -40,6 +40,8 @@ function CCTag(node) {
 	this.name = node.getAttribute('name');
 	this.verified = Number(node.getAttribute('verified'));
 	this.cnt = Number(node.getAttribute('cnt'));
+	this.description = nodeData(node);
+	if (this.description == '') this.description = null;
 }
 
 /* Function that fetches data */
@@ -138,7 +140,7 @@ function writeGroupTags(group,isSelf) {
 		for (var t = start; t < end; t++) {
 			var tag = tags[group.tags[t]];
 			if (!tag) continue;
-			var span = createTextLink(null, tag.name, null, null, writeTag, null, 'link')
+			var span = createTextLink(null, tag.name, null, null, writeTag, tag.description, 'link')
 			span.id = 't'+tag.id;
 			tagCol.appendChild(span);
 		}

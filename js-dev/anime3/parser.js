@@ -99,7 +99,7 @@ function CGroupEntry(node) {
 	  case 'lastep': this.lastEp = epNoToString(nodeData(sNode)); break;
 	  case 'lastup': this.lastUp = convertTime(nodeData(sNode)); break;
 	  case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
-	  case 'cmts': this.commentCount = Number(sNode.getAttribute('cnt'))+1; break;
+	  case 'cmts': this.commentCount = Number(sNode.getAttribute('cnt')); break; //re-add +1 when we are back to using xmln
 	  case 'epcnt': this.epCnt = Number(nodeData(sNode)); break;
 	  case 'sepcnt': this.sepCnt = Number(nodeData(sNode)); break;
 	  case 'eprange': this.epRange = nodeData(sNode); break;
