@@ -732,9 +732,9 @@ function updateGroupTable() {
 					var epbar = getElementsByClassName(cell.getElementsByTagName('span'), 'completion', true)[0];
 					if (epbar != null) {
 						var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
-								'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"}, 
-								'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime",'class':"done mylist"}, 
-								'3' : {'use':false,'type': 3,'desc':"Done by: ",'img':"lightblue",'class':"doneby"}};
+									'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"}, 
+									'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime",'class':"done mylist"}, 
+									'3' : {'use':false,'type': 3,'desc':"Done by: ",'img':"lightblue",'class':"doneby"}};
 						var totalEps = (anime.eps ? anime.eps : anime.highestEp);
 						var range = expandRange(null, totalEps, maps[0], null);
 						if (group.relatedGroups.length) {
@@ -755,7 +755,7 @@ function updateGroupTable() {
 					/*var widthval = (screen.width < 1280 ? (totalEps < 200 ? totalEps : 200) : (totalEps < 300 ? totalEps : 300));
 					var mult = ( totalEps > 0 && MAX_BAR_WIDTH / totalEps >= 1 ? mult = Math.floor(MAX_BAR_WIDTH / totalEps) : 1);
 					cell.style.minWidth = (widthval*mult+5) + 'px'*/
-					cell.style.minWidth = MAX_BAR_WIDTH + 'px';
+					//cell.style.minWidth = MAX_BAR_WIDTH + 'px';
 				}
 				if (className.indexOf('lastep') >= 0)
 					cell.setAttribute('anidb:sort',mapEpisodeNumber(group.lastEp));
