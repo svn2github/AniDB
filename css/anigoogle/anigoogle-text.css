@@ -15,17 +15,8 @@ a.i_button:hover
 	text-transform:capitalize;
 }
 
-#layout-nav div.main_search a.advsearch
-{
-	font-family:arial,sans-serif;
-	text-decoration:underline;
-	text-transform:capitalize;
-}
-
 #layout-search input.text,
 #layout-search input.submit,
-#layout-nav div.main_search input.text,
-#layout-nav div.main_search select,
 #layout-menu > li,
 #layout-tabs
 {

@@ -4,36 +4,11 @@
 @import "../anigoogle/anigoogle-text.css";
 @import "../anigoogle/anigoogle-border.css";
 @import "../anigoogle/anigoogle-color.css";
+@import "../anigoogle/anigoogle-search.css";
 @import "aniblackle-color.css";
 @import "aniblackle-icons.css";
 
 #layout-footer:after
 {
 	content:"design by deridiot inspired by blackle";
-}
-
-button,
-select,
-textarea,
-input,
-#layout-search select,
-#layout-search input.text,
-#layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.tabbed_pane div.body
-{
-	border:1px solid #666666;
-}
-
-tr
-{
-	background-color: #000000;
-}
-
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected
-{
-	border-bottom:1px double #000000;
-	border-left:1px solid #666666;
-	border-right:1px solid #666666;
-	border-top:1px solid #666666;
 }
