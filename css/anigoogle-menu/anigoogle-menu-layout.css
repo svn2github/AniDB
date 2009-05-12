@@ -107,3 +107,18 @@
 	top:19px;
 	width:100px;
 }
+
+#layout-hint + #layout-nav + #layout-content #layout-tabs
+{
+    margin:6.4em 0.3em;
+}
+
+#layout-hint + #layout-nav #layout-menu
+{
+    margin-top:0;
+}
+
+#layout-hint + #layout-nav #layout-search
+{
+    top:2em;
+}
