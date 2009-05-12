@@ -93,3 +93,12 @@
 {
 	margin-top: 0;
 }
+
+#layout-nav div.search a.advsearch
+{
+	display: block;
+	left:623px;
+	position:absolute;
+	top:19px;
+	width:100px;
+}

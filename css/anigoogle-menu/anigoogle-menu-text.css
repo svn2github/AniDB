@@ -11,3 +11,10 @@
 {
 	font-size:1em;
 }
+
+#layout-nav div.search a.advsearch
+{
+	font-family:arial,sans-serif;
+	text-decoration:underline;
+	text-transform:capitalize;
+}
