@@ -374,3 +374,10 @@ tr + tr td,
 {
 	background-color:#666666;
 }
+
+#layout-main div.mylist_all td.stats,
+#layout-main div.mylist_all td.rating,
+#layout-main div.mylist_all td.vote
+{
+	border-left:1px solid #555555;
+}

@@ -101,3 +101,10 @@ tr + tr td,
 {
 	border-top:2px solid #C9D7F1;
 }
+
+#layout-main div.mylist_all td.stats,
+#layout-main div.mylist_all td.rating,
+#layout-main div.mylist_all td.vote
+{
+	border-left:1px solid #C9D7F1;
+}
