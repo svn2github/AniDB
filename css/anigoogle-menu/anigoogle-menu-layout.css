@@ -11,12 +11,6 @@
 	padding-top:1em;
 }
 
-#layout-menu 
-{
-	padding-top:1em;
-	padding-left:1.1em;
-}
-
 #layout-menu,
 #layout-nav
 {
@@ -38,8 +32,7 @@
 {
 	display:block;
 	margin-left:-13em;
-	margin-top:-.1em;
-	padding-left:1em;
+	padding-left:1.1em;
 	padding-right:1em;
 	padding-top:1em;
 	position:relative;
