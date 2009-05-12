@@ -1,17 +1,13 @@
 #layout-content
 {
 	border-bottom:1px solid #C9D7F1;
-}
-
-#layout-content
-{
 	border-left:1px solid #C9D7F1;
 	border-top:1px solid #C9D7F1;
 }
 
-#layout-menu 
+#layout-nav
 {
-	border-right:1px solid #C9D7F1;
+	border-left:1px solid #C9D7F1;
 }
 
 #layout-menu > li ul

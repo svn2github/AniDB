@@ -1,12 +1,13 @@
 #layout-content
 {
 	border-bottom-color:#666666;
-}
-
-#layout-content
-{
 	border-left-color:#666666;
 	border-top-color:#666666;
+}
+
+#layout-nav
+{
+	border-left-color:#666666;
 }
 
 #layout-menu li.sub-menu,
@@ -35,9 +36,4 @@
 #layout-menu > li ul
 {
 	background-color:#444444;
-}
-
-#layout-menu 
-{
-	border-right-color:#666666;
 }

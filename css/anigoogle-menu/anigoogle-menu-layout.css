@@ -7,7 +7,7 @@
 
 #layout-content
 {
-	margin-top:1.1em;
+	margin-top:-1.1em;
 	padding-top:1em;
 }
 
@@ -22,6 +22,11 @@
 	margin-left:0;
 }
 
+#layout-nav
+{
+	padding-bottom:2em;
+}
+
 #layout-main h1.main,
 #layout-main div.main_all
 {
@@ -32,7 +37,7 @@
 {
 	display:block;
 	margin-left:-13em;
-	padding-left:1.1em;
+	padding-left:1em;
 	padding-right:1em;
 	padding-top:1em;
 	position:relative;
