@@ -71,38 +71,6 @@
 	padding:0 8px;
 }
 
-#layout-nav.main_nav
-{
-	height:20em;
-}
-
-#layout-nav div.main_search
-{
-	margin-left:38%;
-	position:absolute;
-}
-
-#layout-nav div.main_search div.search
-{
-	margin-left:-14em;
-}
-
-#layout-nav div.main_search a.advsearch
-{
-	left:320px;
-	top:100px;
-}
-
-#layout-nav div.main_search input.submit
-{
-	margin-left:9.5em;
-}
-
-#layout-nav div.main_search input.random
-{
-	margin-left:0.5em;
-}
-
 #layout-nav div.menu_hr,
 #layout-menu span.tab
 {
