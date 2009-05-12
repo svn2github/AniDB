@@ -3,21 +3,20 @@
 	border-bottom:1px solid #C9D7F1;
 }
 
-#layout-content,
-#layout-nav
+#layout-content
 {
 	border-left:1px solid #C9D7F1;
+	border-top:1px solid #C9D7F1;
+}
+
+#layout-menu 
+{
+	border-right:1px solid #C9D7F1;
 }
 
 #layout-menu > li ul
 {
 	border:none;
-}
-
-#layout-menu,
-#layout-nav
-{
-	border-top:1px solid #C9D7F1;
 }
 
 #layout-menu li.sub-menu
