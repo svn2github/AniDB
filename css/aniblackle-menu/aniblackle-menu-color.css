@@ -3,15 +3,9 @@
 	border-bottom-color:#666666;
 }
 
-#layout-content,
-#layout-nav
+#layout-content
 {
 	border-left-color:#666666;
-}
-
-#layout-menu,
-#layout-nav
-{
 	border-top-color:#666666;
 }
 
@@ -23,6 +17,7 @@
 
 #layout-menu
 {
+	border-right-color:#C9D7F1;
 	background-color:#000000;
 }
 
