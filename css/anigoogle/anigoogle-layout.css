@@ -176,13 +176,6 @@
 	padding-top:.5em;
 }
 
-#layout-menu li.sub-menu ul li
-{
-	padding:2px 8px;
-}
-
-
-
 #layout-footer,
 #layout-main div.tabbed_pane ul.tabs
 {
@@ -280,7 +273,9 @@ h4,
 #layout-main .g_definitionlist {
 	margin:2px 0 0px;
 }
-#layout-main .g_definitionlist table tr td
+#layout-main .g_definitionlist table tr td,
+#layout-menu li.sub-menu ul li,
+#layout-main div.g_definitionlist tr th
 {
-	padding:2px 8px 2px 8px;
+	padding:2px 8px;
 }

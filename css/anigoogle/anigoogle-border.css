@@ -86,6 +86,11 @@ tr + tr td,
 	border-top:1px solid #C9D7F1;
 }
 
+#layout-main div.g_definitionlist tr th
+{
+	border-top:1px solid #E8F0FF;
+}
+
 #layout-main div.g_definitionlist tr:first-child th
 {
 	border-top:none;
