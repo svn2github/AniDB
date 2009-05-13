@@ -333,14 +333,13 @@ function prepPage() {
 		//Group Page
 		fetchData(null, gid);
 	}
-
 }
 
 /* Function that fetches anime data
  * @param aid Anime ID
  * @param gid Group ID
  */
- function fetchData(aid,gid) {
+function fetchData(aid,gid) {
 	var req = xhttpRequest();
 	if (gid == null) {
 		//First get for group-anime page
@@ -503,7 +502,7 @@ function addEpBars(groupReleases){
 		
 		if(groupReleases[aid + '_mlrange'] != '' && groupReleases[aid + '_mlrange']) {
 			maps[2]['use'] = true;
-			range = expandRange(groupReleases[aid + '_eprange'], totalEps, maps[2], range);
+			range = expandRange(groupReleases[aid + '_mlrange'], totalEps, maps[2], range);
 		}
 
 		cell = rows[i].insertCell(colIndex);
