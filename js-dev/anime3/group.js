@@ -454,7 +454,7 @@ function parseGroupRangeData(xmlDoc){
 	for(var j=0; j<mlEntries.length; j++) {
 		id = mlGroups[j].getAttribute('aid');
 		mlRange = nodeData(mlEntries[j]);
-		groupReleases[id + '_mlrange'] = totalEps;
+		groupReleases[id + '_mlrange'] = mlRange;
 	}
 	addEpBars(groupReleases);
 }
