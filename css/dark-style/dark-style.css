@@ -2194,3 +2194,23 @@ padding: 0;
 text-align: left;
 vertical-align: middle;
 }
+/*epbar colors*/
+#layout-main div.anime_all div.groups td.epbar div.notdone,
+#layout-main div.group_all div.group_released td.epbar div.notdone
+{
+	background-color:#817eae;
+	border-bottom: 2px solid #817eae;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+	background-color:#5e3f89;
+	border-bottom: 2px solid #5e3f89;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+	border-bottom: 2px solid #00ff00;
+}
