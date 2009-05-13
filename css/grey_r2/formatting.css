@@ -178,34 +178,7 @@ ul.format-modes li.selected, ul.format-modes li:hover {
 	text-align:right;
 }
 
-a.button,
-input.button,
-button.button,
-a.confirmButton,
-input.confirmButton,
-button.confirmButton {
-	background:#9B9B9B url(../icons/formating/button.png) repeat-x scroll left top;
-	border-color:#999999 #858585 #666666;
-	border-style:solid;
-	border-width:1px;
-	color:#FFFFFF;
-	cursor:pointer;
-	font-size:11px;
-	font-weight:bold;
-	line-height:16px;
-	padding:0 4px;
-	text-decoration:none;
-	text-shadow:0 -1px 1px #9B9B9B;
-	vertical-align:baseline;
-}
-
 input.dialogConfirm { margin-left:8px; }
-a.confirmButton, input.confirmButton, button.confirmButton {
-	background:#515151 url(../icons/formating/confirm_button.png) repeat-x scroll left top;
-	border-color:#505050 #404040 #2D2D2D;
-	font-weight:bold;
-	text-shadow:0 -1px 1px #515151;
-}
 
 .dialogBox a.i_close {
 	background:transparent url(../icons/formating/delete_inactive.png) no-repeat scroll 50% 50%;
@@ -219,16 +192,6 @@ a.confirmButton, input.confirmButton, button.confirmButton {
 
 .dialogBox a.i_close:hover {
 	background:transparent url(../icons/formating/delete_active.png) no-repeat scroll 50% 50%;
-}
-
-.dialogBox div.buttons {
-	clear: both;
-	border-top: 1px solid rgb(170, 170, 170);
-	padding: 10px 15px 10px 15px;
-	background-color: rgb(238, 238, 238);
-	background-image: none;
-	overflow: hidden;
-	text-align: right;
 }
 
 /* addlink crap */
