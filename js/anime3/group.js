@@ -451,7 +451,7 @@ function parseGroupRangeData(xmlDoc){
 	for(var j=0; j<mlEntries.length; j++) {
 		id = mlGroups[j].getAttribute('aid');
 		mlRange = nodeData(mlEntries[j]);
-		groupReleases[id + '_mlrange'] = totalEps;
+		groupReleases[id + '_mlrange'] = mlRange;
 	}
 	addEpBars(groupReleases);
 }
@@ -485,7 +485,7 @@ function addEpBars(groupReleases){
 		
 		maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
 				'1' : {'use':false,'type': 1,'desc':"Done: "+groupReleases[aid + '_eprange'],'img':"darkblue",'class':"done"}, 
-				'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(groupReleases[aid + '_eprange']),'img':"lime",'class':"done mylist"}};
+				'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(groupReleases[aid + '_mlrange']),'img':"lime",'class':"done mylist"}};
 
 		totalEps = parseInt(groupReleases[aid + '_neps']);
 		if(isNaN(totalEps)) totalEps = 0;
@@ -499,7 +499,7 @@ function addEpBars(groupReleases){
 		
 		if(groupReleases[aid + '_mlrange'] != '' && groupReleases[aid + '_mlrange']) {
 			maps[2]['use'] = true;
-			range = expandRange(groupReleases[aid + '_eprange'], totalEps, maps[2], range);
+			range = expandRange(groupReleases[aid + '_mlrange'], totalEps, maps[2], range);
 		}
 
 		cell = rows[i].insertCell(colIndex);
