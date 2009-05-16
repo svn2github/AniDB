@@ -58,10 +58,13 @@ line-height: 1.2;
 font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
 color: white
 }
-ul li #tooltip,
-tr #tooltip
+div.genren_all ul#cattree li #tooltip
 {
-left: 10em;
+margin-left: 50px;
+}
+div.animetagmod_all tr #tooltip
+{
+margin-left: 0px;
 }
 form input[type="text"],
 form input[type="checkbox"],
@@ -89,6 +92,7 @@ margin-left: 0.3em;
 input#addfilem\.next,
 input#addfilem\.search,
 form input[type="submit"],
+form input[type="button"],
 *.button,
 button,
 *.confirmButton

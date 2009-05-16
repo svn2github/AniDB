@@ -66,7 +66,8 @@ background-color: transparent;
 #results_submit,
 input#addfilem\.next,
 input#addfilem\.search,
-form input[type="submit"],
+input[type="submit"],
+input[type="button"],
 *.button,
 button,
 *.confirmButton,
@@ -80,7 +81,6 @@ span.g_odd,
 div.quotebody div.quote div.g_odd,
 #layout-main div.chartags_all div.addbox div.tag-column h5
 {
-background-image: none;
 background-color: hsla(0, 0%, 0%, 0.4);
 }
 #layout-content div.animelist_all tr.mylist td
@@ -182,9 +182,9 @@ input#addfilem\.search:hover,
 *.confirmButton:hover,
 button:hover,
 *.submit:hover,
-input[type="submit"]:hover
+input[type="submit"]:hover,
+input[type="button"]:hover
 {
-background-image: none;
 background-color: hsla(0, 100%, 25%, 0.8);
 color: #ff6000;
 border-color: #797979;
@@ -278,12 +278,8 @@ border-top: 1px dashed #c1c1c1;
 }
 #obj-tooltip
 {
-width: auto !important;
-height: auto !important;
-background-color: black;
+background-image: url(../grey/images/bg_2.gif);
 color: white;
-visibility: hidden;
-z-index: 100;
 }
 #obj-tooltip h1
 {

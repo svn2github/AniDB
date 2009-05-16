@@ -1,4 +1,3 @@
-@import "../icons/all.css";
 @import "../common/layout/page/all.css";
 @import "../common/layout/global/tabbed_pane.css";
 @import "../common/layout/global/tagcloud.css";
@@ -8,7 +7,7 @@
 @import "../common/layout/global/tooltip.css";
 @import "../common/layout/global/editdata.css";
 @import "acdropdown.css";
-@import "../icons/comment-grey.css";
+@import "../grey_r2/formatting.css";
 @import "icons.css";
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,blockquote {
 margin:0;
@@ -125,12 +124,8 @@ margin-left: 0.3em;
 div.addfilem input[id="addfilem.next"],
 div.result input,
 form input[type="submit"],
-a.button,
-input.button,
-button.button,
-a.confirmButton,
-input.confirmButton,
-button.confirmButton
+*.button,
+*.confirmButton
 {
 margin-top: 0.3em;
 color: #797979;
@@ -147,13 +142,9 @@ text-shadow: none;
 #addSubLang:hover,
 div.addfilem input[id="addfilem.next"]:hover,
 div.result input:hover,
-form input[type="submit"]:hover,
-a.button:hover,
-input.button:hover,
-button.button:hover,
-a.confirmButton:hover,
-input.confirmButton:hover,
-button.confirmButton:hover
+input[type="submit"]:hover,
+*.confirmButton:hover,
+*.button:hover
 {
 color: white;
 background-image: url(images/blackpixel.png);
@@ -264,6 +255,10 @@ text-align: center;
 *.hide
 {
 display: none !important;
+}
+.g_msg
+{
+text-align: left;
 }
 #layout-content div.g_msg.error
 {
@@ -579,7 +574,7 @@ clear: right;
 }
 #layout-search form input.text
 {
-width: 11.4em;
+width: 15em;
 font-size: 10px;
 margin: 0;
 padding: 0;
@@ -899,7 +894,6 @@ float: right;
 #layout-main div.group_all div.icons span.i_icon
 {
 float: left;
-padding: 0px 2px 0px 2px;
 }
 #layout-main div.anime_all div.info th span.i_icon
 {
@@ -1889,6 +1883,7 @@ width: 20em;
 #layout-main dl dd
 {
 margin-left: 10em;
+text-align: left;
 }
 #layout-content div.profile_all div.css_style div.block div.image
 {
@@ -1939,112 +1934,6 @@ vertical-align: middle;
 {
 background-color: black;
 border: 0;
-}
-input.f_buddy
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/user.gif);
-text-indent: -5000px;
-}
-span.f_separator
-{
-display: block;
-float: left;
-width: 5px;
-height: 20px;
-background: transparent url(../icons/formating/separator.gif) no-repeat;
-text-indent: -5000px;
-}
-input.f_mouseover,
-input.f_selected
-{
-border-color: #89aad1;
-background-color: #e8f0fa;
-}
-input.f_bold
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/bold.gif);
-text-indent: -5000px;
-}
-input.f_italic
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/italic.gif);
-text-indent: -5000px;
-}
-input.f_underline
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/underline.gif);
-text-indent: -5000px;
-}
-input.f_strikethrough
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/strikethrough.gif);
-text-indent: -5000px;
-}
-input.f_unorderedlist
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/unorderedlist.gif);
-text-indent: -5000px;
-}
-input.f_orderedlist
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/orderedlist.gif);
-text-indent: -5000px;
-}
-input.f_link
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/link.gif);
-text-indent: -5000px;
-}
-input.f_viewsource
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/view_text.gif);
-text-indent: -5000px;
-}
-input.f_viewrte
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/view_source.gif);
-text-indent: -5000px;
-}
-input.f_cleansource
-{
-width: 23px;
-height: 23px;
-background-image: url(../icons/formating/clean_source.gif);
-text-indent: -5000px;
-}
-input.f_preview
-{
-width: 23px;
-height: 23px;
-background-image: url(images/f_preview.png);
-text-indent: -5000px;
-}
-input.f_spoiler
-{
-width: 23px;
-height: 23px;
-background-image: url(images/f_spoiler.png);
-text-indent: -5000px;
 }
 #layout-overlay
 {
@@ -2724,8 +2613,33 @@ padding-left: 40% -220px;
 margin: 0;
 padding-left: 4px;
 }
-ul li #tooltip,
-tr #tooltip
+div.animetagmod_all tr #tooltip
 {
-left: 10em;
+margin-left: 0px;
+}
+td,
+ul,
+div.desc,
+.body,
+td.id a.i_icon,
+th.field,
+td.value,
+td.name,
+td.quality,
+td.title,
+td.name,
+#layout-main div.main_all div.news h4,
+#layout-main div.profile_all .g_info
+{
+text-align:left;
+}
+.g_list,
+.g_info,
+.g_input,
+.g_section,
+#layout-footer p,
+#layout-main div.profile_all p,
+#layout-main table.grouplist td.number.eps
+{
+text-align:center;
 }
