@@ -780,17 +780,19 @@ function parseEpisodes(node,aid,cntEps) {
 	}
 	if (node.length > 1 || node.parentNode.nodeName != 'anime') return; 
 	var epNodes = node.getElementsByTagName('ep');
+	var epCnt = 0;
 	for (var i = 0; i < epNodes.length; i++) {
 		var childNode = epNodes[i];
 		var episodeEntry = new CEpisodeEntry(childNode);
 		episodeEntry.animeId = aid;
-		if (cntEps && (episodeEntry.typeChar == 'N' || episodeEntry.typeChar == '')) animes[aid].highestEp++;
+		if (cntEps && (episodeEntry.typeChar == 'N' || episodeEntry.typeChar == '')) epCnt++;
 		episodes[episodeEntry.id] = episodeEntry;
 		epOrder.push(episodeEntry.id);
 		parseEpisode(childNode,aid);
 		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.id);
 		if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
 	}
+	if (cntEps && epCnt > animes[aid].highestEp) animes[aid].highestEp = epCnt;
 }
 
 /* Processes a node to extract anime information
