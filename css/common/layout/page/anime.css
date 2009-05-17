@@ -112,7 +112,8 @@
 	height:8px;
 }
 
-#layout-main div.anime_all div.forum div.threads
+#layout-main div.anime_all div.forum div.threads,
+#layout-main div.anime_all div.forum div.msg
 {
 	margin-left: 1em;
 	margin-right: 1em;
