@@ -770,9 +770,10 @@ function parseGroups(node,aid) {
 /* Processes a node to extract episode information
  * @param node Node to process
  * @param aid Anime ID of episode data
+ * @param cntEps If set to true will count the number of normal episodes currently present in a given anime
  * @return void (sets episodes)
  */
-function parseEpisodes(node,aid) {
+function parseEpisodes(node,aid,cntEps) {
 	if (!node) return false; // no nodes return;
 	for (var nd = 0; nd < node.length; nd++) { // find the right episode entry
 		if (node[nd].parentNode.nodeName == 'anime') { node = node[nd]; break; }
@@ -783,6 +784,7 @@ function parseEpisodes(node,aid) {
 		var childNode = epNodes[i];
 		var episodeEntry = new CEpisodeEntry(childNode);
 		episodeEntry.animeId = aid;
+		if (cntEps && (episodeEntry.typeChar == 'N' || episodeEntry.typeChar == '')) animes[aid].highestEp++;
 		episodes[episodeEntry.id] = episodeEntry;
 		epOrder.push(episodeEntry.id);
 		parseEpisode(childNode,aid);
@@ -813,7 +815,7 @@ function parseAnimes(node) {
 		var groupNodes = childNode.getElementsByTagName('groups');
 		parseGroups(groupNodes,animeEntry.id); // Parsing Groups
 		var epNodes = childNode.getElementsByTagName('eps');
-		parseEpisodes(epNodes,animeEntry.id); // Parsing Episodes
+		parseEpisodes(epNodes,animeEntry.id,(animeEntry.eps == 0)); // Parsing Episodes
 		animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
 		if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
 	}
