@@ -148,13 +148,15 @@ function prepPageEntity() {
 		var tbNames = ['characterlist','stafflist'];
 		divs = creatordivs;
 	}
+	var ident = 0;
 	for (var i = 0; i < divs.length; i++) {
 		var div = divs[i];
 		var tables = div.getElementsByTagName('table');
 		for (var t = 0; t < tables.length; t++) {
 			if (tbNames.indexOf(tables[t].id) < 0) continue;
-			tables[t].id += '_'+i;
+			tables[t].id += '_'+ident;
 			tableNames.push(tables[t].id);
+			ident++;
 		}
 		div.className += (i > 0 ? ' hide' : '');
 		div.id = 'section_'+i;
