@@ -542,7 +542,7 @@ function parseCustom(node) {
 					mylistEntry = new CMylistEntry(mylistNode);
 					mylist[mylistEntry.fileId] = mylistEntry;
 					var ep = episodes[mylistEntry.episodeId];
-					if (mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
+					if (ep && mylistEntry.seenDate) ep.seenDate = mylistEntry.seenDate;
 					// now do the same thing for related episodes
 					for (var e = 0; e < mylistEntry.relatedEids.length; e++) {
 						var episode = episodes[mylistEntry.relatedEids[e]];
