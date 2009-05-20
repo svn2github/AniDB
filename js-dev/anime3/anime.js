@@ -1360,11 +1360,12 @@ function createFileTable(episode) {
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
 	var odd = 0;
+	var gs = groupFilter.join(',');
 	for (var f = 0; f < episode.files.length; f++) {
 		var file = files[episode.files[f]];
 		if (!file) continue;
-		//alert('file.id: '+file.id+'\nfile.groupId: '+file.groupId+'\ngroupFilter: '+groupFilter+'\nfiltered: '+(groupFilter.indexOf(""+file.groupId) < 0));
-		if (expandedGroups && groupFilter.indexOf(""+file.groupId) < 0) continue;
+		//alert('file.id: '+file.id+'\nfile.groupId: '+file.groupId+'\ngroupFilter: '+gs+'\nfiltered: '+(gs.indexOf(file.groupId) < 0));
+		if (expandedGroups && gs.indexOf(file.groupId) < 0) continue;
 		// Filtering stuff
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
