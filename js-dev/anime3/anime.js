@@ -259,7 +259,7 @@ function parseData(xmldoc) {
 	var uET = new Date() - t2;
 	t2 = new Date();
 	// fetch group data if needed
-	for (var g = 0; g < groupsNeedingExpand.length; g++) {
+	for (var g = 0; g < updateGroupTable.length; g++) {
 		// i hope this is just one group, but you never know
 		var gid = groupsNeedingExpand[g];
 		var a = document.getElementById('href_gid_'+gid);
@@ -445,6 +445,9 @@ function forceGroupVisibilty(vis) {
 					if (!vis) {
 						group.visible = true; // show group files
 						groupFilter.push(group.id);
+						if (group.relatedGroups.length) {
+							for (var gi = 0; gi < group.relatedGroups.length; gi++) groupFilter.push(group.relatedGroups[gi]);
+						}
 					}
 					continue;
 				}
@@ -551,7 +554,7 @@ function expandFilesByGroup() {
 	if (getXML) { // *Need* to fetch the xml so we need to do the following:
 		var req = xhttpRequest(); // #2 Fetch data
 		globalStatus.updateBarWithText('Fetching '+group.name+' episode data...',0,'Loading episode data: ');
-		if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
+		if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+uriObj['aid']+'&eid=all&gid='+gid, parseEpisodeData);
 	}
 }
@@ -1360,7 +1363,8 @@ function createFileTable(episode) {
 	for (var f = 0; f < episode.files.length; f++) {
 		var file = files[episode.files[f]];
 		if (!file) continue;
-		if (expandedGroups && groupFilter.indexOf(file.groupId) < 0) continue;
+		//alert('file.id: '+file.id+'\nfile.groupId: '+file.groupId+'\ngroupFilter: '+groupFilter+'\nfiltered: '+(groupFilter.indexOf(""+file.groupId) < 0));
+		if (expandedGroups && groupFilter.indexOf(""+file.groupId) < 0) continue;
 		// Filtering stuff
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
