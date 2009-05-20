@@ -546,7 +546,7 @@ function parseCustom(node) {
 					// now do the same thing for related episodes
 					for (var e = 0; e < mylistEntry.relatedEids.length; e++) {
 						var episode = episodes[mylistEntry.relatedEids[e]];
-						if (mylistEntry.seenDate && !episode.seenDate) episode.seenDate = mylistEntry.seenDate;
+						if (episode && mylistEntry.seenDate && !episode.seenDate) episode.seenDate = mylistEntry.seenDate;
 					}
 					var group = groups[mylistEntry.groupId];
 					if (group) group.visible = true;
