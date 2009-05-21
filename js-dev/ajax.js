@@ -95,48 +95,48 @@ function xhttpRequestPost(obj, url, handler, data, override, method) {
 function xhttpRequestReadData(obj, handler,method) {
 	if (!obj) { xhttpRequestUpdateStatus('object is null...'); return; }
 	var rootDoc = 'root';
-	//try {
-	if(typeof obj.responseText === 'undefined') { // Checkes if we got XHR object, or its wrapper. Does this check works cross-browser? It should.
-		var xhr = obj.xhr;
-	} else var xhr = obj;
-	switch (xhr.readyState) {
-		case 2: xhttpRequestUpdateStatus('requesting data...',25); break;
-		case 3: xhttpRequestUpdateStatus('receiving data...',50); break;
-		case 4:
-			xhttpRequestUpdateStatus('data transfer completed...',100);
-			switch (xhr.status) {
-				case 0:
-				case 200:
-				case 304:
-					var data = null;
-					if (!method || method == 'xml') {
-						if (window.XMLHttpRequest) data = xhr.responseXML; // Mozilla and likes
-						else { // The original IE implementation
-							var progIDs = [ 'Msxml2.DOMDocument.6.0', 'Msxml2.DOMDocument.3.0']; // MSXML5.0, MSXML4.0 and Msxml2.DOMDocument all have issues
-							for (var i = 0; i < progIDs.length; i++) {
-								try {
-									data = new ActiveXObject(progIDs[i]);
-									data.loadXML(xhr.responseText);
-									break;
-								}
-								catch (ex) {
+	try {
+		if(typeof obj.responseText === 'undefined') { // Checkes if we got XHR object, or its wrapper. Does this check works cross-browser? It should.
+			var xhr = obj.xhr;
+		} else var xhr = obj;
+		switch (xhr.readyState) {
+			case 2: xhttpRequestUpdateStatus('requesting data...',25); break;
+			case 3: xhttpRequestUpdateStatus('receiving data...',50); break;
+			case 4:
+				xhttpRequestUpdateStatus('data transfer completed...',100);
+				switch (xhr.status) {
+					case 0:
+					case 200:
+					case 304:
+						var data = null;
+						if (!method || method == 'xml') {
+							if (window.XMLHttpRequest) data = xhr.responseXML; // Mozilla and likes
+							else { // The original IE implementation
+								var progIDs = [ 'Msxml2.DOMDocument.6.0', 'Msxml2.DOMDocument.3.0']; // MSXML5.0, MSXML4.0 and Msxml2.DOMDocument all have issues
+								for (var i = 0; i < progIDs.length; i++) {
+									try {
+										data = new ActiveXObject(progIDs[i]);
+										data.loadXML(xhr.responseText);
+										break;
+									}
+									catch (ex) {
+									}
 								}
 							}
+						} else if (method == 'text') {
+							data = xhr.responseText;
 						}
-					} else if (method == 'text') {
-						data = xhr.responseText;
-					}
-					if (handler) handler(data, obj);
+						if (handler) handler(data, obj);
+					break;
+					default:
+						alert('There was a problem with the request.\nServer returned: '+xhr.status+': '+xhr.statusText);
 				break;
-				default:
-					alert('There was a problem with the request.\nServer returned: '+xhr.status+': '+xhr.statusText);
+			}
 			break;
 		}
-		break;
+	} catch ( e ) {
+		alert('error: '+ e.description+'\nurl: '+url);
 	}
-  /*} catch ( e ) {
-    alert('Caught Exception: ' + e.description)
-  }*/
 }
 
 /* This function is used to update the status of the Request
