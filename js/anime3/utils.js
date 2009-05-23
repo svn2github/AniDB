@@ -620,6 +620,40 @@ function convertRangeToText(range) {
 
 // GENERAL FUNCTIONS //
 
+/* Replacement functions
+ * @param str String to replace identifiers
+ * @source anime3.formating::convert_input
+ */
+function convert_input(str) {
+	str = str.replace(/\[(p|b|i|u|ul|ol|li)\]/mgi,'<$1>');
+	str = str.replace(/\[\/(p|b|i|u|ul|ol|li)\]/mgi,'</$1>');
+	str = str.replace(/\[([/])?s\]/mgi,'<$1strike>');
+	str = str.replace(/\[([/])?code\]/mgi,'<$1pre>');
+	str = str.replace(/\<p\>/mgi,'');
+	str = str.replace(/\<\/p\>/mgi,'<br />');
+	str = str.replace(/\[br\]/mgi,'<br />');
+	str = str.replace(/\n/mgi,'<br />');
+	str = str.replace(/\<\/li\>\<br \/\>/mgi,'</li>');
+	str = str.replace(/\<\/ul\>\<br \/\>\<br \/\>/mgi,'</ul></br>');
+	str = str.replace(/\<\/ol\>\<br \/\>\<br \/\>/mgi,'</ol></br>');
+	str = str.replace(/\[url=([^\[\]].+?)\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$2</a>');
+	str = str.replace(/\[url\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$1</a>');
+	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
+	return (str);
+}
+/* Function that cleans some input
+ * @param str String to replace identifiers
+ * @source anime3.formating
+ */
+function clean_input(str) {
+	str = str.replace(/\&amp\;/mgi,'&');
+	str = str.replace(/\&lt\;/mgi,'<');
+	str = str.replace(/\&gt\;/mgi,'>');
+	str = str.replace(/\<br\>/mgi,'\n');
+	str = str.replace(/\<br \/\>/mgi,'\n');
+	return (str);
+}
+
 /* Function that alerts the user for errors
  * @param func Name of the function
  * @param process 

@@ -397,7 +397,11 @@ function showResults(single,filter) {
 		} else {
 			ck = createButton(ckNames[curPageID]['single'],null,false,desc.id,'radio',ckNames[curPageID]['func']);
 		}
-		if (ids.length == 1) ck.checked = true;
+		if (ids.length == 1) {
+			ck.checked = true;
+			newguiseinput.value = desc.id; 
+			guiseinput.value = desc.title;
+		}
 		createCell(row, 'check', ck);
 		if (!HIDETHUMBNAILS) {
 			// image
