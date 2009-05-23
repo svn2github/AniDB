@@ -92,10 +92,10 @@ function xhttpRequestPost(obj, url, handler, data, override, method) {
  * @param handler The function that will handle the given obj
  * @return void
  */
-function xhttpRequestReadData(obj, handler,method) {
+function xhttpRequestReadData(obj, handler, method) {
 	if (!obj) { xhttpRequestUpdateStatus('object is null...'); return; }
 	var rootDoc = 'root';
-	try {
+//	try {
 		if(typeof obj.responseText === 'undefined') { // Checkes if we got XHR object, or its wrapper. Does this check works cross-browser? It should.
 			var xhr = obj.xhr;
 		} else var xhr = obj;
@@ -134,9 +134,9 @@ function xhttpRequestReadData(obj, handler,method) {
 			}
 			break;
 		}
-	} catch ( e ) {
-		alert('error: '+ e.description+'\nurl: '+url);
-	}
+/*	} catch ( e ) {
+		alert('error: '+ e.description);
+	}*/
 }
 
 /* This function is used to update the status of the Request
