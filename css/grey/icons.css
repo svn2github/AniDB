@@ -37,31 +37,31 @@ background-image: url(../icons/grey/ask2.gif);
 *.i_ep_vote,
 *.i_vote
 {
-background-image: url(images/anidb_vote.gif);
+background-image: url(../grey/images/anidb_vote.gif);
 }
 *.i_group_revote,
 *.i_ep_revote,
 *.i_revote
 {
-background-image: url(images/anidb_revote.gif);
+background-image: url(../grey/images/anidb_revote.gif);
 }
 *.i_crc_no
 {
-background-image: url(images/anidb_crc_no.gif);
+background-image: url(../grey/images/anidb_crc_no.gif);
 }
 *.i_crc_yes
 {
-background-image: url(images/anidb_crc_yes.gif);
+background-image: url(../grey/images/anidb_crc_yes.gif);
 }
 *.i_crc_unv
 {
-background-image: url(images/anidb_crc_unv.gif);
+background-image: url(../grey/images/anidb_crc_unv.gif);
 }
 *.i_av_yes
 {
-background-image: url(images/anidb_av_yes.gif);
+background-image: url(../grey/images/anidb_av_yes.gif);
 }
 *.i_revote
 {
-background-image: url(images/anidb_revote.gif);
+background-image: url(../grey/images/anidb_revote.gif);
 }

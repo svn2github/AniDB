@@ -2613,7 +2613,8 @@ padding-left: 40% -220px;
 margin: 0;
 padding-left: 4px;
 }
-div.animetagmod_all tr #tooltip
+div.animetagmod_all tr #tooltip,
+div.animetag_all tr #tooltip
 {
 margin-left: 0px;
 }

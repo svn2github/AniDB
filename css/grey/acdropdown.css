@@ -3,6 +3,7 @@
 background-color:transparent;
 background-image: url(images/bg_1.gif);
 border:1px solid #85878C;
+border-top: none;
 color: white;
 }
 #layout-search ul.acdropdown li:nth-child(2n+1)
