@@ -79,7 +79,8 @@ span.g_odd,
 #layout-content div.animeatt_reviews div.review > h4,
 #layout-content div.animeatt_reviews div.review div.text,
 div.quotebody div.quote div.g_odd,
-#layout-main div.chartags_all div.addbox div.tag-column h5
+#layout-main div.chartags_all div.addbox div.tag-column h5,
+#layout-main div.quotebody div.quoteof
 {
 background-color: hsla(0, 0%, 0%, 0.4);
 }
@@ -181,7 +182,7 @@ input#addfilem\.search:hover,
 *.button:hover,
 *.confirmButton:hover,
 button:hover,
-*.submit:hover,
+*.submit:not(div):hover,
 input[type="submit"]:hover,
 input[type="button"]:hover
 {
@@ -331,4 +332,11 @@ border-bottom: 2px solid #008800;
 {
 color: #ff6000;
 background-image: url(../grey/images/whitepixel.png);
+}
+div.spoiler,
+#layout-main div.cmt_entries dl.profile,
+#layout-main div.forum ul.topiclist dd,
+#layout-main div.quotebody
+{
+border-color: grey;
 }

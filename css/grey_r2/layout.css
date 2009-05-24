@@ -56,13 +56,14 @@ html,
 font-size: 10px;
 line-height: 1.2;
 font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
-color: white
+color: white;
 }
 div.genren_all ul#cattree li #tooltip
 {
 margin-left: 50px;
 }
-div.animetagmod_all tr #tooltip
+div.animetagmod_all tr #tooltip,
+div.animetag_all tr #tooltip
 {
 margin-left: 0px;
 }
@@ -91,8 +92,8 @@ margin-left: 0.3em;
 #results_submit,
 input#addfilem\.next,
 input#addfilem\.search,
-form input[type="submit"],
-form input[type="button"],
+input[type="submit"],
+input[type="button"],
 *.button,
 button,
 *.confirmButton
@@ -409,4 +410,23 @@ a.filter
 {
 font-size: 100%;
 color: #a1a1a1;
+}
+div.spoiler,
+#layout-main div.quotebody
+{
+border-style: dashed;
+border-width: 1px;
+}
+#layout-main div.cmt_entries dl.profile
+{
+border-right-style: dashed;
+}
+#layout-main div.forum ul.topiclist dd
+{
+border-left-style: dashed;
+}
+div.dreq_form textarea,
+#layout-main div.forum div.quickreply textarea
+{
+width:50%;
 }
