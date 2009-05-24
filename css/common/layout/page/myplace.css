@@ -121,3 +121,10 @@
 {
 	width:9em;
 }
+
+#layout-main div.userpage_all div.userprefs div.block
+{
+	float:left;
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
