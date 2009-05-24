@@ -124,7 +124,8 @@
 
 #layout-main div.userpage_all div.userprefs div.block
 {
-	float:left;
+	display:inline-block;
 	margin-left: 1em;
 	margin-bottom: 1em;
+	width:auto;
 }
