@@ -399,8 +399,11 @@ function showResults(single,filter) {
 		}
 		if (ids.length == 1) {
 			ck.checked = true;
-			newguiseinput.value = desc.id; 
-			guiseinput.value = desc.title;
+			if (curPageID == 'addcreator' || curPageID == 'addcharacter')
+			{
+				newguiseinput.value = desc.id; 
+				guiseinput.value = desc.title;
+			}
 		}
 		createCell(row, 'check', ck);
 		if (!HIDETHUMBNAILS) {
