@@ -639,6 +639,7 @@ function convert_input(str) {
 	str = str.replace(/\[url=([^\[\]].+?)\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$2</a>');
 	str = str.replace(/\[url\]([^\:\\\/\[\]].+?)\[\/url\]/mgi,'<a href="$1">$1</a>');
 	str = str.replace(/\[img\]([^\[\]].+?)\[\/img\]/mgi,'<img src="$1" alt="" />');
+	str = str.replace(/\[spoiler\]([^\[\]].+?)\[\/spoiler\]/mgi,'');
 	return (str);
 }
 /* Function that cleans some input
