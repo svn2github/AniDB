@@ -930,11 +930,11 @@ function CInfo(node) {
 		var airdate = node.getAttribute('airdate');
 		var enddate = node.getAttribute('enddate');
 		var airDateYear = endDateYear = '?';
-		if (airdate != '0') {
+		if (airdate && airdate != '0') {
 			this.airdate = javascriptDate(airdate);
 			airDateYear = this.airdate.getFullYear();
 		}
-		if (enddate != '0') {
+		if (enddate && enddate != '0') {
 			this.enddate = javascriptDate(enddate);
 			endDateYear = this.enddate.getFullYear();
 		}
