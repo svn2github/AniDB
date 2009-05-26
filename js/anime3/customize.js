@@ -929,6 +929,7 @@ function CInfo(node) {
 	} else {
 		var airdate = node.getAttribute('airdate');
 		var enddate = node.getAttribute('enddate');
+		if (enddate == '0') enddate = null;
 		if (airdate && enddate) {
 			this.airdate = javascriptDate(airdate);
 			this.enddate = javascriptDate(enddate);
