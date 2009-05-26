@@ -420,6 +420,8 @@ function showResults(single,filter) {
 		var existTitles = desc.titles.length;
 		var existMatch = false;
 		var altTitleSpan = null;
+		// hack for ' converted to ` conversion
+		if (searchString.indexOf("'") >= 0) searchString = searchString.replace(/\'/mgi,"`");
 		if (existTitles) {
 			altTitleSpan = document.createElement('ul');
 			altTitleSpan.className = 'alt_titles';
