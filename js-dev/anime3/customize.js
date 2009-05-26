@@ -929,15 +929,14 @@ function CInfo(node) {
 	} else {
 		var airdate = node.getAttribute('airdate');
 		var enddate = node.getAttribute('enddate');
-		if (airdate != '0') airdate = '?';
-		else {
+		var airDateYear = endDateYear = '?';
+		if (airdate != '0') {
 			this.airdate = javascriptDate(airdate);
-			var airDateYear = this.airdate.getFullYear();
+			airDateYear = this.airdate.getFullYear();
 		}
-		if (enddate != '0') enddate = '?';
-		else {
+		if (enddate != '0') {
 			this.enddate = javascriptDate(enddate);
-			var endDateYear = this.enddate.getFullYear();
+			endDateYear = this.enddate.getFullYear();
 		}
 		this.year = (airDateYear == endDateYear ? airDateYear : airDateYear + '-' +endDateYear);
 	}
