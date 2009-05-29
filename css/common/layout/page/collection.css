@@ -2,3 +2,14 @@
 {
 	display:none;
 }
+
+#layout-main div.collection_all div.tracks div.medium td.trackno,
+#layout-main div.collection_all div.tracks div.medium td.length
+{
+	width: 4em;
+}
+
+#layout-main div.collection_all div.tracks div.medium th.name
+{
+	width: 45%;
+}
