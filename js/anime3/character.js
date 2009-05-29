@@ -681,6 +681,15 @@ function changeLayout() {
 				magicRows['waist'].style.display = 'none';
 				magicRows['hips'].style.display = 'none';
 				break;
+			case 4: // vessel
+				magicRows['gender'].style.display = 'none';
+				magicRows['bloodtype'].style.display = 'none';
+				magicRows['height'].style.display = '';
+				magicRows['weight'].style.display = '';
+				magicRows['bust'].style.display = 'none';
+				magicRows['waist'].style.display = 'none';
+				magicRows['hips'].style.display = 'none';
+				break;
 			default: // organization and future types?
 				magicRows['gender'].style.display = 'none';
 				magicRows['bloodtype'].style.display = 'none';
