@@ -304,11 +304,17 @@ tr + tr td,
 	color:#888888;
 }
 
+#layout-main div div.addrelform table tr.header
+{
+	background-color: #777777;
+}
+
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4
 {
 	background-color: #000000;
 }
+
 
 #layout-main a.filter
 {
