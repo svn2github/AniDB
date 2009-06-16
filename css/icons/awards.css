@@ -2,9 +2,10 @@
 #mainichi_animation { background-image: url(../icons/awards/anidb_mainichi_animation.png); }
 #mainichi_oofuji_noburou { background-image: url(../icons/awards/anidb_mainichi_oofuji_noburou.png); }
 
-/* Anime list thumbs */
+/* Anime list icons */
 *.i_award_mainichi { background-image: url(../icons/awards/anidb_mainichi.gif); }
 *.i_award_top10 { background-image: url(../icons/awards/anidb_top10.gif); }
+*.i_award_arc2000 { background-image: url(../icons/awards/anidb_arc2000award.gif); }
 *.i_award_arc2001 { background-image: url(../icons/awards/anidb_arc2001award.gif); }
 *.i_award_arc2002 { background-image: url(../icons/awards/anidb_arc2002award.gif); }
 *.i_award_arc2003 { background-image: url(../icons/awards/anidb_arc2003award.gif); }
