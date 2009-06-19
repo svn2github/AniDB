@@ -36,12 +36,16 @@
 #layout-main div.userpage_all div.userdetails,
 #layout-main div.userpage_all div.userprefs,
 #layout-main div.userpage_all div.clubs,
-#layout-main div.userpage_all div.signature,
-#layout-main div.userpage_all div.userdetails div.desc
+#layout-main div.userpage_all div.signature
 {
 	clear:none;
 	margin-left:19em;
 	margin-right:12.5em;
+}
+
+#layout-main div.userpage_all div.userdetails div.desc
+{
+	clear:none;
 }
 
 #layout-main div.userpage_all div.userdetails .block > div
