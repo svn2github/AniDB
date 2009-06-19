@@ -1130,7 +1130,10 @@ function changeMylistState(action,node) {
 	var file = files[fid];
 	var eids = new Array();
 	eids[file.episodeId] = 1;
-	for (var eid in file.epRelations) eids[eid] = 1;
+	for (var eid in file.epRelations) {
+		if (typeof file.epRelations[eid] == "function") continue;
+		eids[eid] = 1;
+	}
 	for (var eid in eids) {
 		if (!eids[eid]) continue;
 		var row = document.getElementById('e'+eid+'f'+file.id);
