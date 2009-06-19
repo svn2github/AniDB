@@ -1,9 +1,9 @@
 (C) 2009 nicklaich inspired by EXP
-Version: 1 (18.06.2009)
+Version: 2 (19.06.2009)
 
 Make TXT file with ed2k link for each file.
-FileName is "<AnimeName> - <EpNo> [<Group>][<CRC32>].<ext>".
-Anime and group names comes "as is" (with spaces and '|' symbols).
+FileName is "AnimeName - EpNo [Group][CRC32].ext".
+Warning: Anime and group names comes "as is" (with spaces and symbols like ':?*/|\' etc).
 Lines separated by 0Dh 0Ah symbols.
 Generic files and files without CRC32 are not listed.
 
