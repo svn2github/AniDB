@@ -3,7 +3,10 @@ package gui;
 import aniAdd.misc.Misc;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,8 +19,10 @@ import java.util.TreeMap;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
+import javax.swing.JTree;
 import javax.swing.TransferHandler;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.tree.DefaultMutableTreeNode;
 import processing.Mod_EpProcessing;
 import processing.TagSystem;
 
@@ -256,7 +261,24 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         }
     }
 
-    
+    private void CopyTree(JTree tree){
+        Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String cmdTree = CopyTree((DefaultMutableTreeNode)tree.getModel().getRoot(), 0);
+        
+        cb.setContents(new StringSelection(cmdTree), null);
+    }
+    private String CopyTree(DefaultMutableTreeNode node, int depth){
+        String treeStr="";
+        do {
+            for(int i=0; i<depth;i++) treeStr += "  ";
+            treeStr += (String)node.getUserObject() + "\n";
+            if(node.getChildCount()!=0) treeStr += CopyTree((DefaultMutableTreeNode)node.getChildAt(0), depth+1);
+        } while((node = node.getNextSibling()) != null);
+        return treeStr;
+    }
+
+
+
     protected abstract void UpdateProgressBars();
     protected abstract void UpdateStatusLabels();    
     protected abstract void AddFiles(ArrayList<File> files);
@@ -267,6 +289,8 @@ public abstract class GUIComponents extends javax.swing.JPanel {
     protected abstract void ToggleStorageType(int type);
     
     protected abstract void ToggleProcessing(String type);
+
+    protected abstract void CopyEvents();
 
 
     /** This method is called from within the constructor to
@@ -692,10 +716,25 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         pnl_Logs_Ctrls.setOpaque(false);
 
         btn_CopyCmdTree.setText("Copy Cmd Log Tree");
+        btn_CopyCmdTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CopyCmdTreeActionPerformed(evt);
+            }
+        });
 
         btn_CopyLogTree.setText("Copy Event Log Tree");
+        btn_CopyLogTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CopyLogTreeActionPerformed(evt);
+            }
+        });
 
         btn_CopyDebugMsgs.setText("Copy Debug Messages");
+        btn_CopyDebugMsgs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CopyDebugMsgsActionPerformed(evt);
+            }
+        });
 
         btn_ClearLogs.setText("Clear Logs");
 
@@ -1558,6 +1597,16 @@ public abstract class GUIComponents extends javax.swing.JPanel {
     private void ptn_UseTaggingSystemFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ptn_UseTaggingSystemFileActionPerformed
         SaveToMem("RenameTypeAniDBFileName", ptn_UseAniDBFN.isSelected());
 }//GEN-LAST:event_ptn_UseTaggingSystemFileActionPerformed
+    private void btn_CopyCmdTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CopyCmdTreeActionPerformed
+        CopyTree(trvw_Cmd);
+    }//GEN-LAST:event_btn_CopyCmdTreeActionPerformed
+    private void btn_CopyLogTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CopyLogTreeActionPerformed
+        CopyTree(trvw_Event);
+    }//GEN-LAST:event_btn_CopyLogTreeActionPerformed
+
+    private void btn_CopyDebugMsgsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CopyDebugMsgsActionPerformed
+        CopyEvents();
+    }//GEN-LAST:event_btn_CopyDebugMsgsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btn_AddFiles;

@@ -96,12 +96,7 @@ public class AniAdd implements IAniAdd{
     class EventHandler implements ComListener{
         public void AddEventHandler(Module mod){ mod.AddComListener(this);}
         public void EventHandler(ComEvent comEvent) {
-            System.out.print("Event: " + ((Module)comEvent.getSource()).ModuleName() + " ");
-            System.out.print(comEvent.Type());
-            for (int i=0; i<comEvent.ParamCount(); i++) {
-                System.out.print(" " + comEvent.Params(i));
-            }
-            System.out.println("");
+            System.out.println("Event: " + comEvent.toString());
         }
     }
 
@@ -109,15 +104,9 @@ public class AniAdd implements IAniAdd{
     //Com System
 	private ArrayList<ComListener> listeners = new ArrayList<ComListener>();
     protected void ComFire(ComEvent comEvent){
-        System.out.print("AniAdd Event: ");
-        for (int i=0; i<comEvent.ParamCount(); i++) {
-            System.out.print(" " + comEvent.Params(i));
-        }
-        System.out.println("");
+        System.out.println("AniAdd Event: " + comEvent.toString());
+        for (ComListener listener : listeners) listener.EventHandler(comEvent);
 
-        for (ComListener listener : listeners) {
-            listener.EventHandler(comEvent);
-        }
     }
 	public void AddComListener(ComListener comListener){ listeners.add(comListener); }
 	public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }

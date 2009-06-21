@@ -7,8 +7,6 @@ package gui;
 
 
 
-import aniAdd.Communication.ComEvent;
-import aniAdd.Communication.ComListener;
 import java.awt.Image;
 import javax.swing.table.DefaultTableModel;
 import processing.Mod_EpProcessing;

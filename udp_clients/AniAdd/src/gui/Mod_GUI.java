@@ -6,6 +6,9 @@ import aniAdd.Module;
 import aniAdd.misc.Misc;
 import aniAdd.misc.Mod_Memory;
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +29,8 @@ import udpApi.Query;
 public class Mod_GUI extends GUIComponents implements Module {
     //private Thread tLblupdater;
     private LabelUpdater labelUpdater = new LabelUpdater();
-    
+
+    private ArrayList<ComEvent> comEvents = new ArrayList<ComEvent>();
     private HashMap<Integer, Integer> fileId2LogItemId = new HashMap<Integer, Integer>();
     private Mod_EpProcessing epProc;
     private Mod_Memory mem;
@@ -318,6 +322,15 @@ public class Mod_GUI extends GUIComponents implements Module {
         return (long)Math.max(etaFile, etaCmd);
     }
 
+    protected void CopyEvents() {
+        Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String eventStr="";
+        
+        for (ComEvent comEvent : comEvents) eventStr += comEvent.toString() + "\n";
+
+        cb.setContents(new StringSelection(eventStr), null);
+    }
+
     class LabelUpdater implements Runnable{
         Thread t;
 
@@ -466,6 +479,7 @@ public class Mod_GUI extends GUIComponents implements Module {
                        comEvent.Type()==ComEvent.eType.Fatal){
                         DisplayEvent((String)comEvent.Params(0), comEvent.Type());
                     }
+                    comEvents.add(comEvent);
                 }
             };
             module.AddComListener(comListener);

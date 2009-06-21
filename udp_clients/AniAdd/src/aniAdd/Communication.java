@@ -54,6 +54,15 @@ public interface Communication {
 		public Object Params(int i) { return params.get(i); }
         public int ParamCount(){ return params.size(); }
 
+        public String toString(){
+            String str;
+            str = getSource() instanceof Module?(((Module)getSource()).ModuleName() + " " + Type()):"";
+            for (int i=0; i<ParamCount(); i++) {
+                str += " " + Params(i).toString();
+            }
+            return str;
+        }
+        
 		public enum eType{Information, Manipulation, Warning, Error, Fatal}
 	}
 }
