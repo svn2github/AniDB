@@ -118,16 +118,3 @@
 	margin-left: 1em;
 	margin-right: 1em;
 }
-
-/*temporary*/
-#layout-main div.anime_all div.collections div.collection
-{
-	height:100px;
-	width:100px;
-}
-
-#layout-main div.anime_all div.collections div.collection,
-#layout-main div.anime_all div.collections div.collection *
-{
-	display: inline-table;
-}

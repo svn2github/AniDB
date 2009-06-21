@@ -51,8 +51,12 @@
 	width:100px;
 }
 
-*.g_block,
-*.g_block *
+*.g_block
 {
 	display: inline-table;
+}
+
+*.g_block *
+{
+	display: block;
 }
