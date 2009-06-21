@@ -203,8 +203,7 @@ public abstract class GUIComponents extends javax.swing.JPanel {
     }
 
     private void attachDragAndDrop(JComponent c) {
-        if(c instanceof JList)
-            ((JList)c).setDragEnabled(false);
+        if(c instanceof JList) ((JList)c).setDragEnabled(false);
         c.setTransferHandler(new FSTransfer());
     }
     private static List<File> transferableToFileList(Transferable t){
@@ -239,14 +238,14 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         static final long serialVersionUID=0;
         public boolean importData(JComponent comp, Transferable t){
             final List<File> files=transferableToFileList(t);
+            final ArrayList<File> allFiles = new ArrayList<File>();
             if(files!=null){
                 new Runnable() {
                     public void run(){
-                        ArrayList<File> files = new ArrayList<File>();
-                        for(File sf:files) files.addAll(Misc.getFiles(sf, Mod_EpProcessing.supportedFiles));
+                        for(File sf:files) allFiles.addAll(Misc.getFiles(sf, Mod_EpProcessing.supportedFiles));
                     }
                 }.run();
-                
+                AddFiles(allFiles);
                 UpdateStatusLabels();
                 UpdateProgressBars();
                 tbl_Files.updateUI();

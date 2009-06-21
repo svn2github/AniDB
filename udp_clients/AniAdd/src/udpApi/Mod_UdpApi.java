@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import aniAdd.misc.ICallBack;
+import aniAdd.misc.Misc;
 
 public class Mod_UdpApi  implements Module{
 	public final int MAXRETRIES = 3;
@@ -238,6 +239,7 @@ public class Mod_UdpApi  implements Module{
 
 	private class Idle implements Runnable{
 	    private int replysPending;
+        private long authRetry;
 		public int getReplysPending() {return replysPending;}
 		
 		public void run() {
@@ -266,6 +268,15 @@ public class Mod_UdpApi  implements Module{
                         }
                     }
                     this.replysPending=replysPending;
+                }
+
+                if(aniDBAPIDown && authRetry==0){
+                    authRetry = System.currentTimeMillis() + 5*60*1000;
+                    Log(ComEvent.eType.Warning, "API down. Connection retry on "+ Misc.longToTime(authRetry));
+                }
+                if(auth && aniDBAPIDown && authRetry!=0 && (authRetry - System.currentTimeMillis()<0)){
+                    authRetry=0;
+                    authenticate();
                 }
 
                 
@@ -456,6 +467,8 @@ public class Mod_UdpApi  implements Module{
                 queryCmd(query.getCmd());
                 break;
 
+            case 600:
+            case 601:
             case 602:
                 aniDBAPIDown = true;
                 connected = false;//TODO
