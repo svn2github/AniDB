@@ -58,5 +58,5 @@
 
 *.g_block *
 {
-	display: block;
+	display: table-row;
 }
