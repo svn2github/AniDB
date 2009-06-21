@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package aniAdd;
 
 import aniAdd.Communication.ComEvent;
@@ -12,8 +7,6 @@ import gui.Mod_GUI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import processing.Mod_EpProcessing;
 import udpApi.Mod_UdpApi;
 

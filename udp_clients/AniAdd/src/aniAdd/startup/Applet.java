@@ -75,8 +75,7 @@ public class Applet extends JApplet {
                 autopass = cookies.get("adbautopass");
                 if (username == null) username = cookies.get("adbautouser");
                 if (username == null || (session == null && autopass == null)) throw new NullPointerException();
-            } catch(Exception e) {
-            }
+            } catch(Exception e) {}
         }
 
         if(username==null || username.isEmpty() || password == null || password.isEmpty()){
@@ -87,7 +86,7 @@ public class Applet extends JApplet {
         aniAdd.AddComListener(new Communication.ComListener() {
             public void EventHandler(ComEvent comEvent) {
                 if(comEvent.Type() == ComEvent.eType.Information){
-                    if((Module.eModState)comEvent.Params(0)== Module.eModState.Initialized){
+                    if((Module.eModState)comEvent.Params(0) == Module.eModState.Initialized){
                         Initialize();
                     }
                 }

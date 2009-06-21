@@ -39,7 +39,7 @@ public class Mod_UdpApi  implements Module{
     
     public ArrayList<Query> Queries() {return queries;}
 
-	private ArrayList<Cmd> cmdToSend;
+	private final ArrayList<Cmd> cmdToSend;
     
 	private Long lastDelayPackageMills;
 
@@ -131,7 +131,7 @@ public class Mod_UdpApi  implements Module{
         	//TODO ServerReply
         }
 
-        Log(ComEvent.eType.Information, "Cmd", (!reply.Identifier().equals("[SERVER]")) ? reply.QueryId() : reply.QueryId() ^ -1, false);
+        Log(ComEvent.eType.Information, "Reply", (!reply.Identifier().equals("[SERVER]")) ? reply.QueryId() : reply.QueryId() ^ -1, false);
         deliverReply(reply);		
 	}
 	private void deliverReply(Reply reply) {
@@ -176,6 +176,13 @@ public class Mod_UdpApi  implements Module{
         cmd.setArgs("user", userName.toLowerCase());
         cmd.setArgs("protover", Integer.toString(PROTOCOLVER), "client", CLIENTTAG.toLowerCase(), "clientver", Integer.toString(CLIENTVER));
         cmd.setArgs("nat", "1", "enc", "UTF8");
+        
+        synchronized (cmdToSend) {
+            for(int i = cmdToSend.size()-1;i >= 0 ;i--) {
+                if(cmdToSend.get(i).Action().equals("AUTH")) cmdToSend.remove(i);
+            }
+        }
+        
         queryCmd(cmd);
         return true;
 	}
@@ -196,7 +203,7 @@ public class Mod_UdpApi  implements Module{
             return;
         }
 
-        synchronized (queries) {
+        synchronized (cmdToSend) {
         	cmdToSend.add(cmd);
 		}
         
@@ -287,45 +294,43 @@ public class Mod_UdpApi  implements Module{
 	private class Send implements Runnable{		
 		public void run() {
             byte[] cmdToSendBin;
-            boolean cmdReordered;
+            boolean cmdReordered = false;
             long now;
 
             while(cmdToSend.size() > 0 && connected) {
                 now = System.currentTimeMillis();
                 
-                if(idleClass.getReplysPending() < 3 || !isAuthed) {
-                    
-                    if((!cmdToSend.get(0).LoginReq() || isAuthed) &&
-                     (NODELAY.contains(cmdToSend.get(0).Action()) || lastDelayPackageMills == null || (now - lastDelayPackageMills) > 2200)) {
-                        //Cmd doesn't need login or client is logged in and is allowed to send
-                        //send cmds from top to bottom
+                synchronized (cmdToSend){
+                    if(idleClass.getReplysPending() < 3 || !isAuthed) {
 
-                        cmdToSendBin = TransformCmd(cmdToSend.get(0));
-                        System.out.println("API Send:"+cmdToSend.get(0).toString(session));
-                        try {
-							com.send(new DatagramPacket(cmdToSendBin, cmdToSendBin.length, aniDBIP, ANIDBAPIPORT));
-						} catch (IOException e) {e.printStackTrace();}
-                        //Debug.Print("Send: " + cmdToSend[0].ToString(session).Replace("\n", " # "));
+                        if((!cmdToSend.get(0).LoginReq() || isAuthed) &&
+                         (NODELAY.contains(cmdToSend.get(0).Action()) || lastDelayPackageMills == null || (now - lastDelayPackageMills) > 2200)) {
+                            //Cmd doesn't need login or client is logged in and is allowed to send
+                            //send cmds from top to bottom
 
-                        if(!NODELAY.contains(cmdToSend.get(0).Action())) {
-                            lastDelayPackageMills = now;
-                        }
+                            cmdToSendBin = TransformCmd(cmdToSend.get(0));
+                            System.out.println("API Send:"+cmdToSend.get(0).toString(session));
+                            try {
+                                com.send(new DatagramPacket(cmdToSendBin, cmdToSendBin.length, aniDBIP, ANIDBAPIPORT));
+                            } catch (IOException e) {e.printStackTrace();}
+                            //Debug.Print("Send: " + cmdToSend[0].ToString(session).Replace("\n", " # "));
 
-                        synchronized (cmdToSend){
-                        	cmdToSend.remove(0); 
-                        }
+                            if(!NODELAY.contains(cmdToSend.get(0).Action())) {
+                                lastDelayPackageMills = now;
+                            }
 
-                    } else if(auth) {
-                        //Cmd needs login but client is not connected OR Cmd needs delay which has not yet passed
-                        //Move command without (login req./delay req.) to top
+                            cmdToSend.remove(0);
 
-                        cmdReordered = false;
-                        boolean r1, r2, n1, n2, magic;
-                        r1 = cmdToSend.get(0).LoginReq();
-                        n1 = NODELAY.contains(cmdToSend.get(0).Action());
+                        } else if(auth) {
+                            //Cmd needs login but client is not connected OR Cmd needs delay which has not yet passed
+                            //Move command without (login req./delay req.) to top
 
-                        if((!isAuthed && r1) || !n1) {
-                            synchronized (cmdToSend) {
+                            cmdReordered = false;
+                            boolean r1, r2, n1, n2, magic;
+                            r1 = cmdToSend.get(0).LoginReq();
+                            n1 = NODELAY.contains(cmdToSend.get(0).Action());
+
+                            if((!isAuthed && r1) || !n1) {
                                 for(int i = 0;i < cmdToSend.size();i++) {
                                     r2 = cmdToSend.get(0).LoginReq();
                                     n2 = NODELAY.contains(cmdToSend.get(0).Action());
@@ -343,12 +348,12 @@ public class Mod_UdpApi  implements Module{
                                     }
                                 }
                             }
-                            if(cmdReordered) continue;
+
                         }
                     }
                 }
 
-                try {Thread.sleep(200);} catch (Exception exception) {}
+                if(!cmdReordered) try {Thread.sleep(200);} catch (Exception exception) {}
             }
 			
 		}
@@ -471,7 +476,7 @@ public class Mod_UdpApi  implements Module{
             case 601:
             case 602:
                 aniDBAPIDown = true;
-                connected = false;//TODO
+                //connected = false;//TODO
                 break;
         }
     	

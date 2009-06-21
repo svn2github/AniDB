@@ -17,6 +17,12 @@ public class MultiKeyDict<C, K, V> {
 		}
 	}
 
+    public void clear() {
+		for (int i = 0; i < keyMapper.count(); i++) {
+			dict.get(i).clear();
+		}
+    }
+
 
 	public V get(C cat, K key){
 		return dict.get(keyMapper.getCatIndex(cat)).get(key);

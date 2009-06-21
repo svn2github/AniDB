@@ -52,6 +52,12 @@ public class Mod_EpProcessing implements Module {
         index2Id = new ArrayList<Integer>();
     }
 
+    public void ClearFiles() {
+        index2Id.clear();
+        files.clear();
+        Log(ComEvent.eType.Information, eComType.FileCountChanged);
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Processing"> 
     private void processEps() {
         while(isPaused) try {Thread.sleep(100);} catch (InterruptedException ex) {}
@@ -414,7 +420,7 @@ public class Mod_EpProcessing implements Module {
 
         for (File cf : newFiles) {
             if (files.contains("Path", cf.getAbsolutePath())) {
-                //continue;
+                continue;
             }
 
             FileInfo fileInfo = new FileInfo(cf, lastFileId);

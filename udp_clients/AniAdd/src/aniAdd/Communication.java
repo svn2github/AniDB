@@ -5,6 +5,7 @@
 
 package aniAdd;
 
+import aniAdd.misc.Misc;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.EventObject;
@@ -30,6 +31,7 @@ public interface Communication {
 	}
 
 	public static class ComEvent extends EventObject{
+        long createdOn;
 		eType type;
 		ArrayList<Object> params;
 
@@ -48,7 +50,10 @@ public interface Communication {
 			this(source);
 			this.type = type;
 		}
-		private ComEvent(Object source) { super(source); }
+		private ComEvent(Object source) { 
+            super(source);
+            createdOn = System.currentTimeMillis();
+        }
 
 		public eType Type(){ return type; }
 		public Object Params(int i) { return params.get(i); }
@@ -56,13 +61,13 @@ public interface Communication {
 
         public String toString(){
             String str;
-            str = getSource() instanceof Module?(((Module)getSource()).ModuleName() + " " + Type()):"";
+            str = Misc.longToTime(createdOn) + ": " + (getSource() instanceof Module?(((Module)getSource()).ModuleName() + " " + Type()):"");
             for (int i=0; i<ParamCount(); i++) {
                 str += " " + Params(i).toString();
             }
             return str;
         }
         
-		public enum eType{Information, Manipulation, Warning, Error, Fatal}
+		public enum eType{Debug, Information, Manipulation, Warning, Error, Fatal}
 	}
 }

@@ -68,6 +68,8 @@ public abstract class GUIComponents extends javax.swing.JPanel {
     protected void InitDefaults(){
         chck_MarkWatched.setSelected((Boolean)LoadFromMem("SetWatched", true));
         chck_AddToML.setSelected((Boolean)LoadFromMem("AddToMyList", true));
+        chck_MarkWatched.setEnabled(chck_AddToML.isSelected());
+
         chck_RenameMoveFiles.setSelected((Boolean)LoadFromMem("RenameFiles", false));
         cmb_Storage.setSelectedIndex((Integer)LoadFromMem("SetStorageType", 1));
 
@@ -154,6 +156,13 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         }
     }
 
+    protected void LockDown(){
+        btn_Start.setEnabled(false);
+        btn_AddFiles.setEnabled(false);
+        btn_AddFolders.setEnabled(false);
+        setTransferHandler(null);
+    }
+
     protected void AddPaths(boolean File) {
         JFileChooser FC = new javax.swing.JFileChooser();
         if (File) FC.setFileSelectionMode(JFileChooser.FILES_ONLY);  else  FC.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -198,10 +207,14 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         lbl_TimeRemaining.setText("Time remaining: " + Misc.longToTime(eta));
     }
     
-    protected void ProcessingDone(){
+    protected void FileProcessingDone(){
         btn_Start.setText("Start");
     }
 
+    protected void EpProcessingDone(){
+        btn_Clear.setVisible(true);
+    }
+    
     private void attachDragAndDrop(JComponent c) {
         if(c instanceof JList) ((JList)c).setDragEnabled(false);
         c.setTransferHandler(new FSTransfer());
@@ -281,6 +294,7 @@ public abstract class GUIComponents extends javax.swing.JPanel {
     protected abstract void UpdateProgressBars();
     protected abstract void UpdateStatusLabels();    
     protected abstract void AddFiles(ArrayList<File> files);
+    protected abstract void ClearFiles();
     
     protected abstract void ToggleMLCmd(boolean doAction);
     protected abstract void ToggleFileRename(boolean doAction);
@@ -330,9 +344,12 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         txt_Storage = new gui.components.JHintTextArea();
         scrl_txt_Other = new javax.swing.JScrollPane();
         txt_Other = new gui.components.JHintTextArea();
+        pnl_StartClear = new javax.swing.JPanel();
+        btn_Clear = new javax.swing.JButton();
+        btn_Start = new javax.swing.JButton();
+        pnl_AddMedia = new javax.swing.JPanel();
         btn_AddFiles = new javax.swing.JButton();
         btn_AddFolders = new javax.swing.JButton();
-        btn_Start = new javax.swing.JButton();
         tp_Logs = new javax.swing.JPanel();
         spnl_Logs = new javax.swing.JSplitPane();
         scrpn_trvw_Cmd = new javax.swing.JScrollPane();
@@ -343,7 +360,6 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         btn_CopyCmdTree = new javax.swing.JButton();
         btn_CopyLogTree = new javax.swing.JButton();
         btn_CopyDebugMsgs = new javax.swing.JButton();
-        btn_ClearLogs = new javax.swing.JButton();
         tp_Options = new javax.swing.JPanel();
         chck_ShowFileInfoPane = new javax.swing.JCheckBox();
         chck_ShowEditboxes = new javax.swing.JCheckBox();
@@ -585,11 +601,11 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         pnl_EditBoxesLayout.setHorizontalGroup(
             pnl_EditBoxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_EditBoxesLayout.createSequentialGroup()
-                .addComponent(scrl_txt_Source, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addComponent(scrl_txt_Source, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(scrl_txt_Storage, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(scrl_txt_Storage, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(scrl_txt_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                .addComponent(scrl_txt_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
         );
         pnl_EditBoxesLayout.setVerticalGroup(
             pnl_EditBoxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -597,6 +613,39 @@ public abstract class GUIComponents extends javax.swing.JPanel {
             .addComponent(scrl_txt_Other, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
             .addComponent(scrl_txt_Storage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
         );
+
+        pnl_StartClear.setOpaque(false);
+
+        btn_Clear.setText("Clear");
+        btn_Clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ClearActionPerformed(evt);
+            }
+        });
+
+        btn_Start.setText("Start");
+        btn_Start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_StartActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_StartClearLayout = new javax.swing.GroupLayout(pnl_StartClear);
+        pnl_StartClear.setLayout(pnl_StartClearLayout);
+        pnl_StartClearLayout.setHorizontalGroup(
+            pnl_StartClearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btn_Clear, 0, 77, Short.MAX_VALUE)
+            .addComponent(btn_Start, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+        );
+        pnl_StartClearLayout.setVerticalGroup(
+            pnl_StartClearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_StartClearLayout.createSequentialGroup()
+                .addComponent(btn_Start, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(btn_Clear))
+        );
+
+        pnl_AddMedia.setOpaque(false);
 
         btn_AddFiles.setText("Add Files");
         btn_AddFiles.addActionListener(new java.awt.event.ActionListener() {
@@ -612,12 +661,21 @@ public abstract class GUIComponents extends javax.swing.JPanel {
             }
         });
 
-        btn_Start.setText("Start");
-        btn_Start.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_StartActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout pnl_AddMediaLayout = new javax.swing.GroupLayout(pnl_AddMedia);
+        pnl_AddMedia.setLayout(pnl_AddMediaLayout);
+        pnl_AddMediaLayout.setHorizontalGroup(
+            pnl_AddMediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btn_AddFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+            .addComponent(btn_AddFolders, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+        );
+        pnl_AddMediaLayout.setVerticalGroup(
+            pnl_AddMediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_AddMediaLayout.createSequentialGroup()
+                .addComponent(btn_AddFolders)
+                .addGap(0, 0, 0)
+                .addComponent(btn_AddFiles)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout pnl_FileAdd_CtrlsLayout = new javax.swing.GroupLayout(pnl_FileAdd_Ctrls);
         pnl_FileAdd_Ctrls.setLayout(pnl_FileAdd_CtrlsLayout);
@@ -630,35 +688,34 @@ public abstract class GUIComponents extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(chck_AddToML, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(chck_MarkWatched, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chck_RenameMoveFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
+                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chck_RenameMoveFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chck_MarkWatched, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_EditBoxes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_AddFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                    .addComponent(btn_AddFolders, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                .addComponent(pnl_AddMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(btn_Start))
+                .addComponent(pnl_StartClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnl_FileAdd_CtrlsLayout.setVerticalGroup(
             pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
                 .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmb_Storage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chck_MarkWatched))
+                    .addComponent(chck_RenameMoveFiles))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chck_AddToML)
-                    .addComponent(chck_RenameMoveFiles)))
-            .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                .addComponent(pnl_EditBoxes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_Start, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_FileAdd_CtrlsLayout.createSequentialGroup()
-                    .addComponent(btn_AddFolders)
-                    .addGap(0, 0, 0)
-                    .addComponent(btn_AddFiles)))
+                    .addComponent(chck_MarkWatched)))
+            .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
+                .addComponent(pnl_EditBoxes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
+                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnl_AddMedia, javax.swing.GroupLayout.Alignment.LEADING, 0, 46, Short.MAX_VALUE)
+                    .addComponent(pnl_StartClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnl_FileAdd_ContLayout = new javax.swing.GroupLayout(pnl_FileAdd_Cont);
@@ -676,7 +733,7 @@ public abstract class GUIComponents extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(pnl_FileAdd_Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(pnl_FileAdd_Ctrls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnl_FileAdd_Ctrls, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         spnl_FileAdd.setRightComponent(pnl_FileAdd_Cont);
@@ -735,8 +792,6 @@ public abstract class GUIComponents extends javax.swing.JPanel {
             }
         });
 
-        btn_ClearLogs.setText("Clear Logs");
-
         javax.swing.GroupLayout pnl_Logs_CtrlsLayout = new javax.swing.GroupLayout(pnl_Logs_Ctrls);
         pnl_Logs_Ctrls.setLayout(pnl_Logs_CtrlsLayout);
         pnl_Logs_CtrlsLayout.setHorizontalGroup(
@@ -747,16 +802,14 @@ public abstract class GUIComponents extends javax.swing.JPanel {
                 .addComponent(btn_CopyLogTree)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_CopyDebugMsgs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 299, Short.MAX_VALUE)
-                .addComponent(btn_ClearLogs))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         pnl_Logs_CtrlsLayout.setVerticalGroup(
             pnl_Logs_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_Logs_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btn_CopyCmdTree)
                 .addComponent(btn_CopyLogTree)
-                .addComponent(btn_CopyDebugMsgs)
-                .addComponent(btn_ClearLogs))
+                .addComponent(btn_CopyDebugMsgs))
         );
 
         javax.swing.GroupLayout tp_LogsLayout = new javax.swing.GroupLayout(tp_Logs);
@@ -1530,6 +1583,7 @@ public abstract class GUIComponents extends javax.swing.JPanel {
 }//GEN-LAST:event_btn_AddFilesActionPerformed
     private void chck_AddToMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chck_AddToMLActionPerformed
         SaveToMem("AddToMyList", chck_AddToML.isSelected());
+        chck_MarkWatched.setEnabled(chck_AddToML.isSelected());
         ToggleMLCmd(chck_AddToML.isSelected());
         tbl_Files.updateUI();
 }//GEN-LAST:event_chck_AddToMLActionPerformed
@@ -1558,6 +1612,7 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         ToggleProcessing(btn_Start.getText());
         if(btn_Start.getText().equals("Start")){
             btn_Start.setText("Pause");
+            btn_Clear.setVisible(false);
         } else if(btn_Start.getText().equals("Pause")) {
             btn_Start.setText("Resume");
         } else if(btn_Start.getText().equals("Resume")) {
@@ -1607,10 +1662,16 @@ public abstract class GUIComponents extends javax.swing.JPanel {
         CopyEvents();
     }//GEN-LAST:event_btn_CopyDebugMsgsActionPerformed
 
+    private void btn_ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ClearActionPerformed
+        ClearFiles();
+        UpdateProgressBars();
+        UpdateStatusLabels();
+    }//GEN-LAST:event_btn_ClearActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btn_AddFiles;
     protected javax.swing.JButton btn_AddFolders;
-    protected javax.swing.JButton btn_ClearLogs;
+    private javax.swing.JButton btn_Clear;
     protected javax.swing.JButton btn_CopyCmdTree;
     protected javax.swing.JButton btn_CopyDebugMsgs;
     protected javax.swing.JButton btn_CopyLogTree;
@@ -1661,6 +1722,7 @@ public abstract class GUIComponents extends javax.swing.JPanel {
     protected javax.swing.JLabel lbl_TimeRemaining;
     protected javax.swing.JLabel lbl_Type;
     protected javax.swing.JPanel pnl_AddFolderOnStartup;
+    private javax.swing.JPanel pnl_AddMedia;
     protected javax.swing.JPanel pnl_AnimeTitles;
     protected javax.swing.JPanel pnl_EditBoxes;
     protected javax.swing.JPanel pnl_EpTitles;
@@ -1675,6 +1737,7 @@ public abstract class GUIComponents extends javax.swing.JPanel {
     protected javax.swing.JPanel pnl_GroupNames;
     protected javax.swing.JPanel pnl_Logs_Ctrls;
     protected javax.swing.JPanel pnl_Misc;
+    private javax.swing.JPanel pnl_StartClear;
     protected javax.swing.JProgressBar prg_File;
     protected javax.swing.JProgressBar prg_Total;
     protected javax.swing.JRadioButton ptn_MoveToFolder;

@@ -40,7 +40,7 @@ public class Mod_GUI extends GUIComponents implements Module {
     
     private void AddCmdEvent(final ComEvent comEvent) {
         if(comEvent.Type() != ComEvent.eType.Information ||
-          !((comEvent.ParamCount() > 0) && (comEvent.Params(0).equals("Cmd"))) ||
+          !((comEvent.ParamCount() > 0) && (comEvent.Params(0).equals("Cmd") || comEvent.Params(0).equals("Reply"))) ||
           (api.ModState() == eModState.Terminating)) return;
         
         if(!SwingUtilities.isEventDispatchThread()){
@@ -131,7 +131,8 @@ public class Mod_GUI extends GUIComponents implements Module {
         ((DefaultTableModel)tbl_Files.getModel()).fireTableRowsUpdated(fileIndex, fileIndex);
 
         TreeNode node;
-        int logItemId; String title = "";
+        Integer logItemId;
+        String title = "";
         DefaultTreeModel model = (DefaultTreeModel)trvw_Event.getModel();
         DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
         if((Mod_EpProcessing.eComSubType)comEvent.Params(1) == Mod_EpProcessing.eComSubType.Processing) {
@@ -145,6 +146,7 @@ public class Mod_GUI extends GUIComponents implements Module {
         }
 
         logItemId = fileId2LogItemId.get(file.Id());
+        if(logItemId==null || ((DefaultMutableTreeNode)root).getChildCount() <= logItemId) return;
         node = (TreeNode)root.getChildAt(logItemId);
         switch((Mod_EpProcessing.eComSubType)comEvent.Params(1)) {
             case NoWriteAccess:
@@ -272,7 +274,7 @@ public class Mod_GUI extends GUIComponents implements Module {
         } else if(comEvent.Params(1) == Mod_EpProcessing.eComSubType.Done){
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    ProcessingDone();
+                    FileProcessingDone();
                     //UpdateProgressBars();
                     //UpdateStatusLabels();
                 }
@@ -360,7 +362,8 @@ public class Mod_GUI extends GUIComponents implements Module {
                     });} catch (Exception ex) {}
                 }
             }
-
+            
+            SwingUtilities.invokeLater(new Runnable() {public void run() {EpProcessingDone();}});
             processingStartOn = 0;
             pausedTime = 0;
             processingPausedOn = 0;
@@ -373,6 +376,10 @@ public class Mod_GUI extends GUIComponents implements Module {
 
     protected void SaveToMem(String key, Object value) {mem.put(key, value);}
     protected Object LoadFromMem(String key, Object defVal) {return mem.get(key, defVal);}
+
+    protected void ClearFiles(){
+        epProc.ClearFiles();
+    }
 
     protected void AddFiles(ArrayList<File> files) {epProc.addFiles(files);}
     protected void ToggleMLCmd(boolean doAction) {
@@ -455,17 +462,21 @@ public class Mod_GUI extends GUIComponents implements Module {
 
         api.AddComListener(new ComListener() {
             public void EventHandler(ComEvent comEvent) {
-                AddCmdEvent(comEvent);
+                if(comEvent.Type()==ComEvent.eType.Information) AddCmdEvent(comEvent);
             }
         });
         epProc.AddComListener(new ComListener() {
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileEvent) {
-                    AddFileEvent(comEvent);
-                } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileCountChanged) {
-                    byteCount = epProc.totalBytes();
-                } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.Status) {
-                    EpProcStatusEvent(comEvent);
+                if(comEvent.Type()==ComEvent.eType.Information){
+                    if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileEvent) {
+                        AddFileEvent(comEvent);
+                    } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileCountChanged) {
+                        byteCount = epProc.totalBytes();
+                        processedBytes = epProc.processedBytes();
+                        ((DefaultTableModel)tbl_Files.getModel()).fireTableDataChanged();
+                    } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.Status) {
+                        EpProcStatusEvent(comEvent);
+                    }
                 }
             }
         });
@@ -480,6 +491,10 @@ public class Mod_GUI extends GUIComponents implements Module {
                         DisplayEvent((String)comEvent.Params(0), comEvent.Type());
                     }
                     comEvents.add(comEvent);
+
+                    if(comEvent.Type()==ComEvent.eType.Error || comEvent.Type()==ComEvent.eType.Fatal){
+                        LockDown();
+                    }
                 }
             };
             module.AddComListener(comListener);

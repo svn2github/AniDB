@@ -180,7 +180,7 @@
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                               <Component id="pnl_FileAdd_Status" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                              <Component id="pnl_FileAdd_Ctrls" min="-2" max="-2" attributes="0"/>
+                              <Component id="pnl_FileAdd_Ctrls" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -321,19 +321,16 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="chck_MarkWatched" min="-2" pref="145" max="-2" attributes="0"/>
-                                      <Component id="chck_RenameMoveFiles" alignment="1" min="-2" pref="145" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="chck_RenameMoveFiles" min="-2" pref="145" max="-2" attributes="0"/>
+                                      <Component id="chck_MarkWatched" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="pnl_EditBoxes" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btn_AddFiles" pref="145" max="32767" attributes="2"/>
-                                      <Component id="btn_AddFolders" alignment="0" pref="145" max="32767" attributes="2"/>
-                                  </Group>
+                                  <Component id="pnl_AddMedia" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                                  <Component id="btn_Start" min="-2" max="-2" attributes="2"/>
+                                  <Component id="pnl_StartClear" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -342,22 +339,24 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cmb_Storage" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chck_MarkWatched" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chck_RenameMoveFiles" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="chck_AddToML" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="chck_RenameMoveFiles" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="chck_MarkWatched" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="pnl_EditBoxes" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="btn_Start" alignment="0" max="32767" attributes="3"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btn_AddFolders" min="-2" max="-2" attributes="1"/>
-                                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                                      <Component id="btn_AddFiles" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="pnl_EditBoxes" max="32767" attributes="1"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="pnl_AddMedia" alignment="0" min="0" pref="46" max="32767" attributes="1"/>
+                                      <Component id="pnl_StartClear" alignment="0" max="32767" attributes="1"/>
                                   </Group>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -431,11 +430,11 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="scrl_txt_Source" pref="98" max="32767" attributes="0"/>
+                                      <Component id="scrl_txt_Source" pref="97" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                                      <Component id="scrl_txt_Storage" pref="108" max="32767" attributes="0"/>
+                                      <Component id="scrl_txt_Storage" pref="97" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
-                                      <Component id="scrl_txt_Other" pref="100" max="32767" attributes="0"/>
+                                      <Component id="scrl_txt_Other" pref="98" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -519,39 +518,98 @@
                             </Container>
                           </SubComponents>
                         </Container>
-                        <Component class="javax.swing.JButton" name="btn_AddFiles">
+                        <Container class="javax.swing.JPanel" name="pnl_StartClear">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Add Files"/>
+                            <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AddFilesActionPerformed"/>
-                          </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
-                          </AuxValues>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="btn_AddFolders">
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btn_Clear" alignment="0" min="0" pref="77" max="32767" attributes="1"/>
+                                  <Component id="btn_Start" alignment="0" pref="77" max="32767" attributes="1"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="btn_Start" max="32767" attributes="2"/>
+                                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                                      <Component id="btn_Clear" min="-2" max="-2" attributes="1"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JButton" name="btn_Clear">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Clear"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ClearActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btn_Start">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Start"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_StartActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="pnl_AddMedia">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Add Folders"/>
+                            <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AddFoldersActionPerformed"/>
-                          </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
-                          </AuxValues>
-                        </Component>
-                        <Component class="javax.swing.JButton" name="btn_Start">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Start"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_StartActionPerformed"/>
-                          </Events>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
-                          </AuxValues>
-                        </Component>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btn_AddFiles" pref="137" max="32767" attributes="1"/>
+                                  <Component id="btn_AddFolders" alignment="0" pref="137" max="32767" attributes="1"/>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="btn_AddFolders" min="-2" max="-2" attributes="1"/>
+                                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                                      <Component id="btn_AddFiles" min="-2" max="-2" attributes="1"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JButton" name="btn_AddFiles">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Add Files"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AddFilesActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                              </AuxValues>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="btn_AddFolders">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Add Folders"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_AddFoldersActionPerformed"/>
+                              </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -674,8 +732,7 @@
                           <Component id="btn_CopyLogTree" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btn_CopyDebugMsgs" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="299" max="32767" attributes="0"/>
-                          <Component id="btn_ClearLogs" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="382" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -685,7 +742,6 @@
                           <Component id="btn_CopyCmdTree" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_CopyLogTree" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_CopyDebugMsgs" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_ClearLogs" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -720,14 +776,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_CopyDebugMsgsActionPerformed"/>
                   </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="btn_ClearLogs">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Clear Logs"/>
-                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
                   </AuxValues>
