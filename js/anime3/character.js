@@ -160,8 +160,11 @@ function prepPageEntity() {
 		}
 		div.className += (i > 0 ? ' hide' : '');
 		div.id = 'section_'+i;
-		var h4 = div.getElementsByTagName('h4')[0];
-		if (h4) charNames.push(dig_text(h4).substring(6));
+		var nameTR = getElementsByClassName(div.getElementsByTagName('tr'),'mainname',true)[0];
+		if (nameTR) {
+			var text = dig_text(nameTR.getElementsByTagName('td')[0]).replace('(','');
+			charNames.push(text);
+		}
 	}
 	// clear horizontal rule nodes
 	var hrNodes = document.getElementsByTagName('hr');

@@ -399,8 +399,8 @@ function changeAnimeRowWatchedState(aid,isWatched,epType) {
 			var text = cellSeen.firstChild.nodeValue;
 			var value = Number(text.split('+')[1]);
 			if (!isWatched) {
-				if (!value) cellSeen.firstChild.nodeValue += '+1';
-				else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value+1));
+				if (!value || value <= 1) cellSeen.firstChild.nodeValue = text.replace('+'+value,'');//if (!value) cellSeen.firstChild.nodeValue += '+1';
+				else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value-1)); //else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value+1));
 			} else {
 				if (!value) cellSeen.firstChild.nodeValue += '+1';
 				else cellSeen.firstChild.nodeValue = text.replace('+'+value,'+'+(value+1));
