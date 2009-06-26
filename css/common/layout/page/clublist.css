@@ -1,4 +1,9 @@
-#layout-main div.clublist_all table
+#layout-main div.clublist_all table.animelist th.title
 {
-	width: 100%
+	width: 98%
+}
+
+#layout-main div.clublist_all div.note
+{
+	clear:none;
 }
