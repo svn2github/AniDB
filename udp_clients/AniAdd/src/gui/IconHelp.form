@@ -21,12 +21,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel4" alignment="0" min="-2" max="-2" attributes="0"/>
           <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
-          <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
           <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
           <Component id="jPanel5" alignment="0" min="-2" max="-2" attributes="0"/>
-          <Component id="jPanel8" alignment="0" min="-2" max="-2" attributes="0"/>
-          <Component id="jPanel6" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+          <Component id="jPanel6" alignment="0" min="-2" max="-2" attributes="1"/>
           <Component id="jPanel7" alignment="0" min="-2" max="-2" attributes="0"/>
+          <Component id="jPanel8" alignment="0" min="-2" max="-2" attributes="1"/>
+          <Component id="jPanel2" alignment="0" min="-2" max="-2" attributes="0"/>
+          <Component id="jPanel9" alignment="0" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -35,6 +36,8 @@
               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -349,21 +352,33 @@
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel41" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel25" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Component id="jLabel21" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel41" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel23" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -401,6 +416,13 @@
             <Property name="text" type="java.lang.String" value="P: Parsing File"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel41">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/PBlue.png"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel6">
@@ -416,12 +438,13 @@
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel27" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel42" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -429,6 +452,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel42" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -469,6 +493,13 @@
             <Property name="text" type="java.lang.String" value="F: Fileinfo Retrieval"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel42">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/FBlue.png"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel8">
@@ -481,6 +512,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel44" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -499,6 +532,7 @@
               <Component id="jLabel38" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel40" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel44" alignment="0" min="-2" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -513,7 +547,7 @@
         <Component class="javax.swing.JLabel" name="jLabel37">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gui/icons/RYellow.png"/>
+              <Image iconType="3" name="/gui/icons/RBlue.png"/>
             </Property>
           </Properties>
         </Component>
@@ -536,6 +570,13 @@
             <Property name="text" type="java.lang.String" value="R: Rename/Move File"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel44">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/RYellow.png"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel7">
@@ -548,6 +589,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel31" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel43" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -566,6 +609,7 @@
               <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
               <Component id="jLabel35" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel43" alignment="0" min="-2" max="-2" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -580,7 +624,7 @@
         <Component class="javax.swing.JLabel" name="jLabel32">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gui/icons/MYellow.png"/>
+              <Image iconType="3" name="/gui/icons/MBlue.png"/>
             </Property>
           </Properties>
         </Component>
@@ -601,6 +645,84 @@
         <Component class="javax.swing.JLabel" name="jLabel35">
           <Properties>
             <Property name="text" type="java.lang.String" value="M: Update MyList"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel43">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/MYellow.png"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel9">
+      <Properties>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jLabel45" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                  <Component id="jLabel48" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel49" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                  <Component id="jLabel49" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                      <Component id="jLabel46" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel45" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel47" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel48" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel45">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/PBlue.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel46">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/FBlue.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel47">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/MBlue.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel48">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/gui/icons/RBlue.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel49">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Blue: Action is currently being performed"/>
           </Properties>
         </Component>
       </SubComponents>

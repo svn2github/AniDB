@@ -61,24 +61,34 @@ public class IconHelp extends javax.swing.JPanel {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel49 = new javax.swing.JLabel();
 
         setOpaque(false);
 
@@ -246,6 +256,8 @@ public class IconHelp extends javax.swing.JPanel {
 
         jLabel25.setText("P: Parsing File");
 
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/PBlue.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -255,19 +267,28 @@ public class IconHelp extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jLabel22)
                 .addGap(0, 0, 0)
+                .addComponent(jLabel41)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel23)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel25))
+                .addComponent(jLabel25)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel21)
-            .addComponent(jLabel22)
-            .addComponent(jLabel23)
-            .addComponent(jLabel24)
-            .addComponent(jLabel25)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel25)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel21)
+                        .addComponent(jLabel22)
+                        .addComponent(jLabel41)
+                        .addComponent(jLabel23)
+                        .addComponent(jLabel24)))
+                .addGap(0, 0, 0))
         );
 
         jPanel6.setOpaque(false);
@@ -282,6 +303,8 @@ public class IconHelp extends javax.swing.JPanel {
 
         jLabel30.setText("F: Fileinfo Retrieval");
 
+        jLabel42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/FBlue.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -291,17 +314,19 @@ public class IconHelp extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(jLabel27)
                 .addGap(0, 0, 0)
+                .addComponent(jLabel42)
+                .addGap(0, 0, 0)
                 .addComponent(jLabel28)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel30)
-                .addGap(20, 20, 20))
+                .addComponent(jLabel30))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel26)
             .addComponent(jLabel27)
+            .addComponent(jLabel42)
             .addComponent(jLabel28)
             .addComponent(jLabel29)
             .addComponent(jLabel30)
@@ -311,7 +336,7 @@ public class IconHelp extends javax.swing.JPanel {
 
         jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/RGray.png"))); // NOI18N
 
-        jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/RYellow.png"))); // NOI18N
+        jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/RBlue.png"))); // NOI18N
 
         jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/RGreen.png"))); // NOI18N
 
@@ -319,12 +344,16 @@ public class IconHelp extends javax.swing.JPanel {
 
         jLabel40.setText("R: Rename/Move File");
 
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/RYellow.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jLabel36)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel44)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel37)
                 .addGap(0, 0, 0)
@@ -341,13 +370,14 @@ public class IconHelp extends javax.swing.JPanel {
             .addComponent(jLabel38)
             .addComponent(jLabel39)
             .addComponent(jLabel40)
+            .addComponent(jLabel44)
         );
 
         jPanel7.setOpaque(false);
 
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/MGray.png"))); // NOI18N
 
-        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/MYellow.png"))); // NOI18N
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/MBlue.png"))); // NOI18N
 
         jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/MGreen.png"))); // NOI18N
 
@@ -355,12 +385,16 @@ public class IconHelp extends javax.swing.JPanel {
 
         jLabel35.setText("M: Update MyList");
 
+        jLabel43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/MYellow.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jLabel31)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel43)
                 .addGap(0, 0, 0)
                 .addComponent(jLabel32)
                 .addGap(0, 0, 0)
@@ -377,6 +411,45 @@ public class IconHelp extends javax.swing.JPanel {
             .addComponent(jLabel33)
             .addComponent(jLabel34)
             .addComponent(jLabel35)
+            .addComponent(jLabel43)
+        );
+
+        jPanel9.setOpaque(false);
+
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/PBlue.png"))); // NOI18N
+
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/FBlue.png"))); // NOI18N
+
+        jLabel47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/MBlue.png"))); // NOI18N
+
+        jLabel48.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/RBlue.png"))); // NOI18N
+
+        jLabel49.setText("Blue: Action is currently being performed");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jLabel45)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel46)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel47)
+                .addGap(0, 0, 0)
+                .addComponent(jLabel48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel49))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel49)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel46)
+                    .addComponent(jLabel45)
+                    .addComponent(jLabel47)
+                    .addComponent(jLabel48)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -385,12 +458,13 @@ public class IconHelp extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,6 +472,8 @@ public class IconHelp extends javax.swing.JPanel {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -450,6 +526,15 @@ public class IconHelp extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -463,6 +548,7 @@ public class IconHelp extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -305,7 +305,6 @@ public class Mod_EpProcessing implements Module {
                 procFile.ActionsDone().add(eAction.Rename);
             } else {
                 procFile.ActionsError().add(eAction.Rename);
-                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id());
             }
         }
         
@@ -313,48 +312,56 @@ public class Mod_EpProcessing implements Module {
     }
 
     private boolean renameFile(FileInfo procFile){
+        String folder="";
+        String filename="";
         try {
-            String path="";
             TreeMap<String,String> ts = getPathFromTagSystem(procFile);
 
             if((Boolean)mem.get("EnableFileMove")){
                 if((Boolean)mem.get("MoveTypeUseFolder")){
-                    path = (String)mem.get("MoveToFolder");
+                    folder = (String)mem.get("MoveToFolder");
                     if((Boolean) mem.get("AppendAnimeTitle")){
                         int titleType = (Integer)mem.get("AppendAnimeTitleType");
-                        path += titleType==0?procFile.Data().get("DB_SN_English"):(titleType==1?procFile.Data().get("DB_SN_Romaji"):procFile.Data().get("DB_SN_Kanji")) + java.io.File.separatorChar;
+                        folder += titleType==0?procFile.Data().get("DB_SN_English"):(titleType==1?procFile.Data().get("DB_SN_Romaji"):procFile.Data().get("DB_SN_Kanji")) + java.io.File.separatorChar;
                     }
 
                 } else {
-                    path = ts.get("PathName");
+                    folder = ts.get("PathName");
                 }
             }
 
-            path = path.replaceAll("[:\"/*|<>?]", "");
-            if(path.isEmpty()){
-                path = procFile.FileObj().getParent() + java.io.File.separatorChar;
+            folder = folder.substring(0, 3) + folder.substring(3).replaceAll("[\":/*|<>?]", "");
+            if(folder.isEmpty()){
+                folder = procFile.FileObj().getParent() + java.io.File.separatorChar;
+            } else if(folder.length() > 240) {
+                throw new Exception("Pathname (Folder) too long");
             }
 
+            String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
             if((Boolean)mem.get("RenameTypeAniDBFileName")){
-                path += procFile.Data().get("DB_FileName");
+                filename = procFile.Data().get("DB_FileName");
             } else {
-                String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
-                path += ts.get("FileName").replaceAll("[\\\\:\"/*|<>?]", "") + ext;
+                filename = ts.get("FileName").replaceAll("[\\\\:\"/*|<>?]", "") + ext;
             }
-            
-            //System.out.println(path);
 
-            File renFile = new File(path);
-            if(procFile.FileObj().renameTo(renFile)){
-                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), procFile.FileObj(), renFile);
+            if(filename.length()+ folder.length() > 240) filename = filename.substring(0, 240-folder.length()-ext.length())+ext;
+
+            File folderObj = new File(folder);
+            folderObj.mkdir();
+
+            File renFile = new File(folderObj, filename);
+             if(procFile.FileObj().renameTo(renFile)){
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), procFile.FileObj(), folder + filename);
                 procFile.FileObj(renFile);
                 return true;
             } else {
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), folder + filename);
                 return false;
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
+            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), folder + filename, ex.getMessage());
             return false;
         }
     }

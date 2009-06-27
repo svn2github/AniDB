@@ -229,11 +229,11 @@ public class Mod_GUI extends GUIComponents implements Module {
                 break;
             case RenamingFailed:
                 title = "Renaming failed";
-                node.add(new TreeNode("Couldn't rename file."));
+                node.add(new TreeNode("Couldn't rename file. " + (comEvent.ParamCount()==6?(String)comEvent.Params(5):"")));
                 break;
             case FileRenamed:
                 title = "File renamed";
-                node.add(new TreeNode("File renamed to " + ((File)comEvent.Params(4)).getName()));
+                node.add(new TreeNode("File renamed to " + (String)comEvent.Params(4)));
                 break;
             case RenamingNotNeeded:
                 title = "No renaming needed";
