@@ -8,10 +8,10 @@
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
 <project name="AniAdd_GUI" default="default" basedir=".">
-    <description>Builds, tests, and runs the project AniAdd GUI.</description>
+    <description>Builds, tests, and runs the project AniAdd.</description>
     <import file="nbproject/build-impl.xml"/>
 
-    <!--<target name="-post-jar">
+    <target name="-post-jar">
         <signjar jar="${dist.dir}/AniAdd.jar" alias="AD" keystore="keystore" storepass="secret"/>
     </target>
 
@@ -27,7 +27,7 @@
     </target>
 
 
-    
+    <!--
     There exist several targets which are by default empty and which can be 
     used for execution of your tasks. These targets are usually executed 
     before and after some main targets. They are: 
