@@ -78,7 +78,7 @@ public class Applet extends JApplet {
             } catch(Exception e) {}
         }
 
-        if(username==null || username.isEmpty() || password == null || password.isEmpty()){
+        if(username==null || username.isEmpty() || ((password == null || password.isEmpty()) && (session!=null || session.isEmpty()))){
             username = JOptionPane.showInputDialog(this, "User");
             password = JOptionPane.showInputDialog(this, "Password");
         }
