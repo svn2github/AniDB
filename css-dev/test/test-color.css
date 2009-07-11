@@ -291,15 +291,17 @@ button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover
 {
+	border: 1px solid #34394D;
 	background-color: #BFC2C9;
+	color: #000000;
 }
 
-#layout-main .g_list li a
+#layout-main ul.g_list li a
 {
 	color: #FFFFFF;
 }
 
-#layout-main .g_list li:hover a
+#layout-main ul.g_list li:hover a
 {
 	color: #000000;
 }
