@@ -84,6 +84,10 @@ a:hover
 #layout-tabs ul.main-tabs li
 {
 	background-color: #34394D;
+}
+
+#layout-tabs ul.main-tabs li a
+{
 	color: #FFFFFF;
 }
 
@@ -91,6 +95,11 @@ a:hover
 #layout-tabs ul.main-tabs li:hover
 {
 	background-color: #BFC2C9;
+}
+
+#layout-tabs ul.main-tabs li.selected a,
+#layout-tabs ul.main-tabs li:hover a
+{
 	color: #000000;
 }
 
