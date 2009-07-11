@@ -1,19 +1,14 @@
 #layout-search div.search
 {
-	margin-left:35em;
+	margin-left:26em;
 	margin-top:1.9em;
+	width:44em;
 }
 
 #layout-search
 {
 	margin-left:13.5em;
 	height:65px;
-}
-
-#layout-nav div.search a.advsearch
-{
-	left:790px;
-	top:25px;
 }
 
 #layout-tabs
@@ -32,13 +27,9 @@
 	width:80px;
 }
 
-#layout-search div.search
-{
-	width:44em;
-}
-
 #layout-nav div.search a.advsearch
 {
-	left:770px;
+	left:680px;
+	top:25px;
 	width:83px;
 }
