@@ -130,36 +130,6 @@ input[size="60"]
 	width: 36em;
 }
 
-span.test,
-button,
-#layout-main .g_list li a,
-#layout-main div.pagination span a,
-input[type="button"],
-input[type="submit"]
-{
-	color: black;
-	border: outset #969AA6 1px;
-	background-color: #BFC2C9;
-}
-
-.g_list li.selected,
-div.pagination span strong
-{
-	border: inset #969AA6 1px;
-	background-color: #B0B0B1;
-}
-
-span.test:hover,
-button:hover,
-#layout-main .g_list li a:hover,
-#layout-main .g_list li.g_odd a:hover,
-div.pagination span strong:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover
-{
-	background-color: #B0B0B1;
-}
-
 #layout-main div.news p.comment,
 #layout-main div.news p.comment a,
 #layout-main div.news div.newsitem h4 a
