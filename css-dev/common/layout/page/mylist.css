@@ -15,3 +15,27 @@
 {
 	margin-top: 0.5em;
 }
+
+#layout-main div.mylist_all td.name
+{
+	padding-right:1em;
+}
+
+#layout-main div.mylist_all td.stats,
+#layout-main div.mylist_all td.rating,
+#layout-main div.mylist_all td.vote
+{
+	padding:0 1em;
+}
+
+#layout-main div.mylist_all td.stats
+{
+	min-width:6em;
+}
+
+#layout-main div.mylist_all td.rating,
+#layout-main div.mylist_all td.vote
+{
+	min-width:4em;
+	text-align:left;
+}

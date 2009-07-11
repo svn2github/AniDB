@@ -31,9 +31,10 @@
 
 #layout-main ul#cattree .cat span.edit
 {
-	float:right;
+	text-align:right;
 	margin-right: 1em;
-	margin-top:-2em;
+	margin-top: -2em;
+	display: block;
 }
 
 #layout-main ul#cattree .cat span.edit a

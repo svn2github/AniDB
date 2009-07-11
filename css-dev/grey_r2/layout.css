@@ -6,44 +6,29 @@
 @import "../common/layout/page/all.css";
 @import "../common/style/text/default.css";
 @import "../common/style/content/page-anime.css";
-@import "../icons/all.css";
 span.link,
 a
 {
 text-decoration: none;
-color: #ADD8E6;
 cursor: pointer;
 }
 #layout-tabs
 {
 display:block;
 margin-right:.5em;
-position:absolute;
-right:0;
-top:2.1em;
 }
 #layout-tabs ul li
 {
-display:inline;
-padding:4px 6px 3px;
+padding:4px 6px 3px 0;
 }
 #layout-tabs ul
 {
-margin-bottom:.5em;
-margin-top:.5em;
+margin-top:0.2em;
 text-align:right;
 }
 #layout-tabs li.news
 {
-	display:inline;
-}
-#layout-tabs ul.main-tabs > li.selected
-{
-border-bottom:2px solid;
-}
-#layout-tabs ul.main-tabs > li
-{
-	border-bottom:none;
+display:inline;
 }
 #layout-main > h1
 {
@@ -71,7 +56,16 @@ html,
 font-size: 10px;
 line-height: 1.2;
 font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
-color: white
+color: white;
+}
+div.genren_all ul#cattree li #tooltip
+{
+margin-left: 50px;
+}
+div.animetagmod_all tr #tooltip,
+div.animetag_all tr #tooltip
+{
+margin-left: 0px;
 }
 form input[type="text"],
 form input[type="checkbox"],
@@ -94,21 +88,37 @@ margin-left: 0.3em;
 #addAudLang,
 #remSubLang,
 #addSubLang,
-div.addfilem input[id="addfilem.next"],
-div.result input,
-form input[type="submit"],
-a.button,
-input.button,
-button.button,
-a.confirmButton,
-input.confirmButton,
-button.confirmButton
+#results_back,
+#results_submit,
+input#addfilem\.next,
+input#addfilem\.search,
+input[type="submit"],
+input[type="button"],
+*.button,
+button,
+*.confirmButton
 {
 margin-top: 0.3em;
 color: #c1c1c1;
 border-style: dashed;
 text-shadow: none;
 border-color: #565656;
+}
+#layout-hint
+{
+position: fixed;
+width: 100%;
+height: 1.5em;
+padding-top: 0px;
+text-align: center;
+}
+#layout-hint + #layout-nav
+{
+margin-top: 1.5em;
+}
+#layout-hint + #layout-nav + #layout-content
+{
+padding-top:4.5em;
 }
 #layout-nav
 {
@@ -184,7 +194,7 @@ left: auto;
 }
 #layout-search form input.text
 {
-width: 11.4em;
+width: 25em;
 font-size: 10px;
 margin: 0;
 padding: 0;
@@ -195,22 +205,18 @@ text-align: right;
 padding: 0;
 margin: 0;
 }
-#layout-search form input.submit,
-form button[type="submit"]
+#layout-search form input.submit
 {
 font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
 margin: 0;
 padding: 0;
-color: white;
 font-size: 11px;
 font-weight: normal;
-border-style: dashed;
-border-color: #565656;
 }
 #layout-content
 {
 margin: 0 0 0 0;
-padding-top: 3em;
+padding-top: 2.5em;
 padding-bottom: 0.1em;
 width: 100%;
 }
@@ -319,24 +325,14 @@ color: red;
 {
 color: white;
 }
-#layout-nav li li:hover a
-{
-color: #ff6000;
-background-image: url(images/whitepixel.png);
-}
 #layout-content div.g_msg
 {
 margin: 2em;
 padding: 1.2em;
 }
-#layout-content div.g_msg h3
-{
-float: left;
-}
 #layout-content div.g_msg p
 {
 display: block;
-margin-left: 4.5em;
 padding: 0;
 text-align: left;
 }
@@ -349,8 +345,88 @@ border-top-width: 0px;
 {
 border-bottom-width: 1px;
 }
-#layout-main div.forum div.search form input, #layout-main div.forum div.search form select, #layout-main div.forum div.search form input[type="submit"]
+#layout-main div.forum div.search form input,
+#layout-main div.forum div.search form select,
+#layout-main div.forum div.search form input[type="submit"]
 {
 padding: 0;
 margin: 0;
+}
+*.i_inline
+{
+color: transparent;
+}
+th.expand
+{
+width: 13px;
+}
+th.crc
+{
+width: 5em;
+}
+#layout-main div.forum div.quickreply textarea
+{
+border: none
+}
+button + button
+{
+margin-left: 0.5em;
+}
+#layout-main div.tabbed_pane ul.tabs
+{
+margin-bottom: 2px;
+}
+#layout-main div.tabbed_pane div.pane ul
+{
+width: auto;
+}
+#layout-main div.tabbed_pane div.pane ul
+{
+display: block;
+}
+#layout-tabs ul.main-tabs li + li
+{
+margin-left: 0.5em;
+}
+#layout-tabs ul.main-tabs li
+{
+padding: 0 6px 0px 6px;
+border-bottom: none;
+}
+#layout-tabs + #layout-main
+{
+margin-top: -4px;
+}
+#layout-content #layout-main div.userpage_all div.stats div.stats_roles td,
+#layout-content #layout-main div.myplace_all div.stats div.stats_roles td,
+#layout-content #layout-main div.preferences ul li
+{
+white-space: nowrap;
+}
+span.time,
+span.user a.id,
+td.rating span,
+a.filter
+{
+font-size: 100%;
+color: #a1a1a1;
+}
+div.spoiler,
+#layout-main div.quotebody
+{
+border-style: dashed;
+border-width: 1px;
+}
+#layout-main div.cmt_entries dl.profile
+{
+border-right-style: dashed;
+}
+#layout-main div.forum ul.topiclist dd
+{
+border-left-style: dashed;
+}
+div.dreq_form textarea,
+#layout-main div.forum div.quickreply textarea
+{
+width:50%;
 }

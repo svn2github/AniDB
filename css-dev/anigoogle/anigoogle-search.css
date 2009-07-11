@@ -1,0 +1,89 @@
+#layout-nav div.main_search
+{
+	background-image:url(images/logo.gif);
+	background-repeat:no-repeat;
+}
+
+#layout-nav div.main_search div.search
+{
+	margin-left:-11em;
+}
+
+#layout-nav.main_nav
+{
+	height:25em;
+}
+
+#layout-nav div.main_search input.text
+{
+	padding:3px;
+}
+
+#layout-nav div.main_search select
+{
+	padding:2px;
+	margin-top: 7em;
+}
+
+#layout-nav div.main_search input.submit
+{
+	float:left;
+	margin-left:7.5em;
+	margin-top:.2em;
+	width:150px;
+}
+
+#layout-nav div.main_search div.search form
+{
+	width:45.5em;
+}
+
+#layout-nav div.main_search div.search input.text
+{
+	width:300px;
+}
+
+#layout-nav div.main_search a.advsearch
+{
+	left:350px;
+	margin:0;
+	position:absolute;
+	top:105px;
+	width:100px;
+}
+
+#layout-nav div.main_search input.random
+{
+	margin-left:.5em;
+}
+
+#layout-menu ul li,
+#layout-menu > li:hover ul,
+#layout-nav div.main_search a.advsearch,
+#layout-nav div.main_search form.random
+{
+	display:block;
+}
+
+#layout-nav div.main_search
+{
+	height:110px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:3em;
+	position:relative;
+	width:268px;
+}
+
+#layout-nav div.main_search a.advsearch
+{
+	font-family:arial,sans-serif;
+	text-decoration:underline;
+	text-transform:capitalize;
+}
+
+#layout-nav div.main_search input.text,
+#layout-nav div.main_search select
+{
+	font-size:1.2em;
+}

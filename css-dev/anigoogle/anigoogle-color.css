@@ -52,12 +52,6 @@ span.g_odd
 	border-top-color:blue;
 }
 
-#layout-nav div.main_search
-{
-	background-image:url(images/logo.gif);
-	background-repeat:no-repeat;
-}
-
 #layout-menu > li ul
 {
 	background-color:#FFF;

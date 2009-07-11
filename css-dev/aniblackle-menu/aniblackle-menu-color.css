@@ -1,18 +1,13 @@
 #layout-content
 {
 	border-bottom-color:#666666;
+	border-left-color:#666666;
+	border-top-color:#666666;
 }
 
-#layout-content,
 #layout-nav
 {
 	border-left-color:#666666;
-}
-
-#layout-menu,
-#layout-nav
-{
-	border-top-color:#666666;
 }
 
 #layout-menu li.sub-menu,
@@ -23,6 +18,7 @@
 
 #layout-menu
 {
+	border-right-color:#C9D7F1;
 	background-color:#000000;
 }
 

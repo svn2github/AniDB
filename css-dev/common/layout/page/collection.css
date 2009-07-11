@@ -1,0 +1,25 @@
+#layout-main div.collection_all ul.links_top
+{
+	display:none;
+}
+
+#layout-main div.collection_all div.tracks div.medium td.trackno
+{
+	width: 4em;
+}
+
+#layout-main div.collection_all div.tracks div.medium th.name
+{
+	width: 35%;
+}
+
+#layout-main div.collection_all div.tracks div.medium td.length,
+#layout-main div.collection_all div.tracks div.medium td.rating
+{
+    width: 6em;
+}
+
+#layout-main div.collection_all div.tracks div.medium td.credit
+{
+    width: 20em;
+}

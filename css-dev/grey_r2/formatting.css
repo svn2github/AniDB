@@ -1,0 +1,289 @@
+div.format-buttons {
+padding: 3px 0px;
+margin-bottom:.2em;
+margin-left:.2em;
+text-align:left;
+}
+
+*.f_button {
+background-repeat: no-repeat;
+background-position: center;
+width: 21px;
+height: 21px;
+margin-left: 0;
+margin-right: 0;
+border: 1px solid #717171;
+margin-right: 2px;
+/* text-indent works badly on IE versions < 8, as IE treats inputs as text */
+/*text-indent: -5000px;*/
+}
+
+.format-buttons select {
+height: 18px;
+border: 0;
+background-color: black;
+vertical-align: middle;
+}
+
+*.f_button:hover, *.f_button.selected {
+background-color: #ff6000;
+border-color: #000000;
+}
+
+*.f_mouseout {
+background-color: #FFFFFF;
+border-color: #D6D3CE;
+}
+
+*.f_selected {
+background-color: #8492B5;
+}
+
+*.f_bold {
+font-weight: bold;
+background-image: url(../icons/grey/formatting/bold.png);
+}
+
+*.f_italic {
+font-style: italic;
+background-image: url(../icons/grey/formatting/italic.png);
+}
+
+*.f_underline {
+text-decoration: underline;
+background-image: url(../icons/grey/formatting/underline.png);
+}
+
+*.f_strikethrough {
+text-decoration: line-through;
+background-image: url(../icons/grey/formatting/strikethrough.png);
+}
+
+*.f_insertorderedlist {
+background-image: url(../icons/grey/formatting/orderedlist.png);
+}
+
+*.f_insertunorderedlist {
+background-image: url(../icons/grey/formatting/unorderedlist.png);
+}
+
+*.f_insertlistitem {
+background-image: url(../icons/grey/formatting/list_item.png);
+}
+
+*.f_link {
+background-image: url(../icons/grey/formatting/link.png);
+}
+
+*.f_unlink {
+background-image: url(../icons/grey/formatting/unlink.png);
+opacity: 0.60;
+}
+
+.f_img {
+background-image: url(../icons/formating/image.gif);
+}
+
+*.f_separator {
+background-image: url(../icons/formating/separator.gif);
+}
+
+*.f_viewsource {
+background-image: url(../icons/grey/formatting/view_text.gif);
+}
+
+*.f_viewrte {
+background-image: url(../icons/grey/formatting/view_source.gif);
+}
+
+*.f_cleansource {
+background-image: url(../icons/formating/clean_source.gif);
+}
+
+*.f_preview {
+background-image: url(../icons/formating/preview.gif);
+}
+
+*.f_preview {
+background-image: url(../icons/formating/preview.gif);
+}
+
+*.f_spoiler {
+background-image: url(../icons/grey/formatting/spoiler.png);
+}
+
+*.f_code {
+background-image: url(../icons/grey/formatting/code.gif);
+}
+
+
+*.f_buddy {
+background-image: url(../icons/formating/user.gif);
+}
+
+div.controls-holder {
+	border-bottom: 2px solid black;
+}
+
+/* unused now, stays for backwards compat */
+
+ul.format-modes {
+	list-style: none;
+	float: right;
+}
+
+ul.format-modes li {
+	display: inline;
+	padding: 0px 5px 2px 5px;
+	border: solid 1px black;
+	/* margin: 2px; */
+	background-color: #FFFFFF;
+	cursor: pointer;
+}
+
+ul.format-modes li.selected, ul.format-modes li:hover {
+	background-color: #B5BED6;
+	text-decoration: none;
+}
+
+
+/* dialogBox */
+
+.dialogBox {
+	position: absolute;
+	background:#FFFFFF none repeat scroll 0 0;
+	border:5px solid #333333;
+}
+
+.dialogBox h3 {
+	background: #333333 none repeat scroll 0 0;
+	border-bottom:1px solid #AAAAAA;
+	font-size:11px;
+	margin:0;
+	padding:3px 15px 5px;
+	color: white;
+	font-weight: bold;
+	text-align: left;
+}
+
+.dialogBox h3:hover { cursor: move; }
+
+.dialogBox .dialogButtons {
+	background:#EEEEEE none repeat scroll 0 0;
+	border-top:1px solid #AAAAAA;
+	clear:both;
+	overflow:hidden;
+	padding:10px 15px;
+	text-align:right;
+}
+
+input.dialogConfirm { margin-left:8px; }
+
+.dialogBox a.i_close {
+	background:transparent url(../icons/formating/delete_inactive.png) no-repeat scroll 50% 50%;
+	display:block;
+	float:right;
+	height:16px;
+	margin:0px;
+	text-decoration:none;
+	width:16px;
+}
+
+.dialogBox a.i_close:hover {
+	background:transparent url(../icons/formating/delete_active.png) no-repeat scroll 50% 50%;
+}
+
+/* addlink crap */
+
+#widget_addlink {
+	position: absolute;
+	top: 75px;
+	left: 30px;
+	width: 400px;
+}
+
+#widget_addlink th {
+	text-align: left;
+}
+
+#widget_addlink div.content table
+{
+	border: none;
+	margin: 0.5em;
+}
+
+#widget_addlink div.content table input
+{
+	width: 350px;
+}
+
+/*
+ * Spinner stuff
+ * NOTE: This should go elsewhere and can be problematic for other styles
+ *
+ */
+
+.spinInput {
+  /* Change this to modify the default spin control background color*/
+  background-color: #FFFFFF;
+}
+
+.spinLeftRightEdge, .spinTopBottomEdge {
+  position: absolute;
+  overflow: hidden;
+  /* Change this to modify the default spin control border color*/
+  background-color: #A5ACB2;
+}
+  
+.spinContainer {
+  position: relative;
+  font-size: 0px;
+  height: 20px;
+}
+
+.spinLeftRightEdge { height: 20px; width: 1px; }
+.spinTopBottomEdge { height: 1px; left: 1px; }
+
+.spinInput {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  border: 0px;
+  height: 15px;
+  /* Change this to modify the default spin control font, font color, and font size*/
+}
+
+.spinUpBtn, 
+.spinUpBtnHover, 
+.spinUpBtnPress, 
+.spinDownBtn, 
+.spinDownBtnHover, 
+.spinDownBtnPress {
+  position: absolute;
+  width: 15px;
+  height: 8px;
+  right: 2px;
+  background-image: url('../icons/formating/spin_control_buttons.png');
+  background-repeat: no-repeat;
+  /* Change this to modify the default button color*/
+  background-color: #000000;
+}
+
+.spinUpBtn, 
+.spinUpBtnHover, 
+.spinUpBtnPress { 
+	top: 2px; 
+	left: 40px;
+}
+.spinDownBtn, 
+.spinDownBtnHover, 
+.spinDownBtnPress { 
+	top: 10px; 
+	left: 40px;
+}
+.spinUpBtn { background-position:0px 0px; }
+.spinUpBtnHover { background-position:0px -16px; }
+.spinUpBtnPress { background-position:0px -32px; }
+.spinDownBtn { background-position:0px -8px; }
+.spinDownBtnHover { background-position:0px -24px; }
+.spinDownBtnPress { background-position:0px -40px; }

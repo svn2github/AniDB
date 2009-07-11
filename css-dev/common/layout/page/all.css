@@ -4,7 +4,10 @@
 @import "animeatt.css";
 @import "animelist.css";
 @import "charlist.css";
+@import "club.css";
+@import "clublist.css";
 @import "cmt.css";
+@import "collection.css";
 @import "collectionlist.css";
 @import "creatorlist.css";
 @import "credits.css";
@@ -13,6 +16,7 @@
 @import "ep.css";
 @import "file.css";
 @import "genren.css";
+@import "group.css";
 @import "grouplist.css";
 @import "latest.css";
 @import "latestanimes.css";
@@ -30,6 +34,7 @@
 @import "relations.css";
 @import "reports.css";
 @import "schedule.css";
+@import "song.css";
 @import "songlist.css";
 @import "tags.css";
 @import "userlist.css";

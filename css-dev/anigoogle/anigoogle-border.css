@@ -4,8 +4,10 @@ table
 	border-top:1px solid;
 }
 
+#layout-main div.ep_all div.info table,
 #layout-main div.hint2_all table,
-#layout-main div.anime_all div.info div.data table
+#layout-main div.anime_all div.info div.data table,
+#layout-main div.song_all div.info table
 {
 	border-top:none;
 }
@@ -84,6 +86,11 @@ tr + tr td,
 	border-top:1px solid #C9D7F1;
 }
 
+#layout-main div.g_definitionlist tr th
+{
+	border-top:1px solid #E8F0FF;
+}
+
 #layout-main div.g_definitionlist tr:first-child th
 {
 	border-top:none;
@@ -98,4 +105,11 @@ tr + tr td,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top:2px solid #C9D7F1;
+}
+
+#layout-main div.mylist_all td.stats,
+#layout-main div.mylist_all td.rating,
+#layout-main div.mylist_all td.vote
+{
+	border-left:1px solid #C9D7F1;
 }

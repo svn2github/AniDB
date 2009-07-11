@@ -1,3 +1,8 @@
+tr
+{
+	background-color: #000000;
+}
+
 button,
 select,
 select option,
@@ -291,7 +296,7 @@ tr + tr td,
 }
 
 #layout-main div.forum div.events dl dt,
-#layout-main div.forum div.poll dl dt
+#layout-main div.forum div.poll dl dt,
 #layout-main div.cmt_entries dl.profile dd,
 #layout-main div.forum div.poll dl dd,
 #layout-main div.forum div.events dl dd
@@ -299,11 +304,17 @@ tr + tr td,
 	color:#888888;
 }
 
+#layout-main div div.addrelform table tr.header
+{
+	background-color: #777777;
+}
+
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4
 {
 	background-color: #000000;
 }
+
 
 #layout-main a.filter
 {
@@ -373,4 +384,11 @@ tr + tr td,
 #layout-main div.cmt_all div.cmt_add hr
 {
 	background-color:#666666;
+}
+
+#layout-main div.mylist_all td.stats,
+#layout-main div.mylist_all td.rating,
+#layout-main div.mylist_all td.vote
+{
+	border-left:1px solid #555555;
 }

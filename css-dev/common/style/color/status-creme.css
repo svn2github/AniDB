@@ -67,19 +67,22 @@
 }
 
 /*epbar colors*/
-#layout-main div.anime_all div.groups td.epbar div.notdone
+#layout-main div.anime_all div.groups td.epbar div.notdone,
+#layout-main div.group_all div.group_released td.epbar div.notdone
 {
 	background-color:#c6c3ff;
 	border-bottom: 2px solid #c6c3ff;
 }
 
-#layout-main div.anime_all div.groups td.epbar div.done
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
 {
 	background-color:#6361ff;
 	border-bottom: 2px solid #6361ff;
 }
 
-#layout-main div.anime_all div.groups td.epbar div.done.mylist
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
 {
 	border-bottom: 2px solid #00ff00;
 }

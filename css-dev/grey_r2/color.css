@@ -1,3 +1,10 @@
+span.link,
+a,
+#layout-main div.forum div.poll div.inner div.question h2
+{
+color: #ADD8E6;
+border-bottom-color: white;
+}
 thead,
 tr th,
 #layout-content div.anime_mylist th,
@@ -16,16 +23,24 @@ tr th,
 {
 background-color: hsla(0, 100%, 25%, 0.4);
 }
+#layout-main tr th.field
+{
+background-color: transparent;
+}
 html,
 #layout-content,
 #layout-main div.quotebody div.quotebody:nth-of-type(2n+1),
 #layout-main div.forum div.postbody dl.codebox
 {
-background-image: url(images/bg_1.gif);
+background-image: url(../grey/images/bg_1.gif);
 }
 #layout-nav,#layout-footer,#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account
 {
-background-image: url(images/bg_2.gif);
+background-image: url(../grey/images/bg_2.gif);
+}
+#layout-main div.tabbed_pane div.pane table td
+{
+background-color: transparent;
 }
 #layout-content div.g_msg.error,
 #layout-content div.g_msg.warning,
@@ -47,29 +62,26 @@ background-image: url(images/bg_2.gif);
 #addAudLang,
 #remSubLang,
 #addSubLang,
-div.addfilem input[id="addfilem.next"],
-div.result input,
-form input[type="submit"],
-a.button,
-input.button,
-button.button,
-a.confirmButton,
-input.confirmButton,
-button.confirmButton,
+#results_back,
+#results_submit,
+input#addfilem\.next,
+input#addfilem\.search,
+input[type="submit"],
+input[type="button"],
+*.button,
+button,
+*.confirmButton,
 tr.g_odd,
-tr.g_odd th,
 li.g_odd,
 span.g_odd,
 #layout-content div.creq_all tr.revoked td,
 #layout-content div.creq_all tr.deleted td,
 #layout-content div.animeatt_reviews div.review > h4,
 #layout-content div.animeatt_reviews div.review div.text,
-ul#layout-menu li:hover ul ,
 div.quotebody div.quote div.g_odd,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
-#layout-main div.tabbed_pane div.pane table tr.g_odd td
+#layout-main div.quotebody div.quoteof
 {
-background-image: none;
 background-color: hsla(0, 0%, 0%, 0.4);
 }
 #layout-content div.animelist_all tr.mylist td
@@ -77,7 +89,8 @@ background-color: hsla(0, 0%, 0%, 0.4);
 background-color: hsla(34, 95%, 44%, 0.4);
 }
 #layout-content div.animelist_all tr.complete td,
-#layout-content div.mylist_list tr.complete td
+#layout-content div.mylist_list tr.complete td,
+#layout-main div.forum div.poll div.pollbar
 {
 background-color: hsla(207, 86%, 44%, 0.4);
 }
@@ -108,9 +121,8 @@ background-color: hsla(0, 100%, 50%, 0.3);
 #layout-main div.forum div.events div.inner,
 #layout-main div.export_all div.exportblock div.inner
 {
-background-image: url(images/bg_3.gif);
+background-image: url(../grey/images/bg_3.gif);
 }
-
 #layout-main table ul li.g_odd,
 #layout-main table table td.g_odd,
 #layout-main ul.g_list li.g_odd,
@@ -119,11 +131,33 @@ tr.action td.submit:hover
 {
 background: inherit;
 }
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-tabs ul.main-tabs > li
+{
+border: 1px solid #565656;
+border-bottom-color: transparent;
+color: grey;
+}
+#layout-tabs ul.main-tabs > li a span
+{
+color: grey;
+}
 #layout-main div.tabbed_pane div.body,
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.navbar div.inner div.bottom,
+#layout-tabs ul.main-tabs > li.selected,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-tabs ul.main-tabs li:hover
 {
 border:1px solid #121212;
+}
+#layout-tabs ul.main-tabs > li a:hover span,
+#layout-tabs ul.main-tabs > li.selected a span,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+color: white;
 }
 #layout-main > h1,
 #layout-nav div.menu_hr
@@ -141,23 +175,17 @@ background-color: hsla(0, 100%, 100%, 0.2);
 #addAudLang:hover,
 #remSubLang:hover,
 #addSubLang:hover,
-div.addfilem input[id="addfilem.next"]:hover,
-div.result input:hover,
-form input[type="submit"]:hover,
-a.button:hover,
-input.button:hover,
-button.button:hover,
-a.confirmButton:hover,
-input.confirmButton:hover,
-button.confirmButton:hover,
-#layout-search form input.submit:hover,
-form button[type="submit"]:hover,
+#results_back:hover,
+#results_submit:hover,
+input#addfilem\.next:hover,
+input#addfilem\.search:hover,
+*.button:hover,
+*.confirmButton:hover,
+button:hover,
+*.submit:not(div):hover,
 input[type="submit"]:hover,
-#layout-search form input.submit:hover,
-form button[type="submit"]:hover,
-input[type="submit"]:hover
+input[type="button"]:hover
 {
-background-image: none;
 background-color: hsla(0, 100%, 25%, 0.8);
 color: #ff6000;
 border-color: #797979;
@@ -172,7 +200,7 @@ border: 1px solid #ff6000;
 }
 #layout-content div.g_msg.note
 {
-border: 1px solid #006600;
+border: 1px solid #575757;
 }
 #layout-content div.g_msg.success
 {
@@ -182,13 +210,14 @@ border: 1px solid #1D6125;
 {
 color: red;
 }
-#layout-content div.g_msg.warning h3
+#layout-content div.g_msg.warning h3,
+#layout-hint span a
 {
 color: #FF6000;
 }
 #layout-content div.g_msg.note h3
 {
-color: #006600;
+color: grey;
 }
 #layout-content div.g_msg.success h3
 {
@@ -198,11 +227,12 @@ input[disabled], input[readonly], select[disabled], select[readonly], checkbox[d
 {
 color: #898989;
 }
-tr:hover td,
+#layout-main tr:hover th.field,
+tr:hover > td,
 #layout-main div.forum ul.topics li.row:hover,
-#layout-main div.tabbed_pane div.pane table tr:hover td
+#layout-main div.tabbed_pane div.pane table tr:hover > td
 {
-background-image: url(images/whitepixel.png);
+background-image: url(../grey/images/whitepixel.png);
 /*background-color: hsla(0, 100%, 100%, 0.2);*/
 }
 #layout-main div.forum ul.topics,
@@ -218,33 +248,30 @@ background-color: hsla(0, 100%, 25%, 0.4);
 }
 #tooltip span.top
 {
-background:url(images/bubble.png) no-repeat top;
+background:url(../grey/images/bubble.png) no-repeat top;
 }
 
 #tooltip span.middle
 {
-background:url(images/bubble_filler.png) repeat bottom;
+background:url(../grey/images/bubble_filler.png) repeat bottom;
 }
 
 #tooltip span.bottom
 {
-background:url(images/bubble.png) no-repeat bottom;
+background:url(../grey/images/bubble.png) no-repeat bottom;
 }
 #tooltip
 {
 color: white;
 }
-#layout-tabs ul.main-tabs > li.selected
+#layout-main div.tagcloud span:nth-of-type(2n+1) a
 {
-border-bottom-color: #FF6000;
+color: #f1f1f1;
 }
-#layout-main div.tagcloud span:nth-child(2n+1) a
+#layout-main div.tagcloud span:nth-of-type(2n+1) a:active,
+#layout-main div.tagcloud span a:active
 {
-color: #99FFB6;
-}
-#layout-main div.tagcloud span:nth-child(2n+1) a:active
-{
-color: blue;
+color: #ff6000;
 }
 #layout-main div.anime_all div.episodes tr.newtype td
 {
@@ -252,12 +279,8 @@ border-top: 1px dashed #c1c1c1;
 }
 #obj-tooltip
 {
-width: auto !important;
-height: auto !important;
-background-color: black;
+background-image: url(../grey/images/bg_2.gif);
 color: white;
-visibility: hidden;
-z-index: 100;
 }
 #obj-tooltip h1
 {
@@ -271,4 +294,49 @@ margin: 0;
 padding: 0;
 text-align: left;
 vertical-align: middle;
+}
+#layout-hint
+{
+background-image:url(../grey/images/bluepixel.png);
+background-color: #262a2a;
+border: 0;
+}
+#layout-hint span a:hover
+{
+color: red;
+}
+#layout-main div.forum div.poll div.pollbar
+{
+border-color: #3c37a5;
+}
+#layout-main div.anime_all div.groups td.epbar div.notdone,
+#layout-main div.group_all div.group_released td.epbar div.notdone
+{
+background-color:grey;
+border-bottom: 2px solid grey;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+background-color:#343434;
+border-bottom: 2px solid #515151;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+border-bottom: 2px solid #008800;
+}
+#layout-nav li li:hover a
+{
+color: #ff6000;
+background-image: url(../grey/images/whitepixel.png);
+}
+div.spoiler,
+#layout-main div.cmt_entries dl.profile,
+#layout-main div.forum ul.topiclist dd,
+#layout-main div.quotebody
+{
+border-color: grey;
 }

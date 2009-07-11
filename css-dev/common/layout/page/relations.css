@@ -148,3 +148,9 @@
 {
 	text-align:left;
 }
+
+#layout-main div.addcreatoranimerel_all div.content h4 span.nolink
+{
+	-moz-user-select:text;
+	cursor: default;
+}

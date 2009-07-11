@@ -34,11 +34,18 @@
 }
 
 #layout-main div.userpage_all div.userdetails,
-#layout-main div.userpage_all div.userprefs
+#layout-main div.userpage_all div.userprefs,
+#layout-main div.userpage_all div.clubs,
+#layout-main div.userpage_all div.signature
 {
 	clear:none;
 	margin-left:19em;
 	margin-right:12.5em;
+}
+
+#layout-main div.userpage_all div.userdetails div.desc
+{
+	clear:none;
 }
 
 #layout-main div.userpage_all div.userdetails .block > div
@@ -98,12 +105,6 @@
 	margin-top:1em;
 }
 
-#layout-main div.userpage_all div.charts div.error
-{
-	clear:none;
-	float:none;
-}
-
 #layout-main div.userpage_all div.cmt_entries
 {
 	clear:none;
@@ -111,6 +112,7 @@
 	width:100%;
 }
 
+#layout-main div.userpage_all div.charts div.error,
 #layout-main div.userpage_all div.forum div.error
 {
 	clear:none;
@@ -120,4 +122,12 @@
 #layout-main div.userpage_all div.stats table th
 {
 	width:9em;
+}
+
+#layout-main div.userpage_all div.userprefs div.block
+{
+	display:inline-block;
+	margin-left: 1em;
+	margin-bottom: 1em;
+	width:auto;
 }

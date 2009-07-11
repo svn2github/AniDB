@@ -1,0 +1,10 @@
+@import "../anigoogle-menu/anigoogle-menu.css";
+@import "../common/style/color/forum-default.css";
+@import "../common/style/color/status-radioactive.css";
+@import "test-color.css";
+@import "test-border.css";
+
+#layout-footer:after
+{
+	content:"design by deridiot inspired by anidbstyle";
+}
