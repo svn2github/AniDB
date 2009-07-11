@@ -98,8 +98,6 @@ a:hover
 	background-color: #4A4A5A;
 }
 
-#layout-menu,
-#layout-menu a:hover,
 #layout-tabs a:hover {
 	color: #bbbbbb;
 }
@@ -221,5 +219,5 @@ input[type="checkbox"]
 #layout-menu > li ul,
 #layout-menu li.sub-menu
 {
-	background-color:#4a4a5a;
+	background-color:#34394D;
 }
