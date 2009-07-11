@@ -26,3 +26,19 @@
 	height:10.5em;
 	padding-bottom: 0;
 }
+
+#layout-search input.submit
+{
+	width:80px;
+}
+
+#layout-search div.search
+{
+	width:44em;
+}
+
+#layout-nav div.search a.advsearch
+{
+	left:770px;
+	width:83px;
+}
