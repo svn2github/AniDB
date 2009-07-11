@@ -85,21 +85,13 @@ a:hover
 
 #layout-tabs ul li
 {
-	background-color: #666666;
+	background-color: #D3D5D9;
 }
 
-#layout-tabs li.selected
-{
-	background-color: #4A4A5A;
-}
-
+#layout-tabs li.selected,
 #layout-tabs li:hover
 {
-	background-color: #4A4A5A;
-}
-
-#layout-tabs a:hover {
-	color: #bbbbbb;
+	background-color: #BFC2C9;
 }
 
 option /*Opera*/

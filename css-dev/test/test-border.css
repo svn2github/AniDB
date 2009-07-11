@@ -56,30 +56,17 @@ img, a
 	padding: 1em;
 }
 
-#layout-tabs li.selected a
-{
-	border-top: 1px solid #4A4A5A;
-}
-
 #layout-tabs ul li
 {
-	border-left: 1px solid #000008;
-	border-right: 1px solid #000008;
-	border-bottom: 1px solid #000008;
-	border-top: none;
+	border-left: 1px solid #9A9CA1;
+	border-right: 1px solid #9A9CA1;
+	border-top: 1px solid #9A9CA1;
+	border-bottom: 1px double #BFC2C9;
 }
 
-#layout-tabs ul li a
+#layout-tabs li.selected
 {
-	border-left: 1px solid #D6DEE7;
-	border-right: 1px solid #D6DEE7;
-	border-bottom: 1px solid #D6DEE7;
-	border-top: none;
-}
-
-#layout-tabs li.selected a
-{
-	border-top: 1px solid #4A4A5A;
+	border-bottom: 1px double #D3D5D9;
 }
 
 #layout-main div.tabbed_pane div.body
