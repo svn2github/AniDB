@@ -1,4 +1,12 @@
-@import "../anigoogle-menu/anigoogle-menu.css";
+@import "../sub/common.css";
+@import "../anigoogle/anigoogle-layout.css";
+@import "../anigoogle/anigoogle-text.css";
+@import "../anigoogle/anigoogle-border.css";
+@import "../anigoogle/anigoogle-color.css";
+@import "../anigoogle-menu/anigoogle-menu-layout.css";
+@import "../anigoogle-menu/anigoogle-menu-text.css";
+@import "../anigoogle-menu/anigoogle-menu-border.css";
+@import "../anigoogle-menu/anigoogle-menu-color.css";
 @import "../common/style/color/forum-default.css";
 @import "../common/style/color/status-radioactive.css";
 @import "test-color.css";
