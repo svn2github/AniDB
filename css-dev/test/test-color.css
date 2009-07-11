@@ -114,7 +114,15 @@ option /*Opera*/
 #user-xpass input
 {
 	color: #CCCCCC;
-	border: #BFC2C9 1px solid;
+	background-color: #34394d;
+	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size: 130%;
+}
+
+#user-xname input,
+#user-xpass input
+{
+	color: #CCCCCC;
 	background-color: #34394d;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	font-size: 130%;
@@ -172,14 +180,12 @@ input[type="checkbox"]
 #layout-main div.tabbed_pane ul.tabs li
 {
 	background-color:#D3D5D9;
-	border-bottom-color:#D3D5D9;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	background:#b8bac0;
-	border-bottom-color:#b8bac0;
 }
 
 #layout-main div.main_all div.register div.inner,
@@ -259,4 +265,62 @@ table
 #layout-main div div.addrelform table tr
 {
 	background-color:inherit;
+}
+
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"]
+{
+	color: #FFFFFF;
+	border: 1px solid #34394D;
+	background-color: #34394D;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	padding:3px 5px;
+}
+
+span.test:hover,
+button:hover,
+#layout-main ul.g_list li.selected,
+#layout-main ul.g_list li.selected:hover,
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.g_odd:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover
+{
+	background-color: #BFC2C9;
+}
+
+#layout-main .g_list li a
+{
+	color: #FFFFFF;
+}
+
+#layout-main .g_list li:hover a
+{
+	color: #000000;
+}
+
+#layout-main div.pagination span a
+{
+	border: 1px solid #BABABA;
+}
+
+#layout-main div.pagination span a
+{
+	background-color: #ECEDEE;
+	border-color: #B4BAC0;
+	color: #5C758C;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	border: 1px solid #BFBFBF;
+	background-color: #969AA6;
+	border-color: #969AA6;
+	color: #FFFFFF;
 }

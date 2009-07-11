@@ -77,9 +77,7 @@ img, a
 
 #layout-main div.tabbed_pane ul.tabs li
 {
-	border-left:1px solid #9A9CA1;
-	border-right:1px solid #9A9CA1;
-	border-top:1px solid #9A9CA1;
+	border:1px solid #9A9CA1;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
