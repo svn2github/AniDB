@@ -83,17 +83,17 @@ a:hover
 	color: #FFAA55;
 }
 
-#layout-tabs ul li a
+#layout-tabs ul li
 {
 	background-color: #666666;
 }
 
-#layout-tabs li.selected a
+#layout-tabs li.selected
 {
 	background-color: #4A4A5A;
 }
 
-#layout-tabs li a:hover
+#layout-tabs li:hover
 {
 	background-color: #4A4A5A;
 }
