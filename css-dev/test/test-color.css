@@ -71,27 +71,27 @@ a:hover
 }
 
 #layout-menu a:link,
-#layout-menu a:visited,
-#layout-tabs a
+#layout-menu a:visited
 {
 	color: white;
 }
 
-#layout-menu a:active,
-#layout-tabs li.selected a
+#layout-menu a:active
 {
 	color: #FFAA55;
 }
 
-#layout-tabs ul li
+#layout-tabs ul.main-tabs li
 {
-	background-color: #D3D5D9;
+	background-color: #34394D;
+	color: #FFFFFF;
 }
 
-#layout-tabs li.selected,
-#layout-tabs li:hover
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li:hover
 {
 	background-color: #BFC2C9;
+	color: #000000;
 }
 
 option /*Opera*/
