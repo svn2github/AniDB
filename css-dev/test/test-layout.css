@@ -33,3 +33,8 @@
 	top:25px;
 	width:83px;
 }
+
+#layout-main div.filter_menu span.actions.old input
+{
+	margin-top:3px;
+}

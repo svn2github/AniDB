@@ -2,13 +2,13 @@ html,
 tr,
 #layout-menu
 {
-	background-color:#BFC2C9;
+	background-color:#D6D7D9;
 }
 
 body.nonav
 {
 	height: 100%;
-	background-color: #BFC2C9;
+	background-color: #D6D7D9;
 }
 
 span.link,
@@ -33,7 +33,7 @@ a:hover
 
 #layout-main *.g_odd *.g_odd
 {
-	background-color: #BFC2C9;
+	background-color: #D6D7D9;
 }
 #layout-main *.g_odd *.g_odd *.g_odd
 {
@@ -41,7 +41,7 @@ a:hover
 }
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd
 {
-	background-color: #BFC2C9;
+	background-color: #D6D7D9;
 }
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd
 {
@@ -50,7 +50,7 @@ a:hover
 
 #layout-main ul.g_list li.g_odd
 {
-	background-color: #BFC2C9;
+	background-color: #D6D7D9;
 }
 
 #layout-main div.news h4,
@@ -94,7 +94,7 @@ a:hover
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
-	background-color: #BFC2C9;
+	background-color: #D6D7D9;
 }
 
 #layout-tabs ul.main-tabs li.selected a,
@@ -148,7 +148,7 @@ input[size="60"]
 select, textarea
 {
 	color: #CCCCCC;
-	border: #BFC2C9 1px solid;
+	border: #D6D7D9 1px solid;
 	background-color: #34394D;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	font-size: 130%;
@@ -159,7 +159,7 @@ input[type="password"],
 input[type="checkbox"]
 {
 	color: #CCCCCC;
-	border: #BFC2C9 1px solid;
+	border: #D6D7D9 1px solid;
 	background-color: #34394D;
 	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	font-size: 130%;
@@ -292,7 +292,7 @@ input[type="button"]:hover,
 input[type="submit"]:hover
 {
 	border: 1px solid #34394D;
-	background-color: #BFC2C9;
+	background-color: #D6D7D9;
 	color: #000000;
 }
 
