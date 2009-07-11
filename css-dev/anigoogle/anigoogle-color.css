@@ -67,8 +67,6 @@ span.g_odd
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
-#layout-menu li.sub-menu:hover,
-#layout-menu li.sub-menu ul li:hover,
 #layout-main div.g_timedentry h4
 {
 	background-color:#ECF4FD;
