@@ -1,6 +1,6 @@
 #layout-search div.search
 {
-	margin-left:36em;
+	margin-left:35em;
 	margin-top:1.9em;
 }
 
@@ -12,17 +12,17 @@
 
 #layout-nav div.search a.advsearch
 {
-	left:800px;
-	top:23px;
+	left:790px;
+	top:25px;
 }
 
 #layout-tabs
 {
-	margin:8em 0.3em;
+	margin:7.5em 0.3em;
 }
 
 #layout-nav
 {
-	height:11em;
+	height:10.5em;
 	padding-bottom: 0;
 }
