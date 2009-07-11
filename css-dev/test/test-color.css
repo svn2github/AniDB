@@ -222,3 +222,62 @@ input[type="checkbox"]
 {
 	background-color:#34394D;
 }
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border-bottom-color:#B8BAC0;
+}
+
+#layout-content {
+	border-bottom-color:#666666;
+	border-left-color:#666666;
+	border-top-color:#666666;
+}
+
+#layout-nav
+{
+	border-left-color:#666666;
+}
+
+th,
+#layout-main div.profile_all div.default_languages table tr
+{
+	background-color: inherit;
+}
+
+#layout-main > h1
+{
+	background-color:#34394D;
+	border-top-color:#DDDDDD;
+	color:#CCCCCC;
+}
+
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#666666;
+}
+
+#layout-main div.g_definitionlist tr th,
+tr + tr td, #layout-main div div.explanation div.description dl + dl,
+#layout-main div.report_all div.body ul li + li,
+#layout-main div.g_definitionlist tr th
+{
+	border-top-color:#CCCCCC;
+}
+
+#layout-main div.tagcloud,
+#layout-main div.desc
+{
+	background-color:#B8BAC0;
+	border-color:#9A9CA1;
+}
+
+#layout-main table tr.header
+{
+	background-color:#999999;
+}
+
+table
+{
+	border-top-color:#DDDDDD;
+}

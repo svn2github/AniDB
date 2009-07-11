@@ -56,7 +56,7 @@ img, a
 	padding: 1em;
 }
 
-#layout-tabs ul.main-tabs > li
+#layout-tabs ul.main-tabs li
 {
 	border-left: 1px solid #666666;
 	border-right: 1px solid #666666;
@@ -89,4 +89,9 @@ img, a
 	border-left:1px solid #9A9CA1;
 	border-right:1px solid #9A9CA1;
 	border-top:1px solid #9A9CA1;
+}
+
+#layout-main ul.g_list li
+{
+	border:none;
 }
