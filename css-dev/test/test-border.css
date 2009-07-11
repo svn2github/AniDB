@@ -56,17 +56,18 @@ img, a
 	padding: 1em;
 }
 
-#layout-tabs ul.main-tabs li
+#layout-tabs ul.main-tabs > li
 {
 	border-left: 1px solid #666666;
 	border-right: 1px solid #666666;
 	border-top: 1px solid #666666;
-	border-bottom: 1px double #BFC2C9;
+	border-bottom: 1px double #34394D;
 }
 
-#layout-tabs ul.main-tabs li.selected
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li:hover
 {
-	border-bottom: 1px double #34394D;
+	border-bottom: 1px double #BFC2C9;
 }
 
 #layout-main div.tabbed_pane div.body
