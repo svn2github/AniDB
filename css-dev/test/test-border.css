@@ -1,83 +1,63 @@
 table
 {
-	border-collapse: separate;
-}
-
-table table
-{
-	border: none;
-}
-
-img, a
-{
-	border: none;
+	border-collapse:separate;
 }
 
 #layout-main .g_image image,
 #layout-main .g_definitionlist
 {
-	padding: 1px;
+	padding:1px;
 }
 
 #layout-main .block .g_definitionlist table
 {
-	border: none;
-	margin: 0;
+	border:none;
+	margin:0;
 }
 
 #layout-main div.avatar img,
 #layout-main div.anime_all div.info div.image img
 {
-	border: 1px solid;
-	border-color: #717377 #E8E9EC #E8E9EC #717377;
-	padding: 1px;
+	border:1px solid;
+	border-color:#717377 #E8E9EC #E8E9EC #717377;
+	padding:1px;
 }
 
 #layout-main div.anime_all div.groups tr.header th,
 #layout-main div.anime_all div.episodes tr.header th
 {
-	padding: 4px 1px 7px 1px;
-	border-bottom: black 2px solid;
+	border-bottom:black 2px solid;
+	padding:4px 1px 7px;
 }
 
 #layout-main table.eplist tr.files.episode td
 {
-	border-bottom: 1px solid gray;
+	border-bottom:1px solid gray;
 }
 
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top: black 2px solid;
+	border-top:black 2px solid;
 }
 
 #layout-main div.g_content
 {
-	border-top: 2px groove #BFC2CA;
-	padding: 1em;
+	border-top:2px groove #BFC2CA;
+	padding:1em;
 }
 
 #layout-tabs ul.main-tabs li
 {
-	border-left: 1px solid #666666;
-	border-right: 1px solid #666666;
-	border-top: 1px solid #666666;
-	border-bottom: 1px double #34394D;
+	border-bottom:1px double #34394D;
+	border-left:1px solid #666666;
+	border-right:1px solid #666666;
+	border-top:1px solid #666666;
 }
 
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
-	border-bottom: 1px double #C8CACE;
-}
-
-#layout-main div.tabbed_pane div.body
-{
-	border:1px solid #9A9CA1;
-}
-
-#layout-main div.tabbed_pane ul.tabs li
-{
-	border:1px solid #9A9CA1;
+	border-bottom:1px double #C8CACE;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
@@ -90,7 +70,21 @@ img, a
 }
 
 #layout-main div.pagination span strong,
-#layout-main div.pagination span a
+#layout-main div.pagination span a,
+#layout-main div.pagination span a:hover
 {
-	border: 1px solid #777777;
+	border:1px solid #777777;
+}
+
+table table,
+img,
+a
+{
+	border:none;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border:1px solid #9A9CA1;
 }

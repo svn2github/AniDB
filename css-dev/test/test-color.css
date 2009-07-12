@@ -193,7 +193,6 @@ tr,
 #layout-menu,
 #layout-main *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main ul.g_list li.g_odd,
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
