@@ -67,7 +67,7 @@ img, a
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
-	border-bottom: 1px double #D6D7D9;
+	border-bottom: 1px double #C8CACE;
 }
 
 #layout-main div.tabbed_pane div.body
