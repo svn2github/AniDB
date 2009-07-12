@@ -138,6 +138,11 @@ table
 	color:#000000;
 }
 
+#layout-main div.g_timedentry h4
+{
+	border-top-color:#DDDDDD;
+}
+
 span.test,
 button,
 #layout-main ul.g_list li,
