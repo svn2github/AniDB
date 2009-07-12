@@ -171,7 +171,6 @@ input[type="submit"]:hover
 #layout-main div.pagination span a
 {
 	background-color:#ECEDEE;
-	border-color:#777777;
 	color:#5C758C;
 }
 
@@ -179,7 +178,6 @@ input[type="submit"]:hover
 #layout-main div.pagination span strong
 {
 	background-color:#8B8F9B;
-	border-color:#777777;
 	color:#FFFFFF;
 }
 
