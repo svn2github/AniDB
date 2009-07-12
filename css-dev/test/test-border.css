@@ -92,4 +92,7 @@ a
 #layout-main div.animeatt_reviews div.review div.text
 {
 	border:1px solid #AAAAAA;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
 }
