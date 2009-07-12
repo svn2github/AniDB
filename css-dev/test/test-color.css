@@ -133,9 +133,9 @@ table
 
 #layout-main div.animeatt_all div.review > h4
 {
-	background-color:#969AA6;
+	background-color:#B0B0B0;
 	border-top-color:#DDDDDD;
-	color:#EEEEEE;
+	color:#000000;
 }
 
 span.test,
@@ -277,4 +277,9 @@ th,
 {
 	background-image:url(images/logo_small.gif);
 	background-repeat:no-repeat;
+}
+
+#layout-main div.animeatt_reviews div.review div.text
+{
+	background-color:#DEDEDE;
 }
