@@ -162,7 +162,7 @@ button:hover,
 #layout-main ul.g_list li.g_odd:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
-#layout-search input:hover
+#layout-search input.submit:hover
 {
 	background-color:#C8CACE;
 	border:1px solid #34394D;
