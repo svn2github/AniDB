@@ -88,3 +88,9 @@ img, a
 	border-right:1px solid #9A9CA1;
 	border-top:1px solid #9A9CA1;
 }
+
+#layout-main div.pagination span strong,
+#layout-main div.pagination span a
+{
+	border: 1px solid;
+}
