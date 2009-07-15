@@ -135,6 +135,20 @@
 	width:89px;
 }
 
+*.i_topic_subscribe
+{
+	background-image: url(../icons/orange/topic_subscribe.gif);
+	height:12px;
+	width:63px;
+}
+
+*.i_topic_unsubscribe
+{
+	background-image: url(../icons/orange/topic_unsubscribe.gif);
+	height:12px;
+	width:75px;
+}
+
 *.i_topic_move
 {
 	background-image: url(../icons/orange/topic_move.png);
