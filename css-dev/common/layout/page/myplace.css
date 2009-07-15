@@ -131,3 +131,25 @@
 	margin-bottom: 1em;
 	width:auto;
 }
+
+#layout-main div.userpage_all div.blog p.comment
+{
+float:right;
+margin:-2em 0 0;
+}
+
+#layout-main div.userpage_all div.blog div.g_msg.note
+{
+clear:none;
+}
+
+#layout-main div.userpage_all div.cmt_entries div.postbody div.content,
+#layout-main div.userpage_all div.cmt_entries div.postbody div.signature
+{
+    margin-left:1em;
+}
+
+#layout-main div.userpage_all div.cmt_entries div.postbody p.author
+{
+    padding-left:1em;
+}
