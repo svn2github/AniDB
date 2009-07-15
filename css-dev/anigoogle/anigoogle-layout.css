@@ -279,3 +279,9 @@ h4,
 {
 	padding:2px 8px;
 }
+
+#layout-main div.animeatt_reviews div.review div.text
+{
+	margin-top:1em;
+	padding:8px;
+}
