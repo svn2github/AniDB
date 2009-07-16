@@ -153,3 +153,8 @@ clear:none;
 {
     padding-left:1em;
 }
+
+#layout-main div.userpage_all div.blog div.g_timedentry
+{
+	min-height:100px
+}
