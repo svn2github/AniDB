@@ -278,14 +278,12 @@
 *.i_forum
 {
 	background-image:url(../icons/phpbb/forum_normal.gif);
-	height:2.5em;
 	background-repeat: no-repeat;
 }
 
 *.i_forum_unread
 {
 	background-image:url(../icons/phpbb/forum_normal_unread.gif);
-	height:2.5em;
 	background-repeat: no-repeat;
 }
 
