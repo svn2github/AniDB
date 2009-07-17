@@ -46,3 +46,9 @@
 	font-size: 10px;
 	word-wrap: break-word;
 }
+
+#layout-hint.mod
+{
+	background-color:#FFF0E5;
+	border-color:#F46F0B;
+}
