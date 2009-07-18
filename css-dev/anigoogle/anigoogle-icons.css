@@ -115,3 +115,7 @@
 *.i_pm_reply {
   background-image:url(../icons/blue/pm_reply.gif);
 }
+
+*.i_topic_subscribe {
+  background-image:url(../icons/blue/topic_subscribe.gif);
+}
