@@ -220,3 +220,10 @@ input[type="checkbox"]
 {
 	background-color:#B0B0B0;
 }
+
+#layout-main div.tagcloud,
+#layout-main div.desc
+{
+	background-color:#B8BAC0;
+}
+

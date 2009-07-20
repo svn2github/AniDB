@@ -172,6 +172,7 @@
 	width: auto;
 	float:left;
 	white-space: nowrap;
+	margin-left:0.2em;
 }
 
 #layout-tabs ul li a
