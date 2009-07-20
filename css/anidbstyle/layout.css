@@ -178,3 +178,8 @@
 {
 	padding:0px 8px 3px 8px;
 }
+
+#layout-main div.userpage_all > div.g_section > h4
+{
+	padding: 0.3em;
+}

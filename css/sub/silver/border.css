@@ -130,3 +130,11 @@ img, a
 {
 	border-top:2px solid #006699;
 }
+
+#layout-main div.userpage_all > div.g_section > h4
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border-top: 1px solid #D1D7DC;
+}

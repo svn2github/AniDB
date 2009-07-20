@@ -215,3 +215,8 @@ input[type="checkbox"]
 {
 	background-color:#A9ABB1;
 }
+
+#layout-main div.userpage_all > div.g_section > h4
+{
+	background-color:#B0B0B0;
+}
