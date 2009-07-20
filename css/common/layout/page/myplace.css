@@ -27,19 +27,6 @@
 	padding:1px 6px;
 }
 
-#layout-main div.userpage_all div.history ul.nav,
-#layout-main div.userpage_all div.history ul.filter
-
-
-#layout-main div.userpage_all div.userdetails,
-#layout-main div.userpage_all div.userprefs,
-#layout-main div.userpage_all div.clubs,
-#layout-main div.userpage_all div.signature
-{
-	clear:none;
-	margin-left:20em;
-}
-
 #layout-main div.userpage_all div.userdetails div.desc
 {
 	clear:none;
@@ -65,7 +52,7 @@
 
 #layout-main div.userpage_all div.charts div
 {
-	float:left;
+	display:inline-block;
 }
 
 #layout-main div.userpage_all div.charts div.votedistribution
@@ -168,11 +155,18 @@
 	text-align:center;
 }
 
+#layout-main div.userpage_all div.history ul.nav,
+#layout-main div.userpage_all div.history ul.filter,
+#layout-main div.userpage_all div.g_section
+{
+	clear:none;
+}
+
+
 #layout-main div.userpage_all div.g_section
 {
 	margin-left:20em;
 	margin-right:1em;
-	clear:none;
 }
 
 #layout-main div.userpage_all div.clubs div
