@@ -154,8 +154,7 @@
 	clear:none;
 }
 
-#layout-main div.userpage_all > div.g_section,
-#layout-main div.userpage_all div.forum
+#layout-main div.userpage_all > div.g_section
 {
 	margin-left:20em;
 	margin-right:1em;
