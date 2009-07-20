@@ -148,13 +148,14 @@
 
 #layout-main div.userpage_all div.history ul.nav,
 #layout-main div.userpage_all div.history ul.filter,
-#layout-main div.userpage_all > div.g_section
+#layout-main div.userpage_all > div.g_section,
+#layout-main div.userpage_all div.forum
 {
 	clear:none;
 }
 
-
-#layout-main div.userpage_all > div.g_section
+#layout-main div.userpage_all > div.g_section,
+#layout-main div.userpage_all div.forum
 {
 	margin-left:20em;
 	margin-right:1em;
