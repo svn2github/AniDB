@@ -1,8 +1,9 @@
-#layout-main div.userpage_all div.stats
+#layout-main div.userpage_all div.stats,
+#layout-main div.userpage_all div.g_menu
 {
-	clear:none;
+	clear:left;
 	float:left;
-	width:18em;
+	width:19em;
 }
 
 #layout-main div.userpage_all div.stats table
@@ -13,13 +14,6 @@
 #layout-main div.userpage_all div.stats div table td.value
 {
 	text-align:right;
-}
-
-#layout-main div.userpage_all div.g_menu
-{
-	clear:right;
-	float:right;
-	width:11em;
 }
 
 #layout-main div.userpage_all div.g_menu div + div
@@ -33,14 +27,17 @@
 	padding:1px 6px;
 }
 
+#layout-main div.userpage_all div.history ul.nav,
+#layout-main div.userpage_all div.history ul.filter
+
+
 #layout-main div.userpage_all div.userdetails,
 #layout-main div.userpage_all div.userprefs,
 #layout-main div.userpage_all div.clubs,
 #layout-main div.userpage_all div.signature
 {
 	clear:none;
-	margin-left:19em;
-	margin-right:12.5em;
+	margin-left:20em;
 }
 
 #layout-main div.userpage_all div.userdetails div.desc
@@ -121,7 +118,7 @@
 
 #layout-main div.userpage_all div.stats table th
 {
-	width:9em;
+	width:8em;
 }
 
 #layout-main div.userpage_all div.userprefs div.block
@@ -134,13 +131,13 @@
 
 #layout-main div.userpage_all div.blog p.comment
 {
-float:right;
-margin:-2em 0 0;
+	float:right;
+	margin:-2em 0 0;
 }
 
 #layout-main div.userpage_all div.blog div.g_msg.note
 {
-clear:none;
+	clear:none;
 }
 
 #layout-main div.userpage_all div.cmt_entries div.postbody div.content,
@@ -158,4 +155,74 @@ clear:none;
 #layout-main div.userpage_all div.blog div.g_timedentry
 {
 	min-height:100px
+}
+
+#layout-main div.userpage_all div.history table
+{
+	width:100%;
+}
+
+#layout-main div.userpage_all div.history ul.nav,
+#layout-main div.userpage_all div.history ul.filter
+{
+	text-align:center;
+}
+
+#layout-main div.userpage_all div.g_section
+{
+	margin-left:20em;
+	margin-right:1em;
+	clear:none;
+}
+
+#layout-main div.userpage_all div.clubs div
+{
+	display: inline-block;
+}
+
+#layout-main div.userpage_all div.clubs div.founded + div.joined
+{
+	margin-left:5em;
+}
+
+#layout-main div.userpage_all div.g_section + div.g_section
+{
+	margin-top:2.5em;
+}
+
+#layout-main div.userpage_all div.userdetails .block div.notify
+{
+	min-width:25em;
+	padding-left: 1em;
+}
+
+#layout-main div.userpage_all div.userdetails .block div.notify div.msg + div.news
+{
+	margin-top:1em;
+}
+
+
+#layout-main div.userpage_all div.userdetails .block div table
+{
+	width:100%;
+}
+
+#layout-main div.userpage_all div.userdetails .block div table th
+{
+	width:7em;
+}
+
+#layout-main div.userpage_all div.userdetails div.desc
+{
+	margin-left: 0em;
+	margin-right: 0em;
+}
+
+#layout-main div.userpage_all div.block
+{
+	display:inline-table;
+	margin-bottom:1em;
+	margin-left:1em;
+	width:auto;
+	margin-right:0;
 }
