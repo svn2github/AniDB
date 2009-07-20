@@ -3,6 +3,17 @@
 {
 	clear:left;
 	float:left;
+}
+
+#layout-main div.userpage_all div.g_menu
+{
+	padding-left: 0.5em;
+	width:18em;
+}
+
+#layout-main div.userpage_all div.stats
+{
+	padding:0;
 	width:19em;
 }
 
