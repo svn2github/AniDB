@@ -73,15 +73,6 @@
 	height:540px;
 }
 
-#layout-main div.userpage_all div.forum,
-#layout-main div.userpage_all div.charts,
-#layout-main div.userpage_all div.latest
-{
-	clear:none;
-	margin-left:18.5em;
-	margin-right:12em;
-}
-
 #layout-main div.userpage_all div.latest div + div,
 #layout-main div.userpage_all div.stats div + div,
 #layout-main div.userpage_all div.userprefs div + div
@@ -157,13 +148,13 @@
 
 #layout-main div.userpage_all div.history ul.nav,
 #layout-main div.userpage_all div.history ul.filter,
-#layout-main div.userpage_all div.g_section
+#layout-main div.userpage_all > div.g_section
 {
 	clear:none;
 }
 
 
-#layout-main div.userpage_all div.g_section
+#layout-main div.userpage_all > div.g_section
 {
 	margin-left:20em;
 	margin-right:1em;
