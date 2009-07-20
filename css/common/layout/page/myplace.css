@@ -167,10 +167,10 @@
 
 #layout-main div.userpage_all > div.g_section
 {
-	margin-left:19em;
 	margin-right:1em;
 }
 
+#layout-main div.userpage_all > div.g_section,
 #layout-main div.userpage_all div.forum
 {
 	margin-left:19.5em;
