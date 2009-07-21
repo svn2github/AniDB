@@ -118,9 +118,14 @@
 	width:auto;
 }
 
+#layout-main div.userpage_all div.blog div.pagination
+{
+	float:none;
+	text-align:right;
+}
+
 #layout-main div.userpage_all div.blog p.comment
 {
-	float:right;
 	margin:-2em 0 0;
 }
 
