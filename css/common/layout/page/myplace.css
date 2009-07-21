@@ -124,6 +124,12 @@
 	text-align:right;
 }
 
+#layout-main div.userpage_all div.blog div.topic_actions a
+{
+	float:none;
+	text-align:left;
+}
+
 #layout-main div.userpage_all div.blog p.comment
 {
 	text-align:right;
