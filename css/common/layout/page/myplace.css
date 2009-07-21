@@ -126,6 +126,7 @@
 
 #layout-main div.userpage_all div.blog p.comment
 {
+	text-align:right;
 	margin:-2em 0 0;
 }
 
