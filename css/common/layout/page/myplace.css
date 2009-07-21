@@ -122,6 +122,7 @@
 {
 	float:none;
 	text-align:right;
+	margin-top:-1em;
 }
 
 #layout-main div.userpage_all div.blog div.topic_actions a
