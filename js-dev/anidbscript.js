@@ -20,7 +20,8 @@ jsVersionArray.push({
 var usejspopups = CookieGetByKey('other', 'jsp') || true;
 var curPageID = null;
 var searchTypeSelect = null;
-var searchTypeAssist = true;
+var searchTypeDefaultSelect = CookieGetByKey('other', 'dsearch') || 'none';
+var searchTypeDefaultAssist = CookieGetByKey('other', 'asearch') || 0;
 var username = null;
 var defaultTabs = tabCookieGet();
 
@@ -627,8 +628,7 @@ var Magic = {
 					}
 				}
 				if (!searchTypeSelect || !input) break;
-				def_search = CookieGet('def_search') || 'none';
-				if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
+				if (searchTypeDefaultSelect != 'none' && searchTypeSelect) searchTypeSelect.value = searchTypeDefaultSelect;
 				addEventSimple(searchTypeSelect,'change',function() { input.focus(); });
 				break;
 			}
@@ -1097,8 +1097,7 @@ function printTags() {
 	}
 }
 
-searchTypeAssist = Number(CookieGet('search_assist') || 1);
-if (searchTypeAssist) {
+if (searchTypeDefaultAssist) {
 	// Initialize the script
 	addLoadEvent(function() {
 		// Find target form
