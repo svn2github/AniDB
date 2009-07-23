@@ -34,7 +34,7 @@ var currentView;
 var simpleView = true;
 var isEditPage = false;
 var seeDebug = false;
-var LAY_FORMATFILESIZE = false;
+var FORMATFILESIZE = false;
 var templateType = 'manual';
 var animeType = 0;
 
