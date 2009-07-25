@@ -79,7 +79,7 @@ background: black;
 border: none;
 font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
 font-size: 10px;
-margin-left: 0.3em;
+margin-right: 0.3em;
 }
 #adba_update,
 #style_next,
@@ -429,4 +429,8 @@ div.dreq_form textarea,
 #layout-main div.forum div.quickreply textarea
 {
 width:50%;
+}
+div.userpage_all div.clubs div.club *
+{
+display: table-row;
 }

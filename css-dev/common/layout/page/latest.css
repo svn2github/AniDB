@@ -98,3 +98,8 @@
 {
 	margin-right:0;
 }
+
+#layout-main div.latest2_all div.latest_recommendations div.content th.anime
+{
+	width:30%;
+}

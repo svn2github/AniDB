@@ -13,3 +13,8 @@
 	margin:-0.5em 0 0.5em;
 	position:relative;
 }
+
+#layout-main div.userpage_all > div.g_section > h4
+{
+	padding: 0.3em;
+}

@@ -35,7 +35,8 @@
 #layout-main div.forum div.comment div.content strong,
 #layout-main div.forum a.topictitle strong,
 #layout-main div.addcreatoranimerel_all tr.identical,
-#layout-main div.addcreatorsongrel_all tr.identical
+#layout-main div.addcreatorsongrel_all tr.identical,
+#layout-main div.latestanimes_all div.g_section.mylist tr.mylist td
 {
 	background-color: #6FCF7F;
 }

@@ -428,3 +428,14 @@ h4.collapsed span
 {
     text-decoration:line-through;
 }
+
+#layout-main div.userpage_all div.block caption,
+#layout-main div.userpage_all div.block h3
+{
+	font-size:1em;
+}
+
+#layout-main div.userpage_all div.userdetails div.block caption
+{
+	font-size:1.2em;
+}

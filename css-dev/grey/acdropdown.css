@@ -1,21 +1,21 @@
-#layout-search ul.acdropdown
+ul.acdropdown
 {
-background-color:transparent;
-background-image: url(images/bg_1.gif);
-border:1px solid #85878C;
-border-top: none;
-color: white;
+background-color:transparent !important;
+background-image: url(images/bg_1.gif) !important;
+border:1px solid #85878C !important;
+border-top: none !important;
+color: white !important;
 }
-#layout-search ul.acdropdown li:nth-child(2n+1)
+ul.acdropdown li:nth-child(2n+1)
 {
-background-image: none;
-background-color: hsla(0, 0%, 0%, 0.4);
+background-image: none !important;
+background-color: hsla(0, 0%, 0%, 0.4) !important;
 }
 
-#layout-search ul.acdropdown li:hover,
-#layout-search ul.acdropdown li.selected
+ul.acdropdown li:hover,
+ul.acdropdown li.selected
 {
-color: #ADD8E6;
-background: transparent url(images/whitepixel.png);
-font-weight: normal;
+color: #ADD8E6 !important;
+background: transparent url(images/whitepixel.png) !important;
+font-weight: normal !important;
 }

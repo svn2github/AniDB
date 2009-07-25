@@ -260,6 +260,11 @@ h4,
 	margin-top:1.1em;
 }
 
+#layout-hint + #layout-nav #layout-search
+{
+	top:4.5em;
+}
+
 #layout-menu li.sub-menu ul li a
 {
 	display: block;

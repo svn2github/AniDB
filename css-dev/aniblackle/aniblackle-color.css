@@ -122,7 +122,8 @@ input[type="submit"]:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
-#layout-main div.news_all div.g_timedentry h4
+#layout-main div.news_all div.g_timedentry h4,
+#layout-main div.userpage_all > div.g_section > h4
 {
 	background-color:#444444;
 }
@@ -193,7 +194,8 @@ div.quotebody
 
 #layout-main div.cmt_all div.cmt_add h4,
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.navbar div.inner div.bottom,
+#layout-main div.userpage_all > div.g_section > h4
 {
 	border-top-color:#666666;
 }

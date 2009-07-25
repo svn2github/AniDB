@@ -102,3 +102,17 @@ img, a
 	border-right:1px solid #9A9CA1;
 	border-top:1px solid #9A9CA1;
 }
+
+#layout-main div.userpage_all > div.g_section > h4
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border-top: 1px solid black;
+}
+
+#layout-main div.tagcloud,
+#layout-main div.desc
+{
+	border:1px solid #9A9CA1;
+}

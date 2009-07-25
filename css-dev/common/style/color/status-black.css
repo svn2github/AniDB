@@ -38,7 +38,8 @@
 #layout-main div.addcreatoranimerel_all tr.identical,
 #layout-main div.addcreatorsongrel_all tr.identical,
 #layout-main table.animelist tr.mylist,
-#layout-main div.song_all div.tabbed_pane_main table tr td.mylist
+#layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
+#layout-main div.latestanimes_all div.g_section.mylist tr.mylist td
 {
 	background-color:#364a36;
 }

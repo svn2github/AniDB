@@ -41,11 +41,11 @@ margin: 0;
 clear: right;
 border: none;
 }
-#layout-main .g_section,
+/*#layout-main .g_section,
 #layout-main .g_list
 {
 clear: both;
-}
+}*/
 #layout-main .g_list.type
 {
 float: left;
@@ -1543,7 +1543,6 @@ display: block;
 float: left;
 width: 13.1em;
 margin-top: 2em;
-clear: none;
 }
 #layout-main div.userpage_all div.charts,
 #layout-main div.userpage_all div.latest,
@@ -1551,8 +1550,7 @@ clear: none;
 #layout-content div.userpage_all div.userprefs
 {
 clear: none;
-margin-left: 19.5em;
-margin-right: 14em;
+margin-left: 21em;
 }
 #layout-main div.userpage_all div.g_menu
 {
@@ -1601,13 +1599,11 @@ padding-right: 1em;
 padding-left: 6px;
 padding-right: 6px;
 text-align: left;
-margin-left: -3em;
 list-style-type: none;
 }
 #layout-content div.userpage_all div.buddies,
 #layout-content div.userpage_all div.favreviewers
 {
-float: right;
 margin-bottom: 1em;
 }
 #layout-content div.userpage_all div.buddies ul li,
@@ -1639,10 +1635,6 @@ float: left;
 #layout-content div.userpage_all div.charts div h4
 {
 text-align: center;
-}
-#layout-content div.userpage_all div.charts div.votedistribution
-{
-margin-left: 50px;
 }
 #layout-content div.userpage_all ul.g_list.links,
 #layout-content div.userpage_all div.charts div.mylisthistory
@@ -2643,4 +2635,21 @@ text-align:left;
 #layout-main table.grouplist td.number.eps
 {
 text-align:center;
+}
+#layout-main div.userpage_all div.charts div,
+#layout-main div.userpage_all div.cmt_entries
+{
+float: none;
+clear: none;
+display: inline-table;
+width: auto;
+margin-left: 0;
+}
+#layout-main div.userpage_all div.forum
+{
+margin-right: 0;
+}
+#layout-main div.userpage_all div.cmt_entries
+{
+width: 100%;
 }

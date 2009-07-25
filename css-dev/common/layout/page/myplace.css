@@ -1,8 +1,20 @@
+#layout-main div.userpage_all div.stats,
+#layout-main div.userpage_all div.g_menu
+{
+	clear:left;
+	float:left;
+}
+
+#layout-main div.userpage_all div.g_menu
+{
+	padding-left: 0.5em;
+	width:18em;
+}
+
 #layout-main div.userpage_all div.stats
 {
-	clear:none;
-	float:left;
-	width:18em;
+	padding:0;
+	width:19em;
 }
 
 #layout-main div.userpage_all div.stats table
@@ -15,13 +27,6 @@
 	text-align:right;
 }
 
-#layout-main div.userpage_all div.g_menu
-{
-	clear:right;
-	float:right;
-	width:11em;
-}
-
 #layout-main div.userpage_all div.g_menu div + div
 {
 	margin-top:1em;
@@ -31,16 +36,6 @@
 #layout-main div.userpage_all div.favreviewers ul li
 {
 	padding:1px 6px;
-}
-
-#layout-main div.userpage_all div.userdetails,
-#layout-main div.userpage_all div.userprefs,
-#layout-main div.userpage_all div.clubs,
-#layout-main div.userpage_all div.signature
-{
-	clear:none;
-	margin-left:19em;
-	margin-right:12.5em;
 }
 
 #layout-main div.userpage_all div.userdetails div.desc
@@ -68,7 +63,7 @@
 
 #layout-main div.userpage_all div.charts div
 {
-	float:left;
+	display:inline-block;
 }
 
 #layout-main div.userpage_all div.charts div.votedistribution
@@ -89,15 +84,6 @@
 	height:540px;
 }
 
-#layout-main div.userpage_all div.forum,
-#layout-main div.userpage_all div.charts,
-#layout-main div.userpage_all div.latest
-{
-	clear:none;
-	margin-left:18.5em;
-	margin-right:12em;
-}
-
 #layout-main div.userpage_all div.latest div + div,
 #layout-main div.userpage_all div.stats div + div,
 #layout-main div.userpage_all div.userprefs div + div
@@ -108,7 +94,7 @@
 #layout-main div.userpage_all div.cmt_entries
 {
 	clear:none;
-	float:left;
+	display:inline-block;
 	width:100%;
 }
 
@@ -121,7 +107,7 @@
 
 #layout-main div.userpage_all div.stats table th
 {
-	width:9em;
+	width:8em;
 }
 
 #layout-main div.userpage_all div.userprefs div.block
@@ -132,15 +118,28 @@
 	width:auto;
 }
 
+#layout-main div.userpage_all div.blog div.pagination
+{
+	float:none;
+	text-align:right;
+	margin-top:-1em;
+}
+
+#layout-main div.userpage_all div.blog div.topic_actions a
+{
+	float:none;
+	text-align:left;
+}
+
 #layout-main div.userpage_all div.blog p.comment
 {
-float:right;
-margin:-2em 0 0;
+	text-align:right;
+	margin:-2em 0 0;
 }
 
 #layout-main div.userpage_all div.blog div.g_msg.note
 {
-clear:none;
+	clear:none;
 }
 
 #layout-main div.userpage_all div.cmt_entries div.postbody div.content,
@@ -154,7 +153,90 @@ clear:none;
     padding-left:1em;
 }
 
+
 #layout-main div.userpage_all div.blog div.g_timedentry
 {
 	min-height:100px
+}
+
+#layout-main div.userpage_all div.history table
+{
+	width:100%;
+}
+
+#layout-main div.userpage_all div.history ul.nav,
+#layout-main div.userpage_all div.history ul.filter
+{
+	text-align:center;
+}
+
+#layout-main div.userpage_all div.history ul.nav,
+#layout-main div.userpage_all div.history ul.filter,
+#layout-main div.userpage_all > div.g_section,
+#layout-main div.userpage_all div.forum
+{
+	clear:none;
+}
+
+#layout-main div.userpage_all > div.g_section
+{
+	margin-right:1em;
+}
+
+#layout-main div.userpage_all > div.g_section,
+#layout-main div.userpage_all div.forum
+{
+	margin-left:19.5em;
+}
+
+#layout-main div.userpage_all div.clubs div
+{
+	display: inline-block;
+}
+
+#layout-main div.userpage_all div.clubs div.founded + div.joined
+{
+	margin-left:5em;
+}
+
+#layout-main div.userpage_all div.g_section + div.g_section
+{
+	margin-top:2.5em;
+}
+
+#layout-main div.userpage_all div.userdetails .block div.notify
+{
+	min-width:25em;
+	padding-left: 1em;
+}
+
+#layout-main div.userpage_all div.userdetails .block div.notify div.msg + div.news
+{
+	margin-top:1em;
+}
+
+
+#layout-main div.userpage_all div.userdetails .block div table
+{
+	width:100%;
+}
+
+#layout-main div.userpage_all div.userdetails .block div table th
+{
+	width:7em;
+}
+
+#layout-main div.userpage_all div.userdetails div.desc
+{
+	margin-left: 0em;
+	margin-right: 0em;
+}
+
+#layout-main div.userpage_all div.block
+{
+	display:inline-table;
+	margin-bottom:1em;
+	margin-left:1em;
+	width:auto;
+	margin-right:0;
 }
