@@ -134,6 +134,11 @@ span.g_odd
 	background-color:#CADCEB;
 }
 
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#FFFFFF;
+}
+
 #layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,

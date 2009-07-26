@@ -63,7 +63,7 @@ table
 #layout-main div.tabbed_pane_cfg ul.tabs li:hover,
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected
 {
-	border-bottom:1px double #D4E6FC;
+	border-bottom:1px double #ECF4FD;
 }
 
 #layout-main div.tagcloud,
