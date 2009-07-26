@@ -308,6 +308,7 @@ public class ACon implements ActionListener{
 		if(param!=null){
 			if(m_session!=null) param += "&s="+m_session;
 		}else if(m_session!=null) param = "s="+m_session;
+		generateTag();
 		if(param!=null)
 			param += "&tag="+m_tag;
 		else param = "tag="+m_tag;
