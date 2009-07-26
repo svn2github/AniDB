@@ -125,7 +125,8 @@ select option[value="0"]
 }
 
 input[type="submit"],
-input[type="button"]
+input[type="button"],
+button
 {
 	background-color:#586fd1;
 	border:1px solid #2d42af;
@@ -134,7 +135,8 @@ input[type="button"]
 }
 
 input[type="submit"]:hover,
-input[type="button"]:hover
+input[type="button"]:hover,
+button:hover
 {
 	background-color:#2d42af;
 }

@@ -6,7 +6,8 @@
 #layout-main div.tabbed_pane div.pane ul
 {
 	width: 100%;
-	display: table;
+	display: inline-block;
+	vertical-align: top;
 }
 #layout-main div.tabbed_pane div.pane.hide
 {

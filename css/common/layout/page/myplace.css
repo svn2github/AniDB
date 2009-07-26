@@ -122,7 +122,6 @@
 {
 	float:none;
 	text-align:right;
-	margin-top:-1em;
 }
 
 #layout-main div.userpage_all div.blog div.topic_actions a
@@ -186,7 +185,7 @@
 #layout-main div.userpage_all > div.g_section,
 #layout-main div.userpage_all div.forum
 {
-	margin-left:19.5em;
+	margin-left:21em;
 }
 
 #layout-main div.userpage_all div.clubs div
@@ -239,4 +238,11 @@
 	margin-left:1em;
 	width:auto;
 	margin-right:0;
+}
+
+#layout-main div.userpage_all div.blog div.buttons,
+#layout-main div.userpage_all div.blog div.buttons + div.pagination
+{
+	display: inline-block;
+	width: 48%;
 }

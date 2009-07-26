@@ -2653,3 +2653,18 @@ margin-right: 0;
 {
 width: 100%;
 }
+#layout-main div.userpage_all div.g_menu
+{
+float: right;
+clear: right;
+}
+#layout-main div.userpage_all div.g_menu.stats
+{
+float: left;
+clear: left;
+}
+#layout-main div.userpage_all div.g_section,
+#layout-main div.userpage_all div.forum
+{
+margin-right: 12em;
+}

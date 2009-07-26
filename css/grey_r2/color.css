@@ -80,7 +80,8 @@ span.g_odd,
 #layout-content div.animeatt_reviews div.review div.text,
 div.quotebody div.quote div.g_odd,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
-#layout-main div.quotebody div.quoteof
+#layout-main div.quotebody div.quoteof,
+#layout-main div.userpage_all div.blog div.body
 {
 background-color: hsla(0, 0%, 0%, 0.4);
 }
