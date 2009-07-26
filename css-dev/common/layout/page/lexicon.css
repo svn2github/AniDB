@@ -31,3 +31,8 @@
 {
 	width: 100%
 }
+
+#layout-main div.lexicon_all div.related_entries ul.jump:first-child
+{
+	margin-top: 0;
+}
