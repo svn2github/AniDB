@@ -18,13 +18,13 @@
 	margin: 1px 1px 1px 6px;
 }
 
-#layout-main div.tabbed_pane div.pane table,
+/*#layout-main div.tabbed_pane div.pane table,
 #layout-main div.tabbed_pane div.pane table td,
 #layout-main div.tabbed_pane div.pane ul,
 #layout-main div.tabbed_pane div.pane ul li
 {
 	background: inherit;
-}
+}*/
 
 #layout-main div.tabbed_pane ul.tabs li
 {
