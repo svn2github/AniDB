@@ -62,7 +62,8 @@
 	background-color: rgb(53, 58, 143);
 	color: white;
 }
-#layout-main div.tabbed_pane ul.tabs li
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main div.tabbed_pane ul.tabs li a
 {
 	background-color: rgb(86, 90, 185);
 	color: rgb(255, 255, 255);
@@ -161,4 +162,10 @@ div.pagination span strong
 #layout-main div.group_all div.group_released td.epbar div.done.mylist
 {
 	border-bottom: 2px solid #00ff00;
+}
+/*overrides*/
+/*profile.css*/
+#layout-main div.profile_all div.pane.general div.body div.pane div ul li a.i_inline
+{
+padding: 4px 8px;
 }
