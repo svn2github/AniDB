@@ -39,18 +39,18 @@ var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
 var uriObj = new Array();      // Object that holds the URI
-var LAY_HEADER = true;
-var LAY_NOANIMEGROUPREL = false;
-var LAY_HIDEFILES = false;
-var LAY_HIDERAWS = false;
-var LAY_HIDEGROUPRAWS = false;
-var LAY_HIDEGENERICFILES = false;
-var LAY_HIDEPARODYEPS = false;
-var LAY_SHOWFID = false;
-var LAY_SHOWCRC = false;
-var LAY_FORMATFILESIZE = false;
-var LAY_HIDEFILTEREDGROUPS = true;
-var IRC_FILTERRELEASESBYLANG = true;
+var HEADER = true;
+var NOANIMEGROUPREL = false;
+var HIDEFILES = false;
+var HIDERAWS = false;
+var HIDEGROUPRAWS = false;
+var HIDEGENERICFILES = false;
+var HIDEPARODYEPS = false;
+var SHOWFID = false;
+var SHOWCRC = false;
+var FORMATFILESIZE = false;
+var HIDEFILTEREDGROUPS = true;
+var FILTERRELEASESBYLANG = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
@@ -233,7 +233,7 @@ function parseData(xmldoc) {
 	var parseCustomNode = (new Date()) - t1;
 	globalStatus.updateBarWithText('Processing animes...',45,'Total progress: ');
 	// do some triming of the definition cols if possible
-	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !LAY_SHOWCRC)
+	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !SHOWCRC)
 		removeColAttribute('crc',fileCols);
 	if (!uid) 
 		removeColAttribute('expand',groupCols);
@@ -692,7 +692,7 @@ function updateGroupTable() {
 		// update existing rows
 		var gid = group.id;
 		if (!groups[gid]) continue; // not interested
-		if (IRC_FILTERRELEASESBYLANG || Number(group_langfilter)) {
+		if (FILTERRELEASESBYLANG || Number(group_langfilter)) {
 			// now we check to see if this group is languaged filtered or not
 			var lafound = (!filterAudLang.length ? true : false);
 			var lsfound = (!filterSubLang.length ? true : false);
@@ -858,7 +858,7 @@ function updateEpisodeTable() {
 	var episodeTable = document.getElementById('eplist');
 	if (!episodeTable) return;
 	var tbody = episodeTable.tBodies[0];
-	if (LAY_HEADER) {
+	if (HEADER) {
 		var thead = document.createElement('thead');
 		var row = tbody.rows[0];
 		var cell = row.cells[0];
@@ -1293,7 +1293,7 @@ function expandFiles() {
 		var table = document.createElement('table');
 		table.className = 'filelist';
 		table.id = 'file'+rfid+'relations';
-		if (LAY_HEADER)
+		if (HEADER)
 			table.appendChild(createTableHead(fileCols));
 		var tfoot = document.createElement('tfoot');
 		var tbody = document.createElement('tbody');
@@ -1358,7 +1358,7 @@ function createFileTable(episode) {
 	var table = document.createElement('table');
 	table.className = 'filelist';
 	table.id = 'episode'+eid+'files';
-	if (LAY_HEADER)
+	if (HEADER)
 		table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
@@ -1373,7 +1373,7 @@ function createFileTable(episode) {
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
 			filterObj.markUnfiltered(file);
-			if (LAY_HIDEFILES && file.isDeprecated) file.visible = false;
+			if (HIDEFILES && file.isDeprecated) file.visible = false;
 			filterObj.markVisible(file);
 			filterObj.markHidden(file);
 			if (!file.visible) episode.hiddenFiles++;
@@ -1381,7 +1381,7 @@ function createFileTable(episode) {
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		if (!expandedGroups) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
-			if (!file.visible || (file.type == 'generic' && LAY_HIDEGENERICFILES)) row.style.display = 'none';		
+			if (!file.visible || (file.type == 'generic' && HIDEGENERICFILES)) row.style.display = 'none';		
 		}
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
@@ -1406,7 +1406,7 @@ function createFileTable(episode) {
 	cell.className = '';
 	cell.replaceChild(table,cell.firstChild);
 	// fix the sorting function
-	if (LAY_HEADER) {
+	if (HEADER) {
 		var idCol = animePage_sorts[animePage_sortsV.indexOf(animePage_curSort)];
 		if (animePage_curLayout.indexOf(idCol) < 0) animePage_curSort = 'default';
 		var sortCol = (animePage_curSort == 'default') ? 'group' : animePage_curSort;

@@ -37,8 +37,8 @@ function createTooltips(node) {
 
 function prepPage() {
 	uriObj = parseURI(); // update the uriObj
-	createPreferencesTable('global');
-	initTooltips();
+	if (typeof createPreferencesTable != 'undefined') createPreferencesTable('global');
+	if (typeof initTooltips != 'undefined') initTooltips();
 	var table = getElementsByClassName(document.getElementsByTagName('table'),'wishlist',false)[0];
 	if (!table) return;
 	table.id = 'wishlist';
@@ -68,7 +68,7 @@ function prepPage() {
 		}
 	}
 	createTooltips(table);
-	handleTables(new Array(),['wishlist'],null,collapseThumbnails,(get_info & 64));
+	if (typeof handleTables != 'undefined') handleTables(new Array(),['wishlist'],null,collapseThumbnails,(get_info & 64));
 }
 
 addLoadEvent(prepPage);

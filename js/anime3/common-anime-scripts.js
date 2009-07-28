@@ -254,7 +254,7 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				var eptitle;
 				var eptitleURL = 'animedb.pl?show=ep&aid='+aid+'&eid='+eid;
 				var eptitleText = "";
-				if (episode.seenDate == 0 && config && config['lay'] && config['lay']['LAY_NOSPOILER']) {
+				if (episode.seenDate == 0 && config && config['lay'] && config['lay']['NOSPOILER']) {
 					eptitleText = (anime.type != 'movie' ? 'Episode' : 'Part') + ' ' + episode.epno;
 					eptitle = createTextLink(null, eptitleText, eptitleURL, null, null, null, null);
 				} else {
@@ -480,7 +480,7 @@ function createFileIcons(file) {
 		var a = createIcon(null, '[+]', null, expandFiles, 'expand this entry', 'i_plus');
 		icons['expand'] = a;
 	}
-	if (!LAY_SHOWFID) {
+	if (!SHOWFID) {
 		if (!file.pseudoFile)
 			icons['fid'] = createIcon(null, file.id, 'animedb.pl?show=file&fid='+file.id, null, 'show file details - FID: '+file.id, 'i_file_details');
 		else
@@ -763,7 +763,7 @@ function createFileRow(eid,fid,cols,skips,rfid) {
 				break;
 			case 'mylist-source':
 				var text = (mylistEntry.source ? mylistEntry.source : "");
-				if (IRC_SHOWFILESOURCE) text = file.source;
+				if (SHOWFILESOURCE) text = file.source;
 				createCell(row, col['classname'], document.createTextNode(text), null, colSpan);
 				break;
 			case 'users':

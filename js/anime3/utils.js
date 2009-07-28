@@ -923,12 +923,12 @@ function epNoToString(epno) {
 
 /* This function formats the file size
  * @param size Size in bytes
- * @param force Should force LAY_FORMATFILESIZE?
+ * @param force Should force FORMATFILESIZE?
  * @return Converted file size
  */
 function formatFileSize(size,force) {
   var format = false;
-  if (LAY_FORMATFILESIZE) format = LAY_FORMATFILESIZE;
+  if (FORMATFILESIZE) format = FORMATFILESIZE;
   if (force) format = force;
   if (!format) {
     var aux = new String(size);

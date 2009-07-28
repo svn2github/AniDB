@@ -594,93 +594,14 @@ function parseConfig(node) {
 		if (sNode.nodeType == 3) continue;
 		switch (sNode.nodeName) {
 			case 'epp': preferredEntriesPerPage = parseInt(nodeData(sNode)) || 25; break;
-			case 'lay':
+			case 'settings':
 				var lay = Number(nodeData(sNode)) || 0;
 				config[sNode.nodeName] = new Array();
-				config[sNode.nodeName]['LAY_HEADER'] = true;
-				config[sNode.nodeName]['LAY_FILES'] = (lay & 2);
-				config[sNode.nodeName]['LAY_NOTIFYPOPUP'] = (lay & 4);
-				config[sNode.nodeName]['LAY_NOTIFYMAIL'] = (lay & 8);
-				config[sNode.nodeName]['LAY_MSGNOPOPUP'] = (lay & 16);
-				config[sNode.nodeName]['LAY_NOANIMEGROUPREL'] = (lay & 32);
-				config[sNode.nodeName]['LAY_SHOWHENTAI'] = (lay & 64);
-				config[sNode.nodeName]['LAY_HIDEKANJI'] = (lay & 128);
-				config[sNode.nodeName]['LAY_HIDEOTHER'] = (lay & 256);
-				config[sNode.nodeName]['LAY_HIDEFILES'] = (lay & 512);
-				config[sNode.nodeName]['LAY_HIDERAWS'] = (lay & 1024);
-				config[sNode.nodeName]['LAY_DROPEDNOTIFY'] = (lay & 2048);
-				config[sNode.nodeName]['LAY_HIDEGENERICFILES'] = (lay & 4096);
-				config[sNode.nodeName]['LAY_EDITNOTIFY'] = (lay & 8192);
-				config[sNode.nodeName]['LAY_EDITEDITNOTIFY'] = (lay & 16384);
-				config[sNode.nodeName]['LAY_FINEVOTES'] = (lay & 32768);
-				config[sNode.nodeName]['LAY_HIDEAWARDS'] = (lay & 65536);
-				config[sNode.nodeName]['LAY_HIDEPARODYEPS'] = (lay & 131072);
-				config[sNode.nodeName]['LAY_HIDEHENTAIPICS'] = (lay & 262144);
-				config[sNode.nodeName]['LAY_NOTIFYREVIEWBUDDY'] = (lay & 524288);
-				config[sNode.nodeName]['LAY_NOTIFYONLYMYLANG'] = (lay & 1048576);
-				config[sNode.nodeName]['LAY_SEQNOTIFY'] = (lay & 2097152);
-				config[sNode.nodeName]['LAY_HISTCLEARSNOTIFY'] = (lay & 4194304);
-				config[sNode.nodeName]['LAY_HIDESHORTTITLE'] = (lay & 8388608);
-				config[sNode.nodeName]['LAY_HIDEOTHERTITLES'] = (lay & 16777216);
-				config[sNode.nodeName]['LAY_ETLANGFLAGS'] = (lay & 33554432);
-				config[sNode.nodeName]['LAY_HIDESYNONYMS'] = (lay & 67108864);
-				config[sNode.nodeName]['LAY_NOSPOILER'] = (lay & 134217728);
-				config[sNode.nodeName]['LAY_SHOWFID'] = (lay & 268435456);
-				config[sNode.nodeName]['LAY_SHOWCRC'] = (lay & 536870912);
-				config[sNode.nodeName]['LAY_SHOWTABS'] = (lay & 1073741824);
-				LAY_HEADER = config[sNode.nodeName]['LAY_HEADER'];
-				LAY_NOANIMEGROUPREL = config[sNode.nodeName]['LAY_NOANIMEGROUPREL'];
-				LAY_HIDEFILES = config[sNode.nodeName]['LAY_HIDEFILES'];
-				LAY_HIDERAWS = config[sNode.nodeName]['LAY_HIDERAWS'];
-				LAY_HIDEGENERICFILES = config[sNode.nodeName]['LAY_HIDEGENERICFILES'];
-				LAY_HIDEPARODYEPS = config[sNode.nodeName]['LAY_HIDEPARODYEPS'];
-				LAY_SHOWFID = config[sNode.nodeName]['LAY_SHOWFID'];
-				LAY_SHOWCRC = config[sNode.nodeName]['LAY_SHOWCRC'];
-				break;
-			case 'irc':
-				var irc = Number(nodeData(sNode)) || 0;
-				config[sNode.nodeName] = new Array();
-				config[sNode.nodeName]['IRC_NICKWATCH'] = (irc & 1);
-				config[sNode.nodeName]['IRC_NICKWATCH_COMMENT'] = (irc & 2);
-				config[sNode.nodeName]['IRC_ED2KWATCH'] = (irc & 4);
-				config[sNode.nodeName]['IRC_HIDEINSTATS'] = (irc & 8);
-				config[sNode.nodeName]['IRC_HIDECATEGORIES'] = (irc & 16);
-				config[sNode.nodeName]['IRC_USEAJAX'] = (irc & 32);
-				config[sNode.nodeName]['IRC_HIDETHUMBNAILS'] = (irc & 64);
-				config[sNode.nodeName]['IRC_SPLITVOTE'] = (irc & 128);
-				config[sNode.nodeName]['IRC_SHOWFULLWEIGHT'] = (irc & 256);
-				config[sNode.nodeName]['IRC_HIDETAGS'] = (irc & 512);
-				config[sNode.nodeName]['IRC_SHOWSPOILERTAGS'] = (irc & 1024);
-				config[sNode.nodeName]['IRC_HIDEGROUPJOINTS'] = (irc & 2048);
-				config[sNode.nodeName]['IRC_HIDEPICS'] = (irc & 4096);
-				config[sNode.nodeName]['IRC_HIDESIGNATURE'] = (irc & 8192);
-				config[sNode.nodeName]['IRC_DONTPARSESMILEYS'] = (irc & 16384);
-				config[sNode.nodeName]['IRC_FILTERRELEASESBYLANG'] = (irc & 32768);
-				config[sNode.nodeName]['IRC_SHOWFILESOURCE'] = (irc & 65536);
-				config[sNode.nodeName]['IRC_HIDEAVATAR'] = (irc & 131072);
-				config[sNode.nodeName]['IRC_DEFAULTNOTHREADNOTIFY'] = (irc & 262144);
-				/*
-				config[sNode.nodeName]['IRC_NOTIFYREVIEWBUDDY'] = (irc & 524288);
-				config[sNode.nodeName]['IRC_NOTIFYONLYMYLANG'] = (irc & 1048576);
-				config[sNode.nodeName]['IRC_SEQNOTIFY'] = (irc & 2097152);
-				config[sNode.nodeName]['IRC_HISTCLEARSNOTIFY'] = (irc & 4194304);
-				config[sNode.nodeName]['IRC_HIDEANIMEPAGESTITLE'] = (irc & 8388608);
-				config[sNode.nodeName]['IRC_HIDEOTHERTITLES'] = (irc & 16777216);
-				config[sNode.nodeName]['IRC_ETLANGFLAGS'] = (irc & 33554432);
-				config[sNode.nodeName]['IRC_HIDESYNONYMS'] = (irc & 67108864);
-				config[sNode.nodeName]['IRC_NOSPOILER'] = (irc & 134217728);
-				config[sNode.nodeName]['IRC_SHOWFID'] = (irc & 268435456);
-				config[sNode.nodeName]['IRC_SHOWCRC'] = (irc & 536870912);
-				config[sNode.nodeName]['IRC_SHOWTABS'] = (irc & 1073741824);
-				*/
-				IRC_USEAJAX = config[sNode.nodeName]['IRC_USEAJAX'];
-				IRC_HIDETHUMBNAILS = config[sNode.nodeName]['IRC_HIDETHUMBNAILS'];
-				IRC_HIDETAGS = config[sNode.nodeName]['IRC_HIDETAGS'];
-				IRC_HIDEGROUPJOINTS = config[sNode.nodeName]['IRC_HIDEGROUPJOINTS'];
-				IRC_HIDEPICS = config[sNode.nodeName]['IRC_HIDEPICS'];
-				IRC_FILTERRELEASESBYLANG = config[sNode.nodeName]['IRC_FILTERRELEASESBYLANG'];
-				IRC_SHOWFILESOURCE = config[sNode.nodeName]['IRC_SHOWFILESOURCE'];
-				IRC_HIDEAVATAR = config[sNode.nodeName]['IRC_HIDEAVATAR'];
+				for (var j = 0; j < sNode.childNodes.length; j++)
+				{
+					var dNode = sNode.childNodes.item(j);
+					config[sNode.nodeName][dNode.nodeName] = true;
+				}
 				break;
 			case 'animelang':
 				for (var j = 0; j < sNode.childNodes.length; j++) {
@@ -1201,8 +1122,8 @@ filterObj.visible = filterObj.defaultVisible;
 filterObj.defaultHidden = {0:4,
 							1:{"falang":"==,obj.filterAudLang"},
 							2:{"fslang":"==,obj.filterSubLang"},
-							3:{"fraw":"==,LAY_HIDERAWS"},
-							4:{"fgroupfiltered":"==,LAY_HIDEFILTEREDGROUPS"}};
+							3:{"fraw":"==,HIDERAWS"},
+							4:{"fgroupfiltered":"==,HIDEFILTEREDGROUPS"}};
 filterObj.hidden = filterObj.defaultHidden;
 /* AUXILIAR COMPARE FUNCTION */
 filterObj.compare = function compare(symbol, a, b) {
@@ -1317,15 +1238,15 @@ filterObj['fdeprecated'] = function fdeprecated(file,symbol,value,rthis) {
 };
 filterObj['fraw'] = function fraw(file,symbol,value,rthis) {
 	if (rthis) return (file.isRaw);
-	if (LAY_HIDERAWS && file.isRaw) return true;
+	if (HIDERAWS && file.isRaw) return true;
 	else return false;
-	//return (filterObj.compare(symbol, file.isRaw, !LAY_HIDERAWS));
+	//return (filterObj.compare(symbol, file.isRaw, !HIDERAWS));
 };
 filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
 	var group = groups[file.groupId];
 	if (!group) return false;
 	if (rthis) return (group.filtered);
-	return (filterObj.compare(symbol, group.filtered, LAY_HIDEFILTEREDGROUPS));
+	return (filterObj.compare(symbol, group.filtered, HIDEFILTEREDGROUPS));
 };
 
 /* PROCESSING FUCTIONS */
