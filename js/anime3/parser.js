@@ -1112,7 +1112,7 @@ filterObj.defaultDeprecated = {0:5,
 							5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fextension":"==,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"}}
 filterObj.deprecated = filterObj.defaultDeprecated;
 filterObj.defaultVisible = {0:6,
-							1:{"hidefiles":"==,true"}
+							1:{"hidefiles":"==,true"},
 							2:{"fdeprecated":"==,true"},
 							3:{"finmylist":"==,true"},
 							4:{"fusers":">=,50"},
