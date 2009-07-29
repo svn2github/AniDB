@@ -1111,12 +1111,13 @@ filterObj.defaultDeprecated = {0:5,
 							4:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":"==,this","c_rf_fextension":"==,this","c_rf_fcrc":"==,valid","fcrc":"!=,valid","fgroup":"!=,0"},
 							5:{"c_sf_fgroup":"==,this","c_rf_fsource":"==,this","c_rf_fversion":">,this","c_rf_fextension":"==,this","c_rf_fcrc":"==,valid","fgroup":"!=,0"}}
 filterObj.deprecated = filterObj.defaultDeprecated;
-filterObj.defaultVisible = {0:5,
-							1:{"fdeprecated":"==,true"},
-							2:{"finmylist":"==,true"},
-							3:{"fusers":">=,50"},
-							4:{"fdate":"<,604800"},
-							5:{"efvisible":"<,1"}};
+filterObj.defaultVisible = {0:6,
+							1:{"hidefiles":"==,true"}
+							2:{"fdeprecated":"==,true"},
+							3:{"finmylist":"==,true"},
+							4:{"fusers":">=,50"},
+							5:{"fdate":"<,604800"},
+							6:{"efvisible":"<,1"}};
 filterObj.visible = filterObj.defaultVisible;
 filterObj.defaultHidden = {0:4,
 							1:{"falang":"==,obj.filterAudLang"},
@@ -1246,6 +1247,9 @@ filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
 	if (!group) return false;
 	if (rthis) return (group.filtered);
 	return (filterObj.compare(symbol, group.filtered, config['settings']['HIDEFILTEREDGROUPS']));
+};
+filterObj['hidefiles'] = function hidefiles(file,symbol,value,rthis) {
+	return (config['settings']['HIDEFILES'] == (value == 'true' ? true : false));
 };
 
 /* PROCESSING FUCTIONS */
