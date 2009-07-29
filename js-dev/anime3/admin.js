@@ -5,9 +5,9 @@
 jsVersionArray.push({
 	"file":"anime3/admin.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2858 $",
+	"date":"$Date:: 2009-07-29 14:07:58 +0100#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });
 

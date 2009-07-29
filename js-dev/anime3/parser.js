@@ -683,6 +683,7 @@ function parseGroups(node,aid) {
 	groupEntry.state = 'unknown';
 	groupEntry.stateId = 0;
 	groupEntry.hasCherryBeenPoped = false;
+	groupEntry.filtered = 0;
 	groups[groupEntry.id] = groupEntry;
 	anime.groups.push(0);
 }
@@ -1247,6 +1248,9 @@ filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
 	if (rthis) return (group.filtered);
 	return (filterObj.compare(symbol, group.filtered, config['settings']['HIDEFILTEREDGROUPS']));
 };
+filterObj['hidefiles'] = function hidefiles(file,symbol,value,rthis) {
+	return (config['settings']['HIDEFILES'] == (value == 'true' ? true : false));
+};
 
 /* PROCESSING FUCTIONS */
 filterObj.processFile = function processFile(file, operation) {
@@ -1325,7 +1329,12 @@ filterObj.markUnfiltered = function markUnfiltered(file) {
 	return (filterObj.processFile(file,'unfiltered'));
 }
 filterObj.markVisible = function markVisible(file) {
-	return (filterObj.processFile(file,'visible'));
+	// only do this step if HIDEFILES is set
+	if (config['settings']['HIDEFILES']) return (filterObj.processFile(file,'visible'));
+	else {
+		file.visible = true;
+		return true;
+	}
 }
 filterObj.markHidden = function markHidden(file) {
 	return (filterObj.processFile(file,'hidden'));

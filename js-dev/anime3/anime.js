@@ -349,7 +349,7 @@ function doGroupTableOperations(op) {
 	}
 	//tbody.style.display = 'none';
 	var tfoot = groupTable.tFoot;
-	var visible = 0;
+	var visible = 1;
 	for (var g = 0; g < tbody.rows.length; g++) {
 		var row = tbody.rows[g];
 		var gid = Number(row.id.substring(4,row.id.length));
@@ -1357,9 +1357,8 @@ function createFileTable(episode) {
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
 			filterObj.markUnfiltered(file);
-			if (config['settings']['HIDEFILES'] && file.isDeprecated) file.visible = false;
 			filterObj.markVisible(file);
-			if (!file.type == 'generic') filterObj.markHidden(file); // only run this for non-generic files
+			if (file.type != 'generic') filterObj.markHidden(file); // only run this for non-generic files
 			if (!file.visible) episode.hiddenFiles++;
 		} else file.visible = false; // STUB files should be very hidden, very hidden indeed..
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
