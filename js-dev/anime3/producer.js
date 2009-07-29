@@ -21,16 +21,16 @@ var seeDebug = false;
  * Updates the release list rows to allow more sorting options
  */
 function updateReleaseListRows() {
-	var div = getElementsByClassName(document.getElementsByTagName('DIV'), 'producer_related_anime', true)[0];
+	var div = getElementsByClassName(document.getElementsByTagName('div'), 'producer_related_anime', true)[0];
   if (!div) return;
-	var table = div.getElementsByTagName('TABLE')[0];
+	var table = div.getElementsByTagName('table')[0];
 	if (!table) return;
 	var tbody = table.tBodies[0];
 	for (var i = 1; i < tbody.rows.length; i++) { // update each row
 		var row = tbody.rows[i];
 		var test = row.cells[0];		// Title Cell
 		if (!test) continue;
-		var label = test.getElementsByTagName('LABEL')[0];
+		var label = test.getElementsByTagName('label')[0];
 		if (label && label.childNodes.length) {
 			var a = label.getElementsByTagName('A')[0];
 			if (a) {
@@ -45,11 +45,11 @@ function updateReleaseListRows() {
  * Updates the release list table with sorting
  */
 function updateReleaseList() {
-	var div = getElementsByClassName(document.getElementsByTagName('DIV'), 'producer_related_anime', true)[0];
+	var div = getElementsByClassName(document.getElementsByTagName('div'), 'producer_related_anime', true)[0];
   if (!div) return;
-	var table = div.getElementsByTagName('TABLE')[0];
+	var table = div.getElementsByTagName('table')[0];
 	if (!table) return;
-	headingList = table.getElementsByTagName('TH');
+	headingList = table.getElementsByTagName('th');
   // I know the headings i need so..
   headingList[0].className += ' c_setlatin';	// Anime
   headingList[1].className += ' c_latin';		// Relation

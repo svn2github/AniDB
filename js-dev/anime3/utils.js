@@ -928,7 +928,7 @@ function epNoToString(epno) {
  */
 function formatFileSize(size,force) {
   var format = false;
-  if (FORMATFILESIZE) format = FORMATFILESIZE;
+  if (config['settings']['FORMATFILESIZE']) format = config['settings']['FORMATFILESIZE'];
   if (force) format = force;
   if (!format) {
     var aux = new String(size);
@@ -1502,8 +1502,8 @@ function applyFormat(identifier, file, episode, anime, group) {
 	  identifier = identifier.replace(/\%raw/mgi,(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
 	else identifier = identifier.replace(/\%raw/mgi,"");
   }
-  identifier = identifier.replace(/\%crc/mgi,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
-  identifier = identifier.replace(/\%CRC/mgi,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
+  identifier = identifier.replace(/\%crc/mg,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
+  identifier = identifier.replace(/\%CRC/mg,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
   identifier = identifier.replace(/\%ver/mgi,(file.version != 'v1') ? file.version : "");
   identifier = identifier.replace(/\%cen/mgi,(file.isCensored) ? "cen" : "");
   identifier = identifier.replace(/\%uncen/mgi,(file.isUncensored) ? "uncen" : "");

@@ -39,17 +39,6 @@ var episodeTitleLang = '';
 var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
-var HEADER = true;
-var NOANIMEGROUPREL = false;
-var HIDEFILES = false;
-var HIDERAWS = false;
-var HIDEGROUPRAWS = false;
-var HIDEGENERICFILES = false;
-var HIDEPARODYEPS = false;
-var SHOWFID = false;
-var SHOWCRC = false;
-var FORMATFILESIZE = false;
-var HIDEFILTEREDGROUPS = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
@@ -343,17 +332,14 @@ function fetchData(aid,gid) {
 	var req = xhttpRequest();
 	if (gid == null) {
 		//First get for group-anime page
-		//console.log("1. group-anime page " + aid + ' ' + gid);
 		if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'.xml', parseData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=anime&aid='+aid, parseData);
 	} else if(gid != null && aid != null) {
 		//Second get for group-anime page
-		//console.log("2. group-anime page " + aid + ' ' + gid);
 		if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'_gid'+gid+'.xml', parseEpisodeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=ep&aid='+aid+'&eid=all&gid='+gid, parseEpisodeData);
 	} else if(gid != null && aid == null) {
 		//Get for group page
-		//console.log("group page " + aid + ' ' + gid);
 		if (isLocalHost()) xhttpRequestFetch(req, 'xml/gid'+gid+'_range.xml', parseGroupRangeData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=agranges&gid=' + gid, parseGroupRangeData);
 	}

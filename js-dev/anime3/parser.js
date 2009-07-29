@@ -21,7 +21,7 @@ jsVersionArray.push({
 var episodeFileTableRenderList = new Array(); // stack of fileTables in queue for render (currently not used)
 var fInt = 100; // time to wait between ep node parsing 
 var eInt = 150; // time to wait between ep render
-var config = new Object(); // config
+//var config = new Object(); // config
 
 // CORE Classes //
 
@@ -597,10 +597,9 @@ function parseConfig(node) {
 			case 'settings':
 				var lay = Number(nodeData(sNode)) || 0;
 				config[sNode.nodeName] = new Array();
-				for (var j = 0; j < sNode.childNodes.length; j++)
-				{
-					var dNode = sNode.childNodes.item(j);
-					config[sNode.nodeName][dNode.nodeName] = true;
+				var optionNodes = sNode.getElementsByTagName('option');
+				for (var j = 0; j < optionNodes.length; j++) {
+					config[sNode.nodeName][nodeData(optionNodes[j])] = true;
 				}
 				break;
 			case 'animelang':
@@ -1238,7 +1237,7 @@ filterObj['fdeprecated'] = function fdeprecated(file,symbol,value,rthis) {
 };
 filterObj['fraw'] = function fraw(file,symbol,value,rthis) {
 	if (rthis) return (file.isRaw);
-	if (HIDERAWS && file.isRaw) return true;
+	if (config['settings']['HIDERAWS'] && file.isRaw) return true;
 	else return false;
 	//return (filterObj.compare(symbol, file.isRaw, !HIDERAWS));
 };
@@ -1246,7 +1245,7 @@ filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
 	var group = groups[file.groupId];
 	if (!group) return false;
 	if (rthis) return (group.filtered);
-	return (filterObj.compare(symbol, group.filtered, HIDEFILTEREDGROUPS));
+	return (filterObj.compare(symbol, group.filtered, config['settings']['HIDEFILTEREDGROUPS']));
 };
 
 /* PROCESSING FUCTIONS */

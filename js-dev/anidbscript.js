@@ -24,6 +24,9 @@ var searchTypeDefaultSelect = CookieGetByKey('other', 'dsearch') || 'none';
 var searchTypeDefaultAssist = CookieGetByKey('other', 'asearch') || 0;
 var username = null;
 var defaultTabs = tabCookieGet();
+// joys of joys
+var config = new Object();
+config['settings'] = new Object();
 
 /* returns true if the script is being executed on localhost */
 function isLocalHost() {

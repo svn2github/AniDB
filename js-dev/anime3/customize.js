@@ -67,8 +67,6 @@ var arePrefsShown = false;
 var defPrefTab = 0;
 var storedTab = '';
 var currentFMode = 1;
-var HIDETHUMBNAILS = false;
-var FORMATFILESIZE = false;
 var picbase = 'http://img5.anidb.net/pics/anime/';
 var charInfos = new Array(); 		// Character information	(indexed by charid)
 var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
@@ -160,7 +158,7 @@ function loadSettings() {
 	searchTypeAssist = search_assist = Number(settings['other']['asearch']);
 	// LAYOUT
 	settings['aLayout'] = CookieGetToArray('aLayout',settings['aLayout']);
-	FORMATFILESIZE = format_size = Number(settings['aLayout']['fsize']);
+	config['settings']['FORMATFILESIZE'] = format_size = Number(settings['aLayout']['fsize']);
 	animePage_curSort = settings['aLayout']['aCS'];
 	animePage_curSortOrder = settings['aLayout']['aCSO'];
 	animePageLayout = settings['aLayout']['aPL'];
@@ -620,7 +618,7 @@ function createPreferencesTable(type) {
 				li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_ANIME_LAYOUT', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				var szformatSel = createSelectArray(null,"format_size","format_size",null,format_size,{0:{"text":'no'},1:{"text":'yes'}});
-				szformatSel.onchange = function() { format_size = FORMATFILESIZE = this.value; };
+				szformatSel.onchange = function() { format_size = config['settings']['FORMATFILESIZE'] = this.value; };
 				li.appendChild(szformatSel);
 				li.appendChild(document.createTextNode(' Format file size'));
 				ul.appendChild(li);

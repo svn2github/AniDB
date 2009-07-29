@@ -36,9 +36,6 @@ var episodeAltTitleLang = 'en';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
 var uriObj = new Array();		// Object that holds the URI
-var FORMATFILESIZE = false;
-var SHOWCRC = false;
-var SHOWFILESOURCE = false;
 var preferredEntriesPerPage = 30;
 var useLangFilters = true;
 var filterAudLang = new Array();
@@ -199,7 +196,7 @@ function parseData(xmldoc) {
 	if (!ruid) ruid = uid;
 	var parseCustomNode = (new Date()) - t1;
 	// do some triming of the definition cols if possible
-	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !SHOWCRC)
+	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !config['settings']['SHOWCRC'])
 		removeColAttribute('crc',fileCols);
 	if (!mylist_settings['noeptb']) removeColAttribute('epno',fileCols);
 	fileSkips = buildSkipCols(fileCols);
@@ -213,7 +210,7 @@ function parseData(xmldoc) {
 	if (!aid) { errorAlert('parseData','no anime node'); return; }
 	aid = Number(aid.getAttribute('id'));
 	// we now have the prefereces, so i can add a new sorting col if avaialable (?)
-	if (config['irc']['SHOWFILESOURCE'])
+	if (config['settings']['SHOWFILESOURCE'])
 		addColDefinition('mylist-source',fileCols,'sort',"c_latin");
 	createEpisodeTable(aid);
 }
@@ -848,7 +845,7 @@ function createEpisodeTable(aid) {
 		table.id = 'a'+aid+'_filesTable';
 		colSpan = 12;
 		if (mylist_settings['noeptb']) colSpan++;
-		if ((uriObj['showcrc'] && uriObj['showcrc'] == '1') || SHOWCRC) colSpan++;
+		if ((uriObj['showcrc'] && uriObj['showcrc'] == '1') || config['settings']['SHOWCRC']) colSpan++;
 		var thead = (fileTableHead ? fileTableHead.cloneNode(true) : createFilesTableHead());
 		table.appendChild(thead);
 		var tbody = document.createElement('tbody');
