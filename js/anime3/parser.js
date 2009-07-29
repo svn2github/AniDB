@@ -1330,7 +1330,10 @@ filterObj.markUnfiltered = function markUnfiltered(file) {
 filterObj.markVisible = function markVisible(file) {
 	// only do this step if HIDEFILES is set
 	if (config['settings']['HIDEFILES']) return (filterObj.processFile(file,'visible'));
-	else return true;
+	else {
+		file.visible = true;
+		return true;
+	}
 }
 filterObj.markHidden = function markHidden(file) {
 	return (filterObj.processFile(file,'hidden'));
