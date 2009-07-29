@@ -390,8 +390,12 @@ margin-left: 0.5em;
 }
 #layout-tabs ul.main-tabs li
 {
-padding: 0 6px 0px 6px;
+padding: 0;
 border-bottom: none;
+}
+#layout-tabs ul.main-tabs li a
+{
+padding: 0 6px;
 }
 #layout-tabs + #layout-main
 {
@@ -433,4 +437,19 @@ width:50%;
 div.userpage_all div.clubs div.club *
 {
 display: table-row;
+}
+#layout-main div.animeatt_reviews div.review div.text
+{
+margin-left: 1em;
+margin-top: 1em;
+}
+#layout-main div.addfilem.form div.dump textarea
+{
+padding-left: 0;
+padding-right: 0;
+margin-right: 0;
+}
+#layout-main div.g_content
+{
+margin: 0 1em;
 }
