@@ -683,6 +683,7 @@ function parseGroups(node,aid) {
 	groupEntry.state = 'unknown';
 	groupEntry.stateId = 0;
 	groupEntry.hasCherryBeenPoped = false;
+	groupEntry.filtered = 0;
 	groups[groupEntry.id] = groupEntry;
 	anime.groups.push(0);
 }
