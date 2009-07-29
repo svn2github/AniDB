@@ -925,13 +925,6 @@ function initFormating() {
 			textArea.onmousedown = getCaretPosition;
 			textArea.onkeydown = getCaretPosition;
 		}
-
-		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
-		if (smileyBox) {
-			var newSmileyBox = createSmileyBox(null,i);
-			smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
-			smileyBox = newSmileyBox;
-		}
 		
 		wysiwygHeight = getStyleInformation(textArea,'height');
 		wysiwygWidth = getStyleInformation(textArea,'width');
@@ -959,6 +952,13 @@ function initFormating() {
 					}
 				};
 			}
+		}
+		
+		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
+		if (smileyBox) {
+			var newSmileyBox = createSmileyBox(null,i);
+			smileyBox.parentNode.replaceChild(newSmileyBox,smileyBox);
+			smileyBox = newSmileyBox;
 		}
 	}
 }
