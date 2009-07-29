@@ -1237,7 +1237,7 @@ filterObj['fdeprecated'] = function fdeprecated(file,symbol,value,rthis) {
 };
 filterObj['fraw'] = function fraw(file,symbol,value,rthis) {
 	if (rthis) return (file.isRaw);
-	if (HIDERAWS && file.isRaw) return true;
+	if (config['settings']['HIDERAWS'] && file.isRaw) return true;
 	else return false;
 	//return (filterObj.compare(symbol, file.isRaw, !HIDERAWS));
 };
@@ -1245,7 +1245,7 @@ filterObj['fgroupfiltered'] = function fgroupfiltered(file,symbol,value,rthis) {
 	var group = groups[file.groupId];
 	if (!group) return false;
 	if (rthis) return (group.filtered);
-	return (filterObj.compare(symbol, group.filtered, HIDEFILTEREDGROUPS));
+	return (filterObj.compare(symbol, group.filtered, config['settings']['HIDEFILTEREDGROUPS']));
 };
 
 /* PROCESSING FUCTIONS */

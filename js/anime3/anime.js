@@ -39,18 +39,6 @@ var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
 var uriObj = new Array();      // Object that holds the URI
-var HEADER = true;
-var NOANIMEGROUPREL = false;
-var HIDEFILES = false;
-var HIDERAWS = false;
-var HIDEGROUPRAWS = false;
-var HIDEGENERICFILES = false;
-var HIDEPARODYEPS = false;
-var SHOWFID = false;
-var SHOWCRC = false;
-var FORMATFILESIZE = false;
-var HIDEFILTEREDGROUPS = true;
-var FILTERRELEASESBYLANG = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
@@ -233,7 +221,7 @@ function parseData(xmldoc) {
 	var parseCustomNode = (new Date()) - t1;
 	globalStatus.updateBarWithText('Processing animes...',45,'Total progress: ');
 	// do some triming of the definition cols if possible
-	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !SHOWCRC)
+	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !config['settings']['SHOWCRC'])
 		removeColAttribute('crc',fileCols);
 	if (!uid) 
 		removeColAttribute('expand',groupCols);
@@ -692,7 +680,7 @@ function updateGroupTable() {
 		// update existing rows
 		var gid = group.id;
 		if (!groups[gid]) continue; // not interested
-		if (FILTERRELEASESBYLANG || Number(group_langfilter)) {
+		if (config['settings']['FILTERRELEASESBYLANG'] || Number(group_langfilter)) {
 			// now we check to see if this group is languaged filtered or not
 			var lafound = (!filterAudLang.length ? true : false);
 			var lsfound = (!filterSubLang.length ? true : false);
@@ -858,17 +846,15 @@ function updateEpisodeTable() {
 	var episodeTable = document.getElementById('eplist');
 	if (!episodeTable) return;
 	var tbody = episodeTable.tBodies[0];
-	if (HEADER) {
-		var thead = document.createElement('thead');
-		var row = tbody.rows[0];
-		var cell = row.cells[0];
-		if (cell.getElementsByTagName('a').length) {
-			while (cell.childNodes.length) cell.removeChild(cell.firstChild);
-			cell.appendChild(document.createTextNode('X'));
-		}
-		thead.appendChild(row);
-		episodeTable.insertBefore(thead,tbody);
+	var thead = document.createElement('thead');
+	var row = tbody.rows[0];
+	var cell = row.cells[0];
+	if (cell.getElementsByTagName('a').length) {
+		while (cell.childNodes.length) cell.removeChild(cell.firstChild);
+		cell.appendChild(document.createTextNode('X'));
 	}
+	thead.appendChild(row);
+	episodeTable.insertBefore(thead,tbody);
 	//alert(expandedGroups);
 	var epsToExpand = new Array();
 	for (var e in episodes) {
@@ -1293,8 +1279,7 @@ function expandFiles() {
 		var table = document.createElement('table');
 		table.className = 'filelist';
 		table.id = 'file'+rfid+'relations';
-		if (HEADER)
-			table.appendChild(createTableHead(fileCols));
+		table.appendChild(createTableHead(fileCols));
 		var tfoot = document.createElement('tfoot');
 		var tbody = document.createElement('tbody');
 		// TableBody
@@ -1358,8 +1343,7 @@ function createFileTable(episode) {
 	var table = document.createElement('table');
 	table.className = 'filelist';
 	table.id = 'episode'+eid+'files';
-	if (HEADER)
-		table.appendChild(createTableHead(fileCols));
+	table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
 	var odd = 0;
@@ -1373,7 +1357,7 @@ function createFileTable(episode) {
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
 			filterObj.markUnfiltered(file);
-			if (HIDEFILES && file.isDeprecated) file.visible = false;
+			if (config['settings']['HIDEFILES'] && file.isDeprecated) file.visible = false;
 			filterObj.markVisible(file);
 			filterObj.markHidden(file);
 			if (!file.visible) episode.hiddenFiles++;
@@ -1381,7 +1365,7 @@ function createFileTable(episode) {
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		if (!expandedGroups) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
-			if (!file.visible || (file.type == 'generic' && HIDEGENERICFILES)) row.style.display = 'none';		
+			if (!file.visible || (file.type == 'generic' && config['settings']['HIDEGENERICFILES'])) row.style.display = 'none';		
 		}
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
@@ -1406,23 +1390,21 @@ function createFileTable(episode) {
 	cell.className = '';
 	cell.replaceChild(table,cell.firstChild);
 	// fix the sorting function
-	if (HEADER) {
-		var idCol = animePage_sorts[animePage_sortsV.indexOf(animePage_curSort)];
-		if (animePage_curLayout.indexOf(idCol) < 0) animePage_curSort = 'default';
-		var sortCol = (animePage_curSort == 'default') ? 'group' : animePage_curSort;
-		var sortOrder = (animePage_curSort == 'default') ? 'down': animePage_curSortOrder;
-		init_sorting(table, sortCol,sortOrder);
-		var ths = table.tHead.getElementsByTagName('th');
-		var th = null;
-		for (var i = 0; i < ths.length; i++) {
-			ths[i].onclick = prepareForSort;
-			if (animePage_curSort != 'default' && ths[i].className.indexOf(animePage_curSort) >= 0) th = ths[i];
-		}
-		// apply sort, users will regret this, but oh well.. what you want may not always be what you get
-		if (animePage_curSort != 'default' && th != null) {
-			//alert('animePage_curSort: '+animePage_curSort+'\nanimePage_curSortOrder: '+animePage_curSortOrder+'\nth.className: '+th.className);
-			sortcol(th);
-		}
+	var idCol = animePage_sorts[animePage_sortsV.indexOf(animePage_curSort)];
+	if (animePage_curLayout.indexOf(idCol) < 0) animePage_curSort = 'default';
+	var sortCol = (animePage_curSort == 'default') ? 'group' : animePage_curSort;
+	var sortOrder = (animePage_curSort == 'default') ? 'down': animePage_curSortOrder;
+	init_sorting(table, sortCol,sortOrder);
+	var ths = table.tHead.getElementsByTagName('th');
+	var th = null;
+	for (var i = 0; i < ths.length; i++) {
+		ths[i].onclick = prepareForSort;
+		if (animePage_curSort != 'default' && ths[i].className.indexOf(animePage_curSort) >= 0) th = ths[i];
+	}
+	// apply sort, users will regret this, but oh well.. what you want may not always be what you get
+	if (animePage_curSort != 'default' && th != null) {
+		//alert('animePage_curSort: '+animePage_curSort+'\nanimePage_curSortOrder: '+animePage_curSortOrder+'\nth.className: '+th.className);
+		sortcol(th);
 	}
 	// add event to file table
 	addCheckboxesEvent(tbody);

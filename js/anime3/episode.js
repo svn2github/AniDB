@@ -38,17 +38,6 @@ var episodeAltTitleLang = 'x-jat';
 var episodeTitleDisplay = 2;
 var entriesPerPage = 30;
 var uriObj = new Array();      // Object that holds the URI
-var HEADER = true;
-var NOANIMEGROUPREL = false;
-var HIDEFILES = false;
-var HIDERAWS = false;
-var HIDEGROUPRAWS = false;
-var HIDEGENERICFILES = false;
-var HIDEPARODYEPS = false;
-var SHOWFID = false;
-var SHOWCRC = false;
-var FORMATFILESIZE = false;
-var HIDEFILTEREDGROUPS = true;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
@@ -179,7 +168,7 @@ function parseData(xmldoc) {
 	parseCustom(root.getElementsByTagName('custom').item(0));
 	var parseCustomNode = (new Date()) - t1;
 	// do some triming of the definition cols if possible
-	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !SHOWCRC)
+	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !config['settings']['SHOWCRC'])
 		removeColAttribute('crc',fileCols);
 	fileSkips = buildSkipCols(fileCols);
 	updateStatus('');
@@ -585,8 +574,7 @@ function expandFiles() {
 		var table = document.createElement('table');
 		table.className = 'filelist';
 		table.id = 'file'+rfid+'relations';
-		if (HEADER)
-			table.appendChild(createTableHead(fileCols));
+		table.appendChild(createTableHead(fileCols));
 		var tfoot = document.createElement('tfoot');
 		var tbody = document.createElement('tbody');
 		// TableBody
@@ -650,8 +638,7 @@ function createFileTable(episode) {
 	var table = document.createElement('table');
 	table.className = 'filelist';
 	table.id = 'episode'+eid+'files';
-	if (HEADER)
-		table.appendChild(createTableHead(fileCols));
+	table.appendChild(createTableHead(fileCols));
 	var tfoot = document.createElement('tfoot');
 	var tbody = document.createElement('tbody');
 	var odd = 0;
@@ -663,7 +650,7 @@ function createFileTable(episode) {
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
 			filterObj.markUnfiltered(file);
-			if (HIDEFILES && file.isDeprecated) file.visible = false;
+			if (config['settings']['HIDEFILES'] && file.isDeprecated) file.visible = false;
 			filterObj.markVisible(file);
 			filterObj.markHidden(file);
 			if (!file.visible) episode.hiddenFiles++;
@@ -671,7 +658,7 @@ function createFileTable(episode) {
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		if (!expandedGroups) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
-			if (!file.visible || (file.type == 'generic' && HIDEGENERICFILES)) row.style.display = 'none';		
+			if (!file.visible || (file.type == 'generic' && config['settings']['HIDEGENERICFILES'])) row.style.display = 'none';		
 		}
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
@@ -697,11 +684,9 @@ function createFileTable(episode) {
 	filelisttable.parentNode.replaceChild(table,filelisttable);
 
 	// fix the sorting function
-	if (HEADER) {
-		init_sorting(table,'title','down');
-		var ths = table.tHead.getElementsByTagName('th');
-		for (var i = 0; i < ths.length; i++) ths[i].onclick = prepareForSort;
-	}
+	init_sorting(table,'title','down');
+	var ths = table.tHead.getElementsByTagName('th');
+	for (var i = 0; i < ths.length; i++) ths[i].onclick = prepareForSort;
 	return table;
 }
 
