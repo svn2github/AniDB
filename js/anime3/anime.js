@@ -1357,9 +1357,10 @@ function createFileTable(episode) {
 		if (!file.pseudoFile || file.type != 'stub') {
 			filterObj.markDeprecated(file);
 			filterObj.markUnfiltered(file);
-			if (config['settings']['HIDEFILES'] && file.isDeprecated) file.visible = false;
 			filterObj.markVisible(file);
 			if (file.type != 'generic') filterObj.markHidden(file); // only run this for non-generic files
+			if (config['settings']['HIDEFILES'] && file.isDeprecated) file.visible = false;
+			else file.visible = true;
 			if (!file.visible) episode.hiddenFiles++;
 		} else file.visible = false; // STUB files should be very hidden, very hidden indeed..
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
