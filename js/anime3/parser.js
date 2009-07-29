@@ -597,10 +597,9 @@ function parseConfig(node) {
 			case 'settings':
 				var lay = Number(nodeData(sNode)) || 0;
 				config[sNode.nodeName] = new Array();
-				for (var j = 0; j < sNode.childNodes.length; j++)
-				{
-					var dNode = sNode.childNodes.item(j);
-					config[sNode.nodeName][dNode.nodeName] = true;
+				var optionNodes = sNode.getElementsByTagName('option');
+				for (var j = 0; j < optionNodes.length; j++) {
+					config[sNode.nodeName][nodeData(optionNodes[j])] = true;
 				}
 				break;
 			case 'animelang':
