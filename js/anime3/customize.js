@@ -539,7 +539,7 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var li = document.createElement('li');
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_GROUP', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
-				var rb = createBasicButton('group_check_type_5',5,'radio');
+				var rb = createBasicButton('group_check_type',5,'radio');
 				rb.onchange = function() { group_check_type = this.value; };
 				rb.checked = (group_check_type == 5);
 				li.appendChild(rb);
