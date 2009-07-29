@@ -1358,8 +1358,11 @@ function createFileTable(episode) {
 			filterObj.markDeprecated(file);
 			filterObj.markUnfiltered(file);
 			if (config['settings']['HIDEFILES'] && file.isDeprecated) file.visible = false;
+			if (file.id == 102987) alert("part 1: "+file.visible);
 			filterObj.markVisible(file);
+			if (file.id == 102987) alert("part 2: "+file.visible);
 			filterObj.markHidden(file);
+			if (file.id == 102987) alert("part 3: "+file.visible);
 			if (!file.visible) episode.hiddenFiles++;
 		} else file.visible = false; // STUB files should be very hidden, very hidden indeed..
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
