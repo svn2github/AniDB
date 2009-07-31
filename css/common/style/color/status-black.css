@@ -2,7 +2,7 @@
 #layout-main tr.g_fs_lame,
 #layout-main input.exclude,
 #layout-main table.filelist tr.invalid,
-#layout-main div.myvotes_all table tr.low td,
+#layout-main div.myvotes_all table tr td.low,
 #layout-main div.addcreatoranimerel_all tr.left_only,
 #layout-main div.addcreatorsongrel_all tr.left_only,
 #layout-main table.filelist tr.g_odd.deprecated
@@ -10,7 +10,7 @@
 	background-color:#564444
 }
 
-#layout-main div.myvotes_all table tr.g_odd.low td,
+#layout-main div.myvotes_all table tr.g_odd td.low,
 #layout-main div.addcreatoranimerel_all tr.right_only,
 #layout-main div.addcreatorsongrel_all tr.right_only
 {
@@ -21,7 +21,7 @@
 #layout-main input.include,
 #layout-main table.filelist tr.good,
 #layout-main div.msg_all tr.mod,
-#layout-main div.myvotes_all table tr.high td,
+#layout-main div.myvotes_all table tr td.high,
 #layout-main div.producer_all table tr.mylist,
 #layout-main div.latest2_all table tr.mylist,
 #layout-main div.latest2_all table tr td.mylist,
@@ -47,7 +47,7 @@
 #layout-main td.g_odd ins,
 #layout-main table.filelist tr.g_odd.good,
 #layout-main div.msg_all tr.g_odd.mod,
-#layout-main div.myvotes_all table tr.g_odd.high td,
+#layout-main div.myvotes_all table tr.g_odd td.high,
 #layout-main div.producer_all table tr.g_odd.mylist,
 #layout-main div.latest2_all table tr.g_odd.mylist,
 #layout-main div.latest2_all table tr.g_odd td.mylist,
@@ -85,7 +85,7 @@
 #layout-main div.group_released table,
 #layout-main div.producer_related_anime table,
 #layout-main td ins,
-#layout-main div.myvotes_all table tr.high td,
+#layout-main div.myvotes_all table tr td.high,
 #layout-main div.character_all div.tabbed_pane_main table,
 #layout-main div.creator_all div.tabbed_pane_main table,
 #layout-main div.anime_all div.tabbed_pane_main table,
