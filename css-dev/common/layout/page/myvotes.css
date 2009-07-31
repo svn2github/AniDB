@@ -8,3 +8,25 @@
 	float:left;
 	clear:none;
 }
+#layout-main div.myvotes_all td
+{
+	padding-left:1em;
+	padding-right:1em;
+}
+
+#layout-main div.myvotes_all td.date,
+#layout-main div.myvotes_all td.vote,
+#layout-main div.myvotes_all td.state
+{
+	width:6em;
+}
+
+#layout-main div.myvotes_all td.cast
+{
+	width:8em;
+}
+
+#layout-main div.myvotes_all td.action
+{
+	width:10em;
+}

@@ -25,7 +25,8 @@
 #layout-main div.mylist_all td.rating,
 #layout-main div.mylist_all td.vote
 {
-	padding:0 1em;
+	padding-left:1em;
+	padding-right:1em;
 }
 
 #layout-main div.mylist_all td.stats

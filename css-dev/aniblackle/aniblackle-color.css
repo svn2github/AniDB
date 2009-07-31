@@ -389,9 +389,9 @@ tr + tr td,
 	background-color:#666666;
 }
 
-#layout-main div.mylist_all td.stats,
-#layout-main div.mylist_all td.rating,
-#layout-main div.mylist_all td.vote
+#layout-main div.mylist_all td+td,
+#layout-main div.myvotes_all td+td,
+#layout-main div.mywishlist_all tr td+td
 {
-	border-left:1px solid #555555;
+	border-left-color:#555555;
 }

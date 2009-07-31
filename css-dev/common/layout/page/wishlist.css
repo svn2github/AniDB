@@ -1,14 +1,34 @@
-#layout-main div.mywishlist_all table th.comment
-{
-	min-width: 20%;
-}
-
-#layout-main div.mywishlist_all table th.title
-{
-	width: 98%;
-}
-
 #layout-main div.mywishlist_all div.filter_menu div.settings
 {
 	margin-top: 0.5em;
+}
+
+#layout-main div.mywishlist_all tr td
+{
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+#layout-main div.mywishlist_all tr td.name
+{
+	width:40%;
+}
+
+#layout-main div.mywishlist_all tr td.comment
+{
+	width:20%;
+}
+
+#layout-main div.mywishlist_all tr td.rating,
+#layout-main div.mywishlist_all tr td.stats
+{
+	width:6em;
+}
+
+#layout-main div.mywishlist_all tr td.nfy,
+#layout-main div.mywishlist_all tr td.priority,
+#layout-main div.mywishlist_all tr td.releaseinfo,
+#layout-main div.mywishlist_all tr td.check
+{
+	width:1em;
 }
