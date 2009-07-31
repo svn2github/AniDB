@@ -280,8 +280,13 @@ th,
 
 #layout-search
 {
-	background-image:url(images/logo_big.png);
-	background-repeat:no-repeat;
+	background:url("images/backlame.png") repeat-x scroll center top transparent;
+	width:100%;
+}
+
+#layout-search div.search
+{
+	background:url("images/logo_big.png") no-repeat scroll left top transparent;
 }
 
 #layout-main div.animeatt_reviews div.review div.text
