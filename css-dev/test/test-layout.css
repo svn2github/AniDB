@@ -1,19 +1,31 @@
+#layout-menu
+{
+	margin-top: 11.5em;
+	padding-left:1.1em;
+}
+
+#layout-content
+{
+	margin-top:-10.5em;
+}
+
 #layout-search div.search
 {
-	margin-left:26em;
-	margin-top:1.9em;
-	width:44em;
+	width:430px;
+	height: 94px;
+	margin-left:-1.5em;
+	margin-top:0;
 }
 
 #layout-search
 {
-	margin-left:13.5em;
-	height:65px;
+	height: 94px;
+	margin-left:0;
 }
 
 #layout-tabs
 {
-	margin:7.5em 0.3em;
+	margin:10.6em 0.3em;
 }
 
 #layout-nav
@@ -29,8 +41,8 @@
 
 #layout-nav div.search a.advsearch
 {
-	left:680px;
-	top:25px;
+	left:825px;
+	top:30px;
 	width:83px;
 }
 
@@ -40,9 +52,16 @@
 }
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-margin-top: 8.9em;
+	margin-top: 8.9em;
 }
 #layout-nav input.submit
 {
 	padding:3px 5px;
+}
+
+#layout-search div.search form
+{
+	padding-left:41.5em;
+	padding-top:3em;
+	width:50em;
 }

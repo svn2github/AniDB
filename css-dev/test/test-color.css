@@ -33,14 +33,11 @@ a:hover
 }
 
 #layout-menu a:link,
-#layout-menu a:visited
+#layout-menu a:visited,
+#layout-tabs ul.main-tabs li a,
+#layout-main ul.g_list li a
 {
-	color:white;
-}
-
-#layout-menu a:active
-{
-	color:#FFAA55;
+	color:#CCCCCC;
 }
 
 option /*opera*/
@@ -88,11 +85,6 @@ input[size="60"]
 	border-top-color:#666666;
 }
 
-#layout-nav
-{
-	border-left-color:#666666;
-}
-
 #layout-main > h1
 {
 	background-color:#34394D;
@@ -123,7 +115,8 @@ tr + tr td,
 
 #layout-main table tr.header
 {
-	background-color:#999999;
+	background-color:#34394D;
+	color:#CCCCCC;
 }
 
 table
@@ -138,9 +131,25 @@ table
 	color:#000000;
 }
 
-#layout-main div.g_timedentry h4
+#layout-main div.g_timedentry h4,
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.userpage_all > div.g_section > h4
 {
+	background-color:#34394D;
 	border-top-color:#DDDDDD;
+	color:#CCCCCC;
+}
+
+#layout-main div.userpage_all > div.g_section > h4 a,
+#layout-main div.animeatt_all div.review >  h4 a
+{
+	color: #7C9EBA;
+}
+
+#layout-main div.userpage_all > div.g_section > h4 a:hover,
+#layout-main div.animeatt_all div.review >  h4 a:hover
+{
+	color:#AA0000;
 }
 
 span.test,
@@ -213,7 +222,7 @@ tr,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
 #layout-main div.news div.newsitem span.stamp
 {
-	background-color:#B0B0B0;
+	background-color:#B8B8B8;
 }
 
 #layout-tabs ul.main-tabs li,
