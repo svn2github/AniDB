@@ -44,6 +44,10 @@
   background-image:url(../icons/grey/comment_move.gif);
 }
 
+.i_comment_creq {
+  background-image:url(../icons/grey/comment_creq.gif);
+}
+
 *.i_topic_lock {
   background-image:url(../icons/grey/topic_lock.gif);
 }

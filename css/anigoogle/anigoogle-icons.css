@@ -64,6 +64,10 @@
   background-image:url(../icons/blue/comment_info.gif);
 }
 
+.i_comment_creq {
+  background-image:url(../icons/blue/comment_creq.gif);
+}
+
 *.i_top {
   background:transparent url(../icons/blue/icon_back_top.gif) no-repeat scroll 0 50%;
 }
