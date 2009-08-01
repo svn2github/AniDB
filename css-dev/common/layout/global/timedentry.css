@@ -28,6 +28,7 @@
 {
 	padding: 0.2em;
 	text-align: left;
+	min-height:174px;
 }
 
 #layout-main div.g_timedentry span.stamp

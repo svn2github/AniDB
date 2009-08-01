@@ -153,7 +153,8 @@
 }
 
 
-#layout-main div.userpage_all div.blog div.g_timedentry
+#layout-main div.userpage_all div.blog div.g_timedentry,
+#layout-main div.userpage_all div.blog div.g_timedentry div.body
 {
 	min-height:100px
 }
