@@ -55,3 +55,8 @@
 {
 	min-height: 330px;
 }
+
+#layout-main div.animeatt_all div.forum div.options-box dl dd
+{
+	margin-left:20em;
+}
