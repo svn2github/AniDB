@@ -140,12 +140,14 @@ table
 	color:#CCCCCC;
 }
 
+#layout-main table tr.header a,
 #layout-main div.userpage_all > div.g_section > h4 a,
 #layout-main div.animeatt_all div.review >  h4 a
 {
 	color: #7C9EBA;
 }
 
+#layout-main table tr.header a:hover,
 #layout-main div.userpage_all > div.g_section > h4 a:hover,
 #layout-main div.animeatt_all div.review >  h4 a:hover
 {
