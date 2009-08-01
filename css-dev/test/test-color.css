@@ -103,7 +103,7 @@ tr + tr td,
 #layout-main div.report_all div.body ul li + li,
 #layout-main div.g_definitionlist tr th
 {
-	border-top-color:#CCCCCC;
+	border-top-color:#999999;
 }
 
 #layout-main div.tagcloud,
@@ -196,11 +196,11 @@ input[type="submit"]:hover,
 	color:#FFFFFF;
 }
 
-#layout-main div.mylist_all td.stats,
-#layout-main div.mylist_all td.rating,
-#layout-main div.mylist_all td.vote
+#layout-main div.mylist_all td+td,
+#layout-main div.mywishlist_all td+td,
+#layout-main div.myvotes_all td+td
 {
-	border-left-color:#CCCCCC;
+	border-left-color:#999999;
 }
 
 html,
