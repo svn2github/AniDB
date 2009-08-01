@@ -18,3 +18,8 @@ input,
 	border-right:1px solid #666666;
 	border-top:1px solid #666666;
 }
+
+#layout-main div.g_timedentry div.body
+{
+	border: none;
+}
