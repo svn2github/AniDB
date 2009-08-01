@@ -42,13 +42,6 @@ input[size="60"]
 	width:36em;
 }
 
-#layout-main div.news p.comment,
-#layout-main div.news p.comment a,
-#layout-main div.news div.newsitem h4 a
-{
-	color:#C0C0C0;
-}
-
 #layout-main div.tabbed_pane ul.tabs li
 {
 	background-color:#D3D5D9;
