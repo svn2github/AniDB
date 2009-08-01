@@ -1,0 +1,14 @@
+#layout-search input,
+#user-xname input,
+#user-xpass input,
+#user-xname input,
+#user-xpass input,
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="checkbox"]
+{
+	font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size:130%;
+}

@@ -32,19 +32,6 @@ a:hover
 	background-color:#969aa6;
 }
 
-#layout-menu a:link,
-#layout-menu a:visited,
-#layout-tabs ul.main-tabs li a,
-#layout-main ul.g_list li a
-{
-	color:#CCCCCC;
-}
-
-option /*opera*/
-{
-	color:#CCCCCC;
-}
-
 input[size="10"]
 {
 	width:6em;
@@ -60,11 +47,6 @@ input[size="60"]
 #layout-main div.news div.newsitem h4 a
 {
 	color:#C0C0C0;
-}
-
-#layout-main div.tabbed_pane div.body
-{
-	background-color:#b8bac0;
 }
 
 #layout-main div.tabbed_pane ul.tabs li
@@ -137,21 +119,27 @@ table
 {
 	background-color:#34394D;
 	border-top-color:#DDDDDD;
-	color:#CCCCCC;
 }
 
+#layout-main > h1 a,
+#layout-main div.g_timedentry h4 a,
+#layout-main div.g_timedentry p.comment a,
 #layout-main table tr.header a,
 #layout-main div.userpage_all > div.g_section > h4 a,
-#layout-main div.animeatt_all div.review >  h4 a
+#layout-main div.animeatt_all div.review > h4 a
 {
-	color: #7C9EBA;
+	color:#A2BFD7;
 }
 
+#layout-menu a:hover,
+#layout-main > h1 a:hover,
+#layout-main div.g_timedentry h4 a:hover,
+#layout-main div.g_timedentry p.comment a:hover,
 #layout-main table tr.header a:hover,
 #layout-main div.userpage_all > div.g_section > h4 a:hover,
-#layout-main div.animeatt_all div.review >  h4 a:hover
+#layout-main div.animeatt_all div.review > h4 a:hover
 {
-	color:#AA0000;
+	color:#FFAA55;
 }
 
 span.test,
@@ -250,8 +238,6 @@ tr,
 {
 	background-color:#34394d;
 	color:#CCCCCC;
-	font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	font-size:130%;
 }
 
 select,
@@ -263,18 +249,6 @@ input[type="checkbox"]
 	background-color:#34394D;
 	border:#C8CACE 1px solid;
 	color:#CCCCCC;
-	font-family:Arial,Verdana, Tahoma, Helvetica, sans-serif;
-	font-size:130%;
-}
-
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *,
-#layout-main div.main_all div.register div.inner,
-#layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *
-{
-	background-color:#A9ABB1;
 }
 
 th,
@@ -300,3 +274,25 @@ th,
 	background-color:#DEDEDE;
 }
 
+option,
+#layout-main div.g_timedentry h4,
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-menu a:link,
+#layout-menu a:visited,
+#layout-tabs ul.main-tabs li a,
+#layout-main ul.g_list li a
+{
+	color:#CCCCCC;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *,
+#layout-main div.main_all div.register div.inner,
+#layout-main div.main_all div.register .rbottom *,
+#layout-main div.main_all div.register .rtop *
+{
+	background-color:#b8bac0;
+}
