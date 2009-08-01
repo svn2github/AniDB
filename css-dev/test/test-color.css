@@ -276,11 +276,7 @@ th,
 	background:url("images/logo_big.png") no-repeat scroll left top transparent;
 }
 
-#layout-main div.animeatt_reviews div.review div.text
-{
-	background-color:#DEDEDE;
-}
-
+#layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.tabbed_pane div.body,
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
@@ -289,5 +285,11 @@ th,
 #layout-main div.main_all div.register .rbottom *,
 #layout-main div.main_all div.register .rtop *
 {
-	background-color:#b8bac0;
+	background-color:#B6B9C0;
+}
+
+#layout-main div.g_timedentry div.body
+{
+	border-color:#AAAAAA;
+	background-color:#B6B9C0;
 }

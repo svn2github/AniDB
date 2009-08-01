@@ -115,3 +115,11 @@ tr + tr td,
 {
 	border-left:1px solid #C9D7F1;
 }
+
+#layout-main div.g_timedentry div.body
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+	border: 1px solid #C9D7F1;
+}

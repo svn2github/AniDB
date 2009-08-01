@@ -290,3 +290,14 @@ h4,
 	margin-top:1em;
 	padding:8px;
 }
+
+#layout-main div.g_timedentry div.avatar
+{
+	margin:1.5em 1em 1em;
+}
+
+#layout-main div.g_timedentry div.body
+{
+	margin-top:0.5em;
+	padding:8px;
+}
