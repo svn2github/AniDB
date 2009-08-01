@@ -198,9 +198,9 @@ input[type="submit"]:hover,
 	color:#FFFFFF;
 }
 
-#layout-main div.mylist_all td+td,
-#layout-main div.mywishlist_all td+td,
-#layout-main div.myvotes_all td+td
+#layout-main div.mylist_all td + td,
+#layout-main div.myvotes_all td + td,
+#layout-main div.mywishlist_all tr td + td
 {
 	border-left-color:#999999;
 }
