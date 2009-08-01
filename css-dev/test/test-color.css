@@ -137,7 +137,7 @@ option,
 }
 
 #layout-menu a:hover,
-#layout-menu li:hover a,
+#layout-menu li:hover > a,
 #layout-main > h1 a:hover,
 #layout-main div.g_timedentry h4 a:hover,
 #layout-main div.g_timedentry p.comment a:hover,
