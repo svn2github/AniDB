@@ -50,3 +50,8 @@
 {
 	float: right;
 }
+
+#layout-main div.animeatt_reviews div.review div.text
+{
+	min-height: 330px;
+}
