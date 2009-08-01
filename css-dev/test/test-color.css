@@ -222,7 +222,8 @@ tr,
 #layout-main span.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main div.news div.newsitem span.stamp
+#layout-main div.news div.newsitem span.stamp,
+#layout-main div.message-box div.format-buttons input
 {
 	background-color:#B8B8B8;
 }
@@ -232,12 +233,6 @@ tr,
 #layout-menu li.sub-menu
 {
 	background-color:#34394D;
-}
-
-#layout-tabs ul.main-tabs li a,
-#layout-main ul.g_list li a
-{
-	color:#FFFFFF;
 }
 
 #layout-tabs ul.main-tabs li.selected a,
@@ -304,3 +299,4 @@ th,
 {
 	background-color:#DEDEDE;
 }
+

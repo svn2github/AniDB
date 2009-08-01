@@ -52,8 +52,14 @@
 }
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-	margin-top: 8.9em;
+	margin:12em 0.3em;
 }
+
+#layout-hint + #layout-nav #layout-menu
+{
+	margin-top: 11.5em;
+}
+
 #layout-nav input.submit
 {
 	padding:3px 5px;
