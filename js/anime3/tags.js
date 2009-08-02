@@ -8,7 +8,7 @@ jsVersionArray.push({
 	"version":"1.2",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
-	"author":"$Author$"
+	"author":"$Author$",
 	"changelog":"Update to reflect current tag system changes"
 });
 

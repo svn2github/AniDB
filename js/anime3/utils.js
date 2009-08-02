@@ -1,13 +1,13 @@
 /* Utilities
  * @author fahrenheit (alka.setzer@gmail.com)
-           some code derived from work done by PetriW and Rar at anidb
+					 some code derived from work done by PetriW and Rar at anidb
  * version 2.2 (07.07.2007)
  */
 jsVersionArray.push({
 	"file":"anime3/utils.js",
 	"version":"2.3",
 	"revision":"$Revision$",
-	"date":"$Date::                           $",
+	"date":"$Date::													 $",
 	"author":"$Author$"
 });
 // TIME/DATE FUNCTIONS //
@@ -15,21 +15,21 @@ jsVersionArray.push({
 var globalStatus = new statusInformation(); // Global status information
 
 function padLeft(text, padChar, count) {
-  var result = '';
-  text = new String(text);
-  while (text.length + result.length < count) {
-    result += result + padChar;
-  }
-  return (result + text);
+	var result = '';
+	text = new String(text);
+	while (text.length + result.length < count) {
+		result += result + padChar;
+	}
+	return (result + text);
 }
 
 function padRight(text, padChar, count) {
-  var result = '';
-  text = new String(text);
-  while (text.length + result.length < count) {
-    result += result + padChar;
-  }
-  return (text + result);
+	var result = '';
+	text = new String(text);
+	while (text.length + result.length < count) {
+		result += result + padChar;
+	}
+	return (text + result);
 }
 
 /* Function that converts UTC TIME/UNIXTIME date format to a string
@@ -37,15 +37,15 @@ function padRight(text, padChar, count) {
  * @return A string with the date
  */
 function convertTime(data) {
-  if (!data) return;
-  if (data.indexOf('T') >= 0) 
-    return (data.split('T').join(" "));
-  else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0)
-    return data;
-  else {
-    var datetime = new Date(data * 1000);
-    return (datetime.getFullYear() + '-' + padLeft(datetime.getMonth()+1, '0', 2) + '-' + padLeft(datetime.getDate(), '0', 2));
-  }
+	if (!data) return;
+	if (data.indexOf('T') >= 0) 
+		return (data.split('T').join(" "));
+	else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0)
+		return data;
+	else {
+		var datetime = new Date(data * 1000);
+		return (datetime.getFullYear() + '-' + padLeft(datetime.getMonth()+1, '0', 2) + '-' + padLeft(datetime.getDate(), '0', 2));
+	}
 }
 
 /* Function that converts given date to javascript a Date object
@@ -94,25 +94,25 @@ function javascriptDate(data) {
  * @return Date in the format of dd.mm.yyyy
  */
 function cTimeDate(data) {
-  if (!data) return;
-  if (data.indexOf(' ') >= 0) {
-    data = data.split(' ')[0];
-    data = data.split('-')[2] + '.' + data.split('-')[1] + '.' + data.split('-')[0];
-    return (data);
-  } else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0) {
-    data = data.split('-')[2] + '.' + data.split('-')[1] + '.' + data.split('-')[0];
-    return (data);
-  } else return(data);
+	if (!data) return;
+	if (data.indexOf(' ') >= 0) {
+		data = data.split(' ')[0];
+		data = data.split('-')[2] + '.' + data.split('-')[1] + '.' + data.split('-')[0];
+		return (data);
+	} else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0) {
+		data = data.split('-')[2] + '.' + data.split('-')[1] + '.' + data.split('-')[0];
+		return (data);
+	} else return(data);
 }
 /* This function returns a Hour of UTC time date
  * @param data The date
  * @return Date in the format of hh:mm:ss
  */
 function cTimeHour(data) {
-  if (!data) return;
-  if (data.indexOf(' ') >= 0) return (data.split(' ')[1]);
-  else if (data.indexOf(':') >= 0 && data.indexOf(' ') < 0) return(data);
-  else return(data);
+	if (!data) return;
+	if (data.indexOf(' ') >= 0) return (data.split(' ')[1]);
+	else if (data.indexOf(':') >= 0 && data.indexOf(' ') < 0) return(data);
+	else return(data);
 }
 
 /* This function retuns a Date of UTC time in DATE HOUR style
@@ -120,14 +120,14 @@ function cTimeHour(data) {
  * @return Date in the format of dd.mm.yyyy hh:mm
  */
 function cTimeDateHour(data) {
-  if (!data) return;
-  var date = cTimeDate(data);
-  if (data.indexOf(' ') >= 0) {
+	if (!data) return;
+	var date = cTimeDate(data);
+	if (data.indexOf(' ') >= 0) {
 	var hour = data.split(' ')[1] || '';
 	if (hour != '') hour = ' ' + hour.split(':')[0] + ':' + hour.split(':')[1];
-    return (date+hour);
-  }
-  else return(date);
+		return (date+hour);
+	}
+	else return(date);
 }
 
 // DOM NODE FUNCTIONS //
@@ -137,8 +137,8 @@ function cTimeDateHour(data) {
  * @return String containing node data
  */
 function nodeData(node) { 
-  try { return node.childNodes.item(0).nodeValue; } 
-  catch(e) { return ''; }
+	try { return node.childNodes.item(0).nodeValue; } 
+	catch(e) { return ''; }
 
 }
 
@@ -169,28 +169,28 @@ function replaceNodeWithChildren(theNode) {
  * @return void (shows an alert box)
  */
 function goDeepDOMtree(node,level) {
-  if (!node.childNodes.length) return (node.nodeValue);
-  var spacing = '';
-  for (var k = 0; k < level; k++) spacing += '..';
-  var out = spacing +'<'+node.nodeName+'>';
-  for (var i = 0; i < node.childNodes.length; i++){
-    var sNode = node.childNodes[i];
-    if (sNode.childNodes && sNode.childNodes.length) out += '\n';
-    out += goDeepDOMtree(sNode,level+1);
-    if (sNode.childNodes && sNode.childNodes.length) out += spacing;
-  }
-  out += '</'+node.nodeName+'>\n';
-  return out;
+	if (!node.childNodes.length) return (node.nodeValue);
+	var spacing = '';
+	for (var k = 0; k < level; k++) spacing += '..';
+	var out = spacing +'<'+node.nodeName+'>';
+	for (var i = 0; i < node.childNodes.length; i++){
+		var sNode = node.childNodes[i];
+		if (sNode.childNodes && sNode.childNodes.length) out += '\n';
+		out += goDeepDOMtree(sNode,level+1);
+		if (sNode.childNodes && sNode.childNodes.length) out += spacing;
+	}
+	out += '</'+node.nodeName+'>\n';
+	return out;
 } 
 
 function showDOMtree(node) {
-  var out = '<'+node.nodeName+'>\n';
-  for (var i = 0; i < node.childNodes.length; i++){
-    var sNode = node.childNodes[i];
-    out += goDeepDOMtree(sNode,1);
-  }
-  out += '</'+node.nodeName+'>';
-  alert(out);
+	var out = '<'+node.nodeName+'>\n';
+	for (var i = 0; i < node.childNodes.length; i++){
+		var sNode = node.childNodes[i];
+		out += goDeepDOMtree(sNode,1);
+	}
+	out += '</'+node.nodeName+'>';
+	alert(out);
 }
 
 /* Function that searches a HTMLCollection Object for an element
@@ -201,12 +201,12 @@ function showDOMtree(node) {
  * @return requested node(s)
  */
 function getElementsByClassName(nodes, name, useIndexOf) {
-  var ret = new Array();
-  for (var i = 0; i < nodes.length; i++) {
-    if (!useIndexOf) { if (nodes[i].className == name) ret.push(nodes[i]); }
-    else { if (nodes[i].className.indexOf(name) >= 0 ) ret.push(nodes[i]); }
-  }
-  return ret;
+	var ret = new Array();
+	for (var i = 0; i < nodes.length; i++) {
+		if (!useIndexOf) { if (nodes[i].className == name) ret.push(nodes[i]); }
+		else { if (nodes[i].className.indexOf(name) >= 0 ) ret.push(nodes[i]); }
+	}
+	return ret;
 }
 
 /* Function that searches a HTMLCollection Object for an element
@@ -217,12 +217,12 @@ function getElementsByClassName(nodes, name, useIndexOf) {
  * @return requested node(s)
  */
 function getElementsByName(nodes, sname, useIndexOf) {
-  var ret = new Array();
-  for (var i = 0; i < nodes.length; i++) {
-    if (!useIndexOf) { if (nodes[i].name == sname) ret.push(nodes[i]); }
-    else { if (nodes[i].name.indexOf(sname) >= 0 ) ret.push(nodes[i]); }
-  }
-  return ret;
+	var ret = new Array();
+	for (var i = 0; i < nodes.length; i++) {
+		if (!useIndexOf) { if (nodes[i].name == sname) ret.push(nodes[i]); }
+		else { if (nodes[i].name.indexOf(sname) >= 0 ) ret.push(nodes[i]); }
+	}
+	return ret;
 }
 
 /* Function that returns elements of given tag name for the given node only
@@ -231,11 +231,11 @@ function getElementsByName(nodes, sname, useIndexOf) {
  * @return requested node(s)
  */
 function getNodeElementsByTagName(node, tag) {
-  var ret = new Array();
-  for (var i = 0; i < node.childNodes.length; i++) {
-    if (node.childNodes[i].nodeName == tag) ret.push(node.childNodes[i]);
-  }
-  return ret;
+	var ret = new Array();
+	for (var i = 0; i < node.childNodes.length; i++) {
+		if (node.childNodes[i].nodeName == tag) ret.push(node.childNodes[i]);
+	}
+	return ret;
 }
 
 /* Function that creates an header
@@ -362,7 +362,7 @@ function createTextLink(parentNode, text, url, rel, onclick, title, className, i
 	var obj = createLink(null, text, url, rel, onclick, title, className, isText);
 	if (className) obj.className = className;
 	if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
-  else return(obj);
+	else return(obj);
 }
 
 /* Creates a SELECT option element
@@ -372,34 +372,34 @@ function createTextLink(parentNode, text, url, rel, onclick, title, className, i
  * @param isSelected Should this option be selected
  */
 function createSelectOption(parentNode, text, value, isSelected, className, isDisabled) {
-  var obj = document.createElement('option');
-  if (text != null) obj.appendChild(document.createTextNode(text));
-  if (value != null) obj.value = value;
-  if (isSelected != null) obj.selected = isSelected;
-  if (className != null) obj.className = className;
-  if (isDisabled != null) obj.disabled = isDisabled;
-  if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
-  else return(obj);
+	var obj = document.createElement('option');
+	if (text != null) obj.appendChild(document.createTextNode(text));
+	if (value != null) obj.value = value;
+	if (isSelected != null) obj.selected = isSelected;
+	if (className != null) obj.className = className;
+	if (isDisabled != null) obj.disabled = isDisabled;
+	if (parentNode != null && parentNode != '') parentNode.appendChild(obj);
+	else return(obj);
 }
 
 function createCheckbox(name,checked) {
-  var ck = document.createElement('input');
-  ck.type = 'checkbox';
-  ck.name = name;
-  if (checked != null) ck.checked = checked;
-  return ck;
+	var ck = document.createElement('input');
+	ck.type = 'checkbox';
+	ck.name = name;
+	if (checked != null) ck.checked = checked;
+	return ck;
 }
 
 function createTextInput(name,size,disabled,hidden,maxlength,value) {
-  var input = document.createElement('input');
-  if (!hidden) input.type = 'text';
-  else input.type = 'hidden';
-  if (name != null) { input.name = name; input.id = name;/*.replace('.','_')*/; }
-  if (size != null) input.size = size;
-  if (disabled != null) input.disabled = disabled;
-  if (maxlength != null) input.maxLength = maxlength;
-  if (value != null) input.value = value;
-  return input;
+	var input = document.createElement('input');
+	if (!hidden) input.type = 'text';
+	else input.type = 'hidden';
+	if (name != null) { input.name = name; input.id = name;/*.replace('.','_')*/; }
+	if (size != null) input.size = size;
+	if (disabled != null) input.disabled = disabled;
+	if (maxlength != null) input.maxLength = maxlength;
+	if (value != null) input.value = value;
+	return input;
 }
 
 function createBasicButton(name,value,type) {
@@ -536,13 +536,13 @@ function makeBar(parentNode,start,end,total,map,barSize) {
 	} else {
 		//Relative Size
 		length = (1 + end - start) / total;
-    	width = length - makeBar_rest;
-    	if(end != total){
-        	if(width <= makeBar_rest) width = makeBar_rest; 
-        	if(makeBar_rest > barSize) { makeBar_rest -= length; return null;}
-    	}
-    	makeBar_rest = width - length + makeBar_rest;
-    	bar.style.width = (width*100) + "%";
+			width = length - makeBar_rest;
+			if(end != total){
+					if(width <= makeBar_rest) width = makeBar_rest; 
+					if(makeBar_rest > barSize) { makeBar_rest -= length; return null;}
+			}
+			makeBar_rest = width - length + makeBar_rest;
+			bar.style.width = (width*100) + "%";
 	}
 		
 	if (parentNode != null || parentNode != '') parentNode.appendChild(bar); else return bar;
@@ -663,11 +663,11 @@ function clean_input(str) {
  * @return void
  */
 function showAlert(func, process, pNode, cNode) {
-  if (cNode != '#text' && seeDebug)
-  alert(func+
-	      '\nProcessing: '+process+
-	      '\nUnrecognized '+pNode+' node: '+cNode+
-        '\nPlease warn your favorite moderator with this text message');
+	if (cNode != '#text' && seeDebug)
+	alert(func+
+				'\nProcessing: '+process+
+				'\nUnrecognized '+pNode+' node: '+cNode+
+				'\nPlease warn your favorite moderator with this text message');
 }
 
 /* Function that alerts the user for errors
@@ -689,21 +689,21 @@ function errorAlert(funcName,whereIs) {
  * @return Object holding URI Data
  */
 function parseURI() {
-  var uri = "" + window.location;
-  var obj = new Object();
-  if (uri.indexOf('?') > -1) { // we have an URI
-    var elems;
-    if (uri.indexOf('#') >= 0) {
-      elems = uri.substring(uri.indexOf('?')+1,uri.indexOf('#')).split('&');
-      obj['#'] = uri.substring(uri.indexOf('#')+1,uri.length);
-    } else elems = uri.substring(uri.indexOf('?')+1,uri.length).split('&');
-  }
-  for (i in elems) {
-    var efield = String(elems[i]).split('=')[0];
-    var evalue = String(elems[i]).split('=')[1];
-    obj[efield] = evalue;
-  }
-  return obj;
+	var uri = "" + window.location;
+	var obj = new Object();
+	if (uri.indexOf('?') > -1) { // we have an URI
+		var elems;
+		if (uri.indexOf('#') >= 0) {
+			elems = uri.substring(uri.indexOf('?')+1,uri.indexOf('#')).split('&');
+			obj['#'] = uri.substring(uri.indexOf('#')+1,uri.length);
+		} else elems = uri.substring(uri.indexOf('?')+1,uri.length).split('&');
+	}
+	for (i in elems) {
+		var efield = String(elems[i]).split('=')[0];
+		var evalue = String(elems[i]).split('=')[1];
+		obj[efield] = evalue;
+	}
+	return obj;
 }
 
 /* Function that updates the URI
@@ -711,17 +711,17 @@ function parseURI() {
  * @return void (set's the URI)
  */
 function updateURI(obj) {
-  var uri = "" + window.location;
-  var currentURI = uri.substring(0,uri.indexOf('?'));
-  var initial = true;
-  for (var field in obj) {
-    if (field == '#') continue;
-    if (!initial) currentURI += '&';
-    else currentURI += '?';
-    currentURI += field + '=' + obj[field];
-  }
-  if (obj['#']) currentURI += '#' + obj['#'];
-  return (currentURI);
+	var uri = "" + window.location;
+	var currentURI = uri.substring(0,uri.indexOf('?'));
+	var initial = true;
+	for (var field in obj) {
+		if (field == '#') continue;
+		if (!initial) currentURI += '&';
+		else currentURI += '?';
+		currentURI += field + '=' + obj[field];
+	}
+	if (obj['#']) currentURI += '#' + obj['#'];
+	return (currentURI);
 }
 
 /* Function that clones an object
@@ -729,8 +729,8 @@ function updateURI(obj) {
  * @return usage: var x = new cloneObject(y);
  */
 function cloneObject(what) {
-  for (var i in what)
-    this[i] = what[i];
+	for (var i in what)
+		this[i] = what[i];
 }
 
 function cloneArray(what) {
@@ -742,31 +742,31 @@ function cloneArray(what) {
 
 /* Adds array push prototype to arrays if not defined */
 function Array_push() {
-  var A_p = 0;
-  for (A_p = 0; A_p < arguments.length; A_p++) {
-    this[this.length] = arguments[A_p];
-  }
-  return(this.length);
+	var A_p = 0;
+	for (A_p = 0; A_p < arguments.length; A_p++) {
+		this[this.length] = arguments[A_p];
+	}
+	return(this.length);
 }
 
 if (typeof Array.prototype.push == "undefined") {
-  Array.prototype.push = Array_push;
+	Array.prototype.push = Array_push;
 }
 
 
 /* Adds array shift prototype to arrays if not defined */
 function Array_shift() {
-  var A_s = 0;
-  var response = this[0];
-  for (A_s = 0; A_s < this.length-1; A_s++) {
-    this[A_s] = this[A_s + 1];
-  }
-  this.length--;
-  return(response);
+	var A_s = 0;
+	var response = this[0];
+	for (A_s = 0; A_s < this.length-1; A_s++) {
+		this[A_s] = this[A_s + 1];
+	}
+	this.length--;
+	return(response);
 }
 
 if (typeof Array.prototype.shift == "undefined") {
-  Array.prototype.shift = Array_shift;
+	Array.prototype.shift = Array_shift;
 }
 
 /* Adds array indexOf prototype to arrays if not defined */
@@ -910,14 +910,14 @@ function initStatusBox() {
  */
 function epNoToString(epno) {
 
-  var ret = Number(epno);
-  if (isNaN(ret)) return epno;
-  if (ret >= 10000) return 'O' + Number(ret - 10000);
-  if (ret >= 4000 && ret < 10000) return 'P' + Number(ret - 4000);
-  if (ret >= 3000 && ret < 4000) return 'T' + Number(ret - 3000);
-  if (ret >= 2000 && ret < 3000) return 'C' + Number(ret - 2000);
-  if (ret >= 1000 && ret < 2000) return 'S' + Number(ret - 1000);
-  return ret;
+	var ret = Number(epno);
+	if (isNaN(ret)) return epno;
+	if (ret >= 10000) return 'O' + Number(ret - 10000);
+	if (ret >= 4000 && ret < 10000) return 'P' + Number(ret - 4000);
+	if (ret >= 3000 && ret < 4000) return 'T' + Number(ret - 3000);
+	if (ret >= 2000 && ret < 3000) return 'C' + Number(ret - 2000);
+	if (ret >= 1000 && ret < 2000) return 'S' + Number(ret - 1000);
+	return ret;
 
 }
 
@@ -927,29 +927,29 @@ function epNoToString(epno) {
  * @return Converted file size
  */
 function formatFileSize(size,force) {
-  var format = false;
-  if (config['settings']['FORMATFILESIZE']) format = config['settings']['FORMATFILESIZE'];
-  if (force) format = force;
-  if (!format) {
-    var aux = new String(size);
-    var sz = new Array();
-    for (var i = 0; i < aux.length; i++) sz.push(aux.charAt(i));
-    aux = ''; 
-    var i = sz.length - 1;
-    while (i - 2 > 0) { i -= 2; sz.splice(i, 0, '.'); i--; }
-    for (i = 0; i < sz.length; i++) aux += sz[i];
-    return (aux);
-  }
-  var tsize = parseInt(size);
-  if (tsize < 1000) return(tsize + ' B'); // Byte
-  else {
-    tsize = tsize / 1024;
-    if (tsize < 1000) return(tsize.toFixed(2) + ' KB'); // kilobyte
-    else { // megabyte
-      tsize = tsize / 1024;
-      return(tsize.toFixed(2) + ' MB');
-    }
-  }
+	var format = false;
+	if (config['settings']['FORMATFILESIZE']) format = config['settings']['FORMATFILESIZE'];
+	if (force) format = force;
+	if (!format) {
+		var aux = new String(size);
+		var sz = new Array();
+		for (var i = 0; i < aux.length; i++) sz.push(aux.charAt(i));
+		aux = ''; 
+		var i = sz.length - 1;
+		while (i - 2 > 0) { i -= 2; sz.splice(i, 0, '.'); i--; }
+		for (i = 0; i < sz.length; i++) aux += sz[i];
+		return (aux);
+	}
+	var tsize = parseInt(size);
+	if (tsize < 1000) return(tsize + ' B'); // Byte
+	else {
+		tsize = tsize / 1024;
+		if (tsize < 1000) return(tsize.toFixed(2) + ' KB'); // kilobyte
+		else { // megabyte
+			tsize = tsize / 1024;
+			return(tsize.toFixed(2) + ' MB');
+		}
+	}
 }
 
 /* This function formats a length to a given format
@@ -958,34 +958,38 @@ function formatFileSize(size,force) {
  * @return Formated length
  */
 function formatFileLength(length, format) {
-  var tsec = length % 60;
-  var tmin = Math.floor(length/60);
-  tmin = tmin % 60;
-  var thr = Math.floor(length/3600);
-  thr = thr % 60;
-  var tday = Math.floor(length/86400);
-  var output = '';
-  if (format == 'long') {
-    if (tday) output += tday + ':';
-    if (thr) output += thr + ':';
-    if (tmin) output += tmin + ':';
-    output += tsec;
-  } else { // format is 'rounded'
-    var minutes = 0;
-    if (tday) minutes = tday * 1440;
-    if (thr) minutes += thr * 60;
-    if (tmin) minutes += tmin;
-    if (tsec > 29) minutes += 1;
-    output = minutes+'m';
-  }
-  return output;
+	var tsec = length % 60;
+	var tmin = Math.floor(length/60);
+	tmin = tmin % 60;
+	var thr = Math.floor(length/3600);
+	thr = thr % 60;
+	var tday = Math.floor(length/86400);
+	if (!tmin) tmin = "00";
+	else if (tmin < 10) tmin = "0"+tmin;
+	if (!tsec) tsec = "00";
+	else if (tsec < 10) tsec = "0"+tsec;
+	var output = '';
+	if (format == 'long') {
+		if (tday) output += tday + ':';
+		if (thr) output += thr + ':';
+		output += tmin + ':';
+		output += tsec;
+	} else { // format is 'rounded'
+		var minutes = 0;
+		if (tday) minutes = tday * 1440;
+		if (thr) minutes += thr * 60;
+		if (tmin) minutes += tmin;
+		if (tsec > 29) minutes += 1;
+		output = minutes+'m';
+	}
+	return output;
 }
 
 // QUALITY FUNCTIONS //
 
 function buildQualityIcon(node,quality) {
-  var qual = quality.replace(' ','');
-  createIcon(node, quality, null, null, 'quality: '+quality, 'i_rate_'+qual);
+	var qual = quality.replace(' ','');
+	createIcon(node, quality, null, null, 'quality: '+quality, 'i_rate_'+qual);
 }
 
 // EPISODE Functions //
@@ -1039,7 +1043,7 @@ function c_number(a, b) {
 	return aN - bN;
 }
 function c_number_r(a, b) {
-  return c_number(b, a);
+	return c_number(b, a);
 }
 function dig_text(node) {
 	if (!node) {
@@ -1215,26 +1219,26 @@ function init_sorting(node,ident,sortico) {
 		'c_date':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_date},
 		'c_set':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_anidbsort},
 		'c_setlatin':{'sortf':c_string, 'sortr':c_string_r, 'getval':get_anidbsort},
-		'c_none':{'sortf':c_undefined, 'sortr':c_undefined_r, 'getval':get_blank} }  
+		'c_none':{'sortf':c_undefined, 'sortr':c_undefined_r, 'getval':get_blank} }	
 }
 
 /* Finds the active sort col and return it's identifier
  * @param node If specified tells the root node [node]
  */
 function findSortCol(node) {
-  if (!node) node = document;
-  var headinglist;
+	if (!node) node = document;
+	var headinglist;
 	if (document.getElementsByTagName)
 		headinglist = node.getElementsByTagName('th');
 	else 	
-	  return;
+		return;
 	for (var i = 0; i < headinglist.length; i++) {
-    var heading = headinglist[i];
-    if (heading.className.indexOf('s_forward') >= 0 || heading.className.indexOf('s_reverse') >= 0) {
-      return heading.className.substring(0,heading.className.indexOf(" ")) || heading.className;
-    } else continue;
-  }
-  return null;
+		var heading = headinglist[i];
+		if (heading.className.indexOf('s_forward') >= 0 || heading.className.indexOf('s_reverse') >= 0) {
+			return heading.className.substring(0,heading.className.indexOf(" ")) || heading.className;
+		} else continue;
+	}
+	return null;
 }
 /* Function that actualy sorts a column */
 function sortcol(node) {
@@ -1267,7 +1271,7 @@ function sortcol(node) {
 		startIndex = Number(node.parentNode.rowIndex)+1; 
 	var sortfunc = this._sortFunction;
 	if (!sortfunc) {
-		//  We now find out which sort function to apply to the column or none
+		//	We now find out which sort function to apply to the column or none
 		sortfunc = node.className.substring(node.className.indexOf(" c_")+1,(node.className.indexOf(" ",node.className.indexOf(" c_")+1)+1 || node.className.length+1)-1);
 		sortfunc = (sortfunc.indexOf('c_') < 0 || sortfunc == 'c_none' ? 'c_none' : sortfunc);
 		node._sortFunction = sortfunc;
@@ -1457,78 +1461,78 @@ hashObj.sfv = hashObj.pattern+".%ext %crc";
 hashObj.validHashes = [ "ed2k", "sfv" ];
 
 var validIdentifiers = ["%ant","%anat","%ept","%epat","%enr","%pn","%fpn","%raw",
-                        "%crc","%CRC","%ver","%cen","%dub","%sub","%lang","%flang",
-                        "%grp","%grn","%qual","%src","%res","%vcodec","%eps","%atype",
-                        "%fid","%aid","%eid","%gid","%dlen","%ext","%ed2k","%uncen",
-                        "%acodec","%achans","%hlen","%flen"]
+												"%crc","%CRC","%ver","%cen","%dub","%sub","%lang","%flang",
+												"%grp","%grn","%qual","%src","%res","%vcodec","%eps","%atype",
+												"%fid","%aid","%eid","%gid","%dlen","%ext","%ed2k","%uncen",
+												"%acodec","%achans","%hlen","%flen"]
 /* Function that tests if a given identifier is valid
  * @param identifier The identifier to test
  * @return true|false
  */
 function checkIdentifiers(identifier) {
-  for (var i = 0; i < validIdentifiers.length; i++) {
-    if (identifier.indexOf(validIdentifiers[i]) >= 0) return true;
-  }
-  return false;
+	for (var i = 0; i < validIdentifiers.length; i++) {
+		if (identifier.indexOf(validIdentifiers[i]) >= 0) return true;
+	}
+	return false;
 }
 /* Function that creates the link for a given hash
  * @return void (sets the hash href) 
  */
 function applyFormat(identifier, file, episode, anime, group) {
-  var originalIdentifier = identifier;
-  var dropIfNull = false;
-  if (identifier.indexOf('<') >= 0) {  
+	var originalIdentifier = identifier;
+	var dropIfNull = false;
+	if (identifier.indexOf('<') >= 0) {	
 	originalIdentifier = originalIdentifier.substr(originalIdentifier.indexOf('<')+1,originalIdentifier.indexOf('>')-1);
 	identifier = identifier.match(/(\%[A-Z]+)/mgi)[0];
 	originalIdentifier = originalIdentifier.replace(identifier,"%replaceme");
 	dropIfNull = true;
-  }
-  //alert('identifier: '+identifier+' ('+originalIdentifier+') exists? '+checkIdentifiers(identifier));
-  if (!checkIdentifiers(identifier)) return ("");
-  identifier = identifier.replace(/\%ant/mgi,anime.getTitle());
-  identifier = identifier.replace(/\%anat/mgi,anime.getAltTitle());
-  identifier = identifier.replace(/\%ept/mgi,episode.getTitle());
-  identifier = identifier.replace(/\%epat/mgi,episode.getAltTitle());
-  if (identifier.indexOf("%enr") >= 0) {
+	}
+	//alert('identifier: '+identifier+' ('+originalIdentifier+') exists? '+checkIdentifiers(identifier));
+	if (!checkIdentifiers(identifier)) return ("");
+	identifier = identifier.replace(/\%ant/mgi,anime.getTitle());
+	identifier = identifier.replace(/\%anat/mgi,anime.getAltTitle());
+	identifier = identifier.replace(/\%ept/mgi,episode.getTitle());
+	identifier = identifier.replace(/\%epat/mgi,episode.getAltTitle());
+	if (identifier.indexOf("%enr") >= 0) {
 	var epLen = String((anime.eps) ? anime.eps : anime.epCount);
 	var epFmt = '0000'+episode.epno;
 	epFmt = epFmt.slice(epFmt.length-epLen.length);
 	identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
-  }
-  identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");
-  identifier = identifier.replace(/\%fpn/mgi,(anime.type == 'movie') ? "Part" : "Episode");
-  if (identifier.indexOf("%raw") >= 0) {
+	}
+	identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");
+	identifier = identifier.replace(/\%fpn/mgi,(anime.type == 'movie') ? "Part" : "Episode");
+	if (identifier.indexOf("%raw") >= 0) {
 	if (file.type == 'video' && file.subtitleTracks.length == 0)
-	  identifier = identifier.replace(/\%raw/mgi,(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
+		identifier = identifier.replace(/\%raw/mgi,(file.audioTracks.length == 1 && file.audioTracks[0].lang == 'ja') ? "RAW" : "");
 	else identifier = identifier.replace(/\%raw/mgi,"");
-  }
-  identifier = identifier.replace(/\%crc/mg,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
-  identifier = identifier.replace(/\%CRC/mg,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
-  identifier = identifier.replace(/\%ver/mgi,(file.version != 'v1') ? file.version : "");
-  identifier = identifier.replace(/\%cen/mgi,(file.isCensored) ? "cen" : "");
-  identifier = identifier.replace(/\%uncen/mgi,(file.isUncensored) ? "uncen" : "");
-  if (identifier.indexOf("%dub") >= 0) {
+	}
+	identifier = identifier.replace(/\%crc/mg,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32);
+	identifier = identifier.replace(/\%CRC/mg,(file.crcStatus == 'invalid') ? "INVALID" : file.crc32.toUpperCase());
+	identifier = identifier.replace(/\%ver/mgi,(file.version != 'v1') ? file.version : "");
+	identifier = identifier.replace(/\%cen/mgi,(file.isCensored) ? "cen" : "");
+	identifier = identifier.replace(/\%uncen/mgi,(file.isUncensored) ? "uncen" : "");
+	if (identifier.indexOf("%dub") >= 0) {
 	var dub = new Array();
 	for (var i = 0; i < file.audioTracks.length; i++) dub.push(file.audioTracks[i].lang);
 	identifier = identifier.replace(/\%dub/mgi,(dub.length) ? dub.join(',') : "");
-  }
-  if (identifier.indexOf("%sub") >= 0) {
+	}
+	if (identifier.indexOf("%sub") >= 0) {
 	var sub = new Array();
 	for (var i = 0; i < file.subtitleTracks.length; i++) sub.push(file.subtitleTracks[i].lang);
 	identifier = identifier.replace(/\%sub/mgi,(sub.length) ? sub.join(',') : "");
-  }
-  if (identifier.indexOf("%lang") >= 0 || identifier.indexOf("%flang") >= 0) {
+	}
+	if (identifier.indexOf("%lang") >= 0 || identifier.indexOf("%flang") >= 0) {
 	var dub = new Array();
 	for (var i = 0; i < file.audioTracks.length; i++) {
-	  if (file.audioTracks[i].lang == "ja") continue;
-	  if (identifier.indexOf("%lang") >= 0 && dub.length > 1) { dub.push("+"); break; }
-	  dub.push(file.audioTracks[i].lang);
+		if (file.audioTracks[i].lang == "ja") continue;
+		if (identifier.indexOf("%lang") >= 0 && dub.length > 1) { dub.push("+"); break; }
+		dub.push(file.audioTracks[i].lang);
 	}
 	var sub = new Array();
 	for (var i = 0; i < file.subtitleTracks.length; i++) {
-	  if (file.subtitleTracks[i].lang == "en") continue;
-	  if (identifier.indexOf("%lang") >= 0 && sub.length > 1) { sub.push("+"); break; }
-	  sub.push(file.subtitleTracks[i].lang);
+		if (file.subtitleTracks[i].lang == "en") continue;
+		if (identifier.indexOf("%lang") >= 0 && sub.length > 1) { sub.push("+"); break; }
+		sub.push(file.subtitleTracks[i].lang);
 	}
 	var langs = "";
 	if (dub.length) langs += 'dub';
@@ -1541,90 +1545,90 @@ function applyFormat(identifier, file, episode, anime, group) {
 	if (langs == 'dub.sub_ja.en') langs = "";
 	if (identifier.indexOf("%lang") >= 0) identifier = identifier.replace(/\%lang/mgi,langs);
 	if (identifier.indexOf("%flang") >= 0) identifier = identifier.replace(/\%flang/mgi,langs);
-  }
-  identifier = identifier.replace(/\%grp/mgi,(group) ? group.shortName : '');
-  identifier = identifier.replace(/\%grn/mgi,(group) ? group.name : '');
-  identifier = identifier.replace(/\%qual/mgi,(file.quality != 'unknown') ? file.quality : "");
-  identifier = identifier.replace(/\%src/mgi,file.source);
-  identifier = identifier.replace(/\%vcodec/mgi,(file.type == 'video' && file.videoTracks.length) ? file.videoTracks[0].codec : "");
-  identifier = identifier.replace(/\%acodec/mgi,((file.type == 'video' || file.type == 'audio') && file.audioTracks.length) ? file.audioTracks[0].codec : "");
-  identifier = identifier.replace(/\%achans/mgi,((file.type == 'video' || file.type == 'audio') && file.audioTracks.length && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
-  identifier = identifier.replace(/\%res/mgi,(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
-  identifier = identifier.replace(/\%eps/mgi,anime.eps);
-  identifier = identifier.replace(/\%atype/mgi,(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");
-  identifier = identifier.replace(/\%fid/mgi,file.id);
-  identifier = identifier.replace(/\%gid/mgi,file.groupId);
-  identifier = identifier.replace(/\%eid/mgi,file.episodeId);
-  identifier = identifier.replace(/\%aid/mgi,file.animeId);
-  identifier = identifier.replace(/\%flen/mgi,file.size);
-  identifier = identifier.replace(/\%dlen/mgi,formatFileSize(file.size,false));
-  identifier = identifier.replace(/\%hlen/mgi,formatFileSize(file.size,true));
-  identifier = identifier.replace(/\%ext/mgi,file.fileType);
-  identifier = identifier.replace(/\%ed2k/mgi,file.ed2k);
-  if (dropIfNull) {
+	}
+	identifier = identifier.replace(/\%grp/mgi,(group) ? group.shortName : '');
+	identifier = identifier.replace(/\%grn/mgi,(group) ? group.name : '');
+	identifier = identifier.replace(/\%qual/mgi,(file.quality != 'unknown') ? file.quality : "");
+	identifier = identifier.replace(/\%src/mgi,file.source);
+	identifier = identifier.replace(/\%vcodec/mgi,(file.type == 'video' && file.videoTracks.length) ? file.videoTracks[0].codec : "");
+	identifier = identifier.replace(/\%acodec/mgi,((file.type == 'video' || file.type == 'audio') && file.audioTracks.length) ? file.audioTracks[0].codec : "");
+	identifier = identifier.replace(/\%achans/mgi,((file.type == 'video' || file.type == 'audio') && file.audioTracks.length && file.audioTracks[0].chan != 'unknown') ? mapAudioChannels(file.audioTracks[0].chan) : "");
+	identifier = identifier.replace(/\%res/mgi,(file.type == 'video' && file.resolution != 'unknown') ? file.resolution : "");
+	identifier = identifier.replace(/\%eps/mgi,anime.eps);
+	identifier = identifier.replace(/\%atype/mgi,(anime.type != 'unknown') ? mapAnimeType(anime.type) : "");
+	identifier = identifier.replace(/\%fid/mgi,file.id);
+	identifier = identifier.replace(/\%gid/mgi,file.groupId);
+	identifier = identifier.replace(/\%eid/mgi,file.episodeId);
+	identifier = identifier.replace(/\%aid/mgi,file.animeId);
+	identifier = identifier.replace(/\%flen/mgi,file.size);
+	identifier = identifier.replace(/\%dlen/mgi,formatFileSize(file.size,false));
+	identifier = identifier.replace(/\%hlen/mgi,formatFileSize(file.size,true));
+	identifier = identifier.replace(/\%ext/mgi,file.fileType);
+	identifier = identifier.replace(/\%ed2k/mgi,file.ed2k);
+	if (dropIfNull) {
 	if (identifier != '') identifier = originalIdentifier.replace(/\%replaceme/mgi,identifier);
 	else identifier = "";
-  }
-  return (identifier);
+	}
+	return (identifier);
 }
 
 function createHashLink() {
-  var ahref = this.getElementsByTagName('a')[0];
-  //if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
-  var parentid = this.parentNode.id;
-  var fid = Number((parentid.indexOf('fid_') >= 0) ? this.parentNode.id.split('fid_')[1] : this.parentNode.id.split('f')[1]);
-  var file = files[fid];
-  if (!file) return;
-  
-  var episode = episodes[file.episodeId];
-  var curAnime = animes[file.animeId];
-  var group = (file.groupId != 0) ? groups[file.groupId] : null;
-  var possibleHashTypes = this.className.split(' ');
-  var i;
-  var found = false;
-  for (i = 0; i < possibleHashTypes.length; i++) {
-    if (hashObj.validHashes.indexOf(possibleHashTypes[i]) >= 0) { found = true; break; }
-  }
-  if (!found) return;
-  var hashType = possibleHashTypes[i];
+	var ahref = this.getElementsByTagName('a')[0];
+	//if (ahref.href.indexOf("!fillme!") < 0) return; // we allready have the hash
+	var parentid = this.parentNode.id;
+	var fid = Number((parentid.indexOf('fid_') >= 0) ? this.parentNode.id.split('fid_')[1] : this.parentNode.id.split('f')[1]);
+	var file = files[fid];
+	if (!file) return;
+	
+	var episode = episodes[file.episodeId];
+	var curAnime = animes[file.animeId];
+	var group = (file.groupId != 0) ? groups[file.groupId] : null;
+	var possibleHashTypes = this.className.split(' ');
+	var i;
+	var found = false;
+	for (i = 0; i < possibleHashTypes.length; i++) {
+		if (hashObj.validHashes.indexOf(possibleHashTypes[i]) >= 0) { found = true; break; }
+	}
+	if (!found) return;
+	var hashType = possibleHashTypes[i];
 
-  if (!hashObj.usePatterns) hashObj.pattern = hashObj.defaultPattern;
-  var pattern = hashObj[hashType]; 
-  //alert('pattern.in: '+pattern); 
-  var lt = 0; var gt = 0; // Find case '<' and '>' matches
-  for (var i = 0; i < pattern.length; i++) {
-    if (pattern.charAt(i) == '<') lt++;
-    if (pattern.charAt(i) == '>') gt++;
-  }
-  if ((lt == gt) && (lt > 0)) { // only continues if lt == gt
-    while (pattern.lastIndexOf("<") != -1) { // first get rid of the conditional patterns
-      var i = pattern.lastIndexOf("<");
-      var fI = 0;
-      while (pattern.indexOf(">",fI) != -1) {
-        var k = pattern.indexOf(">",fI);
-        if (k < i) {
-          fI = k + 1;
-          continue;
-        } // we have found a pair of thingies
-        var splitstr = pattern.slice(i,k+1);
-        pattern = pattern.replace(splitstr,function(str, offset, s) { return applyFormat(str,file,episode,anime,group); });
-        break; // continue to next match thingie
-      }
-    }
-  }
-  pattern = applyFormat(pattern,file,episode,anime,group);
-  if (hashObj.convertSpaces) pattern = pattern.replace(/ /mgi,hashObj.spacesChar);
-  //alert('pattern.out: '+pattern);
-  ahref.href = pattern+'/';
-  file.ed2klink = pattern+'/';
+	if (!hashObj.usePatterns) hashObj.pattern = hashObj.defaultPattern;
+	var pattern = hashObj[hashType]; 
+	//alert('pattern.in: '+pattern); 
+	var lt = 0; var gt = 0; // Find case '<' and '>' matches
+	for (var i = 0; i < pattern.length; i++) {
+		if (pattern.charAt(i) == '<') lt++;
+		if (pattern.charAt(i) == '>') gt++;
+	}
+	if ((lt == gt) && (lt > 0)) { // only continues if lt == gt
+		while (pattern.lastIndexOf("<") != -1) { // first get rid of the conditional patterns
+			var i = pattern.lastIndexOf("<");
+			var fI = 0;
+			while (pattern.indexOf(">",fI) != -1) {
+				var k = pattern.indexOf(">",fI);
+				if (k < i) {
+					fI = k + 1;
+					continue;
+				} // we have found a pair of thingies
+				var splitstr = pattern.slice(i,k+1);
+				pattern = pattern.replace(splitstr,function(str, offset, s) { return applyFormat(str,file,episode,anime,group); });
+				break; // continue to next match thingie
+			}
+		}
+	}
+	pattern = applyFormat(pattern,file,episode,anime,group);
+	if (hashObj.convertSpaces) pattern = pattern.replace(/ /mgi,hashObj.spacesChar);
+	//alert('pattern.out: '+pattern);
+	ahref.href = pattern+'/';
+	file.ed2klink = pattern+'/';
 }
 
 // TOOLTIP FUNCTIONS //
 
-var offsetfromcursorX=12;       //Customize x offset of tooltip
-var offsetfromcursorY=10;       //Customize y offset of tooltip
-var offsetdivfrompointerX=0;   //Customize x offset of tooltip div relative to pointer image
-var offsetdivfrompointerY=0;   //Customize y offset of tooltip div relative to pointer image. Tip: Set it to (height_of_pointer_image-1).
+var offsetfromcursorX=12;			 //Customize x offset of tooltip
+var offsetfromcursorY=10;			 //Customize y offset of tooltip
+var offsetdivfrompointerX=0;	 //Customize x offset of tooltip div relative to pointer image
+var offsetdivfrompointerY=0;	 //Customize y offset of tooltip div relative to pointer image. Tip: Set it to (height_of_pointer_image-1).
 
 var divHTMLTOOLTIP; //tooltip
 
