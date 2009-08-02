@@ -1,8 +1,6 @@
-#layout-main div.animeatt_reviews div.review,
-#layout-main div.animeatt_reviews div.review + *
+#layout-main div.animeatt_reviews div.review
 {
 	clear: right;
-	padding-top: 2em;
 }
 #layout-main div.animeatt_reviews div.review div.bar
 {
@@ -54,6 +52,12 @@
 #layout-main div.animeatt_reviews div.review div.text
 {
 	min-height: 330px;
+}
+
+#layout-main div.animeatt_reviews div.review div.text + div.note
+{
+	margin-top: 0.5em;
+	margin-right: 12em;
 }
 
 #layout-main div.animeatt_all div.forum div.options-box dl dd
