@@ -591,12 +591,14 @@ a:hover
 	color:#AA0000;
 }
 
+#layout-main div.animelist_table table tr.mylist > td.title:before,
 #layout-main div.group_released table tr.mylist > td.title:before {
 	text-decoration:overline;
 	font-size: xx-small;
 	color: pink;
 	content: "M";
 }
+#layout-main div.animelist_table table tr.all_watched > td.title:before,
 #layout-main div.group_released table tr.all_watched > td.title:before {
 	text-decoration:overline;
 	font-size: xx-small;
