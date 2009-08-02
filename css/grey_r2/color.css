@@ -30,7 +30,7 @@ background-color: transparent;
 }
 html,
 #layout-content,
-#layout-main div.quotebody div.quotebody: nth-of-type(2n+1),
+#layout-main div.quotebody div.quotebody:nth-of-type(2n+1),
 #layout-main div.forum div.postbody dl.codebox
 {
 background-image: url(../grey/images/bg_1.gif);
@@ -128,7 +128,7 @@ background-image: url(../grey/images/bg_3.gif);
 #layout-main table table td.g_odd,
 #layout-main ul.g_list li.g_odd,
 #layout-tabs .g_odd,
-tr.action td.submit: hover
+tr.action td.submit:hover
 {
 background: inherit;
 }
@@ -137,28 +137,28 @@ background: inherit;
 {
 border: 1px solid #565656;
 border-bottom-color: transparent;
-color: grey;
+color: gray;
 }
 #layout-tabs ul.main-tabs > li a span
 {
-color: grey;
+color: gray;
 }
 #layout-main div.tabbed_pane div.body,
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom,
 #layout-tabs ul.main-tabs > li.selected,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li: hover,
-#layout-tabs ul.main-tabs li: hover,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-tabs ul.main-tabs li:hover,
 #layout-main div.tagcloud,
 #layout-main div.desc
 {
 border: 1px solid #121212;
 }
-#layout-tabs ul.main-tabs > li a: hover span,
+#layout-tabs ul.main-tabs > li a:hover span,
 #layout-tabs ul.main-tabs > li.selected a span,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li: hover
+#layout-main div.tabbed_pane ul.tabs li:hover
 {
 color: white;
 }
@@ -171,23 +171,23 @@ border-top-color: #121212;
 {
 background-color: hsla(0, 100%, 100%, 0.2);
 }
-#adba_update: hover,
-#style_next: hover,
-#style_prev: hover,
-#remAudLang: hover,
-#addAudLang: hover,
-#remSubLang: hover,
-#addSubLang: hover,
-#results_back: hover,
-#results_submit: hover,
-input#addfilem\.next: hover,
-input#addfilem\.search: hover,
-*.button: hover,
-*.confirmButton: hover,
-button: hover,
-*.submit: not(div): hover,
-input[type="submit"]: hover,
-input[type="button"]: hover
+#adba_update:hover,
+#style_next:hover,
+#style_prev:hover,
+#remAudLang:hover,
+#addAudLang:hover,
+#remSubLang:hover,
+#addSubLang:hover,
+#results_back:hover,
+#results_submit:hover,
+input#addfilem\.next:hover,
+input#addfilem\.search:hover,
+*.button:hover,
+*.confirmButton:hover,
+button:hover,
+*.submit: not(div):hover,
+input[type="submit"]:hover,
+input[type="button"]:hover
 {
 background-color: hsla(0, 100%, 25%, 0.8);
 color: #ff6000;
@@ -220,7 +220,7 @@ color: #FF6000;
 }
 #layout-content div.g_msg.note h3
 {
-color: grey;
+color: gray;
 }
 #layout-content div.g_msg.success h3
 {
@@ -230,111 +230,111 @@ input[disabled], input[readonly], select[disabled], select[readonly], checkbox[d
 {
 color: #898989;
 }
-#layout-main tr: hover th.field,
-tr: hover > td,
-#layout-main div.forum ul.topics li.row: hover,
-#layout-main div.tabbed_pane div.pane table tr: hover > td
+#layout-main tr:hover th.field,
+tr:hover > td,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.pane table tr:hover > td
 {
 background-image: url(../grey/images/whitepixel.png);
 /*background-color: hsla(0, 100%, 100%, 0.2);*/
 }
 #layout-main div.forum ul.topics,
-#layout-main div.forum li.row: last-of-type
+#layout-main div.forum li.row:last-of-type
 {
-border-color: hsla(0, 100%, 25%, 0.4);
+border-color:hsla(0, 100%, 25%, 0.4);
 }
 div.threads .rtop > *,
 div.threads .rbottom > *,
 #layout-main div.forum ul.topiclist li.header
 {
-background-color: hsla(0, 100%, 25%, 0.4);
+background-color:hsla(0, 100%, 25%, 0.4);
 }
 #tooltip span.top
 {
-background: url(../grey/images/bubble.png) no-repeat top;
+background:url(../grey/images/bubble.png) no-repeat top;
 }
 
 #tooltip span.middle
 {
-background: url(../grey/images/bubble_filler.png) repeat bottom;
+background:url(../grey/images/bubble_filler.png) repeat bottom;
 }
 
 #tooltip span.bottom
 {
-background: url(../grey/images/bubble.png) no-repeat bottom;
+background:url(../grey/images/bubble.png) no-repeat bottom;
 }
 #tooltip
 {
-color: white;
+color:white;
 }
-#layout-main div.tagcloud span: nth-of-type(2n+1) a
+#layout-main div.tagcloud span:nth-of-type(2n+1) a
 {
-color: #f1f1f1;
+color:#f1f1f1;
 }
-#layout-main div.tagcloud span: nth-of-type(2n+1) a: active,
-#layout-main div.tagcloud span a: active
+#layout-main div.tagcloud span:nth-of-type(2n+1) a:active,
+#layout-main div.tagcloud span a:active
 {
-color: #ff6000;
+color:#ff6000;
 }
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-border-top: 1px dashed #c1c1c1;
+border-top:1px dashed #c1c1c1;
 }
 #obj-tooltip
 {
-background-image: url(../grey/images/bg_2.gif);
-color: white;
+background-image:url(../grey/images/bg_2.gif);
+color:white;
 }
 #obj-tooltip h1
 {
-display: none;
+display:none;
 }
 #obj-tooltip ul li,
 #obj-tooltip ul
 {
-list-style-type: none;
-margin: 0;
-padding: 0;
-text-align: left;
-vertical-align: middle;
+list-style-type:none;
+margin:0;
+padding:0;
+text-align:left;
+vertical-align:middle;
 }
 #layout-hint
 {
-background-image: url(../grey/images/bluepixel.png);
-background-color: #262a2a;
-border: 0;
+background-image:url(../grey/images/bluepixel.png);
+background-color:#262a2a;
+border:0;
 }
-#layout-hint span a: hover
+#layout-hint span a:hover
 {
-color: red;
+color:red;
 }
 #layout-main div.forum div.poll div.pollbar
 {
-border-color: #3c37a5;
+border-color:#3c37a5;
 }
 #layout-main div.anime_all div.groups td.epbar div.notdone,
 #layout-main div.group_all div.group_released td.epbar div.notdone
 {
-background-color: grey;
-border-bottom: 2px solid grey;
+background-color:gray;
+border-bottom:2px solid grey;
 }
 
 #layout-main div.anime_all div.groups td.epbar div.done,
 #layout-main div.group_all div.group_released td.epbar div.done
 {
-background-color: #343434;
-border-bottom: 2px solid #515151;
+background-color:#343434;
+border-bottom:2px solid #515151;
 }
 
 #layout-main div.anime_all div.groups td.epbar div.done.mylist,
 #layout-main div.group_all div.group_released td.epbar div.done.mylist
 {
-border-bottom: 2px solid #008800;
+border-bottom:2px solid #008800;
 }
-#layout-nav li li: hover a
+#layout-nav li li:hover a
 {
-color: #ff6000;
-background-image: url(../grey/images/whitepixel.png);
+color:#ff6000;
+background-image:url(../grey/images/whitepixel.png);
 }
 div.spoiler,
 #layout-main div.cmt_entries dl.profile,
@@ -343,15 +343,15 @@ div.spoiler,
 #layout-main div.tagcloud,
 #layout-main div.desc
 {
-border-color: grey;
+border-color:gray;
 }
 #layout-main div.blog div.body,
 #layout-main div.tagcloud,
 #layout-main div.desc
 {
-background-color: hsla(0, 0%, 10%, 0.4);
+background-color:hsla(0, 0%, 10%, 0.4);
 }
 #layout-main  div.userpage_all div.charts div.mylisthistory div.image
 {
-background-color: hsla(0, 100%, 100%, 0.4);
+background-color:hsla(0, 100%, 100%, 0.4);
 }

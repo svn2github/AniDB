@@ -9,63 +9,63 @@
 span.link,
 a
 {
-text-decoration: none;
-cursor: pointer;
+text-decoration:none;
+cursor:pointer;
 }
 #layout-tabs
 {
-display: block;
-margin-right: 0.5em;
+display:block;
+margin-right:0.5em;
 }
 #layout-tabs ul li
 {
-padding: 4px 6px 3px 0;
+padding:4px 6px 3px 0;
 }
 #layout-tabs ul
 {
-margin-top: 0.2em;
-text-align: right;
+margin-top:0.2em;
+text-align:right;
 }
 #layout-tabs li.news
 {
-display: inline;
+display:inline;
 }
 #layout-main > h1
 {
-display: block;
-padding: 4px;
-text-align: left;
+display:block;
+padding:4px;
+text-align:left;
 }
 #layout-main > h1,
 #layout-nav div.menu_hr
 {
-margin-top: 0.3em;
-border-top: 1px solid;
+margin-top:0.3em;
+border-top:1px solid;
 }
 #layout-menu span.tab
 {
-display: inherit;
+display:inherit;
 }
 #layout-menu span.tab
 {
-position: static;
+position:static;
 }
 html,
 #tooltip
 {
-font-size: 10px;
-line-height: 1.2;
-font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
-color: white;
+font-size:10px;
+line-height:1.2;
+font-family:"Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
+color:white;
 }
 div.genren_all ul#cattree li #tooltip
 {
-margin-left: 50px;
+margin-left:50px;
 }
 div.animetagmod_all tr #tooltip,
 div.animetag_all tr #tooltip
 {
-margin-left: 0px;
+margin-left:0px;
 }
 form input[type="text"],
 form input[type="checkbox"],
@@ -74,12 +74,12 @@ form textarea,
 form select,
 select
 {
-color: white;
-background: black;
-border: none;
-font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
-font-size: 10px;
-margin-right: 0.3em;
+color:white;
+background:black;
+border:none;
+font-family:"Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
+font-size:10px;
+margin-right:0.3em;
 }
 #adba_update,
 #style_next,
@@ -98,153 +98,153 @@ input[type="button"],
 button,
 *.confirmButton
 {
-margin-top: 0.3em;
-color: #c1c1c1;
-border-style: dashed;
-text-shadow: none;
-border-color: #565656;
+margin-top:0.3em;
+color:#c1c1c1;
+border-style:dashed;
+text-shadow:none;
+border-color:#565656;
 }
 #layout-hint
 {
-position: fixed;
-width: 100%;
-height: 1.5em;
-padding-top: 0px;
-text-align: center;
+position:fixed;
+width:100%;
+height:1.5em;
+padding-top:0px;
+text-align:center;
 }
 #layout-hint + #layout-nav
 {
-margin-top: 1.5em;
+margin-top:1.5em;
 }
 #layout-hint + #layout-nav + #layout-content
 {
-padding-top: 4.5em;
+padding-top:4.5em;
 }
 #layout-nav
 {
-position: fixed;
-z-index: 1;
-width: 100%;
-height: 2.1em;
-padding-top: 0px;
+position:fixed;
+z-index:1;
+width:100%;
+height:2.1em;
+padding-top:0px;
 }
 #layout-menu
 {
-text-align: left;
-height: 2.1em;
-display: block;
+text-align:left;
+height:2.1em;
+display:block;
 }
 #layout-menu span,
 #layout-menu a
 {
-cursor: default;
+cursor:default;
 }
 #layout-menu ul
 {
-list-style: none;
-margin-left: -0.3em;
+list-style:none;
+margin-left:-0.3em;
 }
 #layout-menu ul li a,
 #layout-main div.blog div.body
 {
-display: block;
-padding: 0 0.3em 0 0.3em;
+display:block;
+padding:0 0.3em 0 0.3em;
 }
 #layout-menu > li
 {
-padding-bottom: 1em;
+padding-bottom:1em;
 }
 #layout-menu div.menu .g_odd
 {
-background: none;
+background:none;
 }
 #layout-menu div.menu li.forum
 {
-font-weight: bold;
+font-weight:bold;
 }
 #layout-menu span.login,
 #layout-menu span.user
 {
-text-align: left;
-display: block;
+text-align:left;
+display:block;
 }
 #layout-menu span.login a
 {
-display: inline;
+display:inline;
 }
-#layout-menu #newnews: before,
-#layout-menu #newnews: after,
-#layout-menu #newmessages: before,
-#layout-menu #newnotifies: before,
-#layout-menu #newmessages: after,
-#layout-menu a.history: after
+#layout-menu #newnews:before,
+#layout-menu #newnews:after,
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
 {
-content: "!";
-font-weight: bold;
-color: red;
-margin: 0 0.2em 0 0.2em;
+content:"!";
+font-weight:bold;
+color:red;
+margin:0 0.2em 0 0.2em;
 }
 #layout-search
 {
-display: block;
-position: absolute;
-top: -0.5em;
-right: 0;
-height: 2em;
-left: auto;
+display:block;
+position:absolute;
+top:-0.5em;
+right:0;
+height:2em;
+left:auto;
 }
 #layout-search form input.text
 {
-width: 25em;
-font-size: 10px;
-margin: 0;
-padding: 0;
+width:25em;
+font-size:10px;
+margin:0;
+padding:0;
 }
 #layout-search form p
 {
-text-align: right;
-padding: 0;
-margin: 0;
+text-align:right;
+padding:0;
+margin:0;
 }
 #layout-search form input.submit
 {
-font-family: "Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
-margin: 0;
-padding: 0;
-font-size: 11px;
-font-weight: normal;
+font-family:"Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
+margin:0;
+padding:0;
+font-size:11px;
+font-weight:normal;
 }
 #layout-content
 {
-margin: 0 0 0 0;
-padding-top: 2.5em;
-padding-bottom: 0.1em;
-width: 100%;
+margin:0 0 0 0;
+padding-top:2.5em;
+padding-bottom:0.1em;
+width:100%;
 }
 body.nonav #layout-content
 {
-width: auto;
-height: auto;
-margin: 0;
+width:auto;
+height:auto;
+margin:0;
 }
 #layout-menu
 {
-text-align: left;
-margin-left: 1em;
-margin-right: 1em;
-margin-bottom: 1em;
-margin-top: 0.4em;
-display: block;
+text-align:left;
+margin-left:1em;
+margin-right:1em;
+margin-bottom:1em;
+margin-top:0.4em;
+display:block;
 }
 #layout-content ul.g_list.nav,
 #layout-content ul.g_list.jump,
 #layout-content ul.g_list.limit
 {
-padding-left: 0;
-padding-top: 2px;
-padding-bottom: 2px;
-width: 100%;
-text-align: center;
+padding-left:0;
+padding-top:2px;
+padding-bottom:2px;
+width:100%;
+text-align:center;
 }
 #layout-content ul.g_list.nav li,
 #layout-content ul.g_list.links li,
@@ -252,206 +252,206 @@ text-align: center;
 #layout-content ul.g_list.limit li,
 #layout-tabs ul.main-tabs li
 {
-display: inline;
-margin-left: 0;
-margin-right: 0;
-padding-left: 0;
-padding-right: 0;
+display:inline;
+margin-left:0;
+margin-right:0;
+padding-left:0;
+padding-right:0;
 }
 #menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account
 {
-display: none;
-z-index: 7;
-position: absolute;
-top: 2.1em;
+display:none;
+z-index:7;
+position:absolute;
+top:2.1em;
 }
-ul#layout-menu li: hover ul {
-display: block;
-position: absolute;
+ul#layout-menu li:hover ul {
+display:block;
+position:absolute;
 }
 ul#layout-menu li ul li{
-float: none;
-display: block;
-line-height: normal;
-white-space: nowrap;
-margin-left: 0;
-margin-right: 0;
+float:none;
+display:block;
+line-height:normal;
+white-space:nowrap;
+margin-left:0;
+margin-right:0;
 }
 ul#layout-menu li {
-float: left;
-margin-left: 10px;
+float:left;
+margin-left:10px;
 }
 #layout-main .g_image image,
 #layout-main .g_definitionlist
 {
-padding: 1px;
+padding:1px;
 }
 #layout-main .block .g_definitionlist table
 {
-border: none;
-margin: 0;
+border:none;
+margin:0;
 }
 html, body, div, form, table
 {
-left: 0;
+left:0;
 }
 *.hide
 {
-display: none !important;
+display:none !important;
 }
 #layout-nav input,
 #layout-nav button
 {
-width: auto;
+width:auto;
 }
 #layout-content div.group_all div.group_released table td.undumped
 {
-font-size: 0px;
+font-size:0px;
 }
 #layout-content div.group_all div.group_released table td.notalldumped
 {
-font-size: inherit;
-color: red;
-font-weight: bold;
+font-size:inherit;
+color:red;
+font-weight:bold;
 }
 #layout-nav #layout-menu li.sub-menu span.tab
 {
-text-transform: lowercase;
+text-transform:lowercase;
 }
 #layout-nav #layout-menu li.alert > span
 {
-color: red;
+color:red;
 }
 #layout-nav a
 {
-color: white;
+color:white;
 }
 #layout-content div.g_msg
 {
-margin: 2em;
-padding: 1.2em;
+margin:2em;
+padding:1.2em;
 }
 #layout-content div.g_msg p
 {
-display: block;
-padding: 0;
-text-align: left;
+display:block;
+padding:0;
+text-align:left;
 }
 #layout-main div.forum li.row
 {
-border-bottom-width: 0px;
-border-top-width: 0px;
+border-bottom-width:0px;
+border-top-width:0px;
 }
-#layout-main div.forum li.row: last-of-type
+#layout-main div.forum li.row:last-of-type
 {
-border-bottom-width: 1px;
+border-bottom-width:1px;
 }
 #layout-main div.forum div.search form input,
 #layout-main div.forum div.search form select,
 #layout-main div.forum div.search form input[type="submit"]
 {
-padding: 0;
-margin: 0;
+padding:0;
+margin:0;
 }
 *.i_inline
 {
-color: transparent;
+color:transparent;
 }
 th.expand
 {
-width: 13px;
+width:13px;
 }
 th.crc
 {
-width: 5em;
+width:5em;
 }
 #layout-main div.forum div.quickreply textarea
 {
-border: none
+border:none
 }
 button + button
 {
-margin-left: 0.5em;
+margin-left:0.5em;
 }
 #layout-main div.tabbed_pane ul.tabs
 {
-margin-bottom: 2px;
+margin-bottom:2px;
 }
 #layout-main div.tabbed_pane div.pane ul
 {
-width: auto;
+width:auto;
 }
 #layout-main div.tabbed_pane div.pane ul
 {
-display: block;
+display:block;
 }
 #layout-tabs ul.main-tabs li + li
 {
-margin-left: 0.5em;
+margin-left:0.5em;
 }
 #layout-tabs ul.main-tabs li
 {
-padding: 0;
-border-bottom: none;
+padding:0;
+border-bottom:none;
 }
 #layout-tabs ul.main-tabs li a,
 #layout-main div.blog div.body
 {
-padding: 0 6px;
+padding:0 6px;
 }
 #layout-tabs + #layout-main
 {
-margin-top: -4px;
+margin-top:-4px;
 }
 #layout-content #layout-main div.userpage_all div.stats div.stats_roles td,
 #layout-content #layout-main div.myplace_all div.stats div.stats_roles td,
 #layout-content #layout-main div.preferences ul li
 {
-white-space: nowrap;
+white-space:nowrap;
 }
 span.time,
 span.user a.id,
 td.rating span,
 a.filter
 {
-font-size: 100%;
-color: #a1a1a1;
+font-size:100%;
+color:#a1a1a1;
 }
 div.spoiler,
 #layout-main div.quotebody
 {
-border-style: dashed;
-border-width: 1px;
+border-style:dashed;
+border-width:1px;
 }
 #layout-main div.cmt_entries dl.profile
 {
-border-right-style: dashed;
+border-right-style:dashed;
 }
 #layout-main div.forum ul.topiclist dd
 {
-border-left-style: dashed;
+border-left-style:dashed;
 }
 div.dreq_form textarea,
 #layout-main div.forum div.quickreply textarea
 {
-width: 50%;
+width:50%;
 }
 div.userpage_all div.clubs div.club *
 {
-display: table-row;
+display:table-row;
 }
 #layout-main div.animeatt_reviews div.review div.text
 {
-margin-left: 1em;
-margin-top: 1em;
+margin-left:1em;
+margin-top:1em;
 }
 #layout-main div.addfilem.form div.dump textarea
 {
-padding-left: 0;
-padding-right: 0;
-margin-right: 0;
+padding-left:0;
+padding-right:0;
+margin-right:0;
 }
 #layout-main div.g_content
 {
-margin: 0 1em;
+margin:0 1em;
 }
