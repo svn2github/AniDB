@@ -591,17 +591,17 @@ a:hover
 	color:#AA0000;
 }
 
-#layout-main div.animelist_table table tr.mylist > td.title:before,
-#layout-main div.group_released table tr.mylist > td.title:before {
-	text-decoration:overline;
+#layout-main div.animelist_table table tr.mylist > td.name:after,
+#layout-main div.group_released table tr.mylist > td.title:after {
+	vertical-align: top;
 	font-size: xx-small;
 	color: pink;
-	content: "M";
+	content: " m";
 }
-#layout-main div.animelist_table table tr.all_watched > td.title:before,
-#layout-main div.group_released table tr.all_watched > td.title:before {
-	text-decoration:overline;
+#layout-main div.animelist_table table tr.all_watched > td.name:after,
+#layout-main div.group_released table tr.all_watched > td.title:after {
+	vertical-align: top;
 	font-size: xx-small;
 	color: green;
-	content: "W";
+	content: " w";
 }
