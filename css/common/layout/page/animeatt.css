@@ -56,8 +56,9 @@
 
 #layout-main div.animeatt_reviews div.review div.text + div.note
 {
-	margin-top: 0.5em;
+	margin-top: 1em;
 	margin-right: 12em;
+	clear: none;
 }
 
 #layout-main div.animeatt_all div.forum div.options-box dl dd
