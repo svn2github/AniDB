@@ -60,3 +60,14 @@
 {
 	margin-left:20em;
 }
+#layout-main div.animeatt_all div.animeatt_info h4,
+#layout-main div.animeatt_all div.animeatt_info p
+{
+	text-align: left;
+}
+
+#layout-main div.animeatt_all div.animeatt_info ol
+{
+	list-style:decimal inside none;
+	text-align: left;
+}
