@@ -1965,17 +1965,15 @@ padding: 1px;
 text-align: left;
 padding: 1px;
 }
-#layout-content div.animelist_all tr.mylist td
+#layout-content table.animelist tr.mylist td
 {
 background-image: url(images/orangepixel.png);
 }
-#layout-content div.animelist_all tr.mylist.complete td,
-#layout-content div.mylist_list tr.complete td
+#layout-content table.animelist tr.complete td
 {
 background-image: url(images/bluepixel.png);
 }
-#layout-content div.animelist_all tr.mylist.all_watched td,
-#layout-content div.mylist_list tr.all_watched td
+#layout-content table.animelist tr.all_watched td
 {
 background-image: url(images/greenpixel.png);
 }

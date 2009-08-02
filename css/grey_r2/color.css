@@ -86,12 +86,11 @@ div.quotebody div.quote div.g_odd,
 {
 background-color: hsla(0, 0%, 0%, 0.4);
 }
-#layout-content div.animelist_all tr.mylist td
+#layout-content table.animelist tr.mylist td
 {
 background-color: hsla(34, 95%, 44%, 0.4);
 }
-#layout-content div.animelist_all tr.complete td,
-#layout-content div.mylist_list tr.complete td,
+#layout-content table.animelist tr.complete td,
 #layout-main div.forum div.poll div.pollbar
 {
 background-color: hsla(207, 86%, 44%, 0.4);
@@ -107,8 +106,7 @@ background-color: hsla(207, 86%, 44%, 0.4);
 #layout-content div.creq_all tr.granted,
 #layout-content div.creq_data ins,
 #layout-content div.animeatt_reviews div.review.approved > h4,
-#layout-content div.animelist_all tr.all_watched td,
-#layout-content div.mylist_list tr.all_watched td,
+#layout-content table.animelist tr.all_watched td,
 #layout-content #layout-main div.ed2kdump_all table.filelist .in
 {
 background-color: hsla(127, 54%, 25%, 0.6);
