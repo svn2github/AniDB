@@ -1,3 +1,4 @@
+#layout-main td del,
 #layout-main tr.g_fs_lame,
 #layout-main input.exclude,
 #layout-main table.filelist tr.invalid,
@@ -8,9 +9,7 @@
 	background-color: #AAAAAA;
 }
 
-#layout-main td del,
 #layout-main div.myvotes_all table tr.g_odd td.low,
-#layout-main div.myvotes_all table tr td.low,
 #layout-main div.addcreatoranimerel_all tr.right_only,
 #layout-main div.addcreatorsongrel_all tr.right_only
 {
@@ -36,6 +35,8 @@
 #layout-main div.forum a.topictitle strong,
 #layout-main div.addcreatoranimerel_all tr.identical,
 #layout-main div.addcreatorsongrel_all tr.identical,
+#layout-main table.animelist tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
 #layout-main div.latestanimes_all div.g_section.mylist tr.mylist td
 {
 	background-color: #6FCF7F;
@@ -54,7 +55,9 @@
 #layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.animelist_all table tr.g_odd.mylist,
 #layout-main div.group_released table tr.g_odd.mylist,
-#layout-main div.schedule_all table tr.g_odd.mylist
+#layout-main div.schedule_all table tr.g_odd.mylist,
+#layout-main table.animelist tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd td.mylist
 {
 	background-color: #6FC279;
 }

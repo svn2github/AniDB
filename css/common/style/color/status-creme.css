@@ -36,6 +36,7 @@
 #layout-main div.addcreatoranimerel_all tr.identical,
 #layout-main div.addcreatorsongrel_all tr.identical,
 #layout-main table.animelist tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
 #layout-main div.latestanimes_all div.g_section.mylist tr.mylist td
 {
 	background-color: #f2ffe9;
@@ -55,9 +56,20 @@
 #layout-main div.animelist_all table tr.g_odd.mylist,
 #layout-main div.group_released table tr.g_odd.mylist,
 #layout-main div.schedule_all table tr.g_odd.mylist,
-#layout-main table.animelist tr.g_odd.mylist
+#layout-main table.animelist tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd td.mylist
 {
 	background-color: #e2efd9;
+}
+
+#layout-main table.filelist tr.deprecated
+{
+	background-color: #CC9999;
+}
+
+#layout-main table.filelist tr.generic
+{
+	background-color:#EEEEEE;
 }
 
 #layout-main div.addcreatoranimerel_all tr.same_name,
