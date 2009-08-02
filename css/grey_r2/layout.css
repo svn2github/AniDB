@@ -14,33 +14,33 @@ cursor: pointer;
 }
 #layout-tabs
 {
-display:block;
-margin-right:.5em;
+display: block;
+margin-right: 0.5em;
 }
 #layout-tabs ul li
 {
-padding:4px 6px 3px 0;
+padding: 4px 6px 3px 0;
 }
 #layout-tabs ul
 {
-margin-top:0.2em;
-text-align:right;
+margin-top: 0.2em;
+text-align: right;
 }
 #layout-tabs li.news
 {
-display:inline;
+display: inline;
 }
 #layout-main > h1
 {
-display:block;
-padding:4px;
-text-align:left;
+display: block;
+padding: 4px;
+text-align: left;
 }
 #layout-main > h1,
 #layout-nav div.menu_hr
 {
 margin-top: 0.3em;
-border-top:1px solid;
+border-top: 1px solid;
 }
 #layout-menu span.tab
 {
@@ -118,7 +118,7 @@ margin-top: 1.5em;
 }
 #layout-hint + #layout-nav + #layout-content
 {
-padding-top:4.5em;
+padding-top: 4.5em;
 }
 #layout-nav
 {
@@ -144,7 +144,8 @@ cursor: default;
 list-style: none;
 margin-left: -0.3em;
 }
-#layout-menu ul li a
+#layout-menu ul li a,
+#layout-main div.blog div.body
 {
 display: block;
 padding: 0 0.3em 0 0.3em;
@@ -171,12 +172,12 @@ display: block;
 {
 display: inline;
 }
-#layout-menu #newnews:before,
-#layout-menu #newnews:after,
-#layout-menu #newmessages:before,
-#layout-menu #newnotifies:before,
-#layout-menu #newmessages:after,
-#layout-menu a.history:after
+#layout-menu #newnews: before,
+#layout-menu #newnews: after,
+#layout-menu #newmessages: before,
+#layout-menu #newnotifies: before,
+#layout-menu #newmessages: after,
+#layout-menu a.history: after
 {
 content: "!";
 font-weight: bold;
@@ -264,7 +265,7 @@ z-index: 7;
 position: absolute;
 top: 2.1em;
 }
-ul#layout-menu li:hover ul {
+ul#layout-menu li: hover ul {
 display: block;
 position: absolute;
 }
@@ -341,7 +342,7 @@ text-align: left;
 border-bottom-width: 0px;
 border-top-width: 0px;
 }
-#layout-main div.forum li.row:last-of-type
+#layout-main div.forum li.row: last-of-type
 {
 border-bottom-width: 1px;
 }
@@ -393,7 +394,8 @@ margin-left: 0.5em;
 padding: 0;
 border-bottom: none;
 }
-#layout-tabs ul.main-tabs li a
+#layout-tabs ul.main-tabs li a,
+#layout-main div.blog div.body
 {
 padding: 0 6px;
 }
@@ -432,7 +434,7 @@ border-left-style: dashed;
 div.dreq_form textarea,
 #layout-main div.forum div.quickreply textarea
 {
-width:50%;
+width: 50%;
 }
 div.userpage_all div.clubs div.club *
 {

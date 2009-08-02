@@ -11,6 +11,7 @@
 ./fma_style/fma_style.css
 ./geassmode/stylesheet.css
 ./grey/grey.css
+./grey_r2/grey_r2.css
 ./haruhistylex/haruhistylex.css
 ./haruhistylex-v1.5/haruhistylex-v1.5.css
 #./haruhistylex-v2/haruhistylex-v2.css
@@ -26,7 +27,6 @@
 ./sub/brown2/main.css
 ./sub/norwegian-blue/main.css
 ./sub/silver/main.css
-./test/test.css
 #./yukinaga/yukinaga.css
 ./zakura/zakura.css
 ./zakura-fixed_menu/zakura-fixed_menu.css
