@@ -20,6 +20,11 @@
 	margin-left: 0;
 }
 
+#layout-main div.main_all div.rightbar > div+div
+{
+	margin-top: 1em;
+}
+
 #layout-main div.main_all div.news
 {
 	clear: none;

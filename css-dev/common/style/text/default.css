@@ -439,3 +439,8 @@ h4.collapsed span
 {
 	font-size:1.2em;
 }
+
+#tooltip
+{
+	font-size: 10px;
+}

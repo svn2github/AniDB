@@ -1,9 +1,3 @@
-html,
-tr
-{
-	background-color:#FFFFFF;
-}
-
 th
 {
 	background-color:#C3D9FF;
@@ -21,23 +15,9 @@ th a
 	color:darkblue;
 }
 
-span.link:hover,
-a:hover,
-#layout-main a.filter:hover
-{
-	color:#AA0000;
-}
-
 table
 {
 	border-top-color:blue;
-}
-
-tr.g_odd,
-li.g_odd,
-span.g_odd
-{
-	background-color:#ECF4FD;
 }
 
 #layout-search
@@ -64,27 +44,19 @@ span.g_odd
 	border-bottom-color:#FFFFFF;
 }
 
-#layout-main ul.g_list li:hover,
-#layout-main ul.g_list li.selected,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.g_timedentry h4
-{
-	background-color:#ECF4FD;
-}
-
 #layout-main div.pagination span a
 {
-	background-color:#ECEDEE;
+	background-color:#FFFFFF;
+	color:#000000;
 	border-color:#B4BAC0;
-	color:#5C758C;
 }
 
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	background-color:#ECF4FD;
+	background-color:#E5ECF9;
+	color:#000000;
 	border-color:#4692BF;
-	color:#FFFFFF;
 }
 
 #layout-main div.tagcloud
@@ -109,44 +81,11 @@ span.g_odd
 	background-color:#c3d9ff;
 }
 
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
-{
-	background-color:#E5ECF9;
-	color: #000000;
-}
-
-#layout-main div.pagination span a
-{
-	background-color:#FFFFFF;
-	color: #000000;
-}
-
-#layout-main div.pagination span a:hover
-{
-	color:#AA0000;
-}
-
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *
 {
 	background-color:#CADCEB;
-}
-
-#layout-main div.tabbed_pane ul.tabs li
-{
-	background-color:#FFFFFF;
-}
-
-#layout-main div.tabbed_pane div.body,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane_cfg div.body ,
-#layout-main div.tabbed_pane_cfg ul.tabs li:hover,
-#layout-main div.tabbed_pane_cfg ul.tabs li.selected
-{
-	background-color:#ECF4FD;
 }
 
 #layout-main div.desc
@@ -157,14 +96,44 @@ span.g_odd
 
 #layout-main div.profile_all div.tabbed_pane div.general table tr
 {
-	background-color: inherit;
+	background-color:inherit;
 }
 
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.g_timedentry div.body
+{
+	background-color:#F4F9FD;
+}
+
+html,
+tr,
+#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.forum ul.topics li.row
 {
 	background-color:#FFFFFF;
 }
 
+span.link:hover,
+a:hover,
+#layout-main a.filter:hover,
+#layout-main div.pagination span a:hover
+{
+	color:#AA0000;
+}
+
+tr.g_odd,
+li.g_odd,
+span.g_odd,
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.g_timedentry h4,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane_cfg div.body,
+#layout-main div.tabbed_pane_cfg ul.tabs li:hover,
+#layout-main div.tabbed_pane_cfg ul.tabs li.selected,
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.poll .rbottom *,
 #layout-main div.forum div.poll .rtop *,

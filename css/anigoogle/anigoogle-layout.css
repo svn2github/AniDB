@@ -40,23 +40,23 @@
 #layout-search input.text
 {
 	float:left;
+	width:200px;
 	margin:0;
 	padding:4px;
-	width:200px;
 }
 
 #layout-search input.submit
 {
 	float:right;
-	margin:0;
 	width:100px;
+	margin:0;
 }
 
 #layout-main > h1
 {
 	display:block;
-	padding:4px;
 	text-align:left;
+	padding:4px;
 }
 
 #layout-footer p
@@ -78,10 +78,10 @@
 #layout-menu > li ul
 {
 	display:none;
-	padding:0;
 	position:absolute;
 	z-index:5;
-	margin-left:-0.7em;
+	margin-left:-.7em;
+	padding:0;
 }
 
 #layout-menu span.tab
@@ -108,7 +108,7 @@
 {
 	margin-left:16em;
 	margin-top:1.3em;
-	width: 100%;
+	width:100%;
 }
 
 #layout-search div.search form
@@ -149,7 +149,6 @@
 #layout-tabs
 {
 	display:block;
-	margin-right:.5em;
 	position:absolute;
 	right:0;
 	top:0;
@@ -194,11 +193,6 @@ h4,
 	padding:.3em;
 }
 
-#layout-tabs li.news
-{
-	display:inline;
-}
-
 #layout-main div.tabbed_pane ul.tabs
 {
 	text-align:left;
@@ -207,11 +201,11 @@ h4,
 
 #layout-main div.desc
 {
-	border: 1px solid;
-	padding:4px;
+	border:1px solid;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
-	border-radius: 5px;
+	border-radius:5px;
+	padding:4px;
 }
 
 #layout-main div.tagcloud,
@@ -219,13 +213,12 @@ h4,
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
-	border-radius: 5px;
+	border-radius:5px;
 }
 
 #layout-main ul.g_list li
 {
-	display: -moz-inline-block;
-	display: inline-block;
+	display:inline-block;
 }
 
 #layout-main ul.g_list + ul.g_list
@@ -241,8 +234,8 @@ h4,
 #layout-main .latest_all .g_list.filter li,
 #layout-main ul.g_list li
 {
-	margin-top:0.5em;
-	margin-right:0.3em;
+	margin-top:.5em;
+	margin-right:.3em;
 }
 
 #layout-hint
@@ -252,7 +245,7 @@ h4,
 
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-	margin:1.2em 0.3em;
+	margin:1.2em .3em;
 }
 
 #layout-hint + #layout-nav #layout-menu
@@ -267,17 +260,14 @@ h4,
 
 #layout-menu li.sub-menu ul li a
 {
-	display: block;
+	display:block;
 }
 
-#layout-menu li.sub-menu ul li.alert span a
+#layout-main .g_definitionlist
 {
-	display:inline;
+	margin:2px 0 0;
 }
 
-#layout-main .g_definitionlist {
-	margin:2px 0 0px;
-}
 #layout-main .g_definitionlist table tr td,
 #layout-menu li.sub-menu ul li,
 #layout-main div.g_definitionlist tr th
@@ -289,4 +279,21 @@ h4,
 {
 	margin-top:1em;
 	padding:8px;
+}
+
+#layout-main div.g_timedentry div.avatar
+{
+	margin:1.5em 1em 1em;
+}
+
+#layout-main div.g_timedentry div.body
+{
+	margin-top:.5em;
+	padding:8px;
+}
+
+#layout-tabs li.news,
+#layout-menu li.sub-menu ul li.alert span a
+{
+	display:inline;
 }

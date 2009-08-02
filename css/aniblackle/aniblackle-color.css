@@ -395,3 +395,9 @@ tr + tr td,
 {
 	border-left-color:#555555;
 }
+
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.g_timedentry div.body
+{
+	background-color:#3B3B3B;
+}
