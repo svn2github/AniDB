@@ -14,8 +14,6 @@ jsVersionArray.push({
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
-var seeTimes = false;
 var gTable = null;
 var released_div = null;
 var ep_table = null;

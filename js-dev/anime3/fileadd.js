@@ -33,7 +33,6 @@ var maxSubTracks = 3;
 var currentView;
 var simpleView = true;
 var isEditPage = false;
-var seeDebug = false;
 var templateType = 'manual';
 var animeType = 0;
 

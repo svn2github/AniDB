@@ -15,7 +15,6 @@ jsVersionArray.push({
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = CookieGet('seeDebug') || 0;
 var useInlineActions = CookieGet('inlineActions') || 0;
 var msgTable;
 var headingList;

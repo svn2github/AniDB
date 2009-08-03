@@ -18,7 +18,6 @@ jsVersionArray.push({
 });
 
 // GLOBALS
-var seeDebug = CookieGet('seeDebug') || 0;
 var wysiwygWidth = "100%";
 var wysiwygHeight = "20em";
 var viewTextMode = 0;

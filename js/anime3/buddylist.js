@@ -14,7 +14,6 @@ jsVersionArray.push({
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
 var buddyListTable = null;
 
 /* Function that updates buddylist rows */

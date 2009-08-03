@@ -103,6 +103,9 @@ settings['other']['emode'] = 1; // currentFMode
 settings['other']['jsp'] = 1; // usejspopups
 settings['other']['dsearch'] = 'none'; // def_search
 settings['other']['asearch'] = 0; // search_assist
+settings['other']['seeDebug'] = 0; // see debug information
+settings['other']['seeTimes'] = 0; // see timing information
+settings['other']['ignoreLocal'] = 0; // ignore local check information
 
 //get_info_sz = null;
 //get_info_mw = null;
@@ -657,6 +660,20 @@ function createPreferencesTable(type) {
 				createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
 				createLabledCheckBox(li,'search_assist','search_assist',function() { searchTypeAssist = this.checked; },Number(search_assist),' Use anidb search assist',null);
 				ul.appendChild(li);
+				if (String(""+window.location).indexOf('anidb.net') < 0) { // Show extra options for the local developer
+					li = document.createElement('li');
+					createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+					createLabledCheckBox(li,'seeDebug','seeDebug',function() { seeDebug = this.checked; },Number(seeDebug),' See Debug information (can be very verbose and very alerty)',null);
+					ul.appendChild(li);
+					li = document.createElement('li');
+					createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+					createLabledCheckBox(li,'seeTimes','seeTimes',function() { seeTimes = this.checked; },Number(seeTimes),' See Timing information (can be very verbose and is very alerty)',null);
+					ul.appendChild(li);
+					li = document.createElement('li');
+					createLink(li, '[?]', 'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER', 'wiki', null, 'Those who seek help shall find it.', 'i_inline i_help');
+					createLabledCheckBox(li,'ignoreLocal','ignoreLocal',function() { ignoreLocal = this.checked; },Number(ignoreLocal),' Ignore the localhost check (for usage with your own anidb copy)',null);
+					ul.appendChild(li);
+				}
 				tab.appendChild(ul);
 				break;
 			case 'global':
@@ -786,6 +803,9 @@ function createPreferencesTable(type) {
 			settings['other']['emode'] = document.getElementById('currentFMode').value;
 			settings['other']['dsearch'] = document.getElementById('def_search').value;
 			settings['other']['asearch'] = Number(document.getElementById('search_assist').checked)+'';
+			settings['other']['seeDebug'] = Number(document.getElementById('seeDebug').checked)+'';
+			settings['other']['seeTimes'] = Number(document.getElementById('seeTimes').checked)+'';
+			settings['other']['ignoreLocal'] = Number(document.getElementById('ignoreLocal').checked)+'';
 			CookieSetFromArray('other', settings['other'], 3650);
 		}
 		if (document.getElementById('get_info_sz')) {

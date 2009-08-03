@@ -16,7 +16,6 @@ jsVersionArray.push({
 
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
 var cssurl;
 var current_css = "";
 var style_index = 0;

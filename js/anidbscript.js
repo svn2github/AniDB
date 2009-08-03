@@ -22,6 +22,9 @@ var curPageID = null;
 var searchTypeSelect = null;
 var searchTypeDefaultSelect = CookieGetByKey('other', 'dsearch') || 'none';
 var searchTypeDefaultAssist = CookieGetByKey('other', 'asearch') || 0;
+var seeDebug = CookieGetByKey('other', 'seeDebug') || 0;
+var seeTimes = CookieGetByKey('other', 'seeTimes') || 0;
+var ignoreLocal = CookieGetByKey('other', 'ignoreLocal') || 0;
 var username = null;
 var defaultTabs = tabCookieGet();
 // joys of joys
@@ -30,6 +33,7 @@ config['settings'] = new Object();
 
 /* returns true if the script is being executed on localhost */
 function isLocalHost() {
+	if (ignoreLocal) return false; // magic code for DerIdiot
 	return (''+window.location.hostname == '' || ''+window.location.hostname.toLowerCase() == 'localhost');
 }
 

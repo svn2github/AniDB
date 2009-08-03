@@ -40,8 +40,6 @@ var preferredEntriesPerPage = 30;
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
-var seeDebug = false;
-var seeTimes = false;
 var base_url = 'http://static.anidb.net/';
 // mylist settings (deducted from mylist links, though the xmls should take care of most of the stuff)
 var mylist_settings = new Object();

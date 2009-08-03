@@ -41,8 +41,6 @@ var uriObj = new Array();      // Object that holds the URI
 var useLangFilters = true;
 var filterAudLang = new Array();
 var filterSubLang = new Array();
-var seeDebug = false;
-var seeTimes = false;
 var epInterval = 250; // This one needs work
 var epInt; // Interval ID
 var processingEps = false; // are we processing episodes?

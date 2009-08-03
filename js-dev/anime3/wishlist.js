@@ -15,7 +15,6 @@ jsVersionArray.push({
  
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
 
 function createTooltips(node) {
 	if (!node) node = document;

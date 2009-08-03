@@ -6,9 +6,9 @@
 jsVersionArray.push({
 	"file": "anime3/animerel.js",
 	"version": "1",
-	"revision":"$Revision: 2858 $",
-	"date":"$Date::						   $",
-	"author":"$Author: fahrenheit $"
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$"
 });
 
 var sortingCols = {

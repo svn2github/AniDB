@@ -15,7 +15,6 @@ jsVersionArray.push({
  
 // GLOBALS
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
 
 /* *
  * Updates the release list rows to allow more sorting options

@@ -25,7 +25,6 @@ var audTracks = 0;
 var maxAudTracks = 3;
 var subTracks = 0;
 var maxSubTracks = 3;
-var seeDebug = false;
 var templateType = 'manual';
 var groupList = null;
 var group = null;

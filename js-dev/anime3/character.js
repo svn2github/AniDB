@@ -84,7 +84,6 @@ var addRelSubmit;
 var fieldset;
 var table;
 var tbody;
-var seeDebug = false;
 var isCreatorPage = false;
 var searchString = "";
 var aids = new Array();

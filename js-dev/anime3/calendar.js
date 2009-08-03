@@ -15,8 +15,6 @@ jsVersionArray.push({
 // GLOBALs //
 
 var uriObj = new Array();      // Object that holds the URI
-var seeDebug = false;
-var seeTimes = false;
 var submitQueue = new Array();	// This is kind of fake, but oh well...
 
 var priMap = [
