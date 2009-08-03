@@ -184,3 +184,30 @@
 {
 	padding: 0.3em;
 }
+
+#layout-main div.animeatt_reviews div.review div.text
+{
+	margin-top:1em;
+	padding:8px;
+}
+
+#layout-main div.animeatt_all h4
+{
+	padding:0.3em;
+}
+
+#layout-main div.animeatt_reviews div.review div.note
+{
+	margin-left:0;
+}
+
+#layout-main div.g_timedentry div.avatar
+{
+	margin:1.5em 1em 1em;
+}
+
+#layout-main div.g_timedentry div.body
+{
+	margin-top:.5em;
+	padding:8px;
+}

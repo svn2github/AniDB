@@ -216,14 +216,16 @@ input[type="checkbox"]
 	background-color:#A9ABB1;
 }
 
+#layout-main div.animeatt_all h4,
 #layout-main div.userpage_all > div.g_section > h4
 {
 	background-color:#B0B0B0;
 }
 
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.g_timedentry div.body,
 #layout-main div.tagcloud,
 #layout-main div.desc
 {
 	background-color:#B8BAC0;
 }
-
