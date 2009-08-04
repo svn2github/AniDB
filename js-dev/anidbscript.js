@@ -21,10 +21,10 @@ var usejspopups = CookieGetByKey('other', 'jsp') || true;
 var curPageID = null;
 var searchTypeSelect = null;
 var searchTypeDefaultSelect = CookieGetByKey('other', 'dsearch') || 'none';
-var searchTypeDefaultAssist = CookieGetByKey('other', 'asearch') || 0;
-var seeDebug = CookieGetByKey('other', 'seeDebug') || 0;
-var seeTimes = CookieGetByKey('other', 'seeTimes') || 0;
-var ignoreLocal = CookieGetByKey('other', 'ignoreLocal') || 0;
+var searchTypeDefaultAssist = Number(CookieGetByKey('other', 'asearch')) || 0;
+var seeDebug = Number(CookieGetByKey('other', 'seeDebug')) || 0;
+var seeTimes = Number(CookieGetByKey('other', 'seeTimes')) || 0;
+var ignoreLocal = Number(CookieGetByKey('other', 'ignoreLocal')) || 0;
 var username = null;
 var defaultTabs = tabCookieGet();
 // joys of joys
