@@ -103,16 +103,26 @@ img, a
 	border-top:1px solid #9A9CA1;
 }
 
+#layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4
 {
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
 	border-top: 1px solid black;
 }
 
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-main div.g_timedentry div.body,
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.animeatt_all div.review > h4
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius: 5px;
+}
+
 #layout-main div.tagcloud,
-#layout-main div.desc
+#layout-main div.desc,
+#layout-main div.g_timedentry div.body,
+#layout-main div.animeatt_reviews div.review div.text
 {
 	border:1px solid #9A9CA1;
 }
