@@ -130,12 +130,6 @@
 	text-align:left;
 }
 
-#layout-main div.userpage_all div.blog p.comment
-{
-	text-align:right;
-	margin:-2em 0 0;
-}
-
 #layout-main div.userpage_all div.blog div.g_msg.note
 {
 	clear:none;
@@ -246,4 +240,48 @@
 {
 	display: inline-block;
 	width: 48%;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry.comment,
+#layout-main div.userpage_all div.blog div.g_timedentry.comment div.body
+{
+	min-height:0;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry div.poll
+{
+	margin-top:.5em;
+}
+
+#layout-main div.userpage_all div.blog div.blogcomments div.topic_actions
+{
+	margin-bottom:1em;
+	margin-top:0;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry
+{
+	margin-bottom:1em;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry h4
+{
+	display:table-cell;
+	padding-left:.5em;
+	padding-right:1.5em;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+{
+	margin-bottom:1.5em;
+	margin-top:0;
+	padding-top:1px;
+	text-align:left;
+	width:45%;
+}
+
+#layout-main div.userpage_all div.blog div.blogcomments h4,
+#layout-main div.userpage_all div.blog div.g_timedentry p.cmt
+{
+	text-align:left;
 }

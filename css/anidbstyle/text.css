@@ -34,3 +34,13 @@
 {
 	content: "design by akujiN"
 }
+
+#layout-main div.userpage_all div.blog div.g_timedentry h4
+{
+	font-size:1.4em;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+{
+	font-size:.9em;
+}

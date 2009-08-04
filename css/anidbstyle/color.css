@@ -217,7 +217,8 @@ input[type="checkbox"]
 }
 
 #layout-main div.animeatt_all div.review > h4,
-#layout-main div.userpage_all > div.g_section > h4
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-main div.userpage_all div.blog div.g_timedentry h4
 {
 	background-color:#B0B0B0;
 }
@@ -228,4 +229,15 @@ input[type="checkbox"]
 #layout-main div.desc
 {
 	background-color:#B8BAC0;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp a
+{
+	color:#777777;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+{
+	border-top-color:#9A9CA1;
+	color:#777777;
 }

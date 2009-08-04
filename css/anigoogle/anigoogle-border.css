@@ -124,3 +124,16 @@ tr + tr td,
 	border-radius: 5px;
 	border: 1px solid #C9D7F1;
 }
+
+#layout-main div.userpage_all div.blog div.g_timedentry h4
+{
+	-moz-border-radius:0 10px 0 0;
+	-webkit-border-radius:0 10px 0 0;
+	border-radius:0 10px 0 0;
+	border-top:none;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+{
+	border-top:1px solid;
+}
