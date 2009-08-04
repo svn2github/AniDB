@@ -191,7 +191,7 @@
 
 #layout-main div.userpage_all div.clubs div
 {
-	display: inline-block;
+	display: inline-table;
 }
 
 #layout-main div.userpage_all div.clubs div.founded + div.joined
