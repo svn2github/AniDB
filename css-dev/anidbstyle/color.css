@@ -216,6 +216,7 @@ input[type="checkbox"]
 	background-color:#A9ABB1;
 }
 
+#layout-main div.userpage_all div.blog div.g_timedentry h4,
 #layout-main div.userpage_all > div.g_section > h4
 {
 	background-color:#B0B0B0;
@@ -234,6 +235,6 @@ input[type="checkbox"]
 
 #layout-main div.userpage_all div.blog div.g_timedentry span.stamp
 {
-	border-top-color:#C9D7F1;
-	color:#999999;
+	border-top-color:#9A9CA1;
+	color:#777777;
 }
