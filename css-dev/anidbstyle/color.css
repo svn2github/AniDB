@@ -227,3 +227,13 @@ input[type="checkbox"]
 	background-color:#B8BAC0;
 }
 
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp a
+{
+	color:#999999;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+{
+	border-top-color:#C9D7F1;
+	color:#999999;
+}
