@@ -211,3 +211,8 @@
 	margin-top:.5em;
 	padding:8px;
 }
+
+#layout-main div.userpage_all div.blog div.g_timedentry h4
+{
+	padding: 0.3em;
+}
