@@ -127,3 +127,7 @@
 *.i_topic_subscribe {
   background-image:url(../icons/grey/topic_subscribe.gif);
 }
+
+*.i_topic_unsubscribe {
+  background-image:url(../icons/grey/topic_unsubscribe.gif);
+}
