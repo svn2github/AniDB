@@ -14,7 +14,7 @@
 #layout-main div.cmt_all div.g_timedentry div.inner dl.profile {
 	margin:0; padding:0 20px 0 0;
 	width:120px;
-	background:#595654 url(images/layout/forum-post-arrow.png) no-repeat right 45px;
+	background:url(images/layout/forum-post-arrow.png) no-repeat right 45px;
 	border:none;
 }
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.user {
@@ -35,7 +35,7 @@
 	
 /* Top bar */
 #layout-main div.cmt_all div.g_timedentry div.inner div.postbody p.author {
-	margin:0 0 0 160px; padding:5px 10px;
+	margin:0 0 0 140px; padding:5px 10px;
 	width:auto;
 	background:#dbdbdb;
 	border-top:5px solid #595654;
@@ -43,7 +43,7 @@
 	line-height:20px;
 }
 #layout-main div.cmt_all div.g_timedentry div.inner div.postbody span.actions a.i_icon {
-	margin:0; padding:6px 5px 4px;
+	margin:5px 0 0; padding:6px 5px 4px;
 	width:auto; height:20px;
 	color:#333; background:none;
 	text-transform:capitalize;
@@ -63,5 +63,5 @@
 /* Footer */
 #layout-main div.cmt_all div.g_timedentry div.inner div.postfooter {
 	margin-left:140px;
-	border-top:5px solid #595654;
+	border-bottom:5px solid #595654;
 }
