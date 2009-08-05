@@ -6,36 +6,24 @@
 /* Wrapping box with faux columns */
 #layout-main div.cmt_all div.g_timedentry div.inner {
 	margin:0; padding:0;
-	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y;
-	border:5px solid #595654;
+	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y 135px 0;
+	border-right:5px solid #595654;
 }
 
 /* Profile box */
 #layout-main div.cmt_all div.g_timedentry div.inner dl.profile {
-	margin:0; padding:0 20px;
+	margin:0; padding:0 20px 0 0;
 	width:120px;
 	background:#595654 url(images/layout/forum-post-arrow.png) no-repeat right 45px;
 	border:none;
 }
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.user {
-		margin-top:31px; padding:0;
-	}
-		#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.user a {
-			color:#ccc;
-		}
-	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.rank {
-		color:#aaa;
+		padding:0;
 	}
 	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile img {
 		background:#fff;
-		border:5px solid #eee;
+		border:5px solid #595654;
 	}
-	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd {
-		color:#888;
-	}
-		#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd strong {
-			color:inherit;
-		}
 
 /* Icon bar (profile box) */
 #layout-main div.cmt_all div.g_timedentry span.icons.user a.i_user_history,
@@ -50,6 +38,7 @@
 	margin:0 0 0 160px; padding:5px 10px;
 	width:auto;
 	background:#dbdbdb;
+	border-top:5px solid #595654;
 	border-bottom:1px solid #aaa;
 	line-height:20px;
 }
@@ -68,5 +57,11 @@
 
 /* Text area */
 #layout-main div.cmt_all div.g_timedentry div.inner div.postbody div.content {
-	margin:0 0 0 180px; padding:10px 20px;
+	margin:0 0 0 140px; padding:10px 20px;
+}
+
+/* Footer */
+#layout-main div.cmt_all div.g_timedentry div.inner div.postfooter {
+	margin-left:140px;
+	border-top:5px solid #595654;
 }

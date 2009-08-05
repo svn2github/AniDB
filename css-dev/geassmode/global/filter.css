@@ -1,3 +1,6 @@
+#layout-main div.g_content div.filter_menu div.content {
+	border:none;
+}
 #layout-main div.g_content div.filter_menu form p input {
 	text-transform:capitalize;
 }
@@ -6,9 +9,9 @@
 	color:#333;
 	border-bottom:1px solid #dbdbdb;
 }
-	#layout-main div.g_content div.filter_menu form div.filters ul li label {
-		padding:1px 0;
-	}
-		#layout-main div.g_content div.filter_menu form div.filters ul li label input {
-			vertical-align:middle;
-		}
+#layout-main div.g_content div.filter_menu form div.filters ul li label {
+	padding:1px 0;
+}
+#layout-main div.g_content div.filter_menu form div.filters ul li label input {
+	vertical-align:middle;
+}
