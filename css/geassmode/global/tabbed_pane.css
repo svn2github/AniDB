@@ -3,13 +3,13 @@
 		margin:3px 0 6px;
 	}
 		#layout-main div.tabbed_pane ul.tabs li.tab {
-			padding:3px 6px;
+			padding:2px 4px 4px;
 			color:#666;
 			font-size:0.9em;
 		}
 		#layout-main div.tabbed_pane ul.tabs li.tab:hover,
 		#layout-main div.tabbed_pane ul.tabs li.tab.selected {
-			padding:2px 6px;
+			padding:2px 4px 6px;
 			color:#333; background:url(images/layout/tabbox-arrow.png) no-repeat center bottom;
 		}
 	#layout-main div.tabbed_pane div.body {
