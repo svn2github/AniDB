@@ -4,11 +4,12 @@
 	text-align:left;
 }
 	#layout-main .g_section h4 {
-		padding:5px 7px 5px 14px;
-		color:#eee; background:#393634;
-		font-size:1.1em; font-weight:normal;
+		margin:5px 0 10px; padding:3px 0;
+		font-size:1.2em; font-weight:normal;
 		text-align:left;
+		line-height:15px;
 	}
 		#layout-main .g_section h4.collapsed span {
+			padding:0;
 			text-decoration:none;
 		}
