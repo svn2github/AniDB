@@ -803,9 +803,9 @@ function createPreferencesTable(type) {
 			settings['other']['emode'] = document.getElementById('currentFMode').value;
 			settings['other']['dsearch'] = document.getElementById('def_search').value;
 			settings['other']['asearch'] = Number(document.getElementById('search_assist').checked)+'';
-			settings['other']['seeDebug'] = Number(document.getElementById('seeDebug').checked)+'';
-			settings['other']['seeTimes'] = Number(document.getElementById('seeTimes').checked)+'';
-			settings['other']['ignoreLocal'] = Number(document.getElementById('ignoreLocal').checked)+'';
+			if (document.getElementById('seeDebug')) { settings['other']['seeDebug'] = Number(document.getElementById('seeDebug').checked)+''; }
+			if (document.getElementById('seeTimes')) { settings['other']['seeTimes'] = Number(document.getElementById('seeTimes').checked)+''; }
+			if (document.getElementById('ignoreLocal')) { settings['other']['ignoreLocal'] = Number(document.getElementById('ignoreLocal').checked)+''; }
 			CookieSetFromArray('other', settings['other'], 3650);
 		}
 		if (document.getElementById('get_info_sz')) {
