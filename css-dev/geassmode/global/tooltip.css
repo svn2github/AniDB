@@ -1,15 +1,17 @@
-a:hover #tooltip {
+a span#tooltip {
 	padding-top:5px;
 	background:none;
-	background:url(images/layout/tabbox-arrow.png) no-repeat center top;
+	background:url(images/layout/tabbox-arrow.png) no-repeat 20px top;
 	opacity:0.9;
 }
-a:hover #tooltip span.top,
-a:hover #tooltip span.bottom {
+a span#tooltip span.top,
+a span#tooltip span.bottom {
 	display:none;
 }
-a:hover #tooltip span.middle {
+a span#tooltip span.middle {
 	margin:0; padding:5px 10px;
 	color:#333; background:#fff;
 	border:5px solid #595654;
+	font-size:13px;
+	text-align:left;
 }
