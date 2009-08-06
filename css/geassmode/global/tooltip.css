@@ -1,6 +1,8 @@
 a:hover #tooltip {
+	padding-top:5px;
 	background:none;
-	border:1px solid #393634;
+	background:url(images/layout/tabbox-arrow.png) no-repeat center top;
+	opacity:0.9;
 }
 a:hover #tooltip span.top,
 a:hover #tooltip span.bottom {
@@ -8,6 +10,6 @@ a:hover #tooltip span.bottom {
 }
 a:hover #tooltip span.middle {
 	margin:0; padding:5px 10px;
-	color:#eee; background:#393634; opacity:0.97;
-	border:1px solid #eee;
+	color:#333; background:#fff;
+	border:5px solid #595654;
 }
