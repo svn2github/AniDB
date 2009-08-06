@@ -1,13 +1,14 @@
 #layout-main div.userpage_all div.g_menu {
 	padding:0;
-	width:180px;
+	width:130px;
 	float:left;
 }
 #layout-main div.userpage_all div.g_menu.stats {
+	width:190px;
 	float:right; clear:right;
 }
 #layout-main div.userpage_all div.g_section {
-	margin:10px 210px;
+	margin:10px 210px 10px 150px;
 }
 #layout-main div.userpage_all div.block {
 	margin-left:0; margin-right:0;
