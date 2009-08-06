@@ -51,7 +51,7 @@ body.nonav {
 	}
 #layout-footer {
 	margin:-120px 80px -120px 195px; /* Negative margins here prevent weird whitespace at the page's bottom */
-	min-width:700px; max-width:1200px;
+	min-width:700px; max-width:1400px;
 }
 
 /*epbar colors*/

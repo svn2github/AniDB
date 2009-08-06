@@ -1,13 +1,16 @@
 #layout-main div.g_content div.mylist_list div.filter_menu {
 	width:160px;
 }
-	#layout-main div.g_content div.mylist_list div.filter_menu form div.user ul li span.user {
-		padding:2px 8px 2px 14px;
-		display:block;
-		border-bottom:1px solid #dbdbdb;
-	}
-	#layout-main div.g_content div.mylist_list div.filter_menu form p {
-		margin:0 0 10px; padding:3px 8px 4px 14px;
-		background:url(images/layout/border-hack.gif) repeat-x left bottom;
-		border-left:5px solid #393634;
-	}
+#layout-main div.g_content div.mylist_list div.filter_menu div.content {
+	margin-top:-5px;
+}
+#layout-main div.g_content div.mylist_list div.filter_menu form div.user ul li span.user {
+	padding:2px 8px 2px 14px;
+	display:block;
+	border-bottom:1px solid #dbdbdb;
+}
+#layout-main div.g_content div.mylist_list div.filter_menu form p {
+	margin:0 0 10px; padding:3px 8px 4px 14px;
+	background:url(images/layout/border-hack.gif) repeat-x left bottom;
+	border-left:5px solid #393634;
+}

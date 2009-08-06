@@ -1,0 +1,11 @@
+#layout-main div.userpage_all div.g_menu {
+	padding:0;
+	width:180px;
+	float:left;
+}
+#layout-main div.userpage_all div.g_menu.stats {
+	float:right; clear:right;
+}
+#layout-main div.userpage_all div.g_section {
+	margin:10px 210px;
+}
