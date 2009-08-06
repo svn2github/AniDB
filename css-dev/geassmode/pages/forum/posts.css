@@ -6,14 +6,14 @@
 /* Wrapping box with faux columns */
 #layout-main div.cmt_all div.g_timedentry div.inner {
 	margin:0; padding:0;
-	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y 115px 0;
+	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y 125px 0;
 	border-right:5px solid #595654;
 }
 
 /* Profile box */
 #layout-main div.cmt_all div.g_timedentry div.inner dl.profile {
 	margin:0; padding:0 10px 0 0;
-	width:110px;
+	width:120px;
 	background:url(images/layout/forum-post-arrow.png) no-repeat right 31px;
 	border:none;
 }
@@ -35,7 +35,7 @@
 	
 /* Top bar */
 #layout-main div.cmt_all div.g_timedentry div.inner div.postbody p.author {
-	margin:0 0 0 120px; padding:5px 10px;
+	margin:0 0 0 130px; padding:5px 10px;
 	width:auto;
 	background:#dbdbdb;
 	border-top:5px solid #595654;
@@ -57,11 +57,11 @@
 
 /* Text area */
 #layout-main div.cmt_all div.g_timedentry div.inner div.postbody div.content {
-	margin:0 0 0 120px; padding:10px 20px;
+	margin:0 0 0 130px; padding:10px 20px;
 }
 
 /* Footer */
 #layout-main div.cmt_all div.g_timedentry div.inner div.postfooter {
-	margin-left:120px;
+	margin-left:130px;
 	border-bottom:5px solid #595654;
 }
