@@ -1,17 +1,20 @@
-a span#tooltip {
+a span#tooltip,
+a:hover span#tooltip {
 	padding-top:5px;
 	background:none;
-	background:url(images/layout/tabbox-arrow.png) no-repeat 20px top;
-	opacity:0.9;
+	background:url(images/layout/tabbox-arrow.png) no-repeat 40% top;
+	opacity:0.95;
 }
 a span#tooltip span.top,
-a span#tooltip span.bottom {
+a span#tooltip span.bottom,
+a:hover span#tooltip span.top,
+a:hover span#tooltip span.bottom {
 	display:none;
 }
-a span#tooltip span.middle {
+a span#tooltip span.middle,
+a:hover span#tooltip span.middle {
 	margin:0; padding:5px 10px;
 	color:#333; background:#fff;
 	border:5px solid #595654;
-	font-size:13px;
 	text-align:left;
 }
