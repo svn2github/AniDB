@@ -19,6 +19,7 @@
 		#layout-main table tr.header th.c_set,
 		#layout-main table tr.header th.c_reverse,
 		#layout-main table tr.header th.c_setlatin,
+		#layout-main table tr.header th.c_latin,
 		#layout-main table tr.header th.c_number,
 		#layout-main table tr.header th.sortable {
 			color:#dbdbdb; background-position:right center;
@@ -28,6 +29,7 @@
 		#layout-main table tr.header th.c_set:hover,
 		#layout-main table tr.header th.c_reverse:hover,
 		#layout-main table tr.header th.c_setlatin:hover,
+		#layout-main table tr.header th.c_latin:hover,
 		#layout-main table tr.header th.c_number:hover,
 		#layout-main table tr.header th.sortable:hover {
 			color:#ababab; background-color:#444;
