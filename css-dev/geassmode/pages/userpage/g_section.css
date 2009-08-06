@@ -5,22 +5,3 @@
 			border-bottom:1px solid #dbdbdb;
 			font-size:0.85em;
 		}
-#layout-main div.userpage_all div.g_section.latest,
-#layout-main div.userpage_all div.forum {
-	margin-left:230px; margin-right:190px;
-	border:none;
-}
-	#layout-main div.userpage_all div.g_section.latest div {
-		margin:0 0 10px;
-		border-left:5px solid #393634;
-	}
-		#layout-main div.userpage_all div.g_section.latest div ul li {
-			padding:2px 8px 2px 14px;
-			text-transform:capitalize;
-			border-bottom:1px solid #dbdbdb;
-			font-size:0.9em;
-		}
-			#layout-main div.userpage_all div.g_section.latest div ul li span.vote {
-				float:right;
-				position:relative; top:-15px;
-			}

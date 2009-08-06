@@ -1,0 +1,22 @@
+#layout-main div.userpage_all div.g_section.latest div {
+	margin:0 0 10px;
+	border-left:5px solid #393634;
+}
+	#layout-main div.userpage_all div.g_section.latest div h4 {
+		margin:none;padding:2px 8px 2px 14px;
+		color:#eee; background:#393634;
+		border:none;
+		font-weight:normal;
+	}
+	#layout-main div.userpage_all div.g_section.latest div ul li {
+		padding:2px 8px 2px 14px;
+		text-transform:capitalize;
+		border-bottom:1px solid #dbdbdb;
+		font-size:0.9em;
+	}
+#layout-main div.userpage_all div.g_section.latest div.g_info {
+	border:none;
+}
+	#layout-main div.userpage_all div.g_section.latest div.g_info p {
+		font-style:italic;
+	}

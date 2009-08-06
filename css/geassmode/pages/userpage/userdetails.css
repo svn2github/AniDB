@@ -1,3 +1,6 @@
 #layout-main div.userpage_all div.userdetails {
 	border:none;
 }
+	#layout-main div.userpage_all div.userdetails img {
+		border:5px solid #393634;
+	}

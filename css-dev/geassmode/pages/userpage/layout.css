@@ -9,3 +9,6 @@
 #layout-main div.userpage_all div.g_section {
 	margin:10px 210px;
 }
+#layout-main div.userpage_all div.block {
+	margin-left:0; margin-right:0;
+}
