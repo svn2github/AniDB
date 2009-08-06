@@ -11,5 +11,8 @@
 	margin:10px 210px 10px 150px;
 }
 #layout-main div.userpage_all div.block {
-	margin-left:0; margin-right:0;
+	margin:0;
 }
+	#layout-main div.userpage_all div.block div.notify {
+		display:none;
+	}
