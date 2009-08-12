@@ -492,10 +492,20 @@ function createCheckBox(parentNode,name,id,onchange,checked,disabled) {
 	if (parentNode && parentNode != '') parentNode.appendChild(ck);
 	else return ck;
 }
-function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className,disabled) {
-	var ck = createCheckBox(null,name,id,onchange,checked,disabled);
+function createLabledElement(parentNode,type,name,id,onchange,value,checked,text,className,disabled) {
+	var obj;
+	if (type == "checkbox")
+		obj = createCheckBox(null,name,id,onchange,checked,disabled);
+	else if (type == "radio") {
+		obj = createBasicButton(name,value,'radio');
+		obj.checked = checked;
+		if (id) obj.id = id;
+		if (onchange) obj.onchange = onchange;
+		if (className) obj.className = className;
+		if (disabled) obj.disabled = true;
+	}
 	var label = document.createElement('label');
-	label.appendChild(ck);
+	label.appendChild(obj);
 	if (className) label.className = className;
 	if (text) {
 		if (typeof(text) == 'string') label.appendChild(document.createTextNode(text));
@@ -503,6 +513,16 @@ function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className
 	}
 	if (parentNode && parentNode != '') parentNode.appendChild(label);
 	else return label;
+}
+function createLabledCheckBox(parentNode,name,id,onchange,checked,text,className,disabled) {
+	var lbl = createLabledElement(null,'checkbox',name,id,onchange,null,checked,text,className,disabled);
+	if (parentNode && parentNode != '') parentNode.appendChild(lbl);
+	else return lbl;
+}
+function createLabledRadioBox(parentNode,name,id,onchange,value,checked,text,className,disabled) {
+	var lbl = createLabledElement(null,'radio',name,id,onchange,value,checked,text,className,disabled);
+	if (parentNode && parentNode != '') parentNode.appendChild(lbl);
+	else return lbl;
 }
 
 // GROUP BAR FUNCTIONS //
