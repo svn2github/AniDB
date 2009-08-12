@@ -137,6 +137,7 @@ tr + tr td,
 {
 	border-top:1px solid;
 }
+
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs > li
 {
