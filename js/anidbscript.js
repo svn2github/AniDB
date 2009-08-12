@@ -12,9 +12,9 @@ var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
 	"version":"1.03",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2933 $",
+	"date":"$Date:: 2009-08-04 21:24:43 +0100#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
 var usejspopups = CookieGetByKey('other', 'jsp') || true;

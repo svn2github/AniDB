@@ -288,8 +288,8 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				if (true) {
 					var watchedState = document.createElement('span');
 					watchedState.className = 'icons';
-					if (icons['state'].length) for (var s=0; s < icons['state'].length; s++) watchedState.appendChild(icons['state'][s]);
-					if (icons['fstate'].length) for (var s=0; s < icons['fstate'].length; s++) watchedState.appendChild(icons['fstate'][s]);
+					if (icons['state']) for (var s=0; s < icons['state'].length; s++) watchedState.appendChild(icons['state'][s]);
+					if (icons['fstate']) for (var s=0; s < icons['fstate'].length; s++) watchedState.appendChild(icons['fstate'][s]);
 					if (icons['recap']) watchedState.appendChild(icons['recap']);
 					if (icons['comment']) watchedState.appendChild(icons['comment']);
 					if (icons['seen']) watchedState.appendChild(icons['seen']);

@@ -1,9 +1,9 @@
 jsVersionArray.push({
 	"file":"addfilem.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2128 $",
+	"date":"$Date:: 2009-01-31 15:09:06 +0000#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Initial version"
 });
 

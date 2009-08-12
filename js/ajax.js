@@ -9,9 +9,9 @@
 jsVersionArray.push({
 	"file":"ajax.js",
 	"version":"1.2",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2718 $",
+	"date":"$Date:: 2009-05-24 00:16:50 +0100#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Addition of paziek's XHR element, plus update of IE's MSXML methods"
 });
 

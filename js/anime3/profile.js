@@ -8,9 +8,9 @@
 jsVersionArray.push({
 	"file":"anime3/profile.js",
 	"version":"1.2",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2923 $",
+	"date":"$Date:: 2009-08-04 00:34:35 +0100#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Move some stuff out of this script to customize"
 });
 

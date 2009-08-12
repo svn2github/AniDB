@@ -7,9 +7,9 @@
 jsVersionArray.push({
 	"file":"anime3/aproduceradd.js",
 	"version":"1.2",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2923 $",
+	"date":"$Date:: 2009-08-04 00:34:35 +0100#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Fixed the page to load without checks"
 });
 

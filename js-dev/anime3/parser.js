@@ -319,6 +319,7 @@ function CFileEntry(node) {
   this.subCnt = 0;
   this.avdumped = 0;
   this.newFile = false;
+  this.isTrueVirtual = false; // Haruhi brought up lots of issues with virtual files
   this.pseudoFile = false; // Got fed up with strange methods for checking if a file isn't pseudo
   this.videoTracks = new Array();
   this.audioTracks = new Array();
@@ -486,6 +487,7 @@ function CFileEntry(node) {
 }
 
 CFileEntry.prototype.isVirtual = function(eid) {
+	if (this.isTrueVirtual) return true;
 	return (this.episodeId != eid);
 }
 
@@ -770,12 +772,19 @@ function buildFileEntry(node, aid, eid) {
 		for (var r in efile.relatedGroups)
 			fileEntry.relatedGroups[r] = efile.relatedGroups[r];
 	}
+	if (fileEntry.epRelations.length) {	// got to test something first
+		for (var fereid in fileEntry.epRelations) {
+			if (fereid != fileEntry.episodeId) continue;
+			fileEntry.isTrueVirtual = true;
+			break;
+		}
+	}
 	// special trick to fool cache issues
 	if (!groups[fileEntry.groupId]) createPseudoGroupEntry(fileEntry.groupId);
 	files[fileEntry.id] = fileEntry;
 	if (!episode) return; // This only happens in case of an external file
 	if (fileEntry.newFile) episode.newFiles = true;
-	if (episode.files.indexOf(fileEntry.id) < 0) episode.files.push(fileEntry.id)
+	if (episode.files.indexOf(fileEntry.id) < 0) episode.files.push(fileEntry.id);
 }
 
 /* Processes a node to extract file information for a given episode
@@ -834,6 +843,7 @@ function parseEpRelations(nodes) {
 		if (!episode) { if (seeDebug) alert('ERR.parseEpRelations: no episode'); continue; } // this realy should not happen
 		if (episode.files.indexOf(fid) < 0) episode.files.push(fid); // add this file to the eps files
 		file.epRelations[eid] = {"startp":startp,"endp":endp};
+		if (file.episodeId == eid) file.isTrueVirtual = true;
 	}
 }
 

@@ -6,9 +6,9 @@
 jsVersionArray.push({
 	"file":"anime3/character.js",
 	"version":"1.0",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 2858 $",
+	"date":"$Date:: 2009-07-29 14:07:58 +0100#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Merged Character related scripts"
 });
 
@@ -161,7 +161,8 @@ function prepPageEntity() {
 		div.id = 'section_'+i;
 		var nameTR = getElementsByClassName(div.getElementsByTagName('tr'),'mainname',true)[0];
 		if (nameTR) {
-			var text = dig_text(nameTR.getElementsByTagName('td')[0]).replace('(','');
+			var text = dig_text(nameTR.getElementsByTagName('td')[0]);
+			text = text.substring(0,text.length-1);
 			charNames.push(text);
 		}
 	}
