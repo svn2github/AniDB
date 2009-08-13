@@ -1,37 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MyList>
-<User>
-	<Name><![CDATA[<tmpl_var name=global_user>]]></Name>
-	<Id><tmpl_var name=global_user_id></Id>
-	<Date><tmpl_var expr="sprintf('%s-%s-%sT%s:00Z',substr(global_date,6,4),substr(global_date,3,2),substr(global_date,0,2),substr(global_date,11,5))"></Date>
-<!--<DateShort><tmpl_var name=global_date_short></DateShort>-->
-	<AnimeCount><tmpl_var name=global_animecount></AnimeCount>
-	<EpCount><tmpl_var name=global_epcount></EpCount>
-	<FileCount><tmpl_var name=global_filecount></FileCount>
-	<ByteCount><tmpl_var expr="replace('\.','',global_bytecount)"></ByteCount>
-<!--<ByteCountH><tmpl_var name=global_bytecount_h></ByteCountH>-->
-	<AnimeDBUrl><![CDATA[<tmpl_var name=global_animedburl>]]></AnimeDBUrl>
-	<AnimeAdded><tmpl_var name=global_userstat_animeadded></AnimeAdded>
-	<EpsAdded><tmpl_var name=global_userstat_epsadded></EpsAdded>
-	<FilesAdded><tmpl_var name=global_userstat_filesadded></FilesAdded>
-	<GroupsAdded><tmpl_var name=global_userstat_groupsadded></GroupsAdded>
-	<LameFiles><tmpl_var name=global_userstat_lamefiles></LameFiles>
-	<LameFilesP><tmpl_var expr="replace('%','',global_userstat_lamefilesp)"></LameFilesP>
-	<IndependenceP><tmpl_var expr="replace('%','',global_userstat_independencep)"></IndependenceP>
-	<LeechP><tmpl_var expr="replace('%','',global_userstat_leechp)"></LeechP>
-	<Reviews><tmpl_var name=global_userstat_reviews></Reviews>
-	<Votes><tmpl_var name=global_userstat_votes></Votes>
-	<TotalViewedP><tmpl_var expr="replace('%','',global_userstat_totalviewedp)"></TotalViewedP>
-	<TotalOwnedP><tmpl_var expr="replace('%','',global_userstat_totalownedp)"></TotalOwnedP>
-	<OwnViewedP><tmpl_var expr="replace('%','',global_userstat_ownviewedp)"></OwnViewedP>
-	<ViewedEpCnt><tmpl_var expr="replace('%','',global_userstat_viewedepcnt)"></ViewedEpCnt>
-</User>
-<tmpl_loop name=global_genren_loop><GenreN>
-	<Id><tmpl_var name=global_genren_id></Id>
-	<Name><![CDATA[<tmpl_var name=global_genren_name>]]></Name>
-	<ParentId><tmpl_var name=global_genren_parentid></ParentId>
-	<IsHentai><tmpl_var name=global_genren_ishentai></IsHentai>
-</GenreN>
+<User
+Name="<tmpl_var expr="jsencodexml(global_user)">"
+Id="<tmpl_var name=global_user_id>"
+Date="<tmpl_var expr="sprintf('%s-%s-%sT%s:00Z',substr(global_date,6,4),substr(global_date,3,2),substr(global_date,0,2),substr(global_date,11,5))">"
+AnimeCount="<tmpl_var name=global_animecount>"
+EpCount="<tmpl_var name=global_epcount>"
+FileCount="<tmpl_var name=global_filecount>"
+ByteCount="<tmpl_var expr="replace('\.','',global_bytecount)">"
+AnimeDBUrl="<tmpl_var expr="jsencodexml(global_animedburl)">"
+AnimeAdded="<tmpl_var name=global_userstat_animeadded>"
+EpsAdded="<tmpl_var name=global_userstat_epsadded>"
+FilesAdded="<tmpl_var name=global_userstat_filesadded>"
+GroupsAdded="<tmpl_var name=global_userstat_groupsadded>"
+LameFiles="<tmpl_var name=global_userstat_lamefiles>"
+LameFilesP="<tmpl_var expr="replace('%','',global_userstat_lamefilesp)">"
+IndependenceP="<tmpl_var expr="replace('%','',global_userstat_independencep)">"
+LeechP="<tmpl_var expr="replace('%','',global_userstat_leechp)">"
+Reviews="<tmpl_var name=global_userstat_reviews>"
+Votes="<tmpl_var name=global_userstat_votes>"
+TotalViewedP="<tmpl_var expr="replace('%','',global_userstat_totalviewedp)">"
+TotalOwnedP="<tmpl_var expr="replace('%','',global_userstat_totalownedp)">"
+OwnViewedP="<tmpl_var expr="replace('%','',global_userstat_ownviewedp)">"
+ViewedEpCnt="<tmpl_var expr="replace('%','',global_userstat_viewedepcnt)">"
+/>
+<tmpl_loop name=global_genren_loop><GenreN Id="<tmpl_var expr="jsencodexml(global_genren_id)">" Name="<tmpl_var expr="jsencodexml(global_genren_name)">" ParentId="<tmpl_var expr="jsencodexml(global_genren_parentid)">" IsHentai="<tmpl_var expr="jsencodexml(global_genren_ishentai)">"/>
 </tmpl_loop>
 <tmpl_loop name=loop_anime><Anime>
 	<Id><tmpl_var name=data_anime_id></Id>
@@ -116,12 +109,16 @@
 		<MyTmpVoteDate><tmpl_var expr="sprintf('%s-%s-%sT%s:00Z',substr(data_anime_my_tmpvote_date,6,4),substr(data_anime_my_tmpvote_date,3,2),substr(data_anime_my_tmpvote_date,0,2),substr(data_anime_my_tmpvote_date,11,5))"></MyTmpVoteDate>
 	<!--<MyTmpVoteDateShort><tmpl_var name=data_anime_my_tmpvote_date_short></MyTmpVoteDateShort>-->
 	</tmpl_if>
-
-<tmpl_loop name=loop_anime_tag><Tag>
-	<Id><tmpl_var name=data_anime_tag_id></Id>
-	<Name><![CDATA[<tmpl_var name=data_anime_tag_name>]]></Name>
-	<Date><tmpl_var name=data_anime_tag_date></Date>
-</Tag>
+<tmpl_loop name=loop_anime_genren><GenreN
+Id="<tmpl_var name=data_anime_genren_id>"
+IsHentai="<tmpl_var name=data_anime_genren_ishentai>"
+Name="<tmpl_var expr="jsencodexml(data_anime_genren_name)">"
+ParentId="<tmpl_var name=data_anime_genren_parentid>"
+Weight="<tmpl_var name=data_anime_genren_weight>"
+WeightName="<tmpl_var name=data_anime_genren_weight_name>"
+/>
+</tmpl_loop>
+<tmpl_loop name=loop_anime_tag><Tag Id="<tmpl_var name=data_anime_tag_id>" Name="<tmpl_var expr="jsencodexml(data_anime_tag_name)">" DateUnix="<tmpl_var name=data_anime_tag_date>"/>
 </tmpl_loop>
 <tmpl_loop name=loop_anime_company><Company>
 	<Id><tmpl_var name=data_anime_company_id></Id>
@@ -211,6 +208,10 @@
 		<VCodecId><tmpl_var name=data_file_vcodec_id></VCodecId>
 		<VCodecName><tmpl_var name=data_file_vcodec_name></VCodecName>
 		<VFlags><tmpl_var name=data_file_vflags></VFlags>
+<tmpl_loop name=loop_data_file_filerel><FileRel FId="<tmpl_var expr="jsencodexml(data_file_filerel_fid)">" OtherFId="<tmpl_var expr="jsencodexml(data_file_filerel_otherfid)">" Type="<tmpl_var expr="jsencodexml(data_file_filerel_type)">"/>
+</tmpl_loop>
+<tmpl_loop name=loop_data_file_fileeprel><FileEpRel FId="<tmpl_var expr="jsencodexml(data_file_fileeprel_fid)">" EId="<tmpl_var expr="jsencodexml(data_file_fileeprel_eid)">" StartP="<tmpl_var expr="jsencodexml(data_file_fileeprel_startp)">" EndP="<tmpl_var expr="jsencodexml(data_file_fileeprel_endp)">"/>
+</tmpl_loop>
 	</File>
 	</tmpl_loop>
 </Ep>
