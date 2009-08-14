@@ -16,11 +16,6 @@
     display: none;
 }
 
-#layout-main div.lexicon_all table.animelist th.title
-{
-	width: 98%
-}
-
 #layout-main div.lexicon_all div.note,
 #layout-main div.lexicon_all div.fullsearch_form
 {
@@ -35,4 +30,32 @@
 #layout-main div.lexicon_all div.related_entries ul.jump:first-child
 {
 	margin-top: 0;
+}
+
+#layout-main div.lexicon_all table.animelist tr td
+{
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+#layout-main div.lexicon_all table.animelist tr td.name
+{
+	width:50%;
+}
+
+#layout-main div.lexicon_all table.animelist tr td.rating
+{
+	text-align: left;
+	min-width:6em;
+}
+
+#layout-main div.lexicon_all table.animelist tr td.count,
+#layout-main div.lexicon_all table.animelist tr td.date
+{
+	text-align: right;
+}
+
+#layout-main div.lexicon_all table.animelist tr td.count
+{
+	min-width:4em;
 }
