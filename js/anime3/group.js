@@ -6,9 +6,9 @@
 jsVersionArray.push({
 	"file":"anime3/aproduceradd.js",
 	"version":"1.1",
-	"revision":"$Revision: 2923 $",
-	"date":"$Date:: 2009-08-04 00:34:35 +0100#$",
-	"author":"$Author: fahrenheit $",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
 	"changelog":"Re-added and fixed stuff"
 });
 
@@ -142,6 +142,7 @@ function updateEpTableRows(cellClean) {
 	var tbody = table.tBodies[0];
 	for (var i = 0; i < tbody.rows.length; i++) { // update each row
 		var row = tbody.rows[i];
+/*
 		if (!cellClean) {
 			var test = row.cells[2];	// ID cell
 			if (test) {
@@ -199,13 +200,19 @@ function updateEpTableRows(cellClean) {
 				}
 			}
 		} else {
+*/
+			test = row.cells[6];		// CRC Cell
+			if (test) {
+				if (!test.childNodes.length) test.setAttribute('anidb:sort','-');
+				else test.setAttribute('anidb:sort',test.firstChild.nodeValue);
+			}
 			test = row.cells[11];	// icons Cell
 			if (test) {
 				test.onmouseover = createHashLink;/*
 				var a = test.getElementsByTagName('a')[0];
 				if (a) a.href = '!fillme!';*/
 			}
-		}
+//		}
 	}
 }
 
@@ -266,18 +273,18 @@ function updateEpTable() {
 	headingList[0].appendChild(ck);
 	createCheckBox(null,'files.all','files.all',toggleFilesFromGroup,false);
 	headingList[1].className += ' c_set';			// Date
-	headingList[2].className += ' c_set';			// ID
-	headingList[3].className += ' c_set';			// EP
-	headingList[4].className += ' c_none';			// Group
+	headingList[2].className += ' c_setlatin';		// ID
+	headingList[3].className += ' c_setlatin';		// EP
+	headingList[4].className += ' c_setlatin';		// Group
 	headingList[5].className += ' c_set';			// Size
 	headingList[6].className += ' c_setlatin';		// CRC
 	headingList[7].className += ' c_set';			// Quality
-	headingList[8].className += ' c_set';			// Source
+	headingList[8].className += ' c_latin';			// Source
 	headingList[9].className += ' c_set';			// Resolution
-	headingList[10].className += ' c_set';			// User count
-	headingList[11].className += ' c_set';			// icons
+	headingList[10].className += ' c_setlatin';		// User count
+	headingList[11].className += ' c_setlatin';		// icons
 	if (headingList[12] && headingList[12].className.indexOf('') >= 0) {
-		headingList[12].className += ' c_setlatin';// Username
+		headingList[12].className += ' c_set';		// Username
 	}
 	var tbody = table.tBodies[0];
 	var thead = document.createElement('thead');
@@ -298,6 +305,7 @@ function updateEpTable() {
 
 /* This function prepares the mylist page for use with my scripts */
 function prepPage() {
+	var start = new Date();
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
 	released_div = getElementsByClassName(document.getElementsByTagName('div'), 'group_released', true)[0];
@@ -313,6 +321,8 @@ function prepPage() {
 	gid = Number(uriObj['gid']);
 	
 	createPreferencesTable('group');
+	//alert("Timed: "+(new Date() - start));
+
 	if (!isNaN(aid) && !isNaN(gid)) {
 		//Group-Anime Page
 		fetchData(aid);
