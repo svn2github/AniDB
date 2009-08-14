@@ -173,12 +173,6 @@ small,
 	text-align:center;
 }
 
-#layout-main div.ed2kexport_all pre
-{
-	white-space: pre-wrap;
-	white-space: -moz-pre-wrap;
-}
-
 #layout-main div.japan_time
 {
 	font-size:120%;
@@ -207,14 +201,6 @@ div.pagination span a
 	text-transform:capitalize;
 }
 
-/*
-.s_forward,
-th.descending
-{
-	text-decoration:overline;
-}
-*/
-
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
@@ -222,13 +208,6 @@ th.descending
 	font-size:1em;
 	font-weight:bold;
 	text-transform:uppercase;
-}
-
-#layout-main div.forum ul.topics dd.posts,
-#layout-main div.forum ul.topics dd.views,
-#layout-main div.forum ul.topics dd.topics
-{
-	font-size:1.2em;
 }
 
 #layout-main div.forum a.topictitle
@@ -249,13 +228,6 @@ th.descending
 {
 	font-size:1.1em;
 	line-height:1.3em;
-}
-
-#layout-main div.forum div.events p,
-#layout-main div.forum div.poll p,
-#layout-main div.forum div.postbody dl.codebox
-{
-	font-size:1em;
 }
 
 #layout-main div.forum div.postbody dl.codebox dt
@@ -290,6 +262,94 @@ th.descending
 	font-weight:normal;
 }
 
+button:hover,
+input[type="submit"]:hover,
+th.sortable
+{
+	cursor:pointer;
+}
+
+#layout-main table.filelist tr.virtual,
+#layout-main ul.g_list li.selected,
+#layout-main div.anime_all div.groups td.state.stalled,
+#layout-main div.anime_all div.groups td.state.unknown,
+#layout-main div.group_released td.state.stalled,
+#layout-main div.group_released td.state.unknown,
+#layout-main div.forum span.postdeleted,
+#layout-main div.forum span.postedited
+{
+	font-style:italic;
+}
+
+#layout-main div.anime_all div.groups td.state.dropped,
+#layout-main div.group_released td.state.dropped
+{
+	text-decoration:underline;
+}
+
+#layout-main div.msg_all div.header dt,
+#layout-main div.forumsearch_form dt,
+#layout-main div.forum div.add-box dl dt
+{
+	font-size:1.1em;
+	font-weight:bold;
+}
+
+#layout-main div.chartags_all div.addbox div.taggrouplist span.link,
+#layout-main div.chartags_all div.addbox div.tag-column span.link
+{
+	line-height:1.5em;
+}
+
+ul.acdropdown
+{
+	background-color:white;
+	border:black 1px solid;
+	color:black;
+}
+
+ul.acdropdown li
+{
+	background-color:transparent;
+	color:none;
+	font-weight:normal;
+}
+
+ul.acdropdown li:hover
+{
+	background-color:blue;
+	color:white;
+	font-weight:bold;
+}
+
+h4.collapsed span
+{
+	text-decoration:line-through;
+}
+
+#tooltip
+{
+	font-size:10px;
+}
+
+#layout-main div.forum ul.topics dd.posts,
+#layout-main div.forum ul.topics dd.views,
+#layout-main div.forum ul.topics dd.topics,
+#layout-main div.chartags_all div.addbox div.tag-group h3,
+#layout-main div.userpage_all div.userdetails div.block caption
+{
+	font-size:1.2em;
+}
+
+#layout-main div.forum div.events p,
+#layout-main div.forum div.poll p,
+#layout-main div.forum div.postbody dl.codebox,
+#layout-main div.userpage_all div.block caption,
+#layout-main div.userpage_all div.block h3
+{
+	font-size:1em;
+}
+
 #layout-main div.forum div.navbar span.breadcrumbs,
 #layout-main div.forum div.navbar span.info,
 #layout-main div.forum div.navbar span.messages,
@@ -305,7 +365,9 @@ th.descending
 #layout-main div.msg_all div.header dd,
 #layout-main div.forum div.rules div.inner,
 #layout-main div.forum div.navbar span.notify,
-#layout-main div.forum div.quickreply textarea
+#layout-main div.forum div.quickreply textarea,
+#layout-main div.chartags_all div.addbox div.tag-column h5,
+#layout-main div.chartags_all div.addbox div.taggrouplist span.link
 {
 	font-size:1.1em;
 }
@@ -340,107 +402,13 @@ div.quotebody div.quoteof,
 #layout-main div.forum div.options-box dt,
 #layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt,
-#layout-main div.forum div.poll div.pollbar
-{
-	font-weight:bold;
-}
-
-button:hover,
-input[type="submit"]:hover,
-th.sortable
-{
-	cursor:pointer;
-}
-
-#layout-main table.filelist tr.virtual,
-#layout-main ul.g_list li.selected,
-#layout-main div.anime_all div.groups td.state.stalled,
-#layout-main div.anime_all div.groups td.state.unknown,
-#layout-main div.group_released td.state.stalled,
-#layout-main div.group_released td.state.unknown,
-#layout-main div.forum span.postdeleted,
-#layout-main div.forum span.postedited
-{
-	font-style:italic;
-}
-
-/*
-.s_reverse,
-th.ascending */
-#layout-main div.anime_all div.groups td.state.dropped,
-#layout-main div.group_released td.state.dropped
-{
-	text-decoration:underline;
-}
-
-#layout-main div.msg_all div.header dt,
-#layout-main div.forumsearch_form dt,
-#layout-main div.forum div.add-box dl dt
-{
-	font-size:1.1em;
-	font-weight:bold;
-}
-
-#layout-main div.chartags_all div.addbox div.taggrouplist span.link,
-#layout-main div.chartags_all div.addbox div.tag-column span.link
-{
-	line-height:1.5em;
-}
-
-#layout-main div.chartags_all div.addbox div.tag-column h5,
-#layout-main div.chartags_all div.addbox div.taggrouplist span.link
-{
-	font-size:1.1em;
-}
-
+#layout-main div.forum div.poll div.pollbar,
 #layout-main div.chartags_all div.addbox div.tag-column h5
 {
 	font-weight:bold;
 }
 
-#layout-main div.chartags_all div.addbox div.tag-group h3
+#layout-main div.latest2_all div.latest_hotanime th.rating
 {
-	font-size:1.2em;
-}
-
-ul.acdropdown
-{
-	background-color: white;
-	border: black 1px solid;
-	color: black;
-}
-
-ul.acdropdown li
-{
-	background-color: transparent;
-	color:none;
-	font-weight: normal;
-}
-
-ul.acdropdown li:hover
-{
-	background-color: blue;
-	color:white;
-	font-weight: bold;
-}
-
-h4.collapsed span
-{
-    text-decoration:line-through;
-}
-
-#layout-main div.userpage_all div.block caption,
-#layout-main div.userpage_all div.block h3
-{
-	font-size:1em;
-}
-
-#layout-main div.userpage_all div.userdetails div.block caption
-{
-	font-size:1.2em;
-}
-
-#tooltip
-{
-	font-size: 10px;
+	cursor:text;
 }
