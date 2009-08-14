@@ -419,7 +419,7 @@ function parseEpisodeData(xmldoc) {
 	}
 	updateStatus('');
 	// now that we have all the data actualy update the hash nodes
-	updateEpTableRows(true);
+	//updateEpTableRows(true); // maybe i can live without this one
 	
 	addEpBar();
 }
