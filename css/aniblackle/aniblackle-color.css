@@ -391,7 +391,8 @@ tr + tr td,
 
 #layout-main div.mylist_all td+td,
 #layout-main div.myvotes_all td+td,
-#layout-main div.mywishlist_all tr td+td
+#layout-main div.mywishlist_all tr td+td,
+#layout-main div.animelist_all tr td+td
 {
 	border-left-color:#555555;
 }
@@ -400,4 +401,9 @@ tr + tr td,
 #layout-main div.g_timedentry div.body
 {
 	background-color:#3B3B3B;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+{
+	border-top-color:#555555;
 }
