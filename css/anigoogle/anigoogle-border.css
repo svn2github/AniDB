@@ -112,7 +112,8 @@ tr + tr td,
 #layout-main div.mylist_all td+td,
 #layout-main div.myvotes_all td+td,
 #layout-main div.mywishlist_all tr td+td,
-#layout-main div.animelist_all tr td+td
+#layout-main div.animelist_all tr td+td,
+#layout-main div.lexicon_all table.animelist tr td+td
 {
 	border-left:1px solid #C9D7F1;
 }
