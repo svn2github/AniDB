@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<os:openServiceDescription
+    xmlns:os="http://www.microsoft.com/schemas/openservicedescription/1.0">
+    <os:homepageUrl>http://anidb.net</homepageUrl>
+    <os:display>
+        <os:name>Lookup Anime on AniDB.net</name>
+        <os:icon>http://anidb.net/favicon.ico</icon>
+		<os:description>Search Anime information within AniDB.net</os:description> 
+    </os:display>
+    <os:activity category="Lookup">
+   		 <os:activityAction context="selection" >
+            <os:execute action="http://anidb.net/perl-bin/animedb.pl" method="post">
+                <os:parameter name="adb.search" value="{selection}" type="text" />
+				<os:parameter name="do.search" value="search" type="text" />
+				<os:parameter name="show" value="animelist" type="text" />
+            </os:execute>
+        </os:activityAction>
+    </os:activity>
+</os:openServiceDescription>
