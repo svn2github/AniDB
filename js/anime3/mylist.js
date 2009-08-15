@@ -110,8 +110,9 @@ function prepPage() {
 	var mylistTable = getElementsByClassName(document.getElementsByTagName('table'),'animelist',true)[0];
 	if (!mylistTable) { errorAlert('prepPage','no mylist table found'); return; }
 	var body = mylistTable.tBodies[0];
-	for (var i = 1; i < body.rows.length-1; i++) {
+	for (var i = 1; i < body.rows.length; i++) {
 		var row = body.rows[i];
+		if (row.className.indexOf('action') >= 0) continue;
 		var aid = Number(row.id.substring(1));
 		var cell = getElementsByClassName(row.getElementsByTagName('td'),'expand',true)[0];
 		if (!cell) { errorAlert('prepPage','no expand cell found'); continue; }
