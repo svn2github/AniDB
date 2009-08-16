@@ -11,12 +11,12 @@
 
 #layout-main div.mywishlist_all tr td.name
 {
-	width:40%;
+	width:50%;
 }
 
 #layout-main div.mywishlist_all tr td.comment
 {
-	width:20%;
+	width:30%;
 }
 
 #layout-main div.mywishlist_all tr td.rating,
