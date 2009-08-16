@@ -1215,6 +1215,7 @@ function init_sorting(node,ident,sortico) {
 		header._identifier = (header.className && header.className.length > 0 ? header.className.substring(0,header.className.indexOf(" ")) || header.className : null);
 		if (header._sortFunction == 'c_none') continue;
 		header.onclick = sortcol; // This applies the actual sorting behaviour
+		header.className += ' sortable';
 		// And the following adds the icons (Optional, it's just a visual input)
 		if (typeof(ident) == 'string') {
 			if (ident && ident.length) {
