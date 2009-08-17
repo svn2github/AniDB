@@ -1,0 +1,102 @@
+#layout-main div.forum div.poll div.pollbar,
+#layout-main div.forum div.navbar div.inner,
+#layout-main div.forum div.search div.inner,
+#layout-main div.forum div.threads div.inner,
+#layout-main div.forum div.options-box div.inner,
+#layout-main div.forum div.submit-box div.inner,
+#layout-main div.forum div.threads div.inner
+{
+	background-color: #494947;
+}
+
+#layout-main div.forum div.options-box div.inner *,
+#layout-main div.forum div.navbar div.inner a,
+#layout-main div.forum div.navbar div.inner span,
+#layout-main div.forum div.search div.inner label
+{
+	color: #dddddd;
+}
+
+/*#layout-main div.forum div.g_section div.inner,*/
+#layout-main div.forum /*div.threads*/ div.inner
+{
+	border: 2px ridge #dddddd;
+	-moz-border-radius: .75em;
+	-webkit-border-radius: .75em;
+	-moz-border-radius-topleft:0;
+	-moz-border-radius-bottomright:0;
+	-webkit-border-top-left-radius:0;
+	-webkit-border-bottom-right-radius:0;
+}
+
+#layout-main div.forum ul.topiclist,
+#layout-main div.forum ul.linklist
+{
+	background-color: transparent;
+}
+
+#layout-main div.forum div.threads div.inner
+{
+	padding-bottom: .5em;
+}
+
+#layout-main div.forum div.signature,
+#layout-main div.forum div.navbar div.inner div.bottom
+{
+	border-top-color:#dddddd;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	background-color:#999999;
+}
+
+#layout-main div.forum ul.topics li.g_odd
+{
+	background-color:#aaaaaa;
+}
+
+/*
+#layout-main div.cmt_entries a.username-colored:hover,
+#layout-main div.forum a.username-coloured:hover,*/
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum ul.topiclist li
+{
+	color:#666666;
+}
+
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-color:#bbbbbb;
+}
+
+#layout-main div.forum a.topictitle/*,
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.username-coloured*/
+{
+	color: #555555;
+}
+
+#layout-main div.cmt_entries div.postbody span.actions
+{
+	padding-right:0;
+}
+
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.inner
+{
+	background-color:#e7e7e7;
+}
+
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2
+{
+	color:#444444;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry h4
+{
+	display: block;
+}

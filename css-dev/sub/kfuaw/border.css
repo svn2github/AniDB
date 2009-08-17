@@ -1,0 +1,172 @@
+table
+{
+	border-collapse: seperate;
+}
+
+img, a
+{
+	border: none;
+}
+
+#layout-main table tr
+{
+	border: 1px solid #494947;
+}
+
+#layout-main table tr + tr td
+{
+	border-top: 1px solid #dddddd;
+	border-bottom: none;
+}
+
+#layout-main table tr.header + tr td
+{
+	border: none;
+}
+
+#layout-main table tr th.field,
+#layout-main table tr td.field
+{
+	border-top: 1px solid #494947;
+}
+
+#layout-main .g_description,
+#layout-main .g_image image
+{
+	border: 1px #98AAB1 dotted;
+}
+
+#layout-main .g_image image
+{
+	padding: 1px;
+}
+
+#layout-main .block .g_definitionlist table
+{
+	/*border: none;*/
+	margin: 0;
+}
+
+#layout-main div.anime_all div.episodes tr.newtype td
+{
+	border-top: 2px #006699 double;
+}
+
+#layout-main div.anime_all div.episodes tr.heading th
+{
+	padding: 4px 1px 7px 1px;
+	border-bottom: black 2px solid;
+}
+
+#layout-main div.anime_all div.episodes tr.newtype td
+{
+	border-top: black 2px solid;
+}
+
+#layout-main div.avatar img
+{
+	border: 1px solid #cbd6e5;
+}
+
+#layout-tabs ul li a,
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-menu li.sub-menu,
+#layout-main h1
+{
+	border: 2px ridge #dddddd;
+}
+
+#layout-main div.tabbed_pane ul.tabs li,
+#tooltip span.top,
+#tooltip span.bottom,
+#layout-content,
+#layout-menu,
+#layout-tabs ul li a,
+#layout-menu li.sub-menu,
+#layout-main h1,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	-moz-border-radius: .75em;
+	-webkit-border-radius: .75em;
+	-moz-border-radius-topleft:0;
+	-moz-border-radius-bottomright:0;
+	-webkit-border-top-left-radius:0;
+	-webkit-border-bottom-right-radius:0;
+}
+
+#layout-menu
+{
+	-moz-border-radius-topright:0;
+	-webkit-border-top-right-radius:0;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.animeatt_all div.bar h4,
+#layout-main div.animeatt_all div.bar ul,
+#layout-search form select,
+#layout-search form input,
+#layout-main div.creq_all div.states dl,
+#layout-main table,
+#layout-main .g_list,
+#layout-main div.userpage_all div.latest ul,
+#layout-main div.g_menu div h4 + ul,
+#layout-main div.g_menu div h4 + p,
+#layout-main div.latestanimes_anime div.data table,
+#layout-main div.tabbed_pane div.body > div,
+#layout-main div.main_all div.rightbar h4 + ol
+{
+	border: 1px solid #494947;
+}
+
+#layout-main div.tabbed_pane div.pane table
+{
+	border: none;
+}
+
+#layout-main ul.links
+{
+	border: none;
+	border-top: 2pt groove #FFFFFF;
+}
+
+/*#layout-main div.g_timedentry h4
+{
+	border: 1px dotted #bbbbbb;
+}*/
+
+#tooltip span.top,
+#tooltip span.bottom,
+#tooltip span.middle
+{
+	border: 2pt solid #494947;
+}
+
+#tooltip span.top
+{
+	border-bottom: none;
+	-moz-border-radius-bottomleft:0;
+	-moz-border-radius-bottomright:0;
+	-webkit-border-bottom-left-radius:0;
+	-webkit-border-bottom-right-radius:0;
+}
+
+#tooltip span.bottom
+{
+	border-top: none;
+	-moz-border-radius-topleft:0;
+	-moz-border-radius-topright:0;
+	-webkit-border-top-left-radius:0;
+	-webkit-border-top-right-radius:0;
+}
+
+#tooltip span.middle
+{
+	border-top: none;
+	border-bottom: none;
+}
+
+table table,
+#layout-main div.tabbed_pane div.body table tr
+{
+	border: none;
+}

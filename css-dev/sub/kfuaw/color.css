@@ -1,0 +1,162 @@
+html
+{
+	color: #2E3C55;
+	background: #E3E1E1 url(images/background.png) repeat-y scroll 0 0;
+}
+
+span.link,
+a
+{
+	color: #5a5a5a;
+	cursor: pointer;
+}
+
+span.link,
+a,
+#layout-main div.g_timedentry a:hover,
+#layout-main div.userpage_all div.g_section h4 a:hover,
+#layout-main div.g_section h4 a:hover,
+#layout-main div.g_msg.note a:hover,
+#layout-main table caption a:hover,
+#layout-main div.cmt_entries div.postbody div.content a:hover,
+#layout-main div.userpage_all div.g_section h4 a:hover,
+a.i_icon:hover,
+a.i_inline:hover,
+#layout-main div.edit_actions a:hover
+{
+	text-decoration: none;
+}
+
+#layout-main div.g_timedentry a,
+#layout-main h1 a,
+#layout-main h4 a,
+#layout-main .g_list a,
+#layout-main div.tabbed_pane ul.tabs li a,
+#layout-main div.userpage_all div.g_section h4 a,
+#layout-main table caption a,
+#layout-main div.edit_actions a,
+#layout-main div.g_msg.note a,
+#layout-main div.cmt_entries div.postbody div.content a,
+#layout-main div.g_section h4 a,
+span.link:hover,
+a:hover
+{
+	text-decoration: underline;
+}
+
+#layout-main div.g_section h4,
+#layout-main div.g_section h4 a,
+#layout-menu,
+#layout-main div.creq_all dd,
+#layout-content
+{
+	background-color: #F3F3F3;
+	color: #2E3C55;
+}
+
+#layout-main div.profile_all div.g_section h4 a
+{
+	background-color:transparent;
+}
+
+#layout-menu
+{
+	color: #2E3C55;
+}
+
+#layout-main div.creq_all dl,
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd
+{
+	background-color: #eaeaea;
+}
+
+#layout-main div.animeatt_all div.bar h4,
+#layout-main div.g_menu.filter_menu h4,
+#layout-main div.userpage_all div.g_section.userprefs h3,
+#layout-main div.creq_all div.g_section.creq_stats table.stats th,
+#layout-main div.userpage_all div.g_section.latest h4,
+#layout-menu li.sub-menu,
+#layout-search form select,
+#layout-search form input,
+#layout-main div.tabbed_pane div.pane ul.tabs li,
+#layout-main div.tabbed_pane h4,
+#layout-main .g_list,
+#layout-main h4,
+#layout-main table tr th.field,
+#layout-main table tr td.field,
+#layout-main div.creq_all dl,
+#layout-main table caption,
+#layout-main table thead,
+#layout-main h1,
+#layout-main table tr.header,
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#494947;
+	color: #dddddd;
+}
+
+#layout-main h1 a,
+#layout-main h4 a,
+#layout-main .g_list a,
+#layout-main div.tabbed_pane ul.tabs li a,
+#layout-main table caption a,
+#layout-menu li.sub-menu a,
+#layout-main div.tabbed_pane div.edit_actions,
+#layout-main div.tabbed_pane div.edit_actions a
+{
+	color: #dddddd;
+}
+
+#layout-tabs ul li a:hover,
+#layout-tabs ul li:hover a,
+#layout-tabs ul li.selected a
+{
+	background-color: #e5e4e4;
+	color: #494947;
+}
+
+#layout-main div.tabbed_pane div.pane ul.tabs li a:hover, /* fixes double tabben panes*/
+#layout-main div.tabbed_pane div.pane ul.tabs li:hover, /* same here */
+#layout-main div.tabbed_pane div.pane ul.tabs li.selected, /*same here */
+#layout-main div.tabbed_pane ul.tabs li a:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane div.body
+{
+	background-color: #f5f4f4;
+	color: #494947;
+}
+
+#layout-main ul.links,
+#layout-main div.g_timedentry h4,
+#layout-main div.g_timedentry h4 a
+{
+	color: #6B868F;
+	background-color: transparent
+}
+
+#layout-main div.g_content ul.links a
+{
+	color: #4e4f47;
+}
+
+/*
+#tooltip span.top,
+#tooltip span.bottom
+{
+	background-color: none;
+	height: 0;
+	display: none;
+}*/
+
+#tooltip span.top,
+#tooltip span.bottom,
+#tooltip span.middle
+{
+	color: #151515;
+	background:#fafafa;
+}
