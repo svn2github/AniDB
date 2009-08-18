@@ -99,8 +99,9 @@ sub create_tpl
 		'functions' =>
 		{
 			'jsencode' => \&export_funcs::jsencode,
-			'jsencodehtml' => \&export_funcs::jsencodehtml,
-			'jsencodexml'  => \&export_funcs::jsencodexml,
+			'jsencodehtml'  => \&export_funcs::jsencodehtml,
+			'jsencodexml'   => \&export_funcs::jsencodexml,
+			'jsencodexmlcs' => \&export_funcs::jsencodexmlcs,
 			'replace' => \&export_funcs::replace,
 			'ireplace' => \&export_funcs::ireplace
 		}

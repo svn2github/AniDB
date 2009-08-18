@@ -32,7 +32,8 @@ namespace Program
         private void MyForm_Load(object sender, System.EventArgs e)
         {
             var t0 = DateTime.Now;
-            myList = MyList.Load("mylist.xml");
+            try { myList = MyList.Load(@"mylist.xml"); }
+            catch (Exception ex) { MessageBox.Show(ex.Message + "\n" + ex.InnerException.Message); Application.Exit(); return; }
             var t1 = DateTime.Now;
             foreach (var anime in myList.Animes)
             {

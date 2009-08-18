@@ -4,7 +4,7 @@ package export_funcs;
 
 use strict;
 
-$export_funcs::VERSION = "0.03";	#23.06.2006
+$export_funcs::VERSION = "0.04";	#18.08.2009
 
 ##INIT
 ##
@@ -59,6 +59,26 @@ sub jsencodexml
     $str =~ s/\`/\&#8216\;/g;
     $str =~ s/\r//g;
     $str =~ s/\n/\<br \/\>/g;
+
+    return $str;
+}
+
+sub jsencodexmlcs
+{
+    my $str = shift;
+    
+    $str =~ s/\&/\&amp\;/g;
+    $str =~ s/\</\&lt\;/g;
+    $str =~ s/\>/\&gt\;/g;
+    $str =~ s/\'/\&apos\;/g;
+    $str =~ s/\"/\&quot\;/g;
+    $str =~ s/\`/\&apos\;/g;
+    $str =~ s/\[i\]/\&lt\;i\&gt\;/g;
+    $str =~ s/\[\/i\]/\&lt\;\/i\&gt\;/g;
+    $str =~ s/\[b\]/\&lt\;b\&gt\;/g;
+    $str =~ s/\[\/b\]/\&lt\;\/b\&gt\;/g;
+    $str =~ s/\[u\]/\&lt\;u\&gt\;/g;
+    $str =~ s/\[\/u\]/\&lt\;\/u\&gt\;/g;
 
     return $str;
 }
