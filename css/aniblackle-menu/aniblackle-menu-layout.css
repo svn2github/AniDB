@@ -1,9 +1,0 @@
-#layout-hint + #layout-nav + #layout-content #layout-tabs
-{
-	margin:1.6em 0.3em;
-}
-
-#layout-hint + #layout-nav #layout-menu
-{
-	margin-top: 0;
-}
