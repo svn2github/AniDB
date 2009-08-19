@@ -1,0 +1,407 @@
+@import "../common.css";
+
+@import "../../common/style/color/status-creme.css";
+@import "../../grey/icons.css";
+
+@import "border.css";
+@import "color.css";
+@import "forum.css";
+
+body
+{
+	padding: 3em .8em .8em .8em;
+}
+
+#layout-main div.profile_all div.pane.general div.body div.pane div ul
+{
+	padding: 0;
+}
+
+#layout-main div.main_all div.rightbar h3
+{
+	margin-top:0;
+}
+
+#layout-main div.main_all div.rightbar div + h3
+{
+	margin-top:1em;
+}
+
+#layout-hint
+{
+	left: .165em;
+	margin: .165em 0;
+	padding: .08em;
+	position:absolute;
+	right: 26em;
+	width:auto;
+	z-index:5;
+}
+/*
+#layout-menu:before
+{
+	background: #494947 url(images/osaka.png) no-repeat scroll center 2pt;
+	display: block;
+	height: 153px;
+	margin: 0 0 1em 0;
+	content:"";
+}*/
+
+#layout-menu
+{
+	padding: .8em;
+	width: 12em;
+}
+
+#layout-menu > li + li
+{
+	margin-top: 1em;
+}
+
+#layout-main h1
+{
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: lighter;
+	font-family: "Trebuchet MS", "Arial", "Verdana", "sans-serif";
+	margin-top: 0;
+	padding-top: 1.1em;
+}
+
+#layout-search form select,
+#layout-search form input
+{
+	margin:0;
+	padding:0;
+	position: relative;
+}
+
+#layout-search form select
+{
+	width: 10em;
+}
+
+#layout-search form input
+{
+	margin:0 0 0 .25em;
+	width: 12em;
+}
+
+#layout-search form input.submit
+{
+	width:2em;
+	height:2em;
+	overflow:hidden;
+	background:transparent url(images/osaka_.png) no-repeat center center;
+	border-left:none;
+	text-indent:-666em;
+	margin: 0 .333em 0 0;
+}
+
+#layout-main div.g_timedentry h4
+{
+	font-size: 100%;
+	line-height: 1.2em;
+	font-weight: normal;
+}
+
+#layout-main .g_list li:before
+{
+	content: " | "
+}
+
+#layout-main .g_list li:first-child:before
+{
+	content: "";
+}
+
+#layout-main .g_list.limit li:first-child:before
+{
+	content: "show: ";
+}
+
+#layout-main table.vote_graph td
+{
+	text-align: center;
+}
+
+#layout-nav
+{
+	height: 0;
+	position: static;
+}
+
+#layout-search
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #393636;
+	text-align: right;
+	border-bottom:1px solid #292927;
+}
+
+#layout-search form,
+#layout-search p
+{
+	text-align: right;
+	margin: 0;
+	padding: 0;
+}
+
+#layout-tabs ul li a
+{
+	padding: .22em .9em;
+}
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	padding: .1em .9em;
+}
+
+#layout-tabs ul li a:hover,
+#layout-tabs ul li.g_odd a:hover
+{
+	text-decoration: none;
+}
+
+#layout-content
+{
+	margin-left: 13em;
+}
+
+#layout-menu li.sub-menu,
+#layout-main h1
+{
+	padding: .4em .4em .4em .8em;
+}
+
+#layout-main h1
+{
+	margin: 0 0 .8em 0;
+}
+
+#layout-main
+{
+	margin: 0;
+	padding: .8em;
+}
+
+#layout-footer,
+#layout-footer p
+{
+	text-align: right;
+}
+
+#layout-main div.g_timedentry h4,
+#layout-main div.g_section.forum div.g_timedentry.blogitem h4
+{
+	font-family: times New Roman;
+	font-size: 2.5em;
+	font-weight: normal;
+	text-align: left;
+	padding: 0 0 0 .2em;
+}
+
+#layout-tabs
+{
+	margin: 0;
+	display: block;
+}
+
+#layout-tabs ul.main-tabs
+{
+	display: block;
+	padding: 1.2em .33em .4em .33em;
+	margin: 0;
+}
+
+/*
+#layout-search .rtop,
+#layout-search .rbottom,*/
+.rtop,
+.rbottom,
+#layout-main div.main_all div.rightbar > h4/*,
+#layout-main div.main_all div.rightbar div.reviews,
+#layout-main div.main_all div.rightbar div.just_started,
+#layout-main div.main_all div.rightbar div.random*/
+{
+	display: none;
+}
+
+#layout-main div.main_all div.news
+{
+	margin-right:17em;
+}
+
+#layout-main div.main_all div.rightbar
+{
+	width: 16em;
+}
+
+#layout-main div.main_all div.rightbar div
+{
+	margin: 0 0 .4em 0;
+	
+}
+
+#layout-main div.cmt_all div.comment h4,
+#layout-main div.main_all div.rightbar h4,
+#layout-main table tr.header,
+#layout-main li
+{
+	padding: .16em;
+}
+
+#layout-main div.g_menu ul
+{
+	margin: 0;
+}
+
+#layout-main div.tabbed_pane div.pane ul.tabs,
+#layout-main ul.links
+{
+	padding: .33em 0 0 0;
+	margin-top: .33em;
+}
+
+#layout-main .g_list li
+{
+	padding: 0 .16em 0 .16em;
+}
+
+#layout-search,
+#layout-main div.msg_all form,
+#layout-main div.msg_all table,
+#layout-main div.anime_all div.groups table.grouplist,
+#layout-main div.anime_all div.character table.characterlist,
+#layout-main div.anime_all div.seiyuu table.seiyuulist,
+#layout-main div.anime_all div.relations table.relationslist,
+#layout-main div.anime_all div.recommendations table.recommendationslist,
+#layout-main div.anime_all div.reviews table.reviewlist,
+#layout-main div.anime_all div.episodes table.eplist,
+#layout-main div.ep_all table.filelist,
+#layout-main div.schedule table,
+#layout-main div.tabbed_pane_main table,
+#layout-main div.userpage_all div.g_menu table,
+#layout-main div.userpage_all div.userprefs table
+{
+	width: 100%;
+}
+
+#layout-main div.addepm div.ep,
+#layout-main div.cmt_all div.topic_actions
+{
+	margin-bottom: .16em;
+}
+
+#layout-main div.creq_all div.creq_stats
+{
+	width: 15%;
+	margin: auto;
+}
+
+#layout-main div.creq_all div.states,
+#layout-main div.creq_all .g_section
+{
+	/*width: 80%;*/
+	margin: 0 auto 4em auto;
+}
+
+#layout-main div.creq_all dl
+{
+	margin: 0 auto;
+}
+
+#layout-main div.creq_all .g_section
+{
+	margin-bottom: .4em;
+}
+
+#layout-main div.userpage_all div.userdetails div.block caption,
+#layout-main div.userpage_all div.g_section.latest h4,
+#layout-main div.userpage_all div.block caption,
+#layout-main div.userpage_all div.g_section caption,
+#layout-main div.g_menu h4,
+#layout-main div.g_menu caption,
+#layout-main div.latest2_all div.content h4,
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.animeatt_all div.bar caption,
+#layout-main div.animeatt_all div.bar h4
+{
+	font-size: 1em;
+	text-align: center;
+}
+
+#layout-main div.userpage_all div.stats,
+#layout-main div.userpage_all div.g_menu
+{
+	padding: 0;
+	width: 17em;
+}
+
+#layout-main div.anime_all #tabbed_pane_main,
+#layout-main div.anime_all div.forum div.threads,
+#layout-main div.anime_all div.forum div.note
+{
+	margin-left:0;
+	margin-right:0;
+}
+
+#tooltip span.middle,
+#tooltip span.bottom
+{
+	position:relative;
+	top:-1.7em;
+	font-size: 1.1em;
+}
+
+#layout-main div.animeatt_all div.bar div + div
+{
+	margin-top: .4em;
+}
+
+#layout-main div.main_all div.news p.comment
+{
+	float:none;
+	text-align:right;
+}
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin:0 0 .5em 0;
+}
+
+#layout-main div.tabbed_pane div.g_section
+{
+	margin-bottom: 0;
+}
+
+#layout-main div.userpage_all div.g_menu.stats
+{
+	clear:left;
+	float:left
+}
+
+#layout-main div.userpage_all div.g_menu
+{
+	clear:right;
+	float:right;
+}
+
+#layout-main div.userpage_all > div.g_section,
+#layout-main div.userpage_all div.forum
+{
+	margin-left:19em;
+	margin-right:19em;
+}
+
+#layout-main div.main_all div.news p.comment
+{
+	margin:-3.5em 0 0;
+}
+
+#layout-main div.userpage_all div.userprefs h3
+{
+	padding: 0 2em;
+}
