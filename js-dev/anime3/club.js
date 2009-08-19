@@ -9,7 +9,7 @@ var userlistCols = {	"name user":{"type":'c_latin'},
 						"date":{"type":'c_date'}};
 
 var sortingCols = {};
-var tableNames = ["member", "exmember", "invited"];
+var tableNames = ["invited", "reject", "request", "denied", "member", "exmember", "revoked", "kicked", "banned"];
 var skipTables = tableNames;
 
 function prepPage() {
