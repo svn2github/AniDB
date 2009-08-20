@@ -21,34 +21,41 @@ using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.Hashes {
     public class Hasher {
-        private Dictionary<string, string> hashStringDict;
-        private List<Hash> hashes;
+        private Dictionary<string, byte[]> hashes;
+        private List<HashContainer> hashAlgorithms;
         private RefillBuffer b;
 
 
-        public Hasher(Stream s, int blockCount, int blockSize) {
+        public Hasher(Stream s, int blockCount, int blockSize)
+            : this(blockCount, blockSize) {
             b = new RefillBuffer(s, blockCount, blockSize);
-            hashStringDict = new Dictionary<string, string>();
-            hashes = new List<Hash>();
+        }
+        public Hasher(string filePath, int blockCount, int blockSize)
+            : this(blockCount, blockSize) {
+            b = new RefillBuffer(filePath, blockCount, blockSize);
+        }
+        private Hasher(int blockCount, int blockSize) {
+            hashes = new Dictionary<string, byte[]>();
+            hashAlgorithms = new List<HashContainer>();
         }
 
-        public Dictionary<string, string> HashStringDict { get { return hashStringDict; } }
+        public Dictionary<string, byte[]> Hashes { get { return hashes; } }
         public void AddHash(HashAlgorithm hashAlgorithm, string name) {
             hashAlgorithm.Initialize();
-            Hash hash = new Hash(b, hashes.Count, hashAlgorithm, name);
-            hash.HashDone += (s, e) => { hashStringDict[((Hash)s).Name] = ((Hash)s).HashString; };
-            hashes.Add(hash);
+            HashContainer hash = new HashContainer(b, hashAlgorithms.Count, hashAlgorithm, name);
+            hash.HashDone += (s, e) => { hashes[((HashContainer)s).Name] = ((HashContainer)s).Hash; };
+            hashAlgorithms.Add(hash);
         }
-        public List<Hash> Hashes { get { return hashes; } }
+        public List<HashContainer> HashAlgorithms { get { return hashAlgorithms; } }
         public RefillBuffer Buffer { get { return b; } }
 
-        public void Join() { for(int i = 0;i < hashes.Count;i++) hashes[i].Join(); }
+        public void Join() { for(int i = 0;i < hashAlgorithms.Count;i++) hashAlgorithms[i].Join(); }
         public void Start() {
-            b.Start(hashes.Count);
-            for(int i = 0;i < hashes.Count;i++) hashes[i].Start();
+            b.Start(hashAlgorithms.Count);
+            for(int i = 0;i < hashAlgorithms.Count;i++) hashAlgorithms[i].Start();
         }
         public bool IsDone() {
-            for(int i = 0;i < hashes.Count;i++) if(!hashes[i].IsDone()) return false;
+            for(int i = 0;i < hashAlgorithms.Count;i++) if(!hashAlgorithms[i].IsDone()) return false;
             return true;
         }
     }

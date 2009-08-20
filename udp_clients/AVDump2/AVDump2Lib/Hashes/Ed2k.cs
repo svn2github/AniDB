@@ -32,12 +32,12 @@ using System.Security.Cryptography;
 using System.Diagnostics;
 
 namespace AVDump2Lib.Hashes {
-    /// <summary>Broken: Blocks need to be Blocksize*n=9500*1024 (n as int)</summary>
     public class Ed2k : HashAlgorithm {
         private static int BLOCKSIZE;
         private List<byte[]> md4HashBlocks;
         private HashAlgorithm md4;
         private byte[] blueHash;
+        private bool blueIsRed;
         private long length;
 
         public Ed2k() {
@@ -68,15 +68,14 @@ namespace AVDump2Lib.Hashes {
                 md4.TransformBlock(array, ibStart + space, toWrite - space, null, 0);
                 length += toWrite - space;
             }
-
         }
+
 
         /// <summary>Calculates both ed2k hashes</summary>
         /// <returns>Always returns the red hash</returns>
         protected override byte[] HashFinal() {
             md4.TransformFinalBlock(new byte[0], 0, 0);
             md4HashBlocks.Add(md4.Hash);
-
 
             //Blue Hash
             if(length >= BLOCKSIZE) {
@@ -97,18 +96,22 @@ namespace AVDump2Lib.Hashes {
                 md4.TransformFinalBlock(md4.ComputeHash(new byte[0]), 0, 0);
             }
 
+            if(length % BLOCKSIZE != 0) blueIsRed = true;
+
             return md4.Hash;
         }
 
         public override void Initialize() {
+            //Called when TransformFinalBlock is called in Mono (not in NET) !
+
             length = 0;
-            blueHash = null;
+            //blueHash = null;
             md4.Initialize();
             BLOCKSIZE = 9728000;
             md4HashBlocks.Clear();
         }
 
-        public bool BlueIsRed() { return length % BLOCKSIZE != 0; }
+        public bool BlueIsRed() { return blueIsRed; }
         public byte[] BlueHash { get { return blueHash; } }
     }
 }

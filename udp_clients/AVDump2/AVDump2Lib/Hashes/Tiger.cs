@@ -32,22 +32,20 @@ namespace AVDump2Lib.Hashes {
     /// <summary>Works but slow</summary>
     public class Tiger : HashAlgorithm {
         #region Fields
-        private long a;
-        private long b;
-        private long c;
-
-        private long[] block;
         private const int BLOCKSIZE = 64;
-        private byte[] buf;
+        private long a, b, c, aa, bb, cc;
+        private int ah, bh, ch;
+
+        private long[] words;
+        private byte[] block;
 
         private long lLen;
         private int nBufPos;
-        private const int PASSES = 3;
         #endregion
 
         public Tiger() {
-            this.buf = new byte[64];
-            this.block = new long[8];
+            this.block = new byte[64];
+            this.words = new long[8];
         }
 
         #region S Boxes
@@ -323,189 +321,186 @@ namespace AVDump2Lib.Hashes {
         public override bool CanTransformMultipleBlocks { get { return true; } }
 
         public void Compress() {
-            int ah, bh, ch;
-            long aa = a;
-            long bb = b;
-            long cc = c;
+            aa = a; bb = b; cc = c;
 
             //ABC 0 5
-            c ^= block[0]; ch = (int)(c >> 32);
+            c ^= words[0]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 5L;
 
             //BCA 1 5
-            a ^= block[1]; ah = (int)(a >> 32);
+            a ^= words[1]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 5L;
 
             //CAB 2 5
-            b ^= block[2]; bh = (int)(b >> 32);
+            b ^= words[2]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 5L;
 
             //ABC 3 5
-            c ^= block[3]; ch = (int)(c >> 32);
+            c ^= words[3]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 5L;
 
             //BCA 4 5
-            a ^= block[4]; ah = (int)(a >> 32);
+            a ^= words[4]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 5L;
 
             //CAB 5 5
-            b ^= block[5]; bh = (int)(b >> 32);
+            b ^= words[5]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 5L;
 
             //ABC 6 5
-            c ^= block[6]; ch = (int)(c >> 32);
+            c ^= words[6]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 5L;
 
             //BCA 7 5
-            a ^= block[7]; ah = (int)(a >> 32);
+            a ^= words[7]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 5L;
 
             //==========================================================================================
             //Scheduler
-            block[0] -= block[7] ^ -6510615555426900571L;
-            block[1] ^= block[0];
-            block[2] += block[1];
-            block[3] -= block[2] ^ ((~block[1]) << 19);
-            block[4] ^= block[3];
-            block[5] += block[4];
-            block[6] -= block[5] ^ (((~block[4]) >> 23) & 2199023255551L);
-            block[7] ^= block[6];
-            block[0] += block[7];
-            block[1] -= block[0] ^ ((~block[7]) << 19);
-            block[2] ^= block[1];
-            block[3] += block[2];
-            block[4] -= block[3] ^ (((~block[2]) >> 23) & 2199023255551L);
-            block[5] ^= block[4];
-            block[6] += block[5];
-            block[7] -= block[6] ^ 81985529216486895L;
+            words[0] -= words[7] ^ -6510615555426900571L;
+            words[1] ^= words[0];
+            words[2] += words[1];
+            words[3] -= words[2] ^ ((~words[1]) << 19);
+            words[4] ^= words[3];
+            words[5] += words[4];
+            words[6] -= words[5] ^ (((~words[4]) >> 23) & 2199023255551L);
+            words[7] ^= words[6];
+            words[0] += words[7];
+            words[1] -= words[0] ^ ((~words[7]) << 19);
+            words[2] ^= words[1];
+            words[3] += words[2];
+            words[4] -= words[3] ^ (((~words[2]) >> 23) & 2199023255551L);
+            words[5] ^= words[4];
+            words[6] += words[5];
+            words[7] -= words[6] ^ 81985529216486895L;
 
             //CAB 0 7
-            b ^= block[0]; bh = (int)(b >> 32);
+            b ^= words[0]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 7L;
 
             //ABC 1 7
-            c ^= block[1]; ch = (int)(c >> 32);
+            c ^= words[1]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 7L;
 
             //BCA 2 7
-            a ^= block[2]; ah = (int)(a >> 32);
+            a ^= words[2]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 7L;
 
             //CAB 3 7
-            b ^= block[3]; bh = (int)(b >> 32);
+            b ^= words[3]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 7L;
 
             //ABC 4 7
-            c ^= block[4]; ch = (int)(c >> 32);
+            c ^= words[4]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 7L;
 
             //BCA 5 7
-            a ^= block[5]; ah = (int)(a >> 32);
+            a ^= words[5]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 7L;
 
             //CAB 6 7
-            b ^= block[6]; bh = (int)(b >> 32);
+            b ^= words[6]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 7L;
 
             //ABC 7 7
-            c ^= block[7]; ch = (int)(c >> 32);
+            c ^= words[7]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 7L;
 
             //==========================================================================================
             //Scheduler
-            block[0] -= block[7] ^ -6510615555426900571L;
-            block[1] ^= block[0];
-            block[2] += block[1];
-            block[3] -= block[2] ^ ((~block[1]) << 19);
-            block[4] ^= block[3];
-            block[5] += block[4];
-            block[6] -= block[5] ^ (((~block[4]) >> 23) & 2199023255551L);
-            block[7] ^= block[6];
-            block[0] += block[7];
-            block[1] -= block[0] ^ ((~block[7]) << 19);
-            block[2] ^= block[1];
-            block[3] += block[2];
-            block[4] -= block[3] ^ (((~block[2]) >> 23) & 2199023255551L);
-            block[5] ^= block[4];
-            block[6] += block[5];
-            block[7] -= block[6] ^ 81985529216486895L;
+            words[0] -= words[7] ^ -6510615555426900571L;
+            words[1] ^= words[0];
+            words[2] += words[1];
+            words[3] -= words[2] ^ ((~words[1]) << 19);
+            words[4] ^= words[3];
+            words[5] += words[4];
+            words[6] -= words[5] ^ (((~words[4]) >> 23) & 2199023255551L);
+            words[7] ^= words[6];
+            words[0] += words[7];
+            words[1] -= words[0] ^ ((~words[7]) << 19);
+            words[2] ^= words[1];
+            words[3] += words[2];
+            words[4] -= words[3] ^ (((~words[2]) >> 23) & 2199023255551L);
+            words[5] ^= words[4];
+            words[6] += words[5];
+            words[7] -= words[6] ^ 81985529216486895L;
 
             //BCA 0 9
-            a ^= block[0]; ah = (int)(a >> 32);
+            a ^= words[0]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 9L;
 
             //CAB 1 9
-            b ^= block[1]; bh = (int)(b >> 32);
+            b ^= words[1]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 9L;
 
             //ABC 2 9
-            c ^= block[2]; ch = (int)(c >> 32);
+            c ^= words[2]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 9L;
 
             //BCA 3 9
-            a ^= block[3]; ah = (int)(a >> 32);
+            a ^= words[3]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 9L;
 
             //CAB 4 9
-            b ^= block[4]; bh = (int)(b >> 32);
+            b ^= words[4]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 9L;
 
             //ABC 5 9
-            c ^= block[5]; ch = (int)(c >> 32);
+            c ^= words[5]; ch = (int)(c >> 32);
             a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
             b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
             b *= 9L;
 
             //BCA 6 9
-            a ^= block[6]; ah = (int)(a >> 32);
+            a ^= words[6]; ah = (int)(a >> 32);
             b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
             c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
             c *= 9L;
 
             //CAB 7 9
-            b ^= block[7]; bh = (int)(b >> 32);
+            b ^= words[7]; bh = (int)(b >> 32);
             c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
             a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
             a *= 9L;
@@ -517,19 +512,15 @@ namespace AVDump2Lib.Hashes {
         }
 
         protected override void HashCore(byte[] data, int nStart, int nSize) {
-            byte[] buf = null;
-            int nBufPos = 0;
             int nEnd = 0;
             int nToCopy = 0;
-            this.lLen += nSize;
-            buf = this.buf;
-            nBufPos = this.nBufPos;
+            lLen += nSize;
             nEnd = (nStart + nSize);
             while(nStart < nEnd) {
                 nToCopy = 64 - nBufPos;
                 if(nToCopy > nSize) nToCopy = nSize;
 
-                Buffer.BlockCopy(data, nStart, buf, nBufPos, nToCopy);
+                Buffer.BlockCopy(data, nStart, block, nBufPos, nToCopy);
                 nStart += nToCopy;
                 nBufPos += nToCopy;
                 nSize -= nToCopy;
@@ -540,14 +531,13 @@ namespace AVDump2Lib.Hashes {
                 }
                 break;
             }
-            this.nBufPos = nBufPos;
         }
 
         protected override byte[] HashFinal() {
             byte[] buf = null;
             int nBufPos = 0;
             nBufPos = this.nBufPos;
-            buf = this.buf;
+            buf = this.block;
             buf[nBufPos] = ((byte)1);
             nBufPos++;
             if(56 <= nBufPos) {
@@ -587,8 +577,8 @@ namespace AVDump2Lib.Hashes {
             int nI = 0;
             int nPos = 0;
             nPos = 0;
-            block = this.block;
-            buf = this.buf;
+            block = this.words;
+            buf = this.block;
             while(nPos < 64) {
                 block[nI] = BitConverter.ToInt64(buf, nPos);
                 nPos += 8;

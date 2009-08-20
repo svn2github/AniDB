@@ -43,8 +43,6 @@ namespace AVDump2Lib.Hashes {
         private long length;
         private byte[] buffer;
 
-        static string bla = "astr";
-
         public Md4() {
             A0 = 0x67452301U;
             B0 = 0xEFCDAB89U;

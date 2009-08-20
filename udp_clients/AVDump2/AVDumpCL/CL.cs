@@ -14,6 +14,8 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
+#define HasAcreq
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +23,7 @@ using System.IO;
 using System.Threading;
 using AVDump2Lib.Hashes;
 using AVDump2Lib.MediaInfoLib;
-
+using AVDump2Lib.Dump;
 
 
 namespace AVDump2CL {
@@ -60,6 +62,7 @@ namespace AVDump2CL {
             char2SwitchEnum['l'] = eSwitches.ListCodecs;
             char2SwitchEnum['x'] = eSwitches.OldXmlFormat;
             char2SwitchEnum['y'] = eSwitches.CreqCmlFormat; //Done
+            char2SwitchEnum['M'] = eSwitches.MediaInfoOutPut; //Done
             char2SwitchEnum['N'] = eSwitches.NoDataOutput;
 
             char2SwitchEnum['c'] = eSwitches.ExcludeSubFolders; //Done
@@ -92,6 +95,15 @@ namespace AVDump2CL {
         }
 
         static void Main(string[] args) {
+
+            /*System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+            xmlDoc.Load("log.xml");
+            username = "alpha";
+            password = "test";*/
+            //if(username != null && password != null) ACreq.DoACreq("avdump2lib", "1", port, username, password, xmlDoc, 1);
+
+			args = new string[] { @"G:\Anime\[Done]Koukaku Kidoutai\[THORA] Koukaku Kidoutai Stand Alone Complex the Laughing Man - Complete Movie.mkv", "-pye1", "-log:log.xml" };
+
             if(!ParseClOptions(args)) return;
             Console.CursorVisible = false;
 
@@ -153,8 +165,11 @@ namespace AVDump2CL {
                 Console.WriteLine("Hashing: " + System.IO.Path.GetFileName(filePath));
 
                 if((switches & (eSwitches.Crc32 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Crc32(), "crc");
-                if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
-                //if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
+				if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
+				if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
+				if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
+				if((switches & (eSwitches.Ed2k | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Ed2k(), "ed2k");
+				if((switches & (eSwitches.Tth | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new Tiger(), "tth");
                 if((switches & (eSwitches.Md5 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.MD5CryptoServiceProvider(), "md5");
                 if((switches & (eSwitches.Sha1 | eSwitches.UseAllHashes)) != 0) hasher.AddHash(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "sha1");
 
@@ -165,13 +180,33 @@ namespace AVDump2CL {
             if((switches & eSwitches.PrintElapsedHashingTime) != 0) Console.WriteLine("Time elapsed after Hashing: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
 
             if((switches & eSwitches.HashingOnly) == 0) {
-                System.Xml.XmlDocument xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(filePath, ToLogFormatSwitch(switches), hasher.HashStringDict, stream.Length);
-                if(logStream != null) {
-                    byte[] filePathBytes = System.Text.Encoding.UTF8.GetBytes(filePath);
-                    logStream.Write(filePathBytes, 0, filePathBytes.Length);
-                    xmlDoc.Save(logStream);
-                    logStream.Write(new byte[] { 13, 10 }, 0, 2);
+                eLogType logType = ToLogFormatSwitch(switches);
+
+                System.Xml.XmlDocument xmlDoc;
+                if((logType & eLogType.AVDump) != 0) {
+                    xmlDoc = (System.Xml.XmlDocument)Info.CreateInfoLog(filePath, logType & eLogType.AVDump, hasher.HashAlgorithms, stream.Length);
+                    if(logStream != null) {
+                        /*byte[] filePathBytes = System.Text.Encoding.UTF8.GetBytes(filePath);
+                        logStream.Write(filePathBytes, 0, filePathBytes.Length);
+                        xmlDoc.Save(logStream);
+                        logStream.Write(new byte[] { 13, 10 }, 0, 2);*/
+                        System.IO.FileStream f = new FileStream(filePath + ".xml", FileMode.Create, FileAccess.Write);
+                        xmlDoc.Save(f);
+                        f.Close();
+                        f.Dispose();
+                    }
                 }
+                if((logType & eLogType.MediaInfo) != 0) {
+                    string txt = (string)Info.CreateInfoLog(filePath, logType & eLogType.MediaInfo, hasher.HashAlgorithms, stream.Length);
+                    if(logStream != null) {
+                        byte[] filePathBytes = System.Text.Encoding.UTF8.GetBytes(filePath);
+                        System.IO.File.WriteAllText(filePath + ".txt", txt);
+                    }
+                }
+
+#if(HasAcreq) //If you get an error below: Scroll to the top of the page and comment #define HasAcreq out
+                //if(username != null && password != null) ACreq.DoACreq("avdump2lib", "1", port, username, password, xmlDoc, 1);
+#endif
             } else {
                 //TODO
             }
@@ -182,15 +217,18 @@ namespace AVDump2CL {
                 doneListContent.Add(filePath);
             }
 
-            if(hasher.HashStringDict.ContainsKey("ed2k")) {
+            if(hasher.Hashes.ContainsKey("ed2k")) {
                 if(ed2kListStream != null) {
-                    byte[] ed2kBytes = System.Text.Encoding.UTF8.GetBytes(hasher.HashStringDict["ed2k"] + '\n');
-                    ed2kListStream.Write(ed2kBytes, 0, ed2kBytes.Length);
+                    byte[] blueEd2kHash = hasher.HashAlgorithms[1].AltHash; //Handle Ed2k screwup
+                    byte[] redEd2kHash = hasher.Hashes["ed2k"];
+
+                    //System.Text.Encoding.UTF8.GetBytes
+                    //ed2kListStream.Write(ed2kBytes, 0, ed2kBytes.Length);
                 }
 
-                if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine("Ed2k: " + hasher.HashStringDict["ed2k"]);
-                if((switches & eSwitches.PrintAniDBLink) != 0) Console.WriteLine(String.Format(gotoLink, stream.Length, hasher.HashStringDict["ed2k"]));
-                if((switches & eSwitches.GotoAniDBLink) != 0) Process.Start(String.Format(gotoLink, stream.Length, hasher.HashStringDict["ed2k"]));
+                if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine("Ed2k: " +  BaseConverter.ToString(hasher.Hashes["ed2k"], 16));
+                if((switches & eSwitches.PrintAniDBLink) != 0) Console.WriteLine(String.Format(gotoLink, stream.Length, hasher.Hashes["ed2k"]));
+                if((switches & eSwitches.GotoAniDBLink) != 0) Process.Start(String.Format(gotoLink, stream.Length, hasher.Hashes["ed2k"]));
             }
 
             stream.Dispose();
@@ -206,28 +244,34 @@ namespace AVDump2CL {
         }
 
         private static eLogType ToLogFormatSwitch(eSwitches sw) {
+            eLogType logTypes = 0;
+
             switch(sw) {
                 case eSwitches.ShortOutput:
-                    return 0;
+                    break;
                 case eSwitches.ListCodecs:
-                    return 0;
+                    break;
                 case eSwitches.OldXmlFormat:
-                    return 0;
+                    break;
+                case eSwitches.MediaInfoOutPut:
+                    logTypes |= eLogType.MediaInfo;
+                    return eLogType.MediaInfo;
                 case eSwitches.CreqCmlFormat:
-                    return eLogType.AVDump;
+                    logTypes |= eLogType.AVDump;
+                    break;
                 case eSwitches.NoDataOutput:
-                    return 0;
+                    break;
             }
-            return 0;
+            return logTypes | eLogType.MediaInfo | eLogType.AVDump;
         }
 
         private static void DisplayHashBuffer(Hasher hasher) {
-            Console.WriteLine("*: Buffersize available for hashalgorithm blocksize: " + blockSize + "  kb blockCount: " + blockCount);
+            Console.WriteLine("*: Buffersize available for hashalgorithm blocksize: " + blockSize + "kb blockCount: " + blockCount);
 
             DateTime startTime = DateTime.Now;
             int cursorPos = Console.CursorTop;
             long fileSize = hasher.Buffer.BaseStream.Length;
-            Average[] mean = new Average[hasher.Hashes.Count];
+            Average[] mean = new Average[hasher.HashAlgorithms.Count];
             double bufferSize = 0; int charCount = 0; long bytesProcessed = 0; int timeElapsed;
 
             for(int i = 0;i < mean.Length;i++) mean[i] = new Average();
@@ -238,7 +282,7 @@ namespace AVDump2CL {
                 Console.CursorTop = cursorPos;
                 Console.CursorLeft = 0;
                 bytesProcessed = 0;
-                foreach(Hash hash in hasher.Hashes) {
+                foreach(HashContainer hash in hasher.HashAlgorithms) {
                     mean[hash.ReaderID].Add(hasher.Buffer.Count(hash.ReaderID));
                     bufferSize = mean[hash.ReaderID].Calc(5);
                     if(bytesProcessed > hash.BytesProcessed || bytesProcessed == 0) bytesProcessed = hash.BytesProcessed;
@@ -255,9 +299,9 @@ namespace AVDump2CL {
 
                 timeElapsed = (int)(DateTime.Now - startTime).TotalMilliseconds;
                 Console.Write("\n" +
-                  "Position: " + ((double)bytesProcessed / (1 << 20)).ToString("0 MB") + "/" + ((double)fileSize / (1 << 20)).ToString("0 MB") + "  " +
+                  "Position: " + ((double)bytesProcessed / (1 << 20)).ToString("0MB") + "/" + ((double)fileSize / (1 << 20)).ToString("0MB") + "  " +
                   "Elapsed time: " + (timeElapsed / 1000d).ToString("0.0").PadLeft(3) + "s  " +
-                  "Speed: " + (((double)bytesProcessed / (1 << 20)) / (timeElapsed / 1000d)).ToString("0.00 MB/s") +
+                  "Speed: " + (((double)bytesProcessed / (1 << 20)) / (timeElapsed / 1000d)).ToString("0.00MB/s") +
                   "".PadLeft(80 - Console.CursorLeft)
                 );
             }
@@ -392,7 +436,8 @@ press any key to exit";
         ListCodecs = 1L << 1,
         OldXmlFormat = 1L << 2,
         CreqCmlFormat = 1L << 3,
-        NoDataOutput = 1L << 4,
+        MediaInfoOutPut = 1L << 4,
+        NoDataOutput = 1L << 5,
 
         //Control
         ExcludeSubFolders = 1L << 16,
