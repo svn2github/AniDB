@@ -1,5 +1,9 @@
 ﻿(C) 2009 by kucing
-Version: α (18.8.2009)
+Version: α (20.8.2009)
 
 MyList.xml + sample C# source code for your own open source application.
-Alpha version. Expect bugs. PM kucing for bugs report.
+
+Based on AniDB Template SDK 0.13.4.
+Includes undocumented fields. Excludes deprecated fields.
+Alpha version. Expect bugs. PM kucing for bugs report, etc.
+If you made an application that use this template, please share your source code.

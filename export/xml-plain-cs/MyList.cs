@@ -124,10 +124,9 @@ namespace Kucing.AniDB.MyList
 
         public override string ToString()
         {
-            return /*this.UserId + "\t" +*/ this.Name;
+            return this.Name;
         }
     }
-
 
     [Serializable]
     public class GenreN
@@ -158,83 +157,170 @@ namespace Kucing.AniDB.MyList
     [Serializable]
     public class Anime
     {
+        [XmlAttribute]
         public int Id;
+        [XmlAttribute]
         public int Eps;
+        [XmlAttribute]
         public int EpsSpecial;
-        public int EpsTotal { get { return this.Eps + this.EpsSpecial; } }
+        [XmlAttribute]
+        public int EpsTotal;
+        [XmlAttribute]
         public int YearStart, YearEnd;
         public string Year { get { return this.YearStart.ToString() + (this.YearStart == this.YearEnd ? "" : "-" + this.YearEnd); } }
 
+        [XmlAttribute]
         public string Url;
+        [XmlAttribute]
         public string Other;
+        [XmlAttribute]
         public DateTime Date;
-
-        protected long FUpdate;
-        public long Update { get { return this.FUpdate; } set { this.FUpdate = value; if (value != 0) this.UpdateDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(value); } }
+        protected int FUpdate;
+        [XmlAttribute]
+        public int Update { get { return this.FUpdate; } set { this.FUpdate = value; if (value != 0) this.UpdateDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(value); } }
+        [XmlAttribute]
         public DateTime UpdateDate;
-        public string UpdateShort;
+        [XmlAttribute]
         public DateTime StartDate;
-
-        public DateTime? EndDate;
-
+        [XmlAttribute]
+        public DateTime EndDate;
+        [XmlAttribute]
         public float Rating;
+        [XmlAttribute]
         public int Votes;
+        [XmlAttribute]
         public float TmpRating;
+        [XmlAttribute]
         public int TmpVotes;
+        [XmlAttribute]
         public float ReviewRating;
+        [XmlAttribute]
         public int ReviewVotes;
+        [XmlAttribute]
         public int TypeId;
+        [XmlAttribute]
         public string TypeName;
-
+        [XmlAttribute]
+        public int AnimeNfoId;
+        [XmlAttribute]
+        public string AnimeNfoId2;
+        [XmlAttribute]
+        public string AnimeNfoUrl;
+        [XmlAttribute]
+        public string AnimeNfoUrlName;
+        [XmlAttribute]
+        public int AnnId;
+        [XmlAttribute]
+        public bool AnnListed;
+        [XmlAttribute]
+        public string AnnUrl;
+        [XmlAttribute]
+        public int AllCinemaId;
+        [XmlAttribute]
+        public bool AllCinemaListed;
+        [XmlAttribute]
+        public string AllCinemaUrl;
+        [XmlAttribute]
+        public int AnimePlanetId;
+        [XmlAttribute]
+        public bool AnimePlanetListed;
+        [XmlAttribute]
+        public string AnimePlanetUrl;
+        [XmlAttribute]
+        public bool IsRestricted;
+        [XmlAttribute]
         public int MyEps;
+        [XmlAttribute]
         public int MyEpsSpecial;
-        public int MyEpsTotal { get { return this.MyEps + this.MyEpsSpecial; } }
+        [XmlAttribute]
+        public int MyEpsTotal;
+        [XmlAttribute]
         public int MyWatchedEps;
+        [XmlAttribute]
         public int MyWatchedEpsSpecial;
-        public int MyWatchedEpsTotal { get { return this.MyWatchedEps + this.MyWatchedEpsSpecial; } }
+        [XmlAttribute]
+        public int MyWatchedEpsTotal;
+        [XmlAttribute]
         public int MyUnwatchedEps;
+        [XmlAttribute]
         public int MyUnwatchedEpsSpecial;
-        public int MyUnwatchedEpsTotal { get { return this.MyUnwatchedEps + this.MyUnwatchedEpsSpecial; } }
+        [XmlAttribute]
+        public int MyUnwatchedEpsTotal;
+        [XmlAttribute]
         public long MySize;
         public string MySizeH { get { return MyList.ToHuman(this.MySize); } }
+        [XmlAttribute]
         public bool IsComplete;
+        [XmlAttribute]
         public bool IsWatched;
-
+        [XmlAttribute]
         public string Name;
+        [XmlAttribute]
+        public int NameLangId;
+        [XmlAttribute]
         public string NameLangName;
+        [XmlAttribute]
         public string NameLangSName;
+        [XmlAttribute]
         public string TitleJapKanji;
-        public bool TitleHasJapKanji { get { return !string.IsNullOrEmpty(this.TitleJapKanji); } }
+        [XmlAttribute]
+        public bool TitleHasJapKanji;
+        [XmlAttribute]
         public string TitleEng;
-        public bool TitleHasEng { get { return !string.IsNullOrEmpty(this.TitleEng); } }
+        [XmlAttribute]
+        public bool TitleHasEng;
+        [XmlAttribute]
         public string TitleOther;
-        public bool TitleHasOther { get { return !string.IsNullOrEmpty(this.TitleOther); } }
-
+        [XmlAttribute]
+        public bool TitleHasOther;
+        [XmlAttribute]
         public bool HasAwards;
+        [XmlAttribute]
         public string AwardIcons;
-
+        [XmlAttribute]
         public int MyState;
+        [XmlAttribute]
         public string MyStateString;
+        [XmlAttribute]
         public string MyStateIcon;
+        [XmlAttribute]
         public bool MyStateUndef;
+        [XmlAttribute]
         public bool MyStateUnknown;
+        [XmlAttribute]
         public bool MyStateOnHdd;
+        [XmlAttribute]
         public bool MyStateOnCD;
+        [XmlAttribute]
         public bool MyStateDeleted;
-
+        [XmlAttribute]
+        public bool MyStateRelease;
+        [XmlAttribute]
+        public bool MyStateShared;
+        [XmlAttribute]
         public bool IsInWishList;
-        public int? WishListType;
+        [XmlAttribute]
+        public int WishListType;
+        [XmlAttribute]
         public string WishListTypeName;
-        public int? WishListPriority;
+        [XmlAttribute]
+        public int WishListPriority;
+        [XmlAttribute]
         public string WishListPriorityName;
+        [XmlAttribute]
         public string WishListComment;
+        [XmlAttribute]
         public bool MyIsVoted;
-        public float? MyVote;
-        public DateTime? MyVoteDate;
-
+        [XmlAttribute]
+        public float MyVote;
+        [XmlAttribute]
+        public DateTime MyVoteDate;
+        [XmlAttribute]
         public bool MyIsTmpVoted;
-        public float? MyTmpVote;
-        public DateTime? MyTmpVoteDate;
+        [XmlAttribute]
+        public float MyTmpVote;
+        [XmlAttribute]
+        public DateTime MyTmpVoteDate;
 
         [XmlElement("GenreN")]
         public List<AnimeGenreN> Categories;
@@ -244,239 +330,20 @@ namespace Kucing.AniDB.MyList
         public List<Company> Companies;
         [XmlElement("Group")]
         public List<Group> Groups;
+        [XmlElement("Title")]
+        public List<AnimeTitle> Titles;
+        [XmlElement("AwardType")]
+        public List<AwardType> AwardTypes;
+        [XmlElement("Award")]
+        public List<Award> Awards;
         [XmlElement("Ep")]
         public List<Ep> Episodes;
 
-
         public override string ToString()
         {
-            return /*this.Id + "\t" +*/ this.Name;
+            return this.Name;
         }
     }
-    /*[XmlElement("AnimeID")]
-    public int ID;
-    public string Name;
-    public string NameKanji;
-    public string NameEnglish;
-    [XmlElement("Year")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _Year;
-    public int YearStart { get { return int.Parse(_Year.Value.Substring(0, 4)); ; } }
-    public int YearEnd
-    {
-        get
-        {
-            if (_Year.Value.Length == 4)
-                return int.Parse(_Year.Value.Substring(0, 4));
-            else if (_Year.Value.Length == 9)
-                return int.Parse(_Year.Value.Substring(5, 4));
-            else
-                throw new Exception("Anime.Year = " + _Year.Value);
-        }
-    }
-    [XmlElement("URL")]
-    public string Url;
-    [XmlElement("AnimeDescription")]
-    public string Description;
-    [XmlElement("Date")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _Date;
-    public DateTime Date { get { return MyAnimeList.ParseDate(_Date); } }
-    public string Update; // TODO Update
-    [XmlElement("StartDate")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _StartDate;
-    public DateTime StartDate { get { return MyAnimeList.ParseDate(_StartDate); } }
-    [XmlElement("EndDate")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _EndDate;
-    public DateTime EndDate { get { return MyAnimeList.ParseDate(_EndDate); } }
-    [XmlElement("Rating")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _Rating;
-    public double Rating { get { return MyAnimeList.ParseNaN(_Rating); } }
-    public int Votes;
-    [XmlElement("TempRating")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _TempRating;
-    public double TempRating { get { return MyAnimeList.ParseNaN(_TempRating); } }
-    public int TempVotes;
-    [XmlElement("ReviewRating")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _ReviewRating;
-    public double ReviewRating { get { return MyAnimeList.ParseNaN(_ReviewRating); } }
-    public int Reviews;
-    public Xml_CDataSection MyVote; // TODO MyVote
-    public Xml_CDataSection MyVoteDate; // TODO MyVoteDate
-    public Xml_CDataSection MyTempVote; // TODO MyTempVote
-    public Xml_CDataSection MyTempVoteDate; // TODO MyTempVoteDate
-    public int TypeID;
-    public string TypeName;
-    public int NFOID;
-    public string NFOID2;
-    public string NFOURL;
-    public string NFOURLName;
-    public int ANNID;
-    public string ANNURL;
-    public int AllCinemaID;
-    public string AllCinemaURL;
-    public Xml_CDataSection AnimePlanetURL; // TODO AnimePlanetURL
-    public int Eps;
-    public int EpsSpecial;
-    public int EpsTotal;
-    public int MyEps;
-    public int MyEpsSpecial;
-    public int MyEpsTotal;
-    public int WatchedEps;
-    public int WatchedSpecial;
-    public int WatchedTotal;
-    public int UnWatchedEps;
-    public int UnWatchedSpecial;
-    public int UnWatchedTotal;
-    [XmlElement("ByteCount")]
-    /*[JsonExIgnore]* /
-    public Xml_CDataSection _ByteCount;
-    public long ByteCount { get { return MyAnimeList.ParseLong(_ByteCount); } }
-    public Xml_CDataSection MyWishlistType; // TODO MyWishlist*
-    public Xml_CDataSection MyWishlistTypeName; // TODO MyWishlistTypeName
-    public Xml_CDataSection MyWishlistPriority; // TODO MyWishlistPriority
-    public Xml_CDataSection MyWishlistPriorityName; // TODO MyWishlistPriorityName
-    public Xml_CDataSection MyWishlistComment; // TODO MyWishlistComment
-    public bool Hentai;
-
-    public List<Episode> Episodes;
-
-    public override string ToString() { return this.Name; }
-    }
-
-    [Serializable]
-    public class Episode // TODO Episode
-    {
-    public int AnimeID;
-    [XmlElement("EpID")]
-    public int ID;
-    public string EpNo;
-    public string EpName;
-    public string EpNameRomaji;
-    public string EpNameKanji;
-    public int EpLength;
-    //public string EpAired><![CDATA[25.11.2004 00:00]]></EpAired>
-    //public string EpDate><![CDATA[12.09.2004 18:53]]></EpDate>
-    //public string EpUpdate><![CDATA[09.06.2005 13:25]]></EpUpdate>
-    //public string EpOther><![CDATA[]]></EpOther>
-    //public string EpState><![CDATA[0]]></EpState>
-    public bool EpStateSpecial;
-    public bool EpStateRecap;
-    public bool EpStateOp;
-    public bool EpStateEnd;
-    //public string EpRating><![CDATA[5.25]]></EpRating>
-    public int EpVotes;
-    //public string EpMyVote><![CDATA[-]]></EpMyVote>
-    //public string EpMyVoteDate><![CDATA[-]]></EpMyVoteDate>
-    //public string MyEpWatched><![CDATA[]]></MyEpWatched>
-    //public string MyEpState><![CDATA[2]]></MyEpState>
-    public string MyEpStateString;
-    public string MyEpStateIcon;
-
-    public Anime Anime;
-    public List<File> Files;
-
-    public override string ToString() { return this.EpName; }
-    }
-
-    [Serializable]
-    public class File
-    {
-    public int AnimeID;
-    public int EpID;
-    [XmlElement("FID")]
-    public int ID;
-    public long Size;
-    public int Length;
-    public bool Generic;
-    public string FileType;
-    public string CRC;
-    public string MD5;
-    public string SHA1;
-    public string TTH;
-    public string ed2kName;
-    public string ed2kHash;
-    public string ed2kLink;
-    public int GID;
-    public string GName;
-    public string GShortName;
-    //public string ReleaseDate><![CDATA[-]]></ReleaseDate>
-    //public string QualityID><![CDATA[5]]></QualityID>
-    //public string QualityName><![CDATA[low]]></QualityName>
-    //public string ResName><![CDATA[352x240]]></ResName>
-    //public string FileType><![CDATA[10]]></FileType>
-    //public string VCount><![CDATA[1]]></VCount>
-    //public string VAspectRatio><![CDATA[10]]></VAspectRatio>
-    //public string VAspectRatioName><![CDATA[4:3]]></VAspectRatioName>
-    //public string VFPS><![CDATA[29970]]></VFPS>
-    //public string VFlags><![CDATA[0]]></VFlags>
-    //public string VBitRate><![CDATA[582]]></VBitRate>
-    //public string VCodecID><![CDATA[3]]></VCodecID>
-    //public string VCodecName><![CDATA[DivX3]]></VCodecName>
-    //public string ACount><![CDATA[1]]></ACount>
-    //public string ABitRate><![CDATA[96]]></ABitRate>
-    //public string ACodecID><![CDATA[5]]></ACodecID>
-    //public string ACodecName><![CDATA[MP3 CBR]]></ACodecName>
-    //public string AChanType><![CDATA[20]]></AChanType>
-    //public string AChanTypeName><![CDATA[2.0]]></AChanTypeName>
-    //public string ALangID><![CDATA[2]]></ALangID>
-    //public string ALangName><![CDATA[japanese]]></ALangName>
-    //public string AType><![CDATA[10]]></AType>
-    //public string ATypeName><![CDATA[normal]]></ATypeName>
-    //public string ABitRate2><![CDATA[0]]></ABitRate2>
-    //public string ACodecID2><![CDATA[0]]></ACodecID2>
-    //public string ACodecName2><![CDATA[]]></ACodecName2>
-    //public string AChanType2><![CDATA[0]]></AChanType2>
-    //public string AChanTypeName2><![CDATA[]]></AChanTypeName2>
-    //public string ALangID2><![CDATA[0]]></ALangID2>
-    //public string ALangName2><![CDATA[]]></ALangName2>
-    //public string AType2><![CDATA[0]]></AType2>
-    //public string ATypeName2><![CDATA[]]></ATypeName2>
-    //public string SubCount><![CDATA[1]]></SubCount>
-    //public string SubID><![CDATA[4]]></SubID>
-    //public string SubName><![CDATA[english]]></SubName>
-    //public string SubFlags><![CDATA[0]]></SubFlags>
-    //public string SubType><![CDATA[10]]></SubType>
-    //public string SubTypeName><![CDATA[hard]]></SubTypeName>
-    //public string SubID2><![CDATA[0]]></SubID2>
-    //public string SubName2><![CDATA[]]></SubName2>
-    //public string SubFlags2><![CDATA[0]]></SubFlags2>
-    //public string SubType2><![CDATA[0]]></SubType2>
-    //public string SubTypeName2><![CDATA[]]></SubTypeName2>
-    //public string TypeID><![CDATA[4]]></TypeID>
-    //public string TypeName><![CDATA[VHS]]></TypeName>
-    //public string Other><![CDATA[]]></Other>
-    //public string HasComment><![CDATA[0]]></HasComment>
-    //public string Date><![CDATA[09.09.2004 11:15]]></Date>
-    //public string Update><![CDATA[26.12.2007 19:28]]></Update>
-    //public string Storage><![CDATA[]]></Storage>
-    //public string Source><![CDATA[]]></Source>
-    //public string ListDate><![CDATA[12.04.2008 06:05]]></ListDate>
-    //public string ViewDate><![CDATA[12.04.2008 06:05]]></ViewDate>
-    //public string State><![CDATA[0]]></State>
-    //public string StateCRCOK><![CDATA[0]]></StateCRCOK>
-    //public string StateCRCFailed><![CDATA[0]]></StateCRCFailed>
-    //public string StateCRCUnverified><![CDATA[1]]></StateCRCUnverified>
-    //public string VersionName><![CDATA[v1]]></VersionName>
-    //public string MyWatched><![CDATA[1]]></MyWatched>
-    //public string MyState><![CDATA[2]]></MyState>
-    //public string MyStateString><![CDATA[external storage (cd/dvd/...)]]></MyStateString>
-    //public string MyStateIcon><![CDATA[<a class="i_icon i_state_oncd" title="File with status: external storage (cd/dvd/...)" href="http://wiki.anidb.net/w/Filestates" rel="anidb::wiki"><span>SE</span></a>]]></MyStateIcon>
-    //public string MyFileState><![CDATA[0]]></MyFileState>
-    //public string MyFileStateString><![CDATA[]]></MyFileStateString>
-    //public string MyFileStateIcon><![CDATA[]]></MyFileStateIcon>
-
-    public Anime Anime;
-    public Episode Episode;
-
-    public override string ToString() { return this.ed2kName; }
-    }*.
-    }*/
 
     [Serializable]
     public class Tag
@@ -485,9 +352,9 @@ namespace Kucing.AniDB.MyList
         public int Id;
         [XmlAttribute]
         public string Name;
-        private long FDateUnix;
+        private int FDateUnix;
         [XmlAttribute("Date")]
-        public long DateUnix { get { return this.FDateUnix; } set { this.FDateUnix = value; if (value != 0) this.Date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(value); } }
+        public int DateUnix { get { return this.FDateUnix; } set { this.FDateUnix = value; if (value != 0) this.Date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(value); } }
         [XmlIgnore]
         public DateTime Date;
 
@@ -564,14 +431,55 @@ namespace Kucing.AniDB.MyList
     }
 
     [Serializable]
-    public class XLang
+    public class EpTitle
+    {
+        [XmlAttribute]
+        public string Name;
+        [XmlAttribute]
+        public int LangId;
+        [XmlAttribute]
+        public string LangName;
+        [XmlAttribute]
+        public string LangSName;
+
+        public override string ToString() { return this.Name; }
+    }
+
+    [Serializable]
+    public class AnimeTitle : EpTitle
+    {
+        [XmlAttribute]
+        public int TypeId;
+        [XmlAttribute]
+        public string TypeString;
+    }
+
+    [Serializable]
+    public class AwardType
     {
         [XmlAttribute]
         public int Id;
         [XmlAttribute]
         public string Name;
         [XmlAttribute]
-        public string SName;
+        public string Img;
+
+        public override string ToString() { return this.Name; }
+    }
+
+    [Serializable]
+    public class Award
+    {
+        [XmlAttribute]
+        public int Id;
+        [XmlAttribute]
+        public string Name;
+        [XmlAttribute]
+        public string Type;
+        [XmlAttribute]
+        public string Url;
+        [XmlAttribute]
+        public string PicUrl;
 
         public override string ToString() { return this.Name; }
     }
@@ -599,7 +507,7 @@ namespace Kucing.AniDB.MyList
         public int Length;
         [XmlAttribute]
         public DateTime Aired;
-        
+
         public string Other;
         [XmlAttribute]
         public float Rating;
@@ -631,7 +539,8 @@ namespace Kucing.AniDB.MyList
         public int MyState;
         [XmlAttribute]
         public string MyStateString;
-        /*[XmlAttribute] public string MyStateIcon;*/
+        [XmlAttribute]
+        public string MyStateIcon;
         [XmlAttribute]
         public bool MyStateUndef;
         [XmlAttribute]
@@ -649,6 +558,8 @@ namespace Kucing.AniDB.MyList
         [XmlAttribute]
         public bool MyStateHanger;
 
+        [XmlElement("Title")]
+        public List<EpTitle> Titles;
         [XmlElement("File")]
         public List<File> Files;
         [XmlElement("FileEpRel")]
@@ -658,53 +569,16 @@ namespace Kucing.AniDB.MyList
     }
 
     [Serializable]
-    public class File
+    public class XLang
     {
+        [XmlAttribute]
         public int Id;
-        public long Size;
-        public string SizeH { get { return MyList.ToHuman(this.Size); } }
-        public bool IsGeneric;
-        public string FileType;
-        public string Crc;
-        public string Md5;
-        public string Sha1;
-        public string Tth;
-        public string Ed2kLink;
-        public string Ed2kHash;
-        public string Ed2kName;
-        public int GroupId;
-        public string GroupName;
-        public string GroupShortName;
-        public DateTime ReleaseD;
-        public int QualId;
-        public string QualName;
-        public string ResName;
-        public int VidCnt;
-        public int AR;
-        public string ARName;
-        public int Fps;
-        public int VBitRate;
-        public int VCodecId;
-        public string VCodecName;
-        public int VFlags;
-
-        [XmlElement("FileRel")]
-        public List<FileRel> FileFileRelations;
-
-        public override string ToString() { return this.Ed2kName; }
-    }
-
-    [Serializable]
-    public class FileRel
-    {
         [XmlAttribute]
-        public int FId;
+        public string Name;
         [XmlAttribute]
-        public int OtherFId;
-        [XmlAttribute]
-        public string Type;
+        public string SName;
 
-        public override string ToString() { return this.FId + " " + this.Type + " " + this.OtherFId; }
+        public override string ToString() { return this.Name; }
     }
 
     [Serializable]
@@ -718,5 +592,203 @@ namespace Kucing.AniDB.MyList
         public int StartP;
         [XmlAttribute]
         public int EndP;
+    }
+
+    [Serializable]
+    public class File
+    {
+        [XmlAttribute]
+        public int Id;
+        [XmlAttribute]
+        public int LId;
+        [XmlAttribute]
+        public long SizePlain;
+        public string SizeH { get { return MyList.ToHuman(this.SizePlain); } }
+        [XmlAttribute]
+        public bool IsGeneric;
+        [XmlAttribute]
+        public string FileType;
+        [XmlAttribute]
+        public string Crc;
+        [XmlAttribute]
+        public string Md5;
+        [XmlAttribute]
+        public string Sha1;
+        [XmlAttribute]
+        public string Tth;
+        [XmlAttribute]
+        public string Ed2kLink;
+        [XmlAttribute]
+        public string Ed2kHash;
+        [XmlAttribute]
+        public string Ed2kName;
+        [XmlAttribute]
+        public int GroupId;
+        [XmlAttribute]
+        public string GroupName;
+        [XmlAttribute]
+        public string GroupShortName;
+        [XmlAttribute]
+        public DateTime ReleaseD;
+        [XmlAttribute]
+        public int QualId;
+        [XmlAttribute]
+        public string QualName;
+        [XmlAttribute]
+        public string ResName;
+        [XmlAttribute]
+        public int VidCnt;
+        [XmlElement("Video")]
+        public List<Video> Videos;
+        [XmlAttribute]
+        public int AudCnt;
+        [XmlElement("Audio")]
+        public List<Audio> Audios;
+        [XmlAttribute]
+        public int SubCnt;
+        [XmlElement("Sub")]
+        public List<Sub> Subs;
+        [XmlAttribute] public int Length;
+        [XmlAttribute]
+        public int Type;
+        [XmlAttribute]
+        public string TypeName;
+        [XmlAttribute]
+        public int SourceId;
+        [XmlAttribute]
+        public string SourceName;
+        [XmlAttribute] public DateTime LDate;
+        [XmlAttribute] public DateTime Date;
+        [XmlAttribute]
+        public DateTime Update;
+        [XmlAttribute] public string Storage;
+        [XmlAttribute] public string Source;
+        [XmlAttribute] public bool HasComment;
+        [XmlAttribute] public string Other;
+        [XmlAttribute] public DateTime ViewDate;
+        [XmlAttribute] public int State;
+        [XmlAttribute]
+        public bool StateCrcOk;
+        [XmlAttribute] public bool StateCrcFailed;
+        [XmlAttribute] public bool StateCrcUnverified;
+        [XmlAttribute] public bool StateIsV2;
+        [XmlAttribute] public bool StateIsV3;
+        [XmlAttribute] public bool StateIsV4;
+        [XmlAttribute] public bool StateIsV5;
+        [XmlAttribute] public bool IsWathed;
+        [XmlAttribute] public string StateVersionName;
+        [XmlAttribute]
+        public string MyOther;
+        [XmlAttribute]
+        public int MyState;
+        [XmlAttribute]
+        public string MyStateString;
+        [XmlAttribute] public string MyStateIcon;
+        [XmlAttribute] public bool MyStateUnknown;
+        [XmlAttribute] public bool MyStateOnHdd;
+        [XmlAttribute] public bool MyStateOnCD;
+        [XmlAttribute] public bool MyStateDeleted;
+        [XmlAttribute] public int MyFileState;
+        [XmlAttribute] public string MyFileStateString;
+        [XmlAttribute] public string MyFileStateIcon;
+        [XmlAttribute]
+        public bool MyFileStateNormal;
+        [XmlAttribute] public bool MyFileStateInvalidCrc;
+        [XmlAttribute] public bool MyFileStateSelfEdited;
+        [XmlAttribute] public bool MyFileStateSelfRipped;
+        [XmlAttribute] public bool MyFileStateOnDvd;
+        [XmlAttribute] public bool MyFileStateOnVhs;
+        [XmlAttribute] public bool MyFileStateOnTV;
+        [XmlAttribute] public bool MyFileStateTheater;
+        [XmlAttribute] public bool MyFileStateOther;
+        [XmlAttribute] public bool MyFileStateRelease;
+        [XmlAttribute]
+        public bool MyFileStateShared;
+
+
+        [XmlElement("FileRel")]
+        public List<FileRel> FileFileRelations;
+
+        public override string ToString() { return this.Ed2kName; }
+    }
+
+    [Serializable]
+    public class Video
+    {
+        [XmlAttribute]
+        public int AR;
+        [XmlAttribute]
+        public string ARName;
+        [XmlAttribute]
+        public float Fps;
+        [XmlAttribute]
+        public int BitRate;
+        [XmlAttribute]
+        public int CodecId;
+        [XmlAttribute]
+        public string CodecName;
+        [XmlAttribute]
+        public int Flags;
+
+        public override string ToString() { return this.CodecName; }
+    }
+
+    [Serializable]
+    public class Audio
+    {
+        [XmlAttribute]
+        public int Type;
+        [XmlAttribute]
+        public string TypeName;
+        [XmlAttribute]
+        public int BitRate;
+        [XmlAttribute]
+        public int CodecId;
+        [XmlAttribute]
+        public string CodecName;
+        [XmlAttribute]
+        public int ChanType;
+        [XmlAttribute]
+        public string ChanTypeName;
+        [XmlAttribute]
+        public int LangId;
+        [XmlAttribute]
+        public string LangName;
+        [XmlAttribute]
+        public string LangSName;
+
+        public override string ToString() { return this.LangName; }
+    }
+
+    [Serializable]
+    public class Sub
+    {
+        [XmlAttribute]
+        public int Flags;
+        [XmlAttribute]
+        public int Type;
+        [XmlAttribute]
+        public string TypeName;
+        [XmlAttribute]
+        public int SubId;
+        [XmlAttribute]
+        public string SubName;
+        [XmlAttribute]
+        public string SubSName;
+
+        public override string ToString() { return this.SubName; }
+    }
+
+    [Serializable]
+    public class FileRel
+    {
+        [XmlAttribute]
+        public int FId;
+        [XmlAttribute]
+        public int OtherFId;
+        [XmlAttribute]
+        public string Type;
+
+        public override string ToString() { return this.FId + " " + this.Type + " " + this.OtherFId; }
     }
 }
