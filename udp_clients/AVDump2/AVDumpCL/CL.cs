@@ -95,15 +95,6 @@ namespace AVDump2CL {
         }
 
         static void Main(string[] args) {
-
-            /*System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
-            xmlDoc.Load("log.xml");
-            username = "alpha";
-            password = "test";*/
-            //if(username != null && password != null) ACreq.DoACreq("avdump2lib", "1", port, username, password, xmlDoc, 1);
-
-			args = new string[] { @"G:\Anime\[Done]Koukaku Kidoutai\[THORA] Koukaku Kidoutai Stand Alone Complex the Laughing Man - Complete Movie.mkv", "-pye1", "-log:log.xml" };
-
             if(!ParseClOptions(args)) return;
             Console.CursorVisible = false;
 
