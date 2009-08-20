@@ -14,7 +14,7 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
-#define HasAcreq
+//#define HasAcreq
 
 using System;
 using System.Collections.Generic;
@@ -97,6 +97,19 @@ namespace AVDump2CL {
 
 
 		static void Main(string[] args) {
+			System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+			xmlDoc.Load("log.xml");
+			username = "dvdkhl";
+			password = "anime";
+			if(username != null && password != null) ACreq.DoACreq("avdumplib", "1", port, username, password, xmlDoc, 1);
+
+			while(true) {
+				Thread.Sleep(100);
+			}
+
+			args = new string[] { @"G:\Anime\[Done]Koukaku Kidoutai\[THORA] Koukaku Kidoutai Stand Alone Complex the Laughing Man - Complete Movie.mkv", "-pye1", "-log:log.xml" };
+			//args = new string[] { @"sample_for_issue_912.mpeg", "-pe1" };
+
 			if(!ParseClOptions(args)) return;
 			Console.CursorVisible = false;
 
@@ -191,7 +204,7 @@ namespace AVDump2CL {
 				}
 
 #if(HasAcreq) //If you get an error below: Scroll to the top of the page and comment #define HasAcreq out
-				//if(username != null && password != null) ACreq.DoACreq("avdump2lib", "1", port, username, password, xmlDoc, 1);
+				if(username != null && password != null) ACreq.DoACreq("avdump2lib", "1", port, username, password, xmlDoc, 1);
 #endif
 			} else {
 				//TODO
