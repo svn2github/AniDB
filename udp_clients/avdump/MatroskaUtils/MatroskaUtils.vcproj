@@ -107,7 +107,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/libebml-0.7.8&quot;;&quot;$(SolutionDir)/libmatroska-0.8.1&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/libebml&quot;;&quot;$(SolutionDir)/libmatroska&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;USING_ATT;USING_CHAPTER_DATA"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="true"
