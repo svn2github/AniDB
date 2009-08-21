@@ -15,7 +15,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "wrappers.h"
-#include "OGMInfo.h"
+#include <OGMInfo/OGMInfo.h>
 
 OGM::OGM(wchar_t *path){
 	m_p = new MyOGM(path);

@@ -17,84 +17,6 @@
 	</ToolFiles>
 	<Configurations>
 		<Configuration
-			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)avinfo/src;$(SolutionDir)MPAHeaderInfo/src"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				AdditionalIncludeDirectories=""
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="avinfod.lib libebmld.lib libmatroskad.lib liboggd.lib libvorbisd.lib MACLib.lib MatroskaUtilsd.lib MediaInfod.lib MPEGAudioInfod.lib OGMInfod.lib tinyxml.lib Winmm.lib Ws2_32.lib ZenLibd.lib zlib.lib"
-				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib"
-				GenerateDebugInformation="true"
-				SubSystem="1"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
@@ -121,8 +43,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="$(SolutionDir)avinfo/src;$(SolutionDir)MPAHeaderInfo/src"
-				PreprocessorDefinitions="WIN32;NEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)&quot;;&quot;$(SolutionDir)/avinfo/src&quot;;&quot;$(SolutionDir)/MediaInfoLib/Include&quot;;&quot;$(SolutionDir)/ZenLib/Source&quot;;&quot;$(SolutionDir)/libebml&quot;"
+				PreprocessorDefinitions="WIN32;NEBUG;_CONSOLE;ENABLE_HASH;ENABLE_AC;ENABLE_FP"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				AssemblerListingLocation=""
@@ -144,92 +66,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="$(SolutionDir)\_libs\avinfo.lib hash.lib cryptlib.lib Ws2_32.lib tinyxml.lib MPEGAudioInfo.lib libFooID.lib mpg123-0.65.lib libebml.lib"
-				OutputFile="$(OutDir)\$(ProjectName)\$(ProjectName).exe"
-				LinkIncremental="1"
-				IgnoreDefaultLibraryNames="ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib"
-				GenerateDebugInformation="false"
-				SubSystem="1"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				LinkTimeCodeGeneration="0"
-				RandomizedBaseAddress="1"
-				DataExecutionPrevention="0"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Static|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
-			CharacterSet="1"
-			WholeProgramOptimization="0"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="2"
-				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)avinfo/src&quot;;&quot;$(SolutionDir)&quot;"
-				PreprocessorDefinitions="WIN32;NEBUG;_CONSOLE;ENABLE_WXW;ENABLE_HASH;ENABLE_AC;ENABLE_FP"
-				RuntimeLibrary="0"
-				UsePrecompiledHeader="0"
-				AssemblerListingLocation=""
-				ObjectFile="$(IntDir)\"
-				ProgramDataBaseFileName="$(IntDir)\vc80.pdb"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="0"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-				AdditionalIncludeDirectories=""
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="avinfo.lib avhash.lib cryptlib.lib libFooID.lib libebml.lib libmatroska.lib MACLib.lib MediaInfo.lib MatroskaUtils.lib MPEGAudioInfo.lib mpg123-0.65.lib ogg_static.lib OGMInfo.lib shlwapi.lib tinyxml.lib vorbis_static.lib Ws2_32.lib wxbase28u.lib ZenLib.lib zlib.lib"
+				AdditionalDependencies="ws2_32.lib shlwapi.lib"
 				OutputFile="$(OutDir)\$(ProjectName)\$(ProjectName).exe"
 				Version=""
 				LinkIncremental="1"

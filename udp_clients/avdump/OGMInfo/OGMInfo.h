@@ -33,12 +33,12 @@
 #ifndef __OGMINFO_EXE_H__
 #define __OGMINFO_EXE_H__
 
-#include <Common/common.h>
-#include <Common/IOStream_File.h>
-#include <Common/Fraction.h>
+#include "Common/common.h"
+#include "Common/IOStream_File.h"
+#include "Common/Fraction.h"
 #include <ogg/ogg.h>
 #include <vorbis/codec.h>
-#include <Common/OGM.h>
+#include "Common/OGM.h"
 
 
 //#define OGMINFO_VERSION	L"2.0b4"
