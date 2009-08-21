@@ -10,7 +10,7 @@ img, a
 
 #layout-main table tr
 {
-	border: 1px solid #494947;
+	border: 1px solid #363636;
 }
 
 #layout-main table tr + tr td
@@ -27,7 +27,7 @@ img, a
 #layout-main table tr th.field,
 #layout-main table tr td.field
 {
-	border-top: 1px solid #494947;
+	border-top: 1px solid #363636;
 }
 
 #layout-main .g_description,
@@ -76,6 +76,7 @@ img, a
 	border: 2px ridge #dddddd;
 }
 
+#layout-search div.search,
 #layout-main div.tabbed_pane ul.tabs li,
 #tooltip span.top,
 #tooltip span.bottom,
@@ -94,20 +95,12 @@ img, a
 	-webkit-border-bottom-right-radius:0;
 }
 
-#layout-menu
-{
-	-moz-border-radius-topright:0;
-	-webkit-border-top-right-radius:0;
-}
-
 #layout-main div.tabbed_pane div.body,
 #layout-main div.animeatt_all div.bar h4,
 #layout-main div.animeatt_all div.bar ul,
-#layout-search form select,
-#layout-search form input,
 #layout-main div.creq_all div.states dl,
-#layout-main table,
-#layout-main .g_list,
+#layout-main table,/*
+#layout-main .g_list,*/
 #layout-main div.userpage_all div.latest ul,
 #layout-main div.g_menu div h4 + ul,
 #layout-main div.g_menu div h4 + p,
@@ -115,7 +108,7 @@ img, a
 #layout-main div.tabbed_pane div.body > div,
 #layout-main div.main_all div.rightbar h4 + ol
 {
-	border: 1px solid #494947;
+	border: 1px solid #363636;
 }
 
 #layout-main div.tabbed_pane div.pane table
@@ -138,7 +131,7 @@ img, a
 #tooltip span.bottom,
 #tooltip span.middle
 {
-	border: 2pt solid #494947;
+	border: 2pt solid #363636;
 }
 
 #tooltip span.top

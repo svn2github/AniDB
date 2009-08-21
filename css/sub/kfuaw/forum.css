@@ -6,7 +6,7 @@
 #layout-main div.forum div.submit-box div.inner,
 #layout-main div.forum div.threads div.inner
 {
-	background-color: #494947;
+	background-color: #363636;
 }
 
 #layout-main div.forum div.options-box div.inner *,
@@ -63,6 +63,12 @@
 #layout-main div.forum ul.topiclist li
 {
 	color:#666666;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left-color:#363636;
+	border-right-color:#363636;
 }
 
 #layout-main div.forum ul.topics li.row:hover
