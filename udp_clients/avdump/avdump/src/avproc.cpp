@@ -144,9 +144,9 @@ int process_file(config &conf, stringstream &sst, const wchar_t *path, __int64 f
 		while( f>=0 ){
 			if(prog && calls%10==0){
 				if(care)
-					printf("\nP %05.2f%%",f);
+					wprintf(L"\nP %05.2f%%",f);
 				else
-					printf("\rP %05.2f%%",f);
+					wprintf(L"\rP %05.2f%%",f);
 			}
 			calls++;
 			f = avinfo_file_parse(id);
