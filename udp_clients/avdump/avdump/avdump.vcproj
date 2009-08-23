@@ -42,9 +42,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)&quot;;&quot;$(SolutionDir)/avinfo/src&quot;;&quot;$(SolutionDir)/MediaInfoLib/Include&quot;;&quot;$(SolutionDir)/ZenLib/Source&quot;;&quot;$(SolutionDir)/libebml&quot;"
-				PreprocessorDefinitions="WIN32;NEBUG;_CONSOLE;ENABLE_HASH;ENABLE_AC;ENABLE_FP"
+				WholeProgramOptimization="true"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)&quot;;&quot;$(SolutionDir)/avinfo/src&quot;;&quot;$(SolutionDir)/MediaInfoLib/Include&quot;;&quot;$(SolutionDir)/ZenLib/Source&quot;;&quot;$(SolutionDir)/libebml&quot;;&quot;$(SolutionDir)/wxWidgets/include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;ENABLE_WXW;ENABLE_HASH;ENABLE_AC;ENABLE_FP"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				AssemblerListingLocation=""

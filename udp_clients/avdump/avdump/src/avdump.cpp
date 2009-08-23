@@ -36,7 +36,7 @@ myHashSet *file_register;
 
 #define STR_HOST "api.anidb.net"
 #define STR_VERSION "0.34.1"
-#define STR_DATE "09XXYY"
+#define STR_DATE "090823"
 #define STR_USAGE "\
 Help:      http://wiki.anidb.info/w/Avdump\n\
 Usage:     avdump [-options] <media file/folder> [<media file/folder> ...]\n\
