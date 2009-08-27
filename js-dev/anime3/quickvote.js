@@ -10,8 +10,26 @@ jsVersionArray.push({
 	"author":"$Author$",
 	"changelog":"Initial version"
 });
+
+var sortingCols = {
+	'animelist': 	{	"name":{"type":'c_setlatin',"isDefault":true},
+						"old":{"type":'c_number'}}
+};
+var tableNames = ['animelist'];
+var skipTables = null;
  
 function prepPage() {
+	var table = document.getElementById('animelist');
+	if (!table) return;
+	var tfoot = document.createElement('tfoot');
+	tfoot.appendChild(table.tBodies[0].rows[table.tBodies[0].rows.length-1]);
+	table.appendChild(tfoot);
+	
+	initTooltips();
+	handleTables(sortingCols, tableNames, skipTables, collapseThumbnails, get_info);
+	
+	return; //noec: Previously this function was not added to the onLoad event.
+	
 	var table = getElementsByClassName(document.getElementsByTagName('table'), 'animelist', false)[0];
 	if (!table) return;
 	var tbody = table.tBodies[0];
@@ -50,4 +68,4 @@ function prepPage() {
 	}
 }
 
-//addLoadEvent(prepPage);
+addLoadEvent(prepPage);
