@@ -13,7 +13,7 @@
 	<style name="aniblackle-menu">
 		<title>Aniblackle with Menu</title>
 		<creator>Der Idiot</creator>
-		<update>09.04.2009</update>
+		<update>19.08.2009</update>
 		<status>in development</status>
 		<description>Style inspired by blackle.com</description>
 		<path/>
@@ -73,7 +73,7 @@
 	<style name="anigoogle-menu">
 		<title>Anigoogle with Menu</title>
 		<creator>Der Idiot</creator>
-		<update>09.04.2009</update>
+		<update>19.08.2009</update>
 		<status>in development</status>
 		<description>Style inspired by blackle.com</description>
 		<path/>
@@ -123,12 +123,22 @@
 	<style name="grey">
 		<title>Grey</title>
 		<creator>zeromind</creator>
-		<update>12.07.2008</update>
+		<update>11.05.2009</update>
 		<status>In development</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
 		<screenshot>grey/images/screenshot.png</screenshot>
 		<thumbnail>grey/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="grey_r2">
+		<title>grey r2</title>
+		<creator>zeromind</creator>
+		<update>13.05.2009</update>
+		<status>In development</status>
+		<description>It's grey, and stuff. Requires at least Firefox 3.5 (or any other browser that supports hsla color definitions) to look properly.</description>
+		<path/>
+		<screenshot>grey_r2/images/screenshot.png</screenshot>
+		<thumbnail>grey_r2/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="haruhistylex">
 		<title>HaruhiStyleX.AniDB</title>
@@ -255,6 +265,16 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<screenshot>sub-brown2/images/screenshot.png</screenshot>
 		<thumbnail>sub-brown2/images/thumbnail.png</thumbnail>
 	</style>
+	<style name="sub-kfuaw">
+		<title>sub-kfuaw</title>
+		<creator>noec</creator>
+		<update>18.08.2009</update>
+		<status>in development</status>
+		<description>Very simple style mostly using grey colors.</description>
+		<path/>
+		<screenshot>sub-kfuaw/images/screenshot.png</screenshot>
+		<thumbnail>sub-kfuaw/images/thumbnail.png</thumbnail>
+	</style>
 	<style name="sub-norwegian-blue">
 		<title>norwegian-blue</title>
 		<creator>PetriW</creator>
@@ -268,7 +288,7 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 	<style name="sub-silver">
 		<title>sub-silver</title>
 		<creator>epoximator</creator>
-		<update/>
+		<update>20.07.2009</update>
 		<status/>
 		<description/>
 		<path/>
