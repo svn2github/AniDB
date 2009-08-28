@@ -4,7 +4,7 @@ package export_funcs;
 
 use strict;
 
-$export_funcs::VERSION = "0.04";	#18.08.2009
+$export_funcs::VERSION = "0.04";	#28.08.2009
 
 ##INIT
 ##
@@ -65,21 +65,15 @@ sub jsencodexml
 
 sub jsencodexmlcs
 {
-    my $str = shift;
-    
-    $str =~ s/\&/\&amp\;/g;
-    $str =~ s/\</\&lt\;/g;
-    $str =~ s/\>/\&gt\;/g;
-    $str =~ s/\'/\&apos\;/g;
-    $str =~ s/\"/\&quot\;/g;
-    $str =~ s/\`/\&apos\;/g;
-    $str =~ s/\[i\]/\&lt\;i\&gt\;/g;
-    $str =~ s/\[\/i\]/\&lt\;\/i\&gt\;/g;
-    $str =~ s/\[b\]/\&lt\;b\&gt\;/g;
-    $str =~ s/\[\/b\]/\&lt\;\/b\&gt\;/g;
-    $str =~ s/\[u\]/\&lt\;u\&gt\;/g;
-    $str =~ s/\[\/u\]/\&lt\;\/u\&gt\;/g;
-
+    my $str = shift;    
+	$str =~ s/\n//g;
+	$str =~ s/\r//g;
+	$str =~ s/\`/\'/g;
+	if (index($str, '&amp;' ) < 0) { $str =~ s/\&/\&amp\;/g; }
+	if (index($str, '&lt;'  ) < 0) { $str =~ s/\</\&lt\;/g; }
+	if (index($str, '&gt;'  ) < 0) { $str =~ s/\>/\&gt\;/g; }
+	if (index($str, '&apos;') < 0) { $str =~ s/\'/\&apos\;/g; }
+	if (index($str, '&quot;') < 0) { $str =~ s/\"/\&quot\;/g; }
     return $str;
 }
 
