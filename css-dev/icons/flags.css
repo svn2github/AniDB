@@ -98,6 +98,16 @@
 	background-image: url(../icons/flags/anidb_sub_spanish.gif);
 }
 
+*.i_audio_es-LA
+{
+	background-image: url(../icons/flags/anidb_audio_hispanic.gif);
+}
+
+*.i_sub_es-LA
+{
+	background-image: url(../icons/flags/anidb_sub_hispanic.gif);
+}
+
 *.i_audio_el
 {
 	background-image: url(../icons/flags/anidb_audio_greek.gif);
