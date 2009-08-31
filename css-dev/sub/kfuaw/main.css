@@ -9,9 +9,11 @@
 
 body
 {
-	padding: 3em .8em .8em .8em;
+	/*padding: 1em .8em .8em .8em;*/
 }
 
+#layout-search input.submit,
+#layout-search p,
 #layout-main div.profile_all div.pane.general div.body div.pane div ul
 {
 	padding: 0;
@@ -29,28 +31,14 @@ body
 
 #layout-hint
 {
-	left: .165em;
-	margin: .165em 0;
-	padding: .08em;
-	position:absolute;
-	right: 26em;
-	width:auto;
-	z-index:5;
+	position: relative;
 }
-/*
-#layout-menu:before
-{
-	background: #494947 url(images/osaka.png) no-repeat scroll center 2pt;
-	display: block;
-	height: 153px;
-	margin: 0 0 1em 0;
-	content:"";
-}*/
 
 #layout-menu
 {
 	padding: .8em;
 	width: 12em;
+	margin: 1em 0 0 1em;
 }
 
 #layout-menu > li + li
@@ -68,34 +56,39 @@ body
 	padding-top: 1.1em;
 }
 
-#layout-search form select,
-#layout-search form input
+#layout-search
 {
-	margin:0;
-	padding:0;
-	position: relative;
+	position: absolute;
+	top: 2em;
+	right: 0;
+	left: 100%;
 }
 
-#layout-search form select
+#layout-hint + #layout-nav #layout-search
+{
+	top: 3.5em;
+}
+
+#layout-search div.search
+{
+	/*background: #393636;*/
+	width: 33em;
+	margin: 0 0 0 -35em;
+}
+
+#layout-search div.search form
+{
+	text-align: right;
+}
+
+#layout-search input,
+#layout-search select
 {
 	width: 10em;
 }
 
-#layout-search form input
+#layout-search input.submit
 {
-	margin:0 0 0 .25em;
-	width: 12em;
-}
-
-#layout-search form input.submit
-{
-	width:2em;
-	height:2em;
-	overflow:hidden;
-	background:transparent url(images/osaka_.png) no-repeat center center;
-	border-left:none;
-	text-indent:-666em;
-	margin: 0 .333em 0 0;
 }
 
 #layout-main div.g_timedentry h4
@@ -131,24 +124,6 @@ body
 	position: static;
 }
 
-#layout-search
-{
-	position: absolute;
-	top: 0;
-	left: 0;
-	background: #393636;
-	text-align: right;
-	border-bottom:1px solid #292927;
-}
-
-#layout-search form,
-#layout-search p
-{
-	text-align: right;
-	margin: 0;
-	padding: 0;
-}
-
 #layout-tabs ul li a
 {
 	padding: .22em .9em;
@@ -167,7 +142,20 @@ body
 
 #layout-content
 {
-	margin-left: 13em;
+	margin: 0 1em 0 14em;
+}
+/*
+#layout-maine
+{
+	content: "Some silly text";
+	height: 0;
+	position: absolute;
+	top: 2em;
+}*/
+
+#layout-tabs + #layout-main:before
+{
+	content: "";
 }
 
 #layout-menu li.sub-menu,
@@ -184,13 +172,7 @@ body
 #layout-main
 {
 	margin: 0;
-	padding: .8em;
-}
-
-#layout-footer,
-#layout-footer p
-{
-	text-align: right;
+	padding: 4em .8em .8em .8em;
 }
 
 #layout-main div.g_timedentry h4,
@@ -206,7 +188,7 @@ body
 #layout-tabs
 {
 	margin: 0;
-	display: block;
+	height: 0;
 }
 
 #layout-tabs ul.main-tabs
@@ -216,15 +198,9 @@ body
 	margin: 0;
 }
 
-/*
-#layout-search .rtop,
-#layout-search .rbottom,*/
 .rtop,
 .rbottom,
-#layout-main div.main_all div.rightbar > h4/*,
-#layout-main div.main_all div.rightbar div.reviews,
-#layout-main div.main_all div.rightbar div.just_started,
-#layout-main div.main_all div.rightbar div.random*/
+#layout-main div.main_all div.rightbar > h4
 {
 	display: none;
 }
@@ -270,7 +246,6 @@ body
 	padding: 0 .16em 0 .16em;
 }
 
-#layout-search,
 #layout-main div.msg_all form,
 #layout-main div.msg_all table,
 #layout-main div.anime_all div.groups table.grouplist,
@@ -404,4 +379,43 @@ body
 #layout-main div.userpage_all div.userprefs h3
 {
 	padding: 0 2em;
+}
+
+#layout-main div.animevotes_all div.animevote_list > table
+{
+	padding: .5em;
+}
+
+#layout-main div.animevotes_all div.animevote_list > table br
+{
+	display: none;
+}
+
+#layout-main div.animevotes_all div.animevote_list > table > tbody > tr > td > table
+{
+	margin: .5em;
+}
+
+#layout-main div.animevotes_all div.animevote_list > table > tbody > tr > td > table,
+#layout-main div.animevotes_all div.animevote_list > table > tbody > tr > td
+{
+	display: inline;
+	padding: 0;
+	float:left;
+}
+
+#layout-footer p
+{
+	text-align: right;
+}
+
+#layout-footer
+{
+	text-align: right;
+	margin: 0 1em 0 0;
+}
+
+#layout-footer:after
+{
+	content: "design by noec"
 }

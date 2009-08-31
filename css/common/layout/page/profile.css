@@ -96,7 +96,7 @@
 #layout-main div.profile_all div.passwords form > div,
 #layout-main div.profile_all div.tabbed_pane div.default_languages div
 {
-	display:table-cell;
+	display:inline-table;
 }
 
 #layout-main div.profile_all div.preferences,
@@ -133,4 +133,23 @@
 {
 	padding:5px 10px 0;
 	margin:0;
+}
+
+#layout-main div.profile_all div.account tr th
+{
+	width:20em;
+	text-align: left;
+}
+
+#layout-main div.profile_all div.account tr th,
+#layout-main div.profile_all div.account tr td
+{
+	padding:4px 8px;
+}
+
+#layout-main div.profile_all div.account tr th p.note
+{
+	text-align: left;
+	display: block;
+	white-space:normal;
 }

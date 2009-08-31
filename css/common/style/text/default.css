@@ -408,3 +408,15 @@ div.quotebody div.quoteof,
 {
 	font-weight:bold;
 }
+
+
+#layout-main div.profile_all div.account tr th
+{
+	font-weight: bold;
+}
+
+#layout-main div.profile_all div.account tr th p.note
+{
+	font-style: italic;
+	font-weight: normal;
+}

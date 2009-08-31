@@ -78,11 +78,9 @@ a:hover
 #layout-main div.creq_all div.g_section.creq_stats table.stats th,
 #layout-main div.userpage_all div.g_section.latest h4,
 #layout-menu li.sub-menu,
-#layout-search form select,
-#layout-search form input,
 #layout-main div.tabbed_pane div.pane ul.tabs li,
-#layout-main div.tabbed_pane h4,
-#layout-main .g_list,
+#layout-main div.tabbed_pane h4,/*
+#layout-main .g_list,*/
 #layout-main h4,
 #layout-main table tr th.field,
 #layout-main table tr td.field,
@@ -95,13 +93,13 @@ a:hover
 #layout-tabs ul li.g_odd a,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	background-color:#494947;
+	background-color:#363636;
 	color: #dddddd;
 }
 
 #layout-main h1 a,
-#layout-main h4 a,
-#layout-main .g_list a,
+#layout-main h4 a,/*
+#layout-main .g_list a,*/
 #layout-main div.tabbed_pane ul.tabs li a,
 #layout-main table caption a,
 #layout-menu li.sub-menu a,
@@ -116,10 +114,10 @@ a:hover
 #layout-tabs ul li.selected a
 {
 	background-color: #e5e4e4;
-	color: #494947;
+	color: #363636;
 }
 
-#layout-main div.tabbed_pane div.pane ul.tabs li a:hover, /* fixes double tabben panes*/
+#layout-main div.tabbed_pane div.pane ul.tabs li a:hover, /* fixes double tabbed panes*/
 #layout-main div.tabbed_pane div.pane ul.tabs li:hover, /* same here */
 #layout-main div.tabbed_pane div.pane ul.tabs li.selected, /*same here */
 #layout-main div.tabbed_pane ul.tabs li a:hover,
@@ -128,7 +126,7 @@ a:hover
 #layout-main div.tabbed_pane div.body
 {
 	background-color: #f5f4f4;
-	color: #494947;
+	color: #363636;
 }
 
 #layout-main ul.links,
@@ -138,20 +136,6 @@ a:hover
 	color: #6B868F;
 	background-color: transparent
 }
-
-#layout-main div.g_content ul.links a
-{
-	color: #4e4f47;
-}
-
-/*
-#tooltip span.top,
-#tooltip span.bottom
-{
-	background-color: none;
-	height: 0;
-	display: none;
-}*/
 
 #tooltip span.top,
 #tooltip span.bottom,
