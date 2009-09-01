@@ -806,12 +806,12 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     }//GEN-LAST:event_txt_SourceKeyReleased
 
     private void txt_StorageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_StorageKeyReleased
-        gui.ToMem("StorageText",txt_Source.getText());
+        gui.ToMem("StorageText",txt_Storage.getText());
         ToggleEditBox(1,txt_Storage.getText());
     }//GEN-LAST:event_txt_StorageKeyReleased
 
     private void txt_OtherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_OtherKeyReleased
-        gui.ToMem("OtherText",txt_Source.getText());
+        gui.ToMem("OtherText",txt_Other.getText());
         ToggleEditBox(2,txt_Other.getText());
     }//GEN-LAST:event_txt_OtherKeyReleased
 

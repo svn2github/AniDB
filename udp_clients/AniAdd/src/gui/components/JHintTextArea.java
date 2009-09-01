@@ -5,8 +5,6 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.*;
-import javax.swing.text.*;
-import javax.swing.text.Highlighter.HighlightPainter;
 
 public class JHintTextArea extends JTextArea implements FocusListener {
     private boolean isEmpty;
@@ -46,18 +44,36 @@ public class JHintTextArea extends JTextArea implements FocusListener {
         }
     }
 
+    @Override
+    public void setText(String text){
+        if(text==null || text.isEmpty()){
+            isEmpty = true;
+            setHintStyle();
+        } else {
+            isEmpty = false;
+            setNormalStyle();
+            super.setText(text);
+        }
+    }
+
+    @Override
+    public String getText(){
+        return isEmpty?"":super.getText();
+    }
+
     private void setHintStyle(){
         setForeground(FORGROUND_COLOR_EMPTY);
-        setText(getTextHint());
+        super.setText(getTextHint());
     }
 
     private void setNormalStyle(){
         setForeground(FORGROUND_COLOR);
-        setText("");
+        super.setText("");
     }
 
     public void focusGained(FocusEvent e) {
         if (isEmpty) {
+            isEmpty = false;
             setNormalStyle();
         }
     }
