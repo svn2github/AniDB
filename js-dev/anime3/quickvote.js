@@ -26,7 +26,7 @@ function prepPage() {
 	table.appendChild(tfoot);
 	
 	initTooltips();
-	createPreferencesTable('mylist');
+	createPreferencesTable('global');
 	handleTables(sortingCols, tableNames, skipTables, collapseThumbnails, (get_info & 2));
 	
 	return; //noec: Previously this function was not added to the onLoad event.
