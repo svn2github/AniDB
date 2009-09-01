@@ -1102,12 +1102,28 @@ function get_anidbsort(node) {
 function get_date(node) {
 	if (node && !node.childNodes.length) string = '?';
 	else {
-		while (node && !node.nodeValue) { node = node.firstChild; }
-		var string = node.nodeValue;
+		var hstring = "";
+		while (node && !node.nodeValue) {
+			if (node.firstElementChild) {
+				if (node.firstElementChild.className.indexOf('date') >= 0) {
+					node = node.firstElementChild;
+				}
+				else {
+					if (node.firstElementChild.className.indexOf('time') >= 0) {
+						hstring = node.firstElementChild.firstChild.nodeValue;
+						hstring = String.fromCharCode(160) + hstring;
+					}
+					node = node.firstChild;
+				}
+			}
+			else node = node.firstChild
+		}
+		var string = node.nodeValue + hstring;
 	}
 	var findPrecision = function getPrecision(pstring) {
 		if (pstring == '?') return Number(new Date(2099,11,31)); // Totaly future date
-		if (pstring.indexOf('.') >= 0) {
+		var seperator = (pstring.indexOf('.') >= 0) ? '.' : ((pstring.indexOf('-') >= 0) ? '-' : null);
+		if (seperator) {
 			var highPrecision = (pstring.indexOf(':') >= 0);
 			var datePart = hourPart = "";
 			if (highPrecision) {
@@ -1128,11 +1144,16 @@ function get_date(node) {
 					}
 				}
 			} else datePart = pstring;
-			var edate = datePart.split(".");
+			var edate = datePart.split(seperator);
 			var ehour = hour = minute = 0;
 			var now = new Date();
 			var year;
 			// more date stuff
+			if (seperator == '-') {		// "-" seperator based dates format yyyy-mm-dd
+				var etemp = edate[2];	// "." seperator based dates format dd.mm.yyyy
+				edate[2] = edate[0];
+				edate[0] = etemp;
+			}
 			if (edate[2] && !isNaN(Number(edate[2]))) {
 				year = edate[2];
 				if (year.length == 2) {
