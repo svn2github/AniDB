@@ -15,6 +15,8 @@ public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
         this.aniAdd = aniAdd;
 
         initComponents();
+
+        gUI_Options_AddFoldersOnStartup1.setVisible(false);
     }
     public void Terminate() {}
     public void GUIEventHandler(ComEvent comEvent) {}

@@ -314,6 +314,7 @@ public class Mod_EpProcessing implements IModule {
         String filename="";
         try {
             TreeMap<String,String> ts = getPathFromTagSystem(procFile);
+            File folderObj = null;
 
             if((Boolean)mem.get("GUI_EnableFileMove")){
                 if((Boolean)mem.get("GUI_MoveTypeUseFolder")){
@@ -326,14 +327,22 @@ public class Mod_EpProcessing implements IModule {
                 } else {
                     folder = ts.get("PathName");
                 }
+                
+                folder = folder.substring(0, 3) + folder.substring(3).replaceAll("[\":/*|<>?]", "");
+                if(folder.isEmpty()){
+                    folder = procFile.FileObj().getParent() + java.io.File.separatorChar;
+                } else if(folder.length() > 240) {
+                    throw new Exception("Pathname (Folder) too long");
+                }
+                folderObj = new File(folder);
+                if(!folderObj.isAbsolute()){
+                    Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), "Folderpath needs to be absolute.");
+                    return false;
+                }
+
+                folderObj.mkdir();
             }
 
-            folder = folder.substring(0, 3) + folder.substring(3).replaceAll("[\":/*|<>?]", "");
-            if(folder.isEmpty()){
-                folder = procFile.FileObj().getParent() + java.io.File.separatorChar;
-            } else if(folder.length() > 240) {
-                throw new Exception("Pathname (Folder) too long");
-            }
 
             String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
             if((Boolean)mem.get("GUI_RenameTypeAniDBFileName")){
@@ -344,22 +353,24 @@ public class Mod_EpProcessing implements IModule {
 
             if(filename.length()+ folder.length() > 240) filename = filename.substring(0, 240-folder.length()-ext.length())+ext;
 
-            File folderObj = new File(folder);
-            folderObj.mkdir();
 
-            File renFile = new File(folderObj, filename);
-             if(procFile.FileObj().renameTo(renFile)){
-                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), procFile.FileObj(), folder + filename);
+            File renFile = (folderObj!=null)?(new File(folderObj, filename)):(new File(filename));
+
+            if(renFile.exists()){
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), "Destination filename already exists.");
+                return false;
+            } else if(procFile.FileObj().renameTo(renFile)){
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), procFile.FileObj());
                 procFile.FileObj(renFile);
                 return true;
             } else {
-                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), folder + filename);
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj());
                 return false;
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), folder + filename, ex.getMessage());
+            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), ex.getMessage());
             return false;
         }
     }
@@ -408,16 +419,16 @@ public class Mod_EpProcessing implements IModule {
     public int FileCount() { return files.size(); }
 
     public void addFiles(Collection<File> newFiles) {
-        Integer storage = (Integer) mem.get("GUI_SetStorageType");
-        boolean watched = (Boolean) mem.get("GUI_SetWatched");
-        boolean rename = (Boolean) mem.get("GUI_RenameFiles");
-        boolean addToMyList = (Boolean) mem.get("GUI_AddToMyList");
+        Integer storage = (Integer) mem.get("GUI_SetStorageType", 1);
+        boolean watched = (Boolean) mem.get("GUI_SetWatched", false);
+        boolean rename = (Boolean) mem.get("GUI_RenameFiles", false);
+        boolean addToMyList = (Boolean) mem.get("GUI_AddToMyList", false);
         String otherStr="", sourceStr="", storageStr="";
 
-        if((Boolean)mem.get("ShowSrcStrOtEditBoxes")){
-            otherStr = (String)mem.get("OtherText","");
-            sourceStr = (String)mem.get("SourceText","");
-            storageStr = (String)mem.get("StorageText", "");
+        if((Boolean)mem.get("GUI_ShowSrcStrOtEditBoxes", false)){
+            otherStr = (String)mem.get("GUI_OtherText","");
+            sourceStr = (String)mem.get("GUI_SourceText","");
+            storageStr = (String)mem.get("GUI_StorageText", "");
         }
 
         for (File cf : newFiles) {

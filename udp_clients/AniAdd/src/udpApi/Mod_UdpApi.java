@@ -379,21 +379,21 @@ public class Mod_UdpApi implements IModule {
                             //Move command without (login req./delay req.) to top
 
                             cmdReordered = false;
-                            boolean r1, r2, n1, n2, magic;
+                            boolean r1, r2, n1, n2, canOptimize;
                             r1 = cmdToSend.get(0).LoginReq();
                             n1 = NODELAY.contains(cmdToSend.get(0).Action());
 
                             if ((!isAuthed && r1) || !n1) {
                                 for (int i = 0; i < cmdToSend.size(); i++) {
-                                    r2 = cmdToSend.get(0).LoginReq();
-                                    n2 = NODELAY.contains(cmdToSend.get(0).Action());
-                                    magic = (!isAuthed && !n1 && !r1 && n2 && !r2) ||
-                                            (!isAuthed && !n1 && r1 && !r2) ||
-                                            (!isAuthed && n1 && r1 && !r2) ||
-                                            (isAuthed && !n1 && !r1 && n2) ||
-                                            (isAuthed && !n1 && r1 && n2);
+                                    r2 = cmdToSend.get(i).LoginReq();
+                                    n2 = NODELAY.contains(cmdToSend.get(i).Action());
+                                    canOptimize = (!isAuthed && !n1 && !r1 &&  n2 && !r2) ||
+                                                  (!isAuthed && !n1 &&  r1 &&        !r2) ||
+                                                  (!isAuthed &&  n1 &&  r1 &&        !r2) ||
+                                                  ( isAuthed && !n1 && !r1 &&  n2       ) ||
+                                                  ( isAuthed && !n1 &&  r1 &&  n2       );
 
-                                    if (magic) {
+                                    if (canOptimize) {
                                         cmdToSend.add(0, cmdToSend.get(0));
                                         cmdToSend.remove(i + 1);
                                         cmdReordered = true;
@@ -407,10 +407,7 @@ public class Mod_UdpApi implements IModule {
                 }
 
                 if (!cmdReordered) {
-                    try {
-                        Thread.sleep(200);
-                    } catch (Exception exception) {
-                    }
+                    try { Thread.sleep(200); } catch (Exception exception) {}
                 }
             }
 

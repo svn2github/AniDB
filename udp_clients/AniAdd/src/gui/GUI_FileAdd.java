@@ -88,6 +88,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         chck_MarkWatched.setEnabled(chck_AddToML.isSelected());
         chck_RenameMoveFiles.setSelected((Boolean)gui.FromMem("RenameFiles", DEFRENAMEMOVE));
         cmb_Storage.setSelectedIndex((Integer)gui.FromMem("SetStorageType", DEFSTORAGETYPE));
+        txt_Other.setText((String)gui.FromMem("OtherText", ""));
+        txt_Source.setText((String)gui.FromMem("SourceText", ""));
+        txt_Storage.setText((String)gui.FromMem("StorageText", ""));
 
         ToggleFileInfoPane();
         ToggleEditBoxes();
@@ -324,6 +327,21 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             }
         });
     }
+    private void ToggleEditBox(final int box, String text){
+        SetOptions(text, new ISetOption() {
+            int boxId = box;
+            public void setOption(Object type, FileInfo file) {
+                if(boxId == 0){
+                    file.Data().put("EditSource", (String)type);
+                }else if(boxId == 1){
+                    file.Data().put("EditStorage", (String)type);
+                }else if(boxId == 2){
+                    file.Data().put("EditOther", (String)type);
+                }
+            }
+        });
+    }
+
     private void ToggleProcessing(String type) {
         if(type.equals("Start")){
             epProc.processing(Mod_EpProcessing.eProcess.Start);
@@ -335,7 +353,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             epProc.processing(Mod_EpProcessing.eProcess.Resume);
         }
     }
-    private void SetOptions(Object type, ISetOption optionSetter){
+    private void SetOptions(Object type, ISetOption optionSetter){ //TODO: Refractor to remove first parameter
         int size = epProc.FileCount();
         for (int i = 0; i < size; i++) {
             FileInfo fileInfo = epProc.index2FileInfo(i);
@@ -784,14 +802,17 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 
     private void txt_SourceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SourceKeyReleased
         gui.ToMem("SourceText",txt_Source.getText());
+        ToggleEditBox(0,txt_Source.getText());
     }//GEN-LAST:event_txt_SourceKeyReleased
 
     private void txt_StorageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_StorageKeyReleased
         gui.ToMem("StorageText",txt_Source.getText());
+        ToggleEditBox(1,txt_Storage.getText());
     }//GEN-LAST:event_txt_StorageKeyReleased
 
     private void txt_OtherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_OtherKeyReleased
         gui.ToMem("OtherText",txt_Source.getText());
+        ToggleEditBox(2,txt_Other.getText());
     }//GEN-LAST:event_txt_OtherKeyReleased
 
 

@@ -14,6 +14,7 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
 
         chck_ShowFileInfoPane.setSelected((Boolean)gui.FromMem("ShowFileInfoPane", false));
         chck_ShowEditboxes.setSelected((Boolean)gui.FromMem("ShowSrcStrOtEditBoxes", false));
+        chck_ShowFileInfoPane.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")

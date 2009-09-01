@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -255,11 +256,11 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
                 break;
             case RenamingFailed:
                 title = "Renaming failed";
-                node.add(new TreeNode("Couldn't rename file. " + (comEvent.ParamCount()==6?(String)comEvent.Params(5):"")));
+                node.add(new TreeNode("Couldn't rename file. " + (comEvent.ParamCount()==5?(String)comEvent.Params(4):"")));
                 break;
             case FileRenamed:
                 title = "File renamed";
-                node.add(new TreeNode("File renamed to " + (String)comEvent.Params(4)));
+                node.add(new TreeNode("File renamed to " + ((File)comEvent.Params(3)).getAbsolutePath()));
                 break;
             case RenamingNotNeeded:
                 title = "No renaming needed";
