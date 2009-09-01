@@ -1,9 +1,10 @@
 package aniAdd;
 
+import aniAdd.Modules.IModule;
 import aniAdd.Communication.ComEvent;
 import aniAdd.Communication.ComListener;
 import aniAdd.misc.Mod_Memory;
-import gui.Mod_GUI;
+import gui.GUI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
@@ -15,15 +16,17 @@ import udpApi.Mod_UdpApi;
  * @author Arokh
  */
 public class AniAdd implements IAniAdd{
-    TreeMap<String, Module> modules;
+    final static int CURRENTVER = 3;
+
+    TreeMap<String, IModule> modules;
     EventHandler eventHandler;
     Mod_Memory mem;
 
     public AniAdd() {
-        modules = new TreeMap<String, Module>();
+        modules = new TreeMap<String, IModule>();
         eventHandler = new EventHandler();
 
-        Module mod;
+        IModule mod;
         mod = new Mod_Memory();
         modules.put(mod.ModuleName(), mod);
         eventHandler.AddEventHandler(mod);
@@ -37,16 +40,16 @@ public class AniAdd implements IAniAdd{
         modules.put(mod.ModuleName(), mod);
         eventHandler.AddEventHandler(mod);
 
-        mod = new Mod_GUI();
+        mod = new GUI();
         modules.put(mod.ModuleName(), mod);
         eventHandler.AddEventHandler(mod);
     }
 
     public void Start(){
-        ComFire(new ComEvent(this, ComEvent.eType.Information, Module.eModState.Initializing));
-        mem.put("FirstStart", 2);
+        ComFire(new ComEvent(this, ComEvent.eType.Information, IModule.eModState.Initializing));
+        mem.put("FirstStart", CURRENTVER);
 
-        for (Module module : modules.values()) {
+        for (IModule module : modules.values()) {
             System.out.println("Initializing: " + module.ModuleName());
             module.Initialize(this);
         }
@@ -56,16 +59,16 @@ public class AniAdd implements IAniAdd{
             try {Thread.sleep(100);} catch (InterruptedException ex) {}
 
             allModsInitialized = true;
-            for (Module module : modules.values()) { allModsInitialized &= module.ModState() == Module.eModState.Initialized; }
+            for (IModule module : modules.values()) { allModsInitialized &= module.ModState() == IModule.eModState.Initialized; }
         }
 
-        ComFire(new ComEvent(this, ComEvent.eType.Information, Module.eModState.Initialized));
+        ComFire(new ComEvent(this, ComEvent.eType.Information, IModule.eModState.Initialized));
     }
     
     public void Stop(){
-        ComFire(new ComEvent(this, ComEvent.eType.Information, Module.eModState.Terminating));
+        ComFire(new ComEvent(this, ComEvent.eType.Information, IModule.eModState.Terminating));
 
-        for (Module module : modules.values()) {
+        for (IModule module : modules.values()) {
             System.out.println("Terminating: " + module.ModuleName());
             module.Terminate();
         }
@@ -75,19 +78,19 @@ public class AniAdd implements IAniAdd{
             try {Thread.sleep(100);} catch (InterruptedException ex) {}
             
             allModsTerminated = true;
-            for (Module module : modules.values()) { allModsTerminated &= module.ModState() == Module.eModState.Terminated; }
+            for (IModule module : modules.values()) { allModsTerminated &= module.ModState() == IModule.eModState.Terminated; }
         }
 
         
-        ComFire(new ComEvent(this, ComEvent.eType.Information, Module.eModState.Terminated));
+        ComFire(new ComEvent(this, ComEvent.eType.Information, IModule.eModState.Terminated));
     }
 
-    public Module GetModule(String modName) { return modules.get(modName); }
+    public IModule GetModule(String modName) { return modules.get(modName); }
 
-    public Collection<Module> GetModules(){return modules.values();}
+    public Collection<IModule> GetModules(){return modules.values();}
 
     class EventHandler implements ComListener{
-        public void AddEventHandler(Module mod){ mod.AddComListener(this);}
+        public void AddEventHandler(IModule mod){ mod.AddComListener(this);}
         public void EventHandler(ComEvent comEvent) {
             System.out.println("Event: " + comEvent.toString());
         }

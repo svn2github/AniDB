@@ -5,9 +5,10 @@
 
 package aniAdd.startup;
 
+import aniAdd.Modules.IModule;
 import aniAdd.Communication.ComEvent;
 import aniAdd.*;
-import gui.Mod_GUI;
+import gui.GUI;
 import java.awt.Font;
 import java.net.CookieHandler;
 import java.net.URI;
@@ -78,7 +79,7 @@ public class Applet extends JApplet {
             } catch(Exception e) {}
         }
 
-        if(username==null || username.isEmpty() || ((password == null || password.isEmpty()) && (session!=null || session.isEmpty()))){
+        if(username==null || username.isEmpty() || ((password == null || password.isEmpty()) && (session==null || session.isEmpty()))){
             username = JOptionPane.showInputDialog(this, "User");
             password = JOptionPane.showInputDialog(this, "Password");
         }
@@ -86,7 +87,7 @@ public class Applet extends JApplet {
         aniAdd.AddComListener(new Communication.ComListener() {
             public void EventHandler(ComEvent comEvent) {
                 if(comEvent.Type() == ComEvent.eType.Information){
-                    if((Module.eModState)comEvent.Params(0) == Module.eModState.Initialized){
+                    if((IModule.eModState)comEvent.Params(0) == IModule.eModState.Initialized){
                         Initialize();
                     }
                 }
@@ -97,9 +98,10 @@ public class Applet extends JApplet {
     }
 
     private void Initialize(){
-        Mod_GUI gui = (Mod_GUI)aniAdd.GetModule("MainGUI");
+        GUI gui = (GUI)aniAdd.GetModule("MainGUI");
         Mod_UdpApi api = (Mod_UdpApi)aniAdd.GetModule("UdpApi");
         
+        System.out.println(username + " " + session + " " + autopass + " " + password);
         api.setPassword(password);
         api.setSession(session);
         api.setUsername(username);

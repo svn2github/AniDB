@@ -99,12 +99,16 @@ public class Misc {
 
     public static String longToTime(long time) {
         long s, m, h;
-        time = time % (24 * 60 * 60 * 1000);
-        s = time / 1000;
-        h = s / 3600;
-        s -= h * 3600;
-        m = s / 60;
-        s -= m * 60;
+        time = (time % (24 * 60 * 60 * 1000))/1000;
+
+        s = time % 60;
+        time = (time-s)/60;
+
+        m = time % 60;
+        time = (time-m)/60;
+
+        h = time;
+
         return stringPadding(h + "", 2, '0') + ":" + stringPadding(m + "", 2, '0') + ":" + stringPadding(s + "", 2, '0');
     }
 

@@ -1,48 +1,74 @@
 package gui;
 
 import aniAdd.Communication.ComEvent;
+import aniAdd.Communication.ComListener;
 import aniAdd.IAniAdd;
-import aniAdd.Module;
+import aniAdd.Modules.IModule;
+import aniAdd.Modules.IModule.eModState;
 import aniAdd.misc.Misc;
-import aniAdd.misc.Mod_Memory;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JTree;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import processing.FileInfo;
 import processing.FileParser;
 import processing.Mod_EpProcessing;
+import processing.Mod_EpProcessing.eComType;
 import udpApi.Mod_UdpApi;
 import udpApi.Query;
 
-public class Mod_GUI extends GUIComponents implements Module {
-    //private Thread tLblupdater;
-    private LabelUpdater labelUpdater = new LabelUpdater();
-
-    private ArrayList<ComEvent> comEvents = new ArrayList<ComEvent>();
+public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
     private HashMap<Integer, Integer> fileId2LogItemId = new HashMap<Integer, Integer>();
-    private Mod_EpProcessing epProc;
-    private Mod_Memory mem;
+    private ArrayList<ComEvent> comEvents = new ArrayList<ComEvent>();
+
     private IAniAdd aniAdd;
+    private Mod_EpProcessing epProc;
     private Mod_UdpApi api;
 
-    
+    public GUI_Logs() {
+        initComponents();
+    }
+
+    private void CopyTree(JTree tree){
+        Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String cmdTree = CopyTree((DefaultMutableTreeNode)tree.getModel().getRoot(), 0);
+
+        cb.setContents(new StringSelection(cmdTree), null);
+    }
+    private String CopyTree(DefaultMutableTreeNode node, int depth){
+        String treeStr="";
+        do {
+            for(int i=0; i<depth;i++) treeStr += "  ";
+            treeStr += (String)node.getUserObject() + "\n";
+            if(node.getChildCount()!=0) treeStr += CopyTree((DefaultMutableTreeNode)node.getChildAt(0), depth+1);
+        } while((node = node.getNextSibling()) != null);
+        return treeStr;
+    }
+    private  void CopyEvents() {
+        Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String eventStr="";
+
+        for (ComEvent comEvent : comEvents) eventStr += comEvent.toString() + "\n";
+
+        cb.setContents(new StringSelection(eventStr), null);
+    }
+
+    public String TabName() {return "Log";}
+    public int PreferredTabLocation() { return 1; }
+
     private void AddCmdEvent(final ComEvent comEvent) {
         if(comEvent.Type() != ComEvent.eType.Information ||
           !((comEvent.ParamCount() > 0) && (comEvent.Params(0).equals("Cmd") || comEvent.Params(0).equals("Reply"))) ||
           (api.ModState() == eModState.Terminating)) return;
-        
+
         if(!SwingUtilities.isEventDispatchThread()){
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {
@@ -128,7 +154,7 @@ public class Mod_GUI extends GUIComponents implements Module {
 
         FileInfo file = epProc.id2FileInfo((Integer)comEvent.Params(2));
         int fileIndex = epProc.Id2Index(file.Id());
-        ((DefaultTableModel)tbl_Files.getModel()).fireTableRowsUpdated(fileIndex, fileIndex);
+        
 
         TreeNode node;
         Integer logItemId;
@@ -139,7 +165,7 @@ public class Mod_GUI extends GUIComponents implements Module {
             node = new TreeNode();
             node.Name("File " + file.FileObj().getName() + ": [*]");
             node.setUserObject(node.Name().replace("[*]", "Processing started"));
-            
+
             fileId2LogItemId.put(file.Id(), root.getChildCount());
             model.insertNodeInto(node, root, root.getChildCount());
             return;
@@ -158,13 +184,13 @@ public class Mod_GUI extends GUIComponents implements Module {
                 node.add(new TreeNode(title, null));
                 break;
             case ParsingDone:
-                processedBytes = epProc.processedBytes();
+                //processedBytes = epProc.processedBytes();
                 title = "AVDump processing done";
                 FileParser fp = (FileParser)comEvent.Params(3);
                 node.add(new TreeNode("Parsing done (" + (int)(file.FileObj().length() / 1024 / 1024) + "MB in " + (fp.ParseDuration()/100/10d) + "s with "+fp.MBPerSecond()+"mb/s)"));
                 break;
             case ParsingError:
-                processedBytes = epProc.processedBytes();
+                //processedBytes = epProc.processedBytes();
                 title = "File Parsing error";
                 node.add(new TreeNode("Parsing Error"));
                 break;
@@ -259,278 +285,149 @@ public class Mod_GUI extends GUIComponents implements Module {
         node.setUserObject(node.Name().replace("[*]", title));
         model.reload();
     }
-    private void EpProcStatusEvent(final ComEvent comEvent){
-        if(comEvent.Params(1) == Mod_EpProcessing.eProcess.Start){
-            if(processingStartOn==0) processingStartOn = System.currentTimeMillis();
-            labelUpdater.Start();
-           
-        } else if(comEvent.Params(1) == Mod_EpProcessing.eProcess.Pause){
-            processingPausedOn = System.currentTimeMillis();
-            
-        } else if(comEvent.Params(1) == Mod_EpProcessing.eProcess.Resume){
-            pausedTime += System.currentTimeMillis() - processingPausedOn;
-            processingPausedOn = 0;
-            
-        } else if(comEvent.Params(1) == Mod_EpProcessing.eComSubType.Done){
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    FileProcessingDone();
-                    //UpdateProgressBars();
-                    //UpdateStatusLabels();
-                }
-            });
-        }
-    }
-    
-    protected void UpdateProgressBars() {
-        UpdateProgressBars(FileProgress(), TotalProgress());
-    }
-    protected void UpdateStatusLabels() {
-        UpdateStatusLabels(byteCount, ProcByteCount(), ElapsedTime(), ETA());
-    }
 
-    long processingStartOn;
-    long processingPausedOn;
-    long pausedTime;
-    long byteCount;
-    long processedBytes;
-
-
-    public double FileProgress(){
-        return (double)epProc.processedBytesCurrentFile() / (double)epProc.totalBytesCurrentFile();
-    }
-    public double TotalProgress(){
-        double prgValFile = (double)ProcByteCount() / (double)byteCount;
-
-        int pendingFileCmds =  (epProc.FileCount() - epProc.processedFileCount())*((Boolean)mem.get("AddToMyList")?2:1);
-        int procCmd = api.totalCmdCount() - api.waitingCmdCount();
-        double partialCmd = 1-api.currendCmdDelay()/(double)api.cmdSendDelay();
-        double prgValCmd = (procCmd+partialCmd) / (double)(api.totalCmdCount()+pendingFileCmds);
-        return Math.min(prgValFile, prgValCmd);
-    }
-    public long ProcByteCount(){
-        return processedBytes + epProc.processedBytesCurrentFile();
-    }
-    public long ElapsedTime(){
-        return processingStartOn!=0?System.currentTimeMillis() - processingStartOn - pausedTime:0;
-    }
-    public long ETA(){
-        long procByteCount = ProcByteCount();
-        double etaFile = (double)(byteCount-procByteCount)/((double)procByteCount/(double)ElapsedTime());
-
-        int pendingFileCmds =  (epProc.FileCount() - epProc.processedFileCount())*((Boolean)mem.get("AddToMyList")?2:1);
-        double etaCmd = (api.waitingCmdCount() + pendingFileCmds)*api.cmdSendDelay()-api.cmdSendDelay()+api.currendCmdDelay();
-
-        return (long)Math.max(etaFile, etaCmd);
-    }
-
-    protected void CopyEvents() {
-        Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
-        String eventStr="";
-        
-        for (ComEvent comEvent : comEvents) eventStr += comEvent.toString() + "\n";
-
-        cb.setContents(new StringSelection(eventStr), null);
-    }
-
-    class LabelUpdater implements Runnable{
-        Thread t;
-
-        public void Start(){
-            t = new Thread(this);
-            t.start();
-        }
-
-        public void Terminate(){
-            try {
-                if( t!= null) t.join();
-            } catch (InterruptedException ex) { ex.printStackTrace();}
-        }
-
-        public void run() {
-            while((epProc.isProcessing() || api.waitingCmdCount()!=0) && modState != eModState.Terminating){
-                do {
-                    try {Thread.sleep(100);} catch (InterruptedException ex) {}
-                } while (epProc.isPaused() && modState != eModState.Terminating);
-
-                if( modState != eModState.Terminating){
-                    try { SwingUtilities.invokeAndWait(new Runnable() {
-                        public void run() {
-                            UpdateProgressBars();
-                            UpdateStatusLabels();
-                        }
-                    });} catch (Exception ex) {}
-                }
-            }
-            
-            SwingUtilities.invokeLater(new Runnable() {public void run() {EpProcessingDone();}});
-            processingStartOn = 0;
-            pausedTime = 0;
-            processingPausedOn = 0;
-        }
-    }
-
-    public void DisplayEvent(String msg, ComEvent.eType msgType){
-        super.DisplayEvent(msg, msgType==ComEvent.eType.Warning?Color.yellow:(msgType==ComEvent.eType.Error?Color.red:Color.red));
-    }
-
-    protected void SaveToMem(String key, Object value) {mem.put(key, value);}
-    protected Object LoadFromMem(String key, Object defVal) {return mem.get(key, defVal);}
-
-    protected void ClearFiles(){
-        epProc.ClearFiles();
-    }
-
-    protected void AddFiles(ArrayList<File> files) {epProc.addFiles(files);}
-    protected void ToggleMLCmd(boolean doAction) {
-        SetOptions(doAction, new ISetOption() {
-            public void setOption(Object type, FileInfo file) {
-                if((Boolean)type){
-                    file.ActionsTodo().add(FileInfo.eAction.MyListCmd);
-                } else {
-                    file.ActionsTodo().remove(FileInfo.eAction.MyListCmd);
-                }
-            }
-        });
-    }
-    protected void ToggleFileRename(boolean doAction) {
-        SetOptions(doAction, new ISetOption() {
-            public void setOption(Object type, FileInfo file) {
-                if((Boolean)type){
-                    file.ActionsTodo().add(FileInfo.eAction.Rename);
-                } else {
-                    file.ActionsTodo().remove(FileInfo.eAction.Rename);
-                }
-            }
-        });
-    }
-    protected void ToggleStorageType(int type) {
-        SetOptions(type, new ISetOption() {
-            public void setOption(Object type, FileInfo file) {
-                file.MLStorage(FileInfo.eMLStorageState.values()[(Integer)type]);
-            }
-        });
-    }
-    protected void ToggleWatched(boolean doAction) {
-        SetOptions(doAction, new ISetOption() {
-            public void setOption(Object type, FileInfo file) {
-                if((Boolean)type){
-                    file.ActionsTodo().add(FileInfo.eAction.Watched);
-                } else {
-                    file.ActionsTodo().remove(FileInfo.eAction.Watched);
-                }
-            }
-        });
-    }
-    protected void ToggleProcessing(String type) {
-        if(type.equals("Start")){
-            epProc.processing(Mod_EpProcessing.eProcess.Start);
-
-        } else if(type.equals("Pause")){
-            epProc.processing(Mod_EpProcessing.eProcess.Pause);
-
-        } else if(type.equals("Resume")){
-            epProc.processing(Mod_EpProcessing.eProcess.Resume);
-        }
-    }
-    private void SetOptions(Object type, ISetOption optionSetter){
-        int size = epProc.FileCount();
-        for (int i = 0; i < size; i++) {
-            FileInfo fileInfo = epProc.index2FileInfo(i);
-            if(fileInfo.Served()) continue;
-
-            optionSetter.setOption(type, fileInfo);
-        }
-    }
-    private interface ISetOption{void setOption(Object type, FileInfo file);}
-
-
-    // <editor-fold defaultstate="collapsed" desc="IModule">
-    protected String modName = "MainGUI";
-    protected eModState modState = eModState.New;
-
-    public eModState ModState() { return modState; }
-    public String ModuleName() {return modName;}
-    public void Initialize(IAniAdd aniAdd) {
-        modState = eModState.Initializing;
-
+    public void Initialize(IAniAdd aniAdd, IGUI gui) {
         this.aniAdd = aniAdd;
-        aniAdd.AddComListener(new AniAddEventHandler());
-        mem = (Mod_Memory)aniAdd.GetModule("Memory");
-        epProc = (Mod_EpProcessing)aniAdd.GetModule("EpProcessing");
         api = (Mod_UdpApi)aniAdd.GetModule("UdpApi");
+        epProc = (Mod_EpProcessing)aniAdd.GetModule("EpProcessing");
+
+        InitEventHandler();
+    }
+
+    private void InitEventHandler(){
+        btn_CopyCmdTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CopyTree(trvw_Cmd);
+            }
+        });
+        btn_CopyLogTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CopyTree(trvw_Event);
+            }
+        });
+        btn_CopyDebugMsgs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CopyEvents();
+            }
+        });
 
         api.AddComListener(new ComListener() {
             public void EventHandler(ComEvent comEvent) {
                 if(comEvent.Type()==ComEvent.eType.Information) AddCmdEvent(comEvent);
             }
         });
+        
         epProc.AddComListener(new ComListener() {
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Type()==ComEvent.eType.Information){
-                    if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileEvent) {
-                        AddFileEvent(comEvent);
-                    } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileCountChanged) {
-                        byteCount = epProc.totalBytes();
-                        processedBytes = epProc.processedBytes();
-                        ((DefaultTableModel)tbl_Files.getModel()).fireTableDataChanged();
-                    } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.Status) {
-                        EpProcStatusEvent(comEvent);
-                    }
-                }
+                if(comEvent.Type()==ComEvent.eType.Information && comEvent.Params(0) instanceof eComType && comEvent.Params(0)==eComType.FileEvent) AddFileEvent(comEvent);
             }
         });
 
         ComListener comListener;
-        for (Module module : aniAdd.GetModules()) { 
+        for (IModule module : aniAdd.GetModules()) {
             comListener = new ComListener() {
                 public void EventHandler(ComEvent comEvent) {
-                    if(comEvent.Type()==ComEvent.eType.Error ||
-                       comEvent.Type()==ComEvent.eType.Warning ||
-                       comEvent.Type()==ComEvent.eType.Fatal){
-                        DisplayEvent((String)comEvent.Params(0), comEvent.Type());
-                    }
                     comEvents.add(comEvent);
-
-                    if(comEvent.Type()==ComEvent.eType.Error || comEvent.Type()==ComEvent.eType.Fatal){
-                        LockDown();
-                    }
                 }
             };
             module.AddComListener(comListener);
         }
-        
-        FileTable_TM tm = new gui.FileTable_TM(epProc);
-        tbl_Files.setDefaultRenderer(Object.class, new FileTable_Renderer());
-        tbl_Files.setModel(tm);
-        tbl_Files.setRowHeight(19);
 
-        tbl_Files.getColumnModel().getColumn(1).setMaxWidth(72);
-
-        modState = eModState.Initialized;
-   }
-    public void Terminate() {
-        modState = eModState.Terminating;
-
-        labelUpdater.Terminate();
-
-        modState = eModState.Terminated;
     }
-    // </editor-fold>
 
-    // <editor-fold defaultstate="collapsed" desc="Com System">
-	private ArrayList<ComListener> listeners = new ArrayList<ComListener>();
-    protected void ComFire(ComEvent comEvent){
-        for (ComListener listener : listeners) {
-            listener.EventHandler(comEvent);
-        }
+    public void Terminate() {}
+    public void GUIEventHandler(ComEvent comEvent) {
+    	
     }
-	public void AddComListener(ComListener comListener){ listeners.add(comListener); }
-	public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }
-    class AniAddEventHandler implements ComListener{
-        public void EventHandler(ComEvent comEvent) {
 
-        }
-    }
-    // </editor-fold>
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        spnl_Logs = new javax.swing.JSplitPane();
+        scrpn_trvw_Cmd = new javax.swing.JScrollPane();
+        trvw_Cmd = new javax.swing.JTree();
+        scrpn_trvw_Event = new javax.swing.JScrollPane();
+        trvw_Event = new javax.swing.JTree();
+        pnl_Logs_Ctrls = new javax.swing.JPanel();
+        btn_CopyCmdTree = new javax.swing.JButton();
+        btn_CopyLogTree = new javax.swing.JButton();
+        btn_CopyDebugMsgs = new javax.swing.JButton();
+
+        spnl_Logs.setDividerLocation(200);
+        spnl_Logs.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        spnl_Logs.setResizeWeight(0.5);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Cmds");
+        trvw_Cmd.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        scrpn_trvw_Cmd.setViewportView(trvw_Cmd);
+
+        spnl_Logs.setTopComponent(scrpn_trvw_Cmd);
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Event Log");
+        trvw_Event.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        scrpn_trvw_Event.setViewportView(trvw_Event);
+
+        spnl_Logs.setRightComponent(scrpn_trvw_Event);
+
+        pnl_Logs_Ctrls.setOpaque(false);
+
+        btn_CopyCmdTree.setText("Copy Cmd Log Tree");
+
+        btn_CopyLogTree.setText("Copy Event Log Tree");
+
+        btn_CopyDebugMsgs.setText("Copy Debug Messages");
+
+        javax.swing.GroupLayout pnl_Logs_CtrlsLayout = new javax.swing.GroupLayout(pnl_Logs_Ctrls);
+        pnl_Logs_Ctrls.setLayout(pnl_Logs_CtrlsLayout);
+        pnl_Logs_CtrlsLayout.setHorizontalGroup(
+            pnl_Logs_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_Logs_CtrlsLayout.createSequentialGroup()
+                .addComponent(btn_CopyCmdTree)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_CopyLogTree)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_CopyDebugMsgs)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        pnl_Logs_CtrlsLayout.setVerticalGroup(
+            pnl_Logs_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_Logs_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btn_CopyCmdTree)
+                .addComponent(btn_CopyLogTree)
+                .addComponent(btn_CopyDebugMsgs))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_Logs_Ctrls, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(spnl_Logs, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(spnl_Logs, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnl_Logs_Ctrls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    protected javax.swing.JButton btn_CopyCmdTree;
+    protected javax.swing.JButton btn_CopyDebugMsgs;
+    protected javax.swing.JButton btn_CopyLogTree;
+    protected javax.swing.JPanel pnl_Logs_Ctrls;
+    protected javax.swing.JScrollPane scrpn_trvw_Cmd;
+    protected javax.swing.JScrollPane scrpn_trvw_Event;
+    protected javax.swing.JSplitPane spnl_Logs;
+    protected javax.swing.JTree trvw_Cmd;
+    protected javax.swing.JTree trvw_Event;
+    // End of variables declaration//GEN-END:variables
+
+    public void GainedFocus() {}
+
+    public void LostFocus() {}
 }

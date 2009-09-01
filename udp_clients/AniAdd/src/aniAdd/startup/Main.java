@@ -5,9 +5,10 @@ package aniAdd.startup;
  * and open the template in the editor.
  */
 
+import aniAdd.Modules.IModule;
 import aniAdd.*;
 import aniAdd.Communication.ComEvent;
-import gui.Mod_GUI;
+import gui.GUI;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -41,7 +42,7 @@ public class Main {
         aniAdd.AddComListener(new Communication.ComListener() {
             public void EventHandler(ComEvent comEvent) {
                 if(comEvent.Type() == ComEvent.eType.Information){
-                    if((Module.eModState)comEvent.Params(0)== Module.eModState.Initialized){
+                    if((IModule.eModState)comEvent.Params(0)== IModule.eModState.Initialized){
                         Initialize();
                     }
                 }
@@ -53,7 +54,7 @@ public class Main {
 
     
         private static void Initialize(){
-        Mod_GUI gui = (Mod_GUI)aniAdd.GetModule("MainGUI");
+        GUI gui = (GUI)aniAdd.GetModule("MainGUI");
         Mod_UdpApi api = (Mod_UdpApi)aniAdd.GetModule("UdpApi");
         
         username = JOptionPane.showInputDialog(frm, "User", "");//"dvdkhl");

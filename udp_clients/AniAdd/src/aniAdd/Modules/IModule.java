@@ -1,7 +1,9 @@
-package aniAdd;
+package aniAdd.Modules;
+
+import aniAdd.*;
 
 
-public interface Module extends Communication {
+public interface IModule extends Communication {
     String ModuleName();
     eModState ModState();
     

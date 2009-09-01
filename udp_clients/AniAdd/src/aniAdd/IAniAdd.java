@@ -1,8 +1,9 @@
 package aniAdd;
 
+import aniAdd.Modules.IModule;
 import java.util.Collection;
 
 public interface IAniAdd extends Communication {
-    Module GetModule(String modName);
-    Collection<Module> GetModules();
+    IModule GetModule(String modName);
+    Collection<IModule> GetModules();
 }

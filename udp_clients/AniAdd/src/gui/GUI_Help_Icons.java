@@ -15,10 +15,10 @@ package gui;
  *
  * @author Arokh
  */
-public class IconHelp extends javax.swing.JPanel {
+public class GUI_Help_Icons extends javax.swing.JPanel {
 
     /** Creates new form IconHelp */
-    public IconHelp() {
+    public GUI_Help_Icons() {
         initComponents();
     }
 

@@ -5,9 +5,8 @@
 
 package aniAdd.misc;
 
-import aniAdd.Communication.ComListener;
 import aniAdd.IAniAdd;
-import aniAdd.Module;
+import aniAdd.Modules.IModule;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -22,7 +21,7 @@ import java.util.prefs.Preferences;
  *
  * @author Arokh
  */
-public class Mod_Memory implements Module {
+public class Mod_Memory implements IModule {
     TreeMap<String,Object> mem;
 
     public Mod_Memory() {
@@ -76,6 +75,11 @@ public class Mod_Memory implements Module {
         }
     }
 
+    public void clear(){
+        mem.clear();
+        ComFire(new ComEvent(this, ComEvent.eType.Information, "SettingsCleared"));
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="IModule">
     protected String modName = "Memory";
@@ -98,6 +102,8 @@ public class Mod_Memory implements Module {
     // <editor-fold defaultstate="collapsed" desc="Com System">
 	private ArrayList<ComListener> listeners = new ArrayList<ComListener>();
     protected void ComFire(ComEvent comEvent){
+        ArrayList<ComListener> listeners = (ArrayList<ComListener>)this.listeners.clone();
+        
         for (ComListener listener : listeners) {
             listener.EventHandler(comEvent);
         }

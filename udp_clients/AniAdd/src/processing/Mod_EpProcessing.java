@@ -1,6 +1,5 @@
 package processing;
 
-import aniAdd.Communication.ComListener;
 import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import udpApi.Cmd;
 import udpApi.Query;
 
 import aniAdd.IAniAdd;
-import aniAdd.Module;
+import aniAdd.Modules.IModule;
 import aniAdd.misc.ICallBack;
 import aniAdd.misc.Mod_Memory;
 import aniAdd.misc.Misc;
@@ -20,7 +19,7 @@ import aniAdd.misc.MultiKeyDict.IKeyMapper;
 import java.util.TreeMap;
 import udpApi.Mod_UdpApi;
 
-public class Mod_EpProcessing implements Module {
+public class Mod_EpProcessing implements IModule {
 
     public static String[] supportedFiles = {"avi", "mpg", "mpeg", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"};
     private IAniAdd aniAdd;
@@ -36,7 +35,6 @@ public class Mod_EpProcessing implements Module {
     public Mod_EpProcessing() {
         lastFileId = 0;
         files = new MultiKeyDict<String, Object, FileInfo>(new IKeyMapper<String, Object, FileInfo>() {
-
             public int count() {
                 return 2;
             }
@@ -152,9 +150,9 @@ public class Mod_EpProcessing implements Module {
         cmd.setArgs("viewed", procFile.ActionsTodo().contains(eAction.Watched) ? "1" : "0");
         cmd.setArgs("state", Integer.toString(procFile.MLStorage().ordinal()));
         
-        if(procFile.Data().containsKey(("Other"))) cmd.setArgs("other", (String)procFile.Data().get("Other"));
-        if(procFile.Data().containsKey(("Source"))) cmd.setArgs("source", (String)procFile.Data().get("Source"));
-        if(procFile.Data().containsKey(("Storage"))) cmd.setArgs("storage", (String)procFile.Data().get("Storage"));
+        if(procFile.Data().containsKey(("EditOther"))) cmd.setArgs("other", (String)procFile.Data().get("EditOther"));
+        if(procFile.Data().containsKey(("EditSource"))) cmd.setArgs("source", (String)procFile.Data().get("EditSource"));
+        if(procFile.Data().containsKey(("EditStorage"))) cmd.setArgs("storage", (String)procFile.Data().get("EditStorage"));
 
         api.queryCmd(cmd);
         //System.out.println("Sending ML Cmd");
@@ -317,11 +315,11 @@ public class Mod_EpProcessing implements Module {
         try {
             TreeMap<String,String> ts = getPathFromTagSystem(procFile);
 
-            if((Boolean)mem.get("EnableFileMove")){
-                if((Boolean)mem.get("MoveTypeUseFolder")){
-                    folder = (String)mem.get("MoveToFolder");
-                    if((Boolean) mem.get("AppendAnimeTitle")){
-                        int titleType = (Integer)mem.get("AppendAnimeTitleType");
+            if((Boolean)mem.get("GUI_EnableFileMove")){
+                if((Boolean)mem.get("GUI_MoveTypeUseFolder")){
+                    folder = (String)mem.get("GUI_MoveToFolder");
+                    if((Boolean) mem.get("GUI_AppendAnimeTitle")){
+                        int titleType = (Integer)mem.get("GUI_AppendAnimeTitleType");
                         folder += titleType==0?procFile.Data().get("DB_SN_English"):(titleType==1?procFile.Data().get("DB_SN_Romaji"):procFile.Data().get("DB_SN_Kanji")) + java.io.File.separatorChar;
                     }
 
@@ -338,7 +336,7 @@ public class Mod_EpProcessing implements Module {
             }
 
             String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
-            if((Boolean)mem.get("RenameTypeAniDBFileName")){
+            if((Boolean)mem.get("GUI_RenameTypeAniDBFileName")){
                 filename = procFile.Data().get("DB_FileName");
             } else {
                 filename = ts.get("FileName").replaceAll("[\\\\:\"/*|<>?]", "") + ext;
@@ -365,7 +363,7 @@ public class Mod_EpProcessing implements Module {
             return false;
         }
     }
-    private TreeMap<String,String> getPathFromTagSystem(FileInfo procFile) {
+    private TreeMap<String,String> getPathFromTagSystem(FileInfo procFile) throws Exception {
         TagSystem ts = new TagSystem();
         TreeMap<String, String> tags = new TreeMap<String, String>();
         tags.put("ATr", procFile.Data().get("DB_SN_Romaji"));
@@ -394,11 +392,7 @@ public class Mod_EpProcessing implements Module {
         tags.put("Cen", ((Integer.valueOf(procFile.Data().get("DB_State")) & 8) != 0 ? "1" : ""));
 
         //String path = "";
-        try {
-            ts.parseAndTransform((String) mem.get("TagSystemCode"), tags);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        ts.parseAndTransform((String)mem.get("GUI_TagSystemCode"), tags);
 
         return tags;
     }
@@ -406,43 +400,41 @@ public class Mod_EpProcessing implements Module {
 
 
     // <editor-fold defaultstate="collapsed" desc="Public Methods"> 
-    public FileInfo id2FileInfo(int id) {
-        return files.get("Id", id);
-    }
-    public FileInfo index2FileInfo(int index) {
-        return files.get("Id", index2Id.get(index));
-    }
+    public FileInfo id2FileInfo(int id) { return files.get("Id", id); }
+    public FileInfo index2FileInfo(int index) { return files.get("Id", index2Id.get(index));}
     public int Index2Id(int index){ return index2Id.get(index); }
     public int Id2Index(int id){ return Misc.binarySearch(index2Id, id); }
 
-    public int FileCount() {
-        return files.size();
-    }
+    public int FileCount() { return files.size(); }
 
     public void addFiles(Collection<File> newFiles) {
-        Integer storage = (Integer) mem.get("SetStorageType");
-        boolean watched = (Boolean) mem.get("SetWatched");
-        boolean rename = (Boolean) mem.get("RenameFiles");
-        boolean addToMyList = (Boolean) mem.get("AddToMyList");
+        Integer storage = (Integer) mem.get("GUI_SetStorageType");
+        boolean watched = (Boolean) mem.get("GUI_SetWatched");
+        boolean rename = (Boolean) mem.get("GUI_RenameFiles");
+        boolean addToMyList = (Boolean) mem.get("GUI_AddToMyList");
+        String otherStr="", sourceStr="", storageStr="";
+
+        if((Boolean)mem.get("ShowSrcStrOtEditBoxes")){
+            otherStr = (String)mem.get("OtherText","");
+            sourceStr = (String)mem.get("SourceText","");
+            storageStr = (String)mem.get("StorageText", "");
+        }
 
         for (File cf : newFiles) {
-            if (files.contains("Path", cf.getAbsolutePath())) {
-                continue;
-            }
+            if (files.contains("Path", cf.getAbsolutePath())) continue;
 
             FileInfo fileInfo = new FileInfo(cf, lastFileId);
             fileInfo.MLStorage(FileInfo.eMLStorageState.values()[storage]);
             fileInfo.ActionsTodo().add(eAction.Process);
             fileInfo.ActionsTodo().add(eAction.FileCmd);
-            if (addToMyList) {
-                fileInfo.ActionsTodo().add(eAction.MyListCmd);
-            }
-            if (watched) {
-                fileInfo.ActionsTodo().add(eAction.Watched);
-            }
-            if (rename) {
-                fileInfo.ActionsTodo().add(eAction.Rename);
-            }
+
+            if (addToMyList) fileInfo.ActionsTodo().add(eAction.MyListCmd);
+            if (watched) fileInfo.ActionsTodo().add(eAction.Watched);
+            if (rename) fileInfo.ActionsTodo().add(eAction.Rename);
+
+            if(!otherStr.isEmpty()) fileInfo.Data().put("EditOther", otherStr);
+            if(!sourceStr.isEmpty()) fileInfo.Data().put("EditSource", sourceStr);
+            if(!storageStr.isEmpty()) fileInfo.Data().put("EditStorage", storageStr);
 
             index2Id.add(lastFileId++);
             files.put(fileInfo);
@@ -518,9 +510,7 @@ public class Mod_EpProcessing implements Module {
     public long totalBytesCurrentFile() { return fileParser!=null?fileParser.getByteCount():0; }
     public long totalBytes(){
         long count=0;
-        for (FileInfo fi : files.values()) {
-            count += fi.FileObj().length();
-        }
+        for (FileInfo fi : files.values()) count += fi.FileObj().length();
         return count;
     }
     // </editor-fold>
@@ -573,8 +563,8 @@ public class Mod_EpProcessing implements Module {
             listener.EventHandler(comEvent);
         }
     }
-	public void AddComListener(ComListener comListener){ listeners.add(comListener); }
-	public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }
+    public void AddComListener(ComListener comListener){ listeners.add(comListener); }
+    public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }
     class AniAddEventHandler implements ComListener{
         public void EventHandler(ComEvent comEvent) {
 

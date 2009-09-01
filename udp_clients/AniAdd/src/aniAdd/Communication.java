@@ -5,6 +5,7 @@
 
 package aniAdd;
 
+import aniAdd.Modules.IModule;
 import aniAdd.misc.Misc;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -61,7 +62,7 @@ public interface Communication {
 
         public String toString(){
             String str;
-            str = Misc.longToTime(createdOn) + ": " + (getSource() instanceof Module?(((Module)getSource()).ModuleName() + " " + Type()):"");
+            str = Misc.longToTime(createdOn) + ": " + (getSource() instanceof IModule?(((IModule)getSource()).ModuleName() + " " + Type()):"");
             for (int i=0; i<ParamCount(); i++) {
                 str += " " + Params(i).toString();
             }
