@@ -754,11 +754,7 @@ function parseAnimes(node) {
 			}
 		)
 		for (var ai = 0; ai < anime.episodes.length; ai++) {
-			var eid = anime.episodes[ai].split('|');
-			var eno = eid[0];
-			alert(eno);
-			eid = eid[1];
-			anime.episodes[ai] = Number(eid);
+			anime.episodes[ai] = Number(anime.episodes[ai].split('|')[1]);
 		}
 		animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
 		if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
