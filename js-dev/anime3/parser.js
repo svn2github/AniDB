@@ -746,8 +746,10 @@ function parseAnimes(node) {
 			function sort(a,b) {
 				var p1 = a.split('|');
 				var p2 = b.split('|');
-				if (p1[0] < p2[0]) return -1;
-				if (p1[0] > p2[0]) return 1;
+				var eno1 = !isNaN(p1[0]) ? Number(p1[0]) : p1[0]);
+				var eno2 = !isNaN(p2[0]) ? Number(p2[0]) : p2[0]);
+				if (eno1 < eno2) return -1;
+				if (eno1 > eno2) return 1;
 				return 0;
 			}
 		)
