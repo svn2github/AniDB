@@ -751,7 +751,7 @@ function parseAnimes(node) {
 				return 0;
 			}
 		)
-		for (var ai = 0; ai < anime.episodes.length) {
+		for (var ai = 0; ai < anime.episodes.length; ai++) {
 			var eid = anime.episodes[ai].split('|');
 			var eno = eid[0];
 			alert(eno);
