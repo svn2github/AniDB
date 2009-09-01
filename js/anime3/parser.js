@@ -712,7 +712,7 @@ function parseEpisodes(node,aid,cntEps) {
 		episodes[episodeEntry.id] = episodeEntry;
 		epOrder.push(episodeEntry.id);
 		parseEpisode(childNode,aid);
-		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.id);
+		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.epno+'|'+episodeEntry.id);
 		if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
 	}
 	if (cntEps && epCnt > animes[aid].highestEp) animes[aid].highestEp = epCnt;
@@ -741,6 +741,21 @@ function parseAnimes(node) {
 		parseGroups(groupNodes,animeEntry.id); // Parsing Groups
 		var epNodes = childNode.getElementsByTagName('eps');
 		parseEpisodes(epNodes,animeEntry.id,(animeEntry.eps == 0)); // Parsing Episodes
+		// sort the episode list
+		anime.episodes.sort(
+			function sort(a,b) {
+				var p1 = a.split('|');
+				var p2 = b.split('|');
+				var eno1 = !isNaN(p1[0]) ? Number(p1[0]) : p1[0];
+				var eno2 = !isNaN(p2[0]) ? Number(p2[0]) : p2[0];
+				if (eno1 < eno2) return -1;
+				if (eno1 > eno2) return 1;
+				return 0;
+			}
+		)
+		for (var ai = 0; ai < anime.episodes.length; ai++) {
+			anime.episodes[ai] = Number(anime.episodes[ai].split('|')[1]);
+		}
 		animeOrder.push(animeEntry.id); // This is need because Opera is a bad boy in for (elem in array)
 		if (seeDebug) updateStatus('processed anime '+(i+1)+' of '+epNodes.length);
 	}

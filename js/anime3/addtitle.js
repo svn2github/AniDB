@@ -1,6 +1,9 @@
 jsVersionArray.push({
 	"file":"anime3/addtitle.js",
-	"version":"0.1"
+	"version":"0.1",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$"
 });
 
 var baseCols = {	"date":{"type":'c_date'},
