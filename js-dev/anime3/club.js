@@ -1,6 +1,9 @@
 jsVersionArray.push({
 	"file":"anime3/club.js",
-	"version":"0.1"
+	"version":"0.1",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$"
 });
 
 var userlistCols = {	"name user":{"type":'c_latin'},
