@@ -5,6 +5,7 @@ import aniAdd.IAniAdd;
 import aniAdd.Modules.IMod_GUI;
 import aniAdd.Modules.IModule;
 import aniAdd.misc.Mod_Memory;
+import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.io.BufferedReader;
@@ -28,14 +29,14 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     private HashMap<String, ITab> tabs;
     private IAniAdd aniAdd;
     private Mod_Memory mem;
-    private Stack<String> errorLst;
+    private Stack<ComEvent> errorLst;
 
     public GUI() {
         initComponents();
         pnl_Notice.setVisible(false);
 
         tabs = new HashMap<String, ITab>();
-        errorLst = new Stack<String>();
+        errorLst = new Stack<ComEvent>();
     }
 
     private void SaveToMem(String key, Object value) {mem.put("GUI_"+key, value);}
@@ -99,11 +100,14 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     }
 
     private void DisplayErrorEvent(ComEvent comEvent){
-        String oldNotice = lbl_Notice.getText();
+        errorLst.add(comEvent);
 
+        lbl_Notice.setBackground(comEvent.Type()== ComEvent.eType.Warning?Color.YELLOW:Color.RED);
         lbl_Notice.setText((String)comEvent.Params(0));
+
+
         if(pnl_Notice.isVisible()){
-            if(!oldNotice.equals("")) errorLst.add(oldNotice);
+        //    if(!oldNotice.equals("")) errorLst.add(oldNotice);
         } else {
             pnl_Notice.setVisible(true);
         }
@@ -136,7 +140,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         for (IModule mod : aniAdd.GetModules()) {
             mod.AddComListener(new ComListener() {
                 public void EventHandler(ComEvent comEvent) {
-                    if(comEvent.Type() == ComEvent.eType.Error || comEvent.Type() == ComEvent.eType.Fatal){
+                    if(comEvent.Type() == ComEvent.eType.Error || comEvent.Type() == ComEvent.eType.Fatal || comEvent.Type() == ComEvent.eType.Warning){
                         DisplayErrorEvent(comEvent);
                     }
                 }
@@ -286,10 +290,14 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_CloseNoticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CloseNoticeActionPerformed
+        errorLst.pop();
+
         if(errorLst.empty()){
             pnl_Notice.setVisible(false);
         }else{
-            lbl_Notice.setText(errorLst.pop());
+            ComEvent comEvent = errorLst.peek();
+            lbl_Notice.setBackground(comEvent.Type()== ComEvent.eType.Warning?Color.YELLOW:Color.RED);
+            lbl_Notice.setText((String)comEvent.Params(0));
         }
     }//GEN-LAST:event_btn_CloseNoticeActionPerformed
 
