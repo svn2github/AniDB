@@ -332,8 +332,7 @@ public class Mod_UdpApi implements IModule {
                     }
                     this.replysPending = replysPending;
 
-                    if((lastReplyPackage==0 || (System.currentTimeMillis() - lastReplyPackage)/1000>15) &&
-                     (replyHeadStart>=3 || !cmdToSend.isEmpty())){
+                    if((lastReplyPackage==0 || (System.currentTimeMillis() - lastReplyPackage)/1000>15) && replyHeadStart>=3 ){
                         logOut(false);
                         authRetry = System.currentTimeMillis() + 60 * 60 * 1000;
                         aniDBAPIDown = true;

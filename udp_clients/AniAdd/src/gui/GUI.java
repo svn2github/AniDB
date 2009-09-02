@@ -102,7 +102,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     private void DisplayErrorEvent(ComEvent comEvent){
         errorLst.add(comEvent);
 
-        lbl_Notice.setBackground(comEvent.Type()== ComEvent.eType.Warning?Color.YELLOW:Color.RED);
+        lbl_Notice.setBackground((comEvent.Type() == ComEvent.eType.Warning)?Color.YELLOW:Color.RED);
         lbl_Notice.setText((String)comEvent.Params(0));
 
 
