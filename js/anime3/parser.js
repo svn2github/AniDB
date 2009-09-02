@@ -746,13 +746,14 @@ function parseAnimes(node) {
 			function sort(a,b) {
 				var p1 = a.split('|');
 				var p2 = b.split('|');
-				var eno1 = eno2 = 0;
+				var eno1 = p1[0];
 				eno1 = p1[0].replace('S',10000);
 				eno1 = p1[0].replace('C',20000);
 				eno1 = p1[0].replace('T',30000);
 				eno1 = p1[0].replace('P',40000);
 				eno1 = p1[0].replace('O',50000);
 				eno1 = Number(eno1);
+				var eno2 = p2[0];
 				eno2 = p2[0].replace('S',10000);
 				eno2 = p2[0].replace('C',20000);
 				eno2 = p2[0].replace('T',30000);
