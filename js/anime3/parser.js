@@ -712,7 +712,7 @@ function parseEpisodes(node,aid,cntEps) {
 		episodes[episodeEntry.id] = episodeEntry;
 		epOrder.push(episodeEntry.id);
 		parseEpisode(childNode,aid);
-		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.epno+'|'+episodeEntry.id);
+		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.typeChar+episodeEntry.epno+'|'+episodeEntry.id);
 		if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
 	}
 	if (cntEps && epCnt > animes[aid].highestEp) animes[aid].highestEp = epCnt;
