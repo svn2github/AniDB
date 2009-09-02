@@ -334,6 +334,7 @@ public class Mod_UdpApi implements IModule {
 
                     if((lastReplyPackage==0 || (System.currentTimeMillis() - lastReplyPackage)/1000>15) &&
                      (replyHeadStart>=3 || !cmdToSend.isEmpty())){
+                        logOut(false);
                         authRetry = System.currentTimeMillis() + 60 * 60 * 1000;
                         aniDBAPIDown = true;
                         Log(ComEvent.eType.Warning, "No UDP API activity, client may be banned. Retry on " + Misc.longToTime(authRetry));
