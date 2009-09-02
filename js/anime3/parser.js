@@ -712,7 +712,7 @@ function parseEpisodes(node,aid,cntEps) {
 		episodes[episodeEntry.id] = episodeEntry;
 		epOrder.push(episodeEntry.id);
 		parseEpisode(childNode,aid);
-		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.typeChar+episodeEntry.epno+'|'+episodeEntry.id);
+		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.epno+'|'+episodeEntry.id);
 		if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
 	}
 	if (cntEps && epCnt > animes[aid].highestEp) animes[aid].highestEp = epCnt;
@@ -746,8 +746,27 @@ function parseAnimes(node) {
 			function sort(a,b) {
 				var p1 = a.split('|');
 				var p2 = b.split('|');
-				var eno1 = !isNaN(p1[0]) ? Number(p1[0]) : p1[0];
-				var eno2 = !isNaN(p2[0]) ? Number(p2[0]) : p2[0];
+				var eno1 = eno2 = 0;
+				if (!isNaN(p1[0]))
+					eno1 = Number(p1[0])
+				else {
+					eno1 = p1[0].replace('S',10000);
+					eno1 = p1[0].replace('C',20000);
+					eno1 = p1[0].replace('T',30000);
+					eno1 = p1[0].replace('P',40000);
+					eno1 = p1[0].replace('O',50000);
+					eno1 = Number(eno1);
+				}
+				if (!isNaN(p2[0]))
+					eno2 = Number(p2[0])
+				else {
+					eno2 = p1[0].replace('S',10000);
+					eno2 = p1[0].replace('C',20000);
+					eno2 = p1[0].replace('T',30000);
+					eno2 = p1[0].replace('P',40000);
+					eno2 = p1[0].replace('O',50000);
+					eno2 = Number(eno2);
+				}
 				if (eno1 < eno2) return -1;
 				if (eno1 > eno2) return 1;
 				return 0;
