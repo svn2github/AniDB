@@ -90,7 +90,9 @@ var languageMap = {'x-unk':{"name":'unknown',"classname":'unknown',"id":'1'},
                    'zh-Hans':{"name":'chinese (simplified)',"classname":'simplified',"id":'81'},
                    'is':{"name":'icelandic',"classname":'icelandic',"id":'84'},
                    'al':{"name":'albanian',"classname":'albanian',"id":'85'},
-                   'es-LA':{"name":'"latin american spanish',"classname":'hispanic',"id":'86'}};
+				   'bd':{"name":'bengali',"classname":'bd',"id":'86'},
+				   'x-kot':{"name":'korean (transcription)',"classname":'x-kot',"id":'87'},
+				   'es-LA':{"name":'latin american spanish',"classname":'es-LA',"id":'88'}};
 
 var codecMap = {'unk':{"name":'unknown'},
 				'other':{"name":'Other (non-ASP)'},
