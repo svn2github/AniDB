@@ -19,6 +19,41 @@ body
 	padding: 0;
 }
 
+#layout-main div.profile_all div.passwords,
+#layout-main div.profile_all div.tabbed_pane div.default_languages
+{
+	display:block;
+}
+
+#layout-main div.profile_all div.pane.general div.body div.pane div,
+#layout-main div.profile_all div.rdf_jabber div,
+#layout-main div.profile_all div.passwords form div.anidb,
+#layout-main div.profile_all div.passwords form div.g_section,
+#layout-main div.profile_all div.default_languages div
+{
+	margin: 1em 1em .5em 0;
+}
+
+/* hides last <li> tag, which is visible because of padding and contains hidden <input> 
+ * begin */
+#layout-main div.profile_all div.pane.general div.body ul li:last-child
+{
+	display: none;
+}
+
+#layout-main div.profile_all div.pane.general div.body div:first-child div:last-child ul li:last-child
+{
+	display: block;
+}
+/* funny
+ * end */
+
+
+#layout-main div.profile_all div.rdf_jabber div
+{
+	display:inline-table;
+}
+
 #layout-main div.main_all div.rightbar h3
 {
 	margin-top:0;

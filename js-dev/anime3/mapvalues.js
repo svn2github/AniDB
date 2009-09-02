@@ -6,9 +6,9 @@
 jsVersionArray.push({
 	"file":"anime3/mapvalues.js",
 	"version":"2.1",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 3019 $",
+	"date":"$Date:: 2009-09-01 12:43:05 +0300#$",
+	"author":"$Author: fahrenheit $",
 	"changelog":"Revised version"
 });
 
@@ -89,7 +89,8 @@ var languageMap = {'x-unk':{"name":'unknown',"classname":'unknown',"id":'1'},
                    'zh-Hant':{"name":'chinese (traditional)',"classname":'traditional',"id":'80'},
                    'zh-Hans':{"name":'chinese (simplified)',"classname":'simplified',"id":'81'},
                    'is':{"name":'icelandic',"classname":'icelandic',"id":'84'},
-                   'al':{"name":'albanian',"classname":'albanian',"id":'85'}};
+                   'al':{"name":'albanian',"classname":'albanian',"id":'85'},
+                   'es-LA':{"name":'"latin american spanish',"classname":'hispanic',"id":'86'}};
 
 var codecMap = {'unk':{"name":'unknown'},
 				'other':{"name":'Other (non-ASP)'},

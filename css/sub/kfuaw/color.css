@@ -144,3 +144,8 @@ a:hover
 	color: #151515;
 	background:#fafafa;
 }
+
+#layout-main div.tabbed_pane div.body table tr
+{
+	background: none;
+}

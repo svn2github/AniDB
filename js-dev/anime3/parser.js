@@ -10,9 +10,9 @@
 jsVersionArray.push({
 	"file":"anime3/parser.js",
 	"version":"2.1.3",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 3027 $",
+	"date":"$Date:: 2009-09-02 03:52:46 +0300#$",
+	"author":"$Author: noec $",
 	"changelog":"Added CAnimeInfo"
 });
 
@@ -712,7 +712,7 @@ function parseEpisodes(node,aid,cntEps) {
 		episodes[episodeEntry.id] = episodeEntry;
 		epOrder.push(episodeEntry.id);
 		parseEpisode(childNode,aid);
-		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.epno+'|'+episodeEntry.id);
+		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.typeChar+episodeEntry.epno+'|'+episodeEntry.id);
 		if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
 	}
 	if (cntEps && epCnt > animes[aid].highestEp) animes[aid].highestEp = epCnt;

@@ -13,7 +13,11 @@ img, a
 	border: 1px solid #363636;
 }
 
-#layout-main table tr + tr td
+#layout-main table tr + tr td,
+#layout-main li.g_odd + li,
+#layout-main li + li.g_odd/*,
+#layout-main span.g_odd + span,
+#layout-main span + span.g_odd*/
 {
 	border-top: 1px solid #dddddd;
 	border-bottom: none;
@@ -106,7 +110,12 @@ img, a
 #layout-main div.g_menu div h4 + p,
 #layout-main div.latestanimes_anime div.data table,
 #layout-main div.tabbed_pane div.body > div,
-#layout-main div.main_all div.rightbar h4 + ol
+#layout-main div.main_all div.rightbar h4 + ol,
+#layout-main div.profile_all div.pane.general div.body div.pane div,
+#layout-main div.profile_all div.passwords form div.anidb,
+#layout-main div.profile_all div.passwords form div.g_section,
+#layout-main div.profile_all div.tabbed_pane div.default_languages div,
+#layout-main div.profile_all div.rdf_jabber div
 {
 	border: 1px solid #363636;
 }
@@ -159,7 +168,9 @@ img, a
 }
 
 table table,
-#layout-main div.tabbed_pane div.body table tr
+#layout-main div.tabbed_pane div.body table tr,
+#layout-main div.tabbed_pane div.body table tr td,
+#layout-main div.tabbed_pane div.body table tr th
 {
 	border: none;
 }
