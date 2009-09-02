@@ -10,9 +10,9 @@
 jsVersionArray.push({
 	"file":"anime3/parser.js",
 	"version":"2.1.3",
-	"revision":"$Revision: 3027 $",
-	"date":"$Date:: 2009-09-02 03:52:46 +0300#$",
-	"author":"$Author: noec $",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
 	"changelog":"Added CAnimeInfo"
 });
 
@@ -182,6 +182,7 @@ function CEpisodeEntry(node) {
   this.type = 'normal';
   this.typeFull = 'Normal Episode';
   this.typeChar = '';
+  this.epnoNum = 0;
   this.vote = -1; // set later
   this.isRecap = false;
   this.animeId = -1;
@@ -228,12 +229,13 @@ function CEpisodeEntry(node) {
   }
   if (this.relDate == 0) this.date = this.addDate;
   else this.date = this.relDate;
-  if (this.flags & 1) { this.type = 'special'; this.typeFull = 'Special Episode'; this.typeChar = 'S'; }
+  this.epnoNum = this.epno;
+  if (this.flags & 1) { this.type = 'special'; this.typeFull = 'Special Episode'; this.typeChar = 'S'; this.epnoNum = 100000+this.epnoNum; }
   if (this.flags & 2) { this.isRecap = true; this.typeFull += ', Recap'; }
-  if (this.flags & 4) { this.type = 'opening'; this.typeFull = 'Opening/Ending/Credits'; this.typeChar = 'C'; }
-  if (this.flags & 32) { this.type = 'trailer'; this.typeFull = 'Trailer/Promo/Ads'; this.typeChar = 'T'; }
-  if (this.flags & 64) { this.type = 'parody'; this.typeFull = 'Parody/Fandub'; this.typeChar = 'P'; }
-  if (this.flags & 128) { this.type = 'other'; this.typeFull = 'Other Episodes'; this.typeChar = 'O'; }
+  if (this.flags & 4) { this.type = 'opening'; this.typeFull = 'Opening/Ending/Credits'; this.typeChar = 'C'; this.epnoNum = 200000+this.epnoNum; }
+  if (this.flags & 32) { this.type = 'trailer'; this.typeFull = 'Trailer/Promo/Ads'; this.typeChar = 'T'; this.epnoNum = 300000+this.epnoNum; }
+  if (this.flags & 64) { this.type = 'parody'; this.typeFull = 'Parody/Fandub'; this.typeChar = 'P'; this.epnoNum = 400000+this.epnoNum; }
+  if (this.flags & 128) { this.type = 'other'; this.typeFull = 'Other Episodes'; this.typeChar = 'O'; this.epnoNum = 500000+this.epnoNum; }
   this.playLength = this.length;
   // Format length
   var h, m;
@@ -712,7 +714,7 @@ function parseEpisodes(node,aid,cntEps) {
 		episodes[episodeEntry.id] = episodeEntry;
 		epOrder.push(episodeEntry.id);
 		parseEpisode(childNode,aid);
-		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.typeChar+episodeEntry.epno+'|'+episodeEntry.id);
+		if (animes[aid].episodes.indexOf(episodeEntry.id) < 0) animes[aid].episodes.push(episodeEntry.epnoNum+'|'+episodeEntry.id);
 		if (seeDebug) updateStatus('processed episode '+(i+1)+' of '+epNodes.length);
 	}
 	if (cntEps && epCnt > animes[aid].highestEp) animes[aid].highestEp = epCnt;
@@ -744,10 +746,8 @@ function parseAnimes(node) {
 		// sort the episode list
 		anime.episodes.sort(
 			function sort(a,b) {
-				var p1 = a.split('|');
-				var p2 = b.split('|');
-				var eno1 = !isNaN(p1[0]) ? Number(p1[0]) : p1[0];
-				var eno2 = !isNaN(p2[0]) ? Number(p2[0]) : p2[0];
+				var eno1 = Number(a.split('|')[0]);
+				var eno2 = Number(b.split('|')[0]);
 				if (eno1 < eno2) return -1;
 				if (eno1 > eno2) return 1;
 				return 0;
