@@ -714,7 +714,7 @@ function InitDefault() {
 		var nav = document.getElementById('layout-main');
 		var firstDiv = nav.getElementsByTagName('div')[0];
 		if (firstDiv) {
-			curPageId = firstDiv.className.substring(firstDiv.className.indexOf('g_content')+10,firstDiv.className.indexOf('_all'));
+			curPageID = firstDiv.className.substring(firstDiv.className.indexOf('g_content')+10,firstDiv.className.indexOf('_all'));
 		}
 	}
 
@@ -737,7 +737,7 @@ function InitDefault() {
 		if (sp)
 			username = sp.firstChild.nodeValue;
 	}
-	if (curPageId == 'notify') Magic.addNotifyCloseSubmit();
+	if (curPageID == 'notify') Magic.addNotifyCloseSubmit();
 }
 
 function enable_sort(func){
