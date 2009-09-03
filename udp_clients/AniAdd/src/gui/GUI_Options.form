@@ -22,7 +22,10 @@
                   <Component id="gUI_Options_RenameMove1" alignment="0" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="gUI_Options_Misc1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="gUI_Options_Misc1" min="-2" max="-2" attributes="1"/>
+                  <Component id="btn_Mode" min="-2" pref="146" max="-2" attributes="1"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -34,7 +37,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="gUI_Options_RenameMove1" min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="gUI_Options_Misc1" alignment="0" min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="gUI_Options_Misc1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="301" max="32767" attributes="0"/>
+              <Component id="btn_Mode" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -53,6 +61,11 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new GUI_Options_Misc(gui);"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_Mode">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ModeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

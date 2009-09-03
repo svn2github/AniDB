@@ -34,12 +34,14 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         tags.put("EpNo", updown_EpNo.getValue().toString());
         tags.put("EpHiNo", updown_EpHiNo.getValue().toString());
         tags.put("EpCount", updown_EpCount.getValue().toString());
+        tags.put("Ver", updown_Version.getValue().toString());
 
         tags.put("Source", cmb_Source.getSelectedItem().toString());
         tags.put("Type", cmb_Type.getSelectedItem().toString());
 
         tags.put("Depr", chck_IsDeprecated.isSelected()?"1":"");
         tags.put("Cen", chck_IsCensored.isSelected()?"1":"");
+        
 
         try {
             ts.parseAndTransform(txt_CodeBox.getText(), tags);
@@ -103,6 +105,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         cmb_Type = new javax.swing.JComboBox();
         lbl_Source = new javax.swing.JLabel();
         cmb_Source = new javax.swing.JComboBox();
+        lbl_Version = new javax.swing.JLabel();
+        updown_Version = new javax.swing.JSpinner();
 
         pnl_AnimeTitles.setOpaque(false);
 
@@ -158,7 +162,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
             pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_AnimeTitlesLayout.createSequentialGroup()
                 .addComponent(lbl_AnimeTitles)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
             .addGroup(pnl_AnimeTitlesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +173,11 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_AT_Synomymn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)
-                    .addComponent(txt_AT_English, javax.swing.GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE)))
+                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(txt_AT_English, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
         );
         pnl_AnimeTitlesLayout.setVerticalGroup(
             pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +233,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
             pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_GroupNamesLayout.createSequentialGroup()
                 .addComponent(lbl_GroupNames)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
             .addGroup(pnl_GroupNamesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,8 +241,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_GT_Long))
                 .addGap(21, 21, 21)
                 .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)))
+                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
         );
         pnl_GroupNamesLayout.setVerticalGroup(
             pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,9 +327,9 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         );
 
         txt_CodeBox.setColumns(20);
-        txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 10));
+        txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
         txt_CodeBox.setRows(5);
-        txt_CodeBox.setText("AT:=[%ATr%,%ATe%,%ATk%]\nET:=[%ETe%,%ETr%,%ETk%]\nGT:=[%GTs%,%GTl%]\nEpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),\"0\")\nSrcStyled:=\"[\"%Source%\"]\"\nisMovieType:={%Type%=\"Movie\"?\"True\":\"False\"}\nisDepr:={%Depr%?\"[Depr]\":\"\"}\nisCen:={%Cen%?\"[Cen]\":\"\"}\n\nFileName:=%AT%\" \"%EpNoPad%\" - \"%ET%\" \"%GT% %isDepr% %isCen% %SrcStyled%\nPathName:=\"E:\\Anime\\!Processed\\\"%AT%");
+        txt_CodeBox.setText("AT:=[%ATr%,%ATe%,%ATk%]\nET:=[%ETe%,%ETr%,%ETk%]\nGT:=\"[\" [%GTs%,%GTl%] \"]\"\nEpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),\"0\")\nSrcStyled:=\"[\"%Source%\"]\"\nisMovieType:={%Type%=\"Movie\"?\"True\":\"False\"}\nisDepr:={%Depr%?\"[Depr]\":\"\"}\nisCen:={%Cen%?\"[Cen]\":\"\"}\nVerStyled:={%Ver%=\"1\"?\"\":\"v\"%Ver%}\n\nFileName:=%AT%\" \"%EpNoPad% %VerStyled% \" - \"%ET%\" \"%GT% %isDepr% %isCen% %SrcStyled%\nPathName:=\"E:\\Anime\\!Processed\\\"%AT%");
         txt_CodeBox.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_CodeBoxTxtChange(evt);
@@ -363,6 +367,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         lbl_EpNo.setText("Episode Number:");
 
+        updown_EpNo.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         updown_EpNo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 updown_EpNoSpinnerChange(evt);
@@ -371,6 +376,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         lbl_EpHiNo.setText("Highest Ep Number:");
 
+        updown_EpHiNo.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         updown_EpHiNo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 updown_EpHiNoSpinnerChange(evt);
@@ -379,6 +385,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         lbl_EpCount.setText("Episode Count:");
 
+        updown_EpCount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         updown_EpCount.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 updown_EpCountSpinnerChange(evt);
@@ -404,6 +411,15 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
             }
         });
 
+        lbl_Version.setText("File Ver:");
+
+        updown_Version.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        updown_Version.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                updown_VersionSpinnerChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_MiscLayout = new javax.swing.GroupLayout(pnl_Misc);
         pnl_Misc.setLayout(pnl_MiscLayout);
         pnl_MiscLayout.setHorizontalGroup(
@@ -423,10 +439,14 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                                 .addGap(18, 18, 18)
                                 .addComponent(cmb_Type, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnl_MiscLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lbl_Source)
+                                .addGap(4, 4, 4)
+                                .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbl_Source)
+                                    .addComponent(lbl_Version))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmb_Source, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(updown_Version, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                                    .addComponent(cmb_Source, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_MiscLayout.createSequentialGroup()
@@ -458,7 +478,11 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                         .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(chck_IsDeprecated)
                             .addComponent(cmb_Source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Source)))
+                            .addComponent(lbl_Source))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Version)))
                     .addGroup(pnl_MiscLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -472,7 +496,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                         .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(updown_EpCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_EpCount))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -493,10 +517,10 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_FileName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
-                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
+                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
-            .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+            .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -595,6 +619,10 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         TagSystemCodeChange();
 }//GEN-LAST:event_cmb_SourceDropDownChange
 
+    private void updown_VersionSpinnerChange(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_updown_VersionSpinnerChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updown_VersionSpinnerChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JCheckBox chck_IsCensored;
@@ -624,6 +652,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JLabel lbl_Misc;
     protected javax.swing.JLabel lbl_Source;
     protected javax.swing.JLabel lbl_Type;
+    protected javax.swing.JLabel lbl_Version;
     protected javax.swing.JPanel pnl_AnimeTitles;
     protected javax.swing.JPanel pnl_EpTitles;
     protected javax.swing.JPanel pnl_GroupNames;
@@ -643,6 +672,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JSpinner updown_EpCount;
     protected javax.swing.JSpinner updown_EpHiNo;
     protected javax.swing.JSpinner updown_EpNo;
+    protected javax.swing.JSpinner updown_Version;
     // End of variables declaration//GEN-END:variables
 
     public String TabName() { return "TagSystem"; }

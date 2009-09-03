@@ -401,6 +401,7 @@ public class Mod_EpProcessing implements IModule {
         tags.put("Watched", procFile.ActionsDone().contains(eAction.Watched) ? "1" : "");
         tags.put("Depr", procFile.Data().get("DB_Deprecated").equals("1") ? "1" : "");
         tags.put("Cen", ((Integer.valueOf(procFile.Data().get("DB_State")) & 8) != 0 ? "1" : ""));
+        tags.put("Ver", GetFileVersion(Integer.valueOf(procFile.Data().get("DB_State"))).toString());
 
         //String path = "";
         ts.parseAndTransform((String)mem.get("GUI_TagSystemCode"), tags);
@@ -534,7 +535,7 @@ public class Mod_EpProcessing implements IModule {
     public String ModuleName() {return modName;}
     public void Initialize(IAniAdd aniAdd) {
         modState = eModState.Initializing;
-        
+
         this.aniAdd = aniAdd;
         aniAdd.AddComListener(new AniAddEventHandler());
         mem = (Mod_Memory)aniAdd.GetModule("Memory");
@@ -592,7 +593,7 @@ public class Mod_EpProcessing implements IModule {
         Start, Pause, Resume, Stop
     }
     
-	public enum eComType {
+    public enum eComType {
 		FileSettings,
 		FileCountChanged,
 		FileEvent,
@@ -623,6 +624,19 @@ public class Mod_EpProcessing implements IModule {
 		RelFilesRenamingFailed,
 		Done
     }
+  
+    public static Integer GetFileVersion(int state){
+        int verFlag = (state & (4 + 8 + 16 + 32)) >> 2 ;
+        int version = 1;
+        
+        while(verFlag != 0){
+            version++;
+            verFlag = verFlag>> 1 ;
+        }
+        
+        return version;
+    }
+
     // </editor-fold>
 }
 

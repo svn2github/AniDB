@@ -11,13 +11,11 @@ import java.awt.datatransfer.Transferable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.StringReader;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 import java.util.Stack;
 import javax.swing.JComponent;
@@ -60,7 +58,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     private void RemoveGuiTab(String tabName){
         for (int i=0; i<tbctrl_Main.getTabCount(); i++) {
             if(tabName.equals(tbctrl_Main.getTitleAt(i))){
-                tabs.remove(tabs.get(tabName));
+                tabs.remove(tabName);
                 tbctrl_Main.removeTabAt(i);
                 return;
             }
@@ -102,15 +100,10 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     private void DisplayErrorEvent(ComEvent comEvent){
         errorLst.add(comEvent);
 
-        lbl_Notice.setBackground((comEvent.Type() == ComEvent.eType.Warning)?Color.YELLOW:Color.RED);
+        pnl_Notice.setBackground((comEvent.Type() == ComEvent.eType.Warning)?Color.YELLOW:Color.RED);
         lbl_Notice.setText((String)comEvent.Params(0));
-
-
-        if(pnl_Notice.isVisible()){
-        //    if(!oldNotice.equals("")) errorLst.add(oldNotice);
-        } else {
-            pnl_Notice.setVisible(true);
-        }
+        
+        pnl_Notice.setVisible(true);
     }
     
     // <editor-fold defaultstate="collapsed" desc="IModule">
@@ -296,7 +289,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
             pnl_Notice.setVisible(false);
         }else{
             ComEvent comEvent = errorLst.peek();
-            lbl_Notice.setBackground(comEvent.Type()== ComEvent.eType.Warning?Color.YELLOW:Color.RED);
+            pnl_Notice.setBackground(comEvent.Type()== ComEvent.eType.Warning?Color.YELLOW:Color.RED);
             lbl_Notice.setText((String)comEvent.Params(0));
         }
     }//GEN-LAST:event_btn_CloseNoticeActionPerformed
