@@ -5,8 +5,11 @@
 package aniAdd.misc;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Date;
 
 public class Misc {
 
@@ -110,6 +113,17 @@ public class Misc {
         h = time;
 
         return stringPadding(h + "", 2, '0') + ":" + stringPadding(m + "", 2, '0') + ":" + stringPadding(s + "", 2, '0');
+    }
+
+    public static String DateToString(Date date){
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        return dateFormat.format(date);
+    }
+
+    public static String DateToString(Date date, String format){
+        DateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(date);
+
     }
 
     public static int binarySearch(ArrayList<Integer> a, int x) {

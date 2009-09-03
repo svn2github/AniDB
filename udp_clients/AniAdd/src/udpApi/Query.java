@@ -4,11 +4,13 @@
  */
 package udpApi;
 
+import java.util.Date;
+
 public class Query {
     private Cmd cmd;
-	private Reply reply;
-    private Long sendOnMills;
-    private Long replyOnMills;
+    private Reply reply;
+    private Date sendOnMills;
+    private Date replyOnMills;
     private int retries;
     private Boolean success;   
     
@@ -16,10 +18,10 @@ public class Query {
 	public void setCmd(Cmd cmd) {this.cmd = cmd;}
 	public Reply getReply() {return reply;}
 	public void setReply(Reply reply) {this.reply = reply;}
-	public Long getSendOn() {return sendOnMills;}
-	public void setSendOn(Long sendOn) {this.sendOnMills = sendOn;}
-	public Long getReplyOn() {return replyOnMills;}
-	public void setReplyOn(Long replyOn) {this.replyOnMills = replyOn;}
+	public Date getSendOn() {return sendOnMills;}
+	public void setSendOn(Date sendOn) {this.sendOnMills = sendOn;}
+	public Date getReplyOn() {return replyOnMills;}
+	public void setReplyOn(Date replyOn) {this.replyOnMills = replyOn;}
 	public int getRetries() {return retries;}
 	public void setRetries(int retries) {this.retries = retries;}
 	public Boolean getSuccess() {return success;}

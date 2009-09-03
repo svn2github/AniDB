@@ -70,6 +70,8 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
           !((comEvent.ParamCount() > 0) && (comEvent.Params(0).equals("Cmd") || comEvent.Params(0).equals("Reply"))) ||
           (api.ModState() == eModState.Terminating)) return;
 
+        if((Integer)comEvent.Params(1) < 0) return;
+
         if(!SwingUtilities.isEventDispatchThread()){
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {
@@ -94,17 +96,16 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
         }
 
         Integer queryIndex = (Integer)comEvent.Params(1);
-        if(queryIndex < 0) return;
 
         Query query = api.Queries().get(queryIndex);
-        String nodeText = Misc.longToTime(query.getSendOn()) + " ID " + queryIndex + " " + query.getCmd().Action();
+        String nodeText = Misc.DateToString(query.getSendOn()) + " ID " + queryIndex + " " + query.getCmd().Action();
         nodeText += (query.getRetries() > 0 ? " Retries: " + query.getRetries() : "") + " Arrived: " + (query.getSuccess()!=null ? (query.getSuccess() ? "Yes" : "Failed") : "Pending");
 
         TreeNode node = null;
         if((Boolean)comEvent.Params(2)) {
             node = new TreeNode(nodeText, queryIndex.toString());
 
-            nodeText = Misc.longToTime(query.getSendOn()) + " Send: " + query.getCmd().Action() + " ";
+            nodeText = Misc.DateToString(query.getSendOn()) + " Send: " + query.getCmd().Action() + " ";
             for (Map.Entry<String,String> entrySet : query.getCmd().Params().entrySet()) {
                 nodeText += entrySet.getKey() + "=" + (entrySet.getKey().equals("pass")?"***":entrySet.getValue())+" ";
             }
@@ -122,7 +123,7 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
 
             node.BackColor(query.getRetries() >= 3 && query.getSuccess()!=null && !query.getSuccess() ? Color.red : null);
             if(query.getRetries() == 0) {
-                nodeText = Misc.longToTime(query.getSendOn()) + " Rcvd: " + query.getReply().ReplyId() + " " + query.getReply().ReplyMsg();
+                nodeText = Misc.DateToString(query.getSendOn()) + " Rcvd: " + query.getReply().ReplyId() + " " + query.getReply().ReplyMsg();
                 node.add(new TreeNode(nodeText, null));
 
                 nodeText = "";

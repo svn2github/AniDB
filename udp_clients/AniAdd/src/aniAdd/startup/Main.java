@@ -11,6 +11,7 @@ import aniAdd.Communication.ComEvent;
 import gui.GUI;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -27,7 +28,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception ex) { }
-        
+
         aniAdd = new AniAdd();
 
         frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
