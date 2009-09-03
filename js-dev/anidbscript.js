@@ -12,9 +12,9 @@ var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
 	"version":"1.03",
-	"revision":"$Revision: 2933 $",
-	"date":"$Date:: 2009-08-04 21:24:43 +0100#$",
-	"author":"$Author: fahrenheit $",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
 	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
 var usejspopups = CookieGetByKey('other', 'jsp') || true;
@@ -664,6 +664,33 @@ var Magic = {
 				}
 			}
 		}),
+	'addNotifyCloseSubmit':(function() {
+			var form = document.getElementsByTagName('form')[0];
+			if (!form) return;
+			var outputLink = form.action+'?';
+			var inputs = form.getElementsByTagName('input');
+			var inputValues = new Array();
+			var newSubmit = document.createElement('input');
+			for (var i = 0; i < inputs.length; i++) {
+				var input = inputs[i];
+				if (input.type == 'submit') { // create a new "submit" button
+					inputValues.push(input.name+"=1");
+					newSubmit.type = 'button';
+					newSubmit.value = input.value;
+					newSubmit.name = input.name;
+					input.parentNode.replaceChild(newSubmit,input);
+				} else {
+					inputValues.push(input.name+"="+input.value);
+				}
+			}
+			newSubmit.onclick = function postData() {
+				var req = xhttpRequest();
+				var data = inputValues.join('&');
+				if (isLocalHost()) xhttpRequestPost(req, 'msg_del.html', null, data);
+				else xhttpRequestPost(req, 'animedb.pl', null, data);
+				window.close();
+			}
+		}),
 	'enhanceCheckboxes':(function() {
 			var formElems = document.getElementsByTagName('form');
 			for (var i = 0; i < formElems.length; i++) {
@@ -683,6 +710,12 @@ function InitDefault() {
 	if (document.getElementById('layout-nav')) {
 		var nav = document.getElementById('layout-nav');
 		curPageID = nav.className.substring(0,nav.className.indexOf('_nav'));
+	} else if (document.getElementById('layout-main')) {
+		var nav = document.getElementById('layout-main');
+		var firstDiv = nav.getElementsByTagName('div')[0];
+		if (firstDiv) {
+			curPageId = firstDiv.className.substring(firstDiv.className.indexOf('g_content')+10,firstDiv.className.indexOf('_all'));
+		}
 	}
 
 	//Magic.enable_hover_menu();
@@ -704,6 +737,7 @@ function InitDefault() {
 		if (sp)
 			username = sp.firstChild.nodeValue;
 	}
+	if (curPageId == 'notify') Magic.addNotifyCloseSubmit();
 }
 
 function enable_sort(func){
