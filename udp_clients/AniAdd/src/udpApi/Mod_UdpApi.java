@@ -573,7 +573,7 @@ public class Mod_UdpApi implements IModule {
             case 602:
             case 666:
                 aniDBAPIDown = true;
-                Log(ComEvent.eType.Error, "Server API Failure Code: " + reply.ReplyId());
+                //Log(ComEvent.eType.Error, "Server API Failure Code: " + reply.ReplyId());
                 //connected = false;//TODO
                 break;
 
