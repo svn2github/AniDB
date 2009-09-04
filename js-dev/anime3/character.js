@@ -800,6 +800,7 @@ function prepPage() {
 
 	switch(curPageID) {
 		case 'creator':
+		case 'creatortext':
 		case 'character': prepPageEntity(); break;
 		case 'addcreator':
 		case 'addcharacter': prepPageAddEntity(); break;
