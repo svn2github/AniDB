@@ -9,7 +9,7 @@ jsVersionArray.push({
 var sortingCols = {
 	'mynotifies_list': {	"name anime":{"type":'c_setlatin',"isDefault":true},
                             "type":{"type":'c_latin'},
-                            "priority":{"type":'c_set'},
+                            "priority sortable":{"type":'c_set'},
                             "mylist sortable":{"type":'c_set'}, // anidbscript.js adds class 'sortable'
                             "seen sortable":{"type":'c_set'},   // before handleTables() is called
                             "state":{"type":'c_latin'},
