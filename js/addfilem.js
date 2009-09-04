@@ -273,15 +273,13 @@ function MyFile(name, size, ed2k){
 	}
 	this.find_epno = function(text){
 		var regx = /\u7B2C(\d+)(\u8A71|\u5DFB)/;
-		if(regx.test(text))
-			return (RegExp.$1)*1;
-		else if (/\[([0-9]{0,4})\]/.test(text))
-			return (RegExp.$1)*1;
-		else if (/EP([0-9]{0,4})/.test(text)) return (RegExp.$1)*1;
-		else{
+		if(regx.test(text)) return (RegExp.$1)*1;
+		else if (/EP[\s\_|\.]?([0-9]{0,4})/i.test(text) && RegExp.$1) return (RegExp.$1)*1;
+		else if (/EP([0-9]{0,4})/i.test(text) && RegExp.$1) return (RegExp.$1)*1;
+		else if (/\[([0-9]{0,4})\]/.test(text) && RegExp.$1) return (RegExp.$1)*1;
+		else {
 			regx = /(\-[\s\_|\.]?|[\s\_|\.])\[*([SCTPO]?\d+)\]*(v\d)?[\s\_|\.\-\(\[\.]/;
-			if(regx.test(text))
-				return (RegExp.$2)*1 || RegExp.$2;
+			if(regx.test(text)) return (RegExp.$2)*1 || RegExp.$2;
 		}
 	}
 	this.find_version = function(text){
