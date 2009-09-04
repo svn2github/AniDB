@@ -1,9 +1,9 @@
 jsVersionArray.push({
 	"file":"addfilem.js",
 	"version":"1.0",
-	"revision":"$Revision: 2128 $",
-	"date":"$Date:: 2009-01-31 15:09:06 +0000#$",
-	"author":"$Author: fahrenheit $",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
 	"changelog":"Initial version"
 });
 
@@ -275,8 +275,9 @@ function MyFile(name, size, ed2k){
 		var regx = /\u7B2C(\d+)(\u8A71|\u5DFB)/;
 		if(regx.test(text))
 			return (RegExp.$1)*1;
-		else if (/\[([0-9]{0,3})\]/.test(text))
+		else if (/\[([0-9]{0,4})\]/.test(text))
 			return (RegExp.$1)*1;
+		else if (/EP([0-9]{0,4})/.test(text)) return (RegExp.$1)*1;
 		else{
 			regx = /(\-[\s\_|\.]?|[\s\_|\.])\[*([SCTPO]?\d+)\]*(v\d)?[\s\_|\.\-\(\[\.]/;
 			if(regx.test(text))
@@ -287,6 +288,8 @@ function MyFile(name, size, ed2k){
 		var regx = /v([1..5])[\s\_\.\(\[]/i;
 		if(regx.test(text))
 			return (RegExp.$1)*1
+		else if(/v(\d)/.test(text)) return (RegExp.$1)*1
+		else return 1;
 	}
 	this.name = name;
 	this.size = size;

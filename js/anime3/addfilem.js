@@ -101,6 +101,7 @@ function MyFile(name, size, ed2k){
 	this.find_version = function(text){
 		var regx = /(\d)v(\d)/;
 		if(regx.test(text)) return (RegExp.$2)*1
+		else if(/v(\d)/.test(text)) return (RegExp.$1)*1
 		else return(1);
 	}
 	this.find_filetype = function(text){
@@ -115,7 +116,8 @@ function MyFile(name, size, ed2k){
 	this.find_epno = function(text){
 		var regx = /\u7B2C(\d+)(\u8A71|\u5DFB)/;
 		if(regx.test(text)) return (RegExp.$1)*1;
-		else if (/\[([0-9]{0,3})\]/.test(text)) return (RegExp.$1)*1;
+		else if (/\[([0-9]{0,4})\]/.test(text)) return (RegExp.$1)*1;
+		else if (/EP([0-9]{0,4})/.test(text)) return (RegExp.$1)*1;
 		else {
 			regx = /(\-[\s\_|\.]?|[\s\_|\.])\[*([SCTPO]?\d+)\]*(v\d)?[\s\_|\.\-\(\[\.]/;
 			if(regx.test(text)) return (RegExp.$2)*1 || RegExp.$2;
