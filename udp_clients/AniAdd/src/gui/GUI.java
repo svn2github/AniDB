@@ -24,6 +24,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class GUI extends javax.swing.JPanel implements IMod_GUI {
+
     private HashMap<String, ITab> tabs;
     private IAniAdd aniAdd;
     private Mod_Memory mem;
@@ -37,93 +38,117 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         errorLst = new Stack<ComEvent>();
     }
 
-    private void SaveToMem(String key, Object value) {mem.put("GUI_"+key, value);}
-    private Object LoadFromMem(String key, Object defVal) {return mem.get("GUI_"+key, defVal);}
-    private Object LoadFromMem(String key) {return mem.get("GUI_"+key);}
+    private void SaveToMem(String key, Object value) {
+        mem.put("GUI_" + key, value);
+    }
 
-    private int AddGuiTab(ITab tab){
+    private Object LoadFromMem(String key, Object defVal) {
+        return mem.get("GUI_" + key, defVal);
+    }
+
+    private Object LoadFromMem(String key) {
+        return mem.get("GUI_" + key);
+    }
+
+    private int AddGuiTab(ITab tab) {
         int index = tbctrl_Main.getTabCount();
-        for (int i=0; i<tbctrl_Main.getTabCount(); i++) {
-            if(tab.PreferredTabLocation() < tabs.get(tbctrl_Main.getTitleAt(i)).PreferredTabLocation()){
+        for (int i = 0; i < tbctrl_Main.getTabCount(); i++) {
+            if (tab.PreferredTabLocation() < tabs.get(tbctrl_Main.getTitleAt(i)).PreferredTabLocation()) {
                 index = i;
                 break;
             }
         }
 
         tabs.put(tab.TabName(), tab);
-        tbctrl_Main.insertTab(tab.TabName(), null, (JComponent)tab, "", index);
+        tbctrl_Main.insertTab(tab.TabName(), null, (JComponent) tab, "", index);
         tab.Initialize(aniAdd, new Gui());
         return index;
     }
-    private void RemoveGuiTab(String tabName){
-        for (int i=0; i<tbctrl_Main.getTabCount(); i++) {
-            if(tabName.equals(tbctrl_Main.getTitleAt(i))){
+
+    private void RemoveGuiTab(String tabName) {
+        for (int i = 0; i < tbctrl_Main.getTabCount(); i++) {
+            if (tabName.equals(tbctrl_Main.getTitleAt(i))) {
                 tabs.remove(tabName);
                 tbctrl_Main.removeTabAt(i);
                 return;
             }
         }
     }
-    
+
     private void attachDragAndDrop(TransferHandler transferHandler) {
         setTransferHandler(transferHandler);
     }
-    protected static List<File> transferableToFileList(Transferable t){
-        try			{
-            List<File> files=new LinkedList<File>();
-            if(t.isDataFlavorSupported(DataFlavor.stringFlavor)){
-                String data = (String)t.getTransferData(DataFlavor.stringFlavor);
-                BufferedReader buf=new BufferedReader(new StringReader(data));
+
+    protected static List<File> transferableToFileList(Transferable t) {
+        try {
+            List<File> files = new LinkedList<File>();
+            if (t.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+                String data = (String) t.getTransferData(DataFlavor.stringFlavor);
+                BufferedReader buf = new BufferedReader(new StringReader(data));
                 String line;
-                while((line=buf.readLine())!=null){
-                    if(line.startsWith("file:/")){
-                        line=line.substring("file:/".length());
+                while ((line = buf.readLine()) != null) {
+                    if (line.startsWith("file:/")) {
+                        line = line.substring("file:/".length());
                         files.add(new File(line));
-                    } else
-                        System.out.println("Not sure how to read: "+line);
+                    } else {
+                        System.out.println("Not sure how to read: " + line);
+                    }
                 }
                 return files;
-            } else if (t.isDataFlavorSupported(DataFlavor.javaFileListFlavor)){
-                List data = (List)t.getTransferData(DataFlavor.javaFileListFlavor);
+            } else if (t.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+                List data = (List) t.getTransferData(DataFlavor.javaFileListFlavor);
                 Iterator i = data.iterator();
-                while (i.hasNext())
-                    files.add((File)i.next());
+                while (i.hasNext()) {
+                    files.add((File) i.next());
+                }
                 return files;
             }
             return null;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private void DisplayErrorEvent(ComEvent comEvent){
+    private void DisplayErrorEvent(ComEvent comEvent) {
         errorLst.add(comEvent);
 
-        pnl_Notice.setBackground((comEvent.Type() == ComEvent.eType.Warning)?Color.YELLOW:Color.RED);
-        lbl_Notice.setText((String)comEvent.Params(0));
-        
+        pnl_Notice.setBackground((comEvent.Type() == ComEvent.eType.Warning) ? Color.YELLOW : Color.RED);
+        lbl_Notice.setText((String) comEvent.Params(0));
+
         pnl_Notice.setVisible(true);
     }
-    
     // <editor-fold defaultstate="collapsed" desc="IModule">
     protected String modName = "MainGUI";
     protected eModState modState = eModState.New;
 
-    public eModState ModState() { return modState; }
-    public String ModuleName() {return modName;}
+    public eModState ModState() {
+        return modState;
+    }
+
+    public String ModuleName() {
+        return modName;
+    }
+
     public void Initialize(IAniAdd aniAdd) {
         modState = eModState.Initializing;
 
         this.aniAdd = aniAdd;
         aniAdd.AddComListener(new AniAddEventHandler());
-        
-        mem = (Mod_Memory)aniAdd.GetModule("Memory");
+
+        mem = (Mod_Memory) aniAdd.GetModule("Memory");
         mem.AddComListener(new ComListener() {
+
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Type() == ComEvent.eType.Information && ((String)comEvent.Params(0)).equals("SettingsCleared")){
+                if (comEvent.Type() == ComEvent.eType.Information && ((String) comEvent.Params(0)).equals("SettingsCleared")) {
                     tbctrl_Main.removeAll();
-                    for (ITab tab : tabs.values()) tab.Terminate();
+
+                    tbctrl_Main.removeChangeListener(tbctrl_Main.getChangeListeners()[0]);
+
+
+                    for (ITab tab : tabs.values()) {
+                        tab.Terminate();
+                    }
                     tabs.clear();
                     InitUI();
                 }
@@ -132,8 +157,9 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         for (IModule mod : aniAdd.GetModules()) {
             mod.AddComListener(new ComListener() {
+
                 public void EventHandler(ComEvent comEvent) {
-                    if(comEvent.Type() == ComEvent.eType.Error || comEvent.Type() == ComEvent.eType.Fatal || comEvent.Type() == ComEvent.eType.Warning){
+                    if (comEvent.Type() == ComEvent.eType.Error || comEvent.Type() == ComEvent.eType.Fatal || comEvent.Type() == ComEvent.eType.Warning) {
                         DisplayErrorEvent(comEvent);
                     }
                 }
@@ -141,31 +167,40 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         }
 
         InitUI();
-        
+
         modState = eModState.Initialized;
     }
-    private void InitUI(){
-        ITab tab = new GUI_FileAdd(); AddGuiTab(tab);
-        tab = new GUI_Help(); AddGuiTab(tab);
-        tab = new GUI_Logs(); AddGuiTab(tab);
-        tab = new GUI_Options(); AddGuiTab(tab);
-        tbctrl_Main.setSelectedIndex((Integer)LoadFromMem("SelectedTabIndex", 0));
+
+    private void InitUI() {
+        ITab tab = new GUI_FileAdd();
+        AddGuiTab(tab);
+        tab = new GUI_Help();
+        AddGuiTab(tab);
+        tab = new GUI_Logs();
+        AddGuiTab(tab);
+        tab = new GUI_Options();
+        AddGuiTab(tab);
+        tbctrl_Main.setSelectedIndex((Integer) LoadFromMem("SelectedTabIndex", 0));
 
         tbctrl_Main.addChangeListener(new ChangeListener() {
-            String oldTabId = "";
-            public void stateChanged(ChangeEvent e) {
-                int selIndex = tbctrl_Main.getSelectedIndex()==-1?0:tbctrl_Main.getSelectedIndex();
 
-                if(oldTabId.isEmpty()) oldTabId = tbctrl_Main.getTitleAt(0);
+            String oldTabId = "";
+
+            public void stateChanged(ChangeEvent e) {
+                int selIndex = tbctrl_Main.getSelectedIndex() == -1 ? 0 : tbctrl_Main.getSelectedIndex();
+
+                if (oldTabId.isEmpty()) {
+                    oldTabId = tbctrl_Main.getTitleAt(0);
+                }
 
                 tabs.get(oldTabId).LostFocus();
                 tabs.get(tbctrl_Main.getTitleAt(selIndex)).GainedFocus();
 
                 oldTabId = tbctrl_Main.getTitleAt(selIndex);
             }
-        });        
+        });
     }
-    
+
     public void Terminate() {
         modState = eModState.Terminating;
 
@@ -176,57 +211,86 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         modState = eModState.Terminated;
     }
     // </editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="Com System">
-	private ArrayList<ComListener> listeners = new ArrayList<ComListener>();
-    protected void ComFire(ComEvent comEvent){
+    private ArrayList<ComListener> listeners = new ArrayList<ComListener>();
+
+    protected void ComFire(ComEvent comEvent) {
         for (ComListener listener : listeners) {
             listener.EventHandler(comEvent);
         }
     }
-	public void AddComListener(ComListener comListener){ listeners.add(comListener); }
-	public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }
 
-    class AniAddEventHandler implements ComListener{
+    public void AddComListener(ComListener comListener) {
+        listeners.add(comListener);
+    }
+
+    public void RemoveComListener(ComListener comListener) {
+        listeners.remove(comListener);
+    }
+
+    class AniAddEventHandler implements ComListener {
+
         public void EventHandler(ComEvent comEvent) {
-
         }
     }
     // </editor-fold>
 
+    public static interface ITab {
 
-    
-    public static interface ITab{
         String TabName();
+
         int PreferredTabLocation();
 
         void Initialize(IAniAdd aniAdd, IGUI gui);
+
         void Terminate();
 
         void GainedFocus();
+
         void LostFocus();
 
         void GUIEventHandler(ComEvent comEvent);
     }
 
-    protected class Gui implements IGUI{
-        public eModState ModState() {return modState;}
-        public void ToMem(String key, Object value) {SaveToMem(key, value);}
-        public Object FromMem(String key) {return LoadFromMem(key);}
-        public Object FromMem(String key, Object defValue) {return LoadFromMem(key, defValue);}
-        public void GUIEvent(ComEvent comEvent) {
-            for(ITab tab : tabs.values()) tab.GUIEventHandler(comEvent);
+    protected class Gui implements IGUI {
+
+        public eModState ModState() {
+            return modState;
         }
 
-        public void SetDragnDropHandler(TransferHandler th){
+        public void ToMem(String key, Object value) {
+            SaveToMem(key, value);
+        }
+
+        public Object FromMem(String key) {
+            return LoadFromMem(key);
+        }
+
+        public Object FromMem(String key, Object defValue) {
+            return LoadFromMem(key, defValue);
+        }
+
+        public void GUIEvent(ComEvent comEvent) {
+            for (ITab tab : tabs.values()) {
+                tab.GUIEventHandler(comEvent);
+            }
+        }
+
+        public void SetDragnDropHandler(TransferHandler th) {
             attachDragAndDrop(th);
         }
 
-        public int AddTab(ITab tab) {return AddGuiTab(tab);}
-        public void SelectTab(int tabIndex){
+        public int AddTab(ITab tab) {
+            return AddGuiTab(tab);
+        }
+
+        public void SelectTab(int tabIndex) {
             tbctrl_Main.setSelectedIndex(tabIndex);
         }
-        public void RemoveTab(String tabName) {RemoveGuiTab(tabName);}
+
+        public void RemoveTab(String tabName) {
+            RemoveGuiTab(tabName);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -285,16 +349,14 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     private void btn_CloseNoticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CloseNoticeActionPerformed
         errorLst.pop();
 
-        if(errorLst.empty()){
+        if (errorLst.empty()) {
             pnl_Notice.setVisible(false);
-        }else{
+        } else {
             ComEvent comEvent = errorLst.peek();
-            pnl_Notice.setBackground(comEvent.Type()== ComEvent.eType.Warning?Color.YELLOW:Color.RED);
-            lbl_Notice.setText((String)comEvent.Params(0));
+            pnl_Notice.setBackground(comEvent.Type() == ComEvent.eType.Warning ? Color.YELLOW : Color.RED);
+            lbl_Notice.setText((String) comEvent.Params(0));
         }
     }//GEN-LAST:event_btn_CloseNoticeActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_CloseNotice;
     private javax.swing.JLabel lbl_Notice;

@@ -369,14 +369,18 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         Thread t;
 
         public void Start(){
-            t = new Thread(this);
-            t.start();
+            if(t == null || !t.isAlive()){
+                t = new Thread(this);
+                t.start();
+            }
         }
+
         public void Terminate(){
             try {
-                if( t!= null) t.join();
+                if(t != null) t.join();
             } catch (InterruptedException ex) { ex.printStackTrace();}
         }
+
         public void run() {
             while((epProc.isProcessing() || api.waitingCmdCount()!=0) && gui.ModState() != eModState.Terminating){
                 do {

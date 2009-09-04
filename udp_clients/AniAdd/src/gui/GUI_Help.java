@@ -16,6 +16,8 @@ import aniAdd.IAniAdd;
 import aniAdd.misc.Mod_Memory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import processing.Mod_EpProcessing;
 
 /**
  *
@@ -82,12 +84,21 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
     public String TabName() { return "Help"; }
     public int PreferredTabLocation() { return 3; }
 
-    public void Initialize(IAniAdd aniAdd, final IGUI gui) {
+    public void Initialize(final IAniAdd aniAdd, final IGUI gui) {
         mem = (Mod_Memory)aniAdd.GetModule("Memory");
 
         btn_ResetSettings.addActionListener(new ActionListener() {
+            Mod_EpProcessing epProc = (Mod_EpProcessing)aniAdd.GetModule("EpProcessing");
+
             public void actionPerformed(ActionEvent e) {
-                mem.clear();
+                if(epProc.isProcessing()){
+                    JOptionPane.showMessageDialog(null, "Cannot reset settings while files are being processed", "Resetting Settings", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+                
+                if(JOptionPane.showConfirmDialog(null, "Reset all settings?", "Resetting Settings", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                    mem.clear();
+                }
             }
         });
     }
