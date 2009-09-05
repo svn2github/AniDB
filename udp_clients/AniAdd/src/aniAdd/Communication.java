@@ -79,7 +79,7 @@ public interface Communication {
         @Override
         public String toString() {
             String str;
-            str = Misc.DateToString(createdOn, "HH:mm:ss") + ": " + (getSource() instanceof IModule ? (((IModule) getSource()).ModuleName() + " " + Type()) : "");
+            str = Misc.DateToString(createdOn, "HH:mm:ss") + " " + type + ": " + (getSource() instanceof IModule ? (((IModule) getSource()).ModuleName()) : "");
             for (int i = 0; i < ParamCount(); i++) {
                 str += " " + Params(i).toString();
             }
@@ -87,7 +87,6 @@ public interface Communication {
         }
 
         public enum eType {
-
             Debug, Information, Manipulation, Warning, Error, Fatal
         }
     }

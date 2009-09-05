@@ -44,7 +44,7 @@ public class Mod_UdpApi implements IModule {
     private int replyHeadStart; //TODO: Change handling
 
     private Thread send;
-    private Thread recieve;
+    private Thread receive;
     private Thread idle;
     private Idle idleClass; //-_-
 
@@ -56,7 +56,7 @@ public class Mod_UdpApi implements IModule {
     public Mod_UdpApi() {
         idleClass = new Idle();
         idle = new Thread(idleClass);
-        recieve = new Thread(new Recieve());
+        receive = new Thread(new Receive());
         send = new Thread(new Send());
 
         queries = new ArrayList<Query>();
@@ -164,10 +164,13 @@ public class Mod_UdpApi implements IModule {
         }
         if (replyFunc != null) {
             replyFunc.invoke((!reply.Identifier().equals("[SERVER]")) ? reply.QueryId() : reply.QueryId() ^ -1);
+        } else {
+            Log(ComEvent.eType.Debug, "Reply couldn't be delivered (unhandled reply)");
         }
     }
 
     public boolean authenticate() {
+        Log(ComEvent.eType.Debug, "Authenticating");
         if (userName == null || userName.isEmpty() || ((password == null || password.isEmpty()) && (session == null || session.isEmpty()))) {
             Log(ComEvent.eType.Error, "UserName or Password not set. (Aborting)");
             return false;
@@ -180,18 +183,22 @@ public class Mod_UdpApi implements IModule {
         }
 
         if (idle.getState() == java.lang.Thread.State.NEW) {
+            Log(ComEvent.eType.Debug, "Starting Idle thread");
             idle.start();
         } else if (idle.getState() == java.lang.Thread.State.TERMINATED) {
+            Log(ComEvent.eType.Debug, "Restarting Idle thread");
             idleClass = new Idle();
             idle = new Thread(idleClass);
             idle.start();
         }
 
-        if (recieve.getState() == java.lang.Thread.State.NEW) {
-            recieve.start();
-        } else if (recieve.getState() == java.lang.Thread.State.TERMINATED) {
-            recieve = new Thread(new Recieve());
-            recieve.start();
+        if (receive.getState() == java.lang.Thread.State.NEW) {
+            Log(ComEvent.eType.Debug, "Starting Receive Thread");
+            receive.start();
+        } else if (receive.getState() == java.lang.Thread.State.TERMINATED) {
+            Log(ComEvent.eType.Debug, "Restarting Receive thread");
+            receive = new Thread(new Receive());
+            receive.start();
         }
 
         auth = true;
@@ -211,10 +218,12 @@ public class Mod_UdpApi implements IModule {
             for (int i = cmdToSend.size() - 1; i >= 0; i--) {
                 if (cmdToSend.get(i).Action().equals("AUTH")) {
                     cmdToSend.remove(i);
+                    Log(ComEvent.eType.Debug, "Pending (old) Authentication removed");
                 }
             }
         }
 
+        Log(ComEvent.eType.Debug, "Adding Authentication Cmd to queue");
         queryCmd(cmd);
         return true;
     }
@@ -232,31 +241,35 @@ public class Mod_UdpApi implements IModule {
     }
 
     public void queryCmd(Cmd cmd) {
-        if (cmdToSend == null) {
+        if (cmd == null) {
             Log(ComEvent.eType.Warning, "cmd cannot be a null reference... (ignored)");
             return;
         }
 
         synchronized (cmdToSend) {
             cmdToSend.add(cmd);
+            Log(ComEvent.eType.Debug, "Added " + cmd.Action() + " cmd to queue");
         }
 
         if (send.getState() == java.lang.Thread.State.NEW) {
+            Log(ComEvent.eType.Debug, "Starting Send thread");
             send.start();
         } else if (send.getState() == java.lang.Thread.State.TERMINATED) {
+            Log(ComEvent.eType.Debug, "Restarting Send thread");
             send = new Thread(new Send());
             send.start();
         }
-
-
     }
 
     public void registerEvent(ICallBack<Integer> reply, String... events) {
+        String evtLst = " ";
         for (String evt : events) {
             if (reply != null) {
                 eventList.put(evt, reply);
+                evtLst += evt + " ";
             }
         }
+        Log(ComEvent.eType.Debug, "Registered Events (" + evtLst + ") for " + reply.getClass().getName());
     }
 
     public void logOut() {
@@ -315,19 +328,20 @@ public class Mod_UdpApi implements IModule {
 
                 if(!aniDBAPIDown) authRetry = null;
                 
-                if (!aniDBAPIDown && isAuthed) {
+                if (!aniDBAPIDown && auth) {
                     replysPending = 0;
-                    for (int i = 0; i < queries.size(); i++) {
-                        if (queries.get(i).getSuccess() == null && queries.get(i).getSendOn() != null) {
-                            if ((now.getTime() - queries.get(i).getSendOn().getTime()) > 15000) {
-                                if (queries.get(i).getRetries() < MAXRETRIES) {
+                    for(int i = 0; i < queries.size(); i++) {
+                        if(queries.get(i).getSuccess() == null && queries.get(i).getSendOn() != null) {
+                            if((now.getTime() - queries.get(i).getSendOn().getTime()) > 15000) {
+                                if(queries.get(i).getRetries() < MAXRETRIES) {
                                     queries.get(i).setRetries(queries.get(i).getRetries() + 1);
                                     queries.get(i).setSendOn(null);
-                                    System.out.println("Cmd Timeout: Resend (Retries:" + queries.get(i).getRetries() + ")");
+                                    Log(ComEvent.eType.Debug, "Cmd Timeout: Resend (Retries:" + queries.get(i).getRetries() + ")");
                                     queryCmd(queries.get(i).getCmd());
                                 } else {
                                     queries.get(i).setSuccess(false);
                                     Log(ComEvent.eType.Information, "Cmd", i, false);
+                                    Log(ComEvent.eType.Error, "Sending command failed. (Retried " + MAXRETRIES + " times)");
                                 }
                             } else if (queries.get(i).getRetries() <= MAXRETRIES) {
                                 replysPending++;
@@ -391,7 +405,7 @@ public class Mod_UdpApi implements IModule {
                             //Debug.Print("Send: " + cmdToSend[0].ToString(session).Replace("\n", " # "));
 
                             if (!NODELAY.contains(cmdToSend.get(0).Action())) {
-                                lastDelayPackageMills = now;
+                                lastDelayPackageMills = new Date(now.getTime());
                             }
 
                             replyHeadStart++;
@@ -418,7 +432,8 @@ public class Mod_UdpApi implements IModule {
                                                   ( isAuthed && !n1 &&  r1 &&  n2       );
 
                                     if (canOptimize) {
-                                        cmdToSend.add(0, cmdToSend.get(0));
+                                        Log(ComEvent.eType.Debug, "cmdToSend reordered QueryId: " + i + " Action: " + cmdToSend.get(i).Action());
+                                        cmdToSend.add(0, cmdToSend.get(i));
                                         cmdToSend.remove(i + 1);
                                         cmdReordered = true;
                                         break;
@@ -458,7 +473,7 @@ public class Mod_UdpApi implements IModule {
         }
     }
 
-    private class Recieve implements Runnable {
+    private class Receive implements Runnable {
 
         public void run() {
             DatagramPacket packet;
@@ -502,6 +517,7 @@ public class Mod_UdpApi implements IModule {
             auth = false;
         } else {
             //Unexpected logout
+            Log(ComEvent.eType.Debug, "Sync Logout");
             isEncodingSet = false;
             isAuthed = false;
         }
@@ -582,6 +598,7 @@ public class Mod_UdpApi implements IModule {
             case 555:
             case 598:
                 Log(ComEvent.eType.Error, "Client Failure Code: " + reply.ReplyId());
+                break;
         }
 
     }
@@ -620,11 +637,11 @@ public class Mod_UdpApi implements IModule {
         } catch (InterruptedException ex) {
         }
         try {
-            recieve.join(1000);
+            receive.join(1000);
         } catch (InterruptedException ex) {
         }
-        if (send.isAlive() || recieve.isAlive() || idle.isAlive()) {
-            Log(ComEvent.eType.Warning, "Thread abort timeout", idle.isAlive(), recieve.isAlive(), send.isAlive());
+        if (send.isAlive() || receive.isAlive() || idle.isAlive()) {
+            Log(ComEvent.eType.Warning, "Thread abort timeout", idle.isAlive(), receive.isAlive(), send.isAlive());
         }
 
         if (com != null) {
