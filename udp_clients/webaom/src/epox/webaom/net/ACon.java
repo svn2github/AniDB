@@ -106,11 +106,8 @@ public class ACon implements ActionListener{
 		}
 	}
 	///////////////////////////////////PASSW////////////////////////////////////
-	public void set(String u, String p, String k, String s){
-		m_up = new UserPass(u,p,k,s);
-	}
 	public void set(String u, String p, String k){
-		set(u,p,k,null);
+		m_up = new UserPass(u,p,k);
 	}
 	private void loginAtt(){
 		m_rem_login_att--;
@@ -119,8 +116,9 @@ public class ACon implements ActionListener{
 	protected void error(String str){
 		debug(str);
 		m_err = str;
-		if(m_log==null)
-			m_log.add(Log.LOG|Log.STN, "<font color=#FF0000>"+str+"</font>");
+		if(m_log==null) return;
+		m_log.println("<font color=#FF0000>"+str+"</font>");
+		m_log.status1(str);
 	}
 	protected void debug(String str){
 		System.out.println(str);
@@ -174,13 +172,7 @@ public class ACon implements ActionListener{
 			}
 		if(m_rem_auth_att<=0)
 			throw new AConEx(AConEx.CLIENT_BUG, "Invalid session.");
-		AConR r;
-		if(m_up.ses!=null){
-			r = send("AUTH", "user="+m_up.usr+"&sess="+m_up.ses+m_ver, true);
-		}else{
-			r = send("AUTH", "user="+m_up.usr+"&pass="+m_up.psw+m_ver, true);
-		}
-
+		AConR r = send("AUTH", "user="+m_up.usr+"&pass="+m_up.psw+m_ver, true);
 		m_rem_auth_att--;
 		switch(r.code){
 			//case Reply.ENCODING_NOT_SUPPORTED:
@@ -206,7 +198,6 @@ public class ACon implements ActionListener{
 				return true;
 			}
 			case AConR.LOGIN_FAILED:
-				A.up.ses = null;
 				error("Login Failed");
 				if(showLoginDialog())
 					return login();
@@ -253,8 +244,7 @@ public class ACon implements ActionListener{
 			m_ia.getHostAddress();
 			m_iscon = true;
 			return true;
-		}catch(SocketException e){
-			e.printStackTrace();
+		}catch(SocketException e){ e.printStackTrace();
 			error("SocketException: "+e.getMessage());
 		}catch(UnknownHostException e){
 			error("Unknown Host: "+m_s.host);

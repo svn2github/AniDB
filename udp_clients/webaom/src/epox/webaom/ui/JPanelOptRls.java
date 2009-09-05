@@ -53,7 +53,9 @@ import javax.xml.parsers.SAXParserFactory;
 import epox.swing.JTableSortable;
 import epox.util.DSData;
 import epox.webaom.A;
+import epox.webaom.RuleMenu;
 import epox.webaom.Rules;
+import epox.webaom.WebAOM;
 
 public class JPanelOptRls extends JPanel implements Action, ActionListener, ItemListener{
 	protected final JTextArea jta;
@@ -94,7 +96,7 @@ public class JPanelOptRls extends JPanel implements Action, ActionListener, Item
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
 			SAXParser saxParser = factory.newSAXParser();
-			saxParser.parse( RuleMenu.class.getResourceAsStream("RuleMenu.xml"), handler );
+			saxParser.parse( WebAOM.class.getClassLoader().getResourceAsStream("rule-helper.xml"), handler );
 
 			jta.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e) {
