@@ -737,7 +737,7 @@ function InitDefault() {
 		if (sp)
 			username = sp.firstChild.nodeValue;
 	}
-	if (curPageID == 'notify') Magic.addNotifyCloseSubmit();
+	//if (curPageID == 'notify') Magic.addNotifyCloseSubmit();
 }
 
 function enable_sort(func){
