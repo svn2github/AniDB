@@ -275,6 +275,11 @@ function prepLanguages() {
 	createCell(row, null, createSelectArray(null,'languagesTypeSelect','languagesTypeSelect',changeLangType,0,optionArray), null, 3);
 	tbody.appendChild(row);
 	row = document.createElement('tr');
+	createHeader(row, null, 'Available');
+	createHeader(row, null, null);
+	createHeader(row, null, 'Selected');
+	tbody.appendChild(row);
+	row = document.createElement('tr');
 	audlangs.row = row;
 	createCell(row, null, audlangs.select[0]);
 	var cell = document.createElement('td');
