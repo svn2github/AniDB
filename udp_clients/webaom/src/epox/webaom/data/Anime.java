@@ -33,7 +33,7 @@ public class Anime extends Base{
 		if(Math.abs(i)!=Math.abs(s0)) s1 = s0;
 		s0 = i;
 	}
-	public int yea, eps, lep, pct;
+	public int yea, yen, eps, lep, pct;
 	public String typ, rom, kan, eng, cat;
 	public Bits pro = null;
 	public Anime(int id){
@@ -45,6 +45,12 @@ public class Anime extends Base{
 		eps = U.i(s[i++]);
 		lep = U.i(s[i++]);
 		yea = U.i(s[i++].substring(0,4));
+        if(s[i-1].length() == 9)  //Data is From AniDB and is in XXXX-YYYY Format
+            yen = U.i(s[i-1].substring(5, 9));
+        else if(s.length == 10)  //Data is From the serialize File
+            yen = U.i(s[9].substring(0, 4));
+        else  //Data is From AniDB and is in XXXX Format
+            yen = yea;
 		typ = s[i++];
 		rom = s[i++];
 		kan = U.n(s[i++]);
@@ -69,7 +75,7 @@ public class Anime extends Base{
 		}
 	}
 	public String serialize(){
-		return ""+id+S+eps+S+lep+S+yea+S+typ+S+rom+S+kan+S+eng+S+cat;
+		return ""+id+S+eps+S+lep+S+yea+S+typ+S+rom+S+kan+S+eng+S+cat+S+yen;
 	}
 	private void setorfill(int no, boolean b){
 		if(!pro.set(no-1, b))

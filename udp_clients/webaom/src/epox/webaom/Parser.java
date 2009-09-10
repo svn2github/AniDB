@@ -63,6 +63,7 @@ public class Parser{
 		a.eps = Integer.parseInt(s[1]);
 		a.lep = Integer.parseInt(s[2]);
 		a.yea = Integer.parseInt(s[10].substring(0,4));
+		a.yen = s[10].length() != 9 ? a.yea : Integer.parseInt(s[10].substring(5, 9));
 		a.typ = s[11].intern();
 		a.rom = s[12];
 		a.kan = s[13];
@@ -181,8 +182,8 @@ public class Parser{
 	                		String s[] = U.split(line.substring(1),'|');
 	                		f = new AFile(s);
 	                		Group g = new Group(f.gid);
-	                		g.name = s[17];
-	                		g.sname = s[18];
+	                		g.name = s[20];
+	                		g.sname = s[21];
 	                		A.cache.add(g, 1, DB.I_G);
 	                		f.anime = a;
 	                		f.ep = e;

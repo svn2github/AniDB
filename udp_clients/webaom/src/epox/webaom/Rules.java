@@ -304,6 +304,23 @@ public class Rules{
 			System.out.println("ERROR: Invalid data in test: U("+s+")");
 			return false;
 		}
+        case 'L':{
+            String cmp[] = s.split(":", 2);
+            if(cmp.length == 2){
+                return mAmap.containsKey(cmp[0])
+                && mAmap.containsKey(cmp[1])
+                && mAmap.get(cmp[0]).equals(mAmap.get(cmp[1]));
+            }
+            System.out.println("ERROR: Invalid data in test: L("+s+")");
+            return false;
+        }
+        case 'Z':{
+            String cmp[] = s.split(":", 2);
+            if(cmp.length == 2)
+                return mAmap.containsKey(cmp[0]) && regtest(mAmap.get(cmp[0]).toString(), cmp[1]);
+            System.out.println("ERROR: Invalid data in test: R("+s+")");
+            return false;
+        }
 
 		default: return false;
 		}

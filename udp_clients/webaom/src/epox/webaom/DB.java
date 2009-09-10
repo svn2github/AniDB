@@ -268,6 +268,7 @@ public class DB{
 			ps.setInt(i++,a.lep);
 			ps.setString(i++,a.typ);
 			ps.setString(i++,a.cat);
+			ps.setInt(i++,a.yen);  //NvrBst: Unsure About This Change; Needs Testing
 			ps.setInt(i++, id);
 		}else if(o instanceof Ep){
 			Ep e = (Ep) o;

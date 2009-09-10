@@ -52,7 +52,7 @@ public class ACon implements ActionListener{
 	public boolean m_authed = false;
 
 	private final String m_ver = "&protover=3&client=webaom&clientver=119&nat=1&comp=1&enc=utf8";
-	private final int m_tag_len = 3;
+	private final int m_tag_len = 5;
 	private final int m_buf_siz = 2048*2;
 	private final int m_ka_time = 3*1000*60*10; //30 min
 	private final int m_ka_nat = 3*1000*60; //3 min

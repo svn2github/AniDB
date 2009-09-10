@@ -130,6 +130,11 @@ public class Cache{
 		}catch(Exception e){
 			f.anime.yea = 0;
 		}
+        try{
+            f.anime.yen = Integer.parseInt(s[i - 1].substring(5, 9));
+        }catch(Exception e){
+            f.anime.yen = f.anime.yea;
+        }
 		f.anime.typ = s[i++];
 		f.anime.rom = s[i++];
 		f.anime.kan = U.n(s[i++]);

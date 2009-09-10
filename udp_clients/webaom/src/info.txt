@@ -1,5 +1,17 @@
 WebAOM!
 
+1.19m 2009.09.10:
+*WebAOM could only handle 999 files before it started doing bad things; updated limit to 99,999 files.  ?? Implement Proper Fix ??
+
+1.19m 2009.09.02:
+*Temp Fix for Incorrect renames during dropped requests [ommina].
+*Fixed Export/Import Function so they are now actually able to import data.
+*Added test L(tag:tag) which returns true if both tags are defined and equal.
+*Added test Z(tag:regexp) which returns true if tag is defined and regular expression is true.
+*Added tag %yen which is set to end year of anime.
+*Made it so if Extension List is empty, all files are processed.
+*Undocumented "X(text)", "ASSUME [SPECIAL] num", "TRUNCATE<num, tag>", %lep tests/tags added to xml help.
+
 1.19l 02.11.2007:
 *Changed A() from exact match to regexp.
 *Fixed %cen tag.

@@ -31,7 +31,10 @@
         <elem title="Category" value="C()">Checks all the categories</elem>
         <elem title="Codec" value="C()">Checks all tracks, video and audio.</elem>
         <elem title="Tag is defined" value="I()">Checks if the tag (%) is defined</elem>
+        <elem title="Total Episode Number" value="X()">Checks total episode number</elem>
         <elem title="Unequal tags" value="U(:)">Checks that both tags (a:b) are defined and unequal</elem>
+        <elem title="Equal tags" value="L(:)">Checks that both tags (a:b) are defined and equal</elem>
+        <elem title="Regular Expression Test" value="Z(:)">Checks (a) is defined and applies regulare expression (b) to (a)</elem>
     </item>
     <item title="Controls">
         <elem title="Append" value="add ">Append a part to the schema</elem>
@@ -39,6 +42,8 @@
         <elem title="Fail, do not rename/move" value="fail ">Leave the file name/location as it is</elem>
         <elem title="Return" value="return ">Return the schema as it is</elem>
         <elem title="Finish" value="finish ">Append a part to the schema and return it</elem>
+        <elem title="Pad" value="assume [special] ">Assumes the max number of episodes/specials is XX if total number is unknown</elem>
+        <elem title="truncate" value="truncate ">Truncates (b) to the length of (a) if (b) is greater than (a)</elem>
     </item>
     <item title="Tags">
         <item title="Anime">
@@ -50,7 +55,10 @@
             <elem title="Title: English" value="%eng">
             </elem>
             <elem title="Number of episodes" value="%eps">Number of episodes if type is not 'Movie'. Check type with T. Will be '0' when unknown.</elem>
+            <elem title="Number of episodes in AniDB" value="%lep">Number of episodes AniDB has (IE for movies split to multi parts this is higher than eps).</elem>
             <elem title="Year Aired" value="%yea">
+            </elem>
+            <elem title="Year Ended" value="%yen">
             </elem>
             <elem title="Type" value="%typ">unknown, TV Series, OVA, Movie, Other, web</elem>
             <elem title="Category list" value="%gen">

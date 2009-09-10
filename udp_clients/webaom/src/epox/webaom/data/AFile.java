@@ -87,7 +87,7 @@ public class AFile extends Base{
 	}*/
 	public String serialize(){
 		return ""+fid+S+aid+S+eid+S+gid+S+lid+S+stt+S+mLs
-		+S+ed2+S+md5+S+sha+S+crc+S+dub+S+sub+S+qua+S+rip+S+aud+S+vid+S+res+S+len
+		+S+ed2+S+md5+S+sha+S+crc+S+dub+S+sub+S+qua+S+rip+S+aud+S+vid+S+res+S+ext+S+len
 		+S+(group!=null?group.serialize():"");
 	}
 	public static Base getInst(String[] s){

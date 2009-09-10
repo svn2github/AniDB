@@ -46,7 +46,7 @@ public class FileHandler{
 		m_ext.removeElementAt(i);
 	}
 	public synchronized boolean addFile(File file){
-		if(	m_ext.includes(getExtension(file)) &&
+		if(	(m_ext.includes(getExtension(file)) || m_ext.getSize() == 0) &&
 			!A.jobs.has(file) && !locked(file)){
 				Job j = A.jobs.add(file);
 				if(j!=null){
@@ -88,7 +88,7 @@ public class FileHandler{
 	protected class FileFilter1 extends javax.swing.filechooser.FileFilter implements java.io.FileFilter{
 		public boolean accept(File file){
 			if(file.isDirectory()) return true;
-			if(m_ext.includes(getExtension(file)))
+			if(m_ext.includes(getExtension(file)) || m_ext.getSize() == 0)
 				return true;
 			return false;
 		}
