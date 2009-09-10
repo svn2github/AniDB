@@ -13,12 +13,16 @@ img, a
 	border: 1px solid #363636;
 }
 
-#layout-main table tr + tr td
+#layout-main table tr + tr td,
+#layout-main li.g_odd + li,
+#layout-main li + li.g_odd/*,
+#layout-main span.g_odd + span,
+#layout-main span + span.g_odd*/
 {
 	border-top: 1px solid #dddddd;
 	border-bottom: none;
 }
-
+#layout-main ul.g_list li,
 #layout-main table tr.header + tr td
 {
 	border: none;
@@ -76,6 +80,7 @@ img, a
 	border: 2px ridge #dddddd;
 }
 
+body.nonav #layout-main div.g_content,
 #layout-search div.search,
 #layout-main div.tabbed_pane ul.tabs li,
 #tooltip span.top,
@@ -105,15 +110,14 @@ img, a
 #layout-main div.g_menu div h4 + ul,
 #layout-main div.g_menu div h4 + p,
 #layout-main div.latestanimes_anime div.data table,
-#layout-main div.tabbed_pane div.body > div,
-#layout-main div.main_all div.rightbar h4 + ol
+#layout-main div.main_all div.rightbar h4 + ol,
+#layout-main div.profile_all div.pane.general div.body div.pane div,
+#layout-main div.profile_all div.passwords form div.anidb,
+#layout-main div.profile_all div.passwords form div.g_section,
+#layout-main div.profile_all div.tabbed_pane div.default_languages div,
+#layout-main div.profile_all div.rdf_jabber div
 {
 	border: 1px solid #363636;
-}
-
-#layout-main div.tabbed_pane div.pane table
-{
-	border: none;
 }
 
 #layout-main ul.links
@@ -121,11 +125,6 @@ img, a
 	border: none;
 	border-top: 2pt groove #FFFFFF;
 }
-
-/*#layout-main div.g_timedentry h4
-{
-	border: 1px dotted #bbbbbb;
-}*/
 
 #tooltip span.top,
 #tooltip span.bottom,
@@ -158,8 +157,27 @@ img, a
 	border-bottom: none;
 }
 
-table table,
-#layout-main div.tabbed_pane div.body table tr
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border: 1px solid #999999;
+	-moz-border-radius: .2em;
+	-webkit-border-radius: .2em;
+	-moz-border-radius-bottomleft:0;
+	-moz-border-radius-bottomright:0;
+	-webkit-border-bottom-left-radius:0;
+	-webkit-border-bottom-right-radius:0;
+	border-bottom-color: #777777;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane div.pane ul.tabs li.selected
+{
+	border: 1px solid #666666;
+	border-bottom-color: #f3f3f3;
+}
+
+table table
 {
 	border: none;
 }

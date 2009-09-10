@@ -91,9 +91,35 @@
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.events div.inner,
 #layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.inner
+#layout-main div.forum div.g_timedentry.comment div.inner
 {
-	background-color:#e7e7e7;
+	background:#eeeeee;
+	border: 1px solid #777777;
+	-moz-border-radius: .6em;
+	-webkit-border-radius: .6em;
+	border-width:3px 1px 3px 1px;
+}
+
+#layout-main div.cmt_entries dl.profile
+{
+	border-right:none;
+}
+
+#layout-main div.cmt_entries div.postbody p.author
+{
+	background:#B4b4b4 url(images/tab-3.png) repeat-x scroll 0 -13px;
+	margin:0 0 0.5em 16em;
+	-moz-border-radius-bottomleft:.7em;
+	-webkit-border-bottom-left-radius:.7em;
+	border-color:#9A9A9A;
+	border-style:solid;
+	border-width:0 0 1px 1px;
+}
+
+#layout-main div.cmt_entries div.postfooter
+{
+	padding-bottom:0.4em;
+	padding-right:0.5em;
 }
 
 #layout-main div.forum div.events h2,

@@ -19,6 +19,41 @@ body
 	padding: 0;
 }
 
+#layout-main div.profile_all div.passwords,
+#layout-main div.profile_all div.tabbed_pane div.default_languages
+{
+	display:block;
+}
+
+#layout-main div.profile_all div.pane.general div.body div.pane div,
+#layout-main div.profile_all div.rdf_jabber div,
+#layout-main div.profile_all div.passwords form div.anidb,
+#layout-main div.profile_all div.passwords form div.g_section,
+#layout-main div.profile_all div.default_languages div
+{
+	margin: 1em 1em .5em 0;
+}
+
+/* hides last <li> tag, which is visible because of padding and contains hidden <input> 
+ * begin */
+#layout-main div.profile_all div.pane.general div.body ul li:last-child
+{
+	display: none;
+}
+
+#layout-main div.profile_all div.pane.general div.body div:first-child div:last-child ul li:last-child
+{
+	display: block;
+}
+/* funny
+ * end */
+
+
+#layout-main div.profile_all div.rdf_jabber div
+{
+	display:inline-table;
+}
+
 #layout-main div.main_all div.rightbar h3
 {
 	margin-top:0;
@@ -71,15 +106,25 @@ body
 
 #layout-search div.search
 {
-	/*background: #393636;*/
-	width: 33em;
-	margin: 0 0 0 -35em;
+	width: 34em;
+	margin: 0 0 0 -36em;
 }
 
 #layout-search div.search form
 {
 	text-align: right;
 }
+
+/*
+#layout-search div.search form p:first-child:before
+{
+	line-height: 0;
+	position: relative;
+	top: .1em;
+	font-size: 2.3em;
+	content: "☺";
+}
+*/
 
 #layout-search input,
 #layout-search select
@@ -143,19 +188,6 @@ body
 #layout-content
 {
 	margin: 0 1em 0 14em;
-}
-/*
-#layout-maine
-{
-	content: "Some silly text";
-	height: 0;
-	position: absolute;
-	top: 2em;
-}*/
-
-#layout-tabs + #layout-main:before
-{
-	content: "";
 }
 
 #layout-menu li.sub-menu,
@@ -241,6 +273,22 @@ body
 	margin-top: .33em;
 }
 
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin:0 0 1px 0;
+}
+
+#layout-main div.tabbed_pane ul.tabs li + li
+{
+	margin-left:-0.5em;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane div.pane ul.tabs li.selected
+{
+	padding-top: .35em;
+}
+
 #layout-main .g_list li
 {
 	padding: 0 .16em 0 .16em;
@@ -323,6 +371,16 @@ body
 	margin-right:0;
 }
 
+#layout-main div.userpage_all  h4,
+#layout-main div.profile_all div.tabbed_pane div.pane.general div.body h4,
+#layout-main div.profile_all div.tabbed_pane div.pane.default_languages div > h4,
+#layout-main div.profile_all div.tabbed_pane div.pane.account div.g_definitionlist h4,
+#layout-main div.profile_all div.tabbed_pane div.pane.rdf_jabber div h4
+{
+	text-align:center;
+	padding:.0 0 .1em 0;
+}
+
 #tooltip span.middle,
 #tooltip span.bottom
 {
@@ -342,10 +400,6 @@ body
 	text-align:right;
 }
 
-#layout-main div.tabbed_pane ul.tabs
-{
-	margin:0 0 .5em 0;
-}
 
 #layout-main div.tabbed_pane div.g_section
 {
@@ -402,6 +456,32 @@ body
 	display: inline;
 	padding: 0;
 	float:left;
+}
+
+#layout-main div.animevotes_all div.animevote_list table th
+{
+	padding: 0 .5em;
+}
+
+#layout-main div.animevotes_all div.animevote_list table tr.header th:first-child
+{
+	padding: 0 1.3em;
+}
+
+#layout-main div.edit_actions
+{
+	margin-top:-2.2em;
+}
+
+body.nonav #layout-main
+{
+	padding: 0;
+}
+
+body.nonav #layout-main div.g_content
+{
+	margin: 2em;
+	padding: 0 1em 1em 1em;
 }
 
 #layout-footer p

@@ -44,6 +44,7 @@ a:hover
 	text-decoration: underline;
 }
 
+body.nonav #layout-main div.g_content,
 #layout-main div.g_section h4,
 #layout-main div.g_section h4 a,
 #layout-menu,
@@ -54,9 +55,21 @@ a:hover
 	color: #2E3C55;
 }
 
+body.nonav #layout-main div.g_content h4,
 #layout-main div.profile_all div.g_section h4 a
 {
 	background-color:transparent;
+}
+
+
+body.nonav #layout-main div.g_content h4
+{
+	color: #2E2e2e;
+}
+
+body.nonav #layout-main div.g_content
+{
+	background: #EEEEEE url(images/tab-1.png) repeat-x scroll 0 -3px;
 }
 
 #layout-menu
@@ -78,7 +91,6 @@ a:hover
 #layout-main div.creq_all div.g_section.creq_stats table.stats th,
 #layout-main div.userpage_all div.g_section.latest h4,
 #layout-menu li.sub-menu,
-#layout-main div.tabbed_pane div.pane ul.tabs li,
 #layout-main div.tabbed_pane h4,/*
 #layout-main .g_list,*/
 #layout-main h4,
@@ -90,21 +102,16 @@ a:hover
 #layout-main h1,
 #layout-main table tr.header,
 #layout-tabs ul li a,
-#layout-tabs ul li.g_odd a,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-tabs ul li.g_odd a
 {
 	background-color:#363636;
 	color: #dddddd;
 }
 
 #layout-main h1 a,
-#layout-main h4 a,/*
-#layout-main .g_list a,*/
-#layout-main div.tabbed_pane ul.tabs li a,
+#layout-main h4 a,
 #layout-main table caption a,
-#layout-menu li.sub-menu a,
-#layout-main div.tabbed_pane div.edit_actions,
-#layout-main div.tabbed_pane div.edit_actions a
+#layout-menu li.sub-menu a
 {
 	color: #dddddd;
 }
@@ -117,24 +124,52 @@ a:hover
 	color: #363636;
 }
 
-#layout-main div.tabbed_pane div.pane ul.tabs li a:hover, /* fixes double tabbed panes*/
-#layout-main div.tabbed_pane div.pane ul.tabs li:hover, /* same here */
-#layout-main div.tabbed_pane div.pane ul.tabs li.selected, /*same here */
-#layout-main div.tabbed_pane ul.tabs li a:hover,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane div.body
-{
-	background-color: #f5f4f4;
-	color: #363636;
-}
-
 #layout-main ul.links,
 #layout-main div.g_timedentry h4,
 #layout-main div.g_timedentry h4 a
 {
 	color: #6B868F;
 	background-color: transparent
+}
+
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background: #cecece url(images/tab-2.png) repeat-x;
+}
+
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane div.pane ul.tabs li.selected,
+#layout-main div.tabbed_pane div.pane ul.tabs li.selected:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected:hover
+{
+	background: url(images/tab-1.png);
+}
+
+#layout-main div.tabbed_pane div.pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li:hover
+{
+	background: url(images/tab-3.png);
+}
+
+#layout-main div.tabbed_pane div.body h4,
+#layout-main .g_section h4
+{
+	background:transparent;
+	color:#444444;
+	font-size:1.2em;
+	font-weight:bold;
+	padding:.5em;
+	text-align:left;
+}
+
+#layout-main div.profile_all div.tabbed_pane div.pane.general div.body h4,
+#layout-main div.profile_all div.tabbed_pane div.pane.default_languages div > h4,
+#layout-main div.profile_all div.tabbed_pane div.pane.account div.g_definitionlist h4,
+#layout-main div.profile_all div.tabbed_pane div.pane.rdf_jabber div h4
+{
+	background-color:#363636;
+	color: #dddddd;
 }
 
 #tooltip span.top,
@@ -144,3 +179,4 @@ a:hover
 	color: #151515;
 	background:#fafafa;
 }
+
