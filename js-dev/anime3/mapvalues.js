@@ -280,11 +280,11 @@ function mapEpisodeNumber(epno) {
 	var firstChar = String(epno);
 	var result = 0;
 	switch (firstChar[0]) {
-		case 'S': result = '1' + epno.substring(1,epno.length); break;
-		case 'C': result = '2' + epno.substring(1,epno.length); break;
-		case 'T': result = '3' + epno.substring(1,epno.length); break;
-		case 'P': result = '4' + epno.substring(1,epno.length); break;
-		case 'O': result = '10' + epno.substring(1,epno.length); break;
+		case 'S': result = 100000 + Number(epno.substring(1)); break;
+		case 'C': result = 200000 + Number(epno.substring(1)); break;
+		case 'T': result = 300000 + Number(epno.substring(1)); break;
+		case 'P': result = 400000 + Number(epno.substring(1)); break;
+		case 'O': result = 500000 + Number(epno.substring(1)); break;
 		default: result = epno;
 	}
 	return (!isNaN(Number(result)) ? Number(result) : 0);
