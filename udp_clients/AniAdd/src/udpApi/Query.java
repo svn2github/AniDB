@@ -12,8 +12,8 @@ public class Query {
     private Date sendOnMills;
     private Date replyOnMills;
     private int retries;
-    private Boolean success;   
-    
+    private Boolean success;
+
     public Cmd getCmd() {return cmd;}
 	public void setCmd(Cmd cmd) {this.cmd = cmd;}
 	public Reply getReply() {return reply;}

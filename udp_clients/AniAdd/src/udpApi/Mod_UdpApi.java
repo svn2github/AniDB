@@ -30,6 +30,7 @@ public class Mod_UdpApi implements IModule {
     private DatagramSocket com;
     private String userName;
     private String password;
+    private String autoPass;
     private String session;
     private boolean connected;
     private boolean aniDBAPIDown;
@@ -204,12 +205,11 @@ public class Mod_UdpApi implements IModule {
         auth = true;
 
         Cmd cmd = new Cmd("AUTH", "auth", null, false);
-        if (session != null && !session.isEmpty()) {
-            cmd.setArgs("sess", session);
-        }
-        if (password != null && !password.isEmpty()) {
-            cmd.setArgs("pass", password);
-        }
+        if (session != null && !session.isEmpty()) cmd.setArgs("sess", session);
+        if (password != null && !password.isEmpty()) cmd.setArgs("pass", password);
+        if (autoPass != null && !autoPass.isEmpty()) cmd.setArgs("autopass", autoPass);
+      
+
         cmd.setArgs("user", userName.toLowerCase());
         cmd.setArgs("protover", Integer.toString(PROTOCOLVER), "client", CLIENTTAG.toLowerCase(), "clientver", Integer.toString(CLIENTVER));
         cmd.setArgs("nat", "1", "enc", "UTF8");
@@ -282,6 +282,10 @@ public class Mod_UdpApi implements IModule {
 
     public void setSession(String session) {
         this.session = session;
+    }
+
+    public void setAutoPass(String autoPass){
+        this.autoPass = autoPass;
     }
 
     public void setUsername(String userName) {
