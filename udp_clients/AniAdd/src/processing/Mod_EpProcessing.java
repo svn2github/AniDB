@@ -149,10 +149,32 @@ public class Mod_EpProcessing implements IModule {
         cmd.setArgs("ed2k", (String)procFile.Data().get("Ed2k"));
         cmd.setArgs("viewed", procFile.ActionsTodo().contains(eAction.Watched) ? "1" : "0");
         cmd.setArgs("state", Integer.toString(procFile.MLStorage().ordinal()));
-        
-        if(procFile.Data().containsKey(("EditOther"))) cmd.setArgs("other", (String)procFile.Data().get("EditOther"));
-        if(procFile.Data().containsKey(("EditSource"))) cmd.setArgs("source", (String)procFile.Data().get("EditSource"));
-        if(procFile.Data().containsKey(("EditStorage"))) cmd.setArgs("storage", (String)procFile.Data().get("EditStorage"));
+
+        String content = "";
+        if(procFile.Data().containsKey(("EditOther"))){
+            content = (String)procFile.Data().get("EditOther");
+            if(content != null && !content.isEmpty()) {
+                content = content.replaceAll("\n", "<br />");
+                content = content.replaceAll("[&|=]", "");
+                cmd.setArgs("other", content);
+            }
+        }
+        if(procFile.Data().containsKey(("EditSource"))){
+            content = (String)procFile.Data().get("EditSource");
+            if(content != null && !content.isEmpty()) {
+                content = content.replaceAll("\n", "");
+                content = content.replaceAll("[&|=]", "");
+                cmd.setArgs("source", content);
+            }
+        }
+        if(procFile.Data().containsKey(("EditStorage"))){
+            content = (String)procFile.Data().get("EditStorage");
+            if(content != null && !content.isEmpty()){
+                content = content.replaceAll("\n", "");
+                content = content.replaceAll("[&|=]", "");
+                cmd.setArgs("storage", content);
+            }
+        }
 
         api.queryCmd(cmd);
         //System.out.println("Sending ML Cmd");

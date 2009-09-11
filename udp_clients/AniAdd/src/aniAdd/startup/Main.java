@@ -11,7 +11,6 @@ import aniAdd.Communication.ComEvent;
 import gui.GUI;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;

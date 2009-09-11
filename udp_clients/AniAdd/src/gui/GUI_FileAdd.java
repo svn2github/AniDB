@@ -569,8 +569,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_EditBoxes.setOpaque(false);
 
         txt_Source.setColumns(8);
+        txt_Source.setLineWrap(true);
         txt_Source.setRows(3);
-        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10));
+        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txt_Source.setTextHint("Source");
         txt_Source.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -580,8 +581,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         scrl_txt_Source.setViewportView(txt_Source);
 
         txt_Storage.setColumns(8);
+        txt_Storage.setLineWrap(true);
         txt_Storage.setRows(3);
-        txt_Storage.setFont(new java.awt.Font("Tahoma", 0, 10));
+        txt_Storage.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txt_Storage.setTextHint("Storage");
         txt_Storage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -591,8 +593,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         scrl_txt_Storage.setViewportView(txt_Storage);
 
         txt_Other.setColumns(8);
+        txt_Other.setLineWrap(true);
         txt_Other.setRows(3);
-        txt_Other.setFont(new java.awt.Font("Tahoma", 0, 10));
+        txt_Other.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txt_Other.setTextHint("Other");
         txt_Other.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {

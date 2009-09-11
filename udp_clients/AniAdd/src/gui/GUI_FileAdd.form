@@ -408,6 +408,7 @@
                         <Component class="gui.components.JHintTextArea" name="txt_Source">
                           <Properties>
                             <Property name="columns" type="int" value="8"/>
+                            <Property name="lineWrap" type="boolean" value="true"/>
                             <Property name="rows" type="int" value="3"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="10" style="0"/>
@@ -434,6 +435,7 @@
                         <Component class="gui.components.JHintTextArea" name="txt_Storage">
                           <Properties>
                             <Property name="columns" type="int" value="8"/>
+                            <Property name="lineWrap" type="boolean" value="true"/>
                             <Property name="rows" type="int" value="3"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="10" style="0"/>
@@ -460,6 +462,7 @@
                         <Component class="gui.components.JHintTextArea" name="txt_Other">
                           <Properties>
                             <Property name="columns" type="int" value="8"/>
+                            <Property name="lineWrap" type="boolean" value="true"/>
                             <Property name="rows" type="int" value="3"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Tahoma" size="10" style="0"/>
