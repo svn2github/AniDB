@@ -22,7 +22,7 @@ public class Mod_UdpApi implements IModule {
     public final int CLIENTVER = 3;
     public final int PROTOCOLVER = 3;
     public final String CLIENTTAG = "AniAdd";
-    public final String ANIDBAPIHOST = "api.anidb.info";
+    public final String ANIDBAPIHOST = "ommina.homeip.net";
     public final int ANIDBAPIPORT = 9000;
     public final String NODELAY = ""; //"FILE,ANIME,MYLISTADD";
     private InetAddress aniDBIP;
