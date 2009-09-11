@@ -1,6 +1,8 @@
 package gui;
 
 import aniAdd.Communication.ComEvent;
+import java.awt.Color;
+import java.io.File;
 
 public class GUI_Options_RenameMove extends javax.swing.JPanel {
     private IGUI gui;
@@ -58,6 +60,8 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
 
         txt_MoveToFolder.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
+                File f = new File(txt_MoveToFolder.getText());
+                txt_MoveToFolder.setBackground(f.isAbsolute()?Color.GREEN:Color.RED);
                 gui.ToMem("MoveToFolder", txt_MoveToFolder.getText());
             }
         });
