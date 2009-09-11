@@ -280,11 +280,11 @@ function mapEpisodeNumber(epno) {
 	var firstChar = String(epno);
 	var result = 0;
 	switch (firstChar[0]) {
-		case 'S': result = 10000 + Number(epno.substring(1)); break;
-		case 'C': result = 20000 + Number(epno.substring(1)); break;
-		case 'T': result = 30000 + Number(epno.substring(1)); break;
-		case 'P': result = 40000 + Number(epno.substring(1)); break;
-		case 'O': result = 100000 + Number(epno.substring(1)); break;
+		case 'S': result = 1000 + Number(epno.substring(1)); break;
+		case 'C': result = 2000 + Number(epno.substring(1)); break;
+		case 'T': result = 3000 + Number(epno.substring(1)); break;
+		case 'P': result = 4000 + Number(epno.substring(1)); break;
+		case 'O': result = 10000 + Number(epno.substring(1)); break;
 		default: result = epno;
 	}
 	return (!isNaN(Number(result)) ? Number(result) : 0);
@@ -298,12 +298,12 @@ function mapReverseEpisodeNumber(epno) {
 	var nepno = Number(epno);
 	if (isNaN(nepno)) return '';
 	epno = String(epno);
-	if (nepno < 10000) return Number(epno);
-	if (nepno >= 10000 && nepno < 20000) return ('S' + Number(epno.substring(1,epno.length)));
-	if (nepno >= 20000 && nepno < 30000) return ('C' + Number(epno.substring(1,epno.length)));
-	if (nepno >= 30000 && nepno < 40000) return ('T' + Number(epno.substring(1,epno.length)));
-	if (nepno >= 40000 && nepno < 100000) return ('P' + Number(epno.substring(1,epno.length)));
-	if (nepno > 100000) return ('O' + Number(epno.substring(1,epno.length)));
+	if (nepno < 1000) return Number(epno);
+	if (nepno >= 1000 && nepno < 2000) return ('S' + Number(epno.substring(1,epno.length)));
+	if (nepno >= 2000 && nepno < 3000) return ('C' + Number(epno.substring(1,epno.length)));
+	if (nepno >= 3000 && nepno < 4000) return ('T' + Number(epno.substring(1,epno.length)));
+	if (nepno >= 4000 && nepno < 10000) return ('P' + Number(epno.substring(1,epno.length)));
+	if (nepno > 10000) return ('O' + Number(epno.substring(1,epno.length)));
 }
 
 /* Function that returns a string with the mylist state
