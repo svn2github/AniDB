@@ -3,6 +3,8 @@ package gui;
 import aniAdd.Communication.ComEvent;
 import java.awt.Color;
 import java.io.File;
+import java.io.File;
+import javax.swing.JFileChooser;
 
 public class GUI_Options_RenameMove extends javax.swing.JPanel {
     private IGUI gui;
@@ -116,6 +118,8 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         txt_MoveToFolder = new javax.swing.JTextField();
         chck_AppendAnimeTitle = new javax.swing.JCheckBox();
         cmb_AnimeTitleType = new javax.swing.JComboBox();
+        lbl_DestFolder = new javax.swing.JLabel();
+        btn_ChooseDestFolder = new javax.swing.JButton();
         pnl_FileRename = new javax.swing.JPanel();
         lbl_Renaming = new javax.swing.JLabel();
         ptn_UseAniDBFN = new javax.swing.JRadioButton();
@@ -151,6 +155,15 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         cmb_AnimeTitleType.setSelectedIndex(1);
         cmb_AnimeTitleType.setEnabled(false);
 
+        lbl_DestFolder.setText("Destination:");
+
+        btn_ChooseDestFolder.setText("...");
+        btn_ChooseDestFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ChooseDestFolderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_FileMoveLayout = new javax.swing.GroupLayout(pnl_FileMove);
         pnl_FileMove.setLayout(pnl_FileMoveLayout);
         pnl_FileMoveLayout.setHorizontalGroup(
@@ -159,26 +172,32 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addGroup(pnl_FileMoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ptn_UseTaggingSystemFolder)
-                    .addGroup(pnl_FileMoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(pnl_FileMoveLayout.createSequentialGroup()
-                            .addComponent(ptn_MoveToFolder)
-                            .addGap(149, 149, 149))
-                        .addGroup(pnl_FileMoveLayout.createSequentialGroup()
-                            .addGap(21, 21, 21)
-                            .addGroup(pnl_FileMoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pnl_FileMoveLayout.createSequentialGroup()
-                                    .addComponent(chck_AppendAnimeTitle)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cmb_AnimeTitleType, 0, 106, Short.MAX_VALUE))
-                                .addComponent(txt_MoveToFolder)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnl_FileMoveLayout.createSequentialGroup()
+                        .addComponent(ptn_MoveToFolder)
+                        .addGap(149, 149, 149))
+                    .addGroup(pnl_FileMoveLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(chck_AppendAnimeTitle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmb_AnimeTitleType, 0, 106, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FileMoveLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(lbl_DestFolder)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_MoveToFolder, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                        .addGap(3, 3, 3)
+                        .addComponent(btn_ChooseDestFolder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         pnl_FileMoveLayout.setVerticalGroup(
             pnl_FileMoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_FileMoveLayout.createSequentialGroup()
                 .addComponent(ptn_MoveToFolder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_MoveToFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_FileMoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_MoveToFolder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_DestFolder)
+                    .addComponent(btn_ChooseDestFolder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_FileMoveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chck_AppendAnimeTitle)
@@ -228,7 +247,9 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         pnl_FileRenamingMoving.setLayout(pnl_FileRenamingMovingLayout);
         pnl_FileRenamingMovingLayout.setHorizontalGroup(
             pnl_FileRenamingMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(chck_EnableFileMoving)
+            .addGroup(pnl_FileRenamingMovingLayout.createSequentialGroup()
+                .addComponent(chck_EnableFileMoving)
+                .addGap(26, 26, 26))
             .addComponent(pnl_FileMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(pnl_FileRenamingMovingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                 .addComponent(btn_EditTagsystem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -243,7 +264,7 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_FileRename, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_EditTagsystem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btn_EditTagsystem, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -258,14 +279,26 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_ChooseDestFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChooseDestFolderActionPerformed
+        JFileChooser FC = new javax.swing.JFileChooser();
+        FC.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        FC.setMultiSelectionEnabled(false);
+
+        if (FC.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
+            txt_MoveToFolder.setText(FC.getSelectedFile().getPath());
+        }
+    }//GEN-LAST:event_btn_ChooseDestFolderActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_ChooseDestFolder;
     protected javax.swing.JButton btn_EditTagsystem;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     protected javax.swing.JCheckBox chck_AppendAnimeTitle;
     protected javax.swing.JCheckBox chck_EnableFileMoving;
     protected javax.swing.JComboBox cmb_AnimeTitleType;
+    private javax.swing.JLabel lbl_DestFolder;
     protected javax.swing.JLabel lbl_Renaming;
     protected javax.swing.JPanel pnl_FileMove;
     protected javax.swing.JPanel pnl_FileRename;

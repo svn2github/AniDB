@@ -468,7 +468,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         );
         pnl_FileAdd_LstvwLayout.setVerticalGroup(
             pnl_FileAdd_LstvwLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
         );
 
         spnl_FileAdd.setLeftComponent(pnl_FileAdd_Lstvw);
@@ -570,8 +570,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 
         txt_Source.setColumns(8);
         txt_Source.setRows(3);
-        txt_Source.setText("");
-        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10));
         txt_Source.setTextHint("Source");
         txt_Source.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -756,9 +755,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 414, Short.MAX_VALUE)
+            .addGap(0, 416, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
+                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
