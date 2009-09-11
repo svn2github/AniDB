@@ -316,10 +316,10 @@ public class Mod_EpProcessing implements IModule {
             TreeMap<String,String> ts = getPathFromTagSystem(procFile);
             File folderObj = null;
 
-            if((Boolean)mem.get("GUI_EnableFileMove")){
-                if((Boolean)mem.get("GUI_MoveTypeUseFolder")){
+            if((Boolean)mem.get("GUI_EnableFileMove")) {
+                if((Boolean)mem.get("GUI_MoveTypeUseFolder")) {
                     folder = (String)mem.get("GUI_MoveToFolder");
-                    if((Boolean) mem.get("GUI_AppendAnimeTitle")){
+                    if((Boolean) mem.get("GUI_AppendAnimeTitle")) {
                         int titleType = (Integer)mem.get("GUI_AppendAnimeTitleType");
                         folder += titleType==0?procFile.Data().get("DB_SN_English"):(titleType==1?procFile.Data().get("DB_SN_Romaji"):procFile.Data().get("DB_SN_Kanji")) + java.io.File.separatorChar;
                     }
@@ -341,6 +341,8 @@ public class Mod_EpProcessing implements IModule {
                 }
 
                 folderObj.mkdir();
+            } else {
+                folderObj = new File(procFile.FileObj().getAbsolutePath());
             }
 
 
