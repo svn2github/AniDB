@@ -19,7 +19,7 @@ import java.util.Date;
 public class Mod_UdpApi implements IModule {
 
     public final int MAXRETRIES = 2;
-    public final int CLIENTVER = 0;
+    public final int CLIENTVER = 3;
     public final int PROTOCOLVER = 3;
     public final String CLIENTTAG = "AniAdd";
     public final String ANIDBAPIHOST = "api.anidb.info";
