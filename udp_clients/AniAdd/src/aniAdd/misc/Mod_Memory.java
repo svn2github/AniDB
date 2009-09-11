@@ -14,6 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.prefs.Preferences;
 
@@ -78,6 +79,15 @@ public class Mod_Memory implements IModule {
     public void clear(){
         mem.clear();
         ComFire(new ComEvent(this, ComEvent.eType.Information, "SettingsCleared"));
+    }
+
+    public String toString(){
+        String settings="";
+        for(Entry<String, Object> entry : mem.entrySet()){
+            settings += entry.getKey() + " = " + (entry.getValue()!=null?entry.getValue().toString().replace("\n", "\\n"):"[null]") + "\n";
+        }
+
+        return settings;
     }
 
 

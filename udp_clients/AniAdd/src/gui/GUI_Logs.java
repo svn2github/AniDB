@@ -6,6 +6,7 @@ import aniAdd.IAniAdd;
 import aniAdd.Modules.IModule;
 import aniAdd.Modules.IModule.eModState;
 import aniAdd.misc.Misc;
+import aniAdd.misc.Mod_Memory;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -53,9 +54,13 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
         } while((node = node.getNextSibling()) != null);
         return treeStr;
     }
-    private  void CopyEvents() {
+    private void CopyEvents() {
         Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
         String eventStr="";
+
+        Mod_Memory mem = (Mod_Memory)aniAdd.GetModule("Memory");
+        eventStr += mem.toString();
+
 
         for (ComEvent comEvent : comEvents) eventStr += comEvent.toString() + "\n";
 
