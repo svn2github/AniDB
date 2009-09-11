@@ -19,7 +19,7 @@ import java.util.Date;
 public class Mod_UdpApi implements IModule {
 
     public final int MAXRETRIES = 2;
-    public final int CLIENTVER = 3;
+    public final int CLIENTVER = 0;
     public final int PROTOCOLVER = 3;
     public final String CLIENTTAG = "AniAdd";
     public final String ANIDBAPIHOST = "api.anidb.info";
@@ -547,7 +547,7 @@ public class Mod_UdpApi implements IModule {
                     break;
 
                 case 500:
-                    Log(ComEvent.eType.Error, "Wrong username and/or password");
+                    Log(ComEvent.eType.Error, "Wrong username and/or password. Try logging out of AniDB and back in.");
                     break;
                 case 503:
                     Log(ComEvent.eType.Error, "Outdated Version");
