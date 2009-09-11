@@ -81,7 +81,7 @@ public interface Communication {
             String str;
             str = Misc.DateToString(createdOn, "HH:mm:ss") + " " + type + ": " + (getSource() instanceof IModule ? (((IModule) getSource()).ModuleName()) : "");
             for (int i = 0; i < ParamCount(); i++) {
-                str += " " + Params(i).toString();
+                str += " " + Params(i);
             }
             return str;
         }

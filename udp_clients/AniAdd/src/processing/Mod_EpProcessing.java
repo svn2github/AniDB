@@ -310,63 +310,78 @@ public class Mod_EpProcessing implements IModule {
     }
 
     private boolean renameFile(FileInfo procFile){
-        String folder="";
+        //String folder="";
         String filename="";
         try {
-            TreeMap<String,String> ts = getPathFromTagSystem(procFile);
+            TreeMap<String,String> ts = null;
+
             File folderObj = null;
 
             if((Boolean)mem.get("GUI_EnableFileMove")) {
                 if((Boolean)mem.get("GUI_MoveTypeUseFolder")) {
-                    folder = (String)mem.get("GUI_MoveToFolder");
+                    folderObj = new File((String)mem.get("GUI_MoveToFolder"));
                     if((Boolean) mem.get("GUI_AppendAnimeTitle")) {
                         int titleType = (Integer)mem.get("GUI_AppendAnimeTitleType");
-                        folder += titleType==0?procFile.Data().get("DB_SN_English"):(titleType==1?procFile.Data().get("DB_SN_Romaji"):procFile.Data().get("DB_SN_Kanji")) + java.io.File.separatorChar;
+                        String title = titleType==0?procFile.Data().get("DB_SN_English"):(titleType==1?procFile.Data().get("DB_SN_Romaji"):procFile.Data().get("DB_SN_Kanji"));
+                        folderObj = new File(folderObj, title.replaceAll("[\":/*|<>?]", ""));
                     }
 
                 } else {
-                    folder = ts.get("PathName");
+                    ts =  getPathFromTagSystem(procFile);
+                    if(ts == null) Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), "No TagSystem script set");
+
+                    //folder = ts.get("PathName");
+                    String folderStr = ts.get("PathName");
+                    folderObj = new File(folderStr == null? "": folderStr);
                 }
                 
-                folder = folder.substring(0, 3) + folder.substring(3).replaceAll("[\":/*|<>?]", "");
-                if(folder.isEmpty()){
-                    folder = procFile.FileObj().getParent() + java.io.File.separatorChar;
-                } else if(folder.length() > 240) {
+                if(folderObj.getPath().equals("")){
+                    folderObj = new File(procFile.FileObj().getParent());
+                } else if(folderObj.getPath().length() > 240) {
                     throw new Exception("Pathname (Folder) too long");
                 }
-                folderObj = new File(folder);
                 if(!folderObj.isAbsolute()){
                     Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), "Folderpath needs to be absolute.");
                     return false;
                 }
 
-                folderObj.mkdir();
+                if(!folderObj.exists()) folderObj.mkdir();
             } else {
-                folderObj = new File(procFile.FileObj().getAbsolutePath());
+                folderObj = procFile.FileObj().getParentFile();
             }
-
 
             String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
             if((Boolean)mem.get("GUI_RenameTypeAniDBFileName")){
                 filename = procFile.Data().get("DB_FileName");
             } else {
-                filename = ts.get("FileName").replaceAll("[\\\\:\"/*|<>?]", "") + ext;
+                if(ts == null) ts = getPathFromTagSystem(procFile);
+                if(ts == null) Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), "No TagSystem script set");
+
+                filename = ts.get("FileName") + ext;
+            }
+            filename = filename.replaceAll("[\\\\:\"/*|<>?]", "");
+
+            boolean truncated = false;
+            if(filename.length()+ folderObj.getPath().length() > 240){
+                filename = filename.substring(0, 240-folderObj.getPath().length()-ext.length())+ext;
+                truncated = true;
             }
 
-            if(filename.length()+ folder.length() > 240) filename = filename.substring(0, 240-folder.length()-ext.length())+ext;
 
+            File renFile = new File(folderObj, filename);
 
-            File renFile = (folderObj!=null)?(new File(folderObj, filename)):(new File(filename));
-
-            if(renFile.exists()){
+            if(renFile.equals(procFile.FileObj())){
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingNotNeeded, procFile.Id(), procFile.FileObj());
+                return true;
+            } else if(renFile.exists()){
                 Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), "Destination filename already exists.");
                 return false;
             } else if(procFile.FileObj().renameTo(renFile)){
-                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), procFile.FileObj());
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), renFile, truncated);
                 procFile.FileObj(renFile);
                 return true;
             } else {
-                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj());
+                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), renFile.getAbsolutePath());
                 return false;
             }
 
@@ -406,7 +421,10 @@ public class Mod_EpProcessing implements IModule {
         tags.put("Ver", GetFileVersion(Integer.valueOf(procFile.Data().get("DB_State"))).toString());
 
         //String path = "";
-        ts.parseAndTransform((String)mem.get("GUI_TagSystemCode"), tags);
+        String codeStr = (String)mem.get("GUI_TagSystemCode");
+        if(codeStr == null || codeStr.isEmpty()) return null;
+
+        ts.parseAndTransform(codeStr, tags);
 
         return tags;
     }

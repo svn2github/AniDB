@@ -46,13 +46,13 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         });
         ptn_MoveToFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("MoveTypeUseFolder", ptn_MoveToFolder.isSelected());
+                gui.ToMem("MoveTypeUseFolder", true);
             }
         });
 
         ptn_UseTaggingSystemFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("MoveTypeUseFolder", ptn_MoveToFolder.isSelected());
+                gui.ToMem("MoveTypeUseFolder", false);
             }
         });
 
@@ -76,13 +76,13 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
 
         ptn_UseAniDBFN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("RenameTypeAniDBFileName", ptn_UseAniDBFN.isSelected());
+                gui.ToMem("RenameTypeAniDBFileName", true);
             }
         });
 
         ptn_UseTaggingSystemFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("RenameTypeAniDBFileName", ptn_UseAniDBFN.isSelected());
+                gui.ToMem("RenameTypeAniDBFileName", false);
             }
         });
 

@@ -261,7 +261,7 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
                 break;
             case FileRenamed:
                 title = "File renamed";
-                node.add(new TreeNode("File renamed to " + ((File)comEvent.Params(3)).getAbsolutePath()));
+                node.add(new TreeNode("File renamed to " + ((File)comEvent.Params(3)).getAbsolutePath() + ((Boolean)comEvent.Params(4)?" (Truncated)":"") ));
                 break;
             case RenamingNotNeeded:
                 title = "No renaming needed";
