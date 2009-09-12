@@ -22,7 +22,7 @@ public class Mod_UdpApi implements IModule {
     public final int CLIENTVER = 3;
     public final int PROTOCOLVER = 3;
     public final String CLIENTTAG = "AniAdd";
-    public final String ANIDBAPIHOST = "ommina.homeip.net";
+    public final String ANIDBAPIHOST = "api.anidb.info";
     public final int ANIDBAPIPORT = 9000;
     public final String NODELAY = ""; //"FILE,ANIME,MYLISTADD";
     private InetAddress aniDBIP;
@@ -208,7 +208,7 @@ public class Mod_UdpApi implements IModule {
         if (session != null && !session.isEmpty()) cmd.setArgs("sess", session);
         if (password != null && !password.isEmpty()) cmd.setArgs("pass", password);
         if (autoPass != null && !autoPass.isEmpty()) cmd.setArgs("autopass", autoPass);
-      
+
 
         cmd.setArgs("user", userName.toLowerCase());
         cmd.setArgs("protover", Integer.toString(PROTOCOLVER), "client", CLIENTTAG.toLowerCase(), "clientver", Integer.toString(CLIENTVER));
@@ -331,7 +331,7 @@ public class Mod_UdpApi implements IModule {
                 now = new Date();
 
                 if(!aniDBAPIDown) authRetry = null;
-                
+
                 if (!aniDBAPIDown && auth) {
                     replysPending = 0;
                     for(int i = 0; i < queries.size(); i++) {
