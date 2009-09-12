@@ -45,7 +45,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chck_ShowEditboxes">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Show Storage/Sorce/Other Editboxes"/>
+        <Property name="label" type="java.lang.String" value="Show Storage/Source/Other Editboxes"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Events>

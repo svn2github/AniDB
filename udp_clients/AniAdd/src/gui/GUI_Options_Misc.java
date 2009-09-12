@@ -32,7 +32,7 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
             }
         });
 
-        chck_ShowEditboxes.setText("Show Storage/Sorce/Other Editboxes");
+        chck_ShowEditboxes.setLabel("Show Storage/Source/Other Editboxes");
         chck_ShowEditboxes.setOpaque(false);
         chck_ShowEditboxes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
