@@ -13,6 +13,7 @@ a
 
 span.link,
 a,
+#layout-main ul.g_list li a,
 #layout-main div.g_timedentry a:hover,
 #layout-main div.userpage_all div.g_section h4 a:hover,
 #layout-main div.g_section h4 a:hover,
@@ -88,8 +89,9 @@ body.nonav #layout-main div.g_content
 #layout-main div.animeatt_all div.bar h4,
 #layout-main div.g_menu.filter_menu h4,
 #layout-main div.userpage_all div.g_section.userprefs h3,
-#layout-main div.creq_all div.g_section.creq_stats table.stats th,
+#layout-main div.userpage_all div.g_section.clubs h3,
 #layout-main div.userpage_all div.g_section.latest h4,
+#layout-main div.creq_all div.g_section.creq_stats table.stats th,
 #layout-menu li.sub-menu,
 #layout-main div.tabbed_pane h4,/*
 #layout-main .g_list,*/
@@ -98,14 +100,13 @@ body.nonav #layout-main div.g_content
 #layout-main table tr td.field,
 #layout-main div.creq_all dl,
 #layout-main table caption,
-#layout-main table thead,
 #layout-main h1,
-#layout-main table tr.header,
-#layout-tabs ul li a,
-#layout-tabs ul li.g_odd a
+#layout-main table thead,
+#layout-main table tr.header
 {
 	background-color:#363636;
 	color: #dddddd;
+	text-shadow:1px 1px 0 #111111;
 }
 
 #layout-main h1 a,
@@ -116,11 +117,9 @@ body.nonav #layout-main div.g_content
 	color: #dddddd;
 }
 
-#layout-tabs ul li a:hover,
-#layout-tabs ul li:hover a,
-#layout-tabs ul li.selected a
+#layout-tabs ul li a,
+#layout-tabs ul li.g_odd a
 {
-	background-color: #e5e4e4;
 	color: #363636;
 }
 
@@ -129,27 +128,42 @@ body.nonav #layout-main div.g_content
 #layout-main div.g_timedentry h4 a
 {
 	color: #6B868F;
-	background-color: transparent
+	background-color: transparent;
+	text-shadow:none;
 }
 
 
+#layout-main ul.g_list li a,
+#layout-tabs ul li a,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	background: #cecece url(images/tab-2.png) repeat-x;
 }
 
+#layout-main ul.g_list li.selected
+{
+	background: #bfbfbf url(images/tab-4.png) repeat-x;
+	text-shadow:none;
+}
+
+#layout-tabs ul li.selected a,
+#layout-tabs ul li.selected a:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.tabbed_pane div.pane ul.tabs li.selected,
 #layout-main div.tabbed_pane div.pane ul.tabs li.selected:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected:hover
 {
-	background: url(images/tab-1.png);
+	background: url(images/tab-1.png) repeat-x;
+	text-shadow:1px 1px 0 #CCCCCC;
 }
 
+#layout-main ul.g_list li a:hover,
+#layout-tabs ul li a:hover,
 #layout-main div.tabbed_pane div.pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li:hover
 {
-	background: url(images/tab-3.png);
+	background: url(images/tab-3.png) repeat-x;
+	text-shadow:0 0 2px #777777;
 }
 
 #layout-main div.tabbed_pane div.body h4,
@@ -161,6 +175,7 @@ body.nonav #layout-main div.g_content
 	font-weight:bold;
 	padding:.5em;
 	text-align:left;
+	text-shadow:none;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.pane.general div.body h4,
@@ -180,3 +195,7 @@ body.nonav #layout-main div.g_content
 	background:#fafafa;
 }
 
+ul#layout-menu li:hover ul li a
+{
+	color: #f3f3f3;
+}

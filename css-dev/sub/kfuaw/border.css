@@ -72,25 +72,21 @@ img, a
 	border: 1px solid #cbd6e5;
 }
 
-#layout-tabs ul li a,
-#layout-main div.tabbed_pane ul.tabs li,
 #layout-menu li.sub-menu,
 #layout-main h1
 {
 	border: 2px ridge #dddddd;
 }
 
+#layout-tabs + #layout-main,
 body.nonav #layout-main div.g_content,
 #layout-search div.search,
-#layout-main div.tabbed_pane ul.tabs li,
 #tooltip span.top,
 #tooltip span.bottom,
 #layout-content,
 #layout-menu,
-#layout-tabs ul li a,
 #layout-menu li.sub-menu,
-#layout-main h1,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-main h1
 {
 	-moz-border-radius: .75em;
 	-webkit-border-radius: .75em;
@@ -100,13 +96,17 @@ body.nonav #layout-main div.g_content,
 	-webkit-border-bottom-right-radius:0;
 }
 
-#layout-main div.tabbed_pane div.body,
+#layout-tabs + #layout-main
+{
+	border: 1px solid #999999;
+}
+
 #layout-main div.animeatt_all div.bar h4,
 #layout-main div.animeatt_all div.bar ul,
 #layout-main div.creq_all div.states dl,
-#layout-main table,/*
-#layout-main .g_list,*/
+#layout-main table,
 #layout-main div.userpage_all div.latest ul,
+#layout-main div.userpage_all div.g_section.clubs h3 + div,
 #layout-main div.g_menu div h4 + ul,
 #layout-main div.g_menu div h4 + p,
 #layout-main div.latestanimes_anime div.data table,
@@ -120,10 +120,19 @@ body.nonav #layout-main div.g_content,
 	border: 1px solid #363636;
 }
 
-#layout-main ul.links
+#layout-main div.tabbed_pane div.body
+{
+	border: 1px solid #999999;
+	-moz-border-radius: .3em;
+	-webkit-border-radius: .3em;
+	-moz-border-radius-topleft:0;
+	-webkit-border-top-left-radius:0;
+}
+
+#layout-main ul.links_bottom
 {
 	border: none;
-	border-top: 2pt groove #FFFFFF;
+	border-top: 2px groove #FFFFFF;
 }
 
 #tooltip span.top,
@@ -158,6 +167,7 @@ body.nonav #layout-main div.g_content,
 }
 
 
+#layout-tabs ul li a,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	border: 1px solid #999999;
@@ -167,14 +177,28 @@ body.nonav #layout-main div.g_content,
 	-moz-border-radius-bottomright:0;
 	-webkit-border-bottom-left-radius:0;
 	-webkit-border-bottom-right-radius:0;
-	border-bottom-color: #777777;
 }
 
+#layout-tabs ul li a
+{
+	border-bottom-color: #acacac;
+}
+
+#layout-tabs ul li.selected a,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.tabbed_pane div.pane ul.tabs li.selected
 {
-	border: 1px solid #666666;
+	border: 1px solid #999999;
 	border-bottom-color: #f3f3f3;
+	border-top:medium none;
+}
+
+#layout-main ul.g_list li.selected,
+#layout-main ul.g_list li a
+{
+	-moz-border-radius:.5em;
+	-webkit-border-radius: .5em;
+	border:1px solid #999999;
 }
 
 table table

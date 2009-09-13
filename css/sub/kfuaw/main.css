@@ -1,11 +1,35 @@
 @import "../common.css";
 
 @import "../../common/style/color/status-creme.css";
+
 @import "../../grey/icons.css";
 
 @import "border.css";
 @import "color.css";
 @import "forum.css";
+
+ul#layout-menu li ul
+{
+	list-style-type: circle;
+	margin-left: .9em;
+	padding-left: .5em;
+}
+ul#layout-menu li ul
+{
+	display: none;
+}
+
+
+#layout-menu span.tab
+{
+	display:block;
+	position: static;
+}
+
+ul#layout-menu li:hover ul
+{
+	display: block;
+}
 
 body
 {
@@ -142,7 +166,7 @@ body
 	line-height: 1.2em;
 	font-weight: normal;
 }
-
+/*
 #layout-main .g_list li:before
 {
 	content: " | "
@@ -152,7 +176,7 @@ body
 {
 	content: "";
 }
-
+*/
 #layout-main .g_list.limit li:first-child:before
 {
 	content: "show: ";
@@ -188,6 +212,7 @@ body
 #layout-content
 {
 	margin: 0 1em 0 14em;
+	padding-bottom: .1em;
 }
 
 #layout-menu li.sub-menu,
@@ -203,8 +228,14 @@ body
 
 #layout-main
 {
-	margin: 0;
 	padding: 4em .8em .8em .8em;
+	margin: 0;
+}
+
+#layout-tabs + #layout-main
+{
+	margin: 4em .8em .8em .8em;
+	padding: .8em;
 }
 
 #layout-main div.g_timedentry h4,
@@ -223,11 +254,16 @@ body
 	height: 0;
 }
 
+#layout-tabs ul li:first-child
+{
+	margin:0;
+}
+
 #layout-tabs ul.main-tabs
 {
 	display: block;
-	padding: 1.2em .33em .4em .33em;
-	margin: 0;
+	margin:0 0 0 0.8em;
+	padding:2.3em 0 0.4em;
 }
 
 .rtop,
@@ -266,8 +302,7 @@ body
 	margin: 0;
 }
 
-#layout-main div.tabbed_pane div.pane ul.tabs,
-#layout-main ul.links
+#layout-main div.tabbed_pane div.pane ul.tabs
 {
 	padding: .33em 0 0 0;
 	margin-top: .33em;
@@ -278,9 +313,20 @@ body
 	margin:0 0 1px 0;
 }
 
+#layout-tabs ul li a
+{
+	font-size: 1.1em;
+}
+
+#layout-tabs ul li + li a,
 #layout-main div.tabbed_pane ul.tabs li + li
 {
 	margin-left:-0.5em;
+}
+
+#layout-tabs ul li.selected a
+{
+	padding-top: .4em;
 }
 
 #layout-main div.tabbed_pane ul.tabs li.selected,
@@ -316,12 +362,6 @@ body
 #layout-main div.cmt_all div.topic_actions
 {
 	margin-bottom: .16em;
-}
-
-#layout-main div.creq_all div.creq_stats
-{
-	width: 15%;
-	margin: auto;
 }
 
 #layout-main div.creq_all div.states,
@@ -375,7 +415,8 @@ body
 #layout-main div.profile_all div.tabbed_pane div.pane.general div.body h4,
 #layout-main div.profile_all div.tabbed_pane div.pane.default_languages div > h4,
 #layout-main div.profile_all div.tabbed_pane div.pane.account div.g_definitionlist h4,
-#layout-main div.profile_all div.tabbed_pane div.pane.rdf_jabber div h4
+#layout-main div.profile_all div.tabbed_pane div.pane.rdf_jabber div h4,
+#layout-main div.g_menu h4
 {
 	text-align:center;
 	padding:.0 0 .1em 0;
@@ -484,6 +525,12 @@ body.nonav #layout-main div.g_content
 	padding: 0 1em 1em 1em;
 }
 
+#layout-main /*div.anime_all*/ div.block > div.image img
+{
+	padding: .5em;
+	border: .5em solid #363639;
+}
+
 #layout-footer p
 {
 	text-align: right;
@@ -498,4 +545,17 @@ body.nonav #layout-main div.g_content
 #layout-footer:after
 {
 	content: "design by noec"
+}
+
+#layout-main ul.g_list li.selected,
+#layout-main ul.g_list li a
+{
+	margin-top:-0.1em;
+	padding:0.1em 0.6em;
+}
+
+#layout-main ul.links_bottom
+{
+	padding: 1em 0 0 0;
+	margin: 1em 0 .3em 0;
 }
