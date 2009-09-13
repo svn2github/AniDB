@@ -370,6 +370,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 
         public void Start(){
             if(t == null || !t.isAlive()){
+                gui.LogEvent(ComEvent.eType.Debug, "Starting progress updater");
                 t = new Thread(this);
                 t.start();
             }
@@ -377,11 +378,13 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 
         public void Terminate(){
             try {
+                gui.LogEvent(ComEvent.eType.Debug, "Waiting for progress updater thread to terminate");
                 if(t != null) t.join();
             } catch (InterruptedException ex) { ex.printStackTrace();}
         }
 
         public void run() {
+            gui.LogEvent(ComEvent.eType.Debug, "Starting progress updater");
             while((epProc.isProcessing() || api.waitingCmdCount()!=0) && gui.ModState() != eModState.Terminating){
                 do {
                     try {Thread.sleep(100);} catch (InterruptedException ex) {}
@@ -401,6 +404,8 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             processingStartOn = 0;
             pausedTime = 0;
             processingPausedOn = 0;
+
+            gui.LogEvent(ComEvent.eType.Debug, "Progress updater thread terminated");
         }
     }
    

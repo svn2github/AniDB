@@ -510,29 +510,29 @@ public class Mod_EpProcessing implements IModule {
         switch (proc) {
             case Start:
                 //System.out.println("Processing started");
-                Log(ComEvent.eType.Information, eComType.Status, eProcess.Start);
                 isProcessing = true;
                 isPaused = false;
+                Log(ComEvent.eType.Information, eComType.Status, eProcess.Start);
                 processEps();
                 break;
             case Pause:
                 //System.out.println("Processing paused");
-                Log(ComEvent.eType.Information, eComType.Status, eProcess.Pause);
                 isPaused = true;
                 if(fileParser!=null) fileParser.pause();
+                Log(ComEvent.eType.Information, eComType.Status, eProcess.Pause);
                 break;
             case Resume:
                 //System.out.println("Processing resumed");
-                Log(ComEvent.eType.Information, eComType.Status, eProcess.Resume);
                 if(fileParser!=null) fileParser.resume();
                 isPaused = false;
+                Log(ComEvent.eType.Information, eComType.Status, eProcess.Resume);
                 break;
             case Stop:
                 //System.out.println("Processing stopped");
-                Log(ComEvent.eType.Information, eComType.Status, eProcess.Stop);
                 //Not yet supported
                 isProcessing = false;
                 isPaused = false;
+                Log(ComEvent.eType.Information, eComType.Status, eProcess.Stop);
                 break;
         }
     }

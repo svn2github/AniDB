@@ -553,7 +553,7 @@ public class Mod_UdpApi implements IModule {
                     Log(ComEvent.eType.Error, "Outdated Version");
                     break;
                 case 504:
-                    Log(ComEvent.eType.Error, reply.ReplyMsg());
+                    Log(ComEvent.eType.Error, "Client temporarily disabled by administrator - please try again later");
                     break;
             }
 

@@ -291,6 +291,10 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         public void RemoveTab(String tabName) {
             RemoveGuiTab(tabName);
         }
+
+        public void LogEvent(ComEvent.eType type, Object... params) {
+            ComFire(new ComEvent(this, type, params));
+        }
     }
 
     @SuppressWarnings("unchecked")

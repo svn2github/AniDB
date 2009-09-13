@@ -18,4 +18,6 @@ public interface IGUI{
     void RemoveTab(String tabName);
 
     void GUIEvent(ComEvent comEvent);
+
+    void LogEvent(ComEvent.eType type, Object... params);
 }
