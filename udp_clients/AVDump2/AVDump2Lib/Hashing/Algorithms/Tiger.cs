@@ -28,28 +28,28 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AVDump2Lib.Hashes {
-    /// <summary>Works but slow</summary>
-    public class Tiger : HashAlgorithm {
-        #region Fields
-        private const int BLOCKSIZE = 64;
-        private long a, b, c, aa, bb, cc;
-        private int ah, bh, ch;
+namespace AVDump2Lib.Hashing.Algorithms {
+	/// <summary>Works but slow</summary>
+	public class Tiger : HashAlgorithm {
+		#region Fields
+		private const int BLOCKSIZE = 64;
+		private long a, b, c, aa, bb, cc;
+		private int ah, bh, ch;
 
-        private long[] words;
-        private byte[] block;
+		private long[] words;
+		private byte[] block;
 
-        private long lLen;
-        private int nBufPos;
-        #endregion
+		private long lLen;
+		private int nBufPos;
+		#endregion
 
-        public Tiger() {
-            this.block = new byte[64];
-            this.words = new long[8];
-        }
+		public Tiger() {
+			this.block = new byte[64];
+			this.words = new long[8];
+		}
 
-        #region S Boxes
-        static long[] T1 = new long[] {
+		#region S Boxes
+		static long[] T1 = new long[] {
             192161084409973854L, -6034178070669973268L, 8272369121297300691L, 7854730284916899642L,
             -3631738584360316525L, 8463286011307239906L, -5664346993730092093L, 5082381371487377520L,
             -1536603760329757466L, -4232985935611735204L, 5541490850629862524L, 766444128913191948L,
@@ -116,7 +116,7 @@ namespace AVDump2Lib.Hashes {
             -5183265553382750L, -1789270636298447811L, -6471656072873752544L, -1458735953920612486L
         };
 
-        static long[] T2 = new long[] {
+		static long[] T2 = new long[] {
             -1826563305001377480L, -5358963986493047656L, 6213947727727520144L, 5496303794639560149L, 
             -2795981259149962188L, 642450021946863605L, -2925749420550550287L, -4252676236223476327L,
             -2372897249057438062L, -2455723000952046826L, 8011611286970690052L, 5372247966639775667L,
@@ -183,7 +183,7 @@ namespace AVDump2Lib.Hashes {
             -8065760984084440343L, 5618223731912049521L, -3014545685365689991L, 2520538699101199374L
         };
 
-        static long[] T3 = new long[] {
+		static long[] T3 = new long[] {
             -819712100864953445L, 5224129141031473793L, -1683494792012715969L, 3214246200928423523L,
             -2720183745931134014L, 3432136347919366758L, -6844377996819786796L, -4697838837464539535L, 
             -3480123136110369641L, -5257202687841710057L, -3160671586143389472L, -8143604544638974599L,
@@ -250,7 +250,7 @@ namespace AVDump2Lib.Hashes {
             4993489137437819341L, 4727924503904151836L, -3180601338503688336L, 7858325008468642462L
         };
 
-        static long[] T4 = new long[] {
+		static long[] T4 = new long[] {
             6561287832113134677L, 1893413629145602549L,-6205320776685678598L, 7334764389497132503L,
             421942495471316930L, -9085229951450268347L,5948965432456907277L, -6872877502453521409L,
             4831763938021002582L, -4272888574428519313L,5678704711006605406L, 4536654317168965104L,
@@ -316,240 +316,240 @@ namespace AVDump2Lib.Hashes {
             -4653220181978985551L, 4688837593722596333L,-3815667051463559517L, -1779743783662362556L, 
             -3650491565905270770L, -4529053496248414107L,-4021111997381021802L, -4350414089199835873L
         };
-        #endregion
+		#endregion
 
-        public override bool CanTransformMultipleBlocks { get { return true; } }
+		public override bool CanTransformMultipleBlocks { get { return true; } }
 
-        public void Compress() {
-            aa = a; bb = b; cc = c;
+		public void Compress() {
+			aa = a; bb = b; cc = c;
 
-            //ABC 0 5
-            c ^= words[0]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 5L;
+			//ABC 0 5
+			c ^= words[0]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 5L;
 
-            //BCA 1 5
-            a ^= words[1]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 5L;
+			//BCA 1 5
+			a ^= words[1]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 5L;
 
-            //CAB 2 5
-            b ^= words[2]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 5L;
+			//CAB 2 5
+			b ^= words[2]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 5L;
 
-            //ABC 3 5
-            c ^= words[3]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 5L;
+			//ABC 3 5
+			c ^= words[3]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 5L;
 
-            //BCA 4 5
-            a ^= words[4]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 5L;
+			//BCA 4 5
+			a ^= words[4]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 5L;
 
-            //CAB 5 5
-            b ^= words[5]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 5L;
+			//CAB 5 5
+			b ^= words[5]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 5L;
 
-            //ABC 6 5
-            c ^= words[6]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 5L;
+			//ABC 6 5
+			c ^= words[6]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 5L;
 
-            //BCA 7 5
-            a ^= words[7]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 5L;
+			//BCA 7 5
+			a ^= words[7]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 5L;
 
-            //==========================================================================================
-            //Scheduler
-            words[0] -= words[7] ^ -6510615555426900571L;
-            words[1] ^= words[0];
-            words[2] += words[1];
-            words[3] -= words[2] ^ ((~words[1]) << 19);
-            words[4] ^= words[3];
-            words[5] += words[4];
-            words[6] -= words[5] ^ (((~words[4]) >> 23) & 2199023255551L);
-            words[7] ^= words[6];
-            words[0] += words[7];
-            words[1] -= words[0] ^ ((~words[7]) << 19);
-            words[2] ^= words[1];
-            words[3] += words[2];
-            words[4] -= words[3] ^ (((~words[2]) >> 23) & 2199023255551L);
-            words[5] ^= words[4];
-            words[6] += words[5];
-            words[7] -= words[6] ^ 81985529216486895L;
+			//==========================================================================================
+			//Scheduler
+			words[0] -= words[7] ^ -6510615555426900571L;
+			words[1] ^= words[0];
+			words[2] += words[1];
+			words[3] -= words[2] ^ ((~words[1]) << 19);
+			words[4] ^= words[3];
+			words[5] += words[4];
+			words[6] -= words[5] ^ (((~words[4]) >> 23) & 2199023255551L);
+			words[7] ^= words[6];
+			words[0] += words[7];
+			words[1] -= words[0] ^ ((~words[7]) << 19);
+			words[2] ^= words[1];
+			words[3] += words[2];
+			words[4] -= words[3] ^ (((~words[2]) >> 23) & 2199023255551L);
+			words[5] ^= words[4];
+			words[6] += words[5];
+			words[7] -= words[6] ^ 81985529216486895L;
 
-            //CAB 0 7
-            b ^= words[0]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 7L;
+			//CAB 0 7
+			b ^= words[0]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 7L;
 
-            //ABC 1 7
-            c ^= words[1]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 7L;
+			//ABC 1 7
+			c ^= words[1]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 7L;
 
-            //BCA 2 7
-            a ^= words[2]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 7L;
+			//BCA 2 7
+			a ^= words[2]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 7L;
 
-            //CAB 3 7
-            b ^= words[3]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 7L;
+			//CAB 3 7
+			b ^= words[3]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 7L;
 
-            //ABC 4 7
-            c ^= words[4]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 7L;
+			//ABC 4 7
+			c ^= words[4]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 7L;
 
-            //BCA 5 7
-            a ^= words[5]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 7L;
+			//BCA 5 7
+			a ^= words[5]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 7L;
 
-            //CAB 6 7
-            b ^= words[6]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 7L;
+			//CAB 6 7
+			b ^= words[6]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 7L;
 
-            //ABC 7 7
-            c ^= words[7]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 7L;
+			//ABC 7 7
+			c ^= words[7]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 7L;
 
-            //==========================================================================================
-            //Scheduler
-            words[0] -= words[7] ^ -6510615555426900571L;
-            words[1] ^= words[0];
-            words[2] += words[1];
-            words[3] -= words[2] ^ ((~words[1]) << 19);
-            words[4] ^= words[3];
-            words[5] += words[4];
-            words[6] -= words[5] ^ (((~words[4]) >> 23) & 2199023255551L);
-            words[7] ^= words[6];
-            words[0] += words[7];
-            words[1] -= words[0] ^ ((~words[7]) << 19);
-            words[2] ^= words[1];
-            words[3] += words[2];
-            words[4] -= words[3] ^ (((~words[2]) >> 23) & 2199023255551L);
-            words[5] ^= words[4];
-            words[6] += words[5];
-            words[7] -= words[6] ^ 81985529216486895L;
+			//==========================================================================================
+			//Scheduler
+			words[0] -= words[7] ^ -6510615555426900571L;
+			words[1] ^= words[0];
+			words[2] += words[1];
+			words[3] -= words[2] ^ ((~words[1]) << 19);
+			words[4] ^= words[3];
+			words[5] += words[4];
+			words[6] -= words[5] ^ (((~words[4]) >> 23) & 2199023255551L);
+			words[7] ^= words[6];
+			words[0] += words[7];
+			words[1] -= words[0] ^ ((~words[7]) << 19);
+			words[2] ^= words[1];
+			words[3] += words[2];
+			words[4] -= words[3] ^ (((~words[2]) >> 23) & 2199023255551L);
+			words[5] ^= words[4];
+			words[6] += words[5];
+			words[7] -= words[6] ^ 81985529216486895L;
 
-            //BCA 0 9
-            a ^= words[0]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 9L;
+			//BCA 0 9
+			a ^= words[0]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 9L;
 
-            //CAB 1 9
-            b ^= words[1]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 9L;
+			//CAB 1 9
+			b ^= words[1]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 9L;
 
-            //ABC 2 9
-            c ^= words[2]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 9L;
+			//ABC 2 9
+			c ^= words[2]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 9L;
 
-            //BCA 3 9
-            a ^= words[3]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 9L;
+			//BCA 3 9
+			a ^= words[3]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 9L;
 
-            //CAB 4 9
-            b ^= words[4]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 9L;
+			//CAB 4 9
+			b ^= words[4]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 9L;
 
-            //ABC 5 9
-            c ^= words[5]; ch = (int)(c >> 32);
-            a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
-            b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
-            b *= 9L;
+			//ABC 5 9
+			c ^= words[5]; ch = (int)(c >> 32);
+			a -= T1[(c >> 0) & 255] ^ T2[(c >> 16) & 255] ^ T3[(ch >> 0) & 255] ^ T4[(ch >> 16) & 255];
+			b += T4[(c >> 8) & 255] ^ T3[(c >> 24) & 255] ^ T2[(ch >> 8) & 255] ^ T1[(ch >> 24) & 255];
+			b *= 9L;
 
-            //BCA 6 9
-            a ^= words[6]; ah = (int)(a >> 32);
-            b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
-            c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
-            c *= 9L;
+			//BCA 6 9
+			a ^= words[6]; ah = (int)(a >> 32);
+			b -= T1[(a >> 0) & 255] ^ T2[(a >> 16) & 255] ^ T3[(ah >> 0) & 255] ^ T4[(ah >> 16) & 255];
+			c += T4[(a >> 8) & 255] ^ T3[(a >> 24) & 255] ^ T2[(ah >> 8) & 255] ^ T1[(ah >> 24) & 255];
+			c *= 9L;
 
-            //CAB 7 9
-            b ^= words[7]; bh = (int)(b >> 32);
-            c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
-            a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
-            a *= 9L;
+			//CAB 7 9
+			b ^= words[7]; bh = (int)(b >> 32);
+			c -= T1[(b >> 0) & 255] ^ T2[(b >> 16) & 255] ^ T3[(bh >> 0) & 255] ^ T4[(bh >> 16) & 255];
+			a += T4[(b >> 8) & 255] ^ T3[(b >> 24) & 255] ^ T2[(bh >> 8) & 255] ^ T1[(bh >> 24) & 255];
+			a *= 9L;
 
 
-            a ^= aa;
-            b -= bb;
-            c += cc;
-        }
+			a ^= aa;
+			b -= bb;
+			c += cc;
+		}
 
-        protected override void HashCore(byte[] data, int nStart, int nSize) {
-            int nEnd = 0;
-            int nToCopy = 0;
-            lLen += nSize;
-            nEnd = (nStart + nSize);
-            while(nStart < nEnd) {
-                nToCopy = 64 - nBufPos;
-                if(nToCopy > nSize) nToCopy = nSize;
+		protected override void HashCore(byte[] data, int nStart, int nSize) {
+			int nEnd = 0;
+			int nToCopy = 0;
+			lLen += nSize;
+			nEnd = (nStart + nSize);
+			while(nStart < nEnd) {
+				nToCopy = 64 - nBufPos;
+				if(nToCopy > nSize) nToCopy = nSize;
 
-                Buffer.BlockCopy(data, nStart, block, nBufPos, nToCopy);
-                nStart += nToCopy;
-                nBufPos += nToCopy;
-                nSize -= nToCopy;
-                if(64 <= nBufPos) {
-                    ProcessBlock();
-                    nBufPos = 0;
-                    continue;
-                }
-                break;
-            }
-        }
+				Buffer.BlockCopy(data, nStart, block, nBufPos, nToCopy);
+				nStart += nToCopy;
+				nBufPos += nToCopy;
+				nSize -= nToCopy;
+				if(64 <= nBufPos) {
+					ProcessBlock();
+					nBufPos = 0;
+					continue;
+				}
+				break;
+			}
+		}
 
-        protected override byte[] HashFinal() {
-            byte[] buf = null;
-            int nBufPos = 0;
-            nBufPos = this.nBufPos;
-            buf = this.block;
-            buf[nBufPos] = ((byte)1);
-            nBufPos++;
-            if(56 <= nBufPos) {
-                Array.Clear(buf, nBufPos, 64 - nBufPos);
-                this.ProcessBlock();
-                nBufPos = 0;
-            }
-            Array.Clear(buf, nBufPos, (64 - nBufPos) - 8);
-            Tiger.LongToBytes(this.lLen << 3, buf, 56);
-            this.ProcessBlock();
+		protected override byte[] HashFinal() {
+			byte[] buf = null;
+			int nBufPos = 0;
+			nBufPos = this.nBufPos;
+			buf = this.block;
+			buf[nBufPos] = ((byte)1);
+			nBufPos++;
+			if(56 <= nBufPos) {
+				Array.Clear(buf, nBufPos, 64 - nBufPos);
+				this.ProcessBlock();
+				nBufPos = 0;
+			}
+			Array.Clear(buf, nBufPos, (64 - nBufPos) - 8);
+			Tiger.LongToBytes(this.lLen << 3, buf, 56);
+			this.ProcessBlock();
 
-            return new byte[] {
+			return new byte[] {
                 (byte) a       , (byte)(a >>  8), (byte)(a >> 16), (byte)(a >> 24),
                 (byte)(a >> 32), (byte)(a >> 40), (byte)(a >> 48), (byte)(a >> 56),
                 (byte) b       , (byte)(b >>  8), (byte)(b >> 16), (byte)(b >> 24),
@@ -557,76 +557,76 @@ namespace AVDump2Lib.Hashes {
                 (byte) c       , (byte)(c >>  8), (byte)(c >> 16), (byte)(c >> 24),
                 (byte)(c >> 32), (byte)(c >> 40), (byte)(c >> 48), (byte)(c >> 56)
             };
-        }
+		}
 
-        public override void Initialize() {
-            this.a = 81985529216486895L;
-            this.b = -81985529216486896L;
-            this.c = -1110518062304271993L;
-            this.nBufPos = 0;
-            this.lLen = 0L;
-        }
+		public override void Initialize() {
+			this.a = 81985529216486895L;
+			this.b = -81985529216486896L;
+			this.c = -1110518062304271993L;
+			this.nBufPos = 0;
+			this.lLen = 0L;
+		}
 
-        static void LongToBytes(long lVal, byte[] buf, int nIdx) {
-            Buffer.BlockCopy(BitConverter.GetBytes(lVal), 0, buf, nIdx, 8);
-        }
+		static void LongToBytes(long lVal, byte[] buf, int nIdx) {
+			Buffer.BlockCopy(BitConverter.GetBytes(lVal), 0, buf, nIdx, 8);
+		}
 
-        public void ProcessBlock() {
-            long[] block = null;
-            byte[] buf = null;
-            int nI = 0;
-            int nPos = 0;
-            nPos = 0;
-            block = this.words;
-            buf = this.block;
-            while(nPos < 64) {
-                block[nI] = BitConverter.ToInt64(buf, nPos);
-                nPos += 8;
-                nI++;
-            }
-            Compress();
-        }
+		public void ProcessBlock() {
+			long[] block = null;
+			byte[] buf = null;
+			int nI = 0;
+			int nPos = 0;
+			nPos = 0;
+			block = this.words;
+			buf = this.block;
+			while(nPos < 64) {
+				block[nI] = BitConverter.ToInt64(buf, nPos);
+				nPos += 8;
+				nI++;
+			}
+			Compress();
+		}
 
-        public static bool SelfTest() {
-            ASCIIEncoding enc = null;
-            byte[] hash = null;
-            int nI = 0;
-            string TEST_DATA = null;
-            byte[] TEST_HASH = null;
-            Tiger tg = null;
-            int _Vb_t_i4_0 = 0;
-            byte[] _Vb_t_array_0 = null;
-            TEST_DATA = "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq";
-            _Vb_t_array_0 = new byte[] { ((byte) 15), ((byte) 123), ((byte) 249), ((byte) 161), ((byte) 155), ((byte) 156), ((byte) 88), ((byte) 242), ((byte) 183), ((byte) 97), 
+		public static bool SelfTest() {
+			ASCIIEncoding enc = null;
+			byte[] hash = null;
+			int nI = 0;
+			string TEST_DATA = null;
+			byte[] TEST_HASH = null;
+			Tiger tg = null;
+			int _Vb_t_i4_0 = 0;
+			byte[] _Vb_t_array_0 = null;
+			TEST_DATA = "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq";
+			_Vb_t_array_0 = new byte[] { ((byte) 15), ((byte) 123), ((byte) 249), ((byte) 161), ((byte) 155), ((byte) 156), ((byte) 88), ((byte) 242), ((byte) 183), ((byte) 97), 
 										   ((byte) 13), ((byte) 247), ((byte) 232), ((byte) 79), ((byte) 10), ((byte) 195), ((byte) 167), ((byte) 28), ((byte) 99), ((byte) 30), 
 										   ((byte) 123), ((byte) 83), ((byte) 247), ((byte) 142) };
-            TEST_HASH = _Vb_t_array_0;
-            tg = new Tiger();
-            tg.Initialize();
-            enc = new ASCIIEncoding();
-            hash = tg.ComputeHash(enc.GetBytes(TEST_DATA));
-            if(hash.Length != TEST_HASH.Length) {
-                return false;
-            }
-            _Vb_t_i4_0 = (TEST_HASH.Length - 1);
-            for(nI = 0;(nI <= _Vb_t_i4_0);nI++) {
-                if(hash[nI] != TEST_HASH[nI]) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
+			TEST_HASH = _Vb_t_array_0;
+			tg = new Tiger();
+			tg.Initialize();
+			enc = new ASCIIEncoding();
+			hash = tg.ComputeHash(enc.GetBytes(TEST_DATA));
+			if(hash.Length != TEST_HASH.Length) {
+				return false;
+			}
+			_Vb_t_i4_0 = (TEST_HASH.Length - 1);
+			for(nI = 0;(nI <= _Vb_t_i4_0);nI++) {
+				if(hash[nI] != TEST_HASH[nI]) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 
-    /// <summary>Broken and also slow yay</summary>
-    public class Tiger_Alt : HashAlgorithm {
-        public static int BLOCKLENGTH;
-        ulong a, b, c, aa, bb, cc;
-        uint ah, bh, ch;
+	/// <summary>Broken and slow (Giving up now)</summary>
+#if UseUnsafeCode
+	public unsafe class TTH : HashAlgorithm {
+		UInt64 a, b, c, aa, bb, cc;
+		UInt64*[] xs;
 
-        #region S-Boxes
-        /** S-Box T1. */
-        private static ulong[] T1 = {
+		#region S-Boxes
+		/** S-Box T1. */
+		private static ulong[] T1 = {
                 0x02AAB17CF7E90C5EL, 0xAC424B03E243A8ECL, 0x72CD5BE30DD5FCD3L, 0x6D019B93F6F97F3AL,
                 0xCD9978FFD21F9193L, 0x7573A1C9708029E2L, 0xB164326B922A83C3L, 0x46883EEE04915870L,
                 0xEAACE3057103ECE6L, 0xC54169B808A3535CL, 0x4CE754918DDEC47CL, 0x0AA2F4DFDC0DF40CL,
@@ -693,8 +693,8 @@ namespace AVDump2Lib.Hashes {
                 0xFFED95D8F1EA02A2L, 0xE72B3BD61464D43DL, 0xA6300F170BDC4820L, 0xEBC18760ED78A77AL
         };
 
-        /** S-Box T2. */
-        private static ulong[] T2 = {
+		/** S-Box T2. */
+		private static ulong[] T2 = {
                 0xE6A6BE5A05A12138L, 0xB5A122A5B4F87C98L, 0x563C6089140B6990L, 0x4C46CB2E391F5DD5L,
                 0xD932ADDBC9B79434L, 0x08EA70E42015AFF5L, 0xD765A6673E478CF1L, 0xC4FB757EAB278D99L,
                 0xDF11C6862D6E0692L, 0xDDEB84F10D7F3B16L, 0x6F2EF604A665EA04L, 0x4A8E0F0FF0E0DFB3L,
@@ -761,8 +761,8 @@ namespace AVDump2Lib.Hashes {
                 0x9010A91E84711AE9L, 0x4DF7F0B7B1498371L, 0xD62A2EABC0977179L, 0x22FAC097AA8D5C0EL
         };
 
-        /** S-Box T3. */
-        private static ulong[] T3 = {
+		/** S-Box T3. */
+		private static ulong[] T3 = {
                 0xF49FCC2FF1DAF39BL, 0x487FD5C66FF29281L, 0xE8A30667FCDCA83FL, 0x2C9B4BE3D2FCCE63L,
                 0xDA3FF74B93FBBBC2L, 0x2FA165D2FE70BA66L, 0xA103E279970E93D4L, 0xBECDEC77B0E45E71L,
                 0xCFB41E723985E497L, 0xB70AAA025EF75017L, 0xD42309F03840B8E0L, 0x8EFC1AD035898579L,
@@ -829,8 +829,8 @@ namespace AVDump2Lib.Hashes {
                 0x454C6FE9F2C0C1CDL, 0x419CF6496412691CL, 0xD3DC3BEF265B0F70L, 0x6D0E60F5C3578A9EL
         };
 
-        /** S-Box T4. */
-        private static ulong[] T4 = {
+		/** S-Box T4. */
+		private static ulong[] T4 = {
                 0x5B0E608526323C55L, 0x1A46C1A9FA1B59F5L, 0xA9E245A17C4C8FFAL, 0x65CA5159DB2955D7L,
                 0x05DB0A76CE35AFC2L, 0x81EAC77EA9113D45L, 0x528EF88AB6AC0A0DL, 0xA09EA253597BE3FFL,
                 0x430DDFB3AC48CD56L, 0xC4B3A67AF45CE46FL, 0x4ECECFD8FBE2D05EL, 0x3EF56F10B39935F0L,
@@ -896,255 +896,91 @@ namespace AVDump2Lib.Hashes {
                 0xBF6C70E5F776CBB1L, 0x411218F2EF552BEDL, 0xCB0C0708705A36A3L, 0xE74D14754F986044L,
                 0xCD56D9430EA8280EL, 0xC12591D7535F5065L, 0xC83223F1720AEF96L, 0xC3A0396F7363A51FL
         };
-        #endregion
+		#endregion
 
-        public Tiger_Alt() {
-            words = new ulong[8];
-        }
+		public override void Initialize() {
+			a = 0x0123456789ABCDEFUL;
+			b = 0xFEDCBA9876543210UL;
+			c = 0xF096A5B4C3B2E187UL;
+			xs = new UInt64*[8];
+		}
 
-        ulong[] words;
-        protected override void HashCore(byte[] array, int ibStart, int cbSize) {
-            if(cbSize % BLOCKLENGTH != 0) array = PadBuffer(array);
-            int blockCount = array.Length / 64;
-            for(int i = 0;i < blockCount;i++) {
-                //for(int j = 0;j < 8;j++) words[j] = BitConverter.ToUInt64(array, i * 64 + j * 8);
+		protected override void HashCore(byte[] array, int ibStart, int cbSize) {
+			int length = 0;
+			if(cbSize >= 64) {
+				fixed(byte* src = array) {
+					UInt64* srcArray;
+					int uint64Count = cbSize >> 3;
+					while(length != uint64Count) {
+						srcArray = (UInt64*)src + length;
+						for(int i = 0;i < 8;i++, srcArray++) xs[i] = srcArray;
+						length += 8;
 
-                int offset = 0;
-                words[0] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset++] & 0xFF) << 56);
-                words[1] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset++] & 0xFF) << 56);
-                words[2] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset++] & 0xFF) << 56);
-                words[3] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset++] & 0xFF) << 56);
-                words[4] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset++] & 0xFF) << 56);
-                words[5] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset++] & 0xFF) << 56);
-                words[6] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset++] & 0xFF) << 56);
-                words[7] = ((ulong)array[offset++] & 0xFF) | ((ulong)(array[offset++] & 0xFF) << 8)
-                | ((ulong)(array[offset++] & 0xFF) << 16) | ((ulong)(array[offset++] & 0xFF) << 24)
-                | ((ulong)(array[offset++] & 0xFF) << 32) | ((ulong)(array[offset++] & 0xFF) << 40)
-                | ((ulong)(array[offset++] & 0xFF) << 48) | ((ulong)(array[offset] & 0xFF) << 56);
+						save_abc();
+						pass(a, b, c, 5);
+						key_schedule();
+						pass(c, a, b, 7);
+						key_schedule();
+						pass(b, c, a, 9);
+						feedforward();
 
+					}
+				}
+			}
+			if(cbSize != length) ;
+		}
 
-                ProcessBlock(words);
-            }
-        }
+		private void save_abc() {
+			aa = a;
+			bb = b;
+			cc = c;
+		}
 
-        private void ProcessBlock(ulong[] words) {
-            //save_abc
-            aa = a;
-            bb = b;
-            cc = c;
+		private void pass(UInt64 a, UInt64 b, UInt64 c, UInt64 mul) {
+			round(a, b, c, *xs[0], mul);
+			round(b, c, a, *xs[1], mul);
+			round(c, a, b, *xs[2], mul);
+			round(a, b, c, *xs[3], mul);
+			round(b, c, a, *xs[4], mul);
+			round(c, a, b, *xs[5], mul);
+			round(a, b, c, *xs[6], mul);
+			round(b, c, a, *xs[7], mul);
+		}
 
-            // pass(a, b, c, 5)
-            c ^= words[0]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 5L;
+		private void round(UInt64 a, UInt64 b, UInt64 c, UInt64 x, UInt64 mul) {
+			c ^= x;
+			a -= T1[(b >> 0) & 255] ^ T2[(b >> 2) & 255] ^ T3[(b >> 4) & 255] ^ T4[(b >> 6) & 255];
+			b += T4[(b >> 1) & 255] ^ T3[(b >> 3) & 255] ^ T2[(b >> 5) & 255] ^ T1[(b >> 7) & 255];
+			b *= mul;
+		}
 
-            a ^= words[1]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 5L;
+		private void key_schedule() {
+			*xs[0] -= *xs[7] ^ 0xA5A5A5A5A5A5A5A5;
+			*xs[1] ^= *xs[0];
+			*xs[2] += *xs[1];
+			*xs[3] -= *xs[2] ^ ((~*xs[1]) << 19);
+			*xs[4] ^= *xs[3];
+			*xs[5] += *xs[4];
+			*xs[6] -= *xs[5] ^ ((~*xs[4]) >> 23);
+			*xs[7] ^= *xs[6];
+			*xs[0] += *xs[7];
+			*xs[1] -= *xs[0] ^ ((~*xs[7]) << 19);
+			*xs[2] ^= *xs[1];
+			*xs[3] += *xs[2];
+			*xs[4] -= *xs[3] ^ ((~*xs[2]) >> 23);
+			*xs[5] ^= *xs[4];
+			*xs[6] += *xs[5];
+			*xs[7] -= *xs[6] ^ 0x0123456789ABCDEF;
+		}
 
-            b ^= words[2]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 5L;
+		private void feedforward() {
+			a ^= aa;
+			b -= bb;
+			c += cc;
+		}
 
-            c ^= words[3]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 5L;
-
-            a ^= words[4]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 5L;
-
-            b ^= words[5]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 5L;
-
-            c ^= words[6]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 5L;
-
-            a ^= words[7]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 5L;
-
-            // key_schedule
-            words[0] -= words[7] ^ 0xA5A5A5A5A5A5A5A5L;
-            words[1] ^= words[0];
-            words[2] += words[1];
-            words[3] -= words[2] ^ ((~words[1]) << 19);
-            words[4] ^= words[3];
-            words[5] += words[4];
-            words[6] -= words[5] ^ ((~words[4]) >> 23);
-            words[7] ^= words[6];
-            words[0] += words[7];
-            words[1] -= words[0] ^ ((~words[7]) << 19);
-            words[2] ^= words[1];
-            words[3] += words[2];
-            words[4] -= words[3] ^ ((~words[2]) >> 23);
-            words[5] ^= words[4];
-            words[6] += words[5];
-            words[7] -= words[6] ^ 0x0123456789ABCDEFL;
-
-            // pass(c, a, b, 7)
-            b ^= words[0]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 7L;
-
-            c ^= words[1]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 7L;
-
-            a ^= words[2]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 7L;
-
-            b ^= words[3]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 7L;
-
-            c ^= words[4]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 7L;
-
-            a ^= words[5]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 7L;
-
-            b ^= words[6]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 7L;
-
-            c ^= words[7]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 7L;
-
-            // key_schedule
-            words[0] -= words[7] ^ 0xA5A5A5A5A5A5A5A5L;
-            words[1] ^= words[0];
-            words[2] += words[1];
-            words[3] -= words[2] ^ ((~words[1]) << 19);
-            words[4] ^= words[3];
-            words[5] += words[4];
-            words[6] -= words[5] ^ ((~words[4]) >> 23);
-            words[7] ^= words[6];
-            words[0] += words[7];
-            words[1] -= words[0] ^ ((~words[7]) << 19);
-            words[2] ^= words[1];
-            words[3] += words[2];
-            words[4] -= words[3] ^ ((~words[2]) >> 23);
-            words[5] ^= words[4];
-            words[6] += words[5];
-            words[7] -= words[6] ^ 0x0123456789ABCDEFL;
-
-            // pass(b,c,a,9)
-            a ^= words[0]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 9L;
-
-            b ^= words[1]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 9L;
-
-            c ^= words[2]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 9L;
-
-            a ^= words[3]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 9L;
-
-            b ^= words[4]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 9L;
-
-            c ^= words[5]; ch = (uint)(c >> 32);
-            a -= T1[(c >> 0) & 0xff] ^ T2[(c >> 16) & 0xff] ^ T3[(ch >> 0) & 0xff] ^ T4[(ch >> 16) & 0xff];
-            b += T4[(c >> 8) & 0xff] ^ T3[(c >> 24) & 0xff] ^ T2[(ch >> 8) & 0xff] ^ T1[(ch >> 24) & 0xff];
-            b *= 9L;
-
-            a ^= words[6]; ah = (uint)(a >> 32);
-            b -= T1[(a >> 0) & 0xff] ^ T2[(a >> 16) & 0xff] ^ T3[(ah >> 0) & 0xff] ^ T4[(ah >> 16) & 0xff];
-            c += T4[(a >> 8) & 0xff] ^ T3[(a >> 24) & 0xff] ^ T2[(ah >> 8) & 0xff] ^ T1[(ah >> 24) & 0xff];
-            c *= 9L;
-
-            b ^= words[7]; bh = (uint)(b >> 32);
-            c -= T1[(b >> 0) & 0xff] ^ T2[(b >> 16) & 0xff] ^ T3[(bh >> 0) & 0xff] ^ T4[(bh >> 16) & 0xff];
-            a += T4[(b >> 8) & 0xff] ^ T3[(b >> 24) & 0xff] ^ T2[(bh >> 8) & 0xff] ^ T1[(bh >> 24) & 0xff];
-            a *= 9L;
-
-
-            // feedforward
-            a ^= aa;
-            b -= bb;
-            c += cc;
-        }
-
-        protected byte[] PadBuffer(byte[] array) {
-            int padding;
-            int n = (int)(array.Length % BLOCKLENGTH);
-            if(n < 56) padding = 56 - n; else padding = 120 - n;
-            int bits = array.Length << 3;
-            int l = array.Length;
-
-            byte[] test = new byte[l + padding + 8];
-            System.Buffer.BlockCopy(array, 0, test, 0, array.Length);
-
-            test[l] = 1;
-            test[l + padding] = (byte)(bits & 0xFF);
-            test[l + padding + 1] = (byte)(bits >> 8 & 0xFF);
-            test[l + padding + 2] = (byte)(bits >> 16 & 0xFF);
-            test[l + padding + 3] = (byte)(bits >> 24 & 0xFF);
-            test[l + padding + 4] = (byte)(bits >> 32 & 0xFF);
-            test[l + padding + 5] = (byte)(bits >> 40 & 0xFF);
-            test[l + padding + 6] = (byte)(bits >> 48 & 0xFF);
-            test[l + padding + 7] = (byte)(bits >> 56 & 0xFF);
-            return test;
-        }
-
-
-        protected override byte[] HashFinal() {
-            return new byte[] {
+		protected override byte[] HashFinal() {
+			return new byte[] {
                 (byte) a       , (byte)(a >>  8), (byte)(a >> 16), (byte)(a >> 24),
                 (byte)(a >> 32), (byte)(a >> 40), (byte)(a >> 48), (byte)(a >> 56),
                 (byte) b       , (byte)(b >>  8), (byte)(b >> 16), (byte)(b >> 24),
@@ -1152,13 +988,7 @@ namespace AVDump2Lib.Hashes {
                 (byte) c       , (byte)(c >>  8), (byte)(c >> 16), (byte)(c >> 24),
                 (byte)(c >> 32), (byte)(c >> 40), (byte)(c >> 48), (byte)(c >> 56)
             };
-        }
-
-        public override void Initialize() {
-            BLOCKLENGTH = 64;
-            a = 0x0123456789ABCDEFUL;
-            b = 0xFEDCBA9876543210UL;
-            c = 0xF096A5B4C3B2E187UL;
-        }
-    }
+		}
+	}
+#endif
 }

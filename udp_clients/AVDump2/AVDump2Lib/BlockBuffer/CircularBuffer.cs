@@ -22,16 +22,19 @@ using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.BlockBuffer {
 	public interface ICircularBuffer<T> {
+		ulong BlockCount { get; }
 		T[] Buffer { get; }
 
-		bool CanRead(int consumerId);
-		T Read(int consumerId);
+		bool ConsumerCanRead(int consumerId);
+		T ConsumerGet(int consumerId);
+		void ConsumerAdvance(int consumerId);
+		//T ConsumerRead(int consumerId);
 
-		bool CanWrite();
-		T ProducerWrite { get; set; }
-
+		bool ProducerCanWrite();
+		T ProducerBlock { get; set; }
 		void ProducerAdvance();
-		void WriteAdvance(T block);
+		//void ProducerWrite(T block);
+
 
 		bool IsEmpty();
 		ulong Count(int consumerId);
@@ -57,33 +60,32 @@ namespace AVDump2Lib.BlockBuffer {
 
 		public T[] Buffer { get { return buffer; } }
 
-		public T Read(int consumerId) {
+		public bool ConsumerCanRead(int consumerId) { return consumers[consumerId] != producer; }
+		public void ConsumerAdvance(int consumerId) { consumers[consumerId]++; }
+		public T ConsumerGet(int consumerId) { return buffer[consumers[consumerId] & blockMask]; }
+		public T ConsumerRead(int consumerId) {
 			//if(!CanRead(consumerId)) return default(T);
 			T block = buffer[consumers[consumerId] & blockMask];
 			consumers[consumerId]++;
 
 			return block;
 		}
-		public bool CanRead(int consumerId) { return consumers[consumerId] != producer; }
-		public ulong Count(int consumerId) { return producer - consumers[consumerId]; }
 
-		public void WriteAdvance(T block) {
-			//if(!CanWrite()) throw new Exception();
-			buffer[producer & blockMask] = block;
-			producer++;
+		public bool ProducerCanWrite() {
+			for(int consumerId = 0;consumerId < consumers.Length;consumerId++) {
+				if(consumers[consumerId] + blockCount == producer) return false;
+			}
+			return true;
 		}
-		public T ProducerWrite {
+		public void ProducerAdvance() { producer++; }
+		public T ProducerBlock {
 			get { return buffer[producer & blockMask]; }
 			set { buffer[producer & blockMask] = value; }
 		}
-
-		public void ProducerAdvance() { producer++; }
-		public bool CanWrite() {
-			for(int consumerId = 0;consumerId < consumers.Length;consumerId++) {
-				if(consumers[consumerId] + blockCount == producer+1) return false;
-				//if(consumers[consumerId] + blockCount == producer) return false;
-			}
-			return true;
+		public void ProducerWrite(T block) {
+			//if(!CanWrite()) throw new Exception();
+			buffer[producer & blockMask] = block;
+			producer++;
 		}
 
 		public bool IsEmpty() {
@@ -92,6 +94,10 @@ namespace AVDump2Lib.BlockBuffer {
 			}
 			return true;
 		}
+		public ulong Count(int consumerId) { return producer - consumers[consumerId]; }
 
+		public ulong BlockCount {
+			get { return blockCount; }
+		}
 	}
 }

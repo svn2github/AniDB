@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Diagnostics;
 
-namespace AVDump2Lib.Hashes {
+namespace AVDump2Lib.Hashing.Algorithms {
     public class Ed2k : HashAlgorithm {
         private static int BLOCKSIZE;
         private List<byte[]> md4HashBlocks;

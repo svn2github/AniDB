@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AVDump2Lib.Hashes {
+namespace AVDump2Lib.Hashing.Algorithms {
     using System;
     using System.Security.Cryptography;
 

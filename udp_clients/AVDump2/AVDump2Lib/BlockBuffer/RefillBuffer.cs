@@ -18,40 +18,44 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System;
 
 namespace AVDump2Lib.BlockBuffer {
+	public delegate void Consumer<T>(T block);
 	public interface IRefillBuffer<T> {
+
 		void Start();
 
-		T Read(int consumerId, bool wait);
+		void Read(int consumerId, Consumer<T> consumer);
+		T GetBlock(int consumerId);
+		void Advance(int consumerId);
+
+		ICircularBuffer<T> BaseStream { get; }
+		IBlockSource<T> BlockSource { get; }
 
 		ulong Count(int consumerId);
 
 		bool EndOfStream();
 		bool EndOfStream(int consumerId);
+
+	}
+	public interface IBlockSource<T> {
+		void InitializeBlock(out T block);
+		T SetNextBlock(T block);
+		bool AllBlocksRead { get; }
 	}
 
 	public class RefillBuffer<T> : IRefillBuffer<T> {
 		ICircularBuffer<T> circBuffer;
-		IBlockSource blockSource;
+		IBlockSource<T> blockSource;
 		Thread tRefiller;
 		bool isEndOfStream;
 
-		object empty;
-		object full;
-
-
-		public RefillBuffer(ICircularBuffer<T> circBuffer, IBlockSource blockSource) {
+		public RefillBuffer(ICircularBuffer<T> circBuffer, IBlockSource<T> blockSource) {
 			this.circBuffer = circBuffer;
 			this.blockSource = blockSource;
 			tRefiller = new Thread(new ThreadStart(Filler));
 			isEndOfStream = false;
-
-			empty = new object();
-			/*for(int i = 0;i < empty.Length;i++) {
-				empty[i] = new object();
-			}*/
-			full = new object();
 
 			for(int i = 0;i < circBuffer.Buffer.Length;i++) {
 				blockSource.InitializeBlock(out circBuffer.Buffer[i]);
@@ -62,40 +66,40 @@ namespace AVDump2Lib.BlockBuffer {
 
 		public ulong Count(int consumerId) { return circBuffer.Count(consumerId); }
 
-		public T Read(int consumerId, bool wait) {
-			while(wait && !circBuffer.CanRead(consumerId)) Thread.Sleep(20);
-			//while(wait && !circBuffer.CanRead(consumerId)) lock(empty) Monitor.Wait(empty,100); //Remove need for timeout
+		public ICircularBuffer<T> BaseStream { get { return circBuffer; } }
+		public IBlockSource<T> BlockSource { get { return blockSource; } }
 
-			T block = circBuffer.Read(consumerId);
-			//lock(full) Monitor.Pulse(full);
-			return block;
+		public T GetBlock(int consumerId) {
+			while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20);
+			return circBuffer.ConsumerGet(consumerId);
+		}
+
+		public void Advance(int consumerId) {
+			circBuffer.ConsumerAdvance(consumerId);
+		}
+
+		public void Read(int consumerId, Consumer<T> consumer) {
+			while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20);
+			consumer(circBuffer.ConsumerGet(consumerId));
+			circBuffer.ConsumerAdvance(consumerId);
 		}
 
 		public bool EndOfStream() { return circBuffer.IsEmpty() && isEndOfStream; }
-		public bool EndOfStream(int consumerId) { return !circBuffer.CanRead(consumerId) && isEndOfStream; }
+		public bool EndOfStream(int consumerId) { return !circBuffer.ConsumerCanRead(consumerId) && isEndOfStream; }
 
 
 		private void Filler() {
 			while(!blockSource.AllBlocksRead) {
-				while(!circBuffer.CanWrite()) Thread.Sleep(20);
-				//while(!circBuffer.CanWrite()) lock(full) Monitor.Wait(full, 100);
+				while(!circBuffer.ProducerCanWrite()) Thread.Sleep(20);
 
-				circBuffer.ProducerWrite = blockSource.SetNextBlock(circBuffer.ProducerWrite);
+				circBuffer.ProducerBlock = blockSource.SetNextBlock(circBuffer.ProducerBlock);
 				circBuffer.ProducerAdvance();
-				//lock(empty) Monitor.PulseAll(empty);
 			}
 			isEndOfStream = true;
 		}
-
-		public interface IBlockSource {
-			void InitializeBlock(out T block);
-			T SetNextBlock(T block);
-			bool AllBlocksRead { get; }
-		}
-
 	}
 
-	public class ByteStreamToBlock : RefillBuffer<byte[]>.IBlockSource {
+	public class ByteStreamToBlock : IBlockSource<byte[]> {
 		Stream source;
 		bool isEndOfStream;
 
@@ -106,6 +110,9 @@ namespace AVDump2Lib.BlockBuffer {
 			this.source = source;
 			this.blockSize = blockSize;
 		}
+
+		public int BlockSize { get { return blockSize; } }
+		public Stream Source { get { return source; } }
 
 		public void InitializeBlock(out byte[] block) { block = new byte[blockSize]; }
 

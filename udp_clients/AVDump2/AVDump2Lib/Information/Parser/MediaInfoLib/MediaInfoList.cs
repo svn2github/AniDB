@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace AVDump2Lib.MediaInfoLib {
+namespace AVDump2Lib.Information.Parser.MediaInfoLib {
     public class MediaInfoList {
         //Import of DLL functions. DO NOT USE until you know what you do (MediaInfo DLL do NOT use CoTaskMemAlloc to allocate memory)  
         [DllImport("MediaInfo.dll")]
@@ -30,23 +30,23 @@ namespace AVDump2Lib.MediaInfoLib {
         //MediaInfo class
         public MediaInfoList() { Handle = MediaInfoList_New(); }
         ~MediaInfoList() { MediaInfoList_Delete(Handle); }
-        public int Open(String FileName, InfoFileOptions Options) { return (int)MediaInfoList_Open(Handle, FileName, (IntPtr)Options); }
+        public int Open(String FileName, eInfoFileOptions Options) { return (int)MediaInfoList_Open(Handle, FileName, (IntPtr)Options); }
         public void Close(int FilePos) { MediaInfoList_Close(Handle, (IntPtr)FilePos); }
         public String Inform(int FilePos) { return Marshal.PtrToStringUni(MediaInfoList_Inform(Handle, (IntPtr)FilePos, (IntPtr)0)); }
-        public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo, InfoKind KindOfSearch) { return Marshal.PtrToStringUni(MediaInfoList_Get(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber, Parameter, (IntPtr)KindOfInfo, (IntPtr)KindOfSearch)); }
-        public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, int Parameter, InfoKind KindOfInfo) { return Marshal.PtrToStringUni(MediaInfoList_GetI(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber, (IntPtr)Parameter, (IntPtr)KindOfInfo)); }
+        public String Get(int FilePos, eStreamKind StreamKind, int StreamNumber, String Parameter, eInfoKind KindOfInfo, eInfoKind KindOfSearch) { return Marshal.PtrToStringUni(MediaInfoList_Get(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber, Parameter, (IntPtr)KindOfInfo, (IntPtr)KindOfSearch)); }
+        public String Get(int FilePos, eStreamKind StreamKind, int StreamNumber, int Parameter, eInfoKind KindOfInfo) { return Marshal.PtrToStringUni(MediaInfoList_GetI(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber, (IntPtr)Parameter, (IntPtr)KindOfInfo)); }
         public String Option(String Option, String Value) { return Marshal.PtrToStringUni(MediaInfoList_Option(Handle, Option, Value)); }
         public int State_Get() { return (int)MediaInfoList_State_Get(Handle); }
-        public int Count_Get(int FilePos, StreamKind StreamKind, int StreamNumber) { return (int)MediaInfoList_Count_Get(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber); }
+        public int Count_Get(int FilePos, eStreamKind StreamKind, int StreamNumber) { return (int)MediaInfoList_Count_Get(Handle, (IntPtr)FilePos, (IntPtr)StreamKind, (IntPtr)StreamNumber); }
         private IntPtr Handle;
 
         //Default values, if you know how to set default values in C#, say me
         public void Open(String FileName) { Open(FileName, 0); }
         public void Close() { Close(-1); }
-        public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo) { return Get(FilePos, StreamKind, StreamNumber, Parameter, KindOfInfo, InfoKind.Name); }
-        public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, String Parameter) { return Get(FilePos, StreamKind, StreamNumber, Parameter, InfoKind.Text, InfoKind.Name); }
-        public String Get(int FilePos, StreamKind StreamKind, int StreamNumber, int Parameter) { return Get(FilePos, StreamKind, StreamNumber, Parameter, InfoKind.Text); }
+        public String Get(int FilePos, eStreamKind StreamKind, int StreamNumber, String Parameter, eInfoKind KindOfInfo) { return Get(FilePos, StreamKind, StreamNumber, Parameter, KindOfInfo, eInfoKind.Name); }
+        public String Get(int FilePos, eStreamKind StreamKind, int StreamNumber, String Parameter) { return Get(FilePos, StreamKind, StreamNumber, Parameter, eInfoKind.Text, eInfoKind.Name); }
+        public String Get(int FilePos, eStreamKind StreamKind, int StreamNumber, int Parameter) { return Get(FilePos, StreamKind, StreamNumber, Parameter, eInfoKind.Text); }
         public String Option(String Option_) { return Option(Option_, ""); }
-        public int Count_Get(int FilePos, StreamKind StreamKind) { return Count_Get(FilePos, StreamKind, -1); }
+        public int Count_Get(int FilePos, eStreamKind StreamKind) { return Count_Get(FilePos, StreamKind, -1); }
     }
 }

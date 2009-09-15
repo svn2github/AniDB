@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace AVDump2Lib.MediaInfoLib {
+namespace AVDump2Lib.Information.Parser.MediaInfoLib {
     public class MediaInfo {
         //Import of DLL functions. DO NOT USE until you know what you do (MediaInfo DLL do NOT use CoTaskMemAlloc to allocate memory)  
         [DllImport("MediaInfo.dll")]
@@ -62,7 +62,7 @@ namespace AVDump2Lib.MediaInfoLib {
             else
                 return Marshal.PtrToStringUni(MediaInfo_Inform(Handle, (IntPtr)0));
         }
-        public String Get(StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo, InfoKind KindOfSearch) {
+        public String Get(eStreamKind StreamKind, int StreamNumber, String Parameter, eInfoKind KindOfInfo, eInfoKind KindOfSearch) {
             if(MustUseAnsi) {
                 IntPtr Parameter_Ptr = Marshal.StringToHGlobalAnsi(Parameter);
                 String ToReturn = Marshal.PtrToStringAnsi(MediaInfoA_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber, Parameter_Ptr, (IntPtr)KindOfInfo, (IntPtr)KindOfSearch));
@@ -71,7 +71,7 @@ namespace AVDump2Lib.MediaInfoLib {
             } else
                 return Marshal.PtrToStringUni(MediaInfo_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber, Parameter, (IntPtr)KindOfInfo, (IntPtr)KindOfSearch));
         }
-        public String Get(StreamKind StreamKind, int StreamNumber, int Parameter, InfoKind KindOfInfo) {
+        public String Get(eStreamKind StreamKind, int StreamNumber, int Parameter, eInfoKind KindOfInfo) {
             if(MustUseAnsi)
                 return Marshal.PtrToStringAnsi(MediaInfoA_GetI(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber, (IntPtr)Parameter, (IntPtr)KindOfInfo));
             else
@@ -89,15 +89,15 @@ namespace AVDump2Lib.MediaInfoLib {
                 return Marshal.PtrToStringUni(MediaInfo_Option(Handle, Option, Value));
         }
         public int State_Get() { return (int)MediaInfo_State_Get(Handle); }
-        public int Count_Get(StreamKind StreamKind, int StreamNumber) { return (int)MediaInfo_Count_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber); }
+        public int Count_Get(eStreamKind StreamKind, int StreamNumber) { return (int)MediaInfo_Count_Get(Handle, (IntPtr)StreamKind, (IntPtr)StreamNumber); }
         private IntPtr Handle;
         private bool MustUseAnsi;
 
         //Default values, if you know how to set default values in C#, say me
-        public String Get(StreamKind StreamKind, int StreamNumber, String Parameter, InfoKind KindOfInfo) { return Get(StreamKind, StreamNumber, Parameter, KindOfInfo, InfoKind.Name); }
-        public String Get(StreamKind StreamKind, int StreamNumber, String Parameter) { return Get(StreamKind, StreamNumber, Parameter, InfoKind.Text, InfoKind.Name); }
-        public String Get(StreamKind StreamKind, int StreamNumber, int Parameter) { return Get(StreamKind, StreamNumber, Parameter, InfoKind.Text); }
+        public String Get(eStreamKind StreamKind, int StreamNumber, String Parameter, eInfoKind KindOfInfo) { return Get(StreamKind, StreamNumber, Parameter, KindOfInfo, eInfoKind.Name); }
+        public String Get(eStreamKind StreamKind, int StreamNumber, String Parameter) { return Get(StreamKind, StreamNumber, Parameter, eInfoKind.Text, eInfoKind.Name); }
+        public String Get(eStreamKind StreamKind, int StreamNumber, int Parameter) { return Get(StreamKind, StreamNumber, Parameter, eInfoKind.Text); }
         public String Option(String Option_) { return Option(Option_, ""); }
-        public int Count_Get(StreamKind StreamKind) { return Count_Get(StreamKind, -1); }
+        public int Count_Get(eStreamKind StreamKind) { return Count_Get(StreamKind, -1); }
     }
 }

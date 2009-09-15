@@ -32,7 +32,7 @@ using System.Security.Cryptography;
 using System.Diagnostics;
 using System.Threading;
 
-namespace AVDump2Lib.Hashes {
+namespace AVDump2Lib.Hashing.Algorithms {
     public class Md4 : HashAlgorithm {
         public static readonly int HASHLENGTH = 16;
 		public static readonly int BLOCKLENGTH = 64;

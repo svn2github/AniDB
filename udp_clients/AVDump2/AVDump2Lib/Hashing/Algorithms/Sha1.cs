@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace AVDump2Lib.Hashes {
+namespace AVDump2Lib.Hashing.Algorithms {
     /// <summary>Only use this class when the NET framework is not available!</summary>
     public class Sha1 : HashAlgorithm {
         HashAlgorithm hash;

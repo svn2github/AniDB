@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AVDump2Lib.MediaInfoLib {
-    public enum StreamKind {
+namespace AVDump2Lib.Information.Parser.MediaInfoLib {
+    public enum eStreamKind {
         General,
         Video,
         Audio,
@@ -12,7 +12,7 @@ namespace AVDump2Lib.MediaInfoLib {
         Image
     }
 
-    public enum InfoKind {
+    public enum eInfoKind {
         Name,
         Text,
         Measure,
@@ -23,14 +23,14 @@ namespace AVDump2Lib.MediaInfoLib {
         HowTo
     }
 
-    public enum InfoOptions {
+    public enum eInfoOptions {
         ShowInInform,
         Support,
         ShowInSupported,
         TypeOfValue
     }
 
-    public enum InfoFileOptions {
+    public enum eInfoFileOptions {
         FileOption_Nothing = 0x00,
         FileOption_Recursive = 0x01,
         FileOption_CloseAll = 0x02,
