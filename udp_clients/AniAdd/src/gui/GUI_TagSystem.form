@@ -40,6 +40,11 @@
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
           </Group>
           <Component id="scrl_txt_CodeBox" alignment="0" pref="621" max="32767" attributes="1"/>
+          <Group type="102" alignment="1" attributes="0">
+              <Component id="lbl_CursorLocation" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="lbl_ErrorMsg" pref="530" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -67,8 +72,13 @@
                   <Component id="lbl_DirName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbl_DirNameStr" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrl_txt_CodeBox" pref="278" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+              <Component id="scrl_txt_CodeBox" pref="264" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbl_ErrorMsg" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbl_CursorLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -475,13 +485,15 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Consolas" size="10" style="0"/>
+              <Font name="Consolas" size="11" style="0"/>
             </Property>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="AT:=[%ATr%,%ATe%,%ATk%]&#xa;ET:=[%ETe%,%ETr%,%ETk%]&#xa;GT:=&quot;[&quot; [%GTs%,%GTl%] &quot;]&quot;&#xa;EpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),&quot;0&quot;)&#xa;SrcStyled:=&quot;[&quot;%Source%&quot;]&quot;&#xa;isMovieType:={%Type%=&quot;Movie&quot;?&quot;True&quot;:&quot;False&quot;}&#xa;isDepr:={%Depr%?&quot;[Depr]&quot;:&quot;&quot;}&#xa;isCen:={%Cen%?&quot;[Cen]&quot;:&quot;&quot;}&#xa;VerStyled:={%Ver%=&quot;1&quot;?&quot;&quot;:&quot;v&quot;%Ver%}&#xa;&#xa;FileName:=%AT%&quot; &quot;%EpNoPad% %VerStyled% &quot; - &quot;%ET%&quot; &quot;%GT% %isDepr% %isCen% %SrcStyled%&#xa;PathName:=&quot;E:\Anime\!Processed\&quot;%AT%"/>
+            <Property name="text" type="java.lang.String" value="AT:=[%ATr%,%ATe%,%ATk%]&#xa;ET:=[%ETe%,%ETr%,%ETk%]&#xa;GT:=&quot;[&quot; [%GTs%,%GTl%] &quot;]&quot;&#xa;&#xa;EpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),&quot;0&quot;)&#xa;&#xa;Src:=&quot;[&quot;%Source%&quot;]&quot;&#xa;Depr:={%Depr%?&quot;[Depr]&quot;:&quot;&quot;}&#xa;Cen:={%Cen%?&quot;[Cen]&quot;:&quot;&quot;}&#xa;Ver:={%Ver%=&quot;1&quot;?&quot;&quot;:&quot;v&quot;%Ver%} &#xa;&#xa;FileName:=%AT%&quot; &quot;%EpNoPad% %Ver% &quot; - &quot;%ET%&quot; &quot;%GT% %Depr% %Cen% %Src%&#xa;PathName:=&quot;E:\Anime\!Processed&quot; $repl(%AT%,&apos;[\&quot;:/*|&lt;&gt;?]&apos;,&quot;&quot;)"/>
           </Properties>
           <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_CodeBoxTxtChange"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txt_CodeBoxMousePressed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_CodeBoxKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_CodeBoxKeyReleased"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
@@ -805,5 +817,16 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lbl_ErrorMsg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" "/>
+        <Property name="opaque" type="boolean" value="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbl_CursorLocation">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Row: 0 Column: 0"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

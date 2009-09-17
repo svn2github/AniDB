@@ -3,6 +3,7 @@ package gui;
 import aniAdd.Communication.ComEvent;
 import aniAdd.IAniAdd;
 import java.util.TreeMap;
+import javax.swing.text.BadLocationException;
 import processing.TagSystem;
 
 public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
@@ -15,8 +16,17 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         txt_CodeBox.setText((String)gui.FromMem("TagSystemCode", txt_CodeBox.getText()));
     }
 
+    private void UpdateCursorLocationLabel(){
+        try {
+            int row = txt_CodeBox.getLineOfOffset(txt_CodeBox.getCaretPosition());
+            int column = txt_CodeBox.getCaretPosition() - txt_CodeBox.getLineStartOffset(row) ;
+            lbl_CursorLocation.setText("Row: " + (row+1)  + "  Column: " + (column+1) + "  Char: " + txt_CodeBox.getCaretPosition());
+            txt_CodeBox.getCaretPosition();
+        } catch (BadLocationException ex) {
+        }
+    }
+    
     protected void TagSystemCodeChange(){
-        TagSystem ts = new TagSystem();
         TreeMap<String, String> tags = new TreeMap<String, String>();
         tags.put("ATr", txt_AT_Romaji.getText());
         tags.put("ATe", txt_AT_English.getText());
@@ -44,12 +54,15 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         
 
         try {
-            ts.parseAndTransform(txt_CodeBox.getText(), tags);
+            TagSystem.Evaluate(txt_CodeBox.getText(), tags);
+
             lbl_FileNameStr.setText(tags.get("FileName"));
             lbl_DirNameStr.setText(tags.get("PathName"));
+            lbl_ErrorMsg.setText(" ");
         } catch (Exception ex) {
-            lbl_FileNameStr.setText("Error");
-            lbl_DirNameStr.setText("Error");
+            lbl_FileNameStr.setText(" ");
+            lbl_DirNameStr.setText(" ");
+            lbl_ErrorMsg.setText(ex.getMessage());
         }
 
 
@@ -107,6 +120,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         cmb_Source = new javax.swing.JComboBox();
         lbl_Version = new javax.swing.JLabel();
         updown_Version = new javax.swing.JSpinner();
+        lbl_ErrorMsg = new javax.swing.JLabel();
+        lbl_CursorLocation = new javax.swing.JLabel();
 
         pnl_AnimeTitles.setOpaque(false);
 
@@ -327,12 +342,20 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         );
 
         txt_CodeBox.setColumns(20);
-        txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 10)); // NOI18N
+        txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         txt_CodeBox.setRows(5);
-        txt_CodeBox.setText("AT:=[%ATr%,%ATe%,%ATk%]\nET:=[%ETe%,%ETr%,%ETk%]\nGT:=\"[\" [%GTs%,%GTl%] \"]\"\nEpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),\"0\")\nSrcStyled:=\"[\"%Source%\"]\"\nisMovieType:={%Type%=\"Movie\"?\"True\":\"False\"}\nisDepr:={%Depr%?\"[Depr]\":\"\"}\nisCen:={%Cen%?\"[Cen]\":\"\"}\nVerStyled:={%Ver%=\"1\"?\"\":\"v\"%Ver%}\n\nFileName:=%AT%\" \"%EpNoPad% %VerStyled% \" - \"%ET%\" \"%GT% %isDepr% %isCen% %SrcStyled%\nPathName:=\"E:\\Anime\\!Processed\\\"%AT%");
+        txt_CodeBox.setText("AT:=[%ATr%,%ATe%,%ATk%]\nET:=[%ETe%,%ETr%,%ETk%]\nGT:=\"[\" [%GTs%,%GTl%] \"]\"\n\nEpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),\"0\")\n\nSrc:=\"[\"%Source%\"]\"\nDepr:={%Depr%?\"[Depr]\":\"\"}\nCen:={%Cen%?\"[Cen]\":\"\"}\nVer:={%Ver%=\"1\"?\"\":\"v\"%Ver%} \n\nFileName:=%AT%\" \"%EpNoPad% %Ver% \" - \"%ET%\" \"%GT% %Depr% %Cen% %Src%\nPathName:=\"E:\\Anime\\!Processed\" $repl(%AT%,'[\\\":/*|<>?]',\"\")");
+        txt_CodeBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txt_CodeBoxMousePressed(evt);
+            }
+        });
         txt_CodeBox.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_CodeBoxKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_CodeBoxTxtChange(evt);
+                txt_CodeBoxKeyReleased(evt);
             }
         });
         scrl_txt_CodeBox.setViewportView(txt_CodeBox);
@@ -499,6 +522,11 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lbl_ErrorMsg.setText(" ");
+        lbl_ErrorMsg.setOpaque(true);
+
+        lbl_CursorLocation.setText("Row: 0 Column: 0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -521,6 +549,10 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
             .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(lbl_CursorLocation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_ErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,8 +574,12 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_DirNameStr))
+                .addGap(0, 0, 0)
+                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_ErrorMsg)
+                    .addComponent(lbl_CursorLocation)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -587,10 +623,6 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         TagSystemCodeChange();
 }//GEN-LAST:event_txt_ET_KanjiTxtChange
 
-    private void txt_CodeBoxTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CodeBoxTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_CodeBoxTxtChange
-
     private void chck_IsCensoredCheckedChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chck_IsCensoredCheckedChange
         TagSystemCodeChange();
 }//GEN-LAST:event_chck_IsCensoredCheckedChange
@@ -620,8 +652,24 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 }//GEN-LAST:event_cmb_SourceDropDownChange
 
     private void updown_VersionSpinnerChange(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_updown_VersionSpinnerChange
-        // TODO add your handling code here:
+        TagSystemCodeChange();
     }//GEN-LAST:event_updown_VersionSpinnerChange
+
+    private void txt_CodeBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_CodeBoxMousePressed
+        UpdateCursorLocationLabel();
+    }//GEN-LAST:event_txt_CodeBoxMousePressed
+
+    private void txt_CodeBoxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CodeBoxKeyPressed
+        UpdateCursorLocationLabel();
+    }//GEN-LAST:event_txt_CodeBoxKeyPressed
+
+    private void txt_CodeBoxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_CodeBoxKeyReleased
+        UpdateCursorLocationLabel();
+        if(!evt.isActionKey()){
+            TagSystemCodeChange();
+        }
+
+    }//GEN-LAST:event_txt_CodeBoxKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -635,6 +683,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JLabel lbl_AT_Romaji;
     protected javax.swing.JLabel lbl_AT_Synomymn;
     protected javax.swing.JLabel lbl_AnimeTitles;
+    private javax.swing.JLabel lbl_CursorLocation;
     protected javax.swing.JLabel lbl_DirName;
     protected javax.swing.JLabel lbl_DirNameStr;
     protected javax.swing.JLabel lbl_ET_English;
@@ -644,6 +693,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JLabel lbl_EpHiNo;
     protected javax.swing.JLabel lbl_EpNo;
     protected javax.swing.JLabel lbl_EpTitles;
+    private javax.swing.JLabel lbl_ErrorMsg;
     protected javax.swing.JLabel lbl_FileName;
     protected javax.swing.JLabel lbl_FileNameStr;
     protected javax.swing.JLabel lbl_GT_Long;

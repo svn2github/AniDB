@@ -35,24 +35,25 @@ public class Mod_UdpApi implements IModule {
     private boolean connected;
     private boolean aniDBAPIDown;
     private boolean auth, isAuthed;
-
     private ArrayList<Query> queries;
     private ArrayList<Reply> serverReplies;
     private final ArrayList<Cmd> cmdToSend;
-
     private Date lastDelayPackageMills;
     private Date lastReplyPackage;
     private int replyHeadStart; //TODO: Change handling
-
     private Thread send;
     private Thread receive;
     private Thread idle;
     private Idle idleClass; //-_-
-
     private TreeMap<String, ICallBack<Integer>> eventList;
 
-    public ArrayList<Query> Queries() { return queries; }
-    public ArrayList<Reply> ServerReplies() { return serverReplies; }
+    public ArrayList<Query> Queries() {
+        return queries;
+    }
+
+    public ArrayList<Reply> ServerReplies() {
+        return serverReplies;
+    }
 
     public Mod_UdpApi() {
         idleClass = new Idle();
@@ -69,11 +70,13 @@ public class Mod_UdpApi implements IModule {
 
         try {
             registerEvent(new ICallBack<Integer>() {
+
                 public void invoke(Integer queryIndex) {
                     InternalMsgHandling(queryIndex);
                 }
             }, "auth", "logout", "ping");
             registerEvent(new ICallBack<Integer>() {
+
                 public void invoke(Integer queryIndex) {
                     InternalMsgHandlingError(queryIndex);
                 }
@@ -205,9 +208,15 @@ public class Mod_UdpApi implements IModule {
         auth = true;
 
         Cmd cmd = new Cmd("AUTH", "auth", null, false);
-        if (session != null && !session.isEmpty()) cmd.setArgs("sess", session);
-        if (password != null && !password.isEmpty()) cmd.setArgs("pass", password);
-        if (autoPass != null && !autoPass.isEmpty()) cmd.setArgs("autopass", autoPass);
+        if (session != null && !session.isEmpty()) {
+            cmd.setArgs("sess", session);
+        }
+        if (password != null && !password.isEmpty()) {
+            cmd.setArgs("pass", password);
+        }
+        if (autoPass != null && !autoPass.isEmpty()) {
+            cmd.setArgs("autopass", autoPass);
+        }
 
 
         cmd.setArgs("user", userName.toLowerCase());
@@ -284,7 +293,7 @@ public class Mod_UdpApi implements IModule {
         this.session = session;
     }
 
-    public void setAutoPass(String autoPass){
+    public void setAutoPass(String autoPass) {
         this.autoPass = autoPass;
     }
 
@@ -318,6 +327,7 @@ public class Mod_UdpApi implements IModule {
 
         private int replysPending;
         private Date authRetry;
+        private boolean longDelay = false;
 
         public int getReplysPending() {
             return replysPending;
@@ -330,14 +340,16 @@ public class Mod_UdpApi implements IModule {
             do {
                 now = new Date();
 
-                if(!aniDBAPIDown) authRetry = null;
+                if (!aniDBAPIDown) {
+                    authRetry = null;
+                }
 
                 if (!aniDBAPIDown && auth) {
                     replysPending = 0;
-                    for(int i = 0; i < queries.size(); i++) {
-                        if(queries.get(i).getSuccess() == null && queries.get(i).getSendOn() != null) {
-                            if((now.getTime() - queries.get(i).getSendOn().getTime()) > 15000) {
-                                if(queries.get(i).getRetries() < MAXRETRIES) {
+                    for (int i = 0; i < queries.size(); i++) {
+                        if (queries.get(i).getSuccess() == null && queries.get(i).getSendOn() != null) {
+                            if ((now.getTime() - queries.get(i).getSendOn().getTime()) > 15000) {
+                                if (queries.get(i).getRetries() < MAXRETRIES) {
                                     queries.get(i).setRetries(queries.get(i).getRetries() + 1);
                                     queries.get(i).setSendOn(null);
                                     Log(ComEvent.eType.Debug, "Cmd Timeout: Resend (Retries:" + queries.get(i).getRetries() + ")");
@@ -354,12 +366,17 @@ public class Mod_UdpApi implements IModule {
                     }
                     this.replysPending = replysPending;
 
-                    if((lastReplyPackage==null || (now.getTime() - lastReplyPackage.getTime())>15000) && replyHeadStart>=3 ){
-                        logOut(false);
-                        authRetry = new Date(now.getTime() + 60 * 60 * 1000);
-                        aniDBAPIDown = true;
-                        Log(ComEvent.eType.Warning, "No UDP API activity, client may be banned. Retry on " + Misc.DateToString(authRetry));
-                    }
+                    if ((lastReplyPackage == null || (now.getTime() - lastReplyPackage.getTime()) > 60000) && replyHeadStart >= 3 && !longDelay) { //quickfix
+                        //logOut(false);
+                        //authRetry = new Date(now.getTime() + 60 * 60 * 1000);
+                        //aniDBAPIDown = true;
+                        Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute, client may be banned.");
+                        longDelay = true;
+
+                        if ((now.getTime() - lastReplyPackage.getTime()) > 300000) {
+                            authenticate();
+                        }
+                    }//quickfix
                 }
 
                 if (aniDBAPIDown && authRetry == null) {
@@ -429,11 +446,11 @@ public class Mod_UdpApi implements IModule {
                                 for (int i = 0; i < cmdToSend.size(); i++) {
                                     r2 = cmdToSend.get(i).LoginReq();
                                     n2 = NODELAY.contains(cmdToSend.get(i).Action());
-                                    canOptimize = (!isAuthed && !n1 && !r1 &&  n2 && !r2) ||
-                                                  (!isAuthed && !n1 &&  r1 &&        !r2) ||
-                                                  (!isAuthed &&  n1 &&  r1 &&        !r2) ||
-                                                  ( isAuthed && !n1 && !r1 &&  n2       ) ||
-                                                  ( isAuthed && !n1 &&  r1 &&  n2       );
+                                    canOptimize = (!isAuthed && !n1 && !r1 && n2 && !r2) ||
+                                            (!isAuthed && !n1 && r1 && !r2) ||
+                                            (!isAuthed && n1 && r1 && !r2) ||
+                                            (isAuthed && !n1 && !r1 && n2) ||
+                                            (isAuthed && !n1 && r1 && n2);
 
                                     if (canOptimize) {
                                         Log(ComEvent.eType.Debug, "cmdToSend reordered QueryId: " + i + " Action: " + cmdToSend.get(i).Action());
@@ -448,7 +465,12 @@ public class Mod_UdpApi implements IModule {
                         }
                     }
                 }
-                if (!cmdReordered) try { Thread.sleep(200); } catch (Exception exception) {}
+                if (!cmdReordered) {
+                    try {
+                        Thread.sleep(200);
+                    } catch (Exception exception) {
+                    }
+                }
             }
 
         }
@@ -568,7 +590,7 @@ public class Mod_UdpApi implements IModule {
     }
 
     private void InternalMsgHandlingError(int queryIndex) {
-        Reply reply = queryIndex<0?serverReplies.get(queryIndex^-1) : queries.get(queryIndex).getReply();
+        Reply reply = queryIndex < 0 ? serverReplies.get(queryIndex ^ -1) : queries.get(queryIndex).getReply();
 
         switch (reply.ReplyId()) {
             case 501:
@@ -584,7 +606,9 @@ public class Mod_UdpApi implements IModule {
         switch (reply.ReplyId()) {
             case 501:
             case 506:
-                if (auth) authenticate();
+                if (auth) {
+                    authenticate();
+                }
                 queryCmd(queries.get(queryIndex).getCmd());
                 break;
 

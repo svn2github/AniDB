@@ -60,7 +60,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         }
 
         tabs.put(tab.TabName(), tab);
-        tbctrl_Main.insertTab(tab.TabName(), null, (JComponent) tab, "", index);
+        tbctrl_Main.insertTab(tab.TabName(), null, (JComponent)tab, null, index);
         tab.Initialize(aniAdd, new Gui());
         return index;
     }

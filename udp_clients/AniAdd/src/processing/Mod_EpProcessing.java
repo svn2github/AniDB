@@ -352,7 +352,6 @@ public class Mod_EpProcessing implements IModule {
                     ts =  getPathFromTagSystem(procFile);
                     if(ts == null) Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RenamingFailed, procFile.Id(), procFile.FileObj(), "No TagSystem script set");
 
-                    //folder = ts.get("PathName");
                     String folderStr = ts.get("PathName");
                     folderObj = new File(folderStr == null? "": folderStr);
                 }
@@ -414,7 +413,7 @@ public class Mod_EpProcessing implements IModule {
         }
     }
     private TreeMap<String,String> getPathFromTagSystem(FileInfo procFile) throws Exception {
-        TagSystem ts = new TagSystem();
+        //TagSystem ts = new TagSystem();
         TreeMap<String, String> tags = new TreeMap<String, String>();
         tags.put("ATr", procFile.Data().get("DB_SN_Romaji"));
         tags.put("ATe", procFile.Data().get("DB_SN_English"));
@@ -446,7 +445,8 @@ public class Mod_EpProcessing implements IModule {
         String codeStr = (String)mem.get("GUI_TagSystemCode");
         if(codeStr == null || codeStr.isEmpty()) return null;
 
-        ts.parseAndTransform(codeStr, tags);
+        //ts.parseAndTransform(codeStr, tags);
+        TagSystem.Evaluate(codeStr, tags);
 
         return tags;
     }

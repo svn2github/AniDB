@@ -4,7 +4,6 @@ package aniAdd.startup;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import aniAdd.Modules.IModule;
 import aniAdd.*;
 import aniAdd.Communication.ComEvent;
@@ -21,17 +20,22 @@ import udpApi.Mod_UdpApi;
  * @author Arokh
  */
 public class Main {
+
     static String username, session, password, autopass;
     static JFrame frm = new JFrame();
     static AniAdd aniAdd;
 
     public static void main(String[] args) {
-        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception ex) { }
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+        }
 
         aniAdd = new AniAdd();
 
         frm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frm.addWindowListener(new WindowAdapter() {
+
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
@@ -40,9 +44,10 @@ public class Main {
         });
 
         aniAdd.AddComListener(new Communication.ComListener() {
+
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Type() == ComEvent.eType.Information){
-                    if((IModule.eModState)comEvent.Params(0)== IModule.eModState.Initialized){
+                if (comEvent.Type() == ComEvent.eType.Information) {
+                    if ((IModule.eModState) comEvent.Params(0) == IModule.eModState.Initialized) {
                         Initialize();
                     }
                 }
@@ -52,18 +57,17 @@ public class Main {
         aniAdd.Start();
     }
 
-    
-        private static void Initialize(){
-        GUI gui = (GUI)aniAdd.GetModule("MainGUI");
-        Mod_UdpApi api = (Mod_UdpApi)aniAdd.GetModule("UdpApi");
-        
+    private static void Initialize() {
+        GUI gui = (GUI) aniAdd.GetModule("MainGUI");
+        Mod_UdpApi api = (Mod_UdpApi) aniAdd.GetModule("UdpApi");
+
         username = JOptionPane.showInputDialog(frm, "User", "");//"dvdkhl");
         password = JOptionPane.showInputDialog(frm, "Password", "");//"Perpetuity");
         api.setPassword(password);
         api.setSession(session);
         api.setUsername(username);
 
-        if(api.authenticate()) {
+        if (api.authenticate()) {
         } else {
         }
 
