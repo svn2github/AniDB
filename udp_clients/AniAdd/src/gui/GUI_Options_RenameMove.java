@@ -40,6 +40,7 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         chck_AppendAnimeTitle.setEnabled(movingEnabled && !folderUseTagSystem);
         cmb_AnimeTitleType.setEnabled(movingEnabled && !folderUseTagSystem && chck_AppendAnimeTitle.isSelected());
         lbl_DestFolder.setEnabled(movingEnabled && !folderUseTagSystem);
+        btn_EditTagsystem.setEnabled(folderUseTagSystem || ptn_UseTaggingSystemFile.isSelected());
         
         gui.GUIEvent(new ComEvent(this, ComEvent.eType.Information, "OptionChange", "EnableFileMoving", movingEnabled));
     }
@@ -89,12 +90,14 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         ptn_UseAniDBFN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.ToMem("RenameTypeAniDBFileName", true);
+                ToggleFileMoving();
             }
         });
 
         ptn_UseTaggingSystemFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.ToMem("RenameTypeAniDBFileName", false);
+                ToggleFileMoving();
             }
         });
 
