@@ -366,13 +366,13 @@ public class Mod_EpProcessing implements IModule {
                     return false;
                 }
 
-                if(!folderObj.exists()) folderObj.mkdir();
+                if(!folderObj.isDirectory()) folderObj.mkdirs();
             } else {
                 folderObj = procFile.FileObj().getParentFile();
             }
 
             String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
-            if((Boolean)mem.get("GUI_RenameTypeAniDBFileName")){
+            if((Boolean)mem.get("GUI_RenameTypeAniDBFileName")) {
                 filename = procFile.Data().get("DB_FileName");
             } else {
                 if(ts == null) ts = getPathFromTagSystem(procFile);

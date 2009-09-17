@@ -31,32 +31,37 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
     }
 
     public void ToggleFileMoving(){
-        gui.ToMem("EnableFileMove", chck_EnableFileMoving.isSelected());
-        ptn_MoveToFolder.setEnabled(chck_EnableFileMoving.isSelected());
-        ptn_UseTaggingSystemFolder.setEnabled(chck_EnableFileMoving.isSelected());
-        txt_MoveToFolder.setEnabled(chck_EnableFileMoving.isSelected());
-        chck_AppendAnimeTitle.setEnabled(chck_EnableFileMoving.isSelected());
-        cmb_AnimeTitleType.setEnabled(chck_EnableFileMoving.isSelected());
-        lbl_DestFolder.setEnabled(chck_EnableFileMoving.isSelected());
+        boolean movingEnabled = chck_EnableFileMoving.isSelected();
+        boolean folderUseTagSystem = ptn_UseTaggingSystemFolder.isSelected();
+
+        ptn_MoveToFolder.setEnabled(movingEnabled);
+        ptn_UseTaggingSystemFolder.setEnabled(movingEnabled);
+        txt_MoveToFolder.setEnabled(movingEnabled && !folderUseTagSystem);
+        chck_AppendAnimeTitle.setEnabled(movingEnabled && !folderUseTagSystem);
+        cmb_AnimeTitleType.setEnabled(movingEnabled && !folderUseTagSystem && chck_AppendAnimeTitle.isSelected());
+        lbl_DestFolder.setEnabled(movingEnabled && !folderUseTagSystem);
         
-        gui.GUIEvent(new ComEvent(this, ComEvent.eType.Information, "OptionChange", "EnableFileMoving", (chck_EnableFileMoving.isSelected())));
+        gui.GUIEvent(new ComEvent(this, ComEvent.eType.Information, "OptionChange", "EnableFileMoving", movingEnabled));
     }
 
     private void initEventHandler(){
         chck_EnableFileMoving.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gui.ToMem("EnableFileMove", chck_EnableFileMoving.isSelected());
                 ToggleFileMoving();
             }
         });
         ptn_MoveToFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.ToMem("MoveTypeUseFolder", true);
+                ToggleFileMoving();
             }
         });
 
         ptn_UseTaggingSystemFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.ToMem("MoveTypeUseFolder", false);
+                ToggleFileMoving();
             }
         });
 
@@ -71,6 +76,7 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         chck_AppendAnimeTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gui.ToMem("AppendAnimeTitle", chck_AppendAnimeTitle.isSelected());
+                ToggleFileMoving();
             }
         });
 
