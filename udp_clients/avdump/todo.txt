@@ -6,3 +6,5 @@ Kill wxWidgets dependency.
 This should give us better unicode console support, but seems to break non-wide I/O, so all non-wide functions need to be converted.
 
 Kill hacked up mpg123 dependency.
+
+Fix crash on -exp filename that can't be opened for writing.
