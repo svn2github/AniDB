@@ -981,7 +981,7 @@ function changeWatchedState() {
 	var month = (((now.getMonth() + 1) > 9) ? (now.getMonth()+1) : '0'+(now.getMonth()+1));
 	var hour = (now.getHours() > 9  ? now.getHours() : '0'+now.getHours());
 	var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
-	now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
+	now = day + '-' + month + '-' + now.getFullYear() + ' '+hour+ ':'+minute+':00';
 	mylistEntry.seenDate = (isWatched ? now : 0);
 	var url;
 	var file = files[fid];
