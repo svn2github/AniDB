@@ -85,6 +85,7 @@ settings['mylist']['use'] = 0; // use_mylist_add
 settings['mylist']['state'] = 0; // mylist_add_state
 settings['mylist']['viewed'] = 0; // mylist_add_viewed_state
 settings['mylist']['fstate'] = 0; // mylist_add_fstate
+settings['mylist']['gstate'] = 0; // mylist_add_state (for generics, defaults to tv)
 settings['group'] = new Array();
 settings['group']['type'] = 0; // group_check_type
 settings['group']['filter'] = 0; // group_langfilter
@@ -143,6 +144,7 @@ function loadSettings() {
 	mylist_add_viewed_state = Number(settings['mylist']['viewed']);
 	mylist_add_state = Number(settings['mylist']['state']);
 	mylist_add_fstate = Number(settings['mylist']['fstate']);
+	mylist_add_gstate = Number(settings['mylist']['gstate']);
 	// GLOBAL
 	settings['global'] = CookieGetToArray('global',settings['global']);
 	collapseThumbnails = Number(settings['global']['collapse']);
@@ -524,6 +526,7 @@ function createPreferencesTable(type) {
 					"element":createLabledCheckBox(null,'use_mylist_add','use_mylist_add',function() {
 							use_mylist_add = Number(this.checked);
 							document.getElementById('mylist_add_state').disabled = (!this.checked);
+							document.getElementById('mylist_add_gstate').disabled = (!this.checked);
 							document.getElementById('mylist_add_fstate').disabled = (!this.checked);
 							document.getElementById('mylist_add_viewed_state').disabled = (!this.checked);
 						},Number(use_mylist_add),' Use quick-add instead of normal mylist add',null),
@@ -550,6 +553,17 @@ function createPreferencesTable(type) {
 					"text":"Default quick-add file state",
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST',
 					"help-text":"Default mylist quick-add file state"});
+
+				optionArray = {0:{"text": ' page default '},100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
+						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '},15:{"text":' streamed '}};
+				var gstateSel = createSelectArray(null,"mylist_add_gstate","mylist_add_gstate",null,mylist_add_gstate,optionArray);
+				if (!use_mylist_add) gstateSel.disabled = true;
+				gstateSel.onchange = function() { mylist_add_gstate = this.value; };
+				addSetting(ul,{
+					"element":gstateSel,
+					"text":"Default quick-add file state (generic)",
+					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST',
+					"help-text":"Default mylist quick-add file state for generic files"});
 					
 				var watchedSel = createSelectArray(null,"mylist_add_viewed_state","mylist_add_viewed_state",null,mylist_add_viewed_state,{0:{"text":'unwatched'},1:{"text":'watched'}});
 				if (!use_mylist_add) watchedSel.disabled = true;

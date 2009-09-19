@@ -1596,6 +1596,7 @@ function createMylistAddBox(parentNode,type) {
 			default: defaultAddType = 13; break;
 		}
 	}
+	if (mylist_add_gstate > 0) defaultAddType = mylist_add_gstate;
 	select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,defaultAddType,optionArray);
 	createFieldValueRow(tbody,'type'+gODD(i),'Generic Type',select); i++;
 	createFieldValueRow(tbody,'source'+gODD(i),'Source',createTextInput("addl.source",30,false,false,100)); i++;
