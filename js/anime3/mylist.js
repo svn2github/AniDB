@@ -163,7 +163,7 @@ function prepPage() {
 function fetchData(aid,uid) {
 	var req = xhttpRequest();
 	var uidstr = (isNaN(Number(ruid)) ? '' : '&uid='+Number(ruid));
-	if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'_uid'+Number(ruid)+'.xml', parseData);
+	if (isLocalHost()) xhttpRequestFetch(req, 'xml/aid'+aid+'_uid'+(Number(ruid) ? Number(ruid) : 1179)+'.xml', parseData);
 	else xhttpRequestFetch(req, 'animedb.pl?show=xml&t=useranime&aid='+aid+uidstr, parseData);
 }
 
@@ -560,7 +560,7 @@ function changeWatchedState() {
 	var month = (((now.getMonth() + 1) > 9) ? (now.getMonth()+1) : '0'+(now.getMonth()+1));
 	var hour = (now.getHours() > 9  ? now.getHours() : '0'+now.getHours());
 	var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
-	now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
+	now = day + '-' + month + '-' + now.getFullYear() + ' '+hour+ ':'+minute+':00';
 	mylistEntry.seenDate = (isWatched ? now : 0);
 	var url = 'animedb.pl?show=mylist&do=seen&seen='+(isWatched ? 1 : 0)+'&lid='+mylistEntry.id;
 	var file = files[fid];
