@@ -208,7 +208,7 @@ function CEpisodeEntry(node) {
 		case 'flags': this.flags = Number(nodeData(sNode)); break;
 		case 'epno': 
 			var eno = nodeData(sNode);
-			this.epno = (!isNaN ? Number(eno) : Number(eno.substring(1,eno.length))); 
+			this.epno = (!isNaN(Number(eno)) ? Number(eno) : Number(eno.substring(1,eno.length))); 
 			break;
 	  case 'len': this.length = Number(nodeData(sNode)); break;
 	  case 'date': this.addDate = convertTime(nodeData(sNode)); this.relDate = convertTime(sNode.getAttribute('rel')) || 0; break;
