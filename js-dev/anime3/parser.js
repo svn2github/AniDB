@@ -205,8 +205,10 @@ function CEpisodeEntry(node) {
 	var sNode = node.childNodes.item(i);
 	if (sNode.nodeType == 3) continue; // Text node, not interested
 	switch (sNode.nodeName.toLowerCase()) {
-	  case 'flags': this.flags = Number(nodeData(sNode)); break;
-	  case 'epno': this.epno = Number(nodeData(sNode)); break;
+		case 'flags': this.flags = Number(nodeData(sNode)); break;
+		case 'epno': 
+			var eno = nodeData(sNode);
+			this.epno = (!isNaN ? : Number(eno) ? Number(eno.substring(1,eno.length)); break;
 	  case 'len': this.length = Number(nodeData(sNode)); break;
 	  case 'date': this.addDate = convertTime(nodeData(sNode)); this.relDate = convertTime(sNode.getAttribute('rel')) || 0; break;
 	  case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
