@@ -82,6 +82,7 @@ settings['ed2k'] = new Array();
 settings['ed2k']['pattern'] = (hashObj && hashObj.pattern ? hashObj.pattern : "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>"); // ed2k_pattern
 settings['ed2k']['space'] = (hashObj && hashObj.spacesChar ? hashObj.spacesChar : "_"); // space_pattern
 settings['ed2k']['pad'] = true;
+settings['ed2k']['padonormal'] = true;
 settings['mylist'] = new Array();
 settings['mylist']['use'] = 0; // use_mylist_add
 settings['mylist']['state'] = 0; // mylist_add_state
@@ -140,6 +141,7 @@ function loadSettings() {
 	hashObj.sfv = hashObj.pattern+".%ext %crc";
 	space_pattern = settings['ed2k']['space'];
 	pad_epnums = settings['ed2k']['pad'];
+	pad_only_normal_epnums = settings['ed2k']['padonormal'];
 	hashObj.spacesChar = space_pattern;
 	// MYLIST
 	settings['mylist'] = CookieGetToArray('mylist',settings['mylist']);
@@ -525,9 +527,17 @@ function createPreferencesTable(type) {
 				addSetting(ul,{
 					"element":createLabledCheckBox(null,'pad_epnums','pad_epnums',function() {
 							pad_epnums = Number(this.checked);
+							document.getElementById('pad_only_normal_epnums').disabled = !pad_epnums;
 						},Number(pad_epnums),' Pad episode numbers',null),
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST',
-					"help-text":"Pad episode numbers to the same greatness as the maximum normal episode count. ie: 25 eps -> S01, 251 eps -> S001."});	
+					"help-text":"Pad episode numbers to the same greatness as the maximum normal episode count. ie: 25 eps -> S01, 251 eps -> S001."});
+				
+				addSetting(ul,{
+					"element":createLabledCheckBox(null,'pad_only_normal_epnums','pad_only_normal_epnums',function() {
+							pad_only_normal_epnums = Number(this.checked);
+						},Number(pad_only_normal_epnums),' Pad only normal episodes',null,!pad_epnums),
+					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST',
+					"help-text":"Use the above padding only to pad \"Normal\" episode numbers."});	
 				
 				tab.appendChild(ul);
 				break;
@@ -792,6 +802,8 @@ function createPreferencesTable(type) {
 		if (document.getElementById('ed2k_pattern')) {
 			settings['ed2k']['pattern'] = document.getElementById('ed2k_pattern').value;
 			settings['ed2k']['space'] = document.getElementById('space_pattern').value;
+			settings['ed2k']['pad'] = document.getElementById('pad_epnums').value;
+			settings['ed2k']['padonormal'] = document.getElementById('pad_only_normal_epnums').value;
 			CookieSetFromArray('ed2k', settings['ed2k'], 3650);
 		}
 		if (document.getElementById('use_mylist_add')) {

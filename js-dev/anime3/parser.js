@@ -242,13 +242,7 @@ function CEpisodeEntry(node) {
 	case 'O': this.type = 'other'; this.typeFull = 'Other Episodes'; this.epnoNum = 1000000+this.epnoNum; break;
   }
   if (this.isRecap) this.typeFull += ', Recap';
-  /* Legacy */
-  if (this.flags & 1) { this.type = 'special'; this.typeFull = 'Special Episode'; this.typeChar = 'S'; this.epnoNum = 100000+this.epnoNum; }
-  if (this.flags & 2) { this.isRecap = true; this.typeFull += ', Recap'; }
-  if (this.flags & 4) { this.type = 'opening'; this.typeFull = 'Opening/Ending/Credits'; this.typeChar = 'C'; this.epnoNum = 200000+this.epnoNum; }
-  if (this.flags & 32) { this.type = 'trailer'; this.typeFull = 'Trailer/Promo/Ads'; this.typeChar = 'T'; this.epnoNum = 300000+this.epnoNum; }
-  if (this.flags & 64) { this.type = 'parody'; this.typeFull = 'Parody/Fandub'; this.typeChar = 'P'; this.epnoNum = 400000+this.epnoNum; }
-  if (this.flags & 128) { this.type = 'other'; this.typeFull = 'Other Episodes'; this.typeChar = 'O'; this.epnoNum = 1000000+this.epnoNum; }
+
   this.playLength = this.length;
   // Format length
   var h, m;
