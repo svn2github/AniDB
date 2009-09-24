@@ -1538,7 +1538,7 @@ function applyFormat(identifier, file, episode, anime, group) {
 	if (identifier.indexOf("%enr") >= 0) {
 		var epLen = String((anime.eps) ? anime.eps : anime.epCount);
 		var epFmt = episode.epno;
-		if ((pad_epnums && file.typeChar == '') || (pad_epnums && file.typeChar != '' && !pad_only_normal_epnums)) {
+		if ((pad_epnums && episode.typeChar == '') || (pad_epnums && episode.typeChar != '' && !pad_only_normal_epnums)) {
 			epFmt = '0000'+epFmt;
 			epFmt = epFmt.slice(epFmt.length-epLen.length);
 		}
