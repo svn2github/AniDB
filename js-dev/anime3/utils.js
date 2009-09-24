@@ -1541,7 +1541,7 @@ function applyFormat(identifier, file, episode, anime, group) {
 		if (pad_epnums) {
 			epFmt = '0000'+epFmt;
 			epFmt = epFmt.slice(epFmt.length-epLen.length);
-		)
+		}
 		identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
 	}
 	identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");
