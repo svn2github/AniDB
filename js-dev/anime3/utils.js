@@ -1537,8 +1537,11 @@ function applyFormat(identifier, file, episode, anime, group) {
 	identifier = identifier.replace(/\%epat/mgi,episode.getAltTitle());
 	if (identifier.indexOf("%enr") >= 0) {
 		var epLen = String((anime.eps) ? anime.eps : anime.epCount);
-		var epFmt = '0000'+episode.epno;
-		epFmt = epFmt.slice(epFmt.length-epLen.length);
+		var epFmt = episode.epno;
+		if (pad_epnums) {
+			epFmt = '0000'+epFmt;
+			epFmt = epFmt.slice(epFmt.length-epLen.length);
+		)
 		identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
 	}
 	identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");

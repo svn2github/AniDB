@@ -184,7 +184,7 @@ function CEpisodeEntry(node) {
   this.typeChar = '';
   this.epnoNum = 0;
   this.vote = -1; // set later
-  this.isRecap = false;
+  this.isRecap = node.getAttribute('recap') ? Number(node.getAttribute('recap')) : 0);
   this.animeId = -1;
   this.hiddenFiles = 0;
   this.seenDate = 0;
@@ -208,7 +208,8 @@ function CEpisodeEntry(node) {
 		case 'flags': this.flags = Number(nodeData(sNode)); break;
 		case 'epno': 
 			var eno = nodeData(sNode);
-			this.epno = (!isNaN(Number(eno)) ? Number(eno) : Number(eno.substring(1,eno.length))); 
+			this.epno = (!isNaN(Number(eno)) ? Number(eno) : Number(eno.substring(1,eno.length)));
+			this.typeChar = (!isNaN(Number(eno)) ? '' : eno.substring(0,1));
 			break;
 	  case 'len': this.length = Number(nodeData(sNode)); break;
 	  case 'date': this.addDate = convertTime(nodeData(sNode)); this.relDate = convertTime(sNode.getAttribute('rel')) || 0; break;
@@ -233,6 +234,15 @@ function CEpisodeEntry(node) {
   if (this.relDate == 0) this.date = this.addDate;
   else this.date = this.relDate;
   this.epnoNum = this.epno;
+  switch(this.typeChar) {
+	case 'S': this.type = 'special'; this.typeFull = 'Special Episode'; this.epnoNum = 100000+this.epnoNum; break;
+	case 'C': this.type = 'opening'; this.typeFull = 'Opening/Ending/Credits'; this.epnoNum = 200000+this.epnoNum; break;
+	case 'T': this.type = 'trailer'; this.typeFull = 'Trailer/Promo/Ads'; this.epnoNum = 300000+this.epnoNum; break;
+	case 'P': this.type = 'parody'; this.typeFull = 'Parody/Fandub'; this.epnoNum = 400000+this.epnoNum; break;
+	case 'O': this.type = 'other'; this.typeFull = 'Other Episodes'; this.epnoNum = 1000000+this.epnoNum; break;
+  }
+  if (this.isRecap) this.typeFull += ', Recap';
+  /* Legacy */
   if (this.flags & 1) { this.type = 'special'; this.typeFull = 'Special Episode'; this.typeChar = 'S'; this.epnoNum = 1000+this.epnoNum; }
   if (this.flags & 2) { this.isRecap = true; this.typeFull += ', Recap'; }
   if (this.flags & 4) { this.type = 'opening'; this.typeFull = 'Opening/Ending/Credits'; this.typeChar = 'C'; this.epnoNum = 2000+this.epnoNum; }
