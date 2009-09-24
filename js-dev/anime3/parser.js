@@ -184,7 +184,7 @@ function CEpisodeEntry(node) {
   this.typeChar = '';
   this.epnoNum = 0;
   this.vote = -1; // set later
-  this.isRecap = node.getAttribute('recap') ? Number(node.getAttribute('recap')) : 0);
+  this.isRecap = (node.getAttribute('recap') ? Number(node.getAttribute('recap')) : 0);
   this.animeId = -1;
   this.hiddenFiles = 0;
   this.seenDate = 0;
