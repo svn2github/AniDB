@@ -8,25 +8,64 @@
 @import "color.css";
 @import "forum.css";
 
-ul#layout-menu li ul
+#layout-menu
 {
-	list-style-type: circle;
-	margin-left: .9em;
-	padding-left: .5em;
+	position: absolute;
+	left: 0;
+	top: 1em;
 }
-ul#layout-menu li ul
+
+#layout-menu > li + li
+{
+	margin-top: 1em;
+}
+
+#layout-menu li.sub-menu
+{
+	width: 1.5em;
+	text-align: right;
+	padding: .1em .5em;
+}
+
+#layout-menu li.sub-menu[title=Main]:before			{ content: "M"; }
+#layout-menu li.sub-menu[title=Listings]:before		{ content: "L"; }
+#layout-menu li.sub-menu[title="My stuff"]:before	{ content: "yM"; }
+#layout-menu li.sub-menu[title=Support]:before		{ content: "S"; }
+#layout-menu li.sub-menu[title=Account]:before		{ content: "A"; }
+
+#layout-menu li.sub-menu span.tab
 {
 	display: none;
 }
 
-
-#layout-menu span.tab
+#layout-menu li ul
 {
-	display:block;
-	position: static;
+	padding-left: 2em;
+	display: none;
+	position: relative;
+	left: 0;
+	top: -1.5em;
+	height: 0;
+	width:10em;
 }
 
-ul#layout-menu li:hover ul
+#layout-menu li ul li
+{
+	padding: 0 1em;
+	position: relative;
+	left: 0em;
+}
+
+#layout-menu li ul li a
+{
+	display: block;
+	padding: .2em .4em;
+	width: 9em;
+	background: #292927;
+}
+
+#layout-menu li.sub-menu ul:hover,
+#layout-menu li.sub-menu:hover ul
 {
 	display: block;
 }
@@ -93,18 +132,6 @@ body
 	position: relative;
 }
 
-#layout-menu
-{
-	padding: .8em;
-	width: 12em;
-	margin: 1em 0 0 1em;
-}
-
-#layout-menu > li + li
-{
-	margin-top: 1em;
-}
-
 #layout-main h1
 {
 	text-align: center;
@@ -128,6 +155,12 @@ body
 	top: 3.5em;
 }
 
+#layout-hint + #layout-nav #layout-menu
+{
+	top: 2.5em;
+}
+
+
 #layout-search div.search
 {
 	width: 34em;
@@ -138,17 +171,6 @@ body
 {
 	text-align: right;
 }
-
-/*
-#layout-search div.search form p:first-child:before
-{
-	line-height: 0;
-	position: relative;
-	top: .1em;
-	font-size: 2.3em;
-	content: "☺";
-}
-*/
 
 #layout-search input,
 #layout-search select
@@ -166,17 +188,7 @@ body
 	line-height: 1.2em;
 	font-weight: normal;
 }
-/*
-#layout-main .g_list li:before
-{
-	content: " | "
-}
 
-#layout-main .g_list li:first-child:before
-{
-	content: "";
-}
-*/
 #layout-main .g_list.limit li:first-child:before
 {
 	content: "show: ";
@@ -211,11 +223,10 @@ body
 
 #layout-content
 {
-	margin: 0 1em 0 14em;
+	margin: 1em 1em 0 4em;
 	padding-bottom: .1em;
 }
 
-#layout-menu li.sub-menu,
 #layout-main h1
 {
 	padding: .4em .4em .4em .8em;
@@ -289,6 +300,7 @@ body
 	
 }
 
+#layout-main div.g_menu h4,
 #layout-main div.cmt_all div.comment h4,
 #layout-main div.main_all div.rightbar h4,
 #layout-main table tr.header,
@@ -338,6 +350,11 @@ body
 #layout-main .g_list li
 {
 	padding: 0 .16em 0 .16em;
+}
+
+#layout-main ul.g_list.nav li
+{
+	line-height:2.5em;
 }
 
 #layout-main div.msg_all form,
@@ -522,10 +539,15 @@ body.nonav #layout-main
 body.nonav #layout-main div.g_content
 {
 	margin: 2em;
-	padding: 0 1em 1em 1em;
+	padding:1em;
 }
 
-#layout-main /*div.anime_all*/ div.block > div.image img
+body.nonav #layout-main div.g_content h4
+{
+	padding:0;
+}
+
+#layout-main div.image img
 {
 	padding: .5em;
 	border: .5em solid #363639;
