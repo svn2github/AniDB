@@ -67,7 +67,8 @@ public class TableModelJobs extends TableModelSortable implements RowModel{
 	FAUD = 31,
 	FMDS = 32,
 	FMDA = 33,
-	ccnt = 34,
+	AYEN = 34,
+	ccnt = 35,
 	JOB = -1;
 	public static long MASK = 1<<NUMB|1<<FILE|1<<STAT;
 
@@ -91,6 +92,7 @@ public class TableModelJobs extends TableModelSortable implements RowModel{
 		STRA[AROM] = "ann";
 		STRA[AENG] = "eng";
 		STRA[AYEA] = "yea";
+		STRA[AYEN] = "yen";
 		STRA[AEPS] = "eps";
 		STRA[ALEP] = "lep";
 		STRA[ATYP] = "typ";
@@ -166,6 +168,7 @@ public class TableModelJobs extends TableModelSortable implements RowModel{
 			case EIDN: return new Integer(j.m_fa.eid);
 			case GIDN: return new Integer(j.m_fa.gid);
 			case AYEA: return new Integer(j.m_fa.anime.yea);
+			case AYEN: return new Integer(j.m_fa.anime.yen);
 			case AEPS: return new Integer(j.m_fa.anime.eps);
 			case ALEP: return new Integer(j.m_fa.anime.lep);
 			case FLEN: return new Integer(j.m_fa.len);

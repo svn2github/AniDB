@@ -376,7 +376,7 @@ public class Job{
 				am.put("yea", m_fa.anime.yea);
 				am.put("gen", m_fa.anime.cat.replaceAll(",", ", "));
 				am.put("lep", m_fa.anime.lep);
-				am.put("yen", m_fa.anime.yea);  //NvrBst: Unsure about this change; Needs Testing
+				am.put("yen", m_fa.anime.yen);  //NvrBst: Unsure about this change; Needs Testing
 			}
 			if(m_fa.ep!=null){
 				am.put("epn", m_fa.ep.eng);

@@ -1,5 +1,8 @@
 WebAOM!
 
+1.19m 2009.09.29:
+*Fixed the %yen tag (Was returning yea at a part).
+
 1.19m 2009.09.10:
 *WebAOM could only handle 999 files before it started doing bad things; updated limit to 99,999 files.  ?? Implement Proper Fix ??
 
