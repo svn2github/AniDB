@@ -58,14 +58,16 @@
 }
 
 #layout-main div.addcreatoranimerel_all div.massadd textarea,
-#layout-main div.addcreatorsongrel_all div.massadd textarea
+#layout-main div.addcreatorsongrel_all div.massadd textarea,
+#layout-main div.addsonganimerel_all div.massadd textarea
 {
 	width:45%;
 	height: 200px;
 }
 
 #layout-main div.addcreatoranimerel_all div.massadd div + div,
-#layout-main div.addcreatorsongrel_all div.massadd div + div
+#layout-main div.addcreatorsongrel_all div.massadd div + div,
+#layout-main div.addsonganimerel_all div.massadd div + div
 {
 	margin-top:0.5em;
 }
