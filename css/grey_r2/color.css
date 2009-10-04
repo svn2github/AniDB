@@ -7,14 +7,14 @@ border-bottom-color: white;
 }
 thead,
 tr th,
-#layout-content div.anime_mylist th,
-#layout-content div.anime_group th,
-#layout-content div.agcmts_entries div.comment h4,
-#layout-content div.dbstats_all h4,
-#layout-content div.stats_all h4
-#layout-content div.main_all h4,
-#layout-content div.main_edit h4,
-#layout-content div.news_all h4,
+#layout-main div.anime_mylist th,
+#layout-main div.anime_group th,
+#layout-main div.agcmts_entries div.comment h4,
+#layout-main div.dbstats_all h4,
+#layout-main div.stats_all h4,
+#layout-main div.main_all h4,
+#layout-main div.main_edit h4,
+#layout-main div.news_all h4,
 #layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4,
 #layout-main div.blog h4,
@@ -24,7 +24,8 @@ tr th,
 {
 background-color: hsla(0, 100%, 25%, 0.4);
 }
-#layout-main tr th.field
+#layout-main tr th.field,
+#layout-main div.pane.account th
 {
 background-color: transparent;
 }
@@ -39,14 +40,10 @@ background-image: url(../grey/images/bg_1.gif);
 {
 background-image: url(../grey/images/bg_2.gif);
 }
-#layout-main div.tabbed_pane div.pane table td
-{
-background-color: transparent;
-}
-#layout-content div.g_msg.error,
-#layout-content div.g_msg.warning,
-#layout-content div.g_msg.note,
-#layout-content div.g_msg.success,
+#layout-main div.g_msg.error,
+#layout-main div.g_msg.warning,
+#layout-main div.g_msg.note,
+#layout-main div.g_msg.success,
 #layout-content #layout-main div.tabbed_pane ul.contribute li.g_odd,
 #layout-main div.addcharcharrel_all div.explanation div.description,
 #layout-main div.addseq_all div.explanation div.description,
@@ -185,7 +182,7 @@ input#addfilem\.search:hover,
 *.button:hover,
 *.confirmButton:hover,
 button:hover,
-*.submit: not(div):hover,
+*.submit:not(div):hover,
 input[type="submit"]:hover,
 input[type="button"]:hover
 {
@@ -193,36 +190,36 @@ background-color: hsla(0, 100%, 25%, 0.8);
 color: #ff6000;
 border-color: #797979;
 }
-#layout-content div.g_msg.error
+#layout-main div.g_msg.error
 {
 border: 1px solid #c40d0d;
 }
-#layout-content div.g_msg.warning
+#layout-main div.g_msg.warning
 {
 border: 1px solid #ff6000;
 }
-#layout-content div.g_msg.note
+#layout-main div.g_msg.note
 {
 border: 1px solid #575757;
 }
-#layout-content div.g_msg.success
+#layout-main div.g_msg.success
 {
 border: 1px solid #1D6125;
 }
-#layout-content div.g_msg.error h3
+#layout-main div.g_msg.error h3
 {
 color: red;
 }
-#layout-content div.g_msg.warning h3,
+#layout-main div.g_msg.warning h3,
 #layout-hint span a
 {
 color: #FF6000;
 }
-#layout-content div.g_msg.note h3
+#layout-main div.g_msg.note h3
 {
 color: gray;
 }
-#layout-content div.g_msg.success h3
+#layout-main div.g_msg.success h3
 {
 color: #2EB42E;
 }
@@ -231,6 +228,7 @@ input[disabled], input[readonly], select[disabled], select[readonly], checkbox[d
 color: #898989;
 }
 #layout-main tr:hover th.field,
+#layout-main div.pane.account th:hover,
 tr:hover > td,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.tabbed_pane div.pane table tr:hover > td
@@ -248,6 +246,11 @@ div.threads .rbottom > *,
 #layout-main div.forum ul.topiclist li.header
 {
 background-color:hsla(0, 100%, 25%, 0.4);
+}
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+opacity:0.5;
 }
 #tooltip span.top
 {

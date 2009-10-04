@@ -326,12 +326,12 @@ color:red;
 {
 color:white;
 }
-#layout-content div.g_msg
+#layout-main div.g_msg
 {
 margin:2em;
 padding:1.2em;
 }
-#layout-content div.g_msg p
+#layout-main div.g_msg p
 {
 display:block;
 padding:0;
@@ -451,7 +451,25 @@ padding-left:0;
 padding-right:0;
 margin-right:0;
 }
+#layout-main div.addcreatoranimerel_all div.massadd textarea,
+#layout-main div.addcreatorsongrel_all div.massadd textarea,
+#layout-main div.addsonganimerel_all div.massadd textarea
+{
+height:250px;
+width:45%;
+}
 #layout-main div.g_content
 {
 margin:0 1em;
+}
+#layout-main div.main_all div.rightbar li span
+{
+position:absolute;
+text-align: right;
+width: 3em;
+}
+#layout-main div.main_all div.rightbar li a
+{
+display:table;
+margin-left:3.5em;
 }

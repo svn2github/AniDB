@@ -238,7 +238,7 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 	top: 0;
 	right: 1em;
 	left: auto;
-	width: 35em;
+	width: 37em;
 	margin-top: 103px;
 	padding: 0;
 }
@@ -253,7 +253,7 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 #layout-search input.text {
 	color:#000033;
 	border: 1px solid #eed0da;
-	padding: 0.3em 0.3em 0;
+	/*padding: 0.3em 0.3em 0;*/
 	height: 1.5em;
 	width: 16em;
 }
