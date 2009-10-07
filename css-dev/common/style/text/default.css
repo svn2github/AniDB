@@ -404,7 +404,9 @@ div.quotebody div.quoteof,
 #layout-main div.forum div.poll dl dt,
 #layout-main div.forum div.poll div.pollbar,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
-#layout-main div.userpage_all div.discussions tr.unread td
+#layout-main div.userpage_all div.discussions tr.unread td,
+#layout-main div.userpage_all div.msg tr.unread td,
+#layout-main div.userpage_all div.news tr.unread td
 {
 	font-weight:bold;
 }
