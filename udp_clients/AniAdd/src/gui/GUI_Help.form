@@ -21,9 +21,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lbl_Icons" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="ctrl_IconHelp" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btn_ResetSettings" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btn_ResetSettings" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -35,7 +38,10 @@
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               <Component id="ctrl_IconHelp" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btn_ResetSettings" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btn_ResetSettings" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -61,6 +67,11 @@
     <Component class="javax.swing.JButton" name="btn_ResetSettings">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reset Settings to Default"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Current Build: 4 (11.10.09)"/>
       </Properties>
     </Component>
   </SubComponents>

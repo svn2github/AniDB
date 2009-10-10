@@ -43,11 +43,14 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
         lbl_Icons = new javax.swing.JLabel();
         ctrl_IconHelp = new gui.GUI_Help_Icons();
         btn_ResetSettings = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         lbl_Icons.setFont(new java.awt.Font("Tahoma", 1, 14));
         lbl_Icons.setText("Icons:");
 
         btn_ResetSettings.setText("Reset Settings to Default");
+
+        jLabel1.setText("Current Build: 4 (11.10.09)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,8 +61,10 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_Icons)
                     .addComponent(ctrl_IconHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ResetSettings))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_ResetSettings)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +74,9 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
                 .addGap(2, 2, 2)
                 .addComponent(ctrl_IconHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_ResetSettings)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_ResetSettings)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -78,6 +85,7 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ResetSettings;
     protected gui.GUI_Help_Icons ctrl_IconHelp;
+    private javax.swing.JLabel jLabel1;
     protected javax.swing.JLabel lbl_Icons;
     // End of variables declaration//GEN-END:variables
 
