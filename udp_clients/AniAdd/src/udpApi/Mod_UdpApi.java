@@ -176,7 +176,14 @@ public class Mod_UdpApi implements IModule {
 
     public boolean authenticate() {
         Log(ComEvent.eType.Debug, "Authenticating");
-        if (userName == null || userName.isEmpty() || ((password == null || password.isEmpty()) && (session == null || session.isEmpty()))) {
+
+        boolean hasUserInfo, hasPass, hasAniDBSession, hasAutoPass;
+        hasUserInfo = userName != null && !userName.isEmpty();
+        hasPass = password != null && !password.isEmpty();
+        hasAniDBSession = aniDBsession != null && !aniDBsession.isEmpty();
+        hasAutoPass = autoPass != null && !autoPass.isEmpty();
+
+        if (!hasUserInfo || !(hasPass || hasAniDBSession || hasAutoPass)) {
             Log(ComEvent.eType.Error, "UserName or Password not set. (Aborting)");
             return false;
         }
