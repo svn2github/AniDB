@@ -109,33 +109,36 @@ public class Mod_EpProcessing implements IModule {
         Cmd cmd = new Cmd("FILE", "file", procFile.Id().toString(), true);
 
         BitSet binCode = new BitSet(32);
-        binCode.set(6); //aid
-        binCode.set(5); //eid
-        binCode.set(4); //gid
-        binCode.set(3); //'lid
-        binCode.set(1); //'Depr
         binCode.set(0); //'state
+        binCode.set(1); //'Depr
+        binCode.set(3); //'lid
+        binCode.set(4); //gid
+        binCode.set(5); //eid
+        binCode.set(6); //aid
+        binCode.set(11); //'crc
+        binCode.set(17); //'video res
         binCode.set(23); //'Quality
         binCode.set(22); //'Source
         binCode.set(24); //'anidb filename scheme
         cmd.setArgs("fmask", Misc.toMask(binCode, 32));
 
         binCode = new BitSet(32);
-        binCode.set(31); //'group name
-        binCode.set(30); //'group short name
-        binCode.set(23); //'epno
-        binCode.set(22); //'ep name
-        binCode.set(21); //'ep romaji
-        binCode.set(20); //'ep kanji
-        binCode.set(7); //'epCount
-        binCode.set(6); //'highest EpCount
         binCode.set(4); //'type
-        binCode.set(15); //'romaji name
-        binCode.set(14); //'kanji name
-        binCode.set(13); //'english name
-        binCode.set(12); //'other name
-        binCode.set(11); //'short name
+        binCode.set(5); //'year
+        binCode.set(6); //'highest EpCount
+        binCode.set(7); //'epCount
         binCode.set(10); //'synonym
+        binCode.set(11); //'short name
+        binCode.set(12); //'other name
+        binCode.set(13); //'english name
+        binCode.set(14); //'kanji name
+        binCode.set(15); //'romaji name
+        binCode.set(20); //'ep kanji
+        binCode.set(21); //'ep romaji
+        binCode.set(22); //'ep name
+        binCode.set(23); //'epno
+        binCode.set(30); //'group short name
+        binCode.set(31); //'group name
         cmd.setArgs("amask", Misc.toMask(binCode, 32));
         cmd.setArgs("size", Long.toString(procFile.FileObj().length()));
         cmd.setArgs("ed2k", procFile.Data().get("Ed2k"));
@@ -216,11 +219,14 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_Deprecated", df.poll());
             procFile.Data().put("DB_State", df.poll());
             procFile.Data().put("DB_Quality", df.poll());
+            procFile.Data().put("DB_VideoRes", df.poll());            
+            procFile.Data().put("DB_CRC", df.poll());            
             procFile.Data().put("DB_Source", df.poll());
             procFile.Data().put("DB_FileName", df.poll());
 
             procFile.Data().put("DB_EpCount", df.poll());
             procFile.Data().put("DB_EpHiCount", df.poll());
+            procFile.Data().put("DB_Year", df.poll());
             procFile.Data().put("DB_Type", df.poll());
             procFile.Data().put("DB_SN_Romaji", df.poll());
             procFile.Data().put("DB_SN_Kanji", df.poll());
@@ -420,13 +426,18 @@ public class Mod_EpProcessing implements IModule {
         tags.put("ATk", procFile.Data().get("DB_SN_Kanji"));
         tags.put("ATs", procFile.Data().get("DB_Synonym"));
         tags.put("ATo", procFile.Data().get("DB_SN_Other"));
-
+        tags.put("AYear", procFile.Data().get("DB_Year"));
+        
         tags.put("ETr", procFile.Data().get("DB_EpN_Romaji"));
         tags.put("ETe", procFile.Data().get("DB_EpN_English"));
         tags.put("ETk", procFile.Data().get("DB_EpN_Kanji"));
 
         tags.put("GTs", procFile.Data().get("DB_Group_Short"));
         tags.put("GTl", procFile.Data().get("DB_Group_Long"));
+
+        tags.put("FCrc", procFile.Data().get("DB_CRC"));
+        tags.put("FVideoRes", procFile.Data().get("DB_VideoRes"));
+        tags.put("AniDBFN", procFile.Data().get("DB_FileName"));
 
         tags.put("EpNo", procFile.Data().get("DB_EpNo"));
         tags.put("EpHiNo", procFile.Data().get("DB_EpHiCount"));

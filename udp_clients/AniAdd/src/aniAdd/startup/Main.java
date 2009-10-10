@@ -64,7 +64,7 @@ public class Main {
         username = JOptionPane.showInputDialog(frm, "User", "");//"dvdkhl");
         password = JOptionPane.showInputDialog(frm, "Password", "");//"Perpetuity");
         api.setPassword(password);
-        api.setSession(session);
+        api.setAniDBSession(session);
         api.setUsername(username);
 
         if (api.authenticate()) {

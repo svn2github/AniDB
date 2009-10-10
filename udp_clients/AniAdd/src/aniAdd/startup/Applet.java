@@ -101,9 +101,10 @@ public class Applet extends JApplet {
         GUI gui = (GUI)aniAdd.GetModule("MainGUI");
         Mod_UdpApi api = (Mod_UdpApi)aniAdd.GetModule("UdpApi");
         
-        System.out.println(username + " " + session + " " + autopass + " " + password);
+        //System.out.println(username + " " + session + " " + autopass + " " + password);
         api.setPassword(password);
-        api.setSession(session);
+        api.setAniDBSession(session);
+        api.setAutoPass(autopass);
         api.setUsername(username);
 
         if(api.authenticate()) {

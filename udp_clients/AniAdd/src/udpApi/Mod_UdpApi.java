@@ -32,6 +32,7 @@ public class Mod_UdpApi implements IModule {
     private String password;
     private String autoPass;
     private String session;
+    private String aniDBsession;
     private boolean connected;
     private boolean aniDBAPIDown;
     private boolean auth, isAuthed;
@@ -208,8 +209,8 @@ public class Mod_UdpApi implements IModule {
         auth = true;
 
         Cmd cmd = new Cmd("AUTH", "auth", null, false);
-        if (session != null && !session.isEmpty()) {
-            cmd.setArgs("sess", session);
+        if (session != null && !aniDBsession.isEmpty()) {
+            cmd.setArgs("sess", aniDBsession);
         }
         if (password != null && !password.isEmpty()) {
             cmd.setArgs("pass", password);
@@ -289,8 +290,8 @@ public class Mod_UdpApi implements IModule {
         this.password = password;
     }
 
-    public void setSession(String session) {
-        this.session = session;
+    public void setAniDBSession(String aniDBsession) {
+        this.aniDBsession = aniDBsession;
     }
 
     public void setAutoPass(String autoPass) {
@@ -370,7 +371,7 @@ public class Mod_UdpApi implements IModule {
                         //logOut(false);
                         //authRetry = new Date(now.getTime() + 60 * 60 * 1000);
                         //aniDBAPIDown = true;
-                        Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute, client may be banned.");
+                        Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute.");
                         longDelay = true;
 
                         if ((now.getTime() - lastReplyPackage.getTime()) > 300000) {
@@ -546,6 +547,7 @@ public class Mod_UdpApi implements IModule {
             Log(ComEvent.eType.Debug, "Sync Logout");
             isEncodingSet = false;
             isAuthed = false;
+            session = null;
         }
     }
 
@@ -582,6 +584,7 @@ public class Mod_UdpApi implements IModule {
         } else if (reply.Identifier().equals("logout")) {
             isEncodingSet = false;
             isAuthed = false;
+            session = null;
 
         } else if (reply.Identifier().equals("ping")) {
         } else if (reply.Identifier().equals("uptime")) {

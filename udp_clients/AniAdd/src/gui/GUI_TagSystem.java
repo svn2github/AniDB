@@ -33,6 +33,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         tags.put("ATk", txt_AT_Kanji.getText());
         tags.put("ATs", txt_AT_Synomymn.getText());
         tags.put("ATo", txt_AT_Other.getText());
+        tags.put("AYear", "2009");
 
         tags.put("ETr", txt_ET_Romaji.getText());
         tags.put("ETe", txt_ET_English.getText());
@@ -40,6 +41,11 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         tags.put("GTs", txt_GT_Short.getText());
         tags.put("GTl", txt_GT_Long.getText());
+
+        tags.put("FCrc", "01abcdef");
+        tags.put("FVideoRes", "1920x1080");
+        tags.put("AniDBFN", "Basquash! - 25 - Above the Rim - [Umai](bfa12577).mkv");
+        
 
         tags.put("EpNo", updown_EpNo.getValue().toString());
         tags.put("EpHiNo", updown_EpHiNo.getValue().toString());
@@ -668,7 +674,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         if(!evt.isActionKey()){
             TagSystemCodeChange();
         }
-
+        
     }//GEN-LAST:event_txt_CodeBoxKeyReleased
 
 
