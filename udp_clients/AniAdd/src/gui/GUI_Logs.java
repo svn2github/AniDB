@@ -13,6 +13,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JTree;
@@ -56,7 +57,7 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
     }
     private void CopyEvents() {
         Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
-        String eventStr="";
+        String eventStr=(new Date()).toString() + "\n";
 
         Mod_Memory mem = (Mod_Memory)aniAdd.GetModule("Memory");
         eventStr += mem.toString();
