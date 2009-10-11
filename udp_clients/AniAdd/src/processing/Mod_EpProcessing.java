@@ -218,9 +218,9 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_LId", df.poll());
             procFile.Data().put("DB_Deprecated", df.poll());
             procFile.Data().put("DB_State", df.poll());
+            procFile.Data().put("DB_CRC", df.poll());            
             procFile.Data().put("DB_Quality", df.poll());
             procFile.Data().put("DB_VideoRes", df.poll());            
-            procFile.Data().put("DB_CRC", df.poll());            
             procFile.Data().put("DB_Source", df.poll());
             procFile.Data().put("DB_FileName", df.poll());
 
