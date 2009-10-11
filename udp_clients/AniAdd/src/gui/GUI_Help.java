@@ -50,7 +50,7 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
 
         btn_ResetSettings.setText("Reset Settings to Default");
 
-        jLabel1.setText("Current Build: 4 (11.10.09)");
+        jLabel1.setText("Current Build: 11.10.09");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -63,7 +63,7 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(ctrl_IconHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_ResetSettings)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(jLabel1))))
         );
         layout.setVerticalGroup(

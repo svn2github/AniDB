@@ -426,7 +426,10 @@ public class Mod_EpProcessing implements IModule {
         tags.put("ATk", procFile.Data().get("DB_SN_Kanji"));
         tags.put("ATs", procFile.Data().get("DB_Synonym"));
         tags.put("ATo", procFile.Data().get("DB_SN_Other"));
-        tags.put("AYear", procFile.Data().get("DB_Year"));
+
+        String[] year = procFile.Data().get("DB_Year").split("-");
+        tags.put("AYearBegin", year[0]);
+        tags.put("AYearEnd", year[1]);
         
         tags.put("ETr", procFile.Data().get("DB_EpN_Romaji"));
         tags.put("ETe", procFile.Data().get("DB_EpN_English"));

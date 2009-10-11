@@ -33,7 +33,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         tags.put("ATk", txt_AT_Kanji.getText());
         tags.put("ATs", txt_AT_Synomymn.getText());
         tags.put("ATo", txt_AT_Other.getText());
-        tags.put("AYear", "2009");
+        tags.put("AYearBegin", "2009");
+        tags.put("AYearEnd", "2009");
 
         tags.put("ETr", txt_ET_Romaji.getText());
         tags.put("ETe", txt_ET_English.getText());
@@ -350,7 +351,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         txt_CodeBox.setColumns(20);
         txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         txt_CodeBox.setRows(5);
-        txt_CodeBox.setText("AT:=[%ATr%,%ATe%,%ATk%]\nET:=[%ETe%,%ETr%,%ETk%]\nGT:=\"[\" [%GTs%,%GTl%] \"]\"\n\nEpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),\"0\")\n\nSrc:=\"[\"%Source%\"]\"\nDepr:={%Depr%?\"[Depr]\":\"\"}\nCen:={%Cen%?\"[Cen]\":\"\"}\nVer:={%Ver%=\"1\"?\"\":\"v\"%Ver%} \n\nFileName:=%AT%\" \"%EpNoPad% %Ver% \" - \"%ET%\" \"%GT% %Depr% %Cen% %Src%\nPathName:=\"E:\\Anime\\!Processed\" $repl(%AT%,'[\\\\\\\":/*|<>?]',\"\")");
+        txt_CodeBox.setText("AT:=[%ATr%,%ATe%,%ATk%]\nET:=[%ETe%,%ETr%,%ETk%]\nGT:=\"[\" [%GTs%,%GTl%] \"]\"\n\nEpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),\"0\")\n\nSrc:=\"[\"%Source%\"]\"\nDepr:={%Depr%?\"[Depr]\":\"\"}\nCen:={%Cen%?\"[Cen]\":\"\"}\nVer:={%Ver%=\"1\"?\"\":\"v\"%Ver%} \n\nFileName:=%AT%\" \"%EpNoPad% %Ver% \" - \"%ET%\" \"%GT% %Depr% %Cen% %Src%\nPathName:=\"E:\\Anime\\!Processed\\\" $repl(%AT%,'[\\\\\\\":/*|<>?]',\"\")");
         txt_CodeBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txt_CodeBoxMousePressed(evt);
