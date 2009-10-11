@@ -214,9 +214,8 @@ public class Mod_UdpApi implements IModule {
         }
 
         auth = true;
-
         Cmd cmd = new Cmd("AUTH", "auth", null, false);
-        if (session != null && !aniDBsession.isEmpty()) {
+        if (aniDBsession != null && !aniDBsession.isEmpty()) {
             cmd.setArgs("sess", aniDBsession);
         }
         if (password != null && !password.isEmpty()) {
