@@ -121,7 +121,7 @@ public class JDialogLogin extends JDialog implements ActionListener{
 		keyt = key.getText();
 		if(usrt.length()<3)
 			ok.setText("Username too short - OK");
-		else if(usrt.length()>10)
+		else if(usrt.length()>16)
 			ok.setText("Username too long - OK");
 		else if(!U.alfanum(usrt))
 			ok.setText("Only letters and digits - OK");

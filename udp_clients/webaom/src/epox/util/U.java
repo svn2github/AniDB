@@ -47,12 +47,11 @@ public class U {
 	public static void out(Object o){
 		System.out.println(o);
 	}
-	public static boolean alfanum(String str){
-		for(int i=0; i<str.length(); i++)
-			if(!Character.isLetterOrDigit(str.charAt(i)))
-				return false;
-		return true;
-	}
+
+	public static boolean alfanum(String str) {
+        return str.matches( "^[a-zA-Z0-9\\-\\_]{3,16}$" );
+    }
+	
 	public static String replace(String str, String src, String dst){
 		int ls = src.length();
 		int ld = dst.length();

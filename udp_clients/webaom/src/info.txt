@@ -1,5 +1,8 @@
 WebAOM!
 
+1.19n 2009.10.12
+*Fix of username length & character restrictions
+
 1.19m 2009.09.29:
 *Fixed the %yen tag (Was returning yea at a part).
 
