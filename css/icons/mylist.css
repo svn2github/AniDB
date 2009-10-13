@@ -68,6 +68,26 @@
 	background-image: url(../icons/state/anidb_liststate_watching.gif);
 }
 
+*.i_liststate_collecting
+{
+	background-image: url(../icons/state/anidb_liststate_collecting.png);
+}
+
+*.i_liststate_stalled
+{
+	background-image: url(../icons/state/anidb_liststate_stalled.gif);
+}
+
+*.i_liststate_dropped
+{
+	background-image: url(../icons/state/anidb_liststate_dropped.gif);
+}
+
+*.i_liststate_completed
+{
+	background-image: url(../icons/state/anidb_liststate_completed.gif);
+}
+
 *.i_liststate_edit
 {
 	background-image: url(../icons/icon/anidb_liststate_edit.gif);
