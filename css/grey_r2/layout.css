@@ -188,10 +188,15 @@ margin:0 0.2em 0 0.2em;
 {
 display:block;
 position:absolute;
-top:-0.5em;
+top:0;
 right:0;
 height:2em;
 left:auto;
+}
+#layout-search .rtop,
+#layout-search .rbottom
+{
+display:none;
 }
 #layout-search form input.text
 {
@@ -472,4 +477,16 @@ width: 3em;
 {
 display:table;
 margin-left:3.5em;
+}
+#layout-main div.forum div.body dl.codebox
+{
+margin:0.5em 0 0 0.5em;
+}
+#layout-main div.forum div.body dl.codebox dt
+{
+display:none;
+}
+#layout-main div.forum div.body dl.codebox dd
+{
+margin-left:0;
 }
