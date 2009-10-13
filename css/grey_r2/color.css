@@ -36,7 +36,8 @@ html,
 {
 background-image: url(../grey/images/bg_1.gif);
 }
-#layout-nav,#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account
+#layout-nav,#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account,
+#layout-main div.forum div.body dl.codebox dd
 {
 background-image: url(../grey/images/bg_2.gif);
 }
