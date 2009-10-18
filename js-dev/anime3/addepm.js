@@ -8,9 +8,9 @@
 jsVersionArray.push({
 	"file":"anime3/addepm.js",
 	"version":"2.4.1",
-	"revision":"$Revision: 2923 $",
-	"date":"$Date:: 2009-08-04 00:34:35 +0100#$",
-	"author":"$Author: fahrenheit $",
+	"revision":"$Revision$",
+	"date":"$Date::                           $",
+	"author":"$Author$",
 	"changelog":"Type filter"
 });
 
@@ -189,7 +189,7 @@ function createNewEpisode(epType,epNo) {
 	var newEp = document.createElement('episode');
 	newEp.setAttribute('id','-'+newEpsCnt);
 	var epno = document.createElement('epno');
-	epno.appendChild(document.createTextNode(epNo+1));
+	epno.appendChild(document.createTextNode(epType+epNo+1));
 	newEp.appendChild(epno);
 	if (epType != '') {
 		var flags = document.createElement('flags');

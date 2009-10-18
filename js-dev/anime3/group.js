@@ -429,7 +429,7 @@ function parseGroupRangeData(xmlDoc){
 	var id;
 	
 	var epRange, totalEps;
-	var animes = xmlDoc.getElementsByTagName('animes')[0].childNodes;
+	var animes = xmlDoc.getElementsByTagName('anime');
 	for(var i =0; i < animes.length; i++){
 		id = animes[i].getAttribute('id');
 		
