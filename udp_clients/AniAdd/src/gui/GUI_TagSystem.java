@@ -45,6 +45,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         tags.put("FCrc", "01abcdef");
         tags.put("FVideoRes", "1920x1080");
+        tags.put("Quality", "Very High");
         tags.put("AniDBFN", "Basquash! - 25 - Above the Rim - [Umai](bfa12577).mkv");
         
 

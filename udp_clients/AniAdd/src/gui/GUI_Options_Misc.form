@@ -16,8 +16,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="chck_ShowEditboxes" alignment="0" min="-2" max="-2" attributes="0"/>
-          <Component id="chck_ShowFileInfoPane" alignment="0" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="chck_ShowEditboxes" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="chck_ShowFileInfoPane" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="chck_DeleteEmptyFolder" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="chck_RenameRelatedFiles" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -26,6 +33,10 @@
               <Component id="chck_ShowFileInfoPane" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chck_ShowEditboxes" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chck_DeleteEmptyFolder" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chck_RenameRelatedFiles" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -36,9 +47,6 @@
         <Property name="label" type="java.lang.String" value="Show Fileinfo Pane"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chck_ShowFileInfoPaneActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
       </AuxValues>
@@ -48,9 +56,24 @@
         <Property name="label" type="java.lang.String" value="Show Storage/Source/Other Editboxes"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chck_ShowEditboxesActionPerformed"/>
-      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chck_DeleteEmptyFolder">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete empty folders (after last file moved out)"/>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chck_RenameRelatedFiles">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rename related files (e.g. external subtitles)"/>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
       </AuxValues>

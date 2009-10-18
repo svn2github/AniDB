@@ -135,8 +135,8 @@ public class Mod_UdpApi implements IModule {
             } else {
                 //wierd splitting function: if last field empty, it is omitted. Adding a space & & delete it again after splitting
                 dataFields = (msg + " ").split("\\|");
-                int I = dataFields.length - 1;
-                dataFields[I] = dataFields[I].substring(0, dataFields[I].length() - 1);
+                int i = dataFields.length - 1;
+                dataFields[i] = dataFields[i].substring(0, dataFields[i].length() - 1);
             }
 
             for (String dataField : dataFields) {

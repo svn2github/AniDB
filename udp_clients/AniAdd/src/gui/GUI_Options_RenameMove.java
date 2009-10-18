@@ -2,6 +2,8 @@ package gui;
 
 import aniAdd.Communication.ComEvent;
 import java.awt.Color;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -46,22 +48,15 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
     }
 
     private void initEventHandler(){
-        chck_EnableFileMoving.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        chck_EnableFileMoving.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
                 gui.ToMem("EnableFileMove", chck_EnableFileMoving.isSelected());
                 ToggleFileMoving();
             }
         });
-        ptn_MoveToFolder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("MoveTypeUseFolder", true);
-                ToggleFileMoving();
-            }
-        });
-
-        ptn_UseTaggingSystemFolder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("MoveTypeUseFolder", false);
+        ptn_MoveToFolder.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                gui.ToMem("MoveTypeUseFolder", ptn_MoveToFolder.isSelected());
                 ToggleFileMoving();
             }
         });
@@ -74,8 +69,8 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
             }
         });
 
-        chck_AppendAnimeTitle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        chck_AppendAnimeTitle.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
                 gui.ToMem("AppendAnimeTitle", chck_AppendAnimeTitle.isSelected());
                 ToggleFileMoving();
             }
@@ -87,16 +82,9 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
             }
         });
 
-        ptn_UseAniDBFN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("RenameTypeAniDBFileName", true);
-                ToggleFileMoving();
-            }
-        });
-
-        ptn_UseTaggingSystemFile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gui.ToMem("RenameTypeAniDBFileName", false);
+        ptn_UseAniDBFN.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                gui.ToMem("RenameTypeAniDBFileName", ptn_UseAniDBFN.isSelected());
                 ToggleFileMoving();
             }
         });

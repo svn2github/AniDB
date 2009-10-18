@@ -3,9 +3,7 @@ package gui;
 
 import aniAdd.Communication.ComEvent;
 import aniAdd.IAniAdd;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 
 public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
     private IGUI gui;
@@ -33,10 +31,12 @@ public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
         gUI_Options_RenameMove1.ptn_UseTaggingSystemFolder.setVisible(advanced);
         gUI_Options_RenameMove1.lbl_Renaming.setVisible(advanced);
         gUI_Options_RenameMove1.btn_EditTagsystem.setVisible(advanced);
-        gUI_Options_Misc1.chck_ShowEditboxes.setVisible(advanced);
+        gUI_Options_Misc1.setVisible(advanced);
 
         if(!advanced){
             gUI_Options_Misc1.chck_ShowEditboxes.setSelected(false);
+            gUI_Options_Misc1.chck_DeleteEmptyFolder.setSelected(false);
+            gUI_Options_Misc1.chck_RenameRelatedFiles.setSelected(false);
             
             gUI_Options_RenameMove1.ptn_MoveToFolder.setSelected(true);
             gUI_Options_RenameMove1.ptn_UseAniDBFN.setSelected(true);
@@ -110,5 +110,4 @@ public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
 
     public void GainedFocus() {}
     public void LostFocus() {}
-
 }

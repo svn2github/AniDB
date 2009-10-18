@@ -71,7 +71,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Current Build: 11.10.09"/>
+        <Property name="text" type="java.lang.String" value="Current Build: 18.10.09"/>
       </Properties>
     </Component>
   </SubComponents>

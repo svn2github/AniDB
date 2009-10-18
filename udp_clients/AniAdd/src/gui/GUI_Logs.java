@@ -29,9 +29,9 @@ import udpApi.Mod_UdpApi;
 import udpApi.Query;
 
 public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
+
     private HashMap<Integer, Integer> fileId2LogItemId = new HashMap<Integer, Integer>();
     private ArrayList<ComEvent> comEvents = new ArrayList<ComEvent>();
-
     private IAniAdd aniAdd;
     private Mod_EpProcessing epProc;
     private Mod_UdpApi api;
@@ -40,116 +40,150 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
         initComponents();
     }
 
-    private void CopyTree(JTree tree){
+    private void CopyTree(JTree tree) {
         Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
-        String cmdTree = CopyTree((DefaultMutableTreeNode)tree.getModel().getRoot(), 0);
+        String cmdTree = CopyTree((DefaultMutableTreeNode) tree.getModel().getRoot(), 0);
 
         cb.setContents(new StringSelection(cmdTree), null);
     }
-    private String CopyTree(DefaultMutableTreeNode node, int depth){
-        String treeStr="";
+
+    private String CopyTree(DefaultMutableTreeNode node, int depth) {
+        String treeStr = "";
         do {
-            for(int i=0; i<depth;i++) treeStr += "  ";
-            treeStr += (String)node.getUserObject() + "\n";
-            if(node.getChildCount()!=0) treeStr += CopyTree((DefaultMutableTreeNode)node.getChildAt(0), depth+1);
-        } while((node = node.getNextSibling()) != null);
+            for (int i = 0; i < depth; i++) {
+                treeStr += "  ";
+            }
+            treeStr += (String) node.getUserObject() + "\n";
+            if (node.getChildCount() != 0) {
+                treeStr += CopyTree((DefaultMutableTreeNode) node.getChildAt(0), depth + 1);
+            }
+        } while ((node = node.getNextSibling()) != null);
         return treeStr;
     }
+
     private void CopyEvents() {
         Clipboard cb = Toolkit.getDefaultToolkit().getSystemClipboard();
-        String eventStr=(new Date()).toString() + "\n";
+        String eventStr = (new Date()).toString() + "\n";
 
-        Mod_Memory mem = (Mod_Memory)aniAdd.GetModule("Memory");
+        Mod_Memory mem = (Mod_Memory) aniAdd.GetModule("Memory");
         eventStr += mem.toString();
 
 
-        for (ComEvent comEvent : comEvents) eventStr += comEvent.toString() + "\n";
+        for (ComEvent comEvent : comEvents) {
+            eventStr += comEvent.toString() + "\n";
+        }
 
         cb.setContents(new StringSelection(eventStr), null);
     }
 
-    public String TabName() {return "Log";}
-    public int PreferredTabLocation() { return 1; }
+    public String TabName() {
+        return "Log";
+    }
+
+    public int PreferredTabLocation() {
+        return 1;
+    }
 
     private void AddCmdEvent(final ComEvent comEvent) {
-        if(comEvent.Type() != ComEvent.eType.Information ||
-          !((comEvent.ParamCount() > 0) && (comEvent.Params(0).equals("Cmd") || comEvent.Params(0).equals("Reply"))) ||
-          (api.ModState() == eModState.Terminating)) return;
+        if (comEvent.Type() != ComEvent.eType.Information ||
+                !((comEvent.ParamCount() > 0) && (comEvent.Params(0).equals("Cmd") || comEvent.Params(0).equals("Reply"))) ||
+                (api.ModState() == eModState.Terminating)) {
+            return;
+        }
 
-        if((Integer)comEvent.Params(1) < 0) return;
+        if ((Integer) comEvent.Params(1) < 0) {
+            return;
+        }
 
-        if(!SwingUtilities.isEventDispatchThread()){
+        if (!SwingUtilities.isEventDispatchThread()) {
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {
+
                     public void run() {
                         AddCmdEvent(comEvent);
                     }
                 });
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
             return;
         }
 
         boolean scroll = false;
-        DefaultTreeModel trModel = (DefaultTreeModel)trvw_Cmd.getModel();
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode)trModel.getRoot();
+        DefaultTreeModel trModel = (DefaultTreeModel) trvw_Cmd.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) trModel.getRoot();
         TreeNode lastNode = new TreeNode(root);
 
 
-        if(!root.isLeaf() && !lastNode.isLeaf()) {
-            lastNode = (TreeNode)lastNode.getChildAt(lastNode.getChildCount());
-            if(trvw_Cmd.isExpanded(new TreePath(trModel.getPathToRoot(lastNode)))) lastNode = (TreeNode)root.getChildAt(lastNode.getChildCount());
-            if(trvw_Cmd.isVisible(new TreePath(lastNode))) scroll = true;
+        if (!root.isLeaf() && !lastNode.isLeaf()) {
+            lastNode = (TreeNode) lastNode.getChildAt(lastNode.getChildCount());
+            if (trvw_Cmd.isExpanded(new TreePath(trModel.getPathToRoot(lastNode)))) {
+                lastNode = (TreeNode) root.getChildAt(lastNode.getChildCount());
+            }
+            if (trvw_Cmd.isVisible(new TreePath(lastNode))) {
+                scroll = true;
+            }
         }
 
-        Integer queryIndex = (Integer)comEvent.Params(1);
+        Integer queryIndex = (Integer) comEvent.Params(1);
 
         Query query = api.Queries().get(queryIndex);
         String nodeText = Misc.DateToString(query.getSendOn()) + " ID " + queryIndex + " " + query.getCmd().Action();
-        nodeText += (query.getRetries() > 0 ? " Retries: " + query.getRetries() : "") + " Arrived: " + (query.getSuccess()!=null ? (query.getSuccess() ? "Yes" : "Failed") : "Pending");
+        nodeText += (query.getRetries() > 0 ? " Retries: " + query.getRetries() : "") + " Arrived: " + (query.getSuccess() != null ? (query.getSuccess() ? "Yes" : "Failed") : "Pending");
 
         TreeNode node = null;
-        if((Boolean)comEvent.Params(2)) {
+        if ((Boolean) comEvent.Params(2)) {
             node = new TreeNode(nodeText, queryIndex.toString());
 
             nodeText = Misc.DateToString(query.getSendOn()) + " Send: " + query.getCmd().Action() + " ";
-            for (Map.Entry<String,String> entrySet : query.getCmd().Params().entrySet()) {
-                nodeText += entrySet.getKey() + "=" + (entrySet.getKey().equals("pass")?"***":entrySet.getValue())+" ";
+            for (Map.Entry<String, String> entrySet : query.getCmd().Params().entrySet()) {
+                nodeText += entrySet.getKey() + "=" + (entrySet.getKey().equals("pass") ? "***" : entrySet.getValue()) + " ";
             }
             node.add(new TreeNode(nodeText, ""));
 
-            trModel.insertNodeInto(node, root , trModel.getChildCount(root));
+            trModel.insertNodeInto(node, root, trModel.getChildCount(root));
             lastNode = node;
 
         } else {
-            for(int i = root.getChildCount() - 1; i >= 0; i--) {
-                if(((TreeNode)root.getChildAt(i)).Name().equals(queryIndex.toString())) { node = (TreeNode)root.getChildAt(i); break; }
+            for (int i = root.getChildCount() - 1; i >= 0; i--) {
+                if (((TreeNode) root.getChildAt(i)).Name().equals(queryIndex.toString())) {
+                    node = (TreeNode) root.getChildAt(i);
+                    break;
+                }
             }
-            if(node == null) return;
+            if (node == null) {
+                return;
+            }
             node.setUserObject(nodeText);
 
-            node.BackColor(query.getRetries() >= 3 && query.getSuccess()!=null && !query.getSuccess() ? Color.red : null);
-            if(query.getRetries() == 0) {
+            node.BackColor(query.getRetries() >= 3 && query.getSuccess() != null && !query.getSuccess() ? Color.red : null);
+            if (query.getRetries() == 0) {
                 nodeText = Misc.DateToString(query.getSendOn()) + " Rcvd: " + query.getReply().ReplyId() + " " + query.getReply().ReplyMsg();
                 node.add(new TreeNode(nodeText, null));
 
                 nodeText = "";
-                for(int i = 0; i < query.getReply().DataField().size(); i++) {
+                for (int i = 0; i < query.getReply().DataField().size(); i++) {
                     nodeText += "D" + (i + 1) + ": " + query.getReply().DataField().get(i) + "  ";
-                    if((i % 6 == 0) && (i != 0)) {
+                    if ((i % 6 == 0) && (i != 0)) {
                         node.add(new TreeNode(nodeText, null));
                         nodeText = "";
                     }
                 }
-                if(!nodeText.equals("")) node.add(new TreeNode(nodeText, null));
+                if (!nodeText.equals("")) {
+                    node.add(new TreeNode(nodeText, null));
+                }
             }
         }
-        if(scroll) trvw_Cmd.makeVisible(new TreePath(lastNode));
+        if (scroll) {
+            trvw_Cmd.makeVisible(new TreePath(lastNode));
+        }
         trModel.reload();
     }
-    private void AddFileEvent(final ComEvent comEvent){
-        if(!SwingUtilities.isEventDispatchThread()){
+
+    private void AddFileEvent(final ComEvent comEvent) {
+        if (!SwingUtilities.isEventDispatchThread()) {
             try {
                 SwingUtilities.invokeAndWait(new Runnable() {
+
                     public void run() {
                         AddFileEvent(comEvent);
                     }
@@ -160,16 +194,16 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
             return;
         }
 
-        FileInfo file = epProc.id2FileInfo((Integer)comEvent.Params(2));
+        FileInfo file = epProc.id2FileInfo((Integer) comEvent.Params(2));
         int fileIndex = epProc.Id2Index(file.Id());
-        
+
 
         TreeNode node;
         Integer logItemId;
         String title = "";
-        DefaultTreeModel model = (DefaultTreeModel)trvw_Event.getModel();
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
-        if((Mod_EpProcessing.eComSubType)comEvent.Params(1) == Mod_EpProcessing.eComSubType.Processing) {
+        DefaultTreeModel model = (DefaultTreeModel) trvw_Event.getModel();
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+        if ((Mod_EpProcessing.eComSubType) comEvent.Params(1) == Mod_EpProcessing.eComSubType.Processing) {
             node = new TreeNode();
             node.Name("File " + file.FileObj().getName() + ": [*]");
             node.setUserObject(node.Name().replace("[*]", "Processing started"));
@@ -180,9 +214,11 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
         }
 
         logItemId = fileId2LogItemId.get(file.Id());
-        if(logItemId==null || ((DefaultMutableTreeNode)root).getChildCount() <= logItemId) return;
-        node = (TreeNode)root.getChildAt(logItemId);
-        switch((Mod_EpProcessing.eComSubType)comEvent.Params(1)) {
+        if (logItemId == null || ((DefaultMutableTreeNode) root).getChildCount() <= logItemId) {
+            return;
+        }
+        node = (TreeNode) root.getChildAt(logItemId);
+        switch ((Mod_EpProcessing.eComSubType) comEvent.Params(1)) {
             case NoWriteAccess:
                 title = "Fileaccess denied";
                 node.add(new TreeNode(title, null));
@@ -194,8 +230,8 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
             case ParsingDone:
                 //processedBytes = epProc.processedBytes();
                 title = "AVDump processing done";
-                FileParser fp = (FileParser)comEvent.Params(3);
-                node.add(new TreeNode("Parsing done (" + (int)(file.FileObj().length() / 1024 / 1024) + "MB in " + (fp.ParseDuration()/100/10d) + "s with "+fp.MBPerSecond()+"mb/s)"));
+                FileParser fp = (FileParser) comEvent.Params(3);
+                node.add(new TreeNode("Parsing done (" + (int) (file.FileObj().length() / 1024 / 1024) + "MB in " + (fp.ParseDuration() / 100 / 10d) + "s with " + fp.MBPerSecond() + "mb/s)"));
                 break;
             case ParsingError:
                 //processedBytes = epProc.processedBytes();
@@ -203,11 +239,11 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
                 node.add(new TreeNode("Parsing Error"));
                 break;
             case GetDBInfo:
-                if((Boolean)comEvent.Params(3) || (Boolean)comEvent.Params(4)) {
+                if ((Boolean) comEvent.Params(3) || (Boolean) comEvent.Params(4)) {
                     title = "Sending packets to AniDB";
-                    if((Boolean)comEvent.Params(3) & (Boolean)comEvent.Params(4)) {
+                    if ((Boolean) comEvent.Params(3) & (Boolean) comEvent.Params(4)) {
                         node.add(new TreeNode("Sending packets to AniDB (FILE and MYLIST)"));
-                    } else if((Boolean)comEvent.Params(3)) {
+                    } else if ((Boolean) comEvent.Params(3)) {
                         node.add(new TreeNode("Sending packets to AniDB (FILE)"));
                     } else {
                         node.add(new TreeNode("Sending packets to AniDB (MYLIST)"));
@@ -250,9 +286,9 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
                 node.add(new TreeNode(title));
                 break;
             /*case VoteCmd_EpVoted:
-                title = "Episode vote set";
-                node.add(new TreeNode(title + " to " + file.Vote.Value));
-                break;*/
+            title = "Episode vote set";
+            node.add(new TreeNode(title + " to " + file.Vote.Value));
+            break;*/
             case VoteCmd_EpVoteRevoked:
                 title = "Episode vote revoked";
                 node.add(new TreeNode(title));
@@ -263,24 +299,32 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
                 break;
             case RenamingFailed:
                 title = "Renaming failed";
-                node.add(new TreeNode("Couldn't rename file. " + (comEvent.ParamCount()==5?(String)comEvent.Params(4):"")));
+                node.add(new TreeNode("Couldn't rename file. " + (comEvent.ParamCount() == 5 ? (String) comEvent.Params(4) : "")));
                 break;
             case FileRenamed:
                 title = "File renamed";
-                node.add(new TreeNode("File renamed to " + ((File)comEvent.Params(3)).getAbsolutePath() + ((Boolean)comEvent.Params(4)?" (Truncated)":"") ));
+                node.add(new TreeNode("File renamed to " + ((File) comEvent.Params(3)).getAbsolutePath() + ((Boolean) comEvent.Params(4) ? " (Truncated)" : "")));
                 break;
             case RenamingNotNeeded:
                 title = "No renaming needed";
                 node.add(new TreeNode(title));
                 break;
-            /*case RelFilesRenamed:
+            case DeletedEmptyFolder:
+                title = "Empty folder deleted";
+                node.add(new TreeNode("Deleted empty folder: " + ((File) comEvent.Params(3)).getAbsolutePath()));
+                break;
+            case DeletetingEmptyFolderFailed:
+                title = "Could not delete empty folder";
+                node.add(new TreeNode("Could not delete empty folder: " + ((File) comEvent.Params(3)).getAbsolutePath() + ((Boolean) comEvent.Params(4) ? ". " + (String) comEvent.Params(4) : "")));
+                break;
+            case RelFilesRenamed:
                 title = "Related files renamed";
-                node.add(new TreeNode("Related files renamed (" + (string)msg[3] + ")"));
+                node.add(new TreeNode("Related files renamed (" + (String) comEvent.Params(3) + ")"));
                 break;
             case RelFilesRenamingFailed:
-                title = "Couldn't rename related files";
-                node.add(new TreeNode(title, null));
-                break;*/
+                title = "Couldn't rename some or all of the related files";
+                node.add(new TreeNode(title + ": " + (String) comEvent.Params(3)));
+                break;
             case Done:
                 title = "Processing done" + (!file.ActionsError().isEmpty() ? " (with errors)" : "");
                 node.add(new TreeNode(title));
@@ -296,44 +340,54 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
 
     public void Initialize(IAniAdd aniAdd, IGUI gui) {
         this.aniAdd = aniAdd;
-        api = (Mod_UdpApi)aniAdd.GetModule("UdpApi");
-        epProc = (Mod_EpProcessing)aniAdd.GetModule("EpProcessing");
+        api = (Mod_UdpApi) aniAdd.GetModule("UdpApi");
+        epProc = (Mod_EpProcessing) aniAdd.GetModule("EpProcessing");
 
         InitEventHandler();
     }
 
-    private void InitEventHandler(){
+    private void InitEventHandler() {
         btn_CopyCmdTree.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CopyTree(trvw_Cmd);
             }
         });
         btn_CopyLogTree.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CopyTree(trvw_Event);
             }
         });
         btn_CopyDebugMsgs.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CopyEvents();
             }
         });
 
         api.AddComListener(new ComListener() {
+
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Type()==ComEvent.eType.Information) AddCmdEvent(comEvent);
+                if (comEvent.Type() == ComEvent.eType.Information) {
+                    AddCmdEvent(comEvent);
+                }
             }
         });
-        
+
         epProc.AddComListener(new ComListener() {
+
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Type()==ComEvent.eType.Information && comEvent.Params(0) instanceof eComType && comEvent.Params(0)==eComType.FileEvent) AddFileEvent(comEvent);
+                if (comEvent.Type() == ComEvent.eType.Information && comEvent.Params(0) instanceof eComType && comEvent.Params(0) == eComType.FileEvent) {
+                    AddFileEvent(comEvent);
+                }
             }
         });
 
         ComListener comListener;
         for (IModule module : aniAdd.GetModules()) {
             comListener = new ComListener() {
+
                 public void EventHandler(ComEvent comEvent) {
                     comEvents.add(comEvent);
                 }
@@ -343,9 +397,10 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
 
     }
 
-    public void Terminate() {}
+    public void Terminate() {
+    }
+
     public void GUIEventHandler(ComEvent comEvent) {
-    	
     }
 
     @SuppressWarnings("unchecked")
@@ -421,8 +476,6 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
                 .addComponent(pnl_Logs_Ctrls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btn_CopyCmdTree;
     protected javax.swing.JButton btn_CopyDebugMsgs;
@@ -435,7 +488,9 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JTree trvw_Event;
     // End of variables declaration//GEN-END:variables
 
-    public void GainedFocus() {}
+    public void GainedFocus() {
+    }
 
-    public void LostFocus() {}
+    public void LostFocus() {
+    }
 }
