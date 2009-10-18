@@ -575,8 +575,8 @@ function changeWatchedState() {
 	for (var eid in eids) {
 		if (!eids[eid]) continue;
 		var episode = episodes[eid];
-		var row = document.getElementById('e'+eid+'f'+fid);
-		if (!episode || !row) continue;
+		var erow = document.getElementById('e'+eid+'f'+fid);
+		if (!episode || !erow) continue;
 		// update file row watched state
 		changeFileRowWatchedState(eid,fid,isWatched);
 		// update episode row watched state
