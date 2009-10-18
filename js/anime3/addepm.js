@@ -189,7 +189,7 @@ function createNewEpisode(epType,epNo) {
 	var newEp = document.createElement('episode');
 	newEp.setAttribute('id','-'+newEpsCnt);
 	var epno = document.createElement('epno');
-	epno.appendChild(document.createTextNode(epNo+1));
+	epno.appendChild(document.createTextNode(epType+epNo+1));
 	newEp.appendChild(epno);
 	if (epType != '') {
 		var flags = document.createElement('flags');
