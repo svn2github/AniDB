@@ -414,6 +414,7 @@ function changeFileRowWatchedState(eid,fid,isWatched) {
 	var mylistEntry = mylist[fid];
 	var episode = episodes[eid];
 	var row = document.getElementById('e'+eid+'f'+fid);
+	
 	var stateCell = getElementsByClassName(row.getElementsByTagName('td'),'icons state',true)[0];
 	var actionCell = getElementsByClassName(row.getElementsByTagName('td'),'icons action',true)[0];
 	var ico = getElementsByClassName(actionCell.getElementsByTagName('a'),'i_seen_',true)[0];
@@ -574,6 +575,8 @@ function changeWatchedState() {
 	for (var eid in eids) {
 		if (!eids[eid]) continue;
 		var episode = episodes[eid];
+		var row = document.getElementById('e'+eid+'f'+fid);
+		if (!episode || !row) continue;
 		// update file row watched state
 		changeFileRowWatchedState(eid,fid,isWatched);
 		// update episode row watched state
