@@ -987,13 +987,12 @@ function changeWatchedState() {
 	var file = files[fid];
 	var eids = new Array();
 	eids[file.episodeId] = 1;
-	for (var eid in file.epRelations) {
-		if (typeof file.epRelations[eid] != "function") eids[eid] = 1;
-	}
+	for (var eid in file.epRelations) eids[eid] = 1;
 	for (var eid in eids) {
 		if (!eids[eid]) continue;
 		var episode = episodes[eid];
 		var row = document.getElementById('e'+eid+'f'+file.id);
+		if (!episode || !row) continue;
 		var stateCell = getElementsByClassName(row.getElementsByTagName('td'),'icons state',true)[0];
 		var actionCell = getElementsByClassName(row.getElementsByTagName('td'),'icons action',true)[0];
 		var ico = getElementsByClassName(actionCell.getElementsByTagName('a'),'i_seen_',true)[0];
