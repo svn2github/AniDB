@@ -311,7 +311,11 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				createCell(row, col['classname'], document.createTextNode(episode.files.length), null, colSpan);
 				break;
 			case 'files-mylist': // for mylist i should only count files the user actualy has in mylist
-				createCell(row, col['classname'], document.createTextNode(findMylistEpEntries(eid).length), null, colSpan);
+				var fileCnt = 0;
+				for (var f in episode.files) {
+					if (typeof mylist[f] != undefined) fileCnt++;
+				}
+				createCell(row, col['classname'], document.createTextNode(fileCnt), null, colSpan);
 				break;
 			case 'actions':
 				createCell(row, col['classname'], (icons['mylist'] ? icons['mylist'] : document.createTextNode(' ')), null, colSpan);
