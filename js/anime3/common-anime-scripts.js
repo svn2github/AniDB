@@ -49,6 +49,7 @@ var genEpCols = [	{'name':"expand",'classname':"expand",'header':"X",'abbr':"Exp
 					{'name':"airdate",'classname':"date airdate",'header':"Air Date"}, 
 					{'name':"users",'classname':"number epusers",'header':"Users"},
 					{'name':"files",'classname':"count files",'header':"Files",'headclass':"files"},
+					{'name':"files-mylist",'classname':"count files",'header':"Files",'headclass':"files"},
 					{'name':"actions",'classname':"action",'header':"Action"}	];
 					
 var genGroupCols = [{'name':"expand",'classname':"expand",'header':"X",'abbr':"Expand/fold"}, 
@@ -308,6 +309,9 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				break;
 			case 'files':
 				createCell(row, col['classname'], document.createTextNode(episode.files.length), null, colSpan);
+				break;
+			case 'files-mylist': // for mylist i should only count files the user actualy has in mylist
+				createCell(row, col['classname'], document.createTextNode(findMylistEpEntries(eid).length), null, colSpan);
 				break;
 			case 'actions':
 				createCell(row, col['classname'], (icons['mylist'] ? icons['mylist'] : document.createTextNode(' ')), null, colSpan);

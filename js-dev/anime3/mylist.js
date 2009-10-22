@@ -70,6 +70,7 @@ var fileSkips = null;
 var epCols = cloneArray(genEpCols);
 removeColAttribute("airdate",epCols);
 removeColAttribute("users",epCols);
+removeColAttribute("files",epCols);
 var epSkips = null;
 
 /* This function parses mylist expand links and sets some settings
