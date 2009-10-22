@@ -11,12 +11,13 @@
 var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
-	"version":"1.03",
+	"version":"1.04",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
 	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
+
 var usejspopups = CookieGetByKey('other', 'jsp') || true;
 var curPageID = null;
 var searchTypeSelect = null;
@@ -25,6 +26,7 @@ var searchTypeDefaultAssist = Number(CookieGetByKey('other', 'asearch')) || 0;
 var seeDebug = Number(CookieGetByKey('other', 'seeDebug')) || 0;
 var seeTimes = Number(CookieGetByKey('other', 'seeTimes')) || 0;
 var ignoreLocal = Number(CookieGetByKey('other', 'ignoreLocal')) || 0;
+var menuCollapse = Number(CookieGetByKey('other', 'menuCollapse')) || 0;
 var username = null;
 var defaultTabs = tabCookieGet();
 // joys of joys
@@ -374,7 +376,7 @@ function compressMenus() {
 		header.width = 'auto';
 		var toggleIcon = document.createElement('a');
 		toggleIcon._pwidth = getStyleInformation(div,'width');
-		toggleIcon.className = 'i_icon i_expanded';
+		toggleIcon.className = 'i_icon ' + (menuCollapse == 0 || (menuCollapse == 2 && window.innerWidth > 1152) ? 'i_expanded' : 'i_collapsed');
 		toggleIcon.title = 'Toggle display of menu';
 		toggleIcon.alt = 'toggle display';
 		toggleIcon.onclick = function toogle() {
@@ -393,6 +395,22 @@ function compressMenus() {
 		header.appendChild(toggleIcon);
 		var content = document.createElement('div');
 		content.className = 'content';
+		if (menuCollapse > 0) { // let's do some work
+			var doCollapse = false;
+			if (menuCollapse == 1) doCollapse = true;
+			else { // check if collapse is needed
+				if (window.innerWidth < 1152) {
+					//alert("window width: "+window.innerWidth+"\ncollapse? "+(window.innerWidth < 1152));
+					doCollapse = true;
+				}
+			}
+			if (doCollapse) {
+				content.style.display = 'none';
+				div.style.width = 'auto'
+				div.className = div.className.replace(/expanded|collapsed/mgi,'');
+				div.className += ' collapsed';
+			}
+		}
 		while(div.childNodes.length) content.appendChild(div.childNodes[0]);
 		div.appendChild(header);
 		div.appendChild(content);

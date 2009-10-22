@@ -823,7 +823,7 @@ function createEpisodeTable(aid) {
 	// now for the tables
 	var table = document.createElement('table');
 	var colSpan;
-	if (mylist_settings['filemode'] == 0) {
+	if (mylist_settings['filemode'] == 0 || !files.length) {
 		table.className = 'eplist';
 		table.id = 'a'+aid+'_episodesTable';
 		colSpan = 7;

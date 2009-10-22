@@ -50,7 +50,6 @@ var animePage_sortsV = ['default','fid','group','size','codec','resolution','sou
 var animePage_curSort = 'default'; // whatever the db spits out 
 var ed2k_pattern = (hashObj && hashObj.pattern ? hashObj.pattern : "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>");
 var space_pattern = (hashObj && hashObj.spacesChar ? hashObj.spacesChar : "_");
-var pad_epnums = true;
 var use_mylist_add = 0;
 var mylist_add_viewed_state = 0;
 var mylist_add_state = 0;
@@ -107,6 +106,7 @@ settings['other']['emode'] = 1; // currentFMode
 settings['other']['jsp'] = 1; // usejspopups
 settings['other']['dsearch'] = 'none'; // def_search
 settings['other']['asearch'] = 0; // search_assist
+settings['other']['menuCollapse'] = 0; // what to do with menus that can be collapsed (0 default, 1 allways hide, 2 try to guess based on page width) 
 settings['other']['seeDebug'] = 0; // see debug information
 settings['other']['seeTimes'] = 0; // see timing information
 settings['other']['ignoreLocal'] = 0; // ignore local check information
@@ -140,9 +140,9 @@ function loadSettings() {
 	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
 	hashObj.sfv = hashObj.pattern+".%ext %crc";
 	space_pattern = settings['ed2k']['space'];
+	hashObj.spacesChar = space_pattern;
 	pad_epnums = settings['ed2k']['pad'];
 	pad_only_normal_epnums = settings['ed2k']['padonormal'];
-	hashObj.spacesChar = space_pattern;
 	// MYLIST
 	settings['mylist'] = CookieGetToArray('mylist',settings['mylist']);
 	use_mylist_add = Number(settings['mylist']['use']);
@@ -523,7 +523,7 @@ function createPreferencesTable(type) {
 					"text":"ED2K hash spaces convert character",
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K',
 					"help-text":"You can chose what to do with spaces in the ed2k links here."});
-				
+
 				addSetting(ul,{
 					"element":createLabledCheckBox(null,'pad_epnums','pad_epnums',function() {
 							pad_epnums = Number(this.checked);
@@ -537,8 +537,7 @@ function createPreferencesTable(type) {
 							pad_only_normal_epnums = Number(this.checked);
 						},Number(pad_only_normal_epnums),' Pad only normal episodes',null,!pad_epnums),
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST',
-					"help-text":"Use the above padding only to pad \"Normal\" episode numbers."});	
-				
+					"help-text":"Use the above padding only to pad \"Normal\" episode numbers."});
 				tab.appendChild(ul);
 				break;
 			case 'mylist-prefs':
@@ -697,6 +696,16 @@ function createPreferencesTable(type) {
 					"element":createLabledCheckBox(null,'search_assist','search_assist',function() { searchTypeAssist = this.checked; },Number(search_assist),' Use anidb search assist',null),
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER',
 					"help-text":"Select if you want to use search assistance on the anidb search box where available."});
+				optionArray = {0:{"text":'default',"desc":'Default behaviour'},
+					1:{"text":'always hidden',"desc":'Menus are always hidden by default'},
+					2:{"text":'auto',"desc":'Menus will be hidden by default depending on the width of the window'}};
+				var menuCollapseSel = createSelectArray(null,"menuCollapse","menuCollapse",null,settings['other']['menuCollapse'],optionArray);
+				menuCollapseSel.onchange = function() { settings['other']['menuCollapse'] = this.value; };
+				addSetting(ul,{
+					"element":menuCollapseSel,
+					"text":"Behaviour of collapsable menus",
+					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_OTHER',
+					"help-text":"You can alter the default behaviour of collapsable menus."});
 				if (String(""+window.location).indexOf('anidb.net') < 0) { // Show extra options for the local developer
 					addSetting(ul,{
 						"element":createLabledCheckBox(null,'seeDebug','seeDebug',function() { seeDebug = this.checked; },Number(seeDebug),' See Debug information (can be very verbose and very alerty)',null),
@@ -843,6 +852,7 @@ function createPreferencesTable(type) {
 			settings['other']['emode'] = document.getElementById('currentFMode').value;
 			settings['other']['dsearch'] = document.getElementById('def_search').value;
 			settings['other']['asearch'] = Number(document.getElementById('search_assist').checked)+'';
+			settings['other']['menuCollapse'] = Number(document.getElementById('menuCollapse').value)+'';
 			if (document.getElementById('seeDebug')) { settings['other']['seeDebug'] = Number(document.getElementById('seeDebug').checked)+''; }
 			if (document.getElementById('seeTimes')) { settings['other']['seeTimes'] = Number(document.getElementById('seeTimes').checked)+''; }
 			if (document.getElementById('ignoreLocal')) { settings['other']['ignoreLocal'] = Number(document.getElementById('ignoreLocal').checked)+''; }

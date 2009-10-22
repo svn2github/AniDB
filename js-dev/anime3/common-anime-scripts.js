@@ -244,7 +244,7 @@ function createEpisodeRow(aid,eid,cols,skips) {
 		}
 		switch(col['name']) {
 			case 'expand':
-				createCell(row, col['classname'], icons['expand'], null, colSpan);
+				createCell(row, col['classname'], (episode.files.length ? icons['expand'] : ""), null, colSpan);
 				break;
 			case 'epno':
 				var epno = createTextLink(null, episode.typeChar+episode.epno, 'animedb.pl?show=ep&eid='+eid, null, null, null, null);
