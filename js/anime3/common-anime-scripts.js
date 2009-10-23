@@ -312,8 +312,9 @@ function createEpisodeRow(aid,eid,cols,skips) {
 				break;
 			case 'files-mylist': // for mylist i should only count files the user actualy has in mylist
 				var fileCnt = 0;
-				for (var f in episode.files) {
-					if (mylist[f] != null) fileCnt++;
+				for (var f = 0; f < episode.files.length; f++) {
+					var mfid = episode.files[f];
+					if (mylist[mfid] != null) fileCnt++;
 				}
 				createCell(row, col['classname'], document.createTextNode(fileCnt), null, colSpan);
 				break;
