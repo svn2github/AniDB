@@ -1,5 +1,7 @@
 (C) 2009 by etele
-Version: 0.01
+Version: 0.02
 
 A csv myexport list to import it into adborg UDP client.
+Changed:
+- corrected typo
 
