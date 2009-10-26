@@ -110,8 +110,8 @@
 {
 	background:#b3b3b3 url(images/tab-3.png) repeat-x scroll 0 -7px;
 	margin:0 0 0.5em 0;
-	-moz-border-radius-bottomleft:.7em;
-	-webkit-border-bottom-left-radius:.7em;
+	-moz-border-radius-bottomleft:0;
+	-webkit-border-bottom-left-radius:0;
 	-moz-border-radius-topright:.4em;
 	-webkit-border-top-right-radius:.4em;
 	-moz-border-radius-topleft:.4em;
@@ -126,6 +126,8 @@
 {
 	-moz-border-radius-topleft:0em;
 	-webkit-border-top-left-radius:0em;
+	-moz-border-radius-bottomleft:.7em;
+	-webkit-border-bottom-left-radius:.7em;
 	margin:0 0 0.5em 16em;
 }
 
@@ -150,4 +152,9 @@
 #layout-main div.forum li.header dd
 {
 	margin: .2em 0;
+}
+
+#layout-main div.forum div.search form input
+{
+	vertical-align:middle;
 }

@@ -13,11 +13,10 @@ img, a
 	border: 1px solid #363636;
 }
 
-#layout-main table tr + tr td,
+#layout-main table tr.g_odd + tr td,
+#layout-main table tr + tr.g_odd td,
 #layout-main li.g_odd + li,
-#layout-main li + li.g_odd/*,
-#layout-main span.g_odd + span,
-#layout-main span + span.g_odd*/
+#layout-main li + li.g_odd
 {
 	border-top: 1px solid #dddddd;
 	border-bottom: none;
@@ -29,7 +28,11 @@ img, a
 }
 
 #layout-main table tr th.field,
-#layout-main table tr td.field
+#layout-main table tr td.field,
+#layout-main table tr.g_odd + tr td.field,
+#layout-main table tr + tr.g_odd td.field,
+#layout-main table tr.g_odd + tr td.field,
+#layout-main table tr + tr.g_odd td.field
 {
 	border-top: 1px solid #363636;
 }
@@ -53,9 +56,15 @@ img, a
 	border-width: 0 1px;
 }
 
-#layout-menu li ul li:first-child a
+#layout-menu li ul li:first-child a,
+#layout-menu li ul li#alert-notif a#newnotifies
 {
 	border-width: 2px 1px 0 1px;
+}
+
+#layout-menu li ul li#alert-notif a
+{
+	border-width: 0 1px 0 1px;
 }
 
 #layout-menu li ul li:last-child a
