@@ -18,6 +18,7 @@ jsVersionArray.push({
 // CORE Functions //
 
 var isIE = false; // Are we dealing with an IE based browser?
+var isHeaderNeeded = true;
 var disableCaching = false; // Should we disable caching?
 
 /* Function that returns a new XMLHttpRequest object
@@ -64,6 +65,7 @@ function doRequest(obj, url, handler, override, method, data) {
 		if (data) xhr.open('POST', url, true); // POST
 		else xhr.open('GET', url, true); // GET
 		if (xhr.overrideMimeType && override) xhr.overrideMimeType(override); // Setting the override type
+		if (isHeaderNeeded) xhr.setRequestHeader('X-LControl','x-no-cache'); // forces disabling of local caching
 		if (disableCaching) xhr.setRequestHeader('Cache-Control','no-cache'); // disables caching
 		if (data) {
 			xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded'); // Setting the correct header
