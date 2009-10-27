@@ -1,0 +1,9 @@
+0.03
+- added new fields to mylist.tpl
+
+0.02
+-orrected type in anime.tpl
+
+0.01
+- initial release
+
