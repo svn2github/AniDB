@@ -1,3 +1,6 @@
+0.04
+- added adult filed to mylist.tpl
+
 0.03
 - added new fields to mylist.tpl
 
