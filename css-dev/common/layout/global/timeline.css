@@ -44,7 +44,8 @@ div.g_timeline ul.row {
 	line-height:20px;
 }
 	div.g_timeline ul.row li a {
-		padding-left:3px; height:20px;
+		margin-right:1px; padding-left:3px;
+		height:20px;
 		display:block;
 		overflow:hidden;
 	}
