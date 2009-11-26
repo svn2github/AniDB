@@ -1,0 +1,51 @@
+div.g_timeline {
+	margin:30px auto;
+	overflow:scroll;
+	max-height:700px;
+}
+div.g_timeline ul {
+	white-space:nowrap;
+}
+div.g_timeline li {
+	display:inline-block;
+}
+div.g_timeline li.feb {
+	width:140px;
+}
+div.g_timeline li.feb.leap {
+	width:145px;
+}
+div.g_timeline li.apr,
+div.g_timeline li.jun,
+div.g_timeline li.sep,
+div.g_timeline li.nov {
+	width:150px;
+}
+div.g_timeline li.jan,
+div.g_timeline li.mar,
+div.g_timeline li.may,
+div.g_timeline li.jul,
+div.g_timeline li.aug,
+div.g_timeline li.oct,
+div.g_timeline li.dec {
+	width:155px;
+}
+div.g_timeline ul.legend {
+	height:30px;
+	line-height:30px;
+}
+	div.g_timeline ul.legend li span {
+		padding-left:5px;
+		display:block;
+	}
+div.g_timeline ul.row {
+	margin-top:1px;
+	height:20px;
+	line-height:20px;
+}
+	div.g_timeline ul.row li a {
+		margin-right:1px; padding-left:3px;
+		height:20px;
+		display:block;
+		overflow:hidden;
+	}

@@ -1,0 +1,14 @@
+div.g_timeline {
+	border:5px solid #777;
+	background:#555;
+}
+div.g_timeline ul.legend {
+	border-bottom:1px solid #f90;
+}
+div.g_timeline ul.legend li span {
+	color:#eee; background:#333;
+	border-bottom:1px solid #f90; border-right:1px solid #f90;
+}
+div.g_timeline ul.row li a {
+	color:#333; background:#dfdfdf;
+}
