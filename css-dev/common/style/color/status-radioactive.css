@@ -4,7 +4,8 @@
 #layout-main table.filelist tr.invalid,
 #layout-main div.myvotes_all table tr td.low,
 #layout-main div.addcreatoranimerel_all tr.left_only,
-#layout-main div.addcreatorsongrel_all tr.left_only
+#layout-main div.addcreatorsongrel_all tr.left_only,
+#layout-main div.timeline_all div.timeline ul.row.g_odd li.stalled a
 {
 	background-color: #AAAAAA;
 }
@@ -59,7 +60,8 @@
 #layout-main div.group_released table tr.g_odd.mylist,
 #layout-main div.schedule_all table tr.g_odd.mylist,
 #layout-main table.animelist tr.g_odd.mylist,
-#layout-main div.song_all div.tabbed_pane_main table tr.g_odd td.mylist
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd td.mylist,
+#layout-main div.timeline_all div.timeline ul.row.g_odd li.completed a
 {
 	background-color: #6FC279;
 }
