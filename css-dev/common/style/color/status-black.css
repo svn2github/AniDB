@@ -6,7 +6,7 @@
 #layout-main div.addcreatoranimerel_all tr.left_only,
 #layout-main div.addcreatorsongrel_all tr.left_only,
 #layout-main table.filelist tr.g_odd.deprecated,
-#layout-main div.timeline_all div.timeline li.stalled a
+#layout-main div.timeline_all div.timeline ul.row li.stalled a
 {
 	background-color:#564444;
 }
@@ -41,7 +41,7 @@
 #layout-main table.animelist tr.mylist,
 #layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
 #layout-main div.latestanimes_all div.g_section.mylist tr.mylist td,
-#layout-main div.timeline_all div.timeline li.completed a
+#layout-main div.timeline_all div.timeline ul.row li.completed a
 {
 	background-color:#364a36;
 }
@@ -67,7 +67,7 @@
 	background-color:#4c614c;
 }
 
-#layout-main div.timeline_all div.timeline li.dropped a,
+#layout-main div.timeline_all div.timeline ul.row li.dropped a,
 #layout-main table.filelist tr.generic
 {
 	background-color:#444444;
@@ -95,9 +95,9 @@
 #layout-main div.animelist_all table,
 #layout-main div.schedule_all table,
 #layout-main div.addcreatoranimerel_all table,
-#layout-main div.timeline_all div.timeline li.stalled a,
-#layout-main div.timeline_all div.timeline li.completed a,
-#layout-main div.timeline_all div.timeline li.dropped a
+#layout-main div.timeline_all div.timeline ul.row li.stalled a,
+#layout-main div.timeline_all div.timeline ul.row li.completed a,
+#layout-main div.timeline_all div.timeline ul.row li.dropped a
 {
 	color:#A0A0A0;
 }
