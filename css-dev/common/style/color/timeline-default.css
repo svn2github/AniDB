@@ -1,9 +1,9 @@
-#layout-main div.timeline_all div.timeline
+#layout-main div.timeline_all div.timeline div.g_timeline
 {
 	border:5px solid #777777;
 }
 
-#layout-main div.timeline_all div.timeline,
+#layout-main div.timeline_all div.timeline div.g_timeline,
 #layout-main div.timeline_all div.timeline ul
 {
 	background:#555555;
@@ -22,7 +22,7 @@
 	border-right:1px solid #f90;
 }
 
-#layout-main div.timeline_all div.timeline ul.row li a
+#layout-main div.timeline_all div.timeline li a
 {
 	color:#333333;
 	background:#dfdfdf;
