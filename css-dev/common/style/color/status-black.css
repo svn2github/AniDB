@@ -13,7 +13,7 @@
 #layout-main div.myvotes_all table tr.g_odd td.low,
 #layout-main div.addcreatoranimerel_all tr.right_only,
 #layout-main div.addcreatorsongrel_all tr.right_only,
-#layout-main div.timeline_all div.timeline li.stalled
+#layout-main div.timeline_all div.timeline li.stalled a
 {
 	background-color: #efc7b2;
 }
@@ -41,7 +41,7 @@
 #layout-main table.animelist tr.mylist,
 #layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
 #layout-main div.latestanimes_all div.g_section.mylist tr.mylist td,
-#layout-main div.timeline_all div.timeline li.completed
+#layout-main div.timeline_all div.timeline li.completed a
 {
 	background-color:#364a36;
 }
@@ -72,7 +72,7 @@
 	background-color:#444444;
 }
 
-#layout-main div.timeline_all div.timeline li.dropped,
+#layout-main div.timeline_all div.timeline li.dropped a,
 #layout-main div.addcreatoranimerel_all tr.same_name,
 #layout-main div.addcreatorsongrel_all tr.same_name,
 #layout-main div.addsongcollectionrel_all tr.same_name
