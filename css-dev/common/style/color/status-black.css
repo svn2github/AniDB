@@ -5,15 +5,15 @@
 #layout-main div.myvotes_all table tr td.low,
 #layout-main div.addcreatoranimerel_all tr.left_only,
 #layout-main div.addcreatorsongrel_all tr.left_only,
-#layout-main table.filelist tr.g_odd.deprecated
+#layout-main table.filelist tr.g_odd.deprecated,
+#layout-main div.timeline_all div.timeline li.stalled a
 {
-	background-color:#564444
+	background-color:#564444;
 }
 
 #layout-main div.myvotes_all table tr.g_odd td.low,
 #layout-main div.addcreatoranimerel_all tr.right_only,
-#layout-main div.addcreatorsongrel_all tr.right_only,
-#layout-main div.timeline_all div.timeline li.stalled a
+#layout-main div.addcreatorsongrel_all tr.right_only
 {
 	background-color: #efc7b2;
 }
@@ -67,12 +67,12 @@
 	background-color:#4c614c;
 }
 
+#layout-main div.timeline_all div.timeline li.dropped a,
 #layout-main table.filelist tr.generic
 {
 	background-color:#444444;
 }
 
-#layout-main div.timeline_all div.timeline li.dropped a,
 #layout-main div.addcreatoranimerel_all tr.same_name,
 #layout-main div.addcreatorsongrel_all tr.same_name,
 #layout-main div.addsongcollectionrel_all tr.same_name
@@ -94,7 +94,10 @@
 #layout-main div.anime_all div.tabbed_pane_main table,
 #layout-main div.animelist_all table,
 #layout-main div.schedule_all table,
-#layout-main div.addcreatoranimerel_all table
+#layout-main div.addcreatoranimerel_all table,
+#layout-main div.timeline_all div.timeline li.stalled a,
+#layout-main div.timeline_all div.timeline li.completed a,
+#layout-main div.timeline_all div.timeline li.dropped a
 {
 	color:#A0A0A0;
 }

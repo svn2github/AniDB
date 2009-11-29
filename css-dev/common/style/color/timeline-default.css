@@ -1,14 +1,29 @@
-div.g_timeline {
-	border:5px solid #777;
-	background:#555;
+#layout-main div.timeline_all div.timeline
+{
+	border:5px solid #777777;
 }
-div.g_timeline ul.legend {
+
+#layout-main div.timeline_all div.timeline,
+#layout-main div.timeline_all div.timeline ul
+{
+	background:#555555;
+}
+
+#layout-main div.timeline_all div.timeline ul.legend
+{
 	border-bottom:1px solid #f90;
 }
-div.g_timeline ul.legend li span {
-	color:#eee; background:#333;
-	border-bottom:1px solid #f90; border-right:1px solid #f90;
+
+#layout-main div.timeline_all div.timeline ul.legend li span
+{
+	color:#eee;
+	background:#333333;
+	border-bottom:1px solid #f90;
+	border-right:1px solid #f90;
 }
-div.g_timeline ul.row li a {
-	color:#333; background:#dfdfdf;
+
+#layout-main div.timeline_all div.timeline ul.row li a
+{
+	color:#333333;
+	background:#dfdfdf;
 }
