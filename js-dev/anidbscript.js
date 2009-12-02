@@ -349,10 +349,27 @@ function enhanceCheckboxes(parent) {
 						break;
 					}
 				}
+
+				// Check for multicolumn environment
+				var check_column = function(node) {
+					var classes = checkbox.className.split(" ");
+					for (i in classes) {
+						var t = /^column(\d+)$/.exec(classes[i]);
+						if (t != null) {
+							return t[1];
+						}
+					}
+					return null
+				}
+				if (!checkbox._inColumn)
+					checkbox._inColumn = check_column(checkbox);
+				
 				for (currentIndex += 1; currentIndex < checkbox.form.elements.length && checkbox.form.elements[currentIndex] != end; currentIndex++) {
 					if (checkbox.form.elements[currentIndex].type == "checkbox" && !checkbox.form.elements[currentIndex].disabled) {
-						checkbox.form.elements[currentIndex].checked = checkbox.checked;
-						ckChangeEvnt(null,checkbox.form.elements[currentIndex]);
+						if (!checkbox._inColumn || checkbox._inColumn == check_column(checkbox.form.elements[currentIndex])) {
+							checkbox.form.elements[currentIndex].checked = checkbox.checked;
+							ckChangeEvnt(null,checkbox.form.elements[currentIndex]);
+						}
 					}
 				}
 
