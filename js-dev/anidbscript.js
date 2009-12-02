@@ -352,7 +352,7 @@ function enhanceCheckboxes(parent) {
 
 				// Check for multicolumn environment
 				var check_column = function(node) {
-					var classes = checkbox.className.split(" ");
+					var classes = node.className.split(" ");
 					for (i in classes) {
 						var t = /^column(\d+)$/.exec(classes[i]);
 						if (t != null) {
