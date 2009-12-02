@@ -1,0 +1,8 @@
+Public domain'd in 2009 by Bjørn Hartfelt - hartfelt@mysecondfacetube.dk
+Version 0, 2009-12-02
+
+This template will output a file containing the length of every watched file in
+your mylist, as well as the date you marked the, watched. Included is a small
+python-script (time-wasted.py) that you can use to transform the output to a
+format suitable for plotting with gnuplot, and an even smaller shell-script
+(gnuplot.sh) that, using gnuplot, generates a nice svg-image.
