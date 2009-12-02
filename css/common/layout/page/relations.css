@@ -61,16 +61,16 @@
 #layout-main div.addcreatorsongrel_all div.massadd div.text textarea,
 #layout-main div.addsonganimerel_all div.massadd div.text textarea
 {
-	width: 20em;
-	height: 10em;
+	width:45%;
+	height: 200px;
 }
 
 #layout-main div.addcreatoranimerel_all div.massadd div.source textarea,
-#layout-main div.addcreatorsongrel_all div.massadd div.source textarea.text,
-#layout-main div.addsonganimerel_all div.massadd div.source textarea.text
+#layout-main div.addcreatorsongrel_all div.massadd div.source textarea,
+#layout-main div.addsonganimerel_all div.massadd div.source textarea
 {
-	width:45%;
-	height: 200px;
+	width: 20em;
+	height: 10em;
 }
 
 #layout-main div.addcreatoranimerel_all div.massadd div + div,
