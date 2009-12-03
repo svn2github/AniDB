@@ -2,19 +2,25 @@
 #layout-main tr.g_fs_lame,
 #layout-main input.exclude,
 #layout-main table.filelist tr.invalid,
+#layout-main table.filelist tr.deprecated,
 #layout-main div.myvotes_all table tr td.low,
 #layout-main div.addcreatoranimerel_all tr.left_only,
 #layout-main div.addcreatorsongrel_all tr.left_only,
-#layout-main table.filelist tr.g_odd.deprecated,
 #layout-main div.timeline_all div.timeline ul.row li.stalled a
 {
 	background-color:#564444;
 }
 
 #layout-main div.myvotes_all table tr.g_odd td.low,
-#layout-main div.addcreatoranimerel_all tr.right_only,
-#layout-main div.addcreatorsongrel_all tr.right_only,
+#layout-main table.filelist tr.g_odd.deprecated,
+#layout-main table.filelist tr.g_odd.invalid,
 #layout-main div.timeline_all div.timeline ul.row.g_odd li.stalled a
+{
+	background-color: #776161;
+}
+
+#layout-main div.addcreatoranimerel_all tr.right_only,
+#layout-main div.addcreatorsongrel_all tr.right_only
 {
 	background-color: #efc7b2;
 }
