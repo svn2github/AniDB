@@ -121,7 +121,7 @@
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.set
 {
-	min-width:15em;
+	min-width:5em;
 }
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.name
@@ -131,7 +131,7 @@
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.anisonurl
 {
-	width:15em;
+	min-width:15em;
 }
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs td input[type="text"]
