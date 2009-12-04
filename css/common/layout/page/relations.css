@@ -124,11 +124,7 @@
 	min-width:5em;
 }
 
-#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.name
-{
-	width:20%;
-}
-
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs th.name,
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.anisonurl
 {
 	min-width:15em;
