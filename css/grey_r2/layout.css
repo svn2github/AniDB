@@ -470,8 +470,8 @@ margin:0 1em;
 #layout-main div.main_all div.rightbar li span
 {
 position:absolute;
-text-align: right;
-width: 3em;
+text-align:right;
+width:3em;
 }
 #layout-main div.main_all div.rightbar li a
 {
@@ -480,13 +480,5 @@ margin-left:3.5em;
 }
 #layout-main div.forum div.body dl.codebox
 {
-margin:0.5em 0 0 0.5em;
-}
-#layout-main div.forum div.body dl.codebox dt
-{
-display:none;
-}
-#layout-main div.forum div.body dl.codebox dd
-{
-margin-left:0;
+margin:0.5em 12em 0 0.5em;
 }
