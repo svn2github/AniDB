@@ -19,22 +19,22 @@ for line in sys.stdin.readlines():
 			state = 2
 	elif state == 2:
 		#looking for date
-		if line.strip() != '':
-			if line.strip() == '-':
-				viewdate = 1;
+		l = line.strip()
+		if l != '':
+			if l == '-':
+				# unwatched...
+				state = 1
 			else:
-				l = line.strip()
 				# dates are returned as 23.09.2007 23:22
 				viewdate = date(
 					int(l[6:10]),
 					int(l[3:5]),
 					int(l[0:2])
 				).toordinal()
-			state = 3
+				state = 3
 	elif state == 3:
 		#looking for length
 		if line.strip() != '':
-			# make some damned sparce arrays already -_-
 			while len(stats) <= viewdate:
 				stats.append(0)
 			
