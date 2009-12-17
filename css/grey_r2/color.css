@@ -385,3 +385,11 @@ margin:auto;
 max-height:none;
 overflow:visible;
 }
+#layout-content div.mylist_list table.animelist tr.watching td
+{
+background-image:url(images/orangepixels.png);
+}
+#layout-content div.mylist_list table.animelist tr.watching:hover td
+{
+background-image:url(images/orangepixels.png), url(../grey/images/whitepixel.png);
+}
