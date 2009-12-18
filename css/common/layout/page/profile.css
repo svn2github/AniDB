@@ -153,3 +153,13 @@
 	display: block;
 	white-space:normal;
 }
+
+#layout-main div.profile_all  div.pane > ul li
+{
+	line-height: 15px;
+}
+
+#layout-main div.profile_all  div.pane > ul li a.i_inline
+{
+	padding:4px 8px 0 7px;
+}
