@@ -844,3 +844,10 @@ div.quotebody div.quote div.quotebody
 {
 	padding-left:1em;
 }
+
+#layout-main div.cmt_entries dl.profile div.split
+{
+	float:right;
+	margin-right:0.5em;
+	margin-top:0.5em;
+}
