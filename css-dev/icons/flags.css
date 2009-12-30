@@ -457,6 +457,10 @@
 {
 	background-image: url(../icons/flags/anidb_audio_japanese-transcription.gif);
 }
+*.i_audio_x-kot
+{
+	background-image: url(../icons/flags/anidb_audio_korean-transcription.gif);
+}
 
 *.i_sub_x-jat
 {
