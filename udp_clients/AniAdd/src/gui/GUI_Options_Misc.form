@@ -22,6 +22,7 @@
                   <Component id="chck_ShowFileInfoPane" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="chck_DeleteEmptyFolder" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="chck_RenameRelatedFiles" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="chck_OverwriteMLEntries" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
@@ -37,6 +38,8 @@
               <Component id="chck_DeleteEmptyFolder" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chck_RenameRelatedFiles" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chck_OverwriteMLEntries" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,6 +75,15 @@
     <Component class="javax.swing.JCheckBox" name="chck_RenameRelatedFiles">
       <Properties>
         <Property name="text" type="java.lang.String" value="Rename related files (e.g. external subtitles)"/>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chck_OverwriteMLEntries">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Overwrite existing MyList Entries"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <AuxValues>

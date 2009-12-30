@@ -7,6 +7,7 @@ import aniAdd.Modules.IModule.eModState;
 import aniAdd.misc.Misc;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -230,7 +231,10 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         return (long)Math.max(etaFile, etaCmd);
     }
 
-    
+
+    private void RemoveFiles(){
+        epProc.delFiles(tbl_Files.getSelectedRows());
+    }
     private void ClearFiles(){
         epProc.ClearFiles();
     }
@@ -387,11 +391,11 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             gui.LogEvent(ComEvent.eType.Debug, "Starting progress updater");
             while((epProc.isProcessing() || api.waitingCmdCount()!=0) && gui.ModState() != eModState.Terminating){
                 do {
-                    try {Thread.sleep(100);} catch (InterruptedException ex) {}
+                    try {Thread.sleep(20);} catch (InterruptedException ex) {}
                 } while (epProc.isPaused() && gui.ModState() != eModState.Terminating);
 
                 if(gui.ModState() != eModState.Terminating){
-                    try { SwingUtilities.invokeAndWait(new Runnable() {
+                    try { SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
                             UpdateProgressBars();
                             UpdateStatusLabels();
@@ -463,6 +467,11 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 
             }
         ));
+        tbl_Files.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbl_FilesKeyPressed(evt);
+            }
+        });
         scr_tbl_Files.setViewportView(tbl_Files);
 
         javax.swing.GroupLayout pnl_FileAdd_LstvwLayout = new javax.swing.GroupLayout(pnl_FileAdd_Lstvw);
@@ -473,7 +482,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         );
         pnl_FileAdd_LstvwLayout.setVerticalGroup(
             pnl_FileAdd_LstvwLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
         );
 
         spnl_FileAdd.setLeftComponent(pnl_FileAdd_Lstvw);
@@ -576,7 +585,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         txt_Source.setColumns(8);
         txt_Source.setLineWrap(true);
         txt_Source.setRows(3);
-        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10));
         txt_Source.setTextHint("Source");
         txt_Source.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -588,7 +597,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         txt_Storage.setColumns(8);
         txt_Storage.setLineWrap(true);
         txt_Storage.setRows(3);
-        txt_Storage.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txt_Storage.setFont(new java.awt.Font("Tahoma", 0, 10));
         txt_Storage.setTextHint("Storage");
         txt_Storage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -600,7 +609,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         txt_Other.setColumns(8);
         txt_Other.setLineWrap(true);
         txt_Other.setRows(3);
-        txt_Other.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txt_Other.setFont(new java.awt.Font("Tahoma", 0, 10));
         txt_Other.setTextHint("Other");
         txt_Other.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -763,9 +772,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -825,6 +834,12 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         gui.ToMem("OtherText",txt_Other.getText());
         ToggleEditBox(2,txt_Other.getText());
     }//GEN-LAST:event_txt_OtherKeyReleased
+
+    private void tbl_FilesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_FilesKeyPressed
+        if(btn_Start.getText().equals("Start") || true){
+            if(evt.getKeyCode() == KeyEvent.VK_DELETE) RemoveFiles();
+        }
+    }//GEN-LAST:event_tbl_FilesKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

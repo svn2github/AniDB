@@ -61,8 +61,8 @@ public class Main {
         GUI gui = (GUI) aniAdd.GetModule("MainGUI");
         Mod_UdpApi api = (Mod_UdpApi) aniAdd.GetModule("UdpApi");
 
-        username = JOptionPane.showInputDialog(frm, "User", "");//"dvdkhl");
-        password = JOptionPane.showInputDialog(frm, "Password", "");//"Perpetuity");
+        username = JOptionPane.showInputDialog(frm, "User", "");
+        password = JOptionPane.showInputDialog(frm, "Password", "");
         api.setPassword(password);
         api.setAniDBSession(session);
         api.setUsername(username);

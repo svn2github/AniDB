@@ -20,6 +20,7 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
         chck_ShowEditboxes.setSelected((Boolean) gui.FromMem("ShowSrcStrOtEditBoxes", false));
         chck_DeleteEmptyFolder.setSelected((Boolean) gui.FromMem("DeleteEmptyFolder", false));
         chck_RenameRelatedFiles.setSelected((Boolean) gui.FromMem("RenameRelatedFiles", false));
+        chck_OverwriteMLEntries.setSelected((Boolean) gui.FromMem("OverwriteMLEntries", true));
         chck_ShowFileInfoPane.setVisible(false);
 
         initEventHandler();
@@ -47,6 +48,11 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
                 gui.ToMem("RenameRelatedFiles", chck_RenameRelatedFiles.isSelected());
             }
         });
+        chck_OverwriteMLEntries.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                gui.ToMem("OverwriteMLEntries", chck_RenameRelatedFiles.isSelected());
+            }
+        });
         
     }
 
@@ -58,6 +64,7 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
         chck_ShowEditboxes = new javax.swing.JCheckBox();
         chck_DeleteEmptyFolder = new javax.swing.JCheckBox();
         chck_RenameRelatedFiles = new javax.swing.JCheckBox();
+        chck_OverwriteMLEntries = new javax.swing.JCheckBox();
 
         chck_ShowFileInfoPane.setLabel("Show Fileinfo Pane");
         chck_ShowFileInfoPane.setOpaque(false);
@@ -71,6 +78,9 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
         chck_RenameRelatedFiles.setText("Rename related files (e.g. external subtitles)");
         chck_RenameRelatedFiles.setOpaque(false);
 
+        chck_OverwriteMLEntries.setText("Overwrite existing MyList Entries");
+        chck_OverwriteMLEntries.setOpaque(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,7 +90,8 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
                     .addComponent(chck_ShowEditboxes)
                     .addComponent(chck_ShowFileInfoPane)
                     .addComponent(chck_DeleteEmptyFolder)
-                    .addComponent(chck_RenameRelatedFiles))
+                    .addComponent(chck_RenameRelatedFiles)
+                    .addComponent(chck_OverwriteMLEntries))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
@@ -92,12 +103,15 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chck_DeleteEmptyFolder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chck_RenameRelatedFiles))
+                .addComponent(chck_RenameRelatedFiles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chck_OverwriteMLEntries))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JCheckBox chck_DeleteEmptyFolder;
+    protected javax.swing.JCheckBox chck_OverwriteMLEntries;
     protected javax.swing.JCheckBox chck_RenameRelatedFiles;
     protected javax.swing.JCheckBox chck_ShowEditboxes;
     protected javax.swing.JCheckBox chck_ShowFileInfoPane;

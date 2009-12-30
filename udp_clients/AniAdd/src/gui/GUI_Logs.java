@@ -136,7 +136,7 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
 
             nodeText = Misc.DateToString(query.getSendOn()) + " Send: " + query.getCmd().Action() + " ";
             for (Map.Entry<String, String> entrySet : query.getCmd().Params().entrySet()) {
-                nodeText += entrySet.getKey() + "=" + (entrySet.getKey().equals("pass") ? "***" : entrySet.getValue()) + " ";
+                nodeText += entrySet.getKey() + "=" + ((entrySet.getKey().equals("pass") || entrySet.getKey().equals("sess") || entrySet.getKey().equals("autopass")) ? "***" : entrySet.getValue()) + " ";
             }
             node.add(new TreeNode(nodeText, ""));
 

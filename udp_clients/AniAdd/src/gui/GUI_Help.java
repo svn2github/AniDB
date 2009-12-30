@@ -50,7 +50,7 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
 
         btn_ResetSettings.setText("Reset Settings to Default");
 
-        jLabel1.setText("Current Build: 18.10.09");
+        jLabel1.setText("Current Build: 30.12.09");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

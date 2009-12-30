@@ -18,6 +18,8 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         this.gui = gui;
 
         chck_EnableFileMoving.setSelected((Boolean)gui.FromMem("EnableFileMove", false));
+        ptn_UseAniDBFN.setSelected((Boolean)gui.FromMem("RenameTypeAniDBFileName", true));
+        ptn_UseTaggingSystemFile.setSelected(!(Boolean)gui.FromMem("RenameTypeAniDBFileName", true));
 
         ptn_MoveToFolder.setSelected((Boolean)gui.FromMem("MoveTypeUseFolder", true));
         ptn_UseTaggingSystemFolder.setSelected(!(Boolean)gui.FromMem("MoveTypeUseFolder", true));
@@ -34,15 +36,18 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
 
     public void ToggleFileMoving(){
         boolean movingEnabled = chck_EnableFileMoving.isSelected();
-        boolean folderUseTagSystem = ptn_UseTaggingSystemFolder.isSelected();
+        boolean folderUseTagSystem = !ptn_MoveToFolder.isSelected();
+
 
         ptn_MoveToFolder.setEnabled(movingEnabled);
         ptn_UseTaggingSystemFolder.setEnabled(movingEnabled);
         txt_MoveToFolder.setEnabled(movingEnabled && !folderUseTagSystem);
         chck_AppendAnimeTitle.setEnabled(movingEnabled && !folderUseTagSystem);
+        btn_ChooseDestFolder.setEnabled(movingEnabled && !folderUseTagSystem);
         cmb_AnimeTitleType.setEnabled(movingEnabled && !folderUseTagSystem && chck_AppendAnimeTitle.isSelected());
+        
         lbl_DestFolder.setEnabled(movingEnabled && !folderUseTagSystem);
-        btn_EditTagsystem.setEnabled(folderUseTagSystem || ptn_UseTaggingSystemFile.isSelected());
+        btn_EditTagsystem.setEnabled((folderUseTagSystem && movingEnabled) || !ptn_UseAniDBFN.isSelected());
         
         gui.GUIEvent(new ComEvent(this, ComEvent.eType.Information, "OptionChange", "EnableFileMoving", movingEnabled));
     }
@@ -54,9 +59,22 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
                 ToggleFileMoving();
             }
         });
+        chck_AppendAnimeTitle.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                gui.ToMem("AppendAnimeTitle", chck_AppendAnimeTitle.isSelected());
+                ToggleFileMoving();
+            }
+        });
+        
         ptn_MoveToFolder.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 gui.ToMem("MoveTypeUseFolder", ptn_MoveToFolder.isSelected());
+                ToggleFileMoving();
+            }
+        });
+        ptn_UseAniDBFN.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                gui.ToMem("RenameTypeAniDBFileName", ptn_UseAniDBFN.isSelected());
                 ToggleFileMoving();
             }
         });
@@ -69,12 +87,6 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
             }
         });
 
-        chck_AppendAnimeTitle.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                gui.ToMem("AppendAnimeTitle", chck_AppendAnimeTitle.isSelected());
-                ToggleFileMoving();
-            }
-        });
 
         cmb_AnimeTitleType.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -82,12 +94,6 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
             }
         });
 
-        ptn_UseAniDBFN.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                gui.ToMem("RenameTypeAniDBFileName", ptn_UseAniDBFN.isSelected());
-                ToggleFileMoving();
-            }
-        });
 
         btn_EditTagsystem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +162,7 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         lbl_DestFolder.setEnabled(false);
 
         btn_ChooseDestFolder.setText("...");
+        btn_ChooseDestFolder.setEnabled(false);
         btn_ChooseDestFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ChooseDestFolderActionPerformed(evt);
@@ -280,7 +287,10 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         FC.setMultiSelectionEnabled(false);
 
         if (FC.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
-            txt_MoveToFolder.setText(FC.getSelectedFile().getPath());
+            File f = FC.getSelectedFile();
+            txt_MoveToFolder.setText(f.getPath());
+            txt_MoveToFolder.setBackground(f.isAbsolute()?Color.GREEN:Color.RED);
+            gui.ToMem("MoveToFolder", txt_MoveToFolder.getText());
         }
     }//GEN-LAST:event_btn_ChooseDestFolderActionPerformed
 

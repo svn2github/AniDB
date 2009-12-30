@@ -94,26 +94,28 @@ public class Mod_EpProcessing implements IModule {
         FileInfo procFile = files.get("Id", fileParser.Tag());
 
 
-        //System.out.println("Cont Processing: " + id);
+        if (procFile != null) {
+            //System.out.println("Cont Processing: " + id);
 
-        procFile.Data().put("Ed2k", fileParser.Hash());
-        procFile.ActionsDone().add(eAction.Process);
-        procFile.ActionsTodo().remove(eAction.Process);
+            procFile.Data().put("Ed2k", fileParser.Hash());
+            procFile.ActionsDone().add(eAction.Process);
+            procFile.ActionsTodo().remove(eAction.Process);
 
-        Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.ParsingDone, procFile.Id(), fileParser);
+            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.ParsingDone, procFile.Id(), fileParser);
 
-        boolean sendML = procFile.ActionsTodo().contains(eAction.MyListCmd);
-        boolean sendFile = procFile.ActionsTodo().contains(eAction.FileCmd);
+            boolean sendML = procFile.ActionsTodo().contains(eAction.MyListCmd);
+            boolean sendFile = procFile.ActionsTodo().contains(eAction.FileCmd);
 
 
-        if (sendFile) {
-            requestDBFileInfo(procFile);
+            if (sendFile) {
+                requestDBFileInfo(procFile);
+            }
+            if (sendML) {
+                requestDBMyList(procFile);
+            }
+
+            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.GetDBInfo, procFile.Id(), sendFile, sendML);
         }
-        if (sendML) {
-            requestDBMyList(procFile);
-        }
-
-        Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.GetDBInfo, procFile.Id(), sendFile, sendML);
 
         if (isProcessing) {
             processEps();
@@ -289,10 +291,14 @@ public class Mod_EpProcessing implements IModule {
 
         } else if (replyId == 310) {
             //File Already Added
-            procFile.ActionsTodo().add(eAction.MyListCmd);
-            Cmd cmd = new Cmd(query.getCmd(), true);
-            cmd.setArgs("edit", "1");
-            api.queryCmd(cmd);
+
+            if ((Boolean) mem.get("GUI_OverwriteMLEntries")) {
+                procFile.ActionsTodo().add(eAction.MyListCmd);
+                Cmd cmd = new Cmd(query.getCmd(), true);
+                cmd.setArgs("edit", "1");
+                api.queryCmd(cmd);
+            }
+
             Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.MLCmd_AlreadyAdded, procFile.Id());
 
         } else {
@@ -473,13 +479,15 @@ public class Mod_EpProcessing implements IModule {
                             String newFn = filename.substring(0, filename.lastIndexOf("."));
                             for (File srcFile : srcFiles) {
                                 relExt = srcFile.getName().substring(oldFilenameWoExt.length());
-                                if(srcFile.renameTo(new File(srcFolder, newFn + relExt))){
+                                if (srcFile.renameTo(new File(srcFolder, newFn + relExt))) {
                                     accumExt += relExt + " ";
                                 } else {
                                     //Todo
                                 }
                             }
-                            if(!accumExt.isEmpty()) Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RelFilesRenamed, procFile.Id(), accumExt);
+                            if (!accumExt.isEmpty()) {
+                                Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RelFilesRenamed, procFile.Id(), accumExt);
+                            }
                         } catch (Exception e) {
                             Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RelFilesRenamingFailed, procFile.Id(), e.getMessage());
                         }
@@ -536,7 +544,7 @@ public class Mod_EpProcessing implements IModule {
 
         tags.put("Watched", procFile.ActionsDone().contains(eAction.Watched) ? "1" : "");
         tags.put("Depr", procFile.Data().get("DB_Deprecated").equals("1") ? "1" : "");
-        tags.put("Cen", ((Integer.valueOf(procFile.Data().get("DB_State")) & 8) != 0 ? "1" : ""));
+        tags.put("Cen", ((Integer.valueOf(procFile.Data().get("DB_State")) & 1 << 7) != 0 ? "1" : ""));
         tags.put("Ver", GetFileVersion(Integer.valueOf(procFile.Data().get("DB_State"))).toString());
 
         String codeStr = (String) mem.get("GUI_TagSystemCode");
@@ -556,8 +564,7 @@ public class Mod_EpProcessing implements IModule {
         return files.get("Id", id);
     }
 
-    public FileInfo index2FileInfo(
-            int index) {
+    public FileInfo index2FileInfo(int index) {
         return files.get("Id", index2Id.get(index));
     }
 
@@ -635,9 +642,11 @@ public class Mod_EpProcessing implements IModule {
         addFiles(lst);
     }
 
-    public void delFile(int index) {
-        files.remove("Id", index2Id.get(index));
-        index2Id.remove(index);
+    public void delFiles(int[] indeces) {
+        for (int i = indeces.length; i > 0; i--) {
+            files.remove("Id", index2Id.get(indeces[i - 1]));
+            index2Id.remove(indeces[i - 1]);
+        }
         Log(ComEvent.eType.Information, eComType.FileCountChanged);
     }
 
