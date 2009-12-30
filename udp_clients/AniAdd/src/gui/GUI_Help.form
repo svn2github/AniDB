@@ -23,7 +23,7 @@
                   <Component id="ctrl_IconHelp" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btn_ResetSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Current Build: 30.12.09"/>
+        <Property name="text" type="java.lang.String" value="Current Build: 30.12.09 b"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

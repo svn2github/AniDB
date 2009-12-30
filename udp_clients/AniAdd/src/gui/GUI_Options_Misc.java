@@ -50,7 +50,7 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
         });
         chck_OverwriteMLEntries.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
-                gui.ToMem("OverwriteMLEntries", chck_RenameRelatedFiles.isSelected());
+                gui.ToMem("OverwriteMLEntries", chck_OverwriteMLEntries.isSelected());
             }
         });
         

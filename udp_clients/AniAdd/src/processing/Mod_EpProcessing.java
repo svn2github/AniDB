@@ -399,15 +399,16 @@ public class Mod_EpProcessing implements IModule {
                     return false;
                 }
 
-                if (!folderObj.isDirectory()) {
-                    folderObj.mkdirs();
-                }
+                if (!folderObj.isDirectory()) folderObj.mkdirs();
+               
             } else {
                 folderObj = procFile.FileObj().getParentFile();
             }
 
             String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
-            if ((Boolean) mem.get("GUI_RenameTypeAniDBFileName")) {
+            if(!(Boolean) mem.get("GUI_EnableFileRenaming")){
+                filename = procFile.FileObj().getName();
+            } else if ((Boolean) mem.get("GUI_RenameTypeAniDBFileName")) {
                 filename = procFile.Data().get("DB_FileName");
             } else {
                 if (ts == null) {

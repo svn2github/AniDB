@@ -287,7 +287,17 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         }
     }
     private void ToggleRenameMove(){
-        chck_RenameMoveFiles.setText(((Boolean)gui.FromMem("EnableFileMove", false))?"Rename/Move File":"Rename File");
+        boolean doRename = (Boolean)gui.FromMem("EnableFileRenaming", true);
+        boolean doMove = (Boolean)gui.FromMem("EnableFileMove", false);
+
+        if(!(doMove || doRename)){
+            chck_RenameMoveFiles.setVisible(false);
+            chck_RenameMoveFiles.setSelected(false);
+            ToggleFileRename(false);
+        } else {
+            chck_RenameMoveFiles.setVisible(true);
+            chck_RenameMoveFiles.setText((doRename?"Rename":"") + (doRename&&doMove?"/":"") + (doMove?"Move":"") + " File");
+        }
     }
 
 

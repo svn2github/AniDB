@@ -51,7 +51,7 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
 
         btn_ResetSettings.setText("Reset Settings to Default");
 
-        jLabel1.setText("Current Build: 30.12.09");
+        jLabel1.setText("Current Build: 30.12.09 b");
 
         jLabel2.setText("Use the DEL Key to remove selected files from the file table");
 
@@ -66,7 +66,7 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(ctrl_IconHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_ResetSettings)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addComponent(jLabel1))
                     .addComponent(jLabel2)))
         );

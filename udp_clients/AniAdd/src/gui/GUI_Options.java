@@ -31,6 +31,7 @@ public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
         gUI_Options_RenameMove1.ptn_UseTaggingSystemFolder.setVisible(advanced);
         gUI_Options_RenameMove1.lbl_Renaming.setVisible(advanced);
         gUI_Options_RenameMove1.btn_EditTagsystem.setVisible(advanced);
+        gUI_Options_RenameMove1.chck_EnableFileRenaming.setVisible(advanced);
         gUI_Options_Misc1.setVisible(advanced);
 
         if(!advanced){
@@ -40,6 +41,7 @@ public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
             
             gUI_Options_RenameMove1.ptn_MoveToFolder.setSelected(true);
             gUI_Options_RenameMove1.ptn_UseAniDBFN.setSelected(true);
+            gUI_Options_RenameMove1.chck_EnableFileRenaming.setSelected(true);
             gUI_Options_RenameMove1.chck_EnableFileMoving.setSelected(false);
         }
         gUI_Options_RenameMove1.ToggleFileMoving();
