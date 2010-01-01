@@ -516,7 +516,6 @@ padding-bottom: 1px;
 {
 list-style: none;
 margin-top: 0px;
-height: 1em;
 }
 #layout-menu div.menu li.calendar, #layout-menu div.menu li.ed2kdump, #layout-menu div.menu li.genre
 {
@@ -544,12 +543,8 @@ display: block;
 {
 display: inline;
 }
-#layout-menu #newnews:before,
-#layout-menu #newnews:after,
-#layout-menu #newmessages:before,
-#layout-menu #newnotifies:before,
-#layout-menu #newmessages:after,
-#layout-menu a.history:after
+#menu-account li.alert > span > a:first-child:before,
+#menu-account li.alert > span > a:first-child:after
 {
 content: "!";
 font-weight: bold;
@@ -633,11 +628,11 @@ padding-top: 1.1em;
 {
 color: white;
 }
-#layout-nav li li:hover a
+ul#layout-menu li ul li:hover a:first-child
 {
 color: #ff6000;
 cursor: default;
-display:block;
+display: block;
 background-image: url(images/whitepixel.png);
 }
 #layout-content div.section
@@ -2020,11 +2015,10 @@ ul#layout-menu li:hover ul {
 display: block;
 position: absolute;
 background-image: url(images/bg_2.gif);
-padding-top: 0px;
-padding-right: 6px;
-padding-bottom: 6px;
-padding-left: 6px;
-margin-left: -6px;
+padding-top: 4px;
+padding-right: 2px;
+padding-bottom: 1px;
+padding-left: 2px;
 margin-top: 0px;
 }
 ul#layout-menu li ul li{
@@ -2665,4 +2659,8 @@ clear: left;
 #layout-main div.userpage_all div.forum
 {
 margin-right: 12em;
+}
+ul#layout-menu li ul li:hover a#newnotifies:first-child, li:hover #newnotifies + a.history, li:hover #newnotifies + a.history + a.nextnotify
+{
+display: inline-block;
 }

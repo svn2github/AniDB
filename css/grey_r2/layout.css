@@ -144,10 +144,14 @@ cursor:default;
 list-style:none;
 margin-left:-0.3em;
 }
-#layout-menu ul li a,
+#layout-menu ul li a:only-of-type,
 #layout-main div.blog div.body
 {
 display:block;
+padding:0 0.3em 0 0.3em;
+}
+#layout-menu ul li a
+{
 padding:0 0.3em 0 0.3em;
 }
 #layout-menu > li
@@ -172,12 +176,8 @@ display:block;
 {
 display:inline;
 }
-#layout-menu #newnews:before,
-#layout-menu #newnews:after,
-#layout-menu #newmessages:before,
-#layout-menu #newnotifies:before,
-#layout-menu #newmessages:after,
-#layout-menu a.history:after
+#menu-account li.alert > span > a:first-of-type:before,
+#menu-account li.alert > span > a:first-of-type:after
 {
 content:"!";
 font-weight:bold;
@@ -274,7 +274,7 @@ ul#layout-menu li:hover ul {
 display:block;
 position:absolute;
 }
-ul#layout-menu li ul li{
+ul#layout-menu li ul li {
 float:none;
 display:block;
 line-height:normal;

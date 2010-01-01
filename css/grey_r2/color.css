@@ -171,7 +171,8 @@ color:white;
 {
 border-top-color:#121212;
 }
-#layout-search form input.text
+#layout-search form input.text,
+#layout-nav li li:hover
 {
 background-color:hsla(0, 100%, 100%, 0.2);
 }
@@ -345,7 +346,6 @@ border-bottom:2px solid #008800;
 #layout-nav li li:hover a
 {
 color:#ff6000;
-background-image:url(../grey/images/whitepixel.png);
 }
 div.spoiler,
 #layout-main div.cmt_entries dl.profile,
