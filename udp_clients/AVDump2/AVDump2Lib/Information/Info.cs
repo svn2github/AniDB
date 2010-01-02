@@ -76,17 +76,18 @@ namespace AVDump2Lib.Information {
 				AppendLeaf(xmlDoc, subNode, "chroma", mediaInfo.Get(eStreamKind.Video, i, "Colorimetry"), null);
 				AppendLeaf(xmlDoc, subNode, "structure", mediaInfo.Get(eStreamKind.Video, i, "Interlacement"), null);
 
-				AppendLeaf(xmlDoc, subNode, "res_p", null, new String[,] { { "Width", mediaInfo.Get(eStreamKind.Video, i, "Width") },
-				                                                           { "Height", mediaInfo.Get(eStreamKind.Video, i, "Height") }});
+				AppendLeaf(xmlDoc, subNode, "res_p", null, new String[,] { { "width", mediaInfo.Get(eStreamKind.Video, i, "Width") },
+				                                                           { "height", mediaInfo.Get(eStreamKind.Video, i, "Height") }});
 
+				//AppendLeaf(xmlDoc, subNode, "dar", mediaInfo.Get(eStreamKind.Video, i, "DisplayAspectRatio"), null);
 				string res_d = mediaInfo.Get(eStreamKind.Video, i, "DisplayAspectRatio/String");
 				if(res_d.Contains(":")) {
 					string x, y;
 					x = res_d.Split(':')[0];
 					y = res_d.Split(':')[1];
 
-					AppendLeaf(xmlDoc, subNode, "res_d", null, new String[,] { { "Width", x.ToString() },
-				                                                               { "Height", y.ToString() }});
+					AppendLeaf(xmlDoc, subNode, "dar", null, new String[,] { { "width", x.ToString() },
+				                                                               { "height", y.ToString() }});
 				}
 			}
 
