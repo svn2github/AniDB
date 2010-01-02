@@ -26,26 +26,26 @@ namespace AVDump2Lib.Hashing.Tools {
 		private IRefillBuffer<byte[]> b;
 		private HashAlgorithm h;
 		private Thread t;
-		private object tag;
+		private string name;
 
 		public event EventHandler HashingDone;
 		private bool hasFinished;
 		private int consumerId;
 		private long processedBytes;
 
-		public HashExecute(HashAlgorithm h, int consumerId, object tag) {
+		public HashExecute(HashAlgorithm h, int consumerId, string name) {
 			this.h = h;
 			this.consumerId = consumerId;
 
 			t = new Thread(new ThreadStart(DoWork));
 			t.Name = h.ToString();
-			this.tag = tag;
+			this.name = name;
 		}
 
 		public HashAlgorithm HashObj { get { if(hasFinished) return h; else throw new Exception("Hashing has not finished"); } }
 		public long ProcessedBytes { get { return processedBytes; } }
 		public bool HasFinished { get { return hasFinished; } }
-		public object Tag { get { return tag; } }
+		public string Name { get { return name; } }
 
 		public void Start(IRefillBuffer<byte[]> b) {
 			this.b = b;

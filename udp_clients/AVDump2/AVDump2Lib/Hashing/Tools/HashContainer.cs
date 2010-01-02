@@ -31,23 +31,12 @@ namespace AVDump2Lib.Hashing.Tools {
 			hashExecutes = new List<HashExecute>();
 		}
 
-		public int AddHashAlgorithm(HashAlgorithm hashAlgorithm, string tag) {
+		public int AddHashAlgorithm(HashAlgorithm hashAlgorithm, string name) {
 			hashAlgorithm.Initialize();
-			HashExecute hashExecute = new HashExecute(hashAlgorithm, hashExecutes.Count, tag);
+			HashExecute hashExecute = new HashExecute(hashAlgorithm, hashExecutes.Count, name);
 			hashExecutes.Add(hashExecute);
 			return hashExecutes.Count - 1;
 		}
-
-		public HashExecute this[int id] { get { return hashExecutes[id]; } }
-		public HashExecute this[string tag] {
-			get {
-				foreach(HashExecute hashExecute in hashExecutes) {
-					if(hashExecute.Tag.Equals(tag)) return hashExecute;
-				}
-				return null;
-			}
-		}
-		public int Count { get { return hashExecutes.Count; } }
 
 		public HashingProgress Start(int blockCount, Stream source, int blockSize) {
 			ByteStreamToBlock blockSource = new ByteStreamToBlock(source, blockSize);
@@ -59,7 +48,10 @@ namespace AVDump2Lib.Hashing.Tools {
 
 			return new HashingProgress(this);
 		}
-		public void Join() { for(int i = 0;i < hashExecutes.Count;i++) hashExecutes[i].Join(); }
+		public List<HashExecute> Join() {
+			for(int i = 0;i < hashExecutes.Count;i++) hashExecutes[i].Join();
+			return hashExecutes;
+		}
 
 		public bool HasFinished {
 			get {
@@ -71,10 +63,10 @@ namespace AVDump2Lib.Hashing.Tools {
 		public class HashingProgress {
 			private HashContainer hashContainer;
 			private Stream source;
-			private DateTime StartTime;
+			private DateTime startTime;
 
 			public HashingProgress(HashContainer hashContainer) {
-				StartTime = DateTime.Now;
+				startTime = DateTime.Now;
 
 				this.hashContainer = hashContainer;
 				source = ((ByteStreamToBlock)hashContainer.b.BlockSource).Source;
@@ -82,18 +74,18 @@ namespace AVDump2Lib.Hashing.Tools {
 
 			public long StreamSize { get { return source.Length; } }
 			public long StreamPosition { get { return source.Position; } }
-			public long ProcessedBytes(int hashObjId) { return hashContainer[hashObjId].ProcessedBytes; }
+			public long ProcessedBytes(int index) { return hashContainer.hashExecutes[index].ProcessedBytes; }
 			public int BufferLength { get { return (int)hashContainer.b.BaseStream.BlockCount; } }
 			public int BlockSize { get { return ((ByteStreamToBlock)hashContainer.b.BlockSource).BlockSize; } }
 			public ulong BlockCount(int hashObjId) { return hashContainer.b.Count(hashObjId); }
 
-			public object HashObjTag(int hashObjId) { return hashContainer.hashExecutes[hashObjId].Tag; }
+			public string HashObjName(int index) { return hashContainer.hashExecutes[index].Name; }
 
 			public int HashObjCount { get { return hashContainer.hashExecutes.Count; } }
 
-			public TimeSpan TimeElapsed { get { return DateTime.Now - StartTime; } }
+			public TimeSpan TimeElapsed { get { return DateTime.Now - startTime; } }
 
-			public void Join() { hashContainer.Join(); }
+			/*public void Join() { hashContainer.Join(); }*/
 			public bool HasFinished { get { return hashContainer.HasFinished; } }
 		}
 	}

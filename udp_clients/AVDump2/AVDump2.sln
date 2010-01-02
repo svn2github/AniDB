@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVDump2Lib", "AVDump2Lib\AVDump2Lib.csproj", "{C827397B-B9F8-4741-B1BB-FC0A17E39550}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVDump2CL", "AVDumpCL\AVDump2CL.csproj", "{4CD2803E-BEFE-44A8-B4EF-3DA5A0588581}"

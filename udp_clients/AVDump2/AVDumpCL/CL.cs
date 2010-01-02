@@ -28,6 +28,7 @@ using AVDump2Lib.Information;
 using AVDump2Lib.Hashing.Algorithms;
 using AVDump2Lib.Hashing.Tools;
 using System.Xml;
+using System.Linq;
 
 
 namespace AVDump2CL {
@@ -62,11 +63,11 @@ namespace AVDump2CL {
 			dumpableExtensions = new List<String>(new string[] { "avi", "mpg", "mpeg", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv", "ts", "ogv", "7z", "asf", "mp3", "aac", "ac3", "dts", "wav" });
 			dumpableExtensions.Sort();
 
-			processExtensions = new List<string>(new string[] { "avi", "ssa", "mkv", "ogm", "mp4", "mov", "mpg", "mpeg", "rm", "srt", "vob", "wmv", "asf", "qt" });
+			processExtensions = new List<string>(new string[] { "avi", "ssa", "mkv", "ogm", "mp4", "mov", "mpg", "mpeg", "rm", "srt", "vob", "wmv", "asf", "qt", "flv" });
 			processExtensions.Sort();
 
 			char2SwitchEnum = new Dictionary<char, eSwitches>();
-			char2SwitchEnum['y'] = eSwitches.CreqCmlFormat; //Done
+			char2SwitchEnum['y'] = eSwitches.CreqXmlFormat; //Done
 			char2SwitchEnum['M'] = eSwitches.MediaInfoOutPut; //Done
 
 			char2SwitchEnum['c'] = eSwitches.ExcludeSubFolders; //Done
@@ -141,7 +142,7 @@ namespace AVDump2CL {
 		private static void ProcessMediaFile(string filePath) {
 			bool error = false;
 			string fileExt = System.IO.Path.GetExtension(filePath).Substring(1);
-			if(doneListContent.Contains(filePath) || processExtensions.BinarySearch(fileExt) < 0 ) return;
+			if(doneListContent.Contains(filePath) || processExtensions.BinarySearch(fileExt) < 0) return;
 
 			Stream stream = System.IO.File.OpenRead(filePath);
 			DateTime startTime = DateTime.Now;
@@ -151,35 +152,42 @@ namespace AVDump2CL {
 
 				if((switches & (eSwitches.Crc32)) != 0) hashContainer.AddHashAlgorithm(new Crc32(), "CRC32");
 				if((switches & (eSwitches.Ed2k)) != 0) hashContainer.AddHashAlgorithm(new Ed2k(), "ED2K");
-				if((switches & (eSwitches.Tth)) != 0) hashContainer.AddHashAlgorithm(new Tiger(), "TTH");
-				if((switches & (eSwitches.Aich)) != 0) hashContainer.AddHashAlgorithm(new Aich(), "AICH");
+				//if((switches & (eSwitches.Tth)) != 0) hashContainer.AddHashAlgorithm(new Tiger(), "TTH");
+				//if((switches & (eSwitches.Aich)) != 0) hashContainer.AddHashAlgorithm(new Aich(), "AICH");
 				if((switches & (eSwitches.Md5)) != 0) hashContainer.AddHashAlgorithm(new System.Security.Cryptography.MD5CryptoServiceProvider(), "MD5");
 				if((switches & (eSwitches.Sha1)) != 0) hashContainer.AddHashAlgorithm(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "SHA1");
 
 				HashContainer.HashingProgress progress = hashContainer.Start(blockCount, stream, blockSize * 1024);
 				if((switches & eSwitches.SupressProgress) == 0) DisplayHashBuffer(progress);
 			}
+			List<HashExecute> hashExecutes = hashContainer.Join();
 
 			if((switches & eSwitches.PrintElapsedHashingTime) != 0) Console.WriteLine("Time elapsed after Hashing: " + (DateTime.Now - startTime).TotalSeconds + "s");
 
-			eLogType logType = ToLogFormatSwitch(switches);
-			for(uint i = 1;i < (1u << 31);i = i << 1) {
-				if(((int)logType & i) != 0) {
-					string info = Info.CreateInfoLog(filePath, (eLogType)((int)logType & i), hashContainer, stream.Length);
-					if(logStream != null) {
-						byte[] infoBytes = System.Text.Encoding.UTF8.GetBytes(info);
-						logStream.Write(infoBytes, 0, infoBytes.Length);
-					}
-				}
+
+			string log = "";
+			if((switches & eSwitches.CreqXmlFormat) != 0) {
+				StringWriter sw = new StringWriter();
+				Info.CreateAVDumpLog(filePath, hashExecutes).Save(sw);
+				log += sw.ToString();
+
+			}
+			if((switches & eSwitches.MediaInfoOutPut) != 0) {
+				log += Info.CreateMediaInfoDump(filePath);
+			}
+
+			if(logStream != null && !String.IsNullOrEmpty(log)) {
+				byte[] infoBytes = System.Text.Encoding.UTF8.GetBytes(log);
+				logStream.Write(infoBytes, 0, infoBytes.Length);
 			}
 
 #if(HasAcreq) //If you get an error below: Scroll to the top of the page and comment #define HasAcreq out
 			if(!(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
-				XmlDocument xmlDoc = new XmlDocument();
-				xmlDoc.LoadXml(Info.CreateInfoLog(filePath, eLogType.AVDump, hashContainer, stream.Length));
+				string creq = Info.CreateAVDumpLog(filePath, hashExecutes).OuterXml;
+				//creq = filePath + "\n" + creq;
 
 				Console.Write("Sending Creq... ");
-				ACreq.eStatus status = ACreq.DoACreq(new ACreq.ClientInfo("avdumplib", 1, port, username, password, xmlDoc), (eSwitches.WaitForDumpReply & switches) != 0);
+				ACreq.eStatus status = ACreq.DoACreq(new ACreq.ClientInfo("avdumplib", 1, port, username, password, creq), (eSwitches.WaitForDumpReply & switches) != 0);
 				switch(status) {
 					case ACreq.eStatus.ACreqSent:
 						Console.WriteLine("Done.");
@@ -200,9 +208,11 @@ namespace AVDump2CL {
 				doneListContent.Add(filePath);
 			}
 
-			if(hashContainer["ED2K"] != null) {
-				byte[] blueEd2kHash = ((Ed2k)hashContainer["ED2K"].HashObj).BlueHash; //Handle Ed2k screwup
-				byte[] redEd2kHash = hashContainer["ED2K"].HashObj.Hash;
+			HashExecute hashExecute = hashExecutes.FirstOrDefault((HashExecute he) => { return he.HashObj is Ed2k; });
+			Ed2k ed2k = (Ed2k)(hashExecute != null ? hashExecute.HashObj : null);
+			if(ed2k != null) {
+				byte[] blueEd2kHash = ed2k.BlueHash; //Handle Ed2k screwup
+				byte[] redEd2kHash = ed2k.Hash;
 
 				if(ed2kListStream != null) {
 					byte[] ed2kBytes = System.Text.Encoding.UTF8.GetBytes(BaseConverter.ToString(redEd2kHash, 16) + (blueEd2kHash != null ? "|" + BaseConverter.ToString(blueEd2kHash, 16) : ""));
@@ -217,15 +227,6 @@ namespace AVDump2CL {
 				Console.WriteLine("Press any key to continue");
 				Console.ReadKey();
 			}
-		}
-
-		private static eLogType ToLogFormatSwitch(eSwitches sw) {
-			eLogType logTypes = 0;
-
-			logTypes |= (eSwitches.MediaInfoOutPut & sw) != 0 ? eLogType.MediaInfo : 0;
-			logTypes |= (eSwitches.CreqCmlFormat & sw) != 0 ? eLogType.AVDump : 0;
-
-			return logTypes;
 		}
 
 		private static void DisplayHashBuffer(HashContainer.HashingProgress progress) {
@@ -253,7 +254,7 @@ namespace AVDump2CL {
 					charCount = bufferSize != 0 ? (int)((bufferSize / (double)blockCount) * 68) : 0;
 					charCount = progress.ProcessedBytes(i) == fileSize ? 0 : charCount;
 
-					Console.Write(progress.HashObjTag(i));
+					Console.Write(progress.HashObjName(i));
 					Console.CursorLeft = 8;
 					Console.WriteLine("[" + "".PadLeft(charCount, '*') + "".PadRight(68 - charCount, ' ') + "]");
 				}
@@ -296,7 +297,7 @@ namespace AVDump2CL {
 							ed2kListStream = System.IO.File.Open(parts[1], FileMode.Append, FileAccess.Write);
 						} catch(Exception) { invalidCl = true; }
 					} else if(parts[0] == "ext") {
-						processExtensions = new List<string>( parts[1].Split(','));
+						processExtensions = new List<string>(parts[1].Split(','));
 					} else if(parts[0] == "log") {
 						try {
 							logStream = System.IO.File.Open(parts[1], FileMode.Append, FileAccess.Write);
@@ -347,7 +348,7 @@ options:    (one letter switches can be put in one string)
    exp     export Ed2k-links to file
    ext     comma separated extension list 
    log     write output to file
-   port    udp Port used by ac (not implemented)
+   port    udp Port used by ac
    done	   save processed-file-paths to file and exclude existing from proc
    tout    timeout: '-tout:<seconds>:<number Of retries>' (not implemented)
    bsize   buffer for hashing: '-bsize:<size in kb (" + blockSize.ToString() + @")>:<num of bufs (" + blockCount.ToString() + @")>'
@@ -385,7 +386,7 @@ press any key to exit";
 		None = 0L,
 
 		//Output
-		CreqCmlFormat = 1L << 3,
+		CreqXmlFormat = 1L << 3,
 		MediaInfoOutPut = 1L << 4,
 
 		//Control
