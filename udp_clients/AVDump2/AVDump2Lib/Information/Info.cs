@@ -39,11 +39,11 @@ namespace AVDump2Lib.Information {
 
 			if(hashExecutes != null) {
 				foreach(HashExecute hashExecute in hashExecutes) {
-					AppendLeaf(xmlDoc, node, hashExecute.Name, BaseConverter.ToString(hashExecute.HashObj.Hash, 16), null);
+					AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower(), BaseConverter.ToString(hashExecute.HashObj.Hash, 16), null);
 
 					if(hashExecute.HashObj is Ed2k) {
 						Ed2k ed2k = (Ed2k)hashExecute.HashObj;
-						if(!ed2k.BlueIsRed()) AppendLeaf(xmlDoc, node, hashExecute.Name, BaseConverter.ToString(ed2k.BlueHash, 16), new String[,] { { "Type", "Blue" } });
+						if(!ed2k.BlueIsRed()) AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower() + "_alt", BaseConverter.ToString(ed2k.BlueHash, 16), null);
 					}
 				}
 			}
