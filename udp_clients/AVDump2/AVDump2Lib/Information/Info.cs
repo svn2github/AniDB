@@ -12,7 +12,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 using System;
 using System.Collections.Generic;
@@ -24,6 +24,7 @@ using System.IO;
 using AVDump2Lib.Hashing.Tools;
 using System.Security.Cryptography;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace AVDump2Lib.Information {
 
@@ -39,11 +40,11 @@ namespace AVDump2Lib.Information {
 
 			if(hashExecutes != null) {
 				foreach(HashExecute hashExecute in hashExecutes) {
-					AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower(), BaseConverter.ToString(hashExecute.HashObj.Hash, 16), null);
+					AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower(), BaseConverter.ToString(hashExecute.HashObj.Hash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse), null);
 
 					if(hashExecute.HashObj is Ed2k) {
 						Ed2k ed2k = (Ed2k)hashExecute.HashObj;
-						if(!ed2k.BlueIsRed()) AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower() + "_alt", BaseConverter.ToString(ed2k.BlueHash, 16), null);
+						if(!ed2k.BlueIsRed()) AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower() + "_alt", BaseConverter.ToString(ed2k.BlueHash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse), null);
 					}
 				}
 			}
@@ -52,35 +53,35 @@ namespace AVDump2Lib.Information {
 			mediaInfo.Open(path);
 
 			node = node.AppendChild(xmlDoc.CreateElement("avmf"));
-			AppendLeaf(xmlDoc, node, "duration", (long.Parse(mediaInfo.Get(eStreamKind.General, 0, "Duration")) / 1000d).ToString(CultureInfo.InvariantCulture), null);
-			AppendLeaf(xmlDoc, node, "extension", mediaInfo.Get(eStreamKind.General, 0, "FileExtension"), null);
+			AppendLeaf(xmlDoc, node, "duration", (long.Parse(mediaInfo.Get(eStreamType.General, 0, "Duration")) / 1000d).ToString(CultureInfo.InvariantCulture), null);
+			AppendLeaf(xmlDoc, node, "extension", mediaInfo.Get(eStreamType.General, 0, "FileExtension"), null);
 			//AppendLeaf(xmlDoc, node, "date", mi.Get(StreamKind.General, 0, ""));
-			AppendLeaf(xmlDoc, node, "chapters", mediaInfo.Get(eStreamKind.General, 0, "ChaptersCount"), null);
-			AppendLeaf(xmlDoc, node, "app", mediaInfo.Get(eStreamKind.General, 0, "Encoded_Application"), null);
-			AppendLeaf(xmlDoc, node, "lib", mediaInfo.Get(eStreamKind.General, 0, "Encoded_Library"), null);
+			AppendLeaf(xmlDoc, node, "chapters", mediaInfo.Get(eStreamType.General, 0, "ChaptersCount"), null);
+			AppendLeaf(xmlDoc, node, "app", mediaInfo.Get(eStreamType.General, 0, "Encoded_Application"), null);
+			AppendLeaf(xmlDoc, node, "lib", mediaInfo.Get(eStreamType.General, 0, "Encoded_Library"), null);
 
-			streamCount = mediaInfo.Count_Get(eStreamKind.Video);
+			streamCount = mediaInfo.Count_Get(eStreamType.Video);
 			for(int i = 0;i < streamCount;i++) {
 				subNode = node.AppendChild(xmlDoc.CreateElement("video"));
-				AppendLeaf(xmlDoc, subNode, "title", mediaInfo.Get(eStreamKind.Video, i, "Title"), null);
-				AppendLeaf(xmlDoc, subNode, "size", mediaInfo.Get(eStreamKind.Video, i, "StreamSize"), null);
-				AppendLeaf(xmlDoc, subNode, "duration", (long.Parse(mediaInfo.Get(eStreamKind.Video, i, "Duration")) / 1000d).ToString(CultureInfo.InvariantCulture), null);
+				AppendLeaf(xmlDoc, subNode, "title", mediaInfo.Get(eStreamType.Video, i, "Title"), null);
+				AppendLeaf(xmlDoc, subNode, "size", mediaInfo.Get(eStreamType.Video, i, "StreamSize"), null);
+				AppendLeaf(xmlDoc, subNode, "duration", (long.Parse(mediaInfo.Get(eStreamType.Video, i, "Duration")) / 1000d).ToString(CultureInfo.InvariantCulture), null);
 				//AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Video, i, ""));
-				AppendLeaf(xmlDoc, subNode, "bitrate", mediaInfo.Get(eStreamKind.Video, i, "BitRate"), null);
-				AppendLeaf(xmlDoc, subNode, "fourcc", mediaInfo.Get(eStreamKind.Video, i, "CodecID"), null); //Codec/CC
-				AppendLeaf(xmlDoc, subNode, "fps", mediaInfo.Get(eStreamKind.Video, i, "FrameRate"), null);
-				AppendLeaf(xmlDoc, subNode, "encoder", mediaInfo.Get(eStreamKind.Video, i, "Encoded_Library"), null);
-				AppendLeaf(xmlDoc, subNode, "setting", mediaInfo.Get(eStreamKind.Video, i, "Encoded_Library_Settings"), null);
+				AppendLeaf(xmlDoc, subNode, "bitrate", mediaInfo.Get(eStreamType.Video, i, "BitRate"), null);
+				AppendLeaf(xmlDoc, subNode, "fourcc", mediaInfo.Get(eStreamType.Video, i, "CodecID"), null); //Codec/CC
+				AppendLeaf(xmlDoc, subNode, "fps", mediaInfo.Get(eStreamType.Video, i, "FrameRate"), null);
+				AppendLeaf(xmlDoc, subNode, "encoder", mediaInfo.Get(eStreamType.Video, i, "Encoded_Library"), null);
+				AppendLeaf(xmlDoc, subNode, "setting", mediaInfo.Get(eStreamType.Video, i, "Encoded_Library_Settings"), null);
 				//AppendLeaf(xmlDoc, subNode, "private", mi.Get(StreamKind.Video, i, ""));
-				AppendLeaf(xmlDoc, subNode, "sample_count", mediaInfo.Get(eStreamKind.Video, i, "FrameCount"), null);
-				AppendLeaf(xmlDoc, subNode, "chroma", mediaInfo.Get(eStreamKind.Video, i, "Colorimetry"), null);
-				AppendLeaf(xmlDoc, subNode, "structure", mediaInfo.Get(eStreamKind.Video, i, "Interlacement"), null);
+				AppendLeaf(xmlDoc, subNode, "sample_count", mediaInfo.Get(eStreamType.Video, i, "FrameCount"), null);
+				AppendLeaf(xmlDoc, subNode, "chroma", mediaInfo.Get(eStreamType.Video, i, "Colorimetry"), null);
+				AppendLeaf(xmlDoc, subNode, "structure", mediaInfo.Get(eStreamType.Video, i, "Interlacement"), null);
 
-				AppendLeaf(xmlDoc, subNode, "res_p", null, new String[,] { { "width", mediaInfo.Get(eStreamKind.Video, i, "Width") },
-				                                                           { "height", mediaInfo.Get(eStreamKind.Video, i, "Height") }});
+				AppendLeaf(xmlDoc, subNode, "res_p", null, new String[,] { { "width", mediaInfo.Get(eStreamType.Video, i, "Width") },
+				                                                           { "height", mediaInfo.Get(eStreamType.Video, i, "Height") }});
 
 				//AppendLeaf(xmlDoc, subNode, "dar", mediaInfo.Get(eStreamKind.Video, i, "DisplayAspectRatio"), null);
-				string res_d = mediaInfo.Get(eStreamKind.Video, i, "DisplayAspectRatio/String");
+				string res_d = mediaInfo.Get(eStreamType.Video, i, "DisplayAspectRatio/String");
 				if(res_d.Contains(":")) {
 					string x, y;
 					x = res_d.Split(':')[0];
@@ -91,30 +92,30 @@ namespace AVDump2Lib.Information {
 				}
 			}
 
-			streamCount = mediaInfo.Count_Get(eStreamKind.Audio);
+			streamCount = mediaInfo.Count_Get(eStreamType.Audio);
 			for(int i = 0;i < streamCount;i++) {
 				subNode = node.AppendChild(xmlDoc.CreateElement("audio"));
-				AppendLeaf(xmlDoc, subNode, "size", mediaInfo.Get(eStreamKind.Audio, i, "StreamSize"), null);
-				AppendLeaf(xmlDoc, subNode, "duration", (long.Parse(mediaInfo.Get(eStreamKind.Audio, i, "Duration")) / 1000d).ToString(CultureInfo.InvariantCulture), null);
-				AppendLeaf(xmlDoc, subNode, "title", mediaInfo.Get(eStreamKind.Audio, i, "Title"), null);
-				AppendLeaf(xmlDoc, subNode, "bitrate", mediaInfo.Get(eStreamKind.Audio, i, "BitRate"), null);
-				AppendLeaf(xmlDoc, subNode, "language", mediaInfo.Get(eStreamKind.Audio, i, "Language"), null);
+				AppendLeaf(xmlDoc, subNode, "size", mediaInfo.Get(eStreamType.Audio, i, "StreamSize"), null);
+				AppendLeaf(xmlDoc, subNode, "duration", (long.Parse(mediaInfo.Get(eStreamType.Audio, i, "Duration")) / 1000d).ToString(CultureInfo.InvariantCulture), null);
+				AppendLeaf(xmlDoc, subNode, "title", mediaInfo.Get(eStreamType.Audio, i, "Title"), null);
+				AppendLeaf(xmlDoc, subNode, "bitrate", mediaInfo.Get(eStreamType.Audio, i, "BitRate"), null);
+				AppendLeaf(xmlDoc, subNode, "language", mediaInfo.Get(eStreamType.Audio, i, "Language"), null);
 				//AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Audio, i, ""));
-				AppendLeaf(xmlDoc, subNode, "twocc", mediaInfo.Get(eStreamKind.Audio, i, "Codec"), null);
-				AppendLeaf(xmlDoc, subNode, "channels", mediaInfo.Get(eStreamKind.Audio, i, "Channel(s)"), null);
-				AppendLeaf(xmlDoc, subNode, "sampling_rate", mediaInfo.Get(eStreamKind.Audio, i, "SamplingRate"), null);
-				AppendLeaf(xmlDoc, subNode, "mode", mediaInfo.Get(eStreamKind.Audio, i, "BitRate_Mode"), null);
-				AppendLeaf(xmlDoc, subNode, "sample_count", mediaInfo.Get(eStreamKind.Audio, i, "SamplingCount"), null);
+				AppendLeaf(xmlDoc, subNode, "twocc", mediaInfo.Get(eStreamType.Audio, i, "Codec"), null);
+				AppendLeaf(xmlDoc, subNode, "channels", mediaInfo.Get(eStreamType.Audio, i, "Channel(s)"), null);
+				AppendLeaf(xmlDoc, subNode, "sampling_rate", mediaInfo.Get(eStreamType.Audio, i, "SamplingRate"), null);
+				AppendLeaf(xmlDoc, subNode, "mode", mediaInfo.Get(eStreamType.Audio, i, "BitRate_Mode"), null);
+				AppendLeaf(xmlDoc, subNode, "sample_count", mediaInfo.Get(eStreamType.Audio, i, "SamplingCount"), null);
 
 			}
 
-			streamCount = mediaInfo.Count_Get(eStreamKind.Text);
+			streamCount = mediaInfo.Count_Get(eStreamType.Text);
 			for(int i = 0;i < streamCount;i++) {
 				subNode = node.AppendChild(xmlDoc.CreateElement("subtitles"));
 				//AppendLeaf(xmlDoc, subNode, "size", mi.Get(StreamKind.Text, i, ""));
-				AppendLeaf(xmlDoc, subNode, "title", mediaInfo.Get(eStreamKind.Text, i, "Title"), null);
-				AppendLeaf(xmlDoc, subNode, "language", mediaInfo.Get(eStreamKind.Text, i, "Language"), null);
-				AppendLeaf(xmlDoc, subNode, "identifier", mediaInfo.Get(eStreamKind.Text, i, "Codec"), null);
+				AppendLeaf(xmlDoc, subNode, "title", mediaInfo.Get(eStreamType.Text, i, "Title"), null);
+				AppendLeaf(xmlDoc, subNode, "language", mediaInfo.Get(eStreamType.Text, i, "Language"), null);
+				AppendLeaf(xmlDoc, subNode, "identifier", mediaInfo.Get(eStreamType.Text, i, "Codec"), null);
 			}
 			mediaInfo.Close();
 
@@ -132,9 +133,72 @@ namespace AVDump2Lib.Information {
 
 			return dump;
 		}
+		public static XmlDocument CreateMediaInfoXMLLog(string filePath, List<HashExecute> hashExecutes) {
+			XmlDocument xmlDoc = new XmlDocument();
+			XmlNode node, subNode;
 
-		private static void AppendLeaf(XmlDocument xmlDoc, XmlNode node, string name, string value, string[,] attributes) {
-			if((attributes == null || attributes.Length == 0) && string.IsNullOrEmpty(value)) return;
+			MediaInfo mediaInfo = CreateMediaInfoInstance();
+			mediaInfo.Open(filePath);
+
+			node = xmlDoc.AppendChild(xmlDoc.CreateElement("File"));
+			subNode = node.AppendChild(xmlDoc.CreateElement("Hashes"));
+			AppendLeaf(xmlDoc, subNode, "Size", (new FileInfo(filePath)).Length.ToString(), null);
+			if(hashExecutes != null) {
+				foreach(HashExecute hashExecute in hashExecutes) {
+					AppendLeaf(xmlDoc, subNode, hashExecute.Name, BaseConverter.ToString(hashExecute.HashObj.Hash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse), null);
+
+					if(hashExecute.HashObj is Ed2k) {
+						Ed2k ed2k = (Ed2k)hashExecute.HashObj;
+						if(!ed2k.BlueIsRed()) AppendLeaf(xmlDoc, subNode, "Ed2k_Alt", BaseConverter.ToString(ed2k.BlueHash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse), null);
+					}
+				}
+			}
+
+			int streamCount, entryCount;
+			string name, text, measure;
+			foreach(eStreamType streamKind in Enum.GetValues(typeof(eStreamType))) {
+				streamCount = mediaInfo.Count_Get(streamKind);
+
+				for(int i = 0;i < streamCount;i++) {
+					entryCount = mediaInfo.Count_Get(streamKind, i);
+					subNode = node.AppendChild(xmlDoc.CreateElement(streamKind.ToString()));
+
+					for(int j = 0;j < entryCount;j++) {
+						name = mediaInfo.Get(streamKind, i, j, eInfoType.Name).Replace("/", "-").Replace("(", "").Replace(")", "");
+						if(name.Equals("Count") || name.Equals("StreamCount") || name.Equals("StreamKind") || name.Equals("Chapters_Pos_End") || name.Equals("Chapters_Pos_Begin") || name.Contains("-String") || name.Equals("StreamKindID")) continue;
+						if(name.Equals("Bits-Pixel*Frame")) name = "BitsPerPixel";
+
+						text = mediaInfo.Get(streamKind, i, j, eInfoType.Text);
+						measure = mediaInfo.Get(streamKind, i, j, eInfoType.Measure).Trim();
+
+						if(name.IndexOfAny(new char[] { ')', ':' }) < 0 && !String.IsNullOrEmpty(text)) {
+							AppendLeaf(xmlDoc, subNode, name, text, String.IsNullOrEmpty(measure) ? null : new string[,] { { "Unit", measure } });
+						} else {
+							Debug.Print(name + " " + text + " " + measure);
+						}
+					}
+					if(streamKind == eStreamType.Menu) {
+						int indexStart;
+						int indexEnd;
+						XmlNode chapterNode;
+
+						if(int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_Begin"), out indexStart) && int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_End"), out indexEnd)) {
+							chapterNode = subNode.AppendChild(xmlDoc.CreateElement("Chapters"));
+							for(;indexStart < indexEnd;indexStart++) {
+								AppendLeaf(xmlDoc, chapterNode, "Chapter", mediaInfo.Get(streamKind, i, indexStart, eInfoType.Text), new string[,] { { "TimeStamp", mediaInfo.Get(streamKind, i, indexStart, eInfoType.Name) } });
+							}
+						}
+					}
+				}
+			}
+
+			mediaInfo.Close();
+
+			return xmlDoc;
+		}
+
+		private static XmlNode AppendLeaf(XmlDocument xmlDoc, XmlNode node, string name, string value, string[,] attributes) {
+			if((attributes == null || attributes.Length == 0) && string.IsNullOrEmpty(value)) return null;
 
 			XmlNode leaf = xmlDoc.CreateElement(name);
 			if(!string.IsNullOrEmpty(value)) leaf.AppendChild(xmlDoc.CreateTextNode(value));
@@ -145,7 +209,7 @@ namespace AVDump2Lib.Information {
 				}
 			}
 
-			node.AppendChild(leaf);
+			return node.AppendChild(leaf);
 		}
 		private static MediaInfo CreateMediaInfoInstance() {
 			MediaInfo mi = new MediaInfo();

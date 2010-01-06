@@ -29,6 +29,7 @@ using AVDump2Lib.Hashing.Algorithms;
 using AVDump2Lib.Hashing.Tools;
 using System.Xml;
 using System.Linq;
+using System.Collections;
 
 
 namespace AVDump2CL {
@@ -44,6 +45,8 @@ namespace AVDump2CL {
 		static Stream logStream;
 		static Stream ed2kListStream;
 		static Stream doneListStream;
+		static Stream hashListStream;
+		static string hashLogStyle;
 		static List<string> mediaLst;
 		static List<string> doneListContent;
 
@@ -144,7 +147,9 @@ namespace AVDump2CL {
 			string fileExt = System.IO.Path.GetExtension(filePath).Substring(1);
 			if(doneListContent.Contains(filePath) || processExtensions.BinarySearch(fileExt) < 0) return;
 
-			Stream stream = System.IO.File.OpenRead(filePath);
+			Stream stream = /*new NullStream(5 * 1024);*/ System.IO.File.OpenRead(filePath);
+
+			#region Hashing
 			DateTime startTime = DateTime.Now;
 			HashContainer hashContainer = new HashContainer();
 			if((switches & (eSwitches.Aich | eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | eSwitches.Sha1 | eSwitches.Tth)) != 0) {
@@ -152,7 +157,7 @@ namespace AVDump2CL {
 
 				if((switches & (eSwitches.Crc32)) != 0) hashContainer.AddHashAlgorithm(new Crc32(), "CRC32");
 				if((switches & (eSwitches.Ed2k)) != 0) hashContainer.AddHashAlgorithm(new Ed2k(), "ED2K");
-				//if((switches & (eSwitches.Tth)) != 0) hashContainer.AddHashAlgorithm(new Tiger(), "TTH");
+				if((switches & (eSwitches.Tth)) != 0) hashContainer.AddHashAlgorithm(new Tiger(), "TTH");
 				//if((switches & (eSwitches.Aich)) != 0) hashContainer.AddHashAlgorithm(new Aich(), "AICH");
 				if((switches & (eSwitches.Md5)) != 0) hashContainer.AddHashAlgorithm(new System.Security.Cryptography.MD5CryptoServiceProvider(), "MD5");
 				if((switches & (eSwitches.Sha1)) != 0) hashContainer.AddHashAlgorithm(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "SHA1");
@@ -161,14 +166,19 @@ namespace AVDump2CL {
 				if((switches & eSwitches.SupressProgress) == 0) DisplayHashBuffer(progress);
 			}
 			List<HashExecute> hashExecutes = hashContainer.Join();
+			#endregion
 
 			if((switches & eSwitches.PrintElapsedHashingTime) != 0) Console.WriteLine("Time elapsed after Hashing: " + (DateTime.Now - startTime).TotalSeconds + "s");
 
-
+			#region Log Output
 			string log = "";
 			if((switches & eSwitches.CreqXmlFormat) != 0) {
 				StringWriter sw = new StringWriter();
 				Info.CreateAVDumpLog(filePath, hashExecutes).Save(sw);
+				log += sw.ToString();
+
+				sw = new StringWriter();
+				Info.CreateMediaInfoXMLLog(filePath, hashExecutes).Save(sw);
 				log += sw.ToString();
 
 			}
@@ -180,7 +190,59 @@ namespace AVDump2CL {
 				byte[] infoBytes = System.Text.Encoding.UTF8.GetBytes(log);
 				logStream.Write(infoBytes, 0, infoBytes.Length);
 			}
+			#endregion
 
+			#region DoneLog Stream Writing
+			if(doneListStream != null) {
+				byte[] donePathBytes = System.Text.Encoding.UTF8.GetBytes(filePath + '\n');
+				doneListStream.Write(donePathBytes, 0, donePathBytes.Length);
+				doneListContent.Add(filePath);
+			}
+			#endregion
+
+			#region Ed2kLog Stream Writing
+			HashExecute ed2kHashExecute = hashExecutes.FirstOrDefault((HashExecute he) => { return he.HashObj is Ed2k; });
+			Ed2k ed2k = (Ed2k)(ed2kHashExecute != null ? ed2kHashExecute.HashObj : null);
+			if(ed2k != null) {
+				byte[] blueEd2kHash = ed2k.BlueHash; //Handle Ed2k screwup
+				byte[] redEd2kHash = ed2k.Hash;
+
+				if(ed2kListStream != null) {
+					byte[] ed2kBytes = System.Text.Encoding.UTF8.GetBytes(BaseConverter.ToString(redEd2kHash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse) + (blueEd2kHash != null ? "|" + BaseConverter.ToString(blueEd2kHash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse) : ""));
+					ed2kListStream.Write(ed2kBytes, 0, ed2kBytes.Length);
+				}
+			}
+			#endregion
+
+			#region HashLog Stream Writing
+			if(hashListStream != null) {
+				string formattedStr = hashLogStyle;
+				foreach(var hashExecute in hashExecutes) {
+					if(hashExecute.HashObj is Ed2k) {
+						string ed2kStr = "ed2k://|file|" + System.IO.Path.GetFileName(filePath) + "|" + stream.Length + "|" + BaseConverter.ToString(hashExecute.HashObj.Hash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse) + "|/";
+						if(!((Ed2k)hashExecute.HashObj).BlueIsRed()) {
+							ed2kStr += "*" + "ed2k://|file|" + System.IO.Path.GetFileName(filePath) + "|" + stream.Length + "|" + BaseConverter.ToString(((Ed2k)hashExecute.HashObj).BlueHash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse) + "|/";
+						}
+
+						formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", ed2kStr);
+					} else {
+						formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", BaseConverter.ToString(hashExecute.HashObj.Hash, eBaseOption.Base32 | eBaseOption.Pad | eBaseOption.Reverse));
+					}
+				}
+				byte[] formattedStrBytes = System.Text.Encoding.UTF8.GetBytes(formattedStr + "\n");
+				hashListStream.Write(formattedStrBytes, 0, formattedStrBytes.Length);
+			}
+			#endregion
+
+			if((switches & eSwitches.DeleteFileWhenDone) != 0 && !error) System.IO.File.Delete(filePath);
+			if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
+			if((switches & eSwitches.PauseWhenFileDone) != 0) {
+				Console.WriteLine("Press any key to continue");
+				Console.ReadKey();
+			}
+			stream.Dispose();
+
+			#region ACreqing
 #if(HasAcreq) //If you get an error below: Scroll to the top of the page and comment #define HasAcreq out
 			if(!(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
 				string creq = Info.CreateAVDumpLog(filePath, hashExecutes).OuterXml;
@@ -200,33 +262,7 @@ namespace AVDump2CL {
 				}
 			}
 #endif
-
-
-			if(doneListStream != null) {
-				byte[] donePathBytes = System.Text.Encoding.UTF8.GetBytes(filePath + '\n');
-				doneListStream.Write(donePathBytes, 0, donePathBytes.Length);
-				doneListContent.Add(filePath);
-			}
-
-			HashExecute hashExecute = hashExecutes.FirstOrDefault((HashExecute he) => { return he.HashObj is Ed2k; });
-			Ed2k ed2k = (Ed2k)(hashExecute != null ? hashExecute.HashObj : null);
-			if(ed2k != null) {
-				byte[] blueEd2kHash = ed2k.BlueHash; //Handle Ed2k screwup
-				byte[] redEd2kHash = ed2k.Hash;
-
-				if(ed2kListStream != null) {
-					byte[] ed2kBytes = System.Text.Encoding.UTF8.GetBytes(BaseConverter.ToString(redEd2kHash, 16) + (blueEd2kHash != null ? "|" + BaseConverter.ToString(blueEd2kHash, 16) : ""));
-					ed2kListStream.Write(ed2kBytes, 0, ed2kBytes.Length);
-				}
-			}
-			stream.Dispose();
-
-			if((switches & eSwitches.DeleteFileWhenDone) != 0 && !error) System.IO.File.Delete(filePath);
-			if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
-			if((switches & eSwitches.PauseWhenFileDone) != 0) {
-				Console.WriteLine("Press any key to continue");
-				Console.ReadKey();
-			}
+			#endregion
 		}
 
 		private static void DisplayHashBuffer(HashContainer.HashingProgress progress) {
@@ -251,12 +287,12 @@ namespace AVDump2CL {
 					bufferSize = mean[i].Calc(5);
 					if(bytesProcessed > progress.ProcessedBytes(i) || bytesProcessed == 0) bytesProcessed = progress.ProcessedBytes(i);
 
-					charCount = bufferSize != 0 ? (int)((bufferSize / (double)blockCount) * 68) : 0;
+					charCount = bufferSize != 0 ? (int)((bufferSize / (double)blockCount) * (Console.WindowWidth - 11)) : 0;
 					charCount = progress.ProcessedBytes(i) == fileSize ? 0 : charCount;
 
 					Console.Write(progress.HashObjName(i));
 					Console.CursorLeft = 8;
-					Console.WriteLine("[" + "".PadLeft(charCount, '*') + "".PadRight(68 - charCount, ' ') + "]");
+					Console.WriteLine("[" + "".PadLeft(charCount, '*') + "".PadRight(Console.WindowWidth - 11 - charCount, ' ') + "]");
 				}
 
 				Thread.Sleep(100);
@@ -292,6 +328,11 @@ namespace AVDump2CL {
 						password = parts[2];
 					} else if(parts[0] == "ms") {
 						if(!int.TryParse(parts[1], out monitorSleepDuration)) invalidCl = true;
+					} else if(parts[0] == "hlog") {
+						try {
+							hashLogStyle = parts[1];
+							hashListStream = System.IO.File.Open(parts[2], FileMode.Append, FileAccess.Write);
+						} catch(Exception) { invalidCl = true; }
 					} else if(parts[0] == "exp") {
 						try {
 							ed2kListStream = System.IO.File.Open(parts[1], FileMode.Append, FileAccess.Write);
@@ -347,6 +388,7 @@ options:    (one letter switches can be put in one string)
    ms      monitor sleep duration in milliseconds, default is " + monitorSleepDuration.ToString() + @"
    exp     export Ed2k-links to file
    ext     comma separated extension list 
+   hlog    export hashes to file '-hlog:" + "\"$CRC32$ $ED2K$\"" + @"':filepath
    log     write output to file
    port    udp Port used by ac
    done	   save processed-file-paths to file and exclude existing from proc
@@ -414,5 +456,27 @@ press any key to exit";
 		Aich = 1L << 45,
 		UseAllHashes = Crc32 + Ed2k + Md5 + Sha1 + Tth + Aich,
 		PrintElapsedHashingTime = 1L << 52
+	}
+
+	public class NullStream : Stream {
+		long length;
+		public NullStream(long length) {
+			this.length = length * 1024 * 1024;
+			Position = 0;
+		}
+		public override bool CanRead { get { return true; } }
+		public override bool CanSeek { get { return false; } }
+		public override bool CanWrite { get { return false; } }
+		public override void Flush() { }
+		public override long Length { get { return length; } }
+		public override long Position { get; set; }
+		public override long Seek(long offset, SeekOrigin origin) { throw new NotImplementedException(); }
+		public override void SetLength(long value) { throw new NotImplementedException(); }
+		public override void Write(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
+		public override int Read(byte[] buffer, int offset, int count) {
+			long bytesRead = (Position + count > Length) ? (Length - Position) : count;
+			Position += bytesRead;
+			return (int)bytesRead;
+		}
 	}
 }
