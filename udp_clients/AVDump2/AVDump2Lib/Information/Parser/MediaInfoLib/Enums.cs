@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace AVDump2Lib.Information.Parser.MediaInfoLib {
-    public enum eStreamKind {
+    public enum eStreamType {
         General,
         Video,
         Audio,
         Text,
         Chapters,
-        Image
+        Image,
+		Menu
     }
 
-    public enum eInfoKind {
+    public enum eInfoType {
         Name,
         Text,
         Measure,

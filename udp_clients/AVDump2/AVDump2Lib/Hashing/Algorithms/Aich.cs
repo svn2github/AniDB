@@ -2,166 +2,108 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
+using AVDump2Lib.Hashes;
+using System.Diagnostics;
 
 namespace AVDump2Lib.Hashing.Algorithms {
 	/// <summary>Untested (most likely wrong)</summary>
 	public class Aich : HashAlgorithm {
-		static SHA1 sha1 = SHA1.Create();
+		private static byte[] emptyArray = new byte[0];
+		private const int BLOCKSIZE = 180 * 1024;
+		private const int BLOCKSIZEREMAINDER = 140 * 1024;
 
-		List<AichHash> partHashes;
-		Part part;
+		private SHA1 blockHasher;
+		private SHA1 nodeHasher;
+		private List<byte[]> partHashes;
+		private List<byte[]> blockHashes;
+		private int blockLengthTodo;
 
 		protected override void HashCore(byte[] array, int ibStart, int cbSize) {
 			while(cbSize != 0) {
-				if(part.HasFinished) {
-					partHashes.Add(CreateHashTree(part.BlockHashes));
-					part.Clear();
-				}
-				part.Update(array, ref ibStart, ref cbSize);
-			}
-		}
+				if(blockLengthTodo > cbSize) {
+					blockHasher.TransformBlock(array, ibStart, cbSize, null, 0);
 
-		protected override byte[] HashFinal() {
-			if(part.BlockHashes.Count != 0) {
-				part.Final();
-				partHashes.Add(CreateHashTree(part.BlockHashes));
-			}
-
-			return CreateHashTree(partHashes).Hash;
-		}
-
-		public override void Initialize() {
-			partHashes = new List<AichHash>();
-			part = new Part();
-		}
-
-
-		public static AichHash CreateHashTree(List<AichHash> blockHashes) {
-				int count = blockHashes.Count;
-				while(blockHashes.Count > 1) {
-					blockHashes.Add(new AichHash(blockHashes[0], blockHashes[1]));
-					blockHashes.RemoveRange(0, 2);
-					count -= 2;
-
-					if(blockHashes.Count != 1) {
-						if(count == 1) {
-							blockHashes.Add(new AichHash(blockHashes[0]));
-							blockHashes.RemoveAt(0);
-						}
-						count = blockHashes.Count;
-					}
-				}
-				return blockHashes[0];
-		}
-
-
-		class Part {
-			List<AichHash> blockHashes;
-			int blockLengthTodo;
-			public bool HasFinished { get; private set; }
-
-			public Part() {
-				blockLengthTodo = 0;
-				blockHashes = new List<AichHash>();
-			}
-
-			public void Update(byte[] array, ref int ibStart, ref int cbSize) {
-				if(blockLengthTodo != 0) {
-					if(blockLengthTodo > cbSize) {
-						sha1.TransformBlock(array, ibStart, cbSize, null, 0);
-						blockLengthTodo -= cbSize;
-
-						ibStart += cbSize;
-						cbSize = 0;
-					} else {
-						sha1.TransformFinalBlock(array, ibStart, blockLengthTodo);
-						blockHashes.Add(new AichHash(sha1.Hash));
-						sha1.Initialize();
-
-						ibStart += blockLengthTodo;
-						cbSize -= blockLengthTodo;
-						blockLengthTodo = 0;
-
-						if(blockHashes.Count==53) HasFinished = true;
-					}
-				}
-
-				while(blockHashes.Count < 52 && cbSize >= 180 * 1024) {
-					blockHashes.Add(new AichHash(sha1.ComputeHash(array, ibStart, 180 * 1024)));
-					ibStart += 180 * 1024;
-					cbSize -= 180 * 1024;
-				}
-
-				if(blockHashes.Count == 52) {
-					if(cbSize < 140 * 1024) {
-						sha1.TransformBlock(array, ibStart, cbSize, null, 0);
-						blockLengthTodo = 140 * 1024 - cbSize;
-						ibStart += cbSize;
-						cbSize = 0;
-					} else {
-						blockHashes.Add(new AichHash(sha1.ComputeHash(array, ibStart, 180 * 1024)));
-						HasFinished = true;
-						ibStart += 180 * 1024;
-						cbSize -= 180 * 1024;
-					}
-				} else if(blockHashes.Count < 52) {
-					sha1.TransformBlock(array, ibStart, cbSize, null, 0);
-					blockLengthTodo = 180 * 1024 - cbSize;
+					blockLengthTodo -= cbSize;
 					ibStart += cbSize;
 					cbSize = 0;
-				}
-			}
+					return;
 
-			public void Final() {
-				if(blockLengthTodo != 0) {
-					sha1.TransformFinalBlock(new byte[0], 0, 0);
-					blockHashes.Add(new AichHash(sha1.Hash));
-					sha1.Initialize();
-				}
-			}
+				} else if(blockLengthTodo != 0) {
+					blockHasher.TransformFinalBlock(array, ibStart, blockLengthTodo);
+					blockHashes.Add(blockHasher.Hash);
+					blockHasher.Initialize();
 
-			public List<AichHash> BlockHashes { get { return blockHashes; } }
-	
-			public void Clear() {
-				blockHashes.Clear();
-				HasFinished = false;
+					ibStart += blockLengthTodo;
+					cbSize -= blockLengthTodo;
+					blockLengthTodo = 0;
+				}
+
+				while(blockHashes.Count < 52 && cbSize >= BLOCKSIZE) {
+					blockHashes.Add(blockHasher.ComputeHash(array, ibStart, BLOCKSIZE));
+					ibStart += BLOCKSIZE;
+					cbSize -= BLOCKSIZE;
+				}
+
+				if(blockHashes.Count < 52) {
+					blockHasher.TransformBlock(array, ibStart, cbSize, null, 0);
+					blockLengthTodo = BLOCKSIZE - cbSize;
+					ibStart += cbSize;
+					cbSize = 0;
+
+				} else if(blockHashes.Count == 52) {
+					if(cbSize < BLOCKSIZEREMAINDER) {
+						blockHasher.TransformBlock(array, ibStart, cbSize, null, 0);
+						blockLengthTodo = BLOCKSIZEREMAINDER - cbSize;
+						ibStart += cbSize;
+						cbSize = 0;
+
+					} else {
+						blockHashes.Add(blockHasher.ComputeHash(array, ibStart, BLOCKSIZEREMAINDER));
+						ibStart += BLOCKSIZEREMAINDER;
+						cbSize -= BLOCKSIZEREMAINDER;
+					}
+				}
+
+				if(blockHashes.Count == 53) {
+					partHashes.Add(CreateRootHash(blockHashes));
+					blockHashes.Clear();
+				}
 			}
 		}
-
-		public class AichHash {
-			byte[] hash;
-			AichHash a, b;
-
-			public bool IsLeave { get; set; }
-
-			public AichHash(byte[] hash) {
-				this.hash = hash;
-				IsLeave = true;
+		protected override byte[] HashFinal() {
+			if(blockLengthTodo != 0) {
+				blockHasher.TransformFinalBlock(emptyArray, 0, 0);
+				blockHashes.Add(blockHasher.Hash);
+				blockHasher.Initialize();
 			}
-			public AichHash(AichHash a, AichHash b) {
-				this.a = a;
-				this.b = b;
+			if(blockHashes.Count != 0) partHashes.Add(CreateRootHash(blockHashes));
 
-				sha1.TransformBlock(a.Hash, 0, 20, null, 0);
-				sha1.TransformFinalBlock(b.Hash, 0, 20);
-				hash = sha1.Hash;
-				sha1.Initialize();
+			return CreateRootHash(partHashes);
+		}
+		public override void Initialize() {
+			partHashes = new List<byte[]>();
+			blockHashes = new List<byte[]>();
+			blockHasher = SHA1.Create();
+			nodeHasher = SHA1.Create();
+		}
 
-				IsLeave = false;
+		private byte[] CreateRootHash(List<byte[]> blockHashes) { return SubCreateRootHash(blockHashes, 0, blockHashes.Count - 1, true); }
+		private byte[] SubCreateRootHash(List<byte[]> blockHashes, int left, int right, bool leftNode) {
+			if(left == right) {
+				return HashBlocks(blockHashes[left], null);
+			} else if(left + 1 == right) {
+				return HashBlocks(blockHashes[left], blockHashes[right]);
+			} else {
+				int border = ((left + right + (leftNode ? 1 : 0)) / 2);
+				return HashBlocks(SubCreateRootHash(blockHashes, left, border, true), SubCreateRootHash(blockHashes, border + 1, right, false));
 			}
-			public AichHash(AichHash a) {
-				this.a = a;
-				this.b = null;
-
-				hash = sha1.ComputeHash(a.Hash);
-
-				IsLeave = false;
-			}
-
-			public AichHash NodeA { get { return a; } }
-			public AichHash NodeB { get { return b; } }
-			public byte[] Hash { get { return hash; } }
-
+		}
+		private byte[] HashBlocks(byte[] l, byte[] r) {
+			nodeHasher.Initialize();
+			if(l != null) nodeHasher.TransformBlock(l, 0, l.Length, null, 0);
+			if(r != null) nodeHasher.TransformBlock(r, 0, r.Length, null, 0);
+			nodeHasher.TransformFinalBlock(emptyArray, 0, 0);
+			return nodeHasher.Hash;
 		}
 	}
 }
