@@ -162,6 +162,10 @@ public class TagSystem {
                 String valB = params.get(1);
                 String valC = params.get(2);
                 return valA.replaceAll(valB, valC);
+            } else if (funcName.equals("match")) {
+                String valA = params.get(0);
+                String valB = params.get(1);
+                return valA.matches(valB)?"1":"";
             } else {
                 e.Throw("No such functionname");
                 return null;

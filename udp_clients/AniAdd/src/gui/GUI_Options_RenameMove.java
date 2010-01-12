@@ -18,6 +18,8 @@ public class GUI_Options_RenameMove extends javax.swing.JPanel {
         this.gui = gui;
 
         chck_EnableFileMoving.setSelected((Boolean)gui.FromMem("EnableFileMove", false));
+        chck_EnableFileRenaming.setSelected((Boolean)gui.FromMem("EnableFileRenaming", true));
+
         ptn_UseAniDBFN.setSelected((Boolean)gui.FromMem("RenameTypeAniDBFileName", true));
         ptn_UseTaggingSystemFile.setSelected(!(Boolean)gui.FromMem("RenameTypeAniDBFileName", true));
 

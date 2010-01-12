@@ -137,6 +137,8 @@ public class Mod_EpProcessing implements IModule {
         binCode.set(22); //'Source
         binCode.set(23); //'Quality
         binCode.set(24); //'anidb filename scheme
+        binCode.set(30); //'sub lang list
+        binCode.set(31); //'dub lang list
         cmd.setArgs("fmask", Misc.toMask(binCode, 32));
 
         binCode = new BitSet(32);
@@ -242,6 +244,8 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_Source", df.poll());
             procFile.Data().put("DB_VideoRes", df.poll());
             procFile.Data().put("DB_FileName", df.poll());
+            procFile.Data().put("DB_FileSubLang", df.poll());
+            procFile.Data().put("DB_FileAudioLang", df.poll());
 
             procFile.Data().put("DB_EpCount", df.poll());
             procFile.Data().put("DB_EpHiCount", df.poll());
@@ -532,6 +536,8 @@ public class Mod_EpProcessing implements IModule {
         tags.put("GTl", procFile.Data().get("DB_Group_Long"));
 
         tags.put("FCrc", procFile.Data().get("DB_CRC"));
+        tags.put("FALng", procFile.Data().get("DB_FileAudioLang"));
+        tags.put("FSLng", procFile.Data().get("DB_FileSubLang"));
         tags.put("FVideoRes", procFile.Data().get("DB_VideoRes"));
         tags.put("AniDBFN", procFile.Data().get("DB_FileName"));
 

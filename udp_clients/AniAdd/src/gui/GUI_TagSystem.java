@@ -27,14 +27,16 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     }
     
     protected void TagSystemCodeChange(){
+
+
         TreeMap<String, String> tags = new TreeMap<String, String>();
         tags.put("ATr", txt_AT_Romaji.getText());
         tags.put("ATe", txt_AT_English.getText());
         tags.put("ATk", txt_AT_Kanji.getText());
         tags.put("ATs", txt_AT_Synomymn.getText());
         tags.put("ATo", txt_AT_Other.getText());
-        tags.put("AYearBegin", "2009");
-        tags.put("AYearEnd", "2009");
+        tags.put("AYearBegin", txt_YearBegin.getText());
+        tags.put("AYearEnd", txt_YearEnd.getText());
 
         tags.put("ETr", txt_ET_Romaji.getText());
         tags.put("ETe", txt_ET_English.getText());
@@ -43,9 +45,12 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         tags.put("GTs", txt_GT_Short.getText());
         tags.put("GTl", txt_GT_Long.getText());
 
-        tags.put("FCrc", "01abcdef");
-        tags.put("FVideoRes", "1920x1080");
-        tags.put("Quality", "Very High");
+        tags.put("FALng", txt_Dubs.getText());
+        tags.put("FSLng", txt_Subs.getText());
+
+        tags.put("FCrc", txt_Crc.getText());
+        tags.put("FVideoRes", txt_Resolution.getText());
+        tags.put("Quality", cmb_Quality.getSelectedItem().toString());
         tags.put("AniDBFN", "Basquash! - 25 - Above the Rim - [Umai](bfa12577).mkv");
         
 
@@ -59,6 +64,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         tags.put("Depr", chck_IsDeprecated.isSelected()?"1":"");
         tags.put("Cen", chck_IsCensored.isSelected()?"1":"");
+        tags.put("Watched", chck_IsWatched.isSelected()?"1":"");
         
 
         try {
@@ -74,14 +80,23 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         }
 
 
-        gui.ToMem("TagSystemCode", txt_CodeBox.getText());
+        if(gui != null) gui.ToMem("TagSystemCode", txt_CodeBox.getText());
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        scrl_txt_CodeBox = new javax.swing.JScrollPane();
+        txt_CodeBox = new javax.swing.JTextArea();
+        lbl_FileName = new javax.swing.JLabel();
+        lbl_DirName = new javax.swing.JLabel();
+        lbl_DirNameStr = new javax.swing.JLabel();
+        lbl_FileNameStr = new javax.swing.JLabel();
+        lbl_ErrorMsg = new javax.swing.JLabel();
+        lbl_CursorLocation = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         pnl_AnimeTitles = new javax.swing.JPanel();
-        lbl_AnimeTitles = new javax.swing.JLabel();
         lbl_AT_English = new javax.swing.JLabel();
         txt_AT_English = new javax.swing.JTextField();
         lbl_AT_Romaji = new javax.swing.JLabel();
@@ -93,261 +108,52 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         lbl_AT_Synomymn = new javax.swing.JLabel();
         txt_AT_Synomymn = new javax.swing.JTextField();
         pnl_GroupNames = new javax.swing.JPanel();
-        lbl_GroupNames = new javax.swing.JLabel();
         lbl_GT_Short = new javax.swing.JLabel();
         txt_GT_Short = new javax.swing.JTextField();
         lbl_GT_Long = new javax.swing.JLabel();
         txt_GT_Long = new javax.swing.JTextField();
         pnl_EpTitles = new javax.swing.JPanel();
-        lbl_EpTitles = new javax.swing.JLabel();
         lbl_ET_English = new javax.swing.JLabel();
         txt_ET_English = new javax.swing.JTextField();
         lbl_ET_Romaji = new javax.swing.JLabel();
         txt_ET_Romaji = new javax.swing.JTextField();
         lbl_ET_Kanji = new javax.swing.JLabel();
         txt_ET_Kanji = new javax.swing.JTextField();
-        scrl_txt_CodeBox = new javax.swing.JScrollPane();
-        txt_CodeBox = new javax.swing.JTextArea();
-        lbl_FileName = new javax.swing.JLabel();
-        lbl_DirName = new javax.swing.JLabel();
-        lbl_DirNameStr = new javax.swing.JLabel();
-        lbl_FileNameStr = new javax.swing.JLabel();
-        pnl_Misc = new javax.swing.JPanel();
-        lbl_Misc = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         chck_IsCensored = new javax.swing.JCheckBox();
         chck_IsDeprecated = new javax.swing.JCheckBox();
-        lbl_EpNo = new javax.swing.JLabel();
-        updown_EpNo = new javax.swing.JSpinner();
-        lbl_EpHiNo = new javax.swing.JLabel();
-        updown_EpHiNo = new javax.swing.JSpinner();
-        lbl_EpCount = new javax.swing.JLabel();
-        updown_EpCount = new javax.swing.JSpinner();
-        lbl_Type = new javax.swing.JLabel();
-        cmb_Type = new javax.swing.JComboBox();
+        updown_Version = new javax.swing.JSpinner();
+        chck_IsWatched = new javax.swing.JCheckBox();
+        lbl_Quality = new javax.swing.JLabel();
         lbl_Source = new javax.swing.JLabel();
+        cmb_Quality = new javax.swing.JComboBox();
         cmb_Source = new javax.swing.JComboBox();
         lbl_Version = new javax.swing.JLabel();
-        updown_Version = new javax.swing.JSpinner();
-        lbl_ErrorMsg = new javax.swing.JLabel();
-        lbl_CursorLocation = new javax.swing.JLabel();
+        lbl_Dubs = new javax.swing.JLabel();
+        txt_Dubs = new javax.swing.JTextField();
+        lbl_Subs = new javax.swing.JLabel();
+        txt_Subs = new javax.swing.JTextField();
+        lbl_Crc = new javax.swing.JLabel();
+        txt_Crc = new javax.swing.JTextField();
+        txt_Resolution = new javax.swing.JTextField();
+        lbl_Resolution = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        lbl_EpCount = new javax.swing.JLabel();
+        updown_EpCount = new javax.swing.JSpinner();
+        lbl_EpHiNo = new javax.swing.JLabel();
+        lbl_Type = new javax.swing.JLabel();
+        cmb_Type = new javax.swing.JComboBox();
+        updown_EpHiNo = new javax.swing.JSpinner();
+        lbl_YearBegin = new javax.swing.JLabel();
+        txt_YearBegin = new javax.swing.JTextField();
+        lbl_YearEnd = new javax.swing.JLabel();
+        txt_YearEnd = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        lbl_EpNo = new javax.swing.JLabel();
+        updown_EpNo = new javax.swing.JSpinner();
 
-        pnl_AnimeTitles.setOpaque(false);
-
-        lbl_AnimeTitles.setText("Anime Titles:");
-
-        lbl_AT_English.setText("English");
-
-        txt_AT_English.setText("The Melancholy of Haruhi Suzumiya (2009)");
-        txt_AT_English.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_AT_EnglishTxtChange(evt);
-            }
-        });
-
-        lbl_AT_Romaji.setText("Romaji");
-
-        txt_AT_Romaji.setText("Suzumiya Haruhi no Yuuutsu (2009)");
-        txt_AT_Romaji.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_AT_RomajiTxtChange(evt);
-            }
-        });
-
-        lbl_AT_Kanji.setText("Kanji");
-
-        txt_AT_Kanji.setText("涼宮ハルヒの憂鬱 (2009)");
-        txt_AT_Kanji.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_AT_KanjiTxtChange(evt);
-            }
-        });
-
-        lbl_AT_Other.setText("Other");
-
-        txt_AT_Other.setText("haruhi2");
-        txt_AT_Other.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_AT_OtherTxtChange(evt);
-            }
-        });
-
-        lbl_AT_Synomymn.setText("Synonymn");
-
-        txt_AT_Synomymn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_AT_SynomymnTxtChange(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_AnimeTitlesLayout = new javax.swing.GroupLayout(pnl_AnimeTitles);
-        pnl_AnimeTitles.setLayout(pnl_AnimeTitlesLayout);
-        pnl_AnimeTitlesLayout.setHorizontalGroup(
-            pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_AnimeTitlesLayout.createSequentialGroup()
-                .addComponent(lbl_AnimeTitles)
-                .addContainerGap(144, Short.MAX_VALUE))
-            .addGroup(pnl_AnimeTitlesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_AT_English)
-                    .addComponent(lbl_AT_Romaji)
-                    .addComponent(lbl_AT_Kanji)
-                    .addComponent(lbl_AT_Other)
-                    .addComponent(lbl_AT_Synomymn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                    .addComponent(txt_AT_English, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
-        );
-        pnl_AnimeTitlesLayout.setVerticalGroup(
-            pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_AnimeTitlesLayout.createSequentialGroup()
-                .addComponent(lbl_AnimeTitles)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_AT_English, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_AT_English))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_AT_Romaji))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_AT_Kanji))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_AT_Other))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_AT_Synomymn)))
-        );
-
-        pnl_GroupNames.setOpaque(false);
-
-        lbl_GroupNames.setText("Group Names:");
-
-        lbl_GT_Short.setText("Short");
-
-        txt_GT_Short.setText("a.f.k.");
-        txt_GT_Short.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_GT_ShortTxtChange(evt);
-            }
-        });
-
-        lbl_GT_Long.setText("Long");
-
-        txt_GT_Long.setText("a.f.k. (Long)");
-        txt_GT_Long.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_GT_LongTxtChange(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_GroupNamesLayout = new javax.swing.GroupLayout(pnl_GroupNames);
-        pnl_GroupNames.setLayout(pnl_GroupNamesLayout);
-        pnl_GroupNamesLayout.setHorizontalGroup(
-            pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_GroupNamesLayout.createSequentialGroup()
-                .addComponent(lbl_GroupNames)
-                .addContainerGap(137, Short.MAX_VALUE))
-            .addGroup(pnl_GroupNamesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_GT_Short)
-                    .addComponent(lbl_GT_Long))
-                .addGap(21, 21, 21)
-                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
-        );
-        pnl_GroupNamesLayout.setVerticalGroup(
-            pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_GroupNamesLayout.createSequentialGroup()
-                .addComponent(lbl_GroupNames)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_GT_Short))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_GT_Long)))
-        );
-
-        pnl_EpTitles.setOpaque(false);
-
-        lbl_EpTitles.setText("Episode Titles:");
-
-        lbl_ET_English.setText("English");
-
-        txt_ET_English.setText("Bamboo Leaf Rhapsody");
-        txt_ET_English.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_ET_EnglishTxtChange(evt);
-            }
-        });
-
-        lbl_ET_Romaji.setText("Romaji");
-
-        txt_ET_Romaji.setText("Sasa no Ha Rhapsody");
-        txt_ET_Romaji.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_ET_RomajiTxtChange(evt);
-            }
-        });
-
-        lbl_ET_Kanji.setText("Kanji");
-
-        txt_ET_Kanji.setText("笹の葉ラプソディ");
-        txt_ET_Kanji.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_ET_KanjiTxtChange(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_EpTitlesLayout = new javax.swing.GroupLayout(pnl_EpTitles);
-        pnl_EpTitles.setLayout(pnl_EpTitlesLayout);
-        pnl_EpTitlesLayout.setHorizontalGroup(
-            pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_EpTitlesLayout.createSequentialGroup()
-                .addComponent(lbl_EpTitles)
-                .addContainerGap(337, Short.MAX_VALUE))
-            .addGroup(pnl_EpTitlesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_ET_English)
-                    .addComponent(lbl_ET_Romaji)
-                    .addComponent(lbl_ET_Kanji))
-                .addGap(21, 21, 21)
-                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_ET_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                    .addComponent(txt_ET_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
-                    .addComponent(txt_ET_English, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)))
-        );
-        pnl_EpTitlesLayout.setVerticalGroup(
-            pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_EpTitlesLayout.createSequentialGroup()
-                .addComponent(lbl_EpTitles)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_ET_English, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_ET_English))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_ET_Romaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_ET_Romaji))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_ET_Kanji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_ET_Kanji)))
-        );
+        setPreferredSize(new java.awt.Dimension(780, 560));
 
         txt_CodeBox.setColumns(20);
         txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
@@ -376,292 +182,648 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         lbl_FileNameStr.setText(" ");
 
-        pnl_Misc.setOpaque(false);
+        lbl_ErrorMsg.setText(" ");
+        lbl_ErrorMsg.setOpaque(true);
 
-        lbl_Misc.setText("Misc Options:");
+        lbl_CursorLocation.setText("Row: 0 Column: 0");
+
+        jPanel1.setOpaque(false);
+
+        pnl_AnimeTitles.setBorder(javax.swing.BorderFactory.createTitledBorder("Anime Titles:"));
+        pnl_AnimeTitles.setOpaque(false);
+
+        lbl_AT_English.setText("English");
+
+        txt_AT_English.setText("The Melancholy of Haruhi Suzumiya (2009)");
+        txt_AT_English.setToolTipText("ATe");
+        txt_AT_English.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_AT_Romaji.setText("Romaji");
+
+        txt_AT_Romaji.setText("Suzumiya Haruhi no Yuuutsu (2009)");
+        txt_AT_Romaji.setToolTipText("ATr");
+        txt_AT_Romaji.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_AT_Kanji.setText("Kanji");
+
+        txt_AT_Kanji.setText("涼宮ハルヒの憂鬱 (2009)");
+        txt_AT_Kanji.setToolTipText("ATk");
+        txt_AT_Kanji.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_AT_Other.setText("Other");
+
+        txt_AT_Other.setText("haruhi2");
+        txt_AT_Other.setToolTipText("ATo");
+        txt_AT_Other.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_AT_Synomymn.setText("Synonymn");
+
+        txt_AT_Synomymn.setToolTipText("ATs");
+        txt_AT_Synomymn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_AnimeTitlesLayout = new javax.swing.GroupLayout(pnl_AnimeTitles);
+        pnl_AnimeTitles.setLayout(pnl_AnimeTitlesLayout);
+        pnl_AnimeTitlesLayout.setHorizontalGroup(
+            pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_AnimeTitlesLayout.createSequentialGroup()
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_AT_English)
+                    .addComponent(lbl_AT_Romaji)
+                    .addComponent(lbl_AT_Kanji)
+                    .addComponent(lbl_AT_Other)
+                    .addComponent(lbl_AT_Synomymn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_AT_English, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnl_AnimeTitlesLayout.setVerticalGroup(
+            pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_AnimeTitlesLayout.createSequentialGroup()
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_AT_English, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_AT_English))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_AT_Romaji))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_AT_Kanji))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_AT_Other))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_AT_Synomymn))
+                .addGap(39, 39, 39))
+        );
+
+        pnl_GroupNames.setBorder(javax.swing.BorderFactory.createTitledBorder("Group Names:"));
+        pnl_GroupNames.setOpaque(false);
+
+        lbl_GT_Short.setText("Short");
+
+        txt_GT_Short.setText("a.f.k.");
+        txt_GT_Short.setToolTipText("GTs");
+        txt_GT_Short.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_GT_Long.setText("Long");
+
+        txt_GT_Long.setText("a.f.k. (Long)");
+        txt_GT_Long.setToolTipText("GTl");
+        txt_GT_Long.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_GroupNamesLayout = new javax.swing.GroupLayout(pnl_GroupNames);
+        pnl_GroupNames.setLayout(pnl_GroupNamesLayout);
+        pnl_GroupNamesLayout.setHorizontalGroup(
+            pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_GroupNamesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_GT_Short)
+                    .addComponent(lbl_GT_Long))
+                .addGap(21, 21, 21)
+                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnl_GroupNamesLayout.setVerticalGroup(
+            pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_GroupNamesLayout.createSequentialGroup()
+                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_GT_Short))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_GT_Long)))
+        );
+
+        pnl_EpTitles.setBorder(javax.swing.BorderFactory.createTitledBorder("Episode Titles:"));
+        pnl_EpTitles.setOpaque(false);
+
+        lbl_ET_English.setText("English");
+
+        txt_ET_English.setText("Bamboo Leaf Rhapsody");
+        txt_ET_English.setToolTipText("ETe");
+        txt_ET_English.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_ET_Romaji.setText("Romaji");
+
+        txt_ET_Romaji.setText("Sasa no Ha Rhapsody");
+        txt_ET_Romaji.setToolTipText("ETr");
+        txt_ET_Romaji.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_ET_Kanji.setText("Kanji");
+
+        txt_ET_Kanji.setText("笹の葉ラプソディ");
+        txt_ET_Kanji.setToolTipText("ETk");
+        txt_ET_Kanji.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_EpTitlesLayout = new javax.swing.GroupLayout(pnl_EpTitles);
+        pnl_EpTitles.setLayout(pnl_EpTitlesLayout);
+        pnl_EpTitlesLayout.setHorizontalGroup(
+            pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_EpTitlesLayout.createSequentialGroup()
+                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_ET_English)
+                    .addComponent(lbl_ET_Romaji)
+                    .addComponent(lbl_ET_Kanji))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_ET_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(txt_ET_English, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                    .addComponent(txt_ET_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnl_EpTitlesLayout.setVerticalGroup(
+            pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_EpTitlesLayout.createSequentialGroup()
+                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_ET_English)
+                    .addComponent(txt_ET_English, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_ET_Romaji)
+                    .addComponent(txt_ET_Romaji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_ET_Kanji)
+                    .addComponent(txt_ET_Kanji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(pnl_AnimeTitles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnl_EpTitles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_GroupNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(pnl_EpTitles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pnl_GroupNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnl_AnimeTitles, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Titles", jPanel1);
+
+        jPanel2.setOpaque(false);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("File Info:"));
+        jPanel3.setOpaque(false);
 
         chck_IsCensored.setText("Is Censored");
+        chck_IsCensored.setToolTipText("Cen");
         chck_IsCensored.setOpaque(false);
         chck_IsCensored.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chck_IsCensoredCheckedChange(evt);
+                CheckedChanged(evt);
             }
         });
 
         chck_IsDeprecated.setText("Is Deprecated");
+        chck_IsDeprecated.setToolTipText("Depr");
         chck_IsDeprecated.setOpaque(false);
         chck_IsDeprecated.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chck_IsDeprecatedCheckedChange(evt);
+                CheckedChanged(evt);
             }
         });
 
-        lbl_EpNo.setText("Episode Number:");
-
-        updown_EpNo.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        updown_EpNo.addChangeListener(new javax.swing.event.ChangeListener() {
+        updown_Version.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        updown_Version.setToolTipText("FVer");
+        updown_Version.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                updown_EpNoSpinnerChange(evt);
+                UpDownChanged(evt);
             }
         });
 
-        lbl_EpHiNo.setText("Highest Ep Number:");
-
-        updown_EpHiNo.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        updown_EpHiNo.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                updown_EpHiNoSpinnerChange(evt);
+        chck_IsWatched.setText("Is Watched");
+        chck_IsWatched.setToolTipText("Watched");
+        chck_IsWatched.setOpaque(false);
+        chck_IsWatched.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheckedChanged(evt);
             }
         });
 
-        lbl_EpCount.setText("Episode Count:");
-
-        updown_EpCount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        updown_EpCount.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                updown_EpCountSpinnerChange(evt);
-            }
-        });
-
-        lbl_Type.setText("Type:");
-
-        cmb_Type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TV Series", "Movie", "OVA" }));
-        cmb_Type.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmb_TypeDropDownChange(evt);
-            }
-        });
+        lbl_Quality.setText("Quality:");
 
         lbl_Source.setText("Source:");
 
+        cmb_Quality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Very Good", "Good", "Eye Cancer" }));
+        cmb_Quality.setToolTipText("Quality");
+        cmb_Quality.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboChanged(evt);
+            }
+        });
+
         cmb_Source.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Web", "DTV", "HDTV", "DVD", "B-R" }));
         cmb_Source.setSelectedIndex(2);
+        cmb_Source.setToolTipText("Source");
         cmb_Source.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmb_SourceDropDownChange(evt);
+                ComboChanged(evt);
             }
         });
 
         lbl_Version.setText("File Ver:");
 
-        updown_Version.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-        updown_Version.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                updown_VersionSpinnerChange(evt);
+        lbl_Dubs.setText("Dubs:");
+
+        txt_Dubs.setText("english'japanese'german");
+        txt_Dubs.setToolTipText("FALng");
+        txt_Dubs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
             }
         });
 
-        javax.swing.GroupLayout pnl_MiscLayout = new javax.swing.GroupLayout(pnl_Misc);
-        pnl_Misc.setLayout(pnl_MiscLayout);
-        pnl_MiscLayout.setHorizontalGroup(
-            pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_MiscLayout.createSequentialGroup()
-                .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_Misc)
-                    .addGroup(pnl_MiscLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chck_IsCensored)
-                            .addComponent(chck_IsDeprecated))
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnl_MiscLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(lbl_Type)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmb_Type, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnl_MiscLayout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        lbl_Subs.setText("Subs:");
+
+        txt_Subs.setText("english'german");
+        txt_Subs.setToolTipText("FSLng");
+        txt_Subs.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_Crc.setText("CRC:");
+
+        txt_Crc.setText("4a8cbc62");
+        txt_Crc.setToolTipText("FCrc");
+        txt_Crc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        txt_Resolution.setText("1920x1080");
+        txt_Resolution.setToolTipText("FVideoRes");
+        txt_Resolution.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_Resolution.setText("Resolution:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chck_IsWatched)
+                                    .addComponent(chck_IsCensored)
+                                    .addComponent(chck_IsDeprecated))
+                                .addGap(9, 9, 9)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lbl_Source)
+                                    .addComponent(lbl_Quality)
                                     .addComponent(lbl_Version))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(updown_Version, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                                    .addComponent(cmb_Source, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_MiscLayout.createSequentialGroup()
-                                .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_EpHiNo)
-                                    .addComponent(lbl_EpNo))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(pnl_MiscLayout.createSequentialGroup()
-                                .addComponent(lbl_EpCount)
-                                .addGap(26, 26, 26)))
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(updown_EpCount, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(updown_EpHiNo)
-                            .addComponent(updown_EpNo, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))))
-                .addGap(10, 10, 10))
-        );
-        pnl_MiscLayout.setVerticalGroup(
-            pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_MiscLayout.createSequentialGroup()
-                .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_MiscLayout.createSequentialGroup()
-                        .addComponent(lbl_Misc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chck_IsCensored)
-                            .addComponent(cmb_Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Type))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cmb_Source, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cmb_Quality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_Subs)
+                                    .addComponent(lbl_Dubs))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_Subs, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                                    .addComponent(txt_Dubs, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_Crc)
+                        .addGap(6, 6, 6)
+                        .addComponent(txt_Crc, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_Resolution)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_Resolution, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(chck_IsCensored)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(chck_IsDeprecated)
                             .addComponent(cmb_Source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Source))
+                            .addComponent(lbl_Source)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmb_Quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_Quality)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chck_IsWatched)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_Version)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_Dubs)
+                    .addComponent(txt_Dubs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_Subs)
+                    .addComponent(txt_Subs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_Crc)
+                    .addComponent(txt_Crc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_Resolution)
+                    .addComponent(txt_Resolution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Anime Info:"));
+        jPanel4.setOpaque(false);
+
+        lbl_EpCount.setText("Episode Count:");
+
+        updown_EpCount.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        updown_EpCount.setToolTipText("EpCount");
+        updown_EpCount.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                UpDownChanged(evt);
+            }
+        });
+
+        lbl_EpHiNo.setText("Highest Ep Number:");
+
+        lbl_Type.setText("Type:");
+
+        cmb_Type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TV Series", "Movie", "OVA", "Web" }));
+        cmb_Type.setToolTipText("Type");
+        cmb_Type.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboChanged(evt);
+            }
+        });
+
+        updown_EpHiNo.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        updown_EpHiNo.setToolTipText("EpHiNo");
+        updown_EpHiNo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                UpDownChanged(evt);
+            }
+        });
+
+        lbl_YearBegin.setText("Year Begin:");
+
+        txt_YearBegin.setText("2001");
+        txt_YearBegin.setToolTipText("FCrc");
+        txt_YearBegin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_YearEnd.setText("Year End:");
+
+        txt_YearEnd.setText("2002");
+        txt_YearEnd.setToolTipText("FCrc");
+        txt_YearEnd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_YearBegin)
+                    .addComponent(lbl_YearEnd)
+                    .addComponent(lbl_Type))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_YearBegin, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_YearEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(lbl_EpCount)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(lbl_EpHiNo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(updown_EpHiNo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(updown_EpCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(cmb_Type, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lbl_YearBegin)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(txt_YearBegin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_YearEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_YearEnd))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Version)))
-                    .addGroup(pnl_MiscLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updown_EpNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_EpNo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(updown_EpHiNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_EpHiNo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_MiscLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmb_Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Type)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(updown_EpCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_EpCount))))
+                            .addComponent(lbl_EpCount))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_EpHiNo)
+                            .addComponent(updown_EpHiNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lbl_ErrorMsg.setText(" ");
-        lbl_ErrorMsg.setOpaque(true);
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Episode Info:"));
+        jPanel5.setOpaque(false);
 
-        lbl_CursorLocation.setText("Row: 0 Column: 0");
+        lbl_EpNo.setText("Episode Number:");
+
+        updown_EpNo.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        updown_EpNo.setToolTipText("EpNo");
+        updown_EpNo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                UpDownChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_EpNo)
+                .addGap(4, 4, 4)
+                .addComponent(updown_EpNo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updown_EpNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_EpNo))
+                .addContainerGap(5, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+        );
+
+        jTabbedPane1.addTab("Misc", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_GroupNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_AnimeTitles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnl_EpTitles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_Misc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lbl_CursorLocation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_ErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_FileName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
-                .addGap(2, 2, 2))
-            .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lbl_CursorLocation)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_ErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)))
+            .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnl_AnimeTitles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnl_GroupNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnl_EpTitles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnl_Misc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_FileName)
                     .addComponent(lbl_FileNameStr))
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_DirNameStr))
-                .addGap(0, 0, 0)
-                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ErrorMsg)
                     .addComponent(lbl_CursorLocation)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txt_AT_EnglishTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_AT_EnglishTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_AT_EnglishTxtChange
-
-    private void txt_AT_RomajiTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_AT_RomajiTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_AT_RomajiTxtChange
-
-    private void txt_AT_KanjiTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_AT_KanjiTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_AT_KanjiTxtChange
-
-    private void txt_AT_OtherTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_AT_OtherTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_AT_OtherTxtChange
-
-    private void txt_AT_SynomymnTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_AT_SynomymnTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_AT_SynomymnTxtChange
-
-    private void txt_GT_ShortTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_GT_ShortTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_GT_ShortTxtChange
-
-    private void txt_GT_LongTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_GT_LongTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_GT_LongTxtChange
-
-    private void txt_ET_EnglishTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ET_EnglishTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_ET_EnglishTxtChange
-
-    private void txt_ET_RomajiTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ET_RomajiTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_ET_RomajiTxtChange
-
-    private void txt_ET_KanjiTxtChange(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ET_KanjiTxtChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_txt_ET_KanjiTxtChange
-
-    private void chck_IsCensoredCheckedChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chck_IsCensoredCheckedChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_chck_IsCensoredCheckedChange
-
-    private void chck_IsDeprecatedCheckedChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chck_IsDeprecatedCheckedChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_chck_IsDeprecatedCheckedChange
-
-    private void updown_EpNoSpinnerChange(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_updown_EpNoSpinnerChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_updown_EpNoSpinnerChange
-
-    private void updown_EpHiNoSpinnerChange(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_updown_EpHiNoSpinnerChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_updown_EpHiNoSpinnerChange
-
-    private void updown_EpCountSpinnerChange(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_updown_EpCountSpinnerChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_updown_EpCountSpinnerChange
-
-    private void cmb_TypeDropDownChange(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_TypeDropDownChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_cmb_TypeDropDownChange
-
-    private void cmb_SourceDropDownChange(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_SourceDropDownChange
-        TagSystemCodeChange();
-}//GEN-LAST:event_cmb_SourceDropDownChange
-
-    private void updown_VersionSpinnerChange(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_updown_VersionSpinnerChange
-        TagSystemCodeChange();
-    }//GEN-LAST:event_updown_VersionSpinnerChange
 
     private void txt_CodeBoxMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_CodeBoxMousePressed
         UpdateCursorLocationLabel();
@@ -679,42 +841,68 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         
     }//GEN-LAST:event_txt_CodeBoxKeyReleased
 
+    private void CheckedChanged(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckedChanged
+        TagSystemCodeChange();
+    }//GEN-LAST:event_CheckedChanged
+
+    private void UpDownChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_UpDownChanged
+        TagSystemCodeChange();
+    }//GEN-LAST:event_UpDownChanged
+
+    private void ComboChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboChanged
+        TagSystemCodeChange();
+    }//GEN-LAST:event_ComboChanged
+
+    private void TextChanged(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextChanged
+        TagSystemCodeChange();
+    }//GEN-LAST:event_TextChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JCheckBox chck_IsCensored;
     protected javax.swing.JCheckBox chck_IsDeprecated;
-    protected javax.swing.JComboBox cmb_Source;
-    protected javax.swing.JComboBox cmb_Type;
+    protected javax.swing.JCheckBox chck_IsWatched;
+    protected javax.swing.JComboBox cmb_Quality;
+    private javax.swing.JComboBox cmb_Source;
+    private javax.swing.JComboBox cmb_Type;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTabbedPane jTabbedPane1;
     protected javax.swing.JLabel lbl_AT_English;
     protected javax.swing.JLabel lbl_AT_Kanji;
     protected javax.swing.JLabel lbl_AT_Other;
     protected javax.swing.JLabel lbl_AT_Romaji;
     protected javax.swing.JLabel lbl_AT_Synomymn;
-    protected javax.swing.JLabel lbl_AnimeTitles;
+    private javax.swing.JLabel lbl_Crc;
     private javax.swing.JLabel lbl_CursorLocation;
     protected javax.swing.JLabel lbl_DirName;
     protected javax.swing.JLabel lbl_DirNameStr;
+    private javax.swing.JLabel lbl_Dubs;
     protected javax.swing.JLabel lbl_ET_English;
     protected javax.swing.JLabel lbl_ET_Kanji;
     protected javax.swing.JLabel lbl_ET_Romaji;
-    protected javax.swing.JLabel lbl_EpCount;
-    protected javax.swing.JLabel lbl_EpHiNo;
-    protected javax.swing.JLabel lbl_EpNo;
-    protected javax.swing.JLabel lbl_EpTitles;
+    private javax.swing.JLabel lbl_EpCount;
+    private javax.swing.JLabel lbl_EpHiNo;
+    private javax.swing.JLabel lbl_EpNo;
     private javax.swing.JLabel lbl_ErrorMsg;
     protected javax.swing.JLabel lbl_FileName;
     protected javax.swing.JLabel lbl_FileNameStr;
     protected javax.swing.JLabel lbl_GT_Long;
     protected javax.swing.JLabel lbl_GT_Short;
-    protected javax.swing.JLabel lbl_GroupNames;
-    protected javax.swing.JLabel lbl_Misc;
-    protected javax.swing.JLabel lbl_Source;
-    protected javax.swing.JLabel lbl_Type;
+    protected javax.swing.JLabel lbl_Quality;
+    private javax.swing.JLabel lbl_Resolution;
+    private javax.swing.JLabel lbl_Source;
+    private javax.swing.JLabel lbl_Subs;
+    private javax.swing.JLabel lbl_Type;
     protected javax.swing.JLabel lbl_Version;
+    private javax.swing.JLabel lbl_YearBegin;
+    private javax.swing.JLabel lbl_YearEnd;
     protected javax.swing.JPanel pnl_AnimeTitles;
     protected javax.swing.JPanel pnl_EpTitles;
     protected javax.swing.JPanel pnl_GroupNames;
-    protected javax.swing.JPanel pnl_Misc;
     protected javax.swing.JScrollPane scrl_txt_CodeBox;
     protected javax.swing.JTextField txt_AT_English;
     protected javax.swing.JTextField txt_AT_Kanji;
@@ -722,14 +910,20 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JTextField txt_AT_Romaji;
     protected javax.swing.JTextField txt_AT_Synomymn;
     protected javax.swing.JTextArea txt_CodeBox;
+    private javax.swing.JTextField txt_Crc;
+    private javax.swing.JTextField txt_Dubs;
     protected javax.swing.JTextField txt_ET_English;
     protected javax.swing.JTextField txt_ET_Kanji;
     protected javax.swing.JTextField txt_ET_Romaji;
     protected javax.swing.JTextField txt_GT_Long;
     protected javax.swing.JTextField txt_GT_Short;
-    protected javax.swing.JSpinner updown_EpCount;
-    protected javax.swing.JSpinner updown_EpHiNo;
-    protected javax.swing.JSpinner updown_EpNo;
+    private javax.swing.JTextField txt_Resolution;
+    private javax.swing.JTextField txt_Subs;
+    private javax.swing.JTextField txt_YearBegin;
+    private javax.swing.JTextField txt_YearEnd;
+    private javax.swing.JSpinner updown_EpCount;
+    private javax.swing.JSpinner updown_EpHiNo;
+    private javax.swing.JSpinner updown_EpNo;
     protected javax.swing.JSpinner updown_Version;
     // End of variables declaration//GEN-END:variables
 
