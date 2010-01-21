@@ -60,7 +60,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         }
 
         tabs.put(tab.TabName(), tab);
-        tbctrl_Main.insertTab(tab.TabName(), null, (JComponent)tab, null, index);
+        tbctrl_Main.insertTab(tab.TabName(), null, (JComponent) tab, null, index);
         tab.Initialize(aniAdd, new Gui());
         return index;
     }
@@ -113,7 +113,8 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
     private void DisplayErrorEvent(ComEvent comEvent) {
         errorLst.add(comEvent);
 
-        pnl_Notice.setBackground((comEvent.Type() == ComEvent.eType.Warning) ? Color.YELLOW : Color.RED);
+        Color c = (comEvent.Type() == ComEvent.eType.Error) ? Color.RED : (comEvent.Type() == ComEvent.eType.Warning ? Color.YELLOW : Color.GREEN);
+        pnl_Notice.setBackground(c);
         lbl_Notice.setText((String) comEvent.Params(0));
 
         pnl_Notice.setVisible(true);
@@ -167,6 +168,10 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         }
 
         InitUI();
+
+        if((Integer)(mem.get("FirstStart", 0)) < 4){
+            DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "AniDBFN, FALng, FSLng fields in TagSystem fixed."));
+        }
 
         modState = eModState.Initialized;
     }
@@ -357,7 +362,8 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
             pnl_Notice.setVisible(false);
         } else {
             ComEvent comEvent = errorLst.peek();
-            pnl_Notice.setBackground(comEvent.Type() == ComEvent.eType.Warning ? Color.YELLOW : Color.RED);
+            Color c = (comEvent.Type() == ComEvent.eType.Error) ? Color.RED : (comEvent.Type() == ComEvent.eType.Warning ? Color.YELLOW : Color.GREEN);
+            pnl_Notice.setBackground(c);
             lbl_Notice.setText((String) comEvent.Params(0));
         }
     }//GEN-LAST:event_btn_CloseNoticeActionPerformed
