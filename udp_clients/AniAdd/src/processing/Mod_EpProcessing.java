@@ -243,9 +243,9 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_Quality", df.poll());
             procFile.Data().put("DB_Source", df.poll());
             procFile.Data().put("DB_VideoRes", df.poll());
-            procFile.Data().put("DB_FileName", df.poll());
-            procFile.Data().put("DB_FileSubLang", df.poll());
             procFile.Data().put("DB_FileAudioLang", df.poll());
+            procFile.Data().put("DB_FileSubLang", df.poll());
+            procFile.Data().put("DB_FileName", df.poll());
 
             procFile.Data().put("DB_EpCount", df.poll());
             procFile.Data().put("DB_EpHiCount", df.poll());
