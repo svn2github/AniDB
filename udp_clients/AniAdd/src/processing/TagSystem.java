@@ -140,29 +140,37 @@ public class TagSystem {
             if(e.funcs.containsKey(funcName)) {
                 return e.funcs.get(funcName).Invoke(e, params);
             } else if (funcName.equals("pad")) {
+                e.Check(params.size() == 3, "Invalid Parameter count");
                 int padCount = Integer.parseInt(params.get(1));
                 char padChar = params.get(2).charAt(0);
                 return Misc.stringPadding(params.get(0), padCount, padChar);
             } else if (funcName.equals("max")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
                 int valA = Integer.parseInt(params.get(0));
                 int valB = Integer.parseInt(params.get(1));
                 return String.valueOf(valA > valB ? valA : valB);
             } else if (funcName.equals("min")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
                 int valA = Integer.parseInt(params.get(0));
                 int valB = Integer.parseInt(params.get(1));
                 return String.valueOf(valA < valB ? valA : valB);
             } else if (funcName.equals("len")) {
+                e.Check(params.size() == 1, "Invalid Parameter count");
                 return String.valueOf(params.get(0).length());
             } else if (funcName.equals("uc")) {
+                e.Check(params.size() == 1, "Invalid Parameter count");
                 return params.get(0).toUpperCase();
             } else if (funcName.equals("lc")) {
+                e.Check(params.size() == 1, "Invalid Parameter count");
                 return params.get(0).toLowerCase();
             } else if (funcName.equals("repl")) {
+                e.Check(params.size() == 3, "Invalid Parameter count");
                 String valA = params.get(0);
                 String valB = params.get(1);
                 String valC = params.get(2);
                 return valA.replaceAll(valB, valC);
             } else if (funcName.equals("match")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
                 String valA = params.get(0);
                 String valB = params.get(1);
                 return valA.matches(valB)?"1":"";
