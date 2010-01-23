@@ -68,6 +68,16 @@
 	background-image: url(../icons/flags/anidb_sub_danish.gif);
 }
 
+*.i_audio_gl
+{
+	background-image: url(../icons/flags/anidb_audio_galician.gif);
+}
+
+*.i_sub_gl
+{
+	background-image: url(../icons/flags/anidb_sub_galician.gif);
+}
+
 *.i_audio_de
 {
 	background-image: url(../icons/flags/anidb_audio_german.gif);
