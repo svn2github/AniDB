@@ -486,7 +486,7 @@ function prepPage() {
 		for (var j in classes) {
 			if (classes[j] == "hide") {
 				classes.splice(j, 1);
-				js_hidden[i].className = classes.join(' ');
+				js_hidden[i].className = classes.join(' ') + ' tainted';
 				break;
 			}
 		}
