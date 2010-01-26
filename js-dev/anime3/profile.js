@@ -1,6 +1,6 @@
 /* file profile page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- *         
+ *
  * version 1.0 (19.05.2007) - Initial release
  * version 1.1 (29.07.2008) - Added Javascript Tab
  * version 1.2 (03.02.2009)	- Move some stuff out of this script to customize
@@ -35,7 +35,7 @@ function fetchData() {
 
 function CStyle(node) {
 	this.name = node.getAttribute('name');
-	this.title = this.name; 
+	this.title = this.name;
 	this.screenshot = "";
 	this.thumbnail = "";
 	this.path = "";
@@ -90,7 +90,7 @@ function updateCurrentStyle() {
 			style_thumbnail.parentNode.appendChild(i_enlarge);
 		}
 		if (curStyle.screenshot == "") i_enlarge.href = base_url+"css/"+curStyle.name+"/images/screenshot.png";
-		else i_enlarge.href = base_url+"css/"+curStyle.screenshot;    
+		else i_enlarge.href = base_url+"css/"+curStyle.screenshot;
 	}
 	// Title
 	if (!style_title) style_title = document.getElementById('style_title');
@@ -197,13 +197,13 @@ function selectStyle() {
 /* Adds a language
  * @param value Language to add
  */
-function addLanguageToArray(value) { 
-	if (this.array.indexOf(value) < 0) this.array.push(value); 
+function addLanguageToArray(value) {
+	if (this.array.indexOf(value) < 0) this.array.push(value);
 }
 /* Removes a language
  * @param value Language to remove
  */
-function remLanguageFromArray(value) { 
+function remLanguageFromArray(value) {
 	if (this.array.indexOf(value) >= 0)
 		this.array.splice(this.array.indexOf(value),1);
 }
@@ -230,7 +230,7 @@ function prepLanguages() {
 				var option = baseSelect.options[i];
 				if (audlangs.array.indexOf(option.value) >= 0) {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
-					newOption.ondblclick = remLangFromBox; 
+					newOption.ondblclick = remLangFromBox;
 					audlangs.select[1].appendChild(newOption);
 				} else {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
@@ -252,7 +252,7 @@ function prepLanguages() {
 				var option = baseSelect.options[i];
 				if (sublangs.array.indexOf(option.value) >= 0) {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
-					newOption.ondblclick = remLangFromBox; 
+					newOption.ondblclick = remLangFromBox;
 					sublangs.select[1].appendChild(newOption);
 				} else {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
@@ -478,7 +478,19 @@ function prepPage() {
 	}
 	if (audlangs.input && sublangs.input) prepLanguages();
 	createPreferencesTable('profile');
+
+	// Show everything JS related profile option
+	var js_hidden = getElementsByClass(document.getElementById('layout-main'), "javascript");
+	for (var i in js_hidden) {
+		var classes = js_hidden[i].split(' ')
+		for (var j in classes) {
+			if (classes[j] == "hide") {
+				js_hidden[i].className = classes.splice(j, 1).join(' ');
+				break;
+			}
+		}
+	}
 }
- 
+
 //window.onload = prePage;
 addLoadEvent(prepPage);
