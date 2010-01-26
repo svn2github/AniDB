@@ -485,7 +485,8 @@ function prepPage() {
 		var classes = js_hidden[i].className.split(' ')
 		for (var j in classes) {
 			if (classes[j] == "hide") {
-				js_hidden[i].className = classes.splice(j, 1).join(' ');
+				classes.splice(j, 1);
+				js_hidden[i].className = classes.join(' ');
 				break;
 			}
 		}
