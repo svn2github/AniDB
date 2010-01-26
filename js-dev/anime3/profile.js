@@ -482,11 +482,11 @@ function prepPage() {
 	// Show everything JS related profile option
 	var js_hidden = getElementsByClassNameDeep(document.getElementById('layout-main'), "javascript");
 	for (var i in js_hidden) {
-		var classes = js_hidden[i].className.split(' ')
+		var classes = js_hidden[i].className.split(' ');
 		for (var j in classes) {
 			if (classes[j] == "hide") {
 				classes.splice(j, 1);
-				js_hidden[i].className = classes.join(' ') + ' tainted';
+				js_hidden[i].className = classes.join(' ');
 				break;
 			}
 		}
