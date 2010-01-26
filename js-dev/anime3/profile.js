@@ -482,7 +482,7 @@ function prepPage() {
 	// Show everything JS related profile option
 	var js_hidden = getElementsByClassNameDeep(document.getElementById('layout-main'), "javascript");
 	for (var i in js_hidden) {
-		var classes = js_hidden[i].split(' ')
+		var classes = js_hidden[i].className.split(' ')
 		for (var j in classes) {
 			if (classes[j] == "hide") {
 				js_hidden[i].className = classes.splice(j, 1).join(' ');
