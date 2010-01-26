@@ -38,7 +38,7 @@ function padRight(text, padChar, count) {
  */
 function convertTime(data) {
 	if (!data) return;
-	if (data.indexOf('T') >= 0) 
+	if (data.indexOf('T') >= 0)
 		return (data.split('T').join(" "));
 	else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0)
 		return data;
@@ -136,8 +136,8 @@ function cTimeDateHour(data) {
  * @param node The node where to extract information
  * @return String containing node data
  */
-function nodeData(node) { 
-	try { return node.childNodes.item(0).nodeValue; } 
+function nodeData(node) {
+	try { return node.childNodes.item(0).nodeValue; }
 	catch(e) { return ''; }
 
 }
@@ -150,14 +150,14 @@ function notImplemented() { alert('Not implemented yet'); }
 function replaceNodeWithChildren(theNode) {
 	var theChildren = new Array();
 	var theParent = theNode.parentNode;
-	
+
 	if (theParent != null) 	{
 		for (var i = 0; i < theNode.childNodes.length; i++)
 			theChildren.push(theNode.childNodes[i].cloneNode(true));
-			
+
 		for (var i = 0; i < theChildren.length; i++)
-			theParent.insertBefore(theChildren[i], theNode);	
-			
+			theParent.insertBefore(theChildren[i], theNode);
+
 		theParent.removeChild(theNode);
 		return theParent;
 	}
@@ -181,7 +181,7 @@ function goDeepDOMtree(node,level) {
 	}
 	out += '</'+node.nodeName+'>\n';
 	return out;
-} 
+}
 
 function showDOMtree(node) {
 	var out = '<'+node.nodeName+'>\n';
@@ -205,6 +205,39 @@ function getElementsByClassName(nodes, name, useIndexOf) {
 	for (var i = 0; i < nodes.length; i++) {
 		if (!useIndexOf) { if (nodes[i].className == name) ret.push(nodes[i]); }
 		else { if (nodes[i].className.indexOf(name) >= 0 ) ret.push(nodes[i]); }
+	}
+	return ret;
+}
+
+/* Perform a deep search for elements with a given class
+ * @param root The root node
+ * @param name The name of the class to find
+ * @return Array of nodes
+ */
+function getElementsByClassNameDeep(root, name) {
+	var ret = new Array();
+	for (var i = 0; i < root.childNodes.length; i++) {
+		var node = root.childNodes[i];
+
+		// We only want element nodes
+		if (node.nodeType != 1) {
+			continue;
+		}
+
+		if (node.className) {
+			var classes = node.className.split(' ');
+			for (var j in classes) {
+				if (classes[j] == name) {
+					ret.push(node);
+					break;
+				}
+			}
+		}
+
+		// Recurse to infinity and beyond
+		if (node.childNodes.length) {
+			ret = ret.concat(getElementsByClassNameDeep(node, name));
+		}
 	}
 	return ret;
 }
@@ -540,38 +573,38 @@ function makeBar(parentNode,start,end,total,map,barSize) {
 		bar.height = 10;
 	}
 	bar.title = bar.alt = '';
-	
+
 	if (start == 1) makeBar_rest=0; //Initialize makeBar_rest var
-	
+
 	var length, width;
 	if(barSize>=1){
 		//Fixed Size
 		length = (1 + end - start) * (barSize / total);	//Theoretical length of range
 		width = Math.ceil(length - makeBar_rest); //Correct error made by last length calculation and cut of decimals
-		if (width<=0) width=1; //Make lone episodes in animes with high ep count visible again 
+		if (width<=0) width=1; //Make lone episodes in animes with high ep count visible again
 		if(makeBar_rest > 1 && total != end) { makeBar_rest -= length; return null;}//Dampen IOIOIOIO effect
 		makeBar_rest = width - length + makeBar_rest;//Calculate new error made by cutting of decimals
-		if(total == end && makeBar_rest>0.1) width--;//Trim last pixel if needed and set image width		
+		if(total == end && makeBar_rest>0.1) width--;//Trim last pixel if needed and set image width
 		bar.style.width=width+"px";//img.width = width;
 	} else {
 		//Relative Size
 		length = (1 + end - start) / total;
 			width = length - makeBar_rest;
 			if(end != total){
-					if(width <= makeBar_rest) width = makeBar_rest; 
+					if(width <= makeBar_rest) width = makeBar_rest;
 					if(makeBar_rest > barSize) { makeBar_rest -= length; return null;}
 			}
 			makeBar_rest = width - length + makeBar_rest;
 			bar.style.width = (width*100) + "%";
 	}
-		
+
 	if (parentNode != null || parentNode != '') parentNode.appendChild(bar); else return bar;
 	return null;
 }
 
 function makeCompletionBar(parentNode, range, maps, barSize) {
 	if(!barSize) barSize = screen.width < 1600 ? (screen.width < 1280 ? 1/200 : 1/300) : 0;
-	
+
 	var len = range.length;
 	var span = document.createElement('span');
 	span.className = 'completion';
@@ -581,7 +614,7 @@ function makeCompletionBar(parentNode, range, maps, barSize) {
 		span.onmouseover = function onmouseover(event) {
 			var node = document.createElement('div');
 			if (maps[1]['use']) node.appendChild(document.createTextNode(maps[1]['desc']));
-			if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createTextNode(', ')); 
+			if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createTextNode(', '));
 			if (maps[2]['use']) node.appendChild(document.createTextNode(maps[2]['desc']));
 			setTooltip(node,true,'auto');
 		}
@@ -605,13 +638,13 @@ function expandRange(range,limit,map,array) {
 	for (var r = 0; r < rangeGroups.length; r++) {
 		var rangeGroup = rangeGroups[r];
 		var rg = rangeGroup.split('-');
-		if (Number(rg[0]) >= 1000) 
+		if (Number(rg[0]) >= 1000)
 			continue; //return (new Array(limit)); // don't do this for specials and crap.
-		if ( rg.length == 1 ) 
+		if ( rg.length == 1 )
 			array[Number(rg[0])-1] = map['type'];
 		else {
-			for( var i = Number(rg[0]); i <= Number(rg[1]); i++) 
-				array[ i-1 ] = map['type']; 
+			for( var i = Number(rg[0]); i <= Number(rg[1]); i++)
+				array[ i-1 ] = map['type'];
 		}
 	}
 	return array;
@@ -677,7 +710,7 @@ function clean_input(str) {
 
 /* Function that alerts the user for errors
  * @param func Name of the function
- * @param process 
+ * @param process
  * @param pNode Parent node
  * @param cNode Child node (or currentNode)
  * @return void
@@ -816,9 +849,9 @@ function updateStatus(text,add,targetName) {
 		if (!targetName) targetName = 'statusBox';
 		if (document.getElementById(targetName)) {
 			var statusBox = document.getElementById(targetName);
-			if (!add) { 
+			if (!add) {
 				if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
-				statusBox.appendChild(document.createTextNode(text)); 
+				statusBox.appendChild(document.createTextNode(text));
 			} else {
 				statusBox.firstChild.nodeValue += text;
 			}
@@ -872,9 +905,9 @@ function statusInformation() {
 		this.barElement = div;
 		return div;
 	}
-	this.createBr = function() { 
+	this.createBr = function() {
 		if (!this.container) return;
-		this.brElement = document.createElement('br'); 
+		this.brElement = document.createElement('br');
 		this.brElement.style.display = 'none';
 		return this.brElement;
 	}
@@ -954,7 +987,7 @@ function formatFileSize(size,force) {
 		var aux = new String(size);
 		var sz = new Array();
 		for (var i = 0; i < aux.length; i++) sz.push(aux.charAt(i));
-		aux = ''; 
+		aux = '';
 		var i = sz.length - 1;
 		while (i - 2 > 0) { i -= 2; sz.splice(i, 0, '.'); i--; }
 		for (i = 0; i < sz.length; i++) aux += sz[i];
@@ -1185,7 +1218,7 @@ function get_date(node) {
 		}
 	}
 	var isRange = (string.indexOf('till') >= 0 || string.indexOf(' - ') >= 0);
-	if (isRange) { 
+	if (isRange) {
 		var split = (string.indexOf('till') >= 0 ? string.split('till') : string.split(' - '));
 		return findPrecision(split[0]); // Ranged date mode, just return the first date
 	} else return findPrecision(string); // Single date mode
@@ -1194,8 +1227,8 @@ function get_date(node) {
 /* This function attaches the sorting function to th's
  * @param node If specified tells the root node [node]
  * @param ident If specified tells to make a special case for the th identified by ident [identifier]
- * @param sortico If specified the th referenced by ident will get this sort icon or the i_down1 icon [up|down] 
- */ 
+ * @param sortico If specified the th referenced by ident will get this sort icon or the i_down1 icon [up|down]
+ */
 function init_sorting(node,ident,sortico) {
 	if (!node) node = document;
 	var headinglist;
@@ -1261,7 +1294,7 @@ function init_sorting(node,ident,sortico) {
 		'c_date':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_date},
 		'c_set':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_anidbsort},
 		'c_setlatin':{'sortf':c_string, 'sortr':c_string_r, 'getval':get_anidbsort},
-		'c_none':{'sortf':c_undefined, 'sortr':c_undefined_r, 'getval':get_blank} }	
+		'c_none':{'sortf':c_undefined, 'sortr':c_undefined_r, 'getval':get_blank} }
 }
 
 /* Finds the active sort col and return it's identifier
@@ -1272,7 +1305,7 @@ function findSortCol(node) {
 	var headinglist;
 	if (document.getElementsByTagName)
 		headinglist = node.getElementsByTagName('th');
-	else 	
+	else
 		return;
 	for (var i = 0; i < headinglist.length; i++) {
 		var heading = headinglist[i];
@@ -1310,7 +1343,7 @@ function sortcol(node) {
 	// if this th is not in thead there is probably a reason so just ignore it and go with the flow
 	var startIndex = 0;
 	if (node.parentNode.parentNode.nodeName.toLowerCase() == 'tbody')
-		startIndex = Number(node.parentNode.rowIndex)+1; 
+		startIndex = Number(node.parentNode.rowIndex)+1;
 	var sortfunc = this._sortFunction;
 	if (!sortfunc) {
 		//	We now find out which sort function to apply to the column or none
@@ -1460,10 +1493,10 @@ function sortcol(node) {
 			tbody.appendChild(row);
 		}
 	}
-	
+
 	// this should do something
 	if (table.normalize) table.normalize();
-	
+
 	// DO NOT USE repaintStripes, takes too long to execute and locks up
 	tbody.style.display = '';
 
@@ -1475,7 +1508,7 @@ function sortcol(node) {
 
 /* Function that repaints the stripes of a table
  * Note: this function for some odd reason can lock up rendering for a while
- * @param table Table (or tbody) to paint stripes 
+ * @param table Table (or tbody) to paint stripes
  * @param startAt optional index where to start painting stripes
  */
 function repaintStripes(table, startAt) {
@@ -1518,12 +1551,12 @@ function checkIdentifiers(identifier) {
 	return false;
 }
 /* Function that creates the link for a given hash
- * @return void (sets the hash href) 
+ * @return void (sets the hash href)
  */
 function applyFormat(identifier, file, episode, anime, group) {
 	var originalIdentifier = identifier;
 	var dropIfNull = false;
-	if (identifier.indexOf('<') >= 0) {	
+	if (identifier.indexOf('<') >= 0) {
 		originalIdentifier = originalIdentifier.substr(originalIdentifier.indexOf('<')+1,originalIdentifier.indexOf('>')-1);
 		identifier = identifier.match(/(\%[A-Z]+)/mgi)[0];
 		originalIdentifier = originalIdentifier.replace(identifier,"%replaceme");
@@ -1542,7 +1575,7 @@ function applyFormat(identifier, file, episode, anime, group) {
 			epFmt = '0000'+epFmt;
 			epFmt = epFmt.slice(epFmt.length-epLen.length);
 		}
-		identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
+		identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt);
 	}
 	identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");
 	identifier = identifier.replace(/\%fpn/mgi,(anime.type == 'movie') ? "Part" : "Episode");
@@ -1624,7 +1657,7 @@ function createHashLink() {
 	var fid = Number((parentid.indexOf('fid_') >= 0) ? this.parentNode.id.split('fid_')[1] : this.parentNode.id.split('f')[1]);
 	var file = files[fid];
 	if (!file) return;
-	
+
 	var episode = episodes[file.episodeId];
 	var curAnime = animes[file.animeId];
 	var group = (file.groupId != 0) ? groups[file.groupId] : null;
@@ -1638,8 +1671,8 @@ function createHashLink() {
 	var hashType = possibleHashTypes[i];
 
 	if (!hashObj.usePatterns) hashObj.pattern = hashObj.defaultPattern;
-	var pattern = hashObj[hashType]; 
-	//alert('pattern.in: '+pattern); 
+	var pattern = hashObj[hashType];
+	//alert('pattern.in: '+pattern);
 	var lt = 0; var gt = 0; // Find case '<' and '>' matches
 	for (var i = 0; i < pattern.length; i++) {
 		if (pattern.charAt(i) == '<') lt++;

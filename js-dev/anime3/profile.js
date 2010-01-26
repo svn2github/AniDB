@@ -480,7 +480,7 @@ function prepPage() {
 	createPreferencesTable('profile');
 
 	// Show everything JS related profile option
-	var js_hidden = getElementsByClass(document.getElementById('layout-main'), "javascript");
+	var js_hidden = getElementsByClassNameDeep(document.getElementById('layout-main'), "javascript");
 	for (var i in js_hidden) {
 		var classes = js_hidden[i].split(' ')
 		for (var j in classes) {
