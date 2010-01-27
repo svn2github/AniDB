@@ -240,6 +240,7 @@ function prepLanguages() {
 			}
 		}
 		audlangs.select[0].size = audlangs.select[1].size = 8;
+		audlangs.select[0].className = audlangs.select[1].className = 'shuttle';
 		audioDiv.parentNode.removeChild(audioDiv);
 	}
 	if (subtitlesDiv) {
@@ -262,9 +263,11 @@ function prepLanguages() {
 			}
 		}
 		sublangs.select[0].size = sublangs.select[1].size = 8;
+		sublangs.select[0].className = sublangs.select[1].className = 'shuttle';
 		subtitlesDiv.parentNode.removeChild(subtitlesDiv);
 	}
 	var langsDiv = document.createElement('div');
+		langsDiv.className = "block settings";
 	var h4 = document.createElement('h4')
 	h4.appendChild(document.createTextNode('Languages'));
 	langsDiv.appendChild(h4);
