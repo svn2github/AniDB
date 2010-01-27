@@ -312,7 +312,9 @@ function prepLanguages() {
 	tbody.appendChild(row);
 	table.appendChild(tbody);
 	langsDiv.appendChild(table);
-	form.insertBefore(langsDiv,form.getElementsByTagName('p')[0]);
+
+	var langContainer = getElementsByClassNameDeep(form, 'languages')[0];
+	langContainer.parentNode.insertBefore(langsDiv, langContainer.nextSibling);
 }
 
 function changeLangType() {
@@ -477,14 +479,13 @@ function prepPage() {
 		sublangs.input.name = 'lang.fileslang';
 	}
 	if (audlangs.input && sublangs.input) prepLanguages();
-	createPreferencesTable('profile');
 
 	// Show everything JS related profile option
 	var js_hidden = getElementsByClassNameDeep(document.getElementById('layout-main'), "javascript");
 	for (var i in js_hidden) {
 		var classes = js_hidden[i].className.split(' ');
 		for (var j in classes) {
-			if (classes[j] == "hide") {
+			if (classes[j] == "hidden") {
 				classes.splice(j, 1);
 				js_hidden[i].className = classes.join(' ');
 				break;
