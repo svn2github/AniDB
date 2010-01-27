@@ -49,3 +49,11 @@
 {
 	text-align: center;
 }
+
+#layout-main div.customise_all div.pane div.settings.block
+{
+	display:inline-table;
+	width: 40em;
+	margin-right: 1.5em;
+	margin-top: 1em;
+}

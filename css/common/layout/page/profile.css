@@ -113,11 +113,10 @@
 #layout-main div.profile_all div.pane div.settings.block,
 #layout-main div.profile_all div.pane.general div.body div.pane div /*TODO: remove this line later*/
 {
-	display:inline-block;
+	display:inline-table;
 	width: 40em;
 	margin-right: 1.5em;
 	margin-top: 1em;
-	vertical-align: top;
 }
 
 #layout-main div.profile_all div.pane.general div.body div.pane div ul
