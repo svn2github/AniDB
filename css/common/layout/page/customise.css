@@ -34,3 +34,18 @@
 {
 	margin-left: 1em;
 }
+
+#layout-main div.customise_all div.block div.info dl
+{
+	margin-left:0;
+}
+
+#layout-main div.customise_all *.javascript.hidden
+{
+	display:none;
+}
+
+#layout-main div.customise_all form p
+{
+	text-align: center;
+}

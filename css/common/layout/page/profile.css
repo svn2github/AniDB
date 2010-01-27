@@ -110,7 +110,8 @@
 	text-align: center;
 }
 
-#layout-main div.profile_all div.pane.general div.body div.pane div
+#layout-main div.profile_all div.pane div.settings.block,
+#layout-main div.profile_all div.pane.general div.body div.pane div /*TODO: remove this line later*/
 {
 	display:inline-block;
 	width: 40em;
@@ -160,6 +161,22 @@
 }
 
 #layout-main div.profile_all  div.pane > ul li a.i_inline
+{
+	padding:4px 8px 0 7px;
+}
+
+#layout-main div.profile_all div.pane div.settings.block.javascript.hidden,
+#layout-main div.profile_all *.javascript.hidden
+{
+	display:none;
+}
+
+#layout-main div.profile_all div.pane div.settings.block li
+{
+	line-height:15px;
+}
+
+#layout-main div.profile_all div.pane div.settings.block li a.i_inline
 {
 	padding:4px 8px 0 7px;
 }
