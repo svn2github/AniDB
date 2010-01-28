@@ -71,45 +71,6 @@ var picbase = 'http://img5.anidb.net/pics/anime/';
 var charInfos = new Array(); 		// Character information	(indexed by charid)
 var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
 var animeInfos = new Array();		// Anime information		(indexed by aid)
-// This is the Preference set holders, I will also define defaults now
-var settings = new Array();
-settings['title'] = new Array();
-settings['title']['aATL'] = 'x-jat'; // animeAltTitleLang
-settings['title']['eATL'] = 'x-jat'; // episodeAltTitleLang
-settings['title']['eTD'] = 2; // episodeTitleDisplay
-settings['ed2k'] = new Array();
-settings['ed2k']['pattern'] = (hashObj && hashObj.pattern ? hashObj.pattern : "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>"); // ed2k_pattern
-settings['ed2k']['space'] = (hashObj && hashObj.spacesChar ? hashObj.spacesChar : "_"); // space_pattern
-settings['ed2k']['pad'] = true;
-settings['ed2k']['padonormal'] = true;
-settings['mylist'] = new Array();
-settings['mylist']['use'] = 0; // use_mylist_add
-settings['mylist']['state'] = 0; // mylist_add_state
-settings['mylist']['viewed'] = 0; // mylist_add_viewed_state
-settings['mylist']['fstate'] = 0; // mylist_add_fstate
-settings['mylist']['gstate'] = 0; // mylist_add_state (for generics, defaults to tv)
-settings['group'] = new Array();
-settings['group']['type'] = 0; // group_check_type
-settings['group']['filter'] = 0; // group_langfilter
-settings['aLayout'] = new Array();
-settings['aLayout']['aCS'] = 'default'; // animePage_curSort
-settings['aLayout']['aCSO'] = 'down'; // animePage_curSortOrder
-settings['aLayout']['aPL'] = '0,1,2,3,4,5,6,7,8,9,10,11,12,13'; // animePageLayout
-settings['aLayout']['fsize'] = 0; // format_size
-settings['global'] = new Array();
-settings['global']['collapse'] = 0; //collapseThumbnails
-settings['global']['info'] = 0; // get_info
-settings['global']['infosz'] = 150; // get_info_sz
-settings['global']['infomw'] = 450; // get_info_mw
-settings['other'] = new Array();
-settings['other']['emode'] = 1; // currentFMode
-settings['other']['jsp'] = 1; // usejspopups
-settings['other']['dsearch'] = 'none'; // def_search
-settings['other']['asearch'] = 0; // search_assist
-settings['other']['menuCollapse'] = 0; // what to do with menus that can be collapsed (0 default, 1 allways hide, 2 try to guess based on page width) 
-settings['other']['seeDebug'] = 0; // see debug information
-settings['other']['seeTimes'] = 0; // see timing information
-settings['other']['ignoreLocal'] = 0; // ignore local check information
 
 //get_info_sz = null;
 //get_info_mw = null;
@@ -124,58 +85,6 @@ function changeOptionValue(node) {
 	else return;
 	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);	
 	CookieSet(name,value,3650);
-}
-
-/* Function that loads cookie settings */
-function loadSettings() {
-	// TITLE
-	settings['title'] = CookieGetToArray('title',settings['title']);
-	animeAltTitleLang = settings['title']['aATL'];
-	episodeAltTitleLang = settings['title']['eATL'];
-	episodeTitleDisplay = Number(settings['title']['eTD']);
-	// ED2K
-	settings['ed2k'] = CookieGetToArray('ed2k',settings['ed2k']);
-	ed2k_pattern = settings['ed2k']['pattern'];
-	hashObj.pattern = ed2k_pattern;
-	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
-	hashObj.sfv = hashObj.pattern+".%ext %crc";
-	space_pattern = settings['ed2k']['space'];
-	hashObj.spacesChar = space_pattern;
-	pad_epnums = settings['ed2k']['pad'];
-	pad_only_normal_epnums = settings['ed2k']['padonormal'];
-	// MYLIST
-	settings['mylist'] = CookieGetToArray('mylist',settings['mylist']);
-	use_mylist_add = Number(settings['mylist']['use']);
-	mylist_add_viewed_state = Number(settings['mylist']['viewed']);
-	mylist_add_state = Number(settings['mylist']['state']);
-	mylist_add_fstate = Number(settings['mylist']['fstate']);
-	mylist_add_gstate = Number(settings['mylist']['gstate']);
-	// GLOBAL
-	settings['global'] = CookieGetToArray('global',settings['global']);
-	collapseThumbnails = Number(settings['global']['collapse']);
-	get_info = Number(settings['global']['info']); // bitwise value
-	get_info_sz = Number(settings['global']['infosz']);
-	get_info_mw = Number(settings['global']['infomw']);
-	// GROUP
-	settings['group'] = CookieGetToArray('group',settings['group']);
-	group_check_type = Number(settings['group']['type']);
-	group_langfilter = Number(settings['group']['filter']);
-	// OTHER
-	settings['other'] = CookieGetToArray('other',settings['other']);
-	def_search = settings['other']['dsearch'];
-	currentFMode = Number(settings['other']['emode']);
-	if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
-	searchTypeAssist = search_assist = Number(settings['other']['asearch']);
-	// LAYOUT
-	settings['aLayout'] = CookieGetToArray('aLayout',settings['aLayout']);
-	config['settings']['FORMATFILESIZE'] = format_size = Number(settings['aLayout']['fsize']);
-	animePage_curSort = settings['aLayout']['aCS'];
-	animePage_curSortOrder = settings['aLayout']['aCSO'];
-	animePageLayout = settings['aLayout']['aPL'];
-	animePageLayout = animePageLayout.split(',');
-	animePage_curLayout = new Array();
-	for (var ci = 0; ci < animePageLayout.length; ci++)
-		animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
 }
 
 /* Function that adds file columns */
