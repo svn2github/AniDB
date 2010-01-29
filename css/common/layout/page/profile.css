@@ -179,3 +179,18 @@
 {
 	padding:4px 8px 0 7px;
 }
+
+#layout-main div.profile_all div.pane div.settings.block li input
+{
+	max-width:37em;
+}
+
+#layout-main div.profile_all div.pane div.settings.block li select
+{
+	margin-bottom: 0.2em;
+}
+
+#layout-main div.profile_all div.tabbed_pane div.default_languages a.i_inline
+{
+	padding:4px 8px 0 7px;
+}
