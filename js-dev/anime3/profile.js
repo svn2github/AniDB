@@ -495,7 +495,154 @@ function prepPage() {
 			}
 		}
 	}
+
+	// Make shuttles where necessary
+	createShuttle(getElementsByClassName(document.getElementsByTagName("table"), "shuttle")[0]);
 }
 
-//window.onload = prePage;
+// Creates shuttle
+function createShuttle(target) {
+	if (!target) {
+		return;
+	}
+
+	var select_boxes     = getElementsByClassNameDeep(target, "shuttle");
+	var select_available = select_boxes[0];
+	var select_selected  = select_boxes[1];
+
+	select_available.getSelected = select_selected.getSelectedIndex = function() {
+		var options = this.getElementsByTagName("option");
+		for (var i = 0; i < options.length; i++) {
+			if (options[i].selected) {
+				return i;
+			}
+		}
+	}
+	select_available.getSelected = select_selected.getSelected = function() {
+		var options = this.getElementsByTagName("option");
+		for (var i = 0; i < options.length; i++) {
+			if (options[i] && options[i].selected) {
+				return options[i];
+			}
+		}
+	}
+
+	// Get global data
+	var fieldset = target.getElementsByTagName("fieldset")[0];
+	var name     = fieldset.getElementsByTagName("input")[0].name.substr(5);
+
+	// Binding to update input fields, to submit something useful
+	select_selected.updateInputs = function() {
+		// Delete old inputs, but leave the config name input
+		var inputs = fieldset.getElementsByTagName("input");
+		for (var i = inputs.length - 1; i > 0; i--) {
+			inputs[i].parentNode.removeChild(inputs[i]);
+		}
+
+		// Re-add options
+		var options = select_selected.getElementsByTagName("option");
+		for (var i = 0; i < options.length; i++) {
+			var input = document.createElement("input");
+				input.type  = "hidden";
+				input.name  = name + "[]";
+				input.value = options[i].value;
+			fieldset.appendChild(input);
+		}
+	}
+
+	// Bind doubleclick event to all options and remember order
+	var options = target.getElementsByTagName("option");
+	var order   = [];
+	for (var i = 0; i < options.length; i++) {
+		if (options[i].parentNode == select_selected) {
+			order.push(options[i].value);
+		}
+		addEventSimple(options[i], "dblclick", function() {
+			if (this.parentNode == select_selected) {
+				select_available.appendChild(this.parentNode.removeChild(this));
+			} else {
+				select_selected.appendChild(this.parentNode.removeChild(this));
+			}
+			select_selected.updateInputs();
+		});
+	}
+
+	// Get all buttons, to bind events to
+	var inputs  = target.getElementsByTagName("input");
+	var buttons = { };
+	for (var i = 0; i < inputs.length; i++) {
+		if (inputs[i].type == "button") {
+			buttons[inputs[i].name] = inputs[i];
+		}
+	}
+
+	// Attach move button functions
+	addEventSimple(buttons["add"], "click", function() {
+		var option = select_available.getSelected();
+		if (!option) {
+			return;
+		}
+		select_selected.appendChild(option.parentNode.removeChild(option));
+		select_selected.updateInputs();
+	});
+	addEventSimple(buttons["remove"], "click", function() {
+		var option = select_selected.getSelected();
+		if (!option) {
+			return;
+		}
+		option = option.parentNode.removeChild(option);
+		option.selected = false;
+		select_available.appendChild(option);
+		select_selected.updateInputs();
+	});
+	addEventSimple(buttons["moveup"], "click", function() {
+		var option = select_selected.getSelected();
+		if (!option) {
+			return;
+		}
+		var options = select_selected.getElementsByTagName("option");
+		var i = select_selected.getSelectedIndex();
+
+		if (i == null || i == 0) {
+			return;
+		} else {
+			select_selected.insertBefore(option.parentNode.removeChild(option), options[i - 1]);
+		}
+		select_selected.updateInputs();
+	});
+	addEventSimple(buttons["movedown"], "click", function() {
+		var option = select_selected.getSelected();
+		if (!option) {
+			return;
+		}
+		var options = select_selected.getElementsByTagName("option");
+		var i = select_selected.getSelectedIndex();
+
+		if (i == null) {
+			return;
+		} else if (i + 1 >= options.length) {
+			select_selected.appendChild(option.parentNode.removeChild(option));
+		} else {
+			select_selected.insertBefore(option.parentNode.removeChild(option), options[i + 1]);
+		}
+		select_selected.updateInputs();
+	});
+	addEventSimple(buttons["reset"], "click", function() {
+		for (var i = 0; i < options.length; i++) {
+			if (options[i].parentNode == select_selected) {
+				select_available.appendChild(options[i].parentNode.removeChild(options[i]));
+			}
+		}
+		for (var i = 0; i < order.length; i++) {
+			for (var j = 0; j < options.length; j++) {
+				if (order[i] == options[j].value) {
+					select_selected.appendChild(options[j].parentNode.removeChild(options[j]));
+					break;
+				}
+			}
+		}
+		select_selected.updateInputs();
+	});
+}
+
 addLoadEvent(prepPage);
