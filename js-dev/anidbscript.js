@@ -74,7 +74,6 @@ settings['other']['ignoreLocal'] = 0; // ignore local check information
 
 function loadJSONCookie(cookie) {
 	var r;
-	alert(CookieGet(cookie));
 	try {
 		r = eval('(' + CookieGet(cookie)  + ')');
 	} catch (e) {
