@@ -67,20 +67,150 @@ settings['other']['emode'] = 1; // currentFMode
 settings['other']['jsp'] = 1; // usejspopups
 settings['other']['dsearch'] = 'none'; // def_search
 settings['other']['asearch'] = 0; // search_assist
-settings['other']['menuCollapse'] = 0; // what to do with menus that can be collapsed (0 default, 1 allways hide, 2 try to guess based on page width) 
+settings['other']['menuCollapse'] = 0; // what to do with menus that can be collapsed (0 default, 1 allways hide, 2 try to guess based on page width)
 settings['other']['seeDebug'] = 0; // see debug information
 settings['other']['seeTimes'] = 0; // see timing information
 settings['other']['ignoreLocal'] = 0; // ignore local check information
 
+function loadJSONCookie(cookie) {
+	var r;
+	alert(CookieGet(cookie));
+	try {
+		r = eval('(' + CookieGet(cookie)  + ')');
+	} catch (e) {
+		return new Object();
+	}
+	return r;
+}
+
 /* Function that loads cookie settings */
 function loadSettings() {
+	var cookie = loadJSONCookie('anidbsettings');
+	for (k in cookie) {
+		switch (k) {
+			// Title
+			case 'ALTANIMETITLE':
+				settings['title']['aATL'] = cookie[k];
+				break;
+			case 'ALTEPTITLE':
+				settings['title']['eATL'] = cookie[k];
+				break;
+			case 'ALTEPTITLEDISPLAY':
+				settings['title']['eTD'] = cookie[k];
+				break;
+			// eD2k
+			case 'ED2KPATTERN':
+				settings['ed2k']['pattern'] = cookie[k];
+				break;
+			// settings['ed2k']['space'] = "_"; // space_pattern <-- Where is this?
+			case 'NOEPNOPADDING':
+				settings['ed2k']['padonormal'] = cookie[k];
+				break;
+			case 'PADALLEPNOS':
+				settings['ed2k']['pad'] = cookie[k];
+				break;
+			// My List
+			case 'USEQUICKADD':
+				settings['mylist']['use'] = cookie[k];
+				break;
+			case 'MYLISTADDSTATE':
+				settings['mylist']['state'] = cookie[k];
+				break;
+			case 'MYLISTADDWATCHEDSTATE':
+				settings['mylist']['viewed'] = cookie[k];
+				break;
+			case 'MYLISTADDFILESTATE':
+				settings['mylist']['fstate'] = cookie[k];
+				break;
+			case 'MYLISTADDGENFILESTATE':
+				settings['mylist']['gstate'] = cookie[k];
+				break;
+			// Group
+			case 'fix': // Fix // group_check_type
+				settings['group']['type'] = cookie[k];
+				break;
+			case 'fix': // Fix // group_langfilter
+				settings['group']['filter'] = cookie[k];
+				break;
+			// Layout
+			case 'LAYOUTANIMEFILESORT':
+				settings['aLayout']['aCS'] = cookie[k];
+				break;
+			case 'LAYOUTANIMEFILESORTORDER':
+				settings['aLayout']['aCSO']= cookie[k];
+				break;
+			case 'LAYOUTANIMEFILE':
+				//alert(cookie[k]);
+				//settings['aLayout']['aPL'] = cookie[k].join(',');
+				break;
+			case 'fix': // format_size
+				settings['aLayout']['fsize'] = cookie[k];
+				break;
+			// Global
+			case 'USETHUMBNAILHOVER':
+				settings['global']['collapse'] = cookie[k];
+				break;
+			case 'DEFAULTINFOTOOLTIPSIZE':
+				settings['global']['infosz'] = cookie[k];
+				break;
+			case 'DEFAULTINFOTOOLTIPWIDTH':
+				settings['global']['infomw'] = cookie[k];
+				break;
+			// Global > Tooltips
+			case 'SHOWINFOTOOLTIPONANIME':
+				settings['global']['info'] |= 1;
+				break;
+			case 'SHOWINFOTOOLTIPONMYLIST':
+				settings['global']['info'] |= 2;
+				break;
+			case 'fix': // Use information tooltips on Episode pages
+				settings['global']['info'] |= 4;
+				break;
+			case 'SHOWINFOTOOLTIPONGROUP':
+				settings['global']['info'] |= 8;
+				break;
+			case 'SHOWINFOTOOLTIPONCHAR':
+				settings['global']['info'] |= 16;
+				break;
+			case 'fix': // Use information tooltips on Creator pages
+				settings['global']['info'] |= 32;
+				break;
+			case 'SHOWINFOTOOLTIPONWISHLIST':
+				settings['global']['info'] |= 64;
+				break;
+			// Other
+			case 'DEFAULTEDITORMODE':
+				settings['other']['emode'] = cookie[k];
+				break;
+			case 'DISABLEJSPOPUPS':
+				settings['other']['jsp'] = 0;
+				break;
+			case 'DEFAULTSEARCHTYPE':
+				// fix, probably needs the shortname and not index
+				settings['other']['dsearch'] = cookie[k];
+				break;
+			case 'USESEARCHASSIST':
+				settings['other']['asearch'] = cookie[k];
+				break;
+			case 'DEFAULTSIDEBARBEHAVIOUR':
+				settings['other']['menuCollapse'] = cookie[k];
+				break;
+			case 'SHOWDEBUGINFO':
+				settings['other']['seeDebug'] = cookie[k];
+				break;
+			case 'SHOWTIMINGINFO':
+				settings['other']['seeTimes'] = cookie[k];
+				break;
+			case 'DISABLELOCALHOSTCHECK':
+				settings['other']['ignoreLocal'] = cookie[k];
+				break;
+		}
+	}
 	// TITLE
-	settings['title'] = CookieGetToArray('title',settings['title']);
 	animeAltTitleLang = settings['title']['aATL'];
 	episodeAltTitleLang = settings['title']['eATL'];
 	episodeTitleDisplay = Number(settings['title']['eTD']);
 	// ED2K
-	settings['ed2k'] = CookieGetToArray('ed2k',settings['ed2k']);
 	ed2k_pattern = settings['ed2k']['pattern'];
 	hashObj.pattern = ed2k_pattern;
 	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
@@ -90,30 +220,25 @@ function loadSettings() {
 	pad_epnums = settings['ed2k']['pad'];
 	pad_only_normal_epnums = settings['ed2k']['padonormal'];
 	// MYLIST
-	settings['mylist'] = CookieGetToArray('mylist',settings['mylist']);
 	use_mylist_add = Number(settings['mylist']['use']);
 	mylist_add_viewed_state = Number(settings['mylist']['viewed']);
 	mylist_add_state = Number(settings['mylist']['state']);
 	mylist_add_fstate = Number(settings['mylist']['fstate']);
 	mylist_add_gstate = Number(settings['mylist']['gstate']);
 	// GLOBAL
-	settings['global'] = CookieGetToArray('global',settings['global']);
 	collapseThumbnails = Number(settings['global']['collapse']);
 	get_info = Number(settings['global']['info']); // bitwise value
 	get_info_sz = Number(settings['global']['infosz']);
 	get_info_mw = Number(settings['global']['infomw']);
 	// GROUP
-	settings['group'] = CookieGetToArray('group',settings['group']);
 	group_check_type = Number(settings['group']['type']);
 	group_langfilter = Number(settings['group']['filter']);
 	// OTHER
-	settings['other'] = CookieGetToArray('other',settings['other']);
 	def_search = settings['other']['dsearch'];
 	currentFMode = Number(settings['other']['emode']);
 	if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
 	searchTypeAssist = search_assist = Number(settings['other']['asearch']);
 	// LAYOUT
-	settings['aLayout'] = CookieGetToArray('aLayout',settings['aLayout']);
 	config['settings']['FORMATFILESIZE'] = format_size = Number(settings['aLayout']['fsize']);
 	animePage_curSort = settings['aLayout']['aCS'];
 	animePage_curSortOrder = settings['aLayout']['aCSO'];
@@ -156,7 +281,7 @@ Array.prototype.sum = function(){
 
 /* returns computed style information about a specific element
  * @param element where to get attributes
- * @param attribute what to get 
+ * @param attribute what to get
  */
 function getStyleInformation(element,attribute,debug) {
 	if (!element && attribute) return;
@@ -183,7 +308,7 @@ function getStyleInformation(element,attribute,debug) {
 			'\nresult: '+result
 		);
 	}
-	
+
 	if (!attribute) {
 		if (useGetCumputedStyle)
 			return window.getComputedStyle(element,null);
@@ -364,7 +489,7 @@ function ClassToggle(elem, name, mode) {
 		classes.splice(index,1);
 		elem.className = classes.join(" ");
 		return 1;
-	}	
+	}
 }
 
 function ckChangeEvnt(event,object) {
@@ -454,7 +579,7 @@ function enhanceCheckboxes(parent) {
 				}
 				if (!checkbox._inColumn)
 					checkbox._inColumn = check_column(checkbox);
-				
+
 				for (currentIndex += 1; currentIndex < checkbox.form.elements.length && checkbox.form.elements[currentIndex] != end; currentIndex++) {
 					if (checkbox.form.elements[currentIndex].type == "checkbox" && !checkbox.form.elements[currentIndex].disabled) {
 						if (!checkbox._inColumn || checkbox._inColumn == check_column(checkbox.form.elements[currentIndex])) {
@@ -567,7 +692,7 @@ var Magic = {
 			for (i = 0; k = params[i]; i++)
 			{
 				n = document.createElement("a");
-				n.title = k[2]; 
+				n.title = k[2];
 				n.appendChild(document.createTextNode(k[0]));
 				if( k[1] ){ n.href=""; n.onclick = k[1]; }
 				else n.href = validatorloc+"?uri=referer&doctype="+doctypecheck.replace(" ","+");
@@ -601,7 +726,7 @@ var Magic = {
 			else
 			{
 				var req = new XMLHttpRequest();
-				req.open('GET', window.location, false); 
+				req.open('GET', window.location, false);
 				req.send(null);
 				if(req.status != 200) { alert("Refetching the document failed with code: "+req.status); }
 				else
@@ -686,7 +811,7 @@ var Magic = {
 		}),
 	'toggle_hide':(function (e) {
 			var block = this.parentNode;
-			ClassToggle(block, 'collapsed'); 
+			ClassToggle(block, 'collapsed');
 			while ( block = block.nextSibling ){
 				if( block.nodeType==1 )
 					ClassToggle(block, 'hide');
@@ -696,7 +821,7 @@ var Magic = {
 			var elems = document.getElementsByTagName('ul');
 			// find out page name
 			var selected = (defaultTabs[(curPageID ? curPageID : 'tab')] ? defaultTabs[(curPageID ? curPageID : 'tab')] : 'tab1');//CookieGet((curPageID ? curPageID + "_" : "")+'tab') || 'tab1';
-			for (var i = 0; i < elems.length; i++){				
+			for (var i = 0; i < elems.length; i++){
 				if(elems[i].className == "tabs"){
 					var li = elems[i].getElementsByTagName('li');
 					for (var j = 0; j < li.length; j++){
@@ -722,7 +847,7 @@ var Magic = {
 					if(pane){
 						var elems = tab.parentNode.getElementsByTagName('li');
 						for (var i = 0; i < elems.length; i++){
-							ClassToggle(elems[i], 'selected', 2);						
+							ClassToggle(elems[i], 'selected', 2);
 						}
 						ClassToggle(tab, 'selected', 1);
 						tabCookieSet((curPageID ? curPageID : 'tab'), tab.id);
@@ -737,7 +862,7 @@ var Magic = {
 							}
 							if (topTab && elems[i].parentNode.parentNode == topTab) {
 								continue;
-							} 
+							}
 							if (elems[i].className.indexOf('pane') < 0) continue;
 							ClassToggle(elems[i], 'hide', 1);
 						}
@@ -823,7 +948,7 @@ var Magic = {
 				enhanceCheckboxes(formElems[i]);
 				addCheckboxesEvent(formElems[i]);
 			}
-		
+
 		})
 };
 
@@ -854,7 +979,7 @@ function InitDefault() {
 	Magic.applySpoilerInputs();			//apply spoiler tag js support
 	Magic.enhanceCheckboxes();			//add gmail like checkbox select and the like
 	compressMenus();
-	
+
 	enable_sort(navigator.appName=='Opera'||navigator.userAgent.indexOf('Firefox/3.0')>0
 		?do_sort_opera_and_ff3:do_sort_generic);
 	var un = document.getElementById('user-name');
@@ -885,10 +1010,10 @@ function enable_sort(func){
 function do_sort_generic(){
 	var t = new Date().getTime(), s;
 	var tx = new Array();
-	
+
 	var type = this.getAttribute("anidb:sort");
 	var desc = ClassToggle(this, 'ascending', 2);
-	
+
 	var ths = this.parentNode.getElementsByTagName('th');
 	for (var i = 0; i < ths.length; i++){
 		ClassToggle(ths[i], 'ascending', 2);
@@ -902,11 +1027,11 @@ function do_sort_generic(){
 
 	var section = this.parentNode.parentNode;
 	var table = section.parentNode;
-	
+
 	table.normalize();
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 	var tmp = new Array();
 	var num = true; var reg = /^\d+$/;
 	var rows = section.getElementsByTagName('tr');
@@ -918,9 +1043,9 @@ function do_sort_generic(){
 		tmp.push([ section.removeChild(rows[1]), val, rows.length ]);
 		if(num && !reg.test(val)) num = false;
 	}
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 	if( desc ){
 		tmp.sort(num?sort_number_r:sort_text_r);
 		ClassToggle(this, 'descending', 1);
@@ -928,9 +1053,9 @@ function do_sort_generic(){
 		tmp.sort(num?sort_number:sort_text);
 		ClassToggle(this, 'ascending', 1);
 	}
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 
 	if(rows.length>1){
 		var last = rows[1];
@@ -944,9 +1069,9 @@ function do_sort_generic(){
 			section.appendChild(tmp[i][0]);
 		}
 	}
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 	/*var t = document.getElementById('layout-footer');
 	var p = t.appendChild(document.createElement('p'));
 	p.appendChild(document.createTextNode(tx.join(', ')+ " => "+tx.sum()+" / "+rows.length));*/
@@ -955,10 +1080,10 @@ function do_sort_generic(){
 function do_sort_opera_and_ff3(){
 	var t = new Date().getTime(), s;
 	var tx = new Array();
-	
+
 	var type = this.getAttribute("anidb:sort");
 	var desc = ClassToggle(this, 'ascending', 2);
-	
+
 	var ths = this.parentNode.getElementsByTagName('th');
 	for (var i = 0; i < ths.length; i++){
 		ClassToggle(ths[i], 'ascending', 2);
@@ -972,16 +1097,16 @@ function do_sort_opera_and_ff3(){
 
 	var section = this.parentNode.parentNode;
 	var table = section.parentNode;
-	
+
 	table.removeChild(section);
 	//ClassToggle(table, 'hide', 1);
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 	table.normalize();
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 	var tmp = new Array();
 	var num = true; var reg = /^\d+$/;
 	var rows = section.getElementsByTagName('tr');
@@ -996,9 +1121,9 @@ function do_sort_opera_and_ff3(){
 		tmp.push([ rows[i], val, rows.length-i ]);
 		if(num && !reg.test(val)) num = false;
 	}
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 	if( desc ){
 		tmp.sort(num?sort_number_r:sort_text_r);
 		ClassToggle(this, 'descending', 1);
@@ -1006,9 +1131,9 @@ function do_sort_opera_and_ff3(){
 		tmp.sort(num?sort_number:sort_text);
 		ClassToggle(this, 'ascending', 1);
 	}
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 
 	if(last){
 		var last = rows[last];
@@ -1022,12 +1147,12 @@ function do_sort_opera_and_ff3(){
 			section.appendChild(tmp[i][0]);
 		}
 	}
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
 	table.appendChild(section);
-	
+
 	s = new Date().getTime(); tx.push(s-t); t=s;
-	
+
 	/*var t = document.getElementById('layout-footer');
 	var p = t.appendChild(document.createElement('p'));
 	p.appendChild(document.createTextNode(tx.join(', ')+ " => "+tx.sum()+" / "+rows.length));*/
@@ -1088,15 +1213,15 @@ function CookieSet( name, value, expires, path, domain, secure ) {
 		expires = expires * 1000 * 60 * 60 * 24;
 	}
 	var expires_date = new Date( today.getTime() + (expires) );
-	
+
 	//alert('CookieSet: '+name+'='+value);
-	
+
 	var text = name + "=" +escape( value ) +
-	( ( expires ) ? ";expires=" + expires_date.toGMTString() : "" ) + 
-	( ( path ) ? ";path=" + path : "" ) + 
+	( ( expires ) ? ";expires=" + expires_date.toGMTString() : "" ) +
+	( ( path ) ? ";path=" + path : "" ) +
 	( ( domain ) ? ";domain=" + domain : "" ) +
 	( ( secure ) ? ";secure" : "" );
-	
+
 	//alert('cookie['+text.length+']:\n'+text);
 
 	document.cookie = text;
@@ -1106,12 +1231,12 @@ function CookieSet( name, value, expires, path, domain, secure ) {
 function CookieGet( check_name ) {
 	var a_all_cookies = document.cookie.split( ';' );
 	var a_temp_cookie, cookie_name, cookie_value;
-	
+
 	for ( i = 0; i < a_all_cookies.length; i++ )
 	{
 		a_temp_cookie = a_all_cookies[i].split( '=' );
 		cookie_name = a_temp_cookie[0].replace(/^\s+|\s+$/g, '');
-	
+
 		if ( cookie_name == check_name ){
 			if ( a_temp_cookie.length > 1 ){
 				cookie_value = unescape( a_temp_cookie[1].replace(/^\s+|\s+$/g, '') );
@@ -1158,7 +1283,7 @@ function CookieGetToArray(name, array) {
 	return array;
 }
 
-// Tag Search Auto Completion. (C) 2008 antennen 
+// Tag Search Auto Completion. (C) 2008 antennen
 // Relies on ajax.js by fahrenheit
 var lastSearch = "";
 var seeDebug = false;
@@ -1173,7 +1298,7 @@ function search() {
 		var ll = lastSearch.length
 		var cl = this.value.length
 		var min = Math.min(ll, cl);
-		
+
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
 			lastSearch = this.value;
 			switch(type) {
@@ -1211,8 +1336,8 @@ function printTags() {
 	var search = target.parentNode.parentNode.getElementsByTagName("input")[0]
 	if(target.hasChildNodes()) {
 		while(target.childNodes.length > 0) {
-			target.removeChild(target.firstChild);       
-		} 
+			target.removeChild(target.firstChild);
+		}
 	}
 	// Loop search result and filter
 	var i = 0;
@@ -1246,18 +1371,18 @@ function printTags() {
 			i++;
 		}
 	}
-	
+
 	target.style.display = "block";
 	target.style.position = "absolute";
 	target.style.left = search.offsetLeft + "px";
 	target.style.top = search.offsetTop + search.offsetHeight + "px";
 	target.style.width = search.offsetWidth - 2 + "px";
-	
+
 	if(i >= 8) {
 		height = target.firstChild.offsetHeight * 8;
 		if(height > 0) target.style.height = height + "px";
 	} else target.style.height = "auto";
-	
+
 	// Don't display if tag is matched or no tags are matched
 	if(i == 0 || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())) {
 		target.style.display = "none";
@@ -1279,7 +1404,7 @@ if (searchTypeDefaultAssist) {
 			textfield.onchange = function() {
 				setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
 			}
-			
+
 			// Find search type dropdown
 			var dropdown = target.getElementsByTagName("select")[0];
 			if(dropdown) {
@@ -1315,39 +1440,39 @@ if (searchTypeDefaultAssist) {
 /* Legacy code */
 
 //anidb.js code (C) 2003 by PetriW
-function myGetElement(name) { 
-	if (document.getElementById) { 
-		// Standards 
-		return document.getElementById(name); 
-	} else if (document.layers) { 
-		// NS 4 
-		return document.layers[name]; 
-	} else if (document.all) { 
-		// IE 4 
-		return document.all[name]; 
-	} else { 
+function myGetElement(name) {
+	if (document.getElementById) {
+		// Standards
+		return document.getElementById(name);
+	} else if (document.layers) {
+		// NS 4
+		return document.layers[name];
+	} else if (document.all) {
+		// IE 4
+		return document.all[name];
+	} else {
 		return false;
-	} 
+	}
 }
 
-function cbSelect(files) { 
-	for (var i = 0; i < files.length; i++) { 
-		myGetElement('mylmod.f.' + files[i]).checked = true; 
-	} 
-} 
+function cbSelect(files) {
+	for (var i = 0; i < files.length; i++) {
+		myGetElement('mylmod.f.' + files[i]).checked = true;
+	}
+}
 
-function cbDeselect(files) { 
-	for (var i = 0; i < files.length; i++) { 
-		myGetElement('mylmod.f.' + files[i]).checked = false; 
-	} 
-} 
+function cbDeselect(files) {
+	for (var i = 0; i < files.length; i++) {
+		myGetElement('mylmod.f.' + files[i]).checked = false;
+	}
+}
 
-function cbToggle(files) { 
-	for (var i = 0; i < files.length; i++) { 
+function cbToggle(files) {
+	for (var i = 0; i < files.length; i++) {
 		obj = myGetElement('mylmod.f.' + files[i]);
 		if (obj)
-			obj.checked = !obj.checked; 
-	} 
+			obj.checked = !obj.checked;
+	}
 }
 
 /* SPINNERs */
@@ -1355,58 +1480,58 @@ function cbToggle(files) {
 function SpinControlAcceleration(increment, milliseconds) {
 	increment = parseFloat(increment);
 	if(isNaN(increment) || increment < 0) increment = 0;
-  
-	milliseconds = parseInt(milliseconds); 
+
+	milliseconds = parseInt(milliseconds);
 	if(isNaN(milliseconds) || milliseconds < 0) milliseconds = 0;
-    
+
 	this.GetIncrement = function() { return increment; }
-	this.GetMilliseconds = function() { return milliseconds; }    
+	this.GetMilliseconds = function() { return milliseconds; }
 }
 
 function SpinControlAccelerationCollection() {
 	var _array = new Array();
 
 	this.GetCount = function() { return _array.length; }
-  
+
 	this.GetIndex = function(index) {
 		if(index < 0 || index >= _array.length) return null;
 		return _array[index];
 	}
-  
+
 	this.RemoveIndex = function(index) {
 		if(index < 0 || index >= _array.length) return;
 
-		newArray = new Array(); 
+		newArray = new Array();
 		for(var i=0; i<_array.length; i++) {
 			if(i == index) continue;
 			newArray.push(_array[i]);
 		}
 		_array = newArray;
 	}
-  
-	this.Clear = function() { _array = new Array(); }  
-	
-	this.Add = function(spa) { 
+
+	this.Clear = function() { _array = new Array(); }
+
+	this.Add = function(spa) {
 		if(spa.constructor != SpinControlAcceleration) return;
 		if(_array.length == 0) { _array.push(spa); return; }
 
 		var newSec = spa.GetMilliseconds();
 		if(newSec > _array[_array.length-1].GetMilliseconds()) { _array.push(spa); return; }
-    
+
 		var added = false;
-		var newArray = new Array();    
+		var newArray = new Array();
 		var indexSec;
 		for(var i=0; i<_array.length; i++) {
 			if(added) newArray.push(_array[i]);
 			else {
 				indexSec = _array[i].GetMilliseconds();
-				if(indexSec < newSec) newArray.push(_array[i]);        
+				if(indexSec < newSec) newArray.push(_array[i]);
 				else if(indexSec == newSec) { newArray.push(spa); added = true; }
 				else { newArray.push(_array[i]); newArray.push(spa); added = true; }
 			}
 		}
 		_array = newArray;
-		return;     
+		return;
 	}
 }
 
@@ -1424,11 +1549,11 @@ function SpinControl() {
 	var _isDisabled = false;
 
 	var _running = 0;
-	var _interval = -1;  
+	var _interval = -1;
 	var _timeStart = 0;
 
 	var _bodyEventHooked = false;
-	
+
 	var _hiddenInput = null;
 
 	var _container = document.createElement("div");
@@ -1438,7 +1563,7 @@ function SpinControl() {
 	_textBox.type = 'text';
 	_textBox.className = 'spinInput';
 	_textBox.value = _currentValue;
-  
+
 	var _upButton = document.createElement("div");
 	_upButton.className = 'spinUpBtn';
 
@@ -1447,8 +1572,8 @@ function SpinControl() {
 
 	_container.appendChild(_textBox);
 	_container.appendChild(_upButton);
-	_container.appendChild(_downButton);  
-  
+	_container.appendChild(_downButton);
+
 	function Run() {
 		if(_isDisabled) return;
 		if(_running == 0) return;
@@ -1461,14 +1586,14 @@ function SpinControl() {
 			for(var i = 0; i<_accelerationCollection.GetCount(); i++) {
 				if(elapsed < _accelerationCollection.GetIndex(i).GetMilliseconds()) break;
 				inc = _accelerationCollection.GetIndex(i).GetIncrement();
-			}    
+			}
 		} else if(elapsed < _updateInterval) {
 			return;
 		}
-    
+
 		DoChange(inc);
 	}
-  
+
 	function CancelRunning() {
 		if(_isDisabled) return;
 		_running = 0;
@@ -1479,7 +1604,7 @@ function SpinControl() {
 		var newVal = _currentValue + inc * _running;
 		UpdateCurrentValue(newVal);
 	}
-  
+
 	function StartRunning(newState) {
 		if(_isDisabled) return;
 		if(_running != 0) CancelRunning();
@@ -1491,7 +1616,7 @@ function SpinControl() {
 		_timeStart = new Date().getTime();
 		_interval = setInterval(Run, 150);
 	}
-  
+
 	function UpdateCurrentValue(newVal) {
 		if(newVal <_minimumVal) newVal = _minimumVal;
 		if(newVal > _maximumVal) newVal = _maximumVal;
@@ -1506,7 +1631,7 @@ function SpinControl() {
 		for(var i=0; i<_callbackArray.length; i++)
 			_callbackArray[i](_this, _currentValue);
 	}
-  
+
 	function UpPress(e) {
 		_upButton.className = 'spinUpBtnPress';
 		_downButton.className = 'spinDownBtn';
@@ -1514,7 +1639,7 @@ function SpinControl() {
 		_textBox.focus();
 		return cancelEvent(e);
 	}
-  
+
 	function DownPress(e) {
 		_upButton.className = 'spinUpBtn';
 		_downButton.className = 'spinDownBtnPress';
@@ -1522,17 +1647,17 @@ function SpinControl() {
 		_textBox.focus();
 		return cancelEvent(e);
 	}
- 
+
 	function UpHover(e) {
 		if(!_bodyEventHooked)
 			hookEvent(document.body, 'mouseover', ClearBtns);
-      
+
 		_upButton.className = 'spinUpBtnHover';
 		_downButton.className = 'spinDownBtn';
 		CancelRunning();
 		return cancelEvent(e);
 	}
-  
+
 	function DownHover(e) {
 		if(!_bodyEventHooked)
 			hookEvent(document.body, 'mouseover', ClearBtns);
@@ -1542,7 +1667,7 @@ function SpinControl() {
 		CancelRunning();
 		return cancelEvent(e);
 	}
-  
+
 	function ClearBtns(e) {
 		var target = getEventTarget(e);
 		if(target == _upButton || target == _downButton)
@@ -1550,40 +1675,40 @@ function SpinControl() {
 		_upButton.className = 'spinUpBtn';
 		_downButton.className = 'spinDownBtn';
 		CancelRunning();
-    
+
 		if(_bodyEventHooked) {
 			unhookEvent(document.body, 'mouseover', ClearBtns);
 			_bodyEventHooked = false;
 		}
 		return cancelEvent(e);
 	}
-  
+
 	function BoxChange() {
 		var val = parseFloat(_textBox.value);
 		if(isNaN(val)) val = _currentValue;
 
 		UpdateCurrentValue(val);
 	}
-  
+
 	function MouseWheel(e) {
 		e = e ? e : window.event;
 		var movement = e.detail ? e.detail / -3 : e.wheelDelta/120;
 		UpdateCurrentValue(_currentValue + _increment * movement);
 		return cancelEvent(e);
 	}
-  
+
 	function TextFocused(e) {
 		hookEvent(window, 'DOMMouseScroll', MouseWheel);
 		hookEvent(document, 'mousewheel', MouseWheel);
 		return cancelEvent(e);
 	}
-  
+
 	function TextBlur(e) {
 		unhookEvent(window, 'DOMMouseScroll', MouseWheel);
 		unhookEvent(document, 'mousewheel', MouseWheel);
 		return cancelEvent(e);
 	}
-	
+
 	function keysPressed(e) {
 		var keynum = getPressedKey(e);
 		switch (keynum) {
@@ -1592,7 +1717,7 @@ function SpinControl() {
 			default: break;
 		}
 	}
-	
+
 	function keysReleased(e) {
 		var keynum = getPressedKey(e);
 		switch (keynum) {
@@ -1601,13 +1726,13 @@ function SpinControl() {
 			default: break;
 		}
 	}
-  
+
 	this.StartListening = function() {
-		hookEvent(_upButton, 'mousedown', UpPress); 
+		hookEvent(_upButton, 'mousedown', UpPress);
 		hookEvent(_upButton, 'mouseup', UpHover);
 		hookEvent(_upButton, 'mouseover', UpHover);
 
-		hookEvent(_downButton, 'mousedown', DownPress); 
+		hookEvent(_downButton, 'mousedown', DownPress);
 		hookEvent(_downButton, 'mouseup', DownHover);
 		hookEvent(_downButton, 'mouseover', DownHover);
 
@@ -1617,13 +1742,13 @@ function SpinControl() {
 		hookEvent(_textBox, 'keydown', keysPressed);
 		hookEvent(_textBox, 'keyup', keysReleased);
 	}
-   
+
 	this.StopListening = function() {
-		unhookEvent(_upButton, 'mousedown', UpPress); 
+		unhookEvent(_upButton, 'mousedown', UpPress);
 		unhookEvent(_upButton, 'mouseup', UpHover);
 		unhookEvent(_upButton, 'mouseover', UpHover);
-    
-		unhookEvent(_downButton, 'mousedown', DownPress); 
+
+		unhookEvent(_downButton, 'mousedown', DownPress);
 		unhookEvent(_downButton, 'mouseup', DownHover);
 		unhookEvent(_downButton, 'mouseover', DownHover);
 
@@ -1632,13 +1757,13 @@ function SpinControl() {
 		unhookEvent(_textBox, 'blur', TextBlur);
 		unhookEvent(_textBox, 'keydown', keysPressed);
 		unhookEvent(_textBox, 'keyup', keysReleased);
-    
+
 		if(_bodyEventHooked) {
 			unhookEvent(document.body, 'mouseover', ClearBtns);
 			_bodyEventHooked = false;
 		}
 	}
-  
+
 	this.SetMaxValue = function(value) {
 		value = parseFloat(value);
 		if(isNaN(value)) value = 1;
@@ -1655,18 +1780,18 @@ function SpinControl() {
 
 	this.SetCurrentValue = function(value) {
 		value = parseFloat(value);
-		if(isNaN(value)) value = 0;	
+		if(isNaN(value)) value = 0;
 		UpdateCurrentValue(value);
 	}
-  
+
 	this.SetWidth = function(value) {
 		value = parseInt(value);
 		if(isNaN(value) || value < 25) value = 25;
 		_width = value;
     	_container.style.width = _width + 'px';
-		_textBox.style.width = (_width - 20) + 'px';  
+		_textBox.style.width = (_width - 20) + 'px';
 	}
-	
+
 	this.SetUpdateInterval = function(value) {
 		value = Number(value);
 		if(isNaN(value)) value = 600;
@@ -1674,49 +1799,49 @@ function SpinControl() {
 		if (value > 10000) value = 10000; // more than 10 seconds between updates !?
 		_updateInterval = value;
 	}
-  
+
 	this.SetIncrement = function(value) {
 		value = parseFloat(value);
 		if(isNaN(value)) value = 0;
 		if(value < 0) value = -value;
-    
+
 		_increment = value;
 	}
-	
+
 	this.SetInputName = function(name) { _textBox.name = name; }
 	this.SetInputId = function(id) { _textBox.id = id; }
 	this.SetInputValue = function(value) { _textBox.value = value; }
-	this.SetInputFields = function(name, id, value) { 
+	this.SetInputFields = function(name, id, value) {
 		if (name != null) _textBox.name = name;
 		if (id != null) _textBox.id = id;
 		if (value != null) _textBox.value = value;
 	}
-	
-	this.SetDisabled = function(value) { 
-		_isDisabled = value; 
+
+	this.SetDisabled = function(value) {
+		_isDisabled = value;
 		_textBox.disabled = value;
 	}
-	
+
 	this.SetHiddenInput = function(element) {
 		_hiddenInput = element;
 		_textBox._hiddenInput = _hiddenInput;
 	}
-  
+
 	this.AttachValueChangedListener = function(listener) {
 		for(var i=0; i<_callbackArray.length; i++)
 			if(_callbackArray[i] == listener)
 				return;
-        
-		_callbackArray.push(listener);  
+
+		_callbackArray.push(listener);
 	}
-  
+
 	this.DetachValueChangedListener = function(listener) {
 		newArray = new Array();
 		for(var i=0; i<_callbackArray.length; i++)
 			if(_callbackArray[i] != listener)
 				newArray.push(_callbackArray[i]);
 
-		_callbackArray = newArray;  
+		_callbackArray = newArray;
 	}
 
 	this.GetContainer = function() { return _container; }
