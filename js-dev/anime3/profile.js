@@ -485,9 +485,9 @@ function prepPage() {
 
 	// Show everything JS related profile option
 	var js_hidden = getElementsByClassNameDeep(document.getElementById('layout-main'), "javascript");
-	for (var i in js_hidden) {
+	for (var i = 0; i < js_hidden.length; i++) {
 		var classes = js_hidden[i].className.split(' ');
-		for (var j in classes) {
+		for (var j = 0; j < classes.length; j++) {
 			if (classes[j] == "hidden") {
 				classes.splice(j, 1);
 				js_hidden[i].className = classes.join(' ');
@@ -501,6 +501,7 @@ function prepPage() {
 	for (var i = 0; i < shuttles.length; i++) {
 		createShuttle(shuttles[i]);
 	}
+
 }
 
 // Creates shuttle
@@ -623,7 +624,7 @@ function createShuttle(target) {
 
 		if (i == null) {
 			return;
-		} else if (i + 1 >= options.length) {
+		} else if (i + 2 >= options.length) {
 			select_selected.appendChild(option.parentNode.removeChild(option));
 		} else {
 			select_selected.insertBefore(option.parentNode.removeChild(option), options[i + 1]);
