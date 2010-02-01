@@ -497,7 +497,10 @@ function prepPage() {
 	}
 
 	// Make shuttles where necessary
-	createShuttle(getElementsByClassName(document.getElementsByTagName("table"), "shuttle")[0]);
+	var shuttles = getElementsByClassName(document.getElementsByTagName("table"), "shuttle");
+	for (var i = 0; i < shuttles.length; i++) {
+		createShuttle(shuttles[i]);
+	}
 }
 
 // Creates shuttle
