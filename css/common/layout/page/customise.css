@@ -53,9 +53,8 @@
 #layout-main div.customise_all div.pane div.settings.block
 {
 	display:inline-table;
-	width: 40em;
-	margin-right: 1.5em;
-	margin-top: 1em;
+	vertical-align:top;
+	width:auto;
 }
 
 #layout-main div.customise_all div.tabbed_pane div.default_languages,
@@ -64,4 +63,9 @@
 	display:table;
 	margin-left:auto;
 	margin-right:auto;
+}
+
+#layout-main div.customise_all div.pane div.settings.block table
+{
+	margin:0;
 }
