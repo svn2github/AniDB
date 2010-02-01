@@ -1,6 +1,6 @@
 /* file customization support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- *         
+ *
  * version 1.0 (03.02.2009) - Initial release
  * version 1.5 (18.02.2009) - Merged information tooltips
  */
@@ -21,7 +21,7 @@ function changeOptionValue(node) {
 	else if (node.name && !node.id) name = node.name;
 	else if (!node.name && node.id) name = node.id;
 	else return;
-	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);	
+	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);
 	CookieSet(name,value,3650);
 }
 
@@ -47,7 +47,7 @@ var animePage_defLayout = ['check-anime','fid','group','size','crc','langs','cf'
 var animePage_curLayout = ['check-anime','fid','group','size','crc','langs','cf','resolution','anime-source','quality','anime-hashes','users','state-anime','actions-anime'];
 var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-source','users'];
 var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
-var animePage_curSort = 'default'; // whatever the db spits out 
+var animePage_curSort = 'default'; // whatever the db spits out
 var ed2k_pattern = (hashObj && hashObj.pattern ? hashObj.pattern : "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>");
 var space_pattern = (hashObj && hashObj.spacesChar ? hashObj.spacesChar : "_");
 var use_mylist_add = 0;
@@ -83,7 +83,7 @@ function changeOptionValue(node) {
 	else if (node.name && !node.id) name = node.name;
 	else if (!node.name && node.id) name = node.id;
 	else return;
-	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);	
+	var value = (node.type == 'checkbox' ? Number(node.checked) : node.value);
 	CookieSet(name,value,3650);
 }
 
@@ -153,7 +153,7 @@ function resetColsBox() {
 	for (var lc = 0; lc < tempArray.length; lc++) {
 		var option = tempArray[lc];
 		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
-		newOption.ondblclick = remColFromBox; 
+		newOption.ondblclick = remColFromBox;
 		userAnimeLayoutSelect.appendChild(newOption);
 		//tempArray.splice(tempArray.indexOf(option),1);
 	}
@@ -162,7 +162,7 @@ function resetColsBox() {
 	for (var lc = 0; lc < tempArray.length; lc++) {
 		var option = tempArray[lc];
 		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
-		newOption.ondblclick = addColToBox; 
+		newOption.ondblclick = addColToBox;
 		defsAnimeLayoutSelect.appendChild(newOption);
 	}
 */
@@ -188,7 +188,7 @@ function makeLayoutPreferencesTable() {
 	for (var lc = 0; lc < animePage_curLayout.length; lc++) {
 		var option = animePage_curLayout[lc];
 		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
-		newOption.ondblclick = remColFromBox; 
+		newOption.ondblclick = remColFromBox;
 		userAnimeLayoutSelect.appendChild(newOption);
 		tempArray.splice(tempArray.indexOf(option),1);
 	}
@@ -196,7 +196,7 @@ function makeLayoutPreferencesTable() {
 	for (var lc = 0; lc < tempArray.length; lc++) {
 		var option = tempArray[lc];
 		var newOption = createSelectOption(null, animeFileColsList[option].text, option, false, null, false);
-		newOption.ondblclick = addColToBox; 
+		newOption.ondblclick = addColToBox;
 		defsAnimeLayoutSelect.appendChild(newOption);
 	}
 	userAnimeLayoutSelect.size = defsAnimeLayoutSelect.size = 14;
@@ -223,7 +223,7 @@ function makeLayoutPreferencesTable() {
 	cell.appendChild(document.createElement('br'));
 	cell.appendChild(document.createElement('br'));
 	var resetCol = createButton('resetCol','resetCol',false,'x','button');
-	resetCol.onclick = resetColsBox;	
+	resetCol.onclick = resetColsBox;
 	cell.appendChild(resetCol);
 	cell.appendChild(document.createElement('br'));
 	cell.appendChild(document.createElement('br'));
@@ -277,13 +277,13 @@ function addSetting(ul,array) {
 	if (array["elements"]) {
 		for (var i=0; i < array["elements"].length; i++) {
 			li.appendChild(array["elements"][i]);
-			if (i < array["elements"].length-1) 
+			if (i < array["elements"].length-1)
 				li.appendChild(document.createTextNode(" "));
 		}
 	}
-	if (array["text"]) 
+	if (array["text"])
 		li.appendChild(document.createTextNode(' '+array["text"]));
-	ul.appendChild(li);	
+	ul.appendChild(li);
 }
 
 
@@ -309,7 +309,7 @@ function createPreferencesTable(type) {
 
 	/* load settings from cookie */
 	loadSettings();
-	
+
 	/* create preferences tabs */
 	var main = panes = jsdiv = bodyDiv = null;
 	var body = document.createElement('div');
@@ -327,9 +327,9 @@ function createPreferencesTable(type) {
 		ul_tabs.appendChild(li);
 		if (t < items[type].length) ul_tabs.appendChild(document.createTextNode(' '));
 	}
-	
+
 	panes.appendChild(ul_tabs);
-	
+
 	if (type != 'profile') {
 		main = document.createElement('div');
 		main.className = "g_section preferences";
@@ -354,7 +354,7 @@ function createPreferencesTable(type) {
 		jsdiv = document.createElement('div');
 		jsdiv.id = 'tab_'+num+'_pane';
 		jsdiv.className = 'pane hide javascript';
-	
+
 		body.className = 'body';
 	}
 	for (var t = 0; t < items[type].length; t++) {
@@ -389,7 +389,7 @@ function createPreferencesTable(type) {
 				var ul = document.createElement('ul');
 				var elements = new Array();
 				var input = createTextInput('ed2k_pattern',80,false,false,255,ed2k_pattern);
-				input.onchange = function() { 
+				input.onchange = function() {
 					ed2k_pattern = this.value;
 					hashObj.pattern = ed2k_pattern;
 					hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
@@ -411,10 +411,10 @@ function createPreferencesTable(type) {
 					"text":"ED2K hash style",
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_ED2K',
 					"help-text":"You can customize the display of the ed2k links here, see the wiki page for more help."});
-				
+
 				elements = new Array();
 				var setSpace = createTextInput('space_pattern',1,false,false,1,space_pattern);
-				setSpace.onchange = function() { 
+				setSpace.onchange = function() {
 					space_pattern = this.value;
 					hashObj.spacesChar = space_pattern;
 				};
@@ -426,7 +426,7 @@ function createPreferencesTable(type) {
 					space_pattern = hashObj.defaultSpacesChar;
 					hashObj.spacesChar = space_pattern;
 				};
-				elements.push(setSpaceDefault);				
+				elements.push(setSpaceDefault);
 				addSetting(ul,{
 					"elements":elements,
 					"text":"ED2K hash spaces convert character",
@@ -440,7 +440,7 @@ function createPreferencesTable(type) {
 						},Number(pad_epnums),' Pad episode numbers',null),
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST',
 					"help-text":"Pad episode numbers to the same greatness as the maximum normal episode count. ie: 25 eps -> S01, 251 eps -> S001."});
-				
+
 				addSetting(ul,{
 					"element":createLabledCheckBox(null,'pad_only_normal_epnums','pad_only_normal_epnums',function() {
 							pad_only_normal_epnums = Number(this.checked);
@@ -493,7 +493,7 @@ function createPreferencesTable(type) {
 					"text":"Default quick-add file state (generic)",
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_MYLIST',
 					"help-text":"Default mylist quick-add file state for generic files"});
-					
+
 				var watchedSel = createSelectArray(null,"mylist_add_viewed_state","mylist_add_viewed_state",null,mylist_add_viewed_state,{0:{"text":'unwatched'},1:{"text":'watched'}});
 				if (!use_mylist_add) watchedSel.disabled = true;
 				watchedSel.onchange = function() { mylist_add_viewed_state = this.value; };
@@ -634,8 +634,8 @@ function createPreferencesTable(type) {
 			case 'global':
 				var ul = document.createElement('ul');
 				addSetting(ul,{
-					"element":createLabledCheckBox(null,'collapseThumbnails','collapseThumbnails',function() { 
-					collapseThumbnails = Number(this.checked); 
+					"element":createLabledCheckBox(null,'collapseThumbnails','collapseThumbnails',function() {
+					collapseThumbnails = Number(this.checked);
 					},Number(collapseThumbnails),' Collapse thumbnails on rows',null),
 					"help-link":'http://wiki.anidb.net/w/PAGE_PREFERENCES_GLOBAL',
 					"help-text":"Check if you want to collapse Thumbnail rows when not hovering on them."});
@@ -704,7 +704,7 @@ function createPreferencesTable(type) {
 		}
 		body.appendChild(tab);
 	}
-	
+
 	var p = document.createElement('p');
 	var reloadInput = document.createElement('button');
 	reloadInput.name = 'do.apply';
@@ -835,7 +835,7 @@ function createPreferencesTable(type) {
 		jsdiv.appendChild(header);
 		panes.appendChild(body);
 		jsdiv.appendChild(panes);
-		jsdiv.appendChild(p);		
+		jsdiv.appendChild(p);
 		bodyDiv.appendChild(jsdiv);
 	}
 }
@@ -930,10 +930,10 @@ function CInfo(node) {
 		HIDETHUMBNAILS = false;
 	} else
 		HIDETHUMBNAILS = true;
-	
+
 	this.title = node.getAttribute('title');
 	this.mainlang = node.getAttribute('mainlang');
-	
+
 	this.titles = new Array();
 	var dataNodes = node.getElementsByTagName('data');
 	for (var i = 0; i < dataNodes.length; i++) {
@@ -1087,7 +1087,7 @@ function findAllInfoIcons(acid) {
 	var targets = document.getElementsByTagName('a');
 	var validTargets = new Array();
 	for (var i = 0; i < targets.length; i++) {
-		if (targets[i].id == acid) 
+		if (targets[i].id == acid)
 			validTargets.push(targets[i]);
 	}
 	return validTargets;
@@ -1125,122 +1125,5 @@ function showInfo() {
 		}
 	} else { // display the data
 		showInfoWork(this,info,type);
-	}
-}
-
-/* Function that takes care of tabs and adds sorting and other stuff to the tabs
- * @param sortingCols Sorting definitions
- * @param tableNames Ids of tables that we are going to process
- * @param skipTables Ids of tables to skip adding info icons (optional, but needs to be set as null if not used)
- * @param collapseThumbnails Should we collapse thumbnails (optional, defaults to false)
- * @param get_info Should we create the information icon (optional, defaults to true)
- */
-function handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_info) {
-	if (!sortingCols || !tableNames) return;
-	if (collapseThumbnails == null) collapseThumbnails = false;
-	if (get_info == null) get_info = true;
-	var tables = new Array();
-	for (var t = 0; t < tableNames.length; t++) {
-		var tester = document.getElementById(tableNames[t]);
-		if (tester) tables.push(tester);
-	}
-	for (var t = 0; t < tables.length; t++) {
-		globalStatus.updateBarWithText('Preparing tabs',parseInt(t+1/tables.length*100),'Total progress: ');
-		var table = tables[t];
-		var tbody = table.tBodies[0];
-		// let's assume that either we have a thead node
-		// or if we don't, if the first row of the tbody
-		// has "header" in the classname that row is the
-		// thead
-		var thead = table.getElementsByTagName('thead')[0];
-		var headRow = (tbody.rows[0] && tbody.rows[0].className.indexOf('header') >= 0);
-		if (!thead && headRow) {
-			thead = document.createElement('thead');
-			thead.appendChild(tbody.rows[0]);
-			table.insertBefore(thead,tbody);
-		}
-		if (thead) { // apply sorting only if we have a table head (which in turns means we have headers)
-			var sortingTable = sortingCols[table.id];
-			if (sortingTable == undefined && table.id.indexOf('_') > 0) // first and only fail back i'm trying
-				sortingTable = sortingCols[table.id.substring(0,table.id.indexOf('_'))];
-			if (sortingTable != undefined) {
-				var ths = thead.getElementsByTagName('th');
-				var defaultTh = null;
-				var defaultSort = null;
-				for (var i = 0; i < ths.length; i++) {
-					var colDef = sortingTable[ths[i].className];
-					if (!colDef) continue;
-					ths[i].className += ' '+colDef['type'];
-					if (colDef['isDefault']) {
-						defaultTh = ths[i];
-						defaultSort = 'down';
-					}
-				}
-				init_sorting(table,defaultTh,defaultSort);
-			}
-		}
-		if (skipTables && skipTables.indexOf(table.id) >= 0) continue;
-		if (!Number(collapseThumbnails) && !Number(get_info)) continue; // don't do the rest of the stuff
-		for (var r = 0; r < tbody.rows.length; r++) {
-			var row = tbody.rows[r];
-			if (Number(collapseThumbnails)) {
-				// add onmouseover/onmouseout effects
-				addEventSimple(row, "mouseover", function showImages(event) {
-					var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-					for (var i = 0; i < images.length; i++) {
-						var imageCell = images[i];
-						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-						if (img) img.style.display = '';
-					}
-				});
-				addEventSimple(row, "mouseout", function showImages(event) {
-					var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
-					for (var i = 0; i < images.length; i++) {
-						var imageCell = images[i];
-						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-						if (img) img.style.display = 'none';
-					}
-				});
-				// collapse images
-				var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
-				for (var i = 0; i < images.length; i++) {
-					var imageCell = images[i];
-					var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
-					if (img) img.style.display = 'none';
-				}
-			}
-			if (Number(get_info) && divHTMLTOOLTIP != null) {
-				var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
-				for (var n = 0; n < names.length; n++) {
-					var nameCell = names[n];
-					var label = nameCell.getElementsByTagName('label')[0];
-					var a = (!label ? nameCell.getElementsByTagName('a')[0] : label.getElementsByTagName('a')[0]);
-					if (!a) continue;
-					nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
-					var type = null;
-					if (a.href.indexOf('creator') >= 0) type = 'creator';
-					else if (a.href.indexOf('character') >= 0) type = 'character';
-					else if (a.href.indexOf('=anime') >= 0) type = 'anime';
-					else continue;
-					if (!type) continue;
-					var id = a.href.substring(a.href.indexOf('id=')+3);
-					var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show '+type+' information', 'i_mylist_ainfo_greyed');
-					if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
-					else infoIcon.id = 'ainfo_'+id;
-					var icons = getElementsByClassName(nameCell.getElementsByTagName('span'),'icons',false)[0];
-					if (!icons) {
-						icons = document.createElement('span');
-						icons.className = 'icons';
-					}
-					icons.appendChild(infoIcon);
-					if (!label) {
-						label = document.createElement('label');
-						label.appendChild(a);
-					}
-					nameCell.appendChild(label);
-					nameCell.insertBefore(icons,label);
-				}
-			}
-		}
 	}
 }

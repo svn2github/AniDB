@@ -1803,6 +1803,122 @@ function confirmRevokes() {
 		}
 	}
 }
-
 // hook up the window onload event
 addLoadEvent(confirmRevokes);
+
+/* Function that takes care of tabs and adds sorting and other stuff to the tabs
+ * @param sortingCols Sorting definitions
+ * @param tableNames Ids of tables that we are going to process
+ * @param skipTables Ids of tables to skip adding info icons (optional, but needs to be set as null if not used)
+ * @param collapseThumbnails Should we collapse thumbnails (optional, defaults to false)
+ * @param get_info Should we create the information icon (optional, defaults to true)
+ */
+function handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_info) {
+	if (!sortingCols || !tableNames) return;
+	if (collapseThumbnails == null) collapseThumbnails = false;
+	if (get_info == null) get_info = true;
+	var tables = new Array();
+	for (var t = 0; t < tableNames.length; t++) {
+		var tester = document.getElementById(tableNames[t]);
+		if (tester) tables.push(tester);
+	}
+	for (var t = 0; t < tables.length; t++) {
+		globalStatus.updateBarWithText('Preparing tabs',parseInt(t+1/tables.length*100),'Total progress: ');
+		var table = tables[t];
+		var tbody = table.tBodies[0];
+		// let's assume that either we have a thead node
+		// or if we don't, if the first row of the tbody
+		// has "header" in the classname that row is the
+		// thead
+		var thead = table.getElementsByTagName('thead')[0];
+		var headRow = (tbody.rows[0] && tbody.rows[0].className.indexOf('header') >= 0);
+		if (!thead && headRow) {
+			thead = document.createElement('thead');
+			thead.appendChild(tbody.rows[0]);
+			table.insertBefore(thead,tbody);
+		}
+		if (thead) { // apply sorting only if we have a table head (which in turns means we have headers)
+			var sortingTable = sortingCols[table.id];
+			if (sortingTable == undefined && table.id.indexOf('_') > 0) // first and only fail back i'm trying
+				sortingTable = sortingCols[table.id.substring(0,table.id.indexOf('_'))];
+			if (sortingTable != undefined) {
+				var ths = thead.getElementsByTagName('th');
+				var defaultTh = null;
+				var defaultSort = null;
+				for (var i = 0; i < ths.length; i++) {
+					var colDef = sortingTable[ths[i].className];
+					if (!colDef) continue;
+					ths[i].className += ' '+colDef['type'];
+					if (colDef['isDefault']) {
+						defaultTh = ths[i];
+						defaultSort = 'down';
+					}
+				}
+				init_sorting(table,defaultTh,defaultSort);
+			}
+		}
+		if (skipTables && skipTables.indexOf(table.id) >= 0) continue;
+		if (!Number(collapseThumbnails) && !Number(get_info)) continue; // don't do the rest of the stuff
+		for (var r = 0; r < tbody.rows.length; r++) {
+			var row = tbody.rows[r];
+			if (Number(collapseThumbnails)) {
+				// add onmouseover/onmouseout effects
+				addEventSimple(row, "mouseover", function showImages(event) {
+					var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+					for (var i = 0; i < images.length; i++) {
+						var imageCell = images[i];
+						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+						if (img) img.style.display = '';
+					}
+				});
+				addEventSimple(row, "mouseout", function showImages(event) {
+					var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+					for (var i = 0; i < images.length; i++) {
+						var imageCell = images[i];
+						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+						if (img) img.style.display = 'none';
+					}
+				});
+				// collapse images
+				var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
+				for (var i = 0; i < images.length; i++) {
+					var imageCell = images[i];
+					var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+					if (img) img.style.display = 'none';
+				}
+			}
+			if (Number(get_info) && divHTMLTOOLTIP != null) {
+				var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
+				for (var n = 0; n < names.length; n++) {
+					var nameCell = names[n];
+					var label = nameCell.getElementsByTagName('label')[0];
+					var a = (!label ? nameCell.getElementsByTagName('a')[0] : label.getElementsByTagName('a')[0]);
+					if (!a) continue;
+					nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
+					var type = null;
+					if (a.href.indexOf('creator') >= 0) type = 'creator';
+					else if (a.href.indexOf('character') >= 0) type = 'character';
+					else if (a.href.indexOf('=anime') >= 0) type = 'anime';
+					else continue;
+					if (!type) continue;
+					var id = a.href.substring(a.href.indexOf('id=')+3);
+					var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show '+type+' information', 'i_mylist_ainfo_greyed');
+					if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
+					else infoIcon.id = 'ainfo_'+id;
+					var icons = getElementsByClassName(nameCell.getElementsByTagName('span'),'icons',false)[0];
+					if (!icons) {
+						icons = document.createElement('span');
+						icons.className = 'icons';
+					}
+					icons.appendChild(infoIcon);
+					if (!label) {
+						label = document.createElement('label');
+						label.appendChild(a);
+					}
+					nameCell.appendChild(label);
+					nameCell.insertBefore(icons,label);
+				}
+			}
+		}
+	}
+}
