@@ -68,3 +68,8 @@
 {
 	margin:0;
 }
+
+#layout-main div.customise_all div.pane div.settings.block.languages > table
+{
+	margin:auto;
+}
