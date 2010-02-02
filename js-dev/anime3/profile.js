@@ -267,7 +267,7 @@ function prepLanguages() {
 		subtitlesDiv.parentNode.removeChild(subtitlesDiv);
 	}
 	var langsDiv = document.createElement('div');
-		langsDiv.className = "block settings";
+		langsDiv.className = "block settings languages";
 	var h4 = document.createElement('h4')
 	h4.appendChild(document.createTextNode('Languages'));
 	langsDiv.appendChild(h4);
