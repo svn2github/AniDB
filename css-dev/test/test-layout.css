@@ -71,3 +71,13 @@
 	padding-top:3em;
 	width:50em;
 }
+
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"]
+{
+	padding:3px 5px;
+}

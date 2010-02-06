@@ -156,13 +156,8 @@ button,
 input[type="button"],
 input[type="submit"]
 {
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
 	background-color:#34394D;
-	border:1px solid #34394D;
-	border-radius:5px;
 	color:#FFFFFF;
-	padding:3px 5px;
 }
 
 span.test:hover,
@@ -173,10 +168,10 @@ button:hover,
 #layout-main ul.g_list li.g_odd:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
-#layout-search input.submit:hover
+#layout-search input.submit:hover,
+#layout-menu #menu-login input[type="button"]
 {
 	background-color:#C8CACE;
-	border:1px solid #34394D;
 	color:#000000;
 }
 

@@ -98,3 +98,16 @@ a
 {
 	border-left: none;
 }
+
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"]
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #34394D;
+	border-radius:5px;
+}
