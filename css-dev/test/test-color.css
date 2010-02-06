@@ -14,7 +14,8 @@ a:link
 }
 
 span.link:hover,
-a:hover
+a:hover,
+th > a:hover
 {
 	color:#AA0000;
 }
@@ -115,13 +116,20 @@ table
 }
 
 option,
+th,
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-menu a:link,
 #layout-menu a:visited,
 #layout-tabs ul.main-tabs li a,
-#layout-main ul.g_list li a
+#layout-main ul.g_list li a,
+#menu-login li.user-xkeep label span,
+#layout-search input,
+#user-xname input,
+#user-xpass input,
+#user-xname input,
+#user-xpass input
 {
 	color:#CCCCCC;
 }
@@ -132,7 +140,11 @@ option,
 #layout-main div.g_timedentry p.comment,
 #layout-main table tr.header a,
 #layout-main div.userpage_all > div.g_section > h4 a,
-#layout-main div.animeatt_all div.review > h4 a
+#layout-main div.animeatt_all div.review > h4 a,
+#layout-main th > span.link,
+#layout-main th > a:visited,
+#layout-main th > a:active,
+#layout-main th > a:link
 {
 	color:#A2BFD7;
 }
@@ -169,7 +181,7 @@ button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 #layout-search input.submit:hover,
-#layout-menu #menu-login input[type="button"]
+#layout-menu li.user-xauth input[type="button"]
 {
 	background-color:#C8CACE;
 	color:#000000;
@@ -209,7 +221,6 @@ tr,
 	background-color:#C8CACE;
 }
 
-#layout-main div.anime_all div.mylist th,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
 #layout-main span.g_odd,
@@ -224,7 +235,13 @@ tr,
 
 #layout-tabs ul.main-tabs li,
 #layout-menu > li ul,
-#layout-menu li.sub-menu
+#layout-menu li.sub-menu,
+th,
+#layout-search input,
+#user-xname input,
+#user-xpass input,
+#user-xname input,
+#user-xpass input
 {
 	background-color:#34394D;
 }
@@ -234,16 +251,6 @@ tr,
 #layout-main ul.g_list li:hover a
 {
 	color:#000000;
-}
-
-#layout-search input,
-#user-xname input,
-#user-xpass input,
-#user-xname input,
-#user-xpass input
-{
-	background-color:#34394d;
-	color:#CCCCCC;
 }
 
 select,
@@ -292,4 +299,27 @@ th,
 #layout-main div.g_timedentry div.body
 {
 	border-color:#AAAAAA;
+}
+
+#layout-menu li.sub-menu ul li#user-xpass:hover,
+#layout-menu li.sub-menu ul li#user-xname:hover,
+#layout-menu li.sub-menu ul li#user-xkeep:hover,
+#layout-menu li.sub-menu ul li#user-xauth:hover
+{
+	background-color: #34394D;
+}
+
+#layout-main div.tabbed_pane div.body div.pane > ul *.g_odd
+{
+	background-color:inherit;
+}
+
+#layout-menu li.sub-menu ul li#user-xauth
+{
+	background:url("http://static.anidb.net/css/icons/orange/button_logon.gif") no-repeat scroll 0 0 transparent;
+}
+
+#layout-menu li.sub-menu ul li#user-signup
+{
+	background:url("http://static.anidb.net/css/icons/orange/button_signup.gif") no-repeat scroll 0 0 transparent;
 }

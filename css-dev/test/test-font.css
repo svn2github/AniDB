@@ -12,3 +12,15 @@ input[type="checkbox"]
 	font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
 	font-size:130%;
 }
+
+#layout-menu li.sub-menu ul li#user-xpass input,
+#layout-menu li.sub-menu ul li#user-xname input
+{
+	font-size:13px;
+}
+
+#layout-menu li.sub-menu ul li#user-signup a,
+#layout-menu li.sub-menu ul li#user-xauth button
+{
+	cursor:pointer;
+}

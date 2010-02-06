@@ -81,3 +81,43 @@ input[type="submit"]
 {
 	padding:3px 5px;
 }
+
+#layout-menu li.sub-menu ul li#user-xname,
+#layout-menu li.sub-menu ul li#user-xpass
+{
+	padding-bottom: 0.2em;
+}
+
+#layout-menu li.sub-menu ul li.alert
+{
+	clear:right;
+}
+
+#layout-menu li.sub-menu ul li#user-signup a,
+#layout-menu li.sub-menu ul li#user-xauth button
+{
+	height:12px;
+	display:block;
+}
+
+#layout-menu li.sub-menu ul li#user-xauth button span,
+#layout-menu li.sub-menu ul li#user-signup a span
+{
+	display: none;
+}
+
+#layout-menu li.sub-menu ul li#user-signup
+{
+	height:12px;
+	width:42px;
+	margin:3px 10px 3px 8px;
+	padding:0;
+}
+
+#layout-menu li.sub-menu ul li#user-xauth
+{
+	height:12px;
+	width:42px;
+	margin:-15px 2px 3px 58px;
+	padding:0;
+}
