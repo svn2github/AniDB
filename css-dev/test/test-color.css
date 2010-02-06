@@ -14,8 +14,7 @@ a:link
 }
 
 span.link:hover,
-a:hover,
-#layout-main th > a:hover
+a:hover
 {
 	color:#AA0000;
 }
@@ -156,7 +155,8 @@ th,
 #layout-main div.g_timedentry p.comment a:hover,
 #layout-main table tr.header a:hover,
 #layout-main div.userpage_all > div.g_section > h4 a:hover,
-#layout-main div.animeatt_all div.review > h4 a:hover
+#layout-main div.animeatt_all div.review > h4 a:hover,
+#layout-main th > a:hover
 {
 	color:#FFAA55;
 }
@@ -308,7 +308,7 @@ input[type="checkbox"]
 	background-color: #34394D;
 }
 
-#layout-main div.tabbed_pane div.body div.pane > ul *.g_odd
+#layout-main div.tabbed_pane div.body div.pane ul *.g_odd
 {
 	background-color:inherit;
 }
