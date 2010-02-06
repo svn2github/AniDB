@@ -38,9 +38,9 @@ ul, li {
 	list-style-type: none;
 }
 
-h1, h2, h3, h4 {
+/*h1, h2, h3, h4 {
 	margin: 0;
-}
+}*/
 
 table {
 	border-collapse: collapse;
@@ -68,7 +68,14 @@ abbr {
 }
 
 /*tabbing pane*/
-#layout-main div.tabbed_pane ul.tabs
-{
+#layout-main div.tabbed_pane ul.tabs {
 	margin: 1px 1px 3px 6px;
 }
+#layout-main div.profile_all div.tabbed_pane,
+#layout-main div.profile_all div.preferences {
+	width: auto;
+}
+#layout-main div.tabbed_pane + h4 + div.tabbed_pane {
+	padding-top: 0.5em;
+}
+

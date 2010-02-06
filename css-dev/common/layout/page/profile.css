@@ -110,13 +110,14 @@
 	text-align: center;
 }
 
-#layout-main div.profile_all div.pane.general div.body div.pane div
+#layout-main div.profile_all div.pane div.settings.block,
+#layout-main div.profile_all div.pane.general div.body div.pane div /*TODO: remove this line later*/
 {
-	display:inline-block;
+	display:inline-table;
 	width: 40em;
 	margin-right: 1.5em;
 	margin-top: 1em;
-	vertical-align: top;
+	vertical-align:top;
 }
 
 #layout-main div.profile_all div.pane.general div.body div.pane div ul
@@ -152,4 +153,55 @@
 	text-align: left;
 	display: block;
 	white-space:normal;
+}
+
+#layout-main div.profile_all  div.pane > ul li
+{
+	line-height: 15px;
+}
+
+#layout-main div.profile_all  div.pane > ul li a.i_inline
+{
+	padding:4px 8px 0 7px;
+}
+
+#layout-main div.profile_all div.pane div.settings.block.javascript.hidden,
+#layout-main div.profile_all *.javascript.hidden
+{
+	display:none;
+}
+
+#layout-main div.profile_all div.pane div.settings.block li
+{
+	line-height:15px;
+}
+
+#layout-main div.profile_all div.pane div.settings.block li a.i_inline
+{
+	padding:4px 8px 0 7px;
+}
+
+#layout-main div.profile_all div.pane div.settings.block li input
+{
+	max-width:37em;
+}
+
+#layout-main div.profile_all div.pane div.settings.block li select
+{
+	margin-bottom: 0.2em;
+}
+
+#layout-main div.profile_all div.tabbed_pane div.default_languages a.i_inline
+{
+	padding:4px 8px 0 7px;
+}
+
+#layout-main div.profile_all div.pane div.settings.block table
+{
+	margin:0;
+}
+
+#layout-main div.profile_all div.pane div.settings.block table + ul
+{
+	margin-top: 0.2em;
 }

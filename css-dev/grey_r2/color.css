@@ -2,51 +2,47 @@ span.link,
 a,
 #layout-main div.forum div.poll div.inner div.question h2
 {
-color: #ADD8E6;
-border-bottom-color: white;
+color:#ADD8E6;
+border-bottom-color:white;
 }
 thead,
-tr th,
-#layout-content div.anime_mylist th,
-#layout-content div.anime_group th,
-#layout-content div.agcmts_entries div.comment h4,
-#layout-content div.dbstats_all h4,
-#layout-content div.stats_all h4
-#layout-content div.main_all h4,
-#layout-content div.main_edit h4,
-#layout-content div.news_all h4,
+tr > th,
+#layout-main div.anime_mylist th,
+#layout-main div.anime_group th,
+#layout-main div.agcmts_entries div.comment h4,
+#layout-main div.dbstats_all h4,
+#layout-main div.stats_all h4,
+#layout-main div.main_all h4,
+#layout-main div.main_edit h4,
+#layout-main div.news_all h4,
 #layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4,
 #layout-main div.blog h4,
-*[bgcolor="#b0b0b0"],
-*[bgcolor="#969aa6"],
-*[bgcolor="#494D59"]
+#layout-main div.timeline_all div.timeline ul.row li.dropped
 {
-background-color: hsla(0, 100%, 25%, 0.4);
+background-color:hsla(0, 100%, 25%, 0.4);
 }
-#layout-main tr th.field
+#layout-main tr > th.field,
+#layout-main div.pane.account th
 {
-background-color: transparent;
+background-color:transparent;
 }
 html,
 #layout-content,
 #layout-main div.quotebody div.quotebody:nth-of-type(2n+1),
 #layout-main div.forum div.postbody dl.codebox
 {
-background-image: url(../grey/images/bg_1.gif);
+background-image:url(../grey/images/bg_1.gif);
 }
-#layout-nav,#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account
+#layout-nav,#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account,
+#layout-main div.forum div.body dl.codebox dd
 {
-background-image: url(../grey/images/bg_2.gif);
+background-image:url(../grey/images/bg_2.gif);
 }
-#layout-main div.tabbed_pane div.pane table td
-{
-background-color: transparent;
-}
-#layout-content div.g_msg.error,
-#layout-content div.g_msg.warning,
-#layout-content div.g_msg.note,
-#layout-content div.g_msg.success,
+#layout-main div.g_msg.error,
+#layout-main div.g_msg.warning,
+#layout-main div.g_msg.note,
+#layout-main div.g_msg.success,
 #layout-content #layout-main div.tabbed_pane ul.contribute li.g_odd,
 #layout-main div.addcharcharrel_all div.explanation div.description,
 #layout-main div.addseq_all div.explanation div.description,
@@ -75,25 +71,31 @@ button,
 tr.g_odd,
 li.g_odd,
 span.g_odd,
-#layout-content div.creq_all tr.revoked td,
-#layout-content div.creq_all tr.deleted td,
-#layout-content div.animeatt_reviews div.review > h4,
-#layout-content div.animeatt_reviews div.review div.text,
+#layout-content div.creq_all tr.revoked > td,
+#layout-content div.creq_all tr.deleted > td,
+#layout-content div.animeatt_reviews > div.review > h4,
+#layout-content div.animeatt_reviews > div.review > div.text,
 div.quotebody div.quote div.g_odd,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
 #layout-main div.quotebody div.quoteof,
-#layout-footer
+#layout-footer,
+#layout-main div.timeline_all div.timeline ul.legend li span
 {
-background-color: hsla(0, 0%, 0%, 0.4);
+background-color:hsla(0, 0%, 0%, 0.4);
 }
-#layout-content table.animelist tr.mylist td
+#layout-content table.animelist tr.mylist td,
+#layout-content table.stafflist tr.mylist td,
+#layout-main div.timeline_all div.timeline ul.row li.watching
 {
-background-color: hsla(34, 95%, 44%, 0.4);
+background-color:hsla(34, 95%, 44%, 0.4);
 }
 #layout-content table.animelist tr.complete td,
-#layout-main div.forum div.poll div.pollbar
+#layout-content table.stafflist tr.complete td,
+#layout-main div.forum div.poll div.pollbar,
+#layout-main div.timeline_all div.timeline ul.row li.stalled
+
 {
-background-color: hsla(207, 86%, 44%, 0.4);
+background-color:hsla(207, 86%, 44%, 0.4);
 }
 #layout-content div.anime_all tr.good,
 #layout-content div.group_all tr.good,
@@ -107,14 +109,16 @@ background-color: hsla(207, 86%, 44%, 0.4);
 #layout-content div.creq_data ins,
 #layout-content div.animeatt_reviews div.review.approved > h4,
 #layout-content table.animelist tr.all_watched td,
-#layout-content #layout-main div.ed2kdump_all table.filelist .in
+#layout-content table.stafflist tr.all_watched td,
+#layout-content #layout-main div.ed2kdump_all table.filelist .in,
+#layout-main div.timeline_all div.timeline ul.row li.completed
 {
-background-color: hsla(127, 54%, 25%, 0.6);
+background-color:hsla(127, 54%, 25%, 0.6);
 }
 #layout-content div.myvotes_all table .low,
 #layout-content div.animeatt_reviews div.review.disapproved > h4
 {
-background-color: hsla(0, 100%, 50%, 0.3);
+background-color:hsla(0, 100%, 50%, 0.3);
 }
 #layout-main div.quotebody,
 #layout-main div.forum div.postbody dl.codebox dt,
@@ -122,7 +126,7 @@ background-color: hsla(0, 100%, 50%, 0.3);
 #layout-main div.forum div.events div.inner,
 #layout-main div.export_all div.exportblock div.inner
 {
-background-image: url(../grey/images/bg_3.gif);
+background-image:url(../grey/images/bg_3.gif);
 }
 #layout-main table ul li.g_odd,
 #layout-main table table td.g_odd,
@@ -130,46 +134,47 @@ background-image: url(../grey/images/bg_3.gif);
 #layout-tabs .g_odd,
 tr.action td.submit:hover
 {
-background: inherit;
+background:inherit;
 }
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-tabs ul.main-tabs > li
 {
-border: 1px solid #565656;
-border-bottom-color: transparent;
-color: gray;
+border:1px solid #565656;
+border-bottom-color:transparent;
+color:gray;
 }
 #layout-tabs ul.main-tabs > li a span
 {
-color: gray;
+color:gray;
 }
 #layout-main div.tabbed_pane div.body,
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom,
 #layout-tabs ul.main-tabs > li.selected,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-tabs ul.main-tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs > li.selected,
+#layout-main div.tabbed_pane ul.tabs > li:hover,
+#layout-tabs ul.main-tabs > li:hover,
 #layout-main div.tagcloud,
 #layout-main div.desc
 {
-border: 1px solid #121212;
+border:1px solid #121212;
 }
 #layout-tabs ul.main-tabs > li a:hover span,
 #layout-tabs ul.main-tabs > li.selected a span,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover
+#layout-main div.tabbed_pane ul.tabs > li.selected,
+#layout-main div.tabbed_pane ul.tabs > li:hover
 {
-color: white;
+color:white;
 }
 #layout-main > h1,
 #layout-nav div.menu_hr
 {
-border-top-color: #121212;
+border-top-color:#121212;
 }
-#layout-search form input.text
+#layout-search form input.text,
+#layout-nav li li:hover
 {
-background-color: hsla(0, 100%, 100%, 0.2);
+background-color:hsla(0, 100%, 100%, 0.2);
 }
 #adba_update:hover,
 #style_next:hover,
@@ -185,58 +190,60 @@ input#addfilem\.search:hover,
 *.button:hover,
 *.confirmButton:hover,
 button:hover,
-*.submit: not(div):hover,
+*.submit:not(div):hover,
 input[type="submit"]:hover,
 input[type="button"]:hover
 {
-background-color: hsla(0, 100%, 25%, 0.8);
-color: #ff6000;
-border-color: #797979;
+background-color:hsla(0, 100%, 25%, 0.8);
+color:#ff6000;
+border-color:#797979;
 }
-#layout-content div.g_msg.error
+#layout-main div.g_msg.error
 {
-border: 1px solid #c40d0d;
+border:1px solid #c40d0d;
 }
-#layout-content div.g_msg.warning
+#layout-main div.g_msg.warning
 {
-border: 1px solid #ff6000;
+border:1px solid #ff6000;
 }
-#layout-content div.g_msg.note
+#layout-main div.g_msg.note
 {
-border: 1px solid #575757;
+border:1px solid #575757;
 }
-#layout-content div.g_msg.success
+#layout-main div.g_msg.success
 {
-border: 1px solid #1D6125;
+border:1px solid #1D6125;
 }
-#layout-content div.g_msg.error h3
+#layout-main div.g_msg.error h3
 {
-color: red;
+color:red;
 }
-#layout-content div.g_msg.warning h3,
+#layout-main div.g_msg.warning h3,
 #layout-hint span a
 {
-color: #FF6000;
+color:#FF6000;
 }
-#layout-content div.g_msg.note h3
+#layout-main div.g_msg.note h3
 {
-color: gray;
+color:gray;
 }
-#layout-content div.g_msg.success h3
+#layout-main div.g_msg.success h3
 {
-color: #2EB42E;
+color:#2EB42E;
 }
 input[disabled], input[readonly], select[disabled], select[readonly], checkbox[disabled], checkbox[readonly], textarea[disabled], textarea[readonly] 
 {
-color: #898989;
+color:#898989;
 }
 #layout-main tr:hover th.field,
+#layout-main div.pane.account th:hover,
 tr:hover > td,
 #layout-main div.forum ul.topics li.row:hover,
-#layout-main div.tabbed_pane div.pane table tr:hover > td
+#layout-main div.tabbed_pane div.pane table tr:hover > td,
+#layout-main div.timeline_all div.timeline ul.row li:hover
 {
-background-image: url(../grey/images/whitepixel.png);
-/*background-color: hsla(0, 100%, 100%, 0.2);*/
+background-image:url(../grey/images/whitepixel.png);
+/*background-color:hsla(0, 100%, 100%, 0.2);*/
 }
 #layout-main div.forum ul.topics,
 #layout-main div.forum li.row:last-of-type
@@ -248,6 +255,11 @@ div.threads .rbottom > *,
 #layout-main div.forum ul.topiclist li.header
 {
 background-color:hsla(0, 100%, 25%, 0.4);
+}
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+opacity:0.5;
 }
 #tooltip span.top
 {
@@ -334,7 +346,6 @@ border-bottom:2px solid #008800;
 #layout-nav li li:hover a
 {
 color:#ff6000;
-background-image:url(../grey/images/whitepixel.png);
 }
 div.spoiler,
 #layout-main div.cmt_entries dl.profile,
@@ -354,4 +365,31 @@ background-color:hsla(0, 0%, 10%, 0.4);
 #layout-main  div.userpage_all div.charts div.mylisthistory div.image
 {
 background-color:hsla(0, 100%, 100%, 0.4);
+}
+#layout-main div.timeline_all div.timeline ul.legend li span
+{
+border:1px solid grey;
+border-left-width:0;
+}
+#layout-main div.timeline_all div.timeline ul.legend li:first-of-type span
+{
+border-left-width:1px;
+}
+#layout-main div.timeline_all div.g_timeline ul.legend
+{
+margin-bottom:0.5em;
+}
+div.g_timeline
+{
+margin:auto;
+max-height:none;
+overflow:visible;
+}
+#layout-content div.mylist_list table.animelist tr.watching td
+{
+background-image:url(images/orangepixels.png);
+}
+#layout-content div.mylist_list table.animelist tr.watching:hover td
+{
+background-image:url(images/orangepixels.png), url(../grey/images/whitepixel.png);
 }

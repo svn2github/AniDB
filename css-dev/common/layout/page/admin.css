@@ -80,6 +80,7 @@
 	display:block;
 }
 
+#layout-main div.creq_all div.tabbed_pane table,
 #layout-main div.creqmod_all table
 {
 	width: 98%;

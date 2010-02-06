@@ -22,7 +22,8 @@
 	clear:none;
 }
 
-#layout-main div.lexicon_all table.characterlist
+#layout-main div.lexicon_all table.characterlist,
+#layout-main div.lexicon_all table.creatorlist
 {
 	width: 100%
 }

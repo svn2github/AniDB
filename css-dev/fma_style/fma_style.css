@@ -366,8 +366,11 @@ div.pagination span strong
 
 #layout-tabs { 
 	display: block;
-	margin-top: -1.8em;
+	/*margin-top: -1.8em;*/
 	padding-left: 18px;
+}
+#layout-tabs ul.main-tabs{ 
+	margin-top: -1.8em;
 }
 
 #layout-tabs ul.main-tabs li { 

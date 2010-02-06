@@ -156,6 +156,13 @@
 	width:77px;
 }
 
+*.i_topic_split
+{
+	background-image: url(../icons/grey/topic_split.png);
+	height:12px;
+	width:77px;
+}
+
 *.i_comment_revisions
 {
 	width: 87px;

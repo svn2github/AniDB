@@ -217,3 +217,8 @@ table + select
 {
 	margin-top:1em;
 }
+
+*.shuttle
+{
+	min-width:15em;
+}

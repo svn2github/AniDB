@@ -79,7 +79,8 @@
 #layout-main div.timeline_all div.timeline ul.row li.dropped a,
 #layout-main div.addcreatoranimerel_all tr.same_name,
 #layout-main div.addcreatorsongrel_all tr.same_name,
-#layout-main div.addsongcollectionrel_all tr.same_name
+#layout-main div.addsongcollectionrel_all tr.same_name,
+#layout-main div.addcharanimerel_all tr.same_name
 {
 	background-color: #FFFFDF;
 }

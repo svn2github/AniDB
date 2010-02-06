@@ -56,7 +56,11 @@
 #layout-main div.anime_all div.relations table.relationslist,
 #layout-main div.anime_all div.recommendations table.recommendationslist,
 #layout-main div.anime_all div.reviews table.reviewlist,
-#layout-main div.anime_all div.episodes table.eplist
+#layout-main div.anime_all div.episodes table.eplist,
+#layout-main div.anime_all > div.g_section.characters > table,
+#layout-main div.anime_all > div.g_section.staff > table,
+#layout-main div.anime_all > div.g_section.songs > table,
+#layout-main div.anime_all > div.g_section.reviews > table
 {
 	width: 98%;
 }
