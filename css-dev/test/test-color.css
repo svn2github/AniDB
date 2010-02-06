@@ -13,13 +13,6 @@ a:link
 	text-decoration:none;
 }
 
-span.link:hover,
-a:hover,
-th > a:hover
-{
-	color:#AA0000;
-}
-
 #layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4
 {
@@ -321,4 +314,11 @@ input[type="checkbox"]
 #layout-menu li.sub-menu ul li#user-signup
 {
 	background:url("http://static.anidb.net/css/icons/orange/button_signup.gif") no-repeat scroll 0 0 transparent;
+}
+
+span.link:hover,
+a:hover,
+th > a:hover
+{
+	color:#AA0000;
 }
