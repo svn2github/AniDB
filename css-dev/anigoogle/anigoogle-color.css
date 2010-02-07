@@ -162,3 +162,8 @@ span.g_odd,
 	border-top-color:#C9D7F1;
 	color:#999999;
 }
+
+#layout-main div.anime_all div.data table.relationlist tr
+{
+	background-color: inherit;
+}

@@ -297,3 +297,8 @@ h4,
 {
 	display:inline;
 }
+
+#layout-main div.main_all div.rightbar li a
+{
+	display:table;
+}

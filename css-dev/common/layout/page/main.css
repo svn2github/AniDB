@@ -161,3 +161,8 @@
 {
 	display:none;
 }
+
+#layout-main div.news div.g_timedentry div.avatar + div.postbody dl.codebox
+{
+	margin-right: 11em;
+}

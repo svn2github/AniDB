@@ -92,8 +92,6 @@
 {
 	float:right;
 	width:25em;
-	margin-top: 2em;
-
 }
 
 #layout-main div.main_all div.register
@@ -162,4 +160,9 @@
 #layout-tabs ul.main-tabs li.news
 {
 	display:none;
+}
+
+#layout-main div.news div.g_timedentry div.avatar + div.postbody dl.codebox
+{
+	margin-right: 11em;
 }
