@@ -308,3 +308,14 @@ h4,
 	display:table;
 	margin-left: 4em;
 }
+
+#menu-account li.alert span:before,
+#menu-account li.alert span:after
+{
+	padding: 0.2em;
+}
+
+.g_msg
+{
+	padding:0.5em 1em;
+}
