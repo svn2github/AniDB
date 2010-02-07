@@ -326,3 +326,8 @@ input[type="checkbox"]
 {
 	background:none repeat scroll 0 0 transparent;
 }
+
+#layout-main div.anime_all div.data table.relationlist tr
+{
+	background-color: inherit;
+}
