@@ -8,7 +8,7 @@
 #layout-main div.timeline_all div.timeline ul.row li.stalled a,
 #layout-main table.filelist tr.deprecated
 {
-	background-color: #CC9999;
+	background-color: #D6B8B8;
 }
 
 #layout-main div.myvotes_all table tr.g_odd td.low,
@@ -18,7 +18,7 @@
 #layout-main table.filelist tr.g_odd.deprecated,
 #layout-main table.filelist tr.g_odd.invalid
 {
-	background-color: #D6B8B8;
+	background-color: #CC9999;
 }
 
 #layout-main td ins,
