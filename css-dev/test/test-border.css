@@ -3,31 +3,10 @@ table
 	border-collapse:separate;
 }
 
-#layout-main .g_image image,
-#layout-main .g_definitionlist
-{
-	padding:1px;
-}
-
-#layout-main .block .g_definitionlist table
-{
-	border:none;
-	margin:0;
-}
-
 #layout-main div.avatar img,
 #layout-main div.anime_all div.info div.image img
 {
 	border:1px solid;
-	border-color:#717377 #E8E9EC #E8E9EC #717377;
-	padding:1px;
-}
-
-#layout-main div.anime_all div.groups tr.header th,
-#layout-main div.anime_all div.episodes tr.header th
-{
-	border-bottom:black 2px solid;
-	padding:4px 1px 7px;
 }
 
 #layout-main table.eplist tr.files.episode td
@@ -37,13 +16,12 @@ table
 
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top:black 2px solid;
+	border-top:2px solid black;
 }
 
 #layout-main div.g_content
 {
 	border-top:2px groove #BFC2CA;
-	padding:1em;
 }
 
 #layout-tabs ul.main-tabs li
@@ -76,13 +54,6 @@ table
 	border:1px solid #777777;
 }
 
-table table,
-img,
-a
-{
-	border:none;
-}
-
 #layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li
 {
@@ -94,20 +65,24 @@ a
 	border-top:1px solid #666666;
 }
 
-#layout-nav
-{
-	border-left: none;
-}
-
 span.test,
 button,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
-input[type="button"],
-input[type="submit"]
+input[type=button],
+input[type=submit]
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border:1px solid #34394D;
 	border-radius:5px;
+}
+
+#layout-main .block .g_definitionlist table,
+table table,
+img,
+a,
+#layout-nav
+{
+	border:none;
 }

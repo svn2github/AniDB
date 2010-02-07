@@ -341,3 +341,9 @@ input[type="checkbox"]
 {
 	border-bottom-color: #7BE07B;
 }
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img
+{
+	border-color:#717377 #E8E9EC #E8E9EC #717377;
+}

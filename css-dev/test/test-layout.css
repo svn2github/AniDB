@@ -137,3 +137,22 @@ input[type="submit"]
 {
 	padding:6px;
 }
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img,
+#layout-main .g_image image,
+#layout-main .g_definitionlist,
+#layout-main div.g_content
+{
+	padding:1px;
+}
+
+#layout-main .block .g_definitionlist table
+{
+	margin:0;
+}
+
+#layout-main tr.header th
+{
+	padding:4px 1px 7px;
+}
