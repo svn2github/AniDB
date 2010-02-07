@@ -298,7 +298,13 @@ h4,
 	display:inline;
 }
 
+#layout-main div.main_all div.rightbar li span
+{
+	position:absolute;
+}
+
 #layout-main div.main_all div.rightbar li a
 {
 	display:table;
+	margin-left: 4em;
 }
