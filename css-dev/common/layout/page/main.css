@@ -88,17 +88,9 @@
 	margin-bottom: 1em;
 }
 
-#layout-main div.main_all div.info div.right
-{
-	float:right;
-	width:25em;
-}
-
 #layout-main div.main_all div.register
 {
-	margin-left: 3em;
-	margin-right: 3em;
-	margin-bottom: 2em;
+	margin:2em 1em;
 	font-weight: bold;
 	font-size: 1.1em;
 }
@@ -111,8 +103,8 @@
 	padding-top:2.5em;
 }
 
-#layout-main div.main_all div.login INPUT[type="text"],
-#layout-main div.main_all div.login INPUT[type="password"]
+#layout-main div.main_all div.login input[type="text"],
+#layout-main div.main_all div.login input[type="password"]
 {
 	width: 7em;
 }
