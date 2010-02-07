@@ -205,3 +205,9 @@
 {
 	margin-top: 0.2em;
 }
+
+#layout-main div.profile_all div.settings.block span.checkbox span.text
+{
+	display:table;
+	margin:-1.7em 0 0 4.5em;
+}

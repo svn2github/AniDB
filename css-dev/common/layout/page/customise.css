@@ -73,3 +73,9 @@
 {
 	margin:auto;
 }
+
+#layout-main div.customise_all span.checkbox span.text
+{
+	display:table;
+	margin:-1.7em 0 0 4.5em;
+}
