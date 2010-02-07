@@ -312,16 +312,7 @@ input[type="checkbox"]
 	background-color:inherit;
 }
 
-#layout-menu li.sub-menu ul li#user-xauth
-{
-	background:url("http://static.anidb.net/css/icons/orange/button_logon.gif") no-repeat scroll 0 0 transparent;
-}
-
-#layout-menu li.sub-menu ul li#user-signup
-{
-	background:url("http://static.anidb.net/css/icons/orange/button_signup.gif") no-repeat scroll 0 0 transparent;
-}
-
+#layout-menu li.sub-menu ul li#user-logout a,
 #layout-menu li.sub-menu ul li#user-xauth button
 {
 	background:none repeat scroll 0 0 transparent;

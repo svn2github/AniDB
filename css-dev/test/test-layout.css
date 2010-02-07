@@ -93,6 +93,8 @@ input[type="submit"]
 	clear:right;
 }
 
+#layout-menu li.sub-menu ul li#user-profile a,
+#layout-menu li.sub-menu ul li#user-logout a,
 #layout-menu li.sub-menu ul li#user-signup a,
 #layout-menu li.sub-menu ul li#user-xauth button
 {
@@ -100,12 +102,15 @@ input[type="submit"]
 	display:block;
 }
 
+#layout-menu li.sub-menu ul li#user-profile span,
+#layout-menu li.sub-menu ul li#user-logout span,
 #layout-menu li.sub-menu ul li#user-xauth button span,
 #layout-menu li.sub-menu ul li#user-signup a span
 {
 	display: none;
 }
 
+#layout-menu li.sub-menu ul li#user-profile,
 #layout-menu li.sub-menu ul li#user-signup
 {
 	height:12px;
@@ -114,6 +119,7 @@ input[type="submit"]
 	padding:0;
 }
 
+#layout-menu li.sub-menu ul li#user-logout,
 #layout-menu li.sub-menu ul li#user-xauth
 {
 	height:12px;

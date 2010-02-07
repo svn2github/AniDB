@@ -167,3 +167,9 @@ span.g_odd,
 {
 	background-color: inherit;
 }
+
+#menu-account li.alert span:before,
+#menu-account li.alert span:after
+{
+	color: red;
+}

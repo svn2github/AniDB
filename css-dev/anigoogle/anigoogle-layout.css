@@ -308,3 +308,9 @@ h4,
 	display:table;
 	margin-left: 4em;
 }
+
+#menu-account li.alert span:before,
+#menu-account li.alert span:after
+{
+	padding: 0.2em;
+}
