@@ -409,3 +409,8 @@ tr + tr td,
 {
 	border-top-color:#555555;
 }
+
+#layout-main div.anime_all div.data table.relationlist tr
+{
+	background-color: inherit;
+}
