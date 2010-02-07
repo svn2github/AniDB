@@ -121,3 +121,13 @@ input[type="submit"]
 	margin:-15px 2px 3px 58px;
 	padding:0;
 }
+
+#layout-main div.main_all div.news
+{
+	margin:-2.3em 0 0;
+}
+
+#layout-main div.news h4
+{
+	padding:6px;
+}
