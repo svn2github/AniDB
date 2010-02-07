@@ -122,7 +122,7 @@ input[type="submit"]
 	padding:0;
 }
 
-#layout-main div.main_all div.news
+#layout-main div.main_all div.news p.comment
 {
 	margin:-2.3em 0 0;
 }
