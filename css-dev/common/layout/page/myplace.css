@@ -112,7 +112,7 @@
 
 #layout-main div.userpage_all div.userprefs div.block
 {
-	display:inline-block;
+	display:inline-table;
 	margin-left: 1em;
 	margin-bottom: 1em;
 	width:auto;
