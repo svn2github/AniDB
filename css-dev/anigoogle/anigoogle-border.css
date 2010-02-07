@@ -149,7 +149,8 @@ tr + tr td,
 	border-radius:5px 5px 0 0;
 }
 
-#layout-main div.tabbed_pane div.body
+#layout-main div.tabbed_pane div.body,
+.g_msg
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
