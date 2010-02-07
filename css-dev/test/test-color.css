@@ -328,3 +328,16 @@ input[type="checkbox"]
 {
 	color: red;
 }
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+	background-color: #4F99E8;
+	border-bottom-color: #4F99E8;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+	border-bottom-color: #7BE07B;
+}
