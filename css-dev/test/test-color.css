@@ -347,3 +347,9 @@ input[type="checkbox"]
 {
 	border-color:#717377 #E8E9EC #E8E9EC #717377;
 }
+
+#layout-main tr.header th.sortable:hover a
+{
+	background-color: #999999;
+	color: #000000
+}

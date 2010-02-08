@@ -112,3 +112,20 @@
 {
     top:2em;
 }
+
+#layout-main tr.header th,
+#layout-main tr.header th.sortable a
+{
+	padding:4px 6px 4px 0px;
+}
+
+#layout-main tr.header th.sortable
+{
+	padding: 0px;
+}
+
+#layout-main tr.header th.sortable a
+{
+	display: block;
+	width: 100%;
+}
