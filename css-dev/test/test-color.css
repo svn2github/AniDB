@@ -142,8 +142,8 @@ th,
 	color:#A2BFD7;
 }
 
-#layout-menu span.link:hover,
-#layout-menu a:hover,
+span.link:hover,
+a:hover,
 #layout-menu li:hover > a,
 #layout-main > h1 a:hover,
 #layout-main div.g_timedentry h4 a:hover,
@@ -177,6 +177,7 @@ input[type="submit"]:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.g_odd:hover,
 #layout-main tr.header th.sortable:hover a,
+#layout-main tr.header th.sortable:hover,
 #layout-menu li.user-xauth input[type="button"],
 #layout-search input.submit:hover
 {
