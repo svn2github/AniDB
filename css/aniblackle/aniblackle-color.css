@@ -415,8 +415,29 @@ tr + tr td,
 	background-color: inherit;
 }
 
-#menu-account li.alert span:before,
-#menu-account li.alert span:after
+#layout-main tr.header th.sortable:hover a,
+#layout-main tr.header th.sortable:hover
 {
-	color: red;
+	background-color: #666666;
+	color: #DDDDDD;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+	background-color: #4F75C9;
+	border-bottom-color: #4F75C9;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+	border-bottom-color: #77BF77;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.notdone,
+#layout-main div.group_all div.group_released td.epbar div.notdone
+{
+	background-color:#A1AFC9;
+	border-bottom-color: #A1AFC9;
 }
