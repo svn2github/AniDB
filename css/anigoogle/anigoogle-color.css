@@ -51,7 +51,6 @@ table
 	border-color:#B4BAC0;
 }
 
-#layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
 	background-color:#E5ECF9;
@@ -192,4 +191,11 @@ span.g_odd,
 {
 	background-color:#C3D8FF;
 	border-bottom-color: #C3D8FF;
+}
+
+#layout-main tr.header th.sortable:hover a,
+#layout-main tr.header th.sortable:hover
+{
+	background-color: #D5E2F7;
+	color: #000000;
 }
