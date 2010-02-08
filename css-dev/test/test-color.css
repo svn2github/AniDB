@@ -13,12 +13,6 @@ a:link
 	text-decoration:none;
 }
 
-span.link:hover,
-a:hover
-{
-	color:#AA0000;
-}
-
 #layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4
 {
@@ -148,6 +142,7 @@ th,
 	color:#A2BFD7;
 }
 
+#layout-menu span.link:hover,
 #layout-menu a:hover,
 #layout-menu li:hover > a,
 #layout-main > h1 a:hover,
@@ -172,19 +167,20 @@ input[type="submit"]
 	color:#FFFFFF;
 }
 
-span.test:hover,
 button:hover,
+span.test:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
 #layout-main ul.g_list li.selected,
 #layout-main ul.g_list li.selected:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.g_odd:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover,
-#layout-search input.submit:hover,
-#layout-menu li.user-xauth input[type="button"]
+#layout-main tr.header th.sortable:hover a,
+#layout-menu li.user-xauth input[type="button"],
+#layout-search input.submit:hover
 {
-	background-color:#C8CACE;
-	color:#000000;
+	background-color: #97989A;
+	color: #FFFFFF;
 }
 
 #layout-main div.pagination span a
@@ -346,10 +342,4 @@ input[type="checkbox"]
 #layout-main div.anime_all div.info div.image img
 {
 	border-color:#717377 #E8E9EC #E8E9EC #717377;
-}
-
-#layout-main tr.header th.sortable:hover a
-{
-	background-color: #BFC2CA;
-	color: #000000
 }
