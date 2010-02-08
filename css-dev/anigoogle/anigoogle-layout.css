@@ -323,7 +323,7 @@ h4,
 #layout-main tr.header th,
 #layout-main tr.header th.sortable a
 {
-	padding:5px 10px 5px 4px;
+	padding:7px 0px;
 }
 
 #layout-main tr.header th.sortable
@@ -331,8 +331,13 @@ h4,
 	padding: 0px;
 }
 
+/*dirty hack for too small columns*/
+#layout-main tr td
+{
+	min-width: 3em;
+}
+
 #layout-main tr.header th.sortable a
 {
 	display: block;
-	width: 100%;
 }

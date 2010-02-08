@@ -171,6 +171,7 @@ button:hover,
 span.test:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
+#layout-main ul.g_list li:hover a,
 #layout-main ul.g_list li.selected,
 #layout-main ul.g_list li.selected:hover,
 #layout-main ul.g_list li:hover,
@@ -179,7 +180,7 @@ input[type="submit"]:hover,
 #layout-menu li.user-xauth input[type="button"],
 #layout-search input.submit:hover
 {
-	background-color: #97989A;
+	background-color: #717B85;
 	color: #FFFFFF;
 }
 
@@ -242,8 +243,7 @@ th,
 }
 
 #layout-tabs ul.main-tabs li.selected a,
-#layout-tabs ul.main-tabs li:hover a,
-#layout-main ul.g_list li:hover a
+#layout-tabs ul.main-tabs li:hover a
 {
 	color:#000000;
 }
