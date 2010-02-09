@@ -143,16 +143,14 @@ th,
 }
 
 span.link:hover,
-a:hover,
-#layout-menu li:hover > a,
-#layout-main > h1 a:hover,
-#layout-main div.g_timedentry h4 a:hover,
-#layout-main div.g_timedentry p.comment a:hover,
-#layout-main table tr.header a:hover,
-#layout-main div.userpage_all > div.g_section > h4 a:hover,
-#layout-main div.animeatt_all div.review > h4 a:hover,
-#layout-main th > a:hover
+a:hover
 {
+	color:#AA0000;
+}
+
+#layout-menu li:hover > a
+{
+
 	color:#FFAA55;
 }
 
