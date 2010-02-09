@@ -19,11 +19,6 @@ table
 	border-top:2px solid black;
 }
 
-#layout-main div.g_content
-{
-	border-top:2px groove #BFC2CA;
-}
-
 #layout-tabs ul.main-tabs li
 {
 	border-bottom:1px double #34394D;
