@@ -240,7 +240,8 @@ th,
 #user-xname input,
 #user-xpass input,
 #user-xname input,
-#user-xpass input
+#user-xpass input,
+.format-buttons select
 {
 	background-color:#34394D;
 }
