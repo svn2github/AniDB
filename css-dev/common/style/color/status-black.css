@@ -131,3 +131,19 @@
 {
 	border-bottom: 2px solid #00ff00;
 }
+
+.g_vital a,
+.v_neg,
+.v_high,
+span.diff,
+#layout-main td.reviewed.no a,
+#layout-main div.creqmod_all .state.return,
+#layout-main div.creqmod_all .state.new,
+#layout-main div.creqmod_all span.type.del,
+#layout-main div.schedule_all a.promo_only,
+#layout-main div.anime_all div.groups td.mylist.new,
+#menu-account li.alert span:before,
+#menu-account li.alert span:after
+{
+	color: #B32947;
+}
