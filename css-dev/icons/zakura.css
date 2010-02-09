@@ -1,10 +1,10 @@
-a.descending {
+*.i_descending {
 	padding-left: 11px; background: url(../icons/zakura/order-descending.gif) no-repeat center left;
 }
-a.ascending {
+*.i_ascending {
 	padding-left: 11px; background: url(../icons/zakura/order-ascending.gif) no-repeat center left;
 }
-a.inactive {
+*.i_inactive {
 	padding-left: 11px; background: url(../icons/zakura/order.gif) no-repeat center left;
 }
 
