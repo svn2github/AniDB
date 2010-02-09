@@ -226,7 +226,6 @@ tr,
 #layout-main span.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main div.message-box div.format-buttons input,
 #layout-main div.forum ul.topics li.g_odd
 {
 	background-color:#B8B8B8;
@@ -367,4 +366,16 @@ input[type="checkbox"]
 #layout-main div.group_all div.group_released td.epbar div.done.mylist
 {
 	border-bottom-color:#7EF27E;
+}
+
+#layout-main div.message-box div.format-buttons input
+{
+	background-color: #CCCCCC;
+}
+
+#layout-main div.message-box div.format-buttons *.f_button:hover,
+#layout-main div.message-box div.format-buttons *.f_button.selected
+{
+	background-color: #B5BED6;
+	border-color: #000000;
 }
