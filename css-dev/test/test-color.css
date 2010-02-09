@@ -347,3 +347,24 @@ input[type="checkbox"]
 {
 	border-color:#717377 #E8E9EC #E8E9EC #717377;
 }
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+	background-color:#4F75E8;
+	border-bottom-color:#4F75E8;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.notdone,
+#layout-main div.group_all div.group_released td.epbar div.notdone
+{
+	background-color:#C3CFFF;
+	border-bottom-color:#C3CFFF;
+}
+
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+	border-bottom-color:#7EF27E;
+}
