@@ -406,7 +406,7 @@ th.c_setlatin,
 th.c_date,
 th.c_latin,
 th.c_number,
-#layout-main th a.inactive
+#layout-main th *.i_inactive
 {
 	background-image:url(images/buttons/updown.gif);
 	background-position:right center;
@@ -433,13 +433,13 @@ th.s_reverse
 }
 
 th.s_forward,
-#layout-main th a.descending
+#layout-main th *.i_descending
 {
 	background-image:url(images/buttons/down2.gif);
 }
 
 th.s_reverse,
-#layout-main th a.ascending
+#layout-main th *.i_ascending
 {
 	background-image:url(images/buttons/up2.gif);
 }

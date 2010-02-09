@@ -88,7 +88,7 @@ th.c_setlatin,
 th.c_date,
 th.c_latin,
 th.c_number,
-#layout-main th a.inactive
+*.i_inactive
 {
 	background-image: url(../icons/test/arrow_inactive.png);
 	background-repeat: no-repeat;
@@ -98,7 +98,7 @@ th.c_number,
 }
 
 th.s_forward, 
-#layout-main th a.descending
+*.i_descending
 {
 	background-image: url(../icons/test/arrow_down.png);
 	background-repeat: no-repeat;
@@ -107,7 +107,7 @@ th.s_forward,
 }
 
 th.s_reverse,
-#layout-main th a.ascending
+*.i_ascending
 {
 	background-image: url(../icons/test/arrow_up.png);
 	background-repeat: no-repeat;
