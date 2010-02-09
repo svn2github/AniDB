@@ -148,7 +148,12 @@ a:hover
 	color:#AA0000;
 }
 
-#layout-menu li:hover > a
+#layout-menu li:hover > a,
+#layout-main > h1 a:hover,
+#layout-main div.g_timedentry h4 a:hover,
+#layout-main div.g_timedentry p.comment a:hover,
+#layout-main div.userpage_all > div.g_section > h4 a:hover,
+#layout-main div.animeatt_all div.review > h4 a:hover
 {
 
 	color:#FFAA55;
