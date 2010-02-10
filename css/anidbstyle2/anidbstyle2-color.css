@@ -188,6 +188,11 @@ input[type="submit"]:hover,
 	color: #FFFFFF;
 }
 
+#layout-main tr.header th.sortable:hover a
+{
+	color: #FFFFFF;
+}
+
 #layout-main div.pagination span a
 {
 	background-color:#ECEDEE;
