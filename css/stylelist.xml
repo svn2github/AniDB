@@ -37,8 +37,8 @@
 		<status>in development</status>
 		<description>a combination of the anigoogle framework and anidbstyle</description>
 		<path/>
-		<screenshot>anidbstyle/images/screenshot.png</screenshot>
-		<thumbnail>anidbstyle/images/thumbnail.png</thumbnail>
+		<screenshot>anidbstyle2/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle2/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
