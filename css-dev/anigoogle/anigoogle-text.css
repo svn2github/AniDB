@@ -42,3 +42,8 @@ a.i_button:hover
 {
 	content: "!";
 }
+
+input[type="button"]
+{
+	cursor:pointer;
+}
