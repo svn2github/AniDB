@@ -191,13 +191,7 @@
 #layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title
 {
 	display:block;
-	margin-top:0.3em;
 	padding-left:3em;
-}
-
-#layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title div.pagination
-{
-	margin-top:0;
 }
 
 #layout-main div.forum ul.topiclist li.row dl.icon
@@ -850,4 +844,9 @@ div.quotebody div.quote div.quotebody
 	float:right;
 	margin-right:0.5em;
 	margin-top:0.5em;
+}
+
+#layout-main div.forum ul.topics dt
+{
+	min-height: 2.5em;
 }
