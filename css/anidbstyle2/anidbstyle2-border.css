@@ -1,0 +1,83 @@
+table
+{
+	border-collapse:separate;
+}
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img
+{
+	border:1px solid;
+}
+
+#layout-main table.eplist tr.files.episode td
+{
+	border-bottom:1px solid gray;
+}
+
+#layout-main div.anime_all div.episodes tr.newtype td
+{
+	border-top:2px solid black;
+}
+
+#layout-tabs ul.main-tabs li
+{
+	border-bottom:1px double #34394D;
+	border-left:1px solid #666666;
+	border-right:1px solid #666666;
+	border-top:1px solid #666666;
+}
+
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li:hover
+{
+	border-bottom:1px double #C8CACE;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom:1px double #b8bac0;
+	border-left:1px solid #9A9CA1;
+	border-right:1px solid #9A9CA1;
+	border-top:1px solid #9A9CA1;
+}
+
+#layout-main div.pagination span strong,
+#layout-main div.pagination span a,
+#layout-main div.pagination span a:hover
+{
+	border:1px solid #777777;
+}
+
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border:1px solid #9A9CA1;
+}
+
+#layout-menu
+{
+	border-top:1px solid #666666;
+}
+
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type=button],
+input[type=submit]
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #34394D;
+	border-radius:5px;
+}
+
+#layout-main .block .g_definitionlist table,
+table table,
+img,
+a,
+#layout-nav
+{
+	border:none;
+}

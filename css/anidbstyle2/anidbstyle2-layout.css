@@ -1,0 +1,153 @@
+#layout-menu
+{
+	margin-top: 11.5em;
+	padding-left:1.1em;
+}
+
+#layout-content
+{
+	margin-top:-10.5em;
+}
+
+#layout-search div.search
+{
+	width:430px;
+	height: 94px;
+	margin-left:-1.5em;
+	margin-top:0;
+}
+
+#layout-search
+{
+	height: 94px;
+	margin-left:0;
+}
+
+#layout-tabs
+{
+	margin:10.6em 0.3em;
+}
+
+#layout-nav
+{
+	height:10.5em;
+	padding-bottom: 0;
+}
+
+#layout-search input.submit
+{
+	width:80px;
+}
+
+#layout-nav div.search a.advsearch
+{
+	left:825px;
+	top:30px;
+	width:83px;
+}
+
+#layout-main div.filter_menu span.actions.old input
+{
+	margin-top:3px;
+}
+#layout-hint + #layout-nav + #layout-content #layout-tabs
+{
+	margin:12em 0.3em;
+}
+
+#layout-hint + #layout-nav #layout-menu
+{
+	margin-top: 11.5em;
+}
+
+#layout-nav input.submit
+{
+	padding:3px 5px;
+}
+
+#layout-search div.search form
+{
+	padding-left:41.5em;
+	padding-top:3em;
+	width:50em;
+}
+
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"]
+{
+	padding:3px 5px;
+}
+
+#layout-menu li.sub-menu ul li#user-xname,
+#layout-menu li.sub-menu ul li#user-xpass
+{
+	padding-bottom: 0.2em;
+}
+
+#layout-menu li.sub-menu ul li.alert
+{
+	clear:right;
+}
+
+#layout-menu li.sub-menu ul li#user-profile a,
+#layout-menu li.sub-menu ul li#user-logout a,
+#layout-menu li.sub-menu ul li#user-signup a,
+#layout-menu li.sub-menu ul li#user-xauth button
+{
+	height:12px;
+	display:block;
+}
+
+#layout-menu li.sub-menu ul li#user-profile span,
+#layout-menu li.sub-menu ul li#user-logout span,
+#layout-menu li.sub-menu ul li#user-xauth button span,
+#layout-menu li.sub-menu ul li#user-signup a span
+{
+	display: none;
+}
+
+#layout-menu li.sub-menu ul li#user-profile,
+#layout-menu li.sub-menu ul li#user-signup
+{
+	height:12px;
+	width:42px;
+	margin:3px 10px 3px 8px;
+	padding:0;
+}
+
+#layout-menu li.sub-menu ul li#user-logout,
+#layout-menu li.sub-menu ul li#user-xauth
+{
+	height:12px;
+	width:42px;
+	margin:-15px 2px 3px 58px;
+	padding:0;
+}
+
+#layout-main div.main_all div.news p.comment
+{
+	margin:-2.3em 0 0;
+}
+
+#layout-main div.news h4
+{
+	padding:6px;
+}
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img,
+#layout-main .g_image image,
+#layout-main .g_definitionlist,
+#layout-main div.g_content
+{
+	padding:1px;
+}
+
+#layout-main .block .g_definitionlist table
+{
+	margin:0;
+}

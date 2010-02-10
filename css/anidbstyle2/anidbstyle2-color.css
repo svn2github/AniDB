@@ -1,0 +1,382 @@
+body.nonav
+{
+	background-color:#C8CACE;
+	height:100%;
+}
+
+span.link,
+a:visited,
+a:active,
+a:link
+{
+	color:#105289;
+	text-decoration:none;
+}
+
+#layout-main div.news h4,
+#layout-main div.main_all div.rightbar h4
+{
+	background-color:#494d59;
+	color:#bbbbbb;
+	padding:2px;
+}
+
+#layout-main div.cmt_all div.comment h4
+{
+	background-color:#969aa6;
+}
+
+input[size="10"]
+{
+	width:6em;
+}
+
+input[size="60"]
+{
+	width:36em;
+}
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#D3D5D9;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color:#b8bac0;
+}
+
+#layout-content
+{
+	border-bottom-color:#666666;
+	border-left-color:#666666;
+	border-top-color:#666666;
+}
+
+#layout-main > h1
+{
+	background-color:#34394D;
+	border-top-color:#DDDDDD;
+	color:#CCCCCC;
+}
+
+#layout-menu li.sub-menu ul li:hover
+{
+	background-color:#666666;
+}
+
+#layout-main div.g_definitionlist tr th,
+tr + tr td,
+#layout-main div div.explanation div.description dl + dl,
+#layout-main div.report_all div.body ul li + li,
+#layout-main div.g_definitionlist tr th
+{
+	border-top-color:#999999;
+}
+
+#layout-main div.tagcloud,
+#layout-main div.desc
+{
+	background-color:#B8BAC0;
+	border-color:#9A9CA1;
+}
+
+table
+{
+	border-top-color:#DDDDDD;
+}
+
+#layout-main div.animeatt_all div.review > h4
+{
+	background-color:#B0B0B0;
+	border-top-color:#DDDDDD;
+	color:#000000;
+}
+
+#layout-main div.g_timedentry h4,
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.userpage_all > div.g_section > h4
+{
+	background-color:#34394D;
+	border-top-color:#DDDDDD;
+}
+
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"],
+#layout-main table tr.header
+{
+	background-color:#34394D;
+}
+
+option,
+th,
+#layout-main div.g_timedentry h4,
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-menu a:link,
+#layout-menu a:visited,
+#layout-tabs ul.main-tabs li a,
+#layout-main ul.g_list li a,
+#menu-login li.user-xkeep label span,
+#layout-search input,
+#user-xname input,
+#user-xpass input,
+#user-xname input,
+#user-xpass input,
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"],
+#layout-main table tr.header
+{
+	color:#CCCCCC;
+}
+
+#layout-main > h1 a,
+#layout-main div.g_timedentry h4 a,
+#layout-main div.g_timedentry p.comment a,
+#layout-main div.g_timedentry p.comment,
+#layout-main table tr.header a,
+#layout-main div.userpage_all > div.g_section > h4 a,
+#layout-main div.animeatt_all div.review > h4 a,
+#layout-main th > span.link,
+#layout-main th > a:visited,
+#layout-main th > a:active,
+#layout-main th > a:link
+{
+	color:#A2BFD7;
+}
+
+span.link:hover,
+a:hover
+{
+	color:#AA0000;
+}
+
+#layout-menu li:hover > a,
+#layout-main > h1 a:hover,
+#layout-main div.g_timedentry h4 a:hover,
+#layout-main div.g_timedentry p.comment a:hover,
+#layout-main div.userpage_all > div.g_section > h4 a:hover,
+#layout-main div.animeatt_all div.review > h4 a:hover
+{
+
+	color:#FFAA55;
+}
+
+button:hover,
+span.test:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+#layout-main ul.g_list li:hover a,
+#layout-main ul.g_list li.selected,
+#layout-main ul.g_list li.selected:hover,
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.g_odd:hover,
+#layout-main tr.header th.sortable:hover,
+#layout-menu li.user-xauth input[type="button"],
+#layout-search input.submit:hover
+{
+	background-color: #717B85;
+	color: #FFFFFF;
+}
+
+#layout-main div.pagination span a
+{
+	background-color:#ECEDEE;
+	color:#5C758C;
+}
+
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
+{
+	background-color:#8B8F9B;
+	color:#FFFFFF;
+}
+
+#layout-main div.mylist_all td+td,
+#layout-main div.myvotes_all td+td,
+#layout-main div.mywishlist_all tr td+td,
+#layout-main div.animelist_all tr td+td,
+#layout-main div.lexicon_all table.animelist tr td+td,
+#layout-main div.mynotifies_all tr td+td
+{
+	border-left-color:#999999;
+}
+
+html,
+tr,
+#layout-menu,
+#layout-main *.g_odd *.g_odd,
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd,
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li:hover
+{
+	background-color:#C8CACE;
+}
+
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd,
+#layout-main *.g_odd *.g_odd *.g_odd,
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
+#layout-main div.forum ul.topics li.g_odd
+{
+	background-color:#B8B8B8;
+}
+
+#layout-tabs ul.main-tabs li,
+#layout-menu > li ul,
+#layout-menu li.sub-menu,
+th,
+#layout-search input,
+#user-xname input,
+#user-xpass input,
+#user-xname input,
+#user-xpass input,
+.format-buttons select
+{
+	background-color:#34394D;
+}
+
+#layout-tabs ul.main-tabs li.selected a,
+#layout-tabs ul.main-tabs li:hover a
+{
+	color:#000000;
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="checkbox"]
+{
+	background-color:#34394D;
+	border:#C8CACE 1px solid;
+	color:#CCCCCC;
+}
+
+#layout-main div.profile_all div.default_languages table tr,
+#layout-main div div.addrelform table tr
+{
+	background-color:inherit;
+}
+
+#layout-search
+{
+	background:url("images/backlame.png") repeat-x scroll center top transparent;
+	width:100%;
+}
+
+#layout-search div.search
+{
+	background:url("images/logo_big.png") no-repeat scroll left top transparent;
+}
+
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.g_timedentry div.body,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *,
+#layout-main div.main_all div.register div.inner,
+#layout-main div.main_all div.register .rbottom *,
+#layout-main div.main_all div.register .rtop *
+{
+	background-color:#B6B9C0;
+}
+
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.g_timedentry div.body
+{
+	border-color:#AAAAAA;
+}
+
+#layout-menu li.sub-menu ul li#user-xpass:hover,
+#layout-menu li.sub-menu ul li#user-xname:hover,
+#layout-menu li.sub-menu ul li#user-xkeep:hover,
+#layout-menu li.sub-menu ul li#user-xauth:hover
+{
+	background-color: #34394D;
+}
+
+#layout-main div.tabbed_pane div.body div.pane ul *.g_odd
+{
+	background-color:inherit;
+}
+
+#layout-menu li.sub-menu ul li#user-logout a,
+#layout-menu li.sub-menu ul li#user-xauth button
+{
+	background:none repeat scroll 0 0 transparent;
+}
+
+#layout-main div.anime_all div.data table.relationlist tr
+{
+	background-color: inherit;
+}
+
+#menu-account li.alert span:before,
+#menu-account li.alert span:after
+{
+	color: red;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+	background-color: #4F99E8;
+	border-bottom-color: #4F99E8;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+	border-bottom-color: #7BE07B;
+}
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img
+{
+	border-color:#717377 #E8E9EC #E8E9EC #717377;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+	background-color:#4F75E8;
+	border-bottom-color:#4F75E8;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.notdone,
+#layout-main div.group_all div.group_released td.epbar div.notdone
+{
+	background-color:#C3CFFF;
+	border-bottom-color:#C3CFFF;
+}
+
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+	border-bottom-color:#7EF27E;
+}
+
+#layout-main div.message-box div.format-buttons input
+{
+	background-color: #CCCCCC;
+}
+
+#layout-main div.message-box div.format-buttons *.f_button:hover,
+#layout-main div.message-box div.format-buttons *.f_button.selected
+{
+	background-color: #B5BED6;
+	border-color: #000000;
+}

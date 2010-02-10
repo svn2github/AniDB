@@ -1,0 +1,20 @@
+@import "../sub/common.css";
+@import "../anigoogle/anigoogle-layout.css";
+@import "../anigoogle/anigoogle-text.css";
+@import "../anigoogle/anigoogle-border.css";
+@import "../anigoogle-menu/anigoogle-menu-layout.css";
+@import "../anigoogle-menu/anigoogle-menu-text.css";
+@import "../anigoogle-menu/anigoogle-menu-border.css";
+/*@import "../common/style/color/forum-default.css";*/
+@import "../common/style/color/status-pastel.css";
+/*@import "../common/style/color/status-radioactive.css";*/
+@import "test-color.css";
+@import "test-border.css";
+@import "test-layout.css";
+@import "test-text.css";
+@import "test-icons.css";
+
+#layout-footer:after
+{
+	content:"design by deridiot inspired by anidbstyle";
+}

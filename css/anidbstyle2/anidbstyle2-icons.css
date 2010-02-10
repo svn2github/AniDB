@@ -1,0 +1,19 @@
+#layout-menu li.sub-menu ul li#user-xauth
+{
+	background:url("../icons/orange/button_logon.gif") no-repeat scroll 0 0 transparent;
+}
+
+#layout-menu li.sub-menu ul li#user-signup
+{
+	background:url("../icons/orange/button_signup.gif") no-repeat scroll 0 0 transparent;
+}
+
+#layout-menu li.sub-menu ul li#user-logout
+{
+	background:url("../icons/orange/button_logout.gif") no-repeat scroll 0 0 transparent;
+}
+
+#layout-menu li.sub-menu ul li#user-profile
+{
+	background:url("../icons/orange/button_profile.gif") no-repeat scroll 0 0 transparent;
+}
