@@ -44,7 +44,7 @@ input[size="60"]
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	background:#b8bac0;
+	background-color:#b8bac0;
 }
 
 #layout-content
@@ -82,12 +82,6 @@ tr + tr td,
 	border-color:#9A9CA1;
 }
 
-#layout-main table tr.header
-{
-	background-color:#34394D;
-	color:#CCCCCC;
-}
-
 table
 {
 	border-top-color:#DDDDDD;
@@ -108,6 +102,17 @@ table
 	border-top-color:#DDDDDD;
 }
 
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"],
+#layout-main table tr.header
+{
+	background-color:#34394D;
+}
+
 option,
 th,
 #layout-main div.g_timedentry h4,
@@ -122,7 +127,14 @@ th,
 #user-xname input,
 #user-xpass input,
 #user-xname input,
-#user-xpass input
+#user-xpass input,
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"],
+#layout-main table tr.header
 {
 	color:#CCCCCC;
 }
@@ -157,17 +169,6 @@ a:hover
 {
 
 	color:#FFAA55;
-}
-
-span.test,
-button,
-#layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd,
-input[type="button"],
-input[type="submit"]
-{
-	background-color:#34394D;
-	color:#FFFFFF;
 }
 
 button:hover,
