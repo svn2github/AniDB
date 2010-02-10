@@ -8,11 +8,11 @@
 /*@import "../common/style/color/forum-default.css";*/
 @import "../common/style/color/status-pastel.css";
 /*@import "../common/style/color/status-radioactive.css";*/
-@import "test-color.css";
-@import "test-border.css";
-@import "test-layout.css";
-@import "test-text.css";
-@import "test-icons.css";
+@import "anidbstyle2-color.css";
+@import "anidbstyle2-border.css";
+@import "anidbstyle2-layout.css";
+@import "anidbstyle2-text.css";
+@import "anidbstyle2-icons.css";
 
 #layout-footer:after
 {
