@@ -24,8 +24,18 @@
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
 		<update>27.08.2009</update>
-		<status>in development</status>
+		<status>retired</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
+		<path/>
+		<screenshot>anidbstyle/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="anidbstyle2">
+		<title>AniDBstyle v2</title>
+		<creator>Der Idiot</creator>
+		<update>10.02.2010</update>
+		<status>in development</status>
+		<description>a combination of the anigoogle framework and anidbstyle</description>
 		<path/>
 		<screenshot>anidbstyle/images/screenshot.png</screenshot>
 		<thumbnail>anidbstyle/images/thumbnail.png</thumbnail>
@@ -34,7 +44,7 @@
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
 		<update>27.08.2009</update>
-		<status>stable (v6)</status>
+		<status>retired</status>
 		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
 		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
