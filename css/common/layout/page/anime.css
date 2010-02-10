@@ -122,3 +122,8 @@
 	margin-left: 1em;
 	margin-right: 1em;
 }
+
+#layout-main div.anime_all div.episodes table.eplist th.title
+{
+	width: 55%;
+}

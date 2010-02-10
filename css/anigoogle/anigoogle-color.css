@@ -167,12 +167,6 @@ span.g_odd,
 	background-color: inherit;
 }
 
-#menu-account li.alert span:before,
-#menu-account li.alert span:after
-{
-	color: red;
-}
-
 #layout-main div.anime_all div.groups td.epbar div.done,
 #layout-main div.group_all div.group_released td.epbar div.done
 {
