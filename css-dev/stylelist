@@ -1,6 +1,7 @@
 ./aniblackle/aniblackle.css
 ./aniblackle-menu/aniblackle-menu.css
 ./anidbstyle/anidbstyle.css
+./anidbstyle2/anidbstyle2.css
 ./anidbstyle_hacks/anidbstyle_hacks.css
 ./anidbstyle_diebuster/anidbstyle_diebuster.css
 ./anidbstyle-dongato/anidbstyle-dongato.css
@@ -28,7 +29,7 @@
 ./sub/kfuaw/main.css
 ./sub/norwegian-blue/main.css
 ./sub/silver/main.css
-./test/test.css
+#./test/test.css
 #./yukinaga/yukinaga.css
 ./zakura/zakura.css
 ./zakura-fixed_menu/zakura-fixed_menu.css
