@@ -20,6 +20,7 @@
 #layout-main
 {
 	margin-left:0;
+	min-height:60em;
 }
 
 #layout-nav
