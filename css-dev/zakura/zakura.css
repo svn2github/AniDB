@@ -169,3 +169,15 @@ div.pagination span strong
 {
 padding: 4px 8px;
 }
+
+#layout-main div.anime_all div.info div.caststaff div.cast table,
+#layout-main div.anime_all div.info div.caststaff div.staff table
+{
+	border: none;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border:1px solid #565AB9;
+}
