@@ -18,60 +18,7 @@ jsVersionArray.push({
 	"changelog":"added checked classes and made the last selected tab a per page preference"
 });
 
-var usejspopups = CookieGetByKey('other', 'jsp') || true;
-var curPageID = null;
-var searchTypeSelect = null;
-var searchTypeDefaultSelect = CookieGetByKey('other', 'dsearch') || 'none';
-var searchTypeDefaultAssist = Number(CookieGetByKey('other', 'asearch')) || 0;
-var seeDebug = Number(CookieGetByKey('other', 'seeDebug')) || 0;
-var seeTimes = Number(CookieGetByKey('other', 'seeTimes')) || 0;
-var ignoreLocal = Number(CookieGetByKey('other', 'ignoreLocal')) || 0;
-var menuCollapse = Number(CookieGetByKey('other', 'menuCollapse')) || 0;
-var username = null;
-var defaultTabs = tabCookieGet();
-// joys of joys
-var config = new Object();
-var settings = config;
-// This is the Preference set holders, I will also define defaults now
-config['settings'] = new Object();
-settings['title'] = new Object();
-settings['title']['aATL'] = 'x-jat'; // animeAltTitleLang
-settings['title']['eATL'] = 'x-jat'; // episodeAltTitleLang
-settings['title']['eTD'] = 2; // episodeTitleDisplay
-settings['ed2k'] = new Object();
-settings['ed2k']['pattern'] = "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>"; // ed2k_pattern
-settings['ed2k']['space'] = "_"; // space_pattern
-settings['ed2k']['pad'] = true;
-settings['ed2k']['padonormal'] = true;
-settings['mylist'] = new Object();
-settings['mylist']['use'] = 0; // use_mylist_add
-settings['mylist']['state'] = 0; // mylist_add_state
-settings['mylist']['viewed'] = 0; // mylist_add_viewed_state
-settings['mylist']['fstate'] = 0; // mylist_add_fstate
-settings['mylist']['gstate'] = 0; // mylist_add_state (for generics, defaults to tv)
-settings['group'] = new Object();
-settings['group']['type'] = 0; // group_check_type
-settings['group']['filter'] = 0; // group_langfilter
-settings['aLayout'] = new Object();
-settings['aLayout']['aCS'] = 'default'; // animePage_curSort
-settings['aLayout']['aCSO'] = 'down'; // animePage_curSortOrder
-settings['aLayout']['aPL'] = '0,1,2,3,4,5,6,7,8,9,10,11,12,13'; // animePageLayout
-settings['aLayout']['fsize'] = 0; // format_size
-settings['global'] = new Object();
-settings['global']['collapse'] = 0; //collapseThumbnails
-settings['global']['info'] = 0; // get_info
-settings['global']['infosz'] = 150; // get_info_sz
-settings['global']['infomw'] = 450; // get_info_mw
-settings['other'] = new Object();
-settings['other']['emode'] = 1; // currentFMode
-settings['other']['jsp'] = 1; // usejspopups
-settings['other']['dsearch'] = 'none'; // def_search
-settings['other']['asearch'] = 0; // search_assist
-settings['other']['menuCollapse'] = 0; // what to do with menus that can be collapsed (0 default, 1 allways hide, 2 try to guess based on page width)
-settings['other']['seeDebug'] = 0; // see debug information
-settings['other']['seeTimes'] = 0; // see timing information
-settings['other']['ignoreLocal'] = 0; // ignore local check information
-
+/*	Loads settings cookie and unserializes it */
 function loadJSONCookie(cookie) {
 	var r;
 	try {
@@ -82,171 +29,266 @@ function loadJSONCookie(cookie) {
 	return r;
 }
 
-/* Function that loads cookie settings */
-function loadSettings() {
-	var cookie = loadJSONCookie('anidbsettings');
-	for (k in cookie) {
-		switch (k) {
-			// Title
-			case 'ALTANIMETITLE':
-				settings['title']['aATL'] = cookie[k];
-				break;
-			case 'ALTEPTITLE':
-				settings['title']['eATL'] = cookie[k];
-				break;
-			case 'ALTEPTITLEDISPLAY':
-				settings['title']['eTD'] = cookie[k];
-				break;
-			// eD2k
-			case 'ED2KPATTERN':
-				settings['ed2k']['pattern'] = cookie[k];
-				break;
-			// settings['ed2k']['space'] = "_"; // space_pattern <-- Where is this?
-			case 'NOEPNOPADDING':
-				settings['ed2k']['padonormal'] = cookie[k];
-				break;
-			case 'PADALLEPNOS':
-				settings['ed2k']['pad'] = cookie[k];
-				break;
-			// My List
-			case 'USEQUICKADD':
-				settings['mylist']['use'] = cookie[k];
-				break;
-			case 'MYLISTADDSTATE':
-				settings['mylist']['state'] = cookie[k];
-				break;
-			case 'MYLISTADDWATCHEDSTATE':
-				settings['mylist']['viewed'] = cookie[k];
-				break;
-			case 'MYLISTADDFILESTATE':
-				settings['mylist']['fstate'] = cookie[k];
-				break;
-			case 'MYLISTADDGENFILESTATE':
-				settings['mylist']['gstate'] = cookie[k];
-				break;
-			// Group
-			case 'fix': // Fix // group_check_type
-				settings['group']['type'] = cookie[k];
-				break;
-			case 'fix': // Fix // group_langfilter
-				settings['group']['filter'] = cookie[k];
-				break;
-			// Layout
-			case 'LAYOUTANIMEFILESORT':
-				settings['aLayout']['aCS'] = cookie[k];
-				break;
-			case 'LAYOUTANIMEFILESORTORDER':
-				settings['aLayout']['aCSO']= cookie[k];
-				break;
-			case 'LAYOUTANIMEFILE':
-				//alert(cookie[k]);
-				//settings['aLayout']['aPL'] = cookie[k].join(',');
-				break;
-			case 'fix': // format_size
-				settings['aLayout']['fsize'] = cookie[k];
-				break;
-			// Global
-			case 'USETHUMBNAILHOVER':
-				settings['global']['collapse'] = cookie[k];
-				break;
-			case 'DEFAULTINFOTOOLTIPSIZE':
-				settings['global']['infosz'] = cookie[k];
-				break;
-			case 'DEFAULTINFOTOOLTIPWIDTH':
-				settings['global']['infomw'] = cookie[k];
-				break;
-			// Global > Tooltips
-			case 'SHOWINFOTOOLTIPONANIME':
-				settings['global']['info'] |= 1;
-				break;
-			case 'SHOWINFOTOOLTIPONMYLIST':
-				settings['global']['info'] |= 2;
-				break;
-			case 'fix': // Use information tooltips on Episode pages
-				settings['global']['info'] |= 4;
-				break;
-			case 'SHOWINFOTOOLTIPONGROUP':
-				settings['global']['info'] |= 8;
-				break;
-			case 'SHOWINFOTOOLTIPONCHAR':
-				settings['global']['info'] |= 16;
-				break;
-			case 'fix': // Use information tooltips on Creator pages
-				settings['global']['info'] |= 32;
-				break;
-			case 'SHOWINFOTOOLTIPONWISHLIST':
-				settings['global']['info'] |= 64;
-				break;
-			// Other
-			case 'DEFAULTEDITORMODE':
-				settings['other']['emode'] = cookie[k];
-				break;
-			case 'DISABLEJSPOPUPS':
-				settings['other']['jsp'] = 0;
-				break;
-			case 'DEFAULTSEARCHTYPE':
-				// fix, probably needs the shortname and not index
-				settings['other']['dsearch'] = cookie[k];
-				break;
-			case 'USESEARCHASSIST':
-				settings['other']['asearch'] = cookie[k];
-				break;
-			case 'DEFAULTSIDEBARBEHAVIOUR':
-				settings['other']['menuCollapse'] = cookie[k];
-				break;
-			case 'SHOWDEBUGINFO':
-				settings['other']['seeDebug'] = cookie[k];
-				break;
-			case 'SHOWTIMINGINFO':
-				settings['other']['seeTimes'] = cookie[k];
-				break;
-			case 'DISABLELOCALHOSTCHECK':
-				settings['other']['ignoreLocal'] = cookie[k];
-				break;
-		}
+var config = new Object();
+var settings = config;
+// This is the Preference set holders, I will also define defaults now
+config['settings'] = new Object();
+
+// Title
+settings['title']         = new Object();
+settings['title']['aATL'] = 'x-jat'; // animeAltTitleLang
+settings['title']['eATL'] = 'x-jat'; // episodeAltTitleLang
+settings['title']['eTD']  = 2; // episodeTitleDisplay
+
+// eD2k
+settings['ed2k']               = new Object();
+settings['ed2k']['pattern']    = "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>"; // ed2k_pattern
+settings['ed2k']['space']      = "_"; // space_pattern
+settings['ed2k']['pad']        = true;
+settings['ed2k']['padonormal'] = true;
+
+// Mylist
+settings['mylist']           = new Object();
+settings['mylist']['use']    = 0; // use_mylist_add
+settings['mylist']['state']  = 0; // mylist_add_state
+settings['mylist']['viewed'] = 0; // mylist_add_viewed_state
+settings['mylist']['fstate'] = 0; // mylist_add_fstate
+settings['mylist']['gstate'] = 0; // mylist_add_state (for generics, defaults to tv)
+
+// Group
+settings['group']           = new Object();
+settings['group']['type']   = 0; // group_check_type
+settings['group']['filter'] = 0; // group_langfilter
+
+// Layout
+settings['aLayout']          = new Object();
+settings['aLayout']['aCS']   = 'default'; // animePage_curSort
+settings['aLayout']['aCSO']  = 'down'; // animePage_curSortOrder
+settings['aLayout']['aPL']   = '0,1,2,3,4,5,6,7,8,9,10,11,12,13'; // animePageLayout
+settings['aLayout']['fsize'] = 0; // format_size
+
+// Global
+settings['global']             = new Object();
+settings['global']['collapse'] = 0; //collapseThumbnails
+settings['global']['info']     = 0; // get_info
+settings['global']['infosz']   = 150; // get_info_sz
+settings['global']['infomw']   = 450; // get_info_mw
+
+// Other
+settings['other']                 = new Object();
+settings['other']['emode']        = 1; // currentFMode
+settings['other']['jsp']          = 1; // usejspopups
+settings['other']['dsearch']      = 'none'; // def_search
+settings['other']['asearch']      = 0; // search_assist
+settings['other']['menuCollapse'] = 0; // what to do with menus that can be collapsed (0 default, 1 allways hide, 2 try to guess based on page width)
+settings['other']['seeDebug']     = 0; // see debug information
+settings['other']['seeTimes']     = 0; // see timing information
+settings['other']['ignoreLocal']  = 0; // ignore local check information
+
+/* Load all settings */
+var cookie = loadJSONCookie('anidbsettings');
+for (k in cookie) {
+	switch (k) {
+		// Title
+		case 'ALTANIMETITLE':
+			settings['title']['aATL'] = cookie[k];
+			break;
+		case 'ALTEPTITLE':
+			settings['title']['eATL'] = cookie[k];
+			break;
+		case 'ALTEPTITLEDISPLAY':
+			settings['title']['eTD'] = cookie[k];
+			break;
+		// eD2k
+		case 'ED2KPATTERN':
+			settings['ed2k']['pattern'] = cookie[k];
+			break;
+		case 'ED2KPATTERNSPACE':
+			settings['ed2k']['space'] = cookie[k];
+			break;
+		case 'NOEPNOPADDING':
+			settings['ed2k']['padonormal'] = cookie[k];
+			break;
+		case 'PADALLEPNOS':
+			settings['ed2k']['pad'] = cookie[k];
+			break;
+		// My List
+		case 'USEQUICKADD':
+			settings['mylist']['use'] = cookie[k];
+			break;
+		case 'MYLISTADDSTATE':
+			settings['mylist']['state'] = cookie[k];
+			break;
+		case 'MYLISTADDWATCHEDSTATE':
+			settings['mylist']['viewed'] = cookie[k];
+			break;
+		case 'MYLISTADDFILESTATE':
+			settings['mylist']['fstate'] = cookie[k];
+			break;
+		case 'MYLISTADDGENFILESTATE':
+			settings['mylist']['gstate'] = cookie[k];
+			break;
+		// Group
+		case 'fix': // Fix // group_check_type
+			settings['group']['type'] = cookie[k];
+			break;
+		case 'FILTERRELEASESBYLANG':
+			// Might be unneeded later on, for now leave it be
+			settings['group']['filter'] = cookie[k];
+			break;
+		// Layout
+		case 'LAYOUTANIMEFILESORT':
+			settings['aLayout']['aCS'] = cookie[k];
+			break;
+		case 'LAYOUTANIMEFILESORTORDER':
+			settings['aLayout']['aCSO']= cookie[k];
+			break;
+		case 'LAYOUTANIMEFILE':
+			settings['aLayout']['aPL'] = cookie[k].join(',');
+			break;
+		case 'FORMATFILESIZE':
+			settings['aLayout']['fsize'] = cookie[k];
+			break;
+		// Global
+		case 'USETHUMBNAILHOVER':
+			settings['global']['collapse'] = cookie[k];
+			break;
+		case 'DEFAULTINFOTOOLTIPSIZE':
+			settings['global']['infosz'] = cookie[k];
+			break;
+		case 'DEFAULTINFOTOOLTIPWIDTH':
+			settings['global']['infomw'] = cookie[k];
+			break;
+		// Global > Tooltips
+		case 'SHOWINFOTOOLTIPONANIME':
+			settings['global']['info'] |= 1;
+			break;
+		case 'SHOWINFOTOOLTIPONMYLIST':
+			settings['global']['info'] |= 2;
+			break;
+		case 'fix': // Use information tooltips on Episode pages
+			settings['global']['info'] |= 4;
+			break;
+		case 'SHOWINFOTOOLTIPONGROUP':
+			settings['global']['info'] |= 8;
+			break;
+		case 'SHOWINFOTOOLTIPONCHAR':
+			settings['global']['info'] |= 16;
+			break;
+		case 'fix': // Use information tooltips on Creator pages
+			settings['global']['info'] |= 32;
+			break;
+		case 'SHOWINFOTOOLTIPONWISHLIST':
+			settings['global']['info'] |= 64;
+			break;
+		// Other
+		case 'DEFAULTEDITORMODE':
+			settings['other']['emode'] = cookie[k];
+			break;
+		case 'DISABLEJSPOPUPS':
+			settings['other']['jsp'] = 0;
+			break;
+		case 'DEFAULTSEARCHTYPE':
+			settings['other']['dsearch'] = cookie[k];
+			break;
+		case 'USESEARCHASSIST':
+			settings['other']['asearch'] = cookie[k];
+			break;
+		case 'DEFAULTSIDEBARBEHAVIOUR':
+			settings['other']['menuCollapse'] = cookie[k];
+			break;
+		case 'SHOWDEBUGINFO':
+			settings['other']['seeDebug'] = cookie[k];
+			break;
+		case 'SHOWTIMINGINFO':
+			settings['other']['seeTimes'] = cookie[k];
+			break;
+		case 'DISABLELOCALHOSTCHECK':
+			settings['other']['ignoreLocal'] = cookie[k];
+			break;
 	}
-	// TITLE
-	animeAltTitleLang = settings['title']['aATL'];
-	episodeAltTitleLang = settings['title']['eATL'];
-	episodeTitleDisplay = Number(settings['title']['eTD']);
-	// ED2K
-	ed2k_pattern = settings['ed2k']['pattern'];
-	hashObj.pattern = ed2k_pattern;
-	hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
-	hashObj.sfv = hashObj.pattern+".%ext %crc";
-	space_pattern = settings['ed2k']['space'];
-	hashObj.spacesChar = space_pattern;
-	pad_epnums = settings['ed2k']['pad'];
-	pad_only_normal_epnums = settings['ed2k']['padonormal'];
-	// MYLIST
-	use_mylist_add = Number(settings['mylist']['use']);
-	mylist_add_viewed_state = Number(settings['mylist']['viewed']);
-	mylist_add_state = Number(settings['mylist']['state']);
-	mylist_add_fstate = Number(settings['mylist']['fstate']);
-	mylist_add_gstate = Number(settings['mylist']['gstate']);
-	// GLOBAL
-	collapseThumbnails = Number(settings['global']['collapse']);
-	get_info = Number(settings['global']['info']); // bitwise value
-	get_info_sz = Number(settings['global']['infosz']);
-	get_info_mw = Number(settings['global']['infomw']);
-	// GROUP
-	group_check_type = Number(settings['group']['type']);
-	group_langfilter = Number(settings['group']['filter']);
-	// OTHER
-	def_search = settings['other']['dsearch'];
-	currentFMode = Number(settings['other']['emode']);
-	if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
-	searchTypeAssist = search_assist = Number(settings['other']['asearch']);
-	// LAYOUT
-	config['settings']['FORMATFILESIZE'] = format_size = Number(settings['aLayout']['fsize']);
-	animePage_curSort = settings['aLayout']['aCS'];
-	animePage_curSortOrder = settings['aLayout']['aCSO'];
-	animePageLayout = settings['aLayout']['aPL'];
-	animePageLayout = animePageLayout.split(',');
-	animePage_curLayout = new Array();
-	for (var ci = 0; ci < animePageLayout.length; ci++)
-		animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
 }
+// TITLE
+animeAltTitleLang   = settings['title']['aATL'];
+episodeAltTitleLang = settings['title']['eATL'];
+episodeTitleDisplay = Number(settings['title']['eTD']);
+
+// ED2K
+ed2k_pattern           = settings['ed2k']['pattern'];
+hashObj                = new Object();
+hashObj.pattern        = ed2k_pattern;
+hashObj.ed2k           = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
+hashObj.sfv            = hashObj.pattern+".%ext %crc";
+space_pattern          = settings['ed2k']['space'];
+hashObj.spacesChar     = space_pattern;
+pad_epnums             = settings['ed2k']['pad'];
+pad_only_normal_epnums = settings['ed2k']['padonormal'];
+
+// MYLIST
+use_mylist_add          = Number(settings['mylist']['use']);
+mylist_add_viewed_state = Number(settings['mylist']['viewed']);
+mylist_add_state        = Number(settings['mylist']['state']);
+mylist_add_fstate       = Number(settings['mylist']['fstate']);
+mylist_add_gstate       = Number(settings['mylist']['gstate']);
+
+// GLOBAL
+collapseThumbnails = Number(settings['global']['collapse']);
+get_info           = Number(settings['global']['info']); // bitwise value
+get_info_sz        = Number(settings['global']['infosz']);
+get_info_mw        = Number(settings['global']['infomw']);
+
+// GROUP
+group_check_type = Number(settings['group']['type']);
+group_langfilter = Number(settings['group']['filter']);
+
+// OTHER
+def_search       = settings['other']['dsearch'];
+currentFMode     = Number(settings['other']['emode']);
+//if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
+searchTypeAssist = search_assist = Number(settings['other']['asearch']);
+
+// LAYOUT
+animePage_curSort       = settings['aLayout']['aCS'];
+animePage_curSortOrder  = settings['aLayout']['aCSO'];
+animePageLayout         = settings['aLayout']['aPL'];
+animePageLayout         = animePageLayout.split(',');
+var animePage_defLayout = [
+	'check-anime',
+	'fid',
+	'group',
+	'size',
+	'crc',
+	'langs',
+	'cf',
+	'resolution',
+	'anime-source',
+	'quality',
+	'anime-hashes',
+	'users',
+	'state-anime',
+	'actions-anime'
+];
+animePage_curLayout     = new Array();
+for (var ci = 0; ci < animePageLayout.length; ci++)
+	animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
+
+// MISC
+var usejspopups             = settings['other']['jsp'] || true;
+var curPageID               = null;
+var searchTypeSelect        = null;
+var searchTypeDefaultSelect = settings['other']['dsearch'] || 'none';
+var searchTypeDefaultAssist = Number(settings['other']['asearch']) || 0;
+var ignoreLocal             = Number(settings['other']['ignoreLocal']) || 0;
+var menuCollapse            = Number(settings['other']['menuCollapse']) || 0;
+var username                = null;
+var defaultTabs             = tabCookieGet();
+
+var seeDebug = Number(settings['other']['seeDebug']) || 0;
+var seeTimes = Number(settings['other']['seeTimes']) || 0;
+
+function loadSettings() { }
+
+/* Function declarations below, end of config here */
 
 /* returns true if the script is being executed on localhost */
 function isLocalHost() {
