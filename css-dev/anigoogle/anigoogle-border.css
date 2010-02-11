@@ -150,9 +150,27 @@ tr + tr td,
 }
 
 #layout-main div.tabbed_pane div.body,
-.g_msg
+.g_msg,
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border:1px solid;
+}
+
+#layout-main div.anime_all div.info div.caststaff div tr.more td
+{
+	border-top: none;
+}
+
+#layout-main div.anime_all div.info div.caststaff div table
+{
+	border-top: 1px solid;
 }

@@ -138,3 +138,9 @@ img, a
 	border-radius:5px;
 	border-top: 1px solid #FFFFFF;
 }
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border:1px solid #FFFFFF;
+}

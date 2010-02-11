@@ -440,3 +440,22 @@ tr + tr td,
 	background-color:#A1AFC9;
 	border-bottom-color: #A1AFC9;
 }
+
+#layout-main div.anime_all div.info div.caststaff div h4,
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.anime_all div.info div.caststaff div td
+{
+	background-color:#000000;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border-color:#666666;
+}
+
+#layout-main div.anime_all div.info div.caststaff div table
+{
+	border-top-color:#A0A0A0;
+}

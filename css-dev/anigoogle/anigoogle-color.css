@@ -38,12 +38,6 @@ table
 	border-color:#000;
 }
 
-#layout-tabs ul.main-tabs > li.selected
-{
-	background-color:#FFFFFF;
-	border-bottom-color:#FFFFFF;
-}
-
 #layout-main div.pagination span a
 {
 	background-color:#FFFFFF;
@@ -107,9 +101,16 @@ table
 html,
 tr,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.forum ul.topics li.row
+#layout-main div.forum ul.topics li.row,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-tabs ul.main-tabs > li.selected
 {
 	background-color:#FFFFFF;
+}
+
+#layout-tabs ul.main-tabs > li.selected
+{
+	border-bottom-color:#FFFFFF;
 }
 
 span.link:hover,
@@ -127,9 +128,7 @@ span.g_odd,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.g_timedentry h4,
-#layout-main div.tabbed_pane div.body,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane div.body,,
 #layout-main div.tabbed_pane_cfg div.body,
 #layout-main div.tabbed_pane_cfg ul.tabs li:hover,
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected,
@@ -191,4 +190,27 @@ span.g_odd,
 {
 	background-color: #D5E2F7;
 	color: #000000;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.anime_all div.info div.caststaff div td
+{
+	background-color:#ECF4FD;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border-color:#C9D7F1;
+}
+
+#layout-main div.anime_all div.info div.caststaff div table
+{
+	border-top-color:blue;
+}
+
+#layout-main div.anime_all div.info div.caststaff div h4
+{
+	background-color:#C3D9FF;
 }
