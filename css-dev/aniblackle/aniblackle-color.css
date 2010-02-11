@@ -46,6 +46,7 @@ span.g_odd
 	border-color:#000000;
 }
 
+#layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
 	background-color:#000000;
@@ -79,6 +80,7 @@ button:hover
 a,
 th a,
 span.link,
+#layout-tabs ul.main-tabs > li:hover a
 #layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
 #layout-main div.tabbed_pane ul.tabs li.selected,
