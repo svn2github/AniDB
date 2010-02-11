@@ -1,5 +1,59 @@
-#layout-main div.test_all iframe
+#layout-main div.tabbed_pane + div.caststaff
 {
-	width:100%;
-	height:700px;
+margin-top: 1em;
+}
+
+#layout-main div.caststaff div.cast,
+#layout-main div.caststaff div.staff
+{
+width:45%;
+display: inline-table;
+vertical-alignment:top;
+min-height: 10em;
+padding:4px;
+}
+
+#layout-main div.caststaff div.cast + div.staff
+{
+margin-left: 0.5em;
+}
+
+#layout-main div.caststaff div h4,
+#layout-main div.caststaff div th
+{
+text-align:left;
+}
+
+#layout-main div.caststaff div.cast,
+#layout-main div.caststaff div.staff
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #9A9CA1;
+	border-radius:5px;
+background-color:#B8BAC0;
+}
+
+#layout-main div.caststaff div th,
+#layout-main div.caststaff div td
+{
+background-color:#B8BAC0;
+border:none;
+}
+
+#layout-main div.caststaff div th a
+{
+color:#105289;
+}
+
+
+#layout-main div.caststaff div.cast td.as
+{
+width:1em;
+}
+
+#layout-main div.caststaff div.cast td.as,
+#layout-main div.caststaff div th
+{
+padding-right:1em;
 }
