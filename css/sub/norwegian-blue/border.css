@@ -77,3 +77,9 @@ img, a
 {
 	border-bottom: 1px #e7ebff double;
 }
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border:1px solid #486187;
+}

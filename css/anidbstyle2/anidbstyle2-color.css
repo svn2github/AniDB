@@ -387,8 +387,7 @@ input[type="checkbox"]
 }
 
 #layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff,
-#layout-main div.anime_all div.info div.caststaff div td
+#layout-main div.anime_all div.info div.caststaff div.staff
 {
 	background-color:#B8BAC0;
 }
@@ -407,4 +406,5 @@ input[type="checkbox"]
 #layout-main div.anime_all div.info div.caststaff div h4
 {
 	background-color:#34394D;
+	color: #CCCCCC;
 }

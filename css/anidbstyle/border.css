@@ -139,3 +139,10 @@ img, a
 {
 	border-top:1px solid;
 }
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	background-color:#B8BAC0;
+	border:1px solid #9A9CA1;
+}
