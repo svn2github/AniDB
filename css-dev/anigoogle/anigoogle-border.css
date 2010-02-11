@@ -12,6 +12,7 @@ table
 	border-top:none;
 }
 
+#layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
 	border-bottom:2px solid;
