@@ -45,6 +45,7 @@ table
 	border-color:#B4BAC0;
 }
 
+#layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
 	background-color:#E5ECF9;
@@ -100,7 +101,6 @@ table
 
 html,
 tr,
-#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.forum ul.topics li.row,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-tabs ul.main-tabs > li.selected
@@ -108,6 +108,7 @@ tr,
 	background-color:#FFFFFF;
 }
 
+#layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
 	border-bottom-color:#FFFFFF;
@@ -128,10 +129,11 @@ span.g_odd,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.g_timedentry h4,
-#layout-main div.tabbed_pane div.body,,
+#layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane_cfg div.body,
 #layout-main div.tabbed_pane_cfg ul.tabs li:hover,
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.poll .rbottom *,
 #layout-main div.forum div.poll .rtop *,
