@@ -160,7 +160,7 @@ a:hover
 	color:#AA0000;
 }
 
-#layout-main table tr.header a,
+#layout-main table tr.header a:hover,
 #layout-menu li:hover > a,
 #layout-main > h1 a:hover,
 #layout-main div.g_timedentry h4 a:hover,
