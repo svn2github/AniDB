@@ -142,6 +142,7 @@ tr + tr td,
 	border-top:1px solid;
 }
 
+#layout-main div.anime_all div.info div.caststaff div h,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs > li
 {
