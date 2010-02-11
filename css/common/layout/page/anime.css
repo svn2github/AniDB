@@ -127,3 +127,49 @@
 {
 	width: 55%;
 }
+
+#layout-main div.anime_all div.info div.caststaff
+{
+	margin-top: 0.5em;
+}
+
+#layout-main div.anime_all div.info div.caststaff > div
+{
+	float:left;
+	padding:4px;
+	width:46.5%;
+	margin-right: 0.5em;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast + div.staff
+{
+	float:right;
+	margin-right:0;
+}
+
+#layout-main div.anime_all div.info div.caststaff div h4
+{
+	text-align:left;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast td.as
+{
+	width:1em;
+}
+
+#layout-main div.anime_all div.info div.caststaff div td
+{
+	padding:0.2em 0.5em 0.2em 0;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.staff td.creator,
+#layout-main div.anime_all div.info div.caststaff div.cast td.char
+{
+	padding-right:0;
+}
+
+#layout-main div.anime_all div.info div.caststaff div td.action
+{
+	padding-top: 1em;
+	text-align:right;
+}
