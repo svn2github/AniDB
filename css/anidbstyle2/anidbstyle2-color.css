@@ -385,3 +385,26 @@ input[type="checkbox"]
 	background-color: #B5BED6;
 	border-color: #000000;
 }
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.anime_all div.info div.caststaff div td
+{
+	background-color:#B8BAC0;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border-color:#9A9CA1;
+}
+
+#layout-main div.anime_all div.info div.caststaff div table
+{
+	border-top-color:#DDDDDD;
+}
+
+#layout-main div.anime_all div.info div.caststaff div h4
+{
+	background-color:#34394D;
+}

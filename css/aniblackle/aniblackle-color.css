@@ -46,6 +46,7 @@ span.g_odd
 	border-color:#000000;
 }
 
+#layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
 	background-color:#000000;
@@ -79,6 +80,7 @@ button:hover
 a,
 th a,
 span.link,
+#layout-tabs ul.main-tabs > li:hover a
 #layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
 #layout-main div.tabbed_pane ul.tabs li.selected,
@@ -439,4 +441,23 @@ tr + tr td,
 {
 	background-color:#A1AFC9;
 	border-bottom-color: #A1AFC9;
+}
+
+#layout-main div.anime_all div.info div.caststaff div h4,
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.anime_all div.info div.caststaff div td
+{
+	background-color:#000000;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff
+{
+	border-color:#666666;
+}
+
+#layout-main div.anime_all div.info div.caststaff div table
+{
+	border-top-color:#A0A0A0;
 }
