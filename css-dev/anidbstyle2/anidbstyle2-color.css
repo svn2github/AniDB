@@ -160,7 +160,7 @@ a:hover
 	color:#AA0000;
 }
 
-#layout-main table tr.header a:hover,
+#layout-main table tr th > a:hover,
 #layout-menu li:hover > a,
 #layout-main > h1 a:hover,
 #layout-main div.g_timedentry h4 a:hover,
@@ -168,7 +168,6 @@ a:hover
 #layout-main div.userpage_all > div.g_section > h4 a:hover,
 #layout-main div.animeatt_all div.review > h4 a:hover
 {
-
 	color:#FFAA55;
 }
 
