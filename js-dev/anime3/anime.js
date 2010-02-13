@@ -1,4 +1,4 @@
-/* file animePage interface 
+/* file animePage interface
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (22.03.2007) - Initial version
  * version 1.2 (03.04.2008) - Some fixes and starting 2.0 conversion
@@ -76,6 +76,44 @@ var groupCols = cloneArray(genGroupCols);
 var groupSkips = buildSkipCols(groupCols);
 //var animeCols = cloneArray(genAnimeCols);
 
+var animeFileColsList = {
+	'default':{'text':"Default"},
+	'check-anime':{'text':"(Un)Check file"},
+	'fid':{'text':"File details/FID"},
+	'group':{'text':"Group"},
+	'size':{'text':"Size"},
+	'crc':{'text':"CRC (profile dependent)"},
+	'langs':{'text':"Languages"},
+	'cf':{'text':"Container Format"},
+	'resolution':{'text':"Resolution"},
+	'anime-source':{'text':"Source"},
+	'quality':{'text':"Quality"},
+	'anime-hashes':{'text':"Hashes"},
+	'users':{'text':"Users"},
+	'state-anime':{'text':"Mylist"},
+	'actions-anime':{'text':"Actions"}
+}
+
+var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-source','users'];
+var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
+var animePage_curSort = 'default'; // whatever the db spits out
+
+var group_check_type = 0;
+var group_langfilter = 0;
+var collapseThumbnails = 0;
+var def_search = 'none';
+var get_info = 0; // bit var
+var animePageLayout = null;
+var virtualDiv = document.createElement('div');
+var arePrefsShown = false;
+var defPrefTab = 0;
+var storedTab = '';
+var currentFMode = 1;
+var picbase = 'http://img5.anidb.net/pics/anime/';
+var charInfos = new Array(); 		// Character information	(indexed by charid)
+var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
+var animeInfos = new Array();		// Anime information		(indexed by aid)
+
 var sortingCols = {
 	'characterlist': {	"name character":{"type":'c_setlatin',"isDefault":true},
 						"entity":{"type":'c_latin'},
@@ -143,7 +181,7 @@ function applyMylistState() {
 
 /* This function prepares the page for use with my scripts */
 function prepPage() {
-	// some other stuff, used only in dev 
+	// some other stuff, used only in dev
 	if (''+window.location.hostname != '') {
 		var anime3 = getElementsByClassName(document.getElementsByTagName('div'), 'anime3', true)[0];
 		if (anime3) anime3.className = anime3.className.replace("anime3","anime"); // this will correct css used in dev
@@ -221,7 +259,7 @@ function parseData(xmldoc) {
 	// do some triming of the definition cols if possible
 	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !config['settings']['SHOWCRC'])
 		removeColAttribute('crc',fileCols);
-	if (!uid) 
+	if (!uid)
 		removeColAttribute('expand',groupCols);
 	// Okay now that i have the preferences i can rebuild fileCols
 	var newFileCols = new Array();
@@ -399,7 +437,7 @@ function forceFileTableRedraw(episode) {
 			if (!row) continue;
 			var fileTable = createFileTable(episode);
 			row.cells[0].className = '';
-			if (!fileTable.tBodies[0].rows.length && !fileTable.tFoot.rows.length) 
+			if (!fileTable.tBodies[0].rows.length && !fileTable.tFoot.rows.length)
 				fileTable.parentNode.removeChild(fileTable);
 		}
 	} else {
@@ -407,7 +445,7 @@ function forceFileTableRedraw(episode) {
 		var row = document.getElementById('eid_'+episode.id+'_ftHolder');
 		if (!row) return;
 		row.cells[0].className = '';
-		if (!fileTable.tBodies[0].rows.length && !fileTable.tFoot.rows.length) 
+		if (!fileTable.tBodies[0].rows.length && !fileTable.tFoot.rows.length)
 			fileTable.parentNode.removeChild(fileTable);
 	}
 }
@@ -427,7 +465,7 @@ function forceGroupVisibilty(vis) {
 			cell = getElementsByClassName(row.getElementsByTagName('td'), 'expand', true)[0];
 			if (cell) {
 				var ahref = cell.getElementsByTagName('a')[0];
-				if (ahref.className.indexOf('minus') >= 0) { // group is expanded 
+				if (ahref.className.indexOf('minus') >= 0) { // group is expanded
 					if (!vis) {
 						group.visible = true; // show group files
 						groupFilter.push(group.id);
@@ -477,14 +515,14 @@ function toggleFilesFromGroup() {
 		ck.checked = checked;
 		filesChecked++;
 	}
-	if (checked) 
+	if (checked)
 		alert('Checked '+filesChecked+' of '+totalFiles+' files, please confirm if the selection is correct.'+
 			'\nManual adding is not recommended. The best way to add files to your mylist is by using an AniDB Client. There is also a ready-to-run Java Applet.');
 	showAddToMylistBox();
 }
 
 /* Function that expands files by group */
-function expandFilesByGroup() { 
+function expandFilesByGroup() {
 	// this will be cute :P
 	loadExpand = true; // warn scripts we are doing a full blown ep work
 	internalExpand = true;
@@ -497,7 +535,7 @@ function expandFilesByGroup() {
 	var group = groups[gid];
 	group.visible = true;
 	var getXML = false;
-	if (group && !group.hasCherryBeenPoped) { 
+	if (group && !group.hasCherryBeenPoped) {
 		getXML = true;
 		group.hasCherryBeenPoped = true; // And assuming everything goes well, our group has had his cherry poped :P
 	}
@@ -612,7 +650,7 @@ function filterGroups() {
 		var gstate = group.state.substring(0,(group.state.indexOf(' ') >= 0) ? group.state.indexOf(' ') : group.state.length);
 		//alert('state: '+state+'\nactive: '+active+'\ngstate: '+gstate+'\nequal: '+(gstate == state));
 		if (state != 'all') {
-			if (gstate == state) { 
+			if (gstate == state) {
 				if (!active) group.filtered = true;
 				else group.filtered = false;
 			}
@@ -642,7 +680,7 @@ function filterGroups() {
 		if (active) {
 			this.className = this.className.replace(' f_selected','');
 			this.title = this.title.replace('show','hide');
-		} else { 
+		} else {
 			this.className += ' f_selected';
 			this.title = this.title.replace('hide','show');
 		}
@@ -700,6 +738,7 @@ function updateGroupTable() {
 			lastKnown = row.rowIndex;
 			group.defaultVisible = true;
 			var cells = row.getElementsByTagName('td');
+
 			// hook up the expand function
 			for (var c = 0; c < cells.length; c++) {
 				var cell = cells[c];
@@ -720,16 +759,16 @@ function updateGroupTable() {
 					// also do another thing
 					var epbar = getElementsByClassName(cell.getElementsByTagName('span'), 'completion', true)[0];
 					if (epbar != null) {
-						var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
-									'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"}, 
-									'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime",'class':"done mylist"}, 
+						var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"},
+									'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"},
+									'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime",'class':"done mylist"},
 									'3' : {'use':false,'type': 3,'desc':"Done by: ",'img':"lightblue",'class':"doneby"}};
 						var totalEps = (anime.eps ? anime.eps : anime.highestEp);
 						var range = expandRange(null, totalEps, maps[0], null);
 						if (group.relatedGroups.length) {
 							maps[3]['use'] = true;
 							for(var i = 0; i < group.relatedGroups.length; i++) {
-								var relGroup = groups[group.relatedGroups[i]]; // ID existance check needed? 
+								var relGroup = groups[group.relatedGroups[i]]; // ID existance check needed?
 								if (!relGroup) continue;
 								maps['desc'] += relGroup.Name + ' ';
 								range = expandRange(relGroup.epRange, totalEps, maps[3], range);
@@ -890,19 +929,19 @@ function updateEpisodeTable() {
 					var altTitle = jaTitle = curTitle = '';
 					var titleSpan = cell.getElementsByTagName('label')[0];
 					if (titleSpan) curTitle = nodeData(titleSpan);
-					if (episodeTitleLang != episodeAltTitleLang && 
-						episode.titles[episodeAltTitleLang] && 
+					if (episodeTitleLang != episodeAltTitleLang &&
+						episode.titles[episodeAltTitleLang] &&
 						episode.titles[episodeAltTitleLang]['title'] != '' &&
 						episode.titles[episodeAltTitleLang]['title'] != curTitle) altTitle = episode.titles[episodeAltTitleLang]['title'];
 					if (episodeTitleLang != 'ja' &&
 						episodeAltTitleLang != 'ja' &&
-						episode.titles['ja'] && 
-						episode.titles['ja']['title'] != '' && 
+						episode.titles['ja'] &&
+						episode.titles['ja']['title'] != '' &&
 						episode.titles['ja']['title'] != altTitle) jaTitle = episode.titles['ja']['title'];
 					if (altTitle != '' || jaTitle != '') {
 						if (episodeTitleDisplay == 1 || (episodeTitleDisplay == 4 && jaTitle == ''))
 							titleSpan.firstChild.nodeValue += ' ('+altTitle+')';
-						if (episodeTitleDisplay == 2 || (episodeTitleDisplay == 3 && jaTitle == '')) 
+						if (episodeTitleDisplay == 2 || (episodeTitleDisplay == 3 && jaTitle == ''))
 							titleSpan.title = mapLanguage(episodeAltTitleLang) + ' title: '+ altTitle;
 						if (episodeTitleDisplay == 3 && jaTitle != '') {
 							var titleTag = '';
@@ -1205,25 +1244,25 @@ function prepareForSort() {
 		var cell = getElementsByClassName(parentRow.getElementsByTagName('td'),'file expand',true)[0];
 		if (cell) {
 			var span = cell.getElementsByTagName('span')[0];
-			if (span && span.className.indexOf('i_minus') >= 0) span.className = span.className.replace('i_minus','i_plus'); 
+			if (span && span.className.indexOf('i_minus') >= 0) span.className = span.className.replace('i_minus','i_plus');
 		}
 	}
 	sortcol(this);
 }
 
-/* Function that shows hidden files 
+/* Function that shows hidden files
  * @param hide Hide files if true
  * @param node Node which called the hideFiles action
  */
 function showFiles(hide,passedNode) {
 	var node = this;
 	if (passedNode) node = passedNode;
-	var cell = null; 
+	var cell = null;
 	while (node.nodeName.toLowerCase() != 'table') {
 		if (!cell && node.nodeName.toLowerCase() == 'td') cell = node;
 		node = node.parentNode;
 	}
-	var eid = Number(node.id.substring(7,node.id.indexOf("files"))); 
+	var eid = Number(node.id.substring(7,node.id.indexOf("files")));
 	var tBody = node.tBodies[0];
 	for (var i = 0; i < tBody.rows.length; i++) {
 		var row = tBody.rows[i];
@@ -1236,7 +1275,7 @@ function showFiles(hide,passedNode) {
 			case 'r': file = pseudoFiles.list[fid]; break;
 		}
 		if (!file) continue;
-		if (!passedNode) row.style.display = ''; 
+		if (!passedNode) row.style.display = '';
 		else if (!file.visible) row.style.display = 'none'; // hide
 	}
 	while (cell.childNodes.length) cell.removeChild(cell.firstChild);
@@ -1247,7 +1286,7 @@ function showFiles(hide,passedNode) {
 		ahref = createLink(null,'hide files', 'removeme', null, hideFiles, null, null);
 	} else {
 		i.appendChild(document.createTextNode(episodes[eid].hiddenFiles + ' file'+((episodes[eid].hiddenFiles > 1) ? 's' : '')+ ' not shown - '));
-		ahref = createLink(null,'show all files', 'removeme', null, showFiles, null, null);			
+		ahref = createLink(null,'show all files', 'removeme', null, showFiles, null, null);
 	}
 	i.appendChild(ahref);
 	cell.appendChild(i);
@@ -1361,7 +1400,7 @@ function createFileTable(episode) {
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		if (!expandedGroups) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
-			if (!file.visible || (file.type == 'generic' && config['settings']['HIDEGENERICFILES'])) row.style.display = 'none';		
+			if (!file.visible || (file.type == 'generic' && config['settings']['HIDEGENERICFILES'])) row.style.display = 'none';
 		}
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);
@@ -1458,7 +1497,7 @@ function parseEpisodeData(xmldoc) {
 		processingEps = false;
 		pseudoFilesCreator(); // create pseudo files
 		if (loadExpand) loadExpand = false;
-		if (seeTimes) 
+		if (seeTimes)
 			alert('Processing...\n\tepNodes: '+((new Date()) - t1)+' ms\n\tfiledataNodes: '+epNodestime+' ms');
 	}
 	// Little Hack for the expand all by group

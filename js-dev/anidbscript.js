@@ -214,13 +214,21 @@ episodeAltTitleLang = settings['title']['eATL'];
 episodeTitleDisplay = Number(settings['title']['eTD']);
 
 // ED2K
+// The hash Object holds hashing defaults
+var hashObj = new Object();
+hashObj.usePatterns       = settings['ed2k']['pattern'];
+hashObj.convertSpaces     = true;
+hashObj.defaultSpacesChar = settings['ed2k']['space'];
+hashObj.spacesChar        = hashObj.defaultSpacesChar;
+hashObj.defaultPattern    = settings['ed2k']['pattern'] ?
+	settings['ed2k']['pattern'] :
+	"%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
+hashObj.pattern           = hashObj.defaultPattern;
+hashObj.ed2k              = "ed2k://|file|" + hashObj.pattern + ".%ext|%flen|%ed2k|";
+hashObj.sfv               = hashObj.pattern + ".%ext %crc";
+hashObj.validHashes = [ "ed2k", "sfv" ];
 ed2k_pattern           = settings['ed2k']['pattern'];
-hashObj                = new Object();
-hashObj.pattern        = ed2k_pattern;
-hashObj.ed2k           = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
-hashObj.sfv            = hashObj.pattern+".%ext %crc";
 space_pattern          = settings['ed2k']['space'];
-hashObj.spacesChar     = space_pattern;
 pad_epnums             = settings['ed2k']['pad'];
 pad_only_normal_epnums = settings['ed2k']['padonormal'];
 
