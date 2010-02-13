@@ -109,7 +109,6 @@ var arePrefsShown = false;
 var defPrefTab = 0;
 var storedTab = '';
 var currentFMode = 1;
-var picbase = 'http://img5.anidb.net/pics/anime/';
 var charInfos = new Array(); 		// Character information	(indexed by charid)
 var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
 var animeInfos = new Array();		// Anime information		(indexed by aid)

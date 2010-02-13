@@ -290,9 +290,9 @@ var ignoreLocal             = Number(settings['other']['ignoreLocal']) || 0;
 var menuCollapse            = Number(settings['other']['menuCollapse']) || 0;
 var username                = null;
 var defaultTabs             = tabCookieGet();
-
-var seeDebug = Number(settings['other']['seeDebug']) || 0;
-var seeTimes = Number(settings['other']['seeTimes']) || 0;
+var picbase                 = 'http://img7.anidb.net/pics/anime/';
+var seeDebug                = Number(settings['other']['seeDebug']) || 0;
+var seeTimes                = Number(settings['other']['seeTimes']) || 0;
 
 function loadSettings() { }
 
