@@ -183,7 +183,7 @@ for (k in cookie) {
 			break;
 		// Other
 		case 'DEFAULTEDITORMODE':
-			settings['other']['emode'] = cookie[k];
+			settings['other']['emode'] = [1, 0, 2][cookie[k]];
 			break;
 		case 'DISABLEJSPOPUPS':
 			settings['other']['jsp'] = 0;
