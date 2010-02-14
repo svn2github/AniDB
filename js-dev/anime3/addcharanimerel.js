@@ -54,7 +54,7 @@ function parseData(xmldoc) {
 		var ids = (descNode.type == 'anime' ? aids : cids);
 		var descs = (descNode.type == 'anime' ? animeInfos : charInfos);
 		if (ids.indexOf(descNode.id) < 0) ids.push(descNode.id);
-		if (!descs[descNode.id]) 
+		if (!descs[descNode.id])
 			descs[descNode.id] = descNode;
 		else if (descNode.type != 1)
 			descs[descNode.id].addTitle(descNode.titletype,descNode.name,descNode.lang,descNode.verified);
@@ -112,7 +112,7 @@ function showResults() {
 	var thead = document.createElement('thead');
 	var row = document.createElement('tr');
 	createHeader(row, 'check', 'X');
-	if (!HIDETHUMBNAILS) 
+	if (!HIDETHUMBNAILS)
 		createHeader(row, 'image', 'Image');
 	createHeader(row, 'name', 'Name'); // Matched Name
 	//createHeader(row, null, 'Name');
@@ -258,7 +258,6 @@ function prepPage() {
 	var newSubmitClone = createButton(addRelSubmit.name,addRelSubmit.id,false,addRelSubmit.value,'button',(addRelInput ? doSearch : doSearchChar), null);
 	addRelSubmit.parentNode.replaceChild(newSubmitClone,addRelSubmit);
 	addRelSubmit = newSubmitClone;
-	createPreferencesTable('global');
 	initTooltips();
 	// update curtable
 	var tables = new Array();

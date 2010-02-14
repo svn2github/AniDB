@@ -1,6 +1,6 @@
 /* file episode page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- *         
+ *
  * version 1.0 (19.01.2008) - Initial release
  * version 2.0 (02.08.2008) - Updated version, added show all ajax function
  */
@@ -12,7 +12,7 @@ jsVersionArray.push({
 	"author":"$Author: fahrenheit $",
 	"changelog":"Updated to support chardb"
 });
- 
+
 // GLOBALS
 var request_eid;				// current eid
 var request_aid;				// current aid
@@ -110,7 +110,7 @@ function prepPage() {
 	form.appendChild(filelisttable);
 	createMylistAddBox(form,'files');
 	//filelisttable.parentNode.replaceChild(form,filelisttable);
-	createPreferencesTable('episode');
+
 	// handles tables
 	var sortingCols = {
 		'stafflist': 	{	"credit":{"type":'c_latin',"isDefault":true},
@@ -218,7 +218,7 @@ function parseEpisodeData(xmldoc) {
 	}
 	updateStatus('');
 	var table = createFileTable(episodes[request_eid]);
-	
+
 }
 
 /* Function that gives some indicators to what is happening
@@ -500,25 +500,25 @@ function prepareForSort() {
 		var cell = getElementsByClassName(parentRow.getElementsByTagName('TD'),'file expand',true)[0];
 		if (cell) {
 			var span = cell.getElementsByTagName('SPAN')[0];
-			if (span && span.className.indexOf('i_minus') >= 0) span.className = span.className.replace('i_minus','i_plus'); 
+			if (span && span.className.indexOf('i_minus') >= 0) span.className = span.className.replace('i_minus','i_plus');
 		}
 	}
 	sortcol(this);
 }
 
-/* Function that shows hidden files 
+/* Function that shows hidden files
  * @param hide Hide files if true
  * @param node Node which called the hideFiles action
  */
 function showFiles(hide,passedNode) {
 	var node = this;
 	if (passedNode) node = passedNode;
-	var cell = null; 
+	var cell = null;
 	while (node.nodeName.toLowerCase() != 'table') {
 		if (!cell && node.nodeName.toLowerCase() == 'td') cell = node;
 		node = node.parentNode;
 	}
-	var eid = Number(node.id.substring(7,node.id.indexOf("files"))); 
+	var eid = Number(node.id.substring(7,node.id.indexOf("files")));
 	var tBody = node.tBodies[0];
 	var rows = tBody.getElementsByTagName('tr');
 	for (var i = 0; i < rows.length; i++) {
@@ -532,7 +532,7 @@ function showFiles(hide,passedNode) {
 			case 'r': file = pseudoFiles.list[fid]; break;
 		}
 		if (!file) continue;
-		if (!passedNode) row.style.display = ''; 
+		if (!passedNode) row.style.display = '';
 		else if (!file.visible) row.style.display = 'none'; // hide
 	}
 	while (cell.childNodes.length) cell.removeChild(cell.firstChild);
@@ -543,7 +543,7 @@ function showFiles(hide,passedNode) {
 		ahref = createLink(null,'hide files', 'removeme', null, hideFiles, null, null);
 	} else {
 		i.appendChild(document.createTextNode(episodes[eid].hiddenFiles + ' file'+((episodes[eid].hiddenFiles > 1) ? 's' : '')+ ' not shown - '));
-		ahref = createLink(null,'show all files', 'removeme', null, showFiles, null, null);			
+		ahref = createLink(null,'show all files', 'removeme', null, showFiles, null, null);
 	}
 	i.appendChild(ahref);
 	cell.appendChild(i);
@@ -656,7 +656,7 @@ function createFileTable(episode) {
 		var row = createFileRow(eid,episode.files[f],fileCols,fileSkips);
 		if (!expandedGroups) {
 			if (groups[file.groupId] && !groups[file.groupId].visible) row.style.display = 'none';
-			if (!file.visible || (file.type == 'generic' && config['settings']['HIDEGENERICFILES'])) row.style.display = 'none';		
+			if (!file.visible || (file.type == 'generic' && config['settings']['HIDEGENERICFILES'])) row.style.display = 'none';
 		}
 		if (row.className.indexOf('generic') < 0) tbody.appendChild(row);
 		else tfoot.appendChild(row);

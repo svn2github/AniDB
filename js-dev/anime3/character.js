@@ -1,6 +1,6 @@
 /* file character page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- *         
+ *
  * version 1.0 (06.02.2008) - Merged Character related scripts
  */
 jsVersionArray.push({
@@ -193,7 +193,7 @@ function prepPageEntity() {
  * show=addcharanimerel page scripts
  */
 
-/* Function that fetches data 
+/* Function that fetches data
  * @param searchString Usualy the search string unless we are dealing with a search by id search in that case it's the ID
  * @param searchType Type of search
  * @param extraSearchString When searchString is an ID this can be used to pass a filter down Search String (not an ID)
@@ -202,7 +202,7 @@ function fetchData(searchString,searchType,extraSearchString) {
 	var req = xhttpRequest();
 	var allowedTypes = ['characterdesc','creatordesc','animedesc','characterdescbyrel','characterdescbyid','creatordescbyid'];
 	if (allowedTypes.indexOf(searchType) < 0) { errorAlert('fetchData','Invalid search type: '+searchType); return; }
-	
+
 	if (searchType != 'characterdescbyrel' && searchType != 'characterdescbyid' && searchType != 'creatordescbyid') {
 		if (isLocalHost()) xhttpRequestFetch(req, 'xml/'+searchType+'_'+encodeURI(searchString)+'.xml', parseData);
 		else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+searchType+'&limit=500&search='+encodeURI(searchString), parseData);
@@ -247,7 +247,7 @@ function parseData(xmldoc) {
 		if (ids.indexOf(descNode.id) < 0) ids.push(descNode.id);
 		if (!descs[descNode.id]) {
 			descs[descNode.id] = descNode;
-			if ((curPageID == 'addcreator' && descNodes[d].nodeName.toLowerCase() == 'creatordescbyid') || 
+			if ((curPageID == 'addcreator' && descNodes[d].nodeName.toLowerCase() == 'creatordescbyid') ||
 				(curPageID == 'addcharacter' && descNodes[d].nodeName.toLowerCase() == 'characterdescbyid'))
 				guiseinput.value = descNode.title;
 		} else
@@ -262,8 +262,8 @@ function parseData(xmldoc) {
 		return;
 	}
 	//alert("Results:\ndescNodes: "+descNodes.length+" ["+aids.length+"|"+cids.length+"|"+crids.length+"]");
-	if (!(curPageID == 'addcreator' && descNodes[0].nodeName == 'creatordescbyid') && 
-				!(curPageID == 'addcharacter' && descNodes[0].nodeName == 'characterdescbyid')) 
+	if (!(curPageID == 'addcreator' && descNodes[0].nodeName == 'creatordescbyid') &&
+				!(curPageID == 'addcharacter' && descNodes[0].nodeName == 'characterdescbyid'))
 	{
 		showResults();
 		handleTables(new Object(),['resultslist'],null,collapseThumbnails,false);
@@ -350,7 +350,7 @@ function showResults(single,filter) {
 		table.appendChild(tbody);
 	}
 	// clear table
-	while (tbody.childNodes.length) 
+	while (tbody.childNodes.length)
 		tbody.removeChild(tbody.firstChild);
 	// Create table head
 	var thead = table.getElementsByTagName('thead')[0];
@@ -359,26 +359,26 @@ function showResults(single,filter) {
 		var row = document.createElement('tr');
 		row.className = 'header';
 		createHeader(row, 'check', 'X');
-		if (!HIDETHUMBNAILS) 
+		if (!HIDETHUMBNAILS)
 			createHeader(row, 'image', 'Image');
 		createHeader(row, 'name', 'Name'); // Matched Name
 		thead.appendChild(row);
 		table.insertBefore(thead,tbody);
 	}
-	
+
 	// now figure out the names of the checkboxes / radio buttons
 	var ckNames = {
 		'addcharcharrel':{'single':"addccrel.next",'multi':"addccrel.nextchar[]",'func':null},
 		'addcreatorcreatorrel':{'single':"addccrel.next",'multi':"addccrel.nextcreator[]",'func':null},
 		'addcharanimerel':{'single':"addcarel.charid[]",'multi':"addcarel.charid[]",'func':null},
-		'addcreator':{'single':"creator",'multi':"creator[]",'func':function setCreatorId() { 
-				newguiseinput.value = this.value; 
-				guiseinput.value = creatorInfos[this.value].title; 
+		'addcreator':{'single':"creator",'multi':"creator[]",'func':function setCreatorId() {
+				newguiseinput.value = this.value;
+				guiseinput.value = creatorInfos[this.value].title;
 				table.style.display = "none";
 			}},
-		'addcharacter':{'single':"character",'multi':"character[]",'func':function setCharId() { 
-				newguiseinput.value = this.value; 
-				guiseinput.value = charInfos[this.value].title; 
+		'addcharacter':{'single':"character",'multi':"character[]",'func':function setCharId() {
+				newguiseinput.value = this.value;
+				guiseinput.value = charInfos[this.value].title;
 				table.style.display = "none";
 			}
 		}
@@ -403,7 +403,7 @@ function showResults(single,filter) {
 		if (ids.length == 1) {
 			ck.checked = true;
 			if (curPageID == 'addcreator' || curPageID == 'addcharacter') {
-				newguiseinput.value = desc.id; 
+				newguiseinput.value = desc.id;
 				guiseinput.value = desc.title;
 			}
 		}
@@ -587,7 +587,7 @@ function prepPageAddEntityEntityRel() {
 	var inputs = div.getElementsByTagName('input');
 	var relinputid,charinputid, searchFunc, relatedSearchFunc, ginfo, tableid, reldivs;
 	switch(curPageID) {
-		case 'addcharcharrel': 
+		case 'addcharcharrel':
 			relinputid = 'addccrel.charid';
 			charinputid = 'charid';
 			searchFunc = doSearchChar;
@@ -596,8 +596,8 @@ function prepPageAddEntityEntityRel() {
 			tableid = 'characterrellist_';
 			reldivs = 'g_section addcharcharrel_entries';
 			break;
-		case 'addcreatorcreatorrel': 
-			relinputid = 'addccrel.creatorid'; 
+		case 'addcreatorcreatorrel':
+			relinputid = 'addccrel.creatorid';
 			charinputid = 'creatorid';
 			searchFunc = doSearchCreator;
 			relatedSearchFunc = doSearchRelatedCreator;
@@ -606,7 +606,7 @@ function prepPageAddEntityEntityRel() {
 			reldivs = 'g_section addcreatorcreatorrel_entries';
 			break;
 		default:
-			errorAlert('prepPageAddEntityEntityRel','no matching page'); 
+			errorAlert('prepPageAddEntityEntityRel','no matching page');
 			return;
 	}
 	addRelInput = getElementsByName(inputs, relinputid, false)[0];
@@ -795,7 +795,6 @@ function prepPageAddEntity() {
 function prepPage() {
 	var uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
-	createPreferencesTable('global');
 	initTooltips();
 
 	switch(curPageID) {

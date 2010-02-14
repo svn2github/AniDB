@@ -469,6 +469,8 @@ function prepPage() {
 		audlangs.rem = remLanguageFromArray;
 		audlangs.toString = convLanguagesToText;
 		audlangs.input.name = 'lang.filealang';
+		audlangs.input = audlangs.input.form.getElementsByTagName('fieldset')[0].appendChild(
+			audlangs.input.parentNode.removeChild(audlangs.input));
 	}
 	sublangs.input = getElementsByName(inputs, 'lang.subin', false)[0];
 	if (sublangs.input) {
@@ -480,6 +482,8 @@ function prepPage() {
 		sublangs.rem = remLanguageFromArray;
 		sublangs.toString = convLanguagesToText;
 		sublangs.input.name = 'lang.fileslang';
+		sublangs.input = sublangs.input.form.getElementsByTagName('fieldset')[0].appendChild(
+			sublangs.input.parentNode.removeChild(sublangs.input));
 	}
 	if (audlangs.input && sublangs.input) prepLanguages();
 

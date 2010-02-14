@@ -299,7 +299,7 @@ function updateEpTable() {
 	table.insertBefore(thead,tbody);
 	table.appendChild(tfoot);
 	init_sorting(table,'epno','down');
-	
+
 	updateEpTableRows(false);
 }
 
@@ -319,8 +319,7 @@ function prepPage() {
 	initTooltips();
 	aid = Number(uriObj['aid']);
 	gid = Number(uriObj['gid']);
-	
-	createPreferencesTable('group');
+
 	//alert("Timed: "+(new Date() - start));
 
 	if (!isNaN(aid) && !isNaN(gid)) {
@@ -420,31 +419,31 @@ function parseEpisodeData(xmldoc) {
 	updateStatus('');
 	// now that we have all the data actualy update the hash nodes
 	//updateEpTableRows(true); // maybe i can live without this one
-	
+
 	addEpBar();
 }
 
 function parseGroupRangeData(xmlDoc){
 	var groupReleases = new Object();
 	var id;
-	
+
 	var epRange, totalEps;
 	var animes = xmlDoc.getElementsByTagName('anime');
 	for(var i =0; i < animes.length; i++){
 		id = animes[i].getAttribute('id');
-		
+
 		epRange = nodeData(animes[i].getElementsByTagName('eprange')[0])
 		groupReleases[id + '_eprange'] = epRange;
-				
+
 		totalEps = nodeData(animes[i].getElementsByTagName('neps')[0])
 		groupReleases[id + '_neps'] = totalEps;
 	}
-	
+
 	var mlRange;
 	var mylist = xmlDoc.getElementsByTagName('mylist');
 	var mlGroups = mylist[0].getElementsByTagName('group');
 	var mlEntries = mylist[0].getElementsByTagName('inmylist');
-	
+
 	for(var j=0; j<mlEntries.length; j++) {
 		id = mlGroups[j].getAttribute('aid');
 		mlRange = nodeData(mlEntries[j]);
@@ -452,12 +451,12 @@ function parseGroupRangeData(xmlDoc){
 	}
 	addEpBars(groupReleases);
 }
- 
- 
+
+
  /* Adds epbars below each anime row */
 function addEpBars(groupReleases){
 	var div = document.getElementById('tab_main_1_pane'); //Need more reliable way?
-	
+
 	var cell;
 	var colIndex = 0;
 	var thead = div.getElementsByTagName('thead')[0];
@@ -470,7 +469,7 @@ function addEpBars(groupReleases){
 			break;
 		}
 	}
-	
+
 	var range;
 	var aid, link;
 	var maps, totalEps;
@@ -479,21 +478,21 @@ function addEpBars(groupReleases){
 	for(var i=0; i < rows.length; i++){
 		link = rows[i].getElementsByTagName('td')[2].getElementsByTagName('a')[0].getAttribute('href');
 		aid = link.substr(link.indexOf('aid=')+4);
-		
-		maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
-				'1' : {'use':false,'type': 1,'desc':"Done: "+groupReleases[aid + '_eprange'],'img':"darkblue",'class':"done"}, 
+
+		maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"},
+				'1' : {'use':false,'type': 1,'desc':"Done: "+groupReleases[aid + '_eprange'],'img':"darkblue",'class':"done"},
 				'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(groupReleases[aid + '_mlrange']),'img':"lime",'class':"done mylist"}};
 
 		totalEps = parseInt(groupReleases[aid + '_neps']);
 		if(isNaN(totalEps)) totalEps = 0;
-		
+
 		range = expandRange(null, totalEps, maps[0], null);
-		
+
 		if(groupReleases[aid + '_eprange'] != '' && groupReleases[aid + '_eprange']) {
 			maps[1]['use'] = true;
 			range = expandRange(groupReleases[aid + '_eprange'], totalEps, maps[1], range);
 		}
-		
+
 		if(groupReleases[aid + '_mlrange'] != '' && groupReleases[aid + '_mlrange']) {
 			maps[2]['use'] = true;
 			range = expandRange(groupReleases[aid + '_mlrange'], totalEps, maps[2], range);
@@ -514,24 +513,24 @@ function addEpBar(){
 
 	var totalEps = (anime.eps ? anime.eps : anime.highestEp);
 	var group = groups[gid];
-	
-	var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"}, 
-				'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"}, 
+
+	var maps = {'0' : {'use':true, 'type': 0,'desc':"",'img':"blue",'class':"notdone"},
+				'1' : {'use':false,'type': 1,'desc':"Done: "+group.epRange,'img':"darkblue",'class':"done"},
 				'2' : {'use':false,'type': 2,'desc':"in mylist: "+convertRangeToText(group.isInMylistRange),'img':"lime",'class':"done mylist"}};
-	
+
 	var range = expandRange(null, totalEps, maps[0], null);
 	if (group.epRange != '') { maps[1]['use'] = true; range = expandRange(group.epRange, totalEps, maps[1], range);}
 	if (group.isInMylistRange != '') { maps[2]['use'] = true; range = expandRange(group.isInMylistRange, totalEps, maps[2], range);}
-	
+
 	var row = document.createElement('tr');
 	var td = document.createElement('td');
 	row.appendChild(td);
-	
+
 	td.setAttribute('colspan', fileList.tBodies[0].rows[0].cells.length)
 	td.className = "epbar";
 	makeCompletionBar(td, range, maps);
 	fileList.tBodies[0].appendChild(row);
 }
- 
+
 //window.onload = prepPage;
 addLoadEvent(prepPage);

@@ -1,4 +1,4 @@
-/* file Quickvote interface 
+/* file Quickvote interface
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (19.11.2008) - Initial version
  */
@@ -17,20 +17,19 @@ var sortingCols = {
 };
 var tableNames = ['animelist'];
 var skipTables = null;
- 
+
 function prepPage() {
 	var table = document.getElementById('animelist');
 	if (!table) return;
 	var tfoot = document.createElement('tfoot');
 	tfoot.appendChild(table.tBodies[0].rows[table.tBodies[0].rows.length-1]);
 	table.appendChild(tfoot);
-	
+
 	initTooltips();
-	createPreferencesTable('global');
 	handleTables(sortingCols, tableNames, skipTables, collapseThumbnails, (get_info & 2));
-	
+
 	return; //noec: Previously this function was not added to the onLoad event.
-	
+
 	var table = getElementsByClassName(document.getElementsByTagName('table'), 'animelist', false)[0];
 	if (!table) return;
 	var tbody = table.tBodies[0];

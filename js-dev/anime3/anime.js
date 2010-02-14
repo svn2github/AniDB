@@ -109,9 +109,6 @@ var arePrefsShown = false;
 var defPrefTab = 0;
 var storedTab = '';
 var currentFMode = 1;
-var charInfos = new Array(); 		// Character information	(indexed by charid)
-var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
-var animeInfos = new Array();		// Anime information		(indexed by aid)
 
 var sortingCols = {
 	'characterlist': {	"name character":{"type":'c_setlatin',"isDefault":true},
@@ -295,7 +292,6 @@ function parseData(xmldoc) {
 	}
 	var gEGD = new Date() - t2;
 	t2 = new Date();
-	createPreferencesTable('anime');
 	updateAddToMylistBox();
 	var uAB = new Date() - t2;
 	var preparingPage = (new Date() - t1);

@@ -226,11 +226,11 @@ hashObj.defaultPattern    = settings['ed2k']['pattern'] ?
 hashObj.pattern           = hashObj.defaultPattern;
 hashObj.ed2k              = "ed2k://|file|" + hashObj.pattern + ".%ext|%flen|%ed2k|";
 hashObj.sfv               = hashObj.pattern + ".%ext %crc";
-hashObj.validHashes = [ "ed2k", "sfv" ];
-ed2k_pattern           = settings['ed2k']['pattern'];
-space_pattern          = settings['ed2k']['space'];
-pad_epnums             = settings['ed2k']['pad'];
-pad_only_normal_epnums = settings['ed2k']['padonormal'];
+hashObj.validHashes       = [ "ed2k", "sfv" ];
+ed2k_pattern              = settings['ed2k']['pattern'];
+space_pattern             = settings['ed2k']['space'];
+pad_epnums                = settings['ed2k']['pad'];
+pad_only_normal_epnums    = settings['ed2k']['padonormal'];
 
 // MYLIST
 use_mylist_add          = Number(settings['mylist']['use']);
@@ -293,6 +293,10 @@ var defaultTabs             = tabCookieGet();
 var picbase                 = 'http://img7.anidb.net/pics/anime/';
 var seeDebug                = Number(settings['other']['seeDebug']) || 0;
 var seeTimes                = Number(settings['other']['seeTimes']) || 0;
+
+var charInfos = new Array(); 		// Character information	(indexed by charid)
+var creatorInfos = new Array(); 	// Creator information		(indexed by creatorid)
+var animeInfos = new Array();		// Anime information		(indexed by aid)
 
 function loadSettings() { }
 

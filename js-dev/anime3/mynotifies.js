@@ -28,7 +28,7 @@ var skipTables = ["forum_related"];
 function prepPage() {
     var tables = getElementsByClassName(document.getElementsByTagName('table'),'mynotifies_list',true);
 	if (!tables) return;
-    
+
     for (var i = 0; i < tables.length; i++) {
         var tableName = tables[i].className.split(' ')[1];
         switch (tableName) {
@@ -45,9 +45,8 @@ function prepPage() {
                 tables[i].id = 'forum_related'; break;
         }
     }
-	
+
 	initTooltips();
-	createPreferencesTable('global');
 	handleTables(sortingCols, tableNames, skipTables, collapseThumbnails, (get_info & 2));
 }
 
