@@ -98,17 +98,11 @@ var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-s
 var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
 var animePage_curSort = 'default'; // whatever the db spits out
 
-var group_check_type = 0;
-var group_langfilter = 0;
 var collapseThumbnails = 0;
-var def_search = 'none';
-var get_info = 0; // bit var
-var animePageLayout = null;
 var virtualDiv = document.createElement('div');
 var arePrefsShown = false;
 var defPrefTab = 0;
 var storedTab = '';
-var currentFMode = 1;
 
 var sortingCols = {
 	'characterlist': {	"name character":{"type":'c_setlatin',"isDefault":true},

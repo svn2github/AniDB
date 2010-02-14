@@ -129,7 +129,7 @@ for (k in cookie) {
 			settings['mylist']['gstate'] = cookie[k];
 			break;
 		// Group
-		case 'fix': // Fix // group_check_type
+		case 'FILESELECTION': // Fix // group_check_type
 			settings['group']['type'] = cookie[k];
 			break;
 		case 'FILTERRELEASESBYLANG':
@@ -175,7 +175,7 @@ for (k in cookie) {
 		case 'SHOWINFOTOOLTIPONCHAR':
 			settings['global']['info'] |= 16;
 			break;
-		case 'fix': // Use information tooltips on Creator pages
+		case 'SHOWINFOTOOLTIPONCREATOR': // Use information tooltips on Creator pages
 			settings['global']['info'] |= 32;
 			break;
 		case 'SHOWINFOTOOLTIPONWISHLIST':
