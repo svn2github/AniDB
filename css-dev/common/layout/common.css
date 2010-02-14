@@ -97,6 +97,12 @@ body.nonav #layout-main h1
 	float: right;
 }
 
+#layout-main div table td.title span.icons.language
+{
+	float:left;
+	padding-right: 0.3em;
+}
+
 #layout-main .icons .i_icon,
 #layout-main div.group_released tr td.languages span.i_icon,
 #layout-main div.anime_all div.groups td.languages span.i_icon,

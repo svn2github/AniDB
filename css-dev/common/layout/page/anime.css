@@ -125,7 +125,7 @@
 
 #layout-main div.anime_all div.episodes table.eplist th.title
 {
-	width: 55%;
+	max-width: 50%;
 }
 
 #layout-main div.anime_all div.info div.caststaff
