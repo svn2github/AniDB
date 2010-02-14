@@ -69,6 +69,7 @@ settings['aLayout']['fsize'] = 0; // format_size
 
 // Global
 settings['global']             = new Object();
+settings['global']['useajax']  = 0;
 settings['global']['collapse'] = 0; //collapseThumbnails
 settings['global']['info']     = 0; // get_info
 settings['global']['infosz']   = 150; // get_info_sz
@@ -79,7 +80,6 @@ settings['other']                 = new Object();
 settings['other']['emode']        = 1; // currentFMode
 settings['other']['jsp']          = 1; // usejspopups
 settings['other']['dsearch']      = 'none'; // def_search
-settings['other']['asearch']      = 0; // search_assist
 settings['other']['menuCollapse'] = 0; // what to do with menus that can be collapsed (0 default, 1 allways hide, 2 try to guess based on page width)
 settings['other']['seeDebug']     = 0; // see debug information
 settings['other']['seeTimes']     = 0; // see timing information
@@ -150,6 +150,9 @@ for (k in cookie) {
 			settings['aLayout']['fsize'] = cookie[k];
 			break;
 		// Global
+		case 'USEAJAX':
+			settings['global']['useajax'] = Number(cookie[k]);
+			break;
 		case 'USETHUMBNAILHOVER':
 			settings['global']['collapse'] = cookie[k];
 			break;
@@ -252,7 +255,6 @@ group_langfilter = Number(settings['group']['filter']);
 def_search       = settings['other']['dsearch'];
 currentFMode     = Number(settings['other']['emode']);
 //if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
-searchTypeAssist = search_assist = 1;
 
 // LAYOUT
 animePage_curSort       = settings['aLayout']['aCS'];
@@ -284,7 +286,6 @@ var usejspopups             = settings['other']['jsp'] || true;
 var curPageID               = null;
 var searchTypeSelect        = null;
 var searchTypeDefaultSelect = settings['other']['dsearch'] || 'none';
-var searchTypeDefaultAssist = Number(settings['other']['asearch']) || 0;
 var ignoreLocal             = Number(settings['other']['ignoreLocal']) || 0;
 var menuCollapse            = Number(settings['other']['menuCollapse']) || 0;
 var username                = null;
@@ -1441,7 +1442,7 @@ function printTags() {
 	}
 }
 
-if (searchTypeDefaultAssist) {
+if (settings['global']['useajax']) {
 	// Initialize the script
 	addLoadEvent(function() {
 		// Find target form
