@@ -946,7 +946,7 @@ function updateEpisodeTable() {
 					if (mylistEpEntries.length) { // A neat part now, state icons
 						var icon;
 						// Loop to see if an entry should get a status, and file state
-						var span = cell.getElementsByTagName('span')[0];
+						var span = getElementsByClassName(cell.getElementsByTagName('span'), 'state', true)[0];
 						if (span) {
 							// first check if we have the new files icon (because i can't realy figure that out
 							var newFilesIcon = null;
