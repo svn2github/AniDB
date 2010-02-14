@@ -166,7 +166,8 @@ for (k in cookie) {
 		case 'SHOWINFOTOOLTIPONMYLIST':
 			settings['global']['info'] |= 2;
 			break;
-		case 'fix': // Use information tooltips on Episode pages
+		case 'SHOWINFOTOOLTIPONEP':
+			// Use information tooltips on Episode pages
 			settings['global']['info'] |= 4;
 			break;
 		case 'SHOWINFOTOOLTIPONGROUP':
@@ -175,7 +176,8 @@ for (k in cookie) {
 		case 'SHOWINFOTOOLTIPONCHAR':
 			settings['global']['info'] |= 16;
 			break;
-		case 'SHOWINFOTOOLTIPONCREATOR': // Use information tooltips on Creator pages
+		case 'SHOWINFOTOOLTIPONCREATOR':
+			// Use information tooltips on Creator pages
 			settings['global']['info'] |= 32;
 			break;
 		case 'SHOWINFOTOOLTIPONWISHLIST':
@@ -190,9 +192,6 @@ for (k in cookie) {
 			break;
 		case 'DEFAULTSEARCHTYPE':
 			settings['other']['dsearch'] = cookie[k];
-			break;
-		case 'USESEARCHASSIST':
-			settings['other']['asearch'] = cookie[k];
 			break;
 		case 'DEFAULTSIDEBARBEHAVIOUR':
 			settings['other']['menuCollapse'] = cookie[k];
@@ -253,7 +252,7 @@ group_langfilter = Number(settings['group']['filter']);
 def_search       = settings['other']['dsearch'];
 currentFMode     = Number(settings['other']['emode']);
 //if (def_search != 'none' && searchTypeSelect) searchTypeSelect.value = def_search;
-searchTypeAssist = search_assist = Number(settings['other']['asearch']);
+searchTypeAssist = search_assist = 1;
 
 // LAYOUT
 animePage_curSort       = settings['aLayout']['aCS'];
