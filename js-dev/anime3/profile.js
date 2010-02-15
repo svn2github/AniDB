@@ -514,143 +514,248 @@ function createShuttle(target) {
 		return;
 	}
 
+	// Get all select elements
 	var select_boxes     = getElementsByClassNameDeep(target, "shuttle");
-	var select_available = select_boxes[0];
-	var select_selected  = select_boxes[1];
 
-	select_available.getSelected = select_selected.getSelectedIndex = function() {
-		var options = this.getElementsByTagName("option");
-		for (var i = 0; i < options.length; i++) {
-			if (options[i].selected) {
-				return i;
+	// Add some magic methods for simpler code further on
+	for (var i = 0; i < select_boxes.length; i++) {
+		// Retrieve current selection index
+		select_boxes[i].getSelectedIndex = function() {
+			var options = this.getElementsByTagName("option");
+			for (var i = 0; i < options.length; i++) {
+				if (options[i].selected) {
+					return i;
+				}
+			}
+		}
+
+		// Retrieve currently selected option node
+		select_boxes[i].getSelected = function() {
+			var options = this.getElementsByTagName("option");
+			for (var i = 0; i < options.length; i++) {
+				if (options[i] && options[i].selected) {
+					return options[i];
+				}
 			}
 		}
 	}
-	select_available.getSelected = select_selected.getSelected = function() {
-		var options = this.getElementsByTagName("option");
-		for (var i = 0; i < options.length; i++) {
-			if (options[i] && options[i].selected) {
-				return options[i];
+
+	// Some globals the closures should know about
+	var fieldsets = target.getElementsByTagName("fieldset");
+	if (fieldsets.length == 2) {
+		var fieldset_left  = fieldsets[0];
+		var name_left      = fieldset_left.getElementsByTagName("input")[0].name.substr(5);
+		var fieldset_right = fieldsets[1];
+	} else {
+		var fieldset_right = fieldsets[0];
+	}
+	var name_right = fieldset_right.getElementsByTagName("input")[0].name.substr(5);
+
+	// Are we doing a bi-directional shutter or a plain old one?
+	if (select_boxes.length == 3) {
+		var select_left      = select_boxes[0];
+		var select_available = select_boxes[1];
+		var select_right     = select_boxes[2];
+
+		// Add update input closure, to regenerate inputs whenever something changes
+		select_left.updateInputs = function() {
+			// Delete old inputs, but leave the config name input
+			var inputs = fieldset_left.getElementsByTagName("input");
+			for (var i = inputs.length - 1; i > 0; i--) {
+				inputs[i].parentNode.removeChild(inputs[i]);
+			}
+
+			// Re-add options
+			var options = select_left.getElementsByTagName("option");
+			for (var i = 0; i < options.length; i++) {
+				var input = document.createElement("input");
+					input.type  = "hidden";
+					input.name  = name_left + "[]";
+					input.value = options[i].value;
+				fieldset_left.appendChild(input);
 			}
 		}
+	} else {
+		var select_available = select_boxes[0];
+		var select_right     = select_boxes[1];
 	}
 
-	// Get global data
-	var fieldset = target.getElementsByTagName("fieldset")[0];
-	var name     = fieldset.getElementsByTagName("input")[0].name.substr(5);
-
-	// Binding to update input fields, to submit something useful
-	select_selected.updateInputs = function() {
+	// Add update input closure, to regenerate inputs whenever something changes
+	select_right.updateInputs = function() {
 		// Delete old inputs, but leave the config name input
-		var inputs = fieldset.getElementsByTagName("input");
+		var inputs = fieldset_right.getElementsByTagName("input");
 		for (var i = inputs.length - 1; i > 0; i--) {
 			inputs[i].parentNode.removeChild(inputs[i]);
 		}
 
 		// Re-add options
-		var options = select_selected.getElementsByTagName("option");
+		var options = select_right.getElementsByTagName("option");
 		for (var i = 0; i < options.length; i++) {
 			var input = document.createElement("input");
 				input.type  = "hidden";
-				input.name  = name + "[]";
+				input.name  = name_right + "[]";
 				input.value = options[i].value;
-			fieldset.appendChild(input);
+			fieldset_right.appendChild(input);
 		}
 	}
 
-	// Bind doubleclick event to all options and remember order
+	// Remember order
+	var order = {
+		"left"      : [],
+		"right"     : []
+	};
 	var options = target.getElementsByTagName("option");
-	var order   = [];
 	for (var i = 0; i < options.length; i++) {
-		if (options[i].parentNode == select_selected) {
-			order.push(options[i].value);
+		if (select_left && options[i].parentNode == select_left) {
+			order["left"].push(options[i].value);
+		} else if (options[i].parentNode == select_right) {
+			order["right"].push(options[i].value);
 		}
-		addEventSimple(options[i], "dblclick", function() {
-			if (this.parentNode == select_selected) {
-				select_available.appendChild(this.parentNode.removeChild(this));
-			} else {
-				select_selected.appendChild(this.parentNode.removeChild(this));
-			}
-			select_selected.updateInputs();
-		});
+
+		// Add double click support if we've just got the right (->) side
+		if (!select_left) {
+			addEventSimple(options[i], "dblclick", function() {
+				if (this.parentNode == select_right) {
+					select_available.appendChild(this.parentNode.removeChild(this));
+				} else {
+					select_right.appendChild(this.parentNode.removeChild(this));
+				}
+				select_right.updateInputs();
+			});
+		}
 	}
+
+
+
+	// All supported button events
+	var button_events = {
+		"add" : function() {
+			if (this.className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var option = select_available.getSelected();
+			if (!option) {
+				return;
+			}
+
+			select.appendChild(option.parentNode.removeChild(option));
+			select.updateInputs();
+		},
+		"remove" : function() {
+			if (this.className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var option = select.getSelected();
+			if (!option) {
+				return;
+			}
+
+			option = option.parentNode.removeChild(option);
+			option.selected = false;
+			select_available.appendChild(option);
+			select.updateInputs();
+		},
+		"moveup" : function() {
+			if (this.className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var option = select.getSelected();
+			if (!option) {
+				return;
+			}
+
+			var options = select.getElementsByTagName("option");
+			var i = select.getSelectedIndex();
+
+			if (i == null || i == 0) {
+				return;
+			} else {
+				select.insertBefore(option.parentNode.removeChild(option), options[i - 1]);
+			}
+			select.updateInputs();
+		},
+		"movedown" : function() {
+			if (this.className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var option = select.getSelected();
+			if (!option) {
+				return;
+			}
+
+			var options = select.getElementsByTagName("option");
+			var i = select.getSelectedIndex();
+
+			if (i == null) {
+				return;
+			} else if (i + 2 >= options.length) {
+				select.appendChild(option.parentNode.removeChild(option));
+			} else {
+				select.insertBefore(option.parentNode.removeChild(option), options[i + 1]);
+			}
+			select.updateInputs();
+		},
+		"reset" : function() {
+			// Put everything in the middle column, counting down because of some auto update retardedness
+			if (select_left) {
+				var options = select_left.getElementsByTagName("option");
+				for (var i = options.length - 1; i >= 0; i--) {
+					if (options[i].parentNode != select_available) {
+						select_available.appendChild(options[i].parentNode.removeChild(options[i]));
+					}
+				}
+			}
+			var options = select_right.getElementsByTagName("option");
+			for (var i = options.length - 1; i >= 0; i--) {
+				if (options[i].parentNode != select_available) {
+					select_available.appendChild(options[i].parentNode.removeChild(options[i]));
+				}
+			}
+
+			// Put back left options
+			if (select_left) {
+				for (var i = 0; i < order["left"].length; i++) {
+					for (var j = 0; j < options.length; j++) {
+						if (order["left"][i] == options[j].value) {
+							select_left.appendChild(options[j].parentNode.removeChild(options[j]));
+							break;
+						}
+					}
+				}
+				select_left.updateInputs();
+			}
+
+			// Put back right inputs
+			for (var i = 0; i < order["right"].length; i++) {
+				for (var j = 0; j < options.length; j++) {
+					if (order["right"][i] == options[j].value) {
+						select_right.appendChild(options[j].parentNode.removeChild(options[j]));
+						break;
+					}
+				}
+			}
+			select_right.updateInputs();
+		}
+	};
 
 	// Get all buttons, to bind events to
 	var inputs  = target.getElementsByTagName("input");
-	var buttons = { };
 	for (var i = 0; i < inputs.length; i++) {
 		if (inputs[i].type == "button") {
-			buttons[inputs[i].name] = inputs[i];
+			addEventSimple(inputs[i], "click", button_events[inputs[i].name]);
 		}
 	}
-
-	// Attach move button functions
-	addEventSimple(buttons["add"], "click", function() {
-		var option = select_available.getSelected();
-		if (!option) {
-			return;
-		}
-		select_selected.appendChild(option.parentNode.removeChild(option));
-		select_selected.updateInputs();
-	});
-	addEventSimple(buttons["remove"], "click", function() {
-		var option = select_selected.getSelected();
-		if (!option) {
-			return;
-		}
-		option = option.parentNode.removeChild(option);
-		option.selected = false;
-		select_available.appendChild(option);
-		select_selected.updateInputs();
-	});
-	addEventSimple(buttons["moveup"], "click", function() {
-		var option = select_selected.getSelected();
-		if (!option) {
-			return;
-		}
-		var options = select_selected.getElementsByTagName("option");
-		var i = select_selected.getSelectedIndex();
-
-		if (i == null || i == 0) {
-			return;
-		} else {
-			select_selected.insertBefore(option.parentNode.removeChild(option), options[i - 1]);
-		}
-		select_selected.updateInputs();
-	});
-	addEventSimple(buttons["movedown"], "click", function() {
-		var option = select_selected.getSelected();
-		if (!option) {
-			return;
-		}
-		var options = select_selected.getElementsByTagName("option");
-		var i = select_selected.getSelectedIndex();
-
-		if (i == null) {
-			return;
-		} else if (i + 2 >= options.length) {
-			select_selected.appendChild(option.parentNode.removeChild(option));
-		} else {
-			select_selected.insertBefore(option.parentNode.removeChild(option), options[i + 1]);
-		}
-		select_selected.updateInputs();
-	});
-	addEventSimple(buttons["reset"], "click", function() {
-		for (var i = 0; i < options.length; i++) {
-			if (options[i].parentNode == select_selected) {
-				select_available.appendChild(options[i].parentNode.removeChild(options[i]));
-			}
-		}
-		for (var i = 0; i < order.length; i++) {
-			for (var j = 0; j < options.length; j++) {
-				if (order[i] == options[j].value) {
-					select_selected.appendChild(options[j].parentNode.removeChild(options[j]));
-					break;
-				}
-			}
-		}
-		select_selected.updateInputs();
-	});
 }
-
 addLoadEvent(prepPage);
