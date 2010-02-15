@@ -128,6 +128,12 @@
 	max-width: 50%;
 }
 
+#layout-main div.anime_all div.episodes table.eplist th.action
+{
+	min-width: 5em;
+}
+
+
 #layout-main div.anime_all div.info div.caststaff
 {
 	margin-top: 0.5em;
