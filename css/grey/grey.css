@@ -2275,10 +2275,14 @@ color:#FFFFFF;
 border-bottom-color:#989898;
 color: #ff6000;
 }
+#layout-main div.forum div.events dl+dl,
+#layout-main div.forum div.poll dl+dl
+{
+border-top-color:#989898;
+}
 #layout-main div.forum div.events dl,
 #layout-main div.forum div.poll dl
 {
-border-top-color:#989898;
 color:#676767;
 }
 #layout-main div.forum div.events dl dt,
