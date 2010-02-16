@@ -107,10 +107,10 @@ for (k in cookie) {
 			settings['ed2k']['space'] = cookie[k];
 			break;
 		case 'NOEPNOPADDING':
-			settings['ed2k']['padonormal'] = cookie[k];
+			settings['ed2k']['padonormal'] = false;
 			break;
 		case 'PADALLEPNOS':
-			settings['ed2k']['pad'] = cookie[k];
+			settings['ed2k']['pad'] = false;
 			break;
 		// My List
 		case 'USEQUICKADD':
