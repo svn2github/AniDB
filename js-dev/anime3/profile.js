@@ -629,8 +629,9 @@ function createShuttle(target) {
 
 	// All supported button events
 	var button_events = {
-		"add" : function() {
-			if (this.className == "left") {
+		"add" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
 				var select = select_left;
 			} else {
 				var select = select_right;
@@ -644,8 +645,9 @@ function createShuttle(target) {
 			select.appendChild(option.parentNode.removeChild(option));
 			select.updateInputs();
 		},
-		"remove" : function() {
-			if (this.className == "left") {
+		"remove" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
 				var select = select_left;
 			} else {
 				var select = select_right;
@@ -661,8 +663,9 @@ function createShuttle(target) {
 			select_available.appendChild(option);
 			select.updateInputs();
 		},
-		"moveup" : function() {
-			if (this.className == "left") {
+		"moveup" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
 				var select = select_left;
 			} else {
 				var select = select_right;
@@ -683,8 +686,9 @@ function createShuttle(target) {
 			}
 			select.updateInputs();
 		},
-		"movedown" : function() {
-			if (this.className == "left") {
+		"movedown" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
 				var select = select_left;
 			} else {
 				var select = select_right;
