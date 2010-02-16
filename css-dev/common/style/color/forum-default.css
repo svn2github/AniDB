@@ -132,8 +132,15 @@ div.quotebody div.quote div.g_odd
 #layout-main div.forum div.events dl,
 #layout-main div.forum div.poll dl
 {
-	border-top-color:#989898;
 	color:#666666;
+}
+
+#layout-main div.forum div.events dl + dl,
+#layout-main div.forum div.poll dl + dl,
+#layout-main div.forum div.events div.data > p,
+#layout-main div.forum div.poll div.data p 
+{
+	border-top-color:#989898;
 }
 
 #layout-main div.forum div.events dl dt,
@@ -205,9 +212,7 @@ div.quotebody div.quote div.g_odd
 
 #layout-main div.forum div.events,
 #layout-main div.forum div.poll,
-#layout-main div.cmt_all div.cmt_add h4,
-#layout-main div.forum div.events div.data > p,
-#layout-main div.forum div.poll div.data p 
+#layout-main div.cmt_all div.cmt_add h4
 {
 	border-bottom-color:#4A4A5A;
 }
