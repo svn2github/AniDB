@@ -64,7 +64,10 @@ button,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
 input[type=button],
-input[type=submit]
+input[type=submit],
+#layout-search select,
+#layout-search input.text,
+#layout-search input.submit
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
