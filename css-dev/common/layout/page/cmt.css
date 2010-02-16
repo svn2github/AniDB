@@ -467,7 +467,6 @@
 #layout-main div.forum div.events dl,
 #layout-main div.forum div.poll dl
 {
-	border-top:1px solid;
 	height:1%;
 	line-height:120%;
 	margin-top:5px;
@@ -486,6 +485,11 @@
 	padding:0 5px;
 	vertical-align:top;
 	width:10%;
+}
+
+#layout-main div.forum div.poll dl + dl
+{
+	border-top:1px solid;
 }
 
 #layout-main div.forum div.events dl dd
