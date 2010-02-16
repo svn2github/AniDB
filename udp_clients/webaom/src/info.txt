@@ -1,5 +1,9 @@
 WebAOM!
 
+1.19o 2010.02.16
+*Removed the external DB support for YEN tag.  Should work as before.
+  TODO: Update SQL? commands to work with YEN tag in DB.java?  Will probably break previous databases's.
+
 1.19n 2009.10.12
 *Fix of username length & character restrictions
 
