@@ -103,3 +103,12 @@ a,
 	-webkit-border-radius:0px 0px 5px 5px;
 	border-radius:0px 0px 5px 5px;
 }
+
+#layout-main div.g_menu.filter_menu div.settings input[type="text"],
+#layout-main div.g_menu.filter_menu div.settings select
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	border:1px solid #34394D;
+}

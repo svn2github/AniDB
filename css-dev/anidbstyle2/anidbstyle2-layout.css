@@ -168,3 +168,8 @@ input[type="submit"]
 {
 	padding:0;
 }
+
+#layout-main div.g_menu.filter_menu div.settings input[type="text"]
+{
+	padding-bottom: 1px;
+}
