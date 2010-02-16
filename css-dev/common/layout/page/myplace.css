@@ -8,13 +8,13 @@
 #layout-main div.userpage_all div.g_menu
 {
 	padding-left: 0.5em;
-	width:18em;
+	width:20em;
 }
 
 #layout-main div.userpage_all div.stats
 {
 	padding:0;
-	width:19em;
+	width:21em;
 }
 
 #layout-main div.userpage_all div.stats table
@@ -181,7 +181,7 @@
 #layout-main div.userpage_all > div.g_section,
 #layout-main div.userpage_all div.forum
 {
-	margin-left:21em;
+	margin-left:22em;
 }
 
 #layout-main div.userpage_all div.clubs div

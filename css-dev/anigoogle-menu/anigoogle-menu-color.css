@@ -3,11 +3,6 @@
 	background-color:#FFFFFF;
 }
 
-#layout-menu li.sub-menu
-{
-	background-color:#ECF4FD;
-}
-
 #layout-menu li.sub-menu ul li:hover
 {
 	background-color:#C9D7F1;

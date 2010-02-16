@@ -65,12 +65,6 @@
 {
 	display:block;
 	margin-bottom:1em;
-	padding:2px 0;
-}
-
-#layout-menu li.sub-menu ul li
-{
-	padding:0 8px;
 }
 
 #layout-nav div.menu_hr,
@@ -112,4 +106,26 @@
 #layout-hint + #layout-nav #layout-search
 {
     top:2em;
+}
+
+#layout-menu li.sub-menu.alert ul li span,
+#layout-menu li.sub-menu ul li > a span
+{
+	padding: 0 8px;
+}
+
+#layout-menu li.sub-menu.alert ul li:first-child span,
+#layout-menu li.sub-menu ul li:first-child > a
+{
+	padding-top:0.4em;
+}
+
+#layout-menu li.sub-menu ul li:last-child > a
+{
+	padding-bottom:0.4em;
+}
+
+#layout-menu li.sub-menu.alert ul li span
+{
+	display: block;
 }
