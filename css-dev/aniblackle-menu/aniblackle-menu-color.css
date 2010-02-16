@@ -10,8 +10,7 @@
 	border-left-color:#666666;
 }
 
-#layout-menu li.sub-menu,
-#layout-menu li.sub-menu:hover
+#layout-menu li.sub-menu ul
 {
 	border-color: #666666;
 }
@@ -20,6 +19,16 @@
 {
 	border-right-color:#C9D7F1;
 	background-color:#000000;
+}
+
+#layout-menu li.sub-menu:hover
+{
+	background-color:#000000;
+}
+
+#layout-menu li.sub-menu:hover
+{
+	border-color: #000000;
 }
 
 #layout-menu li.sub-menu ul
