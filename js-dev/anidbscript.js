@@ -160,7 +160,7 @@ for (k in cookie) {
 			settings['global']['infosz'] = cookie[k];
 			break;
 		case 'DEFAULTINFOTOOLTIPWIDTH':
-			settings['global']['infomw'] = cookie[k];
+			settings['global']['infomw'] = [600, 450, 300][cookie[k]];
 			break;
 		// Global > Tooltips
 		case 'SHOWINFOTOOLTIPONANIME':
