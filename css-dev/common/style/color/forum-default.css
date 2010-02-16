@@ -136,11 +136,15 @@ div.quotebody div.quote div.g_odd
 }
 
 #layout-main div.forum div.events dl + dl,
-#layout-main div.forum div.poll dl + dl,
+#layout-main div.forum div.poll dl + dl
+{
+	border-top-color:#989898;
+}
+
 #layout-main div.forum div.events div.data > p,
 #layout-main div.forum div.poll div.data p 
 {
-	border-top-color:#989898;
+	border-bottom-color:#989898;
 }
 
 #layout-main div.forum div.events dl dt,
