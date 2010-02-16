@@ -22,8 +22,7 @@
 	background-color:#000000;
 }
 
-#layout-menu li.sub-menu,
-#layout-menu li.sub-menu:hover
+#layout-menu li.sub-menu ul
 {
 	background-color:#444444;
 }
