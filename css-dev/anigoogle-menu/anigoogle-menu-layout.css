@@ -108,6 +108,11 @@
     top:2em;
 }
 
+#layout-menu li.sub-menu ul li
+{
+	padding:0;
+}
+
 #layout-menu li.sub-menu.alert ul li span,
 #layout-menu li.sub-menu ul li > a span
 {
