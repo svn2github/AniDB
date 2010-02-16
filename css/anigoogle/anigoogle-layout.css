@@ -335,3 +335,8 @@ h4,
 {
 	display: block;
 }
+
+#layout-main ul.jump
+{
+	margin-top: 0em;
+}

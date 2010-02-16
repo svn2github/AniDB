@@ -1,0 +1,13 @@
+#layout-menu li.sub-menu ul li:first-child:hover
+{
+	-moz-border-radius:4px 4px 0px 0px;
+	-webkit-border-radius:4px 4px 0px 0px;
+	border-radius:4px 4px 0px 0px;
+}
+
+#layout-menu li.sub-menu ul li:last-child:hover
+{
+	-moz-border-radius:0px 0px 4px 4px;
+	-webkit-border-radius:0px 0px 4px 4px;
+	border-radius:0px 0px 4px 4px;
+}

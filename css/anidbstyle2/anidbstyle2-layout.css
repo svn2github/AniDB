@@ -79,7 +79,7 @@ button,
 input[type="button"],
 input[type="submit"]
 {
-	padding:3px 5px;
+	padding:3px;
 }
 
 #layout-menu li.sub-menu ul li#user-xname,
@@ -150,4 +150,21 @@ input[type="submit"]
 #layout-main .block .g_definitionlist table
 {
 	margin:0;
+}
+
+#layout-menu li.sub-menu ul li#user-logout
+{
+	padding-bottom: 0.4em;
+}
+
+#layout-menu li.sub-menu ul li#user-profile,
+#layout-menu li.sub-menu ul li#user-signup
+{
+	margin-top:7px;
+}
+
+#layout-menu li.sub-menu ul li#user-profile a,
+#layout-menu li.sub-menu ul li#user-logout a
+{
+	padding:0;
 }
