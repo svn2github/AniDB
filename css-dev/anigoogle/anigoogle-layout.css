@@ -340,3 +340,9 @@ h4,
 {
 	margin-top: 0em;
 }
+
+#layout-main div.pagination span a,
+#layout-main div.pagination span strong
+{
+	padding:3px;
+}

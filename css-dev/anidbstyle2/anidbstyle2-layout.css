@@ -171,5 +171,5 @@ input[type="submit"]
 
 #layout-main div.g_menu.filter_menu div.settings input[type="text"]
 {
-	padding-bottom: 1px;
+	margin-bottom: 2px;
 }
