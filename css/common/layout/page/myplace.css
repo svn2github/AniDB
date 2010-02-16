@@ -5,21 +5,17 @@
 	float:left;
 }
 
+#layout-main div.userpage_all div.stats,
 #layout-main div.userpage_all div.g_menu
 {
 	padding-left: 0.5em;
-	width:20em;
-}
-
-#layout-main div.userpage_all div.stats
-{
-	padding:0;
+	padding-right: 0.5em;
 	width:21em;
 }
 
 #layout-main div.userpage_all div.stats table
 {
-	width:95%;
+	width:100%
 }
 
 #layout-main div.userpage_all div.stats div table td.value
@@ -181,7 +177,7 @@
 #layout-main div.userpage_all > div.g_section,
 #layout-main div.userpage_all div.forum
 {
-	margin-left:22em;
+	margin-left:23em;
 }
 
 #layout-main div.userpage_all div.clubs div

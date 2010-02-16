@@ -1,5 +1,8 @@
 #layout-content
 {
+	-moz-border-radius:5px 0 0 5px;
+	-webkit-border-radius:5px 0 0 5px;
+	border-radius:5px 0 0 5px;
 	border-bottom:1px solid #C9D7F1;
 	border-left:1px solid #C9D7F1;
 	border-top:1px solid #C9D7F1;

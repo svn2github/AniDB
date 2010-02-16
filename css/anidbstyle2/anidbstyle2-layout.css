@@ -1,7 +1,8 @@
 #layout-menu
 {
-	margin-top: 11.5em;
+	margin-top: 9.5em;
 	padding-left:1.1em;
+	padding-top: 0;
 }
 
 #layout-content
@@ -25,7 +26,7 @@
 
 #layout-tabs
 {
-	margin:10.6em 0.3em;
+	margin:8.4em 0.3em;
 }
 
 #layout-nav
@@ -52,12 +53,12 @@
 }
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-	margin:12em 0.3em;
+	margin:9.8em 0.3em;
 }
 
 #layout-hint + #layout-nav #layout-menu
 {
-	margin-top: 11.5em;
+	margin-top: 9.5em;
 }
 
 #layout-nav input.submit
