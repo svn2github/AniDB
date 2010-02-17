@@ -517,29 +517,6 @@ function createShuttle(target) {
 	// Get all select elements
 	var select_boxes     = getElementsByClassNameDeep(target, "shuttle");
 
-	// Add some magic methods for simpler code further on
-	for (var i = 0; i < select_boxes.length; i++) {
-		// Retrieve current selection index
-		select_boxes[i].getSelectedIndex = function() {
-			var options = this.getElementsByTagName("option");
-			for (var i = 0; i < options.length; i++) {
-				if (options[i].selected) {
-					return i;
-				}
-			}
-		}
-
-		// Retrieve currently selected option node
-		select_boxes[i].getSelected = function() {
-			var options = this.getElementsByTagName("option");
-			for (var i = 0; i < options.length; i++) {
-				if (options[i] && options[i].selected) {
-					return options[i];
-				}
-			}
-		}
-	}
-
 	// Some globals the closures should know about
 	var fieldsets = target.getElementsByTagName("fieldset");
 	if (fieldsets.length == 2) {
@@ -637,13 +614,26 @@ function createShuttle(target) {
 				var select = select_right;
 			}
 
-			var option = select_available.getSelected();
+			var i = select_available.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select_available.options[i];
 			if (!option) {
 				return;
 			}
 
 			select.appendChild(option.parentNode.removeChild(option));
 			select.updateInputs();
+
+			// Move selection
+			if (!select_available) {
+				return;
+			} else if (i >= select_available.length - 1) {
+				select_available.selectedIndex = select_available.length - 1;
+			} else {
+				select_available.selectedIndex = i;
+			}
 		},
 		"remove" : function(e) {
 			e = (e || event);
@@ -653,7 +643,11 @@ function createShuttle(target) {
 				var select = select_right;
 			}
 
-			var option = select.getSelected();
+			var i = select.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select.options[i];
 			if (!option) {
 				return;
 			}
@@ -662,6 +656,15 @@ function createShuttle(target) {
 			option.selected = false;
 			select_available.appendChild(option);
 			select.updateInputs();
+
+			// Move selection
+			if (!select) {
+				return;
+			} else if (i >= select.length - 1) {
+				select.selectedIndex = select.length - 1;
+			} else {
+				select.selectedIndex = i;
+			}
 		},
 		"moveup" : function(e) {
 			e = (e || event);
@@ -671,18 +674,19 @@ function createShuttle(target) {
 				var select = select_right;
 			}
 
-			var option = select.getSelected();
+			var i = select.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select.options[i];
 			if (!option) {
 				return;
 			}
 
-			var options = select.getElementsByTagName("option");
-			var i = select.getSelectedIndex();
-
 			if (i == null || i == 0) {
 				return;
 			} else {
-				select.insertBefore(option.parentNode.removeChild(option), options[i - 1]);
+				select.insertBefore(option.parentNode.removeChild(option), select.options[i - 1]);
 			}
 			select.updateInputs();
 		},
@@ -694,20 +698,21 @@ function createShuttle(target) {
 				var select = select_right;
 			}
 
-			var option = select.getSelected();
+			var i = select.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select.options[i];
 			if (!option) {
 				return;
 			}
-
-			var options = select.getElementsByTagName("option");
-			var i = select.getSelectedIndex();
 
 			if (i == null) {
 				return;
 			} else if (i + 2 >= options.length) {
 				select.appendChild(option.parentNode.removeChild(option));
 			} else {
-				select.insertBefore(option.parentNode.removeChild(option), options[i + 1]);
+				select.insertBefore(option.parentNode.removeChild(option), select.options[i + 1]);
 			}
 			select.updateInputs();
 		},
@@ -715,25 +720,37 @@ function createShuttle(target) {
 			// Put everything in the middle column, counting down because of some auto update retardedness
 			if (select_left) {
 				var options = select_left.getElementsByTagName("option");
-				for (var i = options.length - 1; i >= 0; i--) {
-					if (options[i].parentNode != select_available) {
-						select_available.appendChild(options[i].parentNode.removeChild(options[i]));
+				for (var i = select_left.options.length - 1; i >= 0; i--) {
+					if (select_left.options[i].parentNode != select_available) {
+						select_available.appendChild(
+							select_left.options[i].parentNode.removeChild(
+								select_left.options[i]));
 					}
 				}
 			}
-			var options = select_right.getElementsByTagName("option");
-			for (var i = options.length - 1; i >= 0; i--) {
-				if (options[i].parentNode != select_available) {
-					select_available.appendChild(options[i].parentNode.removeChild(options[i]));
+			for (var i = select_right.options.length - 1; i >= 0; i--) {
+				if (select_right.options[i].parentNode != select_available) {
+					select_available.appendChild(
+						select_right.options[i].parentNode.removeChild(
+							select_right.options[i]));
 				}
 			}
 
 			// Put back left options
 			if (select_left) {
-				for (var i = 0; i < order["left"].length; i++) {
-					for (var j = 0; j < options.length; j++) {
-						if (order["left"][i] == options[j].value) {
-							select_left.appendChild(options[j].parentNode.removeChild(options[j]));
+				for (var i = order["left"].length - 1; i >= 0; i--) {
+					for (var j = select_available.options.length - 1; j >= 0; j--) {
+						if (order["left"][i] == select_available.options[j].value) {
+							if (select_left.length > 0) {
+								select_left.insertBefore(
+									select_available.options[j].parentNode.removeChild(
+										select_available.options[j]),
+									select_left.options[0]);
+							} else {
+								select_left.appendChild(
+									select_available.options[j].parentNode.removeChild(
+										select_available.options[j]));
+							}
 							break;
 						}
 					}
@@ -742,10 +759,19 @@ function createShuttle(target) {
 			}
 
 			// Put back right inputs
-			for (var i = 0; i < order["right"].length; i++) {
-				for (var j = 0; j < options.length; j++) {
-					if (order["right"][i] == options[j].value) {
-						select_right.appendChild(options[j].parentNode.removeChild(options[j]));
+			for (var i = order["right"].length - 1; i >= 0; i--) {
+				for (var j = select_available.options.length - 1; j >= 0; j--) {
+					if (order["right"][i] == select_available.options[j].value) {
+						if (select_right.length > 0) {
+							select_right.insertBefore(
+								select_available.options[j].parentNode.removeChild(
+									select_available.options[j]),
+								select_right.options[0]);
+						} else {
+							select_right.appendChild(
+								select_available.options[j].parentNode.removeChild(
+									select_available.options[j]));
+						}
 						break;
 					}
 				}
