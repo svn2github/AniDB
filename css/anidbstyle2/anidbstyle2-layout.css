@@ -178,3 +178,16 @@ input[type="submit"]
 {
 	margin-bottom: 2px;
 }
+
+#layout-nav li.user-xname input,
+#layout-nav li.user-xpass input,
+#layout-nav li.user-xkeep label
+{
+	margin: 0 8px;
+}
+
+#layout-nav li.user-xname input,
+#layout-nav li.user-xpass input
+{
+	width: 90px;
+}
