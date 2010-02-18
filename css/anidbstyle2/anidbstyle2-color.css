@@ -413,3 +413,16 @@ input[type="checkbox"]
 	background: #717B85;
 	color:#FFFFFF;
 }
+
+*.g_button a
+{
+	border-color:#34394D;
+	background-color:#34394D;
+	color:#CCCCCC;
+}
+
+*.g_button a:hover
+{
+	background-color: #717B85;
+	color: #FFFFFF;
+}

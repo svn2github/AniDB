@@ -211,3 +211,14 @@
 	display:table;
 	margin:-1.7em 0 0 4.5em;
 }
+
+#layout-main div.tabbed_pane div.pane div.userdata_add ul
+{
+	display: block;
+	width: auto;
+}
+
+#layout-main div.userdata_add span.current
+{
+	float:right;
+}

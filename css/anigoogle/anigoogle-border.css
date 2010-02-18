@@ -190,3 +190,11 @@ tr + tr td,
 	-webkit-border-radius:5px;
 	border-radius:5px;
 }
+
+*.g_button a
+{
+	border: 1px solid;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}

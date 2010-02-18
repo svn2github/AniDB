@@ -217,3 +217,15 @@ span.g_odd,
 {
 	background-color:#C3D9FF;
 }
+
+*.g_button a
+{
+	border-color:#C9D7F1;
+	background-color:#FFFFFF;
+}
+
+*.g_button a:hover
+{
+	background-color:#ECF4FD;
+	color:#AA0000;
+}

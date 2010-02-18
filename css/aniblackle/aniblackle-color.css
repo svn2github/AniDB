@@ -460,3 +460,16 @@ tr + tr td,
 {
 	border-top-color:#666666;
 }
+
+*.g_button a
+{
+	border-color:#666666;
+	background-color:#000000;
+	color:#728972;
+}
+
+*.g_button a:hover
+{
+	background-color: #444444;
+	color: #FFFFFF;
+}

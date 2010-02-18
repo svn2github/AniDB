@@ -346,3 +346,8 @@ h4,
 {
 	padding:2px 4px;
 }
+
+*.g_button
+{
+	display: inline-block;
+}
