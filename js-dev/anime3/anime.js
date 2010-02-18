@@ -913,6 +913,7 @@ function updateEpisodeTable() {
 					}
 				}
 				if (cname.indexOf('title') >= 0) {
+					var mylistEpEntries = findMylistEpEntries(eid);
 					if (mylistEpEntries.length) { // A neat part now, state icons
 						var icon;
 						// Loop to see if an entry should get a status, and file state
