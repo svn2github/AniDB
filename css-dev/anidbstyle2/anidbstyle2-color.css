@@ -216,7 +216,6 @@ input[type="submit"]:hover,
 	border-left-color:#999999;
 }
 
-html,
 tr,
 #layout-menu,
 #layout-main *.g_odd *.g_odd,
@@ -225,6 +224,11 @@ tr,
 #layout-tabs ul.main-tabs li:hover
 {
 	background-color:#C8CACE;
+}
+
+html
+{
+	background: #C8CACE url(images/bg.png) repeat-x;
 }
 
 #layout-main tr.g_odd,
