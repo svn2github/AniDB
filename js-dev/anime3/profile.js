@@ -588,19 +588,24 @@ function createShuttle(target) {
 		} else if (options[i].parentNode == select_right) {
 			order["right"].push(options[i].value);
 		}
-
-
 	}
 
 	// Add double click support if we've just got the right (->) side
 	if (!select_left) {
 		var dblclick_event = function(e) {
 			e = (e || event);
-			var target = (e.srcElement || e.target);
-			if (target.parentNode == select_right) {
-				select_available.appendChild(target.parentNode.removeChild(target));
+			if (e.srcElement) {
+				var target = e.srcElement;
 			} else {
-				select_right.appendChild(target.parentNode.removeChild(target));
+				var target = e.target.parentNode;
+			}
+
+			if (target == select_right) {
+				select_available.appendChild(
+					target.removeChild(target.options[target.selectedIndex]));
+			} else {
+				select_right.appendChild(
+					target.removeChild(target.options[target.selectedIndex]));
 			}
 			select_right.updateInputs();
 		}
