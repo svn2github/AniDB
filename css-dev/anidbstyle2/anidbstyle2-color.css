@@ -252,7 +252,7 @@ th,
 
 #layout-menu li.sub-menu ul
 {
-	background: #34394D url(images/menuback.png) repeat-x;
+	background: #34394D url(images/menuback.png) repeat;
 }
 
 #layout-tabs ul.main-tabs li.selected a,
