@@ -239,7 +239,6 @@ tr,
 
 #layout-tabs ul.main-tabs li,
 #layout-menu > li ul,
-#layout-menu li.sub-menu ul,
 th,
 #layout-search input,
 #user-xname input,
@@ -249,6 +248,11 @@ th,
 .format-buttons select
 {
 	background-color:#34394D;
+}
+
+#layout-menu li.sub-menu ul
+{
+	background: #34394D url(images/menuback.png) repeat-x;
 }
 
 #layout-tabs ul.main-tabs li.selected a,
