@@ -125,7 +125,12 @@
 	padding-top:0.4em;
 }
 
-#layout-menu li.sub-menu ul li:last-child > label,
+#layout-menu li.sub-menu ul li.user-xkeep > label
+{
+	display:block;
+}
+
+#layout-menu li.sub-menu ul li.user-xkeep:last-child > label,
 #layout-menu li.sub-menu ul li:last-child > a
 {
 	padding-bottom:0.4em;
