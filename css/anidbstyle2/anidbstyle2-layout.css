@@ -12,7 +12,7 @@
 
 #layout-search div.search
 {
-	width:430px;
+	width:100%;
 	height: 94px;
 	margin-left:-1.5em;
 	margin-top:0;
@@ -22,6 +22,7 @@
 {
 	height: 94px;
 	margin-left:0;
+	width:100%;
 }
 
 #layout-tabs
@@ -42,9 +43,12 @@
 
 #layout-nav div.search a.advsearch
 {
-	left:825px;
-	top:30px;
-	width:83px;
+	margin-top:-2em;
+	padding-left:84em;
+	position:relative;
+	top:0;
+	left:0;
+	width:auto;
 }
 
 #layout-main div.filter_menu span.actions.old input
@@ -70,7 +74,7 @@
 {
 	padding-left:41.5em;
 	padding-top:3em;
-	width:50em;
+	width:auto;
 }
 
 span.test,
