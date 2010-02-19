@@ -44,11 +44,11 @@
 #layout-nav div.search a.advsearch
 {
 	margin-top:-2em;
-	padding-left:84em;
+	margin-left:84em;
 	position:relative;
 	top:0;
 	left:0;
-	width:auto;
+	width:83px;
 }
 
 #layout-main div.filter_menu span.actions.old input
