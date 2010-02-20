@@ -58,7 +58,7 @@ input[size="60"]
 {
 	background-color:#34394D;
 	border-top-color:#DDDDDD;
-	color:#CCCCCC;
+	color:#DDDDDD;
 }
 
 #layout-menu li.sub-menu ul li:hover
@@ -220,11 +220,16 @@ html,
 tr,
 #layout-menu,
 #layout-main *.g_odd *.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-tabs ul.main-tabs li.selected,
-#layout-tabs ul.main-tabs li:hover
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd
 {
-	background-color:#C8CACE;
+	background-color:#C3C5C9;
+}
+
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li:hover,
+#layout-content
+{
+	background-color: #CFD1D4;
 }
 
 #layout-main tr.g_odd,

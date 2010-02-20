@@ -29,7 +29,7 @@ table
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
-	border-bottom:1px double #C8CACE;
+	border-bottom:1px double #CFD1D4;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
