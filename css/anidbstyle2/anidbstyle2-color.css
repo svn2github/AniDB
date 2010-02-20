@@ -13,14 +13,6 @@ a:link
 	text-decoration:none;
 }
 
-#layout-main div.news h4,
-#layout-main div.main_all div.rightbar h4
-{
-	background-color:#494d59;
-	color:#bbbbbb;
-	padding:2px;
-}
-
 #layout-main div.cmt_all div.comment h4
 {
 	background-color:#969aa6;
@@ -50,9 +42,7 @@ input[size="60"]
 
 #layout-main > h1
 {
-	background-color:#34394D;
 	border-top-color:#DDDDDD;
-	color:#DDDDDD;
 }
 
 #layout-menu li.sub-menu ul li:hover
@@ -87,6 +77,9 @@ table
 	color:#000000;
 }
 
+#layout-main div.news h4,
+#layout-main div.main_all div.rightbar h4,
+#layout-main > h1,
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4
