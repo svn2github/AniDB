@@ -7,7 +7,7 @@
 
 #layout-content
 {
-	margin-top:0;
+	margin-top:-10.5em;
 }
 
 #layout-search div.search
@@ -27,13 +27,7 @@
 
 #layout-tabs
 {
-	margin:8.7em 0.3em;
-}
-
-#layout-tabs ul
-{
-	margin-top:0;
-	margin-bottom:0;
+	margin:8.3em 0.3em;
 }
 
 #layout-tabs ul li
@@ -43,7 +37,7 @@
 
 #layout-nav
 {
-	height:0;
+	height:10.5em;
 	padding-bottom: 0;
 }
 
@@ -68,7 +62,7 @@
 }
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-	margin:10.1em 0.3em;
+	margin:9.7em 0.3em;
 }
 
 #layout-hint + #layout-nav #layout-menu
