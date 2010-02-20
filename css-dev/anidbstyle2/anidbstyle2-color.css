@@ -242,11 +242,13 @@ html,
 #layout-main div.forum div.events .rtop *,
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *
+#layout-main div.forum div.comment .rtop *,
+#layout-main div.forum ul.topics li.row.g_odd
 {
 	background-color:#C3C5C9;
 }
 
+#layout-main div.forum ul.topics li.row,
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover,
 #layout-content,
