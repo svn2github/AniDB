@@ -35,7 +35,7 @@ table
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom:1px double #b8bac0;
+	border-bottom:1px double #C3C5C9;
 	border-left:1px solid #9A9CA1;
 	border-right:1px solid #9A9CA1;
 	border-top:1px solid #9A9CA1;
