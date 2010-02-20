@@ -10,6 +10,7 @@
 	background-color:#ECF3F7;
 }
 
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd:hover,
 #layout-main div.forum ul.topics li.row:hover
 {
 	background-color:#CBD6DE;
@@ -69,7 +70,8 @@
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd
 {
 	background-color:#E1EBF2;
 }

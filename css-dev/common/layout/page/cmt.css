@@ -873,3 +873,10 @@ div.quotebody div.quote div.quotebody
 {
 	min-height: 2.5em;
 }
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics
+{
+	width:auto;
+	display:block;
+	vertical-align:inherit;
+}
