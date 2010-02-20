@@ -27,7 +27,6 @@ var isWK = (navigator.userAgent.toLowerCase().indexOf('webkit') >= 0);
 var isIE = (navigator.userAgent.toLowerCase().indexOf('msie') >= 0);
 var isOP = (navigator.userAgent.toLowerCase().indexOf('presto') >= 0 || navigator.userAgent.toLowerCase().indexOf('opera') >= 0);
 var isFF = (!isWK && navigator.userAgent.toLowerCase().indexOf('gecko') >= 0 || navigator.userAgent.toLowerCase().indexOf('firefox') >= 0);
-var currentFMode = CookieGet('currentFMode') || 1;
 if (isWK && currentFMode == 2) currentFMode = 1;
 var smileyList = ['very_happy','happy','sad','shock','confused','cool','laughing','razz','embarassed','crying',
 				  'mad','twisted','rolleyes','wink','neutral','sweating','undecided','thinking','wtf','tehehe',
@@ -118,7 +117,7 @@ function selectionMagic(field, myValue, isText) {
 			//alert('myValue: '+myValue+'\nstartPos: '+startPos+'\nendPos: '+endPos+'\ntext: '+range.text+'\nstartText: '+startText+'\nendText: '+endText);
 			field.value = startText + myValue + endText;
 			// this clears the current selection
-			range.move("character", endPos+1); 
+			range.move("character", endPos+1);
 			range.select();
 			return myValue;
 		}
@@ -181,7 +180,7 @@ function getCaretPosition() {
 }
 
 /* Function that formats text
- * @param id 
+ * @param id
  * @param n Number of textArea
  * @param selected Is select
  */
@@ -210,7 +209,7 @@ function formatText(id, n, selected, element) {
 			hrefField = hrefField.replace('%3A//','://');
 			if (id.toLowerCase() == 'createlink') hyperLink = '[url='+hrefField+']'+textField+'[/url]';
 			else if (id.toLowerCase() == 'insertimage') hyperLink = '[img]'+hrefField+'[/img]';
-			if (currentFMode != 2) { 
+			if (currentFMode != 2) {
 				selectionMagic(field, hyperLink, true);
 				return;
 			}
@@ -336,9 +335,9 @@ function setButtonState(controls, button, state) {
 	var inputs = controls.getElementsByTagName('input');
 	var targetButton = getElementsByClassName(inputs, button, true)[0];
 	if (!targetButton) return;
-	if (state && targetButton.className.indexOf('selected') < 0) 
+	if (state && targetButton.className.indexOf('selected') < 0)
 		targetButton.className += ' selected';
-	else if (!state && targetButton.className.indexOf('selected') >= 0) 
+	else if (!state && targetButton.className.indexOf('selected') >= 0)
 		targetButton.className = targetButton.className.replace(' selected','');
 	else return;
 }
@@ -356,14 +355,14 @@ function checkButtonState(iframe, resubmit) {
 	var theRange = null;
 	var theParentNode = null;
 	var theLevel = 0;
-	
+
 	// Turn off all the buttons
 	var id = Number(iframe.id.substring(iframe.id.indexOf('_')+1));
 	var controls = document.getElementById('controls_'+id);
 	var buttons = controls.getElementsByTagName('input');
 	for (var i = 0; i < buttons.length; i++)
 		buttons[i].className = buttons[i].className.replace(' selected','');
-	
+
 	/* IE selections */
 	if (iframe.contentWindow.document.selection) {
 		theSelection = iframe.document.selection;
@@ -382,10 +381,10 @@ function checkButtonState(iframe, resubmit) {
 		theRange = theSelection.getRangeAt(0);
 		theParentNode = theRange.commonAncestorContainer;
 	}
-	
+
 	while (theParentNode.nodeType == 3)
 		theParentNode = theParentNode.parentNode;
-	
+
 	while (theParentNode.nodeName.toLowerCase() != "body") {
 		switch (theParentNode.nodeName.toLowerCase()) {
 			case "img":
@@ -441,7 +440,7 @@ function checkButtonState(iframe, resubmit) {
 		theParentNode = theParentNode.parentNode;
 		theLevel++;
 	}
-	return true;			
+	return true;
 }
 
 // -------------------------------------------
@@ -454,13 +453,13 @@ function checkButtonState(iframe, resubmit) {
 function makeValidTags(str) {
 	/* Replace uppercase element names with lowercase */
 	str = str.replace(/<[^> ]*/g, function(match){return match.toLowerCase();});
-	
+
 	/* Replace uppercase attribute names with lowercase */
 	str = str.replace(/<[^>]*>/g, function(match) {
 			match = match.replace(/ [^=]+=/g, function(match2){return match2.toLowerCase();});
 			return match;
 		});
-		
+
 	/* Put quotes around unquoted attributes */
 	str = str.replace(/<[^>]*>/g, function(match) {
 			match = match.replace(/( [^=]+=)([^"][^ >]*)/g, "$1\"$2\"");
@@ -477,20 +476,20 @@ function convertSPANs(id) {
 	/* Replace styled spans with their semantic equivalent */
 	var iframe = document.getElementById('wysiwyg_'+id);
 	if (!iframe) return;
-	
+
 	var theSPANs = iframe.contentWindow.document.getElementsByTagName("span");
 
 	while(theSPANs.length > 0) {
 		var theChildren = new Array();
 		var theReplacementElement = null;
 		var theParentElement = null;
-		
+
 		for (var j = 0; j < theSPANs[0].childNodes.length; j++)
 			theChildren.push(theSPANs[0].childNodes[j].cloneNode(true));
-		
+
 		var style = theSPANs[0].getAttribute("style").toLowerCase();
 		//alert(style);
-		
+
 		/* Detect type of span style */
 		if (style.indexOf('bold') < 0 && style.indexOf('italic') < 0 && style.indexOf('underline') < 0 && style.indexOf('line-through') < 0) {
 			replaceNodeWithChildren(theSPANs[0]);
@@ -532,7 +531,7 @@ function convertSPANs(id) {
 				}
 			}
 		}
-		
+
 		if (theReplacementElement != null) {
 			var theRootNode = theParentElement;
 			while (theRootNode.parentNode != null) theRootNode = theRootNode.parentNode;
@@ -540,7 +539,7 @@ function convertSPANs(id) {
 				theReplacementElement.appendChild(theChildren[j]);
 			theSPANs[0].parentNode.replaceChild(theRootNode, theSPANs[0]);
 		}
-		
+
 		theSPANs = iframe.contentWindow.document.getElementsByTagName("span");
 	}
 }
@@ -617,7 +616,7 @@ function convert_output(str) {
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|pre) [^>]*?\>/mgi,'[/$1]');
 	str = str.replace(/\<(p|u|b|i|ul|ol|li|strike|pre)\>/mgi,'[$1]');
 	str = str.replace(/\<\/(p|u|b|i|ul|ol|li|strike|pre)\>/mgi,'[/$1]');
-	
+
 	str = str.replace(/\<([/])?strong([^>]*)\>/mgi,'[$1b]');
 	str = str.replace(/\<([/])?em([^>]*)\>/mgi,'[$1i]');
 
@@ -627,7 +626,7 @@ function convert_output(str) {
 	str = str.replace(/\[\/pre\]/mgi,'[/code]');
 	str = str.replace(/\<a(.+?)\>(.+?)\<\/a\>/mgi,convertLinksOutput);
 	str = str.replace(/\<img([^\>].+?)\>/mgi,convertImagesOutput);
-	
+
 	/* Just a bit of beautifier */
 	str = str.replace(/\[\/li\]\[li\]/mgi,'[/li]\n[li]');
 	str = str.replace(/\[\/li\]\[\/ul\]/mgi,'[/li]\n[/ul]');
@@ -638,7 +637,7 @@ function convert_output(str) {
 	str = str.replace(/\[p\]/mgi,'');
 	str = str.replace(/\[\/p\]/mgi,'\n');
 	/* Remove empty tags */
-	str = str.replace(/\[(p|u|b|i|ul|ol|li)\]\[\/(p|u|b|i|ul|ol|li)\]/mgi,	function areTwoEqual(mstr,s1,s2) { 
+	str = str.replace(/\[(p|u|b|i|ul|ol|li)\]\[\/(p|u|b|i|ul|ol|li)\]/mgi,	function areTwoEqual(mstr,s1,s2) {
 																				if (s1 == s2) return ' ';
 																				else return mstr;
 																			}
@@ -676,7 +675,7 @@ function convertText(id, mode) {
 	var fTA = document.getElementById('textArea_'+id);
 	if (!rte || !fTA) return;
 	rte = rte.contentWindow.document;
-	if (mode) { // 
+	if (mode) { //
 		var content = convert_input(fTA.value);
 		//if (!content.length) content = '&#xA0;';
 		rte.body.innerHTML = content;
@@ -782,7 +781,7 @@ function createControls(parentNode, id, mode) {
 /* function that adds RTE abilites to a given iframe */
 function createRTE(iframe, textArea) {
 	if (!iframe) return;
-	
+
 	var backgroundColor = getStyleInformation(textArea,'backgroundColor');
 	var color = getStyleInformation(textArea,'color');
 	var fontFamily = getStyleInformation(textArea,'fontFamily');
@@ -821,15 +820,15 @@ function createRTE(iframe, textArea) {
 		doc.attachEvent("onkeyup", function(){checkButtonState(iframe); return true;});
 	}
 	var cssStyled = true;
-	try { 
-		if (document.queryCommandSupported('styleWithCSS')) 
+	try {
+		if (document.queryCommandSupported('styleWithCSS'))
 			doc.execCommand('styleWithCSS', null, false);
 		cssStyled = false;
-	} 
-	catch(e) { 
-		try { 
+	}
+	catch(e) {
+		try {
 			if (cssStyled) {
-				doc.execCommand('styleWithCSS', null, false); 
+				doc.execCommand('styleWithCSS', null, false);
 				cssStyled = false;
 			}
 		} // FF 1.5+
@@ -837,15 +836,15 @@ function createRTE(iframe, textArea) {
 	}
 	try {
 		if (cssStyled) {
-			if (document.queryCommandSupported('useCSS')) true; 
+			if (document.queryCommandSupported('useCSS')) true;
 				doc.execCommand('useCSS', null, true);
 			cssStyled = false;
 		}
-	} 
-	catch(e) { 
+	}
+	catch(e) {
 		try {
 			if (cssStyled) {
-				doc.execCommand('useCSS', null, true); 
+				doc.execCommand('useCSS', null, true);
 				cssStyled = false;
 			}
 		}
@@ -865,7 +864,7 @@ function createIframe(parentNode, id, textArea) {
 					getStyleInformation(textArea,'marginBottom') + ' ' + getStyleInformation(textArea,'marginLeft');
 	var padding = 	getStyleInformation(textArea,'paddingTop') + ' ' + getStyleInformation(textArea,'paddingRight') + ' ' +
 					getStyleInformation(textArea,'paddingBottom') + ' ' + getStyleInformation(textArea,'paddingLeft');
-	
+
 	var iframe = document.createElement('iframe');
 	iframe.frameBorder = 0;
 	iframe.id = "wysiwyg_" + id;
@@ -874,7 +873,7 @@ function createIframe(parentNode, id, textArea) {
 	iframe.src = 'about:blank';
 	iframe.style.margin = margin;
 	iframe.style.padding = padding;
-	
+
 	if (border) iframe.style.border = border;
 	else {
 		iframe.style.borderColor = getStyleInformation(textArea,'borderTopColor') || 'black';
@@ -882,7 +881,7 @@ function createIframe(parentNode, id, textArea) {
 		iframe.style.borderStyle = getStyleInformation(textArea,'borderTopStyle') || 'solid';
 	}
 	if (backgroundColor) iframe.style.backgroundColor = backgroundColor;
-	return iframe;	
+	return iframe;
 }
 
 /* Function that creates the smiley list with my nice and current actions */
@@ -924,7 +923,7 @@ function initFormating() {
 			textArea.onmousedown = getCaretPosition;
 			textArea.onkeydown = getCaretPosition;
 		}
-		
+
 		wysiwygHeight = getStyleInformation(textArea,'height');
 		wysiwygWidth = getStyleInformation(textArea,'width');
 
@@ -934,7 +933,7 @@ function initFormating() {
 		if (currentFMode == 2) textArea.style.display = 'none';
 		textArea.parentNode.insertBefore(controls,iframe);
 		createRTE(iframe,textArea);
-		
+
 		// Update inputs
 		if (textArea.form) {
 			var inputs = textArea.form.getElementsByTagName('input');
@@ -952,7 +951,7 @@ function initFormating() {
 				};
 			}
 		}
-		
+
 		var smileyBox = getElementsByClassName(textArea.parentNode.parentNode.getElementsByTagName('div'),'smiley-box', true)[0];
 		if (smileyBox) {
 			var newSmileyBox = createSmileyBox(null,i);

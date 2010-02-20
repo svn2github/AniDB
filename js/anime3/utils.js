@@ -7,7 +7,7 @@ jsVersionArray.push({
 	"file":"anime3/utils.js",
 	"version":"2.3",
 	"revision":"$Revision$",
-	"date":"$Date::													 $",
+	"date":"$Date::                           $",
 	"author":"$Author$"
 });
 // TIME/DATE FUNCTIONS //
@@ -38,7 +38,7 @@ function padRight(text, padChar, count) {
  */
 function convertTime(data) {
 	if (!data) return;
-	if (data.indexOf('T') >= 0) 
+	if (data.indexOf('T') >= 0)
 		return (data.split('T').join(" "));
 	else if (data.indexOf('-') >= 0 && data.indexOf(' ') < 0)
 		return data;
@@ -136,8 +136,8 @@ function cTimeDateHour(data) {
  * @param node The node where to extract information
  * @return String containing node data
  */
-function nodeData(node) { 
-	try { return node.childNodes.item(0).nodeValue; } 
+function nodeData(node) {
+	try { return node.childNodes.item(0).nodeValue; }
 	catch(e) { return ''; }
 
 }
@@ -150,14 +150,14 @@ function notImplemented() { alert('Not implemented yet'); }
 function replaceNodeWithChildren(theNode) {
 	var theChildren = new Array();
 	var theParent = theNode.parentNode;
-	
+
 	if (theParent != null) 	{
 		for (var i = 0; i < theNode.childNodes.length; i++)
 			theChildren.push(theNode.childNodes[i].cloneNode(true));
-			
+
 		for (var i = 0; i < theChildren.length; i++)
-			theParent.insertBefore(theChildren[i], theNode);	
-			
+			theParent.insertBefore(theChildren[i], theNode);
+
 		theParent.removeChild(theNode);
 		return theParent;
 	}
@@ -181,7 +181,7 @@ function goDeepDOMtree(node,level) {
 	}
 	out += '</'+node.nodeName+'>\n';
 	return out;
-} 
+}
 
 function showDOMtree(node) {
 	var out = '<'+node.nodeName+'>\n';
@@ -205,6 +205,39 @@ function getElementsByClassName(nodes, name, useIndexOf) {
 	for (var i = 0; i < nodes.length; i++) {
 		if (!useIndexOf) { if (nodes[i].className == name) ret.push(nodes[i]); }
 		else { if (nodes[i].className.indexOf(name) >= 0 ) ret.push(nodes[i]); }
+	}
+	return ret;
+}
+
+/* Perform a deep search for elements with a given class
+ * @param root The root node
+ * @param name The name of the class to find
+ * @return Array of nodes
+ */
+function getElementsByClassNameDeep(root, name) {
+	var ret = new Array();
+	for (var i = 0; i < root.childNodes.length; i++) {
+		var node = root.childNodes[i];
+
+		// We only want element nodes
+		if (node.nodeType != 1) {
+			continue;
+		}
+
+		if (node.className) {
+			var classes = node.className.split(' ');
+			for (var j in classes) {
+				if (classes[j] == name) {
+					ret.push(node);
+					break;
+				}
+			}
+		}
+
+		// Recurse to infinity and beyond
+		if (node.childNodes.length) {
+			ret = ret.concat(getElementsByClassNameDeep(node, name));
+		}
 	}
 	return ret;
 }
@@ -540,38 +573,38 @@ function makeBar(parentNode,start,end,total,map,barSize) {
 		bar.height = 10;
 	}
 	bar.title = bar.alt = '';
-	
+
 	if (start == 1) makeBar_rest=0; //Initialize makeBar_rest var
-	
+
 	var length, width;
 	if(barSize>=1){
 		//Fixed Size
 		length = (1 + end - start) * (barSize / total);	//Theoretical length of range
 		width = Math.ceil(length - makeBar_rest); //Correct error made by last length calculation and cut of decimals
-		if (width<=0) width=1; //Make lone episodes in animes with high ep count visible again 
+		if (width<=0) width=1; //Make lone episodes in animes with high ep count visible again
 		if(makeBar_rest > 1 && total != end) { makeBar_rest -= length; return null;}//Dampen IOIOIOIO effect
 		makeBar_rest = width - length + makeBar_rest;//Calculate new error made by cutting of decimals
-		if(total == end && makeBar_rest>0.1) width--;//Trim last pixel if needed and set image width		
+		if(total == end && makeBar_rest>0.1) width--;//Trim last pixel if needed and set image width
 		bar.style.width=width+"px";//img.width = width;
 	} else {
 		//Relative Size
 		length = (1 + end - start) / total;
 			width = length - makeBar_rest;
 			if(end != total){
-					if(width <= makeBar_rest) width = makeBar_rest; 
+					if(width <= makeBar_rest) width = makeBar_rest;
 					if(makeBar_rest > barSize) { makeBar_rest -= length; return null;}
 			}
 			makeBar_rest = width - length + makeBar_rest;
 			bar.style.width = (width*100) + "%";
 	}
-		
+
 	if (parentNode != null || parentNode != '') parentNode.appendChild(bar); else return bar;
 	return null;
 }
 
 function makeCompletionBar(parentNode, range, maps, barSize) {
 	if(!barSize) barSize = screen.width < 1600 ? (screen.width < 1280 ? 1/200 : 1/300) : 0;
-	
+
 	var len = range.length;
 	var span = document.createElement('span');
 	span.className = 'completion';
@@ -581,7 +614,7 @@ function makeCompletionBar(parentNode, range, maps, barSize) {
 		span.onmouseover = function onmouseover(event) {
 			var node = document.createElement('div');
 			if (maps[1]['use']) node.appendChild(document.createTextNode(maps[1]['desc']));
-			if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createTextNode(', ')); 
+			if (maps[1]['use'] && maps[2]['use']) node.appendChild(document.createTextNode(', '));
 			if (maps[2]['use']) node.appendChild(document.createTextNode(maps[2]['desc']));
 			setTooltip(node,true,'auto');
 		}
@@ -605,13 +638,13 @@ function expandRange(range,limit,map,array) {
 	for (var r = 0; r < rangeGroups.length; r++) {
 		var rangeGroup = rangeGroups[r];
 		var rg = rangeGroup.split('-');
-		if (Number(rg[0]) >= 1000) 
+		if (Number(rg[0]) >= 1000)
 			continue; //return (new Array(limit)); // don't do this for specials and crap.
-		if ( rg.length == 1 ) 
+		if ( rg.length == 1 )
 			array[Number(rg[0])-1] = map['type'];
 		else {
-			for( var i = Number(rg[0]); i <= Number(rg[1]); i++) 
-				array[ i-1 ] = map['type']; 
+			for( var i = Number(rg[0]); i <= Number(rg[1]); i++)
+				array[ i-1 ] = map['type'];
 		}
 	}
 	return array;
@@ -677,7 +710,7 @@ function clean_input(str) {
 
 /* Function that alerts the user for errors
  * @param func Name of the function
- * @param process 
+ * @param process
  * @param pNode Parent node
  * @param cNode Child node (or currentNode)
  * @return void
@@ -816,9 +849,9 @@ function updateStatus(text,add,targetName) {
 		if (!targetName) targetName = 'statusBox';
 		if (document.getElementById(targetName)) {
 			var statusBox = document.getElementById(targetName);
-			if (!add) { 
+			if (!add) {
 				if (statusBox.firstChild) statusBox.removeChild(statusBox.firstChild);
-				statusBox.appendChild(document.createTextNode(text)); 
+				statusBox.appendChild(document.createTextNode(text));
 			} else {
 				statusBox.firstChild.nodeValue += text;
 			}
@@ -872,9 +905,9 @@ function statusInformation() {
 		this.barElement = div;
 		return div;
 	}
-	this.createBr = function() { 
+	this.createBr = function() {
 		if (!this.container) return;
-		this.brElement = document.createElement('br'); 
+		this.brElement = document.createElement('br');
 		this.brElement.style.display = 'none';
 		return this.brElement;
 	}
@@ -943,18 +976,18 @@ function epNoToString(epno) {
 
 /* This function formats the file size
  * @param size Size in bytes
- * @param force Should force FORMATFILESIZE?
+ * @param force Should force formatting of filesize?
  * @return Converted file size
  */
-function formatFileSize(size,force) {
+function formatFileSize(size, force) {
 	var format = false;
-	if (config['settings']['FORMATFILESIZE']) format = config['settings']['FORMATFILESIZE'];
+	if (settings['aLayout']['fsize']) format = settings['aLayout']['fsize'];
 	if (force) format = force;
 	if (!format) {
 		var aux = new String(size);
 		var sz = new Array();
 		for (var i = 0; i < aux.length; i++) sz.push(aux.charAt(i));
-		aux = ''; 
+		aux = '';
 		var i = sz.length - 1;
 		while (i - 2 > 0) { i -= 2; sz.splice(i, 0, '.'); i--; }
 		for (i = 0; i < sz.length; i++) aux += sz[i];
@@ -1185,7 +1218,7 @@ function get_date(node) {
 		}
 	}
 	var isRange = (string.indexOf('till') >= 0 || string.indexOf(' - ') >= 0);
-	if (isRange) { 
+	if (isRange) {
 		var split = (string.indexOf('till') >= 0 ? string.split('till') : string.split(' - '));
 		return findPrecision(split[0]); // Ranged date mode, just return the first date
 	} else return findPrecision(string); // Single date mode
@@ -1194,8 +1227,8 @@ function get_date(node) {
 /* This function attaches the sorting function to th's
  * @param node If specified tells the root node [node]
  * @param ident If specified tells to make a special case for the th identified by ident [identifier]
- * @param sortico If specified the th referenced by ident will get this sort icon or the i_down1 icon [up|down] 
- */ 
+ * @param sortico If specified the th referenced by ident will get this sort icon or the i_down1 icon [up|down]
+ */
 function init_sorting(node,ident,sortico) {
 	if (!node) node = document;
 	var headinglist;
@@ -1261,7 +1294,7 @@ function init_sorting(node,ident,sortico) {
 		'c_date':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_date},
 		'c_set':{'sortf':c_number, 'sortr':c_number_r, 'getval':get_anidbsort},
 		'c_setlatin':{'sortf':c_string, 'sortr':c_string_r, 'getval':get_anidbsort},
-		'c_none':{'sortf':c_undefined, 'sortr':c_undefined_r, 'getval':get_blank} }	
+		'c_none':{'sortf':c_undefined, 'sortr':c_undefined_r, 'getval':get_blank} }
 }
 
 /* Finds the active sort col and return it's identifier
@@ -1272,7 +1305,7 @@ function findSortCol(node) {
 	var headinglist;
 	if (document.getElementsByTagName)
 		headinglist = node.getElementsByTagName('th');
-	else 	
+	else
 		return;
 	for (var i = 0; i < headinglist.length; i++) {
 		var heading = headinglist[i];
@@ -1310,7 +1343,7 @@ function sortcol(node) {
 	// if this th is not in thead there is probably a reason so just ignore it and go with the flow
 	var startIndex = 0;
 	if (node.parentNode.parentNode.nodeName.toLowerCase() == 'tbody')
-		startIndex = Number(node.parentNode.rowIndex)+1; 
+		startIndex = Number(node.parentNode.rowIndex)+1;
 	var sortfunc = this._sortFunction;
 	if (!sortfunc) {
 		//	We now find out which sort function to apply to the column or none
@@ -1460,10 +1493,10 @@ function sortcol(node) {
 			tbody.appendChild(row);
 		}
 	}
-	
+
 	// this should do something
 	if (table.normalize) table.normalize();
-	
+
 	// DO NOT USE repaintStripes, takes too long to execute and locks up
 	tbody.style.display = '';
 
@@ -1475,7 +1508,7 @@ function sortcol(node) {
 
 /* Function that repaints the stripes of a table
  * Note: this function for some odd reason can lock up rendering for a while
- * @param table Table (or tbody) to paint stripes 
+ * @param table Table (or tbody) to paint stripes
  * @param startAt optional index where to start painting stripes
  */
 function repaintStripes(table, startAt) {
@@ -1489,18 +1522,6 @@ function repaintStripes(table, startAt) {
 		row.className = ((i % 2) ? "g_odd " : "")+row.className.replace(/ g_odd|g_odd/ig,"");
 	}
 }
-
-// The hash Object holds hashing defaults
-var hashObj = new Object();
-hashObj.usePatterns = true;
-hashObj.convertSpaces = true;
-hashObj.defaultSpacesChar = '_';
-hashObj.spacesChar = hashObj.defaultSpacesChar;
-hashObj.defaultPattern = "%ant - %enr%ver - %ept - <[%grp]><(%crc)><(%cen)><(%lang)><(%raw)>";
-hashObj.pattern = hashObj.defaultPattern;
-hashObj.ed2k = "ed2k://|file|"+hashObj.pattern+".%ext|%flen|%ed2k|";
-hashObj.sfv = hashObj.pattern+".%ext %crc";
-hashObj.validHashes = [ "ed2k", "sfv" ];
 
 var validIdentifiers = ["%ant","%anat","%ept","%epat","%enr","%pn","%fpn","%raw",
 												"%crc","%CRC","%ver","%cen","%dub","%sub","%lang","%flang",
@@ -1518,12 +1539,12 @@ function checkIdentifiers(identifier) {
 	return false;
 }
 /* Function that creates the link for a given hash
- * @return void (sets the hash href) 
+ * @return void (sets the hash href)
  */
 function applyFormat(identifier, file, episode, anime, group) {
 	var originalIdentifier = identifier;
 	var dropIfNull = false;
-	if (identifier.indexOf('<') >= 0) {	
+	if (identifier.indexOf('<') >= 0) {
 		originalIdentifier = originalIdentifier.substr(originalIdentifier.indexOf('<')+1,originalIdentifier.indexOf('>')-1);
 		identifier = identifier.match(/(\%[A-Z]+)/mgi)[0];
 		originalIdentifier = originalIdentifier.replace(identifier,"%replaceme");
@@ -1537,9 +1558,12 @@ function applyFormat(identifier, file, episode, anime, group) {
 	identifier = identifier.replace(/\%epat/mgi,episode.getAltTitle());
 	if (identifier.indexOf("%enr") >= 0) {
 		var epLen = String((anime.eps) ? anime.eps : anime.epCount);
-		var epFmt = '0000'+episode.epno;
-		epFmt = epFmt.slice(epFmt.length-epLen.length);
-		identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt); 
+		var epFmt = episode.epno;
+		if ((pad_epnums && episode.typeChar == '') || (pad_epnums && episode.typeChar != '' && !pad_only_normal_epnums)) {
+			epFmt = '0000'+epFmt;
+			epFmt = epFmt.slice(epFmt.length-epLen.length);
+		}
+		identifier = identifier.replace(/\%enr/mgi,episode.typeChar+epFmt);
 	}
 	identifier = identifier.replace(/\%pn/mgi,(anime.type == 'movie') ? "PA" : "EP");
 	identifier = identifier.replace(/\%fpn/mgi,(anime.type == 'movie') ? "Part" : "Episode");
@@ -1621,7 +1645,7 @@ function createHashLink() {
 	var fid = Number((parentid.indexOf('fid_') >= 0) ? this.parentNode.id.split('fid_')[1] : this.parentNode.id.split('f')[1]);
 	var file = files[fid];
 	if (!file) return;
-	
+
 	var episode = episodes[file.episodeId];
 	var curAnime = animes[file.animeId];
 	var group = (file.groupId != 0) ? groups[file.groupId] : null;
@@ -1635,8 +1659,8 @@ function createHashLink() {
 	var hashType = possibleHashTypes[i];
 
 	if (!hashObj.usePatterns) hashObj.pattern = hashObj.defaultPattern;
-	var pattern = hashObj[hashType]; 
-	//alert('pattern.in: '+pattern); 
+	var pattern = hashObj[hashType];
+	//alert('pattern.in: '+pattern);
 	var lt = 0; var gt = 0; // Find case '<' and '>' matches
 	for (var i = 0; i < pattern.length; i++) {
 		if (pattern.charAt(i) == '<') lt++;
@@ -1767,6 +1791,425 @@ function confirmRevokes() {
 		}
 	}
 }
-
 // hook up the window onload event
 addLoadEvent(confirmRevokes);
+
+/* Function that actualy shows the tooltip
+ * @param obj The object that will be base for the tooltip position
+ * @param info The AnimeInfo object
+ * @param type Type of object we are using
+ */
+function showInfoWork(obj,info,type) {
+	if (!get_info_mw) get_info_mw = 450;
+	var minWidth = Number(get_info_mw);
+	if (isNaN(minWidth)) minWidth = 450;
+	var table = document.createElement('table');
+	table.className = type+'Info';
+	table.style.minWidth = minWidth + 'px';
+	var thead = document.createElement('thead');
+	var row = document.createElement('tr');
+	var title = document.createElement('span');
+	title.className = 'title';
+	title.appendChild(document.createTextNode(info.title));
+	var cell = createHeader(null, (info.restricted ? 'restricted' : null), title, null, null, 2);
+	if (type == 'anime' && info.year) {
+		var year = document.createElement('span');
+		year.className = 'year';
+		year.appendChild(document.createTextNode('('+info.year+')'));
+		cell.appendChild(document.createTextNode(' '));
+		cell.appendChild(year);
+	}
+	row.appendChild(cell);
+	thead.appendChild(row);
+	table.appendChild(thead);
+	var tbody = document.createElement('tbody');
+	row = document.createElement('tr');
+	var img = document.createElement('img');
+	img.src = info.picurl;
+	img.alt = '['+info.id+']';
+	createCell(row, type+'InfoThumb', img);
+	var span = document.createElement('span');
+	span.innerHTML = info.desc;
+	createCell(row, type+'InfoDesc', span);
+	tbody.appendChild(row);
+	table.appendChild(tbody);
+	setTooltip(table, true, minWidth);
+}
+
+/* function that finds all icons */
+function findAllInfoIcons(acid) {
+	var targets = document.getElementsByTagName('a');
+	var validTargets = new Array();
+	for (var i = 0; i < targets.length; i++) {
+		if (targets[i].id == acid)
+			validTargets.push(targets[i]);
+	}
+	return validTargets;
+}
+
+/* Function that shows info (or not) */
+function showInfo() {
+	var type = 'character';
+	if (this.id.indexOf('cinfo_ch') >= 0) type = 'character';
+	else if (this.id.indexOf('cinfo_cr') >= 0) type = 'creator';
+	else if (this.id.indexOf('ainfo_') >= 0) type = 'anime';
+	else { errorAlert('showInfo','info type is unknown ['+this.id+']'); return; }
+	var id = Number(this.id.substring((type != 'anime' ? 8 : 6)));
+	if (isNaN(id)) { errorAlert('showInfo','id is not a number ['+id+']'); return; }
+	var info = null;
+	switch (type) {
+		case 'character': info = charInfos[id]; break;
+		case 'creator': info = creatorInfos[id]; break;
+		case 'anime': info = animeInfos[id]; break;
+	}
+	if (!info) { // fetch data and display later
+		setTooltip('please wait while loading data...');
+		var targets = findAllInfoIcons(this.id);
+		for (var i = 0; i < targets.length; i++) {
+			var target = targets[i];
+			target.className = target.className.replace('i_mylist_ainfo_greyed','i_mylist_ainfo_loading');
+			target.title = '';
+			target.onmouseover = showInfo;
+			target.onmouseout = hideTooltip;
+		}
+		switch (type) {
+			case 'character': fetchInfoData("characterdescbyid",id); break;
+			case 'creator': fetchInfoData("creatordescbyid",id); break;
+			case 'anime': fetchInfoData("animedescbyid",id); break;
+		}
+	} else { // display the data
+		showInfoWork(this,info,type);
+	}
+}
+
+function addSetting(ul,array) {
+	var help_text = array["help-text"] ? array["help-text"] : 'Those who seek help shall find it.';
+	var li = document.createElement('li');
+	createLink(li, '[?]', array["help-link"], 'wiki', null, help_text, 'i_inline i_help');
+	if (array["element"])
+		li.appendChild(array["element"]);
+	if (array["elements"]) {
+		for (var i=0; i < array["elements"].length; i++) {
+			li.appendChild(array["elements"][i]);
+			if (i < array["elements"].length-1)
+				li.appendChild(document.createTextNode(" "));
+		}
+	}
+	if (array["text"])
+		li.appendChild(document.createTextNode(' '+array["text"]));
+	ul.appendChild(li);
+}
+
+/* function that shows or hides the customize body */
+function toggleCustomizeBody() {
+	var laycontent = document.getElementById('layout-content');
+	var laytabs = document.getElementById('layout-tabs');
+	var laymain = document.getElementById('layout-main');
+	var layprefs = document.getElementById('layout-prefs');
+	var bodyContent = getElementsByClassName(laymain.getElementsByTagName('div'), 'g_content', true)[0];
+	var lis = laytabs.getElementsByTagName('li');
+	if (!laymain || !layprefs) return;
+	if (!arePrefsShown) { // flushOut the elem
+		while(bodyContent.childNodes.length) virtualDiv.appendChild(bodyContent.firstChild);
+		bodyContent.appendChild(layprefs);
+		layprefs.style.display = '';
+		lis[defPrefTab].className = lis[defPrefTab].className.replace(' selected','');
+		lis[lis.length - 1].className += ' selected';
+		arePrefsShown = true;
+	} else {
+		layprefs.style.display = 'none';
+		while(bodyContent.childNodes.length) laycontent.appendChild(bodyContent.firstChild);
+		while(virtualDiv.childNodes.length) bodyContent.appendChild(virtualDiv.firstChild);
+		lis[lis.length - 1].className = lis[lis.length - 1].className.replace(' selected','');
+		lis[defPrefTab].className += ' selected';
+		arePrefsShown = false;
+	}
+}
+
+/* Function that takes care of tabs and adds sorting and other stuff to the tabs
+ * @param sortingCols Sorting definitions
+ * @param tableNames Ids of tables that we are going to process
+ * @param skipTables Ids of tables to skip adding info icons (optional, but needs to be set as null if not used)
+ * @param collapseThumbnails Should we collapse thumbnails (optional, defaults to false)
+ * @param get_info Should we create the information icon (optional, defaults to true)
+ */
+function handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,get_info) {
+	if (!sortingCols || !tableNames) return;
+	if (collapseThumbnails == null) collapseThumbnails = false;
+	if (get_info == null) get_info = true;
+	var tables = new Array();
+	for (var t = 0; t < tableNames.length; t++) {
+		var tester = document.getElementById(tableNames[t]);
+		if (tester) tables.push(tester);
+	}
+	for (var t = 0; t < tables.length; t++) {
+		globalStatus.updateBarWithText('Preparing tabs',parseInt(t+1/tables.length*100),'Total progress: ');
+		var table = tables[t];
+		var tbody = table.tBodies[0];
+		// let's assume that either we have a thead node
+		// or if we don't, if the first row of the tbody
+		// has "header" in the classname that row is the
+		// thead
+		var thead = table.getElementsByTagName('thead')[0];
+		var headRow = (tbody.rows[0] && tbody.rows[0].className.indexOf('header') >= 0);
+		if (!thead && headRow) {
+			thead = document.createElement('thead');
+			thead.appendChild(tbody.rows[0]);
+			table.insertBefore(thead,tbody);
+		}
+		if (thead) { // apply sorting only if we have a table head (which in turns means we have headers)
+			var sortingTable = sortingCols[table.id];
+			if (sortingTable == undefined && table.id.indexOf('_') > 0) // first and only fail back i'm trying
+				sortingTable = sortingCols[table.id.substring(0,table.id.indexOf('_'))];
+			if (sortingTable != undefined) {
+				var ths = thead.getElementsByTagName('th');
+				var defaultTh = null;
+				var defaultSort = null;
+				for (var i = 0; i < ths.length; i++) {
+					var colDef = sortingTable[ths[i].className];
+					if (!colDef) continue;
+					ths[i].className += ' '+colDef['type'];
+					if (colDef['isDefault']) {
+						defaultTh = ths[i];
+						defaultSort = 'down';
+					}
+				}
+				init_sorting(table,defaultTh,defaultSort);
+			}
+		}
+		if (skipTables && skipTables.indexOf(table.id) >= 0) continue;
+		if (!Number(collapseThumbnails) && !Number(get_info)) continue; // don't do the rest of the stuff
+		for (var r = 0; r < tbody.rows.length; r++) {
+			var row = tbody.rows[r];
+			if (Number(collapseThumbnails)) {
+				// add onmouseover/onmouseout effects
+				addEventSimple(row, "mouseover", function showImages(event) {
+					var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+					for (var i = 0; i < images.length; i++) {
+						var imageCell = images[i];
+						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+						if (img) img.style.display = '';
+					}
+				});
+				addEventSimple(row, "mouseout", function showImages(event) {
+					var images = getElementsByClassName(this.getElementsByTagName('td'), 'image', true);
+					for (var i = 0; i < images.length; i++) {
+						var imageCell = images[i];
+						var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+						if (img) img.style.display = 'none';
+					}
+				});
+				// collapse images
+				var images = getElementsByClassName(row.getElementsByTagName('td'), 'image', true);
+				for (var i = 0; i < images.length; i++) {
+					var imageCell = images[i];
+					var img = imageCell.getElementsByTagName('img')[0]; // i'll just get the first img
+					if (img) img.style.display = 'none';
+				}
+			}
+			if (Number(get_info) && divHTMLTOOLTIP != null) {
+				var names = getElementsByClassName(row.getElementsByTagName('td'), 'name', true);
+				for (var n = 0; n < names.length; n++) {
+					var nameCell = names[n];
+					var label = nameCell.getElementsByTagName('label')[0];
+					var a = (!label ? nameCell.getElementsByTagName('a')[0] : label.getElementsByTagName('a')[0]);
+					if (!a) continue;
+					nameCell.setAttribute('anidb:sort',a.firstChild.nodeValue);
+					var type = null;
+					if (a.href.indexOf('creator') >= 0) type = 'creator';
+					else if (a.href.indexOf('character') >= 0) type = 'character';
+					else if (a.href.indexOf('=anime') >= 0) type = 'anime';
+					else continue;
+					if (!type) continue;
+					var id = a.href.substring(a.href.indexOf('id=')+3);
+					var infoIcon = createIcon(null, 'cinfo', 'removeme', showInfo, 'Click to show '+type+' information', 'i_mylist_ainfo_greyed');
+					if (type == 'creator' || type == 'character') 	infoIcon.id = 'cinfo_c'+(type == 'character' ? 'h' : 'r')+id;
+					else infoIcon.id = 'ainfo_'+id;
+					var icons = getElementsByClassName(nameCell.getElementsByTagName('span'),'icons',false)[0];
+					if (!icons) {
+						icons = document.createElement('span');
+						icons.className = 'icons';
+					}
+					icons.appendChild(infoIcon);
+					if (!label) {
+						label = document.createElement('label');
+						label.appendChild(a);
+					}
+					nameCell.appendChild(label);
+					nameCell.insertBefore(icons,label);
+				}
+			}
+		}
+	}
+}
+
+/* -[ENTITIES]----------------------
+ * ENTITY RELATED FUNCTIONS
+ * ---------------------------------
+ */
+
+/* Creates a new Info node */
+function CInfo(node) {
+	var MAX_CHAR_LENGTH = 750;
+	if (!get_info_sz) get_info_sz = "150";
+	var type = 'character';
+	var idatt = 'charid';
+	switch (node.nodeName.toLowerCase()) {
+		case 'charcaterdescbyrel':
+		case 'characterdesc':
+		case 'characterdescbyid': type = 'character'; idatt = 'charid'; break;
+		case 'creatordescbyrel':
+		case 'creatordesc':
+		case 'creatordescbyid': type = 'creator'; idatt = 'creatorid'; break;
+		case 'animedesc':
+		case 'animedescbyid': type = 'anime'; idatt = 'aid'; break;
+	}
+	this.type = type;
+	this.id = Number(node.getAttribute(idatt));
+	this.desc = convert_input(node.getAttribute('desc'));
+	if (this.desc && this.desc.length > MAX_CHAR_LENGTH) {
+		this.desc = this.desc.substr(0,MAX_CHAR_LENGTH);
+		this.desc += ' [...]';
+	}
+	if (!this.desc || this.desc == '') this.desc = '<i>no description</i>';
+
+	this.restricted = (type != 'anime' ? false : Number(node.getAttribute('restricted'))); // override
+	this.year = null;
+	this.airdate = null;
+	this.enddate = null;
+	var year = node.getAttribute('year');
+	if (year) {
+		this.year = year;
+	} else {
+		var airdate = node.getAttribute('airdate');
+		var enddate = node.getAttribute('enddate');
+		var airDateYear = endDateYear = '?';
+		if (airdate && airdate != '0') {
+			this.airdate = javascriptDate(airdate);
+			airDateYear = this.airdate.getFullYear();
+		}
+		if (enddate && enddate != '0') {
+			this.enddate = javascriptDate(enddate);
+			endDateYear = this.enddate.getFullYear();
+		}
+		this.year = (airDateYear == endDateYear ? airDateYear : airDateYear + '-' +endDateYear);
+	}
+	this.picurl = node.getAttribute('picurl');
+	this.thumbnail = null;
+	if (this.picurl != null) {
+		if (this.picurl != 'nopic.gif' && this.picurl != '') {
+			this.thumbnail = picbase+'thumbs/50x65/'+this.picurl+'-thumb.jpg';
+			this.picurl = picbase+'thumbs/'+get_info_sz+'/'+this.picurl+'-thumb.jpg';
+		} else {
+			this.thumbnail = 'http://static.anidb.net/pics/nopic_50x65.gif';
+			this.picurl = 'http://static.anidb.net/pics/nopic_'+get_info_sz+'.gif';
+		}
+		HIDETHUMBNAILS = false;
+	} else
+		HIDETHUMBNAILS = true;
+
+	this.title = node.getAttribute('title');
+	this.mainlang = node.getAttribute('mainlang');
+
+	this.titles = new Array();
+	var dataNodes = node.getElementsByTagName('data');
+	for (var i = 0; i < dataNodes.length; i++) {
+		var child = dataNodes[i];
+		var lang = child.getAttribute('lang')
+		var name = child.getAttribute('name');
+		var titletype = Number(child.getAttribute('type'));
+		var verified = (child.getAttribute('verifydate') ? (Number(child.getAttribute('verifydate')) > 0) : false);
+		if (titletype != 1 && lang && name)
+			this.addTitle(titletype,name,lang,verified);
+	}
+}
+CInfo.prototype.addTitle = function(type,title,lang,verified) {
+	//alert('adding title: '+'\ntype: '+type+'\ntitle: '+title+'\nlang: '+lang+'\nverified: '+verified);
+	var titletype = 'Main';
+	if (this.type == 'anime') {
+		switch(this.titletype) {
+			case 1: titletype = "Main"; break;
+			case 2: titletype = "Synonym"; break;
+			case 3: titletype = "Short"; break;
+			case 4: titletype = "Official"; break;
+			default: titletype = "unknown"; break;
+		}
+	} else if (this.type == 'character' || this.type == 'creator') {
+		switch(this.titletype) {
+			case 1: titletype = "Main"; break;
+			case 2: titletype = "Official"; break;
+			case 3: titletype = "Alias"; break;
+			case 4: titletype = "Maiden"; break;
+			case 5: titletype = "Nick"; break;
+			case 6: titletype = "Short"; break;
+			case 7: titletype = "Other"; break;
+			default: titletype = "unknown"; break;
+		}
+	}
+	if (!this.titles[type]) this.titles[type] = new Array();
+	this.titles[type].push({'type':titletype,'title':title,'lang':lang,'verified':verified});
+}
+CInfo.prototype.getTitles = function(type) {
+	if (typeof(type) == 'string') {
+		if (this.type == 'anime') {
+			switch(type.toLowerCase()) {
+				case "main": type = 1; break;
+				case "synonym": type = 2; break;
+				case "short": type = 3; break;
+				case "official": type = 4; break;
+				default: type = 0; break;
+			}
+		} else if (this.type == 'character' || this.type == 'creator') {
+			switch(type.toLowerCase()) {
+				case "main": type = 1; break;
+				case "official": type = 2; break;
+				case "alias": type = 3; break;
+				case "maiden": type = 4; break;
+				case "nick": type = 5; break;
+				case "short": type = 6; break;
+				case "other": type = 7; break;
+				default: type = 0; break;
+			}
+		}
+	}
+	if (!this.titles[type]) return null;
+	return this.titles[type];
+}
+/* Function that fetches char/creator data
+ * @param type Type of data to fetch
+ * @param search Search string
+ */
+function fetchInfoData(type,searchString) {
+	var req = xhttpRequest();
+	var allowedTypes = ['characterdescbyid','creatordescbyid','animedescbyid'];
+	if (allowedTypes.indexOf(type) < 0) { errorAlert('fetchInfoData','Invalid search type: '+type); return; }
+	if (''+window.location.hostname == '') xhttpRequestFetch(req, 'xml/'+type.replace('descbyid','')+searchString+'_desc.xml', parseEntityData);
+	else xhttpRequestFetch(req, 'animedb.pl?show=xmln&t=search&type='+type+'&id='+searchString, parseEntityData);
+}
+/* XMLHTTP RESPONSE parser
+ * @param xmldoc Response document
+ */
+function parseEntityData(xmldoc) {
+	var root = xmldoc.getElementsByTagName('root').item(0);
+	if (!root) { errorAlert('parseData','no root node'); return; }
+	var type = 'character';
+	var cdescNodes = root.getElementsByTagName('characterdescbyid');
+	if (!cdescNodes.length) { type = 'creator'; cdescNodes = root.getElementsByTagName('creatordescbyid'); }
+	if (!cdescNodes.length) { type = 'anime'; cdescNodes = root.getElementsByTagName('animedescbyid'); }
+	if (!cdescNodes.length) { type = 'character'; cdescNodes = root.getElementsByTagName('characterdescbyrel'); }
+	for (var d = 0; d < cdescNodes.length; d++) {
+		var infoNode = new CInfo(cdescNodes[d]);
+		var acid = "";
+		switch (type) {
+			case 'character': charInfos[infoNode.id] = infoNode; acid = 'cinfo_ch' + infoNode.id; break;
+			case 'creator': creatorInfos[infoNode.id] = infoNode; acid = 'cinfo_cr' + infoNode.id;  break;
+			case 'anime': animeInfos[infoNode.id] = infoNode; acid = 'ainfo_' + infoNode.id;  break;
+		}
+		var targets = findAllInfoIcons(acid);
+		for (var i = 0; i < targets.length; i++) {
+			var a = targets[i];
+			if (!a) continue;
+			a.className = a.className.replace(/i_mylist_ainfo_loading|i_mylist_ainfo_greyed/gi,'i_mylist_ainfo');
+		}
+	}
+}

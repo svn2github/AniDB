@@ -1,6 +1,6 @@
 /* file profile page support scripts
  * @author fahrenheit (alka.setzer@gmail.com)
- *         
+ *
  * version 1.0 (19.05.2007) - Initial release
  * version 1.1 (29.07.2008) - Added Javascript Tab
  * version 1.2 (03.02.2009)	- Move some stuff out of this script to customize
@@ -35,7 +35,7 @@ function fetchData() {
 
 function CStyle(node) {
 	this.name = node.getAttribute('name');
-	this.title = this.name; 
+	this.title = this.name;
 	this.screenshot = "";
 	this.thumbnail = "";
 	this.path = "";
@@ -90,7 +90,7 @@ function updateCurrentStyle() {
 			style_thumbnail.parentNode.appendChild(i_enlarge);
 		}
 		if (curStyle.screenshot == "") i_enlarge.href = base_url+"css/"+curStyle.name+"/images/screenshot.png";
-		else i_enlarge.href = base_url+"css/"+curStyle.screenshot;    
+		else i_enlarge.href = base_url+"css/"+curStyle.screenshot;
 	}
 	// Title
 	if (!style_title) style_title = document.getElementById('style_title');
@@ -197,13 +197,13 @@ function selectStyle() {
 /* Adds a language
  * @param value Language to add
  */
-function addLanguageToArray(value) { 
-	if (this.array.indexOf(value) < 0) this.array.push(value); 
+function addLanguageToArray(value) {
+	if (this.array.indexOf(value) < 0) this.array.push(value);
 }
 /* Removes a language
  * @param value Language to remove
  */
-function remLanguageFromArray(value) { 
+function remLanguageFromArray(value) {
 	if (this.array.indexOf(value) >= 0)
 		this.array.splice(this.array.indexOf(value),1);
 }
@@ -230,7 +230,7 @@ function prepLanguages() {
 				var option = baseSelect.options[i];
 				if (audlangs.array.indexOf(option.value) >= 0) {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
-					newOption.ondblclick = remLangFromBox; 
+					newOption.ondblclick = remLangFromBox;
 					audlangs.select[1].appendChild(newOption);
 				} else {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
@@ -240,6 +240,7 @@ function prepLanguages() {
 			}
 		}
 		audlangs.select[0].size = audlangs.select[1].size = 8;
+		audlangs.select[0].className = audlangs.select[1].className = 'shuttle';
 		audioDiv.parentNode.removeChild(audioDiv);
 	}
 	if (subtitlesDiv) {
@@ -252,7 +253,7 @@ function prepLanguages() {
 				var option = baseSelect.options[i];
 				if (sublangs.array.indexOf(option.value) >= 0) {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
-					newOption.ondblclick = remLangFromBox; 
+					newOption.ondblclick = remLangFromBox;
 					sublangs.select[1].appendChild(newOption);
 				} else {
 					var newOption = createSelectOption(null, option.text, option.value, false, null, false);
@@ -262,9 +263,11 @@ function prepLanguages() {
 			}
 		}
 		sublangs.select[0].size = sublangs.select[1].size = 8;
+		sublangs.select[0].className = sublangs.select[1].className = 'shuttle';
 		subtitlesDiv.parentNode.removeChild(subtitlesDiv);
 	}
 	var langsDiv = document.createElement('div');
+		langsDiv.className = "block settings languages";
 	var h4 = document.createElement('h4')
 	h4.appendChild(document.createTextNode('Languages'));
 	langsDiv.appendChild(h4);
@@ -312,7 +315,9 @@ function prepLanguages() {
 	tbody.appendChild(row);
 	table.appendChild(tbody);
 	langsDiv.appendChild(table);
-	form.insertBefore(langsDiv,form.getElementsByTagName('p')[0]);
+
+	var langContainer = getElementsByClassNameDeep(form, 'languages')[0];
+	langContainer.parentNode.insertBefore(langsDiv, langContainer.nextSibling);
 }
 
 function changeLangType() {
@@ -464,6 +469,8 @@ function prepPage() {
 		audlangs.rem = remLanguageFromArray;
 		audlangs.toString = convLanguagesToText;
 		audlangs.input.name = 'lang.filealang';
+		audlangs.input = audlangs.input.form.getElementsByTagName('fieldset')[0].appendChild(
+			audlangs.input.parentNode.removeChild(audlangs.input));
 	}
 	sublangs.input = getElementsByName(inputs, 'lang.subin', false)[0];
 	if (sublangs.input) {
@@ -475,10 +482,319 @@ function prepPage() {
 		sublangs.rem = remLanguageFromArray;
 		sublangs.toString = convLanguagesToText;
 		sublangs.input.name = 'lang.fileslang';
+		sublangs.input = sublangs.input.form.getElementsByTagName('fieldset')[0].appendChild(
+			sublangs.input.parentNode.removeChild(sublangs.input));
 	}
 	if (audlangs.input && sublangs.input) prepLanguages();
-	createPreferencesTable('profile');
+
+	// Show everything JS related profile option
+	var js_hidden = getElementsByClassNameDeep(document.getElementById('layout-main'), "javascript");
+	for (var i = 0; i < js_hidden.length; i++) {
+		var classes = js_hidden[i].className.split(' ');
+		for (var j = 0; j < classes.length; j++) {
+			if (classes[j] == "hidden") {
+				classes.splice(j, 1);
+				js_hidden[i].className = classes.join(' ');
+				break;
+			}
+		}
+	}
+
+	// Make shuttles where necessary
+	var shuttles = getElementsByClassName(document.getElementsByTagName("table"), "shuttle");
+	for (var i = 0; i < shuttles.length; i++) {
+		createShuttle(shuttles[i]);
+	}
+
 }
- 
-//window.onload = prePage;
+
+// Creates shuttle
+function createShuttle(target) {
+	if (!target) {
+		return;
+	}
+
+	// Get all select elements
+	var select_boxes     = getElementsByClassNameDeep(target, "shuttle");
+
+	// Some globals the closures should know about
+	var fieldsets = target.getElementsByTagName("fieldset");
+	if (fieldsets.length == 2) {
+		var fieldset_left  = fieldsets[0];
+		var name_left      = fieldset_left.getElementsByTagName("input")[0].name.substr(5);
+		var fieldset_right = fieldsets[1];
+	} else {
+		var fieldset_right = fieldsets[0];
+	}
+	var name_right = fieldset_right.getElementsByTagName("input")[0].name.substr(5);
+
+	// Are we doing a bi-directional shutter or a plain old one?
+	if (select_boxes.length == 3) {
+		var select_left      = select_boxes[0];
+		var select_available = select_boxes[1];
+		var select_right     = select_boxes[2];
+
+		// Add update input closure, to regenerate inputs whenever something changes
+		select_left.updateInputs = function() {
+			// Delete old inputs, but leave the config name input
+			var inputs = fieldset_left.getElementsByTagName("input");
+			for (var i = inputs.length - 1; i > 0; i--) {
+				inputs[i].parentNode.removeChild(inputs[i]);
+			}
+
+			// Re-add options
+			var options = select_left.getElementsByTagName("option");
+			for (var i = 0; i < options.length; i++) {
+				var input = document.createElement("input");
+					input.type  = "hidden";
+					input.name  = name_left + "[]";
+					input.value = options[i].value;
+				fieldset_left.appendChild(input);
+			}
+		}
+	} else {
+		var select_available = select_boxes[0];
+		var select_right     = select_boxes[1];
+	}
+
+	// Add update input closure, to regenerate inputs whenever something changes
+	select_right.updateInputs = function() {
+		// Delete old inputs, but leave the config name input
+		var inputs = fieldset_right.getElementsByTagName("input");
+		for (var i = inputs.length - 1; i > 0; i--) {
+			inputs[i].parentNode.removeChild(inputs[i]);
+		}
+
+		// Re-add options
+		var options = select_right.getElementsByTagName("option");
+		for (var i = 0; i < options.length; i++) {
+			var input = document.createElement("input");
+				input.type  = "hidden";
+				input.name  = name_right + "[]";
+				input.value = options[i].value;
+			fieldset_right.appendChild(input);
+		}
+	}
+
+	// Remember order
+	var order = {
+		"left"      : [],
+		"right"     : []
+	};
+	var options = target.getElementsByTagName("option");
+	for (var i = 0; i < options.length; i++) {
+		if (select_left && options[i].parentNode == select_left) {
+			order["left"].push(options[i].value);
+		} else if (options[i].parentNode == select_right) {
+			order["right"].push(options[i].value);
+		}
+	}
+
+	// Add double click support if we've just got the right (->) side
+	if (!select_left) {
+		var dblclick_event = function(e) {
+			e = (e || event);
+			if (e.srcElement) {
+				var target = e.srcElement;
+			} else {
+				var target = e.target.parentNode;
+			}
+
+			if (target == select_right) {
+				select_available.appendChild(
+					target.removeChild(target.options[target.selectedIndex]));
+			} else {
+				select_right.appendChild(
+					target.removeChild(target.options[target.selectedIndex]));
+			}
+			select_right.updateInputs();
+		}
+		addEventSimple(select_available, "dblclick", dblclick_event);
+		addEventSimple(select_right,     "dblclick", dblclick_event);
+	}
+
+	// All supported button events
+	var button_events = {
+		"add" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var i = select_available.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select_available.options[i];
+			if (!option) {
+				return;
+			}
+
+			select.appendChild(option.parentNode.removeChild(option));
+			select.updateInputs();
+
+			// Move selection
+			if (!select_available) {
+				return;
+			} else if (i >= select_available.length - 1) {
+				select_available.selectedIndex = select_available.length - 1;
+			} else {
+				select_available.selectedIndex = i;
+			}
+		},
+		"remove" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var i = select.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select.options[i];
+			if (!option) {
+				return;
+			}
+
+			option = option.parentNode.removeChild(option);
+			option.selected = false;
+			select_available.appendChild(option);
+			select.updateInputs();
+
+			// Move selection
+			if (!select) {
+				return;
+			} else if (i >= select.length - 1) {
+				select.selectedIndex = select.length - 1;
+			} else {
+				select.selectedIndex = i;
+			}
+		},
+		"moveup" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var i = select.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select.options[i];
+			if (!option) {
+				return;
+			}
+
+			if (i == null || i == 0) {
+				return;
+			} else {
+				select.insertBefore(option.parentNode.removeChild(option), select.options[i - 1]);
+			}
+			select.updateInputs();
+		},
+		"movedown" : function(e) {
+			e = (e || event);
+			if ((e.srcElement || e.target).className == "left") {
+				var select = select_left;
+			} else {
+				var select = select_right;
+			}
+
+			var i = select.selectedIndex;
+			if (i < 0) {
+				return;
+			}
+			var option = select.options[i];
+			if (!option) {
+				return;
+			}
+
+			if (i == null) {
+				return;
+			} else if (i + 2 >= options.length) {
+				select.appendChild(option.parentNode.removeChild(option));
+			} else {
+				select.insertBefore(option.parentNode.removeChild(option), select.options[i + 1]);
+			}
+			select.updateInputs();
+		},
+		"reset" : function() {
+			// Put everything in the middle column, counting down because of some auto update retardedness
+			if (select_left) {
+				var options = select_left.getElementsByTagName("option");
+				for (var i = select_left.options.length - 1; i >= 0; i--) {
+					if (select_left.options[i].parentNode != select_available) {
+						select_available.appendChild(
+							select_left.options[i].parentNode.removeChild(
+								select_left.options[i]));
+					}
+				}
+			}
+			for (var i = select_right.options.length - 1; i >= 0; i--) {
+				if (select_right.options[i].parentNode != select_available) {
+					select_available.appendChild(
+						select_right.options[i].parentNode.removeChild(
+							select_right.options[i]));
+				}
+			}
+
+			// Put back left options
+			if (select_left) {
+				for (var i = order["left"].length - 1; i >= 0; i--) {
+					for (var j = select_available.options.length - 1; j >= 0; j--) {
+						if (order["left"][i] == select_available.options[j].value) {
+							if (select_left.length > 0) {
+								select_left.insertBefore(
+									select_available.options[j].parentNode.removeChild(
+										select_available.options[j]),
+									select_left.options[0]);
+							} else {
+								select_left.appendChild(
+									select_available.options[j].parentNode.removeChild(
+										select_available.options[j]));
+							}
+							break;
+						}
+					}
+				}
+				select_left.updateInputs();
+			}
+
+			// Put back right inputs
+			for (var i = order["right"].length - 1; i >= 0; i--) {
+				for (var j = select_available.options.length - 1; j >= 0; j--) {
+					if (order["right"][i] == select_available.options[j].value) {
+						if (select_right.length > 0) {
+							select_right.insertBefore(
+								select_available.options[j].parentNode.removeChild(
+									select_available.options[j]),
+								select_right.options[0]);
+						} else {
+							select_right.appendChild(
+								select_available.options[j].parentNode.removeChild(
+									select_available.options[j]));
+						}
+						break;
+					}
+				}
+			}
+			select_right.updateInputs();
+		}
+	};
+
+	// Get all buttons, to bind events to
+	var inputs  = target.getElementsByTagName("input");
+	for (var i = 0; i < inputs.length; i++) {
+		if (inputs[i].type == "button") {
+			addEventSimple(inputs[i], "click", button_events[inputs[i].name]);
+		}
+	}
+}
 addLoadEvent(prepPage);

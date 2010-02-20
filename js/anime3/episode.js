@@ -110,7 +110,7 @@ function prepPage() {
 	form.appendChild(filelisttable);
 	createMylistAddBox(form,'files');
 	//filelisttable.parentNode.replaceChild(form,filelisttable);
-	createPreferencesTable('episode');
+
 	// handles tables
 	var sortingCols = {
 		'stafflist': 	{	"credit":{"type":'c_latin',"isDefault":true},
@@ -118,7 +118,7 @@ function prepPage() {
 							"eprange":{"type":'c_latin'},
 							"comment":{"type":'c_latin'}}
 	};
-	var tableNames = ['stafflist0', 'stafflist1', 'stafflist2'];
+	var tableNames = ['stafflist'];
 	var skipTables = null;
 	handleTables(sortingCols,tableNames,skipTables,collapseThumbnails,(get_info & 4));
 	fetchData(aid);
