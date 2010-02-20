@@ -70,13 +70,8 @@ table
 	border-top-color:#DDDDDD;
 }
 
-#layout-main div.animeatt_all div.review > h4
-{
-	background-color:#B0B0B0;
-	border-top-color:#DDDDDD;
-	color:#000000;
-}
 
+#layout-main div.animeatt_all div.review > h4,
 #layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4,
 #layout-main > h1,
@@ -86,6 +81,7 @@ table
 {
 	background-color:#34394D;
 	border-top-color:#DDDDDD;
+	color: #DDDDDD;
 }
 
 span.test,
