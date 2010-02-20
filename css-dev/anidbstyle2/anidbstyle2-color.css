@@ -257,6 +257,11 @@ tr
 	background-color: #CFD1D4;
 }
 
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-color: #ACAEB4;
+}
+
 #layout-tabs ul.main-tabs li,
 #layout-menu > li ul,
 th,
