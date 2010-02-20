@@ -61,7 +61,7 @@
 #layout-main div.anime_all > div.g_section.staff > table,
 #layout-main div.anime_all > div.g_section.songs > table,
 #layout-main div.anime_all > div.g_section.reviews > table,
-#layout-main div.anime_all div.mylist > table.filelist
+#layout-main div.anime_all div.mylistfiles > table.filelist
 {
 	width: 98%;
 }
