@@ -7,7 +7,7 @@
 
 #layout-content
 {
-	margin-top:-10.5em;
+	margin-top:0;
 }
 
 #layout-search div.search
@@ -27,12 +27,23 @@
 
 #layout-tabs
 {
-	margin:8.4em 0.3em;
+	margin:8.7em 0.3em;
+}
+
+#layout-tabs ul
+{
+	margin-top:0;
+	margin-bottom:0;
+}
+
+#layout-tabs ul li
+{
+	line-height:15px;
 }
 
 #layout-nav
 {
-	height:10.5em;
+	height:0;
 	padding-bottom: 0;
 }
 

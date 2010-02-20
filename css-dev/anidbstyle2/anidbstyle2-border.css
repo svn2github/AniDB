@@ -24,12 +24,13 @@ table
 	border-left:1px solid #666666;
 	border-right:1px solid #666666;
 	border-top:1px solid #666666;
+	border-bottom:1px solid #34394D;
 }
 
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
-	border-bottom:1px double #C8CACE;
+	border-bottom:2px double #C8CACE;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
