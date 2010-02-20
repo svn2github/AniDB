@@ -210,7 +210,6 @@ input[type="submit"]:hover,
 }
 
 html,
-tr,
 #layout-menu,
 #layout-main *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd,
@@ -228,26 +227,39 @@ tr,
 #layout-main div.export_all div.exportblock .rtop *,
 #layout-main div.main_all div.register div.inner,
 #layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *
-{
-	background-color:#C3C5C9;
-}
-
-#layout-tabs ul.main-tabs li.selected,
-#layout-tabs ul.main-tabs li:hover,
-#layout-content
-{
-	background-color: #CFD1D4;
-}
-
+#layout-main div.main_all div.register .rtop *,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
 #layout-main span.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd,
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.events .rbottom *,
+#layout-main div.forum div.events .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *,
+#layout-main div.forum ul.topics li.row.g_odd
 {
-	background-color:#B4B4B4;
+	background-color:#C3C5C9;
+}
+
+#layout-main div.forum ul.topics li.row,
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li:hover,
+#layout-content,
+tr
+{
+	background-color: #CFD1D4;
+}
+
+#layout-main div.forum ul.topics li.row:hover
+{
+	background-color: #ACAEB4;
 }
 
 #layout-tabs ul.main-tabs li,
