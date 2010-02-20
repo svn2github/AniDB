@@ -233,7 +233,16 @@ html,
 #layout-main span.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd,
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.events .rbottom *,
+#layout-main div.forum div.events .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *
 {
 	background-color:#C3C5C9;
 }
