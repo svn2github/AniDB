@@ -10,7 +10,7 @@
 	background-color:#ECF3F7;
 }
 
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.row:hover
 {
 	background-color:#CBD6DE;
