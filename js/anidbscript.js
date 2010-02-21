@@ -138,7 +138,14 @@ for (k in cookie) {
 			break;
 		// Layout
 		case 'LAYOUTANIMEFILESORT':
-			settings['aLayout']['aCS'] = cookie[k];
+			settings['aLayout']['aCS'] = {
+				'2'  : 'fid',
+				'7'  : 'codec',
+				'8'  : 'resolution',
+				'4'  : 'size',
+				'9'  : 'source',
+				'12' : 'users'
+			}[cookie[k]];
 			break;
 		case 'LAYOUTANIMEFILESORTORDER':
 			settings['aLayout']['aCSO']= cookie[k];

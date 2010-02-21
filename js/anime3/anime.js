@@ -96,7 +96,6 @@ var animeFileColsList = {
 
 var animePage_sorts = ['default','fid','group','size','cf','resolution','anime-source','users'];
 var animePage_sortsV = ['default','fid','group','size','codec','resolution','source','users'];
-var animePage_curSort = 'default'; // whatever the db spits out
 
 var virtualDiv = document.createElement('div');
 var arePrefsShown = false;
