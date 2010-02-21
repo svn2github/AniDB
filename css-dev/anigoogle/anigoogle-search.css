@@ -50,6 +50,7 @@
 	position:absolute;
 	top:105px;
 	width:100px;
+	white-space:nowrap;
 }
 
 #layout-nav div.main_search input.random
