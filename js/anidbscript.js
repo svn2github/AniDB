@@ -63,7 +63,7 @@ settings['group']['filter'] = 0; // group_langfilter
 // Layout
 settings['aLayout']          = new Object();
 settings['aLayout']['aCS']   = 'default'; // animePage_curSort
-settings['aLayout']['aCSO']  = 'down'; // animePage_curSortOrder
+settings['aLayout']['aCSO']  = 'up'; // animePage_curSortOrder
 settings['aLayout']['aPL']   = '0,1,2,3,4,5,6,7,8,9,10,11,12,13'; // animePageLayout
 settings['aLayout']['fsize'] = 0; // format_size
 
@@ -148,7 +148,7 @@ for (k in cookie) {
 			}[cookie[k]];
 			break;
 		case 'LAYOUTANIMEFILESORTORDER':
-			settings['aLayout']['aCSO']= cookie[k];
+			settings['aLayout']['aCSO'] = ['up', 'down'][cookie[k]];
 			break;
 		case 'LAYOUTANIMEFILE':
 			settings['aLayout']['aPL'] = cookie[k].join(',');
