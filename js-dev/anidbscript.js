@@ -64,7 +64,7 @@ settings['group']['filter'] = 0; // group_langfilter
 settings['aLayout']          = new Object();
 settings['aLayout']['aCS']   = 'default'; // animePage_curSort
 settings['aLayout']['aCSO']  = 'up'; // animePage_curSortOrder
-settings['aLayout']['aPL']   = '0,1,2,3,5,6,7,8,9,10,11,12,13'; // animePageLayout
+settings['aLayout']['aPL']   = '1,2,3,4,6,7,8,9,10,11,12,13,14'; // animePageLayout
 settings['aLayout']['fsize'] = 0; // format_size
 
 // Global
