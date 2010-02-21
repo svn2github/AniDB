@@ -246,8 +246,6 @@ function parseData(xmldoc) {
 	var parseCustomNode = (new Date()) - t1;
 	globalStatus.updateBarWithText('Processing animes...',45,'Total progress: ');
 	// do some triming of the definition cols if possible
-	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !config['settings']['SHOWCRC'])
-		removeColAttribute('crc',fileCols);
 	if (!uid)
 		removeColAttribute('expand',groupCols);
 	// Okay now that i have the preferences i can rebuild fileCols
