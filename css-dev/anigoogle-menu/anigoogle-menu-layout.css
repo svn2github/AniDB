@@ -91,6 +91,7 @@
 	position:absolute;
 	top:19px;
 	width:100px;
+	white-space: nowrap;
 }
 
 #layout-hint + #layout-nav + #layout-content #layout-tabs
