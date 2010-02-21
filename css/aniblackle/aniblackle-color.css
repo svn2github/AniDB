@@ -273,6 +273,7 @@ div.quotebody
 }
 
 tr + tr td,
+tr + tr th,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
 #layout-main div.g_definitionlist tr th
