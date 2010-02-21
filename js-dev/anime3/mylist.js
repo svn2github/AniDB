@@ -1,4 +1,4 @@
-/* file mylist interface 
+/* file mylist interface
  * @author fahrenheit (alka.setzer@gmail.com)
  * version 1.0 (03.04.2008) - Initial version
  * version 1.5 (24.11.2008) - Addition of AnimeInfo tooltips
@@ -98,7 +98,7 @@ function parseMylistExpandLink(href,obj) {
 
 /* This function prepares the mylist page for use with my scripts */
 function prepPage() {
-	// some other stuff, used only in dev 
+	// some other stuff, used only in dev
 	if (''+window.location.hostname != '') {
 		var mylist3 = getElementsByClassName(document.getElementsByTagName('div'), 'mylist3', true)[0];
 		if (mylist3) mylist3.className = mylist3.className.replace("mylist3","mylist"); // this will correct css used in dev
@@ -106,7 +106,7 @@ function prepPage() {
 	uriObj = parseURI();
 	if (uriObj['ajax'] && uriObj['ajax'] == 0) return; // in case i want to quickly change ajax state
 	initTooltips();
-	createPreferencesTable('mylist');
+
 	// find the mylist table and update the links
 	var mylistTable = getElementsByClassName(document.getElementsByTagName('table'),'animelist',true)[0];
 	if (!mylistTable) { errorAlert('prepPage','no mylist table found'); return; }
@@ -415,7 +415,7 @@ function changeFileRowWatchedState(eid,fid,isWatched) {
 	var mylistEntry = mylist[fid];
 	var episode = episodes[eid];
 	var row = document.getElementById('e'+eid+'f'+fid);
-	
+
 	var stateCell = getElementsByClassName(row.getElementsByTagName('td'),'icons state',true)[0];
 	var actionCell = getElementsByClassName(row.getElementsByTagName('td'),'icons action',true)[0];
 	var ico = getElementsByClassName(actionCell.getElementsByTagName('a'),'i_seen_',true)[0];
@@ -439,7 +439,7 @@ function changeFileRowWatchedState(eid,fid,isWatched) {
 		var minute = (now.getMinutes() > 9  ? now.getMinutes() : '0'+now.getMinutes());
 		now = now.getFullYear() + '-'  + day + '-' + month + ' '+hour+ ':'+minute+':00';
 		mylistEntry.seenDate = now;
-		if (stateCell) 
+		if (stateCell)
 			createIcon(stateCell, 'seen ', null, null, 'seen on: '+cTimeDateHour(mylistEntry.seenDate), 'i_seen');
 	}
 }
@@ -470,12 +470,12 @@ function changeEpisodeRowWatchedState(eid,isWatched) {
 			} else if (!ico && isWatched) {
 				episode.seenDate = now;
 				var icons = createEpisodeIcons(episode);
-				while (iconsElem.childNodes.length) 
+				while (iconsElem.childNodes.length)
 					iconsElem.removeChild(iconsElem.firstChild);
 				if (icons['seen']) iconsElem.appendChild(icons['seen']);
 				if (icons['state']) for (var st = 0; st < icons['state'].length; st++) iconsElem.appendChild(icons['state'][st]);
 				if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) iconsElem.appendChild(icons['fstate'][st]);
-				
+
 			}
 		} else {
 			if (isWatched) { // create new icons cell and add a new watched icon
@@ -540,7 +540,7 @@ function changeEpWatchedState() {
 	changeEpisodeRowWatchedState(eid,isWatched);
 	// Update anime watched count
 	changeAnimeRowWatchedState(episode.animeId,isWatched,episode.typeChar);
-	
+
 	var url = 'animedb.pl?show=mylist&do=seen&seen='+(isWatched ? 1 : 0)+'&lid='+lid;
 	postData(url);
 	//alert("posting:\n"+url);
@@ -853,7 +853,7 @@ function createEpisodeTable(aid) {
 		table.appendChild(thead);
 		var tbody = document.createElement('tbody');
 		var anime = animes[aid];
-		// Add files		
+		// Add files
 		var odd = 1;
 		for (var e = 0; e < anime.episodes.length; e++) {
 			var eid = anime.episodes[e];
