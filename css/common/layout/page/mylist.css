@@ -40,3 +40,10 @@
 	min-width:4em;
 	text-align:left;
 }
+
+#layout-main div.mylist_all td.type
+{
+	padding-left:4px;
+	padding-right:4px;
+	white-space:nowrap;
+}
