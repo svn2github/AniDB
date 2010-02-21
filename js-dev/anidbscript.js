@@ -279,7 +279,7 @@ var animePage_defLayout = [
 ];
 animePage_curLayout     = new Array();
 for (var ci = 0; ci < animePageLayout.length; ci++)
-	animePage_curLayout.push(animePage_defLayout[animePageLayout[ci]]);
+	animePage_curLayout.push(animePage_defLayout[animePageLayout[ci] - 1]);
 
 // MISC
 var usejspopups             = settings['other']['jsp'] || true;
