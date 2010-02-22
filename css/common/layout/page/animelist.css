@@ -1,13 +1,8 @@
-#layout-main div.animelist_all td.awards span.i_icon
-{
-	display: -moz-inline-box;
-	display: inline-block;
-}
-
+#layout-main div.animelist_all td.awards span.i_icon,
 #layout-main div.animelist_all div.filters ul li span,
 #layout-main div.animelist_all div.filters ul li span span
 {
-    display: -moz-box;
+    display: -moz-inline-box;
     display: inline-block;
 }
 
@@ -30,7 +25,7 @@
 
 #layout-main div.animelist_all table.animelist tr td.name
 {
-	width:60%;
+	width:75%;
 }
 
 #layout-main div.animelist_all table.animelist tr td.rating
@@ -48,4 +43,9 @@
 #layout-main div.animelist_all table.animelist tr td.count
 {
 	min-width:4em;
+}
+
+#layout-main div.animelist_all td.type
+{
+	white-space:nowrap;
 }
