@@ -50,8 +50,8 @@ input[size="60"]
 	background-color:#666666;
 }
 
-#layout-main div.g_definitionlist tr th,
 tr + tr td,
+tr + tr th,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
 #layout-main div.g_definitionlist tr th

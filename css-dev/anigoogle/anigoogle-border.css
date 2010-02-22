@@ -69,12 +69,12 @@ table
 
 tr + tr td,
 #layout-main div div.explanation div.description dl + dl,
-#layout-main div.report_all div.body ul li + li,
-#layout-main div.g_definitionlist tr th
+#layout-main div.report_all div.body ul li + li
 {
 	border-top:1px solid #C9D7F1;
 }
 
+tr + tr th,
 #layout-main div.g_definitionlist tr th
 {
 	border-top:1px solid #E8F0FF;
