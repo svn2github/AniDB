@@ -40,12 +40,13 @@ img, a
 
 #layout-main table.filelist tr.newep td
 {
-	border-top: 1px #006699 solid;
+	border-top: 1px solid #006699;
 }
 
+#layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top: 2px #006699 double;
+	border-top: 1px double #006699;
 }
 
 #layout-main,

@@ -288,6 +288,7 @@ color:#f1f1f1;
 {
 color:#ff6000;
 }
+#layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 border-top:1px dashed #c1c1c1;

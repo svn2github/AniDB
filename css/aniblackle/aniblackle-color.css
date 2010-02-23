@@ -281,6 +281,7 @@ tr + tr th,
 	border-top-color: #555555;
 }
 
+#layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top-color: #777777;
