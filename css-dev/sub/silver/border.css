@@ -88,11 +88,6 @@ img, a
 	margin: 0;
 }
 
-#layout-main div.anime_all div.episodes tr.newtype td
-{
-	border-top: 2px #FFFFFF double;
-}
-
 #layout-main div.g_definitionlist tr th
 {
 	border-top: 1px #FFFFFF solid;
@@ -126,6 +121,7 @@ img, a
 	border:none;
 }
 
+#layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top:2px solid #006699;

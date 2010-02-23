@@ -92,6 +92,7 @@ tr + tr th,
 	border-top:1px solid blue;
 }
 
+#layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top:2px solid #C9D7F1;

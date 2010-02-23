@@ -62,9 +62,10 @@ img, a
 	margin: 0;
 }
 
+#layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top: 1px #66604d double;
+	border-top: 1px double #66604d;
 }
 
 #layout-main div.avatar img
