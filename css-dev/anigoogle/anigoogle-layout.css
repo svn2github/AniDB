@@ -9,19 +9,15 @@ input[size="60"]
 }
 
 select,
-input[type="text"],
-input[type="password"]
-{
-	padding:1px 4px;
-}
-
-#layout-nav input.submit,
-span.test,
 button,
-#layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd,
+span.test,
+input[type="text"],
 input[type="button"],
-input[type="submit"]
+input[type="submit"],
+input[type="password"],
+#layout-nav input.submit,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd
 {
 	padding:2px 4px;
 }
