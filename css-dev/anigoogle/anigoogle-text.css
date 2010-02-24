@@ -55,8 +55,6 @@ input[type="button"]
 }
 
 select,
-textarea,
-input[type="text"],
 input[type="password"],
 input[type="checkbox"]
 {
