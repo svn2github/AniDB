@@ -60,6 +60,7 @@ table
 }
 
 #layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
 #layout-tabs ul.main-tabs > li
 {
 	border-color:#C9D7F1;
@@ -228,4 +229,23 @@ span.g_odd,
 {
 	background-color:#ECF4FD;
 	color:#AA0000;
+}
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img,
+span.test,
+button,
+input[type=button],
+input[type=submit],
+#layout-search select,
+#layout-search input.text,
+#layout-search input.submit
+{
+	border-color:#B4BAC0;
+}
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img
+{
+	border-color:#000000;
 }

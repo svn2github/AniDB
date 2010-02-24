@@ -27,7 +27,9 @@ table
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-search select,
 #layout-search input.text,
-#layout-menu > li ul
+#layout-menu > li ul,
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img
 {
 	border:1px solid;
 }
@@ -168,9 +170,25 @@ div.spoiler,
 #layout-main div.anime_all div.info div.caststaff div.cast,
 #layout-main div.anime_all div.info div.caststaff div.staff,
 #layout-main div.pagination span a,
-#layout-main div.pagination span strong
+#layout-main div.pagination span strong,
+#layout-search input.text,
+#layout-search input.submit,
+input[type=button],
+input[type=submit],
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
+}
+
+#layout-main .block .g_definitionlist table,
+table table,
+img,
+a
+{
+	border:none;
 }

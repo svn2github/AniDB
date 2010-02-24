@@ -427,3 +427,16 @@ input[type="checkbox"]
 	background-color: #717B85;
 	color: #FFFFFF;
 }
+
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type=button],
+input[type=submit],
+#layout-search select,
+#layout-search input.text,
+#layout-search input.submit
+{
+	border-color:#34394D;
+}

@@ -1,3 +1,14 @@
+#layout-nav input.submit,
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+input[type="button"],
+input[type="submit"]
+{
+	padding:2px 4px;
+}
+
 #layout-nav
 {
 	display:block;
@@ -48,7 +59,7 @@
 #layout-search input.submit
 {
 	float:right;
-	width:100px;
+	width:80px;
 	margin:0;
 }
 
@@ -159,6 +170,8 @@
 {
 	display:inline;
 	padding:4px 6px 3px;
+	line-height:15px;
+
 }
 
 #layout-tabs ul
@@ -350,4 +363,41 @@ h4,
 *.g_button
 {
 	display: inline-block;
+}
+
+#layout-main div.filter_menu span.actions.old input
+{
+	margin-top:3px;
+}
+
+#layout-main div.news_all div.news p.comment,
+#layout-main div.main_all div.news p.comment
+{
+	margin:-2.3em 0 0;
+}
+
+#layout-main div.news h4
+{
+	padding:6px;
+}
+
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img,
+#layout-main .g_image image,
+#layout-main .g_definitionlist,
+#layout-main div.g_content
+{
+	padding:1px;
+}
+
+#layout-main .block .g_definitionlist table
+{
+	margin:0;
+}
+
+#layout-main div.g_menu.filter_menu div.settings input[type="text"]
+{
+	padding:2px;
+	width:12.5em;
+	margin-bottom: 2px;
 }

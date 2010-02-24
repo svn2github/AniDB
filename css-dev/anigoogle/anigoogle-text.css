@@ -22,7 +22,13 @@ a.i_button:hover
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-search select,
-#layout-main div.report_all div.body ul li
+#layout-main div.report_all div.body ul li,
+#layout-search input,
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="checkbox"]
 {
 	font-size:1.1em;
 }
@@ -46,4 +52,18 @@ a.i_button:hover
 input[type="button"]
 {
 	cursor:pointer;
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="checkbox"]
+{
+	font-family: Arial,Verdana,Tahoma,Helvetica,sans-serif;
+}
+
+#layout-main  div.spoiler input.button
+{
+	font-weight: normal;
 }

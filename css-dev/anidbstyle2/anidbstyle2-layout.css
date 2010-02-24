@@ -1,3 +1,4 @@
+/*menu bar, search, header, content block positioning*/
 #layout-menu
 {
 	margin-top: 9.5em;
@@ -30,20 +31,10 @@
 	margin:8.3em 0.3em;
 }
 
-#layout-tabs ul li
-{
-	line-height:15px;
-}
-
 #layout-nav
 {
 	height:10.5em;
 	padding-bottom: 0;
-}
-
-#layout-search input.submit
-{
-	width:80px;
 }
 
 #layout-nav div.search a.advsearch
@@ -56,10 +47,6 @@
 	width:83px;
 }
 
-#layout-main div.filter_menu span.actions.old input
-{
-	margin-top:3px;
-}
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
 	margin:9.7em 0.3em;
@@ -70,28 +57,15 @@
 	margin-top: 9.5em;
 }
 
-#layout-nav input.submit
-{
-	padding:3px 5px;
-}
-
 #layout-search div.search form
 {
 	padding-left:41.5em;
 	padding-top:3em;
 	width:auto;
 }
+/*<----end---->*/
 
-span.test,
-button,
-#layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd,
-input[type="button"],
-input[type="submit"]
-{
-	padding:3px;
-}
-
+/*login/logout/profile/signup stuff related; only neccessary for the default style*/
 #layout-menu li.sub-menu ul li#user-xname,
 #layout-menu li.sub-menu ul li#user-xpass
 {
@@ -138,30 +112,6 @@ input[type="submit"]
 	padding:0;
 }
 
-#layout-main div.main_all div.news p.comment
-{
-	margin:-2.3em 0 0;
-}
-
-#layout-main div.news h4
-{
-	padding:6px;
-}
-
-#layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img,
-#layout-main .g_image image,
-#layout-main .g_definitionlist,
-#layout-main div.g_content
-{
-	padding:1px;
-}
-
-#layout-main .block .g_definitionlist table
-{
-	margin:0;
-}
-
 #layout-menu li.sub-menu ul li#user-logout
 {
 	padding-bottom: 0.4em;
@@ -179,11 +129,6 @@ input[type="submit"]
 	padding:0;
 }
 
-#layout-main div.g_menu.filter_menu div.settings input[type="text"]
-{
-	margin-bottom: 2px;
-}
-
 #layout-nav li.user-xname input,
 #layout-nav li.user-xpass input,
 #layout-nav li.user-xkeep label
@@ -196,3 +141,4 @@ input[type="submit"]
 {
 	width: 90px;
 }
+/*<----end---->*/
