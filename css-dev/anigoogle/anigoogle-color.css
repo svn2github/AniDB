@@ -237,11 +237,5 @@ span.test,
 #layout-search select,
 #layout-search input.text
 {
-	border-color:#B4BAC0;
-}
-
-#layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
-{
-	border-color:#000000;
+	border-color:#C9D7F1;
 }

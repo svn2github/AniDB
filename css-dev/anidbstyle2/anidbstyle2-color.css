@@ -349,9 +349,12 @@ input[type="checkbox"]
 }
 
 #layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
+#layout-main div.anime_all div.info div.image img,
+span.test,
+#layout-search select,
+#layout-search input.text
 {
-	border-color:#717377 #E8E9EC #E8E9EC #717377;
+	border-color:#B4BAC0;
 }
 
 #layout-main div.anime_all div.groups td.epbar div.done,
