@@ -1,3 +1,9 @@
+div.format-buttons input + input,
+div.format-buttons select
+{
+	margin-left:.5em;
+}
+
 div.format-buttons {
 padding: 3px 0px;
 margin-bottom:.2em;

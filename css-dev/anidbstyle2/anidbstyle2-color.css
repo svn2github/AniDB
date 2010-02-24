@@ -365,8 +365,8 @@ span.test,
 	border-bottom-color:#7EF27E;
 }
 
-#layout-main div.message-box div.format-buttons *.f_button:hover,
-#layout-main div.message-box div.format-buttons *.f_button.selected
+#layout-main div.format-buttons *.f_button:hover,
+#layout-main div.format-buttons *.f_button.selected
 {
 	background-color: #B5BED6;
 	border-color: #000000;
