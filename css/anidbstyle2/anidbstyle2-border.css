@@ -1,14 +1,3 @@
-table
-{
-	border-collapse:separate;
-}
-
-#layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
-{
-	border:1px solid;
-}
-
 #layout-main table.eplist tr.files.episode td
 {
 	border-bottom:1px solid gray;
@@ -55,26 +44,6 @@ table
 	border:1px solid #9A9CA1;
 }
 
-span.test,
-button,
-#layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd,
-input[type=button],
-input[type=submit],
-#layout-search select,
-#layout-search input.text,
-#layout-search input.submit
-{
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border:1px solid #34394D;
-	border-radius:5px;
-}
-
-#layout-main .block .g_definitionlist table,
-table table,
-img,
-a,
 #layout-nav
 {
 	border:none;
@@ -82,7 +51,9 @@ a,
 
 #layout-menu li.sub-menu ul
 {
-	-moz-border-radius:5px 5px 5px 5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
 	border:1px solid #EEEEEE;
 }
 

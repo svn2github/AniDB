@@ -776,12 +776,6 @@
 	overflow:hidden;
 }
 
-#layout-main div.forum div.format-buttons input + input,
-#layout-main div.forum div.posting-box div.format-buttons select
-{
-	margin-left:.5em;
-}
-
 #layout-main div.forum div.options-box dt,
 #layout-main div.forum div.add-box dl dt
 {

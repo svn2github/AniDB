@@ -1,18 +1,3 @@
-#layout-search input,
-#user-xname input,
-#user-xpass input,
-#user-xname input,
-#user-xpass input,
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="checkbox"]
-{
-	font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	font-size:130%;
-}
-
 #layout-menu li.sub-menu ul li#user-xpass input,
 #layout-menu li.sub-menu ul li#user-xname input
 {
@@ -23,9 +8,4 @@ input[type="checkbox"]
 #layout-menu li.sub-menu ul li#user-xauth button
 {
 	cursor:pointer;
-}
-
-#layout-main  div.spoiler input.button
-{
-	font-weight: normal;
 }

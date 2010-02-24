@@ -81,22 +81,24 @@
 
 #layout-tabs
 {
-	margin:5em 0.3em;
+	margin:4.9em 0.3em;
 }
 
 #layout-nav div.search a.advsearch
 {
 	display: block;
-	left:623px;
-	position:absolute;
-	top:19px;
-	width:100px;
+	left:0;
+	position:relative;
+	top:0;
+	width:83px;
 	white-space: nowrap;
+	margin-left:62em;
+	margin-top:-2em;
 }
 
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-    margin:6.4em 0.3em;
+    margin:6.3em 0.3em;
 }
 
 #layout-hint + #layout-nav #layout-menu
@@ -140,4 +142,18 @@
 #layout-menu li.sub-menu.alert ul li span
 {
 	display: block;
+}
+
+#layout-search div.search
+{
+	width:100%;
+	margin-left:-1.5em;
+	margin-top:0;
+}
+
+#layout-search div.search form
+{
+	padding-left:17.5em;
+	padding-top:1.5em;
+	width:100%;
 }
