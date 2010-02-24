@@ -141,4 +141,11 @@
 {
 	width: 90px;
 }
+
+#layout-main div.main_all div.login input[type="text"],
+#layout-main div.main_all div.login input[type="password"]
+{
+	padding:2px;
+	width:8.5em;
+}
 /*<----end---->*/
