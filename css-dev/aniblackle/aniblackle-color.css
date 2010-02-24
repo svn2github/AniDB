@@ -454,6 +454,13 @@ tr + tr th,
 	background-color:#000000;
 }
 
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img,
+span.test,
+#layout-search select,
+#layout-search input.text,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
 #layout-main div.anime_all div.info div.caststaff div.cast,
 #layout-main div.anime_all div.info div.caststaff div.staff
 {
