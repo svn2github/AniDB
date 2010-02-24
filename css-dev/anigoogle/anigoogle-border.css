@@ -178,7 +178,8 @@ input[type=submit],
 span.test,
 button,
 #layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd
+#layout-main ul.g_list li.g_odd,
+#layout-search select
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
