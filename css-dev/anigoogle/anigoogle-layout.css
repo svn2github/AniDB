@@ -1,3 +1,20 @@
+input[size="10"]
+{
+	width:6em;
+}
+
+input[size="60"]
+{
+	width:36em;
+}
+
+select,
+input[type="text"],
+input[type="password"]
+{
+	padding:1px 4px;
+}
+
 #layout-nav input.submit,
 span.test,
 button,
@@ -400,4 +417,9 @@ h4,
 	padding:2px;
 	width:13em;
 	margin-bottom: 2px;
+}
+
+#layout-main div.profile_all div.pane div.permissions a.i_inline
+{
+	padding:1px 8px 0 7px;
 }

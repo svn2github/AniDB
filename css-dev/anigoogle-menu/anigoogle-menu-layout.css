@@ -92,7 +92,7 @@
 	top:0;
 	width:83px;
 	white-space: nowrap;
-	margin-left:60em;
+	margin-left:62em;
 	margin-top:-2em;
 }
 
@@ -155,5 +155,5 @@
 {
 	padding-left:17.5em;
 	padding-top:1.5em;
-	width:auto;
+	width:100%;
 }

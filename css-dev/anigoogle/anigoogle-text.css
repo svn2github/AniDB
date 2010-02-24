@@ -54,12 +54,7 @@ input[type="button"]
 	cursor:pointer;
 }
 
-select
-{
-	font-family: Arial,Verdana,Tahoma,Helvetica,sans-serif;
-}
-
-#layout-main  div.spoiler input.button
+#layout-main div.spoiler input.button
 {
 	font-weight: normal;
 }
