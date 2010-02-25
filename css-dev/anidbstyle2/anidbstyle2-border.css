@@ -73,6 +73,7 @@
 
 input[type="submit"],
 input[type="button"],
+button,
 #layout-main div.g_menu.filter_menu div.settings input[type="text"],
 #layout-main div.g_menu.filter_menu div.settings select
 {

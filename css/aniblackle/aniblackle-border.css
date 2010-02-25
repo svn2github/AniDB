@@ -25,6 +25,7 @@ input,
 	border: none;
 }
 
+button,
 input[type="submit"],
 input[type="button"]
 {
