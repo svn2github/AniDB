@@ -1926,7 +1926,7 @@ addEventSimple(window, "load", function() {
 		return;
 	} else if (document.body.offsetWidth > 1900) {
 		banner.className += " widest";
-	} else if (document.body.offsetWidth > 1400) {
+	} else if (document.body.offsetWidth > 1550) {
 		banner.className += " wider";
 	} else if (document.body.offsetWidth > 1200) {
 		banner.className += " wide";
