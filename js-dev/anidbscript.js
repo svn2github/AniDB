@@ -1918,3 +1918,17 @@ function SpinControl() {
 
 	_this.SetWidth(_width);
 }
+
+// Add a class to the banner div to change it dynamically depending on browser window size
+addEventSimple(window, "load", function() {
+	var banner = document.getElementById("layout-search");
+	if (!document.body.offsetWidth) {
+		return;
+	} else if (document.body.offsetWidth > 1900) {
+		banner.className += " widest";
+	} else if (document.body.offsetWidth > 1400) {
+		banner.className += " wider";
+	} else if (document.body.offsetWidth > 1200) {
+		banner.className += " wide";
+	}
+});
