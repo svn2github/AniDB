@@ -14,7 +14,7 @@
 {
 	width:100%;
 	height: 94px;
-	margin-left:-1.5em;
+	margin-left:0em;
 	margin-top:0;
 }
 
@@ -38,12 +38,14 @@
 
 #layout-nav div.search a.advsearch
 {
-	margin-top:-2em;
-	margin-left:86em;
 	position:relative;
 	top:0;
 	left:0;
 	width:83px;
+	margin-left:0;
+	margin-top:0.5em;
+	float:right;
+	margin-right:0.8em;
 }
 
 #layout-hint + #layout-nav + #layout-content #layout-tabs
@@ -58,8 +60,10 @@
 
 #layout-search div.search form
 {
-	padding-left:41.5em;
+	padding-left:0;
 	padding-top:3em;
+	text-align:right;
+	margin-right:1em;
 	width:auto;
 }
 /*<----end---->*/

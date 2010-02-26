@@ -291,6 +291,11 @@ th,
 
 #layout-search div.search
 {
+	background:none;
+}
+
+#layout-search
+{
 	background:url("images/logo.png") no-repeat scroll left top transparent;
 }
 
