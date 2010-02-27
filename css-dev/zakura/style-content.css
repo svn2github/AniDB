@@ -138,7 +138,9 @@ button:hover
 }
 
 .g_msg.note,
-.g_note
+.g_note,
+#layout-main div.tagcloud,
+#layout-main div.desc
 {
 	background:#faf0ff;
 	border:1px solid #dfc8ec;
