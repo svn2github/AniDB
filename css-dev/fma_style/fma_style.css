@@ -331,9 +331,8 @@ div.main_all div.news h4 {
 #layout-main div.tabbed_pane ul.tabs li
 {
 	color:#FFFFFF;
-	background-color:#EFF3FA;
+	background-color:#305C97;
 	border:1px solid #565AB9;
-	padding: 4px;
 }
 
 div.pagination span a
@@ -358,45 +357,21 @@ div.pagination span strong
 	margin-top: 1.2em;
 }
 
-#layout-tabs { 
+#layout-tabs
+{
 	display: block;
-	/*margin-top: -1.8em;*/
 	padding-left: 18px;
 }
-#layout-tabs ul.main-tabs{ 
+#layout-tabs ul.main-tabs
+{
 	margin-top: -1.8em;
 }
 
-#layout-tabs ul.main-tabs li { 
-	background-color: #353A8F;
-	padding: 4px 4px 2px 4px;
+#layout-tabs ul.main-tabs li
+{
 	line-height: 1.6em;
 	text-transform: capitalize;
-	color: white;
-	line-height: 01.6em;
-	padding-left: 02px;
 	display: inline;
-}
-
-#layout-tabs ul li a.selected,
-#layout-tabs ul.main-tabs li.selected a 
-{
-	background-color: transparent;
-}
-
-#layout-tabs ul li a.selected,
-#layout-tabs ul.main-tabs li a
-{
-	color: white;
-}
-
-#layout-tabs ul.main-tabs li a:hover,
-#layout-tabs ul.main-tabs li:hover,
-#layout-tabs ul.main-tabs li.selected,
-#layout-tabs ul.main-tabs li.selected a
-{
-	background-color: #565AB9;
-	color: white;
 }
 
 #layout-tabs ul.main-tabs li a,

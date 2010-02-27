@@ -261,13 +261,13 @@ background: transparent url(images/buttons/help-static-red.png) no-repeat 0.7em 
 #layout-search input.text
 {
 	color:#000033;
-	border: 1px solid #eed0da;
+	border: 1px solid #EFF3FA;
 }
 
 #layout-search select:hover,
 #layout-search input.text:hover
 {
-	border: 1px solid #333333;
+	border: 1px solid #565AB9;
 }
 
 #layout-search input.submit {
