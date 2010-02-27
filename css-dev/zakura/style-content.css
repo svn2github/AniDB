@@ -106,13 +106,9 @@ div.agcmts_all div.agcmts_head:after
 	position:relative;
 }
 
-select
-{
-	background:#fafafa;
-	border:1px solid #cfd0d1;
-	padding:.2em;
-}
-
+select.shuttle,
+select.shuttle:hover,
+select.shuttle:focus,
 select option
 {
 	background:#e0ecfd;
