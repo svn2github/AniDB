@@ -345,7 +345,8 @@ button,
 .g_list.links,
 .g_content,
 div.main_all div.rightbar,
-table
+table,
+#layout-main div.cmt_entries div.comment
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
