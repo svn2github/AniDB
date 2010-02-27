@@ -151,7 +151,8 @@ div.pagination span strong
 #layout-main div.anime_all div.info div.caststaff div.cast,
 #layout-main div.anime_all div.info div.caststaff div.staff
 {
-	border:1px solid #565AB9;
+	border: 1px solid;
+	border-color:#F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
 }
 
 #layout-main div.profile_all div.preferences,
