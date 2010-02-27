@@ -382,3 +382,14 @@ table,
 {
 	border: 1px solid #565AB9;
 }
+
+#layout-main div.forum div.threads,
+#layout-main div.forum div.navbar
+{
+	font-size:80%;
+}
+
+#layout-main div.cmt_entries div.comment
+{
+	font-size:90%;
+}

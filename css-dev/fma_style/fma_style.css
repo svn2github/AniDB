@@ -9,13 +9,13 @@
 @import "../common/style/text/default.css";
 @import "../common/style/content/page-anime.css";
 
-
 /* FMA specific styles */
 @import "style-content.css";
 @import "style-icons.css";
 @import "style-flags.css";
 @import "global.css";
 @import "layout.css";
+@import "forum-color.css";
 
 /* container - right sidebar */
 div.main_all div.rightbar {
@@ -224,7 +224,6 @@ div.main_all div.news h4 {
 	text-align:left;
 	min-height:0pt;
 	margin-bottom:1em;
-	border: 1px solid #D1D7DC;
 }
 
 #layout-main div.cmt_entries dl.profile
