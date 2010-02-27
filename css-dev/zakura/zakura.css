@@ -46,14 +46,9 @@
 	left: 0px;
 }
 
-#layout-main div.tabbed_pane ul.tabs
+#layout-main div.info div.tabbed_pane ul.tabs
 {
 	margin:1px 1px 2px 6px;
-}
-
-#layout-main div.profile_all div.tabbed_pane ul.tabs
-{
-	margin:1px 1px 1px 6px;
 }
 
 #layout-tabs ul.main-tabs li:hover,
