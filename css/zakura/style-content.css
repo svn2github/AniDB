@@ -106,13 +106,9 @@ div.agcmts_all div.agcmts_head:after
 	position:relative;
 }
 
-select
-{
-	background:#fafafa;
-	border:1px solid #cfd0d1;
-	padding:.2em;
-}
-
+select.shuttle,
+select.shuttle:hover,
+select.shuttle:focus,
 select option
 {
 	background:#e0ecfd;
@@ -142,7 +138,9 @@ button:hover
 }
 
 .g_msg.note,
-.g_note
+.g_note,
+#layout-main div.tagcloud,
+#layout-main div.desc
 {
 	background:#faf0ff;
 	border:1px solid #dfc8ec;
@@ -215,7 +213,8 @@ button:hover
 input[type="text"],
 input[type="password"],
 input.text,
-textarea
+textarea,
+select
 {
 	background:#fafafa;
 	border:1px solid #cfd0d1;
@@ -229,7 +228,9 @@ input[type="password"]:hover,
 input.text:focus,
 input.text:hover,
 textarea:focus,
-textarea:hover
+textarea:hover,
+select:focus,
+select:hover
 {
 	background:#fdfdfd;
 	border:1px solid #a1aab2;
@@ -552,27 +553,6 @@ div.anime_all div.groups .state.dropped a
 #layout-main td del
 {
 	background-color:#FFD7C2;
-}
-
-#layout-main div.forum div.navbar span.breadcrumbs,
-#layout-main div.forum div.navbar span.info,
-#layout-main div.forum div.navbar span.messages,
-#layout-main div.forum div.linklist,
-#layout-main div.forum div.signature,
-#layout-main div.forum ul.topics dt,
-#layout-main div.forum dd.lastpost,
-#layout-main div.forum div.options-box dt,
-#layout-main div.forum div.poll dl dd,
-#layout-main div.forum div.poll dl dt,
-#layout-main div.forum div.events dl dd,
-#layout-main div.forum div.events dl dt,
-#layout-main div.msg_all div.header dd,
-#layout-main div.forum div.rules div.inner,
-#layout-main div.forum div.navbar span.notify,
-#layout-main div.forum div.quickreply textarea,
-div.pagination
-{
-	font-size:.9em;
 }
 
 .g_menu ul li.g_odd,

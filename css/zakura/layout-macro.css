@@ -72,14 +72,21 @@ body.nonav form textarea {
 }
 
 #layout-search input.text {
-	border: 1px solid #eed0da;
-	padding: 0.3em 0.3em 0;
+	padding: 0.1em 0.3em;
 	height: 1.5em;
 	width: 16em;
-	color: #1e2495;
+
 }
 
-#layout-search input.text:hover {
+#layout-search select,
+#layout-search input.text
+{
+	border: 1px solid #eed0da;
+	color: #1e2495;
+}
+#layout-search select:hover,
+#layout-search input.text:hover
+{
 	border: 1px solid #dc9abf
 }
 
@@ -98,4 +105,63 @@ body.nonav form textarea {
 
 #layout-footer p:after {
 	content: ". Design by zakness.";
+}
+
+/*rounded borders for stuff*/
+h4,
+*.g_button a,
+*.g_msg,
+div.quotebody,
+div.spoiler,
+#layout-main h1,
+#layout-main div.tagcloud,
+#layout-main div.catcloud,
+#layout-main ul.g_list li,
+#layout-main div.forum div.postbody dl.codebox,
+#layout-main .latest_all .g_list.filter li,
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-main div.g_timedentry div.body,
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.pagination span a,
+#layout-main div.pagination span strong,
+#layout-search input.text,
+#layout-search input.submit,
+span.test,
+button,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+#layout-search select,
+#layout-main div.format-buttons input,
+#layout-main div.format-buttons select,
+#layout-menu li.sub-menu ul,
+.g_list.links,
+.g_content,
+div.main_all div.rightbar,
+table,
+#layout-main div.desc
+{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry h4
+{
+	-moz-border-radius:0 10px 0 0;
+	-webkit-border-radius:0 10px 0 0;
+	border-radius:0 10px 0 0;
+	border-top:none;
+}
+
+#layout-main div.anime_all div.info div.caststaff div h4,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs > li,
+#layout-main div.main_all div.rightbar h4
+{
+	-moz-border-radius:5px 5px 0 0;
+	-webkit-border-radius:5px 5px 0 0;
+	border-radius:5px 5px 0 0;
 }

@@ -18,7 +18,7 @@ h1, h2, h3, h4 {
 }
 
 table {
-	border-collapse: collapse;
+	border-collapse: seperate;
 	border-spacing: 0;
 }
 

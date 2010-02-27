@@ -43,7 +43,7 @@ ul, li {
 }*/
 
 table {
-	border-collapse: collapse;
+	border-collapse: seperate;
 	border-spacing: 0;
 }
 
@@ -71,6 +71,7 @@ abbr {
 #layout-main div.tabbed_pane ul.tabs {
 	margin: 1px 1px 3px 6px;
 }
+
 #layout-main div.profile_all div.tabbed_pane,
 #layout-main div.profile_all div.preferences {
 	width: auto;

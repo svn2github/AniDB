@@ -2,7 +2,7 @@
 #layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner
 {
-	background-color:#305C97;
+	background-color:#4992B6;
 }
 
 #layout-main div.forum ul.topics li.row
@@ -36,8 +36,8 @@
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #305C97;
-	border-right-color: #305C97;
+	border-left-color: #4992B6;
+	border-right-color: #4992B6;
 }
 
 #layout-main div.forum hr

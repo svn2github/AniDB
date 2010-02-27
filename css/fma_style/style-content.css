@@ -128,7 +128,7 @@ content: ".";
 }
 
 .g_menu ul li {
-	border-top: 1px solid #ebe1ef;
+	border-top: 1px solid #EFF3FA;
 	padding: 0.3em;
 	position: relative;
 }
@@ -138,13 +138,11 @@ content: ".";
 }
 
 /* selects */
-select {
-background: #fafafa;
-padding: 0.2em;
-border: 1px solid #cfd0d1;
-}
-
-select option {
+select.shuttle,
+select.shuttle:hover,
+select.shuttle:focus,
+select option
+{
 color: #3d3e6e;
 background: #e0ecfd;
 }
@@ -167,8 +165,11 @@ background-color: #234470;
 
 /* informational boxes */
 .g_msg.note,
-.g_note {
-border: 1px solid #dfc8ec;
+.g_note,
+#layout-main div.tagcloud,
+#layout-main div.desc
+{
+border: 1px solid #565AB9;
 padding: 0.7em;
 background: #EFF3FA;
 color: #4d2f5f;
@@ -287,7 +288,7 @@ margin: 0 0.7em;
 }
 
 /* text fields */
-input[type="text"], input[type="password"], input.text, textarea {
+input[type="text"], input[type="password"], input.text, textarea, select {
 background:#fafafa;
 border: 1px solid #cfd0d1;
 padding: 0.2em;
@@ -296,7 +297,10 @@ padding: 0.2em;
 input[type="text"]:focus, input[type="text"]:hover,
 input[type="password"]:focus, input[type="password"]:hover,
 input.text:focus, input.text:hover,
-textarea:focus, textarea:hover {
+textarea:focus, textarea:hover,
+select:focus,
+select:hover
+{
 border: 1px solid #a1aab2;
 background: #fdfdfd;
 }
@@ -308,7 +312,7 @@ border: 0;
 
 .g_definitionlist table td {
 padding: 0.2em;
-border-top: 1px solid #ebe1ef;
+border-top: 1px solid #EFF3FA;
 border-bottom: 0;
 }
 
@@ -316,7 +320,7 @@ border-bottom: 0;
 background-color: transparent;
 padding: 0.2em;
 color: #3362A2;
-border-top: 1px solid #ebe1ef;
+border-top: 1px solid #EFF3FA;
 vertical-align: middle;
 }
 

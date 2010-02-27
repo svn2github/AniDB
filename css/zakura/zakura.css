@@ -34,69 +34,42 @@
 	width: 99%;
 }
 
+/** TABS **/
 /** TABBING PANE **/
 
 #layout-main div.tabbed_pane div.body
 {
-	border-width: 1px;
-	border-style: solid;
-	border-color: rgb(86, 90, 185);
+	border: 1px solid;
+	border-color: #F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
 }
 #layout-main div.tabbed_pane div.body div.* {
 	left: 0px;
 }
 
-#layout-tabs ul li a:hover,
-#layout-main div.tabbed_pane ul.tabs li:hover
-{
-	background-color: rgb(53, 58, 143);
-	color: white;
-}
-
-#layout-tabs ul li.selected a
-{
-	background-color: rgb(53, 58, 143);
-}
+#layout-tabs ul.main-tabs li:hover,
+#layout-tabs ul.main-tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	background-color: rgb(53, 58, 143);
-	color: white;
-}
-#layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.tabbed_pane ul.tabs li a
-{
-	background-color: rgb(86, 90, 185);
-	color: rgb(255, 255, 255);
-	padding: 4px;
+	background-color:#FFFFFF;
+	color:#7762ED;
+	border-bottom:1px double #FFFFFF;
 }
 
-div.pagination span a
+#layout-tabs ul.main-tabs li,
+#layout-main div.tabbed_pane ul.tabs li
 {
-	border: 1px solid rgb(86, 90, 185);
-	background-color: rgb(86, 90, 185);
-	color: rgb(255, 255, 255);
+	color:#4D2F5F;
+	background-color:#FAF0FF;
+	border:1px solid #F3E7FF;
 }
-
-div.pagination span a:hover,
-div.pagination span strong
-{
-	border: 1px solid rgb(53, 58, 143);
-	background-color: rgb(53, 58, 143);
-	color: #FFFFFF;
-}
-
-/** TABS **/
 
 #layout-tabs
 {
 	display: block;
-}
-
-#layout-tabs { 
 	padding-left: 18px;
 	margin-top: 3em;
 	margin-bottom: -4.5em;
-	font-weight: bold;
 }
 
 #layout-main h1
@@ -104,43 +77,43 @@ div.pagination span strong
 	padding-bottom: 1em;
 }
 
-#layout-tabs ul.main-tabs li { 
-	background-color: #353A8F;
-	padding: 4px 4px 2px 4px;
+#layout-tabs ul.main-tabs li
+{
 	line-height: 1.6em;
 	text-transform: capitalize;
-	color: white;
-	line-height: 01.6em;
-	padding-left: 02px;
 	display: inline;
-}
-
-#layout-tabs ul li a.selected,
-#layout-tabs ul.main-tabs li.selected a 
-{
-	background-color: transparent;
-}
-
-#layout-tabs ul li a.selected,
-#layout-tabs ul.main-tabs li a
-{
-	color: white;
-}
-
-#layout-tabs ul.main-tabs li a:hover,
-#layout-tabs ul.main-tabs li:hover,
-#layout-tabs ul.main-tabs li.selected,
-#layout-tabs ul.main-tabs li.selected a
-{
-	background-color: #565AB9;
-	color: white;
+	padding:3px 0 2px;
 }
 
 #layout-tabs ul.main-tabs li a,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+	padding: 3px 6px;
+}
+
+div.pagination span strong,
+div.pagination span a
+{
+	padding: 1px 4px;
+}
+
+div.pagination span a,
+div.pagination span strong
+{
+	border:1px solid #2D42AF;
+}
+
+div.pagination span a:hover,
+div.pagination span strong
+{
+	background-color:#FFFFFF;
+	color:#2B5288;
+}
+
+div.pagination span a
+{
+	color:#FFFFFF;
+	background-color:#586FD1;
 }
 
 /*epbar colors*/
@@ -167,7 +140,7 @@ div.pagination span strong
 /*profile.css*/
 #layout-main div.profile_all div.pane.general div.body div.pane div ul li a.i_inline
 {
-padding: 4px 8px;
+	padding: 4px 8px;
 }
 
 #layout-main div.anime_all div.info div.caststaff div.cast table,
@@ -179,5 +152,18 @@ padding: 4px 8px;
 #layout-main div.anime_all div.info div.caststaff div.cast,
 #layout-main div.anime_all div.info div.caststaff div.staff
 {
-	border:1px solid #565AB9;
+	border: 1px solid;
+	border-color:#F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
+}
+
+#layout-main div.profile_all div.preferences,
+#layout-main div.profile_all div.tabbed_pane
+{
+	width:auto;
+}
+
+#layout-main div.forum div.threads,
+#layout-main div.forum div.navbar
+{
+	font-size:80%;
 }
