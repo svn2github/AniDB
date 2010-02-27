@@ -37,6 +37,7 @@
 /** TABS **/
 /** TABBING PANE **/
 
+div.pagination span a,
 #layout-main div.tabbed_pane div.body
 {
 	border: 1px solid;
@@ -46,11 +47,8 @@
 	left: 0px;
 }
 
-#layout-main div.info div.tabbed_pane ul.tabs
-{
-	margin:1px 1px 2px 6px;
-}
-
+div.pagination span a:hover,
+div.pagination span strong,
 #layout-tabs ul.main-tabs li:hover,
 #layout-tabs ul.main-tabs li.selected,
 #layout-main div.tabbed_pane ul.tabs li:hover,
@@ -58,9 +56,17 @@
 {
 	background-color:#FFFFFF;
 	color:#7762ED;
+}
+
+#layout-tabs ul.main-tabs li:hover,
+#layout-tabs ul.main-tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
 	border-bottom:1px double #FFFFFF;
 }
 
+div.pagination span a,
 #layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li
 {
@@ -69,27 +75,9 @@
 	border:1px solid #F3E7FF;
 }
 
-div.pagination span a
-{
-	border: 1px solid rgb(86, 90, 185);
-	background-color: rgb(86, 90, 185);
-	color: rgb(255, 255, 255);
-}
-
-div.pagination span a:hover,
-div.pagination span strong
-{
-	border: 1px solid rgb(53, 58, 143);
-	background-color: rgb(53, 58, 143);
-	color: #FFFFFF;
-}
-
 #layout-tabs
 {
 	display: block;
-}
-
-#layout-tabs { 
 	padding-left: 18px;
 	margin-top: 3em;
 	margin-bottom: -4.5em;
@@ -100,19 +88,17 @@ div.pagination span strong
 	padding-bottom: 1em;
 }
 
-#layout-tabs ul.main-tabs li { 
-	padding: 4px 4px 2px 4px;
+#layout-tabs ul.main-tabs li
+{
 	line-height: 1.6em;
 	text-transform: capitalize;
-	line-height: 01.6em;
-	padding-left: 02px;
 	display: inline;
 }
 
 #layout-tabs ul.main-tabs li a,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	padding: 0.3em 0.5em;
+	padding: 3px 6px;
 }
 
 /*epbar colors*/
