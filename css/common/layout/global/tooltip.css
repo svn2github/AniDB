@@ -33,6 +33,7 @@ a:hover #tooltip
 	white-space: normal;
 	width: 250px;
 	z-index: 5;
+	white-space: nowrap;
 }
 
 span.cat span.name:hover #tooltip span.top,
@@ -47,6 +48,7 @@ a:hover #tooltip span.middle
 {
 	display:block;
 	padding:0 8px;
+	white-space: normal;
 }
 
 span.cat span.name:hover #tooltip span.bottom,
