@@ -319,14 +319,20 @@ div.main_all div.news h4 {
 	left: 0px;
 }
 
-#layout-tabs ul.main-tabs li:hover,
-#layout-tabs ul.main-tabs li.selected,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	background-color:#FFFFFF;
 	color:#2B5288;
 	border-bottom:1px double #FFFFFF;
+}
+
+#layout-tabs ul.main-tabs li:hover,
+#layout-tabs ul.main-tabs li.selected
+{
+	color:#2B5288;
+	background-color:#F5F5F5;
+	border-bottom:1px double #F5F5F5;
 }
 
 #layout-tabs ul.main-tabs li,
@@ -375,7 +381,7 @@ div.pagination span strong
 	display: inline;
 }
 
-#layout-tabs ul.main-tabs li a,
+#layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	padding: 0.3em 0.5em;
