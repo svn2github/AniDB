@@ -311,34 +311,28 @@ div.main_all div.news h4 {
 
 #layout-main div.tabbed_pane div.body
 {
-	border-width: 1px;
-	border-style: solid;
-	border-color: rgb(86, 90, 185);
+	border:1px solid #565AB9;
 }
 #layout-main div.tabbed_pane div.body div.* {
 	left: 0px;
 }
 
-#layout-tabs ul li a:hover,
-#layout-main div.tabbed_pane ul.tabs li:hover
-{
-	background-color: rgb(53, 58, 143);
-	color: white;
-}
-
-#layout-tabs ul li.selected a
-{
-	background-color: rgb(53, 58, 143);
-}
+#layout-tabs ul.main-tabs li:hover,
+#layout-tabs ul.main-tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	background-color: rgb(53, 58, 143);
-	color: white;
+	background-color:#FFFFFF;
+	color:#2B5288;
+	border-bottom:1px double #FFFFFF;
 }
+
+#layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	background-color: rgb(86, 90, 185);
-	color: rgb(255, 255, 255);
+	color:#FFFFFF;
+	background-color:#EFF3FA;
+	border:1px solid #565AB9;
 	padding: 4px;
 }
 
