@@ -138,13 +138,11 @@ content: ".";
 }
 
 /* selects */
-select {
-background: #fafafa;
-padding: 0.2em;
-border: 1px solid #cfd0d1;
-}
-
-select option {
+select.shuttle,
+select.shuttle:hover,
+select.shuttle:focus,
+select option
+{
 color: #3d3e6e;
 background: #e0ecfd;
 }
@@ -287,7 +285,7 @@ margin: 0 0.7em;
 }
 
 /* text fields */
-input[type="text"], input[type="password"], input.text, textarea {
+input[type="text"], input[type="password"], input.text, textarea, select {
 background:#fafafa;
 border: 1px solid #cfd0d1;
 padding: 0.2em;
@@ -296,7 +294,10 @@ padding: 0.2em;
 input[type="text"]:focus, input[type="text"]:hover,
 input[type="password"]:focus, input[type="password"]:hover,
 input.text:focus, input.text:hover,
-textarea:focus, textarea:hover {
+textarea:focus, textarea:hover,
+select:focus,
+select:hover
+{
 border: 1px solid #a1aab2;
 background: #fdfdfd;
 }

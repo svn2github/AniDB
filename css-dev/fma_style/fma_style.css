@@ -408,8 +408,7 @@ div.pagination span strong
 #layout-tabs ul.main-tabs li a,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+	padding: 0.3em 0.5em;
 }
 
 /*epbar colors*/
