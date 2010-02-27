@@ -93,6 +93,7 @@ div.pagination span a,
 	line-height: 1.6em;
 	text-transform: capitalize;
 	display: inline;
+	padding:3px 0 2px;
 }
 
 #layout-tabs ul.main-tabs li a,
@@ -145,4 +146,16 @@ div.pagination span a,
 #layout-main div.profile_all div.tabbed_pane
 {
 	width:auto;
+}
+
+#layout-main div.forum div.threads,
+#layout-main div.forum div.navbar
+{
+	font-size:80%;
+}
+
+div.pagination span strong,
+div.pagination span a
+{
+	padding: 1px 4px;
 }
