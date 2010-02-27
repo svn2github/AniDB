@@ -321,6 +321,8 @@ div.pagination span strong,
 	left: 0px;
 }
 
+div.pagination span a:hover,
+div.pagination span strong,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
@@ -328,12 +330,10 @@ div.pagination span strong,
 	color:#2B5288;
 }
 
-div.pagination span a:hover,
-div.pagination span strong,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom:1px double #FFFFFF;
+	border-bottom:2px double #FFFFFF;
 }
 
 #layout-tabs ul.main-tabs li:hover,
@@ -341,7 +341,7 @@ div.pagination span strong,
 {
 	color:#2B5288;
 	background-color:#F5F5F5;
-	border-bottom:1px double #F5F5F5;
+	border-bottom:2px double #F5F5F5;
 }
 
 div.pagination span a,
