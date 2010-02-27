@@ -2,7 +2,7 @@
 #layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner
 {
-	background-color:#6470C3;
+	background-color:#305C97;
 }
 
 #layout-main div.forum ul.topics li.row
@@ -35,8 +35,8 @@
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #6470C3;
-	border-right-color: #6470C3;
+	border-left-color: #305C97;
+	border-right-color: #305C97;
 }
 
 #layout-main div.forum div.signature

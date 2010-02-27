@@ -308,6 +308,8 @@ div.main_all div.news h4 {
 }
 
 /** TABS **/
+div.pagination span a,
+div.pagination span strong,
 #layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane div.body
@@ -324,6 +326,13 @@ div.main_all div.news h4 {
 {
 	background-color:#FFFFFF;
 	color:#2B5288;
+}
+
+div.pagination span a:hover,
+div.pagination span strong,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
 	border-bottom:1px double #FFFFFF;
 }
 
@@ -335,28 +344,13 @@ div.main_all div.news h4 {
 	border-bottom:1px double #F5F5F5;
 }
 
+div.pagination span a,
 #layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	color:#FFFFFF;
 	background-color:#305C97;
 }
-
-div.pagination span a
-{
-	border: 1px solid rgb(86, 90, 185);
-	background-color: rgb(86, 90, 185);
-	color: rgb(255, 255, 255);
-}
-
-div.pagination span a:hover,
-div.pagination span strong
-{
-	border: 1px solid rgb(53, 58, 143);
-	background-color: rgb(53, 58, 143);
-	color: #FFFFFF;
-}
-
 
 /*TABS*/
 #layout-content
