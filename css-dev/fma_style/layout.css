@@ -346,7 +346,8 @@ button,
 .g_content,
 div.main_all div.rightbar,
 table,
-#layout-content
+#layout-content,
+#layout-main div.desc
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
@@ -387,11 +388,6 @@ table,
 #layout-main div.forum div.navbar
 {
 	font-size:80%;
-}
-
-#layout-main div.cmt_entries div.comment
-{
-	font-size:90%;
 }
 
 div.pagination span strong,
