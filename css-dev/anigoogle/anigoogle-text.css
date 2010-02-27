@@ -13,22 +13,22 @@ a.i_button:hover
 #layout-search input.text,
 #layout-search input.submit,
 #layout-menu > li,
-#layout-tabs
+#layout-tabs,
+input[type="text"],
+input[type="password"],
+textarea
 {
 	font-size:1.2em;
 }
 
-#layout-main ul.g_list li,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li,
-#layout-search select,
-#layout-main div.report_all div.body ul li,
-#layout-search input,
 select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="checkbox"]
+input[type="checkbox"],
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main div.report_all div.body ul li,
+#layout-main ul.g_list li,
+#layout-search input,
+#layout-search select,
+#layout-tabs ul.main-tabs > li
 {
 	font-size:1.1em;
 }
