@@ -308,11 +308,13 @@ div.main_all div.news h4 {
 }
 
 /** TABS **/
-
+#layout-tabs ul.main-tabs li,
+#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane div.body
 {
 	border:1px solid #565AB9;
 }
+
 #layout-main div.tabbed_pane div.body div.* {
 	left: 0px;
 }
@@ -332,7 +334,6 @@ div.main_all div.news h4 {
 {
 	color:#FFFFFF;
 	background-color:#305C97;
-	border:1px solid #565AB9;
 }
 
 div.pagination span a

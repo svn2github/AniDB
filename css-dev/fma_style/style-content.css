@@ -128,7 +128,7 @@ content: ".";
 }
 
 .g_menu ul li {
-	border-top: 1px solid #ebe1ef;
+	border-top: 1px solid #EFF3FA;
 	padding: 0.3em;
 	position: relative;
 }
@@ -309,7 +309,7 @@ border: 0;
 
 .g_definitionlist table td {
 padding: 0.2em;
-border-top: 1px solid #ebe1ef;
+border-top: 1px solid #EFF3FA;
 border-bottom: 0;
 }
 
@@ -317,7 +317,7 @@ border-bottom: 0;
 background-color: transparent;
 padding: 0.2em;
 color: #3362A2;
-border-top: 1px solid #ebe1ef;
+border-top: 1px solid #EFF3FA;
 vertical-align: middle;
 }
 
