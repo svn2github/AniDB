@@ -2,24 +2,17 @@
 #layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner
 {
-	background-color:#305C97;
+	background-color:#6470C3;
 }
 
 #layout-main div.forum ul.topics li.row
 {
-	background-color:#DDE6ED;
+	background-color:#F1F0F5;
 }
 
 #layout-main div.forum ul.topics li.row:hover
 {
 	background-color:#CBD6DE;
-}
-
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *,
-#layout-main div.forum div.inner
-{
-	background-color:#F5F5F5;
 }
 
 #layout-main div.forum ul.topiclist dd
@@ -35,8 +28,8 @@
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #305C97;
-	border-right-color: #305C97;
+	border-left-color: #6470C3;
+	border-right-color: #6470C3;
 }
 
 #layout-main div.forum div.signature
@@ -47,7 +40,7 @@
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-	border-top-color:#305C97;
+	border-top-color:#FFD2FE;
 }
 
 #layout-main div.forum div.navbar div.inner div.bottom
@@ -55,6 +48,9 @@
 	border-color: #FFFFFF;
 }
 
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.poll .rbottom *,
 #layout-main div.forum div.poll .rtop *,
@@ -66,9 +62,8 @@
 #layout-main div.forum div.comment .rtop *,
 #layout-main div.forum ul.topics li.g_odd
 {
-	background-color:#EFF3FA;
+	background-color:#F8F7FF;
 }
-
 #layout-main ul.format-modes
 {
 	background-color: inherit;
