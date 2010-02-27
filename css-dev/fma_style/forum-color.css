@@ -7,7 +7,7 @@
 
 #layout-main div.forum ul.topics li.row
 {
-	background-color:#F0F2FF;
+	background-color:#DDE6ED;
 }
 
 #layout-main div.forum ul.topics li.row:hover
@@ -19,7 +19,7 @@
 #layout-main div.forum .rbottom *,
 #layout-main div.forum div.inner
 {
-	background-color:#f8f7ff;
+	background-color:#F5F5F5;
 }
 
 #layout-main div.forum ul.topiclist dd
@@ -47,7 +47,7 @@
 #layout-main div.forum div.signature,
 #layout-main div.forum div.navbar div.inner div.bottom
 {
-	border-top-color:#565AB9;
+	border-top-color:#305C97;
 }
 
 #layout-main div.forum div.navbar div.inner div.bottom
