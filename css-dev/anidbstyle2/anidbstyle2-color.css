@@ -420,7 +420,7 @@ layout-main div.g_timedentry div.body,
 #layout-main div.anime_all div.info div.image img,
 span.test
 {
-	border-color:#B4BAC0 #97AACC #97AACC #B4BAC0;
+	border-color:#B4BAC0 #9A9CA1 #9A9CA1 #B4BAC0;
 }
 
 input[type="text"]:hover,
@@ -450,7 +450,7 @@ select,
 #layout-search select,
 #layout-search input.text
 {
-	background-color:#525870;
+	background-color:#454959;
 	border:#B4BAC0 1px solid;
 	color:#CCCCCC;
 }
@@ -458,5 +458,5 @@ select,
 #layout-menu li.sub-menu ul li:hover,
 #layout-menu li.sub-menu ul li:active
 {
-	background: transparent url(images/stripe-ltgrey.gif) repeat left top;
+	background: transparent url(images/stripe-darkgrey.png) repeat left top;
 }
