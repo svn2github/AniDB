@@ -225,7 +225,7 @@ input[type="submit"]:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover
 #layout-main div.forum ul.topics li.row:hover
 {
-	background-color:#666666;
+	background: transparent url(images/stripe-darkgrey.png) repeat left top;
 }
 
 #layout-main div.forum div.deleted,
