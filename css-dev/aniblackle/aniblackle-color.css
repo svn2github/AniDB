@@ -105,28 +105,10 @@ th,
 	color:#000000;
 }
 
-button:hover,
-input[type="submit"]:hover,
-#layout-main ul.g_list li:hover,
-#layout-main ul.g_list li.selected,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.news_all div.g_timedentry h4,
-#layout-main div.userpage_all > div.g_section > h4
-{
-	background-color:#444444;
-}
-
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
 	background-color:#728972;
-}
-
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
-{
-	background-color:#3B3B3B;
 }
 
 #layout-main div div.addrelform table tr,
@@ -186,9 +168,21 @@ div.quotebody
 #layout-main div.forum div.comment .rtop *,
 #layout-main div.forum div.threads .rtop *,
 #layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.threads div.inner,
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.g_timedentry div.body,
+#layout-main div.export_all div.exportblock div.inner,
+#layout-main div.export_all div.exportblock .rbottom *,
+#layout-main div.export_all div.exportblock .rtop *,
+button:hover,
+input[type="submit"]:hover,
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-tabs ul.main-tabs > li,
+#layout-main div.news_all div.g_timedentry h4,
+#layout-main div.userpage_all > div.g_section > h4
 {
-	background-color: #3B3B3B;
+	background-color: #444444;
 }
 
 #layout-main div.cmt_all div.cmt_add h4,
@@ -201,8 +195,8 @@ div.quotebody
 
 #layout-main div.forum ul.topics
 {
-	border-left-color:#3B3B3B;
-	border-right-color:#3B3B3B;
+	border-left-color:#444444;
+	border-right-color:#444444;
 }
 
 #layout-main div.forum ul.topics li.row
@@ -214,7 +208,7 @@ div.quotebody
 #layout-main div.forum ul.topics li.g_odd,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd
 {
-	background-color:#3F3F3F;
+	background-color:#333333;
 }
 
 #layout-main div.forum a.topictitle
@@ -243,7 +237,6 @@ div.quotebody
 #layout-main div.g_timedentry h4,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
-#layout-tabs ul.main-tabs > li,
 #layout-menu li.sub-menu:hover
 {
 	background-color:#555555;
@@ -385,12 +378,6 @@ tr + tr th,
 	border-left-color:#555555;
 }
 
-#layout-main div.animeatt_reviews div.review div.text,
-#layout-main div.g_timedentry div.body
-{
-	background-color:#3B3B3B;
-}
-
 #layout-main div.userpage_all div.blog div.g_timedentry span.stamp
 {
 	border-top-color:#555555;
@@ -507,6 +494,6 @@ select,
 #layout-search select,
 #layout-search input.text
 {
-	background-color:#333333;
+	background-color:#222222;
 }
 

@@ -18,4 +18,5 @@ input[type="button"]
 	-webkit-border-radius:5px;
 	border-radius:5px;
 	border:1px solid;
+	border-color:#777777 #666666 #666666 #777777;
 }
