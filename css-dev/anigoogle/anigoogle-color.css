@@ -240,33 +240,3 @@ span.test
 {
 	border-color:#C9D7F1 #97AACC #97AACC #C9D7F1;
 }
-
-input[type="text"],
-input[type="password"],
-input.text,
-textarea,
-select,
-#layout-search select,
-#layout-search input.text
-{
-	background-color:#FBFBFB;
-}
-
-input[type="text"]:hover,
-input[type="text"]:focus,
-input[type="password"]:hover,
-input[type="password"]:focus,
-input.text:hover,
-input.text:focus,
-textarea:hover,
-textarea:focus,
-select:hover,
-select:focus,
-#layout-search select:hover,
-#layout-search select:focus,
-#layout-search input.text:hover,
-#layout-search input.text:focus
-{
-	border-color: #BFCBE3;
-	background-color:#FFFFFF;
-}
