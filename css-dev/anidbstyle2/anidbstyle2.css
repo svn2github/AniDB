@@ -6,9 +6,9 @@
 @import "../anigoogle-menu/anigoogle-menu-text.css";
 @import "../anigoogle-menu/anigoogle-menu-border.css";
 @import "../common/style/color/status-pastel.css";
-@import "anidbstyle2-color.css";
+@import "anidbstyle2-layout.css"
 @import "anidbstyle2-border.css";
-@import "anidbstyle2-layout.css";
+@import "anidbstyle2-color.css";;
 @import "anidbstyle2-text.css";
 @import "anidbstyle2-icons.css";
 

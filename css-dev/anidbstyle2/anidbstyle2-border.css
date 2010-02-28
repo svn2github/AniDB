@@ -6,29 +6,26 @@
 #layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top:2px solid black;
+	border-top:1px double black;
 }
 
 #layout-tabs ul.main-tabs li
 {
-	border-left:1px solid #666666;
-	border-right:1px solid #666666;
-	border-top:1px solid #666666;
+	border-left:1px solid #B4BAC0;
+	border-right:1px solid #B4BAC0;
+	border-top:1px solid #B4BAC0;
 }
 
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
-	border-bottom:1px double #CFD1D4;
+	border-bottom:1px double #9A9CA1;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom:1px double #C3C5C9;
-	border-left:1px solid #9A9CA1;
-	border-right:1px solid #9A9CA1;
-	border-top:1px solid #9A9CA1;
+	border-bottom:1px double #9A9CA1;
 }
 
 #layout-main div.pagination span strong,
@@ -38,10 +35,9 @@
 	border:1px solid #777777;
 }
 
-#layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	border:1px solid #9A9CA1;
+	border:1px solid #B4BAC0;
 }
 
 #layout-nav
