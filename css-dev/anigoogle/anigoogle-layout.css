@@ -424,3 +424,8 @@ h4,
 {
 	padding:1px 8px 0 7px;
 }
+
+button+button
+{
+	margin-left: 0.5em;
+}
