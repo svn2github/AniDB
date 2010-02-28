@@ -108,7 +108,8 @@ th,
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	background-color:#728972;
+	color:#728972;
+	background-color:#000000;
 }
 
 #layout-main div div.addrelform table tr,

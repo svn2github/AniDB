@@ -37,12 +37,13 @@
 	background-color:#444444;
 }
 
-#layout-menu li.sub-menu ul li:hover
-{
-	background-color:#888888;
-}
-
 #layout-menu li.sub-menu ul li + li
 {
 	border-top-color:#555555;
+}
+
+#layout-menu li.sub-menu ul li:hover,
+#layout-menu li.sub-menu ul li:active
+{
+	background: transparent url(images/stripe-ltgrey.gif) repeat left top;
 }
