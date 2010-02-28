@@ -437,7 +437,7 @@ select,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-tabs ul.main-tabs > li
 {
-	border-color:#777777;
+	border: 1px solid #777777;
 }
 
 input[type="text"]:hover,
@@ -455,7 +455,7 @@ select:focus,
 #layout-search input.text:hover,
 #layout-search input.text:focus
 {
-	border-color:#666666;
+	border: 1px solid #666666;
 }
 
 span.test,
@@ -479,6 +479,7 @@ div.quotebody,
 #layout-main div.tagcloud,
 #layout-nav div.menu_hr
 {
+	border: 1px solid;
 	border-color:#777777 #666666 #666666 #777777;
 }
 
@@ -506,6 +507,6 @@ select,
 #layout-search select,
 #layout-search input.text
 {
-	background-color:#444444;
+	background-color:#333333;
 }
 
