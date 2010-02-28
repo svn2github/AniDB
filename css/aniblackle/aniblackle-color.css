@@ -126,20 +126,13 @@ th,
 #layout-main div.anime_all div.info div.caststaff div.cast,
 #layout-main div.anime_all div.info div.caststaff div.staff,
 #layout-main div.tagcloud,
-input[type="text"]:hover,
-input[type="text"]:focus,
-input[type="password"]:hover,
-input[type="password"]:focus,
-input.text:hover,
-input.text:focus,
-textarea:hover,
-textarea:focus,
-select:hover,
-select:focus,
-#layout-search select:hover,
-#layout-search select:focus,
-#layout-search input.text:hover,
-#layout-search input.text:focus
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
+#layout-search select,
+#layout-search input.text
 {
 	background-color:#000000;
 }
@@ -422,27 +415,16 @@ select,
 #layout-search select,
 #layout-search input.text,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-tabs ul.main-tabs > li
+#layout-tabs ul.main-tabs > li,
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
+#layout-search select,
+#layout-search input.text
 {
 	border: 1px solid #777777;
-}
-
-input[type="text"]:hover,
-input[type="text"]:focus,
-input[type="password"]:hover,
-input[type="password"]:focus,
-input.text:hover,
-input.text:focus,
-textarea:hover,
-textarea:focus,
-select:hover,
-select:focus,
-#layout-search select:hover,
-#layout-search select:focus,
-#layout-search input.text:hover,
-#layout-search input.text:focus
-{
-	border: 1px solid #666666;
 }
 
 span.test,
@@ -485,15 +467,3 @@ div.quotebody,
 	background-color: #444444;
 	color: #FFFFFF;
 }
-
-input[type="text"],
-input[type="password"],
-input.text,
-textarea,
-select,
-#layout-search select,
-#layout-search input.text
-{
-	background-color:#222222;
-}
-

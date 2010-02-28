@@ -397,8 +397,8 @@ span.test,
 button,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
-input[type=button],
-input[type=submit],
+input[type="button"],
+input[type="submit"],
 #layout-search select,
 #layout-search input.text,
 #layout-search input.submit
@@ -423,25 +423,6 @@ span.test
 	border-color:#B4BAC0 #9A9CA1 #9A9CA1 #B4BAC0;
 }
 
-input[type="text"]:hover,
-input[type="text"]:focus,
-input[type="password"]:hover,
-input[type="password"]:focus,
-input.text:hover,
-input.text:focus,
-textarea:hover,
-textarea:focus,
-select:hover,
-select:focus,
-#layout-search select:hover,
-#layout-search select:focus,
-#layout-search input.text:hover,
-#layout-search input.text:focus
-{
-	background-color:#34394D;
-	border:#C8CACE 1px solid;
-}
-
 input[type="text"],
 input[type="password"],
 input.text,
@@ -450,8 +431,8 @@ select,
 #layout-search select,
 #layout-search input.text
 {
-	background-color:#454959;
-	border:#B4BAC0 1px solid;
+	background-color:#34394D;
+	border-color:#C8CACE;
 	color:#CCCCCC;
 }
 
