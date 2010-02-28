@@ -454,3 +454,9 @@ select,
 	border:#B4BAC0 1px solid;
 	color:#CCCCCC;
 }
+
+#layout-menu li.sub-menu ul li:hover,
+#layout-menu li.sub-menu ul li:active
+{
+	background: transparent url(images/stripe-ltgrey.gif) repeat left top;
+}
