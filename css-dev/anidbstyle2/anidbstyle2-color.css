@@ -460,3 +460,8 @@ select,
 {
 	background: transparent url(images/stripe-darkgrey.png) repeat left top;
 }
+
+#layout-menu li.sub-menu ul
+{
+	border-color:#EEEEEE #9A9CA1 #9A9CA1 #EEEEEE;
+}

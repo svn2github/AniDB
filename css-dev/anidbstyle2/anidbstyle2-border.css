@@ -50,7 +50,6 @@
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
-	border:1px solid #EEEEEE;
 }
 
 #layout-menu li.sub-menu ul li:first-child:hover
@@ -77,4 +76,9 @@ button,
 	-webkit-border-radius:5px;
 	border-radius:5px;
 	border:1px solid #34394D;
+}
+
+#layout-menu li.sub-menu ul li + li
+{
+	border-top:1px solid #454959;
 }
