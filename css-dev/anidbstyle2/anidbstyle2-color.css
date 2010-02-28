@@ -458,7 +458,7 @@ select,
 #layout-menu li.sub-menu ul li:hover,
 #layout-menu li.sub-menu ul li:active
 {
-	background: transparent url(images/stripe-darkgrey.png) repeat left top;
+	background: transparent url(images/stripe-vdarkgrey.png) repeat left top;
 }
 
 #layout-menu li.sub-menu ul
