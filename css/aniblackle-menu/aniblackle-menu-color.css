@@ -1,8 +1,8 @@
 #layout-content
 {
 	border-bottom-color:#666666;
-	border-left-color:#666666;
-	border-top-color:#666666;
+	border-left-color:#777777;
+	border-top-color:#777777;
 }
 
 #layout-nav
@@ -12,15 +12,15 @@
 
 #layout-menu li.sub-menu ul
 {
-	border-color: #666666;
+	border-color:#777777 #666666 #666666 #777777;
 }
 
 #layout-menu
 {
 	border-right-color:#C9D7F1;
-	background-color:#000000;
 }
 
+#layout-menu,
 #layout-menu li.sub-menu:hover
 {
 	background-color:#000000;
@@ -31,17 +31,19 @@
 	border-color: #000000;
 }
 
+#layout-menu > li ul,
 #layout-menu li.sub-menu ul
 {
 	background-color:#444444;
 }
 
-#layout-menu li.sub-menu ul li:hover
+#layout-menu li.sub-menu ul li + li
 {
-	background-color:#888888;
+	border-top-color:#555555;
 }
 
-#layout-menu > li ul
+#layout-menu li.sub-menu ul li:hover,
+#layout-menu li.sub-menu ul li:active
 {
-	background-color:#444444;
+	background: transparent url(images/stripe-darkgrey.png) repeat left top;
 }

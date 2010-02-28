@@ -18,3 +18,8 @@
 	text-decoration:underline;
 	text-transform:capitalize;
 }
+
+#layout-menu li.sub-menu ul li a
+{
+	text-transform:capitalize;
+}

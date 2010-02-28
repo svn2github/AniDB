@@ -3,6 +3,11 @@ input[size="10"]
 	width:6em;
 }
 
+input[size="50"]
+{
+	width:27.5em;
+}
+
 input[size="60"]
 {
 	width:36em;
@@ -418,4 +423,9 @@ h4,
 #layout-main div.profile_all div.pane div.permissions a.i_inline
 {
 	padding:1px 8px 0 7px;
+}
+
+button+button
+{
+	margin-left: 0.5em;
 }

@@ -53,19 +53,6 @@ table
 	border-color:#4692BF;
 }
 
-#layout-main div.tagcloud
-{
-	background-color:#ECF4FD;
-	border-color:#D1D7DC;
-}
-
-#layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd,
-#layout-tabs ul.main-tabs > li
-{
-	border-color:#C9D7F1;
-}
-
 #layout-nav div.menu_hr
 {
 	border-top-color:#c9d7f1;
@@ -83,10 +70,10 @@ table
 	background-color:#CADCEB;
 }
 
+#layout-main div.tagcloud,
 #layout-main div.desc
 {
 	background-color:#ECF4FD;
-	border-color:#C9D7F1;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.general table tr
@@ -203,12 +190,6 @@ span.g_odd,
 	background-color:#ECF4FD;
 }
 
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
-{
-	border-color:#C9D7F1;
-}
-
 #layout-main div.anime_all div.info div.caststaff div table
 {
 	border-top-color:blue;
@@ -221,7 +202,6 @@ span.g_odd,
 
 *.g_button a
 {
-	border-color:#C9D7F1;
 	background-color:#FFFFFF;
 }
 
@@ -231,11 +211,62 @@ span.g_odd,
 	color:#AA0000;
 }
 
-#layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img,
-span.test,
+#layout-main div.tabbed_pane ul.tabs li,
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
+#layout-tabs ul.main-tabs > li,
 #layout-search select,
 #layout-search input.text
 {
 	border-color:#C9D7F1;
+}
+
+#layout-main div.g_timedentry div.body,
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tagcloud,
+#layout-main div.desc,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+*.g_button a,
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img,
+span.test
+{
+	border-color:#C9D7F1 #97AACC #97AACC #C9D7F1;
+}
+
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
+#layout-search select,
+#layout-search input.text
+{
+	background-color:#FBFBFB;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="password"]:hover,
+input[type="password"]:focus,
+input.text:hover,
+input.text:focus,
+textarea:hover,
+textarea:focus,
+select:hover,
+select:focus,
+#layout-search select:hover,
+#layout-search select:focus,
+#layout-search input.text:hover,
+#layout-search input.text:focus
+{
+	border-color: #BFCBE3;
+	background-color:#FFFFFF;
 }

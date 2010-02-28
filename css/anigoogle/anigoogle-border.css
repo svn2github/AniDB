@@ -15,7 +15,7 @@ table
 #layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
-	border-bottom:2px solid;
+	border-bottom:1px double;
 }
 
 #layout-main div.pagination span a,
@@ -45,10 +45,12 @@ table
 	border-top:1px solid;
 }
 
+#layout-main div.g_timedentry div.body,
+#layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li
 {
-	border:1px solid #C9D7F1;
+	border:1px solid;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
@@ -97,7 +99,7 @@ tr + tr th,
 #layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top:2px solid #C9D7F1;
+	border-top:1px double #C9D7F1;
 }
 
 #layout-main div.mylist_all td+td,
@@ -108,12 +110,6 @@ tr + tr th,
 #layout-main div.mynotifies_all tr td+td
 {
 	border-left:1px solid #C9D7F1;
-}
-
-#layout-main div.g_timedentry div.body,
-#layout-main div.animeatt_reviews div.review div.text
-{
-	border: 1px solid #C9D7F1;
 }
 
 #layout-main div.userpage_all div.blog div.g_timedentry h4
@@ -136,7 +132,14 @@ tr + tr th,
 
 #layout-main div.anime_all div.info div.caststaff div.cast,
 #layout-main div.anime_all div.info div.caststaff div.staff,
-*.g_button a
+*.g_button a,
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
+#layout-search select,
+#layout-search input.text
 {
 	border:1px solid;
 }
@@ -179,7 +182,14 @@ button,
 #layout-main ul.g_list li.g_odd,
 #layout-search select,
 #layout-main div.format-buttons input,
-#layout-main div.format-buttons select
+#layout-main div.format-buttons select,
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
+#layout-search select,
+#layout-search input.text
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
