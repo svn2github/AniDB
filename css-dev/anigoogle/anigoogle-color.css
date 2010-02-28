@@ -212,21 +212,14 @@ span.g_odd,
 }
 
 #layout-main div.tabbed_pane ul.tabs li,
-input[type="text"]:hover,
-input[type="text"]:focus,
-input[type="password"]:hover,
-input[type="password"]:focus,
-input.text:hover,
-input.text:focus,
-textarea:hover,
-textarea:focus,
-select:hover,
-select:focus,
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
 #layout-tabs ul.main-tabs > li,
-#layout-search select:hover,
-#layout-search select:focus,
-#layout-search input.text:hover,
-#layout-search input.text:focus
+#layout-search select,
+#layout-search input.text
 {
 	border-color:#C9D7F1;
 }
@@ -257,7 +250,6 @@ select,
 #layout-search input.text
 {
 	background-color:#FBFBFB;
-	border-color: #DEE8FA;
 }
 
 
@@ -276,5 +268,6 @@ select:focus,
 #layout-search input.text:hover,
 #layout-search input.text:focus
 {
+	border-color: #DEE8FA;
 	background-color:#FFFFFF;
 }
