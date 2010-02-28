@@ -64,7 +64,7 @@
 #layout-menu li.sub-menu
 {
 	display:block;
-	margin-bottom:1em;
+	margin-bottom:0.5em;
 }
 
 #layout-nav div.menu_hr,
@@ -122,21 +122,9 @@
 	padding: 0 8px;
 }
 
-#layout-menu li.sub-menu.alert ul li:first-child span,
-#layout-menu li.sub-menu ul li:first-child > a
-{
-	padding-top:0.4em;
-}
-
 #layout-menu li.sub-menu ul li.user-xkeep > label
 {
 	display:block;
-}
-
-#layout-menu li.sub-menu ul li.user-xkeep:last-child > label,
-#layout-menu li.sub-menu ul li:last-child > a
-{
-	padding-bottom:0.4em;
 }
 
 #layout-menu li.sub-menu.alert ul li span
@@ -156,4 +144,9 @@
 	padding-left:17.5em;
 	padding-top:1.5em;
 	width:100%;
+}
+
+#layout-menu li.sub-menu ul li a
+{
+	padding:0.2em 0;
 }

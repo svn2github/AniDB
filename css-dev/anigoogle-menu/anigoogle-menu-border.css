@@ -3,7 +3,7 @@
 	-moz-border-radius:5px 0 0 5px;
 	-webkit-border-radius:5px 0 0 5px;
 	border-radius:5px 0 0 5px;
-	border-bottom:1px solid #C9D7F1;
+	border-bottom:1px solid #97AACC;
 	border-left:1px solid #C9D7F1;
 	border-top:1px solid #C9D7F1;
 }
@@ -22,8 +22,8 @@
 {
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
-	border:1px solid #C9D7F1;
 	border-radius:5px;
+	border:1px solid;
 }
 
 #layout-menu li.sub-menu ul li:first-child:hover
@@ -38,4 +38,9 @@
 	-moz-border-radius:0px 0px 2px 2px;
 	-webkit-border-radius:0px 0px 2px 2px;
 	border-radius:0px 0px 2px 2px;
+}
+
+#layout-menu li.sub-menu ul li+li
+{
+	border-top: 1px solid #DEE8FA;
 }
