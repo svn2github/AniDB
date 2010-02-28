@@ -1,6 +1,6 @@
 tr
 {
-	background-color: #000000;
+	background-color:#000000;
 }
 
 button,
@@ -56,7 +56,6 @@ span.g_odd
 #layout-main div.pagination span a
 {
 	background-color:#555555;
-	border-color:#666666;
 	color:#CCCCCC;
 }
 
@@ -64,11 +63,6 @@ span.g_odd
 #layout-main div.pagination span strong
 {
 	color:#000000;
-}
-
-#layout-main div.tagcloud
-{
-	border-color:#666666;
 }
 
 button:hover
@@ -111,14 +105,6 @@ th,
 	color:#000000;
 }
 
-#layout-main ul.g_list li,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li,
-#layout-nav div.menu_hr
-{
-	border-color:#666666;
-}
-
 button:hover,
 input[type="submit"]:hover,
 #layout-main ul.g_list li:hover,
@@ -134,7 +120,6 @@ input[type="submit"]:hover,
 #layout-main div.pagination span strong
 {
 	background-color:#728972;
-	border-color:#666666;
 }
 
 #layout-main div.export_all div.exportblock div.inner,
@@ -144,36 +129,47 @@ input[type="submit"]:hover,
 	background-color:#3B3B3B;
 }
 
+#layout-main div div.addrelform table tr,
+#layout-main div.animeatt_all div.review > h4,
 #layout-main div.tabbed_pane div.body,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected
-{
-	background-color: #000000;
-}
-
+#layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.anime_all div.desc,
-#layout-main div.desc
+#layout-main div.desc,
+#layout-main div.forum ul.topics li.row,
+*.g_button a,
+#layout-main div.anime_all div.info div.caststaff div h4,
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.tagcloud,
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="password"]:hover,
+input[type="password"]:focus,
+input.text:hover,
+input.text:focus,
+textarea:hover,
+textarea:focus,
+select:hover,
+select:focus,
+#layout-search select:hover,
+#layout-search select:focus,
+#layout-search input.text:hover,
+#layout-search input.text:focus
 {
 	background-color:#000000;
-	border-color:#666666;
 }
 
 div.quotebody
 {
 	background-color:#404040;
-	border:1px solid #666666;
 	color:#ABABAB;
 }
 
 #layout-main div.cmt_entries dl.profile dd strong
 {
 	color:#666666;
-}
-
-#layout-main div.tagcloud
-{
-    background-color:#444444;
 }
 
 #layout-main div.forum .rtop *,
@@ -211,13 +207,8 @@ div.quotebody
 
 #layout-main div.forum ul.topics li.row
 {
-	border-top:1px solid #777777;
+	border-top-color: #777777;
 	border-bottom: none;
-}
-
-#layout-main div.forum ul.topics li.row
-{
-	background-color:#000000;
 }
 
 #layout-main div.forum ul.topics li.g_odd,
@@ -242,18 +233,14 @@ div.quotebody
 	background-color:#666666;
 }
 
-#layout-main div.forum ul.topics li.row:hover,
-#layout-main div.g_timedentry h4
-{
-	background-color:#555555;
-}
-
 #layout-main div.forum div.deleted,
 #layout-main div.forum li.deleted dl.icon
 {
 	opacity:0.6;
 }
 
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.g_timedentry h4,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
@@ -318,13 +305,6 @@ tr + tr th,
 	background-color: #777777;
 }
 
-#layout-main div div.addrelform table tr,
-#layout-main div.animeatt_all div.review > h4
-{
-	background-color: #000000;
-}
-
-
 #layout-main a.filter
 {
 	color:#888888;
@@ -332,23 +312,23 @@ tr + tr th,
 
 #layout-main div.g_msg.error
 {
-	border: 1px solid #6F1212;
+	border-color: #6F1212;
 	background-color: #916A6A;
 }
 #layout-main div.g_msg.warning
 {
-	border: 1px solid #64320C;
+	border-color: #64320C;
 	background-color: #9A6D4C;
 }
 #layout-hint,
 #layout-main div.g_msg.note
 {
-	border: 1px solid #6E6E50;
+	border-color: #6E6E50;
 	background-color: #B3B379;
 }
 #layout-main div.g_msg.success
 {
-	border: 1px solid #066506;
+	border-color: #066506;
 	background-color: #769E76;
 }
 
@@ -447,24 +427,59 @@ tr + tr th,
 	border-bottom-color: #A1AFC9;
 }
 
-#layout-main div.anime_all div.info div.caststaff div h4,
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
-{
-	background-color:#000000;
-}
-
-#layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img,
-span.test,
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
 #layout-search select,
 #layout-search input.text,
-#layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd,
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-tabs ul.main-tabs > li
+{
+	border-color:#777777;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus,
+input[type="password"]:hover,
+input[type="password"]:focus,
+input.text:hover,
+input.text:focus,
+textarea:hover,
+textarea:focus,
+select:hover,
+select:focus,
+#layout-search select:hover,
+#layout-search select:focus,
+#layout-search input.text:hover,
+#layout-search input.text:focus
 {
 	border-color:#666666;
+}
+
+span.test,
+button,
+input[type="button"],
+input[type="submit"],
+*.g_button a,
+div.quotebody,
+#layout-main ul.g_list li,
+#layout-main ul.g_list li.g_odd,
+#layout-main div.anime_all div.desc,
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.anime_all div.info div.image img,
+#layout-main div.avatar img,
+#layout-main div.desc,
+#layout-main div.pagination span a,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tagcloud,
+#layout-nav div.menu_hr
+{
+	border-color:#777777 #666666 #666666 #777777;
 }
 
 #layout-main div.anime_all div.info div.caststaff div table
@@ -474,8 +489,6 @@ span.test,
 
 *.g_button a
 {
-	border-color:#666666;
-	background-color:#000000;
 	color:#728972;
 }
 
@@ -484,3 +497,15 @@ span.test,
 	background-color: #444444;
 	color: #FFFFFF;
 }
+
+input[type="text"],
+input[type="password"],
+input.text,
+textarea,
+select,
+#layout-search select,
+#layout-search input.text
+{
+	background-color:#444444;
+}
+

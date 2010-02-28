@@ -5,18 +5,17 @@ input,
 #layout-search select,
 #layout-search input.text,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.tabbed_pane div.body
+#layout-main div.tabbed_pane div.body,
+input[type="submit"],
+input[type="button"]
 {
-	border:1px solid #666666;
+	border:1px solid;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
 	border-bottom:1px double #000000;
-	border-left:1px solid #666666;
-	border-right:1px solid #666666;
-	border-top:1px solid #666666;
 }
 
 #layout-main div.animeatt_reviews div.review div.text,
@@ -32,5 +31,4 @@ input[type="button"]
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
-	border:1px solid #666666;
 }
