@@ -5,9 +5,9 @@
 @import "../anigoogle/anigoogle-border.css";
 @import "../anigoogle/anigoogle-color.css";
 @import "../anigoogle/anigoogle-search.css";
+@import "aniblackle-border.css";
 @import "aniblackle-color.css";
 @import "aniblackle-icons.css";
-@import "aniblackle-border.css";
 
 #layout-footer:after
 {
