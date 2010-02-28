@@ -222,7 +222,7 @@ input[type="submit"]:hover,
 	color: inherit;
 }
 
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.row:hover
 {
 	background: transparent url(images/stripe-darkgrey.png) repeat left top;
@@ -234,7 +234,6 @@ input[type="submit"]:hover,
 	opacity:0.6;
 }
 
-#layout-main div.forum ul.topics li.row:hover,
 #layout-main div.g_timedentry h4,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
