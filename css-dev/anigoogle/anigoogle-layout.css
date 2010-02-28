@@ -3,6 +3,11 @@ input[size="10"]
 	width:6em;
 }
 
+input[size="50"]
+{
+	width:27.5em;
+}
+
 input[size="60"]
 {
 	width:36em;
