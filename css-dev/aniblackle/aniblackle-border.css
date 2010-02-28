@@ -1,17 +1,3 @@
-button,
-select,
-textarea,
-input,
-#layout-search select,
-#layout-search input.text,
-#layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.tabbed_pane div.body,
-input[type="submit"],
-input[type="button"]
-{
-	border:1px solid;
-}
-
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
@@ -31,4 +17,5 @@ input[type="button"]
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border-radius:5px;
+	border:1px solid;
 }
