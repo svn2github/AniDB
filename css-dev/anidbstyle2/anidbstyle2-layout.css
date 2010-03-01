@@ -12,12 +12,10 @@
 
 #layout-search div.search
 {
-	width:100%;
-	height: 94px;
-	margin-left:0em;
 	margin-top:0;
 }
 
+#layout-search div.search,
 #layout-search
 {
 	height: 94px;
