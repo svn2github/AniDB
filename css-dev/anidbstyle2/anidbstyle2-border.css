@@ -9,13 +9,6 @@
 	border-top:1px double black;
 }
 
-#layout-tabs ul.main-tabs li
-{
-	border-left:1px solid #9A9CA1;
-	border-right:1px solid #9A9CA1;
-	border-top:1px solid #9A9CA1;
-}
-
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover
 {
@@ -28,28 +21,9 @@
 	border-bottom:1px double #C3C5C9;
 }
 
-#layout-main div.pagination span strong,
-#layout-main div.pagination span a,
-#layout-main div.pagination span a:hover
-{
-	border:1px solid #777777;
-}
-
-#layout-main div.tabbed_pane ul.tabs li
-{
-	border:1px solid #B4BAC0;
-}
-
 #layout-nav
 {
 	border:none;
-}
-
-#layout-menu li.sub-menu ul
-{
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
 }
 
 #layout-menu li.sub-menu ul li:first-child:hover
