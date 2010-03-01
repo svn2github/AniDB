@@ -4,7 +4,6 @@ a:active,
 a:link
 {
 	color:#105289;
-	text-decoration:none;
 }
 
 span.link:hover,
@@ -280,7 +279,8 @@ select,
 
 #layout-search div.search,
 #layout-menu li.sub-menu ul li#user-logout a,
-#layout-menu li.sub-menu ul li#user-xauth button
+#layout-menu li.sub-menu ul li#user-xauth button,
+#layout-main div.spoiler input.button
 {
 	background:none;
 }

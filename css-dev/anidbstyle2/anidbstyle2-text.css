@@ -9,3 +9,11 @@
 {
 	cursor:pointer;
 }
+
+span.link,
+a:visited,
+a:active,
+a:link
+{
+	text-decoration:none;
+}
