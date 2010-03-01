@@ -1,12 +1,7 @@
-#layout-main table.eplist tr.files.episode td
-{
-	border-bottom:1px solid gray;
-}
-
 #layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top:1px double black;
+	border-top:1px double #34394D;
 }
 
 #layout-tabs ul.main-tabs li.selected,
