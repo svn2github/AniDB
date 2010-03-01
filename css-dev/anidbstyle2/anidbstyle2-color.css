@@ -48,7 +48,8 @@ table,
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4,
-#layout-main div.anime_all div.info div.caststaff div table
+#layout-main div.anime_all div.info div.caststaff div table,
+#layout-main div.forum div.events h2
 {
 	border-top-color:#DDDDDD;
 }
@@ -164,7 +165,7 @@ input[type="submit"]:hover,
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	background-color: #717B85;
+	background-color: #616E7A;
 }
 
 #layout-main div.mylist_all td+td,
