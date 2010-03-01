@@ -22,7 +22,11 @@ input[type="submit"],
 input[type="password"],
 #layout-nav input.submit,
 #layout-main ul.g_list li,
-#layout-main ul.g_list li.g_odd
+#layout-main ul.g_list li.g_odd,
+#layout-main div.pagination span a,
+#layout-main div.pagination span strong,
+#layout-main div.forum div.search form input,
+#layout-main div.forum div.search form select
 {
 	padding:2px 4px;
 }
@@ -372,12 +376,6 @@ h4,
 	margin-top: 0em;
 }
 
-#layout-main div.pagination span a,
-#layout-main div.pagination span strong
-{
-	padding:2px 4px;
-}
-
 *.g_button
 {
 	display: inline-block;
@@ -425,7 +423,8 @@ h4,
 	padding:1px 8px 0 7px;
 }
 
-button+button
+#layout-main div.forum div.search form input + select,
+button + button
 {
 	margin-left: 0.5em;
 }
