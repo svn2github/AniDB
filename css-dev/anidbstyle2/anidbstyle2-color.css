@@ -23,18 +23,11 @@ a:hover
 	background-color:#D3D5D9;
 }
 
-#layout-tabs ul.main-tabs li
-{
-	border-left-color: #9A9CA1;
-	border-right-color: #9A9CA1;
-	border-top-color: #9A9CA1;
-}
-
 #layout-content
 {
-	border-bottom-color:#9A9CA1;
-	border-left-color:#9A9CA1;
-	border-top-color:#9A9CA1;
+	border-bottom-color:#8E9094;
+	border-left-color:#A2A2A3;
+	border-top-color:#A2A2A3;
 }
 
 tr + tr td,
@@ -293,12 +286,7 @@ select,
 	background: url(images/menuback.png) repeat transparent;
 }
 
-#layout-tabs ul.main-tabs li.selected a,
-#layout-tabs ul.main-tabs li:hover a
-{
-	color:#000000;
-}
-
+/*out logo in the header*/
 #layout-search
 {
 	background:url("images/logo.png") no-repeat scroll left top transparent;
@@ -350,7 +338,10 @@ select,
 #layout-search select,
 #layout-search input.text,
 #layout-main div.format-buttons *.f_button:hover,
-#layout-main div.format-buttons *.f_button.selected
+#layout-main div.format-buttons *.f_button.selected,
+#layout-main div.pagination span strong,
+#layout-main div.pagination span a,
+#layout-main div.pagination span a:hover
 {
 	border-color:#34394D;
 }
@@ -364,15 +355,22 @@ select,
 #layout-main div.anime_all div.info div.caststaff div.cast,
 #layout-main div.anime_all div.info div.caststaff div.staff,
 #layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
+#layout-main div.anime_all div.info div.image img,
 {
-	border-color:#B4BAC0 #9A9CA1 #9A9CA1 #B4BAC0;
+	border-color:#A2A2A3 #8E9094 #8E9094 #A2A2A3;
+}
+
+/*tab color - depends on the multicolored border, but should only contain 1 color as it's sitting on top*/
+#layout-tabs ul.main-tabs li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border-color: #A2A2A3;
 }
 
 /*menu border - special because of background color*/
 #layout-menu li.sub-menu ul
 {
-	border-color:#EEEEEE #9A9CA1 #9A9CA1 #EEEEEE;
+	border-color:#EEEEEE #8E9094 #8E9094 #EEEEEE;
 }
 
 /*menu hover effect*/
@@ -382,7 +380,7 @@ select,
 	background: transparent url(images/stripe-darkgrey.png) repeat left top;
 }
 
-/*epbar*/
+/*anime/group page progress bar*/
 #layout-main div.anime_all div.groups td.epbar div.done,
 #layout-main div.group_all div.group_released td.epbar div.done
 {
@@ -417,14 +415,9 @@ select,
 	border-bottom-color:#7EF27E;
 }
 
-#layout-main div.pagination span strong,
-#layout-main div.pagination span a,
-#layout-main div.pagination span a:hover
+/*link color override for tabs*/
+#layout-tabs ul.main-tabs li.selected a,
+#layout-tabs ul.main-tabs li:hover a
 {
-	border-color: #777777;
-}
-
-#layout-main div.tabbed_pane ul.tabs li
-{
-	border-color: #B4BAC0;
+	color:#000000;
 }
