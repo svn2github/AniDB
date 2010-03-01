@@ -90,8 +90,6 @@ th,
 #layout-search input,
 #user-xname input,
 #user-xpass input,
-#user-xname input,
-#user-xpass input,
 span.test,
 button,
 #layout-main ul.g_list li,
@@ -248,8 +246,6 @@ th,
 #layout-search input,
 #user-xname input,
 #user-xpass input,
-#user-xname input,
-#user-xpass input,
 .format-buttons select,
 #layout-menu li.sub-menu ul li#user-xpass:hover,
 #layout-menu li.sub-menu ul li#user-xname:hover,
@@ -272,17 +268,6 @@ select,
 #layout-main div.forum div.threads div.inner 
 {
 	background-color:#34394D;
-}
-
-#layout-menu li.sub-menu ul
-{
-	background: url(images/menuback.png) repeat transparent;
-}
-
-/*out logo in the header*/
-#layout-search
-{
-	background:url("images/logo.png") no-repeat scroll left top transparent;
 }
 
 #layout-main div.profile_all div.default_languages table tr,
@@ -372,13 +357,6 @@ select,
 #layout-main div.userpage_all > div.g_section > h4
 {
 	border-color:#EEEEEE #8E8E8E #8E8E8E #EEEEEE;
-}
-
-/*menu hover effect*/
-#layout-menu li.sub-menu ul li:hover,
-#layout-menu li.sub-menu ul li:active
-{
-	background: transparent url(images/stripe-darkgrey.png) repeat left top;
 }
 
 /*anime/group page progress bar*/

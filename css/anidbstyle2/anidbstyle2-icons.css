@@ -17,3 +17,19 @@
 {
 	background:url("../icons/orange/button_profile.gif") no-repeat scroll 0 0 transparent;
 }
+
+#layout-menu li.sub-menu ul
+{
+	background:url("images/menuback.png") repeat transparent;
+}
+
+#layout-search
+{
+	background:url("images/logo.png") no-repeat scroll left top transparent;
+}
+
+#layout-menu li.sub-menu ul li:hover,
+#layout-menu li.sub-menu ul li:active
+{
+	background:url("images/stripe-darkgrey.png") repeat left top transparent;
+}
