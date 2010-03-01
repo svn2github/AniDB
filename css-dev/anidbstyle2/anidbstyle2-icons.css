@@ -31,5 +31,5 @@
 #layout-menu li.sub-menu ul li:hover,
 #layout-menu li.sub-menu ul li:active
 {
-	background:url("images/stripe-darkgrey.png") repeat left top transparent;
+	background:url("images/menuhover.png") repeat left top transparent;
 }
