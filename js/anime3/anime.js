@@ -1435,8 +1435,11 @@ function parseEpisodeData(xmldoc) {
 			if (!episode) continue;
 			var eprow = document.getElementById('eid_'+episode.id);
 			if (!eprow) { errorAlert('parseEpisodeData','no episode row for eid: '+episode.id); continue; } // no episode row for some reason
-			var a = eprow.getElementsByTagName('a')[0];
-			if (a) a.onclick = foldEp;
+			var a = getElementsByClassName(eprow.getElementsByTagName('a'), "expand", true);
+			if (a) {
+				a = a[0];
+				a.onclick = foldEp;
+			}
 			if (loadExpand) { // Normal behaviour
 				var eprowid = eprow.rowIndex + 1;
 				var tbRow = document.getElementById('eid_'+eid+'_ftHolder');
