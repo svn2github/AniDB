@@ -39,17 +39,9 @@ tr + tr th,
 	border-top-color:#999999;
 }
 
-#layout-main > h1,
 table,
-#layout-main div.animeatt_all div.review > h4,
-#layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4,
-#layout-main > h1,
-#layout-main div.g_timedentry h4,
-#layout-main div.animeatt_all div.review > h4,
-#layout-main div.userpage_all > div.g_section > h4,
-#layout-main div.anime_all div.info div.caststaff div table,
-#layout-main div.forum div.events h2
+#layout-main div.anime_all div.info div.caststaff div table
 {
 	border-top-color:#DDDDDD;
 }
@@ -368,8 +360,14 @@ select,
 	border-color: #A2A2A3;
 }
 
-/*menu border - special because of background color*/
-#layout-menu li.sub-menu ul
+/*border color - special because of dark background color*/
+#layout-menu li.sub-menu ul,
+#layout-main > h1,
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.news h4,
+#layout-main div.g_timedentry h4,
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.userpage_all > div.g_section > h4
 {
 	border-color:#EEEEEE #8E9094 #8E9094 #EEEEEE;
 }
@@ -421,4 +419,9 @@ select,
 #layout-tabs ul.main-tabs li:hover a
 {
 	color:#000000;
+}
+
+#layout-main div.forum div.events h2
+{
+	color:#666666;
 }
