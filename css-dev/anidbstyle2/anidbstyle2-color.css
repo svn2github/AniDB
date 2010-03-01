@@ -76,7 +76,9 @@ input[type="submit"]:hover,
 #layout-main > h1,
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4,
-#layout-main div.userpage_all > div.g_section > h4
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
 {
 	color: #DDDDDD;
 }
@@ -271,7 +273,10 @@ select,
 #layout-search select,
 #layout-search input.text,
 #layout-menu li.sub-menu ul,
-#layout-main div.pagination span a
+#layout-main div.pagination span a,
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner 
 {
 	background-color:#34394D;
 }
