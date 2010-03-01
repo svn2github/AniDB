@@ -1,3 +1,11 @@
+#layout-search div.search,
+#layout-menu li.sub-menu ul li#user-logout a,
+#layout-menu li.sub-menu ul li#user-xauth button,
+#layout-main div.spoiler input.button
+{
+	background:none;
+}
+
 span.link,
 a:visited,
 a:active,
@@ -275,14 +283,6 @@ select,
 #layout-main div.tabbed_pane div.body div.pane ul *.g_odd
 {
 	background-color:inherit;
-}
-
-#layout-search div.search,
-#layout-menu li.sub-menu ul li#user-logout a,
-#layout-menu li.sub-menu ul li#user-xauth button,
-#layout-main div.spoiler input.button
-{
-	background:none;
 }
 
 /*menu alert ! icon color*/
