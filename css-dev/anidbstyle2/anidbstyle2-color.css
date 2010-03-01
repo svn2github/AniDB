@@ -222,15 +222,19 @@ html,
 #layout-main div.forum ul.topics li.row.g_odd,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd,
 #layout-main div.format-buttons input,
-#layout-main div.pagination span a,
+#layout-main div.pagination span a
+{
+	background-color:#C3C5C9;
+}
+
 #layout-main div.forum ul.topics li.row,
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover,
 #layout-content,
-body.nonav
+body.nonav,
 tr
 {
-	background-color:#C3C5C9;
+	background-color:#CFD1D4;
 }
 
 #layout-main div.forum ul.topics li.row:hover,
@@ -319,7 +323,7 @@ select,
 #menu-account li.alert span:before,
 #menu-account li.alert span:after
 {
-	color: red;
+	color: #B32947;
 }
 
 /*special behaviour for BB code layout buttons as those use black lettered images*/
