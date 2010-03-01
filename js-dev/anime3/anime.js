@@ -1435,7 +1435,7 @@ function parseEpisodeData(xmldoc) {
 			if (!episode) continue;
 			var eprow = document.getElementById('eid_'+episode.id);
 			if (!eprow) { errorAlert('parseEpisodeData','no episode row for eid: '+episode.id); continue; } // no episode row for some reason
-			var a = eprow.getElementsByTagName('a')[0];
+			var a = getElementsByClassName(eprow.getElementsByTagName("td"), "expand", true)[0].getElementsByTagName('a')[0];
 			if (a) a.onclick = foldEp;
 			if (loadExpand) { // Normal behaviour
 				var eprowid = eprow.rowIndex + 1;
