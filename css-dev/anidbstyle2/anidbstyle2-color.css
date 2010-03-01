@@ -145,6 +145,7 @@ select,
 
 button:hover,
 span.test:hover,
+*.g_button a:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 #layout-main ul.g_list li:hover a,
@@ -156,16 +157,11 @@ input[type="submit"]:hover,
 #layout-menu li.user-xauth input[type="button"],
 #layout-search input.submit:hover,
 #layout-main div.spoiler input.button:hover,
-*.g_button a:hover,
-#layout-main tr.header th.sortable:hover a
+#layout-main tr.header th.sortable:hover a,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong
 {
 	background-color: #717B85;
-}
-
-#layout-main div.pagination span a
-{
-	background-color:#ECEDEE;
-	color:#5C758C;
 }
 
 #layout-main div.mylist_all td+td,
@@ -214,8 +210,7 @@ html,
 #layout-main div.forum div.comment .rtop *,
 #layout-main div.forum ul.topics li.row.g_odd,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd,
-#layout-main div.format-buttons input,
-#layout-main div.pagination span a
+#layout-main div.format-buttons input
 {
 	background-color:#C3C5C9;
 }
@@ -274,9 +269,8 @@ textarea,
 select,
 #layout-search select,
 #layout-search input.text,
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong,
-#layout-menu li.sub-menu ul
+#layout-menu li.sub-menu ul,
+#layout-main div.pagination span a
 {
 	background-color:#34394D;
 }
