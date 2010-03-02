@@ -1,105 +1,58 @@
 table
 {
-	border-collapse:separate;
-	border-top:1px solid;
-}
-
-#layout-main div.ep_all div.info table,
-#layout-main div.hint2_all table,
-#layout-main div.anime_all div.info div.data table,
-#layout-main div.song_all div.info table
-{
-	border-top:none;
+	border-collapse: separate;
+	border-top: 1px solid;
 }
 
 #layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
-	border-bottom:1px double;
-}
-
-#layout-main div.pagination span a,
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong,
-#layout-main div.tagcloud,
-#layout-main ul.g_list li,
-#layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li,
-#layout-search select,
-#layout-search input.text,
-#layout-menu > li ul,
-#layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
-{
-	border:1px solid;
+	border-bottom: 1px double;
 }
 
 #layout-tabs ul.main-tabs > li
 {
-	border-bottom:none;
-}
-
-#layout-main > h1,
-#layout-nav div.menu_hr
-{
-	border-top:1px solid;
-}
-
-#layout-main div.g_timedentry div.body,
-#layout-main div.animeatt_reviews div.review div.text,
-#layout-main div.tabbed_pane div.body,
-#layout-main div.tabbed_pane ul.tabs li
-{
-	border:1px solid;
-}
-
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected
-{
-	border-bottom:1px double #ECF4FD;
+	border-bottom: none;
 }
 
 #layout-main div.tabbed_pane_cfg div.body,
 #layout-main div.tabbed_pane_cfg ul.tabs li
 {
-	border:1px solid #ACC3DF;
+	border: 1px solid #ACC3DF;
 }
 
 #layout-main div.tabbed_pane_cfg ul.tabs li:hover,
-#layout-main div.tabbed_pane_cfg ul.tabs li.selected
+#layout-main div.tabbed_pane_cfg ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom:1px double #ECF4FD;
+	border-bottom: 1px double #ECF4FD;
 }
 
 tr + tr td,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li
 {
-	border-top:1px solid #C9D7F1;
+	border-top: 1px solid #C9D7F1;
 }
 
 tr + tr th,
 #layout-main div.g_definitionlist tr th
 {
-	border-top:1px solid #E8F0FF;
-}
-
-#layout-main div.g_definitionlist tr:first-child th
-{
-	border-top:none;
+	border-top: 1px solid #E8F0FF;
 }
 
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4
 {
-	border-top:1px solid blue;
+	border-top: 1px solid blue;
 }
 
 #layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
-	border-top:1px double #C9D7F1;
+	border-top: 1px double #C9D7F1;
 }
 
 #layout-main div.mylist_all td+td,
@@ -109,15 +62,15 @@ tr + tr th,
 #layout-main div.lexicon_all table.animelist tr td+td,
 #layout-main div.mynotifies_all tr td+td
 {
-	border-left:1px solid #C9D7F1;
+	border-left: 1px solid #C9D7F1;
 }
 
 #layout-main div.userpage_all div.blog div.g_timedentry h4
 {
-	-moz-border-radius:0 10px 0 0;
-	-webkit-border-radius:0 10px 0 0;
-	border-radius:0 10px 0 0;
-	border-top:none;
+	-moz-border-radius: 0 10px 0 0;
+	-webkit-border-radius: 0 10px 0 0;
+	border-radius: 0 10px 0 0;
+	border-top: none;
 }
 
 #layout-main div.anime_all div.info div.caststaff div h4,
@@ -125,9 +78,9 @@ tr + tr th,
 #layout-main div.tabbed_pane ul.tabs > li,
 #layout-main div.main_all div.rightbar h4
 {
-	-moz-border-radius:5px 5px 0 0;
-	-webkit-border-radius:5px 5px 0 0;
-	border-radius:5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
 }
 
 #layout-main div.anime_all div.info div.caststaff div.cast,
@@ -139,18 +92,39 @@ input.text,
 textarea,
 select,
 #layout-search select,
-#layout-search input.text
+#layout-search input.text,
+#layout-main div.g_timedentry div.body,
+#layout-main div.animeatt_reviews div.review div.text,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main div.pagination span a,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong,
+#layout-main div.tagcloud,
+#layout-main ul.g_list li,
+#layout-tabs ul.main-tabs > li,
+#layout-menu > li ul,
+#layout-main div.avatar img,
+#layout-main div.anime_all div.info div.image img,
+,
 {
-	border:1px solid;
+	border: 1px solid;
 }
 
-#layout-main div.anime_all div.info div.caststaff div tr.more td
+#layout-main div.anime_all div.info div.caststaff div tr.more td,
+#layout-main div.g_definitionlist tr:first-child th,
+#layout-main div.ep_all div.info table,
+#layout-main div.hint2_all table,
+#layout-main div.anime_all div.info div.data table,
+#layout-main div.song_all div.info table
 {
 	border-top: none;
 }
 
 #layout-main div.userpage_all div.blog div.g_timedentry span.stamp,
-#layout-main div.anime_all div.info div.caststaff div table
+#layout-main div.anime_all div.info div.caststaff div table,
+#layout-main > h1,
+#layout-nav div.menu_hr
 {
 	border-top: 1px solid;
 }
@@ -178,7 +152,6 @@ div.spoiler,
 #layout-search input.submit,
 span.test,
 button,
-#layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
 #layout-search select,
 #layout-main div.format-buttons input,
@@ -188,12 +161,10 @@ input[type="password"],
 input.text,
 textarea,
 select,
-#layout-search select,
-#layout-search input.text
 {
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 #layout-main .block .g_definitionlist table,
@@ -201,5 +172,5 @@ table table,
 img,
 a
 {
-	border:none;
+	border: none;
 }

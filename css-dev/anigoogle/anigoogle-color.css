@@ -1,106 +1,75 @@
-th
-{
-	background-color:#C3D9FF;
-}
-
 span.link,
 a,
 th a
 {
-	color:#105289;
+	color: #105289;
 }
 
 #layout-main a.filter
 {
-	color:darkblue;
-}
-
-table
-{
-	border-top-color:blue;
+	color: darkblue;
 }
 
 #layout-search
 {
-	background-image:url(images/logo_small.gif);
-	background-repeat:no-repeat;
+	background-image: url(images/logo_small.gif);
+	background-repeat: no-repeat;
 }
 
 #layout-main > h1
 {
-	background-color:#ECF4FD;
-	border-top-color:blue;
+	background-color: #ECF4FD;
+	border-top-color: blue;
 }
 
 #layout-menu > li ul
 {
-	background-color:#FFFFFF;
-	border-color:#000000;
+	background-color: #FFFFFF;
+	border-color: #000000;
 }
 
 #layout-main div.pagination span a
 {
-	background-color:#FFFFFF;
-	color:#000000;
-	border-color:#B4BAC0;
+	background-color: #FFFFFF;
+	color: #000000;
+	border-color: #B4BAC0;
 }
 
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	background-color:#E5ECF9;
-	color:#000000;
-	border-color:#4692BF;
+	background-color: #E5ECF9;
+	color: #000000;
+	border-color: #4692BF;
 }
 
 #layout-nav div.menu_hr
 {
-	border-top-color:#c9d7f1;
+	border-top-color: #c9d7f1;
 }
 
 #layout-main table tr.header
 {
-	background-color:#c3d9ff;
+	background-color: #c3d9ff;
 }
 
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *
 {
-	background-color:#CADCEB;
-}
-
-#layout-main div.tagcloud,
-#layout-main div.desc
-{
-	background-color:#ECF4FD;
-}
-
-#layout-main div.profile_all div.tabbed_pane div.general table tr
-{
-	background-color:inherit;
+	background-color: #CADCEB;
 }
 
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.g_timedentry div.body
 {
-	background-color:#F4F9FD;
-}
-
-html,
-tr,
-#layout-main div.forum ul.topics li.row,
-#layout-tabs ul.main-tabs > li.selected,
-#layout-tabs ul.main-tabs > li:hover,
-#layout-main div.tabbed_pane ul.tabs li
-{
-	background-color:#FFFFFF;
+	background-color: #F4F9FD;
 }
 
 #layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
-	border-bottom-color:#FFFFFF;
+	border-bottom-color: #FFFFFF;
 }
 
 span.link:hover,
@@ -108,9 +77,54 @@ a:hover,
 #layout-main a.filter:hover,
 #layout-main div.pagination span a:hover
 {
-	color:#AA0000;
+	color: #AA0000;
 }
 
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp a
+{
+	color: #999999;
+}
+
+#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+{
+	border-top-color: #C9D7F1;
+	color: #999999;
+}
+
+#layout-main div.anime_all div.data table.relationlist tr,
+#layout-main div.profile_all div.tabbed_pane div.general table tr
+{
+	background-color: inherit;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done,
+#layout-main div.group_all div.group_released td.epbar div.done
+{
+	background-color: #6193FF;
+	border-bottom-color: #6193FF;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.done.mylist,
+#layout-main div.group_all div.group_released td.epbar div.done.mylist
+{
+	border-bottom-color: #6CF06C;
+}
+
+#layout-main div.anime_all div.groups td.epbar div.notdone,
+#layout-main div.group_all div.group_released td.epbar div.notdone
+{
+	background-color: #C3D8FF;
+	border-bottom-color: #C3D8FF;
+}
+
+#layout-main tr.header th.sortable:hover
+{
+	background-color: #D5E2F7;
+	color: #000000;
+}
+
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
 tr.g_odd,
 li.g_odd,
 span.g_odd,
@@ -137,78 +151,40 @@ span.g_odd,
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.profile_all div.default_languages table tr,
-#layout-main div.userpage_all > div.g_section > h4
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-main div.tagcloud,
+#layout-main div.desc
 {
-	background-color:#ECF4FD;
+	background-color: #ECF4FD;
 }
 
-#layout-main div.userpage_all div.blog div.g_timedentry span.stamp a
+#layout-main div.anime_all div.info div.caststaff div table,
+table
 {
-	color:#999999;
+	border-top-color: blue;
 }
 
-#layout-main div.userpage_all div.blog div.g_timedentry span.stamp
+#layout-main div.anime_all div.info div.caststaff div h4,
+th
 {
-	border-top-color:#C9D7F1;
-	color:#999999;
+	background-color: #C3D9FF;
 }
 
-#layout-main div.anime_all div.data table.relationlist tr
+*.g_button a,
+html,
+tr,
+#layout-main div.forum ul.topics li.row,
+#layout-tabs ul.main-tabs > li.selected,
+#layout-tabs ul.main-tabs > li:hover,
+#layout-main div.tabbed_pane ul.tabs li
 {
-	background-color: inherit;
-}
-
-#layout-main div.anime_all div.groups td.epbar div.done,
-#layout-main div.group_all div.group_released td.epbar div.done
-{
-	background-color: #6193FF;
-	border-bottom-color: #6193FF;
-}
-
-#layout-main div.anime_all div.groups td.epbar div.done.mylist,
-#layout-main div.group_all div.group_released td.epbar div.done.mylist
-{
-	border-bottom-color: #6CF06C;
-}
-
-#layout-main div.anime_all div.groups td.epbar div.notdone,
-#layout-main div.group_all div.group_released td.epbar div.notdone
-{
-	background-color:#C3D8FF;
-	border-bottom-color: #C3D8FF;
-}
-
-#layout-main tr.header th.sortable:hover
-{
-	background-color: #D5E2F7;
-	color: #000000;
-}
-
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
-{
-	background-color:#ECF4FD;
-}
-
-#layout-main div.anime_all div.info div.caststaff div table
-{
-	border-top-color:blue;
-}
-
-#layout-main div.anime_all div.info div.caststaff div h4
-{
-	background-color:#C3D9FF;
-}
-
-*.g_button a
-{
-	background-color:#FFFFFF;
+	background-color: #FFFFFF;
 }
 
 *.g_button a:hover
 {
-	background-color:#ECF4FD;
-	color:#AA0000;
+	background-color: #ECF4FD;
+	color: #AA0000;
 }
 
 #layout-main div.tabbed_pane ul.tabs li,
@@ -221,7 +197,7 @@ select,
 #layout-search select,
 #layout-search input.text
 {
-	border-color:#C9D7F1;
+	border-color: #C9D7F1;
 }
 
 #layout-main div.g_timedentry div.body,
@@ -238,5 +214,5 @@ select,
 #layout-main div.anime_all div.info div.image img,
 span.test
 {
-	border-color:#C9D7F1 #97AACC #97AACC #C9D7F1;
+	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }

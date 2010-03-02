@@ -1,16 +1,16 @@
 input[size="10"]
 {
-	width:6em;
+	width: 6em;
 }
 
 input[size="50"]
 {
-	width:27.5em;
+	width: 27.5em;
 }
 
 input[size="60"]
 {
-	width:36em;
+	width: 36em;
 }
 
 select,
@@ -28,319 +28,308 @@ input[type="password"],
 #layout-main div.forum div.search form input,
 #layout-main div.forum div.search form select
 {
-	padding:2px 4px;
+	padding: 2px 4px;
 }
 
 #layout-nav
 {
-	display:block;
-	height:6em;
+	display: block;
+	height: 6em;
 }
 
 #layout-main
 {
-	margin-left:1em;
-	margin-right:1em;
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 #layout-menu
 {
-	display:block;
-	left:0;
-	position:absolute;
-	top:0;
-	z-index:5;
+	display: block;
+	left: 0;
+	position: absolute;
+	top: 0;
+	z-index: 5;
 }
 
 #layout-search
 {
-	display:block;
-	height:53px;
-	left:0;
-	margin-left:1em;
-	position:absolute;
-	top:3em;
-	width:60em;
+	display: block;
+	height: 53px;
+	left: 0;
+	margin-left: 1em;
+	position: absolute;
+	top: 3em;
+	width: 60em;
 }
 
 #layout-search p,
 #layout-search form
 {
-	margin:-.5em 0;
-	padding:0;
+	margin: -.5em 0;
+	padding: 0;
 }
 
 #layout-search input.text
 {
-	float:left;
-	width:200px;
-	margin:0;
-	padding:4px;
+	float: left;
+	width: 200px;
+	margin: 0;
+	padding: 4px;
 }
 
 #layout-search input.submit
 {
-	float:right;
-	width:80px;
-	margin:0;
+	float: right;
+	width: 80px;
+	margin: 0;
 }
 
 #layout-main > h1
 {
-	display:block;
-	text-align:left;
-	padding:4px;
+	display: block;
+	text-align: left;
+	padding: 4px;
 }
 
 #layout-footer p
 {
-	margin-bottom:0;
+	margin-bottom: 0;
 }
 
 #layout-footer:after
 {
-	content:"design by hrm & deridiot inspired by google";
+	content: "design by hrm & deridiot inspired by google";
 }
 
 #layout-main h1.main,
 #layout-main div.main_all
 {
-	display:none;
+	display: none;
 }
 
 #layout-menu > li ul
 {
-	display:none;
-	position:absolute;
-	z-index:5;
-	margin-left:-.7em;
-	padding:0;
+	display: none;
+	position: absolute;
+	z-index: 5;
+	margin-left: -.7em;
+	padding: 0;
 }
 
 #layout-menu span.tab
 {
-	display:block;
-	position:relative;
+	display: block;
+	position: relative;
 }
 
 #layout-menu > li
 {
-	display:block;
-	float:left;
-	padding-left:.7em;
-	padding-right:.7em;
+	display: block;
+	float: left;
+	padding-left: .7em;
+	padding-right: .7em;
 }
 
 #layout-nav div.menu_hr
 {
-	display:block;
-	margin-top:2.5em;
+	display: block;
+	margin-top: 2.5em;
 }
 
 #layout-search div.search
 {
-	margin-left:16em;
-	margin-top:1.3em;
-	width:100%;
+	margin-left: 16em;
+	margin-top: 1.3em;
+	width: 100%;
 }
 
 #layout-search div.search form
 {
-	text-align:left;
+	text-align: left;
 }
 
 #layout-search input.text,
 #layout-search input.submit
 {
-	float:none;
+	float: none;
 }
 
 #layout-nav input,
 #layout-nav button
 {
-	padding-left:0;
+	padding-left: 0;
 }
 
 #layout-search select
 {
-	padding:4px 4px 3px;
+	padding: 4px 4px 3px;
 }
 
 #layout-nav div.search_main input.text,
 #layout-nav div.search_main input.submit
 {
-	float:left;
+	float: left;
 }
 
 #layout-nav div.search_main input,
 #layout-nav div.search_main button
 {
-	padding-left:5em;
-	width:20em;
+	padding-left: 5em;
+	width: 20em;
 }
 
 #layout-tabs
 {
-	display:block;
-	position:absolute;
-	right:0;
-	top:0;
-	margin:0;
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 0;
 }
 
 #layout-tabs ul li
 {
-	display:inline;
-	padding:4px 6px 3px;
-	line-height:15px;
-
+	display: inline;
+	padding: 4px 6px 3px;
+	line-height: 15px;
 }
 
 #layout-tabs ul
 {
-	display:block;
-	margin-bottom:.5em;
-	margin-top:.5em;
-	text-align:right;
+	display: block;
+	margin-bottom: .5em;
+	margin-top: .5em;
+	text-align: right;
 }
 
 #layout-menu li.sub-menu span.tab
 {
-	padding-bottom:.5em;
-	padding-top:.5em;
+	padding-bottom: .5em;
+	padding-top: .5em;
 }
 
 #layout-footer,
 #layout-main div.tabbed_pane ul.tabs
 {
-	text-align:center;
+	text-align: center;
 }
 
 #layout-content div.dbstats_all
 {
-	padding-left:9.6em;
-	padding-right:8em;
+	padding-left: 9.6em;
+	padding-right: 8em;
 }
 
 h4,
 #layout-main div.g_timedentry h4
 {
-	padding:.3em;
+	padding: .3em;
 }
 
 #layout-main div.tabbed_pane ul.tabs
 {
-	text-align:left;
-	margin:1px 1px 1px 6px;
+	text-align: left;
+	margin: 1px 1px 1px 6px;
 }
 
 #layout-main div.desc
 {
-	border:1px solid;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	padding:4px;
+	border: 1px solid;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 4px;
 }
 
 #layout-main div.tagcloud,
 #layout-main div.catcloud
 {
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-}
-
-#layout-main ul.g_list li
-{
-	display:inline-block;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
 }
 
 #layout-main ul.g_list + ul.g_list
 {
-	margin-top:-1em;
+	margin-top: -1em;
 }
 
 #layout-main .latest_all .g_list.filter
 {
-	margin-top:0;
+	margin-top: 0;
 }
 
 #layout-main .latest_all .g_list.filter li,
 #layout-main ul.g_list li
 {
-	margin-top:.5em;
-	margin-right:.3em;
+	margin-top: .5em;
+	margin-right: .3em;
 }
 
 #layout-hint
 {
-	position:relative;
+	position: relative;
 }
 
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-	margin:1.2em .3em;
+	margin: 1.2em .3em;
 }
 
 #layout-hint + #layout-nav #layout-menu
 {
-	margin-top:1.1em;
+	margin-top: 1.1em;
 }
 
 #layout-hint + #layout-nav #layout-search
 {
-	top:4.5em;
-}
-
-#layout-menu li.sub-menu ul li a
-{
-	display:block;
+	top: 4.5em;
 }
 
 #layout-main .g_definitionlist
 {
-	margin:2px 0 0;
+	margin: 2px 0 0;
 }
 
 #layout-main .g_definitionlist table tr td,
 #layout-menu li.sub-menu ul li,
 #layout-main div.g_definitionlist tr th
 {
-	padding:2px 8px;
+	padding: 2px 8px;
 }
 
 #layout-main div.animeatt_reviews div.review div.text
 {
-	margin-top:1em;
-	padding:8px;
+	margin-top: 1em;
+	padding: 8px;
 }
 
 #layout-main div.g_timedentry div.avatar
 {
-	margin:1.5em 1em 1em;
+	margin: 1.5em 1em 1em;
 }
 
 #layout-main div.g_timedentry div.body
 {
-	margin-top:.5em;
-	padding:8px;
+	margin-top: .5em;
+	padding: 8px;
 }
 
 #layout-tabs li.news,
 #layout-menu li.sub-menu ul li.alert span a
 {
-	display:inline;
+	display: inline;
 }
 
 #layout-main div.main_all div.rightbar li span
 {
-	position:absolute;
+	position: absolute;
 }
 
 #layout-main div.main_all div.rightbar li a
 {
-	display:table;
+	display: table;
 	margin-left: 4em;
 }
 
@@ -352,13 +341,13 @@ h4,
 
 .g_msg
 {
-	padding:0.5em 1em;
+	padding: 0.5em 1em;
 }
 
 #layout-main tr.header th,
 #layout-main tr.header th.sortable a
 {
-	padding:5px 0px;
+	padding: 5px 0px;
 }
 
 #layout-main tr.header th.sortable
@@ -366,7 +355,8 @@ h4,
 	padding: 0px;
 }
 
-#layout-main tr.header th.sortable a
+#layout-main tr.header th.sortable a,
+#layout-menu li.sub-menu ul li a
 {
 	display: block;
 }
@@ -376,25 +366,26 @@ h4,
 	margin-top: 0em;
 }
 
-*.g_button
+*.g_button,
+#layout-main ul.g_list li
 {
 	display: inline-block;
 }
 
 #layout-main div.filter_menu span.actions.old input
 {
-	margin-top:3px;
+	margin-top: 3px;
 }
 
 #layout-main div.news_all div.news p.comment,
 #layout-main div.main_all div.news p.comment
 {
-	margin:-2.3em 0 0;
+	margin: -2.3em 0 0;
 }
 
 #layout-main div.news h4
 {
-	padding:6px;
+	padding: 6px;
 }
 
 #layout-main div.avatar img,
@@ -403,24 +394,24 @@ h4,
 #layout-main .g_definitionlist,
 #layout-main div.g_content
 {
-	padding:1px;
+	padding: 1px;
 }
 
 #layout-main .block .g_definitionlist table
 {
-	margin:0;
+	margin: 0;
 }
 
 #layout-main div.g_menu.filter_menu div.settings input[type="text"]
 {
-	padding:2px;
-	width:12em;
+	padding: 2px;
+	width: 12em;
 	margin-bottom: 2px;
 }
 
 #layout-main div.profile_all div.pane div.permissions a.i_inline
 {
-	padding:1px 8px 0 7px;
+	padding: 1px 8px 0 7px;
 }
 
 #layout-main div.forum div.search form input + select,
