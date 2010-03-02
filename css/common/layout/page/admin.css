@@ -36,9 +36,7 @@
 #layout-main div.admin_all div.creatorrelation dl
 {
 	display:block;
-	height:1%;
-	margin:0;
-	overflow:hidden;
+	margin:0 0 0.2em;
 }
 
 #layout-main div.admin_all div.creatoranimerelation dl dt,
