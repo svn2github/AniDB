@@ -1,119 +1,109 @@
 #layout-content,
 #layout-nav
 {
-	margin-left:13.2em;
-	padding-left:1em;
+	margin-left: 13.2em;
+	padding-left: 1em;
 }
 
 #layout-content
 {
-	margin-top:-0.9em;
-	padding-top:1em;
-}
-
-#layout-menu,
-#layout-nav
-{
-	margin-top:0;
+	margin-top: -0.9em;
+	padding-top: 1em;
 }
 
 #layout-main
 {
-	margin-left:0;
-	min-height:60em;
+	margin-left: 0;
+	min-height: 60em;
 }
 
 #layout-nav
 {
-	padding-bottom:2em;
-}
-
-#layout-main h1.main,
-#layout-main div.main_all
-{
-	display:block;
+	padding-bottom: 2em;
 }
 
 #layout-menu
 {
-	display:block;
-	margin-left:-13em;
-	padding-left:1em;
-	padding-right:1em;
-	padding-top:1em;
-	position:relative;
-	width:10em;
+	display: block;
+	margin-left: -13em;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 1em;
+	position: relative;
+	width: 10em;
 }
 
 #layout-menu > li
 {
-	display:block;
-	float:none;
-	padding-left:0;
-	padding-right:0;
+	display: block;
+	float: none;
+	padding-left: 0;
+	padding-right: 0;
 }
 
 #layout-menu > li ul
 {
-	display:block;
-	margin-left:0;
-	padding:0;
-	position:relative;
+	display: block;
+	margin-left: 0;
+	padding: 0;
+	position: relative;
 }
 
 #layout-menu li.sub-menu
 {
-	display:block;
-	margin-bottom:0.5em;
+	display: block;
+	margin-bottom: 0.5em;
 }
 
 #layout-nav div.menu_hr,
 #layout-menu span.tab
 {
-	display:none;
+	display: none;
 }
 
 #layout-search
 {
-	top:0.5em;
-	margin-left:15em;
+	top: 0.5em;
+	margin-left: 15em;
 }
 
 #layout-tabs
 {
-	margin:4.9em 0.3em;
+	margin: 4.9em 0.3em;
 }
 
 #layout-nav div.search a.advsearch
 {
 	display: block;
-	left:0;
-	position:relative;
-	top:0;
-	width:83px;
+	left: 0;
+	position: relative;
+	top: 0;
+	width: 83px;
 	white-space: nowrap;
-	margin-left:62em;
-	margin-top:-2em;
+	margin-left: 62em;
+	margin-top: -2em;
 }
 
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
-    margin:6.3em 0.3em;
+	margin: 6.3em 0.3em;
 }
 
-#layout-hint + #layout-nav #layout-menu
+#layout-hint + #layout-nav #layout-menu,
+#layout-menu,
+#layout-nav
 {
-    margin-top:0;
+	margin-top: 0;
 }
 
 #layout-hint + #layout-nav #layout-search
 {
-    top:2em;
+	top: 2em;
 }
 
 #layout-menu li.sub-menu ul li
 {
-	padding:0;
+	padding: 0;
 }
 
 #layout-menu li.sub-menu.alert ul li span,
@@ -122,31 +112,29 @@
 	padding: 0 8px;
 }
 
-#layout-menu li.sub-menu ul li.user-xkeep > label
-{
-	display:block;
-}
-
-#layout-menu li.sub-menu.alert ul li span
+#layout-menu li.sub-menu.alert ul li span,
+#layout-menu li.sub-menu ul li.user-xkeep > label,
+#layout-main h1.main,
+#layout-main div.main_all
 {
 	display: block;
 }
 
 #layout-search div.search
 {
-	width:100%;
-	margin-left:-1.5em;
-	margin-top:0;
+	width: 100%;
+	margin-left: -1.5em;
+	margin-top: 0;
 }
 
 #layout-search div.search form
 {
-	padding-left:17.5em;
-	padding-top:1.5em;
-	width:100%;
+	padding-left: 17.5em;
+	padding-top: 1.5em;
+	width: 100%;
 }
 
 #layout-menu li.sub-menu ul li a
 {
-	padding:0.1em 0;
+	padding: 0.1em 0;
 }

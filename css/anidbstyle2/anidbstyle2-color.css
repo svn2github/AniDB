@@ -3,7 +3,7 @@
 #layout-menu li.sub-menu ul li#user-xauth button,
 #layout-main div.spoiler input.button
 {
-	background:none;
+	background: none;
 }
 
 span.link,
@@ -11,30 +11,30 @@ a:visited,
 a:active,
 a:link
 {
-	color:#105289;
+	color: #105289;
 }
 
 span.link:hover,
 a:hover
 {
-	color:#AA0000;
+	color: #AA0000;
 }
 
 #layout-main div.cmt_all div.comment h4
 {
-	background-color:#969AA6;
+	background-color: #969AA6;
 }
 
 #layout-main div.tabbed_pane ul.tabs li
 {
-	background-color:#D3D5D9;
+	background-color: #D3D5D9;
 }
 
 #layout-content
 {
-	border-bottom-color:#8E8E8E;
-	border-left-color:#ABABAB;
-	border-top-color:#ABABAB;
+	border-bottom-color: #8E8E8E;
+	border-left-color: #ABABAB;
+	border-top-color: #ABABAB;
 }
 
 tr + tr td,
@@ -43,14 +43,14 @@ tr + tr th,
 #layout-main div.report_all div.body ul li + li,
 #layout-main div.g_definitionlist tr th
 {
-	border-top-color:#999999;
+	border-top-color: #999999;
 }
 
 table,
 #layout-main div.main_all div.rightbar h4,
 #layout-main div.anime_all div.info div.caststaff div table
 {
-	border-top-color:#DDDDDD;
+	border-top-color: #DDDDDD;
 }
 
 button:hover,
@@ -75,7 +75,6 @@ input[type="submit"]:hover,
 #layout-main div.main_all div.rightbar h4,
 #layout-main > h1,
 #layout-main div.g_timedentry h4,
-#layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
@@ -114,10 +113,9 @@ select,
 #layout-search select,
 #layout-search input.text
 {
-	color:#CCCCCC;
+	color: #CCCCCC;
 }
 
-/*special link color for dark backgrounds*/
 #layout-main > h1 a,
 #layout-main div.g_timedentry h4 a,
 #layout-main div.g_timedentry p.comment a,
@@ -130,7 +128,7 @@ select,
 #layout-main th > a:active,
 #layout-main th > a:link
 {
-	color:#A2BFD7;
+	color: #A2BFD7;
 }
 
 #layout-main table tr th > a:hover,
@@ -141,7 +139,7 @@ select,
 #layout-main div.userpage_all > div.g_section > h4 a:hover,
 #layout-main div.animeatt_all div.review > h4 a:hover
 {
-	color:#FFAA55;
+	color: #FFAA55;
 }
 
 button:hover,
@@ -172,7 +170,7 @@ input[type="submit"]:hover,
 #layout-main div.lexicon_all table.animelist tr td+td,
 #layout-main div.mynotifies_all tr td+td
 {
-	border-left-color:#999999;
+	border-left-color: #999999;
 }
 
 html,
@@ -213,7 +211,7 @@ html,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd,
 #layout-main div.format-buttons input
 {
-	background-color:#C3C5C9;
+	background-color: #C3C5C9;
 }
 
 #layout-main div.forum ul.topics li.row,
@@ -223,7 +221,7 @@ html,
 body.nonav,
 tr
 {
-	background-color:#CFD1D4;
+	background-color: #CFD1D4;
 }
 
 #layout-main div.forum ul.topics li.row:hover,
@@ -237,7 +235,6 @@ tr
 #layout-main div.main_all div.rightbar h4,
 #layout-main > h1,
 #layout-main div.g_timedentry h4,
-#layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4,
 span.test,
 button,
@@ -260,7 +257,6 @@ th,
 #layout-menu li.sub-menu ul li#user-xauth:hover,
 #layout-main div.anime_all div.info div.caststaff div h4,
 #layout-main div.spoiler input.button,
-*.g_button a,
 input[type="text"],
 input[type="password"],
 input.text,
@@ -272,9 +268,9 @@ select,
 #layout-main div.pagination span a,
 #layout-main div.forum div.threads .rtop *,
 #layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner 
+#layout-main div.forum div.threads div.inner
 {
-	background-color:#34394D;
+	background-color: #34394D;
 }
 
 #layout-main div.profile_all div.default_languages table tr,
@@ -282,24 +278,21 @@ select,
 #layout-main div.anime_all div.data table.relationlist tr,
 #layout-main div.tabbed_pane div.body div.pane ul *.g_odd
 {
-	background-color:inherit;
+	background-color: inherit;
 }
 
-/*menu alert ! icon color*/
 #menu-account li.alert span:before,
 #menu-account li.alert span:after
 {
 	color: #B32947;
 }
 
-/*special behaviour for BB code layout buttons as those use black lettered images*/
 #layout-main div.format-buttons *.f_button:hover,
 #layout-main div.format-buttons *.f_button.selected
 {
 	background-color: #B5BED6;
 }
 
-/*border for textboxes, buttons, etc.*/
 span.test,
 button,
 #layout-main ul.g_list li,
@@ -323,10 +316,9 @@ select,
 #layout-main div.g_menu.filter_menu div.settings input[type="text"],
 #layout-main div.g_menu.filter_menu div.settings select
 {
-	border-color:#34394D;
+	border-color: #34394D;
 }
 
-/*2 colored border for bigger boxes*/
 #layout-main div.g_timedentry div.body,
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.tabbed_pane div.body,
@@ -337,29 +329,25 @@ select,
 #layout-main div.avatar img,
 #layout-main div.anime_all div.info div.image img
 {
-	border-color:#ABABAB #8E8E8E #8E8E8E #ABABAB;
+	border-color: #ABABAB #8E8E8E #8E8E8E #ABABAB;
 }
 
-/*tab color - depends on the multicolored border, but should only contain 1 color as it's sitting on top*/
 #layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	border-color: #ABABAB;
 }
 
-/*border color - special because of dark background color*/
 #layout-menu li.sub-menu ul,
 #layout-main > h1,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.news h4,
 #layout-main div.g_timedentry h4,
-#layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4
 {
-	border-color:#EEEEEE #8E8E8E #8E8E8E #EEEEEE;
+	border-color: #EEEEEE #8E8E8E #8E8E8E #EEEEEE;
 }
 
-/*anime/group page progress bar*/
 #layout-main div.anime_all div.groups td.epbar div.done,
 #layout-main div.group_all div.group_released td.epbar div.done
 {
@@ -376,32 +364,30 @@ select,
 #layout-main div.anime_all div.groups td.epbar div.done,
 #layout-main div.group_all div.group_released td.epbar div.done
 {
-	background-color:#4F75E8;
-	border-bottom-color:#4F75E8;
+	background-color: #4F75E8;
+	border-bottom-color: #4F75E8;
 }
 
 #layout-main div.anime_all div.groups td.epbar div.notdone,
 #layout-main div.group_all div.group_released td.epbar div.notdone
 {
-	background-color:#C3CFFF;
-	border-bottom-color:#C3CFFF;
+	background-color: #C3CFFF;
+	border-bottom-color: #C3CFFF;
 }
-
 
 #layout-main div.anime_all div.groups td.epbar div.done.mylist,
 #layout-main div.group_all div.group_released td.epbar div.done.mylist
 {
-	border-bottom-color:#7EF27E;
+	border-bottom-color: #7EF27E;
 }
 
-/*link color override for tabs*/
 #layout-tabs ul.main-tabs li.selected a,
 #layout-tabs ul.main-tabs li:hover a
 {
-	color:#000000;
+	color: #000000;
 }
 
 #layout-main div.forum div.events h2
 {
-	color:#666666;
+	color: #666666;
 }

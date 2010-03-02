@@ -1,11 +1,11 @@
 #layout-menu
 {
-	background-color:#FFFFFF;
+	background-color: #FFFFFF;
 }
 
 #layout-menu > li ul
 {
-	background-color:#ECF4FD;
+	background-color: #ECF4FD;
 }
 
 #layout-menu li.sub-menu ul li:hover,
@@ -16,5 +16,5 @@
 
 #layout-menu li.sub-menu ul
 {
-	border-color:#C9D7F1 #97AACC #97AACC #C9D7F1;
+	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }

@@ -2,12 +2,12 @@ a.i_icon:hover,
 a.i_inline:hover,
 a.i_button:hover
 {
-	text-decoration:none;
+	text-decoration: none;
 }
 
 #layout-search input.submit
 {
-	text-transform:capitalize;
+	text-transform: capitalize;
 }
 
 #layout-search input.text,
@@ -18,7 +18,7 @@ input[type="text"],
 input[type="password"],
 textarea
 {
-	font-size:1.2em;
+	font-size: 1.2em;
 }
 
 select,
@@ -30,17 +30,17 @@ input[type="checkbox"],
 #layout-search select,
 #layout-tabs ul.main-tabs > li
 {
-	font-size:1.1em;
+	font-size: 1.1em;
 }
 
 #layout-main div.userpage_all div.blog div.g_timedentry h4
 {
-	font-size:1.4em;
+	font-size: 1.4em;
 }
 
 #layout-main div.userpage_all div.blog div.g_timedentry span.stamp
 {
-	font-size:.9em;
+	font-size: .9em;
 }
 
 #menu-account li.alert span:before,
@@ -51,10 +51,10 @@ input[type="checkbox"],
 
 input[type="button"]
 {
-	cursor:pointer;
+	cursor: pointer;
 }
 
 #layout-main div.spoiler input.button
 {
-	font-weight: normal;
+	font-weight: 400;
 }

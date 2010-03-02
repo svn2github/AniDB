@@ -1,43 +1,43 @@
 #layout-content
 {
-	-moz-border-radius:5px 0 0 5px;
-	-webkit-border-radius:5px 0 0 5px;
-	border-radius:5px 0 0 5px;
-	border-bottom:1px solid #97AACC;
-	border-left:1px solid #C9D7F1;
-	border-top:1px solid #C9D7F1;
+	-moz-border-radius: 5px 0 0 5px;
+	-webkit-border-radius: 5px 0 0 5px;
+	border-radius: 5px 0 0 5px;
+	border-bottom: 1px solid #97AACC;
+	border-left: 1px solid #C9D7F1;
+	border-top: 1px solid #C9D7F1;
 }
 
 #layout-nav
 {
-	border-left:1px solid #C9D7F1;
+	border-left: 1px solid #C9D7F1;
 }
 
 #layout-menu > li ul
 {
-	border:none;
+	border: none;
 }
 
 #layout-menu li.sub-menu ul
 {
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border-radius:5px;
-	border:1px solid;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid;
 }
 
 #layout-menu li.sub-menu ul li:first-child:hover
 {
-	-moz-border-radius:2px 2px 0px 0px;
-	-webkit-border-radius:2px 2px 0px 0px;
-	border-radius:2px 2px 0px 0px;
+	-moz-border-radius: 2px 2px 0px 0px;
+	-webkit-border-radius: 2px 2px 0px 0px;
+	border-radius: 2px 2px 0px 0px;
 }
 
 #layout-menu li.sub-menu ul li:last-child:hover
 {
-	-moz-border-radius:0px 0px 2px 2px;
-	-webkit-border-radius:0px 0px 2px 2px;
-	border-radius:0px 0px 2px 2px;
+	-moz-border-radius: 0px 0px 2px 2px;
+	-webkit-border-radius: 0px 0px 2px 2px;
+	border-radius: 0px 0px 2px 2px;
 }
 
 #layout-menu li.sub-menu ul li+li
