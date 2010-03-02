@@ -77,8 +77,7 @@ input[type="submit"]:hover,
 #layout-main div.g_timedentry h4,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.forum li.header dt,
-#layout-main div.forum li.header dd,
-
+#layout-main div.forum li.header dd
 {
 	color: #DDDDDD;
 }
@@ -269,9 +268,7 @@ select,
 #layout-main div.pagination span a,
 #layout-main div.forum div.threads .rtop *,
 #layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner,
-,
-
+#layout-main div.forum div.threads div.inner
 {
 	background-color: #34394D;
 }
@@ -346,8 +343,7 @@ select,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.news h4,
 #layout-main div.g_timedentry h4,
-#layout-main div.userpage_all > div.g_section > h4,
-
+#layout-main div.userpage_all > div.g_section > h4
 {
 	border-color: #EEEEEE #8E8E8E #8E8E8E #EEEEEE;
 }
