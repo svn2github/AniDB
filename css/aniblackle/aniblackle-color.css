@@ -4,55 +4,27 @@ select option,
 input,
 textarea,
 html,
-#layout-main div.mylist_list tr.all_watched td.stats
+#layout-main div.mylist_list tr.all_watched td.stats,
+*.g_button a,
+#layout-main table ul li.g_odd,
+#layout-main table table td.g_odd,
+#layout-main ul.g_list li.g_odd
 {
-	background: #000000;
 	color: #728972;
-}
-
-table
-{
-	border-top-color: #888888;
-}
-
-tr.g_odd,
-li.g_odd,
-span.g_odd
-{
-	background-color: #393939;
-}
-
-#layout-main > h1
-{
-	background-color: #000000;
-	border-top-color: #888888;
 }
 
 #layout-menu > li ul
 {
-	background-color: #555555;
 	border-color: #000000;
 }
 
 #layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
-	background-color: #000000;
 	border-bottom-color: #000000;
 }
 
-#layout-main div.pagination span a
-{
-	background-color: #555555;
-	color: #CCCCCC;
-}
-
-button:hover
-{
-	background-color: #888888;
-	color: #CCCCCC;
-}
-
+*.g_button a:hover,
 a:hover,
 span.link:hover,
 #layout-menu li.sub-menu:hover,
@@ -62,24 +34,9 @@ input[type="submit"]:hover
 	color: #FFFFFF;
 }
 
-#layout-main table tr.header,
-#layout-main table thead tr
-{
-	background-color: #777777;
-	color: #000000;
-}
-
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
-{
-	color: #728972;
-	background-color: #000000;
-}
-
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.tabbed_pane div.body,
-#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.anime_all div.desc,
@@ -97,15 +54,21 @@ textarea,
 select,
 #layout-search select,
 #layout-search input.text,
-tr
+tr,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong,
+#layout-tabs ul.main-tabs > li:hover,
+#layout-tabs ul.main-tabs > li.selected,
+#layout-main > h1,
+button,
+select,
+select option,
+input,
+textarea,
+html,
+#layout-main div.mylist_list tr.all_watched td.stats
 {
 	background-color: #000000;
-}
-
-div.quotebody
-{
-	background-color: #404040;
-	color: #ABABAB;
 }
 
 #layout-main div.cmt_entries dl.profile dd strong
@@ -133,53 +96,51 @@ div.quotebody
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *,
-button:hover,
-input[type="submit"]:hover,
-#layout-main ul.g_list li:hover,
-#layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.news_all div.g_timedentry h4,
-#layout-main div.userpage_all > div.g_section > h4
+#layout-main div.userpage_all > div.g_section > h4,
+tr.g_odd,
+li.g_odd,
+span.g_odd
 {
-	background-color: #444444;
+	background-color: #333333;
 }
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #444444;
-	border-right-color: #444444;
+	border-left-color: #333333;
+	border-right-color: #333333;
 }
 
 #layout-main div.forum ul.topics li.row
 {
 	border-top-color: #777777;
-	border-bottom: none;
 }
 
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
-	background-color: #333333;
+	background-color: #222222;
 }
 
 #layout-main div.forum a.topictitle,
 a,
 th a,
 span.link,
-#layout-tabs ul.main-tabs > li:hover a#layout-tabs ul.main-tabs > li.selected a,
+#layout-tabs ul.main-tabs > li:hover a,
+#layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong,
+#layout-main div.pagination span a,
+div.quotebody,
+#layout-main table tr.header,
+#layout-main table thead tr
 {
 	color: #CCCCCC;
-}
-
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.forum ul.topics li.row:hover,
-#layout-main div.forum ul.topics li.g_odd.row:hover
-{
-	background: transparent url(images/stripe-vdarkgrey.png) repeat left top;
 }
 
 #layout-main div.forum div.deleted,
@@ -188,22 +149,36 @@ ul.g_list li,
 	opacity: 0.6;
 }
 
+div.quotebody,
 #layout-main div.g_timedentry h4,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
-#layout-menu li.sub-menu:hover
+#layout-menu li.sub-menu:hover,
+#layout-main table tr.header,
+#layout-main table thead tr,
+#layout-menu > li ul,
+#layout-main div div.addrelform table tr.header
 {
 	background-color: #555555;
+}
+
+button:hover,
+input[type="submit"]:hover,
+*.g_button a:hover,
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-main div.pagination span a,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
+{
+	background-color: #444444;
 }
 
 #layout-main div.cmt_entries dl.profile
 {
 	border-right-color: #666666;
-}
-
-#layout-menu li.sub-menu ul li:hover
-{
-	background-color: #888888;
 }
 
 #layout-main div.anime_all table.stafflist + table.stafflist,
@@ -222,11 +197,6 @@ ul.g_list li,
 #layout-main div.forum ul.topiclist li
 {
 	color: inherit;
-}
-
-#layout-main div div.addrelform table tr.header
-{
-	background-color: #777777;
 }
 
 #layout-main a.filter,
@@ -285,9 +255,7 @@ ul.g_list li,
 }
 
 #layout-hint,
-#layout-main div.g_msg,
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
+#layout-main div.g_msg
 {
 	color: #000000;
 }
@@ -372,7 +340,7 @@ select,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-tabs ul.main-tabs > li
 {
-	border: 1px solid #777777;
+	border: 1px solid #666666;
 }
 
 span.test,
@@ -397,9 +365,11 @@ div.quotebody,
 #layout-nav div.menu_hr
 {
 	border: 1px solid;
-	border-color: #777777 #666666 #666666 #777777;
+	border-color: #666666 #444444 #444444 #666666;
 }
 
+#layout-main > h1,
+table,
 #layout-main div.anime_all div.info div.caststaff div table,
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4,
@@ -409,18 +379,4 @@ div.quotebody,
 #layout-main div.userpage_all > div.g_section > h4
 {
 	border-top-color: #666666;
-}
-
-*.g_button a,
-#layout-main table ul li.g_odd,
-#layout-main table table td.g_odd,
-#layout-main ul.g_list li.g_odd
-{
-	color: #728972;
-}
-
-*.g_button a:hover
-{
-	background-color: #444444;
-	color: #FFFFFF;
 }

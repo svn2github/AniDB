@@ -4,6 +4,7 @@
 	border-bottom:1px double #000000;
 }
 
+#layout-main div.forum ul.topics li.row,
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.g_timedentry div.body
 {
