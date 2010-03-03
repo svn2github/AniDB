@@ -4,55 +4,33 @@ select option,
 input,
 textarea,
 html,
-#layout-main div.mylist_list tr.all_watched td.stats
+#layout-main div.mylist_list tr.all_watched td.stats,
+*.g_button a,
+#layout-main table ul li.g_odd,
+#layout-main table table td.g_odd,
+#layout-main ul.g_list li.g_odd
 {
-	background: #000000;
 	color: #728972;
 }
 
+#layout-main > h1,
 table
 {
 	border-top-color: #888888;
 }
 
-tr.g_odd,
-li.g_odd,
-span.g_odd
-{
-	background-color: #393939;
-}
-
-#layout-main > h1
-{
-	background-color: #000000;
-	border-top-color: #888888;
-}
-
 #layout-menu > li ul
 {
-	background-color: #555555;
 	border-color: #000000;
 }
 
 #layout-tabs ul.main-tabs > li:hover,
 #layout-tabs ul.main-tabs > li.selected
 {
-	background-color: #000000;
 	border-bottom-color: #000000;
 }
 
-#layout-main div.pagination span a
-{
-	background-color: #555555;
-	color: #CCCCCC;
-}
-
-button:hover
-{
-	background-color: #888888;
-	color: #CCCCCC;
-}
-
+*.g_button a:hover,
 a:hover,
 span.link:hover,
 #layout-menu li.sub-menu:hover,
@@ -62,24 +40,9 @@ input[type="submit"]:hover
 	color: #FFFFFF;
 }
 
-#layout-main table tr.header,
-#layout-main table thead tr
-{
-	background-color: #777777;
-	color: #000000;
-}
-
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
-{
-	color: #728972;
-	background-color: #000000;
-}
-
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.tabbed_pane div.body,
-#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.anime_all div.desc,
@@ -97,15 +60,21 @@ textarea,
 select,
 #layout-search select,
 #layout-search input.text,
-tr
+tr,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong,
+#layout-tabs ul.main-tabs > li:hover,
+#layout-tabs ul.main-tabs > li.selected,
+#layout-main > h1,
+button,
+select,
+select option,
+input,
+textarea,
+html,
+#layout-main div.mylist_list tr.all_watched td.stats
 {
 	background-color: #000000;
-}
-
-div.quotebody
-{
-	background-color: #404040;
-	color: #ABABAB;
 }
 
 #layout-main div.cmt_entries dl.profile dd strong
@@ -139,37 +108,50 @@ input[type="submit"]:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.news_all div.g_timedentry h4,
-#layout-main div.userpage_all > div.g_section > h4
+#layout-main div.userpage_all > div.g_section > h4,
+*.g_button a:hover,
+#layout-main div.pagination span a,
+tr.g_odd,
+li.g_odd,
+span.g_odd,
+#layout-main div.tabbed_pane ul.tabs li
 {
-	background-color: #444444;
+	background-color: #333333;
 }
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #444444;
-	border-right-color: #444444;
+	border-left-color: #333333;
+	border-right-color: #333333;
 }
 
 #layout-main div.forum ul.topics li.row
 {
 	border-top-color: #777777;
-	border-bottom: none;
 }
 
+div.quotebody,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
-	background-color: #333333;
+	background-color: #393939;
 }
 
 #layout-main div.forum a.topictitle,
 a,
 th a,
 span.link,
-#layout-tabs ul.main-tabs > li:hover a#layout-tabs ul.main-tabs > li.selected a,
+#layout-tabs ul.main-tabs > li:hover a,
+#layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong,
+#layout-main div.pagination span a,
+div.quotebody,
+#layout-main table tr.header,
+#layout-main table thead tr
 {
 	color: #CCCCCC;
 }
@@ -191,7 +173,11 @@ ul.g_list li,
 #layout-main div.g_timedentry h4,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
-#layout-menu li.sub-menu:hover
+#layout-menu li.sub-menu:hover,
+#layout-main table tr.header,
+#layout-main table thead tr,
+#layout-menu > li ul,
+#layout-main div div.addrelform table tr.header
 {
 	background-color: #555555;
 }
@@ -199,11 +185,6 @@ ul.g_list li,
 #layout-main div.cmt_entries dl.profile
 {
 	border-right-color: #666666;
-}
-
-#layout-menu li.sub-menu ul li:hover
-{
-	background-color: #888888;
 }
 
 #layout-main div.anime_all table.stafflist + table.stafflist,
@@ -222,11 +203,6 @@ ul.g_list li,
 #layout-main div.forum ul.topiclist li
 {
 	color: inherit;
-}
-
-#layout-main div div.addrelform table tr.header
-{
-	background-color: #777777;
 }
 
 #layout-main a.filter,
@@ -285,9 +261,7 @@ ul.g_list li,
 }
 
 #layout-hint,
-#layout-main div.g_msg,
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
+#layout-main div.g_msg
 {
 	color: #000000;
 }
@@ -409,18 +383,4 @@ div.quotebody,
 #layout-main div.userpage_all > div.g_section > h4
 {
 	border-top-color: #666666;
-}
-
-*.g_button a,
-#layout-main table ul li.g_odd,
-#layout-main table table td.g_odd,
-#layout-main ul.g_list li.g_odd
-{
-	color: #728972;
-}
-
-*.g_button a:hover
-{
-	background-color: #444444;
-	color: #FFFFFF;
 }
