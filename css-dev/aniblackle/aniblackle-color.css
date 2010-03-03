@@ -96,19 +96,13 @@ html,
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *,
-button:hover,
-input[type="submit"]:hover,
-#layout-main ul.g_list li:hover,
-#layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.news_all div.g_timedentry h4,
 #layout-main div.userpage_all > div.g_section > h4,
-*.g_button a:hover,
-#layout-main div.pagination span a,
 tr.g_odd,
 li.g_odd,
-span.g_odd,
-#layout-main div.tabbed_pane ul.tabs li
+span.g_odd
 {
 	background-color: #333333;
 }
@@ -163,13 +157,23 @@ div.quotebody,
 #layout-main table tr.header,
 #layout-main table thead tr,
 #layout-menu > li ul,
-#layout-main div div.addrelform table tr.header,
+#layout-main div div.addrelform table tr.header
+{
+	background-color: #555555;
+}
+
+button:hover,
+input[type="submit"]:hover,
+*.g_button a:hover,
+#layout-main ul.g_list li:hover,
+#layout-main ul.g_list li.selected,
+#layout-main div.pagination span a,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover
 {
-	background-color: #555555;
+	background-color: #444444;
 }
 
 #layout-main div.cmt_entries dl.profile
