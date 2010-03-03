@@ -195,8 +195,7 @@ textarea,
 select,
 #layout-tabs ul.main-tabs > li,
 #layout-search select,
-#layout-search input.text,
-#layout-main div.forum ul.topiclist dd
+#layout-search input.text
 {
 	border-color: #C9D7F1;
 }
