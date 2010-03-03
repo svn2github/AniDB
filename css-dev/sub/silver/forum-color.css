@@ -70,7 +70,7 @@
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main div.forum ul.topics li.g_odd,
+#layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd
 {
 	background-color:#E1EBF2;

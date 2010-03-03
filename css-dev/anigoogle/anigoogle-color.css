@@ -147,7 +147,7 @@ span.g_odd,
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main div.forum ul.topics li.g_odd,
+#layout-main div.forum ul.topics li.row.g_odd,
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.profile_all div.default_languages table tr,
@@ -195,7 +195,8 @@ textarea,
 select,
 #layout-tabs ul.main-tabs > li,
 #layout-search select,
-#layout-search input.text
+#layout-search input.text,
+#layout-main div.forum ul.topiclist dd
 {
 	border-color: #C9D7F1;
 }

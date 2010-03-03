@@ -60,7 +60,7 @@
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color:#F8F7FF;
 }

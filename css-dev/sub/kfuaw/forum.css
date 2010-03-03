@@ -51,7 +51,7 @@
 	background-color:#999999;
 }
 
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color:#aaaaaa;
 }

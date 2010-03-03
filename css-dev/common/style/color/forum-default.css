@@ -60,7 +60,7 @@ div.quotebody div.quote div.g_odd
 }
 
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd,
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color:#b0b0b0;
 }

@@ -2066,7 +2066,7 @@ div.quotebody div.quoteof
 {
 	background-color: #333;
 }
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color:black;
 }

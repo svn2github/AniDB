@@ -2237,7 +2237,7 @@ background-repeat:no-repeat;
 background: inherit;
 }
 #layout-main div.forum div.comment div.inner,
-#layout-main div.forum ul.topics li.g_odd
+#layout-main div.forum ul.topics li.g_odd.row
 {
 background-image: url(images/bg_2.gif)
 }
