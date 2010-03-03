@@ -1,11 +1,7 @@
+#layout-main div.addrelform ul.alt_titles li,
 #layout-main div.addrelform span.main
 {
-	line-height:16px;
-}
-
-#layout-main div.addrelform ul.alt_titles li
-{
-	line-height:16px;
+	line-height: 16px;
 }
 
 #layout-main div.addseq_all div.explanation div.description,
@@ -13,8 +9,8 @@
 #layout-main div.addcharcharrel_all div.explanation div.description,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description
 {
-	margin:1em 0;
-	padding:4px;
+	margin: 1em 0;
+	padding: 4px;
 }
 
 #layout-main div.addseq_all div.explanation div.description dl + dl,
@@ -24,7 +20,7 @@
 #layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr,
 #layout-main div.addcreatorsongrel_all div.explanation div.description tr + tr
 {
-	margin-top:0.25em;
+	margin-top: 0.25em;
 	padding: 0.25em 0;
 }
 
@@ -34,9 +30,9 @@
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description dl,
 #layout-main div.addcreatorsongrel_all div.explanation div.description dl
 {
-	margin:0;
-	text-align:left;
-	width:100%;
+	margin: 0;
+	text-align: left;
+	width: 100%;
 }
 
 #layout-main div.addseq_all div.explanation div.description dt,
@@ -62,7 +58,7 @@
 #layout-main div.addsonganimerel_all div.massadd div.text textarea,
 #layout-main div.addcharanimerel_all div.massadd div.text textarea
 {
-	width:45%;
+	width: 45%;
 	height: 200px;
 }
 
@@ -78,18 +74,7 @@
 #layout-main div.addcreatorsongrel_all div.massadd div + div,
 #layout-main div.addsonganimerel_all div.massadd div + div
 {
-	margin-top:0.5em;
-}
-
-#layout-main div.addcreatoranimerel_all div.explanation,
-#layout-main div.addcreatorsongrel_all div.explanation
-{
-	margin-top:1em;
-}
-
-#layout-main div.addcharanimerel_all div.editcarel table
-{
-    width:100%;
+	margin-top: 0.5em;
 }
 
 #layout-main div.addcreatoranimerel_all div.explanation div.description table,
@@ -102,38 +87,38 @@
 #layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr td,
 #layout-main div.addcreatorsongrel_all div.explanation div.description tr + tr td
 {
-	margin-top:0.25em;
-	padding:0.25em 0 0.3em;
+	margin-top: 0.25em;
+	padding: 0.25em 0 0.3em;
 }
-
 
 #layout-main div.addsongcollectionrel_all div.massadd textarea
 {
-	height:200px;
-	width:500px;
+	height: 200px;
+	width: 500px;
 }
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.mediumno,
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.trackno,
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.length
 {
-	width:7em;
+	width: 7em;
 }
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.set
 {
-	min-width:5em;
+	min-width: 5em;
 }
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.name,
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs th.anisonurl
 {
-	min-width:15em;
+	min-width: 15em;
 }
 
-#layout-main div.addsongcollectionrel_all div.massadd_new_songs td input[type="text"]
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs td input[type="text"],
+#layout-main div.addcharanimerel_all div.editcarel table
 {
-	width:100%;
+	width: 100%;
 }
 
 #layout-main div.addsongcollectionrel_all div.massadd_new_songs td
@@ -141,7 +126,9 @@
 	padding: 2px 4px;
 }
 
-#layout-main div.addcreatoranimerel_all div.content
+#layout-main div.addcreatoranimerel_all div.content,
+#layout-main div.addcreatoranimerel_all div.explanation,
+#layout-main div.addcreatorsongrel_all div.explanation
 {
 	margin-top: 1em;
 }
@@ -153,11 +140,11 @@
 
 #layout-main div.addcreatoranimerel_all div.content h4
 {
-	text-align:left;
+	text-align: left;
 }
 
 #layout-main div.addcreatoranimerel_all div.content h4 span.nolink
 {
-	-moz-user-select:text;
+	-moz-user-select: text;
 	cursor: default;
 }

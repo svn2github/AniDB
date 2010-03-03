@@ -197,7 +197,7 @@ html,
 #layout-main span.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main div.forum ul.topics li.g_odd,
+#layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.poll .rbottom *,
 #layout-main div.forum div.poll .rtop *,
@@ -207,8 +207,7 @@ html,
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main div.forum ul.topics li.row.g_odd,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 #layout-main div.format-buttons input
 {
 	background-color: #C3C5C9;
@@ -225,7 +224,9 @@ tr
 }
 
 #layout-main div.forum ul.topics li.row:hover,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover
+#layout-main div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover
 {
 	background-color: #ACAEB4;
 }

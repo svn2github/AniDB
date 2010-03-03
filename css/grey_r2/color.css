@@ -50,7 +50,7 @@ background-image:url(../grey/images/bg_2.gif);
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description,
 #layout-main div.addcreatoranimerel_all div.explanation div.description,
 #layout-main div.forum div.comment div.inner,
-#layout-main div.forum ul.topics li.g_odd,
+#layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.forum hr,
 #adba_update,
 #style_next,
@@ -239,6 +239,7 @@ color:#898989;
 #layout-main div.pane.account th:hover,
 tr:hover > td,
 #layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.tabbed_pane div.pane table tr:hover > td,
 #layout-main div.timeline_all div.timeline ul.row li:hover
 {

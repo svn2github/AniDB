@@ -1,108 +1,108 @@
 #layout-main div.profile_all table
 {
-	border:none;
+	border: none;
 }
 
 #layout-main div.css_style div.info dl dd
 {
-	margin-left:7em;
-	width:60%;
+	margin-left: 7em;
+	width: 60%;
 }
 
 #layout-main div.profile_all div.block div.image
 {
-	width:40%;
+	width: 40%;
 }
 
 #layout-main div.profile_all div.block div.info dl
 {
-	margin-left:0;
+	margin-left: 0;
 }
 
 #style_url
 {
-	width:75%;
+	width: 75%;
 }
 
 #style_thumbnail
 {
-	padding:3px;
-	text-align:center;
-	width:220px;
+	padding: 3px;
+	text-align: center;
+	width: 220px;
 }
 
 #image_viewer
 {
-	margin:50px;
+	margin: 50px;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.user_css div textarea
 {
-	height:500px;
-	width:70%;
+	height: 500px;
+	width: 70%;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.permissions div.detailed h4
 {
-	margin-bottom:.5em;
+	margin-bottom: .5em;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.permissions form
 {
-	text-align:left;
+	text-align: left;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div
 {
-	float:left;
-	margin-bottom:.5em;
+	float: left;
+	margin-bottom: .5em;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label
 {
-	display:block;
-	line-height:2.3;
-	margin-right:1em;
+	display: block;
+	line-height: 2.3;
+	margin-right: 1em;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label select
 {
-	display:block;
-	margin-left:13.5em;
-	margin-top:-1.8em;
-	width:330px;
+	display: block;
+	margin-left: 13.5em;
+	margin-top: -1.8em;
+	width: 330px;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.permissions div.permissions div label input
 {
-	width:326px;
+	width: 326px;
 }
 
 #layout-main div.profile_all div.tabbed_pane div.permissions div.guest
 {
-	clear:left;
-	text-align:center;
+	clear: left;
+	text-align: center;
 }
 
 #layout-main div.profile_all div.passwords,
 #layout-main div.profile_all div.tabbed_pane div.default_languages
 {
-	display:table;
-	margin-left:auto;
-	margin-right:auto;
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #layout-main div.profile_all div.passwords > div,
 #layout-main div.profile_all div.passwords form > div,
 #layout-main div.profile_all div.tabbed_pane div.default_languages div
 {
-	display:inline-table;
+	display: inline-table;
 }
 
 #layout-main div.profile_all div.preferences,
 #layout-main div.profile_all div.tabbed_pane
 {
-	width:100%;
+	width: 100%;
 }
 
 #layout-main div.profile_all div.pane.general div.body div.pane
@@ -110,80 +110,61 @@
 	text-align: center;
 }
 
-#layout-main div.profile_all div.pane div.settings.block,
-#layout-main div.profile_all div.pane.general div.body div.pane div /*TODO: remove this line later*/
+#layout-main div.profile_all div.pane div.settings.block
 {
-	display:inline-table;
+	display: inline-table;
 	width: 40em;
 	margin-right: 1.5em;
 	margin-top: 1em;
-	vertical-align:top;
+	vertical-align: top;
 }
 
 #layout-main div.profile_all div.pane.general div.body div.pane div ul
 {
-	padding:4px;
-}
-
-#layout-main div.profile_all div.pane.general div.body div.pane div ul li
-{
-	line-height: 15px;
+	padding: 4px;
 }
 
 #layout-main div.profile_all div.pane.general div.body div.pane div ul li a.i_inline
 {
-	padding:5px 10px 0;
-	margin:0;
+	padding: 5px 10px 0;
+	margin: 0;
 }
 
 #layout-main div.profile_all div.account tr th
 {
-	width:20em;
+	width: 20em;
 	text-align: left;
 }
 
 #layout-main div.profile_all div.account tr th,
 #layout-main div.profile_all div.account tr td
 {
-	padding:4px 8px;
+	padding: 4px 8px;
 }
 
 #layout-main div.profile_all div.account tr th p.note
 {
 	text-align: left;
 	display: block;
-	white-space:normal;
-}
-
-#layout-main div.profile_all  div.pane > ul li
-{
-	line-height: 15px;
-}
-
-#layout-main div.profile_all  div.pane > ul li a.i_inline
-{
-	padding:4px 8px 0 7px;
+	white-space: normal;
 }
 
 #layout-main div.profile_all div.pane div.settings.block.javascript.hidden,
 #layout-main div.profile_all *.javascript.hidden
 {
-	display:none;
+	display: none;
 }
 
-#layout-main div.profile_all div.pane div.settings.block li
+#layout-main div.profile_all div.pane div.settings.block li,
+#layout-main div.profile_all div.pane > ul li,
+#layout-main div.profile_all div.pane.general div.body div.pane div ul li
 {
-	line-height:15px;
-}
-
-#layout-main div.profile_all div.pane div.settings.block li a.i_inline
-{
-	padding:4px 8px 0 7px;
+	line-height: 15px;
 }
 
 #layout-main div.profile_all div.pane div.settings.block li input
 {
-	max-width:37em;
+	max-width: 37em;
 }
 
 #layout-main div.profile_all div.pane div.settings.block li select
@@ -191,14 +172,16 @@
 	margin-bottom: 0.2em;
 }
 
-#layout-main div.profile_all div.tabbed_pane div.default_languages a.i_inline
+#layout-main div.profile_all div.tabbed_pane div.default_languages a.i_inline,
+#layout-main div.profile_all div.pane div.settings.block li a.i_inline,
+#layout-main div.profile_all div.pane > ul li a.i_inline
 {
-	padding:4px 8px 0 7px;
+	padding: 4px 8px 0 7px;
 }
 
 #layout-main div.profile_all div.pane div.settings.block table
 {
-	margin:0;
+	margin: 0;
 }
 
 #layout-main div.profile_all div.pane div.settings.block table + ul
@@ -208,8 +191,8 @@
 
 #layout-main div.profile_all div.settings.block span.checkbox span.text
 {
-	display:table;
-	margin:-1.7em 0 0 4.5em;
+	display: table;
+	margin: -1.7em 0 0 4.5em;
 }
 
 #layout-main div.tabbed_pane div.pane div.userdata_add ul
@@ -220,5 +203,5 @@
 
 #layout-main div.userdata_add span.current
 {
-	float:right;
+	float: right;
 }
