@@ -2243,6 +2243,7 @@ background-image: url(images/bg_2.gif)
 }
 #layout-main div.forum div.inner,
 #layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.events div.inner,
 #layout-main div.export_all div.exportblock div.inner

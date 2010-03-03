@@ -157,7 +157,7 @@ input[type="submit"]:hover,
 }
 
 #layout-main div.forum ul.topics li.g_odd.row,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
 	background-color: #333333;
 }
@@ -175,7 +175,9 @@ ul.g_list li,
 }
 
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
-#layout-main div.forum ul.topics li.row:hover
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
 {
 	background: transparent url(images/stripe-vdarkgrey.png) repeat left top;
 }

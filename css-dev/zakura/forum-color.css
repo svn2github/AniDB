@@ -10,7 +10,8 @@
 	background-color:#F1F0F5;
 }
 
-#layout-main div.forum ul.topics li.row:hover
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
 {
 	background-color:#CBD6DE;
 }

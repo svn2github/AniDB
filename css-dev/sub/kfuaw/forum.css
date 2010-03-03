@@ -71,7 +71,8 @@
 	border-right-color:#363636;
 }
 
-#layout-main div.forum ul.topics li.row:hover
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
 {
 	background-color:#bbbbbb;
 }
