@@ -579,7 +579,7 @@
 
 #layout-main div.forum div.quickreply textarea
 {
-	border: 1px inset;
+	border: 1px solid;
 	height: 10em;
 	line-height: 1.2em;
 	padding: 2px;
