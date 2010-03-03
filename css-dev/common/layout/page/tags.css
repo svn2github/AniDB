@@ -2,8 +2,8 @@
 #layout-main div.creatortags_all div.addbox textarea,
 #layout-main div.animetag_all div.addbox textarea
 {
-	height:200px;
-	width:400px;
+	height: 200px;
+	width: 400px;
 }
 
 #layout-main div.chartagsmod_all div.addbox input,
@@ -12,8 +12,8 @@
 #layout-main div.animetagmod_all div.addbox input,
 #layout-main div.animetag_all div.addbox input
 {
-	display:block;
-	margin:1em auto;
+	display: block;
+	margin: 1em auto;
 }
 
 #layout-main div.chartags_all div.editbox input[type="text"],
@@ -21,7 +21,7 @@
 #layout-main div.animetag_all div.editbox input[type="text"],
 #layout-main div.animetagmod_all div.editbox input[type="text"]
 {
-	width:400px;
+	width: 400px;
 }
 
 #layout-main div.chartags_all div.editbox textarea,
@@ -29,8 +29,8 @@
 #layout-main div.animetag_all div.editbox textarea,
 #layout-main div.animetagmod_all div.editbox textarea
 {
-	height:100px;
-	width:400px;
+	height: 100px;
+	width: 400px;
 }
 
 #layout-main div.chartagsmod_all dl,
@@ -39,9 +39,9 @@
 #layout-main div.animetagmod_all dl,
 #layout-main div.animetag_all dl
 {
-	display:block;
-	height:1%;
-	overflow:hidden;
+	display: block;
+	height: 1%;
+	overflow: hidden;
 }
 
 #layout-main div.chartagsmod_all dl dt,
@@ -50,8 +50,8 @@
 #layout-main div.animetagmod_all dl dt,
 #layout-main div.animetag_all dl dt
 {
-	clear:none;
-	float:left;
+	clear: none;
+	float: left;
 }
 
 #layout-main div.chartagsmod_all dl dd,
@@ -60,30 +60,17 @@
 #layout-main div.animetagmod_all dl dd,
 #layout-main div.animetag_all dl dd
 {
-	margin-left:20em;
+	margin-left: 20em;
 }
 
+#layout-main div.chartags_all table.charactertags,
+#layout-main div.creatortags_all table.charactertags,
+#layout-main div.animetag_all table.animetag,
 #layout-main div.chartagsmod_all div.inner,
 #layout-main div.chartags_all div.inner,
 #layout-main div.creatortags_all div.inner,
 #layout-main div.animetagmod_all div.inner,
 #layout-main div.animetag_all div.inner
-{
-	margin-bottom:1em;
-}
-
-#layout-main div.chartagsmod_all table.charactertags,
-#layout-main div.chartagsmod_all table.charactertaggroups,
-#layout-main div.chartags_all table.charactertags,
-#layout-main div.creatortags_all table.charactertags,
-#layout-main div.animetag_all table.charactertags
-{
-	width:100%;
-}
-
-#layout-main div.chartags_all table.charactertags,
-#layout-main div.creatortags_all table.charactertags,
-#layout-main div.animetag_all table.animetag
 {
 	margin-bottom: 1em;
 }
@@ -91,36 +78,36 @@
 #layout-main div.chartags_all div.addbox div.taggrouplist,
 #layout-main div.creatortags_all div.addbox div.taggrouplist
 {
-	margin-top:.5em;
+	margin-top: .5em;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-column,
 #layout-main div.creatortags_all div.addbox div.tag-column
 {
-	display:inline-block;
-	min-height:17.5em;
-	width:17.5em;
-	margin:0 1em 1em 0;
-	padding:4px;
-	border:1px solid darkgrey;
+	display: inline-block;
+	min-height: 17.5em;
+	width: 17.5em;
+	margin: 0 1em 1em 0;
+	padding: 4px;
+	border: 1px solid darkgrey;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-column span,
 #layout-main div.creatortags_all div.addbox div.tag-column span
 {
-	display:table-row;
+	display: table-row;
 }
 
 #layout-main div.chartags_all div.addbox div.taggrouplist span,
 #layout-main div.creatortags_all div.addbox div.tag-column span
 {
-	text-align:left;
+	text-align: left;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-column h5,
 #layout-main div.creatortags_all div.addbox div.tag-column h5
 {
-	text-align:center;
+	text-align: center;
 }
 
 #layout-main div.chartags_all div.addbox div.tag-group h3,
@@ -132,7 +119,7 @@
 #layout-main div.chartags_all div.fake,
 #layout-main div.creatortags_all div.fake
 {
-	clear:both;
+	clear: both;
 }
 
 #layout-main div.animetag_all div.animetag_entries_spoiler table + div.animetag_entries_spoiler
@@ -142,7 +129,12 @@
 
 #layout-main div.chartagsmod_all table,
 #layout-main div.creatortagsmod_all table,
-#layout-main div.animetagmod_all table
+#layout-main div.animetagmod_all table,
+#layout-main div.chartagsmod_all table.charactertags,
+#layout-main div.chartagsmod_all table.charactertaggroups,
+#layout-main div.chartags_all table.charactertags,
+#layout-main div.creatortags_all table.charactertags,
+#layout-main div.animetag_all table.charactertags
 {
 	width: 100%;
 }
@@ -196,5 +188,5 @@
 #layout-main div.chartagsmod_all dl dd label,
 #layout-main div.creatortagsmod_all dl dd label
 {
-	display:block;
+	display: block;
 }

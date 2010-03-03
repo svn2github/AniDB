@@ -31,18 +31,13 @@
 
 #layout-main div.anime_all div.tags
 {
-	margin-top:1em;
-	margin-bottom:1em;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 #layout-main div.anime_all div.tabbed_pane ul.contribute
 {
-    border:none;
-}
-
-#layout-main div.anime_all div.data td.value form
-{
-	text-align:left;
+	border: none;
 }
 
 #layout-main div.anime_all #grouplist td.icons a + a
@@ -68,24 +63,18 @@
 
 #layout-main div.anime_all #tabbed_pane_main
 {
-	margin:1.5em 1em 1em;
+	margin: 1.5em 1em 1em;
 }
 
 #layout-main div.anime_all div.reviews table.reviewlist th.approval
 {
-	width:12em;
-}
-
-#layout-main div.anime_all table.stafflist td.credit,
-#layout-main div.anime_all table.stafflist td.name
-{
-	width:30%;
+	width: 12em;
 }
 
 #layout-main div.anime_all table.stafflist td.comment,
 #layout-main div.anime_all table.stafflist td.eprange
 {
-	min-width:10em;
+	min-width: 10em;
 }
 
 #layout-main div.anime_all table.stafflist + table.stafflist
@@ -95,26 +84,28 @@
 
 #layout-main div.anime_all div.songs table th.credit
 {
-	min-width:15em;
+	min-width: 15em;
 }
 
 #layout-main div.anime_all div.recommendations td.action,
 #layout-main div.anime_all div.reviews td.action
 {
-	text-align:right;
+	text-align: right;
 }
 
 #layout-main div.group_all div.group_released td.epbar,
-#layout-main div.anime_all div.groups td.epbar
+#layout-main div.anime_all div.groups td.epbar,
+#layout-main div.anime_all table.stafflist td.credit,
+#layout-main div.anime_all table.stafflist td.name
 {
-	width:30%;
+	width: 30%;
 }
 
 #layout-main div.group_all div.group_released td.epbar div,
 #layout-main div.anime_all div.groups td.epbar div
 {
-	float:left;
-	height:8px;
+	float: left;
+	height: 8px;
 }
 
 #layout-main div.anime_all div.forum div.threads,
@@ -134,7 +125,6 @@
 	min-width: 5em;
 }
 
-
 #layout-main div.anime_all div.info div.caststaff
 {
 	margin-top: 0.5em;
@@ -142,41 +132,47 @@
 
 #layout-main div.anime_all div.info div.caststaff > div
 {
-	float:left;
-	padding:4px;
-	width:46.5%;
+	float: left;
+	padding: 4px;
+	width: 46.5%;
 	margin-right: 0.5em;
 }
 
 #layout-main div.anime_all div.info div.caststaff div.cast + div.staff
 {
-	float:right;
-	margin-right:0;
+	float: right;
+	margin-right: 0;
 }
 
-#layout-main div.anime_all div.info div.caststaff div h4
+#layout-main div.anime_all div.info div.caststaff div h4,
+#layout-main div.anime_all div.data td.value form
 {
-	text-align:left;
+	text-align: left;
 }
 
 #layout-main div.anime_all div.info div.caststaff div.cast td.as
 {
-	width:1em;
+	width: 1em;
 }
 
 #layout-main div.anime_all div.info div.caststaff div td
 {
-	padding:0.2em 0.5em 0.2em 0;
+	padding: 0.2em 0.5em 0.2em 0;
 }
 
 #layout-main div.anime_all div.info div.caststaff div.staff td.creator,
 #layout-main div.anime_all div.info div.caststaff div.cast td.char
 {
-	padding-right:0;
+	padding-right: 0;
 }
 
 #layout-main div.anime_all div.info div.caststaff div td.action
 {
 	padding-top: 1em;
-	text-align:right;
+	text-align: right;
+}
+
+#layout-main div.anime_all div.groups td.action
+{
+	min-width: 11em;
 }
