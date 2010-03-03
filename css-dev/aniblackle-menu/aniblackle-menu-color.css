@@ -1,18 +1,18 @@
 #layout-content
 {
-	border-bottom-color:#666666;
-	border-left-color:#777777;
-	border-top-color:#777777;
+	border-bottom-color:#444444;
+	border-left-color:#666666;
+	border-top-color:#666666;
 }
 
 #layout-nav
 {
-	border-left-color:#666666;
+	border-left-color:#555555;
 }
 
 #layout-menu li.sub-menu ul
 {
-	border-color:#777777 #666666 #666666 #777777;
+	border-color:#666666 #444444 #444444 #666666;
 }
 
 #layout-menu

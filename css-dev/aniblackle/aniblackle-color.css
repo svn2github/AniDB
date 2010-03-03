@@ -13,12 +13,6 @@ html,
 	color: #728972;
 }
 
-#layout-main > h1,
-table
-{
-	border-top-color: #888888;
-}
-
 #layout-menu > li ul
 {
 	border-color: #000000;
@@ -130,11 +124,10 @@ span.g_odd,
 	border-top-color: #777777;
 }
 
-div.quotebody,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
-	background-color: #393939;
+	background-color: #222222;
 }
 
 #layout-main div.forum a.topictitle,
@@ -156,20 +149,13 @@ div.quotebody,
 	color: #CCCCCC;
 }
 
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.forum ul.topics li.row:hover,
-#layout-main div.forum ul.topics li.g_odd.row:hover
-{
-	background: transparent url(images/stripe-vdarkgrey.png) repeat left top;
-}
-
 #layout-main div.forum div.deleted,
 #layout-main div.forum li.deleted dl.icon
 {
 	opacity: 0.6;
 }
 
+div.quotebody,
 #layout-main div.g_timedentry h4,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
@@ -177,7 +163,11 @@ div.quotebody,
 #layout-main table tr.header,
 #layout-main table thead tr,
 #layout-menu > li ul,
-#layout-main div div.addrelform table tr.header
+#layout-main div div.addrelform table tr.header,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
 {
 	background-color: #555555;
 }
@@ -346,7 +336,7 @@ select,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-tabs ul.main-tabs > li
 {
-	border: 1px solid #777777;
+	border: 1px solid #666666;
 }
 
 span.test,
@@ -371,9 +361,11 @@ div.quotebody,
 #layout-nav div.menu_hr
 {
 	border: 1px solid;
-	border-color: #777777 #666666 #666666 #777777;
+	border-color: #666666 #444444 #444444 #666666;
 }
 
+#layout-main > h1,
+table,
 #layout-main div.anime_all div.info div.caststaff div table,
 #layout-main div.g_timedentry h4,
 #layout-main div.animeatt_all div.review > h4,
