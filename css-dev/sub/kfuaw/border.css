@@ -21,8 +21,19 @@ img, a
 	border-top: 1px solid #dddddd;
 	border-bottom: none;
 }
+
 #layout-main ul.g_list li,
-#layout-main table tr.header + tr td
+#layout-main table tr.header + tr td,
+#layout-main div.profile_all tr.g_odd,
+#layout-main div.profile_all span.g_odd,
+#layout-main div.profile_all li.g_odd,
+#layout-main div.profile_all tr.g_odd + tr td,
+#layout-main div.profile_all tr + tr.g_odd td,
+#layout-main div.profile_all tr,
+#layout-main div.profile_all span,
+#layout-main div.profile_all li,
+#layout-main div.customise_all li.g_odd + li,
+#layout-main div.customise_all li + li.g_odd
 {
 	border: none;
 }
@@ -147,8 +158,10 @@ body.nonav #layout-main div.g_content,
 #layout-main div.profile_all div.pane.general div.body div.pane div,
 #layout-main div.profile_all div.passwords form div.anidb,
 #layout-main div.profile_all div.passwords form div.g_section,
-#layout-main div.profile_all div.tabbed_pane div.default_languages div,
-#layout-main div.profile_all div.rdf_jabber div
+#layout-main div.profile_all div.rdf_jabber div,
+#layout-main div.profile_all div.settings.block,
+#layout-main div.profile_all div.default_languages table,
+#layout-main div.profile_all div.userdata_form table 
 {
 	border: 1px solid #363636;
 }
@@ -235,6 +248,7 @@ body.nonav #layout-main div.g_content,
 	border:1px solid #999999;
 }
 
+#layout-main div.profile_all div.tabbed_pane div.default_languages div,
 table table
 {
 	border: none;

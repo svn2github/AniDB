@@ -77,12 +77,21 @@ body.nonav #layout-main div.g_content
 	color: #2E3C55;
 }
 
-#layout-main div.creq_all dl,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
 #layout-main span.g_odd
 {
 	background-color: #eaeaea;
+}
+
+#layout-main div.profile_all tr.g_odd,
+#layout-main div.profile_all span.g_odd,
+#layout-main div.profile_all li.g_odd,
+#layout-main div.customise_all tr.g_odd,
+#layout-main div.customise_all span.g_odd,
+#layout-main div.customise_all li.g_odd
+{
+	background-color: transparent;
 }
 
 #layout-main div.animeatt_all div.bar h4,
@@ -101,11 +110,19 @@ body.nonav #layout-main div.g_content
 #layout-main table caption,
 #layout-main h1,
 #layout-main table thead,
-#layout-main table tr.header
+#layout-main table tr.header,
+#layout-main div.customise_all div.settings.block h4,
+#layout-main div.profile_all div.settings.block h4,
+#layout-main div.creq_all dl
 {
 	background-color:#363636;
 	color: #dddddd;
 	text-shadow:1px 1px 0 #111111;
+}
+
+#layout-main div.creq_all dl dd
+{
+	text-shadow: none;
 }
 
 #layout-main h1 a,

@@ -98,21 +98,6 @@ body
 	margin: 1em 1em .5em 0;
 }
 
-/* hides last <li> tag, which is visible because of padding and contains hidden <input> 
- * begin */
-#layout-main div.profile_all div.pane.general div.body ul li:last-child
-{
-	display: none;
-}
-
-#layout-main div.profile_all div.pane.general div.body div:first-child div:last-child ul li:last-child
-{
-	display: block;
-}
-/* funny
- * end */
-
-
 #layout-main div.profile_all div.rdf_jabber div
 {
 	display:inline-table;
@@ -304,8 +289,7 @@ body
 #layout-main div.g_menu h4,
 #layout-main div.cmt_all div.comment h4,
 #layout-main div.main_all div.rightbar h4,
-#layout-main table tr.header,
-#layout-main li
+#layout-main table tr.header
 {
 	padding: .16em;
 }
@@ -430,14 +414,56 @@ body
 }
 
 #layout-main div.userpage_all  h4,
-#layout-main div.profile_all div.tabbed_pane div.pane.general div.body h4,
-#layout-main div.profile_all div.tabbed_pane div.pane.default_languages div > h4,
-#layout-main div.profile_all div.tabbed_pane div.pane.account div.g_definitionlist h4,
-#layout-main div.profile_all div.tabbed_pane div.pane.rdf_jabber div h4,
 #layout-main div.g_menu h4
 {
 	text-align:center;
 	padding:.0 0 .1em 0;
+}
+
+#layout-main div.profile_all div.pane div.settings.block,
+#layout-main div.profile_all div.pane.general div.body div.pane div
+{
+	width: 45%;
+}
+
+#layout-main div.customise_all div.pane div.settings.block
+{
+	width: 35%;
+	margin-left: 1em;
+}
+
+#layout-main div.customise_all div.settings.block table,
+#layout-main div.profile_all div.settings.block table
+{
+	width: 100%;
+}
+
+#layout-main div.customise_all div.settings.block h4,
+#layout-main div.customise_all div.settings.block table caption,
+#layout-main div.customise_all div.userdata_form table caption,
+#layout-main div.profile_all div.settings.block h4,
+#layout-main div.profile_all div.settings.block table caption,
+#layout-main div.profile_all div.userdata_form table caption
+{
+	text-align: left;
+	padding: .4em .5em;
+}
+
+#layout-main div.profile_all div.settings.block ul
+{
+	margin: .5em 0 0 0;
+}
+
+#layout-main div.customise_all div.pane > ul li,
+#layout-main div.profile_all div.pane div.settings.block li
+{
+	line-height: 20px;
+}
+
+#layout-main div.customise_all span.checkbox span.text,
+#layout-main div.profile_all div.settings.block span.checkbox span.text
+{
+	margin:-2em 0 0 4.5em;
 }
 
 #tooltip span.middle,
@@ -451,6 +477,12 @@ body
 #layout-main div.animeatt_all div.bar div + div
 {
 	margin-top: .4em;
+}
+
+#layout-main div.animeatt_all div.menu caption,
+#layout-main div.animeatt_all div.menu h4
+{
+	padding: 0;
 }
 
 #layout-main div.main_all div.news p.comment
