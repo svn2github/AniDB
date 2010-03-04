@@ -29,44 +29,35 @@ a:hover,
 span.link:hover,
 #layout-menu li.sub-menu:hover,
 button:hover,
+input[type="button"]:hover,
 input[type="submit"]:hover
 {
 	color: #FFFFFF;
 }
 
-#layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4,
-#layout-main div.tabbed_pane div.body,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.anime_all div.desc,
-#layout-main div.desc,
 #layout-main div.forum ul.topics li.row,
-*.g_button a,
+#layout-main div.pagination span a:hover,
+#layout-main div.pagination span strong,
 #layout-main div.anime_all div.info div.caststaff div h4,
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff,
-#layout-main div.tagcloud,
+#layout-main div.mylist_list tr.all_watched td.stats,
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main > h1,
+#layout-search select,
+#layout-search input.text,
+#layout-tabs ul.main-tabs > li:hover,
+#layout-tabs ul.main-tabs > li.selected,
+*.g_button a,
 input[type="text"],
 input[type="password"],
 input.text,
-textarea,
-select,
-#layout-search select,
-#layout-search input.text,
 tr,
-#layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong,
-#layout-tabs ul.main-tabs > li:hover,
-#layout-tabs ul.main-tabs > li.selected,
-#layout-main > h1,
 button,
 select,
 select option,
 input,
 textarea,
-html,
-#layout-main div.mylist_list tr.all_watched td.stats
+html
 {
 	background-color: #000000;
 }
@@ -97,20 +88,31 @@ html,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *,
 #layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.news_all div.g_timedentry h4,
 #layout-main div.userpage_all > div.g_section > h4,
-tr.g_odd,
-li.g_odd,
-span.g_odd
+#layout-main div.anime_all div.info div.caststaff div.cast,
+#layout-main div.anime_all div.info div.caststaff div.staff,
+#layout-main div.tagcloud,
+#layout-main div.desc,
+#layout-main div.anime_all div.desc,
+#layout-main div div.addrelform table tr,
+#layout-main div.tabbed_pane div.body
 {
-	background-color: #333333;
+	background-color: #404040;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom-color: #404040;
 }
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #333333;
-	border-right-color: #333333;
+	border-left-color: #404040;
+	border-right-color: #404040;
 }
 
 #layout-main div.forum ul.topics li.row
@@ -119,9 +121,12 @@ span.g_odd
 }
 
 #layout-main div.forum ul.topics li.g_odd.row,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+tr.g_odd,
+li.g_odd,
+span.g_odd
 {
-	background-color: #222222;
+	background-color: #333333;
 }
 
 #layout-main div.forum a.topictitle,
@@ -131,8 +136,7 @@ span.link,
 #layout-tabs ul.main-tabs > li:hover a,
 #layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong,
 #layout-main div.pagination span a,
@@ -157,12 +161,9 @@ div.quotebody,
 #layout-main table tr.header,
 #layout-main table thead tr,
 #layout-menu > li ul,
-#layout-main div div.addrelform table tr.header
-{
-	background-color: #555555;
-}
-
+#layout-main div div.addrelform table tr.header,
 button:hover,
+input[type="button"]:hover,
 input[type="submit"]:hover,
 *.g_button a:hover,
 #layout-main ul.g_list li:hover,
@@ -173,7 +174,7 @@ input[type="submit"]:hover,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover
 {
-	background-color: #444444;
+	background-color: #555555;
 }
 
 #layout-main div.cmt_entries dl.profile

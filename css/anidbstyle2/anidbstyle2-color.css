@@ -334,7 +334,9 @@ select,
 }
 
 #layout-tabs ul.main-tabs li,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-menu li.sub-menu ul li#user-xpass input,
+#layout-menu li.sub-menu ul li#user-xname input
 {
 	border-color: #ABABAB;
 }

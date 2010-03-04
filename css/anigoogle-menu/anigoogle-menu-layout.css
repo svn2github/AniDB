@@ -134,7 +134,8 @@
 	width: 100%;
 }
 
-#layout-menu li.sub-menu ul li a
+#layout-menu li.sub-menu ul li > a,
+#layout-menu li.sub-menu ul li > label
 {
 	padding: 0.1em 0;
 }
