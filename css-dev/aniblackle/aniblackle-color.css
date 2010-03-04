@@ -98,10 +98,7 @@ html
 #layout-main div.desc,
 #layout-main div.anime_all div.desc,
 #layout-main div div.addrelform table tr,
-#layout-main div.tabbed_pane div.body,
-tr.g_odd,
-li.g_odd,
-span.g_odd
+#layout-main div.tabbed_pane div.body
 {
 	background-color: #404040;
 }
@@ -124,7 +121,10 @@ span.g_odd
 }
 
 #layout-main div.forum ul.topics li.g_odd.row,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+tr.g_odd,
+li.g_odd,
+span.g_odd
 {
 	background-color: #333333;
 }
