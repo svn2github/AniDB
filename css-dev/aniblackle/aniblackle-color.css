@@ -106,6 +106,12 @@ span.g_odd
 	background-color: #404040;
 }
 
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	border-bottom-color: #404040;
+}
+
 #layout-main div.forum ul.topics
 {
 	border-left-color: #404040;
@@ -130,8 +136,7 @@ span.link,
 #layout-tabs ul.main-tabs > li:hover a,
 #layout-tabs ul.main-tabs > li.selected a,
 ul.g_list li,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong,
 #layout-main div.pagination span a,
