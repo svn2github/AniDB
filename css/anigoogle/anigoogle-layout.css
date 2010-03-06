@@ -372,6 +372,7 @@ h4,
 	display: inline-block;
 }
 
+#layout-main div.group_all div.addfilem.options tr.group input,
 #layout-main div.filter_menu span.actions.old input
 {
 	margin-top: 3px;
