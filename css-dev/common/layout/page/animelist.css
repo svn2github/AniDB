@@ -2,7 +2,6 @@
 #layout-main div.animelist_all div.filters ul li span,
 #layout-main div.animelist_all div.filters ul li span span
 {
-    display: -moz-inline-box;
     display: inline-block;
 }
 
@@ -19,19 +18,8 @@
 
 #layout-main div.animelist_all table.animelist tr td
 {
-	padding-left: 1em;
-	padding-right: 1em;
-}
-
-#layout-main div.animelist_all table.animelist tr td.name
-{
-	width:75%;
-}
-
-#layout-main div.animelist_all table.animelist tr td.rating
-{
-	text-align: left;
-	min-width:6em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
 
 #layout-main div.animelist_all table.animelist tr td.count,
@@ -40,12 +28,36 @@
 	text-align: right;
 }
 
-#layout-main div.animelist_all table.animelist tr td.count
+#layout-main div.animelist_all table.animelist tr td.rating
 {
-	min-width:4em;
+	text-align: left;
 }
 
-#layout-main div.animelist_all td.type
+#layout-main div.animelist_all table.animelist tr td.name
 {
-	white-space:nowrap;
+	width:50%;
+}
+
+@media screen and (min-width: 1200px)
+{
+	#layout-main div.animelist_all table.animelist tr td.name
+	{
+		width:75%;
+	}
+
+	#layout-main div.animelist_all table.animelist tr td.rating
+	{
+		text-align: left;
+		min-width:6em;
+	}
+
+	#layout-main div.animelist_all table.animelist tr td.count
+	{
+		min-width:4em;
+	}
+
+	#layout-main div.animelist_all td.type
+	{
+		white-space:nowrap;
+	}
 }
