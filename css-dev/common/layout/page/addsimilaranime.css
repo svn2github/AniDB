@@ -1,4 +1,4 @@
-#layout-main div.addsimilaranime_entries div.block
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
 {
 	line-height: 1.4;
 	margin-bottom: 1em;
@@ -11,7 +11,7 @@
 	vertical-align: top;
 }
 
-#layout-main div.addsimilaranime_entries div.title
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	float: left;
 	margin-right: 1em;
@@ -20,77 +20,77 @@
 	width: 15em;
 }
 
-#layout-main div.addsimilaranime_entries dl.profile
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile
 {
 	display: block;
 	margin: 0 1em 0.5em;
 }
 
-#layout-main div.addsimilaranime_entries dl.profile dd
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
 {
 	clear: none;
 	float: none;
 	margin-left: 0;
 }
 
-#layout-main div.addsimilaranime_entries div.postbody
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
 	margin-top: 0.5em;
 	margin-left: 16em;
 	margin-right: 1em;
 }
 
-#layout-main div.addsimilaranime_entries div.postbody:first-of-type
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody:first-of-type
 {
 	margin-top: 1em;
 }
 
-#layout-main div.addsimilaranime_entries div.new
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.new
 {
 	margin: 0.5em 2em 1em 16em;
 }
 
-#layout-main div.addsimilaranime_entries div.new textarea
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.new textarea
 {
 	width: 100%;
 	height: 4em;
 }
 
-#layout-main div.addsimilaranime_entries div.new textarea + input
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.new textarea + input
 {
 	display: block;
 }
 
-#layout-main div.addsimilaranime_entries div.new form
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.new form
 {
 	text-align: left;
 }
 
-#layout-main div.addsimilaranime_entries div.postbody div.content
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody div.content
 {
 	padding: 4px;
 }
 
-#layout-main div.addsimilaranime_entries div.postbody p.author
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody p.author
 {
 	padding: 4px 0 0 4px;
 	display: inline-block;
 }
 
-#layout-main div.addsimilaranime_entries div.postbody span.actions,
-#layout-main div.addsimilaranime_entries div.postbody span.actions a,
-#layout-main div.addsimilaranime_entries dl.profile dd div.vote.icons
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody span.actions,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody span.actions a,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd div.vote.icons
 {
 	float: right;
 }
 
-#layout-main div.addsimilaranime_entries div.postbody span.actions
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody span.actions
 {
 	padding-right: 4px;
 	padding-top: 4px;
 }
 
-#layout-main div.addsimilaranime_entries div.postfooter
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postfooter
 {
 	clear: both;
 	height: 11px;
@@ -99,14 +99,14 @@
 	text-align: right;
 }
 
-#layout-main div.addsimilaranime_entries div.postfooter a.i_top
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postfooter a.i_top
 {
 	display: block;
 	float: right;
 }
 
-#layout-main div.addsimilaranime_entries div.block,
-#layout-main div.addsimilaranime_entries div.postbody
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -115,7 +115,7 @@
 	border-width:1px;
 }
 
-#layout-main div.addsimilaranime_entries div.title
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	border-right: 1px solid;
 }

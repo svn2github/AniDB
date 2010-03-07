@@ -60,6 +60,8 @@ th a
 	background-color: #CADCEB;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.g_timedentry div.body
 {
@@ -77,7 +79,7 @@ a:hover,
 #layout-main a.filter:hover,
 #layout-main div.pagination span a:hover,
 *.g_button a:hover,
-#layout-main div.addsimilaranime_entries a.name-colored
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored
 {
 	color: #AA0000;
 }
@@ -157,7 +159,7 @@ span.g_odd,
 #layout-main div.tagcloud,
 #layout-main div.desc,
 #layout-main div.anime_all div.similaranime div.stripe,
-#layout-main div.addsimilaranime_entries div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 *.g_button a:hover
 {
 	background-color: #ECF4FD;
@@ -169,8 +171,6 @@ table
 	border-top-color: blue;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.addsimilaranime_entries div.block,
 #layout-main div.anime_all div.info div.caststaff div h4,
 th
 {
@@ -203,8 +203,8 @@ select,
 
 #layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.anime_all div.similaranime div.stripe,
-#layout-main div.addsimilaranime_entries div.block,
-#layout-main div.addsimilaranime_entries div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 #layout-main div.g_timedentry div.body,
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.tabbed_pane div.body,
@@ -222,17 +222,17 @@ span.test
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }
 
-#layout-main div.addsimilaranime_entries div.title
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	border-color: #97AACC;
 }
 
-#layout-main div.addsimilaranime_entries dl.profile dd
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
 {
 	color:#666666;
 }
 
-#layout-main div.addsimilaranime_entries dl.profile dd strong
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
 {
 	color:#000000;
 }
