@@ -1,0 +1,157 @@
+/*TESTING! - DO NOT USE THIS ON PROD!!!*/
+
+#layout-main div.addsimilaranime_entries div.block
+{
+	line-height: 1.4;
+	margin-bottom: 1em;
+	min-height: 0;
+	text-align: left;
+	word-wrap: break-word;
+}
+
+#layout-main div.addsimilaranime_entries div.title
+{
+	float: left;
+	margin-right: 1em;
+	margin-top: 1em;
+	min-height: 80px;
+	width: 15em;
+}
+
+#layout-main div.addsimilaranime_entries dl.profile
+{
+	display: block;
+	margin: 0 1em 0.5em;
+}
+
+#layout-main div.addsimilaranime_entries dl.profile dd
+{
+	clear: none;
+	float: none;
+	margin-left: 0;
+}
+
+#layout-main div.addsimilaranime_entries dl.profile dd div.vote.icons
+{
+float:right;
+}
+
+#layout-main div.addsimilaranime_entries div.postbody
+{
+	margin-top: 0.5em;
+	margin-left: 16em;
+	margin-right:1em;
+}
+
+#layout-main div.addsimilaranime_entries div.postbody:first-of-type
+{
+margin-top:1em;
+}
+
+#layout-main div.addsimilaranime_entries div.new
+{
+margin-left: 16em;
+margin-bottom: 1em;
+margin-top:0.5em;
+}
+
+#layout-main div.addsimilaranime_entries div.new form
+{
+text-align:left;
+}
+
+
+#layout-main div.addsimilaranime_entries div.postbody div.content
+{
+	padding:4px;
+}
+
+#layout-main div.addsimilaranime_entries div.postbody p.author
+{
+	padding:4px 0 0 4px;
+	display:inline-block;
+}
+
+#layout-main div.addsimilaranime_entries div.postbody span.actions,
+#layout-main div.addsimilaranime_entries div.postbody span.actions a
+{
+	float: right;
+}
+
+#layout-main div.addsimilaranime_entries div.postbody span.actions
+{
+	padding-right: 4px;
+	padding-top: 4px;
+}
+
+#layout-main div.addsimilaranime_entries div.postfooter
+{
+	clear: both;
+	height: 11px;
+	padding-bottom: .9em;
+	padding-right: 1em;
+	text-align: right;
+}
+
+#layout-main div.addsimilaranime_entries div.postfooter a.i_top
+{
+	display: block;
+	float: right;
+}
+
+/*general - styling*/
+#layout-main div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_entries div.postbody
+{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid;
+}
+
+#layout-main div.addsimilaranime_entries div.title
+{
+border-right: 1px solid;
+}
+
+#layout-main div.addsimilaranime_entries a.name-colored
+{
+font-weight: bold;
+}
+
+/*specific styling*/
+#layout-main div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_entries div.postbody
+{
+border-color:#ABABAB #8E8E8E #8E8E8E #ABABAB;
+}
+
+#layout-main div.addsimilaranime_entries div.title
+{
+border-color:#8E8E8E;
+}
+
+#layout-main div.addsimilaranime_entries div.block
+{
+background-color:#CFD1D4;
+}
+
+#layout-main div.addsimilaranime_entries div.postbody
+{
+background-color:#C3C5C9;
+}
+
+#layout-main div.addsimilaranime_entries a.name-colored
+{
+color:#AA0000;
+}
+
+#layout-main div.addsimilaranime_entries dl.profile dd
+{
+color:#666666;
+}
+
+#layout-main div.addsimilaranime_entries dl.profile dd strong
+{
+color:#000000;
+}
