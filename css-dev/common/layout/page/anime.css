@@ -176,3 +176,94 @@
 {
 	min-width: 11em;
 }
+
+/*TESTING! - DO NOT USE THIS ON PROD!!!*/
+div.similaranime div.stripe
+{
+display:inline-block;
+width:400px;
+text-align:left;
+position:relative;
+}
+
+div.similaranime div.stripe div.image
+{
+margin: 0.5em;
+width:5em;
+height:5.5em;
+overflow:hidden;
+float:left;
+}
+
+div.similaranime div.stripe div.data
+{
+float:left;
+margin:0.5em 0.5em 0.5em 0;
+width:335px;
+}
+
+div.similaranime div.stripe div.name
+{
+margin-bottom:0.5em;
+}
+
+div.similaranime div.stripe div.stats span
+{
+display:block;
+}
+
+div.similaranime div.stripe div.vote.icons
+{
+float:right;
+}
+
+div.similaranime div.tooltip
+{
+display: none;
+}
+
+div.similaranime div.stripe div.image:hover div.tooltip
+{
+	display: block;
+	width: 500px;
+	text-align:left;
+z-index:10;
+position:absolute;
+margin:2em 0 0 3em;
+}
+
+div.similaranime div.stripe div.tooltip div.comments div.content
+{
+padding:0 4px 4px;
+}
+
+div.similaranime div.stripe div.tooltip div.comments div.postbody + div.postbody
+{
+margin-top: 0.5em;
+}
+
+div.similaranime div.stripe div.tooltip div.postbody,
+div.similaranime div.stripe
+{
+border-style:solid;
+border-width:1px;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+}
+
+div.similaranime div.stripe div.tooltip div.postbody,
+div.similaranime div.stripe
+{
+border-color:#ABABAB #8E8E8E #8E8E8E #ABABAB;
+}
+
+div.similaranime div.stripe
+{
+background-color:#C3C5C9;
+}
+
+div.similaranime div.stripe div.tooltip div.postbody
+{
+background-color:#CFD1D4;
+}
