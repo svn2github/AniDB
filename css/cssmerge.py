@@ -12,17 +12,17 @@ def cssmerge(fullpath, outfile):
         nr += 1
         line = line.strip()
         
-        if line.count("{")>0:
-            if incurly :
-                print "ERROR: double curly @ "+fullpath+":"+`incurly`+"-"+`nr`
-                sys.exit()
-            else : incurly = nr
+        #if line.count("{")>0:
+        #    if incurly :
+        #        print "ERROR: double curly @ "+fullpath+":"+`incurly`+"-"+`nr`
+        #        sys.exit()
+        #    else : incurly = nr
 
-        if line.count("}")>0:
-            if incurly : incurly = 0
-            else:
-                print "ERROR: negative curly @ "+fullpath+":"+`nr`
-                sys.exit()
+        #if line.count("}")>0:
+        #    if incurly : incurly = 0
+        #    else:
+        #        print "ERROR: negative curly @ "+fullpath+":"+`nr`
+        #        sys.exit()
     
         if line.startswith("@import"):
             monkey = line[line.find('"')+1:line.rfind('"')]
