@@ -406,7 +406,8 @@ div.quotebody div.quoteof,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
 #layout-main div.userpage_all div.discussions tr.unread td,
 #layout-main div.userpage_all div.msg tr.unread td,
-#layout-main div.userpage_all div.news tr.unread td
+#layout-main div.userpage_all div.news tr.unread td,
+#layout-main div.addsimilaranime_entries a.name-colored
 {
 	font-weight:bold;
 }
