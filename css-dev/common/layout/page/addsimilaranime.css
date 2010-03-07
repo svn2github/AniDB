@@ -63,7 +63,7 @@ width:100%;
 height:4em;
 }
 
-#layout-main div.addsimilaranime_entries div.new input
+#layout-main div.addsimilaranime_entries div.new textarea + input
 {
 	display: block;
 }
