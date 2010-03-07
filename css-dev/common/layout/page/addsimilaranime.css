@@ -54,15 +54,18 @@ margin-top:1em;
 
 #layout-main div.addsimilaranime_entries div.new
 {
-margin-left: 16em;
-margin-bottom: 1em;
-margin-top:0.5em;
+margin: 0.5em 2em 1em 16em
 }
 
 #layout-main div.addsimilaranime_entries div.new textarea
 {
-width:80%;
+width:100%;
 height:4em;
+}
+
+#layout-main div.addsimilaranime_entries div.new input
+{
+	display: block;
 }
 
 #layout-main div.addsimilaranime_entries div.new form
