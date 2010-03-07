@@ -7,6 +7,8 @@
 	min-height: 0;
 	text-align: left;
 	word-wrap: break-word;
+	width: 49%;
+	display: inline-table;
 }
 
 #layout-main div.addsimilaranime_entries div.title
