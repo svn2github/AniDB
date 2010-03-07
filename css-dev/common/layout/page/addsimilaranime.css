@@ -8,7 +8,9 @@
 	text-align: left;
 	word-wrap: break-word;
 	width: 49%;
+	min-width:35em;
 	display: inline-table;
+	vertical-align:top;
 }
 
 #layout-main div.addsimilaranime_entries div.title
@@ -55,6 +57,12 @@ margin-top:1em;
 margin-left: 16em;
 margin-bottom: 1em;
 margin-top:0.5em;
+}
+
+#layout-main div.addsimilaranime_entries div.new textarea
+{
+width:80%;
+height:4em;
 }
 
 #layout-main div.addsimilaranime_entries div.new form
