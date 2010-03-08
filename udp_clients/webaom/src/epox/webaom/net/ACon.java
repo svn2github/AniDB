@@ -286,7 +286,7 @@ public class ACon implements ActionListener{
 				return r;
 			}catch(SocketTimeoutException e){
 				generateTag();
-				error("Operation Failed: TIME OUT. Try #"+timeouts);
+				error("Operation Failed: TIMEOUT or SERVER BUSY. Try #"+timeouts);
 				m_s.delay += 100;
 				//m_tm.start();
 			}catch(IOException e){ e.printStackTrace();

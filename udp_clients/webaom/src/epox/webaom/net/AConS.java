@@ -19,6 +19,7 @@ public class AConS{
 	 * @param max	maximum timeouts
 	 * @param n		enable nat check
 	 */
+	
 	public AConS(String h, int rp, int lp, int to, int del, int max, boolean n){
 		host = h;
 		rport = rp;

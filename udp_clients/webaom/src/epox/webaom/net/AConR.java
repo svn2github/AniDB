@@ -20,6 +20,8 @@
  */
 package epox.webaom.net;
 
+import java.net.SocketTimeoutException;
+
 import epox.util.U;
 
 public class AConR{
@@ -27,7 +29,7 @@ public class AConR{
 	public String message = null;
 	public String data = null, tag;
 
-	public AConR(String sTag, int tag_len, String raw) throws AConEx, TagEx{
+	public AConR(String sTag, int tag_len, String raw) throws AConEx, TagEx, SocketTimeoutException {
 		if(sTag!=null && raw.length()>0 && raw.charAt(0)=='t'){
 			tag = raw.substring(0,tag_len+1);
 			if(!tag.equals(sTag)) throw new TagEx();
@@ -38,8 +40,10 @@ public class AConR{
 		}catch(NumberFormatException e){
 			throw new AConEx(AConEx.ANIDB_SERVER_ERROR, "Unexpected response");
 		}
-		if(code>600&&code<700)
+		
+		if( (code > 600 && code < 700) && code != 602 )
 			throw new AConEx(AConEx.ANIDB_SERVER_ERROR, raw);
+		
 		int i;
 		switch(code){
 			case BANNED:
@@ -58,16 +62,10 @@ public class AConR{
 				data = raw.substring(4, i-1);
 				message = raw.substring(i);
 				break;
-			/*case FILE:
-				message = raw.substring(4, 8);
-				data = raw.substring(9);
-				break;
-			case MYLIST:
-				message = raw.substring(4, 10);
-				data = raw.substring(11);
-				break;*/
 			case ACCESS_DENIED:
 				throw new AConEx(AConEx.CLIENT_USER);
+			case SERVER_BUSY:
+			    throw new SocketTimeoutException();
 			case CLIENT_BANNED:
 				message = raw.substring(4, 17);
 				//data = raw.substring(18);
@@ -188,7 +186,8 @@ public class AConR{
 	 * SERVER SIDE FAILURE 6XX
 	 */
 
-	INTERNAL_SERVER_ERROR			=600; //C
+	INTERNAL_SERVER_ERROR			= 600, //C
+	SERVER_BUSY                     = 602;
 //	ANIDB_OUT_OF_SERVICE			=601, //C
 //	API_VIOLATION					=666; //C
 }

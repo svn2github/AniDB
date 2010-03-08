@@ -1,5 +1,8 @@
 WebAOM!
 
+1.19p 2010.03.07
+*Hack to keep receive thread from dribbling all over itself and quitting if the server replies with a 602.  Probably.
+
 1.19o 2010.02.16
 *Removed the external DB support for YEN tag.  Should work as before.
   TODO: Update SQL? commands to work with YEN tag in DB.java?  Will probably break previous databases's.
@@ -11,7 +14,7 @@ WebAOM!
 *Fixed the %yen tag (Was returning yea at a part).
 
 1.19m 2009.09.10:
-*WebAOM could only handle 999 files before it started doing bad things; updated limit to 99,999 files.  ?? Implement Proper Fix ??
+*WebAOM could only handle 999 files before it started doing bad things; updated limit to 99,999 files.
 
 1.19m 2009.09.02:
 *Temp Fix for Incorrect renames during dropped requests [ommina].
