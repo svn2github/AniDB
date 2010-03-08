@@ -79,7 +79,8 @@ a:hover,
 #layout-main a.filter:hover,
 #layout-main div.pagination span a:hover,
 *.g_button a:hover,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored
 {
 	color: #AA0000;
 }
@@ -222,6 +223,7 @@ span.test
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.name,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	border-color: #97AACC;

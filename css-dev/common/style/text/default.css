@@ -407,7 +407,8 @@ div.quotebody div.quoteof,
 #layout-main div.userpage_all div.discussions tr.unread td,
 #layout-main div.userpage_all div.msg tr.unread td,
 #layout-main div.userpage_all div.news tr.unread td,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored
 {
 	font-weight:bold;
 }

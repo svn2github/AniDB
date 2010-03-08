@@ -204,6 +204,9 @@
 #layout-main div.anime_all div.similaranime div.stripe div.name
 {
 	margin-bottom: 0.5em;
+	margin-right: 5em;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
 }
 
 #layout-main div.anime_all div.similaranime div.stripe div.stats span

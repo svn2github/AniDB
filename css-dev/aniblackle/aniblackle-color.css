@@ -182,6 +182,11 @@ input[type="submit"]:hover,
 	background-color: #555555;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.name
+{
+	border-bottom-color: #666666;
+}
+
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title,
 #layout-main div.cmt_entries dl.profile
 {
