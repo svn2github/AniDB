@@ -9,17 +9,13 @@
 #layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
-	background-color: #FAFAFA;
+	background-color: #C3C5C9;
 }
 
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title,
 #layout-main div.anime_all div.similaranime div.stripe div.name
 {
-	border-bottom-color: #999999;
-}
-
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
-{
-	border-right-color: #999999;
+	border-color: #ABABAB;
 }
 
 #layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
@@ -27,7 +23,7 @@
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
-	border-color: #D1D7DC;
+	border-color: #ABABAB #8E8E8E #8E8E8E #ABABAB;
 }
 
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
