@@ -60,6 +60,10 @@ th a
 	background-color: #CADCEB;
 }
 
+#layout-main div.tabbed_pane_main div.tagcloud,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.g_timedentry div.body
 {
@@ -75,7 +79,10 @@ th a
 span.link:hover,
 a:hover,
 #layout-main a.filter:hover,
-#layout-main div.pagination span a:hover
+#layout-main div.pagination span a:hover,
+*.g_button a:hover,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored
 {
 	color: #AA0000;
 }
@@ -153,7 +160,11 @@ span.g_odd,
 #layout-main div.profile_all div.default_languages table tr,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.tagcloud,
-#layout-main div.desc
+#layout-main div.desc,
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
+*.g_button a:hover
 {
 	background-color: #ECF4FD;
 }
@@ -181,12 +192,6 @@ tr,
 	background-color: #FFFFFF;
 }
 
-*.g_button a:hover
-{
-	background-color: #ECF4FD;
-	color: #AA0000;
-}
-
 #layout-main div.tabbed_pane ul.tabs li,
 input[type="text"],
 input[type="password"],
@@ -200,6 +205,10 @@ select,
 	border-color: #C9D7F1;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 #layout-main div.g_timedentry div.body,
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.tabbed_pane div.body,
@@ -215,4 +224,20 @@ select,
 span.test
 {
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.name,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
+{
+	border-color: #97AACC;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
+{
+	color:#666666;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
+{
+	color:#000000;
 }

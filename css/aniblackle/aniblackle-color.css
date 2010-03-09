@@ -30,11 +30,14 @@ span.link:hover,
 #layout-menu li.sub-menu:hover,
 button:hover,
 input[type="button"]:hover,
-input[type="submit"]:hover
+input[type="submit"]:hover,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored:hover,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored:hover
 {
 	color: #FFFFFF;
 }
 
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.forum ul.topics li.row,
 #layout-main div.pagination span a:hover,
@@ -98,7 +101,9 @@ html
 #layout-main div.desc,
 #layout-main div.anime_all div.desc,
 #layout-main div div.addrelform table tr,
-#layout-main div.tabbed_pane div.body
+#layout-main div.tabbed_pane div.body,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.similaranime div.stripe
 {
 	background-color: #404040;
 }
@@ -120,6 +125,10 @@ html
 	border-top-color: #777777;
 }
 
+#layout-main div.tabbed_pane_main div.tagcloud,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 tr.g_odd,
@@ -142,7 +151,10 @@ ul.g_list li,
 #layout-main div.pagination span a,
 div.quotebody,
 #layout-main table tr.header,
-#layout-main table thead tr
+#layout-main table thead tr,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
 {
 	color: #CCCCCC;
 }
@@ -177,6 +189,12 @@ input[type="submit"]:hover,
 	background-color: #555555;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.name
+{
+	border-bottom-color: #666666;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title,
 #layout-main div.cmt_entries dl.profile
 {
 	border-right-color: #666666;
@@ -204,6 +222,7 @@ input[type="submit"]:hover,
 #layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt,
 #layout-main div.cmt_entries dl.profile dd,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd,
 #layout-main div.forum div.poll dl dd,
 #layout-main div.forum div.events dl dd
 {
@@ -344,6 +363,10 @@ select,
 	border: 1px solid #666666;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 span.test,
 button,
 input[type="button"],

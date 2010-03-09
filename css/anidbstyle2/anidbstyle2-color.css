@@ -15,7 +15,9 @@ a:link
 }
 
 span.link:hover,
-a:hover
+a:hover,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored
 {
 	color: #AA0000;
 }
@@ -208,11 +210,18 @@ html,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
-#layout-main div.format-buttons input
+#layout-main div.format-buttons input,
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
 	background-color: #C3C5C9;
 }
 
+#layout-main div.tabbed_pane_main div.tagcloud,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.forum ul.topics li.row,
 #layout-tabs ul.main-tabs li.selected,
 #layout-tabs ul.main-tabs li:hover,
@@ -320,6 +329,10 @@ select,
 	border-color: #34394D;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 #layout-main div.g_timedentry div.body,
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.tabbed_pane div.body,
@@ -333,6 +346,8 @@ select,
 	border-color: #ABABAB #8E8E8E #8E8E8E #ABABAB;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.name,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title,
 #layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-menu li.sub-menu ul li#user-xpass input,
@@ -384,12 +399,14 @@ select,
 	border-bottom-color: #7EF27E;
 }
 
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong,
 #layout-tabs ul.main-tabs li.selected a,
 #layout-tabs ul.main-tabs li:hover a
 {
 	color: #000000;
 }
 
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd,
 #layout-main div.forum div.events h2
 {
 	color: #666666;

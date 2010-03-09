@@ -176,3 +176,81 @@
 {
 	min-width: 11em;
 }
+
+#layout-main div.anime_all div.similaranime div.stripe
+{
+	display: inline-block;
+	width: 400px;
+	text-align: left;
+	position: relative;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.image
+{
+	margin: 0.5em;
+	width: 5em;
+	height: 5.5em;
+	overflow: hidden;
+	float: left;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.data
+{
+	float: left;
+	margin: 0.5em 0.5em 0.5em 0;
+	width: 335px;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.name
+{
+	margin-bottom: 0.5em;
+	margin-right: 5em;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.stats span
+{
+	display: block;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.vote.icons
+{
+	float: right;
+}
+
+#layout-main div.anime_all div.similaranime div.tooltip
+{
+	display: none;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.image:hover div.tooltip
+{
+	display: block;
+	width: 400px;
+	text-align: left;
+	z-index: 10;
+	position: absolute;
+	margin: 2em 0 0 3em;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.comments div.content
+{
+	padding: 0 4px 4px;
+	word-wrap: break-word;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.comments div.postbody + div.postbody
+{
+	margin-top: 0.5em;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.similaranime div.stripe
+{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border-style:solid;
+	border-width:1px;
+}

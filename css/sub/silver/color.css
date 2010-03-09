@@ -156,3 +156,51 @@ div.pagination span strong
 {
 	background-color:#DEE3E7;
 }
+
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
+{
+	background-color: #DEE3E7;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
+{
+	background-color: #FAFAFA;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.name
+{
+	border-bottom-color: #999999;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
+{
+	border-right-color: #999999;
+}
+
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
+{
+	border-color: #D1D7DC;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored
+{
+	color: #AA0000;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
+{
+	color:#666666;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
+{
+	color:#000000;
+}

@@ -186,6 +186,9 @@ input[type="checkbox"]
 	font-size: 130%;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *
@@ -193,20 +196,9 @@ input[type="checkbox"]
 	background-color:#A9ABB1;
 }
 
-#layout-main div.tabbed_pane div.body
-{
-	background-color:#b8bac0;
-}
-
 #layout-main div.tabbed_pane ul.tabs li
 {
 	background-color:#D3D5D9;
-}
-
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected
-{
-	background:#b8bac0;
 }
 
 #layout-main div.main_all div.register div.inner,
@@ -226,7 +218,13 @@ input[type="checkbox"]
 #layout-main div.animeatt_reviews div.review div.text,
 #layout-main div.g_timedentry div.body,
 #layout-main div.tagcloud,
-#layout-main div.desc
+#layout-main div.desc,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-main div.tabbed_pane div.body,
+#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
 	background-color:#B8BAC0;
 }
@@ -240,4 +238,14 @@ input[type="checkbox"]
 {
 	border-top-color:#9A9CA1;
 	color:#777777;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
+{
+	color:#444444;
+}
+
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
+{
+	color:#000000;
 }
