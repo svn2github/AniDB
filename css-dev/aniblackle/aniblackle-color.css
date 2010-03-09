@@ -102,6 +102,7 @@ html
 #layout-main div.anime_all div.desc,
 #layout-main div div.addrelform table tr,
 #layout-main div.tabbed_pane div.body,
+#layout-main div.anime_all div.tabbed_pane tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.anime_all div.similaranime div.stripe
 {
 	background-color: #404040;
@@ -124,6 +125,7 @@ html
 	border-top-color: #777777;
 }
 
+#layout-main div.anime_all div.tabbed_pane tabbed_pane_main div.similaranime div.stripe,
 #layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 #layout-main div.forum ul.topics li.g_odd.row,

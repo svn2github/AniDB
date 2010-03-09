@@ -60,6 +60,7 @@ th a
 	background-color: #CADCEB;
 }
 
+#layout-main div.anime_all div.tabbed_pane tabbed_pane_main div.similaranime div.stripe,
 #layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.animeatt_reviews div.review div.text,
@@ -160,6 +161,7 @@ span.g_odd,
 #layout-main div.tagcloud,
 #layout-main div.desc,
 #layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.anime_all div.tabbed_pane tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 *.g_button a:hover
 {
