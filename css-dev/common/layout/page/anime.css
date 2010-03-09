@@ -237,6 +237,7 @@
 #layout-main div.anime_all div.similaranime div.stripe div.tooltip div.comments div.content
 {
 	padding: 0 4px 4px;
+	word-wrap: break-word;
 }
 
 #layout-main div.anime_all div.similaranime div.stripe div.tooltip div.comments div.postbody + div.postbody
