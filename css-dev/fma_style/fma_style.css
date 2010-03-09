@@ -430,13 +430,13 @@ div.pagination span a,
 	background-color: #F5F7FF;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
+#layout-main div.anime_all div.similaranime div.stripe div.name
 {
 	border-bottom-color: #D3D7E2;;
 	border-bottom-style: dotted;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.name
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	border-right-color: #D3D7E2;;
 	border-right-style: dotted;
