@@ -60,6 +60,7 @@
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.new textarea + input
 {
 	display: block;
+	margin-top: 0.2em;
 }
 
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.new form
