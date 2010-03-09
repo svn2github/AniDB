@@ -212,3 +212,8 @@ div.pagination span a
 {
 	color:#000000;
 }
+
+#layout-main div.anime_all div.similaranime div.stripe div.data
+{
+	width:320px;
+}
