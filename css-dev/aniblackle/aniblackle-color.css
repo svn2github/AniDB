@@ -35,6 +35,7 @@ input[type="submit"]:hover
 	color: #FFFFFF;
 }
 
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.forum ul.topics li.row,
 #layout-main div.pagination span a:hover,
@@ -62,7 +63,6 @@ html
 	background-color: #000000;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong,
 #layout-main div.cmt_entries dl.profile dd strong
 {
 	color: #666666;
@@ -145,7 +145,8 @@ ul.g_list li,
 #layout-main div.pagination span a,
 div.quotebody,
 #layout-main table tr.header,
-#layout-main table thead tr
+#layout-main table thead tr,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
 {
 	color: #CCCCCC;
 }
@@ -176,8 +177,7 @@ input[type="submit"]:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
+#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody
 {
 	background-color: #555555;
 }
