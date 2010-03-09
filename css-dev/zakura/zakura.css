@@ -168,6 +168,11 @@ div.pagination span a
 	font-size:80%;
 }
 
+#layout-main div.anime_all div.similaranime div.stripe
+{
+	font-size:90%;
+}
+
 #layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
