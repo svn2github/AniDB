@@ -6,7 +6,8 @@
 #layout-main div.myvotes_all table tr td.low,
 #layout-main div.addcreatoranimerel_all tr.left_only,
 #layout-main div.addcreatorsongrel_all tr.left_only,
-#layout-main div.timeline_all div.timeline ul.row li.stalled a
+#layout-main div.timeline_all div.timeline ul.row li.stalled a,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block.low
 {
 	background-color:#564444;
 }
@@ -48,7 +49,8 @@
 #layout-main table.animelist tr.mylist,
 #layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
 #layout-main div.latestanimes_all div.g_section.mylist tr.mylist td,
-#layout-main div.timeline_all div.timeline ul.row li.completed a
+#layout-main div.timeline_all div.timeline ul.row li.completed a,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block.high
 {
 	background-color:#364a36;
 }
