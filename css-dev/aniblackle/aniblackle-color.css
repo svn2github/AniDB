@@ -30,7 +30,9 @@ span.link:hover,
 #layout-menu li.sub-menu:hover,
 button:hover,
 input[type="button"]:hover,
-input[type="submit"]:hover
+input[type="submit"]:hover,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored:hover,
+#layout-main div.anime_all div.similaranime div.stripe a.name-colored:hover
 {
 	color: #FFFFFF;
 }
@@ -173,8 +175,6 @@ button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 *.g_button a:hover,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored:hover,
-#layout-main div.anime_all div.similaranime div.stripe a.name-colored:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-main div.pagination span a,
