@@ -240,12 +240,6 @@ input[type="checkbox"]
 	color:#777777;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-#layout-main div.anime_all div.similaranime div.stripe a.name-colored
-{
-	color: #AA0000;
-}
-
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
 {
 	color:#444444;
