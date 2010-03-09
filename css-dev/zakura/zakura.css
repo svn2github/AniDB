@@ -203,13 +203,8 @@ div.pagination span a
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
+	border: 1px solid;
 	border-color:#F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
-}
-
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-#layout-main div.anime_all div.similaranime div.stripe a.name-colored,
-{
-	color: #AA0000;
 }
 
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
