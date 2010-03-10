@@ -2,3 +2,8 @@
 {
 	width: 100%
 }
+
+#layout-main div.latest_all table td.name.user
+{
+	min-width: 10em;
+}
