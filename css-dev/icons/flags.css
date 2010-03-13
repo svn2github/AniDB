@@ -228,6 +228,16 @@
 	background-image: url(../icons/flags/anidb_sub_japanese.gif);
 }
 
+*.i_audio_jv
+{
+	background-image: url(../icons/flags/anidb_audio_javanese.gif);
+}
+
+*.i_sub_jv
+{
+	background-image: url(../icons/flags/anidb_sub_javanese.gif);
+}
+
 *.i_audio_ka
 {
 	background-image: url(../icons/flags/anidb_audio_georgian.gif);
