@@ -40,7 +40,9 @@
 #layout-main table.animelist tr.mylist,
 #layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
 #layout-main div.latestanimes_all div.g_section.mylist tr.mylist td,
-#layout-main div.timeline_all div.timeline ul.row li.completed a
+#layout-main div.timeline_all div.timeline ul.row li.completed a,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody
 {
 	background-color: #f2ffe9;
 }
