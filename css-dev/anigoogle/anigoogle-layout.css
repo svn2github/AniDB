@@ -233,23 +233,6 @@ h4,
 	margin: 1px 1px 1px 6px;
 }
 
-#layout-main div.desc
-{
-	border: 1px solid;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	padding: 4px;
-}
-
-#layout-main div.tagcloud,
-#layout-main div.catcloud
-{
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-
 #layout-main ul.g_list + ul.g_list
 {
 	margin-top: -1em;
@@ -419,4 +402,9 @@ h4,
 button + button
 {
 	margin-left: 0.5em;
+}
+
+*.g_bubble
+{
+	padding: 4px;
 }
