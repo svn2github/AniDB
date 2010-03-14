@@ -176,7 +176,7 @@ input[type="submit"]:hover,
 }
 
 .g_bubble,
-.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble,
 html,
 #layout-menu,
 #layout-main *.g_odd *.g_odd,
