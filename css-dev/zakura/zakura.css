@@ -221,3 +221,7 @@ div.pagination span a
 	width:320px;
 }
 
+#layout-main div.g_timedentry div.body
+{
+	padding:1em;
+}
