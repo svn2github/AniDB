@@ -42,20 +42,33 @@
 }
 
 #layout-tabs ul.main-tabs li:hover,
-#layout-tabs ul.main-tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected
+#layout-tabs ul.main-tabs li.selected
 {
 	background-color:#FFFFFF;
 	color:#7762ED;
 	border-bottom:1px double #FFFFFF;
 }
 
-#layout-tabs ul.main-tabs li,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-tabs ul.main-tabs li
 {
 	color:#4D2F5F;
 	background-color:#F5F7FF;
+	border:1px solid #F3E7FF;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color:#F5F7FF;
+	color:#4D2F5F;
+	border-bottom:1px double #F5F7FF;
+}
+
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#FFFFFF;
+	color:#7762ED;
 	border:1px solid #F3E7FF;
 }
 
