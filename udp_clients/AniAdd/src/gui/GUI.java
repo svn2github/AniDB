@@ -169,8 +169,12 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         InitUI();
 
-        if((Integer)(mem.get("FirstStart", 0)) < 4){
-            DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "AniDBFN, FALng, FSLng fields in TagSystem fixed."));
+        if((Integer)(mem.get("FirstStart", 0)) < 5){
+            DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>- Do not unset watched state when 'Mark watched' is unchecked (to unset refer to ShowSetWatchedState in Options Tab)<br/>" +
+                    "- 'Recursivly delete folders until non-empty folder found' option added<br/>" +
+                    "- Fixed rare rename related files bug<br/>" +
+                    "- Move related files with processed file<br/>" +
+                    "- Tagsystem: Watched variable reflects watched state in AniDB</html>"));
         }
 
         modState = eModState.Initialized;

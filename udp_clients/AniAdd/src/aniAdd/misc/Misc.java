@@ -66,16 +66,14 @@ public class Misc {
 
     public static String toMask(BitSet ba, int length) {
         String hex = "";
-        byte hexPart;
+        int hexPart;
 
-        for (int I = 0; I < length; I += 4) {
+        for (int i = 0; i < length; i += 8) {
             hexPart = 0;
-            for (int J = 0; J < 4; J++) {
-                hexPart += ba.get(I + J) ? (1 << J) : 0;
-            }
-            hex = Integer.toHexString(hexPart).toUpperCase() + hex;
+            for (int j = 0; j < 8; j++) hexPart += ba.get(i + j) ? (1 << j) : 0;
+            hex += stringPadding(Integer.toHexString(hexPart).toUpperCase(), 2, '0');
         }
-        return hex.substring(6, 8) + hex.substring(4, 6) + hex.substring(2, 4) + hex.substring(0, 2);
+        return hex;
     }
 
     public static BitSet getBits(int b) {

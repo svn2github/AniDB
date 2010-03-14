@@ -17,7 +17,7 @@ import udpApi.Mod_UdpApi;
  * @author Arokh
  */
 public class AniAdd implements IAniAdd{
-    final static int CURRENTVER = 4;
+    final static int CURRENTVER = 5;
 
     TreeMap<String, IModule> modules;
     EventHandler eventHandler;
@@ -48,7 +48,6 @@ public class AniAdd implements IAniAdd{
 
     public void Start(){
         ComFire(new ComEvent(this, ComEvent.eType.Information, IModule.eModState.Initializing));
-        mem.put("FirstStart", CURRENTVER);
 
         for (IModule module : modules.values()) {
             System.out.println("Initializing: " + module.ModuleName());
@@ -63,6 +62,7 @@ public class AniAdd implements IAniAdd{
             for (IModule module : modules.values()) { allModsInitialized &= module.ModState() == IModule.eModState.Initialized; }
         }
 
+        mem.put("FirstStart", CURRENTVER);
         ComFire(new ComEvent(this, ComEvent.eType.Information, IModule.eModState.Initialized));
     }
     

@@ -40,105 +40,126 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     private long byteCount;
     //private long processedBytes;
 
-
     public GUI_FileAdd() {
         initComponents();
     }
 
     public void Initialize(IAniAdd aniAdd, final IGUI gui) {
         this.gui = gui;
-        this.aniAdd = aniAdd;    
+        this.aniAdd = aniAdd;
         epProc = (Mod_EpProcessing)aniAdd.GetModule("EpProcessing");
         api = (Mod_UdpApi)aniAdd.GetModule("UdpApi");
 
         api.AddComListener(new ComListener() {
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Type()==ComEvent.eType.Error || comEvent.Type()==ComEvent.eType.Fatal) {
+                if (comEvent.Type() == ComEvent.eType.Error || comEvent.Type() == ComEvent.eType.Fatal) {
                     LockDown();
                 }
             }
         });
         epProc.AddComListener(new ComListener() {
             public void EventHandler(ComEvent comEvent) {
-                if(comEvent.Type()==ComEvent.eType.Information){
-                    if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileEvent) {
-                        int fileIndex = epProc.Id2Index((Integer)comEvent.Params(2));
-                        ((DefaultTableModel)tbl_Files.getModel()).fireTableRowsUpdated(fileIndex, fileIndex);
-                    } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.FileCountChanged) {
+                if (comEvent.Type() == ComEvent.eType.Information) {
+                    if (comEvent.Params(0) == Mod_EpProcessing.eComType.FileEvent) {
+                        int fileIndex = epProc.Id2Index((Integer) comEvent.Params(2));
+                        ((DefaultTableModel) tbl_Files.getModel()).fireTableRowsUpdated(fileIndex, fileIndex);
+                    } else if (comEvent.Params(0) == Mod_EpProcessing.eComType.FileCountChanged) {
                         byteCount = epProc.totalBytes();
                         //processedBytes = epProc.processedBytes();
-                        ((DefaultTableModel)tbl_Files.getModel()).fireTableDataChanged();
-                    } else if(comEvent.Params(0) == Mod_EpProcessing.eComType.Status) {
+                        ((DefaultTableModel) tbl_Files.getModel()).fireTableDataChanged();
+                    } else if (comEvent.Params(0) == Mod_EpProcessing.eComType.Status) {
                         EpProcStatusEvent(comEvent);
                     }
-                } else if(comEvent.Type()==ComEvent.eType.Error || comEvent.Type()==ComEvent.eType.Fatal){
+                } else if (comEvent.Type() == ComEvent.eType.Error || comEvent.Type() == ComEvent.eType.Fatal) {
                     LockDown();
                 }
 
             }
         });
-        
+
         FileTable_TM tm = new gui.FileTable_TM(epProc);
         tbl_Files.setDefaultRenderer(Object.class, new FileTable_Renderer());
         tbl_Files.setModel(tm);
         tbl_Files.setRowHeight(19);
         tbl_Files.getColumnModel().getColumn(1).setMaxWidth(72);
 
-        chck_MarkWatched.setSelected((Boolean)gui.FromMem("SetWatched", DEFWATCHED));
-        chck_AddToML.setSelected((Boolean)gui.FromMem("AddToMyList", DEFADDTOML));
+        chck_MarkWatched.setSelected((Boolean) gui.FromMem("SetWatched", DEFWATCHED));
+        chck_AddToML.setSelected((Boolean) gui.FromMem("AddToMyList", DEFADDTOML));
         chck_MarkWatched.setEnabled(chck_AddToML.isSelected());
-        chck_RenameMoveFiles.setSelected((Boolean)gui.FromMem("RenameFiles", DEFRENAMEMOVE));
-        cmb_Storage.setSelectedIndex((Integer)gui.FromMem("SetStorageType", DEFSTORAGETYPE));
-        txt_Other.setText((String)gui.FromMem("OtherText", ""));
-        txt_Source.setText((String)gui.FromMem("SourceText", ""));
-        txt_Storage.setText((String)gui.FromMem("StorageText", ""));
+        chck_RenameMoveFiles.setSelected((Boolean) gui.FromMem("RenameFiles", DEFRENAMEMOVE));
+        chck_SetWatchedState.setSelected((Boolean) gui.FromMem("SetWatchedState", false));
+        cmb_Storage.setSelectedIndex((Integer) gui.FromMem("SetStorageType", DEFSTORAGETYPE));
+        txt_Other.setText((String) gui.FromMem("OtherText", ""));
+        txt_Source.setText((String) gui.FromMem("SourceText", ""));
+        txt_Storage.setText((String) gui.FromMem("StorageText", ""));
 
-        ToggleFileInfoPane();
-        ToggleEditBoxes();
-        ToggleRenameMove();
+        UpdateSetWatchedState();
+        UpdateFileInfoPane();
+        UpdateEditBoxes();
+        UpdateRenameMove();
 
         gui.SetDragnDropHandler(new FSTransfer());
     }
 
     private void LockDown() {
-    	if(true) return;
+        if (true) {
+            return;
+        }
         btn_Start.setEnabled(false);
         btn_AddFiles.setEnabled(false);
         btn_AddFolders.setEnabled(false);
         gui.SetDragnDropHandler(null);
     }
-    public void Terminate() { labelUpdater.Terminate(); }
+    public void Terminate() {
+        labelUpdater.Terminate();
+    }
     public void GUIEventHandler(ComEvent comEvent) {
-        if(comEvent.ParamCount()>1 && "OptionChange".equals((String)comEvent.Params(0))){
-            if("ShowFileInfoPane".equals((String)comEvent.Params(1))){
-                ToggleFileInfoPane();
-            } else if("ShowSrcStrOtEditBoxes".equals((String)comEvent.Params(1))){
-                ToggleEditBoxes();
-            } else if("EnableFileMoving".equals((String)comEvent.Params(1))){
-                ToggleRenameMove();
+        if (comEvent.ParamCount() > 1 && "OptionChange".equals((String) comEvent.Params(0))) {
+            if ("ShowFileInfoPane".equals((String) comEvent.Params(1))) {
+                UpdateFileInfoPane();
+            } else if ("ShowSrcStrOtEditBoxes".equals((String) comEvent.Params(1))) {
+                UpdateEditBoxes();
+            } else if ("EnableFileMoving".equals((String) comEvent.Params(1))) {
+                UpdateRenameMove();
+            } else if ("ShowSetWatchedStateBox".equals((String) comEvent.Params(1))) {
+                UpdateSetWatchedState();
+
+                Boolean watched; //refractor
+                if((Boolean)gui.FromMem("ShowSetWatchedStateBox", false)){
+                    watched = chck_SetWatchedState.isSelected()? chck_MarkWatched.isSelected() : null;
+                } else {
+                    watched = chck_MarkWatched.isSelected() ? true : null;
+                }
+                ToggleWatched(watched);
             }
 
         }
     }
-
     public String TabName() {
         return "FileAdd";
     }
 
-    public int PreferredTabLocation() { return 0; }
+    public int PreferredTabLocation() {
+        return 0;
+    }
 
     public void GainedFocus() {}
     public void LostFocus() {}
-    
+
     class FSTransfer extends TransferHandler {
-        static final long serialVersionUID=0;
-        public boolean importData(JComponent comp, Transferable t){
-            final List<File> files= GUI.transferableToFileList(t);
+
+        static final long serialVersionUID = 0;
+
+        public boolean importData(JComponent comp, Transferable t) {
+            final List<File> files = GUI.transferableToFileList(t);
             final ArrayList<File> allFiles = new ArrayList<File>();
-            if(files!=null){
+            if (files != null) {
                 new Runnable() {
-                    public void run(){
-                        for(File sf:files) allFiles.addAll(Misc.getFiles(sf, Mod_EpProcessing.supportedFiles));
+
+                    public void run() {
+                        for (File sf : files) {
+                            allFiles.addAll(Misc.getFiles(sf, Mod_EpProcessing.supportedFiles));
+                        }
                     }
                 }.run();
                 AddFiles(allFiles);
@@ -151,7 +172,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             }
         }
 
-        public boolean canImport(JComponent comp, DataFlavor[] transferFlavors) {return true;}
+        public boolean canImport(JComponent comp, DataFlavor[] transferFlavors) {
+            return true;
+        }
     }
 
     private void UpdateProgressBars() {
@@ -160,32 +183,32 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     private void UpdateStatusLabels() {
         UpdateStatusLabels(byteCount, ProcByteCount(), ElapsedTime(), ETA());
     }
-
-    private void UpdateProgressBars(double fileProg, double totalProg){
-        prg_File.setValue((int)(fileProg*1000));
-        prg_Total.setValue((int)(totalProg*1000));
+    private void UpdateProgressBars(double fileProg, double totalProg) {
+        prg_File.setValue((int) (fileProg * 1000));
+        prg_Total.setValue((int) (totalProg * 1000));
     }
-    private void UpdateStatusLabels(long totalBytes, long totalProcessedBytes, long elapsed, long eta){
-        lbl_MBProcessed.setText((totalProcessedBytes/1024/1024) + " of " + (totalBytes/1024/1024) + "MB");
+    private void UpdateStatusLabels(long totalBytes, long totalProcessedBytes, long elapsed, long eta) {
+        lbl_MBProcessed.setText((totalProcessedBytes / 1024 / 1024) + " of " + (totalBytes / 1024 / 1024) + "MB");
         lbl_TimeElapsed.setText("Time elapsed: " + Misc.longToTime(elapsed));
         lbl_TimeRemaining.setText("Time remaining: " + Misc.longToTime(eta));
     }
-
-    
-    private void EpProcStatusEvent(final ComEvent comEvent){
-        if(comEvent.Params(1) == Mod_EpProcessing.eProcess.Start){
-            if(processingStartOn==0) processingStartOn = System.currentTimeMillis();
+    private void EpProcStatusEvent(final ComEvent comEvent) {
+        if (comEvent.Params(1) == Mod_EpProcessing.eProcess.Start) {
+            if (processingStartOn == 0) {
+                processingStartOn = System.currentTimeMillis();
+            }
             labelUpdater.Start();
 
-        } else if(comEvent.Params(1) == Mod_EpProcessing.eProcess.Pause){
+        } else if (comEvent.Params(1) == Mod_EpProcessing.eProcess.Pause) {
             processingPausedOn = System.currentTimeMillis();
 
-        } else if(comEvent.Params(1) == Mod_EpProcessing.eProcess.Resume){
+        } else if (comEvent.Params(1) == Mod_EpProcessing.eProcess.Resume) {
             pausedTime += System.currentTimeMillis() - processingPausedOn;
             processingPausedOn = 0;
 
-        } else if(comEvent.Params(1) == Mod_EpProcessing.eComSubType.Done){
-             SwingUtilities.invokeLater(new Runnable() {
+        } else if (comEvent.Params(1) == Mod_EpProcessing.eComSubType.Done) {
+            SwingUtilities.invokeLater(new Runnable() {
+
                 public void run() {
                     FileProcessingDone();
                     //UpdateProgressBars();
@@ -194,117 +217,142 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             });
         }
     }
-    
-    private void FileProcessingDone(){
+    private void FileProcessingDone() {
         btn_Start.setText("Start");
     }
-    private void EpProcessingDone(){
+    private void EpProcessingDone() {
         btn_Clear.setVisible(true);
     }
-
-    
-    private double FileProgress(){
-        return (double)epProc.processedBytesCurrentFile() / (double)epProc.totalBytesCurrentFile();
+    private double FileProgress() {
+        return (double) epProc.processedBytesCurrentFile() / (double) epProc.totalBytesCurrentFile();
     }
-    private double TotalProgress(){
-        double prgValFile = (double)ProcByteCount() / (double)byteCount;
+    private double TotalProgress() {
+        double prgValFile = (double) ProcByteCount() / (double) byteCount;
 
-        int pendingFileCmds =  (epProc.FileCount() - epProc.processedFileCount())*((Boolean)gui.FromMem("AddToMyList", DEFADDTOML)?2:1);
+        int pendingFileCmds = (epProc.FileCount() - epProc.processedFileCount()) * ((Boolean) gui.FromMem("AddToMyList", DEFADDTOML) ? 2 : 1);
         int procCmd = api.totalCmdCount() - api.waitingCmdCount();
-        double partialCmd = 1-api.currendCmdDelay()/(double)api.cmdSendDelay();
-        double prgValCmd = (procCmd+partialCmd) / (double)(api.totalCmdCount()+pendingFileCmds);
+        double partialCmd = 1 - api.currendCmdDelay() / (double) api.cmdSendDelay();
+        double prgValCmd = (procCmd + partialCmd) / (double) (api.totalCmdCount() + pendingFileCmds);
         return Math.min(prgValFile, prgValCmd);
     }
-    private long ProcByteCount(){
+    private long ProcByteCount() {
         return epProc.processedBytes() + epProc.processedBytesCurrentFile();
     }
-    private long ElapsedTime(){
-        return processingStartOn!=0?System.currentTimeMillis() - processingStartOn - pausedTime:0;
+    private long ElapsedTime() {
+        return processingStartOn != 0 ? System.currentTimeMillis() - processingStartOn - pausedTime : 0;
     }
-    private long ETA(){
+    private long ETA() {
         long procByteCount = ProcByteCount();
-        double etaFile = (double)(byteCount-procByteCount)/((double)procByteCount/(double)ElapsedTime());
+        double etaFile = (double) (byteCount - procByteCount) / ((double) procByteCount / (double) ElapsedTime());
 
-        int pendingFileCmds =  (epProc.FileCount() - epProc.processedFileCount())*((Boolean)gui.FromMem("AddToMyList", DEFADDTOML)?2:1);
-        double etaCmd = (api.waitingCmdCount() + pendingFileCmds)*api.cmdSendDelay()-api.cmdSendDelay()+api.currendCmdDelay();
+        int pendingFileCmds = (epProc.FileCount() - epProc.processedFileCount()) * ((Boolean) gui.FromMem("AddToMyList", DEFADDTOML) ? 2 : 1);
+        double etaCmd = (api.waitingCmdCount() + pendingFileCmds) * api.cmdSendDelay() - api.cmdSendDelay() + api.currendCmdDelay();
 
-        return (long)Math.max(etaFile, etaCmd);
+        return (long) Math.max(etaFile, etaCmd);
     }
 
-
-    private void RemoveFiles(){
+    private void RemoveFiles() {
         epProc.delFiles(tbl_Files.getSelectedRows());
     }
-    private void ClearFiles(){
+    private void ClearFiles() {
         epProc.ClearFiles();
     }
     private void AddPaths(boolean File) {
         JFileChooser FC = new javax.swing.JFileChooser();
-        if (File) FC.setFileSelectionMode(JFileChooser.FILES_ONLY);  else  FC.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        if (File) {
+            FC.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        } else {
+            FC.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        }
 
-        String lastDirectory = (String)gui.FromMem("LastDirectory", null);
-        if(lastDirectory!=null) FC.setCurrentDirectory(new File(lastDirectory));
+        String lastDirectory = (String) gui.FromMem("LastDirectory", null);
+        if (lastDirectory != null) {
+            FC.setCurrentDirectory(new File(lastDirectory));
+        }
 
         FC.setMultiSelectionEnabled(true);
         FC.addChoosableFileFilter(new FileFilter() {
-            public boolean accept(File file) {return file.isDirectory() || Misc.isVideoFile(file, Mod_EpProcessing.supportedFiles);}
-            public String getDescription() {return "Video Files and Directories";}
+
+            public boolean accept(File file) {
+                return file.isDirectory() || Misc.isVideoFile(file, Mod_EpProcessing.supportedFiles);
+            }
+
+            public String getDescription() {
+                return "Video Files and Directories";
+            }
         });
 
         if (FC.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
             ArrayList<File> files = new ArrayList<File>();
 
-           for(File sf:FC.getSelectedFiles()){
-               lastDirectory = sf.getParentFile().getAbsolutePath();
-               files.addAll(Misc.getFiles(sf, Mod_EpProcessing.supportedFiles));
-           }
-           AddFiles(files);
-           gui.ToMem("LastDirectory", lastDirectory);
+            for (File sf : FC.getSelectedFiles()) {
+                lastDirectory = sf.getParentFile().getAbsolutePath();
+                files.addAll(Misc.getFiles(sf, Mod_EpProcessing.supportedFiles));
+            }
+            AddFiles(files);
+            gui.ToMem("LastDirectory", lastDirectory);
         }
 
         UpdateStatusLabels();
         UpdateProgressBars();
         tbl_Files.updateUI();
     }
-    private void AddFiles(ArrayList<File> files) {epProc.addFiles(files);}
+    private void AddFiles(ArrayList<File> files) {
+        epProc.addFiles(files);
+    }
 
-    private void ToggleFileInfoPane(){
-        if((Boolean)gui.FromMem("ShowFileInfoPane", false)){
+    
+    private void UpdateSetWatchedState() {
+        boolean showSetWatchedStateBox = (Boolean) gui.FromMem("ShowSetWatchedStateBox", false);
+
+        chck_SetWatchedState.setVisible(showSetWatchedStateBox);
+        chck_SetWatchedState.setEnabled(chck_AddToML.isSelected());
+        chck_MarkWatched.setText(showSetWatchedStateBox?"Watched":"Mark Watched");
+
+        UpdateMarkWatched();
+    }
+    private void UpdateMarkWatched() {
+        boolean showSetWatchedState = (Boolean) gui.FromMem("ShowSetWatchedStateBox", false);
+        chck_MarkWatched.setEnabled((chck_AddToML.isSelected() && !showSetWatchedState) || (chck_AddToML.isSelected() && showSetWatchedState && chck_SetWatchedState.isSelected()));
+    }
+    
+    private void UpdateFileInfoPane() {
+        if ((Boolean) gui.FromMem("ShowFileInfoPane", false)) {
             spnl_FileAdd.setDividerLocation(spnl_FileAdd.getDividerLocation() - 100);
             pnl_FileAdd_FileInfo.setVisible(true);
             spnl_FileAdd.setDividerSize(3);
         } else {
             spnl_FileAdd.setDividerSize(0);
             pnl_FileAdd_FileInfo.setVisible(false);
-            spnl_FileAdd.setDividerLocation(-1*(int)pnl_FileAdd_Ctrls.getPreferredSize().getHeight());
+            spnl_FileAdd.setDividerLocation(-1 * (int) pnl_FileAdd_Ctrls.getPreferredSize().getHeight());
         }
     }
-    private void ToggleEditBoxes(){
-        if((Boolean)gui.FromMem("ShowSrcStrOtEditBoxes", false)){
+    private void UpdateEditBoxes() {
+        if ((Boolean) gui.FromMem("ShowSrcStrOtEditBoxes", false)) {
             pnl_EditBoxes.setVisible(true);
         } else {
             pnl_EditBoxes.setVisible(false);
         }
     }
-    private void ToggleRenameMove(){
-        boolean doRename = (Boolean)gui.FromMem("EnableFileRenaming", true);
-        boolean doMove = (Boolean)gui.FromMem("EnableFileMove", false);
+    private void UpdateRenameMove() {
+        boolean doRename = (Boolean) gui.FromMem("EnableFileRenaming", true);
+        boolean doMove = (Boolean) gui.FromMem("EnableFileMove", false);
 
-        if(!(doMove || doRename)){
+        if (!(doMove || doRename)) {
             chck_RenameMoveFiles.setVisible(false);
             chck_RenameMoveFiles.setSelected(false);
             ToggleFileRename(false);
         } else {
             chck_RenameMoveFiles.setVisible(true);
-            chck_RenameMoveFiles.setText((doRename?"Rename":"") + (doRename&&doMove?"/":"") + (doMove?"Move":"") + " File");
+            chck_RenameMoveFiles.setText((doRename ? "Rename" : "") + (doRename && doMove ? "/" : "") + (doMove ? "Move" : "") + " File");
         }
     }
 
-
     private void ToggleMLCmd(boolean doAction) {
         SetOptions(doAction, new ISetOption() {
+
             public void setOption(Object type, FileInfo file) {
-                if((Boolean)type){
+                if ((Boolean) type) {
                     file.ActionsTodo().add(FileInfo.eAction.MyListCmd);
                 } else {
                     file.ActionsTodo().remove(FileInfo.eAction.MyListCmd);
@@ -314,8 +362,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     }
     private void ToggleFileRename(boolean doAction) {
         SetOptions(doAction, new ISetOption() {
+
             public void setOption(Object type, FileInfo file) {
-                if((Boolean)type){
+                if ((Boolean) type) {
                     file.ActionsTodo().add(FileInfo.eAction.Rename);
                 } else {
                     file.ActionsTodo().remove(FileInfo.eAction.Rename);
@@ -325,96 +374,106 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     }
     private void ToggleStorageType(int type) {
         SetOptions(type, new ISetOption() {
+
             public void setOption(Object type, FileInfo file) {
-                file.MLStorage(FileInfo.eMLStorageState.values()[(Integer)type]);
+                file.MLStorage(FileInfo.eMLStorageState.values()[(Integer) type]);
             }
         });
     }
-    private void ToggleWatched(boolean doAction) {
+    private void ToggleWatched(Boolean doAction) {
         SetOptions(doAction, new ISetOption() {
             public void setOption(Object type, FileInfo file) {
-                if((Boolean)type){
-                    file.ActionsTodo().add(FileInfo.eAction.Watched);
-                } else {
-                    file.ActionsTodo().remove(FileInfo.eAction.Watched);
-                }
+                file.Watched((Boolean)type);
             }
         });
     }
-    private void ToggleEditBox(final int box, String text){
+    private void ToggleEditBox(final int box, String text) {
         SetOptions(text, new ISetOption() {
             int boxId = box;
             public void setOption(Object type, FileInfo file) {
-                if(boxId == 0){
-                    file.Data().put("EditSource", (String)type);
-                }else if(boxId == 1){
-                    file.Data().put("EditStorage", (String)type);
-                }else if(boxId == 2){
-                    file.Data().put("EditOther", (String)type);
+                if (boxId == 0) {
+                    file.Data().put("EditSource", (String) type);
+                } else if (boxId == 1) {
+                    file.Data().put("EditStorage", (String) type);
+                } else if (boxId == 2) {
+                    file.Data().put("EditOther", (String) type);
                 }
             }
         });
     }
-
-    private void ToggleProcessing(String type) {
-        if(type.equals("Start")){
-            epProc.processing(Mod_EpProcessing.eProcess.Start);
-
-        } else if(type.equals("Pause")){
-            epProc.processing(Mod_EpProcessing.eProcess.Pause);
-
-        } else if(type.equals("Resume")){
-            epProc.processing(Mod_EpProcessing.eProcess.Resume);
-        }
-    }
-    private void SetOptions(Object type, ISetOption optionSetter){ //TODO: Refractor to remove first parameter
+    private void SetOptions(Object type, ISetOption optionSetter) { //TODO: Refractor to remove first parameter
         int size = epProc.FileCount();
         for (int i = 0; i < size; i++) {
             FileInfo fileInfo = epProc.index2FileInfo(i);
-            if(fileInfo.Served()) continue;
-
+            if (fileInfo.Served()) continue;
             optionSetter.setOption(type, fileInfo);
         }
     }
-    private interface ISetOption{void setOption(Object type, FileInfo file);}
-
+    private interface ISetOption { void setOption(Object type, FileInfo file); }
     
-    class LabelUpdater implements Runnable{
+    private void ToggleProcessing(String type) {
+        if (type.equals("Start")) {
+            epProc.processing(Mod_EpProcessing.eProcess.Start);
+        } else if (type.equals("Pause")) {
+            epProc.processing(Mod_EpProcessing.eProcess.Pause);
+        } else if (type.equals("Resume")) {
+            epProc.processing(Mod_EpProcessing.eProcess.Resume);
+        }
+    }
+
+    class LabelUpdater implements Runnable {
+
         Thread t;
 
-        public void Start(){
-            if(t == null || !t.isAlive()){
+        public void Start() {
+            if (t == null || !t.isAlive()) {
                 gui.LogEvent(ComEvent.eType.Debug, "Starting progress updater");
                 t = new Thread(this);
                 t.start();
             }
         }
 
-        public void Terminate(){
+        public void Terminate() {
             try {
                 gui.LogEvent(ComEvent.eType.Debug, "Waiting for progress updater thread to terminate");
-                if(t != null) t.join();
-            } catch (InterruptedException ex) { ex.printStackTrace();}
+                if (t != null) {
+                    t.join();
+                }
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
 
         public void run() {
             gui.LogEvent(ComEvent.eType.Debug, "Starting progress updater");
-            while((epProc.isProcessing() || api.waitingCmdCount()!=0) && gui.ModState() != eModState.Terminating){
+            while ((epProc.isProcessing() || api.waitingCmdCount() != 0) && gui.ModState() != eModState.Terminating) {
                 do {
-                    try {Thread.sleep(20);} catch (InterruptedException ex) {}
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException ex) {
+                    }
                 } while (epProc.isPaused() && gui.ModState() != eModState.Terminating);
 
-                if(gui.ModState() != eModState.Terminating){
-                    try { SwingUtilities.invokeLater(new Runnable() {
-                        public void run() {
-                            UpdateProgressBars();
-                            UpdateStatusLabels();
-                        }
-                    });} catch (Exception ex) {}
+                if (gui.ModState() != eModState.Terminating) {
+                    try {
+                        SwingUtilities.invokeLater(new Runnable() {
+
+                            public void run() {
+                                UpdateProgressBars();
+                                UpdateStatusLabels();
+                            }
+                        });
+                    } catch (Exception ex) {
+                    }
                 }
             }
 
-            SwingUtilities.invokeLater(new Runnable() {public void run() {EpProcessingDone();}});
+            SwingUtilities.invokeLater(new Runnable() {
+
+                public void run() {
+                    EpProcessingDone();
+                }
+            });
             processingStartOn = 0;
             pausedTime = 0;
             processingPausedOn = 0;
@@ -422,9 +481,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             gui.LogEvent(ComEvent.eType.Debug, "Progress updater thread terminated");
         }
     }
-   
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -444,6 +501,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_Ctrls = new javax.swing.JPanel();
         cmb_Storage = new javax.swing.JComboBox();
         chck_RenameMoveFiles = new javax.swing.JCheckBox();
+        chck_SetWatchedState = new javax.swing.JCheckBox();
         chck_MarkWatched = new javax.swing.JCheckBox();
         chck_AddToML = new javax.swing.JCheckBox();
         pnl_EditBoxes = new javax.swing.JPanel();
@@ -488,11 +546,11 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_Lstvw.setLayout(pnl_FileAdd_LstvwLayout);
         pnl_FileAdd_LstvwLayout.setHorizontalGroup(
             pnl_FileAdd_LstvwLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
         );
         pnl_FileAdd_LstvwLayout.setVerticalGroup(
             pnl_FileAdd_LstvwLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
         );
 
         spnl_FileAdd.setLeftComponent(pnl_FileAdd_Lstvw);
@@ -518,12 +576,12 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_Status.setLayout(pnl_FileAdd_StatusLayout);
         pnl_FileAdd_StatusLayout.setHorizontalGroup(
             pnl_FileAdd_StatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(prg_File, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
-            .addComponent(prg_Total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+            .addComponent(prg_File, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+            .addComponent(prg_Total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FileAdd_StatusLayout.createSequentialGroup()
                 .addComponent(lbl_MBProcessed, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_TimeElapsed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbl_TimeElapsed, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_TimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -547,7 +605,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_FileInfo.setLayout(pnl_FileAdd_FileInfoLayout);
         pnl_FileAdd_FileInfoLayout.setHorizontalGroup(
             pnl_FileAdd_FileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 685, Short.MAX_VALUE)
+            .addGap(0, 710, Short.MAX_VALUE)
         );
         pnl_FileAdd_FileInfoLayout.setVerticalGroup(
             pnl_FileAdd_FileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,6 +628,14 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         chck_RenameMoveFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chck_RenameMoveFilesActionPerformed(evt);
+            }
+        });
+
+        chck_SetWatchedState.setIconTextGap(0);
+        chck_SetWatchedState.setMargin(new java.awt.Insets(2, 2, 2, 0));
+        chck_SetWatchedState.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chck_SetWatchedStateActionPerformed(evt);
             }
         });
 
@@ -633,11 +699,11 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_EditBoxesLayout.setHorizontalGroup(
             pnl_EditBoxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_EditBoxesLayout.createSequentialGroup()
-                .addComponent(scrl_txt_Source, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addComponent(scrl_txt_Source, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(scrl_txt_Storage, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addComponent(scrl_txt_Storage, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(scrl_txt_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                .addComponent(scrl_txt_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
         );
         pnl_EditBoxesLayout.setVerticalGroup(
             pnl_EditBoxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,8 +763,8 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_AddMedia.setLayout(pnl_AddMediaLayout);
         pnl_AddMediaLayout.setHorizontalGroup(
             pnl_AddMediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_AddFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-            .addComponent(btn_AddFolders, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+            .addComponent(btn_AddFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+            .addComponent(btn_AddFolders, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
         );
         pnl_AddMediaLayout.setVerticalGroup(
             pnl_AddMediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -721,11 +787,14 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
                         .addComponent(chck_AddToML, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chck_RenameMoveFiles, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chck_MarkWatched, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
+                        .addComponent(chck_SetWatchedState)
+                        .addGap(0, 0, 0)
+                        .addComponent(chck_MarkWatched, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chck_RenameMoveFiles))
+                .addGap(6, 6, 6)
+                .addComponent(pnl_EditBoxes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_EditBoxes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
                 .addComponent(pnl_AddMedia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(pnl_StartClear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -733,20 +802,21 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_CtrlsLayout.setVerticalGroup(
             pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
-                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmb_Storage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chck_RenameMoveFiles))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chck_AddToML)
-                    .addComponent(chck_MarkWatched)))
-            .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
-                .addComponent(pnl_EditBoxes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
-                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnl_AddMedia, javax.swing.GroupLayout.Alignment.LEADING, 0, 46, Short.MAX_VALUE)
-                    .addComponent(pnl_StartClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(pnl_AddMedia, javax.swing.GroupLayout.Alignment.LEADING, 0, 46, Short.MAX_VALUE)
+                        .addComponent(pnl_StartClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
+                            .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmb_Storage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chck_RenameMoveFiles))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(chck_MarkWatched, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chck_SetWatchedState, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(chck_AddToML)))
+                        .addComponent(pnl_EditBoxes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -774,17 +844,17 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 699, Short.MAX_VALUE)
+            .addGap(0, 724, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+                    .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                     .addGap(0, 0, 0)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
+            .addGap(0, 454, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE))
+                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -799,11 +869,20 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 }//GEN-LAST:event_chck_RenameMoveFilesActionPerformed
     private void chck_MarkWatchedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chck_MarkWatchedActionPerformed
         gui.ToMem("SetWatched", chck_MarkWatched.isSelected());
-        ToggleWatched(chck_MarkWatched.isSelected());
+
+        //System.out.println(gui.FromMem("ShowSetWatchedStateBox", false) + "? " + chck_MarkWatched.isSelected() + "?true:null) : (" + chck_SetWatchedState.isSelected()+"?"+chck_MarkWatched.isSelected()+":null)");
+        Boolean watched;
+        if((Boolean)gui.FromMem("ShowSetWatchedStateBox", false)){
+            watched = chck_SetWatchedState.isSelected()? chck_MarkWatched.isSelected() : null;
+        } else {
+            watched = chck_MarkWatched.isSelected() ? true : null;
+        }
+
+        ToggleWatched(watched);
 }//GEN-LAST:event_chck_MarkWatchedActionPerformed
     private void chck_AddToMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chck_AddToMLActionPerformed
         gui.ToMem("AddToMyList", chck_AddToML.isSelected());
-        chck_MarkWatched.setEnabled(chck_AddToML.isSelected());
+        UpdateSetWatchedState();
         ToggleMLCmd(chck_AddToML.isSelected());
         tbl_Files.updateUI();
 }//GEN-LAST:event_chck_AddToMLActionPerformed
@@ -814,12 +893,12 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 }//GEN-LAST:event_btn_ClearActionPerformed
     private void btn_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_StartActionPerformed
         ToggleProcessing(btn_Start.getText());
-        if(btn_Start.getText().equals("Start")){
+        if (btn_Start.getText().equals("Start")) {
             btn_Start.setText("Pause");
             btn_Clear.setVisible(false);
-        } else if(btn_Start.getText().equals("Pause")) {
+        } else if (btn_Start.getText().equals("Pause")) {
             btn_Start.setText("Resume");
-        } else if(btn_Start.getText().equals("Resume")) {
+        } else if (btn_Start.getText().equals("Resume")) {
             btn_Start.setText("Pause");
         }
 }//GEN-LAST:event_btn_StartActionPerformed
@@ -831,27 +910,41 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 }//GEN-LAST:event_btn_AddFoldersActionPerformed
 
     private void txt_SourceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SourceKeyReleased
-        gui.ToMem("SourceText",txt_Source.getText());
-        ToggleEditBox(0,txt_Source.getText());
+        gui.ToMem("SourceText", txt_Source.getText());
+        ToggleEditBox(0, txt_Source.getText());
     }//GEN-LAST:event_txt_SourceKeyReleased
 
     private void txt_StorageKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_StorageKeyReleased
-        gui.ToMem("StorageText",txt_Storage.getText());
-        ToggleEditBox(1,txt_Storage.getText());
+        gui.ToMem("StorageText", txt_Storage.getText());
+        ToggleEditBox(1, txt_Storage.getText());
     }//GEN-LAST:event_txt_StorageKeyReleased
 
     private void txt_OtherKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_OtherKeyReleased
-        gui.ToMem("OtherText",txt_Other.getText());
-        ToggleEditBox(2,txt_Other.getText());
+        gui.ToMem("OtherText", txt_Other.getText());
+        ToggleEditBox(2, txt_Other.getText());
     }//GEN-LAST:event_txt_OtherKeyReleased
 
     private void tbl_FilesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbl_FilesKeyPressed
-        if(btn_Start.getText().equals("Start") || true){
-            if(evt.getKeyCode() == KeyEvent.VK_DELETE) RemoveFiles();
+        if (btn_Start.getText().equals("Start") || true) {
+            if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+                RemoveFiles();
+            }
         }
     }//GEN-LAST:event_tbl_FilesKeyPressed
 
-
+    private void chck_SetWatchedStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chck_SetWatchedStateActionPerformed
+        gui.ToMem("SetWatchedState", chck_SetWatchedState.isSelected());
+        UpdateMarkWatched();
+        
+        Boolean watched;
+        if((Boolean)gui.FromMem("ShowSetWatchedStateBox", false)){
+            watched = chck_SetWatchedState.isSelected()? chck_MarkWatched.isSelected() : null;
+        } else {
+            watched = chck_MarkWatched.isSelected() ? true : null;
+        }
+        
+        ToggleWatched(watched);
+    }//GEN-LAST:event_chck_SetWatchedStateActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton btn_AddFiles;
     protected javax.swing.JButton btn_AddFolders;
@@ -860,6 +953,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JCheckBox chck_AddToML;
     protected javax.swing.JCheckBox chck_MarkWatched;
     protected javax.swing.JCheckBox chck_RenameMoveFiles;
+    private javax.swing.JCheckBox chck_SetWatchedState;
     protected javax.swing.JComboBox cmb_Storage;
     protected javax.swing.JLabel lbl_MBProcessed;
     protected javax.swing.JLabel lbl_TimeElapsed;
@@ -884,5 +978,4 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     protected gui.components.JHintTextArea txt_Source;
     protected gui.components.JHintTextArea txt_Storage;
     // End of variables declaration//GEN-END:variables
-
 }

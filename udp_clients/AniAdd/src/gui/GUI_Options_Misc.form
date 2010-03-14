@@ -23,8 +23,13 @@
                   <Component id="chck_DeleteEmptyFolder" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="chck_RenameRelatedFiles" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="chck_OverwriteMLEntries" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="chck_ShowUnwatchedOption" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="21" pref="21" max="21" attributes="0"/>
+                      <Component id="chck_RecursivelyDeleteEmptyFolders" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -37,9 +42,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chck_DeleteEmptyFolder" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="chck_RecursivelyDeleteEmptyFolders" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Component id="chck_RenameRelatedFiles" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="chck_OverwriteMLEntries" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="chck_ShowUnwatchedOption" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -65,7 +75,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="chck_DeleteEmptyFolder">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delete empty folders (after last file moved out)"/>
+        <Property name="text" type="java.lang.String" value="Delete empty folder (after last file moved out)"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
@@ -89,6 +99,16 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chck_ShowUnwatchedOption">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Show SetWatchedState CheckBox"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="chck_RecursivelyDeleteEmptyFolders">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Recursively delete parent folders until non-empty folder is found"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

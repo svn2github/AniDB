@@ -125,7 +125,7 @@ public class Mod_EpProcessing implements IModule {
     private void requestDBFileInfo(FileInfo procFile) {
         Cmd cmd = new Cmd("FILE", "file", procFile.Id().toString(), true);
 
-        BitSet binCode = new BitSet(32);
+        BitSet binCode = new BitSet(64);
         binCode.set(0); //'state
         binCode.set(1); //'Depr
         binCode.set(3); //'lid
@@ -139,7 +139,8 @@ public class Mod_EpProcessing implements IModule {
         binCode.set(24); //'anidb filename scheme
         binCode.set(30); //'sub lang list
         binCode.set(31); //'dub lang list
-        cmd.setArgs("fmask", Misc.toMask(binCode, 32));
+        binCode.set(37); //'watched state
+        cmd.setArgs("fmask", Misc.toMask(binCode, 40));
 
         binCode = new BitSet(32);
         binCode.set(4); //'type
@@ -170,8 +171,11 @@ public class Mod_EpProcessing implements IModule {
         Cmd cmd = new Cmd("MYLISTADD", "mladd", procFile.Id().toString(), true);
         cmd.setArgs("size", Long.toString(procFile.FileObj().length()));
         cmd.setArgs("ed2k", (String) procFile.Data().get("Ed2k"));
-        cmd.setArgs("viewed", procFile.ActionsTodo().contains(eAction.Watched) ? "1" : "0");
         cmd.setArgs("state", Integer.toString(procFile.MLStorage().ordinal()));
+
+        if(procFile.Watched() != null) {
+            cmd.setArgs("viewed",  procFile.Watched()?"1":"0");
+        }
 
         String content = "";
         if (procFile.Data().containsKey(("EditOther"))) {
@@ -246,6 +250,7 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_FileAudioLang", df.poll());
             procFile.Data().put("DB_FileSubLang", df.poll());
             procFile.Data().put("DB_FileName", df.poll());
+            procFile.Data().put("DB_IsWatched", df.poll());
 
             procFile.Data().put("DB_EpCount", df.poll());
             procFile.Data().put("DB_EpHiCount", df.poll());
@@ -288,9 +293,9 @@ public class Mod_EpProcessing implements IModule {
         if (replyId == 210 || replyId == 311) {
             //File Added/Edited
             procFile.ActionsDone().add(eAction.MyListCmd);
-            if (procFile.ActionsTodo().remove(eAction.Watched)) {
-                procFile.ActionsDone().add(eAction.Watched);
-            }
+            /*if (procFile.ActionsTodo().remove(eAction.SetWatchedState)) {
+                procFile.ActionsDone().add(eAction.SetWatchedState);
+            }*/
             Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.MLCmd_FileAdded, procFile.Id());
 
         } else if (replyId == 310) {
@@ -307,9 +312,9 @@ public class Mod_EpProcessing implements IModule {
 
         } else {
             procFile.ActionsError().add(eAction.MyListCmd);
-            if (procFile.ActionsTodo().remove(eAction.Watched)) {
-                procFile.ActionsError().add(eAction.Watched);
-            }
+            /*if (procFile.ActionsTodo().remove(eAction.SetWatchedState)) {
+                procFile.ActionsError().add(eAction.SetWatchedState);
+            }*/
 
             if (replyId == 320 || replyId == 330 || replyId == 350) {
                 Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.MLCmd_NotFound, procFile.Id());
@@ -451,22 +456,6 @@ public class Mod_EpProcessing implements IModule {
 
                 if (procFile.FileObj().renameTo(renFile)) {
                     Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.FileRenamed, procFile.Id(), renFile, truncated);
-                    if ((Boolean) mem.get("GUI_DeleteEmptyFolder")) {
-                        // <editor-fold defaultstate="collapsed" desc="Delete Empty Folder">
-                        File srcFolder = procFile.FileObj().getParentFile();
-                        try {
-                            if (srcFolder.list().length == 0) {
-                                if (srcFolder.delete()) {
-                                    Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.DeletedEmptyFolder, procFile.Id(), srcFolder);
-                                } else {
-                                    Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.DeletetingEmptyFolderFailed, procFile.Id(), srcFolder);
-                                }
-                            }
-                        } catch (Exception e) {
-                            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.DeletetingEmptyFolderFailed, procFile.Id(), srcFolder, e.getMessage());
-                        }
-                        // </editor-fold>
-                    }
                     if ((Boolean) mem.get("GUI_RenameRelatedFiles")) {
                         // <editor-fold defaultstate="collapsed" desc="Rename Related Files">
                         try {
@@ -474,9 +463,8 @@ public class Mod_EpProcessing implements IModule {
                             File srcFolder = procFile.FileObj().getParentFile();
 
                             File[] srcFiles = srcFolder.listFiles(new FilenameFilter() {
-
                                 public boolean accept(File dir, String name) {
-                                    return name.startsWith(oldFilenameWoExt);
+                                    return name.startsWith(oldFilenameWoExt + ".");
                                 }
                             });
 
@@ -484,7 +472,7 @@ public class Mod_EpProcessing implements IModule {
                             String newFn = filename.substring(0, filename.lastIndexOf("."));
                             for (File srcFile : srcFiles) {
                                 relExt = srcFile.getName().substring(oldFilenameWoExt.length());
-                                if (srcFile.renameTo(new File(srcFolder, newFn + relExt))) {
+                                if (srcFile.renameTo(new File(folderObj, newFn + relExt))) {
                                     accumExt += relExt + " ";
                                 } else {
                                     //Todo
@@ -495,6 +483,29 @@ public class Mod_EpProcessing implements IModule {
                             }
                         } catch (Exception e) {
                             Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.RelFilesRenamingFailed, procFile.Id(), e.getMessage());
+                        }
+                        // </editor-fold>
+                    }
+                    if ((Boolean) mem.get("GUI_DeleteEmptyFolder")) {
+                        // <editor-fold defaultstate="collapsed" desc="Delete Empty Folder">
+                        File srcFolder = procFile.FileObj().getParentFile();
+                        boolean recurse = (Boolean) mem.get("RecursivelyDeleteEmptyFolders");
+                        try {
+                            while (srcFolder.list().length == 0) {
+                                if (srcFolder.delete()) {
+                                    Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.DeletedEmptyFolder, procFile.Id(), srcFolder);
+                                } else {
+                                    Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.DeletetingEmptyFolderFailed, procFile.Id(), srcFolder);
+                                    break;
+                                }
+                                if(!recurse) break;
+
+                                Thread.sleep(200);
+                                srcFolder = srcFolder.getParentFile();
+                                System.out.println(srcFolder.list().length);
+                            }
+                        } catch (Exception e) {
+                            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.DeletetingEmptyFolderFailed, procFile.Id(), srcFolder, e.getMessage());
                         }
                         // </editor-fold>
                     }
@@ -524,9 +535,7 @@ public class Mod_EpProcessing implements IModule {
 
         String[] year = procFile.Data().get("DB_Year").split("-", -1);
         tags.put("AYearBegin", year[0]);
-        if (year.length == 2) {
-            tags.put("AYearEnd", year[1]);
-        }
+        if (year.length == 2) tags.put("AYearEnd", year[1]);
 
         tags.put("ETr", procFile.Data().get("DB_EpN_Romaji"));
         tags.put("ETe", procFile.Data().get("DB_EpN_English"));
@@ -549,15 +558,18 @@ public class Mod_EpProcessing implements IModule {
         tags.put("Source", procFile.Data().get("DB_Source"));
         tags.put("Type", procFile.Data().get("DB_Type"));
 
-        tags.put("Watched", procFile.ActionsDone().contains(eAction.Watched) ? "1" : "");
+        if(procFile.ActionsDone().contains(eAction.MyListCmd)){
+            tags.put("Watched", (procFile.Watched() != null && procFile.Watched() || procFile.Watched() == null && procFile.Data().get("DB_IsWatched").equals("1")) ? "1" : "");
+        } else {
+            tags.put("Watched", procFile.Data().get("DB_IsWatched"));
+        }
+
         tags.put("Depr", procFile.Data().get("DB_Deprecated").equals("1") ? "1" : "");
         tags.put("Cen", ((Integer.valueOf(procFile.Data().get("DB_State")) & 1 << 7) != 0 ? "1" : ""));
         tags.put("Ver", GetFileVersion(Integer.valueOf(procFile.Data().get("DB_State"))).toString());
 
         String codeStr = (String) mem.get("GUI_TagSystemCode");
-        if (codeStr == null || codeStr.isEmpty()) {
-            return null;
-        }
+        if (codeStr == null || codeStr.isEmpty()) return null;
 
         TagSystem.Evaluate(codeStr, tags);
 
@@ -588,53 +600,40 @@ public class Mod_EpProcessing implements IModule {
     }
 
     public void addFiles(Collection<File> newFiles) {
+        Boolean watched;
+        if((Boolean)mem.get("GUI_ShowSetWatchedStateBox", false)){
+            watched = (Boolean)mem.get("GUI_SetWatchedState", false)? (Boolean)mem.get("GUI_SetWatched", false) : null;
+        } else {
+            watched = (Boolean)mem.get("GUI_SetWatched", false) ? true : null;
+        }
+
         Integer storage = (Integer) mem.get("GUI_SetStorageType", 1);
-        boolean watched = (Boolean) mem.get("GUI_SetWatched", false);
         boolean rename = (Boolean) mem.get("GUI_RenameFiles", false);
         boolean addToMyList = (Boolean) mem.get("GUI_AddToMyList", false);
         String otherStr = "", sourceStr = "", storageStr = "";
 
         if ((Boolean) mem.get("GUI_ShowSrcStrOtEditBoxes", false)) {
             otherStr = (String) mem.get("GUI_OtherText", "");
-            sourceStr =
-                    (String) mem.get("GUI_SourceText", "");
-            storageStr =
-                    (String) mem.get("GUI_StorageText", "");
+            sourceStr = (String) mem.get("GUI_SourceText", "");
+            storageStr = (String) mem.get("GUI_StorageText", "");
         }
 
         for (File cf : newFiles) {
-            if (files.contains("Path", cf.getAbsolutePath())) {
-                continue;
-            }
+            if (files.contains("Path", cf.getAbsolutePath())) continue;
 
             FileInfo fileInfo = new FileInfo(cf, lastFileId);
             fileInfo.MLStorage(FileInfo.eMLStorageState.values()[storage]);
             fileInfo.ActionsTodo().add(eAction.Process);
             fileInfo.ActionsTodo().add(eAction.FileCmd);
 
-            if (addToMyList) {
-                fileInfo.ActionsTodo().add(eAction.MyListCmd);
-            }
+            if (addToMyList) fileInfo.ActionsTodo().add(eAction.MyListCmd);
+            if (rename) fileInfo.ActionsTodo().add(eAction.Rename);
 
-            if (watched) {
-                fileInfo.ActionsTodo().add(eAction.Watched);
-            }
+            fileInfo.Watched(watched);
 
-            if (rename) {
-                fileInfo.ActionsTodo().add(eAction.Rename);
-            }
-
-            if (!otherStr.isEmpty()) {
-                fileInfo.Data().put("EditOther", otherStr);
-            }
-
-            if (!sourceStr.isEmpty()) {
-                fileInfo.Data().put("EditSource", sourceStr);
-            }
-
-            if (!storageStr.isEmpty()) {
-                fileInfo.Data().put("EditStorage", storageStr);
-            }
+            if (!otherStr.isEmpty()) fileInfo.Data().put("EditOther", otherStr);
+            if (!sourceStr.isEmpty()) fileInfo.Data().put("EditSource", sourceStr);
+            if (!storageStr.isEmpty()) fileInfo.Data().put("EditStorage", storageStr);
 
             index2Id.add(lastFileId++);
             files.put(fileInfo);
