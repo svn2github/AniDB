@@ -205,7 +205,7 @@ html,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
-#layout-main div.format-buttons input,
+#layout-main div.format-buttons input
 {
 	background-color: #C3C5C9;
 }
