@@ -84,8 +84,8 @@ img, a
 }
 
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.anime_all div.g_bubble.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.g_bubble.stripe,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
 #layout-main div.tabbed_pane div.body,
@@ -149,7 +149,7 @@ img, a
 	border:1px solid #9A9CA1;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.name,
+#layout-main div.anime_all div.g_bubble.stripe div.name,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	border-color: #000000;

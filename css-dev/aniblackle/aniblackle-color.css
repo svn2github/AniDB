@@ -32,7 +32,7 @@ button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored:hover,
-#layout-main div.anime_all div.similaranime div.stripe a.name-colored:hover
+#layout-main div.anime_all div.g_bubble.stripe a.name-colored:hover
 {
 	color: #FFFFFF;
 }
@@ -142,7 +142,7 @@ div.quotebody,
 #layout-main table tr.header,
 #layout-main table thead tr,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-#layout-main div.anime_all div.similaranime div.stripe a.name-colored,
+#layout-main div.anime_all div.g_bubble.stripe a.name-colored,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
 {
 	color: #CCCCCC;
@@ -178,7 +178,7 @@ input[type="submit"]:hover,
 	background-color: #555555;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.name
+#layout-main div.anime_all div.g_bubble.stripe div.name
 {
 	border-bottom-color: #666666;
 }

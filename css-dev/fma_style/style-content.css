@@ -165,9 +165,7 @@ background-color: #234470;
 
 /* informational boxes */
 .g_msg.note,
-.g_note,
-#layout-main div.tagcloud,
-#layout-main div.desc
+.g_note
 {
 border: 1px solid #565AB9;
 padding: 0.7em;

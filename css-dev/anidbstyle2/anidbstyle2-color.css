@@ -17,7 +17,7 @@ a:link
 span.link:hover,
 a:hover,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-#layout-main div.anime_all div.similaranime div.stripe a.name-colored
+#layout-main div.anime_all div.g_bubble.stripe a.name-colored
 {
 	color: #AA0000;
 }
@@ -326,7 +326,7 @@ select,
 	border-color: #ABABAB #8E8E8E #8E8E8E #ABABAB;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.name,
+#layout-main div.anime_all div.g_bubble.stripe div.name,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title,
 #layout-tabs ul.main-tabs li,
 #layout-main div.tabbed_pane ul.tabs li,

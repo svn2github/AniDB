@@ -186,7 +186,7 @@ input[type="checkbox"]
 	font-size: 130%;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.g_bubble.stripe div.tooltip div.postbody,
 #layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.export_all div.exportblock div.inner,
@@ -222,7 +222,7 @@ input[type="checkbox"]
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.tabbed_pane div.body,
-#layout-main div.anime_all div.similaranime div.stripe,
+#layout-main div.anime_all div.g_bubble.stripe,
 #layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
