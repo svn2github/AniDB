@@ -183,6 +183,7 @@
 	width: 400px;
 	text-align: left;
 	position: relative;
+	vertical-align: top;
 }
 
 #layout-main div.anime_all div.g_bubble.stripe div.image
