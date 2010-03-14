@@ -62,9 +62,7 @@ th a
 
 #layout-main div.tabbed_pane_main div.tagcloud,
 *.g_bubble *.g_bubble,
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
-#layout-main div.animeatt_reviews div.review div.text
+*.g_bubble *.g_bubble *.g_bubble *.g_bubble
 {
 	background-color: #F4F9FD;
 }
@@ -134,6 +132,7 @@ li.g_odd,
 span.g_odd,
 *.g_bubble,
 *.g_bubble *.g_bubble div.tooltip div.postbody,
+*.g_bubble *.g_bubble  *.g_bubble,
 *.g_button a:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
@@ -199,8 +198,6 @@ select,
 	border-color: #C9D7F1;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
-#layout-main div.animeatt_reviews div.review div.text,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
 *.g_button a,
