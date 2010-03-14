@@ -37,6 +37,8 @@ input[type="submit"]:hover,
 	color: #FFFFFF;
 }
 
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.forum ul.topics li.row,
 #layout-main div.pagination span a:hover,
@@ -116,8 +118,6 @@ html
 	border-top-color: #777777;
 }
 
-.g_bubble .g_bubble,
-.g_bubble .g_bubble .g_bubble .g_bubble,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 tr.g_odd,
