@@ -1,5 +1,5 @@
 @import "../common.css";
-@import "../common/style/color/similar-anime-default.css";
+@import "../../common/style/color/similar-anime-default.css";
 @import "../fancy.css";
 
 @import "../../common/layout/macro/separate.css";
