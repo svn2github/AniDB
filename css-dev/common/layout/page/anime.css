@@ -177,7 +177,7 @@
 	min-width: 11em;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe
+#layout-main div.anime_all div.g_bubble.stripe
 {
 	display: inline-block;
 	width: 400px;
@@ -185,7 +185,7 @@
 	position: relative;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.image
+#layout-main div.anime_all div.g_bubble.stripe div.image
 {
 	margin: 0.5em;
 	width: 5em;
@@ -194,14 +194,14 @@
 	float: left;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.data
+#layout-main div.anime_all div.g_bubble.stripe div.data
 {
 	float: left;
 	margin: 0.5em 0.5em 0.5em 0;
 	width: 335px;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.name
+#layout-main div.anime_all div.g_bubble.stripe div.name
 {
 	margin-bottom: 0.5em;
 	margin-right: 5em;
@@ -209,12 +209,12 @@
 	border-bottom-width:1px;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.stats span
+#layout-main div.anime_all div.g_bubble.stripe div.stats span
 {
 	display: block;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.vote.icons
+#layout-main div.anime_all div.g_bubble.stripe div.actions.icons
 {
 	float: right;
 }
@@ -224,7 +224,7 @@
 	display: none;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.image:hover div.tooltip
+#layout-main div.anime_all div.g_bubble.stripe div.image:hover div.tooltip
 {
 	display: block;
 	width: 400px;
@@ -234,19 +234,19 @@
 	margin: 2em 0 0 3em;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.comments div.content
+#layout-main div.anime_all div.g_bubble.stripe div.tooltip div.comments div.content
 {
 	padding: 0 4px 4px;
 	word-wrap: break-word;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.comments div.postbody + div.postbody
+#layout-main div.anime_all div.g_bubble.stripe div.tooltip div.comments div.postbody + div.postbody
 {
 	margin-top: 0.5em;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.similaranime div.stripe
+#layout-main div.anime_all div.g_bubble.stripe div.tooltip div.postbody,
+#layout-main div.anime_all div.g_bubble.stripe
 {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
