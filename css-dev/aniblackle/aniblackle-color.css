@@ -37,7 +37,6 @@ input[type="submit"]:hover,
 	color: #FFFFFF;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.forum ul.topics li.row,
 #layout-main div.pagination span a:hover,
@@ -85,8 +84,6 @@ html
 #layout-main div.forum div.threads .rtop *,
 #layout-main div.forum div.threads .rbottom *,
 #layout-main div.forum div.threads div.inner,
-#layout-main div.animeatt_reviews div.review div.text,
-#layout-main div.g_timedentry div.body,
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *,
@@ -95,15 +92,9 @@ html
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.news_all div.g_timedentry h4,
 #layout-main div.userpage_all > div.g_section > h4,
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff,
-#layout-main div.tagcloud,
-#layout-main div.desc,
-#layout-main div.anime_all div.desc,
 #layout-main div div.addrelform table tr,
-#layout-main div.tabbed_pane div.body,
-#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.similaranime div.stripe
+.g_bubble,
+.g_bubble .g_bubble .g_bubble
 {
 	background-color: #404040;
 }
@@ -125,10 +116,8 @@ html
 	border-top-color: #777777;
 }
 
-#layout-main div.tabbed_pane_main div.tagcloud,
-#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 tr.g_odd,
@@ -363,10 +352,7 @@ select,
 	border: 1px solid #666666;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.similaranime div.stripe,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
+.g_bubble,
 span.test,
 button,
 input[type="button"],
@@ -375,17 +361,11 @@ input[type="submit"],
 div.quotebody,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
-#layout-main div.anime_all div.desc,
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff,
 #layout-main div.anime_all div.info div.image img,
 #layout-main div.avatar img,
-#layout-main div.desc,
 #layout-main div.pagination span a,
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong,
-#layout-main div.tabbed_pane div.body,
-#layout-main div.tagcloud,
 #layout-nav div.menu_hr
 {
 	border: 1px solid;
