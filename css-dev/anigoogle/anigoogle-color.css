@@ -60,9 +60,8 @@ th a
 	background-color: #CADCEB;
 }
 
-#layout-main div.tabbed_pane_main div.tagcloud,
-*.g_bubble *.g_bubble,
-*.g_bubble *.g_bubble *.g_bubble *.g_bubble
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble
 {
 	background-color: #F4F9FD;
 }
@@ -130,9 +129,8 @@ a:hover,
 tr.g_odd,
 li.g_odd,
 span.g_odd,
-*.g_bubble,
-*.g_bubble *.g_bubble div.tooltip div.postbody,
-*.g_bubble *.g_bubble  *.g_bubble,
+.g_bubble,
+.g_bubble .g_bubble  .g_bubble,
 *.g_button a:hover,
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
@@ -198,12 +196,10 @@ select,
 	border-color: #C9D7F1;
 }
 
+.g_bubble,
+*.g_button a,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
-*.g_button a,
-*.g_bubble,
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff,
 #layout-main div.avatar img,
 #layout-main div.anime_all div.info div.image img,
 span.test
