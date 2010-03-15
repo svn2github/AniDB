@@ -186,9 +186,8 @@ input[type="checkbox"]
 	font-size: 130%;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble,
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *
@@ -215,16 +214,10 @@ input[type="checkbox"]
 	background-color:#B0B0B0;
 }
 
-#layout-main div.animeatt_reviews div.review div.text,
-#layout-main div.g_timedentry div.body,
-#layout-main div.tagcloud,
-#layout-main div.desc,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.tabbed_pane div.body,
-#layout-main div.anime_all div.similaranime div.stripe,
-#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
+.g_bubble,
+.g_bubble .g_bubble .g_bubble
 {
 	background-color:#B8BAC0;
 }

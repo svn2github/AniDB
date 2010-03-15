@@ -7,6 +7,7 @@
 #layout-main div.customise_all  div.pane > ul li
 {
 	line-height: 15px;
+	margin-right:0.1em;
 }
 
 #layout-main div.customise_all  div.pane > ul li a.i_inline

@@ -4,6 +4,7 @@
 
 /* Import common files */
 @import "../sub/common.css";
+@import "../common/style/color/similar-anime-default.css";
 
 /* Import global elements */
 @import "./global/all.css";

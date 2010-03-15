@@ -1,4 +1,5 @@
 @import "../common.css";
+@import "../../common/style/color/similar-anime-default.css";
 
 @import "../../common/layout/macro/collapsed.css";
 @import "../../common/style/color/status-creme.css";

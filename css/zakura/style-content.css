@@ -139,12 +139,10 @@ button:hover
 
 .g_msg.note,
 .g_note,
-#layout-main div.tagcloud,
-#layout-main div.desc
+g_bubble
 {
 	background:#F5F7FF;
 	color:#4d2f5f;
-	padding:.7em;
 }
 
 .g_msg.error,

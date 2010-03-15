@@ -37,30 +37,38 @@
 /** TABS **/
 /** TABBING PANE **/
 
-#layout-main div.tabbed_pane div.body
-{
-	border: 1px solid;
-	border-color: #F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
-}
 #layout-main div.tabbed_pane div.body div.* {
 	left: 0px;
 }
 
 #layout-tabs ul.main-tabs li:hover,
-#layout-tabs ul.main-tabs li.selected,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected
+#layout-tabs ul.main-tabs li.selected
 {
 	background-color:#FFFFFF;
 	color:#7762ED;
 	border-bottom:1px double #FFFFFF;
 }
 
-#layout-tabs ul.main-tabs li,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-tabs ul.main-tabs li
 {
 	color:#4D2F5F;
 	background-color:#F5F7FF;
+	border:1px solid #F3E7FF;
+}
+
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	background-color:#F5F7FF;
+	color:#4D2F5F;
+	border-bottom:1px double #F5F7FF;
+}
+
+
+#layout-main div.tabbed_pane ul.tabs li
+{
+	background-color:#FFFFFF;
+	color:#7762ED;
 	border:1px solid #F3E7FF;
 }
 
@@ -149,13 +157,6 @@ div.pagination span a
 	border: none;
 }
 
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
-{
-	border: 1px solid;
-	border-color:#F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
-}
-
 #layout-main div.profile_all div.preferences,
 #layout-main div.profile_all div.tabbed_pane
 {
@@ -168,26 +169,24 @@ div.pagination span a
 	font-size:80%;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe
+.g_bubble.stripe
 {
 	font-size:90%;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
+.g_bubble .g_bubble,
+.g_bubble .g_bubble
 {
 	background-color: #FAF0FF;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe,
-#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
+.g_bubble,
+.g_bubble .g_bubble .g_bubble
 {
 	background-color: #F5F7FF;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.name
+.g_bubble.stripe > div.data div.name
 {
 	border-bottom-color: #D3D7E2;;
 	border-bottom-style: dotted;
@@ -201,12 +200,7 @@ div.pagination span a
 
 .g_msg.note,
 .g_note,
-#layout-main div.tagcloud,
-#layout-main div.desc,
-#layout-main div.anime_all div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.similaranime div.stripe,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
+.g_bubble
 {
 	border: 1px solid;
 	border-color:#F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
@@ -222,8 +216,12 @@ div.pagination span a
 	color:#000000;
 }
 
-#layout-main div.anime_all div.similaranime div.stripe div.data
+.g_bubble.stripe > div.data
 {
 	width:320px;
 }
 
+#layout-main div.g_timedentry div.body
+{
+	padding:1em;
+}

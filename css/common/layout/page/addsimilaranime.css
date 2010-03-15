@@ -107,16 +107,6 @@
 	float: right;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
-{
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	border-style:solid;
-	border-width:1px;
-}
-
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	border-right: 1px solid;
