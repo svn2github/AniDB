@@ -43,8 +43,7 @@
 	margin-top: 0.5em;
 }
 
-.g_bubble.stripe > div.image div.tooltip div.postbody,
-.g_bubble.stripe
+.g_bubble
 {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
