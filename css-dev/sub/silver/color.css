@@ -51,14 +51,9 @@ a:hover
 }
 
 .g_bubble,
-.g_bubble .g_bubble
+.g_bubble .g_bubble .g_bubble
 {
 	background-color:#FAFAFA;
-}
-
-.g_bubble
-{
-	border:1px solid #D1D7DC;
 }
 
 #layout-tabs ul li a,
@@ -162,7 +157,7 @@ div.pagination span strong
 	background-color: #DEE3E7;
 }
 
-#layout-main div.anime_all div.g_bubble.stripe div.name
+.g_bubble.stripe > div.data div.name
 {
 	border-bottom-color: #999999;
 }
@@ -172,16 +167,15 @@ div.pagination span strong
 	border-right-color: #999999;
 }
 
-#layout-main div.anime_all div.g_bubble.stripe div.tooltip div.postbody,
-#layout-main div.anime_all div.g_bubble.stripe,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
+.g_bubble
 {
+	border-style: solid;
+	border-width: 1px;
 	border-color: #D1D7DC;
 }
 
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-#layout-main div.anime_all div.g_bubble.stripe a.name-colored
+.g_bubble.stripe > div.data .name-colored
 {
 	color: #AA0000;
 }

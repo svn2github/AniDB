@@ -144,11 +144,6 @@
 	margin-left: 22em;
 }
 
-#layout-main div.userpage_all div.clubs div
-{
-	display: inline-table;
-}
-
 #layout-main div.userpage_all div.clubs div.founded + div.joined
 {
 	margin-left: 5em;
@@ -251,4 +246,17 @@
 #layout-main div.userpage_all div.blog div.g_timedentry p.cmt
 {
 	text-align: left;
+}
+
+#layout-main div.userpage_all div.latest_recommendations > div.edit_actions
+{
+	text-align: right;
+	margin-right: 1em;
+	margin-top: -1.6em;
+	float:none;
+}
+
+#layout-main div.userpage_all div.latest_recommendations > div.content
+{
+	margin-top:1em;
 }

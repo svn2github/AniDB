@@ -169,7 +169,7 @@ div.pagination span a
 	font-size:80%;
 }
 
-#layout-main div.anime_all div.g_bubble.stripe
+.g_bubble.stripe
 {
 	font-size:90%;
 }
@@ -186,7 +186,7 @@ div.pagination span a
 	background-color: #F5F7FF;
 }
 
-#layout-main div.anime_all div.g_bubble.stripe div.name
+.g_bubble.stripe > div.data div.name
 {
 	border-bottom-color: #D3D7E2;;
 	border-bottom-style: dotted;
@@ -216,7 +216,7 @@ div.pagination span a
 	color:#000000;
 }
 
-#layout-main div.anime_all div.g_bubble.stripe div.data
+.g_bubble.stripe > div.data
 {
 	width:320px;
 }
