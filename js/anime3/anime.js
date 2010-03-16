@@ -12,7 +12,7 @@ jsVersionArray.push({
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"Allowed for file table layout changes"
+	"changelog":"Ajax fix for expanding episodes"
 });
 
 // GLOBALs //
@@ -125,7 +125,6 @@ var sortingCols = {
 	'reviewlist': {		"name":{"type":'c_setlatin',"isDefault":true},
 						"average":{"type":'c_latin'},
 						"approval":{"type":'c_latin'}},
-	'recomlist': {		"name":{"type":'c_setlatin',"isDefault":true}},
 	'grouplist': {		"date lastupdate":{"type":'c_date'},
 						"name group":{"type":'c_setlatin'},
 						"state":{"type":'c_latin'},
@@ -135,8 +134,8 @@ var sortingCols = {
 						"rating":{"type":'c_number'},
 						"threads":{"type":'c_number'}}
 };
-var tableNames = ['characterlist','relationslist','recomlist','reviewlist','stafflist','grouplist'];
-var skipTables = ['recomlist','reviewlist','grouplist'];
+var tableNames = ['characterlist','relationslist','reviewlist','stafflist','grouplist'];
+var skipTables = ['reviewlist','grouplist'];
 
 /* -[STARTUP]-----------------------
  * START UP RELATED FUNCTIONS
