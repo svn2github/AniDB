@@ -130,7 +130,7 @@ function writeGroupTags(group,isSelf) {
 	var end = (group.tags.length > step ? step : group.tags.length);
 	while (start != group.tags.length) {
 		var tagCol = document.createElement('div');
-		tagCol.className = 'tag-column';
+		tagCol.className = 'g_bubble tag-column';
 		if(isSelf) {
 			var h5 = document.createElement('h5');
 			h5.appendChild(document.createTextNode(group.name));
