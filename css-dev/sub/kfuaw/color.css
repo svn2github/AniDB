@@ -215,3 +215,14 @@ ul#layout-menu li:hover ul li a
 {
 	color: #f3f3f3;
 }
+
+#layout-main .g_bubble.stripe
+{
+	background-color:#cdcdcd;
+}
+
+.g_bubble,
+.g_bubble .g_bubble .g_bubble
+{
+	background-color:#eeeeee;
+}

@@ -261,10 +261,11 @@ table table
 }
 
 #layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
+#layout-main div.anime_all div.info div.caststaff div.staff,
+.g_bubble
 {
-	-moz-border-radius:0.3em;
-	-webkit-border-radius: .5em;
-	border-radius:0.3em;
+	-moz-border-radius:0.4em;
+	-webkit-border-radius: .4em;
+	border-radius:0.4em;
 	border:1px solid #999999;
 }
