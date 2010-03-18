@@ -39,6 +39,7 @@ public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
             gUI_Options_Misc1.chck_ShowFileInfoPane.setSelected(false);
             gUI_Options_Misc1.chck_ShowEditboxes.setSelected(false);
             gUI_Options_Misc1.chck_DeleteEmptyFolder.setSelected(false);
+            gUI_Options_Misc1.chck_OverwriteMLEntries.setSelected(true);
             gUI_Options_Misc1.chck_RenameRelatedFiles.setSelected(false);
             gUI_Options_Misc1.chck_RecursivelyDeleteEmptyFolders.setSelected(false);
             gUI_Options_Misc1.chck_ShowUnwatchedOption.setSelected(false);
