@@ -380,10 +380,8 @@ public class Mod_UdpApi implements IModule {
                         Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute.");
                         longDelay = true;
 
-                        if ((now.getTime() - lastReplyPackage.getTime()) > 300000) {
-                            authenticate();
-                        }
                     }//quickfix
+                    if (longDelay && (now.getTime() - lastReplyPackage.getTime()) > 300000 )  authenticate();
                 }
 
                 if (aniDBAPIDown && authRetry == null) {

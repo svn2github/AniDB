@@ -489,7 +489,7 @@ public class Mod_EpProcessing implements IModule {
                     if ((Boolean) mem.get("GUI_DeleteEmptyFolder")) {
                         // <editor-fold defaultstate="collapsed" desc="Delete Empty Folder">
                         File srcFolder = procFile.FileObj().getParentFile();
-                        boolean recurse = (Boolean) mem.get("RecursivelyDeleteEmptyFolders");
+                        boolean recurse = (Boolean) mem.get("GUI_RecursivelyDeleteEmptyFolders");
                         try {
                             while (srcFolder.list().length == 0) {
                                 if (srcFolder.delete()) {

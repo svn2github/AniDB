@@ -184,8 +184,8 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         UpdateStatusLabels(byteCount, ProcByteCount(), ElapsedTime(), ETA());
     }
     private void UpdateProgressBars(double fileProg, double totalProg) {
-        prg_File.setValue((int) (fileProg * 1000));
-        prg_Total.setValue((int) (totalProg * 1000));
+        prg_File.setValue((int) (fileProg * 10000));
+        prg_Total.setValue((int) (totalProg * 10000));
     }
     private void UpdateStatusLabels(long totalBytes, long totalProcessedBytes, long elapsed, long eta) {
         lbl_MBProcessed.setText((totalProcessedBytes / 1024 / 1024) + " of " + (totalBytes / 1024 / 1024) + "MB");
@@ -228,11 +228,11 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
     }
     private double TotalProgress() {
         double prgValFile = (double) ProcByteCount() / (double) byteCount;
-
         int pendingFileCmds = (epProc.FileCount() - epProc.processedFileCount()) * ((Boolean) gui.FromMem("AddToMyList", DEFADDTOML) ? 2 : 1);
         int procCmd = api.totalCmdCount() - api.waitingCmdCount();
         double partialCmd = 1 - api.currendCmdDelay() / (double) api.cmdSendDelay();
         double prgValCmd = (procCmd + partialCmd) / (double) (api.totalCmdCount() + pendingFileCmds);
+        //return prgValFile;
         return Math.min(prgValFile, prgValCmd);
     }
     private long ProcByteCount() {
@@ -445,26 +445,21 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         }
 
         public void run() {
+            Runnable updater = new Runnable() {
+                public void run() {
+                    UpdateProgressBars();
+                    UpdateStatusLabels();
+                }
+            };
+            
             gui.LogEvent(ComEvent.eType.Debug, "Starting progress updater");
             while ((epProc.isProcessing() || api.waitingCmdCount() != 0) && gui.ModState() != eModState.Terminating) {
                 do {
-                    try {
-                        Thread.sleep(20);
-                    } catch (InterruptedException ex) {
-                    }
+                    try { Thread.sleep(50); } catch (InterruptedException ex) { }
                 } while (epProc.isPaused() && gui.ModState() != eModState.Terminating);
 
                 if (gui.ModState() != eModState.Terminating) {
-                    try {
-                        SwingUtilities.invokeLater(new Runnable() {
-
-                            public void run() {
-                                UpdateProgressBars();
-                                UpdateStatusLabels();
-                            }
-                        });
-                    } catch (Exception ex) {
-                    }
+                    try { SwingUtilities.invokeAndWait(updater); } catch (Exception ex) { }
                 }
             }
 
@@ -550,7 +545,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         );
         pnl_FileAdd_LstvwLayout.setVerticalGroup(
             pnl_FileAdd_LstvwLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
         );
 
         spnl_FileAdd.setLeftComponent(pnl_FileAdd_Lstvw);
@@ -559,9 +554,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
 
         pnl_FileAdd_Status.setOpaque(false);
 
-        prg_File.setMaximum(1000);
+        prg_File.setMaximum(10000);
 
-        prg_Total.setMaximum(1000);
+        prg_Total.setMaximum(10000);
 
         lbl_MBProcessed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_MBProcessed.setText("0 of 0 MB processed");

@@ -170,11 +170,13 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         InitUI();
 
         if((Integer)(mem.get("FirstStart", 0)) < 5){
-            DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>- Do not unset watched state when 'Mark watched' is unchecked (to unset refer to ShowSetWatchedState in Options Tab)<br/>" +
-                    "- 'Recursivly delete folders until non-empty folder found' option added<br/>" +
-                    "- Fixed rare rename related files bug<br/>" +
-                    "- Move related files with processed file<br/>" +
-                    "- Tagsystem: Watched variable reflects watched state in AniDB</html>"));
+            DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
+                    "- [Bug] Client would not reauthenticate in some cases" +
+                    "- [Bug] Fixed rare rename related files bug<br/>" +
+                    "- [Change] Move related files with processed file<br/>" +
+                    "- [Change] Tagsystem: Watched variable reflects watched state in AniDB</html>" +
+                    "- [Change/Feat]: Do not unset watched state when 'Mark watched' is unchecked (to unset refer to ShowSetWatchedState in Options Tab)<br/>" +
+                    "- [Feat]: 'Recursivly delete folders until non-empty folder found' option added<br/>"));
         }
 
         modState = eModState.Initialized;
@@ -333,13 +335,15 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
             pnl_NoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NoticeLayout.createSequentialGroup()
                 .addComponent(lbl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
+                .addGap(16, 16, 16))
+            .addGroup(pnl_NoticeLayout.createSequentialGroup()
+                .addGap(784, 784, 784)
                 .addComponent(btn_CloseNotice, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnl_NoticeLayout.setVerticalGroup(
             pnl_NoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btn_CloseNotice)
+                .addComponent(btn_CloseNotice, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(lbl_Notice))
         );
 

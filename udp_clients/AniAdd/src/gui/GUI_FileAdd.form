@@ -180,7 +180,7 @@
               <SubComponents>
                 <Component class="javax.swing.JProgressBar" name="prg_File">
                   <Properties>
-                    <Property name="maximum" type="int" value="1000"/>
+                    <Property name="maximum" type="int" value="10000"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
@@ -188,7 +188,7 @@
                 </Component>
                 <Component class="javax.swing.JProgressBar" name="prg_Total">
                   <Properties>
-                    <Property name="maximum" type="int" value="1000"/>
+                    <Property name="maximum" type="int" value="10000"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
