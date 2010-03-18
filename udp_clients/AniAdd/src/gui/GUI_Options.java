@@ -34,11 +34,15 @@ public class GUI_Options extends javax.swing.JPanel implements GUI.ITab {
         gUI_Options_RenameMove1.chck_EnableFileRenaming.setVisible(advanced);
         gUI_Options_Misc1.setVisible(advanced);
 
+
         if(!advanced){
+            gUI_Options_Misc1.chck_ShowFileInfoPane.setSelected(false);
             gUI_Options_Misc1.chck_ShowEditboxes.setSelected(false);
             gUI_Options_Misc1.chck_DeleteEmptyFolder.setSelected(false);
             gUI_Options_Misc1.chck_RenameRelatedFiles.setSelected(false);
-            
+            gUI_Options_Misc1.chck_RecursivelyDeleteEmptyFolders.setSelected(false);
+            gUI_Options_Misc1.chck_ShowUnwatchedOption.setSelected(false);
+
             gUI_Options_RenameMove1.ptn_MoveToFolder.setSelected(true);
             gUI_Options_RenameMove1.ptn_UseAniDBFN.setSelected(true);
             gUI_Options_RenameMove1.chck_EnableFileRenaming.setSelected(true);

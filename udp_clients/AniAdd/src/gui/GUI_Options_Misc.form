@@ -104,11 +104,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Show SetWatchedState CheckBox"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JCheckBox" name="chck_RecursivelyDeleteEmptyFolders">
       <Properties>
         <Property name="text" type="java.lang.String" value="Recursively delete parent folders until non-empty folder is found"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

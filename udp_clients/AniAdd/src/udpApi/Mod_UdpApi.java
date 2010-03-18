@@ -347,9 +347,7 @@ public class Mod_UdpApi implements IModule {
             do {
                 now = new Date();
 
-                if (!aniDBAPIDown) {
-                    authRetry = null;
-                }
+                if (!aniDBAPIDown) authRetry = null;
 
                 if (!aniDBAPIDown && auth) {
                     replysPending = 0;
@@ -372,16 +370,19 @@ public class Mod_UdpApi implements IModule {
                         }
                     }
                     this.replysPending = replysPending;
-
-                    if ((lastReplyPackage == null || (now.getTime() - lastReplyPackage.getTime()) > 60000) && replyHeadStart >= 3 && !longDelay) { //quickfix
-                        //logOut(false);
-                        //authRetry = new Date(now.getTime() + 60 * 60 * 1000);
-                        //aniDBAPIDown = true;
-                        Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute.");
+                    
+                    //quickfix
+                    if ((lastReplyPackage == null || (now.getTime() - lastReplyPackage.getTime()) > 60000) && replyHeadStart >= 3 && authRetry == null && !longDelay) { 
+                        authRetry = new Date(now.getTime() + 5 * 60 * 1000);
                         longDelay = true;
-
-                    }//quickfix
-                    if (longDelay && (now.getTime() - lastReplyPackage.getTime()) > 300000 )  authenticate();
+                        Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute.");
+                    }
+                    if (longDelay && authRetry != null && (authRetry.getTime() - now.getTime() < 0) ) {
+                        authenticate();
+                        longDelay = false;
+                        authRetry = null;
+                    }
+                    //quickfix end
                 }
 
                 if (aniDBAPIDown && authRetry == null) {
@@ -392,12 +393,8 @@ public class Mod_UdpApi implements IModule {
                     authRetry = null;
                     authenticate();
                 }
-
-
-                try {
-                    Thread.sleep(500);
-                } catch (Exception exception) {
-                }
+                
+                try { Thread.sleep(500); } catch (Exception exception) { }
             } while (connected);
         }
     }

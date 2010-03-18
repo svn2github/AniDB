@@ -171,12 +171,12 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         if((Integer)(mem.get("FirstStart", 0)) < 5){
             DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
-                    "- [Bug] Client would not reauthenticate in some cases" +
-                    "- [Bug] Fixed rare rename related files bug<br/>" +
-                    "- [Change] Move related files with processed file<br/>" +
-                    "- [Change] Tagsystem: Watched variable reflects watched state in AniDB</html>" +
-                    "- [Change/Feat]: Do not unset watched state when 'Mark watched' is unchecked (to unset refer to ShowSetWatchedState in Options Tab)<br/>" +
-                    "- [Feat]: 'Recursivly delete folders until non-empty folder found' option added<br/>"));
+                "- [Bug] Client would not reauthenticate in some cases" +
+                "- [Bug] Fixed rare rename related files bug<br/>" +
+                "- [Change] Move related files with processed file<br/>" +
+                "- [Change] Tagsystem: Watched variable reflects watched state in AniDB<br/>" +
+                "- [Change/Feat]: Do not unset watched state when 'Mark watched' is unchecked (to unset refer to ShowSetWatchedState in Options Tab)<br/>" +
+                "- [Feat]: 'Recursivly delete folders until non-empty folder found' option added</html>"));
         }
 
         modState = eModState.Initialized;

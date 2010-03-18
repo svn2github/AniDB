@@ -17,7 +17,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="586" max="32767" attributes="0"/>
+              <EmptySpace pref="685" max="32767" attributes="0"/>
               <Component id="btn_Mode" min="-2" pref="146" max="-2" attributes="1"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>

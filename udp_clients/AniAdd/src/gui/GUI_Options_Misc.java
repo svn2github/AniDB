@@ -143,10 +143,10 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JCheckBox chck_DeleteEmptyFolder;
     protected javax.swing.JCheckBox chck_OverwriteMLEntries;
-    private javax.swing.JCheckBox chck_RecursivelyDeleteEmptyFolders;
+    protected javax.swing.JCheckBox chck_RecursivelyDeleteEmptyFolders;
     protected javax.swing.JCheckBox chck_RenameRelatedFiles;
     protected javax.swing.JCheckBox chck_ShowEditboxes;
     protected javax.swing.JCheckBox chck_ShowFileInfoPane;
-    private javax.swing.JCheckBox chck_ShowUnwatchedOption;
+    protected javax.swing.JCheckBox chck_ShowUnwatchedOption;
     // End of variables declaration//GEN-END:variables
 }
