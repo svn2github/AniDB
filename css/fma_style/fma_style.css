@@ -441,7 +441,7 @@ div.pagination span a,
 }
 
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-.g_bubble.stripe > div.data .name-colored
+.g_bubble.stripe .name-colored
 {
 	color: #AA0000;
 }
