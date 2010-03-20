@@ -11,7 +11,7 @@ window.onload = (function()
 {
 	InitDefault();
 	my_mark = false;
-	var form = document.getElementById('type.del')
+	var form = document.getElementById('type.del');
 	if( form )
 	{
 		add_check('do.del.notify.all');
@@ -27,7 +27,7 @@ function do_submit(event)
 	if( my_mark)
 	{
 		my_mark = false;
-		return confirm("This will delete ALL notifies. Continue?";
+		return confirm("This will delete ALL notifies. Continue?");
 	}
 	return true;
 }

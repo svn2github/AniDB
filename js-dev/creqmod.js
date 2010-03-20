@@ -10,7 +10,7 @@ jsVersionArray.push({
 window.onload = (function(){
 	InitDefault();
 	my_mark = false;
-	var form = document.getElementById('type.del')
+	var form = document.getElementById('type.del');
 	if( form ){
 		add_check('creq.add');
 		add_check('creq.add.close');
