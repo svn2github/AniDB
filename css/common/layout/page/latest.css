@@ -36,6 +36,10 @@
 	width: 90%;
 }
 
+#layout-main div.latest2_all div.animelist_all td.type,
+#layout-main div.latest2_all div.latest_similaranime div.content td.user.name,
+#layout-main div.latest2_all div.latest_recommendations div.content td.user.name,
+#layout-main div.latest2_all div.latest_reviews div.content td.user.name,
 #layout-main div.latest2_all div.latest_anime div.content td.type
 {
 	white-space:nowrap;
@@ -98,7 +102,14 @@
 	width:30%;
 }
 
-#layout-main div.latest2_all div.animelist_all td.type
+#layout-main div.latest2_all div.latest_similaranime div.content td.anime.name
 {
-	white-space:nowrap;
+	width:20%;
+}
+
+#layout-main div.latest2_all div.latest_reviews div.content th.approval,
+#layout-main div.latest2_all div.latest_reviews div.content th.rating,
+#layout-main div.latest2_all div.latest_reviews div.content th.my_vote
+{
+	min-width:7em;
 }
