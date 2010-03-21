@@ -19,7 +19,6 @@
 #layout-main ul#cattree *.cat span.name,
 #layout-main ul#cattree *.cat a
 {
-	display: -moz-inline-box;
 	display: inline-block;
 	min-width: 20em;
 }
