@@ -15,7 +15,7 @@ a.i_icon:hover, a.i_inline:hover
 
 .i_inline
 {
-	padding: 0px 8px 0px 7px;
+	padding: 2px 8px 2px 8px;
 	margin: 4px;
 }
 
@@ -29,7 +29,6 @@ a.i_icon:hover, a.i_inline:hover
 	width: 300px;
 	height: 50px;
 	padding: 0.2em;
-	display: -moz-inline-box;
 	display: inline-block;
 }
 
@@ -46,6 +45,5 @@ span.icons
 
 span.smiley
 {
-	display: -moz-inline-box;
 	display:inline-block;
 }

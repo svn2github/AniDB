@@ -211,12 +211,6 @@ div.review h2
 }
 
 /* profile styling */
-*.i_inline
-{
-	padding: 2px 8px 2px 8px;
-	margin: 4px;
-}
-
 div.css_style div.block
 {
 	margin-left: auto;
@@ -452,7 +446,6 @@ div.data caption
 #layout-main ul#cattree .cat a,
 div.permissions span.name
 {
-	display: -moz-inline-box;
 	display: inline-block;
 	min-width: 20em;
 }
