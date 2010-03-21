@@ -408,16 +408,13 @@ div.quotebody div.quoteof,
 #layout-main div.userpage_all div.msg tr.unread td,
 #layout-main div.userpage_all div.news tr.unread td,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-.g_bubble.stripe .name-colored
+#layout-main div.profile_all div.account tr th
+.g_bubble.stripe .name-colored,
+div.relations .g_bubble.stripe div.type
 {
 	font-weight:bold;
 }
 
-
-#layout-main div.profile_all div.account tr th
-{
-	font-weight: bold;
-}
 
 #layout-main div.profile_all div.account tr th p.note
 {
