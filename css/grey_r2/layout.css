@@ -1,7 +1,6 @@
 @import "../common/normalize.css";
 @import "../common/layout/default.css";
 @import "../common/layout/common.css";
-@import "../common/style/color/similar-anime-default.css";
 @import "../common/layout/global/all.css";
 @import "../common/layout/global/roundcorner.css";
 @import "../common/layout/page/all.css";
@@ -482,4 +481,10 @@ margin-left:3.5em;
 #layout-main div.forum div.body dl.codebox
 {
 margin:0.5em 12em 0 0.5em;
+}
+.g_bubble
+{
+-moz-border-radius:0;
+border-style:none;
+border-width:0;
 }
