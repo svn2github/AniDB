@@ -14,12 +14,20 @@ import java.util.TreeMap;
 
 import aniAdd.misc.ICallBack;
 import aniAdd.misc.Misc;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
+import java.util.zip.InflaterOutputStream;
 
 public class Mod_UdpApi implements IModule {
 
     public final int MAXRETRIES = 2;
-    public final int CLIENTVER = 3;
+    public final int CLIENTVER = 0;
     public final int PROTOCOLVER = 3;
     public final String CLIENTTAG = "AniAdd";
     public final String ANIDBAPIHOST = "api.anidb.info";
@@ -228,7 +236,7 @@ public class Mod_UdpApi implements IModule {
 
         cmd.setArgs("user", userName.toLowerCase());
         cmd.setArgs("protover", Integer.toString(PROTOCOLVER), "client", CLIENTTAG.toLowerCase(), "clientver", Integer.toString(CLIENTVER));
-        cmd.setArgs("nat", "1", "enc", "UTF8");
+        cmd.setArgs("nat", "1", "enc", "UTF8", "comp", "1");
 
         synchronized (cmdToSend) {
             for (int i = cmdToSend.size() - 1; i >= 0; i--) {
@@ -493,20 +501,37 @@ public class Mod_UdpApi implements IModule {
             Log(ComEvent.eType.Information, "Cmd", cmd.QueryId(), query.getRetries() == 0);
 
             if (isEncodingSet) {
-                return cmd.toString(session).getBytes(Charset.forName("ASCII"));
+                return cmd.toString(session).getBytes(Charset.forName("UTF8"));
+
             } else {
                 isEncodingSet = true;
-                return cmd.toString(session).getBytes(Charset.forName("UTF8"));
+                return cmd.toString(session).getBytes(Charset.forName("ASCII"));
             }
         }
     }
 
     private class Receive implements Runnable {
 
+        private byte[] inflatePacket(ByteArrayInputStream stream) throws IOException{
+            stream.skip(4);
+
+            InflaterInputStream iis = new InflaterInputStream(stream, new Inflater(true));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(2 * 1400);
+
+            int readBytes;
+            byte[] b = new byte[1024];
+            while((readBytes = iis.read(b))!= -1) baos.write(b, 0, readBytes);
+            
+            return baos.toByteArray();
+        }
+
         public void run() {
             DatagramPacket packet;
             Thread reply;
 
+            int length;
+            byte[] replyBinary;
+            byte[] packetBinary;
             while (connected) {
                 try {
                     packet = new DatagramPacket(new byte[1400], 1400);
@@ -514,7 +539,17 @@ public class Mod_UdpApi implements IModule {
                     replyHeadStart = 0;
                     aniDBAPIDown = false;
 
-                    reply = new Thread(new Reply(new String(packet.getData(), 0, packet.getLength(), "UTF8")));
+                    packetBinary = packet.getData();
+                    if(packetBinary[0] == 0 && packetBinary[1] == 0){
+                        replyBinary = inflatePacket(new ByteArrayInputStream(packetBinary));
+                        length = replyBinary.length;
+
+                    } else {
+                        replyBinary = packetBinary;
+                        length = packet.getLength();
+                    }
+
+                    reply = new Thread(new Reply(new String(replyBinary, 0, length, "UTF8")));
                     reply.start();
                 } catch (Exception e) {
                     aniDBAPIDown = true;
