@@ -24,6 +24,11 @@
 	width:20%;
 }
 
+#layout-main div.buddylist_all th.action
+{
+	width:25em;
+}
+
 #layout-main div.buddylist_all td.acnt,
 #layout-main div.buddylist_all td.epcnt,
 #layout-main div.buddylist_all td.fcnt,
