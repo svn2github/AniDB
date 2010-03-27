@@ -26,11 +26,6 @@
 	width:25em;
 }
 
-#layout-main div.buddylist_all td.action span.action a
-{
-	display: inline;
-}
-
 #layout-main div.buddylist_all td.action span.action
 {
 	float: right;
@@ -61,9 +56,4 @@
 #layout-main div.buddylist_all td.name
 {
 	text-align: left;
-}
-
-#layout-main div.buddylist_all td.action span.action a
-{
-	display: block;
 }
