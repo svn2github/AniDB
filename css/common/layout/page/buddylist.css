@@ -1,6 +1,7 @@
 #layout-main div.buddylist_all th.last_online,
 #layout-main div.buddylist_all th.size,
-#layout-main div.buddylist_all th.date
+#layout-main div.buddylist_all th.date,
+#layout-main div.buddylist_all th.name
 {
 	width: 10em;
 }
@@ -20,14 +21,33 @@
 	width: 8em;
 }
 
-#layout-main div.buddylist_all th.name
-{
-	width: 20%;
-}
-
-#layout-main div.buddylist_all th.action
+#layout-main div.buddylist_all th.actions
 {
 	width:25em;
+}
+
+#layout-main div.buddylist_all td.action span.action a
+{
+	display: inline;
+}
+
+#layout-main div.buddylist_all td.action span.action
+{
+	float: right;
+	margin-right: 0.5em;
+}
+
+#layout-main div.buddylist_all th.actions
+{
+	width:25em;
+}
+
+@media screen and (min-width: 1200px)
+{
+	#layout-main div.buddylist_all th.name
+	{
+		width: 20%;
+	}
 }
 
 #layout-main div.buddylist_all td.acnt,
