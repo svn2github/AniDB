@@ -2,29 +2,30 @@
 #layout-main div.buddylist_all th.size,
 #layout-main div.buddylist_all th.date
 {
-	width:10em;
+	width: 10em;
 }
 
 #layout-main div.buddylist_all th.anime,
 #layout-main div.buddylist_all th.episodes,
 #layout-main div.buddylist_all th.files,
 #layout-main div.buddylist_all th.image,
-#layout-main div.buddylist_all th.taste
+#layout-main div.buddylist_all th.taste,
+#layout-main div.buddylist_all th.friendship
 {
-	width:5em;
+	width: 5em;
 }
 
 #layout-main div.buddylist_all th.size
 {
-	width:8em;
+	width: 8em;
 }
 
 #layout-main div.buddylist_all th.name
 {
-	width:20%;
+	width: 20%;
 }
 
-#layout-main div.buddylist_all th.actions
+#layout-main div.buddylist_all th.action
 {
 	width:25em;
 }
@@ -40,4 +41,9 @@
 #layout-main div.buddylist_all td.name
 {
 	text-align: left;
+}
+
+#layout-main div.buddylist_all td.action span.action a
+{
+	display: block;
 }
