@@ -207,7 +207,7 @@ html,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 #layout-main div.format-buttons input
 {
-	background-color: #C3C5C9;
+	background-color: #B9BBBF;
 }
 
 .g_bubble .g_bubble,
@@ -219,7 +219,7 @@ html,
 body.nonav,
 tr
 {
-	background-color: #CFD1D4;
+	background-color: #C3C5C9;
 }
 
 #layout-main div.forum ul.topics li.row:hover,
