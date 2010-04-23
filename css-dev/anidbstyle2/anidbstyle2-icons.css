@@ -28,6 +28,21 @@
 	background:url("images/logo.png") no-repeat scroll left top transparent;
 }
 
+#layout-search.wide
+{
+	background:url("images/logo-wide.png") no-repeat scroll left top transparent;
+}
+
+#layout-search.wider
+{
+	background:url("images/logo-wider.png") no-repeat scroll left top transparent;
+}
+
+#layout-search.widest
+{
+	background:url("images/logo-widest.png") no-repeat scroll left top transparent;
+}
+
 #layout-menu li.sub-menu ul li:hover,
 #layout-menu li.sub-menu ul li:active
 {
