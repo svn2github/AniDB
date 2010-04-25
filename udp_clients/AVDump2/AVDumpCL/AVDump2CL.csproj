@@ -57,7 +57,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;HasAcreq</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;HasAcreq, Debug</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
@@ -95,9 +95,8 @@
     <DefineConstants>HasAcreq</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zip.Reduced, Version=1.7.2.16, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\Ionic.Zip.Reduced.dll</HintPath>
+    <Reference Include="Ionic.Zip.Reduced">
+      <HintPath>Libs\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -110,7 +109,9 @@
     <Compile Include="ACreq.cs" />
     <Compile Include="Average.cs" />
     <Compile Include="CL.cs" />
+    <Compile Include="NullStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Switches.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AVDump2Lib\AVDump2Lib.csproj">

@@ -17,16 +17,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
 
-namespace AVDump2CL {
-	public class Average {
-		private Stack<double> values;
+namespace AVDump2Lib.InfoGathering.Parser.SubtitleInfo {
+	public class SAMI {
 
-		public Average() { values = new Stack<double>(); }
-		public void Add(double value) { values.Push(value); }
-
-		public double Calc() { return values.Average(); }
-		public double Calc(int restriction) { return values.Take(restriction).Average(); }
 	}
 }

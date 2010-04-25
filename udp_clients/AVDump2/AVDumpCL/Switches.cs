@@ -16,17 +16,44 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 
 namespace AVDump2CL {
-	public class Average {
-		private Stack<double> values;
+	[Flags]
+	enum eSwitches : long {
+		None = 0L,
 
-		public Average() { values = new Stack<double>(); }
-		public void Add(double value) { values.Push(value); }
+		//Output
+		CreqXmlFormat = 1L << 3,
+		MediaInfoOutPut = 1L << 4,
+		MediaInfoXMLOutPut = 1L << 5,
 
-		public double Calc() { return values.Average(); }
-		public double Calc(int restriction) { return values.Take(restriction).Average(); }
+		//Control
+		ExcludeSubFolders = 1L << 16,
+		MonitorFolder = 1L << 18,
+		PauseWhenDone = 1L << 20,
+		PauseWhenFileDone = 1L << 21,
+		RandomFileOrder = 1L << 22,
+		PrintTimeUsedPerFile = 1L << 23,
+		DeleteFileWhenDone = 1L << 24,
+		WaitForDumpReply = 1L << 25,
+		SupressProgress = 1L << 27,
+		PrintTotalTimeUsed = 1L << 28,
+
+		DefAudioExtensions = 1L << 32,
+		DefVideoExtensions = 1L << 33,
+		DefSubtitleExtensions = 1L << 34,
+
+		//Hash
+		Crc32 = 1L << 40,
+		Ed2k = 1L << 41,
+		Md5 = 1L << 42,
+		Sha1 = 1L << 43,
+		Tth = 1L << 44,
+		Tiger = 1L << 45,
+		Aich = 1L << 46,
+		UseAllHashes = Crc32 + Ed2k + Md5 + Sha1 + Tth + Tiger + Aich,
+		PrintElapsedHashingTime = 1L << 52
 	}
 }

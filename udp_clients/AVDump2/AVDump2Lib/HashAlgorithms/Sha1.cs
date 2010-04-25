@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2009 DvdKhl 
+﻿// Copyright (C) 2009 DvdKhl
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,16 +17,24 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
+using System.Security.Cryptography;
 
-namespace AVDump2CL {
-	public class Average {
-		private Stack<double> values;
+namespace AVDump2Lib.HashAlgorithms {
+    /// <summary>Only use this class when the NET framework is not available!</summary>
+    public class Sha1 : HashAlgorithm {
+        HashAlgorithm hash;
 
-		public Average() { values = new Stack<double>(); }
-		public void Add(double value) { values.Push(value); }
+        public Sha1() { hash = new System.Security.Cryptography.SHA1CryptoServiceProvider(); }
 
-		public double Calc() { return values.Average(); }
-		public double Calc(int restriction) { return values.Take(restriction).Average(); }
-	}
+        protected override void HashCore(byte[] array, int ibStart, int cbSize) {
+            hash.TransformBlock(array, ibStart, cbSize, null, 0);
+        }
+
+        protected override byte[] HashFinal() {
+            hash.TransformFinalBlock(new byte[0], 0, 0);
+            return hash.Hash;
+        }
+
+        public override void Initialize() { hash.Initialize(); }
+    }
 }

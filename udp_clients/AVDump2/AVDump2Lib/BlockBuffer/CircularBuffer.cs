@@ -28,12 +28,10 @@ namespace AVDump2Lib.BlockBuffer {
 		bool ConsumerCanRead(int consumerId);
 		T ConsumerGet(int consumerId);
 		void ConsumerAdvance(int consumerId);
-		//T ConsumerRead(int consumerId);
 
 		bool ProducerCanWrite();
 		T ProducerBlock { get; set; }
 		void ProducerAdvance();
-		//void ProducerWrite(T block);
 
 
 		bool IsEmpty();
@@ -78,10 +76,7 @@ namespace AVDump2Lib.BlockBuffer {
 			return true;
 		}
 		public void ProducerAdvance() { producer++; }
-		public T ProducerBlock {
-			get { return buffer[producer & blockMask]; }
-			set { buffer[producer & blockMask] = value; }
-		}
+		public T ProducerBlock { get { return buffer[producer & blockMask]; } set { buffer[producer & blockMask] = value; } }
 		public void ProducerWrite(T block) {
 			//if(!CanWrite()) throw new Exception();
 			buffer[producer & blockMask] = block;
@@ -96,8 +91,6 @@ namespace AVDump2Lib.BlockBuffer {
 		}
 		public ulong Count(int consumerId) { return producer - consumers[consumerId]; }
 
-		public ulong BlockCount {
-			get { return blockCount; }
-		}
+		public ulong BlockCount { get { return blockCount; } }
 	}
 }

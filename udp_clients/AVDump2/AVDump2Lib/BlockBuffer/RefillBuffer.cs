@@ -22,12 +22,15 @@ using System;
 
 namespace AVDump2Lib.BlockBuffer {
 	public delegate void Consumer<T>(T block);
-	public interface IRefillBuffer<T> {
+	public interface IRefillBuffer<T> : IDisposable {
 
 		void Start();
 
 		void Read(int consumerId, Consumer<T> consumer);
 		T GetBlock(int consumerId);
+
+		bool CanRead(int consumerId);
+
 		void Advance(int consumerId);
 
 		ICircularBuffer<T> BaseStream { get; }
@@ -39,17 +42,12 @@ namespace AVDump2Lib.BlockBuffer {
 		bool EndOfStream(int consumerId);
 
 	}
-	public interface IBlockSource<T> {
-		void InitializeBlock(out T block);
-		T SetNextBlock(T block);
-		bool AllBlocksRead { get; }
-	}
 
 	public class RefillBuffer<T> : IRefillBuffer<T> {
-		ICircularBuffer<T> circBuffer;
-		IBlockSource<T> blockSource;
-		Thread tRefiller;
-		bool isEndOfStream;
+		private ICircularBuffer<T> circBuffer;
+		private IBlockSource<T> blockSource;
+		private Thread tRefiller;
+		private bool isEndOfStream;
 
 		public RefillBuffer(ICircularBuffer<T> circBuffer, IBlockSource<T> blockSource) {
 			this.circBuffer = circBuffer;
@@ -74,9 +72,9 @@ namespace AVDump2Lib.BlockBuffer {
 			return circBuffer.ConsumerGet(consumerId);
 		}
 
-		public void Advance(int consumerId) {
-			circBuffer.ConsumerAdvance(consumerId);
-		}
+		public bool CanRead(int consumerId) { return circBuffer.ConsumerCanRead(consumerId); }
+
+		public void Advance(int consumerId) { circBuffer.ConsumerAdvance(consumerId); }
 
 		public void Read(int consumerId, Consumer<T> consumer) {
 			while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20);
@@ -87,7 +85,6 @@ namespace AVDump2Lib.BlockBuffer {
 		public bool EndOfStream() { return circBuffer.IsEmpty() && isEndOfStream; }
 		public bool EndOfStream(int consumerId) { return !circBuffer.ConsumerCanRead(consumerId) && isEndOfStream; }
 
-
 		private void Filler() {
 			while(!blockSource.AllBlocksRead) {
 				while(!circBuffer.ProducerCanWrite()) Thread.Sleep(20);
@@ -97,9 +94,17 @@ namespace AVDump2Lib.BlockBuffer {
 			}
 			isEndOfStream = true;
 		}
+
+		public void Dispose() { blockSource.Dispose(); }
 	}
 
-	public class ByteStreamToBlock : IBlockSource<byte[]> {
+	public interface IBlockSource<T> : IDisposable {
+		void InitializeBlock(out T block);
+		T SetNextBlock(T block);
+		bool AllBlocksRead { get; }
+	}
+
+	public class ByteStreamToBlock : IBlockSource<byte[]>, IDisposable {
 		Stream source;
 		bool isEndOfStream;
 
@@ -128,5 +133,6 @@ namespace AVDump2Lib.BlockBuffer {
 
 		public bool AllBlocksRead { get { return isEndOfStream; } }
 
+		public void Dispose() { source.Dispose(); }
 	}
 }

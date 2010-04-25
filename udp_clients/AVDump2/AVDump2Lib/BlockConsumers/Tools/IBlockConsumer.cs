@@ -15,18 +15,17 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 
-namespace AVDump2CL {
-	public class Average {
-		private Stack<double> values;
+namespace AVDump2Lib.BlockConsumers.Tools {
+	public interface IBlockConsumer {
+		event EventHandler ProcessingDone;
 
-		public Average() { values = new Stack<double>(); }
-		public void Add(double value) { values.Push(value); }
+		string Name { get; }
 
-		public double Calc() { return values.Average(); }
-		public double Calc(int restriction) { return values.Take(restriction).Average(); }
+		void Start(AVDump2Lib.BlockBuffer.IRefillBuffer<byte[]> b, int consumerId);
+		void Join();
+		bool HasFinished { get; }
+
+		long ProcessedBytes { get; }
 	}
 }
