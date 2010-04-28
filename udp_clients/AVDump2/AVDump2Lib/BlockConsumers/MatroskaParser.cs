@@ -161,33 +161,25 @@ namespace AVDump2Lib.BlockConsumers {
 			protected sealed override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 				switch((DocTypeEBML.eId)elementInfo.ElementType.Id) {
 					case DocTypeEBML.eId.DocType:
-						DocType = (string)reader.RetrieveValue();
-						break;
+						DocType = (string)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.DocTypeReadVersion:
-						DocTypeReadVersion = (ulong)reader.RetrieveValue();
-						break;
+						DocTypeReadVersion = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.DocTypeVersion:
-						DocTypeVersion = (ulong)reader.RetrieveValue();
-						break;
+						DocTypeVersion = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLMaxIDLength:
-						EbmlMaxIdLength = (ulong)reader.RetrieveValue();
-						break;
+						EbmlMaxIdLength = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLMaxSizeLength:
-						EbmlMaxSizeLength = (ulong)reader.RetrieveValue();
-						break;
+						EbmlMaxSizeLength = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLReadVersion:
-						EbmlReadVersion = (ulong)reader.RetrieveValue();
-						break;
+						EbmlReadVersion = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLVersion:
-						EbmlVersion = (ulong)reader.RetrieveValue();
-						break;
+						EbmlVersion = (ulong)reader.RetrieveValue(); break;
 					default:
 						return false;
 				}
 				return true;
 			}
 		}
-
 		public class SegmentSection : Section {
 			public SegmentInfoSection SegmentInfo { get; private set; }
 			public SeekHeadSection SeekHead { get; private set; }
@@ -217,7 +209,6 @@ namespace AVDump2Lib.BlockConsumers {
 				return true;
 			}
 
-			//Cluster
 			//Cues
 
 			public class SegmentInfoSection : Section {
@@ -237,34 +228,42 @@ namespace AVDump2Lib.BlockConsumers {
 				public string WritingApp { get; private set; }
 				public DateTime? ProductionDate { get; private set; }
 
+				public EbmlEnumerable<ChapterTranslateSection> ChapterTranslate { get; private set; }
+
+				public SegmentInfoSection() {
+					ChapterTranslate = new EbmlEnumerable<ChapterTranslateSection>();
+				}
+
 				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 					switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 						case DocTypeMatroskaV2.eId.SegmentUID:
-							break;
+							segmentUId = (byte[])reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.SegmentFilename:
-							break;
+							SegmentFilename = (string)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.PrevUID:
-							break;
+							prevUId = (byte[])reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.PrevFilename:
-							break;
+							PreviousFilename = (string)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.NextUID:
-							break;
+							nextUId = (byte[])reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.NextFilename:
-							break;
+							NextFilename = (string)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.SegmentFamily:
-							break;
+							segmentFamily = (byte[])reader.RetrieveValue(); break;
+						case DocTypeMatroskaV2.eId.ChapterTranslate:
+							Section.CreateReadAdd(new ChapterTranslateSection(), reader, ChapterTranslate); break;
 						case DocTypeMatroskaV2.eId.TimecodeScale:
-							break;
+							TimecodeScale = (ulong)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.Duration:
-							break;
+							Duration = (double)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.Title:
-							break;
+							Title = (string)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.MuxingApp:
-							break;
+							MuxingApp = (string)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.WritingApp:
-							break;
+							WritingApp = (string)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.DateUTC:
-							break;
+							ProductionDate = (DateTime)reader.RetrieveValue(); break;
 						default:
 							return false;
 					}
@@ -280,19 +279,104 @@ namespace AVDump2Lib.BlockConsumers {
 						throw new NotImplementedException();
 					}
 				}
-
 			}
-			public class SeekHeadSection {
 
+			public class ClusterSection : Section {
+				private List<TrackInfo> tracks = new List<TrackInfo>();
+
+				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+					switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+						case DocTypeMatroskaV2.eId.SimpleBlock:
+						case DocTypeMatroskaV2.eId.Block:
+							MatroskaBlock matroskaBlock = (MatroskaBlock)reader.RetrieveValue();
+							if(matroskaBlock.TrackNumber > tracks.Count) for(int i = tracks.Count;i < matroskaBlock.TrackNumber;i++) tracks.Add(new TrackInfo(i));
+							tracks[matroskaBlock.TrackNumber - 1].ProcessBlock(matroskaBlock);
+							break;
+
+						case DocTypeMatroskaV2.eId.BlockGroup:
+							reader.EnterMasterElement();
+							ProcessElement(reader, reader.NextElementInfo());
+							reader.LeaveMasterElement();
+							break;
+
+						case DocTypeMatroskaV2.eId.Timecode:
+							foreach(var track in tracks) track.EndOfCluster((long)reader.RetrieveValue());
+							break;
+
+						default:
+							return false;
+					}
+					return true;
+				}
+
+				public class TrackInfo {
+					public int Index { get; private set; }
+
+					private long trackSize;
+
+					private uint frames;
+					private long minStamp;
+					private long highStamp;
+
+					private Collection<ClusterInfo> clusters;
+
+					private uint clusterFrames;
+					private uint clusterSize;
+					private long clusterStamp;
+
+					public TrackInfo(int index) {
+						this.Index = index;
+						clusters = new Collection<ClusterInfo>();
+					}
+
+					public void EndOfCluster(long clusterStamp) {
+						clusters.Add(new ClusterInfo((ulong)this.clusterStamp, clusterFrames, clusterSize));
+
+						clusterSize = clusterFrames = 0;
+						this.clusterStamp = clusterStamp;
+					}
+
+					public void ProcessBlock(MatroskaBlock block) {
+						clusterSize += block.DataLength;
+						trackSize += block.DataLength;
+
+						clusterFrames += block.FrameCount;
+						frames += block.FrameCount;
+
+						if(highStamp < block.TimeCode + clusterStamp) highStamp = block.TimeCode + clusterStamp;
+						if(minStamp > block.TimeCode + clusterStamp) minStamp = block.TimeCode + clusterStamp;
+					}
+
+					public struct ClusterInfo {
+						public ulong clusterStamp;
+						public uint frames;
+						public uint size;
+
+						public ClusterInfo(ulong clusterStamp, uint frames, uint size) {
+							this.frames = frames; this.size = size; this.clusterStamp = clusterStamp;
+						}
+					}
+				}
+			}
+
+			public class SeekHeadSection {
 				public class SeekSection {
 					public ulong Id { get; private set; }
 					public ulong Position { get; private set; }
-
 				}
 			}
-			public class TracksSection {
+			public class TracksSection : Section {
+				public EbmlEnumerable<TrackEntrySection> Tracks { get; private set; }
 
-				public class TrackEntrySection {
+				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+					if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.TrackEntry) {
+						Section.CreateReadAdd(new TrackEntrySection(), reader, tracks);
+						return true;
+					}
+					return false;
+				}
+
+				public class TrackEntrySection : Section {
 					public ulong? TrackNumber { get; private set; } //Not 0; Mandatory
 					public ulong? TrackUId { get; private set; } //Not 0
 					public Types TrackType { get; private set; } //Mandatory
@@ -303,17 +387,50 @@ namespace AVDump2Lib.BlockConsumers {
 					public double? TrackTimecodeScale { get; private set; }
 					public string Name { get; private set; }
 					public string Language { get; private set; } //Default: 'eng'
-					public string CodeId { get; private set; } //Mandatory
+					public string CodecId { get; private set; } //Mandatory
 					//CodecPrivate
-					public string CodeName { get; private set; }
+					public string CodecName { get; private set; }
 					//AttachmentLink #>=1
 
+					public VideoSection Video { get; private set; }
+					public AudioSection Audio { get; private set; }
+					public ContentEncodingsSection ContentEncodings { get; private set; }
+
+					protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+						switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+							case DocTypeMatroskaV2.eId.TrackNumber: break;
+							case DocTypeMatroskaV2.eId.TrackUID: break;
+							case DocTypeMatroskaV2.eId.TrackType: break;
+							case DocTypeMatroskaV2.eId.MinCache: break;
+							case DocTypeMatroskaV2.eId.MaxCache: break;
+							case DocTypeMatroskaV2.eId.DefaultDuration: break;
+							case DocTypeMatroskaV2.eId.TrackTimecodeScale: break;
+							case DocTypeMatroskaV2.eId.Name: break;
+							case DocTypeMatroskaV2.eId.Language: break;
+							case DocTypeMatroskaV2.eId.CodecID: break;
+							case DocTypeMatroskaV2.eId.CodecName: break;
+							case DocTypeMatroskaV2.eId.Video:
+								Video = new VideoSection();
+								Video.Read(reader);
+								break;
+							case DocTypeMatroskaV2.eId.Audio:
+								Audio = new AudioSection();
+								Audio.Read(reader);
+								break;
+							case DocTypeMatroskaV2.eId.ContentEncodings:
+								ContentEncodings = new ContentEncodingsSection();
+								ContentEncodings.Read(reader);
+								break;
+							default: return false;
+						}
+						return true;
+					}
 
 					[Flags]
 					public enum Options { None = 0, Enabled = 1, Default = 2, Forced = 4, Lacing = 8 }
 					public enum Types { Video = 0x1, Audio = 0x2, Complex = 0x3, Logo = 0x10, Subtitle = 0x11, Button = 0x12, Control = 0x20 }
 
-					public class VideoSection {
+					public class VideoSection : Section {
 						public ulong? PixelWidth { get; private set; }
 						public ulong? PixelHeight { get; private set; }
 						public ulong? PixelCropBottom { get; private set; } //Default: 0
@@ -324,19 +441,31 @@ namespace AVDump2Lib.BlockConsumers {
 						public ulong? DisplayHeight { get; private set; } //Default: $PixelHeight
 						public Unit DisplayUnit { get; private set; } //Default: Pixels (0)
 
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							throw new NotImplementedException();
+						}
+
 						public enum Unit { Pixels, Centimeters, Inches }
 					}
-					public class AudioSection {
+					public class AudioSection : Section {
 						public ulong? SamplingFrequency { get; private set; } //Default: 8000
 						public ulong? OutputSamplingFrequency { get; private set; }
 						public ulong? ChannelCount { get; private set; } //Default: 1
 						public ulong? BitDepth { get; private set; }
+
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							throw new NotImplementedException();
+						}
 					}
-					public class ContentEncodingsSection {
+					public class ContentEncodingsSection : Section {
 						public class ContentEncodingSection {
 							public ulong? ContentEncodingOrder { get; private set; } //Default: 0
 							public CETypes ContentEncodingScope { get; private set; } //Default: 1
 							public CETypes ContentEncodingType { get; private set; } //Default: 0
+
+							protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+								throw new NotImplementedException();
+							}
 
 							[Flags]
 							public enum CEScopes { AllFrames = 1, CodecPrivate = 2, ContentCompression = 4 }
@@ -350,6 +479,7 @@ namespace AVDump2Lib.BlockConsumers {
 						}
 					}
 				}
+
 			}
 			public class AttachmentsSection {
 				public class AttachedFileSection {
@@ -412,7 +542,6 @@ namespace AVDump2Lib.BlockConsumers {
 					}
 				}
 			}
-
 		}
 
 		public abstract class Section {
@@ -435,13 +564,22 @@ namespace AVDump2Lib.BlockConsumers {
 				DocTypeEBML.eId id = (DocTypeEBML.eId)elementInfo.ElementType.Id;
 				return id == DocTypeEBML.eId.CRC32 || id == DocTypeEBML.eId.Void;
 			}
-			internal static void EnterReadLeave(Section section, EBMLReader reader) {
-				reader.EnterMasterElement();
+			internal static void CreateReadAdd<T>(T section, EBMLReader reader, EbmlEnumerable<T> lst) where T : Section {
 				section.Read(reader);
-				reader.LeaveMasterElement();
+				lst.Add(section);
 			}
 
 			protected abstract bool ProcessElement(EBMLReader reader, ElementInfo elementInfo);
+		}
+		public class EbmlEnumerable<T> : IEnumerable<T> {
+			protected Collection<T> items;
+
+			public EbmlEnumerable() { items = new Collection<T>(); }
+
+			protected internal void Add(T item) { items.Add(item); }
+
+			public IEnumerator<T> GetEnumerator() { return items.GetEnumerator(); }
+			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { return items.GetEnumerator(); }
 		}
 	}
 }
