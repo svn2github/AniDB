@@ -53,7 +53,7 @@ namespace AVDump2CL {
 		Tth = 1L << 44,
 		Tiger = 1L << 45,
 		Aich = 1L << 46,
-		UseAllHashes = Crc32 + Ed2k + Md5 + Sha1 + Tth + Tiger + Aich,
+		UseAllHashes = Crc32 | Ed2k | Md5 | Sha1 | Tth | Tiger | Aich,
 		PrintElapsedHashingTime = 1L << 52
 	}
 }

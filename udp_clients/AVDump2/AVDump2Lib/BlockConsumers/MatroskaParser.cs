@@ -16,6 +16,7 @@
 
 using System;
 using System.Xml;
+using System.Linq;
 using AVDump2Lib.BlockConsumers.Tools;
 using AVDump2Lib.InfoGathering.Parser.CSEBMLLib;
 using CSEBMLLib;
@@ -25,6 +26,7 @@ using CSEBMLLib.DocTypes.Matroska;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Diagnostics;
 
 namespace AVDump2Lib.BlockConsumers {
 	public class MatroskaParser : BlockConsumerBase {
@@ -115,113 +117,138 @@ namespace AVDump2Lib.BlockConsumers {
 			dataSrc = new FileSource(b, consumerId);
 			reader = new EBMLReader(dataSrc, new DocTypeEBML(new IDocTypeExtension[] { new DocTypeMatroskaV2() }));
 
+			Thread t = new Thread(ReadBytesUpdater);
+			t.Start();
+
 			Root();
 		}
 
 		private void Root() {
 			ElementInfo elementInfo = reader.NextElementInfo();
 			if(elementInfo.ElementType.Id == (int)DocTypeEBML.eId.EBMLHeader) {
-				EbmlHeader = new EbmlHeaderSection();
-				EbmlHeader.Read(reader);
+				EbmlHeader = Section.CreateRead(new EbmlHeaderSection(), reader);
 			} else {
 				//Todo: dispose reader
-				while(b.EndOfStream(consumerId)) {
-					while(!b.CanRead(consumerId)) Thread.Sleep(20);
-					b.Advance(consumerId);
-				}
+				DummyRead();
 			}
 
 			while((elementInfo = reader.NextElementInfo()) != null && Section.IsGlobalElement(elementInfo)) ;
-			if(elementInfo == null || elementInfo.ElementType.Id != (int)DocTypeMatroskaV2.eId.Segment) {
-				//error
+
+			if(elementInfo != null && elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Segment) {
+				Segment = Section.CreateRead(new SegmentSection(), reader);
 			} else {
-				Segment = new SegmentSection();
+				//error
+				DummyRead();
 			}
+		}
+		private void DummyRead() {
+			while(b.EndOfStream(consumerId)) {
+				while(!b.CanRead(consumerId)) Thread.Sleep(20);
+				b.Advance(consumerId);
+			}
+		}
+		private void ReadBytesUpdater() {
+			while(!HasFinished) {
+				Thread.Sleep(20);
+				ProcessedBytes = dataSrc.Position;
+			}
+			ProcessedBytes = dataSrc.Length;
 		}
 
 		public class EbmlHeaderSection : Section {
-			public ulong EbmlVersion { get; private set; }
-			public ulong EbmlReadVersion { get; private set; }
-			public ulong EbmlMaxIdLength { get; private set; }
-			public ulong EbmlMaxSizeLength { get; private set; }
-			public string DocType { get; private set; }
-			public ulong DocTypeVersion { get; private set; }
-			public ulong DocTypeReadVersion { get; private set; }
+			#region Fields & Properties
+			private ulong? ebmlVersion;
+			private ulong? ebmlReadVersion;
+			private ulong? ebmlMaxIdLength;
+			private ulong? ebmlMaxSizeLength;
+			private string docType;
+			private ulong? docTypeVersion;
+			private ulong? docTypeReadVersion;
 
-			public EbmlHeaderSection() {
-				EbmlVersion = 1;
-				EbmlReadVersion = 1;
-				EbmlMaxIdLength = 4;
-				EbmlMaxSizeLength = 8;
-				DocType = "matroska";
-				DocTypeVersion = 1;
-				DocTypeReadVersion = 1;
-			}
+			public ulong EbmlVersion { get { return ebmlVersion.HasValue ? ebmlVersion.Value : 1; } }
+			public ulong EbmlReadVersion { get { return ebmlReadVersion.HasValue ? ebmlReadVersion.Value : 1; } }
+			public ulong EbmlMaxIdLength { get { return ebmlMaxIdLength.HasValue ? ebmlMaxIdLength.Value : 4; } }
+			public ulong EbmlMaxSizeLength { get { return ebmlMaxSizeLength.HasValue ? ebmlMaxSizeLength.Value : 8; } }
+			public ulong DocTypeReadVersion { get { return docTypeReadVersion.HasValue ? docTypeReadVersion.Value : 1; } }
+			public ulong DocTypeVersion { get { return docTypeVersion.HasValue ? docTypeVersion.Value : 1; } }
+			public string DocType { get { return docType != null ? docType : "matroska"; } }
+			#endregion
 
 			protected sealed override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 				switch((DocTypeEBML.eId)elementInfo.ElementType.Id) {
 					case DocTypeEBML.eId.DocType:
-						DocType = (string)reader.RetrieveValue(); break;
+						docType = (string)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.DocTypeReadVersion:
-						DocTypeReadVersion = (ulong)reader.RetrieveValue(); break;
+						docTypeReadVersion = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.DocTypeVersion:
-						DocTypeVersion = (ulong)reader.RetrieveValue(); break;
+						docTypeVersion = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLMaxIDLength:
-						EbmlMaxIdLength = (ulong)reader.RetrieveValue(); break;
+						ebmlMaxIdLength = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLMaxSizeLength:
-						EbmlMaxSizeLength = (ulong)reader.RetrieveValue(); break;
+						ebmlMaxSizeLength = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLReadVersion:
-						EbmlReadVersion = (ulong)reader.RetrieveValue(); break;
+						ebmlReadVersion = (ulong)reader.RetrieveValue(); break;
 					case DocTypeEBML.eId.EBMLVersion:
-						EbmlVersion = (ulong)reader.RetrieveValue(); break;
+						ebmlVersion = (ulong)reader.RetrieveValue(); break;
 					default:
 						return false;
 				}
 				return true;
 			}
+			protected sealed override void Validate() { }
 		}
 		public class SegmentSection : Section {
+			#region Fields & Properties
 			public SegmentInfoSection SegmentInfo { get; private set; }
-			public SeekHeadSection SeekHead { get; private set; }
+			public AttachmentsSection Attachments { get; private set; }
+			public ChaptersSection Chapters { get; private set; }
+			public ClusterSection Cluster { get; private set; }
+			public TracksSection Tracks { get; private set; }
+			//public SeekHeadSection SeekHead { get; private set; }
+			#endregion
+
+			public SegmentSection() { Cluster = new ClusterSection(); }
 
 			protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 				switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 					case DocTypeMatroskaV2.eId.Cluster:
-						break;
-					case DocTypeMatroskaV2.eId.SeekHead:
-						break;
+						Cluster.Read(reader); break;
 					case DocTypeMatroskaV2.eId.Tracks:
-						break;
+						Tracks = Section.CreateRead(new TracksSection(), reader); break;
 					case DocTypeMatroskaV2.eId.Info:
-						SegmentInfo = new SegmentInfoSection();
-						SegmentInfo.Read(reader);
-						break;
+						SegmentInfo = Section.CreateRead(new SegmentInfoSection(), reader); break;
 					case DocTypeMatroskaV2.eId.Chapters:
-						break;
+						Chapters = Section.CreateRead(new ChaptersSection(), reader); break;
 					case DocTypeMatroskaV2.eId.Attachments:
-						break;
+						Attachments = Section.CreateRead(new AttachmentsSection(), reader); break;
 					case DocTypeMatroskaV2.eId.Tags:
 						break;
-
+					/*case DocTypeMatroskaV2.eId.SeekHead:
+						break;
+					case DocTypeMatroskaV2.eId.Cues:
+						break;*/
 					default:
 						return false;
 				}
 				return true;
 			}
+			protected override void Validate() { }
 
-			//Cues
-
+			#region SubSections
 			public class SegmentInfoSection : Section {
-				private byte[] segmentUId, prevUId, nextUId, segmentFamily;
+				#region Fields & Properties
+				private ulong? timecodeScale;
+				private EbmlEnumerable<byte[]> segmentFamily;
+				private byte[] segmentUId, prevUId, nextUId;
 
 				public byte[] SegmentUId { get { return segmentUId == null ? null : (byte[])segmentUId.Clone(); } }
-				public string SegmentFilename { get; private set; }
 				public byte[] PreviousUId { get { return prevUId == null ? null : (byte[])prevUId.Clone(); } }
-				public string PreviousFilename { get; private set; }
 				public byte[] NextUId { get { return nextUId == null ? null : (byte[])nextUId.Clone(); } }
+				public string SegmentFilename { get; private set; }
+				public string PreviousFilename { get; private set; }
 				public string NextFilename { get; private set; }
-				public byte[] SegmentFamily { get { return segmentFamily == null ? null : (byte[])segmentFamily.Clone(); } }
-				public ulong? TimecodeScale { get; private set; }
+				public EbmlEnumerable<byte[]> SegmentFamily { get { return segmentFamily.DeepClone(item => { return (byte[])item.Clone(); }); } }
+				public ulong TimecodeScale { get { return timecodeScale.HasValue ? timecodeScale.Value : 1000000; } }
 				public double? Duration { get; private set; }
 				public string Title { get; private set; }
 				public string MuxingApp { get; private set; }
@@ -229,8 +256,10 @@ namespace AVDump2Lib.BlockConsumers {
 				public DateTime? ProductionDate { get; private set; }
 
 				public EbmlEnumerable<ChapterTranslateSection> ChapterTranslate { get; private set; }
+				#endregion
 
 				public SegmentInfoSection() {
+					segmentFamily = new EbmlEnumerable<byte[]>();
 					ChapterTranslate = new EbmlEnumerable<ChapterTranslateSection>();
 				}
 
@@ -249,11 +278,11 @@ namespace AVDump2Lib.BlockConsumers {
 						case DocTypeMatroskaV2.eId.NextFilename:
 							NextFilename = (string)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.SegmentFamily:
-							segmentFamily = (byte[])reader.RetrieveValue(); break;
+							segmentFamily.Add((byte[])reader.RetrieveValue()); break;
 						case DocTypeMatroskaV2.eId.ChapterTranslate:
 							Section.CreateReadAdd(new ChapterTranslateSection(), reader, ChapterTranslate); break;
 						case DocTypeMatroskaV2.eId.TimecodeScale:
-							TimecodeScale = (ulong)reader.RetrieveValue(); break;
+							timecodeScale = (ulong)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.Duration:
 							Duration = (double)reader.RetrieveValue(); break;
 						case DocTypeMatroskaV2.eId.Title:
@@ -269,18 +298,32 @@ namespace AVDump2Lib.BlockConsumers {
 					}
 					return true;
 				}
+				protected override void Validate() { }
 
+				#region SubSections
 				public class ChapterTranslateSection : Section {
-					public ulong EditionUId { get; private set; }
-					public ulong Codec { get; private set; }
-					//Id (Binary)
+					private byte[] id;
+
+					public EbmlEnumerable<ulong> EditionUId { get; private set; }
+					public ulong? Codec { get; private set; }
+					public byte[] Id { get { return id != null ? (byte[])id.Clone() : null; } }
 
 					protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
-						throw new NotImplementedException();
+						switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+							case DocTypeMatroskaV2.eId.ChapterTranslateEditionUID:
+								EditionUId.Add((ulong)reader.RetrieveValue()); break;
+							case DocTypeMatroskaV2.eId.ChapterTranslateCodec:
+								Codec = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.ChapterTranslateID:
+								id = (byte[])reader.RetrieveValue(); break;
+							default: return false;
+						}
+						return true;
 					}
+					protected override void Validate() { }
 				}
+				#endregion
 			}
-
 			public class ClusterSection : Section {
 				private List<TrackInfo> tracks = new List<TrackInfo>();
 
@@ -293,14 +336,13 @@ namespace AVDump2Lib.BlockConsumers {
 							tracks[matroskaBlock.TrackNumber - 1].ProcessBlock(matroskaBlock);
 							break;
 
+						case DocTypeMatroskaV2.eId.BlockDuration: break;
+						case DocTypeMatroskaV2.eId.ReferenceBlock: break;
 						case DocTypeMatroskaV2.eId.BlockGroup:
-							reader.EnterMasterElement();
-							ProcessElement(reader, reader.NextElementInfo());
-							reader.LeaveMasterElement();
-							break;
-
+							Read(reader); break;
 						case DocTypeMatroskaV2.eId.Timecode:
-							foreach(var track in tracks) track.EndOfCluster((long)reader.RetrieveValue());
+							long timeCode = (long)(ulong)reader.RetrieveValue();
+							foreach(var track in tracks) track.EndOfCluster(timeCode);
 							break;
 
 						default:
@@ -308,6 +350,7 @@ namespace AVDump2Lib.BlockConsumers {
 					}
 					return true;
 				}
+				protected override void Validate() { }
 
 				public class TrackInfo {
 					public int Index { get; private set; }
@@ -358,6 +401,647 @@ namespace AVDump2Lib.BlockConsumers {
 					}
 				}
 			}
+			public class TracksSection : Section {
+				#region Fields & Properties
+				public EbmlEnumerable<TrackEntrySection> Items { get; private set; }
+				#endregion
+
+				public TracksSection() { Items = new EbmlEnumerable<TrackEntrySection>(); }
+
+				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+					if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.TrackEntry) {
+						Section.CreateReadAdd(new TrackEntrySection(), reader, Items);
+						return true;
+					}
+					return false;
+				}
+				protected override void Validate() { }
+
+				#region SubSections
+				public class TrackEntrySection : Section {
+					#region Fields & Properties
+					private bool? enabled, def, forced, lacing;
+					private string language;
+					private ulong? minCache;
+					private ulong? maxBlockAdditionID;
+
+					public ulong? TrackNumber { get; private set; } //Not 0; Mandatory
+					public ulong? TrackUId { get; private set; } //Not 0
+					public EbmlEnumerable<ulong> TrackOverlay { get; private set; }
+					public Types? TrackType { get; private set; } //Mandatory
+					public Options TrackFlags {
+						get { //Set: Default, Enabled
+							return (!enabled.HasValue || enabled.Value ? Options.Enabled : Options.None) |
+								   (forced.HasValue && forced.Value ? Options.Forced : Options.None) |
+								   (!def.HasValue || def.Value ? Options.Default : Options.None) |
+								   (lacing.HasValue && lacing.Value ? Options.Lacing : Options.None);
+						}
+					}
+					public ulong MinCache { get { return minCache.HasValue ? minCache.Value : 0; } } //Default: 0
+					public ulong? MaxCache { get; private set; }
+					public ulong MaxBlockAdditionID { get { return maxBlockAdditionID.HasValue ? maxBlockAdditionID.Value : 0; } } //Default: 0
+					public ulong? DefaultDuration { get; private set; }
+					public double? TrackTimecodeScale { get; private set; }
+					public string Name { get; private set; }
+					public string Language { get { return language != null ? language : "eng"; } } //Default: 'eng'
+					public string CodecId { get; private set; } //Mandatory
+					//CodecPrivate
+					public string CodecName { get; private set; }
+					public string AttachmentLink { get; private set; }
+
+					public VideoSection Video { get; private set; }
+					public AudioSection Audio { get; private set; }
+					public ContentEncodingsSection ContentEncodings { get; private set; }
+					#endregion
+
+					public TrackEntrySection() { TrackOverlay = new EbmlEnumerable<ulong>(); }
+
+					protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+						switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+							case DocTypeMatroskaV2.eId.TrackNumber:
+								TrackNumber = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.TrackUID:
+								TrackUId = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.TrackOverlay:
+								TrackOverlay.Add((ulong)reader.RetrieveValue()); break;
+							case DocTypeMatroskaV2.eId.TrackType:
+								TrackType = (Types)(ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.MinCache:
+								minCache = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.MaxCache:
+								MaxCache = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.MaxBlockAdditionID:
+								maxBlockAdditionID = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.DefaultDuration:
+								DefaultDuration = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.TrackTimecodeScale:
+								TrackTimecodeScale = (double)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.Name:
+								Name = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.Language:
+								language = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.CodecID:
+								CodecId = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.CodecName:
+								CodecName = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.AttachmentLink:
+								AttachmentLink = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.FlagEnabled:
+								enabled = (ulong)reader.RetrieveValue() == 1; break;
+							case DocTypeMatroskaV2.eId.FlagDefault:
+								def = (ulong)reader.RetrieveValue() == 1; break;
+							case DocTypeMatroskaV2.eId.FlagForced:
+								forced = (ulong)reader.RetrieveValue() == 1; break;
+							case DocTypeMatroskaV2.eId.FlagLacing:
+								lacing = (ulong)reader.RetrieveValue() == 1; break;
+							case DocTypeMatroskaV2.eId.Video:
+								Video = Section.CreateRead(new VideoSection(), reader); break;
+							case DocTypeMatroskaV2.eId.Audio:
+								Audio = Section.CreateRead(new AudioSection(), reader); break;
+							case DocTypeMatroskaV2.eId.ContentEncodings:
+								ContentEncodings = Section.CreateRead(new ContentEncodingsSection(), reader); break;
+							default: return false;
+						}
+						return true;
+					}
+					protected override void Validate() { }
+
+					[Flags]
+					public enum Options { None = 0, Enabled = 1, Default = 2, Forced = 4, Lacing = 8 }
+					public enum Types { Video = 0x1, Audio = 0x2, Complex = 0x3, Logo = 0x10, Subtitle = 0x11, Button = 0x12, Control = 0x20 }
+
+					#region SubSections
+					public class VideoSection : Section {
+						#region Fields & Properties
+						public ulong? pixelCropBottom;
+						public ulong? pixelCropTop;
+						public ulong? pixelCropLeft;
+						public ulong? pixelCropRight;
+						public ulong? displayWidth;
+						public ulong? displayHeight;
+						public bool? interlaced;
+						public byte[] colorSpace;
+						public ARType? aspectRatioType;
+						public Unit? displayUnit;
+
+						public double? FrameRate { get; private set; }
+						public byte[] ColorSpace { get { return colorSpace != null ? (byte[])colorSpace.Clone() : null; } }
+						public ulong? PixelWidth { get; private set; }
+						public ulong? PixelHeight { get; private set; }
+						public ARType AspectRatioType { get { return aspectRatioType.HasValue ? aspectRatioType.Value : ARType.FreeResizing; } } //Default: FreeResizing (0)
+						public bool Interlaced { get { return interlaced.HasValue ? interlaced.Value : false; } } //Default: FreeResizing (0)
+						public ulong PixelCropBottom { get { return pixelCropBottom.HasValue ? pixelCropBottom.Value : 0; } } //Default: 0
+						public ulong PixelCropTop { get { return pixelCropTop.HasValue ? pixelCropTop.Value : 0; } } //Default: 0
+						public ulong PixelCropLeft { get { return pixelCropLeft.HasValue ? pixelCropLeft.Value : 0; } } //Default: 0
+						public ulong PixelCropRight { get { return pixelCropRight.HasValue ? pixelCropRight.Value : 0; } } //Default: 0
+						public ulong DisplayWidth { get { return displayWidth.HasValue ? displayWidth.Value : (PixelWidth.HasValue ? PixelWidth.Value : 0); } } //Default: $PixelWidth
+						public ulong DisplayHeight { get { return displayHeight.HasValue ? displayHeight.Value : (PixelHeight.HasValue ? PixelHeight.Value : 0); } } //Default: $PixelHeight
+						public Unit DisplayUnit { get { return displayUnit.HasValue ? displayUnit.Value : Unit.Pixels; } } //Default: Pixels (0)
+						#endregion
+
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+								case DocTypeMatroskaV2.eId.PixelWidth:
+									PixelHeight = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.PixelHeight:
+									PixelHeight = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.PixelCropBottom:
+									pixelCropBottom = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.PixelCropTop:
+									pixelCropTop = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.PixelCropLeft:
+									pixelCropLeft = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.PixelCropRight:
+									pixelCropRight = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.DisplayWidth:
+									displayWidth = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.DisplayHeight:
+									displayHeight = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.DisplayUnit:
+									displayUnit = (Unit)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.FrameRate:
+									FrameRate = (double)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.FlagInterlaced:
+									interlaced = (ulong)reader.RetrieveValue() == 1; break;
+								case DocTypeMatroskaV2.eId.ColourSpace:
+									colorSpace = (byte[])reader.RetrieveValue(); break;
+								default: return false;
+							}
+							return true;
+						}
+						protected override void Validate() { }
+
+						public enum Unit { Pixels, Centimeters, Inches }
+						public enum ARType { FreeResizing, KeepAR, Fixed }
+					}
+					public class AudioSection : Section {
+						#region Fields & Properties
+						private double? samplingFrequency;
+						private ulong? channelCount;
+
+						public double SamplingFrequency { get { return samplingFrequency.HasValue ? samplingFrequency.Value : 8000d; } } //Default: 8000
+						public ulong? OutputSamplingFrequency { get; private set; }
+						public ulong ChannelCount { get { return channelCount.HasValue ? channelCount.Value : 1; } } //Default: 1
+						public ulong? BitDepth { get; private set; }
+						#endregion
+
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+								case DocTypeMatroskaV2.eId.SamplingFrequency:
+									samplingFrequency = (double)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.OutputSamplingFrequency:
+									OutputSamplingFrequency = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.Channels:
+									channelCount = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.BitDepth:
+									BitDepth = (ulong)reader.RetrieveValue(); break;
+								default: return false;
+							}
+							return true;
+						}
+						protected override void Validate() { }
+					}
+					public class ContentEncodingsSection : Section {
+						public EbmlEnumerable<ContentEncodingSection> Encodings { get; private set; }
+
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.ContentEncodings) {
+								Section.CreateReadAdd(new ContentEncodingSection(), reader, Encodings);
+								return true;
+							}
+							return false;
+						}
+						protected override void Validate() { }
+
+						public class ContentEncodingSection : Section {
+							#region Fields & Properties
+							private ulong? contentEncodingOrder;
+							private CEScopes? contentEncodingScope;
+							private CETypes? contentEncodingType;
+
+							public ulong? ContentEncodingOrder { get { return contentEncodingOrder.HasValue ? contentEncodingOrder.Value : 0; } } //Default: 0
+							public CEScopes ContentEncodingScope { get { return contentEncodingScope.HasValue ? contentEncodingScope.Value : CEScopes.AllFrames; } } //Default: 1
+							public CETypes ContentEncodingType { get { return contentEncodingType.HasValue ? contentEncodingType.Value : CETypes.Compression; } } //Default: 0
+
+							public ContentCompressionSection ContentCompression { get; private set; }
+							#endregion
+
+							protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+								switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+									case DocTypeMatroskaV2.eId.ContentEncodingOrder:
+										contentEncodingOrder = (ulong)reader.RetrieveValue(); break;
+									case DocTypeMatroskaV2.eId.ContentEncodingScope:
+										contentEncodingScope = (CEScopes)reader.RetrieveValue(); break;
+									case DocTypeMatroskaV2.eId.ContentEncodingType:
+										contentEncodingType = (CETypes)reader.RetrieveValue(); break;
+									case DocTypeMatroskaV2.eId.ContentCompression:
+										ContentCompression = Section.CreateRead(new ContentCompressionSection(), reader); break;
+									default: return false;
+								}
+								return true;
+							}
+							protected override void Validate() { }
+
+							[Flags]
+							public enum CEScopes { AllFrames = 1, CodecPrivate = 2, ContentCompression = 4 }
+							public enum CETypes { Compression = 0, Encryption = 1 }
+
+							public class ContentCompressionSection : Section {
+								#region Fields & Properties
+								private CompAlgos? contentCompAlgo;
+
+								public CompAlgos ContentCompAlgo { get { return contentCompAlgo.HasValue ? contentCompAlgo.Value : CompAlgos.zlib; } }
+								//ContentCompSetting
+								#endregion
+
+								protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+									switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+										case DocTypeMatroskaV2.eId.ContentCompAlgo:
+											contentCompAlgo = (CompAlgos)reader.RetrieveValue(); break;
+										default: return false;
+									}
+									return true;
+								}
+								protected override void Validate() { }
+
+								public enum CompAlgos { zlib = 0, bzlib = 1, lzo1x = 2, HeaderScripting = 3 }
+							}
+							public class ContentEncryptionSection : Section {
+								#region Fields & Properties
+								private EncAlgos? contentEncAlgo;
+								private SigAlgos? contentSigAlgo;
+								private SigHashAlgos? contentSigHashAlgo;
+								private byte[] contentEncKeyId, contentSignature, contentSigKeyId;
+
+								public EncAlgos ContentEncAlgo { get { return contentEncAlgo.HasValue ? contentEncAlgo.Value : EncAlgos.SignedOnly; } }
+								public SigAlgos ContentSigAlgo { get { return contentSigAlgo.HasValue ? contentSigAlgo.Value : SigAlgos.EncryptionOnly; } }
+								public SigHashAlgos ContentSigHashAlgo { get { return contentSigHashAlgo.HasValue ? contentSigHashAlgo.Value : SigHashAlgos.EncryptionOnly; } }
+								public byte[] ContentEncKeyId { get { return (byte[])contentEncKeyId.Clone(); } }
+								public byte[] ContentSignature { get { return (byte[])contentSignature.Clone(); } }
+								public byte[] ContentSigKeyId { get { return (byte[])contentSigKeyId.Clone(); } }
+								#endregion
+
+								protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+									switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+										case DocTypeMatroskaV2.eId.ContentEncAlgo:
+											contentEncAlgo = (EncAlgos)reader.RetrieveValue(); break;
+										case DocTypeMatroskaV2.eId.ContentSigAlgo:
+											contentSigAlgo = (SigAlgos)reader.RetrieveValue(); break;
+										case DocTypeMatroskaV2.eId.ContentSigHashAlgo:
+											contentSigHashAlgo = (SigHashAlgos)reader.RetrieveValue(); break;
+										case DocTypeMatroskaV2.eId.ContentEncKeyID:
+											contentEncKeyId = (byte[])reader.RetrieveValue(); break;
+										case DocTypeMatroskaV2.eId.ContentSignature:
+											contentSignature = (byte[])reader.RetrieveValue(); break;
+										case DocTypeMatroskaV2.eId.ContentSigKeyID:
+											contentSigKeyId = (byte[])reader.RetrieveValue(); break;
+										default: return false;
+									}
+									return true;
+								}
+								protected override void Validate() { }
+
+								public enum EncAlgos { SignedOnly = 0, DES = 1, TrippleDES = 2, TwoFish = 3, BlowFish = 4, AES = 5 }
+								public enum SigAlgos { EncryptionOnly = 0, RSA = 1 }
+								public enum SigHashAlgos { EncryptionOnly = 0, SHA1_160 = 1, MD5 = 2 }
+							}
+						}
+					}
+					#endregion
+				}
+				#endregion
+			}
+			public class AttachmentsSection : Section {
+				public EbmlEnumerable<AttachedFileSection> Items { get; private set; }
+
+				public AttachmentsSection() { Items = new EbmlEnumerable<AttachedFileSection>(); }
+
+				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+					if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.AttachedFile) {
+						Section.CreateReadAdd(new AttachedFileSection(), reader, Items);
+						return true;
+					}
+					return false;
+				}
+				protected override void Validate() { }
+
+				public class AttachedFileSection : Section {
+					public string FileDescription { get; private set; }
+					public string FileName { get; private set; }
+					public string FileMimeType { get; private set; }
+					public ulong? FileUId { get; private set; }
+
+					protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+						switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+							case DocTypeMatroskaV2.eId.FileDescription:
+								FileDescription = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.FileName:
+								FileName = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.FileMimeType:
+								FileMimeType = (string)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.FileUID:
+								FileUId = (ulong)reader.RetrieveValue(); break;
+							default: return false;
+						}
+						return true;
+					}
+					protected override void Validate() { }
+				}
+			}
+			public class ChaptersSection : Section {
+				public EbmlEnumerable<EditionEntrySection> Items { get; private set; }
+
+				public ChaptersSection() { Items = new EbmlEnumerable<EditionEntrySection>(); }
+
+				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+					if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.EditionEntry) {
+						Section.CreateReadAdd(new EditionEntrySection(), reader, Items);
+						return true;
+					}
+					return false;
+				}
+				protected override void Validate() { }
+
+				public class EditionEntrySection : Section {
+					#region Fields & Properties
+					private bool? hidden, ordered, def;
+
+					public ulong? EditionUId { get; private set; }
+					public Options EditionFlags {
+						get {
+							return (hidden.HasValue && hidden.Value ? Options.Hidden : Options.None) |
+								   (ordered.HasValue && ordered.Value ? Options.Ordered : Options.None) |
+								   (def.HasValue && def.Value ? Options.Default : Options.None);
+						}
+					}
+					public EbmlEnumerable<ChapterAtomSection> ChapterAtom { get; private set; }
+					#endregion
+
+					public EditionEntrySection() { ChapterAtom = new EbmlEnumerable<ChapterAtomSection>(); }
+
+					protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+						switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+							case DocTypeMatroskaV2.eId.ChapterAtom:
+								Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtom); break;
+							case DocTypeMatroskaV2.eId.EditionUID:
+								EditionUId = (ulong)reader.RetrieveValue(); break;
+							case DocTypeMatroskaV2.eId.EditionFlagHidden:
+								hidden = (ulong)reader.RetrieveValue() == 1; break;
+							case DocTypeMatroskaV2.eId.EditionFlagDefault:
+								def = (ulong)reader.RetrieveValue() == 1; break;
+							case DocTypeMatroskaV2.eId.EditionFlagOrdered:
+								ordered = (ulong)reader.RetrieveValue() == 1; break;
+							default: return false;
+						}
+						return true;
+					}
+					protected override void Validate() { }
+
+					[Flags]
+					public enum Options { None = 0, Hidden = 1, Default = 2, Ordered = 4 }
+
+					public class ChapterAtomSection : Section {
+						#region Fields & Properties
+						private byte[] chapterSegmentUId;
+						private bool? enabled, hidden;
+
+						public ulong? ChapterUId { get; private set; }
+						public ulong? ChapterTimeStart { get; private set; } //Def: 0?
+						public ulong? ChapterTimeEnd { get; private set; }
+						public Options ChapterFlags { get { return (hidden.HasValue && hidden.Value ? Options.Hidden : Options.None) | (!enabled.HasValue || enabled.Value ? Options.Enabled : Options.None); } }
+						public byte[] ChapterSegmentUId { get { return chapterSegmentUId == null ? null : (byte[])chapterSegmentUId.Clone(); } }
+						public ulong? ChapterSegmentEditionUId { get; private set; }
+						public ChapterTrackSection ChapterTrack { get; private set; }
+						public EbmlEnumerable<ChapterAtomSection> ChapterAtom { get; private set; }
+						public EbmlEnumerable<ChapterDisplaySection> ChapterDisplay { get; private set; }
+						public EbmlEnumerable<ChapterProcessSection> ChapterProcess { get; private set; }
+						#endregion
+
+						public ChapterAtomSection() {
+							ChapterAtom = new EbmlEnumerable<ChapterAtomSection>();
+							ChapterDisplay = new EbmlEnumerable<ChapterDisplaySection>();
+							ChapterProcess = new EbmlEnumerable<ChapterProcessSection>();
+						}
+
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+								case DocTypeMatroskaV2.eId.ChapterTrack:
+									ChapterTrack = Section.CreateRead(new ChapterTrackSection(), reader); break;
+								case DocTypeMatroskaV2.eId.ChapterAtom:
+									Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtom); break;
+								case DocTypeMatroskaV2.eId.ChapterDisplay:
+									Section.CreateReadAdd(new ChapterDisplaySection(), reader, ChapterDisplay); break;
+								case DocTypeMatroskaV2.eId.ChapProcess:
+									Section.CreateReadAdd(new ChapterProcessSection(), reader, ChapterProcess); break;
+								case DocTypeMatroskaV2.eId.ChapterUID:
+									ChapterUId = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.ChapterTimeStart:
+									ChapterTimeStart = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.ChapterTimeEnd:
+									ChapterTimeEnd = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.ChapterFlagEnabled:
+									enabled = (ulong)reader.RetrieveValue() == 1; break;
+								case DocTypeMatroskaV2.eId.ChapterFlagHidden:
+									hidden = (ulong)reader.RetrieveValue() == 1; break;
+								case DocTypeMatroskaV2.eId.ChapterSegmentUID:
+									chapterSegmentUId = (byte[])reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.ChapterSegmentEditionUID:
+									ChapterSegmentEditionUId = (ulong)reader.RetrieveValue(); break;
+								default: return false;
+							}
+							return true;
+						}
+						protected override void Validate() { }
+
+						[Flags]
+						public enum Options { None = 0, Hidden = 1, Enabled = 2 }
+
+						public class ChapterTrackSection : Section {
+							public EbmlEnumerable<ulong> ChapterTrackNumber { get; private set; }
+
+							public ChapterTrackSection() { ChapterTrackNumber = new EbmlEnumerable<ulong>(); }
+
+							protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+								switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+									case DocTypeMatroskaV2.eId.ChapterTrackNumber:
+										ChapterTrackNumber.Add((ulong)reader.RetrieveValue()); break;
+									default: return false;
+								}
+								return true;
+							}
+							protected override void Validate() { }
+						}
+						public class ChapterDisplaySection : Section {
+							public string ChapterString { get; private set; }
+							public EbmlEnumerable<string> ChapterLanguage { get; private set; } //Def: eng
+							public EbmlEnumerable<string> ChapterCountry { get; private set; }
+
+							public ChapterDisplaySection() {
+								ChapterLanguage = new EbmlEnumerable<string>();
+								ChapterCountry = new EbmlEnumerable<string>();
+							}
+
+							protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+								switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+									case DocTypeMatroskaV2.eId.ChapString:
+										ChapterString = (string)reader.RetrieveValue(); break;
+									case DocTypeMatroskaV2.eId.ChapLanguage:
+										ChapterLanguage.Add((string)reader.RetrieveValue()); break;
+									case DocTypeMatroskaV2.eId.ChapCountry:
+										ChapterCountry.Add((string)reader.RetrieveValue()); break;
+									default: return false;
+								}
+								return true;
+							}
+							protected override void Validate() { }
+						}
+						public class ChapterProcessSection : Section {
+							private ulong? chapterProcessCodecId;
+
+							public ulong ChapterProcessCodecId { get { return chapterProcessCodecId.HasValue ? chapterProcessCodecId.Value : 0; } }
+							public EbmlEnumerable<ChapterProcessCommandSection> ChapterProcessCommand { get; private set; }
+							//ChapProcessPrivate
+
+							public ChapterProcessSection() { ChapterProcessCommand = new EbmlEnumerable<ChapterProcessCommandSection>(); }
+
+							protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+								switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+									case DocTypeMatroskaV2.eId.ChapProcessCommand:
+										Section.CreateReadAdd(new ChapterProcessCommandSection(), reader, ChapterProcessCommand); break;
+									case DocTypeMatroskaV2.eId.ChapProcessCodecID:
+										chapterProcessCodecId = (ulong)reader.RetrieveValue(); break;
+									default: return false;
+								}
+								return true;
+							}
+							protected override void Validate() { }
+
+							public class ChapterProcessCommandSection : Section {
+								public ProcessTime? ChapterProcessTime { get; private set; }
+								//ChapProcessData
+
+								protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+									switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+										case DocTypeMatroskaV2.eId.ChapProcessTime:
+											ChapterProcessTime = (ProcessTime)reader.RetrieveValue(); break;
+										default: return false;
+									}
+									return true;
+								}
+								protected override void Validate() { }
+
+								public enum ProcessTime { During, Before, After }
+							}
+						}
+					}
+				}
+			}
+			public class TagsSection : Section {
+				public EbmlEnumerable<TagSection> Items { get; private set; }
+
+				public TagsSection() { Items = new EbmlEnumerable<TagSection>(); }
+
+				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+					if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.Tags) {
+						Section.CreateReadAdd(new TagSection(), reader, Items);
+						return true;
+					}
+					return false;
+				}
+				protected override void Validate() { }
+
+				public class TagSection : Section {
+					public TargetsSection Targets { get; private set; }
+					public EbmlEnumerable<SimpleTagSection> SimpleTag { get; private set; }
+
+					public TagSection() { SimpleTag = new EbmlEnumerable<SimpleTagSection>(); }
+
+					protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+						switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+							case DocTypeMatroskaV2.eId.Targets:
+								Targets = Section.CreateRead(new TargetsSection(), reader); break;
+							case DocTypeMatroskaV2.eId.SimpleTag:
+								Section.CreateReadAdd(new SimpleTagSection(), reader, SimpleTag); break;
+							default: return false;
+						}
+						return true;
+					}
+					protected override void Validate() { }
+
+					public class TargetsSection : Section {
+						private ulong? targetTypeValue;
+						private EbmlEnumerable<ulong> trackUId, editionUId, chapterUId, attachmentUId;
+
+						public ulong TargetTypeValue { get { return targetTypeValue.HasValue ? targetTypeValue.Value : 50; } } //Def: 50
+						public string TargetType { get; private set; }
+						public EbmlEnumerable<ulong> TrackUId { get { return trackUId.Count != 0 ? trackUId : new EbmlEnumerable<ulong>(new ulong[] { 0 }); } }
+						public EbmlEnumerable<ulong> EditionUId { get { return editionUId.Count != 0 ? editionUId : new EbmlEnumerable<ulong>(new ulong[] { 0 }); } }
+						public EbmlEnumerable<ulong> ChapterUId { get { return chapterUId.Count != 0 ? chapterUId : new EbmlEnumerable<ulong>(new ulong[] { 0 }); } }
+						public EbmlEnumerable<ulong> AttachmentUId { get { return attachmentUId.Count != 0 ? attachmentUId : new EbmlEnumerable<ulong>(new ulong[] { 0 }); } }
+
+						public TargetsSection() {
+							trackUId = new EbmlEnumerable<ulong>();
+							editionUId = new EbmlEnumerable<ulong>();
+							chapterUId = new EbmlEnumerable<ulong>();
+							attachmentUId = new EbmlEnumerable<ulong>();
+						}
+
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+								case DocTypeMatroskaV2.eId.TargetTypeValue:
+									targetTypeValue = (ulong)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.TargetType:
+									TargetType = (string)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.TargetTrackUID:
+									trackUId.Add((ulong)reader.RetrieveValue()); break;
+								case DocTypeMatroskaV2.eId.TargetEditionUID:
+									editionUId.Add((ulong)reader.RetrieveValue()); break;
+								case DocTypeMatroskaV2.eId.TargetChapterUID:
+									chapterUId.Add((ulong)reader.RetrieveValue()); break;
+								case DocTypeMatroskaV2.eId.TargetAttachmentUID:
+									attachmentUId.Add((ulong)reader.RetrieveValue()); break;
+								default: return false;
+							}
+							return true;
+						}
+						protected override void Validate() { }
+					}
+					public class SimpleTagSection : Section {
+						private string tagLanguage;
+						private bool? tagOriginal;
+
+						public EbmlEnumerable<SimpleTagSection> SimpleTag { get; private set; }
+
+
+						public string TagName { get; private set; }
+						public string TagLanguage { get { return tagLanguage != null ? tagLanguage : "und"; } } //Def: und
+						public string TagString { get; private set; }
+						public bool TagOriginal { get { return tagOriginal.HasValue ? tagOriginal.Value : true; } } //Def: True
+						//TagBinary
+
+						public SimpleTagSection() { SimpleTag = new EbmlEnumerable<SimpleTagSection>(); }
+
+						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
+							switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
+								case DocTypeMatroskaV2.eId.TagName:
+									TagName = (string)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.TagLanguage:
+									tagLanguage = (string)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.TagString:
+									TagString = (string)reader.RetrieveValue(); break;
+								case DocTypeMatroskaV2.eId.TagDefault:
+									tagOriginal = (ulong)reader.RetrieveValue() == 1; break;
+								case DocTypeMatroskaV2.eId.SimpleTag:
+									Section.CreateReadAdd(new SimpleTagSection(), reader, SimpleTag); break;
+								default: return false;
+							}
+							return true;
+						}
+						protected override void Validate() { }
+					}
+				}
+
+			}
 
 			public class SeekHeadSection {
 				public class SeekSection {
@@ -365,198 +1049,21 @@ namespace AVDump2Lib.BlockConsumers {
 					public ulong Position { get; private set; }
 				}
 			}
-			public class TracksSection : Section {
-				public EbmlEnumerable<TrackEntrySection> Tracks { get; private set; }
-
-				protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
-					if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.TrackEntry) {
-						Section.CreateReadAdd(new TrackEntrySection(), reader, tracks);
-						return true;
-					}
-					return false;
-				}
-
-				public class TrackEntrySection : Section {
-					public ulong? TrackNumber { get; private set; } //Not 0; Mandatory
-					public ulong? TrackUId { get; private set; } //Not 0
-					public Types TrackType { get; private set; } //Mandatory
-					public Options TrackFlags { get; private set; } //Set: Default, Enabled
-					public ulong? MinCache { get; private set; } //Default: 0
-					public ulong? MaxCache { get; private set; }
-					public ulong? DefaultDuration { get; private set; }
-					public double? TrackTimecodeScale { get; private set; }
-					public string Name { get; private set; }
-					public string Language { get; private set; } //Default: 'eng'
-					public string CodecId { get; private set; } //Mandatory
-					//CodecPrivate
-					public string CodecName { get; private set; }
-					//AttachmentLink #>=1
-
-					public VideoSection Video { get; private set; }
-					public AudioSection Audio { get; private set; }
-					public ContentEncodingsSection ContentEncodings { get; private set; }
-
-					protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
-						switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
-							case DocTypeMatroskaV2.eId.TrackNumber: break;
-							case DocTypeMatroskaV2.eId.TrackUID: break;
-							case DocTypeMatroskaV2.eId.TrackType: break;
-							case DocTypeMatroskaV2.eId.MinCache: break;
-							case DocTypeMatroskaV2.eId.MaxCache: break;
-							case DocTypeMatroskaV2.eId.DefaultDuration: break;
-							case DocTypeMatroskaV2.eId.TrackTimecodeScale: break;
-							case DocTypeMatroskaV2.eId.Name: break;
-							case DocTypeMatroskaV2.eId.Language: break;
-							case DocTypeMatroskaV2.eId.CodecID: break;
-							case DocTypeMatroskaV2.eId.CodecName: break;
-							case DocTypeMatroskaV2.eId.Video:
-								Video = new VideoSection();
-								Video.Read(reader);
-								break;
-							case DocTypeMatroskaV2.eId.Audio:
-								Audio = new AudioSection();
-								Audio.Read(reader);
-								break;
-							case DocTypeMatroskaV2.eId.ContentEncodings:
-								ContentEncodings = new ContentEncodingsSection();
-								ContentEncodings.Read(reader);
-								break;
-							default: return false;
-						}
-						return true;
-					}
-
-					[Flags]
-					public enum Options { None = 0, Enabled = 1, Default = 2, Forced = 4, Lacing = 8 }
-					public enum Types { Video = 0x1, Audio = 0x2, Complex = 0x3, Logo = 0x10, Subtitle = 0x11, Button = 0x12, Control = 0x20 }
-
-					public class VideoSection : Section {
-						public ulong? PixelWidth { get; private set; }
-						public ulong? PixelHeight { get; private set; }
-						public ulong? PixelCropBottom { get; private set; } //Default: 0
-						public ulong? PixelCropTop { get; private set; } //Default: 0
-						public ulong? PixelCropLeft { get; private set; } //Default: 0
-						public ulong? PixelCropRight { get; private set; } //Default: 0
-						public ulong? DisplayWidth { get; private set; } //Default: $PixelWidth
-						public ulong? DisplayHeight { get; private set; } //Default: $PixelHeight
-						public Unit DisplayUnit { get; private set; } //Default: Pixels (0)
-
-						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
-							throw new NotImplementedException();
-						}
-
-						public enum Unit { Pixels, Centimeters, Inches }
-					}
-					public class AudioSection : Section {
-						public ulong? SamplingFrequency { get; private set; } //Default: 8000
-						public ulong? OutputSamplingFrequency { get; private set; }
-						public ulong? ChannelCount { get; private set; } //Default: 1
-						public ulong? BitDepth { get; private set; }
-
-						protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
-							throw new NotImplementedException();
-						}
-					}
-					public class ContentEncodingsSection : Section {
-						public class ContentEncodingSection {
-							public ulong? ContentEncodingOrder { get; private set; } //Default: 0
-							public CETypes ContentEncodingScope { get; private set; } //Default: 1
-							public CETypes ContentEncodingType { get; private set; } //Default: 0
-
-							protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
-								throw new NotImplementedException();
-							}
-
-							[Flags]
-							public enum CEScopes { AllFrames = 1, CodecPrivate = 2, ContentCompression = 4 }
-							public enum CETypes { Compression, Encryption }
-							public class ContentCompressionSection {
-								public CompAlgos ContentCompAlgo { get; private set; }
-								//ContentCompSetting
-
-								public enum CompAlgos { zlib, bzlib, lzo1x, HeaderScripting }
-							}
-						}
-					}
-				}
-
-			}
-			public class AttachmentsSection {
-				public class AttachedFileSection {
-					public string FileDescription { get; private set; }
-					public string FileName { get; private set; }
-					public string FileMimeType { get; private set; }
-					public ulong FileUId { get; private set; }
-				}
-			}
-			public class ChaptersSection {
-
-				public class EditionEntry {
-					public ulong? EditionUId { get; private set; }
-					public Options EditionFlags { get; private set; }
-					public IEnumerable<ChapterAtomSection> ChapterAtom { get; private set; }
-
-					[Flags]
-					public enum Options { Hidden = 1, Default = 2, Ordered = 4 }
-
-					public class ChapterAtomSection {
-						private byte[] chapterSegmentUId;
-
-						public ulong? ChapterUId { get; private set; }
-						public ulong? ChapterTimeStart { get; private set; } //Def: 0
-						public ulong? ChapterTimeEnd { get; private set; }
-						public Options ChapterFlags { get; private set; }
-						public byte[] ChapterSegmentUId { get { return chapterSegmentUId == null ? null : (byte[])chapterSegmentUId.Clone(); } }
-						public ulong? ChapterSegmentEditionUId { get; private set; }
-
-						public class ChapterTracksSection {
-							public ulong ChapterTrackNumber { get; private set; }
-						}
-						public class ChapterDisplaySection {
-							public string ChapterString { get; private set; }
-							public string ChapterLanguage { get; private set; } //Def: eng
-							public string ChapterCountry { get; private set; }
-						}
-
-						[Flags]
-						public enum Options { Hidden = 1, Enabled = 2 }
-					}
-				}
-			}
-			public class TagsSection {
-				public class TagSection {
-					public class TargetsSection {
-						public ulong? TargetTypeValue { get; private set; } //Def: 50
-						public string TargetType { get; private set; }
-						public ulong? TrackUId { get; private set; }
-						public ulong? EditionUId { get; private set; }
-						public ulong? ChapterUId { get; private set; }
-						public ulong? AttachmentUId { get; private set; }
-					}
-					public class SimpleTagSection {
-						public string TagName { get; private set; }
-						public string TagLanguage { get; private set; } //Def: und
-						public bool TagOriginal { get; private set; } //Def: True
-						public string TagString { get; private set; }
-						//TagBinary
-					}
-				}
-			}
+			#endregion
 		}
 
 		public abstract class Section {
-			//public uint SectionId { get; private set; }
-
 			internal void Read(EBMLReader reader) {
 				reader.EnterMasterElement();
 
 				ElementInfo elementInfo;
 				while((elementInfo = reader.NextElementInfo()) != null) {
 					if(!ProcessElement(reader, elementInfo) && !IsGlobalElement(elementInfo)) {
-						//error
+						Debug.Print("Unprocessed Item: " + reader.ParentElements.Aggregate<ElementInfo, string>("File", (acc, item) => { return acc + "." + item.ElementType.Name; }) + "." + elementInfo.ElementType.Name);
 					}
 				}
 
+				Validate();
 				reader.LeaveMasterElement();
 			}
 
@@ -568,15 +1075,30 @@ namespace AVDump2Lib.BlockConsumers {
 				section.Read(reader);
 				lst.Add(section);
 			}
+			internal static T CreateRead<T>(T section, EBMLReader reader) where T : Section {
+				section.Read(reader);
+				return section;
+			}
 
 			protected abstract bool ProcessElement(EBMLReader reader, ElementInfo elementInfo);
+			protected abstract void Validate();
 		}
 		public class EbmlEnumerable<T> : IEnumerable<T> {
 			protected Collection<T> items;
 
-			public EbmlEnumerable() { items = new Collection<T>(); }
+			public EbmlEnumerable() : this(new T[0]) { }
+			public EbmlEnumerable(T[] items) {
+				this.items = new Collection<T>();
+				foreach(var item in items) this.items.Add(item);
+			}
 
 			protected internal void Add(T item) { items.Add(item); }
+			protected internal EbmlEnumerable<T> DeepClone(Func<T, T> cloneFunc) {
+				EbmlEnumerable<T> clone = new EbmlEnumerable<T>();
+				foreach(var item in items) clone.Add(cloneFunc(item));
+				return clone;
+			}
+			public int Count { get { return items.Count; } }
 
 			public IEnumerator<T> GetEnumerator() { return items.GetEnumerator(); }
 			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() { return items.GetEnumerator(); }

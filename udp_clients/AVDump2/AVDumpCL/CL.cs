@@ -98,12 +98,16 @@ namespace AVDump2CL {
 		}
 
 		static void Main(string[] args) {
+#if(Debug)
 			if(args.Length == 0) {
 				args = new string[] {
+					//@"E:\Anime\Stalled\Clannad - After story [SS-Eclipse]\Clannad after story - 15 [DVD SS-Eclipse] (1280x720 x264).mkv",
+
 					@"E:\Anime\Stalled\ponyo_on_the_cliff_by_the_sea[1920x1040.h264.flac.ac3][niizk].mkv",
 					"-a"
 				};
 			}
+#endif
 
 			if(!ParseClOptions(args)) return;
 			Console.CursorVisible = false;
@@ -257,7 +261,7 @@ namespace AVDump2CL {
 			#region Hashing
 			DateTime startTime = DateTime.Now;
 			BlockConsumerContainer blockConsumerContainer = new BlockConsumerContainer();
-			if((switches & (eSwitches.Aich | eSwitches.Crc32 | eSwitches.Ed2k | eSwitches.Md5 | eSwitches.Sha1 | eSwitches.Tth)) != 0) {
+			if(true || (switches & eSwitches.UseAllHashes) != 0) {
 				Console.WriteLine("Hashing: " + System.IO.Path.GetFileName(filePath));
 
 #if(Debug)
@@ -269,7 +273,7 @@ namespace AVDump2CL {
 				if((switches & (eSwitches.Sha1)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "SHA1"));
 				if((switches & (eSwitches.Tth)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new TreeHash(new TigerThex(), new TigerThex(), 1024), "TTH"));
 				if((switches & (eSwitches.Md5)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new System.Security.Cryptography.MD5CryptoServiceProvider(), "MD5"));
-				if(System.IO.Path.GetExtension(filePath).ToLower().Equals(".mkv")) blockConsumerContainer.AddBlockConsumer(new MatroskaParser("MKVParser"));
+				if(System.IO.Path.GetExtension(filePath).ToLower().Equals(".mkv")) blockConsumerContainer.AddBlockConsumer(new MatroskaFileInfo("MKVParser"));
 
 				BlockConsumerContainer.Progress progress = blockConsumerContainer.Start(blockCount, stream, blockSize * 1024);
 				if((switches & eSwitches.SupressProgress) == 0) DisplayHashBuffer(progress);
@@ -388,13 +392,18 @@ namespace AVDump2CL {
 				Console.WriteLine(progress.Name(i));
 				if(cursorLeft < progress.Name(i).Length) cursorLeft = progress.Name(i).Length + 1;
 			}
+			Console.CursorTop = Console.CursorTop + 1;
+			Console.WriteLine("Progress");
+			if(cursorLeft < "Progress".Length) cursorLeft = "Progress".Length + 1;
+
 			for(int i = 0;i < progress.BlockConsumerCount;i++) {
 				Console.CursorTop = cursorTop + i; Console.CursorLeft = cursorLeft;
-				Console.Write("[");
-				Console.CursorLeft = Console.WindowWidth - 1;
-				Console.Write("]");
+				Console.Write("["); Console.CursorLeft = Console.WindowWidth - 1; Console.Write("]");
 			}
+			Console.CursorTop = Console.CursorTop + 1; Console.CursorLeft = cursorLeft;
+			Console.Write("["); Console.CursorLeft = Console.WindowWidth - 1; Console.Write("]");
 			cursorLeft++;
+
 
 			int barLength = Console.WindowWidth - 1 - cursorLeft;
 
@@ -414,9 +423,12 @@ namespace AVDump2CL {
 					Console.SetCursorPosition(cursorLeft, cursorTop + i);
 					Console.Write("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
 				}
-
+				Console.SetCursorPosition(cursorLeft, Console.CursorTop + 2);
+				charCount = (int)((double)bytesProcessed / (double)fileSize * barLength);
+				Console.Write("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
 				Thread.Sleep(100);
 
+				//Console.SetCursorPosition(cursorLeft, Console.CursorTop);
 				timeElapsed = (int)progress.TimeElapsed.TotalMilliseconds;
 				Console.Write("\n" +
 				  "Position: " + ((double)bytesProcessed / (1 << 20)).ToString("0MB") + "/" + ((double)fileSize / (1 << 20)).ToString("0MB") + "  " +

@@ -32,6 +32,9 @@ namespace AVDump2Lib.InfoGathering {
 
 	public class Info {
 		public static XmlDocument CreateAVDumpLog(string path, IEnumerable<IBlockConsumer> blockConsumers) {
+			MediaInfo mediaInfo;
+			MatroskaFileInfo matroskaFileInfo;
+
 			XmlDocument xmlDoc = new XmlDocument();
 			XmlNode node, subNode;
 			int streamCount;
@@ -41,7 +44,7 @@ namespace AVDump2Lib.InfoGathering {
 			AppendLeaf(xmlDoc, node, "size", (new FileInfo(path)).Length.ToString(), null);
 
 			if(blockConsumers != null) {
-				foreach(HashCalculator blockConsumer in blockConsumers) {
+				foreach(IBlockConsumer blockConsumer in blockConsumers) {
 					if(blockConsumer is HashCalculator) {
 						HashCalculator hashExecute = (HashCalculator)blockConsumer;
 						eBaseOption baseOption = (hashExecute.HashObj is TreeHash || hashExecute.HashObj is TigerThex ? eBaseOption.Base32 : eBaseOption.Heximal) | eBaseOption.Pad | eBaseOption.Reverse;
@@ -54,13 +57,13 @@ namespace AVDump2Lib.InfoGathering {
 								AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower() + "_alt", BaseConverter.ToString(ed2k.BlueHash, baseOption).ToLower(), null);
 							}
 						}
-					} else {
-
+					} else if(blockConsumer is MatroskaFileInfo) {
+						matroskaFileInfo = (MatroskaFileInfo)blockConsumer;
 					}
 				}
 			}
 
-			MediaInfo mediaInfo = CreateMediaInfoInstance();
+			mediaInfo = CreateMediaInfoInstance();
 			mediaInfo.Open(path);
 
 			node = node.AppendChild(xmlDoc.CreateElement("avmf"));
@@ -123,7 +126,6 @@ namespace AVDump2Lib.InfoGathering {
 				AppendLeaf(xmlDoc, subNode, "sampling_rate", mediaInfo.Get(eStreamType.Audio, i, "SamplingRate"), null);
 				AppendLeaf(xmlDoc, subNode, "mode", mediaInfo.Get(eStreamType.Audio, i, "BitRate_Mode"), null);
 				AppendLeaf(xmlDoc, subNode, "sample_count", mediaInfo.Get(eStreamType.Audio, i, "SamplingCount"), null);
-
 			}
 
 			streamCount = mediaInfo.Count_Get(eStreamType.Text);
@@ -235,5 +237,9 @@ namespace AVDump2Lib.InfoGathering {
 			mi.Option("Info_Version", "0.7.2.1;AVDump2;1");
 			return mi;
 		}
+	}
+
+	public class AVDumpLog {
+			
 	}
 }
