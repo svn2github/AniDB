@@ -37,7 +37,7 @@
 }
 
 /*logo @ 1280*/
-@media screen and (min-width: 1200px)
+@media screen and (min-width: 1235px)
 {
 	#layout-search
 	{
@@ -46,7 +46,7 @@
 }
 
 /*logo @ 1650*/
-@media screen and (min-width: 1550px)
+@media screen and (min-width: 1575px)
 {
 	#layout-search
 	{
@@ -55,7 +55,7 @@
 }
 
 /*logo @ 1920*/
-@media screen and (min-width: 1900px)
+@media screen and (min-width: 1860px)
 {
 	#layout-search
 	{
