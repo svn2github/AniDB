@@ -16,11 +16,6 @@
 	border-bottom: 1px double #B9BBBF;
 }
 
-#layout-nav
-{
-	border: none;
-}
-
 #layout-menu li.sub-menu ul li:first-child:hover
 {
 	-moz-border-radius: 5px 5px 0px 0px;
