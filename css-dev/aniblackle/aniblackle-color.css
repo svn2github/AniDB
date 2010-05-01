@@ -98,19 +98,19 @@ html
 .g_bubble,
 .g_bubble .g_bubble .g_bubble
 {
-	background-color: #404040;
+	background-color: #333333;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom-color: #404040;
+	border-bottom-color: #333333;
 }
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #404040;
-	border-right-color: #404040;
+	border-left-color: #333333;
+	border-right-color: #333333;
 }
 
 #layout-main div.forum ul.topics li.row
@@ -124,7 +124,7 @@ tr.g_odd,
 li.g_odd,
 span.g_odd
 {
-	background-color: #333333;
+	background-color: #404040;
 }
 
 #layout-main div.forum a.topictitle,
