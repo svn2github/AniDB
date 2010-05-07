@@ -34,9 +34,9 @@ a:hover,
 
 #layout-content
 {
-	border-bottom-color: #8E8E8E;
-	border-left-color: #ABABAB;
-	border-top-color: #ABABAB;
+	border-bottom-color:#7D7D7D;
+	border-left-color:#9A9A9A;
+	border-top-color:#9A9A9A;
 }
 
 tr + tr td,
@@ -162,7 +162,7 @@ input[type="submit"]:hover,
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
-	background-color: #616E7A;
+	background-color:#58636E;
 }
 
 #layout-main div.mylist_all td+td,
@@ -323,7 +323,7 @@ select,
 #layout-main div.avatar img,
 #layout-main div.anime_all div.info div.image img
 {
-	border-color: #ABABAB #8E8E8E #8E8E8E #ABABAB;
+	border-color:#9A9A9A #7D7D7D #7D7D7D #9A9A9A;
 }
 
 .g_bubble.stripe > div.data div.name,
@@ -333,7 +333,7 @@ select,
 #layout-menu li.sub-menu ul li#user-xpass input,
 #layout-menu li.sub-menu ul li#user-xname input
 {
-	border-color: #ABABAB;
+	border-color: #9A9A9A;
 }
 
 #layout-menu li.sub-menu ul,
@@ -390,4 +390,12 @@ select,
 #layout-main div.forum div.events h2
 {
 	color: #666666;
+}
+
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events div.data > p,
+#layout-main div.forum div.poll div.data p
+{
+	border-bottom-color:#7D7D7D;
 }
