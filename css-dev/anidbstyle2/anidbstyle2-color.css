@@ -399,3 +399,9 @@ select,
 {
 	border-bottom-color:#7D7D7D;
 }
+
+div.quotebody
+{
+	background-color: #E6E4D1;
+	border-color: #9A9A9A #7D7D7D #7D7D7D #9A9A9A;
+}
