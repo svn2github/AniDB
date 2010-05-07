@@ -23,13 +23,42 @@
 	background:url("images/menuback.png") repeat transparent;
 }
 
+#layout-menu li.sub-menu ul li:hover,
+#layout-menu li.sub-menu ul li:active
+{
+	background:url("images/menuhover.png") repeat left top transparent;
+}
+
+
+/*logo @1024*/
 #layout-search
 {
 	background:url("images/logo.png") no-repeat scroll left top transparent;
 }
 
-#layout-menu li.sub-menu ul li:hover,
-#layout-menu li.sub-menu ul li:active
+/*logo @ 1280*/
+@media screen and (min-width: 1235px)
 {
-	background:url("images/menuhover.png") repeat left top transparent;
+	#layout-search
+	{
+		background:url("images/logo-wide.png") no-repeat scroll left top transparent;
+	}
+}
+
+/*logo @ 1650*/
+@media screen and (min-width: 1575px)
+{
+	#layout-search
+	{
+		background:url("images/logo-wider.png") no-repeat scroll left top transparent;
+	}
+}
+
+/*logo @ 1920*/
+@media screen and (min-width: 1860px)
+{
+	#layout-search
+	{
+		background:url("images/logo-widest.png") no-repeat scroll left top transparent;
+	}
 }
