@@ -5,10 +5,7 @@ a,
 color:#ADD8E6;
 border-bottom-color:white;
 }
-thead,
 tr > th,
-#layout-main div.anime_mylist th,
-#layout-main div.anime_group th,
 #layout-main div.agcmts_entries div.comment h4,
 #layout-main div.dbstats_all h4,
 #layout-main div.stats_all h4,
@@ -35,7 +32,8 @@ html,
 background-image:url(../grey/images/bg_1.gif);
 }
 #layout-nav,#menu-main,#menu-lists,#menu-private,#menu-mod,#menu-support,#menu-account,
-#layout-main div.forum div.body dl.codebox dd
+#layout-main div.forum div.body dl.codebox dd,
+div.tooltip .g_bubble
 {
 background-image:url(../grey/images/bg_2.gif);
 }
@@ -79,39 +77,42 @@ div.quotebody div.quote div.g_odd,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
 #layout-main div.quotebody div.quoteof,
 #layout-footer,
-#layout-main div.timeline_all div.timeline ul.legend li span
+#layout-main div.timeline_all div.timeline ul.legend li span,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
 {
 background-color:hsla(0, 0%, 0%, 0.4);
 }
 #layout-content table.animelist tr.mylist td,
 #layout-content table.stafflist tr.mylist td,
-#layout-main div.timeline_all div.timeline ul.row li.watching
+#layout-main div.timeline_all div.timeline ul.row li.watching,
+.g_bubble.stripe.mylist
 {
 background-color:hsla(34, 95%, 44%, 0.4);
 }
 #layout-content table.animelist tr.complete td,
 #layout-content table.stafflist tr.complete td,
 #layout-main div.forum div.poll div.pollbar,
-#layout-main div.timeline_all div.timeline ul.row li.stalled
-
+#layout-main div.timeline_all div.timeline ul.row li.stalled,
+.g_bubble.stripe.mylist.complete
 {
 background-color:hsla(207, 86%, 44%, 0.4);
 }
-#layout-content div.anime_all tr.good,
-#layout-content div.group_all tr.good,
-#layout-content div.ep_all tr.good ,
-#layout-content tr.verified.yes,
-#layout-content tr.verified.yes,
-#layout-content div.mylist_list table table table tr.good,
+#layout-content div.anime_all tr.good td,
+#layout-content div.group_all tr.good td,
+#layout-content div.ep_all tr.good td,
+#layout-content tr.verified.yes td,
+#layout-content tr.verified.yes th,
+#layout-content div.mylist_list table table table tr.good td,
 #layout-content div.myvotes_all table .high,
-#layout-content div.producer_related_anime tr.mylist,
-#layout-content div.creq_all tr.granted,
+#layout-content div.producer_related_anime tr.mylist td,
+#layout-content div.creq_all tr.granted td,
 #layout-content div.creq_data ins,
 #layout-content div.animeatt_reviews div.review.approved > h4,
 #layout-content table.animelist tr.all_watched td,
 #layout-content table.stafflist tr.all_watched td,
 #layout-content #layout-main div.ed2kdump_all table.filelist .in,
-#layout-main div.timeline_all div.timeline ul.row li.completed
+#layout-main div.timeline_all div.timeline ul.row li.completed,
+.g_bubble.stripe.mylist.all_watched
 {
 background-color:hsla(127, 54%, 25%, 0.6);
 }
@@ -241,7 +242,8 @@ tr:hover > td,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.tabbed_pane div.pane table tr:hover > td,
-#layout-main div.timeline_all div.timeline ul.row li:hover
+#layout-main div.timeline_all div.timeline ul.row li:hover,
+ul.contribute li:hover
 {
 background-image:url(../grey/images/whitepixel.png);
 /*background-color:hsla(0, 100%, 100%, 0.2);*/
@@ -354,13 +356,15 @@ div.spoiler,
 #layout-main div.forum ul.topiclist dd,
 #layout-main div.quotebody,
 #layout-main div.tagcloud,
-#layout-main div.desc
+#layout-main div.desc,
+.g_bubble
 {
 border-color:gray;
 }
 #layout-main div.blog div.body,
 #layout-main div.tagcloud,
-#layout-main div.desc
+#layout-main div.desc,
+.g_bubble.stripe
 {
 background-color:hsla(0, 0%, 10%, 0.4);
 }

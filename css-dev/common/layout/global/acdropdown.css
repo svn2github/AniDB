@@ -5,6 +5,7 @@ ul.acdropdown
 	padding:0;
 	overflow:auto;
 	list-style-type:none;
+	z-index: 10;
 }
 
 ul.acdropdown li {

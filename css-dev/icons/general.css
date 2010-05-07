@@ -34,12 +34,12 @@
 
 *.i_plus
 {
-	background-image: url(../icons/orange/plus.gif);
+	background: url(../icons/orange/plus.gif) no-repeat right;
 }
 
 *.i_minus
 {
-	background-image: url(../icons/orange/minus.gif);
+	background: url(../icons/orange/minus.gif) no-repeat right;
 }
 
 *.i_none
