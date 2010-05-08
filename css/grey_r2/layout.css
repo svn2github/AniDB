@@ -56,7 +56,6 @@ html,
 font-size:10px;
 line-height:1.2;
 font-family:"Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
-color:white;
 }
 div.genren_all ul#cattree li #tooltip
 {
@@ -74,8 +73,6 @@ form textarea,
 form select,
 select
 {
-color:white;
-background:black;
 border:none;
 font-family:"Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
 font-size:10px;
@@ -99,10 +96,8 @@ button,
 *.confirmButton
 {
 margin-top:0.3em;
-color:#c1c1c1;
 border-style:dashed;
 text-shadow:none;
-border-color:#565656;
 }
 #layout-hint
 {
@@ -181,7 +176,6 @@ display:inline;
 {
 content:"!";
 font-weight:bold;
-color:red;
 margin:0 0.2em 0 0.2em;
 }
 #layout-search
@@ -316,20 +310,11 @@ font-size:0px;
 #layout-content div.group_all div.group_released table td.notalldumped
 {
 font-size:inherit;
-color:red;
 font-weight:bold;
 }
 #layout-nav #layout-menu li.sub-menu span.tab
 {
 text-transform:lowercase;
-}
-#layout-nav #layout-menu li.alert > span
-{
-color:red;
-}
-#layout-nav a
-{
-color:white;
 }
 #layout-main div.g_msg
 {
@@ -417,10 +402,18 @@ white-space:nowrap;
 span.time,
 span.user a.id,
 td.rating span,
+td.vote,
 a.filter
 {
 font-size:100%;
-color:#a1a1a1;
+}
+td.vote
+{
+font-weight:bold;
+}
+td.vote.temp
+{
+font-weight:normal;
 }
 div.spoiler,
 #layout-main div.quotebody
