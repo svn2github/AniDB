@@ -1,19 +1,21 @@
-#layout-main div.latestanimes_all div.filter_menu ~ div.content
+#layout-main div.latestanimes_all div.middle div.filter_menu ~ div.content
 {
 	margin-right: 17.2em;
 }
 
-#layout-main div.latestanimes_all div.latestanimes_form
+#layout-main div.latestanimes_all div.top
 {
 	margin-bottom: 1em;
 }
 
-#layout-main div.latestanimes_all div.latestanimes_form div
+#layout-main div.latestanimes_all div.top div.jump > div,
+#layout-main div.latestanimes_all div.bottom div.jump > div
 {
 	display:inline-block;
 }
 
-#layout-main div.latestanimes_all div.latestanimes_form form input.year
+#layout-main div.latestanimes_all div.top input.year,
+#layout-main div.latestanimes_all div.bottom input.year
 {
 	width: 4em;
 	text-align: center;
