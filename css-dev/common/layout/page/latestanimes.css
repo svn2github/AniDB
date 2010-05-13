@@ -1,60 +1,19 @@
-#layout-main div.latestanimes_form
+#layout-main div.latestanimes_all div.filter_menu ~ div.content
 {
-	clear: both;
+	margin-right: 17.2em;
 }
 
-#layout-main div.latestanimes_form a
+#layout-main div.latestanimes_all div.latestanimes_form
 {
-	margin: 1.3em;
+	margin-bottom: 1em;
 }
 
-#layout-main div.latestanimes_form form
+#layout-main div.latestanimes_all div.latestanimes_form div
 {
-	margin: 1em 0;
-	text-align: center;
+	display:inline-block;
 }
 
-#layout-main div.latestanimes_form div
-{
-	display: inline;
-}
-
-#layout-main div.latestanimes_form form input.year
-{
-	width: 3em;
-}
-
-#layout-main div.latestanimes_anime
-{
-	clear: left;
-	padding-left: 10%
-}
-
-#layout-main div.latestanimes_anime div.g_image img
-{
-	display: block;
-	width: 150px;
-	margin: 0 1em 1em;
-	float: left;
-}
-
-#layout-main div.latestanimes_anime h3
-{
-	margin: 0.5em 0 0.5em 17.3em;
-}
-
-#layout-main div.latestanimes_anime div.data table
-{
-	width: 500px;
-}
-
-#layout-main div.latestanimes_anime div.data table tbody td
-{
-	width: 100%;
-}
-
-
-#layout-main div.latestanimes_form form input.year
+#layout-main div.latestanimes_all div.latestanimes_form form input.year
 {
 	width: 4em;
 	text-align: center;
