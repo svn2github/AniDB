@@ -3,6 +3,11 @@
 	margin-right: 17.2em;
 }
 
+#layout-main div.calendar_all > div.middle div.filter_menu.collapsed ~ div.content
+{
+	margin-right:2.5em;
+}
+
 #layout-main div.calendar_all > div.top
 {
 	margin-bottom: 1em;

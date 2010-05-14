@@ -5,7 +5,7 @@
 
 #layout-main div.calendar_all > div.middle div.filter_menu.collapsed ~ div.content
 {
-	margin-right:0;
+	margin-right:2.5em;
 }
 
 #layout-main div.calendar_all > div.top
