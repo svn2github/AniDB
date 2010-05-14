@@ -133,6 +133,7 @@
 .g_bubble.box > div.top div.actions.icons
 {
 	float: right;
+	margin-top:-0.2em;
 }
 
 .g_bubble.box > div.data div.desc
