@@ -5,6 +5,7 @@
 @import "animeatt.css";
 @import "animelist.css";
 @import "buddylist.css"
+@import "calendar.css";
 @import "charlist.css";
 @import "club.css";
 @import "clublist.css";
@@ -22,7 +23,6 @@
 @import "group.css";
 @import "grouplist.css";
 @import "latest.css";
-@import "latestanimes.css";
 @import "lexicon.css";
 @import "main.css";
 @import "modlatest.css";

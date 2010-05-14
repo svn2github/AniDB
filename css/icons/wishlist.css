@@ -22,3 +22,8 @@
 {
 	background-image: url(../icons/silk/wishlist_undefined.png);
 }
+
+*.i_wishlist_remove
+{
+	background-image: url(../icons/silk/wishlist_remove.png);
+}

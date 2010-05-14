@@ -84,3 +84,59 @@
 	overflow-y:auto;
 	max-height:7em;
 }
+
+.g_bubble.box
+{
+	display: inline-block;
+	width: 300px;
+	text-align: left;
+	vertical-align: top;
+	height:375px;
+	margin-bottom:1em;
+	margin-right:0.5em;
+	overflow-y:auto;
+	word-wrap: break-word;
+}
+
+.g_bubble.box > div.image
+{
+	margin:0 0.5em 0.5em;
+	float: left;
+	max-height:180px;
+	width:150px;
+	overflow:hidden;
+}
+
+.g_bubble.box > div.top
+{
+	padding: 0.5em 0.5em 0 0.5em;
+}
+
+.g_bubble.box > div.data
+{
+	margin: 0.2em 0.5em 0.5em;
+}
+
+.g_bubble.box > div.data div + div
+{
+	margin-top:0.2em;
+}
+
+.g_bubble.box > div.top div.name
+{
+	margin-bottom: 0.5em;
+	margin-right: 7em;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+
+.g_bubble.box > div.top div.actions.icons
+{
+	float: right;
+	margin-top:-0.2em;
+}
+
+.g_bubble.box > div.data div.desc
+{
+	clear:left;
+}

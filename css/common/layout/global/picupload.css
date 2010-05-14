@@ -1,11 +1,10 @@
-*.g_button
+.g_button
 {
 	margin-bottom: 2px;
-	/*display: inline-block;*/
-	display: none; /*disabling by default as this needs styling*/
 }
 
-*.g_button a
+.g_button a
 {
 	padding: 2px 4px;
+	display: block;
 }

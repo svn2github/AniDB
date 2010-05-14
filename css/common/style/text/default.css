@@ -409,8 +409,10 @@ div.quotebody div.quoteof,
 #layout-main div.userpage_all div.news tr.unread td,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
 #layout-main div.profile_all div.account tr th,
-.g_bubble.stripe .name-colored,
-div.relations .g_bubble.stripe div.type
+.g_bubble .name-colored,
+div.relations .g_bubble.stripe div.type,
+.g_bubble.box > div.top div.name,
+.g_bubble.box > div.data div.date
 {
 	font-weight:bold;
 }

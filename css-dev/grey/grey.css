@@ -6,6 +6,8 @@
 @import "../common/layout/global/block.css";
 @import "../common/layout/global/tooltip.css";
 @import "../common/layout/global/editdata.css";
+@import "../common/layout/global/bubble.css";
+@import "../common/layout/global/timeline.css";
 @import "acdropdown.css";
 @import "../grey_r2/formatting.css";
 @import "icons.css";
@@ -220,7 +222,8 @@ font-weight: bolder;
 }
 tr.g_odd,
 li.g_odd,
-span.g_odd
+span.g_odd,
+.tagcloud
 {
 background-image: url(images/bg_2.gif);
 }
@@ -800,7 +803,8 @@ background-image: url(images/greenpixel.png);
 #layout-content div.anime_all tr.invalid td,
 #layout-content div.group_all tr.invalid td,
 #layout-content div.ep_all tr.invalid td,
-#layout-content div.mydb_all tr.lame td
+#layout-content div.mydb_all tr.lame td,
+#layout-main div.timeline_all div.timeline ul.row li.dropped
 {
 background-image: url(images/badredpixel.png);
 }
@@ -1455,7 +1459,7 @@ text-align: right;
 padding: 0.1em 1em 0.1em 0.1em;
 background-image: url(images/whitepixel.png);
 }
-#layout-content div.news  > div
+#layout-content div.news > div
 {
 margin: 0.1em 0.1em 3.1em 0.1em;
 }
@@ -1783,7 +1787,7 @@ padding: 0.5em;
 margin: 0.5em 15.5em 0.5em 7em;
 background-image: url(images/bg_2.gif);
 }
-#layout-content div.animeatt_reviews div.review.approved  > h4
+#layout-content div.animeatt_reviews div.review.approved > h4
 {
 background-image: url(images/greenpixel.png);
 }
@@ -1960,15 +1964,21 @@ padding: 1px;
 text-align: left;
 padding: 1px;
 }
-#layout-content table.animelist tr.mylist td
+#layout-content table.animelist tr.mylist td,
+.g_bubble.stripe.mylist,
+#layout-main div.timeline_all div.timeline ul.row li.watching
 {
 background-image: url(images/orangepixel.png);
 }
-#layout-content table.animelist tr.complete td
+#layout-content table.animelist tr.complete td,
+.g_bubble.stripe.mylist.complete,
+#layout-main div.timeline_all div.timeline ul.row li.stalled
 {
 background-image: url(images/bluepixel.png);
 }
-#layout-content table.animelist tr.all_watched td
+#layout-content table.animelist tr.all_watched td,
+.g_bubble.stripe.mylist.all_watched,
+#layout-main div.timeline_all div.timeline ul.row li.completed
 {
 background-image: url(images/greenpixel.png);
 }
@@ -2069,7 +2079,7 @@ text-transform: lowercase;
 {
 color: red;
 }
-#layout-main div.animelist_all td.awards  span.i_icon
+#layout-main div.animelist_all td.awards span.i_icon
 {
 display: inline-block;
 }
@@ -2478,7 +2488,7 @@ display: table-cell;
 margin-left: auto;
 margin-right: auto;
 }
-#layout-main div.latestanimes_all  .g_image image,
+#layout-main div.latestanimes_all .g_image image,
 #layout-main div.latestanimes_all div.g_definitionlist
 {
 display: table-cell;
@@ -2667,4 +2677,42 @@ margin-right: 12em;
 ul#layout-menu li ul li:hover a#newnotifies:first-child, li:hover #newnotifies + a.history, li:hover #newnotifies + a.history + a.nextnotify
 {
 display: inline-block;
+}
+.g_bubble
+{
+-moz-border-radius:0;
+border-style:none;
+border-width:0;
+}
+div.tooltip .g_bubble
+{
+background-image:url(images/bg_2.gif);
+border:1px solid gray;
+}
+#layout-main div.tagcloud
+{
+padding:1.5em 3.5em;
+}
+#layout-main div.userpage_all div.charts div.mylisthistory div.image
+{
+background-color:hsla(0, 100%, 100%, 0.4);
+}
+#layout-main div.timeline_all div.timeline ul.legend li span
+{
+border:1px solid grey;
+border-left-width:0;
+}
+#layout-main div.timeline_all div.timeline ul.legend li:first-of-type span
+{
+border-left-width:1px;
+}
+#layout-main div.timeline_all div.g_timeline ul.legend
+{
+margin-bottom:0.5em;
+}
+div.g_timeline
+{
+margin:auto;
+max-height:none;
+overflow:visible;
 }

@@ -5,6 +5,16 @@ a,
 color:#ADD8E6;
 border-bottom-color:white;
 }
+form input[type="text"],
+form input[type="checkbox"],
+form input[type="password"],
+form textarea,
+form select,
+select
+{
+color:white;
+background-color:black;
+}
 tr > th,
 #layout-main div.agcmts_entries div.comment h4,
 #layout-main div.dbstats_all h4,
@@ -144,6 +154,34 @@ border:1px solid #565656;
 border-bottom-color:transparent;
 color:gray;
 }
+#adba_update,
+#style_next,
+#style_prev,
+#remAudLang,
+#addAudLang,
+#remSubLang,
+#addSubLang,
+#results_back,
+#results_submit,
+input#addfilem\.next,
+input#addfilem\.search,
+input[type="submit"],
+input[type="button"],
+*.button,
+button,
+*.confirmButton
+{
+color:#c1c1c1;
+border-color:#565656;
+}
+span.time,
+span.user a.id,
+td.rating span,
+td.vote.temp,
+a.filter
+{
+color:#a1a1a1;
+}
 #layout-tabs ul.main-tabs > li a span
 {
 color:gray;
@@ -160,6 +198,9 @@ color:gray;
 {
 border:1px solid #121212;
 }
+html,
+#tooltip,
+#layout-nav a,
 #layout-tabs ul.main-tabs > li a:hover span,
 #layout-tabs ul.main-tabs > li.selected a span,
 #layout-main div.tabbed_pane ul.tabs > li.selected,
@@ -215,6 +256,10 @@ border:1px solid #575757;
 {
 border:1px solid #1D6125;
 }
+#menu-account li.alert > span > a:first-of-type:before,
+#menu-account li.alert > span > a:first-of-type:after,
+#layout-content div.group_all div.group_released table td.notalldumped,
+#layout-nav #layout-menu li.alert > span,
 #layout-main div.g_msg.error h3
 {
 color:red;
@@ -277,10 +322,6 @@ background:url(../grey/images/bubble_filler.png) repeat bottom;
 #tooltip span.bottom
 {
 background:url(../grey/images/bubble.png) no-repeat bottom;
-}
-#tooltip
-{
-color:white;
 }
 #layout-main div.tagcloud span:nth-of-type(2n+1) a
 {
@@ -368,7 +409,7 @@ border-color:gray;
 {
 background-color:hsla(0, 0%, 10%, 0.4);
 }
-#layout-main  div.userpage_all div.charts div.mylisthistory div.image
+#layout-main div.userpage_all div.charts div.mylisthistory div.image
 {
 background-color:hsla(0, 100%, 100%, 0.4);
 }

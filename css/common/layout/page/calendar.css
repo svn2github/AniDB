@@ -1,0 +1,22 @@
+#layout-main div.calendar_all > div.middle div.filter_menu ~ div.content
+{
+	margin-right: 17.2em;
+}
+
+#layout-main div.calendar_all > div.top
+{
+	margin-bottom: 1em;
+}
+
+#layout-main div.calendar_all > div.top div.jump > div,
+#layout-main div.calendar_all > div.bottom div.jump > div
+{
+	display:inline-block;
+}
+
+#layout-main div.calendar_all > div.top input.year,
+#layout-main div.calendar_all > div.bottom input.year
+{
+	width: 4em;
+	text-align: center;
+}
