@@ -148,3 +148,21 @@
 	-moz-user-select: text;
 	cursor: default;
 }
+
+#layout-main div.addcharanimerel_all div.massadd  td.seiyuu.name.original input,
+#layout-main div.addcharanimerel_all div.massadd td.char.name.original input,
+#layout-main div.addcharanimerel_all div.massadd td.comment input
+{
+	width:6em;
+}
+
+#layout-main div.addcharanimerel_all div.massedit table,
+#layout-main div.addcharanimerel_all div.massedit table td input[type="text"]
+{
+	width:98%;
+}
+
+#layout-main div.addcharanimerel_all div.massedit table td 
+{
+	padding-right:1em;
+}
