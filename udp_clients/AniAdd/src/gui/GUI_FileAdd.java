@@ -232,7 +232,6 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         int procCmd = api.totalCmdCount() - api.waitingCmdCount();
         double partialCmd = 1 - api.currendCmdDelay() / (double) api.cmdSendDelay();
         double prgValCmd = (procCmd + partialCmd) / (double) (api.totalCmdCount() + pendingFileCmds);
-        //return prgValFile;
         return Math.min(prgValFile, prgValCmd);
     }
     private long ProcByteCount() {

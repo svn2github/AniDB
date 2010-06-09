@@ -134,6 +134,8 @@ public class Mod_EpProcessing implements IModule {
         binCode.set(6); //aid
         binCode.set(11); //'crc
         binCode.set(17); //'video res
+        binCode.set(19); //'VideoCodec
+        binCode.set(21); //'AudioCodec
         binCode.set(22); //'Source
         binCode.set(23); //'Quality
         binCode.set(24); //'anidb filename scheme
@@ -246,6 +248,8 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_CRC", df.poll());
             procFile.Data().put("DB_Quality", df.poll());
             procFile.Data().put("DB_Source", df.poll());
+            procFile.Data().put("DB_AudioCodec", df.poll());
+            procFile.Data().put("DB_VideoCodec", df.poll());
             procFile.Data().put("DB_VideoRes", df.poll());
             procFile.Data().put("DB_FileAudioLang", df.poll());
             procFile.Data().put("DB_FileSubLang", df.poll());
@@ -546,9 +550,12 @@ public class Mod_EpProcessing implements IModule {
 
         tags.put("FCrc", procFile.Data().get("DB_CRC"));
         tags.put("FALng", procFile.Data().get("DB_FileAudioLang"));
+        tags.put("FACodec", procFile.Data().get("DB_AudioCodec"));
         tags.put("FSLng", procFile.Data().get("DB_FileSubLang"));
+        tags.put("FVCodec", procFile.Data().get("DB_VideoCodec"));
         tags.put("FVideoRes", procFile.Data().get("DB_VideoRes"));
         tags.put("AniDBFN", procFile.Data().get("DB_FileName"));
+        tags.put("CurrentFN", procFile.FileObj().getName());
 
         tags.put("EpNo", procFile.Data().get("DB_EpNo"));
         tags.put("EpHiNo", procFile.Data().get("DB_EpHiCount"));

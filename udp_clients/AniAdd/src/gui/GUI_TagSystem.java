@@ -27,8 +27,6 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     }
     
     protected void TagSystemCodeChange(){
-
-
         TreeMap<String, String> tags = new TreeMap<String, String>();
         tags.put("ATr", txt_AT_Romaji.getText());
         tags.put("ATe", txt_AT_English.getText());
@@ -49,11 +47,13 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         tags.put("FSLng", txt_Subs.getText());
 
         tags.put("FCrc", txt_Crc.getText());
+        tags.put("FACodec", txt_AudioCodec.getText());
+        tags.put("FVCodec", txt_VideoCodec.getText());
         tags.put("FVideoRes", txt_Resolution.getText());
         tags.put("Quality", cmb_Quality.getSelectedItem().toString());
-        tags.put("AniDBFN", "Basquash! - 25 - Above the Rim - [Umai](bfa12577).mkv");
+        tags.put("AniDBFN", "Suzumiya_Haruhi_no_Yuuutsu_(2009)_-_01_-_The_Melancholy_of_Suzumiya_Haruhi_Part_1_-_[a.f.k.](32f2f4ea).avi");
+        tags.put("CurrentFN", txt_CurrentFN.getText());
         
-
         tags.put("EpNo", updown_EpNo.getValue().toString());
         tags.put("EpHiNo", updown_EpHiNo.getValue().toString());
         tags.put("EpCount", updown_EpCount.getValue().toString());
@@ -78,7 +78,6 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
             lbl_DirNameStr.setText(" ");
             lbl_ErrorMsg.setText(ex.getMessage());
         }
-
 
         if(gui != null) gui.ToMem("TagSystemCode", txt_CodeBox.getText());
     }
@@ -138,6 +137,13 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         txt_Crc = new javax.swing.JTextField();
         txt_Resolution = new javax.swing.JTextField();
         lbl_Resolution = new javax.swing.JLabel();
+        lbl_AudioCodec = new javax.swing.JLabel();
+        txt_AudioCodec = new javax.swing.JTextField();
+        txt_VideoCodec = new javax.swing.JTextField();
+        lbl_VideoCodec = new javax.swing.JLabel();
+        lbl_CurrentFN = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_CurrentFN = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         lbl_EpCount = new javax.swing.JLabel();
         updown_EpCount = new javax.swing.JSpinner();
@@ -254,11 +260,11 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_AT_Synomymn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_AT_English, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))
+                    .addComponent(txt_AT_English, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnl_AnimeTitlesLayout.setVerticalGroup(
@@ -320,8 +326,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_GT_Long))
                 .addGap(21, 21, 21)
                 .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnl_GroupNamesLayout.setVerticalGroup(
@@ -380,9 +386,9 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_ET_Kanji))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_ET_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                    .addComponent(txt_ET_English, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                    .addComponent(txt_ET_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
+                    .addComponent(txt_ET_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                    .addComponent(txt_ET_English, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                    .addComponent(txt_ET_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnl_EpTitlesLayout.setVerticalGroup(
@@ -530,6 +536,41 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         lbl_Resolution.setText("Resolution:");
 
+        lbl_AudioCodec.setText("Audio Codec:");
+
+        txt_AudioCodec.setText("AC3");
+        txt_AudioCodec.setToolTipText("FACodec");
+        txt_AudioCodec.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        txt_VideoCodec.setText("H264/AVC");
+        txt_VideoCodec.setToolTipText("FVCodec");
+        txt_VideoCodec.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+
+        lbl_VideoCodec.setText("Video Codec:");
+
+        lbl_CurrentFN.setText("Current Filename:");
+
+        txt_CurrentFN.setColumns(20);
+        txt_CurrentFN.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        txt_CurrentFN.setLineWrap(true);
+        txt_CurrentFN.setRows(5);
+        txt_CurrentFN.setText("[Chihiro]​_Suzumiya​_Haruhi​_no​_Yuutsu​_(2009)​_-​_01​_[848x480​_H.​264​_AAC][7595C366].​mkv");
+        txt_CurrentFN.setToolTipText("CurrentFN");
+        txt_CurrentFN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(txt_CurrentFN);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -551,10 +592,9 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                                     .addComponent(lbl_Version))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(cmb_Source, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cmb_Quality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmb_Source, 0, 85, Short.MAX_VALUE)
+                                    .addComponent(cmb_Quality, 0, 85, Short.MAX_VALUE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_Subs)
@@ -572,43 +612,76 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                         .addComponent(lbl_Resolution)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_Resolution, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(lbl_CurrentFN, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lbl_AudioCodec, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_VideoCodec, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_AudioCodec, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                                .addComponent(txt_VideoCodec, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                            .addGap(11, 11, 11)))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(chck_IsCensored)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(chck_IsCensored)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(chck_IsDeprecated)
+                                    .addComponent(cmb_Source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_Source)))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cmb_Quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_Quality)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chck_IsWatched)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_Version)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Dubs)
+                            .addComponent(txt_Dubs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chck_IsDeprecated)
-                            .addComponent(cmb_Source, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_Source)))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmb_Quality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbl_Quality)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chck_IsWatched)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbl_Version)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Dubs)
-                    .addComponent(txt_Dubs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Subs)
-                    .addComponent(txt_Subs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_Crc)
-                    .addComponent(txt_Crc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Resolution)
-                    .addComponent(txt_Resolution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                            .addComponent(lbl_Subs)
+                            .addComponent(txt_Subs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_Crc)
+                            .addComponent(txt_Crc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_Resolution)
+                            .addComponent(txt_Resolution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txt_VideoCodec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_VideoCodec)))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txt_AudioCodec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_AudioCodec)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbl_CurrentFN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Anime Info:"));
@@ -763,12 +836,12 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                    .addComponent(jPanel4, 0, 307, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -792,17 +865,17 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(lbl_CursorLocation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_ErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE))
+                .addComponent(lbl_ErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_FileName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
-                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)))
-            .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)))
+            .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -817,7 +890,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_DirNameStr))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ErrorMsg)
@@ -863,20 +936,23 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JCheckBox chck_IsDeprecated;
     protected javax.swing.JCheckBox chck_IsWatched;
     protected javax.swing.JComboBox cmb_Quality;
-    private javax.swing.JComboBox cmb_Source;
-    private javax.swing.JComboBox cmb_Type;
+    protected javax.swing.JComboBox cmb_Source;
+    protected javax.swing.JComboBox cmb_Type;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     protected javax.swing.JLabel lbl_AT_English;
     protected javax.swing.JLabel lbl_AT_Kanji;
     protected javax.swing.JLabel lbl_AT_Other;
     protected javax.swing.JLabel lbl_AT_Romaji;
     protected javax.swing.JLabel lbl_AT_Synomymn;
+    private javax.swing.JLabel lbl_AudioCodec;
     private javax.swing.JLabel lbl_Crc;
+    private javax.swing.JLabel lbl_CurrentFN;
     private javax.swing.JLabel lbl_CursorLocation;
     protected javax.swing.JLabel lbl_DirName;
     protected javax.swing.JLabel lbl_DirNameStr;
@@ -884,9 +960,9 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JLabel lbl_ET_English;
     protected javax.swing.JLabel lbl_ET_Kanji;
     protected javax.swing.JLabel lbl_ET_Romaji;
-    private javax.swing.JLabel lbl_EpCount;
-    private javax.swing.JLabel lbl_EpHiNo;
-    private javax.swing.JLabel lbl_EpNo;
+    protected javax.swing.JLabel lbl_EpCount;
+    protected javax.swing.JLabel lbl_EpHiNo;
+    protected javax.swing.JLabel lbl_EpNo;
     private javax.swing.JLabel lbl_ErrorMsg;
     protected javax.swing.JLabel lbl_FileName;
     protected javax.swing.JLabel lbl_FileNameStr;
@@ -894,10 +970,11 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JLabel lbl_GT_Short;
     protected javax.swing.JLabel lbl_Quality;
     private javax.swing.JLabel lbl_Resolution;
-    private javax.swing.JLabel lbl_Source;
+    protected javax.swing.JLabel lbl_Source;
     private javax.swing.JLabel lbl_Subs;
-    private javax.swing.JLabel lbl_Type;
+    protected javax.swing.JLabel lbl_Type;
     protected javax.swing.JLabel lbl_Version;
+    private javax.swing.JLabel lbl_VideoCodec;
     private javax.swing.JLabel lbl_YearBegin;
     private javax.swing.JLabel lbl_YearEnd;
     protected javax.swing.JPanel pnl_AnimeTitles;
@@ -909,8 +986,10 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JTextField txt_AT_Other;
     protected javax.swing.JTextField txt_AT_Romaji;
     protected javax.swing.JTextField txt_AT_Synomymn;
+    private javax.swing.JTextField txt_AudioCodec;
     protected javax.swing.JTextArea txt_CodeBox;
     private javax.swing.JTextField txt_Crc;
+    private javax.swing.JTextArea txt_CurrentFN;
     private javax.swing.JTextField txt_Dubs;
     protected javax.swing.JTextField txt_ET_English;
     protected javax.swing.JTextField txt_ET_Kanji;
@@ -919,11 +998,12 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JTextField txt_GT_Short;
     private javax.swing.JTextField txt_Resolution;
     private javax.swing.JTextField txt_Subs;
+    private javax.swing.JTextField txt_VideoCodec;
     private javax.swing.JTextField txt_YearBegin;
     private javax.swing.JTextField txt_YearEnd;
-    private javax.swing.JSpinner updown_EpCount;
-    private javax.swing.JSpinner updown_EpHiNo;
-    private javax.swing.JSpinner updown_EpNo;
+    protected javax.swing.JSpinner updown_EpCount;
+    protected javax.swing.JSpinner updown_EpHiNo;
+    protected javax.swing.JSpinner updown_EpNo;
     protected javax.swing.JSpinner updown_Version;
     // End of variables declaration//GEN-END:variables
 

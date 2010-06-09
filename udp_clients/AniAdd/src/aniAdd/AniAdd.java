@@ -17,7 +17,7 @@ import udpApi.Mod_UdpApi;
  * @author Arokh
  */
 public class AniAdd implements IAniAdd{
-    final static int CURRENTVER = 6;
+    final static int CURRENTVER = 7;
 
     TreeMap<String, IModule> modules;
     EventHandler eventHandler;

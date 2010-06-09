@@ -169,10 +169,10 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         InitUI();
 
-        if((Integer)(mem.get("FirstStart", 0)) < 6) {
+        if((Integer)(mem.get("FirstStart", 0)) < 7) {
             DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
-                "Fixed truncation issue leading to missing fields used by the TagSystem.<br/>" +
-                "This only happened when the titles were very long, i.e. only in rare cases</html>"));
+                "Added Audio- & VideoCodec vars to tagsystem (FACodec & FVCodec)<br/>" +
+                "</html>"));
         }
 
         modState = eModState.Initialized;
