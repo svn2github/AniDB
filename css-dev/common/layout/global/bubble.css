@@ -140,3 +140,18 @@
 {
 	clear:left;
 }
+
+.g_bubble.stripe.mini
+{
+	width:300px;
+}
+
+.g_bubble.stripe.mini > div.data
+{
+	width:235px;
+}
+
+.g_bubble.stripe.mini > div.data div.name 
+{
+	margin-right: 0;
+}

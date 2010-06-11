@@ -44,19 +44,3 @@
 {
 	width: 10em;
 }
-
-*.g_block
-{
-	margin-bottom:1em;
-	width:100px;
-}
-
-*.g_block
-{
-	display: inline-table;
-}
-
-*.g_block *
-{
-	display: table-row;
-}
