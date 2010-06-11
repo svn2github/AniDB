@@ -74,14 +74,11 @@
 	text-align: right;
 }
 
+#layout-main div.latest2_all div.latest_complete div.content td.mylist,
+#layout-main div.latest2_all div.latest_complete div.content td.seen,
+#layout-main div.latest2_all div.files div.content td.mylist,
+#layout-main div.latest2_all div.files div.content td.seen,
 #layout-main div.latest2_all div.content td.action
-{
-	min-width: 7em;
-	max-width: 7em;
-}
-
-#layout-main div.latest2_all div.content td.mylist,
-#layout-main div.latest2_all div.content td.seen
 {
 	min-width: 7em;
 	max-width: 7em;
