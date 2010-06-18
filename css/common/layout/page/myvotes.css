@@ -30,3 +30,13 @@
 {
 	width:10em;
 }
+
+#layout-main div.myvotes_all td.thumb
+{
+	width:5em;
+}
+
+#layout-main div.myvotes_all td.number
+{
+	width:3em;
+}
