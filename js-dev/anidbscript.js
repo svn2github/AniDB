@@ -1945,13 +1945,14 @@ addEventSimple(window, "load", function() {
 				if (!links.length) {
 					return;
 				}
-				addEventSimple(links[links.length - 1], "click", function() {
+				var more = links[links.length - 1];
+				addEventSimple(more, "click", function() {
 					var spans = span.getElementsByTagName("span");
 					if (!spans) {
 						return;
 					}
 					spans[0].className = "";
-					this.parentNode.removeChild(this);
+					more.parentNode.removeChild(more);
 					return false;
 				});
 			})(spans[i]);
