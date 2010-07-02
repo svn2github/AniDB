@@ -1932,3 +1932,30 @@ addEventSimple(window, "load", function() {
 		banner.className += " wide";
 	}
 });
+// Add expand support to resource links Q&D
+addEventSimple(window, "load", function() {
+	var spans = document.getElementsByTagName("span");
+	if (!spans.length) {
+		return;
+	}
+	for (var i = 0; i < spans.length; i++) {
+		if (spans[i].className.match(/(?:^|\s+)morelinks(?:\s+|$)/)) {
+			(function(span) {
+				var links = span.getElementsByTagName("a");
+				if (!links.length) {
+					return;
+				}
+				var more = links[links.length - 1];
+				addEventSimple(more, "click", function() {
+					var spans = span.getElementsByTagName("span");
+					if (!spans) {
+						return;
+					}
+					spans[0].className = "";
+					more.parentNode.removeChild(more);
+					return false;
+				});
+			})(spans[i]);
+		}
+	}
+});
