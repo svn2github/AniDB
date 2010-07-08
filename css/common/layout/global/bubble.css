@@ -155,3 +155,18 @@
 {
 	margin-right: 0;
 }
+
+.g_bubble.stripe.small
+{
+	width:250px;
+}
+
+.g_bubble.stripe.small > div.data
+{
+	width:185px;
+}
+
+.g_bubble.stripe.small > div.data div.name 
+{
+	margin-right: 2em;
+}
