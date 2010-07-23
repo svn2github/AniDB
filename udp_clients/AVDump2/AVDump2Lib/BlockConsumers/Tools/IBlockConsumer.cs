@@ -26,6 +26,8 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 		void Join();
 		bool HasFinished { get; }
 
+		//object FinishedStatus { get; }
+
 		long ProcessedBytes { get; }
 	}
 }

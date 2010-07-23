@@ -68,6 +68,8 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 				source = ((ByteStreamToBlock)hashContainer.b.BlockSource).Source;
 			}
 
+			public IBlockConsumer BlockConsumerObj(int index) { return blockConsumers.items[index]; }
+
 			public long StreamSize { get { return source.Length; } }
 			public long StreamPosition { get { return source.Position; } }
 			public long ProcessedBytes(int index) { return blockConsumers.items[index].ProcessedBytes; }

@@ -102,6 +102,7 @@ namespace AVDump2Lib.BlockConsumers {
 				ProcessedBytes = dataSrc.Position;
 			}
 		}*/
+
 	}
 
 	public class MatroskaFileInfo : BlockConsumerBase {
@@ -157,6 +158,7 @@ namespace AVDump2Lib.BlockConsumers {
 			}
 			ProcessedBytes = dataSrc.Length;
 		}
+
 
 	}
 	public class EbmlHeaderSection : Section {
@@ -558,8 +560,8 @@ namespace AVDump2Lib.BlockConsumers {
 		public ulong PixelCropTop { get { return pixelCropTop.HasValue ? pixelCropTop.Value : 0; } } //Default: 0
 		public ulong PixelCropLeft { get { return pixelCropLeft.HasValue ? pixelCropLeft.Value : 0; } } //Default: 0
 		public ulong PixelCropRight { get { return pixelCropRight.HasValue ? pixelCropRight.Value : 0; } } //Default: 0
-		public ulong DisplayWidth { get { return displayWidth.HasValue ? displayWidth.Value : (PixelWidth.HasValue ? PixelWidth.Value : 0); } } //Default: $PixelWidth
-		public ulong DisplayHeight { get { return displayHeight.HasValue ? displayHeight.Value : (PixelHeight.HasValue ? PixelHeight.Value : 0); } } //Default: $PixelHeight
+		public ulong DisplayWidth { get { return displayWidth.HasValue ? displayWidth.Value : PixelWidth; } } //Default: $PixelWidth
+		public ulong DisplayHeight { get { return displayHeight.HasValue ? displayHeight.Value : PixelHeight; } } //Default: $PixelHeight
 		public Unit DisplayUnit { get { return displayUnit.HasValue ? displayUnit.Value : Unit.Pixels; } } //Default: Pixels (0)
 		#endregion
 

@@ -42,6 +42,7 @@ namespace AVDump2Lib.BlockConsumers {
 			while(!b.EndOfStream(consumerId)) b.Read(consumerId, consumer);
 			h.TransformFinalBlock(new byte[0], 0, 0);
 		}
+
 	}
 
 }
