@@ -54,6 +54,9 @@ namespace AVDump2CL {
 		Tiger = 1L << 45,
 		Aich = 1L << 46,
 		UseAllHashes = Crc32 | Ed2k | Md5 | Sha1 | Tth | Tiger | Aich,
-		PrintElapsedHashingTime = 1L << 52
+		PrintElapsedHashingTime = 1L << 52,
+		PrintEd2kLink = 1L << 60,
+		PrintAniDBLink = 1L << 61,
+		OpenInBrowser = 1L << 62,
 	}
 }
