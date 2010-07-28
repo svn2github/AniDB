@@ -31,9 +31,7 @@
 {
 	-moz-column-width:31em;
 	-webkit-column-width:31em;
-	clear:none;
 	column-width:31em;
-	margin-right:20em;
 	text-align:center;
 }
 
@@ -108,9 +106,11 @@
 	padding:0.5em;
 }
 
+#layout-main div.main_all div.datablocks,
+#layout-main div.main_all div.news.forum,
 #layout-main div.main_all div.header
 {
-	margin-bottom:1em;
+	clear:none;
 	margin-right:20em;
 }
 
