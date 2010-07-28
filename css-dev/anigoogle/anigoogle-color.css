@@ -53,6 +53,7 @@ th a,
 #layout-main div.main_all div.header h4,
 #layout-main table tr.header,
 #layout-main div.anime_all div.info div.caststaff div h4,
+#layout-main div.main_all div.rightbar h4,
 th
 {
 	background-color: #c3d9ff;
@@ -164,8 +165,6 @@ span.g_odd,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.profile_all div.default_languages table tr,
 #layout-main div.userpage_all > div.g_section > h4,
-#layout-main div.main_all div.datablocks h4,
-#layout-main div.main_all div.header h4,
 #layout-main div.main_all div.header div.account ul.tabs li.signup
 {
 	background-color: #ECF4FD;
@@ -207,6 +206,8 @@ select,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
 #layout-main div.avatar img,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
 #layout-main div.anime_all div.info div.image img,
 span.test
 {
@@ -219,6 +220,7 @@ span.test
 	border-color: #97AACC;
 }
 
+#layout-main div.main_all div.rightbar h4,
 #layout-main div.main_all div.datablocks h4,
 #layout-main div.main_all div.header h4,
 #layout-main div.main_all div.header div.latestnews div.posted,
