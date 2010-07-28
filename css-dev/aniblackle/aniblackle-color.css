@@ -8,7 +8,10 @@ html,
 *.g_button a,
 #layout-main table ul li.g_odd,
 #layout-main table table td.g_odd,
-#layout-main ul.g_list li.g_odd
+#layout-main ul.g_list li.g_odd,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
+#layout-main div.main_all div.rightbar h4
 {
 	color: #728972;
 }
@@ -146,7 +149,8 @@ div.quotebody,
 #layout-main table thead tr,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
 .g_bubble .name-colored,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong,
+#layout-main div.main_all div.header div.latestnews div.posted
 {
 	color: #CCCCCC;
 }
