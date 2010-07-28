@@ -405,3 +405,45 @@ div.quotebody
 	background-color: #E6E4D1;
 	border-color: #9A9A9A #7D7D7D #7D7D7D #9A9A9A;
 }
+
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	background-color:#34394D;
+	color:#DDDDDD;
+	border-color:#EEEEEE #8E8E8E #8E8E8E #EEEEEE;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li
+{
+	border-top-color: #9A9A9A;
+	border-left-color: #9A9A9A;
+	border-right-color: #7D7D7D;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li,
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover
+{
+	background-color:#CFD1D4;
+	border-bottom-color: #CFD1D4;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li.signup
+{
+	background-color:#34394D;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li.signup a
+{
+	color:#DDDDDD;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a
+{
+	color:#AA0000;
+}
+
+#layout-main div.main_all div.header div.latestnews div.posted
+{
+	color:#666666;
+}
