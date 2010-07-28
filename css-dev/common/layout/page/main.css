@@ -67,7 +67,7 @@
 #layout-main div.main_all div.datablocks h4,
 #layout-main div.main_all div.header h4
 {
-	margin-bottom:0.1em;
+	margin-bottom:0.2em;
 }
 
 #layout-main div.main_all div.header div.account ul.tabs
@@ -140,7 +140,6 @@
 #layout-main div.main_all div.header div.latestnews
 {
 	clear:none;
-	padding:0.5em;
 }
 
 #layout-main div.main_all div.header div.latestnews > div
