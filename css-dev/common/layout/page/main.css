@@ -142,6 +142,11 @@
 	clear:none;
 }
 
+#layout-main div.main_all div.header div.content
+{
+	text-align:left;
+}
+
 #layout-main div.main_all div.header div.content,
 #layout-main div.main_all div.header div.latestnews > div
 {
