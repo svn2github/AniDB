@@ -187,6 +187,12 @@
 	display:block;
 }
 
+#layout-main div.main_all div.latestnews div.hidden,
+#layout-main div.main_all div.datablocks div.hidden
+{
+	display: none;
+}
+
 @media screen and (min-width: 1200px) and (max-width: 1400px)
 {
 	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
@@ -264,10 +270,10 @@
 
 @media screen and (min-width: 1600px)
 {
-	#layout-main div.main_all div.latestnews div.hide,
-	#layout-main div.main_all div.datablocks div.hide
+	#layout-main div.main_all div.latestnews div.hidden,
+	#layout-main div.main_all div.datablocks div.hidden
 	{
-		display: inline-block !important;
+		display: inline-block;
 	}
 }
 
