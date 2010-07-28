@@ -144,11 +144,6 @@
 	margin-left: 22em;
 }
 
-#layout-main div.userpage_all div.clubs div.founded + div.joined
-{
-	margin-left: 5em;
-}
-
 #layout-main div.userpage_all div.g_section + div.g_section
 {
 	margin-top: 2.5em;

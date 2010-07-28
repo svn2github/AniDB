@@ -143,15 +143,30 @@
 
 .g_bubble.stripe.mini
 {
-	width:300px;
+	width:200px;
 }
 
 .g_bubble.stripe.mini > div.data
 {
-	width:235px;
+	width:135px;
 }
 
 .g_bubble.stripe.mini > div.data div.name 
 {
 	margin-right: 0;
+}
+
+.g_bubble.stripe.small
+{
+	width:250px;
+}
+
+.g_bubble.stripe.small > div.data
+{
+	width:185px;
+}
+
+.g_bubble.stripe.small > div.data div.name 
+{
+	margin-right: 2em;
 }

@@ -22,6 +22,7 @@
 @import "genren.css";
 @import "group.css";
 @import "grouplist.css";
+@import "irc.css";
 @import "latest.css";
 @import "lexicon.css";
 @import "main.css";
@@ -32,7 +33,6 @@
 @import "mynotifies.css";
 @import "myplace.css";
 @import "myvotes.css";
-@import "news.css";
 @import "profile.css";
 @import "producerlist.css";
 @import "relations.css";
