@@ -220,13 +220,17 @@ span.test
 	border-color: #97AACC;
 }
 
-#layout-main div.main_all div.rightbar h4,
-#layout-main div.main_all div.datablocks h4,
-#layout-main div.main_all div.header h4,
 #layout-main div.main_all div.header div.latestnews div.posted,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
 {
 	color:#666666;
+}
+
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	color:#555555;
 }
 
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
