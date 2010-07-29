@@ -1,3 +1,16 @@
+#layout-main div.main_all div.rightbar li span
+{
+	position:absolute;
+}
+
+#layout-main div.main_all div.rightbar li a,
+#layout-main div.main_all div.rightbar li span + span
+{
+	display: table;
+	margin-left: 4.5em;
+	position: relative;
+}
+
 #layout-main div.main_all div.rightbar
 {
 	width: 19em;
@@ -18,13 +31,6 @@
 #layout-main div.main_all div.rightbar > div
 {
 	margin-bottom:1em;
-}
-
-#layout-main div.main_all div.rightbar li span + span
-{
-	display:table;
-	margin-left:4.5em;
-	position: relative;
 }
 
 #layout-main div.main_all div.datablocks
