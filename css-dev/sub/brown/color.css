@@ -88,6 +88,7 @@ th,
 	background-color: #E9E6D9;
 }
 
+.g_bubble.stripe,
 .g_bubble,
 .g_bubble .g_bubble  .g_bubble
 {
@@ -101,14 +102,6 @@ th,
 	background-color: #E0DBC9;
 }
 
-#layout-main div.main_all div.datablocks h4,
-#layout-main div.main_all div.header h4
-{
-	border:1px solid #867F6A;
-	color:#E9E6D9;
-	padding:2px;
-}
-
 .g_bubble
 {
 	border: 1px dotted #999380;
@@ -118,6 +111,7 @@ th,
 #layout-main div.main_all div.datablocks h4,
 #layout-main div.main_all div.header h4
 {
+	padding:2px;
 	background-color:#8C8673;
 	color:#E9E6D9;
 	border: 1px dotted #867F6A;

@@ -222,3 +222,11 @@
 {
 	width: 10em;
 }
+
+#layout-main div.main_all div.datablocks,
+#layout-main div.main_all div.news.forum,
+#layout-main div.main_all div.header
+{
+	clear:none;
+	margin-right:21em;
+}

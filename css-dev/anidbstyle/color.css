@@ -51,12 +51,14 @@ a:hover
 	background-color: #BFC2C9;
 }
 
-#layout-main div.news h4,
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,,
 #layout-main div.main_all div.rightbar h4
 {
 	padding: 2px;
 	color: #bbbbbb;
 	background-color: #494d59;
+	border: none;
 }
 #layout-main div.cmt_all div.comment h4
 {
