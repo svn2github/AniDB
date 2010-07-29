@@ -308,10 +308,7 @@ div.main_all div.news h4 {
 }
 
 /** TABS **/
-div.pagination span a,
-div.pagination span strong,
-#layout-tabs ul.main-tabs li,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-tabs ul.main-tabs li
 {
 	border:1px solid #565AB9;
 }
@@ -409,6 +406,9 @@ div.pagination span a,
 	border: none;
 }
 
+div.pagination span a,
+div.pagination span strong,
+#layout-main div.tabbed_pane ul.tabs li,
 .g_bubble
 {
 	border-color: #E4E4E4 #D5CCCC #D5CCCC #E4E4E4;
