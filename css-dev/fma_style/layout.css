@@ -371,12 +371,6 @@ table,
 	border: none;
 }
 
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
-{
-	border: 1px solid #565AB9;
-}
-
 #layout-main div.forum div.threads,
 #layout-main div.forum div.navbar
 {

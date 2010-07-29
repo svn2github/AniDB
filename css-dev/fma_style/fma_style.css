@@ -311,8 +311,7 @@ div.main_all div.news h4 {
 div.pagination span a,
 div.pagination span strong,
 #layout-tabs ul.main-tabs li,
-#layout-main div.tabbed_pane ul.tabs li,
-.g_bubble
+#layout-main div.tabbed_pane ul.tabs li
 {
 	border:1px solid #565AB9;
 }
@@ -410,20 +409,19 @@ div.pagination span a,
 	border: none;
 }
 
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
+.g_bubble
 {
-	border:1px solid #565AB9;
+	border-color: #E4E4E4 #D5CCCC #D5CCCC #E4E4E4;
 }
 
 .g_bubble .g_bubble,
-.g_bubble .g_bubble .g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble
 {
 	background-color: #EFF3FA;
 }
 
 .g_bubble,
-.g_bubble .g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble
 {
 	background-color: #F5F7FF;
 }
