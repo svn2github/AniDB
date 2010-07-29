@@ -51,9 +51,14 @@
 
 #layout-tabs ul.main-tabs li
 {
-	color:#4D2F5F;
-	background-color:#F5F7FF;
+	color:#FFFFFF;
+	background-color:#305C97
 	border:1px solid #F3E7FF;
+}
+
+#layout-tabs ul.main-tabs li a
+{
+	color:#FFFFFF;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
@@ -171,7 +176,7 @@ div.pagination span a
 
 .g_bubble.stripe
 {
-	font-size:90%;
+	font-size:85%;
 }
 
 .g_bubble .g_bubble,
@@ -203,7 +208,7 @@ div.pagination span a
 .g_bubble
 {
 	border: 1px solid;
-	border-color:#F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
+	border-color:#E4E4E4 #D5CCCC #D5CCCC #E4E4E4;
 }
 
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
@@ -224,4 +229,111 @@ div.pagination span a
 #layout-main div.g_timedentry div.body
 {
 	padding:1em;
+}
+
+#layout-main div.main_all div.datablocks,
+#layout-main div.main_all div.news.forum,
+#layout-main div.main_all div.header
+{
+	margin-right:20.5em;
+}
+
+#layout-main div.main_all div.datablocks div.stripe
+{
+	width:100%;
+	height: auto;
+}
+
+#layout-main div.main_all div.datablocks div.hidden
+{
+	display:inline-block;
+}
+
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	background-color:#FAF0FF;
+	border-color:#F3E7FF #DEC9F2 #DEC9F2 #F3E7FF;
+	color:#4D4993;
+	font-size:1.1em;
+	font-weight:bold;
+	padding:0.3em 1em;
+}
+
+
+#layout-main div.main_all div.datablocks
+{
+	-moz-column-width:24em;
+	-webkit-column-width:24em;
+	column-width:24em;
+}
+
+#layout-main div.main_all div.datablocks > div
+{
+	width:24em;
+}
+
+#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
+{
+	width:165px;
+}
+
+#layout-main div.main_all div.datablocks div.stripe div.data
+{
+	width:220px;
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px)
+{
+	#layout-main div.main_all div.datablocks
+	{
+		-moz-column-width:33em;
+		-webkit-column-width:33em;
+		column-width:33em;
+	}
+
+	#layout-main div.main_all div.datablocks > div
+	{
+		width:33em;
+	}
+
+	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
+	{
+		width:270px;
+	}
+
+	#layout-main div.main_all div.datablocks div.stripe div.data
+	{
+		width:325px;
+	}
+}
+
+@media screen and (min-width: 1850px)
+{
+	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
+	{
+		width:225px;
+	}
+
+	#layout-main div.main_all div.datablocks div.stripe div.data
+	{
+		width: 280px;
+	}
+
+	#layout-main div.main_all div.datablocks
+	{
+		-moz-column-width: 29em;
+		-webkit-column-width: 29em;
+		column-width: 29em;
+	}
+
+	#layout-main div.main_all div.datablocks > div
+	{
+		width: 29em;
+	}
+}
+
+.g_bubble.stripe.mini > div.data
+{
+	width:130px;
 }
