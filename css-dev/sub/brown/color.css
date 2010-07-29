@@ -87,3 +87,29 @@ th,
 {
 	background-color: #E9E6D9;
 }
+
+.g_bubble,
+.g_bubble .g_bubble  .g_bubble
+{
+	background-color: #E9E6D9;
+}
+
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble,
+#layout-main div.main_all .g_bubble
+{
+	background-color: #E0DBC9;
+}
+
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	border:1px solid #867F6A;
+	color:#E9E6D9;
+	padding:2px;
+}
+
+.g_bubble
+{
+	border: 1px dotted #999380;
+}

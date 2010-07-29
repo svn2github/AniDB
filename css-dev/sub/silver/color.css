@@ -189,3 +189,17 @@ div.pagination span strong
 {
 	color:#000000;
 }
+
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	background: #3A95C2 url(images/sub-bg-th.gif) repeat-x scroll 0 0;
+	color: #FFFFFF;
+	padding: 2px;
+	border-color: #03699C;
+}
+
+#layout-main div.main_all .g_bubble
+{
+	background-color: #DEE3E7;
+}
