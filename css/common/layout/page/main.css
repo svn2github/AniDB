@@ -1,12 +1,20 @@
+#layout-main div.main_all div.rightbar li span
+{
+	position:absolute;
+}
+
+#layout-main div.main_all div.rightbar li a,
+#layout-main div.main_all div.rightbar li span + span
+{
+	display: table;
+	margin-left: 4.5em;
+	position: relative;
+}
+
 #layout-main div.main_all div.rightbar
 {
 	width: 19em;
 	float: right;
-}
-
-#layout-main div.main_all div.rightbar p
-{
-	text-align: center;
 }
 
 #layout-main div.main_all div.rightbar h3
@@ -20,141 +28,299 @@
 	margin-left: 0;
 }
 
-#layout-main div.main_all div.rightbar > div+div
+#layout-main div.main_all div.rightbar > div
 {
-	margin-top: 1em;
+	margin-bottom:1em;
 }
 
-#layout-main div.main_all div.news
+#layout-main div.main_all div.datablocks
 {
-	clear: none;
-	margin-right: 20em;
+	-moz-column-width:31em;
+	-webkit-column-width:31em;
+	column-width:31em;
+	text-align:center;
 }
 
-#layout-main div.main_all div.news p.comment
+#layout-main div.main_all div.datablocks > div
 {
-	float: right;
-	margin: -2em 0 0 0;
+	display:inline-table;
+	vertical-align:top;
+	width:31em;
 }
 
-/* main_edit */
-
-#layout-main div.main_edit
+#layout-main div.main_all div.datablocks > div.account
 {
-	text-align: center;
-	padding-left: 5%;
-	padding-right: 5%;
+	width:30em;
 }
 
-#layout-main div.main_edit label
+#layout-main div.main_all div.datablocks div.stripe
 {
-	display: block;
-	text-align: left;
-	vertical-align: top;
-	margin: auto;
-	padding: 0.6em;
+	height:7.5em;
+	width:auto;
 }
 
-#layout-main div.main_edit label *
+#layout-main div.main_all div.datablocks div.stripe div.data
 {
-	display: block;
-	margin-top: -1.2em;
-	margin-left: 4em;
+	width:240px;
 }
 
-#layout-main div.main_edit label input
+#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
 {
-	width: 90%;
+	margin:0.5em 0;
+	width:188px;
 }
 
-#layout-main div.main_edit textarea
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
 {
-	height: 30em;
-	width: 90%;
+	margin-bottom:0.2em;
 }
 
-#layout-main div.main_edit form div > input
+#layout-main div.main_all div.header div.account ul.tabs
 {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+	margin-bottom:-1px;
 }
 
-/*CRAZY TESTING!*/
-#layout-main div.main_all div.info
+#layout-main div.main_all div.header div.account ul.tabs li
+{
+	display:inline-block;
+	padding:0.2em 0;
+	text-align:center;
+	width:49%;
+}
+
+#layout-main div.main_all div.header div.account div.login input[type="text"],
+#layout-main div.main_all div.header div.account div.login input[type="password"]
+{
+	padding:4px;
+	width:16.5em;
+}
+
+#layout-main div.main_all div.header div.account table
+{
+	margin:0.4em auto;
+}
+
+#layout-main div.main_all div.header div.account table th
+{
+	padding:4px 8px;
+}
+
+#layout-main div.main_all div.header div.account,
+#layout-main div.main_all div.header div.about
+{
+	padding:0.5em;
+}
+
+#layout-main div.main_all div.datablocks,
+#layout-main div.main_all div.news.forum,
+#layout-main div.main_all div.header
 {
 	clear:none;
 	margin-right:20em;
-	margin-bottom: 1em;
 }
 
-#layout-main div.main_all div.register
+#layout-main div.main_all div.header div.account
 {
-	margin: 0 2em;
-	font-weight: bold;
-	font-size: 1.1em;
+	float:right;
+	width:30.5em;
 }
 
-#layout-main div.main_all div.inner div.text
+#layout-main div.main_all div.header div.about ul li + li,
+#layout-main div.main_all div.header div.about div.content > span + span
 {
-	padding-left: 1.5em;
-	padding-right: 1.5em;
-	padding-bottom:2.5em;
-	padding-top:2.5em;
+	padding-top:0.5em;
 }
 
-#layout-main div.main_all div.login input[type="text"],
-#layout-main div.main_all div.login input[type="password"]
+#layout-main div.main_all div.header div.about h4
 {
-	width: 7em;
+	margin-right:26em;
 }
 
-#layout-main div.main_all div.info div.left
+#layout-main div.main_all div.header div.about ul
 {
-	text-align: left;
-	margin-right: 2em;
+	list-style-type:disc;
+	padding-left:1.5em;
 }
 
-#layout-main div.main_all div.info div.left dl dd
+#layout-main div.main_all div.header div.latestnews
 {
-	line-height:1.5em;
-	margin-bottom:0.1em;
-	margin-left:2em;
+	clear:none;
 }
 
-#layout-main div.main_all div.info div.left dl
+#layout-main div.main_all div.header div.content
+{
+	text-align:left;
+}
+
+#layout-main div.main_all div.header div.latestnews > div
+{
+	text-align:center;
+}
+
+#layout-main div.main_all div.header div.latestnews div.stripe
+{
+	width:100%;
+}
+
+#layout-main div.main_all div.header div.latestnews div.stripe div.data
+{
+	float:none;
+	margin-left:6em;
+	width:auto;
+}
+
+#layout-main div.main_all div.header div.latestnews div.posted
+{
+	margin-bottom:0.5em;
+}
+
+#layout-main div.main_all div.datablocks div.stripe div.data div.name,
+#layout-main div.main_all div.header div.latestnews div.stripe div.name
+{
+	margin-right:0;
+}
+
+#layout-main div.main_all div.datablocks div.similaranime div.image.other,
+#layout-main div.main_all div.header div.account ul.tabs li.signup
+{
+	float:right;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li a,
+#layout-main div.main_all div.header div.about div.content > span
 {
 	display:block;
-	margin:0.2em 0 0.5em 0;
 }
 
-#layout-main div.main_all div.info div.left ul
+#layout-main div.main_all div.latestnews div.hidden,
+#layout-main div.main_all div.datablocks div.hidden
 {
-	list-style-type: square;
+	display: none;
 }
 
-#layout-main div.main_all div.info div.about
+@media screen and (min-width: 1200px) and (max-width: 1400px)
 {
-	padding-bottom: 1em;
-	border-bottom:2px groove #BFC2CA;
+	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
+	{
+		width: 285px;
+	}
+
+	#layout-main div.main_all div.datablocks div.stripe div.data
+	{
+		width: 340px;
+	}
+
+	#layout-main div.main_all div.datablocks
+	{
+		-moz-column-width: 41em;
+		-webkit-column-width: 41em;
+		column-width: 41em;
+	}
+
+	#layout-main div.main_all div.datablocks > div
+	{
+		width: 41em;
+	}
 }
 
-#layout-main div.main_all div.info div.signup
+@media screen and (min-width: 1580px) and (max-width: 1680px)
 {
-	padding-top: 1em;
+	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
+	{
+		width: 165px;
+	}
+
+	#layout-main div.main_all div.datablocks div.stripe div.data
+	{
+		width: 220px;
+	}
+
+	#layout-main div.main_all div.datablocks
+	{
+		-moz-column-width: 29em;
+		-webkit-column-width: 29em;
+		column-width: 29em;
+	}
+
+	#layout-main div.main_all div.datablocks > div
+	{
+		width: 29em;
+	}
 }
 
-#layout-main div.main_all div.info h2
+@media screen and (min-width: 1850px)
 {
-	font-size:150%;
+	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
+	{
+		width: 235px;
+	}
+
+	#layout-main div.main_all div.datablocks div.stripe div.data
+	{
+		width: 290px;
+	}
+
+	#layout-main div.main_all div.datablocks
+	{
+		-moz-column-width: 36em;
+		-webkit-column-width: 36em;
+		column-width: 36em;
+	}
+
+	#layout-main div.main_all div.datablocks > div
+	{
+		width: 36em;
+	}
 }
 
-#layout-tabs ul.main-tabs li.news
+@media screen and (min-width: 1600px)
 {
-	display:none;
+	#layout-main div.main_all div.latestnews div.hidden,
+	#layout-main div.main_all div.datablocks div.hidden
+	{
+		display: inline-block;
+	}
 }
 
-#layout-main div.news div.g_timedentry div.avatar + div.postbody dl.codebox
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
 {
-	margin-right: 11em;
+	border: 1px solid;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li
+{
+	-moz-border-radius:0.5em 0.5em 0 0;
+	-webkit-border-radius:0.5em 0.5em 0 0;
+	border-radius:0.5em 0.5em 0 0;
+	border-top: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
+}
+
+#layout-main div.main_all div.header div.account div.login
+{
+	-moz-border-radius:0 0 0.5em 0.5em;
+	-webkit-border-radius:0 0 0.5em 0.5em;
+	border-radius:0 0 0.5em 0.5em;
+}
+
+#layout-main div.main_all div.header div.account table
+{
+	border-top: none;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li,
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover
+{
+	border-bottom: 1px double;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li.signup
+{
+	border-bottom: none;
 }

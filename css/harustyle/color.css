@@ -145,3 +145,26 @@ span.link:hover,
 {
 	background-color:#FAE287;
 }
+
+.g_bubble.stripe,
+.g_bubble,
+.g_bubble .g_bubble  .g_bubble
+{
+	background-color: #FAE287;
+}
+
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble
+{
+	background-color: #E8DDB3;
+}
+
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	background-color:#3496DA;
+	color: #FFFFFF;
+	border: none;
+	padding:2px;
+}

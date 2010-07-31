@@ -1,33 +1,33 @@
-#layout-main .g_bubble.stripe div.tooltip div.postbody,
+.g_bubble.stripe div.tooltip div.postbody,
 #layout-main div.tabbed_pane_main div.similaranime div.stripe,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
 {
 	background-color: #CFD1D4;
 }
 
-#layout-main .g_bubble.stripe,
+.g_bubble.stripe,
 #layout-main div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
 	background-color: #C3C5C9;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title,
-#layout-main .g_bubble.stripe div.name
+.g_bubble.stripe div.name,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
 	border-color: #ABABAB;
 }
 
-#layout-main .g_bubble.stripe div.tooltip div.postbody,
-#layout-main .g_bubble.stripe,
+.g_bubble.stripe,
+.g_bubble.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
 	border-color: #ABABAB #8E8E8E #8E8E8E #ABABAB;
 }
 
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-.g_bubble .name-colored
+.g_bubble .name-colored,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored
 {
 	color: #AA0000;
 }

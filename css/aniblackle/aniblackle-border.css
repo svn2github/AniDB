@@ -1,6 +1,8 @@
 #layout-main div.forum ul.topics li.row,
 #layout-main div.animeatt_reviews div.review div.text,
-#layout-main div.g_timedentry div.body
+#layout-main div.g_timedentry div.body,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
 {
 	border: none;
 }

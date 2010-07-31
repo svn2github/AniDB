@@ -1,6 +1,7 @@
 span.link,
 a,
-th a
+th a,
+#layout-main div.main_all div.header div.account ul.tabs li.signup a
 {
 	color: #105289;
 }
@@ -48,7 +49,12 @@ th a
 	border-top-color: #c9d7f1;
 }
 
-#layout-main table tr.header
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
+#layout-main table tr.header,
+#layout-main div.anime_all div.info div.caststaff div h4,
+#layout-main div.main_all div.rightbar h4,
+th
 {
 	background-color: #c3d9ff;
 }
@@ -67,7 +73,9 @@ th a
 }
 
 #layout-tabs ul.main-tabs > li:hover,
-#layout-tabs ul.main-tabs > li.selected
+#layout-tabs ul.main-tabs > li.selected,
+#layout-main div.main_all div.header div.account ul.tabs li,
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover
 {
 	border-bottom-color: #FFFFFF;
 }
@@ -78,7 +86,9 @@ a:hover,
 #layout-main div.pagination span a:hover,
 *.g_button a:hover,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-.g_bubble .name-colored
+.g_bubble .name-colored,
+
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a
 {
 	color: #AA0000;
 }
@@ -154,7 +164,8 @@ span.g_odd,
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.profile_all div.default_languages table tr,
-#layout-main div.userpage_all > div.g_section > h4
+#layout-main div.userpage_all > div.g_section > h4,
+#layout-main div.main_all div.header div.account ul.tabs li.signup
 {
 	background-color: #ECF4FD;
 }
@@ -165,19 +176,14 @@ table
 	border-top-color: blue;
 }
 
-#layout-main div.anime_all div.info div.caststaff div h4,
-th
-{
-	background-color: #C3D9FF;
-}
-
 *.g_button a,
 html,
 tr,
 #layout-main div.forum ul.topics li.row,
 #layout-tabs ul.main-tabs > li.selected,
 #layout-tabs ul.main-tabs > li:hover,
-#layout-main div.tabbed_pane ul.tabs li
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover
 {
 	background-color: #FFFFFF;
 }
@@ -200,6 +206,8 @@ select,
 #layout-main ul.g_list li,
 #layout-main ul.g_list li.g_odd,
 #layout-main div.avatar img,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
 #layout-main div.anime_all div.info div.image img,
 span.test
 {
@@ -212,12 +220,27 @@ span.test
 	border-color: #97AACC;
 }
 
+#layout-main div.main_all div.header div.latestnews div.posted,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd
 {
 	color:#666666;
 }
 
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	color:#555555;
+}
+
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
 {
 	color:#000000;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li
+{
+	border-top-color: #C9D7F1;
+	border-left-color: #C9D7F1;
+	border-right-color: #97AACC;
 }

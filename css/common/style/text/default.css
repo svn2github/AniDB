@@ -332,6 +332,11 @@ h4.collapsed span
 	font-size:10px;
 }
 
+#layout-main div.main_all div.header div.account ul.tabs li
+{
+	font-size: 1.3em;
+}
+
 #layout-main div.forum ul.topics dd.posts,
 #layout-main div.forum ul.topics dd.views,
 #layout-main div.forum ul.topics dd.topics,
@@ -367,7 +372,8 @@ h4.collapsed span
 #layout-main div.forum div.navbar span.notify,
 #layout-main div.forum div.quickreply textarea,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
-#layout-main div.chartags_all div.addbox div.taggrouplist span.link
+#layout-main div.chartags_all div.addbox div.taggrouplist span.link,
+#layout-main div.main_all div.datablocks > div.account
 {
 	font-size:1.1em;
 }
@@ -412,12 +418,13 @@ div.quotebody div.quoteof,
 .g_bubble .name-colored,
 div.relations .g_bubble.stripe div.type,
 .g_bubble.box > div.top div.name,
-.g_bubble.box > div.data div.date
+.g_bubble.box > div.data div.date,
+#layout-main div.main_all div.header div.account ul.tabs li
 {
 	font-weight:bold;
 }
 
-
+#layout-main div.main_all div.header div.latestnews div.posted,
 #layout-main div.profile_all div.account tr th p.note
 {
 	font-style: italic;

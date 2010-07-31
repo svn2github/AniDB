@@ -216,7 +216,7 @@ ul#layout-menu li:hover ul li a
 	color: #f3f3f3;
 }
 
-#layout-main .g_bubble.stripe
+.g_bubble.stripe
 {
 	background-color:#cdcdcd;
 }

@@ -73,3 +73,27 @@ th,
 {
 	background-color: #E7F0FF;
 }
+
+.g_bubble.stripe,
+.g_bubble,
+.g_bubble .g_bubble  .g_bubble
+{
+	background-color: #E7F0FF;
+}
+
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble,
+#layout-main div.main_all .g_bubble
+{
+	background-color: #CBD6E5;
+}
+
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	background-color:#A1B4CD;
+	border: none;
+	padding:2px;
+	color:#2E3C55;
+}
