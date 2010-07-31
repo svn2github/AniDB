@@ -22,6 +22,7 @@
 @import "genren.css";
 @import "group.css";
 @import "grouplist.css";
+@import "import.css";
 @import "irc.css";
 @import "latest.css";
 @import "lexicon.css";
@@ -41,6 +42,5 @@
 @import "song.css";
 @import "songlist.css";
 @import "tags.css";
-/*@import "test.css";*/
 @import "userlist.css";
 @import "wishlist.css";
