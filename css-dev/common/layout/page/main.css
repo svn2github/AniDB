@@ -57,6 +57,7 @@
 {
 	height:7.5em;
 	width:auto;
+	overflow:hidden;
 }
 
 #layout-main div.main_all div.datablocks div.stripe div.data
