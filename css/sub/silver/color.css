@@ -199,6 +199,9 @@ div.pagination span strong
 	border-color: #03699C;
 }
 
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.events .rbottom *,
+#layout-main div.forum div.events .rtop *,
 #layout-main div.main_all .g_bubble
 {
 	background-color: #DEE3E7;
