@@ -84,7 +84,8 @@ th,
 
 .g_bubble.stripe,
 .g_bubble,
-.g_bubble .g_bubble  .g_bubble
+.g_bubble .g_bubble  .g_bubble,
+#layout-main div.forum ul.topics li.row
 {
 	background-color: #F2F3EE;
 }
@@ -100,7 +101,9 @@ th,
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main div.main_all .g_bubble
+#layout-main div.main_all .g_bubble,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+#layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color: #DCDDD9;
 }

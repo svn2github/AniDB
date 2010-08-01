@@ -123,7 +123,7 @@ th,
 	padding:2px;
 	color:#E9E6D9;
 	border: 1px dotted #867F6A;
-	background-color:#BEBCAD#8C8673;
+	background-color:#8C8673;
 }
 
 #layout-main div.forum .rtop *,
@@ -149,4 +149,23 @@ th,
 #layout-main div.forum ul.topics li.row
 {
 	background-color:#E9E6D9;
+}
+
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	color:#E9E6D9;
+}
+
+#layout-main div.forum div.threads .rtop *,
+#layout-main div.forum div.threads .rbottom *,
+#layout-main div.forum div.threads div.inner
+{
+	background-color:#8C8673;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left-color:#8C8673;
+	border-right-color:#8C8673;
 }
