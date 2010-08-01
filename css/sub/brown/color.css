@@ -121,7 +121,20 @@ th,
 #layout-main div.main_all div.header h4
 {
 	padding:2px;
-	background-color:#8C8673;
 	color:#E9E6D9;
 	border: 1px dotted #867F6A;
+}
+
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	background-color:#8C8673;
 }
