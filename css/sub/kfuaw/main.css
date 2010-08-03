@@ -414,6 +414,8 @@ body
 	margin-right:0;
 }
 
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
 #layout-main div.userpage_all  h4,
 #layout-main div.g_menu h4
 {
@@ -592,13 +594,13 @@ body.nonav #layout-main div.g_content h4
 	padding: 0;
 	border: none;
 }
-
+/*
 #layout-main .g_bubble.postbody
 {
 	border: none;
 	background: transparent;
 }
-
+*/
 #layout-footer p
 {
 	text-align: right;
