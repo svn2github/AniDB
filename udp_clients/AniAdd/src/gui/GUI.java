@@ -171,6 +171,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         if((Integer)(mem.get("FirstStart", 0)) < 7) {
             DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
+                "Added compression to avoid truncated messages (which in rare cases lead to file renaming issues)<br/>" +
                 "Added Audio- & VideoCodec vars to tagsystem (FACodec & FVCodec)<br/>" +
                 "</html>"));
         }

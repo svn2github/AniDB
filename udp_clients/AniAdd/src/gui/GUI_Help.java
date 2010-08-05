@@ -55,7 +55,7 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
 
         btn_ResetSettings.setText("Reset Settings to Default");
 
-        jLabel1.setText("Current Build: 09.06.10");
+        jLabel1.setText("Current Build: 05.08.10");
 
         jLabel2.setText("Use the DEL Key to remove selected files from the file table");
 

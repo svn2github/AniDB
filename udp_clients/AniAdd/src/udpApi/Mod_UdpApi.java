@@ -16,18 +16,14 @@ import aniAdd.misc.ICallBack;
 import aniAdd.misc.Misc;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
-import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
-import java.util.zip.InflaterOutputStream;
 
 public class Mod_UdpApi implements IModule {
 
     public final int MAXRETRIES = 2;
-    public final int CLIENTVER = 0;
+    public final int CLIENTVER = 4;
     public final int PROTOCOLVER = 3;
     public final String CLIENTTAG = "AniAdd";
     public final String ANIDBAPIHOST = "api.anidb.info";
