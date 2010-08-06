@@ -403,3 +403,9 @@ button + button
 {
 	margin-left: 0.5em;
 }
+
+#layout-main div.addsongcollectionrel_all div.massadd_new_songs td
+{
+	padding: 0;
+	padding: 2px 4px;
+}
