@@ -37,6 +37,7 @@
     <SccLocalPath>Svn</SccLocalPath>
     <SccAuxPath>Svn</SccAuxPath>
     <SccProvider>SubversionScc</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -116,21 +117,10 @@
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfoList.cs" />
     <Compile Include="Misc\ExceptionXElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="InfoGathering\Parser\SubtitleInfo\IDX.cs" />
     <Compile Include="InfoGathering\Parser\SubtitleInfo\SAMI.cs" />
     <Compile Include="InfoGathering\Parser\SubtitleInfo\SRT.cs" />
     <Compile Include="InfoGathering\Parser\SubtitleInfo\SSA_ASS.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

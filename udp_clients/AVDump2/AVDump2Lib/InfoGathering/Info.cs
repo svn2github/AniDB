@@ -95,7 +95,8 @@ namespace AVDump2Lib.InfoGathering {
 				}
 
 				//AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Video, i, ""));
-				AppendLeaf(xmlDoc, subNode, "bitrate2", ((int)double.Parse(mediaInfo.Get(eStreamType.Video, i, "BitRate")) / 1000).ToString(), new String[,]  {{"unit", "kbit/s"}});
+				milInfo = mediaInfo.Get(eStreamType.Video, i, "BitRate");
+				if(!String.IsNullOrEmpty(milInfo)) AppendLeaf(xmlDoc, subNode, "bitrate2", ((int)double.Parse(milInfo) / 1000).ToString(), new String[,] { { "unit", "kbit/s" } });
 				AppendLeaf(xmlDoc, subNode, "bitrate", mediaInfo.Get(eStreamType.Video, i, "BitRate"), null);
 				AppendLeaf(xmlDoc, subNode, "fourcc", mediaInfo.Get(eStreamType.Video, i, "CodecID"), null); //Codec/CC
 				AppendLeaf(xmlDoc, subNode, "fps", mediaInfo.Get(eStreamType.Video, i, "FrameRate"), null);
@@ -134,7 +135,8 @@ namespace AVDump2Lib.InfoGathering {
 				AppendLeaf(xmlDoc, subNode, "size", mediaInfo.Get(eStreamType.Audio, i, "StreamSize"), null);
 				AppendLeaf(xmlDoc, subNode, "title", mediaInfo.Get(eStreamType.Audio, i, "Title"), null);
 				AppendLeaf(xmlDoc, subNode, "bitrate", mediaInfo.Get(eStreamType.Audio, i, "BitRate"), null);
-				AppendLeaf(xmlDoc, subNode, "bitrate2", ((int)double.Parse(mediaInfo.Get(eStreamType.Audio, i, "BitRate")) / 1000).ToString(), new String[,]  {{"unit", "kbit/s"}});
+				milInfo = mediaInfo.Get(eStreamType.Audio, i, "BitRate");
+				if(!String.IsNullOrEmpty(milInfo)) AppendLeaf(xmlDoc, subNode, "bitrate2", ((int)double.Parse(milInfo) / 1000).ToString(), new String[,] { { "unit", "kbit/s" } });
 				AppendLeaf(xmlDoc, subNode, "language", mediaInfo.Get(eStreamType.Audio, i, "Language"), null);
 				//AppendLeaf(xmlDoc, subNode, "identifier", mi.Get(StreamKind.Audio, i, ""));
 				AppendLeaf(xmlDoc, subNode, "twocc", mediaInfo.Get(eStreamType.Audio, i, "Codec"), null);

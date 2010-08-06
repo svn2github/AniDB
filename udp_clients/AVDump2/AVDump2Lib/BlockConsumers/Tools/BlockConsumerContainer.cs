@@ -76,6 +76,7 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 			public int BufferLength { get { return (int)blockConsumers.b.BaseStream.BlockCount; } }
 			public int BlockSize { get { return ((ByteStreamToBlock)blockConsumers.b.BlockSource).BlockSize; } }
 			public ulong BlockCount(int hashObjId) { return blockConsumers.b.Count(hashObjId); }
+			public ulong BlockCount() { return blockConsumers.b.BaseStream.BlockCount; }
 
 			public string Name(int index) { return blockConsumers.items[index].Name; }
 

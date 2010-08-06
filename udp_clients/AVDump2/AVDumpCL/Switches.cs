@@ -46,14 +46,14 @@ namespace AVDump2CL {
 		DefSubtitleExtensions = 1L << 34,
 
 		//Hash
-		Crc32 = 1L << 40,
+		Crc = 1L << 40,
 		Ed2k = 1L << 41,
 		Md5 = 1L << 42,
 		Sha1 = 1L << 43,
 		Tth = 1L << 44,
 		Tiger = 1L << 45,
 		Aich = 1L << 46,
-		UseAllHashes = Crc32 | Ed2k | Md5 | Sha1 | Tth | Tiger | Aich,
+		UseAllHashes = Crc | Ed2k | Md5 | Sha1 | Tth | Tiger | Aich,
 		PrintElapsedHashingTime = 1L << 52,
 		PrintEd2kLink = 1L << 60,
 		PrintAniDBLink = 1L << 61,

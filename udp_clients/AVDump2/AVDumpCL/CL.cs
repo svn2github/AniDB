@@ -15,9 +15,14 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 /**/
 
-//#undef HasAcreq
+//In Debug Build
 //#undef Debug
+
+//In Release Build
 //#define Debug
+
+//#undef HasAcreq
+//#define HasAcreq
 
 using System;
 using System.Collections;
@@ -88,7 +93,7 @@ namespace AVDump2CL {
 			char2SwitchEnum['w'] = eSwitches.SupressProgress; //Done
 			char2SwitchEnum['T'] = eSwitches.PrintTotalTimeUsed; //Done
 
-			char2SwitchEnum['0'] = eSwitches.Crc32; //Done
+			char2SwitchEnum['0'] = eSwitches.Crc; //Done
 			char2SwitchEnum['1'] = eSwitches.Ed2k; //Done
 			char2SwitchEnum['2'] = eSwitches.Md5; //Done
 			char2SwitchEnum['3'] = eSwitches.Sha1; //Done
@@ -109,12 +114,16 @@ namespace AVDump2CL {
 			if(args.Length == 0) {
 				args = new string[] {
 					//@"E:\Anime\Stalled\Clannad - After story [SS-Eclipse]\Clannad after story - 15 [DVD SS-Eclipse] (1280x720 x264).mkv",
-					@"E:\Anime\DL",
+					//@"E:\Anime\DL",
 					//@"E:\Anime\DL\[CoalGuys] B Gata H Kei - 01 [531DF322].mkv",
 					//@"E:\Anime\Stalled\ponyo_on_the_cliff_by_the_sea[1920x1040.h264.flac.ac3][niizk].mkv",
-					"-ac:arokh:Anime",
+					//@"E:\Anime\DL\[Chihiro]_Sekirei_~Pure_Engagement~_04_[480p][H264][4CEE0075].mkv",
+					@"D:\My Stuff\Downloads\[Mazui_DudeeBalls-Remux]_Ookami-san_-_06_[720p].mkv",
+					//"-ac:arokh:Anime",
+					//@"E:\Anime\DL\[Arigatou] Tokyo Majin [DVD][x264.AAC][Dual Audio]\Arigatou.Tokyo.Majin.Ep21.[x264.AAC][539CC09B].mkv",
+					//@"E:\Anime\DL\[QTS] Precure All Stars DX2 Kibou no Hikari Rainbow Jewel wo Mamore! Eizou Tokuten - Heartcatch Precure! Movie CM (BD H264 1920x1080 24fps AC3).mkv",
 					"-aoyp",
-					"-log:log.xml"
+					//"-log:log.xml"
 				};
 			}
 #endif
@@ -133,7 +142,7 @@ namespace AVDump2CL {
 			if(logStream != null) logStream.Dispose();
 
 			if((switches & eSwitches.PauseWhenDone) != 0) {
-				Console.WriteLine("Press any key to continue");
+				Console.WriteLine("Press any alpha-numeric key to continue");
 				Pause();
 			}
 		}
@@ -214,7 +223,7 @@ namespace AVDump2CL {
 				}
 
 				if(invalidCl) {
-					Console.WriteLine("Error in Commandline: " + args[i] + ". Aborting!\nPress key to exit");
+					Console.WriteLine("Error in Commandline: " + args[i] + ". Aborting!\nPress any alpha-numeric key to exit");
 					Pause();
 					return false;
 				}
@@ -283,7 +292,7 @@ namespace AVDump2CL {
 #if(Debug)
 				//if((switches & (eSwitches.Aich)) != 0) hashContainer.AddHashAlgorithm(new Aich(), "AICH");
 #endif
-				if((switches & (eSwitches.Crc32)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new Crc32(), "CRC"));
+				if((switches & (eSwitches.Crc)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new Crc32(), "CRC"));
 				//if((switches & (eSwitches.Tiger)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new TigerThex(), "TIGER"));
 				if((switches & (eSwitches.Ed2k)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new Ed2k(), "ED2K"));
 				if((switches & (eSwitches.Sha1)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "SHA1"));
@@ -378,15 +387,17 @@ namespace AVDump2CL {
 			}
 			#endregion
 
-			string aniDBLink = "http://anidb.info/perl-bin/animedb.pl?show=file&size=" + stream.Length + "&hash=" + BaseConverter.ToString(ed2k.Hash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse);
-			if((switches & eSwitches.OpenInBrowser) != 0) System.Diagnostics.Process.Start(aniDBLink);
-			if((switches & eSwitches.PrintAniDBLink) != 0) Console.WriteLine(aniDBLink);
+			if((switches & eSwitches.OpenInBrowser) != 0 || (switches & eSwitches.PrintAniDBLink) != 0) {
+				string aniDBLink = "http://anidb.info/perl-bin/animedb.pl?show=file&size=" + stream.Length + "&hash=" + BaseConverter.ToString(ed2k.Hash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse);
+				if((switches & eSwitches.OpenInBrowser) != 0) System.Diagnostics.Process.Start(aniDBLink);
+				if((switches & eSwitches.PrintAniDBLink) != 0) Console.WriteLine(aniDBLink);
+			}
 			if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine("ed2k://|file|" + System.IO.Path.GetFileName(filePath) + "|" + stream.Length + "|" + BaseConverter.ToString(ed2k.Hash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse) + "|/");
 
 			if((switches & eSwitches.DeleteFileWhenDone) != 0 && !error) System.IO.File.Delete(filePath);
 			if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
 			if((switches & eSwitches.PauseWhenFileDone) != 0) {
-				Console.WriteLine("Press any key to continue");
+				Console.WriteLine("Press any alpha-numeric key to continue");
 				Pause();
 			}
 			stream.Dispose();
@@ -434,14 +445,14 @@ namespace AVDump2CL {
 			output = "*: Buffersize available for hashalgorithm blocksize: " + blockSize + "kb blockCount: " + blockCount + "\n";
 
 			for(int i = 0;i < progress.BlockConsumerCount;i++) {
-				output += progress.Name(i).PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.WindowWidth - maxNameLength - 3) + "]";
+				output += progress.Name(i).PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.WindowWidth - maxNameLength - 4) + "]\n";
 			}
-			output += "\n" + "Progress".PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.WindowWidth - maxNameLength - 3) + "]";
+			output += "\n" + "Progress".PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.WindowWidth - maxNameLength - 4) + "]\n";
 
 			Console.Write(output);
 			lastLineIndex = Console.CursorTop;
 
-			int barLength = Console.WindowWidth - maxNameLength - 3;
+			int barLength = Console.WindowWidth - maxNameLength - 4;
 			bool doLoop = !progress.HasFinished;
 			do {
 				doLoop = !progress.HasFinished;
@@ -500,10 +511,10 @@ namespace AVDump2CL {
 		}
 
 		private static void Pause() {
-			char c;
+			ConsoleKeyInfo cki;
 			do {
-				c = Console.ReadKey().KeyChar;
-			} while(Char.IsControl(c));
+				cki = Console.ReadKey();
+			} while(Char.IsControl(cki.KeyChar) && cki.Key != ConsoleKey.Enter);
 		}
 
 		#region Empty args help
