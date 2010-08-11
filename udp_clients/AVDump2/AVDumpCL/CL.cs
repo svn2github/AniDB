@@ -16,13 +16,19 @@
 /**/
 
 //In Debug Build
-//#undef Debug
+//#define CreateProviderLogs
+//#define UseNullStream
+#define UseFileExtensionCheck
+#define SetArgumentsIfNull
+//define UseAICHHash
+#undef Debug
 
 //In Release Build
-//#define Debug
+#define Debug
 
-//#undef HasAcreq
+#undef HasAcreq
 //#define HasAcreq
+
 
 using System;
 using System.Collections;
@@ -37,6 +43,7 @@ using AVDump2Lib.Dump;
 using AVDump2Lib.HashAlgorithms;
 using AVDump2Lib.InfoGathering;
 using AVDump2Lib.Misc;
+using System.Collections.ObjectModel;
 
 namespace AVDump2CL {
 	public class CL {
@@ -71,10 +78,10 @@ namespace AVDump2CL {
 			mediaLst = new List<string>();
 			doneListContent = new List<string>();
 
-			dumpableExtensions = new List<String>(new string[] { "avi", "mpg", "mpeg", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv", "ts", "ogv", "7z", "asf", "mp3", "aac", "ac3", "dts", "wav" });
+			dumpableExtensions = new List<String>(new string[] { "mpg", "mpeg", "ts", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z" });
 			dumpableExtensions.Sort();
 
-			processExtensions = new List<string>(new string[] { "idx", "avi", "ssa", "mkv", "ogm", "mp4", "mov", "mpg", "mpeg", "rm", "srt", "vob", "wmv", "asf", "qt", "flv" });
+			processExtensions = new List<string>(new string[] { "mpg", "mpeg", "ts", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z" });
 			processExtensions.Sort();
 
 			char2SwitchEnum = new Dictionary<char, eSwitches>();
@@ -109,24 +116,27 @@ namespace AVDump2CL {
 
 		static void Main(string[] args) {
 			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
+			Console.OutputEncoding = new System.Text.UTF8Encoding(false);
+
 
 #if(Debug)
+#if(SetArgumentsIfNull)
 			if(args.Length == 0) {
 				args = new string[] {
-					//@"E:\Anime\Stalled\Clannad - After story [SS-Eclipse]\Clannad after story - 15 [DVD SS-Eclipse] (1280x720 x264).mkv",
-					//@"E:\Anime\DL",
-					//@"E:\Anime\DL\[CoalGuys] B Gata H Kei - 01 [531DF322].mkv",
+					@"E:\Anime\Processed",
+					//@"E:\Anime\DL\cor.tv.dnangel\cor.tv.dnangel.20.[B3D5C421].mkv",
 					//@"E:\Anime\Stalled\ponyo_on_the_cliff_by_the_sea[1920x1040.h264.flac.ac3][niizk].mkv",
-					//@"E:\Anime\DL\[Chihiro]_Sekirei_~Pure_Engagement~_04_[480p][H264][4CEE0075].mkv",
-					@"D:\My Stuff\Downloads\[Mazui_DudeeBalls-Remux]_Ookami-san_-_06_[720p].mkv",
-					//"-ac:arokh:Anime",
-					//@"E:\Anime\DL\[Arigatou] Tokyo Majin [DVD][x264.AAC][Dual Audio]\Arigatou.Tokyo.Majin.Ep21.[x264.AAC][539CC09B].mkv",
-					//@"E:\Anime\DL\[QTS] Precure All Stars DX2 Kibou no Hikari Rainbow Jewel wo Mamore! Eizou Tokuten - Heartcatch Precure! Movie CM (BD H264 1920x1080 24fps AC3).mkv",
-					"-aoyp",
+					//@"E:\Anime\Stalled\Mouryou no Hako[Aero] 4v2 - The Kasha Incident.mkv",
+					//@"D:\My Stuff\Downloads\[Mazui_DudeeBalls-Remux]_Ookami-san_-_06_[720p].mkv",
+					//"-oy",
 					//"-log:log.xml"
 				};
 			}
 #endif
+			//System.IO.File.AppendAllText("Args.txt", args.Aggregate("args[]:", (acc, str) => { return acc + " " + str; }) + "\n");
+			//System.IO.File.AppendAllText("Args.txt", Environment.CommandLine + "\n");
+#endif
+
 
 			if(!ParseClOptions(args)) return;
 
@@ -134,7 +144,6 @@ namespace AVDump2CL {
 			ProcessMedia(new Queue<string>(mediaLst));
 
 			if((switches & eSwitches.MonitorFolder) != 0) MonitorFiles();
-
 			if((switches & eSwitches.PrintTotalTimeUsed) != 0) Console.WriteLine("Total time elapsed: " + (DateTime.Now - startTime).TotalSeconds + "s");
 
 			if(ed2kListStream != null) ed2kListStream.Dispose();
@@ -268,29 +277,31 @@ namespace AVDump2CL {
 			bool error = false;
 			string fileExt = System.IO.Path.GetExtension(filePath).Substring(1);
 
-#if(!Debug)
-			if (doneListContent.Contains(filePath) || processExtensions.BinarySearch(fileExt) < 0) return;
+#if(!Debug || UseFileExtensionCheck)
+			if (doneListContent.Contains(filePath) || processExtensions.BinarySearch(fileExt) < 0) {
+				return;
+			}
 #endif
 
 			Stream stream = System.IO.File.OpenRead(filePath);
 			//System.IO.BufferedStream bs = new BufferedStream(stream, 1024);
 
 
-#if(Debug)
-			//stream = new NullStream(1024 * 1024 * 1024);
-			//stream = new MemoryStream(System.Text.Encoding.ASCII.GetBytes("".PadLeft(1025, 'A'))); //System.IO.File.OpenRead(filePath);
-			//stream = new MemoryStream(new byte[] { 0 }); //System.IO.File.OpenRead(filePath);
+#if(Debug && UseNullStream)
+			stream = new NullStream(1024 * 1024 * 1024);
+			stream = new MemoryStream(System.Text.Encoding.ASCII.GetBytes("".PadLeft(1025, 'A'))); //System.IO.File.OpenRead(filePath);
+			stream = new MemoryStream(new byte[] { 0 }); //System.IO.File.OpenRead(filePath);
 #endif
 
 			#region Hashing
 			DateTime startTime = DateTime.Now;
 			BlockConsumerContainer blockConsumerContainer = new BlockConsumerContainer();
-			if((switches & eSwitches.UseAllHashes) != 0) {
+			if((switches & eSwitches.UseAllHashes) != 0 || System.IO.Path.GetExtension(filePath).ToLower().Equals(".mkv")) {
 				Console.WriteLine("Folder: " + System.IO.Path.GetDirectoryName(filePath));
 				Console.WriteLine("Filename: " + System.IO.Path.GetFileName(filePath));
 
-#if(Debug)
-				//if((switches & (eSwitches.Aich)) != 0) hashContainer.AddHashAlgorithm(new Aich(), "AICH");
+#if(Debug && UseAICHHash)
+				if((switches & (eSwitches.Aich)) != 0) hashContainer.AddHashAlgorithm(new Aich(), "AICH");
 #endif
 				if((switches & (eSwitches.Crc)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new Crc32(), "CRC"));
 				//if((switches & (eSwitches.Tiger)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new TigerThex(), "TIGER"));
@@ -298,7 +309,7 @@ namespace AVDump2CL {
 				if((switches & (eSwitches.Sha1)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new System.Security.Cryptography.SHA1CryptoServiceProvider(), "SHA1"));
 				if((switches & (eSwitches.Tth)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new TreeHash(new TigerThex(), new TigerThex(), 1024), "TTH"));
 				if((switches & (eSwitches.Md5)) != 0) blockConsumerContainer.AddBlockConsumer(new HashCalculator(new System.Security.Cryptography.MD5CryptoServiceProvider(), "MD5"));
-				//if(System.IO.Path.GetExtension(filePath).ToLower().Equals(".mkv")) blockConsumerContainer.AddBlockConsumer(new MatroskaFileInfo("MKVParser"));
+				if(System.IO.Path.GetExtension(filePath).ToLower().Equals(".mkv")) blockConsumerContainer.AddBlockConsumer(new MatroskaFileInfo("MKVParser"));
 
 				BlockConsumerContainer.Progress progress = blockConsumerContainer.Start(blockCount, stream, blockSize * 1024);
 				if((switches & eSwitches.SupressProgress) == 0) {
@@ -312,13 +323,31 @@ namespace AVDump2CL {
 			IEnumerable<IBlockConsumer> blockConsumers = blockConsumerContainer.Join();
 			#endregion
 
+
+			MatroskaProvider mkvProvider = null;
+			if(blockConsumers.Any(b => b.Name.Equals("MKVParser"))) mkvProvider = new MatroskaProvider((MatroskaFileInfo)blockConsumers.First(b => b.Name.Equals("MKVParser")));
+			var milProvider = new MediaInfoProvider(filePath);
+			var hashProvider = new HashInfoProvider(blockConsumers.Where(b => !b.Name.Equals("MKVParser")).Cast<HashCalculator>());
+
+			Collection<InfoProvider> providers = new Collection<InfoProvider>();
+			if(mkvProvider != null) providers.Add(mkvProvider);
+			providers.Add(milProvider);
+			providers.Add(hashProvider);
+			var p = new CompositeInfoProvider(providers);
+
+#if(Debug && CreateProviderLogs)
+			Info.CreateAVDumpLog(p).Save(System.IO.Path.GetFileNameWithoutExtension(filePath) + "_Composite" + System.IO.Path.GetExtension(filePath) + ".xml");
+			Info.CreateAVDumpLog(milProvider).Save(System.IO.Path.GetFileNameWithoutExtension(filePath) + "_MIL" + System.IO.Path.GetExtension(filePath) + ".xml");
+			if(mkvProvider != null) Info.CreateAVDumpLog(mkvProvider).Save(System.IO.Path.GetFileNameWithoutExtension(filePath) + "_MKVParser" + System.IO.Path.GetExtension(filePath) + ".xml");
+#endif
+
 			if((switches & eSwitches.PrintElapsedHashingTime) != 0) Console.WriteLine("Time elapsed after Hashing: " + (DateTime.Now - startTime).TotalSeconds + "s");
 
 			#region Log Output
 			string log = "";
 			if((switches & eSwitches.CreqXmlFormat) != 0) {
 				StringWriter sw = new StringWriter();
-				Info.CreateAVDumpLog(filePath, blockConsumers).Save(sw);
+				Info.CreateAVDumpLog(p).Save(sw);
 				log += sw.ToString();
 			}
 			if((switches & eSwitches.MediaInfoXMLOutPut) != 0) {
@@ -404,7 +433,7 @@ namespace AVDump2CL {
 
 			#region ACreqing
 #if(HasAcreq) //If you get an error below: Scroll to the top of the page and uncomment #undef HasAcreq
-			if(!(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
+			if(dumpableExtensions.BinarySearch(fileExt) >= 0 && !(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
 				string creq = Info.CreateAVDumpLog(filePath, blockConsumers).OuterXml;
 
 				Console.Write("Sending Creq... ");
@@ -478,7 +507,7 @@ namespace AVDump2CL {
 				  "Position: " + ((double)bytesProcessed / (1 << 20)).ToString("0MB") + "/" + ((double)fileSize / (1 << 20)).ToString("0MB") + "  " +
 				  "Elapsed time: " + (timeElapsed / 1000d).ToString("0.0").PadLeft(3) + "s  " +
 				  "Speed: " + (((double)bytesProcessed / (1 << 20)) / (timeElapsed / 1000d)).ToString("0.00MB/s") +
-				  "".PadLeft(80 - Console.CursorLeft)
+				  "".PadLeft(Console.WindowWidth - Console.CursorLeft)
 				);
 
 				Thread.Sleep(100);

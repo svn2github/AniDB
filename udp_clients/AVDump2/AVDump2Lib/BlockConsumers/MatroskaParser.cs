@@ -29,81 +29,81 @@ using System.Threading;
 using System.Diagnostics;
 
 namespace AVDump2Lib.BlockConsumers {
-	public class MatroskaParser : BlockConsumerBase {
-		private FileSource dataSrc;
-		private EBMLReader reader;
-		private XmlDocument xmlDoc;
+	//public class MatroskaParser : BlockConsumerBase {
+	//    private FileSource dataSrc;
+	//    private EBMLReader reader;
+	//    private XmlDocument xmlDoc;
 
-		public MatroskaParser(string name) : base(name) { xmlDoc = new XmlDocument(); }
+	//    public MatroskaParser(string name) : base(name) { xmlDoc = new XmlDocument(); }
 
-		protected override void DoWork() {
-			dataSrc = new FileSource(b, consumerId);
-			reader = new EBMLReader(dataSrc, new DocTypeEBML(new IDocTypeExtension[] { new DocTypeMatroskaV2() }));
+	//    protected override void DoWork() {
+	//        dataSrc = new FileSource(b, consumerId);
+	//        reader = new EBMLReader(dataSrc, new DocTypeEBML(new DocTypeMatroskaV2()));
 
-			xmlDoc.AppendChild(xmlDoc.CreateElement("AVD2Entry".ToLower()));
-		}
+	//        xmlDoc.AppendChild(xmlDoc.CreateElement("AVD2Entry".ToLower()));
+	//    }
 
-		/*public MatroskaParser(string name) : base(name) { xmlDoc = new XmlDocument(); }
+	//    /*public MatroskaParser(string name) : base(name) { xmlDoc = new XmlDocument(); }
 
-		protected override void DoWork() {
-			dataSrc = new FileSource(b, consumerId);
-			reader = new EBMLReader(dataSrc, new DocTypeEBML(new IDocTypeExtension[] { new DocTypeMatroskaV2() }));
+	//    protected override void DoWork() {
+	//        dataSrc = new FileSource(b, consumerId);
+	//        reader = new EBMLReader(dataSrc, new DocTypeEBML(new IDocTypeExtension[] { new DocTypeMatroskaV2() }));
 
-			xmlDoc.AppendChild(xmlDoc.CreateElement("Ebml"));
-			Recurse(xmlDoc.FirstChild);
-		}
+	//        xmlDoc.AppendChild(xmlDoc.CreateElement("Ebml"));
+	//        Recurse(xmlDoc.FirstChild);
+	//    }
 
-		private void Recurse(XmlNode node) {
-			ElementInfo elementInfo;
+	//    private void Recurse(XmlNode node) {
+	//        ElementInfo elementInfo;
 
-			XmlNode subNode;
-			while((elementInfo = reader.NextElementInfo()) != null) {
-				#region Xml Node creation
-				subNode = xmlDoc.CreateElement(elementInfo.ElementType.Name);
-				subNode.Attributes.Append(xmlDoc.CreateAttribute("Id")).Value = Convert.ToString(elementInfo.ElementType.Id, 16);
-				subNode.Attributes.Append(xmlDoc.CreateAttribute("Pos")).Value = Convert.ToString(elementInfo.Position, 16);
-				subNode.Attributes.Append(xmlDoc.CreateAttribute("Length")).Value = elementInfo.Length.ToString();
-				subNode.Attributes.Append(xmlDoc.CreateAttribute("Type")).Value = elementInfo.ElementType.Type.ToString();
-				#endregion
+	//        XmlNode subNode;
+	//        while((elementInfo = reader.NextElementInfo()) != null) {
+	//            #region Xml Node creation
+	//            subNode = xmlDoc.CreateElement(elementInfo.ElementType.Name);
+	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Id")).Value = Convert.ToString(elementInfo.ElementType.Id, 16);
+	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Pos")).Value = Convert.ToString(elementInfo.Position, 16);
+	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Length")).Value = elementInfo.Length.ToString();
+	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Type")).Value = elementInfo.ElementType.Type.ToString();
+	//            #endregion
 
-				if(elementInfo.ElementType.Type == ElementType.eType.Master) {
-					reader.EnterMasterElement();
-					Recurse(subNode);
-					reader.LeaveMasterElement();
+	//            if(elementInfo.ElementType.Type == ElementType.eType.Master) {
+	//                reader.EnterMasterElement();
+	//                Recurse(subNode);
+	//                reader.LeaveMasterElement();
 
-				} else {
-					if(elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Block || elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.SimpleBlock) {
-						#region Matroska Block
-						MatroskaBlock matroskaBlock = (MatroskaBlock)reader.RetrieveValue();
+	//            } else {
+	//                if(elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Block || elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.SimpleBlock) {
+	//                    #region Matroska Block
+	//                    MatroskaBlock matroskaBlock = (MatroskaBlock)reader.RetrieveValue();
 
-						subNode.InnerText = "TN(" + matroskaBlock.TrackNumber + ")";
+	//                    subNode.InnerText = "TN(" + matroskaBlock.TrackNumber + ")";
 
-						if(matroskaBlock.Flags != 0) {
-							MatroskaBlock.BlockFlag f = matroskaBlock.Flags;
-							subNode.InnerText += " Flags(" + ((f & MatroskaBlock.BlockFlag.Discardable) != 0 ? "D" : "") +
-															 ((f & MatroskaBlock.BlockFlag.Invisible) != 0 ? "I" : "") +
-															 ((f & MatroskaBlock.BlockFlag.Keyframe) != 0 ? "K" : "");
+	//                    if(matroskaBlock.Flags != 0) {
+	//                        MatroskaBlock.BlockFlag f = matroskaBlock.Flags;
+	//                        subNode.InnerText += " Flags(" + ((f & MatroskaBlock.BlockFlag.Discardable) != 0 ? "D" : "") +
+	//                                                         ((f & MatroskaBlock.BlockFlag.Invisible) != 0 ? "I" : "") +
+	//                                                         ((f & MatroskaBlock.BlockFlag.Keyframe) != 0 ? "K" : "");
 
-							MatroskaBlock.LaceType l = matroskaBlock.LacingType;
-							subNode.InnerText += (l == MatroskaBlock.LaceType.Ebml ? "E" : (l == MatroskaBlock.LaceType.Fixed ? "F" : (l == MatroskaBlock.LaceType.Xiph ? "X" : ""))) + ")";
+	//                        MatroskaBlock.LaceType l = matroskaBlock.LacingType;
+	//                        subNode.InnerText += (l == MatroskaBlock.LaceType.Ebml ? "E" : (l == MatroskaBlock.LaceType.Fixed ? "F" : (l == MatroskaBlock.LaceType.Xiph ? "X" : ""))) + ")";
 
 
-							if(l != MatroskaBlock.LaceType.None) subNode.InnerText += " FC(" + matroskaBlock.FrameCount + ")";
-						}
-						subNode.InnerText += " DL(" + matroskaBlock.DataLength + ")";
-						#endregion
+	//                        if(l != MatroskaBlock.LaceType.None) subNode.InnerText += " FC(" + matroskaBlock.FrameCount + ")";
+	//                    }
+	//                    subNode.InnerText += " DL(" + matroskaBlock.DataLength + ")";
+	//                    #endregion
 
-					} else if(elementInfo.ElementType.Type != ElementType.eType.Binary) {
-						object value = reader.RetrieveValue();
-						subNode.InnerText = value.ToString();
-					}
-				}
-				node.AppendChild(subNode);
-				ProcessedBytes = dataSrc.Position;
-			}
-		}*/
+	//                } else if(elementInfo.ElementType.Type != ElementType.eType.Binary) {
+	//                    object value = reader.RetrieveValue();
+	//                    subNode.InnerText = value.ToString();
+	//                }
+	//            }
+	//            node.AppendChild(subNode);
+	//            ProcessedBytes = dataSrc.Position;
+	//        }
+	//    }*/
 
-	}
+	//}
 
 	public class MatroskaFileInfo : BlockConsumerBase {
 		private FileSource dataSrc;
@@ -117,7 +117,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 		protected override void DoWork() {
 			dataSrc = new FileSource(b, consumerId);
-			reader = new EBMLReader(dataSrc, new DocTypeEBML(new IDocTypeExtension[] { new DocTypeMatroskaV2() }));
+			reader = new EBMLReader(dataSrc, new DocTypeEBML(new DocTypeMatroskaV2()));
 
 			FileSize = dataSrc.Length;
 
@@ -220,7 +220,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.Cluster:
 					Cluster.Read(reader); break;
 				case DocTypeMatroskaV2.eId.Tracks:
-					Tracks = Section.CreateRead(new TracksSection(), reader); break;
+					Tracks = Section.CreateRead(new TracksSection(), reader); Cluster.SetTrackCount(Tracks.Items.Count); break;
 				case DocTypeMatroskaV2.eId.Info:
 					SegmentInfo = Section.CreateRead(new SegmentInfoSection(), reader); break;
 				case DocTypeMatroskaV2.eId.Chapters:
@@ -327,17 +327,22 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 	}
+
 	public class ClusterSection : Section {
 		public List<Track> Tracks { get; private set; }
 
-		public ClusterSection() { Tracks = new List<Track>(); }
+		public ClusterSection() { }
+
+		public void SetTrackCount(int count) {
+			Tracks = new List<Track>();
+			for(int i = 0;i < count;i++) Tracks.Add(new Track(i));
+		}
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.SimpleBlock:
 				case DocTypeMatroskaV2.eId.Block:
 					MatroskaBlock matroskaBlock = (MatroskaBlock)reader.RetrieveValue();
-					if(matroskaBlock.TrackNumber > Tracks.Count) for(int i = Tracks.Count;i < matroskaBlock.TrackNumber;i++) Tracks.Add(new Track(i));
 					Tracks[matroskaBlock.TrackNumber - 1].ProcessBlock(matroskaBlock);
 					break;
 
@@ -347,56 +352,87 @@ namespace AVDump2Lib.BlockConsumers {
 					Read(reader); break;
 				case DocTypeMatroskaV2.eId.Timecode:
 					long timeCode = (long)(ulong)reader.RetrieveValue();
-					foreach(var track in Tracks) track.EndOfCluster(timeCode);
+					foreach(var track in Tracks) track.BeginOfCluster(timeCode);
 					break;
 
-				default:
-					return false;
+				default: return false;
 			}
 			return true;
 		}
-		protected override void Validate() { }
+		protected override void Validate() { foreach(var track in Tracks) track.EndOfCluster(); }
 
 		public class Track {
 			public int Index { get; private set; }
 
 			private long trackSize;
 
-			private uint frames;
+			private uint laces;
 			private long minStamp;
 			private long highStamp;
 
 			private Collection<ClusterInfo> clusters;
 
-			private uint clusterFrames;
+			private uint clusterLaces;
 			private uint clusterSize;
-			private long clusterStamp;
+			private long timeCode;
 
 			internal Track(int index) {
 				this.Index = index;
 				clusters = new Collection<ClusterInfo>();
 			}
-			internal void EndOfCluster(long clusterStamp) {
-				clusters.Add(new ClusterInfo((ulong)this.clusterStamp, clusterFrames, clusterSize));
 
-				clusterSize = clusterFrames = 0;
-				this.clusterStamp = clusterStamp;
+			internal void EndOfCluster() { clusters.Add(new ClusterInfo((ulong)timeCode, clusterLaces, clusterSize)); }
+			internal void BeginOfCluster(long timeCode) {
+				this.timeCode = timeCode;
+				clusterSize = clusterLaces = 0;
 			}
 			internal void ProcessBlock(MatroskaBlock block) {
 				clusterSize += block.DataLength;
 				trackSize += block.DataLength;
 
-				clusterFrames += block.FrameCount;
-				frames += block.FrameCount;
+				clusterLaces += block.FrameCount;
+				laces += block.FrameCount;
 
-				if(highStamp < block.TimeCode + clusterStamp) highStamp = block.TimeCode + clusterStamp;
-				if(minStamp > block.TimeCode + clusterStamp) minStamp = block.TimeCode + clusterStamp;
+				if(highStamp < block.TimeCode + timeCode) highStamp = block.TimeCode + timeCode;
+				if(minStamp > block.TimeCode + timeCode) minStamp = block.TimeCode + timeCode;
 			}
 
-			/*public TrackInfo CalcTrackInfo() {
+			public TrackInfo CalcTrackInfo(double mult) {
+				var trackLength = TimeSpan.FromMilliseconds(highStamp * (mult / 1000000));
+				return new TrackInfo(
+					minBitrate: 0,
+					maxBitrate: 0,
+					averageBitrate: trackSize * 8 / trackLength.TotalSeconds,
+					minLaceRate: 0,
+					maxLaceRate: 0,
+					averageLaceRate: laces / trackLength.TotalSeconds,
+					trackLength: trackLength,
+					trackSize: trackSize,
+					laceCount: (int)laces
+				);
 
-			}*/
+			}
 
+
+		}
+		public class TrackInfo {
+			public double MinBitrate { get; private set; }
+			public double MaxBitrate { get; private set; }
+			public double AverageBitrate { get; private set; }
+
+			public double MinLaceRate { get; private set; }
+			public double MaxLaceRate { get; private set; }
+			public double AverageLaceRate { get; private set; }
+
+			public TimeSpan TrackLength { get; private set; }
+			public long TrackSize { get; private set; }
+			public int LaceCount { get; private set; }
+
+			public TrackInfo(double minBitrate, double maxBitrate, double averageBitrate, double minLaceRate, double maxLaceRate, double averageLaceRate, TimeSpan trackLength, long trackSize, int laceCount) {
+				MinBitrate = minBitrate; MaxBitrate = maxBitrate; AverageBitrate = averageBitrate;
+				MinLaceRate = minLaceRate; MaxLaceRate = maxLaceRate; AverageLaceRate = averageLaceRate;
+				TrackLength = trackLength; TrackSize = trackSize; LaceCount = laceCount;
+			}
 		}
 		struct ClusterInfo {
 			public ulong clusterStamp;
@@ -406,19 +442,6 @@ namespace AVDump2Lib.BlockConsumers {
 			public ClusterInfo(ulong clusterStamp, uint frames, uint size) {
 				this.frames = frames; this.size = size; this.clusterStamp = clusterStamp;
 			}
-		}
-		public class TrackInfo {
-			public double MinBitrate { get; private set; }
-			public double MaxBitrate { get; private set; }
-			public double AverageBitrate { get; private set; }
-
-			public double MinFrameRate { get; private set; }
-			public double MaxFrameRate { get; private set; }
-			public double AverageFrameRate { get; private set; }
-
-			public int TrackLength { get; private set; }
-			public long TrackSize { get; private set; }
-			public int FrameCount { get; private set; }
 		}
 	}
 	public class TracksSection : Section {
@@ -568,7 +591,7 @@ namespace AVDump2Lib.BlockConsumers {
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.PixelWidth:
-					PixelHeight = (ulong)reader.RetrieveValue(); break;
+					PixelWidth = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.PixelHeight:
 					PixelHeight = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.PixelCropBottom:
@@ -606,7 +629,7 @@ namespace AVDump2Lib.BlockConsumers {
 		private ulong? channelCount;
 
 		public double SamplingFrequency { get { return samplingFrequency.HasValue ? samplingFrequency.Value : 8000d; } } //Default: 8000
-		public ulong? OutputSamplingFrequency { get; private set; }
+		public double? OutputSamplingFrequency { get; private set; }
 		public ulong ChannelCount { get { return channelCount.HasValue ? channelCount.Value : 1; } } //Default: 1
 		public ulong? BitDepth { get; private set; }
 		#endregion
@@ -616,7 +639,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.SamplingFrequency:
 					samplingFrequency = (double)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.OutputSamplingFrequency:
-					OutputSamplingFrequency = (ulong)reader.RetrieveValue(); break;
+					OutputSamplingFrequency = (double)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.Channels:
 					channelCount = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.BitDepth:
@@ -1077,6 +1100,7 @@ namespace AVDump2Lib.BlockConsumers {
 			ElementInfo elementInfo;
 			while((elementInfo = reader.NextElementInfo()) != null) {
 				if(!ProcessElement(reader, elementInfo) && !IsGlobalElement(elementInfo)) {
+					//if(elementInfo.ElementType.Type != ElementType.eType.Master) reader.RetrieveValue();
 					Debug.Print("Unprocessed Item: " + reader.ParentElements.Aggregate<ElementInfo, string>("File", (acc, item) => { return acc + "." + item.ElementType.Name; }) + "." + elementInfo.ElementType.Name);
 				}
 			}

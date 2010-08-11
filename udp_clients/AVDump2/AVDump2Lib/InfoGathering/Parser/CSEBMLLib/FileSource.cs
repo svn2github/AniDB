@@ -25,81 +25,113 @@ using System.Threading;
 using System.Diagnostics;
 
 namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
-	public class FileSource : IEBMLDataSource {
+	public class FileSource : IEBMLDataSource, IDisposable {
 		private Object syncRoot = new object();
 
-		private Int64 localOffset;
+		//private Int64 localOffset;
 		private Int64 localStartPosition;
-		private bool advanced;
-		private int consumerId;
 
 		public IRefillBuffer<byte[]> buffer;
+		private int consumerId;
 
 		public FileSource(IRefillBuffer<byte[]> buffer, int consumerId) {
 			this.buffer = buffer;
 			this.consumerId = consumerId;
 
 			dataInfo = new DataInfo() {
-				GetBlock = () => {
+				GetBlock = () => {	
 					while(!buffer.CanRead(consumerId)) Thread.Sleep(20);
 					return buffer.GetBlock(consumerId);
 				},
 				Advance = () => {
 					while(!buffer.CanRead(consumerId)) Thread.Sleep(20);
 					localStartPosition += buffer.GetBlock(consumerId).Length;
+					dataInfo.Offset = 0;
 					buffer.Advance(consumerId);
-					advanced = true;
 				}
 			};
 		}
 
 		public bool IsStream { get { return true; } }
 
-		public long Length { get { return ((ByteStreamToBlock)buffer.BlockSource).Source.Length; } }
+		public Int64 Length { get { return ((ByteStreamToBlock)buffer.BlockSource).Source.Length; } }
 
-		public long Position { get { return localStartPosition + localOffset; } set { throw new NotSupportedException(); } }
+		public long Position {
+			get { return localStartPosition + dataInfo.Offset; }
+			set { throw new NotSupportedException(); }
+		}
 
-		public void Skip(long bytes) {
+		public void Skip(Int64 bytes) {
+			if(bytes == 0) return;
 			lock(syncRoot) {
-				Int64 bytesSkipped = Math.Min(buffer.GetBlock(consumerId).Length - localOffset, bytes);
-				localOffset += bytesSkipped;
+				Int64 bytesSkipped = Math.Min(buffer.GetBlock(consumerId).Length - dataInfo.Offset, bytes);
+				dataInfo.Offset += bytesSkipped;
 				bytes -= bytesSkipped;
 
-				byte[] block;
+
+				byte[] block = buffer.GetBlock(consumerId);
+				if(dataInfo.Offset == block.Length) dataInfo.Advance();
 				while(bytes != 0) {
-					block = buffer.GetBlock(consumerId);
-					if(bytes > (block.Length - localOffset)) {
-						bytes -= block.Length - localOffset;
+					if(bytes > (block.Length - dataInfo.Offset)) {
+						bytes -= block.Length - dataInfo.Offset;
 						localStartPosition += block.Length;
-						localOffset = 0;
+						dataInfo.Offset = 0;
 
 						while(!buffer.CanRead(consumerId)) Thread.Sleep(20);
 						buffer.Advance(consumerId);
 
 					} else {
-						localOffset += bytes;
+						dataInfo.Offset += bytes;
 						bytes = 0;
 					}
+					block = buffer.GetBlock(consumerId);
 				}
 			}
 		}
 
+		//public void Skip(Int64 bytes) {
+		//    if(bytes == 0) return;
+		//    lock(syncRoot) {
+		//        Int64 bytesSkipped = Math.Min(buffer.GetBlock(consumerId).Length - dataInfo.Offset, bytes);
+		//        dataInfo.Offset += bytesSkipped;
+		//        bytes -= bytesSkipped;
+
+		//        if(dataInfo.Offset == buffer.GetBlock(consumerId).Length) dataInfo.Advance();
+
+		//        byte[] block;
+		//        while(bytes != 0) {
+		//            block = buffer.GetBlock(consumerId);
+		//            if(bytes > (block.Length - dataInfo.Offset)) {
+		//                bytes -= block.Length - dataInfo.Offset;
+		//                localStartPosition += block.Length;
+		//                dataInfo.Offset = 0;
+
+		//                while(!buffer.CanRead(consumerId)) Thread.Sleep(20);
+		//                buffer.Advance(consumerId);
+
+		//            } else {
+		//                dataInfo.Offset += bytes;
+		//                bytes = 0;
+		//            }
+		//        }
+		//    }
+		//}
+
+
+
 		private DataInfo dataInfo;
-		public object ProcessData(long length, Func<DataInfo, long> dataProcessFunc) {
-			dataInfo.Offset = localOffset;
-			dataInfo.Length = length;
-			dataInfo.Value = null;
-
-			long offset;
-			lock(syncRoot) offset = dataProcessFunc(dataInfo);
-			if(advanced) {
-				localOffset = offset;
-				advanced = false;
-			} else {
-				localOffset += offset;
+		public T ProcessData<T>(Func<DataInfo, T> dataProcessFunc) {
+			T value;
+			lock(syncRoot) {
+				value = dataProcessFunc(dataInfo);
+				if(dataInfo.Offset == buffer.GetBlock(consumerId).Length) dataInfo.Advance();
 			}
-
-			return dataInfo.Value;
+			return value;
 		}
+
+		public bool EOF() { throw new NotImplementedException(); }
+
+		public void Dispose() { buffer.Dispose(); }
 	}
+
 }
