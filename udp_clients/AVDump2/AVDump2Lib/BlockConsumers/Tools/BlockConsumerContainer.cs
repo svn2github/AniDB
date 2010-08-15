@@ -25,19 +25,25 @@ using AVDump2Lib.BlockBuffer;
 namespace AVDump2Lib.BlockConsumers.Tools {
 	public class BlockConsumerContainer {
 		private List<IBlockConsumer> items;
+		private ICircularBuffer<byte[]> circb;
 		private IRefillBuffer<byte[]> b;
+		private ByteStreamToBlock blockSource;
 
-		public BlockConsumerContainer() { items = new List<IBlockConsumer>(); }
+		public BlockConsumerContainer(int blockCount, int blockSize) {
+			items = new List<IBlockConsumer>();
+			blockSource = new ByteStreamToBlock(blockSize);
+			circb = new CircularBuffer<byte[]>((int)Math.Log(blockCount, 2));
+			b = new RefillBuffer<byte[]>(circb, blockSource);
+		}
 
 		public int AddBlockConsumer(IBlockConsumer blockConsumer) {
 			items.Add(blockConsumer);
 			return items.Count - 1;
 		}
 
-		public Progress Start(int blockCount, Stream source, int blockSize) {
-			ByteStreamToBlock blockSource = new ByteStreamToBlock(source, blockSize);
-			ICircularBuffer<byte[]> circb = new CircularBuffer<byte[]>(items.Count, (int)Math.Log(blockCount, 2));
-			b = new RefillBuffer<byte[]>(circb, blockSource);
+		public Progress Start(Stream source) {
+			blockSource.Initialize(source);
+			b.Initialize(items.Count);
 			b.Start();
 
 			for(int i = 0;i < items.Count;i++) items[i].Start(b, i);
@@ -48,6 +54,8 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 			for(int i = 0;i < items.Count;i++) items[i].Join();
 			return items;
 		}
+
+		public void Reset() { items.Clear(); }
 
 		public bool HasFinished {
 			get {

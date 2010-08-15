@@ -69,6 +69,8 @@
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -115,6 +117,7 @@
     <Compile Include="InfoGathering\Parser\MediaInfoLib\Enums.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfo.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfoList.cs" />
+    <Compile Include="Misc\CSEBMLSpeedTest.cs" />
     <Compile Include="Misc\ExceptionXElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InfoGathering\Parser\SubtitleInfo\IDX.cs" />

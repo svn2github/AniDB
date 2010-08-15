@@ -34,6 +34,8 @@ namespace AVDump2Lib.BlockConsumers {
 
 		public HashAlgorithm HashObj { get { if(HasFinished) return h; else throw new Exception("Hashing has not finished"); } }
 		protected override void DoWork() {
+
+
 			Consumer<byte[]> consumer = (byte[] block) => {
 				h.TransformBlock(block, 0, block.Length, null, 0);
 				ProcessedBytes += block.Length;

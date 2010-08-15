@@ -15,15 +15,12 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.BlockConsumers.Tools {
 	public abstract class BlockConsumerBase : IBlockConsumer {
-		private Thread t;
+		protected Thread t;
 		protected IRefillBuffer<byte[]> b;
 		protected int consumerId;
 
@@ -48,12 +45,30 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 			ProcessedBytes = 0;
 			HasFinished = false;
 
-			DoWork();
+			try {
+				DoWork();
+			} catch(Exception ex) {
+				Error = ex;
+			} finally {
+				DummyRead();
+				HasFinished = true;
+			}
 
-			HasFinished = true;
 			if(ProcessingDone != null) ProcessingDone(this, new EventArgs());
+			
 		}
 
 		protected abstract void DoWork();
+
+		protected void DummyRead() {
+			while(!b.EndOfStream(consumerId)) {
+				while(!b.CanRead(consumerId)) Thread.Sleep(20);
+				b.Advance(consumerId);
+			}
+		}
+
+		public Exception Error { get; private set; }
 	}
+
+
 }

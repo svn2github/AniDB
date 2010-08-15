@@ -44,7 +44,7 @@ namespace AVDump2Lib.Misc {
 					(
 						new XElement("StackTrace",
 							from frame in exception.StackTrace.Split('\n')
-							let prettierFrame = frame.Substring(6).Trim()
+							let prettierFrame = frame.Trim()
 							select new XElement("Frame", prettierFrame))
 					);
 				}

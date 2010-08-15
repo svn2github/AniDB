@@ -27,84 +27,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.IO;
+using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.BlockConsumers {
-	//public class MatroskaParser : BlockConsumerBase {
-	//    private FileSource dataSrc;
-	//    private EBMLReader reader;
-	//    private XmlDocument xmlDoc;
-
-	//    public MatroskaParser(string name) : base(name) { xmlDoc = new XmlDocument(); }
-
-	//    protected override void DoWork() {
-	//        dataSrc = new FileSource(b, consumerId);
-	//        reader = new EBMLReader(dataSrc, new DocTypeEBML(new DocTypeMatroskaV2()));
-
-	//        xmlDoc.AppendChild(xmlDoc.CreateElement("AVD2Entry".ToLower()));
-	//    }
-
-	//    /*public MatroskaParser(string name) : base(name) { xmlDoc = new XmlDocument(); }
-
-	//    protected override void DoWork() {
-	//        dataSrc = new FileSource(b, consumerId);
-	//        reader = new EBMLReader(dataSrc, new DocTypeEBML(new IDocTypeExtension[] { new DocTypeMatroskaV2() }));
-
-	//        xmlDoc.AppendChild(xmlDoc.CreateElement("Ebml"));
-	//        Recurse(xmlDoc.FirstChild);
-	//    }
-
-	//    private void Recurse(XmlNode node) {
-	//        ElementInfo elementInfo;
-
-	//        XmlNode subNode;
-	//        while((elementInfo = reader.NextElementInfo()) != null) {
-	//            #region Xml Node creation
-	//            subNode = xmlDoc.CreateElement(elementInfo.ElementType.Name);
-	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Id")).Value = Convert.ToString(elementInfo.ElementType.Id, 16);
-	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Pos")).Value = Convert.ToString(elementInfo.Position, 16);
-	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Length")).Value = elementInfo.Length.ToString();
-	//            subNode.Attributes.Append(xmlDoc.CreateAttribute("Type")).Value = elementInfo.ElementType.Type.ToString();
-	//            #endregion
-
-	//            if(elementInfo.ElementType.Type == ElementType.eType.Master) {
-	//                reader.EnterMasterElement();
-	//                Recurse(subNode);
-	//                reader.LeaveMasterElement();
-
-	//            } else {
-	//                if(elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Block || elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.SimpleBlock) {
-	//                    #region Matroska Block
-	//                    MatroskaBlock matroskaBlock = (MatroskaBlock)reader.RetrieveValue();
-
-	//                    subNode.InnerText = "TN(" + matroskaBlock.TrackNumber + ")";
-
-	//                    if(matroskaBlock.Flags != 0) {
-	//                        MatroskaBlock.BlockFlag f = matroskaBlock.Flags;
-	//                        subNode.InnerText += " Flags(" + ((f & MatroskaBlock.BlockFlag.Discardable) != 0 ? "D" : "") +
-	//                                                         ((f & MatroskaBlock.BlockFlag.Invisible) != 0 ? "I" : "") +
-	//                                                         ((f & MatroskaBlock.BlockFlag.Keyframe) != 0 ? "K" : "");
-
-	//                        MatroskaBlock.LaceType l = matroskaBlock.LacingType;
-	//                        subNode.InnerText += (l == MatroskaBlock.LaceType.Ebml ? "E" : (l == MatroskaBlock.LaceType.Fixed ? "F" : (l == MatroskaBlock.LaceType.Xiph ? "X" : ""))) + ")";
-
-
-	//                        if(l != MatroskaBlock.LaceType.None) subNode.InnerText += " FC(" + matroskaBlock.FrameCount + ")";
-	//                    }
-	//                    subNode.InnerText += " DL(" + matroskaBlock.DataLength + ")";
-	//                    #endregion
-
-	//                } else if(elementInfo.ElementType.Type != ElementType.eType.Binary) {
-	//                    object value = reader.RetrieveValue();
-	//                    subNode.InnerText = value.ToString();
-	//                }
-	//            }
-	//            node.AppendChild(subNode);
-	//            ProcessedBytes = dataSrc.Position;
-	//        }
-	//    }*/
-
-	//}
-
 	public class MatroskaFileInfo : BlockConsumerBase {
 		private FileSource dataSrc;
 		private EBMLReader reader;
@@ -122,6 +49,7 @@ namespace AVDump2Lib.BlockConsumers {
 			FileSize = dataSrc.Length;
 
 			Thread t = new Thread(ReadBytesUpdater);
+			t.Name = "MKVParser ProgressUpdater";
 			t.Start();
 
 			Root();
@@ -145,21 +73,56 @@ namespace AVDump2Lib.BlockConsumers {
 				DummyRead();
 			}
 		}
-		private void DummyRead() {
-			while(b.EndOfStream(consumerId)) {
-				while(!b.CanRead(consumerId)) Thread.Sleep(20);
-				b.Advance(consumerId);
-			}
-		}
 		private void ReadBytesUpdater() {
+			int timerRes = 40;
+			int ttl = 10000;
+			int ticks = ttl / timerRes;
+
 			while(!HasFinished) {
-				Thread.Sleep(20);
-				ProcessedBytes = dataSrc.Position;
+				Thread.Sleep(timerRes);
+				ticks--;
+
+				if(ProcessedBytes == dataSrc.Position) {
+					if(ticks < 0) {
+						t.Abort();
+						break;
+					}
+				} else {
+					ProcessedBytes = dataSrc.Position;
+					ticks = ttl / timerRes;
+				}
 			}
 			ProcessedBytes = dataSrc.Length;
 		}
 
+		public static bool IsMatroskaFile(Stream fileStream) {
+			var blockSource = new ByteStreamToBlock(1024 * 1024); blockSource.Initialize(fileStream);
+			var circb = new CircularBuffer<byte[]>(2);
+			var buffer = new RefillBuffer<byte[]>(circb, blockSource, 1);
 
+			buffer.Start();
+
+
+			var src = new FileSource(buffer, 0);
+			var docType = new DocTypeEBML(new DocTypeMatroskaV2());
+			var reader = new EBMLReader(src, docType);
+
+
+			bool isMatroskaFile;
+			try {
+				ElementInfo elementInfo = reader.NextElementInfo();
+				if(elementInfo.ElementType.Id == (int)DocTypeEBML.eId.EBMLHeader) {
+					Section.CreateRead(new EbmlHeaderSection(), reader);
+					isMatroskaFile = true;
+				} else {
+					isMatroskaFile = false;
+				}
+			} catch(Exception) { isMatroskaFile = false; }
+
+			buffer.Stop();
+
+			return isMatroskaFile;
+		}
 	}
 	public class EbmlHeaderSection : Section {
 		#region Fields & Properties
@@ -220,7 +183,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.Cluster:
 					Cluster.Read(reader); break;
 				case DocTypeMatroskaV2.eId.Tracks:
-					Tracks = Section.CreateRead(new TracksSection(), reader); Cluster.SetTrackCount(Tracks.Items.Count); break;
+					Tracks = Section.CreateRead(new TracksSection(), reader); Cluster.AddTracks(from track in Tracks.Items select (int)track.TrackNumber.GetValueOrDefault(0)); break; //Must be set and != 0 (add warning)
 				case DocTypeMatroskaV2.eId.Info:
 					SegmentInfo = Section.CreateRead(new SegmentInfoSection(), reader); break;
 				case DocTypeMatroskaV2.eId.Chapters:
@@ -329,21 +292,23 @@ namespace AVDump2Lib.BlockConsumers {
 	}
 
 	public class ClusterSection : Section {
-		public List<Track> Tracks { get; private set; }
+		public Dictionary<int, Track> Tracks { get; private set; }
 
-		public ClusterSection() { }
+		public ClusterSection() { Tracks = new Dictionary<int, Track>(); }
 
-		public void SetTrackCount(int count) {
-			Tracks = new List<Track>();
-			for(int i = 0;i < count;i++) Tracks.Add(new Track(i));
-		}
+		public void AddTracks(IEnumerable<int> trackNumbers) { foreach(var trackNumber in trackNumbers) Tracks.Add(trackNumber, new Track(trackNumber)); }
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.SimpleBlock:
 				case DocTypeMatroskaV2.eId.Block:
 					MatroskaBlock matroskaBlock = (MatroskaBlock)reader.RetrieveValue();
-					Tracks[matroskaBlock.TrackNumber - 1].ProcessBlock(matroskaBlock);
+					Track track;
+					if(Tracks.TryGetValue(matroskaBlock.TrackNumber, out track)) {
+						Tracks[matroskaBlock.TrackNumber].ProcessBlock(matroskaBlock);
+					} else {
+						throw new Exception("Invalid track index (" + matroskaBlock.TrackNumber + ") in matroska block");
+					}
 					break;
 
 				case DocTypeMatroskaV2.eId.BlockDuration: break;
@@ -352,17 +317,17 @@ namespace AVDump2Lib.BlockConsumers {
 					Read(reader); break;
 				case DocTypeMatroskaV2.eId.Timecode:
 					long timeCode = (long)(ulong)reader.RetrieveValue();
-					foreach(var track in Tracks) track.BeginOfCluster(timeCode);
+					foreach(var t in Tracks.Values) t.BeginOfCluster(timeCode);
 					break;
 
 				default: return false;
 			}
 			return true;
 		}
-		protected override void Validate() { foreach(var track in Tracks) track.EndOfCluster(); }
+		protected override void Validate() { foreach(var track in Tracks.Values) track.EndOfCluster(); }
 
 		public class Track {
-			public int Index { get; private set; }
+			public int TrackNumber { get; private set; }
 
 			private long trackSize;
 
@@ -376,8 +341,8 @@ namespace AVDump2Lib.BlockConsumers {
 			private uint clusterSize;
 			private long timeCode;
 
-			internal Track(int index) {
-				this.Index = index;
+			internal Track(int trackNumber) {
+				this.TrackNumber = trackNumber;
 				clusters = new Collection<ClusterInfo>();
 			}
 
@@ -495,7 +460,7 @@ namespace AVDump2Lib.BlockConsumers {
 		public string Name { get; private set; }
 		public string Language { get { return language != null ? language : "eng"; } } //Default: 'eng'
 		public string CodecId { get; private set; } //Mandatory
-		//CodecPrivate
+		public byte[] CodecPrivate { get; private set; }
 		public string CodecName { get; private set; }
 		public string AttachmentLink { get; private set; }
 
@@ -503,6 +468,93 @@ namespace AVDump2Lib.BlockConsumers {
 		public AudioSection Audio { get; private set; }
 		public ContentEncodingsSection ContentEncodings { get; private set; }
 		#endregion
+
+		public BitmapInfoHeader? GetBitMapInfoHeader() {
+			if(!CodecId.Equals("V_MS/VFW/FOURCC")) return null;
+			byte[] b = new byte[40];
+			Buffer.BlockCopy(CodecPrivate, 0, b, 0, 40);
+
+			return BitmapInfoHeader.Create(b);
+		}
+		[StructLayout(LayoutKind.Sequential)]
+		public struct BitmapInfoHeader {
+			public uint biSize;
+			public int biWidth;
+			public int biHeight;
+			public ushort biPlanes;
+			public ushort biBitCount;
+			public uint biCompression;
+			public uint biSizeImage;
+			public int biXPelsPerMeter;
+			public int biYPelsPerMeter;
+			public uint biClrUsed;
+			public uint biClrImportant;
+
+			public string FourCC {
+				get {
+					var bytes = BitConverter.GetBytes(biCompression);
+					string fourCC = "";
+					foreach(var b in bytes) fourCC += (char)b;
+					return fourCC;
+				}
+			}
+
+			public static BitmapInfoHeader Create(byte[] b) {
+				GCHandle hDataIn = GCHandle.Alloc(b, GCHandleType.Pinned);
+				BitmapInfoHeader bitmapInfoHeader = (BitmapInfoHeader)Marshal.PtrToStructure(hDataIn.AddrOfPinnedObject(), typeof(BitmapInfoHeader));
+				hDataIn.Free();
+				return bitmapInfoHeader;
+			}
+		}
+
+		public VMpeg4IsoAvcHeader GetVMpeg4IsoAvcHeader() {
+			if(!CodecId.Equals("V_MPEG4/ISO/AVC")) return null;
+			return VMpeg4IsoAvcHeader.Create(CodecPrivate);
+		}
+		public class VMpeg4IsoAvcHeader {
+			public byte ReservedA { get; private set; }
+			public byte Profile { get; private set; }
+			public byte ReservedB { get; private set; }
+			public byte Level { get; private set; }
+			public byte ReservedC { get; private set; }
+			public byte NALULengthSizeMinus1 { get; private set; }
+			public byte ReservedD { get; private set; }
+			public IEnumerable<string> SequenceParameterSets { get; private set; }
+			public IEnumerable<string> PictureParameterSets { get; private set; }
+
+			public static VMpeg4IsoAvcHeader Create(byte[] b) {
+				var header = new VMpeg4IsoAvcHeader();
+
+				header.ReservedA = b[0];
+				header.Profile = b[1];
+				header.ReservedB = b[2];
+				header.Level = b[3];
+				header.ReservedC = (byte)((b[4] & 0xFC) >> 2);
+				header.NALULengthSizeMinus1 = (byte)(b[4] & 0x3);
+				header.ReservedB = (byte)((b[5] & 0xE0) >> 5);
+
+				int pos = 6;
+				byte count = (byte)(b[5] & 0x1F);
+				header.SequenceParameterSets = GetSet(b, count, ref pos);
+				count = b[pos++];
+				header.PictureParameterSets = GetSet(b, count, ref pos);
+
+				return header;
+			}
+			private static IEnumerable<string> GetSet(byte[] b, byte count, ref int pos) {
+				Int16 size;
+
+				var sets = new Collection<string>();
+				for(int i = 0;i < count;i++) {
+					size = (Int16)((b[pos] << 8) + b[pos + 1]); pos += 2;
+
+					sets.Add(System.Text.Encoding.ASCII.GetString(b, pos, size));
+					pos += size;
+				}
+
+				return sets;
+			}
+		}
 
 		public TrackEntrySection() { TrackOverlay = new EbmlList<ulong>(); }
 
@@ -534,6 +586,8 @@ namespace AVDump2Lib.BlockConsumers {
 					CodecId = (string)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.CodecName:
 					CodecName = (string)reader.RetrieveValue(); break;
+				case DocTypeMatroskaV2.eId.CodecPrivate:
+					CodecPrivate = (byte[])reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.AttachmentLink:
 					AttachmentLink = (string)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.FlagEnabled:
@@ -607,7 +661,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.DisplayHeight:
 					displayHeight = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.DisplayUnit:
-					displayUnit = (Unit)reader.RetrieveValue(); break;
+					displayUnit = (Unit)(ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.FrameRate:
 					FrameRate = (double)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.FlagInterlaced:
@@ -1098,14 +1152,17 @@ namespace AVDump2Lib.BlockConsumers {
 			reader.EnterMasterElement();
 
 			ElementInfo elementInfo;
-			while((elementInfo = reader.NextElementInfo()) != null) {
-				if(!ProcessElement(reader, elementInfo) && !IsGlobalElement(elementInfo)) {
-					//if(elementInfo.ElementType.Type != ElementType.eType.Master) reader.RetrieveValue();
-					Debug.Print("Unprocessed Item: " + reader.ParentElements.Aggregate<ElementInfo, string>("File", (acc, item) => { return acc + "." + item.ElementType.Name; }) + "." + elementInfo.ElementType.Name);
+			try {
+				while((elementInfo = reader.NextElementInfo()) != null) {
+					try {
+						if(!ProcessElement(reader, elementInfo) && !IsGlobalElement(elementInfo)) {
+							Debug.Print("Unprocessed Item: " + reader.ParentElements.Aggregate<ElementInfo, string>("File", (acc, item) => { return acc + "." + item.ElementType.Name; }) + "." + elementInfo.ElementType.Name);
+						}
+					} catch(Exception) { }
 				}
-			}
+				Validate();
+			} catch(Exception) { }
 
-			Validate();
 			reader.LeaveMasterElement();
 		}
 

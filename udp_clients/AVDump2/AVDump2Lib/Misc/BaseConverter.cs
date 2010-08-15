@@ -89,6 +89,18 @@ namespace AVDump2Lib.Misc {
 		public void ShiftRight(int count) { throw new Exception(); }
 	}
 	public static class BaseConverter {
+		private static readonly string base2 = "01";
+		private static readonly string base4 = "0123";
+		private static readonly string base8 = "01234567";
+		private static readonly string base10 = "0123456789";
+		private static readonly string base16 = "0123456789ABCDEF";
+		private static readonly string base32Hex = "0123456789ABCDEFGHIJKLMNOPQRSTUV";
+		private static readonly string base32Z = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+		private static readonly string base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+		private static readonly string base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		private static readonly string base62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		private static readonly string base64 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/";
+
 		public static string ToString(byte[] value, eBaseOption baseOption) {
 			string symbols = Enum2Symbols(baseOption);
 			byte[] radix = new byte[value.Length];
@@ -192,18 +204,6 @@ namespace AVDump2Lib.Misc {
 			for(count--;count >= 0;count--) value[value.Count - 1 - count] = false;
 		}
 
-
-		private static readonly string base2 = "01";
-		private static readonly string base4 = "0123";
-		private static readonly string base8 = "01234567";
-		private static readonly string base10 = "0123456789";
-		private static readonly string base16 = "0123456789ABCDEF";
-		private static readonly string base32Hex = "0123456789ABCDEFGHIJKLMNOPQRSTUV";
-		private static readonly string base32Z = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
-		private static readonly string base32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-		private static readonly string base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		private static readonly string base62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		private static readonly string base64 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/";
 
 		private static string Enum2Symbols(eBaseOption symbol) {
 			switch(symbol & ~eBaseOption.All) {
@@ -331,5 +331,4 @@ namespace AVDump2Lib.Misc {
 			return hashStr;
 		}
 	}
-
 }

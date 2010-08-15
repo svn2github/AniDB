@@ -54,9 +54,9 @@ namespace AVDump2Lib.InfoGathering {
 
 						if(hashExecute.HashObj is Ed2k) {
 							Ed2k ed2k = (Ed2k)hashExecute.HashObj;
-							if(!ed2k.BlueIsRed()) {
+							if(!ed2k.BlueIsRed) {
 								baseOption = eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse;
-								AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower() + "_alt", BaseConverter.ToString(ed2k.BlueHash, baseOption).ToLower(), null);
+								AppendLeaf(xmlDoc, node, hashExecute.Name.ToLower() + "_alt", BaseConverter.ToString(ed2k.RedHash, baseOption).ToLower(), null);
 							}
 						}
 					} else if(blockConsumer is MatroskaFileInfo) {
@@ -162,8 +162,8 @@ namespace AVDump2Lib.InfoGathering {
 			XmlDocument xmlDoc = new XmlDocument(); ;
 			Func<string, string, string, string, XmlNode> createNode = (name, value, unit, provider) => {
 				XmlNode n = xmlDoc.CreateElement(name);
-				if(!string.IsNullOrEmpty(unit)) n.Attributes.Append(xmlDoc.CreateAttribute("Unit")).Value = unit;
-				if(!string.IsNullOrEmpty(provider) && false) n.Attributes.Append(xmlDoc.CreateAttribute("Provider")).Value = provider;
+				if(!string.IsNullOrEmpty(unit)) n.Attributes.Append(xmlDoc.CreateAttribute("unit")).Value = unit;
+				if(!string.IsNullOrEmpty(provider)) n.Attributes.Append(xmlDoc.CreateAttribute("provider")).Value = provider;
 
 				n.AppendChild(xmlDoc.CreateTextNode(value));
 				return n;
@@ -231,7 +231,7 @@ namespace AVDump2Lib.InfoGathering {
 
 					if(hashExecute.HashObj is Ed2k) {
 						Ed2k ed2k = (Ed2k)hashExecute.HashObj;
-						if(!ed2k.BlueIsRed()) AppendLeaf(xmlDoc, subNode, "Ed2k_Alt", BaseConverter.ToString(ed2k.BlueHash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse), null);
+						if(!ed2k.BlueIsRed) AppendLeaf(xmlDoc, subNode, "Ed2k_Alt", BaseConverter.ToString(ed2k.RedHash, eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse), null);
 					}
 				}
 			}
@@ -301,7 +301,7 @@ namespace AVDump2Lib.InfoGathering {
 	}
 
 	public enum StreamType { General, Video, Audio, Text, Chapter, Hash }
-	public enum EntryKey { None, Index, Size, Bitrate, Date, Duration, Title, Language, CodecName, Id, FrameCount, FrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, EncodeSettings, EncodeLibrary, BitrateMode }
+	public enum EntryKey { None, Index, Size, Bitrate, Date, Duration, Title, Language, CodecName, CodecId, FourCC, Id, FrameCount, FrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, EncodeSettings, EncodeLibrary, BitrateMode }
 
 	public struct StreamTypeEntryPair {
 		public readonly StreamType Type;
@@ -342,6 +342,8 @@ namespace AVDump2Lib.InfoGathering {
 			infos.Add(new InfoEntry(new StreamTypeEntryPair(type, index, entry), value, unit, this));
 		}
 		protected void Add(EntryKey entry, string value, string unit) { Add(StreamType.General, 0, entry, value, unit); }
+		protected void Add(EntryKey entry, Func<string> value, string unit) { Add(StreamType.General, 0, entry, value, unit); }
+		protected void Add(StreamType type, int index, EntryKey entry, Func<string> value, string unit) { try { Add(type, index, entry, value(), unit); } catch(Exception) { } }
 
 		public virtual InfoEntry this[StreamType type, int index, EntryKey key] {
 			get {
@@ -361,11 +363,12 @@ namespace AVDump2Lib.InfoGathering {
 			infos = new InfoCollection();
 			MFI = mfi;
 
+			Add(EntryKey.Extension, "mkv", null);
 			Add(EntryKey.Size, MFI.ProcessedBytes.ToString(), "byte");
 			Add(EntryKey.Date, MFI.Segment.SegmentInfo.ProductionDate.HasValue ? MFI.Segment.SegmentInfo.ProductionDate.Value.ToString() : null, null);
-			Add(EntryKey.Duration, (MFI.Segment.SegmentInfo.Duration.Value * (MFI.Segment.SegmentInfo.TimecodeScale / 1000000000d)).ToString("0.000", CultureInfo.InvariantCulture), "s");
-			Add(EntryKey.WritingApp, MFI.Segment.SegmentInfo.WritingApp.ToString(), null);
-			Add(EntryKey.MuxingApp, MFI.Segment.SegmentInfo.MuxingApp.ToString(), null);
+			Add(EntryKey.Duration, MFI.Segment.SegmentInfo.Duration.HasValue ? (MFI.Segment.SegmentInfo.Duration.Value * (MFI.Segment.SegmentInfo.TimecodeScale / 1000000000d)).ToString("0.000", CultureInfo.InvariantCulture) : null, "s");
+			Add(EntryKey.WritingApp, MFI.Segment.SegmentInfo.WritingApp, null);
+			Add(EntryKey.MuxingApp, MFI.Segment.SegmentInfo.MuxingApp, null);
 
 			int[] indeces = new int[3];
 			foreach(var track in MFI.Segment.Tracks.Items) {
@@ -380,31 +383,36 @@ namespace AVDump2Lib.InfoGathering {
 		}
 
 		private void AddStreamInfo(MatroskaProvider p, TrackEntrySection trackEntry, StreamType type, int index) {
-			var trackInfo = MFI.Segment.Cluster.Tracks[(int)trackEntry.TrackNumber.Value - 1].CalcTrackInfo(
-				MFI.Segment.SegmentInfo.TimecodeScale * trackEntry.TrackTimecodeScale.GetValueOrDefault(1)
-			);
+			ClusterSection.TrackInfo trackInfo = null;
+			try {
+				trackInfo = MFI.Segment.Cluster.Tracks[(int)trackEntry.TrackNumber.Value].CalcTrackInfo(
+					MFI.Segment.SegmentInfo.TimecodeScale * trackEntry.TrackTimecodeScale.GetValueOrDefault(1)
+				);
+			} catch(Exception) { }
 
-			Add(type, index, EntryKey.Index, index.ToString(), null);
-			Add(type, index, EntryKey.Size, trackInfo.TrackSize.ToString(), "byte");
-			Add(type, index, EntryKey.Bitrate, trackInfo.AverageBitrate.ToString("0", CultureInfo.InvariantCulture), "bit/s");
-			Add(type, index, EntryKey.Duration, trackInfo.TrackLength.TotalSeconds.ToString(CultureInfo.InvariantCulture), "s");
-			Add(type, index, EntryKey.Title, trackEntry.Name, null);
-			Add(type, index, EntryKey.Language, trackEntry.Language, null);
-			Add(type, index, EntryKey.CodecName, trackEntry.CodecId, null);
-			Add(type, index, EntryKey.Id, trackEntry.TrackUId.ToString(), null);
+			Add(type, index, EntryKey.Index, () => index.ToString(), null);
+			Add(type, index, EntryKey.Size, () => trackInfo.TrackSize.ToString(), "byte");
+			Add(type, index, EntryKey.Bitrate, () => trackInfo.AverageBitrate.ToString("0", CultureInfo.InvariantCulture), "bit/s");
+			Add(type, index, EntryKey.Duration, () => trackInfo.TrackLength.TotalSeconds.ToString(CultureInfo.InvariantCulture), "s");
+			Add(type, index, EntryKey.Title, () => trackEntry.Name, null);
+			Add(type, index, EntryKey.Language, () => trackEntry.Language, null);
+			Add(type, index, EntryKey.CodecName, () => trackEntry.CodecName, null);
+			Add(type, index, EntryKey.CodecId, () => trackEntry.CodecId, null);
+			Add(type, index, EntryKey.FourCC, () => string.Equals(trackEntry.CodecId, "V_MS/VFW/FOURCC") && trackEntry.GetBitMapInfoHeader().HasValue ? trackEntry.GetBitMapInfoHeader().Value.FourCC : null, null);
+			Add(type, index, EntryKey.Id, () => trackEntry.TrackUId.ToString(), null);
 
 			switch(type) {
 				case StreamType.Video:
-					Add(type, index, EntryKey.FrameCount, trackInfo.LaceCount.ToString(), null);
-					Add(type, index, EntryKey.FrameRate, (trackEntry.DefaultDuration.HasValue ? 1000000000d / trackEntry.DefaultDuration.Value : trackInfo.AverageLaceRate).ToString("0.000", CultureInfo.InvariantCulture), "fps");
-					Add(type, index, EntryKey.Width, trackEntry.Video.PixelWidth.ToString(), "px");
-					Add(type, index, EntryKey.Height, trackEntry.Video.PixelHeight.ToString(), "px");
-					Add(type, index, EntryKey.DAR, (trackEntry.Video.DisplayWidth / (double)trackEntry.Video.DisplayHeight).ToString("0.000", CultureInfo.InvariantCulture), null);
+					Add(type, index, EntryKey.FrameCount, () => trackInfo.LaceCount.ToString(), null);
+					Add(type, index, EntryKey.FrameRate, () => (trackEntry.DefaultDuration.HasValue ? 1000000000d / trackEntry.DefaultDuration.Value : trackInfo.AverageLaceRate).ToString("0.000", CultureInfo.InvariantCulture), "fps");
+					Add(type, index, EntryKey.Width, () => trackEntry.Video.PixelWidth.ToString(), "px");
+					Add(type, index, EntryKey.Height, () => trackEntry.Video.PixelHeight.ToString(), "px");
+					Add(type, index, EntryKey.DAR, () => (trackEntry.Video.DisplayWidth / (double)trackEntry.Video.DisplayHeight).ToString("0.000", CultureInfo.InvariantCulture), null);
 					break;
 				case StreamType.Audio:
-					Add(type, index, EntryKey.SampleCount, (trackInfo.TrackLength.TotalSeconds * trackEntry.Audio.SamplingFrequency).ToString(), null);
-					Add(type, index, EntryKey.SamplingRate, trackEntry.Audio.SamplingFrequency.ToString(CultureInfo.InvariantCulture), null);
-					Add(type, index, EntryKey.ChannelCount, trackEntry.Audio.ChannelCount.ToString(), null);
+					Add(type, index, EntryKey.SampleCount, () => (trackInfo.TrackLength.TotalSeconds * trackEntry.Audio.SamplingFrequency).ToString(), null);
+					Add(type, index, EntryKey.SamplingRate, () => trackEntry.Audio.SamplingFrequency.ToString(CultureInfo.InvariantCulture), null);
+					Add(type, index, EntryKey.ChannelCount, () => trackEntry.Audio.ChannelCount.ToString(), null);
 					break;
 				case StreamType.Text: break;
 			}
@@ -419,12 +427,15 @@ namespace AVDump2Lib.InfoGathering {
 		public MediaInfoProvider(string filePath) {
 			infos = new InfoCollection();
 
+			Func<string, string, string> nonEmpty = (a, b) => { return string.IsNullOrEmpty(a) ? b : a; };
+
 			MIL = new MediaInfo();
 			MIL.Option("Internet", "No");
 			MIL.Open(filePath);
 
-			Add(EntryKey.Size, Get("Size"), "byte");
+			Add(EntryKey.Size, Get("FileSize"), "byte");
 			Add(EntryKey.Duration, Get("Duration", (str) => { return (double.Parse(str, CultureInfo.InvariantCulture) / 1000).ToString("0.000", CultureInfo.InvariantCulture); }), "s");
+			//Add(EntryKey.Extension, Get("Format/Extensions"), null);
 			Add(EntryKey.Extension, Get("FileExtension"), null);
 			Add(EntryKey.WritingApp, Get("Encoded_Application"), null);
 			Add(EntryKey.MuxingApp, Get("Encoded_Library"), null);
@@ -443,7 +454,7 @@ namespace AVDump2Lib.InfoGathering {
 					Add(st, i, EntryKey.Language, Get(streamKind, i, "Language"), null);
 					Add(st, i, EntryKey.Duration, Get(streamKind, i, "Duration", (str) => { return (double.Parse(str, CultureInfo.InvariantCulture) / 1000).ToString("0.000", CultureInfo.InvariantCulture); }), "s");
 					Add(st, i, EntryKey.Bitrate, Get(streamKind, i, "BitRate"), null);
-					Add(st, i, EntryKey.CodecName, Get(streamKind, i, "CodecID"), null);
+					Add(st, i, EntryKey.FourCC, nonEmpty(Get(streamKind, i, "Codec/CC"), Get(streamKind, i, "CodecID")), null);
 					Add(st, i, EntryKey.EncodeSettings, Get(streamKind, i, "Encoded_Library_Settings"), null);
 					Add(st, i, EntryKey.EncodeLibrary, Get(streamKind, i, "Encoded_Library"), null);
 					Add(st, i, EntryKey.BitrateMode, Get(streamKind, i, "BitRate_Mode"), null);
@@ -484,14 +495,14 @@ namespace AVDump2Lib.InfoGathering {
 
 			int i = 0;
 			foreach(var hashCalculator in hashCalculators) {
-				eBaseOption baseOption = (hashCalculator.HashObj is TreeHash || hashCalculator.HashObj is TigerThex ? eBaseOption.Base32 : eBaseOption.Heximal) | eBaseOption.Pad | eBaseOption.Reverse;
+				eBaseOption baseOption = ((hashCalculator.HashObj is TreeHash || hashCalculator.HashObj is TigerThex) ? eBaseOption.Base32 : eBaseOption.Heximal) | eBaseOption.Pad | eBaseOption.Reverse;
 				Add(StreamType.Hash, i++, EntryKey.None, BaseConverter.ToString(hashCalculator.HashObj.Hash, baseOption).ToLower(), hashCalculator.Name.ToLower());
 
 				if(hashCalculator.HashObj is Ed2k) {
 					Ed2k ed2k = (Ed2k)hashCalculator.HashObj;
-					if(!ed2k.BlueIsRed()) {
+					if(!ed2k.BlueIsRed) {
 						baseOption = eBaseOption.Heximal | eBaseOption.Pad | eBaseOption.Reverse;
-						Add(StreamType.Hash, i++, EntryKey.None, BaseConverter.ToString(ed2k.BlueHash, baseOption).ToLower(), hashCalculator.Name.ToLower() + "_alt");
+						Add(StreamType.Hash, i++, EntryKey.None, BaseConverter.ToString(ed2k.RedHash, baseOption).ToLower(), hashCalculator.Name.ToLower() + "_alt");
 					}
 				}
 			}

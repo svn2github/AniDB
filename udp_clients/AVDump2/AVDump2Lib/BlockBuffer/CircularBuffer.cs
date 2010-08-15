@@ -22,7 +22,10 @@ using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.BlockBuffer {
 	public interface ICircularBuffer<T> {
+
 		ulong BlockCount { get; }
+		ulong ProducerPosition { get; }
+
 		T[] Buffer { get; }
 
 		bool ConsumerCanRead(int consumerId);
@@ -33,6 +36,7 @@ namespace AVDump2Lib.BlockBuffer {
 		T ProducerBlock { get; set; }
 		void ProducerAdvance();
 
+		void Initialize(int consumerCount);
 
 		bool IsEmpty();
 		ulong Count(int consumerId);
@@ -47,12 +51,15 @@ namespace AVDump2Lib.BlockBuffer {
 
 		private T[] buffer;
 
-		public CircularBuffer(int consumerCount, int blockCountPower) {
-			if(blockCountPower < 0) throw new Exception("Negative power is not allowed");
+		public CircularBuffer(int blockCountPower, int consumerCount) : this(blockCountPower) { Initialize(consumerCount); }
+		public CircularBuffer(int blockCountPower) {
+			if(blockCountPower < 0) throw new ArgumentException("Negative power is not allowed", "blockCountPower");
 			blockCount = 1UL << blockCountPower;
 			blockMask = blockCount - 1;
 			buffer = new T[blockCount];
-
+		}
+		public void Initialize(int consumerCount) {
+			producer = 0;
 			consumers = new ulong[consumerCount];
 		}
 
@@ -78,7 +85,6 @@ namespace AVDump2Lib.BlockBuffer {
 		public void ProducerAdvance() { producer++; }
 		public T ProducerBlock { get { return buffer[producer & blockMask]; } set { buffer[producer & blockMask] = value; } }
 		public void ProducerWrite(T block) {
-			//if(!CanWrite()) throw new Exception();
 			buffer[producer & blockMask] = block;
 			producer++;
 		}
@@ -92,5 +98,8 @@ namespace AVDump2Lib.BlockBuffer {
 		public ulong Count(int consumerId) { return producer - consumers[consumerId]; }
 
 		public ulong BlockCount { get { return blockCount; } }
+
+
+		public ulong ProducerPosition { get { return producer; } }
 	}
 }

@@ -26,6 +26,8 @@ namespace AVDump2Lib.BlockBuffer {
 
 		void Start();
 
+		void Initialize(int consumerCount);
+
 		void Read(int consumerId, Consumer<T> consumer);
 		T GetBlock(int consumerId);
 
@@ -48,16 +50,24 @@ namespace AVDump2Lib.BlockBuffer {
 		private IBlockSource<T> blockSource;
 		private Thread tRefiller;
 		private bool isEndOfStream;
+		private bool disposed, stop;
 
+		public RefillBuffer(ICircularBuffer<T> circBuffer, IBlockSource<T> blockSource, int consumerCount) : this(circBuffer, blockSource) { Initialize(consumerCount); }
 		public RefillBuffer(ICircularBuffer<T> circBuffer, IBlockSource<T> blockSource) {
 			this.circBuffer = circBuffer;
 			this.blockSource = blockSource;
-			tRefiller = new Thread(new ThreadStart(Filler));
+
+			for(int i = 0;i < circBuffer.Buffer.Length;i++) blockSource.InitializeBlock(out circBuffer.Buffer[i]);
+		}
+
+
+		public void Initialize(int consumerCount) {
+			blockSource.InitializeBlock(out circBuffer.Buffer[(circBuffer.ProducerPosition - 1) & (circBuffer.BlockCount - 1)]);
+
+			circBuffer.Initialize(consumerCount);
+			tRefiller = new Thread(Filler);
 			isEndOfStream = false;
 
-			for(int i = 0;i < circBuffer.Buffer.Length;i++) {
-				blockSource.InitializeBlock(out circBuffer.Buffer[i]);
-			}
 		}
 
 		public void Start() { tRefiller.Start(); }
@@ -87,7 +97,8 @@ namespace AVDump2Lib.BlockBuffer {
 
 		private void Filler() {
 			while(!blockSource.AllBlocksRead) {
-				while(!circBuffer.ProducerCanWrite()) Thread.Sleep(20);
+				while(!stop && !circBuffer.ProducerCanWrite()) Thread.Sleep(20);
+				if(stop) return;
 
 				circBuffer.ProducerBlock = blockSource.SetNextBlock(circBuffer.ProducerBlock);
 				circBuffer.ProducerAdvance();
@@ -95,7 +106,9 @@ namespace AVDump2Lib.BlockBuffer {
 			isEndOfStream = true;
 		}
 
-		public void Dispose() { blockSource.Dispose(); }
+		public void Stop() { stop = true; tRefiller.Join(); }
+
+		public void Dispose() { Stop(); blockSource.Dispose(); disposed = true; }
 	}
 
 	public interface IBlockSource<T> : IDisposable {
@@ -111,13 +124,17 @@ namespace AVDump2Lib.BlockBuffer {
 		int bytesRead;
 		int blockSize;
 
-		public ByteStreamToBlock(Stream source, int blockSize) {
-			this.source = source;
-			this.blockSize = blockSize;
-		}
+		public ByteStreamToBlock(int blockSize) { this.blockSize = blockSize; }
+		public ByteStreamToBlock(Stream source, int blockSize) : this(blockSize) { Initialize(source); }
 
 		public int BlockSize { get { return blockSize; } }
 		public Stream Source { get { return source; } }
+
+		public void Initialize(Stream source) {
+			this.source = source;
+			bytesRead = 0;
+			isEndOfStream = false;
+		}
 
 		public void InitializeBlock(out byte[] block) { block = new byte[blockSize]; }
 
@@ -134,5 +151,6 @@ namespace AVDump2Lib.BlockBuffer {
 		public bool AllBlocksRead { get { return isEndOfStream; } }
 
 		public void Dispose() { source.Dispose(); }
+
 	}
 }

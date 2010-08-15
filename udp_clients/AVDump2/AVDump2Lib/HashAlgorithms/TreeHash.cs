@@ -127,17 +127,14 @@ namespace AVDump2Lib.HashAlgorithms {
 				blockHasher.TransformFinalBlock(emptyArray, 0, 0);
 				lock(blocks) blocks.Enqueue(blockHasher.Hash);
 				blockHasher.Initialize();
-
 			}
 
 			CompressBlocks();
 
 			nods.AddRange(blocks);
-			nods.Add(nods.Reverse<byte[]>().Aggregate((byte[] accumHash, byte[] hash) => { return HashBlocks(hash, accumHash); }));
-			nods.RemoveRange(0, nods.Count - 1);
 
 			eof = true;
-			return nods[0];
+			return nods.Count != 0 ? nods.Reverse<byte[]>().Aggregate((byte[] accumHash, byte[] hash) => { return HashBlocks(hash, accumHash); }) : blockHasher.ComputeHash(new byte[0]);
 		}
 
 		public override void Initialize() {

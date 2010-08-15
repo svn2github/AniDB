@@ -30,6 +30,7 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 
 		//private Int64 localOffset;
 		private Int64 localStartPosition;
+		private Int64 length;
 
 		public IRefillBuffer<byte[]> buffer;
 		private int consumerId;
@@ -37,9 +38,10 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 		public FileSource(IRefillBuffer<byte[]> buffer, int consumerId) {
 			this.buffer = buffer;
 			this.consumerId = consumerId;
+			length = ((ByteStreamToBlock)buffer.BlockSource).Source.Length;
 
 			dataInfo = new DataInfo() {
-				GetBlock = () => {	
+				GetBlock = () => {
 					while(!buffer.CanRead(consumerId)) Thread.Sleep(20);
 					return buffer.GetBlock(consumerId);
 				},
@@ -48,13 +50,15 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 					localStartPosition += buffer.GetBlock(consumerId).Length;
 					dataInfo.Offset = 0;
 					buffer.Advance(consumerId);
-				}
+				},
+				GetLength = () => { return length; },
+				GetPosition = () => { return localStartPosition + dataInfo.Offset; }
 			};
 		}
 
 		public bool IsStream { get { return true; } }
 
-		public Int64 Length { get { return ((ByteStreamToBlock)buffer.BlockSource).Source.Length; } }
+		public Int64 Length { get { return length; } }
 
 		public long Position {
 			get { return localStartPosition + dataInfo.Offset; }
@@ -62,7 +66,7 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 		}
 
 		public void Skip(Int64 bytes) {
-			if(bytes == 0) return;
+			if(bytes <= 0 || EOF()) return; //throw error/warning when bytes < 0
 			lock(syncRoot) {
 				Int64 bytesSkipped = Math.Min(buffer.GetBlock(consumerId).Length - dataInfo.Offset, bytes);
 				dataInfo.Offset += bytesSkipped;
@@ -80,11 +84,13 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 						while(!buffer.CanRead(consumerId)) Thread.Sleep(20);
 						buffer.Advance(consumerId);
 
+						if(bytes != 0 && Position == Length) throw new Exception("Skip: Unexpected EOF");
+						block = buffer.GetBlock(consumerId);
+
 					} else {
 						dataInfo.Offset += bytes;
 						bytes = 0;
 					}
-					block = buffer.GetBlock(consumerId);
 				}
 			}
 		}
@@ -124,12 +130,12 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 			T value;
 			lock(syncRoot) {
 				value = dataProcessFunc(dataInfo);
-				if(dataInfo.Offset == buffer.GetBlock(consumerId).Length) dataInfo.Advance();
+				if(!EOF() && dataInfo.Offset == buffer.GetBlock(consumerId).Length) dataInfo.Advance();
 			}
 			return value;
 		}
 
-		public bool EOF() { throw new NotImplementedException(); }
+		public bool EOF() { return length == localStartPosition + dataInfo.Offset; }
 
 		public void Dispose() { buffer.Dispose(); }
 	}
