@@ -99,7 +99,8 @@
     </DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zip.Reduced">
+    <Reference Include="Ionic.Zip.Reduced, Version=1.7.2.16, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="System" />

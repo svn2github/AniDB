@@ -85,8 +85,8 @@ namespace AVDump2CL {
 
 		private static int retries = 3;
 		private static int timeout = 10;
-		private static int blockCount = 8;
-		private static int blockSize = 2 * 1024;
+		private static int blockCount = 4;
+		private static int blockSize = 4 * 1024;
 		private static int monitorSleepDuration = 60000;
 		private static List<string> dumpableExtensions;
 		private static List<string> processExtensions;
@@ -205,7 +205,7 @@ namespace AVDump2CL {
 				//@"E:\Anime\Stalled\ponyo_on_the_cliff_by_the_sea[1920x1040.h264.flac.ac3][niizk].mkv",		
 				//@"E:\Anime\Stalled\Mouryou no Hako[Aero] 4v2 - The Kasha Incident.mkv",
 				//@"D:\My Stuff\Downloads\[Mazui_DudeeBalls-Remux]_Ookami-san_-_06_[720p].mkv",
-				"-p0123",
+				"-p5",
 				//"-log:log.xml"
 			};
 		}
@@ -342,11 +342,12 @@ namespace AVDump2CL {
 			var infoProvider = CreateInfoProvider(e.File.FullName, blockConsumers);
 
 			WriteLogs(e, blockConsumers, infoProvider);
-			HandleSwitches(e, blockConsumers, startTime);
+			HandleSwitches(e, blockConsumers);
 
 #if(HasAcreq)
 			DoACreq(e, infoProvider);
 #endif
+			if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
 
 			Console.WriteLine(); Console.WriteLine();
 		}
@@ -463,7 +464,7 @@ namespace AVDump2CL {
 			}
 			#endregion
 		}
-		private static void HandleSwitches(FileEnvironment e, Dictionary<string, IBlockConsumer> blockConsumers, DateTime startTime) {
+		private static void HandleSwitches(FileEnvironment e, Dictionary<string, IBlockConsumer> blockConsumers) {
 			Ed2k ed2k = null;
 			if(blockConsumers.ContainsKey("ED2K")) ed2k = (Ed2k)((HashCalculator)blockConsumers["ED2K"]).HashObj;
 
@@ -475,7 +476,6 @@ namespace AVDump2CL {
 			if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine("ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse) + "|/");
 
 			//if((switches & eSwitches.DeleteFileWhenDone) != 0 && !error) System.IO.File.Delete(filePath);
-			if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
 			if((switches & eSwitches.PauseWhenFileDone) != 0) {
 				Console.WriteLine("Press any alpha-numeric key to continue");
 				Pause();
