@@ -12,7 +12,6 @@ using AVDump2Lib.InfoGathering;
 using AVDump2Lib.BlockConsumers;
 using AVDump2Lib.HashAlgorithms;
 using AVDump2Lib.Misc;
-using AVDump2Lib.Dump;
 using System.Threading;
 
 namespace AVDump2CL {

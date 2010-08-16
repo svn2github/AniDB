@@ -98,6 +98,11 @@
   <ItemGroup>
     <Compile Include="HashAlgorithms\Aich.cs" />
     <Compile Include="HashAlgorithms\TreeHash.cs" />
+    <Compile Include="InfoGathering\InfoProvider\HashInfoProvider.cs" />
+    <Compile Include="InfoGathering\InfoProvider\MatroskaProvider.cs" />
+    <Compile Include="InfoGathering\InfoProvider\MediaInfoProvider.cs" />
+    <Compile Include="InfoGathering\InfoProvider\Tools\CompositeInfoProvider.cs" />
+    <Compile Include="InfoGathering\InfoProvider\Tools\InfoProvider.cs" />
     <Compile Include="Misc\BaseConverter.cs" />
     <Compile Include="BlockConsumers\Tools\BlockConsumerBase.cs" />
     <Compile Include="BlockConsumers\Tools\BlockConsumerContainer.cs" />
@@ -147,7 +152,11 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Libs\CSEBMLLib.dll" />
+    <Content Include="Libs\CSEBMLLib.pdb" />
+    <Content Include="Libs\MediaInfo.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)AsmRaise.exe" "$(ProjectDir)Properties\AssemblyInfo.cs"</PostBuildEvent>

@@ -206,10 +206,6 @@ namespace AVDump2Lib.HashAlgorithms {
 		}
 
 
-		~TigerThex() {
-
-		}
-
 		protected override void HashCore(byte[] data, int nStart, int nSize) {
 			byte[] buf = null;
 			int nBufPos = 0;

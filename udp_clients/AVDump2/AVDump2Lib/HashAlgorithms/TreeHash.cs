@@ -33,13 +33,10 @@ namespace AVDump2Lib.HashAlgorithms {
 		private readonly int BLOCKSIZE;
 		private int blockLengthTodo;
 		private Queue<byte[]> blocks;
-		private AutoResetEvent newBlocks, waitingForBlocks;
-		private Thread compressor;
 
 		private List<int> level;
 		private List<byte[]> nods;
 
-		private bool eof;
 
 		public TreeHash(HashAlgorithm nodeHasher, HashAlgorithm blockHasher, int blockSize) {
 			this.nodeHasher = nodeHasher;
@@ -49,9 +46,6 @@ namespace AVDump2Lib.HashAlgorithms {
 			this.blocks = new Queue<byte[]>();
 			this.nods = new List<byte[]>();
 			this.level = new List<int>();
-
-			newBlocks = new AutoResetEvent(false);
-			waitingForBlocks = new AutoResetEvent(false);
 		}
 
 		protected override void HashCore(byte[] array, int ibStart, int cbSize) {
@@ -108,8 +102,6 @@ namespace AVDump2Lib.HashAlgorithms {
 					if(level.Count <= i + 1) level.Add(0);
 				}
 			}
-
-
 		}
 
 		private byte[] HashBlocks(byte[] l, byte[] r) {
@@ -130,20 +122,11 @@ namespace AVDump2Lib.HashAlgorithms {
 			}
 
 			CompressBlocks();
-
 			nods.AddRange(blocks);
-
-			eof = true;
 			return nods.Count != 0 ? nods.Reverse<byte[]>().Aggregate((byte[] accumHash, byte[] hash) => { return HashBlocks(hash, accumHash); }) : blockHasher.ComputeHash(new byte[0]);
 		}
 
 		public override void Initialize() {
-			if(compressor != null && compressor.IsAlive) {
-				eof = true;
-				newBlocks.Set();
-				compressor.Join();
-			}
-
 			nodeHasher.Initialize();
 			blockHasher.Initialize();
 
@@ -152,14 +135,7 @@ namespace AVDump2Lib.HashAlgorithms {
 			this.level.Clear();
 			level.Add(0);
 
-			newBlocks.Reset();
-			waitingForBlocks.Reset();
-
-			eof = false;
 			blockLengthTodo = 0;
-
-			compressor = new Thread(CompressBlocks);
-			//compressor.Start();
 		}
 	}
 }

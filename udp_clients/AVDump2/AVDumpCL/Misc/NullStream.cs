@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace AVDump2CL {
+namespace AVDump2CL.Misc {
 	public class NullStream : Stream {
 		long length;
 		public NullStream(long length) {

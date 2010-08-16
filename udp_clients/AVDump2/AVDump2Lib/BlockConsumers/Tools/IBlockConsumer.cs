@@ -15,14 +15,15 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
 
 using System;
+using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.BlockConsumers.Tools {
 	public interface IBlockConsumer {
-		event EventHandler ProcessingDone;
+		//event EventHandler ProcessingDone;
 
 		string Name { get; }
 
-		void Start(AVDump2Lib.BlockBuffer.IRefillBuffer<byte[]> b, int consumerId);
+		void Start(IRefillBuffer<byte[]> b, int consumerId);
 		void Join();
 		bool HasFinished { get; }
 

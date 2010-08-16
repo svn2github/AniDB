@@ -21,15 +21,17 @@ using System.Security.Cryptography;
 using System.Threading;
 using AVDump2Lib.BlockBuffer;
 using AVDump2Lib.BlockConsumers.Tools;
+using AVDump2Lib.Misc;
 
 namespace AVDump2Lib.BlockConsumers {
 	public class HashCalculator : BlockConsumerBase {
 		private HashAlgorithm h;
+		private Func<HashAlgorithm, string> toString;
 
-		public HashCalculator(HashAlgorithm h, string name)
+		public HashCalculator(string name, HashAlgorithm h, Func<HashAlgorithm, string> toString)
 			: base(name) {
 			this.h = h;
-			h.Initialize();
+			this.toString = toString;
 		}
 
 		public HashAlgorithm HashObj { get { if(HasFinished) return h; else throw new Exception("Hashing has not finished"); } }
@@ -45,6 +47,10 @@ namespace AVDump2Lib.BlockConsumers {
 			h.TransformFinalBlock(new byte[0], 0, 0);
 		}
 
+
+		public override string ToString() { return toString(h); }
+
+		protected override void InitInternal() { h.Initialize(); }
 	}
 
 }

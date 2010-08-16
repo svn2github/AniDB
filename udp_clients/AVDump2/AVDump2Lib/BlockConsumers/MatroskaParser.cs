@@ -32,47 +32,27 @@ using System.IO;
 using AVDump2Lib.BlockBuffer;
 
 namespace AVDump2Lib.BlockConsumers {
-	public class MatroskaFileInfo : BlockConsumerBase {
+	public class MatroskaParser : BlockConsumerBase {
+		public MatroskaFile MatroskaFileObj { get; private set; }
+
 		private FileSource dataSrc;
 		private EBMLReader reader;
+		private Thread progressUpdater;
+		private IDocType matroskaDocType = new DocTypeEBML(new DocTypeMatroskaV2());
 
-		public long FileSize { get; private set; }
-		public EbmlHeaderSection EbmlHeader { get; private set; }
-		public SegmentSection Segment { get; private set; }
-
-		public MatroskaFileInfo(string name) : base(name) { }
+		public MatroskaParser(string name) : base(name) { }
 
 		protected override void DoWork() {
-			dataSrc = new FileSource(b, consumerId);
-			reader = new EBMLReader(dataSrc, new DocTypeEBML(new DocTypeMatroskaV2()));
-
-			FileSize = dataSrc.Length;
-
-			Thread t = new Thread(ReadBytesUpdater);
-			t.Name = "MKVParser ProgressUpdater";
-			t.Start();
-
+			progressUpdater.Start();
 			Root();
 		}
 
 		private void Root() {
-			ElementInfo elementInfo = reader.NextElementInfo();
-			if(elementInfo.ElementType.Id == (int)DocTypeEBML.eId.EBMLHeader) {
-				EbmlHeader = Section.CreateRead(new EbmlHeaderSection(), reader);
-			} else {
-				//Todo: dispose reader
-				DummyRead();
-			}
-
-			while((elementInfo = reader.NextElementInfo()) != null && Section.IsGlobalElement(elementInfo)) ;
-
-			if(elementInfo != null && elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Segment) {
-				Segment = Section.CreateRead(new SegmentSection(), reader);
-			} else {
-				//error
-				DummyRead();
-			}
+			var matroskaFile = new MatroskaFile(dataSrc.Length);
+			matroskaFile.Parse(reader);
+			MatroskaFileObj = matroskaFile;
 		}
+
 		private void ReadBytesUpdater() {
 			int timerRes = 40;
 			int ttl = 10000;
@@ -84,7 +64,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 				if(ProcessedBytes == dataSrc.Position) {
 					if(ticks < 0) {
-						t.Abort();
+						progressUpdater.Abort();
 						break;
 					}
 				} else {
@@ -123,7 +103,51 @@ namespace AVDump2Lib.BlockConsumers {
 
 			return isMatroskaFile;
 		}
+
+		public override string ToString() { return ""; }
+
+		protected override void InitInternal() {
+			dataSrc = new FileSource(b, consumerId);
+			reader = new EBMLReader(dataSrc, matroskaDocType);
+
+			progressUpdater = new Thread(ReadBytesUpdater);
+			progressUpdater.Name = "MKVParser ProgressUpdater";
+		}
 	}
+
+	public class MatroskaFile : Section {
+		public long FileSize { get; private set; }
+		public EbmlHeaderSection EbmlHeader { get; private set; }
+		public SegmentSection Segment { get; private set; }
+
+		public MatroskaFile(long fileSize) { FileSize = fileSize; }
+
+		public void Parse(EBMLReader reader) {
+			ElementInfo elementInfo = reader.NextElementInfo();
+			if(elementInfo.ElementType.Id == (int)DocTypeEBML.eId.EBMLHeader) {
+				EbmlHeader = Section.CreateRead(new EbmlHeaderSection(), reader);
+			} else {
+				//Todo: dispose reader / add warning
+				return;
+			}
+
+			while((elementInfo = reader.NextElementInfo()) != null && Section.IsGlobalElement(elementInfo)) ;
+
+			if(elementInfo != null && elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Segment) {
+				Segment = Section.CreateRead(new SegmentSection(), reader);
+			} else {
+				//Todo: dispose reader / add warning
+				return;
+			}
+
+			Validate();
+		}
+
+		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) { throw new NotSupportedException(); }
+
+		protected override void Validate() { }
+	}
+
 	public class EbmlHeaderSection : Section {
 		#region Fields & Properties
 		private ulong? ebmlVersion;

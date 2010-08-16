@@ -22,7 +22,7 @@ using System.Diagnostics;
 
 namespace AVDump2Lib.Misc {
 	[Flags]
-	public enum eBaseOption {
+	public enum BaseOption {
 		Binary = 1<<1,
 		Base04 = 1 << 2,
 		Octal = 1 << 3,
@@ -101,21 +101,21 @@ namespace AVDump2Lib.Misc {
 		private static readonly string base62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		private static readonly string base64 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/";
 
-		public static string ToString(byte[] value, eBaseOption baseOption) {
+		public static string ToString(byte[] value, BaseOption baseOption) {
 			string symbols = Enum2Symbols(baseOption);
 			byte[] radix = new byte[value.Length];
 			radix[0] = (byte)symbols.Length;
 
 			string result = "";
-			if((baseOption & (eBaseOption.Base32 | eBaseOption.Base32Hex | eBaseOption.Base32Z)) != 0 && (baseOption & (eBaseOption.Reverse)) != 0) {
+			if((baseOption & (BaseOption.Base32 | BaseOption.Base32Hex | BaseOption.Base32Z)) != 0 && (baseOption & (BaseOption.Reverse)) != 0) {
 				result = ToBase32String(value, symbols);
-			} else if((baseOption & (eBaseOption.Heximal)) != 0 && (baseOption & (eBaseOption.Reverse)) != 0) {
+			} else if((baseOption & (BaseOption.Heximal)) != 0 && (baseOption & (BaseOption.Reverse)) != 0) {
 				result = ToBase16String(value, symbols);
 			} else {
-				result = ToString(new BitVector(value, value.Length * 8, (baseOption & eBaseOption.Reverse) != 0), new BitVector(radix), symbols);
+				result = ToString(new BitVector(value, value.Length * 8, (baseOption & BaseOption.Reverse) != 0), new BitVector(radix), symbols);
 			}
 
-			if((baseOption & eBaseOption.Pad) != 0) {
+			if((baseOption & BaseOption.Pad) != 0) {
 				int padCount = (int)Math.Ceiling((value.Length << 3) * Math.Log(2, symbols.Length));
 				result = result.PadLeft(padCount, symbols[0]);
 			}
@@ -205,29 +205,29 @@ namespace AVDump2Lib.Misc {
 		}
 
 
-		private static string Enum2Symbols(eBaseOption symbol) {
-			switch(symbol & ~eBaseOption.All) {
-				case eBaseOption.Binary:
+		private static string Enum2Symbols(BaseOption symbol) {
+			switch(symbol & ~BaseOption.All) {
+				case BaseOption.Binary:
 					return base2;
-				case eBaseOption.Base04:
+				case BaseOption.Base04:
 					return base4;
-				case eBaseOption.Octal:
+				case BaseOption.Octal:
 					return base8;
-				case eBaseOption.Decimal:
+				case BaseOption.Decimal:
 					return base10;
-				case eBaseOption.Heximal:
-					return ((symbol & eBaseOption.LowerCase) == 0) ? base16 : base16.ToLower();
-				case eBaseOption.Base32:
-					return ((symbol & eBaseOption.LowerCase) == 0) ? base32 : base32.ToLower();
-				case eBaseOption.Base32Z:
-					return ((symbol & eBaseOption.LowerCase) == 0) ? base32Z : base32Z.ToLower();
-				case eBaseOption.Base32Hex:
-					return ((symbol & eBaseOption.LowerCase) == 0) ? base32Hex : base32Hex.ToLower();
-				case eBaseOption.Base36:
-					return ((symbol & eBaseOption.LowerCase) == 0) ? base36 : base36.ToLower();
-				case eBaseOption.Base62:
+				case BaseOption.Heximal:
+					return ((symbol & BaseOption.LowerCase) == 0) ? base16 : base16.ToLower();
+				case BaseOption.Base32:
+					return ((symbol & BaseOption.LowerCase) == 0) ? base32 : base32.ToLower();
+				case BaseOption.Base32Z:
+					return ((symbol & BaseOption.LowerCase) == 0) ? base32Z : base32Z.ToLower();
+				case BaseOption.Base32Hex:
+					return ((symbol & BaseOption.LowerCase) == 0) ? base32Hex : base32Hex.ToLower();
+				case BaseOption.Base36:
+					return ((symbol & BaseOption.LowerCase) == 0) ? base36 : base36.ToLower();
+				case BaseOption.Base62:
 					return base62;
-				case eBaseOption.Base64:
+				case BaseOption.Base64:
 					return base64;
 				default:
 					throw new ArgumentException();

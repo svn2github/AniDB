@@ -21,23 +21,30 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
 using AVDump2Lib.BlockBuffer;
+using System.Diagnostics;
 
 namespace AVDump2Lib.BlockConsumers.Tools {
 	public class BlockConsumerContainer {
+		private Dictionary<string, IBlockConsumer> availableBlockConsumers;
+
 		private List<IBlockConsumer> items;
 		private ICircularBuffer<byte[]> circb;
 		private IRefillBuffer<byte[]> b;
 		private ByteStreamToBlock blockSource;
 
 		public BlockConsumerContainer(int blockCount, int blockSize) {
+			availableBlockConsumers = new Dictionary<string, IBlockConsumer>();
 			items = new List<IBlockConsumer>();
+
 			blockSource = new ByteStreamToBlock(blockSize);
 			circb = new CircularBuffer<byte[]>((int)Math.Log(blockCount, 2));
 			b = new RefillBuffer<byte[]>(circb, blockSource);
 		}
 
-		public int AddBlockConsumer(IBlockConsumer blockConsumer) {
-			items.Add(blockConsumer);
+		public void RegisterBlockConsumer(string name, IBlockConsumer blockConsumer) { availableBlockConsumers.Add(name, blockConsumer); }
+
+		public int AddBlockConsumer(string name) {
+			items.Add(availableBlockConsumers[name]);
 			return items.Count - 1;
 		}
 

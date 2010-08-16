@@ -17,6 +17,7 @@
 using System;
 using System.Threading;
 using AVDump2Lib.BlockBuffer;
+using System.Diagnostics;
 
 namespace AVDump2Lib.BlockConsumers.Tools {
 	public abstract class BlockConsumerBase : IBlockConsumer {
@@ -24,21 +25,25 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 		protected IRefillBuffer<byte[]> b;
 		protected int consumerId;
 
-		public event EventHandler ProcessingDone;
 		public string Name { get; private set; }
 		public long ProcessedBytes { get; protected set; }
 
 		public BlockConsumerBase(string name) {
-			t = new Thread(new ThreadStart(DoWorkInternal));
+			t = new Thread(DoWorkInternal);
 			this.Name = t.Name = name;
 		}
 
 		public void Start(IRefillBuffer<byte[]> b, int consumerId) {
-			this.b = b;
 			this.consumerId = consumerId;
+			HasFinished = false;
+			ProcessedBytes = 0;
+			this.b = b;
+
+			InitInternal();
+	
 			t.Start();
 		}
-		public void Join() { t.Join(); }
+		public void Join() { t.Join(); t = new Thread(DoWorkInternal); t.Name = Name; }
 		public bool HasFinished { get; private set; }
 
 		private void DoWorkInternal() {
@@ -53,14 +58,11 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 				DummyRead();
 				HasFinished = true;
 			}
-
-			if(ProcessingDone != null) ProcessingDone(this, new EventArgs());
-			
 		}
 
 		protected abstract void DoWork();
 
-		protected void DummyRead() {
+		private void DummyRead() {
 			while(!b.EndOfStream(consumerId)) {
 				while(!b.CanRead(consumerId)) Thread.Sleep(20);
 				b.Advance(consumerId);
@@ -68,6 +70,11 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 		}
 
 		public Exception Error { get; private set; }
+
+		public abstract override string ToString();
+
+
+		protected abstract void InitInternal();
 	}
 
 
