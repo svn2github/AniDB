@@ -13,22 +13,31 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			infos = new InfoCollection();
 			MFI = mfi;
 
-			Add(EntryKey.Extension, "mkv", null);
 			Add(EntryKey.Size, MFI.FileSize.ToString(), "byte");
-			Add(EntryKey.Date, MFI.Segment.SegmentInfo.ProductionDate.HasValue ? MFI.Segment.SegmentInfo.ProductionDate.Value.ToString() : null, null);
+			Add(EntryKey.Date, MFI.Segment.SegmentInfo.ProductionDate.HasValue ? MFI.Segment.SegmentInfo.ProductionDate.Value.ToString("yyyy.MM.dd HH.mm.ss.ffff") : null, null);
 			Add(EntryKey.Duration, MFI.Segment.SegmentInfo.Duration.HasValue ? (MFI.Segment.SegmentInfo.Duration.Value * (MFI.Segment.SegmentInfo.TimecodeScale / 1000000000d)).ToString("0.000", CultureInfo.InvariantCulture) : null, "s");
 			Add(EntryKey.WritingApp, MFI.Segment.SegmentInfo.WritingApp, null);
 			Add(EntryKey.MuxingApp, MFI.Segment.SegmentInfo.MuxingApp, null);
 
 			int[] indeces = new int[3];
+			bool hasVideo, hasAudio, hasSubtitle;
+			hasVideo = hasAudio = hasSubtitle = false;
 			foreach(var track in MFI.Segment.Tracks.Items) {
 				if(!track.TrackType.HasValue) throw new Exception("TrackType missing");
 				switch(track.TrackType.Value) {
-					case TrackEntrySection.Types.Video: AddStreamInfo(this, track, StreamType.Video, indeces[0]++); break;
-					case TrackEntrySection.Types.Audio: AddStreamInfo(this, track, StreamType.Audio, indeces[1]++); break;
-					case TrackEntrySection.Types.Subtitle: AddStreamInfo(this, track, StreamType.Text, indeces[2]++); break;
+					case TrackEntrySection.Types.Video: AddStreamInfo(this, track, StreamType.Video, indeces[0]++); hasVideo = true; break;
+					case TrackEntrySection.Types.Audio: AddStreamInfo(this, track, StreamType.Audio, indeces[1]++); hasAudio = true; break;
+					case TrackEntrySection.Types.Subtitle: AddStreamInfo(this, track, StreamType.Text, indeces[2]++); hasSubtitle = true; break;
 					default: break;
 				}
+			}
+
+			if(hasVideo) {
+				Add(EntryKey.Extension, "mkv", null);
+			} else if(hasAudio) {
+				Add(EntryKey.Extension, "mka", null);
+			} else if(hasSubtitle) {
+				Add(EntryKey.Extension, "mks", null);
 			}
 		}
 

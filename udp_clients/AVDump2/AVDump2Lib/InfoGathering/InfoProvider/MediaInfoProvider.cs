@@ -21,8 +21,8 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 			Add(EntryKey.Size, Get("FileSize"), "byte");
 			Add(EntryKey.Duration, Get("Duration", (str) => { return (double.Parse(str, CultureInfo.InvariantCulture) / 1000).ToString("0.000", CultureInfo.InvariantCulture); }), "s");
-			//Add(EntryKey.Extension, Get("Format/Extensions"), null);
-			Add(EntryKey.Extension, Get("FileExtension"), null);
+			Add(EntryKey.Extension, Get("Format/Extensions"), null);
+			Add(EntryKey.FileExtension, Get("FileExtension"), null);
 			Add(EntryKey.WritingApp, Get("Encoded_Application"), null);
 			Add(EntryKey.MuxingApp, Get("Encoded_Library"), null);
 
@@ -40,7 +40,8 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 					Add(st, i, EntryKey.Language, Get(streamKind, i, "Language"), null);
 					Add(st, i, EntryKey.Duration, Get(streamKind, i, "Duration", (str) => { return (double.Parse(str, CultureInfo.InvariantCulture) / 1000).ToString("0.000", CultureInfo.InvariantCulture); }), "s");
 					Add(st, i, EntryKey.Bitrate, Get(streamKind, i, "BitRate"), null);
-					Add(st, i, EntryKey.FourCC, nonEmpty(Get(streamKind, i, "Codec/CC"), Get(streamKind, i, "CodecID")), null);
+					Add(st, i, EntryKey.CodecId, Get(streamKind, i, "CodecID"), null);
+					Add(st, i, EntryKey.FourCC, Get(streamKind, i, "Codec/CC") != null && Get(streamKind, i, "Codec/CC").Length == 4 ? Get(streamKind, i, "Codec/CC") : null, null);
 					Add(st, i, EntryKey.EncodeSettings, Get(streamKind, i, "Encoded_Library_Settings"), null);
 					Add(st, i, EntryKey.EncodeLibrary, Get(streamKind, i, "Encoded_Library"), null);
 					Add(st, i, EntryKey.BitrateMode, Get(streamKind, i, "BitRate_Mode"), null);

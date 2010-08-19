@@ -30,6 +30,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.IO;
 using AVDump2Lib.BlockBuffer;
+using System.Collections;
 
 namespace AVDump2Lib.BlockConsumers {
 	public class MatroskaParser : BlockConsumerBase {
@@ -146,6 +147,11 @@ namespace AVDump2Lib.BlockConsumers {
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) { throw new NotSupportedException(); }
 
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("EbmlHeader", EbmlHeader);
+			yield return CreatePair("Segment", Segment);
+		}
 	}
 
 	public class EbmlHeaderSection : Section {
@@ -189,6 +195,16 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected sealed override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("EbmlVersion", EbmlVersion);
+			yield return CreatePair("EbmlReadVersion", EbmlReadVersion);
+			yield return CreatePair("EbmlMaxIdLength", EbmlMaxIdLength);
+			yield return CreatePair("EbmlMaxSizeLength", EbmlMaxSizeLength);
+			yield return CreatePair("DocTypeReadVersion", DocTypeReadVersion);
+			yield return CreatePair("DocTypeVersion", DocTypeVersion);
+			yield return CreatePair("DocType", DocType);
+		}
 	}
 	public class SegmentSection : Section {
 		#region Fields & Properties
@@ -227,6 +243,13 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("SegmentInfo", SegmentInfo);
+			yield return CreatePair("Attachments", Attachments);
+			yield return CreatePair("Chapters", Chapters);
+			yield return CreatePair("Cluster", Cluster);
+			yield return CreatePair("Tracks", Tracks);
+		}
 	}
 	public class SegmentInfoSection : Section {
 		#region Fields & Properties
@@ -292,6 +315,20 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("SegmentUId", SegmentUId);
+			yield return CreatePair("PreviousUId", PreviousUId);
+			yield return CreatePair("NextUId", NextUId);
+			yield return CreatePair("SegmentFilename", SegmentFilename);
+			yield return CreatePair("PreviousFilename", PreviousFilename);
+			yield return CreatePair("NextFilename", NextFilename);
+			yield return CreatePair("Duration", Duration);
+			yield return CreatePair("Title", Title);
+			yield return CreatePair("MuxingApp", MuxingApp);
+			yield return CreatePair("WritingApp", WritingApp);
+			yield return CreatePair("ProductionDate", ProductionDate);
+		}
 	}
 	public class ChapterTranslateSection : Section {
 		private byte[] id;
@@ -313,6 +350,12 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("EditionUId", EditionUId);
+			yield return CreatePair("Codec", Codec);
+			yield return CreatePair("Id", Id);
+		}
 	}
 
 	public class ClusterSection : Section {
@@ -349,6 +392,9 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { foreach(var track in Tracks.Values) track.EndOfCluster(); }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() { yield break; }
+
 
 		public class Track {
 			public int TrackNumber { get; private set; }
@@ -456,6 +502,10 @@ namespace AVDump2Lib.BlockConsumers {
 			return false;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			foreach(var item in Items) yield return CreatePair("Track", item);
+		}
 	}
 	public class TrackEntrySection : Section {
 		#region Fields & Properties
@@ -634,6 +684,29 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("TrackNumber", TrackNumber);
+			yield return CreatePair("TrackUId", TrackUId);
+			yield return CreatePair("TrackOverlay", TrackOverlay);
+			yield return CreatePair("TrackType", TrackType);
+			yield return CreatePair("TrackFlags", TrackFlags);
+			yield return CreatePair("MinCache", MinCache);
+			yield return CreatePair("MaxCache", MaxCache);
+			yield return CreatePair("MaxBlockAdditionID", MaxBlockAdditionID);
+			yield return CreatePair("DefaultDuration", DefaultDuration);
+			yield return CreatePair("TrackTimecodeScale", TrackTimecodeScale);
+			yield return CreatePair("Name", Name);
+			yield return CreatePair("Language", Language);
+			yield return CreatePair("CodecId", CodecId);
+			yield return CreatePair("CodecPrivate", CodecPrivate);
+			yield return CreatePair("CodecName", CodecName);
+			yield return CreatePair("AttachmentLink", AttachmentLink);
+			yield return CreatePair("Video", Video);
+			yield return CreatePair("Audio", Audio);
+			yield return CreatePair("ContentEncodings", ContentEncodings);
+		}
+
+
 		[Flags]
 		public enum Options { None = 0, Enabled = 1, Default = 2, Forced = 4, Lacing = 8 }
 		public enum Types { Video = 0x1, Audio = 0x2, Complex = 0x3, Logo = 0x10, Subtitle = 0x11, Button = 0x12, Control = 0x20 }
@@ -698,6 +771,23 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("FrameRate", FrameRate);
+			yield return CreatePair("ColorSpace", ColorSpace);
+			yield return CreatePair("PixelWidth", PixelWidth);
+			yield return CreatePair("PixelHeight", PixelHeight);
+			yield return CreatePair("AspectRatioType", AspectRatioType);
+			yield return CreatePair("Interlaced", Interlaced);
+			yield return CreatePair("PixelCropBottom", PixelCropBottom);
+			yield return CreatePair("PixelCropTop", PixelCropTop);
+			yield return CreatePair("PixelCropLeft", PixelCropLeft);
+			yield return CreatePair("PixelCropRight", PixelCropRight);
+			yield return CreatePair("DisplayWidth", DisplayWidth);
+			yield return CreatePair("DisplayHeight", DisplayHeight);
+			yield return CreatePair("DisplayUnit", DisplayUnit);
+		}
+
+
 		public enum Unit { Pixels, Centimeters, Inches }
 		public enum ARType { FreeResizing, KeepAR, Fixed }
 	}
@@ -727,6 +817,12 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("SamplingFrequency", SamplingFrequency);
+			yield return CreatePair("OutputSamplingFrequency", OutputSamplingFrequency);
+			yield return CreatePair("ChannelCount", ChannelCount);
+			yield return CreatePair("BitDepth", BitDepth);
+		}
 	}
 	public class ContentEncodingsSection : Section {
 		public EbmlList<ContentEncodingSection> Encodings { get; private set; }
@@ -739,6 +835,9 @@ namespace AVDump2Lib.BlockConsumers {
 			return false;
 		}
 		protected override void Validate() { }
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			foreach(var encoding in Encodings) yield return CreatePair("ContentEncoding", encoding);
+		}
 	}
 	public class ContentEncodingSection : Section {
 		#region Fields & Properties
@@ -769,6 +868,14 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("ContentEncodingOrder", ContentEncodingOrder);
+			yield return CreatePair("ContentEncodingScope", ContentEncodingScope);
+			yield return CreatePair("ContentEncodingType", ContentEncodingType);
+			yield return CreatePair("ContentCompression", ContentCompression);
+		}
+
+
 		[Flags]
 		public enum CEScopes { AllFrames = 1, CodecPrivate = 2, ContentCompression = 4 }
 		public enum CETypes { Compression = 0, Encryption = 1 }
@@ -790,6 +897,10 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("ContentCompAlgo", ContentCompAlgo);
+		}
 
 		public enum CompAlgos { zlib = 0, bzlib = 1, lzo1x = 2, HeaderScripting = 3 }
 	}
@@ -828,6 +939,16 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("ContentEncAlgo", ContentEncAlgo);
+			yield return CreatePair("ContentSigAlgo", ContentSigAlgo);
+			yield return CreatePair("ContentSigHashAlgo", ContentSigHashAlgo);
+			yield return CreatePair("ContentEncKeyId", ContentEncKeyId);
+			yield return CreatePair("ContentSignature", ContentSignature);
+			yield return CreatePair("ContentSigKeyId", ContentSigKeyId);
+		}
+
+
 		public enum EncAlgos { SignedOnly = 0, DES = 1, TrippleDES = 2, TwoFish = 3, BlowFish = 4, AES = 5 }
 		public enum SigAlgos { EncryptionOnly = 0, RSA = 1 }
 		public enum SigHashAlgos { EncryptionOnly = 0, SHA1_160 = 1, MD5 = 2 }
@@ -846,6 +967,9 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			foreach(var attachedFile in Items) yield return CreatePair("AttachedFile", attachedFile);
+		}
 	}
 	public class AttachedFileSection : Section {
 		public string FileDescription { get; private set; }
@@ -868,6 +992,13 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("FileDescription", FileDescription);
+			yield return CreatePair("FileName", FileName);
+			yield return CreatePair("FileMimeType", FileMimeType);
+			yield return CreatePair("FileUId", FileUId);
+		}
 	}
 	public class ChaptersSection : Section {
 		public EbmlList<EditionEntrySection> Items { get; private set; }
@@ -883,6 +1014,7 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() { foreach(var item in Items) yield return CreatePair("EditionEntry", item); }
 	}
 	public class EditionEntrySection : Section {
 		#region Fields & Properties
@@ -896,15 +1028,15 @@ namespace AVDump2Lib.BlockConsumers {
 					   (def.HasValue && def.Value ? Options.Default : Options.None);
 			}
 		}
-		public EbmlList<ChapterAtomSection> ChapterAtom { get; private set; }
+		public EbmlList<ChapterAtomSection> ChapterAtoms { get; private set; }
 		#endregion
 
-		public EditionEntrySection() { ChapterAtom = new EbmlList<ChapterAtomSection>(); }
+		public EditionEntrySection() { ChapterAtoms = new EbmlList<ChapterAtomSection>(); }
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.ChapterAtom:
-					Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtom); break;
+					Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtoms); break;
 				case DocTypeMatroskaV2.eId.EditionUID:
 					EditionUId = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.EditionFlagHidden:
@@ -922,6 +1054,11 @@ namespace AVDump2Lib.BlockConsumers {
 		[Flags]
 		public enum Options { None = 0, Hidden = 1, Default = 2, Ordered = 4 }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("EditionUId", EditionUId);
+			yield return CreatePair("EditionFlags", EditionFlags);
+			foreach(var chapterAtom in ChapterAtoms) yield return CreatePair("ChapterAtom", chapterAtom);
+		}
 	}
 	public class ChapterAtomSection : Section {
 		#region Fields & Properties
@@ -935,15 +1072,15 @@ namespace AVDump2Lib.BlockConsumers {
 		public byte[] ChapterSegmentUId { get { return chapterSegmentUId == null ? null : (byte[])chapterSegmentUId.Clone(); } }
 		public ulong? ChapterSegmentEditionUId { get; private set; }
 		public ChapterTrackSection ChapterTrack { get; private set; }
-		public EbmlList<ChapterAtomSection> ChapterAtom { get; private set; }
-		public EbmlList<ChapterDisplaySection> ChapterDisplay { get; private set; }
-		public EbmlList<ChapterProcessSection> ChapterProcess { get; private set; }
+		public EbmlList<ChapterAtomSection> ChapterAtoms { get; private set; }
+		public EbmlList<ChapterDisplaySection> ChapterDisplays { get; private set; }
+		public EbmlList<ChapterProcessSection> ChapterProcesses { get; private set; }
 		#endregion
 
 		public ChapterAtomSection() {
-			ChapterAtom = new EbmlList<ChapterAtomSection>();
-			ChapterDisplay = new EbmlList<ChapterDisplaySection>();
-			ChapterProcess = new EbmlList<ChapterProcessSection>();
+			ChapterAtoms = new EbmlList<ChapterAtomSection>();
+			ChapterDisplays = new EbmlList<ChapterDisplaySection>();
+			ChapterProcesses = new EbmlList<ChapterProcessSection>();
 		}
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
@@ -951,11 +1088,11 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.ChapterTrack:
 					ChapterTrack = Section.CreateRead(new ChapterTrackSection(), reader); break;
 				case DocTypeMatroskaV2.eId.ChapterAtom:
-					Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtom); break;
+					Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtoms); break;
 				case DocTypeMatroskaV2.eId.ChapterDisplay:
-					Section.CreateReadAdd(new ChapterDisplaySection(), reader, ChapterDisplay); break;
+					Section.CreateReadAdd(new ChapterDisplaySection(), reader, ChapterDisplays); break;
 				case DocTypeMatroskaV2.eId.ChapProcess:
-					Section.CreateReadAdd(new ChapterProcessSection(), reader, ChapterProcess); break;
+					Section.CreateReadAdd(new ChapterProcessSection(), reader, ChapterProcesses); break;
 				case DocTypeMatroskaV2.eId.ChapterUID:
 					ChapterUId = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.ChapterTimeStart:
@@ -979,30 +1116,45 @@ namespace AVDump2Lib.BlockConsumers {
 		[Flags]
 		public enum Options { None = 0, Hidden = 1, Enabled = 2 }
 
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return new KeyValuePair<string, object>("ChapterTrack", ChapterTrack);
+			foreach(var chapterAtoms in ChapterAtoms) yield return CreatePair("ChapterAtom", chapterAtoms);
+			foreach(var chapterDisplay in ChapterDisplays) yield return CreatePair("ChapterDisplay", chapterDisplay);
+			foreach(var chapterProcess in ChapterProcesses) yield return CreatePair("ChapterProcess", chapterProcess);
+			yield return CreatePair("ChapterUId", ChapterUId);
+			yield return CreatePair("ChapterTimeStart", ChapterTimeStart);
+			yield return CreatePair("ChapterTimeEnd", ChapterTimeEnd);
+			yield return CreatePair("ChapterFlags", ChapterFlags);
+			yield return CreatePair("ChapterSegmentUId", ChapterSegmentUId);
+			yield return CreatePair("ChapterSegmentEditionUId", ChapterSegmentEditionUId);
+		}
 	}
 	public class ChapterTrackSection : Section {
-		public EbmlList<ulong> ChapterTrackNumber { get; private set; }
+		public EbmlList<ulong> ChapterTrackNumbers { get; private set; }
 
-		public ChapterTrackSection() { ChapterTrackNumber = new EbmlList<ulong>(); }
+		public ChapterTrackSection() { ChapterTrackNumbers = new EbmlList<ulong>(); }
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.ChapterTrackNumber:
-					ChapterTrackNumber.Add((ulong)reader.RetrieveValue()); break;
+					ChapterTrackNumbers.Add((ulong)reader.RetrieveValue()); break;
 				default: return false;
 			}
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() { foreach(var chapterTrackNumber in ChapterTrackNumbers) yield return new KeyValuePair<string, object>("ChapterTrackNumber", chapterTrackNumber); }
 	}
 	public class ChapterDisplaySection : Section {
 		public string ChapterString { get; private set; }
-		public EbmlList<string> ChapterLanguage { get; private set; } //Def: eng
-		public EbmlList<string> ChapterCountry { get; private set; }
+		public EbmlList<string> ChapterLanguages { get; private set; } //Def: eng
+		public EbmlList<string> ChapterCountries { get; private set; }
 
 		public ChapterDisplaySection() {
-			ChapterLanguage = new EbmlList<string>();
-			ChapterCountry = new EbmlList<string>();
+			ChapterLanguages = new EbmlList<string>();
+			ChapterCountries = new EbmlList<string>();
 		}
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
@@ -1010,28 +1162,34 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.ChapString:
 					ChapterString = (string)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.ChapLanguage:
-					ChapterLanguage.Add((string)reader.RetrieveValue()); break;
+					ChapterLanguages.Add((string)reader.RetrieveValue()); break;
 				case DocTypeMatroskaV2.eId.ChapCountry:
-					ChapterCountry.Add((string)reader.RetrieveValue()); break;
+					ChapterCountries.Add((string)reader.RetrieveValue()); break;
 				default: return false;
 			}
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			foreach(var chapterLanguage in ChapterLanguages) yield return CreatePair("ChapterLanguage", chapterLanguage);
+			foreach(var chapterCountry in ChapterCountries) yield return CreatePair("ChapterCountry", chapterCountry);
+			yield return new KeyValuePair<string, object>("ChapterString", ChapterString);
+		}
 	}
 	public class ChapterProcessSection : Section {
 		private ulong? chapterProcessCodecId;
 
 		public ulong ChapterProcessCodecId { get { return chapterProcessCodecId.HasValue ? chapterProcessCodecId.Value : 0; } }
-		public EbmlList<ChapterProcessCommandSection> ChapterProcessCommand { get; private set; }
+		public EbmlList<ChapterProcessCommandSection> ChapterProcessCommands { get; private set; }
 		//ChapProcessPrivate
 
-		public ChapterProcessSection() { ChapterProcessCommand = new EbmlList<ChapterProcessCommandSection>(); }
+		public ChapterProcessSection() { ChapterProcessCommands = new EbmlList<ChapterProcessCommandSection>(); }
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.ChapProcessCommand:
-					Section.CreateReadAdd(new ChapterProcessCommandSection(), reader, ChapterProcessCommand); break;
+					Section.CreateReadAdd(new ChapterProcessCommandSection(), reader, ChapterProcessCommands); break;
 				case DocTypeMatroskaV2.eId.ChapProcessCodecID:
 					chapterProcessCodecId = (ulong)reader.RetrieveValue(); break;
 				default: return false;
@@ -1039,6 +1197,12 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("ChapterProcessCodecId", ChapterProcessCodecId);
+			foreach(var chapterProcessCommand in ChapterProcessCommands) yield return CreatePair("ChapterProcessCommand", chapterProcessCommand);
+		}
+
 
 		public class ChapterProcessCommandSection : Section {
 			public ProcessTime? ChapterProcessTime { get; private set; }
@@ -1053,6 +1217,10 @@ namespace AVDump2Lib.BlockConsumers {
 				return true;
 			}
 			protected override void Validate() { }
+
+			public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+				yield return CreatePair("ChapterProcessTime", ChapterProcessTime);
+			}
 
 			public enum ProcessTime { During, Before, After }
 		}
@@ -1071,25 +1239,33 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 		protected override void Validate() { }
 
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			foreach(var tag in Items) yield return CreatePair("Tag", tag);
+		}
+
 
 	}
 	public class TagSection : Section {
 		public TargetsSection Targets { get; private set; }
-		public EbmlList<SimpleTagSection> SimpleTag { get; private set; }
+		public EbmlList<SimpleTagSection> SimpleTags { get; private set; }
 
-		public TagSection() { SimpleTag = new EbmlList<SimpleTagSection>(); }
+		public TagSection() { SimpleTags = new EbmlList<SimpleTagSection>(); }
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.Targets:
 					Targets = Section.CreateRead(new TargetsSection(), reader); break;
 				case DocTypeMatroskaV2.eId.SimpleTag:
-					Section.CreateReadAdd(new SimpleTagSection(), reader, SimpleTag); break;
+					Section.CreateReadAdd(new SimpleTagSection(), reader, SimpleTags); break;
 				default: return false;
 			}
 			return true;
 		}
 		protected override void Validate() { }
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return new KeyValuePair<string, object>("Targets", Targets);
+			foreach(var simpleTag in SimpleTags) yield return CreatePair("SimpleTag", simpleTag);
+		}
 
 	}
 	public class TargetsSection : Section {
@@ -1098,10 +1274,10 @@ namespace AVDump2Lib.BlockConsumers {
 
 		public ulong TargetTypeValue { get { return targetTypeValue.HasValue ? targetTypeValue.Value : 50; } } //Def: 50
 		public string TargetType { get; private set; }
-		public EbmlList<ulong> TrackUId { get { return trackUId.Count != 0 ? trackUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
-		public EbmlList<ulong> EditionUId { get { return editionUId.Count != 0 ? editionUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
-		public EbmlList<ulong> ChapterUId { get { return chapterUId.Count != 0 ? chapterUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
-		public EbmlList<ulong> AttachmentUId { get { return attachmentUId.Count != 0 ? attachmentUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
+		public EbmlList<ulong> TrackUIds { get { return trackUId.Count != 0 ? trackUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
+		public EbmlList<ulong> EditionUIds { get { return editionUId.Count != 0 ? editionUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
+		public EbmlList<ulong> ChapterUIds { get { return chapterUId.Count != 0 ? chapterUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
+		public EbmlList<ulong> AttachmentUIds { get { return attachmentUId.Count != 0 ? attachmentUId : new EbmlList<ulong>(new ulong[] { 0 }); } }
 
 		public TargetsSection() {
 			trackUId = new EbmlList<ulong>();
@@ -1129,6 +1305,16 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("TargetTypeValue", TargetTypeValue);
+			yield return CreatePair("TargetType", TargetType);
+			foreach(var trackUId in TrackUIds) yield return CreatePair("TrackUId", trackUId);
+			foreach(var editionUId in EditionUIds) yield return CreatePair("EditionUId", editionUId);
+			foreach(var chapterUId in ChapterUIds) yield return CreatePair("ChapterUId", chapterUId);
+			foreach(var attachmentUId in AttachmentUIds) yield return CreatePair("AttachmentUId", attachmentUId);
+		}
+
 	}
 	public class SimpleTagSection : Section {
 		private string tagLanguage;
@@ -1162,6 +1348,14 @@ namespace AVDump2Lib.BlockConsumers {
 			return true;
 		}
 		protected override void Validate() { }
+
+		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() {
+			yield return CreatePair("TagName", TagName);
+			yield return CreatePair("TagLanguage", TagLanguage);
+			yield return CreatePair("TagString", TagString);
+			yield return CreatePair("TagOriginal", TagOriginal);
+		}
+
 	}
 
 	public class SeekHeadSection {
@@ -1171,7 +1365,7 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 	}
 
-	public abstract class Section {
+	public abstract class Section : IEnumerable<KeyValuePair<string, object>> {
 		internal void Read(EBMLReader reader) {
 			reader.EnterMasterElement();
 
@@ -1205,6 +1399,12 @@ namespace AVDump2Lib.BlockConsumers {
 
 		protected abstract bool ProcessElement(EBMLReader reader, ElementInfo elementInfo);
 		protected abstract void Validate();
+
+		IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+		public abstract IEnumerator<KeyValuePair<string, object>> GetEnumerator();
+
+		protected KeyValuePair<string, object> CreatePair(string key, object value) { return new KeyValuePair<string, object>(key, value); }
+
 	}
 	public class EbmlList<T> : IList<T> {
 		protected List<T> items;

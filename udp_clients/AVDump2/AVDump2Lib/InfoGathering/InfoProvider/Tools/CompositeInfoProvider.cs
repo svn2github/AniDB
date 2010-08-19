@@ -22,8 +22,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 		public IEnumerable<InfoEntry> EnumEntries() {
 			InfoEntry entry;
 
-
-			for(int index = 0;index < 5;index++) {
+			for(int index = 0;index < 10;index++) {
 				entry = this[StreamType.Hash, index, EntryKey.None];
 				if(entry != null) yield return entry;
 			}
@@ -33,24 +32,26 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 				if(entry != null) yield return entry;
 			}
 
-			for(int index = 0;index < 6;index++) {
+			for(int index = 0;index < 10;index++) {
 				foreach(EntryKey entryKey in Enum.GetValues(typeof(EntryKey))) {
 					entry = this[StreamType.Video, index, entryKey];
 					if(entry != null) yield return entry;
 				}
 			}
-			for(int index = 0;index < 6;index++) {
+			for(int index = 0;index < 10;index++) {
 				foreach(EntryKey entryKey in Enum.GetValues(typeof(EntryKey))) {
 					entry = this[StreamType.Audio, index, entryKey];
 					if(entry != null) yield return entry;
 				}
 			}
-			for(int index = 0;index < 6;index++) {
+			for(int index = 0;index < 10;index++) {
 				foreach(EntryKey entryKey in Enum.GetValues(typeof(EntryKey))) {
 					entry = this[StreamType.Text, index, entryKey];
 					if(entry != null) yield return entry;
 				}
 			}
 		}
+
+		public T GetProvider<T>() where T : InfoProviderBase { return (T)providers.FirstOrDefault(p => p is T); }
 	}
 }
