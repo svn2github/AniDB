@@ -28,7 +28,7 @@ a:hover,
 }
 
 #layout-main div.tabbed_pane ul.tabs li
-{
+{F
 	background-color: #D3D5D9;
 }
 
@@ -179,8 +179,6 @@ input[type="submit"]:hover,
 .g_bubble .g_bubble .g_bubble,
 html,
 #layout-menu,
-#layout-main *.g_odd *.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd *.g_odd,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-main div.export_all div.exportblock div.inner,
@@ -189,12 +187,6 @@ html,
 #layout-main div.main_all div.register div.inner,
 #layout-main div.main_all div.register .rbottom *,
 #layout-main div.main_all div.register .rtop *,
-#layout-main tr.g_odd,
-#layout-main li.g_odd,
-#layout-main span.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.forum div.poll div.inner,
 #layout-main div.forum div.poll .rbottom *,
 #layout-main div.forum div.poll .rtop *,
@@ -204,10 +196,22 @@ html,
 #layout-main div.forum div.comment div.inner,
 #layout-main div.forum div.comment .rbottom *,
 #layout-main div.forum div.comment .rtop *,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 #layout-main div.format-buttons input
 {
 	background-color: #B9BBBF;
+}
+
+#layout-main .g_odd .g_odd,
+#layout-main .g_odd .g_odd .g_odd .g_odd,
+#layout-main tr.g_odd,
+#layout-main li.g_odd,
+#layout-main span.g_odd,
+#layout-main .g_odd .g_odd .g_odd,
+#layout-main .g_odd .g_odd .g_odd .g_odd .g_odd,
+#layout-main div.forum ul.topics li.g_odd.row,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
+{
+	background-color: #A7A9AB;
 }
 
 .g_bubble .g_bubble,

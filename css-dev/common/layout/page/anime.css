@@ -77,11 +77,6 @@
 	min-width: 10em;
 }
 
-#layout-main div.anime_all table.stafflist + table.stafflist
-{
-	margin-top: 1.5em;
-}
-
 #layout-main div.anime_all div.songs table th.credit
 {
 	min-width: 15em;
@@ -100,6 +95,19 @@
 {
 	width: 30%;
 }
+
+#layout-main div.anime_all div.staffblock + div.staffblock
+{
+	margin-top:1.5em;
+}
+
+#layout-main div.anime_all div.staffblock h2
+{
+	margin-left:1em;
+	text-align:center;
+	width:30%;
+}
+
 
 #layout-main div.group_all div.group_released td.epbar div,
 #layout-main div.anime_all div.groups td.epbar div
