@@ -1,3 +1,9 @@
+#layout-main div.forum dl.icon dt
+{
+	background-position: 5px 50%;
+	background-repeat: no-repeat;
+}
+
 #layout-main div.cmt_add form div textarea
 {
 	display: block;
@@ -209,9 +215,9 @@
 	margin: 5px 0;
 }
 
-#layout-main div.forum div.navbar div.inner span.messages,
-#layout-main div.forum div.navbar div.inner span.breadcrumbs,
-#layout-main div.forum div.navbar div.inner span.info
+#layout-main div.forum div.g_bubble.navbar span.messages,
+#layout-main div.forum div.g_bubble.navbar span.breadcrumbs,
+#layout-main div.forum div.g_bubble.navbar span.info
 {
 	display: block;
 	line-height: 2em;
@@ -224,13 +230,13 @@
 	padding-top: .5em;
 }
 
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.g_bubble.navbar div.bottom
 {
 	clear: both;
 	margin-right: 1em;
 }
 
-#layout-main div.forum div.navbar div.inner
+#layout-main div.forum div.g_bubble.navbar
 {
 	padding-bottom: .5em;
 	padding-left: 1em;
@@ -313,10 +319,10 @@
 	margin-top: 1em;
 }
 
-#layout-main div.forum div.posting-box div.inner,
-#layout-main div.forum div.options-box div.inner,
-#layout-main div.forum div.submit-box div.inner,
-#layout-main div.forum div.preview-box div.inner
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.options-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.preview-box
 {
 	padding: .5em 1em;
 }
@@ -592,7 +598,7 @@
 	margin-top: .5em;
 }
 
-#layout-main div.forum div.rules div.inner
+#layout-main div.forum div.g_bubble.rules
 {
 	padding: 10px;
 	text-align: left;
@@ -650,7 +656,7 @@
 	margin-left: 30%;
 }
 
-#layout-main div.forumsearch_form div.inner input[type="text"]
+#layout-main div.g_bubble.forumsearch_form input[type="text"]
 {
 	width: 250px;
 }
@@ -674,7 +680,7 @@
 }
 
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom,
+#layout-main div.forum div.g_bubble.navbar div.bottom,
 #layout-main div.forum div.events dl + dl,
 #layout-main div.forum div.poll dl + dl
 {
@@ -716,8 +722,8 @@
 
 #layout-main div.cmt_entries div.comment span.stamp span.icons,
 #layout-main div.forum div.topic_actions div.buttons a,
-#layout-main div.forum div.navbar div.inner span.breadcrumbs,
-#layout-main div.forum div.navbar div.inner span.messages,
+#layout-main div.forum div.g_bubble.navbar span.breadcrumbs,
+#layout-main div.forum div.g_bubble.navbar span.messages,
 #layout-main div.forum div.topic_actions div.linklist
 {
 	float: left;
@@ -738,8 +744,7 @@
 	margin-bottom: 1em;
 }
 
-#layout-main div.forum div.navbar div.fake,
-#layout-main div.forum div.navbar div.inner div.fake
+#layout-main div.forum div.navbar div.fake
 {
 	clear: both;
 }
@@ -780,7 +785,7 @@
 }
 
 #layout-main div.forum div.add-box form,
-#layout-main div.forumsearch_form div.inner form
+#layout-main div.g_bubble.forumsearch_form form
 {
 	padding: 1em;
 }

@@ -41,18 +41,10 @@ div.quotebody div.quote div.g_odd
 	color: #105289;
 }
 
-#layout-main div.forum dl.icon dt
-{
-	background-position: 5px 50%;
-	background-repeat: no-repeat;
-}
-
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+/*#layout-main div.forum div.g_bubble.threads
 {
 	background-color: #4a4a5a;
-}
+}*/
 
 #layout-main div.forum ul.topics li.row
 {
@@ -65,9 +57,7 @@ div.quotebody div.quote div.g_odd
 	background-color: #b0b0b0;
 }
 
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *,
-#layout-main div.forum div.inner,
+/*#layout-main div.g_bubble.forum,*/
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.row:hover,
@@ -100,23 +90,17 @@ div.quotebody div.quote div.g_odd
 }
 
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.navbar div.bottom
 {
 	border-top-color: #4a4a5a;
 }
 
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *
+/*#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment
 {
 	background-color: #B6B9C0;
-}
+}*/
 
 #layout-main div.forum div.poll div.pollbar
 {
@@ -168,17 +152,11 @@ div.quotebody div.quote div.g_odd
 	color: #000000;
 }
 
-#layout-main div.forum div.rules div.inner,
-#layout-main div.forum div.rules .rtop *,
-#layout-main div.forum div.rules .rbottom *
-{
-	background-color: #ECD5D8;
-}
-
-#layout-main div.forum div.rules div.inner
+/*#layout-main div.forum div.g_bubble.rules
 {
 	color: #BC2A4D;
-}
+	background-color: #ECD5D8;
+}*/
 
 #layout-main div.forum div.quickreply textarea
 {

@@ -184,18 +184,6 @@ html,
 #layout-main div.export_all div.exportblock div.inner,
 #layout-main div.export_all div.exportblock .rbottom *,
 #layout-main div.export_all div.exportblock .rtop *,
-#layout-main div.main_all div.register div.inner,
-#layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *,
 #layout-main div.format-buttons input
 {
 	background-color: #B9BBBF;
@@ -269,10 +257,7 @@ select,
 #layout-search select,
 #layout-search input.text,
 #layout-menu li.sub-menu ul,
-#layout-main div.pagination span a,
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+#layout-main div.pagination span a
 {
 	background-color: #34394D;
 }
