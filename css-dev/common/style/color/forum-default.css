@@ -180,8 +180,7 @@ div.quotebody div.quote div.g_odd
 }
 
 #layout-main div.forum ul.topiclist,
-#layout-main div.forum ul.linklist,
-#layout-main div.forum div.comment
+#layout-main div.forum ul.linklist
 {
 	background-color: inherit;
 }
