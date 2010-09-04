@@ -6,7 +6,7 @@
 /* Wrapping box with faux columns */
 #layout-main div.cmt_all div.g_bubble.comment {
 	padding:0;
-	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y 119px 0;
+	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y 135px 0;
 	border-right:5px solid #595654;
 	border-left: none;
 	border-top: none;
@@ -16,8 +16,8 @@
 /* Profile box */
 #layout-main div.cmt_all div.g_bubble.comment dl.profile {
 	padding:0 10px 0 0;
-	width:120px;
-	background:url(images/layout/forum-post-arrow.png) no-repeat right 31px;
+	width:119px;
+	background:url(images/layout/forum-post-arrow.png) no-repeat right 27px;
 	border:none;
 }
 	#layout-main div.cmt_all div.g_bubble.comment dl.profile dd.user {
