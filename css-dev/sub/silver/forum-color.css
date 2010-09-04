@@ -1,7 +1,11 @@
-#layout-main div.forum div.g_bubble.threads,
-#layout-main div.forum div.g_bubble.threads > ul
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color:#4992B6;
+}
+
+#layout-main div.forum div.g_bubble.threads > ul
+{
+	background-color: transparent;
 }
 
 #layout-main div.forum ul.topics li.row
