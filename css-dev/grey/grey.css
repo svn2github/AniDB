@@ -2250,6 +2250,7 @@ background: inherit;
 {
 background-image: url(images/bg_2.gif)
 }
+#layout-main div.forum div.g_bubble.header,
 #layout-main div.forum div.g_bubble.navbar,
 #layout-main div.forum div.g_bubble.search,
 #layout-main div.forum div.g_bubble.posting-box,
