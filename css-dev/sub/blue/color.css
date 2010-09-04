@@ -98,3 +98,9 @@ th,
 	padding:2px;
 	color:#2E3C55;
 }
+
+#layout-search div.g_bubble.search
+{
+	background-color: transparent;
+	border:none;
+}

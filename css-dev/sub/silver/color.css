@@ -196,3 +196,9 @@ div.pagination span strong
 {
 	background-color: #DEE3E7;
 }
+
+#layout-search div.g_bubble.search
+{
+	background-color: transparent;
+	border:none;
+}

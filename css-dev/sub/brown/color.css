@@ -163,3 +163,9 @@ th,
 	border-left-color:#8C8673;
 	border-right-color:#8C8673;
 }
+
+#layout-search div.g_bubble.search
+{
+	background-color: transparent;
+	border:none;
+}
