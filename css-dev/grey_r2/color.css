@@ -1,6 +1,6 @@
 span.link,
 a,
-#layout-main div.forum div.poll div.inner div.question h2
+#layout-main div.forum div.g_bubble.poll div.question h2
 {
 color:#ADD8E6;
 border-bottom-color:white;
@@ -57,7 +57,7 @@ background-image:url(../grey/images/bg_2.gif);
 #layout-main div.addcharcharrel_all div.explanation div.description,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description,
 #layout-main div.addcreatoranimerel_all div.explanation div.description,
-#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.g_bubble.comment,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.forum hr,
 #adba_update,
@@ -133,9 +133,9 @@ background-color:hsla(0, 100%, 50%, 0.3);
 }
 #layout-main div.quotebody,
 #layout-main div.forum div.postbody dl.codebox dt,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.events div.inner,
-#layout-main div.export_all div.exportblock div.inner
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.export_all div.g_bubble.exportblock
 {
 background-image:url(../grey/images/bg_3.gif);
 }
@@ -188,7 +188,7 @@ color:gray;
 }
 #layout-main div.tabbed_pane div.body,
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom,
+#layout-main div.forum div.navbar div.bottom,
 #layout-tabs ul.main-tabs > li.selected,
 #layout-main div.tabbed_pane ul.tabs > li.selected,
 #layout-main div.tabbed_pane ul.tabs > li:hover,
