@@ -454,12 +454,6 @@ width:45%;
 {
 margin:0 1em;
 }
-#layout-main div.main_all div.rightbar li span
-{
-position:absolute;
-text-align:right;
-width:3em;
-}
 #layout-main div.main_all div.rightbar li a
 {
 display:table;
@@ -469,7 +463,7 @@ margin-left:3.5em;
 {
 margin:0.5em 12em 0 0.5em;
 }
-.g_bubble
+.g_bubble,#layout-main div.main_all div.datablocks h4,#layout-main div.main_all div.header h4
 {
 -moz-border-radius:0;
 border-style:none;
