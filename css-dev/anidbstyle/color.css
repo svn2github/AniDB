@@ -24,28 +24,16 @@ a:hover
 #layout-main div.anime_all div.mylist th,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
-#layout-main span.g_odd
-{
-	background-color: #B0B0B0;
-}
-
-#layout-main *.g_odd *.g_odd
-{
-	background-color: #BFC2C9;
-}
-#layout-main *.g_odd *.g_odd *.g_odd
-{
-	background-color: #B0B0B0;
-}
-#layout-main *.g_odd *.g_odd *.g_odd *.g_odd
-{
-	background-color: #BFC2C9;
-}
+#layout-main span.g_odd,
+#layout-main *.g_odd *.g_odd *.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd
 {
 	background-color: #B0B0B0;
 }
 
+#layout-main div.forum ul.topics li.row,
+#layout-main *.g_odd *.g_odd,
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd,
 #layout-main ul.g_list li.g_odd
 {
 	background-color: #BFC2C9;
