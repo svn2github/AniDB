@@ -5,7 +5,8 @@
 }
 
 #layout-main div.forum hr,
-#layout-main div.cmt_all div.cmt_add hr
+#layout-main div.cmt_all div.cmt_add hr,
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color:#4A4A5A;
 }
@@ -29,4 +30,17 @@
 	border-bottom-color: #092e4d;
 	border-right-color: #092e4d;
 	color: #FFFFFF;
+}
+
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box
+{
+	background-color:#ACAEB4;
 }
