@@ -12,7 +12,7 @@
 
 /* Profile box */
 #layout-main div.cmt_all div.g_bubble.comment dl.profile {
-	margin:0; padding:0 10px 0 0;
+	padding:0 10px 0 0;
 	width:120px;
 	background:url(images/layout/forum-post-arrow.png) no-repeat right 31px;
 	border:none;
