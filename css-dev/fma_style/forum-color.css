@@ -67,3 +67,8 @@
 {
 	background-color:#F5F5F5;
 }
+
+#layout-main div.forum div.g_bubble.posting-box div.message-box input.f_button
+{
+	background-color: #FFFFFF;
+}
