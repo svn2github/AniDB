@@ -97,15 +97,9 @@ th,
 
 .g_bubble .g_bubble,
 .g_bubble .g_bubble .g_bubble .g_bubble,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment,
 #layout-main div.main_all .g_bubble
 {
 	background-color: #E0DBC9;
@@ -126,9 +120,11 @@ th,
 	background-color:#8C8673;
 }
 
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *,
-#layout-main div.forum div.inner,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.row:hover,
@@ -157,9 +153,7 @@ th,
 	color:#E9E6D9;
 }
 
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color:#8C8673;
 }
