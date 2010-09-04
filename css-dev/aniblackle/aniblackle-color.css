@@ -81,6 +81,8 @@ html,
 #layout-main div.forum div.g_bubble.events,
 #layout-main div.forum div.g_bubble.comment,
 #layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
@@ -378,4 +380,9 @@ table,
 #layout-main div.userpage_all > div.g_section > h4
 {
 	border-top-color: #666666;
+}
+
+#layout-main div.forum ul.topics dd
+{
+	border-left-color:#444444;
 }
