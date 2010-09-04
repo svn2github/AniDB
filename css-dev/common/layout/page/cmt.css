@@ -40,7 +40,7 @@
 
 #layout-main div.cmt_entries dl.profile dd.user
 {
-	padding-top: 8pt;
+	padding-top: 0.5em;
 }
 
 #layout-main div.cmt_entries dl.profile dd.user_icons
@@ -666,8 +666,6 @@
 }
 
 #layout-main div.forum div.postbody dl.codebox dt,
-#layout-main div.forum div.events,
-#layout-main div.forum div.poll,
 #layout-main div.forum div.events div.data > p,
 #layout-main div.forum div.poll div.data p
 {

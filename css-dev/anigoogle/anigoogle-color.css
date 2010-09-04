@@ -59,9 +59,11 @@ th
 	background-color: #c3d9ff;
 }
 
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box
 {
 	background-color: #CADCEB;
 }
@@ -88,7 +90,8 @@ a:hover,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
 .g_bubble .name-colored,
 
-#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a,
+#layout-main div.cmt_entries a.username-colored
 {
 	color: #AA0000;
 }
@@ -234,4 +237,20 @@ span.test
 	border-top-color: #C9D7F1;
 	border-left-color: #C9D7F1;
 	border-right-color: #97AACC;
+}
+
+#layout-main div.forum div.g_bubble.navbar div.bottom
+{
+	border-color:#FFFFFF;
+}
+
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2
+{
+	color:#006699;
+}
+
+#layout-main div.forum div.g_bubble.threads
+{
+	background-color:#4992B6;
 }
