@@ -51,6 +51,7 @@
 #layout-main div.forum div.g_bubble.comment,
 #layout-main div.cmt_all div.cmt_add h4
 {
+	border: 1px solid;
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }
 
