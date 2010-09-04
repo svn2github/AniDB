@@ -43,3 +43,51 @@
 {
 	background-color:#ACAEB4;
 }
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+#layout-main div.forum ul.topics li.g_odd.row
+{
+	background-color: #b0b0b0;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	background-color: #bfc2c9;
+}
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
+{
+	background-color: #ACAEB4;
+}
+
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+	opacity: 0.3;
+}
+
+div.quotebody
+{
+	background-color: #EBEADD;
+	border: 1px solid #DBDBDB;
+}
+
+div.quotebody div.quote div.g_odd
+{
+	background-color: #EFEED9;
+}
+
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum a.username-coloured
+{
+	color:#AA0000;
+}
+
+#layout-main div.forum div.quickreply textarea
+{
+	border-color: #A9A9A9;
+}
