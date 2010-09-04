@@ -135,14 +135,14 @@
 	display: block;
 	float: left;
 	width: 50%;
-	padding: .2em .5em 0.5em;
+	padding: 0.2em 0.5em 0.5em;
 }
 
 #layout-main div.forum li.header dt,
 #layout-main div.forum li.header dd
 {
 	border-left-width: 0;
-	padding:5px 5px 2px;
+	padding:0.7px 5px 5px;
 }
 
 #layout-main div.forum ul.topiclist dd.posts,
@@ -194,9 +194,11 @@
 	padding-left: .3em;
 }
 
-#layout-main div.forum div.threads
+#layout-main div.forum div.g_bubble.threads
 {
 	padding-bottom: 0.4em;
+	border:none;
+	margin-bottom: 0.5em;
 }
 
 #layout-main div.forum hr
