@@ -44,15 +44,22 @@
 #layout-tabs ul.main-tabs li:hover,
 #layout-tabs ul.main-tabs li.selected
 {
-	background-color:#FFFFFF;
-	color:#7762ED;
 	border-bottom:1px double #FFFFFF;
+	background-color:#FFFFFF;
+}
+
+#layout-tabs ul.main-tabs li:hover,
+#layout-tabs ul.main-tabs li.selected,
+#layout-tabs ul.main-tabs li:hover a,
+#layout-tabs ul.main-tabs li.selected a
+{
+	color:#7762ED;
 }
 
 #layout-tabs ul.main-tabs li
 {
 	color:#FFFFFF;
-	background-color:#305C97
+	background-color:#305C97;
 	border:1px solid #F3E7FF;
 }
 
