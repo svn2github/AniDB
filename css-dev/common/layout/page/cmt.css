@@ -130,11 +130,6 @@
 	min-height: 35px;
 }
 
-#layout-main div.forum li.header dl.icon dt
-{
-	padding-left: .5em;
-}
-
 #layout-main div.forum ul.topiclist dt
 {
 	display: block;
@@ -147,10 +142,7 @@
 #layout-main div.forum li.header dd
 {
 	border-left-width: 0;
-	line-height: 1em;
-	margin: 2px 0 4px;
-	padding-bottom: 2px;
-	padding-top: 2px;
+	padding:5px 5px 2px;
 }
 
 #layout-main div.forum ul.topiclist dd.posts,
@@ -204,7 +196,7 @@
 
 #layout-main div.forum div.threads
 {
-	margin-bottom: 4px;
+	padding-bottom: 0.4em;
 }
 
 #layout-main div.forum hr
@@ -226,14 +218,12 @@
 
 #layout-main div.forum div.navbar span.icons
 {
-	padding-right: 1em;
 	padding-top: .5em;
 }
 
 #layout-main div.forum div.g_bubble.navbar div.bottom
 {
 	clear: both;
-	margin-right: 1em;
 }
 
 #layout-main div.forum div.g_bubble.navbar
@@ -246,7 +236,6 @@
 #layout-main div.forum div.navbar span.info
 {
 	float: right;
-	padding-right: 1em;
 }
 
 #layout-main div.forum div.signature
@@ -317,14 +306,6 @@
 #layout-main div.forum div.preview-box
 {
 	margin-top: 1em;
-}
-
-#layout-main div.forum div.g_bubble.posting-box,
-#layout-main div.forum div.g_bubble.options-box,
-#layout-main div.forum div.g_bubble.submit-box,
-#layout-main div.forum div.g_bubble.preview-box
-{
-	padding: .5em 1em;
 }
 
 #layout-main div.forum dl.topic
@@ -614,9 +595,6 @@
 
 #layout-main div.forum div.search form
 {
-	margin-left: 1em;
-	padding-bottom: .5em;
-	padding-top: .5em;
 	text-align: left;
 }
 
@@ -667,16 +645,14 @@
 	border: none;
 }
 
-#layout-main div.forum li.row
+#layout-main div.forum li.row+li.row
 {
-	border-bottom: 1px solid;
 	border-top: 1px solid;
 }
 
 #layout-main div.forum ul.topics
 {
-	border-left: 5px solid;
-	border-right: 5px solid;
+	padding: 0 0.5em;
 }
 
 #layout-main div.forum div.signature,
@@ -858,4 +834,14 @@ div.quotebody div.quote div.quotebody
 	width: auto;
 	display: block;
 	vertical-align: inherit;
+}
+
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.options-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.preview-box
+{
+	padding:0.8em;
 }
