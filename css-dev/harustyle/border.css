@@ -8,7 +8,8 @@ table table
 	border: none;
 }
 
-img, a
+img, a,
+#layout-search div.g_bubble.search
 {
 	border: none;
 }
