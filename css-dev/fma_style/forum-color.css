@@ -36,25 +36,17 @@
 	border-top-color: #CCCCCC;
 }
 
-#layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.signature
 {
 	border-top-color:#305C97;
 }
 
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.navbar div.bottom
 {
 	border-color: #FFFFFF;
 }
 
-#layout-main div.forum div.g_bubble.poll,
-#layout-main div.forum div.g_bubble.events,
 #layout-main div.forum div.g_bubble.comment,
-#layout-main div.forum div.g_bubble.navbar,
-#layout-main div.forum div.g_bubble.search,
-#layout-main div.forum div.g_bubble.posting-box,
-#layout-main div.forum div.g_bubble.submit-box,
-#layout-main div.forum div.g_bubble.options-box,
 #layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color:#EFF3FA;
@@ -63,4 +55,15 @@
 #layout-main ul.format-modes
 {
 	background-color: inherit;
+}
+
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box
+{
+	background-color:#F5F5F5;
 }
