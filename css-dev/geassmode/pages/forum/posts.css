@@ -5,7 +5,7 @@
 
 /* Wrapping box with faux columns */
 #layout-main div.cmt_all div.g_bubble.comment {
-	margin:0; padding:0;
+	padding:0;
 	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y 125px 0;
 	border-right:5px solid #595654;
 }
