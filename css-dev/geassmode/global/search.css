@@ -10,9 +10,7 @@
 		margin:0; padding:0;
 	}
 	#layout-search form.random,
-	#layout-search a.advsearch,
-	#layout-search b.rtop,
-	#layout-search b.rbottom {
+	#layout-search a.advsearch {
 		display:none;
 	}
 	#layout-search form select {

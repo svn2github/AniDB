@@ -298,8 +298,7 @@ background-image:url(../grey/images/whitepixel.png);
 {
 border-color:hsla(0, 100%, 25%, 0.4);
 }
-div.threads .rtop > *,
-div.threads .rbottom > *,
+#layout-main div.forum div.g_bubble.threads,
 #layout-main div.forum ul.topiclist li.header
 {
 background-color:hsla(0, 100%, 25%, 0.4);

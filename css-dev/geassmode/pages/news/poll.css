@@ -3,11 +3,7 @@
 	background:url(images/layout/border-hack.gif) repeat-x left bottom;
 	border-bottom:none; border-left:5px solid #393634;
 }
-	#layout-main div.g_content div.news div.poll .rtop,
-	#layout-main div.g_content div.news div.poll .rbottom {
-		display:none;
-	}
-	
+
 	#layout-main div.g_content div.news div.poll div.inner {
 		padding:0;
 		background:none; 
@@ -27,11 +23,7 @@
 	background:url(images/layout/border-hack.gif) repeat-x left bottom;
 	border-bottom:none; border-left:5px solid #393634;
 }
-	#layout-main div.g_content div.news div.events .rtop,
-	#layout-main div.g_content div.news div.events .rbottom {
-		display:none;
-	}
-	
+
 	#layout-main div.g_content div.news div.events div.inner {
 		padding:0;
 		background:none; 

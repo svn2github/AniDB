@@ -187,11 +187,6 @@ right:0;
 height:2em;
 left:auto;
 }
-#layout-search .rtop,
-#layout-search .rbottom
-{
-display:none;
-}
 #layout-search form input.text
 {
 width:25em;

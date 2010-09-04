@@ -26,18 +26,6 @@
 	display:block;
 }
 
-#layout-main div.export_all .rtop, .rbottom
-{
-	display:block;
-}
-
-#layout-main div.export_all .rtop *, .rbottom *
-{
-	display: block;
-	height: 1px;
-	overflow: hidden;
-}
-
 #layout-main div.export_all .r1
 {
 	margin: 0 5px;

@@ -189,10 +189,7 @@ input[type="checkbox"]
 }
 
 .g_bubble .g_bubble,
-.g_bubble .g_bubble .g_bubble .g_bubble,
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
+.g_bubble .g_bubble .g_bubble .g_bubble
 {
 	background-color:#A9ABB1;
 }
@@ -200,13 +197,6 @@ input[type="checkbox"]
 #layout-main div.tabbed_pane ul.tabs li
 {
 	background-color:#D3D5D9;
-}
-
-#layout-main div.main_all div.register div.inner,
-#layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *
-{
-	background-color:#A9ABB1;
 }
 
 #layout-main div.animeatt_all div.review > h4,

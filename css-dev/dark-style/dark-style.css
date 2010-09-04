@@ -1955,8 +1955,6 @@ div.anime_all div.image
 	display: block;
 }
 
-#layout-search .rtop,
-#layout-search .rbottom,
 #layout-search div.search form.random,
 #layout-tabs
 {
@@ -2000,21 +1998,16 @@ div.anime_all div.image
 {
 	margin: 10px auto;
 }
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *,
-#layout-main div.forum div.inner
-{
-	background-color:#170a2b;
-}
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *,
+
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover
 {
@@ -2054,9 +2047,7 @@ div.quotebody div.quoteof
 {
 	color:#d3adec;
 }
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color: #2a2a2a;
 }

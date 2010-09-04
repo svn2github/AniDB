@@ -150,17 +150,13 @@ span.g_odd
 	background-color:#EEEEEE;
 }
 
-#layout-search div.search,
-#layout-search .rbottom *,
-#layout-search .rtop *
+#layout-search div.search
 {
 	background-color:#dbdbdb;
 	color:#000000;
 }
 
-#layout-search div.search,
-#layout-search .rbottom *,
-#layout-search .rtop *
+#layout-search div.search
 {
 	background-color:#dbdbdb;
 	color:#000000;
@@ -184,11 +180,4 @@ span.g_odd
 #layout-main div.pagination span a:hover
 {
 	color:#AA0000;
-}
-
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
-{
-	background-color:#CADCEB;
 }

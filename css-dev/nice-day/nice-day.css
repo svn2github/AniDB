@@ -697,8 +697,6 @@ ul.contribution li,
 	content:attr(title);
 }
 
-#layout-search .rtop,
-#layout-search .rbottom,
 #layout-search div.search form.random,
 #layout-search div.search a.advsearch
 {

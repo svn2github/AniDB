@@ -134,13 +134,6 @@ div.pagination span strong
 	color: #FFFFFF;
 }
 
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
-{
-	background-color:#CADCEB;
-}
-
 #layout-main div div.explanation div.description
 {
 	background-color:#F4F4F4;

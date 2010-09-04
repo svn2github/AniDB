@@ -2540,11 +2540,6 @@ border:1px solid #D1D7DC;
 {
 border-top:1px solid #D1D7DC;
 }
-*.rbottom,
-*.rtop
-{
-display: none;
-}
 *.rating
 {
 white-space: nowrap;
