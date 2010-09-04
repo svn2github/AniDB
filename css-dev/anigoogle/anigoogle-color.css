@@ -84,14 +84,15 @@ th
 
 span.link:hover,
 a:hover,
+.g_button a:hover,
+.g_bubble .name-colored,
 #layout-main a.filter:hover,
 #layout-main div.pagination span a:hover,
-*.g_button a:hover,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-.g_bubble .name-colored,
-
 #layout-main div.main_all div.header div.account ul.tabs li.signup:hover a,
-#layout-main div.cmt_entries a.username-colored
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum a.username-coloured
 {
 	color: #AA0000;
 }

@@ -181,9 +181,6 @@ html,
 #layout-menu,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *,
 #layout-main div.format-buttons input
 {
 	background-color: #B9BBBF;
@@ -197,7 +194,12 @@ html,
 #layout-main .g_odd .g_odd .g_odd,
 #layout-main .g_odd .g_odd .g_odd .g_odd .g_odd,
 #layout-main div.forum ul.topics li.g_odd.row,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box
 {
 	background-color: #A7A9AB;
 }
@@ -257,7 +259,9 @@ select,
 #layout-search select,
 #layout-search input.text,
 #layout-menu li.sub-menu ul,
-#layout-main div.pagination span a
+#layout-main div.pagination span a,
+#layout-main div.main_all div.header div.account ul.tabs li.signup,
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color: #34394D;
 }
@@ -303,7 +307,8 @@ select,
 #layout-main div.pagination span a,
 #layout-main div.pagination span a:hover,
 #layout-main div.g_menu.filter_menu div.settings input[type="text"],
-#layout-main div.g_menu.filter_menu div.settings select
+#layout-main div.g_menu.filter_menu div.settings select,
+#layout-main div.forum div.g_bubble.navbar div.bottom
 {
 	border-color: #34394D;
 }
@@ -415,11 +420,6 @@ div.quotebody
 {
 	background-color:#CFD1D4;
 	border-bottom-color: #CFD1D4;
-}
-
-#layout-main div.main_all div.header div.account ul.tabs li.signup
-{
-	background-color:#34394D;
 }
 
 #layout-main div.main_all div.header div.account ul.tabs li.signup a
