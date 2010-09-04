@@ -274,6 +274,12 @@ ul#menu-account
 	background:url(images/button_search_over.gif) no-repeat;
 }
 
+#layout-search div.g_bubble.search
+{
+	background-color: inherit;
+	border: none;
+}
+
 #layout-content
 {
 	border-left:1px solid #fff;
@@ -2212,7 +2218,7 @@ vertical-align: middle;
 .g_bubble,
 .g_bubble .g_bubble  .g_bubble
 {
-	background-color: #000000;
+	background-color: #1A1A1A;
 }
 
 .g_bubble .g_bubble,
@@ -2229,4 +2235,9 @@ vertical-align: middle;
 	background-color:#000000;
 	color: #FFFFFF;
 	border: none;
+}
+
+.g_bubble,
+{
+	border-color: #A9A9A9;
 }
