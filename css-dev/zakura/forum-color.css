@@ -37,14 +37,9 @@
 }
 
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.g_bubble.navbar div.bottom
 {
 	border-top-color:#FFD2FE;
-}
-
-#layout-main div.forum div.navbar div.inner div.bottom
-{
-	border-color: #FFFFFF;
 }
 
 #layout-main div.forum div.g_bubble.poll,

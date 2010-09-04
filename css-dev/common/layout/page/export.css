@@ -3,24 +3,18 @@
 	margin-top: 2em;
 }
 
-#layout-main div.export_all div.exportblock div.inner
-{
-	padding-top: 1em;
-	padding-bottom: 1em;
-}
-
-#layout-main div.export_all div.exportblock div.inner h4
+#layout-main div.export_all div.exportblock h4
 {
 	padding-bottom: 0.5em;
 }
 
-#layout-main div.export_all div.exportblock div.inner div.content
+#layout-main div.export_all div.exportblock div.content
 {
 	text-align: left;
 	padding-left: 2em;
 }
 
-#layout-main div.export_all div.exportblock div.inner div.content a.example
+#layout-main div.export_all div.exportblock div.content a.example
 {
 	padding-top: 1em;
 	display:block;

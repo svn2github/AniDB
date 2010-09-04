@@ -2241,21 +2241,25 @@ color:#FFFFFF;
 background-position:5px 50%;
 background-repeat:no-repeat;
 }
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 background: inherit;
 }
-#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.g_bubble.comment,
 #layout-main div.forum ul.topics li.g_odd.row
 {
 background-image: url(images/bg_2.gif)
 }
-#layout-main div.forum div.inner,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.events div.inner,
-#layout-main div.export_all div.exportblock div.inner
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.export_all div.exportblock
 {
 background-image: url(images/bg_3.gif)
 }
@@ -2321,11 +2325,11 @@ border-bottom-color:#CCCCCC;
 color: white;
 font-weight: bold;
 }
-#layout-main div.forum div.rules div.inner
+#layout-main div.forum div.g_bubble.rules
 {
 background-color:#ECD5D8;
 }
-#layout-main div.forum div.rules div.inner
+#layout-main div.forum div.g_bubble.rules
 {
 color:#BC2A4D;
 }
