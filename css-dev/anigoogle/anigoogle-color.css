@@ -68,6 +68,10 @@ th
 	background-color: #CADCEB;
 }
 
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover,
 .g_bubble .g_bubble,
 .g_bubble .g_bubble .g_bubble .g_bubble
 {
@@ -160,7 +164,8 @@ span.g_odd,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.profile_all div.default_languages table tr,
 #layout-main div.userpage_all > div.g_section > h4,
-#layout-main div.main_all div.header div.account ul.tabs li.signup
+#layout-main div.main_all div.header div.account ul.tabs li.signup,
+#layout-main div.forum div.g_bubble.comment
 {
 	background-color: #ECF4FD;
 }
