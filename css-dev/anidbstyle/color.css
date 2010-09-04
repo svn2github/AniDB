@@ -26,7 +26,8 @@ a:hover
 #layout-main li.g_odd,
 #layout-main span.g_odd,
 #layout-main *.g_odd *.g_odd *.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd
+#layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
+#layout-main div.forum ul.topics li.row.g_odd
 {
 	background-color: #B0B0B0;
 }
