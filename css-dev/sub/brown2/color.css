@@ -40,6 +40,13 @@ a.i_icon:hover, a.i_inline:hover
 }
 
 th,
+#layout-main div.forum .rtop *,
+#layout-main div.forum .rbottom *,
+#layout-main div.forum div.inner,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.main_all div.news h4,
 #layout-main div.main_all div.rightbar h4,
 #layout-main div.cmt_all div.comment h4
@@ -77,14 +84,26 @@ th,
 
 .g_bubble.stripe,
 .g_bubble,
-.g_bubble .g_bubble  .g_bubble
+.g_bubble .g_bubble  .g_bubble,
+#layout-main div.forum ul.topics li.row
 {
 	background-color: #F2F3EE;
 }
 
 .g_bubble .g_bubble,
 .g_bubble .g_bubble .g_bubble .g_bubble,
-#layout-main div.main_all .g_bubble
+#layout-main div.forum div.poll div.inner,
+#layout-main div.forum div.poll .rbottom *,
+#layout-main div.forum div.poll .rtop *,
+#layout-main div.forum div.events div.inner,
+#layout-main div.forum div.events .rbottom *,
+#layout-main div.forum div.events .rtop *,
+#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.comment .rbottom *,
+#layout-main div.forum div.comment .rtop *,
+#layout-main div.main_all .g_bubble,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+#layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color: #DCDDD9;
 }

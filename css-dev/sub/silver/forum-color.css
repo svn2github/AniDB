@@ -43,7 +43,8 @@
 #layout-main div.forum div.g_bubble.posting-box,
 #layout-main div.forum div.g_bubble.submit-box,
 #layout-main div.forum div.g_bubble.options-box,
-#layout-main div.forum div.g_bubble.comment
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.cmt_all div.cmt_add h4
 {
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }

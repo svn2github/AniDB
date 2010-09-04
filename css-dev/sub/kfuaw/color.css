@@ -194,6 +194,8 @@ body.nonav #layout-main div.g_content
 	text-shadow:none;
 }
 
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
 #layout-main div.profile_all div.tabbed_pane div.pane.general div.body h4,
 #layout-main div.profile_all div.tabbed_pane div.pane.default_languages div > h4,
 #layout-main div.profile_all div.tabbed_pane div.pane.account div.g_definitionlist h4,
