@@ -1,4 +1,5 @@
-#layout-main div.forum div.g_bubble.threads
+#layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.threads > ul
 {
 	background-color:#4992B6;
 }
