@@ -181,7 +181,9 @@ html,
 #layout-menu,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.format-buttons input
+#layout-main div.format-buttons input,
+#layout-main div.forum ul.topics li.g_odd.row,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
 	background-color: #B9BBBF;
 }
@@ -193,15 +195,13 @@ html,
 #layout-main span.g_odd,
 #layout-main .g_odd .g_odd .g_odd,
 #layout-main .g_odd .g_odd .g_odd .g_odd .g_odd,
-#layout-main div.forum ul.topics li.g_odd.row,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 #layout-main div.forum div.g_bubble.search,
 #layout-main div.forum div.g_bubble.navbar,
 #layout-main div.forum div.g_bubble.posting-box,
 #layout-main div.forum div.g_bubble.submit-box,
 #layout-main div.forum div.g_bubble.options-box
 {
-	background-color: #A7A9AB;
+	background-color: #ACAEB4;
 }
 
 .g_bubble .g_bubble,
@@ -315,7 +315,16 @@ select,
 
 .g_bubble,
 #layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
+#layout-main div.anime_all div.info div.image img,
+#layout-main div.forum div.signature,
+#layout-main div.forum div.events dl + dl,
+#layout-main div.forum div.poll dl + dl,
+#layout-main div.cmt_entries dl.profile,
+#layout-main div.forum div.quickreply textarea,
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events div.data > p,
+#layout-main div.forum div.poll div.data p
 {
 	border-color:#9A9A9A #7D7D7D #7D7D7D #9A9A9A;
 }
