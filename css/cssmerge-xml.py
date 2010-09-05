@@ -1,4 +1,5 @@
-import os, sys, amara, datetime, copy
+import os, copy, datetime, sys
+from lxml import etree
 
 __out = "../../flat/"
 
@@ -12,18 +13,18 @@ def cssmerge(fullpath, outfile):
 		nr += 1
 		line = line.strip()
 		
-		if line.count("{")>0:
-			if incurly :
-				print "ERROR: double curly @ "+fullpath+":"+`incurly`+"-"+`nr`
-				sys.exit()
-			else : incurly = nr
+		#if line.count("{")>0:
+		#	if incurly :
+		#		print "ERROR: double curly @ "+fullpath+":"+`incurly`+"-"+`nr`
+		#		sys.exit()
+		#	else : incurly = nr
 
-		if line.count("}")>0:
-			if incurly : incurly = 0
-			else:
-				print "ERROR: negative curly @ "+fullpath+":"+`nr`
-				sys.exit()
-	
+		#if line.count("}")>0:
+		#	if incurly : incurly = 0
+		#	else:
+		#		print "ERROR: negative curly @ "+fullpath+":"+`nr`
+		#		sys.exit()
+
 		if line.startswith("@import"):
 			monkey = line[line.find('"')+1:line.rfind('"')]
 			outfile.write("/*"+monkey+"*/\n")
@@ -53,7 +54,7 @@ def xml(newstyle,path):
 	newest = 0
 	new = {'status': u'', 'description': u'', 'creator': u'', 'update': u'', 'title': u'', 'path': u'', 'screenshot': u'', 'thumbnail': u''}
 	descpath = path + '/' + 'description'
-	xmldoc = amara.parse('./stylelist.xml')
+	tree = etree.parse('stylelist.xml')
 
 	if os.path.exists(descpath):
 		stuff = file(descpath, 'r').readlines()
@@ -73,7 +74,7 @@ def xml(newstyle,path):
 			new[elem] = unicode(newstyle + '/' + 'images' +'/' +elem+'.png')
 		else:
 			new[elem] = u'none'
-	
+
 	for filename in os.listdir(path):
 		if filename.endswith('.css'):
 			mtime = os.path.getmtime(path + '/' + filename)
@@ -85,37 +86,57 @@ def xml(newstyle,path):
 	if newfile.day >= svn['day'] and newfile.month >= svn['month'] and newfile.year >= svn['year']:
 		new['update'] = unicode(newfile.strftime('%d.%m.%Y'))
 
-	xmlstyles = xmldoc.css_styles.xml_xpath("style/@name")
+	xmlstyles = tree.getroot().xpath("style/@name")
 	for i in range(len(xmlstyles)):
-		stylelist += [xmlstyles[i].value]
+		stylelist += [xmlstyles[i]]
 
 	if newstyle in stylelist:
-		styleelem = xmldoc.css_styles.style
+		styleelem = list(tree.getroot())
 		for i in range(len(styleelem)):
-			if styleelem[i].name == newstyle:
-				styleelem[i].title = new['title']
-				styleelem[i].creator = new['creator']
-				styleelem[i].update = new['update']
-				styleelem[i].status = new['status']
-				styleelem[i].description = new['description']
-				styleelem[i].path = new['path']
-				styleelem[i].thumbnail = new['thumbnail']
-				styleelem[i].screenshot = new['screenshot']
+			if styleelem[i].get("name") == newstyle:
+				anime = styleelem[i]
+				anime.iterchildren(tag="title").next().text = new['title']
+				anime.iterchildren(tag="creator").next().text = new['creator']
+				anime.iterchildren(tag="update").next().text = new['update']
+				anime.iterchildren(tag="status").next().text = new['status']
+				anime.iterchildren(tag="description").next().text = new['description']
+				anime.iterchildren(tag="path").next().text = new['path']
+				anime.iterchildren(tag="thumbnail").next().text = new['thumbnail']
+				anime.iterchildren(tag="screenshot").next().text = new['screenshot']
 	else:
-		temp = copy.deepcopy(xmldoc.css_styles.style)
-		temp.name = newstyle
-		temp.title = new['title']
-		temp.creator = new['creator']
-		temp.update = new['update']
-		temp.status = new['status']
-		temp.description = new['description']
-		temp.path = new['path']
-		temp.thumbnail = new['thumbnail']
-		temp.screenshot = new['screenshot']
-		xmldoc.css_styles.xml_append(temp)
+		anime = etree.SubElement(tree.getroot(), "style")
+		anime.set("name", newstyle)
+		set_node(anime, "title", new['title'])
+		set_node(anime, "creator", new['creator'])
+		set_node(anime, "update", new['update'])
+		set_node(anime, "status", new['status'])
+		set_node(anime, "description", new['description'])
+		set_node(anime, "path", new['path'])
+		set_node(anime, "thumbnail", new['thumbnail'])
+		set_node(anime, "screenshot", new['screenshot'])
 
-	output = file('./stylelist.xml', 'w')
-	output.write(xmldoc.xml())
+	output = file('stylelist.xml', 'w')
+	indent(tree.getroot())
+	output.write(etree.tostring(tree, pretty_print=True, encoding="UTF-8", xml_declaration=True))
+
+def set_node(node, tag, content):
+	tmp = etree.SubElement(node, tag)
+	tmp.text = content
+
+def indent(elem, level=0):
+	i = "\n" + level*"\t"
+	if len(elem):
+		if not elem.text or not elem.text.strip():
+			elem.text = i + "\t"
+		for e in elem:
+			indent(e, level+1)
+			if not e.tail or not e.tail.strip():
+				e.tail = i + "\t"
+		if not e.tail or not e.tail.strip():
+			e.tail = i
+	else:
+		if level and (not elem.tail or not elem.tail.strip()):
+			elem.tail = i
 
 if __name__ == "__main__":
 	cssm()
