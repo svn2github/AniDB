@@ -60,7 +60,6 @@ th
 }
 
 #layout-main div.forum div.g_bubble.poll,
-#layout-main div.forum div.g_bubble.events,
 #layout-main div.forum div.g_bubble.header,
 #layout-main div.forum div.g_bubble.search,
 #layout-main div.forum div.g_bubble.navbar,
@@ -172,7 +171,8 @@ span.g_odd,
 #layout-main div.profile_all div.default_languages table tr,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.main_all div.header div.account ul.tabs li.signup,
-#layout-main div.forum div.g_bubble.comment
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.events
 {
 	background-color: #ECF4FD;
 }
