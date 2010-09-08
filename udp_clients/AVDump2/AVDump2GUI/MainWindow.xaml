@@ -1,0 +1,314 @@
+﻿<Window x:Class="AVDump2GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:this="clr-namespace:AVDump2GUI"
+        Title="MainWindow" Height="400" Width="800">
+    <Window.Resources>
+        <this:StatusConverter x:Key="statusConverter"/>
+        <this:BytesConverter x:Key="bytesConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView Name="lstvw_Files" Grid.Column="0" Grid.Row="0">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Filename" Width="300" DisplayMemberBinding="{Binding Path=File.Name}"/>
+                    <GridViewColumn Header="Size">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding Path=File.Length, Converter={StaticResource bytesConverter}}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Status">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Path=Status, Converter={StaticResource statusConverter}}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding}" Margin="0,0,1,0" SnapsToDevicePixels="True"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Height="16" SnapsToDevicePixels="True"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TabControl Grid.Column="1" Grid.Row="0">
+            <TabItem Header="Info">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <Expander Header="Total Statistics">
+                            <Grid Margin="8,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="Processed Files:"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="1" Text="Processed bytes:"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="2" Text="Processing time:"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="3" Text="Sent bytes:"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="4" Text="Errors thrown:"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1" TextAlignment="Right" Text="0"/>
+                            </Grid>
+                        </Expander>
+                        <Expander Header="Session Statistics">
+                            <Grid Margin="8,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Grid.Row="0" Text="Processed Files:"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="1" Text="Processed bytes:"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="2" Text="Processing time:"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="3" Text="Sent bytes:"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                <TextBlock Grid.Row="4" Text="Errors thrown:"/>
+                                <TextBlock Grid.Row="4" Grid.Column="1" TextAlignment="Right" Text="0"/>
+                            </Grid>
+                        </Expander>
+                        <Expander Header="Information">
+                            <StackPanel Margin="8,0,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Text="Elapsed Time:"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                    <TextBlock Grid.Row="1" Text="ETA:"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                    <TextBlock Grid.Row="2" Text="Total files:"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                    <TextBlock Grid.Row="3" Text="Processed files:"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                    <TextBlock Grid.Row="4" Text="Total bytes:"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" TextAlignment="Right" Text="0"/>
+
+                                    <TextBlock Grid.Row="5" Text="Processed bytes:"/>
+                                    <TextBlock Grid.Row="5" Grid.Column="1" TextAlignment="Right" Text="0"/>
+                                </Grid>
+                                <GroupBox>
+                                    <GroupBox.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}" Content="?" Foreground="White" Margin="0,0,4,0">
+                                                <Button.Style>
+                                                    <Style TargetType="{x:Type Button}">
+                                                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                                    <Grid>
+                                                                        <Ellipse Fill="#FF00B1FF" Stroke="Black" />
+                                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                    </Grid>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                            <TextBlock Text="Buffers"/>
+                                        </StackPanel>
+                                    </GroupBox.Header>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Text="CRC32 "/>
+                                        <ProgressBar Grid.Column="1" Grid.Row="0"/>
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="ED2K"/>
+                                        <ProgressBar Grid.Column="1" Grid.Row="1"/>
+                                        <TextBlock Grid.Column="0" Grid.Row="2" Text="MD5"/>
+                                        <ProgressBar Grid.Column="1" Grid.Row="2"/>
+                                        <TextBlock Grid.Column="0" Grid.Row="3" Text="TIGER"/>
+                                        <ProgressBar Grid.Column="1" Grid.Row="3"/>
+                                        <TextBlock Grid.Column="0" Grid.Row="4" Text="TTH"/>
+                                        <ProgressBar Grid.Column="1" Grid.Row="4"/>
+                                        <TextBlock Grid.Column="0" Grid.Row="5" Text="SHA1"/>
+                                        <ProgressBar Grid.Column="1" Grid.Row="5"/>
+                                        <TextBlock Grid.Column="0" Grid.Row="6" Text="Disk"/>
+                                        <ProgressBar Grid.Column="1" Grid.Row="6"/>
+                                    </Grid>
+                                </GroupBox>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Hash/Log">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <Expander>
+                            <Expander.Header>
+                                <CheckBox Name="chck_HashFiles" Content="Hashing" IsChecked="True"/>
+                            </Expander.Header>
+                            <WrapPanel Margin="8,0,0,0" ItemWidth="58">
+                                <CheckBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_HashFiles}" Content="CRC32"/>
+                                <CheckBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_HashFiles}" Content="ED2K"/>
+                                <CheckBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_HashFiles}" Content="MD5"/>
+                                <CheckBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_HashFiles}" Content="TIGER"/>
+                                <CheckBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_HashFiles}" Content="TTH"/>
+                                <CheckBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_HashFiles}" Content="SHA1"/>
+                            </WrapPanel>
+                        </Expander>
+                        <Expander>
+                            <Expander.Header>
+                                <CheckBox Content="ACReq" IsChecked="True"/>
+                            </Expander.Header>
+                        </Expander>
+                        <Expander>
+                            <Expander.Header>
+                                <CheckBox Content="New ACReq" IsChecked="False"/>
+                            </Expander.Header>
+                        </Expander>
+                        <Expander>
+                            <Expander.Header>
+                                <CheckBox Content="MIL XML Dump" IsChecked="False"/>
+                            </Expander.Header>
+                        </Expander>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Settings">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <CheckBox Content="Include files in subfolders"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox Name="chck_UseACReq" Grid.ColumnSpan="2" Content="ACReq processed files:"/>
+                            <TextBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_UseACReq }" Grid.Column="0" Grid.Row="1" />
+                            <PasswordBox IsEnabled="{Binding Path=IsChecked, ElementName=chck_UseACReq }" Grid.Column="1" Grid.Row="1"/>
+                        </Grid>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" Text="Filter files (Regex):" />
+                            <TextBox />
+                        </DockPanel>
+
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" Text="Monitor folder:" />
+                            <TextBox />
+                        </DockPanel>
+
+
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Blocksize (MB) &amp; -count: " VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1"  Text="4" TextAlignment="Right"/>
+                            <TextBox Grid.Column="2" Text="4" TextAlignment="Right"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Text="File Progress:"/>
+            <ProgressBar Grid.Row="0" Grid.Column="1"/>
+
+            <TextBlock Grid.Row="1" Text="Total Progress:" Margin="0,0,8,0"/>
+            <ProgressBar Grid.Row="1" Grid.Column="1"/>
+        </Grid>
+        
+        <Button Grid.Column="1" Grid.Row="1" Content="Start" />
+    </Grid>
+</Window>

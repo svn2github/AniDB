@@ -50,6 +50,13 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 					if(entry != null) yield return entry;
 				}
 			}
+
+			for(int index = 0;index < 10;index++) {
+				foreach(EntryKey entryKey in Enum.GetValues(typeof(EntryKey))) {
+					entry = this[StreamType.Unkown, index, entryKey];
+					if(entry != null) yield return entry;
+				}
+			}
 		}
 
 		public T GetProvider<T>() where T : InfoProviderBase { return (T)providers.FirstOrDefault(p => p is T); }

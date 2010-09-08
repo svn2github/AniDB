@@ -13,8 +13,9 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			infos = new InfoCollection();
 
 			int i = 0;
+			var hash = hashCalculators.First().HashObj.Hash;
 			foreach(var hashCalculator in hashCalculators) {
-				BaseOption baseOption = ((hashCalculator.HashObj is TreeHash || hashCalculator.HashObj is TigerThex) ? BaseOption.Base32 : BaseOption.Heximal) | BaseOption.Pad | BaseOption.Reverse;
+				BaseOption baseOption = ((hashCalculator.HashObj is TTH || hashCalculator.HashObj is TigerForTTH) ? BaseOption.Base32 : BaseOption.Heximal) | BaseOption.Pad | BaseOption.Reverse;
 				Add(StreamType.Hash, i++, EntryKey.None, BaseConverter.ToString(hashCalculator.HashObj.Hash, baseOption).ToLower(), hashCalculator.Name.ToLower());
 
 				if(hashCalculator.HashObj is Ed2k) {

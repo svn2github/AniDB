@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml;
+using System.Diagnostics;
 
 namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
-	public enum StreamType { General, Video, Audio, Text, Chapter, Hash }
-	public enum EntryKey { None, Index, Size, Bitrate, Date, Duration, Title, Language, CodecName, CodecId, FourCC, Id, FrameCount, FrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, FileExtension, EncodeSettings, EncodeLibrary, BitrateMode }
+	public enum StreamType { General, Video, Audio, Text, Chapter, Hash, Unkown }
+	public enum EntryKey { None, Index, Size, Overhead, Bitrate, Date, Duration, Title, Language, CodecName, CodecId, CodecIdAlt, FourCC, Id, FrameCount, FrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, FileExtension, EncodeSettings, EncodeLibrary, BitrateMode }
 
 	public struct StreamTypeEntryPair {
 		public readonly StreamType Type;
@@ -64,13 +67,13 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 
 		public InfoProviderBase() { }
 
-		protected void Add(StreamType type, int index, EntryKey entry, string value, string unit) {
+		protected virtual void Add(StreamType type, int index, EntryKey entry, string value, string unit) {
 			if(string.IsNullOrEmpty(value)) return;
 			infos.Add(new InfoEntry(new StreamTypeEntryPair(type, index, entry), value, unit, this));
 		}
 		protected void Add(EntryKey entry, string value, string unit) { Add(StreamType.General, 0, entry, value, unit); }
 		protected void Add(EntryKey entry, Func<string> value, string unit) { Add(StreamType.General, 0, entry, value, unit); }
-		protected void Add(StreamType type, int index, EntryKey entry, Func<string> value, string unit) { try { Add(type, index, entry, value(), unit); } catch(Exception) { } }
+		protected void Add(StreamType type, int index, EntryKey entry, Func<string> value, string unit) { try { Add(type, index, entry, value(), unit); } catch(Exception) { Debug.Print(entry.ToString()); } }
 
 		public virtual InfoEntry this[StreamType type, int index, EntryKey key] {
 			get {

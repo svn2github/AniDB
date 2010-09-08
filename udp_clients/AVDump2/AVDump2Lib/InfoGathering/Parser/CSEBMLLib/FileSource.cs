@@ -72,7 +72,6 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 				dataInfo.Offset += bytesSkipped;
 				bytes -= bytesSkipped;
 
-
 				byte[] block = buffer.GetBlock(consumerId);
 				if(dataInfo.Offset == block.Length) dataInfo.Advance();
 				while(bytes != 0) {
@@ -88,42 +87,13 @@ namespace AVDump2Lib.InfoGathering.Parser.CSEBMLLib {
 						block = buffer.GetBlock(consumerId);
 
 					} else {
-						dataInfo.Offset += bytes;
+						dataInfo.Offset += Math.Min(bytes, length - Position);
+						//dataInfo.Offset += bytes;
 						bytes = 0;
 					}
 				}
 			}
 		}
-
-		//public void Skip(Int64 bytes) {
-		//    if(bytes == 0) return;
-		//    lock(syncRoot) {
-		//        Int64 bytesSkipped = Math.Min(buffer.GetBlock(consumerId).Length - dataInfo.Offset, bytes);
-		//        dataInfo.Offset += bytesSkipped;
-		//        bytes -= bytesSkipped;
-
-		//        if(dataInfo.Offset == buffer.GetBlock(consumerId).Length) dataInfo.Advance();
-
-		//        byte[] block;
-		//        while(bytes != 0) {
-		//            block = buffer.GetBlock(consumerId);
-		//            if(bytes > (block.Length - dataInfo.Offset)) {
-		//                bytes -= block.Length - dataInfo.Offset;
-		//                localStartPosition += block.Length;
-		//                dataInfo.Offset = 0;
-
-		//                while(!buffer.CanRead(consumerId)) Thread.Sleep(20);
-		//                buffer.Advance(consumerId);
-
-		//            } else {
-		//                dataInfo.Offset += bytes;
-		//                bytes = 0;
-		//            }
-		//        }
-		//    }
-		//}
-
-
 
 		private DataInfo dataInfo;
 		public T ProcessData<T>(Func<DataInfo, T> dataProcessFunc) {

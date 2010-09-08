@@ -39,12 +39,14 @@ namespace AVDump2Lib.BlockConsumers {
 		private FileSource dataSrc;
 		private EBMLReader reader;
 		private Thread progressUpdater;
+		private Thread progressingThread;
 		private IDocType matroskaDocType = new DocTypeEBML(new DocTypeMatroskaV2());
 
 		public MatroskaParser(string name) : base(name) { }
 
 		protected override void DoWork() {
 			progressUpdater.Start();
+			progressingThread = Thread.CurrentThread;
 			Root();
 		}
 
@@ -65,7 +67,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 				if(ProcessedBytes == dataSrc.Position) {
 					if(ticks < 0) {
-						progressUpdater.Abort();
+						progressingThread.Abort();
 						break;
 					}
 				} else {
@@ -93,7 +95,7 @@ namespace AVDump2Lib.BlockConsumers {
 			try {
 				ElementInfo elementInfo = reader.NextElementInfo();
 				if(elementInfo.ElementType.Id == (int)DocTypeEBML.eId.EBMLHeader) {
-					Section.CreateRead(new EbmlHeaderSection(), reader);
+					Section.CreateRead(new EbmlHeaderSection(), reader, elementInfo.Length);
 					isMatroskaFile = true;
 				} else {
 					isMatroskaFile = false;
@@ -102,12 +104,15 @@ namespace AVDump2Lib.BlockConsumers {
 
 			buffer.Stop();
 
+			fileStream.Position = 0;
 			return isMatroskaFile;
 		}
 
 		public override string ToString() { return ""; }
 
 		protected override void InitInternal() {
+			MatroskaFileObj = null;
+
 			dataSrc = new FileSource(b, consumerId);
 			reader = new EBMLReader(dataSrc, matroskaDocType);
 
@@ -117,16 +122,15 @@ namespace AVDump2Lib.BlockConsumers {
 	}
 
 	public class MatroskaFile : Section {
-		public long FileSize { get; private set; }
 		public EbmlHeaderSection EbmlHeader { get; private set; }
 		public SegmentSection Segment { get; private set; }
 
-		public MatroskaFile(long fileSize) { FileSize = fileSize; }
+		public MatroskaFile(long fileSize) { SectionSize = fileSize; }
 
-		public void Parse(EBMLReader reader) {
+		internal void Parse(EBMLReader reader) {
 			ElementInfo elementInfo = reader.NextElementInfo();
 			if(elementInfo.ElementType.Id == (int)DocTypeEBML.eId.EBMLHeader) {
-				EbmlHeader = Section.CreateRead(new EbmlHeaderSection(), reader);
+				EbmlHeader = Section.CreateRead(new EbmlHeaderSection(), reader, elementInfo.Length.Value);
 			} else {
 				//Todo: dispose reader / add warning
 				return;
@@ -135,7 +139,7 @@ namespace AVDump2Lib.BlockConsumers {
 			while((elementInfo = reader.NextElementInfo()) != null && Section.IsGlobalElement(elementInfo)) ;
 
 			if(elementInfo != null && elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Segment) {
-				Segment = Section.CreateRead(new SegmentSection(), reader);
+				Segment = Section.CreateRead(new SegmentSection(), reader, elementInfo.Length);
 			} else {
 				//Todo: dispose reader / add warning
 				return;
@@ -221,15 +225,15 @@ namespace AVDump2Lib.BlockConsumers {
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.Cluster:
-					Cluster.Read(reader); break;
+					Cluster.Read(reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Tracks:
-					Tracks = Section.CreateRead(new TracksSection(), reader); Cluster.AddTracks(from track in Tracks.Items select (int)track.TrackNumber.GetValueOrDefault(0)); break; //Must be set and != 0 (add warning)
+					Tracks = Section.CreateRead(new TracksSection(), reader, elementInfo.Length); Cluster.AddTracks(from track in Tracks.Items select (int)track.TrackNumber.GetValueOrDefault(0)); break; //Must be set and != 0 (add warning)
 				case DocTypeMatroskaV2.eId.Info:
-					SegmentInfo = Section.CreateRead(new SegmentInfoSection(), reader); break;
+					SegmentInfo = Section.CreateRead(new SegmentInfoSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Chapters:
-					Chapters = Section.CreateRead(new ChaptersSection(), reader); break;
+					Chapters = Section.CreateRead(new ChaptersSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Attachments:
-					Attachments = Section.CreateRead(new AttachmentsSection(), reader); break;
+					Attachments = Section.CreateRead(new AttachmentsSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Tags:
 					break;
 				/*case DocTypeMatroskaV2.eId.SeekHead:
@@ -296,7 +300,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.SegmentFamily:
 					segmentFamily.Add((byte[])reader.RetrieveValue()); break;
 				case DocTypeMatroskaV2.eId.ChapterTranslate:
-					Section.CreateReadAdd(new ChapterTranslateSection(), reader, ChapterTranslate); break;
+					Section.CreateReadAdd(new ChapterTranslateSection(), reader, elementInfo.Length, ChapterTranslate); break;
 				case DocTypeMatroskaV2.eId.TimecodeScale:
 					timecodeScale = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.Duration:
@@ -381,7 +385,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.BlockDuration: break;
 				case DocTypeMatroskaV2.eId.ReferenceBlock: break;
 				case DocTypeMatroskaV2.eId.BlockGroup:
-					Read(reader); break;
+					Read(reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Timecode:
 					long timeCode = (long)(ulong)reader.RetrieveValue();
 					foreach(var t in Tracks.Values) t.BeginOfCluster(timeCode);
@@ -469,7 +473,7 @@ namespace AVDump2Lib.BlockConsumers {
 				TrackLength = trackLength; TrackSize = trackSize; LaceCount = laceCount;
 			}
 		}
-		struct ClusterInfo {
+		private struct ClusterInfo {
 			public ulong clusterStamp;
 			public uint frames;
 			public uint size;
@@ -496,7 +500,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.TrackEntry) {
-				Section.CreateReadAdd(new TrackEntrySection(), reader, Items);
+				Section.CreateReadAdd(new TrackEntrySection(), reader, elementInfo.Length, Items);
 				return true;
 			}
 			return false;
@@ -566,7 +570,11 @@ namespace AVDump2Lib.BlockConsumers {
 
 			public string FourCC {
 				get {
-					var bytes = BitConverter.GetBytes(biCompression);
+					var bytes = new byte[4];
+					for(int i = 0;i < 4;i++) bytes[i] = (byte)((biCompression >> (i << 3)) & 0xFF);
+					//bytes = BitConverter.GetBytes(biCompression);
+
+
 					string fourCC = "";
 					foreach(var b in bytes) fourCC += (char)b;
 					return fourCC;
@@ -673,11 +681,11 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.FlagLacing:
 					lacing = (ulong)reader.RetrieveValue() == 1; break;
 				case DocTypeMatroskaV2.eId.Video:
-					Video = Section.CreateRead(new VideoSection(), reader); break;
+					Video = Section.CreateRead(new VideoSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Audio:
-					Audio = Section.CreateRead(new AudioSection(), reader); break;
+					Audio = Section.CreateRead(new AudioSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.ContentEncodings:
-					ContentEncodings = Section.CreateRead(new ContentEncodingsSection(), reader); break;
+					ContentEncodings = Section.CreateRead(new ContentEncodingsSection(), reader, elementInfo.Length); break;
 				default: return false;
 			}
 			return true;
@@ -829,7 +837,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.ContentEncodings) {
-				Section.CreateReadAdd(new ContentEncodingSection(), reader, Encodings);
+				Section.CreateReadAdd(new ContentEncodingSection(), reader, elementInfo.Length, Encodings);
 				return true;
 			}
 			return false;
@@ -861,7 +869,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.ContentEncodingType:
 					contentEncodingType = (CETypes)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.ContentCompression:
-					ContentCompression = Section.CreateRead(new ContentCompressionSection(), reader); break;
+					ContentCompression = Section.CreateRead(new ContentCompressionSection(), reader, elementInfo.Length); break;
 				default: return false;
 			}
 			return true;
@@ -960,7 +968,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.AttachedFile) {
-				Section.CreateReadAdd(new AttachedFileSection(), reader, Items);
+				Section.CreateReadAdd(new AttachedFileSection(), reader, elementInfo.Length, Items);
 				return true;
 			}
 			return false;
@@ -1007,7 +1015,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.EditionEntry) {
-				Section.CreateReadAdd(new EditionEntrySection(), reader, Items);
+				Section.CreateReadAdd(new EditionEntrySection(), reader, elementInfo.Length, Items);
 				return true;
 			}
 			return false;
@@ -1036,7 +1044,7 @@ namespace AVDump2Lib.BlockConsumers {
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.ChapterAtom:
-					Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtoms); break;
+					Section.CreateReadAdd(new ChapterAtomSection(), reader, elementInfo.Length, ChapterAtoms); break;
 				case DocTypeMatroskaV2.eId.EditionUID:
 					EditionUId = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.EditionFlagHidden:
@@ -1086,13 +1094,13 @@ namespace AVDump2Lib.BlockConsumers {
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.ChapterTrack:
-					ChapterTrack = Section.CreateRead(new ChapterTrackSection(), reader); break;
+					ChapterTrack = Section.CreateRead(new ChapterTrackSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.ChapterAtom:
-					Section.CreateReadAdd(new ChapterAtomSection(), reader, ChapterAtoms); break;
+					Section.CreateReadAdd(new ChapterAtomSection(), reader, elementInfo.Length, ChapterAtoms); break;
 				case DocTypeMatroskaV2.eId.ChapterDisplay:
-					Section.CreateReadAdd(new ChapterDisplaySection(), reader, ChapterDisplays); break;
+					Section.CreateReadAdd(new ChapterDisplaySection(), reader, elementInfo.Length, ChapterDisplays); break;
 				case DocTypeMatroskaV2.eId.ChapProcess:
-					Section.CreateReadAdd(new ChapterProcessSection(), reader, ChapterProcesses); break;
+					Section.CreateReadAdd(new ChapterProcessSection(), reader, elementInfo.Length, ChapterProcesses); break;
 				case DocTypeMatroskaV2.eId.ChapterUID:
 					ChapterUId = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.ChapterTimeStart:
@@ -1189,7 +1197,7 @@ namespace AVDump2Lib.BlockConsumers {
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.ChapProcessCommand:
-					Section.CreateReadAdd(new ChapterProcessCommandSection(), reader, ChapterProcessCommands); break;
+					Section.CreateReadAdd(new ChapterProcessCommandSection(), reader, elementInfo.Length, ChapterProcessCommands); break;
 				case DocTypeMatroskaV2.eId.ChapProcessCodecID:
 					chapterProcessCodecId = (ulong)reader.RetrieveValue(); break;
 				default: return false;
@@ -1232,7 +1240,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			if((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id == DocTypeMatroskaV2.eId.Tags) {
-				Section.CreateReadAdd(new TagSection(), reader, Items);
+				Section.CreateReadAdd(new TagSection(), reader, elementInfo.Length, Items);
 				return true;
 			}
 			return false;
@@ -1254,9 +1262,9 @@ namespace AVDump2Lib.BlockConsumers {
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
 				case DocTypeMatroskaV2.eId.Targets:
-					Targets = Section.CreateRead(new TargetsSection(), reader); break;
+					Targets = Section.CreateRead(new TargetsSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.SimpleTag:
-					Section.CreateReadAdd(new SimpleTagSection(), reader, SimpleTags); break;
+					Section.CreateReadAdd(new SimpleTagSection(), reader, elementInfo.Length, SimpleTags); break;
 				default: return false;
 			}
 			return true;
@@ -1342,7 +1350,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.TagDefault:
 					tagOriginal = (ulong)reader.RetrieveValue() == 1; break;
 				case DocTypeMatroskaV2.eId.SimpleTag:
-					Section.CreateReadAdd(new SimpleTagSection(), reader, SimpleTag); break;
+					Section.CreateReadAdd(new SimpleTagSection(), reader, elementInfo.Length, SimpleTag); break;
 				default: return false;
 			}
 			return true;
@@ -1366,9 +1374,12 @@ namespace AVDump2Lib.BlockConsumers {
 	}
 
 	public abstract class Section : IEnumerable<KeyValuePair<string, object>> {
-		internal void Read(EBMLReader reader) {
-			reader.EnterMasterElement();
+		public long? SectionSize { get; protected set; }
 
+		internal void Read(EBMLReader reader, long? size) {
+			SectionSize = size;
+
+			reader.EnterMasterElement();
 			ElementInfo elementInfo;
 			try {
 				while((elementInfo = reader.NextElementInfo()) != null) {
@@ -1388,12 +1399,12 @@ namespace AVDump2Lib.BlockConsumers {
 			DocTypeEBML.eId id = (DocTypeEBML.eId)elementInfo.ElementType.Id;
 			return id == DocTypeEBML.eId.CRC32 || id == DocTypeEBML.eId.Void;
 		}
-		internal static void CreateReadAdd<T>(T section, EBMLReader reader, EbmlList<T> lst) where T : Section {
-			section.Read(reader);
+		internal static void CreateReadAdd<T>(T section, EBMLReader reader, long? size, EbmlList<T> lst) where T : Section {
+			section.Read(reader, size);
 			lst.Add(section);
 		}
-		internal static T CreateRead<T>(T section, EBMLReader reader) where T : Section {
-			section.Read(reader);
+		internal static T CreateRead<T>(T section, EBMLReader reader, long? size) where T : Section {
+			section.Read(reader, size);
 			return section;
 		}
 

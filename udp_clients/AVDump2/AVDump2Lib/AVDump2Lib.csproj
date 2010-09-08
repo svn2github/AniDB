@@ -62,8 +62,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;Debug</DefineConstants>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants>TRACE;DEBUG;Debug UseUnsafeCode</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
@@ -71,48 +71,18 @@
     <ErrorReport>prompt</ErrorReport>
     <DocumentationFile>
     </DocumentationFile>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;Release</DefineConstants>
+    <DefineConstants>TRACE;Release UseUnsafeCode</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugRelease|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\DebugRelease\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\AVDump2Lib.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
-    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugRelease|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;DebugRelease</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <CodeAnalysisLogFile>bin\x86\Debug\AVDump2Lib.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSEBMLLib">
@@ -128,12 +98,14 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlockConsumers\OgmOggParser.cs" />
     <Compile Include="HashAlgorithms\Aich.cs" />
-    <Compile Include="HashAlgorithms\TreeHash.cs" />
+    <Compile Include="HashAlgorithms\TigerTreeHash.cs" />
     <Compile Include="InfoGathering\InfoProvider\FileExtensionProvider.cs" />
     <Compile Include="InfoGathering\InfoProvider\HashInfoProvider.cs" />
     <Compile Include="InfoGathering\InfoProvider\MatroskaProvider.cs" />
     <Compile Include="InfoGathering\InfoProvider\MediaInfoProvider.cs" />
+    <Compile Include="InfoGathering\InfoProvider\OgmOggProvider.cs" />
     <Compile Include="InfoGathering\InfoProvider\Tools\CompositeInfoProvider.cs" />
     <Compile Include="InfoGathering\InfoProvider\Tools\InfoProvider.cs" />
     <Compile Include="Misc\BaseConverter.cs" />
@@ -155,8 +127,13 @@
     <Compile Include="InfoGathering\Parser\MediaInfoLib\Enums.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfo.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfoList.cs" />
+    <Compile Include="Misc\Conversion\BigEndianBitConverter.cs" />
     <Compile Include="Misc\CSEBMLSpeedTest.cs" />
+    <Compile Include="Misc\Conversion\EndianBitConverter.cs" />
+    <Compile Include="Misc\Conversion\Endianness.cs" />
     <Compile Include="Misc\ExceptionXElement.cs" />
+    <Compile Include="Misc\Conversion\LittleEndianBitConverter.cs" />
+    <Compile Include="Misc\SafeXmlWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InfoGathering\Parser\SubtitleInfo\IDX.cs" />
     <Compile Include="InfoGathering\Parser\SubtitleInfo\SAMI.cs" />

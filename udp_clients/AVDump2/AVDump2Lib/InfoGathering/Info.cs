@@ -162,9 +162,27 @@ namespace AVDump2Lib.InfoGathering {
 		}
 		public static XmlDocument CreateAVDumpLog(InfoProviderBase p) {
 			XmlDocument xmlDoc = new XmlDocument(); ;
-			Func<string, string, XmlNode> createNode = (name, value) => {
+			Func<InfoProviderBase, string> getName = (provider) => {
+				string name;
+				if(provider is MatroskaProvider) {
+					name = "mkv";
+				} else if(provider is MediaInfoProvider) {
+					name = "mil";
+				} else if(provider is OgmOggProvider) {
+					name = "ogm";
+				} else if(provider is HashInfoProvider) {
+					name = "hash";
+				} else if(provider is FileExtensionProvider) {
+					name = "ext";
+				} else {
+					name = "";
+				}
+				return name;
+			};
+			Func<string, string, string, XmlNode> createNode = (name, value, pName) => {
 				var n = xmlDoc.CreateElement(name);
 				if(value != null) n.AppendChild(xmlDoc.CreateTextNode(value));
+				//if(!string.IsNullOrEmpty(pName)) n.Attributes.Append(xmlDoc.CreateAttribute("p")).Value = pName;
 				return n;
 			};
 			Action<XmlNode, string, string> addAttribute = (n, name, value) => { n.Attributes.Append(xmlDoc.CreateAttribute(name)).Value = value; };
@@ -173,6 +191,7 @@ namespace AVDump2Lib.InfoGathering {
 			toAcreqName[EntryKey.MuxingApp] = "app";
 			toAcreqName[EntryKey.WritingApp] = "lib";
 			toAcreqName[EntryKey.CodecId] = "identifier";
+			toAcreqName[EntryKey.CodecIdAlt] = "identifier2";
 			toAcreqName[EntryKey.FrameRate] = "fps";
 			toAcreqName[EntryKey.FrameCount] = "sample_count";
 			toAcreqName[EntryKey.SampleCount] = "sample_count";
@@ -181,14 +200,17 @@ namespace AVDump2Lib.InfoGathering {
 			toAcreqName[EntryKey.SamplingRate] = "sampling_rate";
 			toAcreqName[EntryKey.FileExtension] = "extension";
 			toAcreqName[EntryKey.Extension] = "detected_extension";
+			toAcreqName[EntryKey.CodecName] = "codec_name";
+			toAcreqName[EntryKey.Overhead] = "extra_size";
+			toAcreqName[EntryKey.BitrateMode] = "mode";
 			toAcreqName[EntryKey.DAR] = "ar";
-
 
 			var fileNode = xmlDoc.AppendChild(xmlDoc.CreateElement("file"));
 			var avmfNode = xmlDoc.CreateElement("avmf");
 			var lookUp = new Dictionary<KeyValuePair<StreamType, int>, XmlNode>();
-			CompositeInfoProvider comp = (CompositeInfoProvider)p;
+
 			XmlNode node;
+			CompositeInfoProvider comp = (CompositeInfoProvider)p;
 			foreach(var entry in p) {
 				var pair = new KeyValuePair<StreamType, int>(entry.Key.Type, entry.Key.Index);
 				if(!lookUp.TryGetValue(pair, out node)) {
@@ -199,13 +221,14 @@ namespace AVDump2Lib.InfoGathering {
 
 							if(comp.GetProvider<MatroskaProvider>() != null) {
 								var matroskaFile = comp.GetProvider<MatroskaProvider>().MFI;
-								var subNode = node.AppendChild(createNode("res_d", null));
+								var subNode = node.AppendChild(createNode("res_d", null, "mkv"));
 								addAttribute(subNode, "width", matroskaFile.Segment.Tracks[TrackEntrySection.Types.Video, entry.Key.Index].Video.DisplayWidth.ToString());
 								addAttribute(subNode, "height", matroskaFile.Segment.Tracks[TrackEntrySection.Types.Video, entry.Key.Index].Video.DisplayHeight.ToString());
 							}
 							break;
 						case StreamType.Audio: lookUp[pair] = node = xmlDoc.CreateElement("audio"); avmfNode.AppendChild(node); break;
 						case StreamType.Text: lookUp[pair] = node = xmlDoc.CreateElement("subtitles"); avmfNode.AppendChild(node); break;
+						case StreamType.Unkown: lookUp[pair] = node = xmlDoc.CreateElement("unkownstream"); avmfNode.AppendChild(node); break;
 						case StreamType.Hash: lookUp[pair] = node = fileNode; break;
 						case StreamType.Chapter: break;
 						default: break;
@@ -216,103 +239,53 @@ namespace AVDump2Lib.InfoGathering {
 				string name, value;
 				if(!toAcreqName.TryGetValue(entry.Key.Entry, out name)) name = entry.Key.Entry.ToString().ToLower();
 				if(entry.Key.Entry == EntryKey.Date) {
-					value = Convert.ToString((int)(DateTime.ParseExact(entry.Value, "yyyy.MM.dd HH.mm.ss.ffff", CultureInfo.InvariantCulture) - new DateTime(1970, 1, 1)).TotalSeconds, 16);
+					try {
+						value = Convert.ToString((int)(DateTime.ParseExact(entry.Value, "yyyy.MM.dd HH.mm.ss.ffff", CultureInfo.InvariantCulture) - new DateTime(1970, 1, 1)).TotalSeconds, 16);
+					} catch(Exception) {
+						continue;
+					}
 				} else {
 					value = entry.Value;
 				}
 
 				if(entry.Key.Type == StreamType.Hash) {
-					node.AppendChild(createNode(entry.Unit.ToLower(), entry.Value.ToLower()));
+					node.AppendChild(createNode(entry.Unit.ToLower(), entry.Value.ToLower(), "hash"));
 				} else if(entry.Key.Entry == EntryKey.FrameRate && pair.Key == StreamType.Video) {
-					node.AppendChild(createNode(name, value.Equals("") ? "-1" : value));
+					node.AppendChild(createNode(name, value.Equals("") ? "-1" : value, getName(entry.Provider)));
 				} else if((entry.Key.Entry == EntryKey.Width || entry.Key.Entry == EntryKey.Height) && pair.Key == StreamType.Video) {
 					if(node["res_p"] == null) node.AppendChild(xmlDoc.CreateElement("res_p"));
 					node["res_p"].Attributes.Append(xmlDoc.CreateAttribute(entry.Key.Entry == EntryKey.Width ? "width" : "height")).Value = entry.Value;
 				} else {
-					node.AppendChild(createNode(name, value));
+					node.AppendChild(createNode(name, value, getName(entry.Provider)));
 				}
 			}
 			fileNode.AppendChild(avmfNode);
 
-			var chaptersNode = avmfNode.AppendChild(xmlDoc.CreateElement("Chapters"));
-
+			var chaptersNode = xmlDoc.CreateElement("Chapters");
 			if(comp.GetProvider<MatroskaProvider>() != null) {
 				var matroskaFile = comp.GetProvider<MatroskaProvider>().MFI;
 
-				if(matroskaFile.Segment.SegmentInfo.PreviousUId != null) avmfNode.AppendChild(createNode("previous_uid", new Guid(matroskaFile.Segment.SegmentInfo.PreviousUId).ToString()));
-				if(matroskaFile.Segment.SegmentInfo.NextUId != null) avmfNode.AppendChild(createNode("next_uid", new Guid(matroskaFile.Segment.SegmentInfo.NextUId).ToString()));
-				if(matroskaFile.Segment.SegmentInfo.PreviousFilename != null) avmfNode.AppendChild(createNode("previous_filename", matroskaFile.Segment.SegmentInfo.PreviousFilename));
-				if(matroskaFile.Segment.SegmentInfo.NextFilename != null) avmfNode.AppendChild(createNode("next_filename", matroskaFile.Segment.SegmentInfo.NextFilename));
-				if(matroskaFile.Segment.SegmentInfo.SegmentUId != null) avmfNode.AppendChild(createNode("segment_uid", new Guid(matroskaFile.Segment.SegmentInfo.SegmentUId).ToString()));
+				if(matroskaFile.Segment.Attachments != null) fileNode.AppendChild(createNode("extra_size", matroskaFile.Segment.Attachments.SectionSize.Value.ToString(), "mkv"));
+				if(matroskaFile.Segment.SegmentInfo.PreviousUId != null) avmfNode.AppendChild(createNode("previous_uid", new Guid(matroskaFile.Segment.SegmentInfo.PreviousUId).ToString(), "mkv"));
+				if(matroskaFile.Segment.SegmentInfo.NextUId != null) avmfNode.AppendChild(createNode("next_uid", new Guid(matroskaFile.Segment.SegmentInfo.NextUId).ToString(), "mkv"));
+				if(matroskaFile.Segment.SegmentInfo.PreviousFilename != null) avmfNode.AppendChild(createNode("previous_filename", matroskaFile.Segment.SegmentInfo.PreviousFilename, "mkv"));
+				if(matroskaFile.Segment.SegmentInfo.NextFilename != null) avmfNode.AppendChild(createNode("next_filename", matroskaFile.Segment.SegmentInfo.NextFilename, "mkv"));
+				if(matroskaFile.Segment.SegmentInfo.SegmentUId != null) avmfNode.AppendChild(createNode("segment_uid", new Guid(matroskaFile.Segment.SegmentInfo.SegmentUId).ToString(), "mkv"));
 				if(matroskaFile.Segment.Chapters != null) CreateEBMLTree(xmlDoc, chaptersNode, matroskaFile.Segment.Chapters);
 
 			} else {
-				try { CreateChaptersMIL(xmlDoc, chaptersNode, comp.GetProvider<MediaInfoProvider>().MIL); } catch(Exception) { }
+				try { CreateChaptersMIL(xmlDoc, chaptersNode, comp.GetProvider<MediaInfoProvider>().MIL); } catch(Exception) { chaptersNode.RemoveAll(); }
 			}
+			if(chaptersNode.HasChildNodes) avmfNode.AppendChild(chaptersNode);
 
 			return xmlDoc;
 		}
-		private static void CreateEBMLTree(XmlDocument xmlDoc, XmlNode n, IEnumerable<KeyValuePair<string, object>> c) {
-			foreach(var item in c) {
-				if(item.Value is Section) {
-					CreateEBMLTree(xmlDoc, n.AppendChild(xmlDoc.CreateElement(item.Key)), (IEnumerable<KeyValuePair<string, object>>)item.Value);
-				} else if(item.Value != null) {
-					n.AppendChild(xmlDoc.CreateElement(item.Key)).AppendChild(xmlDoc.CreateTextNode(item.Value.ToString()));
-				}
-			}
-		}
-		private static void CreateChaptersMIL(XmlDocument xmlDoc, XmlNode chaptersNode, MediaInfo mediaInfo) {
-			Func<string, string, XmlNode> createNode = (name, value) => {
-				var n = xmlDoc.CreateElement(name);
-				if(value != null) n.AppendChild(xmlDoc.CreateTextNode(value));
-				return n;
-			};
-
-			XmlNode editionEntryNode, chapterAtomNode, chapterDisplayNode;
-			eStreamType streamKind = eStreamType.Menu;
-			int streamCount, entryCount;
-			streamCount = mediaInfo.Count_Get(streamKind);
-
-			for(int i = 0;i < streamCount;i++) {
-				entryCount = mediaInfo.Count_Get(streamKind, i);
-				editionEntryNode = chaptersNode.AppendChild(xmlDoc.CreateElement("EditionEntry"));
-
-				int indexStart, indexEnd;
-				if(int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_Begin"), out indexStart) && int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_End"), out indexEnd)) {
-					chapterAtomNode = editionEntryNode.AppendChild(xmlDoc.CreateElement("ChapterAtom"));
-					for(;indexStart < indexEnd;indexStart++) {
-
-						Func<string, ulong> conv = (str) => {
-							var timeParts = str.Split(new char[] { ':', '.' }).Select(s => ulong.Parse(s.Trim())).ToArray();
-							return (((timeParts[0] * 60 + timeParts[1]) * 60 + timeParts[2]) * 1000 + timeParts[3]) * 1000000;
-						};
-
-						var timeStamps = mediaInfo.Get(streamKind, i, indexStart, eInfoType.Name).Split('-');
-						ulong timestampStart = conv(timeStamps[0].Trim());
-						ulong timestampEnd;
-						if(timeStamps.Length > 1) timestampEnd = conv(timeStamps[1].Trim());
-
-
-						chapterAtomNode.AppendChild(createNode("ChapterTimeStart", timestampStart.ToString()));
-						chapterDisplayNode = chapterAtomNode.AppendChild(xmlDoc.CreateElement("ChapterDisplay"));
-
-						string languageTitle, language, title;
-						languageTitle = mediaInfo.Get(streamKind, i, indexStart, eInfoType.Text);
-						language = languageTitle.Contains(':') ? languageTitle.Substring(0, languageTitle.IndexOf(':')) : null;
-						title = languageTitle.Substring(language == null ? 0 : language.Length + 1);
-						chapterDisplayNode.AppendChild(createNode("ChapterString", title));
-						if(language != null) chapterDisplayNode.AppendChild(createNode("ChapterLanguage", language.Equals("en") ? "eng" : language));
-					}
-				}
-			}
-		}
-
 		public static XmlDocument CreateNewAVDumpLog(InfoProviderBase provider) {
 			XmlDocument xmlDoc = new XmlDocument(); ;
 			Func<string, string, string, string, XmlNode> createNode = (name, value, unit, p) => {
 				var n = xmlDoc.CreateElement(name);
-				if(!string.IsNullOrEmpty(unit)) n.Attributes.Append(xmlDoc.CreateAttribute("unit")).Value = unit;
-				if(!string.IsNullOrEmpty(p)) n.Attributes.Append(xmlDoc.CreateAttribute("provider")).Value = p;
+				if(!string.IsNullOrEmpty(unit)) n.Attributes.Append(xmlDoc.CreateAttribute("u")).Value = unit;
+				if(!string.IsNullOrEmpty(p)) n.Attributes.Append(xmlDoc.CreateAttribute("p")).Value = p;
 
 				n.AppendChild(xmlDoc.CreateTextNode(value));
 				return n;
@@ -369,6 +342,63 @@ namespace AVDump2Lib.InfoGathering {
 
 			return xmlDoc;
 		}
+		private static void CreateEBMLTree(XmlDocument xmlDoc, XmlNode n, IEnumerable<KeyValuePair<string, object>> c) {
+			foreach(var item in c) {
+				if(item.Value is Section) {
+					CreateEBMLTree(xmlDoc, n.AppendChild(xmlDoc.CreateElement(item.Key)), (IEnumerable<KeyValuePair<string, object>>)item.Value);
+				} else if(item.Value != null && item.Value is byte[]) {
+					n.AppendChild(xmlDoc.CreateElement(item.Key)).AppendChild(xmlDoc.CreateTextNode(new Guid((byte[])item.Value).ToString()));
+				} else if(item.Value != null) {
+					n.AppendChild(xmlDoc.CreateElement(item.Key)).AppendChild(xmlDoc.CreateTextNode(item.Value.ToString()));
+				}
+			}
+		}
+		private static void CreateChaptersMIL(XmlDocument xmlDoc, XmlNode chaptersNode, MediaInfo mediaInfo) {
+			Func<string, string, XmlNode> createNode = (name, value) => {
+				var n = xmlDoc.CreateElement(name);
+				if(value != null) n.AppendChild(xmlDoc.CreateTextNode(value));
+				return n;
+			};
+
+			XmlNode editionEntryNode, chapterAtomNode, chapterDisplayNode;
+			eStreamType streamKind = eStreamType.Menu;
+			int streamCount, entryCount;
+			streamCount = mediaInfo.Count_Get(streamKind);
+
+			for(int i = 0;i < streamCount;i++) {
+				entryCount = mediaInfo.Count_Get(streamKind, i);
+				editionEntryNode = chaptersNode.AppendChild(xmlDoc.CreateElement("EditionEntry"));
+
+				int indexStart, indexEnd;
+				if(int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_Begin"), out indexStart) && int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_End"), out indexEnd)) {
+					chapterAtomNode = editionEntryNode.AppendChild(xmlDoc.CreateElement("ChapterAtom"));
+					for(;indexStart < indexEnd;indexStart++) {
+
+						Func<string, ulong> conv = (str) => {
+							var timeParts = str.Split(new char[] { ':', '.' }).Select(s => ulong.Parse(s.Trim())).ToArray();
+							return (((timeParts[0] * 60 + timeParts[1]) * 60 + timeParts[2]) * 1000 + timeParts[3]) * 1000000;
+						};
+
+						var timeStamps = mediaInfo.Get(streamKind, i, indexStart, eInfoType.Name).Split('-');
+						ulong timestampStart = conv(timeStamps[0].Trim());
+						ulong timestampEnd;
+						if(timeStamps.Length > 1) timestampEnd = conv(timeStamps[1].Trim());
+
+
+						chapterAtomNode.AppendChild(createNode("ChapterTimeStart", timestampStart.ToString()));
+						chapterDisplayNode = chapterAtomNode.AppendChild(xmlDoc.CreateElement("ChapterDisplay"));
+
+						string languageTitle, language, title;
+						languageTitle = mediaInfo.Get(streamKind, i, indexStart, eInfoType.Text);
+						language = languageTitle.Contains(':') ? languageTitle.Substring(0, languageTitle.IndexOf(':')) : null;
+						title = languageTitle.Substring(language == null ? 0 : language.Length + 1);
+						chapterDisplayNode.AppendChild(createNode("ChapterString", title));
+						if(language != null) chapterDisplayNode.AppendChild(createNode("ChapterLanguage", language.Equals("en") ? "eng" : language));
+					}
+				}
+			}
+		}
+
 		public static string CreateMediaInfoDump(string filePath) {
 			MediaInfo mi = CreateMediaInfoInstance();
 

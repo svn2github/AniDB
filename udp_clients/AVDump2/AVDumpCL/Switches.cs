@@ -25,9 +25,11 @@ namespace AVDump2CL {
 		None = 0L,
 
 		//Output
+
 		CreqXmlFormat = 1L << 3,
 		MediaInfoOutPut = 1L << 4,
 		MediaInfoXMLOutPut = 1L << 5,
+		NewCreqXmlFormat = 1L << 6,
 
 		//Control
 		ExcludeSubFolders = 1L << 16,
@@ -46,14 +48,16 @@ namespace AVDump2CL {
 		DefSubtitleExtensions = 1L << 34,
 
 		//Hash
-		Crc = 1L << 40,
-		Ed2k = 1L << 41,
+		Crc = 1L << 39,
+		Ed2k = 1L << 40,
+		Md4 = 1L << 41,
 		Md5 = 1L << 42,
 		Sha1 = 1L << 43,
-		Tth = 1L << 44,
-		Tiger = 1L << 45,
+		Tiger = 1L << 44,
+		Tth = 1L << 45,
 		Aich = 1L << 46,
-		UseAllHashes = Crc | Ed2k | Md5 | Sha1 | Tth | Tiger | Aich,
+		UseAllHashes = Crc | Ed2k | Md5 | Sha1 | Tth | Tiger | Aich | Md4,
+		UseACreqHashes = Crc | Ed2k | Md5 | Sha1 | Tth | Aich,
 		PrintElapsedHashingTime = 1L << 52,
 		PrintEd2kLink = 1L << 60,
 		PrintAniDBLink = 1L << 61,

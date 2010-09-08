@@ -26,7 +26,7 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 		protected int consumerId;
 
 		public string Name { get; private set; }
-		public long ProcessedBytes { get; protected set; }
+		public virtual long ProcessedBytes { get; protected set; }
 
 		public BlockConsumerBase(string name) {
 			t = new Thread(DoWorkInternal);
@@ -39,7 +39,7 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 			ProcessedBytes = 0;
 			this.b = b;
 
-			InitInternal();
+			Init();
 	
 			t.Start();
 		}
@@ -73,6 +73,10 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 
 		public abstract override string ToString();
 
+		private void Init() {
+			Error = null;
+			InitInternal();
+		}
 
 		protected abstract void InitInternal();
 	}

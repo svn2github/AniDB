@@ -5,6 +5,8 @@ using System.Text;
 using System.Xml.Linq;
 using System.Collections.ObjectModel;
 using System.IO;
+using AVDump2Lib.Misc;
+using System.Xml;
 
 namespace AVDump2CL.Exceptions {
 	public class FileProcessingExceptionCollection : Collection<AVD2Exception> {
@@ -32,7 +34,7 @@ namespace AVDump2CL.Exceptions {
 			if(!Directory.Exists(destPath)) Directory.CreateDirectory(destPath);
 			string fileName = "Err " + DateTime.Now.ToString("yyyyMMdd HH.mm.ss.ffff") + ".xml";
 
-			fileElem.Save(Path.Combine(destPath, fileName));
+			using(var writer = new SafeXmlWriter(Path.Combine(destPath, fileName), Encoding.Unicode)) fileElem.Save(writer);
 		}
 
 	}
