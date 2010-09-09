@@ -89,6 +89,7 @@ span.g_odd
 	border-color:#c3d0ec;
 }
 
+#layout-main div.votes_all div.graph div.header,
 #layout-main table tr.header,
 #layout-main div.news_all div.g_timedentry h4,
 #layout-main div.main_all div.g_timedentry h4

@@ -2,6 +2,7 @@
 	color:#333;
 	border-collapse:collapse;
 }
+	#layout-main div.votes_all div.graph div.header,
 	#layout-main table tr.header {
 		background:#333;
 		border:none;

@@ -111,6 +111,7 @@ body.nonav #layout-main div.g_content
 #layout-main h1,
 #layout-main table thead,
 #layout-main table tr.header,
+#layout-main div.votes_all div.graph div.header,
 #layout-main div.customise_all div.settings.block h4,
 #layout-main div.profile_all div.settings.block h4,
 #layout-main div.creq_all dl
