@@ -49,9 +49,9 @@
 	width:25em;
 }
 
+#layout-main div.creq_all table.creqlist td.check,
 #layout-main div.creq_all table.creqlist td.count,
-#layout-main div.creqmod_all table.creqlist td.count,
-#layout-main div.creqmod_all table.creqlist td.check
+#layout-main div.creqmod_all table.creqlist td.count
 {
 	width:3em;
 }
