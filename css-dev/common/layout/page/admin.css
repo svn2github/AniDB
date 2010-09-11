@@ -78,17 +78,6 @@
 	display:block;
 }
 
-#layout-main div.creq_all div.tabbed_pane table,
-#layout-main div.creqmod_all table
-{
-	width: 98%;
-}
-
-#layout-main div.creqmod_all div.creq_head dl dd
-{
-	margin-left: 15em;
-}
-
 #layout-main div.admin_all div.admin_genren_edit textarea
 {
 	width:500px;
@@ -111,17 +100,4 @@
 #layout-main div.admin_all div.admin_user_avatars  ul.g_list + table
 {
 	margin-top:1em;
-}
-
-#layout-main div.creq_all div.creq_header table,
-#layout-main div.creq_all div.creq_data table
-{
-	width:50em;
-}
-
-
-#layout-main div.creq_all div.creq_hist table,
-#layout-main div.creq_all div.creq_entry_hist table
-{
-	width:98%;
 }

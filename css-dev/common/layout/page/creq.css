@@ -1,0 +1,60 @@
+#layout-main div.creqmod_all div.creq_head dl dd
+{
+	margin-left: 15em;
+}
+
+#layout-main div.creq_all div.creq_header table,
+#layout-main div.creq_all div.creq_data table
+{
+	width:50em;
+}
+
+#layout-main div.creq_all div.tabbed_pane table,
+#layout-main div.creqmod_all table,
+#layout-main div.creq_all div.creq_hist table,
+#layout-main div.creq_all div.creq_entry_hist table
+{
+	width:98%;
+}
+
+#layout-main div.creqmod_all div.creq_head dl dd
+{
+	margin-left: 15em;
+}
+
+#layout-main div.creqmod_all table.creqlist td.type,
+#layout-main div.creqmod_all table.creqlist td.state,
+#layout-main div.creqmod_all table.creqlist td.action,
+#layout-main div.creqmod_all table.creqlist td.client,
+#layout-main div.creqmod_all table.creqlist td.language
+{
+	width:5em;
+}
+
+#layout-main div.creqmod_all table.creqlist td.date,
+#layout-main div.creqmod_all table.creqlist td.name
+{
+	width:10em;
+}
+
+#layout-main div.creqmod_all table.creqlist td.count
+{
+	width:3em;
+}
+
+#layout-main div.creqmod_all table.creqlist td.id,
+#layout-main div.creqmod_all table.creqlist td.name
+{
+	text-align:left;
+}
+
+#layout-main div.creqmod_all table.creqlist td
+{
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+#layout-main div.creqmod_all table.creqlist td.entry
+{
+	width:auto;
+}

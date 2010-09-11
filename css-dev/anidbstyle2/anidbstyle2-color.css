@@ -182,17 +182,17 @@ input[type="submit"]:hover,
 
 .g_bubble,
 .g_bubble .g_bubble .g_bubble,
-html,
-#layout-menu,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.format-buttons input,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
 	background-color: #ACAEB4;
 }
 
+html,
+#layout-menu,
+#layout-main div.format-buttons input,
 #layout-main .g_odd .g_odd,
 #layout-main .g_odd .g_odd .g_odd .g_odd,
 #layout-main tr.g_odd,
