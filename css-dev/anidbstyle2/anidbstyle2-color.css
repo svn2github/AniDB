@@ -190,7 +190,7 @@ html,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
-	background-color: #B9BBBF;
+	background-color: #ACAEB4;
 }
 
 #layout-main .g_odd .g_odd,
@@ -204,9 +204,13 @@ html,
 #layout-main div.forum div.g_bubble.navbar,
 #layout-main div.forum div.g_bubble.posting-box,
 #layout-main div.forum div.g_bubble.submit-box,
-#layout-main div.forum div.g_bubble.options-box
+#layout-main div.forum div.g_bubble.options-box,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover
 {
-	background-color: #ACAEB4;
+	background-color: #B9BBBF;
 }
 
 .g_bubble .g_bubble,
@@ -219,14 +223,6 @@ body.nonav,
 tr
 {
 	background-color: #CFD1D4;
-}
-
-#layout-main div.forum ul.topics li.row:hover,
-#layout-main div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover
-{
-	background-color: #ACAEB4;
 }
 
 #layout-main div.animeatt_all div.review > h4,
