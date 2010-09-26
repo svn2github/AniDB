@@ -1,0 +1,8 @@
+(C) 2010 by aaabbb1
+Version: 0.1 (09/16/2010)
+
+Simple text format export template which emulates the output of the UDP API MYLIST command.
+It's goal is to produce identical results as the actual UDP API interface and it is intended
+to be used to initialize client local caches.
+Note: extra information beyond what MYLIST returns is on "comment" lines beginning with #.
+Note: this template is still experimental and should not yet be used by anyone except aaabbb1.

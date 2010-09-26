@@ -1,0 +1,10 @@
+Simple Text MYLIST Export Format - ChangeLog
+Version: 0.1 - 9.17.2010
+(C) 2010 by aaabbb1
+
+----------------------------------------------------------------------------------------------
+
+ 0.1 - 9.17.2010
+   - Experimental: not for public use.
+   - Initial revision.  Does not have raw times (dates) yet.
+   - May have a group ID problem.
