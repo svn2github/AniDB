@@ -16,7 +16,10 @@ img, a
 #layout-main table tr.g_odd + tr td,
 #layout-main table tr + tr.g_odd td,
 #layout-main li.g_odd + li,
-#layout-main li + li.g_odd
+#layout-main li + li.g_odd,
+#layout-main div.votes_all div.graph div.group + div.group_odd,
+#layout-main div.votes_all div.graph div.group_odd + div.group,
+#layout-main div.votes_all div.graph.eps div.row + div.row
 {
 	border-top: 1px solid #dddddd;
 	border-bottom: none;

@@ -56,7 +56,10 @@ img, a,
 tr + tr td,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
-#layout-main div.g_definitionlist tr th
+#layout-main div.g_definitionlist tr th,
+#layout-main div.votes_all div.graph div.group + div.group_odd,
+#layout-main div.votes_all div.graph div.group_odd + div.group,
+#layout-main div.votes_all div.graph.eps div.row + div.row
 {
 	border-top: 1px solid #AFAF00;
 }

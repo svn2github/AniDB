@@ -79,7 +79,9 @@ body.nonav #layout-main div.g_content
 
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
-#layout-main span.g_odd
+#layout-main span.g_odd,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #eaeaea;
 }

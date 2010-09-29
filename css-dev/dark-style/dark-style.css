@@ -1624,7 +1624,9 @@ div.myplace_all div.stats_roles
 }
 
 .g_odd,
-div.anime_all div.mylist td
+div.anime_all div.mylist td,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color:#333;
 }

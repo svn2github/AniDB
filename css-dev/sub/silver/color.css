@@ -71,7 +71,9 @@ a:hover
 #layout-main div.g_timedentry h4,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
-#layout-main span.g_odd
+#layout-main span.g_odd,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #dee3e7;
 }

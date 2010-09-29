@@ -22,7 +22,9 @@ table
 
 tr.g_odd,
 li.g_odd,
-span.g_odd
+span.g_odd,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color:#e5ecf9;
 }

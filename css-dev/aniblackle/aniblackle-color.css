@@ -11,7 +11,9 @@ html,
 #layout-main ul.g_list li.g_odd,
 #layout-main div.main_all div.datablocks h4,
 #layout-main div.main_all div.header h4,
-#layout-main div.main_all div.rightbar h4
+#layout-main div.main_all div.rightbar h4,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	color: #728972;
 }
@@ -118,6 +120,8 @@ html,
 
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd,
 tr.g_odd,
 li.g_odd,
 span.g_odd
@@ -302,7 +306,10 @@ tr + tr td,
 tr + tr th,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
-#layout-main div.g_definitionlist tr th
+#layout-main div.g_definitionlist tr th,
+#layout-main div.votes_all div.graph div.group + div.group_odd,
+#layout-main div.votes_all div.graph div.group_odd + div.group,
+#layout-main div.votes_all div.graph.eps div.row + div.row
 {
 	border-top-color: #555555;
 }
@@ -369,7 +376,9 @@ div.quotebody,
 #layout-main div.pagination span strong,
 #layout-nav div.menu_hr,
 #layout-main div.main_all div.datablocks h4,
-#layout-main div.main_all div.header h4
+#layout-main div.main_all div.header h4,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	border: 1px solid;
 	border-color: #666666 #444444 #444444 #666666;
