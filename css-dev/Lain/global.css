@@ -22,7 +22,7 @@ body{
 a{ color: #55bbff;} /*IE*/
 
 .g_odd,
-#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #002233;

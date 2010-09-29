@@ -18,7 +18,7 @@ a:visited, a:active, a:hover, a:link {
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
 #layout-main span.g_odd,
-#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #b0b0b0;

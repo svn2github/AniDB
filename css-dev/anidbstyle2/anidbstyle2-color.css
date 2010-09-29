@@ -212,7 +212,7 @@ html,
 #layout-main div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #B9BBBF;
@@ -316,7 +316,7 @@ select,
 #layout-main div.g_menu.filter_menu div.settings input[type="text"],
 #layout-main div.g_menu.filter_menu div.settings select,
 #layout-main div.forum div.g_bubble.navbar div.bottom,
-#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
 	border-color: #34394D;

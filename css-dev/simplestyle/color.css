@@ -45,7 +45,7 @@ select
 }
 
 #layout-content tr.g_odd,
-#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
          background-color: #9CCD17;

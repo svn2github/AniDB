@@ -192,7 +192,7 @@ tr,
 #layout-tabs ul.main-tabs > li:hover,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.main_all div.header div.account ul.tabs li.signup:hover,
-#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #FFFFFF;
