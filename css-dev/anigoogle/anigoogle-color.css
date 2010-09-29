@@ -173,9 +173,7 @@ span.g_odd,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.main_all div.header div.account ul.tabs li.signup,
 #layout-main div.forum div.g_bubble.comment,
-#layout-main div.forum div.g_bubble.events,
-#layout-main div.votes_all div.graph div.group,
-#layout-main div.votes_all div.graph.eps div.g_odd
+#layout-main div.forum div.g_bubble.events
 {
 	background-color: #ECF4FD;
 }
@@ -193,7 +191,9 @@ tr,
 #layout-tabs ul.main-tabs > li.selected,
 #layout-tabs ul.main-tabs > li:hover,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.main_all div.header div.account ul.tabs li.signup:hover
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #FFFFFF;
 }
