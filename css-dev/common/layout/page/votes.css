@@ -16,19 +16,14 @@
 #layout-main div.votes_all div.graph
 {
 	padding:0.5em;
-	width:350px;
-}
-
-#layout-main div.votes_all div.graph div.column.desc
-{
-	width:40px;
+	width:375px;
 }
 
 #layout-main div.votes_all div.graph div.row div.rating.my,
 #layout-main div.votes_all div.graph div.row div.epno,
 #layout-main div.votes_all div.graph div.column
 {
-	width:30px;
+	width:32px;
 }
 
 #layout-main div.votes_all div.graph div.column div.bar
@@ -54,11 +49,13 @@
 	text-align:right;
 }
 
+#layout-main div.votes_all div.graph div.row div.gender,
+#layout-main div.votes_all div.graph div.row div.agerange,
 #layout-main div.votes_all div.graph div.row div.rating
 {
 	padding:0 4px;
 	text-align:left;
-	width:60px;
+	width:67px;
 }
 
 #layout-main div.votes_all div.graph div.row div.bar
@@ -80,4 +77,11 @@
 #layout-main div.votes_all div.graph div.column + div.column
 {
 	margin-left:-3px;
+}
+
+#layout-main div.votes_all div.graph div.column.desc,
+#layout-main div.votes_all div.graph div.row div.gender,
+#layout-main div.votes_all div.graph div.row div.agerange
+{
+	width:40px;
 }
