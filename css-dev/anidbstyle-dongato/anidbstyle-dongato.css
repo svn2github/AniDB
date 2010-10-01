@@ -378,14 +378,14 @@ h4.collapsed span
 }
 
 /* add separation to content/menus end */
-div.review,
+/*div.review,
 div.g_section.userprefs div,
 div.bar div,
 div.mylist_menu div,
 div.mylist_menu ul
 {
 	margin-bottom: 2em;
-}
+}*/
 
 /* more prominent header */
 div.cmt_all h4

@@ -134,7 +134,9 @@ button:hover,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main .g_list li a:hover,
 #layout-main .g_list li.g_odd a:hover,
-div.pagination span strong:hover
+div.pagination span strong:hover,
+.g_bubble,
+.g_bubble .g_bubble .g_bubble
 {
 	background-color: #B0B0B1;
 }
@@ -178,4 +180,10 @@ input[type="submit"]:hover
 #layout-tabs a:hover
 {
 	color: #bbbbbb;
+}
+
+.g_bubble .g_bubble,
+.g_bubble .g_bubble .g_bubble .g_bubble
+{
+	background-color:#A9ABB1;
 }
