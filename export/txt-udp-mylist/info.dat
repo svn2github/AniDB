@@ -1,5 +1,5 @@
 (C) 2010 by aaabbb1
-Version: 0.1 (09/16/2010)
+Version: 0.2 (09/30/2010)
 
 Simple text format export template which emulates the output of the UDP API MYLIST command.
 It's goal is to produce identical results as the actual UDP API interface and it is intended

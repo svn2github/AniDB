@@ -1,8 +1,14 @@
 Simple Text MYLIST Export Format - ChangeLog
-Version: 0.1 - 9.17.2010
+Version: 0.2 - 9.30.2010
 (C) 2010 by aaabbb1
 
 ----------------------------------------------------------------------------------------------
+
+ 0.2 - 9.30.2010
+   - Experimental: not for public use.
+   - Removed loop on groups, switched to data_file_group_id instead.
+   - SDK shows duplicate entries, not sure about server.
+   - Still needs raw times.
 
  0.1 - 9.17.2010
    - Experimental: not for public use.
