@@ -194,9 +194,7 @@ color:gray;
 #layout-tabs ul.main-tabs > li.selected,
 #layout-main div.tabbed_pane ul.tabs > li.selected,
 #layout-main div.tabbed_pane ul.tabs > li:hover,
-#layout-tabs ul.main-tabs > li:hover,
-#layout-main div.tagcloud,
-#layout-main div.desc
+#layout-tabs ul.main-tabs > li:hover
 {
 border:1px solid #121212;
 }
@@ -397,15 +395,11 @@ div.spoiler,
 #layout-main div.cmt_entries dl.profile,
 #layout-main div.forum ul.topiclist dd,
 #layout-main div.quotebody,
-#layout-main div.tagcloud,
-#layout-main div.desc,
 .g_bubble
 {
 border-color:gray;
 }
 #layout-main div.blog div.body,
-#layout-main div.tagcloud,
-#layout-main div.desc,
 .g_bubble.stripe
 {
 background-color:hsla(0, 0%, 10%, 0.4);
@@ -440,4 +434,15 @@ background-image:url(images/orangepixels.png);
 #layout-content div.mylist_list table.animelist tr.watching:hover td
 {
 background-image:url(images/orangepixels.png), url(../grey/images/whitepixel.png);
+}
+
+/*vote graphs*/
+#layout-main div.votes_all div.graph div.bar div.colored
+{
+	background-color:green;
+}
+
+#layout-main div.votes_all div.graph div.bar.my div.colored
+{
+	background-color:#CD9D29;
 }

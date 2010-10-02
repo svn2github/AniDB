@@ -469,3 +469,7 @@ margin:0.5em 12em 0 0.5em;
 border-style:none;
 border-width:0;
 }
+
+#layout-main div.votes_all div.graph div.column + div.column {
+margin-left:-2px;
+}
