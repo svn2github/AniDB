@@ -69,9 +69,7 @@ tr + tr td,
 	border-top:none;
 }
 
-#layout-main div.tagcloud,
-#layout-main div.anime_all div.desc,
-#layout-main div.desc
+.g_bubble
 {
 	border:1px solid #AFAF00;
 }
