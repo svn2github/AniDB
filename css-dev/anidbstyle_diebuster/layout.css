@@ -1,3 +1,8 @@
+html
+{
+	background: transparent url(images/backtoo.png) repeat scroll 0 0;
+}
+
 #layout-menu
 {
 	background: transparent url(images/menuback.png) no-repeat top left;
