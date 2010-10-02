@@ -1,3 +1,9 @@
+body,
+#layout-nav input
+{
+	font-size: 10px;
+}
+
 #layout-main .g_list li:first-child:before
 {
 	content: "";
