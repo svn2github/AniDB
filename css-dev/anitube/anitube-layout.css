@@ -18,11 +18,6 @@
 	z-index:5;
 }
 
-#layout-search
-{
-	padding-top:6em;
-}
-
 #layout-search p,
 #layout-search form
 {
@@ -101,6 +96,11 @@
 	margin-right:auto;
 	text-align:left;
 	width:46.5em;
+}
+
+#layout-nav
+{
+	height:5em;
 }
 
 #layout-nav input,
