@@ -108,7 +108,7 @@ img, a
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4
 {
-	border-top: 1px solid black;
+	border-top: 1px solid #9A9CA1;
 }
 
 #layout-main div.userpage_all > div.g_section > h4,
@@ -142,5 +142,5 @@ img, a
 .g_bubble.stripe > div.data div.name,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
-	border-color: #000000;
+	border-color: #9A9CA1;
 }
