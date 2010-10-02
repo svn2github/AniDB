@@ -10,7 +10,7 @@ html
 
 #layout-search
 {
-	background: transparent url(images/backlame.png) repeat-x top;
+	background: transparent url("images/backlame.png") repeat-x scroll center center;
 }
 
 #layout-search div.search
@@ -26,4 +26,9 @@ html
 #layout-tabs
 {
 	top: 79px;
+}
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin: 1em;
 }
