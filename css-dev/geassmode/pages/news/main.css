@@ -2,3 +2,15 @@
 {
 	margin-right:21em;
 }
+
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	background:none repeat scroll 0 0 #393634;
+	color:#EEEEEE;
+	font-size:1.3em;
+	font-weight:normal;
+	padding:5px 7px 5px 14px;
+	text-align:left;
+	border: none;
+}

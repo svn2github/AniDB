@@ -1,5 +1,14 @@
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
 .g_bubble
 {
 	background:none repeat scroll 0 0 #FFFFFF;
 	border:5px solid #595654;
+	font-size: 90%;
 }

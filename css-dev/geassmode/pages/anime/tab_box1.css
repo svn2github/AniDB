@@ -14,6 +14,6 @@
 		border:5px solid #595654;
 	}
 #layout-main div.block + div.desc {
-	margin:0; padding:0;
+	margin:0;
 	width:50%;
 }
