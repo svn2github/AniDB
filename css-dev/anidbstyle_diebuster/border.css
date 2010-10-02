@@ -9,6 +9,7 @@
 	border: 1px inset #232323;
 }
 
+#layout-search div.search,
 #layout-tabs li a:hover,
 #layout-tabs li.selected a,
 #layout-tabs ul li a,
