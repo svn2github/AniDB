@@ -231,3 +231,9 @@ input[type="checkbox"]
 {
 	color:#000000;
 }
+
+#menu-mod
+{
+	background-color: #1a2238;
+	border: 1px inset #AEAEAE;
+}
