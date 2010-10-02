@@ -182,3 +182,8 @@ h4,
 {
 	margin-top:1.5em;
 }
+
+#layout-main div.animeatt_all div.review > h4
+{
+	margin-bottom: 1em
+}
