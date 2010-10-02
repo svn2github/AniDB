@@ -61,7 +61,7 @@
 
 #layout-search
 {
-	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
+	background: transparent url(../anidbstyle/images/backlame.png) repeat-x scroll center top;
 	width: 100%;
 }
 
@@ -75,7 +75,7 @@
 {
 	background: transparent url(../anidbstyle/images/searchback.png) no-repeat top right;
 	position: absolute;
-	top: 77px;
+	top: 78px;
 	left: auto;
 	right: 0;
 	-right: -1px;
@@ -149,7 +149,7 @@
 	position: absolute;
 	right: 260px;
 	left: 180px;
-	top: 92px;
+	top: 93px;
 }
 
 #layout-tabs ul li,
