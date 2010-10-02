@@ -1,12 +1,3 @@
-span.link,
-a:visited,
-a:active,
-a:hover,
-a:link
-{
-  color: blue;
-}
-
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all >  div.g_section > h4,
 #layout-main div.userpage_all div.blog div.g_timedentry h4,
@@ -18,15 +9,10 @@ a:link
 	background-color: #B5A89E;
 }
 
-#layout-menu a:link,
-#layout-menu a:visited
-{
-	color: #9E2C30;
-}
-
 #layout-menu,
 #layout-menu a:hover,
-#layout-tabs a:hover {
+#layout-tabs a:hover
+{
 	color: #191b7b;
 }
 #layout-menu #menu-main a,
@@ -35,8 +21,9 @@ a:link
 #layout-menu #menu-support a
 
 {
-background-image: url(images/bg.png);
+	background-image: url(images/bg.png);
 }
+
 input[type="text"],
 input[type="password"],
 input[type="checkbox"],
