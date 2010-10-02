@@ -7,6 +7,9 @@ a:link
   color: blue;
 }
 
+#layout-main div.animeatt_all div.review > h4,
+#layout-main div.userpage_all >  div.g_section > h4,
+#layout-main div.userpage_all div.blog div.g_timedentry h4,
 #layout-main div.main_all div.rightbar h4,
 #layout-main div.main_all div.datablocks h4,
 #layout-main div.main_all div.header h4
@@ -95,7 +98,8 @@ input[type="submit"]:hover
 	color: white;
 }
 
-#layout-tabs a:hover {
+#layout-tabs a:hover
+{
 	color: #DCCFC5;
 }
 
@@ -134,6 +138,7 @@ input[type="submit"]:hover
 	background-color: inherit;
 }
 
+#layout-main div.forum ul.topics li.row,
 #layout-main div.forum div.g_bubble.header,
 #layout-main div.forum div.g_bubble.poll,
 #layout-main div.forum div.g_bubble.events,
@@ -145,14 +150,30 @@ input[type="submit"]:hover
 .g_bubble .g_bubble,
 .g_bubble .g_bubble .g_bubble .g_bubble
 {
-	background-color:#E3D4CA;
+	background-color:#EBDDD3;
 }
 
-
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+#layout-main div.forum ul.topics li.g_odd.row
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
 .g_bubble,
 .g_bubble .g_bubble .g_bubble
 {
-    background-color:#EBDDD3;
+    background-color:#E0CFC3;
+}
+
+#layout-main div.forum hr, #layout-main div.cmt_all div.cmt_add hr,
+#layout-main div.forum div.g_bubble.threads
+{
+	background-color:#9E2C30;
+}
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
+{
+	background-color: #D4C8C1;
 }
