@@ -95,15 +95,6 @@ input[type="password"]
 	margin-right: 1em;
 }
 
-/* different anime description style */
-#layout-content div.info div.desc,
-#layout-content div.info ul
-{
-	background-color: #B0B0B0;
-	margin: 1em;
-	padding: 1em;
-}
-
 /* border for anime images */
 div.anime_all div.image img
 {

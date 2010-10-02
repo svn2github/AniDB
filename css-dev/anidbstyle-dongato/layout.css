@@ -18,3 +18,8 @@
 {
 	background: transparent url(../anidbstyle/images/searchback.png) no-repeat top right;
 }
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	margin: 1em;
+}
