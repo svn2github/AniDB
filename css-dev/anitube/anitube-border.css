@@ -23,7 +23,6 @@ table
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-search select.type,
-#layout-search input.text,
 #layout-menu > li ul
 {
 	border:1px solid;
