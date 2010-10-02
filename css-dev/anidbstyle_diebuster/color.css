@@ -164,3 +164,8 @@ input[type="submit"]:hover
 {
 	background-color: #D4C8C1;
 }
+
+#layout-main div.tabbed_pane ul.tabs li.selected
+{
+	color: #9E2C30;
+}
