@@ -42,3 +42,8 @@
 		border-left:none;
 		text-indent:-5000px;
 	}
+
+#layout-search div.search
+{
+	border: none;
+}

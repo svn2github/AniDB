@@ -20,7 +20,7 @@
 		#layout-main div.main_all div.rightbar div ol { }
 			#layout-main div.main_all div.rightbar ol li { }
 				#layout-main div.main_all div.rightbar ol li a {
-					padding:2px 8px 2px 14px;
+					padding:2px 8px 2px 2px;
 					display:block;
 					color:#333;
 					border-bottom:1px solid #dbdbdb;
@@ -31,7 +31,12 @@
 				}
 				#layout-main div.main_all div.rightbar ol li span {
 					padding:2px 14px 2px 2px;
-					display:inline-block;
-					float:right;
 					color:#333;
 				}
+
+
+#layout-main div.main_all div.rightbar li span + span
+{
+	border-bottom:1px solid #DBDBDB;
+	width: 16.7em;
+}
