@@ -31,7 +31,8 @@ span.g_odd,
 
 #layout-main > h1
 {
-	border-top-color:#CCCCCC;
+	background-color: #FFFFFF;
+	border-top: none;
 }
 
 #layout-nav
@@ -48,8 +49,8 @@ span.g_odd,
 
 #layout-tabs ul.main-tabs > li.selected
 {
-	background-color:#DBDBDB;
-	border-bottom-color:#DBDBDB;
+	background-color: #FFFFFF;
+	border-bottom-color:#FFFFFF;
 }
 
 #layout-main ul.g_list li:hover,
@@ -171,4 +172,10 @@ span.g_odd,
 #layout-main div.pagination span a:hover
 {
 	color:#AA0000;
+}
+
+#layout-main ul.g_list li, #layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	border-color:#CCCCCC;
 }
