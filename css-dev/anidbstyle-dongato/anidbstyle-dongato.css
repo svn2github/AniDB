@@ -1,24 +1,16 @@
-@import "../common/normalize.css";
-@import "../common/layout/default.css";
-@import "../common/layout/common.css";
-@import "../common/layout/global/all.css";
-@import "../common/layout/page/all.css";
-@import "../common/style/color/acdropdown.css";
-@import "../common/style/color/msgbox-default.css";
-@import "../common/style/color/similar-anime-default.css";
-@import "../common/style/color/forum-default.css";
-@import "../common/style/color/special.css";
-@import "../common/style/text/default.css";
-@import "../common/style/content/page-anime.css";
-@import "../icons/all.css";
+@import "../sub/common.css";
+
 @import "../common/style/color/status-radioactive.css";
+@import "../anidbstyle/border.css";
+@import "../anidbstyle/color.css";
+@import "../anidbstyle/layout.css";
+@import "../anidbstyle/menu-user.css";
+
 @import "layout.css";
-@import "menu-user.css";
-@import "border.css";
 @import "color.css";
 @import "text.css";
 @import "icons.css";
-@import "main.css";
+
 
 /* format for PRE */
 pre
@@ -377,16 +369,6 @@ h4.collapsed span
 	color: gray;
 }
 
-/* add separation to content/menus end */
-/*div.review,
-div.g_section.userprefs div,
-div.bar div,
-div.mylist_menu div,
-div.mylist_menu ul
-{
-	margin-bottom: 2em;
-}*/
-
 /* more prominent header */
 div.cmt_all h4
 {
@@ -484,14 +466,7 @@ h4
 	margin: 4px;
 }
 
-div.news p.comment
-{
-	color: #bbbbbb;
-	float: right;
-}
-
-h4 a,
-div.news p.comment a
+h4 a
 {
 	color: white !important;
 }
@@ -516,13 +491,4 @@ div.g_section.wishlist button[value="Update"]
 	margin-right: auto;
 	margin-top: 1em;
 	width: 60px;
-}
-
-/* styling for review headers */
-div.g_section.animeatt_reviews > div.review > h4
-{
-	color: #BBBBBB;
-	background-color: #494D59;
-	padding: 2px;
-	width: 80%;
 }
