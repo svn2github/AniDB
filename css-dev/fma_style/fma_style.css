@@ -324,14 +324,16 @@ div.pagination span strong,
 #layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
-	background-color:#FFFFFF;
+	background-color:#F5F7FF;
 	color:#2B5288;
 }
 
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom:2px double #FFFFFF;
+	border: 1px solid;
+	border-color:#E4E4E4 #D5CCCC #D5CCCC #E4E4E4;
+	border-bottom:2px double #F5F7FF;
 }
 
 #layout-tabs ul.main-tabs li:hover,
