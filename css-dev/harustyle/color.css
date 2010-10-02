@@ -141,13 +141,6 @@ span.link:hover,
 	color:#000000;
 }
 
-#layout-main div.tagcloud,
-#layout-main div.anime_all div.desc,
-#layout-main div.desc
-{
-	background-color:#FAE287;
-}
-
 .g_bubble.stripe,
 .g_bubble,
 .g_bubble .g_bubble  .g_bubble

@@ -77,12 +77,6 @@ span.g_odd,
 	color:#FFFFFF;
 }
 
-#layout-main div.tagcloud
-{
-	background-color:#FAFAFA;
-	border-color:#D1D7DC;
-}
-
 #layout-main ul.g_list li,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li

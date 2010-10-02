@@ -38,7 +38,6 @@ img, a
 #layout-main .g_image image,
 #layout-main .g_timedentry,
 #layout-main .g_definitionlist table,
-#layout-main div.desc,
 #layout-main div.tabbed_pane ul.tabs li
 {
 	border: 1px #999380 dotted;
