@@ -22,3 +22,8 @@ html
 {
 	background: transparent url(images/searchback.png) no-repeat top right;
 }
+
+#layout-tabs
+{
+	top: 79px;
+}

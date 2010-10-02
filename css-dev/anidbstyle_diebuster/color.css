@@ -110,3 +110,26 @@ input[type="submit"]:hover
 {
 	color: white;
 }
+
+#layout-main div.anime_all div.mylist th,
+#layout-main tr.g_odd, #layout-main li.g_odd,
+#layout-main span.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
+{
+	background-color: white;
+}
+
+#layout-menu a:active,
+#layout-tabs li.selected a
+{
+	color: #FFAA55;
+}
+
+#layout-tabs li a:hover,
+#layout-tabs li.selected a,
+#layout-tabs ul li a,
+#layout-tabs ul li
+{
+	background-color: inherit;
+}
