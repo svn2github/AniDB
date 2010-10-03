@@ -1,8 +1,15 @@
 Simple Text MYLIST Export Format - ChangeLog
-Version: 0.2 - 9.30.2010
+Version: 0.3 - 10.02.2010
 (C) 2010 by aaabbb1
 
 ----------------------------------------------------------------------------------------------
+
+ 0.3 - 10.02.2010
+   - Experimental: not for public use.
+   - Fixed filestate.
+   - Reformatted comments for easier client parsing and error checking.
+   - SDK returns duplicate results, but server seems OK.
+   - Still needs raw times.
 
  0.2 - 9.30.2010
    - Experimental: not for public use.
