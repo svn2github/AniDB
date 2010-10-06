@@ -791,14 +791,14 @@ div.quotebody div.quote div.quotebody
 	word-wrap: break-word;
 }
 
-#layout-main div.cmt_all div.cmt_add h4
+#layout-main div.forum div.cmt_entries.history h4
 {
 	text-align: left;
 	border-bottom: 1px solid;
 	padding-bottom: 0.2em;
 }
 
-#layout-main div.cmt_all div.cmt_add div.review
+#layout-main div.forum div.cmt_entries.history
 {
 	overflow: auto;
 	height: 300px;
