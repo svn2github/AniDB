@@ -109,6 +109,12 @@
 	padding-right: .5em;
 }
 
+#layout-main div.msg_all div.forum ul.topics dd.check
+{
+	border-left: none;
+	border-right:1px solid;
+}
+
 #layout-main div.forum li.header dl.icon
 {
 	min-height: 0;

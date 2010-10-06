@@ -7,6 +7,7 @@
 #layout-main div.msg_all div.header
 {
 	margin-bottom: 1em;
+	padding:0.5em 1em;
 }
 
 #layout-main div.msg_all div.header dl
@@ -17,18 +18,39 @@
 	overflow:hidden;
 }
 
-#layout-main div.msg_all div.header
-{
-	padding:0.5em 1em;
-}
-
 #layout-main div.msg_all div.forum div.topic_actions
 {
 	margin-top:0;
 	margin-bottom:1em;
 }
 
-#layout-main div.msg_all th
+#layout-main div.msg_all div.forum ul.topiclist dd.to,
+#layout-main div.msg_all div.forum ul.topiclist dd.type,
+#layout-main div.msg_all div.forum ul.topiclist dd.read,
+#layout-main div.msg_all div.forum ul.topiclist dd.action
 {
-	min-width:5em;
+	text-align:center;
+	width:10%;
+}
+
+#layout-main div.msg_all div.forum ul.topiclist dd.check
+{
+	text-align:center;
+	width:2.5em;
+}
+
+#layout-main div.msg_all div.forum ul.topics dd.check
+{
+	padding-left:0;
+}
+
+#layout-main div.msg_all div.forum ul.topics dd
+{
+	padding-top:1em;
+	height:2em;
+}
+
+#layout-main div.msg_all div.forum ul.topics dt
+{
+	padding:0 0.5em 0.3em;
 }
