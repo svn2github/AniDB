@@ -136,6 +136,7 @@
 	float: left;
 	width: 50%;
 	padding: 0.2em 0.5em 0.5em;
+	clear:none;
 }
 
 #layout-main div.forum li.header dt,
