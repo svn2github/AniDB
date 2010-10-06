@@ -798,7 +798,7 @@ div.quotebody div.quote div.quotebody
 	padding-bottom: 0.2em;
 }
 
-#layout-main div.forum div.cmt_entries.history
+#layout-main div.forum div.cmt_entries.history > div
 {
 	overflow: auto;
 	height: 300px;
