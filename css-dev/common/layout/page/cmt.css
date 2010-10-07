@@ -141,7 +141,7 @@
 	display: block;
 	float: left;
 	width: 50%;
-	padding: 0.2em 0.5em;
+	padding: 0.2em 0.5em 0.4em;
 	clear:none;
 }
 
@@ -179,10 +179,10 @@
 
 #layout-main div.forum ul.topiclist li.row dd.lastpost
 {
-	padding: 0.2em 0.5em;
+	padding: 0.2em 0.5em 0.4em;
 }
 
-#layout-main div.forum a.lastpost
+#layout-main div.forum ul.topiclist li.row dd.lastpost a.lastpost
 {
 	display: inline-block;
 	height: 9px;
