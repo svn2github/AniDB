@@ -141,7 +141,7 @@
 	display: block;
 	float: left;
 	width: 50%;
-	padding: 0em 0.5em;
+	padding: 0.2em 0.5em;
 	clear:none;
 }
 
@@ -160,7 +160,9 @@
 	width: 8%;
 }
 
-#layout-main div.forum ul.topics dd
+#layout-main div.forum ul.topics dd.posts,
+#layout-main div.forum ul.topics dd.views,
+#layout-main div.forum ul.topics dd.topics
 {
 	line-height: 2.5em;
 }
@@ -175,7 +177,12 @@
 	padding: 2px 0;
 }
 
-#layout-main div.forum ul.topiclist li.row dd.lastpost a.lastpost
+#layout-main div.forum ul.topiclist li.row dd.lastpost
+{
+	padding: 0.2em 0.5em;
+}
+
+#layout-main div.forum a.lastpost
 {
 	display: inline-block;
 	height: 9px;
