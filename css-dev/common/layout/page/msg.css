@@ -54,3 +54,24 @@
 {
 	padding:0 0.5em 0.3em;
 }
+
+#layout-main div.msg_all div.forum div.topic_actions
+{
+	margin-bottom:2em;
+	margin-top:0;
+}
+
+#layout-main div.msg_all div.forum div.topic_actions div.buttons > *
+{
+	float:left;
+}
+
+#layout-main div.msg_all div.forum div.topic_actions div.buttons ul
+{
+	margin-bottom: 0;
+}
+
+#layout-main div.msg_all div.forum div.topic_actions div.buttons ul li
+{
+	margin-top: 0;
+}

@@ -180,6 +180,7 @@
 #layout-main div.forum ul.topiclist li.row dd.lastpost
 {
 	padding: 0.2em 0.5em 0.4em;
+	min-height: 2.5em;
 }
 
 #layout-main div.forum ul.topiclist li.row dd.lastpost a.lastpost
