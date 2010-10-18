@@ -79,7 +79,9 @@ body.nonav #layout-main div.g_content
 
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
-#layout-main span.g_odd
+#layout-main span.g_odd,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #eaeaea;
 }
@@ -111,6 +113,7 @@ body.nonav #layout-main div.g_content
 #layout-main h1,
 #layout-main table thead,
 #layout-main table tr.header,
+#layout-main div.votes_all div.graph div.header,
 #layout-main div.customise_all div.settings.block h4,
 #layout-main div.profile_all div.settings.block h4,
 #layout-main div.creq_all dl

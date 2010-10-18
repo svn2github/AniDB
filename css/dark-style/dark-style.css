@@ -274,6 +274,12 @@ ul#menu-account
 	background:url(images/button_search_over.gif) no-repeat;
 }
 
+#layout-search div.g_bubble.search
+{
+	background-color: inherit;
+	border: none;
+}
+
 #layout-content
 {
 	border-left:1px solid #fff;
@@ -1618,7 +1624,9 @@ div.myplace_all div.stats_roles
 }
 
 .g_odd,
-div.anime_all div.mylist td
+div.anime_all div.mylist td,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color:#333;
 }
@@ -1955,8 +1963,6 @@ div.anime_all div.image
 	display: block;
 }
 
-#layout-search .rtop,
-#layout-search .rbottom,
 #layout-search div.search form.random,
 #layout-tabs
 {
@@ -2000,21 +2006,16 @@ div.anime_all div.image
 {
 	margin: 10px auto;
 }
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *,
-#layout-main div.forum div.inner
-{
-	background-color:#170a2b;
-}
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *,
+
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover
 {
@@ -2054,9 +2055,7 @@ div.quotebody div.quoteof
 {
 	color:#d3adec;
 }
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color: #2a2a2a;
 }
@@ -2222,7 +2221,7 @@ vertical-align: middle;
 .g_bubble,
 .g_bubble .g_bubble  .g_bubble
 {
-	background-color: #000000;
+	background-color: #1A1A1A;
 }
 
 .g_bubble .g_bubble,
@@ -2239,4 +2238,25 @@ vertical-align: middle;
 	background-color:#000000;
 	color: #FFFFFF;
 	border: none;
+}
+
+.g_bubble
+{
+	border-color: #A9A9A9;
+}
+
+/*vote graphs*/
+#layout-main div.votes_all div.graph div.bar div.colored
+{
+	background-color:green;
+}
+
+#layout-main div.votes_all div.graph div.bar.my div.colored
+{
+	background-color:#CD9D29;
+}
+
+#layout-main div.votes_all div.graph div.group
+{
+	background-color:inherit;
 }

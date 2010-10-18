@@ -21,7 +21,9 @@ a:visited, a:active, a:hover, a:link
 #layout-content table.grouplist th,
 #layout-content tr.g_odd,
 #layout-content li.g_odd,
-#layout-content span.g_odd
+#layout-content span.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #FAE287;
 }
@@ -137,13 +139,6 @@ span.link:hover,
 {
 	background-color:#FAE287;
 	color:#000000;
-}
-
-#layout-main div.tagcloud,
-#layout-main div.anime_all div.desc,
-#layout-main div.desc
-{
-	background-color:#FAE287;
 }
 
 .g_bubble.stripe,

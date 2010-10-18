@@ -24,7 +24,9 @@ a:hover
 #layout-main div.anime_all div.mylist th,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
-#layout-main span.g_odd
+#layout-main span.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #B0B0B0;
 }
@@ -52,8 +54,8 @@ a:hover
 }
 
 #layout-main div.main_all div.rightbar h4,
-#layout-main div.main_all div.datablocks h4,,
-#layout-main div.main_all div.rightbar h4
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
 {
 	padding: 2px;
 	color: #bbbbbb;
@@ -61,11 +63,6 @@ a:hover
 	border: none;
 }
 #layout-main div.cmt_all div.comment h4
-{
-	background-color: #969aa6;
-}
-
-#layout-main div.news div.newsitem span.stamp
 {
 	background-color: #969aa6;
 }
@@ -161,13 +158,6 @@ input[type="submit"]:hover
 	background-color: #B0B0B1;
 }
 
-#layout-main div.news p.comment,
-#layout-main div.news p.comment a,
-#layout-main div.news div.newsitem h4 a
-{
-    color: #C0C0C0;
-}
-
 select, textarea
 {
 	color: #CCCCCC;
@@ -189,10 +179,7 @@ input[type="checkbox"]
 }
 
 .g_bubble .g_bubble,
-.g_bubble .g_bubble .g_bubble .g_bubble,
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
+.g_bubble .g_bubble .g_bubble .g_bubble
 {
 	background-color:#A9ABB1;
 }
@@ -200,13 +187,6 @@ input[type="checkbox"]
 #layout-main div.tabbed_pane ul.tabs li
 {
 	background-color:#D3D5D9;
-}
-
-#layout-main div.main_all div.register div.inner,
-#layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *
-{
-	background-color:#A9ABB1;
 }
 
 #layout-main div.animeatt_all div.review > h4,
@@ -243,4 +223,10 @@ input[type="checkbox"]
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong
 {
 	color:#000000;
+}
+
+#menu-mod
+{
+	background-color: #1a2238;
+	border: 1px inset #AEAEAE;
 }

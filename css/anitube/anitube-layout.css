@@ -1,12 +1,12 @@
+#layout-tabs + #layout-main
+{
+	margin-top:-2.4em;
+}
+
 #layout-main
 {
 	margin-left:1em;
 	margin-right:1em;
-}
-
-#layout-tabs + #layout-main
-{
-	margin-top:5em;
 }
 
 #layout-menu
@@ -16,11 +16,6 @@
 	position:absolute;
 	top:0;
 	z-index:5;
-}
-
-#layout-search
-{
-	padding-top:6em;
 }
 
 #layout-search p,
@@ -103,6 +98,11 @@
 	width:46.5em;
 }
 
+#layout-nav
+{
+	height:5em;
+}
+
 #layout-nav input,
 #layout-nav button
 {
@@ -118,8 +118,9 @@
 #layout-tabs
 {
 	display:block;
-	margin-top:-5.25em;
+	margin-top:1em;
 	position:relative;
+	margin-right:2em;
 }
 
 #layout-tabs ul li
@@ -131,7 +132,7 @@
 #layout-tabs ul
 {
 	display:block;
-	text-align:center;
+	text-align:right;
 }
 
 #layout-menu li.sub-menu span.tab
@@ -169,15 +170,6 @@ h4,
 	padding:.3em;
 }
 
-#layout-search .rtop,
-#layout-search .rbottom
-{
-	margin-left:auto;
-	margin-right:auto;
-	width:75%;
-	display:block;
-}
-
 #layout-hint + #layout-nav + #layout-content #layout-tabs
 {
 	margin:1.2em 0.3em;
@@ -189,4 +181,9 @@ h4,
 #layout-hint + #layout-nav #layout-search
 {
 	margin-top:1.5em;
+}
+
+#layout-main div.animeatt_all div.review > h4
+{
+	margin-bottom: 1em
 }

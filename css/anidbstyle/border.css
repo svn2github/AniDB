@@ -108,7 +108,7 @@ img, a
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.userpage_all > div.g_section > h4
 {
-	border-top: 1px solid black;
+	border-top: 1px solid #9A9CA1;
 }
 
 #layout-main div.userpage_all > div.g_section > h4,
@@ -132,15 +132,8 @@ img, a
 	border-top:1px solid;
 }
 
-#layout-main div.anime_all div.info div.caststaff div.cast,
-#layout-main div.anime_all div.info div.caststaff div.staff
-{
-	background-color:#B8BAC0;
-	border:1px solid #9A9CA1;
-}
-
 .g_bubble.stripe > div.data div.name,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
 {
-	border-color: #000000;
+	border-color: #9A9CA1;
 }

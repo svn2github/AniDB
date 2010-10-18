@@ -86,3 +86,9 @@ img, a
 {
 	border:1px dotted #98AAB1;
 }
+
+#layout-search div.g_bubble.search
+{
+	background-color: transparent;
+	border:none;
+}

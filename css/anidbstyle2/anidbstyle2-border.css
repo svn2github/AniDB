@@ -1,4 +1,5 @@
-#layout-main div.anime_all table.stafflist + table.stafflist,
+#layout-main div.anime_all div.staffblock + div.staffblock table,
+#layout-main div.ep_all div.staffblock + div.staffblock table,
 #layout-main div.anime_all div.episodes tr.newtype td
 {
 	border-top: 1px double #34394D;
@@ -13,7 +14,7 @@
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom: 1px double #B9BBBF;
+	border-bottom: 1px double #ACAEB4;
 }
 
 #layout-menu li.sub-menu ul li:first-child:hover

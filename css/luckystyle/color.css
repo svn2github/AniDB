@@ -8,7 +8,9 @@ a:visited, a:active, a:hover, a:link {
 #layout-content table.grouplist th,
 #layout-content tr.g_odd,
 #layout-content li.g_odd,
-#layout-content span.g_odd
+#layout-content span.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #028fcd;
 }

@@ -1,24 +1,24 @@
 #layout-main div.forum div.poll div.pollbar,
-#layout-main div.forum div.navbar div.inner,
-#layout-main div.forum div.search div.inner,
-#layout-main div.forum div.threads div.inner,
-#layout-main div.forum div.options-box div.inner,
-#layout-main div.forum div.submit-box div.inner,
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.options-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color: #363636;
 }
 
-#layout-main div.forum div.options-box div.inner *,
-#layout-main div.forum div.navbar div.inner a,
-#layout-main div.forum div.navbar div.inner span,
-#layout-main div.forum div.search div.inner label
+#layout-main div.forum div.g_bubble.options-box *,
+#layout-main div.forum div.g_bubble.navbar a,
+#layout-main div.forum div.g_bubble.navbar span,
+#layout-main div.forum div.g_bubble.search label
 {
 	color: #dddddd;
 }
 
-/*#layout-main div.forum div.g_section div.inner,*/
-#layout-main div.forum /*div.threads*/ div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 	border: 2px ridge #dddddd;
 	-moz-border-radius: .75em;
@@ -35,13 +35,13 @@
 	background-color: transparent;
 }
 
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 	padding-bottom: .5em;
 }
 
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.g_bubble.navbar div.bottom
 {
 	border-top-color:#dddddd;
 }
@@ -89,11 +89,10 @@
 	padding-right:0;
 }
 
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.header div.inner,
-#layout-main div.forum div.g_timedentry.comment div.inner
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.comment
 {
 	background:#eeeeee;
 	border: 1px solid #555555;

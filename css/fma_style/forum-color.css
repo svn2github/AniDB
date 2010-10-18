@@ -1,6 +1,4 @@
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color:#305C97;
 }
@@ -14,13 +12,6 @@
 #layout-main div.forum ul.topics li.g_odd.row:hover
 {
 	background-color:#CBD6DE;
-}
-
-#layout-main div.forum .rtop *,
-#layout-main div.forum .rbottom *,
-#layout-main div.forum div.inner
-{
-	background-color:#F5F5F5;
 }
 
 #layout-main div.forum ul.topiclist dd
@@ -45,26 +36,17 @@
 	border-top-color: #CCCCCC;
 }
 
-#layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.signature
 {
 	border-top-color:#305C97;
 }
 
-#layout-main div.forum div.navbar div.inner div.bottom
+#layout-main div.forum div.g_bubble.navbar div.bottom
 {
 	border-color: #FFFFFF;
 }
 
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *,
+#layout-main div.forum div.g_bubble.comment,
 #layout-main div.forum ul.topics li.g_odd.row
 {
 	background-color:#EFF3FA;
@@ -73,4 +55,21 @@
 #layout-main ul.format-modes
 {
 	background-color: inherit;
+}
+
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box
+{
+	background-color:#F5F5F5;
+}
+
+#layout-main div.forum div.g_bubble.posting-box div.message-box input.f_button
+{
+	background-color: #FFFFFF;
 }

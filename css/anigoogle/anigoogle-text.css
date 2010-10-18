@@ -28,7 +28,11 @@ input[type="checkbox"],
 #layout-main ul.g_list li,
 #layout-search input,
 #layout-search select,
-#layout-tabs ul.main-tabs > li
+#layout-tabs ul.main-tabs > li,
+button,
+input[type="button"],
+input[type="submit"],
+#layout-nav input.submit
 {
 	font-size: 1.1em;
 }

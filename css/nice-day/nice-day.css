@@ -287,6 +287,7 @@ h4
 
 li.tab,
 tr.header,
+#layout-main div.votes_all div.graph div.header,
 ul.g_list li,
 ul.main-tabs li,
 ul.tabs li.tab
@@ -352,6 +353,7 @@ tr.mylist td.name a:first-child:after
 h1,
 li.tab,
 tr.header,
+#layout-main div.votes_all div.graph div.header,
 ul.g_list li,
 ul.main-tabs li,
 ul.tabs li.tab
@@ -535,6 +537,7 @@ tr.action td.value
 #layout-nav,
 li.tab,
 tr.header,
+#layout-main div.votes_all div.graph div.header,
 ul.g_list li,
 ul.main-tabs li,
 ul.tabs li.tab
@@ -697,8 +700,6 @@ ul.contribution li,
 	content:attr(title);
 }
 
-#layout-search .rtop,
-#layout-search .rbottom,
 #layout-search div.search form.random,
 #layout-search div.search a.advsearch
 {

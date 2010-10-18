@@ -2,7 +2,6 @@
 @import "../common/layout/default.css";
 @import "../common/layout/common.css";
 @import "../common/layout/global/all.css";
-@import "../common/layout/global/roundcorner.css";
 @import "../common/layout/page/all.css";
 @import "../common/style/text/default.css";
 @import "../common/style/content/page-anime.css";
@@ -186,11 +185,6 @@ top:0;
 right:0;
 height:2em;
 left:auto;
-}
-#layout-search .rtop,
-#layout-search .rbottom
-{
-display:none;
 }
 #layout-search form input.text
 {

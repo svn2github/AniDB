@@ -8,7 +8,8 @@ table table
 	border: none;
 }
 
-img, a
+img, a,
+#layout-search div.g_bubble.search
 {
 	border: none;
 }
@@ -55,7 +56,10 @@ img, a
 tr + tr td,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
-#layout-main div.g_definitionlist tr th
+#layout-main div.g_definitionlist tr th,
+#layout-main div.votes_all div.graph div.group + div.group_odd,
+#layout-main div.votes_all div.graph div.group_odd + div.group,
+#layout-main div.votes_all div.graph.eps div.row + div.row
 {
 	border-top: 1px solid #AFAF00;
 }
@@ -65,9 +69,7 @@ tr + tr td,
 	border-top:none;
 }
 
-#layout-main div.tagcloud,
-#layout-main div.anime_all div.desc,
-#layout-main div.desc
+.g_bubble
 {
 	border:1px solid #AFAF00;
 }

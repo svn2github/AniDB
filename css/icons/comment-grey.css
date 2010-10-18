@@ -220,18 +220,21 @@
 	width:47px;
 }
 
+*.i_msg_normal,
 *.i_topic_normal
 {
 	background-image:url(../icons/phpbb/topic_normal.gif);
 	background-repeat: no-repeat;
 }
 
+*.i_msg_system,
 *.i_topic_sticky
 {
 	background-image:url(../icons/phpbb/topic_sticky.gif);
 	background-repeat: no-repeat;
 }
 
+*.i_msg_mod,
 *.i_topic_announcement,
 *.i_topic_global
 {
@@ -258,18 +261,21 @@
 	background-repeat: no-repeat;
 }
 
+*.i_msg_normal_unread,
 *.i_topic_normal_unread
 {
 	background-image:url(../icons/phpbb/topic_normal_unread.gif);
 	background-repeat: no-repeat;
 }
 
+*.i_msg_system_unread,
 *.i_topic_sticky_unread
 {
 	background-image:url(../icons/phpbb/topic_sticky_unread.gif);
 	background-repeat: no-repeat;
 }
 
+*.i_msg_mod_unread,
 *.i_topic_announcement_unread,
 *.i_topic_global_unread
 {

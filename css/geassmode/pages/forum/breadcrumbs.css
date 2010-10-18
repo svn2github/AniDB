@@ -1,51 +1,49 @@
-#layout-main div.forum_all   div.navbar > b,
-#layout-main div.threads_all div.navbar > b,
-#layout-main div.cmt_all     div.navbar > b,
-#layout-main div.forum_all   div.navbar div.inner div.bottom span.messages,
-#layout-main div.threads_all div.navbar div.inner div.bottom span.messages,
-#layout-main div.cmt_all     div.navbar div.inner div.bottom span.messages,
-#layout-main div.forum_all   div.navbar div.inner div.top span.icons,
-#layout-main div.threads_all div.navbar div.inner div.top span.icons,
-#layout-main div.cmt_all     div.navbar div.inner div.top span.icons,
-#layout-main div.forum_all   div.navbar div.inner div.top span.info,
-#layout-main div.threads_all div.navbar div.inner div.top span.info,
-#layout-main div.cmt_all     div.navbar div.inner div.top span.info {
+#layout-main div.forum_all   div.g_bubble.navbar > b,
+#layout-main div.threads_all div.g_bubble.navbar > b,
+#layout-main div.cmt_all     div.g_bubble.navbar > b,
+#layout-main div.forum_all   div.g_bubble.navbar div.bottom span.messages,
+#layout-main div.threads_all div.g_bubble.navbar div.bottom span.messages,
+#layout-main div.cmt_all     div.g_bubble.navbar div.bottom span.messages,
+#layout-main div.forum_all   div.g_bubble.navbar div.top span.icons,
+#layout-main div.threads_all div.g_bubble.navbar div.top span.icons,
+#layout-main div.cmt_all     div.g_bubble.navbar div.top span.icons,
+#layout-main div.forum_all   div.g_bubble.navbar div.top span.info,
+#layout-main div.threads_all div.g_bubble.navbar div.top span.info,
+#layout-main div.cmt_all     div.g_bubble.navbar div.top span.info {
 	display:none;
 }
 
-#layout-main div.forum_all   div.navbar div.inner div.bottom,
-#layout-main div.threads_all div.navbar div.inner div.bottom,
-#layout-main div.cmt_all     div.navbar div.inner div.bottom {
+#layout-main div.forum_all   div.g_bubble.navbar div.bottom,
+#layout-main div.threads_all div.g_bubble.navbar div.bottom,
+#layout-main div.cmt_all     div.g_bubble.navbar div.bottom {
 	border:none;
 }
 
-#layout-main div.forum_all   div.navbar div.inner div.bottom span.notify,
-#layout-main div.threads_all div.navbar div.inner div.bottom span.notify,
-#layout-main div.cmt_all     div.navbar div.inner div.bottom span.notify {
+#layout-main div.forum_all   div.g_bubble.navbar div.bottom span.notify,
+#layout-main div.threads_all div.g_bubble.navbar div.bottom span.notify,
+#layout-main div.cmt_all     div.g_bubble.navbar div.bottom span.notify {
 	margin-top:-2.5em;
 }
 
-#layout-main div.forum_all  div.navbar,
-#layout-main div.threads_all div.navbar,
-#layout-main div.cmt_all    div.navbar {
+#layout-main div.forum_all  div.g_bubble.navbar,
+#layout-main div.threads_all div.g_bubble.navbar,
+#layout-main div.cmt_all    div.g_bubble.navbar,
+#layout-main div.forum_all  div.g_bubble.search,
+#layout-main div.threads_all div.g_bubble.search,
+#layout-main div.cmt_all    div.g_bubble.search {
 	padding:0 20px;
 	color:#888; background:#393634;
 }
-#layout-main div.forum_all  div.navbar div.inner,
-#layout-main div.threads_all div.navbar div.inner,
-#layout-main div.cmt_all    div.navbar div.inner {
-	padding:0;
-	background-color:transparent;
-}
-#layout-main div.forum_all  div.navbar div.top,
-#layout-main div.threads_all div.navbar div.top,
-#layout-main div.cmt_all    div.navbar div.top {
+
+#layout-main div.forum_all  div.g_bubble.navbar div.top,
+#layout-main div.threads_all div.g_bubble.navbar div.top,
+#layout-main div.cmt_all    div.g_bubble.navbar div.top {
 	padding:0;
 	height:40px;
 	line-height:40px;
 }
-#layout-main div.forum_all  div.navbar div.top span.breadcrumbs,
-#layout-main div.threads_all div.navbar div.top span.breadcrumbs,
-#layout-main div.cmt_all    div.navbar div.top span.breadcrumbs {
+#layout-main div.forum_all  div.g_bubble.navbar div.top span.breadcrumbs,
+#layout-main div.threads_all div.g_bubble.navbar div.top span.breadcrumbs,
+#layout-main div.cmt_all    div.g_bubble.navbar div.top span.breadcrumbs {
 	display:inline; float:none;
 }

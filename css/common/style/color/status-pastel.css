@@ -122,3 +122,14 @@ span.diff,
 {
 	color: #B32947;
 }
+
+/*vote graphs*/
+#layout-main div.votes_all div.graph div.bar div.colored
+{
+	background-color:green;
+}
+
+#layout-main div.votes_all div.graph div.bar.my div.colored
+{
+	background-color:#CD9D29;
+}

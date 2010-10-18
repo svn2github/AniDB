@@ -24,8 +24,6 @@
 	top: 700px;
 	left: 23px;
 	padding: 4px;
-	background-color: #1a2238;
-	border: 1px inset #AEAEAE;
 }
 
 #layout-menu ul
@@ -61,7 +59,7 @@
 
 #layout-search
 {
-	background: transparent url(../anidbstyle/images/backlame.png) repeat-x top;
+	background: transparent url(../anidbstyle/images/backlame.png) repeat-x scroll center center;
 	width: 100%;
 }
 
@@ -75,7 +73,7 @@
 {
 	background: transparent url(../anidbstyle/images/searchback.png) no-repeat top right;
 	position: absolute;
-	top: 77px;
+	top: 78px;
 	left: auto;
 	right: 0;
 	-right: -1px;
@@ -149,7 +147,7 @@
 	position: absolute;
 	right: 260px;
 	left: 180px;
-	top: 92px;
+	top: 93px;
 }
 
 #layout-tabs ul li,
@@ -229,4 +227,66 @@
 {
 	clear:none;
 	margin-right:21em;
+}
+
+.g_msg
+{
+	margin: 1em;
+}
+
+#layout-main div.main_all div.rightbar
+{
+	width: 20em;
+}
+
+#layout-main div.main_all div.rightbar p
+{
+	margin: 1.2em 0 0 0;
+}
+
+#layout-main div.main_all div.rightbar h3
+{
+	margin: 1.5em 0 0.4em 0;
+}
+
+#layout-main div.main_all div.rightbar ol
+{
+	margin: 0em 0 0.4em 0;
+	padding: 0;
+}
+
+#layout-main div.main_all div.rightbar li a
+{
+	margin-left: 4em;
+	display: table;
+}
+
+#layout-main div.main_all div.rightbar li span
+{
+	position: absolute;
+}
+
+#layout-main div.main_all div.news
+{
+	margin-right: 21em;
+}
+
+#layout-main div.main_all div.news div.newsitem span.stamp
+{
+	padding: 0.1em 1em 0.1em 0.1em;
+}
+
+#layout-main div.main_all div.news div.newsitem p.body
+{
+	margin: 0.1em 0.1em 3.1em 0.1em;
+}
+
+#layout-main .latest_all .g_list.filter li
+{
+	margin-top: 3px;
+}
+
+#layout-search div.search form.random
+{
+	display:none;
 }

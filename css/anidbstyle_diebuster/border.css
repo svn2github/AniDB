@@ -1,69 +1,22 @@
-table
-{
-	border-collapse: separate;
-}
-
-table table
-{
-	border: none;
-}
-
-img, a
-{
-	border: none;
-}
-
-#layout-main .g_image image,
-#layout-main .g_definitionlist
-{
-	padding: 1px;
-}
-
-#layout-main .block .g_definitionlist table
-{
-	border: none;
-	margin: 0;
-}
-
-#layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
-{
-	border: 1px solid;
-	border-color: #717377 #E8E9EC #E8E9EC #717377;
-	padding: 1px;
-}
-
-#layout-main div.anime_all div.groups tr.header th,
-#layout-main div.anime_all div.episodes tr.header th
-{
-	padding: 4px 1px 7px 1px;
-	border-bottom: black 2px solid;
-}
-
-#layout-main table.eplist tr.files.episode td
-{
-	border-bottom: 1px solid gray;
-}
-
-#layout-main div.anime_all table.stafflist + table.stafflist,
-#layout-main div.anime_all div.episodes tr.newtype td
-{
-	border-top: 2px solid black;
-}
-
-#layout-main div.g_content
-{
-	border-top: 2px groove #BFC2CA;
-	padding: 1em;
-}
-
 #layout-main div.cmt_entries dl.profile,
 #layout-main div.cmt_entries div.comment
 {
-	border:1px solid #aaaaaa;
+	border-right-color: #aaaaaa;
 }
 
 #menu-mod
 {
 	border: 1px inset #232323;
+}
+
+#layout-search div.search,
+#layout-tabs li a:hover,
+#layout-tabs li.selected a,
+#layout-tabs ul li a,
+#layout-tabs ul li
+{
+	border: none;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
 }

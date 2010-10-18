@@ -71,7 +71,9 @@ a:hover
 #layout-main div.g_timedentry h4,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
-#layout-main span.g_odd
+#layout-main span.g_odd,
+#layout-main div.votes_all div.graph div.group,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #dee3e7;
 }
@@ -132,13 +134,6 @@ div.pagination span strong
 	background-color: #4692BF;
 	border-color: #4692BF;
 	color: #FFFFFF;
-}
-
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
-{
-	background-color:#CADCEB;
 }
 
 #layout-main div div.explanation div.description
@@ -202,4 +197,10 @@ div.pagination span strong
 #layout-main div.main_all .g_bubble
 {
 	background-color: #DEE3E7;
+}
+
+#layout-search div.g_bubble.search
+{
+	background-color: transparent;
+	border:none;
 }

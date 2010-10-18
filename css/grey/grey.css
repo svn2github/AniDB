@@ -686,10 +686,6 @@ margin: 0;
 {
 display: block;
 }
-#layout-content div.anime_info div.desc
-{
-margin: 0.7em 0.3em 0.3em 0.3em;
-}
 #layout-content div.anime_vote form.permvote
 {
 margin: 1.1em 0 1.1em 0;
@@ -2241,21 +2237,26 @@ color:#FFFFFF;
 background-position:5px 50%;
 background-repeat:no-repeat;
 }
-#layout-main div.forum div.threads div.inner
+#layout-main div.forum div.g_bubble.threads
 {
 background: inherit;
 }
-#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.g_bubble.comment,
 #layout-main div.forum ul.topics li.g_odd.row
 {
 background-image: url(images/bg_2.gif)
 }
-#layout-main div.forum div.inner,
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.events div.inner,
-#layout-main div.export_all div.exportblock div.inner
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.export_all div.exportblock
 {
 background-image: url(images/bg_3.gif)
 }
@@ -2321,11 +2322,11 @@ border-bottom-color:#CCCCCC;
 color: white;
 font-weight: bold;
 }
-#layout-main div.forum div.rules div.inner
+#layout-main div.forum div.g_bubble.rules
 {
 background-color:#ECD5D8;
 }
-#layout-main div.forum div.rules div.inner
+#layout-main div.forum div.g_bubble.rules
 {
 color:#BC2A4D;
 }
@@ -2536,14 +2537,12 @@ border:1px solid #D1D7DC;
 #layout-main div.addseq_all div.explanation div.description dl + dl,
 #layout-main div.addcharcharrel_all div.explanation div.description dl + dl,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description dl + dl,
-#layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr td
+#layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr td,
+#layout-main div.votes_all div.graph div.group + div.group_odd,
+#layout-main div.votes_all div.graph div.group_odd + div.group,
+#layout-main div.votes_all div.graph.eps div.row + div.row
 {
 border-top:1px solid #D1D7DC;
-}
-*.rbottom,
-*.rtop
-{
-display: none;
 }
 *.rating
 {

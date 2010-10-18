@@ -52,6 +52,7 @@ th a,
 #layout-main div.main_all div.datablocks h4,
 #layout-main div.main_all div.header h4,
 #layout-main table tr.header,
+#layout-main div.votes_all div.graph div.header,
 #layout-main div.anime_all div.info div.caststaff div h4,
 #layout-main div.main_all div.rightbar h4,
 th
@@ -59,11 +60,23 @@ th
 	background-color: #c3d9ff;
 }
 
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box
 {
 	background-color: #CADCEB;
+}
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
+{
+	background-color:#CBD6DE;
 }
 
 .g_bubble .g_bubble,
@@ -82,13 +95,15 @@ th
 
 span.link:hover,
 a:hover,
+.g_button a:hover,
+.g_bubble .name-colored,
 #layout-main a.filter:hover,
 #layout-main div.pagination span a:hover,
-*.g_button a:hover,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-.g_bubble .name-colored,
-
-#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a,
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum a.username-coloured
 {
 	color: #AA0000;
 }
@@ -151,21 +166,14 @@ span.g_odd,
 #layout-main div.tabbed_pane_cfg ul.tabs li.selected,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div div.addrelform table tr,
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.profile_all div.default_languages table tr,
 #layout-main div.userpage_all > div.g_section > h4,
-#layout-main div.main_all div.header div.account ul.tabs li.signup
+#layout-main div.main_all div.header div.account ul.tabs li.signup,
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.events
 {
 	background-color: #ECF4FD;
 }
@@ -183,7 +191,9 @@ tr,
 #layout-tabs ul.main-tabs > li.selected,
 #layout-tabs ul.main-tabs > li:hover,
 #layout-main div.tabbed_pane ul.tabs li,
-#layout-main div.main_all div.header div.account ul.tabs li.signup:hover
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #FFFFFF;
 }
@@ -243,4 +253,20 @@ span.test
 	border-top-color: #C9D7F1;
 	border-left-color: #C9D7F1;
 	border-right-color: #97AACC;
+}
+
+#layout-main div.forum div.g_bubble.navbar div.bottom
+{
+	border-color:#FFFFFF;
+}
+
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2
+{
+	color:#006699;
+}
+
+#layout-main div.forum div.g_bubble.threads
+{
+	background-color:#4992B6;
 }

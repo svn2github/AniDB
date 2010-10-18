@@ -14,10 +14,14 @@ a:link
 	color: #105289;
 }
 
-span.link:hover,
 a:hover,
+span.link:hover,
+.g_bubble .name-colored,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
-.g_bubble .name-colored
+#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a,
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum a.username-coloured
 {
 	color: #AA0000;
 }
@@ -43,7 +47,10 @@ tr + tr td,
 tr + tr th,
 #layout-main div div.explanation div.description dl + dl,
 #layout-main div.report_all div.body ul li + li,
-#layout-main div.g_definitionlist tr th
+#layout-main div.g_definitionlist tr th,
+#layout-main div.votes_all div.graph div.group + div.group_odd,
+#layout-main div.votes_all div.graph div.group_odd + div.group,
+#layout-main div.votes_all div.graph.eps div.row + div.row
 {
 	border-top-color: #999999;
 }
@@ -105,6 +112,7 @@ button,
 input[type="button"],
 input[type="submit"],
 #layout-main table tr.header,
+#layout-main div.votes_all div.graph div.header,
 #layout-main div.anime_all div.info div.caststaff div h4,
 *.g_button a,
 input[type="text"],
@@ -177,35 +185,35 @@ input[type="submit"]:hover,
 
 .g_bubble,
 .g_bubble .g_bubble .g_bubble,
-html,
-#layout-menu,
-#layout-main *.g_odd *.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd *.g_odd,
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *,
-#layout-main div.main_all div.register div.inner,
-#layout-main div.main_all div.register .rbottom *,
-#layout-main div.main_all div.register .rtop *,
+#layout-main div.forum ul.topics li.g_odd.row,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
+{
+	background-color: #ACAEB4;
+}
+
+html,
+#layout-menu,
+#layout-main div.format-buttons input,
+#layout-main .g_odd .g_odd,
+#layout-main .g_odd .g_odd .g_odd .g_odd,
 #layout-main tr.g_odd,
 #layout-main li.g_odd,
 #layout-main span.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd,
-#layout-main *.g_odd *.g_odd *.g_odd *.g_odd *.g_odd,
-#layout-main div.forum ul.topics li.g_odd.row,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.poll .rbottom *,
-#layout-main div.forum div.poll .rtop *,
-#layout-main div.forum div.events div.inner,
-#layout-main div.forum div.events .rbottom *,
-#layout-main div.forum div.events .rtop *,
-#layout-main div.forum div.comment div.inner,
-#layout-main div.forum div.comment .rbottom *,
-#layout-main div.forum div.comment .rtop *,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
-#layout-main div.format-buttons input
+#layout-main .g_odd .g_odd .g_odd,
+#layout-main .g_odd .g_odd .g_odd .g_odd .g_odd,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color: #B9BBBF;
 }
@@ -222,14 +230,6 @@ tr
 	background-color: #CFD1D4;
 }
 
-#layout-main div.forum ul.topics li.row:hover,
-#layout-main div.forum ul.topics li.g_odd.row:hover,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover
-{
-	background-color: #ACAEB4;
-}
-
 #layout-main div.animeatt_all div.review > h4,
 #layout-main div.news h4,
 #layout-main div.main_all div.rightbar h4,
@@ -243,6 +243,7 @@ button,
 input[type="button"],
 input[type="submit"],
 #layout-main table tr.header,
+#layout-main div.votes_all div.graph div.header,
 *.g_button a,
 #layout-tabs ul.main-tabs li,
 #layout-menu > li ul,
@@ -266,9 +267,8 @@ select,
 #layout-search input.text,
 #layout-menu li.sub-menu ul,
 #layout-main div.pagination span a,
-#layout-main div.forum div.threads .rtop *,
-#layout-main div.forum div.threads .rbottom *,
-#layout-main div.forum div.threads div.inner
+#layout-main div.main_all div.header div.account ul.tabs li.signup,
+#layout-main div.forum div.g_bubble.threads
 {
 	background-color: #34394D;
 }
@@ -314,14 +314,26 @@ select,
 #layout-main div.pagination span a,
 #layout-main div.pagination span a:hover,
 #layout-main div.g_menu.filter_menu div.settings input[type="text"],
-#layout-main div.g_menu.filter_menu div.settings select
+#layout-main div.g_menu.filter_menu div.settings select,
+#layout-main div.forum div.g_bubble.navbar div.bottom,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	border-color: #34394D;
 }
 
 .g_bubble,
 #layout-main div.avatar img,
-#layout-main div.anime_all div.info div.image img
+#layout-main div.anime_all div.info div.image img,
+#layout-main div.forum div.signature,
+#layout-main div.forum div.events dl + dl,
+#layout-main div.forum div.poll dl + dl,
+#layout-main div.cmt_entries dl.profile,
+#layout-main div.forum div.quickreply textarea,
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events div.data > p,
+#layout-main div.forum div.poll div.data p
 {
 	border-color:#9A9A9A #7D7D7D #7D7D7D #9A9A9A;
 }
@@ -428,19 +440,9 @@ div.quotebody
 	border-bottom-color: #CFD1D4;
 }
 
-#layout-main div.main_all div.header div.account ul.tabs li.signup
-{
-	background-color:#34394D;
-}
-
 #layout-main div.main_all div.header div.account ul.tabs li.signup a
 {
 	color:#DDDDDD;
-}
-
-#layout-main div.main_all div.header div.account ul.tabs li.signup:hover a
-{
-	color:#AA0000;
 }
 
 #layout-main div.main_all div.header div.latestnews div.posted

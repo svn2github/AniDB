@@ -1,40 +1,43 @@
 /* Hide round corners */
-#layout-main div.cmt_all div.g_timedentry > b {
+#layout-main div.cmt_all div.g_bubble.comment > b {
 	display:none;
 }
 
 /* Wrapping box with faux columns */
-#layout-main div.cmt_all div.g_timedentry div.inner {
-	margin:0; padding:0;
+#layout-main div.cmt_all div.g_bubble.comment {
+	padding:0;
 	background:#f2f8f6 url(images/layout/forum-post-fakebg.png) repeat-y 125px 0;
 	border-right:5px solid #595654;
+	border-left: none;
+	border-top: none;
+	border-bottom: none;
 }
 
 /* Profile box */
-#layout-main div.cmt_all div.g_timedentry div.inner dl.profile {
-	margin:0; padding:0 10px 0 0;
+#layout-main div.cmt_all div.g_bubble.comment dl.profile {
+	padding:0 10px 0 0;
 	width:120px;
-	background:url(images/layout/forum-post-arrow.png) no-repeat right 31px;
+	background:url(images/layout/forum-post-arrow.png) no-repeat right 32px;
 	border:none;
 }
-	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile dd.user {
+	#layout-main div.cmt_all div.g_bubble.comment dl.profile dd.user {
 		padding:0;
 	}
-	#layout-main div.cmt_all div.g_timedentry div.inner dl.profile img {
+	#layout-main div.cmt_all div.g_bubble.comment dl.profile img {
 		background:#fff;
 		border:5px solid #595654;
 	}
 
 /* Icon bar (profile box) */
-#layout-main div.cmt_all div.g_timedentry span.icons.user a.i_user_history,
-#layout-main div.cmt_all div.g_timedentry span.icons.user a.i_user_wishlist,
-#layout-main div.cmt_all div.g_timedentry span.icons.user a.i_user_votes,
-#layout-main div.cmt_all div.g_timedentry span.icons.user a.i_user_reviews {
+#layout-main div.cmt_all div.g_bubble.comment span.icons.user a.i_user_history,
+#layout-main div.cmt_all div.g_bubble.comment span.icons.user a.i_user_wishlist,
+#layout-main div.cmt_all div.g_bubble.comment span.icons.user a.i_user_votes,
+#layout-main div.cmt_all div.g_bubble.comment span.icons.user a.i_user_reviews {
 	display:none;
 }
 	
 /* Top bar */
-#layout-main div.cmt_all div.g_timedentry div.inner div.postbody p.author {
+#layout-main div.cmt_all div.g_bubble.comment div.postbody p.author {
 	margin:0 0 0 130px; padding:5px 10px;
 	width:auto;
 	background:#dbdbdb;
@@ -42,26 +45,34 @@
 	border-bottom:1px solid #aaa;
 	line-height:20px;
 }
-#layout-main div.cmt_all div.g_timedentry div.inner div.postbody span.actions a.i_icon {
+#layout-main div.cmt_all div.g_bubble.comment div.postbody span.actions a.i_icon {
 	margin:5px 0 0; padding:6px 5px 4px;
 	width:auto; height:20px;
 	color:#333; background:none;
 	text-transform:capitalize;
 }
-#layout-main div.cmt_all div.g_timedentry div.inner div.postbody span.actions a.i_icon:hover {
+#layout-main div.cmt_all div.g_bubble.comment div.postbody span.actions a.i_icon:hover {
 	background:#666;
 }
-	#layout-main div.cmt_all div.g_timedentry div.inner div.postbody span.actions a.i_icon span {
+	#layout-main div.cmt_all div.g_bubble.comment div.postbody span.actions a.i_icon span {
 		display:inline;
 	}
 
 /* Text area */
-#layout-main div.cmt_all div.g_timedentry div.inner div.postbody div.content {
+#layout-main div.cmt_all div.g_bubble.comment div.postbody div.content {
 	margin:0 0 0 130px; padding:10px 20px;
 }
 
 /* Footer */
-#layout-main div.cmt_all div.g_timedentry div.inner div.postfooter {
+#layout-main div.cmt_all div.g_bubble.comment div.postfooter {
 	margin-left:130px;
 	border-bottom:5px solid #595654;
+}
+
+#layout-main div.forum div.signature {
+	margin-left:11em;
+}
+
+#layout-main div.cmt_entries dl.profile {
+	margin: 0;
 }

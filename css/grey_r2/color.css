@@ -1,6 +1,6 @@
 span.link,
 a,
-#layout-main div.forum div.poll div.inner div.question h2
+#layout-main div.forum div.g_bubble.poll div.question h2
 {
 color:#ADD8E6;
 border-bottom-color:white;
@@ -57,7 +57,7 @@ background-image:url(../grey/images/bg_2.gif);
 #layout-main div.addcharcharrel_all div.explanation div.description,
 #layout-main div.addcreatorcreatorrel_all div.explanation div.description,
 #layout-main div.addcreatoranimerel_all div.explanation div.description,
-#layout-main div.forum div.comment div.inner,
+#layout-main div.forum div.g_bubble.comment,
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.forum hr,
 #adba_update,
@@ -79,6 +79,8 @@ button,
 tr.g_odd,
 li.g_odd,
 span.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd,
 #layout-content div.creq_all tr.revoked > td,
 #layout-content div.creq_all tr.deleted > td,
 #layout-content div.animeatt_reviews > div.review > h4,
@@ -133,9 +135,9 @@ background-color:hsla(0, 100%, 50%, 0.3);
 }
 #layout-main div.quotebody,
 #layout-main div.forum div.postbody dl.codebox dt,
-#layout-main div.forum div.poll div.inner,
-#layout-main div.forum div.events div.inner,
-#layout-main div.export_all div.exportblock div.inner
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.export_all div.g_bubble.exportblock
 {
 background-image:url(../grey/images/bg_3.gif);
 }
@@ -188,13 +190,11 @@ color:gray;
 }
 #layout-main div.tabbed_pane div.body,
 #layout-main div.forum div.signature,
-#layout-main div.forum div.navbar div.inner div.bottom,
+#layout-main div.forum div.navbar div.bottom,
 #layout-tabs ul.main-tabs > li.selected,
 #layout-main div.tabbed_pane ul.tabs > li.selected,
 #layout-main div.tabbed_pane ul.tabs > li:hover,
-#layout-tabs ul.main-tabs > li:hover,
-#layout-main div.tagcloud,
-#layout-main div.desc
+#layout-tabs ul.main-tabs > li:hover
 {
 border:1px solid #121212;
 }
@@ -298,8 +298,7 @@ background-image:url(../grey/images/whitepixel.png);
 {
 border-color:hsla(0, 100%, 25%, 0.4);
 }
-div.threads .rtop > *,
-div.threads .rbottom > *,
+#layout-main div.forum div.g_bubble.threads,
 #layout-main div.forum ul.topiclist li.header
 {
 background-color:hsla(0, 100%, 25%, 0.4);
@@ -396,15 +395,11 @@ div.spoiler,
 #layout-main div.cmt_entries dl.profile,
 #layout-main div.forum ul.topiclist dd,
 #layout-main div.quotebody,
-#layout-main div.tagcloud,
-#layout-main div.desc,
 .g_bubble
 {
 border-color:gray;
 }
 #layout-main div.blog div.body,
-#layout-main div.tagcloud,
-#layout-main div.desc,
 .g_bubble.stripe
 {
 background-color:hsla(0, 0%, 10%, 0.4);
@@ -439,4 +434,15 @@ background-image:url(images/orangepixels.png);
 #layout-content div.mylist_list table.animelist tr.watching:hover td
 {
 background-image:url(images/orangepixels.png), url(../grey/images/whitepixel.png);
+}
+
+/*vote graphs*/
+#layout-main div.votes_all div.graph div.bar div.colored
+{
+	background-color:green;
+}
+
+#layout-main div.votes_all div.graph div.bar.my div.colored
+{
+	background-color:#CD9D29;
 }

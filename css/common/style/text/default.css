@@ -368,7 +368,7 @@ h4.collapsed span
 #layout-main div.forum div.events dl dd,
 #layout-main div.forum div.events dl dt,
 #layout-main div.msg_all div.header dd,
-#layout-main div.forum div.rules div.inner,
+#layout-main div.forum div.rules,
 #layout-main div.forum div.navbar span.notify,
 #layout-main div.forum div.quickreply textarea,
 #layout-main div.chartags_all div.addbox div.tag-column h5,
@@ -424,6 +424,7 @@ div.relations .g_bubble.stripe div.type,
 	font-weight:bold;
 }
 
+.g_italic,
 #layout-main div.main_all div.header div.latestnews div.posted,
 #layout-main div.profile_all div.account tr th p.note
 {

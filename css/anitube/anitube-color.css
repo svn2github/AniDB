@@ -22,14 +22,17 @@ table
 
 tr.g_odd,
 li.g_odd,
-span.g_odd
+span.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color:#e5ecf9;
 }
 
 #layout-main > h1
 {
-	border-top-color:#CCCCCC;
+	background-color: #FFFFFF;
+	border-top: none;
 }
 
 #layout-nav
@@ -46,15 +49,13 @@ span.g_odd
 
 #layout-tabs ul.main-tabs > li.selected
 {
-	background-color:#DBDBDB;
-	border-bottom-color:#DBDBDB;
+	background-color: #FFFFFF;
+	border-bottom-color:#FFFFFF;
 }
 
 #layout-main ul.g_list li:hover,
 #layout-main ul.g_list li.selected,
 #layout-tabs ul.main-tabs > li,
-#layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-menu li.sub-menu:hover,
 #layout-menu li.sub-menu ul li:hover
 {
@@ -76,12 +77,6 @@ span.g_odd
 	color:#FFFFFF;
 }
 
-#layout-main div.tagcloud
-{
-	background-color:#FAFAFA;
-	border-color:#D1D7DC;
-}
-
 #layout-main ul.g_list li,
 #layout-tabs ul.main-tabs > li,
 #layout-main div.tabbed_pane ul.tabs li
@@ -89,6 +84,7 @@ span.g_odd
 	border-color:#c3d0ec;
 }
 
+#layout-main div.votes_all div.graph div.header,
 #layout-main table tr.header,
 #layout-main div.news_all div.g_timedentry h4,
 #layout-main div.main_all div.g_timedentry h4
@@ -150,22 +146,6 @@ span.g_odd
 	background-color:#EEEEEE;
 }
 
-#layout-search div.search,
-#layout-search .rbottom *,
-#layout-search .rtop *
-{
-	background-color:#dbdbdb;
-	color:#000000;
-}
-
-#layout-search div.search,
-#layout-search .rbottom *,
-#layout-search .rtop *
-{
-	background-color:#dbdbdb;
-	color:#000000;
-}
-
 #layout-main div.pagination span a:hover,
 #layout-main div.pagination span strong
 {
@@ -186,9 +166,8 @@ span.g_odd
 	color:#AA0000;
 }
 
-#layout-main div.export_all div.exportblock div.inner,
-#layout-main div.export_all div.exportblock .rbottom *,
-#layout-main div.export_all div.exportblock .rtop *
+#layout-main ul.g_list li, #layout-tabs ul.main-tabs > li,
+#layout-main div.tabbed_pane ul.tabs li
 {
-	background-color:#CADCEB;
+	border-color:#CCCCCC;
 }
