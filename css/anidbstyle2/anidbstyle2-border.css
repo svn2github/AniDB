@@ -14,7 +14,7 @@
 #layout-main div.tabbed_pane ul.tabs li:hover,
 #layout-main div.tabbed_pane ul.tabs li.selected
 {
-	border-bottom: 1px double #ACAEB4;
+	border-bottom: 1px double #B1B3B5;
 }
 
 #layout-menu li.sub-menu ul li:first-child:hover
