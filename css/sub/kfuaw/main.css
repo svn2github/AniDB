@@ -31,6 +31,7 @@
 #layout-menu li.sub-menu[title=Main]:before			{ content: "M"; }
 #layout-menu li.sub-menu[title=Listings]:before		{ content: "L"; }
 #layout-menu li.sub-menu[title="My stuff"]:before	{ content: "yM"; }
+#layout-menu li.sub-menu[title=Moderate]:before		{ content: "C"; }
 #layout-menu li.sub-menu[title=Support]:before		{ content: "S"; }
 #layout-menu li.sub-menu[title=Account]:before		{ content: "A"; }
 
@@ -628,4 +629,22 @@ body.nonav #layout-main div.g_content h4
 {
 	padding: 1em 0 0 0;
 	margin: 1em 0 .3em 0;
+}
+
+#layout-main div.votes_all div.graph
+{
+	clear: none;
+	display: inline-block;
+	margin: .2em 0;
+	vertical-align: top;
+}
+
+#layout-main div.votes_all div.container
+{
+	display: inline-block;
+}
+
+#layout-main div.votes_all div.container:first-child
+{
+	width: 65%;
 }
