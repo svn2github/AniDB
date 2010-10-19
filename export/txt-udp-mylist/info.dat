@@ -1,5 +1,5 @@
 (C) 2010 by aaabbb1
-Version: 0.3 (10/02/2010)
+Version: 0.4 (10/19/2010)
 
 This is a simple text format export template which emulates the output of the UDP API MYLIST
 command.  It's goal is to produce identical results as the actual UDP API interface and it
@@ -12,7 +12,5 @@ which local file a particular MYLIST entry is referring.  These comments may be 
 as desired.
 
 Note: this template is still experimental and should not yet be used by anyone except aaabbb1.
-It currently returns formatted times which do not match the actual server values (there are
-no seconds in the formatted times, only minutes, while the server stores unix style epoch
-times which includes seconds).  Ommina is working on adding raw time support into the export
-system, so that we can get results that will exactly match the server both in format and value.
+It currently has some problems where returned data does not match the actual server data.
+These issues are being investigated.

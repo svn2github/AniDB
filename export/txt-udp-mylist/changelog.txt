@@ -1,8 +1,15 @@
 Simple Text MYLIST Export Format - ChangeLog
-Version: 0.3 - 10.02.2010
+Version: 0.4 - 10.19.2010
 (C) 2010 by aaabbb1
 
 ----------------------------------------------------------------------------------------------
+
+ 0.4 - 10.19.2010
+   - Experimental: not for public use.
+   - Added raw times for list date and view date.
+     Note: raw times won't work until the next server code update.
+   - Some problems with duplicate episode IDs were found and are
+     being investigated.
 
  0.3 - 10.02.2010
    - Experimental: not for public use.
