@@ -58,7 +58,7 @@
 
 /*
 #layout-main div.cmt_entries a.username-colored:hover,
-#layout-main div.forum a.username-coloured:hover,*/
+#layout-main div.forum a.username-colored:hover,*/
 #layout-main div.forum a.topictitle:hover,
 #layout-main div.forum ul.topiclist li
 {
@@ -79,7 +79,7 @@
 
 #layout-main div.forum a.topictitle/*,
 #layout-main div.cmt_entries a.username-colored,
-#layout-main div.forum a.username-coloured*/
+#layout-main div.forum a.username-colored*/
 {
 	color: #555555;
 }
