@@ -553,9 +553,7 @@ div.anime_all div.groups .state.dropped a
 }
 
 .g_menu ul li.g_odd,
-table tr.g_odd,
-#layout-main div.votes_all div.graph div.group,
-#layout-main div.votes_all div.graph.eps div.g_odd
+table tr.g_odd
 {
 	background-color:#f5f7ff;
 }

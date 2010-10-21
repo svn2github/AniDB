@@ -76,12 +76,18 @@
 	border-bottom:1px double #F5F7FF;
 }
 
-
 #layout-main div.tabbed_pane ul.tabs li
+{
+
+	border:1px solid #F3E7FF;
+}
+
+#layout-main div.tabbed_pane ul.tabs li,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	background-color:#FFFFFF;
 	color:#7762ED;
-	border:1px solid #F3E7FF;
 }
 
 #layout-tabs
@@ -349,4 +355,15 @@ div.pagination span a
 {
 	background-color: transparent;
 	border:none;
+}
+
+/*vote graphs*/
+#layout-main div.votes_all div.graph div.bar div.colored
+{
+	background-color:green;
+}
+
+#layout-main div.votes_all div.graph div.bar.my div.colored
+{
+	background-color:#CD9D29;
 }
