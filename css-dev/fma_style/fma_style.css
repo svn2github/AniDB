@@ -91,7 +91,9 @@ div.main_all div.rightbar ol li span {
 	top: 0.3em;
 	left: 1em;
 }
-div.main_all div.rightbar ol li.g_odd {
+div.main_all div.rightbar ol li.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd {
 	background: #fff;
 }
 
@@ -320,9 +322,7 @@ div.main_all div.news h4 {
 div.pagination span a:hover,
 div.pagination span strong,
 #layout-main div.tabbed_pane ul.tabs li:hover,
-#layout-main div.tabbed_pane ul.tabs li.selected,
-#layout-main div.votes_all div.graph div.group_odd,
-#layout-main div.votes_all div.graph.eps div.g_odd
+#layout-main div.tabbed_pane ul.tabs li.selected
 {
 	background-color:#F5F7FF;
 	color:#2B5288;

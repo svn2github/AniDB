@@ -16,7 +16,7 @@
 #layout-main div.votes_all div.graph
 {
 	padding:0.5em;
-	width:375px;
+	min-width:380px;
 }
 
 #layout-main div.votes_all div.graph div.row div.rating.my,
