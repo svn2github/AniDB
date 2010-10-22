@@ -9,8 +9,7 @@
 	background-color:#CD9D29;
 }
 
-#layout-main div.votes_all div.graph div.header > div,
-#layout-main div.votes_all div.graph div.column.desc > div
+#layout-main div.votes_all div.graph div.header
 {
 	color: #FFFFFF;
 }
