@@ -8,3 +8,19 @@
 {
 	background-color:#CD9D29;
 }
+
+#layout-main div.votes_all div.graph div.header > div
+{
+	color: #FFFFFF;
+}
+
+#layout-main div.votes_all div.graph div.column + div.column
+{
+	margin-left:-2px;
+}
+
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd
+{
+	background-color:#F2F8F6;
+}
