@@ -230,14 +230,14 @@ div.pagination span a
 	line-height:1.3em;
 }
 
-#layout-main div.forum div.postbody dl.codebox dt
+#layout-main div.forum div.postbody div.code div.title
 {
 	font-family:"Lucida Grande","Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
 	font-size:1em;
 	font-weight:bold;
 }
 
-#layout-main div.forum div.postbody dl.codebox code
+#layout-main div.forum div.postbody div.code code
 {
 	font-family:Monaco,"Andale Mono","Courier New",Courier,mono;
 	font-size:1.2em;
@@ -348,7 +348,7 @@ h4.collapsed span
 
 #layout-main div.forum div.events p,
 #layout-main div.forum div.poll p,
-#layout-main div.forum div.postbody dl.codebox,
+#layout-main div.forum div.postbody div.code,
 #layout-main div.userpage_all div.block caption,
 #layout-main div.userpage_all div.block h3
 {
