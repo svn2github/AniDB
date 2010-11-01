@@ -427,7 +427,7 @@ subStreams.prototype.add = function() {
 	ck.onchange = function toggle() { substrm.disable(this.checked,i); }
 	ck.style.display = 'none';
 	this.streams[i].enabled = ck;
-	var optionArray = {"10":{'text':"hard sub"},"20":{'text':"soft sub"},"30":{'text':"suplementary soft sub"},
+	var optionArray = {"10":{'text':"hard sub"},"20":{'text':"soft sub"},"30":{'text':"supplementary soft sub"},
 						"100":{'text':"other"},"200":{'text':"unknown"}};
 	var select = createSelectArray(null,'addstrm.sub'+id+'.type','addstrm.sub'+id+'.type',null,"200",optionArray);
 	select.title = 'Subtitle track type';

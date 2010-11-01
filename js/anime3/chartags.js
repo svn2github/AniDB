@@ -61,7 +61,7 @@ function parseData(xmldoc) {
 	var groupNodes = root.getElementsByTagName('group');
 	var tagNodes = root.getElementsByTagName('tag');
 	// Add the general tag group
-	groups[0] = {'gid':0,'name':'ungroupped','pid':0,'tags':new Array(),'childGroups':new Array()};
+	groups[0] = {'gid':0,'name':'ungrouped','pid':0,'tags':new Array(),'childGroups':new Array()};
 	level0groups.push(0);
 	var pidlist = new Array();
 	pidlist.push(0);
