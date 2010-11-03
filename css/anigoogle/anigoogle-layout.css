@@ -327,6 +327,11 @@ h4,
 	padding: 0.5em 1em;
 }
 
+#layout-main tr.header th.sortable
+{
+	padding: 0px;
+}
+
 #layout-main tr.header th,
 #layout-main tr.header th.sortable a
 {
