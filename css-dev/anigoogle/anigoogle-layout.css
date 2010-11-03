@@ -333,11 +333,6 @@ h4,
 	padding: 5px 0px;
 }
 
-#layout-main tr.header th.sortable
-{
-	padding: 0px;
-}
-
 #layout-main tr.header th.sortable a,
 #layout-menu li.sub-menu ul li a
 {
