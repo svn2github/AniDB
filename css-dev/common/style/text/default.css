@@ -311,7 +311,7 @@ ul.acdropdown
 ul.acdropdown li
 {
 	background-color:transparent;
-	color:none;
+	color:transparent;
 	font-weight:normal;
 }
 
@@ -387,9 +387,9 @@ caption,
 .v_high,
 .v_med,
 span.diff,
-#layout-main div.creqmod_all .state.new,
-#layout-main div.creqmod_all .state.return,
-#layout-main div.creqmod_all span.type.del,
+#layout-main div.creq_all .state.new,
+#layout-main div.creq_all .state.return,
+#layout-main div.creq_all span.type.del,
 #layout-main div.msg_all tr.new td.state,
 #layout-main div.msg_all tr td.type,
 #layout-main div.mylist_list tr.complete td.stats,

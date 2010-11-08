@@ -524,7 +524,7 @@ margin-top: 0px;
 {
 margin-bottom: 0.3em;
 }
-#layout-menu div.menu li.creqmod
+#layout-menu div.menu li.creq
 {
 margin-top: 0.3em;
 }
@@ -998,7 +998,6 @@ text-align: left;
 #layout-content div.agcmts_add form div textarea,
 #layout-content div.animegroup_all form div textarea,
 #layout-content div.creq_all form div textarea,
-#layout-content div.creqmod_all form div textarea,
 #layout-content div.addfilem_all div form div textarea
 {
 display: block !important;
@@ -1010,8 +1009,8 @@ height: 20em !important;
 #layout-content div.animegroup_all label,
 #layout-content div.animegroup_all form div input,
 #layout-content div.creq_all form div input,
-#layout-content div.creqmod_all div.creq_buttons,
-#layout-content div.creqmod_all div.creq_messages > p,
+#layout-content div.creq_all div.creq_buttons,
+#layout-content div.creq_all div.creq_messages > p,
 #layout-content div.addfilem_all form div input
 {
 margin: 0.3em 0 0 10%;
@@ -1727,8 +1726,7 @@ background-image: url(images/bg_2.gif);
 color: red;
 background-image: url(images/bg_2.gif);
 }
-#layout-content div.creq_all dd,
-#layout-content div.creqmod_all dd
+#layout-content div.creq_all dd
 {
 margin-bottom: 0.5em;
 }
@@ -2357,9 +2355,9 @@ caption,
 .v_high,
 .v_med,
 span.diff,
-#layout-main div.creqmod_all .state.new,
-#layout-main div.creqmod_all .state.return,
-#layout-main div.creqmod_all span.type.del,
+#layout-main div.creq_all .state.new,
+#layout-main div.creq_all .state.return,
+#layout-main div.creq_all span.type.del,
 #layout-main div.msg_all tr.new td.state,
 #layout-main div.msg_all tr td.type,
 #layout-main div.mylist_list tr.complete td.stats,
