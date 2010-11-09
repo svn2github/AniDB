@@ -7,7 +7,8 @@
 
 #layout-main div.creq_all div.creq_raw table
 {
-	width:50em;
+	max-width:98%;
+	min-width:50em;
 }
 
 #layout-main div.creq_all table.creqlist td.type,
