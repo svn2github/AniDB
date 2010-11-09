@@ -40,7 +40,6 @@
 #layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.animelist_all table tr.mylist,
 #layout-main div.group_released table tr.mylist,
-#layout-main div.schedule_all table tr.mylist,
 #layout-main div.forum div.comment div.content strong,
 #layout-main div.forum a.topictitle strong,
 #layout-main div.addcreatoranimerel_all tr.identical,
@@ -70,7 +69,6 @@
 #layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.animelist_all table tr.g_odd.mylist,
 #layout-main div.group_released table tr.g_odd.mylist,
-#layout-main div.schedule_all table tr.g_odd.mylist,
 #layout-main table.animelist tr.g_odd.mylist,
 #layout-main div.song_all div.tabbed_pane_main table tr.g_odd td.mylist,
 #layout-main div.timeline_all div.timeline ul.row.g_odd li.completed a
@@ -105,7 +103,6 @@
 #layout-main div.creator_all div.tabbed_pane_main table,
 #layout-main div.anime_all div.tabbed_pane_main table,
 #layout-main div.animelist_all table,
-#layout-main div.schedule_all table,
 #layout-main div.addcreatoranimerel_all table,
 #layout-main div.timeline_all div.timeline ul.row li.stalled a,
 #layout-main div.timeline_all div.timeline ul.row li.completed a,

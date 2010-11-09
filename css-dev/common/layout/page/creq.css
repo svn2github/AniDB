@@ -1,4 +1,4 @@
-#layout-main div.creq_all table
+/*#layout-main div.creq_all table
 {
 	width:98%;
 }
@@ -44,7 +44,7 @@
 #layout-main div.creq_all table.creqlist td.entry
 {
 	width:auto;
-}
+}*/
 
 #layout-main div.creq_all div.creq_data table td.old,
 #layout-main div.creq_all div.creq_data table td.new,

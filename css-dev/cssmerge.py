@@ -1,6 +1,8 @@
-import os, sys
+import os, sys, cssutils, logging
 
 __out = "../../flat/"
+
+cssutils.log.setLevel(logging.ERROR)
 
 def cssmerge(fullpath, outfile):
     path, filename = os.path.split(os.path.normpath(fullpath))
@@ -46,6 +48,9 @@ def cssm(cssfile="/"):
                 os.mkdir(out)
             try:
                 cssmerge(line.rstrip('\n'),file(out + '/' + path.lstrip('./').replace('/','-') + '.css', 'w'))
+                css = cssutils.parseFile(out + '/' + path.lstrip('./').replace('/','-') + '.css')
+                cssutils.ser.prefs.useMinified()
+                file(out + '/' + path.lstrip('./').replace('/','-') + '.css', 'w').write(css.cssText)
             except:
                 print out + '/' + path.lstrip('./').replace('/','-') + '.css'
 
