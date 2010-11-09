@@ -257,7 +257,8 @@ div.pagination span a
 }
 
 #layout-main div.forum ul.topiclist li.row dl.icon dt.icon span.title,
-#layout-main div.forumsearch_form dt span.desc
+#layout-main div.forumsearch_form dt span.desc,
+#layout-main div.creq_all .state.return th.field
 {
 	font-weight:normal;
 }

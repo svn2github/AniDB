@@ -1,6 +1,12 @@
-/*#layout-main div.creq_all table
+#layout-main div.creq_all table.creqlist,
+#layout-main div.creq_all div.creq_hist table
 {
 	width:98%;
+}
+
+#layout-main div.creq_all div.creq_raw table
+{
+	width:50em;
 }
 
 #layout-main div.creq_all table.creqlist td.type,
@@ -35,7 +41,8 @@
 	text-align:left;
 }
 
-#layout-main div.creq_all table.creqlist td
+#layout-main div.creq_all table.creqlist td,
+#layout-main div.creq_all div.creq_data td
 {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
@@ -44,7 +51,17 @@
 #layout-main div.creq_all table.creqlist td.entry
 {
 	width:auto;
-}*/
+}
+
+#layout-main div.creq_all div.creq_data td.field
+{
+	white-space:nowrap;
+}
+
+#layout-main div.creq_all th.field
+{
+	text-align:center;
+}
 
 #layout-main div.creq_all div.creq_data table td.old,
 #layout-main div.creq_all div.creq_data table td.new,
