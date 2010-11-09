@@ -37,7 +37,8 @@
 }
 
 #layout-main div.creq_all table.creqlist td.id,
-#layout-main div.creq_all table.creqlist td.name
+#layout-main div.creq_all table.creqlist td.name,
+#layout-main div.creq_all div.creq_header th.field
 {
 	text-align:left;
 }
@@ -59,7 +60,6 @@
 	white-space:nowrap;
 }
 
-#layout-main div.creq_all div.creq_data th.field,
 #layout-main div.creq_all th.field
 {
 	text-align:center;
