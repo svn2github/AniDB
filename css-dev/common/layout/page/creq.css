@@ -43,10 +43,10 @@
 }
 
 #layout-main div.creq_all table.creqlist td,
-#layout-main div.creq_all div.creq_data td
+#layout-main div.creq_all div.creq_data td,
+#layout-main div.creq_all div.creq_raw td
 {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+	padding: 2px 8px;
 }
 
 #layout-main div.creq_all table.creqlist td.entry
@@ -59,6 +59,7 @@
 	white-space:nowrap;
 }
 
+#layout-main div.creq_all div.creq_data th.field,
 #layout-main div.creq_all th.field
 {
 	text-align:center;
