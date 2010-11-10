@@ -169,12 +169,12 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         InitUI();
 
-        if((Integer)(mem.get("FirstStart", 0)) < 8) {
+        /*if((Integer)(mem.get("FirstStart", 0)) < 8) {
             DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
                 "<br/>" +
                 "<br/>" +
                 "</html>"));
-        }
+        }*/
 
         modState = eModState.Initialized;
     }
