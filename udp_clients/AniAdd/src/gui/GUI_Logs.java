@@ -366,7 +366,7 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
             }
         });
 
-        api.AddComListener(new ComListener() {
+        api.addComListener(new ComListener() {
 
             public void EventHandler(ComEvent comEvent) {
                 if (comEvent.Type() == ComEvent.eType.Information) {
@@ -375,7 +375,7 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
             }
         });
 
-        epProc.AddComListener(new ComListener() {
+        epProc.addComListener(new ComListener() {
 
             public void EventHandler(ComEvent comEvent) {
                 if (comEvent.Type() == ComEvent.eType.Information && comEvent.Params(0) instanceof eComType && comEvent.Params(0) == eComType.FileEvent) {
@@ -392,7 +392,7 @@ public class GUI_Logs extends javax.swing.JPanel implements GUI.ITab {
                     comEvents.add(comEvent);
                 }
             };
-            module.AddComListener(comListener);
+            module.addComListener(comListener);
         }
 
     }

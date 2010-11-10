@@ -27,9 +27,10 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (Exception ex) {
         }
+        /*try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); } catch (Exception ex) { }*/
 
         aniAdd = new AniAdd();
 
@@ -43,7 +44,7 @@ public class Main {
             }
         });
 
-        aniAdd.AddComListener(new Communication.ComListener() {
+        aniAdd.addComListener(new Communication.ComListener() {
 
             public void EventHandler(ComEvent comEvent) {
                 if (comEvent.Type() == ComEvent.eType.Information) {

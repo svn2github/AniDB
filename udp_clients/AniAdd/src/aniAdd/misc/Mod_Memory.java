@@ -99,7 +99,7 @@ public class Mod_Memory implements IModule {
     public String ModuleName() {return modName;}
     public void Initialize(IAniAdd aniAdd) {
         modState = eModState.Initializing;
-        aniAdd.AddComListener(new AniAddEventHandler());
+        aniAdd.addComListener(new AniAddEventHandler());
         modState = eModState.Initialized;
    }
     public void Terminate() {
@@ -118,7 +118,7 @@ public class Mod_Memory implements IModule {
             listener.EventHandler(comEvent);
         }
     }
-	public void AddComListener(ComListener comListener){ listeners.add(comListener); }
+	public void addComListener(ComListener comListener){ listeners.add(comListener); }
 	public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }
     class AniAddEventHandler implements ComListener{
         public void EventHandler(ComEvent comEvent) {

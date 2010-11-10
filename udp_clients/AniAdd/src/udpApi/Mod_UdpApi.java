@@ -679,7 +679,7 @@ public class Mod_UdpApi implements IModule {
 
     public void Initialize(IAniAdd aniAdd) {
         modState = eModState.Initializing;
-        aniAdd.AddComListener(new AniAddEventHandler());
+        aniAdd.addComListener(new AniAddEventHandler());
         modState = eModState.Initialized;
     }
 
@@ -723,7 +723,7 @@ public class Mod_UdpApi implements IModule {
         }
     }
 
-    public void AddComListener(ComListener comListener) {
+    public void addComListener(ComListener comListener) {
         listeners.add(comListener);
     }
 

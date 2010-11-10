@@ -135,10 +135,10 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         modState = eModState.Initializing;
 
         this.aniAdd = aniAdd;
-        aniAdd.AddComListener(new AniAddEventHandler());
+        aniAdd.addComListener(new AniAddEventHandler());
 
         mem = (Mod_Memory) aniAdd.GetModule("Memory");
-        mem.AddComListener(new ComListener() {
+        mem.addComListener(new ComListener() {
 
             public void EventHandler(ComEvent comEvent) {
                 if (comEvent.Type() == ComEvent.eType.Information && ((String) comEvent.Params(0)).equals("SettingsCleared")) {
@@ -157,7 +157,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         });
 
         for (IModule mod : aniAdd.GetModules()) {
-            mod.AddComListener(new ComListener() {
+            mod.addComListener(new ComListener() {
 
                 public void EventHandler(ComEvent comEvent) {
                     if (comEvent.Type() == ComEvent.eType.Error || comEvent.Type() == ComEvent.eType.Fatal || comEvent.Type() == ComEvent.eType.Warning) {
@@ -169,10 +169,10 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         InitUI();
 
-        if((Integer)(mem.get("FirstStart", 0)) < 7) {
+        if((Integer)(mem.get("FirstStart", 0)) < 8) {
             DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
-                "Added compression to avoid truncated messages (which in rare cases lead to file renaming issues)<br/>" +
-                "Added Audio- & VideoCodec vars to tagsystem (FACodec & FVCodec)<br/>" +
+                "<br/>" +
+                "<br/>" +
                 "</html>"));
         }
 
@@ -228,7 +228,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         }
     }
 
-    public void AddComListener(ComListener comListener) {
+    public void addComListener(ComListener comListener) {
         listeners.add(comListener);
     }
 
@@ -331,10 +331,10 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         pnl_NoticeLayout.setHorizontalGroup(
             pnl_NoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NoticeLayout.createSequentialGroup()
-                .addContainerGap(533, Short.MAX_VALUE)
+                .addContainerGap(171, Short.MAX_VALUE)
                 .addComponent(btn_CloseNotice, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(pnl_NoticeLayout.createSequentialGroup()
-                .addComponent(lbl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+                .addComponent(lbl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
         pnl_NoticeLayout.setVerticalGroup(
@@ -349,14 +349,14 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+            .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnl_Notice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+                .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

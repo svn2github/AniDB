@@ -17,7 +17,7 @@ import udpApi.Mod_UdpApi;
  * @author Arokh
  */
 public class AniAdd implements IAniAdd{
-    final static int CURRENTVER = 7;
+    final static int CURRENTVER = 8;
 
     TreeMap<String, IModule> modules;
     EventHandler eventHandler;
@@ -91,7 +91,7 @@ public class AniAdd implements IAniAdd{
     public Collection<IModule> GetModules(){return modules.values();}
 
     class EventHandler implements ComListener{
-        public void AddEventHandler(IModule mod){ mod.AddComListener(this);}
+        public void AddEventHandler(IModule mod){ mod.addComListener(this);}
         public void EventHandler(ComEvent comEvent) {
             System.out.println("Event: " + comEvent.toString());
         }
@@ -105,7 +105,7 @@ public class AniAdd implements IAniAdd{
         for (ComListener listener : listeners) listener.EventHandler(comEvent);
 
     }
-	public void AddComListener(ComListener comListener){ listeners.add(comListener); }
+	public void addComListener(ComListener comListener){ listeners.add(comListener); }
 	public void RemoveComListener(ComListener comListener){ listeners.remove(comListener); }
     //Com System End
 }

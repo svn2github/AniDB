@@ -25,6 +25,7 @@ public class FileTable_Renderer extends DefaultTableCellRenderer{
 
     public FileTable_Renderer() {cellComponent = new ImgCell();}
 
+	@Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         //renderer = new ImgCell();
         FileInfo fileInfo = (FileInfo)value;
@@ -88,7 +89,7 @@ public class FileTable_Renderer extends DefaultTableCellRenderer{
             iconGroup[0] = ImgSelector(eIconType.P, eAction.Process, fileInfo.Served());
             iconGroup[1] = ImgSelector(eIconType.F, eAction.FileCmd, fileInfo.ActionsDone().contains(eAction.Process));
             iconGroup[2] = ImgSelector(eIconType.M, eAction.MyListCmd, fileInfo.ActionsDone().contains(eAction.Process));
-            iconGroup[3] = ImgSelector(eIconType.R, eAction.Rename, false);
+            iconGroup[3] = ImgSelector(eIconType.R, eAction.Rename, fileInfo.ActionsDone().contains(eAction.Process));
 
             return iconGroup;
         }

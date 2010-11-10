@@ -163,6 +163,23 @@ public class TagSystem {
             } else if (funcName.equals("lc")) {
                 e.Check(params.size() == 1, "Invalid Parameter count");
                 return params.get(0).toLowerCase();
+            } else if (funcName.equals("add")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
+                return String.valueOf(Integer.parseInt(params.get(0)) + Integer.parseInt(params.get(1)));
+            } else if (funcName.equals("substract")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
+                return String.valueOf(Integer.parseInt(params.get(0)) - Integer.parseInt(params.get(1)));
+            } else if (funcName.equals("mult")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
+                return String.valueOf(Integer.parseInt(params.get(0)) * Integer.parseInt(params.get(1)));
+            } else if (funcName.equals("div")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
+                return String.valueOf(Integer.parseInt(params.get(0)) / Integer.parseInt(params.get(1)));
+            } else if (funcName.equals("substr")) {
+                e.Check(params.size() == 2 || params.size() == 3, "Invalid Parameter count");
+                String valA = params.get(0);
+                int valB = Integer.parseInt(params.get(1));
+                return params.size() == 2? valA.substring(valB) : valA.substring(valB,  Integer.parseInt(params.get(2)));
             } else if (funcName.equals("repl")) {
                 e.Check(params.size() == 3, "Invalid Parameter count");
                 String valA = params.get(0);
@@ -174,6 +191,16 @@ public class TagSystem {
                 String valA = params.get(0);
                 String valB = params.get(1);
                 return valA.matches(valB)?"1":"";
+            } else if (funcName.equals("indexof")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
+                String valA = params.get(0);
+                String valB = params.get(1);
+                return String.valueOf(valA.indexOf(valB));
+            } else if (funcName.equals("lindexof")) {
+                e.Check(params.size() == 2, "Invalid Parameter count");
+                String valA = params.get(0);
+                String valB = params.get(1);
+                return String.valueOf(valA.lastIndexOf(valB));
             } else {
                 e.Throw("No such functionname");
                 return null;

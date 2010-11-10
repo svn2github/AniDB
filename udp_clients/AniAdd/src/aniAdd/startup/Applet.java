@@ -31,7 +31,7 @@ public class Applet extends JApplet {
     AniAdd aniAdd;
 
     public Applet() {
-        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());} catch (Exception ex) { }
+        try {UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");} catch (Exception ex) { }
         
         aniAdd = new AniAdd();
     }
@@ -84,7 +84,7 @@ public class Applet extends JApplet {
             password = JOptionPane.showInputDialog(this, "Password");
         }
         
-        aniAdd.AddComListener(new Communication.ComListener() {
+        aniAdd.addComListener(new Communication.ComListener() {
             public void EventHandler(ComEvent comEvent) {
                 if(comEvent.Type() == ComEvent.eType.Information){
                     if((IModule.eModState)comEvent.Params(0) == IModule.eModState.Initialized){

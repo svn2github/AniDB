@@ -26,7 +26,7 @@ public class Mod_Statistics implements IModule {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void AddComListener(ComListener comListener) {
+    public void addComListener(ComListener comListener) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

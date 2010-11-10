@@ -22,7 +22,7 @@ import udpApi.Mod_UdpApi;
 
 public class Mod_EpProcessing implements IModule {
 
-    public static String[] supportedFiles = {"avi", "mpg", "mpeg", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"};
+    public static String[] supportedFiles = {"avi", "ac3", "mpg", "mpeg", "rm", "rmvb", "asf", "wmv", "mov", "ogm", "mp4", "mkv", "rar", "zip", "ace", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "swf", "flv"};
     private IAniAdd aniAdd;
     private Mod_UdpApi api;
     private Mod_Memory mem;
@@ -32,6 +32,7 @@ public class Mod_EpProcessing implements IModule {
     private boolean isProcessing;
     private boolean isPaused;
     private int lastFileId;
+    private int filesBeingMoved;
 
     public Mod_EpProcessing() {
         lastFileId = 0;
@@ -72,6 +73,13 @@ public class Mod_EpProcessing implements IModule {
                 procFile.Served(true);
                 //System.out.println("Processing: " + procFile.FileObj().getAbsolutePath());
                 Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.Processing, procFile.Id());
+
+                while (filesBeingMoved > 0) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                    }
+                }
 
                 fileParser = new FileParser(procFile.FileObj(), new ICallBack<FileParser>() {
 
@@ -145,6 +153,7 @@ public class Mod_EpProcessing implements IModule {
         cmd.setArgs("fmask", Misc.toMask(binCode, 40));
 
         binCode = new BitSet(32);
+        binCode.set(1); //'category list
         binCode.set(4); //'type
         binCode.set(5); //'year
         binCode.set(6); //'highest EpCount
@@ -175,8 +184,8 @@ public class Mod_EpProcessing implements IModule {
         cmd.setArgs("ed2k", (String) procFile.Data().get("Ed2k"));
         cmd.setArgs("state", Integer.toString(procFile.MLStorage().ordinal()));
 
-        if(procFile.Watched() != null) {
-            cmd.setArgs("viewed",  procFile.Watched()?"1":"0");
+        if (procFile.Watched() != null) {
+            cmd.setArgs("viewed", procFile.Watched() ? "1" : "0");
         }
 
         String content = "";
@@ -260,6 +269,7 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_EpHiCount", df.poll());
             procFile.Data().put("DB_Year", df.poll());
             procFile.Data().put("DB_Type", df.poll());
+            procFile.Data().put("DB_CatList", df.poll());
             procFile.Data().put("DB_SN_Romaji", df.poll());
             procFile.Data().put("DB_SN_Kanji", df.poll());
             procFile.Data().put("DB_SN_English", df.poll());
@@ -298,7 +308,7 @@ public class Mod_EpProcessing implements IModule {
             //File Added/Edited
             procFile.ActionsDone().add(eAction.MyListCmd);
             /*if (procFile.ActionsTodo().remove(eAction.SetWatchedState)) {
-                procFile.ActionsDone().add(eAction.SetWatchedState);
+            procFile.ActionsDone().add(eAction.SetWatchedState);
             }*/
             Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.MLCmd_FileAdded, procFile.Id());
 
@@ -317,7 +327,7 @@ public class Mod_EpProcessing implements IModule {
         } else {
             procFile.ActionsError().add(eAction.MyListCmd);
             /*if (procFile.ActionsTodo().remove(eAction.SetWatchedState)) {
-                procFile.ActionsError().add(eAction.SetWatchedState);
+            procFile.ActionsError().add(eAction.SetWatchedState);
             }*/
 
             if (replyId == 320 || replyId == 330 || replyId == 350) {
@@ -365,11 +375,31 @@ public class Mod_EpProcessing implements IModule {
         if (procFile.ActionsTodo().contains(eAction.Rename) && procFile.ActionsDone().contains(eAction.FileCmd)) {
             procFile.ActionsTodo().remove(eAction.Rename);
 
-            if (renameFile(procFile)) {
-                procFile.ActionsDone().add(eAction.Rename);
-            } else {
-                procFile.ActionsError().add(eAction.Rename);
+
+            while (filesBeingMoved > 0) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                }
             }
+
+            synchronized (this) {
+                filesBeingMoved++;
+            }
+
+            try {
+                if (renameFile(procFile)) {
+                    procFile.ActionsDone().add(eAction.Rename);
+                } else {
+                    procFile.ActionsError().add(eAction.Rename);
+                }
+            } catch (Exception e) {
+            }
+
+            synchronized (this) {
+                filesBeingMoved--;
+            }
+
         }
 
         Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.Done, procFile.Id());
@@ -412,14 +442,16 @@ public class Mod_EpProcessing implements IModule {
                     return false;
                 }
 
-                if (!folderObj.isDirectory()) folderObj.mkdirs();
-               
+                if (!folderObj.isDirectory()) {
+                    folderObj.mkdirs();
+                }
+
             } else {
                 folderObj = procFile.FileObj().getParentFile();
             }
 
             String ext = procFile.FileObj().getName().substring(procFile.FileObj().getName().lastIndexOf("."));
-            if(!(Boolean) mem.get("GUI_EnableFileRenaming")){
+            if (!(Boolean) mem.get("GUI_EnableFileRenaming")) {
                 filename = procFile.FileObj().getName();
             } else if ((Boolean) mem.get("GUI_RenameTypeAniDBFileName")) {
                 filename = procFile.Data().get("DB_FileName");
@@ -467,6 +499,7 @@ public class Mod_EpProcessing implements IModule {
                             File srcFolder = procFile.FileObj().getParentFile();
 
                             File[] srcFiles = srcFolder.listFiles(new FilenameFilter() {
+
                                 public boolean accept(File dir, String name) {
                                     return name.startsWith(oldFilenameWoExt + ".");
                                 }
@@ -502,7 +535,9 @@ public class Mod_EpProcessing implements IModule {
                                     Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.DeletetingEmptyFolderFailed, procFile.Id(), srcFolder);
                                     break;
                                 }
-                                if(!recurse) break;
+                                if (!recurse) {
+                                    break;
+                                }
 
                                 Thread.sleep(200);
                                 srcFolder = srcFolder.getParentFile();
@@ -539,7 +574,11 @@ public class Mod_EpProcessing implements IModule {
 
         String[] year = procFile.Data().get("DB_Year").split("-", -1);
         tags.put("AYearBegin", year[0]);
-        if (year.length == 2) tags.put("AYearEnd", year[1]);
+        if (year.length == 2) {
+            tags.put("AYearEnd", year[1]);
+        }
+
+        tags.put("ACatList", procFile.Data().get("DB_CatList"));
 
         tags.put("ETr", procFile.Data().get("DB_EpN_Romaji"));
         tags.put("ETe", procFile.Data().get("DB_EpN_English"));
@@ -565,10 +604,10 @@ public class Mod_EpProcessing implements IModule {
         tags.put("Source", procFile.Data().get("DB_Source"));
         tags.put("Type", procFile.Data().get("DB_Type"));
 
-        if(procFile.ActionsDone().contains(eAction.MyListCmd)){
+        if (procFile.ActionsDone().contains(eAction.MyListCmd)) {
             tags.put("Watched", (procFile.Watched() != null && procFile.Watched() || procFile.Watched() == null && procFile.Data().get("DB_IsWatched").equals("1")) ? "1" : "");
         } else {
-            tags.put("Watched", procFile.Data().get("DB_IsWatched"));
+            tags.put("Watched", procFile.Data().get("DB_IsWatched").equals("1") ? "1" : "");
         }
 
         tags.put("Depr", procFile.Data().get("DB_Deprecated").equals("1") ? "1" : "");
@@ -576,7 +615,9 @@ public class Mod_EpProcessing implements IModule {
         tags.put("Ver", GetFileVersion(Integer.valueOf(procFile.Data().get("DB_State"))).toString());
 
         String codeStr = (String) mem.get("GUI_TagSystemCode");
-        if (codeStr == null || codeStr.isEmpty()) return null;
+        if (codeStr == null || codeStr.isEmpty()) {
+            return null;
+        }
 
         TagSystem.Evaluate(codeStr, tags);
 
@@ -608,10 +649,10 @@ public class Mod_EpProcessing implements IModule {
 
     public void addFiles(Collection<File> newFiles) {
         Boolean watched;
-        if((Boolean)mem.get("GUI_ShowSetWatchedStateBox", false)){
-            watched = (Boolean)mem.get("GUI_SetWatchedState", false)? (Boolean)mem.get("GUI_SetWatched", false) : null;
+        if ((Boolean) mem.get("GUI_ShowSetWatchedStateBox", false)) {
+            watched = (Boolean) mem.get("GUI_SetWatchedState", false) ? (Boolean) mem.get("GUI_SetWatched", false) : null;
         } else {
-            watched = (Boolean)mem.get("GUI_SetWatched", false) ? true : null;
+            watched = (Boolean) mem.get("GUI_SetWatched", false) ? true : null;
         }
 
         Integer storage = (Integer) mem.get("GUI_SetStorageType", 1);
@@ -626,21 +667,33 @@ public class Mod_EpProcessing implements IModule {
         }
 
         for (File cf : newFiles) {
-            if (files.contains("Path", cf.getAbsolutePath())) continue;
+            if (files.contains("Path", cf.getAbsolutePath())) {
+                continue;
+            }
 
             FileInfo fileInfo = new FileInfo(cf, lastFileId);
             fileInfo.MLStorage(FileInfo.eMLStorageState.values()[storage]);
             fileInfo.ActionsTodo().add(eAction.Process);
             fileInfo.ActionsTodo().add(eAction.FileCmd);
 
-            if (addToMyList) fileInfo.ActionsTodo().add(eAction.MyListCmd);
-            if (rename) fileInfo.ActionsTodo().add(eAction.Rename);
+            if (addToMyList) {
+                fileInfo.ActionsTodo().add(eAction.MyListCmd);
+            }
+            if (rename) {
+                fileInfo.ActionsTodo().add(eAction.Rename);
+            }
 
             fileInfo.Watched(watched);
 
-            if (!otherStr.isEmpty()) fileInfo.Data().put("EditOther", otherStr);
-            if (!sourceStr.isEmpty()) fileInfo.Data().put("EditSource", sourceStr);
-            if (!storageStr.isEmpty()) fileInfo.Data().put("EditStorage", storageStr);
+            if (!otherStr.isEmpty()) {
+                fileInfo.Data().put("EditOther", otherStr);
+            }
+            if (!sourceStr.isEmpty()) {
+                fileInfo.Data().put("EditSource", sourceStr);
+            }
+            if (!storageStr.isEmpty()) {
+                fileInfo.Data().put("EditStorage", storageStr);
+            }
 
             index2Id.add(lastFileId++);
             files.put(fileInfo);
@@ -779,7 +832,7 @@ public class Mod_EpProcessing implements IModule {
         modState = eModState.Initializing;
 
         this.aniAdd = aniAdd;
-        aniAdd.AddComListener(new AniAddEventHandler());
+        aniAdd.addComListener(new AniAddEventHandler());
         mem =
                 (Mod_Memory) aniAdd.GetModule("Memory");
         api =
@@ -829,7 +882,7 @@ public class Mod_EpProcessing implements IModule {
 
     }
 
-    public void AddComListener(ComListener comListener) {
+    public void addComListener(ComListener comListener) {
         listeners.add(comListener);
     }
 

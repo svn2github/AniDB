@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
@@ -16,10 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="724" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="714" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="spnl_FileAdd" pref="724" max="32767" attributes="0"/>
+                  <Component id="spnl_FileAdd" pref="714" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -27,9 +27,9 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="454" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="204" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="spnl_FileAdd" alignment="0" pref="454" max="32767" attributes="0"/>
+              <Component id="spnl_FileAdd" alignment="0" pref="204" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,12 +70,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scr_tbl_Files" alignment="0" pref="718" max="32767" attributes="0"/>
+                  <Component id="scr_tbl_Files" alignment="0" pref="708" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scr_tbl_Files" alignment="0" pref="335" max="32767" attributes="0"/>
+                  <Component id="scr_tbl_Files" alignment="0" pref="76" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -93,6 +93,7 @@
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="0" rowCount="0"/>
                     </Property>
+                    <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbl_FilesKeyPressed"/>
@@ -150,12 +151,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="prg_File" alignment="0" pref="722" max="32767" attributes="0"/>
-                      <Component id="prg_Total" alignment="1" pref="722" max="32767" attributes="0"/>
+                      <Component id="prg_File" alignment="0" pref="712" max="32767" attributes="0"/>
+                      <Component id="prg_Total" alignment="1" pref="712" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lbl_MBProcessed" min="-2" pref="274" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_TimeElapsed" pref="132" max="32767" attributes="0"/>
+                          <Component id="lbl_TimeElapsed" pref="122" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_TimeRemaining" min="-2" pref="304" max="-2" attributes="0"/>
                       </Group>
@@ -239,7 +240,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="710" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="700" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -552,8 +553,8 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btn_AddFiles" alignment="0" pref="99" max="32767" attributes="1"/>
-                          <Component id="btn_AddFolders" alignment="0" pref="99" max="32767" attributes="1"/>
+                          <Component id="btn_AddFiles" alignment="0" pref="89" max="32767" attributes="1"/>
+                          <Component id="btn_AddFolders" alignment="0" max="32767" attributes="1"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
