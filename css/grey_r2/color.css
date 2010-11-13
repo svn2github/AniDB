@@ -449,7 +449,7 @@ background-image:url(images/orangepixels.png), url(../grey/images/whitepixel.png
 }
 #layout-main div.votes_all div.graph div.bar div.colored
 {
-background-color:darkgreen;
+background-color:#006400;
 }
 #layout-main div.votes_all div.graph div.bar.my div.colored
 {

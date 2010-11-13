@@ -106,7 +106,6 @@ span.g_odd,
 #layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
 #layout-main div.animelist_all table tr.mylist,
 #layout-main div.group_released table tr.mylist,
-#layout-main div.schedule_all table tr.mylist,
 #layout-main div.addcreatoranimerel_all tr.identical,
 #layout-main table.animelist tr.mylist
 {
@@ -126,7 +125,6 @@ span.g_odd,
 #layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
 #layout-main div.animelist_all table tr.g_odd.mylist,
 #layout-main div.group_released table tr.g_odd.mylist,
-#layout-main div.schedule_all table tr.g_odd.mylist,
 #layout-main table.animelist tr.g_odd.mylist
 {
 	background-color:#86b186;

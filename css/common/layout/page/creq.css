@@ -1,45 +1,27 @@
-#layout-main div.creqmod_all div.creq_head dl dd
-{
-	margin-left: 15em;
-}
-
-#layout-main div.creq_all div.creq_header table,
-#layout-main div.creq_all div.creq_data table
-{
-	width:50em;
-}
-
-#layout-main div.creq_all div.tabbed_pane table,
-#layout-main div.creqmod_all table,
+#layout-main div.creq_all table.creqlist,
 #layout-main div.creq_all div.creq_hist table,
-#layout-main div.creq_all div.creq_entry_hist table
+#layout-main div.creq_all div.creq_data table
 {
 	width:98%;
 }
 
-#layout-main div.creqmod_all div.creq_head dl dd
+#layout-main div.creq_all div.creq_raw table
 {
-	margin-left: 15em;
+	max-width:98%;
+	min-width:50em;
 }
 
 #layout-main div.creq_all table.creqlist td.type,
 #layout-main div.creq_all table.creqlist td.state,
 #layout-main div.creq_all table.creqlist td.action,
 #layout-main div.creq_all table.creqlist td.client,
-#layout-main div.creq_all table.creqlist td.language,
-#layout-main div.creqmod_all table.creqlist td.type,
-#layout-main div.creqmod_all table.creqlist td.state,
-#layout-main div.creqmod_all table.creqlist td.action,
-#layout-main div.creqmod_all table.creqlist td.client,
-#layout-main div.creqmod_all table.creqlist td.language
+#layout-main div.creq_all table.creqlist td.language
 {
 	width:5em;
 }
 
 #layout-main div.creq_all table.creqlist td.date,
-#layout-main div.creq_all table.creqlist td.name,
-#layout-main div.creqmod_all table.creqlist td.date,
-#layout-main div.creqmod_all table.creqlist td.name
+#layout-main div.creq_all table.creqlist td.name
 {
 	width:10em;
 }
@@ -50,31 +32,38 @@
 }
 
 #layout-main div.creq_all table.creqlist td.check,
-#layout-main div.creq_all table.creqlist td.count,
-#layout-main div.creqmod_all table.creqlist td.count
+#layout-main div.creq_all table.creqlist td.count
 {
 	width:3em;
 }
 
 #layout-main div.creq_all table.creqlist td.id,
 #layout-main div.creq_all table.creqlist td.name,
-#layout-main div.creqmod_all table.creqlist td.id,
-#layout-main div.creqmod_all table.creqlist td.name
+#layout-main div.creq_all div.creq_header th.field
 {
 	text-align:left;
 }
 
 #layout-main div.creq_all table.creqlist td,
-#layout-main div.creqmod_all table.creqlist td
+#layout-main div.creq_all div.creq_data td,
+#layout-main div.creq_all div.creq_raw td
 {
-	padding-left: 0.5em;
-	padding-right: 0.5em;
+	padding: 2px 8px;
 }
 
-#layout-main div.creq_all table.creqlist td.entry,
-#layout-main div.creqmod_all table.creqlist td.entry
+#layout-main div.creq_all table.creqlist td.entry
 {
 	width:auto;
+}
+
+#layout-main div.creq_all div.creq_data td.field
+{
+	white-space:nowrap;
+}
+
+#layout-main div.creq_all th.field
+{
+	text-align:center;
 }
 
 #layout-main div.creq_all div.creq_data table td.old,
@@ -83,4 +72,5 @@
 #layout-main div.creq_all div.creq_raw table td.new
 {
 	white-space:pre-wrap;
+	vertical-align:top;
 }

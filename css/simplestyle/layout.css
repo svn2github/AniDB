@@ -80,7 +80,6 @@ body.nonav
 	width: 170px;
 }
 
-#menu-main .schedule,
 #menu-main .random,
 #menu-support .irc,
 #menu-adm
@@ -286,9 +285,4 @@ body.nonav
 #layout-content div.anime_all div.mylist th.anime
 {
 	width: 300px;
-}
-
-#layout-main div.schedule_all ul.g_list.nav
-{
-	display: block;
 }

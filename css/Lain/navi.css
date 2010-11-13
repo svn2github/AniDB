@@ -87,13 +87,6 @@
 	width: 16px;
 	height: 16px;
 }
-#menu-main>li.schedule>a{
-	left: 135px;
-	top: 126px;
-	width: 14px;
-	height: 16px;
-	background-image: url("images/Schedule.png");
-}
 #menu-main>li.calendar>a{
 	left: 114px;
 	top: 117px;

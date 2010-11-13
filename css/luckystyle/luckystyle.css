@@ -146,11 +146,6 @@ body,
 	display: none;
 }
 
-#layout-main div.schedule_all ul.g_list.nav
-{
-	display: block;
-}
-
 #layout-search div.search form.random
 {
 	display:none;

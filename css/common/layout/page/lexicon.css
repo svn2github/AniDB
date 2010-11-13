@@ -6,7 +6,6 @@
 #layout-main div.lexicon_all div.filters ul li span,
 #layout-main div.lexicon_all div.filters ul li span span
 {
-    display: -moz-box;
     display: inline-block;
 }
 
