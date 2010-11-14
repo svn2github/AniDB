@@ -7,6 +7,7 @@ package aniAdd2;
 import aniAdd2.exts.gui.AA2GUI;
 import aniAdd2.exts.gui.notify.Notify;
 import aniAdd2.exts.gui.notify.Notify.NotifyType;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -39,12 +40,12 @@ public class Main {
 
 		if(gui == null) {
 			frame.getContentPane().add(new JLabel("Couldn't find GUI extension", null, SwingConstants.CENTER));
-			frame.setSize(400, 200);
+			frame.setSize(new Dimension(400, 200));
 			return;
 		}
 
 		frame.getContentPane().add(gui.getComponent());
-		frame.setSize(1024, 768);
+		frame.setSize(new Dimension(800, 600));
 
 		notifyTest(gui);
 	}
@@ -55,7 +56,7 @@ public class Main {
 		gui.addNotify("Warning", NotifyType.Warning);
 		Notify notifyError = gui.addNotify("Error", NotifyType.Error);
 
-		int i = 5;
+		/*int i = 5;
 		while(i != 0) {
 			notifySuccess.setMessage("Success. Closing in " + i + " seconds");
 			notifyError.setMessage("Error. Solving error in " + i-- + " seconds");
@@ -63,6 +64,6 @@ public class Main {
 		}
 		notifySuccess.closeNotify();
 		notifyError.setMessage("Success");
-		notifyError.setType(NotifyType.Success);
+		notifyError.setType(NotifyType.Success);*/
 	}
 }

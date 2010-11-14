@@ -4,7 +4,6 @@
  */
 package aniAdd2.exts.gui.exts.processing;
 
-import aniAdd2.AniAdd2;
 import aniAdd2.communication.ComEvent;
 import aniAdd2.exts.gui.exts.AA2GUIExtension;
 import java.awt.Component;

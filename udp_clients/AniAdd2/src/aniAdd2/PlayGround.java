@@ -11,11 +11,43 @@
 
 package aniAdd2;
 
+import aniAdd2.exts.gui.components.GroupBox;
+import aniAdd2.exts.gui.components.TriStateCheckBox;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Insets;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author Arokh
  */
 public class PlayGround extends javax.swing.JPanel {
+
+	public static void main(String[] args){
+		JFrame frame = new JFrame("AniAdd2");
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		TriStateCheckBox triStateCheckBox = new TriStateCheckBox("BlaBla");
+		triStateCheckBox.setOpaque(false);
+		triStateCheckBox.setMargin(new Insets(0, 0, 0, 0));
+
+		GroupBox groupBox = new GroupBox(triStateCheckBox);
+		groupBox = GroupBox.createExpander(triStateCheckBox);
+
+		groupBox.setPreferredSize(new Dimension(100, 100));
+
+		JButton b = new JButton("sdthsdthddsfgsdfgsdfgth");
+		groupBox.getContentPane().add(b);
+
+
+		frame.getContentPane().setLayout(new BorderLayout());
+		frame.getContentPane().add(groupBox, BorderLayout.NORTH);
+		frame.setSize(new Dimension(800, 600));
+	}
 
     /** Creates new form PlayGround */
     public PlayGround() {
@@ -31,37 +63,80 @@ public class PlayGround extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ptn_RevokeVote = new javax.swing.JRadioButton();
+        ptn_SetVote = new javax.swing.JRadioButton();
+        spn_Vote = new javax.swing.JSpinner();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jTextField1 = new javax.swing.JTextField();
 
         setMaximumSize(new java.awt.Dimension(150, 130));
         setPreferredSize(new java.awt.Dimension(150, 130));
 
-        jButton1.setText("jButton1");
+        ptn_RevokeVote.setText("Revoke");
+        ptn_RevokeVote.setBorder(null);
+        ptn_RevokeVote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ptn_RevokeVoteActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        ptn_SetVote.setText("Set Vote");
+        ptn_SetVote.setBorder(null);
+
+        spn_Vote.setModel(new javax.swing.SpinnerNumberModel(500, 100, 1000, 50));
+
+        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jFormattedTextField1.setText("jFormattedTextField1");
+
+        jTextField1.setBackground(javax.swing.UIManager.getDefaults().getColor("TableHeader.background"));
+        jTextField1.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(ptn_SetVote)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(spn_Vote, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
+            .addComponent(ptn_RevokeVote, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(223, 223, 223)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(290, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ptn_SetVote)
+                    .addComponent(spn_Vote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
-                .addComponent(jButton2)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addComponent(ptn_RevokeVote)
+                .addGap(110, 110, 110)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+	private void ptn_RevokeVoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ptn_RevokeVoteActionPerformed
+		// TODO add your handling code here:
+	}//GEN-LAST:event_ptn_RevokeVoteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton ptn_RevokeVote;
+    private javax.swing.JRadioButton ptn_SetVote;
+    private javax.swing.JSpinner spn_Vote;
     // End of variables declaration//GEN-END:variables
+
 
 }

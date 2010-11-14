@@ -117,6 +117,8 @@ public class TriStateCheckBox extends JCheckBox {
 		}
 
 		private void setState(State state) {
+			if(!isEnabled()) return;
+
 			if(state == NOT_SELECTED) {
 				other.setArmed(false);
 				setPressed(false);

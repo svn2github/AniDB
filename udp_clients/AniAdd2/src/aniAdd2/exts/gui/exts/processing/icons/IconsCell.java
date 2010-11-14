@@ -26,6 +26,7 @@ public class IconsCell extends Component {
 		this.fileInfo = fileInfo;
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		Image[] imgList = getProgressIcons();
 		for(int i = 0; i < imgList.length; i++) {
@@ -35,15 +36,15 @@ public class IconsCell extends Component {
 
 	private Image[] getProgressIcons() {
 		Image[] iconGroup = new Image[4];
-		iconGroup[0] = ImgSelector(IconType.P, Action.Process, fileInfo.isServed());
-		iconGroup[1] = ImgSelector(IconType.F, Action.FileCmd, fileInfo.getActionsDone().contains(Action.Process));
-		iconGroup[2] = ImgSelector(IconType.M, Action.MyListCmd, fileInfo.getActionsDone().contains(Action.Process));
-		iconGroup[3] = ImgSelector(IconType.R, Action.Rename, fileInfo.getActionsDone().contains(Action.Process));
+		iconGroup[0] = imgSelector(IconType.P, Action.Process, fileInfo.isServed());
+		iconGroup[1] = imgSelector(IconType.F, Action.FileCmd, fileInfo.getActionsDone().contains(Action.Process));
+		iconGroup[2] = imgSelector(IconType.M, Action.MyListCmd, fileInfo.getActionsDone().contains(Action.Process));
+		iconGroup[3] = imgSelector(IconType.R, Action.Rename, false);
 
 		return iconGroup;
 	}
 
-	private Image ImgSelector(IconType iconType, Action action, boolean doingAction) {
+	private Image imgSelector(IconType iconType, Action action, boolean doingAction) {
 		if((fileInfo.getActionsTodo().contains(action))) {
 			return icons.get(iconType.getPos() | (doingAction ? IconType.Blue.getPos() : IconType.Yellow.getPos()));
 		} else if((fileInfo.getActionsDone().contains(action))) {
@@ -102,7 +103,11 @@ public class IconsCell extends Component {
 		}
 	}
 
-	private enum IconType {
+	public static Image getImage(int iconType){
+		return icons.get(iconType);
+	}
+
+	public enum IconType {
 		Gray(1),
 		Yellow(1 << 1),
 		Red(1 << 2),
