@@ -5,12 +5,6 @@ ul.acdropdown
 	color:black;
 }
 
-ul.acdropdown li
-{
-	background-color:transparent;
-	color:transparent;
-}
-
 ul.acdropdown li:hover,
 ul.acdropdown li.selected
 {
