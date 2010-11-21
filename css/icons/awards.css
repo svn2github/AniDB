@@ -14,6 +14,7 @@
 *.i_award_arc2006 { background-image: url(../icons/awards/anidb_arc2006award.gif); }
 *.i_award_arc2007 { background-image: url(../icons/awards/anidb_arc2007award.gif); }
 *.i_award_arc2008 { background-image: url(../icons/awards/anidb_arc2008award.gif); }
+*.i_award_arc2009 { background-image: url(../icons/awards/anidb_arc2009award.gif); }
 
 /* AniDB Top10 */
 #top10 { background-image: url(../icons/awards/anidb_top10_banner.gif); }
@@ -28,6 +29,7 @@
 #arc2006_action { background-image: url(../icons/awards/arc2006_action.jpg); }
 #arc2007_action { background-image: url(../icons/awards/arc2007_action.jpg); }
 #arc2008_action { background-image: url(../icons/awards/arc2008_action.png); }
+#arc2009_action { background-image: url(../icons/awards/arc2009_action.jpg); }
 
 /* ARC Awards - Best Adventure/Fantasy */
 #arc2000_adventure_fantasy { background-image: url(../icons/awards/arc2000_adventure_fantasy.jpg); }
@@ -39,6 +41,7 @@
 #arc2006_adventure_fantasy { background-image: url(../icons/awards/arc2006_adventure_fantasy.jpg); }
 #arc2007_adventure_fantasy { background-image: url(../icons/awards/arc2007_adventure_fantasy.jpg); }
 #arc2008_adventure_fantasy { background-image: url(../icons/awards/arc2008_adventure_fantasy.png); }
+#arc2009_adventure_fantasy { background-image: url(../icons/awards/arc2009_adventure_fantasy.jpg); }
 
 /* ARC Awards - Best Animation */
 #arc2000_animation { background-image: url(../icons/awards/arc2000_animation.jpg); }
@@ -50,6 +53,7 @@
 #arc2006_animation { background-image: url(../icons/awards/arc2006_animation.jpg); }
 #arc2007_animation { background-image: url(../icons/awards/arc2007_animation.jpg); }
 #arc2008_animation { background-image: url(../icons/awards/arc2008_animation.png); }
+#arc2009_animation { background-image: url(../icons/awards/arc2009_animation.jpg); }
 
 /* ARC Awards - Best Anime Overall */
 #arc2000_anime_overall { background-image: url(../icons/awards/arc2000_anime_overall.jpg); }
@@ -61,6 +65,7 @@
 #arc2006_anime_overall { background-image: url(../icons/awards/arc2006_anime_overall.jpg); }
 #arc2007_anime_overall { background-image: url(../icons/awards/arc2007_anime_overall.jpg); }
 #arc2008_anime_overall { background-image: url(../icons/awards/arc2008_anime_overall.png); }
+#arc2009_anime_overall { background-image: url(../icons/awards/arc2009_anime_overall.jpg); }
 
 /* ARC Awards - Best Character Development */
 #arc2000_character_development { background-image: url(../icons/awards/arc2000_character_development.jpg); }
@@ -72,6 +77,7 @@
 #arc2006_character_development { background-image: url(../icons/awards/arc2006_character_development.jpg); }
 #arc2007_character_development { background-image: url(../icons/awards/arc2007_character_development.jpg); }
 #arc2008_character_development { background-image: url(../icons/awards/arc2008_character_development.png); }
+#arc2009_character_development { background-image: url(../icons/awards/arc2009_character_development.jpg); }
 
 /* ARC Awards - Best Comedy */
 #arc2000_comedy { background-image: url(../icons/awards/arc2000_comedy.jpg); }
@@ -83,6 +89,7 @@
 #arc2006_comedy { background-image: url(../icons/awards/arc2006_comedy.jpg); }
 #arc2007_comedy { background-image: url(../icons/awards/arc2007_comedy.jpg); }
 #arc2008_comedy { background-image: url(../icons/awards/arc2008_comedy.png); }
+#arc2009_comedy { background-image: url(../icons/awards/arc2009_comedy.jpg); }
 
 /* ARC Awards - Best Drama */
 #arc2000_drama { background-image: url(../icons/awards/arc2000_drama.jpg); }
@@ -94,6 +101,7 @@
 #arc2006_drama { background-image: url(../icons/awards/arc2006_drama.jpg); }
 #arc2007_drama { background-image: url(../icons/awards/arc2007_drama.jpg); }
 #arc2008_drama { background-image: url(../icons/awards/arc2008_drama.png); }
+#arc2009_drama { background-image: url(../icons/awards/arc2009_drama.jpg); }
 
 /* ARC Awards - Best Ecchi */
 #arc2000_ecchi { background-image: url(../icons/awards/arc2000_ecchi.jpg); }
@@ -105,6 +113,7 @@
 #arc2006_ecchi { background-image: url(../icons/awards/arc2006_ecchi.jpg); }
 #arc2007_ecchi { background-image: url(../icons/awards/arc2007_ecchi.jpg); }
 #arc2008_ecchi { background-image: url(../icons/awards/arc2008_ecchi.png); }
+#arc2009_ecchi { background-image: url(../icons/awards/arc2009_ecchi.jpg); }
 
 /* ARC Awards - Best Female Character */
 #arc2000_female_character { background-image: url(../icons/awards/arc2000_female_character.jpg); }
@@ -116,6 +125,7 @@
 #arc2006_female_character { background-image: url(../icons/awards/arc2006_female_character.jpg); }
 #arc2007_female_character { background-image: url(../icons/awards/arc2007_female_character.jpg); }
 #arc2008_female_character { background-image: url(../icons/awards/arc2008_female_character.png); }
+#arc2009_female_character { background-image: url(../icons/awards/arc2009_female_character.jpg); }
 
 /* ARC Awards - Best Male Character */
 #arc2000_male_character { background-image: url(../icons/awards/arc2000_male_character.jpg); }
@@ -127,6 +137,7 @@
 #arc2006_male_character { background-image: url(../icons/awards/arc2006_male_character.jpg); }
 #arc2007_male_character { background-image: url(../icons/awards/arc2007_male_character.jpg); }
 #arc2008_male_character { background-image: url(../icons/awards/arc2008_male_character.png); }
+#arc2009_male_character { background-image: url(../icons/awards/arc2009_male_character.jpg); }
 
 /* ARC Awards - Best Music/OST */
 #arc2000_music_ost { background-image: url(../icons/awards/arc2000_music_ost.jpg); }
@@ -138,6 +149,7 @@
 #arc2006_music_ost { background-image: url(../icons/awards/arc2006_music_ost.jpg); }
 #arc2007_music_ost { background-image: url(../icons/awards/arc2007_music_ost.jpg); }
 #arc2008_music_ost { background-image: url(../icons/awards/arc2008_music_ost.png); }
+#arc2009_music_ost { background-image: url(../icons/awards/arc2009_music_ost.jpg); }
 
 /* ARC Awards - Best Mystery/Thriller/Horror */
 #arc2000_mystery_thriller_horror { background-image: url(../icons/awards/arc2000_mystery_thriller_horror.jpg); }
@@ -148,6 +160,7 @@
 #arc2006_mystery_thriller_horror { background-image: url(../icons/awards/arc2006_mystery_thriller_horror.jpg); }
 #arc2007_mystery_thriller_horror { background-image: url(../icons/awards/arc2007_mystery_thriller_horror.jpg); }
 #arc2008_mystery_thriller_horror { background-image: url(../icons/awards/arc2008_mystery_thriller_horror.png); }
+#arc2009_mystery_thriller_horror { background-image: url(../icons/awards/arc2009_mystery_thriller_horror.jpg); }
 
 /* ARC Awards - Best Newcomer */
 #arc2003_newcomer { background-image: url(../icons/awards/arc2003_newcomer.jpg); }
@@ -156,6 +169,7 @@
 #arc2006_newcomer { background-image: url(../icons/awards/arc2006_newcomer.jpg); }
 #arc2007_newcomer { background-image: url(../icons/awards/arc2007_newcomer.jpg); }
 #arc2008_newcomer { background-image: url(../icons/awards/arc2008_newcomer.png); }
+#arc2009_newcomer { background-image: url(../icons/awards/arc2009_newcomer.jpg); }
 
 /* ARC Awards - Best OP-ED Combination */
 #arc2000_op-ed { background-image: url(../icons/awards/arc2000_op-ed.jpg); }
@@ -167,6 +181,7 @@
 #arc2006_op-ed { background-image: url(../icons/awards/arc2006_op-ed.jpg); }
 #arc2007_op-ed { background-image: url(../icons/awards/arc2007_op-ed.jpg); }
 #arc2008_op-ed { background-image: url(../icons/awards/arc2008_op-ed.png); }
+#arc2009_op-ed { background-image: url(../icons/awards/arc2009_op-ed.jpg); }
 
 /* ARC Awards - Best Quick Watch */
 #arc2000_quick_watch { background-image: url(../icons/awards/arc2000_quick_watch.jpg); }
@@ -178,6 +193,7 @@
 #arc2006_quick_watch { background-image: url(../icons/awards/arc2006_quick_watch.jpg); }
 #arc2007_quick_watch { background-image: url(../icons/awards/arc2007_quick_watch.jpg); }
 #arc2008_quick_watch { background-image: url(../icons/awards/arc2008_quick_watch.png); }
+#arc2009_quick_watch { background-image: url(../icons/awards/arc2009_quick_watch.jpg); }
 
 /* ARC Awards - Best Romance */
 #arc2000_romance { background-image: url(../icons/awards/arc2000_romance.jpg); }
@@ -189,6 +205,7 @@
 #arc2006_romance { background-image: url(../icons/awards/arc2006_romance.jpg); }
 #arc2007_romance { background-image: url(../icons/awards/arc2007_romance.jpg); }
 #arc2008_romance { background-image: url(../icons/awards/arc2008_romance.png); }
+#arc2009_romance { background-image: url(../icons/awards/arc2009_romance.jpg); }
 
 /* ARC Awards - Best Sci-Fi */
 #arc2000_sci-fi { background-image: url(../icons/awards/arc2000_sci-fi.jpg); }
@@ -200,16 +217,19 @@
 #arc2006_sci-fi { background-image: url(../icons/awards/arc2006_sci-fi.jpg); }
 #arc2007_sci-fi { background-image: url(../icons/awards/arc2007_sci-fi.jpg); }
 #arc2008_sci-fi { background-image: url(../icons/awards/arc2008_sci-fi.png); }
+#arc2009_sci-fi { background-image: url(../icons/awards/arc2009_sci-fi.jpg); }
 
 /* ARC Awards - Best Slice-of-Life */
 #arc2007_slice_of_life { background-image: url(../icons/awards/arc2007_slice_of_life.jpg); }
 #arc2008_slice_of_life { background-image: url(../icons/awards/arc2008_slice_of_life.png); }
+#arc2009_slice_of_life { background-image: url(../icons/awards/arc2009_slice_of_life.jpg); }
 
 /* ARC Awards - Best Sports */
 #arc2001_sports { background-image: url(../icons/awards/arc2001_sports.jpg); }
 #arc2003_sports { background-image: url(../icons/awards/arc2003_sports.jpg); }
 #arc2007_sports { background-image: url(../icons/awards/arc2007_sports.jpg); }
 #arc2008_sports { background-image: url(../icons/awards/arc2008_sports.png); }
+#arc2009_sports { background-image: url(../icons/awards/arc2009_sports.jpg); }
 
 /* ARC Awards - Best Story */
 #arc2000_story { background-image: url(../icons/awards/arc2000_story.jpg); }
@@ -221,6 +241,7 @@
 #arc2006_story { background-image: url(../icons/awards/arc2006_story.jpg); }
 #arc2007_story { background-image: url(../icons/awards/arc2007_story.jpg); }
 #arc2008_story { background-image: url(../icons/awards/arc2008_story.png); }
+#arc2009_story { background-image: url(../icons/awards/arc2009_story.jpg); }
 
 /* ARC Awards - Best Villain */
 #arc2000_villain { background-image: url(../icons/awards/arc2000_villain.jpg); }
@@ -231,4 +252,4 @@
 #arc2006_villain { background-image: url(../icons/awards/arc2006_villain.jpg); }
 #arc2007_villain { background-image: url(../icons/awards/arc2007_villain.jpg); }
 #arc2008_villain { background-image: url(../icons/awards/arc2008_villain.png); }
-
+#arc2009_villain { background-image: url(../icons/awards/arc2009_villain.jpg); }
