@@ -7,8 +7,10 @@ package aniAdd2;
 import aniAdd2.communication.ComEvent;
 import aniAdd2.communication.IComListener;
 import aniAdd2.exts.IAA2Extension;
+import aniAdd2.exts.StateComEvent;
 import aniAdd2.exts.gui.AA2GUI;
 import aniAdd2.exts.processing.AA2Processing;
+import aniAdd2.exts.storage.AA2Storage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +39,10 @@ public class AniAdd2 implements IAniAdd2 {
 		ext.addComListener(extensionListener);
 		extensions.add(ext);
 
+		ext = new AA2Storage();
+		ext.addComListener(extensionListener);
+		extensions.add(ext);
+
 	}
 
 	public void initialize() {
@@ -52,7 +58,7 @@ public class AniAdd2 implements IAniAdd2 {
 			if(!allModsInitialized) ThreadUtil.Sleep(100);
 		} while(!allModsInitialized);
 
-		comFire(new ComEvent(this, ComEvent.ComType.Information, IAA2Extension.State.Initialized));
+		comFire(new StateComEvent(this, IAA2Extension.State.Initialized));
 	}
 
 	public IAA2Extension getExtension(Class extensionClass) {

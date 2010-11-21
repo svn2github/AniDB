@@ -44,6 +44,6 @@ public abstract class AA2Extension extends Communication implements IAA2Extensio
 
 	protected final void setState(State state) {
 		this.state = state;
-		comFire(new ComEvent(this, ComEvent.ComType.Information, state));
+		comFire(new StateComEvent(this, state));
 	}
 }

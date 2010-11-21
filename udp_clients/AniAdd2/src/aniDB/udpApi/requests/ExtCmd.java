@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package aniDB.udpApi.client.requests;
+package aniDB.udpApi.requests;
 
 import java.util.Map.Entry;
 
@@ -20,6 +20,11 @@ public abstract class ExtCmd<CmdType extends Cmd> {
 		if(cmd.isFinal()) return false;
 		cmd.setTag(tag);
 		return true;
+	}
+
+	public CmdType makeFinal(){
+		cmd.setFinal();
+		return cmd;
 	}
 
 	public boolean CheckValidity() {
@@ -59,6 +64,13 @@ public abstract class ExtCmd<CmdType extends Cmd> {
 	}
 
 	public static class Dependency {
+
+		public Dependency(String[] required, String[] optional) {
+			this.required = required;
+			this.optional = optional;
+		}
+		
+
 		public String[] required;
 		public String[] optional;
 	}

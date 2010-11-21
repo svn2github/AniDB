@@ -60,7 +60,7 @@ public class AA2Processing extends AA2Extension {
 	}
 
 	public String getName() {
-		return "File Processor";
+		return "MLAdd";
 	}
 
 	public int fileCount() {

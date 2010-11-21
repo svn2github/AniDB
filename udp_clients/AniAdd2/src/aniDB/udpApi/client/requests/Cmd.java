@@ -26,7 +26,7 @@ public class Cmd extends aniDB.udpApi.requests.Cmd {
 		return true;
 	}
 
-	public boolean getAuthRequired(){
+	public boolean isAuthRequired(){
 		return authRequired;
 	}
 	public boolean setAuthRequired(boolean authRequired) {

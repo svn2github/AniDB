@@ -85,6 +85,7 @@ public class AA2GUI extends AA2Extension {
 	protected void parentEventHandler(ComEvent comEvent) {
 	}
 
+
 	private class ExtensionListener implements IComListener {
 		public void eventHandler(ComEvent comEvent) {
 			//TODO

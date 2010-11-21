@@ -5,10 +5,26 @@
 
 package aniDB.udpApi.requests;
 
+import aniDB.udpApi.shared.CmdTools;
+
 /**
  *
  * @author Arokh
  */
-public class PING {
+public abstract class PING<CmdType extends Cmd> extends ExtCmd<CmdType> {
 
+	public PING() {
+		dependencies = new Dependency[] {
+			new Dependency(new String[0], new String[]{ "nat" })
+		};
+	}
+
+
+	public Boolean isNAT() {
+		return CmdTools.toBoolean(cmd, "nat");
+	}
+
+	public void setNAT(boolean nat) {
+		cmd.add("nat", CmdTools.toString(nat));
+	}
 }
