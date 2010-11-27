@@ -54,4 +54,6 @@ public enum DBFCode {
 	}
 	public int getCode(){
 		return code;
-	}}
+	}
+
+}

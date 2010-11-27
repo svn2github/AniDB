@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.TreeMap;
 import javax.imageio.ImageIO;
 
@@ -20,7 +21,8 @@ import javax.imageio.ImageIO;
  */
 public class IconsCell extends Component {
 	private FileInfo fileInfo;
-	private final static TreeMap<Integer, Image> icons;
+	private final static HashMap<Integer, Image> icons;
+	private final static HashMap<Action, Integer> action2IconPos;
 
 	public void setFile(FileInfo fileInfo) {
 		this.fileInfo = fileInfo;
@@ -35,29 +37,18 @@ public class IconsCell extends Component {
 	}
 
 	private Image[] getProgressIcons() {
-		Image[] iconGroup = new Image[4];
-		iconGroup[0] = imgSelector(IconType.P, Action.Process, fileInfo.isServed());
-		iconGroup[1] = imgSelector(IconType.F, Action.FileCmd, fileInfo.getActionsDone().contains(Action.Process));
-		iconGroup[2] = imgSelector(IconType.M, Action.MyListCmd, fileInfo.getActionsDone().contains(Action.Process));
-		iconGroup[3] = imgSelector(IconType.R, Action.Rename, false);
-
+		Image[] iconGroup = new Image[5];
+		iconGroup[0] = icons.get(IconType.P.getPos() | action2IconPos.get(fileInfo.getProcess()));
+		iconGroup[1] = icons.get(IconType.F.getPos() | action2IconPos.get(fileInfo.getFileCmd()));
+		iconGroup[2] = icons.get(IconType.M.getPos() | action2IconPos.get(fileInfo.getMlCmd()));
+		iconGroup[3] = icons.get(IconType.V.getPos() | action2IconPos.get(fileInfo.getVoteCmd()));
+		iconGroup[4] = icons.get(IconType.R.getPos() | action2IconPos.get(fileInfo.getMove()));
+		
 		return iconGroup;
 	}
 
-	private Image imgSelector(IconType iconType, Action action, boolean doingAction) {
-		if((fileInfo.getActionsTodo().contains(action))) {
-			return icons.get(iconType.getPos() | (doingAction ? IconType.Blue.getPos() : IconType.Yellow.getPos()));
-		} else if((fileInfo.getActionsDone().contains(action))) {
-			return icons.get(iconType.getPos() | IconType.Green.getPos());
-		} else if((fileInfo.getActionsError().contains(action))) {
-			return icons.get(iconType.getPos() | IconType.Red.getPos());
-		} else {
-			return icons.get(iconType.getPos() | IconType.Gray.getPos());
-		}
-	}
-
 	static {
-		icons = new TreeMap<Integer, Image>();
+		icons = new HashMap<Integer, Image>();
 		icons.put(IconType.F.getPos() | IconType.Gray.getPos(), createImageIcon("FGray.png"));
 		icons.put(IconType.F.getPos() | IconType.Yellow.getPos(), createImageIcon("FYellow.png"));
 		icons.put(IconType.F.getPos() | IconType.Red.getPos(), createImageIcon("FRed.png"));
@@ -86,6 +77,13 @@ public class IconsCell extends Component {
 		icons.put(IconType.V.getPos() | IconType.Yellow.getPos(), createImageIcon("VYellow.png"));
 		icons.put(IconType.V.getPos() | IconType.Red.getPos(), createImageIcon("VRed.png"));
 		icons.put(IconType.V.getPos() | IconType.Green.getPos(), createImageIcon("VGreen.png"));
+
+		action2IconPos = new HashMap<Action, Integer>();
+		action2IconPos.put(Action.None, IconType.Gray.getPos());
+		action2IconPos.put(Action.Todo, IconType.Yellow.getPos());
+		action2IconPos.put(Action.Doing, IconType.Blue.getPos());
+		action2IconPos.put(Action.Done, IconType.Green.getPos());
+		action2IconPos.put(Action.Error, IconType.Red.getPos());
 	}
 
 	private static Image createImageIcon(String path) {

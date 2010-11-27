@@ -146,4 +146,12 @@ public enum ReplyCodes {
 	public int getCode(){
 		return code;
 	}
+
+	public static ReplyCodes getEnum(int replyCodeInt){
+		for(ReplyCodes replyCode : values()) {
+			if(replyCode.getCode() == replyCodeInt) return replyCode;
+		}
+		return null;
+	}
+
 }

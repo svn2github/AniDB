@@ -5,20 +5,11 @@
 
 package aniDB.udpApi.client;
 
-import aniDB.udpApi.client.accountManagement.AccountManagement;
-import aniDB.udpApi.client.accountManagement.IAccountListener;
-import aniDB.udpApi.client.accountManagement.IAccountListener.AccountEvent;
-import aniDB.udpApi.client.accountManagement.UserAccount;
-import aniDB.udpApi.client.registerManagement.RegisterManagement;
-import aniDB.udpApi.client.replies.Reply;
-import aniDB.udpApi.client.requests.Cmd;
-import aniDB.udpApi.client.requests.PING;
-import aniDB.udpApi.shared.ByReference;
-import aniDB.udpApi.shared.DateUtil;
-import aniDB.udpApi.shared.IAction;
-import aniDB.udpApi.shared.IdGenerator;
-import aniDB.udpApi.shared.ThreadBase;
-import aniDB.udpApi.shared.TimeSpan;
+import aniDB.udpApi.client.accountManagement.*;
+import aniDB.udpApi.client.registerManagement.*;
+import aniDB.udpApi.client.replies.*;
+import aniDB.udpApi.client.requests.*;
+import aniDB.udpApi.shared.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -31,8 +22,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
@@ -107,10 +97,9 @@ public class ClientAPI {
 		try {
 			hQuery = registerManagement.register(new IAction<Reply>() { public void invoke(Reply param) { internalReplyHandling(param); } });
 		} catch(Exception ex) {}
-
 	}
 
-	private void accountListener(UserAccount account, AccountEvent accountEvent){
+	private void accountListener(UserAccount account, IAccountListener.AccountEvent accountEvent){
 		switch(accountEvent) {
 			case Added:
 				authenticate(account);
@@ -127,9 +116,11 @@ public class ClientAPI {
 
 	private void queryCmd(CmdInfo cmdInfo) {
 		cmdInfo.getCmd().setFinal();
-		synchronized(pendingRequests) { pendingRequests.add(cmdInfo); }
 
-		if(!send.isAlive()) send.Start(); //TODO: race condition
+		synchronized(pendingRequests) {
+			pendingRequests.add(cmdInfo);
+			if(!send.isAlive()) send.Start();
+		}
 	}
 
 
@@ -139,16 +130,184 @@ public class ClientAPI {
 	private void authenticate() {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
+	
+	private void logOut(UserAccount account, boolean b) {
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
+	private void logOut(boolean b) {
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
 
-	private void processReply(String replyStr){
+	private void processReply(String replyStr) throws Exception{
+		ReplyInfo replyInfo = ReplyInfo.parseReplyString(replyStr); //TODO: refactor parseReplyString to retrun ReplyInfo
+		if(replyInfo.getId() == null) {
+			serverReplies.add(replyInfo);
 
+		} else {
+			Query query = queries.get(replyInfo.getIndex());
+
+			if(query.getState() == Query.State.Success) {
+				//TODO Log
+				return;
+			}
+
+			replyInfo.getReply().setAccount(query.getCmdInfo().getCmd().getAccount());
+
+			query.setReplyInfo(replyInfo);
+		}
+
+		if(internalReplyHook(replyInfo)) throwEvent.invoke(replyInfo); //RegisterManagement.throwEvent
 	}
 
 
 	private void internalReplyHandling(Reply reply) {
 
+		if(reply.getTag().equals("auth")) {
+			switch(reply.getCode()) {
+				case LOGIN_ACCEPTED:
+				case LOGIN_ACCEPTED_NEW_VER:
+					if(reply.getAccount() == null) return; //TODO: Log failure
+
+					if(reply.getAccount().isAuthenticated()) logOut(reply.getAccount(), false);
+					reply.getAccount().setSession(reply.getMessage().substring(0, reply.getMessage().indexOf(" ")));
+					reply.getAccount().setAuthenticated(true);
+
+					apiUnavailable = false;
+
+					try {
+						InetAddress inetIP = InetAddress.getByName(Pattern.compile("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b").matcher(reply.getMessage()).group());
+						behindNAT = !InetAddress.getLocalHost().equals(inetIP);
+					} catch(UnknownHostException ex) {}
+
+					
+					if(reply.getAccount().areAnyOptionsSet(UserAccount.Option.Push_Notify, UserAccount.Option.Push_Message, UserAccount.Option.Push_Buddy)) {
+
+						boolean pushPending = false;
+						synchronized(pendingRequests) {
+							for(CmdInfo pendingRequest : pendingRequests) {
+								if(pendingRequest.getCmd().getAccount() != null &&
+								   pendingRequest.getCmd().getAccount().equals(reply.getAccount()) &&
+								   pendingRequest.getCmd().getAction().equals("PUSH")) {
+
+									pushPending = true;
+									break;
+								}
+							}
+						}
+
+						if(!pushPending) { //TODO
+							//PUSH pushCmd = new PUSH();
+							//pushCmd.setAccount(reply.getAccount());
+							//pushCmd.setBuddy(reply.getAccount().isOptionSet(UserAccount.Option.Push_Buddy));
+							//pushCmd.setMessage(reply.getAccount().isOptionSet(UserAccount.Option.Push_Message));
+							//pushCmd.setNotify(reply.getAccount().isOptionSet(UserAccount.Option.Push_Notify));
+
+							//queryCmd(pushCmd.makeFinal(), hQuery);
+						}
+					}
+
+					if(reply.getCode() == ReplyCodes.LOGIN_ACCEPTED_NEW_VER) {
+					}
+
+					break;
+
+				case CLIENT_VERSION_OUTDATED:
+				case LOGIN_FAILED:
+					break;
+				default:
+					break;
+			}
+
+		} else if(reply.getTag().equals("logout")) {
+			switch(reply.getCode()) {
+				case LOGGED_OUT:
+				case NOT_LOGGED_IN:
+				default:
+					reply.getAccount().setAuthenticated(false);
+					//IsEncodingSet = false
+					break;
+			}
+		}
+
+		switch(reply.getCode()) {
+			case NOTIFICATION_ENABLED:
+
+			case PUSHACK_CONFIRMED:
+			case UPTIME:
+			case PONG:
+
+			case NO_SUCH_PACKET_PENDING:
+			case ACCESS_DENIED:
+			case CLIENT_BANNED:
+			case ILLEGAL_INPUT_OR_ACCESS_DENIED:
+			case API_PASSWORD_NOT_DEFINED:
+			case NO_SUCH_ENCRYPTION_TYPE:
+
+			case ENCRYPTION_ENABLED:
+			case ENCODING_CHANGED:
+			case ENCODING_NOT_SUPPORTED:
+				break;
+		}
 	}
 	private boolean internalReplyHook(ReplyInfo replyInfo) {
+		UserAccount account = replyInfo.getReply().getAccount();
+
+		Query.State queryState = Query.State.Success;
+
+		switch(replyInfo.getReply().getCode()) {
+			case NOTIFICATION_NOTIFY:
+			case NOTIFICATION_MESSAGE:
+			case NOTIFICATION_BUDDY:
+			case NOTIFICATION_SHUTDOWN:
+				if(account != null ? account.isOptionSet(UserAccount.Option.Push_Ack) : false) { //TODO
+					//PUSHACK pushAckcmd = new PUSHACK();
+					//pushAckcmd.setPacketId(Integer.parseInt(replyInfo.getReply().getMessage().substring(0, replyInfo.getReply().getMessage().indexOf(" "))));
+					//queryCmd(pushAckcmd.makeFinal(), hQuery);
+					//return false;
+				} else {
+					//return true;
+				}
+				break;
+			case INVALID_SESSION:
+			case LOGIN_FIRST:
+
+				if(account != null) {
+					logOut(account, false);
+					authenticate(account);
+
+					queryState = Query.State.Pending;
+					if(replyInfo.getId() != null) queryCmd(queries.get(replyInfo.getIndex()).getCmdInfo());
+				} else {
+					//TODO: Log
+				}
+				return false;
+
+			case ACCESS_DENIED:
+				break;
+			case UNKNOWN_COMMAND:
+				break;
+			case ILLEGAL_INPUT_OR_ACCESS_DENIED:
+				break;
+			case CLIENT_VERSION_OUTDATED:
+				break;
+			case CLIENT_BANNED:
+				break;
+			case BANNED:
+				break;
+			case INTERNAL_SERVER_ERROR:
+			case ANIDB_OUT_OF_SERVICE:
+			case SERVER_BUSY:
+			case API_VIOLATION:
+				apiUnavailable = true;
+				apiDownUntil = new Date(new Date().getTime() + 60*60);
+
+				logOut(false);
+				if(replyInfo.getId() != null) queryCmd(queries.get(replyInfo.getIndex()).getCmdInfo());
+				return false;
+		}
+
+		queries.get(replyInfo.getIndex()).setState(queryState);
+
 		return true;
 	}
 
@@ -200,7 +359,11 @@ public class ClientAPI {
             }
 
             public void run() {
-                api.processReply(replyStr);
+				try {
+					api.processReply(replyStr);
+				} catch(Exception ex) {
+					//TODO Error handling
+				}
             }
         }
 	}

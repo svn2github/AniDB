@@ -9,6 +9,6 @@ package aniDB.udpApi.client.requests;
  *
  * @author Arokh
  */
-public class PUSHACK {
+public class PUSHACK extends aniDB.udpApi.requests.PUSHACK<Cmd> {
 
 }

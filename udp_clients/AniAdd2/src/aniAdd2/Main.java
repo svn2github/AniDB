@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 /**
@@ -24,8 +25,16 @@ public class Main {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			UIManager.put("swing.boldMetal", Boolean.FALSE);
+		} catch (Exception e) {
+		   // handle exception
+		}
+		
 		aniAdd2 = new AniAdd2();
 		aniAdd2.initialize();
+
 
 		webStart();
 	}
@@ -47,7 +56,7 @@ public class Main {
 		frame.getContentPane().add(gui.getComponent());
 		frame.setSize(new Dimension(800, 600));
 
-		notifyTest(gui);
+		//notifyTest(gui);
 	}
 
 	private static void notifyTest(AA2GUI gui) {
@@ -56,7 +65,7 @@ public class Main {
 		gui.addNotify("Warning", NotifyType.Warning);
 		Notify notifyError = gui.addNotify("Error", NotifyType.Error);
 
-		/*int i = 5;
+		int i = 5;
 		while(i != 0) {
 			notifySuccess.setMessage("Success. Closing in " + i + " seconds");
 			notifyError.setMessage("Error. Solving error in " + i-- + " seconds");
@@ -64,6 +73,6 @@ public class Main {
 		}
 		notifySuccess.closeNotify();
 		notifyError.setMessage("Success");
-		notifyError.setType(NotifyType.Success);*/
+		notifyError.setType(NotifyType.Success);
 	}
 }

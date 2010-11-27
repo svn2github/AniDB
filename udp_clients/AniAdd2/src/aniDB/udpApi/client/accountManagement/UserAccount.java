@@ -5,7 +5,7 @@
 
 package aniDB.udpApi.client.accountManagement;
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.EnumSet;
 
 /**
@@ -31,9 +31,20 @@ public class UserAccount {
 		return options.contains(option);
 	}
 	public boolean areOptionsSet(Option ... options) {
-		boolean ret = true;
-		for(Option option : options) ret &= isOptionSet(option);
+		return this.options.containsAll(Arrays.asList(options));
+	}
+	public boolean areAnyOptionsSet(Option ... options) {
+		boolean ret = false;
+		for(Option option : options) ret |= isOptionSet(option);
 		return ret;
+	}
+
+	public void setSession(String session) { //TODO: make default access
+		this.session = session;
+	}
+
+	public void setAuthenticated(boolean authenticated) {
+		this.authenticated = authenticated;
 	}
 
 	public enum Option {
