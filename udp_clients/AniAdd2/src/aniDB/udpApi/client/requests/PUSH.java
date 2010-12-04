@@ -10,5 +10,6 @@ package aniDB.udpApi.client.requests;
  * @author Arokh
  */
 public class PUSH extends aniDB.udpApi.requests.PUSH<Cmd> {
+	public PUSH() { super(new Cmd()); }
 
 }

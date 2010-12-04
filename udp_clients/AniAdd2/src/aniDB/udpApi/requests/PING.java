@@ -12,8 +12,8 @@ import aniDB.udpApi.shared.CmdTools;
  * @author Arokh
  */
 public abstract class PING<CmdType extends Cmd> extends ExtCmd<CmdType> {
-
-	public PING() {
+	public PING(CmdType cmd) {
+		super("PING", cmd);
 		dependencies = new Dependency[] {
 			new Dependency(new String[0], new String[]{ "nat" })
 		};

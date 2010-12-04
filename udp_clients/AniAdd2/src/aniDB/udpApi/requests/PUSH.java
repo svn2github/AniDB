@@ -10,5 +10,6 @@ package aniDB.udpApi.requests;
  * @author Arokh
  */
 public class PUSH<CmdType extends Cmd> extends ExtCmd<CmdType> {
+	public PUSH(CmdType cmd) { super("PUSH", cmd); }
 
 }

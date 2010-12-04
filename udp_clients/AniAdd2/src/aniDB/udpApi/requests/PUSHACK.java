@@ -10,5 +10,6 @@ package aniDB.udpApi.requests;
  * @author Arokh
  */
 public class PUSHACK<CmdType extends Cmd> extends ExtCmd<CmdType> {
+	public PUSHACK(CmdType cmd) { super("PUSHACK", cmd); }
 
 }

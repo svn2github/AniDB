@@ -21,6 +21,8 @@ public abstract class AA2Extension extends Communication implements IAA2Extensio
 		setState(State.New);
 	}
 
+	protected abstract void parentEventHandler(ComEvent comEvent);
+	
 	public void initialize(IAniAdd2 aniAdd2) {
 		setState(State.Initializing);
 

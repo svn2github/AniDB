@@ -77,8 +77,6 @@ public class ReplyInfo {
 		} else {
 			reply.setData(new String[0]);
 		}
-
-		reply.setFinal();
 		return new ReplyInfo(reply, id, index);
 	}
 

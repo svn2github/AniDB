@@ -35,6 +35,4 @@ public abstract class Communication implements ICommunication {
 	protected void comFire(ComEvent comEvent) {
 		for(IComListener listener : listeners) listener.eventHandler(comEvent);
 	}
-
-	protected abstract void parentEventHandler(ComEvent comEvent);
 }

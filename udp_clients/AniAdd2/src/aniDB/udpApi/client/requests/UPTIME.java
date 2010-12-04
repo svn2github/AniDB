@@ -9,6 +9,7 @@ package aniDB.udpApi.client.requests;
  *
  * @author Arokh
  */
-public class UPTIME {
+public class UPTIME extends aniDB.udpApi.requests.AUTH<Cmd> {
+	public UPTIME() { super(new Cmd()); }
 
 }

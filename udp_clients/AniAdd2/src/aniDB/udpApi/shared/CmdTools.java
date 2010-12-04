@@ -16,7 +16,7 @@ public class CmdTools {
 		if(cmd.get(param) == null || cmd.get(param).isEmpty()) return null;
 		return (cmd.get(param).equals("1")) ? true : false;
 	}
-	public static Integer ToInt(Cmd cmd, String param) {
+	public static Integer toInt(Cmd cmd, String param) {
 		if(cmd.get(param) == null || cmd.get(param).isEmpty()) return null;
 		return Integer.getInteger(cmd.get(param));
 	}

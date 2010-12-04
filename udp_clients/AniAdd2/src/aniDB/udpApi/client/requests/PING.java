@@ -12,6 +12,8 @@ import aniDB.udpApi.client.accountManagement.UserAccount;
  * @author Arokh
  */
 public class PING extends aniDB.udpApi.requests.PING<Cmd> {
+	public PING() { super(new Cmd()); }
+
 	public UserAccount getAccount(){ return cmd.getAccount(); }
 	public void setAccount(UserAccount account) { cmd.setAccount(account); }
 

@@ -15,6 +15,13 @@ public abstract class ExtCmd<CmdType extends Cmd> {
 	protected Dependency[] dependencies;
 	protected CmdType cmd;
 
+	public ExtCmd(String action, CmdType cmd) {
+		this.cmd = cmd;
+		cmd.setAction(action);
+	}
+
+
+
 	public String getTag() { return cmd.getTag(); }
 	public boolean setTag(String tag) {
 		if(cmd.isFinal()) return false;
@@ -23,6 +30,7 @@ public abstract class ExtCmd<CmdType extends Cmd> {
 	}
 
 	public CmdType makeFinal(){
+		if(!CheckValidity()) throw new IllegalStateException();
 		cmd.setFinal();
 		return cmd;
 	}

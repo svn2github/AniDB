@@ -16,6 +16,8 @@ public class Query {
 	private Date replyOn;
 	private CmdInfo cmdInfo;
 	private ReplyInfo replyInfo;
+	private int retryCount;
+	private State state;
 
 	void setRequestOn(Date requestOn) {
 		this.requestOn = requestOn;
@@ -49,21 +51,13 @@ public class Query {
 		this.replyInfo = replyInfo;
 	}
 
-	void raiseRetryCount() {
-		throw new UnsupportedOperationException("Not yet implemented");
-	}
+	void raiseRetryCount() { retryCount++; }
 
-	void setState(State state) {
-		throw new UnsupportedOperationException("Not yet implemented");
-	}
+	void setState(State state) { this.state = state;  }
 
-	State getState() {
-		throw new UnsupportedOperationException("Not yet implemented");
-	}
+	State getState() { return state; }
 
-	int getRetryCount() {
-		throw new UnsupportedOperationException("Not yet implemented");
-	}
+	int getRetryCount() { return retryCount; }
 
 	public static enum State { Pending, Success, Failed }
 }

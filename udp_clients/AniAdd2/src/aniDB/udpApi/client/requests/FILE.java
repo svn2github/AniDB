@@ -9,6 +9,7 @@ package aniDB.udpApi.client.requests;
  *
  * @author Arokh
  */
-public class FILE {
+public class FILE extends aniDB.udpApi.requests.AUTH<Cmd> {
+	public FILE() { super(new Cmd()); }
 
 }

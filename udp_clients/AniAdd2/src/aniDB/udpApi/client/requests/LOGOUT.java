@@ -9,6 +9,7 @@ package aniDB.udpApi.client.requests;
  *
  * @author Arokh
  */
-public class LOGOUT {
+public class LOGOUT extends aniDB.udpApi.requests.AUTH<Cmd>{
+	public LOGOUT() { super(new Cmd()); }
 
 }

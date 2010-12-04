@@ -16,12 +16,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
@@ -33,11 +33,11 @@ import java.util.zip.InflaterInputStream;
 public class ClientAPI {
 	public static final int MAX_RETRY_COUNT = 3; //Drop Cmd after * retry
 	public static final int MAX_REPLY_PENDING_COUNT = 3; //Delay sinding next cmd until pending replies is lower than *
-	public static final int CLIENT_VERSION = 8;
+	public static final int CLIENT_VERSION = 0;
 	public static final int PROTOCOL_VERSION = 3;
 	public static final int ANIDB_API_PORT = 9000;
-	public static final String ANIDB_API_HOST = "127.0.0.1";//"api.anidb.info";
-	public static final String CLIENT_TAG = "anitracker";
+	public static final String ANIDB_API_HOST = "api.anidb.info";
+	public static final String CLIENT_TAG = "AniAdd";
 	public static final String NO_DELAY = "";//"FILE,ANIME,MYLISTADD"; //Cmds which do not need to respect PACKET_DELAY
 	public static final TimeSpan PACKET_DELAY = new TimeSpan(2200); // TimeSpan.FromSeconds(2.2 /*0.0*/); //Delay between each packet send
 	public static final TimeSpan PING_INTERVAL = new TimeSpan(5 * 60 * 1000); // TimeSpan.FromMinutes(5); //Pinginterval, to keep connection alive (NAT)
@@ -49,9 +49,9 @@ public class ClientAPI {
 	private final List<ReplyInfo> serverReplies;
 	private final List<Query> queries;
 
-	private Receive receive;
-	private Send send;
-	private Idle idle;
+	private final Receive receive;
+	private final Send send;
+	private final Idle idle;
 
 	private IAction<ReplyInfo> throwEvent;
 	private Object hQuery;
@@ -70,21 +70,25 @@ public class ClientAPI {
 
 
 	private RegisterManagement registerManagement;
+
 	private AccountManagement accountManagement;
+	private AccountManagement.Internal accountManagementInternal;
 
 	public ClientAPI() throws Exception {
 		ByReference<IAction<ReplyInfo>> throwEventRef = new ByReference<IAction<ReplyInfo>>();
 		registerManagement = new RegisterManagement(throwEventRef);
 		throwEvent = throwEventRef.getParam();
 
-		accountManagement = new AccountManagement();
+		ByReference<AccountManagement.Internal> accountManagementInternalRef = new ByReference<AccountManagement.Internal>();
+		accountManagement = new AccountManagement(accountManagementInternalRef);
 		accountManagement.addAccountListener(new IAccountListener() {
 			public void action(UserAccount account, AccountEvent accountEvent) {
 				accountListener(account, accountEvent);
 			}
 		});
+		accountManagementInternal = accountManagementInternalRef.getParam();
 
-		com = new DatagramSocket(ANIDB_API_PORT, Inet4Address.getByName(ANIDB_API_HOST));
+		com = new DatagramSocket(ANIDB_API_PORT);
 
 		pendingRequests = new ArrayList<CmdInfo>();
 		serverReplies = new ArrayList<ReplyInfo>();
@@ -95,15 +99,24 @@ public class ClientAPI {
 		idle = new Idle(this);
 
 		try {
-			hQuery = registerManagement.register(new IAction<Reply>() { public void invoke(Reply param) { internalReplyHandling(param); } });
+			hQuery = registerManagement.register(new IAction<Reply>() { public void invoke(Reply param) {
+				try {
+					internalReplyHandling(param);
+				} catch(Exception ex) {
+					//TODO
+				}
+			}});
+			
 		} catch(Exception ex) {}
 	}
 
 	private void accountListener(UserAccount account, IAccountListener.AccountEvent accountEvent){
-		switch(accountEvent) {
-			case Added:
+		try {
+			switch(accountEvent) {
+				case Added:
 				authenticate(account);
-		}
+			}
+		} catch(Exception ex) { }
 	}
 
 
@@ -119,13 +132,38 @@ public class ClientAPI {
 
 		synchronized(pendingRequests) {
 			pendingRequests.add(cmdInfo);
-			if(!send.isAlive()) send.Start();
+			
+			synchronized(send) { if(!send.isAlive()) send.Start(); }
 		}
 	}
 
+	private void authenticate(UserAccount account) throws Exception {
+			if(account == null) throw new Exception();
 
-	private void authenticate(UserAccount account) {
-		throw new UnsupportedOperationException("Not yet implemented");
+			synchronized(receive) { if(!receive.isAlive()) receive.Start(); }
+			synchronized(idle) { if(!idle.isAlive()) idle.Start(); }
+
+			accountManagementInternal.setShouldAuthenticate(account, true);
+			
+			if(account.isOptionSet(UserAccount.Option.Encryption)) {
+				ENCRYPT encryptCmd = new ENCRYPT();
+				encryptCmd.setAccount(account);
+				encryptCmd.setTag("encrypt");
+				encryptCmd.setType("AES");
+				queryCmd(encryptCmd.makeFinal(), hQuery);
+			}
+
+			AUTH authCmd = new AUTH();
+			authCmd.setAccount(account);
+			authCmd.setPassword(accountManagementInternal.getUserPassword(account));
+			authCmd.setTag("auth");
+			authCmd.setNAT(true);
+			authCmd.setCompression(true);
+			authCmd.setClientName(CLIENT_TAG);
+			authCmd.setClientVersion(CLIENT_VERSION);
+			authCmd.setProtocolVersion(PROTOCOL_VERSION);
+			authCmd.setEncoding(AUTH.EncodingTypes.UTF8);
+			queryCmd(authCmd.makeFinal(), hQuery);
 	}
 	private void authenticate() {
 		throw new UnsupportedOperationException("Not yet implemented");
@@ -152,7 +190,7 @@ public class ClientAPI {
 			}
 
 			replyInfo.getReply().setAccount(query.getCmdInfo().getCmd().getAccount());
-
+			replyInfo.getReply().setFinal();
 			query.setReplyInfo(replyInfo);
 		}
 
@@ -160,8 +198,7 @@ public class ClientAPI {
 	}
 
 
-	private void internalReplyHandling(Reply reply) {
-
+	private void internalReplyHandling(Reply reply) throws Exception {
 		if(reply.getTag().equals("auth")) {
 			switch(reply.getCode()) {
 				case LOGIN_ACCEPTED:
@@ -169,15 +206,16 @@ public class ClientAPI {
 					if(reply.getAccount() == null) return; //TODO: Log failure
 
 					if(reply.getAccount().isAuthenticated()) logOut(reply.getAccount(), false);
-					reply.getAccount().setSession(reply.getMessage().substring(0, reply.getMessage().indexOf(" ")));
-					reply.getAccount().setAuthenticated(true);
+					accountManagementInternal.setSession(reply.getAccount(), reply.getMessage().substring(0, reply.getMessage().indexOf(" ")));
+					accountManagementInternal.setShouldAuthenticate(reply.getAccount(), true);
 
 					apiUnavailable = false;
-
-					try {
-						InetAddress inetIP = InetAddress.getByName(Pattern.compile("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b").matcher(reply.getMessage()).group());
+					
+					Matcher matcher = Pattern.compile("\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b").matcher(reply.getMessage());
+					if(matcher.find()) {
+						InetAddress inetIP = InetAddress.getByName(matcher.group());
 						behindNAT = !InetAddress.getLocalHost().equals(inetIP);
-					} catch(UnknownHostException ex) {}
+					}
 
 					
 					if(reply.getAccount().areAnyOptionsSet(UserAccount.Option.Push_Notify, UserAccount.Option.Push_Message, UserAccount.Option.Push_Buddy)) {
@@ -223,7 +261,7 @@ public class ClientAPI {
 				case LOGGED_OUT:
 				case NOT_LOGGED_IN:
 				default:
-					reply.getAccount().setAuthenticated(false);
+					accountManagementInternal.setAuthenticated(reply.getAccount(), false);
 					//IsEncodingSet = false
 					break;
 			}
@@ -249,7 +287,7 @@ public class ClientAPI {
 				break;
 		}
 	}
-	private boolean internalReplyHook(ReplyInfo replyInfo) {
+	private boolean internalReplyHook(ReplyInfo replyInfo) throws Exception {
 		UserAccount account = replyInfo.getReply().getAccount();
 
 		Query.State queryState = Query.State.Success;
@@ -311,6 +349,9 @@ public class ClientAPI {
 		return true;
 	}
 
+	public RegisterManagement getRegisterManagement() { return registerManagement; }
+	public AccountManagement getAccountManagement() { return accountManagement; }
+
 
 	private static class Receive extends ThreadBase<ClientAPI> {
 		public Receive(ClientAPI api) { super(api); }
@@ -340,8 +381,8 @@ public class ClientAPI {
 				try {
 					api.com.receive(packet);
 
-					replystr = new String(b[0] == 0 && b[1] == 0 ? inflatePacket(b) : b, "UTF8");
-
+					replystr = b[0] == 0 && b[1] == 0 ? new String(inflatePacket(b), "UTF8") : new String(b, packet.getOffset(), packet.getLength(), "UTF8");
+					System.out.println("API Repl: " + replystr);
 					t = new Thread(new Reply(replystr));
 					t.start();
 				} catch(Exception ex) {
@@ -397,7 +438,7 @@ public class ClientAPI {
 					if(api.pendingReplyCount < MAX_REPLY_PENDING_COUNT) {
 						if((!cmdInfo.getCmd().isAuthRequired() || isAuthed) && (
 						  NO_DELAY.contains(cmdInfo.getCmd().getAction()) ||
-						  api.lastDelayPacketOn.getTime() == 0 ||
+						  api.lastDelayPacketOn == null ||
 						  DateUtil.substract(now, api.lastDelayPacketOn).compareTo(PACKET_DELAY) < 0
 						 )
 						) {
@@ -466,10 +507,11 @@ public class ClientAPI {
 			UserAccount account = cmdInfo.getCmd().getAccount();
 
 			if(cmdInfo.getCmd().isAuthRequired() && api.accountManagement.contains(account)) {
-				session = account.getSession();
+				session = api.accountManagementInternal.getSession(account);
 			}
 
 			String cmdStr = cmdInfo.toString(session);
+			System.out.println("API Send: " + cmdStr);
 			byte[] b = cmdStr.getBytes(api.isEncodingSet ? "UTF-8" : "US-ASCII");
 			api.isEncodingSet = true;
 

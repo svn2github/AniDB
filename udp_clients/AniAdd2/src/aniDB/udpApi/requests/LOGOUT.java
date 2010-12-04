@@ -9,6 +9,7 @@ package aniDB.udpApi.requests;
  *
  * @author Arokh
  */
-public class LOGOUT {
+public class LOGOUT<CmdType extends Cmd> extends ExtCmd<CmdType> {
+	public LOGOUT(CmdType cmd) { super("LOGOUT", cmd); }
 
 }

@@ -14,15 +14,29 @@ import java.util.EnumSet;
  */
 public class UserAccount {
 	private boolean authenticated;
+	private boolean shouldAuthenticate;
+	private String userName;
+	private String userPassword;
+	private String apiPassword;
 	private String session;
 	private EnumSet<Option> options;
+
+	public UserAccount(String userName, String userPassword, EnumSet<Option> options, boolean shouldAuthenticate, String apiPassword) {
+		this.shouldAuthenticate = shouldAuthenticate;
+		this.userName = userName;
+		this.userPassword = userPassword;
+		this.apiPassword = apiPassword;
+		this.options = options.clone();
+	}
+
+
 
 
 	public boolean isAuthenticated() {
 		return authenticated;
 	}
 
-	public String getSession() {
+	String getSession() {
 		return session;
 	}
 
@@ -39,12 +53,40 @@ public class UserAccount {
 		return ret;
 	}
 
-	public void setSession(String session) { //TODO: make default access
+	void setSession(String session) { //TODO: make default access
 		this.session = session;
 	}
 
-	public void setAuthenticated(boolean authenticated) {
+	void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
+	}
+
+	public boolean isShouldAuthenticate() {
+		return shouldAuthenticate;
+	}
+
+	void setShouldAuthenticate(boolean shouldAuthenticate) {
+		this.shouldAuthenticate = shouldAuthenticate;
+	}
+
+	String getUserPassword() {
+		return userPassword;
+	}
+
+	void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+
+	String getApiPassword() {
+		return apiPassword;
+	}
+
+	void setApiPassword(String apiPassword) {
+		this.apiPassword = apiPassword;
+	}
+
+	public String getUserName() {
+		return userName;
 	}
 
 	public enum Option {

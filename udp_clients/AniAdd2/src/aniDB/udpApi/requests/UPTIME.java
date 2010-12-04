@@ -9,6 +9,7 @@ package aniDB.udpApi.requests;
  *
  * @author Arokh
  */
-public class UPTIME {
+public class UPTIME<CmdType extends Cmd> extends ExtCmd<CmdType> {
+	public UPTIME(CmdType cmd) { super("UPTIME", cmd); }
 
 }

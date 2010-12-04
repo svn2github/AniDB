@@ -7,7 +7,15 @@ package aniAdd2;
 import aniAdd2.exts.gui.AA2GUI;
 import aniAdd2.exts.gui.notify.Notify;
 import aniAdd2.exts.gui.notify.Notify.NotifyType;
+import aniAdd2.exts.udpApi.AA2AniDBUdpClient;
+import aniDB.udpApi.client.accountManagement.UserAccount;
+import aniDB.udpApi.client.accountManagement.UserAccount.Option;
 import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.EnumSet;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -24,7 +32,7 @@ public class Main {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 			UIManager.put("swing.boldMetal", Boolean.FALSE);
@@ -39,7 +47,7 @@ public class Main {
 		webStart();
 	}
 
-	private static void webStart() {
+	private static void webStart() throws Exception {
 
 		JFrame frame = new JFrame("AniAdd2");
 		frame.setVisible(true);
@@ -56,6 +64,14 @@ public class Main {
 		frame.getContentPane().add(gui.getComponent());
 		frame.setSize(new Dimension(800, 600));
 
+
+		File file = new File(Main.class.getResource("AccInfo").toURI());
+		if(file.exists() && false) {
+			AA2AniDBUdpClient client = (AA2AniDBUdpClient)aniAdd2.getExtension(AA2AniDBUdpClient.class);
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			client.getAccountManagement().add(new UserAccount(br.readLine(), br.readLine(), EnumSet.of(Option.KeepAlive, Option.Compression), true, null));
+		}
+		
 		//notifyTest(gui);
 	}
 

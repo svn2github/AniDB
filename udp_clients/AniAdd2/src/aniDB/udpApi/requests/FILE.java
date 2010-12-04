@@ -9,6 +9,7 @@ package aniDB.udpApi.requests;
  *
  * @author Arokh
  */
-public class FILE {
+public class FILE<CmdType extends Cmd> extends ExtCmd<CmdType> {
+	public FILE(CmdType cmd) { super("FILE", cmd); }
 
 }

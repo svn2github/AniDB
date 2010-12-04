@@ -14,4 +14,5 @@ import aniAdd2.exts.IAA2Extension;
  */
 public interface IAniAdd2 extends ICommunication, Iterable<IAA2Extension> {
     IAA2Extension getExtension(Class extensionClass);
+	void sendMessage(IAA2Extension receiver, Object arg);
 }

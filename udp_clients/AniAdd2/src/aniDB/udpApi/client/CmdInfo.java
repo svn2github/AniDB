@@ -7,6 +7,7 @@ package aniDB.udpApi.client;
 
 import aniDB.udpApi.client.requests.Cmd;
 import aniDB.udpApi.shared.IdGenerator;
+import java.util.Map.Entry;
 
 /**
  *
@@ -42,6 +43,14 @@ public class CmdInfo {
 	}
 
 	String toString(String session) {
-		throw new UnsupportedOperationException("Not yet implemented");
+		if(index == null) throw new NullPointerException();
+
+		String cmdStr;
+		cmdStr = cmd.getAction() + " tag=" + Long.toString(idGenerator.generate(), 16) + ":" + (cmd.getTag() != null ? cmd.getTag() + ":" : "") + index;
+
+		if(session != null && cmd.isAuthRequired()) cmdStr += "&s=" + session;
+
+		for(Entry<String, String> entry : cmd) cmdStr += "&" + entry.getKey() + "=" + entry.getValue();
+		return cmdStr;
 	}
 }
