@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<filters>
+  <checkBoxFilters>
+    <checkBoxFilter>Show OAVs</checkBoxFilter>
+    <checkBoxFilter>Show TV Series</checkBoxFilter>
+    <checkBoxFilter>Show Movies</checkBoxFilter>
+    <checkBoxFilter>Show Others</checkBoxFilter>
+  </checkBoxFilters>
+  <dropDownFilters>
+    <dropDownFilter checked="true">All Shows</dropDownFilter>
+    <dropDownFilter>All Incomplete Shows</dropDownFilter>
+    <dropDownFilter>All Complete Shows</dropDownFilter>
+    <dropDownFilter>Shows Completable By Preferred Group</dropDownFilter>
+    <dropDownFilter>Shows Completable By Group In MyList</dropDownFilter>
+    <dropDownFilter>Incompletable Shows</dropDownFilter>
+  </dropDownFilters>
+</filters>
+
