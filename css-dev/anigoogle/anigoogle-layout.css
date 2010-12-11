@@ -209,8 +209,7 @@ input[type="password"],
 	padding-top: .5em;
 }
 
-#layout-footer,
-#layout-main div.tabbed_pane ul.tabs
+#layout-footer
 {
 	text-align: center;
 }
