@@ -1,47 +1,85 @@
 table
 {
-	border-collapse: separate;
-}
-
-table table
-{
-	border: none;
-}
-
-img, a
-{
-	border: none;
-}
-
-#layout-content .g_image image,
-#layout-content .g_definitionlist
-{
-	padding: 1px;
-}
-
-#layout-content div.g_section img
-{
-	border: 0px #e64b73 solid;
-}
-
-#layout-content .g_block .g_definitionlist > table
-{
-	border: none;
-	margin: 0;
+	border-collapse:separate;
 }
 
 #layout-content div.mylist_add table
 {
- 	border: 2px #028fcd solid;
+	border:2px #028fcd solid;
 }
 
 #layout-content div.anime_all div.episodes tr.heading th
 {
-	padding: 1px 1px 1px 1px;
-	border-bottom: black 2px solid;
+	border-bottom:black 2px solid;
 }
 
 #layout-content div.anime_all div.episodes tr.newtype td
 {
-	border-top: black 2px solid;
+	border-top:black 2px solid;
+}
+
+#layout-search form input.text
+{
+	border:#06b3fe 1px solid;
+}
+
+#layout-content div.g_msg.success
+{
+	border:1px #FFE681 solid;
+}
+
+#layout-content div.g_msg.note,
+#layout-content div.g_msg.error,
+#layout-content div.g_msg.warning
+{
+	border:1px #e64b73 solid;
+}
+
+.g_bubble,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	border-color:#666666 #444444 #444444 #666666;
+}
+
+.g_bubble.stripe div.name,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
+{
+	border-color:#666666;
+}
+
+#layout-tabs ul li,
+#layout-tabs ul li.g_odd
+{
+	-moz-border-radius:5px 5px 0 0;
+	border:1px solid #E54B70;
+	border-radius:5px 5px 0 0;
+}
+
+#layout-main div.tabbed_pane_cfg ul.tabs li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+	-moz-border-radius:5px 5px 0 0;
+	border:1px solid #666666;
+	border-radius:5px 5px 0 0;
+}
+
+#layout-main div.tabbed_pane_cfg ul.tabs li:hover,
+#layout-main div.tabbed_pane_cfg ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
+#layout-tabs ul li.selected,
+#layout-tabs ul li:hover
+{
+	border-bottom:1px double #000000;
+}
+
+table table,
+img,
+a,
+#layout-content .g_block .g_definitionlist > table,
+#layout-content div.g_section img,
+#layout-search form input.submit
+{
+	border:none;
 }

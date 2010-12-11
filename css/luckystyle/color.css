@@ -1,125 +1,219 @@
 span.link,
-a:visited, a:active, a:hover, a:link {
-  color: blue;
-  text-decoration: none;
-}
-
-#layout-content div.anime_all div.mylist th,
-#layout-content table.grouplist th,
-#layout-content tr.g_odd,
-#layout-content li.g_odd,
-#layout-content span.g_odd,
-#layout-main div.votes_all div.graph div.group_odd,
-#layout-main div.votes_all div.graph.eps div.g_odd
+a:visited,
+a:active,
+a:hover,
+a:link
 {
-	background-color: #028fcd;
-}
-
-#layout-content div.rightbar li.g_odd
-{
- 	background-color: #028fcd;
-}
-
-#layout-content div.main_all div.news h4
-{
-	color: #FFFFFF;
-	background-color: #e64b73;
-}
-
-#layout-content div.main_all div.rightbar h4
-{
-	color: #FFFFFF;
-	background-color: #06b3ff;
-}
-
-#layout-content div.agcmts_entries div.comment h4
-{
-	color: #FFFFFF;
-	background-color: #e64b73;
-}
-
-#layout-content div.main_all div.news span.stamp
-{
-	background-color: #000000;
-}
-
-#layout-content div.main_all div.news a:link,
-#layout-content div.main_all div.news a:visited
-{
-	color: #f9ff7b;
-}
-
-#layout-menu a:link, #layout-menu a:visited
-{
-	color: #FFFFFF;
-}
-
-#layout-content div.rightbar a:link,
-#layout-content div.rightbar a:visited
-{
-	color: #f9ff7b;
+	color:blue;
 }
 
 #layout-menu a:active
 {
-	color: #ff0000;
+	color:#ff0000;
 }
 
 #layout-menu *,
-#layout-menu a:hover {
-	color: #bbbbbb;
-}
-
-#layout-menu #newnotifies
+#layout-menu a:hover
 {
-	color: white; /* text color - notifies */
+	color:#bbbbbb;
 }
 
-#layout-menu #newmessages
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
 {
-	display: block;
-	color: white;
+	color:red;
 }
 
-#layout-menu a.history:link,
-#layout-menu a.history:visited,
-#layout-menu a.history:active,
-#layout-menu a.history:hover
+#layout-content p.g_vital a:link,
+#layout-content p.g_vital a:visited
 {
-	color: #FFE681; /* text color - history link */
+	color:#2fe324;
 }
 
-#layout-menu div.usermenu p.user
+body.nonav
 {
-	color: white;
+	background:#000000;
 }
 
-#layout-content div.agcmts_entries div.comment a:link,
-#layout-content div.agcmts_entries div.comment a:hover
-#llayout-content div.agcmts_entries div.comment a:active
-#llayout-content div.agcmts_entries div.comment a:visited
+#layout-search form input.text
 {
-	color: #f9ff7b;    /* Link color in comments */
-	font-weight: bold;
+	background-color:#000000;
+	color:#06b3fe;
 }
 
+#layout-content div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
+#layout-content tr.header
+{
+	background-color:#028fcd;
+	color:#FFFFFF;
+}
+
+#layout-content div.rightbar li.g_odd,
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd,
+#layout-content tr.g_odd,
+#layout-content li.g_odd,
+#layout-content span.g_odd
+{
+	background-color:#444444;
+}
+
+#layout-content div.main_all div.news h4,
+#layout-content div.agcmts_entries div.comment h4
+{
+	background-color:#e64b73;
+	color:#FFFFFF;
+}
+
+#layout-content div.main_all div.news a:link,
+#layout-content div.main_all div.news a:visited,
+#layout-content div.rightbar a:link,
+#layout-content div.rightbar a:visited,
 #layout-content .g_definitionlist a:link,
-#layout-content .g_definitionlist a:visited
-{
-	color: #f9ff7b;
-}
-
+#layout-content .g_definitionlist a:visited,
 #layout-content a:link,
 #layout-content a:visited,
 #layout-content a:active,
 #layout-content a:hover
 {
-      	color: #f9ff7b;
+	color:#f9ff7b;
 }
 
-#layout-content div.episodes th
+#layout-menu a:link,
+#layout-menu a:visited,
+html,
+#layout-menu #newnotifies,
+#layout-menu #newmessages,
+#layout-menu div.usermenu p.user,
+#layout-content div.g_msg.note h3,
+#layout-main td del,
+#layout-main td ins,
+#layout-main table.filelist,
+#layout-main div.msg_all tr.mod,
+#layout-main table.animelist,
+#layout-main div.group_released table,
+#layout-main div.producer_related_anime table,
+#layout-main td ins,
+#layout-main div.myvotes_all table tr td.high,
+#layout-main div.character_all div.tabbed_pane_main table,
+#layout-main div.creator_all div.tabbed_pane_main table,
+#layout-main div.anime_all div.tabbed_pane_main table,
+#layout-main div.animelist_all table,
+#layout-main div.addcreatoranimerel_all table,
+#layout-main div.timeline_all div.timeline ul.row li.stalled a,
+#layout-main div.timeline_all div.timeline ul.row li.completed a,
+#layout-main div.timeline_all div.timeline ul.row li.dropped a
 {
-	background-color: #028fcd;
+	color:#FFFFFF;
+}
+
+#layout-menu a.history:link,
+#layout-menu a.history:visited,
+#layout-menu a.history:active,
+#layout-menu a.history:hover,
+#layout-content div.g_msg.success h3
+{
+	color:#FFE681;
+}
+
+#layout-content table.animelist tr.all_watched td.eps,
+#layout-content table.animelist tr.all_watched td.seen,
+#layout-content div.g_msg.error h3,
+#layout-content div.g_msg.warning h3
+{
+	color:#e64b73;
+}
+
+textarea,
+input,
+#layout-hint,
+select,
+button,
+input[type="button"],
+input[type="submit"]
+{
+	color:black;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	background-color:#404040;
+	border-top-color:#777777;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left-color:#404040;
+	border-right-color:#404040;
+}
+
+#layout-main div.forum ul.topics li.g_odd.row,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
+{
+	background-color:#333333;
+}
+
+#layout-main div.forum a.topictitle
+{
+	color:#CCCCCC;
+}
+
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+	opacity:0.6;
+}
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
+{
+	background-color:#555555;
+}
+
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum ul.topiclist li
+{
+	color:inherit;
+}
+
+#layout-main div.forum div.events dl dt,
+#layout-main div.forum div.poll dl dt,
+#layout-main div.cmt_entries dl.profile dd,
+#layout-main div.forum div.poll dl dd,
+#layout-main div.forum div.events dl dd
+{
+	color:#888888;
+}
+
+#layout-main div.forum div.signature,
+#layout-main div.forum div.events dl + dl,
+#layout-main div.forum div.poll dl + dl,
+#layout-main div.forum div.quickreply textarea,
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events div.data > p,
+#layout-main div.forum div.poll div.data p
+{
+	border-color:#666666 #444444 #444444 #666666;
+}
+
+#layout-main div.cmt_all div.cmt_add h4,
+#layout-main div.forum div.signature,
+#layout-main div.forum div.g_bubble.navbar div.bottom
+{
+	border-top-color:#666666;
+}
+
+#layout-main div.forum ul.topics dd
+{
+	border-left-color:#444444;
 }
 
 #layout-content div.message table,
@@ -127,30 +221,29 @@ a:visited, a:active, a:hover, a:link {
 #layout-content div.message th,
 #layout-content div.message td,
 #layout-content div.message td.iframe,
-#layout-content div.message td.iframe wysiwyg
+#layout-content div.message td.iframe wysiwyg,
+#layout-content div.g_msg.note,
+#layout-content div.g_msg.error,
+#layout-content div.g_msg.success,
+#layout-content div.g_msg.warning,
+#layout-content div.main_all div.news span.stamp,
+#layout-content div.anime_all div.episodes tr.generic td,
+.g_bubble,
+#layout-main div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
+#layout-tabs ul li,
+#layout-tabs ul li.g_odd
 {
-	background-color: #000000;
-         color: white;
-}
-
-#layout-content div.episodes tr.invalid
-{
-	background-color: #e64b73;
-}
-
-#layout-content div.episodes tr.good,
-#layout-content div.episodes tr.good a
-{
-	background-color: #88fe90;
-         color: #000000;
-}
-
-#layout-content table.filelist tr.deprecated
-{
-	background-color: #999999;
-}
-
-#layout-content div.anime_all div.episodes tr.generic td
-{
-	background-color: #000000;
+	background-color:#000000;
+	color:white;
 }
