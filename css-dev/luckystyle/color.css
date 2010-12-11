@@ -177,9 +177,6 @@ html
 textarea,
 input,
 #layout-hint,
-#layout-main div.cmt_entries div.postbody div.content,
-#layout-main div.cmt_entries div.postbody p.author,
-#layout-main div.cmt_entries dl.profile dd,
 select,
 button,
 input[type="button"],
@@ -201,4 +198,99 @@ input[type="submit"]
 #layout-main div.anime_all div.info div.caststaff > div
 {
 	background-color:gray;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	background-color: #404040;
+}
+
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box
+{
+	background-color: #000000;
+}
+
+#layout-main div.forum ul.topics
+{
+	border-left-color: #404040;
+	border-right-color: #404040;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	border-top-color: #777777;
+}
+
+#layout-main div.forum ul.topics li.g_odd.row,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
+{
+	background-color: #333333;
+}
+
+#layout-main div.forum a.topictitle
+{
+	color: #CCCCCC;
+}
+
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+	opacity: 0.6;
+}
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
+#layout-main div.forum ul.topics li.row:hover,
+#layout-main div.forum ul.topics li.g_odd.row:hover
+{
+	background-color: #555555;
+}
+
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum ul.topiclist li
+{
+	color: inherit;
+}
+
+#layout-main div.forum div.events dl dt,
+#layout-main div.forum div.poll dl dt,
+#layout-main div.cmt_entries dl.profile dd,
+#layout-main div.forum div.poll dl dd,
+#layout-main div.forum div.events dl dd
+{
+	color: #888888;
+}
+
+#layout-main div.forum div.signature,
+#layout-main div.forum div.events dl + dl,
+#layout-main div.forum div.poll dl + dl,
+#layout-main div.forum div.quickreply textarea,
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events div.data > p,
+#layout-main div.forum div.poll div.data p
+{
+	border-color: #666666 #444444 #444444 #666666;
+}
+
+#layout-main div.cmt_all div.cmt_add h4,
+#layout-main div.forum div.signature,
+#layout-main div.forum div.g_bubble.navbar div.bottom
+{
+	border-top-color: #666666;
+}
+
+#layout-main div.forum ul.topics dd
+{
+	border-left-color:#444444;
 }
