@@ -275,3 +275,9 @@ h4,
 	margin-top: .5em;
 	text-align: right;
 }
+
+#layout-main div.tabbed_pane ul.tabs
+{
+	text-align: left;
+	margin: 1px 1px 1px 6px;
+}

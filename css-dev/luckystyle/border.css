@@ -3,11 +3,6 @@ table
 	border-collapse:separate;
 }
 
-#layout-content div.g_section img
-{
-	border:0 #e64b73 solid;
-}
-
 #layout-content div.mylist_add table
 {
 	border:2px #028fcd solid;
@@ -23,19 +18,9 @@ table
 	border-top:black 2px solid;
 }
 
-#layout-search form input.submit
-{
-	border:0 solid white;
-}
-
 #layout-search form input.text
 {
 	border:#06b3fe 1px solid;
-}
-
-#layout-content div.g_msg.note
-{
-	border:0;
 }
 
 #layout-content div.g_msg.success
@@ -51,8 +36,12 @@ a,
 	border:none;
 }
 
+#layout-content div.g_section img,
+#layout-search form input.submit,
+#layout-content div.g_msg.note,
 #layout-content div.g_msg.error,
-#layout-content div.g_msg.warning
+#layout-content div.g_msg.warning,
+#layout-main div.forum ul.topics li.row
 {
 	border:1px #e64b73 solid;
 }
@@ -70,11 +59,6 @@ a,
 	border-color: #666666;
 }
 
-#layout-main div.forum ul.topics li.row
-{
-	border: none;
-}
-
 #layout-tabs ul li,
 #layout-tabs ul li.g_odd
 {
@@ -83,7 +67,18 @@ a,
     border: 1px solid #E54B70;
 }
 
+#layout-main div.tabbed_pane_cfg ul.tabs li,
+#layout-main div.tabbed_pane ul.tabs li
+{
+    -moz-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #666666;
+}
 
+#layout-main div.tabbed_pane_cfg ul.tabs li:hover,
+#layout-main div.tabbed_pane_cfg ul.tabs li.selected,
+#layout-main div.tabbed_pane ul.tabs li:hover,
+#layout-main div.tabbed_pane ul.tabs li.selected,
 #layout-tabs ul li.selected,
 #layout-tabs ul li:hover
 {
