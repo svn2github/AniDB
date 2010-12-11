@@ -108,7 +108,7 @@ body.nonav
 #layout-content li.g_odd,
 #layout-content span.g_odd
 {
-	background-color: gray;
+	background-color: #444444;
 }
 
 #layout-content div.main_all div.news h4,
@@ -140,17 +140,30 @@ body.nonav
 
 #layout-menu a:link,
 #layout-menu a:visited,
-html
-{
-	color:#FFFFFF;
-}
-
+html,
 #layout-menu #newnotifies,
 #layout-menu #newmessages,
 #layout-menu div.usermenu p.user,
-#layout-content div.g_msg.note h3
+#layout-content div.g_msg.note h3,
+#layout-main td del,
+#layout-main td ins,
+#layout-main table.filelist,
+#layout-main div.msg_all tr.mod,
+#layout-main table.animelist,
+#layout-main div.group_released table,
+#layout-main div.producer_related_anime table,
+#layout-main td ins,
+#layout-main div.myvotes_all table tr td.high,
+#layout-main div.character_all div.tabbed_pane_main table,
+#layout-main div.creator_all div.tabbed_pane_main table,
+#layout-main div.anime_all div.tabbed_pane_main table,
+#layout-main div.animelist_all table,
+#layout-main div.addcreatoranimerel_all table,
+#layout-main div.timeline_all div.timeline ul.row li.stalled a,
+#layout-main div.timeline_all div.timeline ul.row li.completed a,
+#layout-main div.timeline_all div.timeline ul.row li.dropped a
 {
-	color:white;
+	color:#FFFFFF;
 }
 
 #layout-menu a.history:link,
@@ -197,13 +210,6 @@ input[type="submit"]
 {
 	background-color: #000000;
 }
-
-/*#layout-content .g_image image,
-#layout-content .g_definitionlist,
-#layout-main div.anime_all div.info div.caststaff > div
-{
-	background-color:gray;
-}*/
 
 #layout-main div.forum ul.topics li.row
 {
