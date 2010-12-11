@@ -188,14 +188,12 @@ input[type="submit"]
 	color:black;
 }
 
-#layout-main div.main_all div.header div.latestnews div.stripe,
-#layout-main div.main_all div.datablocks div.stripe,
+
 .g_bubble,
-.g_bubble.stripe,
 #layout-main div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
 {
-	background-color:black;
+	background-color: #000000;
 }
 
 #layout-content .g_image image,

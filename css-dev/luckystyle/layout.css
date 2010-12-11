@@ -246,3 +246,9 @@ input[type="submit"]
 {
 	padding:1px;
 }
+
+h4,
+#layout-main div.g_timedentry h4
+{
+    padding: 0.3em;
+}

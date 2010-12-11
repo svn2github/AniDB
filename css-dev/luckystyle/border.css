@@ -56,3 +56,16 @@ a,
 {
 	border:1px #e64b73 solid;
 }
+
+.g_bubble,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4
+{
+	border-color: #666666 #444444 #444444 #666666;
+}
+
+.g_bubble.stripe div.name,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.title
+{
+	border-color: #666666;
+}
