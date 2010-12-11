@@ -61,13 +61,6 @@ a:link
 	background-color:#999999;
 }
 
-#layout-content div.main_all h4,
-#layout-content div.main_edit h4
-{
-	background-color:#3496DA;
-	color:#FFFFFF;
-}
-
 #layout-menu #newmessages:before,
 #layout-menu #newnotifies:before,
 #layout-menu #newmessages:after,
@@ -93,9 +86,11 @@ body.nonav
 	color:#06b3fe;
 }
 
+h4,
 #layout-content tr.header
 {
 	background-color:#028fcd;
+	color:#FFFFFF;
 }
 
 #layout-content div.rightbar li.g_odd,
