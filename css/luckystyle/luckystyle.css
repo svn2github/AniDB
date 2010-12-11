@@ -178,10 +178,6 @@ color:black;
 {
 color:black;
 }
-#layout-main div.data
-{
-color:black;
-}
 #layout-main div.cmt_entries div.postbody div.content
 {
 color:black;
@@ -201,4 +197,16 @@ color:black;
 #layout-main div.main_all div.header div.latestnews div.stripe
 {
 color:black;
+}
+#layout-main div.main_all div.datablocks div.stripe
+{
+background-color:black;
+}
+#layout-content .g_image image, #layout-content .g_definitionlist
+{
+background-color:grey;
+}
+#layout-main div.anime_all div.info div.caststaff > div
+{
+background-color:grey;
 }
