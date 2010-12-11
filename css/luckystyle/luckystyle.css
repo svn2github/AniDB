@@ -182,9 +182,6 @@ color:black;
 {
 color:black;
 }
-#layout-content a:link, #layout-content a:visited, #layout-content a:active, #layout-content a:hover {
-color:#0066FF;
-}
 #layout-main div.cmt_entries div.postbody div.content
 {
 color:black;
@@ -198,6 +195,10 @@ color:black;
 color:black;
 }
 select
+{
+color:black;
+}
+#layout-main div.main_all div.header div.latestnews div.stripe
 {
 color:black;
 }
