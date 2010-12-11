@@ -93,15 +93,12 @@ body.nonav
 	color:#06b3fe;
 }
 
-#layout-content div.anime_all div.mylist th,
-#layout-content table.grouplist th,
-#layout-content tr.header,
-#layout-content div.rightbar li.g_odd,
-#layout-content div.episodes th
+#layout-content tr.header
 {
 	background-color:#028fcd;
 }
 
+#layout-content div.rightbar li.g_odd,
 #layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd,
 #layout-content tr.g_odd,
