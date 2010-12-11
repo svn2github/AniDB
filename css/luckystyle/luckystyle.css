@@ -210,3 +210,7 @@ background-color:gray;
 {
 background-color:black;
 }
+.g_bubble.stripe, #layout-main div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody, #layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
+{
+background-color:black;
+}
