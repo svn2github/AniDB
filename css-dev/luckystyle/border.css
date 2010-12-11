@@ -37,11 +37,14 @@ a,
 }
 
 #layout-content div.g_section img,
-#layout-search form input.submit,
+#layout-search form input.submit
+{
+	border: none;
+}
+
 #layout-content div.g_msg.note,
 #layout-content div.g_msg.error,
-#layout-content div.g_msg.warning,
-#layout-main div.forum ul.topics li.row
+#layout-content div.g_msg.warning
 {
 	border:1px #e64b73 solid;
 }
