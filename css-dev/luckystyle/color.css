@@ -7,12 +7,6 @@ a:link
 	color:blue;
 }
 
-#layout-content div.main_all div.rightbar h4
-{
-	background-color:#06b3ff;
-	color:#FFFFFF;
-}
-
 #layout-menu a:active
 {
 	color:#ff0000;
@@ -44,23 +38,6 @@ a:link
 	color:white;
 }
 
-#layout-content div.episodes tr.invalid
-{
-	background-color:#e64b73;
-}
-
-#layout-content div.episodes tr.good,
-#layout-content div.episodes tr.good a
-{
-	background-color:#88fe90;
-	color:#000000;
-}
-
-#layout-content table.filelist tr.deprecated
-{
-	background-color:#999999;
-}
-
 #layout-menu #newmessages:before,
 #layout-menu #newnotifies:before,
 #layout-menu #newmessages:after,
@@ -86,7 +63,9 @@ body.nonav
 	color:#06b3fe;
 }
 
-h4,
+#layout-content div.main_all div.rightbar h4,
+#layout-main div.main_all div.datablocks h4,
+#layout-main div.main_all div.header h4,
 #layout-content tr.header
 {
 	background-color:#028fcd;
