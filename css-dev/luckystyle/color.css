@@ -95,15 +95,20 @@ body.nonav
 
 #layout-content div.anime_all div.mylist th,
 #layout-content table.grouplist th,
-#layout-content tr.g_odd,
-#layout-content li.g_odd,
-#layout-content span.g_odd,
-#layout-main div.votes_all div.graph div.group_odd,
-#layout-main div.votes_all div.graph.eps div.g_odd,
+#layout-content tr.header,
 #layout-content div.rightbar li.g_odd,
 #layout-content div.episodes th
 {
 	background-color:#028fcd;
+}
+
+#layout-main div.votes_all div.graph div.group_odd,
+#layout-main div.votes_all div.graph.eps div.g_odd,
+#layout-content tr.g_odd,
+#layout-content li.g_odd,
+#layout-content span.g_odd
+{
+	background-color: gray;
 }
 
 #layout-content div.main_all div.news h4,
@@ -193,12 +198,12 @@ input[type="submit"]
 	background-color: #000000;
 }
 
-#layout-content .g_image image,
+/*#layout-content .g_image image,
 #layout-content .g_definitionlist,
 #layout-main div.anime_all div.info div.caststaff > div
 {
 	background-color:gray;
-}
+}*/
 
 #layout-main div.forum ul.topics li.row
 {
@@ -293,4 +298,10 @@ input[type="submit"]
 #layout-main div.forum ul.topics dd
 {
 	border-left-color:#444444;
+}
+
+#layout-tabs ul li,
+#layout-tabs ul li.g_odd
+{
+    background-color: #000000;
 }

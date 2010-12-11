@@ -74,3 +74,18 @@ a,
 {
 	border: none;
 }
+
+#layout-tabs ul li,
+#layout-tabs ul li.g_odd
+{
+    -moz-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+    border: 1px solid #E54B70;
+}
+
+
+#layout-tabs ul li.selected,
+#layout-tabs ul li:hover
+{
+    border-bottom: 1px double #000000;
+}

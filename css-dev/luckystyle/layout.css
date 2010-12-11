@@ -251,3 +251,27 @@ h4,
 {
     padding: 0.3em;
 }
+
+#layout-tabs
+{
+	display: block;
+	position: absolute;
+   right: 170px;
+    top: 73px;
+	margin: 0;
+}
+
+#layout-tabs ul li
+{
+	display: inline;
+	padding: 4px 6px 3px;
+	line-height: 15px;
+}
+
+#layout-tabs ul
+{
+	display: block;
+	margin-bottom: .5em;
+	margin-top: .5em;
+	text-align: right;
+}
