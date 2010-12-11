@@ -9,144 +9,198 @@
 
 html, body, div
 {
-	padding: 0;
+        padding: 0;
 }
 
 body,
 #layout-menu
 {
-	font-size: 10px;
+        font-size: 10px;
 }
 
 #layout-content div.main_all h4,
 #layout-content div.main_edit h4
 {
-	background-color: #3496DA;
-	color: #FFFFFF;
+        background-color: #3496DA;
+        color: #FFFFFF;
 }
 
 #layout-content div.main_all div.rightbar
 {
-	width: 16em;
-	float: right;
-	text-align: center;
-	margin: 0.3em;
+        width: 16em;
+        float: right;
+        text-align: center;
+        margin: 0.3em;
 }
 
 #layout-content div.main_all div.rightbar p
 {
-	margin: 1.2em 0 0 0;
+        margin: 1.2em 0 0 0;
 }
 
 #layout-content div.main_all div.rightbar h3
 {
-	font-size: 100%;
-	margin: 1.5em 0 0.4em 0;
+        font-size: 100%;
+        margin: 1.5em 0 0.4em 0;
 }
 
 #layout-content div.main_all div.rightbar ol
 {
-	margin: 0em 0 0.4em 0;
-	padding: 0;
+        margin: 0em 0 0.4em 0;
+        padding: 0;
 }
 
 #layout-content div.main_all div.rightbar li
 {
-	list-style: none;
-	text-align: left;
+        list-style: none;
+        text-align: left;
 }
 
 #layout-content div.main_all div.rightbar li span
 {
-	display: block;
-	float: left;
-	height: 100%;
-	width: 4em;
-	text-align: center;
+        display: block;
+        float: left;
+        height: 100%;
+        width: 4em;
+        text-align: center;
 }
 
 #layout-content div.main_all div.rightbar li a
 {
-	display: block;
-	margin-left: 4em;
+        display: block;
+        margin-left: 4em;
 }
 
 #layout-content div.main_all div.news
 {
-	margin-right: 17em;
-	margin-left: 0.3em;
+        margin-right: 17em;
+        margin-left: 0.3em;
 }
 
 #layout-content div.main_all div.news div.newsitem h4
 {
-	padding: 0.1em;
+        padding: 0.1em;
 }
 
 #layout-content div.main_all div.news div.newsitem span.stamp
 {
-	padding: 0.1em 1em 0.1em 0.1em;
+        padding: 0.1em 1em 0.1em 0.1em;
 }
 
 #layout-content div.main_all div.news div.newsitem p.body
 {
-	margin: 0.1em 0.1em 3.1em 0.1em;
+        margin: 0.1em 0.1em 3.1em 0.1em;
 }
 
 #layout-content div.g_msg.note
 {
-	color: white;
+        color: white;
          background-color: #000000;
          border: 0;
 }
 
 #layout-content div.g_msg.note h3
 {
-	color: white;
+        color: white;
 }
 
 #layout-content div.g_msg.error
 {
-	color: white;
+        color: white;
          background-color: #000000;
          border: 1px #e64b73 solid;
 }
 
 #layout-content div.g_msg.error h3
 {
-	color: #e64b73;
+        color: #e64b73;
 }
 
 #layout-content div.g_msg.success
 {
-	color: white;
+        color: white;
          background-color: #000000;
          border: 1px #FFE681 solid;
 }
 
 #layout-content div.g_msg.success h3
 {
-	color: #FFE681;
+        color: #FFE681;
 }
 
 #layout-content div.g_msg.warning
 {
-	color: white;
+        color: white;
          background-color: #000000;
          border: 1px #e64b73 solid;
 }
 
 #layout-content div.g_msg.warning h3
 {
-	color: #e64b73;
+        color: #e64b73;
 }
 
-/*disable new features until it's styled properly by the actual css dev if he wants to use it*/
+/*disable new features until it`s styled properly by the actual css dev if he wants to use it*/
 #layout-search select,
 #layout-tabs {
-	display: none;
+        display: none;
 }
 
 #layout-search div.search form.random
 {
-	display:none;
+        display:none;
+}
+#layout-main div.profile_all div.tabbed_pane div.user_css div textarea
+{
+height: 500px;
+width: 70%;
+}
+button,
+input[type="button"],
+input[type="submit"]
+{
+padding:1px;
+color:black;
+}
+#menu-account
+{
+position: absolute;
+top: 390px;
+left: 17px;
+}
+#layout-menu
+{
+background-image:url("http://deliciouscak.es/randomup/Lucky_Menu.png");
+}
+textarea, input
+{
+color:black;
+}
+#layout-hint
+{
+color:black;
+}
+#layout-main div.data
+{
+color:black;
+}
+#layout-main div.rightbar
+{
+visibility:hidden;
+width:0px;
+}
+#layout-content a:link, #layout-content a:visited, #layout-content a:active, #layout-content a:hover {
+color:#0066FF;
+}
+#layout-main div.cmt_entries div.postbody div.content
+{
+color:black;
+}
+#layout-main div.cmt_entries div.postbody p.author
+{
+color:black;
+}
+#layout-main div.cmt_entries dl.profile dd
+{
+color:black;
 }
