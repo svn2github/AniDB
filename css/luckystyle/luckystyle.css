@@ -166,10 +166,6 @@ position: absolute;
 top: 390px;
 left: 17px;
 }
-#layout-menu
-{
-background-image:url("http://deliciouscak.es/randomup/Lucky_Menu.png");
-}
 textarea, input
 {
 color:black;
@@ -209,4 +205,8 @@ background-color:gray;
 #layout-main div.anime_all div.info div.caststaff > div
 {
 background-color:gray;
+}
+.g_bubble
+{
+background-color:black;
 }
