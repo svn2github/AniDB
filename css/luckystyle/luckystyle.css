@@ -59,7 +59,7 @@ body,
 #layout-content div.main_all div.rightbar li span
 {
         display: block;
-        float: left;
+        text-align: left;
         height: 100%;
         width: 4em;
         text-align: center;
@@ -183,11 +183,6 @@ color:black;
 #layout-main div.data
 {
 color:black;
-}
-#layout-main div.rightbar
-{
-visibility:hidden;
-width:0px;
 }
 #layout-content a:link, #layout-content a:visited, #layout-content a:active, #layout-content a:hover {
 color:#0066FF;
