@@ -249,35 +249,35 @@ input[type="submit"]
 h4,
 #layout-main div.g_timedentry h4
 {
-    padding: 0.3em;
+	padding:0.3em;
 }
 
 #layout-tabs
 {
-	display: block;
-	position: absolute;
-   right: 170px;
-    top: 73px;
-	margin: 0;
+	display:block;
+	margin:0;
+	position:absolute;
+	right:170px;
+	top:73px;
 }
 
 #layout-tabs ul li
 {
-	display: inline;
-	padding: 4px 6px 3px;
-	line-height: 15px;
+	display:inline;
+	line-height:15px;
+	padding:4px 6px 3px;
 }
 
 #layout-tabs ul
 {
-	display: block;
-	margin-bottom: .5em;
-	margin-top: .5em;
-	text-align: right;
+	display:block;
+	margin-bottom:.5em;
+	margin-top:.5em;
+	text-align:right;
 }
 
 #layout-main div.tabbed_pane ul.tabs
 {
-	text-align: left;
-	margin: 1px 1px 1px 6px;
+	margin:1px 1px 1px 6px;
+	text-align:left;
 }

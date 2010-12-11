@@ -18,26 +18,6 @@ a:link
 	color:#bbbbbb;
 }
 
-#layout-content div.agcmts_entries div.comment a:link,
-#layout-content div.agcmts_entries div.comment a:hover
-#llayout-content div.agcmts_entries div.comment a:active
-#llayout-content div.agcmts_entries div.comment a:visited
-{
-	color:#f9ff7b;
-	font-weight:bold;
-}
-
-#layout-content div.message table,
-#layout-content div.message tr,
-#layout-content div.message th,
-#layout-content div.message td,
-#layout-content div.message td.iframe,
-#layout-content div.message td.iframe wysiwyg
-{
-	background-color:#000000;
-	color:white;
-}
-
 #layout-menu #newmessages:before,
 #layout-menu #newnotifies:before,
 #layout-menu #newmessages:after,
@@ -79,7 +59,7 @@ body.nonav
 #layout-content li.g_odd,
 #layout-content span.g_odd
 {
-	background-color: #444444;
+	background-color:#444444;
 }
 
 #layout-content div.main_all div.news h4,
@@ -87,12 +67,6 @@ body.nonav
 {
 	background-color:#e64b73;
 	color:#FFFFFF;
-}
-
-#layout-content div.main_all div.news span.stamp,
-#layout-content div.anime_all div.episodes tr.generic td
-{
-	background-color:#000000;
 }
 
 #layout-content div.main_all div.news a:link,
@@ -154,15 +128,6 @@ html,
 	color:#e64b73;
 }
 
-#layout-content div.g_msg.note,
-#layout-content div.g_msg.error,
-#layout-content div.g_msg.success,
-#layout-content div.g_msg.warning
-{
-	background-color:#000000;
-	color:white;
-}
-
 textarea,
 input,
 #layout-hint,
@@ -174,59 +139,33 @@ input[type="submit"]
 	color:black;
 }
 
-
-.g_bubble,
-#layout-main div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody
-{
-	background-color: #000000;
-}
-
 #layout-main div.forum ul.topics li.row
 {
-	background-color: #404040;
-}
-
-#layout-main div.forum div.g_bubble.header,
-#layout-main div.forum div.g_bubble.poll,
-#layout-main div.forum div.g_bubble.events,
-#layout-main div.forum div.g_bubble.comment,
-#layout-main div.forum div.g_bubble.threads,
-#layout-main div.forum div.g_bubble.navbar,
-#layout-main div.forum div.g_bubble.search,
-#layout-main div.forum div.g_bubble.posting-box,
-#layout-main div.forum div.g_bubble.submit-box,
-#layout-main div.forum div.g_bubble.options-box
-{
-	background-color: #000000;
+	background-color:#404040;
+	border-top-color:#777777;
 }
 
 #layout-main div.forum ul.topics
 {
-	border-left-color: #404040;
-	border-right-color: #404040;
-}
-
-#layout-main div.forum ul.topics li.row
-{
-	border-top-color: #777777;
+	border-left-color:#404040;
+	border-right-color:#404040;
 }
 
 #layout-main div.forum ul.topics li.g_odd.row,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row
 {
-	background-color: #333333;
+	background-color:#333333;
 }
 
 #layout-main div.forum a.topictitle
 {
-	color: #CCCCCC;
+	color:#CCCCCC;
 }
 
 #layout-main div.forum div.deleted,
 #layout-main div.forum li.deleted dl.icon
 {
-	opacity: 0.6;
+	opacity:0.6;
 }
 
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
@@ -234,14 +173,14 @@ input[type="submit"]
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover
 {
-	background-color: #555555;
+	background-color:#555555;
 }
 
 #layout-main div.forum div.events h2,
 #layout-main div.forum div.poll h2,
 #layout-main div.forum ul.topiclist li
 {
-	color: inherit;
+	color:inherit;
 }
 
 #layout-main div.forum div.events dl dt,
@@ -250,7 +189,7 @@ input[type="submit"]
 #layout-main div.forum div.poll dl dd,
 #layout-main div.forum div.events dl dd
 {
-	color: #888888;
+	color:#888888;
 }
 
 #layout-main div.forum div.signature,
@@ -262,14 +201,14 @@ input[type="submit"]
 #layout-main div.forum div.events div.data > p,
 #layout-main div.forum div.poll div.data p
 {
-	border-color: #666666 #444444 #444444 #666666;
+	border-color:#666666 #444444 #444444 #666666;
 }
 
 #layout-main div.cmt_all div.cmt_add h4,
 #layout-main div.forum div.signature,
 #layout-main div.forum div.g_bubble.navbar div.bottom
 {
-	border-top-color: #666666;
+	border-top-color:#666666;
 }
 
 #layout-main div.forum ul.topics dd
@@ -277,8 +216,34 @@ input[type="submit"]
 	border-left-color:#444444;
 }
 
+#layout-content div.message table,
+#layout-content div.message tr,
+#layout-content div.message th,
+#layout-content div.message td,
+#layout-content div.message td.iframe,
+#layout-content div.message td.iframe wysiwyg,
+#layout-content div.g_msg.note,
+#layout-content div.g_msg.error,
+#layout-content div.g_msg.success,
+#layout-content div.g_msg.warning,
+#layout-content div.main_all div.news span.stamp,
+#layout-content div.anime_all div.episodes tr.generic td,
+.g_bubble,
+#layout-main div.tabbed_pane_main div.similaranime div.stripe div.tooltip div.postbody,
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.postbody,
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.comment,
+#layout-main div.forum div.g_bubble.threads,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box,
 #layout-tabs ul li,
 #layout-tabs ul li.g_odd
 {
-    background-color: #000000;
+	background-color:#000000;
+	color:white;
 }
