@@ -1,115 +1,54 @@
-html
-{
-	background: #000000 url('images/Lucky_Menu_Pixel.gif') repeat-y left;
-         color: #FFFFFF;
-}
-
-body.nonav
-{
-	background: #000000;
-}
-
 #layout-menu
 {
-	position: absolute;
-	top: 132px;
-	left: 0;
-	width: 100px;
-	height: 603px;
-	padding: 10px 42px 0px 28px;
-	background: url('images/Lucky_Menu.png') no-repeat top left;
-}
-
-#menu-account
-{
-	position: absolute;
-	top: 370px;
-	left: 17px;
-	line-height: 1.2;
-}
-
-#menu-mod,
-#menu-main .random
-{
-	display: none;
-}
-
-#layout-menu ul
-{
-	line-height: 1.2;
+	height:603px;
+	left:0;
+	padding:10px 48px 0 22px;
+	position:absolute;
+	top:132px;
+	width:100px;
 }
 
 #layout-menu li
 {
-	padding: 0;
-	text-indent: 0;
+	padding:0;
+	text-indent:0;
 }
 
-
-#layout-menu li.mywishlist,
-#layout-menu li.myreviews,
-#layout-menu li.mydbentries,
-#layout-menu li.mycreqs,
-#layout-menu li.up2date
+#menu-main,
+#menu-private,
+#menu-lists
 {
-	display: none;
+	margin-bottom:1em;
 }
 
-#menu-main, #menu-private, #menu-lists
+#layout-menu li.genre,
+#layout-menu li.genren
 {
-	margin-bottom: 1.0em;
-}
-
-#layout-menu li.genre, #layout-menu li.genren
-{
-	display: inline;
+	display:inline;
 }
 
 #layout-menu li.help
 {
-	margin-bottom: 2px;
-	display: block;
-	text-indent: 15px;
-	background-position:  left 50%;
-	background-repeat: no-repeat;
-	background-image: url('images/buttons/ask2.gif');padding-left:0; padding-right:0; padding-top:1px; padding-bottom:0
-}
-
-#layout-menu li.forum
-{
-	font-weight: bold;
+	display:block;
+	margin-bottom:2px;
+	padding:1px 0 0;
+	text-indent:15px;
 }
 
 #menu-account li
 {
-	width: 92px;
-	text-align: center;
+	text-align:center;
+	width:92px;
 }
 
 #user-profile a,
 #user-logout a
 {
-	float: left;
-	display: block;
-	width: 42px;
-	height: 12px;
-	margin: 2px;
-}
-
-#user-profile a span,
-#user-logout a span
-{
-	display: none;
-}
-
-#user-logout a
-{
-	background-image: url('images/buttons/button_logout.gif');
-}
-
-#user-profile a
-{
-	background-image: url('images/buttons/button_profile.gif');
+	display:block;
+	float:left;
+	height:12px;
+	margin:2px;
+	width:42px;
 }
 
 #layout-menu #newmessages:before,
@@ -117,123 +56,193 @@ body.nonav
 #layout-menu #newmessages:after,
 #layout-menu a.history:after
 {
-	content: "!";
-	color: red;
-	padding: 0.2em;
+	padding:0.2em;
 }
 
 #layout-menu #newmessages
 {
-	display: block;
-}
-
-#layout-search
-{
-	background: url('images/Lucky_Header_Pixel.gif') repeat-x top;
-	width: 100%;
-	height: 132px;
-}
-
-#layout-search div.search
-{
-	background: url('images/Lucky_Header.png') no-repeat top left;
-	height: 132px;
-
+	display:block;
 }
 
 #layout-search div.search form
 {
-	display: block;
-	float: right;
-	background: url('images/Lucky_Searchteil.gif') no-repeat 0px 1px;
-	margin: 0;
-	height: 70px;
-	width: 166px;
-	max-width: 166px;
-         padding-left:0;
-         padding-right:0px;
-         padding-top:70px;
-         padding-bottom:0;
-
+	display:block;
+	float:right;
+	margin:0;
+	max-width:166px;
+	padding:70px 0 0;
 }
 
 #layout-search div.search form p
 {
-	margin: 0;
-	padding: 0;
-}
-
-#layout-search form select.type
-{
-	display: none;
+	margin:0;
+	padding:0;
 }
 
 #layout-search form input.text
 {
-	display: block;
-	float: right;
-	font-size: 10px;
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	color: #06b3fe;
-	background-color: #000000;
-	border: #06b3fe 1px solid;
-	margin: 27px 3px 0 0;
-	width: 10.3em;
-         padding-right: 26px;
+	display:block;
+	float:right;
+	margin:27px 3px 0 0;
+	padding-right:26px;
+	width:10.3em;
 }
 
 #layout-search form input.submit
 {
-	display: block;
-	float: right;
-	background: url('images/buttons/button_search.gif') no-repeat top;
-	font-size: 10px;
-	border: 0px solid white;
-	width: 63px;
-	height: 14px;
-	overflow: hidden;
-	margin-right: 2.3em;
-	content: ""; padding-left:0; padding-right:0; padding-top:14px; padding-bottom:0
+	display:block;
+	float:right;
+	margin-right:2.3em;
+	overflow:hidden;
+	padding:14px 0 0;
 }
 
 #layout-content
 {
-	margin-left: 182px;
-	padding-top: 0.5em;
+	margin-left:182px;
+	padding-top:0.5em;
 }
 
 #layout-content h1
 {
-         font-size: 16px;
-         font-weight: bold;
-         margin: 3px 0 18px 37px;
-         text-align: left;
+	margin:3px 0 18px 37px;
+	text-align:left;
 }
 
 #layout-content div.g_section
 {
-	padding-top: 10px;
-	clear: both;
+	clear:both;
+	padding-top:10px;
 }
 
 #layout-footer
 {
-	margin-top: 19px;
-	margin-left: 182px;
-	text-align: center;
-}
-
-#layout-footer:after
-{
-	content: "Design by Breadstone. Coding by B1nh"
+	margin-left:182px;
+	margin-top:19px;
+	text-align:center;
 }
 
 #layout-content div.rightbar
 {
-	padding-top: 2px;
+	padding-top:2px;
 }
 
 #layout-content div.anime_all div.mylist th.anime
 {
-	width: 300px;
+	width:300px;
+}
+
+#layout-content .g_block .g_definitionlist > table
+{
+	margin:0;
+}
+
+#layout-content div.main_all div.rightbar
+{
+	float:right;
+	margin:0.3em;
+	text-align:center;
+	width:16em;
+}
+
+#layout-content div.main_all div.rightbar p
+{
+	margin:1.2em 0 0;
+}
+
+#layout-content div.main_all div.rightbar h3
+{
+	margin:1.5em 0 0.4em;
+}
+
+#layout-content div.main_all div.rightbar ol
+{
+	margin:0 0 0.4em;
+	padding:0;
+}
+
+#layout-content div.main_all div.rightbar li
+{
+	list-style:none;
+	text-align:left;
+}
+
+#layout-content div.main_all div.rightbar li span
+{
+	display:block;
+	height:100%;
+	text-align:left;
+}
+
+#layout-content div.main_all div.rightbar li a
+{
+	display:block;
+	margin-left:4em;
+}
+
+#layout-content div.main_all div.news
+{
+	margin-left:0.3em;
+	margin-right:17em;
+}
+
+#layout-content div.main_all div.news div.newsitem h4
+{
+	padding:0.1em;
+}
+
+#layout-content div.main_all div.news div.newsitem span.stamp
+{
+	padding:0.1em 1em 0.1em 0.1em;
+}
+
+#layout-content div.main_all div.news div.newsitem p.body
+{
+	margin:0.1em 0.1em 3.1em;
+}
+
+#layout-main div.profile_all div.tabbed_pane div.user_css div textarea
+{
+	height:500px;
+	width:70%;
+}
+
+#menu-mod,
+#menu-main .random,
+#layout-menu li.mywishlist,
+#layout-menu li.myreviews,
+#layout-menu li.mydbentries,
+#layout-menu li.mycreqs,
+#user-profile a span,
+#user-logout a span,
+#layout-search form select.type,
+#layout-search select,
+#layout-tabs,
+#layout-search div.search form.random
+{
+	display:none;
+}
+
+#layout-menu ul,
+#layout-content div.main_all h4
+{
+	line-height:1.2;
+}
+
+#layout-content ul.g_navlist li,
+html,
+body,
+div
+{
+	padding:0;
+}
+
+#layout-content div.anime_all div.episodes tr.heading th,
+#layout-content .g_image image,
+#layout-content .g_definitionlist,
+button,
+input[type="button"],
+input[type="submit"]
+{
+	padding:1px;
 }

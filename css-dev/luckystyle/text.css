@@ -1,47 +1,92 @@
-#layout-content ul.g_navlist li
+body,
+#layout-menu
 {
-	padding: 0px;
+	font-size:10px;
+}
+
+#layout-menu li.forum
+{
+	font-weight:bold;
+}
+
+#layout-search form input.text
+{
+	font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size:10px;
+}
+
+#layout-search form input.submit
+{
+	content:"";
+	font-size:10px;
+}
+
+#layout-content h1
+{
+	font-size:16px;
+	font-weight:bold;
+}
+
+#layout-content div.main_all div.rightbar h3
+{
+	font-size:100%;
 }
 
 #layout-content ul.g_navlist li:before
 {
-	content: " | "
+	content:" | ";
 }
+
 #layout-content ul.g_navlist li:first-child:before
 {
-	content: "";
+	content:"";
 }
+
 #layout-content ul.g_numonpage li:first-child:before
 {
-	content: "show: ";
+	content:"show: ";
 }
 
 #layout-content div.main_all h4
 {
-	font-size: 100%;
-	line-height: 1.2;
-	font-weight: normal;
+	font-size:100%;
+	font-weight:normal;
 }
 
 #layout-content p.g_vital a:link,
 #layout-content p.g_vital a:visited
 {
-	font-weight: bolder;
-         color: #2fe324;
+	font-weight:bolder;
 }
 
 #layout-menu li.genren:before
 {
-	content: "(";
+	content:"(";
 }
 
 #layout-menu li.genren:after
 {
-	content: ")";
+	content:")";
 }
 
-#layout-content table.animelist tr.all_watched td.eps,
-#layout-content table.animelist tr.all_watched td.seen
+#layout-footer:after
 {
- 	color: #e64b73;
+	content:"Design by Breadstone. Coding by B1nh";
+}
+
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
+{
+	content:"!";
+}
+
+span.link,
+a:visited,
+a:active,
+a:hover,
+a:link
+{
+	text-decoration:none;
 }

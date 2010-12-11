@@ -1,0 +1,140 @@
+*.i_vrs_1
+{
+	background-image:url('images/buttons/anidb_vrs_1.gif');
+}
+
+*.i_vrs_2
+{
+	background-image:url('images/buttons/anidb_vrs_2.gif');
+}
+
+*.i_vrs_3
+{
+	background-image:url('images/buttons/anidb_vrs_3.gif');
+}
+
+*.i_vrs_4
+{
+	background-image:url('images/buttons/anidb_vrs_4.gif');
+}
+
+*.i_vrs_5
+{
+	background-image:url('images/buttons/anidb_vrs_5.gif');
+}
+
+*.i_noup1
+{
+	background-image:url('images/buttons/noup1.gif');
+	height:10px;
+	width:9px;
+}
+
+*.i_plus
+{
+	background-image:url('images/buttons/plus.gif');
+}
+
+*.i_up1
+{
+	background-image:url('images/buttons/up1.gif');
+	height:10px;
+	width:9px;
+}
+
+*.i_nodown1
+{
+	background-image:url('images/buttons/nodown1.gif');
+	height:10px;
+	width:9px;
+}
+
+*.i_none
+{
+	background-image:url('images/buttons/none.gif');
+}
+
+*.i_minus
+{
+	background-image:url('images/buttons/minus.gif');
+}
+
+*.i_punkt
+{
+	background-image:url('images/buttons/buttons_punkt.gif');
+}
+
+*.i_search
+{
+	background-image:url('images/buttons/buttons_search.gif');
+}
+
+*.i_suchen
+{
+	background-image:url('images/buttons/buttons_suchen.gif');
+}
+
+*.i_report_entry,*.i_no_vote
+{
+	background-image:url('images/buttons/icon/anidb_no_vote.gif');
+}
+
+*.i_help
+{
+	background:url('images/buttons/ask2.gif') no-repeat right;
+	cursor:help;
+}
+
+#layout-menu
+{
+	background:url('images/Lucky_Menu.png') no-repeat top left;
+}
+
+#layout-menu li.help
+{
+	background-image:url('images/buttons/ask2.gif');
+	background-position:left 50%;
+	background-repeat:no-repeat;
+}
+
+#user-logout a
+{
+	background-image:url('images/buttons/button_logout.gif');
+}
+
+#user-profile a
+{
+	background-image:url('images/buttons/button_profile.gif');
+}
+
+#layout-search
+{
+	background:url('images/Lucky_Header_Pixel.gif') repeat-x top;
+	height:132px;
+	width:100%;
+}
+
+#layout-search div.search
+{
+	background:url('images/Lucky_Header.png') no-repeat top left;
+	height:132px;
+}
+
+html
+{
+	background:#000000 url('images/Lucky_Menu_Pixel.gif') repeat-y left;
+}
+
+#layout-search form input.submit
+{
+	background:url('images/buttons/button_search.gif') no-repeat top;
+	height:14px;
+	width:63px;
+}
+
+#layout-search div.search form
+{
+	background:url('images/Lucky_Searchteil.gif') no-repeat 0 1px;
+	height:70px;
+	width:166px;
+}
