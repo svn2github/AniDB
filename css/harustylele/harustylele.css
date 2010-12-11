@@ -14,3 +14,38 @@
 {
 	display: none;
 }
+#layout-search form input.text {
+background-color: #272D43;
+border: 1px solid #BFC2C9;
+color: white;
+display: block;
+font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+font-size: 10px;
+left: 15px;
+margin: 0px 3px 0px 0px;
+position: relative;
+top: 28px;
+width: 100px;
+}
+#layout-search select {
+display: block;
+float: right;
+margin: 26px 35px 0px 0px;
+}
+#layout-search form input.submit {
+border: 0px;
+cursor: pointer;
+float: none;
+height: 14px;
+left: 163px;
+margin-left: 2em;
+overflow: hidden;
+padding: 20px 0px 0px;
+position: relative;
+top: 12px;
+width: 20px;
+}
+#layout-search form input.submit {
+background: url(http://static.anidb.net/css/harustylele/images/banner.png) no-repeat 50% 0%
+/*background: url(http://deliciouscak.es/randomup/button_search.gif) no-repeat 50% 0%;*/
+}
