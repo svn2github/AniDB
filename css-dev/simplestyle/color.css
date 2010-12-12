@@ -241,3 +241,90 @@ select,
 	background-color: #FF4242;
 	color: #FFFFFF;
 }
+
+#layout-main div.forum li.header dt,
+#layout-main div.forum li.header dd
+{
+	color:#FFFFFF;
+}
+
+#layout-main div.forum hr,
+#layout-main div.cmt_all div.cmt_add hr,
+#layout-main div.forum div.g_bubble.threads
+{
+	background-color:#47C2FF;
+}
+
+#layout-main div.forum div.signature,
+#layout-main div.forum div.events dl + dl,
+#layout-main div.forum div.poll dl + dl,
+#layout-main div.cmt_entries dl.profile,
+#layout-main div.forum div.quickreply textarea,
+#layout-main div.forum div.events h2,
+#layout-main div.forum div.poll h2,
+#layout-main div.forum div.events div.data > p,
+#layout-main div.forum div.poll div.data p
+{
+	border-color:#47C2FF;
+}
+
+#layout-main div.forum div.g_bubble.poll div.pollbar
+{
+	background-color: #105289;
+	border-bottom-color: #092e4d;
+	border-right-color: #092e4d;
+	color: #FFFFFF;
+}
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
+#layout-main div.forum ul.topics li.g_odd.row
+{
+	color: #47C2FF;
+	background-color: #FFFFFF;
+}
+
+#layout-main div.forum ul.topics li.row
+{
+	color: #FFFFFF;
+	background-color: #47C2FF;
+}
+
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row a,
+#layout-main div.forum ul.topics li.g_odd.row a
+{
+	color: #47C2FF;
+}
+
+#layout-main div.forum ul.topics li.row a
+{
+	color: #FFFFFF;
+}
+
+#layout-main div.forum div.deleted,
+#layout-main div.forum li.deleted dl.icon
+{
+	opacity: 0.3;
+}
+
+div.quotebody
+{
+	background-color: #EBEADD;
+	border: 1px solid #DBDBDB;
+}
+
+div.quotebody div.quote div.g_odd
+{
+	background-color: #EFEED9;
+}
+
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum a.topictitle:hover,
+#layout-main div.forum a.username-colored
+{
+	color:#AA0000;
+}
+
+#layout-main div.forum div.quickreply textarea
+{
+	border-color: #47C2FF;
+}
