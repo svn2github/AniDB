@@ -1,59 +1,47 @@
-html, body, div
-{
-	padding: 0;
-}
-
 #layout-content
 {
-	margin-left: 202px;
+	margin-left:202px;
 }
 
 #layout-menu
 {
-    height:auto;
-    padding-left: 13px;
-    padding-top: 187px;
+	height:auto;
+	padding-left:13px;
+	padding-top:187px;
 }
 
 #layout-menu li.sub-menu
 {
-    padding: 0 1.2em 0 1.1em;
-    width: 150px;
-	display: table;
+	display:table;
+	padding:0 1.2em 0 1.1em;
+	width:150px;
 }
 
 #layout-menu ul
 {
-	line-height: 1.35;
-display: table-cell;
-vertical-align: middle;
-    padding-bottom: 1em;
-    padding-top: 0.8em;
-}
-
-#layout-menu li
-{
-	padding: 0;
+	display:table-cell;
+	line-height:1.35;
+	padding-bottom:1em;
+	padding-top:0.8em;
+	vertical-align:middle;
 }
 
 #layout-menu ul.my
 {
-	margin-top: 36px;
+	margin-top:36px;
 }
 
 #layout-menu li.help
 {
-	padding: 1px 0 0 0;
-	margin-bottom: 2px;
-	display: block;
+	display:block;
+	margin-bottom:2px;
+	padding:1px 0 0;
 }
-
-
 
 #layout-menu span.user
 {
-	text-align: left;
-	display: block;
+	display:block;
+	text-align:left;
 }
 
 #layout-menu #newmessages:before,
@@ -61,166 +49,142 @@ vertical-align: middle;
 #layout-menu #newmessages:after,
 #layout-menu a.history:after
 {
-	padding: 0.2em;
+	padding:0.2em;
 }
 
 #layout-menu #newmessages
 {
-	display: block;
+	display:block;
 }
 
 #layout-content h1
 {
-	position: relative;
-	margin: 0px 0 5px 0px;
-	padding: 4px 0px 0px 13px;
+	margin:0 0 5px;
+	padding:4px 0 0 13px;
+	position:relative;
 }
 
 #layout-content div.g_section
 {
-	padding-top: 10px;
-	clear: both;
-}
-
-#layout-content div.info caption
-{
-	display: none;
+	clear:both;
+	padding-top:10px;
 }
 
 #layout-content div.g_content div.profile_all
 {
-	text-align: center;
+	text-align:center;
 }
 
 #layout-content div.g_filterlist,
 #layout-content ul.g_actionlist,
 #layout-content ul.g_navlist
 {
-	padding: 2px;
+	padding:2px;
 }
 
 #layout-footer
 {
-	margin-top: 19px;
-	margin-left: 182px;
-	text-align: center;
+	margin-left:182px;
+	margin-top:19px;
+	text-align:center;
 }
 
 #layout-content div.anime_all div.mylist th.anime
 {
-	width: 300px;
-}
-
-#layout-content .g_image image,
-#layout-content .g_definitionlist
-{
-	padding: 1px;
+	width:300px;
 }
 
 #layout-content .block .g_definitionlist > table
 {
-	margin: 0;
-}
-
-#layout-content div.g_definitionlist table
-{
-    padding: 1px;
-}
-
-#layout-content div.avatar img,
-#layout-content div.anime_all div.info div.image img
-{
-	padding: 1px;
+	margin:0;
 }
 
 #layout-content div.anime_all div.episodes tr.heading th
 {
-	padding: 4px 1px 7px 1px;
-}
-
-#layout-content div.g_definitionlist table
-{
-         padding: 1px;
-}
-
-#layout-content div.g_definitionlist table.relationlist
-{
-         padding: 1px;
+	padding:4px 1px 7px;
 }
 
 #layout-content div.myplace_all ul,
 #layout-content div.userpage_all ul,
 #layout-content div.mylist_all ul
 {
-         padding: 3px;
-}
-
-#layout-content ul.g_navlist li
-{
-	padding: 0px;
-}
-
-/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
-#layout-tabs {
-	display:none;
+	padding:3px;
 }
 
 #layout-menu li.sub-menu + li.sub-menu
 {
-    margin-top: 1.2em;
+	margin-top:1.2em;
 }
 
 #layout-menu li.sub-menu ul+span
 {
-display: table-cell;
-position: relative;
-vertical-align: middle;
-width: 0.5em;
-text-align: right;
+	display:table-cell;
+	position:relative;
+	text-align:right;
+	vertical-align:middle;
+	width:0.5em;
 }
 
 #layout-menu li.sub-menu.account
 {
-top: 10px;
-right: 5px;
-position: absolute;
+	position:absolute;
+	right:5px;
+	top:10px;
 }
 
-#layout-search {
-    position: absolute;
-    right: 5px;
-    top: 105px;
+#layout-search
+{
+	position:absolute;
+	right:5px;
+	top:105px;
 }
 
 #layout-search div.search
 {
-float: right;
-width: 170px;
-}
-
-#layout-search div.search input.submit
-{
-display: none;
+	float:right;
+	width:170px;
 }
 
 #layout-search form input.text
 {
-width: 165px;
+	width:165px;
 }
 
 #layout-search form select
 {
-width: 171px;
-margin-bottom: 0.1em;
-}
-
-#layout-search form > p
-{
-padding: 0;
+	margin-bottom:0.1em;
+	width:171px;
 }
 
 #layout-content div.main_all div.rightbar h4
 {
-	padding-top: 4px;
-	padding-bottom: 4px;
+	padding-bottom:4px;
+	padding-top:4px;
+}
+
+html,
+body,
+div,
+#layout-menu li,
+#layout-content ul.g_navlist li,
+#layout-search form > p
+{
+	padding:0;
+}
+
+#layout-content div.info caption,
+#layout-tabs,
+#layout-search div.search input.submit
+{
+	display:none;
+}
+
+#layout-content .g_image image,
+#layout-content .g_definitionlist,
+#layout-content div.g_definitionlist table,
+#layout-content div.avatar img,
+#layout-content div.anime_all div.info div.image img,
+#layout-content div.g_definitionlist table.relationlist
+{
+	padding:1px;
 }

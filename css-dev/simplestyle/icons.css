@@ -1,94 +1,100 @@
 *.i_help
 {
-	background: url(images/icons/ask2.gif) no-repeat right;
-	cursor: help; /* just kept for teh funs */
+	background:url(images/icons/ask2.gif) no-repeat right;
+	cursor:help;
 }
 
 *.i_report_entry,
 *.i_no_vote
 {
-	background-image: url(images/icons/anidb_no_vote.gif);
+	background-image:url(images/icons/anidb_no_vote.gif);
 }
 
 *.i_down1
 {
-	background-image: url(images/icons/down1.gif);
-	width: 15px;
-	height: 13px;
+	background-image:url(images/icons/down1.gif);
+	height:13px;
+	width:15px;
 }
 
 *.i_minus
 {
-	background-image: url(images/icons/minus.gif);
-	width: 15px;
-	height: 13px;
+	background-image:url(images/icons/minus.gif);
+	height:13px;
+	width:15px;
 }
 
 *.i_nodown1
 {
-	background-image: url(images/icons/nodown1.gif);
-	width: 15px;
-	height: 13px;
+	background-image:url(images/icons/nodown1.gif);
+	height:13px;
+	width:15px;
 }
 
 *.i_noup1
 {
-	background-image: url(images/icons/noup1.gif);
-	width: 15px;
-	height: 13px;
+	background-image:url(images/icons/noup1.gif);
+	height:13px;
+	width:15px;
 }
 
 *.i_plus
 {
-	background-image: url(images/icons/plus.gif);
-	width: 15px;
-	height: 13px;
+	background-image:url(images/icons/plus.gif);
+	height:13px;
+	width:15px;
 }
 
 *.i_up1
 {
-	background-image: url(images/icons/up1.gif);
-	width: 15px;
-	height: 13px;
+	background-image:url(images/icons/up1.gif);
+	height:13px;
+	width:15px;
 }
 
-/* credits to zak */
-img[src*="down1.gif"] {
-	background: url(images/icons/down.gif) no-repeat top;
-	width: 15px;
-	height: 13px;
+img[src*="down1.gif"]
+{
+	background:url(images/icons/down.gif) no-repeat top;
+	height:13px;
+	width:15px;
 }
-img[src*="up1.gif"] {
-	background: url(images/icons/up1.gif) no-repeat top;
-	width: 15px;
-	height: 13px;
+
+img[src*="up1.gif"]
+{
+	background:url(images/icons/up1.gif) no-repeat top;
+	height:13px;
+	width:15px;
 }
-img[src*="nodown1.gif"] {
-	background: transparent url(images/icons/nodown1.gif) no-repeat left top;
-	width: 15px;
-	height: 13px;
+
+img[src*="nodown1.gif"]
+{
+	background:transparent url(images/icons/nodown1.gif) no-repeat left top;
+	height:13px;
+	width:15px;
 }
-img[src*="noup1.gif"] {
-	background: transparent url(images/icons/noup.gif) no-repeat left top;
-	width: 15px;
-	height: 13px;
+
+img[src*="noup1.gif"]
+{
+	background:transparent url(images/icons/noup.gif) no-repeat left top;
+	height:13px;
+	width:15px;
 }
 
 #layout-nav
 {
-	background: transparent url(images/header.png) no-repeat;
-	height: 187px;
+	background:transparent url(images/header.png) no-repeat;
+	height:187px;
 }
 
 #layout-menu li.help
 {
-	text-indent: 15px;
-	background-position: left;
-	background-repeat: no-repeat;
-	background-image: url(images/help.gif);
+	background-image:url(images/help.gif);
+	background-position:left;
+	background-repeat:no-repeat;
+	text-indent:15px;
 }
 
 #layout-content div.main_all div.rightbar h4
 {
-	background: url("images/punkt.gif") no-repeat scroll 7px 8px #47C2FF;
+	background:url("images/punkt.gif") no-repeat scroll 7px 8px #47C2FF;
 }
