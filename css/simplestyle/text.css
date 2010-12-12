@@ -70,7 +70,7 @@ a:link
 	font-weight:bolder;
 }
 
-#layout-menu li
+#layout-menu li.sub-menu ul li
 {
 	text-transform:capitalize;
 }
