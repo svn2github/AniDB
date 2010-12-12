@@ -104,7 +104,7 @@ a:link
 	font-weight:bold;
 }
 
-#layout-menu li.sub-menu ul+span
+#layout-menu li.sub-menu span.extra
 {
 	font-family:"Microsoft Sans Serif", sans-serif;
 	font-size:7em;
@@ -116,12 +116,12 @@ a:link
 	counter-increment:section 1;
 }
 
-#layout-menu li.sub-menu ul+span:after
+#layout-menu li.sub-menu span.extra:after
 {
 	content:counter(section);
 }
 
-#layout-menu li.sub-menu.account ul+span:after
+#layout-menu li.sub-menu.account span.extra:after
 {
 	content:"P";
 }
