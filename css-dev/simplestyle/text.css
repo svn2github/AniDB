@@ -72,7 +72,6 @@ a:link
 
 #layout-menu li
 {
-	text-indent:0;
 	text-transform:capitalize;
 }
 
@@ -104,7 +103,7 @@ a:link
 	font-weight:bold;
 }
 
-#layout-menu li.sub-menu span.extra
+#layout-menu li.sub-menu ul+span
 {
 	font-family:"Microsoft Sans Serif", sans-serif;
 	font-size:7em;
@@ -116,12 +115,12 @@ a:link
 	counter-increment:section 1;
 }
 
-#layout-menu li.sub-menu span.extra:after
+#layout-menu li.sub-menu ul+span:after
 {
 	content:counter(section);
 }
 
-#layout-menu li.sub-menu.account span.extra:after
+#layout-menu li.sub-menu.account ul+span:after
 {
 	content:"P";
 }
