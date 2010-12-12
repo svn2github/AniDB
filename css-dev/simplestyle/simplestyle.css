@@ -99,39 +99,6 @@ body,
 	margin-left: 4em;
 }
 
-#layout-content div.main_all div.news
-{
-	margin-right: 220px;
-	margin-left: 34px;;
-}
-
-#layout-content div.main_all div.newsitem
-{
-	border-bottom: 1px solid #B9CD81;
-}
-
-#layout-content div.main_all div.newsitem:last-child
-{
-	border-bottom: none;
-}
-
-#layout-content div.main_all div.news div.newsitem h4
-{
-	background: url(images/newsicon.jpg) no-repeat left;
-         padding-left:31px;
-}
-
-#layout-content div.main_all div.news div.newsitem span.stamp
-{
-         margin-top: -3px;
-         padding: 0 0 0 31px;
-}
-
-#layout-content div.main_all div.news div.newsitem p.body
-{
-	margin: 0.1em 0.1em 3.1em 0.1em;
-}
-
 /*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
 #layout-tabs {
 	display:none;

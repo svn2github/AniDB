@@ -31,21 +31,6 @@ body.nonav
 	width: 108px;
 }
 
-#menu-account
-{
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	left: auto;
-	line-height: 1.7;
-	height: 105px;
-	width: 186px;
-	padding: 0 2px 0 0;
-	z-index: 12;
-	font-weight: bold;
-	width: 130px;
-}
-
 #layout-search
 {
 	position: absolute;
@@ -139,29 +124,6 @@ body.nonav
 #layout-menu #newmessages
 {
 	display: block;
-}
-
-#user-profile a
-{
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	width: 60px;
-	height: 100px;
-}
-
-#user-profile a span
-{
-	display: none;
-}
-
-#user-logout a
-{
-	position: absolute;
-	bottom: 10px;
-	left: 44px;
-	width: 49px;
-	height: 11px;
 }
 
 #layout-search div.search
