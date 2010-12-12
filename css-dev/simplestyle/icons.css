@@ -87,3 +87,8 @@ img[src*="noup1.gif"] {
 	background-repeat: no-repeat;
 	background-image: url(images/help.gif);
 }
+
+#layout-content div.main_all div.rightbar h4
+{
+	background: url("images/punkt.gif") no-repeat scroll 7px 8px #47C2FF;
+}

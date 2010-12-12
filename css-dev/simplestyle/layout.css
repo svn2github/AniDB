@@ -218,3 +218,9 @@ margin-bottom: 0.1em;
 {
 padding: 0;
 }
+
+#layout-content div.main_all div.rightbar h4
+{
+	padding-top: 4px;
+	padding-bottom: 4px;
+}

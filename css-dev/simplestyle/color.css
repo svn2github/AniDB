@@ -184,6 +184,11 @@ select
 	color: #46C5FF;
 }
 
+#layout-content div.rightbar li a
+{
+	color:  #FFFFFF;
+}
+
 #layout-content div.main_all h4,
 #layout-content div.main_edit h4
 {
@@ -198,8 +203,6 @@ select
 #layout-content div.main_all div.rightbar h4
 {
 	color: #FFFFFF;
-         background: url(images/punkt.gif) no-repeat;
-         background-position:7px 5px;
 }
 
 #layout-content div.g_timedentry div.body
@@ -287,7 +290,8 @@ select
     background-color: #98CB1B;
 }
 
-.g_bubble
+.g_bubble,
+.g_bubble.stripe > div.data div.name
 {
 	border-color: #46C5FF;
 }

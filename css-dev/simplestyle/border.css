@@ -106,6 +106,7 @@ select
 }
 
 #layout-search form input.text,
+#layout-search form select
 {
     border: 2px solid #D1EDFA;
 }
@@ -113,4 +114,10 @@ select
 .g_bubble
 {
     border-left: 3px solid;
+}
+
+#layout-content div.main_all div.rightbar h4
+{
+	-moz-border-radius: 10px 0 0 0;
+	border-radius: 10px 0 0 0;
 }
