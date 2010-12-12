@@ -139,6 +139,10 @@ select,
 	color:#46C5FF;
 }
 
+#layout-content table.filelist tr.deprecated,
+#layout-content table.filelist tr.deprecated a,
+#layout-content table.filelist tr.good a,
+#layout-content table.filelist tr.invalid a,
 #layout-content tr.high a,
 #layout-content tr.g_odd a,
 #layout-content tr.mod a,
@@ -162,9 +166,31 @@ select,
 	color:#FFFFFF;
 }
 
+#layout-main td ins,
 #layout-main input.include,
+#layout-main table.filelist tr.good,
+#layout-main div.myvotes_all table tr td.high,
+#layout-main div.producer_all table tr.mylist,
+#layout-main div.latest2_all table tr.mylist,
+#layout-main div.latest2_all table tr td.mylist,
+#layout-main div.character_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.animelist_all table tr.mylist,
+#layout-main div.group_released table tr.mylist,
 #layout-main div.forum div.comment div.content strong,
 #layout-main div.forum a.topictitle strong,
+#layout-main div.addcreatoranimerel_all tr.identical,
+#layout-main div.addcreatorsongrel_all tr.identical,
+#layout-main table.animelist tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
+#layout-main div.latestanimes_all div.g_section.mylist tr.mylist td,
+#layout-main div.timeline_all div.timeline ul.row li.completed a,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe.mylist,
+.g_bubble.stripe.mylist,
+.g_bubble.box.mylist > div.top,
 #layout-content div.rightbar li.g_odd,
 #layout-content div.g_filterlist,
 #layout-content ul.g_actionlist,
@@ -172,4 +198,24 @@ select,
 {
 	background-color:#46C5FF;
 	color:#FFFFFF;
+}
+
+#layout-content p.g_vital a
+{
+	color:red;
+}
+
+
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main div.myvotes_all table tr td.low,
+#layout-main div.addcreatoranimerel_all tr.left_only,
+#layout-main div.addcreatorsongrel_all tr.left_only,
+#layout-main div.timeline_all div.timeline ul.row li.stalled a,
+#layout-main table.filelist tr.deprecated
+{
+	background-color: #FF4242;
+	color: #FFFFFF;
 }
