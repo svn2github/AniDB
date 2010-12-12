@@ -1,6 +1,7 @@
-#layout-content ul.g_navlist li
+body,
+#layout-menu
 {
-	padding: 0px;
+	font-size: 10px;
 }
 
 #layout-content ul.g_navlist li:before
@@ -67,4 +68,99 @@
 #layout-menu div.usermenu a.nextnotify
 {
 	font-size: 11px;
+}
+
+#layout-footer:after
+{
+	content: "design by b1nh (AniDB: binhkun)"
+}
+
+span.link,
+a:visited, a:active, a:hover, a:link {
+	text-decoration: none;
+}
+
+#layout-content div.g_definitionlist th
+{
+         font-size: 12px;
+}
+
+#layout-content div.main_all div.rightbar h4
+{
+         font-size: 11px;
+         font-weight: bold;
+}
+
+#layout-content div.main_all div.rightbar p a
+{
+	font-size: 11px;
+	font-weight: bolder;
+}
+
+#layout-menu li
+{
+	text-indent: 0;
+	text-transform:capitalize;
+}
+
+#layout-menu li.forum
+{
+	font-weight: bold;
+}
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
+{
+	content: "!";
+}
+
+#layout-search form input.text,
+#layout-search form select
+{
+	font-size: 13px;
+	font-weight: bold;
+	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
+}
+
+#layout-content caption,
+#layout-content div.profile_all h4
+{
+	font-size: 14px;
+}
+
+#layout-content h1
+{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#layout-menu li.sub-menu ul+span
+{
+font-size: 7em;
+font-weight: 900;
+font-family: "Microsoft Sans Serif", sans-serif;
+}
+
+#layout-menu li.sub-menu
+{
+counter-increment: section 1;
+}
+
+#layout-menu li.sub-menu ul+span:after
+{
+    content: counter(section);
+}
+
+#layout-menu li.sub-menu.account ul+span:after
+{
+    content: "P";
+}
+
+#layout-search div.search:before
+{
+	content: "search";
+    font-family: Arial,Verdana,Tahoma,Helvetica,sans-serif;
+    font-size: 15px;
+    font-weight: bold;
 }

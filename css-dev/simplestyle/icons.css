@@ -73,3 +73,17 @@ img[src*="noup1.gif"] {
 	width: 15px;
 	height: 13px;
 }
+
+#layout-nav
+{
+	background: transparent url(images/header.png) no-repeat;
+	height: 187px;
+}
+
+#layout-menu li.help
+{
+	text-indent: 15px;
+	background-position: left;
+	background-repeat: no-repeat;
+	background-image: url(images/help.gif);
+}

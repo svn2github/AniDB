@@ -1,6 +1,23 @@
+html,
+body.nonav
+{
+	background-color: #FFFFFF;
+}
+
+input, textarea
+{
+    color: #3FB2E7;
+}
+
+input[type="submit"],
+input[type="button"]
+{
+	color: #FFFFFF;
+    background-color: #3FB2E7;
+}
+
 span.link,
 a:visited, a:active, a:hover, a:link {
-	text-decoration: none;
          color: #9CCD17;
 }
 
@@ -84,39 +101,6 @@ select
 #layout-content div.anime_all div.groups th
 {
          color: #46C5FF;
-}
-
-
-#layout-content div.g_definitionlist th
-{
-         font-size: 12px;
-}
-
-#layout-content div.g_definitionlist table
-{
-	border: 2px #9CCD17 solid;
-         padding: 1px;
-}
-
-#layout-content div.g_definitionlist table.relationlist
-{
-	border: 0;
-         padding: 1px;
-}
-
-#layout-content div.myplace_all ul,
-#layout-content div.userpage_all ul,
-#layout-content div.mylist_all ul
-{
-	border: 2px #9CCD17 solid;
-         padding: 3px;
-}
-
-#layout-content div.g_content ul.g_navlist,
-#layout-content div.g_content ul.g_actionlist,
-#layout-content div.g_content ul.g_jumplist
-{
-	border: 0;
 }
 
 #layout-content div.notify_all h3,
@@ -224,10 +208,6 @@ select
 	color: #FFFFFF;
          background: url(images/punkt.gif) no-repeat;
          background-position:7px 5px;
-         padding-left: 19px;
-         font-size: 11px;
-         font-weight: bold;
-         text-align: left;
 }
 
 #layout-content div.g_timedentry div.body
@@ -246,10 +226,6 @@ select
 	color: #9CCD17;
 }
 
-#layout-content div.adduserdata_all tr
-{
-	border-bottom:1px #DFFF89 solid;
-}
 
 #layout-menu a:link,
 #layout-menu a:visited {
@@ -263,4 +239,63 @@ select
 #layout-menu *,
 #layout-menu a:hover {
 	color: #FFFFFF;
+}
+
+#layout-content div.main_all div.rightbar p a
+{
+	color: #FFFFFF;
+}
+
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
+{
+	color: red;
+}
+
+#layout-search form input.text,
+#layout-search form select
+{
+	color: #9CCD17;
+	background-color: #FFFFFF;
+}
+
+#layout-footer
+{
+	color: #92C016;
+}
+
+#layout-content div.g_filterlist,
+#layout-content ul.g_actionlist,
+#layout-content ul.g_navlist
+{
+	background-color: #46C5FF;
+	color: #FFFFFF;
+}
+
+#layout-content caption,
+#layout-content div.profile_all h4
+{
+	color: #46C5FF;
+}
+
+#layout-content h1
+{
+	color: #9CCD17;
+}
+
+#layout-menu li.sub-menu:nth-child(odd)
+{
+    background-color: #47C2FF;
+}
+
+#layout-menu li.sub-menu:nth-child(even)
+{
+    background-color: #98CB1B;
+}
+
+.g_bubble
+{
+	border-color: #46C5FF;
 }

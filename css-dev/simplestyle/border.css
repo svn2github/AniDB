@@ -12,19 +12,10 @@ img, a
 {
 	border: none;
 }
-/*F0FFC9*/
+
 input, textarea
 {
-	border: 1px #9CCD17  solid;
-         padding-left: 2px;
-         color: #3FB2E7;
-}
-
-input[type="submit"],
-input[type="button"]
-{
-	color: #FFFFFF;
-         background-color: #3FB2E7;
+	border: 1px #9CCD17 solid;
 }
 
 select
@@ -32,31 +23,15 @@ select
 	border: 1px #3FB2E7  solid;
 }
 
-#layout-content .g_image image,
-#layout-content .g_definitionlist
-{
-	padding: 1px;
-}
-
-#layout-content .block .g_definitionlist > table
-{
-	margin: 0;
-}
-
-
 #layout-content div.g_definitionlist table
 {
 	border: 2px #9CCD17 solid;
-         padding: 1px;
 }
-
 
 #layout-content div.avatar img,
 #layout-content div.anime_all div.info div.image img
 {
-	border: 1px solid;
-	border-color: #9CCD17;
-	padding: 1px;
+	border: 1px solid #9CCD17;
 }
 
 #layout-content div.anime_all div.mylist tr.heading th,
@@ -67,11 +42,75 @@ select
 
 #layout-content div.anime_all div.episodes tr.heading th
 {
-	padding: 4px 1px 7px 1px;
 	border-bottom: #46C5FF 2px solid;
 }
 
 #layout-content div.anime_all div.episodes tr.newtype td
 {
 	border-top: #46C5FF 2px solid;
+}
+
+#layout-content div.g_definitionlist table
+{
+	border: 2px #9CCD17 solid;
+}
+
+#layout-content div.g_definitionlist table.relationlist
+{
+	border: 0;
+}
+
+#layout-content div.myplace_all ul,
+#layout-content div.userpage_all ul,
+#layout-content div.mylist_all ul
+{
+	border: 2px #9CCD17 solid;
+}
+
+#layout-content div.g_content ul.g_navlist,
+#layout-content div.g_content ul.g_actionlist,
+#layout-content div.g_content ul.g_jumplist
+{
+	border: 0;
+}
+
+#layout-content div.adduserdata_all tr
+{
+	border-bottom:1px #DFFF89 solid;
+}
+
+#layout-search form input.text
+{
+	border: #D1EDFA 2px solid;
+}
+
+#layout-content div.adduserdata_all table
+{
+	border-collapse: collapse;
+}
+
+#layout-content table
+{
+	border:#9CCD17 2px solid;
+}
+
+#layout-content h1
+{
+	border-left:#9CCD17 3px solid;
+}
+
+#layout-menu li.sub-menu
+{
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+#layout-search form input.text,
+{
+    border: 2px solid #D1EDFA;
+}
+
+.g_bubble
+{
+    border-left: 3px solid;
 }

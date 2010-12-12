@@ -1,11 +1,6 @@
-html
+html, body, div
 {
-	background: #FFFFFF;
-}
-
-body.nonav
-{
-	background: #FFFFFF;
+	padding: 0;
 }
 
 #layout-content
@@ -13,58 +8,32 @@ body.nonav
 	margin-left: 202px;
 }
 
-#layout-nav
-{
-	background: transparent url(images/header.png) no-repeat;
-	height: 187px;
-}
-
 #layout-menu
 {
-	background: url(images/menubg.png) no-repeat left 187px;
-	padding-top: 195px;
-	padding-left: 24px;
-	height: 578px;
+    height:auto;
+    padding-left: 13px;
+    padding-top: 187px;
 }
 
-#layout-menu li.sub-menu{
-	width: 108px;
-}
-
-#menu-mod
+#layout-menu li.sub-menu
 {
-	position: absolute;
-	top: 740px;
-	left: 24px;
-	padding: 0px;
+    padding: 0 1.2em 0 1.1em;
+    width: 150px;
+	display: table;
 }
 
 #layout-menu ul
 {
 	line-height: 1.35;
-         width: 170px;
+display: table-cell;
+vertical-align: middle;
+    padding-bottom: 1em;
+    padding-top: 0.8em;
 }
 
 #layout-menu li
 {
 	padding: 0;
-	text-indent: 0;
-	text-transform:capitalize;
-	width: 170px;
-}
-
-#menu-main .random,
-#menu-support .irc,
-#menu-adm
-{
-	display: none;
-}
-
-#menu-main,
-#menu-lists,
-#menu-private
-{
-	margin-bottom: 33px;
 }
 
 #layout-menu ul.my
@@ -72,26 +41,14 @@ body.nonav
 	margin-top: 36px;
 }
 
-#layout-menu li.genre, #layout-menu li.genren
-{
-	display: inline;
-}
-
 #layout-menu li.help
 {
 	padding: 1px 0 0 0;
 	margin-bottom: 2px;
 	display: block;
-	text-indent: 15px;
-	background-position: left;
-	background-repeat: no-repeat;
-	background-image: url(images/help.gif);
 }
 
-#layout-menu li.forum
-{
-	font-weight: bold;
-}
+
 
 #layout-menu span.user
 {
@@ -104,8 +61,6 @@ body.nonav
 #layout-menu #newmessages:after,
 #layout-menu a.history:after
 {
-	content: "!";
-	color: red;
 	padding: 0.2em;
 }
 
@@ -114,28 +69,11 @@ body.nonav
 	display: block;
 }
 
-#layout-search form input.text
-{
-	font-size: 13px;
-	font-weight: bold;
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	color: #9CCD17;
-	background-color: #FFFFFF;
-	border: #D1EDFA 2px solid;
-	width: 180px;
-}
-
 #layout-content h1
 {
 	position: relative;
-	font-size: 16px;
-	font-weight: bold;
 	margin: 0px 0 5px 0px;
-	text-align: left;
-	height: 23px;
-	color: #9CCD17;
 	padding: 4px 0px 0px 13px;
-	border-left:#9CCD17 3px solid;
 }
 
 #layout-content div.g_section
@@ -149,18 +87,6 @@ body.nonav
 	display: none;
 }
 
-#layout-content caption,
-#layout-content div.profile_all h4
-{
-	font-size: 14px;
-	color: #46C5FF;
-}
-
-#layout-content table
-{
-	border:#9CCD17 2px solid;
-}
-
 #layout-content div.g_content div.profile_all
 {
 	text-align: center;
@@ -170,30 +96,125 @@ body.nonav
 #layout-content ul.g_actionlist,
 #layout-content ul.g_navlist
 {
-	background: #46C5FF;
 	padding: 2px;
-	color: #FFFFFF;
-}
-
-#layout-content div.adduserdata_all table
-{
-	border-collapse: collapse;
 }
 
 #layout-footer
 {
 	margin-top: 19px;
 	margin-left: 182px;
-	color: #92C016;
 	text-align: center;
-}
-
-#layout-footer:after
-{
-	content: "design by b1nh (AniDB: binhkun)"
 }
 
 #layout-content div.anime_all div.mylist th.anime
 {
 	width: 300px;
+}
+
+#layout-content .g_image image,
+#layout-content .g_definitionlist
+{
+	padding: 1px;
+}
+
+#layout-content .block .g_definitionlist > table
+{
+	margin: 0;
+}
+
+#layout-content div.g_definitionlist table
+{
+    padding: 1px;
+}
+
+#layout-content div.avatar img,
+#layout-content div.anime_all div.info div.image img
+{
+	padding: 1px;
+}
+
+#layout-content div.anime_all div.episodes tr.heading th
+{
+	padding: 4px 1px 7px 1px;
+}
+
+#layout-content div.g_definitionlist table
+{
+         padding: 1px;
+}
+
+#layout-content div.g_definitionlist table.relationlist
+{
+         padding: 1px;
+}
+
+#layout-content div.myplace_all ul,
+#layout-content div.userpage_all ul,
+#layout-content div.mylist_all ul
+{
+         padding: 3px;
+}
+
+#layout-content ul.g_navlist li
+{
+	padding: 0px;
+}
+
+/*disable tabbing until it's styled properly by the actual css dev if he wants to use it*/
+#layout-tabs {
+	display:none;
+}
+
+#layout-menu li.sub-menu + li.sub-menu
+{
+    margin-top: 1.2em;
+}
+
+#layout-menu li.sub-menu ul+span
+{
+display: table-cell;
+position: relative;
+vertical-align: middle;
+width: 0.5em;
+text-align: right;
+}
+
+#layout-menu li.sub-menu.account
+{
+top: 10px;
+right: 5px;
+position: absolute;
+}
+
+#layout-search {
+    position: absolute;
+    right: 5px;
+    top: 105px;
+}
+
+#layout-search div.search
+{
+float: right;
+width: 170px;
+}
+
+#layout-search div.search input.submit
+{
+display: none;
+}
+
+#layout-search form input.text
+{
+width: 165px;
+}
+
+#layout-search form select
+{
+width: 171px;
+margin-bottom: 0.1em;
+}
+
+#layout-search form > p
+{
+padding: 0;
 }
