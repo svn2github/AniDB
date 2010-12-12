@@ -279,7 +279,6 @@ select,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 #layout-main div.forum ul.topics li.g_odd.row
 {
-	color: #47C2FF;
 	background-color: #FFFFFF;
 }
 
@@ -289,8 +288,8 @@ select,
 	background-color: #98CB1B;
 }
 
-#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row a,
-#layout-main div.forum ul.topics li.g_odd.row a
+#layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row a.topictitle,
+#layout-main div.forum ul.topics li.g_odd.row a.topictitle
 {
 	color: #47C2FF;
 }
