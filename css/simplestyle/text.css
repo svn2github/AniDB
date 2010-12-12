@@ -1,70 +1,156 @@
-#layout-content ul.g_navlist li
-{
-	padding: 0px;
-}
-
 #layout-content ul.g_navlist li:before
 {
-	content: " | "
+	content:" | ";
 }
+
 #layout-content ul.g_navlist li:first-child:before
 {
-	content: "";
+	content:"";
 }
+
 #layout-content ul.g_numonpage li:first-child:before
 {
-	content: "show: ";
+	content:"show: ";
 }
 
 #layout-content div.main_all h4
 {
-	font-size: 18px;
-	line-height: 1.2;
-	font-weight: normal;
+	line-height:1.2;
 }
 
 #layout-content p.g_vital a
 {
-	color: red;
-	font-weight: bolder;
-}
-
-#layout-content div.main_all div.news span.stamp
-{
-	font-size: 11px;
-}
-
-#layout-content div.main_all div.news span.stamp a
-{
-	font-weight: bold;
+	font-weight:bolder;
 }
 
 #layout-menu li.genren:before
 {
-	content: "(";
+	content:"(";
 }
 
 #layout-menu li.genren:after
 {
-	content: ")";
+	content:")";
 }
 
-#layout-menu a {
- 	font-size: 12px;
-         font-weight: bold;
+#layout-menu a
+{
+	font-size:12px;
+	font-weight:bold;
 }
 
-#layout-content div.g_definitionlist a {
-         font-weight: bold;
+#layout-footer:after
+{
+	content:"design by b1nh (AniDB: binhkun)";
 }
 
+span.link,
+a:visited,
+a:active,
+a:hover,
+a:link
+{
+	text-decoration:none;
+}
+
+#layout-content div.g_definitionlist th
+{
+	font-size:12px;
+}
+
+#layout-content div.main_all div.rightbar h4
+{
+	font-size:11px;
+	font-weight:bold;
+}
+
+#layout-content div.main_all div.rightbar p a
+{
+	font-size:11px;
+	font-weight:bolder;
+}
+
+#layout-menu li
+{
+	text-indent:0;
+	text-transform:capitalize;
+}
+
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
+{
+	content:"!";
+}
+
+#layout-search form input.text,
+#layout-search form select
+{
+	font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size:13px;
+	font-weight:bold;
+}
+
+#layout-content caption,
+#layout-content div.profile_all h4
+{
+	font-size:14px;
+}
+
+#layout-content h1
+{
+	font-size:16px;
+	font-weight:bold;
+}
+
+#layout-menu li.sub-menu ul+span
+{
+	font-family:"Microsoft Sans Serif", sans-serif;
+	font-size:7em;
+	font-weight:900;
+}
+
+#layout-menu li.sub-menu
+{
+	counter-increment:section 1;
+}
+
+#layout-menu li.sub-menu ul+span:after
+{
+	content:counter(section);
+}
+
+#layout-menu li.sub-menu.account ul+span:after
+{
+	content:"P";
+}
+
+#layout-search div.search:before
+{
+	content:"search";
+	font-family:Arial, Verdana, Tahoma, Helvetica, sans-serif;
+	font-size:15px;
+	font-weight:bold;
+}
+
+body,
+#layout-menu,
 #layout-menu div.usermenu #newnews
 {
-	font-size: 10px;
+	font-size:10px;
 }
 
+#layout-content div.main_all div.news span.stamp,
 #layout-menu div.usermenu #newnotifies,
 #layout-menu div.usermenu a.nextnotify
 {
-	font-size: 11px;
+	font-size:11px;
+}
+
+#layout-content div.main_all div.news span.stamp a,
+#layout-content div.g_definitionlist a,
+#layout-menu li.forum
+{
+	font-weight:bold;
 }

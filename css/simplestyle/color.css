@@ -1,266 +1,243 @@
-span.link,
-a:visited, a:active, a:hover, a:link {
-	text-decoration: none;
-         color: #9CCD17;
-}
-
-select
+input[type="submit"],
+input[type="button"]
 {
-	color: #46C5FF;
-}
-
-#layout-content div.rightbar li,
-#layout-content div.rightbar li span,
-#layout-content div.rightbar li a
-{
-	color:  #FFFFFF;
-}
-
-/* CHANGES */
-
-#layout-content  tr
-{
-         color: #46C5FF;
-}
-
-#layout-content div.profile_all div.css_style
-{
-         color: #9CCD17;
-}
-
-#layout-content tr span.main
-{
-         color: #46C5FF;
-}
-
-
-#layout-content  tr a
-{
-         color: #46C5FF;
-}
-
-#layout-content  tr.high a
-{
-	color: #FFFFFF;
+	background-color:#3FB2E7;
+	color:#FFFFFF;
 }
 
 #layout-content tr.g_odd,
 #layout-main div.votes_all div.graph div.group_odd,
 #layout-main div.votes_all div.graph.eps div.g_odd
 {
-         background-color: #9CCD17;
-         color: #FFFFFF;
+	background-color:#9CCD17;
+	color:#FFFFFF;
 }
 
 #layout-content tr.g_odd span.main
 {
-         color: #f5f5f5;
-}
-
-#layout-content  tr.g_odd a,
-#layout-content  tr.mod a,
-#layout-content  tr.g_odd td
-{
-         color: #FFFFFF;
-}
-
-#layout-content div.g_filterlist a,
-#layout-content ul.g_actionlist a
-{
-	color: #FFFFFF;
-}
-
-#layout-content table.grouplist th,
-#layout-content tr.g_odd,
-#layout-content li.g_odd,
-#layout-content span.g_odd,
-#layout-content tr.mod
-{
-         color: #FFFFFF;
-}
-
-
-#layout-content div.anime_all div.mylist th,
-#layout-content div.anime_all div.groups th
-{
-         color: #46C5FF;
-}
-
-
-#layout-content div.g_definitionlist th
-{
-         font-size: 12px;
-}
-
-#layout-content div.g_definitionlist table
-{
-	border: 2px #9CCD17 solid;
-         padding: 1px;
-}
-
-#layout-content div.g_definitionlist table.relationlist
-{
-	border: 0;
-         padding: 1px;
-}
-
-#layout-content div.myplace_all ul,
-#layout-content div.userpage_all ul,
-#layout-content div.mylist_all ul
-{
-	border: 2px #9CCD17 solid;
-         padding: 3px;
-}
-
-#layout-content div.g_content ul.g_navlist,
-#layout-content div.g_content ul.g_actionlist,
-#layout-content div.g_content ul.g_jumplist
-{
-	border: 0;
+	color:#f5f5f5;
 }
 
 #layout-content div.notify_all h3,
 #layout-content div.notify_all h4
 {
-	font-size: 14px;
-         color: #3FB2E7;
+	color:#3FB2E7;
+	font-size:14px;
 }
 
 #layout-content div.desc
 {
-	border: 1px #9CCD17 solid;
-         padding: 10px;
-         color: #3FB2E7;
-}
-
-#layout-content p
-{
-         color: #3FB2E7;
-}
-
-#layout-content div.g_filterlist li a,
-#layout-content ul.g_actionlist li a,
-#layout-content ul.g_navlist li a
-{
-	color: #FFFFFF;
+	border:1px #9CCD17 solid;
+	color:#3FB2E7;
+	padding:10px;
 }
 
 #layout-content div.addepm h4
 {
-         font-size: 14px;
-         color: #9CCD17;
+	color:#9CCD17;
+	font-size:14px;
 }
 
-#layout-content td del,
-#layout-content tr.g_fs_lame,
-#layout-content table.filelist tr.invalid,
-#layout-content div.myvotes_all table tr.low td
+#layout-content div.rightbar li
 {
-	background-color: #FF4242;
-         color: #FFFFFF;
+	background-color:#FFFFFF;
+	color:#46C5FF;
 }
 
-#layout-main td ins,
-#layout-main input.include,
-#layout-main table.filelist tr.good,
-#layout-main div.myvotes_all table tr.high td,
-#layout-main div.producer_all table tr.mylist,
-#layout-main div.latest2_all table tr.mylist,
-#layout-main div.latest2_all table tr td.mylist,
-#layout-main div.character_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
-#layout-main div.animelist_all table tr.mylist,
-#layout-main div.group_released table tr.mylist,
-#layout-main div.forum div.comment div.content strong,
-#layout-main div.forum a.topictitle strong,
-#layout-main div.addcreatoranimerel_all tr.identical
+#layout-content div.g_timedentry div.body
 {
-	background-color: #46C5FF;
-         color: #FFFFFF;
+	color:#3FB0E4;
 }
 
-#layout-content table.filelist tr.deprecated,
-#layout-content table.filelist tr.deprecated a,
-#layout-content table.filelist tr.good a,
-#layout-content table.filelist tr.invalid a
+#layout-content div.agcmts_entries div.comment h4
 {
-         color: #FFFFFF;
+	background-color:#969aa6;
 }
 
+#layout-menu a:link,
+#layout-menu a:visited
+{
+	color:#ffffff;
+}
+
+#layout-menu #newmessages:before,
+#layout-menu #newnotifies:before,
+#layout-menu #newmessages:after,
+#layout-menu a.history:after
+{
+	color:red;
+}
+
+#layout-search form input.text,
+#layout-search form select
+{
+	background-color:#FFFFFF;
+	color:#9CCD17;
+}
+
+#layout-footer
+{
+	color:#92C016;
+}
+
+#layout-menu li.sub-menu:nth-child(odd)
+{
+	background-color:#47C2FF;
+}
+
+#layout-menu li.sub-menu:nth-child(even)
+{
+	background-color:#98CB1B;
+}
+
+.g_bubble,
+.g_bubble.stripe > div.data div.name
+{
+	border-color:#46C5FF;
+}
+
+html,
+body.nonav,
 #wysiwyg_0
 {
 	background-color:#FFFFFF;
 }
 
-/* CHANGES END*/
-
-#layout-content div.rightbar li.g_odd
+input,
+textarea,
+#layout-content p
 {
-	background-color: #ffffff;
+	color:#3FB2E7;
 }
 
-#layout-content div.rightbar tr.g_odd a,
-#layout-content div.rightbar li.g_odd a,
-#layout-content div.rightbar span.g_odd a,
-#layout-content div.rightbar li.g_odd span
-{
-	color: #46C5FF;
-}
-
-#layout-content div.main_all h4,
-#layout-content div.main_edit h4
-{
-	color: #46C5FF;
-}
-
-#layout-content div.main_all div.news h4
-{
-	color: #46C5FF;
-}
-
-#layout-content div.main_all div.rightbar h4
-{
-	color: #FFFFFF;
-         background: url(images/punkt.gif) no-repeat;
-         background-position:7px 5px;
-         padding-left: 19px;
-         font-size: 11px;
-         font-weight: bold;
-         text-align: left;
-}
-
-#layout-content div.g_timedentry div.body
-{
-	color: #3FB0E4;
-}
-
-#layout-content div.agcmts_entries div.comment h4
-{
-	background-color: #969aa6;
-}
-
+span.link,
+a:visited,
+a:active,
+a:hover,
+a:link,
+#layout-content div.profile_all div.css_style,
 #layout-content div.main_all div.news span.stamp,
-#layout-content div.main_all div.news span.stamp a
+#layout-content div.main_all div.news span.stamp a,
+#layout-content h1
 {
-	color: #9CCD17;
+	color:#9CCD17;
 }
 
-#layout-content div.adduserdata_all tr
+select,
+#layout-content tr,
+#layout-content tr span.main,
+#layout-content tr a,
+#layout-content div.anime_all div.mylist th,
+#layout-content div.anime_all div.groups th,
+#layout-content div.main_all h4,
+#layout-content div.main_edit h4,
+#layout-content div.main_all div.news h4,
+#layout-content caption,
+#layout-content div.profile_all h4,
+#layout-content div.rightbar li a
 {
-	border-bottom:1px #DFFF89 solid;
+	color:#46C5FF;
 }
 
-#layout-menu a:link,
-#layout-menu a:visited {
-	color: #ffffff;
-}
-
-#layout-menu a:active
-{
-	color: #FFFFFF;
-}
+#layout-content table.filelist tr.deprecated,
+#layout-content table.filelist tr.deprecated a,
+#layout-content table.filelist tr.good a,
+#layout-content table.filelist tr.invalid a,
+#layout-content tr.high a,
+#layout-content tr.g_odd a,
+#layout-content tr.mod a,
+#layout-content tr.g_odd td,
+#layout-content div.g_filterlist a,
+#layout-content ul.g_actionlist a,
+#layout-content table.grouplist th,
+#layout-content tr.g_odd,
+#layout-content li.g_odd,
+#layout-content span.g_odd,
+#layout-content tr.mod,
+#layout-content div.g_filterlist li a,
+#layout-content ul.g_actionlist li a,
+#layout-content div.rightbar li.g_odd a,
+#layout-content div.main_all div.rightbar h4,
+#layout-menu a:active,
 #layout-menu *,
-#layout-menu a:hover {
+#layout-menu a:hover,
+#layout-content div.main_all div.rightbar p a
+{
+	color:#FFFFFF;
+}
+
+#layout-main td ins,
+#layout-main input.include,
+#layout-main table.filelist tr.good,
+#layout-main div.myvotes_all table tr td.high,
+#layout-main div.producer_all table tr.mylist,
+#layout-main div.latest2_all table tr.mylist,
+#layout-main div.latest2_all table tr td.mylist,
+#layout-main div.character_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.creator_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.anime_all div.tabbed_pane_main table tr.mylist,
+#layout-main div.animelist_all table tr.mylist,
+#layout-main div.group_released table tr.mylist,
+#layout-main div.forum div.comment div.content strong,
+#layout-main div.forum a.topictitle strong,
+#layout-main div.addcreatoranimerel_all tr.identical,
+#layout-main div.addcreatorsongrel_all tr.identical,
+#layout-main table.animelist tr.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr td.mylist,
+#layout-main div.latestanimes_all div.g_section.mylist tr.mylist td,
+#layout-main div.timeline_all div.timeline ul.row li.completed a,
+#layout-main div.anime_all div.tabbed_pane_main div.similaranime div.stripe.mylist,
+.g_bubble.stripe.mylist,
+.g_bubble.box.mylist > div.top,
+#layout-main td.g_odd ins,
+#layout-main table.filelist tr.g_odd.good,
+#layout-main div.myvotes_all table tr.g_odd td.high,
+#layout-main div.producer_all table tr.g_odd.mylist,
+#layout-main div.latest2_all table tr.g_odd.mylist,
+#layout-main div.latest2_all table tr.g_odd td.mylist,
+#layout-main div.character_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.creator_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.collection_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.anime_all div.tabbed_pane_main table tr.g_odd.mylist,
+#layout-main div.animelist_all table tr.g_odd.mylist,
+#layout-main div.group_released table tr.g_odd.mylist,
+#layout-main table.animelist tr.g_odd.mylist,
+#layout-main div.song_all div.tabbed_pane_main table tr.g_odd td.mylist,
+#layout-main div.timeline_all div.timeline ul.row.g_odd li.completed a,
+#layout-content div.rightbar li.g_odd,
+#layout-content div.g_filterlist,
+#layout-content ul.g_actionlist,
+#layout-content ul.g_navlist
+{
+	background-color:#46C5FF;
+	color:#FFFFFF;
+}
+
+#layout-content p.g_vital a
+{
+	color:red;
+}
+
+
+#layout-main td del,
+#layout-main tr.g_fs_lame,
+#layout-main input.exclude,
+#layout-main table.filelist tr.invalid,
+#layout-main div.myvotes_all table tr td.low,
+#layout-main div.addcreatoranimerel_all tr.left_only,
+#layout-main div.addcreatorsongrel_all tr.left_only,
+#layout-main div.timeline_all div.timeline ul.row li.stalled a,
+#layout-main table.filelist tr.deprecated,
+#layout-main div.myvotes_all table tr.g_odd td.low,
+#layout-main div.addcreatoranimerel_all tr.right_only,
+#layout-main div.addcreatorsongrel_all tr.right_only,
+#layout-main div.timeline_all div.timeline ul.row.g_odd li.stalled a,
+#layout-main table.filelist tr.g_odd.deprecated,
+#layout-main table.filelist tr.g_odd.invalid
+{
+	background-color: #FF4242;
 	color: #FFFFFF;
 }

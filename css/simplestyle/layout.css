@@ -1,129 +1,47 @@
-html
-{
-	background: #FFFFFF;
-}
-
-body.nonav
-{
-	background: #FFFFFF;
-}
-
 #layout-content
 {
-	margin-left: 202px;
-}
-
-#layout-nav
-{
-	background: transparent url(images/header.png) no-repeat;
-	height: 187px;
+	margin-left:202px;
 }
 
 #layout-menu
 {
-	background: url(images/menubg.png) no-repeat left 187px;
-	padding-top: 195px;
-	padding-left: 24px;
-	height: 578px;
+	height:auto;
+	padding-left:13px;
+	padding-top:187px;
 }
 
-#layout-menu li.sub-menu{
-	width: 108px;
-}
-
-#menu-account
+#layout-menu li.sub-menu
 {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	left: auto;
-	line-height: 1.7;
-	height: 105px;
-	width: 186px;
-	padding: 0 2px 0 0;
-	z-index: 12;
-	font-weight: bold;
-	width: 130px;
-}
-
-#layout-search
-{
-	position: absolute;
-	width: 186px;
-	left: auto;
-	right: 2px;
-	top: 0px;
-	height: 176px;
-	background: transparent url(images/searchbg.png) no-repeat top right;
-	z-index: 10;
-}
-
-#menu-mod
-{
-	position: absolute;
-	top: 740px;
-	left: 24px;
-	padding: 0px;
+	display:table;
+	padding:0 1.2em 0 1.1em;
+	width:150px;
 }
 
 #layout-menu ul
 {
-	line-height: 1.35;
-         width: 170px;
-}
-
-#layout-menu li
-{
-	padding: 0;
-	text-indent: 0;
-	text-transform:capitalize;
-	width: 170px;
-}
-
-#menu-main .random,
-#menu-support .irc,
-#menu-adm
-{
-	display: none;
-}
-
-#menu-main,
-#menu-lists,
-#menu-private
-{
-	margin-bottom: 33px;
+	display:table-cell;
+	line-height:1.35;
+	padding-bottom:1em;
+	padding-top:0.8em;
+	vertical-align:middle;
 }
 
 #layout-menu ul.my
 {
-	margin-top: 36px;
-}
-
-#layout-menu li.genre, #layout-menu li.genren
-{
-	display: inline;
+	margin-top:36px;
 }
 
 #layout-menu li.help
 {
-	padding: 1px 0 0 0;
-	margin-bottom: 2px;
-	display: block;
-	text-indent: 15px;
-	background-position: left;
-	background-repeat: no-repeat;
-	background-image: url(images/help.gif);
-}
-
-#layout-menu li.forum
-{
-	font-weight: bold;
+	display:block;
+	margin-bottom:2px;
+	padding:1px 0 0;
 }
 
 #layout-menu span.user
 {
-	text-align: left;
-	display: block;
+	display:block;
+	text-align:left;
 }
 
 #layout-menu #newmessages:before,
@@ -131,158 +49,143 @@ body.nonav
 #layout-menu #newmessages:after,
 #layout-menu a.history:after
 {
-	content: "!";
-	color: red;
-	padding: 0.2em;
+	padding:0.2em;
 }
 
 #layout-menu #newmessages
 {
-	display: block;
-}
-
-#user-profile a
-{
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	width: 60px;
-	height: 100px;
-}
-
-#user-profile a span
-{
-	display: none;
-}
-
-#user-logout a
-{
-	position: absolute;
-	bottom: 10px;
-	left: 44px;
-	width: 49px;
-	height: 11px;
-}
-
-#layout-search div.search
-{
-	position: absolute;
-	top: 112px;
-	height: 30px;
-	z-index: 11;
-}
-
-#layout-search div.search form
-{
-	display: block;
-	float: right;
-	padding: 0;
-	margin: 0;
-	height: 64px;
-	max-width: 188px;
-}
-
-#layout-search div.search form p
-{
-	margin: 0;
-	padding: 0;
-}
-
-#layout-search select
-{
-	display: none;
-}
-
-#layout-search form input.text
-{
-	display: block;
-	float: right;
-	font-size: 13px;
-	font-weight: bold;
-	font-family: Arial, Verdana, Tahoma, Helvetica, sans-serif;
-	color: #9CCD17;
-	vertical-align: middle;
-	background-color: #FFFFFF;
-	border: #D1EDFA 2px solid;
-	margin: 24px 3px 0 0;
-	width: 179px;
-	height: 17px;
-}
-
-#layout-search form input.submit
-{
-	display: none;
+	display:block;
 }
 
 #layout-content h1
 {
-	position: relative;
-	font-size: 16px;
-	font-weight: bold;
-	margin: 0px 0 5px 0px;
+	margin:0 0 5px;
+	padding:4px 0 0 13px;
+	position:relative;
 	text-align: left;
-	height: 23px;
-	color: #9CCD17;
-	padding: 4px 0px 0px 13px;
-	border-left:#9CCD17 3px solid;
 }
 
 #layout-content div.g_section
 {
-	padding-top: 10px;
-	clear: both;
-}
-
-#layout-content div.info caption
-{
-	display: none;
-}
-
-#layout-content caption,
-#layout-content div.profile_all h4
-{
-	font-size: 14px;
-	color: #46C5FF;
-}
-
-#layout-content table
-{
-	border:#9CCD17 2px solid;
+	clear:both;
+	padding-top:10px;
 }
 
 #layout-content div.g_content div.profile_all
 {
-	text-align: center;
+	text-align:center;
 }
 
 #layout-content div.g_filterlist,
 #layout-content ul.g_actionlist,
 #layout-content ul.g_navlist
 {
-	background: #46C5FF;
-	padding: 2px;
-	color: #FFFFFF;
-}
-
-#layout-content div.adduserdata_all table
-{
-	border-collapse: collapse;
+	padding:2px;
 }
 
 #layout-footer
 {
-	margin-top: 19px;
-	margin-left: 182px;
-	color: #92C016;
-	text-align: center;
-}
-
-#layout-footer:after
-{
-	content: "design by b1nh (AniDB: binhkun)"
+	margin-left:182px;
+	margin-top:19px;
+	text-align:center;
 }
 
 #layout-content div.anime_all div.mylist th.anime
 {
-	width: 300px;
+	width:300px;
+}
+
+#layout-content .block .g_definitionlist > table
+{
+	margin:0;
+}
+
+#layout-content div.anime_all div.episodes tr.heading th
+{
+	padding:4px 1px 7px;
+}
+
+#layout-content div.myplace_all ul,
+#layout-content div.userpage_all ul,
+#layout-content div.mylist_all ul
+{
+	padding:3px;
+}
+
+#layout-menu li.sub-menu + li.sub-menu
+{
+	margin-top:1.2em;
+}
+
+#layout-menu li.sub-menu ul+span
+{
+	display:table-cell;
+	position:relative;
+	text-align:right;
+	vertical-align:middle;
+	width:0.5em;
+}
+
+#layout-menu li.sub-menu.account
+{
+	position:absolute;
+	right:5px;
+	top:10px;
+}
+
+#layout-search
+{
+	position:absolute;
+	right:5px;
+	top:105px;
+}
+
+#layout-search div.search
+{
+	float:right;
+	width:170px;
+}
+
+#layout-search form input.text
+{
+	width:165px;
+}
+
+#layout-search form select
+{
+	margin-bottom:0.1em;
+	width:171px;
+}
+
+#layout-content div.main_all div.rightbar h4
+{
+	padding-bottom:4px;
+	padding-top:4px;
+}
+
+html,
+body,
+div,
+#layout-menu li,
+#layout-content ul.g_navlist li,
+#layout-search form > p
+{
+	padding:0;
+}
+
+#layout-content div.info caption,
+#layout-tabs,
+#layout-search div.search input.submit
+{
+	display:none;
+}
+
+#layout-content .g_image image,
+#layout-content .g_definitionlist,
+#layout-content div.g_definitionlist table,
+#layout-content div.avatar img,
+#layout-content div.anime_all div.info div.image img,
+#layout-content div.g_definitionlist table.relationlist
+{
+	padding:1px;
 }
