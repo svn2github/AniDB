@@ -1,3 +1,8 @@
+.i_inline
+{
+    padding: 2px 9px;
+}
+
 #layout-content
 {
 	margin-left:202px;
@@ -188,4 +193,11 @@ div,
 #layout-content div.g_definitionlist table.relationlist
 {
 	padding:1px;
+}
+
+#layout-main div.profile_all div.tabbed_pane div.default_languages a.i_inline,
+#layout-main div.profile_all div.pane div.settings.block li a.i_inline,
+#layout-main div.profile_all div.pane > ul li a.i_inline
+{
+    padding: 5px 10px 0 7px;
 }
