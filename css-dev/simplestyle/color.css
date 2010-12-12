@@ -133,7 +133,8 @@ select,
 #layout-content div.main_edit h4,
 #layout-content div.main_all div.news h4,
 #layout-content caption,
-#layout-content div.profile_all h4
+#layout-content div.profile_all h4,
+#layout-content div.rightbar li a
 {
 	color:#46C5FF;
 }
@@ -151,8 +152,7 @@ select,
 #layout-content tr.mod,
 #layout-content div.g_filterlist li a,
 #layout-content ul.g_actionlist li a,
-#layout-content ul.g_navlist li a,
-#layout-content div.rightbar li a,
+#layout-content div.rightbar li.g_odd a,
 #layout-content div.main_all div.rightbar h4,
 #layout-menu a:active,
 #layout-menu *,
