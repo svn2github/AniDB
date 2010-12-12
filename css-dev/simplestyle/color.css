@@ -38,8 +38,7 @@ input[type="button"]
 	font-size:14px;
 }
 
-#layout-content div.rightbar li,
-#layout-content div.rightbar li a
+#layout-content div.rightbar li
 {
 	background-color:#FFFFFF;
 	color:#46C5FF;
@@ -153,6 +152,7 @@ select,
 #layout-content div.g_filterlist li a,
 #layout-content ul.g_actionlist li a,
 #layout-content ul.g_navlist li a,
+#layout-content div.rightbar li a,
 #layout-content div.main_all div.rightbar h4,
 #layout-menu a:active,
 #layout-menu *,
