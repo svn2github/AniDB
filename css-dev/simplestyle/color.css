@@ -221,7 +221,6 @@ select,
 	color:red;
 }
 
-
 #layout-main td del,
 #layout-main tr.g_fs_lame,
 #layout-main input.exclude,
@@ -279,6 +278,7 @@ select,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row,
 #layout-main div.forum ul.topics li.g_odd.row
 {
+	color: #000000;
 	background-color: #FFFFFF;
 }
 
@@ -292,6 +292,14 @@ select,
 #layout-main div.forum ul.topics li.g_odd.row a.topictitle
 {
 	color: #47C2FF;
+}
+
+#layout-main div.cmt_entries a.username-colored,
+#layout-main div.forum ul.topics li.row a.topictitle:hover,
+#layout-main div.forum a.username-colored,
+#layout-main div.forum ul.topics li.row a.username-colored
+{
+	color:#AA0000;
 }
 
 #layout-main div.forum ul.topics li.row a
@@ -314,13 +322,6 @@ div.quotebody
 div.quotebody div.quote div.g_odd
 {
 	background-color: #EFEED9;
-}
-
-#layout-main div.cmt_entries a.username-colored,
-#layout-main div.forum a.topictitle:hover,
-#layout-main div.forum a.username-colored
-{
-	color:#AA0000;
 }
 
 #layout-main div.forum div.quickreply textarea
