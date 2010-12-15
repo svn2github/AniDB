@@ -13,6 +13,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 		public override InfoEntry this[StreamType type, int index, EntryKey key] {
 			get {
 				InfoEntry entry;
+
 				foreach(var provider in providers) if((entry = provider[type, index, key]) != null) return entry;
 				return null;
 			}

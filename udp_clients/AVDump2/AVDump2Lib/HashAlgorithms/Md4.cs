@@ -42,7 +42,7 @@ namespace AVDump2Lib.HashAlgorithms {
 		private long hashedLength;
 		private byte[] buffer;
 
-		public Md4() { buffer = new byte[BLOCKLENGTH]; }
+		public Md4() { buffer = new byte[BLOCKLENGTH]; Initialize(); }
 
 		protected override void HashCore(byte[] array, int ibStart, int cbSize) {
 			int n = (int)(hashedLength % BLOCKLENGTH);
@@ -84,11 +84,12 @@ namespace AVDump2Lib.HashAlgorithms {
 			hashedLength = 0;
 		}
 		public void Initialize(InternalState state) {
+			hashedLength = state.hashedLength;
 			A = state.A;
 			B = state.B;
 			C = state.C;
 			D = state.D;
-			hashedLength = state.hashedLength;
+			buffer = (byte[])state.Buffer.Clone();
 		}
 
 		protected byte[] PadBuffer() {
@@ -242,17 +243,19 @@ namespace AVDump2Lib.HashAlgorithms {
 		}
 
 		public struct InternalState {
-			public readonly uint A, B, C, D;
-			public readonly long hashedLength;
+			public uint A, B, C, D;
+			public long hashedLength;
+			public byte[] Buffer;
 
-			public InternalState(long hashedLength, uint A, uint B, uint C, uint D) {
+			public InternalState(long hashedLength, uint A, uint B, uint C, uint D, byte[] Buffer) {
+				this.hashedLength = hashedLength;
 				this.A = A;
 				this.B = B;
 				this.C = C;
 				this.D = D;
-				this.hashedLength = hashedLength;
+				this.Buffer = (byte[])Buffer.Clone();
 			}
 		}
-		public InternalState GetState() { return new InternalState(hashedLength, A, B, C, D); }
+		public InternalState GetState() { return new InternalState(hashedLength, A, B, C, D, buffer); }
 	}
 }

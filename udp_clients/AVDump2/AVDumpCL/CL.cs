@@ -1,20 +1,4 @@
-﻿// Copyright (C) 2009 DvdKhl 
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
-
-/* ###Preprocessor Directives###
+﻿/* ###Preprocessor Directives###
  * CreateProviderLogs	    (Needs Debug)
  * UseNullStream		    (Needs Debug)
  * UseFileExtensionCheck    
@@ -28,18 +12,20 @@
 */
 
 #define Debug
+/**/
 //#define DebugRelease
 
 #if(DebugRelease)
 #define Debug
 #define HasACreq
 #define UseFileExtensionCheck
+//#define UseNullStream
 
 #elif(Debug)
 #define HasACreq
-#define SetArgumentsIfNull
+#define SetArguments
 #define UseFileExtensionCheck
-#define UseNullStream
+//#define UseNullStream
 
 #elif(Release)
 #define HasACreq
@@ -70,6 +56,8 @@ using System.Xml;
 using System.Text;
 
 namespace AVDump2CL {
+
+
 	public class CL {
 		#region Fields
 		private static Dictionary<char, eSwitches> char2SwitchEnum;
@@ -85,6 +73,7 @@ namespace AVDump2CL {
 		private static string doneListPath;
 		private static string hashListPath;
 		private static string acErrListPath;
+		private static string extDiffListPath;
 
 
 		private static string hashLogStyle;
@@ -112,10 +101,10 @@ namespace AVDump2CL {
 			mediaLst = new List<string>();
 			doneListContent = new List<string>();
 
-			dumpableExtensions = new List<String>(new string[] { "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			dumpableExtensions = new List<String>(new string[] { "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
 			dumpableExtensions.Sort();
 
-			processExtensions = new List<string>(new string[] { "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			processExtensions = new List<string>(new string[] { "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
 			processExtensions.Sort();
 
 			char2SwitchEnum = new Dictionary<char, eSwitches>();
@@ -148,19 +137,70 @@ namespace AVDump2CL {
 			char2SwitchEnum['e'] = eSwitches.PrintEd2kLink; //Done
 			char2SwitchEnum['d'] = eSwitches.PrintAniDBLink; //Done
 			char2SwitchEnum['D'] = eSwitches.OpenInBrowser; //Done
+
+
 		}
 
 		static void Main(string[] args) {
 			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
 			Console.OutputEncoding = new System.Text.UTF8Encoding(false);
 
-#if(SetArgumentsIfNull)
+#if(SetArguments)
+			//if(!ParseClOptions(ArgsParser.Parse("-pya -hlog:\"$CRC32$ $ED2K$\":hlog.txt").ToArray())) return;
 			if(!ParseClOptions(SetArguments())) return;
 #else
-			if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
-#endif
-			ProcessMedia(new List<string>(mediaLst));
+			args = ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray();
 
+			if(args.Length == 0) {
+				Console.WriteLine("Error while parsing commandline arguments");
+				Console.WriteLine("Press any alpha-numeric key to continue");
+				Pause();
+				return;
+			}
+
+			try {
+				if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
+			} catch(Exception) {
+				Console.WriteLine("Error while interpreting commandline arguments");
+				Console.WriteLine("Press any alpha-numeric key to continue");
+				Pause();
+				return;
+			}
+
+#endif
+
+#if(UseNullStream)
+			Dictionary<string, IBlockConsumer> blockConsumers;
+			int i = 1010;
+
+
+			var container = CreateContainer(blockCount, blockSize);
+			while(true) {
+
+				Console.WriteLine("\n\n" + i);
+
+				var length = 2048;
+				//var length = (new Random().Next(0, 1024 * 1024) * 1024) + i;
+				//File.WriteAllBytes("test.bin", new byte[length]);
+				var e = new FileEnvironment(appVersion, container, null, DateTime.Now, 1, 0, length, 0);
+				ExecuteBlockConsumers(e, out blockConsumers);
+				container.Reset();
+
+				//var tigerThex = (TigerThex)(((HashCalculator)blockConsumers["TIGERThex"]).HashObj);
+				//var tigerforTTH = (TigerForTTH)(((HashCalculator)blockConsumers["TIGER"]).HashObj);
+
+				//if(!tigerThex.Hash.SequenceEqual(tigerforTTH.Hash)) {
+				//    Console.WriteLine("Hash");
+				//    Pause();
+				//}
+
+				if((switches & eSwitches.PauseWhenFileDone) != 0) Pause();
+				i++;
+			}
+#endif
+
+
+			ProcessMedia(new List<string>(mediaLst));
 			if((switches & eSwitches.MonitorFolder) != 0) MonitorFiles();
 
 			if((switches & eSwitches.PauseWhenDone) != 0) {
@@ -169,58 +209,63 @@ namespace AVDump2CL {
 			}
 		}
 		private static string[] SetArguments() {
+			//return File.ReadAllLines("diff.txt").Select(str => str.Split('\t')[1]).OrderBy(str => str).Concat(new string[]{ "-extdiff:diff2.txt", "-qy" }).ToArray();
+	 
 			return new string[] {
-				//@"G:\Anime\!Movies\Metropolis.mkv",
-				//@"G:\Anime\!Movies\[zx] Koukaku Kidoutai 2.0 - Full Movie.mkv",
-				//@"D:\My Stuff\Downloads\Hitou Meguri The Animation (Hentai) (Episode 001) [9BDBC2AC] [Shippon].mkv",
-				//@"D:\My Stuff\Downloads\Usavich__Episode_022___8CBC6674___RANDOMFAGGOTS_.mkv",
-				@"D:\Anime\",
-				//@"D:\Anime\Stalled2\2008\Tentai Senshi Sunred\Tentai Senshi Sunred 05 - FIGHT.05 [ANBU][DTV][848x480].mkv",
-				//@"D:\My Stuff\Downloads\Tenchi Muyou! (Episode 023) [DA3523AA] [zx].ogm",
-				//@"D:\My Stuff\Downloads\Tenchi Muyou! (Episode 010) [5BAA3E45] [zx].ogm",
-				//@"E:\Anime\Processed\Bleach\",
-				//@"D:\My Stuff\Downloads\undumpable mp3s\undumpable mp3s\01 神様のいうとおり.MP3",
-				//@"E:\Anime\DL\[Mazui]_Ookami-san_-_09_[29E885FA].mkv",
-				//@"D:\My Stuff\Downloads\H2 - 33 - [ILA].ogm",
-				//@"D:\My Stuff\Downloads\Gensou Maden Saiyuuki - 13 - [ASS].ogm",
-				//@"E:\Anime\DL\[Commie] Shiki - 04 [0A9F1BCF].mkv",
-				//@"E:\Anime\bla.txt",
-				//@"H:\Anime\Stalled\Groove Adventure Rave [Soldats-Choco]\Groove Adventure Rave - 50 -Choco.avi", //(15*9500*1024)
-				//@"H:\Anime\Stalled\Groove Adventure Rave [Soldats-Choco]\Groove Adventure Rave - 50 -Choco.avi", //(15*9500*1024)
-				//@"E:\Anime\DL\out.mkv",
-				//@"E:\Anime\DL\[Rip] Apocalypse Zero\[RiP] Apocalypse Zero - 01 [71C75E2D].mkv",
-				//@"D:\Anime\Stalled\[Ripped & Encoded By Ra-Calium] - [H264 - AC3] - [Weiss Kreuz]\[Ripped & Encoded by Ra-Calium] - [Weiss Kreuz] - [H264 - AC3] - [Episode 10] - [Bruder].mkv",
-				//@"E:\Anime\DL\cor.tv.dnangel\cor.tv.dnangel.20.[B3D5C421].mkv",
-				//@"E:\Anime\Stalled\ponyo_on_the_cliff_by_the_sea[1920x1040.h264.flac.ac3][niizk].mkv",		
-				//@"E:\Anime\Stalled\Mouryou no Hako[Aero] 4v2 - The Kasha Incident.mkv",
-				//@"D:\My Stuff\Downloads\[Mazui_DudeeBalls-Remux]_Ookami-san_-_06_[720p].mkv",
-				//@"E:\Anime\DL\[Doki] Shukufuku no Campanella - 05 (848x480 h264 AAC) [4F458D98].mkv",
-				//@"G:\Anime\[Done]Devil May Cry\[AonE-Conclave] Devil May Cry 05 - Mission 05 in Private.mp4",
-				//@"H:\Anime\Stalled\[a4e]Alien_Nine\[a4e]Alien_Nine_01[divx5.05].ogm",
-				//@"F:\Anime\Rurouni Kenshin\Rurouni Kenshin - The Motion Picture.ogm",
-				//@"G:\Anime\!Movies\[zx] Hotaru no Haka - Complete Movie.ogm",
-				//@"Z:\Node D\Music\Blind Guardian\Tokyo Tales\Blind Guardian - Tokyo Tales - 08 - Majesty.ogg",
-				//@"G:\Anime\[Done]InuYasha\[AHQ] Inuyasha - 022 - A Wicked Smile; Kikyo's Wandering Soul.ogm",
-				//@"G:\Anime\[Done]Slayers\Movies\[A-Supreme] Slayers Return - Complete Movie.ogm",
-				"-p01256",
-				//"-log:log.xml",
+				//@"\\ROADRUNNER\Nods\Node A\Music",
+				//@"\\ROADRUNNER\Nods\Node A\Music\vivaldi, mozart, beethoven, chopin, ravel - ravel - bolero de ravel.mp3",
+				//@"F:\Anime",
+				@"\\ROADRUNNER\Nods\Node A\Media\Stargate.Universe.S02E10.720p.HDTV.x264-CTU.mkv",
+				//@"F:\Anime\[Done]InuYasha\Movies\[AHQ] Inuyasha I - Toki wo Koeru Omoi - Part 2 of 2.mkv",
+				//@"F:\Anime\Love Hina Again",
+				//@"E:\Anime\Now\1989\Ys\Ys 1 - Prologue [KRT][DVD][640x480].avi",
+				//@"D:\My Stuff\µT\Anime\Tenchi Universe\zx.tenchi-universe.05.divx5.ogm",
+				//@"D:\My Stuff\Downloads\New folder (2)\Mahou no Rouge Lipstick (Hentai) (Episode 001) [01F18A1F].rm",
+				//@"D:\My Stuff\Downloads\New folder (2)\186e4a23.rmvb",
+				//@"D:\My Stuff\Downloads\New folder (2)",
+				//@"D:\My Stuff\Downloads\New folder (2)\(rar--m1a mpa1 mp1 m2a mpa2 mp2 mp3) Black.Eyed.Peas.-.Monkey.Business.-.2005.-.Mp3-VBRkbps.rar",
+				//@"D:\My Stuff\Downloads\New folder (2)\New folder (3)\Taiko Drums (Japanese Festival Music).mp3",
+				//@"F:\Anime\[Done]Cowbow Bebop\Cowboy Bebop - Tengoku no Tobira Complete Movie [THORA][Blu-ray].mkv",
+				//@"D:\My Stuff\Downloads\New folder (4)\Gakuen no Shuryousha (Hentai) (Episode 001) [1A82A0D8] [myd].ogm",
+				//@"E:\Anime\Stalled\1995\Tenchi Muyou!\Tenchi Muyou! 01 - No Need For Discussions! [zx][DVD][640x480].ogm",
+				//@"D:\My Stuff\Downloads\New folder (4)\Afro Samurai (Episodes 001-005) [287F0519] [THORA].mkv",
+				//@"F:\Anime\[Done]Juubee Ninpuuchou\[AQAN] Juubee Ninpuuchou - Ryuuhougyoku Hen 01 - Mujan, the Hidden Village.ogm",
+				//@"E:\Anime\Processed\One Piece\One Piece 460 - An Enormous Fleet Appears - The Whitebeard Pirates Invade! [Yibis][HDTV].mkv",
+				//@"E:\Anime\Processed\One Piece\One Piece\One Piece Episode of Chopper Plus - Fuyu ni Saku, Kiseki no Sakura\One Piece Episode of Chopper Plus - Fuyu ni Saku, Kiseki no Sakura 1 - Complete Movie [N - F][DTV].mp4",
+				//@"E:\Anime\Processed\One Piece\One Piece Norowareta Seiken\One Piece Norowareta Seiken 1v2 - Complete Movie [K-F][DVD].mp4",
+				//@"D:\My Stuff\Downloads\New folder (2)\",
+				//@"D:\My Stuff\Downloads\New folder (2)\",
+				"-qYa",
+				//"-hlog:\"$CRC$ $ED2K$\":hlog.txt",
+				"-bsize:10:10",
+				//"-log:ogmlog2.xml",
+				"-log:bla.xml",
 				//"-acerr:acerr.txt",
 				//"-ac:arokh:Anime",
-				//"-ext:avi,mpg,mpeg,mp4,rm,asf,flv",
-				"-ext:avi",
+				//"-host:ommina.homeip.net:9002",
+				//"-ac:arokh:containers",
+				//"-ext:mp4",
+				//"-ext:srt,ass,ssa,swf",
+				//"-extdiff:diff.txt",
 				//"-done:done.txt"
 			};
 		}
 
 		private static bool ParseClOptions(string[] args) {
-			if(args.Length == 0) { Console.WriteLine(help); Pause(); return false; }
+			if(args.Length == 0) { HelpPrinter(); Pause(); return false; }
 
+			bool firstDeleteCharSet = false;
 			bool invalidCl = false;
 			string[] parts;
 			for(int i = 0;i < args.Length;i++) {
 				if(args[i][0].Equals('-')) {
 					args[i] = args[i].Substring(1);
 					parts = args[i].Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+
+					if(parts.Length == 0) continue;
+
+					for(int j = 0;j < parts.Length;j++) parts[j] = parts[j].Replace("|Colon|", ":");
+
 				} else {
 					mediaLst.Add(args[i]);
 					continue;
@@ -239,23 +284,33 @@ namespace AVDump2CL {
 						try {
 							hashLogStyle = parts[1];
 							hashListPath = Path.Combine(AppPath, parts[2]);
-
-							//hashListStream = System.IO.File.Open(parts[2], FileMode.Append, FileAccess.Write);
+							if(!Directory.Exists(hashListPath)) Directory.CreateDirectory(Path.GetDirectoryName(hashListPath));
 						} catch(Exception) { invalidCl = true; }
 
 					} else if(parts[0] == "exp") {
 						try {
 							ed2kListPath = Path.Combine(AppPath, parts[1]);
-							//ed2kListStream = System.IO.File.Open(parts[1], FileMode.Append, FileAccess.Write);
+							if(!Directory.Exists(ed2kListPath)) Directory.CreateDirectory(Path.GetDirectoryName(ed2kListPath));
 						} catch(Exception) { invalidCl = true; }
 
 					} else if(parts[0] == "ext") {
-						processExtensions = new List<string>(parts[1].ToLower().Split(','));
-						processExtensions.Sort();
+						var exts = parts[1].ToLower().Split(',');
+						invalidCl = exts.Any(str => str.StartsWith("-")) && !exts.All(str => str.StartsWith("-"));
+
+						if(!invalidCl) {
+							if(exts[0][0] == '-') {
+								foreach(var ext in exts) processExtensions.Remove(ext.Substring(1));
+							} else {
+								processExtensions = new List<string>(exts);
+								processExtensions.Sort();
+							}
+						}
+
+
 					} else if(parts[0] == "log") {
 						try {
 							logPath = Path.Combine(AppPath, parts[1]);
-							//logStream = System.IO.File.Open(parts[1], FileMode.Append, FileAccess.Write);
+							if(!Directory.Exists(logPath)) Directory.CreateDirectory(Path.GetDirectoryName(logPath));
 						} catch(Exception) { invalidCl = true; }
 
 					} else if(parts[0] == "lport") {
@@ -264,6 +319,7 @@ namespace AVDump2CL {
 					} else if(parts[0] == "done") {
 						try {
 							doneListPath = Path.Combine(AppPath, parts[1]);
+							if(!Directory.Exists(doneListPath)) Directory.CreateDirectory(Path.GetDirectoryName(doneListPath));
 							if(File.Exists(doneListPath)) {
 								doneListContent.AddRange(File.ReadAllText(doneListPath).ToLower().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
 								doneListContent.Sort();
@@ -272,6 +328,12 @@ namespace AVDump2CL {
 					} else if(parts[0] == "acerr") {
 						try {
 							acErrListPath = Path.Combine(AppPath, parts[1]);
+							if(!Directory.Exists(acErrListPath)) Directory.CreateDirectory(Path.GetDirectoryName(acErrListPath));
+						} catch(Exception) { invalidCl = true; }
+					} else if(parts[0] == "extdiff") {
+						try {
+							extDiffListPath = Path.Combine(AppPath, parts[1]);
+							if(!Directory.Exists(extDiffListPath)) Directory.CreateDirectory(Path.GetDirectoryName(extDiffListPath));
 						} catch(Exception) { invalidCl = true; }
 
 					} else if(parts[0] == "tout" && parts.Length == 3) {
@@ -281,6 +343,8 @@ namespace AVDump2CL {
 					} else if(parts[0] == "bsize" && parts.Length == 3) {
 						if(!int.TryParse(parts[1], out blockSize)) invalidCl = true;
 						if(!int.TryParse(parts[2], out blockCount)) invalidCl = true;
+						blockSize = blockSize < 512 ? 512 : (blockSize > 64 * 1024 ? 64 * 1024 : blockSize);
+						blockCount = blockCount < 1 ? 1 : (blockCount > 64 ? 64 : blockCount);
 
 					} else if(parts[0] == "host" && parts.Length == 3) {
 						hostAddress = parts[1];
@@ -292,7 +356,20 @@ namespace AVDump2CL {
 					}
 
 				} else {
-					foreach(char sw in parts[0]) if(char2SwitchEnum.ContainsKey(sw)) switches |= char2SwitchEnum[sw]; else invalidCl = true;
+
+					foreach(char sw in parts[0]) {
+
+						if(char2SwitchEnum.ContainsKey(sw)) {
+							eSwitches s = char2SwitchEnum[sw];
+							if(s == eSwitches.DeleteFileWhenDone && !firstDeleteCharSet) {
+								firstDeleteCharSet = true;
+							} else {
+								switches |= char2SwitchEnum[sw];
+							}
+						} else {
+							invalidCl = true;
+						}
+					}
 				}
 
 				if(invalidCl) {
@@ -301,11 +378,23 @@ namespace AVDump2CL {
 					return false;
 				}
 			}
+
+			if((switches & (eSwitches.PrintEd2kLink | eSwitches.PrintAniDBLink | eSwitches.OpenInBrowser)) != 0 || ed2kListPath != null) {
+				switches |= eSwitches.Ed2k;
+			}
+
+			if((switches & eSwitches.DeleteFileWhenDone) == 0 && firstDeleteCharSet) {
+				Console.WriteLine("Set the z switch twice to confirm file deleting (no Recycle Bin!). Aborting!\nPress any alpha-numeric key to exit");
+				Pause();
+				return false;
+			}
+
 			return true;
 		}
 
 		private static void MonitorFiles() {
-			while(true) {
+			mediaLst = (from media in mediaLst where Directory.Exists(media) select media).ToList();
+			while(mediaLst.Count != 0) {
 				Console.WriteLine("Monitoring folders, press Ctrl+C to stop");
 				Thread.Sleep(monitorSleepDuration);
 				if(!isProcessing) ProcessMedia(new List<string>(mediaLst));
@@ -362,20 +451,20 @@ namespace AVDump2CL {
 			WriteLogs(e, blockConsumers, infoProvider);
 			HandleSwitches(e, blockConsumers);
 
-			if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalMilliseconds.ToString() + "ms");
+			if((switches & eSwitches.PrintTimeUsedPerFile) != 0) Console.WriteLine("Time elapsed for file: " + (DateTime.Now - startTime).TotalSeconds.ToString() + "s");
 
 			Console.WriteLine(); Console.WriteLine();
 		}
 		private static void ExecuteBlockConsumers(FileEnvironment e, out Dictionary<string, IBlockConsumer> blockConsumers) {
 			Stream fileStream;
 #if(Debug && UseNullStream)
-			//fileStream = new RandomStream(1024 * 1024 * 1024);
-			fileStream = new NullStream(1024 * 1024 * 1024);
+			//fileStream = new RandomStream(e.TotalBytes);
+			fileStream = new NullStream(e.TotalBytes);
 #else
 			try {
-				fileStream = File.Open(e.File.FullName, FileMode.Open, FileAccess.Read, FileShare.None);
+				fileStream = File.Open(e.File.FullName, FileMode.Open, FileAccess.Read, FileShare.Read);
 			} catch(Exception ex) {
-				Console.WriteLine(ex.Message);
+				Console.WriteLine(ex.Message + "\n");
 				blockConsumers = null;
 				return;
 			}
@@ -385,6 +474,7 @@ namespace AVDump2CL {
 				Boolean isMatroska = MatroskaParser.IsMatroskaFile(fileStream);
 				Boolean isOgmOgg = OgmOggParser.IsOgmOggFile(fileStream);
 
+				BlockConsumerContainer.Progress progress = null;
 				if((switches & eSwitches.UseAllHashes) != 0 || isMatroska || isOgmOgg) {
 
 #if(Debug && UseAICHHash)
@@ -400,15 +490,15 @@ namespace AVDump2CL {
 					if(isMatroska) e.Container.AddBlockConsumer("Matroska");
 					if(isOgmOgg) e.Container.AddBlockConsumer("Ogm/Ogg");
 
-					BlockConsumerContainer.Progress progress = e.Container.Start(fileStream);
+					progress = e.Container.Start(fileStream);
+				}
 
-					if((switches & eSwitches.SupressProgress) == 0) {
-						try {
-							DisplayHashBuffer(e, progress);
-						} catch(Exception ex) {
-							Console.WriteLine();
-							e.AddException("Error in DisplayHashBuffer", ex);
-						}
+				if((switches & eSwitches.SupressProgress) == 0) {
+					try {
+						DisplayBuffer(e, progress);
+					} catch(Exception ex) {
+						Console.WriteLine();
+						e.AddException("Error in DisplayBuffer", ex);
 					}
 				}
 
@@ -421,8 +511,14 @@ namespace AVDump2CL {
 			}
 		}
 		private static void WriteLogs(FileEnvironment e, Dictionary<string, IBlockConsumer> blockConsumers, InfoProviderBase p) {
+
+
 			#region Generate/Write Logs
-			string log = e.File.FullName + Environment.NewLine;
+			string log = "";
+			if((switches & (eSwitches.CreqXmlFormat | eSwitches.NewCreqXmlFormat | eSwitches.MediaInfoXMLOutPut | eSwitches.MediaInfoOutPut)) != 0) {
+				log = e.File.FullName + Environment.NewLine;
+			}
+
 			if((switches & eSwitches.CreqXmlFormat) != 0) {
 				var tw = new StringWriter();
 				Info.CreateAVDumpLog(p).Save(new SafeXmlWriter(tw));
@@ -469,6 +565,11 @@ namespace AVDump2CL {
 			}
 #endif
 
+			var detExt = p[StreamType.General, 0, EntryKey.Extension] != null ? p[StreamType.General, 0, EntryKey.Extension].Value : null;
+			if(!string.IsNullOrEmpty(extDiffListPath) && !string.IsNullOrEmpty(detExt) && !detExt.ToLower().Equals(e.File.Extension.Substring(1).ToLower())) {
+				File.AppendAllText(extDiffListPath, e.File.Extension.Substring(1) + " => " + detExt + "	" + e.File.FullName + Environment.NewLine);
+			}
+
 			#region DoneLog Stream Writing
 			if(doneListPath != null && (wasACreqSent || username == null || password == null) && e.Exceptions.Count == 0) {
 				File.AppendAllText(doneListPath, e.File.FullName + Environment.NewLine);
@@ -481,13 +582,13 @@ namespace AVDump2CL {
 			Ed2k ed2k = null;
 			if(blockConsumers.ContainsKey("ED2K")) ed2k = (Ed2k)((HashCalculator)blockConsumers["ED2K"]).HashObj;
 			if(ed2k != null) {
-				byte[] blueEd2kHash = ed2k.RedHash; //Handle Ed2k screwup
+				byte[] blueEd2kHash = ed2k.BlueHash; //Handle Ed2k screwup
 				byte[] redEd2kHash = ed2k.Hash;
 
 				if(ed2kListPath != null) {
-					string ed2kStr = "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse) + "|/";
+					string ed2kStr = "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.Hash) + "|/";
 					if(!ed2k.BlueIsRed) {
-						ed2kStr += "*" + "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.RedHash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse) + "|/";
+						ed2kStr += "*" + "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.BlueHash) + "|/";
 					}
 					File.AppendAllText(ed2kListPath, ed2kStr + Environment.NewLine);
 				}
@@ -498,16 +599,16 @@ namespace AVDump2CL {
 			if(hashListPath != null) {
 				string formattedStr = hashLogStyle;
 				foreach(HashCalculator hashExecute in blockConsumers.Values.Where(blockConsumer => { return blockConsumer is HashCalculator; })) {
-					if(hashExecute.HashObj is Ed2k) {
-						string ed2kStr = "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(hashExecute.HashObj.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse) + "|/";
-						if(!((Ed2k)hashExecute.HashObj).BlueIsRed) {
-							ed2kStr += "*" + "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(((Ed2k)hashExecute.HashObj).RedHash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse) + "|/";
-						}
+					//if(hashExecute.HashObj is Ed2k) {
+					//    string ed2kStr = "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(hashExecute.HashObj.Hash) + "|/";
+					//    if(!((Ed2k)hashExecute.HashObj).BlueIsRed) {
+					//        ed2kStr += "*" + "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(((Ed2k)hashExecute.HashObj).BlueHash) + "|/";
+					//    }
 
-						formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", ed2kStr);
-					} else {
-						formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", BaseConverter.ToString(hashExecute.HashObj.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse));
-					}
+					//    formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", ed2kStr);
+					//} else {
+						formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", BaseConverter.ToString(hashExecute.HashObj.Hash));
+					//}
 				}
 				File.AppendAllText(hashListPath, formattedStr + Environment.NewLine);
 			}
@@ -518,13 +619,13 @@ namespace AVDump2CL {
 			if(blockConsumers.ContainsKey("ED2K")) ed2k = (Ed2k)((HashCalculator)blockConsumers["ED2K"]).HashObj;
 
 			if((switches & eSwitches.OpenInBrowser) != 0 || (switches & eSwitches.PrintAniDBLink) != 0) {
-				string aniDBLink = "http://anidb.info/perl-bin/animedb.pl?show=file&size=" + e.File.Length + "&hash=" + BaseConverter.ToString(ed2k.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse);
+				string aniDBLink = "http://anidb.info/perl-bin/animedb.pl?show=file&size=" + e.File.Length + "&hash=" + BaseConverter.ToString(ed2k.Hash);
 				if((switches & eSwitches.OpenInBrowser) != 0) System.Diagnostics.Process.Start(aniDBLink);
 				if((switches & eSwitches.PrintAniDBLink) != 0) Console.WriteLine(aniDBLink);
 			}
-			if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine("ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse) + "|/");
+			if((switches & eSwitches.PrintEd2kLink) != 0) Console.WriteLine("ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.Hash) + "|/");
 
-			//if((switches & eSwitches.DeleteFileWhenDone) != 0 && !error) System.IO.File.Delete(filePath);
+			if((switches & eSwitches.DeleteFileWhenDone) != 0 && e.Exceptions.Count == 0) System.IO.File.Delete(e.File.FullName);
 			if((switches & eSwitches.PauseWhenFileDone) != 0) {
 				Console.WriteLine("Press any alpha-numeric key to continue");
 				Pause();
@@ -534,7 +635,7 @@ namespace AVDump2CL {
 #if(HasACreq)
 		private static ACreqResult DoACreq(FileEnvironment e, InfoProviderBase infoProvider) {
 			MemoryStream stream = new MemoryStream();
-			Info.CreateAVDumpLog(infoProvider).Save(new SafeXmlWriter(stream, new UTF8Encoding()));
+			Info.CreateAVDumpLog(infoProvider).Save(new SafeXmlWriter(stream, new UTF8Encoding(), Formatting.None));
 			byte[] creqBytes = stream.ToArray();
 
 			try {
@@ -542,7 +643,7 @@ namespace AVDump2CL {
 				ACreqResult result;
 				do {
 					Console.Write("Sending Creq... ");
-					result = ACreq.Commit(new ACreqArgs("avdumplib", 1, hostAddress, hostPort, localPort, username, password, creqBytes, (eSwitches.WaitForDumpReply & switches) != 0 ? timeout * 1000 : -1));
+					result = ACreq.Commit(new ACreqArgs("avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, creqBytes, (eSwitches.WaitForDumpReply & switches) != 0 ? timeout * 1000 : -1));
 					tries++;
 					switch(result) {
 						case ACreqResult.ACreqSent: Console.WriteLine("Done."); break;
@@ -564,95 +665,110 @@ namespace AVDump2CL {
 		}
 #endif
 
-		private static void DisplayHashBuffer(FileEnvironment e, BlockConsumerContainer.Progress progress) {
+		private static void DisplayBuffer(FileEnvironment e, BlockConsumerContainer.Progress progress) {
 			double bufferSize = 0; int charCount = 0; long bytesProcessed = 0;
 			int lastLineIndex = 0, maxNameLength = 0;
-			long fileSize = progress.StreamSize;
+			long fileSize = e.File.Length;
 			string output;
 
-			Average[] mean = new Average[progress.BlockConsumerCount];
-			for(int i = 0;i < mean.Length;i++) mean[i] = new Average();
-			for(int i = 0;i < progress.BlockConsumerCount;i++) if(maxNameLength < progress.Name(i).Length) maxNameLength = progress.Name(i).Length + 1;
-			if(maxNameLength < "Progress".Length) maxNameLength = "Progress".Length;
+			Average[] mean = null;
+			if(progress != null) {
+				mean = new Average[progress.BlockConsumerCount];
+				for(int i = 0;i < mean.Length;i++) mean[i] = new Average();
+				for(int i = 0;i < progress.BlockConsumerCount;i++) if(maxNameLength < progress.Name(i).Length) maxNameLength = progress.Name(i).Length + 1;
+				if(maxNameLength < "Progress".Length) maxNameLength = "Progress".Length;
 
-			Console.CursorVisible = false;
-			output = "Bar: Buffer usage | blocksize: " + blockSize + "KB | blockCount: " + blockCount + "\n";
+				Console.CursorVisible = false;
+				output = "Bar: Buffer usage | blocksize: " + blockSize + "KB | blockCount: " + blockCount + "\n";
 
-			for(int i = 0;i < progress.BlockConsumerCount;i++) {
-				output += progress.Name(i).PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.BufferWidth - maxNameLength - 4) + "]\n";
+				for(int i = 0;i < progress.BlockConsumerCount;i++) {
+					output += progress.Name(i).PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.BufferWidth - maxNameLength - 4) + "]\n";
+				}
+				output += "\n" + "Progress".PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.BufferWidth - maxNameLength - 4) + "]\n\n";
+
+				Console.Write(output);
 			}
-			output += "\n" + "Progress".PadRight(maxNameLength + 1) + "[" + "".PadRight(Console.BufferWidth - maxNameLength - 4) + "]\n\n";
 
-			Console.Write(output);
 			lastLineIndex = Console.CursorTop;
 
 			bool doLoop;
 			int barLength = Console.BufferWidth - maxNameLength - 4;
 			do {
-				doLoop = !progress.HasFinished;
+				doLoop = progress != null && !progress.HasFinished;
 
-				bytesProcessed = 0;
-				for(int i = 0;i < progress.BlockConsumerCount;i++) {
-					mean[i].Add(progress.BlockCount(i));
-					bufferSize = mean[i].Calc(10);
-					if(bytesProcessed > progress.ProcessedBytes(i) || bytesProcessed == 0) bytesProcessed = progress.ProcessedBytes(i);
+				if(progress != null) {
+					bytesProcessed = 0;
+					for(int i = 0;i < progress.BlockConsumerCount;i++) {
+						mean[i].Add(progress.BlockCount(i));
+						bufferSize = mean[i].Calc(10);
+						if(bytesProcessed > progress.ProcessedBytes(i) || bytesProcessed == 0) bytesProcessed = progress.ProcessedBytes(i);
 
-					charCount = bufferSize != 0 ? (int)((bufferSize / (double)blockCount) * barLength) : 0;
-					charCount = progress.ProcessedBytes(i) == fileSize ? 0 : charCount;
+						charCount = bufferSize != 0 ? (int)((bufferSize / (double)blockCount) * barLength) : 0;
+						charCount = progress.ProcessedBytes(i) == fileSize ? 0 : charCount;
 
-					Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 3);
-					Console.Write("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
+						Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 3);
+						Console.Write("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
+					}
+					Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - 2);
+					charCount = fileSize != 0 ? (int)((double)bytesProcessed / (double)fileSize * barLength) : barLength;
+					Console.WriteLine("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
+
+					output =
+					  "Position: " + (bytesProcessed >> 20).ToString().PadLeft(3) + "MB/" + (fileSize >> 20) + "MB  " +
+					  "Elapsed time: " + progress.TimeElapsed.ToFormatedString() + " " +
+					  "Speed: " + ((int)(bytesProcessed / progress.TimeElapsed.TotalSeconds) >> 20) + "MB/s";
+					output += "".PadLeft(output.Length < Console.BufferWidth ? Console.BufferWidth - output.Length - 1 : 0, ' ');
+					Console.WriteLine(output);
+				} else {
+					bytesProcessed = fileSize;
 				}
-				Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - 2);
-				charCount = fileSize != 0 ? (int)((double)bytesProcessed / (double)fileSize * barLength) : barLength;
-				Console.WriteLine("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
-
-				output =
-				  "Position: " + (bytesProcessed >> 20).ToString().PadLeft(3) + "MB/" + (fileSize >> 20) + "MB  " +
-				  "Elapsed time: " + progress.TimeElapsed.ToFormatedString() + " " +
-				  "Speed: " + ((int)(bytesProcessed / progress.TimeElapsed.TotalSeconds) >> 20) + "MB/s";
-				output += "".PadLeft(output.Length < Console.BufferWidth ? Console.BufferWidth - output.Length - 1 : 0, ' ');
-				Console.WriteLine(output);
 
 				bytesProcessed += e.ProcessedBytes;
-				if(bytesProcessed != 0) {
-					var totalTimeElapsed = DateTime.Now - e.StartedOn;
+				var totalTimeElapsed = DateTime.Now - e.StartedOn;
+				var eta = e.TotalBytes * (totalTimeElapsed.TotalSeconds / bytesProcessed) - totalTimeElapsed.TotalSeconds + 0.5;
+				if(!double.IsInfinity(eta)) {
 					output =
 					  "Files: " + (e.ProcessedFiles + 1) + "/" + e.TotalFiles + " " +
 					  "Bytes: " + (bytesProcessed >> 20) + "MB/" + (e.TotalBytes >> 20) + "MB " +
 					  "Elapsed: " + totalTimeElapsed.ToFormatedString() + " " +
-					  "ETA: " + TimeSpan.FromSeconds(e.TotalBytes * (totalTimeElapsed.TotalSeconds / bytesProcessed) - totalTimeElapsed.TotalSeconds + 0.5).ToFormatedString();
+					  "ETA: " + TimeSpan.FromSeconds(eta).ToFormatedString();
 					output += "".PadLeft(output.Length < Console.BufferWidth ? Console.BufferWidth - output.Length - 1 : 0, ' ');
 					Console.Write(output);
 				}
 
-				Thread.Sleep(80);
+				if(doLoop) Thread.Sleep(80);
 			} while(doLoop);
 
-			for(int i = 0;i < progress.BlockConsumerCount;i++) {
-				Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 3);
-				Console.Write(progress.BlockConsumerObj(i).ToString());
+
+			if(progress != null) {
+				for(int i = 0;i < progress.BlockConsumerCount;i++) {
+					Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 3);
+					Console.Write(progress.BlockConsumerObj(i).ToString());
+				}
+				Console.SetCursorPosition(0, lastLineIndex);
+
 			}
-			Console.SetCursorPosition(0, lastLineIndex);
 			Console.WriteLine();
 			Console.CursorVisible = true;
 		}
 
+
 		private static BlockConsumerContainer CreateContainer(int blockCount, int blockSize) {
 			BlockConsumerContainer container = new BlockConsumerContainer(blockCount, blockSize * 1024);
-			container.RegisterBlockConsumer("TIGER", new HashCalculator("TIGER", new TigerForTTH(), h => BaseConverter.ToString(h.Hash, BaseOption.Base32 | BaseOption.Pad | BaseOption.Reverse)));
-			container.RegisterBlockConsumer("AICH", new HashCalculator("AICH", new Aich(), h => BaseConverter.ToString(h.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse)));
-			container.RegisterBlockConsumer("SHA1", new HashCalculator("SHA1", new SHA1CryptoServiceProvider(), h => BaseConverter.ToString(h.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse)));
-			container.RegisterBlockConsumer("CRC", new HashCalculator("CRC", new Crc32(), h => BaseConverter.ToString(h.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse)));
-			container.RegisterBlockConsumer("MD4", new HashCalculator("MD4", new Md4(), h => BaseConverter.ToString(h.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse)));
-			container.RegisterBlockConsumer("MD5", new HashCalculator("MD5", new MD5CryptoServiceProvider(), h => BaseConverter.ToString(h.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse)));
-			container.RegisterBlockConsumer("TTH", new HashCalculator("TTH", new TTH(Environment.ProcessorCount), h => BaseConverter.ToString(h.Hash, BaseOption.Base32 | BaseOption.Pad | BaseOption.Reverse)));
+			container.RegisterBlockConsumer("TIGER", new HashCalculator("TIGER", new TigerForTTH(), h => BaseConverter.ToString(h.Hash)));
+			container.RegisterBlockConsumer("AICH", new HashCalculator("AICH", new Aich(), h => BaseConverter.ToString(h.Hash)));
+			container.RegisterBlockConsumer("SHA1", new HashCalculator("SHA1", new SHA1CryptoServiceProvider(), h => BaseConverter.ToString(h.Hash)));
+			container.RegisterBlockConsumer("CRC", new HashCalculator("CRC", new Crc32(), h => BaseConverter.ToString(h.Hash)));
+			container.RegisterBlockConsumer("MD4", new HashCalculator("MD4", new Md4(), h => BaseConverter.ToString(h.Hash)));
+			container.RegisterBlockConsumer("MD5", new HashCalculator("MD5", new MD5CryptoServiceProvider(), h => BaseConverter.ToString(h.Hash)));
+			container.RegisterBlockConsumer("TTH", new HashCalculator("TTH", new TTH(Environment.ProcessorCount), h => BaseConverter.ToString(h.Hash, BaseOption.Base32)));
 			container.RegisterBlockConsumer("Matroska", new MatroskaParser("Matroska"));
 			container.RegisterBlockConsumer("Ogm/Ogg", new OgmOggParser("Ogm/Ogg"));
 
 			container.RegisterBlockConsumer("ED2K", new HashCalculator("ED2K", new Ed2k(),
-				h => BaseConverter.ToString(h.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse) + (((Ed2k)h).BlueIsRed ? "" : " | " + BaseConverter.ToString(((Ed2k)h).RedHash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse))
+				h => BaseConverter.ToString(h.Hash) + (((Ed2k)h).BlueIsRed ? "" : " | " + BaseConverter.ToString(((Ed2k)h).BlueHash))
 			));
+
 			return container;
 		}
 		private static InfoProviderBase CreateInfoProvider(FileEnvironment e, Dictionary<string, IBlockConsumer> blockConsumers) {
@@ -675,6 +791,11 @@ namespace AVDump2CL {
 					if(ogmOggFile != null) ogmOggProvider = new OgmOggProvider(ogmOggFile);
 				}
 			} catch(Exception ex) { e.AddException("Failed to create OgmOggProvider", ex); }
+
+			try {
+				extProvider = new FileExtensionProvider(e.File.FullName);
+			} catch(Exception ex) { e.AddException("Failed to create FileExtensionProvider", ex); }
+
 			try {
 				milProvider = new MediaInfoProvider(e.File.FullName);
 			} catch(Exception ex) { e.AddException("Failed to create MediaInfoProvider", ex); }
@@ -683,14 +804,11 @@ namespace AVDump2CL {
 				hashProvider = new HashInfoProvider(blockConsumers.Values.Where(b => b is HashCalculator).Cast<HashCalculator>());
 			} catch(Exception ex) { e.AddException("Failed to create HashInfoProvider", ex); }
 
-			try {
-				extProvider = new FileExtensionProvider(e.File.FullName);
-			} catch(Exception ex) { e.AddException("Failed to create FileExtensionProvider", ex); }
 
 			var providers = new Collection<InfoProviderBase>();
-			if(extProvider != null) providers.Add(extProvider);
 			if(mkvProvider != null) providers.Add(mkvProvider);
 			if(ogmOggProvider != null) providers.Add(ogmOggProvider);
+			if(extProvider != null) providers.Add(extProvider);
 			if(milProvider != null) providers.Add(milProvider);
 			if(hashProvider != null) providers.Add(hashProvider);
 			p = new CompositeInfoProvider(providers);
@@ -711,10 +829,9 @@ namespace AVDump2CL {
 			List<FileInfo> files = new List<FileInfo>();
 			foreach(var media in mediaLst) {
 				if(System.IO.File.Exists(media)) {
-					/*if(validExtensions.BinarySearch(Path.GetExtension(media).Substring(1)) >= 0)*/
-					files.Add(new FileInfo(media));
+					if(validExtensions.BinarySearch(System.IO.Path.GetExtension(media).Substring(1).ToLower()) >= 0) files.Add(new FileInfo(media));
 				} else if(System.IO.Directory.Exists(media)) {
-					files.AddRange(FileGetter.GetFiles(media, validExtensions));
+					files.AddRange(FileGetter.GetFiles(media, validExtensions, (switches & eSwitches.ExcludeSubFolders) == 0));
 				} else {
 					//TODO Error?
 				}
@@ -737,6 +854,24 @@ namespace AVDump2CL {
 
 
 		#region Empty args help
+		private static void HelpPrinter() {
+			StringBuilder sb = new StringBuilder();
+
+			for(int i = 0;i < help.Length;i++) {
+				if(help[i] == '\x3') {
+					Console.Write(sb.ToString()); sb.Length = 0;
+					Console.ForegroundColor = (ConsoleColor)byte.Parse(help.Substring(i + 1, 2).ToString()); i += 2;
+				} else if(help[i] == '\xF') {
+					Console.Write(sb.ToString()); sb.Length = 0;
+					Console.ResetColor();
+				} else {
+					sb.Append(help[i]);
+				}
+			}
+			Console.Write(sb.ToString()); sb.Length = 0;
+		}
+
+
 		/*static string help =
 @"help:      http://wiki.anidb.info/w/Avdump
 usage:     avdump [-options] <media file/folder> [<media file/folder> ...]
@@ -787,54 +922,68 @@ options:    (one letter switches can be put in one string)
 press any key to exit";*/
 
 		static string help =
-@"help:      http://wiki.anidb.info/w/Avdump
-usage:     avdump [-options] <media file/folder> [<media file/folder> ...]
-options:    (one letter switches can be put in one string)
-  input:    (all multiple letter switches requires colon)
-   ac      autocreq: '-ac:<username>:<api password>' YOU SHOULD USE THIS
-   ms      monitor sleep duration in milliseconds, default is " + monitorSleepDuration.ToString() + @"
-   exp     export Ed2k-links to file
-   ext     comma separated extension list 
-   hlog    export hashes to file '-hlog:" + "\"$CRC32$ $ED2K$\"" + @"':filepath
-   log     write output to file
-   acerr   write filepaths of failed dumps to file
-   lport   local udp Port used by ac
-   done	   save processed-filepaths to file and exclude existing from proc
-   tout    timeout: '-tout:<seconds>:<number Of retries>'
-   bsize   buffer for hashing: '-bsize:<size in kb (" + blockSize.ToString() + @")>:<num of bufs (" + blockCount.ToString() + @")>'
-   host    host name of anidb udp api server, default is '" + hostAddress + ":" + hostPort + @"'
-  output:   (exclusive)
+@"Help:    http://wiki.anidb.info/w/Avdump
+Version: " + appVersion + @"
+Usage:   AVDump2CL [-options] <media file/folder> [<media file/folder> ...]
+
+Options: (one letter switches can be put in one string)
+		 (all multiple letter switches require colon)
+
+  Autocreqing:
+   ac      Autocreqing (example: -ac:<username>:<api_key>) " + '\x3' + "12YOU SHOULD USE THIS" + '\xF' + @"
+   host    Hostname of AniDB UDP API server (default: " + hostAddress + ":" + hostPort + @")
+   lport   Local UDP port used for autocreqing
+   tout    Timeout for sending dumps (example: -tout:<seconds>:<retries>)
+
+  Input:
+   bsize   Buffer size for hashing (example: 
+			   -bsize:<size in kb (" + blockSize.ToString() + @")>:<num of bufs (" + blockCount.ToString() + @")>)
+   ext     Comma separated extension list (example: -ext:avi,mkv or -ext:-zip)
+   ms      Monitor sleep duration in milliseconds (default: " + monitorSleepDuration.ToString() + @")
+
+  Logging:
+   acerr   Write filepaths of failed dumps to file (example: -acerr:acerr.txt)
+   extdiff Write missmatched extensions to file (example: -extdiff:extdiff.txt)
+   exp     Export eD2k-links to file (example: -exp:ed2k.txt)
+   done    Save processed filepaths to file and exclude existing from
+			   processing (example: -done:done.txt)
+   hlog    Export hashes to file (example: -hlog:" + "\"$CRC$ $ED2K$\"" + @":hlog.txt)
+   log     Write output to file (example: -log:log.txt)
+
+  Output:
+   M       MediaInfo dump
+   X       MediaInfo XML dump
    y       XML creq format
-   Y       AVD2 creq Dump
-   M       MediaInfo Dump
-   X       MediaInfo XML Dump
-  control:
-   c       do _not_ recurse Into subfolders
+   Y       AVD2 creq dump
+
+  Control:
+   c       Do _not_ recurse into subfolders
    m       Monitor folder(s)
-   p       pause when done (hold cmd window)
-   t       print Time used for each file
-   T       print total elapsed time
-   q       pause after each file
-   r       random file Order (not implemented)
-   z       delete files after parsing
-   o       wait for Response when sending dumps
-   w       supress progress (silent)
-  hash:
-   0       for crc because the crc of a 0 byte file is 00000000
-   1       for sha1 because of the 1
-   2       for ed2k because of the 2
-   3       A Tiger in the house minimizes the Three Great Risks -- thieves, fire, and evil spirits
-   4       for md4
-   5       for md5
-   6       for tth .. because thats whats left :p
-   a       all (available) hash algorithms
-   u       print elapsed time after hashing
-   e       print ed2k link
-   d       print AniDB link
-   D       open AniDB link in default browser.
+   o       Wait for response when sending dumps
+   p       Pause when done (hold cmd window)
+   q       Pause after each file
+   r       Random file order
+   t       Print time used for each file
+   T       Print total elapsed time
+   w       Supress progress (silent)
+   z       Delete files after parsing
 
-press any key to exit";
+  Hashing:
+   0       For CRC (because the CRC of a 0 byte file is 00000000)
+   1       For SHA1 (because of the 1)
+   2       For ED2K (because of the 2)
+   3       For Tiger (because a tiger in the house minimizes the Three Great
+			   Risks -- thieves, fire, and evil spirits)
+   4       For MD4 (because of the 4)
+   5       For MD5 (because of the 5)
+   6       For TTH ... because that's what's left :p
+   a       All (available) hash algorithms
+   e       Print eD2k-link
+   d       Print AniDB link
+   D       Open AniDB link in default browser
+   u       Print elapsed time after hashing
 
+Press any key to exit";
 		#endregion
 
 		public static string AppPath { get { return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); } }

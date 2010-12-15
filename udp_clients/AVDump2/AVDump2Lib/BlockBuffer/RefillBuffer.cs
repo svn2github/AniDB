@@ -1,20 +1,4 @@
-﻿// Copyright (C) 2009 DvdKhl
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -78,16 +62,25 @@ namespace AVDump2Lib.BlockBuffer {
 		public IBlockSource<T> BlockSource { get { return blockSource; } }
 
 		public T GetBlock(int consumerId) {
-			while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20);
+			if(!circBuffer.ConsumerCanRead(consumerId)) {
+				if(EndOfStream(consumerId)) throw new Exception("Cannot read block when EOS is reached");
+				while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20);
+			};
 			return circBuffer.ConsumerGet(consumerId);
 		}
 
 		public bool CanRead(int consumerId) { return circBuffer.ConsumerCanRead(consumerId); }
 
-		public void Advance(int consumerId) { circBuffer.ConsumerAdvance(consumerId); }
+		public void Advance(int consumerId) {
+			if(EndOfStream(consumerId)) throw new Exception("Cannot advance when EOS is reached");
+			circBuffer.ConsumerAdvance(consumerId); 
+		}
 
 		public void Read(int consumerId, Consumer<T> consumer) {
-			while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20);
+			if(!circBuffer.ConsumerCanRead(consumerId)) {
+				if(EndOfStream(consumerId)) throw new Exception("Cannot read block when EOS is reached");
+				while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20); 
+			};
 			consumer(circBuffer.ConsumerGet(consumerId));
 			circBuffer.ConsumerAdvance(consumerId);
 		}

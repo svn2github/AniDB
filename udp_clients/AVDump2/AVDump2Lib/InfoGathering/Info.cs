@@ -1,20 +1,4 @@
-﻿// Copyright (C) 2009 DvdKhl
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -161,7 +145,7 @@ namespace AVDump2Lib.InfoGathering {
 			return xmlDoc;
 		}
 		public static XmlDocument CreateAVDumpLog(InfoProviderBase p) {
-			XmlDocument xmlDoc = new XmlDocument(); ;
+			XmlDocument xmlDoc = new XmlDocument();
 			Func<InfoProviderBase, string> getName = (provider) => {
 				string name;
 				if(provider is MatroskaProvider) {
@@ -186,9 +170,11 @@ namespace AVDump2Lib.InfoGathering {
 				return n;
 			};
 			Action<XmlNode, string, string> addAttribute = (n, name, value) => { n.Attributes.Append(xmlDoc.CreateAttribute(name)).Value = value; };
+			Func<StreamType, TrackEntrySection.Types> convertEnum = t => t == StreamType.Audio ? TrackEntrySection.Types.Audio : (t == StreamType.Video ? TrackEntrySection.Types.Video : (t == StreamType.Text ? TrackEntrySection.Types.Subtitle : 0));
 
 			var toAcreqName = new Dictionary<EntryKey, string>();
 			toAcreqName[EntryKey.MuxingApp] = "app";
+			toAcreqName[EntryKey.EncodeLibrary] = "encoder";
 			toAcreqName[EntryKey.WritingApp] = "lib";
 			toAcreqName[EntryKey.CodecId] = "identifier";
 			toAcreqName[EntryKey.CodecIdAlt] = "identifier2";
@@ -198,12 +184,15 @@ namespace AVDump2Lib.InfoGathering {
 			toAcreqName[EntryKey.EncodeSettings] = "settings";
 			toAcreqName[EntryKey.ChannelCount] = "channels";
 			toAcreqName[EntryKey.SamplingRate] = "sampling_rate";
-			toAcreqName[EntryKey.FileExtension] = "extension";
-			toAcreqName[EntryKey.Extension] = "detected_extension";
+			toAcreqName[EntryKey.FileExtension] = "file_extension";
+			toAcreqName[EntryKey.Extension] = "extension";
 			toAcreqName[EntryKey.CodecName] = "codec_name";
 			toAcreqName[EntryKey.Overhead] = "extra_size";
 			toAcreqName[EntryKey.BitrateMode] = "mode";
 			toAcreqName[EntryKey.DAR] = "ar";
+			toAcreqName[EntryKey.VFR] = null;
+			toAcreqName[EntryKey.MaxFrameRate] = null;
+			toAcreqName[EntryKey.MinFrameRate] = null;
 
 			var fileNode = xmlDoc.AppendChild(xmlDoc.CreateElement("file"));
 			var avmfNode = xmlDoc.CreateElement("avmf");
@@ -213,6 +202,9 @@ namespace AVDump2Lib.InfoGathering {
 			CompositeInfoProvider comp = (CompositeInfoProvider)p;
 			foreach(var entry in p) {
 				var pair = new KeyValuePair<StreamType, int>(entry.Key.Type, entry.Key.Index);
+
+				if(pair.Key == StreamType.Text && (entry.Key.Entry == EntryKey.Bitrate || entry.Key.Entry == EntryKey.Duration)) continue;
+
 				if(!lookUp.TryGetValue(pair, out node)) {
 					switch(pair.Key) {
 						case StreamType.General: node = entry.Key.Entry == EntryKey.Size ? fileNode : avmfNode; break;
@@ -233,11 +225,20 @@ namespace AVDump2Lib.InfoGathering {
 						case StreamType.Chapter: break;
 						default: break;
 					}
+
+					if(comp.GetProvider<MatroskaProvider>() != null) {
+						var matroskaFile = comp.GetProvider<MatroskaProvider>().MFI;
+
+						if(pair.Key == StreamType.Audio || pair.Key == StreamType.Video || pair.Key == StreamType.Text) {
+							if((matroskaFile.Segment.Tracks[convertEnum(pair.Key), entry.Key.Index].TrackFlags & TrackEntrySection.Options.Default) != 0) addAttribute(node, "default", "1");
+
+						}
+					}
 				}
 
 
 				string name, value;
-				if(!toAcreqName.TryGetValue(entry.Key.Entry, out name)) name = entry.Key.Entry.ToString().ToLower();
+				if(!toAcreqName.TryGetValue(entry.Key.Entry, out name)) name = entry.Key.Entry.ToString().ToLower(); else if(name == null) continue;
 				if(entry.Key.Entry == EntryKey.Date) {
 					try {
 						value = Convert.ToString((int)(DateTime.ParseExact(entry.Value, "yyyy.MM.dd HH.mm.ss.ffff", CultureInfo.InvariantCulture) - new DateTime(1970, 1, 1)).TotalSeconds, 16);
@@ -250,18 +251,34 @@ namespace AVDump2Lib.InfoGathering {
 
 				if(entry.Key.Type == StreamType.Hash) {
 					node.AppendChild(createNode(entry.Unit.ToLower(), entry.Value.ToLower(), "hash"));
+
 				} else if(entry.Key.Entry == EntryKey.FrameRate && pair.Key == StreamType.Video) {
-					node.AppendChild(createNode(name, value.Equals("") ? "-1" : value, getName(entry.Provider)));
+					var vfrInfo = p[StreamType.Video, entry.Key.Index, EntryKey.VFR];
+					var maxFpsInfo = p[StreamType.Video, entry.Key.Index, EntryKey.MaxFrameRate];
+					var minFpsInfo = p[StreamType.Video, entry.Key.Index, EntryKey.MinFrameRate];
+
+					var fpsNode = node.AppendChild(createNode(name, vfrInfo != null ? "0" : value.Equals("") ? null : value, getName(entry.Provider)));
+					if(vfrInfo != null) addAttribute(fpsNode, "vfr", vfrInfo.Value);
+					if(maxFpsInfo != null) addAttribute(fpsNode, "max", maxFpsInfo.Value);
+					if(minFpsInfo != null) addAttribute(fpsNode, "min", minFpsInfo.Value);
+
 				} else if((entry.Key.Entry == EntryKey.Width || entry.Key.Entry == EntryKey.Height) && pair.Key == StreamType.Video) {
-					if(node["res_p"] == null) node.AppendChild(xmlDoc.CreateElement("res_p"));
+					if(node["res_p"] == null) {
+						var subNode = node["res_d"] == null ? node["ar"] : node["res_d"];
+						if(subNode != null) node.InsertBefore(xmlDoc.CreateElement("res_p"), subNode); else node.AppendChild(xmlDoc.CreateElement("res_p"));
+					}
 					node["res_p"].Attributes.Append(xmlDoc.CreateAttribute(entry.Key.Entry == EntryKey.Width ? "width" : "height")).Value = entry.Value;
+
 				} else {
+					//if(name.Equals("idenfitier") && value.Equals("-- --") || value.Equals("")) {
+					//    return null;
+					//}
 					node.AppendChild(createNode(name, value, getName(entry.Provider)));
 				}
 			}
 			fileNode.AppendChild(avmfNode);
 
-			var chaptersNode = xmlDoc.CreateElement("Chapters");
+			XmlNode chaptersNode;
 			if(comp.GetProvider<MatroskaProvider>() != null) {
 				var matroskaFile = comp.GetProvider<MatroskaProvider>().MFI;
 
@@ -271,12 +288,21 @@ namespace AVDump2Lib.InfoGathering {
 				if(matroskaFile.Segment.SegmentInfo.PreviousFilename != null) avmfNode.AppendChild(createNode("previous_filename", matroskaFile.Segment.SegmentInfo.PreviousFilename, "mkv"));
 				if(matroskaFile.Segment.SegmentInfo.NextFilename != null) avmfNode.AppendChild(createNode("next_filename", matroskaFile.Segment.SegmentInfo.NextFilename, "mkv"));
 				if(matroskaFile.Segment.SegmentInfo.SegmentUId != null) avmfNode.AppendChild(createNode("segment_uid", new Guid(matroskaFile.Segment.SegmentInfo.SegmentUId).ToString(), "mkv"));
-				if(matroskaFile.Segment.Chapters != null) CreateEBMLTree(xmlDoc, chaptersNode, matroskaFile.Segment.Chapters);
+				if(matroskaFile.Segment.Chapters != null) {
+					foreach(var chapter in matroskaFile.Segment.Chapters) {
+						chaptersNode = xmlDoc.CreateElement("Chapters");
+						CreateChaptersNode(xmlDoc, chaptersNode, (EditionEntrySection)chapter.Value);
+						if(chaptersNode.HasChildNodes) avmfNode.AppendChild(chaptersNode);
+					}
+				}
 
-			} else {
-				try { CreateChaptersMIL(xmlDoc, chaptersNode, comp.GetProvider<MediaInfoProvider>().MIL); } catch(Exception) { chaptersNode.RemoveAll(); }
+			} else if(comp.GetProvider<MediaInfoProvider>() != null) {
+				var mil = comp.GetProvider<MediaInfoProvider>().MIL;
+
+				chaptersNode = xmlDoc.CreateElement("Chapters");
+				try { CreateChaptersNode(xmlDoc, chaptersNode, mil); } catch(Exception) { chaptersNode.RemoveAll(); }
+				if(chaptersNode.HasChildNodes) avmfNode.AppendChild(chaptersNode);
 			}
-			if(chaptersNode.HasChildNodes) avmfNode.AppendChild(chaptersNode);
 
 			return xmlDoc;
 		}
@@ -285,12 +311,12 @@ namespace AVDump2Lib.InfoGathering {
 			Func<string, string, string, string, XmlNode> createNode = (name, value, unit, p) => {
 				var n = xmlDoc.CreateElement(name);
 				if(!string.IsNullOrEmpty(unit)) n.Attributes.Append(xmlDoc.CreateAttribute("u")).Value = unit;
-				if(!string.IsNullOrEmpty(p)) n.Attributes.Append(xmlDoc.CreateAttribute("p")).Value = p;
+				//if(!string.IsNullOrEmpty(p)) n.Attributes.Append(xmlDoc.CreateAttribute("p")).Value = p;
 
 				n.AppendChild(xmlDoc.CreateTextNode(value));
 				return n;
 			};
-			Func<InfoProviderBase, string> getName =(p) =>{ return p.ToString().Substring(p.ToString().LastIndexOf('.') + 1); };
+			Func<InfoProviderBase, string> getName = (p) => { return p.ToString().Substring(p.ToString().LastIndexOf('.') + 1); };
 
 			var aCreqNode = xmlDoc.AppendChild(xmlDoc.CreateElement("Creq"));
 			var fileNode = aCreqNode.AppendChild(xmlDoc.CreateElement("File"));
@@ -353,6 +379,62 @@ namespace AVDump2Lib.InfoGathering {
 				}
 			}
 		}
+		private static void CreateChaptersNode(XmlDocument xmlDoc, XmlNode n, EditionEntrySection editionEntry) {
+			n.Attributes.Append(xmlDoc.CreateAttribute("flags")).Value = editionEntry.EditionFlags.ToString();
+
+			XmlNode entryNode, subNode;
+			foreach(var chapterAtom in editionEntry.ChapterAtoms) {
+				entryNode = n.AppendChild(xmlDoc.CreateElement("Entry"));
+				entryNode.Attributes.Append(xmlDoc.CreateAttribute("flags")).Value = chapterAtom.ChapterFlags.ToString();
+
+				if(chapterAtom.ChapterSegmentUId != null) entryNode.AppendChild(xmlDoc.CreateElement("SegId")).AppendChild(xmlDoc.CreateTextNode(new Guid((byte[])chapterAtom.ChapterSegmentUId).ToString()));
+
+				subNode = entryNode.AppendChild(xmlDoc.CreateElement("Pos"));
+				if(chapterAtom.ChapterTimeStart.HasValue) subNode.Attributes.Append(xmlDoc.CreateAttribute("start")).Value = (chapterAtom.ChapterTimeStart.Value / 1000000000d).ToString("0.###");
+				if(chapterAtom.ChapterTimeEnd.HasValue) subNode.Attributes.Append(xmlDoc.CreateAttribute("end")).Value = (chapterAtom.ChapterTimeEnd.Value / 1000000000d).ToString("0.###");
+
+				foreach(var chapterDisplay in chapterAtom.ChapterDisplays) {
+					subNode = entryNode.AppendChild(xmlDoc.CreateElement("Title"));
+					subNode.AppendChild(xmlDoc.CreateTextNode(chapterDisplay.ChapterString));
+					if(chapterDisplay.ChapterLanguages.Count != 0) subNode.Attributes.Append(xmlDoc.CreateAttribute("lang")).Value = chapterDisplay.ChapterLanguages.Aggregate((acc, l) => acc + " " + l);
+				}
+			}
+		}
+		private static void CreateChaptersNode(XmlDocument xmlDoc, XmlNode n, MediaInfo mediaInfo) {
+			Func<string, ulong> conv = (str) => {
+				var timeParts = str.Split(new char[] { ':', '.' }).Select(s => ulong.Parse(s.Trim())).ToArray();
+				return (((timeParts[0] * 60 + timeParts[1]) * 60 + timeParts[2]) * 1000 + timeParts[3]) * 1000000;
+			};
+
+			int streamCount, entryCount;
+			eStreamType streamKind = eStreamType.Menu;
+			XmlNode entryNode, subNode;
+			string languageTitle, language, title;
+
+			streamCount = mediaInfo.Count_Get(streamKind);
+			for(int i = 0;i < streamCount;i++) {
+				entryCount = mediaInfo.Count_Get(streamKind, i);
+				int indexStart, indexEnd;
+				if(int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_Begin"), out indexStart) && int.TryParse(mediaInfo.Get(streamKind, i, "Chapters_Pos_End"), out indexEnd)) {
+					for(;indexStart < indexEnd;indexStart++) {
+						entryNode = n.AppendChild(xmlDoc.CreateElement("Entry"));
+
+						var timeStamp = conv(mediaInfo.Get(streamKind, i, indexStart, eInfoType.Name).Split('-')[0].Trim());
+						subNode = entryNode.AppendChild(xmlDoc.CreateElement("Pos"));
+						subNode.Attributes.Append(xmlDoc.CreateAttribute("start")).Value = (timeStamp / 1000).ToString("0.###");
+
+						languageTitle = mediaInfo.Get(streamKind, i, indexStart, eInfoType.Text);
+						language = languageTitle.Contains(':') ? languageTitle.Substring(0, languageTitle.IndexOf(':')) : null;
+						title = languageTitle.Substring(language == null ? 0 : language.Length + 1);
+
+						subNode = entryNode.AppendChild(xmlDoc.CreateElement("Title"));
+						subNode.AppendChild(xmlDoc.CreateTextNode(title));
+						if(language != null) subNode.Attributes.Append(xmlDoc.CreateAttribute("lang")).Value = language;
+					}
+				}
+			}
+		}
+
 		private static void CreateChaptersMIL(XmlDocument xmlDoc, XmlNode chaptersNode, MediaInfo mediaInfo) {
 			Func<string, string, XmlNode> createNode = (name, value) => {
 				var n = xmlDoc.CreateElement(name);
@@ -424,11 +506,11 @@ namespace AVDump2Lib.InfoGathering {
 			if(blockConsumers != null) {
 
 				foreach(HashCalculator hashExecute in blockConsumers.Where(blockConsumer => { return blockConsumer is HashCalculator; })) {
-					AppendLeaf(xmlDoc, subNode, hashExecute.Name, BaseConverter.ToString(hashExecute.HashObj.Hash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse), null);
+					AppendLeaf(xmlDoc, subNode, hashExecute.Name, BaseConverter.ToString(hashExecute.HashObj.Hash), null);
 
 					if(hashExecute.HashObj is Ed2k) {
 						Ed2k ed2k = (Ed2k)hashExecute.HashObj;
-						if(!ed2k.BlueIsRed) AppendLeaf(xmlDoc, subNode, "Ed2k_Alt", BaseConverter.ToString(ed2k.RedHash, BaseOption.Heximal | BaseOption.Pad | BaseOption.Reverse), null);
+						if(!ed2k.BlueIsRed) AppendLeaf(xmlDoc, subNode, "Ed2k_Alt", BaseConverter.ToString(ed2k.BlueHash), null);
 					}
 				}
 			}

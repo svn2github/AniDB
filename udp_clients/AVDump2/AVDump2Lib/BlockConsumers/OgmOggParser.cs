@@ -108,12 +108,10 @@ namespace AVDump2Lib.BlockConsumers {
 		internal void Parse(FileSource dataSrc) {
 			var pageHeader = new PageHeader();
 
-			int counter = 0;
 			while(!dataSrc.EOF()) {
 				do {
 					PageHeader.ReadMagicBytes(dataSrc);
 				} while(!dataSrc.EOF() && !pageHeader.Read(dataSrc));
-				counter++;
 
 				if(dataSrc.EOF()) break;
 
@@ -143,6 +141,9 @@ namespace AVDump2Lib.BlockConsumers {
 					}
 					Tracks.Add(track);
 
+					if(track is AudioTrack && ((AudioTrack)track).ChannelCount == 0) {
+					}
+
 				} else {
 					Overhead += pageHeader.DataLength;
 					dataSrc.Skip(pageHeader.DataLength);
@@ -158,8 +159,6 @@ namespace AVDump2Lib.BlockConsumers {
 		private static byte[] OggS = { (byte)'O', (byte)'g', (byte)'g', (byte)'S' };
 		private static byte[] nullArray = new byte[4];
 		private static byte[] emptyArray = new byte[0];
-
-		//private Crc32 crc;
 
 		public Byte Version { get; private set; }
 		public HeaderFlags Flags { get; private set; }
@@ -386,7 +385,8 @@ namespace AVDump2Lib.BlockConsumers {
 		public Track(uint id, object codecInfo) { this.Id = id; this.codecInfo = codecInfo; }
 
 		internal void ProcessPage(FileSource dataSrc, PageHeader pageHeader) {
-			EncodedDuration = pageHeader.GranulePosition != -1 ? pageHeader.GranulePosition : EncodedDuration;
+			//EncodedDuration = pageHeader.GranulePosition != -1 && pageHeader.GranulePosition != 0 ? pageHeader.GranulePosition : EncodedDuration;
+			EncodedDuration = pageHeader.GranulePosition > EncodedDuration ? pageHeader.GranulePosition : EncodedDuration;
 			Length += pageHeader.DataLength;
 
 			bool skipPacket = true;
@@ -567,6 +567,11 @@ namespace AVDump2Lib.BlockConsumers {
 				codecName = new string(info.SubType);
 				ChannelCount = info.ChannelCount;
 				SampleRate = info.SamplesPerUnit;
+			//} else if(codecInfo is OGMAudio_00FF_0055) {
+			//    var info = (OGMAudio_00FF_0055)codecInfo;
+			//    codecName = new string(info.SubType);
+			//    ChannelCount = info.ChannelCount;
+			//    SampleRate = info.SamplesPerUnit;
 			}
 		}
 
@@ -585,10 +590,10 @@ namespace AVDump2Lib.BlockConsumers {
 
 			if(ByteCompare(header, VorbisIdentBytes) && header.Length == 30) {
 				codecInfo = GetStruct<VorbisIdentHeader>(header, VorbisIdentBytes.Length, 23);
-			} else if(header.Length == 0x39 && System.Text.Encoding.ASCII.GetString(header, 1, 5).Equals("audio")) {
+			} else if(header.Length >= 46 && System.Text.Encoding.ASCII.GetString(header, 1, 5).Equals("audio")) {
 				codecInfo = GetStruct<OGMAudio>(header, 1, 0x38);
-			} else if((header.Length == 0x3E || header.Length == 0x45) && System.Text.Encoding.ASCII.GetString(header, 1, 5).Equals("audio")) {
-				codecInfo = GetStruct<OGMAudio_00FF_0055>(header, 1, header.Length - 1);
+			//} else if((header.Length == 0x3E || header.Length == 0x45) && System.Text.Encoding.ASCII.GetString(header, 1, 5).Equals("audio")) {
+			//    codecInfo = GetStruct<OGMAudio_00FF_0055>(header, 1, header.Length - 1);
 			}
 			return codecInfo;
 		}
@@ -605,25 +610,25 @@ namespace AVDump2Lib.BlockConsumers {
 			public Boolean Framing;
 		}
 
-		[StructLayout(LayoutKind.Sequential)]
-		public struct OGMAudio {
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
-			public Char[] StreamType;
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
-			public Char[] SubType;
-			public Int32 Size;
-			public Int64 TimeUnit;
-			public Int64 SamplesPerUnit;
-			public Int32 DefaultLength;
-			public Int32 BufferSize;
-			public Int16 BitsPerSample;
-			public Int16 ChannelCount;
-			public Int16 BlockAlign;
-			public Int32 Byterate;
-		}
+		//[StructLayout(LayoutKind.Sequential)]
+		//public struct OGMAudio {
+		//    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+		//    public Char[] StreamType;
+		//    [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+		//    public Char[] SubType;
+		//    public Int32 Size;
+		//    public Int64 TimeUnit;
+		//    public Int64 SamplesPerUnit;
+		//    public Int32 DefaultLength;
+		//    public Int32 BufferSize;
+		//    public Int16 BitsPerSample;
+		//    public Int16 ChannelCount;
+		//    public Int16 BlockAlign;
+		//    public Int32 Byterate;
+		//}
 
 		[StructLayout(LayoutKind.Explicit)]
-		public struct OGMAudio_00FF_0055 {
+		public struct OGMAudio {
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 8), FieldOffset(0)]
 			public Char[] StreamType;
 			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 4), FieldOffset(8)]

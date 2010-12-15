@@ -30,7 +30,7 @@ namespace AVDump2CL {
 
 			File = fileInfo;
 			Container = container;
-			Exceptions = new FileProcessingExceptionCollection(version, fileInfo.FullName);
+			Exceptions = new FileProcessingExceptionCollection(version, fileInfo != null ? fileInfo.FullName : null);
 		}
 
 		public void AddException(string message, Exception innerException) {

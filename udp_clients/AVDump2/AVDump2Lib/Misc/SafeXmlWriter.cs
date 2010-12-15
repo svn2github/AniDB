@@ -7,9 +7,9 @@ using System.IO;
 
 namespace AVDump2Lib.Misc {
 	public class SafeXmlWriter : XmlTextWriter {
-		public SafeXmlWriter(TextWriter tw) : base(tw) { Formatting = Formatting.Indented; }
-		public SafeXmlWriter(Stream stream, Encoding encoding) : base(stream, encoding) { Formatting = Formatting.Indented; }
-		public SafeXmlWriter(string filename, Encoding encoding) : base(filename, encoding) { Formatting = Formatting.Indented; }
+		public SafeXmlWriter(TextWriter tw, Formatting formatting = Formatting.Indented) : base(tw) { Formatting = formatting; }
+		public SafeXmlWriter(Stream stream, Encoding encoding, Formatting formatting = Formatting.Indented) : base(stream, encoding) { Formatting = formatting; }
+		public SafeXmlWriter(string filename, Encoding encoding, Formatting formatting = Formatting.Indented) : base(filename, encoding) { Formatting = formatting; }
 
 		private StringBuilder sb = new StringBuilder();
 		public override void WriteString(string text) {

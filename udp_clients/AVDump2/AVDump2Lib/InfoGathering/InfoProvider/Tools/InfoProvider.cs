@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 	public enum StreamType { General, Video, Audio, Text, Chapter, Hash, Unkown }
-	public enum EntryKey { None, Index, Size, Overhead, Bitrate, Date, Duration, Title, Language, CodecName, CodecId, CodecIdAlt, FourCC, Id, FrameCount, FrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, FileExtension, EncodeSettings, EncodeLibrary, BitrateMode }
+	public enum EntryKey { None, Index, Size, Overhead, Bitrate, Date, Duration, Title, Language, CodecName, CodecId, CodecIdAlt, TwoCC, FourCC, Id, FrameCount, FrameRate, VFR, MaxFrameRate, MinFrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, FileExtension, EncodeSettings, EncodeLibrary, BitrateMode }
 
 	public struct StreamTypeEntryPair {
 		public readonly StreamType Type;
@@ -38,30 +38,6 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 		public override string ToString() { return "(" + Key.ToString() + "|" + Value + "|" + Unit + "|" + Provider.ToString() + ")"; }
 	}
 
-	namespace New {
-		public class InfoEntry {
-			public InfoProviderBase Provider { get; private set; }
-			public StreamTypeEntryPair Key { get; private set; }
-			public object Value { get; private set; }
-
-			public InfoEntry(StreamTypeEntryPair key, string value, InfoProviderBase provider) { Key = key; Value = value; Provider = provider; }
-
-			public override string ToString() { return "(" + Key.ToString() + "|" + Value + "|" + Provider.ToString() + ")"; }
-		}
-
-		public interface IInfoProvider : IDisposable {
-			InfoEntry this[StreamType type, int index, EntryKey key] { get; }
-			IEnumerable<InfoEntry> this[StreamType type, int index] { get; }
-			int StreamCount(StreamType type);
-		}
-		public interface ICompositeInfoProvider {
-
-		}
-
-
-	}
-
-
 	public abstract class InfoProviderBase : IDisposable, IEnumerable<InfoEntry> {
 		protected InfoCollection infos;
 
@@ -73,6 +49,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 		}
 		protected void Add(EntryKey entry, string value, string unit) { Add(StreamType.General, 0, entry, value, unit); }
 		protected void Add(EntryKey entry, Func<string> value, string unit) { Add(StreamType.General, 0, entry, value, unit); }
+		protected void Add(StreamType type, int index, EntryKey entry, string value) { Add(type, index, entry, value, null); }
 		protected void Add(StreamType type, int index, EntryKey entry, Func<string> value, string unit) { try { Add(type, index, entry, value(), unit); } catch(Exception) { Debug.Print(entry.ToString()); } }
 
 		public virtual InfoEntry this[StreamType type, int index, EntryKey key] {

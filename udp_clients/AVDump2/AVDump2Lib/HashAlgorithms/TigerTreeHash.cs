@@ -100,14 +100,7 @@ namespace AVDump2Lib.HashAlgorithms {
 				e.Length -= envOffset;
 				e.Offset += envOffset;
 				while(e.Length >= BLOCKSIZE) {
-#if(UseUnsafeCode)
 					e.Blocks.Enqueue(e.BlockHasher.TTHBlockHash(dataBlock, e.Offset));
-#else
-					e.BlockHasher.TransformBlock(zeroArray, 0, 1, null, 0);
-					e.BlockHasher.TransformFinalBlock(dataBlock, e.Offset, BLOCKSIZE);
-					e.Blocks.Enqueue(e.BlockHasher.Hash);
-					e.BlockHasher.Initialize();
-#endif
 					e.Offset += envBlockSize;
 					e.Length -= envBlockSize;
 				}
@@ -171,7 +164,7 @@ namespace AVDump2Lib.HashAlgorithms {
 			}
 
 			foreach(var block in blocks) nods.AddLast(block);
-			return nods.Count != 0 ? nods.Reverse<byte[]>().Aggregate((byte[] accumHash, byte[] hash) => HashBlocks(hash, accumHash)) : blockHasher.ComputeHash(emptyArray);
+			return nods.Count != 0 ? nods.Reverse<byte[]>().Aggregate((byte[] accumHash, byte[] hash) => HashBlocks(hash, accumHash)) : blockHasher.ComputeHash(zeroArray);
 		}
 
 		public override void Initialize() {
@@ -202,7 +195,8 @@ namespace AVDump2Lib.HashAlgorithms {
 			public bool ThreadJoin;
 			public int Index;
 
-			public TigerForTTH BlockHasher;
+
+			public TigerForTTH BlockHasher = new TigerForTTH();
 
 			public Queue<byte[]> Blocks;
 			public int Offset;
@@ -217,7 +211,6 @@ namespace AVDump2Lib.HashAlgorithms {
 				this.Index = index;
 
 				Blocks = new Queue<byte[]>();
-				BlockHasher = new TigerForTTH();
 				BlockHasher.Initialize();
 			}
 		}

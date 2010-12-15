@@ -1,20 +1,4 @@
-﻿// Copyright (C) 2009 DvdKhl 
-//
-// This program is free software; you can redistribute it and/or
-// modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
-// of the License, or (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.using System;
-
-using System;
+﻿using System;
 using System.Xml;
 using System.Linq;
 using AVDump2Lib.BlockConsumers.Tools;
@@ -385,7 +369,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.BlockDuration: break;
 				case DocTypeMatroskaV2.eId.ReferenceBlock: break;
 				case DocTypeMatroskaV2.eId.BlockGroup:
-					Read(reader, elementInfo.Length); break;
+					Read(reader, elementInfo.Length, false); break;
 				case DocTypeMatroskaV2.eId.Timecode:
 					long timeCode = (long)(ulong)reader.RetrieveValue();
 					foreach(var t in Tracks.Values) t.BeginOfCluster(timeCode);
@@ -406,7 +390,7 @@ namespace AVDump2Lib.BlockConsumers {
 			private long trackSize;
 
 			private uint laces;
-			private long minStamp;
+			private long minStamp = -1;
 			private long highStamp;
 
 			private Collection<ClusterInfo> clusters;
@@ -415,12 +399,29 @@ namespace AVDump2Lib.BlockConsumers {
 			private uint clusterSize;
 			private long timeCode;
 
+			private long highStampold;
+			private double lacerate, minlacerate, maxlacerate;
+
+
 			internal Track(int trackNumber) {
 				this.TrackNumber = trackNumber;
 				clusters = new Collection<ClusterInfo>();
 			}
 
-			internal void EndOfCluster() { clusters.Add(new ClusterInfo((ulong)timeCode, clusterLaces, clusterSize)); }
+			internal void EndOfCluster() {
+				lacerate = clusterLaces / (double)(highStamp - highStampold) * 1000;
+				if(clusters.Count == 0) {
+					minlacerate = lacerate;
+					maxlacerate = lacerate;
+				} else {
+					if(minlacerate > lacerate) minlacerate = lacerate;
+					if(maxlacerate < lacerate) maxlacerate = lacerate;
+				}
+
+				highStampold = highStamp;
+
+				clusters.Add(new ClusterInfo((ulong)timeCode, clusterLaces, clusterSize));
+			}
 			internal void BeginOfCluster(long timeCode) {
 				this.timeCode = timeCode;
 				clusterSize = clusterLaces = 0;
@@ -432,19 +433,21 @@ namespace AVDump2Lib.BlockConsumers {
 				clusterLaces += block.FrameCount;
 				laces += block.FrameCount;
 
+
 				if(highStamp < block.TimeCode + timeCode) highStamp = block.TimeCode + timeCode;
-				if(minStamp > block.TimeCode + timeCode) minStamp = block.TimeCode + timeCode;
+				if(minStamp == -1 || minStamp > block.TimeCode + timeCode) minStamp = block.TimeCode + timeCode;
 			}
 
 			public TrackInfo CalcTrackInfo(double mult) {
-				var trackLength = TimeSpan.FromMilliseconds(highStamp * (mult / 1000000));
+				var trackLength = TimeSpan.FromMilliseconds((highStamp - minStamp) * (mult / 1000000));
+
 				return new TrackInfo(
 					minBitrate: 0,
 					maxBitrate: 0,
-					averageBitrate: trackSize * 8 / trackLength.TotalSeconds,
+					averageBitrate: (trackSize != 0 && trackLength.Ticks != 0) ? trackSize * 8 / trackLength.TotalSeconds : (double?)null,
 					minLaceRate: 0,
 					maxLaceRate: 0,
-					averageLaceRate: laces / trackLength.TotalSeconds,
+					averageLaceRate: (laces != 0 && trackLength.Ticks != 0) ? laces / trackLength.TotalSeconds : (double?)null,
 					trackLength: trackLength,
 					trackSize: trackSize,
 					laceCount: (int)laces
@@ -457,17 +460,17 @@ namespace AVDump2Lib.BlockConsumers {
 		public class TrackInfo {
 			public double MinBitrate { get; private set; }
 			public double MaxBitrate { get; private set; }
-			public double AverageBitrate { get; private set; }
+			public double? AverageBitrate { get; private set; }
 
 			public double MinLaceRate { get; private set; }
 			public double MaxLaceRate { get; private set; }
-			public double AverageLaceRate { get; private set; }
+			public double? AverageLaceRate { get; private set; }
 
 			public TimeSpan TrackLength { get; private set; }
 			public long TrackSize { get; private set; }
 			public int LaceCount { get; private set; }
 
-			public TrackInfo(double minBitrate, double maxBitrate, double averageBitrate, double minLaceRate, double maxLaceRate, double averageLaceRate, TimeSpan trackLength, long trackSize, int laceCount) {
+			public TrackInfo(double minBitrate, double maxBitrate, double? averageBitrate, double minLaceRate, double maxLaceRate, double? averageLaceRate, TimeSpan trackLength, long trackSize, int laceCount) {
 				MinBitrate = minBitrate; MaxBitrate = maxBitrate; AverageBitrate = averageBitrate;
 				MinLaceRate = minLaceRate; MaxLaceRate = maxLaceRate; AverageLaceRate = averageLaceRate;
 				TrackLength = trackLength; TrackSize = trackSize; LaceCount = laceCount;
@@ -637,6 +640,33 @@ namespace AVDump2Lib.BlockConsumers {
 				return sets;
 			}
 		}
+
+		public WaveFormatEx? GetWaveFormatEx() {
+			if(!CodecId.Equals("A_MS/ACM")) return null;
+			byte[] b = new byte[18];
+			Buffer.BlockCopy(CodecPrivate, 0, b, 0, 18);
+
+			return WaveFormatEx.Create(b);
+		}
+		public struct WaveFormatEx {
+			public ushort wFormatTag;
+			public ushort nChannels;
+			public uint nSamplesPerSec;
+			public uint nAvgBytesPerSec;
+			public ushort nBlockAlign;
+			public ushort wBitsPerSample;
+			public ushort cbSize;
+
+			public string TwoCC { get { return Convert.ToString(wFormatTag, 16); } }
+
+			public static WaveFormatEx Create(byte[] b) {
+				GCHandle hDataIn = GCHandle.Alloc(b, GCHandleType.Pinned);
+				WaveFormatEx waveFormatEx = (WaveFormatEx)Marshal.PtrToStructure(hDataIn.AddrOfPinnedObject(), typeof(WaveFormatEx));
+				hDataIn.Free();
+				return waveFormatEx;
+			}
+		}
+
 
 		public TrackEntrySection() { TrackOverlay = new EbmlList<ulong>(); }
 
@@ -1376,7 +1406,7 @@ namespace AVDump2Lib.BlockConsumers {
 	public abstract class Section : IEnumerable<KeyValuePair<string, object>> {
 		public long? SectionSize { get; protected set; }
 
-		internal void Read(EBMLReader reader, long? size) {
+		internal void Read(EBMLReader reader, long? size, bool validate = true) {
 			SectionSize = size;
 
 			reader.EnterMasterElement();
@@ -1389,7 +1419,7 @@ namespace AVDump2Lib.BlockConsumers {
 						}
 					} catch(Exception) { }
 				}
-				Validate();
+				if(validate) Validate();
 			} catch(Exception) { }
 
 			reader.LeaveMasterElement();
@@ -1446,7 +1476,5 @@ namespace AVDump2Lib.BlockConsumers {
 		void ICollection<T>.Add(T item) { throw new NotSupportedException(); }
 		public void Clear() { throw new NotSupportedException(); }
 		public void RemoveAt(int index) { throw new NotSupportedException(); }
-
-
 	}
 }

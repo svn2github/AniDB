@@ -27,7 +27,7 @@ namespace AVDump2CL.Exceptions {
 			XElement infoElem, exElem;
 			XElement fileElem = new XElement("FileExceptions", infoElem = new XElement("Information"), exElem = new XElement("Exceptions"));
 			infoElem.Add(new XElement("AVDump2CLVersion", version.ToString()));
-			infoElem.Add(new XElement("File", filePath));
+			if(!string.IsNullOrEmpty(filePath)) infoElem.Add(new XElement("File", filePath));
 
 			foreach(var item in Items) exElem.Add(item.ToXElement());
 

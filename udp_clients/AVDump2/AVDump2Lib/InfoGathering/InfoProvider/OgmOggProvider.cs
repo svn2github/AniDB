@@ -5,6 +5,7 @@ using System.Text;
 using AVDump2Lib.InfoGathering.InfoProvider.Tools;
 using AVDump2Lib.BlockConsumers;
 using System.Globalization;
+using System.Collections.ObjectModel;
 
 namespace AVDump2Lib.InfoGathering.InfoProvider {
 	public class OgmOggProvider : InfoProviderBase {
@@ -34,10 +35,10 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 				}
 			}
 
-			if(true || indeces[0] != 0) {
-				Add(EntryKey.Extension, "ogm ogg", null);
-			} else if(indeces[1] != 0) {
-			} else if(indeces[2] != 0) {
+			if(provider.Tracks.Count == 1 && ((Collection<Track>)provider.Tracks)[0].CodecName.Equals("Vorbis")) {
+				Add(EntryKey.Extension, "ogg", null);
+			} else {
+				Add(EntryKey.Extension, "ogm", null);
 			}
 		}
 
@@ -49,8 +50,8 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			Add(type, index, EntryKey.Duration, () => track.Duration.HasValue ? track.Duration.Value.TotalSeconds.ToString(CultureInfo.InvariantCulture) : null, "s");
 
 			if(track.Comments != null) {
-				if(track.Comments.Comments.Contains("title")) Add(type, index, EntryKey.Title, () => track.Comments.Comments["title"].Value[0], null);
-				if(track.Comments.Comments.Contains("language")) Add(type, index, EntryKey.Language, () => track.Comments.Comments["language"].Value[0], null);
+				if(track.Comments.Comments.Contains("title")) Add(type, index, EntryKey.Title, () => track.Comments.Comments["title"].Value.Aggregate((acc, str) => acc + "," + str), null);
+				if(track.Comments.Comments.Contains("language")) Add(type, index, EntryKey.Language, () => track.Comments.Comments["language"].Value.Aggregate((acc, str) => acc + "," + str), null);
 			}
 
 			Add(type, index, EntryKey.CodecId, () => track.CodecName, null);

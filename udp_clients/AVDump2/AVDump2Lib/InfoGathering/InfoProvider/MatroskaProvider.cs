@@ -52,19 +52,21 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 			Add(type, index, EntryKey.Index, () => index.ToString(), null);
 			Add(type, index, EntryKey.Size, () => trackInfo.TrackSize.ToString(), "byte");
-			Add(type, index, EntryKey.Bitrate, () => trackInfo.AverageBitrate.ToString("0", CultureInfo.InvariantCulture), "bit/s");
+			Add(type, index, EntryKey.Bitrate, () => trackInfo.AverageBitrate.HasValue ? trackInfo.AverageBitrate.Value.ToString("0", CultureInfo.InvariantCulture) : null, "bit/s");
 			Add(type, index, EntryKey.Duration, () => trackInfo.TrackLength.TotalSeconds.ToString(CultureInfo.InvariantCulture), "s");
 			Add(type, index, EntryKey.Title, () => trackEntry.Name, null);
 			Add(type, index, EntryKey.Language, () => trackEntry.Language, null);
 			Add(type, index, EntryKey.CodecName, () => trackEntry.CodecName, null);
 			Add(type, index, EntryKey.CodecId, () => trackEntry.CodecId, null);
 			Add(type, index, EntryKey.FourCC, () => string.Equals(trackEntry.CodecId, "V_MS/VFW/FOURCC") && trackEntry.GetBitMapInfoHeader().HasValue ? trackEntry.GetBitMapInfoHeader().Value.FourCC : null, null);
+			Add(type, index, EntryKey.TwoCC, () => string.Equals(trackEntry.CodecId, "A_MS/ACM") && trackEntry.GetWaveFormatEx().HasValue ? trackEntry.GetWaveFormatEx().Value.TwoCC : null, null);
 			Add(type, index, EntryKey.Id, () => trackEntry.TrackUId.ToString(), null);
 
 			switch(type) {
 				case StreamType.Video:
 					Add(type, index, EntryKey.FrameCount, () => trackInfo.LaceCount.ToString(), null);
-					Add(type, index, EntryKey.FrameRate, () => (trackEntry.DefaultDuration.HasValue ? 1000000000d / trackEntry.DefaultDuration.Value : trackInfo.AverageLaceRate).ToString("0.000", CultureInfo.InvariantCulture), "fps");
+					Add(type, index, EntryKey.FrameRate, () => (trackEntry.DefaultDuration.HasValue ? 1000000000d / trackEntry.DefaultDuration.Value : 0).ToString("0.000", CultureInfo.InvariantCulture), "fps");
+					if(!trackEntry.DefaultDuration.HasValue && trackInfo.AverageLaceRate.HasValue) Add(type, index, EntryKey.VFR, () => trackInfo.AverageLaceRate.Value.ToString("0.000", CultureInfo.InvariantCulture), "fps");
 					Add(type, index, EntryKey.Width, () => trackEntry.Video.PixelWidth.ToString(), "px");
 					Add(type, index, EntryKey.Height, () => trackEntry.Video.PixelHeight.ToString(), "px");
 					Add(type, index, EntryKey.DAR, () => (trackEntry.Video.DisplayWidth / (double)trackEntry.Video.DisplayHeight).ToString("0.000", CultureInfo.InvariantCulture), null);
