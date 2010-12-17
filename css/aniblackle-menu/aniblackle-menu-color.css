@@ -15,8 +15,7 @@
 	border-right-color:#C9D7F1;
 }
 
-#layout-menu,
-#layout-menu li.sub-menu:hover
+#layout-menu
 {
 	background-color:#000000;
 }
