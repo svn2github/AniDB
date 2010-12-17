@@ -3,18 +3,18 @@
 	background-color: #FFFFFF;
 }
 
-#layout-menu > li ul
+#layout-menu li.sub-menu
 {
 	background-color: #ECF4FD;
 }
 
-#layout-menu li.sub-menu ul li:hover,
-#layout-menu li.sub-menu ul li:active
+#layout-menu li.sub-menu li:hover,
+#layout-menu li.sub-menu li:active
 {
 	background: transparent url(images/stripe-ltgrey.gif) repeat left top;
 }
 
-#layout-menu li.sub-menu ul
+#layout-menu li.sub-menu
 {
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }

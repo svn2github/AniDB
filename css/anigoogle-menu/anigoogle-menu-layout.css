@@ -151,7 +151,7 @@
 #layout-menu li.sub-menu ul li > a,
 #layout-menu li.sub-menu ul li > label
 {
-	padding: 0.1em 0;
+	line-height: 17px;
 }
 
 #layout-search p,
