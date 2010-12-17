@@ -10,10 +10,15 @@
 
 #layout-menu li.sub-menu
 {
+	border: 1px solid;
+}
+
+#layout-menu li.sub-menu,
+#layout-menu li.sub-menu ul
+{
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	border: 1px solid;
 }
 
 #layout-menu li.sub-menu li:first-child:hover
