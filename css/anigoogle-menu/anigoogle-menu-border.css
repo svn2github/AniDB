@@ -34,3 +34,8 @@
 {
 	border-top: 1px solid #DEE8FA;
 }
+
+#layout-menu > li ul
+{
+	border:none;
+}

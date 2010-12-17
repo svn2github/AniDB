@@ -19,6 +19,12 @@
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }
 
+#layout-menu > li ul
+{
+	background-color: inherit;
+	border-color: inherit;
+}
+
 /*logo @1024*/
 #layout-search
 {
