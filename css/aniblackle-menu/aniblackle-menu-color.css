@@ -5,6 +5,7 @@
 	border-top-color:#666666;
 }
 
+#layout-menu li.sub-menu:hover,
 #layout-menu li.sub-menu
 {
 	border-color:#666666 #444444 #444444 #666666;
@@ -20,11 +21,7 @@
 	background-color:#000000;
 }
 
-#layout-menu li.sub-menu:hover
-{
-	border-color: #000000;
-}
-
+#layout-menu li.sub-menu:hover,
 #layout-menu li.sub-menu
 {
 	background-color:#404040;
