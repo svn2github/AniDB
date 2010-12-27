@@ -194,17 +194,7 @@
 	display: none;
 }
 
-@media screen and (min-width: 1580px) and (max-width: 1680px)
-{
-	#layout-main div.main_all div.datablocks
-	{
-		-moz-column-count: 3;
-		-webkit-column-count: 3;
-		column-count: 3;
-	}
-}
-
-@media screen and (min-width: 1850px)
+@media screen and (min-width: 1580px)
 {
 	#layout-main div.main_all div.datablocks
 	{
@@ -212,10 +202,7 @@
 		-webkit-column-count: 4;
 		column-count: 4;
 	}
-}
 
-@media screen and (min-width: 1600px)
-{
 	#layout-main div.main_all div.latestnews div.hidden,
 	#layout-main div.main_all div.datablocks div.hidden
 	{
