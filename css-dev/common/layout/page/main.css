@@ -35,9 +35,9 @@
 
 #layout-main div.main_all div.datablocks
 {
-	-moz-column-width:31em;
-	-webkit-column-width:31em;
-	column-width:31em;
+	-moz-column-count:2;
+	-webkit-column-count:2;
+	column-count:2;
 	text-align:center;
 }
 
@@ -45,7 +45,7 @@
 {
 	display:inline-table;
 	vertical-align:top;
-	width:31em;
+	width:100%;
 }
 
 #layout-main div.main_all div.datablocks > div.account
@@ -56,19 +56,13 @@
 #layout-main div.main_all div.datablocks div.stripe
 {
 	height:7.5em;
-	width:auto;
+	width:100%;
 	overflow:hidden;
-}
-
-#layout-main div.main_all div.datablocks div.stripe div.data
-{
-	width:240px;
 }
 
 #layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
 {
-	margin:0.5em 0;
-	width:188px;
+	margin:0.5em 6em;
 }
 
 #layout-main div.main_all div.datablocks h4,
@@ -200,78 +194,23 @@
 	display: none;
 }
 
-@media screen and (min-width: 1200px) and (max-width: 1400px)
-{
-	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
-	{
-		width: 285px;
-	}
-
-	#layout-main div.main_all div.datablocks div.stripe div.data
-	{
-		width: 340px;
-	}
-
-	#layout-main div.main_all div.datablocks
-	{
-		-moz-column-width: 41em;
-		-webkit-column-width: 41em;
-		column-width: 41em;
-	}
-
-	#layout-main div.main_all div.datablocks > div
-	{
-		width: 41em;
-	}
-}
-
 @media screen and (min-width: 1580px) and (max-width: 1680px)
 {
-	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
-	{
-		width: 165px;
-	}
-
-	#layout-main div.main_all div.datablocks div.stripe div.data
-	{
-		width: 220px;
-	}
-
 	#layout-main div.main_all div.datablocks
 	{
-		-moz-column-width: 29em;
-		-webkit-column-width: 29em;
-		column-width: 29em;
-	}
-
-	#layout-main div.main_all div.datablocks > div
-	{
-		width: 29em;
+		-moz-column-count: 3;
+		-webkit-column-count: 3;
+		column-count: 3;
 	}
 }
 
 @media screen and (min-width: 1850px)
 {
-	#layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
-	{
-		width: 235px;
-	}
-
-	#layout-main div.main_all div.datablocks div.stripe div.data
-	{
-		width: 290px;
-	}
-
 	#layout-main div.main_all div.datablocks
 	{
-		-moz-column-width: 36em;
-		-webkit-column-width: 36em;
-		column-width: 36em;
-	}
-
-	#layout-main div.main_all div.datablocks > div
-	{
-		width: 36em;
+		-moz-column-count: 4;
+		-webkit-column-count: 4;
+		column-count: 4;
 	}
 }
 
