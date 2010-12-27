@@ -194,6 +194,16 @@
 	display: none;
 }
 
+@media screen and (max-width: 900px)
+{
+	#layout-main div.main_all div.datablocks
+	{
+		-moz-column-count: 1;
+		-webkit-column-count: 1;
+		column-count: 1;
+	}
+}
+
 @media screen and (min-width: 1580px)
 {
 	#layout-main div.main_all div.datablocks
