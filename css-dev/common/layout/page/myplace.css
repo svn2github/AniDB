@@ -243,3 +243,18 @@
 	display: inline-table;
 	vertical-align: top;
 }
+
+#layout-main div.userpage_all div.latest_recommendations > div.content
+{
+	margin-top:0.5em;
+}
+
+#layout-main div.userpage_all div.latest_recommendations > div.content,
+#layout-main div.userpage_all div.userprefs > div,
+#layout-main div.userpage_all div.clubs div.joined > div,
+#layout-main div.userpage_all div.clubs div.created > div
+{
+    -moz-column-width: 400px;
+    -webkit-column-width: 400px;
+    column-width: 400px;
+}
