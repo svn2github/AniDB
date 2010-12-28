@@ -231,28 +231,15 @@
 	float:none;
 }
 
-#layout-main div.userpage_all div.latest_recommendations > div.content
-{
-	margin-top:1em;
-    -moz-column-count: 2;
-    -webkit-column-count: 2;
-    column-count: 2;
-    text-align: center;
-}
-
-#layout-main div.userpage_all div.userprefs > div,
-#layout-main div.userpage_all div.clubs div.joined,
-#layout-main div.userpage_all div.clubs div.created
-{
-    -moz-column-count: 4;
-    -webkit-column-count: 4;
-    column-count: 4;
-    text-align: center;
-}
-
 #layout-main div.userpage_all div.clubs div.joined,
 #layout-main div.userpage_all div.clubs div.founded
 {
     margin-right: 0;
 	margin-left: 0;
+}
+
+#layout-main div.userpage_all div.userprefs div.datablocks > div
+{
+	display: inline-table;
+	vertical-align: top;
 }
