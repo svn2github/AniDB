@@ -46,6 +46,7 @@
 	display:inline-table;
 	vertical-align:top;
 	width:100%;
+	max-width: 400px;
 }
 
 #layout-main div.main_all div.datablocks > div.account
@@ -58,7 +59,6 @@
 	height:7.5em;
 	width:100%;
 	overflow:hidden;
-	max-width: 400px;
 }
 
 #layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
