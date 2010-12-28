@@ -226,21 +226,13 @@
 	float:none;
 }
 
-#layout-main div.userpage_all div.clubs div.joined,
-#layout-main div.userpage_all div.clubs div.founded
-{
-    margin-right: 0;
-	margin-left: 0;
-}
-
 #layout-main div.userpage_all div.userprefs div.datablocks > div
 {
 	display: inline-table;
 	vertical-align: top;
 }
 
-#layout-main div.userpage_all div.latest_recommendations > div.content,
-#layout-main div.userpage_all div.userprefs div.datablocks > div
+#layout-main div.userpage_all > div.g_section > div.content
 {
 	margin-top:0.5em;
 }
