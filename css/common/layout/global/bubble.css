@@ -52,12 +52,9 @@
 	border-width:1px;
 }
 
-
 .g_bubble.stripe > div.data
 {
-	float: left;
-	margin: 0.5em 0.5em 0.5em 0;
-	width: 335px;
+	margin: 0.5em 0.5em 0.5em 6em
 }
 
 .g_bubble.stripe > div.data div + div

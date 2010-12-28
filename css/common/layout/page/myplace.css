@@ -1,11 +1,9 @@
-#layout-main div.userpage_all div.stats,
 #layout-main div.userpage_all div.g_menu
 {
 	clear: left;
 	float: left;
 }
 
-#layout-main div.userpage_all div.stats,
 #layout-main div.userpage_all div.g_menu
 {
 	padding-left: 0.5em;
@@ -80,14 +78,6 @@
 	width: 8em;
 }
 
-#layout-main div.userpage_all div.userprefs div.block
-{
-	display: inline-table;
-	margin-left: 1em;
-	margin-bottom: 1em;
-	width: auto;
-}
-
 #layout-main div.userpage_all div.blog div.pagination
 {
 	float: none;
@@ -133,20 +123,15 @@
 	clear: none;
 }
 
-#layout-main div.userpage_all > div.g_section
-{
-	margin-right: 1em;
-}
-
 #layout-main div.userpage_all > div.g_section,
 #layout-main div.userpage_all div.forum
 {
-	margin-left: 22em;
+	margin-left: 21em;
 }
 
 #layout-main div.userpage_all div.g_section + div.g_section
 {
-	margin-top: 2.5em;
+	margin-top: 2em;
 }
 
 #layout-main div.userpage_all div.userdetails .block div.notify
@@ -158,7 +143,6 @@
 #layout-main div.userpage_all div.userdetails .block div.notify div.msg + div.news,
 #layout-main div.userpage_all div.latest div + div,
 #layout-main div.userpage_all div.stats div + div,
-#layout-main div.userpage_all div.userprefs div + div,
 #layout-main div.userpage_all div.g_menu div + div
 {
 	margin-top: 1em;
@@ -181,15 +165,6 @@
 	clear: none;
 	margin-left: 0em;
 	margin-right: 0em;
-}
-
-#layout-main div.userpage_all div.block
-{
-	display: inline-table;
-	margin-bottom: 1em;
-	margin-left: 1em;
-	width: auto;
-	margin-right: 0;
 }
 
 #layout-main div.userpage_all div.blog div.buttons,
@@ -224,7 +199,7 @@
 #layout-main div.userpage_all div.blog div.g_timedentry h4
 {
 	display: table-cell;
-	padding-left: .5em;
+	padding-left: 0.5em;
 	padding-right: 1.5em;
 }
 
@@ -251,7 +226,29 @@
 	float:none;
 }
 
-#layout-main div.userpage_all div.latest_recommendations > div.content
+#layout-main div.userpage_all div.userprefs > div > div
 {
-	margin-top:1em;
+	display: inline-table;
+	vertical-align: top;
+}
+
+#layout-main div.userpage_all > div.g_section div.content
+{
+	margin-top:0.5em;
+}
+
+#layout-main div.userpage_all div.latest_recommendations > div.content,
+#layout-main div.userpage_all div.userprefs > div,
+#layout-main div.userpage_all div.clubs div.joined > div,
+#layout-main div.userpage_all div.clubs div.created > div
+{
+    -moz-column-width: 400px;
+    -webkit-column-width: 400px;
+    column-width: 400px;
+}
+
+/*hack because webkit sucks*/
+#layout-main div.userpage_all .g_bubble.stripe
+{
+	position: inherit;
 }
