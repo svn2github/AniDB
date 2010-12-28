@@ -148,7 +148,6 @@
 #layout-main div.userpage_all div.userdetails .block div.notify div.msg + div.news,
 #layout-main div.userpage_all div.latest div + div,
 #layout-main div.userpage_all div.stats div + div,
-#layout-main div.userpage_all div.userprefs div + div,
 #layout-main div.userpage_all div.g_menu div + div
 {
 	margin-top: 1em;
