@@ -46,6 +46,7 @@
 	display:inline-table;
 	vertical-align:top;
 	width:100%;
+	max-width: 400px;
 }
 
 #layout-main div.main_all div.datablocks > div.account
