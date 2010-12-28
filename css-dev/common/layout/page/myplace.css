@@ -226,7 +226,7 @@
 	float:none;
 }
 
-#layout-main div.userpage_all div.userprefs div.datablocks > div
+#layout-main div.userpage_all div.userprefs > div > div
 {
 	display: inline-table;
 	vertical-align: top;
