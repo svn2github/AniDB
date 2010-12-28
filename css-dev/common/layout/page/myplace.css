@@ -242,11 +242,12 @@
 {
 	display: inline-table;
 	vertical-align: top;
+	margin-top:0.5em;
 }
 
-#layout-main div.userpage_all div.latest_recommendations > div.content
+#layout-main div.userpage_all div.g_section h4
 {
-	margin-top:0.5em;
+	margin-bottom:0.5em;
 }
 
 #layout-main div.userpage_all div.latest_recommendations > div.content,
