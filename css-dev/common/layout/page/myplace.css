@@ -242,7 +242,8 @@
 }
 
 #layout-main div.userpage_all div.userprefs > div,
-#layout-main div.userpage_all div.clubs div.block > div
+#layout-main div.userpage_all div.clubs div.joined,
+#layout-main div.userpage_all div.clubs div.created
 {
     -moz-column-count: 4;
     -webkit-column-count: 4;
@@ -250,7 +251,8 @@
     text-align: center;
 }
 
-#layout-main div.userpage_all div.clubs div.block
+#layout-main div.userpage_all div.clubs div.joined,
+#layout-main div.userpage_all div.clubs div.founded
 {
     margin-right: 0;
 	margin-left: 0;
