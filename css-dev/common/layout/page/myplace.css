@@ -246,3 +246,9 @@
     -webkit-column-width: 400px;
     column-width: 400px;
 }
+
+/*hack because webkit sucks*/
+#layout-main div.userpage_all .g_bubble.stripe
+{
+	position: inherit;
+}
