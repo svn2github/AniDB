@@ -78,14 +78,6 @@
 	width: 8em;
 }
 
-#layout-main div.userpage_all div.userprefs div.block
-{
-	display: inline-table;
-	margin-left: 1em;
-	margin-bottom: 1em;
-	width: auto;
-}
-
 #layout-main div.userpage_all div.blog div.pagination
 {
 	float: none;
@@ -181,15 +173,6 @@
 	margin-right: 0em;
 }
 
-#layout-main div.userpage_all div.block
-{
-	display: inline-table;
-	margin-bottom: 1em;
-	margin-left: 1em;
-	width: auto;
-	margin-right: 0;
-}
-
 #layout-main div.userpage_all div.blog div.buttons,
 #layout-main div.userpage_all div.blog div.buttons + div.pagination
 {
@@ -252,4 +235,23 @@
 #layout-main div.userpage_all div.latest_recommendations > div.content
 {
 	margin-top:1em;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+    text-align: center;
+}
+
+#layout-main div.userpage_all div.userprefs > div,
+#layout-main div.userpage_all div.clubs div.block > div
+{
+    -moz-column-count: 4;
+    -webkit-column-count: 4;
+    column-count: 4;
+    text-align: center;
+}
+
+#layout-main div.userpage_all div.clubs div.block
+{
+    margin-right: 0;
+	margin-left: 0;
 }
