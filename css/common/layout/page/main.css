@@ -58,6 +58,7 @@
 	height:7.5em;
 	width:100%;
 	overflow:hidden;
+	max-width: 400px;
 }
 
 #layout-main div.main_all div.datablocks div.similaranime div.stripe div.data
