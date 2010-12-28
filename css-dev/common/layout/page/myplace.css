@@ -232,7 +232,7 @@
 	vertical-align: top;
 }
 
-#layout-main div.userpage_all > div.g_section > div.content
+#layout-main div.userpage_all > div.g_section div.content
 {
 	margin-top:0.5em;
 }
