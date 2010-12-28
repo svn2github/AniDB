@@ -123,20 +123,15 @@
 	clear: none;
 }
 
-#layout-main div.userpage_all > div.g_section
-{
-	margin-right: 1em;
-}
-
 #layout-main div.userpage_all > div.g_section,
 #layout-main div.userpage_all div.forum
 {
-	margin-left: 22em;
+	margin-left: 21em;
 }
 
 #layout-main div.userpage_all div.g_section + div.g_section
 {
-	margin-top: 2.5em;
+	margin-top: 2em;
 }
 
 #layout-main div.userpage_all div.userdetails .block div.notify
@@ -204,7 +199,7 @@
 #layout-main div.userpage_all div.blog div.g_timedentry h4
 {
 	display: table-cell;
-	padding-left: .5em;
+	padding-left: 0.5em;
 	padding-right: 1.5em;
 }
 
@@ -242,12 +237,12 @@
 {
 	display: inline-table;
 	vertical-align: top;
-	margin-top:0.5em;
 }
 
-#layout-main div.userpage_all div.g_section h4
+#layout-main div.userpage_all div.latest_recommendations > div.content,
+#layout-main div.userpage_all div.userprefs div.datablocks > div
 {
-	margin-bottom:0.5em;
+	margin-top:0.5em;
 }
 
 #layout-main div.userpage_all div.latest_recommendations > div.content,
