@@ -842,12 +842,19 @@ div.quotebody div.quote div.quotebody
 {
 	padding:0.8em;
 }
+
 #layout-main div.postbody div.content ol
 {
 	list-style-type: decimal;
-	margin-left: 0;
 }
 #layout-main div.postbody div.content ul
 {
 	list-style-type: disc;
+}
+
+#layout-main div.postbody div.content ol,
+#layout-main div.postbody div.content ul
+{
+	margin-left: 0;
+	padding-left: 4em;
 }
