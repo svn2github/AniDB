@@ -30,7 +30,8 @@ tr > th,
 background-color:hsla(0, 100%, 25%, 0.4);
 }
 #layout-main tr > th.field,
-#layout-main div.pane.account th
+#layout-main div.pane.account th,
+#layout-main div.pane.default_languages div.titles th
 {
 background-color:transparent;
 }
@@ -93,7 +94,8 @@ div.quotebody div.quote div.g_odd,
 #layout-main div.quotebody div.quoteof,
 #layout-footer,
 #layout-main div.timeline_all div.timeline ul.legend li span,
-#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block
+#layout-main div.addsimilaranime_all div.addsimilaranime_entries div.block,
+#layout-main div.pane.default_languages div.titles tr:nth-of-type(2n+1) > *
 {
 background-color:hsla(0, 0%, 0%, 0.4);
 }
@@ -291,7 +293,7 @@ color:#898989;
 }
 #layout-main tr:hover th.field,
 #layout-main div.pane.account th:hover,
-tr:hover > td,
+tr:hover > *,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.tabbed_pane div.pane table tr:hover > td,

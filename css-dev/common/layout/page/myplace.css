@@ -22,6 +22,12 @@
 	padding: 1px 6px;
 }
 
+#layout-main div.userpage_all div.userdetails .block
+{
+	display: inline-table;
+	margin-top: 0;
+}
+
 #layout-main div.userpage_all div.userdetails .block > div
 {
 	display: table-cell;
@@ -131,7 +137,7 @@
 
 #layout-main div.userpage_all div.g_section + div.g_section
 {
-	margin-top: 2em;
+	margin-top: 1.5em;
 }
 
 #layout-main div.userpage_all div.userdetails .block div.notify
