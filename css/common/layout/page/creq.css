@@ -64,3 +64,9 @@
 	white-space:pre-wrap;
 	vertical-align:top;
 }
+
+#layout-main div.creq_all table.creqlist td.entry,
+#layout-main div.creq_all table.creqlist td.summary
+{
+	width: auto;
+}
