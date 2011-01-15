@@ -85,9 +85,7 @@
 .g_bubble.box
 {
 	display: inline-block;
-	min-width: 300px;
-	max-width: 32%;
-    width: auto;
+	width: 300px;
 	text-align: left;
 	vertical-align: top;
 	height:375px;
