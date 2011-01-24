@@ -166,10 +166,10 @@ public class TagSystem {
             } else if (funcName.equals("add")) {
                 e.Check(params.size() == 2, "Invalid Parameter count");
                 return String.valueOf(Integer.parseInt(params.get(0)) + Integer.parseInt(params.get(1)));
-            } else if (funcName.equals("substract")) {
+            } else if (funcName.equals("sub")) {
                 e.Check(params.size() == 2, "Invalid Parameter count");
                 return String.valueOf(Integer.parseInt(params.get(0)) - Integer.parseInt(params.get(1)));
-            } else if (funcName.equals("mult")) {
+            } else if (funcName.equals("mul")) {
                 e.Check(params.size() == 2, "Invalid Parameter count");
                 return String.valueOf(Integer.parseInt(params.get(0)) * Integer.parseInt(params.get(1)));
             } else if (funcName.equals("div")) {

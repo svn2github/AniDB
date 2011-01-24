@@ -169,12 +169,13 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         InitUI();
 
-        /*if((Integer)(mem.get("FirstStart", 0)) < 8) {
+       if((Integer)(mem.get("FirstStart", 0)) < 8) {
             DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
-                "<br/>" +
-                "<br/>" +
+                "Added more TagSystem functions: $uc (uppercase), $lc (lowercase), $indexof, $lindexof, $add, $sub, $mul, $div<br/>" +
+                "New Variable in TagSystem: %ACatList%<br/>" +
+                "Some other minor fixes<br/>" +
                 "</html>"));
-        }*/
+        }
 
         modState = eModState.Initialized;
     }
@@ -331,17 +332,15 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         pnl_NoticeLayout.setHorizontalGroup(
             pnl_NoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_NoticeLayout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
+                .addComponent(lbl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_CloseNotice, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(pnl_NoticeLayout.createSequentialGroup()
-                .addComponent(lbl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
         );
         pnl_NoticeLayout.setVerticalGroup(
             pnl_NoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_NoticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btn_CloseNotice, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lbl_Notice))
+                .addComponent(lbl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -349,14 +348,14 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnl_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+            .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnl_Notice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addComponent(tbctrl_Main, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
