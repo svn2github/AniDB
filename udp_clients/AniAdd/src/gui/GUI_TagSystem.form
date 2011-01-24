@@ -56,7 +56,7 @@
                   <Component id="lbl_DirNameStr" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrl_txt_CodeBox" pref="273" max="32767" attributes="0"/>
+              <Component id="scrl_txt_CodeBox" pref="387" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbl_ErrorMsg" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -158,13 +158,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="pnl_AnimeTitles" max="32767" attributes="1"/>
+                      <Component id="pnl_AnimeTitles" min="-2" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pnl_EpTitles" max="32767" attributes="1"/>
-                          <Component id="pnl_GroupNames" alignment="0" max="32767" attributes="1"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="pnl_GroupNames" max="32767" attributes="1"/>
+                          <Component id="pnl_EpTitles" alignment="0" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="284" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -210,14 +210,13 @@
                               <Component id="lbl_AT_Synomymn" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_AT_English" alignment="0" pref="300" max="32767" attributes="0"/>
-                              <Component id="txt_AT_Romaji" alignment="0" pref="300" max="32767" attributes="0"/>
-                              <Component id="txt_AT_Kanji" alignment="0" pref="300" max="32767" attributes="0"/>
-                              <Component id="txt_AT_Other" alignment="0" pref="300" max="32767" attributes="0"/>
-                              <Component id="txt_AT_Synomymn" alignment="0" pref="300" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txt_AT_Synomymn" max="32767" attributes="1"/>
+                              <Component id="txt_AT_Other" alignment="0" max="32767" attributes="1"/>
+                              <Component id="txt_AT_Kanji" alignment="0" max="32767" attributes="1"/>
+                              <Component id="txt_AT_Romaji" alignment="0" max="32767" attributes="1"/>
+                              <Component id="txt_AT_English" alignment="0" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -379,10 +378,9 @@
                           </Group>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_GT_Long" alignment="0" pref="304" max="32767" attributes="0"/>
-                              <Component id="txt_GT_Short" alignment="0" pref="304" max="32767" attributes="0"/>
+                              <Component id="txt_GT_Long" pref="140" max="32767" attributes="1"/>
+                              <Component id="txt_GT_Short" alignment="0" pref="140" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -468,12 +466,11 @@
                               <Component id="lbl_ET_Kanji" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="txt_ET_Kanji" alignment="1" pref="324" max="32767" attributes="0"/>
-                              <Component id="txt_ET_English" alignment="0" pref="324" max="32767" attributes="0"/>
-                              <Component id="txt_ET_Romaji" pref="324" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txt_ET_Kanji" max="32767" attributes="1"/>
+                              <Component id="txt_ET_Romaji" alignment="0" max="32767" attributes="1"/>
+                              <Component id="txt_ET_English" alignment="0" pref="160" max="32767" attributes="1"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -758,10 +755,10 @@
                                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_CurrentFN" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="80" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1202,7 +1199,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txt_ACatList">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Clubs&apos;Comedy&apos;High School&apos;Novel&apos;Parody&apos;School Life&apos;Seinen&apos;Time Travel"/>
+                    <Property name="text" type="java.lang.String" value="Clubs&apos;Comedy&apos;School Life&apos;Seinen"/>
                     <Property name="toolTipText" type="java.lang.String" value="ACatList"/>
                   </Properties>
                   <Events>

@@ -510,7 +510,6 @@ public class Mod_UdpApi implements IModule {
 
         private byte[] inflatePacket(ByteArrayInputStream stream) throws IOException{
             stream.skip(4);
-
             InflaterInputStream iis = new InflaterInputStream(stream, new Inflater(true));
             ByteArrayOutputStream baos = new ByteArrayOutputStream(2 * 1400);
 

@@ -1,15 +1,12 @@
 package processing;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import aniAdd.misc.ICallBack;
 import ed2kHasher.Edonkey;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FileParser {
 
@@ -120,7 +117,7 @@ public class FileParser {
                     hash = ed2k.getHexValue();
                 } finally { bis.close(); }
 
-            } catch (Exception e) { e.printStackTrace(); }
+            } catch (Exception e) {}
    
 
             parseEndOn = System.currentTimeMillis();

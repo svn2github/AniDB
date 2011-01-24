@@ -262,13 +262,12 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_AT_Other)
                     .addComponent(lbl_AT_Synomymn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_AT_English, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Other, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(txt_AT_Synomymn, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_AT_Synomymn)
+                    .addComponent(txt_AT_Other)
+                    .addComponent(txt_AT_Kanji)
+                    .addComponent(txt_AT_Romaji)
+                    .addComponent(txt_AT_English)))
         );
         pnl_AnimeTitlesLayout.setVerticalGroup(
             pnl_AnimeTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,9 +328,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_GT_Long))
                 .addGap(21, 21, 21)
                 .addGroup(pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
-                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(txt_GT_Long, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                    .addComponent(txt_GT_Short, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)))
         );
         pnl_GroupNamesLayout.setVerticalGroup(
             pnl_GroupNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,11 +386,10 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_ET_Romaji)
                     .addComponent(lbl_ET_Kanji))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txt_ET_Kanji, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                    .addComponent(txt_ET_English, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-                    .addComponent(txt_ET_Romaji, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_ET_Kanji)
+                    .addComponent(txt_ET_Romaji)
+                    .addComponent(txt_ET_English, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
         );
         pnl_EpTitlesLayout.setVerticalGroup(
             pnl_EpTitlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,12 +412,12 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(pnl_AnimeTitles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_AnimeTitles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_EpTitles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_GroupNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnl_GroupNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_EpTitles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,7 +559,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         lbl_CurrentFN.setText("Current Filename:");
 
         txt_CurrentFN.setColumns(20);
-        txt_CurrentFN.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        txt_CurrentFN.setFont(new java.awt.Font("Tahoma", 0, 11));
         txt_CurrentFN.setLineWrap(true);
         txt_CurrentFN.setRows(5);
         txt_CurrentFN.setText("[Chihiro]​_Suzumiya​_Haruhi​_no​_Yuutsu​_(2009)​_-​_01​_[848x480​_H.​264​_AAC][7595C366].​mkv");
@@ -683,8 +680,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_CurrentFN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Anime Info:"));
@@ -740,7 +737,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
             }
         });
 
-        txt_ACatList.setText("Clubs'Comedy'High School'Novel'Parody'School Life'Seinen'Time Travel");
+        txt_ACatList.setText("Clubs'Comedy'School Life'Seinen");
         txt_ACatList.setToolTipText("ACatList");
         txt_ACatList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -909,7 +906,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_DirNameStr))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ErrorMsg)
