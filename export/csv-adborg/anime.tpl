@@ -9,4 +9,5 @@ GID|AGID|Name|ShortName|State
 </tmpl_loop></tmpl_loop>GENREN
 GenID|GenName|isHentai|Weight 
 <tmpl_loop name=loop_anime><tmpl_loop name=loop_anime_genren><tmpl_var name=data_anime_genren_id>|<tmpl_var name=data_anime_genren_name>|<tmpl_var name=data_anime_genren_ishentai>|<tmpl_var name=data_anime_genren_weight>
-</tmpl_loop></tmpl_loop>
+</tmpl_loop>
+</tmpl_loop>

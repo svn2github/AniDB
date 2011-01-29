@@ -1,6 +1,6 @@
-(C) 2009 by etele
-Version: 0.05
-Last change: 2009.11.01
+(C) 2009-2011 by etele
+Version: 0.06
+Last change: 2010.12.02
 
 A csv myexport list to import it into adborg UDP client.
 

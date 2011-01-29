@@ -1,8 +1,12 @@
+0.06
+- fixed EOLN
+
 0.05
 - added fileext filed to anime.tpl
 
 0.04
 - added adult filed to mylist.tpl
+
 0.03
 - added new fields to mylist.tpl
 
