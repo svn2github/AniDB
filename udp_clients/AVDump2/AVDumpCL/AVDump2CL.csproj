@@ -54,6 +54,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,6 +88,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -94,11 +96,11 @@
     <Compile Include="Acreqing\ACreq.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AniDB\AniDBCommit.cs" />
     <Compile Include="FileEnvironment.cs" />
     <Compile Include="Misc\ArgsParser.cs" />
     <Compile Include="Misc\Average.cs" />
     <Compile Include="CL.cs" />
-    <Compile Include="CL2.cs" />
     <Compile Include="Exceptions\AVD2Exception.cs" />
     <Compile Include="Exceptions\FileProcessingExceptionCollection.cs" />
     <Compile Include="Misc\Directory.cs" />
@@ -154,7 +156,9 @@
   <ItemGroup>
     <Content Include="Libs\Ionic.Zip.Reduced.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

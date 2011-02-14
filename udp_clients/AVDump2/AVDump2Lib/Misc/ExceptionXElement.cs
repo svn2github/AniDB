@@ -23,55 +23,43 @@ namespace AVDump2Lib.Misc {
 			: base(new Func<XElement>(() => {
 				// Validate arguments
 
-				if (exception == null) {
-					throw new ArgumentNullException("exception");
-				}
+				if(exception == null) return new XElement("NULLException");
 
 				// The root element is the Exception's type
 
-				XElement root = new XElement
-					(exception.GetType().ToString());
+				XElement root;
+				try {
+					root = new XElement(exception.GetType().ToString());
 
-				if (exception.Message != null) {
-					root.Add(new XElement("Message", exception.Message));
-				}
+					if(exception.Message != null) {
+						root.Add(new XElement("Message", exception.Message));
+					}
 
-				// StackTrace can be null, e.g.:
-				// new ExceptionAsXml(new Exception())
+					// StackTrace can be null, e.g.:
+					// new ExceptionAsXml(new Exception())
 
-				if (!omitStackTrace && exception.StackTrace != null) {
-					root.Add
-					(
-						new XElement("StackTrace",
-							from frame in exception.StackTrace.Split('\n')
-							let prettierFrame = frame.Trim()
-							select new XElement("Frame", prettierFrame))
-					);
-				}
+					if(!omitStackTrace && exception.StackTrace != null) {
+						root.Add(new XElement("StackTrace", from frame in exception.StackTrace.Split('\n')
+															select new XElement("Frame", frame.Trim()))
+						);
+					}
 
-				// Data is never null; it's empty if there is no data
+					// Data is never null; it's empty if there is no data
 
-				if (exception.Data.Count > 0) {
-					root.Add
-					(
-						new XElement("Data",
-							from entry in
-								exception.Data.Cast<DictionaryEntry>()
-							let key = entry.Key.ToString()
-							let value = (entry.Value == null) ?
-								"null" : entry.Value.ToString()
-							select new XElement(key, value))
-					);
-				}
+					if(exception.Data.Count > 0) {
+						root.Add(new XElement("Data", from entry in
+														  exception.Data.Cast<DictionaryEntry>()
+													  let key = entry.Key.ToString()
+													  let value = (entry.Value == null) ?
+														  "null" : entry.Value.ToString()
+													  select new XElement(key, value))
+						);
+					}
 
-				// Add the InnerException if it exists
+					if(exception.InnerException != null) root.Add(new ExceptionXElement(exception.InnerException, omitStackTrace));
 
-				if (exception.InnerException != null) {
-					root.Add
-					(
-						new ExceptionXElement
-							(exception.InnerException, omitStackTrace)
-					);
+				} catch(Exception) {
+					root = new XElement("GeneratingErrorException");
 				}
 
 				return root;

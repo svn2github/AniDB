@@ -23,7 +23,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 		public IEnumerable<InfoEntry> EnumEntries() {
 			InfoEntry entry;
 
-			for(int index = 0;index < 10;index++) {
+			for(int index = 0;index < 20;index++) {
 				entry = this[StreamType.Hash, index, EntryKey.None];
 				if(entry != null) yield return entry;
 			}
@@ -39,20 +39,20 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 					if(entry != null) yield return entry;
 				}
 			}
-			for(int index = 0;index < 10;index++) {
+			for(int index = 0;index < 20;index++) {
 				foreach(EntryKey entryKey in Enum.GetValues(typeof(EntryKey))) {
 					entry = this[StreamType.Audio, index, entryKey];
 					if(entry != null) yield return entry;
 				}
 			}
-			for(int index = 0;index < 10;index++) {
+			for(int index = 0;index < 40;index++) {
 				foreach(EntryKey entryKey in Enum.GetValues(typeof(EntryKey))) {
 					entry = this[StreamType.Text, index, entryKey];
 					if(entry != null) yield return entry;
 				}
 			}
 
-			for(int index = 0;index < 10;index++) {
+			for(int index = 0;index < 20;index++) {
 				foreach(EntryKey entryKey in Enum.GetValues(typeof(EntryKey))) {
 					entry = this[StreamType.Unkown, index, entryKey];
 					if(entry != null) yield return entry;

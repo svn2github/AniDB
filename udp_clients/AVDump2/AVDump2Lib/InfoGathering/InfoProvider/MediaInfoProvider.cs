@@ -18,6 +18,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 			MIL = new MediaInfo();
 			MIL.Option("Internet", "No");
+
 			MIL.Open(filePath);
 
 			Add(EntryKey.Size, Get("FileSize"), "byte");

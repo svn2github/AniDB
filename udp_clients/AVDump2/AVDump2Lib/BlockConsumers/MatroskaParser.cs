@@ -211,9 +211,12 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.Cluster:
 					Cluster.Read(reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Tracks:
-					Tracks = Section.CreateRead(new TracksSection(), reader, elementInfo.Length); Cluster.AddTracks(from track in Tracks.Items select (int)track.TrackNumber.GetValueOrDefault(0)); break; //Must be set and != 0 (add warning)
+					if(Tracks != null) break;
+					Tracks = Section.CreateRead(new TracksSection(), reader, elementInfo.Length);
+					Cluster.AddTracks(Tracks.Items); break; //Must be set and != 0 (add warning)
 				case DocTypeMatroskaV2.eId.Info:
-					SegmentInfo = Section.CreateRead(new SegmentInfoSection(), reader, elementInfo.Length); break;
+					SegmentInfo = Section.CreateRead(new SegmentInfoSection(), reader, elementInfo.Length);
+					Cluster.timecodeScale = SegmentInfo.TimecodeScale; break;
 				case DocTypeMatroskaV2.eId.Chapters:
 					Chapters = Section.CreateRead(new ChaptersSection(), reader, elementInfo.Length); break;
 				case DocTypeMatroskaV2.eId.Attachments:
@@ -350,8 +353,12 @@ namespace AVDump2Lib.BlockConsumers {
 		public Dictionary<int, Track> Tracks { get; private set; }
 
 		public ClusterSection() { Tracks = new Dictionary<int, Track>(); }
+		private long timecode;
+		public ulong timecodeScale;
 
-		public void AddTracks(IEnumerable<int> trackNumbers) { foreach(var trackNumber in trackNumbers) Tracks.Add(trackNumber, new Track(trackNumber)); }
+		public void AddTracks(EbmlList<TrackEntrySection> tracks) {
+			foreach(var track in tracks) Tracks.Add((int)track.TrackNumber, new Track { trackNumber = (int)track.TrackNumber.Value, timecodeScale = track.TrackTimecodeScale });
+		}
 
 		protected override bool ProcessElement(EBMLReader reader, ElementInfo elementInfo) {
 			switch((DocTypeMatroskaV2.eId)elementInfo.ElementType.Id) {
@@ -360,7 +367,7 @@ namespace AVDump2Lib.BlockConsumers {
 					MatroskaBlock matroskaBlock = (MatroskaBlock)reader.RetrieveValue();
 					Track track;
 					if(Tracks.TryGetValue(matroskaBlock.TrackNumber, out track)) {
-						Tracks[matroskaBlock.TrackNumber].ProcessBlock(matroskaBlock);
+						track.timecodes.Add(new TrackTimecode((ulong)((matroskaBlock.TimeCode + timecode) * track.timecodeScale * timecodeScale), matroskaBlock.FrameCount, matroskaBlock.DataLength));
 					} else {
 						throw new Exception("Invalid track index (" + matroskaBlock.TrackNumber + ") in matroska block");
 					}
@@ -371,118 +378,108 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.BlockGroup:
 					Read(reader, elementInfo.Length, false); break;
 				case DocTypeMatroskaV2.eId.Timecode:
-					long timeCode = (long)(ulong)reader.RetrieveValue();
-					foreach(var t in Tracks.Values) t.BeginOfCluster(timeCode);
+					timecode = (long)(ulong)reader.RetrieveValue();
 					break;
 
 				default: return false;
 			}
 			return true;
 		}
-		protected override void Validate() { foreach(var track in Tracks.Values) track.EndOfCluster(); }
+		protected override void Validate() { }
 
 		public override IEnumerator<KeyValuePair<string, object>> GetEnumerator() { yield break; }
 
 
 		public class Track {
-			public int TrackNumber { get; private set; }
+			public int trackNumber;
+			public double timecodeScale;
 
-			private long trackSize;
+			public List<TrackTimecode> timecodes;
 
-			private uint laces;
-			private long minStamp = -1;
-			private long highStamp;
-
-			private Collection<ClusterInfo> clusters;
-
-			private uint clusterLaces;
-			private uint clusterSize;
-			private long timeCode;
-
-			private long highStampold;
-			private double lacerate, minlacerate, maxlacerate;
-
-
-			internal Track(int trackNumber) {
-				this.TrackNumber = trackNumber;
-				clusters = new Collection<ClusterInfo>();
+			public Track() {
+				timecodes = new List<TrackTimecode>();
 			}
 
-			internal void EndOfCluster() {
-				lacerate = clusterLaces / (double)(highStamp - highStampold) * 1000;
-				if(clusters.Count == 0) {
-					minlacerate = lacerate;
-					maxlacerate = lacerate;
-				} else {
-					if(minlacerate > lacerate) minlacerate = lacerate;
-					if(maxlacerate < lacerate) maxlacerate = lacerate;
+			public TrackInfo CalcTrackInfo() {
+				timecodes.Sort();
+
+				var trackLength = TimeSpan.FromMilliseconds((timecodes.Last().timeCode - timecodes.First().timeCode) / 1000000);
+
+				double[] fps = new double[3];
+				double? minfps = null, maxfps = null;
+
+				var oldTC = timecodes.First();
+
+				int pos = 0, prevPos = 0, prevprevPos;
+				double maxDiff;
+
+				int frames = oldTC.frames;
+				long trackSize = oldTC.size;
+
+
+				foreach(var timecode in timecodes.Skip(1)) {
+					//fps[pos] = 1d / ((timecode.timeCode - oldTC.timeCode) / (double)oldTC.frames / 1000000000d);
+					fps[pos] = (double)(1000000000d * oldTC.frames) / (double)(timecode.timeCode - oldTC.timeCode);
+
+					oldTC = timecode;
+					prevprevPos = prevPos;
+					prevPos = pos;
+					pos = (pos + 1) % 3;
+
+					trackSize += timecode.size;
+					frames += timecode.frames;
+
+					maxDiff = (fps[prevprevPos] + fps[pos] / 2) * 0.1;
+					if(Math.Abs(fps[prevPos] - fps[prevprevPos]) < maxDiff && Math.Abs(fps[prevPos] - fps[pos]) < maxDiff) {
+						if(!minfps.HasValue || minfps.Value > fps[prevPos]) minfps = fps[prevPos];
+						if(!maxfps.HasValue || maxfps.Value < fps[prevPos]) maxfps = fps[prevPos];
+					}
 				}
-
-				highStampold = highStamp;
-
-				clusters.Add(new ClusterInfo((ulong)timeCode, clusterLaces, clusterSize));
-			}
-			internal void BeginOfCluster(long timeCode) {
-				this.timeCode = timeCode;
-				clusterSize = clusterLaces = 0;
-			}
-			internal void ProcessBlock(MatroskaBlock block) {
-				clusterSize += block.DataLength;
-				trackSize += block.DataLength;
-
-				clusterLaces += block.FrameCount;
-				laces += block.FrameCount;
-
-
-				if(highStamp < block.TimeCode + timeCode) highStamp = block.TimeCode + timeCode;
-				if(minStamp == -1 || minStamp > block.TimeCode + timeCode) minStamp = block.TimeCode + timeCode;
-			}
-
-			public TrackInfo CalcTrackInfo(double mult) {
-				var trackLength = TimeSpan.FromMilliseconds((highStamp - minStamp) * (mult / 1000000));
 
 				return new TrackInfo(
 					minBitrate: 0,
 					maxBitrate: 0,
 					averageBitrate: (trackSize != 0 && trackLength.Ticks != 0) ? trackSize * 8 / trackLength.TotalSeconds : (double?)null,
-					minLaceRate: 0,
-					maxLaceRate: 0,
-					averageLaceRate: (laces != 0 && trackLength.Ticks != 0) ? laces / trackLength.TotalSeconds : (double?)null,
+					minLaceRate: minfps,
+					maxLaceRate: maxfps,
+					averageLaceRate: (frames != 0 && trackLength.Ticks != 0) ? frames / trackLength.TotalSeconds : (double?)null,
 					trackLength: trackLength,
 					trackSize: trackSize,
-					laceCount: (int)laces
+					laceCount: (int)frames
 				);
-
 			}
-
-
 		}
+
 		public class TrackInfo {
 			public double MinBitrate { get; private set; }
 			public double MaxBitrate { get; private set; }
 			public double? AverageBitrate { get; private set; }
 
-			public double MinLaceRate { get; private set; }
-			public double MaxLaceRate { get; private set; }
+			public double? MinLaceRate { get; private set; }
+			public double? MaxLaceRate { get; private set; }
 			public double? AverageLaceRate { get; private set; }
 
 			public TimeSpan TrackLength { get; private set; }
 			public long TrackSize { get; private set; }
 			public int LaceCount { get; private set; }
 
-			public TrackInfo(double minBitrate, double maxBitrate, double? averageBitrate, double minLaceRate, double maxLaceRate, double? averageLaceRate, TimeSpan trackLength, long trackSize, int laceCount) {
+			public TrackInfo(double minBitrate, double maxBitrate, double? averageBitrate, double? minLaceRate, double? maxLaceRate, double? averageLaceRate, TimeSpan trackLength, long trackSize, int laceCount) {
 				MinBitrate = minBitrate; MaxBitrate = maxBitrate; AverageBitrate = averageBitrate;
 				MinLaceRate = minLaceRate; MaxLaceRate = maxLaceRate; AverageLaceRate = averageLaceRate;
 				TrackLength = trackLength; TrackSize = trackSize; LaceCount = laceCount;
 			}
 		}
-		private struct ClusterInfo {
-			public ulong clusterStamp;
-			public uint frames;
+		public struct TrackTimecode : IComparable<TrackTimecode> {
+			public ulong timeCode;
+			public byte frames;
 			public uint size;
 
-			public ClusterInfo(ulong clusterStamp, uint frames, uint size) {
-				this.frames = frames; this.size = size; this.clusterStamp = clusterStamp;
+			public TrackTimecode(ulong timeCode, byte frames, uint size) {
+				this.frames = frames; this.size = size; this.timeCode = timeCode;
+			}
+
+			public int CompareTo(TrackTimecode other) {
+				return timeCode.CompareTo(other.timeCode);
 			}
 		}
 	}
@@ -520,6 +517,7 @@ namespace AVDump2Lib.BlockConsumers {
 		private string language;
 		private ulong? minCache;
 		private ulong? maxBlockAdditionID;
+		private double? trackTimecodeScale;
 
 		public ulong? TrackNumber { get; private set; } //Not 0; Mandatory
 		public ulong? TrackUId { get; private set; } //Not 0
@@ -537,7 +535,7 @@ namespace AVDump2Lib.BlockConsumers {
 		public ulong? MaxCache { get; private set; }
 		public ulong MaxBlockAdditionID { get { return maxBlockAdditionID.HasValue ? maxBlockAdditionID.Value : 0; } } //Default: 0
 		public ulong? DefaultDuration { get; private set; }
-		public double? TrackTimecodeScale { get; private set; }
+		public double TrackTimecodeScale { get { return trackTimecodeScale.HasValue ? trackTimecodeScale.Value : 1d; } }
 		public string Name { get; private set; }
 		public string Language { get { return language != null ? language : "eng"; } } //Default: 'eng'
 		public string CodecId { get; private set; } //Mandatory
@@ -689,7 +687,7 @@ namespace AVDump2Lib.BlockConsumers {
 				case DocTypeMatroskaV2.eId.DefaultDuration:
 					DefaultDuration = (ulong)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.TrackTimecodeScale:
-					TrackTimecodeScale = (double)reader.RetrieveValue(); break;
+					trackTimecodeScale = (double)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.Name:
 					Name = (string)reader.RetrieveValue(); break;
 				case DocTypeMatroskaV2.eId.Language:

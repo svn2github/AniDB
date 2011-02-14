@@ -23,19 +23,15 @@ namespace AVDump2CL.Exceptions {
 		}
 
 
-		public void Save(string destPath) {
+		public XElement ToXElement(bool addPath) {
 			XElement infoElem, exElem;
 			XElement fileElem = new XElement("FileExceptions", infoElem = new XElement("Information"), exElem = new XElement("Exceptions"));
 			infoElem.Add(new XElement("AVDump2CLVersion", version.ToString()));
-			if(!string.IsNullOrEmpty(filePath)) infoElem.Add(new XElement("File", filePath));
+			if(addPath && !string.IsNullOrEmpty(filePath)) infoElem.Add(new XElement("File", filePath));
 
 			foreach(var item in Items) exElem.Add(item.ToXElement());
 
-			if(!Directory.Exists(destPath)) Directory.CreateDirectory(destPath);
-			string fileName = "Err " + DateTime.Now.ToString("yyyyMMdd HH.mm.ss.ffff") + ".xml";
-
-			using(var writer = new SafeXmlWriter(Path.Combine(destPath, fileName), Encoding.Unicode)) fileElem.Save(writer);
+			return fileElem;
 		}
-
 	}
 }

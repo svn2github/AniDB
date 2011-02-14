@@ -257,8 +257,8 @@ namespace AVDump2Lib.InfoGathering {
 					var maxFpsInfo = p[StreamType.Video, entry.Key.Index, EntryKey.MaxFrameRate];
 					var minFpsInfo = p[StreamType.Video, entry.Key.Index, EntryKey.MinFrameRate];
 
-					var fpsNode = node.AppendChild(createNode(name, vfrInfo != null ? "0" : value.Equals("") ? null : value, getName(entry.Provider)));
-					if(vfrInfo != null) addAttribute(fpsNode, "vfr", vfrInfo.Value);
+					var fpsNode = node.AppendChild(createNode(name, value.Equals("") ? null : value, getName(entry.Provider)));
+					if(vfrInfo != null) addAttribute(fpsNode, "avg", vfrInfo.Value);
 					if(maxFpsInfo != null) addAttribute(fpsNode, "max", maxFpsInfo.Value);
 					if(minFpsInfo != null) addAttribute(fpsNode, "min", minFpsInfo.Value);
 
@@ -390,8 +390,8 @@ namespace AVDump2Lib.InfoGathering {
 				if(chapterAtom.ChapterSegmentUId != null) entryNode.AppendChild(xmlDoc.CreateElement("SegId")).AppendChild(xmlDoc.CreateTextNode(new Guid((byte[])chapterAtom.ChapterSegmentUId).ToString()));
 
 				subNode = entryNode.AppendChild(xmlDoc.CreateElement("Pos"));
-				if(chapterAtom.ChapterTimeStart.HasValue) subNode.Attributes.Append(xmlDoc.CreateAttribute("start")).Value = (chapterAtom.ChapterTimeStart.Value / 1000000000d).ToString("0.###");
-				if(chapterAtom.ChapterTimeEnd.HasValue) subNode.Attributes.Append(xmlDoc.CreateAttribute("end")).Value = (chapterAtom.ChapterTimeEnd.Value / 1000000000d).ToString("0.###");
+				if(chapterAtom.ChapterTimeStart.HasValue) subNode.Attributes.Append(xmlDoc.CreateAttribute("start")).Value = (chapterAtom.ChapterTimeStart.Value / 1000000000d).ToString("0.###", CultureInfo.InvariantCulture);
+				if(chapterAtom.ChapterTimeEnd.HasValue) subNode.Attributes.Append(xmlDoc.CreateAttribute("end")).Value = (chapterAtom.ChapterTimeEnd.Value / 1000000000d).ToString("0.###", CultureInfo.InvariantCulture);
 
 				foreach(var chapterDisplay in chapterAtom.ChapterDisplays) {
 					subNode = entryNode.AppendChild(xmlDoc.CreateElement("Title"));

@@ -45,9 +45,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		private void AddStreamInfo(TrackEntrySection trackEntry, StreamType type, int index) {
 			ClusterSection.TrackInfo trackInfo = null;
 			try {
-				trackInfo = MFI.Segment.Cluster.Tracks[(int)trackEntry.TrackNumber.Value].CalcTrackInfo(
-					MFI.Segment.SegmentInfo.TimecodeScale * trackEntry.TrackTimecodeScale.GetValueOrDefault(1)
-				);
+				trackInfo = MFI.Segment.Cluster.Tracks[(int)trackEntry.TrackNumber.Value].CalcTrackInfo();
 			} catch(Exception) { }
 
 			Add(type, index, EntryKey.Index, () => index.ToString(), null);
@@ -66,13 +64,19 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 				case StreamType.Video:
 					Add(type, index, EntryKey.FrameCount, () => trackInfo.LaceCount.ToString(), null);
 					Add(type, index, EntryKey.FrameRate, () => (trackEntry.DefaultDuration.HasValue ? 1000000000d / trackEntry.DefaultDuration.Value : 0).ToString("0.000", CultureInfo.InvariantCulture), "fps");
-					if(!trackEntry.DefaultDuration.HasValue && trackInfo.AverageLaceRate.HasValue) Add(type, index, EntryKey.VFR, () => trackInfo.AverageLaceRate.Value.ToString("0.000", CultureInfo.InvariantCulture), "fps");
+
+					//if(trackInfo.MinLaceRate + 2 < trackInfo.MaxLaceRate) {
+					if(trackInfo.AverageLaceRate.HasValue) Add(type, index, EntryKey.VFR, () => trackInfo.AverageLaceRate.Value.ToString("0.000", CultureInfo.InvariantCulture), "fps");
+					if(trackInfo.MinLaceRate.HasValue) Add(type, index, EntryKey.MinFrameRate, () => trackInfo.MinLaceRate.Value.ToString("0.000", CultureInfo.InvariantCulture), "fps");
+					if(trackInfo.MaxLaceRate.HasValue) Add(type, index, EntryKey.MaxFrameRate, () => trackInfo.MaxLaceRate.Value.ToString("0.000", CultureInfo.InvariantCulture), "fps");
+					//}
+
 					Add(type, index, EntryKey.Width, () => trackEntry.Video.PixelWidth.ToString(), "px");
 					Add(type, index, EntryKey.Height, () => trackEntry.Video.PixelHeight.ToString(), "px");
 					Add(type, index, EntryKey.DAR, () => (trackEntry.Video.DisplayWidth / (double)trackEntry.Video.DisplayHeight).ToString("0.000", CultureInfo.InvariantCulture), null);
 					break;
 				case StreamType.Audio:
-					Add(type, index, EntryKey.SampleCount, () => (trackInfo.TrackLength.TotalSeconds * trackEntry.Audio.SamplingFrequency).ToString(), null);
+					Add(type, index, EntryKey.SampleCount, () => ((int)(trackInfo.TrackLength.TotalSeconds * trackEntry.Audio.SamplingFrequency)).ToString(), null);
 					Add(type, index, EntryKey.SamplingRate, () => trackEntry.Audio.SamplingFrequency.ToString(CultureInfo.InvariantCulture), null);
 					Add(type, index, EntryKey.ChannelCount, () => trackEntry.Audio.ChannelCount.ToString(), null);
 					break;

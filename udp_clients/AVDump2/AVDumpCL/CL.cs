@@ -54,10 +54,9 @@ using AVDump2Lib.InfoGathering.InfoProvider;
 using AVDump2CL.Exceptions;
 using System.Xml;
 using System.Text;
+using System.Net;
 
 namespace AVDump2CL {
-
-
 	public class CL {
 		#region Fields
 		private static Dictionary<char, eSwitches> char2SwitchEnum;
@@ -151,12 +150,12 @@ namespace AVDump2CL {
 #else
 			args = ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray();
 
-			if(args.Length == 0) {
+			/*if(args.Length == 0) {
 				Console.WriteLine("Error while parsing commandline arguments");
 				Console.WriteLine("Press any alpha-numeric key to continue");
 				Pause();
 				return;
-			}
+			}*/
 
 			try {
 				if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
@@ -198,8 +197,6 @@ namespace AVDump2CL {
 				i++;
 			}
 #endif
-
-
 			ProcessMedia(new List<string>(mediaLst));
 			if((switches & eSwitches.MonitorFolder) != 0) MonitorFiles();
 
@@ -210,14 +207,21 @@ namespace AVDump2CL {
 		}
 		private static string[] SetArguments() {
 			//return File.ReadAllLines("diff.txt").Select(str => str.Split('\t')[1]).OrderBy(str => str).Concat(new string[]{ "-extdiff:diff2.txt", "-qy" }).ToArray();
-	 
+
 			return new string[] {
 				//@"\\ROADRUNNER\Nods\Node A\Music",
 				//@"\\ROADRUNNER\Nods\Node A\Music\vivaldi, mozart, beethoven, chopin, ravel - ravel - bolero de ravel.mp3",
+				//@"F:\Anime\[Done]Mahoutsukai ni Taisetsu na Koto\[SNS] Mahoutsukai ni Taisetsu Na Koto 09 - Yume, the Girl and a Seed of Summer.mkv",
+				//@"F:\Anime\!Archive\Unchecked\Kanon (2006)\Kanon (2006) C1 - Opening [Coalgirls][Depr][Blu-ray].mkv",
+				@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDumpCL\bin\Release\9996780567.flv",
+				//@"D:\My Stuff\Downloads\Ducks.Take.Off.720p.QHD.CRF24.x264-CtrlHD.mkv",
 				//@"F:\Anime",
-				@"\\ROADRUNNER\Nods\Node A\Media\Stargate.Universe.S02E10.720p.HDTV.x264-CTU.mkv",
+				//@"F:\Anime\Bishoujo Senshi Sailor Moon R\Bishoujo Senshi Sailor Moon R 26 - Unmerciful Rubeus! The Four Sisters of Sadness [avatar][DVD][640x496].avi",
+				//@"\\ROADRUNNER\Nods\Node A\Media\Stargate.Universe.S02E10.720p.HDTV.x264-CTU.mkv",
 				//@"F:\Anime\[Done]InuYasha\Movies\[AHQ] Inuyasha I - Toki wo Koeru Omoi - Part 2 of 2.mkv",
 				//@"F:\Anime\Love Hina Again",
+				//@"D:\My Stuff\µT\Anime\Tide Line Blue\wikiupdates.com-TdLnBl-11.mkv",
+				//@"F:\Anime\!Archive\Unchecked\Hidamari Sketch X Hoshimittsu\Hidamari Sketch X Hoshimittsu 7 - May 3rd - 4th A Day in Seven Parts [Nutbladder][HDTV].mkv",
 				//@"E:\Anime\Now\1989\Ys\Ys 1 - Prologue [KRT][DVD][640x480].avi",
 				//@"D:\My Stuff\µT\Anime\Tenchi Universe\zx.tenchi-universe.05.divx5.ogm",
 				//@"D:\My Stuff\Downloads\New folder (2)\Mahou no Rouge Lipstick (Hentai) (Episode 001) [01F18A1F].rm",
@@ -235,17 +239,17 @@ namespace AVDump2CL {
 				//@"E:\Anime\Processed\One Piece\One Piece Norowareta Seiken\One Piece Norowareta Seiken 1v2 - Complete Movie [K-F][DVD].mp4",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
-				"-qYa",
+				"-yp",
 				//"-hlog:\"$CRC$ $ED2K$\":hlog.txt",
-				"-bsize:10:10",
+				//"-bsize:10:10",
 				//"-log:ogmlog2.xml",
-				"-log:bla.xml",
+				"-log:bla3.xml",
 				//"-acerr:acerr.txt",
 				//"-ac:arokh:Anime",
 				//"-host:ommina.homeip.net:9002",
 				//"-ac:arokh:containers",
 				//"-ext:mp4",
-				//"-ext:srt,ass,ssa,swf",
+				//"-ext:avi",
 				//"-extdiff:diff.txt",
 				//"-done:done.txt"
 			};
@@ -423,7 +427,21 @@ namespace AVDump2CL {
 				container.Reset();
 				processedBytes += e.File.Length;
 
-				if(e.Exceptions.Count != 0) e.Exceptions.Save(Path.Combine(AppPath, "Error"));
+				if(e.Exceptions.Count != 0) {
+					var exElem = e.Exceptions.ToXElement(true);
+
+					string exPath = Path.Combine(AppPath, "Error");
+					string exFileName = "Err " + DateTime.Now.ToString("yyyyMMdd HH.mm.ss.ffff") + ".xml";
+					if(!Directory.Exists(exPath)) Directory.CreateDirectory(exPath);
+
+					using(var writer = new SafeXmlWriter(Path.Combine(exPath, exFileName), Encoding.Unicode)) exElem.Save(writer);
+
+					exElem = e.Exceptions.ToXElement(false);
+					MemoryStream memStream = new MemoryStream();
+					using(var writer = new SafeXmlWriter(memStream, Encoding.Unicode)) exElem.Save(writer);
+
+					ACreq.Commit(new ACreqArgs(7, "avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, memStream.ToArray(), -1));
+				}
 			}
 
 			isProcessing = false;
@@ -521,7 +539,7 @@ namespace AVDump2CL {
 
 			if((switches & eSwitches.CreqXmlFormat) != 0) {
 				var tw = new StringWriter();
-				Info.CreateAVDumpLog(p).Save(new SafeXmlWriter(tw));
+				Info.CreateAVDumpLog(p).Save(new SafeXmlWriter(tw, lowerCaseElements: true));
 				log += tw.ToString();
 			}
 			if((switches & eSwitches.NewCreqXmlFormat) != 0) {
@@ -536,7 +554,7 @@ namespace AVDump2CL {
 			}
 			if((switches & eSwitches.MediaInfoOutPut) != 0) log += Info.CreateMediaInfoDump(e.File.FullName);
 
-			if(logPath != null && !String.IsNullOrEmpty(log)) File.AppendAllText(logPath, log + Environment.NewLine + Environment.NewLine);
+			if(logPath != null && !String.IsNullOrEmpty(log)) AppendAllText(logPath, log + Environment.NewLine + Environment.NewLine, "Couldn't update logfile");
 
 			#endregion
 
@@ -567,12 +585,13 @@ namespace AVDump2CL {
 
 			var detExt = p[StreamType.General, 0, EntryKey.Extension] != null ? p[StreamType.General, 0, EntryKey.Extension].Value : null;
 			if(!string.IsNullOrEmpty(extDiffListPath) && !string.IsNullOrEmpty(detExt) && !detExt.ToLower().Equals(e.File.Extension.Substring(1).ToLower())) {
-				File.AppendAllText(extDiffListPath, e.File.Extension.Substring(1) + " => " + detExt + "	" + e.File.FullName + Environment.NewLine);
+
+				AppendAllText(extDiffListPath, e.File.Extension.Substring(1) + " => " + detExt + "	" + e.File.FullName + Environment.NewLine, "Couldn't update extension diff file");
 			}
 
 			#region DoneLog Stream Writing
 			if(doneListPath != null && (wasACreqSent || username == null || password == null) && e.Exceptions.Count == 0) {
-				File.AppendAllText(doneListPath, e.File.FullName + Environment.NewLine);
+				AppendAllText(doneListPath, e.File.FullName + Environment.NewLine, "Couldn't update donelist file");
 				int index = doneListContent.BinarySearch(e.File.FullName.ToLower());
 				if(index < 0) doneListContent.Insert(~index, e.File.FullName);
 			}
@@ -590,7 +609,7 @@ namespace AVDump2CL {
 					if(!ed2k.BlueIsRed) {
 						ed2kStr += "*" + "ed2k://|file|" + e.File.Name + "|" + e.File.Length + "|" + BaseConverter.ToString(ed2k.BlueHash) + "|/";
 					}
-					File.AppendAllText(ed2kListPath, ed2kStr + Environment.NewLine);
+					AppendAllText(ed2kListPath, ed2kStr + Environment.NewLine, "Couldn't update ed2k list file");
 				}
 			}
 			#endregion
@@ -607,10 +626,10 @@ namespace AVDump2CL {
 
 					//    formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", ed2kStr);
 					//} else {
-						formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", BaseConverter.ToString(hashExecute.HashObj.Hash));
+					formattedStr = formattedStr.Replace("$" + hashExecute.Name + "$", BaseConverter.ToString(hashExecute.HashObj.Hash));
 					//}
 				}
-				File.AppendAllText(hashListPath, formattedStr + Environment.NewLine);
+				AppendAllText(hashListPath, formattedStr + Environment.NewLine, "Couldn't update hashlist file");
 			}
 			#endregion
 		}
@@ -635,15 +654,18 @@ namespace AVDump2CL {
 #if(HasACreq)
 		private static ACreqResult DoACreq(FileEnvironment e, InfoProviderBase infoProvider) {
 			MemoryStream stream = new MemoryStream();
-			Info.CreateAVDumpLog(infoProvider).Save(new SafeXmlWriter(stream, new UTF8Encoding(), Formatting.None));
+
+			//string xmlStr = 
+			Info.CreateAVDumpLog(infoProvider).Save(new SafeXmlWriter(stream, new UTF8Encoding(), Formatting.None, lowerCaseElements: true));
 			byte[] creqBytes = stream.ToArray();
 
 			try {
 				int tries = 0;
 				ACreqResult result;
 				do {
-					Console.Write("Sending Creq... ");
-					result = ACreq.Commit(new ACreqArgs("avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, creqBytes, (eSwitches.WaitForDumpReply & switches) != 0 ? timeout * 1000 : -1));
+
+					Console.Write("Sending Creq " + ((eSwitches.WaitForDumpReply & switches) != 0 ? "..." : "(Unchecked)"));
+					result = ACreq.Commit(new ACreqArgs(2, "avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, creqBytes, (eSwitches.WaitForDumpReply & switches) != 0 ? timeout * 1000 : -1));
 					tries++;
 					switch(result) {
 						case ACreqResult.ACreqSent: Console.WriteLine("Done."); break;
@@ -653,7 +675,7 @@ namespace AVDump2CL {
 							Console.WriteLine("Failed. Reason: " + System.Enum.GetName(typeof(ACreqResult), result));
 							Console.ResetColor();
 
-							if(!string.IsNullOrEmpty(acErrListPath)) File.AppendAllText(acErrListPath, e.File.FullName + " ACreq " + result.ToString() + Environment.NewLine);
+							if(!string.IsNullOrEmpty(acErrListPath)) AppendAllText(acErrListPath, e.File.FullName + " ACreq " + result.ToString() + Environment.NewLine, "Couldn't update acerr file");
 							break;
 					}
 				} while(result == ACreqResult.TimeOut && tries <= retries);
@@ -988,18 +1010,63 @@ Press any key to exit";
 
 		public static string AppPath { get { return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); } }
 		private static void GlobalExceptionHandler(object sender, UnhandledExceptionEventArgs e) {
-			ExceptionXElement ex = new ExceptionXElement((Exception)e.ExceptionObject, false);
 			string path = Path.Combine(AppPath, "Error");
-			if(!Directory.Exists(path)) Directory.CreateDirectory(path);
 			string fileName = "Err " + DateTime.Now.ToString("yyyyMMdd HH.mm.ss.ffff") + ".xml";
+			if(!Directory.Exists(path)) Directory.CreateDirectory(path);
+
+			ExceptionXElement ex;
+			try {
+				ex = new ExceptionXElement((Exception)e.ExceptionObject, false);
+			} catch(Exception) {
+				ex = new ExceptionXElement(new Exception("Couldn't save Exception"), false);
+			}
 
 			ex.Save(XmlWriter.Create(new SafeXmlWriter(Path.Combine(path, fileName), Encoding.Unicode), new XmlWriterSettings { OmitXmlDeclaration = true }));
 		}
+
 		private static void Pause() {
 			ConsoleKeyInfo cki;
 			do {
 				cki = Console.ReadKey();
 			} while(Char.IsControl(cki.KeyChar) && cki.Key != ConsoleKey.Enter);
+		}
+
+		private static void AppendAllText(string path, string contents, string error) {
+			int i = 3;
+			bool written = false;
+			while(!written && i != 0) {
+				try {
+					File.AppendAllText(path, contents);
+					written = true;
+				} catch(Exception) {
+					Thread.Sleep(100);
+				}
+				i--;
+			}
+
+			if(!written) {
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine(error);
+				Console.ResetColor();
+			}
+		}
+
+		private static string PostToPasteBin(string content) {
+			WebRequest webReq = WebRequest.Create("http://pastebin.com/api_public.php");
+			webReq.ContentType = "application/x-www-form-urlencoded";
+			webReq.Method = "POST";
+
+			byte[] b = Encoding.UTF8.GetBytes("paste_code=" + System.Web.HttpUtility.UrlEncode(content) +
+						 "&paste_name=" + System.Web.HttpUtility.UrlEncode(username) +
+						 "&paste_subdomain=AVDump2&paste_format=xml&paste_expire_date=1M");
+
+			System.IO.Stream os = webReq.GetRequestStream();
+			os.Write(b, 0, b.Length);
+			os.Close();
+
+			WebResponse webResponse = webReq.GetResponse();
+
+			return (new StreamReader(webResponse.GetResponseStream())).ReadToEnd();
 		}
 	}
 }
