@@ -14,10 +14,11 @@ namespace AVDump2CL.Misc {
 		}
 		private static void GetFiles(List<FileInfo> files, string[] paths, List<string> filter, bool includeSubFolders) {
 			foreach(var path in paths) {
+				string ext = System.IO.Path.GetExtension(path);
 				try {
 					if(System.IO.Directory.Exists(path)) {
 						if(includeSubFolders) GetFiles(files, System.IO.Directory.GetFileSystemEntries(path), filter, true);
-					} else if(filter.BinarySearch(System.IO.Path.GetExtension(path).Substring(1).ToLower()) >= 0) {
+					} else if(ext.Length != 0 && filter.BinarySearch(ext.Substring(1).ToLower()) >= 0) {
 						files.Add(new FileInfo(path));
 					}
 				} catch(Exception) { }

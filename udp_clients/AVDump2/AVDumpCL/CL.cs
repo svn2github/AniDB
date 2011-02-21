@@ -13,7 +13,7 @@
 
 #define Debug
 /**/
-//#define DebugRelease
+#define DebugRelease
 
 #if(DebugRelease)
 #define Debug
@@ -55,6 +55,8 @@ using AVDump2CL.Exceptions;
 using System.Xml;
 using System.Text;
 using System.Net;
+using System.Xml.Linq;
+using System.Globalization;
 
 namespace AVDump2CL {
 	public class CL {
@@ -103,7 +105,7 @@ namespace AVDump2CL {
 			dumpableExtensions = new List<String>(new string[] { "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
 			dumpableExtensions.Sort();
 
-			processExtensions = new List<string>(new string[] { "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			processExtensions = new List<string>(new string[] { "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
 			processExtensions.Sort();
 
 			char2SwitchEnum = new Dictionary<char, eSwitches>();
@@ -141,8 +143,20 @@ namespace AVDump2CL {
 		}
 
 		static void Main(string[] args) {
+			/*Random rnd = new Random();
+			byte[] b = new byte[8];
+			KeyValuePair<double, int>[] data = new KeyValuePair<double, int>[(1 << 10) * 10];
+			for(int i = 0;i < data.Length;i++) {
+				rnd.NextBytes(b);
+				//data[i] = new KeyValuePair<double, int>(i * b[i % 8], BitConverter.ToUInt16(b, 0));
+				data[i] = new KeyValuePair<double, int>(Math.Pow(10, (i >> 10) * 2) , i % 2 + 1);
+			}
+			var bla = Info.KMeansPP(10, data);*/
+
+			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
 			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
-			Console.OutputEncoding = new System.Text.UTF8Encoding(false);
+			//Console.OutputEncoding = new System.Text.UTF8Encoding(false);
 
 #if(SetArguments)
 			//if(!ParseClOptions(ArgsParser.Parse("-pya -hlog:\"$CRC32$ $ED2K$\":hlog.txt").ToArray())) return;
@@ -156,7 +170,6 @@ namespace AVDump2CL {
 				Pause();
 				return;
 			}*/
-
 			try {
 				if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
 			} catch(Exception) {
@@ -208,20 +221,25 @@ namespace AVDump2CL {
 		private static string[] SetArguments() {
 			//return File.ReadAllLines("diff.txt").Select(str => str.Split('\t')[1]).OrderBy(str => str).Concat(new string[]{ "-extdiff:diff2.txt", "-qy" }).ToArray();
 
+
 			return new string[] {
 				//@"\\ROADRUNNER\Nods\Node A\Music",
 				//@"\\ROADRUNNER\Nods\Node A\Music\vivaldi, mozart, beethoven, chopin, ravel - ravel - bolero de ravel.mp3",
 				//@"F:\Anime\[Done]Mahoutsukai ni Taisetsu na Koto\[SNS] Mahoutsukai ni Taisetsu Na Koto 09 - Yume, the Girl and a Seed of Summer.mkv",
 				//@"F:\Anime\!Archive\Unchecked\Kanon (2006)\Kanon (2006) C1 - Opening [Coalgirls][Depr][Blu-ray].mkv",
-				@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDumpCL\bin\Release\9996780567.flv",
+				//@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDumpCL\bin\Release\9996780567.flv",
 				//@"D:\My Stuff\Downloads\Ducks.Take.Off.720p.QHD.CRF24.x264-CtrlHD.mkv",
-				//@"F:\Anime",
+				//@"D:\My Stuff\Downloads\Kurutta Kyoutou - Danzai no Gakuen (Hentai) (Episode 001) [A892042D] .mp4",
 				//@"F:\Anime\Bishoujo Senshi Sailor Moon R\Bishoujo Senshi Sailor Moon R 26 - Unmerciful Rubeus! The Four Sisters of Sadness [avatar][DVD][640x496].avi",
 				//@"\\ROADRUNNER\Nods\Node A\Media\Stargate.Universe.S02E10.720p.HDTV.x264-CTU.mkv",
 				//@"F:\Anime\[Done]InuYasha\Movies\[AHQ] Inuyasha I - Toki wo Koeru Omoi - Part 2 of 2.mkv",
 				//@"F:\Anime\Love Hina Again",
+				//@"D:\My Stuff\Downloads\subtitles2\errors",
+				//@"D:\My Stuff\Downloads\sub",
+				//@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDumpCL\bin\Release\[实习医生格蕾.第六季].Grey's.Anatomy.S06E20.Hook.Line.And.Sinner.HDTV.XviD-2HD.chn.srt",
 				//@"D:\My Stuff\µT\Anime\Tide Line Blue\wikiupdates.com-TdLnBl-11.mkv",
-				//@"F:\Anime\!Archive\Unchecked\Hidamari Sketch X Hoshimittsu\Hidamari Sketch X Hoshimittsu 7 - May 3rd - 4th A Day in Seven Parts [Nutbladder][HDTV].mkv",
+				//@"E:\Anime\Seen\Unkown\[Hitsuji].The.Melancholy.of.Haruhi.Suzumiya.Play.All.DVD.Order.mkv",
+				@"F:\Anime\!Archive\Unchecked\Hidamari Sketch X Hoshimittsu\Hidamari Sketch X Hoshimittsu 7 - May 3rd - 4th A Day in Seven Parts [Nutbladder][HDTV].mkv",
 				//@"E:\Anime\Now\1989\Ys\Ys 1 - Prologue [KRT][DVD][640x480].avi",
 				//@"D:\My Stuff\µT\Anime\Tenchi Universe\zx.tenchi-universe.05.divx5.ogm",
 				//@"D:\My Stuff\Downloads\New folder (2)\Mahou no Rouge Lipstick (Hentai) (Episode 001) [01F18A1F].rm",
@@ -239,17 +257,17 @@ namespace AVDump2CL {
 				//@"E:\Anime\Processed\One Piece\One Piece Norowareta Seiken\One Piece Norowareta Seiken 1v2 - Complete Movie [K-F][DVD].mp4",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
-				"-yp",
+				"-yq",
 				//"-hlog:\"$CRC$ $ED2K$\":hlog.txt",
 				//"-bsize:10:10",
 				//"-log:ogmlog2.xml",
-				"-log:bla3.xml",
+				"-log:subs.xml",
 				//"-acerr:acerr.txt",
 				//"-ac:arokh:Anime",
 				//"-host:ommina.homeip.net:9002",
 				//"-ac:arokh:containers",
-				//"-ext:mp4",
-				//"-ext:avi",
+				//"-ext:srt",
+				//"-ext:avi,lrc",
 				//"-extdiff:diff.txt",
 				//"-done:done.txt"
 			};
@@ -418,6 +436,8 @@ namespace AVDump2CL {
 			FileEnvironment e;
 			var container = CreateContainer(blockCount, blockSize);
 			for(int i = 0;i < files.Count;i++) {
+				if(files[i].Length == 0) continue;
+
 				e = new FileEnvironment(appVersion, container, files[i], startedOn, files.Count, i, totalBytes, processedBytes);
 				try {
 					ProcessMediaFile(e);
@@ -436,11 +456,14 @@ namespace AVDump2CL {
 
 					using(var writer = new SafeXmlWriter(Path.Combine(exPath, exFileName), Encoding.Unicode)) exElem.Save(writer);
 
-					exElem = e.Exceptions.ToXElement(false);
-					MemoryStream memStream = new MemoryStream();
-					using(var writer = new SafeXmlWriter(memStream, Encoding.Unicode)) exElem.Save(writer);
-
-					ACreq.Commit(new ACreqArgs(7, "avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, memStream.ToArray(), -1));
+					if(username != null && password != null) {
+						try {
+							exElem = e.Exceptions.ToXElement(false);
+							MemoryStream memStream = new MemoryStream();
+							using(var writer = new SafeXmlWriter(memStream, Encoding.ASCII)) exElem.Save(writer);
+							ACreq.Commit(new ACreqArgs(7, "avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, memStream.ToArray(), -1));
+						} catch(Exception) { }
+					}
 				}
 			}
 
@@ -655,9 +678,16 @@ namespace AVDump2CL {
 		private static ACreqResult DoACreq(FileEnvironment e, InfoProviderBase infoProvider) {
 			MemoryStream stream = new MemoryStream();
 
+
 			//string xmlStr = 
-			Info.CreateAVDumpLog(infoProvider).Save(new SafeXmlWriter(stream, new UTF8Encoding(), Formatting.None, lowerCaseElements: true));
-			byte[] creqBytes = stream.ToArray();
+			byte[] creqBytes;
+			using(var writer = new SafeXmlWriter(stream, new UTF8Encoding(), Formatting.None, lowerCaseElements: true)) {
+				Info.CreateAVDumpLog(infoProvider).Save(writer);
+
+				creqBytes = new byte[stream.Length - 38];
+				stream.Position = 38;
+				stream.Read(creqBytes, 0, (int)stream.Length - 38);
+			}
 
 			try {
 				int tries = 0;
@@ -1021,7 +1051,17 @@ Press any key to exit";
 				ex = new ExceptionXElement(new Exception("Couldn't save Exception"), false);
 			}
 
-			ex.Save(XmlWriter.Create(new SafeXmlWriter(Path.Combine(path, fileName), Encoding.Unicode), new XmlWriterSettings { OmitXmlDeclaration = true }));
+			using(var writer = new SafeXmlWriter(Path.Combine(path, fileName), Encoding.ASCII)) {
+				ex.Save(XmlWriter.Create(writer, new XmlWriterSettings { OmitXmlDeclaration = true }));
+			}
+
+			if(username != null && password != null) {
+				try {
+					MemoryStream memStream = new MemoryStream();
+					using(var writer = new SafeXmlWriter(memStream, Encoding.ASCII)) ex.Save(writer);
+					ACreq.Commit(new ACreqArgs(7, "avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, memStream.ToArray(), -1));
+				} catch(Exception) { }
+			}
 		}
 
 		private static void Pause() {
@@ -1049,24 +1089,6 @@ Press any key to exit";
 				Console.WriteLine(error);
 				Console.ResetColor();
 			}
-		}
-
-		private static string PostToPasteBin(string content) {
-			WebRequest webReq = WebRequest.Create("http://pastebin.com/api_public.php");
-			webReq.ContentType = "application/x-www-form-urlencoded";
-			webReq.Method = "POST";
-
-			byte[] b = Encoding.UTF8.GetBytes("paste_code=" + System.Web.HttpUtility.UrlEncode(content) +
-						 "&paste_name=" + System.Web.HttpUtility.UrlEncode(username) +
-						 "&paste_subdomain=AVDump2&paste_format=xml&paste_expire_date=1M");
-
-			System.IO.Stream os = webReq.GetRequestStream();
-			os.Write(b, 0, b.Length);
-			os.Close();
-
-			WebResponse webResponse = webReq.GetResponse();
-
-			return (new StreamReader(webResponse.GetResponseStream())).ReadToEnd();
 		}
 	}
 }
