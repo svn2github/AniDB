@@ -24,6 +24,10 @@ namespace AVDump2Lib.InfoGathering.Parser.SubtitleInfo {
 		private Dictionary<string, string> info;
 		private Subs[] subtitles;
 
+		public Subs[] Subtitles {
+			get { return (Subs[])subtitles.Clone(); }
+		}
+
 		public IDX(string source) {
 			info = new Dictionary<string, string>();
 			Parse(source);
@@ -46,7 +50,9 @@ namespace AVDump2Lib.InfoGathering.Parser.SubtitleInfo {
 
 				string key = match.Groups[1].Value;
 				if(key.Equals("timestamp")) {
-					sub.Add(DateTime.ParseExact(Regex.Match(match.Groups[2].Value, "([^,]+)").Groups[1].Value, "HH:mm:ss:FFF", null));
+					try {
+						sub.Add(DateTime.ParseExact(Regex.Match(match.Groups[2].Value, "([^,]+)").Groups[1].Value, "HH:mm:ss:FFF", null));
+					} catch(Exception) {}
 
 				} else if(key.Equals("id")) {
 					subMatch = Regex.Match(match.Groups[2].Value, @"([^,]+), index\: (.+)");
@@ -55,7 +61,7 @@ namespace AVDump2Lib.InfoGathering.Parser.SubtitleInfo {
 					languageId = subMatch.Groups[1].Value;
 					if(!int.TryParse(subMatch.Groups[2].Value, out index)) throw new Exception();
 
-					language = source.Substring(match.Index, matches[i + 1].Index - match.Index);
+					language = source.Substring(match.Index, (i + 1 < matches.Count ? matches[i + 1].Index : source.Length) - match.Index);
 					language = Regex.Match(language, @"alt\: " + "([^\r\n]+)").Groups[1].Value;
 
 					sub = new List<DateTime>();
@@ -65,14 +71,18 @@ namespace AVDump2Lib.InfoGathering.Parser.SubtitleInfo {
 					info[key] = match.Groups[2].Value;
 				}
 			}
+
+			subtitles = subs.ToArray();
 		}
 
 		public class Subs {
-			private int index;
-			private string languageId;
-			private string language;
+			public int index { get; private set; }
+			public string languageId { get; private set; }
+			public string language { get; private set; }
 
 			private List<DateTime> subtitles;
+
+			public int SubtitleCount { get { return subtitles.Count; } }
 
 			internal Subs(int index, string langId, string lang, List<DateTime> subs) {
 				this.index = index;

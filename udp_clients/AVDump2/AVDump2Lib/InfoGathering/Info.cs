@@ -191,6 +191,7 @@ namespace AVDump2Lib.InfoGathering {
 			toAcreqName[EntryKey.BitrateMode] = "mode";
 			toAcreqName[EntryKey.DAR] = "ar";
 			toAcreqName[EntryKey.VFR] = null;
+			toAcreqName[EntryKey.TrackNumber] = null;
 			toAcreqName[EntryKey.MaxFrameRate] = null;
 			toAcreqName[EntryKey.MinFrameRate] = null;
 
@@ -198,12 +199,12 @@ namespace AVDump2Lib.InfoGathering {
 			var avmfNode = xmlDoc.CreateElement("avmf");
 			var lookUp = new Dictionary<KeyValuePair<StreamType, int>, XmlNode>();
 
-			XmlNode node;
+			XmlNode node, fpsNode = null;
 			CompositeInfoProvider comp = (CompositeInfoProvider)p;
 			foreach(var entry in p) {
 				var pair = new KeyValuePair<StreamType, int>(entry.Key.Type, entry.Key.Index);
 
-				if(pair.Key == StreamType.Text && (entry.Key.Entry == EntryKey.Bitrate || entry.Key.Entry == EntryKey.Duration)) continue;
+				if(pair.Key == StreamType.Text && (entry.Key.Entry == EntryKey.Bitrate || entry.Key.Entry == EntryKey.Duration || entry.Key.Entry == EntryKey.BitrateMode)) continue;
 
 				if(!lookUp.TryGetValue(pair, out node)) {
 					switch(pair.Key) {
@@ -257,10 +258,42 @@ namespace AVDump2Lib.InfoGathering {
 					var maxFpsInfo = p[StreamType.Video, entry.Key.Index, EntryKey.MaxFrameRate];
 					var minFpsInfo = p[StreamType.Video, entry.Key.Index, EntryKey.MinFrameRate];
 
-					var fpsNode = node.AppendChild(createNode(name, value.Equals("") ? null : value, getName(entry.Provider)));
+					fpsNode = node.AppendChild(createNode(name, value.Equals("") ? null : value, getName(entry.Provider)));
+					//fpsNode = node.AppendChild(createNode(name, null, getName(entry.Provider)));
+
+
 					if(vfrInfo != null) addAttribute(fpsNode, "avg", vfrInfo.Value);
 					if(maxFpsInfo != null) addAttribute(fpsNode, "max", maxFpsInfo.Value);
 					if(minFpsInfo != null) addAttribute(fpsNode, "min", minFpsInfo.Value);
+					//if(!value.Equals("")) addAttribute(fpsNode, "entry", value);
+
+					if(comp.GetProvider<MatroskaProvider>() != null) {
+						var matroskaProvider = comp.GetProvider<MatroskaProvider>();
+						var trackInfo = matroskaProvider.MFI.Segment.Cluster.Tracks[int.Parse(matroskaProvider[StreamType.Video, entry.Key.Index, EntryKey.TrackNumber].Value)].TrackInfo;
+						if(trackInfo != null && trackInfo.FPSTable != null) {
+							fpsNode = node.AppendChild(createNode("fpshistogram", null, getName(matroskaProvider)));
+							if(trackInfo.FPSTable.Count() > 10) {
+								addAttribute(fpsNode, "compressed", "k-means");
+
+								var cluster = KMeansPP(10, trackInfo.FPSTable.ToArray());
+								for(int i = 0;i < cluster.Length;i++) {
+									var fpsEntryNode = fpsNode.AppendChild(xmlDoc.CreateElement("entry"));
+									addAttribute(fpsEntryNode, "fps", cluster[i][0].ToString("0.000"));
+									addAttribute(fpsEntryNode, "count", cluster[i][1].ToString());
+								}
+
+
+							} else {
+								foreach(var item in trackInfo.FPSTable) {
+									var fpsEntryNode = fpsNode.AppendChild(xmlDoc.CreateElement("entry"));
+									addAttribute(fpsEntryNode, "fps", item.Key.ToString("0.000"));
+									addAttribute(fpsEntryNode, "count", item.Value.ToString());
+								}
+							}
+
+						}
+					}
+
 
 				} else if((entry.Key.Entry == EntryKey.Width || entry.Key.Entry == EntryKey.Height) && pair.Key == StreamType.Video) {
 					if(node["res_p"] == null) {
@@ -303,6 +336,8 @@ namespace AVDump2Lib.InfoGathering {
 				try { CreateChaptersNode(xmlDoc, chaptersNode, mil); } catch(Exception) { chaptersNode.RemoveAll(); }
 				if(chaptersNode.HasChildNodes) avmfNode.AppendChild(chaptersNode);
 			}
+
+			if(avmfNode["audio"] == null && avmfNode["video"] == null && avmfNode["duration"] != null) avmfNode.RemoveChild(avmfNode["duration"]);
 
 			return xmlDoc;
 		}
@@ -577,7 +612,83 @@ namespace AVDump2Lib.InfoGathering {
 			mi.Option("Internet", "No");
 			return mi;
 		}
+
+		public static double[][] KMeansPP(int k, KeyValuePair<double, int>[] data) { // TODO: Rewrite
+			double[] center = new double[k];
+			int[] clusterMap = new int[data.Length];
+
+
+			int minIndex = 0, maxIndex = 0;
+			center[0] = data[data.Length / (k + 1)].Key;
+			double distance, maxDistance, minDistance;
+			for(int i = 1;i < k;i++) {
+				maxDistance = 0;
+
+				for(int j = 0;j < data.Length;j++) {
+					minDistance = -1;
+					for(int l = 0;l < i;l++) {
+						distance = Math.Abs(center[l] - data[j].Key);
+						if(minDistance == -1 || distance < minDistance) {
+							minDistance = distance;
+							minIndex = j;
+						}
+					}
+					if(minDistance > maxDistance) {
+						maxDistance = minDistance;
+						maxIndex = minIndex;
+					}
+				}
+				center[i] = data[maxIndex].Key;
+			}
+
+			bool hasChanged;
+			do {
+				hasChanged = false;
+				for(int i = 0;i < data.Length;i++) {
+					minDistance = -1;
+					for(int j = 0;j < k;j++) {
+						distance = Math.Abs(center[j] - data[i].Key);
+						if(minDistance == -1 || distance < minDistance) {
+							minDistance = distance;
+							minIndex = j;
+						}
+					}
+					if(clusterMap[i] != minIndex) {
+						clusterMap[i] = minIndex;
+						hasChanged = true;
+					}
+				}
+
+				int count;
+				double sum;
+				for(int i = 0;i < k;i++) {
+					sum = count = 0;
+					for(int j = 0;j < clusterMap.Length;j++) {
+						if(clusterMap[j] == i) {
+							sum += data[j].Key * data[j].Value;
+							count += data[j].Value;
+						}
+					}
+					center[i] = sum / count;
+				}
+
+
+			} while(hasChanged);
+
+			double[][] bla = new double[data.Length][];
+			for(int i = 0;i < data.Length;i++) {
+				bla[i] = new double[] { clusterMap[i], data[i].Key, data[i].Value };
+			}
+
+
+			var q = from entry in bla orderby center[(int)entry[0]], Math.Abs(entry[1] - center[(int)entry[0]]) select entry;
+
+			var q2 = q.GroupBy(c => c[0]).Select(a => new double[] { center[(int)a.Key], a.Sum(b => b[2]) });
+
+			return q2.ToArray();
+		}
 	}
 
 	public class InfoCollection : Dictionary<StreamTypeEntryPair, InfoEntry> { public void Add(InfoEntry item) { Add(item.Key, item); } }
+
 }

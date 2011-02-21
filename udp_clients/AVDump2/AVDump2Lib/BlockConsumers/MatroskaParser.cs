@@ -400,7 +400,12 @@ namespace AVDump2Lib.BlockConsumers {
 				timecodes = new List<TrackTimecode>();
 			}
 
-			public TrackInfo CalcTrackInfo() {
+			private TrackInfo trackInfo;
+			public TrackInfo TrackInfo { get { return (trackInfo == null) ? trackInfo = CalcTrackInfo() : trackInfo; } }
+
+			private TrackInfo CalcTrackInfo() {
+				if(timecodes.Count == 0) return new ClusterSection.TrackInfo(null, null, null, null, null, null, null, new TimeSpan(0), 0, 0);
+
 				timecodes.Sort();
 
 				var trackLength = TimeSpan.FromMilliseconds((timecodes.Last().timeCode - timecodes.First().timeCode) / 1000000);
@@ -416,10 +421,14 @@ namespace AVDump2Lib.BlockConsumers {
 				int frames = oldTC.frames;
 				long trackSize = oldTC.size;
 
+				var fpsTable = new Dictionary<double, int>();
 
 				foreach(var timecode in timecodes.Skip(1)) {
 					//fps[pos] = 1d / ((timecode.timeCode - oldTC.timeCode) / (double)oldTC.frames / 1000000000d);
 					fps[pos] = (double)(1000000000d * oldTC.frames) / (double)(timecode.timeCode - oldTC.timeCode);
+
+					if(!fpsTable.ContainsKey(fps[pos])) fpsTable[fps[pos]] = 0;
+					fpsTable[fps[pos]]++;
 
 					oldTC = timecode;
 					prevprevPos = prevPos;
@@ -437,6 +446,8 @@ namespace AVDump2Lib.BlockConsumers {
 				}
 
 				return new TrackInfo(
+					fpsTable: fpsTable,
+
 					minBitrate: 0,
 					maxBitrate: 0,
 					averageBitrate: (trackSize != 0 && trackLength.Ticks != 0) ? trackSize * 8 / trackLength.TotalSeconds : (double?)null,
@@ -451,22 +462,26 @@ namespace AVDump2Lib.BlockConsumers {
 		}
 
 		public class TrackInfo {
-			public double MinBitrate { get; private set; }
-			public double MaxBitrate { get; private set; }
+			public double? MinBitrate { get; private set; }
+			public double? MaxBitrate { get; private set; }
 			public double? AverageBitrate { get; private set; }
 
 			public double? MinLaceRate { get; private set; }
 			public double? MaxLaceRate { get; private set; }
 			public double? AverageLaceRate { get; private set; }
 
+			Dictionary<double, int> fpsTable;
+			public IEnumerable<KeyValuePair<double, int>> FPSTable { get { return fpsTable; } }
+
 			public TimeSpan TrackLength { get; private set; }
 			public long TrackSize { get; private set; }
 			public int LaceCount { get; private set; }
 
-			public TrackInfo(double minBitrate, double maxBitrate, double? averageBitrate, double? minLaceRate, double? maxLaceRate, double? averageLaceRate, TimeSpan trackLength, long trackSize, int laceCount) {
+			public TrackInfo(Dictionary<double, int> fpsTable, double? minBitrate, double? maxBitrate, double? averageBitrate, double? minLaceRate, double? maxLaceRate, double? averageLaceRate, TimeSpan trackLength, long trackSize, int laceCount) {
 				MinBitrate = minBitrate; MaxBitrate = maxBitrate; AverageBitrate = averageBitrate;
 				MinLaceRate = minLaceRate; MaxLaceRate = maxLaceRate; AverageLaceRate = averageLaceRate;
 				TrackLength = trackLength; TrackSize = trackSize; LaceCount = laceCount;
+				this.fpsTable = fpsTable;
 			}
 		}
 		public struct TrackTimecode : IComparable<TrackTimecode> {
@@ -547,6 +562,7 @@ namespace AVDump2Lib.BlockConsumers {
 		public AudioSection Audio { get; private set; }
 		public ContentEncodingsSection ContentEncodings { get; private set; }
 		#endregion
+
 
 		public BitmapInfoHeader? GetBitMapInfoHeader() {
 			if(!CodecId.Equals("V_MS/VFW/FOURCC")) return null;

@@ -45,10 +45,11 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		private void AddStreamInfo(TrackEntrySection trackEntry, StreamType type, int index) {
 			ClusterSection.TrackInfo trackInfo = null;
 			try {
-				trackInfo = MFI.Segment.Cluster.Tracks[(int)trackEntry.TrackNumber.Value].CalcTrackInfo();
+				trackInfo = MFI.Segment.Cluster.Tracks[(int)trackEntry.TrackNumber.Value].TrackInfo;
 			} catch(Exception) { }
 
 			Add(type, index, EntryKey.Index, () => index.ToString(), null);
+			Add(type, index, EntryKey.TrackNumber, () => trackEntry.TrackNumber.Value.ToString(), null);
 			Add(type, index, EntryKey.Size, () => trackInfo.TrackSize.ToString(), "byte");
 			Add(type, index, EntryKey.Bitrate, () => trackInfo.AverageBitrate.HasValue ? trackInfo.AverageBitrate.Value.ToString("0", CultureInfo.InvariantCulture) : null, "bit/s");
 			Add(type, index, EntryKey.Duration, () => trackInfo.TrackLength.TotalSeconds.ToString(CultureInfo.InvariantCulture), "s");

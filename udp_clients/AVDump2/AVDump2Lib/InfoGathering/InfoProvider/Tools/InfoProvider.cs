@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 	public enum StreamType { General, Video, Audio, Text, Chapter, Hash, Unkown }
-	public enum EntryKey { None, Index, Size, Overhead, Bitrate, Date, Duration, Title, Language, CodecName, CodecId, CodecIdAlt, TwoCC, FourCC, Id, FrameCount, FrameRate, VFR, MaxFrameRate, MinFrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, FileExtension, EncodeSettings, EncodeLibrary, BitrateMode }
+	public enum EntryKey { None, Index, Size, Overhead, Bitrate, Date, Duration, Title, Language, CodecName, CodecId, CodecIdAlt, TwoCC, FourCC, Id, FrameCount, FrameRate, VFR, MaxFrameRate, MinFrameRate, Width, Height, DAR, Flags, SampleCount, SamplingRate, ChannelCount, WritingApp, MuxingApp, Extension, FileExtension, EncodeSettings, EncodeLibrary, BitrateMode, TrackNumber }
 
 	public struct StreamTypeEntryPair {
 		public readonly StreamType Type;

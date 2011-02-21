@@ -22,7 +22,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			MIL.Open(filePath);
 
 			Add(EntryKey.Size, Get("FileSize"), "byte");
-			Add(EntryKey.Duration, Get("Duration", str => (double.Parse(str, CultureInfo.InvariantCulture) / 1000).ToString("0.000", CultureInfo.InvariantCulture)), "s");
+			Add(EntryKey.Duration, Get("Duration", str => (double.Parse(str, CultureInfo.InvariantCulture) / 1000d).ToString("0.000", CultureInfo.InvariantCulture)), "s");
 			Add(EntryKey.FileExtension, Get("FileExtension") != null ? Get("FileExtension").ToLower() : null, null);
 			Add(EntryKey.WritingApp, Get("Encoded_Application"), null);
 			Add(EntryKey.MuxingApp, Get("Encoded_Library"), null);
@@ -42,7 +42,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 					Add(st, i, EntryKey.Language, Get(streamKind, i, "Language"), null);
 					Add(st, i, EntryKey.Duration, Get(streamKind, i, "Duration", str => (double.Parse(str.Split('/')[0], CultureInfo.InvariantCulture) / 1000).ToString("0.000", CultureInfo.InvariantCulture)), "s");
 					Add(st, i, EntryKey.Bitrate, Get(streamKind, i, "BitRate"), null);
-					Add(st, i, EntryKey.CodecId, ((Get(streamKind, i, "Format") + " -- " + nonEmpty(Get(streamKind, i, "Format_Version"), Get(streamKind, i, "CodecID"))).Trim() + " -- " + Get(streamKind, i, "Format_Profile")).Trim(), null);
+					Add(st, i, EntryKey.CodecId, ((Get(streamKind, i, "Format") + " -- " + nonEmpty(Get(streamKind, i, "Format_Version"), Get(streamKind, i, "CodecID"))).Trim() + " -- " + Get(streamKind, i, "Format_Profile").Split('/')[0]).Trim(), null);
 					Add(st, i, EntryKey.CodecIdAlt, Get(streamKind, i, "CodecID"), null);
 					Add(st, i, EntryKey.EncodeSettings, Get(streamKind, i, "Encoded_Library_Settings"), null);
 					Add(st, i, EntryKey.EncodeLibrary, Get(streamKind, i, "Encoded_Library"), null);
@@ -61,9 +61,9 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 							indeces[0]++;
 							break;
 						case eStreamType.Audio:
-							Add(st, i, EntryKey.SamplingRate, Get(streamKind, i, "SamplingRate"), null);
-							Add(st, i, EntryKey.SampleCount, Get(streamKind, i, "SamplingCount"), null);
-							Add(st, i, EntryKey.ChannelCount, Get(streamKind, i, "Channel(s)"), null);
+							Add(st, i, EntryKey.SamplingRate, Get(streamKind, i, "SamplingRate").Split('/')[0], null);
+							Add(st, i, EntryKey.SampleCount, Get(streamKind, i, "SamplingCount").Split('/')[0], null);
+							Add(st, i, EntryKey.ChannelCount, Get(streamKind, i, "Channel(s)").Split('/')[0], null);
 							indeces[1]++;
 							break;
 						case eStreamType.Text:
