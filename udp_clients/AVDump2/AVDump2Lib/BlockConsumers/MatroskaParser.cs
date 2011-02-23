@@ -427,8 +427,10 @@ namespace AVDump2Lib.BlockConsumers {
 					//fps[pos] = 1d / ((timecode.timeCode - oldTC.timeCode) / (double)oldTC.frames / 1000000000d);
 					fps[pos] = (double)(1000000000d * oldTC.frames) / (double)(timecode.timeCode - oldTC.timeCode);
 
-					if(!fpsTable.ContainsKey(fps[pos])) fpsTable[fps[pos]] = 0;
-					fpsTable[fps[pos]]++;
+					if(!double.IsInfinity(fps[pos]) && !double.IsNaN(fps[pos])) {
+						if(!fpsTable.ContainsKey(fps[pos])) fpsTable[fps[pos]] = 0;
+						fpsTable[fps[pos]]++;
+					}
 
 					oldTC = timecode;
 					prevprevPos = prevPos;

@@ -239,6 +239,7 @@ namespace AVDump2CL {
 				//@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDumpCL\bin\Release\[实习医生格蕾.第六季].Grey's.Anatomy.S06E20.Hook.Line.And.Sinner.HDTV.XviD-2HD.chn.srt",
 				//@"D:\My Stuff\µT\Anime\Tide Line Blue\wikiupdates.com-TdLnBl-11.mkv",
 				//@"E:\Anime\Seen\Unkown\[Hitsuji].The.Melancholy.of.Haruhi.Suzumiya.Play.All.DVD.Order.mkv",
+				//@"D:\My Stuff\µT\mIRC\[HorribleSubs]_Mitsudomoe_2_-_07_[720p].mkv",
 				@"F:\Anime\!Archive\Unchecked\Hidamari Sketch X Hoshimittsu\Hidamari Sketch X Hoshimittsu 7 - May 3rd - 4th A Day in Seven Parts [Nutbladder][HDTV].mkv",
 				//@"E:\Anime\Now\1989\Ys\Ys 1 - Prologue [KRT][DVD][640x480].avi",
 				//@"D:\My Stuff\µT\Anime\Tenchi Universe\zx.tenchi-universe.05.divx5.ogm",
@@ -257,13 +258,13 @@ namespace AVDump2CL {
 				//@"E:\Anime\Processed\One Piece\One Piece Norowareta Seiken\One Piece Norowareta Seiken 1v2 - Complete Movie [K-F][DVD].mp4",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
-				"-yq",
+				"-yoq",
 				//"-hlog:\"$CRC$ $ED2K$\":hlog.txt",
 				//"-bsize:10:10",
 				//"-log:ogmlog2.xml",
-				"-log:subs.xml",
+				//"-log:subs.xml",
 				//"-acerr:acerr.txt",
-				//"-ac:arokh:Anime",
+				"-ac:arokh:Anime",
 				//"-host:ommina.homeip.net:9002",
 				//"-ac:arokh:containers",
 				//"-ext:srt",
@@ -695,7 +696,7 @@ namespace AVDump2CL {
 				do {
 
 					Console.Write("Sending Creq " + ((eSwitches.WaitForDumpReply & switches) != 0 ? "..." : "(Unchecked)"));
-					result = ACreq.Commit(new ACreqArgs(2, "avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, creqBytes, (eSwitches.WaitForDumpReply & switches) != 0 ? timeout * 1000 : -1));
+					result = ACreq.Commit(new ACreqArgs(1, "avdumplib", appVersion.Build, hostAddress, hostPort, localPort, username, password, creqBytes, (eSwitches.WaitForDumpReply & switches) != 0 ? timeout * 1000 : -1));
 					tries++;
 					switch(result) {
 						case ACreqResult.ACreqSent: Console.WriteLine("Done."); break;
