@@ -10,30 +10,15 @@ jsVersionArray.push({
 window.onload = (function()
 {
 	InitDefault();
-	my_mark = false;
-	var form = document.getElementById('type.del');
-	if( form )
+
+	if(document.getElementById('type.del'))
 	{
-		add_check('do.del.notify.all');
-		form.onsubmit = do_submit;
+		var btns = document.getElementsByName("do.del.notify.all");
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].onclick = function(e) {
+				return confirm("This will delete ALL notifies. Continue?");
+			};
+		}
 	}
 });
-function do_mark()
-{
-	my_mark = true;
-}
-function do_submit(event)
-{
-	if( my_mark)
-	{
-		my_mark = false;
-		return confirm("This will delete ALL notifies. Continue?");
-	}
-	return true;
-}
-function add_check(name)
-{
-	var elements = document.getElementsByName(name);
-	for (var i = 0, elem = null; (elem = elements[i]); i++)
-		elem.onclick = do_mark;	
-}
+
