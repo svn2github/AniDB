@@ -66,6 +66,11 @@ div.badge div.inner.mod-special
 }
 
 
+div.badge div.inner.mod-benu
+{
+	background-image:url("../icons/achievements/mod-badge-center-benu1.png");
+}
+
 div.badge div.inner.mod-deridiot
 {
 	background-image:url("../icons/achievements/mod-badge-center-deridiot.png");
