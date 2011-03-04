@@ -51,12 +51,20 @@ div.badge.level8
 	background-image:url("../icons/achievements/badge-ring-level8.png");
 }
 
+
 div.badge div.inner
 {
 	background-repeat: no-repeat;
 	height: 80px;
 	width: 80px;
 }
+
+
+div.badge div.inner.mod-special
+{
+	background-image:url("../icons/achievements/mod-badge-center-special.png");
+}
+
 
 div.badge div.inner.mod-deridiot
 {
