@@ -7,7 +7,7 @@ jsVersionArray.push({
 	"changelog":"Initial version"
 });
 
-window.onload = (function()
+addEventSimple(window, "load", function()
 {
 	InitDefault();
 
@@ -15,6 +15,7 @@ window.onload = (function()
 	{
 		var btns = document.getElementsByName("do.del.notify.all");
 		for (var i = 0; i < btns.length; i++) {
+
 			btns[i].onclick = function(e) {
 				return confirm("This will delete ALL notifies. Continue?");
 			};
