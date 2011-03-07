@@ -232,6 +232,7 @@
 	float:none;
 }
 
+#layout-main div.userpage_all div.badges > div.badge,
 #layout-main div.userpage_all div.userprefs > div > div
 {
 	display: inline-table;
