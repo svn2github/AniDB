@@ -3,13 +3,17 @@ div.badge-container
 	text-align: center;
 }
 
+div.badge,
+div.badge div.inner
+{
+	background-repeat: no-repeat;
+	height: 80px;
+	width: 80px;
+}
 
 div.badge
 {
 	display: inline-block;
-	background-repeat: no-repeat;
-	height: 80px;
-	width: 80px;
 }
 
 
@@ -63,51 +67,42 @@ div.badge.special
 	background-image:url("../icons/achievements/ring-special.png");
 }
 
-
-div.badge div.inner
-{
-	background-repeat: no-repeat;
-	height: 80px;
-	width: 80px;
-}
-
-
-div.badge div.inner.special-code
+div.badge div.inner.special.code
 {
 	background-image:url("../icons/achievements/center-special-code3.png");
 }
 
-div.badge div.inner.special-creativity
+div.badge div.inner.special.creativity
 {
 	background-image:url("../icons/achievements/center-special-creativity.png");
 }
 
-div.badge div.inner.mod-benu
+div.badge div.inner.mod.benu
 {
 	background-image:url("../icons/achievements/center-mod-benu1.png");
 }
 
-div.badge div.inner.mod-deridiot
+div.badge div.inner.mod.deridiot
 {
 	background-image:url("../icons/achievements/center-mod-deridiot.png");
 }
 
-div.badge div.inner.mod-exp
+div.badge div.inner.mod.exp
 {
 	background-image:url("../icons/achievements/center-mod-exp.png");
 }
 
-div.badge div.inner.mod-nwa
+div.badge div.inner.mod.nwa
 {
 	background-image:url("../icons/achievements/center-mod-nwa.png");
 }
 
-div.badge div.inner.mod-ommina
+div.badge div.inner.mod.ommina
 {
 	background-image:url("../icons/achievements/center-mod-ommina1.png");
 }
 
-div.badge div.inner.mod-worf
+div.badge div.inner.mod.worf
 {
 	background-image:url("../icons/achievements/center-mod-worf.png");
 }
