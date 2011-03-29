@@ -8,6 +8,7 @@
 @import "../common/style/color/forum-default.css";
 @import "../common/style/text/default.css";
 @import "../common/style/content/page-anime.css";
+@import "../common/style/content/page-main.css";
 
 /* FMA specific styles */
 @import "style-content.css";
