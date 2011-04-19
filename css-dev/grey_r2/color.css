@@ -134,7 +134,10 @@ background-color:hsla(207, 86%, 44%, 0.4);
 background-color:hsla(127, 54%, 25%, 0.6);
 }
 #layout-content div.myvotes_all table .low,
-#layout-content div.animeatt_reviews div.review.disapproved > h4
+#layout-content div.animeatt_reviews div.review.disapproved > h4,
+#layout-content div.anime_all tr.invalid td,
+#layout-content div.group_all tr.invalid td,
+#layout-content div.ep_all tr.invalid td
 {
 background-color:hsla(0, 100%, 50%, 0.3);
 }
@@ -293,7 +296,7 @@ color:#898989;
 }
 #layout-main tr:hover th.field,
 #layout-main div.pane.account th:hover,
-tr:hover > *,
+tr:hover > td,
 #layout-main div.forum ul.topics li.row:hover,
 #layout-main div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.tabbed_pane div.pane table tr:hover > td,

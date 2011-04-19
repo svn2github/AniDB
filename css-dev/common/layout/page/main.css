@@ -149,6 +149,11 @@
 	text-align:left;
 }
 
+#layout-main div.main_all div.header div.latestnews span.counter
+{
+	float: right;
+}
+
 #layout-main div.main_all div.header div.latestnews > div
 {
 	text-align:center;

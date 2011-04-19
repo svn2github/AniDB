@@ -282,7 +282,8 @@ th.sortable
 #layout-main div.group_released td.state.stalled,
 #layout-main div.group_released td.state.unknown,
 #layout-main div.forum span.postdeleted,
-#layout-main div.forum span.postedited
+#layout-main div.forum span.postedited,
+#layout-main div.anime_all div.characters a.primary
 {
 	font-style:italic;
 }

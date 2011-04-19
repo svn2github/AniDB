@@ -5,6 +5,7 @@
 @import "../common/layout/page/all.css";
 @import "../common/style/text/default.css";
 @import "../common/style/content/page-anime.css";
+@import "../common/style/content/page-main.css";
 span.link,
 a
 {

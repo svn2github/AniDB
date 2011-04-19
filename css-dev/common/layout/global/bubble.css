@@ -167,3 +167,36 @@
 {
 	margin-right: 2em;
 }
+
+.g_bubble.stripe.medium > div.image:hover div.tooltip,
+.g_bubble.stripe.medium
+{
+	width:300px;
+}
+
+.g_bubble.stripe.medium > div.data
+{
+	width:235px;
+}
+
+.g_bubble.stripe.max > div.data div.name,
+.g_bubble.stripe.medium > div.data div.name
+{
+	margin-right: 2em;
+}
+
+.g_bubble.stripe.max
+{
+	width:98%;
+}
+
+.g_bubble.stripe.max > div.data
+{
+	width: auto;
+}
+
+.g_bubble.stripe.medium div.data div.eprange,
+.g_bubble.stripe.max > div.image:hover div.tooltip
+{
+	display:none;
+}
