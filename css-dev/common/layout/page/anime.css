@@ -184,3 +184,8 @@
 {
 	min-width: 11em;
 }
+
+#layout-main div.anime_all div.characters .g_bubble.stripe div.postbody
+{
+	padding: 4px;
+}
