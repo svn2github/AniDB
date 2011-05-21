@@ -1,0 +1,13 @@
+(C) 2011 by clone1006 aka. kelondir
+Version: 1.0 (21.05.2011)
+
+Simple "Tag-Cloud"-like html output of your completely watched anime. It creates an alphabetically ordered list with the font-size of the title corresponding to your permanent vote.
+
+no permanent vote:    font size 1
+1 <= your vote <= 4:  font size 1
+4 <  your vote <= 5:  font size 2
+5 <  your vote <= 6:  font size 3
+6 <  your vote <= 7:  font size 4
+7 <  your vote <= 8:  font size 5
+8 <  your vote <= 9:  font size 6
+9 <  your vote <= 10: font size 7
