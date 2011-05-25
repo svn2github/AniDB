@@ -599,7 +599,7 @@ function buildTable() {
 		"dub":{"text":'dub (audio ?, no subtitles)'},
 		"extdub":{"text":'external dub file (? audio)'},
 		"extsub":{"text":'external sub file (? subtitles)'},
-		"other":{"text":'other'}
+		"other":{"text":'other (do NOT use this for dubs)'}
 	};
 	var select = createSelectArray(null,null,null,doTemplateWork,null,optionArray);
 	createRow(tbody,createCell(null,'field',createText('Template:')),createCell(null,'value',select),'important');
