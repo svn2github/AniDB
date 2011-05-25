@@ -544,6 +544,11 @@ function doTemplateWork() {
 			} else
 				substrm.disable(false,1);
 			break;
+		case 'dub':
+			if (audstrm.streams[1]) audstrm.remove(1);
+			if (substrm.streams[1]) substrm.remove(1);
+			substrm.disable(true,0);
+			break;
 		case 'extdub':
 			vidstrm.disable(true,0);
 			substrm.disable(true,0);
@@ -586,9 +591,16 @@ function buildTable() {
 	cell.appendChild(newinput);
 	groupSearch = newinput;
 	createRow(tbody,createCell(null,'field',createText('Group:')),cell,'important');
-	var optionArray = {"manual":{"text":'manual input'},"rawsub":{"text":'raw (japanese audio, no subtitles)'},
-						"fansub":{"text":'fansub (japanese audio, ? subtitles)'},"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
-						"extdub":{"text":'external dub file (? audio)'},"extsub":{"text":'external sub file (? subtitles)'},"other":{"text":'other'}};
+	var optionArray = {
+		"manual":{"text":'manual input'},
+		"rawsub":{"text":'raw (japanese audio, no subtitles)'},
+		"fansub":{"text":'fansub (japanese audio, ? subtitles)'},
+		"dual":{"text":'dual (japanese audio, ? audio, ? subtitles)'},
+		"dub":{"text":'dub (audio ?, no subtitles)'},
+		"extdub":{"text":'external dub file (? audio)'},
+		"extsub":{"text":'external sub file (? subtitles)'},
+		"other":{"text":'other'}
+	};
 	var select = createSelectArray(null,null,null,doTemplateWork,null,optionArray);
 	createRow(tbody,createCell(null,'field',createText('Template:')),createCell(null,'value',select),'important');
 	createRow(tbody,createCell(null,'field',createBoldText('File Settings'),null,2));
