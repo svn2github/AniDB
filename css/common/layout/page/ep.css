@@ -49,6 +49,15 @@
 	padding:1em;
 }
 
+#layout-main div.ep_all div.summary
+{
+	clear:left;
+	margin-left:1em;
+	margin-right:1em;
+	margin-top:1em;
+	padding:1em;
+}
+
 #layout-main div.ep_all ul.links_top
 {
 	display:none;
