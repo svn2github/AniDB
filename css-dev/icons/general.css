@@ -16,6 +16,11 @@
 	background-image: url(../icons/icon/anidb_comment.gif);
 }
 
+*.i_summary
+{
+	background-image: url(../icons/icon/anidb_summary.gif);
+}
+
 *.i_report_entry,
 *.i_no_vote
 {
