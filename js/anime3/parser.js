@@ -194,6 +194,7 @@ function CEpisodeEntry(node) {
 	this.userCount = 0;
 	this.fileCount = 0;
 	this.other = '';
+	this.summary = '';
 	this.rating = '-';
 	this.ratingCount = 0;
 	this.newFiles = false;
@@ -216,6 +217,7 @@ function CEpisodeEntry(node) {
 		case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
 		case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
 		case 'other': this.other = nodeData(sNode); break;
+		case 'summary': this.summary = nodeData(sNode); break;
 		case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
 		case 'titles':
 			for (var k = 0; k < sNode.childNodes.length; k++) {

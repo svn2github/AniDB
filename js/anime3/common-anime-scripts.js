@@ -217,8 +217,8 @@ function createEpisodeIcons(episode) {
 		if (mylistEpEntries.length && mylistEpEntries.length == 1) icons['mylist'] = createIcon(null, 'MW', 'removeme', changeEpWatchedState, 'Mark as watched', 'i_seen_yes');
 	}
 	if (episode.isRecap) icons['recap'] = createIcon(null, '[recap] ', null, null, 'This episode is a recap (summary).', 'i_recap');
-	if (episode.other) icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+clean_input(episode.other), 'i_comment');
-	if (episode.other) icons['summary'] = createIcon(null, '[summary] ',null, null, 'Summary: '+clean_input(episode.other), 'i_summary');
+	if (episode.other)   icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+clean_input(episode.other), 'i_comment');
+	if (episode.summary) icons['summary'] = createIcon(null, '[summary] ',null, null, 'Summary: '+clean_input(episode.summary), 'i_summary');
 	return icons;
 }
 /* Function that creates an episode table row
