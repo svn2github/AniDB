@@ -218,6 +218,7 @@ function createEpisodeIcons(episode) {
 	}
 	if (episode.isRecap) icons['recap'] = createIcon(null, '[recap] ', null, null, 'This episode is a recap (summary).', 'i_recap');
 	if (episode.other) icons['comment'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+clean_input(episode.other), 'i_comment');
+	if (episode.other) icons['summary'] = createIcon(null, '[cmt] ',null, null, 'Comment: '+clean_input(episode.other), 'i_summary');
 	return icons;
 }
 /* Function that creates an episode table row
@@ -293,6 +294,7 @@ function createEpisodeRow(aid,eid,cols,skips) {
 					if (icons['fstate']) for (var s=0; s < icons['fstate'].length; s++) watchedState.appendChild(icons['fstate'][s]);
 					if (icons['recap']) watchedState.appendChild(icons['recap']);
 					if (icons['comment']) watchedState.appendChild(icons['comment']);
+					if (icons['summary']) watchedState.appendChild(icons['summary']);
 					if (icons['seen']) watchedState.appendChild(icons['seen']);
 					var cell = createCell(null, col['classname'], watchedState, null, colSpan);
 					cell.appendChild(eptitle);
