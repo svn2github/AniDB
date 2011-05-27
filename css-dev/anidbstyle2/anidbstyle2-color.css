@@ -449,3 +449,10 @@ div.quotebody
 {
 	color:#666666;
 }
+
+#layout-main div.forum div.g_bubble.rules
+{
+	background-color:#ECD5D8;
+	color:#BC2A4D;
+	border-color: #DEBFC3 #C4939F #C4939F #DEBFC3;
+}

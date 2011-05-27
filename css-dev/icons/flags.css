@@ -138,6 +138,16 @@
 	background-image: url(../icons/flags/anidb_sub_english.gif);
 }
 
+*.i_audio_eo
+{
+	background-image: url(../icons/flags/anidb_audio_esperanto.gif);
+}
+
+*.i_sub_eo
+{
+	background-image: url(../icons/flags/anidb_sub_esperanto.gif);
+}
+
 *.i_audio_fi
 {
 	background-image: url(../icons/flags/anidb_audio_finnish.gif);
@@ -550,4 +560,74 @@
 *.i_sub_zh-Hant
 {
 	background-image: url(../icons/flags/anidb_sub_traditional.gif);
+}
+
+*.i_audio_mn
+{
+	background-image: url(../icons/flags/anidb_audio_mongolian.gif);
+}
+
+*.i_sub_mn
+{
+	background-image: url(../icons/flags/anidb_sub_mongolian.gif);
+}
+
+*.i_audio_tl
+{
+	background-image: url(../icons/flags/anidb_audio_filipino.gif);
+}
+
+*.i_sub_tl
+{
+	background-image: url(../icons/flags/anidb_sub_filipino.gif);
+}
+
+*.i_audio_fa
+{
+	background-image: url(../icons/flags/anidb_audio_persian.gif);
+}
+
+*.i_sub_fa
+{
+	background-image: url(../icons/flags/anidb_sub_persian.gif);
+}
+
+*.i_audio_si
+{
+	background-image: url(../icons/flags/anidb_audio_shinhala.gif);
+}
+
+*.i_sub_si
+{
+	background-image: url(../icons/flags/anidb_sub_shinhala.gif);
+}
+
+*.i_audio_hi
+{
+	background-image: url(../icons/flags/anidb_audio_hindi.gif);
+}
+
+*.i_sub_hi
+{
+	background-image: url(../icons/flags/anidb_sub_hindi.gif);
+}
+
+*.i_audio_ht
+{
+	background-image: url(../icons/flags/anidb_audio_creole.gif);
+}
+
+*.i_sub_ht
+{
+	background-image: url(../icons/flags/anidb_sub_creole.gif);
+}
+
+*.i_audio_x-zht
+{
+	background-image: url(../icons/flags/anidb_audio_chinese-transcription.gif);
+}
+
+*.i_sub_x-zht
+{
+	background-image: url(../icons/flags/anidb_sub_chinese-transcription.gif);
 }
