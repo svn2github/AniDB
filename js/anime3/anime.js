@@ -926,6 +926,7 @@ function updateEpisodeTable() {
 							if (newFilesIcon) span.appendChild(newFilesIcon);
 							if (icons['recap']) span.appendChild(icons['recap']);
 							if (icons['comment']) span.appendChild(icons['comment']);
+							if (icons['summary']) span.appendChild(icons['summary']);
 							if (icons['seen']) span.appendChild(icons['seen']);
 							if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
 							if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
@@ -1016,6 +1017,7 @@ function changeWatchedState() {
 						}
 						if (icons['recap']) span.appendChild(icons['recap']);
 						if (icons['comment']) span.appendChild(icons['comment']);
+						if (icons['summary']) span.appendChild(icons['summary']);
 						if (icons['seen']) span.appendChild(icons['seen']);
 						if (icons['state']) for (var st = 0; st < icons['state'].length; st++) span.appendChild(icons['state'][st]);
 						if (icons['fstate']) for (var st = 0; st < icons['fstate'].length; st++) span.appendChild(icons['fstate'][st]);
