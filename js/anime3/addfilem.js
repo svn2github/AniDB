@@ -105,7 +105,7 @@ function MyFile(name, size, ed2k){
 		else return(1);
 	}
 	this.find_filetype = function(text){
-		var regx = /\.([a-z0-9]{2,4})$/i;
+		var regx = /\.([a-z0-9]{2,5})$/i;
 		if(regx.test(text)) return RegExp.$1.toLowerCase();
 	}
 	this.find_group = function(text){
