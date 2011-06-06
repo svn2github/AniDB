@@ -98,7 +98,7 @@ class Main(QtGui.QMainWindow):
             if unicode(self._ui.datatable.item(i,2).text()) == 'done':
                 done += 1
 
-        return done*100/self._ui.datatable.rowCount()        
+        return done*100/self._ui.datatable.rowCount()             
 
 #################################################
 #                                               #
@@ -125,6 +125,12 @@ class Main(QtGui.QMainWindow):
         self._enable_elements()
         if self._ui.exp.isChecked():
             self._output_export()
+
+    def _raise_error(self, path):
+        i = self._paths[path]
+        item = QtGui.QTableWidgetItem('error')
+        self._ui.datatable.setItem(i, 2, item)
+        QtGui.QMessageBox.information(self, "Error!", "Either the client is outdated or your username/password combination is wrong.", QtGui.QMessageBox.Ok)
 
     def _stop(self):
         if self._worker is not None:
@@ -194,7 +200,7 @@ class Main(QtGui.QMainWindow):
 
         paths    = []
         for i in range(self._ui.datatable.rowCount()):
-            if unicode(self._ui.datatable.item(i,2).text()) == 'new':
+            if unicode(self._ui.datatable.item(i,2).text()) != 'done':
                 path = os.path.join(unicode(self._ui.datatable.item(i,0).text()), unicode(self._ui.datatable.item(i,1).text()))
                 paths.append(path)
                 self._paths[path] = i
@@ -215,6 +221,7 @@ class Main(QtGui.QMainWindow):
             self._worker = avdump_worker(username, apikey, done, exp, paths)
             self.connect(self._worker, QtCore.SIGNAL("done"), self._done)
             self.connect(self._worker, QtCore.SIGNAL("finished"), self._finished)
+            self.connect(self._worker, QtCore.SIGNAL("error"), self._raise_error)
             self._worker.start()           
 
 #################################################
@@ -285,7 +292,13 @@ class avdump_worker(QtCore.QThread):
     def stop(self):
         self._was_stopped = True
         if self._isrunning is True:
-            self._avdump.kill()
+            self._avdump.terminate()
+
+    def _error_happened(self, output):
+        if "Either the client is outdated or your username/password combination is wrong" in output:
+            return True
+        else:
+            return False
 
     def run(self):
         self._isrunning = True
@@ -296,7 +309,12 @@ class avdump_worker(QtCore.QThread):
             arg = (u'avdump2cl.exe -ac:%s:%s %s %s "%s"') %(self._username, self._apikey, self._done, self._exp, path)
             self._avdump = subprocessw.Popen(arg, startupinfo = self._startupinfo, stdin=subprocessw.PIPE, stdout=subprocessw.PIPE, stderr=subprocessw.PIPE, shell=True)
             #self._avdump.communicate()
-            print self._avdump.communicate('through stdin to stdout')
+            stdout = self._avdump.communicate('through stdin to stdout')[0]
+            if self._error_happened(stdout) is True:
+                self.emit(QtCore.SIGNAL('error'), path)
+                self._isrunning = False
+                break
+            
             if self._was_stopped is False:
                 self.emit(QtCore.SIGNAL('done'), path)
 
