@@ -1,4 +1,5 @@
-import sys, os, platform, subprocessw, ConfigParser, string, unicodedata
+import sys, os, platform, ConfigParser, string, unicodedata
+import subprocessw_ctypes as subprocessw
 
 from time import time
 
@@ -277,6 +278,10 @@ class avdump_worker(QtCore.QThread):
         self._avdump      = None
         self._isrunning   = False
 
+        self._startupinfo              = subprocessw.STARTUPINFOW()
+        self._startupinfo.dwFlags     |= subprocessw.STARTF_USESHOWWINDOW
+        self._startupinfo.wShowWindow  = subprocessw.SW_HIDE
+
     def stop(self):
         self._was_stopped = True
         if self._isrunning is True:
@@ -287,8 +292,11 @@ class avdump_worker(QtCore.QThread):
         for path in self._paths:
             if self._was_stopped is True:
                 break
-            self._avdump = subprocessw.Popen((u'avdump2cl.exe -ac:%s:%s %s %s "%s"') %(self._username, self._apikey, self._done, self._exp, path))
-            self._avdump.communicate()
+
+            arg = (u'avdump2cl.exe -ac:%s:%s %s %s "%s"') %(self._username, self._apikey, self._done, self._exp, path)
+            self._avdump = subprocessw.Popen(arg, startupinfo = self._startupinfo, stdin=subprocessw.PIPE, stdout=subprocessw.PIPE, stderr=subprocessw.PIPE, shell=True)
+            #self._avdump.communicate()
+            print self._avdump.communicate('through stdin to stdout')
             if self._was_stopped is False:
                 self.emit(QtCore.SIGNAL('done'), path)
 
