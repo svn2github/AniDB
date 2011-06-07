@@ -289,16 +289,16 @@ class avdump_worker(QtCore.QThread):
         self._startupinfo.dwFlags     |= subprocessw.STARTF_USESHOWWINDOW
         self._startupinfo.wShowWindow  = subprocessw.SW_HIDE
 
-    def stop(self):
-        self._was_stopped = True
-        if self._isrunning is True:
-            self._avdump.terminate()
-
     def _error_happened(self, output):
         if "Either the client is outdated or your username/password combination is wrong" in output:
             return True
         else:
             return False
+
+    def stop(self):
+        self._was_stopped = True
+        if self._isrunning is True:
+            self._avdump.terminate()
 
     def run(self):
         self._isrunning = True
@@ -308,8 +308,7 @@ class avdump_worker(QtCore.QThread):
 
             arg = (u'avdump2cl.exe -ac:%s:%s %s %s "%s"') %(self._username, self._apikey, self._done, self._exp, path)
             self._avdump = subprocessw.Popen(arg, startupinfo = self._startupinfo, stdin=subprocessw.PIPE, stdout=subprocessw.PIPE, stderr=subprocessw.PIPE, shell=True)
-            #self._avdump.communicate()
-            stdout = self._avdump.communicate('through stdin to stdout')[0]
+            stdout = self._avdump.stdout.read()
             if self._error_happened(stdout) is True:
                 self.emit(QtCore.SIGNAL('error'), path)
                 self._isrunning = False

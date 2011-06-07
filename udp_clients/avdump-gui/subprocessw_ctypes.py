@@ -367,7 +367,7 @@ if mswindows:
         import locale # just for getpreferredencoding
         import ctypes
         from ctypes.wintypes import (BOOL, BYTE, DWORD, HANDLE, LPCWSTR,
-            LPWSTR, WORD)
+            LPWSTR, WORD, UINT)
 
         LPVOID = ctypes.c_void_p
         LPDWORD = ctypes.POINTER(DWORD)
@@ -456,7 +456,7 @@ if mswindows:
             ("CloseHandle", _kernel32))
         CloseHandle.errcheck = _check_non_zero
 
-        TerminateProcess = ctypes.WINFUNCTYPE(BOOL, HANDLE)(
+        TerminateProcess = ctypes.WINFUNCTYPE(BOOL, HANDLE, UINT)(
             ("TerminateProcess", _kernel32))
         TerminateProcess.errcheck = _check_non_zero
 
