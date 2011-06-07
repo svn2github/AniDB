@@ -8,7 +8,7 @@ setup(
             'packages'     : ['sip'],
             'optimize'     : 2,
             'bundle_files' : 1,
-            'dll_excludes' : ['w9xpopen.exe']
+            'dll_excludes' : ['w9xpopen.exe', 'mswsock.dll', 'powrprof.dll']
         }
     },
     zipfile = None

@@ -1,5 +1,4 @@
 import sys, os, platform, ConfigParser, string, unicodedata
-import subprocessw_ctypes as subprocessw
 
 from time import time
 
@@ -276,21 +275,14 @@ class Main(QtGui.QMainWindow):
 class avdump_worker(QtCore.QThread):
     def __init__(self, username, apikey, done, exp, paths):
         QtCore.QThread.__init__(self, parent=None)
-        self._username    = username
-        self._apikey      = apikey
-        self._done        = done
-        self._exp         = exp
         self._paths       = paths
         self._was_stopped = False
-        self._avdump      = None
         self._isrunning   = False
+        self._args        = (u'avdump2cl.exe -w -ac:%s:%s %s %s') %(username, apikey, done, exp)
 
-        self._startupinfo              = subprocessw.STARTUPINFOW()
-        self._startupinfo.dwFlags     |= subprocessw.STARTF_USESHOWWINDOW
-        self._startupinfo.wShowWindow  = subprocessw.SW_HIDE
-
-    def _error_happened(self, output):
-        if "Either the client is outdated or your username/password combination is wrong" in output:
+    def _error_happened(self, stdout):
+        if "Either the client is outdated or your username/password combination is wrong" in stdout:
+            self._isrunning = False
             return True
         else:
             return False
@@ -298,23 +290,23 @@ class avdump_worker(QtCore.QThread):
     def stop(self):
         self._was_stopped = True
         if self._isrunning is True:
-            self._avdump.terminate()
+            self._avdump.kill()
 
     def run(self):
         self._isrunning = True
+        self._avdump = avdump(self._args)
         for path in self._paths:
-            if self._was_stopped is True:
+            if self._was_stopped is True or self._isrunning is False:
                 break
 
-            arg = (u'avdump2cl.exe -ac:%s:%s %s %s "%s"') %(self._username, self._apikey, self._done, self._exp, path)
-            self._avdump = subprocessw.Popen(arg, startupinfo = self._startupinfo, stdin=subprocessw.PIPE, stdout=subprocessw.PIPE, stderr=subprocessw.PIPE, shell=True)
-            stdout = self._avdump.stdout.read()
+            stdout = self._avdump.dump(path)
             if self._error_happened(stdout) is True:
                 self.emit(QtCore.SIGNAL('error'), path)
                 self._isrunning = False
                 break
-            
-            if self._was_stopped is False:
+            elif self._was_stopped is True:
+                break
+            else:
                 self.emit(QtCore.SIGNAL('done'), path)
 
         self._isrunning = False
@@ -322,6 +314,24 @@ class avdump_worker(QtCore.QThread):
         if self._was_stopped is False:
             self.emit(QtCore.SIGNAL('finished'))
 
+class avdump():
+    def __init__(self, args):
+        self._avdump = QtCore.QProcess()
+        self._args   = args
+
+    def dump(self, path):
+        self._isrunning = True
+        self._avdump.start((u'%s "%s"') %(self._args, path))
+        self._avdump.waitForFinished()
+        stdout = self._avdump.readAll()
+        self._avdump.close()
+        self._isrunning = False
+        return stdout
+
+    def kill(self):
+        if self._isrunning:
+            self._avdump.kill()
+        
 def main():
     app = QtGui.QApplication(sys.argv)
     window=Main()
