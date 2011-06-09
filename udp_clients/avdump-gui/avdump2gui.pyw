@@ -209,17 +209,17 @@ class Main(QtGui.QMainWindow):
         if len(paths) > 0:
             self._ui.progressBar.setValue(self._calculate_progress())
             self._disable_elements()
-            done     = ''
+            done_file = None
             if self._ui.done.isChecked() is True:
-                done = '-done:done.txt'
+                done = "done.txt"
 
-            exp      = ''
+            export_file = None
             if self._ui.exp.isChecked() is True:
                 if not os.path.exists('exports'):
                     os.mkdir('exports')
-                exp  = '-exp:' + self._export_filename
+                exp  = self._export_filename
 
-            self._subprocess = avdump(username, apikey, done, exp, paths)
+            self._subprocess = avdump(username, apikey, done_file, export_file, paths)
             self.connect(self._subprocess, QtCore.SIGNAL("done"), self._done)
             self.connect(self._subprocess, QtCore.SIGNAL("finished"), self._finished)
             self.connect(self._subprocess, QtCore.SIGNAL("error"), self._raise_error)
@@ -276,15 +276,22 @@ class Main(QtGui.QMainWindow):
 
 
 class avdump(QtCore.QProcess):
-    """xx"""
+    """Subprocess using avdump to hash files and communicate with anidb"""
 
-    def __init__(self, username, apikey, done, exp, paths):
+    _procname = "avdump2cl.exe"
+
+    def __init__(self, username, apikey, done_file, export_file, paths):
         QtCore.QProcess.__init__(self)
         self._paths       = paths
         self._status_path = 0 
         self._was_stopped = False
         self._isrunning   = False
-        self._args        = (u'avdump2cl.exe -w -ac:%s:%s %s %s') %(username, apikey, done, exp)
+        self._args        = ["-w", "-ac:%s:%s" % (username, apikey)]
+        if done_file is not None:
+            self._args.append("-done:" + done_file)
+        if export_file is not None:
+            self._args.append("-exp:" + export_file)
+        self._args.extend(paths)
         self.stdout  = ''
 
         self.connect(self, QtCore.SIGNAL('readyReadStandardError()'), self._readStderr)
@@ -294,7 +301,6 @@ class avdump(QtCore.QProcess):
     def _readStdout(self):
         out = self.readAllStandardOutput()
         if out.startsWith("Done"): # ugly hack
-            print "RAR: done ", self._paths[self._status_path]
             self.emit(QtCore.SIGNAL('done'), self._paths[self._status_path])
             self._status_path += 1
         self.stdout += out
@@ -327,7 +333,7 @@ class avdump(QtCore.QProcess):
             self._isrunning = False
 
     def start(self):
-        QtCore.QProcess.start(self, self._args + u"".join(u' "%s"'%p for p in self._paths))
+        QtCore.QProcess.start(self, self._procname, self._args)
         self._isrunning = True
 
 
