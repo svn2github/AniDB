@@ -301,13 +301,7 @@ class avdump_worker(QtCore.QThread):
                 break
 
             self._avdump.dump(path)
-            stdout = None
-            loopcnt = 0
-            while stdout is None and loopcnt < 10:
-                loopcnt += 1
-                if loopcnt > 1:
-                    sleep(1)
-                stdout = self._avdump.stdout
+            stdout = self._avdump.stdout
 
             if self._error_happened(stdout) is True:
                 self.emit(QtCore.SIGNAL('error'), path)
@@ -328,14 +322,14 @@ class avdump():
     def __init__(self, args):
         self._avdump = QtCore.QProcess()
         self._args   = args
-        self.stdout  = None
+        self.stdout  = ''
 
         self._avdump.connect( self._avdump, QtCore.SIGNAL('readyReadStandardError()'), self._readStderr)
         self._avdump.connect( self._avdump, QtCore.SIGNAL('readyReadStandardOutput()'), self._readStdout)
         self._avdump.connect( self._avdump, QtCore.SIGNAL('finished( int)'), self._finished)
 
     def _readStdout(self):
-        self.stdout = self._avdump.readAllStandardOutput()
+        self.stdout += self._avdump.readAllStandardOutput()
 
     def _readStderr(self):
         print "error", self._avdump.readAllStandardError()
