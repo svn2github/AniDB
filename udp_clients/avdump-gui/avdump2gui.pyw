@@ -1,6 +1,6 @@
 import sys, os, platform, ConfigParser, string, unicodedata
 
-from time import time
+from time import time, sleep
 
 # Import Qt modules
 from PyQt4 import QtCore, QtGui
@@ -130,6 +130,7 @@ class Main(QtGui.QMainWindow):
         item = QtGui.QTableWidgetItem('error')
         self._ui.datatable.setItem(i, 2, item)
         QtGui.QMessageBox.information(self, "Error!", "Either the client is outdated or your username/password combination is wrong.", QtGui.QMessageBox.Ok)
+        self._enable_elements()
 
     def _stop(self):
         if self._worker is not None:
@@ -299,10 +300,19 @@ class avdump_worker(QtCore.QThread):
             if self._was_stopped is True or self._isrunning is False:
                 break
 
-            stdout = self._avdump.dump(path)
+            self._avdump.dump(path)
+            stdout = None
+            loopcnt = 0
+            while stdout is None and loopcnt < 10:
+                loopcnt += 1
+                if loopcnt > 1:
+                    sleep(1)
+                stdout = self._avdump.stdout
+
             if self._error_happened(stdout) is True:
                 self.emit(QtCore.SIGNAL('error'), path)
                 self._isrunning = False
+                self._was_stopped = True
                 break
             elif self._was_stopped is True:
                 break
@@ -318,19 +328,33 @@ class avdump():
     def __init__(self, args):
         self._avdump = QtCore.QProcess()
         self._args   = args
+        self.stdout  = None
+
+        self._avdump.connect( self._avdump, QtCore.SIGNAL('readyReadStandardError()'), self._readStderr)
+        self._avdump.connect( self._avdump, QtCore.SIGNAL('readyReadStandardOutput()'), self._readStdout)
+        self._avdump.connect( self._avdump, QtCore.SIGNAL('finished( int)'), self._finished)
+
+    def _readStdout(self):
+        self.stdout = self._avdump.readAllStandardOutput()
+
+    def _readStderr(self):
+        print "error", self._avdump.readAllStandardError()
+
+    def _finished(self):
+        self._avdump.close()
 
     def dump(self, path):
-        self._isrunning = True
         self._avdump.start((u'%s "%s"') %(self._args, path))
         self._avdump.waitForFinished()
-        stdout = self._avdump.readAll()
-        self._avdump.close()
-        self._isrunning = False
-        return stdout
 
     def kill(self):
-        if self._isrunning:
-            self._avdump.kill()
+        i = 0
+        while self._avdump.state() > 0:
+            i += 1
+            if i > 1:
+                sleep(1)
+            if self._avdump.state() > 0:
+                self._avdump.kill()
         
 def main():
     app = QtGui.QApplication(sys.argv)
