@@ -284,8 +284,6 @@ class avdump(QtCore.QProcess):
         QtCore.QProcess.__init__(self)
         self._paths       = paths
         self._status_path = 0 
-        self._was_stopped = False
-        self._isrunning   = False
         self._args        = ["-w", "-ac:%s:%s" % (username, apikey)]
         if done_file is not None:
             self._args.append("-done:" + done_file)
@@ -309,32 +307,26 @@ class avdump(QtCore.QProcess):
         print "error", self.readAllStandardError()
 
     def _finished(self, exitcode):
-        self._isrunning = False
-        self.close() # probably redundant
         # TODO: make error state depend on exitcode not sniffing the output
         if self._error_happened(self.stdout) is True:
             self.emit(QtCore.SIGNAL('error'), self._paths[self._status_path])
-            self._was_stopped = True
             return
-        if self._was_stopped is False:
+        if self.exitStatus() == self.NormalExit:
             self.emit(QtCore.SIGNAL('finished'))
 
     def _error_happened(self, stdout):
         if "Either the client is outdated or your username/password combination is wrong" in stdout:
-            self._isrunning = False
             return True
         else:
             return False
 
     def stop(self):
-        self._was_stopped = True
-        if self._isrunning is True and self.state() != self.NotRunning:
+        if self.state() != self.NotRunning:
             self.kill()
-            self._isrunning = False
+            self.waitForFinished()
 
     def start(self):
         QtCore.QProcess.start(self, self._procname, self._args)
-        self._isrunning = True
 
 
 def main():
