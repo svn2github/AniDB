@@ -342,9 +342,7 @@ class avdump():
         self._avdump.waitForFinished()
 
     def kill(self):
-        i = 0
         while self._avdump.state() > 0:
-            i += 1
             self._avdump.kill()
         
 def main():
