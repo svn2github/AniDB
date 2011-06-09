@@ -1,4 +1,4 @@
-import os, sys, time, unicodedata
+import os, sys, datetime, unicodedata
 import ConfigParser
 
 from PyQt4 import QtCore, QtGui
@@ -30,8 +30,7 @@ class Main(QtGui.QMainWindow):
         self._done_files = []
         self._worker = None
         self._last_dir = os.getcwd()
-        # rar: nicer to name export files with ISO date not unix timestamp?
-        self._export_filename = "exports/export_%d.txt" % time.time()
+        self._export_filename = "exports/export_%s.txt" % datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
 
         self._ui.datatable.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self._ui.datatable.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
@@ -57,6 +56,7 @@ class Main(QtGui.QMainWindow):
                 rows.sort()
                 rows.reverse()
                 for row in rows:
+                    del self._filelist[os.path.join(unicode(self._ui.datatable.item(row,0).text()), unicode(self._ui.datatable.item(row,1).text()))]
                     self._ui.datatable.removeRow(row)
                 self._ui.progressBar.setValue(self._calculate_progress())
 
