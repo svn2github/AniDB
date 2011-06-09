@@ -1,15 +1,25 @@
-import sys, os, platform, ConfigParser, string, unicodedata
+import os, sys, time, unicodedata
+import ConfigParser
 
-from time import time
-
-# Import Qt modules
 from PyQt4 import QtCore, QtGui
 
 # Import the compiled UI module
 from gui import Ui_MainWindow
 
-# Create a class for our main window
+
 class Main(QtGui.QMainWindow):
+    """Main window control for avidump GUI frontend"""
+
+    _allowed_extensions = frozenset(('7z', 'aac', 'ac3', 'ace', 'asf', 'ass',
+        'avi', 'dts', 'dtshd', 'flac', 'flv', 'idx', 'js', 'lrc', 'm2ts',
+        'm4a', 'mk3d', 'mka', 'mks', 'mkv', 'mov', 'mp3', 'mp4', 'mpeg',
+        'mpg', 'ogg', 'ogm', 'ogv', 'pjs', 'qt', 'ra', 'rar', 'rm', 'rmvb',
+        'rt', 'smi', 'smil', 'srt', 'ssa', 'sub', 'swf', 'thd', 'tmp', 'ts',
+        'tts', 'txt', 'wav', 'webm', 'wma', 'wmv', 'xss', 'zip'))
+
+    _allowed_extensions_str = "Dumpable Files (%s)" % " ".join(
+        "*." + ext for ext in sorted(_allowed_extensions))
+
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
         self._ui = Ui_MainWindow()
@@ -20,17 +30,8 @@ class Main(QtGui.QMainWindow):
         self._done_files = []
         self._worker = None
         self._last_dir = os.getcwd()
-        self._export_filename = 'exports/export_' + str(int(time())) + '.txt'
-        self._allowed_extensions = ('avi', 'mpg', 'mpeg', 'ts', 'm2ts', 'rm', 'rmvb', 'asf', 'wmv', 'mov', 'qt', 'ogm',
-                                   'mp4', 'mkv', 'swf', 'flv', 'ogv', 'webm', 'mk3d', 'srt', 'sub', 'ssa', 'smi', 'idx', 'ass',
-                                   'txt', 'mks', 'lrc', 'rt', 'tmp', 'js', 'pjs', 'tts', 'xss', 'mp3', 'aac', 'ac3', 'dts', 'wav',
-                                   'flac', 'wma', 'mka', 'ra', 'ogg', 'm4a', 'dtshd', 'thd', 'rar', 'zip', 'ace', '7z', 'smil')
-
-        tmp = []
-        for ext in self._allowed_extensions:
-            tmp.append('*.' + ext)
-
-        self._allowed_extensions_str = "Dumpable Files (" + " ".join(tmp) + ")"
+        # rar: nicer to name export files with ISO date not unix timestamp?
+        self._export_filename = "exports/export_%d.txt" % time.time()
 
         self._ui.datatable.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
         self._ui.datatable.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
@@ -159,14 +160,13 @@ class Main(QtGui.QMainWindow):
 
         no = self._ui.datatable.rowCount()
 
-        if platform.system().lower() == 'windows':
+        if os.sep == "\\":
             fileloc = fileloc.replace("/", "\\")
-            filepath, filename = fileloc.rsplit("\\", 1)
-        else:
-            filepath, filename = fileloc.rsplit("/", 1)
 
-        tmp, ext = filename.rsplit('.', 1)
-        if ext not in self._allowed_extensions:
+        filepath, filename = os.path.split(fileloc)
+
+        tmp, ext = os.path.splitext(filename)
+        if ext[1:] not in self._allowed_extensions:
             return
 
         self._last_dir = filepath
@@ -211,13 +211,13 @@ class Main(QtGui.QMainWindow):
             self._disable_elements()
             done_file = None
             if self._ui.done.isChecked() is True:
-                done = "done.txt"
+                done_file = "done.txt"
 
             export_file = None
             if self._ui.exp.isChecked() is True:
                 if not os.path.exists('exports'):
                     os.mkdir('exports')
-                exp  = self._export_filename
+                export_file = self._export_filename
 
             self._subprocess = avdump(username, apikey, done_file, export_file, paths)
             self.connect(self._subprocess, QtCore.SIGNAL("done"), self._done)
