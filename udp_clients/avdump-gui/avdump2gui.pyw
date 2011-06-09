@@ -1,6 +1,6 @@
 import sys, os, platform, ConfigParser, string, unicodedata
 
-from time import time, sleep
+from time import time
 
 # Import Qt modules
 from PyQt4 import QtCore, QtGui
@@ -345,10 +345,7 @@ class avdump():
         i = 0
         while self._avdump.state() > 0:
             i += 1
-            if i > 1:
-                sleep(1)
-            if self._avdump.state() > 0:
-                self._avdump.kill()
+            self._avdump.kill()
         
 def main():
     app = QtGui.QApplication(sys.argv)
