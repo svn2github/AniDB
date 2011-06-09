@@ -287,6 +287,10 @@ class avdump(QtCore.QProcess):
 
     _procname = "avdump2cl.exe"
 
+    _sig_stdout_ready = QtCore.SIGNAL('readyReadStandardOutput()')
+    _sig_stderr_ready = QtCore.SIGNAL('readyReadStandardError()')
+    _sig_finished = QtCore.SIGNAL('finished(int, QProcess::ExitStatus)')
+
     def __init__(self, username, apikey, done_file, export_file, paths):
         QtCore.QProcess.__init__(self)
         self._paths       = paths
@@ -299,9 +303,9 @@ class avdump(QtCore.QProcess):
         self._args.extend(paths)
         self.stdout  = ''
 
-        self.connect(self, QtCore.SIGNAL('readyReadStandardError()'), self._readStderr)
-        self.connect(self, QtCore.SIGNAL('readyReadStandardOutput()'), self._readStdout)
-        self.connect(self, QtCore.SIGNAL('finished(int)'), self._finished)
+        self.connect(self, self._sig_stdout_ready, self._readStdout)
+        self.connect(self, self._sig_stderr_ready, self._readStderr)
+        self.connect(self, self._sig_finished, self._finished)
 
     def _readStdout(self):
         out = self.readAllStandardOutput()
@@ -313,12 +317,12 @@ class avdump(QtCore.QProcess):
     def _readStderr(self):
         print "error", self.readAllStandardError()
 
-    def _finished(self, exitcode):
+    def _finished(self, exitcode, exitstatus):
         # TODO: make error state depend on exitcode not sniffing the output
         if self._error_happened(self.stdout) is True:
             self.emit(QtCore.SIGNAL('error'), self._paths[self._status_path])
             return
-        if self.exitStatus() == self.NormalExit:
+        if exitstatus == self.NormalExit:
             self.emit(QtCore.SIGNAL('finished'))
 
     def _error_happened(self, stdout):
