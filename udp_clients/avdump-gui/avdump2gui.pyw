@@ -1,4 +1,4 @@
-import os, sys, datetime, unicodedata
+import datetime, os, sys
 import ConfigParser
 
 from PyQt4 import QtCore, QtGui
@@ -17,8 +17,10 @@ class Main(QtGui.QMainWindow):
         'rt', 'smi', 'smil', 'srt', 'ssa', 'sub', 'swf', 'thd', 'tmp', 'ts',
         'tts', 'txt', 'wav', 'webm', 'wma', 'wmv', 'xss', 'zip'))
 
+    _allowed_extentions_globs = ["*." + ext for ext in _allowed_extensions]
+
     _allowed_extensions_str = "Dumpable Files (%s)" % " ".join(
-        "*." + ext for ext in sorted(_allowed_extensions))
+        _allowed_extentions_globs)
 
     def __init__(self):
         QtGui.QMainWindow.__init__(self)
@@ -143,36 +145,40 @@ class Main(QtGui.QMainWindow):
     def _slotFile(self):
         files = QtGui.QFileDialog.getOpenFileNames(self, 'File select', self._last_dir, self._allowed_extensions_str)
         for path in files:
-            self._add_file(unicode(path))
+            self._add_file(path)
 
     def _slotFolder(self):
-        path = unicode(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory", self._last_dir))
-        if path != '':
-            for root, dir, files in os.walk(path):
-                for filename in files:
-                    self._add_file(os.path.join(root, filename))
+        root_dir = QtGui.QFileDialog.getExistingDirectory(self,
+            "Select Directory", self._last_dir)
+        if not root_dir:
+            return
+        diter = QtCore.QDirIterator(root_dir, self._allowed_extentions_globs,
+            QtCore.QDir.Files, QtCore.QDirIterator.Subdirectories)
+        for path in iter(diter.next, ""):
+            self._add_file(path)
 
     def _add_file(self, fileloc):
-        if len(fileloc) == 0:
-            return
-        elif self._ui.done.isChecked() is True and unicodedata.normalize('NFKC', fileloc) in self._done_files:
-            return
-
-        no = self._ui.datatable.rowCount()
 
         if os.sep == "\\":
             fileloc = fileloc.replace("/", "\\")
 
-        filepath, filename = os.path.split(fileloc)
+        if self._ui.done.isChecked() and fileloc.normalized(
+                QtCore.QString.NormalizationForm_KD) in self._done_files:
+            return
 
+        no = self._ui.datatable.rowCount()
+
+        filepath, filename = os.path.split(unicode(fileloc))
+
+        # rar: is this check needed now both callers filter by filetype?
         tmp, ext = os.path.splitext(filename)
         if ext[1:] not in self._allowed_extensions:
             return
 
         self._last_dir = filepath
 
-        if fileloc not in self._filelist.keys():
-            self._filelist[fileloc] =  1
+        if fileloc not in self._filelist:
+            self._filelist[unicode(fileloc)] =  1
             self._ui.datatable.insertRow(no)
 
             item = QtGui.QTableWidgetItem(filepath)
@@ -272,7 +278,8 @@ class Main(QtGui.QMainWindow):
     def _read_done(self):
         if os.path.exists("done.txt"):
             for line in file("done.txt"):
-                self._done_files.append(unicodedata.normalize('NFKC', line.decode("utf8").strip()))
+                self._done_files.append(QtCore.QString.fromUtf8(line.strip())
+                    .normalized(QtCore.QString.NormalizationForm_KD))
 
 
 class avdump(QtCore.QProcess):
