@@ -14,6 +14,7 @@ class Main(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self)
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
+        self._subprocess = None
         self._filelist = {}
         self._paths = {}
         self._done_files = []
@@ -120,7 +121,6 @@ class Main(QtGui.QMainWindow):
     def _finished(self):
         self._paths = {}
         self._ui.progressBar.setValue(self._calculate_progress())
-        self._worker = None
         self._enable_elements()
         if self._ui.exp.isChecked():
             self._output_export()
@@ -133,8 +133,9 @@ class Main(QtGui.QMainWindow):
         self._enable_elements()
 
     def _stop(self):
-        if self._worker is not None:
-            self._worker.stop()
+        if self._subprocess is not None:
+            self._subprocess.stop()
+            self._subprocess = None
             self._output_export()
             self._enable_elements()
 
@@ -218,11 +219,11 @@ class Main(QtGui.QMainWindow):
                     os.mkdir('exports')
                 exp  = '-exp:' + self._export_filename
 
-            self._worker = avdump_worker(username, apikey, done, exp, paths)
-            self.connect(self._worker, QtCore.SIGNAL("done"), self._done)
-            self.connect(self._worker, QtCore.SIGNAL("finished"), self._finished)
-            self.connect(self._worker, QtCore.SIGNAL("error"), self._raise_error)
-            self._worker.start()
+            self._subprocess = avdump(username, apikey, done, exp, paths)
+            self.connect(self._subprocess, QtCore.SIGNAL("done"), self._done)
+            self.connect(self._subprocess, QtCore.SIGNAL("finished"), self._finished)
+            self.connect(self._subprocess, QtCore.SIGNAL("error"), self._raise_error)
+            self._subprocess.start()
 
 #################################################
 #                                               #
@@ -273,13 +274,44 @@ class Main(QtGui.QMainWindow):
             for line in file("done.txt"):
                 self._done_files.append(unicodedata.normalize('NFKC', line.decode("utf8").strip()))
 
-class avdump_worker(QtCore.QThread):
+
+class avdump(QtCore.QProcess):
+    """xx"""
+
     def __init__(self, username, apikey, done, exp, paths):
-        QtCore.QThread.__init__(self, parent=None)
+        QtCore.QProcess.__init__(self)
         self._paths       = paths
+        self._status_path = 0 
         self._was_stopped = False
         self._isrunning   = False
         self._args        = (u'avdump2cl.exe -w -ac:%s:%s %s %s') %(username, apikey, done, exp)
+        self.stdout  = ''
+
+        self.connect(self, QtCore.SIGNAL('readyReadStandardError()'), self._readStderr)
+        self.connect(self, QtCore.SIGNAL('readyReadStandardOutput()'), self._readStdout)
+        self.connect(self, QtCore.SIGNAL('finished(int)'), self._finished)
+
+    def _readStdout(self):
+        out = self.readAllStandardOutput()
+        if out.startsWith("Done"): # ugly hack
+            print "RAR: done ", self._paths[self._status_path]
+            self.emit(QtCore.SIGNAL('done'), self._paths[self._status_path])
+            self._status_path += 1
+        self.stdout += out
+
+    def _readStderr(self):
+        print "error", self.readAllStandardError()
+
+    def _finished(self, exitcode):
+        self._isrunning = False
+        self.close() # probably redundant
+        # TODO: make error state depend on exitcode not sniffing the output
+        if self._error_happened(self.stdout) is True:
+            self.emit(QtCore.SIGNAL('error'), self._paths[self._status_path])
+            self._was_stopped = True
+            return
+        if self._was_stopped is False:
+            self.emit(QtCore.SIGNAL('finished'))
 
     def _error_happened(self, stdout):
         if "Either the client is outdated or your username/password combination is wrong" in stdout:
@@ -290,66 +322,21 @@ class avdump_worker(QtCore.QThread):
 
     def stop(self):
         self._was_stopped = True
-        if self._isrunning is True:
-            self._avdump.kill()
+        if self._isrunning is True and self.state() != self.NotRunning:
+            self.kill()
+            self._isrunning = False
 
-    def run(self):
+    def start(self):
+        QtCore.QProcess.start(self, self._args + u"".join(u' "%s"'%p for p in self._paths))
         self._isrunning = True
-        self._avdump = avdump(self._args)
-        for path in self._paths:
-            if self._was_stopped is True or self._isrunning is False:
-                break
 
-            self._avdump.dump(path)
-            stdout = self._avdump.stdout
-
-            if self._error_happened(stdout) is True:
-                self.emit(QtCore.SIGNAL('error'), path)
-                self._isrunning = False
-                self._was_stopped = True
-                break
-            elif self._was_stopped is True:
-                break
-            else:
-                self.emit(QtCore.SIGNAL('done'), path)
-
-        self._isrunning = False
-
-        if self._was_stopped is False:
-            self.emit(QtCore.SIGNAL('finished'))
-
-class avdump():
-    def __init__(self, args):
-        self._avdump = QtCore.QProcess()
-        self._args   = args
-        self.stdout  = ''
-
-        self._avdump.connect( self._avdump, QtCore.SIGNAL('readyReadStandardError()'), self._readStderr)
-        self._avdump.connect( self._avdump, QtCore.SIGNAL('readyReadStandardOutput()'), self._readStdout)
-        self._avdump.connect( self._avdump, QtCore.SIGNAL('finished( int)'), self._finished)
-
-    def _readStdout(self):
-        self.stdout += self._avdump.readAllStandardOutput()
-
-    def _readStderr(self):
-        print "error", self._avdump.readAllStandardError()
-
-    def _finished(self):
-        self._avdump.close()
-
-    def dump(self, path):
-        self._avdump.start((u'%s "%s"') %(self._args, path))
-        self._avdump.waitForFinished()
-
-    def kill(self):
-        while self._avdump.state() > 0:
-            self._avdump.kill()
 
 def main():
     app = QtGui.QApplication(sys.argv)
     window=Main()
     window.show()
     sys.exit(app.exec_())
+
 
 if __name__ == "__main__":
     main()
