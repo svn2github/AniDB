@@ -97,7 +97,7 @@ class Main(QtGui.QMainWindow):
             if unicode(self._ui.datatable.item(i,2).text()) == 'done':
                 done += 1
 
-        return done*100/self._ui.datatable.rowCount()             
+        return done*100/self._ui.datatable.rowCount()
 
 #################################################
 #                                               #
@@ -217,12 +217,12 @@ class Main(QtGui.QMainWindow):
                 if not os.path.exists('exports'):
                     os.mkdir('exports')
                 exp  = '-exp:' + self._export_filename
-                
+
             self._worker = avdump_worker(username, apikey, done, exp, paths)
             self.connect(self._worker, QtCore.SIGNAL("done"), self._done)
             self.connect(self._worker, QtCore.SIGNAL("finished"), self._finished)
             self.connect(self._worker, QtCore.SIGNAL("error"), self._raise_error)
-            self._worker.start()           
+            self._worker.start()
 
 #################################################
 #                                               #
@@ -344,7 +344,7 @@ class avdump():
     def kill(self):
         while self._avdump.state() > 0:
             self._avdump.kill()
-        
+
 def main():
     app = QtGui.QApplication(sys.argv)
     window=Main()
