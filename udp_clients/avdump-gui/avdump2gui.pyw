@@ -108,7 +108,7 @@ class Main(QtGui.QMainWindow):
 #                 EVENT HANDLER                 #
 #                                               #
 #################################################
-    def closeEvent(self,event):
+    def closeEvent(self, event):
         self._stop()
         self._write_config()
         event.accept()
@@ -148,35 +148,29 @@ class Main(QtGui.QMainWindow):
             self._add_file(path)
 
     def _slotFolder(self):
-        root_dir = QtGui.QFileDialog.getExistingDirectory(self,
-            "Select Directory", self._last_dir)
+        root_dir = QtGui.QFileDialog.getExistingDirectory(self, "Select Directory", self._last_dir)
         if not root_dir:
             return
-        diter = QtCore.QDirIterator(root_dir, self._allowed_extentions_globs,
-            QtCore.QDir.Files, QtCore.QDirIterator.Subdirectories)
+        diter = QtCore.QDirIterator(root_dir, self._allowed_extentions_globs, QtCore.QDir.Files, QtCore.QDirIterator.Subdirectories)
         for path in iter(diter.next, ""):
             self._add_file(path)
 
     def _add_file(self, fileloc):
-
         if os.sep == "\\":
             fileloc = fileloc.replace("/", "\\")
 
-        if self._ui.done.isChecked() and fileloc.normalized(
-                QtCore.QString.NormalizationForm_KD) in self._done_files:
+        if self._ui.done.isChecked() and fileloc.normalized(QtCore.QString.NormalizationForm_KD) in self._done_files:
             return
-
-        no = self._ui.datatable.rowCount()
 
         filepath, filename = os.path.split(unicode(fileloc))
 
-        # rar: is this check needed now both callers filter by filetype?
         tmp, ext = os.path.splitext(filename)
         if ext[1:] not in self._allowed_extensions:
             return
 
         self._last_dir = filepath
 
+        no = self._ui.datatable.rowCount()
         if fileloc not in self._filelist:
             self._filelist[unicode(fileloc)] =  1
             self._ui.datatable.insertRow(no)
@@ -254,6 +248,14 @@ class Main(QtGui.QMainWindow):
 
             self._last_dir = self._get_config_bit(config, 'DEFAULT', 'last_dir')
 
+            try:
+                width  = int(self._get_config_bit(config, 'DEFAULT', 'window_width'))
+                height = int(self._get_config_bit(config, 'DEFAULT', 'window_height'))
+                if height > 450 or width > 600:
+                    self.resize(width, height)
+            except:
+                pass
+
     def _get_config_bit(self, config, section, option):
         try:
             return config.get(section, option)
@@ -265,6 +267,8 @@ class Main(QtGui.QMainWindow):
         config.set("DEFAULT", "username", str(self._ui.username.text()))
         config.set("DEFAULT", "apikey", str(self._ui.apikey.text()))
         config.set('DEFAULT', 'last_dir', self._last_dir)
+        config.set('DEFAULT', 'window_width', self._ui.main.width())
+        config.set('DEFAULT', 'window_height', self._ui.main.height())
         if self._ui.done.isChecked():
             config.set("DEFAULT", "done", 1)
         else:
