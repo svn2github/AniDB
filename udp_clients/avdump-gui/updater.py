@@ -24,7 +24,7 @@ class updater():
 
     def _download_file(self, filename):
         try:
-            return urllib.urlretrieve(self._base_url + filename)
+            return urllib.urlretrieve(self._base_url + "current/" + filename)
         except urllib2.HTTPError, e:
             print 'Unable to get latest version info - HTTPError = ' + str(e.reason)
             sys.exit(2)
@@ -52,7 +52,7 @@ class updater():
 
     def _md5_is_valid(self, org_md5, filename):
         new_md5 = self._get_md5(filename)
-        print filename, org_md5, new_md5
+        #print filename, org_md5, new_md5
         if org_md5 == new_md5:
             return True
         else:
@@ -79,6 +79,16 @@ class updater():
                 checksum = self._get_md5(os.path.join(root, filename))
                 locfiles[filename] = checksum
         return locfiles
+       
+    def _update_file(self, filename, checksum):
+        downloadedfile = self._download_file(filename)[0]
+        print filename, downloadedfile#, checksum
+        if self._md5_is_valid(checksum, downloadedfile) is True:
+            orgfile = os.path.join(os.getcwd(), 'dist', filename)
+            if os.path.exists(orgfile):
+                os.remove(orgfile)
+            print downloadedfile, orgfile
+            os.rename(downloadedfile, orgfile)
 
     def check_version(self):
         localfiles = self._get_localInfo()
@@ -87,24 +97,12 @@ class updater():
             print 'ERROR'
             return
 
-        needUpdate = []
         for avd2file in updateInfo['files']:
             if avd2file['name'] in localfiles.keys():
                 if localfiles[avd2file['name']] != avd2file['md5']:
-                    needUpdate.append(avd2file)
+                    self._update_file(avd2file['name'], avd2file['md5'])
             else:
-                needUpdate.append(avd2file)
-
-        print needUpdate
-
-        files = []
-        for avd2file in needUpdate:
-            downloadedfile = self._download_file(avd2file['name'])[0]
-            if self._md5_is_valid(avd2file['md5'], downloadedfile) is True:
-                files.append(downloadedfile)
-
-        print files
-        #self._update_files(files)
+                self._update_file(avd2file['name'], avd2file['md5'])
 
 if __name__ == "__main__":
     upd = updater()
