@@ -52,18 +52,10 @@ class updater():
 
     def _md5_is_valid(self, org_md5, filename):
         new_md5 = self._get_md5(filename)
-        #print filename, org_md5, new_md5
         if org_md5 == new_md5:
             return True
         else:
             return False
-
-    def _update_files(self, files):
-        for avd2file in files:
-            if os.path.exists(agentFile['name']):
-                os.remove(agentFile['name'])
-
-            os.rename(agentFile['tempFile'], agentFile['name'])
 
     def _get_updateInfo(self):
         response = self._get_response(self._version_url)
@@ -79,23 +71,25 @@ class updater():
                 checksum = self._get_md5(os.path.join(root, filename))
                 locfiles[filename] = checksum
         return locfiles
-       
+
     def _update_file(self, filename, checksum):
         downloadedfile = self._download_file(filename)[0]
-        print filename, downloadedfile#, checksum
         if self._md5_is_valid(checksum, downloadedfile) is True:
             orgfile = os.path.join(os.getcwd(), 'dist', filename)
             if os.path.exists(orgfile):
                 os.remove(orgfile)
-            print downloadedfile, orgfile
+            print filename, 'updated'
             os.rename(downloadedfile, orgfile)
+        else:
+            print filename + ' did not match its checksum - it is corrupted. This may be caused by network issues so please try again in a moment.'
+            sys.exit(1)
 
     def check_version(self):
         localfiles = self._get_localInfo()
         updateInfo = self._get_updateInfo()
         if updateInfo is None:
-            print 'ERROR'
-            return
+            print 'could not retrieve update information'
+            sys.exit(1)
 
         for avd2file in updateInfo['files']:
             if avd2file['name'] in localfiles.keys():
