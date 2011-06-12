@@ -1,4 +1,4 @@
-import datetime, os, sys
+import datetime, locale, os, sys
 import ConfigParser
 
 from PyQt4 import QtCore, QtGui
@@ -113,34 +113,36 @@ class Main(QtGui.QMainWindow):
         self._write_config()
         event.accept()
 
-    def _done(self, path):
+    def _file_hashing(self, path):
         i = self._paths[path]
-        item = QtGui.QTableWidgetItem('done')
-        self._ui.datatable.setItem(i, 2, item)
+        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('hashing'))
+
+    def _file_sending(self, path):
+        i = self._paths[path]
+        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('sending'))
+
+    def _file_done(self, path):
+        i = self._paths[path]
+        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('done'))
         if self._ui.exp.isChecked():
             self._output_export()
         self._ui.progressBar.setValue(self._calculate_progress())
 
-    def _finished(self):
+    def _file_aborted(self, path):
+        i = self._paths[path]
+        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('aborted'))
+
+    def _finished(self, exitcode, exitstatus):
         self._paths = {}
-        self._ui.progressBar.setValue(self._calculate_progress())
         self._enable_elements()
-        if self._ui.exp.isChecked():
-            self._output_export()
 
-    def _raise_error(self, path, error_message):
-        i = self._paths[path]
-        item = QtGui.QTableWidgetItem('error')
-        self._ui.datatable.setItem(i, 2, item)
+    def _raise_error(self, error_message):
         QtGui.QMessageBox.information(self, "Error!", error_message, QtGui.QMessageBox.Ok)
-        self._enable_elements()
 
     def _stop(self):
         if self._subprocess is not None:
             self._subprocess.stop()
             self._subprocess = None
-            self._output_export()
-            self._enable_elements()
 
     def _slotFile(self):
         files = QtGui.QFileDialog.getOpenFileNames(self, 'File select', self._last_dir, self._allowed_extensions_str)
@@ -190,13 +192,13 @@ class Main(QtGui.QMainWindow):
         apikey   = unicode(self._ui.apikey.text())
 
         if self._ui.datatable.rowCount() == 0:
-            QtGui.QMessageBox.information(self, "Error!", "No files to scan in list.", QtGui.QMessageBox.Ok)
+            self._raise_error("No files to scan in list.")
             return
         elif not os.path.exists('avdump2cl.exe'):
-            QtGui.QMessageBox.information(self, "Error!", "Avdump2cl.exe not found.", QtGui.QMessageBox.Ok)
+            self._raise_error("Program avdump2cl.exe not found")
             return
         elif len(username) == 0 or len(apikey) == 0:
-            QtGui.QMessageBox.information(self, "Error!", "No username and/or api-key specified!", QtGui.QMessageBox.Ok)
+            self._raise_error("No username and/or api-key specified!")
             return
 
         paths    = []
@@ -219,11 +221,15 @@ class Main(QtGui.QMainWindow):
                     os.mkdir('exports')
                 export_file = self._export_filename
 
-            self._subprocess = avdump(username, apikey, done_file, export_file, paths)
-            self.connect(self._subprocess, QtCore.SIGNAL("done"), self._done)
-            self.connect(self._subprocess, QtCore.SIGNAL("finished"), self._finished)
-            self.connect(self._subprocess, QtCore.SIGNAL("error"), self._raise_error)
-            self._subprocess.start()
+            proc = Avdump(username, apikey, done_file, export_file, paths)
+            self.connect(proc, proc.SIG_FILE_HASHING, self._file_hashing)
+            self.connect(proc, proc.SIG_FILE_SENDING, self._file_sending)
+            self.connect(proc, proc.SIG_FILE_ABORTED, self._file_aborted)
+            self.connect(proc, proc.SIG_FILE_DONE, self._file_done)
+            self.connect(proc, proc.SIG_FINISHED, self._finished)
+            self.connect(proc, proc.SIG_PROBLEM, self._raise_error)
+            self._subprocess = proc
+            proc.start()
 
 #################################################
 #                                               #
@@ -286,14 +292,25 @@ class Main(QtGui.QMainWindow):
                     .normalized(QtCore.QString.NormalizationForm_KC))
 
 
-class avdump(QtCore.QProcess):
+class Avdump(QtCore.QProcess):
     """Subprocess using avdump to hash files and communicate with anidb"""
 
     _procname = "avdump2cl.exe"
 
+    # rar: would be nice to communicate with avdump using a unicode encoding
+    _encoding = locale.getpreferredencoding()
+    _linesep = os.linesep.encode(_encoding)
+
+    SIG_FILE_HASHING = QtCore.SIGNAL('avdump_file_hashing')
+    SIG_FILE_SENDING = QtCore.SIGNAL('avdump_file_sending')
+    SIG_FILE_ABORTED = QtCore.SIGNAL('avdump_file_aborted')
+    SIG_FILE_DONE = QtCore.SIGNAL('avdump_file_done')
+    SIG_PROBLEM = QtCore.SIGNAL('avdump_problem')
+
+    SIG_FINISHED = QtCore.SIGNAL('finished(int, QProcess::ExitStatus)')
+
     _SIG_STDOUT_READY = QtCore.SIGNAL('readyReadStandardOutput()')
     _SIG_STDERR_READY = QtCore.SIGNAL('readyReadStandardError()')
-    _SIG_FINISHED = QtCore.SIGNAL('finished(int, QProcess::ExitStatus)')
 
     def __init__(self, username, apikey, done_file, export_file, paths):
         QtCore.QProcess.__init__(self)
@@ -309,57 +326,77 @@ class avdump(QtCore.QProcess):
 
         self.connect(self, self._SIG_STDOUT_READY, self._read_stdout)
         self.connect(self, self._SIG_STDERR_READY, self._read_stderr)
-        self.connect(self, self._SIG_FINISHED, self._finished)
+        self.connect(self, self.SIG_FINISHED, self._finished)
+
+    def start(self):
+        """Start the avdump child process"""
+        QtCore.QProcess.start(self, self._procname, self._args)
+
+    def stop(self):
+        """Kill the avdump child process if it's currently running
+
+        Ideally this function would not use kill at all, avdump should listen
+        to stdin and terminate when EOF is received from the close call.
+        """
+        if self.state() != self.NotRunning:
+            self.close()
+            self.kill()
+            self.waitForFinished()
 
     def _read_stdout(self):
         """Read available avdump output and generate corresponding events"""
         buffer = self._stdout_remainder + str(self.readAllStandardOutput())
         assert buffer, "_read_stdout called with nothing to process?"
-        lines = buffer.split(os.linesep)
+        lines = buffer.split(self._linesep)
         self._stdout_remainder = lines.pop()
         for line in lines:
             if __debug__:
                 print line
             if line:
-                self._process_line(line)
+                self._process_line(line.decode(self._encoding))
+        if self._stdout_remainder == "Sending Data... ":
+            self.emit(self.SIG_FILE_SENDING, self._paths[self._status_path])
 
     def _process_line(self, line):
         """Temporary function maintaining the old event generation style"""
+        if line.startswith("Folder: "):
+            self._current_folder = line.split(": ", 1)[1]
+            self._current_filename = None
+            return
+        if line.startswith("Filename: "):
+            # rar: ideally get filename from stdout, but encoding woes...
+            self._current_filename = line.split(": ", 1)[1]
+            self.emit(self.SIG_FILE_HASHING, self._paths[self._status_path])
+            return
         if line == "Sending Data... Done":
-            self.emit(QtCore.SIGNAL('done'), self._paths[self._status_path])
+            self._current_folder = self._current_filename = None
+            self.emit(self.SIG_FILE_DONE, self._paths[self._status_path])
             self._status_path += 1
+            return
         # rar: temp compat with avdump that doesn't write to stderr
         parts = line.split("Sending Data... Failed", 1)
         if not parts[0]:
             line = parts[1].strip(" .")
             if line == "Reason: TimeOut":
                 return # avdump will keep trying, not a hard error
-            self.emit(QtCore.SIGNAL('error'), self._paths[self._status_path], line)
+            #self.emit(self.SIG_PROBLEM, line)
 
     def _read_stderr(self):
         """Read available avdump error output and forward error messages"""
         buffer = str(self.readAllStandardError())
         assert buffer, "_read_stderr called with nothing to process?"
         sys.stderr.write(buffer)
-        lines = buffer.split(os.linesep)
+        lines = buffer.split(self._linesep)
         sys.stderr.write("\n".join(lines))
         lines[0] = self._stderr_remainder + lines[0]
         self._stderr_remainder = lines.pop()
-        # rar: add event generation for errors here
+        for line in lines:
+            self.emit(self.SIG_PROBLEM, line.decode(self._encoding))
 
     def _finished(self, exitcode, exitstatus):
-        # rar: probably don't want this logic, should fire event regardless
-        if exitstatus == self.NormalExit:
-            self.emit(QtCore.SIGNAL('finished'))
-
-    def stop(self):
-        if self.state() != self.NotRunning:
-            self.kill()
-            self.waitForFinished()
-
-    def start(self):
-        QtCore.QProcess.start(self, self._procname, self._args)
-
+        """Generate any events required on process exit"""
+        if self._current_filename:
+            self.emit(self.SIG_FILE_ABORTED, self._paths[self._status_path])
 
 def main():
     app = QtGui.QApplication(sys.argv)
