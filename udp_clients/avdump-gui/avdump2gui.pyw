@@ -323,6 +323,7 @@ class Avdump(QtCore.QProcess):
             self._args.append("-exp:" + export_file)
         self._args.extend(paths)
         self._stdout_remainder = self._stderr_remainder = ""
+        self._current_folder = self._current_filename = None
 
         self.connect(self, self._SIG_STDOUT_READY, self._read_stdout)
         self.connect(self, self._SIG_STDERR_READY, self._read_stderr)
