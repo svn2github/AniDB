@@ -379,7 +379,7 @@ class Avdump(QtCore.QProcess):
             line = parts[1].strip(" .")
             if line == "Reason: TimeOut":
                 return # avdump will keep trying, not a hard error
-            #self.emit(self.SIG_PROBLEM, line)
+            self.emit(self.SIG_PROBLEM, line)
 
     def _read_stderr(self):
         """Read available avdump error output and forward error messages"""
