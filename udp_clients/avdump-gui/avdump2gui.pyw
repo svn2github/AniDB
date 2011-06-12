@@ -159,7 +159,7 @@ class Main(QtGui.QMainWindow):
         if os.sep == "\\":
             fileloc = fileloc.replace("/", "\\")
 
-        if self._ui.done.isChecked() and fileloc.normalized(QtCore.QString.NormalizationForm_KD) in self._done_files:
+        if self._ui.done.isChecked() and fileloc.normalized(QtCore.QString.NormalizationForm_KC) in self._done_files:
             return
 
         filepath, filename = os.path.split(unicode(fileloc))
@@ -283,7 +283,7 @@ class Main(QtGui.QMainWindow):
         if os.path.exists("done.txt"):
             for line in file("done.txt"):
                 self._done_files.append(QtCore.QString.fromUtf8(line.strip())
-                    .normalized(QtCore.QString.NormalizationForm_KD))
+                    .normalized(QtCore.QString.NormalizationForm_KC))
 
 
 class avdump(QtCore.QProcess):
