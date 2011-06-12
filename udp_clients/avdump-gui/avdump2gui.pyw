@@ -128,11 +128,11 @@ class Main(QtGui.QMainWindow):
         if self._ui.exp.isChecked():
             self._output_export()
 
-    def _raise_error(self, path):
+    def _raise_error(self, path, error_message):
         i = self._paths[path]
         item = QtGui.QTableWidgetItem('error')
         self._ui.datatable.setItem(i, 2, item)
-        QtGui.QMessageBox.information(self, "Error!", "Either the client is outdated or your username/password combination is wrong.", QtGui.QMessageBox.Ok)
+        QtGui.QMessageBox.information(self, "Error!", error_message, QtGui.QMessageBox.Ok)
         self._enable_elements()
 
     def _stop(self):
@@ -291,9 +291,9 @@ class avdump(QtCore.QProcess):
 
     _procname = "avdump2cl.exe"
 
-    _sig_stdout_ready = QtCore.SIGNAL('readyReadStandardOutput()')
-    _sig_stderr_ready = QtCore.SIGNAL('readyReadStandardError()')
-    _sig_finished = QtCore.SIGNAL('finished(int, QProcess::ExitStatus)')
+    _SIG_STDOUT_READY = QtCore.SIGNAL('readyReadStandardOutput()')
+    _SIG_STDERR_READY = QtCore.SIGNAL('readyReadStandardError()')
+    _SIG_FINISHED = QtCore.SIGNAL('finished(int, QProcess::ExitStatus)')
 
     def __init__(self, username, apikey, done_file, export_file, paths):
         QtCore.QProcess.__init__(self)
@@ -305,35 +305,52 @@ class avdump(QtCore.QProcess):
         if export_file is not None:
             self._args.append("-exp:" + export_file)
         self._args.extend(paths)
-        self.stdout  = ''
+        self._stdout_remainder = self._stderr_remainder = ""
 
-        self.connect(self, self._sig_stdout_ready, self._readStdout)
-        self.connect(self, self._sig_stderr_ready, self._readStderr)
-        self.connect(self, self._sig_finished, self._finished)
+        self.connect(self, self._SIG_STDOUT_READY, self._read_stdout)
+        self.connect(self, self._SIG_STDERR_READY, self._read_stderr)
+        self.connect(self, self._SIG_FINISHED, self._finished)
 
-    def _readStdout(self):
-        out = self.readAllStandardOutput()
-        if out.startsWith("Done"): # ugly hack
+    def _read_stdout(self):
+        """Read available avdump output and generate corresponding events"""
+        buffer = self._stdout_remainder + str(self.readAllStandardOutput())
+        assert buffer, "_read_stdout called with nothing to process?"
+        lines = buffer.split(os.linesep)
+        self._stdout_remainder = lines.pop()
+        for line in lines:
+            if __debug__:
+                print line
+            if line:
+                self._process_line(line)
+
+    def _process_line(self, line):
+        """Temporary function maintaining the old event generation style"""
+        if line == "Sending Data... Done":
             self.emit(QtCore.SIGNAL('done'), self._paths[self._status_path])
             self._status_path += 1
-        self.stdout += out
+        # rar: temp compat with avdump that doesn't write to stderr
+        parts = line.split("Sending Data... Failed", 1)
+        if not parts[0]:
+            line = parts[1].strip(" .")
+            if line == "Reason: TimeOut":
+                return # avdump will keep trying, not a hard error
+            self.emit(QtCore.SIGNAL('error'), self._paths[self._status_path], line)
 
-    def _readStderr(self):
-        print "error", self.readAllStandardError()
+    def _read_stderr(self):
+        """Read available avdump error output and forward error messages"""
+        buffer = str(self.readAllStandardError())
+        assert buffer, "_read_stderr called with nothing to process?"
+        sys.stderr.write(buffer)
+        lines = buffer.split(os.linesep)
+        sys.stderr.write("\n".join(lines))
+        lines[0] = self._stderr_remainder + lines[0]
+        self._stderr_remainder = lines.pop()
+        # rar: add event generation for errors here
 
     def _finished(self, exitcode, exitstatus):
-        # TODO: make error state depend on exitcode not sniffing the output
-        if self._error_happened(self.stdout) is True:
-            self.emit(QtCore.SIGNAL('error'), self._paths[self._status_path])
-            return
+        # rar: probably don't want this logic, should fire event regardless
         if exitstatus == self.NormalExit:
             self.emit(QtCore.SIGNAL('finished'))
-
-    def _error_happened(self, stdout):
-        if "Either the client is outdated or your username/password combination is wrong" in stdout:
-            return True
-        else:
-            return False
 
     def stop(self):
         if self.state() != self.NotRunning:
