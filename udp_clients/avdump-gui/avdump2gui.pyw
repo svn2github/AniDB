@@ -137,7 +137,8 @@ class Main(QtGui.QMainWindow):
         self._enable_elements()
 
     def _raise_error(self, error_message):
-        QtGui.QMessageBox.information(self, "Error!", error_message, QtGui.QMessageBox.Ok)
+        self._subprocess.stop()
+        QtGui.QMessageBox.critical(self, "Error!", error_message, QtGui.QMessageBox.Ok)
 
     def _stop(self):
         if self._subprocess is not None:
@@ -363,24 +364,14 @@ class Avdump(QtCore.QProcess):
         if line.startswith("Folder: "):
             self._current_folder = line.split(": ", 1)[1]
             self._current_filename = None
-            return
-        if line.startswith("Filename: "):
+        elif line.startswith("Filename: "):
             # rar: ideally get filename from stdout, but encoding woes...
             self._current_filename = line.split(": ", 1)[1]
             self.emit(self.SIG_FILE_HASHING, self._paths[self._status_path])
-            return
-        if line == "Sending Data... Done":
+        elif line == "Sending Data... Done":
             self._current_folder = self._current_filename = None
             self.emit(self.SIG_FILE_DONE, self._paths[self._status_path])
             self._status_path += 1
-            return
-        # rar: temp compat with avdump that doesn't write to stderr
-        parts = line.split("Sending Data... Failed", 1)
-        if not parts[0]:
-            line = parts[1].strip(" .")
-            if line == "Reason: TimeOut":
-                return # avdump will keep trying, not a hard error
-            self.emit(self.SIG_PROBLEM, line)
 
     def _read_stderr(self):
         """Read available avdump error output and forward error messages"""
@@ -392,6 +383,8 @@ class Avdump(QtCore.QProcess):
         lines[0] = self._stderr_remainder + lines[0]
         self._stderr_remainder = lines.pop()
         for line in lines:
+            if "Reason: TimeOut" in line:
+                return # avdump will keep trying, not a hard error
             self.emit(self.SIG_PROBLEM, line.decode(self._encoding))
 
     def _finished(self, exitcode, exitstatus):
