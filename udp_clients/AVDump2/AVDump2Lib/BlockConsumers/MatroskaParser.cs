@@ -42,7 +42,7 @@ namespace AVDump2Lib.BlockConsumers {
 
 		private void ReadBytesUpdater() {
 			int timerRes = 40;
-			int ttl = 10000;
+			int ttl = 20000;
 			int ticks = ttl / timerRes;
 
 			while(!HasFinished) {
@@ -124,6 +124,13 @@ namespace AVDump2Lib.BlockConsumers {
 
 			if(elementInfo != null && elementInfo.ElementType.Id == (int)DocTypeMatroskaV2.eId.Segment) {
 				Segment = Section.CreateRead(new SegmentSection(), reader, elementInfo.Length);
+
+				try {
+					while((elementInfo = reader.NextElementInfo()) != null) {
+						Segment.Cluster.Read(reader, elementInfo.Length);
+					}
+				} catch(Exception) { Debug.WriteLine("After Segment Section Read error"); }
+
 			} else {
 				//Todo: dispose reader / add warning
 				return;

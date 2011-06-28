@@ -410,7 +410,11 @@ namespace AVDump2Lib.BlockConsumers {
 							offset += commentState[i].Length;
 						}
 
-						Comments = CommentHeader.Parse(b);
+						try {
+							Comments = CommentHeader.Parse(b);
+						} catch(Exception ex) {
+							throw new Exception("Comment parsing caused an exception", ex);
+						}
 					}
 				}
 			}
@@ -453,13 +457,16 @@ namespace AVDump2Lib.BlockConsumers {
 				count = EndianBitConverter.Little.ToInt32(b, offset); offset += 4;
 
 				for(int i = 0;i < count;i++) {
-					length = EndianBitConverter.Little.ToInt32(b, offset); offset += 4;
+					length = EndianBitConverter.Little.ToInt32(b, offset);
+					offset += 4;
 
 					var comment = Comment.Parse(System.Text.Encoding.UTF8.GetString(b, offset, length));
+					offset += length;
+
 					if(ch.Comments.Contains(comment.Key)) {
 						ch.Comments[comment.Key].Value.Add(comment.Value[0]);
 					} else {
-						ch.Comments.Add(comment); offset += length;
+						ch.Comments.Add(comment);
 					}
 				}
 

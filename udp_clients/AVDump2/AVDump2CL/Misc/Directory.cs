@@ -24,5 +24,31 @@ namespace AVDump2CL.Misc {
 				} catch(Exception) { }
 			}
 		}
+
+		public static void TraverseFiles(string path, bool includeSubFolders, Action<FileInfo> onFile, Action<Exception> onError) {
+			if(File.Exists(path)) {
+				try {
+					onFile(new FileInfo(path));
+				} catch(Exception ex) {
+					onError(ex);
+				}
+				return;
+			}
+
+			TraverseFiles(System.IO.Directory.GetFileSystemEntries(path), includeSubFolders, onFile, onError);
+		}
+
+		private static void TraverseFiles(string[] paths, bool includeSubFolders, Action<FileInfo> onFile, Action<Exception> onError) {
+			foreach(var path in paths) {
+				string ext = System.IO.Path.GetExtension(path);
+				try {
+					if(System.IO.Directory.Exists(path)) {
+						if(includeSubFolders) TraverseFiles(System.IO.Directory.GetFileSystemEntries(path), true, onFile, onError);
+					} else {
+						onFile(new FileInfo(path));
+					}
+				} catch(Exception ex) { onError(ex); }
+			}
+		}
 	}
 }

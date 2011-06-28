@@ -15,6 +15,7 @@ namespace AVDump2CL {
 		MediaInfoXMLOutPut = 1L << 5,
 		NewCreqXmlFormat = 1L << 6,
 		TxtFormat = 1L << 7,
+		HashOutput = 1L << 8,
 
 		//Control
 		ExcludeSubFolders = 1L << 16,
@@ -30,10 +31,12 @@ namespace AVDump2CL {
 		NoErrorReporting = 1L << 29,
 		HashingSpeedTest = 1L << 30,
 		DumpAllExtensions = 1L << 31,
+		UseUTF8OutputStream = 1L << 32,
 
-		DefAudioExtensions = 1L << 32,
-		DefVideoExtensions = 1L << 33,
-		DefSubtitleExtensions = 1L << 34,
+
+		DefAudioExtensions = 1L << 34,
+		DefVideoExtensions = 1L << 35,
+		DefSubtitleExtensions = 1L << 36,
 
 
 

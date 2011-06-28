@@ -37,9 +37,8 @@ namespace AVDump2CL {
 			var avd2Ex = new AVD2Exception(DateTime.Now, message, innerException);
 			Exceptions.Add(avd2Ex);
 
-			Console.ForegroundColor = ConsoleColor.Red;
 			Console.Error.WriteLine(avd2Ex.Message);
-			Console.ResetColor();
+			if(avd2Ex.InnerException != null) Console.Error.WriteLine(avd2Ex.InnerException.Message);
 		}
 	}
 }

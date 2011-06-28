@@ -51,11 +51,13 @@ namespace AVDump2CL {
 		private static int blockCount = 4;
 		private static int blockSize = 4 * 1024;
 		private static int monitorSleepDuration = 60000;
-		private static List<string> dumpableExtensions;
-		private static List<string> processExtensions;
+		private static HashSet<string> dumpableExtensions;
+		private static HashSet<string> processExtensions;
 
 		private static Version appVersion = Assembly.GetExecutingAssembly().GetName().Version;
 		private static bool isProcessing;
+		private static bool hasConsole;
+
 		#endregion
 
 		static CL() {
@@ -67,11 +69,11 @@ namespace AVDump2CL {
 			mediaLst = new List<string>();
 			doneListContent = new List<string>();
 
-			dumpableExtensions = new List<String>(new string[] { "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
-			dumpableExtensions.Sort();
+			dumpableExtensions = new HashSet<String>(new string[] { "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			//dumpableExtensions.Sort();
 
-			processExtensions = new List<string>(new string[] { "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
-			processExtensions.Sort();
+			processExtensions = new HashSet<string>(new string[] { "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			//processExtensions.Sort();
 
 			char2SwitchEnum = new Dictionary<char, eSwitches>();
 			char2SwitchEnum['y'] = eSwitches.CreqXmlFormat; //Done
@@ -79,6 +81,7 @@ namespace AVDump2CL {
 			char2SwitchEnum['M'] = eSwitches.MediaInfoOutPut; //Done
 			char2SwitchEnum['X'] = eSwitches.MediaInfoXMLOutPut; //Done
 			char2SwitchEnum['x'] = eSwitches.TxtFormat; //Done
+			char2SwitchEnum['h'] = eSwitches.HashOutput; //Done
 
 			char2SwitchEnum['c'] = eSwitches.ExcludeSubFolders; //Done
 			char2SwitchEnum['m'] = eSwitches.MonitorFolder; //Done
@@ -92,6 +95,7 @@ namespace AVDump2CL {
 			char2SwitchEnum['w'] = eSwitches.SupressProgress; //Done
 			char2SwitchEnum['T'] = eSwitches.PrintTotalTimeUsed; //Done
 			char2SwitchEnum['H'] = eSwitches.HashingSpeedTest; //Done
+			char2SwitchEnum['U'] = eSwitches.UseUTF8OutputStream; //Done
 
 			char2SwitchEnum['0'] = eSwitches.Crc; //Done
 			char2SwitchEnum['1'] = eSwitches.Sha1; //Done
@@ -109,42 +113,29 @@ namespace AVDump2CL {
 		}
 
 		static void Main(string[] args) {
+			//Console.WriteLine(Environment.Version);
 
 			var consoleIn = Console.In;
 			Console.SetOut(new ConsoleOutFilter(Console.Out));
 
-			var waitHandle = new AutoResetEvent(true);
-			try {
-				waitHandle.WaitOne(10);
-			} catch(Exception ex) {
-				Console.WriteLine(".NET 3.5 SP1 probably not installed");
-				Pause();
-				return;
-			}
-			waitHandle.Close();
-
-			var milFileName = Path.Combine(AppPath, Environment.OSVersion.Platform == PlatformID.Unix ? (IntPtr.Size == 4 ? "libMediaInfo_x86.so" : "libMediaInfo_x64.so") : (IntPtr.Size == 4 ? "MediaInfo_x86.dll" : "MediaInfo_x64.dll"));
-			if(!File.Exists(milFileName)) {
-				Console.WriteLine("MediaInfoLib is missing");
-				Pause();
-				return;
-			}
-
+#if(HasACreq)
+			SelfCheck();
+#endif
 
 
 			try {
-				IMediaInfo mi = IntPtr.Size == 8 ? (IMediaInfo)new MediaInfo_x64() : (IMediaInfo)new MediaInfo_x86();
-				if(!mi.Option("Info_Version").Equals("MediaInfoLib - v0.7.42")) {
-					Console.WriteLine("Mediainfo library version mismatch. Needed: v0.7.42, Used: " + mi.Option("Info_Version"));
-					Pause();
-					return;
-				}
-				mi.Close();
-			} catch(Exception ex) {
-				Console.WriteLine("Media Info Library not found. Error: " + ex.ToString());
-				Pause();
-				return;
+				int top = Console.CursorTop;
+				Console.CursorTop = 1;
+				Console.CursorTop = top;
+				hasConsole = true;
+
+			} catch(Exception) {
+				switches |= eSwitches.SupressProgress;
+				hasConsole = false;
 			}
+
+			if((switches & eSwitches.UseUTF8OutputStream) != 0) Console.OutputEncoding = new UTF8Encoding();
+
 
 			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
@@ -165,12 +156,11 @@ namespace AVDump2CL {
 			try {
 				if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
 			} catch(Exception) {
-				Console.WriteLine("Error while interpreting commandline arguments");
+				Console.Error.WriteLine("Error while interpreting commandline arguments");
 				Console.WriteLine("Press any alpha-numeric key to continue");
 				Pause();
 				return;
 			}
-
 #endif
 
 			if((switches & eSwitches.HashingSpeedTest) != 0) {
@@ -193,6 +183,9 @@ namespace AVDump2CL {
 				Pause();
 			}
 		}
+
+
+
 
 #if(!PublicRelease)
 		private static string[] SetArguments() {
@@ -222,8 +215,9 @@ namespace AVDump2CL {
 				//@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDump2CL",
 				//@"D:\My Stuff\Downloads\Byousoku_5_Centimeter_-_T1_-_Trailer_-_[Triad](b2df5b8e)(dub.sub_x-in.en).mp4",
 				//@"D:\My Stuff\Downloads\problemfiles",
-				@"C:\Users\Arokh\Downloads\Slam Dunk! Ep003.rv",
+				@"D:\My Stuff\Downloads\Kowarekake no Orgel (Episode 0O2) [DFE0E4AF] [MiniTheatre] {anidb}.mkv",
 				//@"F:\Anime",
+				//@"E:\Anime",
 				//@"E:\Anime\Now\1992\Kaze no Tairiku",
 				//@"D:\My Stuff\Downloads\[SumiSora&CASO][MariaHolic][Information][DVDRIP][x264_AAC][5B4FD648].mp4",
 				//@"D:\My Stuff\Downloads\[AniYoshi]_Crystal_Blaze_-_01_[C6D45AE8].mkv",
@@ -259,7 +253,7 @@ namespace AVDump2CL {
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\µT\Anime\Requiem from the Darkness[DH]\Requiem From the Darkness 13 - The Death Spirits of Seven Man Point, Part 2[F4319032].mkv",
-				"-y0pc",
+				"-y0q",
 				//"-H01256",
 				//"-py01245",
 				//"-exp:explog.txt",
@@ -271,9 +265,6 @@ namespace AVDump2CL {
 				//"-log:ogmlog2.xml",
 				//"-log:log.xml",
 				//"-acerr:acerr.txt",
-				//"-ac:arokh:Anime",
-				//"-host:ommina.homeip.net:9002",
-				//"-ac:arokh:containers",
 				//"-ext:srt",
 				//"-ext:rt",
 				"-extdiff:extdiff.txt",
@@ -343,14 +334,20 @@ namespace AVDump2CL {
 
 					} else if(parts[0] == "ext") {
 						var exts = parts[1].ToLower().Split(',');
+
+						if(exts.Length == 1 && exts[0].Equals("*")) {
+							processExtensions = null;
+							continue;
+						}
+
 						invalidCl = exts.Any(str => str.StartsWith("-")) && !exts.All(str => str.StartsWith("-"));
 
 						if(!invalidCl) {
 							if(exts[0][0] == '-') {
 								foreach(var ext in exts) processExtensions.Remove(ext.Substring(1));
 							} else {
-								processExtensions = new List<string>(exts);
-								processExtensions.Sort();
+								processExtensions = new HashSet<string>(exts);
+								//processExtensions.Sort();
 							}
 						}
 
@@ -423,7 +420,7 @@ namespace AVDump2CL {
 				}
 
 				if(invalidCl) {
-					Console.WriteLine("Error in Commandline: " + args[i] + ". Aborting!\nPress any alpha-numeric key to exit");
+					Console.Error.WriteLine("Error in Commandline: " + args[i] + ". Aborting!\nPress any alpha-numeric key to exit");
 					Pause();
 					return false;
 				}
@@ -452,7 +449,7 @@ namespace AVDump2CL {
 			}
 
 			if(uselessCombination) {
-				Console.WriteLine("Combination of arguments is invalid (Nothing to do)");
+				Console.Error.WriteLine("Combination of arguments is invalid (Nothing to do)");
 				Pause();
 				return false;
 			}
@@ -476,20 +473,19 @@ namespace AVDump2CL {
 
 			var searchOption = switches != eSwitches.ExcludeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
+			long processedBytes = 0, totalBytes;
+
 #if(PublicRelease)
-			var files = GetFiles(mediaLst, searchOption, processExtensions);
+			var files = GetFiles(mediaLst, searchOption, processExtensions, out totalBytes);
 #else
-			var files = GetFiles(mediaLst, searchOption, processExtensions);
+			var files = GetFiles(mediaLst, searchOption, processExtensions, out totalBytes);
 #endif
 
 			if(files.Count == 0) Console.WriteLine("No files to process");
-			long processedBytes = 0, totalBytes = files.Sum(fi => fi.Length);
 
 			FileEnvironment e;
 			var container = CreateContainer(blockCount, blockSize);
 			for(int i = 0;i < files.Count;i++) {
-				if(files[i].Length == 0) continue;
-
 				e = new FileEnvironment(appVersion, container, files[i], startedOn, files.Count, i, totalBytes, processedBytes);
 				try {
 					ProcessMediaFile(e);
@@ -533,6 +529,12 @@ namespace AVDump2CL {
 		private static void ProcessMediaFile(FileEnvironment e) {
 			Console.WriteLine("Folder: " + e.File.DirectoryName);
 			Console.WriteLine("Filename: " + e.File.Name);
+
+			if(e.File.Length == 0) {
+				Console.Error.WriteLine("Skipping 0byte File");
+				return;
+			}
+
 
 			var startTime = DateTime.Now;
 			Dictionary<string, IBlockConsumer> blockConsumers;
@@ -602,7 +604,11 @@ namespace AVDump2CL {
 						DisplayBuffer(e, progress);
 					} catch(Exception ex) {
 						Console.WriteLine();
-						Console.CursorVisible = true;
+
+
+						CursorVisible = true;
+
+
 						e.AddException("Error in DisplayBuffer", ex);
 					}
 				}
@@ -645,6 +651,7 @@ namespace AVDump2CL {
 				}
 				if((switches & eSwitches.MediaInfoOutPut) != 0) log += Info.CreateMediaInfoDump(e.File.FullName);
 				if((switches & eSwitches.TxtFormat) != 0) log += Info.CreateTxtLog(e.File.FullName, p);
+				if((switches & eSwitches.TxtFormat) != 0) log += Info.CreateHashLog(e.File.FullName, p);
 
 				if(logPath != null && !String.IsNullOrEmpty(log)) AppendAllText(logPath, log + Environment.NewLine + Environment.NewLine, "Couldn't update logfile");
 			} catch(Exception ex) {
@@ -672,7 +679,7 @@ namespace AVDump2CL {
 
 			bool wasACreqSent = false;
 #if(HasACreq)
-			if(acreqFile && (dumpableExtensions.BinarySearch(e.File.Extension.Substring(1).ToLower()) >= 0 || (switches & eSwitches.DumpAllExtensions) != 0) && !(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
+			if(acreqFile && (dumpableExtensions.Contains(e.File.Extension.Substring(1).ToLower()) || (switches & eSwitches.DumpAllExtensions) != 0) && !(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
 				try {
 					var result = DoACreq(e, p);
 					wasACreqSent = result.State == AniDBCommit.ACreqState.CreqSent;
@@ -718,9 +725,8 @@ namespace AVDump2CL {
 				string crcHash = BaseConverter.ToString(((HashCalculator)blockConsumers["CRC"]).HashObj.Hash);
 				if(!e.File.Name.ToLower().Contains(crcHash.ToLower())) {
 					AppendAllText(crcMismatchListPath, crcHash + " " + e.File.FullName + Environment.NewLine, "Couldn't update crcerr list file");
-					Console.ForegroundColor = ConsoleColor.Yellow;
-					Console.WriteLine("Filename doesn't contain the calculated CRC (" + crcHash + ")");
-					Console.ResetColor();
+
+					ColoredWriteLine(ConsoleColor.Yellow, "Filename doesn't contain the calculated CRC (" + crcHash + ")");
 				}
 			}
 
@@ -748,6 +754,57 @@ namespace AVDump2CL {
 		}
 
 #if(HasACreq)
+		private static bool SelfCheck() {
+			//#####################################################
+			var waitHandle = new AutoResetEvent(true);
+			try {
+				waitHandle.WaitOne(10);
+			} catch(Exception ex) {
+				Console.Error.WriteLine(".NET 3.5 SP1 probably not installed");
+				Pause();
+				return false;
+			}
+			waitHandle.Close();
+			//#####################################################
+
+
+			if(Environment.OSVersion.Platform == PlatformID.Unix && !File.Exists(Path.Combine(AppPath, "AVDump2Lib.dll.config"))) {
+				Console.Error.WriteLine("AVDump2Lib.dll.config is missing");
+				Pause();
+				return false;
+			}
+
+
+			//#####################################################
+
+			var milFileName = Path.Combine(AppPath, Environment.OSVersion.Platform == PlatformID.Unix ? (IntPtr.Size == 4 ? "libMediaInfo_x86.so" : "libMediaInfo_x64.so") : (IntPtr.Size == 4 ? "MediaInfo_x86.dll" : "MediaInfo_x64.dll"));
+			if(!File.Exists(milFileName)) {
+				Console.Error.WriteLine("MediaInfoLib is missing");
+				Pause();
+				return false;
+			}
+
+
+			//#####################################################
+			try {
+				IMediaInfo mi = IntPtr.Size == 8 ? (IMediaInfo)new MediaInfo_x64() : (IMediaInfo)new MediaInfo_x86();
+				if(!mi.Option("Info_Version").Equals("MediaInfoLib - v0.7.42")) {
+					Console.Error.WriteLine("Mediainfo library version mismatch. Needed: v0.7.42, Used: " + mi.Option("Info_Version"));
+					Pause();
+					return false;
+				}
+				mi.Close();
+			} catch(Exception ex) {
+				Console.Error.WriteLine("Media Info Library not found. Error: " + ex.ToString());
+				Pause();
+				return false;
+			}
+
+			//#####################################################
+
+			return true;
+		}
+
 		private static AniDBCommit.ACreqResult DoACreq(FileEnvironment e, InfoProviderBase infoProvider) {
 			MemoryStream stream = new MemoryStream();
 
@@ -776,25 +833,20 @@ namespace AVDump2CL {
 					Console.WriteLine("Done");
 
 				} else if(result.State == AniDBCommit.ACreqState.AckUnknownResponse) {
-					Console.ForegroundColor = ConsoleColor.Yellow;
-					Console.WriteLine("Warning. Unknown Response.");
-					Console.ResetColor();
+					ColoredWriteLine(ConsoleColor.Yellow, "Warning. Unknown Response.");
 
 				} else if(result.State == AniDBCommit.ACreqState.LogSizeTooSmall) {
-					Console.ForegroundColor = ConsoleColor.Yellow;
-					Console.WriteLine("Warning. Logsize is too small.");
-					Console.ResetColor();
+					ColoredWriteLine(ConsoleColor.Yellow, "Warning. Logsize is too small.");
 
 				} else if(result.State == AniDBCommit.ACreqState.WrongVersionOrPassOrName) {
-					Console.ForegroundColor = ConsoleColor.Red;
-					Console.WriteLine("Failed. Either the client is outdated or your username/password combination is wrong.");
+					Console.Error.WriteLine("Either the client is outdated or your username/password combination is wrong.");
 					Pause();
-					Console.ResetColor();
+
+				} else if(result.State == AniDBCommit.ACreqState.TimeOut && tries > retries) {
+					Console.WriteLine("Failed");
 
 				} else {
-					Console.ForegroundColor = ConsoleColor.Red;
-					Console.WriteLine("Failed. Reason: " + System.Enum.GetName(typeof(AniDBCommit.ACreqState), result.State));
-					Console.ResetColor();
+					Console.WriteLine(System.Enum.GetName(typeof(AniDBCommit.ACreqState), result.State));
 				}
 
 				if(!string.IsNullOrEmpty(acErrListPath) && (result.State & (AniDBCommit.ACreqState.CreqSent | AniDBCommit.ACreqState.TimeOut)) == 0) {
@@ -826,7 +878,7 @@ namespace AVDump2CL {
 				for(int i = 0;i < progress.BlockConsumerCount;i++) if(maxNameLength < progress.Name(i).Length) maxNameLength = progress.Name(i).Length + 1;
 				if(maxNameLength < "Progress".Length) maxNameLength = "Progress".Length;
 
-				Console.CursorVisible = false;
+				CursorVisible = false;
 				output = "Bar: Buffer usage | blocksize: " + blockSize + "KB | blockCount: " + blockCount + "\n";
 
 				for(int i = 0;i < progress.BlockConsumerCount;i++) {
@@ -897,7 +949,7 @@ namespace AVDump2CL {
 
 			}
 			Console.WriteLine();
-			Console.CursorVisible = true;
+			CursorVisible = true;
 		}
 
 
@@ -983,17 +1035,25 @@ namespace AVDump2CL {
 #endif
 			return new CompositeInfoProvider(providers);
 		}
-		private static List<FileInfo> GetFiles(List<string> mediaLst, SearchOption searchOption, List<string> validExtensions) {
+		private static List<FileInfo> GetFiles(List<string> mediaLst, SearchOption searchOption, HashSet<string> validExtensions, out long totalBytes) {
 			List<FileInfo> files = new List<FileInfo>();
+
+			long anonTotalBytes = 0;
 			foreach(var media in mediaLst) {
-				if(System.IO.File.Exists(media)) {
-					if(validExtensions == null || validExtensions.BinarySearch(Path.GetExtension(media).Substring(1).ToLower()) >= 0) files.Add(new FileInfo(media));
-				} else if(System.IO.Directory.Exists(media)) {
-					files.AddRange(FileGetter.GetFiles(media, validExtensions, (switches & eSwitches.ExcludeSubFolders) == 0));
-				} else {
-					//TODO Error?
-				}
+				FileGetter.TraverseFiles(media, (switches & eSwitches.ExcludeSubFolders) == 0,
+					(fi) => {
+						if(validExtensions == null || (fi.Extension.Length != 0 && validExtensions.Contains(fi.Extension.Substring(1)))) {
+							files.Add(fi);
+							anonTotalBytes += fi.Length;
+
+							if((files.Count & 0x3FF) == 0) Console.WriteLine("Discovered " + files.Count + " files");
+						}
+					},
+
+					(ex) => { Console.WriteLine(ex.Message); }
+				);
 			}
+			totalBytes = anonTotalBytes;
 
 			if((switches & eSwitches.RandomFileOrder) != 0) {
 				Random rng = new Random(4);
@@ -1067,6 +1127,7 @@ Options: (one letter switches can be put in one string)
    x       Simple text format
    y       XML creq format
    Y       AVD2 creq dump
+   h       Hashes only report
 
   Control:
    c       Do _not_ recurse into subfolders
@@ -1079,6 +1140,7 @@ Options: (one letter switches can be put in one string)
    w       Suppress progress (silent)
    z       Delete files after parsing
    H       Test pure hashingspeed without io limitations
+   U       Use UTF8 as console output stream
 
   Hashing:
    0       For CRC (because the CRC of a 0 byte file is 00000000)
@@ -1127,14 +1189,14 @@ Press any key to exit";
 		}
 
 		private static void Pause() {
+			if(!hasConsole) return;
+
 			try {
 				ConsoleKeyInfo cki;
 				do {
 					cki = Console.ReadKey();
 				} while(Char.IsControl(cki.KeyChar) && cki.Key != ConsoleKey.Enter);
 			} catch(Exception) {
-
-				throw;
 			}
 		}
 
@@ -1164,6 +1226,20 @@ Press any key to exit";
 			Console.WriteLine(line);
 			Console.ResetColor();
 		}
+
+		private static bool CursorVisible {
+			set { try { Console.CursorVisible = value; } catch(Exception) { } }
+		}
+
+		private static void ColoredWriteLine(ConsoleColor color, string line) {
+			try {
+				Console.ForegroundColor = color;
+				Console.WriteLine(line);
+				Console.ResetColor();
+			} catch(Exception) {
+			}
+		}
+
 	}
 
 	public class ConsoleOutFilter : TextWriter {

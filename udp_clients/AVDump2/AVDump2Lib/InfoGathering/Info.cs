@@ -726,6 +726,17 @@ namespace AVDump2Lib.InfoGathering {
 
 			return q2.ToArray();
 		}
+
+		public static string CreateHashLog(string path, InfoProviderBase p) {
+			XmlDocument xmlDoc = CreateNewAVDumpLog(p);
+
+			string log = "";
+			if(xmlDoc["Creq"]["File"]["Hashes"].HasChildNodes) log = " #Hashes" + Environment.NewLine;
+			foreach(XmlElement streamsNode in xmlDoc["Creq"]["File"]["Hashes"]) {
+				log += "  " + streamsNode.Name + ": " + streamsNode.InnerText + Environment.NewLine;
+			}
+			return log;
+		}
 	}
 
 	public class InfoCollection : Dictionary<StreamTypeEntryPair, InfoEntry> { public void Add(InfoEntry item) { Add(item.Key, item); } }

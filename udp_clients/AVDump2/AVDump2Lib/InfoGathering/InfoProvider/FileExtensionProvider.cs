@@ -197,7 +197,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			int count = 0;
 			string line;
 			//int lineType = 0, dummy;
-			StreamReader sr = new StreamReader(stream);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
 			while((line = sr.ReadLine()) != null) {
 				if(regexParse.IsMatch(line)) count++;
 				if(count > 20) break;
@@ -232,7 +232,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 
-			StreamReader sr = new StreamReader(stream, true);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			var chars = new char[2048];
 			int length = sr.Read(chars, 0, chars.Length);
 			var str = new string(chars, 0, length).ToLowerInvariant();
@@ -286,7 +286,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			if(stream.Length > 10 * 1024 * 1024) IsCandidate = false;
 			if(!IsCandidate) return;
 
-			var sr = new StreamReader(stream);
+			var sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
 			var line = sr.ReadLine();
 			IsCandidate = line.Contains("VobSub index file, v");
 
@@ -428,7 +428,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 
-			StreamReader sr = new StreamReader(stream, true);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			var chars = new char[2048];
 			int length = sr.Read(chars, 0, chars.Length);
 			var str = new string(chars, 0, length).ToLowerInvariant();
@@ -458,7 +458,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public SamiFileType() : base("", identifier: "text/sami") { PossibleExtensions = new string[] { "smi" }; type = StreamType.Text; }
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
-			StreamReader sr = new StreamReader(stream, true);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			var chars = new char[2048];
 			int length = sr.Read(chars, 0, chars.Length);
 			var str = new string(chars, 0, length).ToLowerInvariant();
@@ -477,7 +477,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		}
 
 		private bool Subviewer(Stream stream) {
-			StreamReader sr = new StreamReader(stream, true);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			var chars = new char[1024];
 			int length = sr.Read(chars, 0, chars.Length);
 			var str = new string(chars, 0, length).ToUpperInvariant();
@@ -494,7 +494,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		private bool MicroDVD(Stream stream) {
 			if(stream.Length > 10 * 1024 * 1024) return false;
 			stream.Position = 0;
-			StreamReader sr = new StreamReader(stream, true);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 
 			int count = 0, matches = 0;
 			string line;
