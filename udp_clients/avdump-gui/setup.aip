@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="8.1.3" version="8.1.3" Modules="freeware" RootPath="." Language="en">
+<DOCUMENT Type="Advanced Installer" CreateVersion="8.1.3" version="8.2" Modules="freeware" RootPath="." Language="en">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_MINDOTNETVERSION" MultiBuildValue="DefaultBuild:3.5" ValueLocId="-"/>
     <ROW Property="ALLUSERS" Value="2" MultiBuildValue="DefaultBuild:"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPPRODUCTICON" Value="anidb_1.exe" Type="8"/>
+    <ROW Property="ARPURLINFOABOUT" Value="http://wiki.anidb.net/w/Avdump_GUI"/>
+    <ROW Property="ARPURLUPDATEINFO" Value="http://wiki.anidb.net/w/Avdump_GUI"/>
     <ROW Property="Manufacturer" Value="AniDB" ValueLocId="*"/>
-    <ROW Property="ProductCode" Value="1033:{2E0D63F9-8AD0-4844-A74F-310F9563C326} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{74556FE6-DB8C-4205-83B8-FBD990E1F552} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Avdump2 GUI" ValueLocId="*"/>
-    <ROW Property="ProductVersion" Value="2.0.0"/>
+    <ROW Property="ProductVersion" Value="2.1.0"/>
     <ROW Property="REBOOT" MultiBuildValue="DefaultBuild:ReallySuppress"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A1286529-4C28-42F9-B7E2-A2C13DDBBF3D}"/>
@@ -19,35 +21,67 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
     <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="Deskto~1|DesktopFolder" IsPseudoRoot="1"/>
-    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+    <ROW Directory="appdata_DIR" Directory_Parent="APPDIR" DefaultDir="appdata"/>
+    <ROW Directory="avdump_gui_2.1.0.win32_DIR" Directory_Parent="appdata_DIR" DefaultDir="avdump~1.win|avdump-gui-2.1.0.win32"/>
+    <ROW Directory="esky_files_DIR" Directory_Parent="avdump_gui_2.1.0.win32_DIR" DefaultDir="esky-f~1|esky-files"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="AVDump2CL.exe" ComponentId="{FCFE239D-3EA2-4566-B040-442714E8F759}" Directory_="APPDIR" Attributes="0" KeyPath="AVDump2CL.exe"/>
-    <ROW Component="AVDump2Lib.dll" ComponentId="{B8472D03-B9AE-4D32-8207-90CAA5D97337}" Directory_="APPDIR" Attributes="0" KeyPath="AVDump2Lib.dll"/>
-    <ROW Component="AVDump2Lib.dll.config" ComponentId="{6CC19F17-C4B6-41FF-AAF2-03B6D9CE9D81}" Directory_="APPDIR" Attributes="0" KeyPath="AVDump2Lib.dll.config" Type="0"/>
-    <ROW Component="CSEBMLLib.dll" ComponentId="{1479EA9E-3705-4CC9-AAF8-1745AD5CF062}" Directory_="APPDIR" Attributes="0" KeyPath="CSEBMLLib.dll"/>
-    <ROW Component="Ionic.Zip.Reduced.dll" ComponentId="{CF2D5161-F90D-47CC-B408-EA0D057D6C46}" Directory_="APPDIR" Attributes="0" KeyPath="Ionic.Zip.Reduced.dll"/>
-    <ROW Component="MediaInfo_x64.dll" ComponentId="{6602A989-A5F2-478E-9B1B-64D15C11A684}" Directory_="APPDIR" Attributes="256" KeyPath="MediaInfo_x64.dll"/>
-    <ROW Component="MediaInfo_x86.dll" ComponentId="{AE917DC8-2061-4004-A9A2-EDA03A6D1B8C}" Directory_="APPDIR" Attributes="0" KeyPath="MediaInfo_x86.dll"/>
-    <ROW Component="SHORTCUTDIR" ComponentId="{9A0A59DB-A0BF-4E71-AC25-C9021CD57B76}" Directory_="SHORTCUTDIR" Attributes="0"/>
-    <ROW Component="avdump2gui.exe" ComponentId="{9F77C0BB-7B2A-478A-B264-F0A81388EE08}" Directory_="APPDIR" Attributes="0" KeyPath="avdump2gui.exe"/>
-    <ROW Component="msvcp90.dll" ComponentId="{98515AFA-A691-4615-B7D5-B2668EFF8290}" Directory_="APPDIR" Attributes="0" KeyPath="msvcp90.dll"/>
+    <ROW Component="API_MS_Win_Core_LocalRegistry_L1_1_0.dll" ComponentId="{F5F248ED-307D-4D06-A420-6CF1CDA27A05}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="API_MS_Win_Core_LocalRegistry_L1_1_0.dll"/>
+    <ROW Component="AVDump2CL.exe" ComponentId="{C2CC6919-6E2D-4169-8B85-A5F9A663E839}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="AVDump2CL.exe"/>
+    <ROW Component="AVDump2Lib.dll" ComponentId="{12085C5E-5949-4FCD-8DD9-B6FC39895C6D}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="AVDump2Lib.dll"/>
+    <ROW Component="AVDump2Lib.dll.config" ComponentId="{78876E44-906F-46CE-9E0A-88C5FC9AECB2}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="AVDump2Lib.dll.config" Type="0"/>
+    <ROW Component="CSEBMLLib.dll" ComponentId="{8A74961E-D434-43FD-94A1-4823C3742B12}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="CSEBMLLib.dll"/>
+    <ROW Component="Ionic.Zip.Reduced.dll" ComponentId="{2B16DB2C-D3B3-44A5-ABE1-DF38699C2908}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="Ionic.Zip.Reduced.dll"/>
+    <ROW Component="MPR.dll" ComponentId="{18AA9E0B-81A2-47DC-96A0-312278DA2D43}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="MPR.dll"/>
+    <ROW Component="MediaInfo_x64.dll" ComponentId="{DEEEA8CF-EBE9-48C8-8B37-0E5F20324D21}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="256" KeyPath="MediaInfo_x64.dll"/>
+    <ROW Component="MediaInfo_x86.dll" ComponentId="{4376A20E-F26B-41F5-A973-1193023E4D56}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="MediaInfo_x86.dll"/>
+    <ROW Component="QtCore4.dll" ComponentId="{2452341E-8CE6-48EF-9CDD-F4B1932EA85D}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="QtCore4.dll"/>
+    <ROW Component="QtGui4.dll" ComponentId="{20141DA7-DDE8-4F7C-9028-10CDE67724A3}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="QtGui4.dll"/>
+    <ROW Component="avdump2gui.exe" ComponentId="{84985C31-0094-4641-9BBF-7A65368062DB}" Directory_="APPDIR" Attributes="0" KeyPath="avdump2gui.exe"/>
+    <ROW Component="avdump2gui.exe_1" ComponentId="{F428BFCE-C70D-44B1-AB14-0DAE5B931A44}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="avdump2gui.exe_1"/>
+    <ROW Component="bootstrap_manifest.txt" ComponentId="{FF3706F2-F6A9-4CE9-8651-C40C0D0B98EF}" Directory_="esky_files_DIR" Attributes="0" KeyPath="bootstrap_manifest.txt" Type="0"/>
+    <ROW Component="msvcp90.dll" ComponentId="{23E930A4-DA18-4C42-919D-013B61FCC72C}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="msvcp90.dll"/>
+    <ROW Component="python27.dll" ComponentId="{09245C44-6B24-4F44-BECC-51157691C234}" Directory_="APPDIR" Attributes="0" KeyPath="python27.dll"/>
+    <ROW Component="python27.dll_1" ComponentId="{134E0DA9-437C-45A2-BAC9-1A0EB766B384}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="python27.dll_1"/>
+    <ROW Component="pywintypes27.dll" ComponentId="{FD151AC9-DBAA-4040-B973-9C229A674740}" Directory_="avdump_gui_2.1.0.win32_DIR" Attributes="0" KeyPath="pywintypes27.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="AVDump2CL.exe AVDump2Lib.dll AVDump2Lib.dll.config CSEBMLLib.dll Ionic.Zip.Reduced.dll MediaInfo_x64.dll MediaInfo_x86.dll SHORTCUTDIR avdump2gui.exe msvcp90.dll"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="API_MS_Win_Core_LocalRegistry_L1_1_0.dll AVDump2CL.exe AVDump2Lib.dll AVDump2Lib.dll.config CSEBMLLib.dll Ionic.Zip.Reduced.dll MPR.dll MediaInfo_x64.dll MediaInfo_x86.dll QtCore4.dll QtGui4.dll avdump2gui.exe avdump2gui.exe_1 bootstrap_manifest.txt msvcp90.dll python27.dll python27.dll_1 pywintypes27.dll"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="AVDump2CL.exe" Component_="AVDump2CL.exe" FileName="AVDump~1.exe|AVDump2CL.exe" Attributes="0" SourcePath="dist\AVDump2CL.exe" SelfReg="false" NextFile="avdump2gui.exe"/>
-    <ROW File="AVDump2Lib.dll" Component_="AVDump2Lib.dll" FileName="AVDump~1.dll|AVDump2Lib.dll" Attributes="0" SourcePath="dist\AVDump2Lib.dll" SelfReg="false" NextFile="AVDump2Lib.dll.config"/>
-    <ROW File="AVDump2Lib.dll.config" Component_="AVDump2Lib.dll.config" FileName="AVDump~1.con|AVDump2Lib.dll.config" Attributes="0" SourcePath="dist\AVDump2Lib.dll.config" SelfReg="false" NextFile="CSEBMLLib.dll"/>
-    <ROW File="CSEBMLLib.dll" Component_="CSEBMLLib.dll" FileName="CSEBML~1.dll|CSEBMLLib.dll" Attributes="0" SourcePath="dist\CSEBMLLib.dll" SelfReg="false" NextFile="Ionic.Zip.Reduced.dll"/>
-    <ROW File="Ionic.Zip.Reduced.dll" Component_="Ionic.Zip.Reduced.dll" FileName="IonicZ~1.dll|Ionic.Zip.Reduced.dll" Attributes="0" SourcePath="dist\Ionic.Zip.Reduced.dll" SelfReg="false" NextFile="MediaInfo_x64.dll"/>
-    <ROW File="MediaInfo_x64.dll" Component_="MediaInfo_x64.dll" FileName="MediaI~1.dll|MediaInfo_x64.dll" Attributes="0" SourcePath="dist\MediaInfo_x64.dll" SelfReg="false" NextFile="MediaInfo_x86.dll"/>
-    <ROW File="MediaInfo_x86.dll" Component_="MediaInfo_x86.dll" FileName="MediaI~2.dll|MediaInfo_x86.dll" Attributes="0" SourcePath="dist\MediaInfo_x86.dll" SelfReg="false" NextFile="msvcp90.dll"/>
-    <ROW File="avdump2gui.exe" Component_="avdump2gui.exe" FileName="avdump~2.exe|avdump2gui.exe" Attributes="0" SourcePath="dist\avdump2gui.exe" SelfReg="false" NextFile="AVDump2Lib.dll"/>
-    <ROW File="msvcp90.dll" Component_="msvcp90.dll" FileName="msvcp90.dll" Attributes="0" SourcePath="dist\msvcp90.dll" SelfReg="false"/>
+    <ROW File="API_MS_Win_Core_LocalRegistry_L1_1_0.dll" Component_="API_MS_Win_Core_LocalRegistry_L1_1_0.dll" FileName="API-MS~1.dll|API-MS-Win-Core-LocalRegistry-L1-1-0.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\API-MS-Win-Core-LocalRegistry-L1-1-0.dll" SelfReg="false" NextFile="AVDump2CL.exe"/>
+    <ROW File="AVDump2CL.exe" Component_="AVDump2CL.exe" FileName="AVDump~1.exe|AVDump2CL.exe" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\AVDump2CL.exe" SelfReg="false" NextFile="avdump2gui.exe_1"/>
+    <ROW File="AVDump2Lib.dll" Component_="AVDump2Lib.dll" FileName="AVDump~1.dll|AVDump2Lib.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\AVDump2Lib.dll" SelfReg="false" NextFile="AVDump2Lib.dll.config"/>
+    <ROW File="AVDump2Lib.dll.config" Component_="AVDump2Lib.dll.config" FileName="AVDump~1.con|AVDump2Lib.dll.config" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\AVDump2Lib.dll.config" SelfReg="false" NextFile="bz2.pyd"/>
+    <ROW File="CSEBMLLib.dll" Component_="CSEBMLLib.dll" FileName="CSEBML~1.dll|CSEBMLLib.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\CSEBMLLib.dll" SelfReg="false" NextFile="bootstrap_manifest.txt"/>
+    <ROW File="Ionic.Zip.Reduced.dll" Component_="Ionic.Zip.Reduced.dll" FileName="IonicZ~1.dll|Ionic.Zip.Reduced.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\Ionic.Zip.Reduced.dll" SelfReg="false" NextFile="library.zip"/>
+    <ROW File="MPR.dll" Component_="MPR.dll" FileName="MPR.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\MPR.dll" SelfReg="false" NextFile="msvcp90.dll"/>
+    <ROW File="MediaInfo_x64.dll" Component_="MediaInfo_x64.dll" FileName="MediaI~1.dll|MediaInfo_x64.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\MediaInfo_x64.dll" SelfReg="false" NextFile="MediaInfo_x86.dll"/>
+    <ROW File="MediaInfo_x86.dll" Component_="MediaInfo_x86.dll" FileName="MediaI~2.dll|MediaInfo_x86.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\MediaInfo_x86.dll" SelfReg="false" NextFile="MPR.dll"/>
+    <ROW File="PyQt4.QtCore.pyd" Component_="AVDump2Lib.dll.config" FileName="PyQt4Q~1.pyd|PyQt4.QtCore.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\PyQt4.QtCore.pyd" SelfReg="false" NextFile="PyQt4.QtGui.pyd"/>
+    <ROW File="PyQt4.QtGui.pyd" Component_="AVDump2Lib.dll.config" FileName="PyQt4Q~2.pyd|PyQt4.QtGui.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\PyQt4.QtGui.pyd" SelfReg="false" NextFile="python27.dll_1"/>
+    <ROW File="QtCore4.dll" Component_="QtCore4.dll" FileName="QtCore4.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\QtCore4.dll" SelfReg="false" NextFile="QtGui4.dll"/>
+    <ROW File="QtGui4.dll" Component_="QtGui4.dll" FileName="QtGui4.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\QtGui4.dll" SelfReg="false" NextFile="select.pyd"/>
+    <ROW File="avdump2gui.exe" Component_="avdump2gui.exe" FileName="avdump~1.exe|avdump2gui.exe" Attributes="0" SourcePath="dist\avdump2gui.exe" SelfReg="false" NextFile="python27.dll"/>
+    <ROW File="avdump2gui.exe_1" Component_="avdump2gui.exe_1" FileName="avdump~2.exe|avdump2gui.exe" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\avdump2gui.exe" SelfReg="false" NextFile="AVDump2Lib.dll"/>
+    <ROW File="bootstrap_manifest.txt" Component_="bootstrap_manifest.txt" FileName="bootst~1.txt|bootstrap-manifest.txt" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\esky-files\bootstrap-manifest.txt" SelfReg="false" NextFile="f_py2exe_27.txt"/>
+    <ROW File="bz2.pyd" Component_="AVDump2Lib.dll.config" FileName="bz2.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\bz2.pyd" SelfReg="false" NextFile="CSEBMLLib.dll"/>
+    <ROW File="ctypes.pyd" Component_="AVDump2Lib.dll.config" FileName="_ctypes.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\_ctypes.pyd" SelfReg="false" NextFile="hashlib.pyd"/>
+    <ROW File="f_py2exe_27.txt" Component_="bootstrap_manifest.txt" FileName="f-py2e~1.txt|f-py2exe-27.txt" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\esky-files\f-py2exe-27.txt" SelfReg="false" NextFile="Ionic.Zip.Reduced.dll"/>
+    <ROW File="hashlib.pyd" Component_="AVDump2Lib.dll.config" FileName="_hashlib.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\_hashlib.pyd" SelfReg="false" NextFile="socket.pyd"/>
+    <ROW File="library.zip" Component_="AVDump2Lib.dll.config" FileName="library.zip" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\library.zip" SelfReg="false" NextFile="MediaInfo_x64.dll"/>
+    <ROW File="msvcp90.dll" Component_="msvcp90.dll" FileName="msvcp90.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\msvcp90.dll" SelfReg="false" NextFile="PyQt4.QtCore.pyd"/>
+    <ROW File="python27.dll" Component_="python27.dll" FileName="python27.dll" Attributes="0" SourcePath="dist\python27.dll" SelfReg="false" NextFile="API_MS_Win_Core_LocalRegistry_L1_1_0.dll"/>
+    <ROW File="python27.dll_1" Component_="python27.dll_1" FileName="python27.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\python27.dll" SelfReg="false" NextFile="pywintypes27.dll"/>
+    <ROW File="pywintypes27.dll" Component_="pywintypes27.dll" FileName="pywint~1.dll|pywintypes27.dll" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\pywintypes27.dll" SelfReg="false" NextFile="QtCore4.dll"/>
+    <ROW File="select.pyd" Component_="AVDump2Lib.dll.config" FileName="select.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\select.pyd" SelfReg="false" NextFile="sip.pyd"/>
+    <ROW File="sip.pyd" Component_="AVDump2Lib.dll.config" FileName="sip.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\sip.pyd" SelfReg="false" NextFile="unicodedata.pyd"/>
+    <ROW File="socket.pyd" Component_="AVDump2Lib.dll.config" FileName="_socket.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\_socket.pyd" SelfReg="false" NextFile="ssl.pyd"/>
+    <ROW File="ssl.pyd" Component_="AVDump2Lib.dll.config" FileName="_ssl.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\_ssl.pyd" SelfReg="false"/>
+    <ROW File="unicodedata.pyd" Component_="AVDump2Lib.dll.config" FileName="unicod~1.pyd|unicodedata.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\unicodedata.pyd" SelfReg="false" NextFile="win32wnet.pyd"/>
+    <ROW File="win32wnet.pyd" Component_="AVDump2Lib.dll.config" FileName="win32w~1.pyd|win32wnet.pyd" Attributes="0" SourcePath="dist\appdata\avdump-gui-2.1.0.win32\win32wnet.pyd" SelfReg="false" NextFile="ctypes.pyd"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\..\Downloads" PackageFileName="avdump-gui" Languages="en" InstallationType="4"/>
@@ -96,9 +130,6 @@
     <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
     <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
   </COMPONENT>
-  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
-    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR"/>
-  </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
@@ -134,8 +165,7 @@
     <ROW Signature_="AI_DotNet40SearchSgn" Root="2" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Install" Type="2"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
-    <ROW Shortcut="avdump2gui.exe" Directory_="SHORTCUTDIR" Name="Avdump2" Component_="avdump2gui.exe" Target="[#avdump2gui.exe]" Description="Avdump2" Hotkey="0" Icon_="anidb_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
-    <ROW Shortcut="avdump2gui.exe_1" Directory_="DesktopFolder" Name="Avdump2" Component_="avdump2gui.exe" Target="[#avdump2gui.exe]" Description="Avdump2" Hotkey="0" Icon_="anidb_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="Avdump2" Directory_="DesktopFolder" Name="Avdump2" Component_="avdump2gui.exe" Target="[#avdump2gui.exe]" Hotkey="0" Icon_="anidb_1.exe" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
