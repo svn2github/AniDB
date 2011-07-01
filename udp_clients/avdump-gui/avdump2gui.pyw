@@ -45,7 +45,6 @@ class Main(QtGui.QMainWindow):
 
         self._enable_elements()
         self._read_config()
-        self._read_done()
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Delete:
@@ -179,7 +178,8 @@ class Main(QtGui.QMainWindow):
         self._enable_elements()
 
     def _raise_error(self, error_message):
-        self._subprocess.stop()
+        if self._subprocess is not None:
+            self._subprocess.stop()
         QtGui.QMessageBox.critical(self, "Error!", error_message, QtGui.QMessageBox.Ok)
 
     def _stop(self):
@@ -188,6 +188,7 @@ class Main(QtGui.QMainWindow):
             self._subprocess = None
 
     def _slotFile(self):
+        self._read_done()
         files = QtGui.QFileDialog.getOpenFileNames(self, 'File select', self._last_dir, self._allowed_extensions_str)
         for path in files:
             self._add_file(path)
@@ -196,6 +197,7 @@ class Main(QtGui.QMainWindow):
         root_dir = QtGui.QFileDialog.getExistingDirectory(self, "Select Directory", self._last_dir)
         if not root_dir:
             return
+        self._read_done()
         diter = QtCore.QDirIterator(root_dir, self._allowed_extentions_globs, QtCore.QDir.Files, QtCore.QDirIterator.Subdirectories)
         for path in iter(diter.next, ""):
             self._add_file(path)
