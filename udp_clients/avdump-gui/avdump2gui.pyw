@@ -302,7 +302,7 @@ class Main(QtGui.QMainWindow):
             try:
                 width  = int(self._get_config_bit(config, 'DEFAULT', 'window_width'))
                 height = int(self._get_config_bit(config, 'DEFAULT', 'window_height'))
-                if height > 450 or width > 600:
+                if height > 1 and width > 1:
                     self.resize(width, height)
             except:
                 pass
