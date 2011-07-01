@@ -1,5 +1,5 @@
 import datetime, locale, os, sys
-import ConfigParser
+import ConfigParser, esky
 
 from PyQt4 import QtCore, QtGui
 
@@ -26,16 +26,16 @@ class Main(QtGui.QMainWindow):
         QtGui.QMainWindow.__init__(self)
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
+
         self._subprocess = None
         self._filelist = {}
         self._paths = {}
         self._done_files = []
         self._worker = None
         self._last_dir = os.getcwd()
-        self._export_filename = "exports/export_%s.txt" % datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+        self._export_filename = "../../exports/export_%s.txt" % datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
 
         self._ui.datatable.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
-        self._ui.datatable.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
 
         self.connect(self._ui.files_button, QtCore.SIGNAL("clicked()"), self._slotFile)
         self.connect(self._ui.folder_button, QtCore.SIGNAL("clicked()"), self._slotFolder)
@@ -58,15 +58,49 @@ class Main(QtGui.QMainWindow):
                 rows.sort()
                 rows.reverse()
                 for row in rows:
-                    del self._filelist[os.path.join(unicode(self._ui.datatable.item(row,0).text()), unicode(self._ui.datatable.item(row,1).text()))]
+                    del self._filelist[os.path.join(unicode(self._ui.datatable.item(row,2).text()), unicode(self._ui.datatable.item(row,1).text()))]
                     self._ui.datatable.removeRow(row)
                 self._ui.progressBar.setValue(self._calculate_progress())
+
+#################################################
+#                                               #
+#                UPDATE FUNCTIONS               #
+#                                               #
+#################################################
+    def _update_app(self):
+        if getattr(sys, "frozen", False):
+            self._updater = Updater()
+            self.connect(self._updater, self._updater.SIG_NEWVERSION, self._new_version)
+            self.connect(self._updater, self._updater.SIG_RESTART, self._restart_program)
+            self.connect(self._updater, self._updater.SIG_PROBLEM, self._raise_updater_error)
+            self._updater.check_version()
+
+    def _restart_program(self):
+        QtGui.QMessageBox.information(self, "Update done!", "The update was successful. You will need to restart the program now.", QtGui.QMessageBox.Ok)
+        #os.execl(sys.executable, sys.executable, * sys.argv)
+        sys.exit()
+
+    def _new_version(self):
+        self._disable_elements()
+        self._ui.stop_button.setDisabled(True)
+        QtGui.QMessageBox.information(self, "New Version!", "A new version has been found and will be installed now. You won't be able to use the app until this has finished.", QtGui.QMessageBox.Ok)
+        self._updater.start()
+
+    def _raise_updater_error(self, error_message):
+        QtGui.QMessageBox.critical(self, "Error!", error_message, QtGui.QMessageBox.Ok)
 
 #################################################
 #                                               #
 #                 GUI FUNCTIONS                 #
 #                                               #
 #################################################
+    def _resize_columns(self):
+        self._ui.datatable.resizeColumnToContents(0)
+        self._ui.datatable.resizeColumnToContents(1)
+        if self._ui.datatable.columnWidth(0) < 50:
+            self._ui.datatable.setColumnWidth(0, 50)
+        if self._ui.datatable.columnWidth(1) < 200:
+            self._ui.datatable.setColumnWidth(1, 200)
 
     def _disable_elements(self):
         self._ui.username.setDisabled(True)
@@ -98,16 +132,20 @@ class Main(QtGui.QMainWindow):
 
         done = 0
         for i in range(self._ui.datatable.rowCount()):
-            if unicode(self._ui.datatable.item(i,2).text()) == 'done':
+            if unicode(self._ui.datatable.item(i,0).text()) == 'done':
                 done += 1
 
         return done*100/self._ui.datatable.rowCount()
-
+        
 #################################################
 #                                               #
 #                 EVENT HANDLER                 #
 #                                               #
 #################################################
+    def resizeEvent(self, event):
+        event.accept()
+        self._resize_columns()
+
     def closeEvent(self, event):
         self._stop()
         self._write_config()
@@ -115,22 +153,26 @@ class Main(QtGui.QMainWindow):
 
     def _file_hashing(self, path):
         i = self._paths[path]
-        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('hashing'))
+        self._ui.datatable.setItem(i, 0, QtGui.QTableWidgetItem('hashing'))
+        self._resize_columns()
 
     def _file_sending(self, path):
         i = self._paths[path]
-        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('sending'))
+        self._ui.datatable.setItem(i, 0, QtGui.QTableWidgetItem('sending'))
+        self._resize_columns()
 
     def _file_done(self, path):
         i = self._paths[path]
-        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('done'))
+        self._ui.datatable.setItem(i, 0, QtGui.QTableWidgetItem('done'))
         if self._ui.exp.isChecked():
             self._output_export()
         self._ui.progressBar.setValue(self._calculate_progress())
+        self._resize_columns()
 
     def _file_aborted(self, path):
         i = self._paths[path]
-        self._ui.datatable.setItem(i, 2, QtGui.QTableWidgetItem('aborted'))
+        self._ui.datatable.setItem(i, 0, QtGui.QTableWidgetItem('aborted'))
+        self._resize_columns()
 
     def _finished(self, exitcode, exitstatus):
         self._paths = {}
@@ -178,15 +220,17 @@ class Main(QtGui.QMainWindow):
             self._filelist[unicode(fileloc)] =  1
             self._ui.datatable.insertRow(no)
 
-            item = QtGui.QTableWidgetItem(filepath)
+            item = QtGui.QTableWidgetItem('new')
             self._ui.datatable.setItem(no, 0, item)
 
             item = QtGui.QTableWidgetItem(filename)
             self._ui.datatable.setItem(no, 1, item)
 
-            item = QtGui.QTableWidgetItem('new')
+            item = QtGui.QTableWidgetItem(filepath)
             self._ui.datatable.setItem(no, 2, item)
+
             self._ui.progressBar.setValue(self._calculate_progress())
+            self._resize_columns()
 
     def _run(self):
         username = unicode(self._ui.username.text())
@@ -204,8 +248,8 @@ class Main(QtGui.QMainWindow):
 
         paths    = []
         for i in range(self._ui.datatable.rowCount()):
-            if unicode(self._ui.datatable.item(i,2).text()) != 'done':
-                path = os.path.join(unicode(self._ui.datatable.item(i,0).text()), unicode(self._ui.datatable.item(i,1).text()))
+            if unicode(self._ui.datatable.item(i,0).text()) != 'done':
+                path = os.path.join(unicode(self._ui.datatable.item(i,2).text()), unicode(self._ui.datatable.item(i,1).text()))
                 paths.append(path)
                 self._paths[path] = i
 
@@ -214,12 +258,12 @@ class Main(QtGui.QMainWindow):
             self._disable_elements()
             done_file = None
             if self._ui.done.isChecked() is True:
-                done_file = "done.txt"
+                done_file = "../../done.txt"
 
             export_file = None
             if self._ui.exp.isChecked() is True:
-                if not os.path.exists('exports'):
-                    os.mkdir('exports')
+                if not os.path.exists('../../exports'):
+                    os.mkdir('../../exports')
                 export_file = self._export_filename
 
             proc = Avdump(username, apikey, done_file, export_file, paths)
@@ -238,9 +282,9 @@ class Main(QtGui.QMainWindow):
 #                                               #
 #################################################
     def _read_config(self):
-        if os.path.exists('options.ini'):
+        if os.path.exists('../../options.ini'):
             config = ConfigParser.ConfigParser()
-            config.read('options.ini')
+            config.read('../../options.ini')
             self._ui.username.setText(self._get_config_bit(config, 'DEFAULT', 'username'))
             self._ui.apikey.setText(self._get_config_bit(config, 'DEFAULT', 'apikey'))
             if self._get_config_bit(config, 'DEFAULT', 'done') == '1':
@@ -271,11 +315,15 @@ class Main(QtGui.QMainWindow):
 
     def _write_config(self):
         config = ConfigParser.ConfigParser()
+        config.read('../../options.ini')
         config.set("DEFAULT", "username", str(self._ui.username.text()))
         config.set("DEFAULT", "apikey", str(self._ui.apikey.text()))
         config.set('DEFAULT', 'last_dir', self._last_dir)
-        config.set('DEFAULT', 'window_width', self._ui.main.width())
-        config.set('DEFAULT', 'window_height', self._ui.main.height())
+
+        if self.isMaximized() is False:
+            config.set('DEFAULT', 'window_width', self.width())
+            config.set('DEFAULT', 'window_height', self.height())
+                
         if self._ui.done.isChecked():
             config.set("DEFAULT", "done", 1)
         else:
@@ -284,14 +332,13 @@ class Main(QtGui.QMainWindow):
             config.set("DEFAULT", "exp", 1)
         else:
             config.set("DEFAULT", "exp", 0)
-        config.write(file("options.ini", "w"))
+        config.write(file("../../options.ini", "w"))
 
     def _read_done(self):
-        if os.path.exists("done.txt"):
-            for line in file("done.txt"):
+        if os.path.exists("../../done.txt"):
+            for line in file("../../done.txt"):
                 self._done_files.append(QtCore.QString.fromUtf8(line.strip())
                     .normalized(QtCore.QString.NormalizationForm_KC))
-
 
 class Avdump(QtCore.QProcess):
     """Subprocess using avdump to hash files and communicate with anidb"""
@@ -392,12 +439,42 @@ class Avdump(QtCore.QProcess):
         if self._current_filename:
             self.emit(self.SIG_FILE_ABORTED, self._paths[self._status_path])
 
+class Updater(QtCore.QProcess):
+    SIG_PROBLEM    = QtCore.SIGNAL('updater_problem')
+    SIG_NEWVERSION = QtCore.SIGNAL('updater_new_version')
+    SIG_RESTART    = QtCore.SIGNAL('updater_restart')
+
+    def __init__(self):
+        QtCore.QProcess.__init__(self)
+        self._app = esky.Esky(sys.executable,"http://static.anidb.net/client/avdump2-gui/")
+        self._app.cleanup()
+
+    def check_version(self):
+        current = self._app.active_version
+        try:
+            new = self._app.find_update()
+            if new is not None:
+                if new > current:
+                    self.emit(self.SIG_NEWVERSION)
+        except Exception, e:
+            self.emit(self.SIG_PROBLEM, "ERROR UPDATING APP: " + str(e))        
+
+    def start(self):
+        try:
+            self._app.auto_update()
+            self.emit(self.SIG_RESTART)
+        except Exception, e:
+            sys.stderr.write("ERROR UPDATING APP: " + str(e))
+            self.emit(self.SIG_PROBLEM, "ERROR UPDATING APP: " + str(e))
+        self._app.cleanup()
+
 def main():
     app = QtGui.QApplication(sys.argv)
     window=Main()
     window.show()
+    window._resize_columns()
+    window._update_app()
     sys.exit(app.exec_())
-
 
 if __name__ == "__main__":
     main()

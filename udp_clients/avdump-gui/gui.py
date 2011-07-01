@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Python27\Lib\site-packages\PyQt4\avdump.ui'
 #
-# Created: Mon Jun 06 13:34:22 2011
+# Created: Thu Jun 30 16:04:50 2011
 #      by: PyQt4 UI code generator 4.8.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -44,7 +44,8 @@ class Ui_MainWindow(object):
         self.datatable.setHorizontalHeaderItem(1, item)
         item = QtGui.QTableWidgetItem()
         self.datatable.setHorizontalHeaderItem(2, item)
-        self.datatable.verticalHeader().setStretchLastSection(False)
+        self.datatable.horizontalHeader().setMinimumSectionSize(50)
+        self.datatable.horizontalHeader().setStretchLastSection(True)
         self.gridLayout.addWidget(self.datatable, 0, 0, 8, 2)
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem, 5, 2, 1, 1)
@@ -193,9 +194,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Avdump2", None, QtGui.QApplication.UnicodeUTF8))
-        self.datatable.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("MainWindow", "path", None, QtGui.QApplication.UnicodeUTF8))
+        self.datatable.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("MainWindow", "status", None, QtGui.QApplication.UnicodeUTF8))
         self.datatable.horizontalHeaderItem(1).setText(QtGui.QApplication.translate("MainWindow", "filename", None, QtGui.QApplication.UnicodeUTF8))
-        self.datatable.horizontalHeaderItem(2).setText(QtGui.QApplication.translate("MainWindow", "status", None, QtGui.QApplication.UnicodeUTF8))
+        self.datatable.horizontalHeaderItem(2).setText(QtGui.QApplication.translate("MainWindow", "path", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("MainWindow", "ed2k export", None, QtGui.QApplication.UnicodeUTF8))
         self.start_button.setText(QtGui.QApplication.translate("MainWindow", "Start", None, QtGui.QApplication.UnicodeUTF8))
         self.stop_button.setText(QtGui.QApplication.translate("MainWindow", "Stop", None, QtGui.QApplication.UnicodeUTF8))
