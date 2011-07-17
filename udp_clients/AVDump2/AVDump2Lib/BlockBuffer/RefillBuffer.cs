@@ -12,6 +12,8 @@ namespace AVDump2Lib.BlockBuffer {
 
 		void Initialize(int consumerCount);
 
+		//int BufferUnderrunCount { get; }
+
 		void Read(int consumerId, Consumer<T> consumer);
 		T GetBlock(int consumerId);
 
@@ -36,6 +38,8 @@ namespace AVDump2Lib.BlockBuffer {
 		private bool isEndOfStream;
 		private bool disposed, stop;
 
+		//public int BufferUnderrunCount { get; private set; }
+
 		public RefillBuffer(ICircularBuffer<T> circBuffer, IBlockSource<T> blockSource, int consumerCount) : this(circBuffer, blockSource) { Initialize(consumerCount); }
 		public RefillBuffer(ICircularBuffer<T> circBuffer, IBlockSource<T> blockSource) {
 			this.circBuffer = circBuffer;
@@ -51,6 +55,7 @@ namespace AVDump2Lib.BlockBuffer {
 			circBuffer.Initialize(consumerCount);
 			tRefiller = new Thread(Filler);
 
+			//BufferUnderrunCount = 0;
 			isEndOfStream = false;
 		}
 
@@ -79,7 +84,8 @@ namespace AVDump2Lib.BlockBuffer {
 		public void Read(int consumerId, Consumer<T> consumer) {
 			if(!circBuffer.ConsumerCanRead(consumerId)) {
 				if(EndOfStream(consumerId)) throw new Exception("Cannot read block when EOS is reached");
-				while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20); 
+				while(!circBuffer.ConsumerCanRead(consumerId)) Thread.Sleep(20);
+
 			};
 			consumer(circBuffer.ConsumerGet(consumerId));
 			circBuffer.ConsumerAdvance(consumerId);

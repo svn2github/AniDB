@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.Collections;
 
 namespace AVDump2Lib.HashAlgorithms {
+
 	public class TTH : HashAlgorithm {
 		public const int BLOCKSIZE = 1024;
 		private static byte[] zeroArray = new byte[] { 0 };
@@ -32,7 +33,7 @@ namespace AVDump2Lib.HashAlgorithms {
 
 		private Environment[] environments; private AutoResetEvent[] signals;
 
-		private HashAlgorithm nodeHasher, blockHasher;
+		private ITigerForTTH nodeHasher, blockHasher;
 		private bool hasLastBlock;
 		private bool hasStarted;
 		private int threadCount;
@@ -48,8 +49,10 @@ namespace AVDump2Lib.HashAlgorithms {
 			this.nods = new LinkedList<byte[]>();
 			this.levels = new LinkedList<LinkedListNode<byte[]>>();
 
-			nodeHasher = new TigerThex();
-			blockHasher = new TigerThex();
+			//nodeHasher = new TigerThex();
+			//blockHasher = new TigerThex();
+			nodeHasher = new TTHTiger();
+			blockHasher = new TTHTiger();
 
 			this.threadCount = threadCount /*= 1*/;
 
@@ -81,10 +84,7 @@ namespace AVDump2Lib.HashAlgorithms {
 				ibStart += cbSize - (cbSize & (BLOCKSIZE - 1));
 				cbSize &= BLOCKSIZE - 1;
 
-				blockHasher.TransformBlock(zeroArray, 0, 1, null, 0);
-				blockHasher.TransformFinalBlock(array, ibStart, cbSize);
-				blocks.Enqueue(blockHasher.Hash);
-				blockHasher.Initialize();
+				blocks.Enqueue(blockHasher.TTHFinalBlockHash(array, ibStart, cbSize));
 				hasLastBlock = false;
 			}
 
@@ -109,18 +109,17 @@ namespace AVDump2Lib.HashAlgorithms {
 			}
 		}
 		private void CompressBlocks() {
-			if(levels.Last.Value == null && blocks.Count > 1) levels.Last.Value = nods.AddLast(HashBlocks(blocks.Dequeue(), blocks.Dequeue()));
-			while(blocks.Count > 1) nods.AddLast(HashBlocks(blocks.Dequeue(), blocks.Dequeue()));
+			if(levels.Last.Value == null && blocks.Count > 1) levels.Last.Value = nods.AddLast(nodeHasher.TTHNodeHash(blocks.Dequeue(), blocks.Dequeue()));
+			while(blocks.Count > 1) nods.AddLast(nodeHasher.TTHNodeHash(blocks.Dequeue(), blocks.Dequeue()));
 
 			var level = levels.Last;
 			LinkedListNode<LinkedListNode<byte[]>> nextLevel;
 			do {
-
 				while(!(level.Value == null || //Level has no nods
 				  (level.Value.Next == null) || //Level is at last node position (only one node available)
 				  ((nextLevel = GetNextLevel(level)) != null && level.Value.Next == nextLevel.Value))) //Level has only one node
 				{
-					level.Value.Value = HashBlocks(level.Value.Value, level.Value.Next.Value);
+					level.Value.Value = nodeHasher.TTHNodeHash(level.Value.Value, level.Value.Next.Value);
 					nods.Remove(level.Value.Next);
 
 					if(level.Previous == null) { //New level Node
@@ -145,16 +144,6 @@ namespace AVDump2Lib.HashAlgorithms {
 			return null;
 		}
 
-		private byte[] HashBlocks(byte[] l, byte[] r) {
-			nodeHasher.Initialize();
-			nodeHasher.TransformBlock(oneArray, 0, 1, null, 0);
-			if(l != null) nodeHasher.TransformBlock(l, 0, l.Length, null, 0);
-			if(r != null) nodeHasher.TransformBlock(r, 0, r.Length, null, 0);
-			nodeHasher.TransformFinalBlock(emptyArray, 0, 0);
-
-			return nodeHasher.Hash;
-		}
-
 		protected override byte[] HashFinal() {
 			foreach(var e in environments) {
 				e.ThreadJoin = true;
@@ -164,12 +153,12 @@ namespace AVDump2Lib.HashAlgorithms {
 			}
 
 			foreach(var block in blocks) nods.AddLast(block);
-			return nods.Count != 0 ? nods.Reverse<byte[]>().Aggregate((byte[] accumHash, byte[] hash) => HashBlocks(hash, accumHash)) : blockHasher.ComputeHash(zeroArray);
+			return nods.Count != 0 ? nods.Reverse<byte[]>().Aggregate((byte[] accumHash, byte[] hash) => nodeHasher.TTHNodeHash(hash, accumHash)) : blockHasher.ZeroArrayHash;
 		}
 
 		public override void Initialize() {
-			nodeHasher.Initialize();
-			blockHasher.Initialize();
+			//nodeHasher.TTHInitialize();
+			//blockHasher.TTHInitialize();
 
 			this.blocks.Clear();
 			this.nods.Clear();
@@ -185,7 +174,7 @@ namespace AVDump2Lib.HashAlgorithms {
 				e.DoWork.Reset();
 				e.WorkDone.Reset();
 				e.ThreadJoin = false;
-				e.BlockHasher.Initialize();
+				//e.BlockHasher.TTHInitialize();
 				e.HashThread = new Thread(DoWork);
 			}
 		}
@@ -195,8 +184,7 @@ namespace AVDump2Lib.HashAlgorithms {
 			public bool ThreadJoin;
 			public int Index;
 
-
-			public TigerForTTH BlockHasher = new TigerForTTH();
+			public ITigerForTTH BlockHasher = new TTHTiger();
 
 			public Queue<byte[]> Blocks;
 			public int Offset;
@@ -211,8 +199,21 @@ namespace AVDump2Lib.HashAlgorithms {
 				this.Index = index;
 
 				Blocks = new Queue<byte[]>();
-				BlockHasher.Initialize();
+				//BlockHasher.TTHInitialize();
 			}
 		}
+
+		public interface ITigerForTTH {
+			//void TTHInitialize();
+			byte[] TTHBlockHash(byte[] array, int ibStart);
+			byte[] TTHFinalBlockHash(byte[] array, int ibStart, int cbSize);
+			byte[] TTHNodeHash(byte[] l, byte[] r);
+
+			byte[] ZeroArrayHash { get; }
+
+		}
 	}
+
+
+
 }

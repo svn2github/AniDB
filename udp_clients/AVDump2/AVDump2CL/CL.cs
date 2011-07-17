@@ -141,27 +141,23 @@ namespace AVDump2CL {
 			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
 
 
-
 #if(!PublicRelease)
-			if(!ParseClOptions(SetArguments())) return;
-#else
-			args = ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray();
-
-			/*if(args.Length == 0) {
-				Console.WriteLine("Error while parsing commandline arguments");
-				Console.WriteLine("Press any alpha-numeric key to continue");
-				Pause();
-				return;
-			}*/
-			try {
-				if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
-			} catch(Exception) {
-				Console.Error.WriteLine("Error while interpreting commandline arguments");
-				Console.WriteLine("Press any alpha-numeric key to continue");
-				Pause();
-				return;
-			}
+			if(args.Length == 0) {
+				if(!ParseClOptions(SetArguments())) return;
+			} else
 #endif
+			{
+				args = ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray();
+
+				try {
+					if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
+				} catch(Exception) {
+					ColoredWriteLine(ConsoleColor.Red, "Error while interpreting commandline arguments", true);
+					Console.WriteLine("Press any alpha-numeric key to continue");
+					Pause();
+					return;
+				}
+			}
 
 			if((switches & eSwitches.HashingSpeedTest) != 0) {
 				var container = CreateContainer(blockCount, blockSize);
@@ -215,9 +211,9 @@ namespace AVDump2CL {
 				//@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDump2CL",
 				//@"D:\My Stuff\Downloads\Byousoku_5_Centimeter_-_T1_-_Trailer_-_[Triad](b2df5b8e)(dub.sub_x-in.en).mp4",
 				//@"D:\My Stuff\Downloads\problemfiles",
-				@"D:\My Stuff\Downloads\Kowarekake no Orgel (Episode 0O2) [DFE0E4AF] [MiniTheatre] {anidb}.mkv",
+				//@"D:\My Stuff\µT\Anime\[Doki] No. 6 - 01 (1280x720 h264 AAC) [459FA4A4]",
 				//@"F:\Anime",
-				//@"E:\Anime",
+				@"E:\Anime",
 				//@"E:\Anime\Now\1992\Kaze no Tairiku",
 				//@"D:\My Stuff\Downloads\[SumiSora&CASO][MariaHolic][Information][DVDRIP][x264_AAC][5B4FD648].mp4",
 				//@"D:\My Stuff\Downloads\[AniYoshi]_Crystal_Blaze_-_01_[C6D45AE8].mkv",
@@ -253,8 +249,9 @@ namespace AVDump2CL {
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\µT\Anime\Requiem from the Darkness[DH]\Requiem From the Darkness 13 - The Death Spirits of Seven Man Point, Part 2[F4319032].mkv",
-				"-y0q",
-				//"-H01256",
+				"-01256q",
+				//"-H",
+				//"-H6",
 				//"-py01245",
 				//"-exp:explog.txt",
 				//"-ms:10000",
@@ -267,7 +264,7 @@ namespace AVDump2CL {
 				//"-acerr:acerr.txt",
 				//"-ext:srt",
 				//"-ext:rt",
-				"-extdiff:extdiff.txt",
+				//"-extdiff:extdiff.txt",
 				//"-done:done.txt"
 			};
 		}
@@ -420,7 +417,7 @@ namespace AVDump2CL {
 				}
 
 				if(invalidCl) {
-					Console.Error.WriteLine("Error in Commandline: " + args[i] + ". Aborting!\nPress any alpha-numeric key to exit");
+					ColoredWriteLine(ConsoleColor.Red, "Error in Commandline: " + args[i] + ". Aborting!\nPress any alpha-numeric key to exit", true);
 					Pause();
 					return false;
 				}
@@ -449,7 +446,7 @@ namespace AVDump2CL {
 			}
 
 			if(uselessCombination) {
-				Console.Error.WriteLine("Combination of arguments is invalid (Nothing to do)");
+				ColoredWriteLine(ConsoleColor.Red, "Combination of arguments is invalid (Nothing to do)", true);
 				Pause();
 				return false;
 			}
@@ -531,7 +528,7 @@ namespace AVDump2CL {
 			Console.WriteLine("Filename: " + e.File.Name);
 
 			if(e.File.Length == 0) {
-				Console.Error.WriteLine("Skipping 0byte File");
+				ColoredWriteLine(ConsoleColor.Red, "Skipping 0byte File", true);
 				return;
 			}
 
@@ -593,6 +590,8 @@ namespace AVDump2CL {
 					if((switches & (eSwitches.Sha1)) != 0) e.Container.AddBlockConsumer("SHA1");
 					if((switches & (eSwitches.Tiger)) != 0) e.Container.AddBlockConsumer("TIGER");
 					if((switches & (eSwitches.Tth)) != 0) e.Container.AddBlockConsumer("TTH");
+					//if((switches & (eSwitches.Tth)) != 0) e.Container.AddBlockConsumer("TTH2");
+					//if((switches & (eSwitches.Tth)) != 0) e.Container.AddBlockConsumer("TTH3");
 					if(isMatroska) e.Container.AddBlockConsumer("Matroska");
 					if(isOgmOgg) e.Container.AddBlockConsumer("Ogm/Ogg");
 
@@ -760,7 +759,7 @@ namespace AVDump2CL {
 			try {
 				waitHandle.WaitOne(10);
 			} catch(Exception ex) {
-				Console.Error.WriteLine(".NET 3.5 SP1 probably not installed");
+				ColoredWriteLine(ConsoleColor.Red, ".NET 3.5 SP1 probably not installed", true);
 				Pause();
 				return false;
 			}
@@ -769,7 +768,7 @@ namespace AVDump2CL {
 
 
 			if(Environment.OSVersion.Platform == PlatformID.Unix && !File.Exists(Path.Combine(AppPath, "AVDump2Lib.dll.config"))) {
-				Console.Error.WriteLine("AVDump2Lib.dll.config is missing");
+				ColoredWriteLine(ConsoleColor.Red, "AVDump2Lib.dll.config is missing", true);
 				Pause();
 				return false;
 			}
@@ -779,7 +778,7 @@ namespace AVDump2CL {
 
 			var milFileName = Path.Combine(AppPath, Environment.OSVersion.Platform == PlatformID.Unix ? (IntPtr.Size == 4 ? "libMediaInfo_x86.so" : "libMediaInfo_x64.so") : (IntPtr.Size == 4 ? "MediaInfo_x86.dll" : "MediaInfo_x64.dll"));
 			if(!File.Exists(milFileName)) {
-				Console.Error.WriteLine("MediaInfoLib is missing");
+				ColoredWriteLine(ConsoleColor.Red, "MediaInfoLib is missing", true);
 				Pause();
 				return false;
 			}
@@ -789,13 +788,13 @@ namespace AVDump2CL {
 			try {
 				IMediaInfo mi = IntPtr.Size == 8 ? (IMediaInfo)new MediaInfo_x64() : (IMediaInfo)new MediaInfo_x86();
 				if(!mi.Option("Info_Version").Equals("MediaInfoLib - v0.7.42")) {
-					Console.Error.WriteLine("Mediainfo library version mismatch. Needed: v0.7.42, Used: " + mi.Option("Info_Version"));
+					ColoredWriteLine(ConsoleColor.Red, "Mediainfo library version mismatch. Needed: v0.7.42, Used: " + mi.Option("Info_Version"), true);
 					Pause();
 					return false;
 				}
 				mi.Close();
 			} catch(Exception ex) {
-				Console.Error.WriteLine("Media Info Library not found. Error: " + ex.ToString());
+				ColoredWriteLine(ConsoleColor.Red, "Media Info Library not found. Error: " + ex.ToString(), true);
 				Pause();
 				return false;
 			}
@@ -839,7 +838,7 @@ namespace AVDump2CL {
 					ColoredWriteLine(ConsoleColor.Yellow, "Warning. Logsize is too small.");
 
 				} else if(result.State == AniDBCommit.ACreqState.WrongVersionOrPassOrName) {
-					Console.Error.WriteLine("Either the client is outdated or your username/password combination is wrong.");
+					ColoredWriteLine(ConsoleColor.Red, "Either the client is outdated or your username/password combination is wrong.", true);
 					Pause();
 
 				} else if(result.State == AniDBCommit.ACreqState.TimeOut && tries > retries) {
@@ -917,6 +916,7 @@ namespace AVDump2CL {
 					  "Position: " + (bytesProcessed >> 20).ToString().PadLeft(3) + "MB/" + (fileSize >> 20) + "MB  " +
 					  "Elapsed time: " + progress.TimeElapsed.ToFormatedString() + " " +
 					  "Speed: " + ((int)(bytesProcessed / progress.TimeElapsed.TotalSeconds) >> 20) + "MB/s";
+					  //"BufUnderruns: " + progress.BufferUndrrunCount;
 					output += "".PadLeft(output.Length < consoleWidth ? consoleWidth - output.Length - 1 : 0, ' ');
 					Console.WriteLine(output);
 				} else {
@@ -955,13 +955,16 @@ namespace AVDump2CL {
 
 		private static BlockConsumerContainer CreateContainer(int blockCount, int blockSize) {
 			BlockConsumerContainer container = new BlockConsumerContainer(blockCount, blockSize * 1024);
-			container.RegisterBlockConsumer("TIGER", new HashCalculator("TIGER", new TigerForTTH(), h => BaseConverter.ToString(h.Hash)));
+			//container.RegisterBlockConsumer("TIGER", new HashCalculator("TIGER", new TigerForTTH(), h => BaseConverter.ToString(h.Hash)));
+			container.RegisterBlockConsumer("TIGER", new HashCalculator("TIGER", new Tiger(), h => BaseConverter.ToString(h.Hash)));
 			container.RegisterBlockConsumer("AICH", new HashCalculator("AICH", new Aich(), h => BaseConverter.ToString(h.Hash)));
 			container.RegisterBlockConsumer("SHA1", new HashCalculator("SHA1", new SHA1CryptoServiceProvider(), h => BaseConverter.ToString(h.Hash)));
 			container.RegisterBlockConsumer("CRC", new HashCalculator("CRC", new Crc32(), h => BaseConverter.ToString(h.Hash)));
 			container.RegisterBlockConsumer("MD4", new HashCalculator("MD4", new Md4(), h => BaseConverter.ToString(h.Hash)));
 			container.RegisterBlockConsumer("MD5", new HashCalculator("MD5", new MD5CryptoServiceProvider(), h => BaseConverter.ToString(h.Hash)));
 			container.RegisterBlockConsumer("TTH", new HashCalculator("TTH", new TTH(Environment.ProcessorCount), h => BaseConverter.ToString(h.Hash, BaseOption.Base32)));
+			//container.RegisterBlockConsumer("TTH2", new HashCalculator("TTH2", new TTH2(Environment.ProcessorCount), h => BaseConverter.ToString(h.Hash, BaseOption.Base32)));
+			//container.RegisterBlockConsumer("TTH3", new HashCalculator("TTH3", new TTH3(Environment.ProcessorCount), h => BaseConverter.ToString(h.Hash, BaseOption.Base32)));
 			container.RegisterBlockConsumer("Matroska", new MatroskaParser("Matroska"));
 			container.RegisterBlockConsumer("Ogm/Ogg", new OgmOggParser("Ogm/Ogg"));
 
@@ -1108,7 +1111,7 @@ Options: (one letter switches can be put in one string)
   Input:
    bsize   Circular buffer size for hashing (ex: 
              -bsize:<blocksize in kb (" + blockSize.ToString() + @")>:<number of blocks (" + blockCount.ToString() + @")>)
-   ext     Comma separated extension list (ex: -ext:avi,mkv or -ext:-zip)
+   ext     Comma sep. extension list (ex: -ext:avi,mkv -ext:-zip or -ext:*)
    ms      Monitor sleep duration in milliseconds (default: " + monitorSleepDuration.ToString() + @")
 
   Logging:
@@ -1231,10 +1234,10 @@ Press any key to exit";
 			set { try { Console.CursorVisible = value; } catch(Exception) { } }
 		}
 
-		private static void ColoredWriteLine(ConsoleColor color, string line) {
+		private static void ColoredWriteLine(ConsoleColor color, string line, bool isError = false) {
 			try {
 				Console.ForegroundColor = color;
-				Console.WriteLine(line);
+				if(!isError) Console.WriteLine(line); else Console.Error.WriteLine(line);
 				Console.ResetColor();
 			} catch(Exception) {
 			}

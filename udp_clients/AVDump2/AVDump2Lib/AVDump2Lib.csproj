@@ -237,7 +237,10 @@
   <ItemGroup>
     <Compile Include="BlockConsumers\OgmOggParser.cs" />
     <Compile Include="HashAlgorithms\Aich.cs" />
+    <Compile Include="HashAlgorithms\Tiger.cs" />
+    <Compile Include="HashAlgorithms\BlockHashAlgorithm.cs" />
     <Compile Include="HashAlgorithms\TigerTreeHash.cs" />
+    <Compile Include="HashAlgorithms\TTHTiger.cs" />
     <Compile Include="InfoGathering\InfoProvider\FileExtensionProvider.cs" />
     <Compile Include="InfoGathering\InfoProvider\HashInfoProvider.cs" />
     <Compile Include="InfoGathering\InfoProvider\MatroskaProvider.cs" />
@@ -262,7 +265,6 @@
     <Compile Include="HashAlgorithms\Crc32.cs" />
     <Compile Include="HashAlgorithms\Ed2k.cs" />
     <Compile Include="HashAlgorithms\Md4.cs" />
-    <Compile Include="HashAlgorithms\Tiger.cs" />
     <Compile Include="InfoGathering\Parser\CSEBMLLib\FileSource.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\Enums.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfo_Any.cs" />

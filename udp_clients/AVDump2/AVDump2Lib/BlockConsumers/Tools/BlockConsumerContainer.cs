@@ -71,6 +71,7 @@ namespace AVDump2Lib.BlockConsumers.Tools {
 			public IBlockConsumer BlockConsumerObj(int index) { return blockConsumers.items[index]; }
 
 			public long StreamSize { get { return source.Length; } }
+			//public int BufferUndrrunCount { get { return blockConsumers.b.BufferUnderrunCount; } }
 			public long StreamPosition { get { return source.Position; } }
 			public long ProcessedBytes(int index) { return blockConsumers.items[index].ProcessedBytes; }
 			public int BufferLength { get { return (int)blockConsumers.b.BaseStream.BlockCount; } }
