@@ -77,7 +77,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			}
 
 			string milInfo = Get("Format/Extensions") != null ? Get("Format/Extensions").ToLower() : "";
-			string fileExt = System.IO.Path.GetExtension(filePath).Substring(1).ToLower();
+			//string fileExt = System.IO.Path.GetExtension(filePath).ToLower();
 			if(milInfo.Contains("asf") && milInfo.Contains("wmv") && milInfo.Contains("wma")) {
 				if(indeces[0] == 0 && indeces[1] != 0 && indeces[2] == 0) {
 					Add(EntryKey.Extension, "wma", null);

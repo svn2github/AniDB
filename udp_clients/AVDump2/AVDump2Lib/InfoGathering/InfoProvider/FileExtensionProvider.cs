@@ -40,6 +40,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 				new SMILFileType(),
 				new TTSFileType(),
 				new XSSFileType(),
+				new ZeroGFileType(),
 			};
 
 			using(Stream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read)) {
@@ -197,7 +198,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			int count = 0;
 			string line;
 			//int lineType = 0, dummy;
-			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			while((line = sr.ReadLine()) != null) {
 				if(regexParse.IsMatch(line)) count++;
 				if(count > 20) break;
@@ -210,7 +211,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 				if(string.IsNullOrEmpty(line)) {
 					continue;
 				}
-
+				
 				switch(lineType) {
 					//case 0: IsCandidate = int.TryParse(line, out dummy); break;
 					case 1: IsCandidate = regexParse.IsMatch(line); break;
@@ -223,10 +224,11 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 				if(count > 20) break;*/
 			}
-
+			
 			if(count == 0) IsCandidate = false;
 		}
 	}
+
 	public class AssSsaFileType : FileType {
 		public AssSsaFileType() : base("", identifier: "text/") { PossibleExtensions = new string[] { "ssa", "ass" }; type = StreamType.Text; }
 		public override void ElaborateCheck(Stream stream) {
@@ -286,7 +288,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			if(stream.Length > 10 * 1024 * 1024) IsCandidate = false;
 			if(!IsCandidate) return;
 
-			var sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			var sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			var line = sr.ReadLine();
 			IsCandidate = line.Contains("VobSub index file, v");
 
@@ -318,7 +320,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
-			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			string line;
 			int i, matches = 0;
 			Regex regex = new Regex(@"\[\d\d\:\d\d\.\d\d\].*");
@@ -335,7 +337,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
-			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			string line;
 			int i, matches = 0;
 			Regex regex = new Regex(@"^\d\d\:\d\d\:\d\d(\.\d)?\:.*");
@@ -352,7 +354,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
-			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			string line;
 			int i, matches = 0;
 			Regex regex = new Regex(@"\s*\d*,\s*\d*," + "\".*\"");
@@ -369,7 +371,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
-			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			string line;
 			int i, matches = 0;
 			Regex regex = new Regex(@"\d*\:\d*\:\d*\.\d*\s*\d*\:\d*\:\d*\.\d*.*");
@@ -387,7 +389,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
-			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			string line;
 			int i, matches = 0;
 			Regex regex = new Regex(@"^\d*\:\d*\:\d*\.\d*,\d*\:\d*\:\d*\.\d*,.*");
@@ -405,7 +407,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
-			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 			string line;
 			int i, j = 0, matches = 0;
 			for(i = 0;i < 30;i++) {
@@ -513,6 +515,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 	public class RarFileType : FileType { public RarFileType() : base(new byte[] { 0x52, 0x61, 0x72, 0x21 }, identifier: "compression/rar") { PossibleExtensions = new string[] { "rar" }; } }
 	public class RaFileType : FileType { public RaFileType() : base(".ra" + (char)0xfd) { PossibleExtensions = new string[] { "ra" }; type = StreamType.Audio; } }
 	public class FlacFileType : FileType { public FlacFileType() : base("fLaC") { PossibleExtensions = new string[] { "flac" }; type = StreamType.Audio; } }
+	public class ZeroGFileType : FileType { public ZeroGFileType() : base("% ZeroG", identifier: "text/ZeroG") { PossibleExtensions = new string[] { "zeg" }; type = StreamType.Text; } }
 	public class AviFileType : FileType { public AviFileType() : base("RIFF") { PossibleExtensions = new string[] { "avi" }; type = StreamType.Video; } public override void ElaborateCheck(Stream stream) { IsCandidate &= Check(stream, 8, "AVI LIST"); } }
 	public class WavFileType : FileType { public WavFileType() : base(new string[] { "RIFX", "RIFF" }) { PossibleExtensions = new string[] { "wav" }; } public override void ElaborateCheck(Stream stream) { IsCandidate &= Check(stream, 8, "WAVE"); } }
 

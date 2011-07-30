@@ -33,7 +33,6 @@ namespace AVDump2CL {
 		DumpAllExtensions = 1L << 31,
 		UseUTF8OutputStream = 1L << 32,
 
-
 		DefAudioExtensions = 1L << 34,
 		DefVideoExtensions = 1L << 35,
 		DefSubtitleExtensions = 1L << 36,

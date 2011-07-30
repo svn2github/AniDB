@@ -269,6 +269,7 @@
     <Compile Include="InfoGathering\Parser\MediaInfoLib\Enums.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfo_Any.cs" />
     <Compile Include="InfoGathering\Parser\MediaInfoLib\MediaInfoList.cs" />
+    <Compile Include="Misc\ConsoleOutFilter.cs" />
     <Compile Include="Misc\Conversion\BigEndianBitConverter.cs" />
     <Compile Include="Misc\CSEBMLSpeedTest.cs" />
     <Compile Include="Misc\Conversion\EndianBitConverter.cs" />

@@ -21,6 +21,8 @@ using AVDump2Lib.InfoGathering.InfoProvider;
 using AVDump2Lib.InfoGathering.InfoProvider.Tools;
 using AVDump2Lib.InfoGathering.Parser.MediaInfoLib;
 using AVDump2Lib.Misc;
+using System.Net;
+using System.Diagnostics;
 
 namespace AVDump2CL {
 	public class CL {
@@ -31,6 +33,7 @@ namespace AVDump2CL {
 		private static string password;
 		private static string hostAddress = "api.anidb.info";
 		private static int hostPort = 9002;
+		private static IPEndPoint host;
 		private static eSwitches switches;
 
 		private static string logPath;
@@ -40,6 +43,7 @@ namespace AVDump2CL {
 		private static string acErrListPath;
 		private static string extDiffListPath;
 		private static string crcMismatchListPath;
+		private static string extFixPath;
 
 
 		private static string hashLogStyle;
@@ -62,17 +66,18 @@ namespace AVDump2CL {
 
 		static CL() {
 			if(!BitConverter.IsLittleEndian) {
-				Console.WriteLine("Warning BitConverter is BigEndian. Continuing will cause incorrect results and/or errors");
+				ColoredWriteLine(ConsoleColor.Red, "Error BitConverter is BigEndian. Big endian support will be added on request", true);
 				Pause();
+				return;
 			}
 
 			mediaLst = new List<string>();
 			doneListContent = new List<string>();
 
-			dumpableExtensions = new HashSet<String>(new string[] { "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			dumpableExtensions = new HashSet<String>(new string[] { "zeg", "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
 			//dumpableExtensions.Sort();
 
-			processExtensions = new HashSet<string>(new string[] { "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			processExtensions = new HashSet<string>(new string[] { "zeg", "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
 			//processExtensions.Sort();
 
 			char2SwitchEnum = new Dictionary<char, eSwitches>();
@@ -113,16 +118,6 @@ namespace AVDump2CL {
 		}
 
 		static void Main(string[] args) {
-			//Console.WriteLine(Environment.Version);
-
-			var consoleIn = Console.In;
-			Console.SetOut(new ConsoleOutFilter(Console.Out));
-
-#if(HasACreq)
-			SelfCheck();
-#endif
-
-
 			try {
 				int top = Console.CursorTop;
 				Console.CursorTop = 1;
@@ -133,6 +128,12 @@ namespace AVDump2CL {
 				switches |= eSwitches.SupressProgress;
 				hasConsole = false;
 			}
+
+			//Console.WriteLine(Environment.Version);
+
+			var consoleIn = Console.In;
+			Console.SetOut(new ConsoleOutFilter(Console.Out));
+
 
 			if((switches & eSwitches.UseUTF8OutputStream) != 0) Console.OutputEncoding = new UTF8Encoding();
 
@@ -146,7 +147,7 @@ namespace AVDump2CL {
 				if(!ParseClOptions(SetArguments())) return;
 			} else
 #endif
-			{
+ {
 				args = ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray();
 
 				try {
@@ -158,6 +159,8 @@ namespace AVDump2CL {
 					return;
 				}
 			}
+
+			if(!SelfCheck()) return;
 
 			if((switches & eSwitches.HashingSpeedTest) != 0) {
 				var container = CreateContainer(blockCount, blockSize);
@@ -179,9 +182,6 @@ namespace AVDump2CL {
 				Pause();
 			}
 		}
-
-
-
 
 #if(!PublicRelease)
 		private static string[] SetArguments() {
@@ -211,14 +211,16 @@ namespace AVDump2CL {
 				//@"C:\Users\Arokh\Projects\Visual Studio 2010\Projects\AVDump2\AVDump2CL",
 				//@"D:\My Stuff\Downloads\Byousoku_5_Centimeter_-_T1_-_Trailer_-_[Triad](b2df5b8e)(dub.sub_x-in.en).mp4",
 				//@"D:\My Stuff\Downloads\problemfiles",
-				//@"D:\My Stuff\µT\Anime\[Doki] No. 6 - 01 (1280x720 h264 AAC) [459FA4A4]",
-				//@"F:\Anime",
+				//@"D:\My Stuff\µT\Anime\",
+				@"F:\Anime",
 				@"E:\Anime",
+				//@"D:\My Stuff\µT\mIRC\Onna_Kyoushi._Nikutai_Jugyou_-_1_-_Volume_1_-_(cen).mp4",
+				//@"D:\My Stuff\Downloads\zerog",
 				//@"E:\Anime\Now\1992\Kaze no Tairiku",
 				//@"D:\My Stuff\Downloads\[SumiSora&CASO][MariaHolic][Information][DVDRIP][x264_AAC][5B4FD648].mp4",
 				//@"D:\My Stuff\Downloads\[AniYoshi]_Crystal_Blaze_-_01_[C6D45AE8].mkv",
 				//@"D:\My Stuff\Downloads\[アニメ DVD] 生徒会の一存 第01話 「駄弁る生徒会」 (1280x720 x264 AAC).mp4",
-
+				//@"D:\My Stuff\Downloads\srt_encoding",
 				//@"D:\My Stuff\Downloads\redcliff450.webm",
 				//@"D:\My Stuff\Downloads\badapple_lulz.ogv",
 				//@"D:\My Stuff\Downloads\AVDump2CL\[peerates.net] free movie from archive.org - La Liberation de Paris - 1944.ogv",
@@ -232,7 +234,7 @@ namespace AVDump2CL {
 				//@"F:\Anime\!Archive\Unchecked\Hidamari Sketch X Hoshimittsu\Hidamari Sketch X Hoshimittsu 7 - May 3rd - 4th A Day in Seven Parts [Nutbladder][HDTV].mkv",
 				//@"E:\Anime\Processed\Hetalia Axis Powers\Hetalia Axis Powers C1 - Ending [gg][DVD].mkv",
 				//@"E:\Anime\Now\1989\Ys\Ys 1 - Prologue [KRT][DVD][640x480].avi",
-				//@"D:\My Stuff\µT\Anime\Tenchi Universe\zx.tenchi-universe.05.divx5.ogm",
+				//@"D:\My Stuff\µT\Anime\Tenchi Universe",
 				//@"D:\My Stuff\Downloads\New folder (2)\Mahou no Rouge Lipstick (Hentai) (Episode 001) [01F18A1F].rm",
 				//@"D:\My Stuff\Downloads\New folder (2)\186e4a23.rmvb",
 				//@"D:\My Stuff\Downloads\New folder (2)",
@@ -242,14 +244,20 @@ namespace AVDump2CL {
 				//@"D:\My Stuff\Downloads\New folder (4)\Gakuen no Shuryousha (Hentai) (Episode 001) [1A82A0D8] [myd].ogm",
 				//@"E:\Anime\Stalled\1995\Tenchi Muyou!\Tenchi Muyou! 01 - No Need For Discussions! [zx][DVD][640x480].ogm",
 				//@"D:\My Stuff\Downloads\New folder (4)\Afro Samurai (Episodes 001-005) [287F0519] [THORA].mkv",
-				//@"F:\Anime\[Done]Juubee Ninpuuchou\[AQAN] Juubee Ninpuuchou - Ryuuhougyoku Hen 01 - Mujan, the Hidden Village.ogm",
+				//@"F:\Anime\[Done]Juubee Ninpuuchou\",
 				//@"E:\Anime\Processed\One Piece\One Piece 460 - An Enormous Fleet Appears - The Whitebeard Pirates Invade! [Yibis][HDTV].mkv",
 				//@"E:\Anime\Processed\One Piece\One Piece\One Piece Episode of Chopper Plus - Fuyu ni Saku, Kiseki no Sakura\One Piece Episode of Chopper Plus - Fuyu ni Saku, Kiseki no Sakura 1 - Complete Movie [N - F][DTV].mp4",
 				//@"E:\Anime\Processed\One Piece\One Piece Norowareta Seiken\One Piece Norowareta Seiken 1v2 - Complete Movie [K-F][DVD].mp4",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\Downloads\New folder (2)\",
 				//@"D:\My Stuff\µT\Anime\Requiem from the Darkness[DH]\Requiem From the Darkness 13 - The Death Spirits of Seven Man Point, Part 2[F4319032].mkv",
-				"-01256q",
+				//"-y",
+				//"-ext:*",
+				//"-p",
+				"-ac:arokh:Anime",
+				//"-host:ommina.homeip.net:9002"
+				//"-host:127.0.0.1:9002"
+				//"-extfix:extfix.txt"
 				//"-H",
 				//"-H6",
 				//"-py01245",
@@ -265,11 +273,10 @@ namespace AVDump2CL {
 				//"-ext:srt",
 				//"-ext:rt",
 				//"-extdiff:extdiff.txt",
-				//"-done:done.txt"
+				"-done:done3.txt"
 			};
 		}
 #endif
-
 
 		private static bool ParseClOptions(string[] args) {
 			if(args.Length == 0) { HelpPrinter(); Pause(); return false; }
@@ -377,6 +384,13 @@ namespace AVDump2CL {
 						try {
 							extDiffListPath = Path.Combine(AppPath, parts[1]);
 							if(!Directory.Exists(extDiffListPath)) Directory.CreateDirectory(Path.GetDirectoryName(extDiffListPath));
+							uselessCombination = false;
+						} catch(Exception) { invalidCl = true; }
+
+					} else if(parts[0] == "extfix") {
+						try {
+							extFixPath = Path.Combine(AppPath, parts[1]);
+							if(!Directory.Exists(extFixPath)) Directory.CreateDirectory(Path.GetDirectoryName(extFixPath));
 							uselessCombination = false;
 						} catch(Exception) { invalidCl = true; }
 
@@ -508,7 +522,7 @@ namespace AVDump2CL {
 							MemoryStream memStream = new MemoryStream();
 							using(var writer = new SafeXmlWriter(memStream, Encoding.ASCII)) exElem.Save(writer);
 
-							AniDBCommit.CommitError(new AniDBCommit.CommitArgs("avdumplib", appVersion.Build, username, password, memStream.ToArray(), hostAddress + ":" + hostPort, localPort, timeout));
+							anidb.CommitError(host, timeout * 1000, "avdumplib", appVersion.Build, username.ToLower(), password, memStream.ToArray());
 						} catch(Exception) { }
 					}
 #endif
@@ -519,6 +533,17 @@ namespace AVDump2CL {
 					Pause();
 				}
 			}
+
+#if(HasACreq)
+			while(anidb.UnsentQueryCount != 0) {
+				Console.WriteLine("Unsent ACReqs: " + anidb.UnsentQueryCount + "  ");
+				if(hasConsole) Console.SetCursorPosition(0, Console.CursorTop - 1);
+				Thread.Sleep(200);
+			}
+			anidb.Stop();
+			anidb.Join();
+#endif
+
 
 			isProcessing = false;
 			if((switches & eSwitches.PrintTotalTimeUsed) != 0) Console.WriteLine("Total time elapsed: " + (DateTime.Now - startedOn).TotalSeconds + "s");
@@ -601,6 +626,9 @@ namespace AVDump2CL {
 				if((switches & eSwitches.SupressProgress) == 0) {
 					try {
 						DisplayBuffer(e, progress);
+
+						//throw new Exception("Just me testing again");
+
 					} catch(Exception ex) {
 						Console.WriteLine();
 
@@ -625,6 +653,23 @@ namespace AVDump2CL {
 			DebugWrite("WriteLogs: Before CreateInfoProvider");
 			var p = CreateInfoProvider(e, blockConsumers, out acreqFile);
 			DebugWrite("WriteLogs: After CreateInfoProvider");
+
+			var detExt = p[StreamType.General, 0, EntryKey.Extension] != null ? p[StreamType.General, 0, EntryKey.Extension].Value.ToLower() : null;
+			var ext = e.File.Extension.Length == 1 ? "" : e.File.Extension.Substring(1).ToLower();
+
+			if(!string.IsNullOrEmpty(extFixPath) && !ext.Equals(detExt)) {
+				try {
+					if(!detExt.Contains(' ')) {
+						e.File.MoveTo(Path.ChangeExtension(e.File.FullName, detExt));
+						AppendAllText(extFixPath, ext + " => " + detExt + "	" + e.File.FullName + Environment.NewLine, "Couldn't update extension fix file");
+						ext = detExt;
+					} else {
+						AppendAllText(extFixPath, "FAILED: " + ext + " => " + detExt + "	" + e.File.FullName + Environment.NewLine, "Couldn't update extension fix file");
+					}
+				} catch(Exception ex) {
+					AppendAllText(extFixPath, "FAILED: " + ext + " => " + detExt + "	" + e.File.FullName + Environment.NewLine, "Couldn't update extension fix file");
+				}
+			}
 
 			#region Generate/Write Logs
 			string log = "";
@@ -676,26 +721,33 @@ namespace AVDump2CL {
 			}
 #endif
 
-			bool wasACreqSent = false;
 #if(HasACreq)
-			if(acreqFile && (dumpableExtensions.Contains(e.File.Extension.Substring(1).ToLower()) || (switches & eSwitches.DumpAllExtensions) != 0) && !(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
-				try {
-					var result = DoACreq(e, p);
-					wasACreqSent = result.State == AniDBCommit.ACreqState.CreqSent;
-					foreach(var exception in result.Exceptions) e.AddException("Internal ACreqing exception", exception);
-				} catch(Exception ex) {
-					e.AddException("ACreqing exception", ex);
+			if(acreqFile && (dumpableExtensions.Contains(ext) || dumpableExtensions.Contains(detExt) || (switches & eSwitches.DumpAllExtensions) != 0) && !(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))) {
+				MemoryStream stream = new MemoryStream();
+
+				byte[] creqBytes;
+				using(var writer = new SafeXmlWriter(stream, new UTF8Encoding(), Formatting.None, lowerCaseElements: true)) {
+					var xmlDoc = Info.CreateAVDumpLog(p);
+					if(xmlDoc["file"]["md4"] != null) xmlDoc["file"].RemoveChild(xmlDoc["file"]["md4"]);
+					if(xmlDoc["file"]["tiger"] != null) xmlDoc["file"].RemoveChild(xmlDoc["file"]["tiger"]);
+
+
+					xmlDoc.Save(writer);
+
+					creqBytes = new byte[stream.Length - 38];
+					stream.Position = 38;
+					stream.Read(creqBytes, 0, (int)stream.Length - 38);
 				}
+				anidb.QueryACReq(new ACReq(host, timeout * 1000, "avdumplib", appVersion.Build, username.ToLower(), password, creqBytes), new AniDB.QueryTag(e));
 			}
 #endif
 
-			var detExt = p[StreamType.General, 0, EntryKey.Extension] != null ? p[StreamType.General, 0, EntryKey.Extension].Value : null;
-			if(!string.IsNullOrEmpty(extDiffListPath) && (detExt == null || !e.File.Extension.Substring(1).ToLower().Equals(detExt.ToLower()))) {
-				AppendAllText(extDiffListPath, e.File.Extension.Substring(1) + " => " + (detExt == null ? "unknown" : detExt) + "	" + e.File.FullName + Environment.NewLine, "Couldn't update extension diff file");
+			if(!string.IsNullOrEmpty(extDiffListPath) && !ext.Equals(detExt)) {
+				AppendAllText(extDiffListPath, ext + " => " + (detExt == null ? "unknown" : detExt) + "	" + e.File.FullName + Environment.NewLine, "Couldn't update extension diff file");
 			}
 
 			#region DoneLog Stream Writing
-			if(doneListPath != null && (wasACreqSent || username == null || password == null) && e.Exceptions.Count == 0) {
+			if(doneListPath != null && (username == null || password == null) && e.Exceptions.Count == 0) {
 				AppendAllText(doneListPath, e.File.FullName + Environment.NewLine, "Couldn't update donelist file");
 				int index = doneListContent.BinarySearch(e.File.FullName);
 				if(index < 0) doneListContent.Insert(~index, e.File.FullName);
@@ -750,11 +802,11 @@ namespace AVDump2CL {
 				AppendAllText(hashListPath, formattedStr + Environment.NewLine, "Couldn't update hashlist file");
 			}
 			#endregion
+
 		}
 
-#if(HasACreq)
 		private static bool SelfCheck() {
-			//#####################################################
+
 			var waitHandle = new AutoResetEvent(true);
 			try {
 				waitHandle.WaitOne(10);
@@ -764,15 +816,14 @@ namespace AVDump2CL {
 				return false;
 			}
 			waitHandle.Close();
-			//#####################################################
 
+			//#####################################################
 
 			if(Environment.OSVersion.Platform == PlatformID.Unix && !File.Exists(Path.Combine(AppPath, "AVDump2Lib.dll.config"))) {
 				ColoredWriteLine(ConsoleColor.Red, "AVDump2Lib.dll.config is missing", true);
 				Pause();
 				return false;
 			}
-
 
 			//#####################################################
 
@@ -783,8 +834,10 @@ namespace AVDump2CL {
 				return false;
 			}
 
-
 			//#####################################################
+
+
+#if(HasACreq)
 			try {
 				IMediaInfo mi = IntPtr.Size == 8 ? (IMediaInfo)new MediaInfo_x64() : (IMediaInfo)new MediaInfo_x86();
 				if(!mi.Option("Info_Version").Equals("MediaInfoLib - v0.7.42")) {
@@ -799,66 +852,79 @@ namespace AVDump2CL {
 				return false;
 			}
 
+			if(!string.IsNullOrEmpty(username)) {
+				if(AniDB.CheckMILHash()) {
+					ColoredWriteLine(ConsoleColor.Red, "Mediainfo lib hash mismatch", true);
+					Pause();
+					return false;
+				}
+
+				int tries = 5;
+				while(tries != 0) {
+					try {
+						host = new IPEndPoint(Dns.GetHostAddresses(hostAddress).First(), hostPort);
+						break;
+					} catch(Exception) { }
+					tries--;
+				}
+				if(host == null) {
+					ColoredWriteLine(ConsoleColor.Red, "Couldn't resolve host " + hostAddress, true);
+					return false;
+				}
+
+				var result = anidb.TestConnectivity(host, timeout * 1000, "avdumplib", appVersion.Build, username.ToLower(), password);
+				if(result.State != ACReq.CommitState.Success) {
+					ColoredWriteLine(ConsoleColor.Red, "Couldn't establish session with anidb (" + result.State + ")", true);
+					Pause();
+					return false;
+				}
+			}
+#endif
+
 			//#####################################################
 
 			return true;
 		}
 
-		private static AniDBCommit.ACreqResult DoACreq(FileEnvironment e, InfoProviderBase infoProvider) {
-			MemoryStream stream = new MemoryStream();
+#if(HasACreq)
+		private static AniDB anidb = new AniDB(AcreqResult, localPort);
 
-			byte[] creqBytes;
-			using(var writer = new SafeXmlWriter(stream, new UTF8Encoding(), Formatting.None, lowerCaseElements: true)) {
-				var xmlDoc = Info.CreateAVDumpLog(infoProvider);
-				if(xmlDoc["file"]["md4"] != null) xmlDoc["file"].RemoveChild(xmlDoc["file"]["md4"]);
-				if(xmlDoc["file"]["tiger"] != null) xmlDoc["file"].RemoveChild(xmlDoc["file"]["tiger"]);
+		private static bool AcreqResult(ACReq.CommitResult result, object tag) {
+			var queryTag = (AniDB.QueryTag)tag;
 
-
-				xmlDoc.Save(writer);
-
-				creqBytes = new byte[stream.Length - 38];
-				stream.Position = 38;
-				stream.Read(creqBytes, 0, (int)stream.Length - 38);
+			FileEnvironment e = (FileEnvironment)queryTag.Tag;
+			if(!string.IsNullOrEmpty(acErrListPath) && (result.State & (ACReq.CommitState.Success | ACReq.CommitState.TimeOut)) == 0) {
+				AppendAllText(acErrListPath, e.File.FullName + " ACreq " + result.State.ToString() + Environment.NewLine, "Couldn't update acerr file");
 			}
 
-			int tries = 0;
-			AniDBCommit.ACreqResult result;
-			do {
-				Console.Write("Sending Data... ");
-				result = AniDBCommit.CommitACreq(new AniDBCommit.CommitArgs("avdumplib", appVersion.Build, username.ToLower(), password, creqBytes, hostAddress + ":" + hostPort, localPort, timeout * 1000));
-				tries++;
+			bool resentCreq = false;
+			switch(result.State) {
+				case ACReq.CommitState.Success:
+					if(doneListPath != null) {
+						AppendAllText(doneListPath, e.File.FullName + Environment.NewLine, "Couldn't update donelist file");
+						int index = doneListContent.BinarySearch(e.File.FullName);
+						if(index < 0) doneListContent.Insert(~index, e.File.FullName);
+					}
+					break;
 
-				if(result.State == AniDBCommit.ACreqState.CreqSent) {
-					Console.WriteLine("Done");
+				case ACReq.CommitState.TimeOut:
+					if(queryTag.Retries < CL.retries) {
+						queryTag.IncreaseTries();
+						resentCreq = true;
+					} else {
+						if(!string.IsNullOrEmpty(acErrListPath)) AppendAllText(acErrListPath, e.File.FullName + " ACreq " + result.State.ToString() + Environment.NewLine, "Couldn't update acerr file");
+					}
+					break;
 
-				} else if(result.State == AniDBCommit.ACreqState.AckUnknownResponse) {
-					ColoredWriteLine(ConsoleColor.Yellow, "Warning. Unknown Response.");
-
-				} else if(result.State == AniDBCommit.ACreqState.LogSizeTooSmall) {
-					ColoredWriteLine(ConsoleColor.Yellow, "Warning. Logsize is too small.");
-
-				} else if(result.State == AniDBCommit.ACreqState.WrongVersionOrPassOrName) {
+				case ACReq.CommitState.WrongVersionOrPassOrName:
 					ColoredWriteLine(ConsoleColor.Red, "Either the client is outdated or your username/password combination is wrong.", true);
 					Pause();
+					break;
 
-				} else if(result.State == AniDBCommit.ACreqState.TimeOut && tries > retries) {
-					Console.WriteLine("Failed");
-
-				} else {
-					Console.WriteLine(System.Enum.GetName(typeof(AniDBCommit.ACreqState), result.State));
-				}
-
-				if(!string.IsNullOrEmpty(acErrListPath) && (result.State & (AniDBCommit.ACreqState.CreqSent | AniDBCommit.ACreqState.TimeOut)) == 0) {
-					AppendAllText(acErrListPath, e.File.FullName + " ACreq " + result.State.ToString() + Environment.NewLine, "Couldn't update acerr file");
-				}
-
-			} while((result.State == AniDBCommit.ACreqState.TimeOut) && tries <= retries);
-
-			if(tries > retries) {
-				if(!string.IsNullOrEmpty(acErrListPath)) AppendAllText(acErrListPath, e.File.FullName + " ACreq " + result.State.ToString() + Environment.NewLine, "Couldn't update acerr file");
+				case ACReq.CommitState.InternalError: break;
 			}
 
-			return result;
+			return resentCreq;
 		}
 #endif
 
@@ -915,8 +981,14 @@ namespace AVDump2CL {
 					output =
 					  "Position: " + (bytesProcessed >> 20).ToString().PadLeft(3) + "MB/" + (fileSize >> 20) + "MB  " +
 					  "Elapsed time: " + progress.TimeElapsed.ToFormatedString() + " " +
-					  "Speed: " + ((int)(bytesProcessed / progress.TimeElapsed.TotalSeconds) >> 20) + "MB/s";
-					  //"BufUnderruns: " + progress.BufferUndrrunCount;
+					  "Speed: " + Math.Max((int)((bytesProcessed >> 20) / progress.TimeElapsed.TotalSeconds), 0) + "MB/s"
+#if(HasACreq)
+ +
+					  " ACreqs Todo: " + anidb.UnsentQueryCount
+#endif
+;
+
+					//"BufUnderruns: " + progress.BufferUndrrunCount;
 					output += "".PadLeft(output.Length < consoleWidth ? consoleWidth - output.Length - 1 : 0, ' ');
 					Console.WriteLine(output);
 				} else {
@@ -1045,7 +1117,7 @@ namespace AVDump2CL {
 			foreach(var media in mediaLst) {
 				FileGetter.TraverseFiles(media, (switches & eSwitches.ExcludeSubFolders) == 0,
 					(fi) => {
-						if(validExtensions == null || (fi.Extension.Length != 0 && validExtensions.Contains(fi.Extension.Substring(1)))) {
+						if(validExtensions == null || (fi.Extension.Length != 0 && validExtensions.Contains(fi.Extension.Substring(1).ToLower()))) {
 							files.Add(fi);
 							anonTotalBytes += fi.Length;
 
@@ -1101,64 +1173,65 @@ Usage:   AVDump2CL [-options] <media file/folder> [<media file/folder> ...]
 Options: (one letter switches can be put in one string)
 		 (all multiple letter switches require colon)
 
-  Autocreqing:
-   ac      Autocreqing (example: -ac:<username>:<api_key>) " + '\x3' + "12YOU SHOULD USE THIS" + '\xF' + @"
-             Enables error reporting! (No private info) To disable add -noerr
-   host    Hostname of AniDB UDP API server (default: " + hostAddress + ":" + hostPort + @")
-   lport   Local UDP port used for autocreqing
-   tout    Timeout for sending dumps (ex: -tout:<seconds>:<retries>)
+Autocreqing:
+ ac      Autocreqing (example: -ac:<username>:<api_key>) " + '\x3' + "12YOU SHOULD USE THIS" + '\xF' + @"
+           Enables error reporting! (No private info) To disable add -noerr
+ host    Hostname of AniDB UDP API server (default: " + hostAddress + ":" + hostPort + @")
+ lport   Local UDP port used for autocreqing
+ tout    Timeout for sending dumps (ex: -tout:<seconds>:<retries>)
 
-  Input:
-   bsize   Circular buffer size for hashing (ex: 
-             -bsize:<blocksize in kb (" + blockSize.ToString() + @")>:<number of blocks (" + blockCount.ToString() + @")>)
-   ext     Comma sep. extension list (ex: -ext:avi,mkv -ext:-zip or -ext:*)
-   ms      Monitor sleep duration in milliseconds (default: " + monitorSleepDuration.ToString() + @")
+Input:
+ bsize   Circular buffer size for hashing (ex: 
+           -bsize:<blocksize in kb (" + blockSize.ToString() + @")>:<number of blocks (" + blockCount.ToString() + @")>)
+ ext     Comma sep. extension list (ex: -ext:avi,mkv -ext:-zip or -ext:*)
+ ms      Monitor sleep duration in milliseconds (default: " + monitorSleepDuration.ToString() + @")
 
-  Logging:
-   acerr   Write file paths of failed dumps to file (ex: -acerr:acerr.txt)
-   crcerr  Checks if filename contains calculated crc (ex: -crc:crcerr.txt)
-   extdiff Write mismatched extensions to file (ex: -extdiff:extdiff.txt)
-   exp     Export eD2k-links to file (ex: -exp:ed2k.txt)
-   done    Skip paths present in log and append paths to newly processed files
-             (ex: -done:done.txt)
-   hlog    Export hashes to file (ex: -hlog:" + "\"$CRC$ $ED2K$\"" + @":hlog.txt)
-   log     Write output to file (ex: -log:log.txt)
+Logging:
+ acerr   Write file paths of failed dumps to file (ex: -acerr:acerr.txt)
+ crcerr  Checks if filename contains calculated crc (ex: -crc:crcerr.txt)
+ extdiff Write mismatched extensions to file (ex: -extdiff:extdiff.txt)
+ extfix  Change to detected extension and log action (ex: -extfix:extfix.txt)
+ exp     Export eD2k-links to file (ex: -exp:ed2k.txt)
+ done    Skip paths present in log and append paths to newly processed files
+           (ex: -done:done.txt)
+ hlog    Export hashes to file (ex: -hlog:" + "\"$CRC$ $ED2K$\"" + @":hlog.txt)
+ log     Write output to file (ex: -log:log.txt)
 
-  Output:
-   M       MediaInfo dump
-   X       MediaInfo XML dump
-   x       Simple text format
-   y       XML creq format
-   Y       AVD2 creq dump
-   h       Hashes only report
+Output:
+ M       MediaInfo dump
+ X       MediaInfo XML dump
+ x       Simple text format
+ y       XML creq format
+ Y       AVD2 creq dump
+ h       Hashes only report
 
-  Control:
-   c       Do _not_ recurse into subfolders
-   m       Monitor folder(s)
-   p       Pause when done (hold cmd window)
-   q       Pause after each file
-   r       Random file order
-   t       Print time used for each file
-   T       Print total elapsed time
-   w       Suppress progress (silent)
-   z       Delete files after parsing
-   H       Test pure hashingspeed without io limitations
-   U       Use UTF8 as console output stream
+Control:
+ c       Do _not_ recurse into subfolders
+ m       Monitor folder(s)
+ p       Pause when done (hold cmd window)
+ q       Pause after each file
+ r       Random file order
+ t       Print time used for each file
+ T       Print total elapsed time
+ w       Suppress progress (silent)
+ z       Delete files after parsing
+ H       Test pure hashingspeed without io limitations
+ U       Use UTF8 as console output stream
 
-  Hashing:
-   0       For CRC (because the CRC of a 0 byte file is 00000000)
-   1       For SHA1 (because of the 1)
-   2       For ED2K (because of the 2)
-   3       For Tiger (because a tiger in the house minimizes the Three Great
-			 Risks -- thieves, fire, and evil spirits)
-   4       For MD4 (because of the 4)
-   5       For MD5 (because of the 5)
-   6       For TTH ... because that's what's left :p
-   a       All (available) hash algorithms
-   e       Print eD2k-link
-   d       Print AniDB link
-   D       Open AniDB link in default browser
-   u       Print elapsed time after hashing
+Hashing:
+ 0       For CRC (because the CRC of a 0 byte file is 00000000)
+ 1       For SHA1 (because of the 1)
+ 2       For ED2K (because of the 2)
+ 3       For Tiger (because a tiger in the house minimizes the Three Great
+           Risks -- thieves, fire, and evil spirits)
+ 4       For MD4 (because of the 4)
+ 5       For MD5 (because of the 5)
+ 6       For TTH ... because that's what's left :p
+ a       All (available) hash algorithms
+ e       Print eD2k-link
+ d       Print AniDB link
+ D       Open AniDB link in default browser
+ u       Print elapsed time after hashing
 
 Press any key to exit";
 		#endregion
@@ -1185,7 +1258,7 @@ Press any key to exit";
 				try {
 					MemoryStream memStream = new MemoryStream();
 					using(var writer = new SafeXmlWriter(memStream, Encoding.ASCII)) ex.Save(writer);
-					AniDBCommit.CommitError(new AniDBCommit.CommitArgs("avdumplib", appVersion.Build, username, password, memStream.ToArray(), hostAddress + ":" + hostPort, localPort, timeout));
+					anidb.CommitError(host, timeout * 1000, "avdumplib", appVersion.Build, username.ToLower(), password, memStream.ToArray());
 				} catch(Exception) { }
 			}
 #endif
@@ -1242,36 +1315,5 @@ Press any key to exit";
 			} catch(Exception) {
 			}
 		}
-
 	}
-
-	public class ConsoleOutFilter : TextWriter {
-		private TextWriter textWriter;
-
-		public ConsoleOutFilter(TextWriter textWriter) { this.textWriter = textWriter; }
-
-		public override void Write(char value) { if(value != '•') textWriter.Write(value); }
-		public override void Write(string value) { textWriter.Write(value.Replace("•", "")); }
-		public override void WriteLine(char[] buffer) { textWriter.WriteLine((new String(buffer)).Replace("•", "")); }
-		public override void WriteLine(string value) { textWriter.WriteLine(value.Replace("•", "")); }
-		public override void WriteLine() { textWriter.WriteLine(); }
-
-		public override void Write(char[] buffer, int index, int count) { textWriter.Write(buffer, index, count); }
-		public override void Write(char[] buffer) { textWriter.Write(buffer); }
-		public override void Write(object value) { textWriter.Write(value); }
-		public override void Write(string format, object arg0) { textWriter.Write(format, arg0); }
-		public override void Write(string format, object arg0, object arg1) { textWriter.Write(format, arg0, arg1); }
-		public override void Write(string format, object arg0, object arg1, object arg2) { textWriter.Write(format, arg0, arg1, arg2); }
-		public override void Write(string format, params object[] arg) { textWriter.Write(format, arg); }
-		public override void WriteLine(char value) { textWriter.WriteLine(value); }
-		public override void WriteLine(char[] buffer, int index, int count) { textWriter.WriteLine(buffer, index, count); }
-		public override void WriteLine(object value) { textWriter.WriteLine(value); }
-		public override void WriteLine(string format, object arg0) { textWriter.WriteLine(format, arg0); }
-		public override void WriteLine(string format, object arg0, object arg1) { textWriter.WriteLine(format, arg0, arg1); }
-		public override void WriteLine(string format, object arg0, object arg1, object arg2) { textWriter.WriteLine(format, arg0, arg1, arg2); }
-		public override void WriteLine(string format, params object[] arg) { textWriter.WriteLine(format, arg); }
-
-		public override Encoding Encoding { get { throw new NotImplementedException(); } }
-	}
-
 }

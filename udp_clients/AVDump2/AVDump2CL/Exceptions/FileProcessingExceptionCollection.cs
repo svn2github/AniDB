@@ -27,13 +27,12 @@ namespace AVDump2CL.Exceptions {
 			XElement infoElem, exElem;
 			XElement fileElem = new XElement("FileExceptions", infoElem = new XElement("Information"), exElem = new XElement("Exceptions"));
 			infoElem.Add(new XElement("AVDump2CLVersion", version.ToString()));
-			infoElem.Add(new XElement("RunOnBitness", IntPtr.Size * 8).ToString());
+			infoElem.Add(new XElement("RunOnBitness", IntPtr.Size * 8));
 			//infoElem.Add(new XElement("Framework", Environment.Version));
-			infoElem.Add(new XElement("OS", new XAttribute("name", Environment.OSVersion.Platform)));
+			infoElem.Add(new XElement("OS",Environment.OSVersion.VersionString));
 			if(addPath && !string.IsNullOrEmpty(filePath)) {
 				infoElem.Add(new XElement("File", filePath));
 			}
-
 			foreach(var item in Items) exElem.Add(item.ToXElement());
 
 			return fileElem;

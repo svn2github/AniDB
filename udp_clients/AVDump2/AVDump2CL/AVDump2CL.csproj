@@ -229,7 +229,6 @@
     <Compile Include="Acreqing\ACreq.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AniDB\AniDBCommit.cs" />
     <Compile Include="FileEnvironment.cs" />
     <Compile Include="Misc\ArgsParser.cs" />
     <Compile Include="Misc\Average.cs" />
