@@ -67,7 +67,11 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			Add(type, index, EntryKey.CodecName, () => trackEntry.CodecName, null);
 			Add(type, index, EntryKey.CodecId, () => trackEntry.CodecId, null);
 
-			Add(type, index, EntryKey.FourCC, () => string.Equals(trackEntry.CodecId, "V_MS/VFW/FOURCC") && trackEntry.GetBitMapInfoHeader().HasValue ? trackEntry.GetBitMapInfoHeader().Value.FourCC : null, null);
+			if(trackEntry.GetBitMapInfoHeader().HasValue && string.Equals(trackEntry.CodecId, "V_MS/VFW/FOURCC")) {
+				var header = trackEntry.GetBitMapInfoHeader().Value;
+				Add(type, index, EntryKey.FourCC, () => header.FourCC, null);
+				//Add(type, index, EntryKey.ColorBitDepth, () => header.biBitCount.ToString(), null);
+			}
 			Add(type, index, EntryKey.TwoCC, () => string.Equals(trackEntry.CodecId, "A_MS/ACM") && trackEntry.GetWaveFormatEx().HasValue ? trackEntry.GetWaveFormatEx().Value.TwoCC : null, null);
 			Add(type, index, EntryKey.Id, () => trackEntry.TrackUId.ToString(), null);
 
@@ -85,6 +89,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 					Add(type, index, EntryKey.Width, () => trackEntry.Video.PixelWidth.ToString(), "px");
 					Add(type, index, EntryKey.Height, () => trackEntry.Video.PixelHeight.ToString(), "px");
 					Add(type, index, EntryKey.DAR, () => (trackEntry.Video.DisplayWidth / (double)trackEntry.Video.DisplayHeight).ToString("0.000", CultureInfo.InvariantCulture), null);
+					//Add(type, index, EntryKey.ColorSpace, () => Encoding.ASCII.GetString(trackEntry.Video.ColorSpace), null);
 					break;
 				case StreamType.Audio:
 					Add(type, index, EntryKey.SampleCount, () => ((int)(trackInfo.TrackLength.TotalSeconds * trackEntry.Audio.SamplingFrequency)).ToString(), null);

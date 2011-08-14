@@ -236,6 +236,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockConsumers\OgmOggParser.cs" />
+    <Compile Include="CL\ArgGroup.cs" />
+    <Compile Include="CL\ArgStructure.cs" />
+    <Compile Include="CL\CLManagement.cs" />
     <Compile Include="HashAlgorithms\Aich.cs" />
     <Compile Include="HashAlgorithms\Tiger.cs" />
     <Compile Include="HashAlgorithms\BlockHashAlgorithm.cs" />

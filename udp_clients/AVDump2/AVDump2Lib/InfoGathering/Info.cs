@@ -407,9 +407,14 @@ namespace AVDump2Lib.InfoGathering {
 		public static string CreateTxtLog(string path, InfoProviderBase p) {
 			XmlDocument xmlDoc = CreateNewAVDumpLog(p);
 
+			Func<string, string> formatDuration = (ldStr) => {
+				var duration = TimeSpan.FromSeconds(double.Parse(ldStr)).ToString();
+				return duration.Substring(0, duration.IndexOf('.'));
+			};
+
 			string log = "File: " + path + Environment.NewLine;
 			foreach(XmlElement node in xmlDoc["Creq"]["File"]["General"]) {
-				log += " " + node.Name + ": " + node.InnerText + Environment.NewLine;
+				log += " " + node.Name + ": " + (node.Name.Equals("Duration") ? formatDuration(node.InnerText) : node.InnerText) + Environment.NewLine;
 			}
 
 			if(xmlDoc["Creq"]["File"]["Hashes"].HasChildNodes) log += " #Hashes" + Environment.NewLine;
@@ -420,20 +425,20 @@ namespace AVDump2Lib.InfoGathering {
 			foreach(XmlElement streamsNode in xmlDoc["Creq"]["File"]["VideoStreams"]) {
 				log += " #Videostream" + Environment.NewLine;
 				foreach(XmlElement node in streamsNode) {
-					log += "  " + node.Name + ": " + node.InnerText + Environment.NewLine;
+					log += "  " + node.Name + ": " + (node.Name.Equals("Duration") ? formatDuration(node.InnerText) : node.InnerText) + Environment.NewLine;
 				}
 			}
 			foreach(XmlElement streamsNode in xmlDoc["Creq"]["File"]["AudioStreams"]) {
 				log += " #Audiostream" + Environment.NewLine;
 				foreach(XmlElement node in streamsNode) {
-					log += "  " + node.Name + ": " + node.InnerText + Environment.NewLine;
+					log += "  " + node.Name + ": " + (node.Name.Equals("Duration") ? formatDuration(node.InnerText) : node.InnerText) + Environment.NewLine;
 				}
 			}
 
 			foreach(XmlElement streamsNode in xmlDoc["Creq"]["File"]["SubtitleStreams"]) {
 				log += " #Subtitlestream" + Environment.NewLine;
 				foreach(XmlElement node in streamsNode) {
-					log += "  " + node.Name + ": " + node.InnerText + Environment.NewLine;
+					log += "  " + node.Name + ": " + (node.Name.Equals("Duration") ? formatDuration(node.InnerText) : node.InnerText) + Environment.NewLine;
 				}
 			}
 
