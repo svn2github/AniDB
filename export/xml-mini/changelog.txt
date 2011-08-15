@@ -1,0 +1,15 @@
+xml-mini anidb.net export template (C) 2011 by ahoka
+Version: 1.2 (12.08.2011)
+
+Changelog:
+  1.2 (12.08.2011)
+	 - Removed a lot of useless things.
+	 - Only grabbing fields that are easily obtained from the UDP API.
+  1.1 (03.08.2011)
+	 - Corrected episode title nodes.
+	 - Changed anime->eps->my_eps to anime->eps->my.
+	 - Filtered out unknown groups (ie id=0).
+  1.0 (01.08.2011)
+     - First version
+     - All data is XML
+	 - Desinged for use with my UDP client.
