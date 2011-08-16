@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mylist uid="<tmpl_var name=global_user_id>"
+<mylist template="mini"
+		uid="<tmpl_var name=global_user_id>"
         username="<tmpl_var name=global_user>"
         date="<tmpl_var name=global_date>"><tmpl_loop name=loop_anime>
 	<anime aid="<tmpl_var name=data_anime_id>"

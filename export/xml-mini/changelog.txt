@@ -3,6 +3,8 @@ Version: 1.3 (16.08.2011)
 
 Changelog:
   1.3 (16.08.2011)
+	 - Added attribute that will notify AniDBmini that
+	   the xml file is using the correct template.
 	 - Added file id to file entries.
   1.2 (12.08.2011)
 	 - Removed a lot of useless things.
