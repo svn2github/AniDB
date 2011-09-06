@@ -348,8 +348,9 @@ class Avdump(QtCore.QProcess):
     _procname = "avdump2cl.exe"
 
     # rar: would be nice to communicate with avdump using a unicode encoding
-    _encoding = locale.getpreferredencoding()
-    _linesep = os.linesep.encode(_encoding)
+    #_encoding = locale.getpreferredencoding()
+    _encoding = u'utf-8'
+    _linesep  = os.linesep.encode(_encoding)
 
     SIG_FILE_HASHING = QtCore.SIGNAL('avdump_file_hashing')
     SIG_FILE_SENDING = QtCore.SIGNAL('avdump_file_sending')
@@ -366,14 +367,15 @@ class Avdump(QtCore.QProcess):
         QtCore.QProcess.__init__(self)
         self._paths       = paths
         self._status_path = 0 
-        self._args        = ["-w", "-ac:%s:%s" % (username, apikey)]
+        self._args        = ["--UseUtf8", "--Quiet", "--Authentication=%s:%s" % (username, apikey)]
         if done_file is not None:
-            self._args.append("-done:" + done_file)
+            self._args.append("--DoneLog=" + done_file)
         if export_file is not None:
-            self._args.append("-exp:" + export_file)
+            self._args.append("--ExportEd2kLinks=" + export_file)
         self._args.extend(paths)
         self._stdout_remainder = self._stderr_remainder = ""
         self._current_folder = self._current_filename = None
+        self._done = False
 
         self.connect(self, self._SIG_STDOUT_READY, self._read_stdout)
         self.connect(self, self._SIG_STDERR_READY, self._read_stderr)
@@ -396,35 +398,34 @@ class Avdump(QtCore.QProcess):
 
     def _read_stdout(self):
         """Read available avdump output and generate corresponding events"""
-        buffer = self._stdout_remainder + str(self.readAllStandardOutput())
+        buffer = self._stdout_remainder + unicode(self.readAllStandardOutput())
         assert buffer, "_read_stdout called with nothing to process?"
         lines = buffer.split(self._linesep)
         self._stdout_remainder = lines.pop()
+        self._done = False
         for line in lines:
             if __debug__:
                 print line
-            if line:
-                self._process_line(line.decode(self._encoding))
-        if self._stdout_remainder == "Sending Data... ":
-            self.emit(self.SIG_FILE_SENDING, self._paths[self._status_path])
+            if line.startswith("Folder: "):
+                self._current_folder = line.split(": ", 1)[1]
+                self._current_filename = None
+            elif line.startswith("Filename: "):
+                # rar: ideally get filename from stdout, but encoding woes...
+                self._current_filename = line.split(": ", 1)[1]
+                self.emit(self.SIG_FILE_HASHING, self._paths[self._status_path])
+            elif self._current_filename is not None and line == '':
+                self._current_folder = self._current_filename = None
+                self.emit(self.SIG_FILE_DONE, self._paths[self._status_path])
+                self._done = True
+                self._status_path += 1
 
-    def _process_line(self, line):
-        """Temporary function maintaining the old event generation style"""
-        if line.startswith("Folder: "):
-            self._current_folder = line.split(": ", 1)[1]
-            self._current_filename = None
-        elif line.startswith("Filename: "):
-            # rar: ideally get filename from stdout, but encoding woes...
-            self._current_filename = line.split(": ", 1)[1]
-            self.emit(self.SIG_FILE_HASHING, self._paths[self._status_path])
-        elif line == "Sending Data... Done":
-            self._current_folder = self._current_filename = None
-            self.emit(self.SIG_FILE_DONE, self._paths[self._status_path])
-            self._status_path += 1
+        if self._done is True:
+            if self._status_path < len(self._paths):
+                self.emit(self.SIG_FILE_SENDING, self._paths[self._status_path])
 
     def _read_stderr(self):
         """Read available avdump error output and forward error messages"""
-        buffer = str(self.readAllStandardError())
+        buffer = unicode(self.readAllStandardError())
         assert buffer, "_read_stderr called with nothing to process?"
         sys.stderr.write(buffer)
         lines = buffer.split(self._linesep)
