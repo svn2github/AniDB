@@ -34,7 +34,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0" rowspan="8" colspan="2">
-     <widget class="QTableWidget" name="datatable">
+     <widget class="Avd2QTableWidget" name="datatable">
       <property name="editTriggers">
        <set>QAbstractItemView::NoEditTriggers</set>
       </property>
@@ -248,7 +248,7 @@
        </size>
       </property>
       <property name="title">
-       <string>Optionen</string>
+       <string>Options</string>
       </property>
       <widget class="QCheckBox" name="exp">
        <property name="geometry">
@@ -356,6 +356,13 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Avd2QTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>avd2qtablewidget</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>datatable</tabstop>
   <tabstop>username</tabstop>

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Python27\Lib\site-packages\PyQt4\avdump.ui'
+# Form implementation generated from reading ui file 'avdump.ui'
 #
-# Created: Fri Jul 01 12:30:00 2011
-#      by: PyQt4 UI code generator 4.8.1
+# Created: Tue Sep 13 00:25:18 2011
+#      by: PyQt4 UI code generator 4.8.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -33,7 +33,7 @@ class Ui_MainWindow(object):
         self.main.setObjectName(_fromUtf8("main"))
         self.gridLayout = QtGui.QGridLayout(self.main)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.datatable = QtGui.QTableWidget(self.main)
+        self.datatable = Avd2QTableWidget(self.main)
         self.datatable.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.datatable.setObjectName(_fromUtf8("datatable"))
         self.datatable.setColumnCount(3)
@@ -202,10 +202,11 @@ class Ui_MainWindow(object):
         self.stop_button.setText(QtGui.QApplication.translate("MainWindow", "Stop", None, QtGui.QApplication.UnicodeUTF8))
         self.username_box.setTitle(QtGui.QApplication.translate("MainWindow", "Username", None, QtGui.QApplication.UnicodeUTF8))
         self.api_box.setTitle(QtGui.QApplication.translate("MainWindow", "Api-key", None, QtGui.QApplication.UnicodeUTF8))
-        self.options_box.setTitle(QtGui.QApplication.translate("MainWindow", "Optionen", None, QtGui.QApplication.UnicodeUTF8))
+        self.options_box.setTitle(QtGui.QApplication.translate("MainWindow", "Options", None, QtGui.QApplication.UnicodeUTF8))
         self.exp.setText(QtGui.QApplication.translate("MainWindow", "export ed2k links", None, QtGui.QApplication.UnicodeUTF8))
         self.done.setText(QtGui.QApplication.translate("MainWindow", "ignore already scanned", None, QtGui.QApplication.UnicodeUTF8))
         self.scapth_box.setTitle(QtGui.QApplication.translate("MainWindow", "Files/Folder to process", None, QtGui.QApplication.UnicodeUTF8))
         self.files_button.setText(QtGui.QApplication.translate("MainWindow", "Files", None, QtGui.QApplication.UnicodeUTF8))
         self.folder_button.setText(QtGui.QApplication.translate("MainWindow", "Folder", None, QtGui.QApplication.UnicodeUTF8))
 
+from avd2qtablewidget import Avd2QTableWidget

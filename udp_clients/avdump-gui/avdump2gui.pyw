@@ -41,6 +41,7 @@ class Main(QtGui.QMainWindow):
         self.connect(self._ui.folder_button, QtCore.SIGNAL("clicked()"), self._slotFolder)
         self.connect(self._ui.start_button, QtCore.SIGNAL("clicked()"), self._run)
         self.connect(self._ui.stop_button, QtCore.SIGNAL("clicked()"), self._stop)
+        self.connect(self._ui.datatable, QtCore.SIGNAL("dropped"), self._add_files)
         self.connect(QtGui.QAction(self), QtCore.SIGNAL('triggered()'), QtCore.SLOT('close()'))
 
         self._enable_elements()
@@ -82,7 +83,7 @@ class Main(QtGui.QMainWindow):
     def _new_version(self):
         self._disable_elements()
         self._ui.stop_button.setDisabled(True)
-        QtGui.QMessageBox.information(self, "New Version!", "A new version has been found and will be installed now. You won't be able to use the app until this has finished.", QtGui.QMessageBox.Ok)
+        QtGui.QMessageBox.information(self, "New Version!", "A new version has been found and will be installed now. You won't be able to use the program until this has finished. Note that it will appear to have locked up for a bit. Just let it finish.", QtGui.QMessageBox.Ok)
         self._updater.start()
 
     def _raise_updater_error(self, error_message):
@@ -135,6 +136,12 @@ class Main(QtGui.QMainWindow):
                 done += 1
 
         return done*100/self._ui.datatable.rowCount()
+
+    def _refresh_stats(self):
+        if self._ui.exp.isChecked():
+            self._output_export()
+        self._ui.progressBar.setValue(self._calculate_progress())
+        self._resize_columns()
         
 #################################################
 #                                               #
@@ -163,17 +170,16 @@ class Main(QtGui.QMainWindow):
     def _file_done(self, path):
         i = self._paths[path]
         self._ui.datatable.setItem(i, 0, QtGui.QTableWidgetItem('done'))
-        if self._ui.exp.isChecked():
-            self._output_export()
-        self._ui.progressBar.setValue(self._calculate_progress())
-        self._resize_columns()
+        self._refresh_stats()
 
     def _file_aborted(self, path):
         i = self._paths[path]
         self._ui.datatable.setItem(i, 0, QtGui.QTableWidgetItem('aborted'))
         self._resize_columns()
+        self._refresh_stats()
 
     def _finished(self, exitcode, exitstatus):
+        self._refresh_stats()
         self._paths = {}
         self._enable_elements()
 
@@ -190,8 +196,7 @@ class Main(QtGui.QMainWindow):
     def _slotFile(self):
         self._read_done()
         files = QtGui.QFileDialog.getOpenFileNames(self, 'File select', self._last_dir, self._allowed_extensions_str)
-        for path in files:
-            self._add_file(path)
+        self._add_files(files)
 
     def _slotFolder(self):
         root_dir = QtGui.QFileDialog.getExistingDirectory(self, "Select Directory", self._last_dir)
@@ -201,6 +206,16 @@ class Main(QtGui.QMainWindow):
         diter = QtCore.QDirIterator(root_dir, self._allowed_extentions_globs, QtCore.QDir.Files, QtCore.QDirIterator.Subdirectories)
         for path in iter(diter.next, ""):
             self._add_file(path)
+
+        self._ui.progressBar.setValue(self._calculate_progress())
+        self._resize_columns()
+
+    def _add_files(self, files):
+        for path in files:
+            self._add_file(path)
+
+        self._ui.progressBar.setValue(self._calculate_progress())
+        self._resize_columns()
 
     def _add_file(self, fileloc):
         if os.sep == "\\":
@@ -219,7 +234,7 @@ class Main(QtGui.QMainWindow):
 
         no = self._ui.datatable.rowCount()
         if fileloc not in self._filelist:
-            self._filelist[unicode(fileloc)] =  1
+            self._filelist[fileloc.normalized(QtCore.QString.NormalizationForm_KC)] =  1
             self._ui.datatable.insertRow(no)
 
             item = QtGui.QTableWidgetItem('new')
@@ -230,9 +245,6 @@ class Main(QtGui.QMainWindow):
 
             item = QtGui.QTableWidgetItem(filepath)
             self._ui.datatable.setItem(no, 2, item)
-
-            self._ui.progressBar.setValue(self._calculate_progress())
-            self._resize_columns()
 
     def _run(self):
         username = unicode(self._ui.username.text())
