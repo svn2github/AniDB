@@ -360,7 +360,6 @@ class Avdump(QtCore.QProcess):
     _procname = "avdump2cl.exe"
 
     # rar: would be nice to communicate with avdump using a unicode encoding
-    #_encoding = locale.getpreferredencoding()
     _encoding = locale.getpreferredencoding()
     _linesep  = os.linesep.encode(_encoding)
 
@@ -385,7 +384,7 @@ class Avdump(QtCore.QProcess):
         if export_file is not None:
             self._args.append("--ExportEd2kLinks=" + export_file)
         self._args.extend(paths)
-        self._stderr_remainder = ""
+        self._stdout_remainder = self._stderr_remainder = ""
         self._current_folder = self._current_filename = None
         self._done = False
 
@@ -410,9 +409,10 @@ class Avdump(QtCore.QProcess):
 
     def _read_stdout(self):
         """Read available avdump output and generate corresponding events"""
-        buffer = unicode(self.readAllStandardOutput(), self._encoding)
+        buffer = self._stdout_remainder + unicode(self.readAllStandardOutput(), self._encoding)
         assert buffer, "_read_stdout called with nothing to process?"
         lines = buffer.split(self._linesep)
+        self._stdout_remainder = lines.pop()
         self._done = False
         for line in lines:
             if __debug__:
