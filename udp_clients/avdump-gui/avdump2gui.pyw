@@ -361,7 +361,7 @@ class Avdump(QtCore.QProcess):
 
     # rar: would be nice to communicate with avdump using a unicode encoding
     #_encoding = locale.getpreferredencoding()
-    _encoding = u'utf-8'
+    _encoding = locale.getpreferredencoding()
     _linesep  = os.linesep.encode(_encoding)
 
     SIG_FILE_HASHING = QtCore.SIGNAL('avdump_file_hashing')
@@ -385,7 +385,7 @@ class Avdump(QtCore.QProcess):
         if export_file is not None:
             self._args.append("--ExportEd2kLinks=" + export_file)
         self._args.extend(paths)
-        self._stdout_remainder = self._stderr_remainder = ""
+        self._stderr_remainder = ""
         self._current_folder = self._current_filename = None
         self._done = False
 
@@ -410,10 +410,9 @@ class Avdump(QtCore.QProcess):
 
     def _read_stdout(self):
         """Read available avdump output and generate corresponding events"""
-        buffer = self._stdout_remainder + unicode(self.readAllStandardOutput())
+        buffer = unicode(self.readAllStandardOutput(), self._encoding)
         assert buffer, "_read_stdout called with nothing to process?"
         lines = buffer.split(self._linesep)
-        self._stdout_remainder = lines.pop()
         self._done = False
         for line in lines:
             if __debug__:
@@ -437,7 +436,7 @@ class Avdump(QtCore.QProcess):
 
     def _read_stderr(self):
         """Read available avdump error output and forward error messages"""
-        buffer = unicode(self.readAllStandardError())
+        buffer = unicode(self.readAllStandardError(), self._encoding)
         assert buffer, "_read_stderr called with nothing to process?"
         sys.stderr.write(buffer)
         lines = buffer.split(self._linesep)
