@@ -433,11 +433,7 @@ function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	var ck = createCheckbox('addepm.'+eid+'.verify'+languageMap[lang]['id'],(Number(verify) ? true : false));
 	if (!mod) {
 		ck.disabled = true;
-		var input   = makeElement('input');
-		input.type  = 'hidden';
-		input.name  = 'addepm.'+eid+'.verify'+languageMap[lang]['id'];
-		input.value = (Number(verify) ? true : false);
-		container.appendChild(input)
+		container.appendChild(createTextInput('addepm.'+eid+'.verify'+languageMap[lang]['id'],null,null,1,null,(Number(verify) ? 'on' : 'off')));
 	}
 	createCell(container, 'verify', ck);
 	createCell(container, 'action', (isUserAdd && lang != 'en') ? createIcon(null, 'rem', null, remTitle, 'Remove this title', 'i_minus') : document.createTextNode(' '));
