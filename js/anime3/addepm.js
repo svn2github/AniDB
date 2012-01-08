@@ -431,7 +431,14 @@ function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	container.appendChild(cell);
 	createCell(container, 'icons', createIcon(null, lang, null, toggleEpTitles, 'language: '+mapLanguage(lang), 'i_audio_'+lang));
 	var ck = createCheckbox('addepm.'+eid+'.verify'+languageMap[lang]['id'],(Number(verify) ? true : false));
-	if (!mod) ck.disabled = true;
+	if (!mod) {
+		ck.disabled = true;
+		var input   = makeElement('input');
+		input.type  = 'hidden';
+		input.name  = 'addepm.'+eid+'.verify'+languageMap[lang]['id'];
+		input.value = (Number(verify) ? true : false);
+		container.appendChild(input)
+	}
 	createCell(container, 'verify', ck);
 	createCell(container, 'action', (isUserAdd && lang != 'en') ? createIcon(null, 'rem', null, remTitle, 'Remove this title', 'i_minus') : document.createTextNode(' '));
 	return(container);
