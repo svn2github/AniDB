@@ -47,6 +47,6 @@ div.badge.upgrade.reviews      div.inner { background-image:url("../icons/achiev
 div.badge.upgrade.similaranime div.inner { background-image:url("../icons/achievements/center-similaranime.png"); }
 div.badge.upgrade.votes        div.inner { background-image:url("../icons/achievements/center-votes.png"); }
 
-div.badge.onetime.introduction div.inner { background-image:url("../icons/achievements/center-onetime-introduction1.png"); }
-div.badge.onetime.club         div.inner { background-image:url("../icons/achievements/center-onetime-club_joined.png"); }
+div.badge.one-time.introduction div.inner { background-image:url("../icons/achievements/center-onetime-introduction1.png"); }
+div.badge.one-time.club         div.inner { background-image:url("../icons/achievements/center-onetime-club_joined.png"); }
 
