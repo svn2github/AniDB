@@ -43,8 +43,8 @@ div.badge.upgrade.hentai        div.inner { background-image:url("../icons/achie
 div.badge.upgrade.animecount div.inner { background-image:url("../icons/achievements/center-special-zzz.png"); } 
 
 div.badge.upgrade.creqcount    div.inner { background-image:url("../icons/achievements/center-creqs.png"); }
-div.badge.upgrade.reviews      div.inner { background-image:url("../icons/achievements/center-reviews1.png"); }
-div.badge.upgrade.similaranime div.inner { background-image:url("../icons/achievements/center-similaranime.png"); }
+div.badge.upgrade.review      div.inner { background-image:url("../icons/achievements/center-reviews1.png"); }
+div.badge.upgrade.similaranime div.inner { background-image:url("../icons/achievements/center-similar_anime.png"); }
 div.badge.upgrade.votes        div.inner { background-image:url("../icons/achievements/center-votes.png"); }
 
 div.badge.one-time.introduction div.inner { background-image:url("../icons/achievements/center-onetime-introduction1.png"); }
