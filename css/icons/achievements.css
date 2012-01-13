@@ -27,25 +27,27 @@ div.badge.mod.nwa      div.inner { background-image:url("../icons/achievements/c
 div.badge.mod.ommina   div.inner { background-image:url("../icons/achievements/center-mod-ommina3.png"); }
 div.badge.mod.worf     div.inner { background-image:url("../icons/achievements/center-mod-worf.png"); }
 
-div.badge.upgrade.conan        div.inner { background-image:url("../icons/achievements/center-conan.png"); }
-div.badge.upgrade.digimon      div.inner { background-image:url("../icons/achievements/center-digimon.png"); }
-div.badge.upgrade.dragonball   div.inner { background-image:url("../icons/achievements/center-dragonball.png"); }
-div.badge.upgrade.gundam       div.inner { background-image:url("../icons/achievements/center-gundam.png"); }
-div.badge.upgrade.lupin        div.inner { background-image:url("../icons/achievements/center-lupin.png"); }
-div.badge.upgrade.macross      div.inner { background-image:url("../icons/achievements/center-macross1.png"); }
-div.badge.upgrade.pokemon      div.inner { background-image:url("../icons/achievements/center-pokemon.png"); }
-div.badge.upgrade.tenchi_muyou div.inner { background-image:url("../icons/achievements/center-tenchi_muyou.png"); }
+div.badge.anime.clamp         div.inner { background-image:url("../icons/achievements/center-clamp.png"); }
+div.badge.anime.classic_anime div.inner { background-image:url("../icons/achievements/center-classic_anime.png"); }
+div.badge.anime.conan         div.inner { background-image:url("../icons/achievements/center-conan.png"); }
+div.badge.anime.digimon       div.inner { background-image:url("../icons/achievements/center-digimon.png"); }
+div.badge.anime.doraemon      div.inner { background-image:url("../icons/achievements/center-doraemon.png"); }
+div.badge.anime.dragonball    div.inner { background-image:url("../icons/achievements/center-dragonball.png"); }
+div.badge.anime.ghibli        div.inner { background-image:url("../icons/achievements/center-ghibli.png"); }
+div.badge.anime.gundam        div.inner { background-image:url("../icons/achievements/center-gundam.png"); }
+div.badge.anime.hentai        div.inner { background-image:url("../icons/achievements/center-hentai4.png"); }
+div.badge.anime.lupin         div.inner { background-image:url("../icons/achievements/center-lupin.png"); }
+div.badge.anime.macross       div.inner { background-image:url("../icons/achievements/center-macross1.png"); }
+div.badge.anime.pokemon       div.inner { background-image:url("../icons/achievements/center-pokemon.png"); }
+div.badge.anime.precure       div.inner { background-image:url("../icons/achievements/center-precure.png"); }
+div.badge.anime.sazae         div.inner { background-image:url("../icons/achievements/center-sazae.png"); }
+div.badge.anime.tenchi_muyou  div.inner { background-image:url("../icons/achievements/center-tenchi_muyou.png"); }
 
-div.badge.upgrade.ghibli        div.inner { background-image:url("../icons/achievements/center-ghibli.png"); }
-div.badge.upgrade.classic_anime div.inner { background-image:url("../icons/achievements/center-classic_anime.png"); }
-div.badge.upgrade.hentai        div.inner { background-image:url("../icons/achievements/center-hentai4.png"); }
-
-div.badge.upgrade.animecount div.inner { background-image:url("../icons/achievements/center-special-zzz.png"); } 
-
-div.badge.upgrade.creqcount    div.inner { background-image:url("../icons/achievements/center-creqs.png"); }
-div.badge.upgrade.review      div.inner { background-image:url("../icons/achievements/center-reviews1.png"); }
-div.badge.upgrade.similaranime div.inner { background-image:url("../icons/achievements/center-similar_anime.png"); }
-div.badge.upgrade.votes        div.inner { background-image:url("../icons/achievements/center-votes.png"); }
+div.badge.stats.creqcount    div.inner { background-image:url("../icons/achievements/center-creqs.png"); }
+div.badge.stats.animecount div.inner { background-image:url("../icons/achievements/center-special-zzz.png"); } 
+div.badge.stats.review      div.inner { background-image:url("../icons/achievements/center-reviews1.png"); }
+div.badge.stats.similaranime div.inner { background-image:url("../icons/achievements/center-similar_anime.png"); }
+div.badge.stats.votes        div.inner { background-image:url("../icons/achievements/center-votes.png"); }
 
 div.badge.one-time.introduction div.inner { background-image:url("../icons/achievements/center-onetime-introduction1.png"); }
 div.badge.one-time.club         div.inner { background-image:url("../icons/achievements/center-onetime-club_joined.png"); }
