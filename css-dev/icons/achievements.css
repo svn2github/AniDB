@@ -28,6 +28,7 @@ div.badge.mod.nwa      div.inner { background-image:url("../icons/achievements/c
 div.badge.mod.ommina   div.inner { background-image:url("../icons/achievements/center-mod-ommina3.png"); }
 div.badge.mod.worf     div.inner { background-image:url("../icons/achievements/center-mod-worf.png"); }
 
+div.badge.anime.adachimitsuru div.inner { background-image:url("../icons/achievements/center-adachi_mitsuru2.png"); }
 div.badge.anime.clamp         div.inner { background-image:url("../icons/achievements/center-clamp.png"); }
 div.badge.anime.classic_anime div.inner { background-image:url("../icons/achievements/center-classic_anime.png"); }
 div.badge.anime.conan         div.inner { background-image:url("../icons/achievements/center-conan.png"); }
@@ -39,6 +40,7 @@ div.badge.anime.gundam        div.inner { background-image:url("../icons/achieve
 div.badge.anime.hentai        div.inner { background-image:url("../icons/achievements/center-hentai4.png"); }
 div.badge.anime.lupin         div.inner { background-image:url("../icons/achievements/center-lupin.png"); }
 div.badge.anime.macross       div.inner { background-image:url("../icons/achievements/center-macross1.png"); }
+div.badge.anime.onepiece      div.inner { background-image:url("../icons/achievements/center-onepiece.png"); }
 div.badge.anime.pokemon       div.inner { background-image:url("../icons/achievements/center-pokemon.png"); }
 div.badge.anime.precure       div.inner { background-image:url("../icons/achievements/center-precure.png"); }
 div.badge.anime.sazae         div.inner { background-image:url("../icons/achievements/center-sazae.png"); }
@@ -53,3 +55,5 @@ div.badge.stats.votes        div.inner { background-image:url("../icons/achievem
 
 div.badge.one-time.introduction div.inner { background-image:url("../icons/achievements/center-onetime-introduction1.png"); }
 div.badge.one-time.club         div.inner { background-image:url("../icons/achievements/center-onetime-club_joined.png"); }
+
+
