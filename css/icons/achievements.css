@@ -6,16 +6,17 @@ div.badge div.inner
 	width: 80px;
 }
 
-div.badge.level1  { background-image:url("../icons/achievements/ring-level1.png"); }
-div.badge.level2  { background-image:url("../icons/achievements/ring-level2.png"); }
-div.badge.level3  { background-image:url("../icons/achievements/ring-level3.png"); }
-div.badge.level4  { background-image:url("../icons/achievements/ring-level4.png"); }
-div.badge.level5  { background-image:url("../icons/achievements/ring-level5.png"); }
-div.badge.level6  { background-image:url("../icons/achievements/ring-level6.png"); }
-div.badge.level7  { background-image:url("../icons/achievements/ring-level7.png"); }
-div.badge.level8  { background-image:url("../icons/achievements/ring-level8.png"); }
-div.badge.mod     { background-image:url("../icons/achievements/ring-mod.png"); }
-div.badge.special { background-image:url("../icons/achievements/ring-special.png"); }
+div.badge.level1   { background-image:url("../icons/achievements/ring-level1.png"); }
+div.badge.level2   { background-image:url("../icons/achievements/ring-level2.png"); }
+div.badge.level3   { background-image:url("../icons/achievements/ring-level3.png"); }
+div.badge.level4   { background-image:url("../icons/achievements/ring-level4.png"); }
+div.badge.level5   { background-image:url("../icons/achievements/ring-level5.png"); }
+div.badge.level6   { background-image:url("../icons/achievements/ring-level6.png"); }
+div.badge.level7   { background-image:url("../icons/achievements/ring-level7.png"); }
+div.badge.level8   { background-image:url("../icons/achievements/ring-level8.png"); }
+div.badge.one-time { background-image:url("../icons/achievements/ring-onetime.png"); }
+div.badge.special  { background-image:url("../icons/achievements/ring-special.png"); }
+div.badge.mod      { background-image:url("../icons/achievements/ring-mod.png"); }
 
 div.badge.special.code       div.inner { background-image:url("../icons/achievements/center-special-code2.png"); }
 div.badge.special.creativity div.inner { background-image:url("../icons/achievements/center-special-creativity.png"); }
@@ -43,8 +44,9 @@ div.badge.anime.precure       div.inner { background-image:url("../icons/achieve
 div.badge.anime.sazae         div.inner { background-image:url("../icons/achievements/center-sazae.png"); }
 div.badge.anime.tenchi_muyou  div.inner { background-image:url("../icons/achievements/center-tenchi_muyou.png"); }
 
+div.badge.mylist.animecount div.inner { background-image:url("../icons/achievements/center-mylist_anime.png"); } 
+
 div.badge.stats.creqcount    div.inner { background-image:url("../icons/achievements/center-creqs.png"); }
-div.badge.stats.animecount div.inner { background-image:url("../icons/achievements/center-special-zzz.png"); } 
 div.badge.stats.review      div.inner { background-image:url("../icons/achievements/center-reviews1.png"); }
 div.badge.stats.similaranime div.inner { background-image:url("../icons/achievements/center-similar_anime.png"); }
 div.badge.stats.votes        div.inner { background-image:url("../icons/achievements/center-votes.png"); }
