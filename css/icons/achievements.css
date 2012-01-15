@@ -48,7 +48,7 @@ div.badge.anime.tenchi_muyou  div.inner { background-image:url("../icons/achieve
 
 div.badge.mylist.animecount   div.inner { background-image:url("../icons/achievements/center-mylist_anime.png"); } 
 div.badge.mylist.episodecount div.inner { background-image:url("../icons/achievements/center-mylist_episodes.png"); } 
-div.badge.mylist.filescount   div.inner { background-image:url("../icons/achievements/center-mylist_files.png"); } 
+div.badge.mylist.filecount    div.inner { background-image:url("../icons/achievements/center-mylist_files.png"); } 
 div.badge.mylist.mylistsize   div.inner { background-image:url("../icons/achievements/center-mylist_size.png"); } 
 div.badge.mylist.timewasted   div.inner { background-image:url("../icons/achievements/center-time_wasted2.png"); } 
 div.badge.mylist.seenepisodes div.inner { background-image:url("../icons/achievements/center-watched1.png"); } 
