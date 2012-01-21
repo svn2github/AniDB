@@ -8,9 +8,9 @@
 jsVersionArray.push({
 	"file":"anime3/addepm.js",
 	"version":"2.4.1",
-	"revision":"$Revision$",
-	"date":"$Date::                           $",
-	"author":"$Author$",
+	"revision":"$Revision: 4209 $",
+	"date":"$Date:: 2012-01-08 21:49:38 +0100#$",
+	"author":"$Author: deridiot $",
 	"changelog":"Type filter"
 });
 
@@ -431,7 +431,10 @@ function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	container.appendChild(cell);
 	createCell(container, 'icons', createIcon(null, lang, null, toggleEpTitles, 'language: '+mapLanguage(lang), 'i_audio_'+lang));
 	var ck = createCheckbox('addepm.'+eid+'.verify'+languageMap[lang]['id'],(Number(verify) ? true : false));
-	if (!mod) ck.disabled = true;
+	if (!mod) {
+		ck.disabled = true;
+		container.appendChild(createTextInput('addepm.'+eid+'.verify'+languageMap[lang]['id'],null,null,1,null,(Number(verify) ? 'on' : 'off')));
+	}
 	createCell(container, 'verify', ck);
 	createCell(container, 'action', (isUserAdd && lang != 'en') ? createIcon(null, 'rem', null, remTitle, 'Remove this title', 'i_minus') : document.createTextNode(' '));
 	return(container);
