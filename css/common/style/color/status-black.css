@@ -138,6 +138,7 @@
 span.diff,
 #layout-main td.reviewed.no a,
 #layout-main div.creq_all .state.return,
+#layout-main div.creq_all .state.return th.field,
 #layout-main div.creq_all .state.new,
 #layout-main div.creq_all span.type.del,
 #layout-main div.anime_all div.groups td.mylist.new,
