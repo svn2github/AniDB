@@ -185,7 +185,7 @@ function createEpisodeIcons(episode) {
 		for (var st in statusFiles) {
 			var status = statusFiles[st];
 			if (isNaN(status)) continue;
-			if (status == undefined || status == 'undefined') continue;
+			if (status == undefined || status == 'undefined' || status == null || !status) continue;
 			//if (status == null || !status) continue;
 			var stClass = 'i_icon i_state_'+mapMEStatusName(st);
 			var txt = status + ' file' + (status > 1 ? 's' : '') + ' with status: '+st;
@@ -195,7 +195,7 @@ function createEpisodeIcons(episode) {
 			if (st == 'indexOf' || st == 'unknown') continue;
 			var state = stateFiles[st];
 			if (isNaN(state)) continue;
-			if (state == undefined || state == 'undefined') continue;
+			if (state == undefined || state == 'undefined' || state == null || !state) continue;
 			//if (state == null || !state) continue;
 			var stClass = 'i_icon '+mapFState(st);
 			var txt = state + ' file' + (state > 1 ? 's' : '') + ' with state: '+st;
