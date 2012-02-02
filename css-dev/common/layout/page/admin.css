@@ -31,7 +31,6 @@
 	padding: 0px 4px;
 }
 
-#layout-main div.admin_all div.creatoranimerelation dl,
 #layout-main div.admin_all div.characterrelation dl,
 #layout-main div.admin_all div.creatorrelation dl
 {
@@ -39,7 +38,6 @@
 	margin:0 0 0.2em;
 }
 
-#layout-main div.admin_all div.creatoranimerelation dl dt,
 #layout-main div.admin_all div.characterrelation dl dt,
 #layout-main div.admin_all div.creatorrelation dl dt
 {
@@ -47,14 +45,12 @@
 	float:left;
 }
 
-#layout-main div.admin_all div.creatoranimerelation dl dd,
 #layout-main div.admin_all div.characterrelation dl dd,
 #layout-main div.admin_all div.creatorrelation dl dd
 {
 	margin-left:20em;
 }
 
-#layout-main div.admin_all div.creatoranimerelation div.inner,
 #layout-main div.admin_all div.characterrelation div.inner,
 #layout-main div.admin_all div.creatorrelation div.inner
 {
@@ -64,14 +60,12 @@
 	width:55em;
 }
 
-#layout-main div.admin_all div.creatoranimerelation input[type="text"],
 #layout-main div.admin_all div.characterrelation input[type="text"],
 #layout-main div.admin_all div.creatorrelation input[type="text"]
 {
 	width:300px;
 }
 
-#layout-main div.admin_all div.creatoranimerelation dl dd label,
 #layout-main div.admin_all div.characterrelation dl dd label,
 #layout-main div.admin_all div.creatorrelation dl dd label
 {
@@ -100,4 +94,54 @@
 #layout-main div.admin_all div.admin_user_avatars  ul.g_list + table
 {
 	margin-top:1em;
+}
+
+#layout-main div.admin_all table.creditlist
+{
+	width:98%;
+}
+
+#layout-main div.admin_all table.creditlist td.no
+{
+	min-width: 5em;
+	max-width: 5em;
+}
+
+#layout-main div.admin_all table.creditlist td.bool
+{
+	min-width: 4em;
+	max-width: 4em;
+}
+
+#layout-main div.admin_all table.creditlist td.action
+{
+	min-width: 25em;
+	max-width: 25em;
+}
+
+#layout-main div.admin_all table.creditlist td.addedby
+{
+	min-width: 10em;
+	max-width: 10em;
+}
+
+#layout-main div.admin_all table.creditlist td.credit
+{
+	min-width: 20em;
+	max-width: 20em;
+}
+
+#layout-main div.admin_all table.creditlist td+td
+{
+	padding-left: 1em;
+}
+
+#layout-main div.admin_all table.creditlist td.description
+{
+	width: 50%;
+}
+
+#layout-main div.admin_all table.creditlist td.action
+{
+	text-align:left;
 }
