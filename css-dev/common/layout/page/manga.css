@@ -1,0 +1,70 @@
+#layout-main div.manga_all table.elementlist,
+#layout-main div.manga_all table.subelementlist
+{
+width:98%;
+}
+
+#layout-main div.manga_all table.elementlist.mixed tr.parent
+{
+background-color: inherit;
+}
+
+#layout-main div.manga_all table.elementlist.mixed,
+#layout-main div.manga_all table.elementlist.mixed  tr.parent td
+{
+border: none;
+}
+
+#layout-main div.manga_all table.elementlist.mixed  tr.parent td
+{
+font-size:140%;
+padding-top: 1em;
+}
+
+#layout-main div.manga_all table.elementlist td.no,
+#layout-main div.manga_all table.elementlist td.action,
+#layout-main div.manga_all table.elementlist td.rating,
+#layout-main div.manga_all table.elementlist td.votes
+{
+	min-width: 5em;
+	max-width: 5em;
+}
+
+#layout-main div.manga_all table.elementlist td+td
+{
+	padding-left: 1em;
+}
+
+#layout-main div.manga_all table.elementlist td.title
+{
+	width: 90%;
+}
+
+#layout-main div.manga_all div.groups td.epbar
+{
+	width: 30%;
+}
+
+#layout-main div.manga_all div.groups td.epbar div
+{
+	border-bottom:  2px solid;
+	float: left;
+	height: 8px;
+}
+
+#layout-main div.manga_all div.groups td.epbar div.done
+{
+	background-color: #6193FF;
+	border-bottom-color: #6193FF;
+}
+
+#layout-main div.manga_all div.groups td.epbar div.done.mylist
+{
+	border-bottom-color: #6CF06C;
+}
+
+#layout-main div.manga_all div.groups td.epbar div.notdone
+{
+	background-color: #C3D8FF;
+	border-bottom-color: #C3D8FF;
+}
