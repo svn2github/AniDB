@@ -8,11 +8,6 @@
 	width:98%;
 }
 
-#layout-main div.group_all table.filelist td
-{
-	width:10em;
-}
-
 #layout-main div.group_all table.filelist td + td
 {
 	padding-left: 1em;
