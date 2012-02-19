@@ -29,3 +29,8 @@
 {
 	border:none;
 }
+
+#layout-main div.mangaelement_all ul.links_top
+{
+	display:none;
+}

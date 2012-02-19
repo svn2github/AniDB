@@ -1,0 +1,78 @@
+#layout-main div.mangaatt_reviews div.review
+{
+	clear: right;
+}
+#layout-main div.mangaatt_reviews div.review div.bar
+{
+	margin-top:1em;
+	float: right;
+	width: 11em;
+}
+#layout-main div.mangaatt_reviews div.review div.bar table
+{
+	width: 100%;
+}
+#layout-main div.mangaatt_reviews div.review div.text
+{
+	text-align: left;
+	margin-right: 12em;
+	padding: 0.5em;
+}
+#layout-main div.mangaatt_reviews div.review div.rating table td.value
+{
+	text-align: right;
+}
+
+#layout-main div.mangaatt_comment
+{
+	text-align: left;	
+}
+
+#layout-main div.mangaatt_comment textarea
+{
+	width: 96%;
+	height: 10em;
+}
+
+#layout-main div.mangaatt_all div.topic_actions
+{
+	height: 25px;
+}
+
+#layout-main div.mangaatt_all div.topic_actions div.buttons a
+{
+	float: left;
+}
+
+#layout-main div.mangaatt_all div.topic_actions span.icons
+{
+	float: right;
+}
+
+#layout-main div.mangaatt_reviews div.review div.text
+{
+	min-height: 330px;
+}
+
+#layout-main div.mangaatt_reviews div.review div.text + div.note
+{
+	margin-top: 1em;
+	margin-right: 12em;
+	clear: none;
+}
+
+#layout-main div.mangaatt_all div.forum div.options-box dl dd
+{
+	margin-left:20em;
+}
+#layout-main div.mangaatt_all div.mangaatt_info h4,
+#layout-main div.mangaatt_all div.mangaatt_info p
+{
+	text-align: left;
+}
+
+#layout-main div.mangaatt_all div.mangaatt_info ol
+{
+	list-style:decimal inside none;
+	text-align: left;
+}

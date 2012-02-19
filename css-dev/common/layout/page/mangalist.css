@@ -1,0 +1,63 @@
+#layout-main div.mangalist_all td.awards span.i_icon,
+#layout-main div.mangalist_all div.filters ul li span,
+#layout-main div.mangalist_all div.filters ul li span span
+{
+    display: inline-block;
+}
+
+#layout-main div.mangalist_all div.filters ul li span span span
+{
+    display: none;
+}
+
+#layout-main div.mangalist_all div.note,
+#layout-main div.mangalist_all div.fullsearch_form
+{
+	clear:none;
+}
+
+#layout-main div.mangalist_all table.mangalist tr td
+{
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+#layout-main div.mangalist_all table.mangalist tr td.count,
+#layout-main div.mangalist_all table.mangalist tr td.date
+{
+	text-align: right;
+}
+
+#layout-main div.mangalist_all table.mangalist tr td.rating
+{
+	text-align: left;
+}
+
+#layout-main div.mangalist_all table.mangalist tr td.name
+{
+	width:50%;
+}
+
+@media screen and (min-width: 1200px)
+{
+	#layout-main div.mangalist_all table.mangalist tr td.name
+	{
+		width:75%;
+	}
+
+	#layout-main div.mangalist_all table.mangalist tr td.rating
+	{
+		text-align: left;
+		min-width:6em;
+	}
+
+	#layout-main div.mangalist_all table.mangalist tr td.count
+	{
+		min-width:4em;
+	}
+
+	#layout-main div.mangalist_all td.type
+	{
+		white-space:nowrap;
+	}
+}

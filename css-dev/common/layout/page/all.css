@@ -1,5 +1,6 @@
 @import "addentity.css";
 @import "addsimilaranime.css";
+@import "addsimilarmanga.css";
 @import "admin.css";
 @import "anime.css";
 @import "animeatt.css";
@@ -29,6 +30,8 @@
 @import "lexicon.css";
 @import "main.css";
 @import "manga.css";
+@import "mangaatt.css";
+@import "mangalist.css";
 @import "mangaelement.css";
 @import "modlatest.css";
 @import "msg.css";

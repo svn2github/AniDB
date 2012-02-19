@@ -47,14 +47,12 @@
 
 #layout-main div.manga_all div.groups table.grouplist,
 #layout-main div.manga_all div.character table.characterlist,
-#layout-main div.manga_all div.seiyuu table.seiyuulist,
 #layout-main div.manga_all div.relations table.relationslist,
 #layout-main div.manga_all div.recommendations table.recommendationslist,
 #layout-main div.manga_all div.reviews table.reviewlist,
 #layout-main div.manga_all div.episodes table.eplist,
 #layout-main div.manga_all > div.g_section.characters > table,
 #layout-main div.manga_all > div.g_section.staff > table,
-#layout-main div.manga_all > div.g_section.songs > table,
 #layout-main div.manga_all > div.g_section.reviews > table,
 #layout-main div.manga_all div.mylistfiles > table.filelist
 {
@@ -75,11 +73,6 @@
 #layout-main div.manga_all table.stafflist td.eprange
 {
 	min-width: 10em;
-}
-
-#layout-main div.manga_all div.songs table th.credit
-{
-	min-width: 15em;
 }
 
 #layout-main div.manga_all div.recommendations td.action,
