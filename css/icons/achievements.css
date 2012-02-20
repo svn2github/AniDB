@@ -50,23 +50,24 @@ div.badge.creator.clamp            div.inner { background-image:url("../icons/ac
 div.badge.creator.ghibli           div.inner { background-image:url("../icons/achievements/center-ghibli.png"); }
 div.badge.creator.matsumoto_leiji  div.inner { background-image:url("../icons/achievements/center-leiji.png"); }
 div.badge.creator.takahashi_rumiko div.inner { background-image:url("../icons/achievements/center-takahashi_rumiko.png"); }
-div.badge.creator.tezuka_osamu           div.inner { background-image:url("../icons/achievements/center-tezuka.png"); }
+div.badge.creator.tezuka_osamu     div.inner { background-image:url("../icons/achievements/center-tezuka.png"); }
 
 div.badge.mylist.animecount   div.inner { background-image:url("../icons/achievements/center-mylist_anime.png"); } 
 div.badge.mylist.episodecount div.inner { background-image:url("../icons/achievements/center-mylist_episodes.png"); } 
 div.badge.mylist.filecount    div.inner { background-image:url("../icons/achievements/center-mylist_files.png"); } 
 div.badge.mylist.mylistsize   div.inner { background-image:url("../icons/achievements/center-mylist_size.png"); } 
-div.badge.mylist.timewasted   div.inner { background-image:url("../icons/achievements/center-time_wasted2.png"); } 
 div.badge.mylist.seenepisodes div.inner { background-image:url("../icons/achievements/center-watched1.png"); } 
+div.badge.mylist.timewasted   div.inner { background-image:url("../icons/achievements/center-time_wasted2.png"); } 
 
+div.badge.stats.anidbmember  div.inner { background-image:url("../icons/achievements/center-anidb_member2.png"); } 
 div.badge.stats.animeadded   div.inner { background-image:url("../icons/achievements/center-special-zzz.png"); }
+div.badge.stats.avmf         div.inner { background-image:url("../icons/achievements/center-dump.png"); }
 div.badge.stats.creatoradded div.inner { background-image:url("../icons/achievements/center-creator.png"); }
 div.badge.stats.creqcount    div.inner { background-image:url("../icons/achievements/center-creqs.png"); }
 div.badge.stats.review       div.inner { background-image:url("../icons/achievements/center-reviews1.png"); }
 div.badge.stats.similaranime div.inner { background-image:url("../icons/achievements/center-similar_anime.png"); }
-div.badge.stats.votes        div.inner { background-image:url("../icons/achievements/center-votes.png"); }
-div.badge.stats.avmf         div.inner { background-image:url("../icons/achievements/center-dump.png"); }
 div.badge.stats.userroles    div.inner { background-image:url("../icons/achievements/center-user_rank.png"); }
+div.badge.stats.votes        div.inner { background-image:url("../icons/achievements/center-votes.png"); }
 
 div.badge.one-time.introduction div.inner { background-image:url("../icons/achievements/center-onetime-introduction1.png"); }
 div.badge.one-time.club         div.inner { background-image:url("../icons/achievements/center-onetime-club_joined.png"); }
