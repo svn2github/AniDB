@@ -5,6 +5,7 @@
 }
 
 #layout-main div.addcreatoranimerel_all div.massadd div.text textarea,
+#layout-main div.addcreatormangarel_all div.massadd div.text textarea,
 #layout-main div.addcreatorsongrel_all div.massadd div.text textarea,
 #layout-main div.addsonganimerel_all div.massadd div.text textarea,
 #layout-main div.addcharanimerel_all div.massadd div.text textarea
@@ -14,6 +15,7 @@
 }
 
 #layout-main div.addcreatoranimerel_all div.massadd div.source textarea,
+#layout-main div.addcreatormangarel_all div.massadd div.source textarea,
 #layout-main div.addcreatorsongrel_all div.massadd div.source textarea,
 #layout-main div.addsonganimerel_all div.massadd div.source textarea
 {
@@ -22,6 +24,7 @@
 }
 
 #layout-main div.addcreatoranimerel_all div.massadd div + div,
+#layout-main div.addcreatoranimerel_all div.massadd div + div,
 #layout-main div.addcreatorsongrel_all div.massadd div + div,
 #layout-main div.addsonganimerel_all div.massadd div + div
 {
@@ -29,12 +32,14 @@
 }
 
 #layout-main div.addcreatoranimerel_all div.explanation div.description table,
+#layout-main div.addcreatoranimerel_all div.explanation div.description table,
 #layout-main div.addcreatorsongrel_all div.explanation div.description table
 {
 	width: 100%;
 	padding: 4px;
 }
 
+#layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr td,
 #layout-main div.addcreatoranimerel_all div.explanation div.description tr + tr td,
 #layout-main div.addcreatorsongrel_all div.explanation div.description tr + tr td
 {
@@ -78,6 +83,7 @@
 
 #layout-main div.addcreatoranimerel_all div.content,
 #layout-main div.addcreatoranimerel_all div.explanation,
+#layout-main div.addcreatormangarel_all div.explanation,
 #layout-main div.addcreatorsongrel_all div.explanation
 {
 	margin-top: 1em;
