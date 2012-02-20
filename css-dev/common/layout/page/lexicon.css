@@ -31,30 +31,36 @@
 	margin-top: 0;
 }
 
-#layout-main div.lexicon_all table.animelist tr td
+#layout-main div.lexicon_all table.animelist tr td,
+#layout-main div.lexicon_all table.mangalist tr td
 {
 	padding-left: 1em;
 	padding-right: 1em;
 }
 
-#layout-main div.lexicon_all table.animelist tr td.name
+#layout-main div.lexicon_all table.animelist tr td.name,
+#layout-main div.lexicon_all table.mangalist tr td.name
 {
 	width:50%;
 }
 
-#layout-main div.lexicon_all table.animelist tr td.rating
+#layout-main div.lexicon_all table.animelist tr td.rating,
+#layout-main div.lexicon_all table.mangalist tr td.rating
 {
 	text-align: left;
 	min-width:6em;
 }
 
 #layout-main div.lexicon_all table.animelist tr td.count,
-#layout-main div.lexicon_all table.animelist tr td.date
+#layout-main div.lexicon_all table.animelist tr td.date,
+#layout-main div.lexicon_all table.mangalist tr td.count,
+#layout-main div.lexicon_all table.mangalist tr td.date
 {
 	text-align: right;
 }
 
-#layout-main div.lexicon_all table.animelist tr td.count
+#layout-main div.lexicon_all table.animelist tr td.count,
+#layout-main div.lexicon_all table.mangalist tr td.count
 {
 	min-width:4em;
 }
