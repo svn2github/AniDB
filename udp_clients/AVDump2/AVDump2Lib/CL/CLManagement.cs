@@ -110,7 +110,8 @@ namespace AVDump2Lib.CL {
 			int secondaryPad = argGroup.Args.Max(ldArg => !string.IsNullOrEmpty(ldArg.Secondary) ? ldArg.Secondary.Length + 3 : 0);
 			int shortCutPad = argGroup.Args.Max(ldArg => ldArg.ShortCut.HasValue ? 3 : 0);
 			foreach(var arg in argGroup.Args) {
-				Console.ForegroundColor = ConsoleColor.White;
+				//Console.ForegroundColor = ConsoleColor.White;
+				Console.ResetColor();
 
 				primary = ("--" + arg.Primary).PadRight(primaryPad);
 				secondary = (!string.IsNullOrEmpty(arg.Secondary) ? "--" + arg.Secondary : "").PadRight(secondaryPad);

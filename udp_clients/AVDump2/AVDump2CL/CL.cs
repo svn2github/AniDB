@@ -24,11 +24,12 @@ using AVDump2Lib.Misc;
 using System.Net;
 using System.Diagnostics;
 using AVDump2Lib.CL;
+using System.IO.Pipes;
+using AVDump2Lib;
 
 namespace AVDump2CL {
 	public class CL {
 		#region Fields
-		private static Dictionary<char, eSwitches> char2SwitchEnum;
 		private static int localPort = 0;
 		private static string username;
 		private static string password;
@@ -45,12 +46,14 @@ namespace AVDump2CL {
 		private static string extDiffListPath;
 		private static string crcMismatchListPath;
 		private static string extFixPath;
+		private static string debugPath;
 
 
 		private static string hashLogStyle;
 		private static List<string> mediaLst;
 		private static List<string> doneListContent;
 
+		private static int? retriesOnIOException;
 		private static int retries = 3;
 		private static int timeout = 10;
 		private static int blockCount = 4;
@@ -63,6 +66,8 @@ namespace AVDump2CL {
 		private static bool isProcessing;
 		private static bool hasConsole;
 
+		private static int sentACReqs = 0;
+		private static int failedACReqs = 0;
 		#endregion
 
 		static CL() {
@@ -75,11 +80,8 @@ namespace AVDump2CL {
 			mediaLst = new List<string>();
 			doneListContent = new List<string>();
 
-			dumpableExtensions = new HashSet<String>(new string[] { "zeg", "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
-			//dumpableExtensions.Sort();
-
-			processExtensions = new HashSet<string>(new string[] { "zeg", "m4a", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
-			//processExtensions.Sort();
+			dumpableExtensions = new HashSet<String>(new string[] {"s2k", "fsb", "sup", "zeg", "m4a", "m4v", "rv", "mk3d", "mkv3d", "dtshd", "thd", "xss", "js", "rt", "tts", "smil", "tmp", "pjs", "webm", "lrc", "avi", "mpg", "mpeg", "m2ts", "ts", "rm", "ra", "rmvb", "asf", "wmv", "wma", "mov", "ogm", "ogg", "mp4", "mkv", "mks", "swf", "flv", "ogv", "srt", "sub", "ssa", "smi", "idx", "ass", "txt", "mp3", "aac", "ac3", "dts", "wav", "flac", "mka", "rar", "zip", "ace", "7z", "qt" });
+			processExtensions = new HashSet<string>(dumpableExtensions);
 		}
 
 		private static CLManagement CreateCLArgParser() {
@@ -98,14 +100,15 @@ namespace AVDump2CL {
 			Func<string, object> toInt = (ldParam) => int.Parse(ldParam);
 
 			Func<string, object> pathParam = (ldParam) => {
-				var path = Path.Combine(AppPath, ldParam);
-				if(!Directory.Exists(path)) Directory.CreateDirectory(Path.GetDirectoryName(path));
-				if(!File.Exists(path)) File.Create(path);
+				var path = Path.IsPathRooted(ldParam)? ldParam : Path.Combine(CurrentDirectory, ldParam);
+				if(!Directory.Exists(Path.GetDirectoryName(path))) Directory.CreateDirectory(Path.GetDirectoryName(path));
+				//if(!File.Exists(path)) File.Create(path).Close();
 				return path;
 			};
 
 			Func<string, int, int, int> between = (value, min, max) => Math.Max(Math.Min((int)toInt(value), max), min);
 
+			#region ACReq
 			clArgManagement.RegisterArgGroup(new ArgGroup("ACReq",
 				"Updates meta info of an existing file entry on AniDB",
 				(nameSpace, argName, argParam) => {
@@ -133,12 +136,14 @@ namespace AVDump2CL {
 					"Local UDP port used for ACReqing"
 				),
 				new ArgStructure("TimeOut", "TOut", null,
-					(ldParams) => ((string[])splitParams(ldParams)).Select(ldParam => toInt(ldParam)),
+					(ldParams) => ((string[])splitParams(ldParams)).Select(ldParam => (int)toInt(ldParam)).ToArray(),
 					"--TOut=<seconds>:<retries>",
 					"Sets the retry count and the timeout before resending the dump"
 				)
 			));
+			#endregion
 
+			#region Logging
 			clArgManagement.RegisterArgGroup(new ArgGroup("Logging",
 				"",
 				(nameSpace, argName, argParam) => {
@@ -153,7 +158,7 @@ namespace AVDump2CL {
 					}
 				},
 				new ArgStructure("ACReqError", "ACErr", null, pathParam, "--ACErr=acerr.txt", "Log file paths of failed dumps to file"),
-				new ArgStructure("CRCError", "CrcErr", null, pathParam, "--CrcErr=crcerr.txt", "Logs the filepath if the calculated CRC is not contained in the filename"),
+				new ArgStructure("CRCError", "CRCErr", null, pathParam, "--CRCErr=crcerr.txt", "Logs the filepath if the calculated CRC is not contained in the filename"),
 				new ArgStructure("ExtensionDifference", "ExtDiff", null, pathParam, "--ExtDiff=extdiff.txt", "Logs the filepath if the detected Extension does not match the actual extension"),
 				new ArgStructure("FixExtensions", "FixExt", null, pathParam, "--FixExt=extfix.txt", "Changes the fileextension to the dectected extension and logs the action"),
 				new ArgStructure("DoneLog", "Done", null, pathParam, "--Done=done.txt", "Skip paths present in the log and appends paths to newly processed files"),
@@ -164,7 +169,9 @@ namespace AVDump2CL {
 				),
 				new ArgStructure("LogFile", "Log", null, pathParam, "--Log=log.txt", "Any enabled reports (See Report Namespace) will be appended to this file")
 			));
+			#endregion
 
+			#region Report
 			clArgManagement.RegisterArgGroup(new ArgGroup("Report",
 				"",
 				(nameSpace, argName, argParam) => {
@@ -184,22 +191,29 @@ namespace AVDump2CL {
 				new ArgStructure("AVD2Format", "", 'c', null, "", ""),
 				new ArgStructure("HashDump", "", 'h', null, "", "")
 			));
+			#endregion
 
+			#region Control
 			clArgManagement.RegisterArgGroup(new ArgGroup("Control",
 				"",
 				(nameSpace, argName, argParam) => {
 					switch(argName) {
+						case "RetryOnIOException": retriesOnIOException = (int)argParam; break;
 						case "BlockSize": blockSize = ((int[])argParam)[0]; blockCount = ((int[])argParam)[1]; break;
 						case "ExtensionList": processExtensions = (HashSet<string>)argParam; break;
-						case "MonitorFolders": monitorSleepDuration = (int)argParam * 1000; break;
+						case "MonitorFolders": monitorSleepDuration = (int)argParam * 1000; switches |= eSwitches.MonitorFolder; break;
 						case "NoRecurse": switches |= eSwitches.ExcludeSubFolders; break;
 						case "PauseWhenDone": switches |= eSwitches.PauseWhenDone; break;
 						case "PauseAfterFile": switches |= eSwitches.PauseWhenFileDone; break;
 						case "Randomize": switches |= eSwitches.RandomFileOrder; break;
 						case "Quiet": switches |= eSwitches.SupressProgress; break;
 						case "Delete": switches |= eSwitches.DeleteFileWhenDone; break;
+						case "RenameFile": break;
+						case "DoneLogFileNameOnly": switches |= eSwitches.DoneLogFilenameOnly; break;
 						case "Benchmark": switches |= eSwitches.HashingSpeedTest; break;
 						case "UseUtf8": switches |= eSwitches.UseUTF8OutputStream; break;
+						case "UseCWD": switches |= eSwitches.UseCWD; break;
+						case "Debug": debugPath = (string)argParam; break;
 					}
 				},
 				new ArgStructure("BlockSize", "BSize", null,
@@ -209,27 +223,32 @@ namespace AVDump2CL {
 				),
 				new ArgStructure("ExtensionList", "Ext", null,
 					ldParam => {
-						var exts = ldParam.Split(',');
+						var exts = ldParam.ToLower().Split(',');
 						if(exts.Length == 1 && exts[0].Equals("*")) return null;
 						if(exts.Any(str => str.StartsWith("-")) && !exts.All(str => str.StartsWith("-"))) throw new Exception("Inclusive and exclusive extensions cannot be mixed");
-						return exts[0][0] == '-' ? processExtensions.Except(exts) : new HashSet<string>(exts);
+						return new HashSet<string>(exts[0][0] == '-' ? processExtensions.Except(exts.Select(ldExt => ldExt.Substring(1))) : exts);
 					},
 					"--Ext=avi,mkv OR --Ext=-zip,-rar OR --Ext=*", ""
 				),
 				new ArgStructure("MonitorFolders", "Mon", null, toInt, "--Mon=3600", "Processes the given paths again after the specified idletime (seconds)"),
 				new ArgStructure("NoErrorReporting", "NoErr", null, null, "", "Disables exception reporting\nBy default an exception report is sent to AniDB if there is one.\nIt does not contain any private information.\nThis greatly helps discovering bugs."),
 				new ArgStructure("NoRecurse", "", 'R', null, "", "Do _not_ recurse into subfolders"),
+				new ArgStructure("DoneLogFileNameOnly", "", 'R', null, "", "Use only the filename for Donelog comparsion"),
 				new ArgStructure("PauseWhenDone", "", 'p', null, "", ""),
+				new ArgStructure("RetryOnIOException", "", null, toInt, "--RetryOnIOException=3", "Retries processing files which have failed with an IOException"),
 				new ArgStructure("PauseAfterFile", "", 'P', null, "", ""),
 				new ArgStructure("Randomize", "", 'r', null, "", ""),
-				//new ArgStructure("PrintElapsedTimeForFile", "", 't', null, "", ""),
-				//new ArgStructure("PrintTotalElapsedTime", "", 'T', null, "", ""),
 				new ArgStructure("Quiet", "", 'q', null, "", ""),
 				new ArgStructure("Delete", "", null, null, "", ""),
+				//new ArgStructure("RenameFile", "Rename", null, null, "--Rename=Format.cs", "After processing, the file is renamed to result of the userdefined function\nThe function is run a new AppDomain with minimal trust."),
 				new ArgStructure("Benchmark", "", 'B', null, "", "Used in conjunction with the hash args\nAdd one file to the args to test read speed."),
-				new ArgStructure("UseUtf8", "", 'U', null, "", "")
+				new ArgStructure("UseCWD", "", null, null, "", "Use the current working directoy for file output"),
+				new ArgStructure("UseUtf8", "", 'U', null, "", ""),
+				new ArgStructure("Debug", "", null, pathParam, "", "")
 			));
+			#endregion
 
+			#region Hashing
 			clArgManagement.RegisterArgGroup(new ArgGroup("Hashing",
 				"",
 				(nameSpace, argName, argParam) => {
@@ -253,7 +272,9 @@ namespace AVDump2CL {
 				new ArgStructure("TTH", "", '6', null, "", ""),
 				new ArgStructure("AllHashes", "", 'a', null, "", "")
 			));
+			#endregion
 
+			#region AniDB
 			clArgManagement.RegisterArgGroup(new ArgGroup("AniDB",
 				"",
 				(nameSpace, argName, argParam) => {
@@ -270,45 +291,20 @@ namespace AVDump2CL {
 				new ArgStructure("PrintAniDBLink", "", null, null, "", ""),
 				new ArgStructure("OpenAniDBLink", "", null, null, "", "")
 			));
+			#endregion
 
 			clArgManagement.SetUnnamedParamHandler(param => mediaLst.Add(param));
 
 			return clArgManagement;
 		}
+		private static bool ParseArgs(string[] args) {
+			bool triedOldCmd = false;
 
-		static void Main(string[] args) {
-			try {
-				int top = Console.CursorTop;
-				Console.CursorTop = 1;
-				Console.CursorTop = top;
-				hasConsole = true;
-
-			} catch(Exception) {
-				switches |= eSwitches.SupressProgress;
-				hasConsole = false;
-			}
-
-			//Console.WriteLine(Environment.Version);
-
-			var consoleIn = Console.In;
-			Console.SetOut(new ConsoleOutFilter(Console.Out));
-
-
-			if((switches & eSwitches.UseUTF8OutputStream) != 0) Console.OutputEncoding = new UTF8Encoding();
-
-
-			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
-
-
-#if(!PublicRelease)
-			if(args.Length == 0) args = SetArguments();
-#endif
-
+		tryOldCmd:
 			try {
 				var clArgParser = CreateCLArgParser();
 				if(args.Length == 0 || args.All(ldArg => ldArg.Trim().Equals(string.Empty))) {
-					Console.WriteLine("Help:    http://wiki.anidb.info/w/Avdump2)");
+					Console.WriteLine("Help:    http://wiki.anidb.info/w/Avdump2");
 					Console.WriteLine("Version: " + appVersion);
 					Console.WriteLine("Usage:   AVDump2CL.exe [--options] <file/folder> [<file/folder> ...]");
 					Console.WriteLine();
@@ -317,10 +313,12 @@ namespace AVDump2CL {
 					Console.WriteLine("For a quickstart use \"AVDump2CL.exe --Auth=<UserName>:<APIKey> <Path>\"");
 					Console.WriteLine("Visit anidb.net/perl-bin/animedb.pl?show=profile (Account Tab) to set key");
 					Console.ReadKey();
-					return;
+					return false;
 				}
+				DebugWrite("Main: Arg Parser created");
 
-				if(!clArgParser.ParseArgs(args)) return;
+				if(!clArgParser.ParseArgs(args)) return false;
+				DebugWrite("Main: Args parsed");
 
 				var uselessCombination = true;
 				if((switches & (eSwitches.UseAllHashes | eSwitches.HashingSpeedTest)) != 0) uselessCombination = false;
@@ -330,76 +328,237 @@ namespace AVDump2CL {
 				if(uselessCombination) {
 					ColoredWriteLine(ConsoleColor.Red, "Combination of arguments is invalid (Nothing to do)", true);
 					Pause();
-					return;
+					return false;
 				}
 
 			} catch(Exception ex) {
-				ColoredWriteLine(ConsoleColor.Red, "Error while interpreting commandline arguments", true);
-				ColoredWriteLine(ConsoleColor.Red, ex.Message + (ex.InnerException != null ? "\n" + ex.InnerException.Message : ""), true);
-				Console.WriteLine("Press any alpha-numeric key to continue");
-				Pause();
-				return;
-			}
-
-
-			//args = ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray();
-			//try {
-			//    if(!ParseClOptions(ArgsParser.Parse(Environment.CommandLine).Skip(1).ToArray())) return;
-			//} catch(Exception) {
-			//    ColoredWriteLine(ConsoleColor.Red, "Error while interpreting commandline arguments", true);
-			//    Console.WriteLine("Press any alpha-numeric key to continue");
-			//    Pause();
-			//    return;
-			//}
-
-
-			if(!SelfCheck()) return;
-
-			if((switches & eSwitches.HashingSpeedTest) != 0) {
-				if(mediaLst.Count == 1 && File.Exists(mediaLst[0])) {
-					Console.WriteLine("File: " + mediaLst[0]);
-					Console.WriteLine("Size: " + (new FileInfo(mediaLst[0]).Length >> 20) + "mb");
-					Console.WriteLine("Reading...");
-					var fileStream = File.OpenRead(mediaLst[0]);
-					var b = new byte[blockSize * 1024];
-					var sw = new Stopwatch();
-					sw.Start();
-					while(fileStream.Read(b, 0, b.Length) != 0) {
-						if(sw.Elapsed.Seconds % 2 == 0) { Console.CursorLeft = 0; Console.Write(fileStream.Position * 100 / fileStream.Length + "%"); }
-					}
-					sw.Stop();
-					Console.CursorLeft = 0;
-					Console.WriteLine("100%");
-					Console.WriteLine("Elapsed: " + sw.Elapsed.TotalSeconds + "s");
-					Console.WriteLine("Speed: " + ((new FileInfo(mediaLst[0]).Length >> 20) / sw.Elapsed.TotalSeconds).ToString("0.00") + "mb/s (may be inaccurate due to read caching)");
-					Console.WriteLine();
+				if(!triedOldCmd && ConvertOldArgs(ref args)) {
+					triedOldCmd = true;
+					goto tryOldCmd; //Well, Sue me 
+				} else {
+					ColoredWriteLine(ConsoleColor.Red, "Error while interpreting commandline arguments", true);
+					ColoredWriteLine(ConsoleColor.Red, ex.Message + (ex.InnerException != null ? "\n" + ex.InnerException.Message : ""), true);
+					Console.WriteLine("Press any alpha-numeric key to continue");
+					Pause();
+					return false;
 				}
+			}
 
-				var container = CreateContainer(blockCount, blockSize);
-				Dictionary<string, IBlockConsumer> blockConumsers;
-				var e = new FileEnvironment(null, container, null, DateTime.Now, 1, 0, 4 * 1024 * 1024 * 1024L, 0);
-
-
-				ExecuteBlockConsumers(e, out blockConumsers, new NullStream(e.TotalBytes));
-				Pause();
-				return;
+			if(triedOldCmd) {
+				ColoredWriteLine(ConsoleColor.Red, "Please update your command line arguments. Refer to --Help");
+				ColoredWriteLine(ConsoleColor.Red, "Converted Args: " + string.Join(" ", args
+					.Where(ldArg => ldArg.StartsWith("-"))
+					.Select(ldArg => ldArg.Contains(" ") && ldArg.Contains("=") ? ldArg.Substring(0, ldArg.IndexOf('=')) + "=\"" + ldArg.Substring(ldArg.IndexOf('=')+1) + "\"" : ldArg)
+					.ToArray()
+				));
+				Thread.Sleep(1000);
 			}
 
 
-			ProcessMedia(new List<string>(mediaLst));
-			if((switches & eSwitches.MonitorFolder) != 0) MonitorFiles();
+			return true;
+		}
+		private static bool ConvertOldArgs(ref string[] origArgs) {
+			int? ms = null;
+			var args = origArgs.ToArray();
 
-			if((switches & eSwitches.PauseWhenDone) != 0) {
-				Console.WriteLine("Press any alpha-numeric key to continue");
-				Pause();
+			var map = "M>M;X>m;x>t;y>C;Y>c;c>R;m>Mon;p>p;q>P;r>r;t>;T>;w>q;z>;H>B;U>U;0>0;1>1;2>2;3>3;4>4;5>5;6>6;a>a;e>PrintEd2kLink;d>PrintAniDBLink;D>OpenAniDBLink;u>".Split(';').ToDictionary(ldStr => ldStr.Split('>')[0][0], ldStr => ldStr.Split('>')[1]);
+
+			try {
+				for(int i = 0;i < args.Length;i++) {
+					var arg = args[i].ToLower();
+
+					if(arg.StartsWith("-ac:")) {
+						args[i] = "--Auth=" + args[i].Substring("-ac:".Length);
+
+					} else if(arg.StartsWith("-log:")) {
+						args[i] = "--Log=" + args[i].Substring("-log:".Length);
+
+					} else if(arg.StartsWith("-done:")) {
+						args[i] = "--Done=" + args[i].Substring("-done:".Length);
+
+					} else if(arg.StartsWith("-acerr:")) {
+						args[i] = "--ACErr=" + args[i].Substring("-acerr:".Length);
+
+					} else if(arg.StartsWith("-crcerr:")) {
+						args[i] = "--CRCErr=" + args[i].Substring("-crcerr:".Length);
+
+					} else if(arg.StartsWith("-extdiff:")) {
+						args[i] = "--ExtDiff=" + args[i].Substring("-extdiff:".Length);
+
+					} else if(arg.StartsWith("-exp:")) {
+						args[i] = "--Exp=" + args[i].Substring("-exp:".Length);
+
+					} else if(arg.StartsWith("-hlog:")) {
+						args[i] = "--HLog=" + args[i].Substring("-hlog:".Length);
+
+					} else if(arg.StartsWith("-ms:")) {
+						ms = int.Parse(args[i].Substring(4));
+						//args[i] = "--Done=" + args[i].Substring("-ms:".Length);
+
+					} else if(arg.StartsWith("-ext:")) {
+						args[i] = "--Done=" + args[i].Substring("-ext:".Length);
+
+					} else if(arg.StartsWith("-bsize:")) {
+						args[i] = "--BSize=" + args[i].Substring("-bsize:".Length);
+
+					} else if(arg.StartsWith("-tout:")) {
+						args[i] = "--TOut=" + args[i].Substring("-tout:".Length);
+
+					} else if(arg.StartsWith("-lport:")) {
+						args[i] = "--LPort=" + args[i].Substring("-lport:".Length);
+
+					} else if(arg.StartsWith("-host:")) {
+						args[i] = "--Host=" + args[i].Substring("-host:".Length);
+
+					} else if(arg.StartsWith("-noerr:")) {
+						args[i] = "--NoErr" + args[i].Substring("-noerr:".Length);
+
+					} else if(args[i].StartsWith("-")) {
+						List<string> argsToAdd = new List<string>();
+						for(int j = 1;j < args[i].Length;j++) {
+							if(!map.ContainsKey(args[i][j])) return false;
+							string value = map[args[i][j]];
+
+							args[i] = args[i].Replace(args[i][j].ToString(), value.Length == 1 ? value[0].ToString() : "");
+							if(value.Length > 1) { argsToAdd.Add(value); j--; }
+						}
+
+
+						var offset = 0;
+						if(argsToAdd.Count != 0) {
+							Array.Resize(ref args, args.Length + argsToAdd.Count);
+							for(int j = args.Length - 1;j >= i + argsToAdd.Count;j--) args[j] = args[j - argsToAdd.Count];
+							for(int j = 0;j < argsToAdd.Count;j++) {
+								args[i + 1 + j] = "--" + argsToAdd[j] + (argsToAdd[j].Equals("Mon") ? "=" + (ms.GetValueOrDefault(3600000) / 1000) : "");
+							}
+							offset += argsToAdd.Count;
+						}
+
+						if(args[i].Length == 1) {
+							for(int j = i;j < args.Length - 1;j++) args[j] = args[j + 1];
+							Array.Resize(ref args, args.Length - 1);
+							offset--;
+						}
+
+						i += offset;
+					//} else {
+					//    args[i] = "\"" + args[i] + "\"";
+					}
+				}
+			} catch(Exception ex) {
+				return false;
 			}
+
+			origArgs = args;
+			return true;
 		}
 
-#if(!PublicRelease)
+
+		static void Main(string[] args) {
+			DebugWrite("Main: Entry");
+			try { int top = Console.CursorTop; Console.CursorTop = 1; Console.CursorTop = top; hasConsole = true; } catch(Exception) { switches |= eSwitches.SupressProgress; hasConsole = false; }
+			DebugWrite("Main: After Consolewindow check");
+
+			var consoleIn = Console.In;
+			Console.SetOut(new ConsoleOutFilter(Console.Out));
+			DebugWrite("Main: Console output filter set");
+
+			if((switches & eSwitches.UseUTF8OutputStream) != 0) Console.OutputEncoding = new UTF8Encoding();
+
+
+			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+			AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
+
+
+#if(Debug)
+			if(args.Length == 0) args = SetArguments();
+#endif
+
+			if(!ParseArgs(args)) return;
+
+			DebugWrite("Main: Args set and valid");
+
+			DebugWrite("Main: Before Check");
+			if(!SelfCheck()) return;
+			DebugWrite("Main: Check Done");
+
+			if((switches & eSwitches.HashingSpeedTest) != 0) { Benchmark(); return; }
+
+			DebugWrite("Main: Entering ProcessMedia");
+			ProcessMedia(new List<string>(mediaLst));
+			DebugWrite("Main: Left ProcessMedia");
+
+			if((switches & eSwitches.MonitorFolder) != 0) MonitorFiles();
+			if((switches & eSwitches.PauseWhenDone) != 0) { Console.WriteLine("Press any alpha-numeric key to continue"); Pause(); }
+		}
+
+
+		private static void Benchmark() {
+			//var bla = new BlockConsumerContainer(16, 4 * 1024 * 1024);
+			//bla.RegisterBlockConsumer("MKV", new MatroskaParser("MKV"));
+			//bla.AddBlockConsumer("MKV");
+
+			//var watch = new Stopwatch();
+			//watch.Start();
+			//bla.Start(File.OpenRead(mediaLst[0]));
+			//bla.Join();
+			//watch.Stop();
+			//Console.WriteLine(watch.ElapsedMilliseconds);
+			//Console.WriteLine();
+
+			if(mediaLst.Count == 1 && File.Exists(mediaLst[0])) {
+				Console.WriteLine("File: " + mediaLst[0]);
+				Console.WriteLine("Size: " + (new FileInfo(mediaLst[0]).Length >> 20) + "mb");
+				Console.WriteLine("Reading...");
+				var fileStream = File.OpenRead(mediaLst[0]);
+				var b = new byte[blockSize * 1024];
+				var sw = new Stopwatch();
+				sw.Start();
+				while(fileStream.Read(b, 0, b.Length) != 0) {
+					if(sw.Elapsed.Seconds % 2 == 0) { Console.CursorLeft = 0; Console.Write(fileStream.Position * 100 / fileStream.Length + "%"); }
+				}
+				sw.Stop();
+				Console.CursorLeft = 0;
+				Console.WriteLine("100%");
+				Console.WriteLine("Elapsed: " + sw.Elapsed.TotalSeconds + "s");
+				Console.WriteLine("Speed: " + ((new FileInfo(mediaLst[0]).Length >> 20) / sw.Elapsed.TotalSeconds).ToString("0.00") + "mb/s (may be inaccurate due to read caching)");
+				Console.WriteLine();
+			}
+
+			var container = CreateContainer(blockCount, blockSize);
+			Dictionary<string, IBlockConsumer> blockConumsers;
+			var e = new FileEnvironment(null, container, null, DateTime.Now, 1, 0, 4 * 1024 * 1024 * 1024L, 0);
+
+
+			ExecuteBlockConsumers(e, out blockConumsers, new NullStream(e.TotalBytes));
+			Pause();
+		}
+
+
+
+#if(Debug)
 		private static string[] SetArguments() {
 			return new string[] {
-				@"D:\My Stuff\µT\Anime\[Commie] Steins;Gate - NCED [BD 720p AAC] [10bit] [C706859E].mkv",
-				"-Cp"
+				//@"-crcerr:blabla2.txt",
+				//@"-p",
+				//@"-exp:blabla.txt",
+				//@"-1",
+				//"--Mon=1",
+				//"--help",
+
+				//@"E:\Anime",
+				//"--UseCWD",
+				"-CPp",
+				//"-exp:d:bla.txt",
+				@"--Ext=tt",
+				//@"--Done=log_test_done.txt",
+				//@"--Log=log_test_log.txt",
+				//@"--ExtDiff=log_test_extdiff.txt",
+				//@"--FixExt=log_test_extfix.txt",
+				//@"--ACErr=log_test_acerr.txt",
+				//@"--CrcErr=log_test_crcerr.txt",
+				//@"--Debug=debug.log",
+				//@"--Host=127.0.0.1:9002",
 			};
 		}
 #endif
@@ -420,40 +579,62 @@ namespace AVDump2CL {
 			var searchOption = switches != eSwitches.ExcludeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
 			long processedBytes = 0, totalBytes;
+			sentACReqs = 0;
+			failedACReqs = 0;
 
+			DebugWrite("ProcessMedia: GetFiles");
 #if(PublicRelease)
 			var files = GetFiles(mediaLst, searchOption, processExtensions, out totalBytes);
 #else
 			var files = GetFiles(mediaLst, searchOption, processExtensions, out totalBytes);
 #endif
+			DebugWrite("ProcessMedia: GetFiles Done");
 
 			if(files.Count == 0) Console.WriteLine("No files to process");
 
+
 			FileEnvironment e;
+			bool fatalExceptionThrown = false;
+			var retryOnIOExCount = retriesOnIOException;
 			var container = CreateContainer(blockCount, blockSize);
 			for(int i = 0;i < files.Count;i++) {
+				DebugWrite("ProcessMedia: Entering ProcessMediaFile");
 				e = new FileEnvironment(appVersion, container, files[i], startedOn, files.Count, i, totalBytes, processedBytes);
 				try {
 					ProcessMediaFile(e);
+					retryOnIOExCount = retriesOnIOException;
+				} catch(FatalException ex) {
+					e.AddException("Fatal error while processing the file.", ex);
+					fatalExceptionThrown = true;
+				} catch(IOException ex) {
+					if(--retryOnIOExCount != 0) {
+						ColoredWriteLine(ConsoleColor.Red, "File processing failed with an IOException. Retrying...", true);
+						i--;
+					} else {
+						ColoredWriteLine(ConsoleColor.Red, "File processing failed " + retriesOnIOException + " times with an IOException. Skipping...", true);
+						retryOnIOExCount = retriesOnIOException;
+					}
+
 				} catch(Exception ex) {
 					e.AddException("Unhandled error while processing the file.", ex);
 				}
+				DebugWrite("ProcessMedia: Left ProcessMediaFile");
 				container.Reset();
 				processedBytes += e.File.Length;
 
 				if(e.Exceptions.Count != 0) {
-					var exElem = e.Exceptions.ToXElement(true);
-
-					string exPath = Path.Combine(AppPath, "Error");
-					string exFileName = "Err " + DateTime.Now.ToString("yyyyMMdd HH.mm.ss.ffff") + ".xml";
-					if(!Directory.Exists(exPath)) Directory.CreateDirectory(exPath);
-
-					using(var writer = new SafeXmlWriter(Path.Combine(exPath, exFileName), Encoding.Unicode)) exElem.Save(writer);
+					try {
+						var exElem = e.Exceptions.ToXElement(true);
+						string exPath = Path.Combine(CurrentDirectory, "Error");
+						string exFileName = "Err " + DateTime.Now.ToString("yyyyMMdd HH.mm.ss.ffff") + ".xml";
+						if(!Directory.Exists(exPath)) Directory.CreateDirectory(exPath);
+						using(var writer = new SafeXmlWriter(Path.Combine(exPath, exFileName), Encoding.Unicode)) exElem.Save(writer);
+					} catch(Exception) { }
 
 #if(HasACreq)
 					if(username != null && password != null && (switches & eSwitches.NoErrorReporting) == 0) {
 						try {
-							exElem = e.Exceptions.ToXElement(false);
+							var exElem = e.Exceptions.ToXElement(false);
 							MemoryStream memStream = new MemoryStream();
 							using(var writer = new SafeXmlWriter(memStream, Encoding.ASCII)) exElem.Save(writer);
 
@@ -463,23 +644,30 @@ namespace AVDump2CL {
 #endif
 				}
 
+				if(fatalExceptionThrown) Environment.Exit(1);
+
 				if((switches & eSwitches.PauseWhenFileDone) != 0) {
 					Console.WriteLine("Press any alpha-numeric key to continue");
 					Pause();
 				}
+
 			}
 
+
+			DebugWrite("ProcessMedia: Left loop, wait for dumping to finish");
 #if(HasACreq)
 			if(anidb != null) {
 				while(anidb.UnsentQueryCount != 0) {
-					Console.WriteLine("Unsent ACReqs: " + anidb.UnsentQueryCount + "  ");
+					Console.WriteLine("ACReq( Done: " + sentACReqs + " Todo: " + (files.Count - sentACReqs - failedACReqs - anidb.UnsentQueryCount) + " Failed: " + failedACReqs + " Pending: " + anidb.UnsentQueryCount + " )");
 					if(hasConsole) Console.SetCursorPosition(0, Console.CursorTop - 1);
 					Thread.Sleep(200);
 				}
+				Console.WriteLine("ACReq( Done: " + sentACReqs + " Todo: " + (files.Count - sentACReqs - failedACReqs - anidb.UnsentQueryCount) + " Failed: " + failedACReqs + " Pending: " + anidb.UnsentQueryCount + " )");
 				anidb.Stop();
 				anidb.Join();
 			}
 #endif
+			DebugWrite("ProcessMedia: Done");
 
 
 			isProcessing = false;
@@ -592,9 +780,9 @@ namespace AVDump2CL {
 			DebugWrite("WriteLogs: After CreateInfoProvider");
 
 			var detExt = p[StreamType.General, 0, EntryKey.Extension] != null ? p[StreamType.General, 0, EntryKey.Extension].Value.ToLower() : null;
-			var ext = e.File.Extension.Length == 1 ? "" : e.File.Extension.Substring(1).ToLower();
+			var ext = e.File.Extension.Length <= 1 ? "" : e.File.Extension.Substring(1).ToLower();
 
-			if(!string.IsNullOrEmpty(extFixPath) && !ext.Equals(detExt)) {
+			if(!string.IsNullOrEmpty(extFixPath) && !string.IsNullOrEmpty(detExt) && !ext.Equals(detExt)) {
 				try {
 					if(!detExt.Contains(' ')) {
 						e.File.MoveTo(Path.ChangeExtension(e.File.FullName, detExt));
@@ -635,10 +823,11 @@ namespace AVDump2CL {
 				if((switches & eSwitches.HashOutput) != 0) log += Info.CreateHashLog(e.File.FullName, p);
 
 				if(logPath != null && !String.IsNullOrEmpty(log)) AppendAllText(logPath, log + Environment.NewLine + Environment.NewLine, "Couldn't update logfile");
+			} catch(FatalException ex) {
+				throw;
 			} catch(Exception ex) {
 				e.AddException("Error while generating info report", ex);
 			}
-
 			#endregion
 
 			if(!string.IsNullOrEmpty(log)) Console.WriteLine(log);
@@ -743,7 +932,7 @@ namespace AVDump2CL {
 		}
 
 		private static bool SelfCheck() {
-
+			DebugWrite("SelfCheck: 1");
 			var waitHandle = new AutoResetEvent(true);
 			try {
 				waitHandle.WaitOne(10);
@@ -753,6 +942,7 @@ namespace AVDump2CL {
 				return false;
 			}
 			waitHandle.Close();
+			DebugWrite("SelfCheck: 2");
 
 			//#####################################################
 
@@ -761,6 +951,7 @@ namespace AVDump2CL {
 				Pause();
 				return false;
 			}
+			DebugWrite("SelfCheck: 3");
 
 			//#####################################################
 
@@ -770,6 +961,7 @@ namespace AVDump2CL {
 				Pause();
 				return false;
 			}
+			DebugWrite("SelfCheck: 4");
 
 			//#####################################################
 
@@ -788,6 +980,7 @@ namespace AVDump2CL {
 				Pause();
 				return false;
 			}
+			DebugWrite("SelfCheck: 5");
 
 			if(!string.IsNullOrEmpty(username)) {
 				if(AniDB.CheckMILHash()) {
@@ -796,6 +989,7 @@ namespace AVDump2CL {
 					return false;
 				}
 
+				DebugWrite("SelfCheck: 5a");
 				int tries = 5;
 				while(tries != 0) {
 					try {
@@ -808,15 +1002,23 @@ namespace AVDump2CL {
 					ColoredWriteLine(ConsoleColor.Red, "Couldn't resolve host " + hostAddress, true);
 					return false;
 				}
+				DebugWrite("SelfCheck: 5b");
 
 				anidb = new AniDB(AcreqResult, localPort);
 				var result = anidb.TestConnectivity(host, timeout * 1000, "avdumplib", appVersion.Build, username.ToLower(), password);
 				if(result.State != ACReq.CommitState.Success) {
 					ColoredWriteLine(ConsoleColor.Red, "Couldn't establish session with anidb (" + result.State + ")", true);
+					if(result.Error != null) {
+						ColoredWriteLine(ConsoleColor.Red, result.Error.Message, true);
+						if(result.Error.InnerException != null) ColoredWriteLine(ConsoleColor.Red, result.Error.InnerException.Message, true);
+					}
+
 					Pause();
 					return false;
 				}
+				DebugWrite("SelfCheck: 5c");
 			}
+			DebugWrite("SelfCheck: 6");
 #endif
 
 			//#####################################################
@@ -837,6 +1039,7 @@ namespace AVDump2CL {
 			bool resentCreq = false;
 			switch(result.State) {
 				case ACReq.CommitState.Success:
+					sentACReqs++;
 					if(doneListPath != null) {
 						AppendAllText(doneListPath, e.File.FullName + Environment.NewLine, "Couldn't update donelist file");
 						int index = doneListContent.BinarySearch(e.File.FullName);
@@ -849,16 +1052,18 @@ namespace AVDump2CL {
 						queryTag.IncreaseTries();
 						resentCreq = true;
 					} else {
+						failedACReqs++;
 						if(!string.IsNullOrEmpty(acErrListPath)) AppendAllText(acErrListPath, e.File.FullName + " ACreq " + result.State.ToString() + Environment.NewLine, "Couldn't update acerr file");
 					}
 					break;
 
 				case ACReq.CommitState.WrongVersionOrPassOrName:
+					failedACReqs++;
 					ColoredWriteLine(ConsoleColor.Red, "Either the client is outdated or your username/password combination is wrong.", true);
 					Pause();
 					break;
 
-				case ACReq.CommitState.InternalError: break;
+				case ACReq.CommitState.InternalError: failedACReqs++; break;
 			}
 
 			return resentCreq;
@@ -886,7 +1091,7 @@ namespace AVDump2CL {
 				for(int i = 0;i < progress.BlockConsumerCount;i++) {
 					output += progress.Name(i).PadRight(maxNameLength + 1) + "[" + "".PadRight(consoleWidth - maxNameLength - 4) + "]\n";
 				}
-				output += "\n" + "Progress".PadRight(maxNameLength + 1) + "[" + "".PadRight(consoleWidth - maxNameLength - 4) + "]\n\n";
+				output += "\n" + "Progress".PadRight(maxNameLength + 1) + "[" + "".PadRight(consoleWidth - maxNameLength - 4) + "]\n\n\n";
 
 				Console.Write(output);
 			}
@@ -908,23 +1113,20 @@ namespace AVDump2CL {
 						charCount = bufferSize != 0 ? (int)((bufferSize / (double)blockCount) * barLength) : 0;
 						charCount = progress.ProcessedBytes(i) == fileSize ? 0 : charCount;
 
-						Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 3);
+						Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 4);
 						Console.Write("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
 					}
-					Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - 2);
+					Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - 3);
 					charCount = fileSize != 0 ? (int)((double)bytesProcessed / (double)fileSize * barLength) : barLength;
 					Console.WriteLine("".PadLeft(charCount, '*') + "".PadRight(barLength - charCount, ' '));
+
+
 
 					output =
 					  "Position: " + (bytesProcessed >> 20).ToString().PadLeft(3) + "MB/" + (fileSize >> 20) + "MB  " +
 					  "Elapsed time: " + progress.TimeElapsed.ToFormatedString() + " " +
-					  "Speed: " + Math.Max((int)((bytesProcessed >> 20) / progress.TimeElapsed.TotalSeconds), 0) + "MB/s"
-#if(HasACreq)
- + (username != null ? " ACreqs Todo: " + anidb.UnsentQueryCount : "")
-#endif
-;
+					  "Speed: " + Math.Max((int)((bytesProcessed >> 20) / progress.TimeElapsed.TotalSeconds), 0) + "MB/s";
 
-					//"BufUnderruns: " + progress.BufferUndrrunCount;
 					output += "".PadLeft(output.Length < consoleWidth ? consoleWidth - output.Length - 1 : 0, ' ');
 					Console.WriteLine(output);
 				} else {
@@ -940,9 +1142,16 @@ namespace AVDump2CL {
 					  "Bytes: " + (bytesProcessed >> 20) + "MB/" + (e.TotalBytes >> 20) + "MB " +
 					  "Elapsed: " + totalTimeElapsed.ToFormatedString() + " " +
 					  "ETA: " + TimeSpan.FromSeconds(eta).ToFormatedString();
-					output += "".PadLeft(output.Length < consoleWidth ? consoleWidth - output.Length - 1 : 0, ' ');
-					Console.Write(output);
+					//output += "".PadLeft(output.Length < consoleWidth ? consoleWidth - output.Length - 1 : 0, ' ');
+					Console.WriteLine(output.PadRight(consoleWidth - 1));
 				}
+
+#if(HasACreq)
+				if(anidb != null) {
+					output = "ACReq( Done: " + sentACReqs + " Todo: " + (e.TotalFiles - sentACReqs - failedACReqs - anidb.UnsentQueryCount) + " Failed: " + failedACReqs + " Pending: " + anidb.UnsentQueryCount + " )";
+					Console.Write(output.PadRight(consoleWidth - 1));
+				}
+#endif
 
 				if(doLoop) Thread.Sleep(80);
 			} while(doLoop);
@@ -950,7 +1159,7 @@ namespace AVDump2CL {
 
 			if(progress != null) {
 				for(int i = 0;i < progress.BlockConsumerCount;i++) {
-					Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 3);
+					Console.SetCursorPosition(maxNameLength + 2, lastLineIndex - progress.BlockConsumerCount + i - 4);
 					Console.Write(progress.BlockConsumerObj(i).ToString());
 				}
 				Console.SetCursorPosition(0, lastLineIndex);
@@ -1018,7 +1227,11 @@ namespace AVDump2CL {
 			try {
 				milProvider = new MediaInfoProvider(e.File.FullName);
 				DebugWrite("CreateInfoProvider: After MediaInfoProvider");
-			} catch(Exception ex) { e.AddException("Failed to create MediaInfoProvider", ex); noErrors = false; }
+			} catch(FatalException ex) {
+				throw;
+			} catch(Exception ex) {
+				e.AddException("Failed to create MediaInfoProvider", ex); noErrors = false; 
+			}
 
 			try {
 				hashProvider = new HashInfoProvider(blockConsumers.Values.Where(b => b is HashCalculator).Cast<HashCalculator>());
@@ -1049,15 +1262,19 @@ namespace AVDump2CL {
 		private static List<FileInfo> GetFiles(List<string> mediaLst, SearchOption searchOption, HashSet<string> validExtensions, out long totalBytes) {
 			List<FileInfo> files = new List<FileInfo>();
 
+			DateTime lastDiscoverLog = DateTime.Now;
 			long anonTotalBytes = 0;
 			foreach(var media in mediaLst) {
 				FileGetter.TraverseFiles(media, (switches & eSwitches.ExcludeSubFolders) == 0,
 					(fi) => {
-						if(validExtensions == null || (fi.Extension.Length != 0 && validExtensions.Contains(fi.Extension.Substring(1).ToLower()))) {
+						if(validExtensions == null || (fi.Extension.Length != 0 && validExtensions.Contains(fi.Extension.Substring(1).ToLower()) && fi.Length != 0)) {
 							files.Add(fi);
 							anonTotalBytes += fi.Length;
 
-							if((files.Count & 0x3FF) == 0) Console.WriteLine("Discovered " + files.Count + " files");
+							if((DateTime.Now - lastDiscoverLog).TotalSeconds > 0.2) {
+								lastDiscoverLog = DateTime.Now;
+								Console.WriteLine("Discovered " + files.Count + " files");
+							}
 						}
 					},
 
@@ -1078,32 +1295,43 @@ namespace AVDump2CL {
 				}
 			}
 
-			return files.Where(fi => doneListContent.BinarySearch(fi.FullName) < 0).ToList();
+			if((switches & eSwitches.DoneLogFilenameOnly) != 0) {
+				var doneLog = new HashSet<string>(doneListContent.Select(ldPath => Path.GetFileName(ldPath)));
+				return files.Where(fi => doneLog.Contains(fi.Name)).ToList();
+			} else {
+				return files.Where(fi => doneListContent.BinarySearch(fi.FullName) < 0).ToList();
+			}
 		}
 
-
+		public static string CurrentDirectory { get {
+			return ((switches & eSwitches.UseCWD) != 0) ? Environment.CurrentDirectory : AppPath;
+		} }
 		public static string AppPath { get { return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); } }
+
 		private static void GlobalExceptionHandler(object sender, UnhandledExceptionEventArgs e) {
-			string path = Path.Combine(AppPath, "Error");
+			string path = Path.Combine(CurrentDirectory, "Error");
 			string fileName = "Err " + DateTime.Now.ToString("yyyyMMdd HH.mm.ss.ffff") + ".xml";
-			if(!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-			ExceptionXElement ex;
+			ExceptionXElement exElem;
 			try {
-				ex = new ExceptionXElement((Exception)e.ExceptionObject, false);
-			} catch(Exception) {
-				ex = new ExceptionXElement(new Exception("Couldn't save Exception"), false);
+				if(!Directory.Exists(path)) Directory.CreateDirectory(path);
+				exElem = new ExceptionXElement((Exception)e.ExceptionObject, false);
+				using(var writer = new SafeXmlWriter(Path.Combine(path, fileName), Encoding.ASCII)) {
+					exElem.Save(XmlWriter.Create(writer, new XmlWriterSettings { OmitXmlDeclaration = true }));
+				}
+			} catch(UnauthorizedAccessException ex) {
+				exElem = new ExceptionXElement(ex, false);
+
+			} catch(Exception ex) {
+				exElem = new ExceptionXElement(new Exception("Couldn't save Exception", ex), false);
 			}
 
-			using(var writer = new SafeXmlWriter(Path.Combine(path, fileName), Encoding.ASCII)) {
-				ex.Save(XmlWriter.Create(writer, new XmlWriterSettings { OmitXmlDeclaration = true }));
-			}
 
 #if(HasACreq)
 			if(username != null && password != null && (switches & eSwitches.NoErrorReporting) == 0) {
 				try {
 					MemoryStream memStream = new MemoryStream();
-					using(var writer = new SafeXmlWriter(memStream, Encoding.ASCII)) ex.Save(writer);
+					using(var writer = new SafeXmlWriter(memStream, Encoding.ASCII)) exElem.Save(writer);
 					anidb.CommitError(host, timeout * 1000, "avdumplib", appVersion.Build, username.ToLower(), password, memStream.ToArray());
 				} catch(Exception) { }
 			}
@@ -1143,10 +1371,8 @@ namespace AVDump2CL {
 		}
 
 		private static void DebugWrite(string line) {
-			return;
-			Console.ForegroundColor = ConsoleColor.DarkRed;
-			Console.WriteLine(line);
-			Console.ResetColor();
+			if(debugPath == null) return;
+			AppendAllText(debugPath, DateTime.Now.ToString("HH:mm:ss") + " " + line + "\n", "");
 		}
 
 		private static bool CursorVisible {

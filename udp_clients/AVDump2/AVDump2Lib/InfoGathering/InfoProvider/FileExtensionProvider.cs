@@ -41,6 +41,9 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 				new TTSFileType(),
 				new XSSFileType(),
 				new ZeroGFileType(),
+				new SUPFileType(),
+				new FanSubberFileType(),
+				new Sasami2kFileType()
 			};
 
 			using(Stream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read)) {
@@ -224,7 +227,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 				if(count > 20) break;*/
 			}
-			
+
 			if(count == 0) IsCandidate = false;
 		}
 	}
@@ -294,6 +297,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 			if(IsCandidate) {
 				stream.Position = 0;
+				sr.DiscardBufferedData();
 				try {
 					idx = new IDX(sr.ReadToEnd());
 
@@ -358,8 +362,10 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			string line;
 			int i, matches = 0;
 			Regex regex = new Regex(@"\s*\d*,\s*\d*," + "\".*\"");
-			for(i = 0;i < 30;i++) {
+			for(i = 0;i < 50;i++) {
 				line = sr.ReadLine();
+				if(line.Contains(",\"") && !line.EndsWith("\"")) line += sr.ReadLine();
+
 				if(line == null) break;
 				matches += regex.IsMatch(line) ? 1 : 0;
 			}
@@ -393,11 +399,16 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			string line;
 			int i, matches = 0;
 			Regex regex = new Regex(@"^\d*\:\d*\:\d*\.\d*,\d*\:\d*\:\d*\.\d*,.*");
-			for(i = 0;i < 30;i++) {
-				line = sr.ReadLine();
+			for(i = 0;i < 50;i++) {
+				line = sr.ReadLine().Trim();
 				if(line == null) break;
 				if(line.StartsWith("#") || string.IsNullOrEmpty(line)) { i--; continue; };
-				matches += regex.IsMatch(line) ? 1 : 0;
+
+				var isMatch = regex.IsMatch(line);
+				matches += isMatch ? 1 : 0;
+				if(!isMatch) {
+					if(!string.IsNullOrEmpty(line) && line.Average(ldChar => char.IsLetter(ldChar) || char.IsWhiteSpace(ldChar) || char.IsPunctuation(ldChar) ? 1 : 0) > 0.8) { i--; continue; };
+				}
 			}
 			if(matches / (double)i < 0.8 || matches == 0) { IsCandidate = false; return; }
 		}
@@ -437,6 +448,20 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			IsCandidate = str.Contains("script=xombiesub");
 		}
 	}
+	public class SUPFileType : FileType {
+		public SUPFileType() : base("", identifier: "text/SubtitleBitmapFile") { PossibleExtensions = new string[] { "sup" }; type = StreamType.Text; }
+
+		public override void ElaborateCheck(Stream stream) {
+			if(!IsCandidate) return;
+
+			byte[] startingBytes = new byte[12];
+			stream.Read(startingBytes, 0, 12);
+			IsCandidate &= startingBytes[0] == 0x50;
+			IsCandidate &= startingBytes[1] == 0x47;
+			IsCandidate &= startingBytes[10] == 0x16;
+			IsCandidate &= startingBytes[11] == 0x00;
+		}
+	}
 	public class SMILFileType : FileType {
 		public SMILFileType() : base("", identifier: "SMIL") { PossibleExtensions = new string[] { "smil" }; type = StreamType.General; }
 
@@ -454,6 +479,19 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			if(matches == 0) { IsCandidate = false; return; }
 		}
 	}
+	public class FanSubberFileType : FileType {
+		public FanSubberFileType() : base("FanSubber v", identifier: "text/FanSubber") { PossibleExtensions = new string[] { "fsb" }; type = StreamType.Text; }
+
+		public override void ElaborateCheck(Stream stream) {
+			if(!IsCandidate) return;
+			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
+			string line = sr.ReadLine();
+
+			IsCandidate &= Regex.IsMatch(line, @"FanSubber v[0-9]+(\.[0-9]+)?");
+		}
+	}
+
+	public class Sasami2kFileType : FileType { public Sasami2kFileType() : base("// translated by Sami2Sasami", identifier: "text/Sasami2k") { PossibleExtensions = new string[] { "s2k" }; type = StreamType.Text; } }
 
 	public class MpegVideoFileType : FileType { public MpegVideoFileType() : base(new byte[] { 0x00, 0x00, 0x01, 0xB3 }) { PossibleExtensions = new string[] { "mpg" }; type = StreamType.Video; } }
 	public class SamiFileType : FileType {

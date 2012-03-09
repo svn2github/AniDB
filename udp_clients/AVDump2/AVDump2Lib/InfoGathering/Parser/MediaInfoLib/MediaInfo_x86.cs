@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace AVDump2Lib.InfoGathering.Parser.MediaInfoLib {
 	public class MediaInfo_x86 : IMediaInfo {
@@ -54,15 +55,25 @@ namespace AVDump2Lib.InfoGathering.Parser.MediaInfoLib {
 		}
 		~MediaInfo_x86() { MediaInfo_Delete(Handle); }
 		public int Open(String FileName) {
-			if(MustUseAnsi) {
-				IntPtr FileName_Ptr = Marshal.StringToHGlobalAnsi(FileName);
-				int ToReturn = (int)MediaInfoA_Open(Handle, FileName_Ptr);
-				Marshal.FreeHGlobal(FileName_Ptr);
-				return ToReturn;
-			} else {
-				IntPtr stringPtr = Marshal.StringToBSTR(FileName);
-				return (int)MediaInfo_Open(Handle, stringPtr);
+			int retVal = 0;
+			var t = new Thread(obj => {
+				if(MustUseAnsi) {
+					IntPtr FileName_Ptr = Marshal.StringToHGlobalAnsi(FileName);
+					int ToReturn = (int)MediaInfoA_Open(Handle, FileName_Ptr);
+					Marshal.FreeHGlobal(FileName_Ptr);
+					retVal = ToReturn;
+				} else {
+					IntPtr stringPtr = Marshal.StringToBSTR(FileName);
+					retVal = (int)MediaInfo_Open(Handle, stringPtr);
+				}
+			});
+
+			t.Start();
+			if(!t.Join(10000)) {
+				throw new FatalException("MediaInfo Open call timed out");
 			}
+
+			return retVal;
 		}
 		public void Close() { MediaInfo_Close(Handle); }
 		public String Inform() {

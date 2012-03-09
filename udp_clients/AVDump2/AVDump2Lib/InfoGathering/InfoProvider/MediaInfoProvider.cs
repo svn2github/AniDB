@@ -111,6 +111,8 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 				}*/
 				if(indeces[0] == 0 && indeces[2] == 0 && indeces[1] != 0) {
 					Add(EntryKey.Extension, "m4a", null);
+				} else if(indeces[0] != 0  && indeces[1] == 0 && indeces[2] == 0) {
+					Add(EntryKey.Extension, "m4v", null);
 				} else {
 					Add(EntryKey.Extension, "mp4", null);
 				}

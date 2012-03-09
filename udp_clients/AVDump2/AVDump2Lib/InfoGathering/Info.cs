@@ -243,12 +243,12 @@ namespace AVDump2Lib.InfoGathering {
 				if(entry.Key.Entry == EntryKey.Date) {
 					try {
 						value = Convert.ToString((int)(DateTime.ParseExact(entry.Value, "yyyy.MM.dd HH.mm.ss.ffff", CultureInfo.InvariantCulture) - new DateTime(1970, 1, 1)).TotalSeconds, 16);
-					} catch(Exception) {
-						continue;
-					}
+					} catch(Exception) { continue; }
 				} else {
 					value = entry.Value;
 				}
+
+				if(entry.Key.Entry == EntryKey.ColorBitDepth && pair.Key == StreamType.Video && ("8".Equals(entry.Value) || "0".Equals(entry.Value))) continue;
 
 				if(entry.Key.Type == StreamType.Hash) {
 					node.AppendChild(createNode(entry.Unit.ToLower(), entry.Value.ToLower(), "hash"));
@@ -409,7 +409,7 @@ namespace AVDump2Lib.InfoGathering {
 
 			Func<string, string> formatDuration = (ldStr) => {
 				var duration = TimeSpan.FromSeconds(double.Parse(ldStr)).ToString();
-				return duration.Substring(0, duration.IndexOf('.'));
+				return duration.IndexOf(".") < 0 ? duration : duration.Substring(0, duration.IndexOf('.'));
 			};
 
 			string log = "File: " + path + Environment.NewLine;

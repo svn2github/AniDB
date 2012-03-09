@@ -239,6 +239,7 @@
     <Compile Include="CL\ArgGroup.cs" />
     <Compile Include="CL\ArgStructure.cs" />
     <Compile Include="CL\CLManagement.cs" />
+    <Compile Include="FatalException.cs" />
     <Compile Include="HashAlgorithms\Aich.cs" />
     <Compile Include="HashAlgorithms\Tiger.cs" />
     <Compile Include="HashAlgorithms\BlockHashAlgorithm.cs" />
@@ -330,6 +331,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -19,6 +19,7 @@ namespace AVDump2CL {
 
 		//Control
 		ExcludeSubFolders = 1L << 16,
+		UseCWD = 1L << 17,
 		MonitorFolder = 1L << 18,
 		PauseWhenDone = 1L << 20,
 		PauseWhenFileDone = 1L << 21,
@@ -32,6 +33,7 @@ namespace AVDump2CL {
 		HashingSpeedTest = 1L << 30,
 		DumpAllExtensions = 1L << 31,
 		UseUTF8OutputStream = 1L << 32,
+		DoneLogFilenameOnly = 1L << 33,
 
 		DefAudioExtensions = 1L << 34,
 		DefVideoExtensions = 1L << 35,

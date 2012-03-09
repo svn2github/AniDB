@@ -1466,10 +1466,10 @@ namespace AVDump2Lib.BlockConsumers {
 						if(!ProcessElement(reader, elementInfo) && !IsGlobalElement(elementInfo)) {
 							Debug.Print("Unprocessed Item: " + reader.ParentElements.Aggregate<ElementInfo, string>("File", (acc, item) => { return acc + "." + item.ElementType.Name; }) + "." + elementInfo.ElementType.Name);
 						}
-					} catch(Exception) { }
+					} catch(Exception) { throw; }
 				}
 				if(validate) Validate();
-			} catch(Exception) { }
+			} catch(Exception) { throw; }
 
 			reader.LeaveMasterElement();
 		}
