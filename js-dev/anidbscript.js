@@ -8,6 +8,7 @@
  * Add your information to jsVersionArray like so:
  * jsVersionArray.push({"file":"anidbscript.js","version":"1.0"});
  */
+ 
 var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
@@ -1353,15 +1354,50 @@ function search() {
 	var target = document.getElementById("tagsearch");
 	var type = this.parentNode.getElementsByTagName("select")[0].value;
 
-	if(this.value.length >= 3 && (type == "chartags" || type == "animetag" || type == "grouplist" || type == "modtag" || type == "producerlist")) {
+	if(this.value.length >= 3 && (type != "modtag" && type != "mylist")) {
 		// Check if a new search is necessary
 		var ll = lastSearch.length
 		var cl = this.value.length
 		var min = Math.min(ll, cl);
 
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
+			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit=20type=";
 			lastSearch = this.value;
 			switch(type) {
+				case "animelist":
+					url += "anime";
+					break;
+				case "animetag":
+					url += "animetag";
+					break;
+				case "characterlist":
+					url += "character";
+					break;
+				case "chartags":
+					url += "charactertag";
+					break;
+				case "clublist":
+					url += "club";
+					break;
+				case "collectionlist":
+					url += "collection";
+					break;
+				case "creatorlist":
+					url += "creator";
+					break;
+				case "grouplist":
+					url += "group";
+					break;
+				case "songlist":
+					url += "song";
+					break;
+				case "userlist":
+					url += "user";
+					break;
+				default: // unknown or unsupported option
+					target.style.display = "none";
+					return;
+/*
 				case "chartags":
 					var url = 'animedb.pl?show=xmln&t=search&type=chartags&search=';
 					var element = 'chartags';
@@ -1379,13 +1415,27 @@ function search() {
 					var url = 'animedb.pl?show=xml&t=producersearch&search=';
 					var element = 'producer';
 					break;
+*/
 			}
-			xhttpRequestFetch(xhttpRequest(), url + encodeURI(this.value), function(xml) {
+			// hack for local test
+			// url = "search-anime.json";
+			xhttpRequestFetch(xhttpRequest(), url, function(jsonData) {
+				if (jsonData['error'] || jsonData['warning']) {
+					// either a warning or an error are a bit fatal so we stop right here
+					target.style.display = "none";
+					return;
+				}
+				searchData = jsonData['results'];
+				printTags();
+			}, null, 'json');
+/*
+			function(xml) {
 				var root = xml.getElementsByTagName('root').item(0);
 				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
 				searchData = root.getElementsByTagName(element);
 				printTags();
-			});
+			}
+*/
 		} else printTags(); // Print matched
 	} else target.style.display = "none";
 }
@@ -1403,7 +1453,8 @@ function printTags() {
 	var i = 0;
 	var height = 0;
 	for(var n = 0; n < searchData.length; n++) {
-		var tag = searchData[n].getAttribute("name");
+		// var tag = searchData[n].getAttribute("name");
+		var tag = searchData[n]['name'];
 		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
 			var result = document.createElement("li");
 			// do a bit of highlighting //
@@ -1421,7 +1472,8 @@ function printTags() {
 			result.id = 'tag_'+n;
 			result.onclick = function() {
 				var id = Number(this.id.substr(4,this.id.length));
-				var tag = searchData[id].getAttribute("name");
+				//var tag = searchData[id].getAttribute("name");
+				var tag = searchData[id]['name'];
 				search.value = tag;
 				target.style.display = "none";
 			}
