@@ -1349,6 +1349,8 @@ function CookieGetToArray(name, array) {
 var lastSearch = "";
 var seeDebug = false;
 var searchData = [];
+var lastHitCount = 0;
+var searchLimit = 50;
 
 function search() {
 	var target = document.getElementById("tagsearch");
@@ -1360,8 +1362,16 @@ function search() {
 		var cl = this.value.length
 		var min = Math.min(ll, cl);
 
-		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
-			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit=20&type=";
+//		unfortunately the new ranking algoririthm invalidates caching as we used to do it
+//		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
+		// refetch data unless we have value of search hits lower than the limit in that case we can use our cache
+/*
+		alert("lastSearch = "+lastSearch+" ("+ll+")\n"+
+			"search ="+this.value+" ("+cl+")\n"+
+			"method 1 = "+!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)+"\n"+
+			"lastHitCount = "+lastHitCount+" vs searchLimit = "+searchLimit+" = "+(lastHitCount == searchLimit));*/
+		if (!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl) || lastHitCount == searchLimit) { 
+			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit="+searchLimit+"&type=";
 			lastSearch = this.value;
 			switch(type) {
 				case "animelist":
@@ -1418,7 +1428,7 @@ function search() {
 */
 			}
 			// hack for local test
-			// url = "search-anime.json";
+			//url = "search-anime.json";
 			xhttpRequestFetch(xhttpRequest(), url, function(jsonData) {
 				if (jsonData['error'] || jsonData['warning']) {
 					// either a warning or an error are a bit fatal so we stop right here
@@ -1426,6 +1436,7 @@ function search() {
 					return;
 				}
 				searchData = jsonData['results'];
+				lastHitCount = searchData.length;
 				printTags();
 			}, null, 'json');
 /*
@@ -1436,7 +1447,10 @@ function search() {
 				printTags();
 			}
 */
-		} else printTags(); // Print matched
+		} else {
+//			alert("Using cached data");
+			printTags(); // Print matched
+		}
 	} else target.style.display = "none";
 }
 
