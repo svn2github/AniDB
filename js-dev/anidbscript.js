@@ -1361,7 +1361,7 @@ function search() {
 		var min = Math.min(ll, cl);
 
 		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
-			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit=20type=";
+			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit=20&type=";
 			lastSearch = this.value;
 			switch(type) {
 				case "animelist":
