@@ -1350,7 +1350,7 @@ var lastSearch = "";
 var seeDebug = false;
 var searchData = [];
 var lastHitCount = 0;
-var searchLimit = 50;
+var searchLimit = 20;
 
 function search() {
 	var target = document.getElementById("tagsearch");
@@ -1428,15 +1428,27 @@ function search() {
 */
 			}
 			// hack for local test
-			//url = "search-anime.json";
+			// url = "search-anime.json";
 			xhttpRequestFetch(xhttpRequest(), url, function(jsonData) {
 				if (jsonData['error'] || jsonData['warning']) {
 					// either a warning or an error are a bit fatal so we stop right here
 					target.style.display = "none";
 					return;
 				}
-				searchData = jsonData['results'];
-				lastHitCount = searchData.length;
+				// we need to take care of repititions
+				var results = new Array();
+				var tmp = new Array(); // array for valid tags
+				var tmpSearchData = jsonData['results'];
+				for(var n = 0; n < tmpSearchData.length; n++) {
+					var name = tmpSearchData[n]['name'];
+					if (tmp.indexOf(name) < 0) {
+						results.push(tmpSearchData[n]);
+						tmp.push(name);
+					}
+				}
+				//searchData = jsonData['results'];
+				searchData = results;
+				lastHitCount = tmpSearchData.length;
 				printTags();
 			}, null, 'json');
 /*
