@@ -1364,12 +1364,7 @@ function search() {
 
 //		unfortunately the new ranking algoririthm invalidates caching as we used to do it
 //		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
-		// refetch data unless we have value of search hits lower than the limit in that case we can use our cache
-/*
-		alert("lastSearch = "+lastSearch+" ("+ll+")\n"+
-			"search ="+this.value+" ("+cl+")\n"+
-			"method 1 = "+!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)+"\n"+
-			"lastHitCount = "+lastHitCount+" vs searchLimit = "+searchLimit+" = "+(lastHitCount == searchLimit));*/
+// 		refetch data unless we have value of search hits lower than the limit in that case we can use our cache
 		if (!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl) || lastHitCount == searchLimit) { 
 			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit="+searchLimit+"&type=";
 			lastSearch = this.value;
@@ -1407,28 +1402,9 @@ function search() {
 				default: // unknown or unsupported option
 					target.style.display = "none";
 					return;
-/*
-				case "chartags":
-					var url = 'animedb.pl?show=xmln&t=search&type=chartags&search=';
-					var element = 'chartags';
-					break;
-				case "animetag":
-				case "modtag":
-					var url = 'animedb.pl?show=xml&t=tagsearch&search=';
-					var element = 'tag';
-					break;
-				case "grouplist":
-					var url = 'animedb.pl?show=xml&t=groupsearch&search=';
-					var element = 'group';
-					break;
-				case "producerlist":
-					var url = 'animedb.pl?show=xml&t=producersearch&search=';
-					var element = 'producer';
-					break;
-*/
 			}
 			// hack for local test
-			// url = "search-anime.json";
+			//url = "search-anime.json";
 			xhttpRequestFetch(xhttpRequest(), url, function(jsonData) {
 				if (jsonData['error'] || jsonData['warning']) {
 					// either a warning or an error are a bit fatal so we stop right here
@@ -1446,23 +1422,12 @@ function search() {
 						tmp.push(name);
 					}
 				}
-				//searchData = jsonData['results'];
 				searchData = results;
 				lastHitCount = tmpSearchData.length;
 				printTags();
 			}, null, 'json');
-/*
-			function(xml) {
-				var root = xml.getElementsByTagName('root').item(0);
-				if (!root) { if (seeDebug) alert('Error: Could not get root node'); return; }
-				searchData = root.getElementsByTagName(element);
-				printTags();
-			}
-*/
-		} else {
-//			alert("Using cached data");
+		} else // how rare, we can use cache
 			printTags(); // Print matched
-		}
 	} else target.style.display = "none";
 }
 
@@ -1478,11 +1443,35 @@ function printTags() {
 	// Loop search result and filter
 	var i = 0;
 	var height = 0;
-	for(var n = 0; n < searchData.length; n++) {
+	var len = Math.min(searchData.length,6);
+	for(var n = 0; n < len; n++) {
 		// var tag = searchData[n].getAttribute("name");
 		var tag = searchData[n]['name'];
+		var picurl = searchData[n]['picurl'];
+		var link = searchData[n]['link']
 		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
 			var result = document.createElement("li");
+			result.style.display = "block";
+			result.style.clear = "both";
+			var a = document.createElement("a");
+			if (link)
+				a.href = link;
+			if (picurl) { // we have thumbnails, so add them
+				var img = document.createElement("img");
+				img.className = "thumb";
+				img.style.cssFloat = "left";
+				img.style.margin = "4px";
+				img.src = picurl;
+				img.alt = "image";
+				if (link)
+					a.appendChild(img);
+				else
+					result.appendChild(img);
+			}
+			var suggestionDiv = document.createElement("div");
+			suggestionDiv.className = "search sugestion";
+			suggestionDiv.style.display = "block";
+			suggestionDiv.style.padding = "6px 4px 5px 50px";
 			// do a bit of highlighting //
 			var b = document.createElement('b');
 			var si = tag.toLowerCase().indexOf(search.value.toLowerCase());
@@ -1490,11 +1479,16 @@ function printTags() {
 				var firstBlock = document.createTextNode(tag.substring(0,si));
 				var middleBlock = document.createTextNode(tag.substr(si,search.value.length));
 				var lastBlock = document.createTextNode(tag.substring(si+search.value.length,tag.length));
-				result.appendChild(firstBlock);
+				suggestionDiv.appendChild(firstBlock);
 				b.appendChild(middleBlock);
-				result.appendChild(b);
-				result.appendChild(lastBlock);
+				suggestionDiv.appendChild(b);
+				suggestionDiv.appendChild(lastBlock);
 			} else continue;
+			if (link) {
+				a.appendChild(suggestionDiv);
+				result.appendChild(a);
+			} else
+				result.appendChild(suggestionDiv);
 			result.id = 'tag_'+n;
 			result.onclick = function() {
 				var id = Number(this.id.substr(4,this.id.length));
@@ -1508,6 +1502,16 @@ function printTags() {
 			target.appendChild(result);
 			i++;
 		}
+	}
+	if (searchData.length > 6) {
+		var showMore = document.createElement("li");
+		showMore.style.display = "block";
+		showMore.style.clear = "both";
+		var a = document.createElement("a");
+		a.onlcick = function() { document.getElementById("layout-search").getElementsByTagName("form").submit(); }
+		a.appendChild(document.createTextNode("Show all results for \""+search.value+"\"..."));
+		showMore.appendChild(a);
+		target.appendChild(showMore);
 	}
 
 	target.style.display = "block";
