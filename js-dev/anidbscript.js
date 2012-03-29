@@ -1350,7 +1350,7 @@ var lastSearch = "";
 var seeDebug = false;
 var searchData = [];
 var lastHitCount = 0;
-var searchLimit = 20;
+var searchLimit = 50;
 
 function search() {
 	var target = document.getElementById("tagsearch");
