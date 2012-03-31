@@ -1403,7 +1403,7 @@ function parseSearchResults(jsonData) {
 		case "collectionlist": typeSearch = true; relKey = "collectionid"; orderArray = ["1","2","3"]; break;
 		case "creatorlist": typeSearch = true; relKey = "creatorid"; orderArray = ["1","2","3","4","5","6","7"]; break;
 		case "songlist": typeSearch = true; relKey = "songid"; orderArray = ["1","2","3"]; break;
-		case "grouplist" // groups need pre-processing because of the short and long names
+		case "grouplist": // groups need pre-processing because of the short and long names
 			for (var n = 0; n < tmpSearchData.length; n++) {
 				var name = tmpSearchData[n]['name'];
 				var shortName = tmpSearchData[n]['shortName'];
