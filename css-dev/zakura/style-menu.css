@@ -22,7 +22,7 @@
 	text-transform: capitalize;
 	color: #7c87d8;
 	padding: 0.2em 0.7em;
-	padding: -1px;
+	/*padding: -1px;*/
 	display: block;
 	font-size: 0.95em;
 }

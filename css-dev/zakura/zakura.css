@@ -5,15 +5,15 @@
 @import "../common/layout/global/all.css";
 @import "../common/layout/page/all.css";
 
-@import "../icons/all.css";
-@import "../icons/zakura.css";
-
 @import "../common/style/color/special.css";
 @import "../common/style/color/forum-default.css";
 @import "../common/style/text/default.css";
 
 @import "../common/style/content/page-anime.css";
 @import "../common/style/content/page-main.css";
+
+@import "../icons/all.css";
+@import "../icons/zakura.css";
 
 @import "layout-macro.css";
 
@@ -37,11 +37,11 @@
 
 /** TABS **/
 /** TABBING PANE **/
-
+/*
 #layout-main div.tabbed_pane div.body div.* {
 	left: 0px;
 }
-
+*/
 #layout-tabs ul.main-tabs li:hover,
 #layout-tabs ul.main-tabs li.selected
 {
@@ -252,6 +252,18 @@ div.pagination span a
 	margin-right:20.5em;
 }
 
+#layout-main div.main_all div.datablocks
+{
+	-moz-column-width:24em;
+	-webkit-column-width:24em;
+	column-width:24em;
+}
+
+#layout-main div.main_all div.datablocks > div
+{
+	width:24em;
+}
+
 #layout-main div.main_all div.datablocks div.stripe
 {
 	width:100%;
@@ -272,19 +284,6 @@ div.pagination span a
 	font-size:1.1em;
 	font-weight:bold;
 	padding:0.3em 1em;
-}
-
-
-#layout-main div.main_all div.datablocks
-{
-	-moz-column-width:24em;
-	-webkit-column-width:24em;
-	column-width:24em;
-}
-
-#layout-main div.main_all div.datablocks > div
-{
-	width:24em;
 }
 
 #layout-main div.main_all div.datablocks div.similaranime div.stripe div.data

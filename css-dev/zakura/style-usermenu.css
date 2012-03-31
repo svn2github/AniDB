@@ -1,12 +1,12 @@
 #layout-menu #menu-account {
-	width: auto;;
+	width: auto;
 }
 
 #layout-menu #menu-account li {
 	display: table-cell;
 	border-bottom: none;
-	-display: block;
-	-float: right;
+	display: block;
+	float: right;
 }
 
 #layout-menu #menu-account li a{

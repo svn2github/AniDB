@@ -12,11 +12,11 @@
 var jsVersionArray = new Array();
 jsVersionArray.push({
 	"file":"anidbscript.js",
-	"version":"1.04",
+	"version":"1.05",
 	"revision":"$Revision$",
 	"date":"$Date::                           $",
 	"author":"$Author$",
-	"changelog":"added checked classes and made the last selected tab a per page preference"
+	"changelog":"Changed the ajax search backend from XML to JSON, also changed the frontend"
 });
 
 /*	Loads settings cookie and unserializes it */
@@ -85,6 +85,13 @@ settings['other']['menuCollapse'] = 0; // what to do with menus that can be coll
 settings['other']['seeDebug']     = 0; // see debug information
 settings['other']['seeTimes']     = 0; // see timing information
 settings['other']['ignoreLocal']  = 0; // ignore local check information
+
+/*
+if (isLocalHost()) {
+	settings['global']['useajax'] = 1;
+	settings['other']['ignoreLocal']  = 1;
+}
+*/
 
 /* Load all settings */
 var cookie = loadJSONCookie('anidbsettings');
@@ -948,7 +955,15 @@ var Magic = {
 				}
 				if (!searchTypeSelect || !input) break;
 				if (searchTypeDefaultSelect != 'none' && searchTypeSelect) searchTypeSelect.value = searchTypeDefaultSelect;
-				addEventSimple(searchTypeSelect,'change',function() { input.focus(); });
+				addEventSimple(searchTypeSelect,'change',function() { 
+					lastSearch = "";
+					searchData = [];
+					lastHitCount = 0;
+					input.focus(); 
+				});
+				originalSearchWidth = input.clientWidth;
+				addEventSimple(input,'focus',function() { this.style.width = (originalSearchWidth * 1.15) + "px"; });
+				addEventSimple(input,'blur',function() { this.style.width = originalSearchWidth+"px"; });
 				break;
 			}
 		}),
@@ -1347,11 +1362,123 @@ function CookieGetToArray(name, array) {
 // Tag Search Auto Completion. (C) 2008 antennen
 // Relies on ajax.js by fahrenheit
 var lastSearch = "";
-var seeDebug = false;
 var searchData = [];
 var lastHitCount = 0;
 var searchLimit = 50;
 
+/**
+ * Function that parses the JSON search results and removes duplicates.
+ * @param jsonData JSON search results object
+ * @return void (searchData is set)
+ */
+function parseSearchResults(jsonData) {
+	if (jsonData['error'] || jsonData['warning']) {
+		// either a warning or an error are a bit fatal so we stop right here
+		target.style.display = "none";
+		return;
+	}
+	// if we have no results there is no need to continue
+	if (jsonData['results'] == null || jsonData['results'].length = 0) {
+		searchData = new Array();
+		lastHitCount = 0;
+		printTags();
+		return;
+	}
+	var target = document.getElementById("layout-search");
+	var type = target.getElementsByTagName("select")[0].value;
+	// we need to take care of repititions
+	var results = new Array();
+	var tmp = new Array(); // array for valid tags
+	var tmpSearchData = jsonData['results'];
+	var tmpObject = new Object();
+	// indicates whether or not we have types, default is faulse
+	var typeSearch = false;
+	// order by which we want prioritize the results
+	var orderArray = null;
+	// relation key for when we are searching by types
+	var relKey = "";
+	switch(type) {
+		case "animelist": typeSearch = true; relKey = "aid"; orderArray = ["1","4","2","3"]; break;
+		case "characterlist": typeSearch = true; relKey = "charid"; orderArray = ["1","2","3","4","5","6","7","8"]; break;
+		case "collectionlist": typeSearch = true; relKey = "collectionid"; orderArray = ["1","2","3"]; break;
+		case "creatorlist": typeSearch = true; relKey = "creatorid"; orderArray = ["1","2","3","4","5","6","7"]; break;
+		case "songlist": typeSearch = true; relKey = "songid"; orderArray = ["1","2","3"]; break;
+		case "grouplist" // groups need pre-processing because of the short and long names
+			for (var n = 0; n < tmpSearchData.length; n++) {
+				var name = tmpSearchData[n]['name'];
+				var shortName = tmpSearchData[n]['shortName'];
+				tmpSearchData[n]['name'] = name + " ("+shortName+")";
+			}
+			break;
+	}
+	if (typeSearch) {
+		// for anime and char results we do special handling
+		// we group by aid/charid first, then by title type
+		// just take care or remove repetitions
+		for(var n = 0; n < tmpSearchData.length; n++) {
+			var topGroup = tmpObject[tmpSearchData[n][relKey]];
+			if (topGroup == null) {
+				topGroup = new Object();
+				topGroup['link'] = tmpSearchData[n]['link'];
+				if (tmpSearchData[n]['picurl'] != null)
+					topGroup['picurl'] = tmpSearchData[n]['picurl'];
+				if (tmpSearchData[n]['restricted'] != null)
+					topGroup['restricted'] = tmpSearchData[n]['restricted'];
+				if (tmpSearchData[n]['is_spoiler'] != null)
+					topGroup['is_spoiler'] = tmpSearchData[n]['is_spoiler'];
+				topGroup[relKey] = tmpSearchData[n][relKey];
+				tmpObject[tmpSearchData[n][relKey]] = topGroup;
+				tmp.push(topGroup[relKey]);
+			}
+			var dataType = tmpSearchData[n]['type'];
+			// this is to make sure we don't have to update this script whenever we add a new type (though it would be faster without this)
+			if (orderArray.indexOf(dataType) < 0) orderArray.push(dataType);
+			var secondGroup = topGroup[dataType];
+			if (secondGroup == null) {
+				secondGroup = new Array();
+				topGroup[dataType] = secondGroup;
+			}
+			var title = new Object();
+			title['name'] = tmpSearchData[n]['name'];
+			title['langid'] = tmpSearchData[n]['langid'];
+			secondGroup.push(title);
+		}
+		// okay, done, now for the results pick the best title
+		for (var n = 0; n < tmp.length; n++) {
+			var relId = tmp[n];
+			var name = null;
+			var langid = 0;
+			for (var k = 0; k < orderArray.length; k++) {
+				if (tmpObject[relId][orderArray[k]] != null) {
+					var title = tmpObject[relId][orderArray[k]][0];
+					name = title['name'];
+					langid = title['langid'];
+					break;
+				}
+			}
+			if (name == null) continue;
+			tmpObject[relId]['name'] = name;
+			tmpObject[relId]['langid'] = langid;
+			results.push(tmpObject[relId]);
+		}
+	} else {
+		// just take care or remove repetitions
+		for (var n = 0; n < tmpSearchData.length; n++) {
+			var name = tmpSearchData[n]['name'];
+			if (tmp.indexOf(name) < 0) {
+				results.push(tmpSearchData[n]);
+				tmp.push(name);
+			}
+		}
+	}
+	searchData = results;
+	lastHitCount = tmpSearchData.length;
+	printTags();
+}
+
+/**
+ * Method that executes whenever the user modifies the text on the search box.
+ */
 function search() {
 	var target = document.getElementById("tagsearch");
 	var type = this.parentNode.getElementsByTagName("select")[0].value;
@@ -1369,63 +1496,23 @@ function search() {
 			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit="+searchLimit+"&type=";
 			lastSearch = this.value;
 			switch(type) {
-				case "animelist":
-					url += "anime";
-					break;
-				case "animetag":
-					url += "animetag";
-					break;
-				case "characterlist":
-					url += "character";
-					break;
-				case "chartags":
-					url += "charactertag";
-					break;
-				case "clublist":
-					url += "club";
-					break;
-				case "collectionlist":
-					url += "collection";
-					break;
-				case "creatorlist":
-					url += "creator";
-					break;
-				case "grouplist":
-					url += "group";
-					break;
-				case "songlist":
-					url += "song";
-					break;
-				case "userlist":
-					url += "user";
-					break;
+				case "animelist": url += "anime"; break;
+				case "animetag": url += "animetag"; break;
+				case "characterlist": url += "character"; break;
+				case "chartags": url += "charactertag"; break;
+				case "clublist": url += "club"; break;
+				case "collectionlist": url += "collection"; break;
+				case "creatorlist": url += "creator"; break;
+				case "grouplist": url += "group"; break;
+				case "songlist": url += "song"; break;
+				case "userlist": url += "user"; break;
 				default: // unknown or unsupported option
 					target.style.display = "none";
 					return;
 			}
 			// hack for local test
-			//url = "search-anime.json";
-			xhttpRequestFetch(xhttpRequest(), url, function(jsonData) {
-				if (jsonData['error'] || jsonData['warning']) {
-					// either a warning or an error are a bit fatal so we stop right here
-					target.style.display = "none";
-					return;
-				}
-				// we need to take care of repititions
-				var results = new Array();
-				var tmp = new Array(); // array for valid tags
-				var tmpSearchData = jsonData['results'];
-				for(var n = 0; n < tmpSearchData.length; n++) {
-					var name = tmpSearchData[n]['name'];
-					if (tmp.indexOf(name) < 0) {
-						results.push(tmpSearchData[n]);
-						tmp.push(name);
-					}
-				}
-				searchData = results;
-				lastHitCount = tmpSearchData.length;
-				printTags();
-			}, null, 'json');
+			// url = "search-anime.json";
+			xhttpRequestFetch(xhttpRequest(), url, parseSearchResults, null, 'json');
 		} else // how rare, we can use cache
 			printTags(); // Print matched
 	} else target.style.display = "none";
