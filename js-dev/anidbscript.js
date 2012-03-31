@@ -1378,7 +1378,7 @@ function parseSearchResults(jsonData) {
 		return;
 	}
 	// if we have no results there is no need to continue
-	if (jsonData['results'] == null || jsonData['results'].length = 0) {
+	if (jsonData['results'] == null || jsonData['results'].length == 0) {
 		searchData = new Array();
 		lastHitCount = 0;
 		printTags();
