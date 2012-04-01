@@ -962,7 +962,7 @@ var Magic = {
 					input.focus(); 
 				});
 				originalSearchWidth = input.clientWidth;
-				addEventSimple(input,'focus',function() { this.style.width = (originalSearchWidth * 1.15) + "px"; });
+				addEventSimple(input,'focus',function() { this.style.width = (originalSearchWidth * 1.10) + "px"; });
 				addEventSimple(input,'blur',function() { this.style.width = originalSearchWidth+"px"; });
 				break;
 			}
@@ -1595,6 +1595,7 @@ function printTags() {
 			} else
 				result.appendChild(suggestionDiv);
 			result.id = 'tag_'+n;
+/*
 			result.onclick = function() {
 				var id = Number(this.id.substr(4,this.id.length));
 				//var tag = searchData[id].getAttribute("name");
@@ -1604,6 +1605,7 @@ function printTags() {
 			}
 			result.ondblclick = function() { this.onclick(); }
 			result.onmousedown = function() { this.onclick(); }
+*/
 			target.appendChild(result);
 			i++;
 		}
