@@ -1409,7 +1409,7 @@ function parseSearchResults(jsonData) {
 		case "grouplist": // groups need pre-processing because of the short and long names
 			for (var n = 0; n < tmpSearchData.length; n++) {
 				var name = tmpSearchData[n]['name'];
-				var shortName = tmpSearchData[n]['shortName'];
+				var shortName = tmpSearchData[n]['shortname'];
 				tmpSearchData[n]['name'] = name + " ("+shortName+")";
 			}
 			break;
