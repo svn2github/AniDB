@@ -1414,6 +1414,7 @@ function parseSearchResults(jsonData) {
 			}
 			break;
 	}
+	var langOrder = ["2","75","4"]; // japanese, japanese-transcript, english
 	if (typeSearch) {
 		// for anime and char results we do special handling
 		// we group by aid/charid first, then by title type
@@ -1475,12 +1476,21 @@ function parseSearchResults(jsonData) {
 					var titlesForType = tmpObject[relId][orderArray[k]];
 					if (titlesForType != null) {
 						var title;
-						// if default language is defined and we have a title match for that we have found hour title
+						// if default language is defined and we have a title match for that we have found our title
 						if (deflangid > 0 && titlesForType[deflangid] != null)
 							title = titlesForType[deflangid];
-						else { // otherwise return the first title that matched the query (may not be optimal but who cares)
-							var firstTitleMatchLang = titlesForType["-1"][0];
-							title = titlesForType[firstTitleMatchLang];
+						else { 
+							// if not, try to locate one of the prefered languages
+							for (var pl = 0; pl < langOrder.length; pl++) {
+								if (titlesForType[langOrder[pl]] != null) {
+									title = titlesForType[langOrder[pl]];
+									break;
+								}
+							} // and if that fails return the first title that matched the query (may not be optimal but who cares)
+							if (title == null) {
+								var firstTitleMatchLang = titlesForType["-1"][0];
+								title = titlesForType[firstTitleMatchLang];
+							}
 						}
 						name = title['names'][0]; // first match in the names array
 						langid = title['langid'];
