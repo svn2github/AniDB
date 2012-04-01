@@ -1667,7 +1667,7 @@ function printTags() {
 	} else target.style.height = "auto";
 
 	// Don't display if tag is matched or no tags are matched
-	if(i == 0 || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())) {
+	if(i == 0/* || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())*/) {
 		target.style.display = "none";
 	}
 }
