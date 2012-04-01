@@ -1398,12 +1398,12 @@ function parseSearchResults(jsonData) {
 	// relation key for when we are searching by types
 	var relKey = "";
 	switch(type) {
-		case "mangalist": typeSearch = true; relKey = "mangaid"; orderArray = ["1","4","2","3"]; break;
-		case "animelist": typeSearch = true; relKey = "aid"; orderArray = ["1","4","2","3"]; break;
-		case "characterlist": typeSearch = true; relKey = "charid"; orderArray = ["1","2","3","4","5","6","7","8"]; break;
-		case "collectionlist": typeSearch = true; relKey = "collectionid"; orderArray = ["1","2","3"]; break;
-		case "creatorlist": typeSearch = true; relKey = "creatorid"; orderArray = ["1","2","3","4","5","6","7"]; break;
-		case "songlist": typeSearch = true; relKey = "songid"; orderArray = ["1","2","3"]; break;
+		case "mangalist": typeSearch = true; relKey = "mangaid"; orderArray = ["4","2","3"]; break;
+		case "animelist": typeSearch = true; relKey = "aid"; orderArray = ["4","2","3"]; break;
+		case "characterlist": typeSearch = true; relKey = "charid"; orderArray = ["2","3","4","5","6","7","8"]; break;
+		case "collectionlist": typeSearch = true; relKey = "collectionid"; orderArray = ["2","3"]; break;
+		case "creatorlist": typeSearch = true; relKey = "creatorid"; orderArray = ["2","3","4","5","6","7"]; break;
+		case "songlist": typeSearch = true; relKey = "songid"; orderArray = ["2","3"]; break;
 		case "grouplist": // groups need pre-processing because of the short and long names
 			for (var n = 0; n < tmpSearchData.length; n++) {
 				var name = tmpSearchData[n]['name'];
@@ -1458,19 +1458,32 @@ function parseSearchResults(jsonData) {
 			var relId = tmp[n];
 			var name = null;
 			var langid = 0;
-			for (var k = 0; k < orderArray.length; k++) {
-				var titlesForType = tmpObject[relId][orderArray[k]];
-				if (titlesForType != null) {
-					var title;
-					if (deflangid > 0 && titlesForType[deflangid] != null)
-						title = titlesForType[deflangid];
-					else {
-						var firstTitleMatchLang = titlesForType["-1"][0];
-						title = titlesForType[firstTitleMatchLang];
+			// if we have main title, set that information
+			if (tmpObject[relId][1] != null) {
+				var firstTitleMatchLang = tmpObject[relId][1]["-1"][0];
+				tmpObject[relId]['main_title'] = tmpObject[relId][1][firstTitleMatchLang]['names'][0];
+				tmpObject[relId]['main_langid'] = tmpObject[relId][1][firstTitleMatchLang]['langid'];
+			}
+			// if the main title contains the search query we can stop
+			if (tmpObject[relId]['main_title'] != null && tmpObject[relId]['main_title'].toLowerCase().indexOf(lastSearch.toLowerCase()) > -1) {
+				name = tmpObject[relId]['main_title'];
+				langid = tmpObject[relId]['main_langid'];
+			} else { // otherwise search for the best match
+				for (var k = 0; k < orderArray.length; k++) {
+					var titlesForType = tmpObject[relId][orderArray[k]];
+					if (titlesForType != null) {
+						var title;
+						// if default language is defined and we have a title match for that we have found hour title
+						if (deflangid > 0 && titlesForType[deflangid] != null)
+							title = titlesForType[deflangid];
+						else { // otherwise return the first title that matched the query (may not be optimal but who cares)
+							var firstTitleMatchLang = titlesForType["-1"][0];
+							title = titlesForType[firstTitleMatchLang];
+						}
+						name = title['names'][0]; // first match in the names array
+						langid = title['langid'];
+						break;
 					}
-					name = title['names'][0]; // first match in the names array
-					langid = title['langid'];
-					break;
 				}
 			}
 			if (name == null) continue;
@@ -1554,6 +1567,8 @@ function printTags() {
 		var tag = searchData[n]['name'];
 		var picurl = searchData[n]['picurl'];
 		var link = searchData[n]['link']
+		var mainTitle = searchData[n]['main_title'];
+		if (tag == mainTitle) mainTitle = null; // same title, we don't need it then
 		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
 			var result = document.createElement("li");
 			result.style.display = "block";
@@ -1574,20 +1589,35 @@ function printTags() {
 					result.appendChild(img);
 			}
 			var suggestionDiv = document.createElement("div");
-			suggestionDiv.className = "search sugestion";
+			suggestionDiv.className = "search suggestion";
 			suggestionDiv.style.display = "block";
 			suggestionDiv.style.padding = "6px 4px 5px 50px";
+			if (mainTitle) { 
+				// we have a main title and a search result, 
+				// we will focus on the main title and show the match on the name
+				var mainTitleSpan = document.createElement("span");
+				mainTitleSpan.className = "search suggestion title main";
+				mainTitleSpan.appendChild(document.createTextNode(mainTitle));
+				suggestionDiv.appendChild(mainTitleSpan);
+				suggestionDiv.appendChild(document.createElement('br'));
+			}
 			// do a bit of highlighting //
+			var matchSpan = document.createElement('span');
+			matchSpan.className = "search suggestion match";
+			if (mainTitle) matchSpan.style.fontSize = "smaller";
+			if (mainTitle) matchSpan.appendChild(document.createTextNode("("));
 			var b = document.createElement('b');
 			var si = tag.toLowerCase().indexOf(search.value.toLowerCase());
 			if (si >= 0) {
 				var firstBlock = document.createTextNode(tag.substring(0,si));
 				var middleBlock = document.createTextNode(tag.substr(si,search.value.length));
 				var lastBlock = document.createTextNode(tag.substring(si+search.value.length,tag.length));
-				suggestionDiv.appendChild(firstBlock);
+				matchSpan.appendChild(firstBlock);
 				b.appendChild(middleBlock);
-				suggestionDiv.appendChild(b);
-				suggestionDiv.appendChild(lastBlock);
+				matchSpan.appendChild(b);
+				matchSpan.appendChild(lastBlock);
+				if (mainTitle) matchSpan.appendChild(document.createTextNode(")"));
+				suggestionDiv.appendChild(matchSpan);
 			} else continue;
 			if (link) {
 				a.appendChild(suggestionDiv);
@@ -1615,7 +1645,11 @@ function printTags() {
 		showMore.style.display = "block";
 		showMore.style.clear = "both";
 		var a = document.createElement("a");
-		a.onlcick = function() { document.getElementById("layout-search").getElementsByTagName("form").submit(); }
+		a.onclick = function() { 
+			var form = document.getElementById("layout-search").getElementsByTagName("form")[0];
+			form.submit();
+			return true;
+		}
 		a.appendChild(document.createTextNode("Show all results for \""+search.value+"\"..."));
 		showMore.appendChild(a);
 		target.appendChild(showMore);
