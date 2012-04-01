@@ -1441,12 +1441,17 @@ function parseSearchResults(jsonData) {
 				secondGroup["-1"] = new Array();
 				topGroup[dataType] = secondGroup;
 			}
-			var title = new Object();
-			title['name'] = tmpSearchData[n]['name'];
 			var langid = tmpSearchData[n]['langid'];
-			title['langid'] = langid;
-			secondGroup[langid] = title;
-			secondGroup["-1"].push(langid);
+			var title = secondGroup[langid];
+			if (title == null) {
+				title = new Object();
+				title['langid'] = langid;
+				title['names'] = new Array();
+				secondGroup[langid] = title;
+			}
+			title['names'].push(tmpSearchData[n]['name']);
+			if (secondGroup["-1"].indexOf(langid) < 0)
+				secondGroup["-1"].push(langid);
 		}
 		// okay, done, now for the results pick the best title
 		for (var n = 0; n < tmp.length; n++) {
@@ -1454,15 +1459,16 @@ function parseSearchResults(jsonData) {
 			var name = null;
 			var langid = 0;
 			for (var k = 0; k < orderArray.length; k++) {
-				if (tmpObject[relId][orderArray[k]] != null) {
+				var titlesForType = tmpObject[relId][orderArray[k]];
+				if (titlesForType != null) {
 					var title;
-					if (deflangid > 0 && tmpObject[relId][orderArray[k]][deflangid] != null)
-						title = tmpObject[relId][orderArray[k]][deflangid];
+					if (deflangid > 0 && titlesForType[deflangid] != null)
+						title = titlesForType[deflangid];
 					else {
-						var firstTitleMatchLang = tmpObject[relId][orderArray[k]]["-1"][0];
-						title = tmpObject[relId][orderArray[k]][firstTitleMatchLang];
+						var firstTitleMatchLang = titlesForType["-1"][0];
+						title = titlesForType[firstTitleMatchLang];
 					}
-					name = title['name'];
+					name = title['names'][0]; // first match in the names array
 					langid = title['langid'];
 					break;
 				}
