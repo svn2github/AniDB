@@ -1384,6 +1384,8 @@ function parseSearchResults(jsonData) {
 		printTags();
 		return;
 	}
+	// this will make sure we invalidate the query.
+	lastSearch = jsonData['query'];
 	var target = document.getElementById("layout-search");
 	var type = target.getElementsByTagName("select")[0].value;
 	// we need to take care of repititions
