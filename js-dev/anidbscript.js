@@ -1414,7 +1414,7 @@ function parseSearchResults(jsonData) {
 			}
 			break;
 	}
-	var langOrder = ["2","75","4"]; // japanese, japanese-transcript, english
+	var langOrder = ["75","4","2"]; // japanese-transcript, english, japanese
 	if (typeSearch) {
 		// for anime and char results we do special handling
 		// we group by aid/charid first, then by title type
@@ -1483,7 +1483,12 @@ function parseSearchResults(jsonData) {
 							// if not, try to locate one of the prefered languages
 							for (var pl = 0; pl < langOrder.length; pl++) {
 								if (titlesForType[langOrder[pl]] != null) {
-									title = titlesForType[langOrder[pl]];
+									// before setting, check if it's the same title as the main title
+									var tempTitle = titlesForType[langOrder[pl]];
+									if (tmpObject[relId]['main_title'] != null &&
+										tmpObject[relId]['main_title'].toLowerCase() == tempTitle['names'][0].toLowerCase())
+										continue; // it is, next title in list please
+									title = tempTitle;
 									break;
 								}
 							} // and if that fails return the first title that matched the query (may not be optimal but who cares)
