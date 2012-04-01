@@ -1398,6 +1398,7 @@ function parseSearchResults(jsonData) {
 	// relation key for when we are searching by types
 	var relKey = "";
 	switch(type) {
+		case "mangalist": typeSearch = true; relKey = "mangaid"; orderArray = ["1","4","2","3"]; break;
 		case "animelist": typeSearch = true; relKey = "aid"; orderArray = ["1","4","2","3"]; break;
 		case "characterlist": typeSearch = true; relKey = "charid"; orderArray = ["1","2","3","4","5","6","7","8"]; break;
 		case "collectionlist": typeSearch = true; relKey = "collectionid"; orderArray = ["1","2","3"]; break;
@@ -1415,6 +1416,7 @@ function parseSearchResults(jsonData) {
 		// for anime and char results we do special handling
 		// we group by aid/charid first, then by title type
 		// just take care or remove repetitions
+		var deflangid = jsonData['deflangid'] || 0;
 		for(var n = 0; n < tmpSearchData.length; n++) {
 			var topGroup = tmpObject[tmpSearchData[n][relKey]];
 			if (topGroup == null) {
@@ -1435,13 +1437,16 @@ function parseSearchResults(jsonData) {
 			if (orderArray.indexOf(dataType) < 0) orderArray.push(dataType);
 			var secondGroup = topGroup[dataType];
 			if (secondGroup == null) {
-				secondGroup = new Array();
+				secondGroup = new Object();
+				secondGroup["-1"] = new Array();
 				topGroup[dataType] = secondGroup;
 			}
 			var title = new Object();
 			title['name'] = tmpSearchData[n]['name'];
-			title['langid'] = tmpSearchData[n]['langid'];
-			secondGroup.push(title);
+			var langid = tmpSearchData[n]['langid'];
+			title['langid'] = langid;
+			secondGroup[langid] = title;
+			secondGroup["-1"].push(langid);
 		}
 		// okay, done, now for the results pick the best title
 		for (var n = 0; n < tmp.length; n++) {
@@ -1450,7 +1455,13 @@ function parseSearchResults(jsonData) {
 			var langid = 0;
 			for (var k = 0; k < orderArray.length; k++) {
 				if (tmpObject[relId][orderArray[k]] != null) {
-					var title = tmpObject[relId][orderArray[k]][0];
+					var title;
+					if (deflangid > 0 && tmpObject[relId][orderArray[k]][deflangid] != null)
+						title = tmpObject[relId][orderArray[k]][deflangid];
+					else {
+						var firstTitleMatchLang = tmpObject[relId][orderArray[k]]["-1"][0];
+						title = tmpObject[relId][orderArray[k]][firstTitleMatchLang];
+					}
 					name = title['name'];
 					langid = title['langid'];
 					break;
@@ -1496,6 +1507,7 @@ function search() {
 			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit="+searchLimit+"&type=";
 			lastSearch = this.value;
 			switch(type) {
+				case "mangalist": url += "manga"; break;
 				case "animelist": url += "anime"; break;
 				case "animetag": url += "animetag"; break;
 				case "characterlist": url += "character"; break;
