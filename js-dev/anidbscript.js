@@ -1593,7 +1593,8 @@ function printTags() {
 			var suggestionDiv = document.createElement("div");
 			suggestionDiv.className = "search suggestion";
 			suggestionDiv.style.display = "block";
-			suggestionDiv.style.padding = "6px 4px 5px 50px";
+			//suggestionDiv.style.padding = "6px 4px 5px 50px";
+			suggestionDiv.style.padding = "4px 4px 4px 4px";
 			if (mainTitle) { 
 				// we have a main title and a search result, 
 				// we will focus on the main title and show the match on the name
