@@ -1475,7 +1475,7 @@ function parseSearchResults(jsonData) {
 				for (var k = 0; k < orderArray.length; k++) {
 					var titlesForType = tmpObject[relId][orderArray[k]];
 					if (titlesForType != null) {
-						var title;
+						var title = null;
 						// if default language is defined and we have a title match for that we have found our title
 						if (deflangid > 0 && titlesForType[deflangid] != null)
 							title = titlesForType[deflangid];
