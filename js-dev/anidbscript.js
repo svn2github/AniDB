@@ -1522,7 +1522,7 @@ function search() {
 //		unfortunately the new ranking algoririthm invalidates caching as we used to do it
 //		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
 // 		refetch data unless we have value of search hits lower than the limit in that case we can use our cache
-		if (!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl) || lastHitCount == searchLimit) { 
+		if (!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl) || lastHitCount >= searchLimit) { 
 			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit="+searchLimit+"&type=";
 			lastSearch = this.value;
 			switch(type) {
