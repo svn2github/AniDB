@@ -1,4 +1,4 @@
-ul.acdropdown
+#layout-search ul.quicksearch
 {
 background-color:transparent !important;
 background-image: url(images/bg_1.gif) !important;
@@ -6,14 +6,14 @@ border:1px solid #85878C !important;
 border-top: none !important;
 color: white !important;
 }
-ul.acdropdown li:nth-child(2n+1)
+#layout-search ul.quicksearch li:nth-child(2n+1)
 {
 background-image: none !important;
 background-color: hsla(0, 0%, 0%, 0.4) !important;
 }
 
-ul.acdropdown li:hover,
-ul.acdropdown li.selected
+#layout-search ul.quicksearch li:hover,
+#layout-search ul.quicksearch li.selected
 {
 color: #ADD8E6 !important;
 background: transparent url(images/whitepixel.png) !important;

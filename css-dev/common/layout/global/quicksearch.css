@@ -1,5 +1,4 @@
-/* This way it applies to all ul's */
-ul.acdropdown
+#layout-search ul.quicksearch
 {
 	margin:0; 
 	padding:0;
@@ -8,7 +7,7 @@ ul.acdropdown
 	z-index: 10;
 }
 
-ul.acdropdown li
+#layout-search ul.quicksearch li
 {
 	margin:0px;
 	padding:2px;

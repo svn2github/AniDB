@@ -308,12 +308,12 @@ th.sortable
 	line-height:1.5em;
 }
 
-ul.acdropdown li
+#layout-search ul.quicksearch li
 {
 	font-weight:normal;
 }
 
-ul.acdropdown li:hover
+#layout-search ul.quicksearch li:hover
 {
 	font-weight:bold;
 }
