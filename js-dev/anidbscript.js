@@ -1588,7 +1588,7 @@ function printTags() {
 		if (tag == mainTitle) mainTitle = null; // same title, we don't need it then
 		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
 			var result = document.createElement("li");
-			if (n%2 <> 0) result.className = "g_odd";
+			if (n%2 != 0) { result.className = "g_odd"};
 			//result.style.display = "block";
 			//result.style.clear = "both";
 			var a = document.createElement("a");
