@@ -1588,6 +1588,7 @@ function printTags() {
 		if (tag == mainTitle) mainTitle = null; // same title, we don't need it then
 		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
 			var result = document.createElement("li");
+			if (n%2 <> 0) result.className = "g_odd";
 			//result.style.display = "block";
 			//result.style.clear = "both";
 			var a = document.createElement("a");
@@ -1673,7 +1674,7 @@ function printTags() {
 		target.appendChild(showMore);
 	}
 
-	//target.style.display = "block";
+	target.style.display = "block";
 	//target.style.position = "absolute";
 	//target.style.left = search.offsetLeft + "px";
 	//target.style.top = search.offsetTop + search.offsetHeight + "px";
@@ -1724,7 +1725,7 @@ if (settings['global']['useajax']) {
 					}
 				}
 				addEventSimple(dropdown,'change',getSearchTypeChange)
-				//dropdown.onchange = getSearchTypeChange;
+				dropdown.onchange = getSearchTypeChange;
 				getSearchTypeChange(dropdown.value);
 			}
 
@@ -1732,7 +1733,7 @@ if (settings['global']['useajax']) {
 			result = document.createElement("ul");
 			result.setAttribute("id", "tagsearch");
 			result.className = "quicksearch";
-			result.style.display = "none";
+			//result.style.display = "none";
 			textfield.parentNode.appendChild(result);
 		}
 	});
