@@ -1596,8 +1596,8 @@ function printTags() {
 			if (picurl) { // we have thumbnails, so add them
 				var img = document.createElement("img");
 				img.className = "thumb";
-				img.style.cssFloat = "left";
-				img.style.margin = "4px";
+				//img.style.cssFloat = "left";
+				//img.style.margin = "4px";
 				img.src = picurl;
 				img.alt = "image";
 				if (link)
@@ -1606,22 +1606,22 @@ function printTags() {
 					result.appendChild(img);
 			}
 			var suggestionDiv = document.createElement("div");
-			suggestionDiv.className = "search suggestion";
-			suggestionDiv.style.display = "block";
+			suggestionDiv.className = "suggestion";
+			//suggestionDiv.style.display = "block";
 			//suggestionDiv.style.padding = "6px 4px 5px 50px";
-			suggestionDiv.style.padding = "4px 4px 4px 4px";
+			//suggestionDiv.style.padding = "4px 4px 4px 4px";
 			if (mainTitle) { 
 				// we have a main title and a search result, 
 				// we will focus on the main title and show the match on the name
 				var mainTitleSpan = document.createElement("span");
-				mainTitleSpan.className = "search suggestion title main";
+				mainTitleSpan.className = "suggestion title main";
 				mainTitleSpan.appendChild(document.createTextNode(mainTitle));
 				suggestionDiv.appendChild(mainTitleSpan);
 				suggestionDiv.appendChild(document.createElement('br'));
 			}
 			// do a bit of highlighting //
 			var matchSpan = document.createElement('span');
-			matchSpan.className = "search suggestion match";
+			matchSpan.className = "suggestion match";
 			if (mainTitle) matchSpan.style.fontSize = "smaller";
 			if (mainTitle) matchSpan.appendChild(document.createTextNode("("));
 			var b = document.createElement('b');
