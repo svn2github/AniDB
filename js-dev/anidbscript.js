@@ -1588,8 +1588,8 @@ function printTags() {
 		if (tag == mainTitle) mainTitle = null; // same title, we don't need it then
 		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
 			var result = document.createElement("li");
-			result.style.display = "block";
-			result.style.clear = "both";
+			//result.style.display = "block";
+			//result.style.clear = "both";
 			var a = document.createElement("a");
 			if (link)
 				a.href = link;
@@ -1622,7 +1622,7 @@ function printTags() {
 			// do a bit of highlighting //
 			var matchSpan = document.createElement('span');
 			matchSpan.className = "suggestion match";
-			if (mainTitle) matchSpan.style.fontSize = "smaller";
+			//if (mainTitle) matchSpan.style.fontSize = "smaller";
 			if (mainTitle) matchSpan.appendChild(document.createTextNode("("));
 			var b = document.createElement('b');
 			var si = tag.toLowerCase().indexOf(search.value.toLowerCase());
@@ -1660,8 +1660,8 @@ function printTags() {
 	}
 	if (searchData.length > 6) {
 		var showMore = document.createElement("li");
-		showMore.style.display = "block";
-		showMore.style.clear = "both";
+		//showMore.style.display = "block";
+		//showMore.style.clear = "both";
 		var a = document.createElement("a");
 		a.onclick = function() { 
 			var form = document.getElementById("layout-search").getElementsByTagName("form")[0];
@@ -1673,11 +1673,11 @@ function printTags() {
 		target.appendChild(showMore);
 	}
 
-	target.style.display = "block";
-	target.style.position = "absolute";
-	target.style.left = search.offsetLeft + "px";
-	target.style.top = search.offsetTop + search.offsetHeight + "px";
-	target.style.width = search.offsetWidth - 2 + "px";
+	//target.style.display = "block";
+	//target.style.position = "absolute";
+	//target.style.left = search.offsetLeft + "px";
+	//target.style.top = search.offsetTop + search.offsetHeight + "px";
+	//target.style.width = search.offsetWidth - 2 + "px";
 
 	if(i >= 8) {
 		height = target.firstChild.offsetHeight * 8;
