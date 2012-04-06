@@ -1,7 +1,7 @@
 #layout-search ul.quicksearch
 {
 	background-color:#FFFFFF;
-	border:1px solid #85878C;
+	border:1px solid;
 	color:black;
 }
 
@@ -9,5 +9,5 @@
 #layout-search ul.quicksearch li.selected
 {
 	color:#FFFFFF;
-	background-color:#5e81bc;
+	background-color:#BBBBBB;
 }

@@ -13,3 +13,31 @@
 	padding:2px;
 	cursor: pointer;
 }
+
+#layout-search ul.quicksearch
+{
+	margin: 0 0 0 4px;
+	position: absolute;
+	width: 375px;
+}
+
+#layout-search ul.quicksearch img
+{
+	float:left;
+}
+
+#layout-search ul.quicksearch li
+{
+	clear: left;
+}
+
+#layout-search ul.quicksearch div.suggestion
+{
+	height: 60px;
+	margin-left: 55px;
+}
+
+#layout-search ul.quicksearch li:last-child
+{
+	text-align:center;
+}

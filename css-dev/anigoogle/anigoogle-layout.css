@@ -73,7 +73,7 @@ input[type="password"],
 #layout-search input.text
 {
 	float: left;
-	width: 200px;
+	width: 230px;
 	margin: 0;
 	padding: 4px;
 }
@@ -83,6 +83,11 @@ input[type="password"],
 	float: right;
 	width: 80px;
 	margin: 0;
+}
+
+#layout-search select
+{
+	margin-left: -5px;
 }
 
 #layout-main > h1

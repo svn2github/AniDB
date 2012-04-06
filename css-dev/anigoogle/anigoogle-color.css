@@ -222,7 +222,9 @@ select,
 #layout-main div.main_all div.datablocks h4,
 #layout-main div.main_all div.header h4,
 #layout-main div.anime_all div.info div.image img,
-span.test
+span.test,
+input[type="submit"],
+button[type="submit"]
 {
 	border-color: #C9D7F1 #97AACC #97AACC #C9D7F1;
 }
@@ -279,4 +281,19 @@ span.test
 	background-color:#ECD5D8;
 	color:#BC2A4D;
 	border-color: #DEBFC3 #C4939F #C4939F #DEBFC3;
+}
+
+#layout-search input.text
+{
+	box-shadow: 1px 1px 2px #C9D7F1 inset;
+}
+
+#layout-search select
+{
+	box-shadow: 0 1px 2px #C9D7F1 inset;
+}
+
+#layout-search ul.quicksearch
+{
+	border-color: #C9D7F1;
 }
