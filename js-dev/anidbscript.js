@@ -1731,7 +1731,7 @@ if (settings['global']['useajax']) {
 			// Spawn result dropdown
 			result = document.createElement("ul");
 			result.setAttribute("id", "tagsearch");
-			result.className = "acdropdown";
+			result.className = "quicksearch";
 			result.style.display = "none";
 			textfield.parentNode.appendChild(result);
 		}
