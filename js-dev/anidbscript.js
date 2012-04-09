@@ -85,12 +85,12 @@ settings['other']['menuCollapse'] = 0; // what to do with menus that can be coll
 settings['other']['seeDebug']     = 0; // see debug information
 settings['other']['seeTimes']     = 0; // see timing information
 settings['other']['ignoreLocal']  = 0; // ignore local check information
-
+/*
 if (isLocalHost()) {
 	settings['global']['useajax'] = 1;
 	settings['other']['ignoreLocal']  = 1;
 }
-
+*/
 /* Load all settings */
 var cookie = loadJSONCookie('anidbsettings');
 for (k in cookie) {
@@ -1566,7 +1566,7 @@ function search() {
 					return;
 			}
 			// hack for local test
-			url = "search-anime.json";
+			// url = "search-anime.json";
 			xhttpRequestFetch(xhttpRequest(), url, parseSearchResults, null, 'json');
 		} else // how rare, we can use cache
 			printTags(); // Print matched
