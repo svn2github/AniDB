@@ -86,12 +86,10 @@ settings['other']['seeDebug']     = 0; // see debug information
 settings['other']['seeTimes']     = 0; // see timing information
 settings['other']['ignoreLocal']  = 0; // ignore local check information
 
-/*
 if (isLocalHost()) {
 	settings['global']['useajax'] = 1;
 	settings['other']['ignoreLocal']  = 1;
 }
-*/
 
 /* Load all settings */
 var cookie = loadJSONCookie('anidbsettings');
@@ -961,9 +959,6 @@ var Magic = {
 					lastHitCount = 0;
 					input.focus(); 
 				});
-				originalSearchWidth = input.clientWidth;
-				addEventSimple(input,'focus',function() { this.style.width = (originalSearchWidth * 1.10) + "px"; });
-				addEventSimple(input,'blur',function() { this.style.width = originalSearchWidth+"px"; });
 				break;
 			}
 		}),
@@ -1528,6 +1523,18 @@ function parseSearchResults(jsonData) {
  */
 function search() {
 	var target = document.getElementById("tagsearch");
+	// check if we have the tagsearch tag
+	if (target == null) {
+		// we don't, need to create it
+		var ls = document.getElementById("layout-search");
+		if (ls) {
+			var txt = ls.getElementsByTagName("input")[0];
+			target = document.createElement("ul");
+			target.setAttribute("id", "tagsearch");
+			target.className = "quicksearch hide";
+			txt.parentNode.appendChild(target);
+		}
+	}
 	var type = this.parentNode.getElementsByTagName("select")[0].value;
 
 	if(this.value.length >= 3 && (type != "modtag" && type != "mylist")) {
@@ -1559,11 +1566,15 @@ function search() {
 					return;
 			}
 			// hack for local test
-			// url = "search-anime.json";
+			url = "search-anime.json";
 			xhttpRequestFetch(xhttpRequest(), url, parseSearchResults, null, 'json');
 		} else // how rare, we can use cache
 			printTags(); // Print matched
-	} else target.style.display = "none";
+	} else {
+		if (target.className.indexOf(" hide") < 0)
+			target.className += " hide";
+		target.style.display = "none";
+	}
 }
 
 function printTags() {
@@ -1687,7 +1698,12 @@ function printTags() {
 
 	// Don't display if tag is matched or no tags are matched
 	if(i == 0/* || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())*/) {
+		if (target.className.indexOf(" hide") < 0)
+			target.className += " hide";
 		target.style.display = "none";
+	} else {
+		if (target.className.indexOf(" hide") >= 0)
+			target.className = target.className.replace(" hide","");
 	}
 }
 
@@ -1704,6 +1720,18 @@ if (settings['global']['useajax']) {
 			textfield.onkeyup = search;
 			textfield.onfocus = search;
 			textfield.onchange = function() {
+				// check if we have the tagsearch tag
+				if (document.getElementById("tagsearch") == null) {
+					// we don't, need to create it
+					var ls = document.getElementById("layout-search");
+					if (ls) {
+						var txt = target.getElementsByTagName("input")[0];
+						var result = document.createElement("ul");
+						result.setAttribute("id", "tagsearch");
+						result.className = "quicksearch hide";
+						txt.parentNode.appendChild(result);
+					}
+				}
 				setTimeout('document.getElementById("tagsearch").style.display = "none"', 100);
 			}
 
@@ -1713,28 +1741,17 @@ if (settings['global']['useajax']) {
 				function getSearchTypeChange(value) {
 					if(value == undefined) value = this.value
 					switch(value) {
-						case "animetag":
-						case "chartags":
-						case "modtag":
-						case "grouplist":
-						case "producerlist":
-							textfield.setAttribute("autocomplete", "off");
+						case "modtag":	
+							textfield.setAttribute("autocomplete", "on");
 							break;
 						default:
-							textfield.setAttribute("autocomplete", "on");
+							textfield.setAttribute("autocomplete", "off");
 					}
 				}
 				addEventSimple(dropdown,'change',getSearchTypeChange)
 				dropdown.onchange = getSearchTypeChange;
 				getSearchTypeChange(dropdown.value);
 			}
-
-			// Spawn result dropdown
-			result = document.createElement("ul");
-			result.setAttribute("id", "tagsearch");
-			result.className = "quicksearch";
-			//result.style.display = "none";
-			textfield.parentNode.appendChild(result);
 		}
 	});
 }
