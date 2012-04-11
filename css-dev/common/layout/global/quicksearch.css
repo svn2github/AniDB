@@ -41,3 +41,11 @@
 {
 	text-align:center;
 }
+
+#layout-search select,
+#layout-search input.text
+{
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
