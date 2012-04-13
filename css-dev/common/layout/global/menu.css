@@ -102,7 +102,16 @@
 }
 
 /** Thingie to hide/show g_menu's */
-.filter_menu h3 a {
+.filter_menu h3 a
+{
 	cursor: pointer;
 	float: right;
+}
+
+/*chrome fix for the table overlapping the menu*/
+#layout-main div.filter_menu + form > table,
+#layout-main div.filter_menu + div > form > table,
+#layout-main div.filter_menu + table
+{
+	margin: 0;
 }
