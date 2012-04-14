@@ -956,6 +956,7 @@ var Magic = {
 				addEventSimple(searchTypeSelect,'change',function() { 
 					lastSearch = "";
 					searchData = [];
+					searchCache = []; // clear cache
 					lastHitCount = 0;
 					input.focus(); 
 				});
@@ -1357,9 +1358,157 @@ function CookieGetToArray(name, array) {
 // Tag Search Auto Completion. (C) 2008 antennen
 // Relies on ajax.js by fahrenheit
 var lastSearch = "";
-var searchData = [];
-var lastHitCount = 0;
-var searchLimit = 50;
+var searchCache = []; // search cache, clears on type change
+var searchData = []; // search data, this is where the results for printTags() will come from
+var lastHitCount = 0; // number of hit counts on the last search
+var searchLimit = 50; // search limit
+var searchNoChange = false; // indicates there were no updates or additions to the search cache
+var searchResultsToDisplay = 6; // number of search results to display
+var queryListCache = new Array(); // a query of the last query strings
+var queryListCacheLimit = 100; // the limit of the query list cache
+var searchTypeDefaultLanguageId = 0; // the language id for the search (0 == auto)
+
+/**
+ * Method that checks if a title matches given patterns
+ * @param title Title to match
+ * @param patterns An array of patterns to match
+ * @return true if all the patterns match the string, false otherwise
+ */
+function searchEntryTitleMatches(title, patterns) {
+	if (title == null || title === undefined) return false;
+	if (patterns == null || patterns === undefined || patterns.length == 0) return true;
+	if (typeof patterns === "string") {
+		var temp = new Array();
+		temp.push(patterns);
+		patterns = temp;
+	}
+	var title = title.toLowerCase();
+	var plen = patterns.length;
+	var lastMatchIndex = 0;
+	for (var p = 0; p < plen; p++) {
+		var pattern = patterns[p];
+		var si = title.indexOf(pattern, lastMatchIndex);
+		if (si >= 0) {
+			lastMatchIndex = si + pattern.length;
+			if (p == plen - 1) // we matched all patterns! we have a match, just add it to the hits and continue to the next entry
+				return true;
+		} else // no match
+			break;
+	}
+	return false;
+}
+
+/**
+ * Method that updates a search entry with the correct name tag.
+ * @param entry Search entry
+ * @param patterns Search patterns
+ * @param orderArray Order of the languages for this entry
+ * @param deflangid Default language id (user preference)
+ * @param matchTitles Whether or not the we should also select the best match title
+ * @return The entry
+ */
+function updateSearchEntry(entry, patterns, orderArray, deflangid, matchTitles) {
+	if (entry == null || entry === undefined) return entry;
+	if (matchTitles == null || entry === undefined) matchTitles = false;
+	if (deflangid == null || deflangid === undefined) deflangid = searchTypeDefaultLanguageId;
+	var langOrder = ["75","4","2"]; // japanese-transcript, english, japanese
+	var plen = patterns.length;
+	var name = null;
+	var langid = 0;
+	// if we have main title, set that information
+	if (entry[1] != null) {
+		var firstTitleMatchLang = entry[1]["-1"][0];
+		entry['main_title'] = entry[1][firstTitleMatchLang]['names'][0];
+		entry['main_langid'] = entry[1][firstTitleMatchLang]['langid'];
+	}
+	// check if main title contains query
+	var ttitle = (entry['main_title'] != null ? entry['main_title'].toLowerCase() : null);
+	var mtitle = searchEntryTitleMatches(entry['main_title'],patterns);
+	// if the main title contains the search query we can stop
+	if (entry['main_title'] != null && mtitle) {
+		name = entry['main_title'];
+		langid = entry['main_langid'];
+	} else { // otherwise search for the best match
+		for (var k = 0; k < orderArray.length; k++) {
+			var titlesForType = entry[orderArray[k]];
+			if (titlesForType != null) {
+				var bestTitle = null; // best title at the moment
+				var title = null;
+				var titleIndex = 0;
+				var tfound = false;
+				// if default language is defined and we have a title match for that we have found our title
+				if (deflangid > 0 && titlesForType[deflangid] != null) {
+					bestTitle = titlesForType[deflangid];
+					if (!matchTitles) {
+						tfound = true;
+						break;
+					} else {
+						var tarr = bestTitle['names'];
+						tfound = false;
+						for (var tt = 0; tt < tarr.length; tt++) {
+							if (searchEntryTitleMatches(tarr[tt],patterns)) {
+								titleIndex = tt; // update title index
+								tfound = true;
+								break;
+							}
+						}
+						if (tfound) break;
+					}
+				}
+				// we still haven't found what we were looking for
+				if (!tfound) { 
+					// if not, try to locate one of the prefered languages
+					for (var pl = 0; pl < langOrder.length; pl++) {
+						if (titlesForType[langOrder[pl]] != null) {
+							// before setting, check if it's the same title as the main title
+							bestTitle = titlesForType[langOrder[pl]];
+							if (!matchTitles) {
+								tfound = true;
+								break;
+							} else {
+								var tarr = bestTitle['names'];
+								tfound = false;
+								for (var tt = 0; tt < tarr.length; tt++) {
+									if (searchEntryTitleMatches(tarr[tt],patterns)) {
+										titleIndex = tt; // update title index
+										tfound = true;
+										break;
+									}
+								}
+								if (tfound) break;
+							}
+						}
+					} // and if that fails return the first title that matched the query (may not be optimal but who cares)
+					if (!tfound) {
+						var firstTitleMatchLang = titlesForType["-1"][0];
+						bestTitle = titlesForType[firstTitleMatchLang];
+						if (!matchTitles)
+							break;
+						else {
+							var tarr = bestTitle['names'];
+							tfound = false;
+							for (var tt = 0; tt < tarr.length; tt++) {
+								if (searchEntryTitleMatches(tarr[tt],patterns)) {
+									titleIndex = tt; // update title index
+									tfound = true;
+									break;
+								}
+							}
+							if (tfound) break;
+						}
+					}
+				}
+				if (title == null) title = bestTitle; // if we haven't found a good match, use the next best non-related one
+				name = title['names'][titleIndex]; // first match in the names array
+				langid = title['langid'];
+				break;
+			}
+		}
+	}
+	entry['name'] = name;
+	entry['langid'] = langid;
+	return entry;
+}
 
 /**
  * Function that parses the JSON search results and removes duplicates.
@@ -1376,11 +1525,16 @@ function parseSearchResults(jsonData) {
 	if (jsonData['results'] == null || jsonData['results'].length == 0) {
 		searchData = new Array();
 		lastHitCount = 0;
-		printTags();
+		printTags(null);
 		return;
 	}
 	// this will make sure we invalidate the query.
-	lastSearch = jsonData['query'];
+	query = jsonData['query'];
+	// add this term to the query list
+	updateQueryListCache(query);
+	var re = /\s/;  
+	var patterns = query.toLowerCase().split(re);
+	var plen = patterns.length;
 	var target = document.getElementById("layout-search");
 	var type = target.getElementsByTagName("select")[0].value;
 	// we need to take care of repititions
@@ -1388,7 +1542,7 @@ function parseSearchResults(jsonData) {
 	var tmp = new Array(); // array for valid tags
 	var tmpSearchData = jsonData['results'];
 	var tmpObject = new Object();
-	// indicates whether or not we have types, default is faulse
+	// indicates whether or not we have types, default is false
 	var typeSearch = false;
 	// order by which we want prioritize the results
 	var orderArray = null;
@@ -1409,12 +1563,13 @@ function parseSearchResults(jsonData) {
 			}
 			break;
 	}
-	var langOrder = ["75","4","2"]; // japanese-transcript, english, japanese
+	lastSearch
 	if (typeSearch) {
 		// for anime and char results we do special handling
 		// we group by aid/charid first, then by title type
 		// just take care or remove repetitions
 		var deflangid = jsonData['deflangid'] || 0;
+		searchTypeDefaultLanguageId = deflangid;
 		for(var n = 0; n < tmpSearchData.length; n++) {
 			var topGroup = tmpObject[tmpSearchData[n][relKey]];
 			if (topGroup == null) {
@@ -1454,55 +1609,16 @@ function parseSearchResults(jsonData) {
 		// okay, done, now for the results pick the best title
 		for (var n = 0; n < tmp.length; n++) {
 			var relId = tmp[n];
-			var name = null;
-			var langid = 0;
-			// if we have main title, set that information
-			if (tmpObject[relId][1] != null) {
-				var firstTitleMatchLang = tmpObject[relId][1]["-1"][0];
-				tmpObject[relId]['main_title'] = tmpObject[relId][1][firstTitleMatchLang]['names'][0];
-				tmpObject[relId]['main_langid'] = tmpObject[relId][1][firstTitleMatchLang]['langid'];
-			}
-			// if the main title contains the search query we can stop
-			if (tmpObject[relId]['main_title'] != null && tmpObject[relId]['main_title'].toLowerCase().indexOf(lastSearch.toLowerCase()) > -1) {
-				name = tmpObject[relId]['main_title'];
-				langid = tmpObject[relId]['main_langid'];
-			} else { // otherwise search for the best match
-				for (var k = 0; k < orderArray.length; k++) {
-					var titlesForType = tmpObject[relId][orderArray[k]];
-					if (titlesForType != null) {
-						var title = null;
-						// if default language is defined and we have a title match for that we have found our title
-						if (deflangid > 0 && titlesForType[deflangid] != null)
-							title = titlesForType[deflangid];
-						else { 
-							// if not, try to locate one of the prefered languages
-							for (var pl = 0; pl < langOrder.length; pl++) {
-								if (titlesForType[langOrder[pl]] != null) {
-									// before setting, check if it's the same title as the main title
-									var tempTitle = titlesForType[langOrder[pl]];
-									if (tmpObject[relId]['main_title'] != null &&
-										tmpObject[relId]['main_title'].toLowerCase() == tempTitle['names'][0].toLowerCase())
-										continue; // it is, next title in list please
-									title = tempTitle;
-									break;
-								}
-							} // and if that fails return the first title that matched the query (may not be optimal but who cares)
-							if (title == null) {
-								var firstTitleMatchLang = titlesForType["-1"][0];
-								title = titlesForType[firstTitleMatchLang];
-							}
-						}
-						name = title['names'][0]; // first match in the names array
-						langid = title['langid'];
-						break;
-					}
-				}
-			}
-			if (name == null) continue;
-			tmpObject[relId]['name'] = name;
-			tmpObject[relId]['langid'] = langid;
-			results.push(tmpObject[relId]);
+			var entry = tmpObject[relId];
+			entry = updateSearchEntry(entry,patterns, orderArray, deflangid);
+			if (entry['name'] == null) continue;
+			results.push(entry);
 		}
+		searchNoChange = updateSearchCache(results, relKey) == 0;
+		// a minor hack is needed for when the last char is a space
+		var lc = query.charAt(query.length-1);
+		if (lc.match(re)) // this will ensure we keep requesting stuff
+			searchNoChange = false;
 	} else {
 		// just take care or remove repetitions
 		for (var n = 0; n < tmpSearchData.length; n++) {
@@ -1512,10 +1628,291 @@ function parseSearchResults(jsonData) {
 				tmp.push(name);
 			}
 		}
+		searchNoChange = updateSearchCache(results, null) == 0;
 	}
 	searchData = results;
 	lastHitCount = tmpSearchData.length;
-	printTags();
+	// this way printTags can know if it should ignore or not
+	printTags(query);
+}
+
+/**
+ * Simple method to update the query list cache and ensure it doesn't grows bewond the limit.
+ * @param queryString Query string to add to the cache (will be added to the end of the list)
+ * @return The current size of the list
+ */
+function updateQueryListCache(queryString) {
+	queryString = queryString.toLowerCase();
+	if (queryListCache.length == queryListCacheLimit)
+		queryListCache.shift(); // remove the first element
+	for (var i = 0; i < queryListCache.length; i++) {
+		if (queryListCache[i] == queryString)
+			return queryListCache.length; // already present
+	}
+	queryListCache.push(queryString);
+	return queryListCache.length;
+}
+
+/**
+ * Recursive function to update search arrays/objects.
+ * @param target Target array (as in, what is to update)
+ * @param source Source array (as in, where the source values come)
+ */
+function updateSearchCacheArray(target, source) {
+	var updated = false;
+	for (var key in source) {
+		if (target[key] == undefined || target[key] == null) {
+			target[key] = source[key];
+			updated = true;
+		} else {
+			if (!(Array.isArray(source[key]) || typeof source[key] === 'object')) { // everything else
+				if (target[key] == source[key])
+					continue;
+				target[key] = source[key];
+				updated = true;
+			} else // arrays || objects
+				if (updateSearchCacheArray(target[key],source[key]))
+					updated = true;
+		}
+	}
+	return updated;
+}
+
+/**
+ * Method that updates the search cache with the latest results.
+ * @param results last search results
+ * @param relKey relation key (for non related/typed searches, use null)
+ * @return number of updated or added cache entries
+ */
+function updateSearchCache(results, relKey) {
+	var len = results.length;
+	var toAdd = new Array();
+	var updated = 0;
+	var added = 0;
+	for (var n = 0; n < len; n++) {
+		var searchElement = results[n];
+		var found = false;
+		for (var k = 0; k < searchCache.length; k++) {
+			var cacheElement = searchCache[k];
+			if (relKey == null) { // only add this if it is not already contained
+				if (cacheElement['name'] == searchElement['name']) {
+					found = true;
+					break;
+				}
+			} else { // typed search
+				if (cacheElement[relKey] == searchElement[relKey]) {
+					found = true;
+					// update entry, recursive
+					if (updateSearchCacheArray(cacheElement,searchElement))
+						updated++;
+					break;
+				}
+			}
+		}
+		if (found) continue;
+		// else, add this to the cache, LATER
+		added++;
+		toAdd.push(searchElement);
+	}
+	searchDebug("updateSearchCache()","added: "+added+", updated: "+updated+", parsed: "+len);
+	//alert("updateSearchCache()\nadded: "+added+"\nupdated: "+updated);
+	// add elements now
+	len = toAdd.length;
+	for (var i = 0; i < len; i++)
+		searchCache.push(toAdd[i]);
+	return updated+added;
+}
+
+/**
+ * Temporary method to print debug info
+ */
+function searchDebug(what,msg) {
+	if (!settings['other']['seeDebug']) return;
+	var elems = document.getElementsByClassName("g_bubble events");
+	if (elems.length > 0) {
+		var parent = elems[0].getElementsByTagName('dl')[0];
+		var dt = document.createElement('dt');
+		var p = document.createElement('p');
+		p.appendChild(document.createTextNode(what));
+		dt.appendChild(p);
+		parent.appendChild(dt);
+		var dd = document.createElement('dd');
+		var d = new Date();
+		var month = (d.getMonth()+1);
+		if (month < 10) month = "0"+month;
+		var day = (d.getDay());
+		if (day < 10) day = "0"+day;
+		var hours = d.getHours();
+		if (hours < 10) hours = "0"+hours;
+		var minutes = d.getMinutes();
+		if (minutes < 10) minutes = "0"+minutes;
+		var seconds = d.getSeconds();;
+		if (seconds < 10) seconds = "0"+seconds;
+		var millis = d.getMilliseconds();
+		if (millis < 10) millis = "00"+millis;
+		else if (millis < 100) millis = "0"+millis;
+		var timestamp = "["+d.getFullYear() + "."+month+"."+day+" "+hours+":"+minutes+":"+seconds+"."+millis+"]";
+		dd.appendChild(document.createTextNode(timestamp+" - "+msg));
+		parent.appendChild(dd);
+	}
+}
+
+/**
+ * Actual method where the cache is searched and the resultData variable is set.
+ * @param type Type of the search
+ * @param query Query string
+ * @return Number of results that satisfied the query string
+ */
+function _searchTagCache(type,query) {
+	var re = /\s/;  
+	var patterns = query.toLowerCase().split(re);
+	var plen = patterns.length;
+	// indicates whether or not we have types, default is false
+	var typeSearch = false;
+	// order by which we want prioritize the results
+	var orderArray = null;
+	// relation key for when we are searching by types
+	var relKey = "";
+	switch(type) {
+		case "manga": typeSearch = true; relKey = "mangaid"; orderArray = ["1","4","2","3"]; break;
+		case "anime": typeSearch = true; relKey = "aid"; orderArray = ["1","4","2","3"]; break;
+		case "character": typeSearch = true; relKey = "charid"; orderArray = ["1","2","3","4","5","6","7","8"]; break;
+		case "collection": typeSearch = true; relKey = "collectionid"; orderArray = ["1","2","3"]; break;
+		case "creator": typeSearch = true; relKey = "creatorid"; orderArray = ["1","2","3","4","5","6","7"]; break;
+		case "song": typeSearch = true; relKey = "songid"; orderArray = ["1","2","3"]; break;
+	}
+	var hits = new Array();
+	// first find matches
+	var len = searchCache.length;
+	var match = false;
+	var uOrderArray = new Array();
+	for (var oi = 1; oi < orderArray.length; oi++)
+		uOrderArray[oi-1] = orderArray[oi];
+	if (typeSearch) { // typed search
+		for (var n = 0; n < len; n++) {
+			var searchElement = searchCache[n];
+			match = false;
+			for (var o = 0; o < orderArray.length; o++) {
+				var titlesForType = searchElement[orderArray[o]];
+				if (titlesForType === undefined || titlesForType === null) continue;
+				// we have titles for this type
+				var titleArray = titlesForType["-1"];
+				for (var to = 0; to < titleArray.length; to++) {
+					var titlesForLanguage = titlesForType[titleArray[to]]['names'];
+					for (var t = 0; t < titlesForLanguage.length; t++) {
+						var title = titlesForLanguage[t].toLowerCase();
+						for (var p = 0; p < plen; p++) {
+							var pattern = patterns[p];
+							if (title.indexOf(pattern) >= 0) {
+								if (p == plen - 1) { // we matched all patterns! we have a match, just add it to the hits and continue to the next entry
+									searchElement = updateSearchEntry(searchElement, patterns, uOrderArray, null, true);
+									hits.push(searchElement);
+									match = true;
+									break;
+								}
+							} else // no match
+								break;
+						}
+					}
+					if (match) break;
+				}
+				if (match) break;
+			}
+			// next cache entry
+		}
+	} else { // basic search
+		for (var n = 0; n < len; n++) {
+			var searchElement = searchCache[n];
+			match = false;
+			var title = searchElement['name'];
+			for (var p = 0; p < plen; p++) {
+				var pattern = patterns[p];
+				if (title.indexOf(pattern) >= 0) {
+					if (p == plen - 1) { // we matched all patterns! we have a match, just add it to the hits and continue to the next entry
+						hits.push(searchElement);
+						match = true;
+						break;
+					}
+				} else // no match
+					break;
+			}
+		}
+	}
+	// then rank them, well, not at the moment but I'm thinging on it
+	
+	searchData = hits;
+	return hits.length;
+}
+
+/**
+ * Entry point for searching the tag cache.
+ * @param type Type of the search
+ * @param query Query string
+ * @return Number of results that satisfied the query string
+ */
+function searchTagCache(type,query) {
+	var cnt = 0;
+	var result = "[ignored -> return]";
+	if (query == lastSearch) {
+		searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result);
+		return 0;
+	}
+	if (searchCache.length == 0)  {
+		result = "[no cache -> return]";
+		searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result);
+		return 0;
+	}
+	if (query.indexOf(lastSearch) < 0) {
+		if (lastSearch.indexOf(query) >= 0) {
+			result = "[del char -> cache(";
+			lastSearch = query;
+			cnt = _searchTagCache(type,query);
+			searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result+cnt+")]");
+			return cnt;
+		}
+		searchNoChange = false;
+		result = "[new query -> cache(";
+		cnt = _searchTagCache(type,query);
+		// check the query list to see if have already searched for this string
+		var found = false;
+		for (var i = 0; i < queryListCache.length; i++) {
+			if (queryListCache[i] != query.toLowerCase()) continue;
+			found = true;
+			break;
+		}
+		if (found) {
+			searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result+cnt+")]");
+			return cnt;
+		} else { // we will display this but will also query the db
+			searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result+cnt+") -> query db]");
+			return 0;
+		}
+	}
+	if (lastHitCount == 0) {
+		result = "[last hit count == 0 -> cache(";
+		cnt = _searchTagCache(type,query);
+		searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result+cnt+")]");
+		return cnt;
+	}
+	if (!searchNoChange) { // last db query changed the cache
+		if (lastHitCount < searchLimit) { // but we didn't reach the query limit, as in, unless the new search has a wildcard there will be no more matches
+			result = "[limit not reached -> cache(";
+			cnt = _searchTagCache(type,query);
+			searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result+cnt+")]");
+			return cnt;
+		} else { // we reached the query limit, that means that if we continue there will be more results
+			result = "[limit reached -> query db]";
+			searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result);
+			return 0;
+		}
+	} else {
+		result = "[no changes -> cache(";
+		cnt = _searchTagCache(type,query);
+		searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result+cnt+")]");
+		return cnt;
+	}
+	searchDebug("searchTagCache()","type = '"+type+"', query = '"+query+"' => "+result);
+	return 0;
 }
 
 /**
@@ -1536,6 +1933,23 @@ function search() {
 		}
 	}
 	var type = this.parentNode.getElementsByTagName("select")[0].value;
+	var searchType;
+	switch(type) {
+		case "mangalist": searchType = "manga"; break;
+		case "animelist": searchType = "anime"; break;
+		case "animetag": searchType = "animetag"; break;
+		case "characterlist": searchType = "character"; break;
+		case "chartags": searchType = "charactertag"; break;
+		case "clublist": searchType = "club"; break;
+		case "collectionlist": searchType = "collection"; break;
+		case "creatorlist": searchType = "creator"; break;
+		case "grouplist": searchType = "group"; break;
+		case "songlist": searchType = "song"; break;
+		case "userlist": searchType = "user"; break;
+		default: // unknown or unsupported option
+			target.style.display = "none";
+			return;
+	}
 
 	if(this.value.length >= 3 && (type != "modtag" && type != "mylist")) {
 		// Check if a new search is necessary
@@ -1543,33 +1957,34 @@ function search() {
 		var cl = this.value.length
 		var min = Math.min(ll, cl);
 
-//		unfortunately the new ranking algoririthm invalidates caching as we used to do it
-//		if(!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl)) {
-// 		refetch data unless we have value of search hits lower than the limit in that case we can use our cache
-		if (!(lastSearch.substr(0, min).toLowerCase() == this.value.substr(0, min).toLowerCase() && ll && cl) || lastHitCount >= searchLimit) { 
-			var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit="+searchLimit+"&type=";
-			lastSearch = this.value;
-			switch(type) {
-				case "mangalist": url += "manga"; break;
-				case "animelist": url += "anime"; break;
-				case "animetag": url += "animetag"; break;
-				case "characterlist": url += "character"; break;
-				case "chartags": url += "charactertag"; break;
-				case "clublist": url += "club"; break;
-				case "collectionlist": url += "collection"; break;
-				case "creatorlist": url += "creator"; break;
-				case "grouplist": url += "group"; break;
-				case "songlist": url += "song"; break;
-				case "userlist": url += "user"; break;
-				default: // unknown or unsupported option
-					target.style.display = "none";
-					return;
-			}
-			// hack for local test
-			// url = "search-anime.json";
-			xhttpRequestFetch(xhttpRequest(), url, parseSearchResults, null, 'json');
-		} else // how rare, we can use cache
-			printTags(); // Print matched
+		if (this.value == lastSearch) {
+			printTags(this.value); // Print matched
+			return;
+		}
+		
+		if (lastSearch.indexOf(this.value) >= 0) {
+			// okay, now we are at point where search in the cache can be useful
+			searchTagCache(searchType,this.value);
+			printTags(this.value); // Print matched
+			return;
+		}
+		
+		// check if there is point in querying the db or we can use our cache
+		if (searchTagCache(searchType,this.value) >= searchResultsToDisplay) {
+			printTags(this.value);
+			return;
+		}
+
+		// if we reached here we want to query the db
+		var url = "animedb.pl?show=json&action=search&query="+encodeURI(this.value)+"&offset=0&limit="+searchLimit+"&type=";
+		lastSearch = this.value;
+
+		url += searchType;
+		// hack for local test
+		// url = "search-"+searchType+"-"+encodeURI(this.value.replace(" ","_"))+".json";
+		//alert(url);
+		searchDebug('request',url);
+		xhttpRequestFetch(xhttpRequest(), url, parseSearchResults, null, 'json');
 	} else {
 		if (target.className.indexOf(" hide") < 0)
 			target.className += " hide";
@@ -1577,111 +1992,120 @@ function search() {
 	}
 }
 
-function printTags() {
+/**
+ * Method that displayes search suggestions.
+ * @param query Search query that called the method
+ */
+function printTags(query) {
 	// Clear old result
 	var target = document.getElementById("tagsearch");
 	var search = target.parentNode.parentNode.getElementsByTagName("input")[0]
+	if (query == null || query === undefined) 
+		query = search.value;
+	else {
+		if (query != search.value) {
+			searchDebug('printTags()',"ignored call, query = '"+query+"' and current value = '"+search.value+"'");
+			return; // it's probably a lost result
+		}
+	}
+	
 	if(target.hasChildNodes()) {
 		while(target.childNodes.length > 0) {
 			target.removeChild(target.firstChild);
 		}
 	}
 	// Loop search result and filter
+	var re = /\s/;  
+	var patterns = query.toLowerCase().split(re);
+	var plen = patterns.length;
 	var i = 0;
 	var height = 0;
-	var len = Math.min(searchData.length,6);
+	var len = Math.min(searchData.length,searchResultsToDisplay);
 	for(var n = 0; n < len; n++) {
-		// var tag = searchData[n].getAttribute("name");
 		var tag = searchData[n]['name'];
 		var picurl = searchData[n]['picurl'];
 		var link = searchData[n]['link']
 		var mainTitle = searchData[n]['main_title'];
-		if (tag == mainTitle) mainTitle = null; // same title, we don't need it then
-		if(tag.toLowerCase().search(search.value.toLowerCase()) != -1) {
-			var result = document.createElement("li");
-			if (n%2 != 0) { result.className = "g_odd"};
-			//result.style.display = "block";
-			//result.style.clear = "both";
-			var a = document.createElement("a");
+		var hasMainTitle = mainTitle != null && mainTitle != tag;
+
+		var result = document.createElement("li");
+		if (n%2 != 0) { result.className = "g_odd"};
+		var a = document.createElement("a");
+		if (link)
+			a.href = link;
+		if (picurl) { // we have thumbnails, so add them
+			result.className += (result.className.length == 0 ? "" : " ") + "image";
+			var img = document.createElement("img");
+			img.className = "thumb";
+			img.src = picurl;
+			img.alt = "image";
 			if (link)
-				a.href = link;
-			if (picurl) { // we have thumbnails, so add them
-				var img = document.createElement("img");
-				img.className = "thumb";
-				//img.style.cssFloat = "left";
-				//img.style.margin = "4px";
-				img.src = picurl;
-				img.alt = "image";
-				if (link)
-					a.appendChild(img);
-				else
-					result.appendChild(img);
-			}
-			var suggestionDiv = document.createElement("div");
-			suggestionDiv.className = "suggestion";
-			//suggestionDiv.style.display = "block";
-			//suggestionDiv.style.padding = "6px 4px 5px 50px";
-			//suggestionDiv.style.padding = "4px 4px 4px 4px";
-			if (mainTitle) { 
-				// we have a main title and a search result, 
-				// we will focus on the main title and show the match on the name
-				var mainTitleSpan = document.createElement("span");
-				mainTitleSpan.className = "suggestion title main";
-				mainTitleSpan.appendChild(document.createTextNode(mainTitle));
-				suggestionDiv.appendChild(mainTitleSpan);
-				suggestionDiv.appendChild(document.createElement('br'));
-			}
-			// do a bit of highlighting //
-			var matchSpan = document.createElement('span');
-			matchSpan.className = "suggestion match";
-			//if (mainTitle) matchSpan.style.fontSize = "smaller";
-			if (mainTitle) matchSpan.appendChild(document.createTextNode("("));
+				a.appendChild(img);
+			else
+				result.appendChild(img);
+		}
+		var suggestionDiv = document.createElement("div");
+		suggestionDiv.className = "suggestion";
+		if (hasMainTitle) { 
+			// we have a main title and a search result, we will focus on the main title and show the match on the name
+			var mainTitleSpan = document.createElement("span");
+			mainTitleSpan.className = "suggestion title main";
+			mainTitleSpan.appendChild(document.createTextNode(mainTitle));
+			suggestionDiv.appendChild(mainTitleSpan);
+		}
+		// do a bit of highlighting //
+		var matchSpan = document.createElement('span');
+		matchSpan.className = "suggestion match";
+		if (mainTitle != null && mainTitle == tag)
+			matchSpan.className += " title main";
+
+		if (hasMainTitle) matchSpan.appendChild(document.createTextNode("("));
+		
+		// I'm pretty sure we will have a match, soooo
+		var lastIndex = 0;
+		var title = tag.toLowerCase();
+		for (var p = 0; p < plen; p++) {
+			var pattern = patterns[p];
 			var b = document.createElement('b');
-			var si = tag.toLowerCase().indexOf(search.value.toLowerCase());
+			var si = title.indexOf(pattern,lastIndex);
 			if (si >= 0) {
-				var firstBlock = document.createTextNode(tag.substring(0,si));
-				var middleBlock = document.createTextNode(tag.substr(si,search.value.length));
-				var lastBlock = document.createTextNode(tag.substring(si+search.value.length,tag.length));
+				var firstBlock = document.createTextNode(tag.substring(lastIndex,si));
 				matchSpan.appendChild(firstBlock);
+				var middleBlock = document.createTextNode(tag.substr(si,pattern.length));
 				b.appendChild(middleBlock);
 				matchSpan.appendChild(b);
-				matchSpan.appendChild(lastBlock);
-				if (mainTitle) matchSpan.appendChild(document.createTextNode(")"));
-				suggestionDiv.appendChild(matchSpan);
-			} else continue;
-			if (link) {
-				a.appendChild(suggestionDiv);
-				result.appendChild(a);
+				lastIndex = si+pattern.length;
 			} else
-				result.appendChild(suggestionDiv);
-			result.id = 'tag_'+n;
-/*
-			result.onclick = function() {
-				var id = Number(this.id.substr(4,this.id.length));
-				//var tag = searchData[id].getAttribute("name");
-				var tag = searchData[id]['name'];
-				search.value = tag;
-				target.style.display = "none";
-			}
-			result.ondblclick = function() { this.onclick(); }
-			result.onmousedown = function() { this.onclick(); }
-*/
-			target.appendChild(result);
-			i++;
+				lastIndex = 0;
 		}
+		var lastBlock = document.createTextNode(tag.substring(lastIndex));
+		matchSpan.appendChild(lastBlock);
+		if (hasMainTitle) matchSpan.appendChild(document.createTextNode(")"));
+		suggestionDiv.appendChild(matchSpan);
+		if (link) {
+			a.appendChild(suggestionDiv);
+			result.appendChild(a);
+		} else
+			result.appendChild(suggestionDiv);
+		result.id = 'tag_'+n;
+		target.appendChild(result);
+		i++;
 	}
-	if (searchData.length > 6) {
+	if (searchData.length >= 6) {
 		var showMore = document.createElement("li");
-		//showMore.style.display = "block";
-		//showMore.style.clear = "both";
+
 		var a = document.createElement("a");
 		a.onclick = function() { 
 			var form = document.getElementById("layout-search").getElementsByTagName("form")[0];
 			form.submit();
 			return true;
 		}
-		a.appendChild(document.createTextNode("Show all results for \""+search.value+"\"..."));
+		a.appendChild(document.createTextNode("Show all results for \""+query+"\"..."));
 		showMore.appendChild(a);
+		target.appendChild(showMore);
+	} else {
+		var showMore = document.createElement("li");
+		showMore.className = "hide";
 		target.appendChild(showMore);
 	}
 
@@ -1690,11 +2114,6 @@ function printTags() {
 	//target.style.left = search.offsetLeft + "px";
 	//target.style.top = search.offsetTop + search.offsetHeight + "px";
 	//target.style.width = search.offsetWidth - 2 + "px";
-
-	if(i >= 8) {
-		height = target.firstChild.offsetHeight * 8;
-		if(height > 0) target.style.height = height + "px";
-	} else target.style.height = "auto";
 
 	// Don't display if tag is matched or no tags are matched
 	if(i == 0/* || (i == 1 && target.firstChild.firstChild.data.toLowerCase() == search.value.toLowerCase())*/) {
@@ -1741,6 +2160,7 @@ if (settings['global']['useajax']) {
 				function getSearchTypeChange(value) {
 					if(value == undefined) value = this.value
 					switch(value) {
+						case "mylist":
 						case "modtag":	
 							textfield.setAttribute("autocomplete", "on");
 							break;

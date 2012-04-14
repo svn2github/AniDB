@@ -412,7 +412,7 @@ div.pagination span a
 #layout-search ul.quicksearch {
 	background-color: white;
 	margin-top: -1px;
-	width: 370px;
+	width: 365px;
 	border-bottom: 1px solid #D5CCCC;
 	border-left: 1px solid #E4E4E4;
 	border-right: 1px solid #D5CCCC;
@@ -422,7 +422,6 @@ div.pagination span a
 
 #layout-search ul.quicksearch li {
 	background-color: transparent;
-	height: 65px;
 }
 
 #layout-search ul.quicksearch li:hover {

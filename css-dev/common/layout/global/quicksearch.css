@@ -24,6 +24,8 @@
 #layout-search ul.quicksearch img
 {
 	float:left;
+	margin-left: 3px;
+	margin-right: 5px;
 }
 
 #layout-search ul.quicksearch li
@@ -31,10 +33,9 @@
 	clear: left;
 }
 
-#layout-search ul.quicksearch div.suggestion
+#layout-search ul.quicksearch li.image
 {
-	height: 60px;
-	margin-left: 55px;
+	height: 65px;
 }
 
 #layout-search ul.quicksearch li:last-child
@@ -48,4 +49,5 @@
 	-moz-box-sizing: content-box;
 	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
+	height: 20px;
 }
