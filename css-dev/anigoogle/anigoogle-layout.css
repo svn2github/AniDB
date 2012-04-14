@@ -166,11 +166,6 @@ input[type="password"],
 	padding-left: 0;
 }
 
-#layout-search select
-{
-	padding: 4px 4px 3px;
-}
-
 #layout-nav div.search_main input.text,
 #layout-nav div.search_main input.submit
 {

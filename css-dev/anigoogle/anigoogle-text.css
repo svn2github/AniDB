@@ -10,6 +10,7 @@ a.i_button:hover
 	text-transform: capitalize;
 }
 
+#layout-search select,
 #layout-search input.text,
 #layout-search input.submit,
 #layout-menu > li,

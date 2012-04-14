@@ -49,5 +49,10 @@
 	-moz-box-sizing: content-box;
 	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
-	height: 20px;
+	height: 18px;
+}
+
+#layout-search select
+{
+	padding: 4px;
 }
