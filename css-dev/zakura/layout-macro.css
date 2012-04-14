@@ -73,21 +73,20 @@ body.nonav form textarea {
 
 #layout-search input.text {
 	padding: 0.1em 0.3em;
-	height: 1.5em;
+	/*height: 1.5em;*/
 	width: 16em;
-
 }
 
 #layout-search select,
 #layout-search input.text
 {
-	border: 1px solid #eed0da;
+	box-sizing: content-box;
+	-moz-box-sizing: content-box; /* Firefox */
+	-webkit-box-sizing: content-box; /* Safari */
+	height: 1.5em;
+	/*border: 1px solid #eed0da;*/
+	border: 1px solid #dc9abf;
 	color: #1e2495;
-}
-#layout-search select:hover,
-#layout-search input.text:hover
-{
-	border: 1px solid #dc9abf
 }
 
 #layout-search input.submit {
