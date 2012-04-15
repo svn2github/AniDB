@@ -2093,7 +2093,7 @@ function printTags(query) {
 		if (searchType.value == 'animelist') {
 			var extraInfo = document.createElement('div');
 			extraInfo.className = "info anime";
-			extraInfo.appendChild(document.createTextNode(entry['animetype']+", "+entry['eps']+" "+(entry['animetype'].toLowerCase().indexOf('movie') >= 0 ? "movie" : "ep")+(entry['eps'] > 1 ? "s" : "")+", "+entry['year']));
+			extraInfo.appendChild(document.createTextNode(entry['animetype']+", "+entry['eps']+" "+(entry['animetype'].toLowerCase().indexOf('movie') >= 0 ? "part" : "ep")+(entry['eps'] > 1 ? "s" : "")+", "+entry['year']));
 			suggestionDiv.appendChild(extraInfo);
 		}
 		if (link) {
