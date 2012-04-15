@@ -1792,8 +1792,10 @@ function _searchTagCache(type,query) {
 	var len = searchCache.length;
 	var match = false;
 	var uOrderArray = new Array();
-	for (var oi = 1; oi < orderArray.length; oi++)
-		uOrderArray[oi-1] = orderArray[oi];
+	if (typeSearch) {
+		for (var oi = 1; oi < orderArray.length; oi++)
+			uOrderArray[oi-1] = orderArray[oi];
+	}
 	if (typeSearch) { // typed search
 		for (var n = 0; n < len; n++) {
 			var searchElement = searchCache[n];
