@@ -1581,6 +1581,12 @@ function parseSearchResults(jsonData) {
 					topGroup['restricted'] = tmpSearchData[n]['restricted'];
 				if (tmpSearchData[n]['is_spoiler'] != null)
 					topGroup['is_spoiler'] = tmpSearchData[n]['is_spoiler'];
+				if (tmpSearchData[n]['animetype'] != null)
+					topGroup['animetype'] = tmpSearchData[n]['animetype'];
+				if (tmpSearchData[n]['eps'] != null)
+					topGroup['eps'] = tmpSearchData[n]['eps'];
+				if (tmpSearchData[n]['year'] != null)
+					topGroup['year'] = tmpSearchData[n]['year'];
 				topGroup[relKey] = tmpSearchData[n][relKey];
 				tmpObject[tmpSearchData[n][relKey]] = topGroup;
 				tmp.push(topGroup[relKey]);
@@ -1999,7 +2005,8 @@ function search() {
 function printTags(query) {
 	// Clear old result
 	var target = document.getElementById("tagsearch");
-	var search = target.parentNode.parentNode.getElementsByTagName("input")[0]
+	var search = target.parentNode.parentNode.getElementsByTagName("input")[0];
+	var searchType = target.parentNode.parentNode.getElementsByTagName("select")[0];
 	if (query == null || query === undefined) 
 		query = search.value;
 	else {
@@ -2022,10 +2029,11 @@ function printTags(query) {
 	var height = 0;
 	var len = Math.min(searchData.length,searchResultsToDisplay);
 	for(var n = 0; n < len; n++) {
-		var tag = searchData[n]['name'];
-		var picurl = searchData[n]['picurl'];
-		var link = searchData[n]['link']
-		var mainTitle = searchData[n]['main_title'];
+		var entry = searchData[n];
+		var tag = entry['name'];
+		var picurl = entry['picurl'];
+		var link = entry['link']
+		var mainTitle = entry['main_title'];
 		var hasMainTitle = mainTitle != null && mainTitle != tag;
 
 		var result = document.createElement("li");
@@ -2082,6 +2090,12 @@ function printTags(query) {
 		matchSpan.appendChild(lastBlock);
 		if (hasMainTitle) matchSpan.appendChild(document.createTextNode(")"));
 		suggestionDiv.appendChild(matchSpan);
+		if (searchType.value == 'animelist') {
+			var extraInfo = document.createElement('div');
+			extraInfo.className = "info anime";
+			extraInfo.appendChild(document.createTextNode(entry['animetype']+", "+entry['eps']+" "+(entry['animetype'].toLowerCase().indexOf('movie') >= 0 ? "movie" : "ep")+(entry['eps'] > 1 ? "s" : "")+", "+entry['year']));
+			suggestionDiv.appendChild(extraInfo);
+		}
 		if (link) {
 			a.appendChild(suggestionDiv);
 			result.appendChild(a);

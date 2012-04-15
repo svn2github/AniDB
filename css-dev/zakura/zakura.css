@@ -433,6 +433,7 @@ div.pagination span a
 	background-color: #D5CCCC;
 }
 
+#layout-search ul.quicksearch div.info,
 #layout-search ul.quicksearch span.match {
 	font-size: smaller;
 }
