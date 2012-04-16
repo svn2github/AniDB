@@ -1555,6 +1555,7 @@ function parseSearchResults(jsonData) {
 		case "collectionlist": typeSearch = true; relKey = "collectionid"; orderArray = ["2","3"]; break;
 		case "creatorlist": typeSearch = true; relKey = "creatorid"; orderArray = ["2","3","4","5","6","7"]; break;
 		case "songlist": typeSearch = true; relKey = "songid"; orderArray = ["2","3"]; break;
+		case "clublist": typeSearch = true; relKey = "clubid"; orderArray = ["2"]; break;
 		case "grouplist": // groups need pre-processing because of the short and long names
 			for (var n = 0; n < tmpSearchData.length; n++) {
 				var name = tmpSearchData[n]['name'];
@@ -1581,10 +1582,12 @@ function parseSearchResults(jsonData) {
 					topGroup['restricted'] = tmpSearchData[n]['restricted'];
 				if (tmpSearchData[n]['is_spoiler'] != null)
 					topGroup['is_spoiler'] = tmpSearchData[n]['is_spoiler'];
-				if (tmpSearchData[n]['animetype'] != null)
-					topGroup['animetype'] = tmpSearchData[n]['animetype'];
+				if (tmpSearchData[n][jsonData['type']+'_type'] != null)
+					topGroup['type'] = tmpSearchData[n][jsonData['type']+'_type'];
 				if (tmpSearchData[n]['eps'] != null)
 					topGroup['eps'] = tmpSearchData[n]['eps'];
+				if (tmpSearchData[n]['rating'] != null)
+					topGroup['rating'] = tmpSearchData[n]['rating'];
 				if (tmpSearchData[n]['year'] != null)
 					topGroup['year'] = tmpSearchData[n]['year'];
 				topGroup[relKey] = tmpSearchData[n][relKey];
@@ -1786,6 +1789,7 @@ function _searchTagCache(type,query) {
 		case "collection": typeSearch = true; relKey = "collectionid"; orderArray = ["1","2","3"]; break;
 		case "creator": typeSearch = true; relKey = "creatorid"; orderArray = ["1","2","3","4","5","6","7"]; break;
 		case "song": typeSearch = true; relKey = "songid"; orderArray = ["1","2","3"]; break;
+		case "club": typeSearch = true; relKey = "clubid"; orderArray = ["1","2"]; break;
 	}
 	var hits = new Array();
 	// first find matches
@@ -2092,10 +2096,17 @@ function printTags(query) {
 		matchSpan.appendChild(lastBlock);
 		if (hasMainTitle) matchSpan.appendChild(document.createTextNode(")"));
 		suggestionDiv.appendChild(matchSpan);
-		if (searchType.value == 'animelist') {
+		if (entry['type'] != null) {
 			var extraInfo = document.createElement('div');
-			extraInfo.className = "info anime";
-			extraInfo.appendChild(document.createTextNode(entry['animetype']+", "+entry['eps']+" "+(entry['animetype'].toLowerCase().indexOf('movie') >= 0 ? "part" : "ep")+(entry['eps'] > 1 ? "s" : "")+", "+entry['year']));
+			extraInfo.className = "info";
+			var extraInfoStr = entry['type'];
+			if (entry['eps'] != null) {
+				extraInfoStr += ", "+entry['eps']+" "+(entry['type'].toLowerCase().indexOf('movie') >= 0 ? "part" : "ep")+(entry['eps'] > 1 ? "s" : "")+", "+entry['year'];
+			}
+			if (entry['rating'] != null) {
+				extraInfoStr += (entry['rating'] == 0 ? '' : ", "+(entry['rating'] / 100)+"/10");
+			}
+			extraInfo.appendChild(document.createTextNode(extraInfoStr));
 			suggestionDiv.appendChild(extraInfo);
 		}
 		if (link) {
