@@ -156,3 +156,7 @@ table,
 	-webkit-border-radius:5px 5px 0 0;
 	border-radius:5px 5px 0 0;
 }
+
+#layout-main div.profile_all div.pane div.settings.block li, #layout-main div.profile_all div.pane > ul li, #layout-main div.profile_all div.pane.general div.body div.pane div ul li { 
+	line-height: 18px;
+}

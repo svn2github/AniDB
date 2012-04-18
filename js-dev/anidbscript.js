@@ -2118,7 +2118,7 @@ function printTags(query) {
 		target.appendChild(result);
 		i++;
 	}
-	if (searchData.length >= 6) {
+	if (searchData.length >= 6 || searchData.length < 6 && lastHitCount >= searchLimit) {
 		var showMore = document.createElement("li");
 
 		var a = document.createElement("a");
