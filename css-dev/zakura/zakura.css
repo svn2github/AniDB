@@ -426,6 +426,7 @@ div.pagination span a
 
 #layout-search ul.quicksearch li:hover {
 	background-color: #F5F7FF;
+	font-weight: normal;
 }
 
 #layout-search ul.quicksearch li:last-child {

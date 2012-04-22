@@ -1555,13 +1555,17 @@ function parseSearchResults(jsonData) {
 		case "collectionlist": typeSearch = true; relKey = "collectionid"; orderArray = ["2","3"]; break;
 		case "creatorlist": typeSearch = true; relKey = "creatorid"; orderArray = ["2","3","4","5","6","7"]; break;
 		case "songlist": typeSearch = true; relKey = "songid"; orderArray = ["2","3"]; break;
+		case "animetags":
+		case "chartags":
 		case "clublist": typeSearch = true; relKey = "clubid"; orderArray = ["2"]; break;
+		case "userlist": typeSearch = true; relKey = "uid"; orderArray = []; break;
 		case "grouplist": // groups need pre-processing because of the short and long names
 			for (var n = 0; n < tmpSearchData.length; n++) {
 				var name = tmpSearchData[n]['name'];
 				var shortName = tmpSearchData[n]['shortname'];
 				tmpSearchData[n]['name'] = name + " ("+shortName+")";
 			}
+			typeSearch = true; relKey = "id"; orderArray = []; break;
 			break;
 	}
 	lastSearch
@@ -1572,24 +1576,37 @@ function parseSearchResults(jsonData) {
 		var deflangid = jsonData['deflangid'] || 0;
 		searchTypeDefaultLanguageId = deflangid;
 		for(var n = 0; n < tmpSearchData.length; n++) {
+			if (type == "songlist") tmpSearchData[n]['song_type'] = "Song";
+			if (type == "userlist") {
+				tmpSearchData[n]['type'] = "1";
+				tmpSearchData[n]['user_type'] = tmpSearchData[n]['role'];
+			}
 			var topGroup = tmpObject[tmpSearchData[n][relKey]];
 			if (topGroup == null) {
 				topGroup = new Object();
 				topGroup['link'] = tmpSearchData[n]['link'];
-				if (tmpSearchData[n]['picurl'] != null)
-					topGroup['picurl'] = tmpSearchData[n]['picurl'];
-				if (tmpSearchData[n]['restricted'] != null)
-					topGroup['restricted'] = tmpSearchData[n]['restricted'];
-				if (tmpSearchData[n]['is_spoiler'] != null)
-					topGroup['is_spoiler'] = tmpSearchData[n]['is_spoiler'];
-				if (tmpSearchData[n][jsonData['type']+'_type'] != null)
-					topGroup['type'] = tmpSearchData[n][jsonData['type']+'_type'];
-				if (tmpSearchData[n]['eps'] != null)
-					topGroup['eps'] = tmpSearchData[n]['eps'];
-				if (tmpSearchData[n]['rating'] != null)
-					topGroup['rating'] = tmpSearchData[n]['rating'];
-				if (tmpSearchData[n]['year'] != null)
-					topGroup['year'] = tmpSearchData[n]['year'];
+				if (tmpSearchData[n]['picurl'] != null) topGroup['picurl'] = tmpSearchData[n]['picurl'];
+				if (tmpSearchData[n]['restricted'] != null) topGroup['restricted'] = tmpSearchData[n]['restricted'];
+				if (tmpSearchData[n]['is_spoiler'] != null) topGroup['is_spoiler'] = tmpSearchData[n]['is_spoiler'];
+				if (tmpSearchData[n][jsonData['type']+'_type'] != null) topGroup['type'] = tmpSearchData[n][jsonData['type']+'_type'];
+				if (tmpSearchData[n]['eps'] != null) topGroup['eps'] = tmpSearchData[n]['eps'];
+				if (tmpSearchData[n]['rating'] != null) topGroup['rating'] = tmpSearchData[n]['rating'];
+				if (tmpSearchData[n]['votes'] != null) topGroup['votes'] = tmpSearchData[n]['votes'];
+				if (tmpSearchData[n]['year'] != null) topGroup['year'] = tmpSearchData[n]['year'];
+				if (tmpSearchData[n]['chapters'] != null) topGroup['chapters'] = tmpSearchData[n]['chapters'];
+				if (tmpSearchData[n]['volumes'] != null) topGroup['volumes'] = tmpSearchData[n]['volumes'];
+				if (tmpSearchData[n]['birthdate'] != null && tmpSearchData[n]['birthdate'] != "") topGroup['birthdate'] = tmpSearchData[n]['birthdate'];
+				if (tmpSearchData[n]['deathdate'] != null && tmpSearchData[n]['deathdate'] != "") topGroup['deathdate'] = tmpSearchData[n]['deathdate'];
+				if (tmpSearchData[n]['founded'] != null) topGroup['founded'] = tmpSearchData[n]['founded'];
+				if (tmpSearchData[n]['age'] != null) topGroup['age'] = tmpSearchData[n]['age'];
+				if (tmpSearchData[n]['gender'] != null && tmpSearchData[n]['gender'] != "-") topGroup['gender'] = tmpSearchData[n]['gender'];
+				if (tmpSearchData[n]['bloodtype'] != null && tmpSearchData[n]['bloodtype'] != "-") topGroup['bloodtype'] = tmpSearchData[n]['bloodtype'];
+				if (tmpSearchData[n]['state'] != null) topGroup['state'] = tmpSearchData[n]['state'];
+				if (tmpSearchData[n]['membercnt'] != null) topGroup['membercnt'] = tmpSearchData[n]['membercnt'];
+				if (tmpSearchData[n]['commentcnt'] != null) topGroup['commentcnt'] = tmpSearchData[n]['commentcnt'];
+				if (tmpSearchData[n]['tracks'] != null) topGroup['tracks'] = tmpSearchData[n]['tracks'];
+				if (tmpSearchData[n]['playlength'] != null) topGroup['playlength'] = tmpSearchData[n]['playlength'];
+				if (tmpSearchData[n]['role'] != null) topGroup['role'] = tmpSearchData[n]['role'];
 				topGroup[relKey] = tmpSearchData[n][relKey];
 				tmpObject[tmpSearchData[n][relKey]] = topGroup;
 				tmp.push(topGroup[relKey]);
@@ -1790,6 +1807,10 @@ function _searchTagCache(type,query) {
 		case "creator": typeSearch = true; relKey = "creatorid"; orderArray = ["1","2","3","4","5","6","7"]; break;
 		case "song": typeSearch = true; relKey = "songid"; orderArray = ["1","2","3"]; break;
 		case "club": typeSearch = true; relKey = "clubid"; orderArray = ["1","2"]; break;
+		case "group": typeSearch = true; relKey = "id"; orderArray = ["1"]; break;
+		case "user": typeSearch = true; relKey = "uid"; orderArray = ["1"]; break;
+		case "animetags":
+		case "charactertags": typeSearch = true; relkey = "tagid"; orderArray = ["1","2"]; break;
 	}
 	var hits = new Array();
 	// first find matches
@@ -2053,10 +2074,8 @@ function printTags(query) {
 			img.className = "thumb";
 			img.src = picurl;
 			img.alt = "image";
-			if (link)
-				a.appendChild(img);
-			else
-				result.appendChild(img);
+			if (link) a.appendChild(img);
+			else result.appendChild(img);
 		}
 		var suggestionDiv = document.createElement("div");
 		suggestionDiv.className = "suggestion";
@@ -2100,12 +2119,28 @@ function printTags(query) {
 			var extraInfo = document.createElement('div');
 			extraInfo.className = "info";
 			var extraInfoStr = entry['type'];
-			if (entry['eps'] != null) {
-				extraInfoStr += ", "+entry['eps']+" "+(entry['type'].toLowerCase().indexOf('movie') >= 0 ? "part" : "ep")+(entry['eps'] > 1 ? "s" : "")+", "+entry['year'];
+			if (entry['gender'] != null) extraInfoStr += ", "+entry['gender'];
+			if (entry['bloodtype'] != null) extraInfoStr += ", blood type: "+entry['bloodtype'];
+			if (entry['eps'] != null) extraInfoStr += ", "+entry['eps']+" "+(entry['type'].toLowerCase().indexOf('movie') >= 0 ? "part" : "ep")+(entry['eps'] > 1 ? "s" : "");
+			if (entry['volumes'] != null) extraInfoStr += ", "+entry['volumes']+" volume"+(entry['volumes'] > 1 ? "s" : "");
+			if (entry['state'] != null) {
+				extraInfoStr += ", state: "+entry['state'];
+				if (entry['state'] == 'public') {
+					if (entry['membercnt'] != null) extraInfoStr += ", "+entry['membercnt']+" member"+(entry['membercnt'] > 1 ? "s" : "");
+					if (entry['commentcnt'] != null) extraInfoStr += ", "+entry['commentcnt']+" message"+(entry['commentcnt'] > 1 ? "s" : "");
+				}
 			}
-			if (entry['rating'] != null) {
-				extraInfoStr += (entry['rating'] == 0 ? '' : ", "+(entry['rating'] / 100)+"/10");
-			}
+			if (entry['tracks'] != null) extraInfoStr += ", "+entry['tracks']+" track"+(entry['tracks'] > 1 ? "s" : "");
+			if (entry['playlength'] != null) extraInfoStr += ", length: "+entry['playlength'];
+			if (entry['chapters'] != null) extraInfoStr += ", "+entry['chapters']+" chapter"+(entry['chapters'] > 1 ? "s" : "");
+			if (entry['founded'] != null) extraInfoStr += ", founded: "+entry['founded'];
+			if (entry['year'] != null) extraInfoStr += ", "+entry['year'];
+			if (entry['birthdate'] != null) extraInfoStr +=", "+(entry['type'].toLowerCase() == "person" || entry['type'].toLowerCase() == "character" ? "born:" : "founded")+": "+entry['birthdate'];
+			if (entry['deathdate'] != null) extraInfoStr +=", "+(entry['type'].toLowerCase() == "person" || entry['type'].toLowerCase() == "character" ? "died:" : "dissolved")+": "+entry['deathdate'];
+			if (entry['age'] != null) extraInfoStr += ", age: "+entry['age'];
+			if (entry['role'] != null && entry['role'] != entry['type']) extraInfoStr += ", "+entry['role'];			
+			if (entry['rating'] != null) extraInfoStr += ", "+entry['rating'];
+			if (entry['votes'] != null && entry['votes'] > 10) extraInfoStr += " ("+entry['votes']+")";
 			extraInfo.appendChild(document.createTextNode(extraInfoStr));
 			suggestionDiv.appendChild(extraInfo);
 		}
