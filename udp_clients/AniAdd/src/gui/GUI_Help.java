@@ -50,12 +50,12 @@ public class GUI_Help extends javax.swing.JPanel implements GUI.ITab {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        lbl_Icons.setFont(new java.awt.Font("Tahoma", 1, 14));
+        lbl_Icons.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_Icons.setText("Icons:");
 
         btn_ResetSettings.setText("Reset Settings to Default");
 
-        jLabel1.setText("Current Build: 24.01.11");
+        jLabel1.setText("Current Build: 30.04.12");
 
         jLabel2.setText("Use the DEL Key to remove selected files from the file table");
 

@@ -2,7 +2,9 @@ package gui;
 
 import aniAdd.Communication.ComEvent;
 import aniAdd.IAniAdd;
+import java.util.Map.Entry;
 import java.util.TreeMap;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.BadLocationException;
 import processing.TagSystem;
 
@@ -40,33 +42,59 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         tags.put("ETr", txt_ET_Romaji.getText());
         tags.put("ETe", txt_ET_English.getText());
         tags.put("ETk", txt_ET_Kanji.getText());
+        tags.put("EAirDate", "");
 
         tags.put("GTs", txt_GT_Short.getText());
         tags.put("GTl", txt_GT_Long.getText());
 
-        tags.put("FALng", txt_Dubs.getText());
-        tags.put("FSLng", txt_Subs.getText());
 
         tags.put("FCrc", txt_Crc.getText());
+        tags.put("FALng", txt_Dubs.getText());
         tags.put("FACodec", txt_AudioCodec.getText());
+        tags.put("FSLng", txt_Subs.getText());
         tags.put("FVCodec", txt_VideoCodec.getText());
         tags.put("FVideoRes", txt_Resolution.getText());
-        tags.put("Quality", cmb_Quality.getSelectedItem().toString());
+        
+        tags.put("FColorDepth", "");
+        tags.put("FDuration", "1440");
+         
         tags.put("AniDBFN", "Suzumiya_Haruhi_no_Yuuutsu_(2009)_-_01_-_The_Melancholy_of_Suzumiya_Haruhi_Part_1_-_[a.f.k.](32f2f4ea).avi");
         tags.put("CurrentFN", txt_CurrentFN.getText());
+        
         
         tags.put("EpNo", updown_EpNo.getValue().toString());
         tags.put("EpHiNo", updown_EpHiNo.getValue().toString());
         tags.put("EpCount", updown_EpCount.getValue().toString());
-        tags.put("Ver", updown_Version.getValue().toString());
-
+        
+        tags.put("FId", "1");
+        tags.put("AId", "2");
+        tags.put("EId", "3");
+        tags.put("GId", "4");
+        tags.put("LId", "5");        
+             
+        tags.put("OtherEps", "5'7");
+        
+        tags.put("Quality", cmb_Quality.getSelectedItem().toString());
         tags.put("Source", cmb_Source.getSelectedItem().toString());
         tags.put("Type", cmb_Type.getSelectedItem().toString());
 
-        tags.put("Depr", chck_IsDeprecated.isSelected()?"1":"");
-        tags.put("Cen", chck_IsCensored.isSelected()?"1":"");
         tags.put("Watched", chck_IsWatched.isSelected()?"1":"");
+
+        tags.put("Depr", chck_IsDeprecated.isSelected()?"1":"");
+        tags.put("CrcOK", "1");
+        tags.put("CrcErr", "0");
+        tags.put("Depr", chck_IsDeprecated.isSelected()?"1":"");
         
+        tags.put("Cen", chck_IsCensored.isSelected()?"1":"");
+        tags.put("UnCen", !chck_IsCensored.isSelected()?"1":"");
+        
+        tags.put("Ver", updown_Version.getValue().toString());
+        
+        DefaultTableModel model = (DefaultTableModel)tbl_Vars.getModel();
+        model.setRowCount(0);
+        for (Entry<String, String> tag : tags.entrySet()) {
+            model.addRow(new Object[]{ tag.getKey(), tag.getValue() });
+        }
 
         try {
             TagSystem.Evaluate(txt_CodeBox.getText(), tags);
@@ -161,11 +189,14 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         jPanel5 = new javax.swing.JPanel();
         lbl_EpNo = new javax.swing.JLabel();
         updown_EpNo = new javax.swing.JSpinner();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_Vars = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(780, 560));
 
         txt_CodeBox.setColumns(20);
-        txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 11));
+        txt_CodeBox.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         txt_CodeBox.setRows(5);
         txt_CodeBox.setText("AT:=[%ATr%,%ATe%,%ATk%]\nET:=[%ETe%,%ETr%,%ETk%]\nGT:=\"[\" [%GTs%,%GTl%] \"]\"\n\nEpNoPad:=$pad(%EpNo%,$max($len(%EpHiNo%),$len(%EpCount%)),\"0\")\n\nSrc:=\"[\"%Source%\"]\"\nDepr:={%Depr%?\"[Depr]\":\"\"}\nCen:={%Cen%?\"[Cen]\":\"\"}\nVer:={%Ver%=\"1\"?\"\":\"v\"%Ver%} \n\nFileName:=%AT%\" \"%EpNoPad% %Ver% \" - \"%ET%\" \"%GT% %Depr% %Cen% %Src%\nPathName:=\"E:\\Anime\\!Processed\\\" $repl(%AT%,'[\\\\\\\":/*|<>?]',\"\")");
         txt_CodeBox.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -428,7 +459,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pnl_GroupNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnl_AnimeTitles, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Titles", jPanel1);
@@ -559,7 +590,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
         lbl_CurrentFN.setText("Current Filename:");
 
         txt_CurrentFN.setColumns(20);
-        txt_CurrentFN.setFont(new java.awt.Font("Tahoma", 0, 11));
+        txt_CurrentFN.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         txt_CurrentFN.setLineWrap(true);
         txt_CurrentFN.setRows(5);
         txt_CurrentFN.setText("[Chihiro]​_Suzumiya​_Haruhi​_no​_Yuutsu​_(2009)​_-​_01​_[848x480​_H.​264​_AAC][7595C366].​mkv");
@@ -593,16 +624,16 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(updown_Version, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmb_Source, 0, 85, Short.MAX_VALUE)
-                                    .addComponent(cmb_Quality, 0, 85, Short.MAX_VALUE)))
+                                    .addComponent(cmb_Source, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmb_Quality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbl_Subs)
                                     .addComponent(lbl_Dubs))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_Subs, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                                    .addComponent(txt_Dubs, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))))
+                                    .addComponent(txt_Subs)
+                                    .addComponent(txt_Dubs)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lbl_Crc)
@@ -627,8 +658,8 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                                 .addComponent(lbl_VideoCodec, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_AudioCodec, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
-                                .addComponent(txt_VideoCodec, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                                .addComponent(txt_AudioCodec)
+                                .addComponent(txt_VideoCodec))
                             .addGap(11, 11, 11)))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -680,7 +711,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_CurrentFN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -765,20 +796,18 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_ACatList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                            .addComponent(txt_ACatList, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txt_YearBegin, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_YearEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                                    .addComponent(txt_YearEnd))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
-                                        .addComponent(lbl_EpCount)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(lbl_EpHiNo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addComponent(lbl_EpCount))
+                                    .addComponent(lbl_EpHiNo))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(updown_EpHiNo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(updown_EpCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -874,24 +903,62 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
 
         jTabbedPane1.addTab("Misc", jPanel2);
 
+        tbl_Vars.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Value"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tbl_Vars);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Variables", jPanel6);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(lbl_CursorLocation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_ErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE))
+                .addComponent(lbl_ErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_FileName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)))
-            .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                    .addComponent(lbl_DirNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbl_FileNameStr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(scrl_txt_CodeBox)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -906,7 +973,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
                     .addComponent(lbl_DirName)
                     .addComponent(lbl_DirNameStr))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addComponent(scrl_txt_CodeBox, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_ErrorMsg)
@@ -959,7 +1026,9 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_ACatList;
     protected javax.swing.JLabel lbl_AT_English;
@@ -998,6 +1067,7 @@ public class GUI_TagSystem extends javax.swing.JPanel implements GUI.ITab {
     protected javax.swing.JPanel pnl_EpTitles;
     protected javax.swing.JPanel pnl_GroupNames;
     protected javax.swing.JScrollPane scrl_txt_CodeBox;
+    private javax.swing.JTable tbl_Vars;
     private javax.swing.JTextField txt_ACatList;
     protected javax.swing.JTextField txt_AT_English;
     protected javax.swing.JTextField txt_AT_Kanji;

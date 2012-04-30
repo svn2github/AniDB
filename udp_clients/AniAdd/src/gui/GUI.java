@@ -4,6 +4,7 @@ import aniAdd.Communication.ComEvent;
 import aniAdd.IAniAdd;
 import aniAdd.Modules.IMod_GUI;
 import aniAdd.Modules.IModule;
+import aniAdd.misc.Misc;
 import aniAdd.misc.Mod_Memory;
 import java.awt.Color;
 import java.awt.datatransfer.DataFlavor;
@@ -11,13 +12,7 @@ import java.awt.datatransfer.Transferable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import java.util.Stack;
+import java.util.*;
 import javax.swing.JComponent;
 import javax.swing.TransferHandler;
 import javax.swing.event.ChangeEvent;
@@ -115,7 +110,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         Color c = (comEvent.Type() == ComEvent.eType.Error) ? Color.RED : (comEvent.Type() == ComEvent.eType.Warning ? Color.YELLOW : Color.GREEN);
         pnl_Notice.setBackground(c);
-        lbl_Notice.setText((String) comEvent.Params(0));
+        lbl_Notice.setText(Misc.DateToString(new Date()) + " " + (String) comEvent.Params(0));
 
         pnl_Notice.setVisible(true);
     }
@@ -169,11 +164,11 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         InitUI();
 
-       if((Integer)(mem.get("FirstStart", 0)) < 8) {
+       if((Integer)(mem.get("FirstStart", 0)) < 9) {
             DisplayErrorEvent(new ComEvent(this, ComEvent.eType.Information, "<html>Changelog:<br/>" +
-                "Added more TagSystem functions: $uc (uppercase), $lc (lowercase), $indexof, $lindexof, $add, $sub, $mul, $div<br/>" +
-                "New Variable in TagSystem: %ACatList%<br/>" +
-                "Some other minor fixes<br/>" +
+                "Added more TagSystem functions: See new tab \"Variables\" in the TagSystem section<br/>"+
+                "Fixed GUI slowdown after processing many files<br/>" +
+                "Fixed Re-authentication issues<br/>" +
                 "</html>"));
         }
 

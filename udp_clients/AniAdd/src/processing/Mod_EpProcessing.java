@@ -56,6 +56,9 @@ public class Mod_EpProcessing implements IModule {
     public void ClearFiles() {
         index2Id.clear();
         files.clear();
+        totalBytes = 0;
+        processedBytes = 0;
+        processedFileCount = 0;
         Log(ComEvent.eType.Information, eComType.FileCountChanged);
     }
 
@@ -109,6 +112,9 @@ public class Mod_EpProcessing implements IModule {
             procFile.ActionsDone().add(eAction.Process);
             procFile.ActionsTodo().remove(eAction.Process);
 
+            processedBytes += procFile.FileObj().length();
+            processedFileCount++;
+            
             Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.ParsingDone, procFile.Id(), fileParser);
 
             boolean sendML = procFile.ActionsTodo().contains(eAction.MyListCmd);
@@ -136,19 +142,27 @@ public class Mod_EpProcessing implements IModule {
         BitSet binCode = new BitSet(64);
         binCode.set(0); //'state
         binCode.set(1); //'Depr
+        binCode.set(2); //'other eps //new
         binCode.set(3); //'lid
         binCode.set(4); //gid
         binCode.set(5); //eid
         binCode.set(6); //aid
+        
+        binCode.set(9); //'bit depth //new
         binCode.set(11); //'crc
+        
         binCode.set(17); //'video res
         binCode.set(19); //'VideoCodec
         binCode.set(21); //'AudioCodec
         binCode.set(22); //'Source
         binCode.set(23); //'Quality
+        
         binCode.set(24); //'anidb filename scheme
+        binCode.set(27); //'air date //new
+        binCode.set(29); //'length in seconds //new
         binCode.set(30); //'sub lang list
         binCode.set(31); //'dub lang list
+        
         binCode.set(37); //'watched state
         cmd.setArgs("fmask", Misc.toMask(binCode, 40));
 
@@ -158,16 +172,19 @@ public class Mod_EpProcessing implements IModule {
         binCode.set(5); //'year
         binCode.set(6); //'highest EpCount
         binCode.set(7); //'epCount
+        
         binCode.set(10); //'synonym
         binCode.set(11); //'short name
         binCode.set(12); //'other name
         binCode.set(13); //'english name
         binCode.set(14); //'kanji name
         binCode.set(15); //'romaji name
+        
         binCode.set(20); //'ep kanji
         binCode.set(21); //'ep romaji
         binCode.set(22); //'ep name
         binCode.set(23); //'epno
+        
         binCode.set(30); //'group short name
         binCode.set(31); //'group name
         cmd.setArgs("amask", Misc.toMask(binCode, 32));
@@ -252,9 +269,11 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_EId", df.poll());
             procFile.Data().put("DB_GId", df.poll());
             procFile.Data().put("DB_LId", df.poll());
+            procFile.Data().put("DB_OtherEps", df.poll());
             procFile.Data().put("DB_Deprecated", df.poll());
             procFile.Data().put("DB_State", df.poll());
             procFile.Data().put("DB_CRC", df.poll());
+            procFile.Data().put("DB_ColorDepth", df.poll());
             procFile.Data().put("DB_Quality", df.poll());
             procFile.Data().put("DB_Source", df.poll());
             procFile.Data().put("DB_AudioCodec", df.poll());
@@ -262,6 +281,8 @@ public class Mod_EpProcessing implements IModule {
             procFile.Data().put("DB_VideoRes", df.poll());
             procFile.Data().put("DB_FileAudioLang", df.poll());
             procFile.Data().put("DB_FileSubLang", df.poll());
+            procFile.Data().put("DB_Duration", df.poll());
+            procFile.Data().put("DB_AirDate", df.poll());
             procFile.Data().put("DB_FileName", df.poll());
             procFile.Data().put("DB_IsWatched", df.poll());
 
@@ -583,6 +604,7 @@ public class Mod_EpProcessing implements IModule {
         tags.put("ETr", procFile.Data().get("DB_EpN_Romaji"));
         tags.put("ETe", procFile.Data().get("DB_EpN_English"));
         tags.put("ETk", procFile.Data().get("DB_EpN_Kanji"));
+        tags.put("EAirDate", procFile.Data().get("DB_AirDate"));
 
         tags.put("GTs", procFile.Data().get("DB_Group_Short"));
         tags.put("GTl", procFile.Data().get("DB_Group_Long"));
@@ -593,12 +615,23 @@ public class Mod_EpProcessing implements IModule {
         tags.put("FSLng", procFile.Data().get("DB_FileSubLang"));
         tags.put("FVCodec", procFile.Data().get("DB_VideoCodec"));
         tags.put("FVideoRes", procFile.Data().get("DB_VideoRes"));
+        tags.put("FColorDepth", procFile.Data().get("DB_ColorDepth"));
+        tags.put("FDuration", procFile.Data().get("DB_Duration"));
+
         tags.put("AniDBFN", procFile.Data().get("DB_FileName"));
         tags.put("CurrentFN", procFile.FileObj().getName());
 
         tags.put("EpNo", procFile.Data().get("DB_EpNo"));
         tags.put("EpHiNo", procFile.Data().get("DB_EpHiCount"));
         tags.put("EpCount", procFile.Data().get("DB_EpCount"));
+		
+        tags.put("FId", procFile.Data().get("DB_FId"));
+        tags.put("AId", procFile.Data().get("DB_AId"));
+        tags.put("EId", procFile.Data().get("DB_EId"));
+        tags.put("GId", procFile.Data().get("DB_GId"));
+        tags.put("LId", procFile.Data().get("DB_LId"));
+        
+        tags.put("OtherEps", procFile.Data().get("DB_OtherEps"));
 
         tags.put("Quality", procFile.Data().get("DB_Quality"));
         tags.put("Source", procFile.Data().get("DB_Source"));
@@ -611,7 +644,10 @@ public class Mod_EpProcessing implements IModule {
         }
 
         tags.put("Depr", procFile.Data().get("DB_Deprecated").equals("1") ? "1" : "");
+        tags.put("CrcOK", ((Integer.valueOf(procFile.Data().get("DB_State")) & 1 << 0) != 0 ? "1" : ""));
+        tags.put("CrcErr", ((Integer.valueOf(procFile.Data().get("DB_State")) & 1 << 1) != 0 ? "1" : ""));
         tags.put("Cen", ((Integer.valueOf(procFile.Data().get("DB_State")) & 1 << 7) != 0 ? "1" : ""));
+        tags.put("UnCen", ((Integer.valueOf(procFile.Data().get("DB_State")) & 1 << 6) != 0 ? "1" : ""));
         tags.put("Ver", GetFileVersion(Integer.valueOf(procFile.Data().get("DB_State"))).toString());
 
         String codeStr = (String) mem.get("GUI_TagSystemCode");
@@ -697,6 +733,7 @@ public class Mod_EpProcessing implements IModule {
 
             index2Id.add(lastFileId++);
             files.put(fileInfo);
+            totalBytes +=fileInfo.FileObj().length();
         }
 
         Log(ComEvent.eType.Information, eComType.FileCountChanged);
@@ -710,6 +747,13 @@ public class Mod_EpProcessing implements IModule {
 
     public void delFiles(int[] indeces) {
         for (int i = indeces.length; i > 0; i--) {
+            FileInfo fi =  files.get("Id", index2Id.get(indeces[i - 1]));
+            long length = files.get("Id", index2Id.get(indeces[i - 1])).FileObj().length();
+            if(fi.ActionsDone().contains(eAction.Process)) {
+                processedBytes-=length;
+                processedFileCount--;
+            }
+            totalBytes -= length;
             files.remove("Id", index2Id.get(indeces[i - 1]));
             index2Id.remove(indeces[i - 1]);
         }
@@ -770,28 +814,33 @@ public class Mod_EpProcessing implements IModule {
         return isProcessing;
     }
 
+    
+    private int processedFileCount;
     public int processedFileCount() {
-        int count = 0;
-        for (FileInfo fi : files.values()) {
-            if (fi.ActionsDone().contains(eAction.Process)) {
-                count++;
-            }
+        return processedFileCount;
+        //int count = 0;
+        //for (FileInfo fi : files.values()) {
+        //    if (fi.ActionsDone().contains(eAction.Process)) {
+        //        count++;
+        //    }
 
-        }
-        return count;
+        //}
+        //return count;
     }
 
+    private long processedBytes;
     public long processedBytes() {
-        long count = 0;
-        for (FileInfo fi : files.values()) {
-            if (fi.ActionsDone().contains(eAction.Process)) {
-                count += fi.FileObj().length();
-            }
+        return processedBytes;
+        //long count = 0;
+        //for (FileInfo fi : files.values()) {
+        //    if (fi.ActionsDone().contains(eAction.Process)) {
+        //        count += fi.FileObj().length();
+        //    }
 
-        }
+        //}
         //if(fileParser!=null) count += fileParser.getBytesRead();
 
-        return count;
+        //return count;
     }
 
     public long processedBytesCurrentFile() {
@@ -807,13 +856,15 @@ public class Mod_EpProcessing implements IModule {
         return fileParser != null ? fileParser.getByteCount() : 0;
     }
 
+    private long totalBytes;
     public long totalBytes() {
-        long count = 0;
-        for (FileInfo fi : files.values()) {
-            count += fi.FileObj().length();
-        }
+        return totalBytes;
+        //long count = 0;
+        //for (FileInfo fi : files.values()) {
+        //    count += fi.FileObj().length();
+        //}
 
-        return count;
+        //return count;
     }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="IModule">
