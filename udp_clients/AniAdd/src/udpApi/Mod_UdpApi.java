@@ -672,6 +672,7 @@ public class Mod_UdpApi implements IModule {
                 break;
             case 602:
                 isAuthed = false;
+                connected = false;
                 Log(ComEvent.eType.Warning, "Server Busy. Re-authenticating in 5 min.");
                 idleClass.DelayedAuthentication();
 

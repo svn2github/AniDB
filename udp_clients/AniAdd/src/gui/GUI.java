@@ -110,7 +110,7 @@ public class GUI extends javax.swing.JPanel implements IMod_GUI {
 
         Color c = (comEvent.Type() == ComEvent.eType.Error) ? Color.RED : (comEvent.Type() == ComEvent.eType.Warning ? Color.YELLOW : Color.GREEN);
         pnl_Notice.setBackground(c);
-        lbl_Notice.setText(Misc.DateToString(new Date()) + " " + (String) comEvent.Params(0));
+        lbl_Notice.setText((String)comEvent.Params(0));
 
         pnl_Notice.setVisible(true);
     }
