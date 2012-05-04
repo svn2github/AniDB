@@ -137,9 +137,12 @@ function cTimeDateHour(data) {
  * @return String containing node data
  */
 function nodeData(node) {
-	try { return node.childNodes.item(0).nodeValue; }
-	catch(e) { return ''; }
-
+	try {
+		if (node != null && node.childNodes.length > 0)
+			return node.childNodes.item(0).nodeValue; 
+		else
+			return '';
+	} catch(e) { return ''; }
 }
 
 // STUBS //
