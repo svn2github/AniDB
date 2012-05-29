@@ -37,7 +37,7 @@ public class Mod_UdpApi implements IModule {
     private String autoPass;
     private String session;
     private String aniDBsession;
-    private boolean connected;
+    private boolean connected, shutdown;
     private boolean aniDBAPIDown;
     private boolean auth, isAuthed;
     private ArrayList<Query> queries;
@@ -193,6 +193,8 @@ public class Mod_UdpApi implements IModule {
         }
 
         if (!connected) {
+            if(com != null) com.close();
+            
             if (!connect()) {
                 return false;
             }
@@ -259,6 +261,7 @@ public class Mod_UdpApi implements IModule {
             return false;
         }
     }
+
 
     public void queryCmd(Cmd cmd) {
         if (cmd == null) {
@@ -352,46 +355,47 @@ public class Mod_UdpApi implements IModule {
                 now = new Date();
 
                 //if (!aniDBAPIDown) authRetry = null;
-
-                if (!aniDBAPIDown && auth) {
-                    replysPending = 0;
-                    for (int i = 0; i < queries.size(); i++) {
-                        if (queries.get(i).getSuccess() == null && queries.get(i).getSendOn() != null) {
-                            if ((now.getTime() - queries.get(i).getSendOn().getTime()) > 15000) {
-                                if (queries.get(i).getRetries() < MAXRETRIES) {
-                                    queries.get(i).setRetries(queries.get(i).getRetries() + 1);
-                                    queries.get(i).setSendOn(null);
-                                    Log(ComEvent.eType.Debug, "Cmd Timeout: Resend (Retries:" + queries.get(i).getRetries() + ")");
-                                    queryCmd(queries.get(i).getCmd());
-                                } else {
-                                    queries.get(i).setSuccess(false);
-                                    Log(ComEvent.eType.Information, "Cmd", i, false);
-                                    Log(ComEvent.eType.Error, "Sending command failed. (Retried " + MAXRETRIES + " times)");
+                try {
+                    if (!aniDBAPIDown && auth) {
+                        replysPending = 0;
+                        for (int i = 0; i < queries.size(); i++) {
+                            if (queries.get(i).getSuccess() == null && queries.get(i).getSendOn() != null) {
+                                if ((now.getTime() - queries.get(i).getSendOn().getTime()) > 15000) {
+                                    if (queries.get(i).getRetries() < MAXRETRIES) {
+                                        queries.get(i).setRetries(queries.get(i).getRetries() + 1);
+                                        queries.get(i).setSendOn(null);
+                                        Log(ComEvent.eType.Debug, "Cmd Timeout: Resend (Retries:" + queries.get(i).getRetries() + ")");
+                                        queryCmd(queries.get(i).getCmd());
+                                    } else {
+                                        queries.get(i).setSuccess(false);
+                                        Log(ComEvent.eType.Information, "Cmd", i, false);
+                                        Log(ComEvent.eType.Error, "Sending command failed. (Retried " + MAXRETRIES + " times)");
+                                    }
+                                } else if (queries.get(i).getRetries() <= MAXRETRIES) {
+                                    replysPending++;
                                 }
-                            } else if (queries.get(i).getRetries() <= MAXRETRIES) {
-                                replysPending++;
                             }
                         }
+                        this.replysPending = replysPending;
+
+                        //quickfix
+                        if ((now.getTime() - idleThreadStartedOn.getTime()) > 60000 * 5 &&
+                                (lastReplyPackage == null || (now.getTime() - lastReplyPackage.getTime()) > 60000) &&
+                                (lastDelayPackageMills == null || (now.getTime() - lastDelayPackageMills.getTime()) > 60000) &&
+                                (authRetry == null && !longDelay && !cmdToSend.isEmpty())) { 
+                            authRetry = new Date(now.getTime() + 4 * 60 * 1000);
+                            longDelay = true;
+                            Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute. Re-authentication in 5 min.");
+                        }
+                        if (longDelay && authRetry != null && (authRetry.getTime() - now.getTime() < 0) ) {
+                            idleThreadStartedOn = new Date();
+                            authenticate();
+                            longDelay = false;
+                            authRetry = null;
+                        }
+                        //quickfix end
                     }
-                    this.replysPending = replysPending;
-                    
-                    //quickfix
-                    if ((now.getTime() - idleThreadStartedOn.getTime()) > 60000 * 5 &&
-                            (lastReplyPackage == null || (now.getTime() - lastReplyPackage.getTime()) > 60000) &&
-                            (lastDelayPackageMills == null || (now.getTime() - lastDelayPackageMills.getTime()) > 60000) &&
-                            (authRetry == null && !longDelay && !cmdToSend.isEmpty())) { 
-                        authRetry = new Date(now.getTime() + 4 * 60 * 1000);
-                        longDelay = true;
-                        Log(ComEvent.eType.Warning, "Reply delay has passed 1 minute. Re-authentication in 5 min.");
-                    }
-                    if (longDelay && authRetry != null && (authRetry.getTime() - now.getTime() < 0) ) {
-                        idleThreadStartedOn = new Date();
-                        authenticate();
-                        longDelay = false;
-                        authRetry = null;
-                    }
-                    //quickfix end
-                }
+                } catch (Exception e) { }
 
                 //if (aniDBAPIDown && authRetry == null) {
                 //    authRetry = new Date(now.getTime() + 5 * 60 * 1000);
@@ -403,7 +407,7 @@ public class Mod_UdpApi implements IModule {
                 //}
                 
                 try { Thread.sleep(500); } catch (Exception exception) { }
-            } while (connected);
+            } while (!shutdown);
             
             Log(ComEvent.eType.Debug, "Idle thread has shut down");
         }
@@ -711,6 +715,8 @@ public class Mod_UdpApi implements IModule {
     public void Terminate() {
         modState = eModState.Terminating;
 
+        shutdown = true;
+        
         if (connected) {
             logOut();
             try {
