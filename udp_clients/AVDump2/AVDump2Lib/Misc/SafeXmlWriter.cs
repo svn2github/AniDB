@@ -9,18 +9,9 @@ namespace AVDump2Lib.Misc {
 	public class SafeXmlWriter : XmlTextWriter {
 		bool lowerCaseElements;
 
-		public SafeXmlWriter(TextWriter tw, Formatting formatting = Formatting.Indented, bool lowerCaseElements = false)
-			: base(tw) {
-			Formatting = formatting; this.lowerCaseElements = lowerCaseElements;
-		}
-		public SafeXmlWriter(Stream stream, Encoding encoding, Formatting formatting = Formatting.Indented, bool lowerCaseElements = false)
-			: base(stream, encoding) {
-			Formatting = formatting; this.lowerCaseElements = lowerCaseElements;
-		}
-		public SafeXmlWriter(string filename, Encoding encoding, Formatting formatting = Formatting.Indented, bool lowerCaseElements = false)
-			: base(filename, encoding) {
-			Formatting = formatting; this.lowerCaseElements = lowerCaseElements;
-		}
+		public SafeXmlWriter(TextWriter tw, Formatting formatting = Formatting.Indented, bool lowerCaseElements = false) : base(tw) { Formatting = formatting; this.lowerCaseElements = lowerCaseElements; }
+		public SafeXmlWriter(Stream stream, Encoding encoding, Formatting formatting = Formatting.Indented, bool lowerCaseElements = false) : base(stream, encoding) { Formatting = formatting; this.lowerCaseElements = lowerCaseElements; }
+		public SafeXmlWriter(string filename, Encoding encoding, Formatting formatting = Formatting.Indented, bool lowerCaseElements = false) : base(filename, encoding) { Formatting = formatting; this.lowerCaseElements = lowerCaseElements; }
 
 
 

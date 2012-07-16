@@ -47,5 +47,9 @@ namespace AVDump2CL {
 				Console.ResetColor();
 			}
 		}
+
+		public override string ToString() {
+			return string.Format("(FileEnvironment Path=\"{0}\" Size={1} StartedOn=\"{2}\" Errors={3})", File.FullName, File.Length, StartedOn, Exceptions.Count);
+		}
 	}
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using AVDump2Lib.InfoGathering.InfoProvider.Tools;
 using AVDump2Lib.InfoGathering.Parser.MediaInfoLib;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
 using AVDump2Lib.InfoGathering.Parser.SubtitleInfo;
 
 namespace AVDump2Lib.InfoGathering.InfoProvider {
@@ -199,13 +199,12 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 			//bool accept = false;
 			int count = 0;
-			string line;
 			//int lineType = 0, dummy;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			while((line = sr.ReadLine()) != null) {
+
+			foreach(var line in ReadLines(sr, 1024)) {
 				if(regexParse.IsMatch(line)) count++;
 				if(count > 20) break;
-
 
 				/*if(int.TryParse(line, out dummy)) {
 					lineType = 1;
@@ -292,7 +291,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			if(!IsCandidate) return;
 
 			var sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			var line = sr.ReadLine();
+			var line = ReadLines(sr, 1024).FirstOrDefault() ?? "";
 			IsCandidate = line.Contains("VobSub index file, v");
 
 			if(IsCandidate) {
@@ -325,13 +324,12 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			string line;
-			int i, matches = 0;
+			int i = 0, matches = 0;
 			Regex regex = new Regex(@"\[\d\d\:\d\d\.\d\d\].*");
-			for(i = 0;i < 30;i++) {
-				line = sr.ReadLine();
-				if(line == null) break;
+			foreach(var line in ReadLines(sr, 1024)) {
+				//if(line == null) break;
 				matches += regex.IsMatch(line) ? 1 : 0;
+				i++;
 			}
 			if(matches / (double)i < 0.8 || matches == 0) { IsCandidate = false; return; }
 		}
@@ -342,13 +340,12 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			string line;
-			int i, matches = 0;
+			int i = 0, matches = 0;
 			Regex regex = new Regex(@"^\d\d\:\d\d\:\d\d(\.\d)?\:.*");
-			for(i = 0;i < 30;i++) {
-				line = sr.ReadLine();
-				if(line == null) break;
+			foreach(var line in ReadLines(sr, 1024)) {
+				//if(line == null) break;
 				matches += regex.IsMatch(line) ? 1 : 0;
+				i++;
 			}
 			if(matches / (double)i < 0.8 || matches == 0) { IsCandidate = false; return; }
 		}
@@ -359,15 +356,18 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			string line;
-			int i, matches = 0;
+			int i = 0, matches = 0;
 			Regex regex = new Regex(@"\s*\d*,\s*\d*," + "\".*\"");
-			for(i = 0;i < 50;i++) {
-				line = sr.ReadLine();
-				if(line.Contains(",\"") && !line.EndsWith("\"")) line += sr.ReadLine();
+			string checkLine = "";
+			foreach(var line in ReadLines(sr, 1024)) {
+				checkLine += line;
+				if(!line.Contains(",\"") || line.EndsWith("\"")) {
+					checkLine = "";
 
-				if(line == null) break;
-				matches += regex.IsMatch(line) ? 1 : 0;
+					//if(line == null) break;
+					matches += regex.IsMatch(checkLine) ? 1 : 0;
+					i++;
+				}
 			}
 			if(matches / (double)i < 0.8 || matches == 0) { IsCandidate = false; return; }
 		}
@@ -378,14 +378,13 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			string line;
-			int i, matches = 0;
+			int i=0, matches = 0;
 			Regex regex = new Regex(@"\d*\:\d*\:\d*\.\d*\s*\d*\:\d*\:\d*\.\d*.*");
-			for(i = 0;i < 30;i++) {
-				line = sr.ReadLine();
+			foreach(var line in ReadLines(sr, 1024)) {
 				if(line == null) break;
-				if(line.StartsWith("#") || string.IsNullOrEmpty(line)) { i--; continue; };
+				if(line.StartsWith("#") || string.IsNullOrEmpty(line)) continue;
 				matches += regex.IsMatch(line) ? 1 : 0;
+				i++;
 			}
 			if(matches / (double)i < 0.8 || matches == 0) { IsCandidate = false; return; }
 		}
@@ -396,19 +395,18 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			string line;
-			int i, matches = 0;
+			int i = 0, matches = 0;
 			Regex regex = new Regex(@"^\d*\:\d*\:\d*\.\d*,\d*\:\d*\:\d*\.\d*,.*");
-			for(i = 0;i < 50;i++) {
-				line = sr.ReadLine().Trim();
-				if(line == null) break;
-				if(line.StartsWith("#") || string.IsNullOrEmpty(line)) { i--; continue; };
+			foreach(var line in ReadLines(sr, 1024).Select(ldLine => ldLine.Trim())) {
+				//if(line == null) break;
+				if(line.StartsWith("#") || string.IsNullOrEmpty(line))  continue;
 
 				var isMatch = regex.IsMatch(line);
 				matches += isMatch ? 1 : 0;
 				if(!isMatch) {
-					if(!string.IsNullOrEmpty(line) && line.Average(ldChar => char.IsLetter(ldChar) || char.IsWhiteSpace(ldChar) || char.IsPunctuation(ldChar) ? 1 : 0) > 0.8) { i--; continue; };
+					if(!string.IsNullOrEmpty(line) && line.Average(ldChar => char.IsLetter(ldChar) || char.IsWhiteSpace(ldChar) || char.IsPunctuation(ldChar) ? 1 : 0) > 0.8)  continue;
 				}
+				i++;
 			}
 			if(matches / (double)i < 0.8 || matches == 0) { IsCandidate = false; return; }
 		}
@@ -419,14 +417,11 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
-			string line;
 			int i, j = 0, matches = 0;
-			for(i = 0;i < 30;i++) {
-				line = sr.ReadLine();
-				if(line == null) break;
-				line = line.ToLower();
+			foreach(var line in ReadLines(sr, 1024).Select(ldLine => ldLine.ToLower())) {
+				//if(line == null) break;
 
-				if(string.IsNullOrEmpty(line) || !line.StartsWith("<")) { continue; };
+				if(string.IsNullOrEmpty(line) || !line.StartsWith("<")) continue;
 
 				j++;
 
@@ -468,13 +463,11 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
-			string line;
-			int i, matches = 0;
-			for(i = 0;i < 30;i++) {
-				line = sr.ReadLine();
+			int i = 0, matches = 0;
+			foreach(var line in ReadLines(sr, 1024).Select(ldLine => ldLine.ToLower().Trim())) {
 				if(line == null) break;
-				line = line.ToLower().Trim();
 				if(line.StartsWith("<smil>")) matches++;
+				i++;
 			}
 			if(matches == 0) { IsCandidate = false; return; }
 		}
@@ -485,7 +478,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override void ElaborateCheck(Stream stream) {
 			if(!IsCandidate) return;
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, false, 2048);
-			string line = sr.ReadLine();
+			string line = ReadLines(sr, 1024).FirstOrDefault() ?? "";
 
 			IsCandidate &= Regex.IsMatch(line, @"FanSubber v[0-9]+(\.[0-9]+)?");
 		}
@@ -537,10 +530,9 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 			StreamReader sr = new StreamReader(stream, Encoding.UTF8, true, 2048);
 
 			int count = 0, matches = 0;
-			string line;
 			Regex regex = new Regex(@"^\{\d*\}\{\d*\}.*$");
-			while((line = sr.ReadLine()) != null) {
-				if((line = line.Trim()).Equals("")) continue;
+			foreach(var line in ReadLines(sr, 1024).Select(ldLine => ldLine.Trim())) {
+				if(line.Equals("")) continue;
 				if(regex.IsMatch(line)) matches++;
 				count++;
 				if(count > 20) break;
@@ -621,6 +613,27 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 		public override string ToString() { return base.ToString() + " IsCandidate " + IsCandidate; }
 
 		public virtual void AddInfo(Action<StreamType, int, EntryKey, string> Add) { if(!string.IsNullOrEmpty(identifier)) Add(type, 0, EntryKey.CodecId, identifier); }
+
+
+		protected static IEnumerable<string> ReadLines(StreamReader streamReader, int maxLineLength) {
+			StringBuilder currentLine = new StringBuilder(maxLineLength);
+			int i;
+			while((i = streamReader.Read()) > 0) {
+				char c = (char)i;
+				if(c == '\r' || c == '\n') {
+					yield return currentLine.ToString();
+					currentLine.Length = 0;
+					continue;
+				}
+				currentLine.Append((char)c);
+				if(currentLine.Length > maxLineLength) {
+					yield break;
+				}
+			}
+			if(currentLine.Length > 0) {
+				yield return currentLine.ToString();
+			}
+		}
 	}
 
 	public interface IFileType {

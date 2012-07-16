@@ -45,7 +45,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider.Tools {
 
 		protected virtual void Add(StreamType type, int index, EntryKey entry, string value, string unit) {
 			if(string.IsNullOrEmpty(value)) return;
-			infos.Add(new InfoEntry(new StreamTypeEntryPair(type, index, entry), value, unit, this));
+			infos.Add(new InfoEntry(new StreamTypeEntryPair(type, index, entry), value.Trim(), unit, this));
 		}
 		protected void Add(EntryKey entry, string value, string unit) { Add(StreamType.General, 0, entry, value, unit); }
 		protected void Add(EntryKey entry, Func<string> value, string unit) { Add(StreamType.General, 0, entry, value, unit); }

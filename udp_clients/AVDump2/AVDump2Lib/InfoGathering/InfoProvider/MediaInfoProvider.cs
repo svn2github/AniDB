@@ -18,7 +18,7 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 
 			MIL = IntPtr.Size == 8 ? (IMediaInfo)new MediaInfo_x64() : (IMediaInfo)new MediaInfo_x86();
 			MIL.Option("Internet", "No");
-			if(!MIL.Option("Info_Version").Equals("MediaInfoLib - v0.7.42")) throw new Exception("Mediainfo library version mismatch. Needed: v0.7.42, Used: " + MIL.Option("Info_Version"));
+			//if(!MIL.Option("Info_Version").Equals("MediaInfoLib - v0.7.42")) throw new Exception("Mediainfo library version mismatch. Needed: v0.7.42, Used: " + MIL.Option("Info_Version"));
 
 			MIL.Open(filePath);
 
@@ -57,9 +57,9 @@ namespace AVDump2Lib.InfoGathering.InfoProvider {
 							Add(st, i, EntryKey.MinFrameRate, Get(streamKind, i, "FrameRate_Minimum"), null);
 							Add(st, i, EntryKey.VFR, Get(streamKind, i, "FrameRate_Mode").Contains("VFR") ? Get(streamKind, i, "FrameRate") : null, null);
 							Add(st, i, EntryKey.FrameCount, Get(streamKind, i, "FrameCount"), null);
-							Add(st, i, EntryKey.Width, Get(streamKind, i, "Width"), null);
+							Add(st, i, EntryKey.Width, () => Get(streamKind, i, "Width").Split('/')[0], null);
 							Add(st, i, EntryKey.ColorBitDepth, Get(streamKind, i, "BitDepth"), null);
-							Add(st, i, EntryKey.Height, Get(streamKind, i, "Height"), null);
+							Add(st, i, EntryKey.Height, () => Get(streamKind, i, "Height").Split('/')[0], null);
 							Add(st, i, EntryKey.DAR, Get(streamKind, i, "DisplayAspectRatio"), null);
 							Add(st, i, EntryKey.PAR, () => double.Parse(Get(streamKind, i, "PixelAspectRatio")) != 1 ? Get(streamKind, i, "PixelAspectRatio") : null, null);
 							indeces[0]++;
