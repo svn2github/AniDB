@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name = "avdump-gui",
-    version = "2.1.7",
+    version = "2.1.8",
     scripts = [
         Executable(
             "avdump2gui.pyw",
