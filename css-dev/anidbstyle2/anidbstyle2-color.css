@@ -267,10 +267,14 @@ select,
 #layout-search input.text,
 #layout-menu li.sub-menu ul,
 #layout-main div.pagination span a,
-#layout-main div.main_all div.header div.account ul.tabs li.signup,
 #layout-main div.forum div.g_bubble.threads
 {
 	background-color: #34394D;
+}
+
+#layout-main div.main_all div.header div.account ul.tabs li.signup
+{
+	background-color: #AA0000;
 }
 
 #layout-main div.profile_all div.default_languages table tr,
@@ -442,7 +446,7 @@ div.quotebody
 
 #layout-main div.main_all div.header div.account ul.tabs li.signup a
 {
-	color:#DDDDDD;
+	color: #CFD1D4;
 }
 
 #layout-main div.main_all div.header div.latestnews div.posted
