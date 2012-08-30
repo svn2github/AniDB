@@ -34,3 +34,22 @@
 {
 	display:none;
 }
+
+#layout-main div.mangaelement_all table.elementlist td.no,
+#layout-main div.mangaelement_all table.elementlist td.action,
+#layout-main div.mangaelement_all table.elementlist td.rating,
+#layout-main div.mangaelement_all table.elementlist td.votes
+{
+	min-width: 5em;
+	max-width: 5em;
+}
+
+#layout-main div.mangaelement_all table.elementlist td+td
+{
+	padding-left: 1em;
+}
+
+#layout-main div.mangaelement_all table.elementlist td.title
+{
+	width: 90%;
+}
