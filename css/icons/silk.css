@@ -5,6 +5,13 @@
 	width:16px;
 }
 
+*.i_general_convert
+{
+	background-image:url(../icons/silk/general_convert.png);
+	height:16px;
+	width:16px;
+}
+
 *.i_general_delete,
 *.i_general_delete_request
 {
