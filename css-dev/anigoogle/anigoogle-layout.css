@@ -72,10 +72,9 @@ input[type="password"],
 
 #layout-search input.text
 {
-	float: left;
 	width: 230px;
 	margin: 0;
-	padding: 4px;
+	padding: 3px;
 }
 
 #layout-search input.submit
