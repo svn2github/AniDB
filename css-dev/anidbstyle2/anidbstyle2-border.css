@@ -56,3 +56,13 @@ button,
 {
 	border: 1px solid;
 }
+
+#layout-search input.text
+{
+    box-shadow: 1px 1px 2px #8E8E8E inset;
+}
+
+#layout-search select
+{
+    box-shadow: 0 1px 2px #8E8E8E inset;
+}
