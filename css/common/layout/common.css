@@ -4,7 +4,7 @@ body.nonav #layout-footer
 	width: auto;
 	height: 90%;
 	margin:0;
-	min-height: 0;
+	min-height: 0 !important;
 }
 
 #layout-nav input,
