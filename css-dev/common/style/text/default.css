@@ -337,7 +337,8 @@ h4.collapsed span
 #layout-main div.forum ul.topics dd.views,
 #layout-main div.forum ul.topics dd.topics,
 #layout-main div.chartags_all div.addbox div.tag-group h3,
-#layout-main div.userpage_all div.userdetails div.block caption
+#layout-main div.userpage_all div.userdetails div.block caption,
+#layout-main div.picupload_all input[type="file"]
 {
 	font-size:1.2em;
 }

@@ -1,0 +1,8 @@
+#layout-main div.picupload_all div.imagelist div.image
+{
+	display: inline-block;
+	padding: 4px;
+	vertical-align: top;
+	overflow:hidden;
+	height: 215px;
+}
