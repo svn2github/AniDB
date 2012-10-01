@@ -30,6 +30,7 @@ div.badge.mod.ommina   div.inner { background-image:url("../icons/achievements/c
 div.badge.mod.sput     div.inner { background-image:url("../icons/achievements/center-mod-sput1.png"); }
 div.badge.mod.worf     div.inner { background-image:url("../icons/achievements/center-mod-worf.png"); }
 
+div.badge.anime.beyblade      div.inner { background-image:url("../icons/achievements/center-beyblade.png"); }
 div.badge.anime.cityhunter    div.inner { background-image:url("../icons/achievements/center-cityhunter.png"); }
 div.badge.anime.classic_anime div.inner { background-image:url("../icons/achievements/center-classic_anime.png"); }
 div.badge.anime.conan         div.inner { background-image:url("../icons/achievements/center-conan.png"); }
@@ -53,6 +54,7 @@ div.badge.anime.saintseiya    div.inner { background-image:url("../icons/achieve
 div.badge.anime.sazae         div.inner { background-image:url("../icons/achievements/center-sazae.png"); }
 div.badge.anime.slayers       div.inner { background-image:url("../icons/achievements/center-slayers.png"); }
 div.badge.anime.tenchi_muyou  div.inner { background-image:url("../icons/achievements/center-tenchi_muyou.png"); }
+div.badge.anime.yugioh        div.inner { background-image:url("../icons/achievements/center-yogioh.png"); }
 
 div.badge.creator.adachimitsuru    div.inner { background-image:url("../icons/achievements/center-adachi_mitsuru2.png"); }
 div.badge.creator.clamp            div.inner { background-image:url("../icons/achievements/center-clamp.png"); }
