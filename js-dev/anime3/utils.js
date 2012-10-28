@@ -444,7 +444,7 @@ function createTextArea( name, cols, rows, maxLength, hidden, disabled, value ) 
 	if ( cols != null ) input.cols = cols;
 	if ( rows != null ) input.rows = rows;
 	if ( disabled != null ) input.disabled = disabled;
-	if ( maxlength != null ) input.maxLength = maxLength;
+	if ( maxLength != null ) input.maxLength = maxLength;
 	if ( value != null ) input.value = value;
 	if (!hidden) input.hidden = hidden;
 	return input;
