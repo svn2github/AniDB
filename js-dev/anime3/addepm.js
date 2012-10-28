@@ -414,8 +414,6 @@ function remTitle() { titlesActions(this,'rem'); }
 function addTitle() { titlesActions(this,'add'); }
 
 // DISPLAY FUNCTIONS //
-function createTextInput(name,size,disabled,hidden,maxlength,value) {
-function createTextArea( name, cols, rows, maxLength, hidden, disabled, value ) {
 
 /* Create a title row
  * @param eid Episode ID
@@ -429,7 +427,7 @@ function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	var container = document.createElement('tr');
 	container.id = 'e'+eid+'.title.'+lang;
 	var textarea = createTextArea('addepm.'+eid+'.title'+languageMap[lang]['id'],80,1,255,false,false,title);
-	var ti = createTextInput('addepm.'+eid+'.title'+languageMap[lang]['id'],50,false,false,255,title);
+	var ti = createTextInput(     'addepm.'+eid+'.title'+languageMap[lang]['id'],50,false,false,255,title);
 	var cell = createCell(null,null,textarea);
 	cell.appendChild(createTextInput('addepm.'+eid+'.update'+languageMap[lang]['id'],50,false,true,null,update));
 	container.appendChild(cell);
