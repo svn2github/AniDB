@@ -426,7 +426,8 @@ function addTitle() { titlesActions(this,'add'); }
 function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	var container = document.createElement('tr');
 	container.id = 'e'+eid+'.title.'+lang;
-	var cell = createCell(null,null,createTextInput('addepm.'+eid+'.title'+languageMap[lang]['id'],50,false,false,255,title));
+	var textarea = createTextArea('addepm.'+eid+'.title'+languageMap[lang]['id'],80,1,255,false,false,title);
+	var cell = createCell(null,null,textarea);
 	cell.appendChild(createTextInput('addepm.'+eid+'.update'+languageMap[lang]['id'],50,false,true,null,update));
 	container.appendChild(cell);
 	createCell(container, 'icons', createIcon(null, lang, null, toggleEpTitles, 'language: '+mapLanguage(lang), 'i_audio_'+lang));

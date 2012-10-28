@@ -438,6 +438,18 @@ function createTextInput(name,size,disabled,hidden,maxlength,value) {
 	return input;
 }
 
+function createTextArea( name, cols, rows, maxLength, hidden, disabled, value ) {
+	var input = document.createElement('textarea');
+	if ( name != null ) { input.name = name; input.id = name; }
+	if ( cols != null ) input.cols = cols;
+	if ( rows != null ) input.rows = rows;
+	if ( disabled != null ) input.disabled = disabled;
+	if ( maxLength != null ) input.maxLength = maxLength;
+	if ( value != null ) input.value = value;
+	if (!hidden) input.hidden = hidden;
+	return input;
+}
+
 function createBasicButton(name,value,type) {
 	var button = document.createElement('input');
 	button.type = (type && type != '') ? type : 'button';
