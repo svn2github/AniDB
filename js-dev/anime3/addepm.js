@@ -393,9 +393,9 @@ function addTitleAllEps() {
 		if (!episode.titles[lang]) titlesActions(null, 'add', episode.id, lang);
 	}
 	// now filter only for this language and trigger the filter
-	var langfiltersel = document.getElementById('fetitle.sel');
-	langfiltersel.value = lang;
-	langfiltersel.onchange();
+	// var langfiltersel = document.getElementById('fetitle.sel');
+	// langfiltersel.value = lang;
+	// langfiltersel.onchange();
 	// now filter only for this ep type and trigger the filter
 	var epfiltersel = document.getElementById('fetitle.type.sel');
 	epfiltersel.value = type;
