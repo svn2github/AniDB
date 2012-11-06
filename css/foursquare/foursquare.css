@@ -20,7 +20,6 @@ Green: #689a4a / Light: #EEF8EA
 
 ================================================== */
 
-
 @import "normalize.css";
 
 @import "../common/layout/default.css";
@@ -101,75 +100,75 @@ padding-top: 35px }
 	border-top: 1px solid white }
 	
 ul#layout-menu {
-background: url('images/anidb.png') no-repeat top left;
+background: url(images/anidb.png) no-repeat top left;
 padding-bottom: 15px }
 
 	#layout-menu li.sub-menu ul {
 	padding-left: 50px }
 	
 			#layout-menu li.sub-menu ul#menu-main {
-			background-image: url('icons/menu/home.png'); 
+			background-image: url(images/icons/menu/home.png); 
 			background-repeat: no-repeat;
 			background-position: 24px 3px }
 			
 				#layout-menu li.sub-menu ul#menu-main:hover,
 				#layout-menu li.sub-menu ul#menu-main:active {
-				background-image: url('icons/menu/home_over.png');
+				background-image: url(images/icons/menu/home_over.png);
 				background-repeat: no-repeat;
 				background-position: 24px 3px }
 				
 			#layout-menu li.sub-menu ul#menu-lists {
-			background-image: url('icons/menu/bookmark.png'); 
+			background-image: url(images/icons/menu/bookmark.png); 
 			background-repeat: no-repeat;
 			background-position: 22px 2px }
 			
 				#layout-menu li.sub-menu ul#menu-lists:hover,
 				#layout-menu li.sub-menu ul#menu-lists:active {
-				background-image: url('icons/menu/bookmark_over.png');
+				background-image: url(images/icons/menu/bookmark_over.png);
 				background-repeat: no-repeat;
 				background-position: 22px 2px }
 
 			#layout-menu li.sub-menu ul#menu-private {
-			background-image: url('icons/menu/myplace.png'); 
+			background-image: url(images/icons/menu/myplace.png); 
 			background-repeat: no-repeat;
 			background-position: 24px 2px }
 			
 				#layout-menu li.sub-menu ul#menu-private:hover,
 				#layout-menu li.sub-menu ul#menu-private:active	{
-				background-image: url('icons/menu/myplace_over.png');
+				background-image: url(images/icons/menu/myplace_over.png);
 				background-repeat: no-repeat;
 				background-position: 24px 2px }
 				
 			#layout-menu li.sub-menu ul#menu-mod {
-			background-image: url('icons/menu/admin.png'); 
+			background-image: url(images/icons/menu/admin.png); 
 			background-repeat: no-repeat;
 			background-position: 23px 2px }
 			
 				#layout-menu li.sub-menu ul#menu-mod:hover,
 				#layout-menu li.sub-menu ul#menu-mod:active	{
-				background-image: url('icons/menu/admin_over.png');
+				background-image: url(images/icons/menu/admin_over.png);
 				background-repeat: no-repeat;
 				background-position: 23px 2px }				
 		
 			#layout-menu li.sub-menu ul#menu-support {
-			background-image: url('icons/menu/social.png'); 
+			background-image: url(images/icons/menu/social.png); 
 			background-repeat: no-repeat;
 			background-position: 23px 3px }
 			
 				#layout-menu li.sub-menu ul#menu-support:hover,
 				#layout-menu li.sub-menu ul#menu-support:active	{
-				background-image: url('icons/menu/social_over.png');
+				background-image: url(images/icons/menu/social_over.png);
 				background-repeat: no-repeat;
 				background-position: 23px 3px }		
 				
 			#layout-menu li.sub-menu ul#menu-account {
-			background-image: url('icons/menu/account.png'); 
+			background-image: url(images/icons/menu/account.png); 
 			background-repeat: no-repeat;
 			background-position: 23px 3px }
 			
 				#layout-menu li.sub-menu ul#menu-account:hover,
 				#layout-menu li.sub-menu ul#menu-account:active	{
-				background-image: url('icons/menu/account_over.png');
+				background-image: url(images/icons/menu/account_over.png);
 				background-repeat: no-repeat;
 				background-position: 23px 3px }	
 				
@@ -1005,320 +1004,320 @@ border-color: silver 1px solid }
 
 /* Anime list icons */
 
-*.i_award_mainichi { background-image: url(icons/awards/anidb_mainichi.png) }
+*.i_award_mainichi { background-image: url(images/icons/awards/anidb_mainichi.png) }
 
-*.i_award_top10 { background-image: url(icons/awards/anidb_top10.png) }
+*.i_award_top10 { background-image: url(images/icons/awards/anidb_top10.png) }
 
-*.i_award_arc2000 { background-image: url(icons/awards/anidb_arc2000award.png) }
+*.i_award_arc2000 { background-image: url(images/icons/awards/anidb_arc2000award.png) }
 
-*.i_award_arc2001 { background-image: url(icons/awards/anidb_arc2001award.png) }
+*.i_award_arc2001 { background-image: url(images/icons/awards/anidb_arc2001award.png) }
 
-*.i_award_arc2002 { background-image: url(icons/awards/anidb_arc2002award.png) }
+*.i_award_arc2002 { background-image: url(images/icons/awards/anidb_arc2002award.png) }
 
-*.i_award_arc2003 { background-image: url(icons/awards/anidb_arc2003award.png) }
+*.i_award_arc2003 { background-image: url(images/icons/awards/anidb_arc2003award.png) }
 
-*.i_award_arc2004 { background-image: url(icons/awards/anidb_arc2004award.png) }
+*.i_award_arc2004 { background-image: url(images/icons/awards/anidb_arc2004award.png) }
 
-*.i_award_arc2005 { background-image: url(icons/awards/anidb_arc2005award.png) }
+*.i_award_arc2005 { background-image: url(images/icons/awards/anidb_arc2005award.png) }
 
-*.i_award_arc2006 { background-image: url(icons/awards/anidb_arc2006award.png) }
+*.i_award_arc2006 { background-image: url(images/icons/awards/anidb_arc2006award.png) }
 
-*.i_award_arc2007 { background-image: url(icons/awards/anidb_arc2007award.png) }
+*.i_award_arc2007 { background-image: url(images/icons/awards/anidb_arc2007award.png) }
 
-*.i_award_arc2008 { background-image: url(icons/awards/anidb_arc2008award.png) }
+*.i_award_arc2008 { background-image: url(images/icons/awards/anidb_arc2008award.png) }
 
-*.i_award_arc2009 { background-image: url(icons/awards/anidb_arc2009award.png) }
+*.i_award_arc2009 { background-image: url(images/icons/awards/anidb_arc2009award.png) }
 
 
 /* Ep Icons */
 
 *.i_ep_edit {
-background-image: url(icons/icon/anidb_ep_edit.png) }
+background-image: url(images/icons/icon/anidb_ep_edit.png) }
 
 
 /* File Icons */
 
 *.i_file_add {
-background-image: url(icons/icon/anidb_file_add.png) }
+background-image: url(images/icons/icon/anidb_file_add.png) }
 
 *.i_file_delete {
-background-image: url(icons/icon/anidb_file_delete.png) }
+background-image: url(images/icons/icon/anidb_file_delete.png) }
 
 *.i_file_edit {
-background-image: url(icons/icon/anidb_file_edit.png) }
+background-image: url(images/icons/icon/anidb_file_edit.png) }
 
 *.i_file_details {
-background-image: url(icons/icon/anidb_file_details.png) }
+background-image: url(images/icons/icon/anidb_file_details.png) }
 
 *.i_file_ed2k {
-background-image: url(icons/icon/anidb_file_ed2k.png) }
+background-image: url(images/icons/icon/anidb_file_ed2k.png) }
 
 *.i_file_ed2k_corrupt {
-background-image: url(icons/icon/anidb_file_ed2k_corrupt.png) }
+background-image: url(images/icons/icon/anidb_file_ed2k_corrupt.png) }
 
 *.i_new_icon {
-background-image: url(icons/icon/anidb_new_icon.png) }
+background-image: url(images/icons/icon/anidb_new_icon.png) }
 
 *.i_av_yes {
-background-image: url(icons/icon/anidb_av_yes.png) }
+background-image: url(images/icons/icon/anidb_av_yes.png) }
 
 *.i_crc_no {
-background-image: url(icons/icon/anidb_crc_no.png) }
+background-image: url(images/icons/icon/anidb_crc_no.png) }
 
 *.i_crc_yes {
-background-image: url(icons/icon/anidb_crc_yes.png) }
+background-image: url(images/icons/icon/anidb_crc_yes.png) }
 
 *.i_censored {
-background-image: url(icons/icon/anidb_censored.png) }
+background-image: url(images/icons/icon/anidb_censored.png) }
 
 *.i_uncensored {
-background-image: url(icons/icon/anidb_uncensored.png) }
+background-image: url(images/icons/icon/anidb_uncensored.png) }
 
 *.i_vrs_1 {
-background-image: url(icons/icon/anidb_vrs_1.png) }
+background-image: url(images/icons/icon/anidb_vrs_1.png) }
 
 *.i_vrs_2 {
-background-image: url(icons/icon/anidb_vrs_2.png) }
+background-image: url(images/icons/icon/anidb_vrs_2.png) }
 
 *.i_vrs_3 {
-background-image: url(icons/icon/anidb_vrs_3.png) }
+background-image: url(images/icons/icon/anidb_vrs_3.png) }
 
 *.i_vrs_4 {
-background-image: url(icons/icon/anidb_vrs_4.png) }
+background-image: url(images/icons/icon/anidb_vrs_4.png) }
 
 *.i_vrs_5 {
-background-image: url(icons/icon/anidb_vrs_5.png) }
+background-image: url(images/icons/icon/anidb_vrs_5.png) }
 
 *.i_crc_unv {
-background-image: url(icons/icon/anidb_crc_unv.png) }
+background-image: url(images/icons/icon/anidb_crc_unv.png) }
 
 *.i_video {
-background-image: url(icons/icon/anidb_video.png) }
+background-image: url(images/icons/icon/anidb_video.png) }
 
 *.i_video.xvid,
 *.i_video.divx5 {
-background-image: url(icons/icon/anidb_video_asp.png) }
+background-image: url(images/icons/icon/anidb_video_asp.png) }
 
 *.i_video.avc {
-background-image: url(icons/icon/anidb_video_avc.png) }
+background-image: url(images/icons/icon/anidb_video_avc.png) }
 
 *.i_video.wmv9 {
-background-image: url(icons/icon/anidb_video_wmv.png) }
+background-image: url(images/icons/icon/anidb_video_wmv.png) }
 
 *.i_ext {
-background-image: url(icons/icon/anidb_other.png) }
+background-image: url(images/icons/icon/anidb_other.png) }
 
 *.i_ext.mkv {
-background-image: url(icons/icon/anidb_ext_mkv.png) }
+background-image: url(images/icons/icon/anidb_ext_mkv.png) }
 
 *.i_ext.ogm {
-background-image: url(icons/icon/anidb_ext_ogm.png) }
+background-image: url(images/icons/icon/anidb_ext_ogm.png) }
 
 *.i_ext.avi {
-background-image: url(icons/icon/anidb_ext_avi.png) }
+background-image: url(images/icons/icon/anidb_ext_avi.png) }
 
 *.i_ext.mp4 {
-background-image: url(icons/icon/anidb_ext_mp4.png) }
+background-image: url(images/icons/icon/anidb_ext_mp4.png) }
 
 *.i_ext.wmv {
-background-image: url(icons/icon/anidb_ext_wmv.png) }
+background-image: url(images/icons/icon/anidb_ext_wmv.png) }
 
 *.i_ext.srt {
-background-image: url(icons/icon/anidb_ext_srt.png) }
+background-image: url(images/icons/icon/anidb_ext_srt.png) }
 
 *.i_ftype_video {
-background-image: url(icons/icon/anidb_video.png) }
+background-image: url(images/icons/icon/anidb_video.png) }
 
 *.i_ftype_video2 {
-background-image: url(icons/icon/anidb_video2.png) }
+background-image: url(images/icons/icon/anidb_video2.png) }
 
 *.i_ftype_subtitle {
-background-image: url(icons/icon/anidb_subtitles.png) }
+background-image: url(images/icons/icon/anidb_subtitles.png) }
 
 *.i_ftype_subtitle2 {
-background-image: url(icons/icon/anidb_subtitles2.png) }
+background-image: url(images/icons/icon/anidb_subtitles2.png) }
 
 *.i_ftype_audio {
-background-image: url(icons/icon/anidb_audio.png) }
+background-image: url(images/icons/icon/anidb_audio.png) }
 
 *.i_ftype_other {
-background-image: url(icons/icon/anidb_other.png) }
+background-image: url(images/icons/icon/anidb_other.png) }
 
 /* to be done 
 
 *.i_file2ep_rel {
 width: 20px;
-background-image: url(icons/icon/anidb_file2ep2.png) }
+background-image: url(images/icons/icon/anidb_file2ep2.png) }
 
 *.i_file2file_rel {
 width: 20px;
-background-image: url(icons/icon/anidb_file2file2.png) }
+background-image: url(images/icons/icon/anidb_file2file2.png) }
 
 .i_avmf_dump {
-background-image: url(icons/icon/anidb_avmf_dump.png) }
+background-image: url(images/icons/icon/anidb_avmf_dump.png) }
 
 .i_avmf_recheck {
-background-image: url(icons/icon/anidb_avmf_recheck.png) }
+background-image: url(images/icons/icon/anidb_avmf_recheck.png) }
 
 .i_avmf_reset {
-background-image: url(icons/icon/anidb_avmf_reset.png) }
+background-image: url(images/icons/icon/anidb_avmf_reset.png) }
 
 .i_avmf_forget {
-background-image: url(icons/icon/anidb_avmf_forget.png) }
+background-image: url(images/icons/icon/anidb_avmf_forget.png) }
 
 */
 
 .i_avmf_delete {
-background-image: url(icons/icon/anidb_avmf_delete.png) }
+background-image: url(images/icons/icon/anidb_avmf_delete.png) }
 
 
 /* Comment Icons */
 
 *.i_comment_info {
-background-image: url(icons/four/comment_info.png) }
+background-image: url(images/icons/four/comment_info.png) }
 
 *.i_pm_reply {
-background: url(icons/four/pm_reply.png) no-repeat;
+background: url(images/icons/four/pm_reply.png) no-repeat;
 height: 12px;
 width: 41px }
 
 *.i_comment_delete {
 width: 45px;
 height: 12px;
-background: url(icons/four/comment_delete.png) no-repeat }
+background: url(images/icons/four/comment_delete.png) no-repeat }
 
 *.i_pm_delete {
-background: url(icons/four/pm_delete.png) no-repeat;
+background: url(images/icons/four/pm_delete.png) no-repeat;
 height:12px;
 width:45px }
 	 
 *.i_comment_quote {
 width: 40px;
 height: 12px;
-background: url(icons/four/comment_quote.png) no-repeat }	   
+background: url(images/icons/four/comment_quote.png) no-repeat }	   
 
 *.i_comment_add {
 width: 88px;
 height: 12px;
-background: url(icons/four/comment_add.png) no-repeat }
+background: url(images/icons/four/comment_add.png) no-repeat }
 
 *.i_comment_creq {
 width: 108px;
 height: 12px;
-background: url(icons/four/comment_creq.png) no-repeat }
+background: url(images/icons/four/comment_creq.png) no-repeat }
 	
 *.i_comment_revisions {
 width: 93px;
 height: 12px;
-background: url(icons/four/comment_revisions.png) no-repeat }
+background: url(images/icons/four/comment_revisions.png) no-repeat }
 
 *.i_comment_setactive {
 width: 61px;
 height: 12px;
-background: url(icons/four/comment_setactive.png) no-repeat }
+background: url(images/icons/four/comment_setactive.png) no-repeat }
 
 *.i_comment_undelete {
 width: 92px;
 height: 12px;
-background: url(icons/four/comment_undelete.png) no-repeat }
+background: url(images/icons/four/comment_undelete.png) no-repeat }
 
 *.i_forum_add {
-background: url(icons/four/forum_add.png) no-repeat;
+background: url(images/icons/four/forum_add.png) no-repeat;
 height: 12px;
 width: 68px }
 
 *.i_forum_delete {
-background: url(icons/four/forum_delete.png) no-repeat;
+background: url(images/icons/four/forum_delete.png) no-repeat;
 height:12px;
 width:83px }
 
 *.i_forum_edit {
-background: url(icons/four/forum_edit.png) no-repeat;
+background: url(images/icons/four/forum_edit.png) no-repeat;
 height:12px;
 width:67px }
 	
 *.i_review_add {
 width: 74px;
 height: 12px;
-background: url(icons/four/review_add.png) no-repeat }
+background: url(images/icons/four/review_add.png) no-repeat }
 	
 *.i_topic_add {
-background: url(icons/four/topic_add.png) no-repeat;
+background: url(images/icons/four/topic_add.png) no-repeat;
 height: 12px;
 width: 60px }
 	
 *.i_topic_delete {
-background: url(icons/four/topic_delete.png) no-repeat;
+background: url(images/icons/four/topic_delete.png) no-repeat;
 height: 12px;
 width: 87px }
 
 *.i_topic_history {
-background: url(icons/four/topic_history.png) no-repeat;
+background: url(images/icons/four/topic_history.png) no-repeat;
 height: 12px;
 width: 89px }
 
 *.i_topic_lock {
-background: url(icons/four/topic_lock.png) no-repeat;
+background: url(images/icons/four/topic_lock.png) no-repeat;
 height: 12px;
 width: 76px }
 
 *.i_topic_move {
-background: url(icons/four/topic_move.png) no-repeat;
+background: url(images/icons/four/topic_move.png) no-repeat;
 height: 12px;
 width: 80px }
 
 *.i_topic_split {
-background: url(icons/four/topic_split.png) no-repeat;
+background: url(images/icons/four/topic_split.png) no-repeat;
 height: 12px;
 width: 80px }
 
 *.i_topic_unlock {
-background: url(icons/four/topic_unlock.png) no-repeat;
+background: url(images/icons/four/topic_unlock.png) no-repeat;
 height: 12px;
 width: 94px }
 
 *.i_comment_edit {
 width: 28px;
 height: 12px;
-background: url(icons/four/comment_edit.png) no-repeat }
+background: url(images/icons/four/comment_edit.png) no-repeat }
 
 *.i_comment_move {
 width: 33px;
 height: 12px;
-background: url(icons/four/comment_move.png) no-repeat }
+background: url(images/icons/four/comment_move.png) no-repeat }
 
 *.i_forum_link {
-background: url(icons/four/forum_link.png) no-repeat;
+background: url(images/icons/four/forum_link.png) no-repeat;
 height: 12px;
 width: 43px }
 
   #layout-main table#grouplist .i_forum_link {
-	background: url(icons/four/forum_link.png) no-repeat;
+	background: url(images/icons/four/forum_link.png) no-repeat;
 	height: 12px;
 	width: 7px }
 
 *.i_topic_locked { /* no hover */
-background: url(icons/four/topic_locked.png) no-repeat;
+background: url(images/icons/four/topic_locked.png) no-repeat;
 height: 12px;
 width: 47px }
 
 *.i_topic_subscribe {
-background: url(icons/four/topic_subscribe.png) no-repeat;
+background: url(images/icons/four/topic_subscribe.png) no-repeat;
 height: 12px;
 width: 70px }
 
 *.i_topic_unsubscribe {
-background: url(icons/four/topic_unsubscribe.png) no-repeat;
+background: url(images/icons/four/topic_unsubscribe.png) no-repeat;
 height: 12px;
 width: 81px }
 
 *.i_topic_undelete {
-background: url(icons/four/topic_undelete.png) no-repeat;
+background: url(images/icons/four/topic_undelete.png) no-repeat;
 height:12px;
 width:106px }
 
 *.i_forum_group {
-background: url(icons/four/forum_group.png) no-repeat;
+background: url(images/icons/four/forum_group.png) no-repeat;
 height:12px;
 width:122px }
 
@@ -1352,10 +1351,10 @@ width:122px }
 	background-position: 0 -12px }	
 	
 *.i_top {
-background-image: url(icons/phpbb/icon_back_top.png) }
+background-image: url(images/icons/phpbb/icon_back_top.png) }
 
 #layout-main div.forum a.lastpost {
-background-image: url(icons/phpbb/topic_latest.png) }
+background-image: url(images/icons/phpbb/topic_latest.png) }
 
 *.i_msg_mod,
 *.i_topic_announcement,
@@ -1363,7 +1362,7 @@ background-image: url(icons/phpbb/topic_latest.png) }
 *.i_msg_normal,
 *.i_topic_normal,
 *.i_forum {
-background-image: url(icons/phpbb/topic_normal.png);
+background-image: url(images/icons/phpbb/topic_normal.png);
 background-repeat: no-repeat }
 
 *.i_msg_normal_unread,
@@ -1372,94 +1371,94 @@ background-repeat: no-repeat }
 *.i_msg_mod_unread,
 *.i_topic_announcement_unread,
 *.i_topic_global_unread {
-background-image: url(icons/phpbb/topic_announce_unread.png);
+background-image: url(images/icons/phpbb/topic_announce_unread.png);
 background-repeat: no-repeat }
 	
 *.i_topic_announcement_locked,
 *.i_topic_global_locked,
 *.i_topic_normal_locked {
-background-image: url(icons/phpbb/topic_normal_locked.png);
+background-image: url(images/icons/phpbb/topic_normal_locked.png);
 background-repeat: no-repeat }
 
 *.i_topic_announcement_locked_unread,
 *.i_topic_global_locked_unread,
 *.i_topic_normal_locked_unread {
-background-image: url(icons/phpbb/topic_normal_locked_unread.png);
+background-image: url(images/icons/phpbb/topic_normal_locked_unread.png);
 background-repeat: no-repeat }	
 
 *.i_topic_sticky {
-background-image: url(icons/phpbb/topic_sticky.png);
+background-image: url(images/icons/phpbb/topic_sticky.png);
 background-repeat: no-repeat }
 
 *.i_topic_sticky_unread {
-background-image: url(icons/phpbb/topic_sticky_unread.png);
+background-image: url(images/icons/phpbb/topic_sticky_unread.png);
 background-repeat: no-repeat }
 
 *.i_topic_sticky_locked {
-background-image: url(icons/phpbb/topic_sticky_locked.png);
+background-image: url(images/icons/phpbb/topic_sticky_locked.png);
 background-repeat: no-repeat }
 
 *.i_topic_sticky_locked_unread {
-background-image: url(icons/phpbb/topic_sticky_locked_unread.png);
+background-image: url(images/icons/phpbb/topic_sticky_locked_unread.png);
 background-repeat: no-repeat }
 
 *.i_msg_system {
-background-image: url(icons/phpbb/system_msg.png);
+background-image: url(images/icons/phpbb/system_msg.png);
 background-repeat: no-repeat }
 
 *.i_msg_system_unread {
-background-image: url(icons/phpbb/system_msg_unread.png);
+background-image: url(images/icons/phpbb/system_msg_unread.png);
 background-repeat: no-repeat }
 	
 /* General Icons */
 
 *.i_help {
-background: url(icons/four/ask2.png) no-repeat right;
+background: url(images/icons/four/ask2.png) no-repeat right;
 cursor: help; /* just for teh funs */ }
 
 *.i_plus {
-background: url(icons/four/plus.png) no-repeat right }
+background: url(images/icons/four/plus.png) no-repeat right }
 
 *.i_minus {
-background: url(icons/four/minus.png) no-repeat right }
+background: url(images/icons/four/minus.png) no-repeat right }
 
 *.i_comment {
-background-image: url(icons/icon/anidb_comment.png) }
+background-image: url(images/icons/icon/anidb_comment.png) }
 
 *.i_summary {
-background-image: url(icons/icon/anidb_summary.png) }
+background-image: url(images/icons/icon/anidb_summary.png) }
 
 *.i_report_entry,
 *.i_no_vote {
 background-image: url(.icons/icon/anidb_no_vote.png) }
 
 *.i_nonotify {
-background-image: url(icons/icon/anidb_nonotify.png) }
+background-image: url(images/icons/icon/anidb_nonotify.png) }
 
 *.i_notify {
-background-image: url(icons/icon/anidb_notify.png) }
+background-image: url(images/icons/icon/anidb_notify.png) }
 
 *.i_vote {
-background-image: url(icons/four/anidb_vote.png) }
+background-image: url(images/icons/four/anidb_vote.png) }
 
 *.i_revote {
-background-image: url(icons/four/anidb_revote.png) }
+background-image: url(images/icons/four/anidb_revote.png) }
 
 *.i_nopic {
-background-image: url(icons/four/nopic.png) }
+background-image: url(images/icons/four/nopic.png) }
 
 *.i_sort {
 width: 5px;
-background-image: url(icons/four/sort.png) }
+background-image: url(images/icons/four/sort.png) }
 
 *.i_arrow_up {
-background-image: url(icons/test/arrow_up.png) }
+background-image: url(images/icons/test/arrow_up.png) }
 
 *.i_arrow_down {
-background-image: url(icons/test/arrow_down.png) }
+background-image: url(images/icons/test/arrow_down.png) }
 
 *.i_arrow_inactive {
-background-image: url(icons/test/arrow_inactive.png) }
+background-image: url(images/icons/test/arrow_inactive.png) }
 
 	th.c_set,
 	th.c_setlatin,
@@ -1467,42 +1466,42 @@ background-image: url(icons/test/arrow_inactive.png) }
 	th.c_latin,
 	th.c_number,
 	*.i_inactive {
-	background-image: url(icons/test/arrow_inactive.png) }
+	background-image: url(images/icons/test/arrow_inactive.png) }
 
 	th.s_forward,
 	*.i_descending {
-	background-image: url(icons/test/arrow_down.png) }
+	background-image: url(images/icons/test/arrow_down.png) }
 
 	th.s_reverse,
 	*.i_ascending {
-	background-image: url(icons/test/arrow_up.png) }
+	background-image: url(images/icons/test/arrow_up.png) }
 
 
 /* Mylist Icons */
  
 *.i_mylist {
-background-image: url(icons/icon/anidb_mylist.png) }
+background-image: url(images/icons/icon/anidb_mylist.png) }
 
 *.i_file_addmylist {
-background-image: url(icons/icon/anidb_file_addmylist.png) }
+background-image: url(images/icons/icon/anidb_file_addmylist.png) }
 
 *.i_file_removemylist {
-background-image: url(icons/icon/anidb_file_removemylist.png) }
+background-image: url(images/icons/icon/anidb_file_removemylist.png) }
 
 *.i_liststate_edit {
-background-image: url(icons/icon/anidb_liststate_edit.png) }
+background-image: url(images/icons/icon/anidb_liststate_edit.png) }
 
 *.i_seen {
-background-image: url(icons/icon/anidb_seen.png) }
+background-image: url(images/icons/icon/anidb_seen.png) }
 
 *.i_seen_no {
-background-image: url(icons/icon/anidb_seen_no.png) }
+background-image: url(images/icons/icon/anidb_seen_no.png) }
 
 *.i_seen_yes {
-background-image: url(icons/icon/anidb_seen_yes.png) }
+background-image: url(images/icons/icon/anidb_seen_yes.png) }
 
 *.i_vote_pending {
-background-image: url(icons/icon/anidb_no_vote.png) }
+background-image: url(images/icons/icon/anidb_no_vote.png) }
 
 
 /* Formating Icons */
@@ -1510,353 +1509,353 @@ background-image: url(icons/icon/anidb_no_vote.png) }
 *.i_mylist_ainfo_loading {
 width: 15px;
 height: 13px;
-background-image: url(icons/formating/loading.gif) }
+background-image: url(images/icons/formating/loading.gif) }
 
 *.i_mylist_ainfo {
 width: 15px;
 height: 13px;
-background-image: url(icons/formating/information.png) }
+background-image: url(images/icons/formating/information.png) }
 
 *.i_mylist_ainfo_greyed {
 width: 15px;
 height: 13px;
-background-image: url(icons/formating/information_greyed.png) }
+background-image: url(images/icons/formating/information_greyed.png) }
 
 *.i_expanded {
-background: transparent url(icons/formating/icon_contract.png) top right no-repeat }
+background: transparent url(images/icons/formating/icon_contract.png) top right no-repeat }
 
 *.i_collapsed {
-background: transparent url(icons/formating/icon_expand.png) top right no-repeat }
+background: transparent url(images/icons/formating/icon_expand.png) top right no-repeat }
 
 
 /* State Icons */
 
 *.i_liststate_watching {
-background-image: url(icons/state/anidb_liststate_watching.png) }
+background-image: url(images/icons/state/anidb_liststate_watching.png) }
 
 *.i_liststate_collecting {
-background-image: url(icons/state/anidb_liststate_collecting.png) }
+background-image: url(images/icons/state/anidb_liststate_collecting.png) }
 
 *.i_liststate_stalled {
-background-image: url(icons/state/anidb_liststate_stalled.png) }
+background-image: url(images/icons/state/anidb_liststate_stalled.png) }
 
 *.i_liststate_dropped {
-background-image: url(icons/state/anidb_liststate_dropped.png) }
+background-image: url(images/icons/state/anidb_liststate_dropped.png) }
 
 *.i_liststate_completed {
-background-image: url(icons/state/anidb_liststate_completed.png) }
+background-image: url(images/icons/state/anidb_liststate_completed.png) }
 
 *.i_state_unknown {
-background-image: url(icons/state/anidb_state_unknown.png) }
+background-image: url(images/icons/state/anidb_state_unknown.png) }
 
 *.i_state_mixed {
-background-image: url(icons/state/anidb_state_mixed.png) }
+background-image: url(images/icons/state/anidb_state_mixed.png) }
 
 *.i_state_onhdd {
-background-image: url(icons/state/anidb_state_onhdd.png) }
+background-image: url(images/icons/state/anidb_state_onhdd.png) }
 
 *.i_tv_series {
 height: 13px;
-background-image: url(icons/state/anidb_atype_tv_series.png) }
+background-image: url(images/icons/state/anidb_atype_tv_series.png) }
 
 *.i_movie {
 height: 13px;
-background-image: url(icons/state/anidb_atype_movie.png) }
+background-image: url(images/icons/state/anidb_atype_movie.png) }
 
 *.i_ova {
 height: 13px;
-background-image: url(icons/state/anidb_atype_ova.png) }
+background-image: url(images/icons/state/anidb_atype_ova.png) }
 
 *.i_web {
 height: 13px;
-background-image: url(icons/state/anidb_atype_web.png) }
+background-image: url(images/icons/state/anidb_atype_web.png) }
 
 *.i_tv_special {
 height: 13px;
-background-image: url(icons/state/anidb_atype_tv_special.png) }
+background-image: url(images/icons/state/anidb_atype_tv_special.png) }
 
 *.i_music_video {
 height: 13px;
-background-image: url(icons/state/anidb_atype_music_video.png) }
+background-image: url(images/icons/state/anidb_atype_music_video.png) }
 
 *.i_other,
 *.i_unknown {
 height: 13px;
-background-image: url(icons/state/anidb_atype_other.png) }
+background-image: url(images/icons/state/anidb_atype_other.png) }
 
 *.i_recap {
-background-image: url(icons/icon/anidb_recap.png) }
+background-image: url(images/icons/icon/anidb_recap.png) }
 
 *.i_filestate_corrupted {
-background-image: url(icons/state/anidb_filestate_corrupted.png) }
+background-image: url(images/icons/state/anidb_filestate_corrupted.png) }
 
 *.i_filestate_edited {
-background-image: url(icons/state/anidb_filestate_edited.png) }
+background-image: url(images/icons/state/anidb_filestate_edited.png) }
 
 *.i_filestate_ondvd {
-background-image: url(icons/state/anidb_filestate_ondvd.png) }
+background-image: url(images/icons/state/anidb_filestate_ondvd.png) }
 
 *.i_filestate_ontv {
-background-image: url(icons/state/anidb_filestate_ontv.png) }
+background-image: url(images/icons/state/anidb_filestate_ontv.png) }
 
 *.i_filestate_other {
-background-image: url(icons/state/anidb_filestate_other.png) }
+background-image: url(images/icons/state/anidb_filestate_other.png) }
 
 *.i_filestate_selfripped {
-background-image: url(icons/state/anidb_filestate_selfripped.png) }
+background-image: url(images/icons/state/anidb_filestate_selfripped.png) }
 
 *.i_filestate_streamed {
-background-image: url(icons/state/anidb_filestate_streamed.png) }
+background-image: url(images/icons/state/anidb_filestate_streamed.png) }
 
 *.i_filestate_theater {
-background-image: url(icons/state/anidb_filestate_theater.png) }
+background-image: url(images/icons/state/anidb_filestate_theater.png) }
 
 *.i_liststate_unknown {
-background-image: url(icons/state/anidb_liststate_unknown.png) }
+background-image: url(images/icons/state/anidb_liststate_unknown.png) }
 
 *.i_state_all {
-background-image: url(icons/state/anidb_state_all.png) }
+background-image: url(images/icons/state/anidb_state_all.png) }
 
 *.i_state_deleted {
-background-image: url(icons/state/anidb_state_deleted.png) }
+background-image: url(images/icons/state/anidb_state_deleted.png) }
 
 *.i_state_oncd {
-background-image: url(icons/state/anidb_state_oncd.png) }
+background-image: url(images/icons/state/anidb_state_oncd.png) }
 
 
 	/* Group State Icons */
 	
 	*.i_gstate_complete {
-	background-image: url(icons/state/anidb_gstate_complete.png) }
+	background-image: url(images/icons/state/anidb_gstate_complete.png) }
 
 	*.i_gstate_dropped {
-	background-image: url(icons/state/anidb_gstate_dropped.png) }
+	background-image: url(images/icons/state/anidb_gstate_dropped.png) }
 
 	*.i_gstate_finished {
-	background-image: url(icons/state/anidb_gstate_finished.png) }
+	background-image: url(images/icons/state/anidb_gstate_finished.png) }
 
 	*.i_gstate_ongoing {
-	background-image: url(icons/state/anidb_gstate_ongoing.png) }
+	background-image: url(images/icons/state/anidb_gstate_ongoing.png) }
 
 	*.i_gstate_stalled {
-	background-image: url(icons/state/anidb_gstate_stalled.png) }
+	background-image: url(images/icons/state/anidb_gstate_stalled.png) }
 
 	*.i_gstate_specials {
-	background-image: url(icons/state/anidb_gstate_specials.png) }
+	background-image: url(images/icons/state/anidb_gstate_specials.png) }
 
 	*.i_gstate_all {
-	background-image: url(icons/state/anidb_gstate_all.png) }
+	background-image: url(images/icons/state/anidb_gstate_all.png) }
 	
 	.f_selected { background-color: #CACACA }
 	
 	*.i_group_comment {
-	background-image: url(icons/silk/comment_add.png) }
+	background-image: url(images/icons/silk/comment_add.png) }
 
 	
 /* Silk Icons */
 	
 *.i_general_blacklist {
-background-image:url(icons/silk/general_blacklist.png);
+background-image:url(images/icons/silk/general_blacklist.png);
 height: 13px;
 width: 15px }
 
 *.i_general_convert {
-background-image:url(icons/silk/general_convert.png);
+background-image:url(images/icons/silk/general_convert.png);
 height: 13px;
 width: 15px }
 
 *.i_general_delete,
 *.i_general_delete_request {
-background-image:url(icons/silk/general_delete.png);
+background-image:url(images/icons/silk/general_delete.png);
 height: 13px;
 width: 15px }
 
 *.i_general_edit,
 *.i_general_edit_request {
-background-image:url(icons/silk/general_edit.png);
+background-image:url(images/icons/silk/general_edit.png);
 height: 13px;
 width: 15px }
 
 *.i_general_history {
-background-image:url(icons/silk/general_history.png);
+background-image:url(images/icons/silk/general_history.png);
 height: 13px;
 width: 15px }
 
 *.i_general_merge {
-background-image:url(icons/silk/general_merge.png);
+background-image:url(images/icons/silk/general_merge.png);
 height: 13px;
 width: 15px }
 
 *.i_general_unverify {
-background-image:url(icons/silk/general_unverify.png);
+background-image:url(images/icons/silk/general_unverify.png);
 height: 13px;
 width: 15px }
 
 *.i_general_verify {
-background-image:url(icons/silk/general_verify.png);
+background-image:url(images/icons/silk/general_verify.png);
 height: 13px;
 width: 15px }
 
 *.i_general_vote_down {
-background-image:url(icons/silk/general_vote_down.png);
+background-image:url(images/icons/silk/general_vote_down.png);
 height: 13px;
 width: 15px }
 
 *.i_general_vote_revoke {
-background-image:url(icons/silk/general_vote_revoke.png);
+background-image:url(images/icons/silk/general_vote_revoke.png);
 height: 13px;
 width: 15px }
 
 *.i_general_vote_up {
-background-image:url(icons/silk/general_vote_up.png);
+background-image:url(images/icons/silk/general_vote_up.png);
 height: 13px;
 width: 15px }
 
 *.i_search_blue {
-background-image:url(icons/silk/search_type_b.png);
+background-image:url(images/icons/silk/search_type_b.png);
 height: 13px;
 width: 15px }
 
 *.i_search_orange {
-background-image:url(icons/silk/search_type_a.png);
+background-image:url(images/icons/silk/search_type_a.png);
 height: 13px;
 width: 15px }
 
 *.i_state_verified {
-background-image:url(icons/silk/state_verified.png);
+background-image:url(images/icons/silk/state_verified.png);
 height: 13px;
 width: 15px }
 
 *.i_user_add {
-background-image: url(icons/silk/user_add.png) }
+background-image: url(images/icons/silk/user_add.png) }
 
 *.i_user_delete {
-background-image: url(icons/silk/user_delete.png) }
+background-image: url(images/icons/silk/user_delete.png) }
 
 *.i_user_feedback {
-background-image: url(icons/silk/user_feedback.png) }
+background-image: url(images/icons/silk/user_feedback.png) }
 
 *.i_user_history {
-background-image: url(icons/silk/user_history.png) }
+background-image: url(images/icons/silk/user_history.png) }
 
 *.i_user_info {
-background-image: url(icons/silk/user_info.png) }
+background-image: url(images/icons/silk/user_info.png) }
 
 *.i_user_mylist {
-background-image: url(icons/silk/user_mylist.png) }
+background-image: url(images/icons/silk/user_mylist.png) }
 
 *.i_user_page {
-background-image: url(icons/silk/user_page.png) }
+background-image: url(images/icons/silk/user_page.png) }
 
 *.i_user_reviews {
-background-image: url(icons/silk/user_reviews.png) }
+background-image: url(images/icons/silk/user_reviews.png) }
 
 *.i_user_send {
-background-image: url(icons/silk/user_send.png) }
+background-image: url(images/icons/silk/user_send.png) }
 
 *.i_user_wishlist {
-background-image: url(icons/silk/user_wishlist.png) }
+background-image: url(images/icons/silk/user_wishlist.png) }
 
 *.i_user_votes {
-background-image: url(icons/silk/user_votes.png) }
+background-image: url(images/icons/silk/user_votes.png) }
 
 *.i_events_birthday {
-background-image: url(icons/silk/events_birthday.png) }
+background-image: url(images/icons/silk/events_birthday.png) }
 
 *.i_events_event {
-background-image: url(icons/silk/events_event.png) }
+background-image: url(images/icons/silk/events_event.png) }
 
 *.i_events_maintenance {
-background-image: url(icons/silk/events_maintenance.png) }
+background-image: url(images/icons/silk/events_maintenance.png) }
 
 	/* Wishlist Icons */
 	
 	*.i_wishlist_blacklist {
-	background-image: url(icons/silk/wishlist_blacklist.png) }
+	background-image: url(images/icons/silk/wishlist_blacklist.png) }
 
 	*.i_wishlist_buddy {
-	background-image: url(icons/silk/wishlist_buddy.png) }
+	background-image: url(images/icons/silk/wishlist_buddy.png) }
 
 	*.i_wishlist_toget {
-	background-image: url(icons/silk/wishlist_toget.png) }
+	background-image: url(images/icons/silk/wishlist_toget.png) }
 
 	*.i_wishlist_towatch {
-	background-image: url(icons/silk/wishlist_towatch.png) }
+	background-image: url(images/icons/silk/wishlist_towatch.png) }
 
 	*.i_wishlist_undefined {
-	background-image: url(icons/silk/wishlist_undefined.png) }
+	background-image: url(images/icons/silk/wishlist_undefined.png) }
 
 	*.i_wishlist_remove {
-	background-image: url(icons/silk/wishlist_remove.png) }
+	background-image: url(images/icons/silk/wishlist_remove.png) }
 	
 
 /* Tooltip */	
 
 #tooltip span.top {
-background:url(icons/test/bubble.png) no-repeat top }
+background:url(images/icons/test/bubble.png) no-repeat top }
 
 #tooltip span.middle {
-background:url(icons/test/bubble_filler.png) repeat bottom }
+background:url(images/icons/test/bubble_filler.png) repeat bottom }
 
 #tooltip span.bottom {
-background:url(icons/test/bubble.png) no-repeat bottom }
+background:url(images/icons/test/bubble.png) no-repeat bottom }
 	
 	
 /* Rate Icons */
 
 *.i_pri_high {
-background-image: url(icons/icon/anidb_pri_high.png) }
+background-image: url(images/icons/icon/anidb_pri_high.png) }
 
 *.i_pri_low {
-background-image: url(icons/icon/anidb_pri_low.png) }
+background-image: url(images/icons/icon/anidb_pri_low.png) }
 
 *.i_pri_med {
-background-image: url(icons/icon/anidb_pri_med.png) }
+background-image: url(images/icons/icon/anidb_pri_med.png) }
 
 *.i_rate_corrupted {
-background-image: url(icons/icon/anidb_rate_corrupted.png) }
+background-image: url(images/icons/icon/anidb_rate_corrupted.png) }
 
 *.i_rate_eyecancer {
-background-image: url(icons/icon/anidb_rate_eyecancer.png) }
+background-image: url(images/icons/icon/anidb_rate_eyecancer.png) }
 
 *.i_rate_star {
-background-image: url(icons/icon/anidb_rate_star.png) }
+background-image: url(images/icons/icon/anidb_rate_star.png) }
 
 *.i_rate_halfstar {
 width: 7px;
-background-image: url(icons/icon/anidb_rate_star.png);
+background-image: url(images/icons/icon/anidb_rate_star.png);
 background-position: left }
 
 *.i_rate_unknown {
-background-image: url(icons/icon/anidb_rate_unknown.png) }
+background-image: url(images/icons/icon/anidb_rate_unknown.png) }
 
 *.i_rate_veryhigh {
 width: 43px;
-background-image: url(icons/icon/anidb_rate_star.png);
+background-image: url(images/icons/icon/anidb_rate_star.png);
 background-repeat: repeat-x;
 background-position: left }
 
 *.i_rate_high {
 width: 38px;
-background-image: url(icons/icon/anidb_rate_star.png);
+background-image: url(images/icons/icon/anidb_rate_star.png);
 background-repeat: repeat-x;
 background-position: left }
 
 *.i_rate_med {
 width: 30px;
-background-image: url(icons/icon/anidb_rate_star.png);
+background-image: url(images/icons/icon/anidb_rate_star.png);
 background-repeat: repeat-x;
 background-position: left }
 
 *.i_rate_low {
 width: 22px;
-background-image: url(icons/icon/anidb_rate_star.png);
+background-image: url(images/icons/icon/anidb_rate_star.png);
 background-repeat: repeat-x;
 background-position: left }
 
 *.i_rate_verylow {
 width: 15px;
-background-image: url(icons/icon/anidb_rate_star.png);
+background-image: url(images/icons/icon/anidb_rate_star.png);
 background-repeat: repeat-x;
 background-position: left }
 
@@ -1871,124 +1870,124 @@ background-position: left }
 *.i_videostream_realvideo_other,
 *.i_videostream_wmv9__also_wmv3_,
 *.i_videostream {
-background-image: url(icons/icon/anidb_videoStream.png) }
+background-image: url(images/icons/icon/anidb_videoStream.png) }
 
 
 /* Audio Flags */
 
 *.i_audio_ja {
-background-image: url(icons/flags/anidb_audio_japanese.png) }
+background-image: url(images/icons/flags/anidb_audio_japanese.png) }
 
 *.i_audio_x-jat {
-background-image: url(icons/flags/anidb_audio_japanese-transcription.png) }
+background-image: url(images/icons/flags/anidb_audio_japanese-transcription.png) }
 
 *.i_audio_de {
-background-image: url(icons/flags/anidb_audio_german.png) }
+background-image: url(images/icons/flags/anidb_audio_german.png) }
 
 *.i_audio_pt-BR {
-background-image: url(icons/flags/anidb_audio_brasilian.png) }
+background-image: url(images/icons/flags/anidb_audio_brasilian.png) }
 
 *.i_audio_cs {
-background-image: url(icons/flags/anidb_audio_czech.png) }
+background-image: url(images/icons/flags/anidb_audio_czech.png) }
 
 *.i_audio_da {
-background-image: url(icons/flags/anidb_audio_danish.png) }
+background-image: url(images/icons/flags/anidb_audio_danish.png) }
 
 *.i_audio_nl {
-background-image: url(icons/flags/anidb_audio_dutch.png) }
+background-image: url(images/icons/flags/anidb_audio_dutch.png) }
 
 *.i_audio_en {
-background-image: url(icons/flags/anidb_audio_english.png) }
+background-image: url(images/icons/flags/anidb_audio_english.png) }
 
 *.i_audio_fi {
-background-image: url(icons/flags/anidb_audio_finnish.png) }
+background-image: url(images/icons/flags/anidb_audio_finnish.png) }
 
 *.i_audio_fr {
-background-image: url(icons/flags/anidb_audio_french.png) }
+background-image: url(images/icons/flags/anidb_audio_french.png) }
 
 *.i_audio_it {
-background-image: url(icons/flags/anidb_audio_italian.png) }
+background-image: url(images/icons/flags/anidb_audio_italian.png) }
 
 *.i_audio_el {
-background-image: url(icons/flags/anidb_audio_greek.png) }
+background-image: url(images/icons/flags/anidb_audio_greek.png) }
 
 *.i_audio_pt {
-background-image: url(icons/flags/anidb_audio_portuguese.png) }
+background-image: url(images/icons/flags/anidb_audio_portuguese.png) }
 
 *.i_audio_ru {
-background-image: url(icons/flags/anidb_audio_russian.png) }
+background-image: url(images/icons/flags/anidb_audio_russian.png) }
 
 *.i_audio_sv {
-background-image: url(icons/flags/anidb_audio_swedish.png) }
+background-image: url(images/icons/flags/anidb_audio_swedish.png) }
 
 *.i_audio_x-other {
-background-image: url(icons/flags/anidb_audio_unknown.png) }
+background-image: url(images/icons/flags/anidb_audio_unknown.png) }
 
 *.i_audio_x-unk {
-background-image: url(icons/flags/anidb_audio_unknown.png) }
+background-image: url(images/icons/flags/anidb_audio_unknown.png) }
 
 *.i_audio_ro {
-background-image: url(icons/flags/anidb_audio_romanian.png) }
+background-image: url(images/icons/flags/anidb_audio_romanian.png) }
 
 *.i_audio_es {
-background-image: url(icons/flags/anidb_audio_spanish.png) }
+background-image: url(images/icons/flags/anidb_audio_spanish.png) }
 
 
 /* Sub Flags */
 
 *.i_sub_de {
-background-image: url(icons/flags/anidb_sub_german.png) }
+background-image: url(images/icons/flags/anidb_sub_german.png) }
 
 *.i_sub_pt-BR {
-background-image: url(icons/flags/anidb_sub_brasilian.png) }
+background-image: url(images/icons/flags/anidb_sub_brasilian.png) }
 
 *.i_sub_cs {
-background-image: url(icons/flags/anidb_sub_czech.png) }
+background-image: url(images/icons/flags/anidb_sub_czech.png) }
 
 *.i_sub_da {
-background-image: url(icons/flags/anidb_sub_danish.png) }
+background-image: url(images/icons/flags/anidb_sub_danish.png) }
 
 *.i_sub_nl {
-background-image: url(icons/flags/anidb_sub_dutch.png) }
+background-image: url(images/icons/flags/anidb_sub_dutch.png) }
 
 *.i_sub_en {
-background-image: url(icons/flags/anidb_sub_english.png) }
+background-image: url(images/icons/flags/anidb_sub_english.png) }
 
 *.i_sub_fi {
-background-image: url(icons/flags/anidb_sub_finnish.png) }
+background-image: url(images/icons/flags/anidb_sub_finnish.png) }
 
 *.i_sub_fr {
-background-image: url(icons/flags/anidb_sub_french.png) }
+background-image: url(images/icons/flags/anidb_sub_french.png) }
 
 *.i_sub_it {
-background-image: url(icons/flags/anidb_sub_italian.png) }
+background-image: url(images/icons/flags/anidb_sub_italian.png) }
 
 *.i_sub_el {
-background-image: url(icons/flags/anidb_sub_greek.png) }
+background-image: url(images/icons/flags/anidb_sub_greek.png) }
 
 *.i_sub_ja {
-background-image: url(icons/flags/anidb_sub_japanese.png) }
+background-image: url(images/icons/flags/anidb_sub_japanese.png) }
 
 *.i_sub_x-jat {
-background-image: url(icons/flags/anidb_sub_japanese-transcription.png) }
+background-image: url(images/icons/flags/anidb_sub_japanese-transcription.png) }
 
 *.i_sub_pt {
-background-image: url(icons/flags/anidb_sub_portuguese.png) }
+background-image: url(images/icons/flags/anidb_sub_portuguese.png) }
 
 *.i_sub_ru {
-background-image: url(icons/flags/anidb_sub_russian.png) }
+background-image: url(images/icons/flags/anidb_sub_russian.png) }
 
 *.i_sub_sv {
-background-image: url(icons/flags/anidb_sub_swedish.png) }
+background-image: url(images/icons/flags/anidb_sub_swedish.png) }
 
 *.i_sub_x-other {
-background-image: url(icons/flags/anidb_sub_unknown.png) }
+background-image: url(images/icons/flags/anidb_sub_unknown.png) }
 
 *.i_sub_x-unk {
-background-image: url(icons/flags/anidb_sub_unknown.png) }
+background-image: url(images/icons/flags/anidb_sub_unknown.png) }
 
 *.i_sub_ro {
-background-image: url(icons/flags/anidb_sub_romanian.png) }
+background-image: url(images/icons/flags/anidb_sub_romanian.png) }
 
 *.i_sub_es {
-background-image: url(icons/flags/anidb_sub_spanish.png) }
+background-image: url(images/icons/flags/anidb_sub_spanish.png) }
