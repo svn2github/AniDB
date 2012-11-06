@@ -20,6 +20,7 @@ Green: #689a4a / Light: #EEF8EA
 
 ================================================== */
 
+
 @import "normalize.css";
 
 @import "../common/layout/default.css";
@@ -1295,9 +1296,9 @@ height: 12px;
 width: 43px }
 
   #layout-main table#grouplist .i_forum_link {
-	background: url(images/icons/four/forum_link.png) no-repeat;
-	height: 12px;
-	width: 7px }
+	background: url(images/icons/icon/anidb_forum_link.png) no-repeat;
+	height: 13px;
+	width: 15px }
 
 *.i_topic_locked { /* no hover */
 background: url(images/icons/four/topic_locked.png) no-repeat;
@@ -1878,6 +1879,9 @@ background-image: url(images/icons/icon/anidb_videoStream.png) }
 
 /* Audio Flags */
 
+.i_audio_x-in {
+background-image: url(images/icons/flags/anidb_audio_instrumental.png) }
+
 *.i_audio_ja {
 background-image: url(images/icons/flags/anidb_audio_japanese.png) }
 
@@ -1934,6 +1938,18 @@ background-image: url(images/icons/flags/anidb_audio_romanian.png) }
 
 *.i_audio_es {
 background-image: url(images/icons/flags/anidb_audio_spanish.png) }
+
+*.i_audio_bg {
+background-image: url(images/icons/flags/anidb_audio_bulgarian.png) }
+
+*.i_audio_hu {
+background-image: url(images/icons/flags/anidb_audio_hungarian.png) }
+
+*.i_audio_mn {
+background-image: url(images/icons/flags/anidb_audio_mongolian.png) }
+
+*.i_audio_tr {
+background-image: url(images/icons/flags/anidb_audio_turkish.png) }
 
 
 /* Sub Flags */
@@ -1994,3 +2010,15 @@ background-image: url(images/icons/flags/anidb_sub_romanian.png) }
 
 *.i_sub_es {
 background-image: url(images/icons/flags/anidb_sub_spanish.png) }
+
+*.i_sub_bg {
+background-image: url(images/icons/flags/anidb_sub_bulgarian.png) }
+
+*.i_sub_hu {
+background-image: url(images/icons/flags/anidb_sub_hungarian.png) }
+
+*.i_sub_mn {
+background-image: url(images/icons/flags/anidb_sub_mongolian.png) }
+
+*.i_sub_tr {
+background-image: url(images/icons/flags/anidb_sub_turkish.png) }

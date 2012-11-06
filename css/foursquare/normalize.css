@@ -47,7 +47,7 @@ label { cursor: pointer }
 
 button, input, 
 select, textarea { 
-font:99% sans-serif; margin: 0; vertical-align: baseline; *vertical-align: middle }
+font: 99% sans-serif; margin: 0; vertical-align: baseline; *vertical-align: middle }
 
 textarea { overflow: auto; vertical-align: top; resize: vertical }
 
@@ -70,8 +70,4 @@ cursor: pointer; -webkit-appearance: button; *overflow: visible }
 
 input[type="checkbox"], 
 input[type="radio"] { 
-box-sizing: border-box; padding: 0; *width: 13px; *height: 13px }
-
-input[type="radio"] { vertical-align: text-bottom }
-
-input[type="checkbox"], label { vertical-align: middle }
+vertical-align: text-bottom; box-sizing: border-box; padding: 0; *width: 13px; *height: 13px }
