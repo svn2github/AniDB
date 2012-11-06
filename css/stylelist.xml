@@ -120,6 +120,16 @@
 		<screenshot>fma_style/images/screenshot.png</screenshot>
 		<thumbnail>fma_style/images/thumbnail.png</thumbnail>
 	</style>
+		<style name="foursquare">
+		<title>Foursquare</title>
+		<creator>Vaneska</creator>
+		<update>05.11.2012</update>
+		<status>V.1.0</status>
+		<description>A Grey and White Theme with Customized Icons, based on Sub Brown 2.</description>
+		<path/>
+		<screenshot>foursquare/images/screenshot.png</screenshot>
+		<thumbnail>foursquare/images/thumbnail.png</thumbnail>
+	</style>
 	<style name="geassmode">
 		<title>Geass Mode</title>
 		<creator>antennen</creator>
@@ -175,7 +185,7 @@
 		<creator>b1nh</creator>
 		<update>29.07.2010</update>
 		<status>In development
-</status>
+	</status>
 		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
 		<path/>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
