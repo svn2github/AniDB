@@ -304,7 +304,7 @@ var menuCollapse            = Number(settings['other']['menuCollapse']) || 0;
 var username                = null;
 var defaultTabs             = tabCookieGet();
 var picbase                 = 'http://img7.anidb.net/pics/anime/';
-var seeDebug                = Number(settings['other']['seeDebug']) || 1;
+var seeDebug                = Number(settings['other']['seeDebug']) || 0;
 var seeTimes                = Number(settings['other']['seeTimes']) || 0;
 
 var charInfos = new Array(); 		// Character information	(indexed by charid)
