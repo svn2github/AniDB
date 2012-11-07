@@ -546,6 +546,11 @@ function parseCustom(node) {
 		childNode = node.childNodes.item(i);
 		if (childNode.nodeType == 3) continue;
 		switch (childNode.nodeName) {
+			case 'langverifier':
+				var langNodes = childNode.getElementsByTagName('lang');
+				for (m = 0; m < langNodes.length; m++) {
+					verifiesLanguage[m] = nodeData(langNodes[m]);
+				}
 			case 'mylist':
 				var mylistNodes = childNode.getElementsByTagName('file');
 				for (m = 0; m < mylistNodes.length; m++) {

@@ -15,20 +15,21 @@ jsVersionArray.push({
 });
 
 // GLOBALS //
-var uid;						// userID
-var mod;						// isMod
-var aid;						// AnimeID
-var gid;						// GroupID
-var anime;						// anime Object (used in animePage)
-var animes = new Array();		// stored by aid
-var animeOrder = new Array();	// animes ordered in db way (link to aid)
-//var groupOrder = new Array();	// ordered group list (filtering porpuses)
-var groups = new Array();		// stored by gid
-var aGroups = new Array();		// stored by agid (gid to link groups)
-var mylist = new Array();		// stored by fid
-var episodes = new Array();		// stored in eid
-var epOrder = new Array();		// episodes ordered in db way (link to eid)
-var files = new Array();		// stored by fid
+var uid;						     // userID
+var mod;						     // isMod
+var aid;						     // AnimeID
+var gid;						     // GroupID
+var anime;						     // anime Object (used in animePage)
+var verifiesLanguage = new Array();  // list of short language identifiers for which the user is marked verifier
+var animes = new Array();		     // stored by aid
+var animeOrder = new Array();	     // animes ordered in db way (link to aid)
+//var groupOrder = new Array();	     // ordered group list (filtering porposes)
+var groups = new Array();		     // stored by gid
+var aGroups = new Array();		     // stored by agid (gid to link groups)
+var mylist = new Array();		     // stored by fid
+var episodes = new Array();		     // stored in eid
+var epOrder = new Array();		     // episodes ordered in db way (link to eid)
+var files = new Array();		     // stored by fid
 var hiddenGroups = 0;
 // settings
 var animeTitleLang = '';
@@ -177,6 +178,18 @@ function updateEpisodeNumbers(episode,type,action) {
 		episode.inputs['epno'].value = episode.epno = episode.typeChar + (epNo+diff);
 		episode = episode.nextEp;
 	}
+}
+
+/* Checks if user is marked language verifier for given language
+ * @param lang short language identifer to check
+ * @return true if verifier
+ */
+
+function isLanguageVerifier (lang) {
+	for( var i=0, j=verifiesLanguage.length; i<j; i++ ) {
+	  if ( verifiesLanguage[i] == lang ) { return true; }
+	};
+	return false;
 }
 
 /* Function that creates a new Episode entry
@@ -432,7 +445,7 @@ function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	container.appendChild(cell);
 	createCell(container, 'icons', createIcon(null, lang, null, toggleEpTitles, 'language: '+mapLanguage(lang), 'i_audio_'+lang));
 	var ck = createCheckbox('addepm.'+eid+'.verify'+languageMap[lang]['id'],(Number(verify) ? true : false));
-	if (!mod) {
+	if ( !mod && !isLanguageVerifier(lang) ) {
 		ck.disabled = true;
 		container.appendChild(createTextInput('addepm.'+eid+'.verify'+languageMap[lang]['id'],null,null,1,null,(Number(verify) ? 'on' : 'off')));
 	}
