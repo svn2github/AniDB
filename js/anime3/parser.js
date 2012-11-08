@@ -194,7 +194,6 @@ function CEpisodeEntry(node) {
 	this.userCount = 0;
 	this.fileCount = 0;
 	this.other = '';
-	this.summary = '';
 	this.rating = '-';
 	this.ratingCount = 0;
 	this.newFiles = false;
@@ -217,7 +216,6 @@ function CEpisodeEntry(node) {
 		case 'ucnt': this.userCount = Number(nodeData(sNode)); break;
 		case 'fcnt': this.fileCount = Number(nodeData(sNode)); break;
 		case 'other': this.other = nodeData(sNode); break;
-		case 'summary': this.summary = nodeData(sNode); break;
 		case 'rating': this.rating = nodeData(sNode); this.ratingCount = Number(sNode.getAttribute('cnt')); break;
 		case 'titles':
 			for (var k = 0; k < sNode.childNodes.length; k++) {
@@ -548,6 +546,11 @@ function parseCustom(node) {
 		childNode = node.childNodes.item(i);
 		if (childNode.nodeType == 3) continue;
 		switch (childNode.nodeName) {
+			case 'langverifier':
+				var langNodes = childNode.getElementsByTagName('lang');
+				for (m = 0; m < langNodes.length; m++) {
+					verifiesLanguage[m] = nodeData(langNodes[m]);
+				}
 			case 'mylist':
 				var mylistNodes = childNode.getElementsByTagName('file');
 				for (m = 0; m < mylistNodes.length; m++) {
