@@ -341,6 +341,13 @@ function toggleEpisodeTitles() {
 		//if (table) table.style.display = (showTitles ? '' : 'none');
 		//if (span) span.style.display = (showTitles ? 'none' : '');
 	}
+	if ( showTitles ) {
+		var txtAreas = document.getElementsByTagName("textarea");
+		var len = txtAreas.length;
+		for( i=0; i<len; i++ ) {
+			resizeTextArea( txtAreas[i], false );
+		}
+	}
 }
 
 /* Function that toggles titles for a specific episode */
@@ -439,7 +446,8 @@ function addTitle() { titlesActions(this,'add'); }
 function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	var container = document.createElement('tr');
 	container.id = 'e'+eid+'.title.'+lang;
-	var textarea = createTextArea('addepm.'+eid+'.title'+languageMap[lang]['id'],80,1,255,false,false,title);
+	var textarea = createTextArea('addepm.'+eid+'.title'+languageMap[lang]['id'],80,1,512,false,false,title);
+	textarea.onkeyup = function(){ resizeTextArea(this, true) };
 	var cell = createCell(null,null,textarea);
 	cell.appendChild(createTextInput('addepm.'+eid+'.update'+languageMap[lang]['id'],50,false,true,null,update));
 	container.appendChild(cell);
@@ -452,6 +460,13 @@ function createEpisodeTitleLine(eid,lang,title,update,verify,isUserAdd) {
 	createCell(container, 'verify', ck);
 	createCell(container, 'action', (isUserAdd && lang != 'en') ? createIcon(null, 'rem', null, remTitle, 'Remove this title', 'i_minus') : document.createTextNode(' '));
 	return(container);
+}
+
+function resizeTextArea(area, always) {
+	if ( area.scrollHeight != area.clientHeight || always ) {
+		area.style.height = "1px";
+		area.style.height = (area.scrollHeight) + "px";
+	}
 }
 
 /* Function that creates episode titles and assorted stuff
