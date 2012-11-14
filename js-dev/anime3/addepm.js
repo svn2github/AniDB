@@ -20,7 +20,6 @@ var mod;						     // isMod
 var aid;						     // AnimeID
 var gid;						     // GroupID
 var anime;						     // anime Object (used in animePage)
-var verifiesLanguage = new Array();  // list of short language identifiers for which the user is marked verifier
 var animes = new Array();		     // stored by aid
 var animeOrder = new Array();	     // animes ordered in db way (link to aid)
 //var groupOrder = new Array();	     // ordered group list (filtering porposes)

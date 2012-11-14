@@ -19,6 +19,7 @@ jsVersionArray.push({
 // CORE Vars //
 
 var episodeFileTableRenderList = new Array(); // stack of fileTables in queue for render (currently not used)
+var verifiesLanguage = new Array();  // list of short language identifiers for which the user is marked verifier
 var fInt = 100; // time to wait between ep node parsing 
 var eInt = 150; // time to wait between ep render
 //var config = new Object(); // config
