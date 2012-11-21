@@ -1,8 +1,8 @@
 /*
-*  Foursquare V.1.0
+*  Foursquare V.1.1
 *  Based on SubBrown2
 *  AniDB Stylesheet
-*  09.11.2012 
+*  21.11.2012 
 */
 
 
@@ -1263,7 +1263,7 @@ width: 87px }
 *.i_topic_history {
 background: url(images/icons/four/topic_history.png) no-repeat;
 height: 12px;
-width: 89px }
+width: 85px }
 
 *.i_topic_lock {
 background: url(images/icons/four/topic_lock.png) no-repeat;
