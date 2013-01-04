@@ -1,11 +1,12 @@
 (C) 2009 nicklaich inspired by EXP
-Version: 2 (19.06.2009)
+Version: 3 (05.01.2013)
 
 Make TXT file with ed2k link for each file.
 FileName is "AnimeName - EpNo [Group][CRC32].ext".
 Warning: Anime and group names comes "as is" (with spaces and symbols like ':?*/|\' etc).
 Lines separated by 0Dh 0Ah symbols.
-Generic files and files without CRC32 are not listed.
+Generic, deleted, corrupted in any way files and files without CRC32 are not listed.
+Files over multiple episodes are commented out by ";" char (I can't find any other way to get rid of them)
 
 Purpose is for automated HDD audit.
 

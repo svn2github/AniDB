@@ -1,0 +1,4 @@
+Version history
+2009-06-18 v. 1 - base report
+2009-06-19 v. 2 - small cosmetic changes
+2013-01-05 v. 3 - usability improvement
