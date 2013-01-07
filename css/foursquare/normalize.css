@@ -1,3 +1,9 @@
+/*
+*  Normalize V.1.1
+*  AniDB Foursquare
+*  06.01.2013
+*/
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, 
 blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, 
 img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, 
@@ -39,7 +45,7 @@ abbr, acronym { font-variant: normal; border-bottom: 1px dotted #666; cursor: he
 
 b, strong { font-weight: bold }
 
-italic, em, dfn { font-style: italic }
+italic, em, dfn, i { font-style: italic }
 
 table { border-collapse: separate; -border-collapse: collapse; border-spacing: 0 } 
 
