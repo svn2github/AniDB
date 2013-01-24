@@ -1,7 +1,7 @@
 /*
-*  Normalize V.1.1
+*  Reset V.1
 *  AniDB Foursquare
-*  06.01.2013
+*  24.01.2013 
 */
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, 
@@ -18,7 +18,7 @@ outline: none;
 margin: 0;
 padding: 0 }
 
-html { height: 101% } 
+html { height: 101% }
 
 body {
 -webkit-font-smoothing: antialiased;

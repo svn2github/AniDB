@@ -1,8 +1,8 @@
 /*
-*  Foursquare V.1.1
+*  Foursquare V.1
 *  Based on SubBrown2
 *  AniDB Stylesheet
-*  06.01.2013
+*  24.01.2013 
 */
 
 
@@ -357,6 +357,10 @@ text-shadow: none }
 	height: 13px;
 	display: inline-block;
 	position: relative }
+	
+		/* Opera Fav Fix */
+		x:-o-prefocus, input[type="checkbox"] {
+		position: static }
 	
 	input[type="checkbox"]:active,
 	input[type="checkbox"]:checked:active {
@@ -930,7 +934,13 @@ border-right: 1px solid #EEE }
 
 #layout-main div.timeline_all div.timeline li a {
 color: #7e8072;
-background: #EEE }
+background: #DCF4FC }
+
+#layout-main div.timeline_all div.timeline ul.row li.completed a {
+background-color: #DFF5D0 }
+
+	#layout-main div.timeline_all div.timeline ul.row.g_odd li.completed a {
+	background-color: #D7E9CB }
 
 
 /* Tooltip */
