@@ -23,6 +23,11 @@
 	background-image: url(../icons/state/anidb_filestate_edited.gif);
 }
 
+*.i_filestate_onbluray
+{
+	background-image: url(../icons/state/anidb_filestate_onbluray.gif);
+}
+
 *.i_filestate_ondvd
 {
 	background-image: url(../icons/state/anidb_filestate_ondvd.gif);
