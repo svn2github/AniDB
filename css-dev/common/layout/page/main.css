@@ -43,8 +43,6 @@
 
 #layout-main div.main_all div.datablocks > div
 {
-	display:inline-table;
-	vertical-align:top;
 	width:100%;
 	max-width: 400px; /*hack to get ie and opera in line as they lack multi column support atm*/
 }
