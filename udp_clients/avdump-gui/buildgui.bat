@@ -1,1 +1,1 @@
-C:\Python27\Lib\site-packages\PyQt4\bin\pyuic4.bat avdump.ui -o gui.py
+C:\Python\Lib\site-packages\PyQt4\pyuic4.bat avdump.ui -o gui.py
