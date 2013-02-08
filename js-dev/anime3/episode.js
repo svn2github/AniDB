@@ -800,8 +800,8 @@ function createMylistAddBox(parentNode,type) {
 		createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
 	//}
 	//if (type == 'anime') {
-		optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
-						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '},15:{"text":' streamed '}};
+		optionArray = {100:{"text":' other '},10:{"text":' self ripped '},16:{"text":' on bluray '},11:{"text":' on dvd '},
+			12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' in theaters '},15:{"text":' streamed '},20:{"text":' filler ep '}};
 		select = createSelectArray(null,"addl.genericstate","addl.genericstate",null,((type == 'anime') ? 13 : 100),optionArray);
 		createFieldValueRow(tbody,'type'+gODD(i),'Generic Type',select); i++;
 	//}

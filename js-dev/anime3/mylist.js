@@ -773,8 +773,9 @@ function createEpisodeTableFoot(colSpan,aid) {
 					{"value":'0',"text":'-------------------------------',"class":'section',"disabled":'disabled'},{"value":'0',"text":'Change file state to',"class":'section',"disabled":'disabled'},
 					{"value":'fstate:0',"text":'normal/original'},{"value":'fstate:1',"text":'corrupted version/invalid crc'},{"value":'fstate:2',"text":'self edited'},{"value":'fstate:100',"text":'other'},
 					{"value":'0',"text":'-------------------------------',"class":'section',"disabled":'disabled'},{"value":'0',"text":'Change generic state to',"class":'section',"disabled":'disabled'},
-					{"value":'gstate:10',"text":'self ripped'},{"value":'gstate:11',"text":'on dvd'},{"value":'gstate:12',"text":'on vhs'},
-					{"value":'gstate:13',"text":'on tv'},{"value":'gstate:14',"text":'theater'},{"value":'gstate:20',"text":'filler ep'},{"value":'gstate:100',"text":'other'}];
+					{"value":'gstate:10',"text":'self ripped'},{"value":'gstate:16',"text":'on bluray'},{"value":'gstate:11',"text":'on dvd'},{"value":'gstate:12',"text":'on vhs'},
+					{"value":'gstate:13',"text":'on tv'},{"value":'gstate:14',"text":'in theaters'},{"value":'gstate:15',"text":'streamed'},{"value":'gstate:20',"text":'filler ep'},
+					{"value":'gstate:100',"text":'other'}];
 	createSelectArrayN(cell,"mylmod.type","mylmod.type",null,0,optionArray);
 	cell.appendChild(document.createTextNode(' '));
 	var button = createBasicButton('mylmod.doit','Update selected files','submit');

@@ -1579,8 +1579,8 @@ function createMylistAddBox(parentNode,type) {
 					2:{"text":' self edited '},100:{"text":' other '}};
 	select = createSelectArray(null,"addl.filestate","addl.filestate",null,mylist_add_fstate,optionArray);
 	createFieldValueRow(tbody,'type'+gODD(i),'Type',select); i++;
-	optionArray = {100:{"text":' other '},10:{"text":' self ripped '},11:{"text":' on dvd '},
-						 12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' theater '},15:{"text":' streamed '}};
+	optionArray = {100:{"text":' other '},10:{"text":' self ripped '},16:{"text":' on bluray '},11:{"text":' on dvd '},
+		12:{"text":' on vhs '},13:{"text":' on tv '},14:{"text":' in theaters '},15:{"text":' streamed '},20:{"text":' filler ep '}};
 	var defaultAddType = ((type == 'anime') ? 13 : 100);
 	if (type == 'anime') {
 		switch(anime.type) {
