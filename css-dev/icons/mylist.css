@@ -58,9 +58,14 @@
 	background-image: url(../icons/state/anidb_filestate_streamed.gif);
 }
 
-*.i_filestate_theater
+*.i_filestate_intheaters
 {
 	background-image: url(../icons/state/anidb_filestate_theater.gif);
+}
+
+*.i_filestate_fillerep
+{
+	background-image: url(../icons/state/anidb_filestate_filler.gif);
 }
 
 *.i_liststate_unknown
