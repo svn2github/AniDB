@@ -46,6 +46,7 @@ div.badge.anime.jewelpet       div.inner { background-image:url("../icons/achiev
 div.badge.anime.logh           div.inner { background-image:url("../icons/achievements/center-logh.png"); }
 div.badge.anime.lupin          div.inner { background-image:url("../icons/achievements/center-lupin.png"); }
 div.badge.anime.macross        div.inner { background-image:url("../icons/achievements/center-macross1.png"); }
+div.badge.anime.major          div.inner { background-image:url("../icons/achievements/center-major.png"); }
 div.badge.anime.onepiece       div.inner { background-image:url("../icons/achievements/center-onepiece.png"); }
 div.badge.anime.pokemon        div.inner { background-image:url("../icons/achievements/center-pokemon.png"); }
 div.badge.anime.precure        div.inner { background-image:url("../icons/achievements/center-precure.png"); }
@@ -55,9 +56,10 @@ div.badge.anime.saintseiya     div.inner { background-image:url("../icons/achiev
 div.badge.anime.sazae          div.inner { background-image:url("../icons/achievements/center-sazae.png"); }
 div.badge.anime.slayers        div.inner { background-image:url("../icons/achievements/center-slayers.png"); }
 div.badge.anime.tenchi_muyou   div.inner { background-image:url("../icons/achievements/center-tenchi_muyou.png"); }
+div.badge.anime.votoms         div.inner { background-image:url("../icons/achievements/center-votoms.png"); }
 div.badge.anime.yugioh         div.inner { background-image:url("../icons/achievements/center-yugioh.png"); }
 
-div.badge.creator.adachimitsuru    div.inner { background-image:url("../icons/achievements/center-adachi_mitsuru2.png"); }
+div.badge.creator.adachimitsuru    div.inner { background-image:url("../icons/achievements/center-adachi_mitsuru.png"); }
 div.badge.creator.clamp            div.inner { background-image:url("../icons/achievements/center-clamp.png"); }
 div.badge.creator.ghibli           div.inner { background-image:url("../icons/achievements/center-ghibli.png"); }
 div.badge.creator.matsumoto_leiji  div.inner { background-image:url("../icons/achievements/center-leiji.png"); }
