@@ -3,12 +3,12 @@
 	<style name="aniblackle">
 		<title>Aniblackle</title>
 		<creator>Der Idiot</creator>
-		<update>09.04.2009</update>
+		<update>28.07.2010</update>
 		<status>in development</status>
 		<description>Style inspired by blackle.com</description>
 		<path/>
-		<thumbnail>aniblackle/images/thumbnail.png</thumbnail>
 		<screenshot>aniblackle/images/screenshot.png</screenshot>
+		<thumbnail>aniblackle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="aniblackle-menu">
 		<title>Aniblackle with Menu</title>
@@ -17,38 +17,38 @@
 		<status>in development</status>
 		<description>Style inspired by blackle; banner by fafnir aka permidion</description>
 		<path/>
-		<thumbnail>aniblackle-menu/images/thumbnail.png</thumbnail>
 		<screenshot>aniblackle-menu/images/screenshot.png</screenshot>
+		<thumbnail>aniblackle-menu/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle">
 		<title>AniDBstyle</title>
 		<creator>akujin</creator>
-		<update/>
+		<update>29.07.2010</update>
 		<status>in development</status>
 		<description>Generally aims to emulate the old table layout as closely as possible, but with much looser underlying markup. Converted to css by Rar,PetriW and epoximator.</description>
 		<path/>
-		<thumbnail>anidbstyle/images/thumbnail.png</thumbnail>
 		<screenshot>anidbstyle/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle2">
 		<title>AniDBstyle v2</title>
 		<creator>Der Idiot</creator>
-		<update>21.10.2010</update>
+		<update>28.07.2010</update>
 		<status>in development</status>
 		<description>a combination of the anigoogle framework and anidbstyle</description>
 		<path/>
-		<thumbnail>anidbstyle2/images/thumbnail.png</thumbnail>
 		<screenshot>anidbstyle2/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle2/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle_hacks">
 		<title>AniDBstyle Hacks</title>
 		<creator>Amour</creator>
-		<update>18.02.2008</update>
+		<update>27.08.2009</update>
 		<status>stable (v6)</status>
 		<description>hacks for the default css (IE7 compatibility)</description>
 		<path/>
-		<thumbnail>anidbstyle_hacks/images/thumbnail.png</thumbnail>
 		<screenshot>anidbstyle_hacks/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle_hacks/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle_diebuster">
 		<title>AniDBstyle</title>
@@ -57,8 +57,8 @@
 		<status>up2date</status>
 		<description>based on anidbstyle</description>
 		<path/>
-		<thumbnail>anidbstyle_diebuster/images/thumbnail.png</thumbnail>
 		<screenshot>anidbstyle_diebuster/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle_diebuster/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anidbstyle-dongato">
 		<title>AniDB Style DonGato's revision</title>
@@ -67,8 +67,8 @@
 		<status>in sync with 0.1.50</status>
 		<description>it only works well with Firefox (sorry don't have any more time to spend with IE/Opera)</description>
 		<path/>
-		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
 		<screenshot>anidbstyle-dongato/images/screenshot.png</screenshot>
+		<thumbnail>anidbstyle-dongato/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anigoogle">
 		<title>Anigoogle</title>
@@ -77,8 +77,8 @@
 		<status>in development</status>
 		<description>Style inspired by Google.</description>
 		<path/>
-		<thumbnail>anigoogle/images/thumbnail.png</thumbnail>
 		<screenshot>anigoogle/images/screenshot.png</screenshot>
+		<thumbnail>anigoogle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anigoogle-menu">
 		<title>Anigoogle with Menu</title>
@@ -87,38 +87,48 @@
 		<status>in development</status>
 		<description>Style inspired by google (originally); banner by edekock</description>
 		<path/>
-		<thumbnail>anigoogle-menu/images/thumbnail.png</thumbnail>
 		<screenshot>anigoogle-menu/images/screenshot.png</screenshot>
+		<thumbnail>anigoogle-menu/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="anitube">
 		<title>Anitube</title>
 		<creator>Der Idiot</creator>
-		<update>27.09.2008</update>
+		<update>27.08.2009</update>
 		<status>in development</status>
 		<description>Style inspired by Youtube.</description>
 		<path/>
-		<thumbnail>anitube/images/thumbnail.png</thumbnail>
 		<screenshot>anitube/images/screenshot.png</screenshot>
+		<thumbnail>anitube/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="dark-style">
 		<title>Dark Style</title>
 		<creator>sylwira</creator>
-		<update>30.10.2010</update>
+		<update>29.07.2010</update>
 		<status>In development</status>
 		<description>Firefox only. (Works also in Opera, but not so well. Don't even try it with IE :D )</description>
 		<path/>
-		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
 		<screenshot>dark-style/images/screenshot.png</screenshot>
+		<thumbnail>dark-style/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="fma_style">
 		<title>Fullmetal Alchemist Style</title>
 		<creator>jkaze</creator>
-		<update>30.10.2010</update>
+		<update>29.07.2010</update>
 		<status>Beta v2</status>
 		<description>Viewing some Fullmetal Alchemist characters in the top, with simple design!</description>
 		<path/>
-		<thumbnail>fma_style/images/thumbnail.png</thumbnail>
 		<screenshot>fma_style/images/screenshot.png</screenshot>
+		<thumbnail>fma_style/images/thumbnail.png</thumbnail>
+	</style>
+		<style name="foursquare">
+		<title>Foursquare</title>
+		<creator>Vaneska</creator>
+		<update>24.01.2013</update>
+		<status>V.1</status>
+		<description>A Grey and White Theme with Customized Icons, based on Sub Brown 2.</description>
+		<path/>
+		<screenshot>foursquare/images/screenshot.png</screenshot>
+		<thumbnail>foursquare/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="geassmode">
 		<title>Geass Mode</title>
@@ -127,8 +137,8 @@
 		<status>Very Alpha</status>
 		<description>Aiming to be a clean and usable design. Banner features C.C. and Kallen from Code Geass. Everything may change without further notice.</description>
 		<path/>
-		<thumbnail>geassmode/images/thumbnail.png</thumbnail>
 		<screenshot>geassmode/images/screenshot.png</screenshot>
+		<thumbnail>geassmode/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="grey">
 		<title>Grey</title>
@@ -137,123 +147,123 @@
 		<status>obsolete, continued in grey_r2</status>
 		<description>It's mainly grey and uses images (some with transparency) for texturising the backgrounds and Arial Unicode MS/Arial for text.</description>
 		<path/>
-		<thumbnail>grey/images/thumbnail.png</thumbnail>
 		<screenshot>grey/images/screenshot.png</screenshot>
+		<thumbnail>grey/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="grey_r2">
 		<title>grey r2</title>
 		<creator>zeromind</creator>
-		<update>20.10.2010</update>
+		<update>31.07.2010</update>
 		<status>In development</status>
 		<description>It's grey, and stuff. Requires at least Firefox 3.5 (or any other browser that supports hsla color definitions) to look properly.</description>
 		<path/>
-		<thumbnail>grey_r2/images/thumbnail.png</thumbnail>
 		<screenshot>grey_r2/images/screenshot.png</screenshot>
+		<thumbnail>grey_r2/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="haruhistylex">
 		<title>HaruhiStyleX.AniDB</title>
 		<creator>TheJAG</creator>
-		<update/>
+		<update>27.08.2009</update>
 		<status>not maintained anymore and replaced by v2</status>
 		<description>NOTE! This style contains adult content. HaruhiStyleX.AniDB is developed for Opera at a resolution of 1280x1024 and may not work in any other webbrowser or lower resolutions. (Based on Harustyle by b1hn.)</description>
 		<path/>
-		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 		<screenshot>haruhistylex/images/screenshot.png</screenshot>
+		<thumbnail>haruhistylex/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="haruhistylex-v1.5">
 		<title/>
 		<creator/>
-		<update/>
+		<update>27.08.2009</update>
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>haruhistylex-v1.5/images/thumbnail.png</thumbnail>
 		<screenshot>haruhistylex-v1.5/images/screenshot.png</screenshot>
+		<thumbnail>haruhistylex-v1.5/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustyle">
 		<title>Harustyle</title>
 		<creator>b1nh</creator>
-		<update>19.06.2007</update>
+		<update>29.07.2010</update>
 		<status>In development
-</status>
+	</status>
 		<description>Completely recoded based on epox' gray css. Everything should work now.</description>
 		<path/>
-		<thumbnail>harustyle/images/thumbnail.png</thumbnail>
 		<screenshot>harustyle/images/screenshot.png</screenshot>
+		<thumbnail>harustyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustylele">
 		<title>Harustyle LE</title>
 		<creator>b1nh</creator>
-		<update/>
+		<update>27.08.2009</update>
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>harustylele/images/thumbnail.png</thumbnail>
 		<screenshot>harustylele/images/screenshot.png</screenshot>
+		<thumbnail>harustylele/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="harustyle-fixed_menu">
 		<title>Harustyle (fixed menu edition)</title>
 		<creator>mehyaa</creator>
-		<update/>
+		<update>27.08.2009</update>
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>harustyle-fixed_menu/images/thumbnail.png</thumbnail>
 		<screenshot>harustyle-fixed_menu/images/screenshot.png</screenshot>
+		<thumbnail>harustyle-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="Lain">
 		<title>Lain</title>
 		<creator>DvdKhl/Arokh</creator>
-		<update>30.09.2010</update>
+		<update>07.08.2008</update>
 		<status>in development</status>
 		<description>Tested with FireFox, IE may work with some changes. 1280x768 Required.</description>
 		<path/>
-		<thumbnail>Lain/images/thumbnail.png</thumbnail>
 		<screenshot>Lain/images/screenshot.png</screenshot>
+		<thumbnail>Lain/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="luckystyle">
 		<title>LuckyStyle</title>
 		<creator>Breadstone</creator>
-		<update>30.09.2010</update>
+		<update>12.10.2007</update>
 		<status>In development</status>
 		<description>Thanks to B1nhs help i've finally completed my LuckyStyle. I hope you guys (and gals) like it. If you find any bugs or something you think
 should be fixed just send me a PM.</description>
 		<path/>
-		<thumbnail>luckystyle/images/thumbnail.png</thumbnail>
 		<screenshot>luckystyle/images/screenshot.png</screenshot>
+		<thumbnail>luckystyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="nice-day">
 		<title>Nice Day</title>
 		<creator>epoximator</creator>
-		<update/>
+		<update>27.08.2009</update>
 		<status>Experimental</status>
 		<description>Based on "Beautiful Day" by Kaushal Sheth (http://www.kaushalsheth.com)</description>
 		<path/>
-		<thumbnail>nice-day/images/thumbnail.png</thumbnail>
 		<screenshot>nice-day/images/screenshot.png</screenshot>
+		<thumbnail>nice-day/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="simplestyle">
 		<title>SimpleStyle</title>
 		<creator>b1nh (AniDB: binhkun)</creator>
-		<update>30.09.2010</update>
+		<update>12.12.2007</update>
 		<status>in development</status>
 		<description>This is my newest AniDB CSS style "SimpleStyle".
 Internet Explorer not supported due to a css bug. 
 Well, what should I say ... I kept it simple and clean. If it's too bright for you, turn down your screen brightness, use sunglasses or wait for a dark version ;)
 Thanks to zak, Rar and pelican for the css help. In case you've wondered where the profile link is - it's the big P on the top right ;)</description>
 		<path/>
-		<thumbnail>simplestyle/images/thumbnail.png</thumbnail>
 		<screenshot>simplestyle/images/screenshot.png</screenshot>
+		<thumbnail>simplestyle/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-blue">
 		<title>sub-blue</title>
 		<creator>epoximator</creator>
-		<update>30.09.2010</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>sub-blue/images/thumbnail.png</thumbnail>
 		<screenshot>sub-blue/images/screenshot.png</screenshot>
+		<thumbnail>sub-blue/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-brown">
 		<title>sub-brown</title>
@@ -262,38 +272,38 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>sub-brown/images/thumbnail.png</thumbnail>
 		<screenshot>sub-brown/images/screenshot.png</screenshot>
+		<thumbnail>sub-brown/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-brown2">
 		<title>brown2</title>
 		<creator>PetriW</creator>
-		<update>30.09.2010</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>sub-brown2/images/thumbnail.png</thumbnail>
 		<screenshot>sub-brown2/images/screenshot.png</screenshot>
+		<thumbnail>sub-brown2/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-kfuaw">
 		<title>sub-kfuaw</title>
 		<creator>noec</creator>
-		<update>21.10.2010</update>
+		<update>09.09.2009</update>
 		<status>in development</status>
 		<description>Very simple style mostly using grey colors.</description>
 		<path/>
-		<thumbnail>sub-kfuaw/images/thumbnail.png</thumbnail>
 		<screenshot>sub-kfuaw/images/screenshot.png</screenshot>
+		<thumbnail>sub-kfuaw/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-norwegian-blue">
 		<title>norwegian-blue</title>
 		<creator>PetriW</creator>
-		<update>29.09.2010</update>
+		<update/>
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>sub-norwegian-blue/images/thumbnail.png</thumbnail>
 		<screenshot>sub-norwegian-blue/images/screenshot.png</screenshot>
+		<thumbnail>sub-norwegian-blue/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="sub-silver">
 		<title>sub-silver</title>
@@ -302,37 +312,37 @@ Thanks to zak, Rar and pelican for the css help. In case you've wondered where t
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>sub-silver/images/thumbnail.png</thumbnail>
 		<screenshot>sub-silver/images/screenshot.png</screenshot>
+		<thumbnail>sub-silver/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="zakura">
 		<title>Zakura</title>
 		<creator>Zak</creator>
-		<update>30.10.2010</update>
-		<status/>
-		<description/>
-		<path/>
-		<thumbnail>zakura/images/thumbnail.png</thumbnail>
-		<screenshot>zakura/images/screenshot.png</screenshot>
-	</style>
-	<style name="zakura-fixed_menu">
-		<title>Zakura (fixed menu edition)</title>
-		<creator>ricce</creator>
 		<update/>
 		<status/>
 		<description/>
 		<path/>
-		<thumbnail>zakura-fixed_menu/images/thumbnail.png</thumbnail>
+		<screenshot>zakura/images/screenshot.png</screenshot>
+		<thumbnail>zakura/images/thumbnail.png</thumbnail>
+	</style>
+	<style name="zakura-fixed_menu">
+		<title>Zakura (fixed menu edition)</title>
+		<creator>ricce</creator>
+		<update>27.08.2009</update>
+		<status/>
+		<description/>
+		<path/>
 		<screenshot>zakura-fixed_menu/images/screenshot.png</screenshot>
+		<thumbnail>zakura-fixed_menu/images/thumbnail.png</thumbnail>
 	</style>
 	<style name="zakura-menu">
 		<title>sub-zakura-menu</title>
 		<creator>fahrenheit</creator>
-		<update></update>
+		<update>27.08.2009</update>
 		<status>Test</status>
 		<description>Based on Zakura by Zak and Nice-day by Epoximator</description>
 		<path></path>
-		<thumbnail>zakura-menu/images/thumbnail.png</thumbnail>
 		<screenshot>zakura-menu/images/screenshot.png</screenshot>
+		<thumbnail>zakura-menu/images/thumbnail.png</thumbnail>
 	</style>
 </css_styles>
