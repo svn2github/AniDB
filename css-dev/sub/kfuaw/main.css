@@ -469,14 +469,6 @@ body
 	margin:-2em 0 0 4.5em;
 }
 
-#tooltip span.middle,
-#tooltip span.bottom
-{
-	position:relative;
-	top:-1.7em;
-	font-size: 1.1em;
-}
-
 #layout-main div.animeatt_all div.bar div + div
 {
 	margin-top: .4em;

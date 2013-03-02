@@ -50,21 +50,11 @@ display:inherit;
 {
 position:static;
 }
-html,
-#tooltip
+html
 {
 font-size:10px;
 line-height:1.2;
 font-family:"Arial Unicode MS", Arial, Verdana, Tahoma, Arial, Helvetica, sans-serif;
-}
-div.genren_all ul#cattree li #tooltip
-{
-margin-left:50px;
-}
-div.animetagmod_all tr #tooltip,
-div.animetag_all tr #tooltip
-{
-margin-left:0px;
 }
 form input[type="text"],
 form input[type="checkbox"],

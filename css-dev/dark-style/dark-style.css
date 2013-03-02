@@ -2111,16 +2111,6 @@ div.quotebody div.quoteof
 	color: #01702e;
 }
 
-#tooltip
-{
-	color:#993300;
-	filter:alpha(opacity=90);
-	khtmlopacity:0.90;
-	mozopacity:0.90;
-	opacity:0.90;
-	font-size: 10px;
-	word-wrap: break-word;
-}
 button + button
 {
 margin-left: 5px;
@@ -2152,24 +2142,7 @@ border-color:#C9D2D8;
 {
 	background-image: url(images/icon_back_top.gif);
 }
-/*Bubble Tooltip*/
-#tooltip span
-{
-font-size: 10px;
-color: white;
-}
-#tooltip span.top
-{
-background:url(images/bubble.png) no-repeat top;
-}
-#tooltip span.middle
-{
-background:url(images/bubble_filler.png) repeat-y bottom;
-}
-#tooltip span.bottom
-{
-background:url(images/bubble.png) no-repeat bottom;
-}
+
 #obj-tooltip
 {
 width: auto !important;

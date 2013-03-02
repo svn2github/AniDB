@@ -302,8 +302,8 @@ th.sortable
 	font-weight:bold;
 }
 
-#layout-main div.chartags_all div.addbox div.taggrouplist span.link,
-#layout-main div.chartags_all div.addbox div.tag-column span.link
+#layout-main div.addtagentityrel_all div.addbox div.taggrouplist span.link,
+#layout-main div.addtagentityrel_all div.addbox div.tag-column span.link
 {
 	line-height:1.5em;
 }
@@ -323,11 +323,6 @@ h4.collapsed span
 	text-decoration:line-through;
 }
 
-#tooltip
-{
-	font-size:10px;
-}
-
 #layout-main div.main_all div.header div.account ul.tabs li
 {
 	font-size: 1.3em;
@@ -336,7 +331,7 @@ h4.collapsed span
 #layout-main div.forum ul.topics dd.posts,
 #layout-main div.forum ul.topics dd.views,
 #layout-main div.forum ul.topics dd.topics,
-#layout-main div.chartags_all div.addbox div.tag-group h3,
+#layout-main div.addtagentityrel_all div.addbox div.tag-group h3,
 #layout-main div.userpage_all div.userdetails div.block caption,
 #layout-main div.picupload_all input[type="file"]
 {
@@ -368,8 +363,8 @@ h4.collapsed span
 #layout-main div.forum div.rules,
 #layout-main div.forum div.navbar span.notify,
 #layout-main div.forum div.quickreply textarea,
-#layout-main div.chartags_all div.addbox div.tag-column h5,
-#layout-main div.chartags_all div.addbox div.taggrouplist span.link,
+#layout-main div.addtagentityrel_all div.addbox div.tag-column h5,
+#layout-main div.addtagentityrel_all div.addbox div.taggrouplist span.link,
 #layout-main div.main_all div.datablocks > div.account
 {
 	font-size:1.1em;
@@ -406,7 +401,7 @@ div.quotebody div.quoteof,
 #layout-main div.forum div.events dl dt,
 #layout-main div.forum div.poll dl dt,
 #layout-main div.forum div.poll div.pollbar,
-#layout-main div.chartags_all div.addbox div.tag-column h5,
+#layout-main div.addtagentityrel_all div.addbox div.tag-column h5,
 #layout-main div.userpage_all div.discussions tr.unread td,
 #layout-main div.userpage_all div.msg tr.unread td,
 #layout-main div.userpage_all div.news tr.unread td,
@@ -432,4 +427,27 @@ div.relations .g_bubble.stripe div.type,
 #layout-main div.anime_all div.info div.caststaff div h4
 {
 	text-transform: uppercase;
+}
+
+a.tooltip:hover
+{
+	text-decoration:none;
+}
+
+a.tooltip span.text
+{
+	font-style: normal;
+	font-weight: normal;
+	font-size: 10px;
+}
+
+#layout-main div.tag-column h5
+{
+	font-size: 1.1em;
+	font-weight:bold;
+}
+
+#layout-main div.tag-column span.not_added
+{
+	text-decoration: line-through;
 }

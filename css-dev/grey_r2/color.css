@@ -90,7 +90,7 @@ span.g_odd,
 #layout-content div.animeatt_reviews > div.review > h4,
 #layout-content div.animeatt_reviews > div.review > div.text,
 div.quotebody div.quote div.g_odd,
-#layout-main div.chartags_all div.addbox div.tag-column h5,
+#layout-main div.addtagentityrel_all div.addbox div.tag-column h5,
 #layout-main div.quotebody div.quoteof,
 #layout-footer,
 #layout-main div.timeline_all div.timeline ul.legend li span,
@@ -209,7 +209,6 @@ color:gray;
 border:1px solid #121212;
 }
 html,
-#tooltip,
 #layout-nav a,
 #layout-tabs ul.main-tabs > li a:hover span,
 #layout-tabs ul.main-tabs > li.selected a span,
@@ -319,29 +318,6 @@ background-color:hsla(0, 100%, 25%, 0.4);
 #layout-main div.forum li.deleted dl.icon
 {
 opacity:0.5;
-}
-#tooltip span.top
-{
-background:url(../grey/images/bubble.png) no-repeat top;
-}
-
-#tooltip span.middle
-{
-background:url(../grey/images/bubble_filler.png) repeat bottom;
-}
-
-#tooltip span.bottom
-{
-background:url(../grey/images/bubble.png) no-repeat bottom;
-}
-#layout-main div.tagcloud span:nth-of-type(2n+1) a
-{
-color:#f1f1f1;
-}
-#layout-main div.tagcloud span:nth-of-type(2n+1) a:active,
-#layout-main div.tagcloud span a:active
-{
-color:#ff6000;
 }
 #layout-main div.anime_all table.stafflist + table.stafflist,
 #layout-main div.anime_all div.episodes tr.newtype td

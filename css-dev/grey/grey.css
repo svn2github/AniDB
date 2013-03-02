@@ -1,6 +1,5 @@
 @import "../common/layout/page/all.css";
 @import "../common/layout/global/tabbed_pane.css";
-@import "../common/layout/global/tagcloud.css";
 @import "../common/layout/global/timedentry.css";
 @import "../common/layout/global/menu.css";
 @import "../common/layout/global/block.css";
@@ -222,8 +221,7 @@ font-weight: bolder;
 }
 tr.g_odd,
 li.g_odd,
-span.g_odd,
-.tagcloud
+span.g_odd
 {
 background-image: url(images/bg_2.gif);
 }
@@ -2203,14 +2201,6 @@ margin-right: 3pt;
 margin-bottom: 0pt;
 margin-left: 0pt;
 }
-div.tagcloud span:nth-child(2n+1) a
-{
-color: #99FFB6;
-}
-div.tagcloud span:nth-child(2n+1) a:active
-{
-color: blue;
-}
 /*FORUM*/
 div.quotebody div.quote div.g_odd
 {
@@ -2393,10 +2383,6 @@ border: 0;
 {
 font-size: 120%;
 }
-#layout-main div.animetag_all div.animetag_list table + div.spoiler
-{
-margin-top: 1.5em;
-}
 #layout-main div.tabbed_pane div.pane.hide
 {
 display: none;
@@ -2422,26 +2408,12 @@ color: #797979;
 border: 1px dashed;
 background: url(images/bg_2.gif);
 }
-#layout-main div.animetag_all div.animetag_list div.spoiler
-{
-text-align: center;
-}
-#layout-main div.animetag_all div.animetag_list table td.globalcnt,
-#layout-main div.animetag_all div.animetag_list table td.spoiler,
-#layout-main div.animetag_all div.animetag_list table td.approval
-{
-text-align: center;
-}
-#layout-main div.animetag_all div.animetag_list table td.name
-{
-text-align: left;
-}
-#layout-main div.chartags_all div.addbox div.tag-column h5
+#layout-main div.addtagentityrel_all div.addbox div.tag-column h5
 {
 font-size: 100%;
 background-image: url(images/bg_2.gif);
 }
-#layout-main div.chartags_all div.addbox div.tag-group h3
+#layout-main div.addtagentityrel_all div.addbox div.tag-group h3
 {
 text-align: center;
 }
@@ -2546,34 +2518,7 @@ border-top:1px solid #D1D7DC;
 {
 white-space: nowrap;
 }
-#tooltip
-{
-color:#993300;
-filter:alpha(opacity=90);
-khtmlopacity:0.90;
-mozopacity:0.90;
-opacity:0.90;
-font-size: 10px;
-word-wrap: break-word;
-}
-/*Bubble Tooltip*/
-#tooltip span
-{
-font-size: 10px;
-color: white;
-}
-#tooltip span.top
-{
-background:url(images/bubble.png) no-repeat top;
-}
-#tooltip span.middle
-{
-background:url(images/bubble_filler.png) repeat-y bottom;
-}
-#tooltip span.bottom
-{
-background:url(images/bubble.png) no-repeat bottom;
-}
+
 /*epbar colors*/
 #layout-main div.anime_all div.groups td.epbar div.notdone,
 #layout-main div.group_all div.group_released td.epbar div.notdone
@@ -2607,11 +2552,6 @@ padding-left: 40% -220px;
 {
 margin: 0;
 padding-left: 4px;
-}
-div.animetagmod_all tr #tooltip,
-div.animetag_all tr #tooltip
-{
-margin-left: 0px;
 }
 td,
 ul,
@@ -2685,10 +2625,6 @@ div.tooltip .g_bubble
 {
 background-image:url(images/bg_2.gif);
 border:1px solid gray;
-}
-#layout-main div.tagcloud
-{
-padding:1.5em 3.5em;
 }
 #layout-main div.userpage_all div.charts div.mylisthistory div.image
 {

@@ -176,7 +176,8 @@ span.g_odd,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.main_all div.header div.account ul.tabs li.signup,
 #layout-main div.forum div.g_bubble.comment,
-#layout-main div.forum div.g_bubble.events
+#layout-main div.forum div.g_bubble.events,
+a.tooltip span.text
 {
 	background-color: #ECF4FD;
 }
@@ -296,4 +297,9 @@ button[type="submit"]
 #layout-search ul.quicksearch
 {
 	border-color: #C9D7F1;
+}
+
+a.tooltip span.text:after
+{
+	border-bottom-color: #ECF4FD;
 }

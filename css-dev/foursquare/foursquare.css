@@ -950,8 +950,6 @@ border: 1px solid #d3d3d3;
 padding: 3px;
 background-color: white }
 
-#tooltip { color: #66675c }
-
 
 /* Forum */
 
@@ -1736,15 +1734,7 @@ width: 15px }
 	*.i_wishlist_undefined { background-image: url(images/icons/silk/wishlist_undefined.png) }
 
 	*.i_wishlist_remove { background-image: url(images/icons/silk/wishlist_remove.png) }
-	
 
-/* Tooltip */	
-
-#tooltip span.top { background:url(images/icons/test/bubble.png) no-repeat top }
-
-#tooltip span.middle { background:url(images/icons/test/bubble_filler.png) repeat bottom }
-
-#tooltip span.bottom { background:url(images/icons/test/bubble.png) no-repeat bottom }
 	
 	
 /* Rate Icons */

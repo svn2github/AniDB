@@ -129,21 +129,6 @@ th.s_reverse,
 }
 */
 
-#tooltip span.top
-{
-	background:url(../icons/test/bubble.gif) no-repeat top;
-}
-
-#tooltip span.middle
-{
-	background:url(../icons/test/bubble_filler.gif) repeat bottom;
-}
-
-#tooltip span.bottom
-{
-	background:url(../icons/test/bubble.gif) no-repeat bottom;
-}
-
 *.i_expanded { 
 	background: transparent url(../icons/formating/icon_contract.gif) top right no-repeat;
 }

@@ -1,192 +1,75 @@
-#layout-main div.chartags_all div.addbox textarea,
-#layout-main div.creatortags_all div.addbox textarea,
-#layout-main div.animetag_all div.addbox textarea
+/*admin bits*/
+#layout-main div.admin_tags_all table.tags
 {
-	height: 200px;
-	width: 400px;
+	width:100%;
 }
 
-#layout-main div.chartagsmod_all div.addbox input,
-#layout-main div.chartags_all div.addbox input,
-#layout-main div.creatortags_all div.addbox input,
-#layout-main div.animetagmod_all div.addbox input,
-#layout-main div.animetag_all div.addbox input
+/*edit form*/
+#layout-main div.g_definitionlist.tagedit_form table table
 {
-	display: block;
-	margin: 1em auto;
+	width:100%;
 }
 
-#layout-main div.chartags_all div.editbox input[type="text"],
-#layout-main div.creatortags_all div.editbox input[type="text"],
-#layout-main div.animetag_all div.editbox input[type="text"],
-#layout-main div.animetagmod_all div.editbox input[type="text"]
+#layout-main div.g_definitionlist.tagedit_form table.options th.anime,
+#layout-main div.g_definitionlist.tagedit_form table.options th.character,
+#layout-main div.g_definitionlist.tagedit_form table.options th.creator,
+#layout-main div.g_definitionlist.tagedit_form table.options th.episode,
+#layout-main div.g_definitionlist.tagedit_form table.options th.manga
 {
-	width: 400px;
+	width:5em;
 }
 
-#layout-main div.chartags_all div.editbox textarea,
-#layout-main div.creatortags_all div.editbox textarea,
-#layout-main div.animetag_all div.editbox textarea,
-#layout-main div.animetagmod_all div.editbox textarea
+#layout-main div.g_definitionlist.tagedit_form table.types td
 {
-	height: 100px;
-	width: 400px;
+	vertical-align: top;
 }
 
-#layout-main div.chartagsmod_all dl,
-#layout-main div.chartags_all dl,
-#layout-main div.creatortags_all dl,
-#layout-main div.animetagmod_all dl,
-#layout-main div.animetag_all dl
+#layout-main div.addtagentityrel_all div.tags_add textarea
 {
-	display: block;
-	height: 1%;
-	overflow: hidden;
+	height: 25em;
+	width: 50em;
 }
 
-#layout-main div.chartagsmod_all dl dt,
-#layout-main div.chartags_all dl dt,
-#layout-main div.creatortags_all dl dt,
-#layout-main div.animetagmod_all dl dt,
-#layout-main div.animetag_all dl dt
+/*display parts on anime/manga page*/
+#layout-main div.tag-list
 {
-	clear: none;
-	float: left;
+	-moz-column-width: 25em;
 }
 
-#layout-main div.chartagsmod_all dl dd,
-#layout-main div.chartags_all dl dd,
-#layout-main div.creatortags_all dl dd,
-#layout-main div.animetagmod_all dl dd,
-#layout-main div.animetag_all dl dd
+#layout-main div.tag-column
 {
-	margin-left: 20em;
-}
-
-#layout-main div.chartags_all table.charactertags,
-#layout-main div.creatortags_all table.charactertags,
-#layout-main div.animetag_all table.animetag,
-#layout-main div.chartagsmod_all div.inner,
-#layout-main div.chartags_all div.inner,
-#layout-main div.creatortags_all div.inner,
-#layout-main div.animetagmod_all div.inner,
-#layout-main div.animetag_all div.inner
-{
+	display: inline-table;
+	width:95%;
+	padding: 4px;
 	margin-bottom: 1em;
 }
 
-#layout-main div.chartags_all div.addbox div.taggrouplist,
-#layout-main div.creatortags_all div.addbox div.taggrouplist
+#layout-main div.tag-column div.tag > span
 {
-	margin-top: .5em;
+	line-height:1.5em;
 }
 
-#layout-main div.chartags_all div.addbox div.tag-column,
-#layout-main div.creatortags_all div.addbox div.tag-column
+#layout-main div.tag-column div.tag span.name
 {
 	display: inline-block;
-	min-height: 17.5em;
-	width: 17.5em;
-	margin: 0 1em 1em 0;
-	padding: 4px;
-	border: 1px solid #a9a9a9;
-}
-
-#layout-main div.chartags_all div.addbox div.tag-column span,
-#layout-main div.creatortags_all div.addbox div.tag-column span
-{
-	display: table-row;
-}
-
-#layout-main div.chartags_all div.addbox div.tag-column span,
-#layout-main div.creatortags_all div.addbox div.tag-column span
-{
+	width: 21.5em;
 	text-align: left;
 }
 
-#layout-main div.chartags_all div.addbox div.tag-column h5,
-#layout-main div.creatortags_all div.addbox div.tag-column h5
+#layout-main div.tag-column div.tag span.weight
+{
+	float:right;
+	width: 4.5em;
+}
+
+#layout-main div.tag-column div.tag span.indent
+{
+	white-space:pre;
+	float: left;
+	line-height: 1.6em;
+}
+
+#layout-main div.tag-column h5
 {
 	text-align: center;
-}
-
-#layout-main div.chartags_all div.addbox div.tag-group h3,
-#layout-main div.creatortags_all div.addbox div.tag-group h3
-{
-	margin-bottom: 0.5em;
-}
-
-#layout-main div.chartags_all div.fake,
-#layout-main div.creatortags_all div.fake
-{
-	clear: both;
-}
-
-#layout-main div.animetag_all div.animetag_entries_spoiler table + div.animetag_entries_spoiler
-{
-	margin-top: 1.5em;
-}
-
-#layout-main div.chartagsmod_all table,
-#layout-main div.creatortagsmod_all table,
-#layout-main div.animetagmod_all table,
-#layout-main div.chartagsmod_all table.charactertags,
-#layout-main div.chartagsmod_all table.charactertaggroups,
-#layout-main div.chartags_all table.charactertags,
-#layout-main div.creatortags_all table.charactertags,
-#layout-main div.animetag_all table.charactertags
-{
-	width: 100%;
-}
-
-#layout-main div.chartagsmod_all table td.action,
-#layout-main div.creatortagsmod_all table td.action,
-#layout-main div.animetagmod_all table td.action
-{
-	min-width: 11em;
-	max-width: 11em;
-}
-
-#layout-main div.chartags_all table td.action,
-#layout-main div.creatortags_all table td.action,
-#layout-main div.animetag_all table td.action
-{
-	min-width: 15.3em;
-	max-width: 15.3em;
-}
-
-#layout-main div.chartagsmod_all table td.count,
-#layout-main div.animetagmod_all table td.count,
-#layout-main div.chartags_all table td.status,
-#layout-main div.chartags_all table td.count,
-#layout-main div.creatortags_all table td.status,
-#layout-main div.creatortags_all table td.count,
-#layout-main div.animetag_all table td.status,
-#layout-main div.animetag_all table td.count
-{
-	min-width: 5em;
-	max-width: 5em;
-}
-
-#layout-main div.chartagsmod_all table td.date,
-#layout-main div.animetagmod_all table td.date,
-#layout-main div.chartags_all table td.date,
-#layout-main div.creatortags_all table td.date,
-#layout-main div.animetag_all table td.date
-{
-	min-width: 10em;
-	max-width: 10em;
-}
-
-#layout-main div.chartags_all table td.name.tag,
-#layout-main div.creatortags_all table td.name.tag,
-#layout-main div.animetag_all table td.name.tag
-{
-	width: 50%;
-}
-
-#layout-main div.chartagsmod_all dl dd label,
-#layout-main div.creatortagsmod_all dl dd label
-{
-	display: block;
 }

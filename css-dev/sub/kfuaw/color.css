@@ -208,14 +208,6 @@ body.nonav #layout-main div.g_content
 	color: #dddddd;
 }
 
-#tooltip span.top,
-#tooltip span.bottom,
-#tooltip span.middle
-{
-	color: #151515;
-	background:#fafafa;
-}
-
 ul#layout-menu li:hover ul li a
 {
 	color: #f3f3f3;

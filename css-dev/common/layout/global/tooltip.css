@@ -16,44 +16,42 @@
 }
 
 /*Bubble Tooltip*/
-#tooltip span
+a.tooltip span.text
 {
+	z-index:10;
 	display:none;
+	padding: 14px 20px;
+	margin-top:50px;
+	margin-left:-160px;
+	width:240px;
+	line-height:16px;
+	position: relative;
 }
 
-span.cat span.name:hover #tooltip,
-a:hover #tooltip
+a.tooltip:hover span.text
 {
-	display: block;
-	line-height: normal;
-	padding: 0;
-	margin: 7px 0em 0em -7em;
+	display:inline;
+	position:absolute;
+}
+
+a.tooltip span.text:after,
+a.tooltip span.text:before
+{
+	bottom: 100%;
+	height: 0;
+	width: 0;
 	position: absolute;
-	text-align: center;
-	white-space: normal;
-	width: 250px;
-	z-index: 5;
-	white-space: nowrap;
+	left: 50%;
+	content: " ";
+	pointer-events: none;
 }
 
-span.cat span.name:hover #tooltip span.top,
-a:hover #tooltip span.top
+a.tooltip span.text:after
 {
-	display:block;
-	padding:30px 8px 0;
+	margin-left: -10px;
 }
-
-span.cat span.name:hover #tooltip span.middle,
-a:hover #tooltip span.middle
+a.tooltip span.text:before
 {
-	display:block;
-	padding:0 8px;
-	white-space: normal;
-}
 
-span.cat span.name:hover #tooltip span.bottom,
-a:hover #tooltip span.bottom
-{
-	display:block;
-	padding:3px 8px 10px;
+	margin-left: -13px;
 }
