@@ -50,7 +50,7 @@ a.tooltip
 
 a.tooltip span.text
 {
-	border: 2px solid;
+	border: 2px solid #FFFFFF;
 }
 
 a.tooltip span.text:after,
