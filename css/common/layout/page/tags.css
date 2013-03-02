@@ -98,7 +98,7 @@
 	display: table-row;
 }
 
-#layout-main div.chartags_all div.addbox div.taggrouplist span,
+#layout-main div.chartags_all div.addbox div.tag-column span,
 #layout-main div.creatortags_all div.addbox div.tag-column span
 {
 	text-align: left;
