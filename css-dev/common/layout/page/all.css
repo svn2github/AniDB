@@ -28,7 +28,6 @@
 @import "import.css";
 @import "irc.css";
 @import "latest.css";
-@import "lexicon.css";
 @import "main.css";
 @import "manga.css";
 @import "mangaatt.css";
@@ -47,6 +46,7 @@
 @import "reports.css";
 @import "song.css";
 @import "songlist.css";
+@import "tag.css";
 @import "tags.css";
 @import "userlist.css";
 @import "votes.css";
