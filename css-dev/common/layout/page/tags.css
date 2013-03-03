@@ -34,6 +34,9 @@
 #layout-main div.tag-list
 {
 	-moz-column-width: 25em;
+	-webkit-column-width: 25em;
+	-ms-column-width: 25em;
+	column-width: 25em;
 }
 
 #layout-main div.tag-column
