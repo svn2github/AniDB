@@ -42,7 +42,7 @@
 #layout-main div.tag-column
 {
 	display: inline-table;
-	width:95%;
+	width: 28em;
 	padding: 4px;
 	margin-bottom: 1em;
 }
