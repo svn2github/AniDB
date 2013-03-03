@@ -13,8 +13,7 @@ html,
 #layout-main div.main_all div.header h4,
 #layout-main div.main_all div.rightbar h4,
 #layout-main div.votes_all div.graph div.group_odd,
-#layout-main div.votes_all div.graph.eps div.g_odd,
-a.tooltip span.text
+#layout-main div.votes_all div.graph.eps div.g_odd
 {
 	color: #728972;
 }
@@ -148,7 +147,8 @@ div.quotebody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
 .g_bubble .name-colored,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong,
-#layout-main div.main_all div.header div.latestnews div.posted
+#layout-main div.main_all div.header div.latestnews div.posted,
+a.tooltip span.text
 {
 	color: #CCCCCC;
 }
@@ -386,8 +386,7 @@ div.quotebody,
 #layout-main div.forum div.events h2,
 #layout-main div.forum div.poll h2,
 #layout-main div.forum div.events div.data > p,
-#layout-main div.forum div.poll div.data p,
-a.tooltip span.text
+#layout-main div.forum div.poll div.data p
 {
 	border: 1px solid;
 	border-color: #666666 #444444 #444444 #666666;
@@ -412,7 +411,19 @@ table,
 	border-left-color:#444444;
 }
 
+a.tooltip span.text
+{
+	border-color: #404040;
+}
+
 a.tooltip span.text:after
 {
+	border-color: rgba(64, 64, 64, 0);
+	border-bottom-color: #404040;
+}
+
+a.tooltip span.text:before
+{
+	border-color: rgba(64, 64, 64, 0);
 	border-bottom-color: #404040;
 }

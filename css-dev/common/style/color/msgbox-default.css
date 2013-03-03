@@ -77,13 +77,3 @@ a.tooltip span.text
 	opacity: 0.85;
 	color: #000000;
 }
-
-a.tooltip span.text:after
-{
-	border-color: rgba(236, 244, 253, 0);
-}
-a.tooltip span.text:before
-{
-	border-color: rgba(255, 255, 255, 0);
-	border-bottom-color: #ffffff;
-}
