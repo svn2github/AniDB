@@ -309,3 +309,13 @@ a.tooltip span.text:after
 	border-color: rgba(236, 244, 253, 0);
 	border-bottom-color: #ECF4FD;
 }
+
+/*tooltip base colors*/
+a.tooltip span.text
+{
+	-moz-box-shadow: 0px 0px 8px 4px #666;
+	-webkit-box-shadow: 0px 0px 8px 4px #666;
+	box-shadow: 0px 0px 8px 4px #666;
+	opacity: 0.85;
+	color: #000000;
+}

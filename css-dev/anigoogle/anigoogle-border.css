@@ -195,3 +195,24 @@ button[type="submit"]
 	-webkit-border-radius: 0 0 4px 4px;
 	border-radius: 0 0 4px 4px;
 }
+
+/*tooltip border*/
+a.tooltip
+{
+	outline:none;
+}
+
+a.tooltip span.text:after,
+a.tooltip span.text:before
+{
+	border: solid transparent;
+}
+
+a.tooltip span.text:after
+{
+	border-width: 10px;
+}
+a.tooltip span.text:before
+{
+	border-width: 13px;
+}
