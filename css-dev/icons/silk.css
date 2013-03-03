@@ -4,6 +4,12 @@
 	height:16px;
 	width:16px;
 }
+*.i_general_block
+{
+	background-image:url(../icons/silk/general_block.png);
+	height:16px;
+	width:16px;
+}
 
 *.i_general_convert
 {
