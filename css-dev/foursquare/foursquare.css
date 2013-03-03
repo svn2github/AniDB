@@ -31,7 +31,7 @@ Green: #689a4a / Light: #EEF8EA
 @import "../common/layout/page/all.css";
 @import "../common/layout/macro/collapsed.css";
 
-@import "../common/style/color/acdropdown.css";
+@import "../common/style/color/quicksearch.css";
 @import "../common/style/color/msgbox-default.css";
 @import "../common/style/color/forum-default.css";
 @import "../common/style/color/special.css";
