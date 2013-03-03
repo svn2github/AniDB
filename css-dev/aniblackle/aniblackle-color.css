@@ -37,7 +37,8 @@ button:hover,
 input[type="button"]:hover,
 input[type="submit"]:hover,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored:hover,
-.g_bubble .name-colored:hover
+.g_bubble .name-colored:hover,
+a.tooltip span.text
 {
 	color: #FFFFFF;
 }
@@ -147,8 +148,7 @@ div.quotebody,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries a.name-colored,
 .g_bubble .name-colored,
 #layout-main div.addsimilaranime_all div.addsimilaranime_entries dl.profile dd strong,
-#layout-main div.main_all div.header div.latestnews div.posted,
-a.tooltip span.text
+#layout-main div.main_all div.header div.latestnews div.posted
 {
 	color: #CCCCCC;
 }
