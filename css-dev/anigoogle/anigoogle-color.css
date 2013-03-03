@@ -298,11 +298,6 @@ button[type="submit"]
 	border-color: #C9D7F1;
 }
 
-a.tooltip span.text
-{
-	border-color: #ECF4FD;
-}
-
 a.tooltip span.text:after
 {
 	border-color: rgba(236, 244, 253, 0);

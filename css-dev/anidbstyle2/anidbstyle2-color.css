@@ -461,11 +461,6 @@ div.quotebody
 	border-color: #DEBFC3 #C4939F #C4939F #DEBFC3;
 }
 
-a.tooltip span.text
-{
-	border-color: #B1B3B5;
-}
-
 a.tooltip span.text:after
 {
 	border-color: rgba(177, 179, 181, 0);
