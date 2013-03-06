@@ -30,6 +30,23 @@
 	width: 50em;
 }
 
+#layout-main div.addtagentityrel_all div.editform div.table
+{
+	width: 55em;
+	display: inline-table;
+}
+
+#layout-main div.addtagentityrel_all div.editform table td
+{
+	min-width: 8em;
+	line-height: 2.2em;
+}
+
+#layout-main div.addtagentityrel_all div.editform table td.name
+{
+	width: 100%;
+}
+
 /*display parts on anime/manga page*/
 #layout-main div.tag-list
 {
