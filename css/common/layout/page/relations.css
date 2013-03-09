@@ -166,7 +166,8 @@
 	padding-right:1em;
 }
 
-#layout-main div.g_content.rel_all td.type.crel.missing
+#layout-main div.g_content.rel_all td.type.crel.missing,
+#layout-main div.g_content.characterrel_all td.type.crel.missing
 {
 	visibility: hidden;
 }
