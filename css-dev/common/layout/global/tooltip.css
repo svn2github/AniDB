@@ -26,6 +26,7 @@ a.tooltip span.text
 	width:240px;
 	line-height:16px;
 	position: relative;
+	text-align: justify;
 }
 
 a.tooltip:hover span.text

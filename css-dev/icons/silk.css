@@ -48,6 +48,13 @@
 	width:16px;
 }
 
+*.i_general_new
+{
+	background-image:url(../icons/silk/general_new.png);
+	height:16px;
+	width:16px;
+}
+
 *.i_general_unverify
 {
 	background-image:url(../icons/silk/general_unverify.png);
