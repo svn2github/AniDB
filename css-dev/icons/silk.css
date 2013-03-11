@@ -1,3 +1,10 @@
+*.i_general_added
+{
+	background-image:url(../icons/silk/general_added.png);
+	height:16px;
+	width:16px;
+}
+
 *.i_general_blacklist
 {
 	background-image:url(../icons/silk/general_blacklist.png);
