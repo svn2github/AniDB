@@ -45,8 +45,6 @@ function toggle_tag(tag, weight, is_parent) {
 				if (is_parent && old_weight && old_weight >= min_weight) {
 					if (cur_weight==600 && weight < cur_weight) {
 						weight = old_weight;
-					} else if (weight < old_weight) {
-						weight = old_weight;
 					}
 				} else if (is_parent && cur_weight==600 && weight < cur_weight) {
 					weight = min_weight;
