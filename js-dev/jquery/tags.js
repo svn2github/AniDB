@@ -18,11 +18,11 @@ tag_weight_rev['i_rate_med']      = 400;
 tag_weight_rev['i_rate_high']     = 500;
 tag_weight_rev['i_rate_veryhigh'] = 600;
 
-function toggle_tag(tag, weight) {
+function toggle_tag(tag, weight, is_parent) {
 	var parent   = $('#tag-list div.tag#' + $(tag).attr('parentid'));
 	if ($(tag).hasClass('is_abstract')) {
 		if (parent.attr('id')) {
-			toggle_tag(parent, weight);
+			toggle_tag(parent, weight, 1);
 		}
 		return;
 	}
@@ -42,15 +42,15 @@ function toggle_tag(tag, weight) {
 				}
 
 				var min_weight = get_max_weight_of_childs($(tag).attr('id'));
-				if (old_weight && old_weight >= min_weight) {
+				if (is_parent && old_weight && old_weight >= min_weight) {
 					if (cur_weight==600 && weight < cur_weight) {
 						weight = old_weight;
 					} else if (weight < old_weight) {
 						weight = old_weight;
 					}
-				} else if (cur_weight==600 && weight < cur_weight) {
+				} else if (is_parent && cur_weight==600 && weight < cur_weight) {
 					weight = min_weight;
-				} else if (weight < cur_weight) {
+				} else if (is_parent && weight < cur_weight) {
 					weight = cur_weight;
 				} else if (weight < min_weight) {
 					weight = min_weight;
@@ -128,7 +128,7 @@ function toggle_tag(tag, weight) {
 	}
 
 	if (parent.attr('id')) {
-		toggle_tag(parent, weight);
+		toggle_tag(parent, weight, 1);
 	}
 }
 
