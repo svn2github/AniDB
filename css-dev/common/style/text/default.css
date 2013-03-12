@@ -460,6 +460,11 @@ a.tooltip span.text
 	cursor: pointer;
 }
 
+#layout-main div.addtagentityrel_all #tag-list div.tag.is_abstract
+{
+	cursor: auto;
+}
+
 #layout-main div.addtagentityrel_all #tag-groups span.link
 {
 	font-size: 1.2em;

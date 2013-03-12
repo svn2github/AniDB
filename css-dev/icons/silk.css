@@ -62,6 +62,13 @@
 	width:16px;
 }
 
+*.i_general_static
+{
+	background-image:url(../icons/silk/general_static.png);
+	height:16px;
+	width:16px;
+}
+
 *.i_general_unverify
 {
 	background-image:url(../icons/silk/general_unverify.png);
