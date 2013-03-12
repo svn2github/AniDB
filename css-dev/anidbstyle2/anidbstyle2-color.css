@@ -50,7 +50,8 @@ tr + tr th,
 #layout-main div.g_definitionlist tr th,
 #layout-main div.votes_all div.graph div.group + div.group_odd,
 #layout-main div.votes_all div.graph div.group_odd + div.group,
-#layout-main div.votes_all div.graph.eps div.row + div.row
+#layout-main div.votes_all div.graph.eps div.row + div.row,
+#layout-main div.addtagentityrel_all #tag-list div.tag + div.tag
 {
 	border-top-color: #999999;
 }
@@ -213,7 +214,8 @@ html,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.row:hover,
 #layout-main div.tabbed_pane div.body div.pane div.forum ul.topics li.g_odd.row:hover,
 #layout-main div.votes_all div.graph div.group_odd,
-#layout-main div.votes_all div.graph.eps div.g_odd
+#layout-main div.votes_all div.graph.eps div.g_odd,
+#layout-main div.addtagentityrel_all #tag-list div.g_odd
 {
 	background-color: #B9BBBF;
 }

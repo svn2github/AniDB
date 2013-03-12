@@ -47,6 +47,16 @@
 	width: 100%;
 }
 
+#layout-main div.addtagentityrel_all div.tag-column div.tag span.state
+{
+	float: right;
+}
+
+#layout-main div.addtagentityrel_all div.tag-column div.tag span.name
+{
+	width: 20.5em;
+}
+
 /*display parts on anime/manga page*/
 #layout-main div.tag-list
 {
@@ -60,7 +70,7 @@
 {
 	display: inline-table;
 	width: 27em;
-	padding: 4px;
+	padding: 8px;
 	margin-bottom: 1em;
 }
 

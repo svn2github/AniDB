@@ -447,7 +447,20 @@ a.tooltip span.text
 	font-weight:bold;
 }
 
+#layout-main div.addtagentityrel_all #tag-groups span.link.unset,
+#layout-main div.addtagentityrel_all #tag-list div.tag.delete span.name,
 #layout-main div.tag-column span.not_added
 {
 	text-decoration: line-through;
+}
+
+#layout-main div.addtagentityrel_all #tag-groups span.link,
+#layout-main div.addtagentityrel_all #tag-list div.tag
+{
+	cursor: pointer;
+}
+
+#layout-main div.addtagentityrel_all #tag-groups span.link
+{
+	font-size: 1.2em;
 }

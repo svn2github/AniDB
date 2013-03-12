@@ -44,9 +44,10 @@ th a,
 	border-color: #4692BF;
 }
 
-#layout-nav div.menu_hr
+#layout-nav div.menu_hr,
+#layout-main div.addtagentityrel_all #tag-list div.tag + div.tag
 {
-	border-top-color: #c9d7f1;
+	border-top-color: #C9D7F1;
 }
 
 #layout-main div.main_all div.datablocks h4,
@@ -196,7 +197,8 @@ tr,
 #layout-main div.tabbed_pane ul.tabs li,
 #layout-main div.main_all div.header div.account ul.tabs li.signup:hover,
 #layout-main div.votes_all div.graph div.group_odd,
-#layout-main div.votes_all div.graph.eps div.g_odd
+#layout-main div.votes_all div.graph.eps div.g_odd,
+#layout-main div.addtagentityrel_all #tag-list div.g_odd
 {
 	background-color: #FFFFFF;
 }

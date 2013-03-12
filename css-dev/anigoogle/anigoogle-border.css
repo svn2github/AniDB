@@ -121,7 +121,8 @@ select,
 #layout-main div.userpage_all div.blog div.g_timedentry span.stamp,
 #layout-main div.anime_all div.info div.caststaff div table,
 #layout-main > h1,
-#layout-nav div.menu_hr
+#layout-nav div.menu_hr,
+#layout-main div.addtagentityrel_all #tag-list div.tag + div.tag
 {
 	border-top: 1px solid;
 }
