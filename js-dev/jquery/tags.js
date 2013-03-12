@@ -42,10 +42,8 @@ function toggle_tag(tag, weight, is_parent) {
 				}
 
 				var min_weight = get_max_weight_of_childs($(tag).attr('id'));
-				if (is_parent && old_weight && old_weight >= min_weight) {
-					if (cur_weight==600 && weight < cur_weight) {
-						weight = old_weight;
-					}
+				if (is_parent && old_weight && old_weight >= min_weight && cur_weight==600 && weight < cur_weight) {
+					weight = old_weight;
 				} else if (is_parent && cur_weight==600 && weight < cur_weight) {
 					weight = min_weight;
 				} else if (is_parent && weight < cur_weight) {
