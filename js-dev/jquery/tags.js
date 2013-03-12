@@ -87,7 +87,7 @@ function toggle_tag(tag, weight, is_parent) {
 						$(state).removeClass('i_general_delete');
 						$(state).attr('title', 'weight was edited');
 					}
-					else if (cls_new == 'i_rate_halfstar') {
+					else {
 						$(tag).addClass('added');
 						$(state).addClass('i_general_added');
 						$(tag).removeClass('delete');
