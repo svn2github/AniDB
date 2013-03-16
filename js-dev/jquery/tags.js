@@ -59,6 +59,7 @@ function toggle_tag(tag, weight, is_parent) {
 				var cls_new    = tag_weight[weight];
 				$(icon).removeClass(cls);
 				$(icon).addClass(cls_new);
+				set_input_value($(tag).attr('id'), weight, $(tag).attr('tagentityrelid'));
 
 				if ($(tag).hasClass('added')) {
 					if (cls_new == 'i_rate_') {
@@ -110,21 +111,54 @@ function toggle_tag(tag, weight, is_parent) {
 		$(tag).removeClass('added');
 		$(state).removeClass('i_general_added');
 		$(state).attr('title', 'to be deleted');
+		set_input_value($(tag).attr('id'), 0, $(tag).attr('tagentityrelid'));
 	} else if ($(tag).hasClass('delete')) {
 		$(tag).addClass('added');
 		$(state).addClass('i_general_added');
 		$(tag).removeClass('delete');
 		$(state).removeClass('i_general_delete');
 		$(state).attr('title', 'was added previously');
+		set_input_value($(tag).attr('id'), null, $(tag).attr('tagentityrelid'));
 	} else if ($(state).hasClass('i_general_new')) {
 		$(state).removeClass('i_general_new');
+		set_input_value($(tag).attr('id'), 0, $(tag).attr('tagentityrelid'));
 	} else {
 		$(state).addClass('i_general_new');
 		$(state).attr('title', 'to be added');
+		set_input_value($(tag).attr('id'), null, $(tag).attr('tagentityrelid'));
 	}
 
 	if (parent.attr('id')) {
 		toggle_tag(parent, weight, 1);
+	}
+}
+
+function set_input_value (tagid, weight, tagentityrelid) {
+	var input = $('#tag-fieldset input#data' + tagid);
+	if (tagentityrelid == undefined && weight == 0) {
+		//useless entry
+		$(input).remove();
+		return;
+	}
+
+	if (weight == undefined) {
+		//tag without weight
+		weight = 'none';
+	} else if (weight == 0) {
+		//delete tag
+		weight = 'delete';
+	}
+
+	if (tagentityrelid == undefined) {
+		tagentityrelid = '';
+	}
+
+	if (input.attr('id')) {
+		//edit existing entry
+		$(input).attr('value', weight + "-" + tagentityrelid);
+	} else {
+		//new entry to be added
+		$('#tag-fieldset').append('<input type="hidden" id="data' + tagid + '" name="data.' + tagid + '" value="' + weight + '-' + tagentityrelid + '" />')
 	}
 }
 
