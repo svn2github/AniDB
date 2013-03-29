@@ -2,7 +2,7 @@
 *  Foursquare V.1
 *  Based on SubBrown2
 *  AniDB Stylesheet
-*  24.01.2013 
+*  29.03.2013
 */
 
 
@@ -1006,6 +1006,26 @@ background-color: white }
 #layout-main div.forum div.poll div.data p {
 border-color: lightgray }
 
+	#layout-main div.forum div.events div.data > p, 
+	#layout-main div.forum div.poll div.data p {
+	padding: 0.5em 0 }
+
+#layout-main div.forum div.g_bubble.poll div.pollbar {
+background-color: #5BBCCE;
+border-bottom-color: #36A2B6;
+border-right-color: #36A2B6;
+color: #FFFFFF }
+
+#layout-main div.forum div.g_bubble.header,
+#layout-main div.forum div.g_bubble.poll,
+#layout-main div.forum div.g_bubble.events,
+#layout-main div.forum div.g_bubble.navbar,
+#layout-main div.forum div.g_bubble.search,
+#layout-main div.forum div.g_bubble.posting-box,
+#layout-main div.forum div.g_bubble.submit-box,
+#layout-main div.forum div.g_bubble.options-box {
+background-color: #F9F9F9 }
+
 div.quotebody, 
 div.code,
 div.spoiler {
@@ -1071,31 +1091,21 @@ border-color: silver 1px solid }
 /* Anime list icons */
 
 *.i_award_mainichi { background-image: url(images/icons/awards/anidb_mainichi.png) }
-
+*.i_award_jmaf { background-image: url(images/icons/awards/anidb_jmaf.png) }
+*.i_award_japa { background-image: url(images/icons/awards/anidb_japa.png) }
+*.i_award_apsa { background-image: url(images/icons/awards/anidb_apsa.png) }
 *.i_award_top10 { background-image: url(images/icons/awards/anidb_top10.png) }
-
 *.i_award_arc2000 { background-image: url(images/icons/awards/anidb_arc2000award.png) }
-
 *.i_award_arc2001 { background-image: url(images/icons/awards/anidb_arc2001award.png) }
-
 *.i_award_arc2002 { background-image: url(images/icons/awards/anidb_arc2002award.png) }
-
 *.i_award_arc2003 { background-image: url(images/icons/awards/anidb_arc2003award.png) }
-
 *.i_award_arc2004 { background-image: url(images/icons/awards/anidb_arc2004award.png) }
-
 *.i_award_arc2005 { background-image: url(images/icons/awards/anidb_arc2005award.png) }
-
 *.i_award_arc2006 { background-image: url(images/icons/awards/anidb_arc2006award.png) }
-
 *.i_award_arc2007 { background-image: url(images/icons/awards/anidb_arc2007award.png) }
-
 *.i_award_arc2008 { background-image: url(images/icons/awards/anidb_arc2008award.png) }
-
 *.i_award_arc2009 { background-image: url(images/icons/awards/anidb_arc2009award.png) }
-
 *.i_award_arc2010 { background-image: url(images/icons/awards/anidb_arc2010award.png) }
-
 *.i_award_arc2011 { background-image: url(images/icons/awards/anidb_arc2011award.png) }
 
 
@@ -1145,8 +1155,7 @@ border-color: silver 1px solid }
 *.i_video { background-image: url(images/icons/icon/anidb_video.png) }
 
 *.i_video.xvid,
-*.i_video.divx5 {
-background-image: url(images/icons/icon/anidb_video_asp.png) }
+*.i_video.divx5 { background-image: url(images/icons/icon/anidb_video_asp.png) }
 
 *.i_video.avc { background-image: url(images/icons/icon/anidb_video_avc.png) }
 
@@ -1578,6 +1587,8 @@ background-image: url(images/icons/state/anidb_atype_other.png) }
 
 *.i_filestate_ondvd { background-image: url(images/icons/state/anidb_filestate_ondvd.png) }
 
+*.i_filestate_onbluray { background-image: url(images/icons/state/anidb_filestate_onbluray.png) }
+
 *.i_filestate_ontv { background-image: url(images/icons/state/anidb_filestate_ontv.png) }
 
 *.i_filestate_other { background-image: url(images/icons/state/anidb_filestate_other.png) }
@@ -1587,6 +1598,8 @@ background-image: url(images/icons/state/anidb_atype_other.png) }
 *.i_filestate_streamed { background-image: url(images/icons/state/anidb_filestate_streamed.png) }
 
 *.i_filestate_theater { background-image: url(images/icons/state/anidb_filestate_theater.png) }
+
+*.i_filestate_fillerep { background-image: url(images/icons/state/anidb_filestate_filler.png) }
 
 *.i_liststate_unknown { background-image: url(images/icons/state/anidb_liststate_unknown.png) }
 
