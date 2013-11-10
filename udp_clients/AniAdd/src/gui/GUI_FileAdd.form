@@ -1,4 +1,4 @@
-<?xml version="1.1" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
@@ -16,10 +16,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="714" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="734" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="spnl_FileAdd" pref="714" max="32767" attributes="0"/>
+                  <Component id="spnl_FileAdd" pref="734" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -27,9 +27,9 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="204" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="242" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="spnl_FileAdd" alignment="0" pref="204" max="32767" attributes="0"/>
+              <Component id="spnl_FileAdd" alignment="0" pref="242" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -70,12 +70,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scr_tbl_Files" alignment="0" pref="708" max="32767" attributes="0"/>
+                  <Component id="scr_tbl_Files" alignment="0" pref="728" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="scr_tbl_Files" alignment="0" pref="76" max="32767" attributes="0"/>
+                  <Component id="scr_tbl_Files" alignment="0" pref="118" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -151,12 +151,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="prg_File" alignment="0" pref="712" max="32767" attributes="0"/>
-                      <Component id="prg_Total" alignment="1" pref="712" max="32767" attributes="0"/>
+                      <Component id="prg_File" alignment="0" max="32767" attributes="0"/>
+                      <Component id="prg_Total" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="lbl_MBProcessed" min="-2" pref="274" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_TimeElapsed" pref="122" max="32767" attributes="0"/>
+                          <Component id="lbl_TimeElapsed" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="lbl_TimeRemaining" min="-2" pref="304" max="-2" attributes="0"/>
                       </Group>
@@ -240,7 +240,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="700" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -297,7 +297,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="pnl_AddMedia" alignment="0" min="0" pref="46" max="32767" attributes="1"/>
+                                  <Component id="pnl_AddMedia" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
                                   <Component id="pnl_StartClear" alignment="0" max="32767" attributes="1"/>
                               </Group>
                               <Group type="103" alignment="1" groupAlignment="1" attributes="0">
@@ -411,9 +411,9 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="scrl_txt_Source" alignment="1" pref="46" max="32767" attributes="0"/>
-                          <Component id="scrl_txt_Other" alignment="1" pref="46" max="32767" attributes="0"/>
-                          <Component id="scrl_txt_Storage" alignment="1" pref="46" max="32767" attributes="0"/>
+                          <Component id="scrl_txt_Source" alignment="1" max="32767" attributes="0"/>
+                          <Component id="scrl_txt_Other" alignment="1" max="32767" attributes="0"/>
+                          <Component id="scrl_txt_Storage" alignment="1" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -553,8 +553,8 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btn_AddFiles" alignment="0" pref="89" max="32767" attributes="1"/>
-                          <Component id="btn_AddFolders" alignment="0" max="32767" attributes="1"/>
+                          <Component id="btn_AddFiles" alignment="0" max="32767" attributes="1"/>
+                          <Component id="btn_AddFolders" alignment="0" pref="109" max="32767" attributes="1"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">

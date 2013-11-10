@@ -541,11 +541,11 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_Lstvw.setLayout(pnl_FileAdd_LstvwLayout);
         pnl_FileAdd_LstvwLayout.setHorizontalGroup(
             pnl_FileAdd_LstvwLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
         );
         pnl_FileAdd_LstvwLayout.setVerticalGroup(
             pnl_FileAdd_LstvwLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addComponent(scr_tbl_Files, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
         );
 
         spnl_FileAdd.setLeftComponent(pnl_FileAdd_Lstvw);
@@ -571,12 +571,12 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_Status.setLayout(pnl_FileAdd_StatusLayout);
         pnl_FileAdd_StatusLayout.setHorizontalGroup(
             pnl_FileAdd_StatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(prg_File, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
-            .addComponent(prg_Total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)
+            .addComponent(prg_File, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(prg_Total, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FileAdd_StatusLayout.createSequentialGroup()
                 .addComponent(lbl_MBProcessed, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_TimeElapsed, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                .addComponent(lbl_TimeElapsed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_TimeRemaining, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -600,7 +600,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_FileAdd_FileInfo.setLayout(pnl_FileAdd_FileInfoLayout);
         pnl_FileAdd_FileInfoLayout.setHorizontalGroup(
             pnl_FileAdd_FileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         pnl_FileAdd_FileInfoLayout.setVerticalGroup(
             pnl_FileAdd_FileInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,7 +656,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         txt_Source.setColumns(8);
         txt_Source.setLineWrap(true);
         txt_Source.setRows(3);
-        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10));
+        txt_Source.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txt_Source.setTextHint("Source");
         txt_Source.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -668,7 +668,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         txt_Storage.setColumns(8);
         txt_Storage.setLineWrap(true);
         txt_Storage.setRows(3);
-        txt_Storage.setFont(new java.awt.Font("Tahoma", 0, 10));
+        txt_Storage.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txt_Storage.setTextHint("Storage");
         txt_Storage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -680,7 +680,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         txt_Other.setColumns(8);
         txt_Other.setLineWrap(true);
         txt_Other.setRows(3);
-        txt_Other.setFont(new java.awt.Font("Tahoma", 0, 10));
+        txt_Other.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         txt_Other.setTextHint("Other");
         txt_Other.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -702,9 +702,9 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         );
         pnl_EditBoxesLayout.setVerticalGroup(
             pnl_EditBoxesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrl_txt_Source, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-            .addComponent(scrl_txt_Other, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-            .addComponent(scrl_txt_Storage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+            .addComponent(scrl_txt_Source, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(scrl_txt_Other, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(scrl_txt_Storage, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pnl_StartClear.setOpaque(false);
@@ -758,8 +758,8 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         pnl_AddMedia.setLayout(pnl_AddMediaLayout);
         pnl_AddMediaLayout.setHorizontalGroup(
             pnl_AddMediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btn_AddFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-            .addComponent(btn_AddFolders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_AddFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_AddFolders, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
         );
         pnl_AddMediaLayout.setVerticalGroup(
             pnl_AddMediaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -799,7 +799,7 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
             .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
                 .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(pnl_AddMedia, javax.swing.GroupLayout.Alignment.LEADING, 0, 46, Short.MAX_VALUE)
+                        .addComponent(pnl_AddMedia, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                         .addComponent(pnl_StartClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_FileAdd_CtrlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(pnl_FileAdd_CtrlsLayout.createSequentialGroup()
@@ -839,17 +839,17 @@ public class GUI_FileAdd extends javax.swing.JPanel implements GUI.ITab {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 734, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+                    .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
                     .addGap(0, 0, 0)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 204, Short.MAX_VALUE)
+            .addGap(0, 242, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                .addComponent(spnl_FileAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

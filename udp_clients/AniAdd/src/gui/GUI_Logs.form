@@ -17,13 +17,13 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="pnl_Logs_Ctrls" alignment="0" max="32767" attributes="0"/>
-          <Component id="spnl_Logs" alignment="0" pref="452" max="32767" attributes="0"/>
+          <Component id="spnl_Logs" alignment="0" pref="507" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="spnl_Logs" pref="147" max="32767" attributes="0"/>
+              <Component id="spnl_Logs" pref="251" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnl_Logs_Ctrls" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -112,7 +112,7 @@
                   <Component id="btn_CopyLogTree" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btn_CopyDebugMsgs" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
+                  <EmptySpace pref="94" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

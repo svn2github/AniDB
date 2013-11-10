@@ -105,7 +105,7 @@ public class Mod_EpProcessing implements IModule {
         FileInfo procFile = files.get("Id", fileParser.Tag());
 
 
-        if (procFile != null) {
+        if (procFile != null && fileParser.Hash() != null) {
             //System.out.println("Cont Processing: " + id);
 
             procFile.Data().put("Ed2k", fileParser.Hash());
@@ -129,6 +129,15 @@ public class Mod_EpProcessing implements IModule {
             }
 
             Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.GetDBInfo, procFile.Id(), sendFile, sendML);
+            
+        } else if(procFile != null) {
+            procFile.ActionsError().add(eAction.Process);
+            procFile.ActionsTodo().remove(eAction.Process);
+            
+            processedBytes += procFile.FileObj().length();
+            processedFileCount++;
+            
+            Log(ComEvent.eType.Information, eComType.FileEvent, eComSubType.ParsingError, procFile.Id(), fileParser);
         }
 
         if (isProcessing) {

@@ -136,7 +136,7 @@ public class GUI_Options_Misc extends javax.swing.JPanel {
                 .addComponent(chck_OverwriteMLEntries)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chck_ShowUnwatchedOption)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
