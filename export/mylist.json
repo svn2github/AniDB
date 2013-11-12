@@ -1,0 +1,3768 @@
+{
+"Animes": [
+	
+	{
+		"aid": 128,
+		"romaji": "Arcade Gamer Fubuki",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 907,
+				"episode": "1",
+				"name": "Fubuki bakutan",
+				"Files": [
+					{
+						"fid": 977,
+						"crc": "e149ad50",
+						"md5": "877c3cc242d09a2fbc6b9d1efb901852",
+						"size": 263268352,
+						"ed2k": "ef2a95183c4931c606e99e33e86434e6",
+						"Group": {
+							"gid": 81,
+							"group": "Anime-Ki"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 908,
+				"episode": "2",
+				"name": "Stolen passion panty",
+				"Files": [
+					{
+						"fid": 978,
+						"crc": "cf8ef6b8",
+						"md5": "b90de9801ee59285d9014ad041a010d0",
+						"size": 294844416,
+						"ed2k": "6a7d43c03835ba95ad46fd7828309c89",
+						"Group": {
+							"gid": 81,
+							"group": "Anime-Ki"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 6257,
+				"episode": "3",
+				"name": "Final game! My dad is an emperor!?",
+				"Files": [
+					{
+						"fid": 108057,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 106,
+		"romaji": "Azumanga Daiou",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 573,
+				"episode": "1",
+				"name": "A Child High School Student - A Genius - Scary? - Rampaging Tomo-chan - It`s an Osakan",
+				"Files": [
+					{
+						"fid": 1049,
+						"crc": "13bbe394",
+						"md5": "17527ea476dac868102c7d991cdb3547",
+						"size": 185382912,
+						"ed2k": "0b92e2ce85c3a81ca976ff37b6360619",
+						"Group": {
+							"gid": 157,
+							"group": "NLA & Ishin"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 577,
+				"episode": "2",
+				"name": "Today is Osaka again - PE Volleyball - Hiccup - Brain - Newbie",
+				"Files": [
+					{
+						"fid": 8031,
+						"crc": "7f49a04f",
+						"md5": "43f913fcb3d04e96a4ddb0d096a466a8",
+						"size": 200206336,
+						"ed2k": "602080a7e45ea043d15ab539b716e68e",
+						"Group": {
+							"gid": 157,
+							"group": "NLA & Ishin"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 565,
+				"episode": "3",
+				"name": "Nyamo - Factional rivalry - Yukari showed up - It`s not my fault - Wherever we go",
+				"Files": [
+					{
+						"fid": 1044,
+						"crc": "cc1e640f",
+						"md5": "b1ced04ee67eebc86d531e461ae9b31c",
+						"size": 159565824,
+						"ed2k": "ace7471650b2a8f8e9f7015a7dce3b1a",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 569,
+				"episode": "4",
+				"name": "Fun job - Pool Pool Pool - Ribbon - Just the two of us - A good person?",
+				"Files": [
+					{
+						"fid": 1046,
+						"crc": "c9d280bb",
+						"md5": "ea363a52eb6cb9c4242c9aeef91c9fab",
+						"size": 182595584,
+						"ed2k": "58c7a1a2afb0a2be0adccfd37a3c7062",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 572,
+				"episode": "5",
+				"name": "Summer Vacation - Welcome To Chiyo`s Room - Invitation - From The Experienced - That`s Enough",
+				"Files": [
+					{
+						"fid": 1048,
+						"crc": "3621e636",
+						"md5": "e94fd43129fde857c6b8d24c82a7dedf",
+						"size": 127449088,
+						"ed2k": "9e3cac49e5392d3a95005a0eeab19f6c",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 575,
+				"episode": "6",
+				"name": "Equation Of Victory - Class 3`s Sakaki - Class 5`s Kagura - Show Them! - Yay! - Dancing Finale",
+				"Files": [
+					{
+						"fid": 1050,
+						"crc": "eef1f573",
+						"md5": "413d5ddd8ed0f236757d0b88214e1ba9",
+						"size": 186077184,
+						"ed2k": "e9040293112655772a4f27acdf2fc4ab",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 563,
+				"episode": "7",
+				"name": "Class of Fairies - Man Of Character - Get Groovin` And Go! - Mascot - Enemy?",
+				"Files": [
+					{
+						"fid": 1043,
+						"crc": "4cc26054",
+						"md5": "7d7ba7cdb850184066c72e1e10537eb5",
+						"size": 131096576,
+						"ed2k": "e2b3a532d2137675e7f1e1e97db4b5ab",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 567,
+				"episode": "8",
+				"name": "Osaka`s First Dream Of The New Year - Tomo-chan`s Version - Sakaki`s Version - Welcome - Kaorin`s Version",
+				"Files": [
+					{
+						"fid": 1045,
+						"crc": "1ab3dd55",
+						"md5": "b7c772e406d95a23f9ed59f50e6823e7",
+						"size": 174731264,
+						"ed2k": "de17fad85a96f7ff0072a6468ab045b6",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 570,
+				"episode": "9",
+				"name": "If You Don`t Let Go - 11 Years Old - Cat-san - Setup - Why?",
+				"Files": [
+					{
+						"fid": 1047,
+						"crc": "c4edcffd",
+						"md5": "a54d105db394020f958af585c26f3d4e",
+						"size": 156704768,
+						"ed2k": "6776f540ebd62a800d3dde0dcb891866",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 576,
+				"episode": "10",
+				"name": "Draft Nominations - Change Of Classes - Wolf - Seniority Attitude On A Roll - Marco...",
+				"Files": [
+					{
+						"fid": 2402,
+						"crc": "4146ad2f",
+						"md5": "99339295521774c42bf03441e15212ae",
+						"size": 150022144,
+						"ed2k": "5dca6f8073d72186b3cc5a3f82466225",
+						"Group": {
+							"gid": 443,
+							"group": "Elite-Anime and AnimeOne"
+						}
+					},
+
+					{
+						"fid": 596,
+						"crc": "7ce2cf31",
+						"md5": "ec16337597f70c01bd3bc233d27d0e7c",
+						"size": 158115840,
+						"ed2k": "417111695a7b0f24ece3b5a5ce7cc05c",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{
+						"fid": 217225,
+						"crc": "320e3afa",
+						"md5": "9547dd7521942aa1be2a3656bbc02059",
+						"size": 238884341,
+						"ed2k": "15791b66be240cdead135acfa3551fb1",
+						"Group": {
+							"gid": 374,
+							"group": "KickAssAnime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 564,
+				"episode": "11",
+				"name": "International City - Competition - No Need To Hit - Full Of Cats - Don`t Escape",
+				"Files": [
+					{
+						"fid": 598,
+						"crc": "d722e228",
+						"md5": "7db026507ce2134a6fc6fdf0cced21fd",
+						"size": 164755456,
+						"ed2k": "4f8b46dc848c2883144fe0177375d2ae",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{
+						"fid": 217225,
+						"crc": "320e3afa",
+						"md5": "9547dd7521942aa1be2a3656bbc02059",
+						"size": 238884341,
+						"ed2k": "15791b66be240cdead135acfa3551fb1",
+						"Group": {
+							"gid": 374,
+							"group": "KickAssAnime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 568,
+				"episode": "12",
+				"name": "Chiyo-chan`s day - High School Friends - Lunch - Afternoon - Jump Rope",
+				"Files": [
+					{
+						"fid": 600,
+						"crc": "9213e4d0",
+						"md5": "8887120cf6d231918d9a14449b97481c",
+						"size": 166037504,
+						"ed2k": "7e540820463b7c5ac5378a8f613c0bdf",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 571,
+				"episode": "13",
+				"name": "No Guard Strategy - S - Midterms - Formation - Ability",
+				"Files": [
+					{
+						"fid": 594,
+						"crc": "a45e67fe",
+						"md5": "9c36f580c1b33a66820f74b65dda4cfb",
+						"size": 162074624,
+						"ed2k": "98e300b7fd1be8b09883be9b9ca4ad04",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 574,
+				"episode": "14",
+				"name": "Shopping - Meeting - Ocean! - Capture Operation - Adult World",
+				"Files": [
+					{
+						"fid": 595,
+						"crc": "9377ad72",
+						"md5": "63043f086e2f1c28fb72844bbd49ee94",
+						"size": 176443392,
+						"ed2k": "5a33b316fc65c6845ef8e7eafc11b5fa",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 562,
+				"episode": "15",
+				"name": "Kimura Family Members - Did you see? - Mystery Wife - Frozen - Concluding Announcement",
+				"Files": [
+					{
+						"fid": 597,
+						"crc": "3406409e",
+						"md5": "a039050d08b616617ac3acdd1f84edba",
+						"size": 228134912,
+						"ed2k": "913722547d615161d5eb4c9865b13ec9",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 566,
+				"episode": "16",
+				"name": "Combination - Descent - Cute - Order - Advertising Effect",
+				"Files": [
+					{
+						"fid": 599,
+						"crc": "c965c1a7",
+						"md5": "ed052434e2930c8a569d8a42670b80cb",
+						"size": 181438464,
+						"ed2k": "095a9e2da6874b418d2729e8f25e9f95",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 1453,
+				"episode": "17",
+				"name": "Osaka`s Scary Stories - Change of Feeling -  December - Incredible Santa - Christmas Party",
+				"Files": [
+					{
+						"fid": 1582,
+						"crc": "7de5c09a",
+						"md5": "a32f63236aa257dc74005754b60bc508",
+						"size": 158158848,
+						"ed2k": "399713c010d0f30837abc871df2a5cdc",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 1681,
+				"episode": "18",
+				"name": "Elated Yomi - Backstab - Excited Excited Excited - Left Out - Go",
+				"Files": [
+					{
+						"fid": 1844,
+						"crc": "865efaa5",
+						"md5": "9aa3548ce000acd6be67cb1dd6a0aa11",
+						"size": 158181376,
+						"ed2k": "8f2253c39086079e1a398394f5be0153",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2207,
+				"episode": "19",
+				"name": "Master of Yawning - Springtime of Youth - Adult Flower Watching - Child Flower Watching - Cherry Blossom",
+				"Files": [
+					{
+						"fid": 2400,
+						"crc": "04de49ac",
+						"md5": "33b4a71a53e8029cfefd14e43ca5f80c",
+						"size": 167340032,
+						"ed2k": "1a9301fa8441aac5d67f9a4af4b8d038",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2208,
+				"episode": "20",
+				"name": "Parting - Yukari`s Birthday - Fly to the Future, Chiyo ! - Child President - Live Strong Please",
+				"Files": [
+					{
+						"fid": 2398,
+						"crc": "cb052cbc",
+						"md5": "97a9f96676f21dde4e20439a5843a6b2",
+						"size": 168312832,
+						"ed2k": "09d0ef963f06ab2da6fb49058d0560b0",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2209,
+				"episode": "21",
+				"name": "Hope - I Just Couldn`t - Watery Grave - Dream Island - Mountain Cats",
+				"Files": [
+					{
+						"fid": 2399,
+						"crc": "01a52c8a",
+						"md5": "0869221dc29a9e0550b2963ec30a6f1f",
+						"size": 167806976,
+						"ed2k": "7a5c14f825c4f8d8291d0a0ee5b46fb5",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2337,
+				"episode": "22",
+				"name": "Nice - Got Tricked - Kurosawa-sensei - Attempted - It`s Not Over Yet",
+				"Files": [
+					{
+						"fid": 2566,
+						"crc": "3cb96ca5",
+						"md5": "518006576cb2395d672fcd8420fd32fe",
+						"size": 165316608,
+						"ed2k": "4097eed249aa4f5455144ae7ba1967e4",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2338,
+				"episode": "23",
+				"name": "Chewed - Cheerleaders - I Didn`t Think - We`ll Run Together - United",
+				"Files": [
+					{
+						"fid": 2567,
+						"crc": "ff13b567",
+						"md5": "84f63907a8b58b1f0d0aa0722b60ac81",
+						"size": 168589312,
+						"ed2k": "865ba7264a71c4bdb5faeb35a28ca1eb",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2339,
+				"episode": "24",
+				"name": "Career Path - Showdown - Lets Hurry - Popularity - Together with Maya",
+				"Files": [
+					{
+						"fid": 2700,
+						"crc": "67bd7a1a",
+						"md5": "99d6ee81fd1dcbe875fdadfe6dc15889",
+						"size": 167878656,
+						"ed2k": "0162930bf70a0650b5b126e73c0c77d0",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2340,
+				"episode": "25",
+				"name": "Course Discussion - Pray for Success - Fight! - Study Session - Tomo and Osaka`s Day of Fate",
+				"Files": [
+					{
+						"fid": 3421,
+						"crc": "fbfe7d9c",
+						"md5": "157368fffc1adeaa3be8e7b68b6920b8",
+						"size": 165568512,
+						"ed2k": "abc25ac19275fa0f7cfa68ec601a00fe",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2336,
+				"episode": "26",
+				"name": "First Graduation - A Thousand Emotions - Sadness - Our Old School - Everyone",
+				"Files": [
+					{
+						"fid": 3796,
+						"crc": "3ec65e58",
+						"md5": "3bfc821f1599f06e312f6a3338ffeb56",
+						"size": 178860032,
+						"ed2k": "89b81ed2188bef94b52d631d427cf21f",
+						"Group": {
+							"gid": 791,
+							"group": "New Life Anime & Ishin-Digital & Anime-Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5001,
+				"episode": "S1",
+				"name": "The Very Short Movie",
+				"Files": [
+					{
+						"fid": 6012,
+						"crc": "90c2aaca",
+						"md5": "f4618e92dd6de372d20dbea7895379f3",
+						"size": 63979520,
+						"ed2k": "a42b28dbcfeb8dde9c393cd62e558940",
+						"Group": {
+							"gid": 84,
+							"group": "Mopoxian Honyaku"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5002,
+				"episode": "S2",
+				"name": "Azumanga Web Daioh",
+				"Files": [
+					{
+						"fid": 6013,
+						"crc": "ecf6e57b",
+						"md5": "510e81fce7e2401c586795d206d0145a",
+						"size": 41111552,
+						"ed2k": "9bbe21007a3aeaeb4f56cc818e4531f2",
+						"Group": {
+							"gid": 157,
+							"group": "NLA & Ishin"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 4897,
+		"romaji": "Baccano!",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 73746,
+				"episode": "1",
+				"name": "The Assistant Editor Refuses to Discuss the Possibility that he is the Main Character",
+				"Files": [
+					{
+						"fid": 352078,
+						"crc": "754d61df",
+						"md5": "c4c60db17714b265339f43fc6a194671",
+						"size": 125599708,
+						"ed2k": "01d46b30d3a0320164de8011d2bd7c46",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73747,
+				"episode": "2",
+				"name": "Despite the Old Woman`s Anxieties the Trans-Continental Train Pulls Out",
+				"Files": [
+					{
+						"fid": 355793,
+						"crc": "5b4201a9",
+						"md5": "f1efa623d09f3e66324178f3deeba62c",
+						"size": 125652374,
+						"ed2k": "fe0da888dcc40ce6afc7a37ea4db4ce5",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73748,
+				"episode": "3",
+				"name": "Randy and Pezzo are Busy Getting Ready for the Party",
+				"Files": [
+					{
+						"fid": 356884,
+						"crc": "21c87935",
+						"md5": "43ca2468a06bf2dacc26ad8bce3b8837",
+						"size": 126569954,
+						"ed2k": "e8fc79defa758d44afd4b3dce9a63b75",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73749,
+				"episode": "4",
+				"name": "Ladd Russo Enjoys Talking a Lot and Killing a Lot",
+				"Files": [
+					{
+						"fid": 359610,
+						"crc": "1093909d",
+						"md5": "55b43f7e6a9eab68c24f49e0d2825c53",
+						"size": 125622026,
+						"ed2k": "e41c352de62e0d27e6d8bec0302b3ba2",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73750,
+				"episode": "5",
+				"name": "Jacuzzi Splot Cries, Cowers, and Shows His Mettle",
+				"Files": [
+					{
+						"fid": 366172,
+						"crc": "246819ed",
+						"md5": "9f86233ed6bc1db02d438682f597e302",
+						"size": 126244714,
+						"ed2k": "0890dea90c53b26c2dc29b55ea22a80e",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73751,
+				"episode": "6",
+				"name": "The Rail Tracer Maneuvers Through the Train Slaughtering Many",
+				"Files": [
+					{
+						"fid": 368929,
+						"crc": "d3c0b46b",
+						"md5": "8020836d4dcc74d1eb58fc14e01da3ab",
+						"size": 104751608,
+						"ed2k": "2f4e13b757c03eeaf825d24aa753f6a9",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73752,
+				"episode": "7",
+				"name": "Everything began on board the Advena Avis",
+				"Files": [
+					{
+						"fid": 372007,
+						"crc": "b800671b",
+						"md5": "50d50dedd400e7f5578145b12adc3704",
+						"size": 106245878,
+						"ed2k": "33feec2c9e8449a8de6f07897933d3b5",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73753,
+				"episode": "8",
+				"name": "Isaac and Miria Spread Happiness Without Realizing it",
+				"Files": [
+					{
+						"fid": 373671,
+						"crc": "5a345b0b",
+						"md5": "aed7aa549986a7839f3c6f2d4ac092eb",
+						"size": 105124708,
+						"ed2k": "3693c5e3b5537291dd79089ca3bcb3df",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73754,
+				"episode": "9",
+				"name": "Claire Stanfield Faithfully Executes Her Professional Duties",
+				"Files": [
+					{
+						"fid": 378506,
+						"crc": "e92e95d8",
+						"md5": "542beca060a72a9ed471438efbf370b1",
+						"size": 126006487,
+						"ed2k": "4f2f05ef8b7b17e77eca4c7317c4faaf",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73755,
+				"episode": "10",
+				"name": "Czeslaw Meyer is Frightened by the Shadow of an Immortal and Reflects Upon His Scheme",
+				"Files": [
+					{
+						"fid": 380621,
+						"crc": "5a6c6744",
+						"md5": "cc2d02d537b99abc9d032fe4a9d7007e",
+						"size": 104800776,
+						"ed2k": "db58494f444f9a1feb8e1dd9d6c12edf",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73756,
+				"episode": "11",
+				"name": "Chane LaForet is Silent Before the Two Mysterious People",
+				"Files": [
+					{
+						"fid": 381476,
+						"crc": "7a0a6e8a",
+						"md5": "2707be1a35d80ba50965db0b58ccde39",
+						"size": 105394977,
+						"ed2k": "8fed5063e7b78bfcde9c69fb13e423c1",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73757,
+				"episode": "12",
+				"name": "Firo and the Gandor Brothers are Shot Down",
+				"Files": [
+					{
+						"fid": 385120,
+						"crc": "aeafb556",
+						"md5": "7d8ff6fc8550783e9ec360674ecc28c5",
+						"size": 105562855,
+						"ed2k": "1ecaf9b4ab01c351f5028efa7fccbd06",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73758,
+				"episode": "13",
+				"name": "Both the Life of an Immortal and a Mortal are Equally Glorified",
+				"Files": [
+					{
+						"fid": 387201,
+						"crc": "98092ffb",
+						"md5": "30368ff81c2861487d88c5040fe338b0",
+						"size": 104933878,
+						"ed2k": "45c36c7d82ed635d432b33d9e6f89aff",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 79784,
+				"episode": "T1",
+				"name": "Trailer",
+				"Files": [
+					{
+						"fid": 347901,
+						"crc": "dae8173e",
+						"md5": "a54a103ac6fea6b6972831253e7e1e1a",
+						"size": 5334533,
+						"ed2k": "753267c715d236ddc3b3c9ae1a83eb09",
+						"Group": {
+							"gid": 958,
+							"group": "Ayu"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 167,
+		"romaji": "Bannou Bunka Nekomusume",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 1593,
+				"episode": "1",
+				"name": "Phase-0I",
+				"Files": [
+					{
+						"fid": 1751,
+						"crc": "e17da3ff",
+						"md5": "b917a4c9a5a3847713421014fe0d2889",
+						"size": 134782976,
+						"ed2k": "153ff7f34a3062c884fc45534209593a",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 416,
+		"romaji": "Blue Gender",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 4949,
+				"episode": "1",
+				"name": "One day",
+				"Files": [
+					{
+						"fid": 7228,
+						"crc": "212e5a85",
+						"md5": "30dbe0ce71ad62a2a33303127b3d1bc3",
+						"size": 220659712,
+						"ed2k": "a6d9a67a67da2a29163d65ef636055c1",
+						"Group": {
+							"gid": 75,
+							"group": "AlphaAnime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 4947,
+				"episode": "2",
+				"name": "Cry",
+				"Files": [
+					{
+						"fid": 7229,
+						"crc": "27cc90eb",
+						"md5": "d9aaab20614fd4712430c2746efafdc9",
+						"size": 221425664,
+						"ed2k": "23769bca8531fed67baaa0b3527a920b",
+						"Group": {
+							"gid": 75,
+							"group": "AlphaAnime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 4945,
+				"episode": "3",
+				"name": "Trial",
+				"Files": [
+					{
+						"fid": 7230,
+						"crc": "b73ca8d9",
+						"md5": "fdfa83578cb86afe4b40397b72c21950",
+						"size": 242235392,
+						"ed2k": "ede0b413ac68df93cebdde0950755602",
+						"Group": {
+							"gid": 75,
+							"group": "AlphaAnime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 5101,
+		"romaji": "Clannad",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 82490,
+				"episode": "1",
+				"name": "Cherry Blossoms Dancing on the Hill",
+				"Files": [
+					{
+						"fid": 372950,
+						"crc": "7ea7c12b",
+						"md5": "5223018bd1e82a8e57802b3f5041ca29",
+						"size": 179176638,
+						"ed2k": "eb7e7180b83b6e1b9fba5d1ca6c6994c",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 84112,
+				"episode": "2",
+				"name": "The First Step",
+				"Files": [
+					{
+						"fid": 375203,
+						"crc": "08b444e2",
+						"md5": "859e13303cb85648f55edd66597560df",
+						"size": 179267485,
+						"ed2k": "8a666da6fc85a2ecac3f58f9adfb48e6",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 84252,
+				"episode": "3",
+				"name": "After the Tears Once Again",
+				"Files": [
+					{
+						"fid": 377290,
+						"crc": "b88366e4",
+						"md5": "8c01ff4211e79016d2805e6d7f2f2264",
+						"size": 179334052,
+						"ed2k": "fbda10ed725d2fa518e2fe7ed139b655",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 84253,
+				"episode": "4",
+				"name": "Let`s Find Members",
+				"Files": [
+					{
+						"fid": 385046,
+						"crc": "63390fe0",
+						"md5": "b1242f6927f849c3edb294dbeca3e64c",
+						"size": 176925024,
+						"ed2k": "4afd4aca63557d1193b5b249d0140c3d",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{
+						"fid": 379608,
+						"crc": "9c5d0736",
+						"md5": "8b1310d2e082a698482bbba5f1ee9d8c",
+						"size": 179474797,
+						"ed2k": "f6292acf19d9b8c556d5fb72fe92cd9f",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 84254,
+				"episode": "5",
+				"name": "A Scene of Carving",
+				"Files": [
+					{
+						"fid": 381073,
+						"crc": "0df15322",
+						"md5": "7c2e2891314f14aee5fb42ec474b10c7",
+						"size": 179423369,
+						"ed2k": "c6797bc9f7153e5ad94bb385f79aa2d3",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 84255,
+				"episode": "6",
+				"name": "Founders` Festival of the Sisters",
+				"Files": [
+					{
+						"fid": 382988,
+						"crc": "fa6782f4",
+						"md5": "a37954ff11e31b6248560e9ec0ae748c",
+						"size": 179457862,
+						"ed2k": "eb72b37eec3424f02fd21ccfcc8b4881",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 85014,
+				"episode": "7",
+				"name": "Star-Shaped Happiness",
+				"Files": [
+					{
+						"fid": 384872,
+						"crc": "28875d83",
+						"md5": "6c2fbb3afb86b432f2df311947dade6e",
+						"size": 179391014,
+						"ed2k": "d29b88f5662ca04e00aeb1f1e2848489",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 85029,
+				"episode": "8",
+				"name": "The Wind that Vanishes into Dusk",
+				"Files": [
+					{
+						"fid": 387090,
+						"crc": "b592ee46",
+						"md5": "96652ced1a8ad2675dd4e727ceae6037",
+						"size": 179549748,
+						"ed2k": "987d0e9e0d150a3e291abfde5575bb3a",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 85030,
+				"episode": "9",
+				"name": "Until the End of the Dream",
+				"Files": [
+					{
+						"fid": 389075,
+						"crc": "e2e0973d",
+						"md5": "2d5b6bed9ccfa11a296e0ab62ab26812",
+						"size": 179970383,
+						"ed2k": "4102eea57d5a07c372df45a830e7ee11",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 4345,
+		"romaji": "Dennou Coil",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 72573,
+				"episode": "1",
+				"name": "Children of Glasses",
+				"Files": [
+					{
+						"fid": 322632,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 72574,
+				"episode": "2",
+				"name": "Coil Cyber-Detective Agency",
+				"Files": [
+					{
+						"fid": 322633,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 72575,
+				"episode": "3",
+				"name": "Yuko and Yuko",
+				"Files": [
+					{
+						"fid": 322634,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73697,
+				"episode": "4",
+				"name": "Daikoku City - Hacker Club",
+				"Files": [
+					{
+						"fid": 329163,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73710,
+				"episode": "5",
+				"name": "Meta-bug Struggle Bus Tour",
+				"Files": [
+					{
+						"fid": 329333,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73711,
+				"episode": "6",
+				"name": "A Red Automaton",
+				"Files": [
+					{
+						"fid": 329334,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 73712,
+				"episode": "7",
+				"name": "Mobilise! Coil Detective Agency",
+				"Files": [
+					{
+						"fid": 329336,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 75099,
+				"episode": "8",
+				"name": "The Summer Festival and the Duel",
+				"Files": [
+					{
+						"fid": 333761,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 75100,
+				"episode": "9",
+				"name": "There`s Ms Michiko",
+				"Files": [
+					{
+						"fid": 333762,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 79754,
+				"episode": "10",
+				"name": "Kanna`s Diary",
+				"Files": [
+					{
+						"fid": 345260,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 79753,
+				"episode": "11",
+				"name": "Sinking! Daikoku City",
+				"Files": [
+					{
+						"fid": 345259,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 84589,
+				"episode": "21",
+				"name": "Black Automaton",
+				"Files": [
+					{
+						"fid": 388780,
+						"crc": "5466a46a",
+						"md5": "0d9e2b73bb0744c1e5ba46b044391c62",
+						"size": 367034788,
+						"ed2k": "706686c0eaf2b5cef58ef89b6a1a61c2",
+						"Group": {
+							"gid": 3097,
+							"group": "Ureshii"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 4549,
+		"romaji": "D.Gray-man",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 84902,
+				"episode": "59",
+				"name": "The Road of an Oath",
+				"Files": [
+					{
+						"fid": 388538,
+						"crc": "c7c817a1",
+						"md5": "85cecf2432a108d7e202b40ff33514dc",
+						"size": 179763721,
+						"ed2k": "820bae33b004da154feff788369e4983",
+						"Group": {
+							"gid": 3730,
+							"group": "Black-Order"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 490,
+		"romaji": "Fake",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 5504,
+				"episode": "1",
+				"name": "OVA",
+				"Files": [
+					{
+						"fid": 6962,
+						"crc": "e799b419",
+						"md5": "0d2bbba2406c2114efea459741713bd6",
+						"size": 488529920,
+						"ed2k": "8f93310d7a56c21e10a79f6df8ac4de3",
+						"Group": {
+							"gid": 136,
+							"group": "Dream-Anime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 163,
+		"romaji": "Fushigi Yuugi (1996)",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 1502,
+				"episode": "1",
+				"name": "Lost Bonds",
+				"Files": [
+					{
+						"fid": 1636,
+						"crc": "fb86b5d6",
+						"md5": "526c30c09dc4e17c2b9805629120e323",
+						"size": 221452288,
+						"ed2k": "9360ba7bff0c8c5567ff4435ab3217c4",
+						"Group": {
+							"gid": 34,
+							"group": "anime.fin"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 1504,
+				"episode": "2",
+				"name": "Flash of Grief",
+				"Files": [
+					{
+						"fid": 1638,
+						"crc": "f387b4e4",
+						"md5": "410e3707464b6bbd3409cf4a2affa503",
+						"size": 204546048,
+						"ed2k": "0dccfb470cc9300fbf5bc5b59618c89a",
+						"Group": {
+							"gid": 34,
+							"group": "anime.fin"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 1783,
+		"romaji": "Genshiken",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 26363,
+				"episode": "8",
+				"name": "A Comparative Study of the Process of Assembling a Mass-Produced Unit",
+				"Files": [
+					{
+						"fid": 86734,
+						"crc": "0c51a46e",
+						"md5": "9ffc99e9cd98dca8a538f57235c220ff",
+						"size": 180365312,
+						"ed2k": "d4c2a63570f2f564280985139b43b313",
+						"Group": {
+							"gid": 117,
+							"group": "Anime-Faith"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 26367,
+				"episode": "12",
+				"name": "The Countermeasures for the Issues That Occur During the Reorganization of a Group",
+				"Files": [
+					{
+						"fid": 112347,
+						"crc": "6158a8b0",
+						"md5": "c24a90aae814135676f340c5232ab919",
+						"size": 180367360,
+						"ed2k": "13a2641e266990eb08304c4a1010d0ca",
+						"Group": {
+							"gid": 117,
+							"group": "Anime-Faith"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 5210,
+		"romaji": "Genshiken 2",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 83013,
+				"episode": "7",
+				"name": "Graduation Syndrome",
+				"Files": [
+					{
+						"fid": 387622,
+						"crc": "4463adcb",
+						"md5": "adce3c92a72037cffaa7c6cd6e531a4e",
+						"size": 180479744,
+						"ed2k": "a6db988ac98bffa9dbdc3e6d3ef4dfc9",
+						"Group": {
+							"gid": 4295,
+							"group": "Pseudonym"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 1305,
+		"romaji": "Ginga Sengoku Gun Yuuden Rai",
+		"type": "TV Series",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 5188,
+		"romaji": "Goshuushou-sama Ninomiya-kun",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 85373,
+				"episode": "8",
+				"name": "Let me eat it!",
+				"Files": [
+					{
+						"fid": 387420,
+						"crc": "86be7d62",
+						"md5": "57cd4641910b8e1ccb841954be5416dc",
+						"size": 178151723,
+						"ed2k": "80f14f2971bb93a1dba8bda19c5b9fdb",
+						"Group": {
+							"gid": 3187,
+							"group": "Misc. Enlightened Entertainment Works"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 2839,
+		"romaji": "Gun x Sword",
+		"type": "TV Series",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 222,
+		"romaji": ".hack//Liminality",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 2614,
+				"episode": "1",
+				"name": "in the case of Mai Minase",
+				"Files": [
+					{
+						"fid": 2989,
+						"crc": "769fcf85",
+						"md5": "d0f2e4934a6e22c028ced7b96484323e",
+						"size": 273715200,
+						"ed2k": "915c42b45d93bf024bb3c31bd9c38b96",
+						"Group": {
+							"gid": 45,
+							"group": "Uptownanime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2616,
+				"episode": "2",
+				"name": "in the case of Yuki Aihara",
+				"Files": [
+					{
+						"fid": 2988,
+						"crc": "2113e51f",
+						"md5": "759983ae51e39ffd1781d49b19510654",
+						"size": 202672128,
+						"ed2k": "977bbf4de1df2d88ad1cd14468a3a354",
+						"Group": {
+							"gid": 1633,
+							"group": "Anime-Paradize & United-Anime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 2615,
+				"episode": "3",
+				"name": "in the case of Kyoko Tohno",
+				"Files": [
+					{
+						"fid": 6307,
+						"crc": "f57df712",
+						"md5": "e6df2e997abef150d7c1a6a5bf2d8ab2",
+						"size": 240455680,
+						"ed2k": "a9d15dc7d6b4bd1a67277e32ed06486b",
+						"Group": {
+							"gid": 103,
+							"group": "UnitedAnime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 301,
+		"romaji": "Hakaima Sadamitsu",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 3754,
+				"episode": "1",
+				"name": "Wanna fight? Bring it on! Enter Sadamitsu",
+				"Files": [
+					{
+						"fid": 6496,
+						"crc": "0265e88e",
+						"md5": "2c74fbdd860f380f9707ff1e07b2619e",
+						"size": 201850880,
+						"ed2k": "016ceb9df27149fe9bcec25ddb211f07",
+						"Group": {
+							"gid": 50,
+							"group": "Anime-Kissaten"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5261,
+				"episode": "2",
+				"name": "Blazing battle! Retrieval complete!",
+				"Files": [
+					{
+						"fid": 6497,
+						"crc": "8c99fa14",
+						"md5": "2f09a61d6a546bcfa550c8c434f42036",
+						"size": 195934208,
+						"ed2k": "0269954027eb42a2c787d503d2adf329",
+						"Group": {
+							"gid": 50,
+							"group": "Anime-Kissaten"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5267,
+				"episode": "4",
+				"name": "A blazing man`s spirit",
+				"Files": [
+					{
+						"fid": 6503,
+						"crc": "cd6b3507",
+						"md5": "5463709ba64a559d4af2d228e5fc823d",
+						"size": 192495616,
+						"ed2k": "67c18565a8fba511a0902bd841eb6abe",
+						"Group": {
+							"gid": 50,
+							"group": "Anime-Kissaten"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5268,
+				"episode": "5",
+				"name": "Women are men`s death scythe",
+				"Files": [
+					{
+						"fid": 6504,
+						"crc": "f15ba6dd",
+						"md5": "8bca415d84f3dd90a78877584c820aa5",
+						"size": 179499008,
+						"ed2k": "3f7f7ea6a517776ab7059a6c1ecb7400",
+						"Group": {
+							"gid": 50,
+							"group": "Anime-Kissaten"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5269,
+				"episode": "6",
+				"name": "A cherry blossom is a flower of man`s confusion",
+				"Files": [
+					{
+						"fid": 6505,
+						"crc": "5a832c62",
+						"md5": "76f9cc2a20418c8a13f7995e4be9a601",
+						"size": 216379392,
+						"ed2k": "0a3e9c66224fdc23792fffb649912e57",
+						"Group": {
+							"gid": 50,
+							"group": "Anime-Kissaten"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5270,
+				"episode": "7",
+				"name": "Man, eat the fist of life",
+				"Files": [
+					{
+						"fid": 6506,
+						"crc": "1db7a9dd",
+						"md5": "c5e3479bd6c5966af83ceb60bdde135c",
+						"size": 182800384,
+						"ed2k": "10263f5093dca5423042a44207f0561d",
+						"Group": {
+							"gid": 50,
+							"group": "Anime-Kissaten"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5271,
+				"episode": "8",
+				"name": "Man, sharing an umbrella of tears",
+				"Files": [
+					{
+						"fid": 6507,
+						"crc": "d905bfda",
+						"md5": "6fc86b632ecb58bd7244d736589c9f1f",
+						"size": 210724864,
+						"ed2k": "873e7ad3c7377c1f0937e4efffcca427",
+						"Group": {
+							"gid": 50,
+							"group": "Anime-Kissaten"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 4917,
+		"romaji": "Hayate no Gotoku!",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 85279,
+				"episode": "34",
+				"name": "Why Did It Die?! School Festival - Part Two",
+				"Files": [
+					{
+						"fid": 389139,
+						"crc": "da3fff63",
+						"md5": "34c7474b45dd067994743d1252b756a7",
+						"size": 244380629,
+						"ed2k": "b3a71a9e3c5d0b4438606671eb719495",
+						"Group": {
+							"gid": 3657,
+							"group": "Static-Subs & Eclipse Productions"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 890,
+		"romaji": "Innocence",
+		"type": "Movie",
+		"Episodes": [
+			{
+				"eid": 17629,
+				"episode": "1",
+				"name": "Complete Movie",
+				"Files": [
+					{
+						"fid": 71314,
+						"crc": "aed9b009",
+						"md5": "4f4441e1e473642f945bde7e34792c3d",
+						"size": 62912,
+						"ed2k": "fd771c80b13337a66b8bbd4a18cc2732",
+						"Group": {
+							"gid": 674,
+							"group": "THE LAST FANTASY"
+						}
+					},
+
+					{
+						"fid": 71154,
+						"crc": "8d0f1492",
+						"md5": "841710fd9ff0460a61dc4180e35f4178",
+						"size": 1117199,
+						"ed2k": "320461923600e85796b9cfce0ed2128b",
+						"Group": {
+							"gid": 674,
+							"group": "THE LAST FANTASY"
+						}
+					},
+
+					{
+						"fid": 70222,
+						"crc": "9f2d8eea",
+						"md5": "303f810618cbbd37e37d55bf473740ff",
+						"size": 1372665822,
+						"ed2k": "ca101fd6a4792d300f15715e432161d9",
+						"Group": {
+							"gid": 1005,
+							"group": "Ecchi Eggu Fansubs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 24240,
+				"episode": "2",
+				"name": "Part 1 of 2",
+				"Files": [
+					{
+						"fid": 71093,
+						"crc": "dee8bc25",
+						"md5": "ec4673aded6dd8f226e22810c1316d7f",
+						"size": 738962963,
+						"ed2k": "0093228bf1bf6cdcceb345cecfe99858",
+						"Group": {
+							"gid": 1184,
+							"group": "UnS"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 24241,
+				"episode": "3",
+				"name": "Part 2 of 2",
+				"Files": [
+					{
+						"fid": 70382,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{
+						"fid": 71094,
+						"crc": "945b3731",
+						"md5": "e67947b4f06cc6ee69c50000984f36c8",
+						"size": 630674189,
+						"ed2k": "dbe0ffb06e0aefd651f6001a69540d3d",
+						"Group": {
+							"gid": 1184,
+							"group": "UnS"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 24382,
+				"episode": "4",
+				"name": "Part 1 of 3",
+				"Files": [
+					{
+						"fid": 70936,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 24385,
+				"episode": "5",
+				"name": "Part 2 of 3",
+				"Files": [
+					{
+						"fid": 70941,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 24386,
+				"episode": "6",
+				"name": "Part 3 of 3",
+				"Files": [
+					{
+						"fid": 70943,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 26,
+		"romaji": "Juuni Kokuki",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 157,
+				"episode": "1",
+				"name": "Shadow of the Moon, The Sea of Shadow - Chapter 1",
+				"Files": [
+					{
+						"fid": 30068,
+						"crc": "51f06ce8",
+						"md5": "1a3f174cb8a47e51b703f88e7b8016c5",
+						"size": 237037132,
+						"ed2k": "c13952dad539240a8610d22244f02d56",
+						"Group": {
+							"gid": 183,
+							"group": "Anime-4ever"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 166,
+				"episode": "2",
+				"name": "Shadow of the Moon, The Sea of Shadow - Chapter 2",
+				"Files": [
+					{
+						"fid": 30069,
+						"crc": "e68f3109",
+						"md5": "d769d952f3880acd7bad2611eb99a67a",
+						"size": 237370796,
+						"ed2k": "74ce57b1cc1f8642828785010aa95088",
+						"Group": {
+							"gid": 183,
+							"group": "Anime-4ever"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 455,
+				"episode": "3",
+				"name": "Shadow of the Moon, The Sea of Shadow - Chapter 3",
+				"Files": [
+					{
+						"fid": 30070,
+						"crc": "d8014683",
+						"md5": "b3a26cd065636cb89be09c928e78fdbe",
+						"size": 237575398,
+						"ed2k": "a3c4254cbf8729a84bd6d3b27df6e1f3",
+						"Group": {
+							"gid": 183,
+							"group": "Anime-4ever"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 456,
+				"episode": "4",
+				"name": "Shadow of the Moon, The Sea of Shadow - Chapter 4",
+				"Files": [
+					{
+						"fid": 30071,
+						"crc": "2e826c85",
+						"md5": "80019df6df7ee27e03cf35090e79f90e",
+						"size": 237845885,
+						"ed2k": "3edc66f54a60d464df773935a4d11c72",
+						"Group": {
+							"gid": 183,
+							"group": "Anime-4ever"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 457,
+				"episode": "5",
+				"name": "Shadow of the Moon, The Sea of Shadow - Chapter 5",
+				"Files": [
+					{
+						"fid": 30072,
+						"crc": "c9a90ae9",
+						"md5": "529e8a27e2df39c2153a9495dbd2ff12",
+						"size": 237262228,
+						"ed2k": "b507d8f88fcd9aa4805ab25cc0d3a8ee",
+						"Group": {
+							"gid": 183,
+							"group": "Anime-4ever"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 2179,
+		"romaji": "Karas",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 35748,
+				"episode": "1",
+				"name": "Overture",
+				"Files": [
+					{
+						"fid": 195592,
+						"crc": "bbf1cee9",
+						"md5": "0fe15fad44bea1e35edb2839f999db47",
+						"size": 524828672,
+						"ed2k": "2665d1ba339d43bf6bb5032cee01b181",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 35749,
+				"episode": "2",
+				"name": "Inferno",
+				"Files": [
+					{
+						"fid": 203401,
+						"crc": "da11bb30",
+						"md5": "20977d6066adc78d34813376a585075d",
+						"size": 524185600,
+						"ed2k": "9c58b5057bd651a679a387bfd087cda5",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 45038,
+				"episode": "3",
+				"name": "Revive",
+				"Files": [
+					{
+						"fid": 224815,
+						"crc": "ccda430f",
+						"md5": "7bed80821df1c6f777e4a36a5926406e",
+						"size": 401235968,
+						"ed2k": "51ab7f88daca82b540e9a020758b1a0f",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 75605,
+				"episode": "4",
+				"name": "Sacrifice",
+				"Files": [
+					{
+						"fid": 371046,
+						"crc": "db71133f",
+						"md5": "eb18bec2190953d4d58320403745219f",
+						"size": 367363322,
+						"ed2k": "3194fdcba27a9fa1f6f43105c116bae7",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 80233,
+				"episode": "5",
+				"name": "Fantasy",
+				"Files": [
+					{
+						"fid": 377569,
+						"crc": "51686410",
+						"md5": "d769055d77c5a72c81d9f2817134d7a0",
+						"size": 366525291,
+						"ed2k": "7b3e9be136e0e5f19aa1affe272dd31f",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 795,
+		"romaji": "Keiraku no Houteishiki Level-C",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 8280,
+				"episode": "1",
+				"name": "OVA",
+				"Files": [
+					{
+						"fid": 109956,
+						"crc": "",
+						"md5": "",
+						"size": 0,
+						"ed2k": "",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 2186,
+		"romaji": "Kidou Senshi Gundam SEED Destiny",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 28202,
+				"episode": "17",
+				"name": "The Soldier`s Life",
+				"Files": [
+					{
+						"fid": 103658,
+						"crc": "5132dd8c",
+						"md5": "9fca8ec9bf68ca84fa102343c4c9e542",
+						"size": 244037632,
+						"ed2k": "8310c0ef9a4c509dcc8caed172f35946",
+						"Group": {
+							"gid": 1384,
+							"group": "Anime Kingdom & AnimeOne"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 896,
+		"romaji": "Kimi ga Nozomu Eien",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 11559,
+				"episode": "1",
+				"name": "Friends to Lovers",
+				"Files": [
+					{
+						"fid": 38991,
+						"crc": "f2f9f1c6",
+						"md5": "f603274a81ba8e654ea7384666b4a0ff",
+						"size": 244548307,
+						"ed2k": "6a56062323f8decdb2ec6c6b1479e642",
+						"Group": {
+							"gid": 34,
+							"group": "anime.fin"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 11729,
+				"episode": "2",
+				"name": "Waiting",
+				"Files": [
+					{
+						"fid": 41328,
+						"crc": "b62f0957",
+						"md5": "2facb0f0a8f1220b1cf350d48cff39ab",
+						"size": 244527896,
+						"ed2k": "04e55f4a75a8d457ae0fcc5c08a8938f",
+						"Group": {
+							"gid": 34,
+							"group": "anime.fin"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 247,
+		"romaji": "Koukaku Kidoutai Stand Alone Complex",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 2858,
+				"episode": "1",
+				"name": "Section 9",
+				"Files": [
+					{
+						"fid": 3916,
+						"crc": "328c5343",
+						"md5": "e64c722fa99d1367325c20fbc4e260b9",
+						"size": 179376128,
+						"ed2k": "e18471215b875215f5e88749921f17e1",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 3581,
+				"episode": "2",
+				"name": "Testation",
+				"Files": [
+					{
+						"fid": 3915,
+						"crc": "54024769",
+						"md5": "935843f0c3b263c158b2202ed3efcf35",
+						"size": 187723776,
+						"ed2k": "180b33162b046002853046ae6de04f16",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 3751,
+				"episode": "3",
+				"name": "Android and I",
+				"Files": [
+					{
+						"fid": 13349,
+						"crc": "f41d4cf4",
+						"md5": "07df7ad893acfc9b1cb67b8d7851c9a1",
+						"size": 174290944,
+						"ed2k": "7df8037ec4ef7486871df369b1811bb8",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 3825,
+				"episode": "4",
+				"name": "Intercepter",
+				"Files": [
+					{
+						"fid": 13348,
+						"crc": "efd7a4e0",
+						"md5": "8b140b79057535c543a508454a1ac224",
+						"size": 192632832,
+						"ed2k": "b3667a4598a0d981f764514bd36ccfcd",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 4952,
+				"episode": "5",
+				"name": "Decoy",
+				"Files": [
+					{
+						"fid": 20089,
+						"crc": "d78e9c93",
+						"md5": "e6116cf12a2007a0428a3ed183ceff0c",
+						"size": 167278592,
+						"ed2k": "41eaaea1d43739fb5f463159a673400f",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 4953,
+				"episode": "6",
+				"name": "Meme",
+				"Files": [
+					{
+						"fid": 10757,
+						"crc": "9b20923e",
+						"md5": "98c232525ba53f01fa1cca5fb16d76a9",
+						"size": 175642624,
+						"ed2k": "e45f0e984f99414d2f9d53aaf89f13d9",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5275,
+				"episode": "7",
+				"name": "Idolater",
+				"Files": [
+					{
+						"fid": 13346,
+						"crc": "1cdc3099",
+						"md5": "34d33e09ec48f215965f91f1f0997ad5",
+						"size": 171671552,
+						"ed2k": "9fc89d3e60d2e37b1337a2bf2d9a31df",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5276,
+				"episode": "8",
+				"name": "Missing Hearts",
+				"Files": [
+					{
+						"fid": 6624,
+						"crc": "1b3790df",
+						"md5": "3031d0267c434d1938f6197ef1f16121",
+						"size": 164608000,
+						"ed2k": "b085574f8d4a236e56f493b8d75d3964",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5278,
+				"episode": "9",
+				"name": "Chat! Chat! Chat!",
+				"Files": [
+					{
+						"fid": 7620,
+						"crc": "5644c49f",
+						"md5": "1c16a7c40a78ba046884227b90d70be3",
+						"size": 184612864,
+						"ed2k": "c6b39bc75d031f34d37da1f3dc162d88",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5279,
+				"episode": "10",
+				"name": "Jungle Cruise",
+				"Files": [
+					{
+						"fid": 7940,
+						"crc": "ab9546b2",
+						"md5": "48a8bc6361369a81c0cb5cdcac1ac985",
+						"size": 194086912,
+						"ed2k": "4226034ecef1e8009e67e86b848cafa3",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5669,
+				"episode": "11",
+				"name": "Portraitz",
+				"Files": [
+					{
+						"fid": 13347,
+						"crc": "042f177c",
+						"md5": "df6fd0a1fa51b0fbd60e8ed0a57a3309",
+						"size": 183345152,
+						"ed2k": "333b790d6b5cc34cceeb1a30de3029ab",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 5670,
+				"episode": "12",
+				"name": "Escape From",
+				"Files": [
+					{
+						"fid": 13350,
+						"crc": "0094b9b1",
+						"md5": "11e30ed7e3c9b4bfc3e7feda0b550014",
+						"size": 184246272,
+						"ed2k": "53d12f7763079efe1b00d894af5ca8db",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 7103,
+				"episode": "13",
+				"name": "Not Equal",
+				"Files": [
+					{
+						"fid": 12346,
+						"crc": "9b9d532d",
+						"md5": "c3be707e0f0b28b8d309aa4b753b26ea",
+						"size": 184428544,
+						"ed2k": "fb69e50f9398675cb823572c8c1bdea3",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 7267,
+				"episode": "14",
+				"name": "¥€$",
+				"Files": [
+					{
+						"fid": 11134,
+						"crc": "20225332",
+						"md5": "e65859e4669cc72e85a1ec5a5d9fe399",
+						"size": 178223104,
+						"ed2k": "6e84abd836cb3139e2fd466739d8654e",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 7746,
+				"episode": "15",
+				"name": "Machines Desirantes",
+				"Files": [
+					{
+						"fid": 12582,
+						"crc": "3e482e3d",
+						"md5": "39bc246679edd01a37079797244bbf56",
+						"size": 183736320,
+						"ed2k": "ff6c32dc5ca19d0cbdcb2d10685ba315",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 6284,
+				"episode": "S1",
+				"name": "Special - A Prior Notice",
+				"Files": [
+					{
+						"fid": 8317,
+						"crc": "92250645",
+						"md5": "1c390865851d7b5a05c2739245dca5cc",
+						"size": 224397312,
+						"ed2k": "57c54fd9c9cfa16e0917c4946471ceff",
+						"Group": {
+							"gid": 85,
+							"group": "Anime-Kraze"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 6666,
+				"episode": "S2",
+				"name": "Tachikomatic Days 01",
+				"Files": [
+					{
+						"fid": 9163,
+						"crc": "99e928bd",
+						"md5": "72efba426781b1b9e3124a315e7bbbd1",
+						"size": 24242176,
+						"ed2k": "209720b20a910d52ab7331711de7b328",
+						"Group": {
+							"gid": 68,
+							"group": "AnimeOne"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 6997,
+				"episode": "S3",
+				"name": "Tachikomatic Days 02",
+				"Files": [
+					{
+						"fid": 10158,
+						"crc": "a59f4316",
+						"md5": "9e211226741142dda8f554ca0cabeb59",
+						"size": 18368512,
+						"ed2k": "715afb46e36d18b707f5a1cb9667062c",
+						"Group": {
+							"gid": 68,
+							"group": "AnimeOne"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 7520,
+				"episode": "S4",
+				"name": "Tachikomatic Days 03",
+				"Files": [
+					{
+						"fid": 11769,
+						"crc": "9b9faa48",
+						"md5": "4637020e84b2a0e4364638b5244226ca",
+						"size": 14426112,
+						"ed2k": "dd28e962f2c0ea4e175932db72d1d7a4",
+						"Group": {
+							"gid": 68,
+							"group": "AnimeOne"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 7521,
+				"episode": "S5",
+				"name": "Tachikomatic Days 04",
+				"Files": [
+					{
+						"fid": 11768,
+						"crc": "db0aee6a",
+						"md5": "5ccbf619a6fb0de895fef1a8a1c3828e",
+						"size": 20054016,
+						"ed2k": "3cdfd5a68cc2ffa24ce72af467ecec10",
+						"Group": {
+							"gid": 68,
+							"group": "AnimeOne"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 7523,
+				"episode": "S7",
+				"name": "Tachikomatic Days 06",
+				"Files": [
+					{
+						"fid": 11767,
+						"crc": "4a878159",
+						"md5": "f230f9b9c0113cc21e2f6b794af18a47",
+						"size": 20582400,
+						"ed2k": "404b3a5ce2d50a6442b4fc936e7266cf",
+						"Group": {
+							"gid": 68,
+							"group": "AnimeOne"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 2870,
+		"romaji": "Love",
+		"type": "Movie",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 3216,
+		"romaji": "Mai-Otome",
+		"type": "TV Series",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 3411,
+		"romaji": "Mangchi",
+		"type": "Movie",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 2855,
+		"romaji": "MAR",
+		"type": "TV Series",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 998,
+		"romaji": "Mezzo DSA",
+		"type": "TV Series",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 7,
+		"romaji": "Mononoke Hime",
+		"type": "Movie",
+		"Episodes": [
+			{
+				"eid": 8130,
+				"episode": "2",
+				"name": "Part 1 of 2",
+				"Files": [
+					{
+						"fid": 13575,
+						"crc": "6e51cb6b",
+						"md5": "8680aa04b3b68fb42760471674ee9a7c",
+						"size": 736245760,
+						"ed2k": "4c082bd45575fa6433935e4a698c4e62",
+						"Group": {
+							"gid": 31,
+							"group": "Anime DivX"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 8131,
+				"episode": "3",
+				"name": "Part 2 of 2",
+				"Files": [
+					{
+						"fid": 13576,
+						"crc": "f27922cf",
+						"md5": "2b0b735d5b8b3978e469e50fa7f1a664",
+						"size": 730935296,
+						"ed2k": "8a553eb46d6a0136c3e4ca34b0f8536c",
+						"Group": {
+							"gid": 31,
+							"group": "Anime DivX"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 1122,
+		"romaji": "Mujin Wakusei Survive",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 11882,
+				"episode": "1",
+				"name": "I Am Transfer Student Luna!",
+				"Files": [
+					{
+						"fid": 33134,
+						"crc": "c038ea3d",
+						"md5": "bc57fc795305092585f9c47ed22148a6",
+						"size": 185675776,
+						"ed2k": "e44d78bc1c7b245856d50f35ef39eff0",
+						"Group": {
+							"gid": 415,
+							"group": "We Suck"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 12006,
+				"episode": "2",
+				"name": "Evasion Is Impossible",
+				"Files": [
+					{
+						"fid": 33160,
+						"crc": "4d43e083",
+						"md5": "f210396f93555d6a74877ce2c558c3a9",
+						"size": 183633920,
+						"ed2k": "719d0d574beee504ec79b720f7368142",
+						"Group": {
+							"gid": 415,
+							"group": "We Suck"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 12389,
+				"episode": "3",
+				"name": "Real Wind, Real Sea",
+				"Files": [
+					{
+						"fid": 33159,
+						"crc": "6878e36c",
+						"md5": "f6f1db6e47168296c8643a071ff0046c",
+						"size": 183623680,
+						"ed2k": "c045ec32b07521d8c81382b6565b1051",
+						"Group": {
+							"gid": 415,
+							"group": "We Suck"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 115,
+		"romaji": "Nanako Kaitai Shinsho",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 978,
+				"episode": "1",
+				"name": "Operation I: The First Spiral",
+				"Files": [
+					{
+						"fid": 7933,
+						"crc": "3990433b",
+						"md5": "9e1f64495371e5473502649b49816330",
+						"size": 244492288,
+						"ed2k": "9f55a1b814fdde60b01a743cf4dc64b1",
+						"Group": {
+							"gid": 151,
+							"group": "Super-Anime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 982,
+				"episode": "2",
+				"name": "Operation II: Memories of You",
+				"Files": [
+					{
+						"fid": 1062,
+						"crc": "e5f847ea",
+						"md5": "eb1fe35d50640bfe254001aa5fc291c2",
+						"size": 143943680,
+						"ed2k": "a5170222b842f0b5efa2fb1eef1c89da",
+						"Group": {
+							"gid": 288,
+							"group": "AnimeSync"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 981,
+				"episode": "3",
+				"name": "Operation III: The Psycho Patient",
+				"Files": [
+					{
+						"fid": 7934,
+						"crc": "03388140",
+						"md5": "d5b97a71795a43b41b4576b01b92120e",
+						"size": 224098304,
+						"ed2k": "7d1d05d86b2775223b00384c371165ff",
+						"Group": {
+							"gid": 151,
+							"group": "Super-Anime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 980,
+				"episode": "4",
+				"name": "Operation IV: Fire-Crackers",
+				"Files": [
+					{
+						"fid": 11817,
+						"crc": "960208e7",
+						"md5": "86d3e22d5e961ca1499f3a71b8f7b72b",
+						"size": 136951808,
+						"ed2k": "df2662843176e40945feab6fe4d788af",
+						"Group": {
+							"gid": 288,
+							"group": "AnimeSync"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 979,
+				"episode": "5",
+				"name": "Operation V: The Last Spiral Part 1",
+				"Files": [
+					{
+						"fid": 7935,
+						"crc": "92d85f86",
+						"md5": "740902792110588bf2d16d6cda0223c0",
+						"size": 222150656,
+						"ed2k": "60a917b7af347744a335494fa2c07d39",
+						"Group": {
+							"gid": 151,
+							"group": "Super-Anime"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 983,
+				"episode": "6",
+				"name": "Operation VI: The Last Spiral Part 2",
+				"Files": [
+					{
+						"fid": 11820,
+						"crc": "2a102868",
+						"md5": "0d605eaa9f61bc06506528b2895907b9",
+						"size": 95659008,
+						"ed2k": "199d32d750891763b23eb89f3f5d1f7b",
+						"Group": {
+							"gid": 0,
+							"group": ""
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 239,
+		"romaji": "Naruto",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 8247,
+				"episode": "37",
+				"name": "Surviving the Cut! The Rookie Nine Together Again!",
+				"Files": [
+					{
+						"fid": 14175,
+						"crc": "f64cc80f",
+						"md5": "da94ce0701f8702bc30feb4fb142c3ee",
+						"size": 170582016,
+						"ed2k": "197bb896dd24f4eea742b4cc1af92619",
+						"Group": {
+							"gid": 155,
+							"group": "Ansatsu Senjutsu Tokushu Butai & AnimeOne"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 46,
+		"romaji": "NieA Under 7",
+		"type": "TV Series",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 3474,
+		"romaji": "Osu",
+		"type": "Movie",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 2596,
+		"romaji": "Pucca",
+		"type": "Web",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 2386,
+		"romaji": "Rozen Maiden",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 26006,
+				"episode": "8",
+				"name": "Lapislazuli Stern",
+				"Files": [
+					{
+						"fid": 104044,
+						"crc": "cdadfcfd",
+						"md5": "08b6b41c1b38f2086f53f9324215a99f",
+						"size": 183500800,
+						"ed2k": "2ac359bba8298f3b187d72445e5ae134",
+						"Group": {
+							"gid": 10,
+							"group": "Anime-Keep"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 1,
+		"romaji": "Seikai no Monshou",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 1,
+				"episode": "1",
+				"name": "Invasion",
+				"Files": [
+					{
+						"fid": 1,
+						"crc": "301940bd",
+						"md5": "08fc1477e60066e99ca0df9e070b81cc",
+						"size": 169142272,
+						"ed2k": "a62c68d5961e4c601fcf73624b003e9e",
+						"Group": {
+							"gid": 1,
+							"group": "Animehaven"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 1016,
+				"episode": "12",
+				"name": "Lady of Chaos",
+				"Files": [
+					{
+						"fid": 3856,
+						"crc": "e1cc5251",
+						"md5": "762da6bbc54e1fa274d3a129992be6a2",
+						"size": 238737515,
+						"ed2k": "85ecf17ff20cf56e148f3dc2f956a168",
+						"Group": {
+							"gid": 41,
+							"group": "Zhentarim DivX"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 112,
+		"romaji": "Sen to Chihiro no Kamikakushi",
+		"type": "Movie",
+		"Episodes": [
+			{
+				"eid": 2552,
+				"episode": "2",
+				"name": "Part 1 of 2",
+				"Files": [
+					{
+						"fid": 2939,
+						"crc": "e21345d4",
+						"md5": "83f3dbf481373f9aabcc48acb53f410c",
+						"size": 715405312,
+						"ed2k": "7839a3e32a0b71c9ff175ba8265f5df7",
+						"Group": {
+							"gid": 297,
+							"group": "Digital Video Labs"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 853,
+		"romaji": "Shichinin no Nana",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 8779,
+				"episode": "1",
+				"name": "Nana times Nana is Nana?",
+				"Files": [
+					{
+						"fid": 36479,
+						"crc": "3dfe463e",
+						"md5": "5b71a5ee3de15b0ba683fb2ea150937c",
+						"size": 243599360,
+						"ed2k": "fb2c5c02bc516d37f19fe46ab99ddb28",
+						"Group": {
+							"gid": 23,
+							"group": "Ansatsu Senjutsu Tokushu Butai"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 8780,
+				"episode": "2",
+				"name": "Chaos! All seven of us go to school?",
+				"Files": [
+					{
+						"fid": 36480,
+						"crc": "7de02746",
+						"md5": "11b8eae7681b22b887e8b1ce5bd17d72",
+						"size": 231911424,
+						"ed2k": "3db1f0075b0e31d7ec88e885121faa26",
+						"Group": {
+							"gid": 23,
+							"group": "Ansatsu Senjutsu Tokushu Butai"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 1009,
+		"romaji": "Tanoshii Muumin Ikka",
+		"type": "TV Series",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 75,
+		"romaji": "Tenshi na Konamaiki",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 29685,
+				"episode": "46",
+				"name": "It`s our Field Trip! It`s a Confession! It`s the Love Comedy Samurai~?!",
+				"Files": [
+					{
+						"fid": 101161,
+						"crc": "68b03201",
+						"md5": "662d7242629f40607c2ed9da802aaefe",
+						"size": 242677890,
+						"ed2k": "472b9330a1e45ab2a678ba4d4541de19",
+						"Group": {
+							"gid": 6,
+							"group": "Anime-Empire"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 5039,
+		"romaji": "Terra e... (2007)",
+		"type": "TV Series",
+		"Episodes": [
+			{
+				"eid": 79789,
+				"episode": "15",
+				"name": "Omen of Change",
+				"Files": [
+					{
+						"fid": 352163,
+						"crc": "89f27704",
+						"md5": "e02b0bfc045c533ee71e8cc3dfe7e1e6",
+						"size": 188739844,
+						"ed2k": "ae233c42d1a432347e044f91741c87a8",
+						"Group": {
+							"gid": 4486,
+							"group": "Makoto"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 80763,
+				"episode": "17",
+				"name": "With Eternity, With A Heat Haze",
+				"Files": [
+					{
+						"fid": 352439,
+						"crc": "11d0c0c9",
+						"md5": "40bb3534240cd2f01d82355681be55b4",
+						"size": 186796183,
+						"ed2k": "fd3887f798eef255ad1e5bf5ae857d3c",
+						"Group": {
+							"gid": 4486,
+							"group": "Makoto"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 81369,
+				"episode": "20",
+				"name": "The Night Before the Decisive Battle",
+				"Files": [
+					{
+						"fid": 358582,
+						"crc": "1e1350db",
+						"md5": "1255a6f276d1aea3ec937c163863f7a6",
+						"size": 238751837,
+						"ed2k": "2182825a7401dd4d94c337603e393d82",
+						"Group": {
+							"gid": 4486,
+							"group": "Makoto"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 82480,
+				"episode": "22",
+				"name": "Dawning Life",
+				"Files": [
+					{
+						"fid": 365382,
+						"crc": "1e10b268",
+						"md5": "531c53af02b926e86c98f71513b6932d",
+						"size": 133839812,
+						"ed2k": "b39ea61f26cf4e88cbb647e62ce0b74f",
+						"Group": {
+							"gid": 4486,
+							"group": "Makoto"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{
+				"eid": 82569,
+				"episode": "23",
+				"name": "To (Earth) Terra...",
+				"Files": [
+					{
+						"fid": 367757,
+						"crc": "41871142",
+						"md5": "4cf69305cb2d0ec24b61d3c51315d447",
+						"size": 189783679,
+						"ed2k": "f70d0a5532022136dd9e0e958143dae9",
+						"Group": {
+							"gid": 4486,
+							"group": "Makoto"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 2999,
+		"romaji": "Tobe! Kujira no Peek",
+		"type": "Movie",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{
+		"aid": 1223,
+		"romaji": "Yami no Shihoukan Judge",
+		"type": "OVA",
+		"Episodes": [
+			{
+				"eid": 13256,
+				"episode": "1",
+				"name": "OVA",
+				"Files": [
+					{
+						"fid": 30434,
+						"crc": "6f3f5e8a",
+						"md5": "fefee8d617df0731aadc37287ed10a88",
+						"size": 706758656,
+						"ed2k": "e23e74c993218096b485d7e52fba8a87",
+						"Group": {
+							"gid": 349,
+							"group": "Project-5"
+						}
+					},
+
+					{}
+				]
+			},
+
+			{}
+		]
+	},
+
+	{
+		"aid": 4726,
+		"romaji": "Yuki",
+		"type": "Movie",
+		"Episodes": [
+			{}
+		]
+	},
+
+	{}
+]
+}
