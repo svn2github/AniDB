@@ -3,4 +3,7 @@
 
 0.02 - 2014.01.11 
 - fixed empty objects
+- updated template
+- removed json file
+
 
