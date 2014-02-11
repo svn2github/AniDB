@@ -21,16 +21,13 @@
 							"gid": <tmpl_var name=data_file_group_id>,
 							"group": "<tmpl_var name=data_file_group_name>"
 						}
-					},
+					}<tmpl_unless __last__>,</tmpl_unless>
 </tmpl_loop>
-					{}
 				]
-			},
+			}<tmpl_unless __last__>,</tmpl_unless>
 </tmpl_loop>
-			{}
 		]
-	},
+	}<tmpl_unless __last__>,</tmpl_unless>
 </tmpl_loop>
-	{}
 ]
 }
