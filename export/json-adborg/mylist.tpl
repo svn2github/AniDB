@@ -2,17 +2,17 @@
 	"Animes": [<tmpl_loop name=loop_anime>
 			{
 				"aid": <tmpl_var name=data_anime_id>,
-				"romaji": "<tmpl_var name=data_anime_name>",<tmpl_if expr="status_anime_title_has_jap_kanji == 1">
-				"kanji": "<tmpl_var name=data_anime_title_jap_kanji>",</tmpl_if><tmpl_if expr="status_anime_title_has_eng == 1">
-				"english": "<tmpl_var name=data_anime_title_eng>",</tmpl_if>
+				"romaji": "<tmpl_var expr="jsencode(data_anime_name)">",<tmpl_if expr="status_anime_title_has_jap_kanji == 1">
+				"kanji": "<tmpl_var expr="jsencode(data_anime_title_jap_kanji)">",</tmpl_if><tmpl_if expr="status_anime_title_has_eng == 1">
+				"english": "<tmpl_var expr="jsencode(data_anime_title_eng)">",</tmpl_if>
 				"type": "<tmpl_var name=data_anime_type_name>",
 				"Episodes": [<tmpl_loop name=loop_ep>
 					{
 						"eid": <tmpl_var name=data_ep_id>,
 						"number": "<tmpl_var name=data_ep_epno>",
-						"english": "<tmpl_var name=data_ep_name>",<tmpl_if expr="status_ep_hasname_kanji == 1">
-						"kanji": "<tmpl_var name=data_ep_name_kanji>",</tmpl_if><tmpl_if expr="status_ep_hasname_romaji == 1">
-						"romaji": "<tmpl_var name=data_ep_name_romaji>",</tmpl_if>
+						"english": "<tmpl_var expr="jsencode(data_ep_name)">",<tmpl_if expr="status_ep_hasname_kanji == 1">
+						"kanji": "<tmpl_var expr="jsencode(data_ep_name_kanji)">",</tmpl_if><tmpl_if expr="status_ep_hasname_romaji == 1">
+						"romaji": "<tmpl_var expr="jsencode(data_ep_name_romaji)">",</tmpl_if>
 						"Files": [<tmpl_loop name=loop_file>
 							{
 								"fid": <tmpl_var name=data_file_id>,
@@ -22,12 +22,12 @@
 								"ed2k": "<tmpl_var name=data_file_ed2k_hash>",
 								"Group": {
 									"gid": <tmpl_var name=data_file_group_id>,
-									"name": "<tmpl_var name=data_file_group_name>",
-									"shortName": "<tmpl_var name=data_file_group_shortname>"
+									"name": "<tmpl_var expr="jsencode(data_file_group_name)">",
+									"shortName": "<tmpl_var expr="jsencode(data_file_group_shortname)">"
 								}, 
 								"MyList": {
 										"mystate": <tmpl_var name=data_file_mystate>,
-										"mystateString": "<tmpl_var name=data_file_mystate_string>",
+										"mystateString": "<tmpl_var expr="jsencode(data_file_mystate_string)">",
 										"state": <tmpl_var name=data_file_state>,
 										"version": "<tmpl_var name=data_file_state_versionname>",
 										"viewdate": "<tmpl_var name=data_file_viewdate>"
