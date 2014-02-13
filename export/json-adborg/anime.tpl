@@ -1,4 +1,4 @@
-	{
+	{<tmpl_loop name=loop_anime>
 		"aid": <tmpl_var name=data_anime_id>,
 		"romaji": "<tmpl_var expr="jsencode(data_anime_name)">",<tmpl_if expr="status_anime_title_has_jap_kanji == 1">
 		"kanji": "<tmpl_var expr="jsencode(data_anime_title_jap_kanji)">",</tmpl_if><tmpl_if expr="status_anime_title_has_eng == 1">

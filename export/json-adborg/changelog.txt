@@ -9,3 +9,6 @@
 0.03 - 2014.01.12
 - added anime.tpl
 
+0.04 - 2014.01.1r32
+- fixed anime.tpl
+
