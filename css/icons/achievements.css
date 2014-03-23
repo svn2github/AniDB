@@ -20,6 +20,7 @@ div.badge.special  { background-image:url("../icons/achievements/ring-special.pn
 div.badge.mod      { background-image:url("../icons/achievements/ring-mod.png"); }
 
 div.badge.special.code       div.inner { background-image:url("../icons/achievements/center-special-code2.png"); }
+div.badge.special.boardgame  div.inner { background-image:url("../icons/achievements/center-special-boardgame.png"); }
 div.badge.special.creativity div.inner { background-image:url("../icons/achievements/center-special-creativity.png"); }
 
 div.badge.mod.benu     div.inner { background-image:url("../icons/achievements/center-mod-benu1.png"); }
