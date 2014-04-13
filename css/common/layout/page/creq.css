@@ -70,3 +70,8 @@
 {
 	width: auto;
 }
+
+#layout-main div.cmt_entries div.creq_state div.postbody p.author
+{
+	margin: 0 0 0 0.8em
+}
