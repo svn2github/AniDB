@@ -83,20 +83,20 @@
 	margin: 0 0 0 0.8em
 }
 
-#layout-main div.creq_hist div.forum dd.posts,
-#layout-main div.creq_hist div.forum dd.joined,
-#layout-main div.creq_hist div.forum dd.user_icons
+#layout-main div.creq_hist div.forum dl.profile dd.posts,
+#layout-main div.creq_hist div.forum dl.profile dd.joined,
+#layout-main div.creq_hist div.forum dl.profile dd.user_icons,
+#layout-main div.creq_hist div.forum dl.profile br
 {
 	display: none;
 }
 
 #layout-main div.creq_hist div.forum div.cmt_entries dl.profile
 {
-	margin:4px 8px -20pt 8pt;
-	width:10.5em;
-	border-right: none;
+	margin:4px 8px -10pt 8pt;
+	width:13em;
 }
 
 #layout-main div.creq_hist div.forum div.cmt_entries div.postbody div.content {
-    margin-left: 12.5em;
+    margin-left: 15em;
 }
