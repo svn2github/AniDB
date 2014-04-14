@@ -71,7 +71,14 @@
 	width: auto;
 }
 
-#layout-main div.cmt_entries div.creq_state div.postbody p.author
+#layout-main div.creq_hist div.forum
+{
+	max-width:98%;
+	min-width:50em;
+	margin: 0 auto;
+}
+
+#layout-main div.creq_hist div.cmt_entries div.creq_state div.postbody p.author
 {
 	margin: 0 0 0 0.8em
 }
