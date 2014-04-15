@@ -94,14 +94,14 @@
 #layout-main div.creq_hist div.forum div.cmt_entries dl.profile
 {
 	margin:4px 8px -10pt 8pt;
-	width:14em;
+	width:12em;
 }
 
 #layout-main div.creq_hist div.forum div.cmt_entries div.postbody div.content {
-    margin-left: 16em;
+    margin-left: 14em;
 }
 
 #layout-main div.creq_hist div.forum dl.profile img
 {
-	width:50%;
+	width:75px;
 }
