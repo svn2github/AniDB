@@ -100,3 +100,8 @@
 #layout-main div.creq_hist div.forum div.cmt_entries div.postbody div.content {
     margin-left: 16em;
 }
+
+#layout-main div.creq_hist div.forum dl.profile img
+{
+	width:50%;
+}
