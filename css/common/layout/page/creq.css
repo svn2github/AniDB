@@ -103,5 +103,5 @@
 
 #layout-main div.creq_hist div.forum dl.profile img
 {
-	width:75px;
+	max-width:75px;
 }
