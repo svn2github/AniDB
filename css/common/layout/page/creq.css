@@ -1,6 +1,7 @@
 #layout-main div.creq_all table.creqlist,
 #layout-main div.creq_all div.creq_hist table,
-#layout-main div.creq_all div.creq_data table
+#layout-main div.creq_all div.creq_data table,
+#layout-main div.creqhist_all div.creq_hist table
 {
 	width:98%;
 }
