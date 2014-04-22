@@ -244,7 +244,6 @@
 	margin-top:0.5em;
 }
 
-#layout-main div.userpage_all div.latest_recommendations > div.content,
 #layout-main div.userpage_all div.userprefs > div,
 #layout-main div.userpage_all div.clubs div.joined > div,
 #layout-main div.userpage_all div.clubs div.created > div
@@ -256,7 +255,12 @@
 
 #layout-main div.userpage_all div.latest_recommendations .g_bubble.stripe
 {
-    min-height:90px;
+	min-height: 105px;
+}
+
+#layout-main div.userpage_all div.latest_recommendations .g_bubble.stripe > div.data div.text
+{
+    max-height: 30px;
 }
 
 /*hack because webkit sucks*/
