@@ -201,3 +201,8 @@
 {
 	display:none;
 }
+
+.g_bubble.stripe.medium
+{
+	min-height:90px;
+}
