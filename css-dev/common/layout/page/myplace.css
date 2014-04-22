@@ -254,6 +254,11 @@
     column-width: 400px;
 }
 
+#layout-main div.userpage_all div.latest_recommendations .g_bubble.stripe
+{
+    min-height:90px;
+}
+
 /*hack because webkit sucks*/
 #layout-main div.userpage_all .g_bubble.stripe
 {

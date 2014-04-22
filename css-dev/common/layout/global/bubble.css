@@ -6,6 +6,7 @@
 	position: relative;
 	vertical-align: top;
 	margin-bottom: 0.3em;
+	min-height:75px;
 }
 
 .g_bubble.stripe > div.image
@@ -91,7 +92,7 @@
 	height:375px;
 	margin-bottom:1em;
 	margin-right:0.5em;
-	overflow-y:auto;
+	overflow:hidden;
 	word-wrap: break-word;
 }
 
