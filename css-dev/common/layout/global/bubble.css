@@ -209,10 +209,10 @@
 
 .g_bubble.stripe.recommendation
 {
-    height: 150px;
+    height: 125px;
 }
 
 .g_bubble.stripe.recommendation > div.data div.text
 {
-    max-height: 115px;
+    max-height: 100px;
 }
