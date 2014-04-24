@@ -253,14 +253,28 @@
     column-width: 400px;
 }
 
-#layout-main div.userpage_all div.latest_recommendations .g_bubble.stripe
+#layout-main div.userpage_all .g_bubble.stripe.recommendation
 {
-	min-height: 105px;
+    height: 150px;
+    position: relative;
 }
 
-#layout-main div.userpage_all div.latest_recommendations .g_bubble.stripe > div.data div.text
+#layout-main div.userpage_all .g_bubble.stripe.recommendation > div.data div.text
 {
-    max-height: 30px;
+    max-height: inherit;
+}
+
+#layout-main div.userpage_all .g_bubble.stripe.recommendation > div.data
+{
+    height: 125px;
+    overflow-y: auto;
+}
+
+#layout-main div.userpage_all .g_bubble.stripe.recommendation > div.author
+{
+    bottom: 0;
+    position: absolute;
+    margin: 0.5em 0.5em 0.5em 6em;
 }
 
 /*hack because webkit sucks*/

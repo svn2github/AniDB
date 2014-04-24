@@ -206,3 +206,13 @@
 {
 	min-height:90px;
 }
+
+.g_bubble.stripe.recommendation
+{
+    height: 115px;
+}
+
+.g_bubble.stripe.recommendation > div.data div.text
+{
+    max-height: 85px;
+}
