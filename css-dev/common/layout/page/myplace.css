@@ -255,7 +255,7 @@
 
 #layout-main div.userpage_all .g_bubble.stripe.recommendation
 {
-    height: 150px;
+    height: 125px;
     position: relative;
 }
 
@@ -266,7 +266,7 @@
 
 #layout-main div.userpage_all .g_bubble.stripe.recommendation > div.data
 {
-    height: 125px;
+    height: 95px;
     overflow-y: auto;
 }
 
