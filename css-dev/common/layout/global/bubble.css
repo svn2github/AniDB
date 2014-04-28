@@ -141,12 +141,12 @@
 
 .g_bubble.stripe.mini
 {
-	width:200px;
+	width:225px;
 }
 
 .g_bubble.stripe.mini > div.data
 {
-	width:135px;
+	width:150px;
 }
 
 .g_bubble.stripe.mini > div.data div.name 
