@@ -196,8 +196,6 @@ function parseData(xmldoc) {
 	if (!ruid) ruid = uid;
 	var parseCustomNode = (new Date()) - t1;
 	// do some triming of the definition cols if possible
-	if ((!uriObj['showcrc'] || (uriObj['showcrc'] && uriObj['showcrc'] == '0')) && !config['settings']['SHOWCRC'])
-		removeColAttribute('crc',fileCols);
 	if (!mylist_settings['noeptb']) removeColAttribute('epno',fileCols);
 	fileSkips = buildSkipCols(fileCols);
 	epSkips = buildSkipCols(epCols);
@@ -847,9 +845,8 @@ function createEpisodeTable(aid) {
 	} else { // only show files
 		table.className = 'filelist';
 		table.id = 'a'+aid+'_filesTable';
-		colSpan = 12;
+		colSpan = 13;
 		if (mylist_settings['noeptb']) colSpan++;
-		if ((uriObj['showcrc'] && uriObj['showcrc'] == '1') || config['settings']['SHOWCRC']) colSpan++;
 		var thead = (fileTableHead ? fileTableHead.cloneNode(true) : createFilesTableHead());
 		table.appendChild(thead);
 		var tbody = document.createElement('tbody');
