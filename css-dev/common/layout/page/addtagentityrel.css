@@ -1,0 +1,15 @@
+#layout-main div.addtagentityrel_all table.creqlist
+{
+	width: 800px;
+}
+
+#layout-main div.addtagentityrel_all table.creqlist td
+{
+	padding: 0px 5px;
+	min-width:30px;
+}
+
+#layout-main div.addtagentityrel_all table.creqlist td.summary
+{
+	width: 100%;
+}
