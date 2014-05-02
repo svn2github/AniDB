@@ -60,10 +60,12 @@
 /*display parts on anime/manga page*/
 #layout-main div.tag-list
 {
-	-moz-column-width: 25em;
-	-webkit-column-width: 25em;
-	-ms-column-width: 25em;
-	column-width: 25em;
+	-moz-column-width: 27em;
+	-moz-column-gap: 2em;
+	-webkit-column-width: 27em;
+	-webkit-column-gap: 2em;
+	column-width: 27em;
+	column-gap: 2em;
 }
 
 #layout-main div.tag-column
@@ -103,3 +105,54 @@
 {
 	text-align: center;
 }
+
+#layout-main div.chartag-list
+{
+	text-align: justify;
+	line-height: 1;
+	margin-left:1em;
+	margin-right:1em;
+	padding:2em 10em;
+}
+
+#layout-main div.chartag-list span.tag
+{
+	line-height:25px;
+	white-space: nowrap;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+}
+
+#layout-main div.chartag-list span.tag span.text
+{
+        white-space: normal;
+}
+
+#layout-main div.chartag-list span.size0 { font-size: 9px;}
+#layout-main div.chartag-list span.size1 { font-size: 9px;}
+#layout-main div.chartag-list span.size2 { font-size: 10px;}
+#layout-main div.chartag-list span.size3 { font-size: 11px;}
+#layout-main div.chartag-list span.size4 { font-size: 12px;}
+#layout-main div.chartag-list span.size5 { font-size: 13px;}
+#layout-main div.chartag-list span.size6 { font-size: 13px;}
+#layout-main div.chartag-list span.size7 { font-size: 14px;}
+#layout-main div.chartag-list span.size8 { font-size: 14px;}
+#layout-main div.chartag-list span.size9 { font-size: 15px;}
+#layout-main div.chartag-list span.size10 { font-size: 15px;}
+#layout-main div.chartag-list span.size11 { font-size: 16px;}
+#layout-main div.chartag-list span.size12 { font-size: 16px;}
+#layout-main div.chartag-list span.size13 { font-size: 18px;}
+#layout-main div.chartag-list span.size14 { font-size: 18px;}
+#layout-main div.chartag-list span.size15 { font-size: 20px;}
+#layout-main div.chartag-list span.size16 { font-size: 21px;}
+#layout-main div.chartag-list span.size17 { font-size: 21px;}
+#layout-main div.chartag-list span.size18 { font-size: 22px;}
+#layout-main div.chartag-list span.size19 { font-size: 22px;}
+#layout-main div.chartag-list span.size20 { font-size: 23px;}
+#layout-main div.chartag-list span.size21 { font-size: 23px;}
+#layout-main div.chartag-list span.size22 { font-size: 24px;}
+#layout-main div.chartag-list span.size23 { font-size: 24px;}
+#layout-main div.chartag-list span.size24 { font-size: 25px;}
+#layout-main div.chartag-list span.size25 { font-size: 25px;}
+
+#layout-main div.chartag-list span.hidden {display:none;}
