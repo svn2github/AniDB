@@ -104,7 +104,9 @@ a:hover,
 #layout-main div.main_all div.header div.account ul.tabs li.signup:hover a,
 #layout-main div.cmt_entries a.username-colored,
 #layout-main div.forum a.topictitle:hover,
-#layout-main div.forum a.username-colored
+#layout-main div.forum a.username-colored,
+input[type="submit"]:hover,
+button[type="submit"]:hover
 {
 	color: #AA0000;
 }
@@ -177,7 +179,9 @@ span.g_odd,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.main_all div.header div.account ul.tabs li.signup,
 #layout-main div.forum div.g_bubble.comment,
-#layout-main div.forum div.g_bubble.events
+#layout-main div.forum div.g_bubble.events,
+input[type="submit"]:hover,
+button[type="submit"]:hover
 {
 	background-color: #ECF4FD;
 }

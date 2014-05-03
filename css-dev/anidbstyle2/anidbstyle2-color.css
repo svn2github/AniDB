@@ -87,7 +87,9 @@ input[type="submit"]:hover,
 #layout-main div.g_timedentry h4,
 #layout-main div.userpage_all > div.g_section > h4,
 #layout-main div.forum li.header dt,
-#layout-main div.forum li.header dd
+#layout-main div.forum li.header dd,
+input[type="submit"]:hover,
+button[type="submit"]:hover
 {
 	color: #DDDDDD;
 }
@@ -169,7 +171,9 @@ input[type="submit"]:hover,
 #layout-main div.spoiler input.button:hover,
 #layout-main tr.header th.sortable:hover a,
 #layout-main div.pagination span a:hover,
-#layout-main div.pagination span strong
+#layout-main div.pagination span strong,
+input[type="submit"]:hover,
+button[type="submit"]:hover
 {
 	background-color:#58636E;
 }
