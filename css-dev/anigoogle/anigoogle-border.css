@@ -148,7 +148,8 @@ input[type="text"],
 input[type="password"],
 input.text,
 textarea,
-select
+select,
+input[type="submit"]
 {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
