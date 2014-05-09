@@ -64,3 +64,9 @@
 {
 	min-width:4em;
 }
+
+#layout-main div.tag_all .g_definitionlist div.tag-column
+{
+	padding:0;
+	margin-bottom: 0;
+}
