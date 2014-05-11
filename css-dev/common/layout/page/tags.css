@@ -1,4 +1,5 @@
 /*admin bits*/
+#layout-main div.admin_tags_all table.tags th,
 #layout-main div.admin_tags_all table.tags td {
     padding-left: 0.5em;
     padding-right: 0.5em;
