@@ -1,7 +1,15 @@
 /*admin bits*/
-#layout-main div.admin_tags_all table.tags
-{
-	width:100%;
+#layout-main div.admin_tags_all table.tags td {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+#layout-main div.admin_tags_all table.tags td.name {
+    width: 80%;
+}
+
+#layout-main div.admin_tags_all table.tags td.action {
+    min-width: 10em;
 }
 
 /*edit form*/
