@@ -43,6 +43,11 @@ span.icons
 	white-space:nowrap;
 }
 
+span.i_icon.rel
+{
+	position: absolute;
+}
+
 span.smiley
 {
 	display:inline-block;
