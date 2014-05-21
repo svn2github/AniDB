@@ -1,16 +1,24 @@
 /*admin bits*/
 #layout-main div.admin_tags_all table.tags th,
-#layout-main div.admin_tags_all table.tags td {
+#layout-main div.admin_tags_all table.tags td
+{
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
 
-#layout-main div.admin_tags_all table.tags td.name {
+#layout-main div.admin_tags_all table.tags td.name
+{
     width: 80%;
 }
 
-#layout-main div.admin_tags_all table.tags td.action {
+#layout-main div.admin_tags_all table.tags td.action
+{
     min-width: 10em;
+}
+
+#layout-main div.admin_tags_all table.tags td.group
+{
+    white-space: nowrap;
 }
 
 #layout-main div.admin_all div.tag.merge th
