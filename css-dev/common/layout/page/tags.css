@@ -122,20 +122,14 @@
 /*display parts on anime/manga page*/
 #layout-main div.tag-list
 {
-	-moz-column-width: 27em;
-	-moz-column-gap: 2em;
-	-webkit-column-width: 27em;
-	-webkit-column-gap: 2em;
-	column-width: 27em;
-	column-gap: 2em;
+
 }
 
 #layout-main div.tag-column
 {
-	display: inline-table;
 	width: 27em;
 	padding: 8px;
-	margin-bottom: 1em;
+    margin: 0.5em;
 }
 
 #layout-main div.tag-column div.tag > span
@@ -175,6 +169,10 @@
 	margin-left:1em;
 	margin-right:1em;
 	padding:2em 10em;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: center;
 }
 
 #layout-main div.chartag-list span.tag
