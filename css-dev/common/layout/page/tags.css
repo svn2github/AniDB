@@ -2,68 +2,68 @@
 #layout-main div.admin_tags_all table.tags th,
 #layout-main div.admin_tags_all table.tags td
 {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
 
 #layout-main div.admin_tags_all table.tags td.name
 {
-    width: 80%;
+	width: 80%;
 }
 
 #layout-main div.admin_tags_all table.tags td.action
 {
-    min-width: 11em;
+	min-width: 11em;
 }
 
 #layout-main div.admin_tags_all table.tags td.group
 {
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 #layout-main div.admin_all div.tag.merge th
 {
-    min-width: 1em;
-    max-width: 1em;
+	min-width: 1em;
+	max-width: 1em;
 }
 #layout-main div.admin_all div.tag.merge th.head
 {
-    min-width: 7.5em;
-    max-width: 7.5em;
+	min-width: 7.5em;
+	max-width: 7.5em;
 }
 #layout-main div.admin_all div.tag.merge th.data
 {
-    width: 33%;
+	width: 33%;
 }
 
 #layout-main div.admin_all div.tag.merge td
 {
-    vertical-align:top;
-    padding:5px;
+	vertical-align:top;
+	padding:5px;
 }
 
 #layout-main div.admin_all div.tag.merge td.input,
 #layout-main div.admin_all div.tag.merge td.check
 {
-    vertical-align:middle;
+	vertical-align:middle;
 }
 
 #layout-main div.admin_all div.tag.merge textarea
 {
-    width:95%;
-    height:10em;
+	width:95%;
+	height:10em;
 }
 
 #layout-main div.admin_all div.tag.merge table.options th,
 #layout-main div.admin_all div.tag.merge table.parents th
 {
-    min-width: 6em;
-    max-width: 6em;
+	min-width: 6em;
+	max-width: 6em;
 }
 
 #layout-main div.admin_all div.tag.merge td table
 {
-    width:100%;
+	width:100%;
 }
 
 /*edit form*/
@@ -122,14 +122,17 @@
 /*display parts on anime/manga page*/
 #layout-main div.tag-list
 {
-
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	justify-content: center;
 }
 
 #layout-main div.tag-column
 {
 	width: 27em;
 	padding: 8px;
-    margin: 0.5em;
+	margin: 0.5em;
 }
 
 #layout-main div.tag-column div.tag > span
@@ -169,10 +172,6 @@
 	margin-left:1em;
 	margin-right:1em;
 	padding:2em 10em;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: stretch;
-	justify-content: center;
 }
 
 #layout-main div.chartag-list span.tag
@@ -185,7 +184,7 @@
 
 #layout-main div.chartag-list span.tag span.text
 {
-        white-space: normal;
+	white-space: normal;
 }
 
 #layout-main div.chartag-list span.size0 { font-size: 9px;}
