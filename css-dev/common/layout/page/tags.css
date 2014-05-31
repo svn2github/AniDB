@@ -130,9 +130,14 @@
 
 #layout-main div.tag-column
 {
-	width: 27em;
+	width: 30em;
 	padding: 8px;
 	margin: 0.5em;
+}
+
+#layout-main div.tag-column div.tag
+{
+	display: flex;
 }
 
 #layout-main div.tag-column div.tag > span
@@ -142,14 +147,12 @@
 
 #layout-main div.tag-column div.tag span.name
 {
-	display: inline-block;
-	width: 21.5em;
+	flex-grow: 1;
 	text-align: left;
 }
 
 #layout-main div.tag-column div.tag span.weight
 {
-	float:right;
 	width: 4.5em;
 }
 
