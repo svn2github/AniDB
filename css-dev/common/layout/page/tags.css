@@ -172,10 +172,11 @@
 {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 	justify-content: center;
 	text-align: justify;
 	line-height: 1;
-	padding:2em 5em;
+	padding:2em 10em;
 }
 
 #layout-main div.chartag-list span.tag
