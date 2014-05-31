@@ -171,6 +171,7 @@
 #layout-main div.chartag-list
 {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 	text-align: justify;
 	line-height: 1;
